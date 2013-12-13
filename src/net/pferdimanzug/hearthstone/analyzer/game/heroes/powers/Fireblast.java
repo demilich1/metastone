@@ -1,11 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.heroes.powers;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.HeroPowerAction;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetRequirement;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.EffectHint;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.SingleTargetDamageSpell;
 
 public class Fireblast extends HeroPower {
 	
@@ -13,21 +9,8 @@ public class Fireblast extends HeroPower {
 
 	public Fireblast() {
 		super("Fireblast");
-	}
-
-	@Override
-	public PlayCardAction play() {
-		return new HeroPowerAction(this) {
-			{
-				setTargetRequirement(TargetRequirement.ANY);
-				setEffectHint(EffectHint.NEGATIVE);
-			}
-			
-			@Override
-			protected void cast(GameContext context, Player player) {
-				context.getLogic().damage(getTarget(), DAMAGE);
-			}
-		};
+		setTargetRequirement(TargetRequirement.ANY);
+		setSpell(new SingleTargetDamageSpell(1));
 	}
 
 }

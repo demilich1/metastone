@@ -2,10 +2,9 @@ package net.pferdimanzug.hearthstone.analyzer.game.heroes.powers;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.HeroPowerAction;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetRequirement;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.EffectHint;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
 
 public class LifeTap extends HeroPower {
 
@@ -13,23 +12,18 @@ public class LifeTap extends HeroPower {
 
 	public LifeTap() {
 		super("Life Tap");
+		setTargetRequirement(TargetRequirement.NONE);
+		setSpell(new LifeTapSpell());
 	}
+	
+	private class LifeTapSpell implements ISpell {
 
-	@Override
-	public PlayCardAction play() {
-		return new HeroPowerAction(this) {
-			{
-				setTargetRequirement(TargetRequirement.NONE);
-				setEffectHint(EffectHint.POSITIVE);
-			}
-
-			@Override
-			protected void cast(GameContext context, Player player) {
-				context.getLogic().damage(player.getHero(), DAMAGE);
-				context.getLogic().drawCard(player);
-			}
-		};
-
+		@Override
+		public void cast(GameContext context, Player player, Entity target) {
+			context.getLogic().damage(player.getHero(), DAMAGE);
+			context.getLogic().drawCard(player);
+		}
+		
 	}
 
 }

@@ -7,56 +7,57 @@ import java.util.concurrent.ThreadLocalRandom;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.HeroPowerAction;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetRequirement;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.minions.Race;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
 
 public class TotemicCall extends HeroPower {
 
 	public TotemicCall() {
 		super("Totemic Call");
+		setTargetRequirement(TargetRequirement.NONE);
+		setSpell(new TotemicCallSpell());
 	}
+	
+	private class TotemicCallSpell implements ISpell {
 
-	@Override
-	public PlayCardAction play() {
-		return new HeroPowerAction(this) {
-
-			@Override
-			protected void cast(GameContext context, Player player) {
-				List<Minion> availableTotems = new ArrayList<Minion>();
-				for (Minion totem : getTotems()) {
-					if (!alreadyOnBoard(player.getMinions(), totem.getClass())) {
-						availableTotems.add(totem);
-					}
+		@Override
+		public void cast(GameContext context, Player player, Entity target) {
+			List<Minion> availableTotems = new ArrayList<Minion>();
+			for (Minion totem : getTotems()) {
+				if (!alreadyOnBoard(player.getMinions(), totem.getClass())) {
+					availableTotems.add(totem);
 				}
-
-				Minion randomTotem = availableTotems.get(ThreadLocalRandom.current().nextInt(availableTotems.size()));
-				context.getLogic().summon(player, randomTotem, null);
 			}
 
-			private List<Minion> getTotems() {
-				List<Minion> minions = new ArrayList<Minion>(4);
-				minions.add(new HealingTotem().summon());
-				minions.add(new StoneclawTotem().summon());
-				minions.add(new SearingTotem().summon());
-				minions.add(new WrathOfAirTotem().summon());
-				return minions;
-			}
+			Minion randomTotem = availableTotems.get(ThreadLocalRandom.current().nextInt(availableTotems.size()));
+			context.getLogic().summon(player, randomTotem, null);
+		}
+		
 
-			private boolean alreadyOnBoard(List<Minion> minions, Class<? extends Minion> minionClass) {
-				for (Entity minion : minions) {
-					if (minion.getClass() == minionClass) {
-						return true;
-					}
+		private List<Minion> getTotems() {
+			List<Minion> minions = new ArrayList<Minion>(4);
+			minions.add(new HealingTotem().summon());
+			minions.add(new StoneclawTotem().summon());
+			minions.add(new SearingTotem().summon());
+			minions.add(new WrathOfAirTotem().summon());
+			return minions;
+		}
+
+		private boolean alreadyOnBoard(List<Minion> minions, Class<? extends Minion> minionClass) {
+			for (Entity minion : minions) {
+				if (minion.getClass() == minionClass) {
+					return true;
 				}
-				return false;
 			}
-		};
+			return false;
+		}
+		
 	}
 
 	private class HealingTotem extends MinionCard {

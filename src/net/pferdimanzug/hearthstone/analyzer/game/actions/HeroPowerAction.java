@@ -10,10 +10,19 @@ public abstract class HeroPowerAction extends PlayCardAction {
 		super(heroPower);
 		setActionType(ActionType.HERO_POWER);
 	}
+	
+	private HeroPower getHeroPower() {
+		return (HeroPower) getCard();
+	}
+	
+	@Override
+	public TargetRequirement getTargetRequirement() {
+		return getHeroPower().getTargetRequirement();
+	}
 
 	@Override
 	public void execute(GameContext context, Player player) {
-		context.getLogic().useHeroPower(player, (HeroPower) getCard());
+		context.getLogic().useHeroPower(player, getHeroPower());
 		cast(context, player);
 	}
 

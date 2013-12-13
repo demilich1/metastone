@@ -1,10 +1,7 @@
-package net.pferdimanzug.hearthstone.analyzer.game.actions.battlecry;
+package net.pferdimanzug.hearthstone.analyzer.game.actions;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetRequirement;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
 
 public class Battlecry extends GameAction {

@@ -1,12 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.heroes.powers;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.HeroPowerAction;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetRequirement;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.EffectHint;
-import net.pferdimanzug.hearthstone.analyzer.game.heroes.Hero;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.SingleTargetDamageSpell;
 
 public class SteadyShot extends HeroPower {
 
@@ -14,23 +9,8 @@ public class SteadyShot extends HeroPower {
 
 	public SteadyShot() {
 		super("Steady Shot");
-	}
-
-	@Override
-	public PlayCardAction play() {
-		return new HeroPowerAction(this) {
-			{
-				setTargetRequirement(TargetRequirement.NONE);
-				setEffectHint(EffectHint.NEGATIVE);
-			}
-
-			@Override
-			protected void cast(GameContext context, Player player) {
-				Hero enemyHero = context.getOpponent(player).getHero();
-				context.getLogic().damage(enemyHero, DAMAGE);
-			}
-		};
-
+		setTargetRequirement(TargetRequirement.ENEMY_HERO);
+		setSpell(new SingleTargetDamageSpell(DAMAGE));
 	}
 
 }

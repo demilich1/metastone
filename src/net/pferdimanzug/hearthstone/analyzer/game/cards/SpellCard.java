@@ -28,7 +28,7 @@ public abstract class SpellCard extends Card {
 	}
 
 	@Override
-	public final PlayCardAction play() {
+	public PlayCardAction play() {
 		return new PlayCardAction(this) {
 			{
 				setTargetRequirement(getTargetRequirement());
