@@ -3,16 +3,16 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.MinionAttackAction;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetRequirement;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.battlecry.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.EffectHint;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.TheCoin;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.Garrosh;
-import net.pferdimanzug.hearthstone.analyzer.game.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.Jaina;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.SingleTargetDamageSpell;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -48,7 +48,7 @@ public class BasicTests extends TestBase {
 		MinionCard devMonster = new DevMonster(1, 1);
 		mage.getHand().add(devMonster);
 		Assert.assertEquals(mage.getHand().getCount(), 1);
-		context.getLogic().performGameAction(context, mage, devMonster.play());
+		context.getLogic().performGameAction(mage, devMonster.play());
 		Assert.assertEquals(mage.getHand().isEmpty(), true);
 		Entity minion = getSingleMinion(mage.getMinions());
 		Assert.assertEquals(minion.getName(), devMonster.getName());
@@ -67,11 +67,11 @@ public class BasicTests extends TestBase {
 
 		MinionCard minionCard1 = new DevMonster(5, 5);
 		mage.getHand().add(minionCard1);
-		context.getLogic().performGameAction(context, mage, minionCard1.play());
+		context.getLogic().performGameAction(mage, minionCard1.play());
 		
 		MinionCard minionCard2 = new DevMonster(1, 1);
 		mage.getHand().add(minionCard2);
-		context.getLogic().performGameAction(context, warrior, minionCard2.play());
+		context.getLogic().performGameAction(warrior, minionCard2.play());
 		
 		Assert.assertEquals(mage.getMinions().size(), 1);
 		Assert.assertEquals(warrior.getMinions().size(), 1);
@@ -81,7 +81,7 @@ public class BasicTests extends TestBase {
 		
 		GameAction attackAction = new MinionAttackAction(attacker);
 		attackAction.setTarget(defender);
-		context.getLogic().performGameAction(context, mage, attackAction);
+		context.getLogic().performGameAction(mage, attackAction);
 		
 		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp() - defender.getAttack());
 		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - attacker.getAttack());
@@ -92,7 +92,7 @@ public class BasicTests extends TestBase {
 	}
 	
 	@Test
-	public void testBattlecry() {
+	public void testBattlecry() { 
 		GameContext context = createContext(new Jaina(), new Garrosh());
 		Player mage = context.getPlayer1();
 		mage.setMana(10);
@@ -100,29 +100,13 @@ public class BasicTests extends TestBase {
 		warrior.setMana(10);
 
 		DevMonster devMonster = new DevMonster(3, 3);
-		devMonster.getMinion().setTag(GameTag.BATTLECRY, new TestBattlecry());
+		Battlecry testBattlecry = Battlecry.createBattlecry(new SingleTargetDamageSpell(3), TargetRequirement.ENEMY_HERO);
+		testBattlecry.setTarget(warrior.getHero());
+		devMonster.getMinion().setTag(GameTag.BATTLECRY, testBattlecry);
 		mage.getHand().add(devMonster);
-		context.getLogic().performGameAction(context, mage, devMonster.play());
+		context.getLogic().performGameAction(mage, devMonster.play());
 		
-		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - TestBattlecry.DAMAGE);
+		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - 3);
 	}
-	
-	
-	public class TestBattlecry extends Battlecry {
-		
-		public static final int DAMAGE = 3;
-
-		public TestBattlecry() {
-			setEffectHint(EffectHint.NEGATIVE);
-		}
-
-		@Override
-		public void execute(GameContext context, Player player) {
-			Hero enemyHero = context.getOpponent(player).getHero();
-			context.getLogic().damage(enemyHero, DAMAGE);
-		}
-		
-	}
-	
 
 }

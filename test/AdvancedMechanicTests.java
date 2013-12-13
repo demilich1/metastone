@@ -31,11 +31,11 @@ public class AdvancedMechanicTests extends BasicTests {
 
 		MinionCard amaniBerserkerCard = new AmaniBerserker();
 		priest.getHand().add(amaniBerserkerCard);
-		context.getLogic().performGameAction(context, priest, amaniBerserkerCard.play());
+		context.getLogic().performGameAction(priest, amaniBerserkerCard.play());
 		
 		MinionCard stonetuskBoarCard = new StonetuskBoar();
 		mage.getHand().add(stonetuskBoarCard);
-		context.getLogic().performGameAction(context, mage, stonetuskBoarCard.play());
+		context.getLogic().performGameAction(mage, stonetuskBoarCard.play());
 		
 		Entity attacker = getSingleMinion(mage.getMinions());
 		Entity defender = getSingleMinion(priest.getMinions());
@@ -46,17 +46,17 @@ public class AdvancedMechanicTests extends BasicTests {
 		// attack once, should apply the enrage attack bonus
 		GameAction attackAction = new MinionAttackAction(attacker);
 		attackAction.setTarget(defender);
-		context.getLogic().performGameAction(context, mage, attackAction);
+		context.getLogic().performGameAction(mage, attackAction);
 		Assert.assertEquals(defender.getAttack(), AmaniBerserker.BASE_ATTACK + AmaniBerserker.ENRAGE_ATTACK_BONUS);
 		Assert.assertEquals(defender.hasTag(GameTag.ENRAGED), true);
 		// attack second time, enrage bonus should not increase
-		context.getLogic().performGameAction(context, mage, attackAction);
+		context.getLogic().performGameAction(mage, attackAction);
 		Assert.assertEquals(defender.getAttack(), AmaniBerserker.BASE_ATTACK + AmaniBerserker.ENRAGE_ATTACK_BONUS);
 		
 		// heal - enrage attack bonus should be gone
 		GameAction healAction = priest.getHero().getHeroPower().play();
 		healAction.setTarget(defender);
-		context.getLogic().performGameAction(context, priest, healAction);
+		context.getLogic().performGameAction(priest, healAction);
 		Assert.assertEquals(defender.getAttack(), AmaniBerserker.BASE_ATTACK);
 		Assert.assertEquals(defender.hasTag(GameTag.ENRAGED), false);
 	}
@@ -75,7 +75,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		MinionCard abusiveSergeant = new AbusiveSergeant();
 		mage.getHand().add(abusiveSergeant);
 		
-		context.getLogic().performGameAction(context, mage, devMonster.play());
+		context.getLogic().performGameAction(mage, devMonster.play());
 		mage.setBehaviour(new IBehaviour() {
 			
 			@Override

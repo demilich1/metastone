@@ -29,7 +29,7 @@ public class ShatteredSunCleric extends MinionCard{
 	private class BuffFriendlyMinion extends GameAction {
 		
 		public BuffFriendlyMinion() {
-			setTargetRequirement(TargetRequirement.OWN_MINIONS);
+			setTargetRequirement(TargetRequirement.FRIENDLY_MINIONS);
 			setEffectHint(EffectHint.POSITIVE);
 			setActionType(ActionType.MINION_ABILITY);
 		}

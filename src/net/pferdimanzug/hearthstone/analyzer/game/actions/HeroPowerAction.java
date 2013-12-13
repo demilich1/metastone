@@ -13,7 +13,7 @@ public abstract class HeroPowerAction extends PlayCardAction {
 
 	@Override
 	public void execute(GameContext context, Player player) {
-		context.getLogic().useHeroPower(context, player, (HeroPower) getCard());
+		context.getLogic().useHeroPower(player, (HeroPower) getCard());
 		cast(context, player);
 	}
 

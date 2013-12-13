@@ -46,7 +46,7 @@ public abstract class GameAction {
 	protected void setEffectHint(EffectHint effectHint) {
 		this.effectHint = effectHint;
 	}
-	
+
 	public boolean canBeExecutedOn(Entity entity) {
 		return true;
 	}

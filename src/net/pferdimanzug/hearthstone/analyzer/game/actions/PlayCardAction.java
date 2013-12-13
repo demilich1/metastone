@@ -14,7 +14,7 @@ public abstract class PlayCardAction extends GameAction {
 
 	@Override
 	public void execute(GameContext context, Player player) {
-		context.getLogic().playCard(context, player, getCard());
+		context.getLogic().playCard(player, getCard());
 		cast(context, player);
 	}
 	

@@ -1,14 +1,13 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
-import net.pferdimanzug.hearthstone.analyzer.game.Player;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetRequirement;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.battlecry.Battlecry;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.EffectHint;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.DrawCardSpell;
 
 public class NoviceEngineer extends MinionCard {
 
@@ -19,21 +18,8 @@ public class NoviceEngineer extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion noviceEngineer = createMinion(1, 2);
-		noviceEngineer.setTag(GameTag.BATTLECRY, new BattlecryNoviceEngineer());
+		Battlecry battlecry = Battlecry.createBattlecry(new DrawCardSpell(1), TargetRequirement.NONE);
+		noviceEngineer.setTag(GameTag.BATTLECRY, battlecry);
 		return noviceEngineer;
 	}
-	
-	private class BattlecryNoviceEngineer extends Battlecry {
-		
-		public BattlecryNoviceEngineer() {
-			setEffectHint(EffectHint.POSITIVE);
-		}
-
-		@Override
-		public void execute(GameContext context, Player player) {
-			context.getLogic().drawCard(player);
-		}
-		
-	}
-
 }

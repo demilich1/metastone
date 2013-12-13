@@ -1,15 +1,13 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
-import net.pferdimanzug.hearthstone.analyzer.game.Player;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetRequirement;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.battlecry.Battlecry;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.EffectHint;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
-import net.pferdimanzug.hearthstone.analyzer.game.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.SingleTargetDamageSpell;
 
 public class Nightblade extends MinionCard {
 	
@@ -22,22 +20,9 @@ public class Nightblade extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion nightblade = createMinion(4, 4);
-		nightblade.setTag(GameTag.BATTLECRY, new BattlecryNightblade());
+		Battlecry battlecry = Battlecry.createBattlecry(new SingleTargetDamageSpell(BATTLECRY_DAMAGE), TargetRequirement.ENEMY_HERO);
+		nightblade.setTag(GameTag.BATTLECRY, battlecry);
 		return nightblade;
-	}
-	
-	private class BattlecryNightblade extends Battlecry {
-		
-		public BattlecryNightblade() {
-			setEffectHint(EffectHint.NEGATIVE);
-		}
-
-		@Override
-		public void execute(GameContext context, Player player) {
-			Hero enemyHero = context.getOpponent(player).getHero();
-			context.getLogic().damage(enemyHero, BATTLECRY_DAMAGE);
-		}
-		
 	}
 
 }

@@ -178,7 +178,7 @@ public class GameLogic implements IGameLogic {
 	}
 
 	@Override
-	public List<Entity> getValidTargets(GameContext context, Player player, GameAction action) {
+	public List<Entity> getValidTargets(Player player, GameAction action) {
 		return targetLogic.getValidTargets(context, player, action);
 	}
 
@@ -236,9 +236,9 @@ public class GameLogic implements IGameLogic {
 	}
 
 	@Override
-	public void performGameAction(GameContext context, Player player, GameAction action) {
+	public void performGameAction(Player player, GameAction action) {
 		if (action.getTargetRequirement() != TargetRequirement.NONE && action.getTarget() == null) {
-			List<Entity> validTargets = getValidTargets(context, player, action);
+			List<Entity> validTargets = getValidTargets(player, action);
 			Entity target = player.getBehaviour().provideTargetFor(action, validTargets);
 			if (target != null) {
 				if (!validTargets.contains(target)) {
@@ -253,7 +253,7 @@ public class GameLogic implements IGameLogic {
 	}
 
 	@Override
-	public void playCard(GameContext context, Player player, Card card) {
+	public void playCard(Player player, Card card) {
 		modifyCurrentMana(player, -card.getManaCost());
 		logger.debug(player.getName() + " plays " + card.getName());
 		player.getHand().remove(card);
@@ -286,7 +286,7 @@ public class GameLogic implements IGameLogic {
 		logger.debug(player.getName() + " summons " + minion.getName());
 		
 		if (minion.getBattlecry() != null) {
-			performGameAction(context, player, minion.getBattlecry());
+			performGameAction(player, minion.getBattlecry());
 		}
 
 		if (nextTo == null) {
@@ -308,10 +308,15 @@ public class GameLogic implements IGameLogic {
 	}
 
 	@Override
-	public void useHeroPower(GameContext context, Player player, HeroPower power) {
+	public void useHeroPower(Player player, HeroPower power) {
 		modifyCurrentMana(player, -power.getManaCost());
 		logger.debug(player.getName() + " uses hero power " + power.getName());
 		power.setUsed(true);
+	}
+
+	@Override
+	public void castSpell(Player player, ISpell spell, Entity target) {
+		spell.cast(context, player, target);
 	}
 
 }

@@ -14,6 +14,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.IGameEventListener;
 import net.pferdimanzug.hearthstone.analyzer.game.events.TurnEndEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 
 public class AbusiveSergeant extends MinionCard {
 	
@@ -26,23 +27,22 @@ public class AbusiveSergeant extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion abusiveSergeant = createMinion(2, 1);
-		abusiveSergeant.setTag(GameTag.BATTLECRY, new AbusiveSergeantBattlecry());
+		Battlecry battlecryAbusive = Battlecry.createBattlecry(new AbusiveSergeantSpell(), TargetRequirement.FRIENDLY_MINIONS);
+		abusiveSergeant.setTag(GameTag.BATTLECRY, battlecryAbusive);
 		return null;
 	}
 	
-	private class AbusiveSergeantBattlecry extends Battlecry {
+	private class AbusiveSergeantSpell extends BuffSpell {
 		
-		public AbusiveSergeantBattlecry() {
-			setTargetRequirement(TargetRequirement.OWN_MINIONS);
+		public AbusiveSergeantSpell() {
+			super(ATTACK_BONUS, 0);
 		}
 
 		@Override
-		public void execute(GameContext context, Player player) {
-			getTarget().modifyTag(GameTag.ATTACK_BONUS, ATTACK_BONUS);
-			context.getEventManager().registerGameEventListener(new EndBuff(getTarget()));
+		public void cast(GameContext context, Player player, Entity target) {
+			super.cast(context, player, target);
+			context.getEventManager().registerGameEventListener(new EndBuff(target));
 		}
-
-		
 	}
 	
 	private class EndBuff implements IGameEventListener {

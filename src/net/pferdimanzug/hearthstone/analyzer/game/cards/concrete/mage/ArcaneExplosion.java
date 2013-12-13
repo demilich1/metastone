@@ -1,41 +1,18 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetRequirement;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.EffectHint;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.spells.DamageSpellCard;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.AreaDamageSpell;
 
-public class ArcaneExplosion extends DamageSpellCard {
+public class ArcaneExplosion extends SpellCard {
 
 	public ArcaneExplosion() {
-		super("Arcane Explosion", Rarity.FREE, HeroClass.MAGE, 2, 1);
+		super("Arcane Explosion", Rarity.FREE, HeroClass.MAGE, 2);
+		setTargetRequirement(TargetRequirement.NONE);
+		setSpell(new AreaDamageSpell(1, TargetRequirement.ENEMY_MINIONS));
 	}
 
-	@Override
-	public PlayCardAction play() {
-		return new PlayCardAction(this) {
-			{
-				setTargetRequirement(TargetRequirement.NONE);
-				setActionType(ActionType.SPELL);
-				setEffectHint(EffectHint.NEGATIVE);
-			}
-			
-			@Override
-			protected void cast(GameContext context, Player player) {
-				Player opponent = context.getOpponent(player);
-				for (Minion minion : opponent.getMinions()) {
-					context.getLogic().damage(minion, getDamage());
-				}
-			}
-		};
-	}
-
-	
 
 }

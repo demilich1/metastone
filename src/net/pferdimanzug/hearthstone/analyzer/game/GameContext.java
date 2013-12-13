@@ -64,7 +64,7 @@ public class GameContext {
 		logic.startTurn(player);
 		GameAction nextAction = null;
 		while ((nextAction = player.getBehaviour().requestAction(this)) != null) {
-			logic.performGameAction(this, player, nextAction);
+			logic.performGameAction(player, nextAction);
 			ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_STATE_UPDATE, this);
 			try {
 				Thread.sleep(1000);

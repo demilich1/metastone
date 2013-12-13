@@ -1,11 +1,13 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.battlecry.BattlecrySingleTargetHealing;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetRequirement;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.battlecry.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.SingleTargetHealingSpell;
 
 public class EarthenRingFarseer extends MinionCard {
 
@@ -16,7 +18,8 @@ public class EarthenRingFarseer extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion earthenRingFarseer = createMinion(3, 3);
-		earthenRingFarseer.setTag(GameTag.BATTLECRY, new BattlecrySingleTargetHealing(3));
+		Battlecry battlecry = Battlecry.createBattlecry(new SingleTargetHealingSpell(3), TargetRequirement.ANY);
+		earthenRingFarseer.setTag(GameTag.BATTLECRY, battlecry);
 		return earthenRingFarseer;
 	}
 

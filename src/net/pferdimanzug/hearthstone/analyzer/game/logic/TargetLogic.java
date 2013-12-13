@@ -50,11 +50,11 @@ public class TargetLogic {
 				|| targetRequirement == TargetRequirement.ANY) {
 			entities.addAll(opponent.getMinions());
 		}
-		if (targetRequirement == TargetRequirement.OWN_HERO || targetRequirement == TargetRequirement.OWN_CHARACTERS
+		if (targetRequirement == TargetRequirement.FRIENDLY_HERO || targetRequirement == TargetRequirement.FRIENDLY_CHARACTERS
 				|| targetRequirement == TargetRequirement.ANY) {
 			entities.add(player.getHero());
 		}
-		if (targetRequirement == TargetRequirement.OWN_MINIONS || targetRequirement == TargetRequirement.OWN_CHARACTERS
+		if (targetRequirement == TargetRequirement.FRIENDLY_MINIONS || targetRequirement == TargetRequirement.FRIENDLY_CHARACTERS
 				|| targetRequirement == TargetRequirement.ANY) {
 			entities.addAll(player.getMinions());
 		}

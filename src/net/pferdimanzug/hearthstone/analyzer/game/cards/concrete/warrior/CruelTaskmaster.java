@@ -8,9 +8,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.battlecry.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 
 public class CruelTaskmaster extends MinionCard {
 
@@ -21,28 +21,22 @@ public class CruelTaskmaster extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion cruelTaskmaster = createMinion(2, 2);
-		cruelTaskmaster.setTag(GameTag.BATTLECRY, new BattlecryCruelTaskmaster());
+		Battlecry battlecry = Battlecry.createBattlecry(new CruelTaskmasterSpell(), TargetRequirement.MINIONS);
+		cruelTaskmaster.setTag(GameTag.BATTLECRY, battlecry);
 		return cruelTaskmaster;
 	}
 	
-	private class BattlecryCruelTaskmaster extends Battlecry {
+	private class CruelTaskmasterSpell extends BuffSpell {
 		
-		public BattlecryCruelTaskmaster() {
-			setTargetRequirement(TargetRequirement.ANY);
+		public CruelTaskmasterSpell() {
+			super(2, 0);
 		}
 
 		@Override
-		public void execute(GameContext context, Player player) {
-			getTarget().modifyTag(GameTag.ATTACK_BONUS, +2);
-			context.getLogic().damage(getTarget(), 1);
+		public void cast(GameContext context, Player player, Entity target) {
+			super.cast(context, player, target);
+			context.getLogic().damage(target, 1);
 		}
-
-		@Override
-		public boolean canBeExecutedOn(Entity entity) {
-			return entity.getEntityType() == EntityType.MINION;
-		}
-		
-		
 		
 	}
 

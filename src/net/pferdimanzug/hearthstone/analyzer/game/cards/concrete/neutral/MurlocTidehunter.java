@@ -1,12 +1,14 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.battlecry.BattlecrySummonMinion;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetRequirement;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.battlecry.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.minions.Race;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
 
 public class MurlocTidehunter extends MinionCard {
 
@@ -17,10 +19,11 @@ public class MurlocTidehunter extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion murlocTidehunter = createMinion(2, 1, Race.MURLOC);
-		murlocTidehunter.setTag(GameTag.BATTLECRY, new BattlecrySummonMinion(new MurlocScout()));
+		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(new MurlocScout()), TargetRequirement.NONE);
+		murlocTidehunter.setTag(GameTag.BATTLECRY, battlecry);
 		return murlocTidehunter;
 	}
-	
+
 	private class MurlocScout extends MinionCard {
 
 		public MurlocScout() {
@@ -31,7 +34,7 @@ public class MurlocTidehunter extends MinionCard {
 		public Minion summon() {
 			return createMinion(1, 1, Race.MURLOC);
 		}
-		
+
 	}
 
 }

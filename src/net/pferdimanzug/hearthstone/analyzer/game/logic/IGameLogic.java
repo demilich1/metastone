@@ -2,27 +2,28 @@ package net.pferdimanzug.hearthstone.analyzer.game.logic;
 
 import java.util.List;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.HeroPower;
 import net.pferdimanzug.hearthstone.analyzer.game.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
 
 public interface IGameLogic {
 	
 	public Player determineBeginner(Player... players);
 	public void init(Player player, boolean begins);
 	public void drawCard(Player player);
-	public void performGameAction(GameContext context, Player player, GameAction action);
+	public void performGameAction(Player player, GameAction action);
 	
 	public boolean canPlayCard(Player player, Card card);
 	
-	public List<Entity> getValidTargets(GameContext context, Player player, GameAction action);
+	public List<Entity> getValidTargets(Player player, GameAction action);
 	
-	public void useHeroPower(GameContext context, Player player, HeroPower power);
-	public void playCard(GameContext context, Player player, Card card);
+	public void useHeroPower(Player player, HeroPower power);
+	public void playCard(Player player, Card card);
+	public void castSpell(Player player, ISpell spell, Entity target);
 	public void damage(Entity target, int damage);
 	public void heal(Entity target, int healing);
 	public void destroy(Entity target);

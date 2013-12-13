@@ -13,6 +13,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.minions.Race;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 
 public class Houndmaster extends MinionCard {
 
@@ -27,20 +28,12 @@ public class Houndmaster extends MinionCard {
 		return houndmaster;
 	}
 
-	
-private class BattlecryHoundmaster extends Battlecry {
-		
-		public BattlecryHoundmaster() {
-			setTargetRequirement(TargetRequirement.OWN_MINIONS);
-			setEffectHint(EffectHint.POSITIVE);
-		}
+	private class BattlecryHoundmaster extends Battlecry {
 
-		@Override
-		public void execute(GameContext context, Player player) {
-			Entity target = getTarget();
-			target.modifyTag(GameTag.ATTACK_BONUS, +2);
-			target.modifyTag(GameTag.HP_BONUS, +2);
-			target.setTag(GameTag.TAUNT);
+		public BattlecryHoundmaster() {
+			super(new HoundmasterBuff());
+			setTargetRequirement(TargetRequirement.FRIENDLY_MINIONS);
+			setEffectHint(EffectHint.POSITIVE);
 		}
 
 		@Override
@@ -51,8 +44,20 @@ private class BattlecryHoundmaster extends Battlecry {
 			Minion minion = (Minion) entity;
 			return minion.getRace() == Race.BEAST;
 		}
-		
-		
-		
 	}
+
+	private class HoundmasterBuff extends BuffSpell {
+
+		public HoundmasterBuff() {
+			super(2, 2);
+		}
+
+		@Override
+		public void cast(GameContext context, Player player, Entity target) {
+			super.cast(context, player, target);
+			target.setTag(GameTag.TAUNT);
+		}
+
+	}
+
 }
