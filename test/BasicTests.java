@@ -1,0 +1,128 @@
+import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
+import net.pferdimanzug.hearthstone.analyzer.game.Player;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.MinionAttackAction;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.battlecry.Battlecry;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.EffectHint;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.TheCoin;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.heroes.Garrosh;
+import net.pferdimanzug.hearthstone.analyzer.game.heroes.Hero;
+import net.pferdimanzug.hearthstone.analyzer.game.heroes.Jaina;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+public class BasicTests extends TestBase {
+	
+	@Test
+	public void testTheCoin() {
+		GameContext context = createContext(new Jaina(), new Garrosh());
+		Player mage = context.getPlayer1();
+		Player warrior = context.getPlayer2();
+		
+		TheCoin theCoin = getTheCoin(mage.getHand());
+		Assert.assertEquals(theCoin, null);
+		theCoin = getTheCoin(warrior.getHand());
+		Assert.assertNotEquals(theCoin, null);
+	}
+	
+	private TheCoin getTheCoin(CardCollection<Card> cards) {
+		for (Card card : cards) {
+			if (card instanceof TheCoin) {
+				return (TheCoin) card;
+			}
+		}
+		return null;
+	}
+
+	@Test
+	public void testSummon() {
+		GameContext context = createContext(new Jaina(), new Garrosh());
+		Player mage = context.getPlayer1();
+		mage.getHand().removeAll();
+		MinionCard devMonster = new DevMonster(1, 1);
+		mage.getHand().add(devMonster);
+		Assert.assertEquals(mage.getHand().getCount(), 1);
+		context.getLogic().performGameAction(context, mage, devMonster.play());
+		Assert.assertEquals(mage.getHand().isEmpty(), true);
+		Entity minion = getSingleMinion(mage.getMinions());
+		Assert.assertEquals(minion.getName(), devMonster.getName());
+		Assert.assertEquals(minion.getAttack(), 1);
+		Assert.assertEquals(minion.getHp(), 1);
+		Assert.assertEquals(minion.isDead(), false);
+	}
+
+	@Test
+	public void testMinionAttack() {
+		GameContext context = createContext(new Jaina(), new Garrosh());
+		Player mage = context.getPlayer1();
+		mage.setMana(10);
+		Player warrior = context.getPlayer2();
+		warrior.setMana(10);
+
+		MinionCard minionCard1 = new DevMonster(5, 5);
+		mage.getHand().add(minionCard1);
+		context.getLogic().performGameAction(context, mage, minionCard1.play());
+		
+		MinionCard minionCard2 = new DevMonster(1, 1);
+		mage.getHand().add(minionCard2);
+		context.getLogic().performGameAction(context, warrior, minionCard2.play());
+		
+		Assert.assertEquals(mage.getMinions().size(), 1);
+		Assert.assertEquals(warrior.getMinions().size(), 1);
+		
+		Entity attacker = getSingleMinion(mage.getMinions());
+		Entity defender = getSingleMinion(warrior.getMinions());
+		
+		GameAction attackAction = new MinionAttackAction(attacker);
+		attackAction.setTarget(defender);
+		context.getLogic().performGameAction(context, mage, attackAction);
+		
+		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp() - defender.getAttack());
+		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - attacker.getAttack());
+		Assert.assertEquals(defender.isDead(), true);
+		
+		Assert.assertEquals(mage.getMinions().size(), 1);
+		Assert.assertEquals(warrior.getMinions().size(), 0);
+	}
+	
+	@Test
+	public void testBattlecry() {
+		GameContext context = createContext(new Jaina(), new Garrosh());
+		Player mage = context.getPlayer1();
+		mage.setMana(10);
+		Player warrior = context.getPlayer2();
+		warrior.setMana(10);
+
+		DevMonster devMonster = new DevMonster(3, 3);
+		devMonster.getMinion().setTag(GameTag.BATTLECRY, new TestBattlecry());
+		mage.getHand().add(devMonster);
+		context.getLogic().performGameAction(context, mage, devMonster.play());
+		
+		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - TestBattlecry.DAMAGE);
+	}
+	
+	
+	public class TestBattlecry extends Battlecry {
+		
+		public static final int DAMAGE = 3;
+
+		public TestBattlecry() {
+			setEffectHint(EffectHint.NEGATIVE);
+		}
+
+		@Override
+		public void execute(GameContext context, Player player) {
+			Hero enemyHero = context.getOpponent(player).getHero();
+			context.getLogic().damage(enemyHero, DAMAGE);
+		}
+		
+	}
+	
+
+}

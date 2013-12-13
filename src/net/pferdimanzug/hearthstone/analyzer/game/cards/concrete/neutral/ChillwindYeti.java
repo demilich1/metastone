@@ -1,0 +1,20 @@
+package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
+
+import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.game.heroes.HeroClass;
+import net.pferdimanzug.hearthstone.analyzer.game.minions.Minion;
+
+public class ChillwindYeti extends MinionCard {
+
+	public ChillwindYeti() {
+		super("Chillwind Yeti", Rarity.FREE, HeroClass.ANY, 4);
+	}
+
+	@Override
+	public Minion summon() {
+		return createMinion(4, 5);
+	}
+
+
+}
