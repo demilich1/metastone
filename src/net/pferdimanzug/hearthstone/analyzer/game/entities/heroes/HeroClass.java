@@ -1,4 +1,4 @@
-package net.pferdimanzug.hearthstone.analyzer.game.heroes;
+package net.pferdimanzug.hearthstone.analyzer.game.entities.heroes;
 
 public enum HeroClass {
 	ANY,

@@ -3,6 +3,6 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards;
 public enum CardType {
 	MINION,
 	SPELL,
-	EQUIPMENT,
+	WEAPON,
 	HERO_POWER
 }

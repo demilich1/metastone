@@ -10,8 +10,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.TheCoin;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
-import net.pferdimanzug.hearthstone.analyzer.game.heroes.Garrosh;
-import net.pferdimanzug.hearthstone.analyzer.game.heroes.Jaina;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SingleTargetDamageSpell;
 
 import org.testng.Assert;

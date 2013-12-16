@@ -1,11 +1,11 @@
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
-import net.pferdimanzug.hearthstone.analyzer.game.heroes.Anduin;
-import net.pferdimanzug.hearthstone.analyzer.game.heroes.Garrosh;
-import net.pferdimanzug.hearthstone.analyzer.game.heroes.Guldan;
-import net.pferdimanzug.hearthstone.analyzer.game.heroes.Hero;
-import net.pferdimanzug.hearthstone.analyzer.game.heroes.Jaina;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Anduin;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Guldan;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.ArmorUp;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.Fireblast;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.LesserHeal;

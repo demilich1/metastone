@@ -9,9 +9,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Fireball;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.HolySmite;
-import net.pferdimanzug.hearthstone.analyzer.game.heroes.Anduin;
-import net.pferdimanzug.hearthstone.analyzer.game.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.heroes.Jaina;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Anduin;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 
 public class HearthstoneAnalyzer {

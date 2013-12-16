@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.HeroPowerAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
-import net.pferdimanzug.hearthstone.analyzer.game.heroes.HeroClass;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 
 public abstract class HeroPower extends SpellCard {
 

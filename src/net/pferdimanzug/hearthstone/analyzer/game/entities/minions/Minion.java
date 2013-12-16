@@ -1,4 +1,4 @@
-package net.pferdimanzug.hearthstone.analyzer.game.minions;
+package net.pferdimanzug.hearthstone.analyzer.game.entities.minions;
 
 import net.pferdimanzug.hearthstone.analyzer.game.aura.Aura;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;

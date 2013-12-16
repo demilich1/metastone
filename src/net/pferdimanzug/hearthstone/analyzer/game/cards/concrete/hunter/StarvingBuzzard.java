@@ -2,13 +2,13 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter;
 
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
 import net.pferdimanzug.hearthstone.analyzer.game.events.IGameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.IGameEventListener;
 import net.pferdimanzug.hearthstone.analyzer.game.events.SummonEvent;
-import net.pferdimanzug.hearthstone.analyzer.game.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.minions.Race;
 
 public class StarvingBuzzard extends MinionCard {
 

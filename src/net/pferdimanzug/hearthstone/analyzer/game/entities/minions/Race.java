@@ -1,4 +1,4 @@
-package net.pferdimanzug.hearthstone.analyzer.game.minions;
+package net.pferdimanzug.hearthstone.analyzer.game.entities.minions;
 
 public enum Race {
 	NONE,

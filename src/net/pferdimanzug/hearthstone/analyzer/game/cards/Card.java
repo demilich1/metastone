@@ -1,7 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards;
 
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
-import net.pferdimanzug.hearthstone.analyzer.game.heroes.HeroClass;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 
 public abstract class Card {
 

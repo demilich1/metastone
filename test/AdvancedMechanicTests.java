@@ -11,9 +11,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.Abusive
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.AmaniBerserker;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.StonetuskBoar;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
-import net.pferdimanzug.hearthstone.analyzer.game.heroes.Anduin;
-import net.pferdimanzug.hearthstone.analyzer.game.heroes.Garrosh;
-import net.pferdimanzug.hearthstone.analyzer.game.heroes.Jaina;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Anduin;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

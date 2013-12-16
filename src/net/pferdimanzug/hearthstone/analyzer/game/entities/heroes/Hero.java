@@ -1,14 +1,16 @@
-package net.pferdimanzug.hearthstone.analyzer.game.heroes;
+package net.pferdimanzug.hearthstone.analyzer.game.entities.heroes;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.HeroPower;
 
 public abstract class Hero extends Entity {
 
 	private final HeroClass heroClass;
 	private final HeroPower heroPower;
+	private Weapon weapon;
 	
 	public Hero(String name, HeroClass heroClass, HeroPower heroPower) {
 		super(null);
@@ -38,6 +40,14 @@ public abstract class Hero extends Entity {
 		// armor cannot fall below zero
 		int newArmor = Math.max(getArmor() + armor, 0);
 		setTag(GameTag.ARMOR, newArmor);
+	}
+
+	public Weapon getWeapon() {
+		return weapon;
+	}
+
+	public void setWeapon(Weapon weapon) {
+		this.weapon = weapon;
 	}
 	
 }
