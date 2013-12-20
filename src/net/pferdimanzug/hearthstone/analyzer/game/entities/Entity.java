@@ -124,4 +124,8 @@ public abstract class Entity {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public boolean isWounded() {
+		return getHp() != getMaxHp();
+	}
 }

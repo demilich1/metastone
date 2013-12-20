@@ -18,6 +18,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.events.DamageEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.IGameEventListener;
 import net.pferdimanzug.hearthstone.analyzer.game.events.KillEvent;
+import net.pferdimanzug.hearthstone.analyzer.game.events.PhysicalAttackEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.SummonEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.TurnEndEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.TurnStartEvent;
@@ -161,6 +162,7 @@ public class GameLogic implements IGameLogic {
 		damage(defender, attackerDamage);
 		damage(attacker, defenderDamage);
 		attacker.modifyTag(GameTag.NUMBER_OF_ATTACKS, -1);
+		context.getEventManager().fireGameEvent(new PhysicalAttackEvent(context, attacker, defender));
 	}
 
 	@Override

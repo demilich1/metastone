@@ -5,6 +5,7 @@ public enum GameEventType {
 	SUMMON,
 	HEAL,
 	KILL,
+	PHYSICAL_ATTACK,
 	TURN_START,
 	TURN_END
 }

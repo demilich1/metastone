@@ -13,8 +13,12 @@ public class Battlecry extends GameAction {
 		battlecry.setTargetRequirement(targetSelection);
 		return battlecry;
 	}
+	
+	public static Battlecry createBattlecry(ISpell spell) {
+		return createBattlecry(spell, TargetRequirement.NONE);
+	}
 
-	public Battlecry(ISpell spell) {
+	protected Battlecry(ISpell spell) {
 		this.spell = spell;
 		setActionType(ActionType.MINION_ABILITY);
 	}
