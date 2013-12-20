@@ -1,6 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetRequirement;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
@@ -12,7 +12,7 @@ public class TheCoin extends SpellCard {
 
 	public TheCoin() {
 		super("The Coin", Rarity.FREE, HeroClass.ANY, 0);
-		setTargetRequirement(TargetRequirement.NONE);
+		setTargetRequirement(TargetSelection.NONE);
 		setSpell(new GainManaSpell(MANA_GAIN));
 	}
 

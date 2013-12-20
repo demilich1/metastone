@@ -16,7 +16,7 @@ public abstract class HeroPowerAction extends PlayCardAction {
 	}
 	
 	@Override
-	public TargetRequirement getTargetRequirement() {
+	public TargetSelection getTargetRequirement() {
 		return getHeroPower().getTargetRequirement();
 	}
 

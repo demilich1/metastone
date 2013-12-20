@@ -5,7 +5,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetRequirement;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.EffectHint;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -29,7 +29,7 @@ public class ShatteredSunCleric extends MinionCard{
 	private class BuffFriendlyMinion extends GameAction {
 		
 		public BuffFriendlyMinion() {
-			setTargetRequirement(TargetRequirement.FRIENDLY_MINIONS);
+			setTargetRequirement(TargetSelection.FRIENDLY_MINIONS);
 			setEffectHint(EffectHint.POSITIVE);
 			setActionType(ActionType.MINION_ABILITY);
 		}

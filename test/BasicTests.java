@@ -4,7 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.MinionAttackAction;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetRequirement;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
@@ -100,7 +100,7 @@ public class BasicTests extends TestBase {
 		warrior.setMana(10);
 
 		DevMonster devMonster = new DevMonster(3, 3);
-		Battlecry testBattlecry = Battlecry.createBattlecry(new SingleTargetDamageSpell(3), TargetRequirement.ENEMY_HERO);
+		Battlecry testBattlecry = Battlecry.createBattlecry(new SingleTargetDamageSpell(3), TargetSelection.ENEMY_HERO);
 		testBattlecry.setTarget(warrior.getHero());
 		devMonster.getMinion().setTag(GameTag.BATTLECRY, testBattlecry);
 		mage.getHand().add(devMonster);

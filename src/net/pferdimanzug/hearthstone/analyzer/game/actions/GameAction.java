@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public abstract class GameAction {
 	
-	private TargetRequirement targetRequirement = TargetRequirement.NONE;
+	private TargetSelection targetRequirement = TargetSelection.NONE;
 	private ActionType actionType = ActionType.UNDEFINED;
 	private EffectHint effectHint = EffectHint.UNKNOWN;
 	
@@ -15,7 +15,7 @@ public abstract class GameAction {
 	
 	public abstract void execute(GameContext context, Player player);
 	
-	public TargetRequirement getTargetRequirement() {
+	public TargetSelection getTargetRequirement() {
 		return targetRequirement;
 	}
 	
@@ -35,7 +35,7 @@ public abstract class GameAction {
 		return actionType;
 	}
 
-	protected void setTargetRequirement(TargetRequirement targetRequirement) {
+	protected void setTargetRequirement(TargetSelection targetRequirement) {
 		this.targetRequirement = targetRequirement;
 	}
 

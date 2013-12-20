@@ -2,7 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetRequirement;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
@@ -18,7 +18,7 @@ public class ArgentProtector extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion argentProtector = createMinion(2, 2);
-		Battlecry battlecry = Battlecry.createBattlecry(new BuffSpell(GameTag.DIVINE_SHIELD), TargetRequirement.FRIENDLY_MINIONS);
+		Battlecry battlecry = Battlecry.createBattlecry(new BuffSpell(GameTag.DIVINE_SHIELD), TargetSelection.FRIENDLY_MINIONS);
 		argentProtector.setTag(GameTag.BATTLECRY, battlecry);
 		return argentProtector;
 	}

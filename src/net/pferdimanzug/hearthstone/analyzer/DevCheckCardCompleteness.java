@@ -43,13 +43,16 @@ public class DevCheckCardCompleteness {
 			allClasses.add(canonName);
 		}
 
+		int missing = 0;
 		for (String card : allCards) {
 			if (allClasses.contains(card)) {
 				//System.out.println("Card found: " + card);
 			} else {
+				missing++;
 				System.out.println("Card missing: " + card);
 			}
 		}
+		System.out.println("There are " + missing + " cards missing");
 	}
 
 	private static String toCanonName(String name) {

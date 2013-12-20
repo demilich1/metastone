@@ -1,7 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetRequirement;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
@@ -14,7 +14,7 @@ public class Hex extends SpellCard {
 
 	public Hex() {
 		super("Hex", Rarity.FREE, HeroClass.SHAMAN, 3);
-		setTargetRequirement(TargetRequirement.MINIONS);
+		setTargetRequirement(TargetSelection.MINIONS);
 		setSpell(new TransformMinionSpell(new Frog()));
 		
 	}

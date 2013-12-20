@@ -1,6 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.heroes.powers;
 
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetRequirement;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
@@ -11,7 +11,7 @@ public class Reinforce extends HeroPower {
 
 	public Reinforce() {
 		super("Reinforce");
-		setTargetRequirement(TargetRequirement.NONE);
+		setTargetRequirement(TargetSelection.NONE);
 		setSpell(new SummonSpell(new SilverHandRecruit()));
 	}
 

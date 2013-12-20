@@ -4,7 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetRequirement;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
@@ -12,7 +12,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
 public abstract class SpellCard extends Card {
 
 	private ISpell spell;
-	private TargetRequirement targetRequirement;
+	private TargetSelection targetRequirement;
 	private EffectHint effectHint;
 
 	public SpellCard(String name, Rarity rarity, HeroClass classRestriction, int manaCost) {
@@ -43,11 +43,11 @@ public abstract class SpellCard extends Card {
 		};
 	}
 
-	public TargetRequirement getTargetRequirement() {
+	public TargetSelection getTargetRequirement() {
 		return targetRequirement;
 	}
 
-	public void setTargetRequirement(TargetRequirement targetRequirement) {
+	public void setTargetRequirement(TargetSelection targetRequirement) {
 		this.targetRequirement = targetRequirement;
 	}
 
@@ -57,6 +57,10 @@ public abstract class SpellCard extends Card {
 
 	public void setEffectHint(EffectHint effectHint) {
 		this.effectHint = effectHint;
+	}
+	
+	public boolean canBeCast(GameContext context, Player player) {
+		return true;
 	}
 	
 	public boolean canBeCastOn(Entity target) {

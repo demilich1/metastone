@@ -8,14 +8,14 @@ public class Battlecry extends GameAction {
 	
 	private final ISpell spell;
 	
-	public static Battlecry createBattlecry(ISpell spell, TargetRequirement targetSelection) {
+	public static Battlecry createBattlecry(ISpell spell, TargetSelection targetSelection) {
 		Battlecry battlecry = new Battlecry(spell);
 		battlecry.setTargetRequirement(targetSelection);
 		return battlecry;
 	}
 	
 	public static Battlecry createBattlecry(ISpell spell) {
-		return createBattlecry(spell, TargetRequirement.NONE);
+		return createBattlecry(spell, TargetSelection.NONE);
 	}
 
 	protected Battlecry(ISpell spell) {

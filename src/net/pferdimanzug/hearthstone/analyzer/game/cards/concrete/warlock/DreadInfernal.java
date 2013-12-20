@@ -2,7 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetRequirement;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
@@ -19,7 +19,7 @@ public class DreadInfernal extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion dreadInfernal = createMinion(6, 6, Race.DEMON);
-		Battlecry infernoBattlecry = Battlecry.createBattlecry(new AreaDamageSpell(1, TargetRequirement.ANY));
+		Battlecry infernoBattlecry = Battlecry.createBattlecry(new AreaDamageSpell(1, TargetSelection.ANY));
 		dreadInfernal.setTag(GameTag.BATTLECRY, infernoBattlecry);
 		return dreadInfernal;
 	}

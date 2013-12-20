@@ -1,6 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage;
 
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetRequirement;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
@@ -13,7 +13,7 @@ public class Polymorph extends SpellCard {
 
 	public Polymorph() {
 		super("Polymorph", Rarity.FREE, HeroClass.MAGE, 4);
-		setTargetRequirement(TargetRequirement.MINIONS);
+		setTargetRequirement(TargetSelection.MINIONS);
 		setSpell(new TransformMinionSpell(new Sheep()));
 	}
 	

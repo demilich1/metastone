@@ -2,7 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetRequirement;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
@@ -20,7 +20,7 @@ public class Nightblade extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion nightblade = createMinion(4, 4);
-		Battlecry battlecry = Battlecry.createBattlecry(new SingleTargetDamageSpell(BATTLECRY_DAMAGE), TargetRequirement.ENEMY_HERO);
+		Battlecry battlecry = Battlecry.createBattlecry(new SingleTargetDamageSpell(BATTLECRY_DAMAGE), TargetSelection.ENEMY_HERO);
 		nightblade.setTag(GameTag.BATTLECRY, battlecry);
 		return nightblade;
 	}

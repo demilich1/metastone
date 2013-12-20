@@ -1,14 +1,13 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.events.DamageEvent;
-import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
-import net.pferdimanzug.hearthstone.analyzer.game.events.IGameEvent;
-import net.pferdimanzug.hearthstone.analyzer.game.events.IGameEventListener;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.DamageReceivedTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 
 public class GurubashiBerserker extends MinionCard {
 	
@@ -21,30 +20,26 @@ public class GurubashiBerserker extends MinionCard {
 
 	@Override
 	public Minion summon() {
-		return new GurubashiBerserkerMinion(this);
+		Minion gurubashiBerserker = createMinion(BASE_ATTACK, 7);
+		SpellTrigger trigger = new SpellTrigger(new GurubashiBerserkerTrigger(gurubashiBerserker), new BuffSpell(3, 0));
+		gurubashiBerserker.addSpellTrigger(trigger);
+		return gurubashiBerserker;
 	}
 	
-	private class GurubashiBerserkerMinion extends Minion implements IGameEventListener {
+	private class GurubashiBerserkerTrigger extends DamageReceivedTrigger {
 
-		public GurubashiBerserkerMinion(MinionCard sourceCard) {
-			super(sourceCard);
-			setBaseStats(BASE_ATTACK, 7);
+		private final Entity target;
+
+		public GurubashiBerserkerTrigger(Entity target) {
+			this.target = target;
 		}
+
+		@Override
+		public Entity getTarget() {
+			return target;
+		}		
 		
-		@Override
-		public void onGameEvent(IGameEvent event) {
-			DamageEvent damageEvent = (DamageEvent) event;
-			if (damageEvent.getVictim() != this) {
-				return;
-			}
-			modifyTag(GameTag.ATTACK_BONUS, ATTACK_BONUS);
-		}
-
-		@Override
-		public GameEventType interestedIn() {
-			return GameEventType.DAMAGE;
-		}
-
 	}
+	
 
 }

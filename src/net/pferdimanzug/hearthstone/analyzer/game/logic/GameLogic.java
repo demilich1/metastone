@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetRequirement;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardType;
@@ -16,7 +16,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.events.DamageEvent;
-import net.pferdimanzug.hearthstone.analyzer.game.events.IGameEventListener;
 import net.pferdimanzug.hearthstone.analyzer.game.events.KillEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.PhysicalAttackEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.SummonEvent;
@@ -24,6 +23,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.TurnEndEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.TurnStartEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.HeroPower;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -113,8 +113,8 @@ public class GameLogic implements IGameLogic {
 	
 	private void destroyMinion(Minion minion) {
 		minion.getOwner().getMinions().remove(minion);
-		if (minion instanceof IGameEventListener) {
-			context.getEventManager().removeGameEventListener((IGameEventListener) minion);
+		for (SpellTrigger spellTrigger : minion.getSpellTriggers()) {
+			context.getEventManager().removeGameEventListener(spellTrigger);
 		}
 		context.getEventManager().fireGameEvent(new KillEvent(context, minion));
 	}
@@ -151,6 +151,7 @@ public class GameLogic implements IGameLogic {
 	@Override
 	public void endTurn(Player player) {
 		player.getHero().setBaseAttack(0);
+		player.getHero().removeTag(GameTag.COMBO);
 		logger.debug(player.getName() + " ends his turn.");
 		context.getEventManager().fireGameEvent(new TurnEndEvent(context, player));
 	}
@@ -239,7 +240,7 @@ public class GameLogic implements IGameLogic {
 
 	@Override
 	public void performGameAction(Player player, GameAction action) {
-		if (action.getTargetRequirement() != TargetRequirement.NONE && action.getTarget() == null) {
+		if (action.getTargetRequirement() != TargetSelection.NONE && action.getTarget() == null) {
 			List<Entity> validTargets = getValidTargets(player, action);
 			Entity target = player.getBehaviour().provideTargetFor(action, validTargets);
 			if (target != null) {
@@ -260,6 +261,7 @@ public class GameLogic implements IGameLogic {
 		logger.debug(player.getName() + " plays " + card.getName());
 		player.getHand().remove(card);
 		player.getGraveyard().add(card);
+		player.getHero().setTag(GameTag.COMBO);
 	}
 
 	// TODO: circular dependency. Very ugly, refactor!
@@ -298,8 +300,8 @@ public class GameLogic implements IGameLogic {
 			// player.getMinions().addAfter(minion, nextTo);
 		}
 		minion.setOwner(player);
-		if (minion instanceof IGameEventListener) {
-			context.getEventManager().registerGameEventListener((IGameEventListener) minion);
+		for (SpellTrigger spellTrigger : minion.getSpellTriggers()) {
+			context.getEventManager().registerGameEventListener(spellTrigger);
 		}
 		if (minion.hasTag(GameTag.CHARGE)) {
 			minion.setTag(GameTag.NUMBER_OF_ATTACKS, minion.hasTag(GameTag.WINDFURY) ? 2 : 1);

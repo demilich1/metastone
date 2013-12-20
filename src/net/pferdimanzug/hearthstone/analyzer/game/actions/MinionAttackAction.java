@@ -10,7 +10,7 @@ public class MinionAttackAction extends GameAction {
 	private Entity attacker;
 
 	public MinionAttackAction(Entity attacker) {
-		setTargetRequirement(TargetRequirement.ENEMY_CHARACTERS);
+		setTargetRequirement(TargetSelection.ENEMY_CHARACTERS);
 		setActionType(ActionType.PHYSICAL_ATTACK);
 		setEffectHint(EffectHint.NEGATIVE);
 		this.attacker = attacker;

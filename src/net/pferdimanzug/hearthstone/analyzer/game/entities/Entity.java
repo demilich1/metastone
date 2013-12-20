@@ -1,12 +1,15 @@
 package net.pferdimanzug.hearthstone.analyzer.game.entities;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 
 public abstract class Entity {
 
@@ -14,6 +17,7 @@ public abstract class Entity {
 	private final HashMap<GameTag, Object> tags = new HashMap<GameTag, Object>();
 	private Player owner;
 	private final Card sourceCard;
+	private final List<SpellTrigger> spellTriggers = new ArrayList<>();
 
 	public Entity(Card sourceCard) {
 		this.setName(sourceCard != null ? sourceCard.getName() : null); 
@@ -127,5 +131,14 @@ public abstract class Entity {
 	
 	public boolean isWounded() {
 		return getHp() != getMaxHp();
+	}
+	
+	public void addSpellTrigger(SpellTrigger spellTrigger) {
+		spellTrigger.setHost(this);
+		getSpellTriggers().add(spellTrigger);
+	}
+
+	public List<SpellTrigger> getSpellTriggers() {
+		return spellTriggers;
 	}
 }

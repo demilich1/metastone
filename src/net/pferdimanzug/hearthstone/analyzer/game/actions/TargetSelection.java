@@ -1,6 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.actions;
 
-public enum TargetRequirement {
+public enum TargetSelection {
 	NONE,
 	ENEMY_CHARACTERS,
 	ENEMY_MINIONS,

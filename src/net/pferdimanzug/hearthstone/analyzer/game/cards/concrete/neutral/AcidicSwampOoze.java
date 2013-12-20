@@ -2,7 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetRequirement;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
@@ -29,7 +29,7 @@ public class AcidicSwampOoze extends MinionCard {
 
 		public BattlecryDestroyWeapon() {
 			super(new DestroyWeaponSpell());
-			setTargetRequirement(TargetRequirement.ENEMY_HERO);
+			setTargetRequirement(TargetSelection.ENEMY_HERO);
 		}
 
 		@Override

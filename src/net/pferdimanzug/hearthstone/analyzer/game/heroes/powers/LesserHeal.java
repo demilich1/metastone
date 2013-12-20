@@ -1,6 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.heroes.powers;
 
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetRequirement;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SingleTargetHealingSpell;
 
 public class LesserHeal extends HeroPower {
@@ -9,7 +9,7 @@ public class LesserHeal extends HeroPower {
 	
 	public LesserHeal() {
 		super("Lesser Heal");
-		setTargetRequirement(TargetRequirement.ANY);
+		setTargetRequirement(TargetSelection.ANY);
 		setSpell(new SingleTargetHealingSpell(HEALING));
 	}
 

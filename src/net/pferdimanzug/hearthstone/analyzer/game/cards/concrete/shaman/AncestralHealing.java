@@ -3,7 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetRequirement;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.EffectHint;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
@@ -16,7 +16,7 @@ public class AncestralHealing extends SpellCard {
 	public AncestralHealing() {
 		super("Ancestral Healing", Rarity.FREE, HeroClass.SHAMAN, 0);
 		setEffectHint(EffectHint.POSITIVE);
-		setTargetRequirement(TargetRequirement.MINIONS);
+		setTargetRequirement(TargetSelection.MINIONS);
 		setSpell(new AncestralHealingSpell());
 	}
 

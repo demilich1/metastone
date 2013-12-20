@@ -2,7 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetRequirement;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
@@ -15,7 +15,7 @@ public class BattleRage extends SpellCard {
 	public BattleRage() {
 		super("Battle Rage", Rarity.COMMON, HeroClass.WARRIOR, 2);
 		setSpell(new BattleRageSpell());
-		setTargetRequirement(TargetRequirement.NONE);
+		setTargetRequirement(TargetSelection.NONE);
 	}
 	
 	private class BattleRageSpell extends DrawCardSpell {

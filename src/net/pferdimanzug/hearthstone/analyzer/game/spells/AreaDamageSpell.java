@@ -6,14 +6,14 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetRequirement;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public class AreaDamageSpell extends DamageSpell {
 	
-	private TargetRequirement targetSelection;
+	private TargetSelection targetSelection;
 
-	public AreaDamageSpell(int damage, TargetRequirement targetSelection) {
+	public AreaDamageSpell(int damage, TargetSelection targetSelection) {
 		super(damage);
 		this.targetSelection = targetSelection;
 	}
@@ -30,7 +30,7 @@ public class AreaDamageSpell extends DamageSpell {
 	
 	private class DummyTargetAction extends GameAction {
 		
-		public DummyTargetAction(TargetRequirement targetRequirement) {
+		public DummyTargetAction(TargetSelection targetRequirement) {
 			setTargetRequirement(targetRequirement);
 			setActionType(ActionType.UNDEFINED);
 		}

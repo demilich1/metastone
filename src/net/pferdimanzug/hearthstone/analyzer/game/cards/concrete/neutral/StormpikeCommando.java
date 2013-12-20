@@ -2,7 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetRequirement;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
@@ -18,7 +18,7 @@ public class StormpikeCommando extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion stormpikeCommando = createMinion(4, 2);
-		Battlecry battlecry = Battlecry.createBattlecry(new SingleTargetDamageSpell(2), TargetRequirement.ANY);
+		Battlecry battlecry = Battlecry.createBattlecry(new SingleTargetDamageSpell(2), TargetSelection.ANY);
 		stormpikeCommando.setTag(GameTag.BATTLECRY, battlecry);
 		return stormpikeCommando;
 	}
