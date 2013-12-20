@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
@@ -41,7 +42,7 @@ public class NorthshireCleric extends MinionCard {
 		}
 
 		@Override
-		public Entity getTarget() {
+		public Entity getTarget(GameContext context, Entity host) {
 			return null;
 		}
 

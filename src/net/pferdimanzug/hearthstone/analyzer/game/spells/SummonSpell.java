@@ -7,15 +7,17 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public class SummonSpell implements ISpell {
 	
-	private final MinionCard minionCard;
+	private final MinionCard[] minionCards;
 	
-	public SummonSpell(MinionCard minionCard) {
-		this.minionCard = minionCard;
+	public SummonSpell(MinionCard... minionCards) {
+		this.minionCards = minionCards;
 	}
 
 	@Override
 	public void cast(GameContext context, Player player, Entity target) {
-		context.getLogic().summon(player, minionCard.summon(), null);
+		for (MinionCard minionCard : minionCards) {
+			context.getLogic().summon(player, minionCard.summon(), null);
+		}
 	}
 
 }

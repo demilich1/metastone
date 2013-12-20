@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
@@ -35,7 +36,7 @@ public class GurubashiBerserker extends MinionCard {
 		}
 
 		@Override
-		public Entity getTarget() {
+		public Entity getTarget(GameContext context, Entity host) {
 			return target;
 		}		
 		

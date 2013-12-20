@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.spells.trigger;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.events.DamageEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
@@ -19,7 +20,7 @@ public class DamageReceivedTrigger implements IGameEventTrigger {
 	}
 
 	@Override
-	public Entity getTarget() {
+	public Entity getTarget(GameContext context, Entity host) {
 		return null;
 	}
 

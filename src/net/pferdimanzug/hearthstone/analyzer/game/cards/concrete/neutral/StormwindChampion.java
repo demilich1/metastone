@@ -41,13 +41,13 @@ public class StormwindChampion extends MinionCard {
 		@Override
 		protected void onApply(Entity entity) {
 			entity.modifyTag(GameTag.ATTACK_BONUS, +1);
-			entity.modifyTag(GameTag.HP_BONUS, +1);
+			entity.modifyHpBonus(+1);
 		}
 
 		@Override
 		protected void onRemove(Entity entity) {
 			entity.modifyTag(GameTag.ATTACK_BONUS, -1);
-			entity.modifyTag(GameTag.HP_BONUS, -1);
+			entity.modifyHpBonus(-1);
 		}
 
 	}

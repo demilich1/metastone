@@ -4,16 +4,14 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageAndFreezeSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 
-public class FrostShock extends SpellCard {
+public class RockbiterWeapon extends SpellCard {
 
-	public FrostShock() {
-		super("Frost Shock", Rarity.FREE, HeroClass.ANY, 1);
-		setTargetRequirement(TargetSelection.ENEMY_CHARACTERS);
-		setSpell(new DamageAndFreezeSpell(1));
+	public RockbiterWeapon() {
+		super("Rockbiter Weapon", Rarity.FREE, HeroClass.SHAMAN, 1);
+		setSpell(new BuffSpell(3, 0));
+		setTargetRequirement(TargetSelection.FRIENDLY_CHARACTERS);
 	}
-
-	
 
 }

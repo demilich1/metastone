@@ -1,4 +1,4 @@
-package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
+package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.aura.Aura;

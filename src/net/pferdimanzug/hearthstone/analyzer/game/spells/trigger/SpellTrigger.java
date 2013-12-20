@@ -20,7 +20,8 @@ public class SpellTrigger implements IGameEventListener {
 	@Override
 	public void onGameEvent(IGameEvent event) {
 		if (trigger.fire(event, host)) {
-			event.getGameContext().getLogic().castSpell(host.getOwner(), spell, trigger.getTarget());
+			Entity target = trigger.getTarget(event.getGameContext(), host);
+			event.getGameContext().getLogic().castSpell(host.getOwner(), spell, target);
 		}
 	}
 

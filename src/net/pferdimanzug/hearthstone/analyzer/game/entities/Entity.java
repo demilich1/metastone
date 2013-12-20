@@ -75,11 +75,16 @@ public abstract class Entity {
 	}
 
 	public int getMaxHp() {
-		return getTagValue(GameTag.MAX_HP);
+		return getTagValue(GameTag.MAX_HP) + getTagValue(GameTag.HP_BONUS);
 	}
 
 	public void setMaxHp(int value) {
 		setTag(GameTag.MAX_HP, value);
+	}
+	
+	public void modifyHpBonus(int value) {
+		modifyTag(GameTag.HP_BONUS, value);
+		modifyTag(GameTag.HP, value);
 	}
 
 	public boolean isDead() {

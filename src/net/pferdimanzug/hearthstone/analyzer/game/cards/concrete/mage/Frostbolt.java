@@ -1,4 +1,4 @@
-package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman;
+package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage;
 
 import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -6,14 +6,13 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageAndFreezeSpell;
 
-public class FrostShock extends SpellCard {
+public class Frostbolt extends SpellCard {
 
-	public FrostShock() {
-		super("Frost Shock", Rarity.FREE, HeroClass.ANY, 1);
-		setTargetRequirement(TargetSelection.ENEMY_CHARACTERS);
-		setSpell(new DamageAndFreezeSpell(1));
+	public Frostbolt() {
+		super("Frostbolt", Rarity.FREE, HeroClass.MAGE, 2);
+		setSpell(new DamageAndFreezeSpell(3));
+		setTargetRequirement(TargetSelection.ANY);
 	}
-
 	
 
 }

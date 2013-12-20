@@ -7,8 +7,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public class BuffSpell implements ISpell {
 	
-	private final int attackBonus;
-	private final int hpBonus;
+	private int attackBonus;
+	private int hpBonus;
 	private final GameTag[] tags;
 
 	public BuffSpell(int attackBonus, int hpBonus, GameTag... tags) {
@@ -27,12 +27,28 @@ public class BuffSpell implements ISpell {
 			target.modifyTag(GameTag.ATTACK_BONUS, +attackBonus);
 		}
 		if (hpBonus != 0) {
-			target.modifyTag(GameTag.HP_BONUS, +hpBonus);
+			target.modifyHpBonus(+hpBonus);
 		}
 		
 		for (GameTag tag : tags) {
 			target.setTag(tag);
 		}
+	}
+
+	public int getAttackBonus() {
+		return attackBonus;
+	}
+
+	public void setAttackBonus(int attackBonus) {
+		this.attackBonus = attackBonus;
+	}
+
+	public int getHpBonus() {
+		return hpBonus;
+	}
+
+	public void setHpBonus(int hpBonus) {
+		this.hpBonus = hpBonus;
 	}	
 
 }

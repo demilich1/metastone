@@ -41,12 +41,12 @@ public class BloodImp extends MinionCard {
 
 		@Override
 		protected void onApply(Entity entity) {
-			entity.modifyTag(GameTag.HP_BONUS, +1);
+			entity.modifyHpBonus(+1);
 		}
 
 		@Override
 		protected void onRemove(Entity entity) {
-			entity.modifyTag(GameTag.HP_BONUS, -1);
+			entity.modifyHpBonus(-1);
 		}
 		
 	}

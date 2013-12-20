@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
@@ -30,7 +31,7 @@ public class BlessingOfWisdom extends SpellCard {
 		}
 
 		@Override
-		public Entity getTarget() {
+		public Entity getTarget(GameContext context, Entity host) {
 			return null;
 		}
 
