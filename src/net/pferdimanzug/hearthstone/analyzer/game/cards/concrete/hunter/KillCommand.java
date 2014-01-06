@@ -7,7 +7,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
 
@@ -35,7 +34,7 @@ public class KillCommand extends SpellCard {
 		}
 		
 		private boolean hasBeast(Player player) {
-			for (Minion minion : player.getMinions()) {
+			for (Entity minion : player.getMinions()) {
 				if (minion.getRace() == Race.BEAST) {
 					return true;
 				}

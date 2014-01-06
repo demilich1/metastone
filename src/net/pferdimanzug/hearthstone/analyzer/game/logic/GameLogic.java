@@ -83,7 +83,7 @@ public class GameLogic implements IGameLogic {
 		minion.setHp(minion.getHp() - damage);
 		context.getEventManager().fireGameEvent(new DamageEvent(context, minion, damage));
 		if (minion.isDead()) {
-			destroyMinion((Minion) minion);
+			destroyMinion((Entity) minion);
 		} else if (minion.hasTag(GameTag.ENRAGE_SPELL)){
 			handleEnrage(minion);
 		}
@@ -108,10 +108,10 @@ public class GameLogic implements IGameLogic {
 
 	@Override
 	public void destroy(Entity target) {
-		
+		//TODO: implement for Hero, Minion, Weapon, etc
 	}
 	
-	private void destroyMinion(Minion minion) {
+	private void destroyMinion(Entity minion) {
 		minion.getOwner().getMinions().remove(minion);
 		for (SpellTrigger spellTrigger : minion.getSpellTriggers()) {
 			context.getEventManager().removeGameEventListener(spellTrigger);
@@ -136,16 +136,8 @@ public class GameLogic implements IGameLogic {
 			return;
 		}
 
-		CardCollection<Card> hand = player.getHand();
-		CardCollection<Card> graveyard = player.getGraveyard();
 		Card card = deck.removeFirst();
-		if (hand.getCount() < MAX_HAND_CARDS) {
-			logger.debug(player.getName() + " draws a card: " + card.getName());
-			hand.add(card);
-		} else {
-			logger.debug(player.getName() + " has too many cards on his hand, card destroyed: " + card.getName());
-		}
-		graveyard.add(card);
+		receiveCard(player, card);
 	}
 
 	@Override
@@ -189,7 +181,7 @@ public class GameLogic implements IGameLogic {
 	public void heal(Entity target, int healing) {
 		switch (target.getEntityType()) {
 		case MINION:
-			healMinion((Minion) target, healing);
+			healMinion((Entity) target, healing);
 			break;
 		case HERO:
 			healHero((Hero) target, healing);
@@ -205,7 +197,7 @@ public class GameLogic implements IGameLogic {
 		hero.setHp(newHp);
 	}
 	
-	private void healMinion(Minion minion, int healing) {
+	private void healMinion(Entity minion, int healing) {
 		int newHp = Math.min(minion.getMaxHp(), minion.getHp() + healing);
 		logger.debug(minion.getName() + " is healed for " + healing + ", hp now: " + minion.getHp() + "/" + minion.getMaxHp());
 		minion.setHp(newHp);
@@ -278,7 +270,7 @@ public class GameLogic implements IGameLogic {
 		player.getHero().getHeroPower().setUsed(false);
 		logger.debug(player.getName() + " is at " + player.getMana() + "/" + player.getMaxMana() + " mana");
 		drawCard(player);
-		for (Minion minion : player.getMinions()) {
+		for (Entity minion : player.getMinions()) {
 			int attacks = minion.hasTag(GameTag.WINDFURY) ? 2 : 1;
 			minion.setTag(GameTag.NUMBER_OF_ATTACKS, attacks);
 		}
@@ -321,6 +313,19 @@ public class GameLogic implements IGameLogic {
 	@Override
 	public void castSpell(Player player, ISpell spell, Entity target) {
 		spell.cast(context, player, target);
+	}
+
+	@Override
+	public void receiveCard(Player player, Card card) {
+		CardCollection<Card> hand = player.getHand();
+		CardCollection<Card> graveyard = player.getGraveyard();
+		if (hand.getCount() < MAX_HAND_CARDS) {
+			logger.debug(player.getName() + " receives card: " + card.getName());
+			hand.add(card);
+		} else {
+			logger.debug(player.getName() + " has too many cards on his hand, card destroyed: " + card.getName());
+			graveyard.add(card);
+		}
 	}
 
 }

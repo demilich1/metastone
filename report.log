@@ -1,217 +1,217 @@
-15:51:10 DEBUG - Setting player hp to 30 for 'P1' (Garrosh Hellscream)
-15:51:10 DEBUG - 'P1' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - Setting player hp to 30 for 'P2' (Jaina Proudmoore)
-15:51:10 DEBUG - 'P2' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Jaina Proudmoore) receives The Coin
-15:51:10 DEBUG - 'P1' (Garrosh Hellscream) uses hero power Armor Up!
-15:51:10 DEBUG - Garrosh Hellscream receives 4 damage, hp now: 28(0)
-15:51:10 DEBUG - Setting player hp to 30 for 'P1' (Jaina Proudmoore)
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - Setting player hp to 30 for 'P2' (Garrosh Hellscream)
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) receives The Coin
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) uses hero power Fireblast
-15:51:10 DEBUG - Garrosh Hellscream receives 1 damage, hp now: 29(0)
-15:51:10 DEBUG - Setting player hp to 30 for 'P1' (Anduin Wrynn)
-15:51:10 DEBUG - 'P1' (Anduin Wrynn) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Anduin Wrynn) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Anduin Wrynn) draws a card: Chillwind Yeti
-15:51:10 DEBUG - Setting player hp to 30 for 'P2' (Garrosh Hellscream)
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) receives The Coin
-15:51:10 DEBUG - 'P1' (Anduin Wrynn) uses hero power Lesser Heal
-15:51:10 DEBUG - Anduin Wrynn is healed for 2, hp now: 28
-15:51:10 DEBUG - 'P1' (Anduin Wrynn) uses hero power Lesser Heal
-15:51:10 DEBUG - Anduin Wrynn is healed for 2, hp now: 30
-15:51:10 DEBUG - Setting player hp to 30 for 'P1' (Gul'dan)
-15:51:10 DEBUG - 'P1' (Gul'dan) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Gul'dan) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Gul'dan) draws a card: Chillwind Yeti
-15:51:10 DEBUG - Setting player hp to 30 for 'P2' (Garrosh Hellscream)
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) receives The Coin
-15:51:10 DEBUG - 'P1' (Gul'dan) uses hero power Life Tap
-15:51:10 DEBUG - Gul'dan receives 2 damage, hp now: 28(0)
-15:51:10 DEBUG - 'P1' (Gul'dan) draws a card: Chillwind Yeti
-15:51:10 DEBUG - Setting player hp to 30 for 'P1' (Jaina Proudmoore)
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - Setting player hp to 30 for 'P2' (Garrosh Hellscream)
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) receives The Coin
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) plays Dev monster
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) summons Dev monster
-15:51:10 DEBUG - Garrosh Hellscream receives 3 damage, hp now: 27(0)
-15:51:10 DEBUG - Setting player hp to 30 for 'P1' (Jaina Proudmoore)
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - Setting player hp to 30 for 'P2' (Garrosh Hellscream)
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) receives The Coin
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) plays Dev monster
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) summons Dev monster
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) plays Dev monster
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) summons Dev monster
-15:51:10 DEBUG - Minion Dev monster is damaged for 5
-15:51:10 DEBUG - Minion Dev monster is damaged for 1
-15:51:10 DEBUG - Setting player hp to 30 for 'P1' (Jaina Proudmoore)
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - Setting player hp to 30 for 'P2' (Garrosh Hellscream)
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) receives The Coin
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) plays Dev monster
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) summons Dev monster
-15:51:10 DEBUG - Setting player hp to 30 for 'P1' (Jaina Proudmoore)
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - Setting player hp to 30 for 'P2' (Garrosh Hellscream)
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) receives The Coin
-15:51:10 DEBUG - Setting player hp to 30 for 'P1' (Jaina Proudmoore)
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - Setting player hp to 30 for 'P2' (Garrosh Hellscream)
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) receives The Coin
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) plays Shieldbearer
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) summons Shieldbearer
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) plays Wisp
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) summons Wisp
-15:51:10 DEBUG - Setting player hp to 30 for 'P1' (Jaina Proudmoore)
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - Setting player hp to 30 for 'P2' (Anduin Wrynn)
-15:51:10 DEBUG - 'P2' (Anduin Wrynn) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Anduin Wrynn) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Anduin Wrynn) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Anduin Wrynn) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Anduin Wrynn) receives The Coin
-15:51:10 DEBUG - 'P2' (Anduin Wrynn) plays Amani Berserker
-15:51:10 DEBUG - 'P2' (Anduin Wrynn) summons Amani Berserker
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) plays Stonetusk Boar
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) summons Stonetusk Boar
-15:51:10 DEBUG - Minion Amani Berserker is damaged for 1
-15:51:10 DEBUG - Minion Stonetusk Boar is damaged for 2
-15:51:10 DEBUG - Minion Amani Berserker is damaged for 1
-15:51:10 DEBUG - Minion Stonetusk Boar is damaged for 5
-15:51:10 DEBUG - 'P2' (Anduin Wrynn) uses hero power Lesser Heal
-15:51:10 DEBUG - Amani Berserker is healed for 2, hp now: 1/3
-15:51:10 DEBUG - Setting player hp to 30 for 'P1' (Jaina Proudmoore)
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - Setting player hp to 30 for 'P2' (Garrosh Hellscream)
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) receives The Coin
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) plays Dev monster
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) summons Dev monster
-15:51:10 DEBUG - Setting player hp to 30 for 'P1' (Jaina Proudmoore)
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - Setting player hp to 30 for 'P2' (Garrosh Hellscream)
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) receives The Coin
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) plays Dev monster
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) summons Dev monster
-15:51:10 DEBUG - Garrosh Hellscream receives 3 damage, hp now: 27(0)
-15:51:10 DEBUG - Setting player hp to 30 for 'P1' (Jaina Proudmoore)
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - Setting player hp to 30 for 'P2' (Garrosh Hellscream)
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) receives The Coin
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) plays Dev monster
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) summons Dev monster
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) plays Dev monster
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) summons Dev monster
-15:51:10 DEBUG - Minion Dev monster is damaged for 5
-15:51:10 DEBUG - Minion Dev monster is damaged for 1
-15:51:10 DEBUG - Setting player hp to 30 for 'P1' (Jaina Proudmoore)
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - Setting player hp to 30 for 'P2' (Garrosh Hellscream)
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) receives The Coin
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) plays Dev monster
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) summons Dev monster
-15:51:10 DEBUG - Setting player hp to 30 for 'P1' (Jaina Proudmoore)
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - Setting player hp to 30 for 'P2' (Garrosh Hellscream)
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) receives The Coin
-15:51:10 DEBUG - Setting player hp to 30 for 'P1' (Jaina Proudmoore)
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) draws a card: Chillwind Yeti
-15:51:10 DEBUG - Setting player hp to 30 for 'P2' (Garrosh Hellscream)
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) draws a card: Chillwind Yeti
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) receives The Coin
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) plays Gurubashi Berserker
-15:51:10 DEBUG - 'P2' (Garrosh Hellscream) summons Gurubashi Berserker
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) plays Oasis Snapjaw
-15:51:10 DEBUG - 'P1' (Jaina Proudmoore) summons Oasis Snapjaw
-15:51:10 DEBUG - Minion Gurubashi Berserker is damaged for 2
-15:51:10 DEBUG - Minion Oasis Snapjaw is damaged for 2
-15:51:10 DEBUG - Minion Gurubashi Berserker is damaged for 2
-15:51:10 DEBUG - Minion Oasis Snapjaw is damaged for 5
+19:08:04 DEBUG - Setting player hp to 30 for 'P1' (Garrosh Hellscream)
+19:08:04 DEBUG - 'P1' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - Setting player hp to 30 for 'P2' (Jaina Proudmoore)
+19:08:04 DEBUG - 'P2' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Jaina Proudmoore) receives The Coin
+19:08:04 DEBUG - 'P1' (Garrosh Hellscream) uses hero power Armor Up!
+19:08:04 DEBUG - Garrosh Hellscream receives 4 damage, hp now: 28(0)
+19:08:04 DEBUG - Setting player hp to 30 for 'P1' (Jaina Proudmoore)
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - Setting player hp to 30 for 'P2' (Garrosh Hellscream)
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives The Coin
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) uses hero power Fireblast
+19:08:04 DEBUG - Garrosh Hellscream receives 1 damage, hp now: 29(0)
+19:08:04 DEBUG - Setting player hp to 30 for 'P1' (Anduin Wrynn)
+19:08:04 DEBUG - 'P1' (Anduin Wrynn) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Anduin Wrynn) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Anduin Wrynn) receives card: Chillwind Yeti
+19:08:04 DEBUG - Setting player hp to 30 for 'P2' (Garrosh Hellscream)
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives The Coin
+19:08:04 DEBUG - 'P1' (Anduin Wrynn) uses hero power Lesser Heal
+19:08:04 DEBUG - Anduin Wrynn is healed for 2, hp now: 28
+19:08:04 DEBUG - 'P1' (Anduin Wrynn) uses hero power Lesser Heal
+19:08:04 DEBUG - Anduin Wrynn is healed for 2, hp now: 30
+19:08:04 DEBUG - Setting player hp to 30 for 'P1' (Gul'dan)
+19:08:04 DEBUG - 'P1' (Gul'dan) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Gul'dan) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Gul'dan) receives card: Chillwind Yeti
+19:08:04 DEBUG - Setting player hp to 30 for 'P2' (Garrosh Hellscream)
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives The Coin
+19:08:04 DEBUG - 'P1' (Gul'dan) uses hero power Life Tap
+19:08:04 DEBUG - Gul'dan receives 2 damage, hp now: 28(0)
+19:08:04 DEBUG - 'P1' (Gul'dan) receives card: Chillwind Yeti
+19:08:04 DEBUG - Setting player hp to 30 for 'P1' (Jaina Proudmoore)
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - Setting player hp to 30 for 'P2' (Garrosh Hellscream)
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives The Coin
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) plays Shieldbearer
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) summons Shieldbearer
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) plays Wisp
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) summons Wisp
+19:08:04 DEBUG - Setting player hp to 30 for 'P1' (Jaina Proudmoore)
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - Setting player hp to 30 for 'P2' (Garrosh Hellscream)
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives The Coin
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) plays Gurubashi Berserker
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) summons Gurubashi Berserker
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) plays Oasis Snapjaw
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) summons Oasis Snapjaw
+19:08:04 DEBUG - Minion Gurubashi Berserker is damaged for 2
+19:08:04 DEBUG - Minion Oasis Snapjaw is damaged for 2
+19:08:04 DEBUG - Minion Gurubashi Berserker is damaged for 2
+19:08:04 DEBUG - Minion Oasis Snapjaw is damaged for 5
+19:08:04 DEBUG - Setting player hp to 30 for 'P1' (Jaina Proudmoore)
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - Setting player hp to 30 for 'P2' (Anduin Wrynn)
+19:08:04 DEBUG - 'P2' (Anduin Wrynn) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Anduin Wrynn) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Anduin Wrynn) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Anduin Wrynn) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Anduin Wrynn) receives The Coin
+19:08:04 DEBUG - 'P2' (Anduin Wrynn) plays Amani Berserker
+19:08:04 DEBUG - 'P2' (Anduin Wrynn) summons Amani Berserker
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) plays Stonetusk Boar
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) summons Stonetusk Boar
+19:08:04 DEBUG - Minion Amani Berserker is damaged for 1
+19:08:04 DEBUG - Minion Stonetusk Boar is damaged for 2
+19:08:04 DEBUG - Minion Amani Berserker is damaged for 1
+19:08:04 DEBUG - Minion Stonetusk Boar is damaged for 5
+19:08:04 DEBUG - 'P2' (Anduin Wrynn) uses hero power Lesser Heal
+19:08:04 DEBUG - Amani Berserker is healed for 2, hp now: 1/3
+19:08:04 DEBUG - Setting player hp to 30 for 'P1' (Jaina Proudmoore)
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - Setting player hp to 30 for 'P2' (Garrosh Hellscream)
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives The Coin
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) plays Dev monster
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) summons Dev monster
+19:08:04 DEBUG - Setting player hp to 30 for 'P1' (Jaina Proudmoore)
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - Setting player hp to 30 for 'P2' (Garrosh Hellscream)
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives The Coin
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) plays Dev monster
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) summons Dev monster
+19:08:04 DEBUG - Garrosh Hellscream receives 3 damage, hp now: 27(0)
+19:08:04 DEBUG - Setting player hp to 30 for 'P1' (Jaina Proudmoore)
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - Setting player hp to 30 for 'P2' (Garrosh Hellscream)
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives The Coin
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) plays Dev monster
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) summons Dev monster
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) plays Dev monster
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) summons Dev monster
+19:08:04 DEBUG - Minion Dev monster is damaged for 5
+19:08:04 DEBUG - Minion Dev monster is damaged for 1
+19:08:04 DEBUG - Setting player hp to 30 for 'P1' (Jaina Proudmoore)
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - Setting player hp to 30 for 'P2' (Garrosh Hellscream)
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives The Coin
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) plays Dev monster
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) summons Dev monster
+19:08:04 DEBUG - Setting player hp to 30 for 'P1' (Jaina Proudmoore)
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - Setting player hp to 30 for 'P2' (Garrosh Hellscream)
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives The Coin
+19:08:04 DEBUG - Setting player hp to 30 for 'P1' (Jaina Proudmoore)
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - Setting player hp to 30 for 'P2' (Garrosh Hellscream)
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives The Coin
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) plays Dev monster
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) summons Dev monster
+19:08:04 DEBUG - Garrosh Hellscream receives 3 damage, hp now: 27(0)
+19:08:04 DEBUG - Setting player hp to 30 for 'P1' (Jaina Proudmoore)
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - Setting player hp to 30 for 'P2' (Garrosh Hellscream)
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives The Coin
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) plays Dev monster
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) summons Dev monster
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) plays Dev monster
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) summons Dev monster
+19:08:04 DEBUG - Minion Dev monster is damaged for 5
+19:08:04 DEBUG - Minion Dev monster is damaged for 1
+19:08:04 DEBUG - Setting player hp to 30 for 'P1' (Jaina Proudmoore)
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - Setting player hp to 30 for 'P2' (Garrosh Hellscream)
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives The Coin
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) plays Dev monster
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) summons Dev monster
+19:08:04 DEBUG - Setting player hp to 30 for 'P1' (Jaina Proudmoore)
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P1' (Jaina Proudmoore) receives card: Chillwind Yeti
+19:08:04 DEBUG - Setting player hp to 30 for 'P2' (Garrosh Hellscream)
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives card: Chillwind Yeti
+19:08:04 DEBUG - 'P2' (Garrosh Hellscream) receives The Coin

@@ -1,7 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer;
 
-import java.io.IOException;
-
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.PlayRandomBehaviour;
@@ -22,13 +20,14 @@ public class HearthstoneAnalyzer {
 		//facade.startUp(instance);
 		//instance.launchDebugGame();
 		
-		
+		/*
 		 try {
-			//DevCheckCardCompleteness.cardListFromImages("D:\\projects\\images\\hearthstone\\cards\\");
-			 DevCheckCardCompleteness.compareClassesWithCardList("D:\\projects\\java\\HearthstoneAnalyzer\\src\\net\\pferdimanzug\\hearthstone\\analyzer\\game\\cards\\concrete");
+			DevCheckCardCompleteness.cardListFromImages("D:\\projects\\images\\hearthstone\\cards\\");
+			 //DevCheckCardCompleteness.compareClassesWithCardList("D:\\projects\\java\\HearthstoneAnalyzer\\src\\net\\pferdimanzug\\hearthstone\\analyzer\\game\\cards\\concrete");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		*/
 		
 	}
 

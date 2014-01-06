@@ -7,7 +7,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DrawCardSpell;
 
 public class BattleRage extends SpellCard {
@@ -27,7 +26,7 @@ public class BattleRage extends SpellCard {
 		@Override
 		public void cast(GameContext context, Player player, Entity target) {
 			int woundedCharacters = player.getHero().isWounded() ? 1 : 0;
-			for (Minion minion : player.getMinions()) {
+			for (Entity minion : player.getMinions()) {
 				if (minion.isWounded()) {
 					woundedCharacters++;
 				}

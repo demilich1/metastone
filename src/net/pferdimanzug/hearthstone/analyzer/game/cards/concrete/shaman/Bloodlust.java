@@ -8,7 +8,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.events.TurnEndEventlistener;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
 
@@ -26,7 +25,7 @@ public class Bloodlust extends SpellCard {
 
 		@Override
 		public void cast(GameContext context, Player player, Entity target) {
-			for (Minion minion : player.getMinions()) {
+			for (Entity minion : player.getMinions()) {
 				minion.modifyTag(GameTag.ATTACK_BONUS, +ATTACK_BONUS);
 				context.getEventManager().registerGameEventListener(new TurnEndEventlistener(new EndBloodlustSpell(), minion));
 			}

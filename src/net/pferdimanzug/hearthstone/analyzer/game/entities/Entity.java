@@ -8,6 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 
@@ -18,6 +19,7 @@ public abstract class Entity {
 	private Player owner;
 	private final Card sourceCard;
 	private final List<SpellTrigger> spellTriggers = new ArrayList<>();
+	private Race race = Race.NONE;
 
 	public Entity(Card sourceCard) {
 		this.setName(sourceCard != null ? sourceCard.getName() : null); 
@@ -145,5 +147,13 @@ public abstract class Entity {
 
 	public List<SpellTrigger> getSpellTriggers() {
 		return spellTriggers;
+	}
+
+	public Race getRace() {
+		return race;
+	}
+
+	public void setRace(Race race) {
+		this.race = race;
 	}
 }

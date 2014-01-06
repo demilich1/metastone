@@ -23,7 +23,7 @@ public class MultiTargetDamageSpell extends DamageSpell {
 		List<Minion> validTargets = new ArrayList<>(context.getOpponent(player).getMinions());
 		for (int i = 0; i < targets; i++) {
 			int randomIndex = ThreadLocalRandom.current().nextInt(validTargets.size());
-			Minion randomTarget = validTargets.remove(randomIndex);
+			Entity randomTarget = validTargets.remove(randomIndex);
 			context.getLogic().damage(randomTarget, getDamage());
 		}
 	}

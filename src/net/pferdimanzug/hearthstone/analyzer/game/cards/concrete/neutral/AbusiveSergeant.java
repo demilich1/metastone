@@ -26,7 +26,7 @@ public class AbusiveSergeant extends MinionCard {
 		Minion abusiveSergeant = createMinion(2, 1);
 		Battlecry battlecryAbusive = Battlecry.createBattlecry(new AbusiveSergeantSpell(), TargetSelection.FRIENDLY_MINIONS);
 		abusiveSergeant.setTag(GameTag.BATTLECRY, battlecryAbusive);
-		return null;
+		return abusiveSergeant;
 	}
 	
 	private class AbusiveSergeantSpell extends BuffSpell {

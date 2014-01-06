@@ -7,7 +7,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
 
 public class Swipe extends SpellCard {
@@ -30,7 +29,7 @@ public class Swipe extends SpellCard {
 
 		public void cast(GameContext context, Player player, Entity target) {
 			damage(context, target, context.getOpponent(player).getHero());
-			for (Minion minion : target.getOwner().getMinions()) {
+			for (Entity minion : target.getOwner().getMinions()) {
 				damage(context, target, minion);
 			}
 		}

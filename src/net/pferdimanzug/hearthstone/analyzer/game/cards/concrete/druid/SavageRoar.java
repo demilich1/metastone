@@ -8,7 +8,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.events.TurnEndEventlistener;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
 
@@ -16,7 +15,7 @@ public class SavageRoar extends SpellCard {
 
 	public SavageRoar() {
 		super("Savage Roar", Rarity.FREE, HeroClass.DRUID, 3);
-		
+		setSpell(new SavageRoarSpell());
 		setTargetRequirement(TargetSelection.NONE);
 	}
 	
@@ -27,7 +26,7 @@ public class SavageRoar extends SpellCard {
 		public void cast(GameContext context, Player player, Entity target) {
 			player.getHero().modifyTag(GameTag.ATTACK_BONUS, +ATTACK_BONUS);
 			context.getEventManager().registerGameEventListener(new TurnEndEventlistener(new EndSavageRoarSpell(), player.getHero()));
-			for (Minion minion : player.getMinions()) {
+			for (Entity minion : player.getMinions()) {
 				minion.modifyTag(GameTag.ATTACK_BONUS, +ATTACK_BONUS);
 				context.getEventManager().registerGameEventListener(new TurnEndEventlistener(new EndSavageRoarSpell(), minion));
 			}

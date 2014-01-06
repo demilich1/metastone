@@ -1,13 +1,13 @@
 package net.pferdimanzug.hearthstone.analyzer.game.events;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public class SummonEvent extends GameEvent {
 	
-	private final Minion minion;
+	private final Entity minion;
 
-	public SummonEvent(GameContext context, Minion minion) {
+	public SummonEvent(GameContext context, Entity minion) {
 		super(context);
 		this.minion = minion;
 	}
@@ -17,7 +17,7 @@ public class SummonEvent extends GameEvent {
 		return GameEventType.SUMMON;
 	}
 
-	public Minion getMinion() {
+	public Entity getMinion() {
 		return minion;
 	}
 

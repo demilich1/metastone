@@ -1,6 +1,7 @@
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
@@ -31,7 +32,7 @@ public class DevMonster extends MinionCard {
 		return baseHp;
 	}
 	
-	public Minion getMinion() {
+	public Entity getMinion() {
 		return minion;
 	}
 

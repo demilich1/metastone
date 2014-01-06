@@ -3,7 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 
-public abstract class Card {
+public abstract class Card implements Cloneable {
 
 	private final String name;
 	private final CardType cardType;
@@ -48,6 +48,17 @@ public abstract class Card {
 
 	public void setCollectible(boolean collectible) {
 		this.collectible = collectible;
+	}
+	
+	@Override
+	public Card clone() {
+		try {
+			return (Card) super.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

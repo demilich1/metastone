@@ -7,7 +7,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 
 public class Minion extends Entity {
 	
-	private Race race = Race.NONE;
 	private Aura aura;
 
 	public Minion(MinionCard sourceCard) {
@@ -17,14 +16,6 @@ public class Minion extends Entity {
 	@Override
 	public EntityType getEntityType() {
 		return EntityType.MINION;
-	}
-
-	public Race getRace() {
-		return race;
-	}
-
-	public void setRace(Race race) {
-		this.race = race;
 	}
 
 	public Aura getAura() {

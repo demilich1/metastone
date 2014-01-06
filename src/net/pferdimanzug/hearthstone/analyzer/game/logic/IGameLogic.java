@@ -15,6 +15,7 @@ public interface IGameLogic {
 	public Player determineBeginner(Player... players);
 	public void init(Player player, boolean begins);
 	public void drawCard(Player player);
+	public void receiveCard(Player player, Card card);
 	public void performGameAction(Player player, GameAction action);
 	
 	public boolean canPlayCard(Player player, Card card);

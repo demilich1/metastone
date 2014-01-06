@@ -39,8 +39,7 @@ public class TimberWolf extends MinionCard {
 			if (entity.getEntityType() != EntityType.MINION) {
 				return false;
 			}
-			Minion minion = (Minion) entity;
-			return minion.getRace() == Race.BEAST;
+			return entity.getRace() == Race.BEAST;
 		}
 
 		@Override
