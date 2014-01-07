@@ -15,10 +15,10 @@ public abstract class PlayCardAction extends GameAction {
 	@Override
 	public void execute(GameContext context, Player player) {
 		context.getLogic().playCard(player, getCard());
-		cast(context, player);
+		play(context, player);
 	}
 	
-	protected abstract void cast(GameContext context, Player player);
+	protected abstract void play(GameContext context, Player player);
 
 	public Card getCard() {
 		return card;

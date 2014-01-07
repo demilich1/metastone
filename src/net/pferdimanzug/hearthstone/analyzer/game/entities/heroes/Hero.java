@@ -32,6 +32,15 @@ public abstract class Hero extends Entity {
 		return EntityType.HERO;
 	}
 	
+	@Override
+	public int getAttack() {
+		int attack = super.getAttack();
+		if (getWeapon() != null) {
+			attack += weapon.getAttack();
+		}
+		return attack;
+	}
+	
 	public int getArmor() {
 		return hasTag(GameTag.ARMOR) ? getTagValue(GameTag.ARMOR) : 0;
 	}
@@ -48,6 +57,9 @@ public abstract class Hero extends Entity {
 
 	public void setWeapon(Weapon weapon) {
 		this.weapon = weapon;
+		if (weapon != null) {
+			weapon.setOwner(getOwner());
+		}
 	}
 	
 }

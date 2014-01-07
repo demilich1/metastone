@@ -4,7 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.MinionAttackAction;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.PhysicalAttackAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.Shieldbearer;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.Wisp;
@@ -39,7 +39,7 @@ public class TargetingTests extends TestBase {
 		
 		List<Entity> validTargets;
 		
-		GameAction attackAction = new MinionAttackAction(attacker);
+		GameAction attackAction = new PhysicalAttackAction(attacker);
 		validTargets = context.getLogic().getValidTargets(mage, attackAction);
 		Assert.assertEquals(validTargets.size(), 1);
 		

@@ -1,7 +1,7 @@
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.MinionAttackAction;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.PhysicalAttackAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.GurubashiBerserker;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.OasisSnapjaw;
@@ -38,7 +38,7 @@ public class SpecialCardTests extends TestBase {
 		Assert.assertEquals(defender.getAttack(), GurubashiBerserker.BASE_ATTACK);
 		
 		// first attack, Gurubashi Berserker should have increased attack
-		GameAction attackAction = new MinionAttackAction(attacker);
+		GameAction attackAction = new PhysicalAttackAction(attacker);
 		attackAction.setTarget(defender);
 		context.getLogic().performGameAction(mage, attackAction);
 		

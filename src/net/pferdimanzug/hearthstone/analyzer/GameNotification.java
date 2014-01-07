@@ -5,4 +5,6 @@ public enum GameNotification {
 	START_GAME,
 	GAME_STATE_UPDATE,
 	GAME_OVER,
+	BATCH_START,
+	BATCH_STOP
 }

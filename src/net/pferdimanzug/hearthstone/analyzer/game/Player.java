@@ -32,6 +32,7 @@ public class Player {
 		this.minions = new ArrayList<>();
 		this.hand = new CardCollection<>();
 		this.graveyard = new CardCollection<>();
+		hero.setOwner(this);
 	}
 	
 	public Hero getHero() {

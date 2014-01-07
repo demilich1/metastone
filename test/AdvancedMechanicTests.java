@@ -4,7 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.MinionAttackAction;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.PhysicalAttackAction;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.AbusiveSergeant;
@@ -44,7 +44,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		Assert.assertEquals(defender.hasTag(GameTag.ENRAGED), false);
 		
 		// attack once, should apply the enrage attack bonus
-		GameAction attackAction = new MinionAttackAction(attacker);
+		GameAction attackAction = new PhysicalAttackAction(attacker);
 		attackAction.setTarget(defender);
 		context.getLogic().performGameAction(mage, attackAction);
 		Assert.assertEquals(defender.getAttack(), AmaniBerserker.BASE_ATTACK + AmaniBerserker.ENRAGE_ATTACK_BONUS);
@@ -79,13 +79,13 @@ public class AdvancedMechanicTests extends BasicTests {
 		mage.setBehaviour(new IBehaviour() {
 			
 			@Override
-			public GameAction requestAction(GameContext context) {
-				return null;
-			}
-			
-			@Override
 			public Entity provideTargetFor(GameAction action, List<Entity> validTargets) {
 				return validTargets.get(0);
+			}
+
+			@Override
+			public GameAction requestAction(GameContext context, List<GameAction> validActions) {
+				return null;
 			}
 		});
 		

@@ -1,7 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game;
 
-import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
-import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventManager;
 import net.pferdimanzug.hearthstone.analyzer.game.events.IGameEventManager;
@@ -21,6 +19,11 @@ public class GameContext {
 	private final IGameEventManager eventManager = new GameEventManager();
 
 	private Player activePlayer;
+	private Player winner;
+	public Player getWinner() {
+		return winner;
+	}
+
 	private GameResult result;
 	private int turn;
 
@@ -55,23 +58,23 @@ public class GameContext {
 		while (!gameDecided()) {
 			playTurn(activePlayer);
 		}
-		Player winner = result == GameResult.WIN ? activePlayer : getOpponent(activePlayer);
-		logger.info("Game finished after " + turn + " turns, the winner is: " + winner.getName());
+		winner = result == GameResult.WIN ? activePlayer : getOpponent(activePlayer);
+		logger.debug("Game finished after " + turn + " turns, the winner is: " + winner.getName());
 	}
 
 	private void playTurn(Player player) {
 		turn++;
 		logic.startTurn(player);
 		GameAction nextAction = null;
-		while ((nextAction = player.getBehaviour().requestAction(this)) != null) {
+		while ((nextAction = player.getBehaviour().requestAction(this, logic.getValidActions(player))) != null) {
 			logic.performGameAction(player, nextAction);
-			ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_STATE_UPDATE, this);
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
+//			ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_STATE_UPDATE, this);
+//			try {
+//				Thread.sleep(1000);
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
 			if (gameDecided()) {
 				return;
 			}
@@ -89,5 +92,8 @@ public class GameContext {
 		return eventManager;
 	}
 
+	public GameResult getResult() {
+		return result;
+	}
 
 }

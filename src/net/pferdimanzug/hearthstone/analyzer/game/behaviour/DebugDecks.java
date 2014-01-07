@@ -22,10 +22,7 @@ public class DebugDecks {
 			deck.add(randomCard.clone());
 			deck.add(randomCard.clone());
 		}
-		int i = 0;
-		for (Card card : deck) {
-			System.out.println(++i + ": " + card.getName());
-		}
+		
 		return deck;
 	}
 	

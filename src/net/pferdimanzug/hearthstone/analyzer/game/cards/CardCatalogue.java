@@ -158,7 +158,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.Whirlwi
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 
 public class CardCatalogue {
-
+	
 	private final static CardCollection<Card> cards = new CardCollection<Card>();
 
 	static {
@@ -342,22 +342,17 @@ public class CardCatalogue {
 
 	public static CardCollection<Card> query(CardType cardType, Rarity rarity, HeroClass heroClass) {
 		CardCollection<Card> result = new CardCollection<Card>();
-		//System.out.println("Searching " + cards.getCount() + " cards...");
 		for (Card card : cards) {
 			if (!card.isCollectible()) {
-				//System.out.println("Card " + card.getName() + " skipped; not collectible");
 				continue;
 			}
 			if (cardType != null && card.getCardType() != cardType) {
-				//System.out.println("Card " + card.getName() + " skipped; QueryCardType: " + cardType + " CardCardType: " + card.getCardType());
 				continue;
 			}
 			if (rarity != null && card.getRarity() != rarity) {
-				//System.out.println("Card " + card.getName() + " skipped; QueryRarity: " + rarity + " CardHeroClass: " + card.getRarity());
 				continue;
 			}
 			if (heroClass != null && card.getClassRestriction() != heroClass) {
-				//System.out.println("Card " + card.getName() + " skipped; QueryHeroClass: " + heroClass + " CardHeroClass: " + card.getClassRestriction());
 				continue;
 			}
 			result.add(card.clone());

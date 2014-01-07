@@ -1,33 +1,4 @@
-11:20:38 DEBUG - Game starts: 'Human' (Anduin Wrynn) VS. 'Bot' (Jaina Proudmoore)
-11:20:38 DEBUG - 'Bot' (Jaina Proudmoore) begins
-11:20:38 DEBUG - Setting player hp to 30 for 'Bot' (Jaina Proudmoore)
-11:20:38 DEBUG - 'Bot' (Jaina Proudmoore) receives card: Raid Leader
-11:20:38 DEBUG - 'Bot' (Jaina Proudmoore) receives card: Shattered Sun Cleric
-11:20:38 DEBUG - 'Bot' (Jaina Proudmoore) receives card: Arcane Intellect
-11:20:38 DEBUG - Setting player hp to 30 for 'Human' (Anduin Wrynn)
-11:20:38 DEBUG - 'Human' (Anduin Wrynn) receives card: Mind Control
-11:20:38 DEBUG - 'Human' (Anduin Wrynn) receives card: Holy Nova
-11:20:38 DEBUG - 'Human' (Anduin Wrynn) receives card: Novice Engineer
-11:20:38 DEBUG - 'Human' (Anduin Wrynn) receives card: Shadow Word: Death
-11:20:38 DEBUG - 'Human' (Anduin Wrynn) receives The Coin
-11:20:38 DEBUG - 'Bot' (Jaina Proudmoore) is at 1/1 mana
-11:20:38 DEBUG - 'Bot' (Jaina Proudmoore) receives card: Chillwind Yeti
-11:20:38 DEBUG - 'Bot' (Jaina Proudmoore) ends his turn.
-11:20:38 DEBUG - 'Human' (Anduin Wrynn) is at 1/1 mana
-11:20:38 DEBUG - 'Human' (Anduin Wrynn) receives card: Murloc Raider
-11:20:38 DEBUG - 'Human' (Anduin Wrynn) plays The Coin
-11:20:39 DEBUG - 'Human' (Anduin Wrynn) plays Novice Engineer
-11:20:39 DEBUG - 'Human' (Anduin Wrynn) summons Novice Engineer
-11:20:39 DEBUG - 'Human' (Anduin Wrynn) receives card: Power Word: Shield
-11:20:40 DEBUG - 'Human' (Anduin Wrynn) ends his turn.
-11:20:40 DEBUG - 'Bot' (Jaina Proudmoore) is at 2/2 mana
-11:20:40 DEBUG - 'Bot' (Jaina Proudmoore) receives card: Chillwind Yeti
-11:20:40 DEBUG - 'Bot' (Jaina Proudmoore) picks random target: Anduin Wrynn
-11:20:40 DEBUG - 'Bot' (Jaina Proudmoore) uses hero power Fireblast
-11:20:40 DEBUG - Anduin Wrynn receives 1 damage, hp now: 29(0)
-11:20:41 DEBUG - 'Bot' (Jaina Proudmoore) ends his turn.
-11:20:41 DEBUG - 'Human' (Anduin Wrynn) is at 2/2 mana
-11:20:41 DEBUG - 'Human' (Anduin Wrynn) receives card: Dalaran Mage
-11:20:41 DEBUG - 'Human' (Anduin Wrynn) plays Murloc Raider
-11:20:41 DEBUG - 'Human' (Anduin Wrynn) summons Murloc Raider
-11:20:42 DEBUG - 'Human' (Anduin Wrynn) plays Power Word: Shield
+18:20:18 INFO  - Games played: 10000
+18:20:18 INFO  - Duration: 2107ms
+18:20:18 INFO  - Player 'Human' (Garrosh Hellscream) won 5607 games
+18:20:18 INFO  - Player 'Bot' (Thrall) won 4393 games

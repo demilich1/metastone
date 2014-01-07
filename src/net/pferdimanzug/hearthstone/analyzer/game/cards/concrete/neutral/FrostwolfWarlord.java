@@ -4,6 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
@@ -20,13 +21,13 @@ public class FrostwolfWarlord extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion frostwolfWarlord = createMinion(4, 4);
-		Battlecry battlecry = Battlecry.createBattlecry(new BuffLeadership());
+		Battlecry battlecry = Battlecry.createBattlecry(new BuffLeadership(), TargetSelection.SELF);
 		frostwolfWarlord.setTag(GameTag.BATTLECRY, battlecry);
 		return frostwolfWarlord;
 	}
 
 	private class BuffLeadership extends BuffSpell {
-
+		
 		@Override
 		public void cast(GameContext context, Player player, Entity target) {
 			int minionCount = player.getMinions().size();

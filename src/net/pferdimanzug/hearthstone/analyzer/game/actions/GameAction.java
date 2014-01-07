@@ -1,16 +1,17 @@
 package net.pferdimanzug.hearthstone.analyzer.game.actions;
 
+import java.util.List;
+
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.EffectHint;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public abstract class GameAction {
 	
 	private TargetSelection targetRequirement = TargetSelection.NONE;
 	private ActionType actionType = ActionType.UNDEFINED;
-	private EffectHint effectHint = EffectHint.UNKNOWN;
-	
+	private List<Entity> validTargets;
+	private Entity source;
 	private Entity target;
 	
 	public abstract void execute(GameContext context, Player player);
@@ -19,10 +20,6 @@ public abstract class GameAction {
 		return targetRequirement;
 	}
 	
-	public EffectHint getEffectHint() {
-		return effectHint;
-	}
-
 	public Entity getTarget() {
 		return target;
 	}
@@ -43,11 +40,23 @@ public abstract class GameAction {
 		this.actionType = actionType;
 	}
 
-	protected void setEffectHint(EffectHint effectHint) {
-		this.effectHint = effectHint;
-	}
-
 	public boolean canBeExecutedOn(Entity entity) {
 		return true;
+	}
+
+	public List<Entity> getValidTargets() {
+		return validTargets;
+	}
+
+	public void setValidTargets(List<Entity> validTargets) {
+		this.validTargets = validTargets;
+	}
+
+	public Entity getSource() {
+		return source;
+	}
+
+	public void setSource(Entity source) {
+		this.source = source;
 	}
 }

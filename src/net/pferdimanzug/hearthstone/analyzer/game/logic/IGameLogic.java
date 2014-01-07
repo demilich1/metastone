@@ -20,6 +20,7 @@ public interface IGameLogic {
 	
 	public boolean canPlayCard(Player player, Card card);
 	
+	public List<GameAction> getValidActions(Player player);
 	public List<Entity> getValidTargets(Player player, GameAction action);
 	
 	public void useHeroPower(Player player, HeroPower power);

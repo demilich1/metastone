@@ -18,6 +18,10 @@ public abstract class SpellCard extends Card {
 	public SpellCard(String name, Rarity rarity, HeroClass classRestriction, int manaCost) {
 		super(name, CardType.SPELL, rarity, classRestriction, manaCost);
 	}
+	
+	protected SpellCard(String name, CardType cardType, Rarity rarity, HeroClass classRestriction, int manaCost) {
+		super(name, cardType, rarity, classRestriction, manaCost);
+	}
 
 	public ISpell getSpell() {
 		return spell;
@@ -31,13 +35,13 @@ public abstract class SpellCard extends Card {
 	public PlayCardAction play() {
 		return new PlayCardAction(this) {
 			{
-				setTargetRequirement(getTargetRequirement());
+				setTargetRequirement(targetRequirement);
 				setEffectHint(getEffectHint());
 				setActionType(ActionType.SPELL);
 			}
 
 			@Override
-			protected void cast(GameContext context, Player player) {
+			protected void play(GameContext context, Player player) {
 				context.getLogic().castSpell(player, spell, getTarget());
 			}
 		};

@@ -3,7 +3,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.MinionAttackAction;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.PhysicalAttackAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
@@ -79,7 +79,7 @@ public class BasicTests extends TestBase {
 		Entity attacker = getSingleMinion(mage.getMinions());
 		Entity defender = getSingleMinion(warrior.getMinions());
 		
-		GameAction attackAction = new MinionAttackAction(attacker);
+		GameAction attackAction = new PhysicalAttackAction(attacker);
 		attackAction.setTarget(defender);
 		context.getLogic().performGameAction(mage, attackAction);
 		

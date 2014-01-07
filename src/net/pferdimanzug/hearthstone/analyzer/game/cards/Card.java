@@ -65,5 +65,10 @@ public abstract class Card implements Cloneable {
 	public int getId() {
 		return id;
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("[%s]", name);
+	}
 
 }

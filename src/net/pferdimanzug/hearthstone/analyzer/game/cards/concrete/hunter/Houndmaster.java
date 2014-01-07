@@ -5,7 +5,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.EffectHint;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
@@ -33,7 +32,6 @@ public class Houndmaster extends MinionCard {
 		public BattlecryHoundmaster() {
 			super(new HoundmasterBuff());
 			setTargetRequirement(TargetSelection.FRIENDLY_MINIONS);
-			setEffectHint(EffectHint.POSITIVE);
 		}
 
 		@Override

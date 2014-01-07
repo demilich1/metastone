@@ -17,7 +17,7 @@ public abstract class WeaponCard extends Card {
 		return new PlayCardAction(this) {
 			
 			@Override
-			protected void cast(GameContext context, Player player) {
+			protected void play(GameContext context, Player player) {
 				player.getHero().setWeapon(getWeapon());
 			}
 		};

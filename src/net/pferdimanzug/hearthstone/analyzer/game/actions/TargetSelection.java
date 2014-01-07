@@ -2,6 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.actions;
 
 public enum TargetSelection {
 	NONE,
+	SELF,
 	ENEMY_CHARACTERS,
 	ENEMY_MINIONS,
 	ENEMY_HERO,

@@ -39,11 +39,10 @@ public abstract class MinionCard extends Card {
 			{
 				setTargetRequirement(TargetSelection.NONE);
 				setActionType(ActionType.SUMMON);
-				setEffectHint(EffectHint.POSITIVE);
 			}
 
 			@Override
-			protected void cast(GameContext context, Player player) {
+			protected void play(GameContext context, Player player) {
 				context.getLogic().summon(player, summon(), null);
 
 			}

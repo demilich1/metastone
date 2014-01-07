@@ -17,9 +17,12 @@ public class ChangeDurabilitySpell implements ISpell {
 	@Override
 	public void cast(GameContext context, Player player, Entity target) {
 		Hero hero = (Hero) target;
+		if (hero.getWeapon() == null) {
+			return;
+		}
 		hero.getWeapon().modifyTag(GameTag.DURABILITY, durabilityChange);
 		if (hero.getWeapon().isBroken()) {
-			hero.setWeapon(null);
+			context.getLogic().destroy(hero.getWeapon());
 		}
 	}
 

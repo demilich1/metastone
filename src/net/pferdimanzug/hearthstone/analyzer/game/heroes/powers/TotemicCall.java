@@ -17,6 +17,11 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
 
 public class TotemicCall extends HeroPower {
+	
+	private final static String HEALING_TOTEM_NAME = "Healing Totem";
+	private final static String STONECLAW_TOTEM_NAME = "Stoneclaw Totem";
+	private final static String WRATH_OF_AIR_TOTEM_NAME = "Wrath of Air Totem";
+	private final static String SEARING_TOTEM_NAME = "Searing Totem";
 
 	public TotemicCall() {
 		super("Totemic Call");
@@ -24,13 +29,32 @@ public class TotemicCall extends HeroPower {
 		setSpell(new TotemicCallSpell());
 	}
 	
+	
+	
+	@Override
+	public boolean canBeCast(GameContext context, Player player) {
+		if (player.getMinions().size() < 4) {
+			return true;
+		}
+		List<String> availableTotems = new ArrayList<String>();
+		availableTotems.add(HEALING_TOTEM_NAME);
+		availableTotems.add(SEARING_TOTEM_NAME);
+		availableTotems.add(STONECLAW_TOTEM_NAME);
+		availableTotems.add(WRATH_OF_AIR_TOTEM_NAME);
+		for(Minion minion : player.getMinions()) {
+			availableTotems.remove(minion.getName());
+		}
+		return !availableTotems.isEmpty();
+	}
+
+
 	private class TotemicCallSpell implements ISpell {
 
 		@Override
 		public void cast(GameContext context, Player player, Entity target) {
 			List<Minion> availableTotems = new ArrayList<Minion>();
 			for (Minion totem : getTotems()) {
-				if (!alreadyOnBoard(player.getMinions(), totem.getClass())) {
+				if (!alreadyOnBoard(player.getMinions(), totem.getName())) {
 					availableTotems.add(totem);
 				}
 			}
@@ -49,9 +73,9 @@ public class TotemicCall extends HeroPower {
 			return minions;
 		}
 
-		private boolean alreadyOnBoard(List<Minion> minions, Class<? extends Minion> minionClass) {
+		private boolean alreadyOnBoard(List<Minion> minions, String minionName) {
 			for (Entity minion : minions) {
-				if (minion.getClass() == minionClass) {
+				if (minion.getName().equals(minionName)) {
 					return true;
 				}
 			}
@@ -62,9 +86,8 @@ public class TotemicCall extends HeroPower {
 
 	private class HealingTotem extends MinionCard {
 
-
 		public HealingTotem() {
-			super("Healing Totem", Rarity.FREE, HeroClass.SHAMAN, 1);
+			super(HEALING_TOTEM_NAME, Rarity.FREE, HeroClass.SHAMAN, 1);
 			setCollectible(false);
 		}
 
@@ -80,7 +103,7 @@ public class TotemicCall extends HeroPower {
 	private class StoneclawTotem extends MinionCard {
 
 		public StoneclawTotem() {
-			super("Stoneclaw Totem", Rarity.FREE, HeroClass.SHAMAN, 1);
+			super(STONECLAW_TOTEM_NAME, Rarity.FREE, HeroClass.SHAMAN, 1);
 			setCollectible(false);
 		}
 
@@ -95,7 +118,7 @@ public class TotemicCall extends HeroPower {
 	private class SearingTotem extends MinionCard {
 
 		public SearingTotem() {
-			super("Searing Totem", Rarity.FREE, HeroClass.SHAMAN, 1);
+			super(SEARING_TOTEM_NAME, Rarity.FREE, HeroClass.SHAMAN, 1);
 			setCollectible(false);
 		}
 
@@ -110,7 +133,7 @@ public class TotemicCall extends HeroPower {
 	private class WrathOfAirTotem extends MinionCard {
 
 		public WrathOfAirTotem() {
-			super("Wrath of Air Totem", Rarity.FREE, HeroClass.SHAMAN, 1);
+			super(WRATH_OF_AIR_TOTEM_NAME, Rarity.FREE, HeroClass.SHAMAN, 1);
 			setCollectible(false);
 		}
 
