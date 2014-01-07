@@ -1,3 +1,4 @@
 bin
 .project
 test-output
+/report.log
