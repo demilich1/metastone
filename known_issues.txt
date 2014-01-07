@@ -1,0 +1,5 @@
+- when a hero with a weapon is attacked, he will incorrectly damage the attacking minion
+- NUMBER_OF_ATTACKS does not work correctly, for example when a summoned minion receives CHARGE or is FROZEN
+- adjacent auras are not implemented
+- summon to a specific spot is not implemented
+- something strange is happening with armor, it actually increases hp

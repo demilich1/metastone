@@ -42,7 +42,7 @@ public abstract class Hero extends Entity {
 	}
 	
 	public int getArmor() {
-		return hasTag(GameTag.ARMOR) ? getTagValue(GameTag.ARMOR) : 0;
+		return getTagValue(GameTag.ARMOR);
 	}
 
 	public void modifyArmor(int armor) {

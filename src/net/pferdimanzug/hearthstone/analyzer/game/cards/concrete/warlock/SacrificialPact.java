@@ -7,6 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroySpell;
 
 public class SacrificialPact extends SpellCard {
@@ -17,6 +18,11 @@ public class SacrificialPact extends SpellCard {
 		setTargetRequirement(TargetSelection.ANY);
 	}
 	
+	@Override
+	public boolean canBeCastOn(Entity target) {
+		return target.getRace() == Race.DEMON;
+	}
+
 	private class SacrificialPactSpell extends DestroySpell {
 
 		@Override

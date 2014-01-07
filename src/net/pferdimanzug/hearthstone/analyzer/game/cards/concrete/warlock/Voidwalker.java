@@ -10,7 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 public class Voidwalker extends MinionCard {
 
 	public Voidwalker() {
-		super("Voidwaker", Rarity.FREE, HeroClass.WARLOCK, 1);
+		super("Voidwalker", Rarity.FREE, HeroClass.WARLOCK, 1);
 	}
 
 	@Override

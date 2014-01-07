@@ -9,9 +9,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.PlayRandomBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Anduin;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Guldan;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Thrall;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Uther;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Valeera;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 
 public class HearthstoneAnalyzer {
@@ -21,7 +24,7 @@ public class HearthstoneAnalyzer {
 		HearthstoneAnalyzer instance = new HearthstoneAnalyzer();
 		facade.startUp(instance);
 		facade.sendNotification(GameNotification.BATCH_START);
-		for (int i = 0; i < 10000; i++) {
+		for (int i = 0; i < 1; i++) {
 			instance.launchDebugGame();	
 		}
 		facade.sendNotification(GameNotification.BATCH_STOP);
@@ -51,7 +54,7 @@ public class HearthstoneAnalyzer {
 	private void launchDebugGame() {
 		Player player1 = new Player("Human", new Garrosh(), DebugDecks.getRandomDeck(HeroClass.WARRIOR));
 		player1.setBehaviour(new PlayRandomBehaviour(player1));
-		Player player2 = new Player("Bot", new Thrall(), DebugDecks.getRandomDeck(HeroClass.SHAMAN));
+		Player player2 = new Player("Bot", new Guldan(), DebugDecks.getRandomDeck(HeroClass.WARLOCK));
 		player2.setBehaviour(new PlayRandomBehaviour(player2));
 		GameLogic logic = new GameLogic();
 		GameContext newGame = new GameContext(player1, player2, logic);

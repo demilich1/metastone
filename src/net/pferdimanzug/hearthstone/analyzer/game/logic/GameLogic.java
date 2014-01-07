@@ -81,11 +81,12 @@ public class GameLogic implements IGameLogic {
 	}
 
 	private void damageHero(Hero hero, int damage) {
+		//TODO: wrong!
 		int damageAfterArmor = damage - hero.getArmor();
 		hero.modifyArmor(-damage);
 
 		hero.setHp(hero.getHp() - damageAfterArmor);
-		logger.debug(hero.getName() + " receives " + Math.abs(damage) + " damage, hp now: " + hero.getHp() + "("
+		logger.debug(hero.getName() + " receives " + damage + " damage, hp now: " + hero.getHp() + "("
 				+ hero.getArmor() + ")");
 	}
 
