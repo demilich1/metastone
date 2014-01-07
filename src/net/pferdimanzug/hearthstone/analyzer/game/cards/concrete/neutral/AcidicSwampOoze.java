@@ -5,43 +5,21 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroyWeaponSpell;
 
 public class AcidicSwampOoze extends MinionCard {
 
-	public AcidicSwampOoze(String name, Rarity rarity, HeroClass classRestriction, int manaCost) {
-		super(name, rarity, classRestriction, manaCost);
+	public AcidicSwampOoze() {
+		super("Acidic Swamp Ooze", Rarity.FREE, HeroClass.ANY, 2);
 	}
 
 	@Override
 	public Minion summon() {
 		Minion acidicSwampOoze = createMinion(3, 2);
-		acidicSwampOoze.setTag(GameTag.BATTLECRY, new BattlecryDestroyWeapon());
+		Battlecry battlecry = Battlecry.createBattlecry(new DestroyWeaponSpell(), TargetSelection.ENEMY_HERO);
+		acidicSwampOoze.setTag(GameTag.BATTLECRY, battlecry);
 		return acidicSwampOoze;
 	}
-	
-	private class BattlecryDestroyWeapon extends Battlecry {
-
-		public BattlecryDestroyWeapon() {
-			super(new DestroyWeaponSpell());
-			setTargetRequirement(TargetSelection.ENEMY_HERO);
-		}
-
-		@Override
-		public boolean canBeExecutedOn(Entity entity) {
-			if (entity.getEntityType() != EntityType.HERO) {
-				return false;
-			}
-			Hero hero = (Hero) entity;
-			return hero.getWeapon() != null;
-		}
-		
-		
-	}
-
 }

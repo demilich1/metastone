@@ -55,5 +55,5 @@ public class PlayRandomBehaviour implements IBehaviour {
 		logger.debug(player.getName() + " picks random target: " + randomTarget.getName());
 		return randomTarget;
 	}
-	
+
 }

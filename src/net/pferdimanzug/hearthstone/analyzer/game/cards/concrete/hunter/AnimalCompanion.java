@@ -14,8 +14,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonRandomSpell;
 
 public class AnimalCompanion extends SpellCard {
 
-	public AnimalCompanion(String name, Rarity rarity, HeroClass classRestriction, int manaCost) {
-		super(name, rarity, classRestriction, manaCost);
+	public AnimalCompanion() {
+		super("Animal Companion", Rarity.FREE, HeroClass.HUNTER, 3);
 		setSpell(new SummonRandomSpell(new Huffer(), new Misha(), new Leokk()));
 	}
 

@@ -8,8 +8,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageAndDrawCardSpell;
 
 public class Shiv extends SpellCard {
 
-	public Shiv(String name, Rarity rarity, HeroClass classRestriction, int manaCost) {
-		super(name, rarity, classRestriction, manaCost);
+	public Shiv() {
+		super("Shiv", Rarity.FREE, HeroClass.ROGUE, 2);
 		setSpell(new DamageAndDrawCardSpell(1));
 		setTargetRequirement(TargetSelection.ANY);
 	}

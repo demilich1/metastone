@@ -212,6 +212,8 @@ public class GameLogic implements IGameLogic {
 		player.getHero().setMaxHp(MAX_HERO_HP);
 		player.getHero().setHp(MAX_HERO_HP);
 
+		player.getDeck().shuffle();
+		
 		for (int j = 0; j < STARTER_CARDS; j++) {
 			drawCard(player);
 		}
