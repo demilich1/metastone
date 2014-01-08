@@ -156,4 +156,8 @@ public abstract class Entity {
 	public void setRace(Race race) {
 		this.race = race;
 	}
+	
+	public boolean canAttackThisTurn() {
+		return getAttack() > 0 && getTagValue(GameTag.NUMBER_OF_ATTACKS) > 0;
+	}
 }

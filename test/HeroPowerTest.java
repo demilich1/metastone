@@ -69,6 +69,22 @@ public class HeroPowerTest extends TestBase {
 		context.getLogic().performGameAction(context.getPlayer2(), damage);
 		Assert.assertEquals(warrior.getHp(), GameLogic.MAX_HERO_HP - ArmorUp.ARMOR_BONUS);
 		Assert.assertEquals(warrior.getArmor(), 0);
+		
+		// there was a bug where armor actually increased the hp of the hero when
+		// the damage dealt was less than the total armor. Following test
+		// covers that scenario
+		context.getLogic().performGameAction(context.getPlayer1(), armorUp);
+        damage = new GameAction() {
+			
+			@Override
+			public void execute(GameContext context, Player player) {
+				context.getLogic().damage(warrior, ArmorUp.ARMOR_BONUS / 2);
+			}
+		};
+		damage.setTarget(warrior);
+		context.getLogic().performGameAction(context.getPlayer2(), damage);
+		Assert.assertEquals(warrior.getHp(), GameLogic.MAX_HERO_HP - ArmorUp.ARMOR_BONUS);
+		Assert.assertEquals(warrior.getArmor(), ArmorUp.ARMOR_BONUS / 2);
 	}
 	
 	@Test

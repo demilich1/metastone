@@ -12,6 +12,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.TheCoin
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Malfurion;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffHeroSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SingleTargetDamageSpell;
 
 import org.testng.Assert;
@@ -107,6 +109,37 @@ public class BasicTests extends TestBase {
 		context.getLogic().performGameAction(mage, devMonster.play());
 		
 		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - 3);
+	}
+	
+	@Test
+	public void testHeroAttack() { 
+		GameContext context = createContext(new Jaina(), new Malfurion());
+		Player mage = context.getPlayer1();
+		mage.setMana(10);
+		Player druid = context.getPlayer2();
+		druid.setMana(10);
+
+		int damage = 1;
+		DevMonster devMonsterCard = new DevMonster(damage, 2);
+		mage.getHand().add(devMonsterCard);
+		context.getLogic().performGameAction(mage, devMonsterCard.play());
+		
+		BuffHeroSpell heroBuffSpell = new BuffHeroSpell(damage, 0);
+		context.getLogic().castSpell(druid, heroBuffSpell, druid.getHero());
+		Entity devMonster = getSingleMinion(mage.getMinions());
+		GameAction minionAttackAction = new PhysicalAttackAction(devMonster);
+		minionAttackAction.setTarget(druid.getHero());
+		context.getLogic().performGameAction(mage, minionAttackAction);
+		// monster attacked; it should not be damaged by the hero
+		Assert.assertEquals(druid.getHero().getHp(), druid.getHero().getMaxHp() - damage);
+		Assert.assertEquals(devMonster.getHp(), devMonster.getMaxHp());
+		
+		GameAction heroAttackAction = new PhysicalAttackAction(druid.getHero());
+		heroAttackAction.setTarget(devMonster);
+		context.getLogic().performGameAction(mage, heroAttackAction);
+		// hero attacked; both entities should be damaged
+		Assert.assertEquals(druid.getHero().getHp(), druid.getHero().getMaxHp() - 2 * damage);
+		Assert.assertEquals(devMonster.getHp(), devMonster.getMaxHp() - damage);
 	}
 
 }

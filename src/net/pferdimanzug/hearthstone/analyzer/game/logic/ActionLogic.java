@@ -34,7 +34,7 @@ public class ActionLogic {
 
 	private GameAction getHeroAttackAction(GameContext context, Player player) {
 		Hero hero = player.getHero();
-		if (hero.getAttack() <= 0) {
+		if (!hero.canAttackThisTurn()) {
 			return null;
 		}
 		return new PhysicalAttackAction(hero);

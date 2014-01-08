@@ -15,6 +15,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.CardType;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.TheCoin;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
@@ -81,11 +82,10 @@ public class GameLogic implements IGameLogic {
 	}
 
 	private void damageHero(Hero hero, int damage) {
-		//TODO: wrong!
-		int damageAfterArmor = damage - hero.getArmor();
+		int effectiveHp = hero.getHp() + hero.getArmor();
 		hero.modifyArmor(-damage);
-
-		hero.setHp(hero.getHp() - damageAfterArmor);
+		int newHp = Math.min(hero.getHp(), effectiveHp - damage);
+		hero.setHp(newHp);
 		logger.debug(hero.getName() + " receives " + damage + " damage, hp now: " + hero.getHp() + "("
 				+ hero.getArmor() + ")");
 	}
@@ -187,7 +187,11 @@ public class GameLogic implements IGameLogic {
 		int attackerDamage = attacker.getAttack();
 		int defenderDamage = defender.getAttack();
 		damage(defender, attackerDamage);
-		damage(attacker, defenderDamage);
+		// heroes do not retaliate when attacked
+		if (defender.getEntityType() != EntityType.HERO) {
+			damage(attacker, defenderDamage);
+		}
+		
 		attacker.modifyTag(GameTag.NUMBER_OF_ATTACKS, -1);
 		context.getEventManager().fireGameEvent(new PhysicalAttackEvent(context, attacker, defender));
 	}
@@ -317,18 +321,23 @@ public class GameLogic implements IGameLogic {
 		}
 		player.setMana(player.getMaxMana());
 		player.getHero().getHeroPower().setUsed(false);
+		refreshAttacksPerRound(player.getHero());
 		logger.debug(player.getName() + " is at " + player.getMana() + "/" + player.getMaxMana() + " mana");
 		drawCard(player);
 		for (Entity minion : player.getMinions()) {
-			int attacks = 1;
-			if (minion.hasTag(GameTag.FROZEN)) {
-				attacks = 0;
-			} else if ( minion.hasTag(GameTag.WINDFURY)) {
-				attacks = 2;
-			}
-			minion.setTag(GameTag.NUMBER_OF_ATTACKS, attacks);
+			refreshAttacksPerRound(minion);
 		}
 		context.getEventManager().fireGameEvent(new TurnStartEvent(context, player));
+	}
+	
+	private void refreshAttacksPerRound(Entity entity) {
+		int attacks = 1;
+		if (entity.hasTag(GameTag.FROZEN)) {
+			attacks = 0;
+		} else if ( entity.hasTag(GameTag.WINDFURY)) {
+			attacks = 2;
+		}
+		entity.setTag(GameTag.NUMBER_OF_ATTACKS, attacks);
 	}
 
 	@Override

@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.entities.minions;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.aura.Aura;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
@@ -32,7 +31,4 @@ public class Minion extends Entity {
 		setBaseHp(baseHp);
 	}
 	
-	public boolean canAttackThisTurn() {
-		return getAttack() > 0 && getTagValue(GameTag.NUMBER_OF_ATTACKS) > 0;
-	}
 }
