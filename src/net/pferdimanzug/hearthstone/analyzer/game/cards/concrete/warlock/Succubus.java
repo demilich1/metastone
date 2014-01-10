@@ -18,7 +18,7 @@ public class Succubus extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion succubus = createMinion(4, 3, Race.DEMON);
-		succubus.setTag(GameTag.BATTLECRY, Battlecry.createBattlecry(new DiscardCardSpell(1)));
+		succubus.setTag(GameTag.BATTLECRY, Battlecry.createBattlecry(new DiscardCardSpell()));
 		return succubus;
 	}
 

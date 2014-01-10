@@ -4,3 +4,6 @@
 - spellpower mechanic not implemented
 - combo mechanic not implemented
 - overload mechanic not implemented
+
+Class specific:
+- Rockbiter is not implemented correctly (lasts forever)

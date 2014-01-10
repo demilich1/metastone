@@ -11,6 +11,10 @@ public class DrawCardSpell implements ISpell {
 	public DrawCardSpell(int numberOfCards) {
 		this.numberOfCards = numberOfCards;
 	}
+	
+	public DrawCardSpell() {
+		this(1);
+	}
 
 	@Override
 	public void cast(GameContext context, Player player, Entity target) {

@@ -5,13 +5,13 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.ApplyTagSpell;
 
 public class Windfury extends SpellCard {
 
 	public Windfury() {
 		super("Windfury", Rarity.FREE, HeroClass.SHAMAN, 2);
-		setSpell(new BuffSpell(GameTag.WINDFURY));
+		setSpell(new ApplyTagSpell(GameTag.WINDFURY));
 		setTargetRequirement(TargetSelection.MINIONS);
 	}
 

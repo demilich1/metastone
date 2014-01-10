@@ -6,23 +6,18 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
-public class AreaFreezeSpell extends AreaSpell {
+public class AreaApplyTagSpell extends AreaSpell {
 
-	private final int damage;
+	private final GameTag tag;
 
-	public AreaFreezeSpell(int damage) {
-		super(TargetSelection.ENEMY_MINIONS);
-		this.damage = damage;
+	public AreaApplyTagSpell(TargetSelection targetSelection, GameTag tag) {
+		super(targetSelection);
+		this.tag = tag;
 	}
 
 	@Override
 	protected void forEachTarget(GameContext context, Player player, Entity entity) {
-		entity.setTag(GameTag.FROZEN);
-		if (damage > 0) {
-			context.getLogic().damage(entity, damage);
-		}
+		entity.setTag(tag);
 	}
-
-	
 
 }

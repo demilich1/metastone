@@ -1,7 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.heroes.powers;
 
 import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffHeroSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffHeroArmorSpell;
 
 public class ArmorUp extends HeroPower {
 
@@ -10,7 +10,7 @@ public class ArmorUp extends HeroPower {
 	public ArmorUp() {
 		super("Armor Up!");
 		setTargetRequirement(TargetSelection.NONE);
-		setSpell(new BuffHeroSpell(0, ARMOR_BONUS));
+		setSpell(new BuffHeroArmorSpell(ARMOR_BONUS));
 	}
 
 }

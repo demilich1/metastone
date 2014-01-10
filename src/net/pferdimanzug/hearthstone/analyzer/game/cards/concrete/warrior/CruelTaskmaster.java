@@ -1,16 +1,16 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
-import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.SingleTargetDamageSpell;
 
 public class CruelTaskmaster extends MinionCard {
 
@@ -21,23 +21,9 @@ public class CruelTaskmaster extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion cruelTaskmaster = createMinion(2, 2);
-		Battlecry battlecry = Battlecry.createBattlecry(new CruelTaskmasterSpell(), TargetSelection.MINIONS);
+		ISpell cruelBuffSpell = new MetaSpell(new BuffSpell(2, 0), new SingleTargetDamageSpell(1));
+		Battlecry battlecry = Battlecry.createBattlecry(cruelBuffSpell, TargetSelection.MINIONS);
 		cruelTaskmaster.setTag(GameTag.BATTLECRY, battlecry);
 		return cruelTaskmaster;
 	}
-	
-	private class CruelTaskmasterSpell extends BuffSpell {
-		
-		public CruelTaskmasterSpell() {
-			super(2, 0);
-		}
-
-		@Override
-		public void cast(GameContext context, Player player, Entity target) {
-			super.cast(context, player, target);
-			context.getLogic().damage(target, 1);
-		}
-		
-	}
-
 }

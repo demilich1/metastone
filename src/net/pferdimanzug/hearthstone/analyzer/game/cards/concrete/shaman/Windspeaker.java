@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.ApplyTagSpell;
 
 public class Windspeaker extends MinionCard {
 
@@ -18,7 +18,7 @@ public class Windspeaker extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion windspeaker = createMinion(3, 3);
-		Battlecry battlecry = Battlecry.createBattlecry(new BuffSpell(GameTag.WINDFURY), TargetSelection.FRIENDLY_MINIONS);
+		Battlecry battlecry = Battlecry.createBattlecry(new ApplyTagSpell(GameTag.WINDFURY), TargetSelection.FRIENDLY_MINIONS);
 		windspeaker.setTag(GameTag.BATTLECRY, battlecry);
 		return windspeaker;
 	}

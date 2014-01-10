@@ -28,6 +28,10 @@ public class FrostwolfWarlord extends MinionCard {
 
 	private class BuffLeadership extends BuffSpell {
 		
+		public BuffLeadership() {
+			super(0, 0);
+		}
+
 		@Override
 		public void cast(GameContext context, Player player, Entity target) {
 			int minionCount = player.getMinions().size();

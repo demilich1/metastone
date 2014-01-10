@@ -12,6 +12,10 @@ public class DiscardCardSpell implements ISpell {
 	public DiscardCardSpell(int numberOfCards) {
 		this.numberOfCards = numberOfCards;
 	}
+	
+	public DiscardCardSpell() {
+		this(1);
+	}
 
 	@Override
 	public void cast(GameContext context, Player player, Entity target) {

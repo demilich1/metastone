@@ -5,13 +5,15 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.ApplyTagSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
 
 public class MarkOfTheWild extends SpellCard {
 
 	public MarkOfTheWild() {
 		super("Mark of the Wild", Rarity.FREE, HeroClass.DRUID, 2);
-		setSpell(new BuffSpell(2, 2, GameTag.TAUNT));
+		setSpell(new MetaSpell(new BuffSpell(2, 2), new ApplyTagSpell(GameTag.TAUNT)));
 		setTargetRequirement(TargetSelection.MINIONS);
 	}
 

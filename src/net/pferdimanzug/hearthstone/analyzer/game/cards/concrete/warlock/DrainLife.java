@@ -13,9 +13,10 @@ public class DrainLife extends SpellCard {
 
 	public DrainLife() {
 		super("Drain Life", Rarity.FREE, HeroClass.WARLOCK, 3);
+		setSpell(new DrainLifeSpell(2));
 		//TODO: can this be cast on own hero?
 		setTargetRequirement(TargetSelection.ANY);
-		setSpell(new DrainLifeSpell(2));
+		
 	}
 	
 	private class DrainLifeSpell extends SingleTargetDamageSpell {

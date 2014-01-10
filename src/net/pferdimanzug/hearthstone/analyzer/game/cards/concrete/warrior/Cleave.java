@@ -18,7 +18,7 @@ public class Cleave extends SpellCard {
 
 	@Override
 	public boolean canBeCast(GameContext context, Player player) {
-		return context.getOpponent(player).getMinions().size() > 2;
+		return context.getOpponent(player).getMinions().size() >= 2;
 	}
 	
 	

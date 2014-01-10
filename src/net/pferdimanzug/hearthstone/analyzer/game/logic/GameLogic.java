@@ -326,6 +326,7 @@ public class GameLogic implements IGameLogic {
 		drawCard(player);
 		for (Entity minion : player.getMinions()) {
 			refreshAttacksPerRound(minion);
+			minion.removeTag(GameTag.SUMMONING_SICKNESS);
 		}
 		context.getEventManager().fireGameEvent(new TurnStartEvent(context, player));
 	}
@@ -343,6 +344,8 @@ public class GameLogic implements IGameLogic {
 	@Override
 	public void summon(Player player, Minion minion, Entity nextTo) {
 		logger.debug("{} summons [{}]", player.getName(), minion.getName());
+		refreshAttacksPerRound(minion);
+		minion.setTag(GameTag.SUMMONING_SICKNESS);
 		
 		if (minion.getBattlecry() != null) {
 			GameAction battlecry = minion.getBattlecry();
@@ -397,6 +400,5 @@ public class GameLogic implements IGameLogic {
 	public List<GameAction> getValidActions(Player player) {
 		return actionLogic.getValidActions(context, player);
 	}
-	
 
 }

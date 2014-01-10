@@ -158,6 +158,9 @@ public abstract class Entity {
 	}
 	
 	public boolean canAttackThisTurn() {
+		if (hasTag(GameTag.SUMMONING_SICKNESS) && !hasTag(GameTag.CHARGE)) {
+			return false;
+		}
 		return getAttack() > 0 && getTagValue(GameTag.NUMBER_OF_ATTACKS) > 0;
 	}
 }

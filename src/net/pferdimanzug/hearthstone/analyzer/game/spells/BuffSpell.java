@@ -9,18 +9,12 @@ public class BuffSpell implements ISpell {
 	
 	private int attackBonus;
 	private int hpBonus;
-	private final GameTag[] tags;
 
-	public BuffSpell(int attackBonus, int hpBonus, GameTag... tags) {
+	public BuffSpell(int attackBonus, int hpBonus) {
 		this.attackBonus = attackBonus;
 		this.hpBonus = hpBonus;
-		this.tags = tags;
 	}
 	
-	public BuffSpell(GameTag... tags) {
-		this(0, 0, tags);
-	}
-
 	@Override
 	public void cast(GameContext context, Player player, Entity target) {
 		if (attackBonus != 0) {
@@ -28,10 +22,6 @@ public class BuffSpell implements ISpell {
 		}
 		if (hpBonus != 0) {
 			target.modifyHpBonus(+hpBonus);
-		}
-		
-		for (GameTag tag : tags) {
-			target.setTag(tag);
 		}
 	}
 
