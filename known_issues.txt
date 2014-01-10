@@ -7,3 +7,4 @@
 
 Class specific:
 - Rockbiter is not implemented correctly (lasts forever)
+- Corruption fires too early(?)

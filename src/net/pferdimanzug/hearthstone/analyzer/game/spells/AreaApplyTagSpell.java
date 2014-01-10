@@ -6,7 +6,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class AreaApplyTagSpell extends AreaSpell {
+
+	private static Logger logger = LoggerFactory.getLogger(AreaApplyTagSpell.class);
 
 	private final GameTag tag;
 
@@ -17,6 +22,7 @@ public class AreaApplyTagSpell extends AreaSpell {
 
 	@Override
 	protected void forEachTarget(GameContext context, Player player, Entity entity) {
+		logger.debug("Applying tag {} to {}", tag, entity.getName());
 		entity.setTag(tag);
 	}
 

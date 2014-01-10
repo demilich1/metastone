@@ -12,6 +12,7 @@ public class TheCoin extends SpellCard {
 
 	public TheCoin() {
 		super("The Coin", Rarity.FREE, HeroClass.ANY, 0);
+		setCollectible(false);
 		setTargetRequirement(TargetSelection.NONE);
 		setSpell(new GainManaSpell(MANA_GAIN));
 	}
