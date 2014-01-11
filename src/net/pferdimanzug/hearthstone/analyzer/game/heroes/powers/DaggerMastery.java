@@ -10,13 +10,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.EquipWeaponSpell;
 
 public class DaggerMastery extends HeroPower {
 
-	public DaggerMastery() {
-		super("Dagger Mastery");
-		setTargetRequirement(TargetSelection.NONE);
-		setSpell(new EquipWeaponSpell(new WickedKnife()));
-		
-	}
-	
 	private class WickedKnife extends WeaponCard {
 
 		public WickedKnife() {
@@ -28,6 +21,13 @@ public class DaggerMastery extends HeroPower {
 		public Weapon getWeapon() {
 			return createWeapon(1, 2);
 		}
+		
+	}
+	
+	public DaggerMastery() {
+		super("Dagger Mastery");
+		setTargetRequirement(TargetSelection.NONE);
+		setSpell(new EquipWeaponSpell(new WickedKnife()));
 		
 	}
 

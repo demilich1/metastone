@@ -11,12 +11,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.DrawCardSpell;
 
 public class BattleRage extends SpellCard {
 
-	public BattleRage() {
-		super("Battle Rage", Rarity.COMMON, HeroClass.WARRIOR, 2);
-		setSpell(new BattleRageSpell());
-		setTargetRequirement(TargetSelection.NONE);
-	}
-	
 	private class BattleRageSpell extends DrawCardSpell {
 
 		public BattleRageSpell() {
@@ -37,6 +31,12 @@ public class BattleRage extends SpellCard {
 		
 		
 		
+	}
+	
+	public BattleRage() {
+		super("Battle Rage", Rarity.COMMON, HeroClass.WARRIOR, 2);
+		setSpell(new BattleRageSpell());
+		setTargetRequirement(TargetSelection.NONE);
 	}
 
 }

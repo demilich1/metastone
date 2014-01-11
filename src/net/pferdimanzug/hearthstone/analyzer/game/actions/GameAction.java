@@ -14,49 +14,49 @@ public abstract class GameAction {
 	private Entity source;
 	private Entity target;
 	
-	public abstract void execute(GameContext context, Player player);
-	
-	public TargetSelection getTargetRequirement() {
-		return targetRequirement;
-	}
-	
-	public Entity getTarget() {
-		return target;
-	}
-
-	public void setTarget(Entity target) {
-		this.target = target;
-	}
-
-	public ActionType getActionType() {
-		return actionType;
-	}
-
-	protected void setTargetRequirement(TargetSelection targetRequirement) {
-		this.targetRequirement = targetRequirement;
-	}
-
-	protected void setActionType(ActionType actionType) {
-		this.actionType = actionType;
-	}
-
 	public boolean canBeExecutedOn(Entity entity) {
 		return true;
 	}
-
-	public List<Entity> getValidTargets() {
-		return validTargets;
-	}
-
-	public void setValidTargets(List<Entity> validTargets) {
-		this.validTargets = validTargets;
+	
+	public abstract void execute(GameContext context, Player player);
+	
+	public ActionType getActionType() {
+		return actionType;
 	}
 
 	public Entity getSource() {
 		return source;
 	}
 
+	public Entity getTarget() {
+		return target;
+	}
+
+	public TargetSelection getTargetRequirement() {
+		return targetRequirement;
+	}
+
+	public List<Entity> getValidTargets() {
+		return validTargets;
+	}
+
+	protected void setActionType(ActionType actionType) {
+		this.actionType = actionType;
+	}
+
 	public void setSource(Entity source) {
 		this.source = source;
+	}
+
+	public void setTarget(Entity target) {
+		this.target = target;
+	}
+
+	protected void setTargetRequirement(TargetSelection targetRequirement) {
+		this.targetRequirement = targetRequirement;
+	}
+
+	public void setValidTargets(List<Entity> validTargets) {
+		this.validTargets = validTargets;
 	}
 }

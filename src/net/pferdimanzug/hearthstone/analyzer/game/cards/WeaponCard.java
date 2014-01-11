@@ -12,6 +12,12 @@ public abstract class WeaponCard extends Card {
 		super(name, CardType.WEAPON, rarity, classRestriction, manaCost);
 	}
 
+	protected Weapon createWeapon(int weaponDamage, int durability) {
+		return new Weapon(this, weaponDamage, durability);
+	}
+
+	public abstract Weapon getWeapon();
+	
 	@Override
 	public PlayCardAction play() {
 		return new PlayCardAction(this) {
@@ -21,12 +27,6 @@ public abstract class WeaponCard extends Card {
 				player.getHero().setWeapon(getWeapon());
 			}
 		};
-	}
-
-	public abstract Weapon getWeapon();
-	
-	protected Weapon createWeapon(int weaponDamage, int durability) {
-		return new Weapon(this, weaponDamage, durability);
 	}
 
 }

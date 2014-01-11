@@ -11,24 +11,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
 import net.pferdimanzug.hearthstone.analyzer.game.events.IGameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.SummonEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DrawCardSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.IGameEventTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.GameEventTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 
 public class StarvingBuzzard extends MinionCard {
 
-	public StarvingBuzzard() {
-		super("Starving Buzzard", Rarity.FREE, HeroClass.HUNTER, 2);
-	}
-
-	@Override
-	public Minion summon() {
-		Minion starvingBuzzard = createMinion(2, 2, Race.BEAST);
-		SpellTrigger trigger = new SpellTrigger(new StarvingBuzzardTrigger(), new DrawCardSpell(1));
-		starvingBuzzard.addSpellTrigger(trigger);
-		return starvingBuzzard;
-	}
-	
-	private class StarvingBuzzardTrigger implements IGameEventTrigger {
+	private class StarvingBuzzardTrigger extends GameEventTrigger {
 
 		@Override
 		public boolean fire(IGameEvent event, Entity host) {
@@ -40,14 +28,26 @@ public class StarvingBuzzard extends MinionCard {
 		}
 
 		@Override
-		public GameEventType interestedIn() {
-			return GameEventType.SUMMON;
-		}
-
-		@Override
 		public Entity getTarget(GameContext context, Entity host) {
 			return null;
 		}
+
+		@Override
+		public GameEventType interestedIn() {
+			return GameEventType.SUMMON;
+		}
+	}
+
+	public StarvingBuzzard() {
+		super("Starving Buzzard", Rarity.FREE, HeroClass.HUNTER, 2);
+	}
+	
+	@Override
+	public Minion summon() {
+		Minion starvingBuzzard = createMinion(2, 2, Race.BEAST);
+		SpellTrigger trigger = new SpellTrigger(new StarvingBuzzardTrigger(), new DrawCardSpell());
+		starvingBuzzard.addSpellTrigger(trigger);
+		return starvingBuzzard;
 	}
 	
 	

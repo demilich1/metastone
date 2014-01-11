@@ -12,18 +12,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
 
 public class RazorfenHunter extends MinionCard {
 
-	public RazorfenHunter() {
-		super("Razorfen Hunter", Rarity.FREE, HeroClass.ANY, 3);
-	}
-
-	@Override
-	public Minion summon() {
-		Minion razorfenHunter = createMinion(2, 3);
-		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(new Boar()), TargetSelection.NONE);
-		razorfenHunter.setTag(GameTag.BATTLECRY, battlecry);
-		return razorfenHunter;
-	}
-
 	private class Boar extends MinionCard {
 
 		public Boar() {
@@ -35,6 +23,18 @@ public class RazorfenHunter extends MinionCard {
 			return createMinion(1, 1, Race.BEAST);
 		}
 
+	}
+
+	public RazorfenHunter() {
+		super("Razorfen Hunter", Rarity.FREE, HeroClass.ANY, 3);
+	}
+
+	@Override
+	public Minion summon() {
+		Minion razorfenHunter = createMinion(2, 3);
+		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(new Boar()), TargetSelection.NONE);
+		razorfenHunter.setTag(GameTag.BATTLECRY, battlecry);
+		return razorfenHunter;
 	}
 
 }

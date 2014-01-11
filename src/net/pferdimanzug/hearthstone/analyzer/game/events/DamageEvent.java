@@ -14,13 +14,13 @@ public class DamageEvent extends GameEvent {
 		this.damage = damage;
 	}
 
+	public int getDamage() {
+		return damage;
+	}
+
 	@Override
 	public GameEventType getEventType() {
 		return GameEventType.DAMAGE;
-	}
-
-	public int getDamage() {
-		return damage;
 	}
 
 	public Entity getVictim() {

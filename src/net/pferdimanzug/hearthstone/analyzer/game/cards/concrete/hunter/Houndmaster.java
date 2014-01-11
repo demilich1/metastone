@@ -16,17 +16,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
 
 public class Houndmaster extends MinionCard {
 
-	public Houndmaster() {
-		super("Houndmaster", Rarity.FREE, HeroClass.HUNTER, 4);
-	}
-
-	@Override
-	public Minion summon() {
-		Minion houndmaster = createMinion(4, 3);
-		houndmaster.setTag(GameTag.BATTLECRY, new BattlecryHoundmaster());
-		return houndmaster;
-	}
-
 	private class BattlecryHoundmaster extends Battlecry {
 
 		public BattlecryHoundmaster() {
@@ -41,5 +30,16 @@ public class Houndmaster extends MinionCard {
 			}
 			return entity.getRace() == Race.BEAST;
 		}
+	}
+
+	public Houndmaster() {
+		super("Houndmaster", Rarity.FREE, HeroClass.HUNTER, 4);
+	}
+
+	@Override
+	public Minion summon() {
+		Minion houndmaster = createMinion(4, 3);
+		houndmaster.setTag(GameTag.BATTLECRY, new BattlecryHoundmaster());
+		return houndmaster;
 	}
 }

@@ -12,18 +12,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
 
 public class MurlocTidehunter extends MinionCard {
 
-	public MurlocTidehunter() {
-		super("Murloc Tidehunter", Rarity.FREE, HeroClass.ANY, 2);
-	}
-
-	@Override
-	public Minion summon() {
-		Minion murlocTidehunter = createMinion(2, 1, Race.MURLOC);
-		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(new MurlocScout()), TargetSelection.NONE);
-		murlocTidehunter.setTag(GameTag.BATTLECRY, battlecry);
-		return murlocTidehunter;
-	}
-
 	private class MurlocScout extends MinionCard {
 
 		public MurlocScout() {
@@ -35,6 +23,18 @@ public class MurlocTidehunter extends MinionCard {
 			return createMinion(1, 1, Race.MURLOC);
 		}
 
+	}
+
+	public MurlocTidehunter() {
+		super("Murloc Tidehunter", Rarity.FREE, HeroClass.ANY, 2);
+	}
+
+	@Override
+	public Minion summon() {
+		Minion murlocTidehunter = createMinion(2, 1, Race.MURLOC);
+		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(new MurlocScout()), TargetSelection.NONE);
+		murlocTidehunter.setTag(GameTag.BATTLECRY, battlecry);
+		return murlocTidehunter;
 	}
 
 }

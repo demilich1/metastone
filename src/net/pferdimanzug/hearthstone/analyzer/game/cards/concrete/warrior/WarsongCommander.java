@@ -11,17 +11,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
 public class WarsongCommander extends MinionCard {
 
-	public WarsongCommander() {
-		super("Warsong Commander", Rarity.FREE, HeroClass.WARRIOR, 3);
-	}
-
-	@Override
-	public Minion summon() {
-		Minion warsongCommander = createMinion(2, 3);
-		warsongCommander.setAura(new WarsongCommanderAura(warsongCommander));
-		return warsongCommander;
-	}
-	
 	private class WarsongCommanderAura extends Aura {
 
 		public WarsongCommanderAura(Entity source) {
@@ -49,6 +38,17 @@ public class WarsongCommander extends MinionCard {
 			
 		}
 		
+	}
+
+	public WarsongCommander() {
+		super("Warsong Commander", Rarity.FREE, HeroClass.WARRIOR, 3);
+	}
+	
+	@Override
+	public Minion summon() {
+		Minion warsongCommander = createMinion(2, 3);
+		warsongCommander.setAura(new WarsongCommanderAura(warsongCommander));
+		return warsongCommander;
 	}
 	
 

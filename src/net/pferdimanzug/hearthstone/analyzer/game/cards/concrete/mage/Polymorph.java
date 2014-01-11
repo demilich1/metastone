@@ -11,12 +11,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.TransformMinionSpell;
 
 public class Polymorph extends SpellCard {
 
-	public Polymorph() {
-		super("Polymorph", Rarity.FREE, HeroClass.MAGE, 4);
-		setTargetRequirement(TargetSelection.MINIONS);
-		setSpell(new TransformMinionSpell(new Sheep()));
-	}
-	
 	private class Sheep extends MinionCard {
 
 		public Sheep() {
@@ -29,6 +23,12 @@ public class Polymorph extends SpellCard {
 			return createMinion(1, 1, Race.BEAST);
 		}
 		
+	}
+	
+	public Polymorph() {
+		super("Polymorph", Rarity.FREE, HeroClass.MAGE, 4);
+		setTargetRequirement(TargetSelection.MINIONS);
+		setSpell(new TransformMinionSpell(new Sheep()));
 	}
 
 }

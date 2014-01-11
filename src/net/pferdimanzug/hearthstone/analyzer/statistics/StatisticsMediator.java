@@ -21,15 +21,6 @@ public class StatisticsMediator extends Mediator<GameNotification> {
 	}
 
 	@Override
-	public List<GameNotification> listNotificationInterests() {
-		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
-		notificationInterests.add(GameNotification.BATCH_START);
-		notificationInterests.add(GameNotification.BATCH_STOP);
-		notificationInterests.add(GameNotification.GAME_OVER);
-		return notificationInterests;
-	}
-	
-	@Override
 	public void handleNotification(INotification<GameNotification> notification) {
 		switch (notification.getId()) {
 		case GAME_OVER:
@@ -44,5 +35,14 @@ public class StatisticsMediator extends Mediator<GameNotification> {
 		default:
 			break;
 		}
+	}
+	
+	@Override
+	public List<GameNotification> listNotificationInterests() {
+		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
+		notificationInterests.add(GameNotification.BATCH_START);
+		notificationInterests.add(GameNotification.BATCH_STOP);
+		notificationInterests.add(GameNotification.GAME_OVER);
+		return notificationInterests;
 	}
 }

@@ -16,19 +16,19 @@ public class BuffWeaponSpell implements ISpell {
 	private final int damageBonus;
 	private final int durabilityBonus;
 
+	public BuffWeaponSpell(int attackBonus) {
+		this(attackBonus, 0);
+	}
+
 	public BuffWeaponSpell(int damageBonus, int durabilityBonus) {
 		this.damageBonus = damageBonus;
 		this.durabilityBonus = durabilityBonus;
 	}
 
-	public BuffWeaponSpell(int attackBonus) {
-		this(attackBonus, 0);
-	}
-
 	@Override
 	public void cast(GameContext context, Player player, Entity target) {
 		Weapon weapon = player.getHero().getWeapon();
-		logger.debug("{} gains ({})", weapon.getName(), damageBonus + "/" + durabilityBonus);
+		logger.debug("{} gains ({})", weapon, damageBonus + "/" + durabilityBonus);
 		if (damageBonus != 0) {
 			weapon.modifyTag(GameTag.WEAPON_DAMAGE, damageBonus);
 		}

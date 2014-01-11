@@ -23,9 +23,10 @@ public class ComboSpell implements ISpell {
 	@Override
 	public void cast(GameContext context, Player player, Entity target) {
 		if (player.getHero().hasTag(GameTag.COMBO)) {
-			logger.debug("Combo spell cast");
+			logger.debug(GameTag.COMBO + " spell activated");
 			context.getLogic().castSpell(player, combo, target);
 		} else {
+			logger.debug("Played a card with " + GameTag.COMBO + " but no card was played before");
 			context.getLogic().castSpell(player, noCombo, target);
 		}
 		

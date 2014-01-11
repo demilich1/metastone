@@ -31,7 +31,7 @@ public class TransformMinionSpell implements ISpell {
 		}
 		
 		Minion removedMinion = minions.remove(index);
-		logger.debug("[{}] is transformed into a [{}]", removedMinion.getName(), newMinion.getName());
+		logger.debug("{} is transformed into a {}", removedMinion, newMinion);
 		minions.add(index, newMinion.summon());
 	}
 

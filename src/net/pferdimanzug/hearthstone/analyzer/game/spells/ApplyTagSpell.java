@@ -22,7 +22,7 @@ public class ApplyTagSpell implements ISpell {
 	@Override
 	public void cast(GameContext context, Player player, Entity target) {
 		for (GameTag tag : tags) {
-			logger.debug("Applying tag {} to {}", tag, target.getName());
+			logger.debug("Applying tag {} to {}", tag, target);
 			target.setTag(tag);
 		}
 	}}

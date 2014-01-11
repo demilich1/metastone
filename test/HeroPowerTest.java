@@ -18,35 +18,6 @@ import org.testng.annotations.Test;
 public class HeroPowerTest extends TestBase {
 
 	@Test
-	public void testFireblast() {
-		GameContext context = createContext(new Jaina(), new Garrosh());
-		Hero mage = context.getPlayer1().getHero();
-		Hero victim = context.getPlayer2().getHero();
-		Assert.assertEquals(victim.getHp(), GameLogic.MAX_HERO_HP);
-		
-		GameAction fireblast = mage.getHeroPower().play();
-		fireblast.setTarget(victim);
-		context.getLogic().performGameAction(context.getPlayer1(), fireblast);
-		Assert.assertEquals(victim.getHp(), GameLogic.MAX_HERO_HP - Fireblast.DAMAGE);
-	}
-	
-	@Test
-	public void testLesserHeal() {
-		GameContext context = createContext(new Anduin(), new Garrosh());
-		Hero priest = context.getPlayer1().getHero();
-		
-		priest.setHp(GameLogic.MAX_HERO_HP - LesserHeal.HEALING);
-		Assert.assertEquals(priest.getHp(), GameLogic.MAX_HERO_HP - LesserHeal.HEALING);
-		
-		GameAction lesserHeal = priest.getHeroPower().play();
-		lesserHeal.setTarget(priest);
-		context.getLogic().performGameAction(context.getPlayer1(), lesserHeal);
-		Assert.assertEquals(priest.getHp(), GameLogic.MAX_HERO_HP);
-		context.getLogic().performGameAction(context.getPlayer1(), lesserHeal);
-		Assert.assertEquals(priest.getHp(), GameLogic.MAX_HERO_HP);
-	}
-	
-	@Test
 	public void testArmorUp() {
 		GameContext context = createContext(new Garrosh(), new Jaina());
 		final Hero warrior = context.getPlayer1().getHero();
@@ -85,6 +56,35 @@ public class HeroPowerTest extends TestBase {
 		context.getLogic().performGameAction(context.getPlayer2(), damage);
 		Assert.assertEquals(warrior.getHp(), GameLogic.MAX_HERO_HP - ArmorUp.ARMOR_BONUS);
 		Assert.assertEquals(warrior.getArmor(), ArmorUp.ARMOR_BONUS / 2);
+	}
+	
+	@Test
+	public void testFireblast() {
+		GameContext context = createContext(new Jaina(), new Garrosh());
+		Hero mage = context.getPlayer1().getHero();
+		Hero victim = context.getPlayer2().getHero();
+		Assert.assertEquals(victim.getHp(), GameLogic.MAX_HERO_HP);
+		
+		GameAction fireblast = mage.getHeroPower().play();
+		fireblast.setTarget(victim);
+		context.getLogic().performGameAction(context.getPlayer1(), fireblast);
+		Assert.assertEquals(victim.getHp(), GameLogic.MAX_HERO_HP - Fireblast.DAMAGE);
+	}
+	
+	@Test
+	public void testLesserHeal() {
+		GameContext context = createContext(new Anduin(), new Garrosh());
+		Hero priest = context.getPlayer1().getHero();
+		
+		priest.setHp(GameLogic.MAX_HERO_HP - LesserHeal.HEALING);
+		Assert.assertEquals(priest.getHp(), GameLogic.MAX_HERO_HP - LesserHeal.HEALING);
+		
+		GameAction lesserHeal = priest.getHeroPower().play();
+		lesserHeal.setTarget(priest);
+		context.getLogic().performGameAction(context.getPlayer1(), lesserHeal);
+		Assert.assertEquals(priest.getHp(), GameLogic.MAX_HERO_HP);
+		context.getLogic().performGameAction(context.getPlayer1(), lesserHeal);
+		Assert.assertEquals(priest.getHp(), GameLogic.MAX_HERO_HP);
 	}
 	
 	@Test

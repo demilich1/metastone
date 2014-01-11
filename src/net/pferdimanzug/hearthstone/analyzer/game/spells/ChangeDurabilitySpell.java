@@ -25,7 +25,7 @@ public class ChangeDurabilitySpell implements ISpell {
 		if (hero.getWeapon() == null) {
 			return;
 		}
-		logger.debug("Durability of weapon {} is changed by {}", hero.getWeapon().getName(), durabilityChange);
+		logger.debug("Durability of weapon {} is changed by {}", hero.getWeapon(), durabilityChange);
 		hero.getWeapon().modifyTag(GameTag.DURABILITY, durabilityChange);
 		if (hero.getWeapon().isBroken()) {
 			context.getLogic().destroy(hero.getWeapon());

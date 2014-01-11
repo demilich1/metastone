@@ -6,7 +6,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
 
 public class Battlecry extends GameAction {
 	
-	private final ISpell spell;
+	public static Battlecry createBattlecry(ISpell spell) {
+		return createBattlecry(spell, TargetSelection.NONE);
+	}
 	
 	public static Battlecry createBattlecry(ISpell spell, TargetSelection targetSelection) {
 		Battlecry battlecry = new Battlecry(spell);
@@ -14,9 +16,7 @@ public class Battlecry extends GameAction {
 		return battlecry;
 	}
 	
-	public static Battlecry createBattlecry(ISpell spell) {
-		return createBattlecry(spell, TargetSelection.NONE);
-	}
+	private final ISpell spell;
 
 	protected Battlecry(ISpell spell) {
 		this.spell = spell;

@@ -15,6 +15,7 @@ public class AddSpellTriggerSpell implements ISpell {
 
 	@Override
 	public void cast(GameContext context, Player player, Entity target) {
+		spellTrigger.setOwner(player);
 		target.addSpellTrigger(spellTrigger);
 		context.getEventManager().registerGameEventListener(spellTrigger);
 	}

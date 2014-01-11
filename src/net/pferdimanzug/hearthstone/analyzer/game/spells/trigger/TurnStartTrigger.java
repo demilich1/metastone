@@ -6,22 +6,22 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
 import net.pferdimanzug.hearthstone.analyzer.game.events.IGameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.TurnStartEvent;
 
-public class TurnStartTrigger implements IGameEventTrigger {
-
+public class TurnStartTrigger extends GameEventTrigger {
+	
 	@Override
 	public boolean fire(IGameEvent event, Entity host) {
 		TurnStartEvent turnStartEvent = (TurnStartEvent) event;
-		return turnStartEvent.getPlayer() == host.getOwner();
-	}
-
-	@Override
-	public GameEventType interestedIn() {
-		return GameEventType.TURN_START;
+		return turnStartEvent.getPlayer() == getOwner();
 	}
 
 	@Override
 	public Entity getTarget(GameContext context, Entity host) {
 		return null;
+	}
+
+	@Override
+	public GameEventType interestedIn() {
+		return GameEventType.TURN_START;
 	}
 
 }

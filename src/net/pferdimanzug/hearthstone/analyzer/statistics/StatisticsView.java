@@ -22,6 +22,15 @@ public class StatisticsView {
 		startTime = System.currentTimeMillis();
 	}
 	
+	public void onBatchStop() {
+		logger.info("Games played: {}", gamesPlayed);
+		long duration = System.currentTimeMillis() - startTime;
+		logger.info("Duration: {}ms", duration);
+		for (String name : gamesWon.keySet()) {
+			logger.info("Player " + name + " won " + gamesWon.get(name) + " games");
+		}
+	}
+	
 	public void onGameOver(GameContext context) {
 		gamesPlayed++;
 		registerWinner(context);
@@ -35,15 +44,6 @@ public class StatisticsView {
 		}
 		int amount = gamesWon.get(key);
 		gamesWon.put(key, amount + 1);
-	}
-	
-	public void onBatchStop() {
-		logger.info("Games played: {}", gamesPlayed);
-		long duration = System.currentTimeMillis() - startTime;
-		logger.info("Duration: {}ms", duration);
-		for (String name : gamesWon.keySet()) {
-			logger.info("Player " + name + " won " + gamesWon.get(name) + " games");
-		}
 	}
 
 }

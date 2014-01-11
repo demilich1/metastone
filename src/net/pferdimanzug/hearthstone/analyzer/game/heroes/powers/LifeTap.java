@@ -8,14 +8,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
 
 public class LifeTap extends HeroPower {
 
-	public static final int DAMAGE = 2;
-
-	public LifeTap() {
-		super("Life Tap");
-		setTargetRequirement(TargetSelection.NONE);
-		setSpell(new LifeTapSpell());
-	}
-	
 	private class LifeTapSpell implements ISpell {
 
 		@Override
@@ -24,6 +16,14 @@ public class LifeTap extends HeroPower {
 			context.getLogic().drawCard(player);
 		}
 		
+	}
+
+	public static final int DAMAGE = 2;
+	
+	public LifeTap() {
+		super("Life Tap");
+		setTargetRequirement(TargetSelection.NONE);
+		setSpell(new LifeTapSpell());
 	}
 
 }

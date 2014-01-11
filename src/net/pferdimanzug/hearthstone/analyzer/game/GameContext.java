@@ -20,17 +20,30 @@ public class GameContext {
 
 	private Player activePlayer;
 	private Player winner;
-	public Player getWinner() {
-		return winner;
-	}
-
 	private GameResult result;
-	private int turn;
 
+	private int turn;
 	public GameContext(Player player1, Player player2, IGameLogic logic) {
 		this.player1 = player1;
 		this.player2 = player2;
 		this.logic = logic;
+	}
+
+	private boolean gameDecided() {
+		result = logic.getMatchResult(activePlayer, getOpponent(activePlayer));
+		return result != GameResult.RUNNING;
+	}
+
+	public IGameEventManager getEventManager() {
+		return eventManager;
+	}
+
+	public IGameLogic getLogic() {
+		return logic;
+	}
+
+	public Player getOpponent(Player player) {
+		return player == player1 ? player2 : player1;
 	}
 
 	public Player getPlayer1() {
@@ -41,12 +54,12 @@ public class GameContext {
 		return player2;
 	}
 
-	public IGameLogic getLogic() {
-		return logic;
+	public GameResult getResult() {
+		return result;
 	}
 
-	public Player getOpponent(Player player) {
-		return player == player1 ? player2 : player1;
+	public Player getWinner() {
+		return winner;
 	}
 
 	public void play() {
@@ -81,19 +94,6 @@ public class GameContext {
 		}
 		logic.endTurn(player);
 		activePlayer = getOpponent(player);
-	}
-
-	private boolean gameDecided() {
-		result = logic.getMatchResult(activePlayer, getOpponent(activePlayer));
-		return result != GameResult.RUNNING;
-	}
-
-	public IGameEventManager getEventManager() {
-		return eventManager;
-	}
-
-	public GameResult getResult() {
-		return result;
 	}
 
 }

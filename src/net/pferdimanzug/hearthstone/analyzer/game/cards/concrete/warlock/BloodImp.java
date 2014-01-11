@@ -12,17 +12,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 
 public class BloodImp extends MinionCard {
 
-	public BloodImp() {
-		super("Blood Imp", Rarity.COMMON, HeroClass.WARLOCK, 1);
-	}
-
-	@Override
-	public Minion summon() {
-		Minion bloodImp = createMinion(1, 1, Race.DEMON, GameTag.STEALTHED);
-		bloodImp.setAura(new BloodImpAura(bloodImp));
-		return bloodImp;
-	} 
-	
 	private class BloodImpAura extends Aura {
 
 		public BloodImpAura(Entity source) {
@@ -49,6 +38,17 @@ public class BloodImp extends MinionCard {
 			entity.modifyHpBonus(-1);
 		}
 		
+	}
+
+	public BloodImp() {
+		super("Blood Imp", Rarity.COMMON, HeroClass.WARLOCK, 1);
+	} 
+	
+	@Override
+	public Minion summon() {
+		Minion bloodImp = createMinion(1, 1, Race.DEMON, GameTag.STEALTHED);
+		bloodImp.setAura(new BloodImpAura(bloodImp));
+		return bloodImp;
 	}
 
 }

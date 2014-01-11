@@ -12,13 +12,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.TransformMinionSpell;
 
 public class Hex extends SpellCard {
 
-	public Hex() {
-		super("Hex", Rarity.FREE, HeroClass.SHAMAN, 3);
-		setTargetRequirement(TargetSelection.MINIONS);
-		setSpell(new TransformMinionSpell(new Frog()));
-		
-	}
-	
 	private class Frog extends MinionCard {
 
 		public Frog() {
@@ -30,6 +23,13 @@ public class Hex extends SpellCard {
 		public Minion summon() {
 			return createMinion(0, 1, Race.BEAST, GameTag.TAUNT);
 		}
+		
+	}
+	
+	public Hex() {
+		super("Hex", Rarity.FREE, HeroClass.SHAMAN, 3);
+		setTargetRequirement(TargetSelection.MINIONS);
+		setSpell(new TransformMinionSpell(new Frog()));
 		
 	}
 	

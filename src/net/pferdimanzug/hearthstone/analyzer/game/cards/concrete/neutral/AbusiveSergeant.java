@@ -15,20 +15,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 
 public class AbusiveSergeant extends MinionCard {
 	
-	private static final int ATTACK_BONUS = 2;
-
-	public AbusiveSergeant() {
-		super("Abusive Sergeant", Rarity.COMMON, HeroClass.ANY, 1);
-	}
-
-	@Override
-	public Minion summon() {
-		Minion abusiveSergeant = createMinion(2, 1);
-		Battlecry battlecryAbusive = Battlecry.createBattlecry(new AbusiveSergeantSpell(), TargetSelection.FRIENDLY_MINIONS);
-		abusiveSergeant.setTag(GameTag.BATTLECRY, battlecryAbusive);
-		return abusiveSergeant;
-	}
-	
 	private class AbusiveSergeantSpell extends BuffSpell {
 		
 		public AbusiveSergeantSpell() {
@@ -41,6 +27,20 @@ public class AbusiveSergeant extends MinionCard {
 			
 			context.getEventManager().registerGameEventListener(new TurnEndEventlistener(new BuffSpell(-ATTACK_BONUS, 0), target));
 		}
+	}
+
+	private static final int ATTACK_BONUS = 2;
+
+	public AbusiveSergeant() {
+		super("Abusive Sergeant", Rarity.COMMON, HeroClass.ANY, 1);
+	}
+	
+	@Override
+	public Minion summon() {
+		Minion abusiveSergeant = createMinion(2, 1);
+		Battlecry battlecryAbusive = Battlecry.createBattlecry(new AbusiveSergeantSpell(), TargetSelection.FRIENDLY_MINIONS);
+		abusiveSergeant.setTag(GameTag.BATTLECRY, battlecryAbusive);
+		return abusiveSergeant;
 	}
 	
 

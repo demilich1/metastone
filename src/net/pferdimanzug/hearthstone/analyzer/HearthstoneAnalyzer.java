@@ -40,17 +40,6 @@ public class HearthstoneAnalyzer {
 		
 	}
 	
-	private void printCardsForDatabase() {
-		try {
-			String path = "./src/" + Card.class.getPackage().getName().replace(".", "/") + "/concrete";
-			System.out.println("Path: " + path);
-			DevCheckCardCompleteness.printImplementedCards(path, "cards.add(new %s());");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
 	private void launchDebugGame() {
 		Player player1 = new Player("Human", new Garrosh(), DebugDecks.getRandomDeck(HeroClass.WARRIOR));
 		player1.setBehaviour(new PlayRandomBehaviour(player1));
@@ -61,6 +50,17 @@ public class HearthstoneAnalyzer {
 		logic.setContext(newGame);
 		ApplicationFacade.getInstance().sendNotification(GameNotification.START_GAME, newGame);
 		//ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_STATE_UPDATE, newGame);
+	}
+
+	private void printCardsForDatabase() {
+		try {
+			String path = "./src/" + Card.class.getPackage().getName().replace(".", "/") + "/concrete";
+			System.out.println("Path: " + path);
+			DevCheckCardCompleteness.printImplementedCards(path, "cards.add(new %s());");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }

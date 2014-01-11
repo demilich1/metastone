@@ -55,16 +55,16 @@ public class DevCheckCardCompleteness {
 		System.out.println("There are " + missing + " cards missing");
 	}
 
-	private static String toCanonName(String name) {
-		return name.toLowerCase().replace(".java", "").replace(".png", "").replace("_", "").replace("-", "");
-	}
-	
 	public static void printImplementedCards(String path, String expression) throws IOException {
 		File folder = new File(path);
 		for (File file : FileUtils.listFiles(folder, new String[] { "java" }, true)) {
 			String cardName = file.getName().replace(".java", "");
 			System.out.println(String.format(expression, cardName));
 		}
+	}
+	
+	private static String toCanonName(String name) {
+		return name.toLowerCase().replace(".java", "").replace(".png", "").replace("_", "").replace("-", "");
 	}
 
 }

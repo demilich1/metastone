@@ -320,9 +320,9 @@ public class CardCatalogue {
 		cards.add(new Whirlwind());
 	}
 
-	public static Card getCardByName(String name) {
+	public static Card getCardById(int id) {
 		for (Card card : cards) {
-			if (card.getName().equals(name)) {
+			if (card.getId() == id) {
 				return card.clone();
 			}
 		}
@@ -330,9 +330,9 @@ public class CardCatalogue {
 		return null;
 	}
 	
-	public static Card getCardById(int id) {
+	public static Card getCardByName(String name) {
 		for (Card card : cards) {
-			if (card.getId() == id) {
+			if (card.getName().equals(name)) {
 				return card.clone();
 			}
 		}

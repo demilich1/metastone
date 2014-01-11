@@ -11,12 +11,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
 
 public class Swipe extends SpellCard {
 
-	public Swipe() {
-		super("Swipe", Rarity.FREE, HeroClass.DRUID, 4);
-		setSpell(new SwipeSpell(4, 1));
-		setTargetRequirement(TargetSelection.ENEMY_CHARACTERS);
-	}
-
 	private class SwipeSpell implements ISpell {
 
 		private final int primaryDamage;
@@ -39,6 +33,12 @@ public class Swipe extends SpellCard {
 			context.getLogic().damage(target, damage);
 		}
 
+	}
+
+	public Swipe() {
+		super("Swipe", Rarity.FREE, HeroClass.DRUID, 4);
+		setSpell(new SwipeSpell(4, 1));
+		setTargetRequirement(TargetSelection.ENEMY_CHARACTERS);
 	}
 
 }

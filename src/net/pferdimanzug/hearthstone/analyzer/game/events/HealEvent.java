@@ -19,12 +19,12 @@ public class HealEvent extends GameEvent {
 		return GameEventType.HEAL;
 	}
 
-	public Entity getTarget() {
-		return target;
-	}
-
 	public int getHealing() {
 		return healing;
+	}
+
+	public Entity getTarget() {
+		return target;
 	}
 
 }

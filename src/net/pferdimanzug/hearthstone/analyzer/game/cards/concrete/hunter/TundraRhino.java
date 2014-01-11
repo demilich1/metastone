@@ -12,17 +12,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 
 public class TundraRhino extends MinionCard {
 
-	public TundraRhino() {
-		super("Tundra Rhino", Rarity.FREE, HeroClass.HUNTER, 5);
-	}
-
-	@Override
-	public Minion summon() {
-		Minion tundraRhino = createMinion(2, 5, Race.BEAST);
-		tundraRhino.setAura(new TundraRhinoAura(tundraRhino));
-		return tundraRhino;
-	}
-	
 	private class TundraRhinoAura extends Aura {
 
 		public TundraRhinoAura(Entity source) {
@@ -50,6 +39,17 @@ public class TundraRhino extends MinionCard {
 			entity.removeTag(GameTag.CHARGE);
 		}
 		
+	}
+
+	public TundraRhino() {
+		super("Tundra Rhino", Rarity.FREE, HeroClass.HUNTER, 5);
+	}
+	
+	@Override
+	public Minion summon() {
+		Minion tundraRhino = createMinion(2, 5, Race.BEAST);
+		tundraRhino.setAura(new TundraRhinoAura(tundraRhino));
+		return tundraRhino;
 	}
 
 }

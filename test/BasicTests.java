@@ -21,18 +21,6 @@ import org.testng.annotations.Test;
 
 public class BasicTests extends TestBase {
 	
-	@Test
-	public void testTheCoin() {
-		GameContext context = createContext(new Jaina(), new Garrosh());
-		Player mage = context.getPlayer1();
-		Player warrior = context.getPlayer2();
-		
-		TheCoin theCoin = getTheCoin(mage.getHand());
-		Assert.assertEquals(theCoin, null);
-		theCoin = getTheCoin(warrior.getHand());
-		Assert.assertNotEquals(theCoin, null);
-	}
-	
 	private TheCoin getTheCoin(CardCollection<Card> cards) {
 		for (Card card : cards) {
 			if (card instanceof TheCoin) {
@@ -41,22 +29,54 @@ public class BasicTests extends TestBase {
 		}
 		return null;
 	}
-
+	
 	@Test
-	public void testSummon() {
+	public void testBattlecry() { 
 		GameContext context = createContext(new Jaina(), new Garrosh());
 		Player mage = context.getPlayer1();
-		mage.getHand().removeAll();
-		MinionCard devMonster = new DevMonster(1, 1);
+		mage.setMana(10);
+		Player warrior = context.getPlayer2();
+		warrior.setMana(10);
+
+		DevMonster devMonster = new DevMonster(3, 3);
+		Battlecry testBattlecry = Battlecry.createBattlecry(new SingleTargetDamageSpell(3), TargetSelection.ENEMY_HERO);
+		testBattlecry.setTarget(warrior.getHero());
+		devMonster.getMinion().setTag(GameTag.BATTLECRY, testBattlecry);
 		mage.getHand().add(devMonster);
-		Assert.assertEquals(mage.getHand().getCount(), 1);
 		context.getLogic().performGameAction(mage, devMonster.play());
-		Assert.assertEquals(mage.getHand().isEmpty(), true);
-		Entity minion = getSingleMinion(mage.getMinions());
-		Assert.assertEquals(minion.getName(), devMonster.getName());
-		Assert.assertEquals(minion.getAttack(), 1);
-		Assert.assertEquals(minion.getHp(), 1);
-		Assert.assertEquals(minion.isDead(), false);
+		
+		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - 3);
+	}
+
+	@Test
+	public void testHeroAttack() { 
+		GameContext context = createContext(new Jaina(), new Malfurion());
+		Player mage = context.getPlayer1();
+		mage.setMana(10);
+		Player druid = context.getPlayer2();
+		druid.setMana(10);
+
+		int damage = 1;
+		DevMonster devMonsterCard = new DevMonster(damage, 2);
+		mage.getHand().add(devMonsterCard);
+		context.getLogic().performGameAction(mage, devMonsterCard.play());
+		
+		BuffHeroSpell heroBuffSpell = new BuffHeroSpell(damage, 0);
+		context.getLogic().castSpell(druid, heroBuffSpell, druid.getHero());
+		Entity devMonster = getSingleMinion(mage.getMinions());
+		GameAction minionAttackAction = new PhysicalAttackAction(devMonster);
+		minionAttackAction.setTarget(druid.getHero());
+		context.getLogic().performGameAction(mage, minionAttackAction);
+		// monster attacked; it should not be damaged by the hero
+		Assert.assertEquals(druid.getHero().getHp(), druid.getHero().getMaxHp() - damage);
+		Assert.assertEquals(devMonster.getHp(), devMonster.getMaxHp());
+		
+		GameAction heroAttackAction = new PhysicalAttackAction(druid.getHero());
+		heroAttackAction.setTarget(devMonster);
+		context.getLogic().performGameAction(mage, heroAttackAction);
+		// hero attacked; both entities should be damaged
+		Assert.assertEquals(druid.getHero().getHp(), druid.getHero().getMaxHp() - 2 * damage);
+		Assert.assertEquals(devMonster.getHp(), devMonster.getMaxHp() - damage);
 	}
 
 	@Test
@@ -94,52 +114,32 @@ public class BasicTests extends TestBase {
 	}
 	
 	@Test
-	public void testBattlecry() { 
+	public void testSummon() {
 		GameContext context = createContext(new Jaina(), new Garrosh());
 		Player mage = context.getPlayer1();
-		mage.setMana(10);
-		Player warrior = context.getPlayer2();
-		warrior.setMana(10);
-
-		DevMonster devMonster = new DevMonster(3, 3);
-		Battlecry testBattlecry = Battlecry.createBattlecry(new SingleTargetDamageSpell(3), TargetSelection.ENEMY_HERO);
-		testBattlecry.setTarget(warrior.getHero());
-		devMonster.getMinion().setTag(GameTag.BATTLECRY, testBattlecry);
+		mage.getHand().removeAll();
+		MinionCard devMonster = new DevMonster(1, 1);
 		mage.getHand().add(devMonster);
+		Assert.assertEquals(mage.getHand().getCount(), 1);
 		context.getLogic().performGameAction(mage, devMonster.play());
-		
-		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - 3);
+		Assert.assertEquals(mage.getHand().isEmpty(), true);
+		Entity minion = getSingleMinion(mage.getMinions());
+		Assert.assertEquals(minion.getName(), devMonster.getName());
+		Assert.assertEquals(minion.getAttack(), 1);
+		Assert.assertEquals(minion.getHp(), 1);
+		Assert.assertEquals(minion.isDead(), false);
 	}
 	
 	@Test
-	public void testHeroAttack() { 
-		GameContext context = createContext(new Jaina(), new Malfurion());
+	public void testTheCoin() {
+		GameContext context = createContext(new Jaina(), new Garrosh());
 		Player mage = context.getPlayer1();
-		mage.setMana(10);
-		Player druid = context.getPlayer2();
-		druid.setMana(10);
-
-		int damage = 1;
-		DevMonster devMonsterCard = new DevMonster(damage, 2);
-		mage.getHand().add(devMonsterCard);
-		context.getLogic().performGameAction(mage, devMonsterCard.play());
+		Player warrior = context.getPlayer2();
 		
-		BuffHeroSpell heroBuffSpell = new BuffHeroSpell(damage, 0);
-		context.getLogic().castSpell(druid, heroBuffSpell, druid.getHero());
-		Entity devMonster = getSingleMinion(mage.getMinions());
-		GameAction minionAttackAction = new PhysicalAttackAction(devMonster);
-		minionAttackAction.setTarget(druid.getHero());
-		context.getLogic().performGameAction(mage, minionAttackAction);
-		// monster attacked; it should not be damaged by the hero
-		Assert.assertEquals(druid.getHero().getHp(), druid.getHero().getMaxHp() - damage);
-		Assert.assertEquals(devMonster.getHp(), devMonster.getMaxHp());
-		
-		GameAction heroAttackAction = new PhysicalAttackAction(druid.getHero());
-		heroAttackAction.setTarget(devMonster);
-		context.getLogic().performGameAction(mage, heroAttackAction);
-		// hero attacked; both entities should be damaged
-		Assert.assertEquals(druid.getHero().getHp(), druid.getHero().getMaxHp() - 2 * damage);
-		Assert.assertEquals(devMonster.getHp(), devMonster.getMaxHp() - damage);
+		TheCoin theCoin = getTheCoin(mage.getHand());
+		Assert.assertEquals(theCoin, null);
+		theCoin = getTheCoin(warrior.getHand());
+		Assert.assertNotEquals(theCoin, null);
 	}
 
 }

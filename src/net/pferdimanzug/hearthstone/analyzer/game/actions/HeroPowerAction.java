@@ -11,19 +11,19 @@ public abstract class HeroPowerAction extends PlayCardAction {
 		setActionType(ActionType.HERO_POWER);
 	}
 	
-	private HeroPower getHeroPower() {
-		return (HeroPower) getCard();
-	}
-	
-	@Override
-	public TargetSelection getTargetRequirement() {
-		return getHeroPower().getTargetRequirement();
-	}
-
 	@Override
 	public void execute(GameContext context, Player player) {
 		context.getLogic().useHeroPower(player, getHeroPower());
 		play(context, player);
+	}
+	
+	private HeroPower getHeroPower() {
+		return (HeroPower) getCard();
+	}
+
+	@Override
+	public TargetSelection getTargetRequirement() {
+		return getHeroPower().getTargetRequirement();
 	}
 
 }

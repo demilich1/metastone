@@ -12,12 +12,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
 
 public class Humility extends SpellCard {
 
-	public Humility() {
-		super("Humility", Rarity.FREE, HeroClass.PALADIN, 1);
-		setSpell(new HumilitySpell());
-		setTargetRequirement(TargetSelection.MINIONS);
-	}
-	
 	private class HumilitySpell implements ISpell {
 
 		@Override
@@ -26,6 +20,12 @@ public class Humility extends SpellCard {
 			target.setTag(GameTag.ATTACK_BONUS, 0);
 		}
 		
+	}
+	
+	public Humility() {
+		super("Humility", Rarity.FREE, HeroClass.PALADIN, 1);
+		setSpell(new HumilitySpell());
+		setTargetRequirement(TargetSelection.MINIONS);
 	}
 
 }

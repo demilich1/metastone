@@ -11,24 +11,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
 import net.pferdimanzug.hearthstone.analyzer.game.events.HealEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.IGameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DrawCardSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.IGameEventTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.GameEventTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 
 public class NorthshireCleric extends MinionCard {
 
-	public NorthshireCleric() {
-		super("Northshire Cleric", Rarity.FREE, HeroClass.PRIEST, 1);
-	}
-
-	@Override
-	public Minion summon() {
-		Minion northshireCleric = createMinion(1, 3);
-		SpellTrigger trigger = new SpellTrigger(new NorthshireClericTrigger(), new DrawCardSpell(1));
-		northshireCleric.addSpellTrigger(trigger);
-		return northshireCleric;
-	}
-	
-	private class NorthshireClericTrigger implements IGameEventTrigger {
+	private class NorthshireClericTrigger extends GameEventTrigger {
 
 		@Override
 		public boolean fire(IGameEvent event, Entity host) {
@@ -37,16 +25,28 @@ public class NorthshireCleric extends MinionCard {
 		}
 
 		@Override
-		public GameEventType interestedIn() {
-			return GameEventType.HEAL;
-		}
-
-		@Override
 		public Entity getTarget(GameContext context, Entity host) {
 			return null;
 		}
 
+		@Override
+		public GameEventType interestedIn() {
+			return GameEventType.HEAL;
+		}
+
 				
+	}
+
+	public NorthshireCleric() {
+		super("Northshire Cleric", Rarity.FREE, HeroClass.PRIEST, 1);
+	}
+	
+	@Override
+	public Minion summon() {
+		Minion northshireCleric = createMinion(1, 3);
+		SpellTrigger trigger = new SpellTrigger(new NorthshireClericTrigger(), new DrawCardSpell());
+		northshireCleric.addSpellTrigger(trigger);
+		return northshireCleric;
 	}
 
 }

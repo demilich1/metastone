@@ -20,13 +20,6 @@ public class PlayModeMediator extends Mediator<GameNotification> {
 	}
 
 	@Override
-	public List<GameNotification> listNotificationInterests() {
-		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
-		notificationInterests.add(GameNotification.GAME_STATE_UPDATE);
-		return notificationInterests;
-	}
-	
-	@Override
 	public void handleNotification(INotification<GameNotification> notification) {
 		switch (notification.getId()) {
 		case GAME_STATE_UPDATE:
@@ -35,6 +28,13 @@ public class PlayModeMediator extends Mediator<GameNotification> {
 		default:
 			break;
 		}
+	}
+	
+	@Override
+	public List<GameNotification> listNotificationInterests() {
+		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
+		notificationInterests.add(GameNotification.GAME_STATE_UPDATE);
+		return notificationInterests;
 	}
 
 	

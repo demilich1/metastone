@@ -15,6 +15,11 @@ public class TurnEndEventlistener implements IGameEventListener {
 	}
 
 	@Override
+	public GameEventType interestedIn() {
+		return GameEventType.TURN_END;
+	}
+
+	@Override
 	public void onGameEvent(IGameEvent event) {
 		TurnEndEvent turnEndEvent = (TurnEndEvent) event;
 		if (turnEndEvent.getPlayer() != target.getOwner()) {
@@ -23,11 +28,6 @@ public class TurnEndEventlistener implements IGameEventListener {
 		
 		event.getGameContext().getLogic().castSpell(turnEndEvent.getPlayer(), spell, target);
 		event.getGameContext().getEventManager().removeGameEventListener(this);
-	}
-
-	@Override
-	public GameEventType interestedIn() {
-		return GameEventType.TURN_END;
 	}
 
 }

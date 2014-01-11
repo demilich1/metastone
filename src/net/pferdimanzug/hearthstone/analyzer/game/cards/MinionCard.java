@@ -16,7 +16,9 @@ public abstract class MinionCard extends Card {
 		super(name, CardType.MINION, rarity, classRestriction, manaCost);
 	}
 
-	public abstract Minion summon();
+	protected Minion createMinion(int baseAttack, int baseHp, GameTag... tags) {
+		return createMinion(baseAttack, baseHp, Race.NONE, tags);
+	}
 
 	protected Minion createMinion(int baseAttack, int baseHp, Race race, GameTag... tags) {
 		Minion minion = new Minion(this);
@@ -29,10 +31,6 @@ public abstract class MinionCard extends Card {
 		return minion;
 	}
 	
-	protected Minion createMinion(int baseAttack, int baseHp, GameTag... tags) {
-		return createMinion(baseAttack, baseHp, Race.NONE, tags);
-	}
-
 	@Override
 	public PlayCardAction play() {
 		return new PlayCardAction(this) {
@@ -49,5 +47,7 @@ public abstract class MinionCard extends Card {
 		};
 
 	}
+
+	public abstract Minion summon();
 
 }

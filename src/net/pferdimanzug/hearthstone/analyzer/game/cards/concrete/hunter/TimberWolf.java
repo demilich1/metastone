@@ -12,17 +12,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 
 public class TimberWolf extends MinionCard {
 
-	public TimberWolf() {
-		super("Timber Wolf", Rarity.FREE, HeroClass.HUNTER, 1);
-	}
-
-	@Override
-	public Minion summon() {
-		Minion timberWolf = createMinion(1, 1, Race.BEAST);
-		timberWolf.setAura(new TimberWolfAura(timberWolf));
-		return timberWolf;
-	}
-
 	private class TimberWolfAura extends Aura {
 
 		public TimberWolfAura(Entity source) {
@@ -52,6 +41,17 @@ public class TimberWolf extends MinionCard {
 			entity.modifyTag(GameTag.ATTACK_BONUS, -1);
 		}
 
+	}
+
+	public TimberWolf() {
+		super("Timber Wolf", Rarity.FREE, HeroClass.HUNTER, 1);
+	}
+
+	@Override
+	public Minion summon() {
+		Minion timberWolf = createMinion(1, 1, Race.BEAST);
+		timberWolf.setAura(new TimberWolfAura(timberWolf));
+		return timberWolf;
 	}
 
 }

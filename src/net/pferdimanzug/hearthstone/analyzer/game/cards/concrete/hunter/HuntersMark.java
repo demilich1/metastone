@@ -12,12 +12,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
 
 public class HuntersMark extends SpellCard {
 
-	public HuntersMark() {
-		super("Hunter's Mark", Rarity.FREE, HeroClass.HUNTER, 0);
-		setSpell(new HuntersMarkSpell());
-		setTargetRequirement(TargetSelection.ENEMY_MINIONS);
-	}
-	
 	private class HuntersMarkSpell implements ISpell {
 
 		@Override
@@ -27,6 +21,12 @@ public class HuntersMark extends SpellCard {
 			target.removeTag(GameTag.HP_BONUS);
 		}
 		
+	}
+	
+	public HuntersMark() {
+		super("Hunter's Mark", Rarity.FREE, HeroClass.HUNTER, 0);
+		setSpell(new HuntersMarkSpell());
+		setTargetRequirement(TargetSelection.ENEMY_MINIONS);
 	}
 
 }

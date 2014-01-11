@@ -23,7 +23,7 @@ public class EquipWeaponSpell implements ISpell {
 	@Override
 	public void cast(GameContext context, Player player, Entity target) {
 		Weapon weapon = weaponCard.getWeapon();
-		logger.debug("[{}] equips weapon [{}]", player.getHero().getName(), weapon.getName());
+		logger.debug("{} equips weapon {}", player.getHero(), weapon);
 		player.getHero().setWeapon(weapon);
 		for (SpellTrigger spellTrigger : weapon.getSpellTriggers()) {
 			context.getEventManager().registerGameEventListener(spellTrigger);

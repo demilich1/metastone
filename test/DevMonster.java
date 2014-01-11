@@ -19,11 +19,6 @@ public class DevMonster extends MinionCard {
 		this.minion = createMinion(baseAttack, baseHp, tags);
 	}
 
-	@Override
-	public Minion summon() {
-		return minion;
-	}
-
 	public int getBaseAttack() {
 		return baseAttack;
 	}
@@ -31,8 +26,13 @@ public class DevMonster extends MinionCard {
 	public int getBaseHp() {
 		return baseHp;
 	}
-	
+
 	public Entity getMinion() {
+		return minion;
+	}
+	
+	@Override
+	public Minion summon() {
 		return minion;
 	}
 

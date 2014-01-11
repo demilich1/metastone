@@ -12,21 +12,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 
 public class GurubashiBerserker extends MinionCard {
 	
-	public static final int BASE_ATTACK = 2;
-	public static final int ATTACK_BONUS = 3;
-
-	public GurubashiBerserker() {
-		super("Gurubashi Berserker", Rarity.FREE, HeroClass.ANY, 5);
-	}
-
-	@Override
-	public Minion summon() {
-		Minion gurubashiBerserker = createMinion(BASE_ATTACK, 7);
-		SpellTrigger trigger = new SpellTrigger(new GurubashiBerserkerTrigger(gurubashiBerserker), new BuffSpell(3, 0));
-		gurubashiBerserker.addSpellTrigger(trigger);
-		return gurubashiBerserker;
-	}
-	
 	private class GurubashiBerserkerTrigger extends DamageReceivedTrigger {
 
 		private final Entity target;
@@ -40,6 +25,21 @@ public class GurubashiBerserker extends MinionCard {
 			return target;
 		}		
 		
+	}
+	public static final int BASE_ATTACK = 2;
+
+	public static final int ATTACK_BONUS = 3;
+
+	public GurubashiBerserker() {
+		super("Gurubashi Berserker", Rarity.FREE, HeroClass.ANY, 5);
+	}
+	
+	@Override
+	public Minion summon() {
+		Minion gurubashiBerserker = createMinion(BASE_ATTACK, 7);
+		SpellTrigger trigger = new SpellTrigger(new GurubashiBerserkerTrigger(gurubashiBerserker), new BuffSpell(3, 0));
+		gurubashiBerserker.addSpellTrigger(trigger);
+		return gurubashiBerserker;
 	}
 	
 

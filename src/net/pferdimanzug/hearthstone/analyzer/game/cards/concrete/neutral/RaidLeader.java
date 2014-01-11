@@ -11,17 +11,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
 public class RaidLeader extends MinionCard {
 	
-	public RaidLeader() {
-		super("Raid Leader", Rarity.FREE, HeroClass.ANY, 3);
-	}
-
-	@Override
-	public Minion summon() {
-		Minion raidLeader = createMinion(2, 2);
-		raidLeader.setAura(new RaidLeaderAura(raidLeader));
-		return raidLeader;
-	}
-	
 	private class RaidLeaderAura extends Aura {
 
 		public RaidLeaderAura(Entity source) {
@@ -48,6 +37,17 @@ public class RaidLeader extends MinionCard {
 			entity.modifyTag(GameTag.ATTACK_BONUS, -1);
 		}
 		
+	}
+
+	public RaidLeader() {
+		super("Raid Leader", Rarity.FREE, HeroClass.ANY, 3);
+	}
+	
+	@Override
+	public Minion summon() {
+		Minion raidLeader = createMinion(2, 2);
+		raidLeader.setAura(new RaidLeaderAura(raidLeader));
+		return raidLeader;
 	}
 
 }

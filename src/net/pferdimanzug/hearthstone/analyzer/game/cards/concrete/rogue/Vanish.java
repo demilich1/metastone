@@ -13,12 +13,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.ReturnMinionToHandSpell
 
 public class Vanish extends SpellCard {
 
-	public Vanish() {
-		super("Vanish", Rarity.FREE, HeroClass.ROGUE, 6);
-		setSpell(new VanishSpell());
-		setTargetRequirement(TargetSelection.NONE);
-	}
-	
 	private class VanishSpell extends AreaSpell {
 		
 		//TODO: use a internal helper spell to avoid duplicating
@@ -36,6 +30,12 @@ public class Vanish extends SpellCard {
 			returnSpell.cast(context, player, entity);
 		}
 		
+	}
+	
+	public Vanish() {
+		super("Vanish", Rarity.FREE, HeroClass.ROGUE, 6);
+		setSpell(new VanishSpell());
+		setTargetRequirement(TargetSelection.NONE);
 	}
 
 }

@@ -12,12 +12,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
 
 public class KillCommand extends SpellCard {
 
-	public KillCommand() {
-		super("Kill Command", Rarity.FREE, HeroClass.HUNTER, 3);
-		setSpell(new KillCommandSpell(3, 5));
-		setTargetRequirement(TargetSelection.ANY);
-	}
-	
 	private class KillCommandSpell extends DamageSpell {
 
 		private int beastDamage;
@@ -42,6 +36,12 @@ public class KillCommand extends SpellCard {
 			return false;
 		}
 		
+	}
+	
+	public KillCommand() {
+		super("Kill Command", Rarity.FREE, HeroClass.HUNTER, 3);
+		setSpell(new KillCommandSpell(3, 5));
+		setTargetRequirement(TargetSelection.ANY);
 	}
 
 }

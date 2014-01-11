@@ -15,20 +15,32 @@ public abstract class SpellCard extends Card {
 	private TargetSelection targetRequirement;
 	private EffectHint effectHint;
 
+	protected SpellCard(String name, CardType cardType, Rarity rarity, HeroClass classRestriction, int manaCost) {
+		super(name, cardType, rarity, classRestriction, manaCost);
+	}
+	
 	public SpellCard(String name, Rarity rarity, HeroClass classRestriction, int manaCost) {
 		super(name, CardType.SPELL, rarity, classRestriction, manaCost);
 	}
-	
-	protected SpellCard(String name, CardType cardType, Rarity rarity, HeroClass classRestriction, int manaCost) {
-		super(name, cardType, rarity, classRestriction, manaCost);
+
+	public boolean canBeCast(GameContext context, Player player) {
+		return true;
+	}
+
+	public boolean canBeCastOn(Entity target) {
+		return true;
+	}
+
+	public EffectHint getEffectHint() {
+		return effectHint;
 	}
 
 	public ISpell getSpell() {
 		return spell;
 	}
 
-	public void setSpell(ISpell spell) {
-		this.spell = spell;
+	public TargetSelection getTargetRequirement() {
+		return targetRequirement;
 	}
 
 	@Override
@@ -47,28 +59,16 @@ public abstract class SpellCard extends Card {
 		};
 	}
 
-	public TargetSelection getTargetRequirement() {
-		return targetRequirement;
-	}
-
-	public void setTargetRequirement(TargetSelection targetRequirement) {
-		this.targetRequirement = targetRequirement;
-	}
-
-	public EffectHint getEffectHint() {
-		return effectHint;
-	}
-
 	public void setEffectHint(EffectHint effectHint) {
 		this.effectHint = effectHint;
 	}
 	
-	public boolean canBeCast(GameContext context, Player player) {
-		return true;
+	public void setSpell(ISpell spell) {
+		this.spell = spell;
 	}
 	
-	public boolean canBeCastOn(Entity target) {
-		return true;
+	public void setTargetRequirement(TargetSelection targetRequirement) {
+		this.targetRequirement = targetRequirement;
 	}
 
 }

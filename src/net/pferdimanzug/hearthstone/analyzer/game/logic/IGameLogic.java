@@ -12,31 +12,31 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
 
 public interface IGameLogic {
 	
-	public Player determineBeginner(Player... players);
-	public void init(Player player, boolean begins);
-	public void drawCard(Player player);
-	public void receiveCard(Player player, Card card);
-	public void performGameAction(Player player, GameAction action);
-	
 	public boolean canPlayCard(Player player, Card card);
-	
-	public List<GameAction> getValidActions(Player player);
-	public List<Entity> getValidTargets(Player player, GameAction action);
-	
-	public void useHeroPower(Player player, HeroPower power);
-	public void playCard(Player player, Card card);
 	public void castSpell(Player player, ISpell spell, Entity target);
 	public void damage(Entity target, int damage);
-	public void heal(Entity target, int healing);
 	public void destroy(Entity target);
+	public Player determineBeginner(Player... players);
 	
-	public void modifyCurrentMana(Player player, int mana);
+	public void drawCard(Player player);
 	
-	public void summon(Player player, Minion minion, Entity nextTo);
+	public void endTurn(Player player);
 	public void fight(Entity attacker, Entity defender);
 	
 	public GameResult getMatchResult(Player player, Player oppenent);
+	public List<GameAction> getValidActions(Player player);
+	public List<Entity> getValidTargets(Player player, GameAction action);
+	public void heal(Entity target, int healing);
+	public void init(Player player, boolean begins);
+	public void modifyCurrentMana(Player player, int mana);
+	
+	public void performGameAction(Player player, GameAction action);
+	
+	public void playCard(Player player, Card card);
+	public void receiveCard(Player player, Card card);
 	
 	public void startTurn(Player player);
-	public void endTurn(Player player);
+	
+	public void summon(Player player, Minion minion, Entity nextTo);
+	public void useHeroPower(Player player, HeroPower power);
 }

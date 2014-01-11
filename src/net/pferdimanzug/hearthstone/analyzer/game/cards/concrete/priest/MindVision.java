@@ -13,12 +13,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
 public class MindVision extends SpellCard {
 	
 
-	public MindVision() {
-		super("Mind Vision", Rarity.FREE, HeroClass.PRIEST, 1);
-		setSpell(new CopyCardSpell());
-		setTargetRequirement(TargetSelection.NONE);
-	}
-	
 	private class CopyCardSpell implements ISpell {
 
 		@Override
@@ -31,6 +25,12 @@ public class MindVision extends SpellCard {
 			player.getHand().add(clone);
 		}
 		
+	}
+	
+	public MindVision() {
+		super("Mind Vision", Rarity.FREE, HeroClass.PRIEST, 1);
+		setSpell(new CopyCardSpell());
+		setTargetRequirement(TargetSelection.NONE);
 	}
 
 }

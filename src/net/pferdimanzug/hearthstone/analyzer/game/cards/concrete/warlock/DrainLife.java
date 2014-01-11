@@ -11,14 +11,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.SingleTargetDamageSpell
 
 public class DrainLife extends SpellCard {
 
-	public DrainLife() {
-		super("Drain Life", Rarity.FREE, HeroClass.WARLOCK, 3);
-		setSpell(new DrainLifeSpell(2));
-		//TODO: can this be cast on own hero?
-		setTargetRequirement(TargetSelection.ANY);
-		
-	}
-	
 	private class DrainLifeSpell extends SingleTargetDamageSpell {
 
 		public DrainLifeSpell(int damage) {
@@ -30,6 +22,14 @@ public class DrainLife extends SpellCard {
 			super.cast(context, player, target);
 			context.getLogic().heal(player.getHero(), getDamage());
 		}
+		
+	}
+	
+	public DrainLife() {
+		super("Drain Life", Rarity.FREE, HeroClass.WARLOCK, 3);
+		setSpell(new DrainLifeSpell(2));
+		//TODO: can this be cast on own hero?
+		setTargetRequirement(TargetSelection.ANY);
 		
 	}
 

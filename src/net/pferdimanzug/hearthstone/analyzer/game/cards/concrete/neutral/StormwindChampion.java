@@ -11,17 +11,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
 public class StormwindChampion extends MinionCard {
 
-	public StormwindChampion() {
-		super("Stormwind Champion", Rarity.FREE, HeroClass.ANY, 7);
-	}
-
-	@Override
-	public Minion summon() {
-		Minion stormwindChampion = createMinion(6, 6);
-		stormwindChampion.setAura(new StormwindChampionAura(stormwindChampion));
-		return stormwindChampion;
-	}
-
 	private class StormwindChampionAura extends Aura {
 
 		public StormwindChampionAura(Entity source) {
@@ -50,6 +39,17 @@ public class StormwindChampion extends MinionCard {
 			entity.modifyHpBonus(-1);
 		}
 
+	}
+
+	public StormwindChampion() {
+		super("Stormwind Champion", Rarity.FREE, HeroClass.ANY, 7);
+	}
+
+	@Override
+	public Minion summon() {
+		Minion stormwindChampion = createMinion(6, 6);
+		stormwindChampion.setAura(new StormwindChampionAura(stormwindChampion));
+		return stormwindChampion;
 	}
 
 }

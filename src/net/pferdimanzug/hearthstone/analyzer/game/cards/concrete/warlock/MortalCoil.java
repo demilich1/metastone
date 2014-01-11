@@ -11,12 +11,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.SingleTargetDamageSpell
 
 public class MortalCoil extends SpellCard {
 
-	public MortalCoil() {
-		super("Mortal Coil", Rarity.FREE, HeroClass.WARLOCK, 1);
-		setSpell(new MortalCoilSpell());
-		setTargetRequirement(TargetSelection.MINIONS);
-	}
-	
 	private class MortalCoilSpell extends SingleTargetDamageSpell {
 
 		public MortalCoilSpell() {
@@ -31,6 +25,12 @@ public class MortalCoil extends SpellCard {
 			}
 		}
 		
+	}
+	
+	public MortalCoil() {
+		super("Mortal Coil", Rarity.FREE, HeroClass.WARLOCK, 1);
+		setSpell(new MortalCoilSpell());
+		setTargetRequirement(TargetSelection.MINIONS);
 	}
 
 }

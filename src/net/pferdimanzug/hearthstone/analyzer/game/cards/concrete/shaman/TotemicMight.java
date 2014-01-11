@@ -12,12 +12,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.AreaSpell;
 
 public class TotemicMight extends SpellCard {
 
-	public TotemicMight() {
-		super("Totemic Might", Rarity.FREE, HeroClass.SHAMAN, 0);
-		setSpell(new TotemicMightSpell());
-		setTargetRequirement(TargetSelection.NONE);
-	}
-
 	private class TotemicMightSpell extends AreaSpell {
 
 		public TotemicMightSpell() {
@@ -33,6 +27,12 @@ public class TotemicMight extends SpellCard {
 			minion.modifyHpBonus(+2);
 		}
 
+	}
+
+	public TotemicMight() {
+		super("Totemic Might", Rarity.FREE, HeroClass.SHAMAN, 0);
+		setSpell(new TotemicMightSpell());
+		setTargetRequirement(TargetSelection.NONE);
 	}
 
 }

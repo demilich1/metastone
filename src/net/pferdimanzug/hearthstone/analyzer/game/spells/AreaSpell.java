@@ -11,24 +11,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public abstract class AreaSpell implements ISpell {
 	
-	private TargetSelection targetSelection;
-
-	public AreaSpell(TargetSelection targetSelection) {
-		this.targetSelection = targetSelection;
-	}
-
-	@Override
-	public void cast(GameContext context, Player player, Entity target) {
-		GameAction dummyTargetAction = new DummyTargetAction(targetSelection);
-		
-		List<Entity> targets = context.getLogic().getValidTargets(player, dummyTargetAction);
-		for (Entity entity : targets) {
-			forEachTarget(context, player, entity);
-		}
-	}
-	
-	protected abstract void forEachTarget(GameContext context, Player player, Entity entity);
-	
 	private class DummyTargetAction extends GameAction {
 		
 		public DummyTargetAction(TargetSelection targetRequirement) {
@@ -42,5 +24,23 @@ public abstract class AreaSpell implements ISpell {
 		}
 		
 	}
+
+	private TargetSelection targetSelection;
+
+	public AreaSpell(TargetSelection targetSelection) {
+		this.targetSelection = targetSelection;
+	}
+	
+	@Override
+	public void cast(GameContext context, Player player, Entity target) {
+		GameAction dummyTargetAction = new DummyTargetAction(targetSelection);
+		
+		List<Entity> targets = context.getLogic().getValidTargets(player, dummyTargetAction);
+		for (Entity entity : targets) {
+			forEachTarget(context, player, entity);
+		}
+	}
+	
+	protected abstract void forEachTarget(GameContext context, Player player, Entity entity);
 
 }

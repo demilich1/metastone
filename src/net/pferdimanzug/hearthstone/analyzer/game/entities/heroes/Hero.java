@@ -19,19 +19,10 @@ public abstract class Hero extends Entity {
 		this.heroPower = heroPower;
 	}
 
-	public HeroClass getHeroClass() {
-		return heroClass;
+	public int getArmor() {
+		return getTagValue(GameTag.ARMOR);
 	}
 
-	public HeroPower getHeroPower() {
-		return heroPower;
-	}
-	
-	@Override
-	public EntityType getEntityType() {
-		return EntityType.HERO;
-	}
-	
 	@Override
 	public int getAttack() {
 		int attack = super.getAttack();
@@ -41,18 +32,27 @@ public abstract class Hero extends Entity {
 		return attack;
 	}
 	
-	public int getArmor() {
-		return getTagValue(GameTag.ARMOR);
+	@Override
+	public EntityType getEntityType() {
+		return EntityType.HERO;
+	}
+	
+	public HeroClass getHeroClass() {
+		return heroClass;
+	}
+	
+	public HeroPower getHeroPower() {
+		return heroPower;
+	}
+
+	public Weapon getWeapon() {
+		return weapon;
 	}
 
 	public void modifyArmor(int armor) {
 		// armor cannot fall below zero
 		int newArmor = Math.max(getArmor() + armor, 0);
 		setTag(GameTag.ARMOR, newArmor);
-	}
-
-	public Weapon getWeapon() {
-		return weapon;
 	}
 
 	public void setWeapon(Weapon weapon) {

@@ -15,17 +15,17 @@ public class PhysicalAttackEvent extends GameEvent {
 		this.defender = defender;
 	}
 
-	@Override
-	public GameEventType getEventType() {
-		return GameEventType.PHYSICAL_ATTACK;
-	}
-
 	public Entity getAttacker() {
 		return attacker;
 	}
 
 	public Entity getDefender() {
 		return defender;
+	}
+
+	@Override
+	public GameEventType getEventType() {
+		return GameEventType.PHYSICAL_ATTACK;
 	}
 
 }

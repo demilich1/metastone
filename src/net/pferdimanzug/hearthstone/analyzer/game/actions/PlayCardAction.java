@@ -15,18 +15,6 @@ public abstract class PlayCardAction extends GameAction {
 	}
 
 	@Override
-	public void execute(GameContext context, Player player) {
-		context.getLogic().playCard(player, getCard());
-		play(context, player);
-	}
-	
-	protected abstract void play(GameContext context, Player player);
-
-	public Card getCard() {
-		return card;
-	}
-
-	@Override
 	public boolean canBeExecutedOn(Entity entity) {
 		if (card instanceof SpellCard) {
 			SpellCard spellCard = (SpellCard) card;
@@ -34,6 +22,18 @@ public abstract class PlayCardAction extends GameAction {
 		}
 		return true;
 	}
+	
+	@Override
+	public void execute(GameContext context, Player player) {
+		context.getLogic().playCard(player, getCard());
+		play(context, player);
+	}
+
+	public Card getCard() {
+		return card;
+	}
+
+	protected abstract void play(GameContext context, Player player);
 	
 	
 

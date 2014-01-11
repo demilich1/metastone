@@ -15,18 +15,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
 
 public class BloodsailRaider extends MinionCard {
 
-	public BloodsailRaider() {
-		super("Bloodsail Raider", Rarity.COMMON, HeroClass.ANY, 2);
-	}
-
-	@Override
-	public Minion summon() {
-		Minion bloodsailRaider = createMinion(2, 3, Race.PIRATE);
-		Battlecry battlecry = Battlecry.createBattlecry(new CopyWeaponAttack(bloodsailRaider));
-		bloodsailRaider.setTag(GameTag.BATTLECRY, battlecry);
-		return bloodsailRaider;
-	}
-	
 	private class CopyWeaponAttack implements ISpell {
 		
 		private Entity self;
@@ -44,6 +32,18 @@ public class BloodsailRaider extends MinionCard {
 		}
 		
 		
+	}
+
+	public BloodsailRaider() {
+		super("Bloodsail Raider", Rarity.COMMON, HeroClass.ANY, 2);
+	}
+	
+	@Override
+	public Minion summon() {
+		Minion bloodsailRaider = createMinion(2, 3, Race.PIRATE);
+		Battlecry battlecry = Battlecry.createBattlecry(new CopyWeaponAttack(bloodsailRaider));
+		bloodsailRaider.setTag(GameTag.BATTLECRY, battlecry);
+		return bloodsailRaider;
 	}
 	
 	

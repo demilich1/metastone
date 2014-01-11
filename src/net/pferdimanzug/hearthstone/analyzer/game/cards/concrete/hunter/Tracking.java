@@ -15,12 +15,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
 
 public class Tracking extends SpellCard {
 
-	public Tracking() {
-		super("Tracking", Rarity.FREE, HeroClass.HUNTER, 1);
-		setSpell(new TrackingSpell());
-		setTargetRequirement(TargetSelection.NONE);
-	}
-	
 	// Tracking description:
 	// "Look at the top three cards of your deck.
 	// Draw one and discard the others."
@@ -45,6 +39,12 @@ public class Tracking extends SpellCard {
 			}
 		}
 		
+	}
+	
+	public Tracking() {
+		super("Tracking", Rarity.FREE, HeroClass.HUNTER, 1);
+		setSpell(new TrackingSpell());
+		setTargetRequirement(TargetSelection.NONE);
 	}
 	
 	

@@ -13,13 +13,13 @@ public class Minion extends Entity {
 		super(sourceCard);
 	}
 	
+	public Aura getAura() {
+		return aura;
+	}
+
 	@Override
 	public EntityType getEntityType() {
 		return EntityType.MINION;
-	}
-
-	public Aura getAura() {
-		return aura;
 	}
 
 	public void setAura(Aura aura) {

@@ -13,7 +13,7 @@ public class ReturnMinionToHandSpell implements ISpell {
 
 	@Override
 	public void cast(GameContext context, Player player, Entity minion) {
-		logger.debug("[{}] is returned to {}'s hand", minion.getName(), player.getName());
+		logger.debug("{} is returned to {}'s hand", minion, player.getName());
 		player.getMinions().remove(minion);
 		context.getLogic().receiveCard(player, minion.getSourceCard());
 	}

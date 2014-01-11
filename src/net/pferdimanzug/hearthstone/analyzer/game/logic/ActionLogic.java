@@ -17,11 +17,12 @@ public class ActionLogic {
 
 	private final TargetLogic targetLogic = new TargetLogic();
 
-	public List<GameAction> getValidActions(GameContext context, Player player) {
-		List<GameAction> validActions = new ArrayList<GameAction>();
-		validActions.addAll(getPhysicalAttackActions(context, player));
-		validActions.addAll(getPlayCardActions(context, player));
-		return validActions;
+	private GameAction getHeroAttackAction(GameContext context, Player player) {
+		Hero hero = player.getHero();
+		if (!hero.canAttackThisTurn()) {
+			return null;
+		}
+		return new PhysicalAttackAction(hero);
 	}
 
 	private GameAction getHeroPowerAction(GameContext context, Player player) {
@@ -30,14 +31,6 @@ public class ActionLogic {
 			return null;
 		}
 		return hero.getHeroPower().play();
-	}
-
-	private GameAction getHeroAttackAction(GameContext context, Player player) {
-		Hero hero = player.getHero();
-		if (!hero.canAttackThisTurn()) {
-			return null;
-		}
-		return new PhysicalAttackAction(hero);
 	}
 
 	private List<GameAction> getPhysicalAttackActions(GameContext context, Player player) {
@@ -57,7 +50,7 @@ public class ActionLogic {
 		}
 		return physicalAttackActions;
 	}
-	
+
 	private List<GameAction> getPlayCardActions(GameContext context, Player player) {
 		List<GameAction> playCardActions = new ArrayList<GameAction>();
 		GameAction heroPowerAction = getHeroPowerAction(context, player);
@@ -76,6 +69,13 @@ public class ActionLogic {
 			
 		}
 		return playCardActions;
+	}
+	
+	public List<GameAction> getValidActions(GameContext context, Player player) {
+		List<GameAction> validActions = new ArrayList<GameAction>();
+		validActions.addAll(getPhysicalAttackActions(context, player));
+		validActions.addAll(getPlayCardActions(context, player));
+		return validActions;
 	}
 
 	private boolean validateAction(GameContext context, Player player, GameAction action) {

@@ -22,7 +22,7 @@ public class BuffSpell implements ISpell {
 	
 	@Override
 	public void cast(GameContext context, Player player, Entity target) {
-		logger.debug("{} gains ({})", target.getName(), attackBonus + "/" + hpBonus);
+		logger.debug("{} gains ({})", target, attackBonus + "/" + hpBonus);
 		if (attackBonus != 0) {
 			target.modifyTag(GameTag.ATTACK_BONUS, +attackBonus);
 		}
@@ -35,12 +35,12 @@ public class BuffSpell implements ISpell {
 		return attackBonus;
 	}
 
-	public void setAttackBonus(int attackBonus) {
-		this.attackBonus = attackBonus;
-	}
-
 	public int getHpBonus() {
 		return hpBonus;
+	}
+
+	public void setAttackBonus(int attackBonus) {
+		this.attackBonus = attackBonus;
 	}
 
 	public void setHpBonus(int hpBonus) {

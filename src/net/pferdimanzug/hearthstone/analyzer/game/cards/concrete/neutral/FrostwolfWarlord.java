@@ -14,18 +14,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 
 public class FrostwolfWarlord extends MinionCard {
 
-	public FrostwolfWarlord() {
-		super("Frostwolf Warlord", Rarity.FREE, HeroClass.ANY, 5);
-	}
-
-	@Override
-	public Minion summon() {
-		Minion frostwolfWarlord = createMinion(4, 4);
-		Battlecry battlecry = Battlecry.createBattlecry(new BuffLeadership(), TargetSelection.SELF);
-		frostwolfWarlord.setTag(GameTag.BATTLECRY, battlecry);
-		return frostwolfWarlord;
-	}
-
 	private class BuffLeadership extends BuffSpell {
 		
 		public BuffLeadership() {
@@ -40,6 +28,18 @@ public class FrostwolfWarlord extends MinionCard {
 			super.cast(context, player, target);
 		}
 
+	}
+
+	public FrostwolfWarlord() {
+		super("Frostwolf Warlord", Rarity.FREE, HeroClass.ANY, 5);
+	}
+
+	@Override
+	public Minion summon() {
+		Minion frostwolfWarlord = createMinion(4, 4);
+		Battlecry battlecry = Battlecry.createBattlecry(new BuffLeadership(), TargetSelection.SELF);
+		frostwolfWarlord.setTag(GameTag.BATTLECRY, battlecry);
+		return frostwolfWarlord;
 	}
 
 }

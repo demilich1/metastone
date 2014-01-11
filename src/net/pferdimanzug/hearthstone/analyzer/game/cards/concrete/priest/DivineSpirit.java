@@ -11,12 +11,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
 
 public class DivineSpirit extends SpellCard {
 
-	public DivineSpirit() {
-		super("Divine Spirit", Rarity.FREE, HeroClass.PRIEST, 2);
-		setSpell(new DivineSpiritSpell());
-		setTargetRequirement(TargetSelection.MINIONS);
-	}
-	
 	private class DivineSpiritSpell implements ISpell {
 
 		@Override
@@ -25,6 +19,12 @@ public class DivineSpirit extends SpellCard {
 			target.modifyHpBonus(hpBonus);
 		}
 		
+	}
+	
+	public DivineSpirit() {
+		super("Divine Spirit", Rarity.FREE, HeroClass.PRIEST, 2);
+		setSpell(new DivineSpiritSpell());
+		setTargetRequirement(TargetSelection.MINIONS);
 	}
 
 }

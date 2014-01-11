@@ -14,22 +14,22 @@ public class DiscardCardSpell implements ISpell {
 	
 	private final int numberOfCards;
 
-	public DiscardCardSpell(int numberOfCards) {
-		this.numberOfCards = numberOfCards;
-	}
-	
 	public DiscardCardSpell() {
 		this(1);
+	}
+	
+	public DiscardCardSpell(int numberOfCards) {
+		this.numberOfCards = numberOfCards;
 	}
 
 	@Override
 	public void cast(GameContext context, Player player, Entity target) {
-		logger.debug("{} discards {} cards", player.getName(), numberOfCards);
 		for (int i = 0; i < numberOfCards; i++) {
 			Card randomHandCard = player.getHand().getRandom();
 			if (randomHandCard == null) {
 				return;
 			}
+			logger.debug("{} discards {}", player.getName(), randomHandCard);
 			player.getHand().remove(randomHandCard);
 		}
 		

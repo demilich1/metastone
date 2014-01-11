@@ -25,11 +25,11 @@ public class BuffHeroSpell implements ISpell {
 	public void cast(GameContext context, Player player, Entity target) {
 		Hero hero = player.getHero();
 		if (attackBonus != 0) {
-			logger.debug("{} gains {} attack", hero.getName(), attackBonus);
+			logger.debug("{} gains {} attack", hero, attackBonus);
 			hero.modifyTag(GameTag.ATTACK_BONUS, +attackBonus);
 		}
 		if (armorBonus != 0) {
-			logger.debug("{} gains {} armor", hero.getName(), armorBonus);
+			logger.debug("{} gains {} armor", hero, armorBonus);
 			hero.modifyArmor(+armorBonus);
 		}
 	}

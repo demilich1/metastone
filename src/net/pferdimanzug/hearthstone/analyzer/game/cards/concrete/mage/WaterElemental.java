@@ -9,15 +9,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
 public class WaterElemental extends MinionCard {
 
-	public WaterElemental() {
-		super("Water Elemental", Rarity.FREE, HeroClass.MAGE, 4);
-	}
-
-	@Override
-	public Minion summon() {
-		return new WaterElementalMinion(this);
-	}
-
 	private class WaterElementalMinion extends Minion {
 
 		public WaterElementalMinion(MinionCard sourceCard) {
@@ -30,6 +21,15 @@ public class WaterElemental extends MinionCard {
 			target.setTag(GameTag.FROZEN);
 		}
 
+	}
+
+	public WaterElemental() {
+		super("Water Elemental", Rarity.FREE, HeroClass.MAGE, 4);
+	}
+
+	@Override
+	public Minion summon() {
+		return new WaterElementalMinion(this);
 	}
 
 }

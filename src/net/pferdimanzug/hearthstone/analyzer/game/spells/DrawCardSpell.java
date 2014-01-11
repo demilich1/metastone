@@ -8,12 +8,12 @@ public class DrawCardSpell implements ISpell {
 	
 	private int numberOfCards;
 
-	public DrawCardSpell(int numberOfCards) {
-		this.numberOfCards = numberOfCards;
-	}
-	
 	public DrawCardSpell() {
 		this(1);
+	}
+	
+	public DrawCardSpell(int numberOfCards) {
+		this.numberOfCards = numberOfCards;
 	}
 
 	@Override

@@ -81,22 +81,9 @@ public class PlayModePanel extends JPanel {
 		p2Panel.add(p2MinionPanel, "cell 0 2,grow");
 	}
 	
-	public void update(GameContext context) {
-		updatePlayerStatus(p1HeroLabel, p1HpLabel, p1ManaLabel, context.getPlayer1());
-		updatePlayerStatus(p2HeroLabel, p2HpLabel, p2ManaLabel, context.getPlayer2());
-		updateHandCardView(p1HandCardPanel, context.getPlayer1());
-		updateHandCardView(p2HandCardPanel, context.getPlayer2());
-		updateMinionView(p1MinionPanel, context.getPlayer1());
-		updateMinionView(p2MinionPanel, context.getPlayer2());
-		revalidate();
-		repaint();
-	}
-	
-	private void updateMinionView(JPanel panel, Player player) {
-		panel.removeAll();
-		for (Minion minion : player.getMinions()) {
-			panel.add(createMinionCard(minion));
-		}
+	private JComponent createHandCard(Card card) {
+		JButton cardButton = new JButton(card.getName());
+		return cardButton;
 	}
 	
 	private JPanel createMinionCard(Minion minion) {
@@ -114,19 +101,6 @@ public class PlayModePanel extends JPanel {
 		bottomPanel.add(hpLabel);
 		panel.add(bottomPanel, BorderLayout.SOUTH);
 		return panel;
-	}
-	
-	private void updateHandCardView(JPanel panel, Player player) {
-		panel.removeAll();
-		for (Card card : player.getHand()) {
-			panel.add(createHandCard(card));
-		}
-	}
-	
-	private void updatePlayerStatus(JLabel iconLabel, JLabel hpLabel, JLabel manaLabel, Player player) {
-		iconLabel.setIcon(getIcon(player.getHero()));
-		hpLabel.setText("Hp: " + player.getHero().getHp() + "/" + player.getHero().getMaxHp());
-		manaLabel.setText("Mana: " + player.getMana() + "/" + player.getMaxMana());
 	}
 	
 	private Icon getIcon(Hero hero) {
@@ -167,8 +141,34 @@ public class PlayModePanel extends JPanel {
 		return new ImageIcon(PlayModePanel.class.getResource("/net/pferdimanzug/hearthstone/analyzer/resources/img/heroes/" + iconName + ".png"));
 	}
 	
-	private JComponent createHandCard(Card card) {
-		JButton cardButton = new JButton(card.getName());
-		return cardButton;
+	public void update(GameContext context) {
+		updatePlayerStatus(p1HeroLabel, p1HpLabel, p1ManaLabel, context.getPlayer1());
+		updatePlayerStatus(p2HeroLabel, p2HpLabel, p2ManaLabel, context.getPlayer2());
+		updateHandCardView(p1HandCardPanel, context.getPlayer1());
+		updateHandCardView(p2HandCardPanel, context.getPlayer2());
+		updateMinionView(p1MinionPanel, context.getPlayer1());
+		updateMinionView(p2MinionPanel, context.getPlayer2());
+		revalidate();
+		repaint();
+	}
+	
+	private void updateHandCardView(JPanel panel, Player player) {
+		panel.removeAll();
+		for (Card card : player.getHand()) {
+			panel.add(createHandCard(card));
+		}
+	}
+	
+	private void updateMinionView(JPanel panel, Player player) {
+		panel.removeAll();
+		for (Minion minion : player.getMinions()) {
+			panel.add(createMinionCard(minion));
+		}
+	}
+	
+	private void updatePlayerStatus(JLabel iconLabel, JLabel hpLabel, JLabel manaLabel, Player player) {
+		iconLabel.setIcon(getIcon(player.getHero()));
+		hpLabel.setText("Hp: " + player.getHero().getHp() + "/" + player.getHero().getMaxHp());
+		manaLabel.setText("Mana: " + player.getMana() + "/" + player.getMaxMana());
 	}
 }

@@ -35,18 +35,10 @@ public class Player {
 		hero.setOwner(this);
 	}
 	
-	public Hero getHero() {
-		return hero;
+	public IBehaviour getBehaviour() {
+		return behaviour;
 	}
 
-	public String getName() {
-		return "'" + name + "' (" + hero.getName() + ")";
-	}
-
-	public List<Minion> getMinions() {
-		return minions;
-	}
-	
 	public List<Entity> getCharacters() {
 		List<Entity> characters = new ArrayList<Entity>();
 		characters.add(getHero());
@@ -57,37 +49,45 @@ public class Player {
 	public CardCollection<Card> getDeck() {
 		return deck;
 	}
+	
+	public CardCollection<Card> getGraveyard() {
+		return graveyard;
+	}
 
 	public CardCollection<Card> getHand() {
 		return hand;
 	}
 
-	public CardCollection<Card> getGraveyard() {
-		return graveyard;
+	public Hero getHero() {
+		return hero;
 	}
-	
+
 	public int getMana() {
 		return mana;
+	}
+	
+	public int getMaxMana() {
+		return maxMana;
+	}
+
+	public List<Minion> getMinions() {
+		return minions;
+	}
+
+	public String getName() {
+		return "'" + name + "' (" + hero.getName() + ")";
+	}
+
+	public void setBehaviour(IBehaviour behaviour) {
+		this.behaviour = behaviour;
 	}
 
 	public void setMana(int mana) {
 		this.mana = mana;
 	}
 
-	public int getMaxMana() {
-		return maxMana;
-	}
-
 	public void setMaxMana(int maxMana) {
 		this.maxMana = maxMana;
-	}
-
-	public IBehaviour getBehaviour() {
-		return behaviour;
-	}
-
-	public void setBehaviour(IBehaviour behaviour) {
-		this.behaviour = behaviour;
 	}
 	
 }

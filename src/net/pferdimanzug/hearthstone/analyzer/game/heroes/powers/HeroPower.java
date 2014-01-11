@@ -22,10 +22,6 @@ public abstract class HeroPower extends SpellCard {
 		return used;
 	}
 
-	public void setUsed(boolean used) {
-		this.used = used;
-	}
-	
 	@Override
 	public PlayCardAction play() {
 		return new HeroPowerAction(this) {
@@ -40,6 +36,10 @@ public abstract class HeroPower extends SpellCard {
 				context.getLogic().castSpell(player, getSpell(), getTarget());
 			}
 		};
+	}
+	
+	public void setUsed(boolean used) {
+		this.used = used;
 	}
 	
 

@@ -13,23 +13,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
 
 public class Bloodlust extends SpellCard {
 
-	public Bloodlust() {
-		super("Bloodlust", Rarity.FREE, HeroClass.SHAMAN, 5);
-		setSpell(new BloodlustSpell());
-		setTargetRequirement(TargetSelection.NONE);
-	}
-	
 	private class BloodlustSpell implements ISpell {
 		
-		private static final int ATTACK_BONUS = 3;
-
-		@Override
-		public void cast(GameContext context, Player player, Entity target) {
-			for (Entity minion : player.getMinions()) {
-				minion.modifyTag(GameTag.ATTACK_BONUS, +ATTACK_BONUS);
-				context.getEventManager().registerGameEventListener(new TurnEndEventlistener(new EndBloodlustSpell(), minion));
-			}
-		}
 		private class EndBloodlustSpell implements ISpell {
 
 			@Override
@@ -38,7 +23,22 @@ public class Bloodlust extends SpellCard {
 			}
 			
 		}
+
+		private static final int ATTACK_BONUS = 3;
+		@Override
+		public void cast(GameContext context, Player player, Entity target) {
+			for (Entity minion : player.getMinions()) {
+				minion.modifyTag(GameTag.ATTACK_BONUS, +ATTACK_BONUS);
+				context.getEventManager().registerGameEventListener(new TurnEndEventlistener(new EndBloodlustSpell(), minion));
+			}
+		}
 		
+	}
+	
+	public Bloodlust() {
+		super("Bloodlust", Rarity.FREE, HeroClass.SHAMAN, 5);
+		setSpell(new BloodlustSpell());
+		setTargetRequirement(TargetSelection.NONE);
 	}
 
 }

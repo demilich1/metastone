@@ -22,36 +22,6 @@ public abstract class Card implements Cloneable {
 		this.manaCost = manaCost;
 	}
 	
-	public abstract PlayCardAction play();
-	
-	public int getManaCost() {
-		return manaCost;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public CardType getCardType() {
-		return cardType;
-	}
-
-	public Rarity getRarity() {
-		return rarity;
-	}
-
-	public HeroClass getClassRestriction() {
-		return classRestriction;
-	}
-
-	public boolean isCollectible() {
-		return collectible;
-	}
-
-	public void setCollectible(boolean collectible) {
-		this.collectible = collectible;
-	}
-	
 	@Override
 	public Card clone() {
 		try {
@@ -61,14 +31,44 @@ public abstract class Card implements Cloneable {
 		}
 		return null;
 	}
+	
+	public CardType getCardType() {
+		return cardType;
+	}
+
+	public HeroClass getClassRestriction() {
+		return classRestriction;
+	}
 
 	public int getId() {
 		return id;
 	}
+
+	public int getManaCost() {
+		return manaCost;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Rarity getRarity() {
+		return rarity;
+	}
+
+	public boolean isCollectible() {
+		return collectible;
+	}
+	
+	public abstract PlayCardAction play();
+
+	public void setCollectible(boolean collectible) {
+		this.collectible = collectible;
+	}
 	
 	@Override
 	public String toString() {
-		return String.format("[%s]", name);
+		return String.format("[%s '%s' Manacost:%d]", getCardType(), getName(), getManaCost());
 	}
 
 }

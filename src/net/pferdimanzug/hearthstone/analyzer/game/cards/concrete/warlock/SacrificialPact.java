@@ -12,17 +12,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroySpell;
 
 public class SacrificialPact extends SpellCard {
 
-	public SacrificialPact() {
-		super("Sacrificial Pact", Rarity.FREE, HeroClass.WARLOCK, 0);
-		setSpell(new SacrificialPactSpell());
-		setTargetRequirement(TargetSelection.ANY);
-	}
-	
-	@Override
-	public boolean canBeCastOn(Entity target) {
-		return target.getRace() == Race.DEMON;
-	}
-
 	private class SacrificialPactSpell extends DestroySpell {
 
 		@Override
@@ -31,6 +20,17 @@ public class SacrificialPact extends SpellCard {
 			context.getLogic().heal(player.getHero(), 5);
 		}
 		
+	}
+	
+	public SacrificialPact() {
+		super("Sacrificial Pact", Rarity.FREE, HeroClass.WARLOCK, 0);
+		setSpell(new SacrificialPactSpell());
+		setTargetRequirement(TargetSelection.ANY);
+	}
+
+	@Override
+	public boolean canBeCastOn(Entity target) {
+		return target.getRace() == Race.DEMON;
 	}
 	
 	

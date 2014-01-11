@@ -18,17 +18,17 @@ public abstract class Aura {
 		affectedEntities.add(entity);
 		onApply(entity);
 	}
-	protected abstract void onApply(Entity entity);
 	public void effectRemove(Entity entity) {
 		for (Entity affectedEntity : affectedEntities) {
 			onRemove(affectedEntity);
 		}
 	}
-	
-	protected abstract void onRemove(Entity entity);
-
 	public Entity getSource() {
 		return source;
 	}
+	
+	protected abstract void onApply(Entity entity);
+
+	protected abstract void onRemove(Entity entity);
 
 }

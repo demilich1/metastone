@@ -14,29 +14,25 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
 public class TargetLogic {
 
-	// Blue post:
-	// Heroes and minions can attack any opposing character, be it minion or
-	// hero.
-	// Friendly minions cannot attack each other, but may target each other with
-	// Battlecry effects as long as the ability does not specify friendly or
-	// opposing.
-	// http://www.blizzposts.com/topic/en/216948/the-consistency-of-rules
-	public List<Entity> getValidTargets(GameContext context, Player player, GameAction action) {
-		TargetSelection targetRequirement = action.getTargetRequirement();
-		ActionType actionType = action.getActionType();
-		Player opponent = context.getOpponent(player);
-
-		// if there is a minion with TAUNT and the action is of type basic
-		// attack only allow corresponding minions as targets
-		if (actionType == ActionType.PHYSICAL_ATTACK
-				&& (targetRequirement == TargetSelection.ENEMY_CHARACTERS || targetRequirement == TargetSelection.ENEMY_MINIONS)
-				&& containsTaunters(opponent.getMinions())) {
-			return getTaunters(opponent.getMinions());
+	private boolean containsTaunters(List<Minion> minions) {
+		for (Entity entity : minions) {
+			if (entity.hasTag(GameTag.TAUNT)) {
+				return true;
+			}
 		}
-		List<Entity> potentialTargets = getEntities(context, player, action.getTargetRequirement()); 
-		return filterTargets(action, potentialTargets);
+		return false;
 	}
 
+	private List<Entity> filterTargets(GameAction action, List<Entity> potentialTargets) {
+		List<Entity> validTargets = new ArrayList<>();
+		for (Entity entity : potentialTargets) {
+			if (action.canBeExecutedOn(entity)) {
+				validTargets.add(entity);
+			}
+		}
+		return validTargets;
+	}
+	
 	private List<Entity> getEntities(GameContext context, Player player, TargetSelection targetRequirement) {
 		Player opponent = context.getOpponent(player);
 		List<Entity> entities = new ArrayList<>();
@@ -60,25 +56,6 @@ public class TargetLogic {
 		}
 		return entities;
 	}
-	
-	private List<Entity> filterTargets(GameAction action, List<Entity> potentialTargets) {
-		List<Entity> validTargets = new ArrayList<>();
-		for (Entity entity : potentialTargets) {
-			if (action.canBeExecutedOn(entity)) {
-				validTargets.add(entity);
-			}
-		}
-		return validTargets;
-	}
-
-	private boolean containsTaunters(List<Minion> minions) {
-		for (Entity entity : minions) {
-			if (entity.hasTag(GameTag.TAUNT)) {
-				return true;
-			}
-		}
-		return false;
-	}
 
 	private List<Entity> getTaunters(List<Minion> entities) {
 		List<Entity> taunters = new ArrayList<Entity>();
@@ -88,6 +65,29 @@ public class TargetLogic {
 			}
 		}
 		return taunters;
+	}
+
+	// Blue post:
+	// Heroes and minions can attack any opposing character, be it minion or
+	// hero.
+	// Friendly minions cannot attack each other, but may target each other with
+	// Battlecry effects as long as the ability does not specify friendly or
+	// opposing.
+	// http://www.blizzposts.com/topic/en/216948/the-consistency-of-rules
+	public List<Entity> getValidTargets(GameContext context, Player player, GameAction action) {
+		TargetSelection targetRequirement = action.getTargetRequirement();
+		ActionType actionType = action.getActionType();
+		Player opponent = context.getOpponent(player);
+
+		// if there is a minion with TAUNT and the action is of type basic
+		// attack only allow corresponding minions as targets
+		if (actionType == ActionType.PHYSICAL_ATTACK
+				&& (targetRequirement == TargetSelection.ENEMY_CHARACTERS || targetRequirement == TargetSelection.ENEMY_MINIONS)
+				&& containsTaunters(opponent.getMinions())) {
+			return getTaunters(opponent.getMinions());
+		}
+		List<Entity> potentialTargets = getEntities(context, player, action.getTargetRequirement()); 
+		return filterTargets(action, potentialTargets);
 	}
 
 }

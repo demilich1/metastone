@@ -22,7 +22,7 @@ public class AreaApplyTagSpell extends AreaSpell {
 
 	@Override
 	protected void forEachTarget(GameContext context, Player player, Entity entity) {
-		logger.debug("Applying tag {} to {}", tag, entity.getName());
+		logger.debug("Applying tag {} to {}", tag, entity);
 		entity.setTag(tag);
 	}
 

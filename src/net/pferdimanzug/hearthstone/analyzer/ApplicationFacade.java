@@ -14,14 +14,14 @@ public class ApplicationFacade extends Facade<GameNotification> {
 		return instance;
 	}
 
-	public void startUp(HearthstoneAnalyzer main) {
-		sendNotification(GameNotification.APPLICATION_STARTUP);
-	}
-
 	public ApplicationFacade() {
 		registerCommand(GameNotification.APPLICATION_STARTUP, new ApplicationStartupCommand());
 		registerCommand(GameNotification.START_GAME, new StartGameCommand());
 		
+	}
+
+	public void startUp(HearthstoneAnalyzer main) {
+		sendNotification(GameNotification.APPLICATION_STARTUP);
 	}
 
 

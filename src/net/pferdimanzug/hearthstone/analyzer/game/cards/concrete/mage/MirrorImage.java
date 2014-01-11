@@ -11,12 +11,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
 
 public class MirrorImage extends SpellCard {
 
-	public MirrorImage() {
-		super("Mirror Image", Rarity.FREE, HeroClass.MAGE, 1);
-		setSpell(new SummonSpell(new MirrorImageMinionCard(), new MirrorImageMinionCard()));
-		setTargetRequirement(TargetSelection.NONE);
-	}
-	
 	private class MirrorImageMinionCard extends MinionCard {
 
 		public MirrorImageMinionCard() {
@@ -28,6 +22,12 @@ public class MirrorImage extends SpellCard {
 			return createMinion(0, 2, GameTag.TAUNT);
 		}
 		
+	}
+	
+	public MirrorImage() {
+		super("Mirror Image", Rarity.FREE, HeroClass.MAGE, 1);
+		setSpell(new SummonSpell(new MirrorImageMinionCard(), new MirrorImageMinionCard()));
+		setTargetRequirement(TargetSelection.NONE);
 	}
 
 }

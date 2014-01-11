@@ -14,11 +14,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonRandomSpell;
 
 public class AnimalCompanion extends SpellCard {
 
-	public AnimalCompanion() {
-		super("Animal Companion", Rarity.FREE, HeroClass.HUNTER, 3);
-		setSpell(new SummonRandomSpell(new Huffer(), new Misha(), new Leokk()));
-	}
-
 	private class Huffer extends MinionCard {
 
 		public Huffer() {
@@ -32,21 +27,7 @@ public class AnimalCompanion extends SpellCard {
 		}
 		
 	}
-	
-	private class Misha extends MinionCard {
 
-		public Misha() {
-			super("Misha", Rarity.FREE, HeroClass.HUNTER, 3);
-			setCollectible(false);
-		}
-
-		@Override
-		public Minion summon() {
-			return createMinion(4, 4, Race.BEAST, GameTag.TAUNT);
-		}
-		
-	}
-	
 	private class Leokk extends MinionCard {
 
 		public Leokk() {
@@ -89,6 +70,25 @@ public class AnimalCompanion extends SpellCard {
 			entity.modifyTag(GameTag.ATTACK_BONUS, -1);
 		}
 
+	}
+	
+	private class Misha extends MinionCard {
+
+		public Misha() {
+			super("Misha", Rarity.FREE, HeroClass.HUNTER, 3);
+			setCollectible(false);
+		}
+
+		@Override
+		public Minion summon() {
+			return createMinion(4, 4, Race.BEAST, GameTag.TAUNT);
+		}
+		
+	}
+	
+	public AnimalCompanion() {
+		super("Animal Companion", Rarity.FREE, HeroClass.HUNTER, 3);
+		setSpell(new SummonRandomSpell(new Huffer(), new Misha(), new Leokk()));
 	}
 
 }
