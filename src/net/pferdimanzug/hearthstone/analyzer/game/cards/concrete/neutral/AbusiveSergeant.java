@@ -1,34 +1,21 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
-import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.events.TurnEndEventlistener;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.AddSpellTriggerSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnEndTrigger;
 
 public class AbusiveSergeant extends MinionCard {
 	
-	private class AbusiveSergeantSpell extends BuffSpell {
-		
-		public AbusiveSergeantSpell() {
-			super(ATTACK_BONUS, 0);
-		}
-
-		@Override
-		public void cast(GameContext context, Player player, Entity target) {
-			super.cast(context, player, target);
-			
-			context.getEventManager().registerGameEventListener(new TurnEndEventlistener(new BuffSpell(-ATTACK_BONUS, 0), target));
-		}
-	}
-
 	private static final int ATTACK_BONUS = 2;
 
 	public AbusiveSergeant() {
@@ -38,7 +25,9 @@ public class AbusiveSergeant extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion abusiveSergeant = createMinion(2, 1);
-		Battlecry battlecryAbusive = Battlecry.createBattlecry(new AbusiveSergeantSpell(), TargetSelection.FRIENDLY_MINIONS);
+		SpellTrigger endBuffTrigger = new SpellTrigger(new TurnEndTrigger(), new BuffSpell(-ATTACK_BONUS, 0));
+		ISpell battlecrySpell = new MetaSpell(new BuffSpell(+ATTACK_BONUS, 0), new AddSpellTriggerSpell(endBuffTrigger));
+		Battlecry battlecryAbusive = Battlecry.createBattlecry(battlecrySpell, TargetSelection.FRIENDLY_MINIONS);
 		abusiveSergeant.setTag(GameTag.BATTLECRY, battlecryAbusive);
 		return abusiveSergeant;
 	}

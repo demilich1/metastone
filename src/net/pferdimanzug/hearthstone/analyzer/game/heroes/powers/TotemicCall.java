@@ -27,7 +27,7 @@ public class TotemicCall extends HeroPower {
 
 		@Override
 		public Minion summon() {
-			Minion healingTotem = createMinion(0, 3, Race.TOTEM);
+			Minion healingTotem = createMinion(0, 2, Race.TOTEM);
 			//TODO: implement healing
 			return healingTotem;
 		}
@@ -110,19 +110,11 @@ public class TotemicCall extends HeroPower {
 			wrathOfAirTotem.setTag(GameTag.SPELL_POWER, 1);
 			return wrathOfAirTotem;
 		}
-
-		
 	}
 	
-	
-	
 	private final static String HEALING_TOTEM_NAME = "Healing Totem";
-
-
 	private final static String STONECLAW_TOTEM_NAME = "Stoneclaw Totem";
-
 	private final static String WRATH_OF_AIR_TOTEM_NAME = "Wrath of Air Totem";
-
 	private final static String SEARING_TOTEM_NAME = "Searing Totem";
 
 	public TotemicCall() {

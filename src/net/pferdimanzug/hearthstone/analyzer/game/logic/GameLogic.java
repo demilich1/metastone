@@ -314,7 +314,7 @@ public class GameLogic implements IGameLogic {
 	public void playCard(Player player, Card card) {
 		modifyCurrentMana(player, -card.getManaCost());
 		logger.debug("{} plays {}", player.getName(), card);
-		logger.debug("{} is now at {} mana", player.getName(), player.getMana() + "/" + player.getMaxMana());
+		//logger.debug("{} is now at {} mana", player.getName(), player.getMana() + "/" + player.getMaxMana());
 		player.getHand().remove(card);
 		player.getGraveyard().add(card);
 		player.getHero().modifyTag(GameTag.COMBO, +1);
@@ -354,9 +354,9 @@ public class GameLogic implements IGameLogic {
 			player.setMaxMana(player.getMaxMana() + 1);
 		}
 		player.setMana(player.getMaxMana());
+		logger.debug("{} starts his turn with {} mana", player.getName(), player.getMana() + "/" + player.getMaxMana());
 		player.getHero().getHeroPower().setUsed(false);
 		refreshAttacksPerRound(player.getHero());
-		logger.debug(player.getName() + " is at " + player.getMana() + "/" + player.getMaxMana() + " mana");
 		drawCard(player);
 		for (Entity minion : player.getMinions()) {
 			refreshAttacksPerRound(minion);

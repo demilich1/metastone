@@ -1,10 +1,7 @@
-- NUMBER_OF_ATTACKS does not work correctly, for example when a summoned minion receives CHARGE or is FROZEN
 - adjacent auras are not implemented
 - summon to a specific spot is not implemented
 - spellpower mechanic not implemented
-- combo mechanic not implemented
 - overload mechanic not implemented
 
 Class specific:
 - Rockbiter is not implemented correctly (lasts forever)
-- Corruption fires too early(?)

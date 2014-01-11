@@ -43,7 +43,7 @@ public class HearthstoneAnalyzer {
 	private void launchDebugGame() {
 		Player player1 = new Player("Human", new Garrosh(), DebugDecks.getRandomDeck(HeroClass.WARRIOR));
 		player1.setBehaviour(new PlayRandomBehaviour(player1));
-		Player player2 = new Player("Bot", new Guldan(), DebugDecks.getRandomDeck(HeroClass.WARLOCK));
+		Player player2 = new Player("Bot", new Thrall(), DebugDecks.getRandomDeck(HeroClass.SHAMAN));
 		player2.setBehaviour(new PlayRandomBehaviour(player2));
 		GameLogic logic = new GameLogic();
 		GameContext newGame = new GameContext(player1, player2, logic);
