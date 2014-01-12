@@ -100,6 +100,11 @@ public class GameLogic implements IGameLogic {
 	}
 	
 	private void damageMinion(Entity minion, int damage) {
+		if (minion.hasTag(GameTag.DIVINE_SHIELD)) {
+			minion.removeTag(GameTag.DIVINE_SHIELD);
+			logger.debug("{}'s DIVINE SHIELD absorbs the damage", minion);
+			return;
+		}
 		logger.debug("{} is damaged for {}", minion, damage);
 		minion.setHp(minion.getHp() - damage);
 		context.getEventManager().fireGameEvent(new DamageEvent(context, minion, damage));

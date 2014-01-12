@@ -14,6 +14,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Anduin;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -88,8 +89,45 @@ public class AdvancedMechanicTests extends BasicTests {
 				return null;
 			}
 		});
+		Entity testSubject = getSingleMinion(mage.getMinions());
+		Assert.assertEquals(testSubject.getAttack(), baseAttack);
+		context.getLogic().performGameAction(mage, abusiveSergeant.play());
+		Assert.assertEquals(testSubject.getAttack(), baseAttack + AbusiveSergeant.ATTACK_BONUS);
+		context.getLogic().endTurn(mage);
+		Assert.assertEquals(testSubject.getAttack(), baseAttack);
+	}
+	
+	@Test
+	public void testDivineShield() {
+		GameContext context = createContext(new Jaina(), new Garrosh());
+		Player mage = context.getPlayer1();
+		mage.setMana(10);
+		Player warrior = context.getPlayer2();
+		warrior.setMana(10);
+
+		MinionCard minionCard1 = new DevMonster(2, 2, GameTag.DIVINE_SHIELD);
+		mage.getHand().add(minionCard1);
+		context.getLogic().performGameAction(mage, minionCard1.play());
 		
-		//TODO: continue
+		MinionCard minionCard2 = new DevMonster(5, 5);
+		mage.getHand().add(minionCard2);
+		context.getLogic().performGameAction(warrior, minionCard2.play());
+		
+		Entity attacker = getSingleMinion(mage.getMinions());
+		Entity defender = getSingleMinion(warrior.getMinions());
+		
+		GameAction attackAction = new PhysicalAttackAction(attacker);
+		attackAction.setTarget(defender);
+		
+		context.getLogic().performGameAction(mage, attackAction);
+		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp());
+		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - attacker.getAttack());
+		Assert.assertEquals(attacker.isDead(), false);
+		
+		context.getLogic().performGameAction(mage, attackAction);
+		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp() - defender.getAttack());
+		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - attacker.getAttack() * 2);
+		Assert.assertEquals(attacker.isDead(), true);
 	}
 
 }

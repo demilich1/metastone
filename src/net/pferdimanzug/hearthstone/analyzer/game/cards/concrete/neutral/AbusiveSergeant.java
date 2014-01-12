@@ -16,7 +16,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class AbusiveSergeant extends MinionCard {
 	
-	private static final int ATTACK_BONUS = 2;
+	public static final int ATTACK_BONUS = 2;
 
 	public AbusiveSergeant() {
 		super("Abusive Sergeant", Rarity.COMMON, HeroClass.ANY, 1);
