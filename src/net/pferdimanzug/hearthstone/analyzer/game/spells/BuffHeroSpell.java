@@ -9,7 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class BuffHeroSpell implements ISpell {
+public class BuffHeroSpell extends Spell {
 
 	private static Logger logger = LoggerFactory.getLogger(BuffHeroSpell.class);
 
@@ -22,7 +22,7 @@ public class BuffHeroSpell implements ISpell {
 	}
 
 	@Override
-	public void cast(GameContext context, Player player, Entity target) {
+	protected void onCast(GameContext context, Player player, Entity target) {
 		Hero hero = player.getHero();
 		if (attackBonus != 0) {
 			logger.debug("{} gains {} attack", hero, attackBonus);

@@ -3,6 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.actions;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.CardType;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
@@ -16,7 +17,7 @@ public abstract class PlayCardAction extends GameAction {
 
 	@Override
 	public boolean canBeExecutedOn(Entity entity) {
-		if (card instanceof SpellCard) {
+		if (card.getCardType() == CardType.SPELL) {
 			SpellCard spellCard = (SpellCard) card;
 			return spellCard.canBeCastOn(entity);
 		}

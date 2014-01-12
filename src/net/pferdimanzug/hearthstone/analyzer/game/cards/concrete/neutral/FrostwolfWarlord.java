@@ -4,13 +4,13 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class FrostwolfWarlord extends MinionCard {
 
@@ -21,11 +21,11 @@ public class FrostwolfWarlord extends MinionCard {
 		}
 
 		@Override
-		public void cast(GameContext context, Player player, Entity target) {
+		protected void onCast(GameContext context, Player player, Entity target) {
 			int minionCount = player.getMinions().size();
 			setAttackBonus(minionCount);
 			setHpBonus(minionCount);
-			super.cast(context, player, target);
+			super.onCast(context, player, target);
 		}
 
 	}

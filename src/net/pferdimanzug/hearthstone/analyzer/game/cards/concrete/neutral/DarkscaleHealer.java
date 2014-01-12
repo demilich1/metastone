@@ -2,12 +2,12 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.AreaHealingSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.HealingSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetKey;
 
 public class DarkscaleHealer extends MinionCard {
 
@@ -18,7 +18,8 @@ public class DarkscaleHealer extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion darkscaleHealer = createMinion(4, 5);
-		Battlecry battlecry = Battlecry.createBattlecry(new AreaHealingSpell(2, TargetSelection.FRIENDLY_CHARACTERS));
+		Battlecry battlecry = Battlecry.createBattlecry(new HealingSpell(2));
+		battlecry.setTargetKey(TargetKey.FRIENDLY_CHARACTERS);
 		darkscaleHealer.setTag(GameTag.BATTLECRY, battlecry);
 		return darkscaleHealer;
 	}

@@ -11,26 +11,25 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class BloodsailRaider extends MinionCard {
 
-	private class CopyWeaponAttack implements ISpell {
+	private class CopyWeaponAttack extends BuffSpell {
 		
-		private Entity self;
-
-		public CopyWeaponAttack(Entity self) {
-			this.self = self;
+		public CopyWeaponAttack() {
+			super(0, 0);
 		}
-		
+
 		@Override
-		public void cast(GameContext context, Player player, Entity target) {
+		protected void onCast(GameContext context, Player player, Entity target) {
 			Weapon weapon = player.getHero().getWeapon();
 			if (weapon != null) {
-				self.modifyTag(GameTag.ATTACK_BONUS, +weapon.getWeaponDamage());
+				setAttackBonus(weapon.getWeaponDamage());
 			}
+			super.onCast(context, player, target);
 		}
-		
 		
 	}
 
@@ -41,7 +40,7 @@ public class BloodsailRaider extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion bloodsailRaider = createMinion(2, 3, Race.PIRATE);
-		Battlecry battlecry = Battlecry.createBattlecry(new CopyWeaponAttack(bloodsailRaider));
+		Battlecry battlecry = Battlecry.createBattlecry(new CopyWeaponAttack(), TargetSelection.SELF);
 		bloodsailRaider.setTag(GameTag.BATTLECRY, battlecry);
 		return bloodsailRaider;
 	}

@@ -3,6 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.actions;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.HeroPower;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public abstract class HeroPowerAction extends PlayCardAction {
 

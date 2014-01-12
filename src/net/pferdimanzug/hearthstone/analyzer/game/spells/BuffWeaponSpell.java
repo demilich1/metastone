@@ -9,7 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class BuffWeaponSpell implements ISpell {
+public class BuffWeaponSpell extends Spell {
 
 	private static Logger logger = LoggerFactory.getLogger(BuffWeaponSpell.class);
 
@@ -26,7 +26,7 @@ public class BuffWeaponSpell implements ISpell {
 	}
 
 	@Override
-	public void cast(GameContext context, Player player, Entity target) {
+	protected void onCast(GameContext context, Player player, Entity target) {
 		Weapon weapon = player.getHero().getWeapon();
 		logger.debug("{} gains ({})", weapon, damageBonus + "/" + durabilityBonus);
 		if (damageBonus != 0) {

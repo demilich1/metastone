@@ -7,12 +7,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
-public class ReturnMinionToHandSpell implements ISpell {
+public class ReturnMinionToHandSpell extends Spell {
 	
 	private static Logger logger = LoggerFactory.getLogger(ReturnMinionToHandSpell.class);
 
 	@Override
-	public void cast(GameContext context, Player player, Entity minion) {
+	protected void onCast(GameContext context, Player player, Entity minion) {
 		logger.debug("{} is returned to {}'s hand", minion, player.getName());
 		player.getMinions().remove(minion);
 		context.getLogic().receiveCard(player, minion.getSourceCard());

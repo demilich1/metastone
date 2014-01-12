@@ -4,7 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
-public class DrawCardSpell implements ISpell {
+public class DrawCardSpell extends Spell {
 	
 	private int numberOfCards;
 
@@ -17,7 +17,7 @@ public class DrawCardSpell implements ISpell {
 	}
 
 	@Override
-	public void cast(GameContext context, Player player, Entity target) {
+	protected void onCast(GameContext context, Player player, Entity target) {
 		for (int i = 0; i < numberOfCards; i++) {
 			context.getLogic().drawCard(player);
 		}

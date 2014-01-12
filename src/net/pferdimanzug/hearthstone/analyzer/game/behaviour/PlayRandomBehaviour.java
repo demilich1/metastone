@@ -7,6 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetKey;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +53,7 @@ public class PlayRandomBehaviour implements IBehaviour {
 		
 		int randomIndex = ThreadLocalRandom.current().nextInt(validTargets.size());
 		Entity randomTarget = validTargets.get(randomIndex);
-		action.setTarget(randomTarget);
+		action.setTargetKey(TargetKey.pointTo(randomTarget));
 	}
 
 }

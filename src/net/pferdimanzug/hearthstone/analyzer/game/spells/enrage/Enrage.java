@@ -4,9 +4,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 
-public class Enrage implements ISpell {
+public class Enrage extends Spell {
 	
 	private final int attackBonus;
 
@@ -15,7 +15,7 @@ public class Enrage implements ISpell {
 	}
 
 	@Override
-	public void cast(GameContext context, Player player, Entity target) {
+	protected void onCast(GameContext context, Player player, Entity target) {
 		int attackModifier = target.hasTag(GameTag.ENRAGED) ? +attackBonus : -attackBonus;
 		target.modifyTag(GameTag.ATTACK_BONUS, attackModifier);
 	}

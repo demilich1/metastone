@@ -2,21 +2,21 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class MindVision extends SpellCard {
 	
 
-	private class CopyCardSpell implements ISpell {
+	private class CopyCardSpell extends Spell {
 
 		@Override
-		public void cast(GameContext context, Player player, Entity target) {
+		protected void onCast(GameContext context, Player player, Entity target) {
 			Card randomCard = context.getOpponent(player).getHand().getRandom();
 			if (randomCard == null) {
 				return;

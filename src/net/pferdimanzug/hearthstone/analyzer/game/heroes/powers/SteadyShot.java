@@ -1,7 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.heroes.powers;
 
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.SingleTargetDamageSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class SteadyShot extends HeroPower {
 
@@ -10,7 +10,7 @@ public class SteadyShot extends HeroPower {
 	public SteadyShot() {
 		super("Steady Shot");
 		setTargetRequirement(TargetSelection.ENEMY_HERO);
-		setSpell(new SingleTargetDamageSpell(DAMAGE));
+		setSpell(new DamageSpell(DAMAGE));
 	}
 
 }

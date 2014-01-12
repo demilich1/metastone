@@ -5,21 +5,18 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
 import net.pferdimanzug.hearthstone.analyzer.game.events.IGameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.IGameEventListener;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetKey;
 
-public class SpellTrigger implements IGameEventListener {
-	
+public class SpellTrigger implements IGameEventListener, Cloneable {
+
 	private final GameEventTrigger trigger;
-	private final ISpell spell;
-	private Entity host;
+	private final Spell spell;
+	private TargetKey hostKey;
 
-	public SpellTrigger(GameEventTrigger trigger, ISpell spell) {
+	public SpellTrigger(GameEventTrigger trigger, Spell spell) {
 		this.trigger = trigger;
 		this.spell = spell;
-	}
-
-	public Entity getHost() {
-		return host;
 	}
 
 	@Override
@@ -29,14 +26,17 @@ public class SpellTrigger implements IGameEventListener {
 
 	@Override
 	public void onGameEvent(IGameEvent event) {
+		Entity host = event.getGameContext().resolveSingleTarget(getOwner(), hostKey);
 		if (trigger.fire(event, host)) {
-			Entity target = trigger.getTarget(event.getGameContext(), host);
-			event.getGameContext().getLogic().castSpell(host.getOwner(), spell, target);
+			if (!spell.hasPredefinedTarget()) {
+				spell.setTarget(hostKey);
+			}
+			event.getGameContext().getLogic().castSpell(trigger.getOwner(), spell);
 		}
 	}
 
 	public void setHost(Entity host) {
-		this.host = host;
+		this.hostKey = TargetKey.pointTo(host);
 	}
 
 	public Player getOwner() {
@@ -45,6 +45,15 @@ public class SpellTrigger implements IGameEventListener {
 
 	public void setOwner(Player owner) {
 		trigger.setOwner(owner);
+	}
+	
+	public SpellTrigger clone() {
+		try {
+			return (SpellTrigger) super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

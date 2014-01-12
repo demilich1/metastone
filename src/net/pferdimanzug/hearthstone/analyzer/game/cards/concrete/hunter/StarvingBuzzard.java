@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
@@ -25,11 +24,6 @@ public class StarvingBuzzard extends MinionCard {
 				return false;
 			}
 			return summonEvent.getMinion().getRace() == Race.BEAST;
-		}
-
-		@Override
-		public Entity getTarget(GameContext context, Entity host) {
-			return null;
 		}
 
 		@Override

@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.logic;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -8,7 +9,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardType;
@@ -26,8 +26,11 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.SummonEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.TurnEndEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.TurnStartEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.HeroPower;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.IdFactory;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetKey;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,6 +47,7 @@ public class GameLogic implements IGameLogic {
 
 	private final TargetLogic targetLogic = new TargetLogic();
 	private final ActionLogic actionLogic = new ActionLogic();
+	private final IdFactory idFactory = new IdFactory();
 	private GameContext context;
 
 	@Override
@@ -68,8 +72,8 @@ public class GameLogic implements IGameLogic {
 	}
 
 	@Override
-	public void castSpell(Player player, ISpell spell, Entity target) {
-		spell.cast(context, player, target);
+	public void castSpell(Player player, Spell spell) {
+		spell.cast(context, player, targetLogic.resolveTargetKey(context, player, spell.getTarget()));
 	}
 
 	@Override
@@ -99,9 +103,7 @@ public class GameLogic implements IGameLogic {
 		logger.debug("{} is damaged for {}", minion, damage);
 		minion.setHp(minion.getHp() - damage);
 		context.getEventManager().fireGameEvent(new DamageEvent(context, minion, damage));
-		if (minion.isDead()) {
-			destroyMinion((Entity) minion);
-		} else if (minion.hasTag(GameTag.ENRAGE_SPELL)){
+		if (minion.hasTag(GameTag.ENRAGE_SPELL)){
 			handleEnrage(minion);
 		}
 	}
@@ -126,7 +128,7 @@ public class GameLogic implements IGameLogic {
 	}
 	
 	private void destroyMinion(Entity minion) {
-		logger.debug("{} is destroyed", minion.toString());
+		logger.debug("{} is destroyed", minion);
 		minion.getOwner().getMinions().remove(minion);
 		for (SpellTrigger spellTrigger : minion.getSpellTriggers()) {
 			context.getEventManager().removeGameEventListener(spellTrigger);
@@ -221,8 +223,8 @@ public class GameLogic implements IGameLogic {
 			entity.removeTag(GameTag.ENRAGED);
 		}
 		
-		ISpell enrageSpell = (ISpell) entity.getTag(GameTag.ENRAGE_SPELL);
-		enrageSpell.cast(context, entity.getOwner(), entity);
+		Spell enrageSpell = (Spell) entity.getTag(GameTag.ENRAGE_SPELL);
+		enrageSpell.cast(context, entity.getOwner(), toList(entity));
 	}
 	
 	@Override
@@ -251,7 +253,7 @@ public class GameLogic implements IGameLogic {
 	private void healMinion(Entity minion, int healing) {
 		int newHp = Math.min(minion.getMaxHp(), minion.getHp() + healing);
 		if (logger.isDebugEnabled()) {
-			logger.debug(minion + " is healed for " + healing + ", hp now: " + minion.getHp() + "/" + minion.getMaxHp());	
+			logger.debug(minion + " is healed for " + healing + ", hp now: " + newHp + "/" + minion.getMaxHp());	
 		}
 		
 		minion.setHp(newHp);
@@ -262,6 +264,7 @@ public class GameLogic implements IGameLogic {
 
 	@Override
 	public void init(Player player, boolean begins) {
+		player.getHero().setId(idFactory.generateId());
 		player.getHero().setMaxHp(MAX_HERO_HP);
 		player.getHero().setHp(MAX_HERO_HP);
 		
@@ -290,9 +293,9 @@ public class GameLogic implements IGameLogic {
 	@Override
 	public void performGameAction(Player player, GameAction action) {
 		if (action.getTargetRequirement() == TargetSelection.SELF) {
-			action.setTarget(action.getSource());
+			action.setTargetKey(TargetKey.pointTo(action.getSource()));
 		}
-		if (action.getTargetRequirement() != TargetSelection.NONE && action.getTarget() == null) {
+		if (action.getTargetRequirement() != TargetSelection.NONE && action.getTargetKey() == null) {
 			List<Entity> validTargets = getValidTargets(player, action);
 			if (validTargets.isEmpty() && action.getActionType() == ActionType.MINION_ABILITY) {
 				return;
@@ -304,10 +307,22 @@ public class GameLogic implements IGameLogic {
 							+ action);
 				}
 			}
-			action.setTarget(target);
+			action.setTargetKey(TargetKey.pointTo(target));
 		}
 
 		action.execute(context, player);
+		checkForDeadEntities();
+	}
+	
+	private void checkForDeadEntities() {
+		for (Player player : context.getPlayers()) {
+			for (Minion minion : new ArrayList<Minion>(player.getMinions())) {
+				if (minion.isDead()) {
+					destroyMinion(minion);	
+				}
+			}
+		}
+		
 	}
 
 	@Override
@@ -367,15 +382,18 @@ public class GameLogic implements IGameLogic {
 
 	@Override
 	public void summon(Player player, Minion minion, Entity nextTo) {
+		minion.setId(idFactory.generateId());
 		logger.debug("{} summons {}", player.getName(), minion);
 		refreshAttacksPerRound(minion);
 		minion.setTag(GameTag.SUMMONING_SICKNESS);
 		
+		context.getPendingEntities().add(minion);
 		if (minion.getBattlecry() != null) {
 			GameAction battlecry = minion.getBattlecry();
 			battlecry.setSource(minion);
 			performGameAction(player, battlecry);
 		}
+		context.getPendingEntities().remove(minion);
 
 		if (nextTo == null) {
 			player.getMinions().add(minion);
@@ -385,6 +403,7 @@ public class GameLogic implements IGameLogic {
 		}
 		minion.setOwner(player);
 		for (SpellTrigger spellTrigger : minion.getSpellTriggers()) {
+			spellTrigger.setHost(minion);
 			context.getEventManager().registerGameEventListener(spellTrigger);
 		}
 		if (minion.hasTag(GameTag.CHARGE)) {
@@ -401,6 +420,22 @@ public class GameLogic implements IGameLogic {
 		modifyCurrentMana(player, -power.getManaCost());
 		logger.debug("{} uses {}", player.getName(), power);
 		power.setUsed(true);
+	}
+
+	@Override
+	public void equipWeapon(Player player, Hero hero, Weapon weapon) {
+		weapon.setId(idFactory.generateId());
+		logger.debug("{} equips weapon {}", player.getHero(), weapon);
+		player.getHero().setWeapon(weapon);
+		for (SpellTrigger spellTrigger : weapon.getSpellTriggers()) {
+			context.getEventManager().registerGameEventListener(spellTrigger);
+		}
+	}
+	
+	private List<Entity> toList(Entity entity) {
+		List<Entity> list = new ArrayList<Entity>(1);
+		list.add(entity);
+		return list;
 	}
 
 }

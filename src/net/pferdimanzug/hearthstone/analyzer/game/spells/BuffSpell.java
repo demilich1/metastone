@@ -8,7 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
-public class BuffSpell implements ISpell {
+public class BuffSpell extends Spell {
 	
 	private static Logger logger = LoggerFactory.getLogger(BuffSpell.class);
 	
@@ -21,7 +21,7 @@ public class BuffSpell implements ISpell {
 	}
 	
 	@Override
-	public void cast(GameContext context, Player player, Entity target) {
+	protected void onCast(GameContext context, Player player, Entity target) {
 		logger.debug("{} gains ({})", target, attackBonus + "/" + hpBonus);
 		if (attackBonus != 0) {
 			target.modifyTag(GameTag.ATTACK_BONUS, +attackBonus);

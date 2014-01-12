@@ -7,13 +7,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.DebugDecks;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.PlayRandomBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Anduin;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Guldan;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Thrall;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Uther;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Valeera;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 
@@ -41,9 +36,11 @@ public class HearthstoneAnalyzer {
 	}
 	
 	private void launchDebugGame() {
-		Player player1 = new Player("Human", new Garrosh(), DebugDecks.getRandomDeck(HeroClass.WARRIOR));
+		Hero hero1 = new Garrosh();
+		Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
 		player1.setBehaviour(new PlayRandomBehaviour(player1));
-		Player player2 = new Player("Bot", new Thrall(), DebugDecks.getRandomDeck(HeroClass.SHAMAN));
+		Hero hero2 = new Valeera();
+		Player player2 = new Player("Bot", hero2, DebugDecks.getRandomDeck(hero2.getHeroClass()));
 		player2.setBehaviour(new PlayRandomBehaviour(player2));
 		GameLogic logic = new GameLogic();
 		GameContext newGame = new GameContext(player1, player2, logic);

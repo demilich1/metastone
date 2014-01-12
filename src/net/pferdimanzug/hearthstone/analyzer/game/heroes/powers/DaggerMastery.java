@@ -1,11 +1,12 @@
 package net.pferdimanzug.hearthstone.analyzer.game.heroes.powers;
 
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.WeaponCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.EquipWeaponSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetKey;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 
 public class DaggerMastery extends HeroPower {
@@ -28,7 +29,7 @@ public class DaggerMastery extends HeroPower {
 		super("Dagger Mastery");
 		setTargetRequirement(TargetSelection.NONE);
 		setSpell(new EquipWeaponSpell(new WickedKnife()));
-		
+		setPredefinedTarget(TargetKey.FRIENDLY_HERO);
 	}
 
 

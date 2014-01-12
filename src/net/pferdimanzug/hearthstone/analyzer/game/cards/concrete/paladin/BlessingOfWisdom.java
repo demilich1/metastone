@@ -1,7 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
@@ -13,6 +11,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.AddSpellTriggerSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DrawCardSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.GameEventTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class BlessingOfWisdom extends SpellCard {
 
@@ -22,11 +21,6 @@ public class BlessingOfWisdom extends SpellCard {
 		public boolean fire(IGameEvent event, Entity host) {
 			PhysicalAttackEvent physicalAttackEvent = (PhysicalAttackEvent) event;
 			return physicalAttackEvent.getAttacker() == host;
-		}
-
-		@Override
-		public Entity getTarget(GameContext context, Entity host) {
-			return null;
 		}
 
 		@Override

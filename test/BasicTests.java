@@ -4,7 +4,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PhysicalAttackAction;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
@@ -14,7 +13,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Malfurion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffHeroSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.SingleTargetDamageSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetKey;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -39,7 +40,7 @@ public class BasicTests extends TestBase {
 		warrior.setMana(10);
 
 		DevMonster devMonster = new DevMonster(3, 3);
-		Battlecry testBattlecry = Battlecry.createBattlecry(new SingleTargetDamageSpell(3), TargetSelection.ENEMY_HERO);
+		Battlecry testBattlecry = Battlecry.createBattlecry(new DamageSpell(3), TargetSelection.ENEMY_HERO);
 		testBattlecry.setTarget(warrior.getHero());
 		devMonster.getMinion().setTag(GameTag.BATTLECRY, testBattlecry);
 		mage.getHand().add(devMonster);
@@ -62,7 +63,8 @@ public class BasicTests extends TestBase {
 		context.getLogic().performGameAction(mage, devMonsterCard.play());
 		
 		BuffHeroSpell heroBuffSpell = new BuffHeroSpell(damage, 0);
-		context.getLogic().castSpell(druid, heroBuffSpell, druid.getHero());
+		heroBuffSpell.setTarget(TargetKey.pointTo(druid.getHero()));
+		context.getLogic().castSpell(druid, heroBuffSpell);
 		Entity devMonster = getSingleMinion(mage.getMinions());
 		GameAction minionAttackAction = new PhysicalAttackAction(devMonster);
 		minionAttackAction.setTarget(druid.getHero());

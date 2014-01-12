@@ -8,7 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
-public class DiscardCardSpell implements ISpell {
+public class DiscardCardSpell extends Spell {
 	
 	private static Logger logger = LoggerFactory.getLogger(DiscardCardSpell.class);
 	
@@ -23,7 +23,7 @@ public class DiscardCardSpell implements ISpell {
 	}
 
 	@Override
-	public void cast(GameContext context, Player player, Entity target) {
+	protected void onCast(GameContext context, Player player, Entity target) {
 		for (int i = 0; i < numberOfCards; i++) {
 			Card randomHandCard = player.getHand().getRandom();
 			if (randomHandCard == null) {

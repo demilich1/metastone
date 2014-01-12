@@ -9,7 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 
-public class ChangeDurabilitySpell implements ISpell {
+public class ChangeDurabilitySpell extends Spell {
 	
 	private static Logger logger = LoggerFactory.getLogger(ChangeDurabilitySpell.class);
 	
@@ -20,7 +20,7 @@ public class ChangeDurabilitySpell implements ISpell {
 	}
 
 	@Override
-	public void cast(GameContext context, Player player, Entity target) {
+	protected void onCast(GameContext context, Player player, Entity target) {
 		Hero hero = (Hero) target;
 		if (hero.getWeapon() == null) {
 			return;

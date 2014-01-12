@@ -1,340 +1,342 @@
-11:20:21 DEBUG - Game starts: 'Human' (Garrosh Hellscream) VS. 'Bot' (Gul'dan)
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) begins
-11:20:21 DEBUG - Setting hero hp to 30 for 'Human' (Garrosh Hellscream)
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) receives card [Charge]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) receives card [Ironforge Rifleman]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) receives card [Whirlwind]
-11:20:21 DEBUG - Setting hero hp to 30 for 'Bot' (Gul'dan)
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [War Golem]
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [Gnomish Inventor]
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [Succubus]
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [Dread Infernal]
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives [The Coin]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) is at 1/1 mana
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) receives card [Oasis Snapjaw]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) plays [Whirlwind]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
-11:20:21 DEBUG - 'Bot' (Gul'dan) is at 1/1 mana
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [Dread Infernal]
-11:20:21 DEBUG - 'Bot' (Gul'dan) plays [The Coin]
-11:20:21 DEBUG - 'Bot' (Gul'dan) gains 1 mana
-11:20:21 DEBUG - 'Bot' (Gul'dan) uses hero power [Life Tap]
-11:20:21 DEBUG - Gul'dan receives 2 damage, hp now: 28(0)
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [Hellfire]
-11:20:21 DEBUG - 'Bot' (Gul'dan) ends his turn.
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) is at 2/2 mana
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) receives card [Execute]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) uses hero power [Armor Up!]
-11:20:21 DEBUG - Garrosh Hellscream gains 2 armor
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
-11:20:21 DEBUG - 'Bot' (Gul'dan) is at 2/2 mana
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [Succubus]
-11:20:21 DEBUG - 'Bot' (Gul'dan) uses hero power [Life Tap]
-11:20:21 DEBUG - Gul'dan receives 2 damage, hp now: 26(0)
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [Drain Life]
-11:20:21 DEBUG - 'Bot' (Gul'dan) ends his turn.
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) is at 3/3 mana
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) receives card [Charge]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) plays [Ironforge Rifleman]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) summons [Ironforge Rifleman]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) picks random target: Garrosh Hellscream
-11:20:21 DEBUG - Garrosh Hellscream receives 1 damage, hp now: 30(1)
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) plays [Charge]
-11:20:21 DEBUG - Applying tag CHARGE to Ironforge Rifleman
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) plays [Charge]
-11:20:21 DEBUG - Applying tag CHARGE to Ironforge Rifleman
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
-11:20:21 DEBUG - 'Bot' (Gul'dan) is at 3/3 mana
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [Corruption]
-11:20:21 DEBUG - 'Bot' (Gul'dan) plays [Corruption]
-11:20:21 DEBUG - 'Bot' (Gul'dan) plays [Succubus]
-11:20:21 DEBUG - 'Bot' (Gul'dan) summons [Succubus]
-11:20:21 DEBUG - 'Bot' (Gul'dan) discards 1 cards
-11:20:21 DEBUG - 'Bot' (Gul'dan) ends his turn.
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) is at 4/4 mana
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) receives card [Ogre Magi]
-11:20:21 DEBUG - Minion [Ironforge Rifleman] is destroyed
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) plays [Ogre Magi]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) summons [Ogre Magi]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
-11:20:21 DEBUG - 'Bot' (Gul'dan) is at 4/4 mana
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [Shadow Bolt]
-11:20:21 DEBUG - [Succubus] attacks [Ogre Magi]
-11:20:21 DEBUG - Minion [Ogre Magi] is damaged for 4
-11:20:21 DEBUG - Minion [Ogre Magi] is destroyed
-11:20:21 DEBUG - Minion [Succubus] is damaged for 4
-11:20:21 DEBUG - Minion [Succubus] is destroyed
-11:20:21 DEBUG - 'Bot' (Gul'dan) plays [Hellfire]
-11:20:21 DEBUG - Garrosh Hellscream receives 3 damage, hp now: 28(0)
-11:20:21 DEBUG - Gul'dan receives 3 damage, hp now: 23(0)
-11:20:21 DEBUG - 'Bot' (Gul'dan) ends his turn.
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) is at 5/5 mana
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) receives card [Ogre Magi]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) plays [Ogre Magi]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) summons [Ogre Magi]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
-11:20:21 DEBUG - 'Bot' (Gul'dan) is at 5/5 mana
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [Shadow Bolt]
-11:20:21 DEBUG - 'Bot' (Gul'dan) uses hero power [Life Tap]
-11:20:21 DEBUG - Gul'dan receives 2 damage, hp now: 21(0)
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [Drain Life]
-11:20:21 DEBUG - 'Bot' (Gul'dan) plays [Drain Life]
-11:20:21 DEBUG - Minion [Ogre Magi] is damaged for 2
-11:20:21 DEBUG - [Gul'dan] is healed for 2, hp now: 21
-11:20:21 DEBUG - 'Bot' (Gul'dan) ends his turn.
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) is at 6/6 mana
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) receives card [Booty Bay Bodyguard]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) plays [Oasis Snapjaw]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) summons [Oasis Snapjaw]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) uses hero power [Armor Up!]
-11:20:21 DEBUG - Garrosh Hellscream gains 2 armor
-11:20:21 DEBUG - [Ogre Magi] attacks [Gul'dan]
-11:20:21 DEBUG - Gul'dan receives 4 damage, hp now: 19(0)
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
-11:20:21 DEBUG - 'Bot' (Gul'dan) is at 6/6 mana
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [Soulfire]
-11:20:21 DEBUG - 'Bot' (Gul'dan) plays [Soulfire]
-11:20:21 DEBUG - Minion [Oasis Snapjaw] is damaged for 4
-11:20:21 DEBUG - 'Bot' (Gul'dan) discards 1 cards
-11:20:21 DEBUG - 'Bot' (Gul'dan) uses hero power [Life Tap]
-11:20:21 DEBUG - Gul'dan receives 2 damage, hp now: 17(0)
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [Mortal Coil]
-11:20:21 DEBUG - 'Bot' (Gul'dan) plays [Gnomish Inventor]
-11:20:21 DEBUG - 'Bot' (Gul'dan) summons [Gnomish Inventor]
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [Sacrificial Pact]
-11:20:21 DEBUG - 'Bot' (Gul'dan) ends his turn.
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) is at 7/7 mana
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) receives card [Oasis Snapjaw]
-11:20:21 DEBUG - [Oasis Snapjaw] attacks [Gnomish Inventor]
-11:20:21 DEBUG - Minion [Gnomish Inventor] is damaged for 2
-11:20:21 DEBUG - Minion [Oasis Snapjaw] is damaged for 2
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) plays [Oasis Snapjaw]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) summons [Oasis Snapjaw]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) uses hero power [Armor Up!]
-11:20:21 DEBUG - Garrosh Hellscream gains 2 armor
-11:20:21 DEBUG - [Ogre Magi] attacks [Gul'dan]
-11:20:21 DEBUG - Gul'dan receives 4 damage, hp now: 13(0)
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) plays [Execute]
-11:20:21 DEBUG - Minion [Gnomish Inventor] is destroyed
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
-11:20:21 DEBUG - 'Bot' (Gul'dan) is at 7/7 mana
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [Bloodfen Raptor]
-11:20:21 DEBUG - 'Bot' (Gul'dan) plays [War Golem]
-11:20:21 DEBUG - 'Bot' (Gul'dan) summons [War Golem]
-11:20:21 DEBUG - 'Bot' (Gul'dan) ends his turn.
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) is at 8/8 mana
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) receives card [Fiery War Axe]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) uses hero power [Armor Up!]
-11:20:21 DEBUG - Garrosh Hellscream gains 2 armor
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) plays [Booty Bay Bodyguard]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) summons [Booty Bay Bodyguard]
-11:20:21 DEBUG - [Ogre Magi] attacks [War Golem]
-11:20:21 DEBUG - Minion [War Golem] is damaged for 4
-11:20:21 DEBUG - Minion [Ogre Magi] is damaged for 7
-11:20:21 DEBUG - Minion [Ogre Magi] is destroyed
-11:20:21 DEBUG - [Oasis Snapjaw] attacks [War Golem]
-11:20:21 DEBUG - Minion [War Golem] is damaged for 2
-11:20:21 DEBUG - Minion [Oasis Snapjaw] is damaged for 7
-11:20:21 DEBUG - Minion [Oasis Snapjaw] is destroyed
-11:20:21 DEBUG - [Oasis Snapjaw] attacks [War Golem]
-11:20:21 DEBUG - Minion [War Golem] is damaged for 2
-11:20:21 DEBUG - Minion [War Golem] is destroyed
-11:20:21 DEBUG - Minion [Oasis Snapjaw] is damaged for 7
-11:20:21 DEBUG - Minion [Oasis Snapjaw] is destroyed
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
-11:20:21 DEBUG - 'Bot' (Gul'dan) is at 8/8 mana
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [Sacrificial Pact]
-11:20:21 DEBUG - 'Bot' (Gul'dan) uses hero power [Life Tap]
-11:20:21 DEBUG - Gul'dan receives 2 damage, hp now: 11(0)
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [Hellfire]
-11:20:21 DEBUG - 'Bot' (Gul'dan) plays [Dread Infernal]
-11:20:21 DEBUG - 'Bot' (Gul'dan) summons [Dread Infernal]
-11:20:21 DEBUG - Garrosh Hellscream receives 1 damage, hp now: 28(5)
-11:20:21 DEBUG - Minion [Booty Bay Bodyguard] is damaged for 1
-11:20:21 DEBUG - Gul'dan receives 1 damage, hp now: 10(0)
-11:20:21 DEBUG - 'Bot' (Gul'dan) plays [Sacrificial Pact]
-11:20:21 DEBUG - Minion [Dread Infernal] is destroyed
-11:20:21 DEBUG - [Gul'dan] is healed for 5, hp now: 10
-11:20:21 DEBUG - 'Bot' (Gul'dan) ends his turn.
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) is at 9/9 mana
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) receives card [Arcanite Reaper]
-11:20:21 DEBUG - [Booty Bay Bodyguard] attacks [Gul'dan]
-11:20:21 DEBUG - Gul'dan receives 5 damage, hp now: 10(0)
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) plays [Fiery War Axe]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) plays [Arcanite Reaper]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) uses hero power [Armor Up!]
-11:20:21 DEBUG - Garrosh Hellscream gains 2 armor
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
-11:20:21 DEBUG - 'Bot' (Gul'dan) is at 9/9 mana
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [The Coin]
-11:20:21 DEBUG - 'Bot' (Gul'dan) plays [The Coin]
-11:20:21 DEBUG - 'Bot' (Gul'dan) gains 1 mana
-11:20:21 DEBUG - 'Bot' (Gul'dan) plays [Dread Infernal]
-11:20:21 DEBUG - 'Bot' (Gul'dan) summons [Dread Infernal]
-11:20:21 DEBUG - Garrosh Hellscream receives 1 damage, hp now: 28(6)
-11:20:21 DEBUG - Minion [Booty Bay Bodyguard] is damaged for 1
-11:20:21 DEBUG - Gul'dan receives 1 damage, hp now: 9(0)
-11:20:21 DEBUG - 'Bot' (Gul'dan) plays [Hellfire]
-11:20:21 DEBUG - Garrosh Hellscream receives 3 damage, hp now: 28(3)
-11:20:21 DEBUG - Minion [Booty Bay Bodyguard] is damaged for 3
-11:20:21 DEBUG - Minion [Booty Bay Bodyguard] is destroyed
-11:20:21 DEBUG - Gul'dan receives 3 damage, hp now: 6(0)
-11:20:21 DEBUG - Minion [Dread Infernal] is damaged for 3
-11:20:21 DEBUG - 'Bot' (Gul'dan) plays [Sacrificial Pact]
-11:20:21 DEBUG - Minion [Dread Infernal] is destroyed
-11:20:21 DEBUG - [Gul'dan] is healed for 5, hp now: 6
-11:20:21 DEBUG - 'Bot' (Gul'dan) ends his turn.
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) is at 10/10 mana
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) receives card [Warsong Commander]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) uses hero power [Armor Up!]
-11:20:21 DEBUG - Garrosh Hellscream gains 2 armor
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) plays [Warsong Commander]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) summons [Warsong Commander]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
-11:20:21 DEBUG - 'Bot' (Gul'dan) is at 10/10 mana
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [Frostwolf Grunt]
-11:20:21 DEBUG - 'Bot' (Gul'dan) plays [Bloodfen Raptor]
-11:20:21 DEBUG - 'Bot' (Gul'dan) summons [Bloodfen Raptor]
-11:20:21 DEBUG - 'Bot' (Gul'dan) plays [Frostwolf Grunt]
-11:20:21 DEBUG - 'Bot' (Gul'dan) summons [Frostwolf Grunt]
-11:20:21 DEBUG - 'Bot' (Gul'dan) uses hero power [Life Tap]
-11:20:21 DEBUG - Gul'dan receives 2 damage, hp now: 9(0)
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [Gnomish Inventor]
-11:20:21 DEBUG - 'Bot' (Gul'dan) plays [Gnomish Inventor]
-11:20:21 DEBUG - 'Bot' (Gul'dan) summons [Gnomish Inventor]
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [Soulfire]
-11:20:21 DEBUG - 'Bot' (Gul'dan) plays [Soulfire]
-11:20:21 DEBUG - Minion [Warsong Commander] is damaged for 4
-11:20:21 DEBUG - Minion [Warsong Commander] is destroyed
-11:20:21 DEBUG - 'Bot' (Gul'dan) discards 1 cards
-11:20:21 DEBUG - 'Bot' (Gul'dan) ends his turn.
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) is at 10/10 mana
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) receives card [Ironforge Rifleman]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) plays [Ironforge Rifleman]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) summons [Ironforge Rifleman]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) picks random target: Gnomish Inventor
-11:20:21 DEBUG - Minion [Gnomish Inventor] is damaged for 1
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) uses hero power [Armor Up!]
-11:20:21 DEBUG - Garrosh Hellscream gains 2 armor
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
-11:20:21 DEBUG - 'Bot' (Gul'dan) is at 10/10 mana
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [Frostwolf Grunt]
-11:20:21 DEBUG - 'Bot' (Gul'dan) plays [Frostwolf Grunt]
-11:20:21 DEBUG - 'Bot' (Gul'dan) summons [Frostwolf Grunt]
-11:20:21 DEBUG - [Gnomish Inventor] attacks [Garrosh Hellscream]
-11:20:21 DEBUG - Garrosh Hellscream receives 2 damage, hp now: 28(5)
-11:20:21 DEBUG - [Frostwolf Grunt] attacks [Garrosh Hellscream]
-11:20:21 DEBUG - Garrosh Hellscream receives 2 damage, hp now: 28(3)
-11:20:21 DEBUG - 'Bot' (Gul'dan) uses hero power [Life Tap]
-11:20:21 DEBUG - Gul'dan receives 2 damage, hp now: 7(0)
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [Corruption]
-11:20:21 DEBUG - [Bloodfen Raptor] attacks [Garrosh Hellscream]
-11:20:21 DEBUG - Garrosh Hellscream receives 3 damage, hp now: 28(0)
-11:20:21 DEBUG - 'Bot' (Gul'dan) plays [Corruption]
-11:20:21 DEBUG - 'Bot' (Gul'dan) ends his turn.
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) is at 10/10 mana
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) receives card [Shield Block]
-11:20:21 DEBUG - Minion [Ironforge Rifleman] is destroyed
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) uses hero power [Armor Up!]
-11:20:21 DEBUG - Garrosh Hellscream gains 2 armor
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) plays [Shield Block]
-11:20:21 DEBUG - Garrosh Hellscream gains 5 armor
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) receives card [Kor'kron Elite]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) plays [Kor'kron Elite]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) summons [Kor'kron Elite]
-11:20:21 DEBUG - [Kor'kron Elite] attacks [Frostwolf Grunt]
-11:20:21 DEBUG - Minion [Frostwolf Grunt] is damaged for 4
-11:20:21 DEBUG - Minion [Frostwolf Grunt] is destroyed
-11:20:21 DEBUG - Minion [Kor'kron Elite] is damaged for 2
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
-11:20:21 DEBUG - 'Bot' (Gul'dan) is at 10/10 mana
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [Voidwalker]
-11:20:21 DEBUG - 'Bot' (Gul'dan) uses hero power [Life Tap]
-11:20:21 DEBUG - Gul'dan receives 2 damage, hp now: 5(0)
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [War Golem]
-11:20:21 DEBUG - 'Bot' (Gul'dan) plays [Voidwalker]
-11:20:21 DEBUG - 'Bot' (Gul'dan) summons [Voidwalker]
-11:20:21 DEBUG - 'Bot' (Gul'dan) plays [War Golem]
-11:20:21 DEBUG - 'Bot' (Gul'dan) summons [War Golem]
-11:20:21 DEBUG - [Bloodfen Raptor] attacks [Garrosh Hellscream]
-11:20:21 DEBUG - Garrosh Hellscream receives 3 damage, hp now: 28(4)
-11:20:21 DEBUG - [Gnomish Inventor] attacks [Kor'kron Elite]
-11:20:21 DEBUG - Minion [Kor'kron Elite] is damaged for 2
-11:20:21 DEBUG - Minion [Kor'kron Elite] is destroyed
-11:20:21 DEBUG - Minion [Gnomish Inventor] is damaged for 4
-11:20:21 DEBUG - Minion [Gnomish Inventor] is destroyed
-11:20:21 DEBUG - [Frostwolf Grunt] attacks [Garrosh Hellscream]
-11:20:21 DEBUG - Garrosh Hellscream receives 2 damage, hp now: 28(2)
-11:20:21 DEBUG - 'Bot' (Gul'dan) ends his turn.
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) is at 10/10 mana
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) receives card [Arcanite Reaper]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) plays [Arcanite Reaper]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) uses hero power [Armor Up!]
-11:20:21 DEBUG - Garrosh Hellscream gains 2 armor
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
-11:20:21 DEBUG - 'Bot' (Gul'dan) is at 10/10 mana
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [Voidwalker]
-11:20:21 DEBUG - [War Golem] attacks [Garrosh Hellscream]
-11:20:21 DEBUG - Garrosh Hellscream receives 7 damage, hp now: 25(0)
-11:20:21 DEBUG - 'Bot' (Gul'dan) uses hero power [Life Tap]
-11:20:21 DEBUG - Gul'dan receives 2 damage, hp now: 3(0)
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [Bloodfen Raptor]
-11:20:21 DEBUG - 'Bot' (Gul'dan) plays [Bloodfen Raptor]
-11:20:21 DEBUG - 'Bot' (Gul'dan) summons [Bloodfen Raptor]
-11:20:21 DEBUG - 'Bot' (Gul'dan) plays [Voidwalker]
-11:20:21 DEBUG - 'Bot' (Gul'dan) summons [Voidwalker]
-11:20:21 DEBUG - [Voidwalker] attacks [Garrosh Hellscream]
-11:20:21 DEBUG - Garrosh Hellscream receives 1 damage, hp now: 24(0)
-11:20:21 DEBUG - [Bloodfen Raptor] attacks [Garrosh Hellscream]
-11:20:21 DEBUG - Garrosh Hellscream receives 3 damage, hp now: 21(0)
-11:20:21 DEBUG - [Frostwolf Grunt] attacks [Garrosh Hellscream]
-11:20:21 DEBUG - Garrosh Hellscream receives 2 damage, hp now: 19(0)
-11:20:21 DEBUG - 'Bot' (Gul'dan) ends his turn.
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) is at 10/10 mana
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) receives card [Shield Block]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) plays [Shield Block]
-11:20:21 DEBUG - Garrosh Hellscream gains 5 armor
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) receives card [Cleave]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) uses hero power [Armor Up!]
-11:20:21 DEBUG - Garrosh Hellscream gains 2 armor
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) plays [Cleave]
-11:20:21 DEBUG - Minion [Voidwalker] is damaged for 2
-11:20:21 DEBUG - Minion [Bloodfen Raptor] is damaged for 2
-11:20:21 DEBUG - Minion [Bloodfen Raptor] is destroyed
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
-11:20:21 DEBUG - 'Bot' (Gul'dan) is at 10/10 mana
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [Mortal Coil]
-11:20:21 DEBUG - [Bloodfen Raptor] attacks [Garrosh Hellscream]
-11:20:21 DEBUG - Garrosh Hellscream receives 3 damage, hp now: 19(4)
-11:20:21 DEBUG - 'Bot' (Gul'dan) uses hero power [Life Tap]
-11:20:21 DEBUG - Gul'dan receives 2 damage, hp now: 1(0)
-11:20:21 DEBUG - 'Bot' (Gul'dan) receives card [The Coin]
-11:20:21 DEBUG - [War Golem] attacks [Garrosh Hellscream]
-11:20:21 DEBUG - Garrosh Hellscream receives 7 damage, hp now: 16(0)
-11:20:21 DEBUG - [Voidwalker] attacks [Garrosh Hellscream]
-11:20:21 DEBUG - Garrosh Hellscream receives 1 damage, hp now: 15(0)
-11:20:21 DEBUG - 'Bot' (Gul'dan) plays [The Coin]
-11:20:21 DEBUG - 'Bot' (Gul'dan) gains 1 mana
-11:20:21 DEBUG - [Frostwolf Grunt] attacks [Garrosh Hellscream]
-11:20:21 DEBUG - Garrosh Hellscream receives 2 damage, hp now: 13(0)
-11:20:21 DEBUG - [Voidwalker] attacks [Garrosh Hellscream]
-11:20:21 DEBUG - Garrosh Hellscream receives 1 damage, hp now: 12(0)
-11:20:21 DEBUG - 'Bot' (Gul'dan) ends his turn.
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) is at 10/10 mana
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) receives card [Execute]
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) uses hero power [Armor Up!]
-11:20:21 DEBUG - Garrosh Hellscream gains 2 armor
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) plays [Execute]
-11:20:21 DEBUG - Minion [Voidwalker] is destroyed
-11:20:21 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
-11:20:21 DEBUG - 'Bot' (Gul'dan) is at 10/10 mana
-11:20:21 DEBUG - Gul'dan receives 0 damage, hp now: 1(0)
-11:20:21 DEBUG - 'Bot' (Gul'dan)'s deck is empty, taking 0 fatigue damage!
-11:20:21 DEBUG - 'Bot' (Gul'dan) uses hero power [Life Tap]
-11:20:21 DEBUG - Gul'dan receives 2 damage, hp now: -1(0)
-11:20:21 DEBUG - Gul'dan receives 1 damage, hp now: -2(0)
-11:20:21 DEBUG - 'Bot' (Gul'dan)'s deck is empty, taking 1 fatigue damage!
-11:20:21 DEBUG - Game finished after 30 turns, the winner is: 'Human' (Garrosh Hellscream)
-11:20:21 INFO  - Games played: 1
-11:20:21 INFO  - Duration: 152ms
-11:20:21 INFO  - Player 'Human' (Garrosh Hellscream) won 1 games
+13:59:43 DEBUG - Game starts: 'Human' (Garrosh Hellscream) VS. 'Bot' (Valeera Sanguinar)
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) begins
+13:59:43 DEBUG - Setting hero hp to 30 for 'Bot' (Valeera Sanguinar)
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) receives card [MINION 'Chillwind Yeti' Manacost:4]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) receives card [WEAPON 'Assassin's Blade' Manacost:5]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) receives card [SPELL 'Sap' Manacost:2]
+13:59:43 DEBUG - Setting hero hp to 30 for 'Human' (Garrosh Hellscream)
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) receives card [SPELL 'Execute' Manacost:1]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) receives card [WEAPON 'Fiery War Axe' Manacost:2]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) receives card [MINION 'Razorfen Hunter' Manacost:3]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) receives card [MINION 'Nightblade' Manacost:5]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) receives [SPELL 'The Coin' Manacost:0]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) starts his turn with 1/1 mana
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) receives card [SPELL 'Assasinate' Manacost:5]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) ends his turn.
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) starts his turn with 1/1 mana
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) receives card [MINION 'Voodoo Doctor' Manacost:1]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) plays [MINION 'Voodoo Doctor' Manacost:1]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) summons [MINION 'Voodoo Doctor'id:3 2/1]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) picks random target: Garrosh Hellscream
+13:59:43 DEBUG - [HERO 'Garrosh Hellscream'id:2 0/30] is healed for 2, hp now: 30
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) plays [SPELL 'The Coin' Manacost:0]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) gains 1 mana
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) starts his turn with 2/2 mana
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) receives card [SPELL 'Vanish' Manacost:6]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) plays [SPELL 'Sap' Manacost:2]
+13:59:43 DEBUG - [MINION 'Voodoo Doctor'id:3 2/1] is returned to 'Bot' (Valeera Sanguinar)'s hand
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) receives card [MINION 'Voodoo Doctor' Manacost:1]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) ends his turn.
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) starts his turn with 2/2 mana
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) receives card [MINION 'Magma Rager' Manacost:3]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) uses [HERO_POWER 'Armor Up!' Manacost:2]
+13:59:43 DEBUG - [HERO 'Garrosh Hellscream'id:2 0/30] gains 2 armor
+13:59:43 DEBUG - [MINION 'Voodoo Doctor'id:3 2/1] attacks [HERO 'Valeera Sanguinar'id:1 0/30]
+13:59:43 DEBUG - Valeera Sanguinar receives 2 damage, hp now: 28(0)
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) starts his turn with 3/3 mana
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) receives card [SPELL 'Sinister Strike' Manacost:1]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) plays [MINION 'Voodoo Doctor' Manacost:1]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) summons [MINION 'Voodoo Doctor'id:4 2/1]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) picks random target: Voodoo Doctor
+13:59:43 DEBUG - [MINION 'Voodoo Doctor'id:3 2/1] is healed for 2, hp now: 1/1
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) uses [HERO_POWER 'Dagger Mastery' Manacost:2]
+13:59:43 DEBUG - [HERO 'Valeera Sanguinar'id:1 0/28] equips weapon [WEAPON 'Wicked Knife'id:5 0/0]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) ends his turn.
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) starts his turn with 3/3 mana
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) receives card [MINION 'Voodoo Doctor' Manacost:1]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) plays [MINION 'Razorfen Hunter' Manacost:3]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) summons [MINION 'Razorfen Hunter'id:6 2/3]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) summons [MINION 'Boar'id:7 1/1]
+13:59:43 DEBUG - [MINION 'Voodoo Doctor'id:3 2/1] attacks [HERO 'Valeera Sanguinar'id:1 0/28]
+13:59:43 DEBUG - Valeera Sanguinar receives 2 damage, hp now: 26(0)
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) starts his turn with 4/4 mana
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) receives card [MINION 'Raid Leader' Manacost:3]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) uses [HERO_POWER 'Dagger Mastery' Manacost:2]
+13:59:43 DEBUG - [HERO 'Valeera Sanguinar'id:1 0/26] equips weapon [WEAPON 'Wicked Knife'id:8 0/0]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) plays [SPELL 'Sinister Strike' Manacost:1]
+13:59:43 DEBUG - Garrosh Hellscream receives 3 damage, hp now: 29(0)
+13:59:43 DEBUG - [MINION 'Voodoo Doctor'id:4 2/1] attacks [MINION 'Razorfen Hunter'id:6 2/3]
+13:59:43 DEBUG - [MINION 'Razorfen Hunter'id:6 2/3] is damaged for 2
+13:59:43 DEBUG - [MINION 'Voodoo Doctor'id:4 2/1] is damaged for 2
+13:59:43 DEBUG - [MINION 'Voodoo Doctor'id:4 2/-1] is destroyed
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) ends his turn.
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) starts his turn with 4/4 mana
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) receives card [SPELL 'Whirlwind' Manacost:1]
+13:59:43 DEBUG - [MINION 'Voodoo Doctor'id:3 2/1] attacks [HERO 'Valeera Sanguinar'id:1 0/26]
+13:59:43 DEBUG - Valeera Sanguinar receives 2 damage, hp now: 24(0)
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) plays [SPELL 'Whirlwind' Manacost:1]
+13:59:43 DEBUG - [MINION 'Voodoo Doctor'id:3 2/1] is damaged for 1
+13:59:43 DEBUG - [MINION 'Boar'id:7 1/1] is damaged for 1
+13:59:43 DEBUG - [MINION 'Razorfen Hunter'id:6 2/1] is damaged for 1
+13:59:43 DEBUG - [MINION 'Voodoo Doctor'id:3 2/0] is destroyed
+13:59:43 DEBUG - [MINION 'Boar'id:7 1/0] is destroyed
+13:59:43 DEBUG - [MINION 'Razorfen Hunter'id:6 2/0] is destroyed
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) plays [MINION 'Voodoo Doctor' Manacost:1]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) summons [MINION 'Voodoo Doctor'id:9 2/1]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) picks random target: Valeera Sanguinar
+13:59:43 DEBUG - [HERO 'Valeera Sanguinar'id:1 0/24] is healed for 2, hp now: 24
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) plays [WEAPON 'Fiery War Axe' Manacost:2]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) starts his turn with 5/5 mana
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) receives card [MINION 'Boulderfist Ogre' Manacost:6]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) plays [MINION 'Chillwind Yeti' Manacost:4]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) summons [MINION 'Chillwind Yeti'id:10 4/5]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) ends his turn.
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) starts his turn with 5/5 mana
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) receives card [MINION 'Warsong Commander' Manacost:3]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) plays [MINION 'Magma Rager' Manacost:3]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) summons [MINION 'Magma Rager'id:11 5/1]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) uses [HERO_POWER 'Armor Up!' Manacost:2]
+13:59:43 DEBUG - [HERO 'Garrosh Hellscream'id:2 0/29] gains 2 armor
+13:59:43 DEBUG - [MINION 'Voodoo Doctor'id:9 2/1] attacks [MINION 'Chillwind Yeti'id:10 4/5]
+13:59:43 DEBUG - [MINION 'Chillwind Yeti'id:10 4/5] is damaged for 2
+13:59:43 DEBUG - [MINION 'Voodoo Doctor'id:9 2/1] is damaged for 4
+13:59:43 DEBUG - [MINION 'Voodoo Doctor'id:9 2/-3] is destroyed
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) starts his turn with 6/6 mana
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) receives card [SPELL 'Deadly Poison' Manacost:1]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) plays [SPELL 'Assasinate' Manacost:5]
+13:59:43 DEBUG - [MINION 'Magma Rager'id:11 5/1] is destroyed
+13:59:43 DEBUG - [MINION 'Chillwind Yeti'id:10 4/3] attacks [HERO 'Garrosh Hellscream'id:2 0/29]
+13:59:43 DEBUG - Garrosh Hellscream receives 4 damage, hp now: 27(0)
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) plays [SPELL 'Deadly Poison' Manacost:1]
+13:59:43 DEBUG - [WEAPON 'Wicked Knife'id:8 0/0] gains (2/0)
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) ends his turn.
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) starts his turn with 6/6 mana
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) receives card [MINION 'Kor'kron Elite' Manacost:4]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) plays [MINION 'Nightblade' Manacost:5]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) summons [MINION 'Nightblade'id:12 4/4]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) picks random target: Valeera Sanguinar
+13:59:43 DEBUG - Valeera Sanguinar receives 3 damage, hp now: 23(0)
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) plays [SPELL 'Execute' Manacost:1]
+13:59:43 DEBUG - [MINION 'Chillwind Yeti'id:10 4/3] is destroyed
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) starts his turn with 7/7 mana
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) receives card [SPELL 'Shiv' Manacost:2]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) uses [HERO_POWER 'Dagger Mastery' Manacost:2]
+13:59:43 DEBUG - [HERO 'Valeera Sanguinar'id:1 0/23] equips weapon [WEAPON 'Wicked Knife'id:13 0/0]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) plays [SPELL 'Shiv' Manacost:2]
+13:59:43 DEBUG - [MINION 'Nightblade'id:12 4/4] is damaged for 1
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) receives card [MINION 'Archmage' Manacost:6]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) plays [MINION 'Raid Leader' Manacost:3]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) summons [MINION 'Raid Leader'id:14 2/2]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) ends his turn.
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) starts his turn with 7/7 mana
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) receives card [WEAPON 'Arcanite Reaper' Manacost:5]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) plays [MINION 'Kor'kron Elite' Manacost:4]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) summons [MINION 'Kor'kron Elite'id:15 4/3 CHARGE]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) uses [HERO_POWER 'Armor Up!' Manacost:2]
+13:59:43 DEBUG - [HERO 'Garrosh Hellscream'id:2 0/27] gains 2 armor
+13:59:43 DEBUG - [MINION 'Kor'kron Elite'id:15 4/3 CHARGE] attacks [HERO 'Valeera Sanguinar'id:1 0/23]
+13:59:43 DEBUG - Valeera Sanguinar receives 4 damage, hp now: 19(0)
+13:59:43 DEBUG - [MINION 'Nightblade'id:12 4/3] attacks [HERO 'Valeera Sanguinar'id:1 0/19]
+13:59:43 DEBUG - Valeera Sanguinar receives 4 damage, hp now: 15(0)
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) starts his turn with 8/8 mana
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) receives card [SPELL 'Sap' Manacost:2]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) plays [SPELL 'Vanish' Manacost:6]
+13:59:43 DEBUG - [MINION 'Nightblade'id:12 4/3] is returned to 'Bot' (Valeera Sanguinar)'s hand
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) receives card [MINION 'Nightblade' Manacost:5]
+13:59:43 DEBUG - [MINION 'Kor'kron Elite'id:15 4/3 CHARGE] is returned to 'Bot' (Valeera Sanguinar)'s hand
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) receives card [MINION 'Kor'kron Elite' Manacost:4]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) plays [SPELL 'Sap' Manacost:2]
+13:59:43 DEBUG - [MINION 'Kor'kron Elite'id:15 4/3 CHARGE] is returned to 'Bot' (Valeera Sanguinar)'s hand
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) receives card [MINION 'Kor'kron Elite' Manacost:4]
+13:59:43 DEBUG - [MINION 'Raid Leader'id:14 2/2] attacks [MINION 'Kor'kron Elite'id:15 4/3 CHARGE]
+13:59:43 DEBUG - [MINION 'Kor'kron Elite'id:15 4/3 CHARGE] is damaged for 2
+13:59:43 DEBUG - [MINION 'Raid Leader'id:14 2/2] is damaged for 4
+13:59:43 DEBUG - [MINION 'Raid Leader'id:14 2/-2] is destroyed
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) ends his turn.
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) starts his turn with 8/8 mana
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) receives card [SPELL 'Shield Block' Manacost:3]
+13:59:43 DEBUG - [MINION 'Nightblade'id:12 4/3] attacks [HERO 'Valeera Sanguinar'id:1 0/15]
+13:59:43 DEBUG - Valeera Sanguinar receives 4 damage, hp now: 11(0)
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) uses [HERO_POWER 'Armor Up!' Manacost:2]
+13:59:43 DEBUG - [HERO 'Garrosh Hellscream'id:2 0/27] gains 2 armor
+13:59:43 DEBUG - [MINION 'Kor'kron Elite'id:15 4/1 CHARGE] attacks [HERO 'Valeera Sanguinar'id:1 0/11]
+13:59:43 DEBUG - Valeera Sanguinar receives 4 damage, hp now: 7(0)
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) plays [WEAPON 'Arcanite Reaper' Manacost:5]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) starts his turn with 9/9 mana
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) receives card [SPELL 'Backstab' Manacost:0]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) plays [MINION 'Nightblade' Manacost:5]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) summons [MINION 'Nightblade'id:16 4/4]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) picks random target: Garrosh Hellscream
+13:59:43 DEBUG - Garrosh Hellscream receives 3 damage, hp now: 27(1)
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) plays [MINION 'Kor'kron Elite' Manacost:4]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) summons [MINION 'Kor'kron Elite'id:17 4/3 CHARGE]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) plays [SPELL 'Backstab' Manacost:0]
+13:59:43 DEBUG - [MINION 'Nightblade'id:16 4/4] is damaged for 2
+13:59:43 DEBUG - [MINION 'Kor'kron Elite'id:17 4/3 CHARGE] attacks [MINION 'Kor'kron Elite'id:15 4/1 CHARGE]
+13:59:43 DEBUG - [MINION 'Kor'kron Elite'id:15 4/1 CHARGE] is damaged for 4
+13:59:43 DEBUG - [MINION 'Kor'kron Elite'id:17 4/3 CHARGE] is damaged for 4
+13:59:43 DEBUG - [MINION 'Kor'kron Elite'id:15 4/-3 CHARGE] is destroyed
+13:59:43 DEBUG - [MINION 'Kor'kron Elite'id:17 4/-1 CHARGE] is destroyed
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) ends his turn.
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) starts his turn with 9/9 mana
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) receives card [WEAPON 'Fiery War Axe' Manacost:2]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) plays [SPELL 'Shield Block' Manacost:3]
+13:59:43 DEBUG - [HERO 'Garrosh Hellscream'id:2 0/27] gains 5 armor
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) receives card [MINION 'Warsong Commander' Manacost:3]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) uses [HERO_POWER 'Armor Up!' Manacost:2]
+13:59:43 DEBUG - [HERO 'Garrosh Hellscream'id:2 0/27] gains 2 armor
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) plays [MINION 'Warsong Commander' Manacost:3]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) summons [MINION 'Warsong Commander'id:18 2/3]
+13:59:43 DEBUG - [MINION 'Nightblade'id:12 4/3] attacks [MINION 'Nightblade'id:16 4/2]
+13:59:43 DEBUG - [MINION 'Nightblade'id:16 4/2] is damaged for 4
+13:59:43 DEBUG - [MINION 'Nightblade'id:12 4/3] is damaged for 4
+13:59:43 DEBUG - [MINION 'Nightblade'id:12 4/-1] is destroyed
+13:59:43 DEBUG - [MINION 'Nightblade'id:16 4/-2] is destroyed
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) starts his turn with 10/10 mana
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) receives card [SPELL 'Shiv' Manacost:2]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) uses [HERO_POWER 'Dagger Mastery' Manacost:2]
+13:59:43 DEBUG - [HERO 'Valeera Sanguinar'id:1 0/7] equips weapon [WEAPON 'Wicked Knife'id:19 0/0]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) plays [MINION 'Boulderfist Ogre' Manacost:6]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) summons [MINION 'Boulderfist Ogre'id:20 6/7]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) plays [SPELL 'Shiv' Manacost:2]
+13:59:43 DEBUG - [MINION 'Boulderfist Ogre'id:20 6/7] is damaged for 1
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) receives card [MINION 'Voodoo Doctor' Manacost:1]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) ends his turn.
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) starts his turn with 10/10 mana
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) receives card [SPELL 'Charge' Manacost:0]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) plays [WEAPON 'Fiery War Axe' Manacost:2]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) plays [SPELL 'Charge' Manacost:0]
+13:59:43 DEBUG - Applying tag CHARGE to [MINION 'Warsong Commander'id:18 2/3]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) plays [MINION 'Warsong Commander' Manacost:3]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) summons [MINION 'Warsong Commander'id:21 2/3]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) uses [HERO_POWER 'Armor Up!' Manacost:2]
+13:59:43 DEBUG - [HERO 'Garrosh Hellscream'id:2 0/27] gains 2 armor
+13:59:43 DEBUG - [MINION 'Warsong Commander'id:18 2/3 CHARGE] attacks [HERO 'Valeera Sanguinar'id:1 0/7]
+13:59:43 DEBUG - Valeera Sanguinar receives 2 damage, hp now: 5(0)
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) starts his turn with 10/10 mana
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) receives card [SPELL 'Fan of Knives' Manacost:3]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) uses [HERO_POWER 'Dagger Mastery' Manacost:2]
+13:59:43 DEBUG - [HERO 'Valeera Sanguinar'id:1 0/5] equips weapon [WEAPON 'Wicked Knife'id:22 0/0]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) plays [MINION 'Kor'kron Elite' Manacost:4]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) summons [MINION 'Kor'kron Elite'id:23 4/3 CHARGE]
+13:59:43 DEBUG - [MINION 'Boulderfist Ogre'id:20 6/6] attacks [HERO 'Garrosh Hellscream'id:2 0/27]
+13:59:43 DEBUG - Garrosh Hellscream receives 6 damage, hp now: 27(4)
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) plays [MINION 'Voodoo Doctor' Manacost:1]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) summons [MINION 'Voodoo Doctor'id:24 2/1]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) picks random target: Garrosh Hellscream
+13:59:43 DEBUG - [HERO 'Garrosh Hellscream'id:2 0/27] is healed for 2, hp now: 27
+13:59:43 DEBUG - [MINION 'Kor'kron Elite'id:23 4/3 CHARGE] attacks [HERO 'Garrosh Hellscream'id:2 0/29]
+13:59:43 DEBUG - Garrosh Hellscream receives 4 damage, hp now: 29(0)
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) plays [SPELL 'Fan of Knives' Manacost:3]
+13:59:43 DEBUG - [MINION 'Warsong Commander'id:18 2/3 CHARGE] is damaged for 1
+13:59:43 DEBUG - [MINION 'Warsong Commander'id:21 2/3] is damaged for 1
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) ends his turn.
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) starts his turn with 10/10 mana
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) receives card [MINION 'Magma Rager' Manacost:3]
+13:59:43 DEBUG - [MINION 'Warsong Commander'id:21 2/2] attacks [MINION 'Kor'kron Elite'id:23 4/3 CHARGE]
+13:59:43 DEBUG - [MINION 'Kor'kron Elite'id:23 4/3 CHARGE] is damaged for 2
+13:59:43 DEBUG - [MINION 'Warsong Commander'id:21 2/2] is damaged for 4
+13:59:43 DEBUG - [MINION 'Warsong Commander'id:21 2/-2] is destroyed
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) uses [HERO_POWER 'Armor Up!' Manacost:2]
+13:59:43 DEBUG - [HERO 'Garrosh Hellscream'id:2 0/29] gains 2 armor
+13:59:43 DEBUG - [MINION 'Warsong Commander'id:18 2/2 CHARGE] attacks [MINION 'Kor'kron Elite'id:23 4/1 CHARGE]
+13:59:43 DEBUG - [MINION 'Kor'kron Elite'id:23 4/1 CHARGE] is damaged for 2
+13:59:43 DEBUG - [MINION 'Warsong Commander'id:18 2/2 CHARGE] is damaged for 4
+13:59:43 DEBUG - [MINION 'Warsong Commander'id:18 2/-2 CHARGE] is destroyed
+13:59:43 DEBUG - [MINION 'Kor'kron Elite'id:23 4/-1 CHARGE] is destroyed
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) plays [MINION 'Magma Rager' Manacost:3]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) summons [MINION 'Magma Rager'id:25 5/1]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) starts his turn with 10/10 mana
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) receives card [SPELL 'Backstab' Manacost:0]
+13:59:43 DEBUG - [MINION 'Boulderfist Ogre'id:20 6/6] attacks [HERO 'Garrosh Hellscream'id:2 0/29]
+13:59:43 DEBUG - Garrosh Hellscream receives 6 damage, hp now: 25(0)
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) plays [SPELL 'Backstab' Manacost:0]
+13:59:43 DEBUG - [MINION 'Magma Rager'id:25 5/1] is damaged for 2
+13:59:43 DEBUG - [MINION 'Magma Rager'id:25 5/-1] is destroyed
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) plays [WEAPON 'Assassin's Blade' Manacost:5]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) uses [HERO_POWER 'Dagger Mastery' Manacost:2]
+13:59:43 DEBUG - [HERO 'Valeera Sanguinar'id:1 0/5] equips weapon [WEAPON 'Wicked Knife'id:26 0/0]
+13:59:43 DEBUG - [MINION 'Voodoo Doctor'id:24 2/1] attacks [HERO 'Garrosh Hellscream'id:2 0/25]
+13:59:43 DEBUG - Garrosh Hellscream receives 2 damage, hp now: 23(0)
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) ends his turn.
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) starts his turn with 10/10 mana
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) receives card [MINION 'Kor'kron Elite' Manacost:4]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) uses [HERO_POWER 'Armor Up!' Manacost:2]
+13:59:43 DEBUG - [HERO 'Garrosh Hellscream'id:2 0/23] gains 2 armor
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) plays [MINION 'Kor'kron Elite' Manacost:4]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) summons [MINION 'Kor'kron Elite'id:27 4/3 CHARGE]
+13:59:43 DEBUG - [MINION 'Kor'kron Elite'id:27 4/3 CHARGE] attacks [HERO 'Valeera Sanguinar'id:1 0/5]
+13:59:43 DEBUG - Valeera Sanguinar receives 4 damage, hp now: 1(0)
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) starts his turn with 10/10 mana
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) receives card [SPELL 'Sprint' Manacost:7]
+13:59:43 DEBUG - [MINION 'Voodoo Doctor'id:24 2/1] attacks [MINION 'Kor'kron Elite'id:27 4/3 CHARGE]
+13:59:43 DEBUG - [MINION 'Kor'kron Elite'id:27 4/3 CHARGE] is damaged for 2
+13:59:43 DEBUG - [MINION 'Voodoo Doctor'id:24 2/1] is damaged for 4
+13:59:43 DEBUG - [MINION 'Voodoo Doctor'id:24 2/-3] is destroyed
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) uses [HERO_POWER 'Dagger Mastery' Manacost:2]
+13:59:43 DEBUG - [HERO 'Valeera Sanguinar'id:1 0/1] equips weapon [WEAPON 'Wicked Knife'id:28 0/0]
+13:59:43 DEBUG - [MINION 'Boulderfist Ogre'id:20 6/6] attacks [MINION 'Kor'kron Elite'id:27 4/1 CHARGE]
+13:59:43 DEBUG - [MINION 'Kor'kron Elite'id:27 4/1 CHARGE] is damaged for 6
+13:59:43 DEBUG - [MINION 'Boulderfist Ogre'id:20 6/6] is damaged for 4
+13:59:43 DEBUG - [MINION 'Kor'kron Elite'id:27 4/-5 CHARGE] is destroyed
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) plays [SPELL 'Sprint' Manacost:7]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) receives card [MINION 'Voodoo Doctor' Manacost:1]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) receives card [SPELL 'Vanish' Manacost:6]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) receives card [SPELL 'Assasinate' Manacost:5]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) receives card [SPELL 'Deadly Poison' Manacost:1]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) plays [MINION 'Voodoo Doctor' Manacost:1]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) summons [MINION 'Voodoo Doctor'id:29 2/1]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) picks random target: Garrosh Hellscream
+13:59:43 DEBUG - [HERO 'Garrosh Hellscream'id:2 0/23] is healed for 2, hp now: 23
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) ends his turn.
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) starts his turn with 10/10 mana
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) receives card [SPELL 'Charge' Manacost:0]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) uses [HERO_POWER 'Armor Up!' Manacost:2]
+13:59:43 DEBUG - [HERO 'Garrosh Hellscream'id:2 0/25] gains 2 armor
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) starts his turn with 10/10 mana
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) receives card [SPELL 'Sprint' Manacost:7]
+13:59:43 DEBUG - [MINION 'Boulderfist Ogre'id:20 6/2] attacks [HERO 'Garrosh Hellscream'id:2 0/25]
+13:59:43 DEBUG - Garrosh Hellscream receives 6 damage, hp now: 23(0)
+13:59:43 DEBUG - [MINION 'Voodoo Doctor'id:29 2/1] attacks [HERO 'Garrosh Hellscream'id:2 0/23]
+13:59:43 DEBUG - Garrosh Hellscream receives 2 damage, hp now: 21(0)
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) plays [SPELL 'Deadly Poison' Manacost:1]
+13:59:43 DEBUG - [WEAPON 'Wicked Knife'id:28 0/0] gains (2/0)
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) plays [MINION 'Archmage' Manacost:6]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) summons [MINION 'Archmage'id:30 4/7 SPELL_POWER]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) uses [HERO_POWER 'Dagger Mastery' Manacost:2]
+13:59:43 DEBUG - [HERO 'Valeera Sanguinar'id:1 0/1] equips weapon [WEAPON 'Wicked Knife'id:31 0/0]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) ends his turn.
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) starts his turn with 10/10 mana
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) receives card [SPELL 'Heroic Strike' Manacost:2]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) uses [HERO_POWER 'Armor Up!' Manacost:2]
+13:59:43 DEBUG - [HERO 'Garrosh Hellscream'id:2 0/21] gains 2 armor
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) plays [SPELL 'Heroic Strike' Manacost:2]
+13:59:43 DEBUG - [HERO 'Garrosh Hellscream'id:2 0/21] gains 4 attack
+13:59:43 DEBUG - [HERO 'Garrosh Hellscream'id:2 4/21] attacks [MINION 'Boulderfist Ogre'id:20 6/2]
+13:59:43 DEBUG - [MINION 'Boulderfist Ogre'id:20 6/2] is damaged for 4
+13:59:43 DEBUG - Garrosh Hellscream receives 6 damage, hp now: 17(0)
+13:59:43 DEBUG - [MINION 'Boulderfist Ogre'id:20 6/-2] is destroyed
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) ends his turn.
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) starts his turn with 10/10 mana
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) receives card [MINION 'Raid Leader' Manacost:3]
+13:59:43 DEBUG - [MINION 'Voodoo Doctor'id:29 2/1] attacks [HERO 'Garrosh Hellscream'id:2 0/17]
+13:59:43 DEBUG - Garrosh Hellscream receives 2 damage, hp now: 15(0)
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) plays [SPELL 'Vanish' Manacost:6]
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) uses [HERO_POWER 'Dagger Mastery' Manacost:2]
+13:59:43 DEBUG - [HERO 'Valeera Sanguinar'id:1 0/1] equips weapon [WEAPON 'Wicked Knife'id:32 0/0]
+13:59:43 DEBUG - [MINION 'Archmage'id:30 4/7 SPELL_POWER] attacks [HERO 'Garrosh Hellscream'id:2 0/15]
+13:59:43 DEBUG - Garrosh Hellscream receives 4 damage, hp now: 11(0)
+13:59:43 DEBUG - 'Bot' (Valeera Sanguinar) ends his turn.
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) starts his turn with 10/10 mana
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) receives card [MINION 'Nightblade' Manacost:5]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) plays [MINION 'Nightblade' Manacost:5]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) summons [MINION 'Nightblade'id:33 4/4]
+13:59:43 DEBUG - 'Human' (Garrosh Hellscream) picks random target: Valeera Sanguinar
+13:59:43 DEBUG - Valeera Sanguinar receives 3 damage, hp now: -2(0)
+13:59:43 DEBUG - Game finished after 30 turns, the winner is: 'Human' (Garrosh Hellscream)
+13:59:43 INFO  - Games played: 1
+13:59:43 INFO  - Duration: 108ms
+13:59:43 INFO  - Player 'Human' (Garrosh Hellscream) won 1 games

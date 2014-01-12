@@ -9,7 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 
 public abstract class Entity {
@@ -20,6 +20,7 @@ public abstract class Entity {
 	private final Card sourceCard;
 	private final List<SpellTrigger> spellTriggers = new ArrayList<>();
 	private Race race = Race.NONE;
+	private int id;
 
 	public Entity(Card sourceCard) {
 		this.setName(sourceCard != null ? sourceCard.getName() : null);
@@ -55,8 +56,8 @@ public abstract class Entity {
 		return (GameAction) getTag(GameTag.DEATHRATTLE);
 	}
 
-	public ISpell getEnrageSpell() {
-		return (ISpell) getTag(GameTag.ENRAGE_SPELL);
+	public Spell getEnrageSpell() {
+		return (Spell) getTag(GameTag.ENRAGE_SPELL);
 	}
 
 	public abstract EntityType getEntityType();
@@ -171,7 +172,7 @@ public abstract class Entity {
 
 	@Override
 	public String toString() {
-		String result = "["  + getEntityType() + " '" + getName() + "' ";
+		String result = "["  + getEntityType() + " '" + getName() + "'id:" + getId() + " ";
 		result += getAttack() + "/" + getHp();
 		String prefix = " ";
 		for (GameTag tag : tags.keySet()) {
@@ -182,5 +183,13 @@ public abstract class Entity {
 		}
 		result += "]";
 		return result;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

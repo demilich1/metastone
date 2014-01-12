@@ -1,7 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.heroes.powers;
 
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.SingleTargetDamageSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Fireblast extends HeroPower {
 	
@@ -10,7 +10,7 @@ public class Fireblast extends HeroPower {
 	public Fireblast() {
 		super("Fireblast");
 		setTargetRequirement(TargetSelection.ANY);
-		setSpell(new SingleTargetDamageSpell(1));
+		setSpell(new DamageSpell(1));
 	}
 
 }

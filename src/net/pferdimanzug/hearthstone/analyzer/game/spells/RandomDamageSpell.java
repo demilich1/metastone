@@ -7,20 +7,21 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
-public class RandomDamageSpell extends DamageSpell {
+public class RandomDamageSpell extends Spell {
 
 	private final int iterations;
+	private int damage;
 
 	public RandomDamageSpell(int damage, int iterations) {
-		super(damage);
+		this.damage = damage;
 		this.iterations = iterations;
 	}
 
 	@Override
-	public void cast(GameContext context, Player player, Entity target) {
+	protected void onCast(GameContext context, Player player, Entity target) {
 		Player opponent = context.getOpponent(player);
 		for (int i = 0; i < iterations; i++) {
-			doDamage(context, opponent, getDamage());
+			doDamage(context, opponent, damage);
 		}
 	}
 	

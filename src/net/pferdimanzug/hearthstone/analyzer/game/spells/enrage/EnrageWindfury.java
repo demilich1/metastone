@@ -12,8 +12,8 @@ public class EnrageWindfury extends Enrage {
 	}
 
 	@Override
-	public void cast(GameContext context, Player player, Entity target) {
-		super.cast(context, player, target);
+	protected void onCast(GameContext context, Player player, Entity target) {
+		super.onCast(context, player, target);
 		if (target.hasTag(GameTag.ENRAGED)) {
 			target.setTag(GameTag.WINDFURY);
 		} else {

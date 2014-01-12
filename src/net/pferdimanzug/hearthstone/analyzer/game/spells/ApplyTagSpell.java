@@ -8,7 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ApplyTagSpell implements ISpell {
+public class ApplyTagSpell extends Spell {
 	
 	private static Logger logger = LoggerFactory.getLogger(ApplyTagSpell.class);
 	
@@ -20,7 +20,7 @@ public class ApplyTagSpell implements ISpell {
 	}
 
 	@Override
-	public void cast(GameContext context, Player player, Entity target) {
+	protected void onCast(GameContext context, Player player, Entity target) {
 		for (GameTag tag : tags) {
 			logger.debug("Applying tag {} to {}", tag, target);
 			target.setTag(tag);

@@ -1,7 +1,10 @@
 package net.pferdimanzug.hearthstone.analyzer.game.spells;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
+import net.pferdimanzug.hearthstone.analyzer.game.Player;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
-public abstract class HealingSpell implements ISpell {
+public class HealingSpell extends Spell {
 
 	private final int healing;
 
@@ -9,8 +12,9 @@ public abstract class HealingSpell implements ISpell {
 		this.healing = healing;
 	}
 
-	public int getHealing() {
-		return healing;
+	@Override
+	protected void onCast(GameContext context, Player player, Entity target) {
+		context.getLogic().heal(target, healing);
 	}
 
 }

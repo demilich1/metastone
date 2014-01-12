@@ -7,14 +7,14 @@ import java.util.concurrent.ThreadLocalRandom;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class TotemicCall extends HeroPower {
 	
@@ -61,7 +61,7 @@ public class TotemicCall extends HeroPower {
 
 		
 	}
-	private class TotemicCallSpell implements ISpell {
+	private class TotemicCallSpell extends Spell {
 
 		private boolean alreadyOnBoard(List<Minion> minions, String minionName) {
 			for (Entity minion : minions) {
@@ -74,7 +74,7 @@ public class TotemicCall extends HeroPower {
 		
 
 		@Override
-		public void cast(GameContext context, Player player, Entity target) {
+		protected void onCast(GameContext context, Player player, Entity target) {
 			List<Minion> availableTotems = new ArrayList<Minion>();
 			for (Minion totem : getTotems()) {
 				if (!alreadyOnBoard(player.getMinions(), totem.getName())) {

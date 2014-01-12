@@ -2,16 +2,16 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Swipe extends SpellCard {
 
-	private class SwipeSpell implements ISpell {
+	private class SwipeSpell extends Spell {
 
 		private final int primaryDamage;
 		private final int secondaryDamage;
@@ -21,7 +21,7 @@ public class Swipe extends SpellCard {
 			this.secondaryDamage = secondaryDamage;
 		}
 
-		public void cast(GameContext context, Player player, Entity target) {
+		protected void onCast(GameContext context, Player player, Entity target) {
 			damage(context, target, context.getOpponent(player).getHero());
 			for (Entity minion : target.getOwner().getMinions()) {
 				damage(context, target, minion);

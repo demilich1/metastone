@@ -1,33 +1,23 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.SingleTargetDamageSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.HealingSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetKey;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class DrainLife extends SpellCard {
 
-	private class DrainLifeSpell extends SingleTargetDamageSpell {
-
-		public DrainLifeSpell(int damage) {
-			super(damage);
-		}
-
-		@Override
-		public void cast(GameContext context, Player player, Entity target) {
-			super.cast(context, player, target);
-			context.getLogic().heal(player.getHero(), getDamage());
-		}
-		
-	}
-	
 	public DrainLife() {
 		super("Drain Life", Rarity.FREE, HeroClass.WARLOCK, 3);
-		setSpell(new DrainLifeSpell(2));
+		Spell damage = new DamageSpell(2);
+		Spell heal = new HealingSpell(2);
+		heal.setTarget(TargetKey.FRIENDLY_HERO);
+		setSpell(new MetaSpell(damage, heal));
 		//TODO: can this be cast on own hero?
 		setTargetRequirement(TargetSelection.ANY);
 		

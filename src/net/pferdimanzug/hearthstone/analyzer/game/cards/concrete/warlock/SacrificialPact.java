@@ -1,30 +1,25 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroySpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.HealingSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetKey;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class SacrificialPact extends SpellCard {
 
-	private class SacrificialPactSpell extends DestroySpell {
-
-		@Override
-		public void cast(GameContext context, Player player, Entity target) {
-			super.cast(context, player, target);
-			context.getLogic().heal(player.getHero(), 5);
-		}
-		
-	}
-	
 	public SacrificialPact() {
 		super("Sacrificial Pact", Rarity.FREE, HeroClass.WARLOCK, 0);
-		setSpell(new SacrificialPactSpell());
+		Spell destroyDemon = new DestroySpell();
+		Spell heal = new HealingSpell(5);
+		heal.setTarget(TargetKey.FRIENDLY_HERO);
+		setSpell(new MetaSpell(destroyDemon, heal));
 		setTargetRequirement(TargetSelection.ANY);
 	}
 

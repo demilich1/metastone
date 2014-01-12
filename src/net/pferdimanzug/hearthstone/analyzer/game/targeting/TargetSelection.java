@@ -1,4 +1,4 @@
-package net.pferdimanzug.hearthstone.analyzer.game.actions;
+package net.pferdimanzug.hearthstone.analyzer.game.targeting;
 
 public enum TargetSelection {
 	NONE,

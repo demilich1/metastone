@@ -4,16 +4,16 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetKey;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public abstract class SpellCard extends Card {
 
-	private ISpell spell;
+	private Spell spell;
 	private TargetSelection targetRequirement;
-	private EffectHint effectHint;
 
 	protected SpellCard(String name, CardType cardType, Rarity rarity, HeroClass classRestriction, int manaCost) {
 		super(name, cardType, rarity, classRestriction, manaCost);
@@ -31,11 +31,7 @@ public abstract class SpellCard extends Card {
 		return true;
 	}
 
-	public EffectHint getEffectHint() {
-		return effectHint;
-	}
-
-	public ISpell getSpell() {
+	public Spell getSpell() {
 		return spell;
 	}
 
@@ -48,27 +44,30 @@ public abstract class SpellCard extends Card {
 		return new PlayCardAction(this) {
 			{
 				setTargetRequirement(targetRequirement);
-				setEffectHint(getEffectHint());
 				setActionType(ActionType.SPELL);
 			}
 
 			@Override
 			protected void play(GameContext context, Player player) {
-				context.getLogic().castSpell(player, spell, getTarget());
+				if (!spell.hasPredefinedTarget()) {
+					spell.setTarget(getTargetKey());
+				}
+				
+				context.getLogic().castSpell(player, spell);
 			}
 		};
 	}
 
-	public void setEffectHint(EffectHint effectHint) {
-		this.effectHint = effectHint;
-	}
-	
-	public void setSpell(ISpell spell) {
+	public void setSpell(Spell spell) {
 		this.spell = spell;
 	}
 	
 	public void setTargetRequirement(TargetSelection targetRequirement) {
 		this.targetRequirement = targetRequirement;
+	}
+	
+	public void setPredefinedTarget(TargetKey target) {
+		spell.setTarget(target);
 	}
 
 }

@@ -3,6 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.actions;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class PhysicalAttackAction extends GameAction {
 	
@@ -16,7 +17,8 @@ public class PhysicalAttackAction extends GameAction {
 
 	@Override
 	public void execute(GameContext context, Player player) {
-		context.getLogic().fight(attacker, getTarget());
+		Entity target = context.resolveSingleTarget(player, getTargetKey()); 
+		context.getLogic().fight(attacker, target);
 	}
 
 

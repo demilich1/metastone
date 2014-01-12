@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
-public class SummonRandomSpell implements ISpell {
+public class SummonRandomSpell extends Spell {
 	
 	private final MinionCard[] minions;
 
@@ -16,7 +16,7 @@ public class SummonRandomSpell implements ISpell {
 	}
 
 	@Override
-	public void cast(GameContext context, Player player, Entity target) {
+	protected void onCast(GameContext context, Player player, Entity target) {
 		MinionCard randomMinionCard = getRandomMinion();
 		context.getLogic().summon(player, randomMinionCard.summon(), null);
 	}

@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.WeaponCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
@@ -11,9 +10,11 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
 import net.pferdimanzug.hearthstone.analyzer.game.events.IGameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.PhysicalAttackEvent;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.SingleTargetHealingSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.HealingSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.GameEventTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetKey;
 
 public class TruesilverChampion extends WeaponCard {
 
@@ -30,11 +31,6 @@ public class TruesilverChampion extends WeaponCard {
 		}
 
 		@Override
-		public Entity getTarget(GameContext context, Entity host) {
-			return host.getOwner().getHero();
-		}
-
-		@Override
 		public GameEventType interestedIn() {
 			return GameEventType.PHYSICAL_ATTACK;
 		}
@@ -48,7 +44,9 @@ public class TruesilverChampion extends WeaponCard {
 	@Override
 	public Weapon getWeapon() {
 		Weapon trueSilverChampion = createWeapon(4, 2);
-		SpellTrigger trigger = new SpellTrigger(new TruesilverChampionWeaponTrigger(), new SingleTargetHealingSpell(2));
+		Spell healHero = new HealingSpell(2);
+		healHero.setTarget(TargetKey.FRIENDLY_HERO);
+		SpellTrigger trigger = new SpellTrigger(new TruesilverChampionWeaponTrigger(), healHero);
 		trueSilverChampion.addSpellTrigger(trigger);
 		return trueSilverChampion;
 	}

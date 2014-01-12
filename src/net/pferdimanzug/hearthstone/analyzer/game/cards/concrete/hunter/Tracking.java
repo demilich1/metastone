@@ -5,13 +5,13 @@ import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Tracking extends SpellCard {
 
@@ -23,12 +23,10 @@ public class Tracking extends SpellCard {
 	// involves player meta-game knowledge
 	// so for now, implemented as: draw 3, pick a random
 	// TODO: offer AI choice of discarded cards
-	private class TrackingSpell implements ISpell {
+	private class TrackingSpell extends Spell {
 
 		@Override
-		public void cast(GameContext context, Player player, Entity target) {
-			
-			// this is a tough one
+		protected void onCast(GameContext context, Player player, Entity target) {
 			List<Card> drawnCards = new ArrayList<>();
 			for (int i = 0; i < 3; i++) {
 				drawnCards.add(player.getDeck().removeFirst());

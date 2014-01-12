@@ -1,33 +1,18 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.DamageReceivedTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetKey;
 
 public class GurubashiBerserker extends MinionCard {
 	
-	private class GurubashiBerserkerTrigger extends DamageReceivedTrigger {
-
-		private final Entity target;
-
-		public GurubashiBerserkerTrigger(Entity target) {
-			this.target = target;
-		}
-
-		@Override
-		public Entity getTarget(GameContext context, Entity host) {
-			return target;
-		}		
-		
-	}
 	public static final int BASE_ATTACK = 2;
-
 	public static final int ATTACK_BONUS = 3;
 
 	public GurubashiBerserker() {
@@ -37,7 +22,9 @@ public class GurubashiBerserker extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion gurubashiBerserker = createMinion(BASE_ATTACK, 7);
-		SpellTrigger trigger = new SpellTrigger(new GurubashiBerserkerTrigger(gurubashiBerserker), new BuffSpell(3, 0));
+		Spell buffAttack = new BuffSpell(3, 0);
+		buffAttack.setTarget(TargetKey.pointTo(gurubashiBerserker));
+		SpellTrigger trigger = new SpellTrigger(new DamageReceivedTrigger(), buffAttack);
 		gurubashiBerserker.addSpellTrigger(trigger);
 		return gurubashiBerserker;
 	}

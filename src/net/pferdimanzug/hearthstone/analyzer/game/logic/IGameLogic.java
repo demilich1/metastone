@@ -6,19 +6,22 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.HeroPower;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.ISpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 
 public interface IGameLogic {
 	
 	public boolean canPlayCard(Player player, Card card);
-	public void castSpell(Player player, ISpell spell, Entity target);
+	public void castSpell(Player player, Spell spell);
 	public void damage(Entity target, int damage);
 	public void destroy(Entity target);
 	public Player determineBeginner(Player... players);
 	
 	public void drawCard(Player player);
+	public void equipWeapon(Player player, Hero hero, Weapon weapon);
 	
 	public void endTurn(Player player);
 	public void fight(Entity attacker, Entity defender);
