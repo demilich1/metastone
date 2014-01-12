@@ -15,7 +15,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class GameContext {
+public class GameContext implements Cloneable {
 
 	private static Logger logger = LoggerFactory.getLogger(GameContext.class);
 
@@ -122,6 +122,17 @@ public class GameContext {
 
 	public List<Entity> getPendingEntities() {
 		return pendingEntities;
+	}
+	
+	public GameContext clone() {
+		try {
+			//TODO: clone players, etc
+			return (GameContext) super.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

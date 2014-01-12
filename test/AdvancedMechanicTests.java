@@ -14,7 +14,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Anduin;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
