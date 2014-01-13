@@ -15,6 +15,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.rits.cloning.Cloner;
+
 public class GameContext implements Cloneable {
 
 	private static Logger logger = LoggerFactory.getLogger(GameContext.class);
@@ -138,14 +140,8 @@ public class GameContext implements Cloneable {
 	}
 	
 	public GameContext clone() {
-		try {
-			//TODO: clone players, etc
-			return (GameContext) super.clone();
-		} catch (CloneNotSupportedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+		Cloner cloner = new Cloner();
+		return cloner.deepClone(this);
 	}
 
 }

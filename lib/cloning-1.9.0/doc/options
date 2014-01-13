@@ -1,0 +1,24 @@
+-classpath
+'/home/ariskk/temp/t/cloning/target/classes:/home/ariskk/.m2/repository/org/objenesis/objenesis/1.2/objenesis-1.2.jar'
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'/home/ariskk/temp/t/cloning/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2012. All Rights Reserved.'
+-charset
+'UTF-8'
+-d
+'/home/ariskk/temp/t/cloning/target/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'cloning 1.9.0 API'
+-link
+'http://java.sun.com/j2se/1.5.0/docs/api'
+-use
+-version
+-windowtitle
+'cloning 1.9.0 API'

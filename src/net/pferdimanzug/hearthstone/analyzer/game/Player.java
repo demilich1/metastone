@@ -88,5 +88,17 @@ public class Player implements Cloneable {
 	public void setMaxMana(int maxMana) {
 		this.maxMana = maxMana;
 	}
+
+	@Override
+	public Player clone() {
+		try {
+			return (Player) super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
 	
 }

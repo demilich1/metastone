@@ -15,5 +15,10 @@
 	<classpathentry kind="con" path="org.testng.TESTNG_CONTAINER"/>
 	<classpathentry kind="lib" path="forms-1.3.0.jar" sourcepath="forms-1.3.0-src.zip"/>
 	<classpathentry kind="lib" path="miglayout15-swing.jar" sourcepath="miglayout-src.zip"/>
+	<classpathentry kind="lib" path="lib/cloning-1.9.0/cloning-1.9.0.jar" sourcepath="lib/cloning-1.9.0/cloning-1.9.0-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/projects/java/hs_sim/lib/cloning-1.9.0/doc/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
