@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
-import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
@@ -16,7 +15,12 @@ public abstract class Entity {
 
 	private String name;
 	private final HashMap<GameTag, Object> tags = new HashMap<GameTag, Object>();
-	private Player owner;
+	// index of the owning player, i.e.
+	// 0 -> owned by player 1
+	// 1 -> owned by player 2
+	// implemented it that way because of the same reason
+	// the class TargetKey was created - lazy references are better for cloning
+	private int ownerIndex;
 	private final Card sourceCard;
 	private final List<SpellTrigger> spellTriggers = new ArrayList<>();
 	private Race race = Race.NONE;
@@ -74,8 +78,8 @@ public abstract class Entity {
 		return name;
 	}
 
-	public Player getOwner() {
-		return owner;
+	public int getOwner() {
+		return ownerIndex;
 	}
 
 	public Race getRace() {
@@ -150,8 +154,8 @@ public abstract class Entity {
 		this.name = name;
 	}
 
-	public void setOwner(Player owner) {
-		this.owner = owner;
+	public void setOwner(int ownerIndex) {
+		this.ownerIndex = ownerIndex;
 	}
 
 	public void setRace(Race race) {

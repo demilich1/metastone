@@ -134,7 +134,8 @@ public class GameLogic implements IGameLogic {
 	
 	private void destroyMinion(Entity minion) {
 		logger.debug("{} is destroyed", minion);
-		minion.getOwner().getMinions().remove(minion);
+		Player owner = context.getPlayer(minion.getOwner());
+		owner.getMinions().remove(minion);
 		for (SpellTrigger spellTrigger : minion.getSpellTriggers()) {
 			context.getEventManager().removeGameEventListener(spellTrigger);
 		}
@@ -142,7 +143,8 @@ public class GameLogic implements IGameLogic {
 	}
 	
 	private void destroyWeapon(Weapon weapon) {
-		weapon.getOwner().getHero().setWeapon(null);
+		Player owner = context.getPlayer(weapon.getOwner());
+		owner.getHero().setWeapon(null);
 	}
 
 	@Override
@@ -229,7 +231,8 @@ public class GameLogic implements IGameLogic {
 		}
 		
 		Spell enrageSpell = (Spell) entity.getTag(GameTag.ENRAGE_SPELL);
-		enrageSpell.cast(context, entity.getOwner(), toList(entity));
+		Player owner = context.getPlayer(entity.getOwner());
+		enrageSpell.cast(context, owner, toList(entity));
 	}
 	
 	@Override
@@ -270,6 +273,7 @@ public class GameLogic implements IGameLogic {
 	@Override
 	public void init(Player player, boolean begins) {
 		player.getHero().setId(idFactory.generateId());
+		player.getHero().setOwner(context.getPlayerIndex(player));
 		player.getHero().setMaxHp(MAX_HERO_HP);
 		player.getHero().setHp(MAX_HERO_HP);
 		
@@ -406,7 +410,7 @@ public class GameLogic implements IGameLogic {
 			// TODO: implement summoning next to
 			// player.getMinions().addAfter(minion, nextTo);
 		}
-		minion.setOwner(player);
+		minion.setOwner(context.getPlayerIndex(player));
 		for (SpellTrigger spellTrigger : minion.getSpellTriggers()) {
 			spellTrigger.setHost(minion);
 			context.getEventManager().registerGameEventListener(spellTrigger);

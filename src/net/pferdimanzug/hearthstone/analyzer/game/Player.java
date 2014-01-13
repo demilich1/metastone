@@ -10,7 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
-public class Player {
+public class Player implements Cloneable {
 
 	private final String name;
 	private final Hero hero;
@@ -32,7 +32,6 @@ public class Player {
 		this.minions = new ArrayList<>();
 		this.hand = new CardCollection<>();
 		this.graveyard = new CardCollection<>();
-		hero.setOwner(this);
 	}
 	
 	public IBehaviour getBehaviour() {

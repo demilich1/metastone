@@ -65,6 +65,19 @@ public class GameContext implements Cloneable {
 	public Player getPlayer2() {
 		return getPlayers()[1];
 	}
+	
+	public Player getPlayer(int index) {
+		return players[index];
+	}
+	
+	public int getPlayerIndex(Player player) {
+		for (int i = 0; i < players.length; i++) {
+			if (players[i] == player) {
+				return i;
+			}
+		}
+		return -1;
+	}
 
 	public GameResult getResult() {
 		return result;
