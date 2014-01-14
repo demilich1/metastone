@@ -309,7 +309,7 @@ public class GameLogic implements IGameLogic {
 			if (validTargets.isEmpty() && action.getActionType() == ActionType.MINION_ABILITY) {
 				return;
 			}
-			Entity target = player.getBehaviour().provideTargetFor(action, validTargets);
+			Entity target = player.getBehaviour().provideTargetFor(player, action, validTargets);
 			if (target != null) {
 				if (!validTargets.contains(target)) {
 					throw new IllegalArgumentException("Selected invalid target " + target.getName() + " for action "

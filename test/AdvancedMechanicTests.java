@@ -79,12 +79,12 @@ public class AdvancedMechanicTests extends BasicTests {
 		mage.setBehaviour(new IBehaviour() {
 			
 			@Override
-			public Entity provideTargetFor(GameAction action, List<Entity> validTargets) {
+			public Entity provideTargetFor(Player player, GameAction action, List<Entity> validTargets) {
 				return validTargets.get(0);
 			}
 
 			@Override
-			public GameAction requestAction(GameContext context, List<GameAction> validActions) {
+			public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
 				return null;
 			}
 		});

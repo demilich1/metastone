@@ -106,7 +106,7 @@ public class GameContext implements Cloneable {
 		turn++;
 		logic.startTurn(player);
 		GameAction nextAction = null;
-		while ((nextAction = player.getBehaviour().requestAction(this, logic.getValidActions(player))) != null) {
+		while ((nextAction = player.getBehaviour().requestAction(this, player, logic.getValidActions(player))) != null) {
 			logic.performGameAction(player, nextAction);
 			
 //			ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_STATE_UPDATE, this);
@@ -141,7 +141,12 @@ public class GameContext implements Cloneable {
 	
 	public GameContext clone() {
 		Cloner cloner = new Cloner();
-		return cloner.deepClone(this);
+		GameContext clone = cloner.deepClone(this);
+		//clone.getLogic().s
+		return clone;
 	}
 
+	public int getTurn() {
+		return turn;
+	}
 }

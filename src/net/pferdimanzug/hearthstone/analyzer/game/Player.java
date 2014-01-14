@@ -10,7 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
-public class Player implements Cloneable {
+public class Player {
 
 	private final String name;
 	private final Hero hero;
@@ -89,16 +89,4 @@ public class Player implements Cloneable {
 		this.maxMana = maxMana;
 	}
 
-	@Override
-	public Player clone() {
-		try {
-			return (Player) super.clone();
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	
-	
 }
