@@ -31,11 +31,11 @@ public class AdvancedMechanicTests extends BasicTests {
 
 		MinionCard amaniBerserkerCard = new AmaniBerserker();
 		priest.getHand().add(amaniBerserkerCard);
-		context.getLogic().performGameAction(priest, amaniBerserkerCard.play());
+		context.getLogic().performGameAction(priest.getId(), amaniBerserkerCard.play());
 		
 		MinionCard stonetuskBoarCard = new StonetuskBoar();
 		mage.getHand().add(stonetuskBoarCard);
-		context.getLogic().performGameAction(mage, stonetuskBoarCard.play());
+		context.getLogic().performGameAction(mage.getId(), stonetuskBoarCard.play());
 		
 		Entity attacker = getSingleMinion(mage.getMinions());
 		Entity defender = getSingleMinion(priest.getMinions());
@@ -46,17 +46,17 @@ public class AdvancedMechanicTests extends BasicTests {
 		// attack once, should apply the enrage attack bonus
 		GameAction attackAction = new PhysicalAttackAction(attacker);
 		attackAction.setTarget(defender);
-		context.getLogic().performGameAction(mage, attackAction);
+		context.getLogic().performGameAction(mage.getId(), attackAction);
 		Assert.assertEquals(defender.getAttack(), AmaniBerserker.BASE_ATTACK + AmaniBerserker.ENRAGE_ATTACK_BONUS);
 		Assert.assertEquals(defender.hasTag(GameTag.ENRAGED), true);
 		// attack second time, enrage bonus should not increase
-		context.getLogic().performGameAction(mage, attackAction);
+		context.getLogic().performGameAction(mage.getId(), attackAction);
 		Assert.assertEquals(defender.getAttack(), AmaniBerserker.BASE_ATTACK + AmaniBerserker.ENRAGE_ATTACK_BONUS);
 		
 		// heal - enrage attack bonus should be gone
 		GameAction healAction = priest.getHero().getHeroPower().play();
 		healAction.setTarget(defender);
-		context.getLogic().performGameAction(priest, healAction);
+		context.getLogic().performGameAction(priest.getId(), healAction);
 		Assert.assertEquals(defender.getAttack(), AmaniBerserker.BASE_ATTACK);
 		Assert.assertEquals(defender.hasTag(GameTag.ENRAGED), false);
 	}
@@ -75,7 +75,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		MinionCard abusiveSergeant = new AbusiveSergeant();
 		mage.getHand().add(abusiveSergeant);
 		
-		context.getLogic().performGameAction(mage, devMonster.play());
+		context.getLogic().performGameAction(mage.getId(), devMonster.play());
 		mage.setBehaviour(new IBehaviour() {
 			
 			@Override
@@ -90,9 +90,9 @@ public class AdvancedMechanicTests extends BasicTests {
 		});
 		Entity testSubject = getSingleMinion(mage.getMinions());
 		Assert.assertEquals(testSubject.getAttack(), baseAttack);
-		context.getLogic().performGameAction(mage, abusiveSergeant.play());
+		context.getLogic().performGameAction(mage.getId(), abusiveSergeant.play());
 		Assert.assertEquals(testSubject.getAttack(), baseAttack + AbusiveSergeant.ATTACK_BONUS);
-		context.getLogic().endTurn(mage);
+		context.getLogic().endTurn(mage.getId());
 		Assert.assertEquals(testSubject.getAttack(), baseAttack);
 	}
 	
@@ -106,11 +106,11 @@ public class AdvancedMechanicTests extends BasicTests {
 
 		MinionCard minionCard1 = new DevMonster(2, 2, GameTag.DIVINE_SHIELD);
 		mage.getHand().add(minionCard1);
-		context.getLogic().performGameAction(mage, minionCard1.play());
+		context.getLogic().performGameAction(mage.getId(), minionCard1.play());
 		
 		MinionCard minionCard2 = new DevMonster(5, 5);
 		mage.getHand().add(minionCard2);
-		context.getLogic().performGameAction(warrior, minionCard2.play());
+		context.getLogic().performGameAction(warrior.getId(), minionCard2.play());
 		
 		Entity attacker = getSingleMinion(mage.getMinions());
 		Entity defender = getSingleMinion(warrior.getMinions());
@@ -118,12 +118,12 @@ public class AdvancedMechanicTests extends BasicTests {
 		GameAction attackAction = new PhysicalAttackAction(attacker);
 		attackAction.setTarget(defender);
 		
-		context.getLogic().performGameAction(mage, attackAction);
+		context.getLogic().performGameAction(mage.getId(), attackAction);
 		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp());
 		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - attacker.getAttack());
 		Assert.assertEquals(attacker.isDead(), false);
 		
-		context.getLogic().performGameAction(mage, attackAction);
+		context.getLogic().performGameAction(mage.getId(), attackAction);
 		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp() - defender.getAttack());
 		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - attacker.getAttack() * 2);
 		Assert.assertEquals(attacker.isDead(), true);

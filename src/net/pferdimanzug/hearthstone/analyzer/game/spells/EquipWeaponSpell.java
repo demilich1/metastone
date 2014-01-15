@@ -17,7 +17,7 @@ public class EquipWeaponSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
 		Weapon weapon = weaponCard.getWeapon();
-		context.getLogic().equipWeapon(player, player.getHero(), weapon);
+		context.getLogic().equipWeapon(player.getId(), weapon);
 		
 	}
 

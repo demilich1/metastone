@@ -30,8 +30,8 @@ public class TargetingTests extends TestBase {
 		MinionCard attackerCard = new Wisp();
 		mage.getHand().add(attackerCard);
 		
-		context.getLogic().performGameAction(victim, tauntCard.play());
-		context.getLogic().performGameAction(mage, attackerCard.play());
+		context.getLogic().performGameAction(victim.getId(), tauntCard.play());
+		context.getLogic().performGameAction(mage.getId(), attackerCard.play());
 		
 		Entity attacker = getSingleMinion(mage.getMinions());
 		Entity defender = getSingleMinion(victim.getMinions());
@@ -40,19 +40,19 @@ public class TargetingTests extends TestBase {
 		List<Entity> validTargets;
 		
 		GameAction attackAction = new PhysicalAttackAction(attacker);
-		validTargets = context.getLogic().getValidTargets(mage, attackAction);
+		validTargets = context.getLogic().getValidTargets(mage.getId(), attackAction);
 		Assert.assertEquals(validTargets.size(), 1);
 		
 		GameAction fireblast = mage.getHero().getHeroPower().play();
-		validTargets = context.getLogic().getValidTargets(mage, fireblast);
+		validTargets = context.getLogic().getValidTargets(mage.getId(), fireblast);
 		Assert.assertEquals(validTargets.size(), 4);
 		
 		defender.removeTag(GameTag.TAUNT);
 		
-		validTargets = context.getLogic().getValidTargets(mage, attackAction);
+		validTargets = context.getLogic().getValidTargets(mage.getId(), attackAction);
 		Assert.assertEquals(validTargets.size(), 2);
 		
-		validTargets = context.getLogic().getValidTargets(mage, fireblast);
+		validTargets = context.getLogic().getValidTargets(mage.getId(), fireblast);
 		Assert.assertEquals(validTargets.size(), 4);
 		
 		//TODO: add stealth + taunt test

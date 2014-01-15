@@ -21,7 +21,7 @@ public class MortalCoil extends SpellCard {
 		protected void onCast(GameContext context, Player player, Entity target) {
 			super.onCast(context, player, target);
 			if (target.isDead()) {
-				context.getLogic().drawCard(player);
+				context.getLogic().drawCard(player.getId());
 			}
 		}
 		

@@ -27,7 +27,7 @@ public class ActionLogic {
 
 	private GameAction getHeroPowerAction(GameContext context, Player player) {
 		Hero hero = player.getHero();
-		if (!context.getLogic().canPlayCard(player, hero.getHeroPower())) {
+		if (!context.getLogic().canPlayCard(player.getId(), hero.getHeroPower())) {
 			return null;
 		}
 		return hero.getHeroPower().play();
@@ -58,7 +58,7 @@ public class ActionLogic {
 			playCardActions.add(heroPowerAction);
 		}
 		for (Card card : player.getHand()) {
-			if (!context.getLogic().canPlayCard(player, card)) {
+			if (!context.getLogic().canPlayCard(player.getId(), card)) {
 				continue;
 			}
 			

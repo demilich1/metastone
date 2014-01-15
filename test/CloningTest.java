@@ -2,6 +2,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.DebugDecks;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.PlayRandomBehaviour;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
@@ -23,6 +24,11 @@ public class CloningTest extends TestBase {
 		Player player2 = new Player("Random dude 2", hero2, DebugDecks.getRandomDeck(hero2.getHeroClass()));
 		player2.setBehaviour(new PlayRandomBehaviour());
 		GameContext original = new GameContext(player1, player2, new GameLogic());
+		DevMonster minionCard = new DevMonster(3, 3);
+		original.getLogic().receiveCard(player1.getId(), minionCard);
+		original.getLogic().performGameAction(player1.getId(), minionCard.play());
+		Entity testMinion = getSingleMinion(player1.getMinions());
+		
 		GameContext clone = original.clone();
 		
 		Assert.assertNotEquals(original, clone);
@@ -33,6 +39,7 @@ public class CloningTest extends TestBase {
 		
 		clone.play();
 		Assert.assertNotEquals(original.getTurn(), clone.getTurn());
+		Assert.assertEquals(testMinion.getHp(), 3);
 		System.out.println("\n********ORIGINAL********\n");
 		System.out.println(original.toString());
 		System.out.println("\n********CLONE********\n");

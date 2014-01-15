@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.spells.trigger;
 
-import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
 import net.pferdimanzug.hearthstone.analyzer.game.events.IGameEvent;
@@ -26,14 +25,14 @@ public class SpellTrigger implements IGameEventListener, Cloneable {
 
 	@Override
 	public void onGameEvent(IGameEvent event) {
-		Player owner = event.getGameContext().getPlayer(trigger.getOwner());
-		Entity host = event.getGameContext().resolveSingleTarget(owner, hostKey);
+		int ownerId = trigger.getOwner();
+		Entity host = event.getGameContext().resolveSingleTarget(ownerId, hostKey);
 		if (trigger.fire(event, host)) {
 			if (!spell.hasPredefinedTarget()) {
 				spell.setTarget(hostKey);
 			}
 			
-			event.getGameContext().getLogic().castSpell(owner, spell);
+			event.getGameContext().getLogic().castSpell(ownerId, spell);
 		}
 	}
 

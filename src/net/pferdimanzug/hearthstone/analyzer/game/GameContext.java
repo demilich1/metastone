@@ -20,6 +20,8 @@ import org.slf4j.LoggerFactory;
 import com.rits.cloning.Cloner;
 
 public class GameContext implements Cloneable {
+	public static final int PLAYER_1 = 0;
+	public static final int PLAYER_2 = 1;
 
 	private static final Logger logger = LoggerFactory.getLogger(GameContext.class);
 	private static final Cloner cloner = new Cloner();
@@ -41,16 +43,16 @@ public class GameContext implements Cloneable {
 	private GameResult result;
 
 	private int turn;
-	
+
 	static {
 		cloner.dontClone(TargetKey.class);
 	}
 
 	public GameContext(Player player1, Player player2, IGameLogic logic) {
-		this.getPlayers()[0] = player1;
-		player1.setId(0);
-		this.getPlayers()[1] = player2;
-		player2.setId(1);
+		this.getPlayers()[PLAYER_1] = player1;
+		player1.setId(PLAYER_1);
+		this.getPlayers()[PLAYER_2] = player2;
+		player2.setId(PLAYER_2);
 		this.logic = logic;
 		this.logic.setContext(this);
 	}
@@ -69,15 +71,15 @@ public class GameContext implements Cloneable {
 	}
 
 	public Player getOpponent(Player player) {
-		return player.getId() == 0 ? getPlayer2() : getPlayer1();
+		return player.getId() == PLAYER_1 ? getPlayer2() : getPlayer1();
 	}
 
 	public Player getPlayer1() {
-		return getPlayers()[0];
+		return getPlayers()[PLAYER_1];
 	}
 
 	public Player getPlayer2() {
-		return getPlayers()[1];
+		return getPlayers()[PLAYER_2];
 	}
 
 	public Player getPlayer(int index) {
@@ -94,10 +96,11 @@ public class GameContext implements Cloneable {
 
 	public void play() {
 		logger.debug("Game starts: " + getPlayer1().getName() + " VS. " + getPlayer2().getName());
-		activePlayer = logic.determineBeginner(getPlayer1(), getPlayer2());
+		int startingPlayerId = logic.determineBeginner(PLAYER_1, PLAYER_1);
+		activePlayer = getPlayer(startingPlayerId);
 		logger.debug(activePlayer.getName() + " begins");
-		logic.init(activePlayer, true);
-		logic.init(getOpponent(activePlayer), false);
+		logic.init(activePlayer.getId(), true);
+		logic.init(getOpponent(activePlayer).getId(), false);
 		while (!gameDecided()) {
 			playTurn(activePlayer);
 		}
@@ -107,9 +110,9 @@ public class GameContext implements Cloneable {
 
 	private void playTurn(Player player) {
 		turn++;
-		logic.startTurn(player);
+		logic.startTurn(player.getId());
 		GameAction nextAction = null;
-		while ((nextAction = player.getBehaviour().requestAction(this, player, logic.getValidActions(player))) != null) {
+		while ((nextAction = player.getBehaviour().requestAction(this, player, logic.getValidActions(player.getId()))) != null) {
 			logic.performGameAction(player.getId(), nextAction);
 
 			// ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_STATE_UPDATE,
@@ -123,7 +126,7 @@ public class GameContext implements Cloneable {
 				return;
 			}
 		}
-		logic.endTurn(player);
+		logic.endTurn(player.getId());
 		activePlayer = getOpponent(player);
 	}
 
@@ -135,7 +138,8 @@ public class GameContext implements Cloneable {
 		return targetLogic.resolveTargetKey(this, player, targetKey);
 	}
 
-	public Entity resolveSingleTarget(Player player, TargetKey targetKey) {
+	public Entity resolveSingleTarget(int playerId, TargetKey targetKey) {
+		Player player = getPlayer(playerId);
 		return targetLogic.resolveTargetKey(this, player, targetKey).get(0);
 	}
 
@@ -143,6 +147,7 @@ public class GameContext implements Cloneable {
 		return pendingEntities;
 	}
 
+	@Override
 	public GameContext clone() {
 		GameContext clone = cloner.deepClone(this);
 		clone.getLogic().setContext(clone);

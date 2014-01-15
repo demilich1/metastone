@@ -37,7 +37,10 @@ public class MinMaxBehaviour implements IBehaviour {
 		logger.debug("Current game state has a score of {}", bestScore);
 		for (GameAction gameAction : validActions) {
 			if (gameAction.getValidTargets() == null) {
+				logger.debug("Context before simulation\n"+context.toString());
 				GameContext simulationResult = simulateAction(context, player, gameAction, null);
+				logger.debug("Context after simulation\n"+context.toString());
+				logger.debug("Simulation result\n"+simulationResult.toString());
 				int gameStateScore = calculateGameStateScore(simulationResult, player.getId());
 				logger.debug("Action (no target) gains score of {}", gameStateScore);
 				if (gameStateScore > bestScore) {
@@ -46,7 +49,10 @@ public class MinMaxBehaviour implements IBehaviour {
 				}
 			} else {
 				for (Entity target : gameAction.getValidTargets()) {
+					logger.debug("Context before simulation\n"+context.toString());
 					GameContext simulationResult = simulateAction(context, player, gameAction, target);
+					logger.debug("Context after simulation\n"+context.toString());
+					logger.debug("Simulation result\n"+simulationResult.toString());
 					int gameStateScore = calculateGameStateScore(simulationResult, player.getId());
 					logger.debug("Action (target {}) gains score of {}", target, gameStateScore);
 					if (gameStateScore > bestScore) {

@@ -18,8 +18,8 @@ public class TestBase {
 		GameLogic logic = new GameLogic();
 		GameContext context = new GameContext(player1, player2, logic);
 		logic.setContext(context);
-		logic.init(player1, true);
-		logic.init(player2, false);
+		logic.init(GameContext.PLAYER_1, true);
+		logic.init(GameContext.PLAYER_2, false);
 		return context;
 	}
 	

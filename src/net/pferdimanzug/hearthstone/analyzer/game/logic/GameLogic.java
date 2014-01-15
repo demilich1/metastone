@@ -51,7 +51,8 @@ public class GameLogic implements IGameLogic {
 	private GameContext context;
 	
 	@Override
-	public boolean canPlayCard(Player player, Card card) {
+	public boolean canPlayCard(int playerId, Card card) {
+		Player player = context.getPlayer(playerId);
 		if (player.getMana() < card.getManaCost()) {
 			return false;
 		}
@@ -72,7 +73,8 @@ public class GameLogic implements IGameLogic {
 	}
 
 	@Override
-	public void castSpell(Player player, Spell spell) {
+	public void castSpell(int playerId, Spell spell) {
+		Player player = context.getPlayer(playerId);
 		spell.cast(context, player, targetLogic.resolveTargetKey(context, player, spell.getTarget()));
 	}
 
@@ -148,12 +150,13 @@ public class GameLogic implements IGameLogic {
 	}
 
 	@Override
-	public Player determineBeginner(Player... players) {
-		return ThreadLocalRandom.current().nextBoolean() ? players[0] : players[1];
+	public int determineBeginner(int... playerIds) {
+		return ThreadLocalRandom.current().nextBoolean() ? playerIds[0] : playerIds[1];
 	}
 
 	@Override
-	public void drawCard(Player player) {
+	public void drawCard(int playerId) {
+		Player player = context.getPlayer(playerId);
 		CardCollection<Card> deck = player.getDeck();
 		if (deck.isEmpty()) {
 			Hero hero = player.getHero();
@@ -165,11 +168,12 @@ public class GameLogic implements IGameLogic {
 		}
 
 		Card card = deck.removeFirst();
-		receiveCard(player, card);
+		receiveCard(playerId, card);
 	}
 
 	@Override
-	public void endTurn(Player player) {
+	public void endTurn(int playerId) {
+		Player player = context.getPlayer(playerId);
 		player.getHero().setTag(GameTag.ATTACK_BONUS, 0);
 		player.getHero().removeTag(GameTag.COMBO);
 		logger.debug("{} ends his turn.", player.getName());
@@ -206,12 +210,14 @@ public class GameLogic implements IGameLogic {
 	}
 
 	@Override
-	public List<GameAction> getValidActions(Player player) {
+	public List<GameAction> getValidActions(int playerId) {
+		Player player = context.getPlayer(playerId);
 		return actionLogic.getValidActions(context, player);
 	}
 
 	@Override
-	public List<Entity> getValidTargets(Player player, GameAction action) {
+	public List<Entity> getValidTargets(int playerId, GameAction action) {
+		Player player = context.getPlayer(playerId);
 		return targetLogic.getValidTargets(context, player, action);
 	}
 
@@ -271,7 +277,8 @@ public class GameLogic implements IGameLogic {
 	}
 
 	@Override
-	public void init(Player player, boolean begins) {
+	public void init(int playerId, boolean begins) {
+		Player player = context.getPlayer(playerId);
 		player.getHero().setId(idFactory.generateId());
 		player.getHero().setOwner(player.getId());
 		player.getHero().setMaxHp(MAX_HERO_HP);
@@ -282,11 +289,11 @@ public class GameLogic implements IGameLogic {
 		player.getDeck().shuffle();
 		
 		for (int j = 0; j < STARTER_CARDS; j++) {
-			drawCard(player);
+			drawCard(playerId);
 		}
 		// second player gets additional card + TheCoin
 		if (!begins) {
-			drawCard(player);
+			drawCard(playerId);
 			TheCoin theCoin = new TheCoin();
 			logger.debug("{} receives {}", player.getName(), theCoin);
 			player.getHand().add(theCoin);
@@ -294,19 +301,20 @@ public class GameLogic implements IGameLogic {
 	}
 
 	@Override
-	public void modifyCurrentMana(Player player, int mana) {
+	public void modifyCurrentMana(int playerId, int mana) {
+		Player player = context.getPlayer(playerId);
 		int newMana = Math.min(player.getMana() + mana, MAX_MANA);
 		player.setMana(newMana);
 	}
 
 	@Override
-	public void performGameAction(int playerIndex, GameAction action) {
+	public void performGameAction(int playerId, GameAction action) {
 		if (action.getTargetRequirement() == TargetSelection.SELF) {
 			action.setTargetKey(TargetKey.pointTo(action.getSource()));
 		}
-		Player player = context.getPlayer(playerIndex);
+		Player player = context.getPlayer(playerId);
 		if (action.getTargetRequirement() != TargetSelection.NONE && action.getTargetKey() == null) {
-			List<Entity> validTargets = getValidTargets(player, action);
+			List<Entity> validTargets = getValidTargets(playerId, action);
 			if (validTargets.isEmpty() && action.getActionType() == ActionType.MINION_ABILITY) {
 				return;
 			}
@@ -320,7 +328,7 @@ public class GameLogic implements IGameLogic {
 			action.setTargetKey(TargetKey.pointTo(target));
 		}
 
-		action.execute(context, player);
+		action.execute(context, playerId);
 		checkForDeadEntities();
 	}
 	
@@ -336,8 +344,9 @@ public class GameLogic implements IGameLogic {
 	}
 
 	@Override
-	public void playCard(Player player, Card card) {
-		modifyCurrentMana(player, -card.getManaCost());
+	public void playCard(int playerId, Card card) {
+		Player player = context.getPlayer(playerId);
+		modifyCurrentMana(playerId, -card.getManaCost());
 		logger.debug("{} plays {}", player.getName(), card);
 		//logger.debug("{} is now at {} mana", player.getName(), player.getMana() + "/" + player.getMaxMana());
 		player.getHand().remove(card);
@@ -346,7 +355,8 @@ public class GameLogic implements IGameLogic {
 	}
 	
 	@Override
-	public void receiveCard(Player player, Card card) {
+	public void receiveCard(int playerId, Card card) {
+		Player player = context.getPlayer(playerId);
 		CardCollection<Card> hand = player.getHand();
 		CardCollection<Card> graveyard = player.getGraveyard();
 		if (hand.getCount() < MAX_HAND_CARDS) {
@@ -374,7 +384,8 @@ public class GameLogic implements IGameLogic {
 	}
 
 	@Override
-	public void startTurn(Player player) {
+	public void startTurn(int playerId) {
+		Player player = context.getPlayer(playerId);
 		if (player.getMaxMana() < MAX_MANA) {
 			player.setMaxMana(player.getMaxMana() + 1);
 		}
@@ -382,7 +393,7 @@ public class GameLogic implements IGameLogic {
 		logger.debug("{} starts his turn with {} mana", player.getName(), player.getMana() + "/" + player.getMaxMana());
 		player.getHero().getHeroPower().setUsed(false);
 		refreshAttacksPerRound(player.getHero());
-		drawCard(player);
+		drawCard(playerId);
 		for (Entity minion : player.getMinions()) {
 			refreshAttacksPerRound(minion);
 			minion.removeTag(GameTag.SUMMONING_SICKNESS);
@@ -391,7 +402,8 @@ public class GameLogic implements IGameLogic {
 	}
 
 	@Override
-	public void summon(Player player, Minion minion, Entity nextTo) {
+	public void summon(int playerId, Minion minion, Entity nextTo) {
+		Player player = context.getPlayer(playerId);
 		minion.setId(idFactory.generateId());
 		logger.debug("{} summons {}", player.getName(), minion);
 		refreshAttacksPerRound(minion);
@@ -426,14 +438,16 @@ public class GameLogic implements IGameLogic {
 	}
 
 	@Override
-	public void useHeroPower(Player player, HeroPower power) {
-		modifyCurrentMana(player, -power.getManaCost());
+	public void useHeroPower(int playerId, HeroPower power) {
+		Player player = context.getPlayer(playerId);
+		modifyCurrentMana(playerId, -power.getManaCost());
 		logger.debug("{} uses {}", player.getName(), power);
 		power.setUsed(true);
 	}
 
 	@Override
-	public void equipWeapon(Player player, Hero hero, Weapon weapon) {
+	public void equipWeapon(int playerId, Weapon weapon) {
+		Player player = context.getPlayer(playerId);
 		weapon.setId(idFactory.generateId());
 		logger.debug("{} equips weapon {}", player.getHero(), weapon);
 		player.getHero().setWeapon(weapon);

@@ -1,7 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.actions;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardType;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
@@ -25,16 +24,16 @@ public abstract class PlayCardAction extends GameAction {
 	}
 	
 	@Override
-	public void execute(GameContext context, Player player) {
-		context.getLogic().playCard(player, getCard());
-		play(context, player);
+	public void execute(GameContext context, int playerId) {
+		context.getLogic().playCard(playerId, getCard());
+		play(context, playerId);
 	}
 
 	public Card getCard() {
 		return card;
 	}
 
-	protected abstract void play(GameContext context, Player player);
+	protected abstract void play(GameContext context, int playerId);
 	
 	
 

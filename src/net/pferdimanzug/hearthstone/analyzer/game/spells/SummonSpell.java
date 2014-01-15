@@ -16,7 +16,7 @@ public class SummonSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
 		for (MinionCard minionCard : minionCards) {
-			context.getLogic().summon(player, minionCard.summon(), null);
+			context.getLogic().summon(player.getId(), minionCard.summon(), null);
 		}
 	}
 

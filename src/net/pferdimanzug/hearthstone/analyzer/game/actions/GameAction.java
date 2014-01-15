@@ -3,7 +3,6 @@ package net.pferdimanzug.hearthstone.analyzer.game.actions;
 import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetKey;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
@@ -20,7 +19,7 @@ public abstract class GameAction {
 		return true;
 	}
 	
-	public abstract void execute(GameContext context, Player player);
+	public abstract void execute(GameContext context, int playerId);
 	
 	public ActionType getActionType() {
 		return actionType;

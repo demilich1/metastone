@@ -1,7 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.actions;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
@@ -25,8 +24,8 @@ public class Battlecry extends GameAction {
 	}
 
 	@Override
-	public void execute(GameContext context, Player player) {
+	public void execute(GameContext context, int playerId) {
 		spell.setTarget(getTargetKey());
-		context.getLogic().castSpell(player, spell);
+		context.getLogic().castSpell(playerId, spell);
 	}
 }

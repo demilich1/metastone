@@ -19,7 +19,7 @@ public class DrawCardSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
 		for (int i = 0; i < numberOfCards; i++) {
-			context.getLogic().drawCard(player);
+			context.getLogic().drawCard(player.getId());
 		}
 	}
 

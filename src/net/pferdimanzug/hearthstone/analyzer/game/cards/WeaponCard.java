@@ -1,7 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
@@ -23,8 +22,8 @@ public abstract class WeaponCard extends Card {
 		return new PlayCardAction(this) {
 			
 			@Override
-			protected void play(GameContext context, Player player) {
-				player.getHero().setWeapon(getWeapon());
+			protected void play(GameContext context, int playerId) {
+				context.getLogic().equipWeapon(playerId, getWeapon());
 			}
 		};
 	}

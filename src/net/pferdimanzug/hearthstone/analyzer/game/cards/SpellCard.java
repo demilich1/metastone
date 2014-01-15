@@ -48,12 +48,12 @@ public abstract class SpellCard extends Card {
 			}
 
 			@Override
-			protected void play(GameContext context, Player player) {
+			protected void play(GameContext context, int playerId) {
 				if (!spell.hasPredefinedTarget()) {
 					spell.setTarget(getTargetKey());
 				}
 				
-				context.getLogic().castSpell(player, spell);
+				context.getLogic().castSpell(playerId, spell);
 			}
 		};
 	}

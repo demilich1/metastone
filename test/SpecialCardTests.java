@@ -25,11 +25,11 @@ public class SpecialCardTests extends TestBase {
 
 		MinionCard gurubashiBerserkerCard = new GurubashiBerserker();
 		warrior.getHand().add(gurubashiBerserkerCard);
-		context.getLogic().performGameAction(warrior, gurubashiBerserkerCard.play());
+		context.getLogic().performGameAction(warrior.getId(), gurubashiBerserkerCard.play());
 		
 		MinionCard oasisSnapjawCard = new OasisSnapjaw();
 		mage.getHand().add(oasisSnapjawCard);
-		context.getLogic().performGameAction(mage, oasisSnapjawCard.play());
+		context.getLogic().performGameAction(mage.getId(), oasisSnapjawCard.play());
 		
 		Entity attacker = getSingleMinion(mage.getMinions());
 		Entity defender = getSingleMinion(warrior.getMinions());
@@ -40,14 +40,14 @@ public class SpecialCardTests extends TestBase {
 		// first attack, Gurubashi Berserker should have increased attack
 		GameAction attackAction = new PhysicalAttackAction(attacker);
 		attackAction.setTarget(defender);
-		context.getLogic().performGameAction(mage, attackAction);
+		context.getLogic().performGameAction(mage.getId(), attackAction);
 		
 		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp() - GurubashiBerserker.BASE_ATTACK);
 		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - attacker.getAttack());
 		Assert.assertEquals(defender.getAttack(), GurubashiBerserker.BASE_ATTACK + GurubashiBerserker.ATTACK_BONUS);
 		
 		// second attack, Gurubashi Berserker should become even stronger
-		context.getLogic().performGameAction(mage, attackAction);
+		context.getLogic().performGameAction(mage.getId(), attackAction);
 		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp() - 2 * GurubashiBerserker.BASE_ATTACK - GurubashiBerserker.ATTACK_BONUS);
 		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - 2 * attacker.getAttack());
 		Assert.assertEquals(defender.getAttack(), GurubashiBerserker.BASE_ATTACK + 2 * GurubashiBerserker.ATTACK_BONUS);

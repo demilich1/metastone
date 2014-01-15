@@ -25,35 +25,35 @@ public class HeroPowerTest extends TestBase {
 		Assert.assertEquals(warrior.getHp(), GameLogic.MAX_HERO_HP);
 		
 		GameAction armorUp = warrior.getHeroPower().play();
-		context.getLogic().performGameAction(context.getPlayer1(), armorUp);
+		context.getLogic().performGameAction(context.getPlayer1().getId(), armorUp);
 		Assert.assertEquals(warrior.getHp(), GameLogic.MAX_HERO_HP);
 		Assert.assertEquals(warrior.getArmor(), ArmorUp.ARMOR_BONUS);
 		
 		GameAction damage = new GameAction() {
 			
 			@Override
-			public void execute(GameContext context, Player player) {
+			public void execute(GameContext context, int playerId) {
 				context.getLogic().damage(warrior, 2 * ArmorUp.ARMOR_BONUS);
 			}
 		};
 		damage.setTarget(warrior);
-		context.getLogic().performGameAction(context.getPlayer2(), damage);
+		context.getLogic().performGameAction(context.getPlayer2().getId(), damage);
 		Assert.assertEquals(warrior.getHp(), GameLogic.MAX_HERO_HP - ArmorUp.ARMOR_BONUS);
 		Assert.assertEquals(warrior.getArmor(), 0);
 		
 		// there was a bug where armor actually increased the hp of the hero when
 		// the damage dealt was less than the total armor. Following test
 		// covers that scenario
-		context.getLogic().performGameAction(context.getPlayer1(), armorUp);
+		context.getLogic().performGameAction(context.getPlayer1().getId(), armorUp);
         damage = new GameAction() {
 			
 			@Override
-			public void execute(GameContext context, Player player) {
+			public void execute(GameContext context, int playerId) {
 				context.getLogic().damage(warrior, ArmorUp.ARMOR_BONUS / 2);
 			}
 		};
 		damage.setTarget(warrior);
-		context.getLogic().performGameAction(context.getPlayer2(), damage);
+		context.getLogic().performGameAction(context.getPlayer2().getId(), damage);
 		Assert.assertEquals(warrior.getHp(), GameLogic.MAX_HERO_HP - ArmorUp.ARMOR_BONUS);
 		Assert.assertEquals(warrior.getArmor(), ArmorUp.ARMOR_BONUS / 2);
 	}
@@ -67,7 +67,7 @@ public class HeroPowerTest extends TestBase {
 		
 		GameAction fireblast = mage.getHeroPower().play();
 		fireblast.setTarget(victim);
-		context.getLogic().performGameAction(context.getPlayer1(), fireblast);
+		context.getLogic().performGameAction(context.getPlayer1().getId(), fireblast);
 		Assert.assertEquals(victim.getHp(), GameLogic.MAX_HERO_HP - Fireblast.DAMAGE);
 	}
 	
@@ -81,9 +81,9 @@ public class HeroPowerTest extends TestBase {
 		
 		GameAction lesserHeal = priest.getHeroPower().play();
 		lesserHeal.setTarget(priest);
-		context.getLogic().performGameAction(context.getPlayer1(), lesserHeal);
+		context.getLogic().performGameAction(context.getPlayer1().getId(), lesserHeal);
 		Assert.assertEquals(priest.getHp(), GameLogic.MAX_HERO_HP);
-		context.getLogic().performGameAction(context.getPlayer1(), lesserHeal);
+		context.getLogic().performGameAction(context.getPlayer1().getId(), lesserHeal);
 		Assert.assertEquals(priest.getHp(), GameLogic.MAX_HERO_HP);
 	}
 	
@@ -97,7 +97,7 @@ public class HeroPowerTest extends TestBase {
 		
 		int cardCount = warlockPlayer.getHand().getCount();
 		GameAction lifetap = warlock.getHeroPower().play();
-		context.getLogic().performGameAction(warlockPlayer, lifetap);
+		context.getLogic().performGameAction(warlockPlayer.getId(), lifetap);
 		Assert.assertEquals(warlock.getHp(), GameLogic.MAX_HERO_HP - LifeTap.DAMAGE);
 		Assert.assertEquals(warlockPlayer.getHand().getCount(), cardCount + 1);
 	}

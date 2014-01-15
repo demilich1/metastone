@@ -21,11 +21,11 @@ public class MetaSpell extends Spell {
 		if (!spell1.hasPredefinedTarget()) {
 			spell1.setTarget(getTarget());
 		}
-		context.getLogic().castSpell(player, spell1);
+		context.getLogic().castSpell(player.getId(), spell1);
 		if (!spell2.hasPredefinedTarget()) {
 			spell2.setTarget(getTarget());
 		}
-		context.getLogic().castSpell(player, spell2);
+		context.getLogic().castSpell(player.getId(), spell2);
 	}
 
 	@Override
