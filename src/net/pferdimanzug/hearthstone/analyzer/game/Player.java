@@ -19,6 +19,8 @@ public class Player {
 	private final CardCollection<Card> deck;
 	private final CardCollection<Card> hand;
 	private final CardCollection<Card> graveyard;
+	
+	private int id = -1;
 
 	private int mana;
 	private int maxMana;
@@ -87,6 +89,14 @@ public class Player {
 
 	public void setMaxMana(int maxMana) {
 		this.maxMana = maxMana;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

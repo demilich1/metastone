@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 public class PlayRandomBehaviour implements IBehaviour {
 
-	private static Logger logger = LoggerFactory.getLogger(PlayRandomBehaviour.class);
+	private final static Logger logger = LoggerFactory.getLogger(PlayRandomBehaviour.class);
 
 	@Override
 	public Entity provideTargetFor(Player player, GameAction action, List<Entity> validTargets) {

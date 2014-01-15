@@ -34,7 +34,7 @@ public interface IGameLogic {
 	public void init(Player player, boolean begins);
 	public void modifyCurrentMana(Player player, int mana);
 	
-	public void performGameAction(Player player, GameAction action);
+	public void performGameAction(int playerIndex, GameAction action);
 	
 	public void playCard(Player player, Card card);
 	public void receiveCard(Player player, Card card);

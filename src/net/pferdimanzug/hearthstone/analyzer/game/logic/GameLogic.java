@@ -37,7 +37,7 @@ import org.slf4j.LoggerFactory;
 
 public class GameLogic implements IGameLogic {
 
-	private static Logger logger = LoggerFactory.getLogger(GameLogic.class);
+	public static Logger logger = LoggerFactory.getLogger(GameLogic.class);
 
 	public static final int MAX_MINIONS = 7;
 	public static final int MAX_HAND_CARDS = 10;
@@ -49,7 +49,7 @@ public class GameLogic implements IGameLogic {
 	private final ActionLogic actionLogic = new ActionLogic();
 	private final IdFactory idFactory = new IdFactory();
 	private GameContext context;
-
+	
 	@Override
 	public boolean canPlayCard(Player player, Card card) {
 		if (player.getMana() < card.getManaCost()) {
@@ -173,8 +173,7 @@ public class GameLogic implements IGameLogic {
 		player.getHero().setTag(GameTag.ATTACK_BONUS, 0);
 		player.getHero().removeTag(GameTag.COMBO);
 		logger.debug("{} ends his turn.", player.getName());
-		int playerIndex = context.getPlayerIndex(player);
-		context.getEventManager().fireGameEvent(new TurnEndEvent(context, playerIndex));
+		context.getEventManager().fireGameEvent(new TurnEndEvent(context, player.getId()));
 	}
 
 	@Override
@@ -274,7 +273,7 @@ public class GameLogic implements IGameLogic {
 	@Override
 	public void init(Player player, boolean begins) {
 		player.getHero().setId(idFactory.generateId());
-		player.getHero().setOwner(context.getPlayerIndex(player));
+		player.getHero().setOwner(player.getId());
 		player.getHero().setMaxHp(MAX_HERO_HP);
 		player.getHero().setHp(MAX_HERO_HP);
 		
@@ -301,10 +300,11 @@ public class GameLogic implements IGameLogic {
 	}
 
 	@Override
-	public void performGameAction(Player player, GameAction action) {
+	public void performGameAction(int playerIndex, GameAction action) {
 		if (action.getTargetRequirement() == TargetSelection.SELF) {
 			action.setTargetKey(TargetKey.pointTo(action.getSource()));
 		}
+		Player player = context.getPlayer(playerIndex);
 		if (action.getTargetRequirement() != TargetSelection.NONE && action.getTargetKey() == null) {
 			List<Entity> validTargets = getValidTargets(player, action);
 			if (validTargets.isEmpty() && action.getActionType() == ActionType.MINION_ABILITY) {
@@ -387,8 +387,7 @@ public class GameLogic implements IGameLogic {
 			refreshAttacksPerRound(minion);
 			minion.removeTag(GameTag.SUMMONING_SICKNESS);
 		}
-		int playerIndex = context.getPlayerIndex(player);
-		context.getEventManager().fireGameEvent(new TurnStartEvent(context, playerIndex));
+		context.getEventManager().fireGameEvent(new TurnStartEvent(context, player.getId()));
 	}
 
 	@Override
@@ -402,7 +401,7 @@ public class GameLogic implements IGameLogic {
 		if (minion.getBattlecry() != null) {
 			GameAction battlecry = minion.getBattlecry();
 			battlecry.setSource(minion);
-			performGameAction(player, battlecry);
+			performGameAction(player.getId(), battlecry);
 		}
 		context.getPendingEntities().remove(minion);
 
@@ -412,7 +411,7 @@ public class GameLogic implements IGameLogic {
 			// TODO: implement summoning next to
 			// player.getMinions().addAfter(minion, nextTo);
 		}
-		minion.setOwner(context.getPlayerIndex(player));
+		minion.setOwner(player.getId());
 		for (SpellTrigger spellTrigger : minion.getSpellTriggers()) {
 			spellTrigger.setHost(minion);
 			context.getEventManager().registerGameEventListener(spellTrigger);

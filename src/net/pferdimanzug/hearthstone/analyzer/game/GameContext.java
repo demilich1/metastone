@@ -28,11 +28,12 @@ public class GameContext implements Cloneable {
 	private final IGameLogic logic;
 	private final TargetLogic targetLogic = new TargetLogic();
 	private final IGameEventManager eventManager = new GameEventManager();
-	// this list is most of the time empty. Whenenver a minion is summoned,
+	// this list is most of the time empty. Whenever a minion is summoned,
 	// it is placed in this list for brief amount of time
-	// reason is battlecry effects may target not yet summoned
+	// reason is Battlecry effects may target not yet summoned
 	// minions and because of the lazy references to entities
-	// we cannot find the to-be-summoned minion if its battlecry
+	// we cannot find the to-be-summoned minion if its Battlecry
+	// tries to target itself
 	private final List<Entity> pendingEntities = new ArrayList<Entity>();
 
 	private Player activePlayer;
@@ -47,7 +48,9 @@ public class GameContext implements Cloneable {
 
 	public GameContext(Player player1, Player player2, IGameLogic logic) {
 		this.getPlayers()[0] = player1;
+		player1.setId(0);
 		this.getPlayers()[1] = player2;
+		player2.setId(1);
 		this.logic = logic;
 		this.logic.setContext(this);
 	}
@@ -66,7 +69,7 @@ public class GameContext implements Cloneable {
 	}
 
 	public Player getOpponent(Player player) {
-		return player == getPlayer1() ? getPlayer2() : getPlayer1();
+		return player.getId() == 0 ? getPlayer2() : getPlayer1();
 	}
 
 	public Player getPlayer1() {
@@ -79,15 +82,6 @@ public class GameContext implements Cloneable {
 
 	public Player getPlayer(int index) {
 		return players[index];
-	}
-
-	public int getPlayerIndex(Player player) {
-		for (int i = 0; i < players.length; i++) {
-			if (players[i] == player) {
-				return i;
-			}
-		}
-		return -1;
 	}
 
 	public GameResult getResult() {
@@ -116,7 +110,7 @@ public class GameContext implements Cloneable {
 		logic.startTurn(player);
 		GameAction nextAction = null;
 		while ((nextAction = player.getBehaviour().requestAction(this, player, logic.getValidActions(player))) != null) {
-			logic.performGameAction(player, nextAction);
+			logic.performGameAction(player.getId(), nextAction);
 
 			// ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_STATE_UPDATE,
 			// this);
