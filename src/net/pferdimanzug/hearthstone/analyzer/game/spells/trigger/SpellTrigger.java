@@ -26,12 +26,14 @@ public class SpellTrigger implements IGameEventListener, Cloneable {
 
 	@Override
 	public void onGameEvent(IGameEvent event) {
-		Entity host = event.getGameContext().resolveSingleTarget(getOwner(), hostKey);
+		Player owner = event.getGameContext().getPlayer(trigger.getOwner());
+		Entity host = event.getGameContext().resolveSingleTarget(owner, hostKey);
 		if (trigger.fire(event, host)) {
 			if (!spell.hasPredefinedTarget()) {
 				spell.setTarget(hostKey);
 			}
-			event.getGameContext().getLogic().castSpell(trigger.getOwner(), spell);
+			
+			event.getGameContext().getLogic().castSpell(owner, spell);
 		}
 	}
 
@@ -39,12 +41,12 @@ public class SpellTrigger implements IGameEventListener, Cloneable {
 		this.hostKey = TargetKey.pointTo(host);
 	}
 
-	public Player getOwner() {
+	public int getOwner() {
 		return trigger.getOwner();
 	}
 
-	public void setOwner(Player owner) {
-		trigger.setOwner(owner);
+	public void setOwner(int playerIndex) {
+		trigger.setOwner(playerIndex);
 	}
 	
 	public SpellTrigger clone() {

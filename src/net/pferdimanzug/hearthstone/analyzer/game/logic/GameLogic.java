@@ -173,7 +173,8 @@ public class GameLogic implements IGameLogic {
 		player.getHero().setTag(GameTag.ATTACK_BONUS, 0);
 		player.getHero().removeTag(GameTag.COMBO);
 		logger.debug("{} ends his turn.", player.getName());
-		context.getEventManager().fireGameEvent(new TurnEndEvent(context, player));
+		int playerIndex = context.getPlayerIndex(player);
+		context.getEventManager().fireGameEvent(new TurnEndEvent(context, playerIndex));
 	}
 
 	@Override
@@ -386,7 +387,8 @@ public class GameLogic implements IGameLogic {
 			refreshAttacksPerRound(minion);
 			minion.removeTag(GameTag.SUMMONING_SICKNESS);
 		}
-		context.getEventManager().fireGameEvent(new TurnStartEvent(context, player));
+		int playerIndex = context.getPlayerIndex(player);
+		context.getEventManager().fireGameEvent(new TurnStartEvent(context, playerIndex));
 	}
 
 	@Override

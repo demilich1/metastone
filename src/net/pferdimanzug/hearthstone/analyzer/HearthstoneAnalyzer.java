@@ -42,9 +42,7 @@ public class HearthstoneAnalyzer {
 		Hero hero2 = new Valeera();
 		Player player2 = new Player("Bot", hero2, DebugDecks.getRandomDeck(hero2.getHeroClass()));
 		player2.setBehaviour(new PlayRandomBehaviour());
-		GameLogic logic = new GameLogic();
-		GameContext newGame = new GameContext(player1, player2, logic);
-		logic.setContext(newGame);
+		GameContext newGame = new GameContext(player1, player2, new GameLogic());
 		ApplicationFacade.getInstance().sendNotification(GameNotification.START_GAME, newGame);
 		//ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_STATE_UPDATE, newGame);
 	}

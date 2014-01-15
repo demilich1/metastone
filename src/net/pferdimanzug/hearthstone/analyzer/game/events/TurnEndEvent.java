@@ -1,15 +1,14 @@
 package net.pferdimanzug.hearthstone.analyzer.game.events;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.Player;
 
 public class TurnEndEvent extends GameEvent {
 
-	private final Player player;
+	private final int playerIndex;
 
-	public TurnEndEvent(GameContext context, Player player) {
+	public TurnEndEvent(GameContext context, int playerIndex) {
 		super(context);
-		this.player = player;
+		this.playerIndex = playerIndex;
 	}
 
 	@Override
@@ -17,8 +16,8 @@ public class TurnEndEvent extends GameEvent {
 		return GameEventType.TURN_END;
 	}
 
-	public Player getPlayer() {
-		return player;
+	public int getPlayer() {
+		return playerIndex;
 	}
 
 }

@@ -22,9 +22,7 @@ public class CloningTest extends TestBase {
 		Hero hero2 = new Garrosh();
 		Player player2 = new Player("Random dude 2", hero2, DebugDecks.getRandomDeck(hero2.getHeroClass()));
 		player2.setBehaviour(new PlayRandomBehaviour());
-		GameLogic gameLogic = new GameLogic();
-		GameContext original = new GameContext(player1, player2, gameLogic);
-		gameLogic.setContext(original);
+		GameContext original = new GameContext(player1, player2, new GameLogic());
 		GameContext clone = original.clone();
 		
 		Assert.assertNotEquals(original, clone);
@@ -35,5 +33,9 @@ public class CloningTest extends TestBase {
 		
 		clone.play();
 		Assert.assertNotEquals(original.getTurn(), clone.getTurn());
+		System.out.println("\n********ORIGINAL********\n");
+		System.out.println(original.toString());
+		System.out.println("\n********CLONE********\n");
+		System.out.println(clone.toString());
 	}
 }

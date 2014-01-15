@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventManager;
 import net.pferdimanzug.hearthstone.analyzer.game.events.IGameEventManager;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameResult;
@@ -19,7 +21,8 @@ import com.rits.cloning.Cloner;
 
 public class GameContext implements Cloneable {
 
-	private static Logger logger = LoggerFactory.getLogger(GameContext.class);
+	private static final Logger logger = LoggerFactory.getLogger(GameContext.class);
+	private static final Cloner cloner = new Cloner();
 
 	private final Player[] players = new Player[2];
 	private final IGameLogic logic;
@@ -37,10 +40,16 @@ public class GameContext implements Cloneable {
 	private GameResult result;
 
 	private int turn;
+	
+	static {
+		cloner.dontClone(TargetKey.class);
+	}
+
 	public GameContext(Player player1, Player player2, IGameLogic logic) {
 		this.getPlayers()[0] = player1;
 		this.getPlayers()[1] = player2;
 		this.logic = logic;
+		this.logic.setContext(this);
 	}
 
 	private boolean gameDecided() {
@@ -67,11 +76,11 @@ public class GameContext implements Cloneable {
 	public Player getPlayer2() {
 		return getPlayers()[1];
 	}
-	
+
 	public Player getPlayer(int index) {
 		return players[index];
 	}
-	
+
 	public int getPlayerIndex(Player player) {
 		for (int i = 0; i < players.length; i++) {
 			if (players[i] == player) {
@@ -108,13 +117,14 @@ public class GameContext implements Cloneable {
 		GameAction nextAction = null;
 		while ((nextAction = player.getBehaviour().requestAction(this, player, logic.getValidActions(player))) != null) {
 			logic.performGameAction(player, nextAction);
-			
-//			ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_STATE_UPDATE, this);
-//			try {
-//				Thread.sleep(1000);
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
+
+			// ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_STATE_UPDATE,
+			// this);
+			// try {
+			// Thread.sleep(1000);
+			// } catch (InterruptedException e) {
+			// e.printStackTrace();
+			// }
 			if (gameDecided()) {
 				return;
 			}
@@ -126,11 +136,11 @@ public class GameContext implements Cloneable {
 	public Player[] getPlayers() {
 		return players;
 	}
-	
+
 	public List<Entity> resolveTarget(Player player, TargetKey targetKey) {
 		return targetLogic.resolveTargetKey(this, player, targetKey);
 	}
-	
+
 	public Entity resolveSingleTarget(Player player, TargetKey targetKey) {
 		return targetLogic.resolveTargetKey(this, player, targetKey).get(0);
 	}
@@ -138,15 +148,42 @@ public class GameContext implements Cloneable {
 	public List<Entity> getPendingEntities() {
 		return pendingEntities;
 	}
-	
+
 	public GameContext clone() {
-		Cloner cloner = new Cloner();
 		GameContext clone = cloner.deepClone(this);
-		//clone.getLogic().s
+		clone.getLogic().setContext(clone);
 		return clone;
 	}
 
 	public int getTurn() {
 		return turn;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder();
+		for (Player player : players) {
+			result.append(player.getName());
+			result.append(" Mana: ");
+			result.append(player.getMana());
+			result.append('/');
+			result.append(player.getMaxMana());
+			result.append('\n');
+			result.append("Minions:\n");
+			for (Minion minion : player.getMinions()) {
+				result.append('\t');
+				result.append(minion);
+				result.append('\n');
+			}
+			result.append("Cards (hand):\n");
+			for (Card card : player.getHand()) {
+				result.append('\t');
+				result.append(card);
+				result.append('\n');
+			}
+		}
+		result.append("Turn: " + getTurn());
+
+		return result.toString();
 	}
 }
