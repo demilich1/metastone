@@ -15,11 +15,13 @@ public class StatisticsView {
 	private int gamesPlayed;
 	private HashMap<String, Integer> gamesWon = new HashMap<>();
 	private long startTime;
+	private int cloningTime;
 	
 	public void onBatchStart() {
 		gamesPlayed = 0;
 		gamesWon.clear();
 		startTime = System.currentTimeMillis();
+		cloningTime = 0;
 	}
 	
 	public void onBatchStop() {
@@ -29,10 +31,12 @@ public class StatisticsView {
 		for (String name : gamesWon.keySet()) {
 			logger.info("Player " + name + " won " + gamesWon.get(name) + " games");
 		}
+		logger.info("Time used for deep cloning: {}ms", cloningTime);
 	}
 	
 	public void onGameOver(GameContext context) {
 		gamesPlayed++;
+		cloningTime = GameContext.CLONING_TIME;
 		registerWinner(context);
 	}
 	

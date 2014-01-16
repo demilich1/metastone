@@ -24,6 +24,9 @@ import com.rits.cloning.Cloner;
 public class GameContext implements Cloneable {
 	public static final int PLAYER_1 = 0;
 	public static final int PLAYER_2 = 1;
+	
+	//DEBUG
+	public static int CLONING_TIME = 0;
 
 	private static final Logger logger = LoggerFactory.getLogger(GameContext.class);
 	private static final Cloner cloner = new Cloner();
@@ -183,8 +186,10 @@ public class GameContext implements Cloneable {
 
 	@Override
 	public GameContext clone() {
+		long start = System.currentTimeMillis();
 		GameContext clone = cloner.deepClone(this);
 		clone.getLogic().setContext(clone);
+		CLONING_TIME += (int)(System.currentTimeMillis() - start);
 		return clone;
 	}
 
