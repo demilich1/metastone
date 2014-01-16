@@ -9,7 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnEndTrigger;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetKey;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class SavageRoar extends SpellCard {
@@ -18,9 +18,9 @@ public class SavageRoar extends SpellCard {
 		super("Savage Roar", Rarity.FREE, HeroClass.DRUID, 3);
 		SpellTrigger endBuffTrigger = new SpellTrigger(new TurnEndTrigger(), new BuffSpell(-2, 0));
 		Spell buff = new BuffSpell(+2, 0);
-		buff.setTarget(TargetKey.FRIENDLY_CHARACTERS);
+		buff.setTarget(EntityReference.FRIENDLY_CHARACTERS);
 		Spell endBuff = new AddSpellTriggerSpell(endBuffTrigger);
-		endBuff.setTarget(TargetKey.FRIENDLY_CHARACTERS);
+		endBuff.setTarget(EntityReference.FRIENDLY_CHARACTERS);
 		setSpell(new MetaSpell(buff, endBuff));
 		setTargetRequirement(TargetSelection.NONE);
 	}

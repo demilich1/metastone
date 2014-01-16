@@ -25,10 +25,10 @@ public class TargetingTests extends TestBase {
 		Player victim = context.getPlayer2();
 		
 		MinionCard tauntCard = new Shieldbearer();
-		victim.getHand().add(tauntCard);
+		context.getLogic().receiveCard(victim.getId(), tauntCard);
 		
 		MinionCard attackerCard = new Wisp();
-		mage.getHand().add(attackerCard);
+		context.getLogic().receiveCard(mage.getId(), attackerCard);
 		
 		context.getLogic().performGameAction(victim.getId(), tauntCard.play());
 		context.getLogic().performGameAction(mage.getId(), attackerCard.play());

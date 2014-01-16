@@ -14,7 +14,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Malfurion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffHeroSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetKey;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 import org.testng.Assert;
@@ -63,7 +63,7 @@ public class BasicTests extends TestBase {
 		context.getLogic().performGameAction(mage.getId(), devMonsterCard.play());
 		
 		BuffHeroSpell heroBuffSpell = new BuffHeroSpell(damage, 0);
-		heroBuffSpell.setTarget(TargetKey.pointTo(druid.getHero()));
+		heroBuffSpell.setTarget(EntityReference.pointTo(druid.getHero()));
 		context.getLogic().castSpell(druid.getId(), heroBuffSpell);
 		Entity devMonster = getSingleMinion(mage.getMinions());
 		GameAction minionAttackAction = new PhysicalAttackAction(devMonster);

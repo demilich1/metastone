@@ -5,6 +5,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardType;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardLocation;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardReference;
 
 public abstract class PlayCardAction extends GameAction {
 
@@ -25,7 +27,8 @@ public abstract class PlayCardAction extends GameAction {
 	
 	@Override
 	public void execute(GameContext context, int playerId) {
-		context.getLogic().playCard(playerId, getCard());
+		CardReference cardReference = new CardReference(playerId, CardLocation.HAND, card.getId());
+		context.getLogic().playCard(playerId, cardReference);
 		play(context, playerId);
 	}
 

@@ -11,6 +11,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardLocation;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class ActionLogic {
@@ -27,7 +29,8 @@ public class ActionLogic {
 
 	private GameAction getHeroPowerAction(GameContext context, Player player) {
 		Hero hero = player.getHero();
-		if (!context.getLogic().canPlayCard(player.getId(), hero.getHeroPower())) {
+		CardReference heroPowerReference = new CardReference(player.getId(), CardLocation.HERO_POWER, hero.getHeroPower().getId());
+		if (!context.getLogic().canPlayCard(player.getId(), heroPowerReference)) {
 			return null;
 		}
 		return hero.getHeroPower().play();
@@ -58,7 +61,8 @@ public class ActionLogic {
 			playCardActions.add(heroPowerAction);
 		}
 		for (Card card : player.getHand()) {
-			if (!context.getLogic().canPlayCard(player.getId(), card)) {
+			CardReference cardReference = new CardReference(player.getId(), CardLocation.HAND, card.getId());
+			if (!context.getLogic().canPlayCard(player.getId(), cardReference)) {
 				continue;
 			}
 			

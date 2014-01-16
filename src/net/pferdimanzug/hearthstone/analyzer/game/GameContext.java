@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventManager;
@@ -12,7 +13,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.IGameEventManager;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameResult;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.IGameLogic;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.TargetLogic;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetKey;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardReference;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +39,7 @@ public class GameContext implements Cloneable {
 	// we cannot find the to-be-summoned minion if its Battlecry
 	// tries to target itself
 	private final List<Entity> pendingEntities = new ArrayList<Entity>();
+	private final CardCollection<Card> pendingCards = new CardCollection<Card>();
 
 	private Player activePlayer;
 	private Player winner;
@@ -45,7 +48,7 @@ public class GameContext implements Cloneable {
 	private int turn;
 
 	static {
-		cloner.dontClone(TargetKey.class);
+		cloner.dontClone(EntityReference.class);
 	}
 
 	public GameContext(Player player1, Player player2, IGameLogic logic) {
@@ -134,13 +137,43 @@ public class GameContext implements Cloneable {
 		return players;
 	}
 
-	public List<Entity> resolveTarget(Player player, TargetKey targetKey) {
+	public List<Entity> resolveTarget(Player player, EntityReference targetKey) {
 		return targetLogic.resolveTargetKey(this, player, targetKey);
 	}
 
-	public Entity resolveSingleTarget(int playerId, TargetKey targetKey) {
+	public Entity resolveSingleTarget(int playerId, EntityReference targetKey) {
 		Player player = getPlayer(playerId);
 		return targetLogic.resolveTargetKey(this, player, targetKey).get(0);
+	}
+	
+	public Card resolveCardReference(CardReference cardReference) {
+		Player player = getPlayer(cardReference.getPlayerId());
+		switch (cardReference.getLocation()) {
+		case DECK:
+			return findCardinCollection(player.getDeck(), cardReference.getCardId());
+		case GRAVEYARD:
+			return findCardinCollection(player.getDeck(), cardReference.getCardId());
+		case HAND:
+			return findCardinCollection(player.getDeck(), cardReference.getCardId());
+		case PENDING:
+			return findCardinCollection(pendingCards, cardReference.getCardId());
+		case HERO_POWER:
+			return player.getHero().getHeroPower();
+		default:
+			break;
+		
+		}
+		logger.error("Could not resolve cardReference [}", cardReference);
+		return null;
+	}
+	
+	private Card findCardinCollection(CardCollection<Card> cardCollection, int cardId) {
+		for (Card card : cardCollection) {
+			if (card.getId() == cardId) {
+				return card;
+			}
+		}
+		return null;
 	}
 
 	public List<Entity> getPendingEntities() {
@@ -184,5 +217,9 @@ public class GameContext implements Cloneable {
 		result.append("Turn: " + getTurn());
 
 		return result.toString();
+	}
+
+	public CardCollection<Card> getPendingCards() {
+		return pendingCards;
 	}
 }

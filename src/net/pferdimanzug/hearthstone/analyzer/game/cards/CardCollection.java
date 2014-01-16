@@ -54,6 +54,10 @@ public class CardCollection<T extends Card> implements Iterable<T>{
 	public T removeFirst() {
 		return cards.remove(0);
 	}
+	
+	public T peekFirst() {
+		return cards.get(0);
+	}
 
 	public void shuffle() {
 		Collections.shuffle(cards);

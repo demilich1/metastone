@@ -11,7 +11,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnEndTrigger;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetKey;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Bloodlust extends SpellCard {
@@ -22,9 +22,9 @@ public class Bloodlust extends SpellCard {
 		super("Bloodlust", Rarity.FREE, HeroClass.SHAMAN, 5);
 		SpellTrigger endBuffTrigger = new SpellTrigger(new TurnEndTrigger(), new BuffSpell(-ATTACK_BONUS, 0));
 		Spell buff = new BuffSpell(+ATTACK_BONUS, 0);
-		buff.setTarget(TargetKey.FRIENDLY_MINIONS);
+		buff.setTarget(EntityReference.FRIENDLY_MINIONS);
 		Spell endBuff = new AddSpellTriggerSpell(endBuffTrigger);
-		endBuff.setTarget(TargetKey.FRIENDLY_MINIONS);
+		endBuff.setTarget(EntityReference.FRIENDLY_MINIONS);
 		setSpell(new MetaSpell(buff, endBuff));
 		setTargetRequirement(TargetSelection.NONE);
 	}

@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.HealingSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetKey;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class DarkscaleHealer extends MinionCard {
 
@@ -19,7 +19,7 @@ public class DarkscaleHealer extends MinionCard {
 	public Minion summon() {
 		Minion darkscaleHealer = createMinion(4, 5);
 		Battlecry battlecry = Battlecry.createBattlecry(new HealingSpell(2));
-		battlecry.setTargetKey(TargetKey.FRIENDLY_CHARACTERS);
+		battlecry.setTargetKey(EntityReference.FRIENDLY_CHARACTERS);
 		darkscaleHealer.setTag(GameTag.BATTLECRY, battlecry);
 		return darkscaleHealer;
 	}

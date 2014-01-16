@@ -28,8 +28,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.TurnStartEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.HeroPower;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardReference;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.IdFactory;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetKey;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 import org.slf4j.Logger;
@@ -51,8 +52,9 @@ public class GameLogic implements IGameLogic {
 	private GameContext context;
 	
 	@Override
-	public boolean canPlayCard(int playerId, Card card) {
+	public boolean canPlayCard(int playerId, CardReference cardReference) {
 		Player player = context.getPlayer(playerId);
+		Card card = context.resolveCardReference(cardReference);
 		if (player.getMana() < card.getManaCost()) {
 			return false;
 		}
@@ -284,6 +286,10 @@ public class GameLogic implements IGameLogic {
 		player.getHero().setMaxHp(MAX_HERO_HP);
 		player.getHero().setHp(MAX_HERO_HP);
 		
+		assignCardIds(player.getDeck());
+		assignCardIds(player.getHand());
+		assignCardIds(player.getGraveyard());
+		
 		logger.debug("Setting hero hp to {} for {}", player.getHero().getHp(), player.getName());
 
 		player.getDeck().shuffle();
@@ -299,6 +305,12 @@ public class GameLogic implements IGameLogic {
 			player.getHand().add(theCoin);
 		}
 	}
+	
+	private void assignCardIds(CardCollection<Card> cardCollection) {
+		for (Card card : cardCollection) {
+			card.setId(idFactory.generateId());
+		}
+	}
 
 	@Override
 	public void modifyCurrentMana(int playerId, int mana) {
@@ -310,7 +322,7 @@ public class GameLogic implements IGameLogic {
 	@Override
 	public void performGameAction(int playerId, GameAction action) {
 		if (action.getTargetRequirement() == TargetSelection.SELF) {
-			action.setTargetKey(TargetKey.pointTo(action.getSource()));
+			action.setTargetKey(EntityReference.pointTo(action.getSource()));
 		}
 		Player player = context.getPlayer(playerId);
 		if (action.getTargetRequirement() != TargetSelection.NONE && action.getTargetKey() == null) {
@@ -325,7 +337,7 @@ public class GameLogic implements IGameLogic {
 							+ action);
 				}
 			}
-			action.setTargetKey(TargetKey.pointTo(target));
+			action.setTargetKey(EntityReference.pointTo(target));
 		}
 
 		action.execute(context, playerId);
@@ -344,8 +356,9 @@ public class GameLogic implements IGameLogic {
 	}
 
 	@Override
-	public void playCard(int playerId, Card card) {
+	public void playCard(int playerId, CardReference cardReference) {
 		Player player = context.getPlayer(playerId);
+		Card card = context.resolveCardReference(cardReference);
 		modifyCurrentMana(playerId, -card.getManaCost());
 		logger.debug("{} plays {}", player.getName(), card);
 		//logger.debug("{} is now at {} mana", player.getName(), player.getMana() + "/" + player.getMaxMana());
@@ -357,12 +370,15 @@ public class GameLogic implements IGameLogic {
 	@Override
 	public void receiveCard(int playerId, Card card) {
 		Player player = context.getPlayer(playerId);
+		if (card.getId() == IdFactory.UNASSIGNED) {
+			card.setId(idFactory.generateId());
+		}
 		CardCollection<Card> hand = player.getHand();
-		CardCollection<Card> graveyard = player.getGraveyard();
 		if (hand.getCount() < MAX_HAND_CARDS) {
 			logger.debug("{} receives card {}", player.getName(), card);
 			hand.add(card);
 		} else {
+			CardCollection<Card> graveyard = player.getGraveyard();
 			logger.debug("{} has too many cards on his hand, card destroyed: {}", player.getName(), card);
 			graveyard.add(card);
 		}

@@ -5,13 +5,13 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
 import net.pferdimanzug.hearthstone.analyzer.game.events.IGameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.IGameEventListener;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetKey;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class SpellTrigger implements IGameEventListener, Cloneable {
 
 	private final GameEventTrigger trigger;
 	private final Spell spell;
-	private TargetKey hostKey;
+	private EntityReference hostKey;
 
 	public SpellTrigger(GameEventTrigger trigger, Spell spell) {
 		this.trigger = trigger;
@@ -37,7 +37,7 @@ public class SpellTrigger implements IGameEventListener, Cloneable {
 	}
 
 	public void setHost(Entity host) {
-		this.hostKey = TargetKey.pointTo(host);
+		this.hostKey = EntityReference.pointTo(host);
 	}
 
 	public int getOwner() {

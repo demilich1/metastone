@@ -4,7 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DrawCardSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetKey;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class LifeTap extends HeroPower {
@@ -15,7 +15,7 @@ public class LifeTap extends HeroPower {
 		super("Life Tap");
 		setTargetRequirement(TargetSelection.NONE);
 		Spell damage = new DamageSpell(2);
-		damage.setTarget(TargetKey.FRIENDLY_HERO);
+		damage.setTarget(EntityReference.FRIENDLY_HERO);
 		Spell draw = new DrawCardSpell();
 		setSpell(new MetaSpell(damage, draw));
 	}

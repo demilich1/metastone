@@ -11,10 +11,11 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.HeroPower;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardReference;
 
 public interface IGameLogic {
 	
-	public boolean canPlayCard(int playerId, Card card);
+	public boolean canPlayCard(int playerId, CardReference cardReference);
 	public void castSpell(int playerId, Spell spell);
 	public void damage(Entity target, int damage);
 	public void destroy(Entity target);
@@ -35,7 +36,7 @@ public interface IGameLogic {
 	
 	public void performGameAction(int playerIdId, GameAction action);
 	
-	public void playCard(int playerId, Card card);
+	public void playCard(int playerId, CardReference cardReference);
 	public void receiveCard(int playerId, Card card);
 	
 	public void startTurn(int playerId);

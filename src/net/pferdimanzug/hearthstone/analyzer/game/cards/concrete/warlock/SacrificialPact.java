@@ -9,7 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroySpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.HealingSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetKey;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class SacrificialPact extends SpellCard {
@@ -18,7 +18,7 @@ public class SacrificialPact extends SpellCard {
 		super("Sacrificial Pact", Rarity.FREE, HeroClass.WARLOCK, 0);
 		Spell destroyDemon = new DestroySpell();
 		Spell heal = new HealingSpell(5);
-		heal.setTarget(TargetKey.FRIENDLY_HERO);
+		heal.setTarget(EntityReference.FRIENDLY_HERO);
 		setSpell(new MetaSpell(destroyDemon, heal));
 		setTargetRequirement(TargetSelection.ANY);
 	}

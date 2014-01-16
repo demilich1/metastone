@@ -10,7 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetKey;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 import org.slf4j.Logger;
@@ -94,27 +94,27 @@ public class TargetLogic {
 		return filterTargets(action, potentialTargets);
 	}
 
-	public List<Entity> resolveTargetKey(GameContext context, Player player, TargetKey targetKey) {
+	public List<Entity> resolveTargetKey(GameContext context, Player player, EntityReference targetKey) {
 		if (targetKey == null) {
 			return null;
 		}
-		if (targetKey == TargetKey.ALL_CHARACTERS) {
+		if (targetKey == EntityReference.ALL_CHARACTERS) {
 			return getEntities(context, player, TargetSelection.ANY);
-		} else if (targetKey == TargetKey.ALL_MINIONS) {
+		} else if (targetKey == EntityReference.ALL_MINIONS) {
 			return getEntities(context, player, TargetSelection.MINIONS);
-		} else if (targetKey == TargetKey.ENEMY_CHARACTERS) {
+		} else if (targetKey == EntityReference.ENEMY_CHARACTERS) {
 			return getEntities(context, player, TargetSelection.ENEMY_CHARACTERS);
-		} else if (targetKey == TargetKey.ENEMY_HERO) {
+		} else if (targetKey == EntityReference.ENEMY_HERO) {
 			return getEntities(context, player, TargetSelection.ENEMY_HERO);
-		} else if (targetKey == TargetKey.ENEMY_MINIONS) {
+		} else if (targetKey == EntityReference.ENEMY_MINIONS) {
 			return getEntities(context, player, TargetSelection.ENEMY_MINIONS);
-		} else if (targetKey == TargetKey.FRIENDLY_CHARACTERS) {
+		} else if (targetKey == EntityReference.FRIENDLY_CHARACTERS) {
 			return getEntities(context, player, TargetSelection.FRIENDLY_CHARACTERS);
-		} else if (targetKey == TargetKey.FRIENDLY_HERO) {
+		} else if (targetKey == EntityReference.FRIENDLY_HERO) {
 			return getEntities(context, player, TargetSelection.FRIENDLY_HERO);
-		} else if (targetKey == TargetKey.FRIENDLY_MINIONS) {
+		} else if (targetKey == EntityReference.FRIENDLY_MINIONS) {
 			return getEntities(context, player, TargetSelection.FRIENDLY_MINIONS);
-		} else if (targetKey == TargetKey.NONE) {
+		} else if (targetKey == EntityReference.NONE) {
 			return new ArrayList<Entity>();
 		}
 
@@ -124,7 +124,7 @@ public class TargetLogic {
 
 	}
 
-	private Entity findEntity(GameContext context, TargetKey targetKey) {
+	private Entity findEntity(GameContext context, EntityReference targetKey) {
 		int targetId = targetKey.getId();
 		for (Entity entity : context.getPendingEntities()) {
 			if (entity.getId() == targetId) {

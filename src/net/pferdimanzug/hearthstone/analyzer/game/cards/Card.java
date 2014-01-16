@@ -5,7 +5,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 
 public abstract class Card implements Cloneable {
 
-	private final int id;
+	private int id;
 	private final String name;
 	private final CardType cardType;
 	private final int manaCost;
@@ -14,7 +14,6 @@ public abstract class Card implements Cloneable {
 	private boolean collectible = true;
 	
 	public Card(String name, CardType cardType, Rarity rarity, HeroClass classRestriction, int manaCost) {
-		this.id = getClass().getName().hashCode();
 		this.name = name;
 		this.cardType = cardType;
 		this.rarity = rarity;
@@ -69,6 +68,10 @@ public abstract class Card implements Cloneable {
 	@Override
 	public String toString() {
 		return String.format("[%s '%s' Manacost:%d]", getCardType(), getName(), getManaCost());
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

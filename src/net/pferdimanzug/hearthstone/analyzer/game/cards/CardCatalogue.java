@@ -320,16 +320,6 @@ public class CardCatalogue {
 		cards.add(new Whirlwind());
 	}
 
-	public static Card getCardById(int id) {
-		for (Card card : cards) {
-			if (card.getId() == id) {
-				return card.clone();
-			}
-		}
-
-		return null;
-	}
-	
 	public static Card getCardByName(String name) {
 		for (Card card : cards) {
 			if (card.getName().equals(name)) {

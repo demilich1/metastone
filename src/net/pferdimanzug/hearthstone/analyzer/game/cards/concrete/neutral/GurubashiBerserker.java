@@ -8,7 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.DamageReceivedTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetKey;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class GurubashiBerserker extends MinionCard {
 	
@@ -23,7 +23,7 @@ public class GurubashiBerserker extends MinionCard {
 	public Minion summon() {
 		Minion gurubashiBerserker = createMinion(BASE_ATTACK, 7);
 		Spell buffAttack = new BuffSpell(3, 0);
-		buffAttack.setTarget(TargetKey.pointTo(gurubashiBerserker));
+		buffAttack.setTarget(EntityReference.pointTo(gurubashiBerserker));
 		SpellTrigger trigger = new SpellTrigger(new DamageReceivedTrigger(), buffAttack);
 		gurubashiBerserker.addSpellTrigger(trigger);
 		return gurubashiBerserker;

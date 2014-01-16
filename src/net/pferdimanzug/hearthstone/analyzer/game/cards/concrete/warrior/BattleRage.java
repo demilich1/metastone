@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DrawCardSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetKey;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class BattleRage extends SpellCard {
@@ -36,7 +36,7 @@ public class BattleRage extends SpellCard {
 		super("Battle Rage", Rarity.COMMON, HeroClass.WARRIOR, 2);
 		setSpell(new BattleRageSpell());
 		setTargetRequirement(TargetSelection.NONE);
-		setPredefinedTarget(TargetKey.NONE);
+		setPredefinedTarget(EntityReference.NONE);
 	}
 
 }

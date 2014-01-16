@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetKey;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public abstract class SpellCard extends Card {
@@ -66,7 +66,7 @@ public abstract class SpellCard extends Card {
 		this.targetRequirement = targetRequirement;
 	}
 	
-	public void setPredefinedTarget(TargetKey target) {
+	public void setPredefinedTarget(EntityReference target) {
 		spell.setTarget(target);
 	}
 

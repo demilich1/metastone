@@ -5,13 +5,13 @@ import java.util.List;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetKey;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public abstract class Spell {
 	
-	private TargetKey target;
+	private EntityReference target;
 
-	public Spell(TargetKey target) {
+	public Spell(EntityReference target) {
 		this.setTarget(target);
 	}
 	
@@ -31,11 +31,11 @@ public abstract class Spell {
 
 	protected abstract void onCast(GameContext context, Player player, Entity target);
 
-	public TargetKey getTarget() {
+	public EntityReference getTarget() {
 		return target;
 	}
 
-	public void setTarget(TargetKey target) {
+	public void setTarget(EntityReference target) {
 		this.target = target;
 	}
 	
