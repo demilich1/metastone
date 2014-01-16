@@ -301,8 +301,7 @@ public class GameLogic implements IGameLogic {
 		if (!begins) {
 			drawCard(playerId);
 			TheCoin theCoin = new TheCoin();
-			logger.debug("{} receives {}", player.getName(), theCoin);
-			player.getHand().add(theCoin);
+			receiveCard(playerId, theCoin);
 		}
 	}
 	

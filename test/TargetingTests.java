@@ -39,7 +39,7 @@ public class TargetingTests extends TestBase {
 		
 		List<Entity> validTargets;
 		
-		GameAction attackAction = new PhysicalAttackAction(attacker);
+		GameAction attackAction = new PhysicalAttackAction(attacker.getReference());
 		validTargets = context.getLogic().getValidTargets(mage.getId(), attackAction);
 		Assert.assertEquals(validTargets.size(), 1);
 		

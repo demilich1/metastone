@@ -10,6 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public abstract class Entity {
 
@@ -195,5 +196,9 @@ public abstract class Entity {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public EntityReference getReference() {
+		return EntityReference.pointTo(this);
 	}
 }

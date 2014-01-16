@@ -1,10 +1,9 @@
 package net.pferdimanzug.hearthstone.analyzer.game.behaviour;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
@@ -13,6 +12,10 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MinMaxBehaviour implements IBehaviour {
 	
@@ -33,37 +36,47 @@ public class MinMaxBehaviour implements IBehaviour {
 	@Override
 	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
 		GameAction bestAction = null;
+		EntityReference bestTarget = null;
 		int bestScore = calculateGameStateScore(context, player.getId());
 		logger.debug("Current game state has a score of {}", bestScore);
+		Set<Integer> uniques = new HashSet<Integer>();
+		for (GameAction gameAction : validActions) {
+			if (!uniques.add(gameAction.hashCode())) {
+				logger.debug("OMG DUPLICATE ACTION DETECTED!!!!");
+			}
+		}
 		for (GameAction gameAction : validActions) {
 			if (gameAction.getValidTargets() == null) {
-				logger.debug("Context before simulation\n"+context.toString());
 				GameContext simulationResult = simulateAction(context, player, gameAction, null);
-				logger.debug("Context after simulation\n"+context.toString());
-				logger.debug("Simulation result\n"+simulationResult.toString());
 				int gameStateScore = calculateGameStateScore(simulationResult, player.getId());
 				logger.debug("Action (no target) gains score of {}", gameStateScore);
 				if (gameStateScore > bestScore) {
 					bestScore = gameStateScore;
 					bestAction = gameAction;
+					logger.debug("BEST ACTION SO FAR id:{}", bestAction.hashCode());
 				}
 			} else {
 				for (Entity target : gameAction.getValidTargets()) {
-					logger.debug("Context before simulation\n"+context.toString());
 					GameContext simulationResult = simulateAction(context, player, gameAction, target);
-					logger.debug("Context after simulation\n"+context.toString());
-					logger.debug("Simulation result\n"+simulationResult.toString());
 					int gameStateScore = calculateGameStateScore(simulationResult, player.getId());
 					logger.debug("Action (target {}) gains score of {}", target, gameStateScore);
 					if (gameStateScore > bestScore) {
 						bestScore = gameStateScore;
 						bestAction = gameAction;
-						gameAction.setTarget(target);
+						bestTarget = bestAction.getTargetKey();
+						logger.debug("BEST ACTION SO FAR id:{}", bestAction.hashCode());
+						logger.debug("Target is set to {}", bestAction.getTargetKey());
 					}
 				}
 
 			}
 		}
+		if (bestAction != null) {
+			bestAction.setTargetKey(bestTarget);
+			logger.debug("Performing best action id:{}", bestAction.hashCode());
+			logger.debug("Target is set to {}", bestAction.getTargetKey());
+		}
+		
 		return bestAction;
 	}
 
@@ -95,10 +108,11 @@ public class MinMaxBehaviour implements IBehaviour {
 		
 		score += player.getHand().getCount();
 		score -= opponent.getHand().getCount();
+		score += player.getMinions().size();
+		score -= player.getMinions().size();
 		for (Minion minion : player.getMinions()) {
 			score += calculateMinionScore(minion);
 		}
-
 		for (Minion minion : opponent.getMinions()) {
 			score -= calculateMinionScore(minion);
 		}

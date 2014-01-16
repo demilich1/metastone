@@ -24,7 +24,7 @@ public class ActionLogic {
 		if (!hero.canAttackThisTurn()) {
 			return null;
 		}
-		return new PhysicalAttackAction(hero);
+		return new PhysicalAttackAction(hero.getReference());
 	}
 
 	private GameAction getHeroPowerAction(GameContext context, Player player) {
@@ -46,7 +46,7 @@ public class ActionLogic {
 			if (!minion.canAttackThisTurn()) {
 				continue;
 			}
-			PhysicalAttackAction minionAttackAction = new PhysicalAttackAction(minion);
+			PhysicalAttackAction minionAttackAction = new PhysicalAttackAction(minion.getReference());
 			if (validateAction(context, player, minionAttackAction)) {
 				physicalAttackActions.add(minionAttackAction);
 			}

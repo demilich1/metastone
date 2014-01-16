@@ -114,8 +114,8 @@ public class GameContext implements Cloneable {
 	private void playTurn(Player player) {
 		turn++;
 		logic.startTurn(player.getId());
-		GameAction nextAction = null;
-		while ((nextAction = player.getBehaviour().requestAction(this, player, logic.getValidActions(player.getId()))) != null) {
+		GameAction nextAction = player.getBehaviour().requestAction(this, player, logic.getValidActions(player.getId()));
+		while (nextAction != null) {
 			logic.performGameAction(player.getId(), nextAction);
 
 			// ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_STATE_UPDATE,
@@ -128,6 +128,7 @@ public class GameContext implements Cloneable {
 			if (gameDecided()) {
 				return;
 			}
+			nextAction = player.getBehaviour().requestAction(this, player, logic.getValidActions(player.getId()));
 		}
 		logic.endTurn(player.getId());
 		activePlayer = getOpponent(player);
@@ -152,9 +153,9 @@ public class GameContext implements Cloneable {
 		case DECK:
 			return findCardinCollection(player.getDeck(), cardReference.getCardId());
 		case GRAVEYARD:
-			return findCardinCollection(player.getDeck(), cardReference.getCardId());
+			return findCardinCollection(player.getGraveyard(), cardReference.getCardId());
 		case HAND:
-			return findCardinCollection(player.getDeck(), cardReference.getCardId());
+			return findCardinCollection(player.getHand(), cardReference.getCardId());
 		case PENDING:
 			return findCardinCollection(pendingCards, cardReference.getCardId());
 		case HERO_POWER:
@@ -200,6 +201,8 @@ public class GameContext implements Cloneable {
 			result.append(player.getMana());
 			result.append('/');
 			result.append(player.getMaxMana());
+			result.append(" HP: ");
+			result.append(player.getHero().getHp() + "(" + player.getHero().getArmor() + ")");
 			result.append('\n');
 			result.append("Minions:\n");
 			for (Minion minion : player.getMinions()) {

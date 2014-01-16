@@ -38,7 +38,7 @@ public class SpecialCardTests extends TestBase {
 		Assert.assertEquals(defender.getAttack(), GurubashiBerserker.BASE_ATTACK);
 		
 		// first attack, Gurubashi Berserker should have increased attack
-		GameAction attackAction = new PhysicalAttackAction(attacker);
+		GameAction attackAction = new PhysicalAttackAction(attacker.getReference());
 		attackAction.setTarget(defender);
 		context.getLogic().performGameAction(mage.getId(), attackAction);
 		

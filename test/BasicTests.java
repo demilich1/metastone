@@ -43,7 +43,7 @@ public class BasicTests extends TestBase {
 		Battlecry testBattlecry = Battlecry.createBattlecry(new DamageSpell(3), TargetSelection.ENEMY_HERO);
 		testBattlecry.setTarget(warrior.getHero());
 		devMonster.getMinion().setTag(GameTag.BATTLECRY, testBattlecry);
-		mage.getHand().add(devMonster);
+		context.getLogic().receiveCard(mage.getId(), devMonster);
 		context.getLogic().performGameAction(mage.getId(), devMonster.play());
 		
 		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - 3);
@@ -66,14 +66,14 @@ public class BasicTests extends TestBase {
 		heroBuffSpell.setTarget(EntityReference.pointTo(druid.getHero()));
 		context.getLogic().castSpell(druid.getId(), heroBuffSpell);
 		Entity devMonster = getSingleMinion(mage.getMinions());
-		GameAction minionAttackAction = new PhysicalAttackAction(devMonster);
+		GameAction minionAttackAction = new PhysicalAttackAction(devMonster.getReference());
 		minionAttackAction.setTarget(druid.getHero());
 		context.getLogic().performGameAction(mage.getId(), minionAttackAction);
 		// monster attacked; it should not be damaged by the hero
 		Assert.assertEquals(druid.getHero().getHp(), druid.getHero().getMaxHp() - damage);
 		Assert.assertEquals(devMonster.getHp(), devMonster.getMaxHp());
 		
-		GameAction heroAttackAction = new PhysicalAttackAction(druid.getHero());
+		GameAction heroAttackAction = new PhysicalAttackAction(druid.getHero().getReference());
 		heroAttackAction.setTarget(devMonster);
 		context.getLogic().performGameAction(mage.getId(), heroAttackAction);
 		// hero attacked; both entities should be damaged
@@ -103,7 +103,7 @@ public class BasicTests extends TestBase {
 		Entity attacker = getSingleMinion(mage.getMinions());
 		Entity defender = getSingleMinion(warrior.getMinions());
 		
-		GameAction attackAction = new PhysicalAttackAction(attacker);
+		GameAction attackAction = new PhysicalAttackAction(attacker.getReference());
 		attackAction.setTarget(defender);
 		context.getLogic().performGameAction(mage.getId(), attackAction);
 		

@@ -30,4 +30,9 @@ public class EntityReference {
 	public boolean isTargetGroup() {
 		return key < 0;
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("[EntityReference key:%d]", key);
+	}
 }

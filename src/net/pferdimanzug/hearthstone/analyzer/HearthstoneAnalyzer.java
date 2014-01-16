@@ -22,7 +22,7 @@ public class HearthstoneAnalyzer {
 		HearthstoneAnalyzer instance = new HearthstoneAnalyzer();
 		facade.startUp(instance);
 		facade.sendNotification(GameNotification.BATCH_START);
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < 100; i++) {
 			instance.launchDebugGame();	
 		}
 		facade.sendNotification(GameNotification.BATCH_STOP);
@@ -42,7 +42,7 @@ public class HearthstoneAnalyzer {
 		Hero hero1 = new Guldan();
 		Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
 		player1.setBehaviour(new MinMaxBehaviour());
-		Hero hero2 = new Thrall();
+		Hero hero2 = new Garrosh();
 		Player player2 = new Player("Bot", hero2, DebugDecks.getRandomDeck(hero2.getHeroClass()));
 		player2.setBehaviour(new PlayRandomBehaviour());
 		GameContext newGame = new GameContext(player1, player2, new GameLogic());

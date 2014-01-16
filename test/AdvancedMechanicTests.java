@@ -44,7 +44,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		Assert.assertEquals(defender.hasTag(GameTag.ENRAGED), false);
 		
 		// attack once, should apply the enrage attack bonus
-		GameAction attackAction = new PhysicalAttackAction(attacker);
+		GameAction attackAction = new PhysicalAttackAction(attacker.getReference());
 		attackAction.setTarget(defender);
 		context.getLogic().performGameAction(mage.getId(), attackAction);
 		Assert.assertEquals(defender.getAttack(), AmaniBerserker.BASE_ATTACK + AmaniBerserker.ENRAGE_ATTACK_BONUS);
@@ -115,7 +115,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		Entity attacker = getSingleMinion(mage.getMinions());
 		Entity defender = getSingleMinion(warrior.getMinions());
 		
-		GameAction attackAction = new PhysicalAttackAction(attacker);
+		GameAction attackAction = new PhysicalAttackAction(attacker.getReference());
 		attackAction.setTarget(defender);
 		
 		context.getLogic().performGameAction(mage.getId(), attackAction);
