@@ -44,5 +44,10 @@ public abstract class HeroPower extends SpellCard {
 		this.used = used;
 	}
 	
+	@Override
+	public HeroPower clone() {
+		return (HeroPower) super.clone();
+	}
+	
 
 }

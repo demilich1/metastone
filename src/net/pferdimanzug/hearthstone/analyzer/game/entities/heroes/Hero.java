@@ -9,7 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.HeroPower;
 public abstract class Hero extends Entity {
 
 	private final HeroClass heroClass;
-	private final HeroPower heroPower;
+	private HeroPower heroPower;
 	private Weapon weapon;
 	
 	public Hero(String name, HeroClass heroClass, HeroPower heroPower) {
@@ -60,6 +60,16 @@ public abstract class Hero extends Entity {
 		if (weapon != null) {
 			weapon.setOwner(getOwner());
 		}
+	}
+	
+	@Override
+	public Hero clone() {
+		Hero clone = (Hero) super.clone();
+		if (weapon != null) {
+			clone.setWeapon(getWeapon().clone());
+		}
+		clone.heroPower = heroPower.clone();
+		return clone;
 	}
 	
 }

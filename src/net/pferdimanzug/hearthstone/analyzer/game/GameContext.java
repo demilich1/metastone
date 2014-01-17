@@ -42,7 +42,7 @@ public class GameContext implements Cloneable {
 	// we cannot find the to-be-summoned minion if its Battlecry
 	// tries to target itself
 	private final List<Entity> pendingEntities = new ArrayList<Entity>();
-	private final CardCollection<Card> pendingCards = new CardCollection<Card>();
+	private final CardCollection pendingCards = new CardCollection();
 
 	private Player activePlayer;
 	private Player winner;
@@ -52,6 +52,7 @@ public class GameContext implements Cloneable {
 
 	static {
 		cloner.dontClone(EntityReference.class);
+		cloner.dontClone(CardReference.class);
 	}
 
 	public GameContext(Player player1, Player player2, IGameLogic logic) {
@@ -171,7 +172,7 @@ public class GameContext implements Cloneable {
 		return null;
 	}
 	
-	private Card findCardinCollection(CardCollection<Card> cardCollection, int cardId) {
+	private Card findCardinCollection(CardCollection cardCollection, int cardId) {
 		for (Card card : cardCollection) {
 			if (card.getId() == cardId) {
 				return card;
@@ -186,6 +187,10 @@ public class GameContext implements Cloneable {
 
 	@Override
 	public GameContext clone() {
+		//
+	}
+	
+	public GameContext cloneThirdParty() {
 		long start = System.currentTimeMillis();
 		GameContext clone = cloner.deepClone(this);
 		clone.getLogic().setContext(clone);
@@ -227,7 +232,7 @@ public class GameContext implements Cloneable {
 		return result.toString();
 	}
 
-	public CardCollection<Card> getPendingCards() {
+	public CardCollection getPendingCards() {
 		return pendingCards;
 	}
 }

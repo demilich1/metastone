@@ -4,21 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
-public class Player {
+public class Player implements Cloneable {
 
 	private final String name;
 	private final Hero hero;
 
-	private final List<Minion> minions;
-	private final CardCollection<Card> deck;
-	private final CardCollection<Card> hand;
-	private final CardCollection<Card> graveyard;
+	private final CardCollection deck;
+	private final CardCollection hand = new CardCollection();
+	private final CardCollection graveyard = new CardCollection();
+	private final List<Minion> minions = new ArrayList<>();
 	
 	private int id = -1;
 
@@ -27,13 +26,19 @@ public class Player {
 	
 	private IBehaviour behaviour;
 
-	public Player(String name, Hero hero, CardCollection<Card> deck) {
+	public Player(String name, Hero hero, CardCollection deck) {
 		this.name = name;
 		this.hero = hero;
 		this.deck = deck;
-		this.minions = new ArrayList<>();
-		this.hand = new CardCollection<>();
-		this.graveyard = new CardCollection<>();
+	}
+	
+	private Player(Player otherPlayer) {
+		this.name = otherPlayer.name;
+		this.hero = otherPlayer.hero.clone();
+		this.deck = otherPlayer.getDeck().clone();
+		for (Minion minion : otherPlayer.getMinions()) {
+			minions.add(minion.clone());
+		}
 	}
 	
 	public IBehaviour getBehaviour() {
@@ -47,15 +52,15 @@ public class Player {
 		return characters;
 	}
 
-	public CardCollection<Card> getDeck() {
+	public CardCollection getDeck() {
 		return deck;
 	}
 	
-	public CardCollection<Card> getGraveyard() {
+	public CardCollection getGraveyard() {
 		return graveyard;
 	}
 
-	public CardCollection<Card> getHand() {
+	public CardCollection getHand() {
 		return hand;
 	}
 
@@ -97,6 +102,10 @@ public class Player {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public Player clone() {
+		return new Player(this);
 	}
 
 }

@@ -12,7 +12,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
-public abstract class Entity {
+public abstract class Entity implements Cloneable {
 
 	private String name;
 	private final HashMap<GameTag, Object> tags = new HashMap<GameTag, Object>();
@@ -200,5 +200,14 @@ public abstract class Entity {
 	
 	public EntityReference getReference() {
 		return EntityReference.pointTo(this);
+	}
+	
+	public Entity clone() {
+		try {
+			return (Entity) super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

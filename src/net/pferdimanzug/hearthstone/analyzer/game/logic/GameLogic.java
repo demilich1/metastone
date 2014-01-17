@@ -159,7 +159,7 @@ public class GameLogic implements IGameLogic {
 	@Override
 	public void drawCard(int playerId) {
 		Player player = context.getPlayer(playerId);
-		CardCollection<Card> deck = player.getDeck();
+		CardCollection deck = player.getDeck();
 		if (deck.isEmpty()) {
 			Hero hero = player.getHero();
 			int fatigue = hero.hasTag(GameTag.FATIGUE) ? hero.getTagValue(GameTag.FATIGUE) : 0;
@@ -305,7 +305,7 @@ public class GameLogic implements IGameLogic {
 		}
 	}
 	
-	private void assignCardIds(CardCollection<Card> cardCollection) {
+	private void assignCardIds(CardCollection cardCollection) {
 		for (Card card : cardCollection) {
 			card.setId(idFactory.generateId());
 		}
@@ -372,12 +372,12 @@ public class GameLogic implements IGameLogic {
 		if (card.getId() == IdFactory.UNASSIGNED) {
 			card.setId(idFactory.generateId());
 		}
-		CardCollection<Card> hand = player.getHand();
+		CardCollection hand = player.getHand();
 		if (hand.getCount() < MAX_HAND_CARDS) {
 			logger.debug("{} receives card {}", player.getName(), card);
 			hand.add(card);
 		} else {
-			CardCollection<Card> graveyard = player.getGraveyard();
+			CardCollection graveyard = player.getGraveyard();
 			logger.debug("{} has too many cards on his hand, card destroyed: {}", player.getName(), card);
 			graveyard.add(card);
 		}

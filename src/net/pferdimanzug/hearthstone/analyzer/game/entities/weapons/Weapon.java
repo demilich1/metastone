@@ -25,5 +25,10 @@ public class Weapon extends Entity {
 	public boolean isBroken() {
 		return !hasTag(GameTag.DURABILITY) || getTagValue(GameTag.DURABILITY) < 1;
 	}
+	
+	@Override
+	public Weapon clone() {
+		return (Weapon) super.clone();
+	}
 
 }

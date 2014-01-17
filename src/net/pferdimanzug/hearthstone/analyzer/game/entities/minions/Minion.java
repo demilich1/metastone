@@ -31,4 +31,9 @@ public class Minion extends Entity {
 		setBaseHp(baseHp);
 	}
 	
+	@Override
+	public Minion clone() {
+		return (Minion) super.clone();
+	}
+	
 }

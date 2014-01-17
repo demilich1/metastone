@@ -22,7 +22,7 @@ import org.testng.annotations.Test;
 
 public class BasicTests extends TestBase {
 	
-	private TheCoin getTheCoin(CardCollection<Card> cards) {
+	private TheCoin getTheCoin(CardCollection cards) {
 		for (Card card : cards) {
 			if (card instanceof TheCoin) {
 				return (TheCoin) card;

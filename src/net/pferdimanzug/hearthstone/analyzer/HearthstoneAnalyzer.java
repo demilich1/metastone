@@ -39,7 +39,7 @@ public class HearthstoneAnalyzer {
 	}
 	
 	private void launchDebugGame() {
-		Hero hero1 = new Garrosh();
+		Hero hero1 = new Guldan();
 		Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
 		player1.setBehaviour(new MinMaxBehaviour());
 		Hero hero2 = new Garrosh();

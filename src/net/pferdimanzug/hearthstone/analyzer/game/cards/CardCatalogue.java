@@ -159,7 +159,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 
 public class CardCatalogue {
 	
-	private final static CardCollection<Card> cards = new CardCollection<Card>();
+	private final static CardCollection cards = new CardCollection();
 
 	static {
 		cards.add(new Claw());
@@ -330,8 +330,8 @@ public class CardCatalogue {
 		return null;
 	}
 
-	public static CardCollection<Card> query(CardType cardType, Rarity rarity, HeroClass heroClass) {
-		CardCollection<Card> result = new CardCollection<Card>();
+	public static CardCollection query(CardType cardType, Rarity rarity, HeroClass heroClass) {
+		CardCollection result = new CardCollection();
 		for (Card card : cards) {
 			if (!card.isCollectible()) {
 				continue;
