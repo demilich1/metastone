@@ -45,15 +45,12 @@ public class HearthstoneAnalyzer {
 				}
 				
 				for (int i = 0; i < 100; i++) {
-					
 					Hero hero1 = HeroFactory.createHero(heroClass1);
 					Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
 					player1.setBehaviour(new MinMaxBehaviour());
-					player1.getHand().add(new GurubashiBerserker());
 					Hero hero2 = HeroFactory.createHero(heroClass2);
 					Player player2 = new Player("Bot", hero2, DebugDecks.getRandomDeck(hero2.getHeroClass()));
-					player2.setBehaviour(new PlayRandomBehaviour());
-					player2.getHand().add(new GurubashiBerserker());
+					player2.setBehaviour(new MinMaxBehaviour());
 					GameContext newGame = new GameContext(player1, player2, new GameLogic());
 					ApplicationFacade.getInstance().sendNotification(GameNotification.START_GAME, newGame);
 				}
