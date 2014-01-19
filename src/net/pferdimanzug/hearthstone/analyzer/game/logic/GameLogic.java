@@ -48,9 +48,23 @@ public class GameLogic implements IGameLogic {
 
 	private final TargetLogic targetLogic = new TargetLogic();
 	private final ActionLogic actionLogic = new ActionLogic();
-	private final IdFactory idFactory = new IdFactory();
+	private final IdFactory idFactory;
 	private GameContext context;
 	
+	public GameLogic() {
+		idFactory = new IdFactory();
+	}
+	
+	private GameLogic(IdFactory idFactory) {
+		this.idFactory = idFactory;
+	}
+	
+	private void assignCardIds(CardCollection cardCollection) {
+		for (Card card : cardCollection) {
+			card.setId(idFactory.generateId());
+		}
+	}
+
 	@Override
 	public boolean canPlayCard(int playerId, CardReference cardReference) {
 		Player player = context.getPlayer(playerId);
@@ -80,6 +94,21 @@ public class GameLogic implements IGameLogic {
 		spell.cast(context, player, targetLogic.resolveTargetKey(context, player, spell.getTarget()));
 	}
 
+	private void checkForDeadEntities() {
+		for (Player player : context.getPlayers()) {
+			for (Minion minion : new ArrayList<Minion>(player.getMinions())) {
+				if (minion.isDead()) {
+					destroyMinion(minion);	
+				}
+			}
+		}
+		
+	}
+	
+	public IGameLogic clone() {
+		return new GameLogic(idFactory.clone());
+	}
+
 	@Override
 	public void damage(Entity target, int damage) {
 		switch (target.getEntityType()) {
@@ -93,7 +122,7 @@ public class GameLogic implements IGameLogic {
 			break;
 		}
 	}
-
+	
 	private void damageHero(Hero hero, int damage) {
 		int effectiveHp = hero.getHp() + hero.getArmor();
 		hero.modifyArmor(-damage);
@@ -111,7 +140,7 @@ public class GameLogic implements IGameLogic {
 		}
 		logger.debug("{} is damaged for {}", minion, damage);
 		minion.setHp(minion.getHp() - damage);
-		context.getEventManager().fireGameEvent(new DamageEvent(context, minion, damage));
+		context.getTriggerManager().fireGameEvent(new DamageEvent(context, minion, damage));
 		if (minion.hasTag(GameTag.ENRAGE_SPELL)){
 			handleEnrage(minion);
 		}
@@ -135,20 +164,19 @@ public class GameLogic implements IGameLogic {
 		
 		}
 	}
-	
+
 	private void destroyMinion(Entity minion) {
 		logger.debug("{} is destroyed", minion);
 		Player owner = context.getPlayer(minion.getOwner());
 		owner.getMinions().remove(minion);
-		for (SpellTrigger spellTrigger : minion.getSpellTriggers()) {
-			context.getEventManager().removeGameEventListener(spellTrigger);
-		}
-		context.getEventManager().fireGameEvent(new KillEvent(context, minion));
+		context.getTriggerManager().fireGameEvent(new KillEvent(context, minion));
+		context.getTriggerManager().removeTriggersAssociatedWith(minion.getReference());
 	}
-	
+
 	private void destroyWeapon(Weapon weapon) {
 		Player owner = context.getPlayer(weapon.getOwner());
 		owner.getHero().setWeapon(null);
+		context.getTriggerManager().removeTriggersAssociatedWith(weapon.getReference());
 	}
 
 	@Override
@@ -179,7 +207,20 @@ public class GameLogic implements IGameLogic {
 		player.getHero().setTag(GameTag.ATTACK_BONUS, 0);
 		player.getHero().removeTag(GameTag.COMBO);
 		logger.debug("{} ends his turn.", player.getName());
-		context.getEventManager().fireGameEvent(new TurnEndEvent(context, player.getId()));
+		context.getTriggerManager().fireGameEvent(new TurnEndEvent(context, player.getId()));
+	}
+
+	@Override
+	public void equipWeapon(int playerId, Weapon weapon) {
+		Player player = context.getPlayer(playerId);
+		weapon.setId(idFactory.generateId());
+		logger.debug("{} equips weapon {}", player.getHero(), weapon);
+		player.getHero().setWeapon(weapon);
+		if (weapon.hasSpellTrigger()) {
+			SpellTrigger spellTrigger = weapon.getSpellTrigger();
+			spellTrigger.setHost(weapon);
+			context.getTriggerManager().addTrigger(spellTrigger);
+		}
 	}
 
 	@Override
@@ -194,9 +235,9 @@ public class GameLogic implements IGameLogic {
 		}
 		
 		attacker.modifyTag(GameTag.NUMBER_OF_ATTACKS, -1);
-		context.getEventManager().fireGameEvent(new PhysicalAttackEvent(context, attacker, defender));
+		context.getTriggerManager().fireGameEvent(new PhysicalAttackEvent(context, attacker, defender));
 	}
-
+	
 	@Override
 	public GameResult getMatchResult(Player player, Player opponent) {
 		int ownHp = player.getHero().getHp();
@@ -277,7 +318,7 @@ public class GameLogic implements IGameLogic {
 			handleEnrage(minion);
 		}
 	}
-
+	
 	@Override
 	public void init(int playerId, boolean begins) {
 		Player player = context.getPlayer(playerId);
@@ -304,12 +345,6 @@ public class GameLogic implements IGameLogic {
 			receiveCard(playerId, theCoin);
 		}
 	}
-	
-	private void assignCardIds(CardCollection cardCollection) {
-		for (Card card : cardCollection) {
-			card.setId(idFactory.generateId());
-		}
-	}
 
 	@Override
 	public void modifyCurrentMana(int playerId, int mana) {
@@ -317,11 +352,11 @@ public class GameLogic implements IGameLogic {
 		int newMana = Math.min(player.getMana() + mana, MAX_MANA);
 		player.setMana(newMana);
 	}
-
+	
 	@Override
 	public void performGameAction(int playerId, GameAction action) {
 		if (action.getTargetRequirement() == TargetSelection.SELF) {
-			action.setTargetKey(EntityReference.pointTo(action.getSource()));
+			action.setTargetKey(action.getSource());
 		}
 		Player player = context.getPlayer(playerId);
 		if (action.getTargetRequirement() != TargetSelection.NONE && action.getTargetKey() == null) {
@@ -342,17 +377,6 @@ public class GameLogic implements IGameLogic {
 		action.execute(context, playerId);
 		checkForDeadEntities();
 	}
-	
-	private void checkForDeadEntities() {
-		for (Player player : context.getPlayers()) {
-			for (Minion minion : new ArrayList<Minion>(player.getMinions())) {
-				if (minion.isDead()) {
-					destroyMinion(minion);	
-				}
-			}
-		}
-		
-	}
 
 	@Override
 	public void playCard(int playerId, CardReference cardReference) {
@@ -365,7 +389,7 @@ public class GameLogic implements IGameLogic {
 		player.getGraveyard().add(card);
 		player.getHero().modifyTag(GameTag.COMBO, +1);
 	}
-	
+
 	@Override
 	public void receiveCard(int playerId, Card card) {
 		Player player = context.getPlayer(playerId);
@@ -413,7 +437,7 @@ public class GameLogic implements IGameLogic {
 			refreshAttacksPerRound(minion);
 			minion.removeTag(GameTag.SUMMONING_SICKNESS);
 		}
-		context.getEventManager().fireGameEvent(new TurnStartEvent(context, player.getId()));
+		context.getTriggerManager().fireGameEvent(new TurnStartEvent(context, player.getId()));
 	}
 
 	@Override
@@ -427,7 +451,7 @@ public class GameLogic implements IGameLogic {
 		context.getPendingEntities().add(minion);
 		if (minion.getBattlecry() != null) {
 			GameAction battlecry = minion.getBattlecry();
-			battlecry.setSource(minion);
+			battlecry.setSource(minion.getReference());
 			performGameAction(player.getId(), battlecry);
 		}
 		context.getPendingEntities().remove(minion);
@@ -439,9 +463,10 @@ public class GameLogic implements IGameLogic {
 			// player.getMinions().addAfter(minion, nextTo);
 		}
 		minion.setOwner(player.getId());
-		for (SpellTrigger spellTrigger : minion.getSpellTriggers()) {
+		if (minion.hasSpellTrigger()) {
+			SpellTrigger spellTrigger = minion.getSpellTrigger();
 			spellTrigger.setHost(minion);
-			context.getEventManager().registerGameEventListener(spellTrigger);
+			context.getTriggerManager().addTrigger(spellTrigger);
 		}
 		if (minion.hasTag(GameTag.CHARGE)) {
 			minion.setTag(GameTag.NUMBER_OF_ATTACKS, minion.hasTag(GameTag.WINDFURY) ? 2 : 1);
@@ -449,32 +474,21 @@ public class GameLogic implements IGameLogic {
 			minion.setTag(GameTag.NUMBER_OF_ATTACKS, 0);
 		}
 		
-		context.getEventManager().fireGameEvent(new SummonEvent(context, minion));
-	}
-
-	@Override
-	public void useHeroPower(int playerId, HeroPower power) {
-		Player player = context.getPlayer(playerId);
-		modifyCurrentMana(playerId, -power.getManaCost());
-		logger.debug("{} uses {}", player.getName(), power);
-		power.setUsed(true);
-	}
-
-	@Override
-	public void equipWeapon(int playerId, Weapon weapon) {
-		Player player = context.getPlayer(playerId);
-		weapon.setId(idFactory.generateId());
-		logger.debug("{} equips weapon {}", player.getHero(), weapon);
-		player.getHero().setWeapon(weapon);
-		for (SpellTrigger spellTrigger : weapon.getSpellTriggers()) {
-			context.getEventManager().registerGameEventListener(spellTrigger);
-		}
+		context.getTriggerManager().fireGameEvent(new SummonEvent(context, minion));
 	}
 	
 	private List<Entity> toList(Entity entity) {
 		List<Entity> list = new ArrayList<Entity>(1);
 		list.add(entity);
 		return list;
+	}
+	
+	@Override
+	public void useHeroPower(int playerId, HeroPower power) {
+		Player player = context.getPlayer(playerId);
+		modifyCurrentMana(playerId, -power.getManaCost());
+		logger.debug("{} uses {}", player.getName(), power);
+		power.setUsed(true);
 	}
 
 }

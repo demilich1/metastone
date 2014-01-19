@@ -21,12 +21,6 @@ public class KillCommand extends SpellCard {
 			this.beastDamage = beastDamage;
 		}
 
-		@Override
-		protected void onCast(GameContext context, Player player, Entity target) {
-			int damage = hasBeast(player) ? beastDamage : getDamage();
-			context.getLogic().damage(target, damage);
-		}
-		
 		private boolean hasBeast(Player player) {
 			for (Entity minion : player.getMinions()) {
 				if (minion.getRace() == Race.BEAST) {
@@ -34,6 +28,12 @@ public class KillCommand extends SpellCard {
 				}
 			}
 			return false;
+		}
+		
+		@Override
+		protected void onCast(GameContext context, Player player, Entity target) {
+			int damage = hasBeast(player) ? beastDamage : getDamage();
+			context.getLogic().damage(target, damage);
 		}
 		
 	}

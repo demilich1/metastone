@@ -15,15 +15,15 @@ public class SummonRandomSpell extends Spell {
 		this.minions = minions;
 	}
 
+	private MinionCard getRandomMinion() {
+		int randomIndex = ThreadLocalRandom.current().nextInt(minions.length);
+		return minions[randomIndex];
+	}
+	
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
 		MinionCard randomMinionCard = getRandomMinion();
 		context.getLogic().summon(player.getId(), randomMinionCard.summon(), null);
-	}
-	
-	private MinionCard getRandomMinion() {
-		int randomIndex = ThreadLocalRandom.current().nextInt(minions.length);
-		return minions[randomIndex];
 	}
 
 }

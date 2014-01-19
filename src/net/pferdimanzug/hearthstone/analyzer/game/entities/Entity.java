@@ -1,8 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.entities;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
@@ -13,17 +11,17 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public abstract class Entity implements Cloneable {
-
+	
 	private String name;
-	private final HashMap<GameTag, Object> tags = new HashMap<GameTag, Object>();
+	private HashMap<GameTag, Object> tags = new HashMap<GameTag, Object>();
 	// index of the owning player, i.e.
 	// 0 -> owned by player 1
 	// 1 -> owned by player 2
 	// implemented it that way because of the same reason
 	// the class TargetKey was created - lazy references are better for cloning
 	private int ownerIndex;
-	private final Card sourceCard;
-	private final List<SpellTrigger> spellTriggers = new ArrayList<>();
+	private Card sourceCard;
+	private SpellTrigger spellTrigger;
 	private Race race = Race.NONE;
 	private int id;
 
@@ -34,14 +32,27 @@ public abstract class Entity implements Cloneable {
 
 	public void addSpellTrigger(SpellTrigger spellTrigger) {
 		spellTrigger.setHost(this);
-		getSpellTriggers().add(spellTrigger);
+		this.spellTrigger = spellTrigger;
 	}
-
+	
 	public boolean canAttackThisTurn() {
 		if (hasTag(GameTag.SUMMONING_SICKNESS) && !hasTag(GameTag.CHARGE)) {
 			return false;
 		}
 		return getAttack() > 0 && getTagValue(GameTag.NUMBER_OF_ATTACKS) > 0;
+	}
+
+	@Override
+	public Entity clone() {
+		try {
+			Entity clone = (Entity) super.clone();
+			clone.tags = new HashMap<>(tags);
+			clone.spellTrigger = spellTrigger != null ? spellTrigger.clone() : null;
+			return clone;
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	private boolean displayGameTag(GameTag tag) {
@@ -71,6 +82,10 @@ public abstract class Entity implements Cloneable {
 		return getTagValue(GameTag.HP);
 	}
 
+	public int getId() {
+		return id;
+	}
+
 	public int getMaxHp() {
 		return getTagValue(GameTag.MAX_HP) + getTagValue(GameTag.HP_BONUS);
 	}
@@ -87,12 +102,16 @@ public abstract class Entity implements Cloneable {
 		return race;
 	}
 
+	public EntityReference getReference() {
+		return EntityReference.pointTo(this);
+	}
+
 	public Card getSourceCard() {
 		return sourceCard;
 	}
 
-	public List<SpellTrigger> getSpellTriggers() {
-		return spellTriggers;
+	public SpellTrigger getSpellTrigger() {
+		return spellTrigger;
 	}
 
 	public Object getTag(GameTag tag) {
@@ -101,6 +120,10 @@ public abstract class Entity implements Cloneable {
 
 	public int getTagValue(GameTag tag) {
 		return tags.containsKey(tag) ? (int) tags.get(tag) : 0;
+	}
+
+	public boolean hasSpellTrigger() {
+		return spellTrigger != null;
 	}
 
 	public boolean hasTag(GameTag tag) {
@@ -147,6 +170,10 @@ public abstract class Entity implements Cloneable {
 		setTag(GameTag.HP, value);
 	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public void setMaxHp(int value) {
 		setTag(GameTag.MAX_HP, value);
 	}
@@ -170,7 +197,7 @@ public abstract class Entity implements Cloneable {
 	public void setTag(GameTag tag, int value) {
 		tags.put(tag, value);
 	}
-
+	
 	public void setTag(GameTag tag, Object value) {
 		tags.put(tag, value);
 	}
@@ -186,28 +213,8 @@ public abstract class Entity implements Cloneable {
 				prefix = ", ";
 			}
 		}
+		result += " hashCode: " + hashCode();
 		result += "]";
 		return result;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	public EntityReference getReference() {
-		return EntityReference.pointTo(this);
-	}
-	
-	public Entity clone() {
-		try {
-			return (Entity) super.clone();
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 }

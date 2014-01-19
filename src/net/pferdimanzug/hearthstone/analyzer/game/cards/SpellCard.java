@@ -58,16 +58,16 @@ public abstract class SpellCard extends Card {
 		};
 	}
 
+	public void setPredefinedTarget(EntityReference target) {
+		spell.setTarget(target);
+	}
+	
 	public void setSpell(Spell spell) {
 		this.spell = spell;
 	}
 	
 	public void setTargetRequirement(TargetSelection targetRequirement) {
 		this.targetRequirement = targetRequirement;
-	}
-	
-	public void setPredefinedTarget(EntityReference target) {
-		spell.setTarget(target);
 	}
 
 }

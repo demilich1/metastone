@@ -21,17 +21,17 @@ public class Swipe extends SpellCard {
 			this.secondaryDamage = secondaryDamage;
 		}
 
+		private void damage(GameContext context, Entity primaryTarget, Entity target) {
+			int damage = target == primaryTarget ? primaryDamage : secondaryDamage;
+			context.getLogic().damage(target, damage);
+		}
+
 		protected void onCast(GameContext context, Player player, Entity target) {
 			damage(context, target, context.getOpponent(player).getHero());
 			Player owner = context.getPlayer(target.getOwner());
 			for (Entity minion : owner.getMinions()) {
 				damage(context, target, minion);
 			}
-		}
-
-		private void damage(GameContext context, Entity primaryTarget, Entity target) {
-			int damage = target == primaryTarget ? primaryDamage : secondaryDamage;
-			context.getLogic().damage(target, damage);
 		}
 
 	}

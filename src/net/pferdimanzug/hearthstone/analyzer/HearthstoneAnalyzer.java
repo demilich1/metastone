@@ -8,6 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.DebugDecks;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.MinMaxBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.PlayRandomBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.GurubashiBerserker;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Guldan;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
@@ -22,7 +23,7 @@ public class HearthstoneAnalyzer {
 		HearthstoneAnalyzer instance = new HearthstoneAnalyzer();
 		facade.startUp(instance);
 		facade.sendNotification(GameNotification.BATCH_START);
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 1000; i++) {
 			instance.launchDebugGame();	
 		}
 		facade.sendNotification(GameNotification.BATCH_STOP);
@@ -42,9 +43,11 @@ public class HearthstoneAnalyzer {
 		Hero hero1 = new Guldan();
 		Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
 		player1.setBehaviour(new MinMaxBehaviour());
+		player1.getHand().add(new GurubashiBerserker());
 		Hero hero2 = new Garrosh();
 		Player player2 = new Player("Bot", hero2, DebugDecks.getRandomDeck(hero2.getHeroClass()));
 		player2.setBehaviour(new PlayRandomBehaviour());
+		player2.getHand().add(new GurubashiBerserker());
 		GameContext newGame = new GameContext(player1, player2, new GameLogic());
 		ApplicationFacade.getInstance().sendNotification(GameNotification.START_GAME, newGame);
 		//ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_STATE_UPDATE, newGame);

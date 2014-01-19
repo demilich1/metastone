@@ -16,15 +16,15 @@ public class DrawCardSpell extends Spell {
 		this.numberOfCards = numberOfCards;
 	}
 
+	public int getNumberOfCards() {
+		return numberOfCards;
+	}
+
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
 		for (int i = 0; i < numberOfCards; i++) {
 			context.getLogic().drawCard(player.getId());
 		}
-	}
-
-	public int getNumberOfCards() {
-		return numberOfCards;
 	}
 
 	protected void setNumberOfCards(int numberOfCards) {

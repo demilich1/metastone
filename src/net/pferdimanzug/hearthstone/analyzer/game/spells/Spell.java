@@ -11,12 +11,12 @@ public abstract class Spell {
 	
 	private EntityReference target;
 
-	public Spell(EntityReference target) {
-		this.setTarget(target);
-	}
-	
 	public Spell() {
 		this(null);
+	}
+	
+	public Spell(EntityReference target) {
+		this.setTarget(target);
 	}
 
 	public void cast(GameContext context, Player player, List<Entity> targets) {
@@ -29,21 +29,21 @@ public abstract class Spell {
 		}
 	}
 
-	protected abstract void onCast(GameContext context, Player player, Entity target);
-
 	public EntityReference getTarget() {
 		return target;
 	}
 
-	public void setTarget(EntityReference target) {
-		this.target = target;
-	}
-	
 	public boolean hasPredefinedTarget() {
 		if (target != null) {
 			return target.isTargetGroup();
 		}
 		return false;
+	}
+
+	protected abstract void onCast(GameContext context, Player player, Entity target);
+	
+	public void setTarget(EntityReference target) {
+		this.target = target;
 	}
 
 }

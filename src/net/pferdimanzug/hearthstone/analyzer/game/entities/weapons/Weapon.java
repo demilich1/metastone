@@ -14,6 +14,11 @@ public class Weapon extends Entity {
 	}
 
 	@Override
+	public Weapon clone() {
+		return (Weapon) super.clone();
+	}
+	
+	@Override
 	public EntityType getEntityType() {
 		return EntityType.WEAPON;
 	}
@@ -24,11 +29,6 @@ public class Weapon extends Entity {
 	
 	public boolean isBroken() {
 		return !hasTag(GameTag.DURABILITY) || getTagValue(GameTag.DURABILITY) < 1;
-	}
-	
-	@Override
-	public Weapon clone() {
-		return (Weapon) super.clone();
 	}
 
 }

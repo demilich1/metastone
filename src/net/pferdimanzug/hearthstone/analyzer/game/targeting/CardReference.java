@@ -12,16 +12,16 @@ public class CardReference {
 		this.cardId = cardId;
 	}
 
-	public int getPlayerId() {
-		return playerId;
+	public int getCardId() {
+		return cardId;
 	}
 
 	public CardLocation getLocation() {
 		return location;
 	}
 
-	public int getCardId() {
-		return cardId;
+	public int getPlayerId() {
+		return playerId;
 	}
 	
 	@Override

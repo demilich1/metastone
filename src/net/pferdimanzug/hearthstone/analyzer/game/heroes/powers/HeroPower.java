@@ -18,10 +18,15 @@ public abstract class HeroPower extends SpellCard {
 		super(name, CardType.HERO_POWER, Rarity.FREE, HeroClass.ANY, 2);
 	}
 
+	@Override
+	public HeroPower clone() {
+		return (HeroPower) super.clone();
+	}
+
 	public boolean hasBeenUsed() {
 		return used;
 	}
-
+	
 	@Override
 	public PlayCardAction play() {
 		return new HeroPowerAction(this) {
@@ -42,11 +47,6 @@ public abstract class HeroPower extends SpellCard {
 	
 	public void setUsed(boolean used) {
 		this.used = used;
-	}
-	
-	@Override
-	public HeroPower clone() {
-		return (HeroPower) super.clone();
 	}
 	
 

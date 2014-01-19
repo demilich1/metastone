@@ -12,7 +12,7 @@ public abstract class GameAction {
 	private TargetSelection targetRequirement = TargetSelection.NONE;
 	private ActionType actionType = ActionType.UNDEFINED;
 	private List<Entity> validTargets;
-	private Entity source;
+	private EntityReference source;
 	private EntityReference targetKey;
 	
 	public boolean canBeExecutedOn(Entity entity) {
@@ -25,7 +25,7 @@ public abstract class GameAction {
 		return actionType;
 	}
 
-	public Entity getSource() {
+	public EntityReference getSource() {
 		return source;
 	}
 
@@ -45,16 +45,16 @@ public abstract class GameAction {
 		this.actionType = actionType;
 	}
 
-	public void setSource(Entity source) {
+	public void setSource(EntityReference source) {
 		this.source = source;
 	}
 
-	public void setTargetKey(EntityReference targetKey) {
-		this.targetKey = targetKey;
-	}
-	
 	public void setTarget(Entity target) {
 		this.targetKey = EntityReference.pointTo(target);
+	}
+	
+	public void setTargetKey(EntityReference targetKey) {
+		this.targetKey = targetKey;
 	}
 
 	protected void setTargetRequirement(TargetSelection targetRequirement) {

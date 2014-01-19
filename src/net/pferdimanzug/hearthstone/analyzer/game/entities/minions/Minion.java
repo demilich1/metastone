@@ -13,6 +13,11 @@ public class Minion extends Entity {
 		super(sourceCard);
 	}
 	
+	@Override
+	public Minion clone() {
+		return (Minion) super.clone();
+	}
+
 	public Aura getAura() {
 		return aura;
 	}
@@ -21,7 +26,7 @@ public class Minion extends Entity {
 	public EntityType getEntityType() {
 		return EntityType.MINION;
 	}
-
+	
 	public void setAura(Aura aura) {
 		this.aura = aura;
 	}
@@ -29,11 +34,6 @@ public class Minion extends Entity {
 	protected void setBaseStats(int baseAttack, int baseHp) {
 		setBaseAttack(baseAttack);
 		setBaseHp(baseHp);
-	}
-	
-	@Override
-	public Minion clone() {
-		return (Minion) super.clone();
 	}
 	
 }

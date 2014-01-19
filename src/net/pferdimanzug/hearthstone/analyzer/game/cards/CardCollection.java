@@ -18,15 +18,21 @@ public class CardCollection implements Iterable<Card>, Cloneable {
 		cards.add(card);
 	}
 
+	public void addAfter(Card card, Card after) {
+		int index = cards.indexOf(after);
+		cards.add(index + 1, card);
+	}
+
 	public void addAll(CardCollection cardCollection) {
 		for (Card card : cardCollection) {
 			cards.add(card.clone());
 		}
 	}
 
-	public void addAfter(Card card, Card after) {
-		int index = cards.indexOf(after);
-		cards.add(index + 1, card);
+	public CardCollection clone() {
+		CardCollection clone = new CardCollection();
+		clone.addAll(this);
+		return clone;
 	}
 
 	public boolean contains(Card card) {
@@ -53,6 +59,10 @@ public class CardCollection implements Iterable<Card>, Cloneable {
 		return cards.iterator();
 	}
 
+	public Card peekFirst() {
+		return cards.get(0);
+	}
+
 	public boolean remove(Card card) {
 		return cards.remove(card);
 	}
@@ -65,18 +75,8 @@ public class CardCollection implements Iterable<Card>, Cloneable {
 		return cards.remove(0);
 	}
 
-	public Card peekFirst() {
-		return cards.get(0);
-	}
-
 	public void shuffle() {
 		Collections.shuffle(cards);
-	}
-
-	public CardCollection clone() {
-		CardCollection clone = new CardCollection();
-		clone.addAll(this);
-		return clone;
 	}
 
 }

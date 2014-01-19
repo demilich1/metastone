@@ -65,13 +65,13 @@ public abstract class Card implements Cloneable {
 		this.collectible = collectible;
 	}
 	
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
 		return String.format("[%s '%s' Manacost:%d]", getCardType(), getName(), getManaCost());
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 }

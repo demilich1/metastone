@@ -25,15 +25,20 @@ public class CloningTest extends TestBase {
 		player2.setBehaviour(new PlayRandomBehaviour());
 		GameContext original = new GameContext(player1, player2, new GameLogic());
 		DevMonster minionCard = new DevMonster(3, 3);
-		player1.getHand().add(minionCard);
+		original.getLogic().receiveCard(player1.getId(), minionCard);
 		original.getLogic().performGameAction(player1.getId(), minionCard.play());
 		Entity testMinion = getSingleMinion(player1.getMinions());
 		
 		GameContext clone = original.clone();
 		
 		Assert.assertNotEquals(original, clone);
-		Assert.assertNotEquals(original.getPlayer1(), clone.getPlayer2());
+		Assert.assertNotEquals(original.getPlayer1(), clone.getPlayer1());
 		Assert.assertNotSame(original.getPlayer2().getMinions(), clone.getPlayer2().getMinions());
+		Entity originalMinion = getSingleMinion(original.getPlayer1().getMinions());
+		Entity cloneMinion = getSingleMinion(clone.getPlayer1().getMinions());
+		Assert.assertNotSame(originalMinion, cloneMinion);
+		System.out.println(originalMinion.toString());
+		System.out.println(cloneMinion.toString());
 		Assert.assertEquals(original.getPlayer2().getMinions().size(), clone.getPlayer2().getMinions().size());
 		Assert.assertEquals(original.getPlayer1().getMana(), clone.getPlayer1().getMana());
 		

@@ -12,13 +12,13 @@ public class DamageSpell extends Spell {
 		this.damage = damage;
 	}
 
+	public int getDamage() {
+		return damage;
+	}
+
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
 		context.getLogic().damage(target, getDamage());
-	}
-
-	public int getDamage() {
-		return damage;
 	}
 
 }

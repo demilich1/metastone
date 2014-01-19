@@ -17,8 +17,8 @@ public class AddSpellTriggerSpell extends Spell {
 	protected void onCast(GameContext context, Player player, Entity target) {
 		SpellTrigger instance = spellTrigger.clone();
 		instance.setOwner(player.getId());
-		target.addSpellTrigger(instance);
-		context.getEventManager().registerGameEventListener(instance);
+		instance.setHost(target);
+		context.getTriggerManager().addTrigger(instance);
 	}
 
 }

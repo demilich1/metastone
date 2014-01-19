@@ -19,10 +19,20 @@ public abstract class Hero extends Entity {
 		this.heroPower = heroPower;
 	}
 
+	@Override
+	public Hero clone() {
+		Hero clone = (Hero) super.clone();
+		if (weapon != null) {
+			clone.setWeapon(getWeapon().clone());
+		}
+		clone.heroPower = heroPower.clone();
+		return clone;
+	}
+
 	public int getArmor() {
 		return getTagValue(GameTag.ARMOR);
 	}
-
+	
 	@Override
 	public int getAttack() {
 		int attack = super.getAttack();
@@ -40,7 +50,7 @@ public abstract class Hero extends Entity {
 	public HeroClass getHeroClass() {
 		return heroClass;
 	}
-	
+
 	public HeroPower getHeroPower() {
 		return heroPower;
 	}
@@ -54,22 +64,12 @@ public abstract class Hero extends Entity {
 		int newArmor = Math.max(getArmor() + armor, 0);
 		setTag(GameTag.ARMOR, newArmor);
 	}
-
+	
 	public void setWeapon(Weapon weapon) {
 		this.weapon = weapon;
 		if (weapon != null) {
 			weapon.setOwner(getOwner());
 		}
-	}
-	
-	@Override
-	public Hero clone() {
-		Hero clone = (Hero) super.clone();
-		if (weapon != null) {
-			clone.setWeapon(getWeapon().clone());
-		}
-		clone.heroPower = heroPower.clone();
-		return clone;
 	}
 	
 }

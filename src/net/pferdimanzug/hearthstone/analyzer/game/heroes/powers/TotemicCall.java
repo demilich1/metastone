@@ -73,6 +73,15 @@ public class TotemicCall extends HeroPower {
 		}
 		
 
+		private List<Minion> getTotems() {
+			List<Minion> minions = new ArrayList<Minion>(4);
+			minions.add(new HealingTotem().summon());
+			minions.add(new StoneclawTotem().summon());
+			minions.add(new SearingTotem().summon());
+			minions.add(new WrathOfAirTotem().summon());
+			return minions;
+		}
+
 		@Override
 		protected void onCast(GameContext context, Player player, Entity target) {
 			List<Minion> availableTotems = new ArrayList<Minion>();
@@ -84,15 +93,6 @@ public class TotemicCall extends HeroPower {
 
 			Minion randomTotem = availableTotems.get(ThreadLocalRandom.current().nextInt(availableTotems.size()));
 			context.getLogic().summon(player.getId(), randomTotem, null);
-		}
-
-		private List<Minion> getTotems() {
-			List<Minion> minions = new ArrayList<Minion>(4);
-			minions.add(new HealingTotem().summon());
-			minions.add(new StoneclawTotem().summon());
-			minions.add(new SearingTotem().summon());
-			minions.add(new WrathOfAirTotem().summon());
-			return minions;
 		}
 		
 	}

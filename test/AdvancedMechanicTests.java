@@ -22,6 +22,39 @@ import org.testng.annotations.Test;
 public class AdvancedMechanicTests extends BasicTests {
 	
 	@Test
+	public void testDivineShield() {
+		GameContext context = createContext(new Jaina(), new Garrosh());
+		Player mage = context.getPlayer1();
+		mage.setMana(10);
+		Player warrior = context.getPlayer2();
+		warrior.setMana(10);
+
+		MinionCard minionCard1 = new DevMonster(2, 2, GameTag.DIVINE_SHIELD);
+		context.getLogic().receiveCard(mage.getId(), minionCard1);
+		context.getLogic().performGameAction(mage.getId(), minionCard1.play());
+		
+		MinionCard minionCard2 = new DevMonster(5, 5);
+		context.getLogic().receiveCard(warrior.getId(), minionCard2);
+		context.getLogic().performGameAction(warrior.getId(), minionCard2.play());
+		
+		Entity attacker = getSingleMinion(mage.getMinions());
+		Entity defender = getSingleMinion(warrior.getMinions());
+		
+		GameAction attackAction = new PhysicalAttackAction(attacker.getReference());
+		attackAction.setTarget(defender);
+		
+		context.getLogic().performGameAction(mage.getId(), attackAction);
+		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp());
+		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - attacker.getAttack());
+		Assert.assertEquals(attacker.isDead(), false);
+		
+		context.getLogic().performGameAction(mage.getId(), attackAction);
+		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp() - defender.getAttack());
+		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - attacker.getAttack() * 2);
+		Assert.assertEquals(attacker.isDead(), true);
+	}
+	
+	@Test
 	public void testEnrage() {
 		GameContext context = createContext(new Jaina(), new Anduin());
 		Player mage = context.getPlayer1();
@@ -30,12 +63,12 @@ public class AdvancedMechanicTests extends BasicTests {
 		priest.setMana(10);
 
 		MinionCard amaniBerserkerCard = new AmaniBerserker();
-		priest.getHand().add(amaniBerserkerCard);
+		context.getLogic().receiveCard(priest.getId(), amaniBerserkerCard);
 		context.getLogic().performGameAction(priest.getId(), amaniBerserkerCard.play());
 		
-		MinionCard stonetuskBoarCard = new StonetuskBoar();
-		mage.getHand().add(stonetuskBoarCard);
-		context.getLogic().performGameAction(mage.getId(), stonetuskBoarCard.play());
+		MinionCard monsterCard = new DevMonster(1, 10);
+		context.getLogic().receiveCard(mage.getId(), monsterCard);
+		context.getLogic().performGameAction(mage.getId(), monsterCard.play());
 		
 		Entity attacker = getSingleMinion(mage.getMinions());
 		Entity defender = getSingleMinion(priest.getMinions());
@@ -94,39 +127,6 @@ public class AdvancedMechanicTests extends BasicTests {
 		Assert.assertEquals(testSubject.getAttack(), baseAttack + AbusiveSergeant.ATTACK_BONUS);
 		context.getLogic().endTurn(mage.getId());
 		Assert.assertEquals(testSubject.getAttack(), baseAttack);
-	}
-	
-	@Test
-	public void testDivineShield() {
-		GameContext context = createContext(new Jaina(), new Garrosh());
-		Player mage = context.getPlayer1();
-		mage.setMana(10);
-		Player warrior = context.getPlayer2();
-		warrior.setMana(10);
-
-		MinionCard minionCard1 = new DevMonster(2, 2, GameTag.DIVINE_SHIELD);
-		mage.getHand().add(minionCard1);
-		context.getLogic().performGameAction(mage.getId(), minionCard1.play());
-		
-		MinionCard minionCard2 = new DevMonster(5, 5);
-		mage.getHand().add(minionCard2);
-		context.getLogic().performGameAction(warrior.getId(), minionCard2.play());
-		
-		Entity attacker = getSingleMinion(mage.getMinions());
-		Entity defender = getSingleMinion(warrior.getMinions());
-		
-		GameAction attackAction = new PhysicalAttackAction(attacker.getReference());
-		attackAction.setTarget(defender);
-		
-		context.getLogic().performGameAction(mage.getId(), attackAction);
-		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp());
-		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - attacker.getAttack());
-		Assert.assertEquals(attacker.isDead(), false);
-		
-		context.getLogic().performGameAction(mage.getId(), attackAction);
-		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp() - defender.getAttack());
-		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - attacker.getAttack() * 2);
-		Assert.assertEquals(attacker.isDead(), true);
 	}
 
 }

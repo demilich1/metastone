@@ -23,6 +23,15 @@ public class EntityReference {
 		this.key = key;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof EntityReference)) {
+			return false;
+		}
+		EntityReference entityReference = (EntityReference) obj;
+		return entityReference.getId() == getId();
+	}
+	
 	public int getId() {
 		return key;
 	}

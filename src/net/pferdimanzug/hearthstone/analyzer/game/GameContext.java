@@ -8,11 +8,10 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventManager;
-import net.pferdimanzug.hearthstone.analyzer.game.events.IGameEventManager;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameResult;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.IGameLogic;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.TargetLogic;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerManager;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
@@ -34,7 +33,7 @@ public class GameContext implements Cloneable {
 	private final Player[] players = new Player[2];
 	private final IGameLogic logic;
 	private final TargetLogic targetLogic = new TargetLogic();
-	private final IGameEventManager eventManager = new GameEventManager();
+	private TriggerManager triggerManager = new TriggerManager();
 	// this list is most of the time empty. Whenever a minion is summoned,
 	// it is placed in this list for brief amount of time
 	// reason is Battlecry effects may target not yet summoned
@@ -64,13 +63,41 @@ public class GameContext implements Cloneable {
 		this.logic.setContext(this);
 	}
 
+	@Override
+	public GameContext clone() {
+		long start = System.currentTimeMillis();
+		IGameLogic logicClone = getLogic().clone();
+		Player player1Clone = getPlayer1().clone();
+		Player player2Clone = getPlayer2().clone();
+		GameContext clone = new GameContext(player1Clone, player2Clone, logicClone);
+		clone.triggerManager = triggerManager.clone();
+		clone.activePlayer = activePlayer == getPlayer1() ? player1Clone : player2Clone;
+		clone.turn = turn;
+		clone.result = result;
+		CLONING_TIME += (int)(System.currentTimeMillis() - start);
+		return clone;
+	}
+
+	public GameContext cloneThirdParty() {
+		long start = System.currentTimeMillis();
+		GameContext clone = cloner.deepClone(this);
+		clone.getLogic().setContext(clone);
+		CLONING_TIME += (int)(System.currentTimeMillis() - start);
+		return clone;
+	}
+
+	private Card findCardinCollection(CardCollection cardCollection, int cardId) {
+		for (Card card : cardCollection) {
+			if (card.getId() == cardId) {
+				return card;
+			}
+		}
+		return null;
+	}
+
 	private boolean gameDecided() {
 		result = logic.getMatchResult(activePlayer, getOpponent(activePlayer));
 		return result != GameResult.RUNNING;
-	}
-
-	public IGameEventManager getEventManager() {
-		return eventManager;
 	}
 
 	public IGameLogic getLogic() {
@@ -81,6 +108,18 @@ public class GameContext implements Cloneable {
 		return player.getId() == PLAYER_1 ? getPlayer2() : getPlayer1();
 	}
 
+	public CardCollection getPendingCards() {
+		return pendingCards;
+	}
+
+	public List<Entity> getPendingEntities() {
+		return pendingEntities;
+	}
+
+	public Player getPlayer(int index) {
+		return players[index];
+	}
+
 	public Player getPlayer1() {
 		return getPlayers()[PLAYER_1];
 	}
@@ -89,14 +128,22 @@ public class GameContext implements Cloneable {
 		return getPlayers()[PLAYER_2];
 	}
 
-	public Player getPlayer(int index) {
-		return players[index];
+	public Player[] getPlayers() {
+		return players;
 	}
 
 	public GameResult getResult() {
 		return result;
 	}
 
+	public TriggerManager getTriggerManager() {
+		return triggerManager;
+	}
+	
+	public int getTurn() {
+		return turn;
+	}
+	
 	public Player getWinner() {
 		return winner;
 	}
@@ -137,19 +184,6 @@ public class GameContext implements Cloneable {
 		logic.endTurn(player.getId());
 		activePlayer = getOpponent(player);
 	}
-
-	public Player[] getPlayers() {
-		return players;
-	}
-
-	public List<Entity> resolveTarget(Player player, EntityReference targetKey) {
-		return targetLogic.resolveTargetKey(this, player, targetKey);
-	}
-
-	public Entity resolveSingleTarget(int playerId, EntityReference targetKey) {
-		Player player = getPlayer(playerId);
-		return targetLogic.resolveTargetKey(this, player, targetKey).get(0);
-	}
 	
 	public Card resolveCardReference(CardReference cardReference) {
 		Player player = getPlayer(cardReference.getPlayerId());
@@ -171,35 +205,14 @@ public class GameContext implements Cloneable {
 		logger.error("Could not resolve cardReference [}", cardReference);
 		return null;
 	}
-	
-	private Card findCardinCollection(CardCollection cardCollection, int cardId) {
-		for (Card card : cardCollection) {
-			if (card.getId() == cardId) {
-				return card;
-			}
-		}
-		return null;
+
+	public Entity resolveSingleTarget(int playerId, EntityReference targetKey) {
+		Player player = getPlayer(playerId);
+		return targetLogic.resolveTargetKey(this, player, targetKey).get(0);
 	}
 
-	public List<Entity> getPendingEntities() {
-		return pendingEntities;
-	}
-
-	@Override
-	public GameContext clone() {
-		//
-	}
-	
-	public GameContext cloneThirdParty() {
-		long start = System.currentTimeMillis();
-		GameContext clone = cloner.deepClone(this);
-		clone.getLogic().setContext(clone);
-		CLONING_TIME += (int)(System.currentTimeMillis() - start);
-		return clone;
-	}
-
-	public int getTurn() {
-		return turn;
+	public List<Entity> resolveTarget(Player player, EntityReference targetKey) {
+		return targetLogic.resolveTargetKey(this, player, targetKey);
 	}
 
 	@Override
@@ -230,9 +243,5 @@ public class GameContext implements Cloneable {
 		result.append("Turn: " + getTurn());
 
 		return result.toString();
-	}
-
-	public CardCollection getPendingCards() {
-		return pendingCards;
 	}
 }

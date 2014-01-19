@@ -90,11 +90,11 @@ public class BasicTests extends TestBase {
 		warrior.setMana(10);
 
 		MinionCard minionCard1 = new DevMonster(5, 5);
-		mage.getHand().add(minionCard1);
+		context.getLogic().receiveCard(mage.getId(), minionCard1);
 		context.getLogic().performGameAction(mage.getId(), minionCard1.play());
 		
 		MinionCard minionCard2 = new DevMonster(1, 1);
-		mage.getHand().add(minionCard2);
+		context.getLogic().receiveCard(warrior.getId(), minionCard2);
 		context.getLogic().performGameAction(warrior.getId(), minionCard2.play());
 		
 		Assert.assertEquals(mage.getMinions().size(), 1);

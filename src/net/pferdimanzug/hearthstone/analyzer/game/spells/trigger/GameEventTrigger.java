@@ -10,11 +10,11 @@ public abstract class GameEventTrigger {
 
 	public abstract boolean fire(IGameEvent event, Entity host);
 
-	public abstract GameEventType interestedIn();
-
 	public int getOwner() {
 		return owner;
 	}
+
+	public abstract GameEventType interestedIn();
 
 	public void setOwner(int playerIndex) {
 		this.owner = playerIndex;

@@ -39,6 +39,33 @@ public class TargetLogic {
 		return validTargets;
 	}
 
+	private Entity findEntity(GameContext context, EntityReference targetKey) {
+		int targetId = targetKey.getId();
+		for (Entity entity : context.getPendingEntities()) {
+			if (entity.getId() == targetId) {
+				return entity;
+			}
+		}
+		for (Player player : context.getPlayers()) {
+
+			if (player.getHero().getId() == targetId) {
+				return player.getHero();
+			} else if (player.getHero().getWeapon() != null && player.getHero().getWeapon().getId() == targetId) {
+				return player.getHero().getWeapon();
+			}
+
+			for (Entity minion : player.getMinions()) {
+				if (minion.getId() == targetId) {
+					return minion;
+				}
+			}
+		}
+
+		logger.error("Id " + targetId + " not found!");
+		throw new RuntimeException("Target not found exception");
+		//return null;
+	}
+
 	private List<Entity> getEntities(GameContext context, Player player, TargetSelection targetRequirement) {
 		Player opponent = context.getOpponent(player);
 		List<Entity> entities = new ArrayList<>();
@@ -122,33 +149,6 @@ public class TargetLogic {
 		target.add(findEntity(context, targetKey));
 		return target;
 
-	}
-
-	private Entity findEntity(GameContext context, EntityReference targetKey) {
-		int targetId = targetKey.getId();
-		for (Entity entity : context.getPendingEntities()) {
-			if (entity.getId() == targetId) {
-				return entity;
-			}
-		}
-		for (Player player : context.getPlayers()) {
-
-			if (player.getHero().getId() == targetId) {
-				return player.getHero();
-			} else if (player.getHero().getWeapon() != null && player.getHero().getWeapon().getId() == targetId) {
-				return player.getHero().getWeapon();
-			}
-
-			for (Entity minion : player.getMinions()) {
-				if (minion.getId() == targetId) {
-					return minion;
-				}
-			}
-		}
-
-		logger.error("Id " + targetId + " not found!");
-		throw new RuntimeException("Target not found exception");
-		//return null;
 	}
 
 }

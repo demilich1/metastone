@@ -20,6 +20,14 @@ public class BuffSpell extends Spell {
 		this.hpBonus = hpBonus;
 	}
 	
+	public int getAttackBonus() {
+		return attackBonus;
+	}
+
+	public int getHpBonus() {
+		return hpBonus;
+	}
+
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
 		logger.debug("{} gains ({})", target, attackBonus + "/" + hpBonus);
@@ -29,14 +37,6 @@ public class BuffSpell extends Spell {
 		if (hpBonus != 0) {
 			target.modifyHpBonus(+hpBonus);
 		}
-	}
-
-	public int getAttackBonus() {
-		return attackBonus;
-	}
-
-	public int getHpBonus() {
-		return hpBonus;
 	}
 
 	public void setAttackBonus(int attackBonus) {
