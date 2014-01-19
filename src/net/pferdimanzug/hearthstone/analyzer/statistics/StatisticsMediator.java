@@ -5,7 +5,6 @@ import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.playmode.PlayModeWindow;
 import de.pferdimanzug.nittygrittymvc.Mediator;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
@@ -28,6 +27,7 @@ public class StatisticsMediator extends Mediator<GameNotification> {
 			break;
 		case BATCH_START:
 			view.onBatchStart();
+			GameContext.CLONING_TIME = 0;
 			break;
 		case BATCH_STOP:
 			view.onBatchStop();

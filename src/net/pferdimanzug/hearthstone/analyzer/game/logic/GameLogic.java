@@ -214,6 +214,11 @@ public class GameLogic implements IGameLogic {
 	public void equipWeapon(int playerId, Weapon weapon) {
 		Player player = context.getPlayer(playerId);
 		weapon.setId(idFactory.generateId());
+		Weapon currentWeapon = player.getHero().getWeapon();
+		if (currentWeapon != null) {
+			logger.debug("{} discards currently equipped weapon {}", player.getHero(), currentWeapon);
+			destroy(currentWeapon);
+		}
 		logger.debug("{} equips weapon {}", player.getHero(), weapon);
 		player.getHero().setWeapon(weapon);
 		if (weapon.hasSpellTrigger()) {

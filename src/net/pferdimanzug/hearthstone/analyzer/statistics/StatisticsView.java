@@ -32,6 +32,7 @@ public class StatisticsView {
 			logger.info("Player " + name + " won " + gamesWon.get(name) + " games");
 		}
 		logger.info("Time used for deep cloning: {}ms", cloningTime);
+		logger.info("====================================================================");
 	}
 	
 	public void onGameOver(GameContext context) {

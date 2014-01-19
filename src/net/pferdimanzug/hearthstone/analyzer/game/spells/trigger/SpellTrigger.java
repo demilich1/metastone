@@ -44,9 +44,13 @@ public class SpellTrigger implements Cloneable {
 
 	public void onGameEvent(IGameEvent event) {
 		int ownerId = trigger.getOwner();
-		Entity host = event.getGameContext().resolveSingleTarget(ownerId, hostReference);
-		if (host == null) {
+		//Entity host = event.getGameContext().resolveSingleTarget(ownerId, hostReference);
+		Entity host = null;
+		try {
+			host = event.getGameContext().resolveSingleTarget(ownerId, hostReference);
+		} catch (Exception e) {
 			logger.error("Target not found for GameEventTrigger: {} Spell: {}", trigger, spell);
+			throw e;
 		}
 
 		if (trigger.fire(event, host)) {

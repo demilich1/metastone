@@ -12,6 +12,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.Gurubas
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Guldan;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Thrall;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Valeera;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
@@ -22,35 +24,48 @@ public class HearthstoneAnalyzer {
 		ApplicationFacade facade = (ApplicationFacade) ApplicationFacade.getInstance();
 		HearthstoneAnalyzer instance = new HearthstoneAnalyzer();
 		facade.startUp(instance);
-		facade.sendNotification(GameNotification.BATCH_START);
-		for (int i = 0; i < 1000; i++) {
-			instance.launchDebugGame();	
-		}
-		facade.sendNotification(GameNotification.BATCH_STOP);
-		
+		instance.launchDebugGame();
+
 		/*
-		 try {
-			DevCheckCardCompleteness.cardListFromImages("D:\\projects\\images\\hearthstone\\cards\\");
-			 //DevCheckCardCompleteness.compareClassesWithCardList("D:\\projects\\java\\HearthstoneAnalyzer\\src\\net\\pferdimanzug\\hearthstone\\analyzer\\game\\cards\\concrete");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		*/
-		
+		 * try { DevCheckCardCompleteness.cardListFromImages(
+		 * "D:\\projects\\images\\hearthstone\\cards\\");
+		 * //DevCheckCardCompleteness.compareClassesWithCardList(
+		 * "D:\\projects\\java\\HearthstoneAnalyzer\\src\\net\\pferdimanzug\\hearthstone\\analyzer\\game\\cards\\concrete"
+		 * ); } catch (IOException e) { e.printStackTrace(); }
+		 */
+
 	}
-	
+
 	private void launchDebugGame() {
-		Hero hero1 = new Guldan();
-		Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
-		player1.setBehaviour(new MinMaxBehaviour());
-		player1.getHand().add(new GurubashiBerserker());
-		Hero hero2 = new Garrosh();
-		Player player2 = new Player("Bot", hero2, DebugDecks.getRandomDeck(hero2.getHeroClass()));
-		player2.setBehaviour(new PlayRandomBehaviour());
-		player2.getHand().add(new GurubashiBerserker());
-		GameContext newGame = new GameContext(player1, player2, new GameLogic());
-		ApplicationFacade.getInstance().sendNotification(GameNotification.START_GAME, newGame);
-		//ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_STATE_UPDATE, newGame);
+		for (HeroClass heroClass1 : HeroClass.values()) {
+			ApplicationFacade.getInstance().sendNotification(GameNotification.BATCH_START);
+			for (HeroClass heroClass2 : HeroClass.values()) {
+				if (heroClass1 == HeroClass.ANY || heroClass2 == HeroClass.ANY) {
+					continue;
+				}
+				
+				for (int i = 0; i < 100; i++) {
+					
+					Hero hero1 = HeroFactory.createHero(heroClass1);
+					Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
+					player1.setBehaviour(new MinMaxBehaviour());
+					player1.getHand().add(new GurubashiBerserker());
+					Hero hero2 = HeroFactory.createHero(heroClass2);
+					Player player2 = new Player("Bot", hero2, DebugDecks.getRandomDeck(hero2.getHeroClass()));
+					player2.setBehaviour(new PlayRandomBehaviour());
+					player2.getHand().add(new GurubashiBerserker());
+					GameContext newGame = new GameContext(player1, player2, new GameLogic());
+					ApplicationFacade.getInstance().sendNotification(GameNotification.START_GAME, newGame);
+				}
+				
+			}
+
+			ApplicationFacade.getInstance().sendNotification(GameNotification.BATCH_STOP);
+		}
+
+
+		// ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_STATE_UPDATE,
+		// newGame);
 	}
 
 	private void printCardsForDatabase() {
@@ -63,5 +78,5 @@ public class HearthstoneAnalyzer {
 			e.printStackTrace();
 		}
 	}
-	
+
 }

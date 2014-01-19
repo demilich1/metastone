@@ -40,7 +40,11 @@ public class TriggerManager implements Cloneable {
 			return;
 		}
 		for (SpellTrigger trigger : getListSnapshot(event.getEventType())) {
-			trigger.onGameEvent(event);
+			// we need to double check here if the trigger still exists;
+			// after all, a previous trigger may have removed it (i.e. double corruption)
+			if (triggers.get(event.getEventType()).contains(trigger)) {
+				trigger.onGameEvent(event);
+			}
 		}
 	}
 

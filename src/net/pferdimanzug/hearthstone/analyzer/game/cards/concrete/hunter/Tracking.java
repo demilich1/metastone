@@ -27,13 +27,18 @@ public class Tracking extends SpellCard {
 
 		@Override
 		protected void onCast(GameContext context, Player player, Entity target) {
+			if (player.getDeck().isEmpty()) {
+				//TODO: assuming tracking does nothing at all when deck is empty
+				// need to check with real game though
+				return;
+			}
 			List<Card> drawnCards = new ArrayList<>();
-			for (int i = 0; i < 3; i++) {
+			for (int i = 0; i < Math.min(3, player.getDeck().getCount()); i++) {
 				drawnCards.add(player.getDeck().removeFirst());
 			}
-			player.getHand().add(drawnCards.remove(0));
+			context.getLogic().receiveCard(player.getId(), drawnCards.remove(0));
 			while (!drawnCards.isEmpty()) {
-				player.getGraveyard().add(drawnCards.get(0));
+				player.getGraveyard().add(drawnCards.remove(0));
 			}
 		}
 		
