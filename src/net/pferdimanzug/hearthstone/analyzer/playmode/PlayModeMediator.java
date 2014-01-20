@@ -25,6 +25,8 @@ public class PlayModeMediator extends Mediator<GameNotification> {
 		case GAME_STATE_UPDATE:
 			view.update((GameContext) notification.getBody());
 			break;
+		case HUMAN_PROMPT_FOR_ACTION:
+			break;
 		default:
 			break;
 		}
@@ -34,6 +36,7 @@ public class PlayModeMediator extends Mediator<GameNotification> {
 	public List<GameNotification> listNotificationInterests() {
 		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
 		notificationInterests.add(GameNotification.GAME_STATE_UPDATE);
+		notificationInterests.add(GameNotification.HUMAN_PROMPT_FOR_ACTION);
 		return notificationInterests;
 	}
 
