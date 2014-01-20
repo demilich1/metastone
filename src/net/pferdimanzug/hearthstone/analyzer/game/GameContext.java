@@ -147,6 +147,9 @@ public class GameContext implements Cloneable {
 	public Player getWinner() {
 		return winner;
 	}
+	
+	protected void onGameStateChanged() {	
+	}
 
 	public void play() {
 		logger.debug("Game starts: " + getPlayer1().getName() + " VS. " + getPlayer2().getName());
@@ -165,17 +168,11 @@ public class GameContext implements Cloneable {
 	private void playTurn(Player player) {
 		turn++;
 		logic.startTurn(player.getId());
+		onGameStateChanged();
 		GameAction nextAction = player.getBehaviour().requestAction(this, player, logic.getValidActions(player.getId()));
 		while (nextAction != null) {
 			logic.performGameAction(player.getId(), nextAction);
-
-			// ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_STATE_UPDATE,
-			// this);
-			// try {
-			// Thread.sleep(1000);
-			// } catch (InterruptedException e) {
-			// e.printStackTrace();
-			// }
+			onGameStateChanged();
 			if (gameDecided()) {
 				return;
 			}

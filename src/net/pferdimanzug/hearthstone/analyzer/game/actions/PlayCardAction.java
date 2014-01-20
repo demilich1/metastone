@@ -38,6 +38,9 @@ public abstract class PlayCardAction extends GameAction {
 
 	protected abstract void play(GameContext context, int playerId);
 	
-	
+	@Override
+	public String toString() {
+		return String.format("%s Card: %s Target: %s", getActionType(), card, getTargetKey());
+	}
 
 }

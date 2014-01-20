@@ -25,5 +25,5 @@ public abstract class HeroPowerAction extends PlayCardAction {
 	public TargetSelection getTargetRequirement() {
 		return getHeroPower().getTargetRequirement();
 	}
-
+	
 }

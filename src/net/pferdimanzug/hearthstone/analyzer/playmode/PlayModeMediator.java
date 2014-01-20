@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanActionOptions;
 import de.pferdimanzug.nittygrittymvc.Mediator;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
@@ -26,6 +27,7 @@ public class PlayModeMediator extends Mediator<GameNotification> {
 			view.update((GameContext) notification.getBody());
 			break;
 		case HUMAN_PROMPT_FOR_ACTION:
+			new HumanActionPromptDialog(view, (HumanActionOptions) notification.getBody());
 			break;
 		default:
 			break;

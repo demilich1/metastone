@@ -7,6 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.DebugDecks;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.MinMaxBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.PlayRandomBehaviour;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.GurubashiBerserker;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
@@ -17,6 +18,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Thrall;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Valeera;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
+import net.pferdimanzug.hearthstone.analyzer.playmode.GameContextVisualizable;
 
 public class HearthstoneAnalyzer {
 
@@ -24,7 +26,7 @@ public class HearthstoneAnalyzer {
 		ApplicationFacade facade = (ApplicationFacade) ApplicationFacade.getInstance();
 		HearthstoneAnalyzer instance = new HearthstoneAnalyzer();
 		facade.startUp(instance);
-		instance.launchDebugGame();
+		instance.launchHumanDebugGame();
 
 		/*
 		 * try { DevCheckCardCompleteness.cardListFromImages(
@@ -34,6 +36,19 @@ public class HearthstoneAnalyzer {
 		 * ); } catch (IOException e) { e.printStackTrace(); }
 		 */
 
+	}
+	
+	private void launchHumanDebugGame() {
+		HeroClass humanHeroClass = HeroClass.WARLOCK;
+		HeroClass aiHeroClass = HeroClass.WARRIOR;
+		Hero hero1 = HeroFactory.createHero(humanHeroClass);
+		Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
+		player1.setBehaviour(new HumanBehaviour());
+		Hero hero2 = HeroFactory.createHero(aiHeroClass);
+		Player player2 = new Player("Bot", hero2, DebugDecks.getRandomDeck(hero2.getHeroClass()));
+		player2.setBehaviour(new MinMaxBehaviour());
+		GameContext newGame = new GameContextVisualizable(player1, player2, new GameLogic());
+		ApplicationFacade.getInstance().sendNotification(GameNotification.START_GAME, newGame);		
 	}
 
 	private void launchDebugGame() {
