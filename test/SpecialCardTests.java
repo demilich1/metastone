@@ -1,8 +1,13 @@
+import java.util.List;
+
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PhysicalAttackAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Fireball;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.FaerieDragon;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.GurubashiBerserker;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.OasisSnapjaw;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
@@ -51,6 +56,40 @@ public class SpecialCardTests extends TestBase {
 		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp() - 2 * GurubashiBerserker.BASE_ATTACK - GurubashiBerserker.ATTACK_BONUS);
 		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - 2 * attacker.getAttack());
 		Assert.assertEquals(defender.getAttack(), GurubashiBerserker.BASE_ATTACK + 2 * GurubashiBerserker.ATTACK_BONUS);
+	}
+	
+	@Test
+	public void testFaerieDragon() {
+		GameContext context = createContext(new Jaina(), new Garrosh());
+		Player mage = context.getPlayer1();
+		mage.setMana(10);
+		Player warrior = context.getPlayer2();
+		warrior.setMana(10);
+
+		MinionCard faerieDragonCard = new FaerieDragon();
+		context.getLogic().receiveCard(warrior.getId(), faerieDragonCard);
+		context.getLogic().performGameAction(warrior.getId(), faerieDragonCard.play());
+		
+		MinionCard devMonsterCard = new DevMonster(1, 1);
+		context.getLogic().receiveCard(mage.getId(), devMonsterCard);
+		context.getLogic().performGameAction(mage.getId(), devMonsterCard.play());
+		
+		Entity attacker = getSingleMinion(mage.getMinions());
+		Entity elusiveOne = getSingleMinion(warrior.getMinions());
+		
+		GameAction attackAction = new PhysicalAttackAction(attacker.getReference());
+		List<Entity> validTargets = context.getLogic().getValidTargets(warrior.getId(), attackAction);
+		// should be two valid targets: enemy hero and faerie dragon
+		Assert.assertEquals(validTargets.size(), 2);
+		
+		SpellCard fireballCard = new Fireball();
+		context.getLogic().receiveCard(mage.getId(), fireballCard);
+		GameAction playFireballAction = fireballCard.play();
+		validTargets = context.getLogic().getValidTargets(warrior.getId(), playFireballAction);
+		Assert.assertEquals(validTargets.size(), 2);
+		Assert.assertFalse(validTargets.contains(elusiveOne));
+		
+		//TODO: add area spell
 	}
 	
 }

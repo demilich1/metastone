@@ -17,7 +17,7 @@ public class AcolyteOfPain extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion acolyteOfPain = createMinion(1, 3);
-		SpellTrigger trigger = new SpellTrigger(new DamageReceivedTrigger(), new DrawCardSpell(1));
+		SpellTrigger trigger = new SpellTrigger(new DamageReceivedTrigger(), new DrawCardSpell());
 		acolyteOfPain.addSpellTrigger(trigger);
 		return acolyteOfPain;
 	}

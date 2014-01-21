@@ -32,6 +32,10 @@ public class TargetLogic {
 	private List<Entity> filterTargets(GameAction action, List<Entity> potentialTargets) {
 		List<Entity> validTargets = new ArrayList<>();
 		for (Entity entity : potentialTargets) {
+			if ((action.getActionType() == ActionType.SPELL || action.getActionType() == ActionType.HERO_POWER) && entity.hasTag(GameTag.UNTARGETABLE_BY_SPELLS)) {
+				continue;
+			}
+			
 			if (action.canBeExecutedOn(entity)) {
 				validTargets.add(entity);
 			}
