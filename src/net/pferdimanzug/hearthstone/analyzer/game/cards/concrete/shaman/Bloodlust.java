@@ -20,8 +20,8 @@ public class Bloodlust extends SpellCard {
 	
 	public Bloodlust() {
 		super("Bloodlust", Rarity.FREE, HeroClass.SHAMAN, 5);
-		SpellTrigger endBuffTrigger = new SpellTrigger(new TurnEndTrigger(), new BuffSpell(-ATTACK_BONUS, 0));
-		Spell buff = new BuffSpell(+ATTACK_BONUS, 0);
+		SpellTrigger endBuffTrigger = new SpellTrigger(new TurnEndTrigger(), new BuffSpell(-ATTACK_BONUS));
+		Spell buff = new BuffSpell(+ATTACK_BONUS);
 		buff.setTarget(EntityReference.FRIENDLY_MINIONS);
 		Spell endBuff = new AddSpellTriggerSpell(endBuffTrigger);
 		endBuff.setTarget(EntityReference.FRIENDLY_MINIONS);

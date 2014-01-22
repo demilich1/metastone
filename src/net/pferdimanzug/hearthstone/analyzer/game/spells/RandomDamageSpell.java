@@ -16,19 +16,23 @@ public class RandomDamageSpell extends Spell {
 		this.damage = damage;
 		this.iterations = iterations;
 	}
-
-	private void doDamage(GameContext context, Player opponent, int damage) {
-		List<Entity> enemyCharacters = opponent.getCharacters();
-		Entity randomTarget = enemyCharacters.get(ThreadLocalRandom.current().nextInt(enemyCharacters.size()));
-		context.getLogic().damage(randomTarget, damage);
-	}
 	
 	@Override
-	protected void onCast(GameContext context, Player player, Entity target) {
-		Player opponent = context.getOpponent(player);
+	public void cast(GameContext context, Player player, List<Entity> targets) {
 		for (int i = 0; i < iterations; i++) {
-			doDamage(context, opponent, damage);
+			Entity randomTarget = null;
+			while (randomTarget == null || randomTarget.isDead()) {
+				randomTarget = targets.get(ThreadLocalRandom.current().nextInt(targets.size()));
+			}
+			
+			context.getLogic().damage(randomTarget, damage);
 		}
+	}
+
+	@Override
+	protected void onCast(GameContext context, Player player, Entity target) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

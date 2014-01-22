@@ -160,6 +160,7 @@ public class GameLogic implements IGameLogic {
 			break;
 		case ANY:
 		default:
+			logger.error("Trying to destroy unknown entity type {}", target.getEntityType());
 			break;
 		
 		}
@@ -169,6 +170,11 @@ public class GameLogic implements IGameLogic {
 		logger.debug("{} is destroyed", minion);
 		Player owner = context.getPlayer(minion.getOwner());
 		owner.getMinions().remove(minion);
+		//TODO: add unit test for deathrattle; also check when exactly it should be fire
+		if (minion.hasTag(GameTag.DEATHRATTLE)) {
+			Spell deathrattleSpell = minion.getDeathrattle();
+			castSpell(owner.getId(), deathrattleSpell);
+		}
 		context.getTriggerManager().fireGameEvent(new KillEvent(context, minion));
 		context.getTriggerManager().removeTriggersAssociatedWith(minion.getReference());
 	}

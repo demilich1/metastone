@@ -20,6 +20,10 @@ public class BuffSpell extends Spell {
 		this.hpBonus = hpBonus;
 	}
 	
+	public BuffSpell(int attackBonus) {
+		this(attackBonus, 0);
+	}
+	
 	public int getAttackBonus() {
 		return attackBonus;
 	}

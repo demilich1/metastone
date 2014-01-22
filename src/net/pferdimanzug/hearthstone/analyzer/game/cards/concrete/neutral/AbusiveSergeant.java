@@ -25,9 +25,9 @@ public class AbusiveSergeant extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion abusiveSergeant = createMinion(2, 1);
-		SpellTrigger endBuffTrigger = new SpellTrigger(new TurnEndTrigger(), new BuffSpell(-ATTACK_BONUS, 0));
-		Spell battlecrySpell = new MetaSpell(new BuffSpell(+ATTACK_BONUS, 0), new AddSpellTriggerSpell(endBuffTrigger));
-		Battlecry battlecryAbusive = Battlecry.createBattlecry(battlecrySpell, TargetSelection.FRIENDLY_MINIONS);
+		SpellTrigger endBuffTrigger = new SpellTrigger(new TurnEndTrigger(), new BuffSpell(-ATTACK_BONUS));
+		Spell battlecrySpell = new MetaSpell(new BuffSpell(+ATTACK_BONUS), new AddSpellTriggerSpell(endBuffTrigger));
+		Battlecry battlecryAbusive = Battlecry.createBattlecry(battlecrySpell, TargetSelection.MINIONS);
 		abusiveSergeant.setTag(GameTag.BATTLECRY, battlecryAbusive);
 		return abusiveSergeant;
 	}

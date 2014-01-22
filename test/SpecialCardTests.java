@@ -4,9 +4,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PhysicalAttackAction;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Fireball;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.ArcaneExplosion;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.FaerieDragon;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.GurubashiBerserker;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.OasisSnapjaw;
@@ -82,14 +82,19 @@ public class SpecialCardTests extends TestBase {
 		// should be two valid targets: enemy hero and faerie dragon
 		Assert.assertEquals(validTargets.size(), 2);
 		
-		SpellCard fireballCard = new Fireball();
-		context.getLogic().receiveCard(mage.getId(), fireballCard);
-		GameAction playFireballAction = fireballCard.play();
-		validTargets = context.getLogic().getValidTargets(warrior.getId(), playFireballAction);
-		Assert.assertEquals(validTargets.size(), 2);
+		
+		GameAction useFireblast = mage.getHero().getHeroPower().play();
+		validTargets = context.getLogic().getValidTargets(warrior.getId(), useFireblast);
+		// should be three valid targets, both heroes + minion which is not the faerie dragon
+		Assert.assertEquals(validTargets.size(), 3);
 		Assert.assertFalse(validTargets.contains(elusiveOne));
 		
-		//TODO: add area spell
+		Card arcaneExplosionCard = new ArcaneExplosion();
+		context.getLogic().receiveCard(mage.getId(), arcaneExplosionCard);
+		int faerieDragonHp = elusiveOne.getHp();
+		context.getLogic().performGameAction(mage.getId(), arcaneExplosionCard.play());
+		// hp should been affected after playing area of effect spell
+		Assert.assertNotEquals(faerieDragonHp, elusiveOne.getHp());
 	}
 	
 }

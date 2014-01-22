@@ -68,8 +68,8 @@ public abstract class Entity implements Cloneable {
 		return (GameAction) getTag(GameTag.BATTLECRY);
 	}
 
-	public GameAction getDeathrattle() {
-		return (GameAction) getTag(GameTag.DEATHRATTLE);
+	public Spell getDeathrattle() {
+		return (Spell) getTag(GameTag.DEATHRATTLE);
 	}
 
 	public Spell getEnrageSpell() {

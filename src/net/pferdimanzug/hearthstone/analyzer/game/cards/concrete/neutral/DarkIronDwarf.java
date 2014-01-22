@@ -6,10 +6,17 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.AddSpellTriggerSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnEndTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class DarkIronDwarf extends MinionCard {
+
+	private static final int ATTACK_BONUS = 2;
 
 	public DarkIronDwarf() {
 		super("Dark Iron Dwarf", Rarity.COMMON, HeroClass.ANY, 4);
@@ -18,7 +25,10 @@ public class DarkIronDwarf extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion darkIronDwarf = createMinion(4, 4);
-		Battlecry battlecry = Battlecry.createBattlecry(new BuffSpell(2, 0), TargetSelection.MINIONS);
+		SpellTrigger endBuffTrigger = new SpellTrigger(new TurnEndTrigger(), new BuffSpell(-ATTACK_BONUS));
+		Spell buff = new BuffSpell(+ATTACK_BONUS);
+		Spell endBuff = new AddSpellTriggerSpell(endBuffTrigger);
+		Battlecry battlecry = Battlecry.createBattlecry(new MetaSpell(buff, endBuff), TargetSelection.MINIONS);
 		darkIronDwarf.setTag(GameTag.BATTLECRY, battlecry);
 		return darkIronDwarf;
 	}
