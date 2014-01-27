@@ -69,7 +69,8 @@ public class GameLogic implements IGameLogic {
 	public boolean canPlayCard(int playerId, CardReference cardReference) {
 		Player player = context.getPlayer(playerId);
 		Card card = context.resolveCardReference(cardReference);
-		if (player.getMana() < card.getManaCost()) {
+		int manaCost = getModifiedManaCost(player, card);
+		if (player.getMana() < manaCost) {
 			return false;
 		}
 		if (card.getCardType() == CardType.HERO_POWER) {
@@ -393,12 +394,20 @@ public class GameLogic implements IGameLogic {
 	public void playCard(int playerId, CardReference cardReference) {
 		Player player = context.getPlayer(playerId);
 		Card card = context.resolveCardReference(cardReference);
-		modifyCurrentMana(playerId, -card.getManaCost());
+		modifyCurrentMana(playerId, -getModifiedManaCost(player, card));
 		logger.debug("{} plays {}", player.getName(), card);
 		//logger.debug("{} is now at {} mana", player.getName(), player.getMana() + "/" + player.getMaxMana());
 		player.getHand().remove(card);
 		player.getGraveyard().add(card);
 		player.getHero().modifyTag(GameTag.COMBO, +1);
+	}
+	
+	private int getModifiedManaCost(Player player, Card card) {
+		int manaCost = card.getManaCost();
+		if (card.getCardType() == CardType.MINION) {
+			manaCost += getTotalTagValue(player, GameTag.MINION_MANA_COST);
+		}
+		return manaCost;
 	}
 
 	@Override
@@ -456,8 +465,6 @@ public class GameLogic implements IGameLogic {
 		Player player = context.getPlayer(playerId);
 		minion.setId(idFactory.generateId());
 		logger.debug("{} summons {}", player.getName(), minion);
-		refreshAttacksPerRound(minion);
-		minion.setTag(GameTag.SUMMONING_SICKNESS);
 		
 		context.getPendingEntities().add(minion);
 		if (minion.getBattlecry() != null) {
@@ -466,6 +473,9 @@ public class GameLogic implements IGameLogic {
 			performGameAction(player.getId(), battlecry);
 		}
 		context.getPendingEntities().remove(minion);
+		
+		refreshAttacksPerRound(minion);
+		minion.setTag(GameTag.SUMMONING_SICKNESS);
 
 		if (nextTo == null) {
 			player.getMinions().add(minion);
@@ -500,6 +510,18 @@ public class GameLogic implements IGameLogic {
 		modifyCurrentMana(playerId, -power.getManaCost());
 		logger.debug("{} uses {}", player.getName(), power);
 		power.setUsed(true);
+	}
+	
+	private int getTotalTagValue(Player player, GameTag tag) {
+		int total = 0;
+		for (Entity minion : player.getMinions()) {
+			if (!minion.hasTag(tag)) {
+				continue;
+			}
+			
+			total += minion.getTagValue(tag);
+		}
+		return total;
 	}
 
 }
