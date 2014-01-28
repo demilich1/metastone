@@ -32,4 +32,13 @@ public class MetaSpell extends Spell {
 	protected void onCast(GameContext context, Player player, Entity target) {
 	}
 
+	@Override
+	public void setApplySpellpower(boolean applySpellpower) {
+		super.setApplySpellpower(applySpellpower);
+		spell1.setApplySpellpower(applySpellpower);
+		spell2.setApplySpellpower(applySpellpower);
+	}
+	
+	
+
 }

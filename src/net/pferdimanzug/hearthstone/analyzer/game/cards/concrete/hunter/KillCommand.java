@@ -33,7 +33,7 @@ public class KillCommand extends SpellCard {
 		@Override
 		protected void onCast(GameContext context, Player player, Entity target) {
 			int damage = hasBeast(player) ? beastDamage : getDamage();
-			context.getLogic().damage(target, damage);
+			context.getLogic().damage(target, damage, true);
 		}
 		
 	}

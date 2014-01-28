@@ -4,28 +4,30 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
-public class RandomDamageSpell extends Spell {
+public class RandomDamageSpell extends DamageSpell {
 
 	private final int iterations;
 	private int damage;
 
 	public RandomDamageSpell(int damage, int iterations) {
-		this.damage = damage;
+		super(damage);
 		this.iterations = iterations;
 	}
 	
 	@Override
 	public void cast(GameContext context, Player player, List<Entity> targets) {
-		for (int i = 0; i < iterations; i++) {
+		int missiles = iterations + context.getLogic().getTotalTagValue(player, GameTag.SPELL_POWER);
+		for (int i = 0; i < missiles; i++) {
 			Entity randomTarget = null;
 			while (randomTarget == null || randomTarget.isDead()) {
 				randomTarget = targets.get(ThreadLocalRandom.current().nextInt(targets.size()));
 			}
 			
-			context.getLogic().damage(randomTarget, damage);
+			context.getLogic().damage(randomTarget, damage, false);
 		}
 	}
 

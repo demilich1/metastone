@@ -64,6 +64,7 @@ public abstract class SpellCard extends Card {
 	
 	public void setSpell(Spell spell) {
 		this.spell = spell;
+		spell.setApplySpellpower(true);
 	}
 	
 	public void setTargetRequirement(TargetSelection targetRequirement) {

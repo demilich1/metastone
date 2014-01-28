@@ -3,6 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.logic;
 import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
@@ -18,7 +19,7 @@ public interface IGameLogic extends Cloneable {
 	public boolean canPlayCard(int playerId, CardReference cardReference);
 	public void castSpell(int playerId, Spell spell);
 	public IGameLogic clone();
-	public void damage(Entity target, int damage);
+	public void damage(Entity target, int damage, boolean applySpellpower);
 	public void destroy(Entity target);
 	
 	public int determineBeginner(int... playerIds);
@@ -27,6 +28,7 @@ public interface IGameLogic extends Cloneable {
 	public void endTurn(int playerId);
 	public void equipWeapon(int playerId, Weapon weapon);
 	
+	public int getTotalTagValue(Player player, GameTag tag);
 	public void fight(Entity attacker, Entity defender);
 	public GameResult getMatchResult(Player player, Player oppenent);
 	public List<GameAction> getValidActions(int playerId);

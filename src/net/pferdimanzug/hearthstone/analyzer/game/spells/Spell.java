@@ -10,6 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 public abstract class Spell {
 	
 	private EntityReference target;
+	protected boolean applySpellpower;
 
 	public Spell() {
 		this(null);
@@ -44,6 +45,14 @@ public abstract class Spell {
 	
 	public void setTarget(EntityReference target) {
 		this.target = target;
+	}
+
+	public boolean applySpellpower() {
+		return applySpellpower;
+	}
+
+	public void setApplySpellpower(boolean applySpellpower) {
+		this.applySpellpower = applySpellpower;
 	}
 
 }
