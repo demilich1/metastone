@@ -33,7 +33,7 @@ public class HeroPowerTest extends TestBase {
 			
 			@Override
 			public void execute(GameContext context, int playerId) {
-				context.getLogic().damage(warrior, 2 * ArmorUp.ARMOR_BONUS, false);
+				context.getLogic().damage(context.getPlayer1(), warrior, 2 * ArmorUp.ARMOR_BONUS, false);
 			}
 		};
 		damage.setTarget(warrior);
@@ -49,7 +49,7 @@ public class HeroPowerTest extends TestBase {
 			
 			@Override
 			public void execute(GameContext context, int playerId) {
-				context.getLogic().damage(warrior, ArmorUp.ARMOR_BONUS / 2, false);
+				context.getLogic().damage(context.getPlayer1(), warrior, ArmorUp.ARMOR_BONUS / 2, false);
 			}
 		};
 		damage.setTarget(warrior);

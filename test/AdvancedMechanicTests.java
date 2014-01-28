@@ -7,12 +7,18 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PhysicalAttackAction;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.AbusiveSergeant;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.AmaniBerserker;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.KoboldGeomancer;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.HolySmite;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.MindBlast;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Anduin;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -127,5 +133,28 @@ public class AdvancedMechanicTests extends BasicTests {
 		context.getLogic().endTurn(mage.getId());
 		Assert.assertEquals(testSubject.getAttack(), baseAttack);
 	}
-
+	
+	@Test
+	public void testSpellpower() {
+		GameContext context = createContext(new Anduin(), new Garrosh());
+		Player priest = context.getPlayer1();
+		priest.setMana(10);
+		Player warrior = context.getPlayer2();
+		warrior.setMana(10);
+		
+		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp());
+		SpellCard damageSpell = new MindBlast();
+		context.getLogic().receiveCard(priest.getId(), damageSpell);
+		
+		context.getLogic().performGameAction(priest.getId(), damageSpell.play());
+		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - MindBlast.DAMAGE);
+		
+		MinionCard spellPowerMinionCard = new KoboldGeomancer();
+		context.getLogic().receiveCard(priest.getId(), spellPowerMinionCard);
+		context.getLogic().performGameAction(priest.getId(), spellPowerMinionCard.play());
+		context.getLogic().receiveCard(priest.getId(), damageSpell);
+		context.getLogic().performGameAction(priest.getId(), damageSpell.play());
+		int spellPower = getSingleMinion(priest.getMinions()).getTagValue(GameTag.SPELL_POWER);
+		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - 2 * MindBlast.DAMAGE - spellPower);
+	}
 }

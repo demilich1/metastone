@@ -27,14 +27,12 @@ public class RandomDamageSpell extends DamageSpell {
 				randomTarget = targets.get(ThreadLocalRandom.current().nextInt(targets.size()));
 			}
 			
-			context.getLogic().damage(randomTarget, damage, false);
+			context.getLogic().damage(player, randomTarget, damage, false);
 		}
 	}
 
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

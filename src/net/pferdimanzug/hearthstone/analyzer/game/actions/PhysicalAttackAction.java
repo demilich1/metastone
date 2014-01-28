@@ -19,7 +19,7 @@ public class PhysicalAttackAction extends GameAction {
 	public void execute(GameContext context, int playerId) {
 		Entity defender = context.resolveSingleTarget(playerId, getTargetKey()); 
 		Entity attacker = context.resolveSingleTarget(playerId, attackerReference);
-		context.getLogic().fight(attacker, defender);
+		context.getLogic().fight(context.getPlayer(playerId), attacker, defender);
 	}
 	
 	@Override

@@ -17,7 +17,7 @@ public class DamageSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
-		context.getLogic().damage(target, getDamage(), applySpellpower);
+		context.getLogic().damage(player, target, getDamage(), applySpellpower);
 	}
 
 }

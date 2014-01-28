@@ -24,7 +24,7 @@ public class MultiTargetDamageSpell extends DamageSpell {
 		for (int i = 0; i < targets; i++) {
 			int randomIndex = ThreadLocalRandom.current().nextInt(validTargets.size());
 			Entity randomTarget = validTargets.remove(randomIndex);
-			context.getLogic().damage(randomTarget, getDamage(), applySpellpower());
+			context.getLogic().damage(player, randomTarget, getDamage(), applySpellpower());
 		}
 	}
 

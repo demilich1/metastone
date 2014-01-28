@@ -111,7 +111,10 @@ public class GameLogic implements IGameLogic {
 	}
 
 	@Override
-	public void damage(Entity target, int damage, boolean applySpellpower) {
+	public void damage(Player player, Entity target, int damage, boolean applySpellpower) {
+		if (applySpellpower) {
+			damage += getTotalTagValue(player, GameTag.SPELL_POWER);
+		}
 		switch (target.getEntityType()) {
 		case MINION:
 			damageMinion((Entity) target, damage);
@@ -199,7 +202,7 @@ public class GameLogic implements IGameLogic {
 			Hero hero = player.getHero();
 			int fatigue = hero.hasTag(GameTag.FATIGUE) ? hero.getTagValue(GameTag.FATIGUE) : 0;
 			hero.setTag(GameTag.FATIGUE, fatigue + 1);
-			damage(hero, fatigue, false);
+			damage(player, hero, fatigue, false);
 			logger.debug("{}'s deck is empty, taking {} fatigue damage!", player.getName(), fatigue);
 			return;
 		}
@@ -236,14 +239,14 @@ public class GameLogic implements IGameLogic {
 	}
 
 	@Override
-	public void fight(Entity attacker, Entity defender) {
+	public void fight(Player player, Entity attacker, Entity defender) {
 		logger.debug("{} attacks {}", attacker, defender);
 		int attackerDamage = attacker.getAttack();
 		int defenderDamage = defender.getAttack();
-		damage(defender, attackerDamage, false);
+		damage(player, defender, attackerDamage, false);
 		// heroes do not retaliate when attacked
 		if (defender.getEntityType() != EntityType.HERO) {
-			damage(attacker, defenderDamage, false);
+			damage(player, attacker, defenderDamage, false);
 		}
 		
 		attacker.modifyTag(GameTag.NUMBER_OF_ATTACKS, -1);
