@@ -23,7 +23,10 @@ public class PlayRandomBehaviour implements IBehaviour {
 		}
 
 		Entity randomTarget = validTargets.get(ThreadLocalRandom.current().nextInt(validTargets.size()));
-		logger.debug(player.getName() + " picks random target: " + randomTarget.getName());
+		if (randomTarget != null) {
+			logger.debug(player.getName() + " picks random target: " + randomTarget.getName());
+		}
+		
 		return randomTarget;
 	}
 

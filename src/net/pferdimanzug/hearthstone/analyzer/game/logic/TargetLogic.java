@@ -121,6 +121,13 @@ public class TargetLogic {
 				&& containsTaunters(opponent.getMinions())) {
 			return getTaunters(opponent.getMinions());
 		}
+		if (actionType == ActionType.SUMMON) {
+			// you can summon next to any friendly minion or provide no target (=null)
+			// in which case the minion will appear to the very right of your board
+			List<Entity> summonTargets = getEntities(context, player, action.getTargetRequirement());
+			summonTargets.add(null);
+			return summonTargets;
+		}
 		List<Entity> potentialTargets = getEntities(context, player, action.getTargetRequirement());
 		return filterTargets(action, potentialTargets);
 	}

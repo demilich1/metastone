@@ -14,6 +14,9 @@ public class EntityReference {
 	public static final EntityReference ALL_CHARACTERS = new EntityReference(-9);
 	
 	public static EntityReference pointTo(Entity entity) {
+		if (entity == null) {
+			return null;
+		}
 		return new EntityReference(entity.getId());
 	}
 		
