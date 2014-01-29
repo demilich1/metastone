@@ -57,13 +57,14 @@ public class SpellTrigger implements Cloneable {
 			if (!spell.hasPredefinedTarget()) {
 				spell.setTarget(hostReference);
 			}
-
+			
 			event.getGameContext().getLogic().castSpell(ownerId, spell);
 		}
 	}
 
 	public void setHost(Entity host) {
 		this.hostReference = host.getReference();
+		spell.setSource(hostReference);
 	}
 
 	public void setOwner(int playerIndex) {

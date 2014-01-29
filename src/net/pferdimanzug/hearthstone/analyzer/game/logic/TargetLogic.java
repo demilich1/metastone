@@ -32,10 +32,11 @@ public class TargetLogic {
 	private List<Entity> filterTargets(GameAction action, List<Entity> potentialTargets) {
 		List<Entity> validTargets = new ArrayList<>();
 		for (Entity entity : potentialTargets) {
-			if ((action.getActionType() == ActionType.SPELL || action.getActionType() == ActionType.HERO_POWER) && entity.hasTag(GameTag.UNTARGETABLE_BY_SPELLS)) {
+			if ((action.getActionType() == ActionType.SPELL || action.getActionType() == ActionType.HERO_POWER)
+					&& entity.hasTag(GameTag.UNTARGETABLE_BY_SPELLS)) {
 				continue;
 			}
-			
+
 			if (action.canBeExecutedOn(entity)) {
 				validTargets.add(entity);
 			}
@@ -67,7 +68,7 @@ public class TargetLogic {
 
 		logger.error("Id " + targetId + " not found!");
 		throw new RuntimeException("Target not found exception");
-		//return null;
+		// return null;
 	}
 
 	private List<Entity> getEntities(GameContext context, Player player, TargetSelection targetRequirement) {
@@ -81,11 +82,12 @@ public class TargetLogic {
 				|| targetRequirement == TargetSelection.MINIONS || targetRequirement == TargetSelection.ANY) {
 			entities.addAll(opponent.getMinions());
 		}
-		if (targetRequirement == TargetSelection.FRIENDLY_HERO || targetRequirement == TargetSelection.FRIENDLY_CHARACTERS
-				|| targetRequirement == TargetSelection.ANY) {
+		if (targetRequirement == TargetSelection.FRIENDLY_HERO
+				|| targetRequirement == TargetSelection.FRIENDLY_CHARACTERS || targetRequirement == TargetSelection.ANY) {
 			entities.add(player.getHero());
 		}
-		if (targetRequirement == TargetSelection.FRIENDLY_MINIONS || targetRequirement == TargetSelection.FRIENDLY_CHARACTERS
+		if (targetRequirement == TargetSelection.FRIENDLY_MINIONS
+				|| targetRequirement == TargetSelection.FRIENDLY_CHARACTERS
 				|| targetRequirement == TargetSelection.MINIONS || targetRequirement == TargetSelection.ANY) {
 			entities.addAll(player.getMinions());
 		}
@@ -122,8 +124,10 @@ public class TargetLogic {
 			return getTaunters(opponent.getMinions());
 		}
 		if (actionType == ActionType.SUMMON) {
-			// you can summon next to any friendly minion or provide no target (=null)
-			// in which case the minion will appear to the very right of your board
+			// you can summon next to any friendly minion or provide no target
+			// (=null)
+			// in which case the minion will appear to the very right of your
+			// board
 			List<Entity> summonTargets = getEntities(context, player, action.getTargetRequirement());
 			summonTargets.add(null);
 			return summonTargets;
@@ -132,7 +136,7 @@ public class TargetLogic {
 		return filterTargets(action, potentialTargets);
 	}
 
-	public List<Entity> resolveTargetKey(GameContext context, Player player, EntityReference targetKey) {
+	public List<Entity> resolveTargetKey(GameContext context, Player player, Entity source, EntityReference targetKey) {
 		if (targetKey == null) {
 			return null;
 		}
@@ -152,6 +156,10 @@ public class TargetLogic {
 			return getEntities(context, player, TargetSelection.FRIENDLY_HERO);
 		} else if (targetKey == EntityReference.FRIENDLY_MINIONS) {
 			return getEntities(context, player, TargetSelection.FRIENDLY_MINIONS);
+		} else if (targetKey == EntityReference.OTHER_FRIENDLY_MINIONS) {
+			List<Entity> targets = getEntities(context, player, TargetSelection.FRIENDLY_MINIONS);
+			targets.remove(source);
+			return targets;
 		} else if (targetKey == EntityReference.NONE) {
 			return new ArrayList<Entity>();
 		}

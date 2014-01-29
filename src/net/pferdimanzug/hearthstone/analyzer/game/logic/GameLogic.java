@@ -91,7 +91,11 @@ public class GameLogic implements IGameLogic {
 	@Override
 	public void castSpell(int playerId, Spell spell) {
 		Player player = context.getPlayer(playerId);
-		spell.cast(context, player, targetLogic.resolveTargetKey(context, player, spell.getTarget()));
+		Entity source = null;
+		if (spell.getSource() != null) {
+			source = context.resolveSingleTarget(playerId, spell.getSource());
+		}
+		spell.cast(context, player, targetLogic.resolveTargetKey(context, player, source, spell.getTarget()));
 	}
 
 	private void checkForDeadEntities() {

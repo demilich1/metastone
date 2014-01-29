@@ -9,11 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ApplyTagSpell extends Spell {
-	
-	private static Logger logger = LoggerFactory.getLogger(ApplyTagSpell.class);
-	
-	private GameTag[] tags;
 
+	private static Logger logger = LoggerFactory.getLogger(ApplyTagSpell.class);
+
+	private GameTag[] tags;
 
 	public ApplyTagSpell(GameTag... tags) {
 		this.tags = tags;
@@ -25,4 +24,5 @@ public class ApplyTagSpell extends Spell {
 			logger.debug("Applying tag {} to {}", tag, target);
 			target.setTag(tag);
 		}
-	}}
+	}
+}

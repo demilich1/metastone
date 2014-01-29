@@ -8,12 +8,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
-public class RandomDamageSpell extends DamageSpell {
+public class DamageRandomSpell extends DamageSpell {
 
 	private final int iterations;
 	private int damage;
 
-	public RandomDamageSpell(int damage, int iterations) {
+	public DamageRandomSpell(int damage, int iterations) {
 		super(damage);
 		this.iterations = iterations;
 	}

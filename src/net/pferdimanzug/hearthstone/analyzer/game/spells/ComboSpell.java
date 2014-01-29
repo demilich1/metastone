@@ -27,7 +27,7 @@ public class ComboSpell extends Spell {
 		if (player.getHero().hasTag(GameTag.COMBO)) {
 			logger.debug(GameTag.COMBO + " spell activated");
 			combo.cast(context, player, targets);
-		} else {
+		} else if (noCombo != null) {
 			logger.debug("Played a card with " + GameTag.COMBO + " but no card was played before");
 			noCombo.cast(context, player, targets);
 		}

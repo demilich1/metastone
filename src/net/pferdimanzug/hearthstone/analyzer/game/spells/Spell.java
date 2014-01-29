@@ -11,6 +11,7 @@ public abstract class Spell {
 	
 	private EntityReference target;
 	protected boolean applySpellpower;
+	private EntityReference source;
 
 	public Spell() {
 		this(null);
@@ -53,6 +54,14 @@ public abstract class Spell {
 
 	public void setApplySpellpower(boolean applySpellpower) {
 		this.applySpellpower = applySpellpower;
+	}
+
+	public EntityReference getSource() {
+		return source;
+	}
+
+	public void setSource(EntityReference source) {
+		this.source = source;
 	}
 
 }
