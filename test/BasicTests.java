@@ -121,7 +121,7 @@ public class BasicTests extends TestBase {
 		Player mage = context.getPlayer1();
 		mage.getHand().removeAll();
 		MinionCard devMonster = new DevMonster(1, 1);
-		mage.getHand().add(devMonster);
+		context.getLogic().receiveCard(mage.getId(), devMonster);
 		Assert.assertEquals(mage.getHand().getCount(), 1);
 		context.getLogic().performGameAction(mage.getId(), devMonster.play());
 		Assert.assertEquals(mage.getHand().isEmpty(), true);
@@ -130,6 +130,18 @@ public class BasicTests extends TestBase {
 		Assert.assertEquals(minion.getAttack(), 1);
 		Assert.assertEquals(minion.getHp(), 1);
 		Assert.assertEquals(minion.isDead(), false);
+		
+		MinionCard devMonster2 = new DevMonster(2, 2);
+		context.getLogic().receiveCard(mage.getId(), devMonster2);
+		GameAction summonAction = devMonster2.play();
+		summonAction.setTarget(minion);
+		context.getLogic().performGameAction(mage.getId(), summonAction);
+		
+		Assert.assertEquals(mage.getMinions().size(), 2);
+		Entity left = mage.getMinions().get(0);
+		Entity right = mage.getMinions().get(1);
+		Assert.assertEquals(left.getAttack(), 2);
+		Assert.assertEquals(right.getAttack(), 1);
 	}
 	
 	@Test
