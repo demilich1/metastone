@@ -14,8 +14,8 @@ public class ComboSpell extends Spell {
 	
 	private static Logger logger = LoggerFactory.getLogger(ComboSpell.class);
 
-	private Spell noCombo;
-	private Spell combo;
+	private final Spell noCombo;
+	private final Spell combo;
 
 	public ComboSpell(Spell noCombo, Spell combo) {
 		this.noCombo = noCombo;
@@ -36,5 +36,18 @@ public class ComboSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
 	}
+
+	@Override
+	public void setApplySpellpower(boolean applySpellpower) {
+		super.setApplySpellpower(applySpellpower);
+		if (noCombo != null) {
+			noCombo.setApplySpellpower(applySpellpower);
+		}
+		if (combo != null) {
+			combo.setApplySpellpower(applySpellpower);
+		}
+	}
+	
+	
 
 }

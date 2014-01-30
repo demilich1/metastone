@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards;
 
+import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 
@@ -43,7 +44,7 @@ public abstract class Card implements Cloneable {
 		return id;
 	}
 
-	public int getManaCost() {
+	public int getManaCost(Player player) {
 		return manaCost;
 	}
 
@@ -71,7 +72,7 @@ public abstract class Card implements Cloneable {
 
 	@Override
 	public String toString() {
-		return String.format("[%s '%s' Manacost:%d]", getCardType(), getName(), getManaCost());
+		return String.format("[%s '%s' Manacost:%d]", getCardType(), getName(), manaCost);
 	}
 
 }

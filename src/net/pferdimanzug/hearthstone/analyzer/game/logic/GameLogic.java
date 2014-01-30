@@ -411,7 +411,7 @@ public class GameLogic implements IGameLogic {
 	}
 
 	private int getModifiedManaCost(Player player, Card card) {
-		int manaCost = card.getManaCost();
+		int manaCost = card.getManaCost(player);
 		if (card.getCardType() == CardType.MINION) {
 			manaCost += getTotalTagValue(player, GameTag.MINION_MANA_COST);
 		}
@@ -515,7 +515,7 @@ public class GameLogic implements IGameLogic {
 	@Override
 	public void useHeroPower(int playerId, HeroPower power) {
 		Player player = context.getPlayer(playerId);
-		modifyCurrentMana(playerId, -power.getManaCost());
+		modifyCurrentMana(playerId, -power.getManaCost(player));
 		logger.debug("{} uses {}", player.getName(), power);
 		power.setUsed(true);
 	}
