@@ -24,7 +24,7 @@ public class BloodImp extends MinionCard {
 		Spell spell = new BuffRandomSpell(0, 1);
 		spell.setTarget(EntityReference.OTHER_FRIENDLY_MINIONS);
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), spell);
-		bloodImp.addSpellTrigger(trigger);
+		bloodImp.setSpellTrigger(trigger);
 		return bloodImp;
 	}
 

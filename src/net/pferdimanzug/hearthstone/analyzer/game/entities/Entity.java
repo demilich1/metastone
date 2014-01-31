@@ -30,7 +30,7 @@ public abstract class Entity implements Cloneable {
 		this.sourceCard = sourceCard;
 	}
 
-	public void addSpellTrigger(SpellTrigger spellTrigger) {
+	public void setSpellTrigger(SpellTrigger spellTrigger) {
 		spellTrigger.setHost(this);
 		this.spellTrigger = spellTrigger;
 	}

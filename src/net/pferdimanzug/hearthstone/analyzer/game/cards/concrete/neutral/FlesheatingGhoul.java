@@ -18,7 +18,7 @@ public class FlesheatingGhoul extends MinionCard {
 	public Minion summon() {
 		SpellTrigger spellTrigger = new SpellTrigger(new MinionDeathTrigger(), new BuffSpell(1));
 		Minion flesheatingGhoul = createMinion(2, 3);
-		flesheatingGhoul.addSpellTrigger(spellTrigger);
+		flesheatingGhoul.setSpellTrigger(spellTrigger);
 		return flesheatingGhoul;
 	}
 

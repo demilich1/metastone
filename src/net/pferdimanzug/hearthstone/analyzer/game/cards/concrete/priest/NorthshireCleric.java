@@ -39,7 +39,7 @@ public class NorthshireCleric extends MinionCard {
 	public Minion summon() {
 		Minion northshireCleric = createMinion(1, 3);
 		SpellTrigger trigger = new SpellTrigger(new NorthshireClericTrigger(), new DrawCardSpell());
-		northshireCleric.addSpellTrigger(trigger);
+		northshireCleric.setSpellTrigger(trigger);
 		return northshireCleric;
 	}
 

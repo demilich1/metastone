@@ -47,7 +47,7 @@ public class TruesilverChampion extends WeaponCard {
 		Spell healHero = new HealingSpell(2);
 		healHero.setTarget(EntityReference.FRIENDLY_HERO);
 		SpellTrigger trigger = new SpellTrigger(new TruesilverChampionWeaponTrigger(), healHero);
-		trueSilverChampion.addSpellTrigger(trigger);
+		trueSilverChampion.setSpellTrigger(trigger);
 		return trueSilverChampion;
 	}
 

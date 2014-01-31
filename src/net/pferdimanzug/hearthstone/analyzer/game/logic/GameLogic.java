@@ -22,6 +22,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
 import net.pferdimanzug.hearthstone.analyzer.game.events.DamageEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.KillEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.PhysicalAttackEvent;
+import net.pferdimanzug.hearthstone.analyzer.game.events.SpellCastedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.SummonEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.TurnEndEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.TurnStartEvent;
@@ -408,6 +409,7 @@ public class GameLogic implements IGameLogic {
 		player.getHand().remove(card);
 		player.getGraveyard().add(card);
 		player.getHero().modifyTag(GameTag.COMBO, +1);
+		context.getTriggerManager().fireGameEvent(new SpellCastedEvent(context, playerId));
 	}
 
 	private int getModifiedManaCost(Player player, Card card) {

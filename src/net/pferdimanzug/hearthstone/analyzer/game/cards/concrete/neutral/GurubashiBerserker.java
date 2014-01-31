@@ -25,7 +25,7 @@ public class GurubashiBerserker extends MinionCard {
 		Spell buffAttack = new BuffSpell(3, 0);
 		buffAttack.setTarget(EntityReference.pointTo(gurubashiBerserker));
 		SpellTrigger trigger = new SpellTrigger(new DamageReceivedTrigger(), buffAttack);
-		gurubashiBerserker.addSpellTrigger(trigger);
+		gurubashiBerserker.setSpellTrigger(trigger);
 		return gurubashiBerserker;
 	}
 	

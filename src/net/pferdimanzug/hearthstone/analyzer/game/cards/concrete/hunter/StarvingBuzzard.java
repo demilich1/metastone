@@ -40,7 +40,7 @@ public class StarvingBuzzard extends MinionCard {
 	public Minion summon() {
 		Minion starvingBuzzard = createMinion(2, 2, Race.BEAST);
 		SpellTrigger trigger = new SpellTrigger(new StarvingBuzzardTrigger(), new DrawCardSpell());
-		starvingBuzzard.addSpellTrigger(trigger);
+		starvingBuzzard.setSpellTrigger(trigger);
 		return starvingBuzzard;
 	}
 	

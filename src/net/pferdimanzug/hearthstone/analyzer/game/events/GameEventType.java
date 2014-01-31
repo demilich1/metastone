@@ -7,5 +7,6 @@ public enum GameEventType {
 	KILL,
 	PHYSICAL_ATTACK,
 	TURN_START,
-	TURN_END
+	TURN_END,
+	SPELL_CASTED
 }
