@@ -2,11 +2,11 @@ package net.pferdimanzug.hearthstone.analyzer.playmode;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,6 +17,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.logic.GameResult;
 
 public class PlayModePanel extends JPanel {
 	private JLabel p1HpLabel;
@@ -81,9 +82,15 @@ public class PlayModePanel extends JPanel {
 		p2Panel.add(p2MinionPanel, "cell 0 2,grow");
 	}
 	
-	private JComponent createHandCard(Card card) {
-		JButton cardButton = new JButton(card.getName());
-		return cardButton;
+	private JComponent createHandCard(Card card, Player player) {
+		JPanel cardPanel = new JPanel(new BorderLayout());
+		cardPanel.setPreferredSize(new Dimension(80, 120));
+		JLabel nameLabel = new JLabel(card.getName());
+		cardPanel.add(nameLabel, BorderLayout.CENTER);
+		JLabel costLabel = new JLabel(card.getManaCost(player) + "");
+		costLabel.setAlignmentX(JComponent.LEFT_ALIGNMENT);
+		cardPanel.add(costLabel, BorderLayout.NORTH);
+		return cardPanel;
 	}
 	
 	private JPanel createMinionCard(Minion minion) {
@@ -148,6 +155,10 @@ public class PlayModePanel extends JPanel {
 		updateHandCardView(p2HandCardPanel, context.getPlayer2());
 		updateMinionView(p1MinionPanel, context.getPlayer1());
 		updateMinionView(p2MinionPanel, context.getPlayer2());
+		
+		if (context.getResult() != GameResult.RUNNING) {
+			new GameResultDialog(context, context.getPlayer1());
+		}
 		revalidate();
 		repaint();
 	}
@@ -155,7 +166,7 @@ public class PlayModePanel extends JPanel {
 	private void updateHandCardView(JPanel panel, Player player) {
 		panel.removeAll();
 		for (Card card : player.getHand()) {
-			panel.add(createHandCard(card));
+			panel.add(createHandCard(card, player));
 		}
 	}
 	
@@ -169,6 +180,9 @@ public class PlayModePanel extends JPanel {
 	private void updatePlayerStatus(JLabel iconLabel, JLabel hpLabel, JLabel manaLabel, Player player) {
 		iconLabel.setIcon(getIcon(player.getHero()));
 		hpLabel.setText("Hp: " + player.getHero().getHp() + "/" + player.getHero().getMaxHp());
+		if (player.getHero().getArmor() > 0) {
+			
+		}
 		manaLabel.setText("Mana: " + player.getMana() + "/" + player.getMaxMana());
 	}
 }

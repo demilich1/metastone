@@ -7,10 +7,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanActionOptions;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 @SuppressWarnings("serial")
 public class HumanActionPromptDialog extends JDialog {
@@ -42,6 +44,12 @@ public class HumanActionPromptDialog extends JDialog {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if (action != null && action.getValidTargets() != null && !action.getValidTargets().isEmpty()) {
+					Entity selectedTarget = (Entity) JOptionPane.showInputDialog(HumanActionPromptDialog.this,
+							"Select a target", "Select a target", JOptionPane.PLAIN_MESSAGE, null, action
+									.getValidTargets().toArray(), null);
+					action.setTarget(selectedTarget);
+				}
 				actionPrompt.getBehaviour().setSelectedAction(action);
 				setVisible(false);
 				dispose();
