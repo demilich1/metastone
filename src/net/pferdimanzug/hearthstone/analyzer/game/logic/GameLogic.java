@@ -42,7 +42,7 @@ public class GameLogic implements IGameLogic {
 
 	public static final int MAX_MINIONS = 7;
 	public static final int MAX_HAND_CARDS = 10;
-	public static final int MAX_HERO_HP = 1;
+	public static final int MAX_HERO_HP = 30;
 	public static final int STARTER_CARDS = 3;
 	public static final int MAX_MANA = 10;
 
