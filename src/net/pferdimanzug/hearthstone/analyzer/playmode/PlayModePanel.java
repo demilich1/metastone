@@ -40,7 +40,7 @@ public class PlayModePanel extends JPanel {
 		
 		JPanel p1Panel = new JPanel();
 		add(p1Panel, BorderLayout.SOUTH);
-		p1Panel.setLayout(new MigLayout("", "[100%,grow,center,nogrid]", "[160!,grow][100!][80!]"));
+		p1Panel.setLayout(new MigLayout("", "[100%,grow,center,nogrid]", "[160!,grow][100!][120!]"));
 		
 		p1MinionPanel = new JPanel();
 		p1Panel.add(p1MinionPanel, "cell 0 0,grow");
@@ -62,7 +62,7 @@ public class PlayModePanel extends JPanel {
 		
 		JPanel p2Panel = new JPanel();
 		add(p2Panel, BorderLayout.NORTH);
-		p2Panel.setLayout(new MigLayout("", "[100%,grow,center,nogrid]", "[80!][100!][160!,grow]"));
+		p2Panel.setLayout(new MigLayout("", "[100%,grow,center,nogrid]", "[120!][100!][160!,grow]"));
 		
 		p2HandCardPanel = new JPanel();
 		p2HandCardPanel.setBorder(null);
@@ -80,72 +80,6 @@ public class PlayModePanel extends JPanel {
 		
 		p2MinionPanel = new JPanel();
 		p2Panel.add(p2MinionPanel, "cell 0 2,grow");
-	}
-	
-	private JComponent createHandCard(Card card, Player player) {
-		JPanel cardPanel = new JPanel(new BorderLayout());
-		cardPanel.setPreferredSize(new Dimension(80, 120));
-		JLabel nameLabel = new JLabel(card.getName());
-		cardPanel.add(nameLabel, BorderLayout.CENTER);
-		JLabel costLabel = new JLabel(card.getManaCost(player) + "");
-		costLabel.setAlignmentX(JComponent.LEFT_ALIGNMENT);
-		cardPanel.add(costLabel, BorderLayout.NORTH);
-		return cardPanel;
-	}
-	
-	private JPanel createMinionCard(Minion minion) {
-		JPanel panel = new JPanel(new BorderLayout());
-		JLabel nameLabel = new JLabel(minion.getName());
-		panel.add(nameLabel, BorderLayout.CENTER);
-		JPanel bottomPanel = new JPanel(new FlowLayout());
-		JLabel attackLabel = new JLabel(minion.getAttack() + "");
-		attackLabel.setOpaque(true);
-		attackLabel.setBackground(Color.YELLOW);
-		JLabel hpLabel = new JLabel(minion.getHp() + "");
-		hpLabel.setOpaque(true);
-		hpLabel.setBackground(Color.RED);
-		bottomPanel.add(attackLabel);
-		bottomPanel.add(hpLabel);
-		panel.add(bottomPanel, BorderLayout.SOUTH);
-		return panel;
-	}
-	
-	private Icon getIcon(Hero hero) {
-		String iconName = null;
-		switch (hero.getHeroClass()) {
-		case DRUID:
-			iconName = "malfurion";
-			break;
-		case HUNTER:
-			iconName = "rexxar";
-			break;
-		case MAGE:
-			iconName = "jaina";
-			break;
-		case PALADIN:
-			iconName = "paladin";
-			break;
-		case PRIEST:
-			iconName = "anduin";
-			break;
-		case ROGUE:
-			iconName = "valeera";
-			break;
-		case SHAMAN:
-			iconName = "thrall";
-			break;
-		case WARLOCK:
-			iconName = "guldan";
-			break;
-		case WARRIOR:
-			iconName = "garrosh";
-			break;
-		default:
-		case ANY:
-			break;
-		
-		}
-		return new ImageIcon(PlayModePanel.class.getResource("/net/pferdimanzug/hearthstone/analyzer/resources/img/heroes/" + iconName + ".png"));
 	}
 	
 	public void update(GameContext context) {
@@ -166,23 +100,22 @@ public class PlayModePanel extends JPanel {
 	private void updateHandCardView(JPanel panel, Player player) {
 		panel.removeAll();
 		for (Card card : player.getHand()) {
-			panel.add(createHandCard(card, player));
+			panel.add(PlayModeUiFactory.createHandCard(card, player));
 		}
 	}
 	
 	private void updateMinionView(JPanel panel, Player player) {
 		panel.removeAll();
 		for (Minion minion : player.getMinions()) {
-			panel.add(createMinionCard(minion));
+			panel.add(PlayModeUiFactory.createMinionCard(minion));
 		}
 	}
 	
 	private void updatePlayerStatus(JLabel iconLabel, JLabel hpLabel, JLabel manaLabel, Player player) {
-		iconLabel.setIcon(getIcon(player.getHero()));
-		hpLabel.setText("Hp: " + player.getHero().getHp() + "/" + player.getHero().getMaxHp());
-		if (player.getHero().getArmor() > 0) {
-			
-		}
+		Icon heroIcon = PlayModeUiFactory.createIcon(player.getHero());
+		iconLabel.setIcon(heroIcon);
+		String hpAndArmorString = String.format("<html>Hp: %d<br/>Armor: %d</html>", player.getHero().getHp(), player.getHero().getArmor());
+		hpLabel.setText(hpAndArmorString);
 		manaLabel.setText("Mana: " + player.getMana() + "/" + player.getMaxMana());
 	}
 }
