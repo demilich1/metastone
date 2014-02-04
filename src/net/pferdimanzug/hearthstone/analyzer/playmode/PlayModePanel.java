@@ -107,7 +107,7 @@ public class PlayModePanel extends JPanel {
 	private void updateMinionView(JPanel panel, Player player) {
 		panel.removeAll();
 		for (Minion minion : player.getMinions()) {
-			panel.add(PlayModeUiFactory.createMinionCard(minion));
+			panel.add(PlayModeUiFactory.createMinionToken(minion));
 		}
 	}
 	

@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Rectangle;
 
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
@@ -28,18 +29,48 @@ public class PlayModeUiFactory {
 	public static JComponent createHandCard(Card card, Player player) {
 		JPanel cardPanel = new JPanel(new BorderLayout());
 		cardPanel.setPreferredSize(new Dimension(100, 110));
-		JTextArea nameLabel = new JTextArea(card.getName());
-		nameLabel.setLineWrap(true);
-		nameLabel.setFont(new Font("Arial", Font.BOLD, 12));
-		//nameLabel.setHorizontalAlignment(JLabel.CENTER);
-		//nameLabel.setVerticalAlignment(JLabel.TOP);
-		cardPanel.add(nameLabel, BorderLayout.CENTER);
+		JTextArea nameArea = new JTextArea(card.getName());
+		nameArea.setLineWrap(true);
+		nameArea.setWrapStyleWord(true);
+		nameArea.setEditable(false);
+		nameArea.setFont(new Font("Arial", Font.BOLD, 12));
+		cardPanel.add(nameArea, BorderLayout.CENTER);
 		JLabel costLabel = new JLabel(card.getManaCost(player) + "");
 		costLabel.setAlignmentX(JComponent.LEFT_ALIGNMENT);
 		cardPanel.add(costLabel, BorderLayout.NORTH);
 		
 		cardPanel.setBorder(createRarityBorder(card.getRarity()));
 		return cardPanel;
+	}
+	
+	public static JPanel createMinionToken(Minion minion) {
+		JPanel panel = new JPanel(new BorderLayout());
+		panel.setPreferredSize(new Dimension(80, 80));
+		JLabel nameLabel = new JLabel(minion.getName());
+		nameLabel.setFont(new Font("Arial", Font.BOLD, 12));
+		nameLabel.setHorizontalAlignment(JLabel.CENTER);
+		panel.add(nameLabel, BorderLayout.CENTER);
+		
+		JPanel bottomPanel = new JPanel(null);
+		
+		final int numberLabelSize = 16;
+		JLabel attackLabel = new JLabel(minion.getAttack() + "");
+		attackLabel.setLocation(8, bottomPanel.getHeight()- 2 * numberLabelSize);
+		attackLabel.setOpaque(true);
+		attackLabel.setBackground(Color.YELLOW);
+		attackLabel.setFont(new Font("Arial", Font.BOLD, 14));
+		
+		JLabel hpLabel = new JLabel(minion.getHp() + "");
+		hpLabel.setHorizontalAlignment(JLabel.RIGHT);
+		hpLabel.setOpaque(true);
+		hpLabel.setBackground(Color.RED);
+		hpLabel.setFont(new Font("Arial", Font.BOLD, 14));
+		
+		bottomPanel.add(attackLabel);
+		bottomPanel.add(hpLabel);
+		panel.add(bottomPanel, BorderLayout.SOUTH);
+		panel.setBorder(createRarityBorder(minion.getSourceCard().getRarity()));
+		return panel;
 	}
 	
 	private static Border createRarityBorder(Rarity rarity) {
@@ -66,23 +97,6 @@ public class PlayModeUiFactory {
 		}
 		return BorderFactory.createLineBorder(color, 2);
 		
-	}
-	
-	public static JPanel createMinionCard(Minion minion) {
-		JPanel panel = new JPanel(new BorderLayout());
-		JLabel nameLabel = new JLabel(minion.getName());
-		panel.add(nameLabel, BorderLayout.CENTER);
-		JPanel bottomPanel = new JPanel(new FlowLayout());
-		JLabel attackLabel = new JLabel(minion.getAttack() + "");
-		attackLabel.setOpaque(true);
-		attackLabel.setBackground(Color.YELLOW);
-		JLabel hpLabel = new JLabel(minion.getHp() + "");
-		hpLabel.setOpaque(true);
-		hpLabel.setBackground(Color.RED);
-		bottomPanel.add(attackLabel);
-		bottomPanel.add(hpLabel);
-		panel.add(bottomPanel, BorderLayout.SOUTH);
-		return panel;
 	}
 	
 	public static Icon createIcon(Hero hero) {
