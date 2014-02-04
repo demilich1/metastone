@@ -17,7 +17,7 @@ public abstract class HeroPowerAction extends PlayCardAction {
 		play(context, playerId);
 	}
 	
-	private HeroPower getHeroPower() {
+	public HeroPower getHeroPower() {
 		return (HeroPower) getCard();
 	}
 

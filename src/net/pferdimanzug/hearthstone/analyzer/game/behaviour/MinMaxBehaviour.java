@@ -73,8 +73,9 @@ public class MinMaxBehaviour implements IBehaviour {
 	}
 
 	@Override
-	public Entity provideTargetFor(Player player, GameAction action, List<Entity> validTargets) {
+	public Entity provideTargetFor(Player player, GameAction action) {
 		//TODO: copied from PlayRandomBehaviour
+		List<Entity> validTargets = action.getValidTargets();
 		if (validTargets.isEmpty()) {
 			return null;
 		}

@@ -1,7 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.behaviour.human;
 
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
@@ -15,16 +14,18 @@ public class HumanBehaviour implements IBehaviour {
 
 	private GameAction selectedAction;
 	private boolean waitingForAction;
+	private Entity selectedTarget;
 
 	@Override
-	public Entity provideTargetFor(Player player, GameAction action, List<Entity> validTargets) {
-		// TODO: copied from PlayRandomBehaviour, change!
-		if (validTargets.isEmpty()) {
+	public Entity provideTargetFor(Player player, GameAction action) {
+		if (action.getValidTargets() == null || action.getValidTargets().isEmpty()) {
 			return null;
 		}
 
-		Entity randomTarget = validTargets.get(ThreadLocalRandom.current().nextInt(validTargets.size()));
-		return randomTarget;
+		ApplicationFacade.getInstance().sendNotification(GameNotification.HUMAN_PROMPT_FOR_TARGET,
+				new HumanTargetOptions(this, action));
+
+		return selectedTarget;
 	}
 
 	@Override
@@ -34,7 +35,7 @@ public class HumanBehaviour implements IBehaviour {
 		ApplicationFacade.getInstance().sendNotification(GameNotification.HUMAN_PROMPT_FOR_ACTION, options);
 		while (waitingForAction) {
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(100);
 			} catch (InterruptedException e) {
 			}
 		}
@@ -44,6 +45,14 @@ public class HumanBehaviour implements IBehaviour {
 	public void setSelectedAction(GameAction selectedAction) {
 		this.selectedAction = selectedAction;
 		waitingForAction = false;
+	}
+
+	public void setSelectedTarget(Entity selectedTarget) {
+		this.selectedTarget = selectedTarget;
+	}
+	
+	public Entity getSelectedTarget() {
+		return this.selectedTarget;
 	}
 
 }

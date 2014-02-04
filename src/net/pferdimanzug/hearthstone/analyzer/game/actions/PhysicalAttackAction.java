@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class PhysicalAttackAction extends GameAction {
 	
-	private EntityReference attackerReference;
+	private final EntityReference attackerReference;
 
 	public PhysicalAttackAction(EntityReference attackerReference) {
 		setTargetRequirement(TargetSelection.ENEMY_CHARACTERS);
@@ -25,6 +25,10 @@ public class PhysicalAttackAction extends GameAction {
 	@Override
 	public String toString() {
 		return String.format("%s Attacker: %s Defender: %s", getActionType(), attackerReference, getTargetKey());
+	}
+
+	public EntityReference getAttackerReference() {
+		return attackerReference;
 	}
 
 

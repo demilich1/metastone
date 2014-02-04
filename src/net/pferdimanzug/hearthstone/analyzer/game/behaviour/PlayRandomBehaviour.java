@@ -17,7 +17,8 @@ public class PlayRandomBehaviour implements IBehaviour {
 	private final static Logger logger = LoggerFactory.getLogger(PlayRandomBehaviour.class);
 
 	@Override
-	public Entity provideTargetFor(Player player, GameAction action, List<Entity> validTargets) {
+	public Entity provideTargetFor(Player player, GameAction action) {
+		List<Entity> validTargets = action.getValidTargets();
 		if (validTargets.isEmpty()) {
 			return null;
 		}

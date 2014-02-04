@@ -43,6 +43,8 @@ public class PlayModePanel extends JPanel {
 		p1Panel.setLayout(new MigLayout("", "[100%,grow,center,nogrid]", "[160!,grow][100!][120!]"));
 		
 		p1MinionPanel = new JPanel();
+		FlowLayout flowLayout_1 = (FlowLayout) p1MinionPanel.getLayout();
+		flowLayout_1.setVgap(0);
 		p1Panel.add(p1MinionPanel, "cell 0 0,grow");
 		
 		p1HpLabel = new JLabel("Hp: 30/30");
@@ -79,6 +81,8 @@ public class PlayModePanel extends JPanel {
 		p2Panel.add(p2ManaLabel, "cell 0 1");
 		
 		p2MinionPanel = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) p2MinionPanel.getLayout();
+		flowLayout.setVgap(0);
 		p2Panel.add(p2MinionPanel, "cell 0 2,grow");
 	}
 	
@@ -90,7 +94,7 @@ public class PlayModePanel extends JPanel {
 		updateMinionView(p1MinionPanel, context.getPlayer1());
 		updateMinionView(p2MinionPanel, context.getPlayer2());
 		
-		if (context.getResult() != GameResult.RUNNING) {
+		if (context.gameDecided()) {
 			new GameResultDialog(context, context.getPlayer1());
 		}
 		revalidate();

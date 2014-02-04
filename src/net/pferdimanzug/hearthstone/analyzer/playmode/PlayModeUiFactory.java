@@ -44,6 +44,8 @@ public class PlayModeUiFactory {
 	}
 	
 	public static JPanel createMinionToken(Minion minion) {
+		JPanel minionTokenPanel = new MinionTokenPanel(minion);
+		/*
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setPreferredSize(new Dimension(80, 80));
 		JLabel nameLabel = new JLabel(minion.getName());
@@ -70,11 +72,14 @@ public class PlayModeUiFactory {
 		bottomPanel.add(hpLabel);
 		panel.add(bottomPanel, BorderLayout.SOUTH);
 		panel.setBorder(createRarityBorder(minion.getSourceCard().getRarity()));
-		return panel;
+		*/
+		minionTokenPanel.setBorder(createRarityBorder(minion.getSourceCard().getRarity()));
+		return minionTokenPanel;
 	}
 	
-	private static Border createRarityBorder(Rarity rarity) {
+	public static Border createRarityBorder(Rarity rarity) {
 		Color color;
+		int thickness = 2;
 		switch (rarity) {
 		case COMMON:
 			color = Color.WHITE;
@@ -86,6 +91,7 @@ public class PlayModeUiFactory {
 		case LEGENDARY:
 			// ff8000
 			color = new Color(255, 128, 0);
+			thickness = 3;
 			break;
 		case RARE:
 			// 0070dd
@@ -95,7 +101,7 @@ public class PlayModeUiFactory {
 			color = Color.GRAY;
 			break;
 		}
-		return BorderFactory.createLineBorder(color, 2);
+		return BorderFactory.createLineBorder(color, thickness);
 		
 	}
 	

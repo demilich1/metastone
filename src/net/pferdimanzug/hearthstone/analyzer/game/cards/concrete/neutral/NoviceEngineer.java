@@ -17,7 +17,7 @@ public class NoviceEngineer extends MinionCard {
 
 	@Override
 	public Minion summon() {
-		Minion noviceEngineer = createMinion(1, 2);
+		Minion noviceEngineer = createMinion(1, 1);
 		Battlecry battlecry = Battlecry.createBattlecry(new DrawCardSpell(1), TargetSelection.NONE);
 		noviceEngineer.setTag(GameTag.BATTLECRY, battlecry);
 		return noviceEngineer;

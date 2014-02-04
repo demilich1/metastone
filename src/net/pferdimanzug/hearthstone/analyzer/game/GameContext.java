@@ -95,7 +95,7 @@ public class GameContext implements Cloneable {
 		return null;
 	}
 
-	private boolean gameDecided() {
+	public boolean gameDecided() {
 		result = logic.getMatchResult(activePlayer, getOpponent(activePlayer));
 		return result != GameResult.RUNNING;
 	}

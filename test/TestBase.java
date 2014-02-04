@@ -41,7 +41,7 @@ public class TestBase {
 	private static class NullBehaviour implements IBehaviour {
 
 		@Override
-		public Entity provideTargetFor(Player player, GameAction action, List<Entity> validTargets) {
+		public Entity provideTargetFor(Player player, GameAction action) {
 			return null;
 		}
 
