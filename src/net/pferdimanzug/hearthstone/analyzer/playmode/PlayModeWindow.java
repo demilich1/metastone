@@ -1,11 +1,14 @@
 package net.pferdimanzug.hearthstone.analyzer.playmode;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
 import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
+import net.pferdimanzug.hearthstone.analyzer.playmode.turn_log.TurnLogPanel;
 
 public class PlayModeWindow extends JFrame {
 
@@ -15,10 +18,11 @@ public class PlayModeWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	private final PlayModePanel renderer;
+	private final TurnLogPanel turnLog;
 
 	public PlayModeWindow() {
 		setTitle("Hearthstone Analyzer");
-		setSize(1024, 768);
+		setSize(1600, 900);
 
 		// make tooltips appear instantly
 		ToolTipManager.sharedInstance().setInitialDelay(0);
@@ -26,6 +30,8 @@ public class PlayModeWindow extends JFrame {
 		// setLayout(new FlowLayout(FlowLayout.LEFT));
 		renderer = new PlayModePanel();
 		add(renderer);
+		turnLog = new TurnLogPanel();
+		add(turnLog, BorderLayout.EAST);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		setLookAndFeel();
@@ -47,6 +53,7 @@ public class PlayModeWindow extends JFrame {
 
 	public void update(GameContext context) {
 		renderer.update(context);
+		turnLog.showActions((GameContextVisualizable) context);
 	}
 
 }

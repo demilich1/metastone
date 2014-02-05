@@ -107,7 +107,6 @@ public class GameLogic implements IGameLogic {
 				}
 			}
 		}
-
 	}
 
 	public IGameLogic clone() {
