@@ -177,8 +177,8 @@ public class GameContext implements Cloneable {
 
 	private void playTurn(Player player) {
 		turn++;
-		onGameStateChanged();
 		logic.startTurn(player.getId());
+		onGameStateChanged();
 		GameAction nextAction = player.getBehaviour().requestAction(this, player, logic.getValidActions(player.getId()));
 		while (nextAction != null) {
 			onActionPerform(nextAction);
