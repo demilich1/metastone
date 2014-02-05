@@ -53,6 +53,9 @@ public class PlayModeWindow extends JFrame {
 
 	public void update(GameContext context) {
 		renderer.update(context);
+	}
+	
+	public void updateTurnLog(GameContext context) {
 		turnLog.showActions((GameContextVisualizable) context);
 	}
 

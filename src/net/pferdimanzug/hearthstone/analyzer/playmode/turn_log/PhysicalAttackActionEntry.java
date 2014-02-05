@@ -15,7 +15,7 @@ public class PhysicalAttackActionEntry extends GameActionEntry {
 		setIcon(icon);
 		Entity attacker = context.resolveSingleTarget(player.getId(), physicalAttackAction.getAttackerReference());
 		Entity defender = context.resolveSingleTarget(player.getId(), physicalAttackAction.getTargetKey());
-		setText(attacker.getName() + " attacks " + defender);
+		setText(attacker.getName() + " attacks " + defender.getName());
 	}
 
 }

@@ -36,6 +36,7 @@ public class GameContextVisualizable extends GameContext {
 			turnEvents.put(action, new ArrayList<GameEvent>());
 		}
 		setCurrentAction(action);
+		ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_ACTION_PERFORMED, this);
 	}
 
 	@Override
