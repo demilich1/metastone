@@ -3,9 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.playmode;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Rectangle;
 
 import javax.swing.BorderFactory;
 import javax.swing.Icon;

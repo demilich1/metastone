@@ -11,6 +11,7 @@ import javax.swing.WindowConstants;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 
+@SuppressWarnings("serial")
 public class GameResultDialog extends JDialog {
 	
 	public GameResultDialog(GameContext context, Player player) {

@@ -18,7 +18,7 @@ public class AddSpellTriggerSpell extends Spell {
 		SpellTrigger instance = spellTrigger.clone();
 		instance.setOwner(player.getId());
 		instance.setHost(target);
-		context.getTriggerManager().addTrigger(instance);
+		context.addTrigger(instance);
 	}
 
 }

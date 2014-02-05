@@ -14,6 +14,7 @@ import net.miginfocom.swing.MigLayout;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
+@SuppressWarnings("serial")
 public class MinionTokenPanel extends JPanel {
 	private final static Set<GameTag> displayedTags = new HashSet<GameTag>(Arrays.asList(new GameTag[] {
 			GameTag.CHARGE, GameTag.ENRAGED, GameTag.FROZEN, GameTag.DIVINE_SHIELD, GameTag.WINDFURY,

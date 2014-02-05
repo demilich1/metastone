@@ -1,13 +1,10 @@
 package net.pferdimanzug.hearthstone.analyzer.playmode;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -15,10 +12,9 @@ import net.miginfocom.swing.MigLayout;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.logic.GameResult;
 
+@SuppressWarnings("serial")
 public class PlayModePanel extends JPanel {
 	private JLabel p1HpLabel;
 	private JLabel p1HeroLabel;
@@ -30,7 +26,7 @@ public class PlayModePanel extends JPanel {
 	private JLabel p2ManaLabel;
 	private JPanel p1MinionPanel;
 	private JPanel p2MinionPanel;
-
+	
 	/**
 	 * Create the panel.
 	 */

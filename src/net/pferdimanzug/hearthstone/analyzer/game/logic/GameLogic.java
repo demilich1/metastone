@@ -148,7 +148,7 @@ public class GameLogic implements IGameLogic {
 		}
 		logger.debug("{} is damaged for {}", minion, damage);
 		minion.setHp(minion.getHp() - damage);
-		context.getTriggerManager().fireGameEvent(new DamageEvent(context, minion, damage));
+		context.fireGameEvent(new DamageEvent(context, minion, damage));
 		if (minion.hasTag(GameTag.ENRAGE_SPELL)) {
 			handleEnrage(minion);
 		}
@@ -184,14 +184,14 @@ public class GameLogic implements IGameLogic {
 			Spell deathrattleSpell = minion.getDeathrattle();
 			castSpell(owner.getId(), deathrattleSpell);
 		}
-		context.getTriggerManager().fireGameEvent(new KillEvent(context, minion));
-		context.getTriggerManager().removeTriggersAssociatedWith(minion.getReference());
+		context.fireGameEvent(new KillEvent(context, minion));
+		context.removeTriggersAssociatedWith(minion.getReference());
 	}
 
 	private void destroyWeapon(Weapon weapon) {
 		Player owner = context.getPlayer(weapon.getOwner());
 		owner.getHero().setWeapon(null);
-		context.getTriggerManager().removeTriggersAssociatedWith(weapon.getReference());
+		context.removeTriggersAssociatedWith(weapon.getReference());
 	}
 
 	@Override
@@ -222,7 +222,7 @@ public class GameLogic implements IGameLogic {
 		player.getHero().setTag(GameTag.ATTACK_BONUS, 0);
 		player.getHero().removeTag(GameTag.COMBO);
 		logger.debug("{} ends his turn.", player.getName());
-		context.getTriggerManager().fireGameEvent(new TurnEndEvent(context, player.getId()));
+		context.fireGameEvent(new TurnEndEvent(context, player.getId()));
 	}
 
 	@Override
@@ -239,7 +239,7 @@ public class GameLogic implements IGameLogic {
 		if (weapon.hasSpellTrigger()) {
 			SpellTrigger spellTrigger = weapon.getSpellTrigger();
 			spellTrigger.setHost(weapon);
-			context.getTriggerManager().addTrigger(spellTrigger);
+			context.addTrigger(spellTrigger);
 		}
 	}
 
@@ -255,7 +255,7 @@ public class GameLogic implements IGameLogic {
 		}
 
 		attacker.modifyTag(GameTag.NUMBER_OF_ATTACKS, -1);
-		context.getTriggerManager().fireGameEvent(new PhysicalAttackEvent(context, attacker, defender));
+		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, defender));
 	}
 
 	@Override
@@ -410,7 +410,7 @@ public class GameLogic implements IGameLogic {
 		player.getHand().remove(card);
 		player.getGraveyard().add(card);
 		player.getHero().modifyTag(GameTag.COMBO, +1);
-		context.getTriggerManager().fireGameEvent(new SpellCastedEvent(context, playerId));
+		context.fireGameEvent(new SpellCastedEvent(context, playerId));
 	}
 
 	private int getModifiedManaCost(Player player, Card card) {
@@ -468,7 +468,7 @@ public class GameLogic implements IGameLogic {
 			refreshAttacksPerRound(minion);
 			minion.removeTag(GameTag.SUMMONING_SICKNESS);
 		}
-		context.getTriggerManager().fireGameEvent(new TurnStartEvent(context, player.getId()));
+		context.fireGameEvent(new TurnStartEvent(context, player.getId()));
 	}
 
 	@Override
@@ -498,7 +498,7 @@ public class GameLogic implements IGameLogic {
 		if (minion.hasSpellTrigger()) {
 			SpellTrigger spellTrigger = minion.getSpellTrigger();
 			spellTrigger.setHost(minion);
-			context.getTriggerManager().addTrigger(spellTrigger);
+			context.addTrigger(spellTrigger);
 		}
 		if (minion.hasTag(GameTag.CHARGE)) {
 			minion.setTag(GameTag.NUMBER_OF_ATTACKS, minion.hasTag(GameTag.WINDFURY) ? 2 : 1);
@@ -506,7 +506,7 @@ public class GameLogic implements IGameLogic {
 			minion.setTag(GameTag.NUMBER_OF_ATTACKS, 0);
 		}
 
-		context.getTriggerManager().fireGameEvent(new SummonEvent(context, minion));
+		context.fireGameEvent(new SummonEvent(context, minion));
 	}
 
 	private List<Entity> toList(Entity entity) {

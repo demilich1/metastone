@@ -10,9 +10,9 @@ import javax.swing.WindowConstants;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanActionOptions;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
+@SuppressWarnings("serial")
 public class HumanTargetPromptDialog extends JDialog {
 	
 	private final GameAction action;

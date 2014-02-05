@@ -8,9 +8,11 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameResult;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.IGameLogic;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.TargetLogic;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerManager;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
@@ -135,9 +137,13 @@ public class GameContext implements Cloneable {
 	public GameResult getResult() {
 		return result;
 	}
+	
+	public void fireGameEvent(GameEvent gameEvent) {
+		triggerManager.fireGameEvent(gameEvent);
+	}
 
-	public TriggerManager getTriggerManager() {
-		return triggerManager;
+	public void removeTriggersAssociatedWith(EntityReference entityReference) {
+		triggerManager.removeTriggersAssociatedWith(entityReference);
 	}
 	
 	public int getTurn() {
@@ -255,5 +261,9 @@ public class GameContext implements Cloneable {
 		result.append("Turn: " + getTurn());
 
 		return result.toString();
+	}
+
+	public void addTrigger(SpellTrigger spellTrigger) {
+		triggerManager.addTrigger(spellTrigger);
 	}
 }
