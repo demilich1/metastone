@@ -49,5 +49,4 @@ public class HumanTargetPromptDialog extends JDialog {
 		});
 		return button;
 	}
-
 }

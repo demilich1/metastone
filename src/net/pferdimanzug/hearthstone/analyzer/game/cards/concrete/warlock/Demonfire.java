@@ -15,8 +15,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Demonfire extends SpellCard {
 
-	public Demonfire(String name, Rarity rarity, HeroClass classRestriction, int manaCost) {
-		super(name, rarity, classRestriction, manaCost);
+	public Demonfire() {
+		super("Demonfire", Rarity.COMMON, HeroClass.WARLOCK, 2);
 		setSpell(new DemonfireSpell());
 		setTargetRequirement(TargetSelection.MINIONS);
 	}

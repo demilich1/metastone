@@ -140,5 +140,4 @@ public class PlayModeUiFactory {
 		}
 		return new ImageIcon(PlayModePanel.class.getResource("/net/pferdimanzug/hearthstone/analyzer/resources/img/heroes/" + iconName + ".png"));
 	}
-
 }
