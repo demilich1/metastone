@@ -14,7 +14,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.logic.IGameLogic;
 
 public class GameContextVisualizable extends GameContext {
 	
-	private final HashMap<GameAction, List<GameEvent>> turnEvents = new HashMap<>();
+	private final HashMap<GameAction, List<GameEvent>> actionEvents = new HashMap<>();
 	private GameAction currentAction;
 
 	public GameContextVisualizable(Player player1, Player player2, IGameLogic logic) {
@@ -31,11 +31,11 @@ public class GameContextVisualizable extends GameContext {
 	}
 	
 	@Override
-	protected void onActionPerform(GameAction action) {
-		if (!turnEvents.containsKey(action)) {
-			turnEvents.put(action, new ArrayList<GameEvent>());
+	protected void onWillPerformAction(GameAction action) {
+		if (!actionEvents.containsKey(action)) {
+			actionEvents.put(action, new ArrayList<GameEvent>());
 		}
-		setCurrentAction(action);
+		currentAction = action;
 		ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_ACTION_PERFORMED, this);
 	}
 
@@ -44,15 +44,16 @@ public class GameContextVisualizable extends GameContext {
 		super.fireGameEvent(gameEvent);
 		
 		if (currentAction == null) {
+			System.out.println("Zwar GameEvent, aber action is NULL mann");
 			return;
 		}
 		
-		List<GameEvent> eventList = turnEvents.get(getCurrentAction());
+		List<GameEvent> eventList = actionEvents.get(currentAction);
 		eventList.add(gameEvent);
 	}
 	
-	public List<GameEvent> getEventsForTurn(int turn) {
-		return turnEvents.get(turn);
+	public List<GameEvent> getEventsForAction(GameAction action) {
+		return actionEvents.get(action);
 	}
 
 	public GameAction getCurrentAction() {

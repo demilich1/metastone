@@ -5,7 +5,7 @@ import javax.swing.ImageIcon;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 
 @SuppressWarnings("serial")
-class BattlecryActionEntry extends GameActionEntry {
+public class BattlecryActionEntry extends GameLogEntry {
 
 	private static final String ICON_PATH = "";
 

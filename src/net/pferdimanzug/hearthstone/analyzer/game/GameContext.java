@@ -158,7 +158,7 @@ public class GameContext implements Cloneable {
 	protected void onGameStateChanged() {	
 	}
 	
-	protected void onActionPerform(GameAction action) {
+	protected void onWillPerformAction(GameAction action) {
 		
 	}
 
@@ -182,7 +182,7 @@ public class GameContext implements Cloneable {
 		onGameStateChanged();
 		GameAction nextAction = player.getBehaviour().requestAction(this, player, logic.getValidActions(player.getId()));
 		while (nextAction != null) {
-			onActionPerform(nextAction);
+			onWillPerformAction(nextAction);
 			logic.performGameAction(player.getId(), nextAction);
 			onGameStateChanged();
 			if (gameDecided()) {
@@ -190,7 +190,7 @@ public class GameContext implements Cloneable {
 			}
 			nextAction = player.getBehaviour().requestAction(this, player, logic.getValidActions(player.getId()));
 		}
-		onActionPerform(new EndTurnAction());
+		onWillPerformAction(new EndTurnAction());
 		logic.endTurn(player.getId());
 		activePlayer = getOpponent(player);
 	}

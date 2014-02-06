@@ -5,7 +5,7 @@ import javax.swing.ImageIcon;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
 
-public class PlayCardActionEntry extends GameActionEntry {
+public class PlayCardActionEntry extends GameLogEntry {
 	
 	public PlayCardActionEntry(Player player, PlayCardAction playCardAction) {
 		ImageIcon icon = new ImageIcon(

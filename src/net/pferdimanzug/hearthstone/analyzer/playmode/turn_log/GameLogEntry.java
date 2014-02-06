@@ -9,11 +9,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 @SuppressWarnings("serial")
-public class GameActionEntry extends JPanel {
+public class GameLogEntry extends JPanel {
 	private JLabel iconLabel;
 	private JTextArea textArea;
 
-	public GameActionEntry() {
+	public GameLogEntry() {
 		FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT, 0, 4);
 		setLayout(flowLayout);
 		add(iconLabel = new JLabel());

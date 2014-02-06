@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PhysicalAttackAction;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
-public class PhysicalAttackActionEntry extends GameActionEntry {
+public class PhysicalAttackActionEntry extends GameLogEntry {
 	
 	public PhysicalAttackActionEntry(GameContext context, Player player, PhysicalAttackAction physicalAttackAction) {
 		ImageIcon icon = new ImageIcon(
