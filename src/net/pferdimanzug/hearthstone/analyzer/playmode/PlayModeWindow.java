@@ -22,7 +22,7 @@ public class PlayModeWindow extends JFrame {
 
 	public PlayModeWindow() {
 		setTitle("Hearthstone Analyzer");
-		setSize(1600, 900);
+		setSize(1280, 800);
 
 		// make tooltips appear instantly
 		ToolTipManager.sharedInstance().setInitialDelay(0);
@@ -36,7 +36,7 @@ public class PlayModeWindow extends JFrame {
 		
 		setLookAndFeel();
 
-		setResizable(false);
+		//setResizable(false);
 		setVisible(true);
 	}
 

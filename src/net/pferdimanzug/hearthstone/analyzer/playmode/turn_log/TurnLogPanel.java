@@ -1,7 +1,13 @@
 package net.pferdimanzug.hearthstone.analyzer.playmode.turn_log;
 
+import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
@@ -12,15 +18,29 @@ import net.pferdimanzug.hearthstone.analyzer.playmode.GameContextVisualizable;
 
 @SuppressWarnings("serial")
 public class TurnLogPanel extends JPanel {
-	
+
+	private final JPanel contentPanel;
+	private final List<JPanel> messages = new ArrayList<>();
+
 	public TurnLogPanel() {
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		contentPanel = new JPanel();
+		JScrollPane scrollPane = new JScrollPane(contentPanel);
+		setPreferredSize(new Dimension(200, 800));
+		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+		add(scrollPane);
 	}
-	
+
 	public void showActions(GameContextVisualizable context) {
-		add(getActionPanel(context));
+		contentPanel.removeAll();
+		messages.add(getActionPanel(context));
+		for (int i = messages.size() - 1; i >= 0; i--) {
+			JPanel message = messages.get(i);
+			contentPanel.add(message);
+		}
+		revalidate();
+		repaint();
 	}
-	
+
 	private JPanel getActionPanel(GameContextVisualizable context) {
 		Player player = context.getActivePlayer();
 		GameAction action = context.getCurrentAction();
