@@ -1,10 +1,11 @@
 package net.pferdimanzug.hearthstone.analyzer.playmode.turn_log;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -23,11 +24,14 @@ public class TurnLogPanel extends JPanel {
 	private final List<JPanel> messages = new ArrayList<>();
 
 	public TurnLogPanel() {
+		setLayout(new BorderLayout());
 		contentPanel = new JPanel();
+		setPreferredSize(new Dimension(200, 700));
 		JScrollPane scrollPane = new JScrollPane(contentPanel);
-		setPreferredSize(new Dimension(200, 800));
+		//scrollPane.setMaximumSize(new Dimension(200, 720));
 		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
-		add(scrollPane);
+		add(scrollPane, BorderLayout.CENTER);
+		//add(contentPanel);
 	}
 
 	public void showActions(GameContextVisualizable context) {
@@ -37,16 +41,16 @@ public class TurnLogPanel extends JPanel {
 			JPanel message = messages.get(i);
 			contentPanel.add(message);
 		}
-		revalidate();
-		repaint();
+		contentPanel.add(Box.createVerticalGlue());
+		
+		contentPanel.revalidate();
+		contentPanel.repaint();
 	}
 
 	private JPanel getActionPanel(GameContextVisualizable context) {
 		Player player = context.getActivePlayer();
 		GameAction action = context.getCurrentAction();
-		if (action == null) {
-			return new TurnEndActionEntry(player);
-		}
+		
 		switch (action.getActionType()) {
 		case HERO_POWER:
 			return new PlayCardActionEntry(player, (PlayCardAction) action);
@@ -58,6 +62,8 @@ public class TurnLogPanel extends JPanel {
 			return new PlayCardActionEntry(player, (PlayCardAction) action);
 		case SUMMON:
 			return new PlayCardActionEntry(player, (PlayCardAction) action);
+		case END_TURN:
+			return new TurnEndActionEntry(player);
 		case UNDEFINED:
 			break;
 		default:

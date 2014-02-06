@@ -9,6 +9,7 @@ import java.util.Set;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.border.Border;
 
 import net.miginfocom.swing.MigLayout;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
@@ -23,7 +24,7 @@ public class MinionTokenPanel extends JPanel {
 	private final JLabel attackLabel;
 	private final JLabel hpLabel;
 
-	public MinionTokenPanel(Minion minion) {
+	public MinionTokenPanel() {
 		setBorder(null);
 		setLayout(new MigLayout("", "[16!][80!][16!]", "[][40!][32!]"));
 
@@ -32,19 +33,26 @@ public class MinionTokenPanel extends JPanel {
 		nameArea.setLineWrap(true);
 		nameArea.setFont(new Font("Arial", Font.BOLD, 12));
 		nameArea.setEditable(false);
-		nameArea.setText(minion.getName());
+		nameArea.setText("<minion name>");
 		add(nameArea, "cell 1 1,width 80!,alignx center,aligny top");
 
-		attackLabel = new JLabel(String.valueOf(minion.getAttack()));
+		attackLabel = new JLabel("00");
 		attackLabel.setForeground(Color.BLACK);
 		attackLabel.setFont(new Font("Arial", Font.BOLD, 16));
 		attackLabel.setHorizontalTextPosition(JLabel.CENTER);
 		attackLabel.setVerticalTextPosition(JLabel.CENTER);
 		add(attackLabel, "cell 0 2,alignx center,aligny center");
 
-		hpLabel = new JLabel(String.valueOf(minion.getHp()));
+		hpLabel = new JLabel("00");
 		hpLabel.setFont(new Font("Arial", Font.BOLD, 16));
 		add(hpLabel, "cell 2 2,alignx center,aligny center");
+	}
+	
+	public void setMinion(Minion minion) {
+		nameArea.setText(minion.getName());
+		attackLabel.setText(String.valueOf(minion.getAttack()));
+		hpLabel.setText(String.valueOf(minion.getHp()));
+		setBorder(PlayModeUiFactory.createRarityBorder(minion.getSourceCard().getRarity()));
 	}
 
 	private static String getTagString(Minion minion) {

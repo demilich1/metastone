@@ -13,6 +13,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 
 @SuppressWarnings("serial")
 public class PlayModePanel extends JPanel {
@@ -26,6 +27,9 @@ public class PlayModePanel extends JPanel {
 	private JLabel p2ManaLabel;
 	private JPanel p1MinionPanel;
 	private JPanel p2MinionPanel;
+	
+	private MinionTokenPanel[] p1Minions = new MinionTokenPanel[GameLogic.MAX_MINIONS];
+	private MinionTokenPanel[] p2Minions = new MinionTokenPanel[GameLogic.MAX_MINIONS];
 	
 	/**
 	 * Create the panel.
@@ -80,6 +84,14 @@ public class PlayModePanel extends JPanel {
 		FlowLayout flowLayout = (FlowLayout) p2MinionPanel.getLayout();
 		flowLayout.setVgap(0);
 		p2Panel.add(p2MinionPanel, "cell 0 2,grow");
+		
+		for (int i = 0; i < GameLogic.MAX_MINIONS; i++) {
+			p1Minions[i] = new MinionTokenPanel();
+			p1MinionPanel.add(p1Minions[i]);
+			p2Minions[i] = new MinionTokenPanel();
+			p2MinionPanel.add(p2Minions[i]);
+		}
+		setVisible(false);
 	}
 	
 	public void update(GameContext context) {
@@ -87,12 +99,14 @@ public class PlayModePanel extends JPanel {
 		updatePlayerStatus(p2HeroLabel, p2HpLabel, p2ManaLabel, context.getPlayer2());
 		updateHandCardView(p1HandCardPanel, context.getPlayer1());
 		updateHandCardView(p2HandCardPanel, context.getPlayer2());
-		updateMinionView(p1MinionPanel, context.getPlayer1());
-		updateMinionView(p2MinionPanel, context.getPlayer2());
+		updateMinionView(p1Minions, context.getPlayer1());
+		updateMinionView(p2Minions, context.getPlayer2());
 		
+		setVisible(true);
 		if (context.gameDecided()) {
 			new GameResultDialog(context, context.getPlayer1());
 		}
+		
 		revalidate();
 		repaint();
 	}
@@ -104,10 +118,16 @@ public class PlayModePanel extends JPanel {
 		}
 	}
 	
-	private void updateMinionView(JPanel panel, Player player) {
-		panel.removeAll();
-		for (Minion minion : player.getMinions()) {
-			panel.add(PlayModeUiFactory.createMinionToken(minion));
+	private void updateMinionView(MinionTokenPanel[] tokenPanel, Player player) {
+		for (int i = 0; i < GameLogic.MAX_MINIONS; i++) {
+			if (i < player.getMinions().size()) {
+				Minion minion = player.getMinions().get(i);
+				tokenPanel[i].setMinion(minion);
+				tokenPanel[i].setVisible(true);
+			} else {
+				tokenPanel[i].setVisible(false);
+			}
+			
 		}
 	}
 	

@@ -18,7 +18,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
 public class PlayModeUiFactory {
 	
@@ -39,40 +38,6 @@ public class PlayModeUiFactory {
 		
 		cardPanel.setBorder(createRarityBorder(card.getRarity()));
 		return cardPanel;
-	}
-	
-	public static JPanel createMinionToken(Minion minion) {
-		JPanel minionTokenPanel = new MinionTokenPanel(minion);
-		/*
-		JPanel panel = new JPanel(new BorderLayout());
-		panel.setPreferredSize(new Dimension(80, 80));
-		JLabel nameLabel = new JLabel(minion.getName());
-		nameLabel.setFont(new Font("Arial", Font.BOLD, 12));
-		nameLabel.setHorizontalAlignment(JLabel.CENTER);
-		panel.add(nameLabel, BorderLayout.CENTER);
-		
-		JPanel bottomPanel = new JPanel(null);
-		
-		final int numberLabelSize = 16;
-		JLabel attackLabel = new JLabel(minion.getAttack() + "");
-		attackLabel.setLocation(8, bottomPanel.getHeight()- 2 * numberLabelSize);
-		attackLabel.setOpaque(true);
-		attackLabel.setBackground(Color.YELLOW);
-		attackLabel.setFont(new Font("Arial", Font.BOLD, 14));
-		
-		JLabel hpLabel = new JLabel(minion.getHp() + "");
-		hpLabel.setHorizontalAlignment(JLabel.RIGHT);
-		hpLabel.setOpaque(true);
-		hpLabel.setBackground(Color.RED);
-		hpLabel.setFont(new Font("Arial", Font.BOLD, 14));
-		
-		bottomPanel.add(attackLabel);
-		bottomPanel.add(hpLabel);
-		panel.add(bottomPanel, BorderLayout.SOUTH);
-		panel.setBorder(createRarityBorder(minion.getSourceCard().getRarity()));
-		*/
-		minionTokenPanel.setBorder(createRarityBorder(minion.getSourceCard().getRarity()));
-		return minionTokenPanel;
 	}
 	
 	public static Border createRarityBorder(Rarity rarity) {

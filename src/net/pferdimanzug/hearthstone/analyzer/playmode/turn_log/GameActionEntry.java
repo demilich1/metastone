@@ -11,24 +11,27 @@ import javax.swing.JTextArea;
 @SuppressWarnings("serial")
 public class GameActionEntry extends JPanel {
 	private JLabel iconLabel;
-	private JTextArea textLabel;
+	private JTextArea textArea;
 
 	public GameActionEntry() {
-		setLayout(new FlowLayout());
+		FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT, 0, 4);
+		setLayout(flowLayout);
 		add(iconLabel = new JLabel());
-		textLabel = new JTextArea();
-		textLabel.setWrapStyleWord(true);
-		textLabel.setLineWrap(true);
-		textLabel.setFont(new Font("Arial", Font.PLAIN, 10));
-		textLabel.setEditable(false);
-		add(textLabel);
+		textArea = new JTextArea();
+		textArea.setWrapStyleWord(true);
+		textArea.setLineWrap(true);
+		textArea.setFont(new Font("Arial", Font.PLAIN, 10));
+		textArea.setEditable(false);
+		add(textArea);
 	}
-	
+
 	protected void setIcon(Icon icon) {
 		iconLabel.setIcon(icon);
+		setMaximumSize(getPreferredSize());
 	}
-	
+
 	protected void setText(String text) {
-		textLabel.setText(text);
+		textArea.setText(text);
+		setMaximumSize(getPreferredSize());
 	}
 }

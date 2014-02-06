@@ -42,7 +42,6 @@ public class HumanActionPromptDialog extends JDialog {
 		}
 		JButton endTurnButton = createActionButton(actionPrompt.getContext(), null);
 		add(endTurnButton);
-		setModal(true);
 		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		pack();
 		setLocation(owner.getWidth(), owner.getY());

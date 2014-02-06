@@ -3,6 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.game;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.pferdimanzug.hearthstone.analyzer.game.actions.EndTurnAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
@@ -189,6 +190,7 @@ public class GameContext implements Cloneable {
 			}
 			nextAction = player.getBehaviour().requestAction(this, player, logic.getValidActions(player.getId()));
 		}
+		onActionPerform(new EndTurnAction());
 		logic.endTurn(player.getId());
 		activePlayer = getOpponent(player);
 	}
