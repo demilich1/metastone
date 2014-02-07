@@ -3,6 +3,8 @@ package net.pferdimanzug.hearthstone.analyzer;
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
@@ -77,11 +79,21 @@ public class HearthstoneAnalyzer extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		primaryStage.setTitle("Professor Hearthstone");
+		
 		ApplicationFacade facade = (ApplicationFacade) ApplicationFacade.getInstance();
 		HearthstoneAnalyzer instance = new HearthstoneAnalyzer();
 		facade.startUp(instance);
-		facade.sendNotification(GameNotification.STAGE_CREATED, primaryStage);
-		instance.launchHumanDebugGame();
+		
+		
+		Pane canvas = new Pane();
+		Scene scene = new Scene(canvas, 400, 400);
+		primaryStage.setScene(scene);
+		facade.sendNotification(GameNotification.CANVAS_CREATED, canvas);
+		primaryStage.show();
+		
+		//instance.launchHumanDebugGame();
+		
 		
 		/*
 		 * try { DevCheckCardCompleteness.cardListFromImages(

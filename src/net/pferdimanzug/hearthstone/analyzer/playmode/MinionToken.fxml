@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.*?>
+
+<fx:root type="BorderPane" prefHeight="160.0" prefWidth="120.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <bottom>
+    <BorderPane prefHeight="20.0" prefWidth="120.0">
+      <left>
+        <StackPane prefHeight="-1.0" prefWidth="-1.0">
+          <children>
+            <ImageView fitHeight="33.0" fitWidth="32.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" y="0.0">
+              <image>
+                <Image url="@../resources/img/common/attack_value_icon.png" />
+              </image>
+            </ImageView>
+            <Label id="outlined_score" fx:id="attack" alignment="BASELINE_CENTER" contentDisplay="CENTER" disable="false" text="0" textAlignment="LEFT" wrapText="false" />
+          </children>
+        </StackPane>
+      </left>
+      <right>
+        <StackPane prefHeight="-1.0" prefWidth="-1.0">
+          <children>
+            <ImageView fitHeight="30.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../resources/img/common/health_value_icon.png" />
+              </image>
+            </ImageView>
+            <Label id="outlined_score" fx:id="hp" alignment="BASELINE_CENTER" text="0" />
+          </children>
+        </StackPane>
+      </right>
+    </BorderPane>
+  </bottom>
+  <center>
+    <Label fx:id="name" labelFor="$name" text="&lt;minion name&gt;" textAlignment="LEFT" textOverrun="ELLIPSIS" wrapText="true">
+      <font>
+        <Font name="Arial Bold" size="12.0" />
+      </font>
+    </Label>
+  </center>
+  <stylesheets>
+    <URL value="@gameboard.css" />
+  </stylesheets>
+</fx:root>

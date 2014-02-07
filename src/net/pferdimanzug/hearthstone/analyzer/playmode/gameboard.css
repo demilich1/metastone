@@ -1,0 +1,5 @@
+#outlined_score {
+    -fx-font: bold 16pt "Arial";
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(one-pass-box, black, 6, 0.9, 1, 1);
+}

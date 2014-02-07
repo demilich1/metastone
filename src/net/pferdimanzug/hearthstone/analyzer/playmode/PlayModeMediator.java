@@ -3,13 +3,12 @@ package net.pferdimanzug.hearthstone.analyzer.playmode;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
+import javafx.scene.layout.Pane;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
-import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanActionOptions;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanTargetOptions;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.HarvestGolem;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import de.pferdimanzug.nittygrittymvc.Mediator;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
@@ -17,24 +16,42 @@ public class PlayModeMediator extends Mediator<GameNotification> {
 
 	public static final String NAME = "PlayModeMediator";
 
-	private final PlayModeWindow view;
+	private final PlayModePane view;
 
 	public PlayModeMediator() {
 		super(NAME);
-		view = new PlayModeWindow();
+		view = new PlayModePane();
+	}
+	
+	@Override
+	public List<GameNotification> listNotificationInterests() {
+		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
+		notificationInterests.add(GameNotification.CANVAS_CREATED);
+		notificationInterests.add(GameNotification.GAME_STATE_UPDATE);
+		notificationInterests.add(GameNotification.GAME_ACTION_PERFORMED);
+		notificationInterests.add(GameNotification.HUMAN_PROMPT_FOR_ACTION);
+		notificationInterests.add(GameNotification.HUMAN_PROMPT_FOR_TARGET);
+		return notificationInterests;
 	}
 
 	@Override
 	public void handleNotification(INotification<GameNotification> notification) {
 		switch (notification.getId()) {
+		case CANVAS_CREATED:
+			Pane parent = (Pane) notification.getBody();
+			parent.getChildren().add(view);
+			MinionToken minionToken = new MinionToken();
+			parent.getChildren().add(minionToken);
+			minionToken.setMinion(new HarvestGolem().summon());
+			break;
 		case GAME_STATE_UPDATE:
-			view.update((GameContext) notification.getBody());
+			//view.update((GameContext) notification.getBody());
 			break;
 		case GAME_ACTION_PERFORMED:
-			view.updateTurnLog((GameContext) notification.getBody());
+			//view.updateTurnLog((GameContext) notification.getBody());
 			break;
 		case HUMAN_PROMPT_FOR_ACTION:
-			new HumanActionPromptDialog(view, (HumanActionOptions) notification.getBody());
+			//new HumanActionPromptDialog(view, (HumanActionOptions) notification.getBody());
 			break;
 		case HUMAN_PROMPT_FOR_TARGET:
 			HumanTargetOptions targetOptions =(HumanTargetOptions) notification.getBody();
@@ -52,19 +69,11 @@ public class PlayModeMediator extends Mediator<GameNotification> {
 			return;
 		}
 		// open new window for target selection
-		Entity selectedTarget = (Entity) JOptionPane.showInputDialog(view, "Select a target", "Select a target",
-				JOptionPane.PLAIN_MESSAGE, null, targetOptions.getAction().getValidTargets().toArray(), null);
-		targetOptions.getBehaviour().setSelectedTarget(selectedTarget);
+//		Entity selectedTarget = (Entity) JOptionPane.showInputDialog(view, "Select a target", "Select a target",
+//				JOptionPane.PLAIN_MESSAGE, null, targetOptions.getAction().getValidTargets().toArray(), null);
+//		targetOptions.getBehaviour().setSelectedTarget(selectedTarget);
 	}
 
-	@Override
-	public List<GameNotification> listNotificationInterests() {
-		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
-		notificationInterests.add(GameNotification.GAME_STATE_UPDATE);
-		notificationInterests.add(GameNotification.GAME_ACTION_PERFORMED);
-		notificationInterests.add(GameNotification.HUMAN_PROMPT_FOR_ACTION);
-		notificationInterests.add(GameNotification.HUMAN_PROMPT_FOR_TARGET);
-		return notificationInterests;
-	}
+	
 
 }
