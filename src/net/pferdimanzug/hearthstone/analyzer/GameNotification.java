@@ -2,6 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer;
 
 public enum GameNotification {
 	APPLICATION_STARTUP,
+	STAGE_CREATED,
 	START_GAME,
 	GAME_STATE_UPDATE,
 	GAME_ACTION_PERFORMED,

@@ -2,6 +2,9 @@ package net.pferdimanzug.hearthstone.analyzer.playmode.turn_log;
 
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentListener;
 
 import javax.swing.Icon;
 import javax.swing.JLabel;
@@ -17,7 +20,7 @@ public class GameLogEntry extends JPanel {
 		FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT, 0, 4);
 		setLayout(flowLayout);
 		add(iconLabel = new JLabel());
-		textArea = new JTextArea();
+		textArea = new JTextArea(3, 0);
 		textArea.setWrapStyleWord(true);
 		textArea.setLineWrap(true);
 		textArea.setFont(new Font("Arial", Font.PLAIN, 10));
@@ -27,11 +30,12 @@ public class GameLogEntry extends JPanel {
 
 	protected void setIcon(Icon icon) {
 		iconLabel.setIcon(icon);
-		setMaximumSize(getPreferredSize());
+
 	}
 
 	protected void setText(String text) {
 		textArea.setText(text);
+		textArea.validate();
 		setMaximumSize(getPreferredSize());
 	}
 }

@@ -44,12 +44,12 @@ public class GameContextVisualizable extends GameContext {
 		super.fireGameEvent(gameEvent);
 		
 		if (currentAction == null) {
-			System.out.println("Zwar GameEvent, aber action is NULL mann");
 			return;
 		}
 		
 		List<GameEvent> eventList = actionEvents.get(currentAction);
 		eventList.add(gameEvent);
+		System.out.println("Adding an event for action " + currentAction);
 	}
 	
 	public List<GameEvent> getEventsForAction(GameAction action) {

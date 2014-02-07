@@ -21,5 +21,6 @@
 			<attribute name="javadoc_location" value="file:/C:/projects/java/hs_sim/lib/cloning-1.9.0/doc/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

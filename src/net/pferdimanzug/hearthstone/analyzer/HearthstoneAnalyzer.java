@@ -2,40 +2,24 @@ package net.pferdimanzug.hearthstone.analyzer;
 
 import java.io.IOException;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.DebugDecks;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.MinMaxBehaviour;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.PlayRandomBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.GurubashiBerserker;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Guldan;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Thrall;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Valeera;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 import net.pferdimanzug.hearthstone.analyzer.playmode.GameContextVisualizable;
 
-public class HearthstoneAnalyzer {
+public class HearthstoneAnalyzer extends Application {
 
 	public static void main(String[] args) {
-		ApplicationFacade facade = (ApplicationFacade) ApplicationFacade.getInstance();
-		HearthstoneAnalyzer instance = new HearthstoneAnalyzer();
-		facade.startUp(instance);
-		instance.launchHumanDebugGame();
-
-		/*
-		 * try { DevCheckCardCompleteness.cardListFromImages(
-		 * "D:\\projects\\images\\hearthstone\\cards\\");
-		 * //DevCheckCardCompleteness.compareClassesWithCardList(
-		 * "D:\\projects\\java\\HearthstoneAnalyzer\\src\\net\\pferdimanzug\\hearthstone\\analyzer\\game\\cards\\concrete"
-		 * ); } catch (IOException e) { e.printStackTrace(); }
-		 */
-
+		launch(args);
 	}
 	
 	private void launchHumanDebugGame() {
@@ -89,6 +73,23 @@ public class HearthstoneAnalyzer {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		ApplicationFacade facade = (ApplicationFacade) ApplicationFacade.getInstance();
+		HearthstoneAnalyzer instance = new HearthstoneAnalyzer();
+		facade.startUp(instance);
+		facade.sendNotification(GameNotification.STAGE_CREATED, primaryStage);
+		instance.launchHumanDebugGame();
+		
+		/*
+		 * try { DevCheckCardCompleteness.cardListFromImages(
+		 * "D:\\projects\\images\\hearthstone\\cards\\");
+		 * //DevCheckCardCompleteness.compareClassesWithCardList(
+		 * "D:\\projects\\java\\HearthstoneAnalyzer\\src\\net\\pferdimanzug\\hearthstone\\analyzer\\game\\cards\\concrete"
+		 * ); } catch (IOException e) { e.printStackTrace(); }
+		 */
 	}
 
 }

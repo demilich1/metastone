@@ -25,6 +25,7 @@ public class TurnLogPanel extends JPanel {
 
 	private final JPanel contentPanel;
 	private final List<JPanel> messages = new ArrayList<>();
+	private GameLogEntry actionEntry;
 
 	public TurnLogPanel() {
 		setLayout(new BorderLayout());
@@ -36,22 +37,34 @@ public class TurnLogPanel extends JPanel {
 		add(scrollPane, BorderLayout.CENTER);
 		// add(contentPanel);
 	}
+	
+	public void nextAction(GameContextVisualizable context) {
+		if (context.getCurrentAction() == null) {
+			return;
+		}
+		this.actionEntry = getActionEntry(context);
+	}
 
-	public void showActions(GameContextVisualizable context) {
+	public void showEvents(GameContextVisualizable context) {
+		if (context.getCurrentAction() == null) {
+			return;
+		}
 		contentPanel.removeAll();
-		messages.add(getActionEntry(context));
+		
 		for (GameEvent gameEvent : context.getEventsForAction(context.getCurrentAction())) {
+			System.out.println("Found event!");
 			GameLogEntry eventEntry = getEventEntry(gameEvent);
 			if (eventEntry == null) {
 				continue;
 			}
 			messages.add(eventEntry);
 		}
+		messages.add(actionEntry);
 		for (int i = messages.size() - 1; i >= 0; i--) {
 			JPanel message = messages.get(i);
 			contentPanel.add(message);
 		}
-		contentPanel.add(Box.createVerticalGlue());
+		//contentPanel.add(Box.createVerticalGlue());
 
 		contentPanel.revalidate();
 		contentPanel.repaint();
@@ -84,6 +97,8 @@ public class TurnLogPanel extends JPanel {
 	}
 
 	private GameLogEntry getEventEntry(GameEvent gameEvent) {
+		return new DebugEventEntry(gameEvent);
+		/*
 		switch (gameEvent.getEventType()) {
 		case DAMAGE:
 			return new DamageEventEntry((DamageEvent) gameEvent);
@@ -105,6 +120,7 @@ public class TurnLogPanel extends JPanel {
 			break;
 		}
 		return null;
+		*/
 	}
 
 }
