@@ -3,6 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.playmode;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.application.Platform;
 import javafx.scene.layout.Pane;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanTargetOptions;
@@ -35,17 +36,19 @@ public class PlayModeMediator extends Mediator<GameNotification> {
 	}
 
 	@Override
-	public void handleNotification(INotification<GameNotification> notification) {
+	public void handleNotification(final INotification<GameNotification> notification) {
 		switch (notification.getId()) {
 		case CANVAS_CREATED:
 			Pane parent = (Pane) notification.getBody();
 			parent.getChildren().add(view);
-			MinionToken minionToken = new MinionToken();
-			parent.getChildren().add(minionToken);
-			minionToken.setMinion(new HarvestGolem().summon());
 			break;
 		case GAME_STATE_UPDATE:
-			//view.update((GameContext) notification.getBody());
+			 Platform.runLater(new Runnable() {
+                 @Override public void run() {
+                	 view.updateGameState((GameContextVisualizable) notification.getBody());
+                 }
+             });
+			
 			break;
 		case GAME_ACTION_PERFORMED:
 			//view.updateTurnLog((GameContext) notification.getBody());

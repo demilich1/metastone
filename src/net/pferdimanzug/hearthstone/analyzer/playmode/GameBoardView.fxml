@@ -1,34 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
-<?import java.util.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
 
-<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<fx:root type="BorderPane" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <bottom>
+    <BorderPane prefHeight="-1.0" prefWidth="-1.0">
+      <bottom>
+        <HBox fx:id="p1CardPane" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="4.0" />
+      </bottom>
+      <center>
+        <VBox fx:id="p1HeroAnchor" alignment="CENTER" fillWidth="false" prefHeight="-1.0" prefWidth="-1.0" />
+      </center>
+    </BorderPane>
+  </bottom>
   <center>
-    <SplitPane dividerPositions="0.5" focusTraversable="true" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
-      <items>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-          <children>
-            <BorderPane id="" layoutX="-1.0" layoutY="0.0" prefHeight="200.0" prefWidth="600.0">
-              <top>
-                <HBox id="" prefHeight="100.0" prefWidth="200.0" />
-              </top>
-            </BorderPane>
-          </children>
-        </AnchorPane>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-          <children>
-            <BorderPane id="" layoutX="-1.0" layoutY="-2.0" prefHeight="200.0" prefWidth="600.0">
-              <bottom>
-                <HBox id="" prefHeight="100.0" prefWidth="200.0" />
-              </bottom>
-            </BorderPane>
-          </children>
-        </AnchorPane>
-      </items>
-    </SplitPane>
+    <BorderPane prefHeight="200.0" prefWidth="200.0">
+      <bottom>
+        <HBox fx:id="p1MinionPane" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
+      </bottom>
+      <top>
+        <HBox fx:id="p2MinionPane" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
+      </top>
+    </BorderPane>
   </center>
-</BorderPane>
+  <top>
+    <BorderPane prefHeight="-1.0" prefWidth="-1.0">
+      <center>
+        <VBox fx:id="p2HeroAnchor" alignment="CENTER" fillWidth="false" prefHeight="-1.0" prefWidth="-1.0" BorderPane.alignment="CENTER" />
+      </center>
+      <top>
+        <HBox fx:id="p2CardPane" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="4.0" />
+      </top>
+    </BorderPane>
+  </top>
+</fx:root>

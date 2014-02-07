@@ -6,8 +6,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -21,8 +19,11 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 
 public class PlayModeUiFactory {
 	
-	private PlayModeUiFactory() {}
-	
+	private static final String RESOURCE_PATH = "/net/pferdimanzug/hearthstone/analyzer/resources";
+
+	private PlayModeUiFactory() {
+	}
+
 	public static JComponent createHandCard(Card card, Player player) {
 		JPanel cardPanel = new JPanel(new BorderLayout());
 		cardPanel.setPreferredSize(new Dimension(100, 110));
@@ -35,11 +36,11 @@ public class PlayModeUiFactory {
 		JLabel costLabel = new JLabel(card.getManaCost(player) + "");
 		costLabel.setAlignmentX(JComponent.LEFT_ALIGNMENT);
 		cardPanel.add(costLabel, BorderLayout.NORTH);
-		
+
 		cardPanel.setBorder(createRarityBorder(card.getRarity()));
 		return cardPanel;
 	}
-	
+
 	public static Border createRarityBorder(Rarity rarity) {
 		Color color;
 		int thickness = 2;
@@ -65,44 +66,44 @@ public class PlayModeUiFactory {
 			break;
 		}
 		return BorderFactory.createLineBorder(color, thickness);
-		
+
 	}
-	
-	public static Icon createIcon(Hero hero) {
-		String iconName = null;
+
+	public static String getIconUrl(Hero hero) {
+		String iconName = RESOURCE_PATH + "/img/heroes/";
 		switch (hero.getHeroClass()) {
 		case DRUID:
-			iconName = "malfurion";
+			iconName += "malfurion";
 			break;
 		case HUNTER:
-			iconName = "rexxar";
+			iconName += "rexxar";
 			break;
 		case MAGE:
-			iconName = "jaina";
+			iconName += "jaina";
 			break;
 		case PALADIN:
-			iconName = "paladin";
+			iconName += "paladin";
 			break;
 		case PRIEST:
-			iconName = "anduin";
+			iconName += "anduin";
 			break;
 		case ROGUE:
-			iconName = "valeera";
+			iconName += "valeera";
 			break;
 		case SHAMAN:
-			iconName = "thrall";
+			iconName += "thrall";
 			break;
 		case WARLOCK:
-			iconName = "guldan";
+			iconName += "guldan";
 			break;
 		case WARRIOR:
-			iconName = "garrosh";
+			iconName += "garrosh";
 			break;
 		default:
 		case ANY:
 			break;
-		
+
 		}
-		return new ImageIcon(PlayModePanel.class.getResource("/net/pferdimanzug/hearthstone/analyzer/resources/img/heroes/" + iconName + ".png"));
+		return iconName + ".png";
 	}
 }

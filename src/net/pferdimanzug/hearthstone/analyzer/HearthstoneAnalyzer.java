@@ -82,17 +82,25 @@ public class HearthstoneAnalyzer extends Application {
 		primaryStage.setTitle("Professor Hearthstone");
 		
 		ApplicationFacade facade = (ApplicationFacade) ApplicationFacade.getInstance();
-		HearthstoneAnalyzer instance = new HearthstoneAnalyzer();
+		final HearthstoneAnalyzer instance = new HearthstoneAnalyzer();
 		facade.startUp(instance);
 		
 		
 		Pane canvas = new Pane();
-		Scene scene = new Scene(canvas, 400, 400);
+		Scene scene = new Scene(canvas);
 		primaryStage.setScene(scene);
 		facade.sendNotification(GameNotification.CANVAS_CREATED, canvas);
 		primaryStage.show();
 		
-		//instance.launchHumanDebugGame();
+		Thread t = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				instance.launchHumanDebugGame();
+			}
+		});
+		t.start();
+		
 		
 		
 		/*

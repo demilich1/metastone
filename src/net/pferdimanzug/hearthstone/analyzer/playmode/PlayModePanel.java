@@ -132,7 +132,8 @@ public class PlayModePanel extends JPanel {
 	}
 	
 	private void updatePlayerStatus(JLabel iconLabel, JLabel hpLabel, JLabel manaLabel, Player player) {
-		Icon heroIcon = PlayModeUiFactory.createIcon(player.getHero());
+		//Icon heroIcon = PlayModeUiFactory.createIcon(player.getHero());
+		Icon heroIcon = null;
 		iconLabel.setIcon(heroIcon);
 		String hpAndArmorString = String.format("<html>Hp: %d<br/>Armor: %d</html>", player.getHero().getHp(), player.getHero().getArmor());
 		hpLabel.setText(hpAndArmorString);

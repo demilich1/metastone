@@ -62,6 +62,10 @@ public class CardCollection implements Iterable<Card>, Cloneable {
 	public Card peekFirst() {
 		return cards.get(0);
 	}
+	
+	public Card get(int index) {
+		return cards.get(index);
+	}
 
 	public boolean remove(Card card) {
 		return cards.remove(card);

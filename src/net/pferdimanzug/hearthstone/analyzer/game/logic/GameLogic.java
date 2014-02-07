@@ -40,6 +40,7 @@ public class GameLogic implements IGameLogic {
 
 	public static Logger logger = LoggerFactory.getLogger(GameLogic.class);
 
+	public static final int MAX_PLAYERS = 2;
 	public static final int MAX_MINIONS = 7;
 	public static final int MAX_HAND_CARDS = 10;
 	public static final int MAX_HERO_HP = 30;

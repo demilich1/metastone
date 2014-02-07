@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<fx:root type="BorderPane" id="card_border" prefHeight="120.0" prefWidth="80.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <center>
+    <Label fx:id="name" alignment="CENTER" text="&lt;card name&gt;" wrapText="true" BorderPane.alignment="CENTER">
+      <font>
+        <Font name="Arial Bold" size="12.0" />
+      </font>
+    </Label>
+  </center>
+  <stylesheets>
+    <URL value="@gameboard.css" />
+  </stylesheets>
+  <top>
+    <Label id="outlined_score" fx:id="manacost" alignment="TOP_LEFT" styleClass="outlined_score" text="0" BorderPane.alignment="TOP_LEFT" />
+  </top>
+</fx:root>

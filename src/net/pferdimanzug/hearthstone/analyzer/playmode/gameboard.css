@@ -3,3 +3,9 @@
     -fx-text-fill: white;
     -fx-effect: dropshadow(one-pass-box, black, 6, 0.9, 1, 1);
 }
+
+#card_border {
+	 -fx-border-color: black ;
+	 -fx-border-style: solid ;
+	 -fx-border-width: 1;
+}

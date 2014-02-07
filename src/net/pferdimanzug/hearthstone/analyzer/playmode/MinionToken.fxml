@@ -26,9 +26,9 @@
       <right>
         <StackPane prefHeight="-1.0" prefWidth="-1.0">
           <children>
-            <ImageView fitHeight="30.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="30.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateY="-2.0">
               <image>
-                <Image url="@../resources/img/common/health_value_icon.png" />
+                <Image url="@../resources/data/img/common/health_value_icon.png" />
               </image>
             </ImageView>
             <Label id="outlined_score" fx:id="hp" alignment="BASELINE_CENTER" text="0" />
