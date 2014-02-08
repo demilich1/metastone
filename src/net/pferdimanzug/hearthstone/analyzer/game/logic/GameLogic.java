@@ -219,7 +219,6 @@ public class GameLogic implements IGameLogic {
 	@Override
 	public void endTurn(int playerId) {
 		Player player = context.getPlayer(playerId);
-		player.getHero().setTag(GameTag.ATTACK_BONUS, 0);
 		player.getHero().removeTag(GameTag.COMBO);
 		logger.debug("{} ends his turn.", player.getName());
 		context.fireGameEvent(new TurnEndEvent(context, player.getId()));

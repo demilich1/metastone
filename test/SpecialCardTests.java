@@ -6,13 +6,16 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PhysicalAttackAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.SavageRoar;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.ArcaneExplosion;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.FaerieDragon;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.GurubashiBerserker;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.OasisSnapjaw;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Malfurion;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -95,6 +98,41 @@ public class SpecialCardTests extends TestBase {
 		context.getLogic().performGameAction(mage.getId(), arcaneExplosionCard.play());
 		// hp should been affected after playing area of effect spell
 		Assert.assertNotEquals(faerieDragonHp, elusiveOne.getHp());
+	}
+	
+	@Test
+	public void testSavageRoar() {
+		GameContext context = createContext(new Malfurion(), new Garrosh());
+		Player player = context.getPlayer1();
+		Hero druid = player.getHero();
+		
+		player.setMana(10);
+		Player warrior = context.getPlayer2();
+		warrior.setMana(10);
+
+		MinionCard devMonsterCard = new DevMonster(1, 1);
+		context.getLogic().receiveCard(player.getId(), devMonsterCard);
+		context.getLogic().performGameAction(player.getId(), devMonsterCard.play());
+		
+		Entity minion = getSingleMinion(player.getMinions());
+		
+		context.getLogic().performGameAction(player.getId(), druid.getHeroPower().play());
+		Assert.assertEquals(druid.getAttack(), 1);
+		Assert.assertEquals(minion.getAttack(), 1);
+		
+		Card savageRoar = new SavageRoar();
+		context.getLogic().receiveCard(player.getId(), savageRoar);
+		context.getLogic().performGameAction(player.getId(), savageRoar.play());
+		Assert.assertEquals(druid.getAttack(), 3);
+		Assert.assertEquals(minion.getAttack(), 3);
+		
+		context.getLogic().endTurn(player.getId());
+		Assert.assertEquals(druid.getAttack(), 0);
+		Assert.assertEquals(minion.getAttack(), 1);
+		
+		context.getLogic().endTurn(player.getId());
+		Assert.assertEquals(druid.getAttack(), 0);
+		Assert.assertEquals(minion.getAttack(), 1);
 	}
 	
 }

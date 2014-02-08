@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
@@ -188,6 +189,20 @@ public class GameBoardView extends BorderPane {
 		
 		updateMinionTokens(context.getPlayer1(), p1Minions);
 		updateMinionTokens(context.getPlayer2(), p2Minions);
+		
+		checkForWinner(context);
+	}
+	
+	private void checkForWinner(GameContext context) {
+		if (context.gameDecided()) {
+			if (context.getWinner() == context.getPlayer1()) {
+				centerMessageLabel.setStyle("-fx-font-size: 48; -fx-text-fill: green;");
+				setCenterMessage("You won!!!");
+			} else {
+				centerMessageLabel.setStyle("-fx-font-size: 48; -fx-text-fill: red;");
+				setCenterMessage("You lost :(");
+			}
+		}
 	}
 	
 	private void updateHandCards(Player player, HandCard[] handCards) {

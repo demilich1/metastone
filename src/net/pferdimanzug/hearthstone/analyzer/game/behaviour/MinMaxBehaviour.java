@@ -92,7 +92,7 @@ public class MinMaxBehaviour implements IBehaviour {
 		GameAction bestAction = null;
 		EntityReference bestTarget = null;
 		int bestScore = calculateGameStateScore(context, player.getId());
-		logger.debug("Current game state has a score of {} and btw this has hashCode {}", bestScore, hashCode());
+		logger.debug("Current game state has a score of {}", bestScore, hashCode());
 		for (GameAction gameAction : validActions) {
 			if (gameAction.getValidTargets() == null) {
 				GameContext simulationResult = simulateAction(context, player, gameAction, null);

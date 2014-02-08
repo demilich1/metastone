@@ -15,10 +15,17 @@ public class SpellTrigger implements Cloneable {
 	private GameEventTrigger trigger;
 	private Spell spell;
 	private EntityReference hostReference;
+	private final boolean oneTime;
+	private boolean expired;
 
 	public SpellTrigger(GameEventTrigger trigger, Spell spell) {
+		this(trigger, spell, false);
+	}
+	
+	public SpellTrigger(GameEventTrigger trigger, Spell spell, boolean oneTime) {
 		this.trigger = trigger;
 		this.spell = spell;
+		this.oneTime = oneTime;
 	}
 
 	public SpellTrigger clone() {
@@ -53,12 +60,15 @@ public class SpellTrigger implements Cloneable {
 			throw e;
 		}
 
-		if (trigger.fire(event, host)) {
+		if (!expired && trigger.fire(event, host)) {
 			if (!spell.hasPredefinedTarget()) {
 				spell.setTarget(hostReference);
 			}
 			
 			event.getGameContext().getLogic().castSpell(ownerId, spell);
+			if (oneTime) {
+				expired = true;
+			}
 		}
 	}
 
@@ -69,6 +79,10 @@ public class SpellTrigger implements Cloneable {
 
 	public void setOwner(int playerIndex) {
 		trigger.setOwner(playerIndex);
+	}
+
+	public boolean isExpired() {
+		return expired;
 	}
 
 }

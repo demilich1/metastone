@@ -6,12 +6,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.AddSpellTriggerSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnEndTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class AbusiveSergeant extends MinionCard {
@@ -25,8 +20,9 @@ public class AbusiveSergeant extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion abusiveSergeant = createMinion();
-		SpellTrigger endBuffTrigger = new SpellTrigger(new TurnEndTrigger(), new BuffSpell(-ATTACK_BONUS));
-		Spell battlecrySpell = new MetaSpell(new BuffSpell(+ATTACK_BONUS), new AddSpellTriggerSpell(endBuffTrigger));
+		
+		BuffSpell battlecrySpell = new BuffSpell(+ATTACK_BONUS);
+		battlecrySpell.setTemporary(true);
 		Battlecry battlecryAbusive = Battlecry.createBattlecry(battlecrySpell, TargetSelection.MINIONS);
 		abusiveSergeant.setTag(GameTag.BATTLECRY, battlecryAbusive);
 		return abusiveSergeant;

@@ -1,6 +1,4 @@
 - adjacent auras are not implemented
 - overload mechanic not implemented
-- all temporary buffs (Savage Roar, Bloodlust, etc) do not work correctly. They are applied, removed next turn and removed again each turn that follows
 
 Class specific:
-- Rockbiter is not implemented correctly (lasts forever)
