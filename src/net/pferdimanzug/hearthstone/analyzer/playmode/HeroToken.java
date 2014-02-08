@@ -15,6 +15,11 @@ public class HeroToken extends GameToken {
 	private Label hpLabel;
 	@FXML
 	private Label manaLabel;
+	@FXML
+	private Label armorLabel;
+
+	@FXML
+	private ImageView armorIcon;
 
 	@FXML
 	private ImageView portrait;
@@ -35,6 +40,14 @@ public class HeroToken extends GameToken {
 		heroPowerIcon.setImage(heroPowerImage);
 		hpLabel.setText(String.valueOf(hero.getHp()));
 		manaLabel.setText("Mana: " + player.getMana() + "/" + player.getMaxMana());
+		updateArmor(hero.getArmor());
+	}
+	
+	private void updateArmor(int armor) {
+		armorLabel.setText(String.valueOf(armor));
+		boolean visible = armor > 0;
+		armorIcon.setVisible(visible);
+		armorLabel.setVisible(visible);
 	}
 
 }

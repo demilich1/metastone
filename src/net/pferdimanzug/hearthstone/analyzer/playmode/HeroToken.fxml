@@ -34,6 +34,12 @@
           </image>
         </ImageView>
         <Label id="outlined_score" fx:id="attackLabel" alignment="BOTTOM_LEFT" text="0" translateX="11.0" translateY="-2.0" StackPane.alignment="BOTTOM_LEFT" />
+        <ImageView id="armorIcon" fx:id="armorIcon" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateX="2.0" translateY="8.0" StackPane.alignment="CENTER_RIGHT">
+          <image>
+            <Image url="@../resources/img/common/armor.png" />
+          </image>
+        </ImageView>
+        <Label id="outlined_score" fx:id="armorLabel" text="0" textAlignment="CENTER" translateX="-11.0" translateY="8.0" StackPane.alignment="CENTER_RIGHT" />
       </children>
       <padding>
         <Insets left="8.0" />
