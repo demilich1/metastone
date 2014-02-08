@@ -252,6 +252,12 @@ public class GameLogic implements IGameLogic {
 		if (defender.getEntityType() != EntityType.HERO) {
 			damage(player, attacker, defenderDamage, false);
 		}
+		if (attacker.getEntityType() == EntityType.HERO) {
+			Hero hero = (Hero) attacker;
+			if (hero.getWeapon() != null) {
+				changeDurability(hero.getWeapon(), -1);
+			}
+		}
 
 		attacker.modifyTag(GameTag.NUMBER_OF_ATTACKS, -1);
 		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, defender));
@@ -533,6 +539,15 @@ public class GameLogic implements IGameLogic {
 			total += minion.getTagValue(tag);
 		}
 		return total;
+	}
+
+	@Override
+	public void changeDurability(Weapon weapon, int durability) {
+		logger.debug("Durability of weapon {} is changed by {}", weapon, durability);
+		weapon.modifyTag(GameTag.DURABILITY, durability);
+		if (weapon.isBroken()) {
+			destroy(weapon);
+		}		
 	}
 
 }

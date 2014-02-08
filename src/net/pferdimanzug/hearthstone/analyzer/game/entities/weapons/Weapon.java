@@ -30,5 +30,9 @@ public class Weapon extends Entity {
 	public boolean isBroken() {
 		return !hasTag(GameTag.DURABILITY) || getTagValue(GameTag.DURABILITY) < 1;
 	}
+	
+	public int getDurability() {
+		return getTagValue(GameTag.DURABILITY);
+	}
 
 }

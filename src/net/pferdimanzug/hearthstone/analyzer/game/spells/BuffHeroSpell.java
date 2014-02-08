@@ -5,6 +5,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnEndTrigger;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +33,13 @@ public class BuffHeroSpell extends Spell {
 		if (armorBonus != 0) {
 			logger.debug("{} gains {} armor", hero, armorBonus);
 			hero.modifyArmor(+armorBonus);
+		}
+		
+		if (attackBonus != 0) {
+			BuffHeroSpell debuff = new BuffHeroSpell(-attackBonus, 0);
+			Spell removeBuff = new AddSpellTriggerSpell(new SpellTrigger(new TurnEndTrigger(), debuff, true));
+			removeBuff.setTarget(target.getReference());
+			context.getLogic().castSpell(player.getId(), removeBuff);
 		}
 	}
 

@@ -36,8 +36,8 @@ public abstract class Hero extends Entity {
 	@Override
 	public int getAttack() {
 		int attack = super.getAttack();
-		if (getWeapon() != null) {
-			attack += weapon.getAttack();
+		if (weapon != null) {
+			attack += weapon.getWeaponDamage();
 		}
 		return attack;
 	}

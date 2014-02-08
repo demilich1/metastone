@@ -7,6 +7,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
 <fx:root type="BorderPane" id="" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
@@ -34,7 +35,7 @@
           </image>
         </ImageView>
         <Label id="outlined_score" fx:id="attackLabel" alignment="BOTTOM_LEFT" text="0" translateX="11.0" translateY="-2.0" StackPane.alignment="BOTTOM_LEFT" />
-        <ImageView id="armorIcon" fx:id="armorIcon" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateX="2.0" translateY="8.0" StackPane.alignment="CENTER_RIGHT">
+        <ImageView fx:id="armorIcon" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateX="2.0" translateY="8.0" StackPane.alignment="CENTER_RIGHT">
           <image>
             <Image url="@../resources/img/common/armor.png" />
           </image>
@@ -46,6 +47,23 @@
       </padding>
     </StackPane>
   </center>
+  <left>
+    <StackPane fx:id="weaponPane" prefHeight="-1.0" prefWidth="-1.0">
+      <children>
+        <Circle fill="#404040" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+        <Label fx:id="weaponNameLabel" maxWidth="70.0" text="&lt;weapon name&gt;" textAlignment="CENTER" textFill="WHITE" wrapText="true" StackPane.alignment="CENTER">
+          <font>
+            <Font name="Arial Bold" size="10.0" />
+          </font>
+        </Label>
+        <Label id="outlined_score" fx:id="weaponAttackLabel" text="0" translateY="-20.0" StackPane.alignment="BOTTOM_LEFT" />
+        <Label id="outlined_score" fx:id="weaponDurabilityLabel" text="0" translateY="-20.0" StackPane.alignment="BOTTOM_RIGHT" />
+      </children>
+      <padding>
+        <Insets bottom="4.0" left="4.0" top="4.0" />
+      </padding>
+    </StackPane>
+  </left>
   <padding>
     <Insets bottom="8.0" top="8.0" />
   </padding>

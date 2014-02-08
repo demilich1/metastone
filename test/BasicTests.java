@@ -7,11 +7,16 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.PhysicalAttackAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.WeaponCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.TheCoin;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Malfurion;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffHeroSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
@@ -154,6 +159,32 @@ public class BasicTests extends TestBase {
 		Assert.assertEquals(theCoin, null);
 		theCoin = getTheCoin(warrior.getHand());
 		Assert.assertNotEquals(theCoin, null);
+	}
+	
+	@Test
+	public void testWeapon() { 
+		GameContext context = createContext(new Garrosh(), new Garrosh());
+		Player player = context.getPlayer1();
+		Hero warrior = player.getHero();
+		
+		WeaponCard weaponCard = new WeaponCard("Test Weapon", Rarity.FREE, HeroClass.ANY, 0) {
+			
+			@Override
+			public Weapon getWeapon() {
+				return createWeapon(2, 2);
+			}
+		};
+		
+		Assert.assertEquals(warrior.getAttack(), 0);
+		context.getLogic().receiveCard(player.getId(), weaponCard);
+		context.getLogic().performGameAction(player.getId(), weaponCard.play());
+		Assert.assertEquals(warrior.getAttack(), 2);
+		Assert.assertEquals(warrior.getWeapon().getDurability(), 2);
+		
+		PhysicalAttackAction attack = new PhysicalAttackAction(warrior.getReference());
+		attack.setTarget(context.getPlayer2().getHero());
+		context.getLogic().performGameAction(player.getId(), attack);
+		Assert.assertEquals(warrior.getWeapon().getDurability(), 1);
 	}
 
 }

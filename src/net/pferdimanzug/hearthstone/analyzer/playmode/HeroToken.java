@@ -4,8 +4,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
 
 public class HeroToken extends GameToken {
 
@@ -15,11 +17,20 @@ public class HeroToken extends GameToken {
 	private Label hpLabel;
 	@FXML
 	private Label manaLabel;
+	
 	@FXML
 	private Label armorLabel;
-
 	@FXML
 	private ImageView armorIcon;
+	
+	@FXML
+	private Pane weaponPane;
+	@FXML
+	private Label weaponNameLabel;
+	@FXML
+	private Label weaponAttackLabel;
+	@FXML
+	private Label weaponDurabilityLabel;
 
 	@FXML
 	private ImageView portrait;
@@ -41,6 +52,7 @@ public class HeroToken extends GameToken {
 		hpLabel.setText(String.valueOf(hero.getHp()));
 		manaLabel.setText("Mana: " + player.getMana() + "/" + player.getMaxMana());
 		updateArmor(hero.getArmor());
+		updateWeapon(hero.getWeapon());
 	}
 	
 	private void updateArmor(int armor) {
@@ -48,6 +60,16 @@ public class HeroToken extends GameToken {
 		boolean visible = armor > 0;
 		armorIcon.setVisible(visible);
 		armorLabel.setVisible(visible);
+	}
+	
+	private void updateWeapon(Weapon weapon) {
+		boolean hasWeapon = weapon != null;
+		weaponPane.setVisible(hasWeapon);
+		if (hasWeapon) {
+			weaponNameLabel.setText(weapon.getName());
+			weaponAttackLabel.setText(String.valueOf(weapon.getWeaponDamage()));
+			weaponDurabilityLabel.setText(String.valueOf(weapon.getDurability()));
+		}
 	}
 
 }

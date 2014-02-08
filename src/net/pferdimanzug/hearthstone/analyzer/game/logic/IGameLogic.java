@@ -27,6 +27,7 @@ public interface IGameLogic extends Cloneable {
 	
 	public void endTurn(int playerId);
 	public void equipWeapon(int playerId, Weapon weapon);
+	public void changeDurability(Weapon weapon, int durability);
 	
 	public int getTotalTagValue(Player player, GameTag tag);
 	public void fight(Player player, Entity attacker, Entity defender);

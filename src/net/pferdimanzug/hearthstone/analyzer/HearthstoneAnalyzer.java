@@ -26,7 +26,7 @@ public class HearthstoneAnalyzer extends Application {
 	}
 	
 	private void launchHumanDebugGame() {
-		HeroClass humanHeroClass = HeroClass.MAGE;
+		HeroClass humanHeroClass = HeroClass.WARRIOR;
 		HeroClass aiHeroClass = HeroClass.WARRIOR;
 		Hero hero1 = HeroFactory.createHero(humanHeroClass);
 		Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));

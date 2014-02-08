@@ -196,10 +196,10 @@ public class GameBoardView extends BorderPane {
 	private void checkForWinner(GameContext context) {
 		if (context.gameDecided()) {
 			if (context.getWinner() == context.getPlayer1()) {
-				centerMessageLabel.setStyle("-fx-font-size: 48; -fx-text-fill: green;");
+				centerMessageLabel.setStyle("-fx-font-size: 72; -fx-text-fill: green;");
 				setCenterMessage("You won!!!");
 			} else {
-				centerMessageLabel.setStyle("-fx-font-size: 48; -fx-text-fill: red;");
+				centerMessageLabel.setStyle("-fx-font-size: 72; -fx-text-fill: red;");
 				setCenterMessage("You lost :(");
 			}
 		}

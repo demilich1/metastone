@@ -16,15 +16,12 @@ import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
-import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
-import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.HeroPowerAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PhysicalAttackAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanActionOptions;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanTargetOptions;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public class HumanActionPromptView extends Stage {
@@ -103,8 +100,9 @@ public class HumanActionPromptView extends Stage {
 		case SUMMON:
 			playCardAction = (PlayCardAction) action;
 			return "SUMMON: " + playCardAction.getCard().getName();
-		case UNDEFINED:
-			break;
+		case EQUIP_WEAPON:
+			playCardAction = (PlayCardAction) action;
+			return "WEAPON: " + playCardAction.getCard().getName();
 		default:
 			break;
 		}
