@@ -42,12 +42,12 @@ public class StormwindChampion extends MinionCard {
 	}
 
 	public StormwindChampion() {
-		super("Stormwind Champion", Rarity.FREE, HeroClass.ANY, 7);
+		super("Stormwind Champion", 6, 6, Rarity.FREE, HeroClass.ANY, 7);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion stormwindChampion = createMinion(6, 6);
+		Minion stormwindChampion = createMinion();
 		stormwindChampion.setAura(new StormwindChampionAura(stormwindChampion));
 		return stormwindChampion;
 	}

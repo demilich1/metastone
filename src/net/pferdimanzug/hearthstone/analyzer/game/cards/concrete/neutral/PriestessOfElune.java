@@ -12,13 +12,13 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class PriestessOfElune extends MinionCard {
 
 	public PriestessOfElune() {
-		super("Priestess Of Elune", Rarity.COMMON, HeroClass.ANY, 6);
+		super("Priestess Of Elune", 5, 4, Rarity.COMMON, HeroClass.ANY, 6);
 	}
 
 	@Override
 	public Minion summon() {
 		Battlecry battlecry = Battlecry.createBattlecry(new HealingSpell(4), TargetSelection.FRIENDLY_HERO);
-		Minion priestessOfElune = createMinion(5, 4);
+		Minion priestessOfElune = createMinion();
 		priestessOfElune.setTag(GameTag.BATTLECRY, battlecry);
 		return priestessOfElune;
 	}

@@ -9,12 +9,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 public class Archmage extends MinionCard {
 	
 	public Archmage() {
-		super("Archmage", Rarity.FREE, HeroClass.ANY, 6);
+		super("Archmage", 4, 7, Rarity.FREE, HeroClass.ANY, 6);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion archmage = createMinion(4, 7);
+		Minion archmage = createMinion();
 		archmage.setTag(GameTag.SPELL_POWER, 1);
 		return archmage;
 	}

@@ -7,23 +7,11 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
 public class DevMonster extends MinionCard {
 
-	private final int baseAttack;
-	private final int baseHp;
 	private final Minion minion;
 
 	public DevMonster(int baseAttack, int baseHp, GameTag... tags) {
-		super("Dev monster", Rarity.COMMON, HeroClass.ANY, 1);
-		this.baseAttack = baseAttack;
-		this.baseHp = baseHp;
-		this.minion = createMinion(baseAttack, baseHp, tags);
-	}
-
-	public int getBaseAttack() {
-		return baseAttack;
-	}
-
-	public int getBaseHp() {
-		return baseHp;
+		super("Dev monster", baseAttack, baseHp, Rarity.COMMON, HeroClass.ANY, 1);
+		this.minion = createMinion(tags);
 	}
 
 	public Minion getMinion() {

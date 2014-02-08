@@ -14,12 +14,12 @@ public class ElvenArcher extends MinionCard {
 	private static final int BATTLECRY_DAMAGE = 1;
 
 	public ElvenArcher() {
-		super("Elven Archer", Rarity.FREE, HeroClass.ANY, 1);
+		super("Elven Archer", 1, 1, Rarity.FREE, HeroClass.ANY, 1);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion elvenArcher = createMinion(1, 1);
+		Minion elvenArcher = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new DamageSpell(BATTLECRY_DAMAGE), TargetSelection.ANY);
 		elvenArcher.setTag(GameTag.BATTLECRY, battlecry);
 		return elvenArcher;

@@ -42,12 +42,12 @@ public class TundraRhino extends MinionCard {
 	}
 
 	public TundraRhino() {
-		super("Tundra Rhino", Rarity.FREE, HeroClass.HUNTER, 5);
+		super("Tundra Rhino", 2, 5, Rarity.FREE, HeroClass.HUNTER, 5);
 	}
 	
 	@Override
 	public Minion summon() {
-		Minion tundraRhino = createMinion(2, 5, Race.BEAST);
+		Minion tundraRhino = createMinion(Race.BEAST);
 		tundraRhino.setAura(new TundraRhinoAura(tundraRhino));
 		return tundraRhino;
 	}

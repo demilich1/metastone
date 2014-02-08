@@ -12,12 +12,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class VoodooDoctor extends MinionCard {
 
 	public VoodooDoctor() {
-		super("Voodoo Doctor", Rarity.FREE, HeroClass.ANY, 1);
+		super("Voodoo Doctor", 2, 1, Rarity.FREE, HeroClass.ANY, 1);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion voodooDoctor = createMinion(2, 1);
+		Minion voodooDoctor = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new HealingSpell(2), TargetSelection.ANY);
 		voodooDoctor.setTag(GameTag.BATTLECRY, battlecry);
 		return voodooDoctor;

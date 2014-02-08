@@ -9,12 +9,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 public class FaerieDragon extends MinionCard {
 
 	public FaerieDragon() {
-		super("Faerie Dragon", Rarity.COMMON, HeroClass.ANY, 2);
+		super("Faerie Dragon", 3, 2, Rarity.COMMON, HeroClass.ANY, 2);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(3, 2, GameTag.UNTARGETABLE_BY_SPELLS);
+		return createMinion(GameTag.UNTARGETABLE_BY_SPELLS);
 	}
 
 }

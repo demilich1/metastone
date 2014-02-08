@@ -9,12 +9,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 public class RiverCrocolisk extends MinionCard {
 
 	public RiverCrocolisk() {
-		super("River Crocolisk", Rarity.FREE, HeroClass.ANY, 2);
+		super("River Crocolisk", 2, 3, Rarity.FREE, HeroClass.ANY, 2);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(2, 3, Race.BEAST);
+		return createMinion(Race.BEAST);
 	}
 
 }

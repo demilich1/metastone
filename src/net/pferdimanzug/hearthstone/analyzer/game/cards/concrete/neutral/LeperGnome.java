@@ -12,14 +12,14 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 public class LeperGnome extends MinionCard {
 
 	public LeperGnome() {
-		super("Leper Gnome", Rarity.COMMON, HeroClass.ANY, 1);
+		super("Leper Gnome", 2, 1, Rarity.COMMON, HeroClass.ANY, 1);
 	}
 
 	@Override
 	public Minion summon() {
 		Spell deathrattle = new DamageSpell(2);
 		deathrattle.setTarget(EntityReference.ENEMY_HERO);
-		Minion leperGnome = createMinion(2, 1);
+		Minion leperGnome = createMinion();
 		leperGnome.setTag(GameTag.DEATHRATTLE, deathrattle);
 		return leperGnome;
 	}

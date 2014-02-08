@@ -17,13 +17,13 @@ public class AnimalCompanion extends SpellCard {
 	private class Huffer extends MinionCard {
 
 		public Huffer() {
-			super("Huffer", Rarity.FREE, HeroClass.HUNTER, 3);
+			super("Huffer", 4, 2, Rarity.FREE, HeroClass.HUNTER, 3);
 			setCollectible(false);
 		}
 
 		@Override
 		public Minion summon() {
-			return createMinion(4, 2, Race.BEAST, GameTag.CHARGE);
+			return createMinion(Race.BEAST, GameTag.CHARGE);
 		}
 		
 	}
@@ -31,13 +31,13 @@ public class AnimalCompanion extends SpellCard {
 	private class Leokk extends MinionCard {
 
 		public Leokk() {
-			super("Leokk", Rarity.FREE, HeroClass.HUNTER, 3);
+			super("Leokk", 2, 4, Rarity.FREE, HeroClass.HUNTER, 3);
 			setCollectible(false);
 		}
 
 		@Override
 		public Minion summon() {
-			Minion leokk = createMinion(2, 4, Race.BEAST);
+			Minion leokk = createMinion(Race.BEAST);
 			leokk.setAura(new LeokkAura(leokk));
 			return leokk;
 		}
@@ -75,13 +75,13 @@ public class AnimalCompanion extends SpellCard {
 	private class Misha extends MinionCard {
 
 		public Misha() {
-			super("Misha", Rarity.FREE, HeroClass.HUNTER, 3);
+			super("Misha", 4, 4, Rarity.FREE, HeroClass.HUNTER, 3);
 			setCollectible(false);
 		}
 
 		@Override
 		public Minion summon() {
-			return createMinion(4, 4, Race.BEAST, GameTag.TAUNT);
+			return createMinion(Race.BEAST, GameTag.TAUNT);
 		}
 		
 	}

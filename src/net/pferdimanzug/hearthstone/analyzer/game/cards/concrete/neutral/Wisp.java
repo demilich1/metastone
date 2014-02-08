@@ -8,12 +8,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 public class Wisp extends MinionCard {
 	
 	public Wisp() {
-		super("Wisp", Rarity.COMMON, HeroClass.ANY, 0);
+		super("Wisp", 1, 1, Rarity.COMMON, HeroClass.ANY, 0);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(1, 1);
+		return createMinion();
 	}
 
 }

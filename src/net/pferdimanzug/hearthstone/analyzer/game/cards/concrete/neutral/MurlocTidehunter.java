@@ -15,23 +15,23 @@ public class MurlocTidehunter extends MinionCard {
 	private class MurlocScout extends MinionCard {
 
 		public MurlocScout() {
-			super("Murloc Scout", Rarity.FREE, HeroClass.ANY, 0);
+			super("Murloc Scout", 1, 1, Rarity.FREE, HeroClass.ANY, 0);
 		}
 
 		@Override
 		public Minion summon() {
-			return createMinion(1, 1, Race.MURLOC);
+			return createMinion(Race.MURLOC);
 		}
 
 	}
 
 	public MurlocTidehunter() {
-		super("Murloc Tidehunter", Rarity.FREE, HeroClass.ANY, 2);
+		super("Murloc Tidehunter", 2, 1, Rarity.FREE, HeroClass.ANY, 2);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion murlocTidehunter = createMinion(2, 1, Race.MURLOC);
+		Minion murlocTidehunter = createMinion(Race.MURLOC);
 		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(new MurlocScout()), TargetSelection.NONE);
 		murlocTidehunter.setTag(GameTag.BATTLECRY, battlecry);
 		return murlocTidehunter;

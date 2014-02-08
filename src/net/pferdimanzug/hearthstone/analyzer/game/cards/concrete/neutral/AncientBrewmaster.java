@@ -12,12 +12,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class AncientBrewmaster extends MinionCard {
 
 	public AncientBrewmaster() {
-		super("Ancient Brewmaster", Rarity.COMMON, HeroClass.ANY, 4);
+		super("Ancient Brewmaster", 5, 4, Rarity.COMMON, HeroClass.ANY, 4);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion ancientBrewmaster = createMinion(5, 4);
+		Minion ancientBrewmaster = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new ReturnMinionToHandSpell(), TargetSelection.FRIENDLY_MINIONS);
 		ancientBrewmaster.setTag(GameTag.BATTLECRY, battlecry);
 		return ancientBrewmaster;

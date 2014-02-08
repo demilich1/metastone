@@ -9,12 +9,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 public class ThrallmarFarseer extends MinionCard {
 
 	public ThrallmarFarseer() {
-		super("Thrallmar Farseer", Rarity.COMMON, HeroClass.ANY, 3);
+		super("Thrallmar Farseer", 2, 3, Rarity.COMMON, HeroClass.ANY, 3);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(2, 3, GameTag.WINDFURY);
+		return createMinion(GameTag.WINDFURY);
 	}
 
 }

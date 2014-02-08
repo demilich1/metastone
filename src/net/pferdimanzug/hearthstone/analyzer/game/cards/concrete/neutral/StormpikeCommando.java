@@ -12,12 +12,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class StormpikeCommando extends MinionCard {
 	
 	public StormpikeCommando() {
-		super("Stormpike Commando", Rarity.FREE, HeroClass.ANY, 5);
+		super("Stormpike Commando", 4, 2, Rarity.FREE, HeroClass.ANY, 5);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion stormpikeCommando = createMinion(4, 2);
+		Minion stormpikeCommando = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new DamageSpell(2), TargetSelection.ANY);
 		stormpikeCommando.setTag(GameTag.BATTLECRY, battlecry);
 		return stormpikeCommando;

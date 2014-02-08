@@ -13,12 +13,12 @@ public class AmaniBerserker extends MinionCard {
 	public static final int ENRAGE_ATTACK_BONUS = 3;
 
 	public AmaniBerserker() {
-		super("Amani Berserker", Rarity.COMMON, HeroClass.ANY, 2);
+		super("Amani Berserker", BASE_ATTACK, 3, Rarity.COMMON, HeroClass.ANY, 2);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion amaniBerserker = createMinion(BASE_ATTACK, 3);
+		Minion amaniBerserker = createMinion();
 		amaniBerserker.setTag(GameTag.ENRAGE_SPELL, new Enrage(ENRAGE_ATTACK_BONUS));
 		return amaniBerserker;
 	}

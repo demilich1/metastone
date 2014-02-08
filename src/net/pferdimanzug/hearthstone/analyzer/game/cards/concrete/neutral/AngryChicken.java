@@ -11,12 +11,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.enrage.Enrage;
 public class AngryChicken extends MinionCard {
 
 	public AngryChicken() {
-		super("Angry Chicken", Rarity.RARE, HeroClass.ANY, 1);
+		super("Angry Chicken", 1, 1, Rarity.RARE, HeroClass.ANY, 1);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion angryChicken = createMinion(1, 1, Race.BEAST);
+		Minion angryChicken = createMinion(Race.BEAST);
 		angryChicken.setTag(GameTag.ENRAGE_SPELL, new Enrage(5));
 		return angryChicken;
 	}

@@ -9,12 +9,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 public class SilvermoonGuardian extends MinionCard {
 
 	public SilvermoonGuardian() {
-		super("Silvermoon Guardian", Rarity.COMMON, HeroClass.ANY, 4);
+		super("Silvermoon Guardian", 3, 3, Rarity.COMMON, HeroClass.ANY, 4);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(3, 3, GameTag.DIVINE_SHIELD);
+		return createMinion(GameTag.DIVINE_SHIELD);
 	}
 
 }

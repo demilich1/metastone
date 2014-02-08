@@ -12,12 +12,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class ShatteredSunCleric extends MinionCard{
 
 	public ShatteredSunCleric() {
-		super("Shattered Sun Cleric", Rarity.FREE, HeroClass.ANY, 3);
+		super("Shattered Sun Cleric", 3, 2, Rarity.FREE, HeroClass.ANY, 3);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion shatteredSunCleric = createMinion(3, 2);
+		Minion shatteredSunCleric = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new BuffSpell(1, 1), TargetSelection.FRIENDLY_MINIONS);
 		shatteredSunCleric.setTag(GameTag.BATTLECRY, battlecry);
 		return shatteredSunCleric;

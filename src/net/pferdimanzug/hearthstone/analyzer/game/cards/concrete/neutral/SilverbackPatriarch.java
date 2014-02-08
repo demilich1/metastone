@@ -9,12 +9,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 public class SilverbackPatriarch extends MinionCard {
 
 	public SilverbackPatriarch() {
-		super("Silverback Patriarch", Rarity.FREE, HeroClass.ANY, 3);
+		super("Silverback Patriarch", 1, 4, Rarity.FREE, HeroClass.ANY, 3);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(1, 4, GameTag.TAUNT);
+		return createMinion(GameTag.TAUNT);
 	}
 
 }

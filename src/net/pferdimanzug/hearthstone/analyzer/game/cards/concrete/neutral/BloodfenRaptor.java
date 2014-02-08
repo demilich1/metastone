@@ -9,12 +9,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 public class BloodfenRaptor extends MinionCard {
 
 	public BloodfenRaptor() {
-		super("Bloodfen Raptor", Rarity.FREE, HeroClass.ANY, 2);
+		super("Bloodfen Raptor", 3, 2, Rarity.FREE, HeroClass.ANY, 2);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion bloodfenRaptor = createMinion(3, 2, Race.BEAST);
+		Minion bloodfenRaptor = createMinion(Race.BEAST);
 		return bloodfenRaptor;
 	}
 

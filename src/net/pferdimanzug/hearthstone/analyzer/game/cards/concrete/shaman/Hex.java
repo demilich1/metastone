@@ -15,13 +15,13 @@ public class Hex extends SpellCard {
 	private class Frog extends MinionCard {
 
 		public Frog() {
-			super("Frog", Rarity.FREE, HeroClass.ANY, 0);
+			super("Frog", 0, 1, Rarity.FREE, HeroClass.ANY, 0);
 			setCollectible(false);
 		}
 
 		@Override
 		public Minion summon() {
-			return createMinion(0, 1, Race.BEAST, GameTag.TAUNT);
+			return createMinion(Race.BEAST, GameTag.TAUNT);
 		}
 		
 	}
@@ -30,9 +30,7 @@ public class Hex extends SpellCard {
 		super("Hex", Rarity.FREE, HeroClass.SHAMAN, 3);
 		setTargetRequirement(TargetSelection.MINIONS);
 		setSpell(new TransformMinionSpell(new Frog()));
-		
 	}
-	
 	
 
 }

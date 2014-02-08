@@ -12,13 +12,13 @@ public class Reinforce extends HeroPower {
 	private class SilverHandRecruit extends MinionCard {
 
 		public SilverHandRecruit() {
-			super("SilverHand Recruit", Rarity.FREE, HeroClass.PALADIN, 1);
+			super("SilverHand Recruit", 1, 1, Rarity.FREE, HeroClass.PALADIN, 1);
 			setCollectible(false);
 		}
 
 		@Override
 		public Minion summon() {
-			return createMinion(1, 1);
+			return createMinion();
 		}
 
 	}

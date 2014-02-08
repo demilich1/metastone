@@ -9,12 +9,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 public class FrostwolfGrunt extends MinionCard {
 
 	public FrostwolfGrunt() {
-		super("Frostwolf Grunt", Rarity.FREE, HeroClass.ANY, 2);
+		super("Frostwolf Grunt", 2, 2, Rarity.FREE, HeroClass.ANY, 2);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(2, 2, GameTag.TAUNT);
+		return createMinion(GameTag.TAUNT);
 	}
 
 }

@@ -12,12 +12,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class MadBomber extends MinionCard {
 
 	public MadBomber() {
-		super("Mad Bomber", Rarity.COMMON, HeroClass.ANY, 2);
+		super("Mad Bomber", 3, 2, Rarity.COMMON, HeroClass.ANY, 2);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion madBomber = createMinion(3, 2);
+		Minion madBomber = createMinion();
 		//TODO: may be bugged?
 		Battlecry battlecry = Battlecry.createBattlecry(new DamageRandomSpell(1, 3), TargetSelection.ANY);
 		madBomber.setTag(GameTag.BATTLECRY, battlecry);

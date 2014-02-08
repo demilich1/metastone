@@ -10,12 +10,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.enrage.Enrage;
 public class GrommashHellscream extends MinionCard {
 
 	public GrommashHellscream() {
-		super("Grommash Hellscream", Rarity.LEGENDARY, HeroClass.WARRIOR, 8);
+		super("Grommash Hellscream", 4, 9, Rarity.LEGENDARY, HeroClass.WARRIOR, 8);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion grommashHellscream = createMinion(4, 9, GameTag.CHARGE);
+		Minion grommashHellscream = createMinion(GameTag.CHARGE);
 		grommashHellscream.setTag(GameTag.ENRAGE_SPELL, new Enrage(6));
 		return grommashHellscream;
 	}

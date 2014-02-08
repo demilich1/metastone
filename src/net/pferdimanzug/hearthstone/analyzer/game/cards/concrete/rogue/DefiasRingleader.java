@@ -13,13 +13,13 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class DefiasRingleader extends MinionCard {
 
 	public DefiasRingleader() {
-		super("DefiasRingleader", Rarity.COMMON, HeroClass.ROGUE, 2);
+		super("DefiasRingleader", 2, 2, Rarity.COMMON, HeroClass.ROGUE, 2);
 	}
 
 	@Override
 	public Minion summon() {
 		Battlecry battlecry = Battlecry.createBattlecry(new ComboSpell(null, new SummonSpell(new DefiasBandit())), TargetSelection.NONE);
-		Minion defiasRingleader = createMinion(2, 2);
+		Minion defiasRingleader = createMinion();
 		defiasRingleader.setTag(GameTag.BATTLECRY, battlecry);
 		return defiasRingleader;
 	}
@@ -27,13 +27,13 @@ public class DefiasRingleader extends MinionCard {
 	private class DefiasBandit extends MinionCard {
 
 		public DefiasBandit() {
-			super("Defias Bandit", Rarity.FREE, HeroClass.ROGUE, 2);
+			super("Defias Bandit", 2, 1, Rarity.FREE, HeroClass.ROGUE, 2);
 			setCollectible(false);
 		}
 
 		@Override
 		public Minion summon() {
-			return createMinion(2, 1);
+			return createMinion();
 		}
 		
 	}

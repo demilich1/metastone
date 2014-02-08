@@ -14,12 +14,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class DreadInfernal extends MinionCard {
 
 	public DreadInfernal() {
-		super("Dread Infernal", Rarity.FREE, HeroClass.WARLOCK, 6);
+		super("Dread Infernal", 6, 6, Rarity.FREE, HeroClass.WARLOCK, 6);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion dreadInfernal = createMinion(6, 6, Race.DEMON);
+		Minion dreadInfernal = createMinion(Race.DEMON);
 		Battlecry infernoBattlecry = Battlecry.createBattlecry(new DamageSpell(1), TargetSelection.NONE);
 		infernoBattlecry.setTargetKey(EntityReference.ALL_CHARACTERS);
 		dreadInfernal.setTag(GameTag.BATTLECRY, infernoBattlecry);

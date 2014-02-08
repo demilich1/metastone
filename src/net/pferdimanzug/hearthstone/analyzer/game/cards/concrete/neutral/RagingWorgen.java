@@ -10,12 +10,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.enrage.EnrageWindfury;
 public class RagingWorgen extends MinionCard {
 
 	public RagingWorgen() {
-		super("Raging Worgen", Rarity.COMMON, HeroClass.ANY, 3);
+		super("Raging Worgen", 3, 3, Rarity.COMMON, HeroClass.ANY, 3);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion ragingWorgen = createMinion(3, 3);
+		Minion ragingWorgen = createMinion();
 		ragingWorgen.setTag(GameTag.ENRAGE_SPELL, new EnrageWindfury(1));
 		return ragingWorgen;
 	}

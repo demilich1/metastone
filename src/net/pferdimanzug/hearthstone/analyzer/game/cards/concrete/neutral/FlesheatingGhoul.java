@@ -11,13 +11,13 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 public class FlesheatingGhoul extends MinionCard {
 
 	public FlesheatingGhoul() {
-		super("Flesheating Ghoul", Rarity.COMMON, HeroClass.ANY, 3);
+		super("Flesheating Ghoul", 2, 3, Rarity.COMMON, HeroClass.ANY, 3);
 	}
 
 	@Override
 	public Minion summon() {
 		SpellTrigger spellTrigger = new SpellTrigger(new MinionDeathTrigger(), new BuffSpell(1));
-		Minion flesheatingGhoul = createMinion(2, 3);
+		Minion flesheatingGhoul = createMinion();
 		flesheatingGhoul.setSpellTrigger(spellTrigger);
 		return flesheatingGhoul;
 	}

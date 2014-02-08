@@ -44,12 +44,12 @@ public class TimberWolf extends MinionCard {
 	}
 
 	public TimberWolf() {
-		super("Timber Wolf", Rarity.FREE, HeroClass.HUNTER, 1);
+		super("Timber Wolf", 1, 1, Rarity.FREE, HeroClass.HUNTER, 1);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion timberWolf = createMinion(1, 1, Race.BEAST);
+		Minion timberWolf = createMinion(Race.BEAST);
 		timberWolf.setAura(new TimberWolfAura(timberWolf));
 		return timberWolf;
 	}

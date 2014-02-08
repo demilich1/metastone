@@ -13,7 +13,7 @@ public class WaterElemental extends MinionCard {
 
 		public WaterElementalMinion(MinionCard sourceCard) {
 			super(sourceCard);
-			setBaseStats(3, 6);
+			setBaseStats(sourceCard.getBaseAttack(), sourceCard.getBaseHp());
 		}
 
 		@Override
@@ -24,7 +24,7 @@ public class WaterElemental extends MinionCard {
 	}
 
 	public WaterElemental() {
-		super("Water Elemental", Rarity.FREE, HeroClass.MAGE, 4);
+		super("Water Elemental", 3, 6, Rarity.FREE, HeroClass.MAGE, 4);
 	}
 
 	@Override

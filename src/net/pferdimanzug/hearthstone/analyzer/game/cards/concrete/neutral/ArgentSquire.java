@@ -9,12 +9,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 public class ArgentSquire extends MinionCard {
 
 	public ArgentSquire() {
-		super("Argent Squire", Rarity.COMMON, HeroClass.ANY, 1);
+		super("Argent Squire", 1, 1, Rarity.COMMON, HeroClass.ANY, 1);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion argentSquire = createMinion(1, 1, GameTag.DIVINE_SHIELD);
+		Minion argentSquire = createMinion(GameTag.DIVINE_SHIELD);
 		return argentSquire;
 	}
 

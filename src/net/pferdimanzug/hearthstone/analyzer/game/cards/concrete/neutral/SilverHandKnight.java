@@ -11,13 +11,13 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
 public class SilverHandKnight extends MinionCard {
 
 	public SilverHandKnight() {
-		super("Silver Hand Knight", Rarity.COMMON, HeroClass.ANY, 5);
+		super("Silver Hand Knight", 4, 4, Rarity.COMMON, HeroClass.ANY, 5);
 	}
 
 	@Override
 	public Minion summon() {
 		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(new Squire()));
-		Minion silverHandKnight = createMinion(4, 4);
+		Minion silverHandKnight = createMinion();
 		silverHandKnight.setTag(GameTag.BATTLECRY, battlecry);
 		return silverHandKnight;
 	}
@@ -25,13 +25,13 @@ public class SilverHandKnight extends MinionCard {
 	private class Squire extends MinionCard {
 
 		public Squire() {
-			super("Squire", Rarity.COMMON, HeroClass.ANY, 1);
+			super("Squire", 2, 2, Rarity.COMMON, HeroClass.ANY, 1);
 			setCollectible(false);
 		}
 
 		@Override
 		public Minion summon() {
-			return createMinion(2, 2);
+			return createMinion();
 		}
 		
 	}

@@ -10,12 +10,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 public class BootyBayBodyguard extends MinionCard {
 
 	public BootyBayBodyguard() {
-		super("Booty Bay Bodyguard", Rarity.FREE, HeroClass.ANY, 5);
+		super("Booty Bay Bodyguard", 5, 4, Rarity.FREE, HeroClass.ANY, 5);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(5, 4, GameTag.TAUNT);
+		return createMinion(GameTag.TAUNT);
 	}
 
 }

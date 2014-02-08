@@ -9,12 +9,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 public class OasisSnapjaw extends MinionCard {
 
 	public OasisSnapjaw() {
-		super("Oasis Snapjaw", Rarity.FREE, HeroClass.ANY, 4);
+		super("Oasis Snapjaw", 2, 7, Rarity.FREE, HeroClass.ANY, 4);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(2, 7, Race.BEAST);
+		return createMinion(Race.BEAST);
 	}
 
 }

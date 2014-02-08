@@ -12,12 +12,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class IronforgeRifleman extends MinionCard {
 
 	public IronforgeRifleman() {
-		super("Ironforge Rifleman", Rarity.FREE, HeroClass.ANY, 3);
+		super("Ironforge Rifleman", 2, 2, Rarity.FREE, HeroClass.ANY, 3);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion ironforgeRifleman = createMinion(2, 2);
+		Minion ironforgeRifleman = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new DamageSpell(1), TargetSelection.ANY);
 		ironforgeRifleman.setTag(GameTag.BATTLECRY, battlecry);
 		return ironforgeRifleman;

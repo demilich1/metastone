@@ -9,12 +9,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 public class GoldshireFootman extends MinionCard {
 
 	public GoldshireFootman() {
-		super("Goldshire Footman", Rarity.FREE, HeroClass.ANY, 1);
+		super("Goldshire Footman", 1, 2, Rarity.FREE, HeroClass.ANY, 1);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(1, 2, GameTag.TAUNT);
+		return createMinion(GameTag.TAUNT);
 	}
 
 }

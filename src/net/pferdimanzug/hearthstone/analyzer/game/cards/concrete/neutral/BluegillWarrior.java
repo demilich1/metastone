@@ -10,12 +10,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 public class BluegillWarrior extends MinionCard {
 
 	public BluegillWarrior() {
-		super("Bluegill Warrior", Rarity.FREE, HeroClass.ANY, 2);
+		super("Bluegill Warrior", 2, 1, Rarity.FREE, HeroClass.ANY, 2);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(2, 1, Race.MURLOC, GameTag.CHARGE);
+		return createMinion(Race.MURLOC, GameTag.CHARGE);
 	}
 
 }

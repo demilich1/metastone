@@ -15,23 +15,23 @@ public class RazorfenHunter extends MinionCard {
 	private class Boar extends MinionCard {
 
 		public Boar() {
-			super("Boar", Rarity.FREE, HeroClass.ANY, 1);
+			super("Boar", 1, 1, Rarity.FREE, HeroClass.ANY, 1);
 		}
 
 		@Override
 		public Minion summon() {
-			return createMinion(1, 1, Race.BEAST);
+			return createMinion(Race.BEAST);
 		}
 
 	}
 
 	public RazorfenHunter() {
-		super("Razorfen Hunter", Rarity.FREE, HeroClass.ANY, 3);
+		super("Razorfen Hunter", 2, 3, Rarity.FREE, HeroClass.ANY, 3);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion razorfenHunter = createMinion(2, 3);
+		Minion razorfenHunter = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(new Boar()), TargetSelection.NONE);
 		razorfenHunter.setTag(GameTag.BATTLECRY, battlecry);
 		return razorfenHunter;

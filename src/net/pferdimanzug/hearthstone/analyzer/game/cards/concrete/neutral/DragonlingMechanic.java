@@ -14,24 +14,24 @@ public class DragonlingMechanic extends MinionCard {
 	private class MechanicalDragonling extends MinionCard {
 
 		public MechanicalDragonling() {
-			super("Mechanical Dragonling", Rarity.FREE, HeroClass.ANY, 1);
+			super("Mechanical Dragonling", 2, 1, Rarity.FREE, HeroClass.ANY, 1);
 			setCollectible(false);
 		}
 
 		@Override
 		public Minion summon() {
-			return createMinion(2, 1);
+			return createMinion();
 		}
 		
 	}
 
 	public DragonlingMechanic() {
-		super("Dragonling Mechanic", Rarity.FREE, HeroClass.ANY, 4);
+		super("Dragonling Mechanic", 2, 4, Rarity.FREE, HeroClass.ANY, 4);
 	}
 	
 	@Override
 	public Minion summon() {
-		Minion dragonlingMechanic = createMinion(2, 4);
+		Minion dragonlingMechanic = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(new MechanicalDragonling()), TargetSelection.NONE);
 		dragonlingMechanic.setTag(GameTag.BATTLECRY, battlecry);
 		return dragonlingMechanic;

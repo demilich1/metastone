@@ -9,12 +9,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 public class SenjinShieldmasta extends MinionCard {
 
 	public SenjinShieldmasta() {
-		super("Sen'jin Shieldmasta", Rarity.FREE, HeroClass.ANY, 4);
+		super("Sen'jin Shieldmasta", 3, 5, Rarity.FREE, HeroClass.ANY, 4);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(3, 5, GameTag.TAUNT);
+		return createMinion(GameTag.TAUNT);
 	}
 
 }

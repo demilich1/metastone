@@ -11,13 +11,13 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 public class LootHoarder extends MinionCard {
 
 	public LootHoarder() {
-		super("Loot Hoarder", Rarity.COMMON, HeroClass.ANY, 2);
+		super("Loot Hoarder", 2, 1, Rarity.COMMON, HeroClass.ANY, 2);
 	}
 
 	@Override
 	public Minion summon() {
 		Spell deathrattle = new DrawCardSpell();
-		Minion lootHoarder = createMinion(2, 1);
+		Minion lootHoarder = createMinion();
 		lootHoarder.setTag(GameTag.DEATHRATTLE, deathrattle);
 		return lootHoarder;
 	}

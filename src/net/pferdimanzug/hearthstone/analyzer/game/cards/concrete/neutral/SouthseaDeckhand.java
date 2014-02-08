@@ -16,13 +16,13 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class SouthseaDeckhand extends MinionCard {
 
 	public SouthseaDeckhand() {
-		super("Southsea Deckhand", Rarity.COMMON, HeroClass.ANY, 1);
+		super("Southsea Deckhand", 2, 1, Rarity.COMMON, HeroClass.ANY, 1);
 	}
 
 	@Override
 	public Minion summon() {
 		Battlecry battlecry = Battlecry.createBattlecry(new ChargeWhileWeaponEquipped(), TargetSelection.SELF);
-		Minion southseaDeckhand = createMinion(2, 1, Race.PIRATE);
+		Minion southseaDeckhand = createMinion(Race.PIRATE);
 		southseaDeckhand.setTag(GameTag.BATTLECRY, battlecry);
 		return southseaDeckhand;
 	}

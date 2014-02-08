@@ -12,12 +12,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class FrostElemental extends MinionCard {
 
 	public FrostElemental() {
-		super("FrostElemental", Rarity.COMMON, HeroClass.ANY, 6);
+		super("FrostElemental", 5, 5, Rarity.COMMON, HeroClass.ANY, 6);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion frostElemental = createMinion(5, 5);
+		Minion frostElemental = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new ApplyTagSpell(GameTag.FROZEN), TargetSelection.ANY);
 		frostElemental.setTag(GameTag.BATTLECRY, battlecry);
 		return frostElemental;

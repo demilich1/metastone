@@ -9,12 +9,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 public class KorkronElite extends MinionCard {
 
 	public KorkronElite() {
-		super("Kor'kron Elite", Rarity.FREE, HeroClass.WARRIOR, 4);
+		super("Kor'kron Elite", 4, 3, Rarity.FREE, HeroClass.WARRIOR, 4);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(4, 3, GameTag.CHARGE);
+		return createMinion(GameTag.CHARGE);
 	}
 
 }

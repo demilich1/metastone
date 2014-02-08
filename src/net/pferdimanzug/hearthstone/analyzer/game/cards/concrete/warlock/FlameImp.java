@@ -15,12 +15,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class FlameImp extends MinionCard {
 
 	public FlameImp() {
-		super("FlameImp", Rarity.COMMON, HeroClass.WARLOCK, 1);
+		super("FlameImp", 3, 2, Rarity.COMMON, HeroClass.WARLOCK, 1);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion flameImp = createMinion(3, 2, Race.DEMON);
+		Minion flameImp = createMinion(Race.DEMON);
 		Spell damageHeroSpell = new DamageSpell(3);
 		damageHeroSpell.setTarget(EntityReference.FRIENDLY_HERO);
 		Battlecry battlecry = Battlecry.createBattlecry(damageHeroSpell, TargetSelection.NONE);

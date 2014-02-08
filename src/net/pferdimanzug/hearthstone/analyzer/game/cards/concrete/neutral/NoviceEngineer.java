@@ -12,12 +12,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class NoviceEngineer extends MinionCard {
 
 	public NoviceEngineer() {
-		super("Novice Engineer", Rarity.FREE, HeroClass.ANY, 2);
+		super("Novice Engineer", 1, 1, Rarity.FREE, HeroClass.ANY, 2);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion noviceEngineer = createMinion(1, 1);
+		Minion noviceEngineer = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new DrawCardSpell(1), TargetSelection.NONE);
 		noviceEngineer.setTag(GameTag.BATTLECRY, battlecry);
 		return noviceEngineer;

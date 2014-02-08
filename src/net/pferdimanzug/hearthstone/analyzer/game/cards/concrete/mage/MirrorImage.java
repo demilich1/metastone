@@ -14,12 +14,12 @@ public class MirrorImage extends SpellCard {
 	private class MirrorImageMinionCard extends MinionCard {
 
 		public MirrorImageMinionCard() {
-			super("Mirror Image", Rarity.FREE, HeroClass.MAGE, 0);
+			super("Mirror Image", 0, 2, Rarity.FREE, HeroClass.MAGE, 0);
 		}
 
 		@Override
 		public Minion summon() {
-			return createMinion(0, 2, GameTag.TAUNT);
+			return createMinion(GameTag.TAUNT);
 		}
 		
 	}

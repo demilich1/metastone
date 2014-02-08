@@ -10,12 +10,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.enrage.Enrage;
 public class TaurenWarrior extends MinionCard {
 
 	public TaurenWarrior() {
-		super("Tauren Warrior", Rarity.COMMON, HeroClass.ANY, 3);
+		super("Tauren Warrior", 2, 3, Rarity.COMMON, HeroClass.ANY, 3);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion taurenWarrior = createMinion(2, 3, GameTag.TAUNT);
+		Minion taurenWarrior = createMinion(GameTag.TAUNT);
 		taurenWarrior.setTag(GameTag.ENRAGE_SPELL, new Enrage(3));
 		return taurenWarrior;
 	}

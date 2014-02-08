@@ -9,12 +9,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 public class Shieldbearer extends MinionCard {
 
 	public Shieldbearer() {
-		super("Shieldbearer", Rarity.COMMON, HeroClass.ANY, 1);
+		super("Shieldbearer", 0, 4, Rarity.COMMON, HeroClass.ANY, 1);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(0, 4, GameTag.TAUNT);
+		return createMinion(GameTag.TAUNT);
 	}
 
 }

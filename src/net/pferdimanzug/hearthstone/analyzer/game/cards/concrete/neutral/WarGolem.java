@@ -8,12 +8,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 public class WarGolem extends MinionCard {
 
 	public WarGolem() {
-		super("War Golem", Rarity.FREE, HeroClass.ANY, 7);
+		super("War Golem", 7, 7, Rarity.FREE, HeroClass.ANY, 7);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(7, 7);
+		return createMinion();
 	}
 
 }

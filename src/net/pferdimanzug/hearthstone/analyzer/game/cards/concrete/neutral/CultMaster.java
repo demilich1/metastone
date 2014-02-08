@@ -36,14 +36,14 @@ public class CultMaster extends MinionCard {
 	}
 
 	public CultMaster() {
-		super("Cult Master", Rarity.COMMON, HeroClass.ANY, 4);
+		super("Cult Master", 4, 2, Rarity.COMMON, HeroClass.ANY, 4);
 	}
 
 	@Override
 	public Minion summon() {
 		GameEventTrigger minionDieTrigger = new CultMasterTrigger();
 		SpellTrigger trigger = new SpellTrigger(minionDieTrigger, new DrawCardSpell());
-		Minion cultMaster = createMinion(4, 2);
+		Minion cultMaster = createMinion();
 		cultMaster.setSpellTrigger(trigger);
 		return cultMaster;
 	}

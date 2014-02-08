@@ -13,7 +13,11 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.HealingSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnEndTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class TotemicCall extends HeroPower {
@@ -21,14 +25,17 @@ public class TotemicCall extends HeroPower {
 	private class HealingTotem extends MinionCard {
 
 		public HealingTotem() {
-			super(HEALING_TOTEM_NAME, Rarity.FREE, HeroClass.SHAMAN, 1);
+			super(HEALING_TOTEM_NAME, 0, 2, Rarity.FREE, HeroClass.SHAMAN, 1);
 			setCollectible(false);
 		}
 
 		@Override
 		public Minion summon() {
-			Minion healingTotem = createMinion(0, 2, Race.TOTEM);
-			//TODO: implement healing
+			Minion healingTotem = createMinion(Race.TOTEM);
+			Spell healSpell = new HealingSpell(1);
+			healSpell.setTarget(EntityReference.FRIENDLY_MINIONS);
+			SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), healSpell);
+			healingTotem.setSpellTrigger(trigger);
 			return healingTotem;
 		}
 		
@@ -36,13 +43,13 @@ public class TotemicCall extends HeroPower {
 	private class SearingTotem extends MinionCard {
 
 		public SearingTotem() {
-			super(SEARING_TOTEM_NAME, Rarity.FREE, HeroClass.SHAMAN, 1);
+			super(SEARING_TOTEM_NAME, 1, 1, Rarity.FREE, HeroClass.SHAMAN, 1);
 			setCollectible(false);
 		}
 
 		@Override
 		public Minion summon() {
-			return createMinion(1, 1, Race.TOTEM);
+			return createMinion(Race.TOTEM);
 		}
 
 		
@@ -50,13 +57,13 @@ public class TotemicCall extends HeroPower {
 	private class StoneclawTotem extends MinionCard {
 
 		public StoneclawTotem() {
-			super(STONECLAW_TOTEM_NAME, Rarity.FREE, HeroClass.SHAMAN, 1);
+			super(STONECLAW_TOTEM_NAME, 0, 2, Rarity.FREE, HeroClass.SHAMAN, 1);
 			setCollectible(false);
 		}
 
 		@Override
 		public Minion summon() {
-			return createMinion(0, 2, Race.TOTEM, GameTag.TAUNT);
+			return createMinion(Race.TOTEM, GameTag.TAUNT);
 		}
 
 		
@@ -100,13 +107,13 @@ public class TotemicCall extends HeroPower {
 	private class WrathOfAirTotem extends MinionCard {
 
 		public WrathOfAirTotem() {
-			super(WRATH_OF_AIR_TOTEM_NAME, Rarity.FREE, HeroClass.SHAMAN, 1);
+			super(WRATH_OF_AIR_TOTEM_NAME, 0, 2, Rarity.FREE, HeroClass.SHAMAN, 1);
 			setCollectible(false);
 		}
 
 		@Override
 		public Minion summon() {
-			Minion wrathOfAirTotem = createMinion(0, 2, Race.TOTEM);
+			Minion wrathOfAirTotem = createMinion(Race.TOTEM);
 			wrathOfAirTotem.setTag(GameTag.SPELL_POWER, 1);
 			return wrathOfAirTotem;
 		}

@@ -12,12 +12,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class AcidicSwampOoze extends MinionCard {
 
 	public AcidicSwampOoze() {
-		super("Acidic Swamp Ooze", Rarity.FREE, HeroClass.ANY, 2);
+		super("Acidic Swamp Ooze", 3, 2, Rarity.FREE, HeroClass.ANY, 2);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion acidicSwampOoze = createMinion(3, 2);
+		Minion acidicSwampOoze = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new DestroyWeaponSpell(), TargetSelection.ENEMY_HERO);
 		acidicSwampOoze.setTag(GameTag.BATTLECRY, battlecry);
 		return acidicSwampOoze;

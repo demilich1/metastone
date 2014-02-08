@@ -41,12 +41,12 @@ public class WarsongCommander extends MinionCard {
 	}
 
 	public WarsongCommander() {
-		super("Warsong Commander", Rarity.FREE, HeroClass.WARRIOR, 3);
+		super("Warsong Commander", 2, 3, Rarity.FREE, HeroClass.WARRIOR, 3);
 	}
 	
 	@Override
 	public Minion summon() {
-		Minion warsongCommander = createMinion(2, 3);
+		Minion warsongCommander = createMinion();
 		warsongCommander.setAura(new WarsongCommanderAura(warsongCommander));
 		return warsongCommander;
 	}

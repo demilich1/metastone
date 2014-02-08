@@ -9,12 +9,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 public class MurlocRaider extends MinionCard {
 
 	public MurlocRaider() {
-		super("Murloc Raider", Rarity.FREE, HeroClass.ANY, 1);
+		super("Murloc Raider", 2, 1, Rarity.FREE, HeroClass.ANY, 1);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(2, 1, Race.MURLOC);
+		return createMinion(Race.MURLOC);
 	}
 
 }

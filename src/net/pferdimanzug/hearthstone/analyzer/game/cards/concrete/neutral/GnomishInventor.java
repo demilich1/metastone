@@ -12,12 +12,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class GnomishInventor extends MinionCard {
 
 	public GnomishInventor() {
-		super("Gnomish Inventor", Rarity.FREE, HeroClass.ANY, 4);
+		super("Gnomish Inventor", 2, 4, Rarity.FREE, HeroClass.ANY, 4);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion gnomishInventor = createMinion(2, 4);
+		Minion gnomishInventor = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new DrawCardSpell(1), TargetSelection.NONE);
 		gnomishInventor.setTag(GameTag.BATTLECRY, battlecry);
 		return gnomishInventor;

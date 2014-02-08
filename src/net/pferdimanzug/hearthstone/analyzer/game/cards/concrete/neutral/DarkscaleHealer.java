@@ -12,12 +12,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 public class DarkscaleHealer extends MinionCard {
 
 	public DarkscaleHealer() {
-		super("Darkscale Healer", Rarity.FREE, HeroClass.ANY, 5);
+		super("Darkscale Healer", 4, 5, Rarity.FREE, HeroClass.ANY, 5);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion darkscaleHealer = createMinion(4, 5);
+		Minion darkscaleHealer = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new HealingSpell(2));
 		battlecry.setTargetKey(EntityReference.FRIENDLY_CHARACTERS);
 		darkscaleHealer.setTag(GameTag.BATTLECRY, battlecry);

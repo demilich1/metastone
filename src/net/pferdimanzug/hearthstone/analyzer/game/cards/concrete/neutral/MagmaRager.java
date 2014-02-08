@@ -8,12 +8,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 public class MagmaRager extends MinionCard {
 
 	public MagmaRager() {
-		super("Magma Rager", Rarity.FREE, HeroClass.ANY, 3);
+		super("Magma Rager", 5, 1, Rarity.FREE, HeroClass.ANY, 3);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(5, 1);
+		return createMinion();
 	}
 
 }

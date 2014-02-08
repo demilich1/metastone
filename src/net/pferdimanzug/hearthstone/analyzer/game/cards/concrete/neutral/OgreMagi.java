@@ -9,12 +9,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 public class OgreMagi extends MinionCard {
 
 	public OgreMagi() {
-		super("Ogre Magi", Rarity.FREE, HeroClass.ANY, 4);
+		super("Ogre Magi", 4, 4, Rarity.FREE, HeroClass.ANY, 4);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion ogreMagi = createMinion(4, 4);
+		Minion ogreMagi = createMinion();
 		ogreMagi.setTag(GameTag.SPELL_POWER, 1);
 		return ogreMagi;
 	}

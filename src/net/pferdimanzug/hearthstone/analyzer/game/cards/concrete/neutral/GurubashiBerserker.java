@@ -16,13 +16,13 @@ public class GurubashiBerserker extends MinionCard {
 	public static final int ATTACK_BONUS = 3;
 
 	public GurubashiBerserker() {
-		super("Gurubashi Berserker", Rarity.FREE, HeroClass.ANY, 5);
+		super("Gurubashi Berserker", BASE_ATTACK, 7, Rarity.FREE, HeroClass.ANY, 5);
 	}
 	
 	@Override
 	public Minion summon() {
-		Minion gurubashiBerserker = createMinion(BASE_ATTACK, 7);
-		Spell buffAttack = new BuffSpell(3, 0);
+		Minion gurubashiBerserker = createMinion();
+		Spell buffAttack = new BuffSpell(ATTACK_BONUS, 0);
 		buffAttack.setTarget(EntityReference.pointTo(gurubashiBerserker));
 		SpellTrigger trigger = new SpellTrigger(new DamageReceivedTrigger(), buffAttack);
 		gurubashiBerserker.setSpellTrigger(trigger);

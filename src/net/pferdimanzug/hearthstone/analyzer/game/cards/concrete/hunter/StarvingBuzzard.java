@@ -33,12 +33,12 @@ public class StarvingBuzzard extends MinionCard {
 	}
 
 	public StarvingBuzzard() {
-		super("Starving Buzzard", Rarity.FREE, HeroClass.HUNTER, 2);
+		super("Starving Buzzard", 2, 1, Rarity.FREE, HeroClass.HUNTER, 2);
 	}
 	
 	@Override
 	public Minion summon() {
-		Minion starvingBuzzard = createMinion(2, 2, Race.BEAST);
+		Minion starvingBuzzard = createMinion(Race.BEAST);
 		SpellTrigger trigger = new SpellTrigger(new StarvingBuzzardTrigger(), new DrawCardSpell());
 		starvingBuzzard.setSpellTrigger(trigger);
 		return starvingBuzzard;

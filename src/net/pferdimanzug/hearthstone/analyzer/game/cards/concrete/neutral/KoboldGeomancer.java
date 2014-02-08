@@ -9,12 +9,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 public class KoboldGeomancer extends MinionCard {
 
 	public KoboldGeomancer() {
-		super("Kobold Geomancer", Rarity.FREE, HeroClass.ANY, 2);
+		super("Kobold Geomancer", 2, 2, Rarity.FREE, HeroClass.ANY, 2);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion koboldGeomancer = createMinion(2, 2);
+		Minion koboldGeomancer = createMinion();
 		koboldGeomancer.setTag(GameTag.SPELL_POWER, 1);
 		return koboldGeomancer;
 	}

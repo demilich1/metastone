@@ -9,12 +9,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 public class StormwindKnight extends MinionCard {
 
 	public StormwindKnight() {
-		super("Stormwind Knight", Rarity.FREE, HeroClass.ANY, 4);
+		super("Stormwind Knight", 2, 5, Rarity.FREE, HeroClass.ANY, 4);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(2, 5, GameTag.CHARGE);
+		return createMinion(GameTag.CHARGE);
 	}
 
 }

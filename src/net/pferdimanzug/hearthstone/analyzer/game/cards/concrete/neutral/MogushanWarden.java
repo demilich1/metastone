@@ -9,12 +9,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 public class MogushanWarden extends MinionCard {
 
 	public MogushanWarden() {
-		super("Mogu'shan Warden", Rarity.COMMON, HeroClass.ANY, 4);
+		super("Mogu'shan Warden", 1, 7, Rarity.COMMON, HeroClass.ANY, 4);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(1, 7, GameTag.TAUNT);
+		return createMinion(GameTag.TAUNT);
 	}
 
 }

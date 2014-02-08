@@ -12,13 +12,13 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class YouthfulBrewmaster extends MinionCard {
 
 	public YouthfulBrewmaster() {
-		super("YouthfulBrewmaster", Rarity.COMMON, HeroClass.ANY, 2);
+		super("YouthfulBrewmaster", 3, 2, Rarity.COMMON, HeroClass.ANY, 2);
 	}
 
 	@Override
 	public Minion summon() {
 		Battlecry battlecry = Battlecry.createBattlecry(new ReturnMinionToHandSpell(), TargetSelection.FRIENDLY_MINIONS);
-		Minion youthfulBrewmaster = createMinion(3, 2);
+		Minion youthfulBrewmaster = createMinion();
 		youthfulBrewmaster.setTag(GameTag.BATTLECRY, battlecry);
 		return youthfulBrewmaster;
 	}

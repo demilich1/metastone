@@ -9,12 +9,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 public class ArgentCommander extends MinionCard {
 
 	public ArgentCommander() {
-		super("Argent Commander", Rarity.RARE, HeroClass.ANY, 6);
+		super("Argent Commander", 4, 2, Rarity.RARE, HeroClass.ANY, 6);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion argentCommander = createMinion(4, 3, GameTag.CHARGE, GameTag.DIVINE_SHIELD);
+		Minion argentCommander = createMinion(GameTag.CHARGE, GameTag.DIVINE_SHIELD);
 		return argentCommander;
 	}
 

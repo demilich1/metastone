@@ -15,12 +15,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 public class BloodImp extends MinionCard {
 
 	public BloodImp() {
-		super("Blood Imp", Rarity.COMMON, HeroClass.WARLOCK, 1);
+		super("Blood Imp", 0, 1, Rarity.COMMON, HeroClass.WARLOCK, 1);
 	} 
 	
 	@Override
 	public Minion summon() {
-		Minion bloodImp = createMinion(0, 1, Race.DEMON, GameTag.STEALTHED);
+		Minion bloodImp = createMinion(Race.DEMON, GameTag.STEALTHED);
 		Spell spell = new BuffRandomSpell(0, 1);
 		spell.setTarget(EntityReference.OTHER_FRIENDLY_MINIONS);
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), spell);

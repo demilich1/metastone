@@ -8,12 +8,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 public class BoulderfistOgre extends MinionCard {
 
 	public BoulderfistOgre() {
-		super("Boulderfist Ogre", Rarity.FREE, HeroClass.ANY, 6);
+		super("Boulderfist Ogre", 6, 7, Rarity.FREE, HeroClass.ANY, 6);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(6, 7);
+		return createMinion();
 	}
 
 }

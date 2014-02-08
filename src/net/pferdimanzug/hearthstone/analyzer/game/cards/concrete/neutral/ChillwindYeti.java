@@ -8,12 +8,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 public class ChillwindYeti extends MinionCard {
 
 	public ChillwindYeti() {
-		super("Chillwind Yeti", Rarity.FREE, HeroClass.ANY, 4);
+		super("Chillwind Yeti", 4, 5, Rarity.FREE, HeroClass.ANY, 4);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(4, 5);
+		return createMinion();
 	}
 
 

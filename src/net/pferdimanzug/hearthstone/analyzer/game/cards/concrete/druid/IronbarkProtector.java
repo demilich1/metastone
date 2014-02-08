@@ -9,12 +9,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 public class IronbarkProtector extends MinionCard {
 
 	public IronbarkProtector() {
-		super("Ironbark Protector", Rarity.FREE, HeroClass.DRUID, 8);
+		super("Ironbark Protector", 8, 8, Rarity.FREE, HeroClass.DRUID, 8);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(8, 8, GameTag.TAUNT);
+		return createMinion(GameTag.TAUNT);
 	}
 
 }

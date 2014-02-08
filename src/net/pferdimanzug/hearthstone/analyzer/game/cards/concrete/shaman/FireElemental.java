@@ -14,12 +14,12 @@ public class FireElemental extends MinionCard {
 	private static final int BATTLECRY_DAMAGE = 3;
 	
 	public FireElemental() {
-		super("Fire Elemental", Rarity.FREE, HeroClass.SHAMAN, 6);
+		super("Fire Elemental", 6, 5, Rarity.FREE, HeroClass.SHAMAN, 6);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion fireElemental = createMinion(6, 5);
+		Minion fireElemental = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new DamageSpell(BATTLECRY_DAMAGE), TargetSelection.ANY);
 		fireElemental.setTag(GameTag.BATTLECRY, battlecry);
 		return fireElemental;

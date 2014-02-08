@@ -9,12 +9,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 public class IronfurGrizzly extends MinionCard {
 
 	public IronfurGrizzly() {
-		super("Ironfur Grizzly", Rarity.FREE, HeroClass.ANY, 3);
+		super("Ironfur Grizzly", 3, 3, Rarity.FREE, HeroClass.ANY, 3);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(3, 3, GameTag.TAUNT);
+		return createMinion(GameTag.TAUNT);
 	}
 
 }

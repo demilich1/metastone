@@ -9,12 +9,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 public class WorgenInfiltrator extends MinionCard {
 
 	public WorgenInfiltrator() {
-		super("Worgen Infiltrator", Rarity.COMMON, HeroClass.ANY, 1);
+		super("Worgen Infiltrator", 2, 1, Rarity.COMMON, HeroClass.ANY, 1);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(2, 1, GameTag.STEALTHED);
+		return createMinion(GameTag.STEALTHED);
 	}
 
 }

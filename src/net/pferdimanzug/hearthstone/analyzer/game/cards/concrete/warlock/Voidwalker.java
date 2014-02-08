@@ -10,12 +10,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 public class Voidwalker extends MinionCard {
 
 	public Voidwalker() {
-		super("Voidwalker", Rarity.FREE, HeroClass.WARLOCK, 1);
+		super("Voidwalker", 1, 3, Rarity.FREE, HeroClass.WARLOCK, 1);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(1, 3, Race.DEMON, GameTag.TAUNT);
+		return createMinion(Race.DEMON, GameTag.TAUNT);
 	}
 
 }

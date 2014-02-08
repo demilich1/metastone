@@ -14,13 +14,13 @@ public class Polymorph extends SpellCard {
 	private class Sheep extends MinionCard {
 
 		public Sheep() {
-			super("Sheep", Rarity.FREE, HeroClass.ANY, 0);
+			super("Sheep", 1, 1, Rarity.FREE, HeroClass.ANY, 0);
 			setCollectible(false);
 		}
 
 		@Override
 		public Minion summon() {
-			return createMinion(1, 1, Race.BEAST);
+			return createMinion(Race.BEAST);
 		}
 		
 	}

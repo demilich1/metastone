@@ -32,12 +32,12 @@ public class NorthshireCleric extends MinionCard {
 	}
 
 	public NorthshireCleric() {
-		super("Northshire Cleric", Rarity.FREE, HeroClass.PRIEST, 1);
+		super("Northshire Cleric", 1, 3, Rarity.FREE, HeroClass.PRIEST, 1);
 	}
 	
 	@Override
 	public Minion summon() {
-		Minion northshireCleric = createMinion(1, 3);
+		Minion northshireCleric = createMinion();
 		SpellTrigger trigger = new SpellTrigger(new NorthshireClericTrigger(), new DrawCardSpell());
 		northshireCleric.setSpellTrigger(trigger);
 		return northshireCleric;

@@ -31,12 +31,12 @@ public class FrostwolfWarlord extends MinionCard {
 	}
 
 	public FrostwolfWarlord() {
-		super("Frostwolf Warlord", Rarity.FREE, HeroClass.ANY, 5);
+		super("Frostwolf Warlord", 4, 4, Rarity.FREE, HeroClass.ANY, 5);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion frostwolfWarlord = createMinion(4, 4);
+		Minion frostwolfWarlord = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new BuffLeadership(), TargetSelection.SELF);
 		frostwolfWarlord.setTag(GameTag.BATTLECRY, battlecry);
 		return frostwolfWarlord;

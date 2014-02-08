@@ -19,12 +19,12 @@ public class DarkIronDwarf extends MinionCard {
 	private static final int ATTACK_BONUS = 2;
 
 	public DarkIronDwarf() {
-		super("Dark Iron Dwarf", Rarity.COMMON, HeroClass.ANY, 4);
+		super("Dark Iron Dwarf", 4, 4, Rarity.COMMON, HeroClass.ANY, 4);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion darkIronDwarf = createMinion(4, 4);
+		Minion darkIronDwarf = createMinion();
 		SpellTrigger endBuffTrigger = new SpellTrigger(new TurnEndTrigger(), new BuffSpell(-ATTACK_BONUS));
 		Spell buff = new BuffSpell(+ATTACK_BONUS);
 		Spell endBuff = new AddSpellTriggerSpell(endBuffTrigger);

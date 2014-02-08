@@ -33,12 +33,12 @@ public class Houndmaster extends MinionCard {
 	}
 
 	public Houndmaster() {
-		super("Houndmaster", Rarity.FREE, HeroClass.HUNTER, 4);
+		super("Houndmaster", 4, 3, Rarity.FREE, HeroClass.HUNTER, 4);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion houndmaster = createMinion(4, 3);
+		Minion houndmaster = createMinion();
 		houndmaster.setTag(GameTag.BATTLECRY, new BattlecryHoundmaster());
 		return houndmaster;
 	}

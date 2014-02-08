@@ -19,12 +19,12 @@ public class AbusiveSergeant extends MinionCard {
 	public static final int ATTACK_BONUS = 2;
 
 	public AbusiveSergeant() {
-		super("Abusive Sergeant", Rarity.COMMON, HeroClass.ANY, 1);
+		super("Abusive Sergeant", 2, 1, Rarity.COMMON, HeroClass.ANY, 1);
 	}
 	
 	@Override
 	public Minion summon() {
-		Minion abusiveSergeant = createMinion(2, 1);
+		Minion abusiveSergeant = createMinion();
 		SpellTrigger endBuffTrigger = new SpellTrigger(new TurnEndTrigger(), new BuffSpell(-ATTACK_BONUS));
 		Spell battlecrySpell = new MetaSpell(new BuffSpell(+ATTACK_BONUS), new AddSpellTriggerSpell(endBuffTrigger));
 		Battlecry battlecryAbusive = Battlecry.createBattlecry(battlecrySpell, TargetSelection.MINIONS);

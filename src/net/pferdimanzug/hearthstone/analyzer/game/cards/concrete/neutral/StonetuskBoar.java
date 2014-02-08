@@ -10,12 +10,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 public class StonetuskBoar extends MinionCard {
 
 	public StonetuskBoar() {
-		super("Stonetusk Boar", Rarity.FREE, HeroClass.ANY, 1);
+		super("Stonetusk Boar", 1, 1, Rarity.FREE, HeroClass.ANY, 1);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(1, 1, Race.BEAST, GameTag.CHARGE);
+		return createMinion(Race.BEAST, GameTag.CHARGE);
 	}
 
 }

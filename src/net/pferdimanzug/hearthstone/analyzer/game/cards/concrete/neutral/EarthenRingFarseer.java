@@ -12,12 +12,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class EarthenRingFarseer extends MinionCard {
 
 	public EarthenRingFarseer() {
-		super("Earthen Ring Farseer", Rarity.COMMON, HeroClass.ANY, 3);
+		super("Earthen Ring Farseer", 3, 3, Rarity.COMMON, HeroClass.ANY, 3);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion earthenRingFarseer = createMinion(3, 3);
+		Minion earthenRingFarseer = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new HealingSpell(3), TargetSelection.ANY);
 		earthenRingFarseer.setTag(GameTag.BATTLECRY, battlecry);
 		return earthenRingFarseer;

@@ -12,12 +12,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class Windspeaker extends MinionCard {
 
 	public Windspeaker() {
-		super("Windspeaker", Rarity.FREE, HeroClass.SHAMAN, 4);
+		super("Windspeaker", 3, 3, Rarity.FREE, HeroClass.SHAMAN, 4);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion windspeaker = createMinion(3, 3);
+		Minion windspeaker = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new ApplyTagSpell(GameTag.WINDFURY), TargetSelection.FRIENDLY_MINIONS);
 		windspeaker.setTag(GameTag.BATTLECRY, battlecry);
 		return windspeaker;

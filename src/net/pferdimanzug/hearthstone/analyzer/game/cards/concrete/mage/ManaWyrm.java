@@ -11,12 +11,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 public class ManaWyrm extends MinionCard {
 
 	public ManaWyrm() {
-		super("Mana Wyrm", Rarity.COMMON, HeroClass.MAGE, 1);
+		super("Mana Wyrm", 1, 3, Rarity.COMMON, HeroClass.MAGE, 1);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion manaWyrm = createMinion(1, 3);
+		Minion manaWyrm = createMinion();
 		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(), new BuffSpell(1));
 		manaWyrm.setSpellTrigger(trigger);
 		return manaWyrm;

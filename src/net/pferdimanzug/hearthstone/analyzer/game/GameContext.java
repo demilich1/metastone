@@ -164,7 +164,7 @@ public class GameContext implements Cloneable {
 
 	public void play() {
 		logger.debug("Game starts: " + getPlayer1().getName() + " VS. " + getPlayer2().getName());
-		int startingPlayerId = logic.determineBeginner(PLAYER_1, PLAYER_1);
+		int startingPlayerId = logic.determineBeginner(PLAYER_1, PLAYER_2);
 		activePlayer = getPlayer(startingPlayerId);
 		logger.debug(activePlayer.getName() + " begins");
 		logic.init(activePlayer.getId(), true);

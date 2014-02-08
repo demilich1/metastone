@@ -12,15 +12,20 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public abstract class MinionCard extends Card {
 
-	public MinionCard(String name, Rarity rarity, HeroClass classRestriction, int manaCost) {
+	private final int baseAttack;
+	private final int baseHp;
+
+	public MinionCard(String name, int baseAttack, int baseHp, Rarity rarity, HeroClass classRestriction, int manaCost) {
 		super(name, CardType.MINION, rarity, classRestriction, manaCost);
+		this.baseAttack = baseAttack;
+		this.baseHp = baseHp;
 	}
 
-	protected Minion createMinion(int baseAttack, int baseHp, GameTag... tags) {
-		return createMinion(baseAttack, baseHp, Race.NONE, tags);
+	protected Minion createMinion(GameTag... tags) {
+		return createMinion(Race.NONE, tags);
 	}
 
-	protected Minion createMinion(int baseAttack, int baseHp, Race race, GameTag... tags) {
+	protected Minion createMinion(Race race, GameTag... tags) {
 		Minion minion = new Minion(this);
 		minion.setBaseAttack(baseAttack);
 		minion.setBaseHp(baseHp);
@@ -49,5 +54,13 @@ public abstract class MinionCard extends Card {
 	}
 
 	public abstract Minion summon();
+
+	public int getBaseAttack() {
+		return baseAttack;
+	}
+
+	public int getBaseHp() {
+		return baseHp;
+	}
 
 }

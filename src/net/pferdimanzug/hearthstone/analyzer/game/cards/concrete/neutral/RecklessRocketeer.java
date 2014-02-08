@@ -9,12 +9,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 public class RecklessRocketeer extends MinionCard {
 
 	public RecklessRocketeer() {
-		super("Reckless Rocketeer", Rarity.FREE, HeroClass.ANY, 6);
+		super("Reckless Rocketeer", 5, 2, Rarity.FREE, HeroClass.ANY, 6);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(5, 2, GameTag.CHARGE);
+		return createMinion(GameTag.CHARGE);
 	}
 
 }

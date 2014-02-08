@@ -40,12 +40,12 @@ public class RaidLeader extends MinionCard {
 	}
 
 	public RaidLeader() {
-		super("Raid Leader", Rarity.FREE, HeroClass.ANY, 3);
+		super("Raid Leader", 2, 2, Rarity.FREE, HeroClass.ANY, 3);
 	}
 	
 	@Override
 	public Minion summon() {
-		Minion raidLeader = createMinion(2, 2);
+		Minion raidLeader = createMinion();
 		raidLeader.setAura(new RaidLeaderAura(raidLeader));
 		return raidLeader;
 	}

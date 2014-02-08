@@ -15,12 +15,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class CruelTaskmaster extends MinionCard {
 
 	public CruelTaskmaster() {
-		super("Cruel Taskmaster", Rarity.COMMON, HeroClass.WARRIOR, 2);
+		super("Cruel Taskmaster", 2, 2, Rarity.COMMON, HeroClass.WARRIOR, 2);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion cruelTaskmaster = createMinion(2, 2);
+		Minion cruelTaskmaster = createMinion();
 		Spell cruelBuffSpell = new MetaSpell(new BuffSpell(2, 0), new DamageSpell(1));
 		Battlecry battlecry = Battlecry.createBattlecry(cruelBuffSpell, TargetSelection.MINIONS);
 		cruelTaskmaster.setTag(GameTag.BATTLECRY, battlecry);

@@ -34,12 +34,12 @@ public class BloodsailRaider extends MinionCard {
 	}
 
 	public BloodsailRaider() {
-		super("Bloodsail Raider", Rarity.COMMON, HeroClass.ANY, 2);
+		super("Bloodsail Raider", 2, 3, Rarity.COMMON, HeroClass.ANY, 2);
 	}
 	
 	@Override
 	public Minion summon() {
-		Minion bloodsailRaider = createMinion(2, 3, Race.PIRATE);
+		Minion bloodsailRaider = createMinion(Race.PIRATE);
 		Battlecry battlecry = Battlecry.createBattlecry(new CopyWeaponAttack(), TargetSelection.SELF);
 		bloodsailRaider.setTag(GameTag.BATTLECRY, battlecry);
 		return bloodsailRaider;

@@ -12,12 +12,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class ArgentProtector extends MinionCard {
 
 	public ArgentProtector() {
-		super("Argent Protector", Rarity.COMMON, HeroClass.PALADIN, 2);
+		super("Argent Protector", 2, 2, Rarity.COMMON, HeroClass.PALADIN, 2);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion argentProtector = createMinion(2, 2);
+		Minion argentProtector = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new ApplyTagSpell(GameTag.DIVINE_SHIELD), TargetSelection.FRIENDLY_MINIONS);
 		argentProtector.setTag(GameTag.BATTLECRY, battlecry);
 		return argentProtector;
