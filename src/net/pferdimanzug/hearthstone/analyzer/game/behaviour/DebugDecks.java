@@ -26,5 +26,13 @@ public class DebugDecks {
 		return deck;
 	}
 	
+	public static CardCollection getSingleCardDeck(Card card, int count) {
+		CardCollection deck = new CardCollection();
+		for (int i = 0; i < count; i++) {
+			deck.add(card.clone());
+		}
+		return deck;
+	}
+	
 
 }

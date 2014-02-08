@@ -11,7 +11,7 @@
 
 <fx:root type="BorderPane" id="" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <center>
-    <StackPane prefHeight="-1.0" prefWidth="-1.0">
+    <StackPane fx:id="targetAnchor" prefHeight="-1.0" prefWidth="-1.0">
       <children>
         <ImageView fx:id="portrait" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
           <image>

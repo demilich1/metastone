@@ -1,11 +1,27 @@
+#board {
+	-fx-background-color: antiquewhite;
+}
+
 #outlined_score {
-    -fx-font: bold 16pt "Arial";
+    -fx-font: bold 16.0pt "Arial";
     -fx-text-fill: white;
-    -fx-effect: dropshadow(one-pass-box, black, 6, 0.9, 1, 1);
+    -fx-effect: dropshadow(one-pass-box, black, 6.0, 0.9, 1.0, 1.0);
 }
 
 #card_border {
 	 -fx-border-color: black ;
 	 -fx-border-style: solid ;
-	 -fx-border-width: 1;
+	 -fx-border-width: 1.0;
 }
+
+#center_message {
+	-fx-font: bold 20.0pt "Arial";
+    -fx-text-fill: gray;
+    -fx-font-weight: bold;
+    -fx-font-style: italic;
+}
+
+#target_button {
+	-fx-background-color: transparent;
+}
+

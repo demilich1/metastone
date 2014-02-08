@@ -2,48 +2,46 @@
 
 <?import java.lang.*?>
 <?import java.net.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<fx:root type="BorderPane" prefHeight="160.0" prefWidth="120.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
-  <bottom>
-    <BorderPane prefHeight="20.0" prefWidth="120.0">
-      <left>
-        <StackPane prefHeight="-1.0" prefWidth="-1.0">
+<fx:root type="BorderPane" prefHeight="-1.0" prefWidth="-1.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <center>
+    <StackPane fx:id="targetAnchor" prefHeight="-1.0" prefWidth="-1.0" BorderPane.alignment="CENTER">
+      <children>
+        <Circle fill="#bfbfbf" radius="40.0" stroke="BLACK" strokeDashOffset="0.0" strokeLineCap="SQUARE" strokeType="INSIDE" strokeWidth="2.0" />
+        <Label fx:id="name" alignment="CENTER" labelFor="$name" maxWidth="80.0" text="&lt;minion name&gt;" textAlignment="CENTER" textOverrun="ELLIPSIS" wrapText="true" StackPane.alignment="CENTER">
+          <font>
+            <Font name="Arial Bold" size="12.0" />
+          </font>
+        </Label>
+        <StackPane prefHeight="-1.0" prefWidth="-1.0" translateY="0.0" StackPane.alignment="BOTTOM_CENTER">
           <children>
-            <ImageView fitHeight="33.0" fitWidth="32.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" y="0.0">
+            <ImageView fitHeight="33.0" fitWidth="32.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" translateY="-1.0" y="0.0" StackPane.alignment="BOTTOM_LEFT">
               <image>
                 <Image url="@../resources/img/common/attack_value_icon.png" />
               </image>
             </ImageView>
-            <Label id="outlined_score" fx:id="attack" alignment="BASELINE_CENTER" contentDisplay="CENTER" disable="false" text="0" textAlignment="LEFT" wrapText="false" />
-          </children>
-        </StackPane>
-      </left>
-      <right>
-        <StackPane prefHeight="-1.0" prefWidth="-1.0">
-          <children>
-            <ImageView fitHeight="30.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateY="-2.0">
+            <Label id="outlined_score" fx:id="attack" alignment="BASELINE_CENTER" contentDisplay="CENTER" disable="false" text="0" textAlignment="LEFT" translateX="10.0" translateY="-4.0" wrapText="false" StackPane.alignment="BOTTOM_LEFT" />
+            <ImageView fitHeight="30.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateY="-2.0" StackPane.alignment="BOTTOM_RIGHT">
               <image>
-                <Image url="@../resources/data/img/common/health_value_icon.png" />
+                <Image url="@../resources/img/common/health_value_icon.png" />
               </image>
             </ImageView>
-            <Label id="outlined_score" fx:id="hp" alignment="BASELINE_CENTER" text="0" />
+            <Label id="outlined_score" fx:id="hp" alignment="BASELINE_CENTER" text="0" translateX="-8.0" translateY="-4.0" StackPane.alignment="BOTTOM_RIGHT" />
           </children>
         </StackPane>
-      </right>
-    </BorderPane>
-  </bottom>
-  <center>
-    <Label fx:id="name" labelFor="$name" text="&lt;minion name&gt;" textAlignment="LEFT" textOverrun="ELLIPSIS" wrapText="true">
-      <font>
-        <Font name="Arial Bold" size="12.0" />
-      </font>
-    </Label>
+      </children>
+    </StackPane>
   </center>
+  <padding>
+    <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+  </padding>
   <stylesheets>
     <URL value="@gameboard.css" />
   </stylesheets>

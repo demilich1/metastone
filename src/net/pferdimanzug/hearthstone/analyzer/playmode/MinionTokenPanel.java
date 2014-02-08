@@ -52,7 +52,7 @@ public class MinionTokenPanel extends JPanel {
 		nameArea.setText(minion.getName());
 		attackLabel.setText(String.valueOf(minion.getAttack()));
 		hpLabel.setText(String.valueOf(minion.getHp()));
-		setBorder(PlayModeUiFactory.createRarityBorder(minion.getSourceCard().getRarity()));
+		setBorder(IconFactory.createRarityBorder(minion.getSourceCard().getRarity()));
 	}
 
 	private static String getTagString(Minion minion) {

@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 
+import javafx.scene.image.Image;
+
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -16,12 +18,13 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
+import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.HeroPower;
 
-public class PlayModeUiFactory {
-	
+public class IconFactory {
+
 	private static final String RESOURCE_PATH = "/net/pferdimanzug/hearthstone/analyzer/resources";
-
-	private PlayModeUiFactory() {
+	
+	private IconFactory() {
 	}
 
 	public static JComponent createHandCard(Card card, Player player) {
@@ -69,41 +72,89 @@ public class PlayModeUiFactory {
 
 	}
 
-	public static String getIconUrl(Hero hero) {
-		String iconName = RESOURCE_PATH + "/img/heroes/";
+	public static String getHeroIconUrl(Hero hero) {
+		String iconPath = RESOURCE_PATH + "/img/heroes/";
 		switch (hero.getHeroClass()) {
 		case DRUID:
-			iconName += "malfurion";
+			iconPath += "malfurion";
 			break;
 		case HUNTER:
-			iconName += "rexxar";
+			iconPath += "rexxar";
 			break;
 		case MAGE:
-			iconName += "jaina";
+			iconPath += "jaina";
 			break;
 		case PALADIN:
-			iconName += "paladin";
+			iconPath += "paladin";
 			break;
 		case PRIEST:
-			iconName += "anduin";
+			iconPath += "anduin";
 			break;
 		case ROGUE:
-			iconName += "valeera";
+			iconPath += "valeera";
 			break;
 		case SHAMAN:
-			iconName += "thrall";
+			iconPath += "thrall";
 			break;
 		case WARLOCK:
-			iconName += "guldan";
+			iconPath += "guldan";
 			break;
 		case WARRIOR:
-			iconName += "garrosh";
+			iconPath += "garrosh";
 			break;
 		default:
 		case ANY:
 			break;
 
 		}
-		return iconName + ".png";
+		return iconPath + ".png";
+	}
+
+	public static String getHeroPowerIconUrl(HeroPower heroPower) {
+		String iconPath = RESOURCE_PATH + "/img/powers/";
+		switch (heroPower.getClassRestriction()) {
+		case DRUID:
+			iconPath += "shapeshift";
+			break;
+		case HUNTER:
+			iconPath += "steady_shot";
+			break;
+		case MAGE:
+			iconPath += "fireblast";
+			break;
+		case PALADIN:
+			iconPath += "reinforce";
+			break;
+		case PRIEST:
+			iconPath += "lesser_heal";
+			break;
+		case ROGUE:
+			iconPath += "dagger_mastery";
+			break;
+		case SHAMAN:
+			iconPath += "totemic_call";
+			break;
+		case WARLOCK:
+			iconPath += "life_tap";
+			break;
+		case WARRIOR:
+			iconPath += "armor_up";
+			break;
+		default:
+			break;
+	
+		}
+		iconPath += ".png";
+		return iconPath;
+	}
+	
+	public static Image getTargetIcon() {
+		String iconPath = RESOURCE_PATH + "/img/common/target.png";
+		return new Image(iconPath);
+	}
+	
+	public static Image getSummonHelper() {
+		String iconPath = RESOURCE_PATH + "/img/common/arrow_down_blue.png";
+		return new Image(iconPath);
 	}
 }

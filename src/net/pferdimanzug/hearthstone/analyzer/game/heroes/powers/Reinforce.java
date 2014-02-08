@@ -24,7 +24,7 @@ public class Reinforce extends HeroPower {
 	}
 
 	public Reinforce() {
-		super("Reinforce");
+		super("Reinforce", HeroClass.PALADIN);
 		setTargetRequirement(TargetSelection.NONE);
 		setSpell(new SummonSpell(new SilverHandRecruit()));
 	}

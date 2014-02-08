@@ -14,8 +14,8 @@ public abstract class HeroPower extends SpellCard {
 
 	private boolean used;
 
-	public HeroPower(String name) {
-		super(name, CardType.HERO_POWER, Rarity.FREE, HeroClass.ANY, 2);
+	public HeroPower(String name, HeroClass heroClass) {
+		super(name, CardType.HERO_POWER, Rarity.FREE, heroClass, 2);
 	}
 
 	@Override

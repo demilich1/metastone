@@ -1,37 +1,36 @@
 package net.pferdimanzug.hearthstone.analyzer.playmode;
 
-import java.io.IOException;
-
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.image.ImageView;
+import javafx.scene.shape.Shape;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
-public class MinionToken extends BorderPane {
+public class MinionToken extends GameToken {
 	@FXML
 	private Label name;
 	@FXML
 	private Label attack;
 	@FXML
 	private Label hp;
+	
+	@FXML
+	private Shape selector;
 
 	public MinionToken() {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MinionToken.fxml"));
-		fxmlLoader.setRoot(this);
-		fxmlLoader.setController(this);
-
-		try {
-			fxmlLoader.load();
-		} catch (IOException exception) {
-			throw new RuntimeException(exception);
-		}
+		super("MinionToken.fxml");
 	}
-	
+
 	public void setMinion(Minion minion) {
 		name.setText(minion.getName());
 		attack.setText(String.valueOf(minion.getAttack()));
 		hp.setText(String.valueOf(minion.getHp()));
 	}
+
+
+	
 
 }

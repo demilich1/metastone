@@ -12,6 +12,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.DebugDecks;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.MinMaxBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.ShatteredSunCleric;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
@@ -29,6 +30,7 @@ public class HearthstoneAnalyzer extends Application {
 		HeroClass aiHeroClass = HeroClass.WARRIOR;
 		Hero hero1 = HeroFactory.createHero(humanHeroClass);
 		Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
+		
 		player1.setBehaviour(new HumanBehaviour());
 		Hero hero2 = HeroFactory.createHero(aiHeroClass);
 		Player player2 = new Player("Bot", hero2, DebugDecks.getRandomDeck(hero2.getHeroClass()));

@@ -114,7 +114,7 @@ public class PlayModePanel extends JPanel {
 	private void updateHandCardView(JPanel panel, Player player) {
 		panel.removeAll();
 		for (Card card : player.getHand()) {
-			panel.add(PlayModeUiFactory.createHandCard(card, player));
+			panel.add(IconFactory.createHandCard(card, player));
 		}
 	}
 	

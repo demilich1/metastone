@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root type="BorderPane" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<fx:root type="BorderPane" id="board" prefHeight="768.0" prefWidth="1024.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <bottom>
     <BorderPane prefHeight="-1.0" prefWidth="-1.0">
       <bottom>
@@ -20,11 +21,25 @@
       <bottom>
         <HBox fx:id="p1MinionPane" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
       </bottom>
+      <center>
+        <HBox id="center_message" alignment="CENTER" prefHeight="-1.0" prefWidth="-1.0" BorderPane.alignment="CENTER">
+          <children>
+            <Label id="center_message" fx:id="centerMessageLabel" text="&lt;center message&gt;" visible="false">
+              <stylesheets>
+                <URL value="@gameboard.css" />
+              </stylesheets>
+            </Label>
+          </children>
+        </HBox>
+      </center>
       <top>
         <HBox fx:id="p2MinionPane" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
       </top>
     </BorderPane>
   </center>
+  <stylesheets>
+    <URL value="@gameboard.css" />
+  </stylesheets>
   <top>
     <BorderPane prefHeight="-1.0" prefWidth="-1.0">
       <center>

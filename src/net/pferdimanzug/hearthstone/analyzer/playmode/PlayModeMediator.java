@@ -6,10 +6,10 @@ import java.util.List;
 import javafx.application.Platform;
 import javafx.scene.layout.Pane;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanActionOptions;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanTargetOptions;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.HarvestGolem;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import de.pferdimanzug.nittygrittymvc.Mediator;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
@@ -23,7 +23,7 @@ public class PlayModeMediator extends Mediator<GameNotification> {
 		super(NAME);
 		view = new PlayModePane();
 	}
-	
+
 	@Override
 	public List<GameNotification> listNotificationInterests() {
 		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
@@ -43,40 +43,46 @@ public class PlayModeMediator extends Mediator<GameNotification> {
 			parent.getChildren().add(view);
 			break;
 		case GAME_STATE_UPDATE:
-			 Platform.runLater(new Runnable() {
-                 @Override public void run() {
-                	 view.updateGameState((GameContextVisualizable) notification.getBody());
-                 }
-             });
-			
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					view.updateGameState((GameContextVisualizable) notification.getBody());
+				}
+			});
+
 			break;
 		case GAME_ACTION_PERFORMED:
-			//view.updateTurnLog((GameContext) notification.getBody());
+			// view.updateTurnLog((GameContext) notification.getBody());
 			break;
 		case HUMAN_PROMPT_FOR_ACTION:
-			//new HumanActionPromptDialog(view, (HumanActionOptions) notification.getBody());
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					new HumanActionPromptView(view.getScene().getWindow(), (HumanActionOptions) notification.getBody());
+				}
+			});
 			break;
 		case HUMAN_PROMPT_FOR_TARGET:
-			HumanTargetOptions targetOptions =(HumanTargetOptions) notification.getBody();
+			HumanTargetOptions targetOptions = (HumanTargetOptions) notification.getBody();
 			selectTarget(targetOptions);
 			break;
 		default:
 			break;
 		}
 	}
-	
-	private void selectTarget(HumanTargetOptions targetOptions) {
+
+	private void selectTarget(final HumanTargetOptions targetOptions) {
 		List<Entity> validTargets = targetOptions.getAction().getValidTargets();
 		if (validTargets.size() == 1) {
 			targetOptions.getBehaviour().setSelectedTarget(validTargets.get(0));
 			return;
 		}
-		// open new window for target selection
-//		Entity selectedTarget = (Entity) JOptionPane.showInputDialog(view, "Select a target", "Select a target",
-//				JOptionPane.PLAIN_MESSAGE, null, targetOptions.getAction().getValidTargets().toArray(), null);
-//		targetOptions.getBehaviour().setSelectedTarget(selectedTarget);
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				view.enableTargetSelection(targetOptions);
+			}
+		});
 	}
-
-	
 
 }

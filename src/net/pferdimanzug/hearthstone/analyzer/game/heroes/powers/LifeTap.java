@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.heroes.powers;
 
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DrawCardSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
@@ -12,7 +13,7 @@ public class LifeTap extends HeroPower {
 	public static final int DAMAGE = 2;
 	
 	public LifeTap() {
-		super("Life Tap");
+		super("Life Tap", HeroClass.WARLOCK);
 		setTargetRequirement(TargetSelection.NONE);
 		Spell damage = new DamageSpell(2);
 		damage.setTarget(EntityReference.FRIENDLY_HERO);

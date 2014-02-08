@@ -118,7 +118,7 @@ public class TotemicCall extends HeroPower {
 	private final static String SEARING_TOTEM_NAME = "Searing Totem";
 
 	public TotemicCall() {
-		super("Totemic Call");
+		super("Totemic Call", HeroClass.SHAMAN);
 		setTargetRequirement(TargetSelection.NONE);
 		setSpell(new TotemicCallSpell());
 	}

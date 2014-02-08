@@ -13,7 +13,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 public class HumanBehaviour implements IBehaviour {
 
 	private GameAction selectedAction;
-	private boolean waitingForAction;
+	private boolean waitingForInput;
 	private Entity selectedTarget;
 
 	@Override
@@ -22,18 +22,26 @@ public class HumanBehaviour implements IBehaviour {
 			return null;
 		}
 
+		waitingForInput = true;
 		ApplicationFacade.getInstance().sendNotification(GameNotification.HUMAN_PROMPT_FOR_TARGET,
 				new HumanTargetOptions(this, action));
+		
+		while (waitingForInput) {
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+			}
+		}
 
 		return selectedTarget;
 	}
 
 	@Override
 	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
-		waitingForAction = true;
+		waitingForInput = true;
 		HumanActionOptions options = new HumanActionOptions(this, context, player, validActions);
 		ApplicationFacade.getInstance().sendNotification(GameNotification.HUMAN_PROMPT_FOR_ACTION, options);
-		while (waitingForAction) {
+		while (waitingForInput) {
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
@@ -44,11 +52,12 @@ public class HumanBehaviour implements IBehaviour {
 
 	public void setSelectedAction(GameAction selectedAction) {
 		this.selectedAction = selectedAction;
-		waitingForAction = false;
+		waitingForInput = false;
 	}
 
 	public void setSelectedTarget(Entity selectedTarget) {
 		this.selectedTarget = selectedTarget;
+		waitingForInput = false;
 	}
 	
 	public Entity getSelectedTarget() {
