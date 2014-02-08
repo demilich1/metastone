@@ -29,7 +29,7 @@ public class WildGrowth extends SpellCard {
 		@Override
 		protected void onCast(GameContext context, Player player, Entity target) {
 			if (player.getMaxMana() < GameLogic.MAX_MANA) {
-				player.setMaxMana(player.getMana() + 1);
+				player.setMaxMana(player.getMaxMana() + 1);
 			} else {
 				player.getHand().add(new ExcessManaCard());
 			}

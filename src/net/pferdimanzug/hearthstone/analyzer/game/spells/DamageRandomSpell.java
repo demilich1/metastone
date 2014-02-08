@@ -11,7 +11,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 public class DamageRandomSpell extends DamageSpell {
 
 	private final int iterations;
-	private int damage;
 
 	public DamageRandomSpell(int damage, int iterations) {
 		super(damage);
@@ -27,7 +26,7 @@ public class DamageRandomSpell extends DamageSpell {
 				randomTarget = targets.get(ThreadLocalRandom.current().nextInt(targets.size()));
 			}
 			
-			context.getLogic().damage(player, randomTarget, damage, false);
+			context.getLogic().damage(player, randomTarget, getDamage(), false);
 		}
 	}
 
