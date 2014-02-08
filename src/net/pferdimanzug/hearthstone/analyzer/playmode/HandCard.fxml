@@ -2,6 +2,7 @@
 
 <?import java.lang.*?>
 <?import java.net.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -11,23 +12,23 @@
   <bottom>
     <StackPane prefHeight="0.0" prefWidth="0.0" translateY="8.0">
       <children>
-        <ImageView fx:id="attackIcon" fitHeight="150.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true" translateX="-8.0" StackPane.alignment="BOTTOM_LEFT">
+        <ImageView fx:id="attackIcon" fitHeight="150.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" translateX="-5.0" translateY="-2.0" StackPane.alignment="BOTTOM_LEFT">
           <image>
             <Image url="@../resources/img/common/attack_value_icon.png" />
           </image>
         </ImageView>
-        <ImageView fx:id="hpIcon" fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" translateX="8.0" translateY="-3.0" StackPane.alignment="BOTTOM_RIGHT">
+        <ImageView fx:id="hpIcon" fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" translateX="4.0" translateY="-4.0" StackPane.alignment="BOTTOM_RIGHT">
           <image>
             <Image url="@../resources/img/common/health_value_icon.png" />
           </image>
         </ImageView>
-        <Label id="outlined_score" fx:id="attackLabel" alignment="CENTER" text="0" translateX="4.0" translateY="-8.0" StackPane.alignment="BOTTOM_LEFT" />
-        <Label id="outlined_score" fx:id="hpLabel" text="0" translateX="-4.0" translateY="-8.0" StackPane.alignment="BOTTOM_RIGHT" />
+        <Label id="outlined_score" fx:id="attackLabel" alignment="CENTER" text="0" translateX="4.0" translateY="-6.0" StackPane.alignment="BOTTOM_LEFT" />
+        <Label id="outlined_score" fx:id="hpLabel" text="0" translateX="-4.0" translateY="-6.0" StackPane.alignment="BOTTOM_RIGHT" />
       </children>
     </StackPane>
   </bottom>
   <center>
-    <Label id="name" fx:id="nameLabel" alignment="CENTER" text="&lt;card name&gt;" wrapText="true" BorderPane.alignment="CENTER">
+    <Label id="name" fx:id="nameLabel" alignment="CENTER" maxWidth="78.0" text="&lt;card name&gt;" textAlignment="CENTER" wrapText="true" BorderPane.alignment="TOP_CENTER">
       <font>
         <Font name="Arial Bold" size="12.0" />
       </font>
@@ -37,6 +38,19 @@
     <URL value="@gameboard.css" />
   </stylesheets>
   <top>
-    <Label id="outlined_score" fx:id="manacostLabel" alignment="TOP_LEFT" styleClass="outlined_score" text="0" BorderPane.alignment="TOP_LEFT" />
+    <StackPane prefHeight="-1.0" prefWidth="-1.0">
+      <children>
+        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" translateX="-8.0" translateY="-4.0" StackPane.alignment="TOP_LEFT">
+          <image>
+            <Image url="@../resources/img/common/mana_crystal.png" />
+          </image>
+        </ImageView>
+        <Label id="outlined_score" fx:id="manacostLabel" alignment="TOP_LEFT" styleClass="outlined_score" text="0" translateY="-4.0" StackPane.alignment="CENTER_LEFT">
+          <StackPane.margin>
+            <Insets />
+          </StackPane.margin>
+        </Label>
+      </children>
+    </StackPane>
   </top>
 </fx:root>
