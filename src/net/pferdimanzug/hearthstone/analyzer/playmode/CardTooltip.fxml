@@ -1,6 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.*?>
 
-<fx:root type="BorderPane" prefHeight="240.0" prefWidth="174.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" />
+<fx:root type="BorderPane" id="card_border" prefHeight="240.0" prefWidth="174.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <bottom>
+    <StackPane prefHeight="-1.0" prefWidth="-1.0">
+      <children>
+        <ImageView fx:id="attackIcon" fitHeight="100.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateX="-8.0" translateY="8.0" StackPane.alignment="BOTTOM_LEFT">
+          <image>
+            <Image url="@../resources/img/common/attack_value_icon.png" />
+          </image>
+        </ImageView>
+        <ImageView fx:id="hpIcon" fitHeight="100.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateX="8.0" translateY="6.0" StackPane.alignment="BOTTOM_RIGHT">
+          <image>
+            <Image url="@../resources/img/common/health_value_icon.png" />
+          </image>
+        </ImageView>
+        <Label id="outlined_score" fx:id="attackLabel" text="0" translateX="4.0" StackPane.alignment="BOTTOM_LEFT" />
+        <Label id="outlined_score" fx:id="hpLabel" text="0" translateX="-4.0" StackPane.alignment="BOTTOM_RIGHT" />
+      </children>
+    </StackPane>
+  </bottom>
+  <center>
+    <VBox alignment="CENTER" prefHeight="-1.0" prefWidth="-1.0" BorderPane.alignment="CENTER">
+      <children>
+        <Label id="outlined_score" fx:id="nameLabel" text="&lt;card name&gt;" textAlignment="CENTER" wrapText="true" />
+        <Label fx:id="descriptionLabel" text="&lt;card description&gt;" wrapText="true">
+          <font>
+            <Font name="Arial" size="14.0" />
+          </font>
+        </Label>
+      </children>
+    </VBox>
+  </center>
+  <stylesheets>
+    <URL value="@gameboard.css" />
+  </stylesheets>
+  <top>
+    <StackPane prefHeight="-1.0" prefWidth="-1.0">
+      <children>
+        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateX="-8.0" translateY="-8.0" StackPane.alignment="TOP_LEFT">
+          <image>
+            <Image url="@../resources/img/common/mana_crystal.png" />
+          </image>
+        </ImageView>
+        <Label id="outlined_score" fx:id="manacostLabel" contentDisplay="CENTER" text="0" textAlignment="CENTER" translateX="4.0" StackPane.alignment="TOP_LEFT" />
+      </children>
+    </StackPane>
+  </top>
+</fx:root>

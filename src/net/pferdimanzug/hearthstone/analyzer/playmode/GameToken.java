@@ -34,6 +34,11 @@ public class GameToken extends BorderPane {
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
+		
+		createTargetButton();
+	}
+	
+	private void createTargetButton() {
 		target = (StackPane) lookup("#targetAnchor");
 		Image image = IconFactory.getTargetIcon();
 		ImageView targetIcon = new ImageView(image);
