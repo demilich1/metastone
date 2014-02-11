@@ -13,6 +13,7 @@ public class ShatteredSunCleric extends MinionCard{
 
 	public ShatteredSunCleric() {
 		super("Shattered Sun Cleric", 3, 2, Rarity.FREE, HeroClass.ANY, 3);
+		setDescription("Battlecry: Give a friendly minion +1/+1");
 	}
 
 	@Override

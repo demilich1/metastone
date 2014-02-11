@@ -10,6 +10,7 @@ public class KoboldGeomancer extends MinionCard {
 
 	public KoboldGeomancer() {
 		super("Kobold Geomancer", 2, 2, Rarity.FREE, HeroClass.ANY, 2);
+		setDescription("Spell Damage +1");
 	}
 
 	@Override

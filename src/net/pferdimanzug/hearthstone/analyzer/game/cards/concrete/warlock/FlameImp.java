@@ -16,6 +16,7 @@ public class FlameImp extends MinionCard {
 
 	public FlameImp() {
 		super("FlameImp", 3, 2, Rarity.COMMON, HeroClass.WARLOCK, 1);
+		setDescription("Battlecry: Deal 3 damage to your hero.");
 	}
 
 	@Override

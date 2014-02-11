@@ -43,6 +43,7 @@ public class StormwindChampion extends MinionCard {
 
 	public StormwindChampion() {
 		super("Stormwind Champion", 6, 6, Rarity.FREE, HeroClass.ANY, 7);
+		setDescription("Your other minions have +1/+1.");
 	}
 
 	@Override

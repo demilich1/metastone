@@ -14,6 +14,7 @@ public class AmaniBerserker extends MinionCard {
 
 	public AmaniBerserker() {
 		super("Amani Berserker", BASE_ATTACK, 3, Rarity.COMMON, HeroClass.ANY, 2);
+		setDescription("Enrage: +3 Attack");
 	}
 
 	@Override

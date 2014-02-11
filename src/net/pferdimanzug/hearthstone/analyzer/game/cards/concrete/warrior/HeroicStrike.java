@@ -11,6 +11,7 @@ public class HeroicStrike extends SpellCard {
 
 	public HeroicStrike() {
 		super("Heroic Strike", Rarity.FREE, HeroClass.WARRIOR, 2);
+		setDescription("Give your hero +4 Attack this turn.");
 		setTargetRequirement(TargetSelection.NONE);
 		setSpell(new BuffHeroSpell(4, 0));
 		setPredefinedTarget(EntityReference.FRIENDLY_HERO);

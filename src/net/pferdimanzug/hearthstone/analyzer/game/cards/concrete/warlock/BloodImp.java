@@ -16,6 +16,7 @@ public class BloodImp extends MinionCard {
 
 	public BloodImp() {
 		super("Blood Imp", 0, 1, Rarity.COMMON, HeroClass.WARLOCK, 1);
+		setDescription("Stealth. At the end of your turn, give another random friendly minion +1 Health.");
 	} 
 	
 	@Override

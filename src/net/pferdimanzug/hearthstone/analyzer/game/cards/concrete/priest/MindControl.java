@@ -10,6 +10,7 @@ public class MindControl extends SpellCard {
 
 	public MindControl() {
 		super("Mind Control", Rarity.FREE, HeroClass.PRIEST, 10);
+		setDescription("Take control of an enemy minion.");
 		setSpell(new MindControlSpell());
 		setTargetRequirement(TargetSelection.ENEMY_MINIONS);
 	}

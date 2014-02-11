@@ -1,5 +1,5 @@
 #board {
-	-fx-background-color: antiquewhite;
+	-fx-background-color: darkkhaki;
 }
 
 #outlined_score {
@@ -9,6 +9,7 @@
 }
 
 #card_border {
+	 -fx-background-color: antiquewhite;
 	 -fx-border-color: black;
 	 -fx-border-style: solid;
 	 -fx-border-width: 1.0;

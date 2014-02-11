@@ -27,6 +27,7 @@ public class MurlocTidehunter extends MinionCard {
 
 	public MurlocTidehunter() {
 		super("Murloc Tidehunter", 2, 1, Rarity.FREE, HeroClass.ANY, 2);
+		setDescription("Battlecry: Summon a 1/1 Murloc Scout.");
 	}
 
 	@Override

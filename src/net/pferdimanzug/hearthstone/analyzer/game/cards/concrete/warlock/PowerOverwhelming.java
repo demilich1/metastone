@@ -15,6 +15,7 @@ public class PowerOverwhelming extends SpellCard {
 
 	public PowerOverwhelming() {
 		super("PowerOverwhelming", Rarity.COMMON, HeroClass.WARLOCK, 1);
+		setDescription("Give a friendly minion +4/+4 until end of turn. Then, it dies. Horribly.");
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), new DestroySpell());
 		setSpell(new MetaSpell(new BuffSpell(4, 4), new AddSpellTriggerSpell(trigger)));
 		setTargetRequirement(TargetSelection.FRIENDLY_MINIONS);

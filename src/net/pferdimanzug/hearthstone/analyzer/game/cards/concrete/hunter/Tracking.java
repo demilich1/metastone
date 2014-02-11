@@ -46,6 +46,7 @@ public class Tracking extends SpellCard {
 	
 	public Tracking() {
 		super("Tracking", Rarity.FREE, HeroClass.HUNTER, 1);
+		setDescription("Look at the top three cards of your deck. Draw one and discard the others.");
 		setSpell(new TrackingSpell());
 		setTargetRequirement(TargetSelection.NONE);
 	}

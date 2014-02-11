@@ -42,6 +42,7 @@ public class WarsongCommander extends MinionCard {
 
 	public WarsongCommander() {
 		super("Warsong Commander", 2, 3, Rarity.FREE, HeroClass.WARRIOR, 3);
+		setDescription("Whenever you summon a minion with 3 or less Attack, give it Charge. ");
 	}
 	
 	@Override

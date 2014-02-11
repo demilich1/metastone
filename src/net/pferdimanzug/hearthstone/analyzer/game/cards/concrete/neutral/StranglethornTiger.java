@@ -11,6 +11,7 @@ public class StranglethornTiger extends MinionCard {
 
 	public StranglethornTiger() {
 		super("StranglethornTiger", 5, 5, Rarity.COMMON, HeroClass.ANY, 5);
+		setDescription("Stealth");
 	}
 
 	@Override

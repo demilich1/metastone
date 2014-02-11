@@ -40,6 +40,7 @@ public class KillCommand extends SpellCard {
 	
 	public KillCommand() {
 		super("Kill Command", Rarity.FREE, HeroClass.HUNTER, 3);
+		setDescription("Deal $3 damage. If you have a Beast, deal $5 damage instead.");
 		setSpell(new KillCommandSpell(3, 5));
 		setTargetRequirement(TargetSelection.ANY);
 	}

@@ -15,6 +15,7 @@ public class DarkIronDwarf extends MinionCard {
 
 	public DarkIronDwarf() {
 		super("Dark Iron Dwarf", 4, 4, Rarity.COMMON, HeroClass.ANY, 4);
+		setDescription("Battlecry: Give a minion +2 Attack this turn. ");
 	}
 
 	@Override

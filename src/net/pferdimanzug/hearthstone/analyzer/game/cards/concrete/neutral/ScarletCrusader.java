@@ -10,6 +10,7 @@ public class ScarletCrusader extends MinionCard {
 
 	public ScarletCrusader() {
 		super("Scarlet Crusader", 3, 1, Rarity.COMMON, HeroClass.ANY, 3);
+		setDescription("Divine Shield");
 	}
 
 	@Override

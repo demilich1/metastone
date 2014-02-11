@@ -13,6 +13,7 @@ public class MadBomber extends MinionCard {
 
 	public MadBomber() {
 		super("Mad Bomber", 3, 2, Rarity.COMMON, HeroClass.ANY, 2);
+		setDescription("Battlecry: Deal 3 damage randomly split between all other characters.");
 	}
 
 	@Override

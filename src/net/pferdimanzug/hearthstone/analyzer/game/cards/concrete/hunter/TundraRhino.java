@@ -43,6 +43,7 @@ public class TundraRhino extends MinionCard {
 
 	public TundraRhino() {
 		super("Tundra Rhino", 2, 5, Rarity.FREE, HeroClass.HUNTER, 5);
+		setDescription("Your Beasts have Charge.");
 	}
 	
 	@Override

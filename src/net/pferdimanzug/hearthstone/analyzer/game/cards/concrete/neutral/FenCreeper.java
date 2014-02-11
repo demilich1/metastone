@@ -10,6 +10,7 @@ public class FenCreeper extends MinionCard {
 
 	public FenCreeper() {
 		super("Fen Creeper", 3, 6, Rarity.COMMON, HeroClass.ANY, 5);
+		setDescription("Taunt");
 	}
 
 	@Override

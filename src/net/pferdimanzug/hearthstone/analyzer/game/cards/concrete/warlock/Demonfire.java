@@ -17,6 +17,7 @@ public class Demonfire extends SpellCard {
 
 	public Demonfire() {
 		super("Demonfire", Rarity.COMMON, HeroClass.WARLOCK, 2);
+		setDescription("Deal $2 damage to a minion. If it’s a friendly Demon, give it +2/+2 instead.");
 		setSpell(new DemonfireSpell());
 		setTargetRequirement(TargetSelection.MINIONS);
 	}

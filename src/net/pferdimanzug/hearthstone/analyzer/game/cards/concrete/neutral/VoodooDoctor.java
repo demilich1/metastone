@@ -13,6 +13,7 @@ public class VoodooDoctor extends MinionCard {
 
 	public VoodooDoctor() {
 		super("Voodoo Doctor", 2, 1, Rarity.FREE, HeroClass.ANY, 1);
+		setDescription("Battlecry: Restore 2 Health.");
 	}
 
 	@Override

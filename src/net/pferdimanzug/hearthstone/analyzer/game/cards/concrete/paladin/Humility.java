@@ -24,6 +24,7 @@ public class Humility extends SpellCard {
 	
 	public Humility() {
 		super("Humility", Rarity.FREE, HeroClass.PALADIN, 1);
+		setDescription("Change a minion's Attack to 1.");
 		setSpell(new HumilitySpell());
 		setTargetRequirement(TargetSelection.MINIONS);
 	}

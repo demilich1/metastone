@@ -14,6 +14,7 @@ public class Charge extends SpellCard {
 
 	public Charge() {
 		super("Charge", Rarity.FREE, HeroClass.WARRIOR, 3);
+		setDescription("Give a friendly minion +2 Attack and Charge.");
 		setTargetRequirement(TargetSelection.FRIENDLY_MINIONS);
 		Spell spell = new MetaSpell(new BuffSpell(2), new ApplyTagSpell(GameTag.CHARGE));
 		setSpell(spell);

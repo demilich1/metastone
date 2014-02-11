@@ -41,6 +41,7 @@ public class RaidLeader extends MinionCard {
 
 	public RaidLeader() {
 		super("Raid Leader", 2, 2, Rarity.FREE, HeroClass.ANY, 3);
+		setDescription("Your other minions have +1 Attack.");
 	}
 	
 	@Override

@@ -45,6 +45,7 @@ public class TimberWolf extends MinionCard {
 
 	public TimberWolf() {
 		super("Timber Wolf", 1, 1, Rarity.FREE, HeroClass.HUNTER, 1);
+		setDescription("Your other Beasts have +1 Attack.");
 	}
 
 	@Override

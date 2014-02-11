@@ -11,6 +11,7 @@ public class ColdBlood extends SpellCard {
 
 	public ColdBlood() {
 		super("Cold Blood", Rarity.COMMON, HeroClass.ROGUE, 1);
+		setDescription("Give a minion +2 Attack. Combo: +4 Attack instead.");
 		ComboSpell metaSpell = new ComboSpell(new BuffSpell(2, 0), new BuffSpell(4,0));
 		setSpell(metaSpell);
 		setTargetRequirement(TargetSelection.MINIONS);

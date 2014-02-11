@@ -13,6 +13,7 @@ public class GnomishInventor extends MinionCard {
 
 	public GnomishInventor() {
 		super("Gnomish Inventor", 2, 4, Rarity.FREE, HeroClass.ANY, 4);
+		setDescription("Battlecry: Draw a card.");
 	}
 
 	@Override

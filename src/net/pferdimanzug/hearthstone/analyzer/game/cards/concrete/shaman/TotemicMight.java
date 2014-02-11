@@ -32,6 +32,7 @@ public class TotemicMight extends SpellCard {
 
 	public TotemicMight() {
 		super("Totemic Might", Rarity.FREE, HeroClass.SHAMAN, 0);
+		setDescription("Give your Totems +2 Health.");
 		setSpell(new TotemicMightSpell());
 		setTargetRequirement(TargetSelection.NONE);
 		setPredefinedTarget(EntityReference.FRIENDLY_MINIONS);

@@ -13,6 +13,7 @@ public class IronforgeRifleman extends MinionCard {
 
 	public IronforgeRifleman() {
 		super("Ironforge Rifleman", 2, 2, Rarity.FREE, HeroClass.ANY, 3);
+		setDescription("Battlecry: Deal 1 damage.");
 	}
 
 	@Override

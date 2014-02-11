@@ -13,6 +13,7 @@ public class GuardianOfKings extends MinionCard {
 
 	public GuardianOfKings() {
 		super("Guardian of Kings", 5, 6, Rarity.FREE, HeroClass.PALADIN, 7);
+		setDescription("Battlecry: Restore #6 Health to your hero.");
 	}
 
 	@Override

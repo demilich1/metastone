@@ -15,6 +15,7 @@ public class Nightblade extends MinionCard {
 
 	public Nightblade() {
 		super("Nightblade", 4, 4, Rarity.FREE, HeroClass.ANY, 5);
+		setDescription("Battlecry: Deal 3 damage to the enemy hero.");
 	}
 
 	@Override

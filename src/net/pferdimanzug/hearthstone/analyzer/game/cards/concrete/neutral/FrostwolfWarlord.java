@@ -32,6 +32,7 @@ public class FrostwolfWarlord extends MinionCard {
 
 	public FrostwolfWarlord() {
 		super("Frostwolf Warlord", 4, 4, Rarity.FREE, HeroClass.ANY, 5);
+		setDescription("Battlecry: Gain +1/+1 for each other friendly minion on the battlefield. ");
 	}
 
 	@Override

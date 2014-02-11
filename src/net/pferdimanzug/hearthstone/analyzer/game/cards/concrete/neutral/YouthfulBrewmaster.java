@@ -13,6 +13,7 @@ public class YouthfulBrewmaster extends MinionCard {
 
 	public YouthfulBrewmaster() {
 		super("YouthfulBrewmaster", 3, 2, Rarity.COMMON, HeroClass.ANY, 2);
+		setDescription("Battlecry: Return a friendly minion from the battlefield to your hand.");
 	}
 
 	@Override

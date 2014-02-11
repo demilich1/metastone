@@ -10,6 +10,7 @@ public class HolyLight extends SpellCard {
 
 	public HolyLight() {
 		super("Holy Light", Rarity.FREE, HeroClass.PALADIN, 2);
+		setDescription("Restore #6 Health.");
 		setTargetRequirement(TargetSelection.ANY);
 		setSpell(new HealingSpell(6));
 	}

@@ -10,6 +10,7 @@ public class FaerieDragon extends MinionCard {
 
 	public FaerieDragon() {
 		super("Faerie Dragon", 3, 2, Rarity.COMMON, HeroClass.ANY, 2);
+		setDescription("Can't be targeted by Spells or Hero Powers.");
 	}
 
 	@Override

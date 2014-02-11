@@ -14,6 +14,7 @@ public class InnerFire extends SpellCard {
 
 	public InnerFire() {
 		super("Inner Fire", Rarity.COMMON, HeroClass.PRIEST, 1);
+		setDescription("Change a minion's Attack to be equal to its Health.");
 		setSpell(new InnerFireSpell());
 		setTargetRequirement(TargetSelection.MINIONS);
 		

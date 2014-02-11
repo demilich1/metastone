@@ -13,6 +13,7 @@ public class DarkscaleHealer extends MinionCard {
 
 	public DarkscaleHealer() {
 		super("Darkscale Healer", 4, 5, Rarity.FREE, HeroClass.ANY, 5);
+		setDescription("Battlecry: Restore 2 Health to all friendly characters.");
 	}
 
 	@Override

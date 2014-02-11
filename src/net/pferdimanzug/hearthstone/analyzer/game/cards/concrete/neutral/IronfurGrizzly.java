@@ -10,6 +10,7 @@ public class IronfurGrizzly extends MinionCard {
 
 	public IronfurGrizzly() {
 		super("Ironfur Grizzly", 3, 3, Rarity.FREE, HeroClass.ANY, 3);
+		setDescription("Taunt");
 	}
 
 	@Override

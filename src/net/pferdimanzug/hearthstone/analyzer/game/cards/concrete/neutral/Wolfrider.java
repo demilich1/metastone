@@ -10,6 +10,7 @@ public class Wolfrider extends MinionCard {
 
 	public Wolfrider() {
 		super("Wolfrider", 3, 1, Rarity.FREE, HeroClass.ANY, 3);
+		setDescription("Charge");
 	}
 
 	@Override

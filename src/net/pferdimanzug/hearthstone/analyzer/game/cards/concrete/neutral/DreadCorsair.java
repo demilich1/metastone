@@ -13,6 +13,7 @@ public class DreadCorsair extends MinionCard {
 
 	public DreadCorsair() {
 		super("Dread Corsair", 3, 3, Rarity.COMMON, HeroClass.ANY, 4);
+		setDescription("Taunt. Costs (1) less per Attack of your weapon. ");
 	}
 
 	@Override

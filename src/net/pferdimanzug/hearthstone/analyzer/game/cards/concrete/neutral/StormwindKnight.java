@@ -10,6 +10,7 @@ public class StormwindKnight extends MinionCard {
 
 	public StormwindKnight() {
 		super("Stormwind Knight", 2, 5, Rarity.FREE, HeroClass.ANY, 4);
+		setDescription("Charge");
 	}
 
 	@Override

@@ -10,6 +10,7 @@ public class MogushanWarden extends MinionCard {
 
 	public MogushanWarden() {
 		super("Mogu'shan Warden", 1, 7, Rarity.COMMON, HeroClass.ANY, 4);
+		setDescription("Taunt");
 	}
 
 	@Override

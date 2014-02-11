@@ -10,6 +10,7 @@ public class Shieldbearer extends MinionCard {
 
 	public Shieldbearer() {
 		super("Shieldbearer", 0, 4, Rarity.COMMON, HeroClass.ANY, 1);
+		setDescription("Taunt");
 	}
 
 	@Override

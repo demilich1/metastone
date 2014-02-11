@@ -33,6 +33,7 @@ public class NorthshireCleric extends MinionCard {
 
 	public NorthshireCleric() {
 		super("Northshire Cleric", 1, 3, Rarity.FREE, HeroClass.PRIEST, 1);
+		setDescription("Whenever a minion is healed, draw a card.");
 	}
 	
 	@Override

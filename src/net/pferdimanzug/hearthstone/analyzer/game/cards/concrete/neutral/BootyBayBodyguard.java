@@ -11,6 +11,7 @@ public class BootyBayBodyguard extends MinionCard {
 
 	public BootyBayBodyguard() {
 		super("Booty Bay Bodyguard", 5, 4, Rarity.FREE, HeroClass.ANY, 5);
+		setDescription("Taunt");
 	}
 
 	@Override

@@ -10,6 +10,7 @@ public class Fireball extends SpellCard {
 	
 	public Fireball() {
 		super("Fireball", Rarity.FREE, HeroClass.MAGE, 4);
+		setDescription("Deal $6 damage.");
 		setTargetRequirement(TargetSelection.ANY);
 		setSpell(new DamageSpell(6));
 	}

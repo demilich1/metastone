@@ -15,6 +15,7 @@ public class DreadInfernal extends MinionCard {
 
 	public DreadInfernal() {
 		super("Dread Infernal", 6, 6, Rarity.FREE, HeroClass.WARLOCK, 6);
+		setDescription("Battlecry: Deal 1 damage to ALL other characters. ");
 	}
 
 	@Override

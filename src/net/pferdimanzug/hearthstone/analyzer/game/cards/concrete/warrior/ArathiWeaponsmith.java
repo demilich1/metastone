@@ -28,6 +28,7 @@ public class ArathiWeaponsmith extends MinionCard {
 
 	public ArathiWeaponsmith() {
 		super("Arathi Weaponsmith", 3, 3, Rarity.COMMON, HeroClass.WARRIOR, 4);
+		setDescription("Battlecry: Equip a 2/2 weapon.");
 	}
 	
 	@Override

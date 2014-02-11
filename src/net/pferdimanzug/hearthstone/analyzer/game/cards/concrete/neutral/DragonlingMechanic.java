@@ -27,6 +27,7 @@ public class DragonlingMechanic extends MinionCard {
 
 	public DragonlingMechanic() {
 		super("Dragonling Mechanic", 2, 4, Rarity.FREE, HeroClass.ANY, 4);
+		setDescription("Battlecry: Summon a 2/1 Mechanical Dragonling. ");
 	}
 	
 	@Override

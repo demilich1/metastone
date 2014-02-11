@@ -13,6 +13,7 @@ public class LeperGnome extends MinionCard {
 
 	public LeperGnome() {
 		super("Leper Gnome", 2, 1, Rarity.COMMON, HeroClass.ANY, 1);
+		setDescription("Deathrattle: Deal 2 damage to the enemy hero.");
 	}
 
 	@Override

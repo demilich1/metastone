@@ -10,6 +10,7 @@ public class ThrallmarFarseer extends MinionCard {
 
 	public ThrallmarFarseer() {
 		super("Thrallmar Farseer", 2, 3, Rarity.COMMON, HeroClass.ANY, 3);
+		setDescription("Windfury");
 	}
 
 	@Override

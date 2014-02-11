@@ -13,6 +13,7 @@ public class PriestessOfElune extends MinionCard {
 
 	public PriestessOfElune() {
 		super("Priestess Of Elune", 5, 4, Rarity.COMMON, HeroClass.ANY, 6);
+		setDescription("Battlecry: Restore 4 Health to your hero.");
 	}
 
 	@Override

@@ -13,6 +13,7 @@ public class AncestralHealing extends SpellCard {
 
 	public AncestralHealing() {
 		super("Ancestral Healing", Rarity.FREE, HeroClass.SHAMAN, 0);
+		setDescription("Restore a minion to full Health and give it Taunt.");
 		setTargetRequirement(TargetSelection.MINIONS);
 		// implemented 'heal to full' as very large number. Change this if any problems arise
 		setSpell(new MetaSpell(new HealingSpell(9999), new ApplyTagSpell(GameTag.TAUNT)));

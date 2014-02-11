@@ -12,6 +12,7 @@ public class LootHoarder extends MinionCard {
 
 	public LootHoarder() {
 		super("Loot Hoarder", 2, 1, Rarity.COMMON, HeroClass.ANY, 2);
+		setDescription("Deathrattle: Draw a card.");
 	}
 
 	@Override

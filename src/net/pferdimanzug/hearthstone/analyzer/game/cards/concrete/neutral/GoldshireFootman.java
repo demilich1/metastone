@@ -10,6 +10,7 @@ public class GoldshireFootman extends MinionCard {
 
 	public GoldshireFootman() {
 		super("Goldshire Footman", 1, 2, Rarity.FREE, HeroClass.ANY, 1);
+		setDescription("Taunt");
 	}
 
 	@Override

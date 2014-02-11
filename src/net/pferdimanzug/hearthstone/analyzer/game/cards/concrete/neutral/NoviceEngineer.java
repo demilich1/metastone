@@ -13,6 +13,7 @@ public class NoviceEngineer extends MinionCard {
 
 	public NoviceEngineer() {
 		super("Novice Engineer", 1, 1, Rarity.FREE, HeroClass.ANY, 2);
+		setDescription("Battlecry: Draw a card.");
 	}
 
 	@Override

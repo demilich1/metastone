@@ -10,6 +10,7 @@ public class SenjinShieldmasta extends MinionCard {
 
 	public SenjinShieldmasta() {
 		super("Sen'jin Shieldmasta", 3, 5, Rarity.FREE, HeroClass.ANY, 4);
+		setDescription("Taunt");
 	}
 
 	@Override

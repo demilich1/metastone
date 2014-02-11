@@ -13,6 +13,7 @@ public class Corruption extends SpellCard {
 
 	public Corruption() {
 		super("Corruption", Rarity.FREE, HeroClass.WARLOCK, 1);
+		setDescription("Choose an enemy minion. At the start of your turn, destroy it.");
 		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), new DestroySpell());
 		setSpell(new AddSpellTriggerSpell(trigger));
 		setTargetRequirement(TargetSelection.ENEMY_MINIONS);

@@ -12,6 +12,7 @@ public class AcolyteOfPain extends MinionCard {
 
 	public AcolyteOfPain() {
 		super("Acolyte of Pain", 1, 3, Rarity.COMMON, HeroClass.ANY, 3);
+		setDescription("Whenever this minion takes damage, draw a card.");
 	}
 
 	@Override

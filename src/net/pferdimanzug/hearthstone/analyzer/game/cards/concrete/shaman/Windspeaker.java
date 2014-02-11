@@ -13,6 +13,7 @@ public class Windspeaker extends MinionCard {
 
 	public Windspeaker() {
 		super("Windspeaker", 3, 3, Rarity.FREE, HeroClass.SHAMAN, 4);
+		setDescription("Battlecry: Give a friendly minion Windfury.");
 	}
 
 	@Override

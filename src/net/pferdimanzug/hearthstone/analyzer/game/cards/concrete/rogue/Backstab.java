@@ -11,6 +11,7 @@ public class Backstab extends SpellCard {
 
 	public Backstab() {
 		super("Backstab", Rarity.FREE, HeroClass.ROGUE, 0);
+		setDescription("Deal $2 damage to an undamaged minion.");
 		setTargetRequirement(TargetSelection.MINIONS);
 		setSpell(new DamageSpell(2));
 	}

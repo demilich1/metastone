@@ -34,6 +34,7 @@ public class BattleRage extends SpellCard {
 	
 	public BattleRage() {
 		super("Battle Rage", Rarity.COMMON, HeroClass.WARRIOR, 2);
+		setDescription("Draw a card for each damaged friendly character.");
 		setSpell(new BattleRageSpell());
 		setTargetRequirement(TargetSelection.NONE);
 		setPredefinedTarget(EntityReference.NONE);

@@ -10,6 +10,7 @@ public class Archmage extends MinionCard {
 	
 	public Archmage() {
 		super("Archmage", 4, 7, Rarity.FREE, HeroClass.ANY, 6);
+		setDescription("Spell Damage +1");
 	}
 
 	@Override

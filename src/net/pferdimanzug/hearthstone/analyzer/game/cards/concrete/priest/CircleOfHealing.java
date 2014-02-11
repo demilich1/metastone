@@ -11,6 +11,7 @@ public class CircleOfHealing extends SpellCard {
 
 	public CircleOfHealing() {
 		super("Circle of Healing", Rarity.COMMON, HeroClass.PRIEST, 0);
+		setDescription("Restore #4 Health to ALL minions.");
 		setSpell(new HealingSpell(4));
 		setPredefinedTarget(EntityReference.ALL_MINIONS);
 		setTargetRequirement(TargetSelection.NONE);

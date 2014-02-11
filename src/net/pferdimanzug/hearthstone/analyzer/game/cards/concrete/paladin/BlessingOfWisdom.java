@@ -32,6 +32,7 @@ public class BlessingOfWisdom extends SpellCard {
 	
 	public BlessingOfWisdom() {
 		super("Blessing of Wisdom", Rarity.COMMON, HeroClass.PALADIN, 1);
+		setDescription("Choose a minion. Whenever it attacks, draw a card.");
 		SpellTrigger trigger = new SpellTrigger(new BlessingOfWisdomTrigger(), new DrawCardSpell());
 		setSpell(new AddSpellTriggerSpell(trigger));
 		setTargetRequirement(TargetSelection.MINIONS);

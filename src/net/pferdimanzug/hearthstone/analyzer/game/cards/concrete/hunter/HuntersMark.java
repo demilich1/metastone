@@ -25,6 +25,7 @@ public class HuntersMark extends SpellCard {
 	
 	public HuntersMark() {
 		super("Hunter's Mark", Rarity.FREE, HeroClass.HUNTER, 0);
+		setDescription("Change a minion's Health to 1.");
 		setSpell(new HuntersMarkSpell());
 		setTargetRequirement(TargetSelection.ENEMY_MINIONS);
 	}

@@ -10,6 +10,7 @@ public class FrostwolfGrunt extends MinionCard {
 
 	public FrostwolfGrunt() {
 		super("Frostwolf Grunt", 2, 2, Rarity.FREE, HeroClass.ANY, 2);
+		setDescription("Taunt");
 	}
 
 	@Override

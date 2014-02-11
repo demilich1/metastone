@@ -13,6 +13,7 @@ public class StormpikeCommando extends MinionCard {
 	
 	public StormpikeCommando() {
 		super("Stormpike Commando", 4, 2, Rarity.FREE, HeroClass.ANY, 5);
+		setDescription("Battlecry: Deal 2 damage.");
 	}
 
 	@Override

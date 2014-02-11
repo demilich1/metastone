@@ -12,6 +12,7 @@ public class DeadlyPoison extends SpellCard {
 
 	public DeadlyPoison() {
 		super("Deadly Poison", Rarity.FREE, HeroClass.ROGUE, 1);
+		setDescription("Give your weapon +2 Attack.");
 		setSpell(new BuffWeaponSpell(2));
 		setTargetRequirement(TargetSelection.NONE);
 	}

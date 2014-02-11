@@ -10,6 +10,7 @@ public class RecklessRocketeer extends MinionCard {
 
 	public RecklessRocketeer() {
 		super("Reckless Rocketeer", 5, 2, Rarity.FREE, HeroClass.ANY, 6);
+		setDescription("Charge");
 	}
 
 	@Override

@@ -14,6 +14,7 @@ public class DefiasRingleader extends MinionCard {
 
 	public DefiasRingleader() {
 		super("DefiasRingleader", 2, 2, Rarity.COMMON, HeroClass.ROGUE, 2);
+		setDescription("Combo: Summon a 2/1 Defias Bandit.");
 	}
 
 	@Override

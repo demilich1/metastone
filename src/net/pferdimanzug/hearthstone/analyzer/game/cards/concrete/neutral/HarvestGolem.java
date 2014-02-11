@@ -12,6 +12,7 @@ public class HarvestGolem extends MinionCard {
 
 	public HarvestGolem() {
 		super("Harvest Golem", 2, 3, Rarity.COMMON, HeroClass.ANY, 3);
+		setDescription("Deathrattle: Summon a 2/1 Damaged Golem.");
 	}
 
 	@Override

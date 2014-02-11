@@ -14,6 +14,7 @@ public class HolyNova extends SpellCard {
 	
 	public HolyNova() {
 		super("Holy Nova", Rarity.FREE, HeroClass.PRIEST, 5);
+		setDescription("Deal $2 damage to all enemies. Restore #2 Health to all friendly characters.");
 		Spell damageComponent = new DamageSpell(2);
 		damageComponent.setTarget(EntityReference.ENEMY_CHARACTERS);
 		Spell healComponent = new HealingSpell(+2);

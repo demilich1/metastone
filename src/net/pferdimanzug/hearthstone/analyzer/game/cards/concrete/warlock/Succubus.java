@@ -13,6 +13,7 @@ public class Succubus extends MinionCard {
 
 	public Succubus() {
 		super("Succubus", 4, 3, Rarity.FREE, HeroClass.WARLOCK, 2);
+		setDescription("Battlecry: Discard a random card.");
 	}
 
 	@Override

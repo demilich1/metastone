@@ -17,6 +17,7 @@ public class IceLance extends SpellCard {
 
 	public IceLance() {
 		super("Ice Lance", Rarity.COMMON, HeroClass.MAGE, 1);
+		setDescription("Freeze a character. If it was already Frozen, deal $4 damage instead.");
 		setSpell(new IceLanceSpell());
 		setTargetRequirement(TargetSelection.ANY);
 	}

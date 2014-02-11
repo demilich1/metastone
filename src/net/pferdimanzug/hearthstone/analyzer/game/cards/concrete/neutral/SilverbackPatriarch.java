@@ -10,6 +10,7 @@ public class SilverbackPatriarch extends MinionCard {
 
 	public SilverbackPatriarch() {
 		super("Silverback Patriarch", 1, 4, Rarity.FREE, HeroClass.ANY, 3);
+		setDescription("Taunt");
 	}
 
 	@Override

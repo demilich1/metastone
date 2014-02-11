@@ -13,6 +13,7 @@ public class EarthenRingFarseer extends MinionCard {
 
 	public EarthenRingFarseer() {
 		super("Earthen Ring Farseer", 3, 3, Rarity.COMMON, HeroClass.ANY, 3);
+		setDescription("Battlecry: Restore 3 Health.");
 	}
 
 	@Override

@@ -16,6 +16,7 @@ public class CruelTaskmaster extends MinionCard {
 
 	public CruelTaskmaster() {
 		super("Cruel Taskmaster", 2, 2, Rarity.COMMON, HeroClass.WARRIOR, 2);
+		setDescription("Battlecry: Deal 1 damage to a minion and give it +2 Attack.");
 	}
 
 	@Override

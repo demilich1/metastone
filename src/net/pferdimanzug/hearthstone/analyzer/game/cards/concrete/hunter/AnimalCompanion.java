@@ -32,8 +32,8 @@ public class AnimalCompanion extends SpellCard {
 	private class Leokk extends MinionCard {
 
 		public Leokk() {
-			asd
 			super("Leokk", 2, 4, Rarity.FREE, HeroClass.HUNTER, 3);
+			setDescription("Other friendly minions have +1 Attack.");
 			setCollectible(false);
 		}
 
@@ -78,6 +78,7 @@ public class AnimalCompanion extends SpellCard {
 
 		public Misha() {
 			super("Misha", 4, 4, Rarity.FREE, HeroClass.HUNTER, 3);
+			setDescription("Taunt");
 			setCollectible(false);
 		}
 

@@ -12,6 +12,7 @@ public class Cleave extends SpellCard {
 
 	public Cleave() {
 		super("Cleave", Rarity.FREE, HeroClass.WARRIOR, 2);
+		setDescription("Deal $2 damage to two random enemy minions.");
 		setSpell(new MultiTargetDamageSpell(2, 2));
 		setTargetRequirement(TargetSelection.NONE);
 	}

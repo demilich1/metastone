@@ -10,6 +10,7 @@ public class DalaranMage extends MinionCard {
 
 	public DalaranMage() {
 		super("Dalaran Mage", 1, 4, Rarity.FREE, HeroClass.ANY, 3);
+		setDescription("Spell Damage +1");
 	}
 
 	@Override

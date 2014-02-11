@@ -39,6 +39,7 @@ public class TruesilverChampion extends WeaponCard {
 
 	public TruesilverChampion() {
 		super("Truesilver Champion", Rarity.FREE, HeroClass.PALADIN, 4);
+		setDescription("Whenever your hero attacks, restore #2 Health to it.");
 	}
 	
 	@Override

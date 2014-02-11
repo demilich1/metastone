@@ -35,6 +35,7 @@ public class BloodsailRaider extends MinionCard {
 
 	public BloodsailRaider() {
 		super("Bloodsail Raider", 2, 3, Rarity.COMMON, HeroClass.ANY, 2);
+		setDescription("Battlecry: Gain Attack equal to the Attack of your weapon.");
 	}
 	
 	@Override

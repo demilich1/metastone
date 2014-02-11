@@ -10,6 +10,7 @@ public class WorgenInfiltrator extends MinionCard {
 
 	public WorgenInfiltrator() {
 		super("Worgen Infiltrator", 2, 1, Rarity.COMMON, HeroClass.ANY, 1);
+		setDescription("Stealth");
 	}
 
 	@Override

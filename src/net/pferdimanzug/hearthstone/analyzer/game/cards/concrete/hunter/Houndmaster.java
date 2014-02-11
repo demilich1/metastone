@@ -34,6 +34,7 @@ public class Houndmaster extends MinionCard {
 
 	public Houndmaster() {
 		super("Houndmaster", 4, 3, Rarity.FREE, HeroClass.HUNTER, 4);
+		setDescription("Battlecry: Give a friendly Beast +2/+2 and Taunt.");
 	}
 
 	@Override

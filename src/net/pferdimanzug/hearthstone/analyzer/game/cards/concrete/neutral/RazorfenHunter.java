@@ -27,6 +27,7 @@ public class RazorfenHunter extends MinionCard {
 
 	public RazorfenHunter() {
 		super("Razorfen Hunter", 2, 3, Rarity.FREE, HeroClass.ANY, 3);
+		setDescription("Battlecry: Summon a 1/1 Boar.");
 	}
 
 	@Override

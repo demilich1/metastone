@@ -12,6 +12,7 @@ public class HolySmite extends SpellCard {
 
 	public HolySmite() {
 		super("Holy Smite", Rarity.FREE, HeroClass.PRIEST, 1);
+		setDescription("Deal $2 damage.");
 		setTargetRequirement(TargetSelection.ANY);
 		setSpell(new DamageSpell(DAMAGE));
 	}

@@ -11,6 +11,7 @@ public class Windfury extends SpellCard {
 
 	public Windfury() {
 		super("Windfury", Rarity.FREE, HeroClass.SHAMAN, 2);
+		setDescription("Give a minion Windfury.");
 		setSpell(new ApplyTagSpell(GameTag.WINDFURY));
 		setTargetRequirement(TargetSelection.MINIONS);
 	}

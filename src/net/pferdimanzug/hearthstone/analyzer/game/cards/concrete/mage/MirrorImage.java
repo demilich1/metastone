@@ -15,6 +15,7 @@ public class MirrorImage extends SpellCard {
 
 		public MirrorImageMinionCard() {
 			super("Mirror Image", 0, 2, Rarity.FREE, HeroClass.MAGE, 0);
+			setDescription("Taunt.");
 		}
 
 		@Override
@@ -26,6 +27,7 @@ public class MirrorImage extends SpellCard {
 	
 	public MirrorImage() {
 		super("Mirror Image", Rarity.FREE, HeroClass.MAGE, 1);
+		setDescription("Summon two 0/2 minions with Taunt.");
 		setSpell(new SummonSpell(new MirrorImageMinionCard(), new MirrorImageMinionCard()));
 		setTargetRequirement(TargetSelection.NONE);
 	}

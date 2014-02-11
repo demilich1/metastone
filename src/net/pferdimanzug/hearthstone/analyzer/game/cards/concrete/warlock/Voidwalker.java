@@ -11,6 +11,7 @@ public class Voidwalker extends MinionCard {
 
 	public Voidwalker() {
 		super("Voidwalker", 1, 3, Rarity.FREE, HeroClass.WARLOCK, 1);
+		setDescription("Taunt");
 	}
 
 	@Override

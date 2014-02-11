@@ -15,6 +15,7 @@ public class FireElemental extends MinionCard {
 	
 	public FireElemental() {
 		super("Fire Elemental", 6, 5, Rarity.FREE, HeroClass.SHAMAN, 6);
+		setDescription("Battlecry: Deal 3 damage.");
 	}
 
 	@Override

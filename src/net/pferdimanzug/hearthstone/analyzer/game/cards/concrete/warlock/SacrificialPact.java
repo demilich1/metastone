@@ -16,6 +16,7 @@ public class SacrificialPact extends SpellCard {
 
 	public SacrificialPact() {
 		super("Sacrificial Pact", Rarity.FREE, HeroClass.WARLOCK, 0);
+		setDescription("Destroy a Demon. Restore #5 Health to your hero.");
 		Spell destroyDemon = new DestroySpell();
 		Spell heal = new HealingSpell(5);
 		heal.setTarget(EntityReference.FRIENDLY_HERO);

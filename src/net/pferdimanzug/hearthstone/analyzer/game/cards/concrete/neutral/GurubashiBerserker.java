@@ -17,6 +17,7 @@ public class GurubashiBerserker extends MinionCard {
 
 	public GurubashiBerserker() {
 		super("Gurubashi Berserker", BASE_ATTACK, 7, Rarity.FREE, HeroClass.ANY, 5);
+		setDescription("Whenever this minion takes damage, gain +3 Attack.");
 	}
 	
 	@Override

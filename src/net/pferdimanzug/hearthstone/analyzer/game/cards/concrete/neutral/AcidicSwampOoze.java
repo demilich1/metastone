@@ -13,6 +13,7 @@ public class AcidicSwampOoze extends MinionCard {
 
 	public AcidicSwampOoze() {
 		super("Acidic Swamp Ooze", 3, 2, Rarity.FREE, HeroClass.ANY, 2);
+		setDescription("Battlecry: Destroy your opponent's weapon.");
 	}
 
 	@Override

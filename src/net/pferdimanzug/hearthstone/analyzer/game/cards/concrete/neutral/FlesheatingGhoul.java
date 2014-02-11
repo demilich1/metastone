@@ -12,6 +12,7 @@ public class FlesheatingGhoul extends MinionCard {
 
 	public FlesheatingGhoul() {
 		super("Flesheating Ghoul", 2, 3, Rarity.COMMON, HeroClass.ANY, 3);
+		setDescription("Whenever a minion dies, gain +1 Attack. ");
 	}
 
 	@Override

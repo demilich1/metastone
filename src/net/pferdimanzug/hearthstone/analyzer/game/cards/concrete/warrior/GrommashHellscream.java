@@ -11,6 +11,7 @@ public class GrommashHellscream extends MinionCard {
 
 	public GrommashHellscream() {
 		super("Grommash Hellscream", 4, 9, Rarity.LEGENDARY, HeroClass.WARRIOR, 8);
+		setDescription("Charge. Enrage: +6 Attack ");
 	}
 
 	@Override

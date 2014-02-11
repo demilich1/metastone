@@ -28,12 +28,12 @@
     </StackPane>
   </bottom>
   <center>
-    <VBox alignment="CENTER" prefHeight="-1.0" prefWidth="-1.0" BorderPane.alignment="CENTER">
+    <VBox alignment="CENTER" prefHeight="-1.0" prefWidth="-1.0" spacing="16.0" BorderPane.alignment="CENTER">
       <children>
-        <Label id="outlined_score" fx:id="nameLabel" text="&lt;card name&gt;" textAlignment="CENTER" wrapText="true" />
-        <Label fx:id="descriptionLabel" text="&lt;card description&gt;" wrapText="true">
+        <Label id="outlined_score" fx:id="nameLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="150.0" text="&lt;card name&gt;" textAlignment="CENTER" wrapText="true" />
+        <Label fx:id="descriptionLabel" alignment="CENTER" maxWidth="150.0" text="&lt;card description&gt;" textAlignment="CENTER" wrapText="true">
           <font>
-            <Font name="Arial" size="14.0" />
+            <Font name="Arial Bold" size="13.0" />
           </font>
         </Label>
       </children>

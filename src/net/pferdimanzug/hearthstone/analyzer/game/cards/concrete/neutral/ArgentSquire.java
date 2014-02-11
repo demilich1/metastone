@@ -10,6 +10,7 @@ public class ArgentSquire extends MinionCard {
 
 	public ArgentSquire() {
 		super("Argent Squire", 1, 1, Rarity.COMMON, HeroClass.ANY, 1);
+		setDescription("Divine Shield");
 	}
 
 	@Override

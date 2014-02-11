@@ -10,6 +10,7 @@ public class SinisterStrike extends SpellCard {
 
 	public SinisterStrike() {
 		super("Sinister Strike", Rarity.FREE, HeroClass.ROGUE, 1);
+		setDescription("Deal $3 damage to the enemy hero.");
 		setSpell(new DamageSpell(3));
 		setTargetRequirement(TargetSelection.ENEMY_HERO);
 	}

@@ -23,6 +23,7 @@ public class DivineSpirit extends SpellCard {
 	
 	public DivineSpirit() {
 		super("Divine Spirit", Rarity.FREE, HeroClass.PRIEST, 2);
+		setDescription("Double a minion's Health.");
 		setSpell(new DivineSpiritSpell());
 		setTargetRequirement(TargetSelection.MINIONS);
 	}

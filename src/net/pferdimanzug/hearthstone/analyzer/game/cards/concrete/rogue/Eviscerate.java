@@ -11,6 +11,7 @@ public class Eviscerate extends SpellCard {
 
 	public Eviscerate() {
 		super("Eviscerate", Rarity.COMMON, HeroClass.ROGUE, 2);
+		setDescription("Deal $2 damage. Combo: Deal $4 damage instead.");
 		setSpell(new ComboSpell(new DamageSpell(2), new DamageSpell(4)));
 		setTargetRequirement(TargetSelection.ANY);
 	}

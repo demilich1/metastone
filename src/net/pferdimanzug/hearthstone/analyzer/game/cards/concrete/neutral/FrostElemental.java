@@ -13,6 +13,7 @@ public class FrostElemental extends MinionCard {
 
 	public FrostElemental() {
 		super("FrostElemental", 5, 5, Rarity.COMMON, HeroClass.ANY, 6);
+		setDescription("Battlecry: Freeze a character.");
 	}
 
 	@Override

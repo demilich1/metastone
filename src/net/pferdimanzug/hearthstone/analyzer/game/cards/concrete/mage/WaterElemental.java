@@ -25,6 +25,7 @@ public class WaterElemental extends MinionCard {
 
 	public WaterElemental() {
 		super("Water Elemental", 3, 6, Rarity.FREE, HeroClass.MAGE, 4);
+		setDescription("Freeze any character damaged by this minion.");
 	}
 
 	@Override

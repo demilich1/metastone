@@ -14,6 +14,7 @@ public class DrainLife extends SpellCard {
 
 	public DrainLife() {
 		super("Drain Life", Rarity.FREE, HeroClass.WARLOCK, 3);
+		setDescription("Deal $2 damage. Restore #2 Health to your hero.");
 		Spell damage = new DamageSpell(2);
 		Spell heal = new HealingSpell(2);
 		heal.setTarget(EntityReference.FRIENDLY_HERO);

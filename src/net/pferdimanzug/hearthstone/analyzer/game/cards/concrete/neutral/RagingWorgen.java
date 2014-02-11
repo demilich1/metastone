@@ -11,6 +11,7 @@ public class RagingWorgen extends MinionCard {
 
 	public RagingWorgen() {
 		super("Raging Worgen", 3, 3, Rarity.COMMON, HeroClass.ANY, 3);
+		setDescription("Enrage: Windfury and +1 Attack");
 	}
 
 	@Override

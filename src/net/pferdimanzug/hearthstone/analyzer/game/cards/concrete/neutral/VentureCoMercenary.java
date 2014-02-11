@@ -10,6 +10,7 @@ public class VentureCoMercenary extends MinionCard {
 
 	public VentureCoMercenary() {
 		super("Venture Co. Mercenary", 7, 6, Rarity.COMMON, HeroClass.ANY, 5);
+		setDescription("Your minions cost (3) more.");
 	}
 
 	@Override

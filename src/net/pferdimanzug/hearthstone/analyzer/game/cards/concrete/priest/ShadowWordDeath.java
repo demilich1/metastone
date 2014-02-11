@@ -11,6 +11,7 @@ public class ShadowWordDeath extends SpellCard {
 	
 	public ShadowWordDeath() {
 		super("Shadow Word: Death", Rarity.FREE, HeroClass.PRIEST, 3);
+		setDescription("Destroy a minion with an Attack of 5 or more.");
 		setSpell(new DestroySpell());
 		setTargetRequirement(TargetSelection.MINIONS);
 	}

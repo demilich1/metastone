@@ -12,6 +12,7 @@ public class SilverHandKnight extends MinionCard {
 
 	public SilverHandKnight() {
 		super("Silver Hand Knight", 4, 4, Rarity.COMMON, HeroClass.ANY, 5);
+		setDescription("Battlecry: Summon a 2/2 Squire.");
 	}
 
 	@Override

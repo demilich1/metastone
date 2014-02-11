@@ -11,6 +11,7 @@ public class TaurenWarrior extends MinionCard {
 
 	public TaurenWarrior() {
 		super("Tauren Warrior", 2, 3, Rarity.COMMON, HeroClass.ANY, 3);
+		setDescription("Taunt. Enrage: +3 Attack");
 	}
 
 	@Override

@@ -11,6 +11,7 @@ public class ArcaneMissiles extends SpellCard {
 
 	public ArcaneMissiles() {
 		super("Arcane Missiles", Rarity.FREE, HeroClass.MAGE, 1);
+		setDescription("Deal $3 damage randomly split among enemy characters.");
 		setTargetRequirement(TargetSelection.NONE);
 		setSpell(new DamageRandomSpell(1, 3));
 		setPredefinedTarget(EntityReference.ENEMY_CHARACTERS);

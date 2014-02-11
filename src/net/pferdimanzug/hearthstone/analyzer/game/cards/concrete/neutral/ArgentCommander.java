@@ -10,6 +10,7 @@ public class ArgentCommander extends MinionCard {
 
 	public ArgentCommander() {
 		super("Argent Commander", 4, 2, Rarity.RARE, HeroClass.ANY, 6);
+		setDescription("Charge, Divine Shield");
 	}
 
 	@Override

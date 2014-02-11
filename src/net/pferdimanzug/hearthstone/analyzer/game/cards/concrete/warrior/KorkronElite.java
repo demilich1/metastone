@@ -10,6 +10,7 @@ public class KorkronElite extends MinionCard {
 
 	public KorkronElite() {
 		super("Kor'kron Elite", 4, 3, Rarity.FREE, HeroClass.WARRIOR, 4);
+		setDescription("Charge");
 	}
 
 	@Override

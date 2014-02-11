@@ -15,6 +15,7 @@ public class AbusiveSergeant extends MinionCard {
 
 	public AbusiveSergeant() {
 		super("Abusive Sergeant", 2, 1, Rarity.COMMON, HeroClass.ANY, 1);
+		setDescription("Battlecry: Give a minion +2 Attack this turn.");
 	}
 	
 	@Override

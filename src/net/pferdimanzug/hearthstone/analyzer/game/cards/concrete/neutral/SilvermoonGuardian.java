@@ -10,6 +10,7 @@ public class SilvermoonGuardian extends MinionCard {
 
 	public SilvermoonGuardian() {
 		super("Silvermoon Guardian", 3, 3, Rarity.COMMON, HeroClass.ANY, 4);
+		setDescription("Divine Shield");
 	}
 
 	@Override

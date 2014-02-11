@@ -12,6 +12,7 @@ public class HammerOfWrath extends SpellCard {
 
 	public HammerOfWrath() {
 		super("Hammer of Wrath", Rarity.FREE, HeroClass.PALADIN, 4);
+		setDescription("Deal $3 damage. Draw a card.");
 		setTargetRequirement(TargetSelection.ANY);
 		setSpell(new MetaSpell(new DamageSpell(3), new DrawCardSpell()));
 	}

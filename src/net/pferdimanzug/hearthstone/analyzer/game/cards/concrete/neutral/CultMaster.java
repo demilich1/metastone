@@ -37,6 +37,7 @@ public class CultMaster extends MinionCard {
 
 	public CultMaster() {
 		super("Cult Master", 4, 2, Rarity.COMMON, HeroClass.ANY, 4);
+		setDescription("Whenever one of your other minions dies, draw a card.");
 	}
 
 	@Override

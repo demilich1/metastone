@@ -10,6 +10,7 @@ public class JunglePanther extends MinionCard {
 
 	public JunglePanther() {
 		super("JunglePanther", 4, 2, Rarity.COMMON, HeroClass.ANY, 3);
+		setDescription("Stealth");
 	}
 
 	@Override

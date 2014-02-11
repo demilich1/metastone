@@ -10,6 +10,7 @@ public class LordOfTheArena extends MinionCard {
 
 	public LordOfTheArena() {
 		super("Lord of the Arena", 6, 5, Rarity.FREE, HeroClass.ANY, 6);
+		setDescription("Taunt");
 	}
 
 	@Override

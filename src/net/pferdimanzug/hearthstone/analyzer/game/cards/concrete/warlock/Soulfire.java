@@ -12,6 +12,7 @@ public class Soulfire extends SpellCard {
 
 	public Soulfire() {
 		super("Soulfire", Rarity.FREE, HeroClass.WARLOCK, 0);
+		setDescription("Deal $4 damage. Discard a random card.");
 		setSpell(new MetaSpell(new DamageSpell(4), new DiscardCardSpell()));
 		setTargetRequirement(TargetSelection.ANY);
 	}

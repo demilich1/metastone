@@ -34,6 +34,7 @@ public class StarvingBuzzard extends MinionCard {
 
 	public StarvingBuzzard() {
 		super("Starving Buzzard", 2, 1, Rarity.FREE, HeroClass.HUNTER, 2);
+		setDescription("Whenever you summon a Beast, draw a card.");
 	}
 	
 	@Override

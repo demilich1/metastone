@@ -19,6 +19,7 @@ public class ConeOfCold extends SpellCard {
 
 	public ConeOfCold() {
 		super("ConeOfCold", Rarity.COMMON, HeroClass.MAGE, 4);
+		setDescription("Freeze a minion and the minions next to it, and deal $1 damage to them.");
 		setSpell(new ConeOfColdSpell());
 		setTargetRequirement(TargetSelection.MINIONS);
 	}

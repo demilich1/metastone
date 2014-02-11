@@ -11,6 +11,7 @@ public class SpitefulSmith extends MinionCard {
 
 	public SpitefulSmith() {
 		super("Spiteful Smith", 4, 6, Rarity.COMMON, HeroClass.ANY, 5);
+		setDescription("Enrage: Your weapon has +2 Attack.");
 	}
 
 	@Override

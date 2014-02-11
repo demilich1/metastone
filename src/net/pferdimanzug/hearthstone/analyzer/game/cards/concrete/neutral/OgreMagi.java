@@ -10,6 +10,7 @@ public class OgreMagi extends MinionCard {
 
 	public OgreMagi() {
 		super("Ogre Magi", 4, 4, Rarity.FREE, HeroClass.ANY, 4);
+		setDescription("Spell Damage +1");
 	}
 
 	@Override

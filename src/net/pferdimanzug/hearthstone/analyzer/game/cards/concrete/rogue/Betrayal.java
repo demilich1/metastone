@@ -14,6 +14,7 @@ public class Betrayal extends SpellCard {
 	
 	public Betrayal() {
 		super("Betrayal", Rarity.COMMON, HeroClass.ROGUE, 2);
+		setDescription("An enemy minion deals its damage to the minions next to it.");
 		setSpell(new BetrayalSpell());
 		setTargetRequirement(TargetSelection.ENEMY_MINIONS);
 	}

@@ -15,6 +15,7 @@ public class ElvenArcher extends MinionCard {
 
 	public ElvenArcher() {
 		super("Elven Archer", 1, 1, Rarity.FREE, HeroClass.ANY, 1);
+		setDescription("Battlecry: Deal 1 damage.");
 	}
 
 	@Override

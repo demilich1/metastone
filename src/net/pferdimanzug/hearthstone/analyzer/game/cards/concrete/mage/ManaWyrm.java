@@ -12,6 +12,7 @@ public class ManaWyrm extends MinionCard {
 
 	public ManaWyrm() {
 		super("Mana Wyrm", 1, 3, Rarity.COMMON, HeroClass.MAGE, 1);
+		setDescription("Whenever you cast a spell, gain +1 Attack.");
 	}
 
 	@Override

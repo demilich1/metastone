@@ -14,8 +14,9 @@ public class ReturnMinionToHandSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, Actor minion) {
-		logger.debug("{} is returned to {}'s hand", minion, player.getName());
-		player.getMinions().remove(minion);
+		Player owner = context.getPlayer(minion.getOwner());
+		logger.debug("{} is returned to {}'s hand", minion, owner.getName());
+		context.getLogic().destroy(minion);
 		Card sourceCard = minion.getSourceCard();
 		context.getPendingCards().add(sourceCard);
 		context.getLogic().receiveCard(minion.getOwner(), sourceCard);
