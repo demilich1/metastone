@@ -5,7 +5,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.aura.Aura;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
@@ -18,6 +18,7 @@ public class AnimalCompanion extends SpellCard {
 
 		public Huffer() {
 			super("Huffer", 4, 2, Rarity.FREE, HeroClass.HUNTER, 3);
+			setDescription("Charge");
 			setCollectible(false);
 		}
 
@@ -31,6 +32,7 @@ public class AnimalCompanion extends SpellCard {
 	private class Leokk extends MinionCard {
 
 		public Leokk() {
+			asd
 			super("Leokk", 2, 4, Rarity.FREE, HeroClass.HUNTER, 3);
 			setCollectible(false);
 		}
@@ -46,12 +48,12 @@ public class AnimalCompanion extends SpellCard {
 	
 	private class LeokkAura extends Aura {
 
-		public LeokkAura(Entity source) {
+		public LeokkAura(Actor source) {
 			super(source);
 		}
 
 		@Override
-		public boolean affects(Entity entity) {
+		public boolean affects(Actor entity) {
 			if (entity == getSource()) {
 				return false;
 			} else if (entity.getOwner() != getSource().getOwner()) {
@@ -61,12 +63,12 @@ public class AnimalCompanion extends SpellCard {
 		}
 
 		@Override
-		protected void onApply(Entity entity) {
+		protected void onApply(Actor entity) {
 			entity.modifyTag(GameTag.ATTACK_BONUS, +1);
 		}
 
 		@Override
-		protected void onRemove(Entity entity) {
+		protected void onRemove(Actor entity) {
 			entity.modifyTag(GameTag.ATTACK_BONUS, -1);
 		}
 
@@ -88,6 +90,7 @@ public class AnimalCompanion extends SpellCard {
 	
 	public AnimalCompanion() {
 		super("Animal Companion", Rarity.FREE, HeroClass.HUNTER, 3);
+		setDescription("Summon a random Beast Companion.");
 		setSpell(new SummonRandomSpell(new Huffer(), new Misha(), new Leokk()));
 	}
 

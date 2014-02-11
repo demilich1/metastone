@@ -4,7 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
@@ -21,7 +21,7 @@ public class Betrayal extends SpellCard {
 	private class BetrayalSpell extends Spell {
 
 		@Override
-		protected void onCast(GameContext context, Player player, Entity target) {
+		protected void onCast(GameContext context, Player player, Actor target) {
 			Minion targetMinion = (Minion) target;
 			for (Minion adjacentMinion : context.getAdjacentMinions(player, targetMinion)) {
 				context.getLogic().damage(player, adjacentMinion, targetMinion.getAttack(), false);

@@ -12,6 +12,7 @@ public class Naturalize extends SpellCard {
 
 	public Naturalize() {
 		super("Naturalize", Rarity.COMMON, HeroClass.DRUID, 1);
+		setDescription("Destroy a minion. Your opponent draws 2 cards.");
 		setSpell(new MetaSpell(new DestroySpell(), new DrawCardSpell(2, true)));
 		setTargetRequirement(TargetSelection.MINIONS);
 	}

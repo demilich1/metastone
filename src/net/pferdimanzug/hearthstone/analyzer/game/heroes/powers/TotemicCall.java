@@ -9,6 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
@@ -90,7 +91,7 @@ public class TotemicCall extends HeroPower {
 		}
 
 		@Override
-		protected void onCast(GameContext context, Player player, Entity target) {
+		protected void onCast(GameContext context, Player player, Actor target) {
 			List<Minion> availableTotems = new ArrayList<Minion>();
 			for (Minion totem : getTotems()) {
 				if (!alreadyOnBoard(player.getMinions(), totem.getName())) {

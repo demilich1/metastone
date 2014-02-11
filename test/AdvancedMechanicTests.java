@@ -12,6 +12,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.Abusive
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.AmaniBerserker;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.KoboldGeomancer;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.MindBlast;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Anduin;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
@@ -39,8 +40,8 @@ public class AdvancedMechanicTests extends BasicTests {
 		context.getLogic().receiveCard(warrior.getId(), minionCard2);
 		context.getLogic().performGameAction(warrior.getId(), minionCard2.play());
 		
-		Entity attacker = getSingleMinion(mage.getMinions());
-		Entity defender = getSingleMinion(warrior.getMinions());
+		Actor attacker = getSingleMinion(mage.getMinions());
+		Actor defender = getSingleMinion(warrior.getMinions());
 		
 		GameAction attackAction = new PhysicalAttackAction(attacker.getReference());
 		attackAction.setTarget(defender);
@@ -73,7 +74,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		context.getLogic().performGameAction(mage.getId(), monsterCard.play());
 		
 		Entity attacker = getSingleMinion(mage.getMinions());
-		Entity defender = getSingleMinion(priest.getMinions());
+		Actor defender = getSingleMinion(priest.getMinions());
 		
 		Assert.assertEquals(defender.getAttack(), AmaniBerserker.BASE_ATTACK);
 		Assert.assertEquals(defender.hasTag(GameTag.ENRAGED), false);
@@ -114,7 +115,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		mage.setBehaviour(new IBehaviour() {
 			
 			@Override
-			public Entity provideTargetFor(Player player, GameAction action) {
+			public Actor provideTargetFor(Player player, GameAction action) {
 				return action.getValidTargets().get(0);
 			}
 
@@ -123,7 +124,7 @@ public class AdvancedMechanicTests extends BasicTests {
 				return null;
 			}
 		});
-		Entity testSubject = getSingleMinion(mage.getMinions());
+		Actor testSubject = getSingleMinion(mage.getMinions());
 		Assert.assertEquals(testSubject.getAttack(), baseAttack);
 		context.getLogic().performGameAction(mage.getId(), abusiveSergeant.play());
 		Assert.assertEquals(testSubject.getAttack(), baseAttack + AbusiveSergeant.ATTACK_BONUS);

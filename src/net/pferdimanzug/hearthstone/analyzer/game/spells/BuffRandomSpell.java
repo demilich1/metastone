@@ -5,7 +5,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 
 public class BuffRandomSpell extends BuffSpell {
 	
@@ -18,8 +18,8 @@ public class BuffRandomSpell extends BuffSpell {
 	}
 
 	@Override
-	public void cast(GameContext context, Player player, List<Entity> targets) {
-		Entity randomTarget = targets.get(ThreadLocalRandom.current().nextInt(targets.size()));
+	public void cast(GameContext context, Player player, List<Actor> targets) {
+		Actor randomTarget = targets.get(ThreadLocalRandom.current().nextInt(targets.size()));
 		onCast(context, player, randomTarget);
 	}
 

@@ -2,10 +2,10 @@ package net.pferdimanzug.hearthstone.analyzer.game.entities.minions;
 
 import net.pferdimanzug.hearthstone.analyzer.game.aura.Aura;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 
-public class Minion extends Entity {
+public class Minion extends Actor {
 	
 	private Aura aura;
 

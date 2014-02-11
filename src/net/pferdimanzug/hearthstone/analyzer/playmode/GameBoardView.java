@@ -20,7 +20,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanTargetOptions;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 
@@ -52,7 +52,7 @@ public class GameBoardView extends BorderPane {
 	private MinionToken[] p2Minions = new MinionToken[GameLogic.MAX_MINIONS];
 	
 	private final HashMap<GameToken, Button> summonHelperMap = new HashMap<GameToken, Button>();
-	private final HashMap<Entity, GameToken> entityTokenMap = new HashMap<Entity, GameToken>();
+	private final HashMap<Actor, GameToken> entityTokenMap = new HashMap<Actor, GameToken>();
 	
 	@FXML
 	private Label centerMessageLabel;
@@ -123,7 +123,7 @@ public class GameBoardView extends BorderPane {
 	
 	private void enableSpellTargets(final HumanTargetOptions targetOptions) {
 		GameAction action = targetOptions.getAction();
-		for (final Entity target : action.getValidTargets()) {
+		for (final Actor target : action.getValidTargets()) {
 			GameToken token = entityTokenMap.get(target);
 			
 			EventHandler<ActionEvent> clickedHander = new EventHandler<ActionEvent>() {
@@ -140,7 +140,7 @@ public class GameBoardView extends BorderPane {
 	
 	private void enableSummonTargets(final HumanTargetOptions targetOptions) {
 		GameAction action = targetOptions.getAction();
-		for (final Entity target : action.getValidTargets()) {
+		for (final Actor target : action.getValidTargets()) {
 			GameToken token = entityTokenMap.get(target);
 			Button summonHelper = summonHelperMap.get(token);
 			summonHelper.setVisible(true);

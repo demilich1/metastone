@@ -10,7 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.WeaponCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.TheCoin;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
@@ -70,7 +70,7 @@ public class BasicTests extends TestBase {
 		BuffHeroSpell heroBuffSpell = new BuffHeroSpell(damage, 0);
 		heroBuffSpell.setTarget(EntityReference.pointTo(druid.getHero()));
 		context.getLogic().castSpell(druid.getId(), heroBuffSpell);
-		Entity devMonster = getSingleMinion(mage.getMinions());
+		Actor devMonster = getSingleMinion(mage.getMinions());
 		GameAction minionAttackAction = new PhysicalAttackAction(devMonster.getReference());
 		minionAttackAction.setTarget(druid.getHero());
 		context.getLogic().performGameAction(mage.getId(), minionAttackAction);
@@ -105,8 +105,8 @@ public class BasicTests extends TestBase {
 		Assert.assertEquals(mage.getMinions().size(), 1);
 		Assert.assertEquals(warrior.getMinions().size(), 1);
 		
-		Entity attacker = getSingleMinion(mage.getMinions());
-		Entity defender = getSingleMinion(warrior.getMinions());
+		Actor attacker = getSingleMinion(mage.getMinions());
+		Actor defender = getSingleMinion(warrior.getMinions());
 		
 		GameAction attackAction = new PhysicalAttackAction(attacker.getReference());
 		attackAction.setTarget(defender);
@@ -130,7 +130,7 @@ public class BasicTests extends TestBase {
 		Assert.assertEquals(mage.getHand().getCount(), 1);
 		context.getLogic().performGameAction(mage.getId(), devMonster.play());
 		Assert.assertEquals(mage.getHand().isEmpty(), true);
-		Entity minion = getSingleMinion(mage.getMinions());
+		Actor minion = getSingleMinion(mage.getMinions());
 		Assert.assertEquals(minion.getName(), devMonster.getName());
 		Assert.assertEquals(minion.getAttack(), 1);
 		Assert.assertEquals(minion.getHp(), 1);
@@ -143,8 +143,8 @@ public class BasicTests extends TestBase {
 		context.getLogic().performGameAction(mage.getId(), summonAction);
 		
 		Assert.assertEquals(mage.getMinions().size(), 2);
-		Entity left = mage.getMinions().get(0);
-		Entity right = mage.getMinions().get(1);
+		Actor left = mage.getMinions().get(0);
+		Actor right = mage.getMinions().get(1);
 		Assert.assertEquals(left.getAttack(), 2);
 		Assert.assertEquals(right.getAttack(), 1);
 	}

@@ -4,7 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
@@ -12,13 +12,10 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public abstract class MinionCard extends Card {
 
-	private final int baseAttack;
-	private final int baseHp;
-
 	public MinionCard(String name, int baseAttack, int baseHp, Rarity rarity, HeroClass classRestriction, int manaCost) {
 		super(name, CardType.MINION, rarity, classRestriction, manaCost);
-		this.baseAttack = baseAttack;
-		this.baseHp = baseHp;
+		setTag(GameTag.BASE_ATTACK, baseAttack);
+		setTag(GameTag.MAX_HP, baseHp);
 	}
 
 	protected Minion createMinion(GameTag... tags) {
@@ -27,8 +24,8 @@ public abstract class MinionCard extends Card {
 
 	protected Minion createMinion(Race race, GameTag... tags) {
 		Minion minion = new Minion(this);
-		minion.setBaseAttack(baseAttack);
-		minion.setBaseHp(baseHp);
+		minion.setBaseAttack(getBaseAttack());
+		minion.setBaseHp(getBaseHp());
 		minion.setRace(race);
 		for (GameTag gameTag : tags) {
 			minion.setTag(gameTag);
@@ -46,7 +43,7 @@ public abstract class MinionCard extends Card {
 
 			@Override
 			protected void play(GameContext context, int playerId) {
-				Entity nextTo = getTargetKey() != null ? context.resolveSingleTarget(playerId, getTargetKey()) : null;
+				Actor nextTo = getTargetKey() != null ? context.resolveSingleTarget(playerId, getTargetKey()) : null;
 				context.getLogic().summon(playerId, summon(), nextTo);
 			}
 		};
@@ -56,11 +53,11 @@ public abstract class MinionCard extends Card {
 	public abstract Minion summon();
 
 	public int getBaseAttack() {
-		return baseAttack;
+		return getTagValue(GameTag.BASE_ATTACK);
 	}
 
 	public int getBaseHp() {
-		return baseHp;
+		return getTagValue(GameTag.MAX_HP);
 	}
 
 }

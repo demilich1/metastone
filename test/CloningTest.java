@@ -2,7 +2,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.DebugDecks;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.PlayRandomBehaviour;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
@@ -27,15 +27,15 @@ public class CloningTest extends TestBase {
 		DevMonster minionCard = new DevMonster(3, 3);
 		original.getLogic().receiveCard(player1.getId(), minionCard);
 		original.getLogic().performGameAction(player1.getId(), minionCard.play());
-		Entity testMinion = getSingleMinion(player1.getMinions());
+		Actor testMinion = getSingleMinion(player1.getMinions());
 		
 		GameContext clone = original.clone();
 		
 		Assert.assertNotEquals(original, clone);
 		Assert.assertNotEquals(original.getPlayer1(), clone.getPlayer1());
 		Assert.assertNotSame(original.getPlayer2().getMinions(), clone.getPlayer2().getMinions());
-		Entity originalMinion = getSingleMinion(original.getPlayer1().getMinions());
-		Entity cloneMinion = getSingleMinion(clone.getPlayer1().getMinions());
+		Actor originalMinion = getSingleMinion(original.getPlayer1().getMinions());
+		Actor cloneMinion = getSingleMinion(clone.getPlayer1().getMinions());
 		Assert.assertNotSame(originalMinion, cloneMinion);
 		System.out.println(originalMinion.toString());
 		System.out.println(cloneMinion.toString());

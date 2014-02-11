@@ -4,7 +4,7 @@ import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 
 public class MetaSpell extends Spell {
 	
@@ -17,7 +17,7 @@ public class MetaSpell extends Spell {
 	}
 
 	@Override
-	public void cast(GameContext context, Player player, List<Entity> targets) {
+	public void cast(GameContext context, Player player, List<Actor> targets) {
 		if (!spell1.hasPredefinedTarget()) {
 			spell1.setTarget(getTarget());
 		}
@@ -29,7 +29,7 @@ public class MetaSpell extends Spell {
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, Entity target) {
+	protected void onCast(GameContext context, Player player, Actor target) {
 	}
 
 	@Override

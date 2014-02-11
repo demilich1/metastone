@@ -5,7 +5,7 @@ import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
@@ -55,8 +55,8 @@ public class Player implements Cloneable {
 		return behaviour;
 	}
 
-	public List<Entity> getCharacters() {
-		List<Entity> characters = new ArrayList<Entity>();
+	public List<Actor> getCharacters() {
+		List<Actor> characters = new ArrayList<Actor>();
 		characters.add(getHero());
 		characters.addAll(getMinions());
 		return characters;

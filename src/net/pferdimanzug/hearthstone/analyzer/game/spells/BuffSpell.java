@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnEndTrigger;
 
@@ -36,7 +36,7 @@ public class BuffSpell extends Spell {
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, Entity target) {
+	protected void onCast(GameContext context, Player player, Actor target) {
 		logger.debug("{} gains ({})", target, attackBonus + "/" + hpBonus);
 		if (attackBonus != 0) {
 			target.modifyTag(GameTag.ATTACK_BONUS, +attackBonus);
@@ -47,9 +47,11 @@ public class BuffSpell extends Spell {
 
 		if (isTemporary()) {
 			BuffSpell debuff = new BuffSpell(-attackBonus, -hpBonus);
-			Spell removeBuff = new AddSpellTriggerSpell(new SpellTrigger(new TurnEndTrigger(), debuff, true));
-			removeBuff.setTarget(target.getReference());
-			context.getLogic().castSpell(player.getId(), removeBuff);
+			debuff.setTarget(target.getReference());
+			SpellTrigger removeTrigger = new SpellTrigger(new TurnEndTrigger(), debuff, true);
+			removeTrigger.setHost(target);
+			removeTrigger.setOwner(target.getOwner());
+			context.addTrigger(removeTrigger);
 		}
 	}
 

@@ -2,7 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin;
 
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
 import net.pferdimanzug.hearthstone.analyzer.game.events.IGameEvent;
@@ -18,7 +18,7 @@ public class BlessingOfWisdom extends SpellCard {
 	private class BlessingOfWisdomTrigger extends GameEventTrigger {
 
 		@Override
-		public boolean fire(IGameEvent event, Entity host) {
+		public boolean fire(IGameEvent event, Actor host) {
 			PhysicalAttackEvent physicalAttackEvent = (PhysicalAttackEvent) event;
 			return physicalAttackEvent.getAttacker() == host;
 		}

@@ -10,6 +10,7 @@ public class IronbarkProtector extends MinionCard {
 
 	public IronbarkProtector() {
 		super("Ironbark Protector", 8, 8, Rarity.FREE, HeroClass.DRUID, 8);
+		setDescription("Taunt");
 	}
 
 	@Override

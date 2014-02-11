@@ -6,6 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
@@ -17,13 +18,13 @@ public class PlayRandomBehaviour implements IBehaviour {
 	private final static Logger logger = LoggerFactory.getLogger(PlayRandomBehaviour.class);
 
 	@Override
-	public Entity provideTargetFor(Player player, GameAction action) {
-		List<Entity> validTargets = action.getValidTargets();
+	public Actor provideTargetFor(Player player, GameAction action) {
+		List<Actor> validTargets = action.getValidTargets();
 		if (validTargets.isEmpty()) {
 			return null;
 		}
 
-		Entity randomTarget = validTargets.get(ThreadLocalRandom.current().nextInt(validTargets.size()));
+		Actor randomTarget = validTargets.get(ThreadLocalRandom.current().nextInt(validTargets.size()));
 		if (randomTarget != null) {
 			logger.debug(player.getName() + " picks random target: " + randomTarget.getName());
 		}
@@ -44,7 +45,7 @@ public class PlayRandomBehaviour implements IBehaviour {
 	}
 	
 	private void selectRandomTarget(GameAction action) {
-		List<Entity> validTargets = action.getValidTargets();
+		List<Actor> validTargets = action.getValidTargets();
 		if (validTargets == null || validTargets.isEmpty()) {
 			return;
 		}

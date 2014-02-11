@@ -4,7 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
@@ -22,7 +22,7 @@ public class KillCommand extends SpellCard {
 		}
 
 		private boolean hasBeast(Player player) {
-			for (Entity minion : player.getMinions()) {
+			for (Actor minion : player.getMinions()) {
 				if (minion.getRace() == Race.BEAST) {
 					return true;
 				}
@@ -31,7 +31,7 @@ public class KillCommand extends SpellCard {
 		}
 		
 		@Override
-		protected void onCast(GameContext context, Player player, Entity target) {
+		protected void onCast(GameContext context, Player player, Actor target) {
 			int damage = hasBeast(player) ? beastDamage : getDamage();
 			context.getLogic().damage(player, target, damage, true);
 		}

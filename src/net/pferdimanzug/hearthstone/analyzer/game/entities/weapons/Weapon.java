@@ -2,10 +2,10 @@ package net.pferdimanzug.hearthstone.analyzer.game.entities.weapons;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 
-public class Weapon extends Entity {
+public class Weapon extends Actor {
 
 	public Weapon(Card sourceCard, int weaponDamage, int durability) {
 		super(sourceCard);

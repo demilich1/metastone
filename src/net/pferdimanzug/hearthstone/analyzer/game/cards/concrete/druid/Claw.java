@@ -10,6 +10,7 @@ public class Claw extends SpellCard {
 
 	public Claw() {
 		super("Claw", Rarity.FREE, HeroClass.DRUID, 1);
+		setDescription("Give your hero +2 Attack this turn and 2 Armor.");
 		setTargetRequirement(TargetSelection.NONE);
 		setSpell(new BuffHeroSpell(2, 2));
 	}

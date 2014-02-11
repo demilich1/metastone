@@ -4,7 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.aura.Aura;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
@@ -13,12 +13,12 @@ public class StormwindChampion extends MinionCard {
 
 	private class StormwindChampionAura extends Aura {
 
-		public StormwindChampionAura(Entity source) {
+		public StormwindChampionAura(Actor source) {
 			super(source);
 		}
 
 		@Override
-		public boolean affects(Entity entity) {
+		public boolean affects(Actor entity) {
 			if (entity == getSource()) {
 				return false;
 			} else if (entity.getOwner() != getSource().getOwner()) {
@@ -28,13 +28,13 @@ public class StormwindChampion extends MinionCard {
 		}
 
 		@Override
-		protected void onApply(Entity entity) {
+		protected void onApply(Actor entity) {
 			entity.modifyTag(GameTag.ATTACK_BONUS, +1);
 			entity.modifyHpBonus(+1);
 		}
 
 		@Override
-		protected void onRemove(Entity entity) {
+		protected void onRemove(Actor entity) {
 			entity.modifyTag(GameTag.ATTACK_BONUS, -1);
 			entity.modifyHpBonus(-1);
 		}

@@ -6,7 +6,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
@@ -34,7 +34,7 @@ public class SouthseaDeckhand extends MinionCard {
 		}
 
 		@Override
-		protected void onCast(GameContext context, Player player, Entity target) {
+		protected void onCast(GameContext context, Player player, Actor target) {
 			if (player.getHero().getWeapon() == null) {
 				return;
 			}

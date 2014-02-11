@@ -4,7 +4,7 @@ import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public abstract class Spell {
@@ -21,12 +21,12 @@ public abstract class Spell {
 		this.setTarget(target);
 	}
 
-	public void cast(GameContext context, Player player, List<Entity> targets) {
+	public void cast(GameContext context, Player player, List<Actor> targets) {
 		if (targets == null) {
 			onCast(context, player, null);
 			return;
 		}
-		for (Entity target : targets) {
+		for (Actor target : targets) {
 			onCast(context, player, target);
 		}
 	}
@@ -42,7 +42,7 @@ public abstract class Spell {
 		return false;
 	}
 
-	protected abstract void onCast(GameContext context, Player player, Entity target);
+	protected abstract void onCast(GameContext context, Player player, Actor target);
 	
 	public void setTarget(EntityReference target) {
 		this.target = target;

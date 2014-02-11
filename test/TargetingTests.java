@@ -8,6 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.PhysicalAttackAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.Shieldbearer;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.Wisp;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
@@ -37,7 +38,7 @@ public class TargetingTests extends TestBase {
 		Entity defender = getSingleMinion(victim.getMinions());
 		Assert.assertEquals(defender.hasTag(GameTag.TAUNT), true);
 		
-		List<Entity> validTargets;
+		List<Actor> validTargets;
 		
 		GameAction attackAction = new PhysicalAttackAction(attacker.getReference());
 		validTargets = context.getLogic().getValidTargets(mage.getId(), attackAction);

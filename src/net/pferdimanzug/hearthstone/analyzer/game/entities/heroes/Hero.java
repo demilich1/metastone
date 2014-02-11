@@ -1,12 +1,12 @@
 package net.pferdimanzug.hearthstone.analyzer.game.entities.heroes;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.HeroPower;
 
-public abstract class Hero extends Entity {
+public abstract class Hero extends Actor {
 
 	private final HeroClass heroClass;
 	private HeroPower heroPower;

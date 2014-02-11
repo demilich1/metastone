@@ -5,7 +5,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.DebugDecks;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
@@ -28,8 +28,8 @@ public class TestBase {
 	}
 	
 	
-	protected static Entity getSingleMinion(List<Minion> minions) {
-		for (Entity minion : minions) {
+	protected static Actor getSingleMinion(List<Minion> minions) {
+		for (Actor minion : minions) {
 			if (minion == null) {
 				continue;
 			}
@@ -41,7 +41,7 @@ public class TestBase {
 	private static class NullBehaviour implements IBehaviour {
 
 		@Override
-		public Entity provideTargetFor(Player player, GameAction action) {
+		public Actor provideTargetFor(Player player, GameAction action) {
 			return null;
 		}
 

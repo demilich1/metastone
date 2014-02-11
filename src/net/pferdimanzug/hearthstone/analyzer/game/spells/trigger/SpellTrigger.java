@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.spells.trigger;
 
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
 import net.pferdimanzug.hearthstone.analyzer.game.events.IGameEvent;
@@ -52,7 +53,7 @@ public class SpellTrigger implements Cloneable {
 	public void onGameEvent(IGameEvent event) {
 		int ownerId = trigger.getOwner();
 		//Entity host = event.getGameContext().resolveSingleTarget(ownerId, hostReference);
-		Entity host = null;
+		Actor host = null;
 		try {
 			host = event.getGameContext().resolveSingleTarget(ownerId, hostReference);
 		} catch (Exception e) {
@@ -65,10 +66,10 @@ public class SpellTrigger implements Cloneable {
 				spell.setTarget(hostReference);
 			}
 			
-			event.getGameContext().getLogic().castSpell(ownerId, spell);
 			if (oneTime) {
 				expired = true;
 			}
+			event.getGameContext().getLogic().castSpell(ownerId, spell);
 		}
 	}
 

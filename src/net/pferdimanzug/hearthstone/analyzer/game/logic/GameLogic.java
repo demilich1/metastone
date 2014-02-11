@@ -14,6 +14,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardType;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.TheCoin;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
@@ -93,7 +94,7 @@ public class GameLogic implements IGameLogic {
 	@Override
 	public void castSpell(int playerId, Spell spell) {
 		Player player = context.getPlayer(playerId);
-		Entity source = null;
+		Actor source = null;
 		if (spell.getSource() != null) {
 			source = context.resolveSingleTarget(playerId, spell.getSource());
 		}
@@ -115,13 +116,13 @@ public class GameLogic implements IGameLogic {
 	}
 
 	@Override
-	public void damage(Player player, Entity target, int damage, boolean applySpellpower) {
+	public void damage(Player player, Actor target, int damage, boolean applySpellpower) {
 		if (applySpellpower) {
 			damage += getTotalTagValue(player, GameTag.SPELL_POWER);
 		}
 		switch (target.getEntityType()) {
 		case MINION:
-			damageMinion((Entity) target, damage);
+			damageMinion((Actor) target, damage);
 			break;
 		case HERO:
 			damageHero((Hero) target, damage);
@@ -140,7 +141,7 @@ public class GameLogic implements IGameLogic {
 				+ hero.getArmor() + ")");
 	}
 
-	private void damageMinion(Entity minion, int damage) {
+	private void damageMinion(Actor minion, int damage) {
 		if (minion.hasTag(GameTag.DIVINE_SHIELD)) {
 			minion.removeTag(GameTag.DIVINE_SHIELD);
 			logger.debug("{}'s DIVINE SHIELD absorbs the damage", minion);
@@ -155,7 +156,7 @@ public class GameLogic implements IGameLogic {
 	}
 
 	@Override
-	public void destroy(Entity target) {
+	public void destroy(Actor target) {
 		switch (target.getEntityType()) {
 		case HERO:
 			logger.error("Destroying hero not implemented!");
@@ -174,7 +175,7 @@ public class GameLogic implements IGameLogic {
 		}
 	}
 
-	private void destroyMinion(Entity minion) {
+	private void destroyMinion(Actor minion) {
 		logger.debug("{} is destroyed", minion);
 		Player owner = context.getPlayer(minion.getOwner());
 		owner.getMinions().remove(minion);
@@ -243,7 +244,7 @@ public class GameLogic implements IGameLogic {
 	}
 
 	@Override
-	public void fight(Player player, Entity attacker, Entity defender) {
+	public void fight(Player player, Actor attacker, Actor defender) {
 		logger.debug("{} attacks {}", attacker, defender);
 		int attackerDamage = attacker.getAttack();
 		int defenderDamage = defender.getAttack();
@@ -284,12 +285,12 @@ public class GameLogic implements IGameLogic {
 	}
 
 	@Override
-	public List<Entity> getValidTargets(int playerId, GameAction action) {
+	public List<Actor> getValidTargets(int playerId, GameAction action) {
 		Player player = context.getPlayer(playerId);
 		return targetLogic.getValidTargets(context, player, action);
 	}
 
-	private void handleEnrage(Entity entity) {
+	private void handleEnrage(Actor entity) {
 		boolean enraged = entity.getHp() < entity.getMaxHp();
 		// enrage state has not changed; do nothing
 		if (entity.hasTag(GameTag.ENRAGED) == enraged) {
@@ -310,10 +311,10 @@ public class GameLogic implements IGameLogic {
 	}
 
 	@Override
-	public void heal(Entity target, int healing) {
+	public void heal(Actor target, int healing) {
 		switch (target.getEntityType()) {
 		case MINION:
-			healMinion((Entity) target, healing);
+			healMinion((Actor) target, healing);
 			break;
 		case HERO:
 			healHero((Hero) target, healing);
@@ -332,7 +333,7 @@ public class GameLogic implements IGameLogic {
 		hero.setHp(newHp);
 	}
 
-	private void healMinion(Entity minion, int healing) {
+	private void healMinion(Actor minion, int healing) {
 		int newHp = Math.min(minion.getMaxHp(), minion.getHp() + healing);
 		if (logger.isDebugEnabled()) {
 			logger.debug(minion + " is healed for " + healing + ", hp now: " + newHp + "/" + minion.getMaxHp());
@@ -385,12 +386,12 @@ public class GameLogic implements IGameLogic {
 		}
 		Player player = context.getPlayer(playerId);
 		if (action.getTargetRequirement() != TargetSelection.NONE && action.getTargetKey() == null) {
-			List<Entity> validTargets = getValidTargets(playerId, action);
+			List<Actor> validTargets = getValidTargets(playerId, action);
 			if (validTargets.isEmpty() && action.getActionType() == ActionType.MINION_ABILITY) {
 				return;
 			}
 			action.setValidTargets(validTargets);
-			Entity target = player.getBehaviour().provideTargetFor(player, action);
+			Actor target = player.getBehaviour().provideTargetFor(player, action);
 			if (!validTargets.contains(target)) {
 				throw new IllegalArgumentException("Selected invalid target " + target + " for action " + action);
 			}
@@ -477,7 +478,7 @@ public class GameLogic implements IGameLogic {
 	}
 
 	@Override
-	public void summon(int playerId, Minion minion, Entity nextTo) {
+	public void summon(int playerId, Minion minion, Actor nextTo) {
 		Player player = context.getPlayer(playerId);
 		minion.setId(idFactory.generateId());
 		logger.debug("{} summons {}", player.getName(), minion);
@@ -514,8 +515,8 @@ public class GameLogic implements IGameLogic {
 		context.fireGameEvent(new SummonEvent(context, minion));
 	}
 
-	private List<Entity> toList(Entity entity) {
-		List<Entity> list = new ArrayList<Entity>(1);
+	private List<Actor> toList(Actor entity) {
+		List<Actor> list = new ArrayList<Actor>(1);
 		list.add(entity);
 		return list;
 	}

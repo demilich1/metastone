@@ -6,7 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
 public class MultiTargetDamageSpell extends DamageSpell {
@@ -19,11 +19,11 @@ public class MultiTargetDamageSpell extends DamageSpell {
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, Entity target) {
+	protected void onCast(GameContext context, Player player, Actor target) {
 		List<Minion> validTargets = new ArrayList<>(context.getOpponent(player).getMinions());
 		for (int i = 0; i < targets; i++) {
 			int randomIndex = ThreadLocalRandom.current().nextInt(validTargets.size());
-			Entity randomTarget = validTargets.remove(randomIndex);
+			Actor randomTarget = validTargets.remove(randomIndex);
 			context.getLogic().damage(player, randomTarget, getDamage(), applySpellpower());
 		}
 	}

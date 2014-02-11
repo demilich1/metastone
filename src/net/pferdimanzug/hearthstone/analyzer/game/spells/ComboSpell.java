@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 
 public class ComboSpell extends Spell {
 	
@@ -23,7 +23,7 @@ public class ComboSpell extends Spell {
 	}
 
 	@Override
-	public void cast(GameContext context, Player player, List<Entity> targets) {
+	public void cast(GameContext context, Player player, List<Actor> targets) {
 		if (player.getHero().hasTag(GameTag.COMBO)) {
 			logger.debug(GameTag.COMBO + " spell activated");
 			combo.cast(context, player, targets);
@@ -34,7 +34,7 @@ public class ComboSpell extends Spell {
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, Entity target) {
+	protected void onCast(GameContext context, Player player, Actor target) {
 	}
 
 	@Override

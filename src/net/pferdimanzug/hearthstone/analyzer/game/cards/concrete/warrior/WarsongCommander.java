@@ -4,7 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.aura.Aura;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
@@ -13,12 +13,12 @@ public class WarsongCommander extends MinionCard {
 
 	private class WarsongCommanderAura extends Aura {
 
-		public WarsongCommanderAura(Entity source) {
+		public WarsongCommanderAura(Actor source) {
 			super(source);
 		}
 
 		@Override
-		public boolean affects(Entity entity) {
+		public boolean affects(Actor entity) {
 			if (entity == getSource()) {
 				return false;
 			} else if (entity.getOwner() != getSource().getOwner()) {
@@ -28,12 +28,12 @@ public class WarsongCommander extends MinionCard {
 		}
 
 		@Override
-		protected void onApply(Entity entity) {
+		protected void onApply(Actor entity) {
 			entity.setTag(GameTag.CHARGE);
 		}
 
 		@Override
-		protected void onRemove(Entity entity) {
+		protected void onRemove(Actor entity) {
 			entity.removeTag(GameTag.CHARGE);
 			
 		}

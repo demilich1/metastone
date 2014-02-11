@@ -11,6 +11,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.ArcaneExpl
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.FaerieDragon;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.GurubashiBerserker;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.OasisSnapjaw;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
@@ -39,8 +40,8 @@ public class SpecialCardTests extends TestBase {
 		mage.getHand().add(oasisSnapjawCard);
 		context.getLogic().performGameAction(mage.getId(), oasisSnapjawCard.play());
 		
-		Entity attacker = getSingleMinion(mage.getMinions());
-		Entity defender = getSingleMinion(warrior.getMinions());
+		Actor attacker = getSingleMinion(mage.getMinions());
+		Actor defender = getSingleMinion(warrior.getMinions());
 		
 		// Gurubashi Berserker should start with just his base attack
 		Assert.assertEquals(defender.getAttack(), GurubashiBerserker.BASE_ATTACK);
@@ -78,10 +79,10 @@ public class SpecialCardTests extends TestBase {
 		context.getLogic().performGameAction(mage.getId(), devMonsterCard.play());
 		
 		Entity attacker = getSingleMinion(mage.getMinions());
-		Entity elusiveOne = getSingleMinion(warrior.getMinions());
+		Actor elusiveOne = getSingleMinion(warrior.getMinions());
 		
 		GameAction attackAction = new PhysicalAttackAction(attacker.getReference());
-		List<Entity> validTargets = context.getLogic().getValidTargets(warrior.getId(), attackAction);
+		List<Actor> validTargets = context.getLogic().getValidTargets(warrior.getId(), attackAction);
 		// should be two valid targets: enemy hero and faerie dragon
 		Assert.assertEquals(validTargets.size(), 2);
 		
@@ -114,7 +115,7 @@ public class SpecialCardTests extends TestBase {
 		context.getLogic().receiveCard(player.getId(), devMonsterCard);
 		context.getLogic().performGameAction(player.getId(), devMonsterCard.play());
 		
-		Entity minion = getSingleMinion(player.getMinions());
+		Actor minion = getSingleMinion(player.getMinions());
 		
 		context.getLogic().performGameAction(player.getId(), druid.getHeroPower().play());
 		Assert.assertEquals(druid.getAttack(), 1);

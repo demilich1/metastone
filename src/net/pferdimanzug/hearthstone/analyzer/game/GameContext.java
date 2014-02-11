@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.EndTurnAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameResult;
@@ -43,7 +43,7 @@ public class GameContext implements Cloneable {
 	// minions and because of the lazy references to entities
 	// we cannot find the to-be-summoned minion if its Battlecry
 	// tries to target itself
-	private final List<Entity> pendingEntities = new ArrayList<Entity>();
+	private final List<Actor> pendingEntities = new ArrayList<Actor>();
 	private final CardCollection pendingCards = new CardCollection();
 
 	private Player activePlayer;
@@ -115,7 +115,7 @@ public class GameContext implements Cloneable {
 		return pendingCards;
 	}
 
-	public List<Entity> getPendingEntities() {
+	public List<Actor> getPendingEntities() {
 		return pendingEntities;
 	}
 
@@ -216,12 +216,12 @@ public class GameContext implements Cloneable {
 		return null;
 	}
 
-	public Entity resolveSingleTarget(int playerId, EntityReference targetKey) {
+	public Actor resolveSingleTarget(int playerId, EntityReference targetKey) {
 		Player player = getPlayer(playerId);
 		return targetLogic.resolveTargetKey(this, player, null, targetKey).get(0);
 	}
 
-	public List<Entity> resolveTarget(Player player, Entity source, EntityReference targetKey) {
+	public List<Actor> resolveTarget(Player player, Actor source, EntityReference targetKey) {
 		return targetLogic.resolveTargetKey(this, player, source, targetKey);
 	}
 	

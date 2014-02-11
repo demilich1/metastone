@@ -2,7 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.spells;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 
 public class AddSpellTriggerSpell extends Spell {
@@ -14,7 +14,7 @@ public class AddSpellTriggerSpell extends Spell {
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, Entity target) {
+	protected void onCast(GameContext context, Player player, Actor target) {
 		SpellTrigger instance = spellTrigger.clone();
 		instance.setOwner(player.getId());
 		instance.setHost(target);

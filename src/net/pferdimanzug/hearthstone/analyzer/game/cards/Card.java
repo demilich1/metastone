@@ -1,13 +1,15 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards;
 
+import java.util.HashMap;
+
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 
-public abstract class Card implements Cloneable {
+public abstract class Card extends Entity {
 
-	private int id;
-	private final String name;
+	private String description = "";
 	private final CardType cardType;
 	private final int manaCost;
 	private final Rarity rarity;
@@ -15,7 +17,7 @@ public abstract class Card implements Cloneable {
 	private boolean collectible = true;
 	
 	public Card(String name, CardType cardType, Rarity rarity, HeroClass classRestriction, int manaCost) {
-		this.name = name;
+		setName(name);
 		this.cardType = cardType;
 		this.rarity = rarity;
 		this.classRestriction = classRestriction;
@@ -25,7 +27,9 @@ public abstract class Card implements Cloneable {
 	@Override
 	public Card clone() {
 		try {
-			return (Card) super.clone();
+			Card clone = (Card) super.clone();
+			clone.tags = new HashMap<>(tags);
+			return clone;
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
 		}
@@ -40,34 +44,30 @@ public abstract class Card implements Cloneable {
 		return classRestriction;
 	}
 
-	public int getId() {
-		return id;
+	public String getDescription() {
+		return description;
 	}
 
 	public int getManaCost(Player player) {
 		return manaCost;
 	}
 
-	public String getName() {
-		return name;
-	}
-
 	public Rarity getRarity() {
 		return rarity;
 	}
-
+	
 	public boolean isCollectible() {
 		return collectible;
 	}
-	
-	public abstract PlayCardAction play();
 
+	public abstract PlayCardAction play();
+	
 	public void setCollectible(boolean collectible) {
 		this.collectible = collectible;
 	}
-	
-	public void setId(int id) {
-		this.id = id;
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override

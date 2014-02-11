@@ -10,6 +10,7 @@ public class Moonfire extends SpellCard {
 
 	public Moonfire() {
 		super("Moonfire", Rarity.FREE, HeroClass.DRUID, 0);
+		setDescription("Deal $1 damage.");
 		setSpell(new DamageSpell(1));
 		setTargetRequirement(TargetSelection.ANY);
 	}

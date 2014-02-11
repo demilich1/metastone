@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.HeroPower;
@@ -19,8 +19,8 @@ public interface IGameLogic extends Cloneable {
 	public boolean canPlayCard(int playerId, CardReference cardReference);
 	public void castSpell(int playerId, Spell spell);
 	public IGameLogic clone();
-	public void damage(Player player, Entity target, int damage, boolean applySpellpower);
-	public void destroy(Entity target);
+	public void damage(Player player, Actor target, int damage, boolean applySpellpower);
+	public void destroy(Actor target);
 	
 	public int determineBeginner(int... playerIds);
 	public void drawCard(int playerId);
@@ -30,11 +30,11 @@ public interface IGameLogic extends Cloneable {
 	public void changeDurability(Weapon weapon, int durability);
 	
 	public int getTotalTagValue(Player player, GameTag tag);
-	public void fight(Player player, Entity attacker, Entity defender);
+	public void fight(Player player, Actor attacker, Actor defender);
 	public GameResult getMatchResult(Player player, Player oppenent);
 	public List<GameAction> getValidActions(int playerId);
-	public List<Entity> getValidTargets(int playerId, GameAction action);
-	public void heal(Entity target, int healing);
+	public List<Actor> getValidTargets(int playerId, GameAction action);
+	public void heal(Actor target, int healing);
 	public void init(int playerId, boolean begins);
 	
 	public void modifyCurrentMana(int playerId, int mana);
@@ -46,7 +46,7 @@ public interface IGameLogic extends Cloneable {
 	
 	public void setContext(GameContext context);
 	public void startTurn(int playerId);
-	public void summon(int playerId, Minion minion, Entity nextTo);
+	public void summon(int playerId, Minion minion, Actor nextTo);
 	
 	public void useHeroPower(int playerId, HeroPower power);
 }
