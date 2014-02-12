@@ -47,6 +47,10 @@ public abstract class Card extends Entity {
 	public String getDescription() {
 		return description;
 	}
+	
+	public int getBaseManaCost() {
+		return manaCost;
+	}
 
 	public int getManaCost(Player player) {
 		return manaCost;

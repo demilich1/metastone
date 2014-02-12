@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
 public class MinionToken extends GameToken {
@@ -23,11 +24,8 @@ public class MinionToken extends GameToken {
 
 	public void setMinion(Minion minion) {
 		name.setText(minion.getName());
-		attack.setText(String.valueOf(minion.getAttack()));
-		hp.setText(String.valueOf(minion.getHp()));
+		setScoreValue(attack, minion.getAttack(), minion.getTagValue(GameTag.BASE_ATTACK));
+		setScoreValue(hp, minion.getHp(), minion.getMaxHp());
 	}
-
-
-	
 
 }

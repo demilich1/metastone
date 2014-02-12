@@ -18,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
 public class GameToken extends BorderPane {
 
@@ -96,6 +97,23 @@ public class GameToken extends BorderPane {
 
 	public void hideTargetMarker() {
 		targetButton.setVisible(false);
+	}
+	
+	protected void setScoreValue(Text label, int value) {
+		setScoreValue(label, value, value);
+	}
+	
+	protected void setScoreValue(Text label, int value, int baseValue) {
+		label.setText(String.valueOf(value));
+		if (value > baseValue) {
+			label.setFill(Color.GREEN);
+		}
+		else if (value < baseValue) {
+			label.setFill(Color.RED);
+		}
+		else {
+			label.setFill(Color.WHITE);
+		}
 	}
 
 }
