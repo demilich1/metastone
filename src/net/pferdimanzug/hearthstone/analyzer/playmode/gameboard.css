@@ -4,8 +4,10 @@
 
 #outlined_score {
     -fx-font: bold 16.0pt "Arial";
-    -fx-text-fill: white;
-    -fx-effect: dropshadow(one-pass-box, black, 6.0, 0.9, 1.0, 1.0);
+    /*-fx-effect: dropshadow(one-pass-box, black, 6.0, 0.9, 1.0, 1.0);*/
+    -fx-fill: white;
+    -fx-stroke: black;
+    -fx-stroke-width: 2;
 }
 
 #card_border {

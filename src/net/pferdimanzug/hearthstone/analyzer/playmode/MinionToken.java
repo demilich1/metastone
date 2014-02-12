@@ -3,15 +3,16 @@ package net.pferdimanzug.hearthstone.analyzer.playmode;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
 public class MinionToken extends GameToken {
 	@FXML
 	private Label name;
 	@FXML
-	private Label attack;
+	private Text attack;
 	@FXML
-	private Label hp;
+	private Text hp;
 	
 	@FXML
 	private Shape selector;

@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.playmode;
 
-import javafx.scene.control.PopupControl;
 import javafx.stage.Popup;
 import javafx.stage.PopupWindow;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
@@ -14,7 +13,6 @@ public class TooltipFactory {
 		Popup popup = new Popup();
 		CardTooltip content = new CardTooltip();
 		content.setCard(card, player);
-		//popup.
 		popup.setAutoFix(true);
 		popup.setAutoHide(true);
 		popup.getContent().add(content);

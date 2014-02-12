@@ -25,8 +25,9 @@ public class HandCard extends CardToken {
 			@Override
 			public void handle(MouseEvent event) {
 				Bounds localBounds = HandCard.this.getBoundsInLocal();
-				Point2D screenPos = HandCard.this.localToScene(localBounds.getMaxX() , localBounds.getMaxY());
-				tooltip.show(HandCard.this, screenPos.getX() + 2 * getWidth(), screenPos.getY() - 2 * getHeight());
+				Point2D screenPos = HandCard.this.localToScene(localBounds.getMaxX() , localBounds.getMinY());
+				tooltip.show(HandCard.this, screenPos.getX() + getWidth(), screenPos.getY() - tooltip.getHeight());
+				tooltip.requestFocus();
 			}
 		});
 		setOnMouseExited(new EventHandler<MouseEvent>() {

@@ -19,28 +19,28 @@
             <Image url="@../resources/img/heroes/garrosh.png" />
           </image>
         </ImageView>
-        <ImageView fitHeight="30.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" translateY="0.0" StackPane.alignment="BOTTOM_RIGHT">
+        <ImageView fitHeight="100.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" translateX="2.0" translateY="2.0" StackPane.alignment="BOTTOM_RIGHT">
           <image>
             <Image url="@../resources/img/common/health_value_icon.png" />
           </image>
         </ImageView>
-        <Label id="outlined_score" fx:id="hpLabel" text="0" translateX="-8.0" translateY="-2.0" StackPane.alignment="BOTTOM_RIGHT">
+        <Text id="outlined_score" fx:id="hpLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-8.0" translateY="-2.0" StackPane.alignment="BOTTOM_RIGHT">
           <StackPane.margin>
             <Insets />
           </StackPane.margin>
-        </Label>
-        <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" translateY="4.0" StackPane.alignment="BOTTOM_LEFT">
+        </Text>
+        <ImageView fitHeight="100.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateX="-2.0" translateY="5.0" StackPane.alignment="BOTTOM_LEFT">
           <image>
             <Image url="@../resources/img/common/attack_value_icon.png" />
           </image>
         </ImageView>
-        <Label id="outlined_score" fx:id="attackLabel" alignment="BOTTOM_LEFT" text="0" translateX="11.0" translateY="-2.0" StackPane.alignment="BOTTOM_LEFT" />
-        <ImageView fx:id="armorIcon" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateX="2.0" translateY="8.0" StackPane.alignment="CENTER_RIGHT">
+        <Text id="outlined_score" fx:id="attackLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="11.0" translateY="-2.0" StackPane.alignment="BOTTOM_LEFT" />
+        <ImageView fx:id="armorIcon" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateX="4.0" translateY="8.0" StackPane.alignment="CENTER_RIGHT">
           <image>
             <Image url="@../resources/img/common/armor.png" />
           </image>
         </ImageView>
-        <Label id="outlined_score" fx:id="armorLabel" text="0" textAlignment="CENTER" translateX="-11.0" translateY="8.0" StackPane.alignment="CENTER_RIGHT" />
+        <Text id="outlined_score" fx:id="armorLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-8.0" translateY="8.0" StackPane.alignment="CENTER_RIGHT" />
       </children>
       <padding>
         <Insets left="8.0" />
@@ -56,8 +56,8 @@
             <Font name="Arial Bold" size="10.0" />
           </font>
         </Label>
-        <Label id="outlined_score" fx:id="weaponAttackLabel" text="0" translateY="-20.0" StackPane.alignment="BOTTOM_LEFT" />
-        <Label id="outlined_score" fx:id="weaponDurabilityLabel" text="0" translateY="-20.0" StackPane.alignment="BOTTOM_RIGHT" />
+        <Text id="outlined_score" fx:id="weaponAttackLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateY="-20.0" StackPane.alignment="BOTTOM_LEFT" />
+        <Text id="outlined_score" fx:id="weaponDurabilityLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateY="-20.0" StackPane.alignment="BOTTOM_RIGHT" />
       </children>
       <padding>
         <Insets bottom="4.0" left="4.0" top="4.0" />

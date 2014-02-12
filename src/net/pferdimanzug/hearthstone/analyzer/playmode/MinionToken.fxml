@@ -22,18 +22,18 @@
         </Label>
         <StackPane prefHeight="-1.0" prefWidth="-1.0" translateY="0.0" StackPane.alignment="BOTTOM_CENTER">
           <children>
-            <ImageView fitHeight="33.0" fitWidth="32.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" translateY="-1.0" y="0.0" StackPane.alignment="BOTTOM_LEFT">
+            <ImageView fitHeight="100.0" fitWidth="32.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" translateX="-2.0" translateY="3.0" y="0.0" StackPane.alignment="BOTTOM_LEFT">
               <image>
                 <Image url="@../resources/img/common/attack_value_icon.png" />
               </image>
             </ImageView>
-            <Label id="outlined_score" fx:id="attack" alignment="BASELINE_CENTER" contentDisplay="CENTER" disable="false" text="0" textAlignment="LEFT" translateX="10.0" translateY="-4.0" wrapText="false" StackPane.alignment="BOTTOM_LEFT" />
-            <ImageView fitHeight="30.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateY="-2.0" StackPane.alignment="BOTTOM_RIGHT">
+            <Text id="outlined_score" fx:id="attack" disable="false" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="LEFT" translateX="10.0" translateY="-4.0" StackPane.alignment="BOTTOM_LEFT" />
+            <ImageView fitHeight="100.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" translateX="2.0" translateY="2.0" StackPane.alignment="BOTTOM_RIGHT">
               <image>
                 <Image url="@../resources/img/common/health_value_icon.png" />
               </image>
             </ImageView>
-            <Label id="outlined_score" fx:id="hp" alignment="BASELINE_CENTER" text="0" translateX="-8.0" translateY="-4.0" StackPane.alignment="BOTTOM_RIGHT" />
+            <Text id="outlined_score" fx:id="hp" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-8.0" translateY="-4.0" StackPane.alignment="BOTTOM_RIGHT" />
           </children>
         </StackPane>
       </children>

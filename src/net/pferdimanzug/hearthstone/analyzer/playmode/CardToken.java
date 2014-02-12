@@ -2,29 +2,31 @@ package net.pferdimanzug.hearthstone.analyzer.playmode;
 
 import java.io.IOException;
 
-import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.CardType;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import net.pferdimanzug.hearthstone.analyzer.game.Player;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.CardType;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 
 public class CardToken extends BorderPane {
 	
 	@FXML
-	protected Label manacostLabel;
+	protected Text manaCostLabel;
 	@FXML
 	protected Label nameLabel;
 	@FXML
 	protected Label descriptionLabel;
 
 	@FXML
-	protected Label attackLabel;
+	protected Text attackLabel;
 	@FXML
-	protected Label hpLabel;
+	protected Text hpLabel;
 
 	@FXML
 	protected ImageView attackIcon;
@@ -45,7 +47,7 @@ public class CardToken extends BorderPane {
 	
 	public void setCard(Card card, Player player) {
 		nameLabel.setText(card.getName());
-		manacostLabel.setText(String.valueOf(card.getManaCost(player)));
+		manaCostLabel.setText(String.valueOf(card.getManaCost(player)));
 		boolean isMinionCard = card.getCardType() == CardType.MINION;
 		attackLabel.setVisible(isMinionCard);
 		hpLabel.setVisible(isMinionCard);
@@ -55,6 +57,19 @@ public class CardToken extends BorderPane {
 			MinionCard minionCard = (MinionCard) card;
 			attackLabel.setText(String.valueOf(minionCard.getBaseAttack()));
 			hpLabel.setText(String.valueOf(minionCard.getBaseHp()));
+		}
+	}
+	
+	private void setScoreValue(Text label, int value, int baseValue) {
+		label.setText(String.valueOf(value));
+		if (value > baseValue) {
+			label.setFill(Color.GREEN);
+		}
+		else if (value < baseValue) {
+			label.setFill(Color.RED);
+		}
+		else {
+			label.setFill(Color.WHITE);
 		}
 	}
 

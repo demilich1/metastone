@@ -22,8 +22,8 @@
             <Image url="@../resources/img/common/health_value_icon.png" />
           </image>
         </ImageView>
-        <Label id="outlined_score" fx:id="attackLabel" alignment="CENTER" text="0" translateX="4.0" translateY="-6.0" StackPane.alignment="BOTTOM_LEFT" />
-        <Label id="outlined_score" fx:id="hpLabel" text="0" translateX="-4.0" translateY="-6.0" StackPane.alignment="BOTTOM_RIGHT" />
+        <Text id="outlined_score" fx:id="attackLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="4.0" translateY="-6.0" StackPane.alignment="BOTTOM_LEFT" />
+        <Text id="outlined_score" fx:id="hpLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-4.0" translateY="-6.0" StackPane.alignment="BOTTOM_RIGHT" />
       </children>
     </StackPane>
   </bottom>
@@ -45,11 +45,7 @@
             <Image url="@../resources/img/common/mana_crystal.png" />
           </image>
         </ImageView>
-        <Label id="outlined_score" fx:id="manacostLabel" alignment="TOP_LEFT" styleClass="outlined_score" text="0" translateY="-4.0" StackPane.alignment="CENTER_LEFT">
-          <StackPane.margin>
-            <Insets />
-          </StackPane.margin>
-        </Label>
+        <Text id="outlined_score" fx:id="manaCostLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" StackPane.alignment="TOP_LEFT" />
       </children>
     </StackPane>
   </top>

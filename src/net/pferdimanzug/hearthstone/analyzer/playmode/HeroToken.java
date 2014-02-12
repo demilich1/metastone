@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
@@ -12,14 +13,14 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
 public class HeroToken extends GameToken {
 
 	@FXML
-	private Label attackLabel;
+	private Text attackLabel;
 	@FXML
-	private Label hpLabel;
+	private Text hpLabel;
 	@FXML
 	private Label manaLabel;
 	
 	@FXML
-	private Label armorLabel;
+	private Text armorLabel;
 	@FXML
 	private ImageView armorIcon;
 	
@@ -28,9 +29,9 @@ public class HeroToken extends GameToken {
 	@FXML
 	private Label weaponNameLabel;
 	@FXML
-	private Label weaponAttackLabel;
+	private Text weaponAttackLabel;
 	@FXML
-	private Label weaponDurabilityLabel;
+	private Text weaponDurabilityLabel;
 
 	@FXML
 	private ImageView portrait;
