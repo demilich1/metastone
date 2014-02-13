@@ -22,6 +22,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
 import net.pferdimanzug.hearthstone.analyzer.game.events.DamageEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.KillEvent;
+import net.pferdimanzug.hearthstone.analyzer.game.events.OverloadEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.PhysicalAttackEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.SpellCastedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.SummonEvent;
@@ -416,7 +417,14 @@ public class GameLogic implements IGameLogic {
 		player.getHand().remove(card);
 		player.getGraveyard().add(card);
 		player.getHero().modifyTag(GameTag.COMBO, +1);
-		context.fireGameEvent(new SpellCastedEvent(context, playerId));
+		if (card.hasTag(GameTag.OVERLOAD)) {
+			player.getHero().modifyTag(GameTag.OVERLOAD, card.getTagValue(GameTag.OVERLOAD));
+			context.fireGameEvent(new OverloadEvent(context, playerId));
+		}
+		
+		if (card.getCardType() == CardType.SPELL) {
+			context.fireGameEvent(new SpellCastedEvent(context, playerId));
+		}
 	}
 
 	private int getModifiedManaCost(Player player, Card card) {
@@ -465,7 +473,9 @@ public class GameLogic implements IGameLogic {
 		if (player.getMaxMana() < MAX_MANA) {
 			player.setMaxMana(player.getMaxMana() + 1);
 		}
-		player.setMana(player.getMaxMana());
+		
+		player.setMana(player.getMaxMana() - player.getHero().getTagValue(GameTag.OVERLOAD));
+		player.getHero().removeTag(GameTag.OVERLOAD);
 		logger.debug("{} starts his turn with {} mana", player.getName(), player.getMana() + "/" + player.getMaxMana());
 		player.getHero().getHeroPower().setUsed(false);
 		refreshAttacksPerRound(player.getHero());
@@ -548,7 +558,7 @@ public class GameLogic implements IGameLogic {
 		weapon.modifyTag(GameTag.DURABILITY, durability);
 		if (weapon.isBroken()) {
 			destroy(weapon);
-		}		
+		}
 	}
 
 }

@@ -6,6 +6,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PhysicalAttackAction;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.AbusiveSergeant;
@@ -17,6 +18,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Anduin;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Thrall;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -154,5 +156,30 @@ public class AdvancedMechanicTests extends BasicTests {
 		context.getLogic().performGameAction(priest.getId(), damageSpell.play());
 		int spellPower = getSingleMinion(priest.getMinions()).getTagValue(GameTag.SPELL_POWER);
 		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - 2 * MindBlast.DAMAGE - spellPower);
+	}
+	
+	@Test
+	public void testOverload() {
+		GameContext context = createContext(new Thrall(), new Garrosh());
+		Player player = context.getPlayer1();
+		int playerId = player.getId();
+		
+		context.getLogic().startTurn(playerId);
+		Assert.assertEquals(player.getMana(), 1);
+		context.getLogic().endTurn(playerId);
+		context.getLogic().startTurn(playerId);
+		Assert.assertEquals(player.getMana(), 2);
+		
+		Card overloadCard = new DevMonster(1, 1);
+		overloadCard.setTag(GameTag.OVERLOAD, 2);
+		context.getLogic().receiveCard(playerId, overloadCard);
+		context.getLogic().performGameAction(playerId, overloadCard.play());
+		context.getLogic().endTurn(playerId);
+		context.getLogic().startTurn(playerId);
+		Assert.assertEquals(player.getMana(), 1);
+		
+		context.getLogic().endTurn(playerId);
+		context.getLogic().startTurn(playerId);
+		Assert.assertEquals(player.getMana(), 4);
 	}
 }

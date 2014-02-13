@@ -8,5 +8,6 @@ public enum GameEventType {
 	PHYSICAL_ATTACK,
 	TURN_START,
 	TURN_END,
-	SPELL_CASTED
+	SPELL_CASTED,
+	OVERLOAD
 }
