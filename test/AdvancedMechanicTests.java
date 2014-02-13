@@ -7,8 +7,10 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PhysicalAttackAction;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.ChooseOneCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Wrath;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.AbusiveSergeant;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.AmaniBerserker;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.KoboldGeomancer;
@@ -18,6 +20,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Anduin;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Malfurion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Thrall;
 
 import org.testng.Assert;
@@ -185,6 +188,29 @@ public class AdvancedMechanicTests extends BasicTests {
 	
 	@Test
 	public void testChooseOne() {
+		GameContext context = createContext(new Malfurion(), new Garrosh());
+		Player player = context.getPlayer1();
+		Player opponent = context.getPlayer2();
+		player.getHand().removeAll();
 		
+		DevMonster minionCard = new DevMonster(1, 4);
+		context.getLogic().receiveCard(opponent.getId(), minionCard);
+		context.getLogic().performGameAction(opponent.getId(), minionCard.play());
+		
+		player.getHero().getHeroPower().setUsed(true);
+		ChooseOneCard wrath = new Wrath();
+		context.getLogic().receiveCard(player.getId(), wrath);
+		player.setMana(wrath.getBaseManaCost());
+		List<GameAction> validActions = context.getLogic().getValidActions(player.getId());
+		Assert.assertEquals(validActions.size(), 2);
+		Assert.assertEquals(player.getHand().getCount(), 1);
+		
+		GameAction playWrath = wrath.playCard1();
+		playWrath.setTarget(getSingleMinion(opponent.getMinions()));
+		context.getLogic().performGameAction(player.getId(), playWrath);
+		
+		validActions = context.getLogic().getValidActions(player.getId());
+		Assert.assertEquals(validActions.size(), 0);
+		Assert.assertEquals(player.getHand().getCount(), 0);
 	}
 }
