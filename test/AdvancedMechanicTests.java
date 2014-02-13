@@ -182,4 +182,9 @@ public class AdvancedMechanicTests extends BasicTests {
 		context.getLogic().startTurn(playerId);
 		Assert.assertEquals(player.getMana(), 4);
 	}
+	
+	@Test
+	public void testChooseOne() {
+		
+	}
 }

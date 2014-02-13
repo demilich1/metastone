@@ -412,8 +412,6 @@ public class GameLogic implements IGameLogic {
 		Card card = context.resolveCardReference(cardReference);
 		modifyCurrentMana(playerId, -getModifiedManaCost(player, card));
 		logger.debug("{} plays {}", player.getName(), card);
-		// logger.debug("{} is now at {} mana", player.getName(),
-		// player.getMana() + "/" + player.getMaxMana());
 		player.getHand().remove(card);
 		player.getGraveyard().add(card);
 		player.getHero().modifyTag(GameTag.COMBO, +1);

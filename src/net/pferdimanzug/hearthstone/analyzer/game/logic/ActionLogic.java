@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PhysicalAttackAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.ChooseOneCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
@@ -66,10 +68,23 @@ public class ActionLogic {
 				continue;
 			}
 			
-			GameAction playCardAction = card.play();
-			if (validateAction(context, player, playCardAction)) {
-				playCardActions.add(playCardAction);
+			if (card.hasTag(GameTag.CHOOSE_ONE)) {
+				ChooseOneCard chooseOneCard = (ChooseOneCard) card;
+				GameAction playCardAction = chooseOneCard.playCard1();
+				if (validateAction(context, player, playCardAction)) {
+					playCardActions.add(playCardAction);
+				}	
+				playCardAction = chooseOneCard.playCard2();
+				if (validateAction(context, player, playCardAction)) {
+					playCardActions.add(playCardAction);
+				}	
+			} else {
+				GameAction playCardAction = card.play();
+				if (validateAction(context, player, playCardAction)) {
+					playCardActions.add(playCardAction);
+				}	
 			}
+			
 			
 		}
 		return playCardActions;
