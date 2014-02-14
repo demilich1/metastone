@@ -15,15 +15,18 @@ public abstract class Aura {
 	}
 	
 	public abstract boolean affects(Actor entity);
+	
 	public void effectApply(Actor entity) {
 		affectedEntities.add(entity);
 		onApply(entity);
 	}
+	
 	public void effectRemove(Entity entity) {
 		for (Actor affectedEntity : affectedEntities) {
 			onRemove(affectedEntity);
 		}
 	}
+	
 	public Actor getSource() {
 		return source;
 	}

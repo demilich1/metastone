@@ -19,24 +19,25 @@ public class TundraRhino extends MinionCard {
 		}
 
 		@Override
-		public boolean affects(Actor entity) {
-			if (entity.getOwner() != getSource().getOwner()) {
+		public boolean affects(Actor actor) {
+			if (actor.getOwner() != getSource().getOwner()) {
 				return false;
 			}
-			if (entity.getEntityType() != EntityType.MINION) {
+			if (actor.getEntityType() != EntityType.MINION) {
 				return false;
 			}
-			return entity.getRace() == Race.BEAST;
+			Minion minion = (Minion) actor;
+			return minion.getRace() == Race.BEAST;
 		}
 
 		@Override
-		protected void onApply(Actor entity) {
-			entity.setTag(GameTag.CHARGE);
+		protected void onApply(Actor actor) {
+			actor.setTag(GameTag.CHARGE);
 		}
 
 		@Override
-		protected void onRemove(Actor entity) {
-			entity.removeTag(GameTag.CHARGE);
+		protected void onRemove(Actor actor) {
+			actor.removeTag(GameTag.CHARGE);
 		}
 		
 	}
@@ -44,11 +45,12 @@ public class TundraRhino extends MinionCard {
 	public TundraRhino() {
 		super("Tundra Rhino", 2, 5, Rarity.FREE, HeroClass.HUNTER, 5);
 		setDescription("Your Beasts have Charge.");
+		setTag(GameTag.RACE, Race.BEAST);
 	}
 	
 	@Override
 	public Minion summon() {
-		Minion tundraRhino = createMinion(Race.BEAST);
+		Minion tundraRhino = createMinion();
 		tundraRhino.setAura(new TundraRhinoAura(tundraRhino));
 		return tundraRhino;
 	}

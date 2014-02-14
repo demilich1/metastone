@@ -2,6 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards;
 
 import java.util.HashMap;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
@@ -53,7 +54,7 @@ public abstract class Card extends Entity {
 	}
 
 	public int getManaCost(Player player) {
-		return manaCost;
+		return manaCost + getTagValue(GameTag.MANA_COST_MODIFIER);
 	}
 
 	public Rarity getRarity() {

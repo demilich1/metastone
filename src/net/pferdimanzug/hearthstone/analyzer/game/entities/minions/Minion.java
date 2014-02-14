@@ -12,6 +12,8 @@ public class Minion extends Actor {
 
 	public Minion(MinionCard sourceCard) {
 		super(sourceCard);
+		Race race = sourceCard.hasTag(GameTag.RACE) ? (Race)sourceCard.getTag(GameTag.RACE) : Race.NONE;
+		setRace(race);
 	}
 	
 	@Override
@@ -43,6 +45,14 @@ public class Minion extends Actor {
 			return getHp();
 		}
 		return super.getAttack();
+	}
+
+	public Race getRace() {
+		return (Race) getTag(GameTag.RACE);
+	}
+
+	public void setRace(Race race) {
+		setTag(GameTag.RACE, race);
 	}
 	
 	

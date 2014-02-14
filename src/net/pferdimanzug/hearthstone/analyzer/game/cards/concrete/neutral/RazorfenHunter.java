@@ -16,11 +16,12 @@ public class RazorfenHunter extends MinionCard {
 
 		public Boar() {
 			super("Boar", 1, 1, Rarity.FREE, HeroClass.ANY, 1);
+			setTag(GameTag.RACE, Race.BEAST);
 		}
 
 		@Override
 		public Minion summon() {
-			return createMinion(Race.BEAST);
+			return createMinion();
 		}
 
 	}

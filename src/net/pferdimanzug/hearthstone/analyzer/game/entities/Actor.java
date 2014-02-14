@@ -5,7 +5,6 @@ import java.util.HashMap;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 
@@ -19,7 +18,7 @@ public abstract class Actor extends Entity {
 	private int ownerIndex;
 	private Card sourceCard;
 	private SpellTrigger spellTrigger;
-	private Race race = Race.NONE;
+	
 	public Actor(Card sourceCard) {
 		this.setName(sourceCard != null ? sourceCard.getName() : null);
 		this.sourceCard = sourceCard;
@@ -85,10 +84,6 @@ public abstract class Actor extends Entity {
 		return ownerIndex;
 	}
 
-	public Race getRace() {
-		return race;
-	}
-
 	public Card getSourceCard() {
 		return sourceCard;
 	}
@@ -143,10 +138,6 @@ public abstract class Actor extends Entity {
 
 	public void setOwner(int ownerIndex) {
 		this.ownerIndex = ownerIndex;
-	}
-
-	public void setRace(Race race) {
-		this.race = race;
 	}
 
 	@Override

@@ -16,11 +16,12 @@ public class DreadInfernal extends MinionCard {
 	public DreadInfernal() {
 		super("Dread Infernal", 6, 6, Rarity.FREE, HeroClass.WARLOCK, 6);
 		setDescription("Battlecry: Deal 1 damage to ALL other characters. ");
+		setTag(GameTag.RACE, Race.DEMON);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion dreadInfernal = createMinion(Race.DEMON);
+		Minion dreadInfernal = createMinion();
 		Battlecry infernoBattlecry = Battlecry.createBattlecry(new DamageSpell(1), TargetSelection.NONE);
 		infernoBattlecry.setTargetKey(EntityReference.ALL_CHARACTERS);
 		dreadInfernal.setTag(GameTag.BATTLECRY, infernoBattlecry);

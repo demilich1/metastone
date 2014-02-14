@@ -12,11 +12,12 @@ public class Voidwalker extends MinionCard {
 	public Voidwalker() {
 		super("Voidwalker", 1, 3, Rarity.FREE, HeroClass.WARLOCK, 1);
 		setDescription("Taunt");
+		setTag(GameTag.RACE, Race.DEMON);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(Race.DEMON, GameTag.TAUNT);
+		return createMinion(GameTag.TAUNT);
 	}
 
 }

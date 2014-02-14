@@ -3,7 +3,9 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroySpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.HealingSpell;
@@ -26,7 +28,11 @@ public class SacrificialPact extends SpellCard {
 
 	@Override
 	public boolean canBeCastOn(Actor target) {
-		return target.getRace() == Race.DEMON;
+		if (target.getEntityType() != EntityType.MINION) {
+			return false;
+		}
+		Minion minion = (Minion) target;
+		return minion.getRace() == Race.DEMON;
 	}
 	
 	

@@ -7,6 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
@@ -40,9 +41,10 @@ public class Demonfire extends SpellCard {
 			context.getLogic().castSpell(player.getId(), spellToCast);
 		}
 
-		private boolean isFriendlyMinion(Player player, Actor entity) {
-			return entity.getOwner() == player.getId() && entity.getEntityType() == EntityType.MINION
-					&& entity.getRace() == Race.DEMON;
+		private boolean isFriendlyMinion(Player player, Actor actor) {
+			Minion minion = (Minion) actor;
+			return minion.getOwner() == player.getId() && minion.getEntityType() == EntityType.MINION
+					&& minion.getRace() == Race.DEMON;
 		}
 
 	}

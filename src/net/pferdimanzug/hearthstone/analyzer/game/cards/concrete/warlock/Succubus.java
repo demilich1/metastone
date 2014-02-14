@@ -14,11 +14,12 @@ public class Succubus extends MinionCard {
 	public Succubus() {
 		super("Succubus", 4, 3, Rarity.FREE, HeroClass.WARLOCK, 2);
 		setDescription("Battlecry: Discard a random card.");
+		setTag(GameTag.RACE, Race.DEMON);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion succubus = createMinion(Race.DEMON);
+		Minion succubus = createMinion();
 		succubus.setTag(GameTag.BATTLECRY, Battlecry.createBattlecry(new DiscardCardSpell()));
 		return succubus;
 	}

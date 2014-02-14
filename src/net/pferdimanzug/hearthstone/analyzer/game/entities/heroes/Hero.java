@@ -3,6 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.entities.heroes;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.HeroPower;
 
@@ -70,6 +71,14 @@ public abstract class Hero extends Actor {
 		if (weapon != null) {
 			weapon.setOwner(getOwner());
 		}
+	}
+
+	public Race getRace() {
+		return (Race) getTag(GameTag.RACE);
+	}
+
+	public void setRace(Race race) {
+		setTag(GameTag.RACE, race);
 	}
 	
 }

@@ -11,6 +11,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonRandomSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class AnimalCompanion extends SpellCard {
 
@@ -19,12 +20,13 @@ public class AnimalCompanion extends SpellCard {
 		public Huffer() {
 			super("Huffer", 4, 2, Rarity.FREE, HeroClass.HUNTER, 3);
 			setDescription("Charge");
+			setTag(GameTag.RACE, Race.BEAST);
 			setCollectible(false);
 		}
 
 		@Override
 		public Minion summon() {
-			return createMinion(Race.BEAST, GameTag.CHARGE);
+			return createMinion(GameTag.CHARGE);
 		}
 		
 	}
@@ -34,12 +36,13 @@ public class AnimalCompanion extends SpellCard {
 		public Leokk() {
 			super("Leokk", 2, 4, Rarity.FREE, HeroClass.HUNTER, 3);
 			setDescription("Other friendly minions have +1 Attack.");
+			setTag(GameTag.RACE, Race.BEAST);
 			setCollectible(false);
 		}
 
 		@Override
 		public Minion summon() {
-			Minion leokk = createMinion(Race.BEAST);
+			Minion leokk = createMinion();
 			leokk.setAura(new LeokkAura(leokk));
 			return leokk;
 		}
@@ -78,13 +81,14 @@ public class AnimalCompanion extends SpellCard {
 
 		public Misha() {
 			super("Misha", 4, 4, Rarity.FREE, HeroClass.HUNTER, 3);
+			setTag(GameTag.RACE, Race.BEAST);
 			setDescription("Taunt");
 			setCollectible(false);
 		}
 
 		@Override
 		public Minion summon() {
-			return createMinion(Race.BEAST, GameTag.TAUNT);
+			return createMinion(GameTag.TAUNT);
 		}
 		
 	}
@@ -93,6 +97,7 @@ public class AnimalCompanion extends SpellCard {
 		super("Animal Companion", Rarity.FREE, HeroClass.HUNTER, 3);
 		setDescription("Summon a random Beast Companion.");
 		setSpell(new SummonRandomSpell(new Huffer(), new Misha(), new Leokk()));
+		setTargetRequirement(TargetSelection.NONE);
 	}
 
 }

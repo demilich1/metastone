@@ -12,11 +12,12 @@ public class YoungDragonhawk extends MinionCard {
 	public YoungDragonhawk() {
 		super("Young Dragonhawk", 1, 1, Rarity.COMMON, HeroClass.ANY, 1);
 		setDescription("Windfury");
+		setTag(GameTag.RACE, Race.BEAST);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(Race.BEAST, GameTag.WINDFURY);
+		return createMinion(GameTag.WINDFURY);
 	}
 
 }

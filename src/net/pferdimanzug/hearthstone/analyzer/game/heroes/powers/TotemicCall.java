@@ -28,11 +28,12 @@ public class TotemicCall extends HeroPower {
 		public HealingTotem() {
 			super(HEALING_TOTEM_NAME, 0, 2, Rarity.FREE, HeroClass.SHAMAN, 1);
 			setCollectible(false);
+			setTag(GameTag.RACE, Race.TOTEM);
 		}
 
 		@Override
 		public Minion summon() {
-			Minion healingTotem = createMinion(Race.TOTEM);
+			Minion healingTotem = createMinion();
 			Spell healSpell = new HealingSpell(1);
 			healSpell.setTarget(EntityReference.FRIENDLY_MINIONS);
 			SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), healSpell);
@@ -46,11 +47,12 @@ public class TotemicCall extends HeroPower {
 		public SearingTotem() {
 			super(SEARING_TOTEM_NAME, 1, 1, Rarity.FREE, HeroClass.SHAMAN, 1);
 			setCollectible(false);
+			setTag(GameTag.RACE, Race.TOTEM);
 		}
 
 		@Override
 		public Minion summon() {
-			return createMinion(Race.TOTEM);
+			return createMinion();
 		}
 
 		
@@ -60,11 +62,12 @@ public class TotemicCall extends HeroPower {
 		public StoneclawTotem() {
 			super(STONECLAW_TOTEM_NAME, 0, 2, Rarity.FREE, HeroClass.SHAMAN, 1);
 			setCollectible(false);
+			setTag(GameTag.RACE, Race.TOTEM);
 		}
 
 		@Override
 		public Minion summon() {
-			return createMinion(Race.TOTEM, GameTag.TAUNT);
+			return createMinion(GameTag.TAUNT);
 		}
 
 		
@@ -110,11 +113,12 @@ public class TotemicCall extends HeroPower {
 		public WrathOfAirTotem() {
 			super(WRATH_OF_AIR_TOTEM_NAME, 0, 2, Rarity.FREE, HeroClass.SHAMAN, 1);
 			setCollectible(false);
+			setTag(GameTag.RACE, Race.TOTEM);
 		}
 
 		@Override
 		public Minion summon() {
-			Minion wrathOfAirTotem = createMinion(Race.TOTEM);
+			Minion wrathOfAirTotem = createMinion();
 			wrathOfAirTotem.setTag(GameTag.SPELL_POWER, 1);
 			return wrathOfAirTotem;
 		}

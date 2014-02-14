@@ -12,11 +12,12 @@ public class StonetuskBoar extends MinionCard {
 	public StonetuskBoar() {
 		super("Stonetusk Boar", 1, 1, Rarity.FREE, HeroClass.ANY, 1);
 		setDescription("Charge");
+		setTag(GameTag.RACE, Race.BEAST);
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion(Race.BEAST, GameTag.CHARGE);
+		return createMinion(GameTag.CHARGE);
 	}
 
 }

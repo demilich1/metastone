@@ -17,11 +17,12 @@ public class FlameImp extends MinionCard {
 	public FlameImp() {
 		super("FlameImp", 3, 2, Rarity.COMMON, HeroClass.WARLOCK, 1);
 		setDescription("Battlecry: Deal 3 damage to your hero.");
+		setTag(GameTag.RACE, Race.DEMON);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion flameImp = createMinion(Race.DEMON);
+		Minion flameImp = createMinion();
 		Spell damageHeroSpell = new DamageSpell(3);
 		damageHeroSpell.setTarget(EntityReference.FRIENDLY_HERO);
 		Battlecry battlecry = Battlecry.createBattlecry(damageHeroSpell, TargetSelection.NONE);

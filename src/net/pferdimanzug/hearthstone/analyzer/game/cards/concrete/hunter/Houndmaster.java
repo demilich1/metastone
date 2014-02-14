@@ -24,11 +24,12 @@ public class Houndmaster extends MinionCard {
 		}
 
 		@Override
-		public boolean canBeExecutedOn(Actor entity) {
-			if (entity.getEntityType() != EntityType.MINION) {
+		public boolean canBeExecutedOn(Actor actor) {
+			if (actor.getEntityType() != EntityType.MINION) {
 				return false;
 			}
-			return entity.getRace() == Race.BEAST;
+			Minion minion = (Minion) actor;
+			return minion.getRace() == Race.BEAST;
 		}
 	}
 

@@ -18,12 +18,13 @@ public class SouthseaDeckhand extends MinionCard {
 	public SouthseaDeckhand() {
 		super("Southsea Deckhand", 2, 1, Rarity.COMMON, HeroClass.ANY, 1);
 		setDescription("Has Charge while you have a weapon equipped.");
+		setTag(GameTag.RACE, Race.PIRATE);
 	}
 
 	@Override
 	public Minion summon() {
 		Battlecry battlecry = Battlecry.createBattlecry(new ChargeWhileWeaponEquipped(), TargetSelection.SELF);
-		Minion southseaDeckhand = createMinion(Race.PIRATE);
+		Minion southseaDeckhand = createMinion();
 		southseaDeckhand.setTag(GameTag.BATTLECRY, battlecry);
 		return southseaDeckhand;
 	}
@@ -41,8 +42,6 @@ public class SouthseaDeckhand extends MinionCard {
 			}
 			super.onCast(context, player, target);
 		}
-		
-		
 		
 	}
 

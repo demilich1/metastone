@@ -19,16 +19,17 @@ public class TimberWolf extends MinionCard {
 		}
 
 		@Override
-		public boolean affects(Actor entity) {
-			if (entity == getSource()) {
+		public boolean affects(Actor actor) {
+			if (actor == getSource()) {
 				return false;
-			} else if (entity.getOwner() != getSource().getOwner()) {
-				return false;
-			}
-			if (entity.getEntityType() != EntityType.MINION) {
+			} else if (actor.getOwner() != getSource().getOwner()) {
 				return false;
 			}
-			return entity.getRace() == Race.BEAST;
+			if (actor.getEntityType() != EntityType.MINION) {
+				return false;
+			}
+			Minion minion = (Minion) actor;
+			return minion.getRace() == Race.BEAST;
 		}
 
 		@Override
@@ -46,11 +47,12 @@ public class TimberWolf extends MinionCard {
 	public TimberWolf() {
 		super("Timber Wolf", 1, 1, Rarity.FREE, HeroClass.HUNTER, 1);
 		setDescription("Your other Beasts have +1 Attack.");
+		setTag(GameTag.RACE, Race.BEAST);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion timberWolf = createMinion(Race.BEAST);
+		Minion timberWolf = createMinion();
 		timberWolf.setAura(new TimberWolfAura(timberWolf));
 		return timberWolf;
 	}

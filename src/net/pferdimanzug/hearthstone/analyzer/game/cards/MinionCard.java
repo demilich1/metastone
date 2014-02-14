@@ -7,7 +7,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public abstract class MinionCard extends Card {
@@ -19,14 +18,9 @@ public abstract class MinionCard extends Card {
 	}
 
 	protected Minion createMinion(GameTag... tags) {
-		return createMinion(Race.NONE, tags);
-	}
-
-	protected Minion createMinion(Race race, GameTag... tags) {
 		Minion minion = new Minion(this);
 		minion.setBaseAttack(getBaseAttack());
 		minion.setBaseHp(getBaseHp());
-		minion.setRace(race);
 		for (GameTag gameTag : tags) {
 			minion.setTag(gameTag);
 		}
