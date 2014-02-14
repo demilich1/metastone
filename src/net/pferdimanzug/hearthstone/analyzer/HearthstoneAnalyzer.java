@@ -15,6 +15,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Wrath;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.ArcaneMissiles;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.ShatteredSunCleric;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.Lightspawn;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.Thoughtsteal;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
@@ -28,11 +30,11 @@ public class HearthstoneAnalyzer extends Application {
 	}
 	
 	private void launchHumanDebugGame() {
-		HeroClass humanHeroClass = HeroClass.DRUID;
-		HeroClass aiHeroClass = HeroClass.HUNTER;
+		HeroClass humanHeroClass = HeroClass.PRIEST;
+		HeroClass aiHeroClass = HeroClass.PALADIN;
 		Hero hero1 = HeroFactory.createHero(humanHeroClass);
-		//Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
-		Player player1 = new Player("Human", hero1, DebugDecks.getSingleCardDeck(new Wrath(), 30));
+		Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
+		//Player player1 = new Player("Human", hero1, DebugDecks.getSingleCardDeck(new Lightspawn(), 30));
 		
 		player1.setBehaviour(new HumanBehaviour());
 		Hero hero2 = HeroFactory.createHero(aiHeroClass);

@@ -20,7 +20,7 @@ public class NorthshireCleric extends MinionCard {
 		@Override
 		public boolean fire(IGameEvent event, Actor host) {
 			HealEvent healEvent = (HealEvent) event;
-			return healEvent.getTarget().getEntityType() != EntityType.MINION;
+			return healEvent.getTarget().getEntityType() == EntityType.MINION;
 		}
 
 		@Override

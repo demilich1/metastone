@@ -85,7 +85,7 @@ public class IconFactory {
 			iconPath += "jaina";
 			break;
 		case PALADIN:
-			iconPath += "paladin";
+			iconPath += "uther";
 			break;
 		case PRIEST:
 			iconPath += "anduin";
