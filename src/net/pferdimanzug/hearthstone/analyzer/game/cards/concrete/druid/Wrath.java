@@ -1,5 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid;
 
+import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.CardType;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.ChooseOneCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
@@ -12,10 +14,10 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class Wrath extends ChooseOneCard {
 
 	public Wrath() {
-		super("Wrath", Rarity.COMMON, HeroClass.DRUID, 1);
+		super("Wrath", CardType.SPELL, Rarity.COMMON, HeroClass.DRUID, 1);
 		setDescription("Choose One - Deal $3 damage to a minion; or $1 damage and draw a card.");
-		setSpellCard1(new WrathDamage());
-		setSpellCard2(new WrathDamageAndDraw());
+		setCard1(new WrathDamage());
+		setCard2(new WrathDamageAndDraw());
 	}
 	
 	private class WrathDamage extends SpellCard {

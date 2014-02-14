@@ -502,10 +502,10 @@ public class GameLogic implements IGameLogic {
 		refreshAttacksPerRound(minion);
 		minion.setTag(GameTag.SUMMONING_SICKNESS);
 
-		if (nextTo == null) {
+		int index = player.getMinions().indexOf(nextTo);
+		if (index == -1) {
 			player.getMinions().add(minion);
 		} else {
-			int index = player.getMinions().indexOf(nextTo);
 			player.getMinions().add(index, minion);
 		}
 		minion.setOwner(player.getId());
