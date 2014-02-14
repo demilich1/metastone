@@ -18,12 +18,23 @@ public abstract class SpellCard extends Card {
 	protected SpellCard(String name, CardType cardType, Rarity rarity, HeroClass classRestriction, int manaCost) {
 		super(name, cardType, rarity, classRestriction, manaCost);
 	}
-	
+
 	public SpellCard(String name, Rarity rarity, HeroClass classRestriction, int manaCost) {
 		super(name, CardType.SPELL, rarity, classRestriction, manaCost);
 	}
 
 	public boolean canBeCast(GameContext context, Player player) {
+		Player opponent = context.getOpponent(player);
+		switch (targetRequirement) {
+		case ENEMY_MINIONS:
+			return context.getMinionCount(opponent) > 0;
+		case FRIENDLY_MINIONS:
+			return context.getMinionCount(player) > 0;
+		case MINIONS:
+			return context.getTotalMinionCount() > 0;
+		default:
+			break;
+		}
 		return true;
 	}
 
@@ -52,7 +63,7 @@ public abstract class SpellCard extends Card {
 				if (!spell.hasPredefinedTarget()) {
 					spell.setTarget(getTargetKey());
 				}
-				
+
 				context.getLogic().castSpell(playerId, spell);
 			}
 		};
@@ -61,12 +72,12 @@ public abstract class SpellCard extends Card {
 	public void setPredefinedTarget(EntityReference target) {
 		spell.setTarget(target);
 	}
-	
+
 	public void setSpell(Spell spell) {
 		this.spell = spell;
 		spell.setApplySpellpower(true);
 	}
-	
+
 	public void setTargetRequirement(TargetSelection targetRequirement) {
 		this.targetRequirement = targetRequirement;
 	}

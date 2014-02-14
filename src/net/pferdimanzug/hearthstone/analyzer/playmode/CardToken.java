@@ -47,7 +47,7 @@ public class CardToken extends BorderPane {
 	
 	public void setCard(Card card, Player player) {
 		nameLabel.setText(card.getName());
-		setScoreValue(manaCostLabel, card.getManaCost(player), card.getBaseManaCost());
+		setScoreValueLowerIsBetter(manaCostLabel, card.getManaCost(player), card.getBaseManaCost());
 		boolean isMinionCard = card.getCardType() == CardType.MINION;
 		attackLabel.setVisible(isMinionCard);
 		hpLabel.setVisible(isMinionCard);
@@ -70,6 +70,19 @@ public class CardToken extends BorderPane {
 			label.setFill(Color.GREEN);
 		}
 		else if (value < baseValue) {
+			label.setFill(Color.RED);
+		}
+		else {
+			label.setFill(Color.WHITE);
+		}
+	}
+	
+	private void setScoreValueLowerIsBetter(Text label, int value, int baseValue) {
+		label.setText(String.valueOf(value));
+		if (value < baseValue) {
+			label.setFill(Color.GREEN);
+		}
+		else if (value > baseValue) {
 			label.setFill(Color.RED);
 		}
 		else {

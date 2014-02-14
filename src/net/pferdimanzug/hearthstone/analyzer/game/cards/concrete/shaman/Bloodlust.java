@@ -1,7 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
@@ -23,9 +21,4 @@ public class Bloodlust extends SpellCard {
 		setTargetRequirement(TargetSelection.NONE);
 	}
 	
-	@Override
-	public boolean canBeCast(GameContext context, Player player) {
-		return player.getMinions().size() > 0;
-	}
-
 }

@@ -1,5 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
+import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
@@ -16,5 +18,16 @@ public class DeadlyShot extends SpellCard {
 		setPredefinedTarget(EntityReference.ENEMY_MINIONS);
 		setTargetRequirement(TargetSelection.NONE);
 	}
+
+	@Override
+	public boolean canBeCast(GameContext context, Player player) {
+		if (!super.canBeCast(context, player)) {
+			return false;
+		}
+		Player opponent = context.getOpponent(player);
+		return opponent.getMinions().size() > 0;
+	}
+	
+	
 
 }

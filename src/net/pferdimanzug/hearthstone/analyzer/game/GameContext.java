@@ -239,6 +239,18 @@ public class GameContext implements Cloneable {
 		}
 		return adjacentMinions;
 	}
+	
+	public int getMinionCount(Player player) {
+		return player.getMinions().size();
+	}
+	
+	public int getTotalMinionCount() {
+		int totalMinionCount = 0;
+		for (int i = 0; i < players.length; i++) {
+			totalMinionCount += getMinionCount(players[i]);
+		}
+		return totalMinionCount;
+	}
 
 	@Override
 	public String toString() {

@@ -39,11 +39,4 @@ public class TotemicMight extends SpellCard {
 		setPredefinedTarget(EntityReference.FRIENDLY_MINIONS);
 	}
 
-	@Override
-	public boolean canBeCast(GameContext context, Player player) {
-		return player.getMinions().size() > 0;
-	}
-	
-	
-
 }

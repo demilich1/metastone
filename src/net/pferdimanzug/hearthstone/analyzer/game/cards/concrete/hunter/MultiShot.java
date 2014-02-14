@@ -19,7 +19,10 @@ public class MultiShot extends SpellCard {
 
 	@Override
 	public boolean canBeCast(GameContext context, Player player) {
-		return context.getOpponent(player).getMinions().size() > 2;
+		if (!super.canBeCast(context, player)) {
+			return false;
+		}
+		return context.getOpponent(player).getMinions().size() >= 2;
 	}
 
 }

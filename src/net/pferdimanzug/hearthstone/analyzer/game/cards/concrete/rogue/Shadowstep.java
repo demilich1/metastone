@@ -8,7 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Shadowstep extends SpellCard {
 
-	protected Shadowstep() {
+	public Shadowstep() {
 		super("Shadowstep", Rarity.COMMON, HeroClass.ROGUE, 0);
 		setDescription("Return a friendly minion to your hand. It costs (2) less.");
 		setSpell(new ReturnMinionToHandSpell(-2));

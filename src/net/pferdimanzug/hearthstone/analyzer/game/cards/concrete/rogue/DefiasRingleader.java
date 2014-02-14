@@ -13,7 +13,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class DefiasRingleader extends MinionCard {
 
 	public DefiasRingleader() {
-		super("DefiasRingleader", 2, 2, Rarity.COMMON, HeroClass.ROGUE, 2);
+		super("Defias Ringleader", 2, 2, Rarity.COMMON, HeroClass.ROGUE, 2);
 		setDescription("Combo: Summon a 2/1 Defias Bandit.");
 	}
 

@@ -12,11 +12,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.DebugDecks;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.MinMaxBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Wrath;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.ArcaneMissiles;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.ShatteredSunCleric;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.Lightspawn;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.Thoughtsteal;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
@@ -30,7 +25,7 @@ public class HearthstoneAnalyzer extends Application {
 	}
 	
 	private void launchHumanDebugGame() {
-		HeroClass humanHeroClass = HeroClass.WARLOCK;
+		HeroClass humanHeroClass = HeroClass.ROGUE;
 		HeroClass aiHeroClass = HeroClass.HUNTER;
 		Hero hero1 = HeroFactory.createHero(humanHeroClass);
 		Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
