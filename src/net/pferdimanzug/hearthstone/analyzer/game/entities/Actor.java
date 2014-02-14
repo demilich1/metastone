@@ -41,7 +41,7 @@ public abstract class Actor extends Entity {
 	public Actor clone() {
 		try {
 			Actor clone = (Actor) super.clone();
-			clone.tags = new HashMap<>(tags);
+			clone.tags = new HashMap<>(getTags());
 			clone.spellTrigger = spellTrigger != null ? spellTrigger.clone() : null;
 			return clone;
 		} catch (CloneNotSupportedException e) {
@@ -154,7 +154,7 @@ public abstract class Actor extends Entity {
 		String result = "["  + getEntityType() + " '" + getName() + "'id:" + getId() + " ";
 		result += getAttack() + "/" + getHp();
 		String prefix = " ";
-		for (GameTag tag : tags.keySet()) {
+		for (GameTag tag : getTags().keySet()) {
 			if (displayGameTag(tag)) {
 				result += prefix + tag;
 				prefix = ", ";

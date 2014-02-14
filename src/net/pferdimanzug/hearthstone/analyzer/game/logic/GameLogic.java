@@ -1,6 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.logic;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -100,6 +101,15 @@ public class GameLogic implements IGameLogic {
 			source = context.resolveSingleTarget(playerId, spell.getSource());
 		}
 		spell.cast(context, player, targetLogic.resolveTargetKey(context, player, source, spell.getTarget()));
+	}
+
+	@Override
+	public void changeDurability(Weapon weapon, int durability) {
+		logger.debug("Durability of weapon {} is changed by {}", weapon, durability);
+		weapon.modifyTag(GameTag.DURABILITY, durability);
+		if (weapon.isBroken()) {
+			destroy(weapon);
+		}
 	}
 
 	private void checkForDeadEntities() {
@@ -279,6 +289,27 @@ public class GameLogic implements IGameLogic {
 		return GameResult.RUNNING;
 	}
 
+	private int getModifiedManaCost(Player player, Card card) {
+		int manaCost = card.getManaCost(player);
+		if (card.getCardType() == CardType.MINION) {
+			manaCost += getTotalTagValue(player, GameTag.MINION_MANA_COST);
+		}
+		return manaCost;
+	}
+
+	@Override
+	public int getTotalTagValue(Player player, GameTag tag) {
+		int total = 0;
+		for (Entity minion : player.getMinions()) {
+			if (!minion.hasTag(tag)) {
+				continue;
+			}
+
+			total += minion.getTagValue(tag);
+		}
+		return total;
+	}
+
 	@Override
 	public List<GameAction> getValidActions(int playerId) {
 		Player player = context.getPlayer(playerId);
@@ -425,14 +456,6 @@ public class GameLogic implements IGameLogic {
 		}
 	}
 
-	private int getModifiedManaCost(Player player, Card card) {
-		int manaCost = card.getManaCost(player);
-		if (card.getCardType() == CardType.MINION) {
-			manaCost += getTotalTagValue(player, GameTag.MINION_MANA_COST);
-		}
-		return manaCost;
-	}
-
 	@Override
 	public void receiveCard(int playerId, Card card) {
 		Player player = context.getPlayer(playerId);
@@ -463,6 +486,25 @@ public class GameLogic implements IGameLogic {
 	// TODO: circular dependency. Very ugly, refactor!
 	public void setContext(GameContext context) {
 		this.context = context;
+	}
+
+	@Override
+	public void silence(Minion target) {
+		final HashSet<GameTag> immuneToSilence = new HashSet<GameTag>();
+		immuneToSilence.add(GameTag.HP);
+		immuneToSilence.add(GameTag.MAX_HP);
+		immuneToSilence.add(GameTag.BASE_ATTACK);
+		immuneToSilence.add(GameTag.SUMMONING_SICKNESS);
+		
+		List<GameTag> tags = new ArrayList<GameTag>();
+		tags.addAll(target.getTags().keySet());
+		for (GameTag tag : tags) {
+			if (immuneToSilence.contains(tag)) {
+				continue;
+			}
+			target.removeTag(tag);
+		}
+		context.removeTriggersAssociatedWith(target.getReference());
 	}
 
 	@Override
@@ -535,28 +577,6 @@ public class GameLogic implements IGameLogic {
 		modifyCurrentMana(playerId, -power.getManaCost(player));
 		logger.debug("{} uses {}", player.getName(), power);
 		power.setUsed(true);
-	}
-
-	@Override
-	public int getTotalTagValue(Player player, GameTag tag) {
-		int total = 0;
-		for (Entity minion : player.getMinions()) {
-			if (!minion.hasTag(tag)) {
-				continue;
-			}
-
-			total += minion.getTagValue(tag);
-		}
-		return total;
-	}
-
-	@Override
-	public void changeDurability(Weapon weapon, int durability) {
-		logger.debug("Durability of weapon {} is changed by {}", weapon, durability);
-		weapon.modifyTag(GameTag.DURABILITY, durability);
-		if (weapon.isBroken()) {
-			destroy(weapon);
-		}
 	}
 
 }

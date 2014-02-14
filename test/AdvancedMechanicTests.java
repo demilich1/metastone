@@ -15,6 +15,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.Abusive
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.AmaniBerserker;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.KoboldGeomancer;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.MindBlast;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.Thoughtsteal;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Anduin;
@@ -212,5 +213,21 @@ public class AdvancedMechanicTests extends BasicTests {
 		validActions = context.getLogic().getValidActions(player.getId());
 		Assert.assertEquals(validActions.size(), 0);
 		Assert.assertEquals(player.getHand().getCount(), 0);
+	}
+	
+	@Test
+	public void testCopyCards() {
+		GameContext context = createContext(new Anduin(), new Garrosh());
+		Player player = context.getPlayer1();
+		Player opponent = context.getPlayer2();
+		player.getHand().removeAll();
+		
+		int cardsInHand = player.getHand().getCount();
+		int cardsInOpponentsDeck = opponent.getDeck().getCount();
+		Card thoughtsteal = new Thoughtsteal();
+		context.getLogic().receiveCard(player.getId(), thoughtsteal);
+		context.getLogic().performGameAction(player.getId(), thoughtsteal.play());
+		Assert.assertEquals(opponent.getDeck().getCount(), cardsInOpponentsDeck);
+		Assert.assertEquals(player.getHand().getCount(), cardsInHand + 2);
 	}
 }

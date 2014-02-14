@@ -59,4 +59,8 @@ public abstract class Entity implements Cloneable {
 		tags.put(tag, value);
 	}
 
+	public HashMap<GameTag, Object> getTags() {
+		return tags;
+	}
+
 }

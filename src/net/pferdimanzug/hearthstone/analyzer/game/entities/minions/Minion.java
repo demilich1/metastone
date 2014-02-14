@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.entities.minions;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.aura.Aura;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
@@ -35,5 +36,15 @@ public class Minion extends Actor {
 		setBaseAttack(baseAttack);
 		setBaseHp(baseHp);
 	}
+
+	@Override
+	public int getAttack() {
+		if (hasTag(GameTag.ATTACK_EQUALS_HP)) {
+			return getHp();
+		}
+		return super.getAttack();
+	}
+	
+	
 	
 }

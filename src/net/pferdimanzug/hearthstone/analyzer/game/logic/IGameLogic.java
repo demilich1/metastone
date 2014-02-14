@@ -47,6 +47,7 @@ public interface IGameLogic extends Cloneable {
 	public void setContext(GameContext context);
 	public void startTurn(int playerId);
 	public void summon(int playerId, Minion minion, Actor nextTo);
+	public void silence(Minion target);
 	
 	public void useHeroPower(int playerId, HeroPower power);
 }

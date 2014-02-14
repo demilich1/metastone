@@ -28,7 +28,7 @@ public abstract class Card extends Entity {
 	public Card clone() {
 		try {
 			Card clone = (Card) super.clone();
-			clone.tags = new HashMap<>(tags);
+			clone.tags = new HashMap<>(getTags());
 			return clone;
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
