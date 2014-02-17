@@ -39,6 +39,4 @@ public class MetaSpell extends Spell {
 		spell2.setApplySpellpower(applySpellpower);
 	}
 	
-	
-
 }

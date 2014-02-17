@@ -162,7 +162,7 @@ public class TargetLogic {
 			targets.remove(source);
 			return targets;
 		} else if (targetKey == EntityReference.NONE) {
-			return new ArrayList<Actor>();
+			return null;
 		}
 
 		ArrayList<Actor> target = new ArrayList<>(1);

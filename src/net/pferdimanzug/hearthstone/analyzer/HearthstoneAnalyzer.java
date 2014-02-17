@@ -12,6 +12,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.DebugDecks;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.MinMaxBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.rogue.FanOfKnives;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
@@ -29,8 +30,8 @@ public class HearthstoneAnalyzer extends Application {
 		HeroClass humanHeroClass = HeroClass.ROGUE;
 		HeroClass aiHeroClass = HeroClass.HUNTER;
 		Hero hero1 = HeroFactory.createHero(humanHeroClass);
-		Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
-		//Player player1 = new Player("Human", hero1, DebugDecks.getSingleCardDeck(new Lightspawn(), 30));
+		//Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
+		Player player1 = new Player("Human", hero1, DebugDecks.getSingleCardDeck(new FanOfKnives(), 30));
 		
 		player1.setBehaviour(new HumanBehaviour());
 		Hero hero2 = HeroFactory.createHero(aiHeroClass);
