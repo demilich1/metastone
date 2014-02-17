@@ -22,6 +22,7 @@ public class HearthstoneAnalyzer extends Application {
 
 	public static void main(String[] args) {
 		launch(args);
+		//new HearthstoneAnalyzer().launchDebugGame();
 	}
 	
 	private void launchHumanDebugGame() {
@@ -40,6 +41,10 @@ public class HearthstoneAnalyzer extends Application {
 	}
 
 	private void launchDebugGame() {
+		ApplicationFacade facade = (ApplicationFacade) ApplicationFacade.getInstance();
+		final HearthstoneAnalyzer instance = new HearthstoneAnalyzer();
+		facade.startUp(instance);
+		
 		for (HeroClass heroClass1 : HeroClass.values()) {
 			ApplicationFacade.getInstance().sendNotification(GameNotification.BATCH_START);
 			for (HeroClass heroClass2 : HeroClass.values()) {
@@ -86,7 +91,6 @@ public class HearthstoneAnalyzer extends Application {
 		ApplicationFacade facade = (ApplicationFacade) ApplicationFacade.getInstance();
 		final HearthstoneAnalyzer instance = new HearthstoneAnalyzer();
 		facade.startUp(instance);
-		
 		
 		Pane canvas = new Pane();
 		Scene scene = new Scene(canvas);

@@ -19,6 +19,9 @@ public class BuffRandomSpell extends BuffSpell {
 
 	@Override
 	public void cast(GameContext context, Player player, List<Actor> targets) {
+		if (targets == null || targets.size() == 0) {
+			return;
+		}
 		Actor randomTarget = targets.get(ThreadLocalRandom.current().nextInt(targets.size()));
 		onCast(context, player, randomTarget);
 	}

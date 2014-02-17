@@ -25,7 +25,10 @@ public class Battlecry extends GameAction {
 
 	@Override
 	public void execute(GameContext context, int playerId) {
-		spell.setTarget(getTargetKey());
+		if (!spell.hasPredefinedTarget()) {
+			spell.setTarget(getTargetKey());
+		}
+		
 		context.getLogic().castSpell(playerId, spell);
 	}
 }

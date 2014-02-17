@@ -32,10 +32,10 @@ public class DamageRandomSpell extends DamageSpell {
 	private List<Actor> getValidTargets(List<Actor> targets) {
 		List<Actor> validTargets = new ArrayList<Actor>();
 		for (Actor actor : targets) {
-			if (actor.isDead() && actor.getEntityType() != EntityType.HERO) {
-				continue;
+			if (!actor.isDead() || actor.getEntityType() == EntityType.HERO) {
+				validTargets.add(actor);
 			}
-			validTargets.add(actor);
+			
 		}
 		return validTargets;
 	}

@@ -4,6 +4,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnStartTrigger;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,17 +14,30 @@ public class ApplyTagSpell extends Spell {
 
 	private static Logger logger = LoggerFactory.getLogger(ApplyTagSpell.class);
 
-	private GameTag[] tags;
+	private final GameTag tag;
+	private final boolean temporary;
 
-	public ApplyTagSpell(GameTag... tags) {
-		this.tags = tags;
+	public ApplyTagSpell(GameTag tag) {
+		this(tag, false);
+	}
+	
+	public ApplyTagSpell(GameTag tag, boolean temporary) {
+		this.tag = tag;
+		this.temporary = temporary;
 	}
 
 	@Override
 	protected void onCast(GameContext context, Player player, Actor target) {
-		for (GameTag tag : tags) {
-			logger.debug("Applying tag {} to {}", tag, target);
-			target.setTag(tag);
+		logger.debug("Applying tag {} to {}", tag, target);
+		target.setTag(tag);
+		
+		if (temporary) {
+				RemoveTagSpell debuff = new RemoveTagSpell(tag);
+				debuff.setTarget(target.getReference());
+				SpellTrigger removeTrigger = new SpellTrigger(new TurnStartTrigger(), debuff, true);
+				removeTrigger.setHost(target);
+				removeTrigger.setOwner(target.getOwner());
+				context.addTrigger(removeTrigger);
 		}
 	}
 }

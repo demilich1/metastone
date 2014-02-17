@@ -189,15 +189,16 @@ public class GameLogic implements IGameLogic {
 	private void destroyMinion(Actor minion) {
 		logger.debug("{} is destroyed", minion);
 		Player owner = context.getPlayer(minion.getOwner());
-		owner.getMinions().remove(minion);
+		context.fireGameEvent(new KillEvent(context, minion));
+		context.removeTriggersAssociatedWith(minion.getReference());
+		
 		// TODO: add unit test for deathrattle; also check when exactly it
 		// should be fire
 		if (minion.hasTag(GameTag.DEATHRATTLE)) {
 			Spell deathrattleSpell = minion.getDeathrattle();
 			castSpell(owner.getId(), deathrattleSpell);
 		}
-		context.fireGameEvent(new KillEvent(context, minion));
-		context.removeTriggersAssociatedWith(minion.getReference());
+		owner.getMinions().remove(minion);
 	}
 
 	private void destroyWeapon(Weapon weapon) {
