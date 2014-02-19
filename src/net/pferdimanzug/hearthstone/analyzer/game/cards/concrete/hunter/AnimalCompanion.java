@@ -1,12 +1,9 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
-import net.pferdimanzug.hearthstone.analyzer.game.aura.Aura;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
@@ -43,38 +40,10 @@ public class AnimalCompanion extends SpellCard {
 		@Override
 		public Minion summon() {
 			Minion leokk = createMinion();
-			leokk.setAura(new LeokkAura(leokk));
+			//leokk.setAura(new LeokkAura(leokk));
 			return leokk;
 		}
 		
-	}
-	
-	private class LeokkAura extends Aura {
-
-		public LeokkAura(Actor source) {
-			super(source);
-		}
-
-		@Override
-		public boolean affects(Actor entity) {
-			if (entity == getSource()) {
-				return false;
-			} else if (entity.getOwner() != getSource().getOwner()) {
-				return false;
-			}
-			return entity.getEntityType() == EntityType.MINION;
-		}
-
-		@Override
-		protected void onApply(Actor entity) {
-			entity.modifyTag(GameTag.ATTACK_BONUS, +1);
-		}
-
-		@Override
-		protected void onRemove(Actor entity) {
-			entity.modifyTag(GameTag.ATTACK_BONUS, -1);
-		}
-
 	}
 	
 	private class Misha extends MinionCard {

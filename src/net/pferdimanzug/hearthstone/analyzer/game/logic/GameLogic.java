@@ -39,7 +39,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class GameLogic implements IGameLogic {
+public class GameLogic implements Cloneable {
 
 	public static Logger logger = LoggerFactory.getLogger(GameLogic.class);
 
@@ -69,7 +69,6 @@ public class GameLogic implements IGameLogic {
 		}
 	}
 
-	@Override
 	public boolean canPlayCard(int playerId, CardReference cardReference) {
 		Player player = context.getPlayer(playerId);
 		Card card = context.resolveCardReference(cardReference);
@@ -93,7 +92,6 @@ public class GameLogic implements IGameLogic {
 		return true;
 	}
 
-	@Override
 	public void castSpell(int playerId, Spell spell) {
 		Player player = context.getPlayer(playerId);
 		Actor source = null;
@@ -103,7 +101,6 @@ public class GameLogic implements IGameLogic {
 		spell.cast(context, player, targetLogic.resolveTargetKey(context, player, source, spell.getTarget()));
 	}
 
-	@Override
 	public void changeDurability(Weapon weapon, int durability) {
 		logger.debug("Durability of weapon {} is changed by {}", weapon, durability);
 		weapon.modifyTag(GameTag.DURABILITY, durability);
@@ -122,11 +119,11 @@ public class GameLogic implements IGameLogic {
 		}
 	}
 
-	public IGameLogic clone() {
+	@Override
+	public GameLogic clone() {
 		return new GameLogic(idFactory.clone());
 	}
 
-	@Override
 	public void damage(Player player, Actor target, int damage, boolean applySpellpower) {
 		if (applySpellpower) {
 			damage += getTotalTagValue(player, GameTag.SPELL_POWER);
@@ -166,7 +163,6 @@ public class GameLogic implements IGameLogic {
 		}
 	}
 
-	@Override
 	public void destroy(Actor target) {
 		switch (target.getEntityType()) {
 		case HERO:
@@ -207,12 +203,10 @@ public class GameLogic implements IGameLogic {
 		context.removeTriggersAssociatedWith(weapon.getReference());
 	}
 
-	@Override
 	public int determineBeginner(int... playerIds) {
 		return ThreadLocalRandom.current().nextBoolean() ? playerIds[0] : playerIds[1];
 	}
 
-	@Override
 	public void drawCard(int playerId) {
 		Player player = context.getPlayer(playerId);
 		CardCollection deck = player.getDeck();
@@ -229,7 +223,6 @@ public class GameLogic implements IGameLogic {
 		receiveCard(playerId, card);
 	}
 
-	@Override
 	public void endTurn(int playerId) {
 		Player player = context.getPlayer(playerId);
 		player.getHero().removeTag(GameTag.COMBO);
@@ -237,7 +230,6 @@ public class GameLogic implements IGameLogic {
 		context.fireGameEvent(new TurnEndEvent(context, player.getId()));
 	}
 
-	@Override
 	public void equipWeapon(int playerId, Weapon weapon) {
 		Player player = context.getPlayer(playerId);
 		weapon.setId(idFactory.generateId());
@@ -255,7 +247,6 @@ public class GameLogic implements IGameLogic {
 		}
 	}
 
-	@Override
 	public void fight(Player player, Actor attacker, Actor defender) {
 		logger.debug("{} attacks {}", attacker, defender);
 		int attackerDamage = attacker.getAttack();
@@ -276,7 +267,6 @@ public class GameLogic implements IGameLogic {
 		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, defender));
 	}
 
-	@Override
 	public GameResult getMatchResult(Player player, Player opponent) {
 		int ownHp = player.getHero().getHp();
 		int opponentHp = opponent.getHero().getHp();
@@ -298,7 +288,6 @@ public class GameLogic implements IGameLogic {
 		return manaCost;
 	}
 
-	@Override
 	public int getTotalTagValue(Player player, GameTag tag) {
 		int total = 0;
 		for (Entity minion : player.getMinions()) {
@@ -311,13 +300,11 @@ public class GameLogic implements IGameLogic {
 		return total;
 	}
 
-	@Override
 	public List<GameAction> getValidActions(int playerId) {
 		Player player = context.getPlayer(playerId);
 		return actionLogic.getValidActions(context, player);
 	}
 
-	@Override
 	public List<Actor> getValidTargets(int playerId, GameAction action) {
 		Player player = context.getPlayer(playerId);
 		return targetLogic.getValidTargets(context, player, action);
@@ -343,7 +330,6 @@ public class GameLogic implements IGameLogic {
 		enrageSpell.cast(context, owner, toList(entity));
 	}
 
-	@Override
 	public void heal(Actor target, int healing) {
 		switch (target.getEntityType()) {
 		case MINION:
@@ -378,7 +364,6 @@ public class GameLogic implements IGameLogic {
 		}
 	}
 
-	@Override
 	public void init(int playerId, boolean begins) {
 		Player player = context.getPlayer(playerId);
 		player.getHero().setId(idFactory.generateId());
@@ -405,14 +390,12 @@ public class GameLogic implements IGameLogic {
 		}
 	}
 
-	@Override
 	public void modifyCurrentMana(int playerId, int mana) {
 		Player player = context.getPlayer(playerId);
 		int newMana = Math.min(player.getMana() + mana, MAX_MANA);
 		player.setMana(newMana);
 	}
 
-	@Override
 	public void performGameAction(int playerId, GameAction action) {
 		if (action.getTargetRequirement() == TargetSelection.SELF) {
 			action.setTargetKey(action.getSource());
@@ -438,7 +421,6 @@ public class GameLogic implements IGameLogic {
 		checkForDeadEntities();
 	}
 
-	@Override
 	public void playCard(int playerId, CardReference cardReference) {
 		Player player = context.getPlayer(playerId);
 		Card card = context.resolveCardReference(cardReference);
@@ -457,7 +439,6 @@ public class GameLogic implements IGameLogic {
 		}
 	}
 
-	@Override
 	public void receiveCard(int playerId, Card card) {
 		Player player = context.getPlayer(playerId);
 		if (card.getId() == IdFactory.UNASSIGNED) {
@@ -489,7 +470,6 @@ public class GameLogic implements IGameLogic {
 		this.context = context;
 	}
 
-	@Override
 	public void silence(Minion target) {
 		final HashSet<GameTag> immuneToSilence = new HashSet<GameTag>();
 		immuneToSilence.add(GameTag.HP);
@@ -508,7 +488,6 @@ public class GameLogic implements IGameLogic {
 		context.removeTriggersAssociatedWith(target.getReference());
 	}
 
-	@Override
 	public void startTurn(int playerId) {
 		Player player = context.getPlayer(playerId);
 		if (player.getMaxMana() < MAX_MANA) {
@@ -528,7 +507,6 @@ public class GameLogic implements IGameLogic {
 		context.fireGameEvent(new TurnStartEvent(context, player.getId()));
 	}
 
-	@Override
 	public void summon(int playerId, Minion minion, Actor nextTo) {
 		Player player = context.getPlayer(playerId);
 		minion.setId(idFactory.generateId());
@@ -572,7 +550,6 @@ public class GameLogic implements IGameLogic {
 		return list;
 	}
 
-	@Override
 	public void useHeroPower(int playerId, HeroPower power) {
 		Player player = context.getPlayer(playerId);
 		modifyCurrentMana(playerId, -power.getManaCost(player));

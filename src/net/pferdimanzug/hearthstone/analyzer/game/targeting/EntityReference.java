@@ -36,6 +36,11 @@ public class EntityReference {
 		return entityReference.getId() == getId();
 	}
 	
+	@Override
+	public int hashCode() {
+		return new Integer(key).hashCode();
+	}
+
 	public int getId() {
 		return key;
 	}

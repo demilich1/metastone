@@ -10,8 +10,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
+import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameResult;
-import net.pferdimanzug.hearthstone.analyzer.game.logic.IGameLogic;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.TargetLogic;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerManager;
@@ -34,7 +34,7 @@ public class GameContext implements Cloneable {
 	private static final Cloner cloner = new Cloner();
 
 	private final Player[] players = new Player[2];
-	private final IGameLogic logic;
+	private final GameLogic logic;
 	private final TargetLogic targetLogic = new TargetLogic();
 	private TriggerManager triggerManager = new TriggerManager();
 	// this list is most of the time empty. Whenever a minion is summoned,
@@ -57,7 +57,7 @@ public class GameContext implements Cloneable {
 		cloner.dontClone(CardReference.class);
 	}
 
-	public GameContext(Player player1, Player player2, IGameLogic logic) {
+	public GameContext(Player player1, Player player2, GameLogic logic) {
 		this.getPlayers()[PLAYER_1] = player1;
 		player1.setId(PLAYER_1);
 		this.getPlayers()[PLAYER_2] = player2;
@@ -69,7 +69,7 @@ public class GameContext implements Cloneable {
 	@Override
 	public GameContext clone() {
 		long start = System.currentTimeMillis();
-		IGameLogic logicClone = getLogic().clone();
+		GameLogic logicClone = getLogic().clone();
 		Player player1Clone = getPlayer1().clone();
 		Player player2Clone = getPlayer2().clone();
 		GameContext clone = new GameContext(player1Clone, player2Clone, logicClone);
@@ -103,7 +103,7 @@ public class GameContext implements Cloneable {
 		return result != GameResult.RUNNING;
 	}
 
-	public IGameLogic getLogic() {
+	public GameLogic getLogic() {
 		return logic;
 	}
 

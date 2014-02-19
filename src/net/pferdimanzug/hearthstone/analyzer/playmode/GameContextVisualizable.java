@@ -10,14 +10,14 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
-import net.pferdimanzug.hearthstone.analyzer.game.logic.IGameLogic;
+import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 
 public class GameContextVisualizable extends GameContext {
 	
 	private final HashMap<GameAction, List<GameEvent>> actionEvents = new HashMap<>();
 	private GameAction currentAction;
 
-	public GameContextVisualizable(Player player1, Player player2, IGameLogic logic) {
+	public GameContextVisualizable(Player player1, Player player2, GameLogic logic) {
 		super(player1, player2, logic);
 	}
 
