@@ -44,7 +44,7 @@ public class BasicTests extends TestBase {
 		Player warrior = context.getPlayer2();
 		warrior.setMana(10);
 
-		DevMonster devMonster = new DevMonster(3, 3);
+		TestMinionCard devMonster = new TestMinionCard(3, 3);
 		Battlecry testBattlecry = Battlecry.createBattlecry(new DamageSpell(3), TargetSelection.ENEMY_HERO);
 		testBattlecry.setTarget(warrior.getHero());
 		devMonster.getMinion().setTag(GameTag.BATTLECRY, testBattlecry);
@@ -63,7 +63,7 @@ public class BasicTests extends TestBase {
 		druid.setMana(10);
 
 		int damage = 1;
-		DevMonster devMonsterCard = new DevMonster(damage, 2);
+		TestMinionCard devMonsterCard = new TestMinionCard(damage, 2);
 		mage.getHand().add(devMonsterCard);
 		context.getLogic().performGameAction(mage.getId(), devMonsterCard.play());
 		
@@ -94,11 +94,11 @@ public class BasicTests extends TestBase {
 		Player warrior = context.getPlayer2();
 		warrior.setMana(10);
 
-		MinionCard minionCard1 = new DevMonster(5, 5);
+		MinionCard minionCard1 = new TestMinionCard(5, 5);
 		context.getLogic().receiveCard(mage.getId(), minionCard1);
 		context.getLogic().performGameAction(mage.getId(), minionCard1.play());
 		
-		MinionCard minionCard2 = new DevMonster(1, 1);
+		MinionCard minionCard2 = new TestMinionCard(1, 1);
 		context.getLogic().receiveCard(warrior.getId(), minionCard2);
 		context.getLogic().performGameAction(warrior.getId(), minionCard2.play());
 		
@@ -125,7 +125,7 @@ public class BasicTests extends TestBase {
 		GameContext context = createContext(new Jaina(), new Garrosh());
 		Player mage = context.getPlayer1();
 		mage.getHand().removeAll();
-		MinionCard devMonster = new DevMonster(1, 1);
+		MinionCard devMonster = new TestMinionCard(1, 1);
 		context.getLogic().receiveCard(mage.getId(), devMonster);
 		Assert.assertEquals(mage.getHand().getCount(), 1);
 		context.getLogic().performGameAction(mage.getId(), devMonster.play());
@@ -136,7 +136,7 @@ public class BasicTests extends TestBase {
 		Assert.assertEquals(minion.getHp(), 1);
 		Assert.assertEquals(minion.isDead(), false);
 		
-		MinionCard devMonster2 = new DevMonster(2, 2);
+		MinionCard devMonster2 = new TestMinionCard(2, 2);
 		context.getLogic().receiveCard(mage.getId(), devMonster2);
 		GameAction summonAction = devMonster2.play();
 		summonAction.setTarget(minion);

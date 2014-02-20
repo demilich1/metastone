@@ -24,7 +24,7 @@ public class TechnicalTests extends TestBase {
 		Player warrior = context.getPlayer2();
 		warrior.setMana(10);
 
-		DevMonster victimCard = new DevMonster(1, 10);
+		TestMinionCard victimCard = new TestMinionCard(1, 10);
 		context.getLogic().receiveCard(warrior.getId(), victimCard);
 		context.getLogic().performGameAction(warrior.getId(), victimCard.play());
 		

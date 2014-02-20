@@ -62,7 +62,7 @@ public class GameLogic implements Cloneable {
 	private GameLogic(IdFactory idFactory) {
 		this.idFactory = idFactory;
 	}
-
+	
 	private void assignCardIds(CardCollection cardCollection) {
 		for (Card card : cardCollection) {
 			card.setId(idFactory.generateId());
@@ -109,11 +109,11 @@ public class GameLogic implements Cloneable {
 		}
 	}
 
-	private void checkForDeadEntities() {
+	public void checkForDeadEntities() {
 		for (Player player : context.getPlayers()) {
 			for (Minion minion : new ArrayList<Minion>(player.getMinions())) {
 				if (minion.isDead()) {
-					destroyMinion(minion);
+					destroy(minion);
 				}
 			}
 		}
@@ -164,6 +164,11 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void destroy(Actor target) {
+		context.removeTriggersAssociatedWith(target.getReference());
+		if (target.hasSpellTrigger()) {
+			target.getSpellTrigger().onRemove(context);
+		} 
+		
 		switch (target.getEntityType()) {
 		case HERO:
 			logger.error("Destroying hero not implemented!");
@@ -178,7 +183,6 @@ public class GameLogic implements Cloneable {
 		default:
 			logger.error("Trying to destroy unknown entity type {}", target.getEntityType());
 			break;
-
 		}
 	}
 
@@ -186,7 +190,6 @@ public class GameLogic implements Cloneable {
 		logger.debug("{} is destroyed", minion);
 		Player owner = context.getPlayer(minion.getOwner());
 		context.fireGameEvent(new KillEvent(context, minion));
-		context.removeTriggersAssociatedWith(minion.getReference());
 		
 		// TODO: add unit test for deathrattle; also check when exactly it
 		// should be fire
@@ -200,7 +203,6 @@ public class GameLogic implements Cloneable {
 	private void destroyWeapon(Weapon weapon) {
 		Player owner = context.getPlayer(weapon.getOwner());
 		owner.getHero().setWeapon(null);
-		context.removeTriggersAssociatedWith(weapon.getReference());
 	}
 
 	public int determineBeginner(int... playerIds) {
@@ -416,7 +418,6 @@ public class GameLogic implements Cloneable {
 			}
 
 		}
-
 		action.execute(context, playerId);
 		checkForDeadEntities();
 	}
@@ -476,6 +477,8 @@ public class GameLogic implements Cloneable {
 		immuneToSilence.add(GameTag.MAX_HP);
 		immuneToSilence.add(GameTag.BASE_ATTACK);
 		immuneToSilence.add(GameTag.SUMMONING_SICKNESS);
+		immuneToSilence.add(GameTag.AURA_ATTACK_BONUS);
+		immuneToSilence.add(GameTag.AURA_HP_BONUS);
 		
 		List<GameTag> tags = new ArrayList<GameTag>();
 		tags.addAll(target.getTags().keySet());
@@ -530,18 +533,19 @@ public class GameLogic implements Cloneable {
 			player.getMinions().add(index, minion);
 		}
 		minion.setOwner(player.getId());
+		context.fireGameEvent(new SummonEvent(context, minion));
 		if (minion.hasSpellTrigger()) {
 			SpellTrigger spellTrigger = minion.getSpellTrigger();
 			spellTrigger.setHost(minion);
+			spellTrigger.onAdd(context);
 			context.addTrigger(spellTrigger);
 		}
+		
 		if (minion.hasTag(GameTag.CHARGE)) {
 			minion.setTag(GameTag.NUMBER_OF_ATTACKS, minion.hasTag(GameTag.WINDFURY) ? 2 : 1);
 		} else {
 			minion.setTag(GameTag.NUMBER_OF_ATTACKS, 0);
 		}
-
-		context.fireGameEvent(new SummonEvent(context, minion));
 	}
 
 	private List<Actor> toList(Actor entity) {

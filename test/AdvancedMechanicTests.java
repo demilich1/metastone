@@ -38,11 +38,11 @@ public class AdvancedMechanicTests extends BasicTests {
 		Player warrior = context.getPlayer2();
 		warrior.setMana(10);
 
-		MinionCard minionCard1 = new DevMonster(2, 2, GameTag.DIVINE_SHIELD);
+		MinionCard minionCard1 = new TestMinionCard(2, 2, GameTag.DIVINE_SHIELD);
 		context.getLogic().receiveCard(mage.getId(), minionCard1);
 		context.getLogic().performGameAction(mage.getId(), minionCard1.play());
 		
-		MinionCard minionCard2 = new DevMonster(5, 5);
+		MinionCard minionCard2 = new TestMinionCard(5, 5);
 		context.getLogic().receiveCard(warrior.getId(), minionCard2);
 		context.getLogic().performGameAction(warrior.getId(), minionCard2.play());
 		
@@ -75,7 +75,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		context.getLogic().receiveCard(priest.getId(), amaniBerserkerCard);
 		context.getLogic().performGameAction(priest.getId(), amaniBerserkerCard.play());
 		
-		MinionCard monsterCard = new DevMonster(1, 10);
+		MinionCard monsterCard = new TestMinionCard(1, 10);
 		context.getLogic().receiveCard(mage.getId(), monsterCard);
 		context.getLogic().performGameAction(mage.getId(), monsterCard.play());
 		
@@ -112,7 +112,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		warrior.setMana(10);
 		
 		int baseAttack = 1;
-		MinionCard devMonster = new DevMonster(baseAttack, 1);
+		MinionCard devMonster = new TestMinionCard(baseAttack, 1);
 		mage.getHand().add(devMonster);
 		MinionCard abusiveSergeant = new AbusiveSergeant();
 		mage.getHand().add(abusiveSergeant);
@@ -174,7 +174,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		context.getLogic().startTurn(playerId);
 		Assert.assertEquals(player.getMana(), 2);
 		
-		Card overloadCard = new DevMonster(1, 1);
+		Card overloadCard = new TestMinionCard(1, 1);
 		overloadCard.setTag(GameTag.OVERLOAD, 2);
 		context.getLogic().receiveCard(playerId, overloadCard);
 		context.getLogic().performGameAction(playerId, overloadCard.play());
@@ -194,7 +194,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		Player opponent = context.getPlayer2();
 		player.getHand().removeAll();
 		
-		DevMonster minionCard = new DevMonster(1, 4);
+		TestMinionCard minionCard = new TestMinionCard(1, 4);
 		context.getLogic().receiveCard(opponent.getId(), minionCard);
 		context.getLogic().performGameAction(opponent.getId(), minionCard.play());
 		
@@ -229,5 +229,50 @@ public class AdvancedMechanicTests extends BasicTests {
 		context.getLogic().performGameAction(player.getId(), thoughtsteal.play());
 		Assert.assertEquals(opponent.getDeck().getCount(), cardsInOpponentsDeck);
 		Assert.assertEquals(player.getHand().getCount(), cardsInHand + 2);
+	}
+	
+	@Test
+	public void testAura() {
+		GameContext context = createContext(new Jaina(), new Garrosh());
+		Player player = context.getPlayer1();
+		Player opponent = context.getPlayer2();
+		
+		TestMinionCard minionCard = new TestMinionCard(1, 1);
+		minionCard.getMinion().setSpellTrigger(new TestAura());
+		context.getLogic().receiveCard(player.getId(), minionCard);
+		context.getLogic().performGameAction(player.getId(), minionCard.play());
+		
+		Actor minion1 = getSingleMinion(player.getMinions());
+		Assert.assertEquals(minion1.getAttack(), 1);
+		
+		minionCard = new TestMinionCard(1, 1);
+		minionCard.getMinion().setSpellTrigger(new TestAura());
+		context.getLogic().receiveCard(player.getId(), minionCard);
+		context.getLogic().performGameAction(player.getId(), minionCard.play());
+		
+		Actor minion2 = minionCard.getMinion();
+		Assert.assertNotEquals(minion1, minion2);
+		Assert.assertEquals(minion1.getAttack(), 2);
+		Assert.assertEquals(minion2.getAttack(), 2);
+		
+		TestMinionCard minionCardOpponent = new TestMinionCard(3, 3);
+		context.getLogic().receiveCard(opponent.getId(), minionCardOpponent);
+		context.getLogic().performGameAction(opponent.getId(), minionCardOpponent.play());
+		Actor enemyMinion = getSingleMinion(opponent.getMinions());
+		Assert.assertEquals(enemyMinion.getAttack(), 3);
+		
+		Assert.assertEquals(minion1.getAttack(), 2);
+		Assert.assertEquals(minion2.getAttack(), 2);
+		PhysicalAttackAction attackAction = new PhysicalAttackAction(enemyMinion.getReference());
+		attackAction.setTarget(minion2);
+		context.getLogic().performGameAction(opponent.getId(), attackAction);
+		Assert.assertEquals(minion1.getAttack(), 1);
+		
+		minionCard = new TestMinionCard(1, 1);
+		minion2 = minionCard.getMinion();
+		context.getLogic().receiveCard(player.getId(), minionCard);
+		context.getLogic().performGameAction(player.getId(), minionCard.play());
+		Assert.assertEquals(minion1.getAttack(), 1);
+		Assert.assertEquals(minion2.getAttack(), 2);
 	}
 }

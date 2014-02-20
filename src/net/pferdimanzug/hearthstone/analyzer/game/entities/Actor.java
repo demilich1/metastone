@@ -55,7 +55,7 @@ public abstract class Actor extends Entity {
 	}
 
 	public int getAttack() {
-		return getTagValue(GameTag.BASE_ATTACK) + getTagValue(GameTag.ATTACK_BONUS);
+		return getTagValue(GameTag.BASE_ATTACK) + getTagValue(GameTag.ATTACK_BONUS) + getTagValue(GameTag.AURA_ATTACK_BONUS);
 	}
 
 	public GameAction getBattlecry() {
@@ -106,6 +106,11 @@ public abstract class Actor extends Entity {
 
 	public void modifyHpBonus(int value) {
 		modifyTag(GameTag.HP_BONUS, value);
+		modifyTag(GameTag.HP, value);
+	}
+	
+	public void modifyAuraHpBonus(int value) {
+		modifyTag(GameTag.AURA_HP_BONUS, value);
 		modifyTag(GameTag.HP, value);
 	}
 

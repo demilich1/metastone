@@ -24,7 +24,7 @@ public class CloningTest extends TestBase {
 		Player player2 = new Player("Random dude 2", hero2, DebugDecks.getRandomDeck(hero2.getHeroClass()));
 		player2.setBehaviour(new PlayRandomBehaviour());
 		GameContext original = new GameContext(player1, player2, new GameLogic());
-		DevMonster minionCard = new DevMonster(3, 3);
+		TestMinionCard minionCard = new TestMinionCard(3, 3);
 		original.getLogic().receiveCard(player1.getId(), minionCard);
 		original.getLogic().performGameAction(player1.getId(), minionCard.play());
 		Actor testMinion = getSingleMinion(player1.getMinions());

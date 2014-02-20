@@ -1,71 +1,72 @@
 package net.pferdimanzug.hearthstone.analyzer.game.aura;
 
+import java.util.List;
+
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
+import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
+import net.pferdimanzug.hearthstone.analyzer.game.events.IGameEvent;
+import net.pferdimanzug.hearthstone.analyzer.game.events.SummonEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.MinionSummonedTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
-public class Aura {
-	
-	private final Spell auraEffect;
-	private EntityReference source;
-	private int ownerId;
-	private TargetSelection targetSelection;
+public class Aura extends SpellTrigger {
 
-	public Aura(Spell auraEffect, Spell removeAuraEffect, TargetSelection targetSelection) {
-		this.auraEffect = auraEffect;
-		this.setTargetSelection(targetSelection);
+	private final EntityReference targets;
+	private final Spell applyAuraEffect;
+	private final Spell removeAuraEffect;
+
+	public Aura(Spell applyAuraEffect, Spell removeAuraEffect, EntityReference targetSelection) {
+		super(new MinionSummonedTrigger(), applyAuraEffect);
+		this.applyAuraEffect = applyAuraEffect;
+		this.removeAuraEffect = removeAuraEffect;
+		this.targets = targetSelection;
 	}
 
-	public Spell getAuraEffect() {
-		return auraEffect;
+	@Override
+	public void onAdd(GameContext context) {
+		applySpellEffect(context, applyAuraEffect);
 	}
 
-	public EntityReference getSource() {
-		return source;
+	@Override
+	public void onRemove(GameContext context) {
+		applySpellEffect(context, removeAuraEffect);
 	}
 
-	public void setSource(EntityReference source) {
-		this.source = source;
-	}
-	
-	public void applyIfApplicable(GameContext context, Actor target) {
-		if (!affects(context, target)) {
+	public void onGameEvent(IGameEvent event) {
+		SummonEvent summonEvent = (SummonEvent) event;
+		Actor target = summonEvent.getMinion();
+		if (!affects(summonEvent.getGameContext(), target)) {
 			return;
 		}
-		auraEffect.setTarget(target.getReference());
-		context.getLogic().castSpell(getOwnerId(), auraEffect);
+		applyAuraEffect.setTarget(target.getReference());
+		event.getGameContext().getLogic().castSpell(getOwner(), applyAuraEffect);
 	}
-	
-	protected boolean affects(GameContext context, Actor actor) {
-		if (actor.getEntityType() != EntityType.MINION) {
+
+	private void applySpellEffect(GameContext context, Spell spell) {
+		Player owner = context.getPlayer(getOwner());
+		// Actor sourceActor = context.resolveSingleTarget(ownerId, source);
+		List<Actor> resolvedTargets = context.resolveTarget(owner, null, targets);
+		for (Actor target : resolvedTargets) {
+			if (!affects(context, target)) {
+				continue;
+			}
+			spell.setTarget(target.getReference());
+			context.getLogic().castSpell(getOwner(), spell);
+		}
+	}
+
+	protected boolean affects(GameContext context, Actor target) {
+		if (target.getEntityType() != EntityType.MINION) {
 			return false;
 		}
-		if (actor.getReference().equals(source)) {
+		if (target.getReference().equals(getHostReference())) {
 			return false;
 		}
 		return true;
 	}
 
-	public int getOwnerId() {
-		return ownerId;
-	}
-
-	public void setOwnerId(int ownerId) {
-		this.ownerId = ownerId;
-	}
-
-	public TargetSelection getTargetSelection() {
-		return targetSelection;
-	}
-
-	public void setTargetSelection(TargetSelection targetSelection) {
-		this.targetSelection = targetSelection;
-	}
-
-	
-
-	
 }

@@ -74,7 +74,7 @@ public class SpecialCardTests extends TestBase {
 		context.getLogic().receiveCard(warrior.getId(), faerieDragonCard);
 		context.getLogic().performGameAction(warrior.getId(), faerieDragonCard.play());
 		
-		MinionCard devMonsterCard = new DevMonster(1, 1);
+		MinionCard devMonsterCard = new TestMinionCard(1, 1);
 		context.getLogic().receiveCard(mage.getId(), devMonsterCard);
 		context.getLogic().performGameAction(mage.getId(), devMonsterCard.play());
 		
@@ -111,7 +111,7 @@ public class SpecialCardTests extends TestBase {
 		Player warrior = context.getPlayer2();
 		warrior.setMana(10);
 
-		MinionCard devMonsterCard = new DevMonster(1, 1);
+		MinionCard devMonsterCard = new TestMinionCard(1, 1);
 		context.getLogic().receiveCard(player.getId(), devMonsterCard);
 		context.getLogic().performGameAction(player.getId(), devMonsterCard.play());
 		

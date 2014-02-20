@@ -1,21 +1,31 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.aura.Aura;
 import net.pferdimanzug.hearthstone.analyzer.game.aura.AuraSpellBuff;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class RaidLeader extends MinionCard {
 	
 	private class RaidLeaderAura extends Aura {
 
 		public RaidLeaderAura() {
-			super(new AuraSpellBuff(1), TargetSelection.FRIENDLY_MINIONS);
+			super(new AuraSpellBuff(1), new AuraSpellBuff(-1), EntityReference.FRIENDLY_MINIONS);
 		}
-
+		
+		@Override
+		protected boolean affects(GameContext context, Actor target) {
+			if (!super.affects(context, target)) {
+				
+				return false;
+			}
+			return target.getOwner() == getOwner();
+		}
 	}
 
 	public RaidLeader() {
@@ -26,7 +36,7 @@ public class RaidLeader extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion raidLeader = createMinion();
-		raidLeader.setAura(new RaidLeaderAura());
+		raidLeader.setSpellTrigger(new RaidLeaderAura());
 		return raidLeader;
 	}
 

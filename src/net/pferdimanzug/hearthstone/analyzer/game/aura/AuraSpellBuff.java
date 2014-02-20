@@ -41,7 +41,7 @@ public class AuraSpellBuff extends Spell {
 			target.modifyTag(GameTag.AURA_ATTACK_BONUS, +attackBonus);
 		}
 		if (hpBonus != 0) {
-			target.modifyTag(GameTag.AURA_HP_BONUS, +hpBonus);
+			target.modifyAuraHpBonus(hpBonus);
 		}
 
 		
