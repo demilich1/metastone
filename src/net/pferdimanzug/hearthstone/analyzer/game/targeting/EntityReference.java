@@ -10,9 +10,10 @@ public class EntityReference {
 	public static final EntityReference FRIENDLY_CHARACTERS = new EntityReference(-5);
 	public static final EntityReference FRIENDLY_MINIONS = new EntityReference(-6);
 	public static final EntityReference OTHER_FRIENDLY_MINIONS = new EntityReference(-7);
-	public static final EntityReference FRIENDLY_HERO = new EntityReference(-8);
-	public static final EntityReference ALL_MINIONS = new EntityReference(-9);
-	public static final EntityReference ALL_CHARACTERS = new EntityReference(-10);
+	public static final EntityReference ADJACENT_MINIONS = new EntityReference(-8);
+	public static final EntityReference FRIENDLY_HERO = new EntityReference(-9);
+	public static final EntityReference ALL_MINIONS = new EntityReference(-10);
+	public static final EntityReference ALL_CHARACTERS = new EntityReference(-11);
 	
 	public static EntityReference pointTo(Entity entity) {
 		if (entity == null) {

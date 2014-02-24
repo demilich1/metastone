@@ -36,10 +36,10 @@ public class ConeOfCold extends SpellCard {
 		@Override
 		protected void onCast(GameContext context, Player player, Actor target) {
 			Minion targetMinion = (Minion) target;
-			List<Minion> affected = context.getAdjacentMinions(player, targetMinion);
+			List<Actor> affected = context.getAdjacentMinions(player, targetMinion);
 			affected.add(targetMinion);
 			
-			for (Minion minion : affected) {
+			for (Actor minion : affected) {
 				damage.setTarget(minion.getReference());
 				context.getLogic().castSpell(player.getId(), damage);
 				freeze.setTarget(minion.getReference());
