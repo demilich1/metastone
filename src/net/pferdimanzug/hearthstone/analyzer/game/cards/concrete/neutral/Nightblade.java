@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -22,7 +21,7 @@ public class Nightblade extends MinionCard {
 	public Minion summon() {
 		Minion nightblade = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new DamageSpell(BATTLECRY_DAMAGE), TargetSelection.ENEMY_HERO);
-		nightblade.setTag(GameTag.BATTLECRY, battlecry);
+		nightblade.setBattlecry(battlecry);
 		return nightblade;
 	}
 

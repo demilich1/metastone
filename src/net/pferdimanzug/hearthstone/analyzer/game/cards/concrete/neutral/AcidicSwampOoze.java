@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -20,7 +19,7 @@ public class AcidicSwampOoze extends MinionCard {
 	public Minion summon() {
 		Minion acidicSwampOoze = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new DestroyWeaponSpell(), TargetSelection.ENEMY_HERO);
-		acidicSwampOoze.setTag(GameTag.BATTLECRY, battlecry);
+		acidicSwampOoze.setBattlecry(battlecry);
 		return acidicSwampOoze;
 	}
 }

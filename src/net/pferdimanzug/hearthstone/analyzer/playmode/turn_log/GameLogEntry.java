@@ -2,9 +2,6 @@ package net.pferdimanzug.hearthstone.analyzer.playmode.turn_log;
 
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentListener;
 
 import javax.swing.Icon;
 import javax.swing.JLabel;

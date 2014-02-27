@@ -1,7 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
@@ -39,7 +38,7 @@ public class FrostwolfWarlord extends MinionCard {
 	public Minion summon() {
 		Minion frostwolfWarlord = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new BuffLeadership(), TargetSelection.SELF);
-		frostwolfWarlord.setTag(GameTag.BATTLECRY, battlecry);
+		frostwolfWarlord.setBattlecry(battlecry);
 		return frostwolfWarlord;
 	}
 

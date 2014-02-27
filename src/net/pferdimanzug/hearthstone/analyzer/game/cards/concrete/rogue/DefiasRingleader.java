@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.rogue;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -21,7 +20,7 @@ public class DefiasRingleader extends MinionCard {
 	public Minion summon() {
 		Battlecry battlecry = Battlecry.createBattlecry(new ComboSpell(null, new SummonSpell(new DefiasBandit())), TargetSelection.NONE);
 		Minion defiasRingleader = createMinion();
-		defiasRingleader.setTag(GameTag.BATTLECRY, battlecry);
+		defiasRingleader.setBattlecry(battlecry);
 		return defiasRingleader;
 	}
 	

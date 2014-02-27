@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -20,7 +19,7 @@ public class VoodooDoctor extends MinionCard {
 	public Minion summon() {
 		Minion voodooDoctor = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new HealingSpell(2), TargetSelection.ANY);
-		voodooDoctor.setTag(GameTag.BATTLECRY, battlecry);
+		voodooDoctor.setBattlecry(battlecry);
 		return voodooDoctor;
 	}
 

@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -19,7 +18,7 @@ public class SilverHandKnight extends MinionCard {
 	public Minion summon() {
 		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(new Squire()));
 		Minion silverHandKnight = createMinion();
-		silverHandKnight.setTag(GameTag.BATTLECRY, battlecry);
+		silverHandKnight.setBattlecry(battlecry);
 		return silverHandKnight;
 	}
 	

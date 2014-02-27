@@ -24,7 +24,7 @@ public class DreadInfernal extends MinionCard {
 		Minion dreadInfernal = createMinion();
 		Battlecry infernoBattlecry = Battlecry.createBattlecry(new DamageSpell(1), TargetSelection.NONE);
 		infernoBattlecry.setTargetKey(EntityReference.ALL_CHARACTERS);
-		dreadInfernal.setTag(GameTag.BATTLECRY, infernoBattlecry);
+		dreadInfernal.setBattlecry(infernoBattlecry);
 		return dreadInfernal;
 	}
 	

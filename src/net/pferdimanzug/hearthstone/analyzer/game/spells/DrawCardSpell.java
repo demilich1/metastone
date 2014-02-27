@@ -5,21 +5,21 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 
 public class DrawCardSpell extends Spell {
-	
+
 	private int numberOfCards;
-	private boolean opponent;
+	private final TargetPlayer targetPlayer;
 
 	public DrawCardSpell() {
 		this(1);
 	}
-	
+
 	public DrawCardSpell(int numberOfCards) {
-		this.numberOfCards = numberOfCards;
+		this(numberOfCards, TargetPlayer.SELF);
 	}
-	
-	public DrawCardSpell(int numberOfCards, boolean opponent) {
+
+	public DrawCardSpell(int numberOfCards, TargetPlayer targetPlayer) {
 		this.numberOfCards = numberOfCards;
-		this.opponent = opponent;
+		this.targetPlayer = targetPlayer;
 	}
 
 	public int getNumberOfCards() {
@@ -28,9 +28,26 @@ public class DrawCardSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, Actor target) {
-		Player drawingPlayer = opponent ? context.getOpponent(player) : player;
+		Player opponent = context.getOpponent(player);
+		switch (targetPlayer) {
+		case BOTH:
+			draw(context, player);
+			draw(context, opponent);
+			break;
+		case OPPONENT:
+			draw(context, opponent);
+			break;
+		case SELF:
+			draw(context, player);
+			break;
+		default:
+			break;
+		}
+	}
+
+	private void draw(GameContext context, Player player) {
 		for (int i = 0; i < numberOfCards; i++) {
-			context.getLogic().drawCard(drawingPlayer.getId());
+			context.getLogic().drawCard(player.getId());
 		}
 	}
 

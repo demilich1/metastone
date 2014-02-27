@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -35,7 +34,7 @@ public class ArathiWeaponsmith extends MinionCard {
 	public Minion summon() {
 		Minion arathiWeaponsmith = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new EquipWeaponSpell(new BattleAxe()), TargetSelection.NONE);
-		arathiWeaponsmith.setTag(GameTag.BATTLECRY, battlecry);
+		arathiWeaponsmith.setBattlecry(battlecry);
 		return arathiWeaponsmith;
 	}
 

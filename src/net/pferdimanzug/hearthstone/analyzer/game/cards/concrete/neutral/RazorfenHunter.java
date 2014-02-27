@@ -35,7 +35,7 @@ public class RazorfenHunter extends MinionCard {
 	public Minion summon() {
 		Minion razorfenHunter = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(new Boar()), TargetSelection.NONE);
-		razorfenHunter.setTag(GameTag.BATTLECRY, battlecry);
+		razorfenHunter.setBattlecry(battlecry);
 		return razorfenHunter;
 	}
 

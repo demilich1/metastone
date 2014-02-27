@@ -41,7 +41,7 @@ public class Houndmaster extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion houndmaster = createMinion();
-		houndmaster.setTag(GameTag.BATTLECRY, new BattlecryHoundmaster());
+		houndmaster.setBattlecry(new BattlecryHoundmaster());
 		return houndmaster;
 	}
 }

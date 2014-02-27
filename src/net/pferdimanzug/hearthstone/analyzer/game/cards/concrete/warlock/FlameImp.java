@@ -26,7 +26,7 @@ public class FlameImp extends MinionCard {
 		Spell damageHeroSpell = new DamageSpell(3);
 		damageHeroSpell.setTarget(EntityReference.FRIENDLY_HERO);
 		Battlecry battlecry = Battlecry.createBattlecry(damageHeroSpell, TargetSelection.NONE);
-		flameImp.setTag(GameTag.BATTLECRY, battlecry);
+		flameImp.setBattlecry(battlecry);
 		return flameImp;
 	}
 

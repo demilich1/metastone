@@ -25,7 +25,7 @@ public class SouthseaDeckhand extends MinionCard {
 	public Minion summon() {
 		Battlecry battlecry = Battlecry.createBattlecry(new ChargeWhileWeaponEquipped(), TargetSelection.SELF);
 		Minion southseaDeckhand = createMinion();
-		southseaDeckhand.setTag(GameTag.BATTLECRY, battlecry);
+		southseaDeckhand.setBattlecry(battlecry);
 		return southseaDeckhand;
 	}
 	

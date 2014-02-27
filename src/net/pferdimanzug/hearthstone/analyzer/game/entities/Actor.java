@@ -30,6 +30,9 @@ public abstract class Actor extends Entity {
 	}
 	
 	public boolean canAttackThisTurn() {
+		if (hasTag(GameTag.CANNOT_ATTACK)) {
+			return false;
+		}
 		if (hasTag(GameTag.SUMMONING_SICKNESS) && !hasTag(GameTag.CHARGE)) {
 			return false;
 		}
@@ -51,7 +54,7 @@ public abstract class Actor extends Entity {
 
 	private boolean displayGameTag(GameTag tag) {
 		return tag == GameTag.CHARGE || tag == GameTag.ENRAGED || tag == GameTag.FROZEN || tag == GameTag.DIVINE_SHIELD
-				|| tag == GameTag.WINDFURY || tag == GameTag.SPELL_POWER || tag == GameTag.STEALTHED || tag == GameTag.TAUNT;
+				|| tag == GameTag.WINDFURY || tag == GameTag.SPELL_POWER || tag == GameTag.STEALTHED || tag == GameTag.TAUNT || tag == GameTag.CANNOT_ATTACK;
 	}
 
 	public int getAttack() {

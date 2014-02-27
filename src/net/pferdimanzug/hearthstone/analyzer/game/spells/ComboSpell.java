@@ -2,13 +2,13 @@ package net.pferdimanzug.hearthstone.analyzer.game.spells;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ComboSpell extends Spell {
 	

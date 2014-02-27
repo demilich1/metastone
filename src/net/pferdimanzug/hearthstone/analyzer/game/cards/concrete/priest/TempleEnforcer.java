@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -20,7 +19,7 @@ public class TempleEnforcer extends MinionCard {
 	public Minion summon() {
 		Minion templeEnforcer = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new BuffSpell(0, 3), TargetSelection.FRIENDLY_MINIONS);
-		templeEnforcer.setTag(GameTag.BATTLECRY, battlecry);
+		templeEnforcer.setBattlecry(battlecry);
 		return templeEnforcer;
 	}
 

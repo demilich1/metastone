@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -24,7 +23,7 @@ public class DarkIronDwarf extends MinionCard {
 		BuffSpell buff = new BuffSpell(+ATTACK_BONUS);
 		buff.setTemporary(true);
 		Battlecry battlecry = Battlecry.createBattlecry(buff, TargetSelection.MINIONS);
-		darkIronDwarf.setTag(GameTag.BATTLECRY, battlecry);
+		darkIronDwarf.setBattlecry(battlecry);
 		return darkIronDwarf;
 	}
 

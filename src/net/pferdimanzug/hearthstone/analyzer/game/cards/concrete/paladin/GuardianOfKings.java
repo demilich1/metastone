@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -20,7 +19,7 @@ public class GuardianOfKings extends MinionCard {
 	public Minion summon() {
 		Minion guardianOfKings = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new HealingSpell(6), TargetSelection.FRIENDLY_HERO);
-		guardianOfKings.setTag(GameTag.BATTLECRY, battlecry);
+		guardianOfKings.setBattlecry(battlecry);
 		return guardianOfKings;
 	}
 	

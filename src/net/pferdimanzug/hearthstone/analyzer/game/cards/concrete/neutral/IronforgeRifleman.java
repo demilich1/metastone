@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -20,7 +19,7 @@ public class IronforgeRifleman extends MinionCard {
 	public Minion summon() {
 		Minion ironforgeRifleman = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new DamageSpell(1), TargetSelection.ANY);
-		ironforgeRifleman.setTag(GameTag.BATTLECRY, battlecry);
+		ironforgeRifleman.setBattlecry(battlecry);
 		return ironforgeRifleman;
 	}
 

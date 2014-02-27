@@ -1,12 +1,12 @@
 package net.pferdimanzug.hearthstone.analyzer.game.spells;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MindControlSpell extends Spell {
 	private static Logger logger = LoggerFactory.getLogger(MindControlSpell.class);

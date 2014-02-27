@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -22,7 +21,7 @@ public class FireElemental extends MinionCard {
 	public Minion summon() {
 		Minion fireElemental = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new DamageSpell(BATTLECRY_DAMAGE), TargetSelection.ANY);
-		fireElemental.setTag(GameTag.BATTLECRY, battlecry);
+		fireElemental.setBattlecry(battlecry);
 		return fireElemental;
 	}
 

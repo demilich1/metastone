@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -20,7 +19,7 @@ public class ShatteredSunCleric extends MinionCard{
 	public Minion summon() {
 		Minion shatteredSunCleric = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new BuffSpell(1, 1), TargetSelection.FRIENDLY_MINIONS);
-		shatteredSunCleric.setTag(GameTag.BATTLECRY, battlecry);
+		shatteredSunCleric.setBattlecry(battlecry);
 		return shatteredSunCleric;
 	}
 }

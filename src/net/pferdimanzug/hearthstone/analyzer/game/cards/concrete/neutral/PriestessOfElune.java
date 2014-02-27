@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -20,7 +19,7 @@ public class PriestessOfElune extends MinionCard {
 	public Minion summon() {
 		Battlecry battlecry = Battlecry.createBattlecry(new HealingSpell(4), TargetSelection.FRIENDLY_HERO);
 		Minion priestessOfElune = createMinion();
-		priestessOfElune.setTag(GameTag.BATTLECRY, battlecry);
+		priestessOfElune.setBattlecry(battlecry);
 		return priestessOfElune;
 	}
 

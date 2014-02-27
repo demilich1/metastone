@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -25,7 +24,7 @@ public class AbusiveSergeant extends MinionCard {
 		BuffSpell battlecrySpell = new BuffSpell(+ATTACK_BONUS);
 		battlecrySpell.setTemporary(true);
 		Battlecry battlecryAbusive = Battlecry.createBattlecry(battlecrySpell, TargetSelection.MINIONS);
-		abusiveSergeant.setTag(GameTag.BATTLECRY, battlecryAbusive);
+		abusiveSergeant.setBattlecry(battlecryAbusive);
 		return abusiveSergeant;
 	}
 	

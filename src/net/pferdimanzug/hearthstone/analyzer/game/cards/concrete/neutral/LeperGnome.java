@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
@@ -21,7 +20,7 @@ public class LeperGnome extends MinionCard {
 		Spell deathrattle = new DamageSpell(2);
 		deathrattle.setTarget(EntityReference.ENEMY_HERO);
 		Minion leperGnome = createMinion();
-		leperGnome.setTag(GameTag.DEATHRATTLE, deathrattle);
+		leperGnome.setDeathrattle(deathrattle);
 		return leperGnome;
 	}
 
