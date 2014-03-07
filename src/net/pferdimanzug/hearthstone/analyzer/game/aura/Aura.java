@@ -48,8 +48,8 @@ public class Aura extends SpellTrigger {
 
 	private void applySpellEffect(GameContext context, Spell spell) {
 		Player owner = context.getPlayer(getOwner());
-		// Actor sourceActor = context.resolveSingleTarget(ownerId, source);
-		List<Actor> resolvedTargets = context.resolveTarget(owner, null, targets);
+		Actor sourceActor = context.resolveSingleTarget(getOwner(), getHostReference());
+		List<Actor> resolvedTargets = context.resolveTarget(owner, sourceActor, targets);
 		for (Actor target : resolvedTargets) {
 			if (!affects(context, target)) {
 				continue;

@@ -62,7 +62,7 @@ public class GameLogic implements Cloneable {
 	private GameLogic(IdFactory idFactory) {
 		this.idFactory = idFactory;
 	}
-	
+
 	private void assignCardIds(CardCollection cardCollection) {
 		for (Card card : cardCollection) {
 			card.setId(idFactory.generateId());
@@ -168,8 +168,8 @@ public class GameLogic implements Cloneable {
 		context.removeTriggersAssociatedWith(target.getReference());
 		if (target.hasSpellTrigger()) {
 			target.getSpellTrigger().onRemove(context);
-		} 
-		
+		}
+
 		switch (target.getEntityType()) {
 		case HERO:
 			logger.error("Destroying hero not implemented!");
@@ -191,7 +191,7 @@ public class GameLogic implements Cloneable {
 		logger.debug("{} is destroyed", minion);
 		Player owner = context.getPlayer(minion.getOwner());
 		context.fireGameEvent(new KillEvent(context, minion));
-		
+
 		// TODO: add unit test for deathrattle; also check when exactly it
 		// should be fire
 		if (minion.hasTag(GameTag.DEATHRATTLE)) {
@@ -435,7 +435,7 @@ public class GameLogic implements Cloneable {
 			player.getHero().modifyTag(GameTag.OVERLOAD, card.getTagValue(GameTag.OVERLOAD));
 			context.fireGameEvent(new OverloadEvent(context, playerId));
 		}
-		
+
 		if (card.getCardType() == CardType.SPELL) {
 			context.fireGameEvent(new SpellCastedEvent(context, playerId));
 		}
@@ -480,7 +480,7 @@ public class GameLogic implements Cloneable {
 		immuneToSilence.add(GameTag.SUMMONING_SICKNESS);
 		immuneToSilence.add(GameTag.AURA_ATTACK_BONUS);
 		immuneToSilence.add(GameTag.AURA_HP_BONUS);
-		
+
 		List<GameTag> tags = new ArrayList<GameTag>();
 		tags.addAll(target.getTags().keySet());
 		for (GameTag tag : tags) {
@@ -497,7 +497,7 @@ public class GameLogic implements Cloneable {
 		if (player.getMaxMana() < MAX_MANA) {
 			player.setMaxMana(player.getMaxMana() + 1);
 		}
-		
+
 		player.setMana(player.getMaxMana() - player.getHero().getTagValue(GameTag.OVERLOAD));
 		player.getHero().removeTag(GameTag.OVERLOAD);
 		logger.debug("{} starts his turn with {} mana", player.getName(), player.getMana() + "/" + player.getMaxMana());
@@ -516,38 +516,53 @@ public class GameLogic implements Cloneable {
 		minion.setId(idFactory.generateId());
 		logger.debug("{} summons {}", player.getName(), minion);
 
-		//context.getPendingEntities().add(minion);
-		minion.setOwner(player.getId());		
+		context.getPendingEntities().add(minion);
+		minion.setOwner(player.getId());
+
+		if (minion.getBattlecry() != null && !minion.getBattlecry().isResolvedLate()) {
+			resolveBattlecry(player.getId(), minion);
+		}
+
 		int index = player.getMinions().indexOf(nextTo);
 		if (index == -1) {
 			player.getMinions().add(minion);
 		} else {
 			player.getMinions().add(index, minion);
 		}
-		
-		if (minion.getBattlecry() != null) {
-			GameAction battlecry = minion.getBattlecry();
-			battlecry.setSource(minion.getReference());
-			performGameAction(player.getId(), battlecry);
+
+		context.getPendingEntities().remove(minion);
+		if (minion.getBattlecry() != null && minion.getBattlecry().isResolvedLate()) {
+			resolveBattlecry(player.getId(), minion);
 		}
-		//context.getPendingEntities().remove(minion);
 
 		refreshAttacksPerRound(minion);
 		minion.setTag(GameTag.SUMMONING_SICKNESS);
 
-		context.fireGameEvent(new SummonEvent(context, minion));
+		try {
+			context.fireGameEvent(new SummonEvent(context, minion));
+		} catch (Exception e) {
+			logger.error("Error while summoning {}", minion);
+			e.printStackTrace();
+		}
+
 		if (minion.hasSpellTrigger()) {
 			SpellTrigger spellTrigger = minion.getSpellTrigger();
 			spellTrigger.setHost(minion);
 			spellTrigger.onAdd(context);
 			context.addTrigger(spellTrigger);
 		}
-		
+
 		if (minion.hasTag(GameTag.CHARGE)) {
 			minion.setTag(GameTag.NUMBER_OF_ATTACKS, minion.hasTag(GameTag.WINDFURY) ? 2 : 1);
 		} else {
 			minion.setTag(GameTag.NUMBER_OF_ATTACKS, 0);
 		}
+	}
+
+	private void resolveBattlecry(int playerId, Minion minion) {
+		GameAction battlecry = minion.getBattlecry();
+		battlecry.setSource(minion.getReference());
+		performGameAction(playerId, battlecry);
 	}
 
 	private List<Actor> toList(Actor entity) {

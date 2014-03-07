@@ -18,6 +18,7 @@ public class Battlecry extends GameAction {
 	}
 	
 	private final Spell spell;
+	private boolean resolvedLate = false;
 
 	protected Battlecry(Spell spell) {
 		this.spell = spell;
@@ -43,5 +44,13 @@ public class Battlecry extends GameAction {
 		
 		spell.setSource(getSource());
 		context.getLogic().castSpell(playerId, spell);
+	}
+
+	public boolean isResolvedLate() {
+		return resolvedLate;
+	}
+
+	public void setResolvedLate(boolean resolvedLate) {
+		this.resolvedLate = resolvedLate;
 	}
 }

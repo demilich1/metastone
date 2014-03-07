@@ -69,7 +69,6 @@ public class TargetLogic {
 
 		logger.error("Id " + targetId + " not found!");
 		throw new RuntimeException("Target not found exception");
-		// return null;
 	}
 
 	private List<Actor> getEntities(GameContext context, Player player, TargetSelection targetRequirement) {
@@ -162,8 +161,7 @@ public class TargetLogic {
 			targets.remove(source);
 			return targets;
 		} else if (targetKey == EntityReference.ADJACENT_MINIONS) {
-			System.out.println("Getting adjacent minions for " + source);
-			return context.getAdjacentMinions(player, (Minion) source);
+			return context.getAdjacentMinions(player, source.getReference());
 		} else if (targetKey == EntityReference.NONE) {
 			return null;
 		}

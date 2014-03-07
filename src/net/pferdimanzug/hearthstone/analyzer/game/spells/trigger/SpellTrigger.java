@@ -23,7 +23,7 @@ public class SpellTrigger implements Cloneable {
 	public SpellTrigger(GameEventTrigger trigger, Spell spell) {
 		this(trigger, spell, false);
 	}
-	
+
 	public SpellTrigger(GameEventTrigger trigger, Spell spell, boolean oneTime) {
 		this.trigger = trigger;
 		this.spell = spell;
@@ -53,26 +53,24 @@ public class SpellTrigger implements Cloneable {
 
 	public void onGameEvent(IGameEvent event) {
 		int ownerId = trigger.getOwner();
-		Actor host = null;
+		Actor host = event.getGameContext().resolveSingleTarget(ownerId, hostReference);
 		try {
-			host = event.getGameContext().resolveSingleTarget(ownerId, hostReference);
+			if (!expired && trigger.fire(event, host)) {
+				if (!spell.hasPredefinedTarget()) {
+					spell.setTarget(getTargetForSpell(event));
+				}
+
+				if (oneTime) {
+					expired = true;
+				}
+				event.getGameContext().getLogic().castSpell(ownerId, spell);
+			}
 		} catch (Exception e) {
-			logger.error("Target not found for GameEventTrigger: {} Spell: {}", trigger, spell);
+			logger.error("SpellTrigger cannot be executed; GameEventTrigger: {} Spell: {}", trigger, spell);
 			throw e;
 		}
-
-		if (!expired && trigger.fire(event, host)) {
-			if (!spell.hasPredefinedTarget()) {
-				spell.setTarget(getTargetForSpell(event));
-			}
-			
-			if (oneTime) {
-				expired = true;
-			}
-			event.getGameContext().getLogic().castSpell(ownerId, spell);
-		}
 	}
-	
+
 	protected EntityReference getTargetForSpell(IGameEvent event) {
 		return hostReference;
 	}
@@ -89,9 +87,11 @@ public class SpellTrigger implements Cloneable {
 	public boolean isExpired() {
 		return expired;
 	}
-	
-	public void onAdd(GameContext context) {}
-	
-	public void onRemove(GameContext context) {}
+
+	public void onAdd(GameContext context) {
+	}
+
+	public void onRemove(GameContext context) {
+	}
 
 }

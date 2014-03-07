@@ -9,7 +9,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.ApplyTagSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
@@ -35,9 +34,8 @@ public class ConeOfCold extends SpellCard {
 
 		@Override
 		protected void onCast(GameContext context, Player player, Actor target) {
-			Minion targetMinion = (Minion) target;
-			List<Actor> affected = context.getAdjacentMinions(player, targetMinion);
-			affected.add(targetMinion);
+			List<Actor> affected = context.getAdjacentMinions(player, target.getReference());
+			affected.add(target);
 			
 			for (Actor minion : affected) {
 				damage.setTarget(minion.getReference());

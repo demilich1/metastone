@@ -26,6 +26,7 @@ public class DefenderOfArgus extends MinionCard {
 		Spell buffSpell = new MetaSpell(new BuffSpell(1, 1), new ApplyTagSpell(GameTag.TAUNT));
 		buffSpell.setTarget(EntityReference.ADJACENT_MINIONS);
 		Battlecry battlecry = Battlecry.createBattlecry(buffSpell, TargetSelection.NONE);
+		battlecry.setResolvedLate(true);
 		defenderOfArgus.setBattlecry(battlecry);
 		return defenderOfArgus;
 	}

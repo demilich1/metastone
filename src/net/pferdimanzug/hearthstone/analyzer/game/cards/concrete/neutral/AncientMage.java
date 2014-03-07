@@ -23,6 +23,7 @@ public class AncientMage extends MinionCard {
 		Spell spellpowerSpell = new ApplyTagSpell(GameTag.SPELL_POWER);
 		spellpowerSpell.setTarget(EntityReference.ADJACENT_MINIONS);
 		Battlecry battlecry = Battlecry.createBattlecry(spellpowerSpell);
+		battlecry.setResolvedLate(true);
 		ancientMage.setBattlecry(battlecry);
 		return ancientMage;
 	}

@@ -3,7 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.entities;
 import java.util.HashMap;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
@@ -61,8 +61,8 @@ public abstract class Actor extends Entity {
 		return getTagValue(GameTag.BASE_ATTACK) + getTagValue(GameTag.ATTACK_BONUS) + getTagValue(GameTag.AURA_ATTACK_BONUS);
 	}
 
-	public GameAction getBattlecry() {
-		return (GameAction) getTag(GameTag.BATTLECRY);
+	public Battlecry getBattlecry() {
+		return (Battlecry) getTag(GameTag.BATTLECRY);
 	}
 
 	public Spell getDeathrattle() {

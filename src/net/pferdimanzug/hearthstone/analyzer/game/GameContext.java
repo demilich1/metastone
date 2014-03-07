@@ -225,9 +225,10 @@ public class GameContext implements Cloneable {
 		return targetLogic.resolveTargetKey(this, player, source, targetKey);
 	}
 	
-	public List<Actor> getAdjacentMinions(Player player, Minion minion) {
+	public List<Actor> getAdjacentMinions(Player player, EntityReference minionReference) {
 		List<Actor> adjacentMinions = new ArrayList<>();
-		List<Minion> minions = player.getMinions();
+		Actor minion = resolveSingleTarget(player.getId(), minionReference);
+		List<Minion> minions = getPlayer(minion.getOwner()).getMinions();
 		int index = minions.indexOf(minion);
 		if (index == -1) {
 			return null;

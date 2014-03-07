@@ -6,7 +6,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
@@ -23,9 +22,8 @@ public class Betrayal extends SpellCard {
 
 		@Override
 		protected void onCast(GameContext context, Player player, Actor target) {
-			Minion targetMinion = (Minion) target;
-			for (Actor adjacentMinion : context.getAdjacentMinions(player, targetMinion)) {
-				context.getLogic().damage(player, adjacentMinion, targetMinion.getAttack(), false);
+			for (Actor adjacentMinion : context.getAdjacentMinions(player, target.getReference())) {
+				context.getLogic().damage(player, adjacentMinion, target.getAttack(), false);
 				//TODO: implement as physical attack
 			}
 		}

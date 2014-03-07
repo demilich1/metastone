@@ -24,8 +24,8 @@ import net.pferdimanzug.hearthstone.analyzer.playmode.GameContextVisualizable;
 public class HearthstoneAnalyzer extends Application {
 
 	public static void main(String[] args) {
-		launch(args);
-		//new HearthstoneAnalyzer().launchDebugGame();
+		//launch(args);
+		new HearthstoneAnalyzer().launchDebugGame();
 	}
 	
 	private void launchHumanDebugGame() {
