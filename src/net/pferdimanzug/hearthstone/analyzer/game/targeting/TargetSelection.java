@@ -10,5 +10,6 @@ public enum TargetSelection {
 	FRIENDLY_MINIONS,
 	FRIENDLY_HERO,
 	MINIONS,
+	ADJACENT_MINIONS,
 	ANY
 }

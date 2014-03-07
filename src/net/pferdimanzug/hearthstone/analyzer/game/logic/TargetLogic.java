@@ -161,10 +161,10 @@ public class TargetLogic {
 			List<Actor> targets = getEntities(context, player, TargetSelection.FRIENDLY_MINIONS);
 			targets.remove(source);
 			return targets;
-		}else if (targetKey == EntityReference.ADJACENT_MINIONS) {
+		} else if (targetKey == EntityReference.ADJACENT_MINIONS) {
+			System.out.println("Getting adjacent minions for " + source);
 			return context.getAdjacentMinions(player, (Minion) source);
-		}
-		else if (targetKey == EntityReference.NONE) {
+		} else if (targetKey == EntityReference.NONE) {
 			return null;
 		}
 

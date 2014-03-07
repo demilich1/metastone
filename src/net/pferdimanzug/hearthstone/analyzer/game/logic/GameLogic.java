@@ -515,24 +515,25 @@ public class GameLogic implements Cloneable {
 		minion.setId(idFactory.generateId());
 		logger.debug("{} summons {}", player.getName(), minion);
 
-		context.getPendingEntities().add(minion);
-		if (minion.getBattlecry() != null) {
-			GameAction battlecry = minion.getBattlecry();
-			battlecry.setSource(minion.getReference());
-			performGameAction(player.getId(), battlecry);
-		}
-		context.getPendingEntities().remove(minion);
-
-		refreshAttacksPerRound(minion);
-		minion.setTag(GameTag.SUMMONING_SICKNESS);
-
+		//context.getPendingEntities().add(minion);
+		minion.setOwner(player.getId());		
 		int index = player.getMinions().indexOf(nextTo);
 		if (index == -1) {
 			player.getMinions().add(minion);
 		} else {
 			player.getMinions().add(index, minion);
 		}
-		minion.setOwner(player.getId());
+		
+		if (minion.getBattlecry() != null) {
+			GameAction battlecry = minion.getBattlecry();
+			battlecry.setSource(minion.getReference());
+			performGameAction(player.getId(), battlecry);
+		}
+		//context.getPendingEntities().remove(minion);
+
+		refreshAttacksPerRound(minion);
+		minion.setTag(GameTag.SUMMONING_SICKNESS);
+
 		context.fireGameEvent(new SummonEvent(context, minion));
 		if (minion.hasSpellTrigger()) {
 			SpellTrigger spellTrigger = minion.getSpellTrigger();

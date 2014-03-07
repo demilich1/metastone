@@ -229,6 +229,9 @@ public class GameContext implements Cloneable {
 		List<Actor> adjacentMinions = new ArrayList<>();
 		List<Minion> minions = player.getMinions();
 		int index = minions.indexOf(minion);
+		if (index == -1) {
+			return null;
+		}
 		int left = index - 1;
 		int right = index + 1;
 		if (left > -1 && left < minions.size()) {

@@ -21,10 +21,12 @@ public class MetaSpell extends Spell {
 		if (!spell1.hasPredefinedTarget()) {
 			spell1.setTarget(getTarget());
 		}
+		spell1.setSource(getSource());
 		context.getLogic().castSpell(player.getId(), spell1);
 		if (!spell2.hasPredefinedTarget()) {
 			spell2.setTarget(getTarget());
 		}
+		spell2.setSource(getSource());
 		context.getLogic().castSpell(player.getId(), spell2);
 	}
 
@@ -38,5 +40,5 @@ public class MetaSpell extends Spell {
 		spell1.setApplySpellpower(applySpellpower);
 		spell2.setApplySpellpower(applySpellpower);
 	}
-	
+
 }
