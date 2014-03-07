@@ -9,11 +9,13 @@ public class PhysicalAttackEvent extends GameEvent {
 
 	private final Actor attacker;
 	private final Entity defender;
+	private final int damageDealt;
 
-	public PhysicalAttackEvent(GameContext context, Actor attacker, Entity defender) {
+	public PhysicalAttackEvent(GameContext context, Actor attacker, Entity defender, int damageDealt) {
 		super(context);
 		this.attacker = attacker;
 		this.defender = defender;
+		this.damageDealt = damageDealt;
 	}
 
 	public Actor getAttacker() {
@@ -27,6 +29,10 @@ public class PhysicalAttackEvent extends GameEvent {
 	@Override
 	public GameEventType getEventType() {
 		return GameEventType.PHYSICAL_ATTACK;
+	}
+
+	public int getDamageDealt() {
+		return damageDealt;
 	}
 
 }

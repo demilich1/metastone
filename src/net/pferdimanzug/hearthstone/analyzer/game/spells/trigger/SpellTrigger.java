@@ -63,7 +63,7 @@ public class SpellTrigger implements Cloneable {
 
 		if (!expired && trigger.fire(event, host)) {
 			if (!spell.hasPredefinedTarget()) {
-				spell.setTarget(hostReference);
+				spell.setTarget(getTargetForSpell(event));
 			}
 			
 			if (oneTime) {
@@ -71,6 +71,10 @@ public class SpellTrigger implements Cloneable {
 			}
 			event.getGameContext().getLogic().castSpell(ownerId, spell);
 		}
+	}
+	
+	protected EntityReference getTargetForSpell(IGameEvent event) {
+		return hostReference;
 	}
 
 	public void setHost(Entity host) {

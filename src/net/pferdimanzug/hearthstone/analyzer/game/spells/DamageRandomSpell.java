@@ -18,24 +18,27 @@ public class DamageRandomSpell extends DamageSpell {
 		super(damage);
 		this.iterations = iterations;
 	}
-	
+
 	@Override
 	public void cast(GameContext context, Player player, List<Actor> targets) {
-		int missiles = iterations + context.getLogic().getTotalTagValue(player, GameTag.SPELL_POWER);
+		int missiles = iterations;
+		if (applySpellpower) {
+			missiles += context.getLogic().getTotalTagValue(player, GameTag.SPELL_POWER);
+		}
 		for (int i = 0; i < missiles; i++) {
 			List<Actor> validTargets = getValidTargets(targets);
 			Actor randomTarget = validTargets.get(ThreadLocalRandom.current().nextInt(validTargets.size()));
 			context.getLogic().damage(player, randomTarget, getDamage(), false);
 		}
 	}
-	
+
 	private List<Actor> getValidTargets(List<Actor> targets) {
 		List<Actor> validTargets = new ArrayList<Actor>();
 		for (Actor actor : targets) {
 			if (!actor.isDead() || actor.getEntityType() == EntityType.HERO) {
 				validTargets.add(actor);
 			}
-			
+
 		}
 		return validTargets;
 	}

@@ -3,25 +3,12 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.ApplyTagSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.AttackTrigger;
 
 public class WaterElemental extends MinionCard {
-
-	private class WaterElementalMinion extends Minion {
-
-		public WaterElementalMinion(MinionCard sourceCard) {
-			super(sourceCard);
-			setBaseStats(sourceCard.getBaseAttack(), sourceCard.getBaseHp());
-		}
-
-		@Override
-		public void onAttack(Entity target) {
-			target.setTag(GameTag.FROZEN);
-		}
-
-	}
 
 	public WaterElemental() {
 		super("Water Elemental", 3, 6, Rarity.FREE, HeroClass.MAGE, 4);
@@ -30,7 +17,9 @@ public class WaterElemental extends MinionCard {
 
 	@Override
 	public Minion summon() {
-		return new WaterElementalMinion(this);
+		Minion waterElemental = createMinion();
+		waterElemental.setSpellTrigger(new AttackTrigger(new ApplyTagSpell(GameTag.FROZEN)));
+		return waterElemental;
 	}
-
+	
 }

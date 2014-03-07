@@ -124,36 +124,36 @@ public class GameLogic implements Cloneable {
 		return new GameLogic(idFactory.clone());
 	}
 
-	public void damage(Player player, Actor target, int damage, boolean applySpellpower) {
+	public boolean damage(Player player, Actor target, int damage, boolean applySpellpower) {
 		if (applySpellpower) {
 			damage += getTotalTagValue(player, GameTag.SPELL_POWER);
 		}
 		switch (target.getEntityType()) {
 		case MINION:
-			damageMinion((Actor) target, damage);
-			break;
+			return damageMinion((Actor) target, damage);
 		case HERO:
-			damageHero((Hero) target, damage);
-			break;
+			return damageHero((Hero) target, damage);
 		default:
 			break;
 		}
+		return false;
 	}
 
-	private void damageHero(Hero hero, int damage) {
+	private boolean damageHero(Hero hero, int damage) {
 		int effectiveHp = hero.getHp() + hero.getArmor();
 		hero.modifyArmor(-damage);
 		int newHp = Math.min(hero.getHp(), effectiveHp - damage);
 		hero.setHp(newHp);
 		logger.debug(hero.getName() + " receives " + damage + " damage, hp now: " + hero.getHp() + "("
 				+ hero.getArmor() + ")");
+		return true;
 	}
 
-	private void damageMinion(Actor minion, int damage) {
+	private boolean damageMinion(Actor minion, int damage) {
 		if (minion.hasTag(GameTag.DIVINE_SHIELD)) {
 			minion.removeTag(GameTag.DIVINE_SHIELD);
 			logger.debug("{}'s DIVINE SHIELD absorbs the damage", minion);
-			return;
+			return false;
 		}
 		logger.debug("{} is damaged for {}", minion, damage);
 		minion.setHp(minion.getHp() - damage);
@@ -161,6 +161,7 @@ public class GameLogic implements Cloneable {
 		if (minion.hasTag(GameTag.ENRAGE_SPELL)) {
 			handleEnrage(minion);
 		}
+		return true;
 	}
 
 	public void destroy(Actor target) {
@@ -253,7 +254,7 @@ public class GameLogic implements Cloneable {
 		logger.debug("{} attacks {}", attacker, defender);
 		int attackerDamage = attacker.getAttack();
 		int defenderDamage = defender.getAttack();
-		damage(player, defender, attackerDamage, false);
+		boolean damaged = damage(player, defender, attackerDamage, false);
 		// heroes do not retaliate when attacked
 		if (defender.getEntityType() != EntityType.HERO) {
 			damage(player, attacker, defenderDamage, false);
@@ -266,7 +267,7 @@ public class GameLogic implements Cloneable {
 		}
 
 		attacker.modifyTag(GameTag.NUMBER_OF_ATTACKS, -1);
-		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, defender));
+		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, defender, damaged ? attackerDamage : 0));
 	}
 
 	public GameResult getMatchResult(Player player, Player opponent) {

@@ -124,9 +124,6 @@ public abstract class Actor extends Entity {
 		setTag(tag, getTagValue(tag) + value);
 	}
 
-	public void onAttack(Entity target) {
-	}
-
 	public void setBaseAttack(int value) {
 		setTag(GameTag.BASE_ATTACK, value);
 	}

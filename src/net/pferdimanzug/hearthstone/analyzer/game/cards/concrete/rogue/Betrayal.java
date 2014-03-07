@@ -26,7 +26,7 @@ public class Betrayal extends SpellCard {
 			Minion targetMinion = (Minion) target;
 			for (Actor adjacentMinion : context.getAdjacentMinions(player, targetMinion)) {
 				context.getLogic().damage(player, adjacentMinion, targetMinion.getAttack(), false);
-				targetMinion.onAttack(adjacentMinion);
+				//TODO: implement as physical attack
 			}
 		}
 		
