@@ -63,13 +63,17 @@ public class SpellTrigger implements Cloneable {
 				if (oneTime) {
 					expired = true;
 				}
+				
 				event.getGameContext().getLogic().castSpell(ownerId, spell);
+				onFire(ownerId, spell, event);
 			}
 		} catch (Exception e) {
 			logger.error("SpellTrigger cannot be executed; GameEventTrigger: {} Spell: {}", trigger, spell);
 			throw e;
 		}
 	}
+	
+	protected void onFire(int ownerId, Spell spell, IGameEvent event) {}
 
 	protected EntityReference getTargetForSpell(IGameEvent event) {
 		return hostReference;

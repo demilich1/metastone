@@ -62,5 +62,20 @@ public abstract class Entity implements Cloneable {
 	public HashMap<GameTag, Object> getTags() {
 		return tags;
 	}
+	
+	/**
+	 * Returns an unique identifier for this Entity type.
+	 * This method can be used in cases where only one-of-a-kind
+	 * is allowed, i.e. secrets.
+	 * <p>
+	 * Notable properties of the return value:
+	 * if o1.getTypeId() == o2.getTypeId() then no statement about o1 == o2
+	 * if o1 == o2 then o1.getTypeId() ==  o2.getTypeId()
+	 *
+	 * @return      unique identifier for this type of entity
+	 */
+	public int getTypeId() {
+		return getClass().getName().hashCode();
+	}
 
 }

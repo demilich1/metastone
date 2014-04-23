@@ -18,6 +18,7 @@ public class Player implements Cloneable {
 	private final CardCollection hand = new CardCollection();
 	private final CardCollection graveyard = new CardCollection();
 	private final List<Minion> minions = new ArrayList<>();
+	private final List<Integer> secrets = new ArrayList<>();
 	
 	private int id = -1;
 
@@ -35,6 +36,7 @@ public class Player implements Cloneable {
 		}
 		this.hand.addAll(otherPlayer.hand);
 		this.graveyard.addAll(otherPlayer.graveyard);
+		this.secrets.addAll(otherPlayer.secrets);
 		this.id = otherPlayer.id;
 		this.mana = otherPlayer.mana;
 		this.maxMana = otherPlayer.maxMana;
@@ -112,6 +114,10 @@ public class Player implements Cloneable {
 	
 	public void setMaxMana(int maxMana) {
 		this.maxMana = maxMana;
+	}
+
+	public List<Integer> getSecrets() {
+		return secrets;
 	}
 
 }

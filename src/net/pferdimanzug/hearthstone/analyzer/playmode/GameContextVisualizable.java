@@ -49,7 +49,6 @@ public class GameContextVisualizable extends GameContext {
 		
 		List<GameEvent> eventList = actionEvents.get(currentAction);
 		eventList.add(gameEvent);
-		System.out.println("Adding an event for action " + currentAction);
 	}
 	
 	public List<GameEvent> getEventsForAction(GameAction action) {

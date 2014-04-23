@@ -4,4 +4,8 @@ However, in some cases, the Battlecry needs to be resolved AFTER the minion ente
 i.e. Defender of Argus. He can only buff adjacent minions when he already entered the battlefield,
 because otherwise adjacent minions cannot be determined
 
+Misdirection will not work properly with the current physical attack logic. Ingame a creature receives
+retalation damage when attacking own hero which has a weapon out. But at the moment the code never
+applies retalation damage when defender is a hero.
+ 
 Class specific:

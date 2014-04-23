@@ -13,6 +13,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardType;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.SecretCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.TheCoin;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
@@ -32,6 +33,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.TurnStartEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.HeroPower;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.secrets.Secret;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.IdFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
@@ -49,6 +51,7 @@ public class GameLogic implements Cloneable {
 	public static final int MAX_HERO_HP = 30;
 	public static final int STARTER_CARDS = 3;
 	public static final int MAX_MANA = 10;
+	public static final int MAX_SECRETS = 5;
 
 	private final TargetLogic targetLogic = new TargetLogic();
 	private final ActionLogic actionLogic = new ActionLogic();
@@ -85,7 +88,7 @@ public class GameLogic implements Cloneable {
 			return player.getMinions().size() < MAX_MINIONS;
 		}
 
-		if (card instanceof SpellCard) {
+		if (card.getCardType() == CardType.SPELL) {
 			SpellCard spellCard = (SpellCard) card;
 			return spellCard.canBeCast(context, player);
 		}
@@ -576,6 +579,22 @@ public class GameLogic implements Cloneable {
 		modifyCurrentMana(playerId, -power.getManaCost(player));
 		logger.debug("{} uses {}", player.getName(), power);
 		power.setUsed(true);
+	}
+	
+	public void addSpellTrigger(Player player, SpellTrigger spellTrigger, Entity target) {
+		SpellTrigger instance = spellTrigger.clone();
+		instance.setOwner(player.getId());
+		instance.setHost(target);
+		context.addTrigger(instance);
+	}
+	
+	public boolean canPlaySecret(Player player, SecretCard card) {
+		return player.getSecrets().size() < MAX_SECRETS && !player.getSecrets().contains(card.getTypeId());
+	}
+	
+	public void playSecret(Player player, Secret secret) {
+		addSpellTrigger(player, secret, player.getHero());
+		player.getSecrets().add(secret.getSource().getTypeId());
 	}
 
 }

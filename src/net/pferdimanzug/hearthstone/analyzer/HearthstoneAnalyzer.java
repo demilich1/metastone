@@ -13,6 +13,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.MinMaxBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.PlayRandomBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.ExplosiveTrap;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.DefenderOfArgus;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.RaidLeader;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
@@ -24,16 +25,16 @@ import net.pferdimanzug.hearthstone.analyzer.playmode.GameContextVisualizable;
 public class HearthstoneAnalyzer extends Application {
 
 	public static void main(String[] args) {
-		//launch(args);
-		new HearthstoneAnalyzer().launchDebugGame();
+		launch(args);
+		//new HearthstoneAnalyzer().launchDebugGame();
 	}
 	
 	private void launchHumanDebugGame() {
-		HeroClass humanHeroClass = HeroClass.ROGUE;
-		HeroClass aiHeroClass = HeroClass.HUNTER;
+		HeroClass humanHeroClass = HeroClass.HUNTER;
+		HeroClass aiHeroClass = HeroClass.WARRIOR;
 		Hero hero1 = HeroFactory.createHero(humanHeroClass);
 		//Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
-		Player player1 = new Player("Human", hero1, DebugDecks.getSingleCardDeck(new DefenderOfArgus(), 30));
+		Player player1 = new Player("Human", hero1, DebugDecks.getSingleCardDeck(new ExplosiveTrap(), 30));
 		
 		player1.setBehaviour(new HumanBehaviour());
 		Hero hero2 = HeroFactory.createHero(aiHeroClass);
