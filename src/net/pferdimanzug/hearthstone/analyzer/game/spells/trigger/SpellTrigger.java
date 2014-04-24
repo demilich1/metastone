@@ -3,8 +3,8 @@ package net.pferdimanzug.hearthstone.analyzer.game.spells.trigger;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
-import net.pferdimanzug.hearthstone.analyzer.game.events.IGameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
@@ -19,6 +19,7 @@ public class SpellTrigger implements Cloneable {
 	private EntityReference hostReference;
 	private final boolean oneTime;
 	private boolean expired;
+	private TriggerLayer layer = TriggerLayer.DEFAULT;
 
 	public SpellTrigger(GameEventTrigger trigger, Spell spell) {
 		this(trigger, spell, false);
@@ -51,7 +52,7 @@ public class SpellTrigger implements Cloneable {
 		return trigger.interestedIn();
 	}
 
-	public void onGameEvent(IGameEvent event) {
+	public void onGameEvent(GameEvent event) {
 		int ownerId = trigger.getOwner();
 		Actor host = event.getGameContext().resolveSingleTarget(ownerId, hostReference);
 		try {
@@ -73,9 +74,9 @@ public class SpellTrigger implements Cloneable {
 		}
 	}
 	
-	protected void onFire(int ownerId, Spell spell, IGameEvent event) {}
+	protected void onFire(int ownerId, Spell spell, GameEvent event) {}
 
-	protected EntityReference getTargetForSpell(IGameEvent event) {
+	protected EntityReference getTargetForSpell(GameEvent event) {
 		return hostReference;
 	}
 
@@ -100,6 +101,14 @@ public class SpellTrigger implements Cloneable {
 	}
 
 	public void onRemove(GameContext context) {
+	}
+
+	public TriggerLayer getLayer() {
+		return layer;
+	}
+
+	protected void setLayer(TriggerLayer layer) {
+		this.layer = layer;
 	}
 
 }

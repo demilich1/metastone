@@ -6,7 +6,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
-import net.pferdimanzug.hearthstone.analyzer.game.events.IGameEvent;
+import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.SummonEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.MinionSummonedTrigger;
@@ -36,7 +36,7 @@ public class Aura extends SpellTrigger {
 		applySpellEffect(context, removeAuraEffect);
 	}
 
-	public void onGameEvent(IGameEvent event) {
+	public void onGameEvent(GameEvent event) {
 		SummonEvent summonEvent = (SummonEvent) event;
 		Actor target = summonEvent.getMinion();
 		if (!affects(summonEvent.getGameContext(), target)) {

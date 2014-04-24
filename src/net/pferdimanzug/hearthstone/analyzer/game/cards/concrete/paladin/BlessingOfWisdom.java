@@ -4,8 +4,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
+import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
-import net.pferdimanzug.hearthstone.analyzer.game.events.IGameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.PhysicalAttackEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.AddSpellTriggerSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DrawCardSpell;
@@ -18,7 +18,7 @@ public class BlessingOfWisdom extends SpellCard {
 	private class BlessingOfWisdomTrigger extends GameEventTrigger {
 
 		@Override
-		public boolean fire(IGameEvent event, Actor host) {
+		public boolean fire(GameEvent event, Actor host) {
 			PhysicalAttackEvent physicalAttackEvent = (PhysicalAttackEvent) event;
 			return physicalAttackEvent.getAttacker() == host;
 		}

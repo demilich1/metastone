@@ -139,10 +139,6 @@ public class GameContext implements Cloneable {
 		return result;
 	}
 	
-	public void checkForSecrets(GameEvent gameEvent) {
-		triggerManager.checkForSecrets(gameEvent);
-	}
-	
 	public void fireGameEvent(GameEvent gameEvent) {
 		triggerManager.fireGameEvent(gameEvent);
 	}
@@ -294,10 +290,6 @@ public class GameContext implements Cloneable {
 		triggerManager.addTrigger(spellTrigger);
 	}
 	
-	public void addSecret(SpellTrigger secret) {
-		triggerManager.addSecret(secret);
-	}
-
 	public Player getActivePlayer() {
 		return activePlayer;
 	}

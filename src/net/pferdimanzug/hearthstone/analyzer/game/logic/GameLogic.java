@@ -33,6 +33,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.TurnStartEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.HeroPower;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerLayer;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.secrets.Secret;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.IdFactory;
@@ -121,7 +122,7 @@ public class GameLogic implements Cloneable {
 			}
 		}
 	}
-	
+
 	@Override
 	public GameLogic clone() {
 		return new GameLogic(idFactory.clone());
@@ -257,12 +258,13 @@ public class GameLogic implements Cloneable {
 		logger.debug("{} attacks {}", attacker, defender);
 		int attackerDamage = attacker.getAttack();
 		int defenderDamage = defender.getAttack();
-		context.checkForSecrets(new PhysicalAttackEvent(context, attacker, defender, attackerDamage));
+		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, defender, attackerDamage)
+				.setTriggerLayer(TriggerLayer.SECRET));
 		// secret may have killed attacker
 		if (attacker.isDead()) {
 			return;
 		}
-		
+
 		boolean damaged = damage(player, defender, attackerDamage, false);
 		// heroes do not retaliate when attacked
 		// TODO: actually heroes weapon is deactivated on opponents turn
@@ -601,15 +603,12 @@ public class GameLogic implements Cloneable {
 
 	public void playSecret(Player player, Secret secret) {
 		logger.debug("{} has a new secret activated: {}", player.getName(), secret.getSource());
-		secret.setOwner(player.getId());
-		secret.setHost(player.getHero());
-		secret.reset();
-		context.addSecret(secret);
+		addSpellTrigger(player, secret, player.getHero());
 		player.getSecrets().add(secret.getSource().getTypeId());
 	}
-	
+
 	public void secretTriggered(Player player, Secret secret) {
-		player.getSecrets().remove((Integer)secret.getSource().getTypeId());
+		player.getSecrets().remove((Integer) secret.getSource().getTypeId());
 	}
 
 }

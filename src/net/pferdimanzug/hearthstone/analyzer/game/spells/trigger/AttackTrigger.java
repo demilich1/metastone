@@ -1,6 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.spells.trigger;
 
-import net.pferdimanzug.hearthstone.analyzer.game.events.IGameEvent;
+import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.PhysicalAttackEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
@@ -12,7 +12,7 @@ public class AttackTrigger extends SpellTrigger {
 	}
 
 	@Override
-	protected EntityReference getTargetForSpell(IGameEvent event) {
+	protected EntityReference getTargetForSpell(GameEvent event) {
 		PhysicalAttackEvent physicalAttackEvent = (PhysicalAttackEvent) event;
 		return physicalAttackEvent.getDefender().getReference();
 	}

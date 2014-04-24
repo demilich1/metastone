@@ -15,8 +15,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.ExplosiveTrap;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.AcolyteOfPain;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.DefenderOfArgus;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.RaidLeader;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;

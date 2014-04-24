@@ -5,7 +5,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.events.IGameEvent;
+import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.SummonEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageRandomSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
@@ -33,7 +33,7 @@ public class KnifeJuggler extends MinionCard {
 	private class OwnMinionSummonedTrigger extends MinionSummonedTrigger {
 
 		@Override
-		public boolean fire(IGameEvent event, Actor host) {
+		public boolean fire(GameEvent event, Actor host) {
 			SummonEvent summonEvent = (SummonEvent) event;
 			return summonEvent.getMinion().getOwner() == host.getOwner();
 		}
