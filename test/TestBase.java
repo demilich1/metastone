@@ -3,8 +3,10 @@ import java.util.List;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.PhysicalAttackAction;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.DebugDecks;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
@@ -27,7 +29,6 @@ public class TestBase {
 		return context;
 	}
 	
-	
 	protected static Actor getSingleMinion(List<Minion> minions) {
 		for (Actor minion : minions) {
 			if (minion == null) {
@@ -36,6 +37,17 @@ public class TestBase {
 			return minion;
 		}
 		return null;
+	}
+	
+	protected static void playCard(GameContext context, Player player, Card card) {
+		context.getLogic().receiveCard(player.getId(), card);
+		context.getLogic().performGameAction(player.getId(), card.play());
+	}
+	
+	protected static void attack(GameContext context, Player player, Actor attacker, Actor target) {
+		PhysicalAttackAction physicalAttackAction = new PhysicalAttackAction(attacker.getReference());
+		physicalAttackAction.setTarget(target);
+		context.getLogic().performGameAction(player.getId(), physicalAttackAction);
 	}
 	
 	private static class NullBehaviour implements IBehaviour {

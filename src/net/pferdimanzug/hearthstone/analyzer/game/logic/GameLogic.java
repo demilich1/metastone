@@ -88,7 +88,7 @@ public class GameLogic implements Cloneable {
 			return player.getMinions().size() < MAX_MINIONS;
 		}
 
-		if (card.getCardType() == CardType.SPELL) {
+		if (card instanceof SpellCard) {
 			SpellCard spellCard = (SpellCard) card;
 			return spellCard.canBeCast(context, player);
 		}
@@ -121,7 +121,7 @@ public class GameLogic implements Cloneable {
 			}
 		}
 	}
-
+	
 	@Override
 	public GameLogic clone() {
 		return new GameLogic(idFactory.clone());
@@ -257,8 +257,15 @@ public class GameLogic implements Cloneable {
 		logger.debug("{} attacks {}", attacker, defender);
 		int attackerDamage = attacker.getAttack();
 		int defenderDamage = defender.getAttack();
+		context.checkForSecrets(new PhysicalAttackEvent(context, attacker, defender, attackerDamage));
+		// secret may have killed attacker
+		if (attacker.isDead()) {
+			return;
+		}
+		
 		boolean damaged = damage(player, defender, attackerDamage, false);
 		// heroes do not retaliate when attacked
+		// TODO: actually heroes weapon is deactivated on opponents turn
 		if (defender.getEntityType() != EntityType.HERO) {
 			damage(player, attacker, defenderDamage, false);
 		}
@@ -549,10 +556,7 @@ public class GameLogic implements Cloneable {
 		}
 
 		if (minion.hasSpellTrigger()) {
-			SpellTrigger spellTrigger = minion.getSpellTrigger();
-			spellTrigger.setHost(minion);
-			spellTrigger.onAdd(context);
-			context.addTrigger(spellTrigger);
+			addSpellTrigger(player, minion.getSpellTrigger(), minion);
 		}
 
 		if (minion.hasTag(GameTag.CHARGE)) {
@@ -580,21 +584,32 @@ public class GameLogic implements Cloneable {
 		logger.debug("{} uses {}", player.getName(), power);
 		power.setUsed(true);
 	}
-	
+
 	public void addSpellTrigger(Player player, SpellTrigger spellTrigger, Entity target) {
-		SpellTrigger instance = spellTrigger.clone();
-		instance.setOwner(player.getId());
-		instance.setHost(target);
-		context.addTrigger(instance);
+		// there was a .clone() here before, we don't need this, do we?
+		spellTrigger.setOwner(player.getId());
+		spellTrigger.setHost(target);
+		spellTrigger.reset();
+		spellTrigger.onAdd(context);
+		context.addTrigger(spellTrigger);
+		logger.debug("SpellTrigger added for " + player);
 	}
-	
+
 	public boolean canPlaySecret(Player player, SecretCard card) {
 		return player.getSecrets().size() < MAX_SECRETS && !player.getSecrets().contains(card.getTypeId());
 	}
-	
+
 	public void playSecret(Player player, Secret secret) {
-		addSpellTrigger(player, secret, player.getHero());
+		logger.debug("{} has a new secret activated: {}", player.getName(), secret.getSource());
+		secret.setOwner(player.getId());
+		secret.setHost(player.getHero());
+		secret.reset();
+		context.addSecret(secret);
 		player.getSecrets().add(secret.getSource().getTypeId());
+	}
+	
+	public void secretTriggered(Player player, Secret secret) {
+		player.getSecrets().remove((Integer)secret.getSource().getTypeId());
 	}
 
 }

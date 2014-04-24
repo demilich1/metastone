@@ -24,7 +24,7 @@ public class Secret extends SpellTrigger {
 	protected void onFire(int ownerId, Spell spell, IGameEvent event) {
 		super.onFire(ownerId, spell, event);
 		Player owner = event.getGameContext().getPlayer(ownerId);
-		owner.getSecrets().remove(source.getTypeId());
+		event.getGameContext().getLogic().secretTriggered(owner, this);
 	}
 	
 

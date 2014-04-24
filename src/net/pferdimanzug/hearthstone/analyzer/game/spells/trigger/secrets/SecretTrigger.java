@@ -10,7 +10,7 @@ public abstract class SecretTrigger extends GameEventTrigger {
 	public boolean fire(IGameEvent event, Actor host) {
 		GameContext context = event.getGameContext();
 		// Secrets can only be triggered on opponents turn
-		if (context.getActivePlayer() != context.getPlayer(getOwner())) {
+		if (context.getActivePlayer() == context.getPlayer(getOwner())) {
 			return false;
 		}
 

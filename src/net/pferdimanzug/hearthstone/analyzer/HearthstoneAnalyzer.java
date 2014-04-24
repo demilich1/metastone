@@ -14,6 +14,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.PlayRandomBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.ExplosiveTrap;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.AcolyteOfPain;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.DefenderOfArgus;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.RaidLeader;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
@@ -38,7 +39,8 @@ public class HearthstoneAnalyzer extends Application {
 		
 		player1.setBehaviour(new HumanBehaviour());
 		Hero hero2 = HeroFactory.createHero(aiHeroClass);
-		Player player2 = new Player("Bot", hero2, DebugDecks.getRandomDeck(hero2.getHeroClass()));
+		//Player player2 = new Player("Bot", hero2, DebugDecks.getRandomDeck(hero2.getHeroClass()));
+		Player player2 = new Player("Bot", hero2, DebugDecks.getSingleCardDeck(new AcolyteOfPain(), 30));
 		player2.setBehaviour(new PlayRandomBehaviour());
 		GameContext newGame = new GameContextVisualizable(player1, player2, new GameLogic());
 		ApplicationFacade.getInstance().sendNotification(GameNotification.START_GAME, newGame);		

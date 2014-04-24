@@ -3,6 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.spells;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class DrawCardSpell extends Spell {
 
@@ -20,6 +21,7 @@ public class DrawCardSpell extends Spell {
 	public DrawCardSpell(int numberOfCards, TargetPlayer targetPlayer) {
 		this.numberOfCards = numberOfCards;
 		this.targetPlayer = targetPlayer;
+		setTarget(EntityReference.NONE);
 	}
 
 	public int getNumberOfCards() {

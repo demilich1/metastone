@@ -91,6 +91,10 @@ public class SpellTrigger implements Cloneable {
 	public boolean isExpired() {
 		return expired;
 	}
+	
+	public void reset() {
+		expired = false;
+	}
 
 	public void onAdd(GameContext context) {
 	}
