@@ -196,12 +196,28 @@ public class GameLogic implements Cloneable {
 		Player owner = context.getPlayer(minion.getOwner());
 		context.fireGameEvent(new KillEvent(context, minion));
 
+		// set Hp to zero to make .isDead() return true
+		minion.setHp(0);
 		// TODO: add unit test for deathrattle; also check when exactly it
 		// should be fire
 		if (minion.hasTag(GameTag.DEATHRATTLE)) {
 			Spell deathrattleSpell = minion.getDeathrattle();
 			castSpell(owner.getId(), deathrattleSpell);
 		}
+		owner.getMinions().remove(minion);
+	}
+	
+	public void removeMinion(Actor minion) {
+		context.removeTriggersAssociatedWith(minion.getReference());
+		if (minion.hasSpellTrigger()) {
+			minion.getSpellTrigger().onRemove(context);
+		}
+		
+		logger.debug("{} was removed", minion);
+		// set Hp to zero to make .isDead() return true
+		minion.setHp(0);
+		
+		Player owner = context.getPlayer(minion.getOwner());
 		owner.getMinions().remove(minion);
 	}
 
@@ -608,6 +624,7 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void secretTriggered(Player player, Secret secret) {
+		logger.debug("Secret was trigged: {}", secret.getSource());
 		player.getSecrets().remove((Integer) secret.getSource().getTypeId());
 	}
 

@@ -28,6 +28,5 @@ public class Secret extends SpellTrigger {
 		Player owner = event.getGameContext().getPlayer(ownerId);
 		event.getGameContext().getLogic().secretTriggered(owner, this);
 	}
-	
 
 }

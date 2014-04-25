@@ -21,7 +21,11 @@ public class SecretCard extends SpellCard {
 	}
 
 	public void setTriggerAndEffect(SecretTrigger trigger, Spell effect) {
-		Spell spell = new AddSecretSpell(new Secret(trigger, effect, this));
+		setSecret(new Secret(trigger, effect, this));
+	}
+	
+	public void setSecret(Secret secret) {
+		Spell spell = new AddSecretSpell(secret);
 		spell.setTarget(EntityReference.FRIENDLY_HERO);
 		setTargetRequirement(TargetSelection.NONE);
 		setSpell(spell);

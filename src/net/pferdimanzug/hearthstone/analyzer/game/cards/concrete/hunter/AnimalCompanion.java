@@ -1,6 +1,8 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
+import net.pferdimanzug.hearthstone.analyzer.game.aura.Aura;
+import net.pferdimanzug.hearthstone.analyzer.game.aura.BuffAura;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
@@ -8,6 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonRandomSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class AnimalCompanion extends SpellCard {
@@ -40,7 +43,8 @@ public class AnimalCompanion extends SpellCard {
 		@Override
 		public Minion summon() {
 			Minion leokk = createMinion();
-			//leokk.setAura(new LeokkAura(leokk));
+			Aura leokkAura = new BuffAura(1, 0, EntityReference.FRIENDLY_MINIONS);
+			leokk.setSpellTrigger(leokkAura);
 			return leokk;
 		}
 		
