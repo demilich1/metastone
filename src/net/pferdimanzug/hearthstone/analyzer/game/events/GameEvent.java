@@ -25,9 +25,8 @@ public abstract class GameEvent {
 		return triggerLayer;
 	}
 	
-	public GameEvent setTriggerLayer(TriggerLayer triggerLayer) {
+	public void setTriggerLayer(TriggerLayer triggerLayer) {
 		this.triggerLayer = triggerLayer;
-		return this;
 	}
 
 	public abstract GameEventType getEventType();

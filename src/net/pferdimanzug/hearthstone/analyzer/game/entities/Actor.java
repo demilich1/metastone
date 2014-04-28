@@ -143,6 +143,9 @@ public abstract class Actor extends Entity {
 
 	public void setOwner(int ownerIndex) {
 		this.ownerIndex = ownerIndex;
+		if (hasSpellTrigger()) {
+			spellTrigger.setHost(this);
+		}
 	}
 
 	@Override

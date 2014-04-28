@@ -14,6 +14,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameResult;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.TargetLogic;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerLayer;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerManager;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
@@ -140,6 +141,11 @@ public class GameContext implements Cloneable {
 	}
 	
 	public void fireGameEvent(GameEvent gameEvent) {
+		fireGameEvent(gameEvent, TriggerLayer.DEFAULT);
+	}
+	
+	public void fireGameEvent(GameEvent gameEvent, TriggerLayer layer) {
+		gameEvent.setTriggerLayer(layer);
 		triggerManager.fireGameEvent(gameEvent);
 	}
 

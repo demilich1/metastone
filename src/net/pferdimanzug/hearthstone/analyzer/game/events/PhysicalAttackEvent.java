@@ -3,15 +3,14 @@ package net.pferdimanzug.hearthstone.analyzer.game.events;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public class PhysicalAttackEvent extends GameEvent {
 
 	private final Actor attacker;
-	private final Entity defender;
+	private final Actor defender;
 	private final int damageDealt;
 
-	public PhysicalAttackEvent(GameContext context, Actor attacker, Entity defender, int damageDealt) {
+	public PhysicalAttackEvent(GameContext context, Actor attacker, Actor defender, int damageDealt) {
 		super(context);
 		this.attacker = attacker;
 		this.defender = defender;
@@ -22,7 +21,7 @@ public class PhysicalAttackEvent extends GameEvent {
 		return attacker;
 	}
 
-	public Entity getDefender() {
+	public Actor getDefender() {
 		return defender;
 	}
 

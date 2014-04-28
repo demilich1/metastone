@@ -5,12 +5,14 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 
 public class IronfurGrizzly extends MinionCard {
 
 	public IronfurGrizzly() {
 		super("Ironfur Grizzly", 3, 3, Rarity.FREE, HeroClass.ANY, 3);
 		setDescription("Taunt");
+		setTag(GameTag.RACE, Race.BEAST);
 	}
 
 	@Override

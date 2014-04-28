@@ -206,17 +206,17 @@ public class GameLogic implements Cloneable {
 		}
 		owner.getMinions().remove(minion);
 	}
-	
+
 	public void removeMinion(Actor minion) {
 		context.removeTriggersAssociatedWith(minion.getReference());
 		if (minion.hasSpellTrigger()) {
 			minion.getSpellTrigger().onRemove(context);
 		}
-		
+
 		logger.debug("{} was removed", minion);
 		// set Hp to zero to make .isDead() return true
 		minion.setHp(0);
-		
+
 		Player owner = context.getPlayer(minion.getOwner());
 		owner.getMinions().remove(minion);
 	}
@@ -274,8 +274,7 @@ public class GameLogic implements Cloneable {
 		logger.debug("{} attacks {}", attacker, defender);
 		int attackerDamage = attacker.getAttack();
 		int defenderDamage = defender.getAttack();
-		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, defender, attackerDamage)
-				.setTriggerLayer(TriggerLayer.SECRET));
+		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, defender, attackerDamage), TriggerLayer.SECRET);
 		// secret may have killed attacker
 		if (attacker.isDead()) {
 			return;
@@ -546,7 +545,7 @@ public class GameLogic implements Cloneable {
 
 		context.getPendingEntities().add(minion);
 		minion.setOwner(player.getId());
-
+		
 		if (minion.getBattlecry() != null && !minion.getBattlecry().isResolvedLate()) {
 			resolveBattlecry(player.getId(), minion);
 		}
@@ -567,7 +566,9 @@ public class GameLogic implements Cloneable {
 		minion.setTag(GameTag.SUMMONING_SICKNESS);
 
 		try {
-			context.fireGameEvent(new SummonEvent(context, minion));
+			SummonEvent summonEvent = new SummonEvent(context, minion);
+			context.fireGameEvent(summonEvent, TriggerLayer.SECRET);
+			context.fireGameEvent(summonEvent, TriggerLayer.DEFAULT);
 		} catch (Exception e) {
 			logger.error("Error while summoning {}", minion);
 			e.printStackTrace();
@@ -610,7 +611,7 @@ public class GameLogic implements Cloneable {
 		spellTrigger.reset();
 		spellTrigger.onAdd(context);
 		context.addTrigger(spellTrigger);
-		logger.debug("SpellTrigger added for " + player);
+		logger.debug("New spelltrigger was added for {}", player.getName());
 	}
 
 	public boolean canPlaySecret(Player player, SecretCard card) {

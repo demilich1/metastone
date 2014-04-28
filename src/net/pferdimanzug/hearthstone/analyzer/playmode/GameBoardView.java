@@ -134,6 +134,7 @@ public class GameBoardView extends BorderPane {
 					targetOptions.getBehaviour().setSelectedTarget(target);
 				}
 			};
+			
 			token.showTargetMarker(clickedHander);
 		}
 	}
