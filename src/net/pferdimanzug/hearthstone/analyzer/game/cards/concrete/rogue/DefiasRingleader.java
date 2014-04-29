@@ -18,8 +18,9 @@ public class DefiasRingleader extends MinionCard {
 
 	@Override
 	public Minion summon() {
-		Battlecry battlecry = Battlecry.createBattlecry(new ComboSpell(null, new SummonSpell(new DefiasBandit())), TargetSelection.NONE);
 		Minion defiasRingleader = createMinion();
+		Battlecry battlecry = Battlecry.createBattlecry(new ComboSpell(null, new SummonSpell(new DefiasBandit())), TargetSelection.NONE);
+		battlecry.setResolvedLate(true);
 		defiasRingleader.setBattlecry(battlecry);
 		return defiasRingleader;
 	}

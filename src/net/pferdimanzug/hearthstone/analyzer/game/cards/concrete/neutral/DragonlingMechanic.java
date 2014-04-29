@@ -33,6 +33,7 @@ public class DragonlingMechanic extends MinionCard {
 	public Minion summon() {
 		Minion dragonlingMechanic = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(new MechanicalDragonling()), TargetSelection.NONE);
+		battlecry.setResolvedLate(true);
 		dragonlingMechanic.setBattlecry(battlecry);
 		return dragonlingMechanic;
 	}

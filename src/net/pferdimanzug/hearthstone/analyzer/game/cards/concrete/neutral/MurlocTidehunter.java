@@ -35,6 +35,7 @@ public class MurlocTidehunter extends MinionCard {
 	public Minion summon() {
 		Minion murlocTidehunter = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(new MurlocScout()), TargetSelection.NONE);
+		battlecry.setResolvedLate(true);
 		murlocTidehunter.setBattlecry(battlecry);
 		return murlocTidehunter;
 	}

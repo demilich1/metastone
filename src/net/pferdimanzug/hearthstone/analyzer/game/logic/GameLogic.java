@@ -7,7 +7,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
+import net.pferdimanzug.hearthstone.analyzer.game.PhysicalAttackTargetAcquisition;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
+import net.pferdimanzug.hearthstone.analyzer.game.TargetAcquisition;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
@@ -28,6 +30,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.OverloadEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.PhysicalAttackEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.SpellCastedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.SummonEvent;
+import net.pferdimanzug.hearthstone.analyzer.game.events.TargetAcquisitionEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.TurnEndEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.TurnStartEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.HeroPower;
@@ -197,7 +200,10 @@ public class GameLogic implements Cloneable {
 		context.fireGameEvent(new KillEvent(context, minion));
 
 		// set Hp to zero to make .isDead() return true
-		minion.setHp(0);
+		if (minion.getHp() > 0) {
+			minion.setHp(0);
+		}
+
 		// TODO: add unit test for deathrattle; also check when exactly it
 		// should be fire
 		if (minion.hasTag(GameTag.DEATHRATTLE)) {
@@ -272,18 +278,24 @@ public class GameLogic implements Cloneable {
 
 	public void fight(Player player, Actor attacker, Actor defender) {
 		logger.debug("{} attacks {}", attacker, defender);
+		TargetAcquisition targetAcquisition = new PhysicalAttackTargetAcquisition(defender, attacker);
+		Actor target = acquireTarget(targetAcquisition);
+		if (target != defender) {
+			logger.debug("Target of attack was changed! New Target: {}", target);
+		}
+
 		int attackerDamage = attacker.getAttack();
-		int defenderDamage = defender.getAttack();
-		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, defender, attackerDamage), TriggerLayer.SECRET);
+		int defenderDamage = target.getAttack();
+		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, target, attackerDamage), TriggerLayer.SECRET);
 		// secret may have killed attacker
 		if (attacker.isDead()) {
 			return;
 		}
 
-		boolean damaged = damage(player, defender, attackerDamage, false);
+		boolean damaged = damage(player, target, attackerDamage, false);
 		// heroes do not retaliate when attacked
 		// TODO: actually heroes weapon is deactivated on opponents turn
-		if (defender.getEntityType() != EntityType.HERO) {
+		if (target.getEntityType() != EntityType.HERO) {
 			damage(player, attacker, defenderDamage, false);
 		}
 		if (attacker.getEntityType() == EntityType.HERO) {
@@ -294,7 +306,7 @@ public class GameLogic implements Cloneable {
 		}
 
 		attacker.modifyTag(GameTag.NUMBER_OF_ATTACKS, -1);
-		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, defender, damaged ? attackerDamage : 0));
+		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, target, damaged ? attackerDamage : 0));
 	}
 
 	public GameResult getMatchResult(Player player, Player opponent) {
@@ -545,7 +557,7 @@ public class GameLogic implements Cloneable {
 
 		context.getPendingEntities().add(minion);
 		minion.setOwner(player.getId());
-		
+
 		if (minion.getBattlecry() != null && !minion.getBattlecry().isResolvedLate()) {
 			resolveBattlecry(player.getId(), minion);
 		}
@@ -558,9 +570,6 @@ public class GameLogic implements Cloneable {
 		}
 
 		context.getPendingEntities().remove(minion);
-		if (minion.getBattlecry() != null && minion.getBattlecry().isResolvedLate()) {
-			resolveBattlecry(player.getId(), minion);
-		}
 
 		refreshAttacksPerRound(minion);
 		minion.setTag(GameTag.SUMMONING_SICKNESS);
@@ -582,6 +591,10 @@ public class GameLogic implements Cloneable {
 			minion.setTag(GameTag.NUMBER_OF_ATTACKS, minion.hasTag(GameTag.WINDFURY) ? 2 : 1);
 		} else {
 			minion.setTag(GameTag.NUMBER_OF_ATTACKS, 0);
+		}
+
+		if (minion.getBattlecry() != null && minion.getBattlecry().isResolvedLate()) {
+			resolveBattlecry(player.getId(), minion);
 		}
 	}
 
@@ -627,6 +640,13 @@ public class GameLogic implements Cloneable {
 	public void secretTriggered(Player player, Secret secret) {
 		logger.debug("Secret was trigged: {}", secret.getSource());
 		player.getSecrets().remove((Integer) secret.getSource().getTypeId());
+	}
+
+	public Actor acquireTarget(TargetAcquisition targetAcquisition) {
+		TargetAcquisitionEvent targetAcquisitionEvent = new TargetAcquisitionEvent(context, targetAcquisition);
+		context.fireGameEvent(targetAcquisitionEvent, TriggerLayer.SECRET);
+		context.fireGameEvent(targetAcquisitionEvent);
+		return targetAcquisition.getTarget();
 	}
 
 }

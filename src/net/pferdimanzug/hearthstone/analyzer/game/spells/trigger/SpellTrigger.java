@@ -65,7 +65,6 @@ public class SpellTrigger implements Cloneable {
 					expired = true;
 				}
 				
-				event.getGameContext().getLogic().castSpell(ownerId, spell);
 				onFire(ownerId, spell, event);
 			}
 		} catch (Exception e) {
@@ -74,7 +73,9 @@ public class SpellTrigger implements Cloneable {
 		}
 	}
 	
-	protected void onFire(int ownerId, Spell spell, GameEvent event) {}
+	protected void onFire(int ownerId, Spell spell, GameEvent event) {
+		event.getGameContext().getLogic().castSpell(ownerId, spell);
+	}
 
 	protected EntityReference getTargetForSpell(GameEvent event) {
 		return hostReference;
