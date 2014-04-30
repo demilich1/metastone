@@ -135,15 +135,25 @@ public class GameLogic implements Cloneable {
 		if (applySpellpower) {
 			damage += getTotalTagValue(player, GameTag.SPELL_POWER);
 		}
+		boolean success = false;
 		switch (target.getEntityType()) {
 		case MINION:
-			return damageMinion((Actor) target, damage);
+			success = damageMinion((Actor) target, damage);
+			break;
 		case HERO:
-			return damageHero((Hero) target, damage);
+			success = damageHero((Hero) target, damage);
+			break;
 		default:
 			break;
 		}
-		return false;
+
+		if (success) {
+			DamageEvent damageEvent = new DamageEvent(context, target, damage);
+			context.fireGameEvent(damageEvent, TriggerLayer.SECRET);
+			context.fireGameEvent(damageEvent);
+		}
+
+		return success;
 	}
 
 	private boolean damageHero(Hero hero, int damage) {
@@ -164,7 +174,6 @@ public class GameLogic implements Cloneable {
 		}
 		logger.debug("{} is damaged for {}", minion, damage);
 		minion.setHp(minion.getHp() - damage);
-		context.fireGameEvent(new DamageEvent(context, minion, damage));
 		if (minion.hasTag(GameTag.ENRAGE_SPELL)) {
 			handleEnrage(minion);
 		}

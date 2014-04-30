@@ -6,18 +6,23 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 
 public class DamageSpell extends Spell {
 	
-	private final int damage;
+	private int damage;
+	
 	public DamageSpell(int damage) {
-		this.damage = damage;
+		this.setDamage(damage);
 	}
 	
 	public int getDamage() {
 		return damage;
 	}
-
+	
 	@Override
 	protected void onCast(GameContext context, Player player, Actor target) {
 		context.getLogic().damage(player, target, getDamage(), applySpellpower);
+	}
+
+	public void setDamage(int damage) {
+		this.damage = damage;
 	}
 
 }

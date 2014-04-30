@@ -16,11 +16,13 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.ExplosiveTrap;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.FreezingTrap;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.Snipe;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.IceBarrier;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.MirrorEntity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Vaporize;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.AcolyteOfPain;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.IronforgeRifleman;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.RazorfenHunter;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.EyeForAnEye;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.NobleSacrifice;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
@@ -37,7 +39,7 @@ public class HearthstoneAnalyzer extends Application {
 	
 	private void launchHumanDebugGame() {
 		HeroClass humanHeroClass = HeroClass.HUNTER;
-		HeroClass aiHeroClass = HeroClass.PALADIN;
+		HeroClass aiHeroClass = HeroClass.MAGE;
 		Hero hero1 = HeroFactory.createHero(humanHeroClass);
 		Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
 		//Player player1 = new Player("Human", hero1, DebugDecks.getSingleCardDeck(new RazorfenHunter(), 30));
@@ -45,7 +47,7 @@ public class HearthstoneAnalyzer extends Application {
 		player1.setBehaviour(new HumanBehaviour());
 		Hero hero2 = HeroFactory.createHero(aiHeroClass);
 		//Player player2 = new Player("Bot", hero2, DebugDecks.getRandomDeck(hero2.getHeroClass()));
-		Player player2 = new Player("Bot", hero2, DebugDecks.getSingleCardDeck(new NobleSacrifice(), 30));
+		Player player2 = new Player("Bot", hero2, DebugDecks.getSingleCardDeck(new IceBarrier(), 30));
 		player2.setBehaviour(new PlayRandomBehaviour());
 		GameContext newGame = new GameContextVisualizable(player1, player2, new GameLogic());
 		ApplicationFacade.getInstance().sendNotification(GameNotification.START_GAME, newGame);		
