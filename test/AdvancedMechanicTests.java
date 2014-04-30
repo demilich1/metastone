@@ -22,7 +22,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Anduin;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Malfurion;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Rexxar;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Thrall;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.SetHpSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.SilenceSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -274,5 +279,39 @@ public class AdvancedMechanicTests extends BasicTests {
 		context.getLogic().performGameAction(player.getId(), minionCard.play());
 		Assert.assertEquals(minion1.getAttack(), 1);
 		Assert.assertEquals(minion2.getAttack(), 2);
+	}
+	
+	@Test
+	public void testSetHpPlusSilence() {
+		GameContext context = createContext(new Rexxar(), new Garrosh());
+		Player player = context.getPlayer1();
+		Player opponent = context.getPlayer2();
+		
+		int baseHp = 5;
+		// summon a minion and check the base hp
+		playCard(context, opponent, new TestMinionCard(4, baseHp));
+		Actor minion = getSingleMinion(opponent.getMinions());
+		Assert.assertEquals(minion.getHp(), baseHp);
+
+		int modifiedHp = 1;
+		// cast a spell on the minion which modifies the hp
+		Spell setHpSpell = new SetHpSpell(modifiedHp);
+		SpellCard spellCard = new TestSpellCard(setHpSpell);
+		spellCard.setTargetRequirement(TargetSelection.MINIONS);
+		context.getLogic().receiveCard(player.getId(), spellCard);
+		GameAction playSpellCard = spellCard.play();
+		playSpellCard.setTarget(minion);
+		context.getLogic().performGameAction(player.getId(), playSpellCard);
+		Assert.assertEquals(minion.getHp(), modifiedHp);
+		
+		// silence the creature - hp should be back to original value
+		Spell silenceSpell = new SilenceSpell();
+		spellCard = new TestSpellCard(silenceSpell);
+		spellCard.setTargetRequirement(TargetSelection.MINIONS);
+		context.getLogic().receiveCard(player.getId(), spellCard);
+		playSpellCard = spellCard.play();
+		playSpellCard.setTarget(minion);
+		context.getLogic().performGameAction(player.getId(), playSpellCard);
+		Assert.assertEquals(minion.getHp(), baseHp);		
 	}
 }

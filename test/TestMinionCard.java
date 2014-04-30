@@ -11,6 +11,8 @@ public class TestMinionCard extends MinionCard {
 
 	public TestMinionCard(int baseAttack, int baseHp, GameTag... tags) {
 		super("Test monster", baseAttack, baseHp, Rarity.COMMON, HeroClass.ANY, 1);
+		setCollectible(false);
+		
 		this.minion = createMinion(tags);
 	}
 
