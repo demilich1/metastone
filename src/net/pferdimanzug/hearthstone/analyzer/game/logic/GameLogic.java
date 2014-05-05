@@ -89,7 +89,7 @@ public class GameLogic implements Cloneable {
 				return false;
 			}
 		} else if (card.getCardType() == CardType.MINION) {
-			return player.getMinions().size() < MAX_MINIONS;
+			return canSummonMoreMinions(player);
 		}
 
 		if (card instanceof SpellCard) {
@@ -106,6 +106,10 @@ public class GameLogic implements Cloneable {
 			source = context.resolveSingleTarget(playerId, spell.getSource());
 		}
 		spell.cast(context, player, targetLogic.resolveTargetKey(context, player, source, spell.getTarget()));
+	}
+	
+	public boolean canSummonMoreMinions(Player player) {
+		return player.getMinions().size() < MAX_MINIONS;
 	}
 
 	public void changeDurability(Weapon weapon, int durability) {
@@ -559,7 +563,7 @@ public class GameLogic implements Cloneable {
 		context.fireGameEvent(new TurnStartEvent(context, player.getId()));
 	}
 
-	public void summon(int playerId, Minion minion, Actor nextTo) {
+	public void summon(int playerId, Minion minion, Card source, Actor nextTo) {
 		Player player = context.getPlayer(playerId);
 		minion.setId(idFactory.generateId());
 		logger.debug("{} summons {}", player.getName(), minion);
@@ -584,7 +588,7 @@ public class GameLogic implements Cloneable {
 		minion.setTag(GameTag.SUMMONING_SICKNESS);
 
 		try {
-			SummonEvent summonEvent = new SummonEvent(context, minion);
+			SummonEvent summonEvent = new SummonEvent(context, minion, source);
 			context.fireGameEvent(summonEvent, TriggerLayer.SECRET);
 			context.fireGameEvent(summonEvent, TriggerLayer.DEFAULT);
 		} catch (Exception e) {

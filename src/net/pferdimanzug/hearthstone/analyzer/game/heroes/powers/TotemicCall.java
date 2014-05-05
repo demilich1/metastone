@@ -103,7 +103,7 @@ public class TotemicCall extends HeroPower {
 			}
 
 			Minion randomTotem = availableTotems.get(ThreadLocalRandom.current().nextInt(availableTotems.size()));
-			context.getLogic().summon(player.getId(), randomTotem, null);
+			context.getLogic().summon(player.getId(), randomTotem, TotemicCall.this, null);
 		}
 		
 	}

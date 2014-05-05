@@ -23,7 +23,7 @@ public class SummonRandomSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, Actor target) {
 		MinionCard randomMinionCard = getRandomMinion();
-		context.getLogic().summon(player.getId(), randomMinionCard.summon(), null);
+		context.getLogic().summon(player.getId(), randomMinionCard.summon(), null, null);
 	}
 
 }

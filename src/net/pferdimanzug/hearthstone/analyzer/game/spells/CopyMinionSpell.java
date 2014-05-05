@@ -14,7 +14,7 @@ public class CopyMinionSpell extends Spell {
 		copy.removeTag(GameTag.BATTLECRY);
 		copy.setOwner(player.getId());
 		
-		context.getLogic().summon(player.getId(), copy, null);
+		context.getLogic().summon(player.getId(), copy, null, null);
 	}
 
 }

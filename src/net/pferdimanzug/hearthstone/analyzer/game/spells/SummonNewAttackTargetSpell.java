@@ -29,7 +29,7 @@ public class SummonNewAttackTargetSpell extends Spell {
 			logger.warn("New target of attack already has a SpellTrigger, will be OVERRIDDEN");
 		}
 		targetMinion.setSpellTrigger(spellTrigger);
-		context.getLogic().summon(player.getId(), targetMinion, null);
+		context.getLogic().summon(player.getId(), targetMinion, null, null);
 		
 	}
 	

@@ -1,0 +1,26 @@
+BLUE POST 02.05.2014
+
+Blade Fury is doing extra damage!
+Blade Fury is a Rogue ability that destroys the player's weapon and deals the weapons damage to all enemies. Even though the weapon has a set amount, Blade Fury is still a spell and can be affected by Spell Power.
+
+All my decks and/or cards vanished!
+Majority of the time this issue is seen it is due to the players region being changed. Double check that the region you are currently in is the one you regularly play in.
+
+My opponent stole my minion.
+When I bounced it to the owners hand, it went to their hand! If you control a minion, you own that minion. Ownership is based off which side of the battlefield a minion is on. When returning a minion to its owners hand, it will return to the hand of the player who controls that minion on their side of the battlefield at the time the effect is played.
+
+My Noble Sacrifice didn't trigger when my opponent attacked!
+Did you have 7 minions on the battlefield? Playing cards that create minions act the exact same way as trying to play a minion. If you don't have room, the card will not trigger.
+
+Minions healed when I killed/silenced Stormwind Champion (or other buffs)!
+At the time you Silence a minion who is effected by a stat modifier, if their health is higher than their printed value (the value the minion displays with no stat modifiers), it will return the minion to its original health that is displayed on the card. If at the time Silence is cast, the minions current health is less than the printed value on the card, the minion will remain on the battlefield with that much damage.
+Ben Brode gives an explanation here: http://us.battle.net/hearthstone/en/forum/topic/9793229858?page=2#21
+
+Gorehowl was destroyed after one use!
+The mistake here is usually in understanding the card. If a player attacks a hero, the durability is reduced. If a player attacks a minion, the attack is reduced.
+
+Ice Block did not prevent my opponents secret from killing me!
+If you are attacking and in a position to trigger your opponent's secret, it is most likely your turn. As secret's cannot trigger on the owning player's turn, there is no chance for Ice Block to become active.
+
+My opponent was able to attack my Faerie Dragon with their hero power!
+Even though you are not able to target the Faerie dragon with spells, you are able to attack the Faerie Dragon. So Rogues and Druids are able to use their hero powers to deal damage to the minion.

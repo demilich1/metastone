@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonNewAttackTargetSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.secrets.TargetAcquisitionTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.secrets.SummonNewTargetTrigger;
 
 public class NobleSacrifice extends SecretCard {
 
@@ -16,7 +16,7 @@ public class NobleSacrifice extends SecretCard {
 		setDescription("Secret: When an enemy attacks, summon a 2/1 Defender as the new target.");
 		
 		Spell decoySpell = new SummonNewAttackTargetSpell(new Defender());
-		setTriggerAndEffect(new TargetAcquisitionTrigger(), decoySpell);
+		setTriggerAndEffect(new SummonNewTargetTrigger(), decoySpell);
 	}
 	
 	private class Defender extends MinionCard {
