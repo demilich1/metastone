@@ -15,6 +15,8 @@ public class EntityReference {
 	public static final EntityReference ALL_MINIONS = new EntityReference(-10);
 	public static final EntityReference ALL_CHARACTERS = new EntityReference(-11);
 	
+	public static final EntityReference KILLED_MINION = new EntityReference(-20);
+	
 	public static EntityReference pointTo(Entity entity) {
 		if (entity == null) {
 			return null;

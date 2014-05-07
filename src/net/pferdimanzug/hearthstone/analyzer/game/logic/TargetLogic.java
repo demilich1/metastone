@@ -163,14 +163,19 @@ public class TargetLogic {
 			return targets;
 		} else if (targetKey == EntityReference.ADJACENT_MINIONS) {
 			return context.getAdjacentMinions(player, source.getReference());
+		} else if (targetKey == EntityReference.KILLED_MINION) {
+			return singleTargetAsList((Actor) context.getEnvironment().get(Environment.KILLED_MINION));
 		} else if (targetKey == EntityReference.NONE) {
 			return null;
 		}
 
-		ArrayList<Actor> target = new ArrayList<>(1);
-		target.add(findEntity(context, targetKey));
-		return target;
+		return singleTargetAsList(findEntity(context, targetKey));
+	}
 
+	private static List<Actor> singleTargetAsList(Actor target) {
+		ArrayList<Actor> list = new ArrayList<>(1);
+		list.add(target);
+		return list;
 	}
 
 }

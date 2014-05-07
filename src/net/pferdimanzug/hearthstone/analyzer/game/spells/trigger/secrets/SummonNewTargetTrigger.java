@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.secrets;
 
-import net.pferdimanzug.hearthstone.analyzer.game.Environment;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
@@ -20,7 +19,6 @@ public class SummonNewTargetTrigger extends SecretTrigger {
 		}
 		TargetAcquisitionEvent targetAcquisitionEvent = (TargetAcquisitionEvent) event;
 		if (targetAcquisitionEvent.getActionType() == ActionType.PHYSICAL_ATTACK) {
-			event.getGameContext().getEnvironment().put(Environment.TARGET_OVERRIDE, host);
 			return true;
 		}
 		return false;

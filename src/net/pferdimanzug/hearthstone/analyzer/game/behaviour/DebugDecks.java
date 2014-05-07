@@ -1,5 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.behaviour;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCatalogue;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
@@ -34,10 +36,11 @@ public class DebugDecks {
 		return deck;
 	}
 	
-	public static CardCollection getSingleCardDeck(Card card, int count) {
+	public static CardCollection getDeckConsistingof(int count, Card... cards) {
 		CardCollection deck = new CardCollection();
 		for (int i = 0; i < count; i++) {
-			deck.add(card.clone());
+			int randomIndex = ThreadLocalRandom.current().nextInt(cards.length);
+			deck.add(cards[randomIndex].clone());
 		}
 		return deck;
 	}

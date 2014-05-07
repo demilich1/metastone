@@ -209,7 +209,11 @@ public class GameLogic implements Cloneable {
 	private void destroyMinion(Actor minion) {
 		logger.debug("{} is destroyed", minion);
 		Player owner = context.getPlayer(minion.getOwner());
-		context.fireGameEvent(new KillEvent(context, minion));
+		context.getEnvironment().put(Environment.KILLED_MINION, minion);
+		KillEvent killEvent = new KillEvent(context, minion);
+		context.fireGameEvent(killEvent, TriggerLayer.SECRET);
+		context.fireGameEvent(killEvent);
+		context.getEnvironment().remove(Environment.KILLED_MINION);
 
 		// set Hp to zero to make .isDead() return true
 		if (minion.getHp() > 0) {

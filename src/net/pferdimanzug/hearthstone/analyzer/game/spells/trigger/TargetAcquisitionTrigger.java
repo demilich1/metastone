@@ -13,7 +13,6 @@ public class TargetAcquisitionTrigger extends GameEventTrigger {
 	public boolean fire(GameEvent event, Actor host) {
 		TargetAcquisitionEvent targetAcquisitionEvent = (TargetAcquisitionEvent) event;
 		if (targetAcquisitionEvent.getActionType() == ActionType.PHYSICAL_ATTACK) {
-			event.getGameContext().getEnvironment().put(Environment.TARGET_OVERRIDE, host);
 			return true;
 		}
 		return false;

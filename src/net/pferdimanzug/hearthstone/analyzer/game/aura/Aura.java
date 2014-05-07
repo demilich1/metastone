@@ -66,6 +66,14 @@ public class Aura extends SpellTrigger {
 		if (target.getReference().equals(getHostReference())) {
 			return false;
 		}
+		
+		Player owner = context.getPlayer(getOwner());
+		Actor sourceActor = context.resolveSingleTarget(getOwner(), getHostReference());
+		List<Actor> validTargets = context.resolveTarget(owner, sourceActor, targets);
+		if (!validTargets.contains(target)) {
+			return false;
+		}
+		
 		return true;
 	}
 

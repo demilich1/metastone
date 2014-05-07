@@ -22,8 +22,10 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Vaporize;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.AcolyteOfPain;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.IronforgeRifleman;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.RazorfenHunter;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.RiverCrocolisk;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.EyeForAnEye;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.NobleSacrifice;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.Redemption;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
@@ -33,21 +35,20 @@ import net.pferdimanzug.hearthstone.analyzer.playmode.GameContextVisualizable;
 public class HearthstoneAnalyzer extends Application {
 
 	public static void main(String[] args) {
-		//launch(args);
-		new HearthstoneAnalyzer().launchDebugGame();
+		launch(args);
+		//new HearthstoneAnalyzer().launchDebugGame();
 	}
 	
 	private void launchHumanDebugGame() {
 		HeroClass humanHeroClass = HeroClass.HUNTER;
-		HeroClass aiHeroClass = HeroClass.MAGE;
+		HeroClass aiHeroClass = HeroClass.PALADIN;
 		Hero hero1 = HeroFactory.createHero(humanHeroClass);
 		Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
-		//Player player1 = new Player("Human", hero1, DebugDecks.getSingleCardDeck(new RazorfenHunter(), 30));
-		
 		player1.setBehaviour(new HumanBehaviour());
+		
 		Hero hero2 = HeroFactory.createHero(aiHeroClass);
 		//Player player2 = new Player("Bot", hero2, DebugDecks.getRandomDeck(hero2.getHeroClass()));
-		Player player2 = new Player("Bot", hero2, DebugDecks.getSingleCardDeck(new IceBarrier(), 30));
+		Player player2 = new Player("Bot", hero2, DebugDecks.getDeckConsistingof(30, new Redemption(), new RiverCrocolisk()));
 		player2.setBehaviour(new PlayRandomBehaviour());
 		GameContext newGame = new GameContextVisualizable(player1, player2, new GameLogic());
 		ApplicationFacade.getInstance().sendNotification(GameNotification.START_GAME, newGame);		
