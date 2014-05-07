@@ -1,4 +1,6 @@
+==============================================
 BLUE POST 02.05.2014
+==============================================
 
 Blade Fury is doing extra damage!
 Blade Fury is a Rogue ability that destroys the player's weapon and deals the weapons damage to all enemies. Even though the weapon has a set amount, Blade Fury is still a spell and can be affected by Spell Power.
@@ -24,3 +26,131 @@ If you are attacking and in a position to trigger your opponent's secret, it is 
 
 My opponent was able to attack my Faerie Dragon with their hero power!
 Even though you are not able to target the Faerie dragon with spells, you are able to attack the Faerie Dragon. So Rogues and Druids are able to use their hero powers to deal damage to the minion.
+
+
+
+==============================================
+LIQUIDHEARTH FORUMS POST (last update 20.03.2014)
+==============================================
+
+#1 Of course you may know you can silence a taunt so you can get to your opponent, but did you know you can silence your own frozen minion to unfreeze them?
+
+#2 More silence goodness! #Thingssilencedoes, not only does it remove buffs from enemy minions it can remove debuffs on friendly: humility, hunter's mark, corruption, power overwhelming, etc... You can not silence a silence. You can buff minions that have been silenced. Silence does not negate the "minion-type" of the card (ie. murloc, beast, pirate, etc.)
+
+#3 Due to the way buffs effecting health work, that is, adding 0/+1 increases both maximum and current health by 1 and subtracting 0/-1 only decreases maximum health by 1. Damage amounts equal to or less than the buff amount essentially are not applied if you then remove the buff. 
+Examples:
+A) Silencing a (toughness) buffed minion that has taken damge, but not below its base health will not carry damage over to its unbuffed health. For instance, say I have a 4/4 that has blessing of kings on it and it becomes an 8/8. Say that 8/8 takes 2 damage, becomes 8/6, then I silence it. It will go back to being a 4/4 with no damage on it.
+B) Your opponent has a stormwind champion(6/6 +1/+1 to your other minions) and a bloodfin raptor (3/2) now buffed to a (4/3). You are playing a mage and have 6 mana. You anticipate killing the stormwind champion with a fireball and ping the raptor with your champion ability for 1 bringing it to 4/2 assuming you'll be able to remove it with your ability next turn. But you fireball the stormwind champion and the raptor becomes a 3/2. (Obviously you should fireball then ping, just trying to create an example.)
+
+#4 AoE and random target spells hit stealthed minions and Faerie dragons.
+
+#5 Battlecry affects can target faerie dragons.
+
+#6 Raging Worgen can attack a second time the first turn he enrages.
+
+#7 If an enraged minion is healed to full they lose their enraged abilities. 
+
+#8 Use straight removal spells(cards that outright remove a minion, rather than deal damage) to bypass things like divine shield and Acolyte of Pain's card draw.
+
+#9 Returning a minion to its owner's hand isn't entirely accurate, it actually returns it to it's controller's hand. You can return tokens to controller's hands. Returning a minion to your hand under shadow madness (priest spell lets you take control of an enemy minion one turn) will return it to your hand, effectively keeping it away from your opponent.
+
+#10 Hexed 0/1 Frogs cost 0 mana to play if returned to hand.
+
+#11 Due to the "choose one" mechanic Keeper of the Grove 's silence and 2 damage abilities count as a spell so it will trigger things like Spellbender or Questing Adventurer or could even be counterspelled by counterspell. 
+
+#12 Every time you "draw a card" while in fatigue raises fatigue by one. If you can force your opponent to draw cards while in fatigue you can use this to your advantage. 
+
+#13 The Auchenai Soulpriest turns all healing into damage, regardless of source (hero power, minions, or spells).
+The Soulpriest turns Voodoo Doctor and Earthen Ring Shaman into *devastating* nukers.
+
+#14 You can use Blessing of Wisdom on an opponent's minion and it'll draw for you. Good for when you are in a bind or maybe can't remove a minion you'd like an opponent to trade with. 
+
+#15 While a minion is controlled by Shadow Madness, you gain the benefit of any special abilities on the card.
+Examples:Harvest Golem's deathrattle will summon a damaged golem for you.
+Loot Hoarder's deathrattle gives you a card.
+Alpha Wolves, Raid Leaders, and Flametongue Totems buff your minions.
+Pint Sized Summoner lets you summon a creature cheaply.
+Northshire Cleric lets you heal and get a card.
+Blessing of Wisdom is still considered your opponents card though so you do not get the card draw. 
+
+#16 Shadow Madness ignores summoning sickness. Mind Control and Cabal Shadow Priest controlled cards do have summoning sickness. However, they are able to attack the turn you take control if they have charge. 
+
+#17 Resurrecting a minion (With Redemption or Ancestral Spirit) will not restore it's battlecry effects or external buffs but all other effects will be. A Steath minion will go back into stealth, A Divine Shield minion will get it's shield back and a charge minion will be able to attack once more during that turn, Injured Blademaster comes back as a 4/7(with ancestral spirit). Exceptionally powerful combo with Argent Commander since he has both charge and divine shield. 
+
+#18 May be an old one, but all new players may not know yet. The coin counts as a spell. It can be countered, comboed, levels Questing Adventurer, etc. 
+
+#19 Snakes count as beasts, use the snake trap secret in combination with the starving buzzard to draw 3 cards.
+
+#20 Humility nor Aldor Peacekeeper bring a light elemental's power to 1(It stays equal to it's health).
+
+#21 You can use Dark Iron Dwarf to boost the power of an enemy minion (unlike the Shattered Sun Cleric) to put it into range of Shadow Word: Death if you need a 4 power minion removed. Great way to get rid of Ysera if you don't have a MC.
+
+#22 Spells that summon a minion, such as the hunter's Animal Companion, do not trigger secret's such as the mage's Mirror Entity, hunter's Snipe or paladin's Repentance. 
+
+#23 When you have minions in your deck that buff adjacent minions its generally a good rule of thumb to put new minions to the left, instead of your usual instinct to the right. The reason is: your totems, spirit wolves, squires, tokens spawn automatically to the right, they die more often, and you need to have a balanced board to put Flametongue totems, dire wolves, doa's,etc in the middle of.
+
+#24 The druid card Wild Growth will give you a free card to draw a card when played at 10 mana crystals. 
+
+#25 Casting Betrayal on a Cobra destroys both adjacent minions.
+
+#26 As a mage using a Leper Gnome you can ping it with your hero ability to kill it and deal the two damage to your opponent. It may help you squeeze in that last couple of damage, can be done the same turn you summon it or you can attack with it and then ping it during other turns. 
+
+#27 Noble Sacrifice tricks - Sword of Justice will buff the defender to 3/2, leaving the board empty to the right of a dire wolf will make the defender spawn as a 3/1, having a raid leader on the board will make the defender spawn as a 3/1, Stormwind Champion will make it enter play as a 3/2, a knife jugglar on your board will throw a knife, etc. 
+
+#28 Mind gaming your opponent: Try not to mouse over / select things when you don't need to ie if you mouse a spell over a minion and decide on a different play your opponent knows you have some form of buff/removal in your hand, make plays in your head. Bringing minions health down to an aoe threshhold may trick them into thinking you have said aoe spell in your hand. Having only 1 copy of a card in your deck may trick your opponent into playing around the other. - submitted by tOb4ccO
+
+#29 Crazed Alchemist tricks - It will kill a minion with 0 attack. If you crazed alchemist a damaged minion and then silence it, it will return to the cards original stats. Temporary stat boosts like the abusive sergeant's +2 attack will swap over permanently. Global stat boosts such as the stormwind champion's +1/+1 will be reapplied after the swap, ie a 4/5 yeti buffed to 5/6 will swap to 6/5 and then get the +1/+1 buff from stormwind champion again, making it a 7/6. 
+
+#30 If you use the Priest card: Mindgames and you happen to copy a Twilight Drake, it will show up as a 4/1.
+
+#31 Alexstrasza can also be used to heal you back up to 15 health.
+
+#32 If a priest uses 'shadow madness' to gain control of a minion for a turn and then uses faceless manipulator to duplicate it, at the end of the turn you get both minions back (if they survive).
+
+#33 Equality removes Enrage. Pretty useful in many situations. The logic behind it is that the creature's max health is changed to 1, so it's no longer enraged - it's at max health.
+
+#34 If you summon Faceless Manipulator vs a mage, he won't get the pre-battlecry 3/3; he'll get the post-battlecry creature that it turned into.
+
+#35 Molten giant does not take into consideration all damage you have taken, it is actually cost = 20 - x, x being equal to your total health minus your current health. Example if you are at 15 health 30 - 15 = 15. 20 - 15 = it will cost 5 to play; however if you play earthen ring farseer and heal yourself for 3 the molten giant will cost 8 again. If you play Jaraxxus and have a molten giant, the molten giant wont cost only 5 (since jaraxxus initial health is 15), it will cost 20, cause it considers the damage taken by the hero, and jaraxxus is at full health at 15 life... So it is impossible to play a molten giant for less then 6 mana after playing Jaraxxus.
+
+#36 Don't forget! You should always attack with minions before you plan on returning them to your hand (brewmaster ie) or before you play a wipe like deathwing.
+
+#37 Shaman's totem hero ability summons a random totem you do not already have on the board. If your opponent silences one of your totems other than seering you can not get another one unless you can manage to kill it, like give it rockbiter to attack. 
+
+#38 Humility or Aldor Peacekeeper + Stampeding Kodo is pretty good yo.
+
+#39 If you use Shadow Madness to gain control of a Wild Pyromancer it's ability will still trigger from the Shadow Madness. I would assume this works with Mind Control too, though I have not tested it.
+
+#40 If you cast a spell with a wild pyromancer on the board and remove an opponent's sylvanas and she steals your pyromancer, the pyromancer's effect will not trigger.
+
+#41 +Spell Damage also gives extra damage to Shadowflame (warlock) and Blade Flurry (rogue).
+
+#42 When a spellbender secret is activated, the minion will be affected by spells that otherwise will be unable to target it or have different result. for example:
+It will die to an execute or buffed by rampage, even though it's at full health.
+It will get buffed by a demon fire that was casted on a demon, even though it is not a demon.
+
+#43 You cannot play Lord Jaraxxus when your board is full of minions already, as he's technically a minion with battlecry. Lord Jaraxxus can be killed by sacrificial pact.
+
+#44 If you silence something that was hit with Equality it goes back to max health.
+
+#45 Freezing rules: Freeze causes you to lose your next attack. If you have a minion attack a water elemental, even though it may kill it, it will not be able to attack next turn, if you attack a water elemental, you will not be able to attack next turn. Water elemental must deal damage to freeze so will not freeze if hitting a divine shield. However, spells such as blizzard and frostbolt which specifically state freeze or damage and freeze will still freeze.
+
+#46 Druid of the claw and ancient of war work differently,
+
+When you return the druid of the claw to your hand, the card is fixed to the form you chose. if you went with bear form, and you used the panda to return the card back, it will be a bear form card.
+
+With ancients, the form is reset. if you play the ancient of war, and you choose the uprooted form, and return it to your hand with the panda, the form is reset, so you get to choose the form again.
+
+#47 If your opponent plays a Millhouse Manastorm; then when it's your turn and you play Lord Jaraxxus, since you become a new character, the Millhouse Manastorm effect will lose it's validity. I just learned this the hard way in a game when I had lethal with Hellfire.
+
+#48 Don't equality/wild pyromancer against a stormwind champion on the board to remove multiple minions. All other minions will be reduced to 1 health and then buffed back to 2 health allowing them to live. 
+
+#49 You can not go over 10 mana. If you would like to play a combination of cards costing more than 10 mana using Innervate you must spend mana before using innervate otherwise it does nothing.
+
+#50 Minions can have multiple death rattles.
+
+#51 You must cast a minion for its battlecry to occur. For example, Almaro-o-bot will not cause a minions battlecry to activate when swapped.
+
+#52 If you play commanding shout on a minion with 1 health and attack a minion, their won't be any triggers for "damage dealt" like water elemental's frost or emperor cobra's poison or frothing berserker's +1Attack and so on. (I assume this works any time the minion would have otherwise died.)
+
+#53 You can use the priest's hero power twice in the same turn mana permitting with shadowform. Heal two damage, cast the spell and then deal two damage. Same thing applies with the second shadowform, you can deal two damage, shadowform deal three damage.

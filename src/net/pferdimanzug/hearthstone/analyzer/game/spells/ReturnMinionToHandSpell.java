@@ -29,9 +29,7 @@ public class ReturnMinionToHandSpell extends Spell {
 		logger.debug("{} is returned to {}'s hand", minion, owner.getName());
 		context.getLogic().removeMinion(minion);
 		Card sourceCard = minion.getSourceCard();
-		context.getPendingCards().add(sourceCard);
 		context.getLogic().receiveCard(minion.getOwner(), sourceCard);
-		context.getPendingCards().remove(sourceCard);
 		if (manaCostModifier != 0) {
 			sourceCard.setTag(GameTag.MANA_COST_MODIFIER, manaCostModifier);
 		}

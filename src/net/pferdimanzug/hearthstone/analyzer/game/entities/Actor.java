@@ -129,6 +129,7 @@ public abstract class Actor extends Entity {
 	}
 
 	public void setBaseHp(int value) {
+		setTag(GameTag.BASE_HP, value);
 		setMaxHp(value);
 		setHp(value);
 	}

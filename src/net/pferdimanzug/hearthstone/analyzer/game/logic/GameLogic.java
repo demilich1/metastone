@@ -5,11 +5,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import net.pferdimanzug.hearthstone.analyzer.game.Environment;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
-import net.pferdimanzug.hearthstone.analyzer.game.PhysicalAttackTargetAcquisition;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.TargetAcquisition;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
@@ -107,7 +106,7 @@ public class GameLogic implements Cloneable {
 		}
 		spell.cast(context, player, targetLogic.resolveTargetKey(context, player, source, spell.getTarget()));
 	}
-	
+
 	public boolean canSummonMoreMinions(Player player) {
 		return player.getMinions().size() < MAX_MINIONS;
 	}
@@ -291,8 +290,15 @@ public class GameLogic implements Cloneable {
 
 	public void fight(Player player, Actor attacker, Actor defender) {
 		logger.debug("{} attacks {}", attacker, defender);
-		TargetAcquisition targetAcquisition = new PhysicalAttackTargetAcquisition(defender, attacker);
-		Actor target = acquireTarget(targetAcquisition);
+
+		context.fireGameEvent(new TargetAcquisitionEvent(context, ActionType.PHYSICAL_ATTACK, defender),
+				TriggerLayer.SECRET);
+		Actor target = defender;
+		if (context.getEnvironment().containsKey(Environment.TARGET_OVERRIDE)) {
+			target = (Actor) context.getEnvironment().get(Environment.TARGET_OVERRIDE);
+		}
+		context.getEnvironment().remove(Environment.TARGET_OVERRIDE);
+
 		if (target != defender) {
 			logger.debug("Target of attack was changed! New Target: {}", target);
 		}
@@ -528,6 +534,7 @@ public class GameLogic implements Cloneable {
 		final HashSet<GameTag> immuneToSilence = new HashSet<GameTag>();
 		immuneToSilence.add(GameTag.HP);
 		immuneToSilence.add(GameTag.MAX_HP);
+		immuneToSilence.add(GameTag.BASE_HP);
 		immuneToSilence.add(GameTag.BASE_ATTACK);
 		immuneToSilence.add(GameTag.SUMMONING_SICKNESS);
 		immuneToSilence.add(GameTag.AURA_ATTACK_BONUS);
@@ -566,13 +573,18 @@ public class GameLogic implements Cloneable {
 	public void summon(int playerId, Minion minion, Card source, Actor nextTo) {
 		Player player = context.getPlayer(playerId);
 		minion.setId(idFactory.generateId());
+		context.getEnvironment().put(Environment.SUMMONED_MINION, minion);
 		logger.debug("{} summons {}", player.getName(), minion);
 
-		context.getPendingEntities().add(minion);
 		minion.setOwner(player.getId());
 
-		if (minion.getBattlecry() != null && !minion.getBattlecry().isResolvedLate()) {
-			resolveBattlecry(player.getId(), minion);
+		try {
+			if (minion.getBattlecry() != null && !minion.getBattlecry().isResolvedLate()) {
+				resolveBattlecry(player.getId(), minion);
+			}
+		} catch (Exception e) {
+			logger.error("Error while trying to resolve battlecry for {}", minion.getName());
+			throw e;
 		}
 
 		int index = player.getMinions().indexOf(nextTo);
@@ -581,8 +593,6 @@ public class GameLogic implements Cloneable {
 		} else {
 			player.getMinions().add(index, minion);
 		}
-
-		context.getPendingEntities().remove(minion);
 
 		refreshAttacksPerRound(minion);
 		minion.setTag(GameTag.SUMMONING_SICKNESS);
@@ -609,6 +619,8 @@ public class GameLogic implements Cloneable {
 		if (minion.getBattlecry() != null && minion.getBattlecry().isResolvedLate()) {
 			resolveBattlecry(player.getId(), minion);
 		}
+
+		context.getEnvironment().remove(Environment.SUMMONED_MINION);
 	}
 
 	private void resolveBattlecry(int playerId, Minion minion) {
@@ -653,13 +665,6 @@ public class GameLogic implements Cloneable {
 	public void secretTriggered(Player player, Secret secret) {
 		logger.debug("Secret was trigged: {}", secret.getSource());
 		player.getSecrets().remove((Integer) secret.getSource().getTypeId());
-	}
-
-	public Actor acquireTarget(TargetAcquisition targetAcquisition) {
-		TargetAcquisitionEvent targetAcquisitionEvent = new TargetAcquisitionEvent(context, targetAcquisition);
-		context.fireGameEvent(targetAcquisitionEvent, TriggerLayer.SECRET);
-		context.fireGameEvent(targetAcquisitionEvent);
-		return targetAcquisition.getTarget();
 	}
 
 }

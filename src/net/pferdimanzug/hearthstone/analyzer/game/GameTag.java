@@ -8,6 +8,7 @@ public enum GameTag {
 	HP_BONUS,
 	AURA_ATTACK_BONUS,
 	AURA_HP_BONUS,
+	BASE_HP,
 	BASE_ATTACK,
 	RACE,
 	FATIGUE,

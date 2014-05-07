@@ -1,6 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.actions.EndTurnAction;
@@ -22,41 +23,23 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.rits.cloning.Cloner;
-
 public class GameContext implements Cloneable {
 	public static final int PLAYER_1 = 0;
 	public static final int PLAYER_2 = 1;
 	
-	//DEBUG
-	public static int CLONING_TIME = 0;
-
 	private static final Logger logger = LoggerFactory.getLogger(GameContext.class);
-	private static final Cloner cloner = new Cloner();
 
 	private final Player[] players = new Player[2];
 	private final GameLogic logic;
 	private final TargetLogic targetLogic = new TargetLogic();
 	private TriggerManager triggerManager = new TriggerManager();
-	// this list is most of the time empty. Whenever a minion is summoned,
-	// it is placed in this list for brief amount of time
-	// reason is Battlecry effects may target not yet summoned
-	// minions and because of the lazy references to entities
-	// we cannot find the to-be-summoned minion if its Battlecry
-	// tries to target itself
-	private final List<Actor> pendingEntities = new ArrayList<Actor>();
-	private final CardCollection pendingCards = new CardCollection();
+	private final HashMap<Environment, Object> environment = new HashMap<>();
 
 	private Player activePlayer;
 	private Player winner;
 	private GameResult result;
 
 	private int turn;
-
-	static {
-		cloner.dontClone(EntityReference.class);
-		cloner.dontClone(CardReference.class);
-	}
 
 	public GameContext(Player player1, Player player2, GameLogic logic) {
 		this.getPlayers()[PLAYER_1] = player1;
@@ -69,7 +52,6 @@ public class GameContext implements Cloneable {
 
 	@Override
 	public GameContext clone() {
-		long start = System.currentTimeMillis();
 		GameLogic logicClone = getLogic().clone();
 		Player player1Clone = getPlayer1().clone();
 		Player player2Clone = getPlayer2().clone();
@@ -78,15 +60,9 @@ public class GameContext implements Cloneable {
 		clone.activePlayer = activePlayer == getPlayer1() ? player1Clone : player2Clone;
 		clone.turn = turn;
 		clone.result = result;
-		CLONING_TIME += (int)(System.currentTimeMillis() - start);
-		return clone;
-	}
-
-	public GameContext cloneThirdParty() {
-		long start = System.currentTimeMillis();
-		GameContext clone = cloner.deepClone(this);
-		clone.getLogic().setContext(clone);
-		CLONING_TIME += (int)(System.currentTimeMillis() - start);
+		for (Environment key : getEnvironment().keySet()) {
+			clone.getEnvironment().put(key, getEnvironment().get(key));
+		}
 		return clone;
 	}
 
@@ -110,14 +86,6 @@ public class GameContext implements Cloneable {
 
 	public Player getOpponent(Player player) {
 		return player.getId() == PLAYER_1 ? getPlayer2() : getPlayer1();
-	}
-
-	public CardCollection getPendingCards() {
-		return pendingCards;
-	}
-
-	public List<Actor> getPendingEntities() {
-		return pendingEntities;
 	}
 
 	public Player getPlayer(int index) {
@@ -211,7 +179,7 @@ public class GameContext implements Cloneable {
 		case HAND:
 			return findCardinCollection(player.getHand(), cardReference.getCardId());
 		case PENDING:
-			return findCardinCollection(pendingCards, cardReference.getCardId());
+			return (Card)getEnvironment().get(Environment.PENDING_CARD);
 		case HERO_POWER:
 			return player.getHero().getHeroPower();
 		default:
@@ -298,5 +266,9 @@ public class GameContext implements Cloneable {
 	
 	public Player getActivePlayer() {
 		return activePlayer;
+	}
+
+	public HashMap<Environment, Object> getEnvironment() {
+		return environment;
 	}
 }

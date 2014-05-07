@@ -1,15 +1,18 @@
 package net.pferdimanzug.hearthstone.analyzer.game.events;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.TargetAcquisition;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 
 public class TargetAcquisitionEvent extends GameEvent {
 
-	private final TargetAcquisition targetAcquisition;
+	private final Actor target;
+	private final ActionType actionType;
 
-	public TargetAcquisitionEvent(GameContext context, TargetAcquisition targetAcquisition) {
+	public TargetAcquisitionEvent(GameContext context, ActionType actionType,  Actor target) {
 		super(context);
-		this.targetAcquisition = targetAcquisition;
+		this.actionType = actionType;
+		this.target = target;
 	}
 
 	@Override
@@ -17,8 +20,12 @@ public class TargetAcquisitionEvent extends GameEvent {
 		return GameEventType.TARGET_ACQUISITION;
 	}
 
-	public TargetAcquisition getTargetAcquisition() {
-		return targetAcquisition;
+	public Actor getTarget() {
+		return target;
+	}
+
+	public ActionType getActionType() {
+		return actionType;
 	}
 
 }

@@ -3,6 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.logic;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.pferdimanzug.hearthstone.analyzer.game.Environment;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
@@ -47,13 +48,13 @@ public class TargetLogic {
 
 	private Actor findEntity(GameContext context, EntityReference targetKey) {
 		int targetId = targetKey.getId();
-		for (Actor entity : context.getPendingEntities()) {
-			if (entity.getId() == targetId) {
-				return entity;
+		if (context.getEnvironment().containsKey(Environment.SUMMONED_MINION)) {
+			Minion summonedMinion = (Minion) context.getEnvironment().get(Environment.SUMMONED_MINION);
+			if (summonedMinion.getId() == targetId) {
+				return summonedMinion;
 			}
 		}
 		for (Player player : context.getPlayers()) {
-
 			if (player.getHero().getId() == targetId) {
 				return player.getHero();
 			} else if (player.getHero().getWeapon() != null && player.getHero().getWeapon().getId() == targetId) {
