@@ -163,8 +163,12 @@ public class TargetLogic {
 			return targets;
 		} else if (targetKey == EntityReference.ADJACENT_MINIONS) {
 			return context.getAdjacentMinions(player, source.getReference());
+		} else if (targetKey == EntityReference.SUMMONED_MINION) {
+			return singleTargetAsList((Actor) context.getEnvironment().get(Environment.SUMMONED_MINION));
 		} else if (targetKey == EntityReference.KILLED_MINION) {
 			return singleTargetAsList((Actor) context.getEnvironment().get(Environment.KILLED_MINION));
+		} else if (targetKey == EntityReference.ATTACKER) {
+			return singleTargetAsList((Actor) context.getEnvironment().get(Environment.ATTACKER));
 		} else if (targetKey == EntityReference.NONE) {
 			return null;
 		}

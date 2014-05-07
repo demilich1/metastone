@@ -20,6 +20,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.IceBarrier
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.MirrorEntity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Vaporize;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.AcolyteOfPain;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.DarkIronDwarf;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.IronforgeRifleman;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.RazorfenHunter;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.RiverCrocolisk;
@@ -35,6 +36,7 @@ import net.pferdimanzug.hearthstone.analyzer.playmode.GameContextVisualizable;
 public class HearthstoneAnalyzer extends Application {
 
 	public static void main(String[] args) {
+		//new HearthstoneAnalyzer().printCardsForDatabase();
 		launch(args);
 		//new HearthstoneAnalyzer().launchDebugGame();
 	}
@@ -43,7 +45,8 @@ public class HearthstoneAnalyzer extends Application {
 		HeroClass humanHeroClass = HeroClass.HUNTER;
 		HeroClass aiHeroClass = HeroClass.PALADIN;
 		Hero hero1 = HeroFactory.createHero(humanHeroClass);
-		Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
+		//Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
+		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new DarkIronDwarf()));
 		player1.setBehaviour(new HumanBehaviour());
 		
 		Hero hero2 = HeroFactory.createHero(aiHeroClass);

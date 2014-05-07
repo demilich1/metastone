@@ -50,7 +50,7 @@ public class BuffSpell extends Spell {
 			debuff.setTarget(target.getReference());
 			SpellTrigger removeTrigger = new SpellTrigger(new TurnEndTrigger(), debuff, true);
 			removeTrigger.setHost(target);
-			removeTrigger.setOwner(target.getOwner());
+			removeTrigger.setOwner(player.getId());
 			context.addTrigger(removeTrigger);
 		}
 	}

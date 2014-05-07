@@ -6,7 +6,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.CopyMinionSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.secrets.MinionSummonedTrigger;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.secrets.TargetMinionSecret;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class MirrorEntity extends SecretCard {
 
@@ -15,7 +15,8 @@ public class MirrorEntity extends SecretCard {
 		setDescription("Secret: When your opponent plays a minion, summon a copy of it.");
 		
 		Spell copySpell = new CopyMinionSpell();
-		setSecret(new TargetMinionSecret(new MinionSummonedTrigger(), copySpell, this));
+		copySpell.setTarget(EntityReference.SUMMONED_MINION);
+		setTriggerAndEffect(new MinionSummonedTrigger(), copySpell);
 	}
 
 }

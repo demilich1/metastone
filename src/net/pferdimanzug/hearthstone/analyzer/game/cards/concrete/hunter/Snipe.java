@@ -6,7 +6,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.secrets.MinionSummonedTrigger;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.secrets.TargetMinionSecret;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class Snipe extends SecretCard {
 
@@ -15,7 +15,8 @@ public class Snipe extends SecretCard {
 		setDescription("Secret: When your opponent plays a minion, deal $4 damage to it.");
 		
 		Spell damageSpell = new DamageSpell(4);
-		setSecret(new TargetMinionSecret(new MinionSummonedTrigger(), damageSpell, this));
+		damageSpell.setTarget(EntityReference.SUMMONED_MINION);
+		setTriggerAndEffect(new MinionSummonedTrigger(), damageSpell);
 	}
 
 }

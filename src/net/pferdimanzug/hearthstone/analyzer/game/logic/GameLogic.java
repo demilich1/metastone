@@ -295,6 +295,7 @@ public class GameLogic implements Cloneable {
 	public void fight(Player player, Actor attacker, Actor defender) {
 		logger.debug("{} attacks {}", attacker, defender);
 
+		context.getEnvironment().put(Environment.ATTACKER, attacker);
 		context.fireGameEvent(new TargetAcquisitionEvent(context, ActionType.PHYSICAL_ATTACK, defender),
 				TriggerLayer.SECRET);
 		Actor target = defender;
@@ -330,6 +331,7 @@ public class GameLogic implements Cloneable {
 
 		attacker.modifyTag(GameTag.NUMBER_OF_ATTACKS, -1);
 		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, target, damaged ? attackerDamage : 0));
+		context.getEnvironment().remove(Environment.ATTACKER);
 	}
 
 	public GameResult getMatchResult(Player player, Player opponent) {

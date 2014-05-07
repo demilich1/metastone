@@ -6,18 +6,17 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroySpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.secrets.HeroAttackedTrigger;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.secrets.Secret;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.secrets.TargetAttackerSecret;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class Vaporize extends SecretCard {
 
 	public Vaporize() {
 		super("Vaporize", Rarity.RARE, HeroClass.MAGE, 3);
 		setDescription("Secret: When a minion attacks your hero, destroy it.");
-		
+
 		Spell destroySpell = new DestroySpell();
-		Secret secret = new TargetAttackerSecret(new HeroAttackedTrigger(), destroySpell, this);
-		setSecret(secret);
+		destroySpell.setTarget(EntityReference.ATTACKER);
+		setTriggerAndEffect(new HeroAttackedTrigger(), destroySpell);
 	}
 
 }
