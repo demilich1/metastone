@@ -4,7 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SecretCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffHeroSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.secrets.HeroAttackedTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.HeroAttackedTrigger;
 
 public class IceBarrier extends SecretCard {
 

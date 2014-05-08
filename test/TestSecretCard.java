@@ -3,7 +3,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.SecretCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.secrets.HeroAttackedTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.HeroAttackedTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 

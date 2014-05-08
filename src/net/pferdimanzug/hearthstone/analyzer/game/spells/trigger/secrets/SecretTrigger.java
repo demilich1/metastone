@@ -3,9 +3,16 @@ package net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.secrets;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
+import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.GameEventTrigger;
 
-public abstract class SecretTrigger extends GameEventTrigger {
+public class SecretTrigger extends GameEventTrigger {
+
+	private final GameEventTrigger trigger;
+
+	public SecretTrigger(GameEventTrigger trigger) {
+		this.trigger = trigger;
+	}
 
 	public boolean fire(GameEvent event, Actor host) {
 		GameContext context = event.getGameContext();
@@ -14,9 +21,18 @@ public abstract class SecretTrigger extends GameEventTrigger {
 			return false;
 		}
 
-		return secretTriggered(event, host);
+		return trigger.fire(event, host);
 	}
 
-	protected abstract boolean secretTriggered(GameEvent event, Actor host);
+	@Override
+	public GameEventType interestedIn() {
+		return trigger.interestedIn();
+	}
+
+	@Override
+	public void setOwner(int playerIndex) {
+		super.setOwner(playerIndex);
+		trigger.setOwner(playerIndex);
+	}
 
 }

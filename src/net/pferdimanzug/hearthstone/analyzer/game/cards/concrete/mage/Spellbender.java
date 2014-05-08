@@ -1,4 +1,4 @@
-package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin;
+package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage;
 
 import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
@@ -10,20 +10,20 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonNewAttackTargetSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SummonNewTargetTrigger;
 
-public class NobleSacrifice extends SecretCard {
+public class Spellbender extends SecretCard {
 
-	public NobleSacrifice() {
-		super("Noble Sacrifice", Rarity.COMMON, HeroClass.PALADIN, 1);
-		setDescription("Secret: When an enemy attacks, summon a 2/1 Defender as the new target.");
-		
-		Spell decoySpell = new SummonNewAttackTargetSpell(new Defender());
-		setTriggerAndEffect(new SummonNewTargetTrigger(ActionType.PHYSICAL_ATTACK), decoySpell);
+	public Spellbender() {
+		super("Spellbender", Rarity.EPIC, HeroClass.MAGE, 3);
+		setDescription("Secret: When an enemy casts a spell on a minion, summon a 1/3 as the new target.");
+
+		Spell spellbenderSpell = new SummonNewAttackTargetSpell(new SpellbenderMinion());
+		setTriggerAndEffect(new SummonNewTargetTrigger(ActionType.SPELL), spellbenderSpell);
 	}
-	
-	private class Defender extends MinionCard {
 
-		public Defender() {
-			super("Defender", 2, 1, Rarity.COMMON, HeroClass.PALADIN, 1);
+	private class SpellbenderMinion extends MinionCard {
+
+		public SpellbenderMinion() {
+			super("Spellbender", 1, 3, Rarity.EPIC, HeroClass.MAGE, 0);
 			setCollectible(false);
 		}
 
@@ -31,8 +31,7 @@ public class NobleSacrifice extends SecretCard {
 		public Minion summon() {
 			return createMinion();
 		}
-		
+
 	}
-	
 
 }

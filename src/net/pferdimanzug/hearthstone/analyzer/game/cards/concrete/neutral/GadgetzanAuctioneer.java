@@ -5,6 +5,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DrawCardSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.TargetPlayer;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellCastedTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 
@@ -18,7 +19,7 @@ public class GadgetzanAuctioneer extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion gadgetzanAuctioneer = createMinion();
-		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(), new DrawCardSpell());
+		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(TargetPlayer.SELF), new DrawCardSpell());
 		gadgetzanAuctioneer.setSpellTrigger(trigger);
 		return gadgetzanAuctioneer;
 	}
