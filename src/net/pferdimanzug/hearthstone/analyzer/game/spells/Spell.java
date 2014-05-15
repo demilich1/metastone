@@ -13,14 +13,6 @@ public abstract class Spell {
 	protected boolean applySpellpower;
 	private EntityReference source;
 
-	public Spell() {
-		this(null);
-	}
-	
-	public Spell(EntityReference target) {
-		this.setTarget(target);
-	}
-
 	public void cast(GameContext context, Player player, List<Actor> targets) {
 		if (targets == null) {
 			onCast(context, player, null);

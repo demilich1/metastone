@@ -111,17 +111,24 @@ public class GameLogic implements Cloneable {
 
 		List<Actor> targets = targetLogic.resolveTargetKey(context, player, source, spell.getTarget());
 		// target can only be changed when there is one target
-		// note: this code block is basically exclusivly for the SpellBender Secret,
-		// but it can easily be expanced if targets of area of effect spell should
-		// be changable as well
-		if (sourceCard != null && targets.size() == 1) {
-			context.fireGameEvent(new TargetAcquisitionEvent(context, ActionType.SPELL, targets.get(0)), TriggerLayer.SECRET);
+		// note: this code block is basically exclusively for the SpellBender
+		// Secret, but it can easily be expanded if targets of area of effect spell
+		// should be changeable as well
+		if (sourceCard != null && targets != null && sourceCard.getTargetRequirement() != TargetSelection.NONE
+				&& targets.size() == 1) {
+			context.fireGameEvent(new TargetAcquisitionEvent(context, ActionType.SPELL, targets.get(0)),
+					TriggerLayer.SECRET);
 			if (context.getEnvironment().containsKey(Environment.TARGET_OVERRIDE)) {
 				targets.remove(0);
-				targets.add((Actor) context.getEnvironment().get(Environment.TARGET_OVERRIDE));	
+				targets.add((Actor) context.getEnvironment().get(Environment.TARGET_OVERRIDE));
+				spell.setTarget(targets.get(0).getReference());
+				logger.info("Target for spell has been changed! New target {}", targets.get(0));
 			}
 		}
 		spell.cast(context, player, targets);
+		if (sourceCard != null) {
+			context.getEnvironment().remove(Environment.TARGET_OVERRIDE);
+		}
 	}
 
 	public boolean canSummonMoreMinions(Player player) {

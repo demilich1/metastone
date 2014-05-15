@@ -8,7 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
 import net.pferdimanzug.hearthstone.analyzer.game.events.TargetAcquisitionEvent;
 
 public class SummonNewTargetTrigger extends GameEventTrigger {
-	
+
 	private final ActionType actionType;
 
 	public SummonNewTargetTrigger(ActionType actionType) {
@@ -30,10 +30,6 @@ public class SummonNewTargetTrigger extends GameEventTrigger {
 			return false;
 		}
 		TargetAcquisitionEvent targetAcquisitionEvent = (TargetAcquisitionEvent) event;
-		if (targetAcquisitionEvent.getActionType() == actionType) {
-			return true;
-		}
-		return false;
+		return targetAcquisitionEvent.getActionType() == actionType;
 	}
-
 }

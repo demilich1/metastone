@@ -64,7 +64,7 @@ public abstract class SpellCard extends Card {
 					spell.setTarget(getTargetKey());
 				}
 
-				context.getLogic().castSpell(playerId, spell);
+				context.getLogic().castSpell(playerId, spell, SpellCard.this);
 			}
 		};
 	}
