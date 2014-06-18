@@ -531,6 +531,8 @@ public class GameLogic implements Cloneable {
 			context.fireGameEvent(spellCastedEvent, TriggerLayer.SECRET);
 			if (!card.hasTag(GameTag.COUNTERED)) {
 				context.fireGameEvent(spellCastedEvent);
+			} else {
+				logger.debug("{} was countered!", card.getName());
 			}
 		}
 	}

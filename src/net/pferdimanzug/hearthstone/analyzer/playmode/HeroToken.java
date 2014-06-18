@@ -38,6 +38,9 @@ public class HeroToken extends GameToken {
 
 	@FXML
 	private ImageView heroPowerIcon;
+	
+	@FXML
+	private Pane secretsAnchor;
 
 	public HeroToken() {
 		super("HeroToken.fxml");
@@ -54,6 +57,7 @@ public class HeroToken extends GameToken {
 		manaLabel.setText("Mana: " + player.getMana() + "/" + player.getMaxMana());
 		updateArmor(hero.getArmor());
 		updateWeapon(hero.getWeapon());
+		updateSecrets(player);
 	}
 	
 	private void updateArmor(int armor) {
@@ -71,6 +75,15 @@ public class HeroToken extends GameToken {
 			weaponAttackLabel.setText(String.valueOf(weapon.getWeaponDamage()));
 			weaponDurabilityLabel.setText(String.valueOf(weapon.getDurability()));
 		}
+	}
+	
+	private void updateSecrets(Player player) {
+		secretsAnchor.getChildren().clear();
+		for (int i = 0; i < player.getSecrets().size(); i++) {
+			ImageView secretIcon = new ImageView(IconFactory.getImageUrl("common/secret.png"));
+			secretsAnchor.getChildren().add(secretIcon);
+		}
+		
 	}
 
 }

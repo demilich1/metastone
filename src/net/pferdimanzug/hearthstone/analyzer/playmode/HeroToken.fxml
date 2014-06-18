@@ -41,6 +41,7 @@
           </image>
         </ImageView>
         <Text id="outlined_score" fx:id="armorLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-8.0" translateY="8.0" StackPane.alignment="CENTER_RIGHT" />
+        <FlowPane fx:id="secretsAnchor" prefHeight="-1.0" prefWidth="64.0" StackPane.alignment="TOP_CENTER" />
       </children>
       <padding>
         <Insets left="8.0" />

@@ -144,6 +144,10 @@ public class IconFactory {
 		iconPath += ".png";
 		return iconPath;
 	}
+	
+	public static String getImageUrl(String imageName) {
+		return RESOURCE_PATH + "/img/" + imageName;
+	}
 
 	public static Image getSummonHelper() {
 		String iconPath = RESOURCE_PATH + "/img/common/arrow_down_blue.png";
