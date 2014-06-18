@@ -521,11 +521,7 @@ public class GameLogic implements Cloneable {
 		player.getHand().remove(card);
 		player.getGraveyard().add(card);
 		player.getHero().modifyTag(GameTag.COMBO, +1);
-		if (card.hasTag(GameTag.OVERLOAD)) {
-			player.getHero().modifyTag(GameTag.OVERLOAD, card.getTagValue(GameTag.OVERLOAD));
-			context.fireGameEvent(new OverloadEvent(context, playerId));
-		}
-
+		
 		if (card.getCardType() == CardType.SPELL) {
 			GameEvent spellCastedEvent = new SpellCastedEvent(context, playerId, card);
 			context.fireGameEvent(spellCastedEvent, TriggerLayer.SECRET);
@@ -533,7 +529,13 @@ public class GameLogic implements Cloneable {
 				context.fireGameEvent(spellCastedEvent);
 			} else {
 				logger.debug("{} was countered!", card.getName());
+				return;
 			}
+		}
+		
+		if (card.hasTag(GameTag.OVERLOAD)) {
+			player.getHero().modifyTag(GameTag.OVERLOAD, card.getTagValue(GameTag.OVERLOAD));
+			context.fireGameEvent(new OverloadEvent(context, playerId));
 		}
 	}
 
