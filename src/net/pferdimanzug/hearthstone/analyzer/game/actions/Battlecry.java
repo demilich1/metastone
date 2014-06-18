@@ -1,7 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.actions;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
@@ -26,7 +26,7 @@ public class Battlecry extends GameAction {
 	}
 
 	@Override
-	public boolean canBeExecutedOn(Actor entity) {
+	public boolean canBeExecutedOn(Entity entity) {
 		if (!super.canBeExecutedOn(entity)) {
 			return false;
 		}

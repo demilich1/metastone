@@ -9,6 +9,10 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class TestSecretCard extends SecretCard {
 
+	public TestSecretCard() {
+		this(1);
+	}
+	
 	public TestSecretCard(int damage) {
 		super("Trap", Rarity.FREE, HeroClass.ANY, 0);
 		setDescription("Secret for unit testing. Deals $" + damage + " damage to all enemies");
@@ -17,10 +21,6 @@ public class TestSecretCard extends SecretCard {
 		Spell damageSpell = new DamageSpell(damage);
 		damageSpell.setTarget(EntityReference.ENEMY_CHARACTERS);
 		setTriggerAndEffect(new HeroAttackedTrigger(), damageSpell);
-	}
-	
-	public TestSecretCard() {
-		this(1);
 	}
 
 }

@@ -10,13 +10,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
 public class DruidOfTheClaw extends ChooseOneCard {
 
-	public DruidOfTheClaw() {
-		super("Druid of the Claw", CardType.MINION, Rarity.COMMON, HeroClass.DRUID, 5);
-		setDescription("Choose One - Charge; or +2 Health and Taunt.");
-		setCard1(new BearForm());
-		setCard2(new CatForm());
-	}
-	
 	private class BearForm extends MinionCard {
 
 		public BearForm() {
@@ -41,6 +34,13 @@ public class DruidOfTheClaw extends ChooseOneCard {
 			return createMinion(GameTag.CHARGE);
 		}
 		
+	}
+	
+	public DruidOfTheClaw() {
+		super("Druid of the Claw", CardType.MINION, Rarity.COMMON, HeroClass.DRUID, 5);
+		setDescription("Choose One - Charge; or +2 Health and Taunt.");
+		setCard1(new BearForm());
+		setCard2(new CatForm());
 	}
 
 }

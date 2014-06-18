@@ -17,19 +17,19 @@ public class PhysicalAttackAction extends GameAction {
 
 	@Override
 	public void execute(GameContext context, int playerId) {
-		Actor defender = context.resolveSingleTarget(playerId, getTargetKey()); 
-		Actor attacker = context.resolveSingleTarget(playerId, attackerReference);
+		Actor defender = (Actor) context.resolveSingleTarget(playerId, getTargetKey()); 
+		Actor attacker = (Actor) context.resolveSingleTarget(playerId, attackerReference);
 		
 		context.getLogic().fight(context.getPlayer(playerId), attacker, defender);
 	}
 	
+	public EntityReference getAttackerReference() {
+		return attackerReference;
+	}
+
 	@Override
 	public String toString() {
 		return String.format("%s Attacker: %s Defender: %s", getActionType(), attackerReference, getTargetKey());
-	}
-
-	public EntityReference getAttackerReference() {
-		return attackerReference;
 	}
 
 

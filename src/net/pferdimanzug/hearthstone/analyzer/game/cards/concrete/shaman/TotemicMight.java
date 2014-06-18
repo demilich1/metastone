@@ -4,7 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
@@ -21,7 +21,7 @@ public class TotemicMight extends SpellCard {
 		}
 
 		@Override
-		protected void onCast(GameContext context, Player player, Actor actor) {
+		protected void onCast(GameContext context, Player player, Entity actor) {
 			Minion minion = (Minion) actor;
 			if (minion.getRace() != Race.TOTEM) {
 				return;

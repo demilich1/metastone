@@ -13,11 +13,11 @@ public class HumanTargetOptions {
 		
 	}
 
-	public HumanBehaviour getBehaviour() {
-		return behaviour;
-	}
-
 	public GameAction getAction() {
 		return action;
+	}
+
+	public HumanBehaviour getBehaviour() {
+		return behaviour;
 	}
 }

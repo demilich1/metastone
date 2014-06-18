@@ -2,7 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin;
 
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.WeaponCard;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
@@ -21,7 +21,7 @@ public class TruesilverChampion extends WeaponCard {
 	private class TruesilverChampionWeaponTrigger extends GameEventTrigger {
 		
 		@Override
-		public boolean fire(GameEvent event, Actor host) {
+		public boolean fire(GameEvent event, Entity host) {
 			PhysicalAttackEvent physicalAttackEvent = (PhysicalAttackEvent) event;
 			if (physicalAttackEvent.getAttacker().getEntityType() != EntityType.HERO) {
 				return false;

@@ -18,28 +18,6 @@ import org.testng.annotations.Test;
 public class SecretTest extends TestBase {
 	
 	@Test
-	public void testPlayOnlyOnce() {
-		GameContext context = createContext(new Jaina(), new Garrosh());
-		Player mage = context.getPlayer1();
-		mage.setMana(10);
-		Player warrior = context.getPlayer2();
-		warrior.setMana(10);
-
-		SecretCard secretCard = new TestSecretCard();
-		context.getLogic().receiveCard(mage.getId(), secretCard);
-		Assert.assertTrue(context.getLogic().canPlaySecret(mage, secretCard));
-		context.getLogic().performGameAction(mage.getId(), secretCard.play());
-		
-		SecretCard secretCard2 = new TestSecretCard();
-		context.getLogic().receiveCard(mage.getId(), secretCard2);
-		Assert.assertFalse(context.getLogic().canPlaySecret(mage, secretCard2));
-		
-		SecretCard otherSecret = new SecretCard("AnotherSecret", Rarity.COMMON, HeroClass.ANY, 0);
-		context.getLogic().receiveCard(mage.getId(), otherSecret);
-		Assert.assertTrue(context.getLogic().canPlaySecret(mage, otherSecret));
-	}
-	
-	@Test
 	public void testKillingStopsAttack() {
 		GameContext context = createContext(new Jaina(), new Garrosh());
 		Player mage = context.getPlayer1();
@@ -93,6 +71,28 @@ public class SecretTest extends TestBase {
 			attack(context, warrior, minion, mage.getHero());
 		}
 		
+	}
+	
+	@Test
+	public void testPlayOnlyOnce() {
+		GameContext context = createContext(new Jaina(), new Garrosh());
+		Player mage = context.getPlayer1();
+		mage.setMana(10);
+		Player warrior = context.getPlayer2();
+		warrior.setMana(10);
+
+		SecretCard secretCard = new TestSecretCard();
+		context.getLogic().receiveCard(mage.getId(), secretCard);
+		Assert.assertTrue(context.getLogic().canPlaySecret(mage, secretCard));
+		context.getLogic().performGameAction(mage.getId(), secretCard.play());
+		
+		SecretCard secretCard2 = new TestSecretCard();
+		context.getLogic().receiveCard(mage.getId(), secretCard2);
+		Assert.assertFalse(context.getLogic().canPlaySecret(mage, secretCard2));
+		
+		SecretCard otherSecret = new SecretCard("AnotherSecret", Rarity.COMMON, HeroClass.ANY, 0);
+		context.getLogic().receiveCard(mage.getId(), otherSecret);
+		Assert.assertTrue(context.getLogic().canPlaySecret(mage, otherSecret));
 	}
 
 

@@ -3,7 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.spells;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +23,7 @@ public class DiscardCardSpell extends Spell {
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, Actor target) {
+	protected void onCast(GameContext context, Player player, Entity target) {
 		for (int i = 0; i < numberOfCards; i++) {
 			Card randomHandCard = player.getHand().getRandom();
 			if (randomHandCard == null) {

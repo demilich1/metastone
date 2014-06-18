@@ -4,6 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnEndTrigger;
 
@@ -18,13 +19,13 @@ public class BuffSpell extends Spell {
 	private int hpBonus;
 	private boolean temporary;
 
+	public BuffSpell(int attackBonus) {
+		this(attackBonus, 0);
+	}
+
 	public BuffSpell(int attackBonus, int hpBonus) {
 		this.attackBonus = attackBonus;
 		this.hpBonus = hpBonus;
-	}
-
-	public BuffSpell(int attackBonus) {
-		this(attackBonus, 0);
 	}
 
 	public int getAttackBonus() {
@@ -35,14 +36,21 @@ public class BuffSpell extends Spell {
 		return hpBonus;
 	}
 
+	public boolean isTemporary() {
+		return temporary;
+	}
+
 	@Override
-	protected void onCast(GameContext context, Player player, Actor target) {
+	protected void onCast(GameContext context, Player player, Entity target) {
 		logger.debug("{} gains ({})", target, attackBonus + "/" + hpBonus);
+		
+		Actor targetActor = (Actor) target;
+		
 		if (attackBonus != 0) {
-			target.modifyTag(GameTag.ATTACK_BONUS, +attackBonus);
+			targetActor.modifyTag(GameTag.ATTACK_BONUS, +attackBonus);
 		}
 		if (hpBonus != 0) {
-			target.modifyHpBonus(+hpBonus);
+			targetActor.modifyHpBonus(+hpBonus);
 		}
 
 		if (isTemporary()) {
@@ -61,10 +69,6 @@ public class BuffSpell extends Spell {
 
 	public void setHpBonus(int hpBonus) {
 		this.hpBonus = hpBonus;
-	}
-
-	public boolean isTemporary() {
-		return temporary;
 	}
 
 	public void setTemporary(boolean temporary) {

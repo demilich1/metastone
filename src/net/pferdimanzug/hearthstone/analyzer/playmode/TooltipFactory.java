@@ -7,8 +7,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 
 public class TooltipFactory {
 	
-	private TooltipFactory() {}
-	
 	public static PopupWindow createCardTooltip(Card card, Player player) {
 		Popup popup = new Popup();
 		CardTooltip content = new CardTooltip();
@@ -18,5 +16,7 @@ public class TooltipFactory {
 		popup.getContent().add(content);
 		return popup;
 	}
+	
+	private TooltipFactory() {}
 
 }

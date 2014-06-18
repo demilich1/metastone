@@ -19,25 +19,25 @@ public class Weapon extends Actor {
 		return (Weapon) super.clone();
 	}
 	
+	public int getDurability() {
+		return getTagValue(GameTag.DURABILITY);
+	}
+	
 	@Override
 	public EntityType getEntityType() {
 		return EntityType.WEAPON;
 	}
 	
+	public Race getRace() {
+		return (Race) getTag(GameTag.RACE);
+	}
+	
 	public int getWeaponDamage() {
 		return getTagValue(GameTag.WEAPON_DAMAGE);
 	}
-	
+
 	public boolean isBroken() {
 		return !hasTag(GameTag.DURABILITY) || getTagValue(GameTag.DURABILITY) < 1;
-	}
-	
-	public int getDurability() {
-		return getTagValue(GameTag.DURABILITY);
-	}
-
-	public Race getRace() {
-		return (Race) getTag(GameTag.RACE);
 	}
 
 	public void setRace(Race race) {

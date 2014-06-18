@@ -8,6 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 
 public class DamageRandomSpell extends DamageSpell {
@@ -20,7 +21,7 @@ public class DamageRandomSpell extends DamageSpell {
 	}
 
 	@Override
-	public void cast(GameContext context, Player player, List<Actor> targets) {
+	public void cast(GameContext context, Player player, List<Entity> targets) {
 		int missiles = iterations;
 		if (applySpellpower) {
 			missiles += context.getLogic().getTotalTagValue(player, GameTag.SPELL_POWER);
@@ -32,9 +33,10 @@ public class DamageRandomSpell extends DamageSpell {
 		}
 	}
 
-	private List<Actor> getValidTargets(List<Actor> targets) {
+	private List<Actor> getValidTargets(List<Entity> targets) {
 		List<Actor> validTargets = new ArrayList<Actor>();
-		for (Actor actor : targets) {
+		for (Entity entity : targets) {
+			Actor actor = (Actor) entity;
 			if (!actor.isDead() || actor.getEntityType() == EntityType.HERO) {
 				validTargets.add(actor);
 			}
@@ -44,7 +46,7 @@ public class DamageRandomSpell extends DamageSpell {
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, Actor target) {
+	protected void onCast(GameContext context, Player player, Entity target) {
 	}
 
 }

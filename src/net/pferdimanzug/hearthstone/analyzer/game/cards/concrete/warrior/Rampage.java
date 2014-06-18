@@ -3,6 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
@@ -17,8 +18,9 @@ public class Rampage extends SpellCard {
 	}
 
 	@Override
-	public boolean canBeCastOn(Actor target) {
-		return target.isWounded();
+	public boolean canBeCastOn(Entity target) {
+		Actor targetActor = (Actor) target;
+		return targetActor.isWounded();
 	}
 	
 	

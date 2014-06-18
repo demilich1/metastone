@@ -1,7 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.secrets;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.GameEventTrigger;
@@ -14,7 +14,7 @@ public class SecretTrigger extends GameEventTrigger {
 		this.trigger = trigger;
 	}
 
-	public boolean fire(GameEvent event, Actor host) {
+	public boolean fire(GameEvent event, Entity host) {
 		GameContext context = event.getGameContext();
 		// Secrets can only be triggered on opponents turn
 		if (context.getActivePlayer() == context.getPlayer(getOwner())) {

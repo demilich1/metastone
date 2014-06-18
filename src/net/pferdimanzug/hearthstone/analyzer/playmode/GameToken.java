@@ -90,15 +90,10 @@ public class GameToken extends BorderPane {
 		target.getChildren().add(targetButton);
 	}
 	
-	public void showTargetMarker(EventHandler<ActionEvent> clickedHander) {
-		targetButton.setOnAction(clickedHander);
-		targetButton.setVisible(true);
-	}
-
 	public void hideTargetMarker() {
 		targetButton.setVisible(false);
 	}
-	
+
 	protected void setScoreValue(Text label, int value) {
 		setScoreValue(label, value, value);
 	}
@@ -114,6 +109,11 @@ public class GameToken extends BorderPane {
 		else {
 			label.setFill(Color.WHITE);
 		}
+	}
+	
+	public void showTargetMarker(EventHandler<ActionEvent> clickedHander) {
+		targetButton.setOnAction(clickedHander);
+		targetButton.setVisible(true);
 	}
 
 }

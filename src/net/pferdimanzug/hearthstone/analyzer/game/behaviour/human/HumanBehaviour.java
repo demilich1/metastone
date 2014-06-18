@@ -8,17 +8,20 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public class HumanBehaviour implements IBehaviour {
 
 	private GameAction selectedAction;
 	private boolean waitingForInput;
-	private Actor selectedTarget;
+	private Entity selectedTarget;
+
+	public Entity getSelectedTarget() {
+		return this.selectedTarget;
+	}
 
 	@Override
-	public Actor provideTargetFor(Player player, GameAction action) {
+	public Entity provideTargetFor(Player player, GameAction action) {
 		if (action.getValidTargets() == null || action.getValidTargets().isEmpty()) {
 			return null;
 		}
@@ -55,14 +58,10 @@ public class HumanBehaviour implements IBehaviour {
 		this.selectedAction = selectedAction;
 		waitingForInput = false;
 	}
-
-	public void setSelectedTarget(Actor selectedTarget) {
+	
+	public void setSelectedTarget(Entity selectedTarget) {
 		this.selectedTarget = selectedTarget;
 		waitingForInput = false;
-	}
-	
-	public Entity getSelectedTarget() {
-		return this.selectedTarget;
 	}
 
 }

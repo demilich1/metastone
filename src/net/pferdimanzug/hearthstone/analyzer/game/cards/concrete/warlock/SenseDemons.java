@@ -8,7 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
@@ -17,17 +17,20 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class SenseDemons extends SpellCard {
 
-	public SenseDemons() {
-		super("Sense Demons", Rarity.COMMON, HeroClass.WARLOCK, 3);
-		setDescription("Put 2 random Demons from your deck into your hand.");
-		setSpell(new SenseDemonsSpell());
-		setTargetRequirement(TargetSelection.NONE);
-	}
-	
 	private class SenseDemonsSpell extends Spell {
 
+		private CardCollection findDemonCards(CardCollection deck) {
+			CardCollection demonCards = new CardCollection();
+			for (Card card : deck) {
+				if (card.getTag(GameTag.RACE) == Race.DEMON) {
+					demonCards.add(card);
+				}
+			}
+			return demonCards;
+		}
+		
 		@Override
-		protected void onCast(GameContext context, Player player, Actor target) {
+		protected void onCast(GameContext context, Player player, Entity target) {
 			CardCollection demonCards = findDemonCards(player.getDeck());
 			for (int i = 0; i < 2; i++) {
 				Card demonCard = null;
@@ -41,16 +44,6 @@ public class SenseDemons extends SpellCard {
 				}
 				context.getLogic().receiveCard(player.getId(), demonCard);
 			}
-		}
-		
-		private CardCollection findDemonCards(CardCollection deck) {
-			CardCollection demonCards = new CardCollection();
-			for (Card card : deck) {
-				if (card.getTag(GameTag.RACE) == Race.DEMON) {
-					demonCards.add(card);
-				}
-			}
-			return demonCards;
 		}
 	}
 	
@@ -67,6 +60,13 @@ public class SenseDemons extends SpellCard {
 			return createMinion();
 		}
 		
+	}
+	
+	public SenseDemons() {
+		super("Sense Demons", Rarity.COMMON, HeroClass.WARLOCK, 3);
+		setDescription("Put 2 random Demons from your deck into your hand.");
+		setSpell(new SenseDemonsSpell());
+		setTargetRequirement(TargetSelection.NONE);
 	}
 
 }

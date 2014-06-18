@@ -1,14 +1,17 @@
 package net.pferdimanzug.hearthstone.analyzer.game.events;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 
 public class SpellCastedEvent extends GameEvent {
 
 	private final int playerId;
+	private final Card sourceCard;
 
-	public SpellCastedEvent(GameContext context, int playerId) {
+	public SpellCastedEvent(GameContext context, int playerId, Card sourceCard) {
 		super(context);
 		this.playerId = playerId;
+		this.sourceCard = sourceCard;
 	}
 
 	@Override
@@ -18,6 +21,10 @@ public class SpellCastedEvent extends GameEvent {
 
 	public int getPlayerId() {
 		return playerId;
+	}
+
+	public Card getSourceCard() {
+		return sourceCard;
 	}
 
 }

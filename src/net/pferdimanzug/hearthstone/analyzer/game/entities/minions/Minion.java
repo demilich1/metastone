@@ -21,16 +21,6 @@ public class Minion extends Actor {
 	}
 
 	@Override
-	public EntityType getEntityType() {
-		return EntityType.MINION;
-	}
-
-	protected void setBaseStats(int baseAttack, int baseHp) {
-		setBaseAttack(baseAttack);
-		setBaseHp(baseHp);
-	}
-
-	@Override
 	public int getAttack() {
 		if (hasTag(GameTag.ATTACK_EQUALS_HP)) {
 			return getHp();
@@ -38,20 +28,30 @@ public class Minion extends Actor {
 		return super.getAttack();
 	}
 
+	@Override
+	public EntityType getEntityType() {
+		return EntityType.MINION;
+	}
+
 	public Race getRace() {
 		return (Race) getTag(GameTag.RACE);
 	}
 
-	public void setRace(Race race) {
-		setTag(GameTag.RACE, race);
+	protected void setBaseStats(int baseAttack, int baseHp) {
+		setBaseAttack(baseAttack);
+		setBaseHp(baseHp);
+	}
+
+	public void setBattlecry(Battlecry battlecry) {
+		setTag(GameTag.BATTLECRY, battlecry);
 	}
 
 	public void setDeathrattle(Spell deathrattleSpell) {
 		setTag(GameTag.DEATHRATTLE, deathrattleSpell);
 	}
 
-	public void setBattlecry(Battlecry battlecry) {
-		setTag(GameTag.BATTLECRY, battlecry);
+	public void setRace(Race race) {
+		setTag(GameTag.RACE, race);
 	}
 
 }

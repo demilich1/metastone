@@ -6,6 +6,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 
 public abstract class Card extends Entity {
@@ -37,6 +38,10 @@ public abstract class Card extends Entity {
 		return null;
 	}
 	
+	public int getBaseManaCost() {
+		return manaCost;
+	}
+
 	public CardType getCardType() {
 		return cardType;
 	}
@@ -49,8 +54,9 @@ public abstract class Card extends Entity {
 		return description;
 	}
 	
-	public int getBaseManaCost() {
-		return manaCost;
+	@Override
+	public EntityType getEntityType() {
+		return EntityType.CARD;
 	}
 
 	public int getManaCost(Player player) {

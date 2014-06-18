@@ -27,6 +27,14 @@ public abstract class MinionCard extends Card {
 		return minion;
 	}
 	
+	public int getBaseAttack() {
+		return getTagValue(GameTag.BASE_ATTACK);
+	}
+
+	public int getBaseHp() {
+		return getTagValue(GameTag.BASE_HP);
+	}
+
 	@Override
 	public PlayCardAction play() {
 		return new PlayCardAction(this) {
@@ -37,7 +45,7 @@ public abstract class MinionCard extends Card {
 
 			@Override
 			protected void play(GameContext context, int playerId) {
-				Actor nextTo = getTargetKey() != null ? context.resolveSingleTarget(playerId, getTargetKey()) : null;
+				Actor nextTo = (Actor) (getTargetKey() != null ? context.resolveSingleTarget(playerId, getTargetKey()) : null);
 				context.getLogic().summon(playerId, summon(), MinionCard.this, nextTo);
 			}
 		};
@@ -45,13 +53,5 @@ public abstract class MinionCard extends Card {
 	}
 
 	public abstract Minion summon();
-
-	public int getBaseAttack() {
-		return getTagValue(GameTag.BASE_ATTACK);
-	}
-
-	public int getBaseHp() {
-		return getTagValue(GameTag.BASE_HP);
-	}
 
 }

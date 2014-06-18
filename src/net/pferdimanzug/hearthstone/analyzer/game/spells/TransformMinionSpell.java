@@ -3,7 +3,8 @@ package net.pferdimanzug.hearthstone.analyzer.game.spells;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +20,7 @@ public class TransformMinionSpell extends Spell {
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, Actor target) {
+	protected void onCast(GameContext context, Player player, Entity target) {
 		/*
 		Player opponent = context.getOpponent(player);
 		int index = player.getMinions().indexOf(target);
@@ -30,9 +31,10 @@ public class TransformMinionSpell extends Spell {
 		minions.add(index, newMinion.summon());
 		*/
 		
-		logger.debug("{} is transformed into a {}", target, newMinion);
-		context.getLogic().removeMinion(target);
-		context.getLogic().summon(target.getOwner(), newMinion.summon(), null, null);
+		Minion minion = (Minion) target;
+		logger.debug("{} is transformed into a {}", minion, newMinion);
+		context.getLogic().removeMinion(minion);
+		context.getLogic().summon(minion.getOwner(), newMinion.summon(), null, null);
 
 	}
 

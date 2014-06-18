@@ -35,38 +35,6 @@ public class TurnLogPanel extends JPanel {
 		// add(contentPanel);
 	}
 	
-	public void nextAction(GameContextVisualizable context) {
-		if (context.getCurrentAction() == null) {
-			return;
-		}
-		this.actionEntry = getActionEntry(context);
-	}
-
-	public void showEvents(GameContextVisualizable context) {
-		if (context.getCurrentAction() == null) {
-			return;
-		}
-		contentPanel.removeAll();
-		
-		for (GameEvent gameEvent : context.getEventsForAction(context.getCurrentAction())) {
-			System.out.println("Found event!");
-			GameLogEntry eventEntry = getEventEntry(gameEvent);
-			if (eventEntry == null) {
-				continue;
-			}
-			messages.add(eventEntry);
-		}
-		messages.add(actionEntry);
-		for (int i = messages.size() - 1; i >= 0; i--) {
-			JPanel message = messages.get(i);
-			contentPanel.add(message);
-		}
-		//contentPanel.add(Box.createVerticalGlue());
-
-		contentPanel.revalidate();
-		contentPanel.repaint();
-	}
-
 	private GameLogEntry getActionEntry(GameContextVisualizable context) {
 		Player player = context.getActivePlayer();
 		GameAction action = context.getCurrentAction();
@@ -118,6 +86,38 @@ public class TurnLogPanel extends JPanel {
 		}
 		return null;
 		*/
+	}
+
+	public void nextAction(GameContextVisualizable context) {
+		if (context.getCurrentAction() == null) {
+			return;
+		}
+		this.actionEntry = getActionEntry(context);
+	}
+
+	public void showEvents(GameContextVisualizable context) {
+		if (context.getCurrentAction() == null) {
+			return;
+		}
+		contentPanel.removeAll();
+		
+		for (GameEvent gameEvent : context.getEventsForAction(context.getCurrentAction())) {
+			System.out.println("Found event!");
+			GameLogEntry eventEntry = getEventEntry(gameEvent);
+			if (eventEntry == null) {
+				continue;
+			}
+			messages.add(eventEntry);
+		}
+		messages.add(actionEntry);
+		for (int i = messages.size() - 1; i >= 0; i--) {
+			JPanel message = messages.get(i);
+			contentPanel.add(message);
+		}
+		//contentPanel.add(Box.createVerticalGlue());
+
+		contentPanel.revalidate();
+		contentPanel.repaint();
 	}
 
 }

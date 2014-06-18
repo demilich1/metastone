@@ -24,9 +24,6 @@ public class IconFactory {
 
 	private static final String RESOURCE_PATH = "/net/pferdimanzug/hearthstone/analyzer/resources";
 	
-	private IconFactory() {
-	}
-
 	public static JComponent createHandCard(Card card, Player player) {
 		JPanel cardPanel = new JPanel(new BorderLayout());
 		cardPanel.setPreferredSize(new Dimension(100, 110));
@@ -147,14 +144,17 @@ public class IconFactory {
 		iconPath += ".png";
 		return iconPath;
 	}
+
+	public static Image getSummonHelper() {
+		String iconPath = RESOURCE_PATH + "/img/common/arrow_down_blue.png";
+		return new Image(iconPath);
+	}
 	
 	public static Image getTargetIcon() {
 		String iconPath = RESOURCE_PATH + "/img/common/target.png";
 		return new Image(iconPath);
 	}
 	
-	public static Image getSummonHelper() {
-		String iconPath = RESOURCE_PATH + "/img/common/arrow_down_blue.png";
-		return new Image(iconPath);
+	private IconFactory() {
 	}
 }

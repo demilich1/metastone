@@ -16,22 +16,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class ImpMaster extends MinionCard {
 
-	public ImpMaster() {
-		super("Imp Master", 1, 5, Rarity.RARE, HeroClass.ANY, 3);
-		setDescription("At the end of your turn, deal 1 damage to this minion and summon a 1/1 Imp.");
-	}
-
-	@Override
-	public Minion summon() {
-		Minion impMaster = createMinion();
-		Spell damageSelfSpell = new DamageSpell(1);
-		Spell summonSpell = new SummonSpell(new Imp());
-		summonSpell.setTarget(EntityReference.NONE);
-		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), new MetaSpell(damageSelfSpell, summonSpell));
-		impMaster.setSpellTrigger(trigger);
-		return impMaster;
-	}
-	
 	private class Imp extends MinionCard {
 
 		public Imp() {
@@ -44,6 +28,22 @@ public class ImpMaster extends MinionCard {
 			return createMinion();
 		}
 		
+	}
+
+	public ImpMaster() {
+		super("Imp Master", 1, 5, Rarity.RARE, HeroClass.ANY, 3);
+		setDescription("At the end of your turn, deal 1 damage to this minion and summon a 1/1 Imp.");
+	}
+	
+	@Override
+	public Minion summon() {
+		Minion impMaster = createMinion();
+		Spell damageSelfSpell = new DamageSpell(1);
+		Spell summonSpell = new SummonSpell(new Imp());
+		summonSpell.setTarget(EntityReference.NONE);
+		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), new MetaSpell(damageSelfSpell, summonSpell));
+		impMaster.setSpellTrigger(trigger);
+		return impMaster;
 	}
 
 }

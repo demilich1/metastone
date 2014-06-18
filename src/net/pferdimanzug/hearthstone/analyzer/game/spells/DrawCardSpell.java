@@ -2,7 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.spells;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class DrawCardSpell extends Spell {
@@ -24,12 +24,18 @@ public class DrawCardSpell extends Spell {
 		setTarget(EntityReference.NONE);
 	}
 
+	private void draw(GameContext context, Player player) {
+		for (int i = 0; i < numberOfCards; i++) {
+			context.getLogic().drawCard(player.getId());
+		}
+	}
+
 	public int getNumberOfCards() {
 		return numberOfCards;
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, Actor target) {
+	protected void onCast(GameContext context, Player player, Entity target) {
 		Player opponent = context.getOpponent(player);
 		switch (targetPlayer) {
 		case BOTH:
@@ -44,12 +50,6 @@ public class DrawCardSpell extends Spell {
 			break;
 		default:
 			break;
-		}
-	}
-
-	private void draw(GameContext context, Player player) {
-		for (int i = 0; i < numberOfCards; i++) {
-			context.getLogic().drawCard(player.getId());
 		}
 	}
 

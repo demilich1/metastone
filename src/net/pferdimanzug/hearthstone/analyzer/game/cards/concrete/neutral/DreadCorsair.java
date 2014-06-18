@@ -18,17 +18,17 @@ public class DreadCorsair extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion(GameTag.TAUNT);
-	}
-
-	@Override
 	public int getManaCost(Player player) {
 		Weapon weapon = player.getHero().getWeapon();
 		if (weapon == null) {
 			return super.getManaCost(player);
 		}
 		return Math.max(0, super.getManaCost(player) - weapon.getAttack());
+	}
+
+	@Override
+	public Minion summon() {
+		return createMinion(GameTag.TAUNT);
 	}
 
 }

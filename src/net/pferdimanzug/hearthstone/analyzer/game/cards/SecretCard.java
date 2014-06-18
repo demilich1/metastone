@@ -21,16 +21,16 @@ public class SecretCard extends SpellCard {
 		return context.getLogic().canPlaySecret(player, this);
 	}
 
-	public void setTriggerAndEffect(GameEventTrigger trigger, Spell effect) {
-		SecretTrigger secretTrigger = new SecretTrigger(trigger);
-		setSecret(new Secret(secretTrigger, effect, this));
-	}
-	
 	public void setSecret(Secret secret) {
 		Spell spell = new AddSecretSpell(secret);
 		spell.setTarget(EntityReference.FRIENDLY_HERO);
 		setTargetRequirement(TargetSelection.NONE);
 		setSpell(spell);
+	}
+	
+	public void setTriggerAndEffect(GameEventTrigger trigger, Spell effect) {
+		SecretTrigger secretTrigger = new SecretTrigger(trigger);
+		setSecret(new Secret(secretTrigger, effect, this));
 	}
 
 }

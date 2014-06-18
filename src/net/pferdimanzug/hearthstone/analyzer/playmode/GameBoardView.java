@@ -21,6 +21,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanTargetOptions;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 
@@ -101,6 +102,18 @@ public class GameBoardView extends BorderPane {
 		
 	}
 	
+	private void checkForWinner(GameContext context) {
+		if (context.gameDecided()) {
+			if (context.getWinner() == context.getPlayer1()) {
+				centerMessageLabel.setStyle("-fx-font-size: 72; -fx-text-fill: green;");
+				setCenterMessage("You won!!!");
+			} else {
+				centerMessageLabel.setStyle("-fx-font-size: 72; -fx-text-fill: red;");
+				setCenterMessage("You lost :(");
+			}
+		}
+	}
+	
 	private Button createSummonHelper() {
 		ImageView icon = new ImageView(IconFactory.getSummonHelper());
 		icon.setFitWidth(32);
@@ -111,19 +124,20 @@ public class GameBoardView extends BorderPane {
 		return helper;
 	}
 	
-	public void enableTargetSelection(final HumanTargetOptions targetOptions) {
-		GameAction action = targetOptions.getAction();
-		if (action.getActionType() == ActionType.SUMMON) {
-			enableSummonTargets(targetOptions);
-		} else {
-			enableSpellTargets(targetOptions);
+	private void disableTargetSelection() {
+		for (GameToken token : entityTokenMap.values()) {
+			token.hideTargetMarker();
 		}
-		setCenterMessage("Select target for " + action.getActionType());
+		for (Button summonHelper : summonHelperMap.values()) {
+			summonHelper.setVisible(false);
+			summonHelper.setManaged(false);
+		}
+		hideCenterMessage();
 	}
 	
 	private void enableSpellTargets(final HumanTargetOptions targetOptions) {
 		GameAction action = targetOptions.getAction();
-		for (final Actor target : action.getValidTargets()) {
+		for (final Entity target : action.getValidTargets()) {
 			GameToken token = entityTokenMap.get(target);
 			
 			EventHandler<ActionEvent> clickedHander = new EventHandler<ActionEvent>() {
@@ -141,7 +155,7 @@ public class GameBoardView extends BorderPane {
 	
 	private void enableSummonTargets(final HumanTargetOptions targetOptions) {
 		GameAction action = targetOptions.getAction();
-		for (final Actor target : action.getValidTargets()) {
+		for (final Entity target : action.getValidTargets()) {
 			GameToken token = entityTokenMap.get(target);
 			Button summonHelper = summonHelperMap.get(token);
 			summonHelper.setVisible(true);
@@ -158,26 +172,25 @@ public class GameBoardView extends BorderPane {
 		}
 	}
 	
-	private void disableTargetSelection() {
-		for (GameToken token : entityTokenMap.values()) {
-			token.hideTargetMarker();
+	public void enableTargetSelection(final HumanTargetOptions targetOptions) {
+		GameAction action = targetOptions.getAction();
+		if (action.getActionType() == ActionType.SUMMON) {
+			enableSummonTargets(targetOptions);
+		} else {
+			enableSpellTargets(targetOptions);
 		}
-		for (Button summonHelper : summonHelperMap.values()) {
-			summonHelper.setVisible(false);
-			summonHelper.setManaged(false);
-		}
-		hideCenterMessage();
-	}
-	
-	private void setCenterMessage(String message) {
-		centerMessageLabel.setText(message);
-		centerMessageLabel.setVisible(true);
+		setCenterMessage("Select target for " + action.getActionType());
 	}
 	
 	private void hideCenterMessage() {
 		centerMessageLabel.setVisible(false);
 	}
 
+	private void setCenterMessage(String message) {
+		centerMessageLabel.setText(message);
+		centerMessageLabel.setVisible(true);
+	}
+	
 	public void updateGameState(GameContextVisualizable context) {
 		entityTokenMap.clear();
 		p1Hero.setHero(context.getPlayer1());
@@ -192,18 +205,6 @@ public class GameBoardView extends BorderPane {
 		updateMinionTokens(context.getPlayer2(), p2Minions);
 		
 		checkForWinner(context);
-	}
-	
-	private void checkForWinner(GameContext context) {
-		if (context.gameDecided()) {
-			if (context.getWinner() == context.getPlayer1()) {
-				centerMessageLabel.setStyle("-fx-font-size: 72; -fx-text-fill: green;");
-				setCenterMessage("You won!!!");
-			} else {
-				centerMessageLabel.setStyle("-fx-font-size: 72; -fx-text-fill: red;");
-				setCenterMessage("You lost :(");
-			}
-		}
 	}
 	
 	private void updateHandCards(Player player, HandCard[] handCards) {

@@ -22,6 +22,12 @@ public class TargetLogic {
 
 	private static Logger logger = LoggerFactory.getLogger(TargetLogic.class);
 
+	private static List<Entity> singleTargetAsList(Entity target) {
+		ArrayList<Entity> list = new ArrayList<>(1);
+		list.add(target);
+		return list;
+	}
+
 	private boolean containsTaunters(List<Minion> minions) {
 		for (Entity entity : minions) {
 			if (entity.hasTag(GameTag.TAUNT)) {
@@ -31,9 +37,9 @@ public class TargetLogic {
 		return false;
 	}
 
-	private List<Actor> filterTargets(GameAction action, List<Actor> potentialTargets) {
-		List<Actor> validTargets = new ArrayList<>();
-		for (Actor entity : potentialTargets) {
+	private List<Entity> filterTargets(GameAction action, List<Entity> potentialTargets) {
+		List<Entity> validTargets = new ArrayList<>();
+		for (Entity entity : potentialTargets) {
 			if ((action.getActionType() == ActionType.SPELL || action.getActionType() == ActionType.HERO_POWER)
 					&& entity.hasTag(GameTag.UNTARGETABLE_BY_SPELLS)) {
 				continue;
@@ -72,9 +78,9 @@ public class TargetLogic {
 		throw new RuntimeException("Target not found exception");
 	}
 
-	private List<Actor> getEntities(GameContext context, Player player, TargetSelection targetRequirement) {
+	private List<Entity> getEntities(GameContext context, Player player, TargetSelection targetRequirement) {
 		Player opponent = context.getOpponent(player);
-		List<Actor> entities = new ArrayList<>();
+		List<Entity> entities = new ArrayList<>();
 		if (targetRequirement == TargetSelection.ENEMY_HERO || targetRequirement == TargetSelection.ENEMY_CHARACTERS
 				|| targetRequirement == TargetSelection.ANY) {
 			entities.add(opponent.getHero());
@@ -95,8 +101,8 @@ public class TargetLogic {
 		return entities;
 	}
 
-	private List<Actor> getTaunters(List<Minion> entities) {
-		List<Actor> taunters = new ArrayList<Actor>();
+	private List<Entity> getTaunters(List<Minion> entities) {
+		List<Entity> taunters = new ArrayList<>();
 		for (Actor entity : entities) {
 			if (entity.hasTag(GameTag.TAUNT)) {
 				taunters.add(entity);
@@ -112,7 +118,7 @@ public class TargetLogic {
 	// Battlecry effects as long as the ability does not specify friendly or
 	// opposing.
 	// http://www.blizzposts.com/topic/en/216948/the-consistency-of-rules
-	public List<Actor> getValidTargets(GameContext context, Player player, GameAction action) {
+	public List<Entity> getValidTargets(GameContext context, Player player, GameAction action) {
 		TargetSelection targetRequirement = action.getTargetRequirement();
 		ActionType actionType = action.getActionType();
 		Player opponent = context.getOpponent(player);
@@ -129,15 +135,15 @@ public class TargetLogic {
 			// (=null)
 			// in which case the minion will appear to the very right of your
 			// board
-			List<Actor> summonTargets = getEntities(context, player, action.getTargetRequirement());
+			List<Entity> summonTargets = getEntities(context, player, action.getTargetRequirement());
 			summonTargets.add(null);
 			return summonTargets;
 		}
-		List<Actor> potentialTargets = getEntities(context, player, action.getTargetRequirement());
+		List<Entity> potentialTargets = getEntities(context, player, action.getTargetRequirement());
 		return filterTargets(action, potentialTargets);
 	}
 
-	public List<Actor> resolveTargetKey(GameContext context, Player player, Actor source, EntityReference targetKey) {
+	public List<Entity> resolveTargetKey(GameContext context, Player player, Actor source, EntityReference targetKey) {
 		if (targetKey == null) {
 			return null;
 		}
@@ -158,28 +164,24 @@ public class TargetLogic {
 		} else if (targetKey == EntityReference.FRIENDLY_MINIONS) {
 			return getEntities(context, player, TargetSelection.FRIENDLY_MINIONS);
 		} else if (targetKey == EntityReference.OTHER_FRIENDLY_MINIONS) {
-			List<Actor> targets = getEntities(context, player, TargetSelection.FRIENDLY_MINIONS);
+			List<Entity> targets = getEntities(context, player, TargetSelection.FRIENDLY_MINIONS);
 			targets.remove(source);
 			return targets;
 		} else if (targetKey == EntityReference.ADJACENT_MINIONS) {
 			return context.getAdjacentMinions(player, source.getReference());
 		} else if (targetKey == EntityReference.SUMMONED_MINION) {
-			return singleTargetAsList((Actor) context.getEnvironment().get(Environment.SUMMONED_MINION));
+			return singleTargetAsList((Entity) context.getEnvironment().get(Environment.SUMMONED_MINION));
 		} else if (targetKey == EntityReference.KILLED_MINION) {
-			return singleTargetAsList((Actor) context.getEnvironment().get(Environment.KILLED_MINION));
+			return singleTargetAsList((Entity) context.getEnvironment().get(Environment.KILLED_MINION));
 		} else if (targetKey == EntityReference.ATTACKER) {
-			return singleTargetAsList((Actor) context.getEnvironment().get(Environment.ATTACKER));
+			return singleTargetAsList((Entity) context.getEnvironment().get(Environment.ATTACKER));
+		} else if (targetKey == EntityReference.PENDING_CARD) {
+			return singleTargetAsList((Entity) context.getEnvironment().get(Environment.PENDING_CARD));
 		} else if (targetKey == EntityReference.NONE) {
 			return null;
 		}
 
 		return singleTargetAsList(findEntity(context, targetKey));
-	}
-
-	private static List<Actor> singleTargetAsList(Actor target) {
-		ArrayList<Actor> list = new ArrayList<>(1);
-		list.add(target);
-		return list;
 	}
 
 }

@@ -8,12 +8,33 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.DebugDecks;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 
 
 public class TestBase {
+	
+	private static class NullBehaviour implements IBehaviour {
+
+		@Override
+		public Entity provideTargetFor(Player player, GameAction action) {
+			return null;
+		}
+
+		@Override
+		public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
+			return null;
+		}
+		
+	}
+	
+	protected static void attack(GameContext context, Player player, Entity attacker, Entity target) {
+		PhysicalAttackAction physicalAttackAction = new PhysicalAttackAction(attacker.getReference());
+		physicalAttackAction.setTarget(target);
+		context.getLogic().performGameAction(player.getId(), physicalAttackAction);
+	}
 	
 	protected static GameContext createContext(Hero hero1, Hero hero2) {
 		
@@ -42,26 +63,6 @@ public class TestBase {
 	protected static void playCard(GameContext context, Player player, Card card) {
 		context.getLogic().receiveCard(player.getId(), card);
 		context.getLogic().performGameAction(player.getId(), card.play());
-	}
-	
-	protected static void attack(GameContext context, Player player, Actor attacker, Actor target) {
-		PhysicalAttackAction physicalAttackAction = new PhysicalAttackAction(attacker.getReference());
-		physicalAttackAction.setTarget(target);
-		context.getLogic().performGameAction(player.getId(), physicalAttackAction);
-	}
-	
-	private static class NullBehaviour implements IBehaviour {
-
-		@Override
-		public Actor provideTargetFor(Player player, GameAction action) {
-			return null;
-		}
-
-		@Override
-		public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
-			return null;
-		}
-		
 	}
 
 }

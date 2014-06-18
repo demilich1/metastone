@@ -8,7 +8,7 @@ import javafx.scene.layout.Pane;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanActionOptions;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanTargetOptions;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import de.pferdimanzug.nittygrittymvc.Mediator;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
@@ -21,17 +21,6 @@ public class PlayModeMediator extends Mediator<GameNotification> {
 	public PlayModeMediator() {
 		super(NAME);
 		view = new PlayModePane();
-	}
-
-	@Override
-	public List<GameNotification> listNotificationInterests() {
-		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
-		notificationInterests.add(GameNotification.CANVAS_CREATED);
-		notificationInterests.add(GameNotification.GAME_STATE_UPDATE);
-		notificationInterests.add(GameNotification.GAME_ACTION_PERFORMED);
-		notificationInterests.add(GameNotification.HUMAN_PROMPT_FOR_ACTION);
-		notificationInterests.add(GameNotification.HUMAN_PROMPT_FOR_TARGET);
-		return notificationInterests;
 	}
 
 	@Override
@@ -70,8 +59,19 @@ public class PlayModeMediator extends Mediator<GameNotification> {
 		}
 	}
 
+	@Override
+	public List<GameNotification> listNotificationInterests() {
+		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
+		notificationInterests.add(GameNotification.CANVAS_CREATED);
+		notificationInterests.add(GameNotification.GAME_STATE_UPDATE);
+		notificationInterests.add(GameNotification.GAME_ACTION_PERFORMED);
+		notificationInterests.add(GameNotification.HUMAN_PROMPT_FOR_ACTION);
+		notificationInterests.add(GameNotification.HUMAN_PROMPT_FOR_TARGET);
+		return notificationInterests;
+	}
+
 	private void selectTarget(final HumanTargetOptions targetOptions) {
-		List<Actor> validTargets = targetOptions.getAction().getValidTargets();
+		List<Entity> validTargets = targetOptions.getAction().getValidTargets();
 		if (validTargets.size() == 1) {
 			targetOptions.getBehaviour().setSelectedTarget(validTargets.get(0));
 			return;

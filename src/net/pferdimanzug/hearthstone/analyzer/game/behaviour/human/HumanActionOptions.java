@@ -20,6 +20,10 @@ public class HumanActionOptions {
 		this.validActions = validActions;
 	}
 
+	public HumanBehaviour getBehaviour() {
+		return behaviour;
+	}
+
 	public GameContext getContext() {
 		return context;
 	}
@@ -30,10 +34,6 @@ public class HumanActionOptions {
 
 	public List<GameAction> getValidActions() {
 		return validActions;
-	}
-
-	public HumanBehaviour getBehaviour() {
-		return behaviour;
 	}
 
 }

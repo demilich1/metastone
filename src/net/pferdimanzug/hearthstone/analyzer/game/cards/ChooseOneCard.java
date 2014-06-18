@@ -14,20 +14,26 @@ public abstract class ChooseOneCard extends Card {
 		setTag(GameTag.CHOOSE_ONE);
 	}
 
-	public Card getCard1() {
-		return card1;
+	@Override
+	public Card clone() {
+		ChooseOneCard clone = (ChooseOneCard) super.clone();
+		clone.card1 = card1.clone();
+		clone.card2 = card2.clone();
+		return clone;
 	}
 
-	public void setCard1(Card card1) {
-		this.card1 = card1;
+	public Card getCard1() {
+		return card1;
 	}
 
 	public Card getCard2() {
 		return card2;
 	}
 
-	public void setCard2(Card card2) {
-		this.card2 = card2;
+	@Override
+	public PlayCardAction play() {
+		// this method should not be called for this type of card
+		return null;
 	}
 
 	public PlayCardAction playCard1() {
@@ -38,25 +44,19 @@ public abstract class ChooseOneCard extends Card {
 		return card2.play();
 	}
 
+	public void setCard1(Card card1) {
+		this.card1 = card1;
+	}
+
+	public void setCard2(Card card2) {
+		this.card2 = card2;
+	}
+	
 	@Override
 	public void setId(int id) {
 		super.setId(id);
 		card1.setId(id);
 		card2.setId(id);
-	}
-
-	@Override
-	public Card clone() {
-		ChooseOneCard clone = (ChooseOneCard) super.clone();
-		clone.card1 = card1.clone();
-		clone.card2 = card2.clone();
-		return clone;
-	}
-	
-	@Override
-	public PlayCardAction play() {
-		// this method should not be called for this type of card
-		return null;
 	}
 
 }

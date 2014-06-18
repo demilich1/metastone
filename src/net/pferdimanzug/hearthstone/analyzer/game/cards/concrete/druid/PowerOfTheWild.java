@@ -15,13 +15,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class PowerOfTheWild extends ChooseOneCard {
 
-	public PowerOfTheWild() {
-		super("Power of the Wild", CardType.SPELL, Rarity.COMMON, HeroClass.DRUID, 2);
-		setDescription("Choose One - Give your minions +1/+1; or Summon a 3/2 Panther.");
-		setCard1(new PowerOfTheWildBuff());
-		setCard2(new PowerOfTheWildPanther());
-	}
-	
 	private class PowerOfTheWildBuff extends SpellCard {
 
 		protected PowerOfTheWildBuff() {
@@ -44,6 +37,13 @@ public class PowerOfTheWild extends ChooseOneCard {
 			return createMinion();
 		}
 		
+	}
+	
+	public PowerOfTheWild() {
+		super("Power of the Wild", CardType.SPELL, Rarity.COMMON, HeroClass.DRUID, 2);
+		setDescription("Choose One - Give your minions +1/+1; or Summon a 3/2 Panther.");
+		setCard1(new PowerOfTheWildBuff());
+		setCard2(new PowerOfTheWildPanther());
 	}
 
 }

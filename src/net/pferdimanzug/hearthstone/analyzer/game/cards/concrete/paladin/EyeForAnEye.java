@@ -15,17 +15,15 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class EyeForAnEye extends SecretCard {
 
-	public EyeForAnEye() {
-		super("Eye for an Eye", Rarity.COMMON, HeroClass.PALADIN, 1);
-		setDescription("Secret: When your hero takes damage, deal that much damage to the enemy hero.");
-
-		setSecret(new EyeForAnEyeSecret(this));
-	}
-
 	private class EyeForAnEyeSecret extends Secret {
 
 		public EyeForAnEyeSecret(Card source) {
 			super(new SecretTrigger(new HeroDamagedTrigger()), new DamageSpell(0), source);
+		}
+
+		@Override
+		protected EntityReference getTargetForSpell(GameEvent event) {
+			return EntityReference.ENEMY_HERO;
 		}
 
 		@Override
@@ -36,11 +34,13 @@ public class EyeForAnEye extends SecretCard {
 			super.onFire(ownerId, spell, event);
 		}
 
-		@Override
-		protected EntityReference getTargetForSpell(GameEvent event) {
-			return EntityReference.ENEMY_HERO;
-		}
+	}
 
+	public EyeForAnEye() {
+		super("Eye for an Eye", Rarity.COMMON, HeroClass.PALADIN, 1);
+		setDescription("Secret: When your hero takes damage, deal that much damage to the enemy hero.");
+
+		setSecret(new EyeForAnEyeSecret(this));
 	}
 
 }

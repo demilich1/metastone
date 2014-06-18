@@ -1,13 +1,13 @@
 package net.pferdimanzug.hearthstone.analyzer.game.events;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public class KillEvent extends GameEvent {
 
-	private final Actor victim;
+	private final Entity victim;
 
-	public KillEvent(GameContext context, Actor victim) {
+	public KillEvent(GameContext context, Entity victim) {
 		super(context);
 		this.victim = victim;
 	}
@@ -17,7 +17,7 @@ public class KillEvent extends GameEvent {
 		return GameEventType.KILL;
 	}
 
-	public Actor getVictim() {
+	public Entity getVictim() {
 		return victim;
 	}
 

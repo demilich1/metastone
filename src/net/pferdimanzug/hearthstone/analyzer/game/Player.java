@@ -100,6 +100,10 @@ public class Player implements Cloneable {
 		return "'" + name + "' (" + hero.getName() + ")";
 	}
 
+	public List<Integer> getSecrets() {
+		return secrets;
+	}
+
 	public void setBehaviour(IBehaviour behaviour) {
 		this.behaviour = behaviour;
 	}
@@ -107,17 +111,13 @@ public class Player implements Cloneable {
 	public void setId(int id) {
 		this.id = id;
 	}
-
+	
 	public void setMana(int mana) {
 		this.mana = mana;
 	}
-	
+
 	public void setMaxMana(int maxMana) {
 		this.maxMana = maxMana;
-	}
-
-	public List<Integer> getSecrets() {
-		return secrets;
 	}
 
 }

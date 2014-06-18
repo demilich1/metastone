@@ -9,20 +9,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
 
 public class SilverHandKnight extends MinionCard {
 
-	public SilverHandKnight() {
-		super("Silver Hand Knight", 4, 4, Rarity.COMMON, HeroClass.ANY, 5);
-		setDescription("Battlecry: Summon a 2/2 Squire.");
-	}
-
-	@Override
-	public Minion summon() {
-		Minion silverHandKnight = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(new Squire()));
-		battlecry.setResolvedLate(true);
-		silverHandKnight.setBattlecry(battlecry);
-		return silverHandKnight;
-	}
-	
 	private class Squire extends MinionCard {
 
 		public Squire() {
@@ -35,6 +21,20 @@ public class SilverHandKnight extends MinionCard {
 			return createMinion();
 		}
 		
+	}
+
+	public SilverHandKnight() {
+		super("Silver Hand Knight", 4, 4, Rarity.COMMON, HeroClass.ANY, 5);
+		setDescription("Battlecry: Summon a 2/2 Squire.");
+	}
+	
+	@Override
+	public Minion summon() {
+		Minion silverHandKnight = createMinion();
+		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(new Squire()));
+		battlecry.setResolvedLate(true);
+		silverHandKnight.setBattlecry(battlecry);
+		return silverHandKnight;
 	}
 
 }

@@ -1,7 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.aura;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
@@ -21,7 +21,7 @@ public class BuffAura extends Aura {
 	}
 
 	@Override
-	protected boolean affects(GameContext context, Actor target) {
+	protected boolean affects(GameContext context, Entity target) {
 		if (!super.affects(context, target)) {
 			return false;
 		}

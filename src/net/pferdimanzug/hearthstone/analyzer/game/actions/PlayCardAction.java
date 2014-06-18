@@ -1,10 +1,12 @@
 package net.pferdimanzug.hearthstone.analyzer.game.actions;
 
+import net.pferdimanzug.hearthstone.analyzer.game.Environment;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardType;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardLocation;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardReference;
 
@@ -17,7 +19,7 @@ public abstract class PlayCardAction extends GameAction {
 	}
 
 	@Override
-	public boolean canBeExecutedOn(Actor entity) {
+	public boolean canBeExecutedOn(Entity entity) {
 		if (card.getCardType() == CardType.SPELL) {
 			SpellCard spellCard = (SpellCard) card;
 			return spellCard.canBeCastOn(entity);
@@ -28,8 +30,13 @@ public abstract class PlayCardAction extends GameAction {
 	@Override
 	public void execute(GameContext context, int playerId) {
 		CardReference cardReference = new CardReference(playerId, CardLocation.HAND, card.getId());
+		context.getEnvironment().put(Environment.PENDING_CARD, card);
 		context.getLogic().playCard(playerId, cardReference);
-		play(context, playerId);
+		// card was countered, do not actually resolve its effects
+		if (!card.hasTag(GameTag.COUNTERED)) {
+			play(context, playerId);
+		}
+		context.getEnvironment().remove(Environment.PENDING_CARD);
 	}
 
 	public Card getCard() {

@@ -36,6 +36,95 @@ import org.testng.annotations.Test;
 public class AdvancedMechanicTests extends BasicTests {
 	
 	@Test
+	public void testAura() {
+		GameContext context = createContext(new Jaina(), new Garrosh());
+		Player player = context.getPlayer1();
+		Player opponent = context.getPlayer2();
+		
+		TestMinionCard minionCard = new TestMinionCard(1, 1);
+		minionCard.getMinion().setSpellTrigger(new TestAura());
+		context.getLogic().receiveCard(player.getId(), minionCard);
+		context.getLogic().performGameAction(player.getId(), minionCard.play());
+		
+		Actor minion1 = getSingleMinion(player.getMinions());
+		Assert.assertEquals(minion1.getAttack(), 1);
+		
+		minionCard = new TestMinionCard(1, 1);
+		minionCard.getMinion().setSpellTrigger(new TestAura());
+		context.getLogic().receiveCard(player.getId(), minionCard);
+		context.getLogic().performGameAction(player.getId(), minionCard.play());
+		
+		Actor minion2 = minionCard.getMinion();
+		Assert.assertNotEquals(minion1, minion2);
+		Assert.assertEquals(minion1.getAttack(), 2);
+		Assert.assertEquals(minion2.getAttack(), 2);
+		
+		TestMinionCard minionCardOpponent = new TestMinionCard(3, 3);
+		context.getLogic().receiveCard(opponent.getId(), minionCardOpponent);
+		context.getLogic().performGameAction(opponent.getId(), minionCardOpponent.play());
+		Actor enemyMinion = getSingleMinion(opponent.getMinions());
+		Assert.assertEquals(enemyMinion.getAttack(), 3);
+		
+		Assert.assertEquals(minion1.getAttack(), 2);
+		Assert.assertEquals(minion2.getAttack(), 2);
+		PhysicalAttackAction attackAction = new PhysicalAttackAction(enemyMinion.getReference());
+		attackAction.setTarget(minion2);
+		context.getLogic().performGameAction(opponent.getId(), attackAction);
+		Assert.assertEquals(minion1.getAttack(), 1);
+		
+		minionCard = new TestMinionCard(1, 1);
+		minion2 = minionCard.getMinion();
+		context.getLogic().receiveCard(player.getId(), minionCard);
+		context.getLogic().performGameAction(player.getId(), minionCard.play());
+		Assert.assertEquals(minion1.getAttack(), 1);
+		Assert.assertEquals(minion2.getAttack(), 2);
+	}
+	
+	@Test
+	public void testChooseOne() {
+		GameContext context = createContext(new Malfurion(), new Garrosh());
+		Player player = context.getPlayer1();
+		Player opponent = context.getPlayer2();
+		player.getHand().removeAll();
+		
+		TestMinionCard minionCard = new TestMinionCard(1, 4);
+		context.getLogic().receiveCard(opponent.getId(), minionCard);
+		context.getLogic().performGameAction(opponent.getId(), minionCard.play());
+		
+		player.getHero().getHeroPower().setUsed(true);
+		ChooseOneCard wrath = new Wrath();
+		context.getLogic().receiveCard(player.getId(), wrath);
+		player.setMana(wrath.getBaseManaCost());
+		List<GameAction> validActions = context.getLogic().getValidActions(player.getId());
+		Assert.assertEquals(validActions.size(), 2);
+		Assert.assertEquals(player.getHand().getCount(), 1);
+		
+		GameAction playWrath = wrath.playCard1();
+		playWrath.setTarget(getSingleMinion(opponent.getMinions()));
+		context.getLogic().performGameAction(player.getId(), playWrath);
+		
+		validActions = context.getLogic().getValidActions(player.getId());
+		Assert.assertEquals(validActions.size(), 0);
+		Assert.assertEquals(player.getHand().getCount(), 0);
+	}
+	
+	@Test
+	public void testCopyCards() {
+		GameContext context = createContext(new Anduin(), new Garrosh());
+		Player player = context.getPlayer1();
+		Player opponent = context.getPlayer2();
+		player.getHand().removeAll();
+		
+		int cardsInHand = player.getHand().getCount();
+		int cardsInOpponentsDeck = opponent.getDeck().getCount();
+		Card thoughtsteal = new Thoughtsteal();
+		context.getLogic().receiveCard(player.getId(), thoughtsteal);
+		context.getLogic().performGameAction(player.getId(), thoughtsteal.play());
+		Assert.assertEquals(opponent.getDeck().getCount(), cardsInOpponentsDeck);
+		Assert.assertEquals(player.getHand().getCount(), cardsInHand + 2);
+	}
+	
+	@Test
 	public void testDivineShield() {
 		GameContext context = createContext(new Jaina(), new Garrosh());
 		Player mage = context.getPlayer1();
@@ -109,6 +198,65 @@ public class AdvancedMechanicTests extends BasicTests {
 	}
 	
 	@Test
+	public void testOverload() {
+		GameContext context = createContext(new Thrall(), new Garrosh());
+		Player player = context.getPlayer1();
+		int playerId = player.getId();
+		
+		context.getLogic().startTurn(playerId);
+		Assert.assertEquals(player.getMana(), 1);
+		context.getLogic().endTurn(playerId);
+		context.getLogic().startTurn(playerId);
+		Assert.assertEquals(player.getMana(), 2);
+		
+		Card overloadCard = new TestMinionCard(1, 1);
+		overloadCard.setTag(GameTag.OVERLOAD, 2);
+		context.getLogic().receiveCard(playerId, overloadCard);
+		context.getLogic().performGameAction(playerId, overloadCard.play());
+		context.getLogic().endTurn(playerId);
+		context.getLogic().startTurn(playerId);
+		Assert.assertEquals(player.getMana(), 1);
+		
+		context.getLogic().endTurn(playerId);
+		context.getLogic().startTurn(playerId);
+		Assert.assertEquals(player.getMana(), 4);
+	}
+	
+	@Test
+	public void testSetHpPlusSilence() {
+		GameContext context = createContext(new Rexxar(), new Garrosh());
+		Player player = context.getPlayer1();
+		Player opponent = context.getPlayer2();
+		
+		int baseHp = 5;
+		// summon a minion and check the base hp
+		playCard(context, opponent, new TestMinionCard(4, baseHp));
+		Actor minion = getSingleMinion(opponent.getMinions());
+		Assert.assertEquals(minion.getHp(), baseHp);
+
+		int modifiedHp = 1;
+		// cast a spell on the minion which modifies the hp
+		Spell setHpSpell = new SetHpSpell(modifiedHp);
+		SpellCard spellCard = new TestSpellCard(setHpSpell);
+		spellCard.setTargetRequirement(TargetSelection.MINIONS);
+		context.getLogic().receiveCard(player.getId(), spellCard);
+		GameAction playSpellCard = spellCard.play();
+		playSpellCard.setTarget(minion);
+		context.getLogic().performGameAction(player.getId(), playSpellCard);
+		Assert.assertEquals(minion.getHp(), modifiedHp);
+		
+		// silence the creature - hp should be back to original value
+		Spell silenceSpell = new SilenceSpell();
+		spellCard = new TestSpellCard(silenceSpell);
+		spellCard.setTargetRequirement(TargetSelection.MINIONS);
+		context.getLogic().receiveCard(player.getId(), spellCard);
+		playSpellCard = spellCard.play();
+		playSpellCard.setTarget(minion);
+		context.getLogic().performGameAction(player.getId(), playSpellCard);
+		Assert.assertEquals(minion.getHp(), baseHp);		
+	}
+	
+	@Test
 	public void testShorttermBuffs() {
 		GameContext context = createContext(new Jaina(), new Garrosh());
 		Player mage = context.getPlayer1();
@@ -126,7 +274,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		mage.setBehaviour(new IBehaviour() {
 			
 			@Override
-			public Actor provideTargetFor(Player player, GameAction action) {
+			public Entity provideTargetFor(Player player, GameAction action) {
 				return action.getValidTargets().get(0);
 			}
 
@@ -165,153 +313,5 @@ public class AdvancedMechanicTests extends BasicTests {
 		context.getLogic().performGameAction(priest.getId(), damageSpell.play());
 		int spellPower = getSingleMinion(priest.getMinions()).getTagValue(GameTag.SPELL_POWER);
 		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - 2 * MindBlast.DAMAGE - spellPower);
-	}
-	
-	@Test
-	public void testOverload() {
-		GameContext context = createContext(new Thrall(), new Garrosh());
-		Player player = context.getPlayer1();
-		int playerId = player.getId();
-		
-		context.getLogic().startTurn(playerId);
-		Assert.assertEquals(player.getMana(), 1);
-		context.getLogic().endTurn(playerId);
-		context.getLogic().startTurn(playerId);
-		Assert.assertEquals(player.getMana(), 2);
-		
-		Card overloadCard = new TestMinionCard(1, 1);
-		overloadCard.setTag(GameTag.OVERLOAD, 2);
-		context.getLogic().receiveCard(playerId, overloadCard);
-		context.getLogic().performGameAction(playerId, overloadCard.play());
-		context.getLogic().endTurn(playerId);
-		context.getLogic().startTurn(playerId);
-		Assert.assertEquals(player.getMana(), 1);
-		
-		context.getLogic().endTurn(playerId);
-		context.getLogic().startTurn(playerId);
-		Assert.assertEquals(player.getMana(), 4);
-	}
-	
-	@Test
-	public void testChooseOne() {
-		GameContext context = createContext(new Malfurion(), new Garrosh());
-		Player player = context.getPlayer1();
-		Player opponent = context.getPlayer2();
-		player.getHand().removeAll();
-		
-		TestMinionCard minionCard = new TestMinionCard(1, 4);
-		context.getLogic().receiveCard(opponent.getId(), minionCard);
-		context.getLogic().performGameAction(opponent.getId(), minionCard.play());
-		
-		player.getHero().getHeroPower().setUsed(true);
-		ChooseOneCard wrath = new Wrath();
-		context.getLogic().receiveCard(player.getId(), wrath);
-		player.setMana(wrath.getBaseManaCost());
-		List<GameAction> validActions = context.getLogic().getValidActions(player.getId());
-		Assert.assertEquals(validActions.size(), 2);
-		Assert.assertEquals(player.getHand().getCount(), 1);
-		
-		GameAction playWrath = wrath.playCard1();
-		playWrath.setTarget(getSingleMinion(opponent.getMinions()));
-		context.getLogic().performGameAction(player.getId(), playWrath);
-		
-		validActions = context.getLogic().getValidActions(player.getId());
-		Assert.assertEquals(validActions.size(), 0);
-		Assert.assertEquals(player.getHand().getCount(), 0);
-	}
-	
-	@Test
-	public void testCopyCards() {
-		GameContext context = createContext(new Anduin(), new Garrosh());
-		Player player = context.getPlayer1();
-		Player opponent = context.getPlayer2();
-		player.getHand().removeAll();
-		
-		int cardsInHand = player.getHand().getCount();
-		int cardsInOpponentsDeck = opponent.getDeck().getCount();
-		Card thoughtsteal = new Thoughtsteal();
-		context.getLogic().receiveCard(player.getId(), thoughtsteal);
-		context.getLogic().performGameAction(player.getId(), thoughtsteal.play());
-		Assert.assertEquals(opponent.getDeck().getCount(), cardsInOpponentsDeck);
-		Assert.assertEquals(player.getHand().getCount(), cardsInHand + 2);
-	}
-	
-	@Test
-	public void testAura() {
-		GameContext context = createContext(new Jaina(), new Garrosh());
-		Player player = context.getPlayer1();
-		Player opponent = context.getPlayer2();
-		
-		TestMinionCard minionCard = new TestMinionCard(1, 1);
-		minionCard.getMinion().setSpellTrigger(new TestAura());
-		context.getLogic().receiveCard(player.getId(), minionCard);
-		context.getLogic().performGameAction(player.getId(), minionCard.play());
-		
-		Actor minion1 = getSingleMinion(player.getMinions());
-		Assert.assertEquals(minion1.getAttack(), 1);
-		
-		minionCard = new TestMinionCard(1, 1);
-		minionCard.getMinion().setSpellTrigger(new TestAura());
-		context.getLogic().receiveCard(player.getId(), minionCard);
-		context.getLogic().performGameAction(player.getId(), minionCard.play());
-		
-		Actor minion2 = minionCard.getMinion();
-		Assert.assertNotEquals(minion1, minion2);
-		Assert.assertEquals(minion1.getAttack(), 2);
-		Assert.assertEquals(minion2.getAttack(), 2);
-		
-		TestMinionCard minionCardOpponent = new TestMinionCard(3, 3);
-		context.getLogic().receiveCard(opponent.getId(), minionCardOpponent);
-		context.getLogic().performGameAction(opponent.getId(), minionCardOpponent.play());
-		Actor enemyMinion = getSingleMinion(opponent.getMinions());
-		Assert.assertEquals(enemyMinion.getAttack(), 3);
-		
-		Assert.assertEquals(minion1.getAttack(), 2);
-		Assert.assertEquals(minion2.getAttack(), 2);
-		PhysicalAttackAction attackAction = new PhysicalAttackAction(enemyMinion.getReference());
-		attackAction.setTarget(minion2);
-		context.getLogic().performGameAction(opponent.getId(), attackAction);
-		Assert.assertEquals(minion1.getAttack(), 1);
-		
-		minionCard = new TestMinionCard(1, 1);
-		minion2 = minionCard.getMinion();
-		context.getLogic().receiveCard(player.getId(), minionCard);
-		context.getLogic().performGameAction(player.getId(), minionCard.play());
-		Assert.assertEquals(minion1.getAttack(), 1);
-		Assert.assertEquals(minion2.getAttack(), 2);
-	}
-	
-	@Test
-	public void testSetHpPlusSilence() {
-		GameContext context = createContext(new Rexxar(), new Garrosh());
-		Player player = context.getPlayer1();
-		Player opponent = context.getPlayer2();
-		
-		int baseHp = 5;
-		// summon a minion and check the base hp
-		playCard(context, opponent, new TestMinionCard(4, baseHp));
-		Actor minion = getSingleMinion(opponent.getMinions());
-		Assert.assertEquals(minion.getHp(), baseHp);
-
-		int modifiedHp = 1;
-		// cast a spell on the minion which modifies the hp
-		Spell setHpSpell = new SetHpSpell(modifiedHp);
-		SpellCard spellCard = new TestSpellCard(setHpSpell);
-		spellCard.setTargetRequirement(TargetSelection.MINIONS);
-		context.getLogic().receiveCard(player.getId(), spellCard);
-		GameAction playSpellCard = spellCard.play();
-		playSpellCard.setTarget(minion);
-		context.getLogic().performGameAction(player.getId(), playSpellCard);
-		Assert.assertEquals(minion.getHp(), modifiedHp);
-		
-		// silence the creature - hp should be back to original value
-		Spell silenceSpell = new SilenceSpell();
-		spellCard = new TestSpellCard(silenceSpell);
-		spellCard.setTargetRequirement(TargetSelection.MINIONS);
-		context.getLogic().receiveCard(player.getId(), spellCard);
-		playSpellCard = spellCard.play();
-		playSpellCard.setTarget(minion);
-		context.getLogic().performGameAction(player.getId(), playSpellCard);
-		Assert.assertEquals(minion.getHp(), baseHp);		
 	}
 }

@@ -7,7 +7,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
@@ -74,14 +73,14 @@ public class MinMaxBehaviour implements IBehaviour {
 	}
 
 	@Override
-	public Actor provideTargetFor(Player player, GameAction action) {
+	public Entity provideTargetFor(Player player, GameAction action) {
 		//TODO: copied from PlayRandomBehaviour
-		List<Actor> validTargets = action.getValidTargets();
+		List<Entity> validTargets = action.getValidTargets();
 		if (validTargets.isEmpty()) {
 			return null;
 		}
 
-		Actor randomTarget = validTargets.get(ThreadLocalRandom.current().nextInt(validTargets.size()));
+		Entity randomTarget = validTargets.get(ThreadLocalRandom.current().nextInt(validTargets.size()));
 		if (randomTarget != null) {
 			logger.debug(player.getName() + " picks random target: " + randomTarget.getName());
 		}
@@ -105,7 +104,7 @@ public class MinMaxBehaviour implements IBehaviour {
 					logger.debug("BEST ACTION SO FAR id:{}", bestAction.hashCode());
 				}
 			} else {
-				for (Actor target : gameAction.getValidTargets()) {
+				for (Entity target : gameAction.getValidTargets()) {
 					GameContext simulationResult = simulateAction(context, player, gameAction, target);
 					int gameStateScore = calculateGameStateScore(simulationResult, player.getId());
 					logger.debug("Action (target {}) gains score of {}", target, gameStateScore);

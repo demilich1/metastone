@@ -5,6 +5,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
 public class ReviveMinionSpell extends Spell {
@@ -16,8 +17,9 @@ public class ReviveMinionSpell extends Spell {
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, Actor target) {
-		MinionCard minionCard = (MinionCard) target.getSourceCard();
+	protected void onCast(GameContext context, Player player, Entity target) {
+		Actor targetActor = (Actor) target;
+		MinionCard minionCard = (MinionCard) targetActor.getSourceCard();
 		Minion minion = minionCard.summon();
 		minion.removeTag(GameTag.BATTLECRY);
 		if (hpAdjustment != 0) {

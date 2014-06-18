@@ -1,7 +1,7 @@
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.aura.Aura;
 import net.pferdimanzug.hearthstone.analyzer.game.aura.AuraSpellBuff;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 
@@ -12,9 +12,8 @@ public class TestAura extends Aura {
 	}
 	
 	@Override
-	protected boolean affects(GameContext context, Actor target) {
+	protected boolean affects(GameContext context, Entity target) {
 		if (!super.affects(context, target)) {
-			
 			return false;
 		}
 		return target.getOwner() == getOwner();

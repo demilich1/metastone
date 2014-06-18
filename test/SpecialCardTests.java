@@ -25,6 +25,45 @@ import org.testng.annotations.Test;
 public class SpecialCardTests extends TestBase {
 	
 	@Test
+	public void testFaerieDragon() {
+		GameContext context = createContext(new Jaina(), new Garrosh());
+		Player mage = context.getPlayer1();
+		mage.setMana(10);
+		Player warrior = context.getPlayer2();
+		warrior.setMana(10);
+
+		MinionCard faerieDragonCard = new FaerieDragon();
+		context.getLogic().receiveCard(warrior.getId(), faerieDragonCard);
+		context.getLogic().performGameAction(warrior.getId(), faerieDragonCard.play());
+		
+		MinionCard devMonsterCard = new TestMinionCard(1, 1);
+		context.getLogic().receiveCard(mage.getId(), devMonsterCard);
+		context.getLogic().performGameAction(mage.getId(), devMonsterCard.play());
+		
+		Entity attacker = getSingleMinion(mage.getMinions());
+		Actor elusiveOne = getSingleMinion(warrior.getMinions());
+		
+		GameAction attackAction = new PhysicalAttackAction(attacker.getReference());
+		List<Entity> validTargets = context.getLogic().getValidTargets(warrior.getId(), attackAction);
+		// should be two valid targets: enemy hero and faerie dragon
+		Assert.assertEquals(validTargets.size(), 2);
+		
+		
+		GameAction useFireblast = mage.getHero().getHeroPower().play();
+		validTargets = context.getLogic().getValidTargets(warrior.getId(), useFireblast);
+		// should be three valid targets, both heroes + minion which is not the faerie dragon
+		Assert.assertEquals(validTargets.size(), 3);
+		Assert.assertFalse(validTargets.contains(elusiveOne));
+		
+		Card arcaneExplosionCard = new ArcaneExplosion();
+		context.getLogic().receiveCard(mage.getId(), arcaneExplosionCard);
+		int faerieDragonHp = elusiveOne.getHp();
+		context.getLogic().performGameAction(mage.getId(), arcaneExplosionCard.play());
+		// hp should been affected after playing area of effect spell
+		Assert.assertNotEquals(faerieDragonHp, elusiveOne.getHp());
+	}
+	
+	@Test
 	public void testGurubashiBerserker() {
 		GameContext context = createContext(new Jaina(), new Garrosh());
 		Player mage = context.getPlayer1();
@@ -60,45 +99,6 @@ public class SpecialCardTests extends TestBase {
 		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp() - 2 * GurubashiBerserker.BASE_ATTACK - GurubashiBerserker.ATTACK_BONUS);
 		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - 2 * attacker.getAttack());
 		Assert.assertEquals(defender.getAttack(), GurubashiBerserker.BASE_ATTACK + 2 * GurubashiBerserker.ATTACK_BONUS);
-	}
-	
-	@Test
-	public void testFaerieDragon() {
-		GameContext context = createContext(new Jaina(), new Garrosh());
-		Player mage = context.getPlayer1();
-		mage.setMana(10);
-		Player warrior = context.getPlayer2();
-		warrior.setMana(10);
-
-		MinionCard faerieDragonCard = new FaerieDragon();
-		context.getLogic().receiveCard(warrior.getId(), faerieDragonCard);
-		context.getLogic().performGameAction(warrior.getId(), faerieDragonCard.play());
-		
-		MinionCard devMonsterCard = new TestMinionCard(1, 1);
-		context.getLogic().receiveCard(mage.getId(), devMonsterCard);
-		context.getLogic().performGameAction(mage.getId(), devMonsterCard.play());
-		
-		Entity attacker = getSingleMinion(mage.getMinions());
-		Actor elusiveOne = getSingleMinion(warrior.getMinions());
-		
-		GameAction attackAction = new PhysicalAttackAction(attacker.getReference());
-		List<Actor> validTargets = context.getLogic().getValidTargets(warrior.getId(), attackAction);
-		// should be two valid targets: enemy hero and faerie dragon
-		Assert.assertEquals(validTargets.size(), 2);
-		
-		
-		GameAction useFireblast = mage.getHero().getHeroPower().play();
-		validTargets = context.getLogic().getValidTargets(warrior.getId(), useFireblast);
-		// should be three valid targets, both heroes + minion which is not the faerie dragon
-		Assert.assertEquals(validTargets.size(), 3);
-		Assert.assertFalse(validTargets.contains(elusiveOne));
-		
-		Card arcaneExplosionCard = new ArcaneExplosion();
-		context.getLogic().receiveCard(mage.getId(), arcaneExplosionCard);
-		int faerieDragonHp = elusiveOne.getHp();
-		context.getLogic().performGameAction(mage.getId(), arcaneExplosionCard.play());
-		// hp should been affected after playing area of effect spell
-		Assert.assertNotEquals(faerieDragonHp, elusiveOne.getHp());
 	}
 	
 	@Test

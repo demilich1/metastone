@@ -27,7 +27,7 @@ public class Swipe extends SpellCard {
 			context.getLogic().damage(player, target, damage, true);
 		}
 
-		protected void onCast(GameContext context, Player player, Actor target) {
+		protected void onCast(GameContext context, Player player, Entity target) {
 			damage(context, player, target, context.getOpponent(player).getHero());
 			Player owner = context.getPlayer(target.getOwner());
 			for (Actor minion : owner.getMinions()) {

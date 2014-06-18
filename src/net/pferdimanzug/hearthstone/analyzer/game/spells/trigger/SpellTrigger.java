@@ -1,7 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.spells.trigger;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
@@ -44,17 +43,36 @@ public class SpellTrigger implements Cloneable {
 		return hostReference;
 	}
 
+	public TriggerLayer getLayer() {
+		return layer;
+	}
+
 	public int getOwner() {
 		return trigger.getOwner();
 	}
 
+	protected EntityReference getTargetForSpell(GameEvent event) {
+		return hostReference;
+	}
+	
 	public GameEventType interestedIn() {
 		return trigger.interestedIn();
 	}
 
+	public boolean isExpired() {
+		return expired;
+	}
+
+	public void onAdd(GameContext context) {
+	}
+
+	protected void onFire(int ownerId, Spell spell, GameEvent event) {
+		event.getGameContext().getLogic().castSpell(ownerId, spell);
+	}
+
 	public void onGameEvent(GameEvent event) {
 		int ownerId = trigger.getOwner();
-		Actor host = event.getGameContext().resolveSingleTarget(ownerId, hostReference);
+		Entity host = event.getGameContext().resolveSingleTarget(ownerId, hostReference);
 		try {
 			if (!expired && trigger.fire(event, host)) {
 				if (!spell.hasPredefinedTarget()) {
@@ -73,12 +91,11 @@ public class SpellTrigger implements Cloneable {
 		}
 	}
 	
-	protected void onFire(int ownerId, Spell spell, GameEvent event) {
-		event.getGameContext().getLogic().castSpell(ownerId, spell);
+	public void onRemove(GameContext context) {
 	}
 
-	protected EntityReference getTargetForSpell(GameEvent event) {
-		return hostReference;
+	public void reset() {
+		expired = false;
 	}
 
 	public void setHost(Entity host) {
@@ -86,30 +103,12 @@ public class SpellTrigger implements Cloneable {
 		spell.setSource(hostReference);
 	}
 
-	public void setOwner(int playerIndex) {
-		trigger.setOwner(playerIndex);
-	}
-
-	public boolean isExpired() {
-		return expired;
-	}
-	
-	public void reset() {
-		expired = false;
-	}
-
-	public void onAdd(GameContext context) {
-	}
-
-	public void onRemove(GameContext context) {
-	}
-
-	public TriggerLayer getLayer() {
-		return layer;
-	}
-
 	protected void setLayer(TriggerLayer layer) {
 		this.layer = layer;
+	}
+
+	public void setOwner(int playerIndex) {
+		trigger.setOwner(playerIndex);
 	}
 
 }

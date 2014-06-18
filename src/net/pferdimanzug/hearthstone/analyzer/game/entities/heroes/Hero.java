@@ -56,29 +56,29 @@ public abstract class Hero extends Actor {
 		return heroPower;
 	}
 
+	public Race getRace() {
+		return (Race) getTag(GameTag.RACE);
+	}
+
 	public Weapon getWeapon() {
 		return weapon;
 	}
-
+	
 	public void modifyArmor(int armor) {
 		// armor cannot fall below zero
 		int newArmor = Math.max(getArmor() + armor, 0);
 		setTag(GameTag.ARMOR, newArmor);
 	}
-	
+
+	public void setRace(Race race) {
+		setTag(GameTag.RACE, race);
+	}
+
 	public void setWeapon(Weapon weapon) {
 		this.weapon = weapon;
 		if (weapon != null) {
 			weapon.setOwner(getOwner());
 		}
-	}
-
-	public Race getRace() {
-		return (Race) getTag(GameTag.RACE);
-	}
-
-	public void setRace(Race race) {
-		setTag(GameTag.RACE, race);
 	}
 	
 }

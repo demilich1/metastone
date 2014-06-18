@@ -10,12 +10,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 
 public abstract class Actor extends Entity {
 	
-	// index of the owning player, i.e.
-	// 0 -> owned by player 1
-	// 1 -> owned by player 2
-	// implemented it that way because of the same reason
-	// the class TargetKey was created - lazy references are better for cloning
-	private int ownerIndex;
 	private Card sourceCard;
 	private SpellTrigger spellTrigger;
 	
@@ -24,11 +18,6 @@ public abstract class Actor extends Entity {
 		this.sourceCard = sourceCard;
 	}
 
-	public void setSpellTrigger(SpellTrigger spellTrigger) {
-		spellTrigger.setHost(this);
-		this.spellTrigger = spellTrigger;
-	}
-	
 	public boolean canAttackThisTurn() {
 		if (hasTag(GameTag.CANNOT_ATTACK)) {
 			return false;
@@ -38,7 +27,7 @@ public abstract class Actor extends Entity {
 		}
 		return getAttack() > 0 && getTagValue(GameTag.NUMBER_OF_ATTACKS) > 0;
 	}
-
+	
 	@Override
 	public Actor clone() {
 		try {
@@ -73,18 +62,12 @@ public abstract class Actor extends Entity {
 		return (Spell) getTag(GameTag.ENRAGE_SPELL);
 	}
 
-	public abstract EntityType getEntityType();
-
 	public int getHp() {
 		return getTagValue(GameTag.HP);
 	}
 
 	public int getMaxHp() {
 		return getTagValue(GameTag.MAX_HP) + getTagValue(GameTag.HP_BONUS);
-	}
-
-	public int getOwner() {
-		return ownerIndex;
 	}
 
 	public Card getSourceCard() {
@@ -107,23 +90,16 @@ public abstract class Actor extends Entity {
 		return getHp() != getMaxHp();
 	}
 
-	public void modifyHpBonus(int value) {
-		modifyTag(GameTag.HP_BONUS, value);
-		modifyTag(GameTag.HP, value);
-	}
-	
 	public void modifyAuraHpBonus(int value) {
 		modifyTag(GameTag.AURA_HP_BONUS, value);
 		modifyTag(GameTag.HP, value);
 	}
 
-	public void modifyTag(GameTag tag, int value) {
-		if (!hasTag(tag)) {
-			setTag(tag, 0);
-		}
-		setTag(tag, getTagValue(tag) + value);
+	public void modifyHpBonus(int value) {
+		modifyTag(GameTag.HP_BONUS, value);
+		modifyTag(GameTag.HP, value);
 	}
-
+	
 	public void setBaseAttack(int value) {
 		setTag(GameTag.BASE_ATTACK, value);
 	}
@@ -142,11 +118,17 @@ public abstract class Actor extends Entity {
 		setTag(GameTag.MAX_HP, value);
 	}
 
+	@Override
 	public void setOwner(int ownerIndex) {
-		this.ownerIndex = ownerIndex;
+		super.setOwner(ownerIndex);
 		if (hasSpellTrigger()) {
 			spellTrigger.setHost(this);
 		}
+	}
+	
+	public void setSpellTrigger(SpellTrigger spellTrigger) {
+		spellTrigger.setHost(this);
+		this.spellTrigger = spellTrigger;
 	}
 
 	@Override

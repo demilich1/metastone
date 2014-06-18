@@ -39,6 +39,10 @@ public class CardCollection implements Iterable<Card>, Cloneable {
 		return cards.contains(card);
 	}
 
+	public Card get(int index) {
+		return cards.get(index);
+	}
+
 	public int getCount() {
 		return cards.size();
 	}
@@ -58,13 +62,9 @@ public class CardCollection implements Iterable<Card>, Cloneable {
 	public Iterator<Card> iterator() {
 		return cards.iterator();
 	}
-
+	
 	public Card peekFirst() {
 		return cards.get(0);
-	}
-	
-	public Card get(int index) {
-		return cards.get(index);
 	}
 
 	public boolean remove(Card card) {

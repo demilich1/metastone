@@ -10,6 +10,15 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 
 public class DebugDecks {
 	
+	public static CardCollection getDeckConsistingof(int count, Card... cards) {
+		CardCollection deck = new CardCollection();
+		for (int i = 0; i < count; i++) {
+			int randomIndex = ThreadLocalRandom.current().nextInt(cards.length);
+			deck.add(cards[randomIndex].clone());
+		}
+		return deck;
+	}
+	
 	public static CardCollection getRandomDeck(HeroClass heroClass) {
 		CardCollection deck = new CardCollection();
 		CardCollection classCards = CardCatalogue.query(null, Rarity.FREE, heroClass);
@@ -33,15 +42,6 @@ public class DebugDecks {
 			deck.add(randomCard.clone());
 		}
 		
-		return deck;
-	}
-	
-	public static CardCollection getDeckConsistingof(int count, Card... cards) {
-		CardCollection deck = new CardCollection();
-		for (int i = 0; i < count; i++) {
-			int randomIndex = ThreadLocalRandom.current().nextInt(cards.length);
-			deck.add(cards[randomIndex].clone());
-		}
 		return deck;
 	}
 	

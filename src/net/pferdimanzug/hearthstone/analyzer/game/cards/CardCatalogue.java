@@ -34,6 +34,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.ArcaneExpl
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.ArcaneIntellect;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.ArcaneMissiles;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.ConeOfCold;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Counterspell;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Fireball;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Flamestrike;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.FrostNova;
@@ -192,6 +193,7 @@ public class CardCatalogue {
 		cards.add(new IceLance());
 		cards.add(new ManaWyrm());
 		cards.add(new MirrorEntity());
+		cards.add(new Counterspell());
 		cards.add(new MirrorImage());
 		cards.add(new Polymorph());
 		cards.add(new Pyroblast());

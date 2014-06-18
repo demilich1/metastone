@@ -2,8 +2,6 @@ package net.pferdimanzug.hearthstone.analyzer.utils;
 
 public class MathUtils {
 	
-	private MathUtils() {}
-	
 	public static int clamp(int value, int min, int max) {
 		if (value < min) {
 			return min;
@@ -12,5 +10,7 @@ public class MathUtils {
 		}
 		return value;
 	}
+	
+	private MathUtils() {}
 
 }

@@ -3,7 +3,6 @@ package net.pferdimanzug.hearthstone.analyzer.game.actions;
 import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
@@ -12,11 +11,11 @@ public abstract class GameAction {
 	
 	private TargetSelection targetRequirement = TargetSelection.NONE;
 	private ActionType actionType = ActionType.UNDEFINED;
-	private List<Actor> validTargets;
+	private List<Entity> validTargets;
 	private EntityReference source;
 	private EntityReference targetKey;
 	
-	public boolean canBeExecutedOn(Actor entity) {
+	public boolean canBeExecutedOn(Entity entity) {
 		return true;
 	}
 	
@@ -38,7 +37,7 @@ public abstract class GameAction {
 		return targetRequirement;
 	}
 
-	public List<Actor> getValidTargets() {
+	public List<Entity> getValidTargets() {
 		return validTargets;
 	}
 
@@ -62,7 +61,7 @@ public abstract class GameAction {
 		this.targetRequirement = targetRequirement;
 	}
 
-	public void setValidTargets(List<Actor> validTargets) {
+	public void setValidTargets(List<Entity> validTargets) {
 		this.validTargets = validTargets;
 	}
 }

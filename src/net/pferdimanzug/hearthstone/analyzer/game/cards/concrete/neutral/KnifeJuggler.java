@@ -2,7 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
@@ -15,11 +15,21 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class KnifeJuggler extends MinionCard {
 
+	private class OwnMinionSummonedTrigger extends MinionSummonedTrigger {
+
+		@Override
+		public boolean fire(GameEvent event, Entity host) {
+			SummonEvent summonEvent = (SummonEvent) event;
+			return summonEvent.getMinion().getOwner() == host.getOwner();
+		}
+		
+	}
+
 	public KnifeJuggler() {
 		super("Knife Juggler", 3, 2, Rarity.RARE, HeroClass.ANY, 2);
 		setDescription("After you summon a minion, deal 1 damage to a random enemy.");
 	}
-
+	
 	@Override
 	public Minion summon() {
 		Minion knifeJuggler = createMinion();
@@ -28,16 +38,6 @@ public class KnifeJuggler extends MinionCard {
 		SpellTrigger trigger = new SpellTrigger(new OwnMinionSummonedTrigger(), damageRandomSpell);
 		knifeJuggler.setSpellTrigger(trigger);
 		return knifeJuggler;
-	}
-	
-	private class OwnMinionSummonedTrigger extends MinionSummonedTrigger {
-
-		@Override
-		public boolean fire(GameEvent event, Actor host) {
-			SummonEvent summonEvent = (SummonEvent) event;
-			return summonEvent.getMinion().getOwner() == host.getOwner();
-		}
-		
 	}
 
 }

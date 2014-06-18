@@ -11,6 +11,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.PhysicalAttackAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.ChooseOneCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardLocation;
@@ -104,7 +105,7 @@ public class ActionLogic {
 		if (action.getTargetRequirement() == TargetSelection.NONE) {
 			return true;
 		}
-		List<Actor> validTargets = targetLogic.getValidTargets(context, player, action);
+		List<Entity> validTargets = targetLogic.getValidTargets(context, player, action);
 		if (validTargets.isEmpty()) {
 			return false;
 		}

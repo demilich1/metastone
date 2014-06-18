@@ -2,7 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock;
 
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
@@ -27,7 +27,7 @@ public class SacrificialPact extends SpellCard {
 	}
 
 	@Override
-	public boolean canBeCastOn(Actor target) {
+	public boolean canBeCastOn(Entity target) {
 		if (target.getEntityType() != EntityType.MINION) {
 			return false;
 		}

@@ -2,7 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest;
 
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
@@ -18,7 +18,7 @@ public class NorthshireCleric extends MinionCard {
 	private class NorthshireClericTrigger extends GameEventTrigger {
 
 		@Override
-		public boolean fire(GameEvent event, Actor host) {
+		public boolean fire(GameEvent event, Entity host) {
 			HealEvent healEvent = (HealEvent) event;
 			return healEvent.getTarget().getEntityType() == EntityType.MINION;
 		}

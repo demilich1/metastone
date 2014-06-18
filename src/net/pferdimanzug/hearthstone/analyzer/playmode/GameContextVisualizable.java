@@ -22,24 +22,6 @@ public class GameContextVisualizable extends GameContext {
 	}
 
 	@Override
-	protected void onGameStateChanged() {
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-		}
-		ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_STATE_UPDATE, this);
-	}
-	
-	@Override
-	protected void onWillPerformAction(GameAction action) {
-		if (!actionEvents.containsKey(action)) {
-			actionEvents.put(action, new ArrayList<GameEvent>());
-		}
-		currentAction = action;
-		ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_ACTION_PERFORMED, this);
-	}
-
-	@Override
 	public void fireGameEvent(GameEvent gameEvent) {
 		super.fireGameEvent(gameEvent);
 		
@@ -51,12 +33,30 @@ public class GameContextVisualizable extends GameContext {
 		eventList.add(gameEvent);
 	}
 	
+	public GameAction getCurrentAction() {
+		return currentAction;
+	}
+
 	public List<GameEvent> getEventsForAction(GameAction action) {
 		return actionEvents.get(action);
 	}
+	
+	@Override
+	protected void onGameStateChanged() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+		}
+		ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_STATE_UPDATE, this);
+	}
 
-	public GameAction getCurrentAction() {
-		return currentAction;
+	@Override
+	protected void onWillPerformAction(GameAction action) {
+		if (!actionEvents.containsKey(action)) {
+			actionEvents.put(action, new ArrayList<GameEvent>());
+		}
+		currentAction = action;
+		ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_ACTION_PERFORMED, this);
 	}
 
 	public void setCurrentAction(GameAction currentAction) {

@@ -18,6 +18,7 @@ public class EntityReference {
 	public static final EntityReference SUMMONED_MINION = new EntityReference(-20);
 	public static final EntityReference KILLED_MINION = new EntityReference(-21);
 	public static final EntityReference ATTACKER = new EntityReference(-22);
+	public static final EntityReference PENDING_CARD = new EntityReference(-23);
 	
 	public static EntityReference pointTo(Entity entity) {
 		if (entity == null) {
@@ -41,13 +42,13 @@ public class EntityReference {
 		return entityReference.getId() == getId();
 	}
 	
+	public int getId() {
+		return key;
+	}
+
 	@Override
 	public int hashCode() {
 		return new Integer(key).hashCode();
-	}
-
-	public int getId() {
-		return key;
 	}
 	
 	public boolean isTargetGroup() {

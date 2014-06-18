@@ -24,6 +24,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
 import net.pferdimanzug.hearthstone.analyzer.game.events.DamageEvent;
+import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.KillEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.OverloadEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.PhysicalAttackEvent;
@@ -69,6 +70,16 @@ public class GameLogic implements Cloneable {
 		this.idFactory = idFactory;
 	}
 
+	public void addSpellTrigger(Player player, SpellTrigger spellTrigger, Entity target) {
+		// there was a .clone() here before, we don't need this, do we?
+		spellTrigger.setOwner(player.getId());
+		spellTrigger.setHost(target);
+		spellTrigger.reset();
+		spellTrigger.onAdd(context);
+		context.addTrigger(spellTrigger);
+		logger.debug("New spelltrigger was added for {}", player.getName());
+	}
+
 	private void assignCardIds(CardCollection cardCollection) {
 		for (Card card : cardCollection) {
 			card.setId(idFactory.generateId());
@@ -98,6 +109,14 @@ public class GameLogic implements Cloneable {
 		return true;
 	}
 
+	public boolean canPlaySecret(Player player, SecretCard card) {
+		return player.getSecrets().size() < MAX_SECRETS && !player.getSecrets().contains(card.getTypeId());
+	}
+
+	public boolean canSummonMoreMinions(Player player) {
+		return player.getMinions().size() < MAX_MINIONS;
+	}
+
 	public void castSpell(int playerId, Spell spell) {
 		castSpell(playerId, spell, null);
 	}
@@ -106,13 +125,14 @@ public class GameLogic implements Cloneable {
 		Player player = context.getPlayer(playerId);
 		Actor source = null;
 		if (spell.getSource() != null) {
-			source = context.resolveSingleTarget(playerId, spell.getSource());
+			source = (Actor) context.resolveSingleTarget(playerId, spell.getSource());
 		}
 
-		List<Actor> targets = targetLogic.resolveTargetKey(context, player, source, spell.getTarget());
+		List<Entity> targets = targetLogic.resolveTargetKey(context, player, source, spell.getTarget());
 		// target can only be changed when there is one target
 		// note: this code block is basically exclusively for the SpellBender
-		// Secret, but it can easily be expanded if targets of area of effect spell
+		// Secret, but it can easily be expanded if targets of area of effect
+		// spell
 		// should be changeable as well
 		if (sourceCard != null && targets != null && sourceCard.getTargetRequirement() != TargetSelection.NONE
 				&& targets.size() == 1) {
@@ -129,10 +149,6 @@ public class GameLogic implements Cloneable {
 		if (sourceCard != null) {
 			context.getEnvironment().remove(Environment.TARGET_OVERRIDE);
 		}
-	}
-
-	public boolean canSummonMoreMinions(Player player) {
-		return player.getMinions().size() < MAX_MINIONS;
 	}
 
 	public void changeDurability(Weapon weapon, int durability) {
@@ -250,20 +266,6 @@ public class GameLogic implements Cloneable {
 			Spell deathrattleSpell = minion.getDeathrattle();
 			castSpell(owner.getId(), deathrattleSpell);
 		}
-		owner.getMinions().remove(minion);
-	}
-
-	public void removeMinion(Actor minion) {
-		context.removeTriggersAssociatedWith(minion.getReference());
-		if (minion.hasSpellTrigger()) {
-			minion.getSpellTrigger().onRemove(context);
-		}
-
-		logger.debug("{} was removed", minion);
-		// set Hp to zero to make .isDead() return true
-		minion.setHp(0);
-
-		Player owner = context.getPlayer(minion.getOwner());
 		owner.getMinions().remove(minion);
 	}
 
@@ -396,7 +398,7 @@ public class GameLogic implements Cloneable {
 		return actionLogic.getValidActions(context, player);
 	}
 
-	public List<Actor> getValidTargets(int playerId, GameAction action) {
+	public List<Entity> getValidTargets(int playerId, GameAction action) {
 		Player player = context.getPlayer(playerId);
 		return targetLogic.getValidTargets(context, player, action);
 	}
@@ -493,12 +495,12 @@ public class GameLogic implements Cloneable {
 		}
 		Player player = context.getPlayer(playerId);
 		if (action.getTargetRequirement() != TargetSelection.NONE && action.getTargetKey() == null) {
-			List<Actor> validTargets = getValidTargets(playerId, action);
+			List<Entity> validTargets = getValidTargets(playerId, action);
 			if (validTargets.isEmpty() && action.getActionType() == ActionType.MINION_ABILITY) {
 				return;
 			}
 			action.setValidTargets(validTargets);
-			Actor target = player.getBehaviour().provideTargetFor(player, action);
+			Entity target = player.getBehaviour().provideTargetFor(player, action);
 			if (!validTargets.contains(target)) {
 				throw new IllegalArgumentException("Selected invalid target " + target + " for action " + action);
 			}
@@ -525,8 +527,18 @@ public class GameLogic implements Cloneable {
 		}
 
 		if (card.getCardType() == CardType.SPELL) {
-			context.fireGameEvent(new SpellCastedEvent(context, playerId));
+			GameEvent spellCastedEvent = new SpellCastedEvent(context, playerId, card);
+			context.fireGameEvent(spellCastedEvent, TriggerLayer.SECRET);
+			if (!card.hasTag(GameTag.COUNTERED)) {
+				context.fireGameEvent(spellCastedEvent);
+			}
 		}
+	}
+
+	public void playSecret(Player player, Secret secret) {
+		logger.debug("{} has a new secret activated: {}", player.getName(), secret.getSource());
+		addSpellTrigger(player, secret, player.getHero());
+		player.getSecrets().add(secret.getSource().getTypeId());
 	}
 
 	public void receiveCard(int playerId, Card card) {
@@ -553,6 +565,31 @@ public class GameLogic implements Cloneable {
 			attacks = 2;
 		}
 		entity.setTag(GameTag.NUMBER_OF_ATTACKS, attacks);
+	}
+
+	public void removeMinion(Actor minion) {
+		context.removeTriggersAssociatedWith(minion.getReference());
+		if (minion.hasSpellTrigger()) {
+			minion.getSpellTrigger().onRemove(context);
+		}
+
+		logger.debug("{} was removed", minion);
+		// set Hp to zero to make .isDead() return true
+		minion.setHp(0);
+
+		Player owner = context.getPlayer(minion.getOwner());
+		owner.getMinions().remove(minion);
+	}
+
+	private void resolveBattlecry(int playerId, Minion minion) {
+		GameAction battlecry = minion.getBattlecry();
+		battlecry.setSource(minion.getReference());
+		performGameAction(playerId, battlecry);
+	}
+
+	public void secretTriggered(Player player, Secret secret) {
+		logger.debug("Secret was trigged: {}", secret.getSource());
+		player.getSecrets().remove((Integer) secret.getSource().getTypeId());
 	}
 
 	// TODO: circular dependency. Very ugly, refactor!
@@ -653,14 +690,8 @@ public class GameLogic implements Cloneable {
 		context.getEnvironment().remove(Environment.SUMMONED_MINION);
 	}
 
-	private void resolveBattlecry(int playerId, Minion minion) {
-		GameAction battlecry = minion.getBattlecry();
-		battlecry.setSource(minion.getReference());
-		performGameAction(playerId, battlecry);
-	}
-
-	private List<Actor> toList(Actor entity) {
-		List<Actor> list = new ArrayList<Actor>(1);
+	private List<Entity> toList(Actor entity) {
+		List<Entity> list = new ArrayList<>(1);
 		list.add(entity);
 		return list;
 	}
@@ -670,31 +701,6 @@ public class GameLogic implements Cloneable {
 		modifyCurrentMana(playerId, -power.getManaCost(player));
 		logger.debug("{} uses {}", player.getName(), power);
 		power.setUsed(true);
-	}
-
-	public void addSpellTrigger(Player player, SpellTrigger spellTrigger, Entity target) {
-		// there was a .clone() here before, we don't need this, do we?
-		spellTrigger.setOwner(player.getId());
-		spellTrigger.setHost(target);
-		spellTrigger.reset();
-		spellTrigger.onAdd(context);
-		context.addTrigger(spellTrigger);
-		logger.debug("New spelltrigger was added for {}", player.getName());
-	}
-
-	public boolean canPlaySecret(Player player, SecretCard card) {
-		return player.getSecrets().size() < MAX_SECRETS && !player.getSecrets().contains(card.getTypeId());
-	}
-
-	public void playSecret(Player player, Secret secret) {
-		logger.debug("{} has a new secret activated: {}", player.getName(), secret.getSource());
-		addSpellTrigger(player, secret, player.getHero());
-		player.getSecrets().add(secret.getSource().getTypeId());
-	}
-
-	public void secretTriggered(Player player, Secret secret) {
-		logger.debug("Secret was trigged: {}", secret.getSource());
-		player.getSecrets().remove((Integer) secret.getSource().getTypeId());
 	}
 
 }

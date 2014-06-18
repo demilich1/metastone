@@ -12,14 +12,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SummonNewTarget
 
 public class NobleSacrifice extends SecretCard {
 
-	public NobleSacrifice() {
-		super("Noble Sacrifice", Rarity.COMMON, HeroClass.PALADIN, 1);
-		setDescription("Secret: When an enemy attacks, summon a 2/1 Defender as the new target.");
-		
-		Spell decoySpell = new SummonNewAttackTargetSpell(new Defender());
-		setTriggerAndEffect(new SummonNewTargetTrigger(ActionType.PHYSICAL_ATTACK), decoySpell);
-	}
-	
 	private class Defender extends MinionCard {
 
 		public Defender() {
@@ -32,6 +24,14 @@ public class NobleSacrifice extends SecretCard {
 			return createMinion();
 		}
 		
+	}
+	
+	public NobleSacrifice() {
+		super("Noble Sacrifice", Rarity.COMMON, HeroClass.PALADIN, 1);
+		setDescription("Secret: When an enemy attacks, summon a 2/1 Defender as the new target.");
+		
+		Spell decoySpell = new SummonNewAttackTargetSpell(new Defender());
+		setTriggerAndEffect(new SummonNewTargetTrigger(ActionType.PHYSICAL_ATTACK), decoySpell);
 	}
 	
 

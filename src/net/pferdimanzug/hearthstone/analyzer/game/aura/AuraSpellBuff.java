@@ -4,6 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 
@@ -17,13 +18,13 @@ public class AuraSpellBuff extends Spell {
 	private int attackBonus;
 	private int hpBonus;
 
+	public AuraSpellBuff(int attackBonus) {
+		this(attackBonus, 0);
+	}
+
 	public AuraSpellBuff(int attackBonus, int hpBonus) {
 		this.attackBonus = attackBonus;
 		this.hpBonus = hpBonus;
-	}
-
-	public AuraSpellBuff(int attackBonus) {
-		this(attackBonus, 0);
 	}
 
 	public int getAttackBonus() {
@@ -35,13 +36,14 @@ public class AuraSpellBuff extends Spell {
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, Actor target) {
-		logger.debug("{} gains ({} from aura effect)", target, attackBonus + "/" + hpBonus);
+	protected void onCast(GameContext context, Player player, Entity target) {
+		Actor targetActor = (Actor) target;
+		logger.debug("{} gains ({} from aura effect)", targetActor, attackBonus + "/" + hpBonus);
 		if (attackBonus != 0) {
-			target.modifyTag(GameTag.AURA_ATTACK_BONUS, +attackBonus);
+			targetActor.modifyTag(GameTag.AURA_ATTACK_BONUS, +attackBonus);
 		}
 		if (hpBonus != 0) {
-			target.modifyAuraHpBonus(hpBonus);
+			targetActor.modifyAuraHpBonus(hpBonus);
 		}
 
 		

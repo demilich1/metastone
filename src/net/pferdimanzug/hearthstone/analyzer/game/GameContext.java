@@ -9,6 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
@@ -50,6 +51,10 @@ public class GameContext implements Cloneable {
 		this.logic.setContext(this);
 	}
 
+	public void addTrigger(SpellTrigger spellTrigger) {
+		triggerManager.addTrigger(spellTrigger);
+	}
+
 	@Override
 	public GameContext clone() {
 		GameLogic logicClone = getLogic().clone();
@@ -75,15 +80,55 @@ public class GameContext implements Cloneable {
 		return null;
 	}
 
+	public void fireGameEvent(GameEvent gameEvent) {
+		fireGameEvent(gameEvent, TriggerLayer.DEFAULT);
+	}
+
+	public void fireGameEvent(GameEvent gameEvent, TriggerLayer layer) {
+		gameEvent.setTriggerLayer(layer);
+		triggerManager.fireGameEvent(gameEvent);
+	}
+
 	public boolean gameDecided() {
 		result = logic.getMatchResult(activePlayer, getOpponent(activePlayer));
 		return result != GameResult.RUNNING;
 	}
 
+	public Player getActivePlayer() {
+		return activePlayer;
+	}
+
+	public List<Entity> getAdjacentMinions(Player player, EntityReference minionReference) {
+		List<Entity> adjacentMinions = new ArrayList<>();
+		Actor minion = (Actor) resolveSingleTarget(player.getId(), minionReference);
+		List<Minion> minions = getPlayer(minion.getOwner()).getMinions();
+		int index = minions.indexOf(minion);
+		if (index == -1) {
+			return null;
+		}
+		int left = index - 1;
+		int right = index + 1;
+		if (left > -1 && left < minions.size()) {
+			adjacentMinions.add(minions.get(left));
+		}
+		if (right > -1 && right < minions.size()) {
+			adjacentMinions.add(minions.get(right));
+		}
+		return adjacentMinions;
+	}
+
+	public HashMap<Environment, Object> getEnvironment() {
+		return environment;
+	}
+
 	public GameLogic getLogic() {
 		return logic;
 	}
-
+	
+	public int getMinionCount(Player player) {
+		return player.getMinions().size();
+	}
+	
 	public Player getOpponent(Player player) {
 		return player.getId() == PLAYER_1 ? getPlayer2() : getPlayer1();
 	}
@@ -91,36 +136,31 @@ public class GameContext implements Cloneable {
 	public Player getPlayer(int index) {
 		return players[index];
 	}
-
+	
 	public Player getPlayer1() {
 		return getPlayers()[PLAYER_1];
 	}
-
+	
 	public Player getPlayer2() {
 		return getPlayers()[PLAYER_2];
 	}
-
+	
 	public Player[] getPlayers() {
 		return players;
 	}
-
+	
 	public GameResult getResult() {
 		return result;
 	}
-	
-	public void fireGameEvent(GameEvent gameEvent) {
-		fireGameEvent(gameEvent, TriggerLayer.DEFAULT);
-	}
-	
-	public void fireGameEvent(GameEvent gameEvent, TriggerLayer layer) {
-		gameEvent.setTriggerLayer(layer);
-		triggerManager.fireGameEvent(gameEvent);
+
+	public int getTotalMinionCount() {
+		int totalMinionCount = 0;
+		for (int i = 0; i < players.length; i++) {
+			totalMinionCount += getMinionCount(players[i]);
+		}
+		return totalMinionCount;
 	}
 
-	public void removeTriggersAssociatedWith(EntityReference entityReference) {
-		triggerManager.removeTriggersAssociatedWith(entityReference);
-	}
-	
 	public int getTurn() {
 		return turn;
 	}
@@ -128,14 +168,14 @@ public class GameContext implements Cloneable {
 	public Player getWinner() {
 		return winner;
 	}
-	
+
 	protected void onGameStateChanged() {	
 	}
-	
+
 	protected void onWillPerformAction(GameAction action) {
 		
 	}
-
+	
 	public void play() {
 		logger.debug("Game starts: " + getPlayer1().getName() + " VS. " + getPlayer2().getName());
 		int startingPlayerId = logic.determineBeginner(PLAYER_1, PLAYER_2);
@@ -149,7 +189,7 @@ public class GameContext implements Cloneable {
 		winner = result == GameResult.WIN ? activePlayer : getOpponent(activePlayer);
 		logger.debug("Game finished after " + turn + " turns, the winner is: " + winner.getName());
 	}
-
+	
 	private void playTurn(Player player) {
 		turn++;
 		logic.startTurn(player.getId());
@@ -169,6 +209,10 @@ public class GameContext implements Cloneable {
 		activePlayer = getOpponent(player);
 	}
 	
+	public void removeTriggersAssociatedWith(EntityReference entityReference) {
+		triggerManager.removeTriggersAssociatedWith(entityReference);
+	}
+
 	public Card resolveCardReference(CardReference cardReference) {
 		Player player = getPlayer(cardReference.getPlayerId());
 		switch (cardReference.getLocation()) {
@@ -190,44 +234,13 @@ public class GameContext implements Cloneable {
 		return null;
 	}
 
-	public Actor resolveSingleTarget(int playerId, EntityReference targetKey) {
+	public Entity resolveSingleTarget(int playerId, EntityReference targetKey) {
 		Player player = getPlayer(playerId);
 		return targetLogic.resolveTargetKey(this, player, null, targetKey).get(0);
 	}
-
-	public List<Actor> resolveTarget(Player player, Actor source, EntityReference targetKey) {
+	
+	public List<Entity> resolveTarget(Player player, Actor source, EntityReference targetKey) {
 		return targetLogic.resolveTargetKey(this, player, source, targetKey);
-	}
-	
-	public List<Actor> getAdjacentMinions(Player player, EntityReference minionReference) {
-		List<Actor> adjacentMinions = new ArrayList<>();
-		Actor minion = resolveSingleTarget(player.getId(), minionReference);
-		List<Minion> minions = getPlayer(minion.getOwner()).getMinions();
-		int index = minions.indexOf(minion);
-		if (index == -1) {
-			return null;
-		}
-		int left = index - 1;
-		int right = index + 1;
-		if (left > -1 && left < minions.size()) {
-			adjacentMinions.add(minions.get(left));
-		}
-		if (right > -1 && right < minions.size()) {
-			adjacentMinions.add(minions.get(right));
-		}
-		return adjacentMinions;
-	}
-	
-	public int getMinionCount(Player player) {
-		return player.getMinions().size();
-	}
-	
-	public int getTotalMinionCount() {
-		int totalMinionCount = 0;
-		for (int i = 0; i < players.length; i++) {
-			totalMinionCount += getMinionCount(players[i]);
-		}
-		return totalMinionCount;
 	}
 
 	@Override
@@ -258,17 +271,5 @@ public class GameContext implements Cloneable {
 		result.append("Turn: " + getTurn());
 
 		return result.toString();
-	}
-
-	public void addTrigger(SpellTrigger spellTrigger) {
-		triggerManager.addTrigger(spellTrigger);
-	}
-	
-	public Player getActivePlayer() {
-		return activePlayer;
-	}
-
-	public HashMap<Environment, Object> getEnvironment() {
-		return environment;
 	}
 }

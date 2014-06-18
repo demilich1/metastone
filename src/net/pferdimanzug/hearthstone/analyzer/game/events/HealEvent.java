@@ -1,14 +1,14 @@
 package net.pferdimanzug.hearthstone.analyzer.game.events;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public class HealEvent extends GameEvent {
 
-	private final Actor target;
+	private final Entity target;
 	private final int healing;
 
-	public HealEvent(GameContext context, Actor target, int healing) {
+	public HealEvent(GameContext context, Entity target, int healing) {
 		super(context);
 		this.target = target;
 		this.healing = healing;
@@ -23,7 +23,7 @@ public class HealEvent extends GameEvent {
 		return healing;
 	}
 
-	public Actor getTarget() {
+	public Entity getTarget() {
 		return target;
 	}
 

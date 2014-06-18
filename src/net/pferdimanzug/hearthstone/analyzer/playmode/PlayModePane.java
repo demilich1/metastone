@@ -12,11 +12,11 @@ public class PlayModePane extends BorderPane {
 		setCenter(boardView);
 	}
 	
-	public void updateGameState(GameContextVisualizable context) {
-		boardView.updateGameState(context);
-	}
-	
 	public void enableTargetSelection(HumanTargetOptions targetOptions) {
 		boardView.enableTargetSelection(targetOptions);
+	}
+	
+	public void updateGameState(GameContextVisualizable context) {
+		boardView.updateGameState(context);
 	}
 }

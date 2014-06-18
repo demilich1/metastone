@@ -4,7 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
@@ -24,11 +24,11 @@ public class Houndmaster extends MinionCard {
 		}
 
 		@Override
-		public boolean canBeExecutedOn(Actor actor) {
-			if (actor.getEntityType() != EntityType.MINION) {
+		public boolean canBeExecutedOn(Entity entity) {
+			if (entity.getEntityType() != EntityType.MINION) {
 				return false;
 			}
-			Minion minion = (Minion) actor;
+			Minion minion = (Minion) entity;
 			return minion.getRace() == Race.BEAST;
 		}
 	}

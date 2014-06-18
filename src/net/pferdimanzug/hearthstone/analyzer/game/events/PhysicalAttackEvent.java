@@ -21,6 +21,10 @@ public class PhysicalAttackEvent extends GameEvent {
 		return attacker;
 	}
 
+	public int getDamageDealt() {
+		return damageDealt;
+	}
+
 	public Actor getDefender() {
 		return defender;
 	}
@@ -28,10 +32,6 @@ public class PhysicalAttackEvent extends GameEvent {
 	@Override
 	public GameEventType getEventType() {
 		return GameEventType.PHYSICAL_ATTACK;
-	}
-
-	public int getDamageDealt() {
-		return damageDealt;
 	}
 
 }

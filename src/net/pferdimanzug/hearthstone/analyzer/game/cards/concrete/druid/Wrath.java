@@ -12,13 +12,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Wrath extends ChooseOneCard {
 
-	public Wrath() {
-		super("Wrath", CardType.SPELL, Rarity.COMMON, HeroClass.DRUID, 1);
-		setDescription("Choose One - Deal $3 damage to a minion; or $1 damage and draw a card.");
-		setCard1(new WrathDamage());
-		setCard2(new WrathDamageAndDraw());
-	}
-	
 	private class WrathDamage extends SpellCard {
 
 		public WrathDamage() {
@@ -39,6 +32,13 @@ public class Wrath extends ChooseOneCard {
 			setTargetRequirement(TargetSelection.MINIONS);
 		}
 		
+	}
+	
+	public Wrath() {
+		super("Wrath", CardType.SPELL, Rarity.COMMON, HeroClass.DRUID, 1);
+		setDescription("Choose One - Deal $3 damage to a minion; or $1 damage and draw a card.");
+		setCard1(new WrathDamage());
+		setCard2(new WrathDamageAndDraw());
 	}
 
 

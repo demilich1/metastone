@@ -13,14 +13,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.MinionAttacksTr
 
 public class SnakeTrap extends SecretCard {
 
-	public SnakeTrap() {
-		super("Snake Trap", Rarity.EPIC, HeroClass.ANY, 2);
-		setDescription("Secret: When one of your minions is attacked, summon three 1/1 Snakes.");
-		
-		Spell summonSpell = new SummonSpell(new Snake(), new Snake(), new Snake());
-		setTriggerAndEffect(new MinionAttacksTrigger(), summonSpell);
-	}
-	
 	private class Snake extends MinionCard {
 
 		public Snake() {
@@ -35,6 +27,14 @@ public class SnakeTrap extends SecretCard {
 			return createMinion();
 		}
 		
+	}
+	
+	public SnakeTrap() {
+		super("Snake Trap", Rarity.EPIC, HeroClass.ANY, 2);
+		setDescription("Secret: When one of your minions is attacked, summon three 1/1 Snakes.");
+		
+		Spell summonSpell = new SummonSpell(new Snake(), new Snake(), new Snake());
+		setTriggerAndEffect(new MinionAttacksTrigger(), summonSpell);
 	}
 
 }
