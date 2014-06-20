@@ -37,7 +37,7 @@ public abstract class Hero extends Actor {
 	@Override
 	public int getAttack() {
 		int attack = super.getAttack();
-		if (weapon != null) {
+		if (weapon != null && weapon.isActive()) {
 			attack += weapon.getWeaponDamage();
 		}
 		return attack;
@@ -62,6 +62,12 @@ public abstract class Hero extends Actor {
 
 	public Weapon getWeapon() {
 		return weapon;
+	}
+	
+	public void activateWeapon(boolean active) {
+		if (weapon != null) {
+			weapon.setActive(active);
+		}
 	}
 	
 	public void modifyArmor(int armor) {

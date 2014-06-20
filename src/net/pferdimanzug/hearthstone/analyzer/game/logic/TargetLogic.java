@@ -104,7 +104,7 @@ public class TargetLogic {
 	private List<Entity> getTaunters(List<Minion> entities) {
 		List<Entity> taunters = new ArrayList<>();
 		for (Actor entity : entities) {
-			if (entity.hasTag(GameTag.TAUNT)) {
+			if (entity.hasTag(GameTag.TAUNT) && !entity.hasTag(GameTag.STEALTHED)) {
 				taunters.add(entity);
 			}
 		}

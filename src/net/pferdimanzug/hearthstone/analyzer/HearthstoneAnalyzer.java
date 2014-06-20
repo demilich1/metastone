@@ -99,7 +99,6 @@ public class HearthstoneAnalyzer extends Application {
 			System.out.println("Path: " + path);
 			DevCheckCardCompleteness.printImplementedCards(path, "cards.add(new %s());");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

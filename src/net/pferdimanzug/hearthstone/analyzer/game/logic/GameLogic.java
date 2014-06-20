@@ -297,6 +297,7 @@ public class GameLogic implements Cloneable {
 	public void endTurn(int playerId) {
 		Player player = context.getPlayer(playerId);
 		player.getHero().removeTag(GameTag.COMBO);
+		player.getHero().activateWeapon(false);
 		logger.debug("{} ends his turn.", player.getName());
 		context.fireGameEvent(new TurnEndEvent(context, player.getId()));
 	}
@@ -343,14 +344,13 @@ public class GameLogic implements Cloneable {
 		}
 
 		boolean damaged = damage(player, target, attackerDamage, false);
-		// heroes do not retaliate when attacked
-		// TODO: actually heroes weapon is deactivated on opponents turn
-		if (target.getEntityType() != EntityType.HERO) {
-			damage(player, attacker, defenderDamage, false);
+		if (defenderDamage > 0) {
+			damage(player, attacker, defenderDamage, false);	
 		}
+		
 		if (attacker.getEntityType() == EntityType.HERO) {
 			Hero hero = (Hero) attacker;
-			if (hero.getWeapon() != null) {
+			if (hero.getWeapon() != null && hero.getWeapon().isActive()) {
 				changeDurability(hero.getWeapon(), -1);
 			}
 		}
@@ -632,6 +632,7 @@ public class GameLogic implements Cloneable {
 		player.getHero().removeTag(GameTag.OVERLOAD);
 		logger.debug("{} starts his turn with {} mana", player.getName(), player.getMana() + "/" + player.getMaxMana());
 		player.getHero().getHeroPower().setUsed(false);
+		player.getHero().activateWeapon(true);
 		refreshAttacksPerRound(player.getHero());
 		drawCard(playerId);
 		for (Entity minion : player.getMinions()) {

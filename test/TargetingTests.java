@@ -55,7 +55,11 @@ public class TargetingTests extends TestBase {
 		validTargets = context.getLogic().getValidTargets(mage.getId(), fireblast);
 		Assert.assertEquals(validTargets.size(), 4);
 		
-		//TODO: add stealth + taunt test
+		// taunt should be ignored when the minion is stealthed
+		defender.setTag(GameTag.TAUNT);
+		defender.setTag(GameTag.STEALTHED);
+		validTargets = context.getLogic().getValidTargets(mage.getId(), attackAction);
+		Assert.assertEquals(validTargets.size(), 2);
 		
 	}
 

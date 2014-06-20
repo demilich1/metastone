@@ -7,6 +7,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 
 public class Weapon extends Actor {
+	
+	private boolean active;
 
 	public Weapon(Card sourceCard, int weaponDamage, int durability) {
 		super(sourceCard);
@@ -42,6 +44,14 @@ public class Weapon extends Actor {
 
 	public void setRace(Race race) {
 		setTag(GameTag.RACE, race);
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 }
