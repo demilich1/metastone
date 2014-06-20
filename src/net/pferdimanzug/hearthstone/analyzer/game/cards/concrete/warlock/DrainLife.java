@@ -19,7 +19,6 @@ public class DrainLife extends SpellCard {
 		Spell heal = new HealingSpell(2);
 		heal.setTarget(EntityReference.FRIENDLY_HERO);
 		setSpell(new MetaSpell(damage, heal));
-		//TODO: can this be cast on own hero?
 		setTargetRequirement(TargetSelection.ANY);
 		
 	}
