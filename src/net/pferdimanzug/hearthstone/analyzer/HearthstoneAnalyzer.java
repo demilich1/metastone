@@ -29,6 +29,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.Harvest
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.IronforgeRifleman;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.RazorfenHunter;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.RiverCrocolisk;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.StormwindChampion;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.Wisp;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.EyeForAnEye;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.NobleSacrifice;
@@ -86,7 +87,7 @@ public class HearthstoneAnalyzer extends Application {
 		HeroClass aiHeroClass = HeroClass.MAGE;
 		Hero hero1 = HeroFactory.createHero(humanHeroClass);
 		//Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
-		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new WarsongCommander(), new GoldshireFootman(), new BoulderfistOgre(), new HarvestGolem()));
+		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new WarsongCommander(), new GoldshireFootman(), new StormwindChampion(), new HarvestGolem()));
 		player1.setBehaviour(new HumanBehaviour());
 		
 		Hero hero2 = HeroFactory.createHero(aiHeroClass);

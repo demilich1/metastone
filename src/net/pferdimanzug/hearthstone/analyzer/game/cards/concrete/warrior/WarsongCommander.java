@@ -27,6 +27,10 @@ public class WarsongCommander extends MinionCard {
 		Minion warsongCommander = createMinion();
 		Spell chargeSpell = new ApplyTagSpell(GameTag.CHARGE);
 		chargeSpell.setTarget(EntityReference.SUMMONED_MINION);
+		//TODO: check interaction with aura buffs. Currently all auras from minions which where played
+		// before the Warsong Commander will also be applied before. Comments on Hearthhead.com state
+		// that auras are ALWAYS applied before other spell triggers, no matter when they were played.
+		// Need to check this
 		SpellTrigger trigger = new SpellTrigger(new BelowThreeAttackTrigger(), chargeSpell);
 		warsongCommander.setSpellTrigger(trigger);
 		return warsongCommander;

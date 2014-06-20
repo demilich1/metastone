@@ -58,8 +58,7 @@ public class TriggerManager implements Cloneable {
 
 	private List<SpellTrigger> getListSnapshot(GameEventType eventType,
 			HashMap<GameEventType, List<SpellTrigger>> triggerMap) {
-		List<SpellTrigger> snapshot = new ArrayList<SpellTrigger>();
-		snapshot.addAll(triggerMap.get(eventType));
+		List<SpellTrigger> snapshot = new ArrayList<SpellTrigger>(triggerMap.get(eventType));
 		return snapshot;
 	}
 
