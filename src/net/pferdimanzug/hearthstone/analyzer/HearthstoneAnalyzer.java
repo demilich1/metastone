@@ -22,7 +22,10 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.MirrorEnti
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Spellbender;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Vaporize;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.AcolyteOfPain;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.BoulderfistOgre;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.DarkIronDwarf;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.GoldshireFootman;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.HarvestGolem;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.IronforgeRifleman;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.RazorfenHunter;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.RiverCrocolisk;
@@ -30,6 +33,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.Wisp;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.EyeForAnEye;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.NobleSacrifice;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.Redemption;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.WarsongCommander;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
@@ -78,11 +82,11 @@ public class HearthstoneAnalyzer extends Application {
 	}
 
 	private void launchHumanDebugGame() {
-		HeroClass humanHeroClass = HeroClass.MAGE;
+		HeroClass humanHeroClass = HeroClass.WARRIOR;
 		HeroClass aiHeroClass = HeroClass.MAGE;
 		Hero hero1 = HeroFactory.createHero(humanHeroClass);
-		Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
-		//Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new Spellbender()));
+		//Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
+		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new WarsongCommander(), new GoldshireFootman(), new BoulderfistOgre(), new HarvestGolem()));
 		player1.setBehaviour(new HumanBehaviour());
 		
 		Hero hero2 = HeroFactory.createHero(aiHeroClass);

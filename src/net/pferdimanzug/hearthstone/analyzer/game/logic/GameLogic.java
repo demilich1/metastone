@@ -564,7 +564,10 @@ public class GameLogic implements Cloneable {
 
 	private void refreshAttacksPerRound(Entity entity) {
 		int attacks = 1;
-		if (entity.hasTag(GameTag.FROZEN)) {
+		if (entity.hasTag(GameTag.SUMMONING_SICKNESS) && !entity.hasTag(GameTag.CHARGE)) {
+			attacks = 0;
+		}
+		else if (entity.hasTag(GameTag.FROZEN)) {
 			attacks = 0;
 		} else if (entity.hasTag(GameTag.WINDFURY)) {
 			attacks = 2;
@@ -637,8 +640,8 @@ public class GameLogic implements Cloneable {
 		refreshAttacksPerRound(player.getHero());
 		drawCard(playerId);
 		for (Entity minion : player.getMinions()) {
-			refreshAttacksPerRound(minion);
 			minion.removeTag(GameTag.SUMMONING_SICKNESS);
+			refreshAttacksPerRound(minion);
 		}
 		context.fireGameEvent(new TurnStartEvent(context, player.getId()));
 	}
@@ -667,9 +670,6 @@ public class GameLogic implements Cloneable {
 			player.getMinions().add(index, minion);
 		}
 
-		refreshAttacksPerRound(minion);
-		minion.setTag(GameTag.SUMMONING_SICKNESS);
-
 		try {
 			SummonEvent summonEvent = new SummonEvent(context, minion, source);
 			context.fireGameEvent(summonEvent, TriggerLayer.SECRET);
@@ -678,15 +678,12 @@ public class GameLogic implements Cloneable {
 			logger.error("Error while summoning {}", minion);
 			e.printStackTrace();
 		}
+		
+		minion.setTag(GameTag.SUMMONING_SICKNESS);
+		refreshAttacksPerRound(minion);
 
 		if (minion.hasSpellTrigger()) {
 			addSpellTrigger(player, minion.getSpellTrigger(), minion);
-		}
-
-		if (minion.hasTag(GameTag.CHARGE)) {
-			minion.setTag(GameTag.NUMBER_OF_ATTACKS, minion.hasTag(GameTag.WINDFURY) ? 2 : 1);
-		} else {
-			minion.setTag(GameTag.NUMBER_OF_ATTACKS, 0);
 		}
 
 		if (minion.getBattlecry() != null && minion.getBattlecry().isResolvedLate()) {
