@@ -4,7 +4,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 
 public class Weapon extends Actor {
 	
@@ -30,20 +29,12 @@ public class Weapon extends Actor {
 		return EntityType.WEAPON;
 	}
 	
-	public Race getRace() {
-		return (Race) getTag(GameTag.RACE);
-	}
-	
 	public int getWeaponDamage() {
 		return getTagValue(GameTag.WEAPON_DAMAGE);
 	}
 
 	public boolean isBroken() {
 		return !hasTag(GameTag.DURABILITY) || getTagValue(GameTag.DURABILITY) < 1;
-	}
-
-	public void setRace(Race race) {
-		setTag(GameTag.RACE, race);
 	}
 
 	public boolean isActive() {

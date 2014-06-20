@@ -312,6 +312,7 @@ public class GameLogic implements Cloneable {
 		}
 		logger.debug("{} equips weapon {}", player.getHero(), weapon);
 		player.getHero().setWeapon(weapon);
+		weapon.setActive(context.getActivePlayer() == player);
 		if (weapon.hasSpellTrigger()) {
 			SpellTrigger spellTrigger = weapon.getSpellTrigger();
 			spellTrigger.setHost(weapon);

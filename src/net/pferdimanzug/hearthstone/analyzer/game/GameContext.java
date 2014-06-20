@@ -36,7 +36,7 @@ public class GameContext implements Cloneable {
 	private TriggerManager triggerManager = new TriggerManager();
 	private final HashMap<Environment, Object> environment = new HashMap<>();
 
-	private Player activePlayer;
+	protected Player activePlayer;
 	private Player winner;
 	private GameResult result;
 
@@ -97,7 +97,7 @@ public class GameContext implements Cloneable {
 	public Player getActivePlayer() {
 		return activePlayer;
 	}
-
+	
 	public List<Entity> getAdjacentMinions(Player player, EntityReference minionReference) {
 		List<Entity> adjacentMinions = new ArrayList<>();
 		Actor minion = (Actor) resolveSingleTarget(player.getId(), minionReference);

@@ -36,14 +36,13 @@ public class TestBase {
 		context.getLogic().performGameAction(player.getId(), physicalAttackAction);
 	}
 	
-	protected static GameContext createContext(Hero hero1, Hero hero2) {
-		
+	protected static DebugContext createContext(Hero hero1, Hero hero2) {
 		Player player1 = new Player("P1", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
 		player1.setBehaviour(new NullBehaviour());
 		Player player2 = new Player("P2", hero2, DebugDecks.getRandomDeck(hero2.getHeroClass()));
 		player2.setBehaviour(new NullBehaviour());
 		GameLogic logic = new GameLogic();
-		GameContext context = new GameContext(player1, player2, logic);
+		DebugContext context = new DebugContext(player1, player2, logic);
 		logic.setContext(context);
 		logic.init(GameContext.PLAYER_1, true);
 		logic.init(GameContext.PLAYER_2, false);

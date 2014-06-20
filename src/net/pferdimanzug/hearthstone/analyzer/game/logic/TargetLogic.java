@@ -30,7 +30,7 @@ public class TargetLogic {
 
 	private boolean containsTaunters(List<Minion> minions) {
 		for (Entity entity : minions) {
-			if (entity.hasTag(GameTag.TAUNT)) {
+			if (entity.hasTag(GameTag.TAUNT) && !entity.hasTag(GameTag.STEALTHED)) {
 				return true;
 			}
 		}
@@ -42,6 +42,10 @@ public class TargetLogic {
 		for (Entity entity : potentialTargets) {
 			if ((action.getActionType() == ActionType.SPELL || action.getActionType() == ActionType.HERO_POWER)
 					&& entity.hasTag(GameTag.UNTARGETABLE_BY_SPELLS)) {
+				continue;
+			}
+			
+			if (entity.hasTag(GameTag.STEALTHED)) {
 				continue;
 			}
 

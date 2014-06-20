@@ -69,6 +69,8 @@ public class BasicTests extends TestBase {
 		BuffHeroSpell heroBuffSpell = new BuffHeroSpell(damage, 0);
 		heroBuffSpell.setTarget(EntityReference.pointTo(druid.getHero()));
 		context.getLogic().castSpell(druid.getId(), heroBuffSpell);
+		context.getLogic().endTurn(druid.getId());
+		
 		Actor devMonster = getSingleMinion(mage.getMinions());
 		GameAction minionAttackAction = new PhysicalAttackAction(devMonster.getReference());
 		minionAttackAction.setTarget(druid.getHero());
@@ -76,7 +78,9 @@ public class BasicTests extends TestBase {
 		// monster attacked; it should not be damaged by the hero
 		Assert.assertEquals(druid.getHero().getHp(), druid.getHero().getMaxHp() - damage);
 		Assert.assertEquals(devMonster.getHp(), devMonster.getMaxHp());
+		context.getLogic().endTurn(mage.getId());
 		
+		context.getLogic().castSpell(druid.getId(), heroBuffSpell);
 		GameAction heroAttackAction = new PhysicalAttackAction(druid.getHero().getReference());
 		heroAttackAction.setTarget(devMonster);
 		context.getLogic().performGameAction(mage.getId(), heroAttackAction);
@@ -162,7 +166,7 @@ public class BasicTests extends TestBase {
 	
 	@Test
 	public void testWeapon() { 
-		GameContext context = createContext(new Garrosh(), new Garrosh());
+		DebugContext context = createContext(new Garrosh(), new Garrosh());
 		Player player = context.getPlayer1();
 		Hero warrior = player.getHero();
 		
@@ -174,6 +178,8 @@ public class BasicTests extends TestBase {
 			}
 		};
 		
+		context.setActivePlayer(player);
+		context.getLogic().startTurn(player.getId());
 		Assert.assertEquals(warrior.getAttack(), 0);
 		context.getLogic().receiveCard(player.getId(), weaponCard);
 		context.getLogic().performGameAction(player.getId(), weaponCard.play());

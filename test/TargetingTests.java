@@ -9,6 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.Shieldbearer;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.Wisp;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
 
@@ -59,7 +60,8 @@ public class TargetingTests extends TestBase {
 		defender.setTag(GameTag.TAUNT);
 		defender.setTag(GameTag.STEALTHED);
 		validTargets = context.getLogic().getValidTargets(mage.getId(), attackAction);
-		Assert.assertEquals(validTargets.size(), 2);
+		Assert.assertEquals(validTargets.size(), 1);
+		Assert.assertEquals(validTargets.get(0).getEntityType(), EntityType.HERO);
 		
 	}
 
