@@ -45,8 +45,9 @@ public class HearthstoneAnalyzer extends Application {
 
 	public static void main(String[] args) {
 		//new HearthstoneAnalyzer().printCardsForDatabase();
-		launch(args);
+		//launch(args);
 		//new HearthstoneAnalyzer().launchDebugGame();
+		DevCheckCardCompleteness.writeImplementedCardsToFile("implemented_cards.csv");
 	}
 	
 	private void launchDebugGame() {

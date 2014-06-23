@@ -9,6 +9,9 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCatalogue;
+
 import org.apache.commons.io.FileUtils;
 
 public class DevCheckCardCompleteness {
@@ -65,6 +68,22 @@ public class DevCheckCardCompleteness {
 	
 	private static String toCanonName(String name) {
 		return name.toLowerCase().replace(".java", "").replace(".png", "").replace("_", "").replace("-", "");
+	}
+	
+	public static void writeImplementedCardsToFile(String filename) {
+		PrintWriter out = null;
+		try {
+			FileWriter outFile = new FileWriter(filename);
+			out = new PrintWriter(outFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return;
+		}
+		
+		for (Card card : CardCatalogue.query(null, null, null)) {
+			out.println(card.getName()+";");
+		}
+		out.close();
 	}
 
 }
