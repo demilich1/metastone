@@ -46,6 +46,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.MirrorEnti
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.MirrorImage;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Polymorph;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Pyroblast;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Spellbender;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Vaporize;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.WaterElemental;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.*;
@@ -142,6 +143,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.InnerRa
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.KorkronElite;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.Rampage;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.ShieldBlock;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.Slam;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.WarsongCommander;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.Whirlwind;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
@@ -185,6 +187,7 @@ public class CardCatalogue {
 		cards.add(new ArcaneIntellect());
 		cards.add(new ArcaneMissiles());
 		cards.add(new ConeOfCold());
+		cards.add(new Counterspell());
 		cards.add(new Fireball());
 		cards.add(new Flamestrike());
 		cards.add(new Frostbolt());
@@ -193,10 +196,10 @@ public class CardCatalogue {
 		cards.add(new IceLance());
 		cards.add(new ManaWyrm());
 		cards.add(new MirrorEntity());
-		cards.add(new Counterspell());
 		cards.add(new MirrorImage());
 		cards.add(new Polymorph());
 		cards.add(new Pyroblast());
+		cards.add(new Spellbender());
 		cards.add(new Vaporize());
 		cards.add(new WaterElemental());
 		cards.add(new Abomination());
@@ -392,8 +395,10 @@ public class CardCatalogue {
 		cards.add(new KorkronElite());
 		cards.add(new Rampage());
 		cards.add(new ShieldBlock());
+		cards.add(new Slam());
 		cards.add(new WarsongCommander());
 		cards.add(new Whirlwind());
+
 	}
 
 	public static Card getCardByName(String name) {

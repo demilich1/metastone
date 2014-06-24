@@ -16,8 +16,8 @@ public class SummoningPortal extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion summoningPortal = createMinion();
-		//TODO: implement min cost of 1... maybe should be an aura?
 		summoningPortal.setTag(GameTag.MINION_MANA_COST, -2);
+		summoningPortal.setTag(GameTag.MINION_MIN_MANA_COST, 1);
 		return summoningPortal;
 	}
 

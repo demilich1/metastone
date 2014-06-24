@@ -41,6 +41,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.secrets.Secret;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.IdFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
+import net.pferdimanzug.hearthstone.analyzer.utils.MathUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -346,9 +347,9 @@ public class GameLogic implements Cloneable {
 
 		boolean damaged = damage(player, target, attackerDamage, false);
 		if (defenderDamage > 0) {
-			damage(player, attacker, defenderDamage, false);	
+			damage(player, attacker, defenderDamage, false);
 		}
-		
+
 		if (attacker.getEntityType() == EntityType.HERO) {
 			Hero hero = (Hero) attacker;
 			if (hero.getWeapon() != null && hero.getWeapon().isActive()) {
@@ -378,6 +379,10 @@ public class GameLogic implements Cloneable {
 		int manaCost = card.getManaCost(player);
 		if (card.getCardType() == CardType.MINION) {
 			manaCost += getTotalTagValue(player, GameTag.MINION_MANA_COST);
+			int minManaCost = getTagValue(player, GameTag.MINION_MIN_MANA_COST, 0);
+			manaCost = MathUtils.clamp(manaCost, minManaCost, Integer.MAX_VALUE);
+		} else if (card.getCardType() == CardType.SPELL) {
+			manaCost += getTotalTagValue(player, GameTag.SPELL_MANA_COST);
 		}
 		return manaCost;
 	}
@@ -392,6 +397,17 @@ public class GameLogic implements Cloneable {
 			total += minion.getTagValue(tag);
 		}
 		return total;
+	}
+
+	public int getTagValue(Player player, GameTag tag, int defaultValue) {
+		for (Entity minion : player.getMinions()) {
+			if (!minion.hasTag(tag)) {
+				continue;
+			}
+
+			return minion.getTagValue(tag);
+		}
+		return defaultValue;
 	}
 
 	public List<GameAction> getValidActions(int playerId) {
@@ -522,7 +538,7 @@ public class GameLogic implements Cloneable {
 		player.getHand().remove(card);
 		player.getGraveyard().add(card);
 		player.getHero().modifyTag(GameTag.COMBO, +1);
-		
+
 		if (card.getCardType() == CardType.SPELL) {
 			GameEvent spellCastedEvent = new SpellCastedEvent(context, playerId, card);
 			context.fireGameEvent(spellCastedEvent, TriggerLayer.SECRET);
@@ -533,7 +549,7 @@ public class GameLogic implements Cloneable {
 				return;
 			}
 		}
-		
+
 		if (card.hasTag(GameTag.OVERLOAD)) {
 			player.getHero().modifyTag(GameTag.OVERLOAD, card.getTagValue(GameTag.OVERLOAD));
 			context.fireGameEvent(new OverloadEvent(context, playerId));
@@ -566,8 +582,7 @@ public class GameLogic implements Cloneable {
 		int attacks = 1;
 		if (entity.hasTag(GameTag.SUMMONING_SICKNESS) && !entity.hasTag(GameTag.CHARGE)) {
 			attacks = 0;
-		}
-		else if (entity.hasTag(GameTag.FROZEN)) {
+		} else if (entity.hasTag(GameTag.FROZEN)) {
 			attacks = 0;
 		} else if (entity.hasTag(GameTag.WINDFURY)) {
 			attacks = 2;
@@ -678,7 +693,7 @@ public class GameLogic implements Cloneable {
 			logger.error("Error while summoning {}", minion);
 			e.printStackTrace();
 		}
-		
+
 		minion.setTag(GameTag.SUMMONING_SICKNESS);
 		refreshAttacksPerRound(minion);
 
