@@ -8,6 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Slam extends SpellCard {
 
@@ -15,6 +16,7 @@ public class Slam extends SpellCard {
 		super("Slam", Rarity.COMMON, HeroClass.WARRIOR, 2);
 		setDescription("Deal $2 damage to a minion. If it survives, draw a card.");
 		setSpell(new SlamSpell());
+		setTargetRequirement(TargetSelection.MINIONS);
 	}
 
 	private class SlamSpell extends DamageSpell {

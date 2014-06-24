@@ -15,7 +15,11 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.ExplosiveTrap;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.FreezingTrap;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.HuntersMark;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.Snipe;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.StarvingBuzzard;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.TimberWolf;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.UnleashTheHounds;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Counterspell;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.IceBarrier;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.MirrorEntity;
@@ -45,8 +49,8 @@ public class HearthstoneAnalyzer extends Application {
 
 	public static void main(String[] args) {
 		//new HearthstoneAnalyzer().printCardsForDatabase();
-		DevCheckCardCompleteness.writeImplementedCardsToFile("implemented_cards.csv");
-		//launch(args);
+		//DevCheckCardCompleteness.writeImplementedCardsToFile("implemented_cards.csv");
+		launch(args);
 		//new HearthstoneAnalyzer().launchDebugGame();
 	}
 	
@@ -84,16 +88,16 @@ public class HearthstoneAnalyzer extends Application {
 	}
 
 	private void launchHumanDebugGame() {
-		HeroClass humanHeroClass = HeroClass.WARRIOR;
+		HeroClass humanHeroClass = HeroClass.HUNTER;
 		HeroClass aiHeroClass = HeroClass.MAGE;
 		Hero hero1 = HeroFactory.createHero(humanHeroClass);
 		//Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
-		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new WarsongCommander(), new GoldshireFootman(), new StormwindChampion(), new HarvestGolem()));
+		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new UnleashTheHounds(), new TimberWolf(), new HuntersMark(), new StarvingBuzzard()));
 		player1.setBehaviour(new HumanBehaviour());
 		
 		Hero hero2 = HeroFactory.createHero(aiHeroClass);
 		//Player player2 = new Player("Bot", hero2, DebugDecks.getRandomDeck(hero2.getHeroClass()));
-		Player player2 = new Player("Bot", hero2, DebugDecks.getDeckConsistingof(30, new Wisp(), new Counterspell()));
+		Player player2 = new Player("Bot", hero2, DebugDecks.getDeckConsistingof(30, new Wisp(), new GoldshireFootman()));
 		player2.setBehaviour(new PlayRandomBehaviour());
 		GameContext newGame = new GameContextVisualizable(player1, player2, new GameLogic());
 		ApplicationFacade.getInstance().sendNotification(GameNotification.START_GAME, newGame);		

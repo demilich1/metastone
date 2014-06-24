@@ -24,12 +24,14 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.Houndmas
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.HuntersMark;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.KillCommand;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.MultiShot;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.ScavengingHyena;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.SnakeTrap;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.Snipe;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.StarvingBuzzard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.TimberWolf;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.Tracking;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.TundraRhino;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.UnleashTheHounds;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.ArcaneExplosion;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.ArcaneIntellect;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.ArcaneMissiles;
@@ -46,6 +48,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.MirrorEnti
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.MirrorImage;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Polymorph;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Pyroblast;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.SorcerersApprentice;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Spellbender;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Vaporize;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.WaterElemental;
@@ -64,6 +67,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.Humilit
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.LightsJustice;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.NobleSacrifice;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.Redemption;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.Repentance;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.TruesilverChampion;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.CircleOfHealing;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.DivineSpirit;
@@ -177,12 +181,14 @@ public class CardCatalogue {
 		cards.add(new HuntersMark());
 		cards.add(new KillCommand());
 		cards.add(new MultiShot());
+		cards.add(new ScavengingHyena());
 		cards.add(new SnakeTrap());
 		cards.add(new Snipe());
 		cards.add(new StarvingBuzzard());
 		cards.add(new TimberWolf());
 		cards.add(new Tracking());
 		cards.add(new TundraRhino());
+		cards.add(new UnleashTheHounds());
 		cards.add(new ArcaneExplosion());
 		cards.add(new ArcaneIntellect());
 		cards.add(new ArcaneMissiles());
@@ -199,6 +205,7 @@ public class CardCatalogue {
 		cards.add(new MirrorImage());
 		cards.add(new Polymorph());
 		cards.add(new Pyroblast());
+		cards.add(new SorcerersApprentice());
 		cards.add(new Spellbender());
 		cards.add(new Vaporize());
 		cards.add(new WaterElemental());
@@ -252,6 +259,7 @@ public class CardCatalogue {
 		cards.add(new HarvestGolem());
 		cards.add(new ImpMaster());
 		cards.add(new InjuredBlademaster());
+		cards.add(new IronbeakOwl());
 		cards.add(new IronforgeRifleman());
 		cards.add(new IronfurGrizzly());
 		cards.add(new JunglePanther());
@@ -284,6 +292,7 @@ public class CardCatalogue {
 		cards.add(new SilverHandKnight());
 		cards.add(new SilvermoonGuardian());
 		cards.add(new SouthseaDeckhand());
+		cards.add(new Spellbreaker());
 		cards.add(new SpitefulSmith());
 		cards.add(new StonetuskBoar());
 		cards.add(new StormpikeCommando());
@@ -316,6 +325,7 @@ public class CardCatalogue {
 		cards.add(new LightsJustice());
 		cards.add(new NobleSacrifice());
 		cards.add(new Redemption());
+		cards.add(new Repentance());
 		cards.add(new TruesilverChampion());
 		cards.add(new CircleOfHealing());
 		cards.add(new DivineSpirit());
@@ -398,7 +408,6 @@ public class CardCatalogue {
 		cards.add(new Slam());
 		cards.add(new WarsongCommander());
 		cards.add(new Whirlwind());
-
 	}
 
 	public static Card getCardByName(String name) {

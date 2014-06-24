@@ -9,7 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class Assassinate extends SpellCard {
 
 	public Assassinate() {
-		super("Assasinate", Rarity.FREE, HeroClass.ROGUE, 5);
+		super("Assassinate", Rarity.FREE, HeroClass.ROGUE, 5);
 		setDescription("Destroy an enemy minion.");
 		setTargetRequirement(TargetSelection.ENEMY_MINIONS);
 		setSpell(new DestroySpell());
