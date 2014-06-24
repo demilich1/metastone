@@ -10,7 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 public class StranglethornTiger extends MinionCard {
 
 	public StranglethornTiger() {
-		super("StranglethornTiger", 5, 5, Rarity.COMMON, HeroClass.ANY, 5);
+		super("Stranglethorn Tiger", 5, 5, Rarity.COMMON, HeroClass.ANY, 5);
 		setDescription("Stealth");
 		setTag(GameTag.RACE, Race.BEAST);
 	}

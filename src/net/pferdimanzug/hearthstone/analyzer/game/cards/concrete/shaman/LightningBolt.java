@@ -10,7 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class LightningBolt extends SpellCard {
 
 	public LightningBolt() {
-		super("LightningBolt", Rarity.COMMON, HeroClass.SHAMAN, 1);
+		super("Lightning Bolt", Rarity.COMMON, HeroClass.SHAMAN, 1);
 		setDescription("Deal 3 damage. Overload: (1)");
 		setTag(GameTag.OVERLOAD, 1);
 		setSpell(new DamageSpell(3));

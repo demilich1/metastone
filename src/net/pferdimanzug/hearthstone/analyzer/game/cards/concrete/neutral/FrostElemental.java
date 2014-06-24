@@ -12,7 +12,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class FrostElemental extends MinionCard {
 
 	public FrostElemental() {
-		super("FrostElemental", 5, 5, Rarity.COMMON, HeroClass.ANY, 6);
+		super("Frost Elemental", 5, 5, Rarity.COMMON, HeroClass.ANY, 6);
 		setDescription("Battlecry: Freeze a character.");
 	}
 

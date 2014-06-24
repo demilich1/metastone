@@ -11,7 +11,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class YouthfulBrewmaster extends MinionCard {
 
 	public YouthfulBrewmaster() {
-		super("YouthfulBrewmaster", 3, 2, Rarity.COMMON, HeroClass.ANY, 2);
+		super("Youthful Brewmaster", 3, 2, Rarity.COMMON, HeroClass.ANY, 2);
 		setDescription("Battlecry: Return a friendly minion from the battlefield to your hand.");
 	}
 

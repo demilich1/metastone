@@ -15,7 +15,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class FlameImp extends MinionCard {
 
 	public FlameImp() {
-		super("FlameImp", 3, 2, Rarity.COMMON, HeroClass.WARLOCK, 1);
+		super("Flame Imp", 3, 2, Rarity.COMMON, HeroClass.WARLOCK, 1);
 		setDescription("Battlecry: Deal 3 damage to your hero.");
 		setTag(GameTag.RACE, Race.DEMON);
 	}

@@ -9,7 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 public class JunglePanther extends MinionCard {
 
 	public JunglePanther() {
-		super("JunglePanther", 4, 2, Rarity.COMMON, HeroClass.ANY, 3);
+		super("Jungle Panther", 4, 2, Rarity.COMMON, HeroClass.ANY, 3);
 		setDescription("Stealth");
 	}
 
