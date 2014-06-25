@@ -20,7 +20,7 @@ public class LeperGnome extends MinionCard {
 		Spell deathrattle = new DamageSpell(2);
 		deathrattle.setTarget(EntityReference.ENEMY_HERO);
 		Minion leperGnome = createMinion();
-		leperGnome.setDeathrattle(deathrattle);
+		leperGnome.addDeathrattle(deathrattle);
 		return leperGnome;
 	}
 

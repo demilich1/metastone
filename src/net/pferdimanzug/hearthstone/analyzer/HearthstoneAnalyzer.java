@@ -9,10 +9,14 @@ import javafx.stage.Stage;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.DebugDecks;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.DoNothingBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.MinMaxBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.PlayRandomBehaviour;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.SummonMinionsBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Innervate;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.SoulOfTheForest;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.ExplosiveTrap;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.FreezingTrap;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.HuntersMark;
@@ -31,6 +35,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.DarkIro
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.GoldshireFootman;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.HarvestGolem;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.IronforgeRifleman;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.LootHoarder;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.RazorfenHunter;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.RiverCrocolisk;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.StormwindChampion;
@@ -88,17 +93,17 @@ public class HearthstoneAnalyzer extends Application {
 	}
 
 	private void launchHumanDebugGame() {
-		HeroClass humanHeroClass = HeroClass.HUNTER;
+		HeroClass humanHeroClass = HeroClass.DRUID;
 		HeroClass aiHeroClass = HeroClass.MAGE;
 		Hero hero1 = HeroFactory.createHero(humanHeroClass);
 		//Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
-		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new UnleashTheHounds(), new TimberWolf(), new HuntersMark(), new StarvingBuzzard()));
+		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new HarvestGolem(), new LootHoarder(), new Innervate(), new SoulOfTheForest()));
 		player1.setBehaviour(new HumanBehaviour());
 		
 		Hero hero2 = HeroFactory.createHero(aiHeroClass);
 		//Player player2 = new Player("Bot", hero2, DebugDecks.getRandomDeck(hero2.getHeroClass()));
 		Player player2 = new Player("Bot", hero2, DebugDecks.getDeckConsistingof(30, new Wisp(), new GoldshireFootman()));
-		player2.setBehaviour(new PlayRandomBehaviour());
+		player2.setBehaviour(new SummonMinionsBehaviour());
 		GameContext newGame = new GameContextVisualizable(player1, player2, new GameLogic());
 		ApplicationFacade.getInstance().sendNotification(GameNotification.START_GAME, newGame);		
 	}

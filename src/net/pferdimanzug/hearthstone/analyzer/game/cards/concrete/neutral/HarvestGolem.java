@@ -32,7 +32,7 @@ public class HarvestGolem extends MinionCard {
 	public Minion summon() {
 		Spell deathrattle = new SummonSpell(new DamagedGolem());
 		Minion harvestGolem = createMinion();
-		harvestGolem.setDeathrattle(deathrattle);
+		harvestGolem.addDeathrattle(deathrattle);
 		return harvestGolem;
 	}
 

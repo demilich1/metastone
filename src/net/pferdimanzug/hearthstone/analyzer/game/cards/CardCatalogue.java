@@ -105,6 +105,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.Ancestra
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.Bloodlust;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.DustDevil;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.EarthShock;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.FeralSpirit;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.FireElemental;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.FlametongueTotem;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.ForkedLightning;
@@ -310,6 +311,7 @@ public class CardCatalogue {
 		cards.add(new Wolfrider());
 		cards.add(new WorgenInfiltrator());
 		cards.add(new YoungDragonhawk());
+		cards.add(new YoungPriestess());
 		cards.add(new YouthfulBrewmaster());
 		cards.add(new ArgentProtector());
 		cards.add(new BlessingOfKings());
@@ -363,6 +365,7 @@ public class CardCatalogue {
 		cards.add(new Bloodlust());
 		cards.add(new DustDevil());
 		cards.add(new EarthShock());
+		cards.add(new FeralSpirit());
 		cards.add(new FireElemental());
 		cards.add(new FlametongueTotem());
 		cards.add(new ForkedLightning());

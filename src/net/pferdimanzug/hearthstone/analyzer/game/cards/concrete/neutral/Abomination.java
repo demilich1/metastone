@@ -21,7 +21,7 @@ public class Abomination extends MinionCard {
 		Minion abomination = createMinion(GameTag.TAUNT);
 		Spell deathrattle = new DamageSpell(2);
 		deathrattle.setTarget(EntityReference.ALL_CHARACTERS);
-		abomination.setDeathrattle(deathrattle);
+		abomination.addDeathrattle(deathrattle);
 		return abomination;
 	}
 

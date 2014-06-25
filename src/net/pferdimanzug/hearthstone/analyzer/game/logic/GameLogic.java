@@ -235,7 +235,7 @@ public class GameLogic implements Cloneable {
 			logger.error("Destroying hero not implemented!");
 			break;
 		case MINION:
-			destroyMinion(target);
+			destroyMinion((Minion)target);
 			break;
 		case WEAPON:
 			destroyWeapon((Weapon) target);
@@ -247,7 +247,7 @@ public class GameLogic implements Cloneable {
 		}
 	}
 
-	private void destroyMinion(Actor minion) {
+	private void destroyMinion(Minion minion) {
 		logger.debug("{} is destroyed", minion);
 		Player owner = context.getPlayer(minion.getOwner());
 		context.getEnvironment().put(Environment.KILLED_MINION, minion);
@@ -263,9 +263,10 @@ public class GameLogic implements Cloneable {
 
 		// TODO: add unit test for deathrattle; also check when exactly it
 		// should be fire
-		if (minion.hasTag(GameTag.DEATHRATTLE)) {
-			Spell deathrattleSpell = minion.getDeathrattle();
-			castSpell(owner.getId(), deathrattleSpell);
+		if (minion.hasTag(GameTag.DEATHRATTLES)) {
+			for (Spell deathrattle : minion.getDeathrattles()) {
+				castSpell(owner.getId(), deathrattle);
+			}
 		}
 		owner.getMinions().remove(minion);
 	}

@@ -66,7 +66,7 @@ public class MinMaxBehaviour implements IBehaviour {
 		if (minion.hasTag(GameTag.STEALTHED)) {
 			minionScore += 1;
 		}
-		if (minion.hasTag(GameTag.DEATHRATTLE)) {
+		if (minion.hasTag(GameTag.DEATHRATTLES)) {
 			minionScore += 1;
 		}
 		return (int) minionScore;

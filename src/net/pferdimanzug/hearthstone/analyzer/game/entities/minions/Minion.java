@@ -1,5 +1,8 @@
 package net.pferdimanzug.hearthstone.analyzer.game.entities.minions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
@@ -17,7 +20,14 @@ public class Minion extends Actor {
 
 	@Override
 	public Minion clone() {
-		return (Minion) super.clone();
+		Minion clone =(Minion) super.clone(); 
+		if (hasTag(GameTag.DEATHRATTLES)) {
+			clone.removeTag(GameTag.DEATHRATTLES);
+			for (Spell deathrattleSpell : getDeathrattles()) {
+				clone.addDeathrattle(deathrattleSpell);
+			}
+		}
+		return clone;
 	}
 
 	@Override
@@ -46,8 +56,16 @@ public class Minion extends Actor {
 		setTag(GameTag.BATTLECRY, battlecry);
 	}
 
-	public void setDeathrattle(Spell deathrattleSpell) {
-		setTag(GameTag.DEATHRATTLE, deathrattleSpell);
+	public void addDeathrattle(Spell deathrattleSpell) {
+		if (!hasTag(GameTag.DEATHRATTLES)) {
+			setTag(GameTag.DEATHRATTLES, new ArrayList<Spell>());
+		}
+		getDeathrattles().add(deathrattleSpell);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Spell> getDeathrattles() {
+		return (List<Spell>) getTag(GameTag.DEATHRATTLES);
 	}
 
 	public void setRace(Race race) {

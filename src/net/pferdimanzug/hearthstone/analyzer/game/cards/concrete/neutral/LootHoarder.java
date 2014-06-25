@@ -18,7 +18,7 @@ public class LootHoarder extends MinionCard {
 	public Minion summon() {
 		Spell deathrattle = new DrawCardSpell();
 		Minion lootHoarder = createMinion();
-		lootHoarder.setDeathrattle(deathrattle);
+		lootHoarder.addDeathrattle(deathrattle);
 		return lootHoarder;
 	}
 
