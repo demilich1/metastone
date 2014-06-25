@@ -9,41 +9,16 @@ import javafx.stage.Stage;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.DebugDecks;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.DoNothingBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.MinMaxBehaviour;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.PlayRandomBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.SummonMinionsBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Innervate;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.SoulOfTheForest;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.ExplosiveTrap;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.FreezingTrap;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.HuntersMark;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.Snipe;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.StarvingBuzzard;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.TimberWolf;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.UnleashTheHounds;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Counterspell;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.IceBarrier;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.MirrorEntity;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Spellbender;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Vaporize;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.AcolyteOfPain;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.BoulderfistOgre;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.DarkIronDwarf;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.GoldshireFootman;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.HarvestGolem;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.IronforgeRifleman;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.LootHoarder;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.RazorfenHunter;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.RiverCrocolisk;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.StormwindChampion;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.QuestingAdventurer;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.Wisp;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.EyeForAnEye;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.NobleSacrifice;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.Redemption;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.WarsongCommander;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.Armorsmith;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.Whirlwind;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
@@ -55,8 +30,8 @@ public class HearthstoneAnalyzer extends Application {
 	public static void main(String[] args) {
 		//new HearthstoneAnalyzer().printCardsForDatabase();
 		//DevCheckCardCompleteness.writeImplementedCardsToFile("implemented_cards.csv");
-		launch(args);
-		//new HearthstoneAnalyzer().launchDebugGame();
+		//launch(args);
+		new HearthstoneAnalyzer().launchDebugGame();
 	}
 	
 	private void launchDebugGame() {
@@ -87,17 +62,16 @@ public class HearthstoneAnalyzer extends Application {
 			ApplicationFacade.getInstance().sendNotification(GameNotification.BATCH_STOP);
 		}
 
-
 		// ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_STATE_UPDATE,
 		// newGame);
 	}
 
 	private void launchHumanDebugGame() {
-		HeroClass humanHeroClass = HeroClass.DRUID;
+		HeroClass humanHeroClass = HeroClass.WARRIOR;
 		HeroClass aiHeroClass = HeroClass.MAGE;
 		Hero hero1 = HeroFactory.createHero(humanHeroClass);
 		//Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
-		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new HarvestGolem(), new LootHoarder(), new Innervate(), new SoulOfTheForest()));
+		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new HarvestGolem(), new Armorsmith(), new Whirlwind(), new QuestingAdventurer()));
 		player1.setBehaviour(new HumanBehaviour());
 		
 		Hero hero2 = HeroFactory.createHero(aiHeroClass);

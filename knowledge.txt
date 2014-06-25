@@ -154,3 +154,123 @@ With ancients, the form is reset. if you play the ancient of war, and you choose
 #52 If you play commanding shout on a minion with 1 health and attack a minion, their won't be any triggers for "damage dealt" like water elemental's frost or emperor cobra's poison or frothing berserker's +1Attack and so on. (I assume this works any time the minion would have otherwise died.)
 
 #53 You can use the priest's hero power twice in the same turn mana permitting with shadowform. Heal two damage, cast the spell and then deal two damage. Same thing applies with the second shadowform, you can deal two damage, shadowform deal three damage.
+
+==============================================
+IHEATHU ARTICLE (16.12.2013)
+==============================================
+
+Hearthstone is made to be a simple game to pick up. However, because of the wide variety of effects 
+in the game, many of which have unwritten rules, the game is in practice very complex, to the point 
+of having some truly bizarre interactions. The following is by no means a complete list, but should 
+serve to whet your appetite for how crazy this game can get. As a note, some of these are most likely 
+bugs, and may be fixed before the game is officially released.
+
+If you play Equality with an Amani Berserker in play, he will be a 2/1. If an Amani revives from 
+Redemption, he will be a 5/1.
+
+A 1/1 minion is standing next to a Dire Wolf Alpha, making it a 2/1. If you play Crazed Alchemist on 
+the token, it will become a 2/2. If instead you play Blessed Champion on the token, it will become a 
+3/1.
+
+A minion attacks a Hunter who has Misdirection Trap set. If the minion attacks your character 
+instead, the minion will take damage from your weapon. However, you won’t lose a weapon durability.
+
+Many spells have an effect even if the printed text says they do nothing. At 10 mana, Wild Growth 
+gives you an Excess Mana spell that costs 0 and draws a card. If you have no demons in your deck, 
+Sense Demons gives you 2 Worthless Imps, which are 1/1s for 1 (not worthless!). If you play Mindgames 
+with no creatures in your opponent’s deck, you get a 0/1 for 0 called Shadow of Nothing. Captain’s 
+Parrot with no pirates in your deck does nothing. Innervate at 10 mana does nothing. Thoughtsteal and 
+Mind Vision also do nothing if the opposing player has no deck or no hand.
+
+If a Warlock plays Lord Jaraxxus into a Repentance secret, you’ll have 1 HP when he replaces your 
+character. Molten Giant also becomes uncastable until you’re at 5 life if you are Jaraxxus. If you 
+play Lord Jaraxxus with a Blood Imp in play, you’ll have 15 HP, even though the Jaraxxus minion on 
+the board had 16 HP. You can use Alarm-o-bot or Mindgames to cheat Jaraxxus in play, but in these 
+cases his battlecry does not activate, and he’s simply a 3/15.
+
+A Chillwind Yeti has 1 damage, making him a 4/4. If you cast Divine Spirit and heal him, he will be a 
+4/9, not a 4/10.
+
+Bane of Doom summons all common demons, Felguard (a rare), but not Doomguard (a rare).
+
+Killing an opponent with Bane of Doom summons an irrelevant demon.
+
+Shadow Madness can be silenced. Mind Control cannot.
+
+If stealthed, Knife Juggler, Imp Master and Ragnaros The Firelord immediately break stealth, since 
+their abilities count as “dealing damage.”
+
+Mirror Entity does not typically copy the Battlecry effect of a minion. For instance, if your 
+opponent plays a Novice Engineer, you don’t get to draw a card. An exception to this is Twilight 
+Drake, which copies based on your opponent’s hand (formerly: your hand), or any Divine Shield which 
+also gets applied again (it’s not actually a Battle Cry). A copied Void Terror will also have a buff 
+if the original ate a minion.
+
+Holy Nova deals damage before it heals. How is this relevant? Well, if the opponent has an Eye for an 
+Eye, and you cast it at 2 HP, you die.
+
+The Battlecry of Aldor Peacekeeper and Humility do not affect Lightspawn at all.  The attack of Dire 
+Wolf Alpha buff also does not affect Lightspawn.
+
+Power of the Wild  3/2 panther does not trigger Mirror Entity, because it counts as a spell.
+
+If a Blood Imp buffs a minion from 2 to 3 HP, and you cast 2 points of area damage, the minion goes 
+to 1 HP but survives.
+
+Warrior Armor is strictly better than HP, so you should always hit with your weapon, *then* armor up. 
+The two examples you might know about are Molten Giant not counting armor as HP for the purposes of 
+its cost, and of course Shield Slam. The one you might not know about is that Water Elemental does 
+not freeze you if it only takes off armor. As of the most recent patch, Alexstrasza lets you keep all 
+armor you have when she sets your HP to 15.
+
+Traps trigger in the order you cast them. If you play a Counterspell, and then play a Spellbender, 
+the first spell your opponent plays will get countered (even if it targeted a minion), and the 
+Spellbender won’t trigger at all. If you play the Spellbender first and the Counterspell second, the 
+spell will get redirected to your 1/3, then get countered.
+
+End of turn minion abilities activate in the order you summon them. For instance, if you play an Imp 
+Master, and then create a Healing Totem that turn, the Imp Master will damage itself and then heal 
+back to 5 HP. If you summon them in the reverse order, the Healing Totem will activate first, and 
+you’ll only have a 4 HP Imp Master.
+
+If you have 7 minions (the max number of minions allowed on one side of the board), your Noble 
+Sacrifice does not trigger at all.
+
+You have Violet Teacher and 5 other minions on your side of the board. If you Mind Control, the 
+teacher token will fill your board, leaving you no room. In this case, the mind controlled minion 
+dies instead of coming to your side of the board.
+
+Most triggers will always resolve before the spell that triggered them. For instance, Soulfire + 
+Gadgetzan Auctioneer will draw a card before discarding it, and Power of the Wild buff + Violet 
+Teacher will make the token, then pump it. An exception to this is Wild Pyromancer, which explicitly 
+triggers after you cast a spell.
+
+Shaman’s hero power can only create a totem if none of that type are on the board. If you have 3 
+totems out, you will get the 4th totem you don’t have with 100% probability. If you have 4 totems 
+out, you’ll get an error when you try to use your ability.
+
+If you have 1 charge left on your Sword of Justice, and play a Silver Hand Knight, the sword will 
+pump the 2/2 Squire, not the Knight. A Snipe works the opposite way, and will kill the 4/4.
+
+Silencing Ancient of War “Rooted” form removes the health buff, leaving a 5/5 with no taunt. 
+Silencing Druid of the Claw in taunt mode does not remove the health buff, leaving a 4/6 with no taunt.
+
+“The end is coming!” After Doomsayer utters these fateful words, he almost always dies, either by his 
+own hand or by your opponent’s. However, if you silence him, he will live to see your next turn. If 
+you then pump his attack above 0 with and attack with him, he’ll say, “Did I miss it?”
+
+Shadowflame and Blade Flurry both counterintuitively get buffed by +Spell Damage minions such as 
+Kobold Geomancer. Betrayal does not.
+
+If you cast Betrayal on an Emperor Cobra, it will instantly kill everything it damages.
+
+If you Mind Control a minion that your opponent cast Blessing of Wisdom on, attacking with the minion 
+will still draw cards for your opponent.
+
+If a full health Amani Berserker attacks a Hunter who has set an Explosive Trap, the enrage will 
+instantly activate and he’ll take 5 damage, not 2.
+
+Your board is a lone Sylvanas Windrunner, while your opponent has a 1/1 and a Sylvanas of his own. 
+Let’s say you trade your Sylvanas for his. If your Sylvanas came into play first, you’ll gain control 
+of his token, but then immediately lose control of it. If yours came into play second, his 
+deathrattle will trigger first, and you’ll get to keep the token.

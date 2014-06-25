@@ -7,6 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.PhysicalAttackAction;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.DebugDecks;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
@@ -59,9 +60,24 @@ public class TestBase {
 		return null;
 	}
 	
+	protected static Minion getSingleMinion(List<Minion> minions, Integer typeId) {
+		for (Minion minion : minions) {
+			if (minion.getTypeId() == typeId) {
+				return minion;
+			}
+		}
+		return null;
+	}
+	
 	protected static void playCard(GameContext context, Player player, Card card) {
 		context.getLogic().receiveCard(player.getId(), card);
 		context.getLogic().performGameAction(player.getId(), card.play());
+	}
+	
+	protected static Minion playMinionCard(GameContext context, Player player, MinionCard minionCard) {
+		context.getLogic().receiveCard(player.getId(), minionCard);
+		context.getLogic().performGameAction(player.getId(), minionCard.play());
+		return getSingleMinion(player.getMinions(), minionCard.summon().getTypeId());
 	}
 
 }

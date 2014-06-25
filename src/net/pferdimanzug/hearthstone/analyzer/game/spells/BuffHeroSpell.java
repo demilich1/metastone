@@ -45,9 +45,7 @@ public class BuffHeroSpell extends Spell {
 			BuffHeroSpell debuff = new BuffHeroSpell(-attackBonus, 0, false);
 			debuff.setTarget(hero.getReference());
 			SpellTrigger removeTrigger = new SpellTrigger(new TurnEndTrigger(), debuff, true);
-			removeTrigger.setHost(hero);
-			removeTrigger.setOwner(hero.getOwner());
-			context.addTrigger(removeTrigger);
+			context.getLogic().addSpellTrigger(player, removeTrigger, hero);
 		}
 	}
 

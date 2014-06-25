@@ -51,18 +51,14 @@ public class AdvancedMechanicTests extends BasicTests {
 		
 		minionCard = new TestMinionCard(1, 1);
 		minionCard.getMinion().setSpellTrigger(new TestAura());
-		context.getLogic().receiveCard(player.getId(), minionCard);
-		context.getLogic().performGameAction(player.getId(), minionCard.play());
+		Actor minion2 = playMinionCard(context, player, minionCard);
 		
-		Actor minion2 = minionCard.getMinion();
 		Assert.assertNotEquals(minion1, minion2);
 		Assert.assertEquals(minion1.getAttack(), 2);
 		Assert.assertEquals(minion2.getAttack(), 2);
 		
 		TestMinionCard minionCardOpponent = new TestMinionCard(3, 3);
-		context.getLogic().receiveCard(opponent.getId(), minionCardOpponent);
-		context.getLogic().performGameAction(opponent.getId(), minionCardOpponent.play());
-		Actor enemyMinion = getSingleMinion(opponent.getMinions());
+		Actor enemyMinion = playMinionCard(context, opponent, minionCardOpponent);
 		Assert.assertEquals(enemyMinion.getAttack(), 3);
 		
 		Assert.assertEquals(minion1.getAttack(), 2);
@@ -73,9 +69,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		Assert.assertEquals(minion1.getAttack(), 1);
 		
 		minionCard = new TestMinionCard(1, 1);
-		minion2 = minionCard.getMinion();
-		context.getLogic().receiveCard(player.getId(), minionCard);
-		context.getLogic().performGameAction(player.getId(), minionCard.play());
+		minion2 = playMinionCard(context, player, minionCard);
 		Assert.assertEquals(minion1.getAttack(), 1);
 		Assert.assertEquals(minion2.getAttack(), 2);
 	}

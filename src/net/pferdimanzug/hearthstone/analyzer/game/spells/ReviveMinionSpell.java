@@ -25,7 +25,7 @@ public class ReviveMinionSpell extends Spell {
 		if (hpAdjustment != 0) {
 			minion.setHp(hpAdjustment);
 		}
-		context.getLogic().summon(player.getId(), minion, null, null);
+		context.getLogic().summon(player.getId(), minion, null, null, false);
 	}
 
 }

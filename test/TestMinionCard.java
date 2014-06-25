@@ -6,18 +6,20 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
 
 public class TestMinionCard extends MinionCard {
+	
+	private static int id;
 
 	private final Minion minion;
 
 	public TestMinionCard(int baseAttack, int baseHp, GameTag... tags) {
-		super("Test monster", baseAttack, baseHp, Rarity.COMMON, HeroClass.ANY, 1);
+		super("Test monster " + ++id, baseAttack, baseHp, Rarity.COMMON, HeroClass.ANY, 1);
 		setCollectible(false);
 		
 		this.minion = createMinion(tags);
 	}
 	
 	public TestMinionCard(int baseAttack, int baseHp, int manaCost) {
-		super("Test monster", baseAttack, baseHp, Rarity.COMMON, HeroClass.ANY, manaCost);
+		super("Test monster " + ++id, baseAttack, baseHp, Rarity.COMMON, HeroClass.ANY, manaCost);
 		setCollectible(false);
 		
 		this.minion = createMinion();
@@ -29,7 +31,7 @@ public class TestMinionCard extends MinionCard {
 
 	@Override
 	public Minion summon() {
-		return minion;
+		return minion.clone();
 	}
 
 }

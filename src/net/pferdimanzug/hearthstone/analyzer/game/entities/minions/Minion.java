@@ -71,5 +71,10 @@ public class Minion extends Actor {
 	public void setRace(Race race) {
 		setTag(GameTag.RACE, race);
 	}
+	
+	@Override
+	public int getTypeId() {
+		return getName().hashCode();
+	}
 
 }

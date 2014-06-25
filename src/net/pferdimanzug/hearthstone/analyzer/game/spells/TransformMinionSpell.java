@@ -34,7 +34,7 @@ public class TransformMinionSpell extends Spell {
 		Minion minion = (Minion) target;
 		logger.debug("{} is transformed into a {}", minion, newMinion);
 		context.getLogic().removeMinion(minion);
-		context.getLogic().summon(minion.getOwner(), newMinion.summon(), null, null);
+		context.getLogic().summon(minion.getOwner(), newMinion.summon(), null, null, false);
 
 	}
 

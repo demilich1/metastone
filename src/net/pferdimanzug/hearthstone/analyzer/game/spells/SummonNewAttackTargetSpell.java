@@ -24,7 +24,7 @@ public class SummonNewAttackTargetSpell extends Spell {
 	protected void onCast(GameContext context, Player player, Entity target) {
 		Minion targetMinion = minionCard.summon();
 		context.getEnvironment().put(Environment.TARGET_OVERRIDE, targetMinion);
-		context.getLogic().summon(player.getId(), targetMinion, null, null);
+		context.getLogic().summon(player.getId(), targetMinion, null, null, false);
 	}
 	
 

@@ -20,7 +20,7 @@ public class ApplyTagSpell extends Spell {
 	public ApplyTagSpell(GameTag tag) {
 		this(tag, false);
 	}
-	
+
 	public ApplyTagSpell(GameTag tag, boolean temporary) {
 		this.tag = tag;
 		this.temporary = temporary;
@@ -30,14 +30,12 @@ public class ApplyTagSpell extends Spell {
 	protected void onCast(GameContext context, Player player, Entity target) {
 		logger.debug("Applying tag {} to {}", tag, target);
 		target.setTag(tag);
-		
+
 		if (temporary) {
-				RemoveTagSpell debuff = new RemoveTagSpell(tag);
-				debuff.setTarget(target.getReference());
-				SpellTrigger removeTrigger = new SpellTrigger(new TurnStartTrigger(), debuff, true);
-				removeTrigger.setHost(target);
-				removeTrigger.setOwner(target.getOwner());
-				context.addTrigger(removeTrigger);
+			RemoveTagSpell debuff = new RemoveTagSpell(tag);
+			debuff.setTarget(target.getReference());
+			SpellTrigger removeTrigger = new SpellTrigger(new TurnStartTrigger(), debuff, true);
+			context.getLogic().addSpellTrigger(player, removeTrigger, target);
 		}
 	}
 }

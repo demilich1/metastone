@@ -23,6 +23,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
+import net.pferdimanzug.hearthstone.analyzer.game.events.CardPlayedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.DamageEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.KillEvent;
@@ -78,7 +79,7 @@ public class GameLogic implements Cloneable {
 		spellTrigger.reset();
 		spellTrigger.onAdd(context);
 		context.addTrigger(spellTrigger);
-		logger.debug("New spelltrigger was added for {}", player.getName());
+		logger.debug("New spelltrigger was added for {} on {}", player.getName(), target);
 	}
 
 	private void assignCardIds(CardCollection cardCollection) {
@@ -235,7 +236,7 @@ public class GameLogic implements Cloneable {
 			logger.error("Destroying hero not implemented!");
 			break;
 		case MINION:
-			destroyMinion((Minion)target);
+			destroyMinion((Minion) target);
 			break;
 		case WEAPON:
 			destroyWeapon((Weapon) target);
@@ -317,8 +318,7 @@ public class GameLogic implements Cloneable {
 		weapon.setActive(context.getActivePlayer() == player);
 		if (weapon.hasSpellTrigger()) {
 			SpellTrigger spellTrigger = weapon.getSpellTrigger();
-			spellTrigger.setHost(weapon);
-			context.addTrigger(spellTrigger);
+			addSpellTrigger(player, spellTrigger, weapon);
 		}
 	}
 
@@ -550,7 +550,9 @@ public class GameLogic implements Cloneable {
 				return;
 			}
 		}
-
+		
+		context.fireGameEvent(new CardPlayedEvent(context, playerId, card));
+		
 		if (card.hasTag(GameTag.OVERLOAD)) {
 			player.getHero().modifyTag(GameTag.OVERLOAD, card.getTagValue(GameTag.OVERLOAD));
 			context.fireGameEvent(new OverloadEvent(context, playerId));
@@ -662,21 +664,20 @@ public class GameLogic implements Cloneable {
 		context.fireGameEvent(new TurnStartEvent(context, player.getId()));
 	}
 
-	public void summon(int playerId, Minion minion, Card source, Actor nextTo) {
+	public void summon(int playerId, Minion minion, Card source, Actor nextTo, boolean resolveBattlecry) {
 		Player player = context.getPlayer(playerId);
 		minion.setId(idFactory.generateId());
+		// TODO: this does not work correctly. Spells referring to this may encounter a NullPointerException
+		// because another spell was triggered in response to the SummonEvent, which itself summons a
+		// minion, reaches the end of this method and removes the Environment.SUMMONED_MINION
+		// need a stack or another approach here!
 		context.getEnvironment().put(Environment.SUMMONED_MINION, minion);
 		logger.debug("{} summons {}", player.getName(), minion);
 
 		minion.setOwner(player.getId());
 
-		try {
-			if (minion.getBattlecry() != null && !minion.getBattlecry().isResolvedLate()) {
-				resolveBattlecry(player.getId(), minion);
-			}
-		} catch (Exception e) {
-			logger.error("Error while trying to resolve battlecry for {}", minion.getName());
-			throw e;
+		if (resolveBattlecry && minion.getBattlecry() != null && !minion.getBattlecry().isResolvedLate()) {
+			resolveBattlecry(player.getId(), minion);
 		}
 
 		int index = player.getMinions().indexOf(nextTo);
@@ -686,14 +687,9 @@ public class GameLogic implements Cloneable {
 			player.getMinions().add(index, minion);
 		}
 
-		try {
-			SummonEvent summonEvent = new SummonEvent(context, minion, source);
-			context.fireGameEvent(summonEvent, TriggerLayer.SECRET);
-			context.fireGameEvent(summonEvent, TriggerLayer.DEFAULT);
-		} catch (Exception e) {
-			logger.error("Error while summoning {}", minion);
-			e.printStackTrace();
-		}
+		SummonEvent summonEvent = new SummonEvent(context, minion, source);
+		context.fireGameEvent(summonEvent, TriggerLayer.SECRET);
+		context.fireGameEvent(summonEvent, TriggerLayer.DEFAULT);
 
 		minion.setTag(GameTag.SUMMONING_SICKNESS);
 		refreshAttacksPerRound(minion);
@@ -702,7 +698,7 @@ public class GameLogic implements Cloneable {
 			addSpellTrigger(player, minion.getSpellTrigger(), minion);
 		}
 
-		if (minion.getBattlecry() != null && minion.getBattlecry().isResolvedLate()) {
+		if (resolveBattlecry && minion.getBattlecry() != null && minion.getBattlecry().isResolvedLate()) {
 			resolveBattlecry(player.getId(), minion);
 		}
 

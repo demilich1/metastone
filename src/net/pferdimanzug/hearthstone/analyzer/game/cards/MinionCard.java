@@ -46,7 +46,7 @@ public abstract class MinionCard extends Card {
 			@Override
 			protected void play(GameContext context, int playerId) {
 				Actor nextTo = (Actor) (getTargetKey() != null ? context.resolveSingleTarget(playerId, getTargetKey()) : null);
-				context.getLogic().summon(playerId, summon(), MinionCard.this, nextTo);
+				context.getLogic().summon(playerId, summon(), MinionCard.this, nextTo, true);
 			}
 		};
 

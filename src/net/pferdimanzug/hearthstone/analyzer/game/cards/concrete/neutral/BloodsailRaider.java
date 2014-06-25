@@ -43,6 +43,7 @@ public class BloodsailRaider extends MinionCard {
 	public Minion summon() {
 		Minion bloodsailRaider = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new CopyWeaponAttack(), TargetSelection.SELF);
+		battlecry.setResolvedLate(true);
 		bloodsailRaider.setBattlecry(battlecry);
 		return bloodsailRaider;
 	}

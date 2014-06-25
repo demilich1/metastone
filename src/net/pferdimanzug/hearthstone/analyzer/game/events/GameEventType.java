@@ -10,5 +10,6 @@ public enum GameEventType {
 	TURN_END,
 	SPELL_CASTED,
 	OVERLOAD,
+	CARD_PLAYED,
 	TARGET_ACQUISITION
 }

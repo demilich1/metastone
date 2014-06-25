@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
@@ -34,7 +35,9 @@ public class Player implements Cloneable {
 		for (Minion minion : otherPlayer.getMinions()) {
 			minions.add(minion.clone());
 		}
-		this.hand.addAll(otherPlayer.hand);
+		for (Card card : otherPlayer.hand) {
+			this.hand.add(card.clone());
+		}
 		this.graveyard.addAll(otherPlayer.graveyard);
 		this.secrets.addAll(otherPlayer.secrets);
 		this.id = otherPlayer.id;
