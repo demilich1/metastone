@@ -238,6 +238,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		playSpellCard.setTarget(minion);
 		context.getLogic().performGameAction(player.getId(), playSpellCard);
 		Assert.assertEquals(minion.getHp(), modifiedHp);
+		Assert.assertEquals(minion.getMaxHp(), modifiedHp);
 		
 		// silence the creature - hp should be back to original value
 		Spell silenceSpell = new SilenceSpell();

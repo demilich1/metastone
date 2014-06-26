@@ -632,6 +632,8 @@ public class GameLogic implements Cloneable {
 		immuneToSilence.add(GameTag.SUMMONING_SICKNESS);
 		immuneToSilence.add(GameTag.AURA_ATTACK_BONUS);
 		immuneToSilence.add(GameTag.AURA_HP_BONUS);
+		immuneToSilence.add(GameTag.RACE);
+		immuneToSilence.add(GameTag.NUMBER_OF_ATTACKS);
 
 		List<GameTag> tags = new ArrayList<GameTag>();
 		tags.addAll(target.getTags().keySet());
@@ -642,6 +644,8 @@ public class GameLogic implements Cloneable {
 			target.removeTag(tag);
 		}
 		context.removeTriggersAssociatedWith(target.getReference());
+		refreshAttacksPerRound(target);
+		target.setHp(target.getMaxHp());
 	}
 
 	public void startTurn(int playerId) {
