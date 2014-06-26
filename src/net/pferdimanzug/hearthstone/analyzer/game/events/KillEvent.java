@@ -21,6 +21,11 @@ public class KillEvent extends GameEvent {
 		return victim;
 	}
 
+	@Override
+	public Entity getEventTarget() {
+		return getVictim();
+	}
+
 	
 
 }

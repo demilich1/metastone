@@ -27,4 +27,9 @@ public class HealEvent extends GameEvent {
 		return target;
 	}
 
+	@Override
+	public Entity getEventTarget() {
+		return getTarget();
+	}
+
 }

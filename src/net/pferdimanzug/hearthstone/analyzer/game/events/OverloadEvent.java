@@ -1,6 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.events;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public class OverloadEvent extends GameEvent {
 
@@ -18,6 +19,11 @@ public class OverloadEvent extends GameEvent {
 
 	public int getPlayerId() {
 		return playerId;
+	}
+
+	@Override
+	public Entity getEventTarget() {
+		return null;
 	}
 
 }

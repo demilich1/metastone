@@ -16,15 +16,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 public class EyeForAnEye extends SecretCard {
 
 	private class EyeForAnEyeSecret extends Secret {
-
+		
 		public EyeForAnEyeSecret(Card source) {
 			super(new SecretTrigger(new HeroDamagedTrigger()), new DamageSpell(0), source);
+			getSpell().setTarget(EntityReference.EVENT_TARGET);
 		}
 
-		@Override
-		protected EntityReference getTargetForSpell(GameEvent event) {
-			return EntityReference.ENEMY_HERO;
-		}
 
 		@Override
 		protected void onFire(int ownerId, Spell spell, GameEvent event) {

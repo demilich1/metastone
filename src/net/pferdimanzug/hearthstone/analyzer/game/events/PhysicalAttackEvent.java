@@ -3,6 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.events;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public class PhysicalAttackEvent extends GameEvent {
 
@@ -32,6 +33,11 @@ public class PhysicalAttackEvent extends GameEvent {
 	@Override
 	public GameEventType getEventType() {
 		return GameEventType.PHYSICAL_ATTACK;
+	}
+
+	@Override
+	public Entity getEventTarget() {
+		return getDefender();
 	}
 
 }

@@ -8,7 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerLayer;
 
 public class Secret extends SpellTrigger {
-	
+
 	private final Card source;
 
 	public Secret(SecretTrigger trigger, Spell spell, Card source) {

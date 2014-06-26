@@ -44,7 +44,7 @@ public class TargetLogic {
 					&& entity.hasTag(GameTag.UNTARGETABLE_BY_SPELLS)) {
 				continue;
 			}
-			
+
 			if (entity.hasTag(GameTag.STEALTHED)) {
 				continue;
 			}
@@ -79,7 +79,7 @@ public class TargetLogic {
 		}
 
 		logger.error("Id " + targetId + " not found!");
-		throw new RuntimeException("Target not found exception");
+		throw new RuntimeException("Target not found exception: " + targetKey);
 	}
 
 	private List<Entity> getEntities(GameContext context, Player player, TargetSelection targetRequirement) {
@@ -173,8 +173,10 @@ public class TargetLogic {
 			return targets;
 		} else if (targetKey == EntityReference.ADJACENT_MINIONS) {
 			return context.getAdjacentMinions(player, source.getReference());
-		} else if (targetKey == EntityReference.SUMMONED_MINION) {
-			return singleTargetAsList((Entity) context.getEnvironment().get(Environment.SUMMONED_MINION));
+		} else if (targetKey == EntityReference.SELF) {
+			return singleTargetAsList(source);
+		} else if (targetKey == EntityReference.EVENT_TARGET) {
+			return singleTargetAsList((Entity) context.getEnvironment().get(Environment.EVENT_TARGET));
 		} else if (targetKey == EntityReference.KILLED_MINION) {
 			return singleTargetAsList((Entity) context.getEnvironment().get(Environment.KILLED_MINION));
 		} else if (targetKey == EntityReference.ATTACKER) {

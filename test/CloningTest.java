@@ -17,7 +17,7 @@ public class CloningTest extends TestBase {
 	
 	@Test
 	public void testCloning() {
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < 100; i++) {
 			Hero hero1 = new Jaina();
 			Player player1 = new Player("Random dude 1", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
 			player1.setBehaviour(new PlayRandomBehaviour());

@@ -44,5 +44,21 @@ public class Weapon extends Actor {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+	
+	@Override
+	public String toString() {
+		String result = "["  + getEntityType() + " '" + getName() + "'id:" + getId() + " ";
+		result += getWeaponDamage() + "/" + getDurability();
+		String prefix = " ";
+		for (GameTag tag : getTags().keySet()) {
+			if (displayGameTag(tag)) {
+				result += prefix + tag;
+				prefix = ", ";
+			}
+		}
+		result += " hashCode: " + hashCode();
+		result += "]";
+		return result;
+	}
 
 }

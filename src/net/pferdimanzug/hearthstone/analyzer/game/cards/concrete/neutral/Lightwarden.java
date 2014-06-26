@@ -5,8 +5,10 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.HealingTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class Lightwarden extends MinionCard {
 
@@ -18,7 +20,9 @@ public class Lightwarden extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion lightwarden = createMinion();
-		SpellTrigger trigger = new SpellTrigger(new HealingTrigger(), new BuffSpell(2));
+		Spell buffSpell = new BuffSpell(2);
+		buffSpell.setTarget(EntityReference.SELF);
+		SpellTrigger trigger = new SpellTrigger(new HealingTrigger(), buffSpell);
 		lightwarden.setSpellTrigger(trigger);
 		return lightwarden;
 	}

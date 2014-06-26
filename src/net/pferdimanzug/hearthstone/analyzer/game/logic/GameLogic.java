@@ -667,11 +667,12 @@ public class GameLogic implements Cloneable {
 	public void summon(int playerId, Minion minion, Card source, Actor nextTo, boolean resolveBattlecry) {
 		Player player = context.getPlayer(playerId);
 		minion.setId(idFactory.generateId());
+		
+		context.getEnvironment().put(Environment.SUMMONED_MINION, minion);
 		// TODO: this does not work correctly. Spells referring to this may encounter a NullPointerException
 		// because another spell was triggered in response to the SummonEvent, which itself summons a
 		// minion, reaches the end of this method and removes the Environment.SUMMONED_MINION
 		// need a stack or another approach here!
-		context.getEnvironment().put(Environment.SUMMONED_MINION, minion);
 		logger.debug("{} summons {}", player.getName(), minion);
 
 		minion.setOwner(player.getId());
@@ -701,7 +702,7 @@ public class GameLogic implements Cloneable {
 		if (resolveBattlecry && minion.getBattlecry() != null && minion.getBattlecry().isResolvedLate()) {
 			resolveBattlecry(player.getId(), minion);
 		}
-
+		
 		context.getEnvironment().remove(Environment.SUMMONED_MINION);
 	}
 

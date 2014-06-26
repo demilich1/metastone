@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.spells.trigger;
 
+import net.pferdimanzug.hearthstone.analyzer.game.Environment;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
@@ -50,11 +51,11 @@ public class SpellTrigger implements Cloneable {
 	public int getOwner() {
 		return trigger.getOwner();
 	}
-
-	protected EntityReference getTargetForSpell(GameEvent event) {
-		return hostReference;
-	}
 	
+	protected Spell getSpell() {
+		return spell;
+	}
+
 	public GameEventType interestedIn() {
 		return trigger.interestedIn();
 	}
@@ -75,15 +76,13 @@ public class SpellTrigger implements Cloneable {
 		Entity host = event.getGameContext().resolveSingleTarget(ownerId, hostReference);
 		try {
 			if (!expired && trigger.fire(event, host)) {
-				if (!spell.hasPredefinedTarget()) {
-					spell.setTarget(getTargetForSpell(event));
-				}
-
 				if (oneTime) {
 					expired = true;
 				}
 				
+				event.getGameContext().getEnvironment().put(Environment.EVENT_TARGET, event.getEventTarget());
 				onFire(ownerId, spell, event);
+				event.getGameContext().getEnvironment().remove(Environment.EVENT_TARGET);
 			}
 		} catch (Exception e) {
 			logger.error("SpellTrigger cannot be executed; GameEventTrigger: {} Spell: {}", trigger, spell);

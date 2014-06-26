@@ -41,7 +41,7 @@ public abstract class Actor extends Entity {
 		return null;
 	}
 
-	private boolean displayGameTag(GameTag tag) {
+	protected boolean displayGameTag(GameTag tag) {
 		return tag == GameTag.CHARGE || tag == GameTag.ENRAGED || tag == GameTag.FROZEN || tag == GameTag.DIVINE_SHIELD
 				|| tag == GameTag.WINDFURY || tag == GameTag.SPELL_POWER || tag == GameTag.STEALTHED || tag == GameTag.TAUNT || tag == GameTag.CANNOT_ATTACK;
 	}

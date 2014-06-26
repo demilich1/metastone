@@ -5,9 +5,11 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.TargetPlayer;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellCastedTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class ManaWyrm extends MinionCard {
 
@@ -19,7 +21,9 @@ public class ManaWyrm extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion manaWyrm = createMinion();
-		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(TargetPlayer.SELF), new BuffSpell(1));
+		Spell buffSpell = new BuffSpell(1);
+		buffSpell.setTarget(EntityReference.SELF);
+		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(TargetPlayer.SELF), buffSpell);
 		manaWyrm.setSpellTrigger(trigger);
 		return manaWyrm;
 	}

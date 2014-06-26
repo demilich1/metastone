@@ -10,6 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.TargetPlayer;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.MinionDeathTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class ScavengingHyena extends MinionCard {
 
@@ -22,6 +23,7 @@ public class ScavengingHyena extends MinionCard {
 	public Minion summon() {
 		Minion scavengingHyena = createMinion();
 		Spell buffAttack = new BuffSpell(2, 1);
+		buffAttack.setTarget(EntityReference.SELF);
 		SpellTrigger trigger = new SpellTrigger(new MinionDeathTrigger(TargetPlayer.SELF, Race.BEAST), buffAttack);
 		scavengingHyena.setSpellTrigger(trigger);
 		return scavengingHyena;

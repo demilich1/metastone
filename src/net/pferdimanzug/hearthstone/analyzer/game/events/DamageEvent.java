@@ -27,5 +27,10 @@ public class DamageEvent extends GameEvent {
 		return victim;
 	}
 
+	@Override
+	public Entity getEventTarget() {
+		return getVictim();
+	}
+
 
 }

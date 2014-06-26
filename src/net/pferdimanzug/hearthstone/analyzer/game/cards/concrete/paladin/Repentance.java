@@ -15,7 +15,7 @@ public class Repentance extends SecretCard {
 		setDescription("Secret: When your opponent plays a minion, reduce its Health to 1.");
 
 		Spell setHpSpell = new SetHpSpell(1);
-		setHpSpell.setTarget(EntityReference.SUMMONED_MINION);
+		setHpSpell.setTarget(EntityReference.EVENT_TARGET);
 		setTriggerAndEffect(new MinionCardPlayedTrigger(), setHpSpell);
 	}
 

@@ -15,7 +15,7 @@ public class MirrorEntity extends SecretCard {
 		setDescription("Secret: When your opponent plays a minion, summon a copy of it.");
 		
 		Spell copySpell = new CopyMinionSpell();
-		copySpell.setTarget(EntityReference.SUMMONED_MINION);
+		copySpell.setTarget(EntityReference.EVENT_TARGET);
 		setTriggerAndEffect(new MinionCardPlayedTrigger(), copySpell);
 	}
 

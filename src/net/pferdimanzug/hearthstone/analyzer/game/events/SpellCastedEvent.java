@@ -2,6 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.events;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public class SpellCastedEvent extends GameEvent {
 
@@ -25,6 +26,11 @@ public class SpellCastedEvent extends GameEvent {
 
 	public Card getSourceCard() {
 		return sourceCard;
+	}
+
+	@Override
+	public Entity getEventTarget() {
+		return getSourceCard();
 	}
 
 }

@@ -7,7 +7,10 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroySpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.AttackTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.PhysicalAttackTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class EmperorCobra extends MinionCard {
 
@@ -20,7 +23,9 @@ public class EmperorCobra extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion emperorCobra = createMinion();
-		emperorCobra.setSpellTrigger(new AttackTrigger(new DestroySpell()));
+		Spell killSpell = new DestroySpell();
+		killSpell.setTarget(EntityReference.EVENT_TARGET);
+		emperorCobra.setSpellTrigger(new SpellTrigger(new PhysicalAttackTrigger(), killSpell));
 		return emperorCobra;
 	}
 	
