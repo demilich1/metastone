@@ -15,8 +15,10 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.GoldshireFootman;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.HarvestGolem;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.IronbeakOwl;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.QuestingAdventurer;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.Wisp;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.DivineSpirit;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.Armorsmith;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.Whirlwind;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
@@ -30,8 +32,8 @@ public class HearthstoneAnalyzer extends Application {
 	public static void main(String[] args) {
 		//new HearthstoneAnalyzer().printCardsForDatabase();
 		//DevCheckCardCompleteness.writeImplementedCardsToFile("implemented_cards.csv");
-		//launch(args);
-		new HearthstoneAnalyzer().launchDebugGame();
+		launch(args);
+		//new HearthstoneAnalyzer().launchDebugGame();
 	}
 	
 	private void launchDebugGame() {
@@ -67,11 +69,11 @@ public class HearthstoneAnalyzer extends Application {
 	}
 
 	private void launchHumanDebugGame() {
-		HeroClass humanHeroClass = HeroClass.WARRIOR;
+		HeroClass humanHeroClass = HeroClass.PRIEST;
 		HeroClass aiHeroClass = HeroClass.MAGE;
 		Hero hero1 = HeroFactory.createHero(humanHeroClass);
 		//Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
-		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new HarvestGolem(), new Armorsmith(), new Whirlwind(), new QuestingAdventurer()));
+		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new HarvestGolem(), new DivineSpirit(), new IronbeakOwl()));
 		player1.setBehaviour(new HumanBehaviour());
 		
 		Hero hero2 = HeroFactory.createHero(aiHeroClass);

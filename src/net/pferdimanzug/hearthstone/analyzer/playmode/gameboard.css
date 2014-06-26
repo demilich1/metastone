@@ -3,7 +3,9 @@
 }
 
 #outlined_score {
-    -fx-font: bold 16.0pt "Arial";
+ 	-fx-font-size: 14pt;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
     /*-fx-effect: dropshadow(one-pass-box, black, 6.0, 0.9, 1.0, 1.0);*/
     -fx-fill: white;
     -fx-stroke: black;

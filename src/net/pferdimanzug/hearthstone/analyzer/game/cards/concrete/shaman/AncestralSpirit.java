@@ -14,7 +14,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class AncestralSpirit extends SpellCard {
 
-	protected AncestralSpirit() {
+	public AncestralSpirit() {
 		super("Ancestral Spirit", Rarity.RARE, HeroClass.SHAMAN, 2);
 		setDescription("Choose a minion. When that minion is destroyed, return it to the battlefield.");
 

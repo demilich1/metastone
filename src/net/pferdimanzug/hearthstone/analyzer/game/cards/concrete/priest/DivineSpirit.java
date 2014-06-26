@@ -17,7 +17,7 @@ public class DivineSpirit extends SpellCard {
 		@Override
 		protected void onCast(GameContext context, Player player, Entity target) {
 			Actor targetActor = (Actor) target;
-			int hpBonus = targetActor.getHp() * 2;
+			int hpBonus = targetActor.getHp();
 			targetActor.modifyHpBonus(hpBonus);
 		}
 		

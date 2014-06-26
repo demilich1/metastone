@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards;
 
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Bite;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Claw;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.DruidOfTheClaw;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.HealingTouch;
@@ -11,6 +12,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Moonfire;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Naturalize;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.PowerOfTheWild;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.SavageRoar;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.SoulOfTheForest;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Starfire;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Swipe;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.WildGrowth;
@@ -54,6 +56,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Vaporize;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.WaterElemental;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.*;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.ArgentProtector;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.BlessedChampion;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.BlessingOfKings;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.BlessingOfMight;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.BlessingOfWisdom;
@@ -102,6 +105,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.rogue.SinisterS
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.rogue.Sprint;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.rogue.Vanish;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.AncestralHealing;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.AncestralSpirit;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.Bloodlust;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.DustDevil;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.EarthShock;
@@ -111,6 +115,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.Flameton
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.ForkedLightning;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.FrostShock;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.Hex;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.LavaBurst;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.LightningBolt;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.RockbiterWeapon;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.StormforgedAxe;
@@ -121,6 +126,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.Windspea
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock.BloodImp;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock.Corruption;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock.Demonfire;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock.Doomguard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock.DrainLife;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock.DreadInfernal;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock.FlameImp;
@@ -136,6 +142,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock.Summoni
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock.Voidwalker;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.ArathiWeaponsmith;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.ArcaniteReaper;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.Armorsmith;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.BattleRage;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.Charge;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.Cleave;
@@ -158,6 +165,7 @@ public class CardCatalogue {
 	private final static CardCollection cards = new CardCollection();
 
 	static {
+		cards.add(new Bite());
 		cards.add(new Claw());
 		cards.add(new DruidOfTheClaw());
 		cards.add(new HealingTouch());
@@ -169,6 +177,7 @@ public class CardCatalogue {
 		cards.add(new Naturalize());
 		cards.add(new PowerOfTheWild());
 		cards.add(new SavageRoar());
+		cards.add(new SoulOfTheForest());
 		cards.add(new Starfire());
 		cards.add(new Swipe());
 		cards.add(new WildGrowth());
@@ -280,6 +289,7 @@ public class CardCatalogue {
 		cards.add(new OasisSnapjaw());
 		cards.add(new OgreMagi());
 		cards.add(new PriestessOfElune());
+		cards.add(new QuestingAdventurer());
 		cards.add(new RagingWorgen());
 		cards.add(new RaidLeader());
 		cards.add(new RazorfenHunter());
@@ -314,6 +324,7 @@ public class CardCatalogue {
 		cards.add(new YoungPriestess());
 		cards.add(new YouthfulBrewmaster());
 		cards.add(new ArgentProtector());
+		cards.add(new BlessedChampion());
 		cards.add(new BlessingOfKings());
 		cards.add(new BlessingOfMight());
 		cards.add(new BlessingOfWisdom());
@@ -362,6 +373,7 @@ public class CardCatalogue {
 		cards.add(new Sprint());
 		cards.add(new Vanish());
 		cards.add(new AncestralHealing());
+		cards.add(new AncestralSpirit());
 		cards.add(new Bloodlust());
 		cards.add(new DustDevil());
 		cards.add(new EarthShock());
@@ -371,6 +383,7 @@ public class CardCatalogue {
 		cards.add(new ForkedLightning());
 		cards.add(new FrostShock());
 		cards.add(new Hex());
+		cards.add(new LavaBurst());
 		cards.add(new LightningBolt());
 		cards.add(new RockbiterWeapon());
 		cards.add(new StormforgedAxe());
@@ -381,6 +394,7 @@ public class CardCatalogue {
 		cards.add(new BloodImp());
 		cards.add(new Corruption());
 		cards.add(new Demonfire());
+		cards.add(new Doomguard());
 		cards.add(new DrainLife());
 		cards.add(new DreadInfernal());
 		cards.add(new FlameImp());
@@ -396,6 +410,7 @@ public class CardCatalogue {
 		cards.add(new Voidwalker());
 		cards.add(new ArathiWeaponsmith());
 		cards.add(new ArcaniteReaper());
+		cards.add(new Armorsmith());
 		cards.add(new BattleRage());
 		cards.add(new Charge());
 		cards.add(new Cleave());
