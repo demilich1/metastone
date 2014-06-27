@@ -20,7 +20,9 @@
 }
 
 #center_message {
-	-fx-font: bold 20.0pt "Arial";
+	-fx-font-size: 20pt;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
     -fx-text-fill: gray;
     -fx-font-weight: bold;
     -fx-font-style: italic;
@@ -30,3 +32,16 @@
 	-fx-background-color: transparent;
 }
 
+#name {
+	-fx-font-size: 10pt;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+}
+
+#name_big {
+	-fx-font-size: 16pt;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+}

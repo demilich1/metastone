@@ -1,20 +1,18 @@
 package net.pferdimanzug.hearthstone.analyzer.playmode;
 
-import javafx.stage.Popup;
-import javafx.stage.PopupWindow;
+import javafx.scene.control.Tooltip;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 
 public class TooltipFactory {
 	
-	public static PopupWindow createCardTooltip(Card card, Player player) {
-		Popup popup = new Popup();
+	public static Tooltip createCardTooltip(Card card, Player player) {
+		Tooltip tooltip = new Tooltip();
 		CardTooltip content = new CardTooltip();
 		content.setCard(card, player);
-		popup.setAutoFix(true);
-		popup.setAutoHide(true);
-		popup.getContent().add(content);
-		return popup;
+		tooltip.setGraphic(content);
+		
+		return tooltip;
 	}
 	
 	private TooltipFactory() {}
