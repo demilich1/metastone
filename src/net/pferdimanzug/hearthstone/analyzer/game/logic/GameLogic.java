@@ -283,7 +283,7 @@ public class GameLogic implements Cloneable {
 		return ThreadLocalRandom.current().nextBoolean() ? playerIds[0] : playerIds[1];
 	}
 
-	public void drawCard(int playerId) {
+	public Card drawCard(int playerId) {
 		Player player = context.getPlayer(playerId);
 		CardCollection deck = player.getDeck();
 		if (deck.isEmpty()) {
@@ -292,11 +292,12 @@ public class GameLogic implements Cloneable {
 			hero.setTag(GameTag.FATIGUE, fatigue + 1);
 			damage(player, hero, fatigue, false);
 			logger.debug("{}'s deck is empty, taking {} fatigue damage!", player.getName(), fatigue);
-			return;
+			return null;
 		}
 
 		Card card = deck.removeFirst();
 		receiveCard(playerId, card);
+		return card;
 	}
 
 	public void endTurn(int playerId) {
@@ -621,6 +622,13 @@ public class GameLogic implements Cloneable {
 
 		Player owner = context.getPlayer(minion.getOwner());
 		owner.getMinions().remove(minion);
+	}
+	
+	public void removeSecrets(Player player) {
+		logger.debug("All secrets for {} have been destroyed", player.getName());
+		// this only works while Secrets are the only SpellTrigger on the heroes
+		context.removeTriggersAssociatedWith(player.getHero().getReference());
+		player.getSecrets().clear();
 	}
 
 	private void resolveBattlecry(int playerId, Minion minion) {

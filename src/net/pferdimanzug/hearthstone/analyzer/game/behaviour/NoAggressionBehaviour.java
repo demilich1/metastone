@@ -7,9 +7,11 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.SecretCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
-public class SummonMinionsBehaviour implements IBehaviour {
+public class NoAggressionBehaviour implements IBehaviour {
 
 	@Override
 	public Entity provideTargetFor(Player player, GameAction action) {
@@ -27,6 +29,12 @@ public class SummonMinionsBehaviour implements IBehaviour {
 		for (GameAction gameAction : validActions) {
 			if (gameAction.getActionType() == ActionType.SUMMON) {
 				return gameAction;
+			} else if (gameAction.getActionType() == ActionType.SPELL) {
+				PlayCardAction playCardAction = (PlayCardAction) gameAction;
+				if (playCardAction.getCard() instanceof SecretCard) {
+					return gameAction;
+				}
+				
 			}
 		}
 		return null;
