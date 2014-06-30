@@ -15,7 +15,7 @@ public class HealingSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
-		context.getLogic().heal((Actor) target, healing);
+		context.getLogic().heal(player, (Actor) target, healing);
 	}
 
 }

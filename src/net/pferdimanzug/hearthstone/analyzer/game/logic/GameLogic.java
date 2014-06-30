@@ -136,10 +136,8 @@ public class GameLogic implements Cloneable {
 		// Secret, but it can easily be expanded if targets of area of effect
 		// spell
 		// should be changeable as well
-		if (sourceCard != null && targets != null && sourceCard.getTargetRequirement() != TargetSelection.NONE
-				&& targets.size() == 1) {
-			context.fireGameEvent(new TargetAcquisitionEvent(context, ActionType.SPELL, targets.get(0)),
-					TriggerLayer.SECRET);
+		if (sourceCard != null && targets != null && sourceCard.getTargetRequirement() != TargetSelection.NONE && targets.size() == 1) {
+			context.fireGameEvent(new TargetAcquisitionEvent(context, ActionType.SPELL, targets.get(0)), TriggerLayer.SECRET);
 			if (context.getEnvironment().containsKey(Environment.TARGET_OVERRIDE)) {
 				targets.remove(0);
 				targets.add((Actor) context.getEnvironment().get(Environment.TARGET_OVERRIDE));
@@ -183,7 +181,7 @@ public class GameLogic implements Cloneable {
 		boolean success = false;
 		switch (target.getEntityType()) {
 		case MINION:
-			success = damageMinion((Actor) target, damage);
+			success = damageMinion(player, (Actor) target, damage);
 			break;
 		case HERO:
 			success = damageHero((Hero) target, damage);
@@ -206,17 +204,20 @@ public class GameLogic implements Cloneable {
 		hero.modifyArmor(-damage);
 		int newHp = Math.min(hero.getHp(), effectiveHp - damage);
 		hero.setHp(newHp);
-		logger.debug(hero.getName() + " receives " + damage + " damage, hp now: " + hero.getHp() + "("
-				+ hero.getArmor() + ")");
+		logger.debug(hero.getName() + " receives " + damage + " damage, hp now: " + hero.getHp() + "(" + hero.getArmor() + ")");
 		return true;
 	}
 
-	private boolean damageMinion(Actor minion, int damage) {
+	private boolean damageMinion(Player player, Actor minion, int damage) {
 		if (minion.hasTag(GameTag.DIVINE_SHIELD)) {
 			minion.removeTag(GameTag.DIVINE_SHIELD);
 			logger.debug("{}'s DIVINE SHIELD absorbs the damage", minion);
 			return false;
 		}
+		if (damage >= minion.getHp() && player.getHero().hasTag(GameTag.CANNOT_REDUCE_HP_BELOW_1)) {
+			damage = minion.getHp() - 1;
+		}
+		
 		logger.debug("{} is damaged for {}", minion, damage);
 		minion.setHp(minion.getHp() - damage);
 		if (minion.hasTag(GameTag.ENRAGE_SPELL)) {
@@ -326,8 +327,7 @@ public class GameLogic implements Cloneable {
 		logger.debug("{} attacks {}", attacker, defender);
 
 		context.getEnvironment().put(Environment.ATTACKER, attacker);
-		context.fireGameEvent(new TargetAcquisitionEvent(context, ActionType.PHYSICAL_ATTACK, defender),
-				TriggerLayer.SECRET);
+		context.fireGameEvent(new TargetAcquisitionEvent(context, ActionType.PHYSICAL_ATTACK, defender), TriggerLayer.SECRET);
 		Actor target = defender;
 		if (context.getEnvironment().containsKey(Environment.TARGET_OVERRIDE)) {
 			target = (Actor) context.getEnvironment().get(Environment.TARGET_OVERRIDE);
@@ -346,7 +346,8 @@ public class GameLogic implements Cloneable {
 			return;
 		}
 
-		boolean damaged = damage(player, target, attackerDamage, false);
+		Player owningPlayer = context.getPlayer(target.getOwner());
+		boolean damaged = damage(owningPlayer, target, attackerDamage, false);
 		if (defenderDamage > 0) {
 			damage(player, attacker, defenderDamage, false);
 		}
@@ -411,6 +412,15 @@ public class GameLogic implements Cloneable {
 		return defaultValue;
 	}
 
+	public boolean hasTag(Player player, GameTag tag) {
+		for (Entity minion : player.getMinions()) {
+			if (minion.hasTag(tag)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public List<GameAction> getValidActions(int playerId) {
 		Player player = context.getPlayer(playerId);
 		return actionLogic.getValidActions(context, player);
@@ -441,7 +451,12 @@ public class GameLogic implements Cloneable {
 		enrageSpell.cast(context, owner, toList(entity));
 	}
 
-	public void heal(Actor target, int healing) {
+	public void heal(Player player, Actor target, int healing) {
+		if (hasTag(player, GameTag.INVERT_HEALING)) {
+			System.out.println("Invert healing, do damage isntead!");
+			damage(player, target, healing, true);
+			return;
+		}
 		switch (target.getEntityType()) {
 		case MINION:
 			healMinion((Actor) target, healing);
@@ -550,9 +565,9 @@ public class GameLogic implements Cloneable {
 				return;
 			}
 		}
-		
+
 		context.fireGameEvent(new CardPlayedEvent(context, playerId, card));
-		
+
 		if (card.hasTag(GameTag.OVERLOAD)) {
 			player.getHero().modifyTag(GameTag.OVERLOAD, card.getTagValue(GameTag.OVERLOAD));
 			context.fireGameEvent(new OverloadEvent(context, playerId));
@@ -671,11 +686,14 @@ public class GameLogic implements Cloneable {
 	public void summon(int playerId, Minion minion, Card source, Actor nextTo, boolean resolveBattlecry) {
 		Player player = context.getPlayer(playerId);
 		minion.setId(idFactory.generateId());
-		
+
 		context.getEnvironment().put(Environment.SUMMONED_MINION, minion);
-		// TODO: this does not work correctly. Spells referring to this may encounter a NullPointerException
-		// because another spell was triggered in response to the SummonEvent, which itself summons a
-		// minion, reaches the end of this method and removes the Environment.SUMMONED_MINION
+		// TODO: this does not work correctly. Spells referring to this may
+		// encounter a NullPointerException
+		// because another spell was triggered in response to the SummonEvent,
+		// which itself summons a
+		// minion, reaches the end of this method and removes the
+		// Environment.SUMMONED_MINION
 		// need a stack or another approach here!
 		logger.debug("{} summons {}", player.getName(), minion);
 
@@ -706,7 +724,7 @@ public class GameLogic implements Cloneable {
 		if (resolveBattlecry && minion.getBattlecry() != null && minion.getBattlecry().isResolvedLate()) {
 			resolveBattlecry(player.getId(), minion);
 		}
-		
+
 		context.getEnvironment().remove(Environment.SUMMONED_MINION);
 	}
 

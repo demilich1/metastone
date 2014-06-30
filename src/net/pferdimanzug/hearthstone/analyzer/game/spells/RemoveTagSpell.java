@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 public class RemoveTagSpell extends Spell {
 
-	private static Logger logger = LoggerFactory.getLogger(ApplyTagSpell.class);
+	private static Logger logger = LoggerFactory.getLogger(RemoveTagSpell.class);
 
 	private GameTag[] tags;
 
@@ -22,7 +22,7 @@ public class RemoveTagSpell extends Spell {
 	protected void onCast(GameContext context, Player player, Entity target) {
 		for (GameTag tag : tags) {
 			logger.debug("Removing tag {} from {}", tag, target);
-			target.setTag(tag);
+			target.removeTag(tag);
 		}
 	}
 }

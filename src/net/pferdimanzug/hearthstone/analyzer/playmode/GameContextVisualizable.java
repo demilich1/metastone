@@ -44,7 +44,7 @@ public class GameContextVisualizable extends GameContext {
 	@Override
 	protected void onGameStateChanged() {
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(500);
 		} catch (InterruptedException e) {
 		}
 		ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_STATE_UPDATE, this);

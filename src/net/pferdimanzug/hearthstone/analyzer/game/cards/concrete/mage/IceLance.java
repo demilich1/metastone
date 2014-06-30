@@ -21,7 +21,7 @@ public class IceLance extends SpellCard {
 		private final Spell damageSpell;
 		
 		public IceLanceSpell() {
-			freezeSpell = new ApplyTagSpell(GameTag.FROZEN);
+			freezeSpell = new ApplyTagSpell(GameTag.FROZEN, true);
 			damageSpell = new DamageSpell(4);
 			damageSpell.setApplySpellpower(true);
 		}

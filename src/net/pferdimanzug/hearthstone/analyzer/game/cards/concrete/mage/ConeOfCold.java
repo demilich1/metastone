@@ -20,7 +20,7 @@ public class ConeOfCold extends SpellCard {
 	private class ConeOfColdSpell extends Spell {
 		
 		private final Spell damage = new DamageSpell(1);
-		private final Spell freeze = new ApplyTagSpell(GameTag.FROZEN);
+		private final Spell freeze = new ApplyTagSpell(GameTag.FROZEN, true);
 		
 		public ConeOfColdSpell() {
 			damage.setApplySpellpower(true);

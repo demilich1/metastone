@@ -14,7 +14,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 public class ColdlightSeer extends MinionCard {
 
 	public ColdlightSeer() {
-		super("ColdlightSeer", 2, 3, Rarity.RARE, HeroClass.ANY, 3);
+		super("Coldlight Seer", 2, 3, Rarity.RARE, HeroClass.ANY, 3);
 		setDescription("Battlecry: Give ALL other Murlocs +2 Health.");
 		setTag(GameTag.RACE, Race.MURLOC);
 	}
