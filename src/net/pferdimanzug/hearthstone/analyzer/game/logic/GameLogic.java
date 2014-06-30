@@ -29,6 +29,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.KillEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.OverloadEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.PhysicalAttackEvent;
+import net.pferdimanzug.hearthstone.analyzer.game.events.SecretRevealedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.SpellCastedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.SummonEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.TargetAcquisitionEvent;
@@ -217,7 +218,7 @@ public class GameLogic implements Cloneable {
 		if (damage >= minion.getHp() && player.getHero().hasTag(GameTag.CANNOT_REDUCE_HP_BELOW_1)) {
 			damage = minion.getHp() - 1;
 		}
-		
+
 		logger.debug("{} is damaged for {}", minion, damage);
 		minion.setHp(minion.getHp() - damage);
 		if (minion.hasTag(GameTag.ENRAGE_SPELL)) {
@@ -631,6 +632,7 @@ public class GameLogic implements Cloneable {
 	public void secretTriggered(Player player, Secret secret) {
 		logger.debug("Secret was trigged: {}", secret.getSource());
 		player.getSecrets().remove((Integer) secret.getSource().getTypeId());
+		context.fireGameEvent(new SecretRevealedEvent(context, (SecretCard) secret.getSource(), player.getId()));
 	}
 
 	// TODO: circular dependency. Very ugly, refactor!
@@ -681,6 +683,12 @@ public class GameLogic implements Cloneable {
 			refreshAttacksPerRound(minion);
 		}
 		context.fireGameEvent(new TurnStartEvent(context, player.getId()));
+	}
+
+	public void modifyMaxMana(Player player, int delta) {
+		logger.debug("Maximum mana was changed by {} for {}", delta, player.getName());
+		int maxMana = MathUtils.clamp(player.getMaxMana() + delta, 0, GameLogic.MAX_MANA);
+		player.setMaxMana(maxMana);
 	}
 
 	public void summon(int playerId, Minion minion, Card source, Actor nextTo, boolean resolveBattlecry) {

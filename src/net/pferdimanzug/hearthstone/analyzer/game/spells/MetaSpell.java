@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public class MetaSpell extends Spell {
-	
+
 	protected final Spell spell1;
 	protected final Spell spell2;
 
@@ -16,7 +16,6 @@ public class MetaSpell extends Spell {
 		this.spell2 = spell2;
 	}
 
-	
 	@Override
 	public void cast(GameContext context, Player player, List<Entity> targets) {
 		if (!spell1.hasPredefinedTarget()) {
@@ -24,14 +23,14 @@ public class MetaSpell extends Spell {
 		}
 		spell1.setSource(getSource());
 		context.getLogic().castSpell(player.getId(), spell1);
-		
+
 		if (!spell2.hasPredefinedTarget()) {
 			spell2.setTarget(getTarget());
 		}
 		spell2.setSource(getSource());
+
 		context.getLogic().castSpell(player.getId(), spell2);
 	}
-	
 
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {

@@ -37,6 +37,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.UnleashT
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.ArcaneExplosion;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.ArcaneIntellect;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.ArcaneMissiles;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Blizzard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.ConeOfCold;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Counterspell;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Fireball;
@@ -55,12 +56,14 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Spellbende
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Vaporize;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.WaterElemental;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.*;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.AldorPeacekeeper;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.ArgentProtector;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.BlessedChampion;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.BlessingOfKings;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.BlessingOfMight;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.BlessingOfWisdom;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.Consecration;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.DivineFavor;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.EyeForAnEye;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.GuardianOfKings;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.HammerOfWrath;
@@ -72,6 +75,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.NobleSa
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.Redemption;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.Repentance;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.TruesilverChampion;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.AuchenaiSoulpriest;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.CircleOfHealing;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.DivineSpirit;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.HolyNova;
@@ -92,6 +96,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.rogue.Assassina
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.rogue.AssassinsBlade;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.rogue.Backstab;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.rogue.Betrayal;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.rogue.BladeFlurry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.rogue.ColdBlood;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.rogue.Conceal;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.rogue.DeadlyPoison;
@@ -146,6 +151,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.Armorsm
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.BattleRage;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.Charge;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.Cleave;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.CommandingShout;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.CruelTaskmaster;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.Execute;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.FieryWarAxe;
@@ -202,6 +208,7 @@ public class CardCatalogue {
 		cards.add(new ArcaneExplosion());
 		cards.add(new ArcaneIntellect());
 		cards.add(new ArcaneMissiles());
+		cards.add(new Blizzard());
 		cards.add(new ConeOfCold());
 		cards.add(new Counterspell());
 		cards.add(new Fireball());
@@ -223,6 +230,7 @@ public class CardCatalogue {
 		cards.add(new AbusiveSergeant());
 		cards.add(new AcidicSwampOoze());
 		cards.add(new AcolyteOfPain());
+		cards.add(new AlarmOBot());
 		cards.add(new AmaniBerserker());
 		cards.add(new AncientBrewmaster());
 		cards.add(new AncientMage());
@@ -323,12 +331,14 @@ public class CardCatalogue {
 		cards.add(new YoungDragonhawk());
 		cards.add(new YoungPriestess());
 		cards.add(new YouthfulBrewmaster());
+		cards.add(new AldorPeacekeeper());
 		cards.add(new ArgentProtector());
 		cards.add(new BlessedChampion());
 		cards.add(new BlessingOfKings());
 		cards.add(new BlessingOfMight());
 		cards.add(new BlessingOfWisdom());
 		cards.add(new Consecration());
+		cards.add(new DivineFavor());
 		cards.add(new EyeForAnEye());
 		cards.add(new GuardianOfKings());
 		cards.add(new HammerOfWrath());
@@ -340,6 +350,7 @@ public class CardCatalogue {
 		cards.add(new Redemption());
 		cards.add(new Repentance());
 		cards.add(new TruesilverChampion());
+		cards.add(new AuchenaiSoulpriest());
 		cards.add(new CircleOfHealing());
 		cards.add(new DivineSpirit());
 		cards.add(new HolyNova());
@@ -360,6 +371,7 @@ public class CardCatalogue {
 		cards.add(new AssassinsBlade());
 		cards.add(new Backstab());
 		cards.add(new Betrayal());
+		cards.add(new BladeFlurry());
 		cards.add(new ColdBlood());
 		cards.add(new Conceal());
 		cards.add(new DeadlyPoison());
@@ -414,6 +426,7 @@ public class CardCatalogue {
 		cards.add(new BattleRage());
 		cards.add(new Charge());
 		cards.add(new Cleave());
+		cards.add(new CommandingShout());
 		cards.add(new CruelTaskmaster());
 		cards.add(new Execute());
 		cards.add(new FieryWarAxe());

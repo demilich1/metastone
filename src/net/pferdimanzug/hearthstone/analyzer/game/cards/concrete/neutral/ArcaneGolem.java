@@ -5,8 +5,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.GainMaxManaSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.ModifyMaxManaSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.TargetPlayer;
 
 public class ArcaneGolem extends MinionCard {
 
@@ -18,7 +19,7 @@ public class ArcaneGolem extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion arcaneGolem = createMinion();
-		Spell battlecrySpell = new GainMaxManaSpell(true);
+		Spell battlecrySpell = new ModifyMaxManaSpell(1, TargetPlayer.OPPONENT);
 		Battlecry battlecry = Battlecry.createBattlecry(battlecrySpell);
 		arcaneGolem.setBattlecry(battlecry);
 		return arcaneGolem;

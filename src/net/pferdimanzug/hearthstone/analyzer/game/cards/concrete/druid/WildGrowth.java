@@ -22,7 +22,7 @@ public class WildGrowth extends SpellCard {
 			setSpell(new DrawCardSpell(1));
 			setTargetRequirement(TargetSelection.NONE);
 		}
-		
+
 	}
 
 	private class WildGrowthSpell extends Spell {
@@ -30,14 +30,14 @@ public class WildGrowth extends SpellCard {
 		@Override
 		protected void onCast(GameContext context, Player player, Entity target) {
 			if (player.getMaxMana() < GameLogic.MAX_MANA) {
-				player.setMaxMana(player.getMaxMana() + 1);
+				context.getLogic().modifyMaxMana(player, +1);
 			} else {
 				player.getHand().add(new ExcessManaCard());
 			}
 
 		}
 	}
-	
+
 	public WildGrowth() {
 		super("Wild Growth", Rarity.FREE, HeroClass.DRUID, 2);
 		setDescription("Gain an empty Mana Crystal.");
