@@ -7,47 +7,44 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnEndTrigger;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-public class ModifyTagSpell extends Spell {
-
-	private static Logger logger = LoggerFactory.getLogger(ModifyTagSpell.class);
+public class SetTagSpell extends Spell {
 
 	private final GameTag tag;
-	private final int delta;
+	private final Integer value;
 	private final boolean temporary;
 
-	public ModifyTagSpell(GameTag tag, int delta) {
-		this(tag, delta, false);
+	public SetTagSpell(GameTag tag) {
+		this(tag, null);
 	}
-	
-	public ModifyTagSpell(GameTag tag, int delta, boolean temporary) {
+
+	public SetTagSpell(GameTag tag, Integer value) {
+		this(tag, value, false);
+	}
+
+	public SetTagSpell(GameTag tag, Integer value, boolean temporary) {
 		this.tag = tag;
-		this.delta = delta;
+		this.value = value;
 		this.temporary = temporary;
+
 	}
 
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
-		if (logger.isDebugEnabled()) {
-			if (delta > 0) {
-				logger.debug("{} gains +{} of {}", new Object[] { target.getName(), delta, tag });
-			} else {
-				logger.debug("{} looses {} of {}", new Object[] { target.getName(), delta, tag });
-			}
+		if (value != null) {
+			target.setTag(tag, value);
+		} else {
+			target.setTag(tag);
 		}
-
-		target.modifyTag(tag, delta);
+		
 		if (isTemporary()) {
-			Spell revertSpell = new ModifyTagSpell(tag, -delta);
+			Spell revertSpell = new RemoveTagSpell(tag);
 			revertSpell.setTarget(target.getReference());
 			SpellTrigger removeTrigger = new SpellTrigger(new TurnEndTrigger(), revertSpell, true);
 			context.getLogic().addSpellTrigger(player, removeTrigger, target);
 		}
 	}
 
-	private boolean isTemporary() {
+	public boolean isTemporary() {
 		return temporary;
 	}
 

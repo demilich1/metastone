@@ -13,12 +13,16 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.MinMaxBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.NoAggressionBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.KeeperOfTheGrove;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.AnimalCompanion;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.EaglehornBow;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.ExplosiveShot;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.Flare;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.Snipe;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.IceBarrier;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.KirinTorMage;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.MirrorEntity;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Vaporize;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.AlarmOBot;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.BloodsailCorsair;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.DefenderOfArgus;
@@ -36,12 +40,14 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.Shatter
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.VoodooDoctor;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.Wisp;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.WorgenInfiltrator;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.YouthfulBrewmaster;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.AldorPeacekeeper;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.DivineFavor;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.HolyWrath;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.AuchenaiSoulpriest;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.DivineSpirit;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.rogue.Headcrack;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.LightningStorm;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock.Felguard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.Armorsmith;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.CommandingShout;
@@ -94,11 +100,11 @@ public class HearthstoneAnalyzer extends Application {
 	}
 
 	private void launchHumanDebugGame() {
-		HeroClass humanHeroClass = HeroClass.PALADIN;
+		HeroClass humanHeroClass = HeroClass.MAGE;
 		HeroClass aiHeroClass = HeroClass.MAGE;
 		Hero hero1 = HeroFactory.createHero(humanHeroClass);
 		//Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
-		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new HolyWrath(), new DreadCorsair()));
+		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new LightningStorm(), new LootHoarder()));
 		player1.setBehaviour(new HumanBehaviour());
 		
 		Hero hero2 = HeroFactory.createHero(aiHeroClass);

@@ -1,4 +1,4 @@
-package net.pferdimanzug.hearthstone.analyzer.game.spells;
+package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
@@ -10,6 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class CrazedAlchemist extends MinionCard {

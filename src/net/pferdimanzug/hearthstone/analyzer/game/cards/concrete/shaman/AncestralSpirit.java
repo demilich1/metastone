@@ -26,7 +26,6 @@ public class AncestralSpirit extends SpellCard {
 
 		@Override
 		protected void onCast(GameContext context, Player player, Entity target) {
-			//TODO: this is not correct, because the re-summoned minion will trigger its battlecry, which shouldn't happen
 			Minion targetMinion = (Minion) target;
 			MinionCard minionCard = (MinionCard) targetMinion.getSourceCard();
 			targetMinion.addDeathrattle(new SummonSpell(minionCard));

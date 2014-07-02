@@ -9,10 +9,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardType;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 
 public class CardToken extends BorderPane {
 	
@@ -54,9 +54,8 @@ public class CardToken extends BorderPane {
 		attackIcon.setVisible(isMinionCard);
 		hpIcon.setVisible(isMinionCard);
 		if (isMinionCard) {
-			MinionCard minionCard = (MinionCard) card;
-			setScoreValue(attackLabel, minionCard.getBaseAttack());
-			setScoreValue(hpLabel, minionCard.getBaseHp());
+			setScoreValue(attackLabel, card.getTagValue(GameTag.BASE_ATTACK));
+			setScoreValue(hpLabel, card.getTagValue(GameTag.BASE_HP));
 		}
 	}
 	

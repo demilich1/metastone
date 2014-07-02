@@ -303,6 +303,7 @@ public class GameLogic implements Cloneable {
 	public void endTurn(int playerId) {
 		Player player = context.getPlayer(playerId);
 		player.getHero().removeTag(GameTag.COMBO);
+		player.getHero().removeTag(GameTag.PLAY_SECRET_AT_NO_COST);
 		player.getHero().activateWeapon(false);
 		logger.debug("{} ends his turn.", player.getName());
 		context.fireGameEvent(new TurnEndEvent(context, player.getId()));
@@ -388,11 +389,15 @@ public class GameLogic implements Cloneable {
 		} else if (card.getCardType() == CardType.SPELL) {
 			manaCost += getTotalTagValue(player, GameTag.SPELL_MANA_COST);
 		}
+		if (card.hasTag(GameTag.SECRET) && player.getHero().hasTag(GameTag.PLAY_SECRET_AT_NO_COST)) {
+			manaCost = 0;
+		}
+		manaCost = MathUtils.clamp(manaCost, 0, Integer.MAX_VALUE);
 		return manaCost;
 	}
 
 	public int getTotalTagValue(Player player, GameTag tag) {
-		int total = 0;
+		int total = player.getHero().getTagValue(tag);
 		for (Entity minion : player.getMinions()) {
 			if (!minion.hasTag(tag)) {
 				continue;
@@ -580,6 +585,10 @@ public class GameLogic implements Cloneable {
 		logger.debug("{} has a new secret activated: {}", player.getName(), secret.getSource());
 		addSpellTrigger(player, secret, player.getHero());
 		player.getSecrets().add(secret.getSource().getTypeId());
+		//TODO: this is grenzwertig, basically it was only added because of the card
+		// 'Kirin Tor Mage', which provides secret cost reduction for one secret.
+		// this mechanic could not be implemented with current spelltriggers
+		player.getHero().removeTag(GameTag.PLAY_SECRET_AT_NO_COST);
 	}
 
 	public void receiveCard(int playerId, Card card) {
@@ -623,7 +632,7 @@ public class GameLogic implements Cloneable {
 		Player owner = context.getPlayer(minion.getOwner());
 		owner.getMinions().remove(minion);
 	}
-	
+
 	public void removeSecrets(Player player) {
 		logger.debug("All secrets for {} have been destroyed", player.getName());
 		// this only works while Secrets are the only SpellTrigger on the heroes

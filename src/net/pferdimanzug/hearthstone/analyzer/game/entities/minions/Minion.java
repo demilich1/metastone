@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
@@ -75,6 +76,10 @@ public class Minion extends Actor {
 	@Override
 	public int getTypeId() {
 		return getName().hashCode();
+	}
+	
+	public Card returnToHand() {
+		return getSourceCard();
 	}
 
 }

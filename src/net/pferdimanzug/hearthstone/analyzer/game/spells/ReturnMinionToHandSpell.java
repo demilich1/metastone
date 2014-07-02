@@ -13,13 +13,13 @@ import org.slf4j.LoggerFactory;
 public class ReturnMinionToHandSpell extends Spell {
 
 	private static Logger logger = LoggerFactory.getLogger(ReturnMinionToHandSpell.class);
-	
+
 	private final int manaCostModifier;
-	
+
 	public ReturnMinionToHandSpell() {
 		this(0);
 	}
-	
+
 	public ReturnMinionToHandSpell(int manaCostModifier) {
 		this.manaCostModifier = manaCostModifier;
 	}
@@ -30,11 +30,9 @@ public class ReturnMinionToHandSpell extends Spell {
 		Player owner = context.getPlayer(minion.getOwner());
 		logger.debug("{} is returned to {}'s hand", minion, owner.getName());
 		context.getLogic().removeMinion(minion);
-		Card sourceCard = minion.getSourceCard();
+		Card sourceCard = minion.returnToHand();
 		context.getLogic().receiveCard(minion.getOwner(), sourceCard);
-		if (manaCostModifier != 0) {
-			sourceCard.setTag(GameTag.MANA_COST_MODIFIER, manaCostModifier);
-		}
+		sourceCard.setTag(GameTag.MANA_COST_MODIFIER, manaCostModifier);
 	}
 
 }

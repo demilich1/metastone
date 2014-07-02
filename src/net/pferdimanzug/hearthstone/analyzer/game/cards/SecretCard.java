@@ -1,6 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.AddSecretSpell;
@@ -15,6 +16,7 @@ public class SecretCard extends SpellCard {
 
 	public SecretCard(String name, Rarity rarity, HeroClass classRestriction, int manaCost) {
 		super(name, rarity, classRestriction, manaCost);
+		setTag(GameTag.SECRET);
 	}
 
 	public boolean canBeCast(GameContext context, Player player) {

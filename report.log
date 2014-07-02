@@ -1,0 +1,38 @@
+18:50:19 DEBUG - Game starts: 'Human' (Jaina Proudmoore) VS. 'Bot' (Jaina Proudmoore)
+18:50:19 DEBUG - 'Bot' (Jaina Proudmoore) begins
+18:50:19 DEBUG - Setting hero hp to 30 for 'Bot' (Jaina Proudmoore)
+18:50:19 DEBUG - 'Bot' (Jaina Proudmoore) receives card [SPELL 'Ice Barrier' Manacost:3]
+18:50:19 DEBUG - 'Bot' (Jaina Proudmoore) receives card [MINION 'Worgen Infiltrator' Manacost:1]
+18:50:19 DEBUG - 'Bot' (Jaina Proudmoore) receives card [MINION 'Goldshire Footman' Manacost:1]
+18:50:19 DEBUG - Setting hero hp to 30 for 'Human' (Jaina Proudmoore)
+18:50:19 DEBUG - 'Human' (Jaina Proudmoore) receives card [SPELL 'Lightning Storm' Manacost:3]
+18:50:19 DEBUG - 'Human' (Jaina Proudmoore) receives card [SPELL 'Lightning Storm' Manacost:3]
+18:50:19 DEBUG - 'Human' (Jaina Proudmoore) receives card [MINION 'Loot Hoarder' Manacost:2]
+18:50:19 DEBUG - 'Human' (Jaina Proudmoore) receives card [SPELL 'Lightning Storm' Manacost:3]
+18:50:19 DEBUG - 'Human' (Jaina Proudmoore) receives card [SPELL 'The Coin' Manacost:0]
+18:50:19 DEBUG - 'Bot' (Jaina Proudmoore) starts his turn with 1/1 mana
+18:50:19 DEBUG - 'Bot' (Jaina Proudmoore) receives card [MINION 'Worgen Infiltrator' Manacost:1]
+18:50:20 DEBUG - 'Bot' (Jaina Proudmoore) plays [MINION 'Worgen Infiltrator' Manacost:1]
+18:50:20 DEBUG - 'Bot' (Jaina Proudmoore) summons [MINION 'Worgen Infiltrator'id:64 2/1 STEALTHED hashCode: 21745935]
+18:50:20 DEBUG - 'Bot' (Jaina Proudmoore) ends his turn.
+18:50:20 DEBUG - 'Human' (Jaina Proudmoore) starts his turn with 1/1 mana
+18:50:20 DEBUG - 'Human' (Jaina Proudmoore) receives card [SPELL 'Lightning Storm' Manacost:3]
+18:50:23 DEBUG - 'Human' (Jaina Proudmoore) ends his turn.
+18:50:23 DEBUG - 'Bot' (Jaina Proudmoore) starts his turn with 2/2 mana
+18:50:23 DEBUG - 'Bot' (Jaina Proudmoore) receives card [MINION 'Worgen Infiltrator' Manacost:1]
+18:50:23 DEBUG - 'Bot' (Jaina Proudmoore) plays [MINION 'Goldshire Footman' Manacost:1]
+18:50:23 DEBUG - 'Bot' (Jaina Proudmoore) summons [MINION 'Goldshire Footman'id:65 1/2 TAUNT hashCode: 15171181]
+18:50:24 DEBUG - 'Bot' (Jaina Proudmoore) plays [MINION 'Worgen Infiltrator' Manacost:1]
+18:50:24 DEBUG - 'Bot' (Jaina Proudmoore) summons [MINION 'Worgen Infiltrator'id:66 2/1 STEALTHED hashCode: 7071086]
+18:50:24 DEBUG - 'Bot' (Jaina Proudmoore) ends his turn.
+18:50:24 DEBUG - 'Human' (Jaina Proudmoore) starts his turn with 2/2 mana
+18:50:24 DEBUG - 'Human' (Jaina Proudmoore) receives card [SPELL 'Lightning Storm' Manacost:3]
+18:50:26 DEBUG - 'Human' (Jaina Proudmoore) plays [SPELL 'The Coin' Manacost:0]
+18:50:26 DEBUG - 'Human' (Jaina Proudmoore) gains 1 mana
+18:50:28 DEBUG - 'Human' (Jaina Proudmoore) plays [SPELL 'Lightning Storm' Manacost:3]
+18:50:28 DEBUG - [MINION 'Goldshire Footman'id:65 1/2 TAUNT hashCode: 15171181] is damaged for 3
+18:50:28 DEBUG - [MINION 'Worgen Infiltrator'id:66 2/1 STEALTHED hashCode: 7071086] is damaged for 2
+18:50:28 DEBUG - [MINION 'Worgen Infiltrator'id:64 2/1 STEALTHED hashCode: 21745935] is damaged for 3
+18:50:28 DEBUG - [MINION 'Goldshire Footman'id:65 1/-1 TAUNT hashCode: 15171181] is destroyed
+18:50:28 DEBUG - [MINION 'Worgen Infiltrator'id:66 2/-1 STEALTHED hashCode: 7071086] is destroyed
+18:50:28 DEBUG - [MINION 'Worgen Infiltrator'id:64 2/-2 STEALTHED hashCode: 21745935] is destroyed
