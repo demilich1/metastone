@@ -6,6 +6,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,16 +61,53 @@ public class DevCheckCardCompleteness {
 		System.out.println("There are " + missing + " cards missing");
 	}
 
-	public static void printImplementedCards(String path, String expression) throws IOException {
+	private static String toCanonName(String name) {
+		return name.toLowerCase().replace(".java", "").replace(".png", "").replace("_", "").replace("-", "");
+	}
+	
+	public static void updateCardCatalogue() {
+		final String cataloguePathStr = "./src/" + CardCatalogue.class.getPackage().getName().replace(".", "/") + "/CardCatalogue.java";
+		Path cataloguePath = Paths.get(cataloguePathStr);
+		List<String> lines = new ArrayList<>();
+		try (BufferedReader reader = Files.newBufferedReader(cataloguePath)) {
+			String line = null;
+			List<String> implementedCards = getImplementedCardsAsLines();
+			boolean insideRelevantCodeBlock = false;
+			while ((line = reader.readLine()) != null) {
+				if (line.contains("static {")) {
+					lines.add(line);
+					insideRelevantCodeBlock = true;
+					lines.addAll(implementedCards);
+				} else if (line.contains("}")) {
+					insideRelevantCodeBlock = false;
+				}
+
+				if (!insideRelevantCodeBlock) {
+					lines.add(line);
+				}
+
+			}
+		} catch (IOException x) {
+			System.err.format("IOException: %s%n", x);
+		}
+		try {
+			Files.write(cataloguePath, lines);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	private static List<String> getImplementedCardsAsLines() {
+		final String expression = "cards.add(new %s());";
+		final String path = "./src/" + Card.class.getPackage().getName().replace(".", "/") + "/concrete/";
+		List<String> lines = new ArrayList<String>();
 		File folder = new File(path);
 		for (File file : FileUtils.listFiles(folder, new String[] { "java" }, true)) {
 			String cardName = file.getName().replace(".java", "");
-			System.out.println(String.format(expression, cardName));
+			lines.add(String.format(expression, cardName));
 		}
-	}
-	
-	private static String toCanonName(String name) {
-		return name.toLowerCase().replace(".java", "").replace(".png", "").replace("_", "").replace("-", "");
+		return lines;
 	}
 	
 	public static void writeImplementedCardsToFile(String filename) {
