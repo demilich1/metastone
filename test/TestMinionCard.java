@@ -1,6 +1,7 @@
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
@@ -25,7 +26,7 @@ public class TestMinionCard extends MinionCard {
 		this.minion = createMinion();
 	}
 
-	public Minion getMinion() {
+	public Actor getMinion() {
 		return minion;
 	}
 

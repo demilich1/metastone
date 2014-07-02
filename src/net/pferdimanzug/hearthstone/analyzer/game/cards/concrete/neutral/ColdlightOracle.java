@@ -22,7 +22,7 @@ public class ColdlightOracle extends MinionCard {
 	public Minion summon() {
 		Minion coldlightOracle = createMinion();
 		coldlightOracle.setBattlecry(Battlecry.createBattlecry(new DrawCardSpell(2, TargetPlayer.BOTH)));
-		return null;
+		return coldlightOracle;
 	}
 
 }

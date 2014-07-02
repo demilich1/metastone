@@ -6,7 +6,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
 public class SummonEvent extends GameEvent {
-	
+
 	private final Minion minion;
 	private final Card source;
 
@@ -33,7 +33,5 @@ public class SummonEvent extends GameEvent {
 	public Card getSource() {
 		return source;
 	}
-
-
 
 }

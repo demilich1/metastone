@@ -1,6 +1,8 @@
 package net.pferdimanzug.hearthstone.analyzer.game.entities;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
@@ -141,5 +143,21 @@ public abstract class Actor extends Entity {
 		result += " hashCode: " + hashCode();
 		result += "]";
 		return result;
+	}
+
+	public void addDeathrattle(Spell deathrattleSpell) {
+		if (!hasTag(GameTag.DEATHRATTLES)) {
+			setTag(GameTag.DEATHRATTLES, new ArrayList<Spell>());
+		}
+		getDeathrattles().add(deathrattleSpell);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Spell> getDeathrattles() {
+		return (List<Spell>) getTag(GameTag.DEATHRATTLES);
+	}
+
+	public void setBattlecry(Battlecry battlecry) {
+		setTag(GameTag.BATTLECRY, battlecry);
 	}
 }

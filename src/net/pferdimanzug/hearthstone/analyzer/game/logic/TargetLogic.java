@@ -58,11 +58,9 @@ public class TargetLogic {
 
 	private Actor findEntity(GameContext context, EntityReference targetKey) {
 		int targetId = targetKey.getId();
-		if (context.getEnvironment().containsKey(Environment.SUMMONED_MINION)) {
-			Minion summonedMinion = (Minion) context.getEnvironment().get(Environment.SUMMONED_MINION);
-			if (summonedMinion.getId() == targetId) {
-				return summonedMinion;
-			}
+		Actor environmentResult = findInEnvironment(context, targetKey);
+		if (environmentResult != null) {
+			return environmentResult;
 		}
 		for (Player player : context.getPlayers()) {
 			if (player.getHero().getId() == targetId) {
@@ -82,6 +80,22 @@ public class TargetLogic {
 		throw new RuntimeException("Target not found exception: " + targetKey);
 	}
 
+	private Actor findInEnvironment(GameContext context, EntityReference targetKey) {
+		int targetId = targetKey.getId();
+		if (context.getEnvironment().containsKey(Environment.SUMMONED_MINION)) {
+			Minion summonedMinion = (Minion) context.getEnvironment().get(Environment.SUMMONED_MINION);
+			if (summonedMinion.getId() == targetId) {
+				return summonedMinion;
+			}
+		} else if (context.getEnvironment().containsKey(Environment.SUMMONED_WEAPON)) {
+			Actor summonedWeapon = (Actor) context.getEnvironment().get(Environment.SUMMONED_WEAPON);
+			if (summonedWeapon.getId() == targetId) {
+				return summonedWeapon;
+			}
+		}
+		return null;
+	}
+
 	private List<Entity> getEntities(GameContext context, Player player, TargetSelection targetRequirement) {
 		Player opponent = context.getOpponent(player);
 		List<Entity> entities = new ArrayList<>();
@@ -93,12 +107,11 @@ public class TargetLogic {
 				|| targetRequirement == TargetSelection.MINIONS || targetRequirement == TargetSelection.ANY) {
 			entities.addAll(opponent.getMinions());
 		}
-		if (targetRequirement == TargetSelection.FRIENDLY_HERO
-				|| targetRequirement == TargetSelection.FRIENDLY_CHARACTERS || targetRequirement == TargetSelection.ANY) {
+		if (targetRequirement == TargetSelection.FRIENDLY_HERO || targetRequirement == TargetSelection.FRIENDLY_CHARACTERS
+				|| targetRequirement == TargetSelection.ANY) {
 			entities.add(player.getHero());
 		}
-		if (targetRequirement == TargetSelection.FRIENDLY_MINIONS
-				|| targetRequirement == TargetSelection.FRIENDLY_CHARACTERS
+		if (targetRequirement == TargetSelection.FRIENDLY_MINIONS || targetRequirement == TargetSelection.FRIENDLY_CHARACTERS
 				|| targetRequirement == TargetSelection.MINIONS || targetRequirement == TargetSelection.ANY) {
 			entities.addAll(player.getMinions());
 		}

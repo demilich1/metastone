@@ -1,10 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.entities.minions;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
@@ -17,13 +13,6 @@ public class Minion extends Actor {
 		super(sourceCard);
 		Race race = sourceCard.hasTag(GameTag.RACE) ? (Race) sourceCard.getTag(GameTag.RACE) : Race.NONE;
 		setRace(race);
-	}
-
-	public void addDeathrattle(Spell deathrattleSpell) {
-		if (!hasTag(GameTag.DEATHRATTLES)) {
-			setTag(GameTag.DEATHRATTLES, new ArrayList<Spell>());
-		}
-		getDeathrattles().add(deathrattleSpell);
 	}
 
 	@Override
@@ -44,11 +33,6 @@ public class Minion extends Actor {
 			return getHp();
 		}
 		return super.getAttack();
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Spell> getDeathrattles() {
-		return (List<Spell>) getTag(GameTag.DEATHRATTLES);
 	}
 
 	@Override
@@ -72,10 +56,6 @@ public class Minion extends Actor {
 	protected void setBaseStats(int baseAttack, int baseHp) {
 		setBaseAttack(baseAttack);
 		setBaseHp(baseHp);
-	}
-	
-	public void setBattlecry(Battlecry battlecry) {
-		setTag(GameTag.BATTLECRY, battlecry);
 	}
 	
 	public void setRace(Race race) {

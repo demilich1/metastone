@@ -256,7 +256,7 @@ public class GameContext implements Cloneable {
 			result.append(player.getHero().getHp() + "(" + player.getHero().getArmor() + ")");
 			result.append('\n');
 			result.append("Minions:\n");
-			for (Minion minion : player.getMinions()) {
+			for (Actor minion : player.getMinions()) {
 				result.append('\t');
 				result.append(minion);
 				result.append('\n');

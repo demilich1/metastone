@@ -36,6 +36,7 @@ public abstract class PlayCardAction extends GameAction {
 		if (!card.hasTag(GameTag.COUNTERED)) {
 			play(context, playerId);
 		}
+		context.getLogic().afterCardPlayed(playerId, cardReference);
 		context.getEnvironment().remove(Environment.PENDING_CARD);
 	}
 

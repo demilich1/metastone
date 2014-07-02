@@ -312,11 +312,17 @@ public class GameLogic implements Cloneable {
 	public void equipWeapon(int playerId, Weapon weapon) {
 		Player player = context.getPlayer(playerId);
 		weapon.setId(idFactory.generateId());
+		context.getEnvironment().put(Environment.SUMMONED_WEAPON, weapon);
 		Weapon currentWeapon = player.getHero().getWeapon();
 		if (currentWeapon != null) {
 			logger.debug("{} discards currently equipped weapon {}", player.getHero(), currentWeapon);
 			destroy(currentWeapon);
 		}
+		if (weapon.getBattlecry() != null) {
+			resolveBattlecry(playerId, weapon);
+		}
+		context.getEnvironment().remove(Environment.SUMMONED_WEAPON);
+
 		logger.debug("{} equips weapon {}", player.getHero(), weapon);
 		player.getHero().setWeapon(weapon);
 		weapon.setActive(context.getActivePlayer() == player);
@@ -571,11 +577,11 @@ public class GameLogic implements Cloneable {
 	public void playCard(int playerId, CardReference cardReference) {
 		Player player = context.getPlayer(playerId);
 		Card card = context.resolveCardReference(cardReference);
+
 		modifyCurrentMana(playerId, -getModifiedManaCost(player, card));
 		logger.debug("{} plays {}", player.getName(), card);
 		player.getHand().remove(card);
 		player.getGraveyard().add(card);
-		player.getHero().modifyTag(GameTag.COMBO, +1);
 
 		if (card.getCardType() == CardType.SPELL) {
 			GameEvent spellCastedEvent = new SpellCastedEvent(context, playerId, card);
@@ -594,6 +600,12 @@ public class GameLogic implements Cloneable {
 			player.getHero().modifyTag(GameTag.OVERLOAD, card.getTagValue(GameTag.OVERLOAD));
 			context.fireGameEvent(new OverloadEvent(context, playerId));
 		}
+	}
+
+	public void afterCardPlayed(int playerId, CardReference cardReference) {
+		Player player = context.getPlayer(playerId);
+		// Card card = context.resolveCardReference(cardReference);
+		player.getHero().modifyTag(GameTag.COMBO, +1);
 	}
 
 	public void playSecret(Player player, Secret secret) {
@@ -657,9 +669,9 @@ public class GameLogic implements Cloneable {
 		player.getSecrets().clear();
 	}
 
-	private void resolveBattlecry(int playerId, Minion minion) {
-		GameAction battlecry = minion.getBattlecry();
-		battlecry.setSource(minion.getReference());
+	private void resolveBattlecry(int playerId, Actor actor) {
+		GameAction battlecry = actor.getBattlecry();
+		battlecry.setSource(actor.getReference());
 		performGameAction(playerId, battlecry);
 	}
 
