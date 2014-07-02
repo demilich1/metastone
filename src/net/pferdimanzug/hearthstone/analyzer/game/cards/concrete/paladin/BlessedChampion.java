@@ -13,14 +13,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class BlessedChampion extends SpellCard {
 
-	public BlessedChampion() {
-		super("Blessed Champion", Rarity.RARE, HeroClass.PALADIN, 5);
-		setDescription("Double a minion's Attack.");
-		
-		setSpell(new DoubleAttackSpell());
-		setTargetRequirement(TargetSelection.MINIONS);
-	}
-	
 	private class DoubleAttackSpell extends Spell {
 
 		@Override
@@ -29,6 +21,14 @@ public class BlessedChampion extends SpellCard {
 			target.modifyTag(GameTag.ATTACK_BONUS, targetActor.getAttack());
 		}
 		
+	}
+	
+	public BlessedChampion() {
+		super("Blessed Champion", Rarity.RARE, HeroClass.PALADIN, 5);
+		setDescription("Double a minion's Attack.");
+		
+		setSpell(new DoubleAttackSpell());
+		setTargetRequirement(TargetSelection.MINIONS);
 	}
 
 }

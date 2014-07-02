@@ -20,6 +20,12 @@ public abstract class Hero extends Actor {
 		this.heroPower = heroPower;
 	}
 
+	public void activateWeapon(boolean active) {
+		if (weapon != null) {
+			weapon.setActive(active);
+		}
+	}
+
 	@Override
 	public Hero clone() {
 		Hero clone = (Hero) super.clone();
@@ -29,7 +35,7 @@ public abstract class Hero extends Actor {
 		clone.heroPower = heroPower.clone();
 		return clone;
 	}
-
+	
 	public int getArmor() {
 		return getTagValue(GameTag.ARMOR);
 	}
@@ -47,7 +53,7 @@ public abstract class Hero extends Actor {
 	public EntityType getEntityType() {
 		return EntityType.HERO;
 	}
-	
+
 	public HeroClass getHeroClass() {
 		return heroClass;
 	}
@@ -59,15 +65,9 @@ public abstract class Hero extends Actor {
 	public Race getRace() {
 		return (Race) getTag(GameTag.RACE);
 	}
-
+	
 	public Weapon getWeapon() {
 		return weapon;
-	}
-	
-	public void activateWeapon(boolean active) {
-		if (weapon != null) {
-			weapon.setActive(active);
-		}
 	}
 	
 	public void modifyArmor(int armor) {

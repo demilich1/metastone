@@ -16,6 +16,11 @@ public class SpellCastedEvent extends GameEvent {
 	}
 
 	@Override
+	public Entity getEventTarget() {
+		return getSourceCard();
+	}
+
+	@Override
 	public GameEventType getEventType() {
 		return GameEventType.SPELL_CASTED;
 	}
@@ -26,11 +31,6 @@ public class SpellCastedEvent extends GameEvent {
 
 	public Card getSourceCard() {
 		return sourceCard;
-	}
-
-	@Override
-	public Entity getEventTarget() {
-		return getSourceCard();
 	}
 
 }

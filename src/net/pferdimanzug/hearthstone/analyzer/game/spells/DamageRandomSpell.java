@@ -2,7 +2,6 @@ package net.pferdimanzug.hearthstone.analyzer.game.spells;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
@@ -28,7 +27,7 @@ public class DamageRandomSpell extends DamageSpell {
 		}
 		for (int i = 0; i < missiles; i++) {
 			List<Actor> validTargets = getValidTargets(targets);
-			Actor randomTarget = validTargets.get(ThreadLocalRandom.current().nextInt(validTargets.size()));
+			Actor randomTarget = getRandomTarget(validTargets);
 			context.getLogic().damage(player, randomTarget, getDamage(), false);
 		}
 	}

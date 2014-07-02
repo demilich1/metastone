@@ -33,12 +33,12 @@ public class Weapon extends Actor {
 		return getTagValue(GameTag.WEAPON_DAMAGE);
 	}
 
-	public boolean isBroken() {
-		return !hasTag(GameTag.DURABILITY) || getTagValue(GameTag.DURABILITY) < 1;
-	}
-
 	public boolean isActive() {
 		return active;
+	}
+
+	public boolean isBroken() {
+		return !hasTag(GameTag.DURABILITY) || getTagValue(GameTag.DURABILITY) < 1;
 	}
 
 	public void setActive(boolean active) {

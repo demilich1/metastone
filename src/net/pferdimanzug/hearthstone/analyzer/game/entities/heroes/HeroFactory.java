@@ -4,8 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class HeroFactory {
-	private final static Logger logger = LoggerFactory.getLogger(HeroFactory.class);
-	
 	public static Hero createHero(HeroClass heroClass) {
 		switch (heroClass) {
 		case DRUID:
@@ -32,5 +30,7 @@ public class HeroFactory {
 		}
 		return null;
 	}
+	
+	private final static Logger logger = LoggerFactory.getLogger(HeroFactory.class);
 
 }

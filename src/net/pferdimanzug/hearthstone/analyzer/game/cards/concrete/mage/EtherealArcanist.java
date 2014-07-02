@@ -15,6 +15,20 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class EtherealArcanist extends MinionCard {
 
+	private class TurnEndAndControlSecretTrigger extends TurnEndTrigger {
+
+		@Override
+		public boolean fire(GameEvent event, Entity host) {
+			if (!super.fire(event, host)) {
+				return false;
+			}
+
+			Player player = event.getGameContext().getPlayer(host.getOwner());
+			return !player.getSecrets().isEmpty();
+		}
+
+	}
+
 	public EtherealArcanist() {
 		super("Ethereal Arcanist", 3, 3, Rarity.RARE, HeroClass.MAGE, 4);
 		setDescription("If you control a Secret at the end of your turn, gain +2/+2.");
@@ -28,20 +42,6 @@ public class EtherealArcanist extends MinionCard {
 		SpellTrigger trigger = new SpellTrigger(new TurnEndAndControlSecretTrigger(), buffSpell);
 		etherealArcanist.setSpellTrigger(trigger);
 		return etherealArcanist;
-	}
-
-	private class TurnEndAndControlSecretTrigger extends TurnEndTrigger {
-
-		@Override
-		public boolean fire(GameEvent event, Entity host) {
-			if (!super.fire(event, host)) {
-				return false;
-			}
-
-			Player player = event.getGameContext().getPlayer(host.getOwner());
-			return !player.getSecrets().isEmpty();
-		}
-
 	}
 
 }

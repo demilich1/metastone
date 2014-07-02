@@ -28,6 +28,10 @@ public class ModifyTagSpell extends Spell {
 		this.temporary = temporary;
 	}
 
+	private boolean isTemporary() {
+		return temporary;
+	}
+
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
 		if (logger.isDebugEnabled()) {
@@ -45,10 +49,6 @@ public class ModifyTagSpell extends Spell {
 			SpellTrigger removeTrigger = new SpellTrigger(new TurnEndTrigger(), revertSpell, true);
 			context.getLogic().addSpellTrigger(player, removeTrigger, target);
 		}
-	}
-
-	private boolean isTemporary() {
-		return temporary;
 	}
 
 }

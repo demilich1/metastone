@@ -13,17 +13,17 @@ public class OverloadEvent extends GameEvent {
 	}
 
 	@Override
+	public Entity getEventTarget() {
+		return null;
+	}
+
+	@Override
 	public GameEventType getEventType() {
 		return GameEventType.OVERLOAD;
 	}
 
 	public int getPlayerId() {
 		return playerId;
-	}
-
-	@Override
-	public Entity getEventTarget() {
-		return null;
 	}
 
 }

@@ -15,6 +15,11 @@ public class HealEvent extends GameEvent {
 	}
 
 	@Override
+	public Entity getEventTarget() {
+		return getTarget();
+	}
+
+	@Override
 	public GameEventType getEventType() {
 		return GameEventType.HEAL;
 	}
@@ -25,11 +30,6 @@ public class HealEvent extends GameEvent {
 
 	public Entity getTarget() {
 		return target;
-	}
-
-	@Override
-	public Entity getEventTarget() {
-		return getTarget();
 	}
 
 }

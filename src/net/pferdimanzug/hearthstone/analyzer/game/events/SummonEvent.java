@@ -17,6 +17,11 @@ public class SummonEvent extends GameEvent {
 	}
 
 	@Override
+	public Entity getEventTarget() {
+		return getMinion();
+	}
+
+	@Override
 	public GameEventType getEventType() {
 		return GameEventType.SUMMON;
 	}
@@ -27,11 +32,6 @@ public class SummonEvent extends GameEvent {
 
 	public Card getSource() {
 		return source;
-	}
-
-	@Override
-	public Entity getEventTarget() {
-		return getMinion();
 	}
 
 

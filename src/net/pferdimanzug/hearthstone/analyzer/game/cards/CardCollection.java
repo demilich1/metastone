@@ -54,15 +54,6 @@ public class CardCollection implements Iterable<Card>, Cloneable {
 		return cards.get(ThreadLocalRandom.current().nextInt(cards.size()));
 	}
 	
-	public boolean hasCardOfType(CardType cardType) {
-		for (Card card : cards) {
-			if (card.getCardType() == cardType) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	public Card getRandomOfType(CardType cardType) {
 		List<Card> relevantCards = new ArrayList<>();
 		for (Card card : cards) {
@@ -74,6 +65,15 @@ public class CardCollection implements Iterable<Card>, Cloneable {
 			return null;
 		}
 		return relevantCards.get(ThreadLocalRandom.current().nextInt(relevantCards.size()));
+	}
+
+	public boolean hasCardOfType(CardType cardType) {
+		for (Card card : cards) {
+			if (card.getCardType() == cardType) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public boolean isEmpty() {

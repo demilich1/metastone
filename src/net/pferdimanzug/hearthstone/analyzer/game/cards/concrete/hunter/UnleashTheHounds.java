@@ -15,11 +15,20 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class UnleashTheHounds extends SpellCard {
 
-	public UnleashTheHounds() {
-		super("Unleash the Hounds", Rarity.COMMON, HeroClass.HUNTER, 3);
-		setDescription("For each enemy minion, summon a 1/1 Hound with Charge.");
-		setSpell(new UnleashTheHoundsSpell());
-		setTargetRequirement(TargetSelection.NONE);
+	private class Hound extends MinionCard {
+
+		public Hound() {
+			super("Hound", 1, 1, Rarity.FREE, HeroClass.HUNTER, 1);
+			setDescription("Charge");
+			setCollectible(false);
+			setTag(GameTag.RACE, Race.BEAST);
+		}
+
+		@Override
+		public Minion summon() {
+			return createMinion(GameTag.CHARGE);
+		}
+		
 	}
 	
 	private class UnleashTheHoundsSpell extends SummonSpell {
@@ -36,20 +45,11 @@ public class UnleashTheHounds extends SpellCard {
 		}
 	}
 	
-	private class Hound extends MinionCard {
-
-		public Hound() {
-			super("Hound", 1, 1, Rarity.FREE, HeroClass.HUNTER, 1);
-			setDescription("Charge");
-			setCollectible(false);
-			setTag(GameTag.RACE, Race.BEAST);
-		}
-
-		@Override
-		public Minion summon() {
-			return createMinion(GameTag.CHARGE);
-		}
-		
+	public UnleashTheHounds() {
+		super("Unleash the Hounds", Rarity.COMMON, HeroClass.HUNTER, 3);
+		setDescription("For each enemy minion, summon a 1/1 Hound with Charge.");
+		setSpell(new UnleashTheHoundsSpell());
+		setTargetRequirement(TargetSelection.NONE);
 	}
 
 }

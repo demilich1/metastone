@@ -13,18 +13,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class SoulOfTheForest extends SpellCard {
 
-	public SoulOfTheForest() {
-		super("Soul of the Forest", Rarity.COMMON, HeroClass.DRUID, 4);
-		setDescription("Give your minions \"Deathrattle: Summon a 2/2 Treant.\"");
-
-		Spell summonSpell = new SummonSpell(new Treant());
-		Spell addDeathrattleSpell = new AddDeathrattleSpell(summonSpell);
-		addDeathrattleSpell.setTarget(EntityReference.FRIENDLY_MINIONS);
-		setSpell(addDeathrattleSpell);
-
-		setTargetRequirement(TargetSelection.NONE);
-	}
-
 	private class Treant extends MinionCard {
 
 		public Treant() {
@@ -36,6 +24,18 @@ public class SoulOfTheForest extends SpellCard {
 		public Minion summon() {
 			return createMinion();
 		}
+	}
+
+	public SoulOfTheForest() {
+		super("Soul of the Forest", Rarity.COMMON, HeroClass.DRUID, 4);
+		setDescription("Give your minions \"Deathrattle: Summon a 2/2 Treant.\"");
+
+		Spell summonSpell = new SummonSpell(new Treant());
+		Spell addDeathrattleSpell = new AddDeathrattleSpell(summonSpell);
+		addDeathrattleSpell.setTarget(EntityReference.FRIENDLY_MINIONS);
+		setSpell(addDeathrattleSpell);
+
+		setTargetRequirement(TargetSelection.NONE);
 	}
 
 }

@@ -12,14 +12,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class DivineFavor extends SpellCard {
 
-	public DivineFavor() {
-		super("Divine Favor", Rarity.RARE, HeroClass.PALADIN, 3);
-		setDescription("Draw cards until you have as many in hand as your opponent.");
-		setSpell(new DivineFavorSpell());
-		
-		setTargetRequirement(TargetSelection.NONE);
-	}
-	
 	private class DivineFavorSpell extends DrawCardSpell {
 		
 		public DivineFavorSpell() {
@@ -39,6 +31,14 @@ public class DivineFavor extends SpellCard {
 		
 		
 		
+	}
+	
+	public DivineFavor() {
+		super("Divine Favor", Rarity.RARE, HeroClass.PALADIN, 3);
+		setDescription("Draw cards until you have as many in hand as your opponent.");
+		setSpell(new DivineFavorSpell());
+		
+		setTargetRequirement(TargetSelection.NONE);
 	}
 
 }

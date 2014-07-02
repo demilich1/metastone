@@ -12,13 +12,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class ExplosiveShot extends SpellCard {
 
-	public ExplosiveShot() {
-		super("Explosive Shot", Rarity.RARE, HeroClass.HUNTER, 5);
-		setDescription("Deal $5 damage to a minion and $2 damage to adjacent ones.");
-		setSpell(new ExplosiveShotSpell());
-		setTargetRequirement(TargetSelection.MINIONS);
-	}
-
 	private class ExplosiveShotSpell extends Spell {
 
 		private final Spell primary = new DamageSpell(5);
@@ -31,6 +24,13 @@ public class ExplosiveShot extends SpellCard {
 			secondary.cast(context, player, context.getAdjacentMinions(player, target.getReference()));
 		}
 
+	}
+
+	public ExplosiveShot() {
+		super("Explosive Shot", Rarity.RARE, HeroClass.HUNTER, 5);
+		setDescription("Deal $5 damage to a minion and $2 damage to adjacent ones.");
+		setSpell(new ExplosiveShotSpell());
+		setTargetRequirement(TargetSelection.MINIONS);
 	}
 
 }

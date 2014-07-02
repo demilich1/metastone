@@ -15,17 +15,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class KeeperOfTheGrove extends ChooseOneCard {
 
-	public KeeperOfTheGrove() {
-		super("Keeper of the Grove", CardType.MINION, Rarity.RARE, HeroClass.DRUID, 4);
-		setDescription("Choose One - Deal 2 damage; or Silence a minion.");
-
-		setCard1(new KeeperDamage());
-		setCard2(new KeeperSilence());
-		
-		setTag(GameTag.BASE_ATTACK, 2);
-		setTag(GameTag.BASE_HP, 4);
-	}
-
 	private class KeeperDamage extends MinionCard {
 
 		public KeeperDamage() {
@@ -38,6 +27,19 @@ public class KeeperOfTheGrove extends ChooseOneCard {
 			Battlecry battlecry = Battlecry.createBattlecry(new DamageSpell(2), TargetSelection.ANY);
 			keeperOfTheGrove.setBattlecry(battlecry);
 			return keeperOfTheGrove;
+		}
+
+	}
+
+	private class KeeperMinion extends Minion {
+
+		public KeeperMinion(MinionCard sourceCard) {
+			super(sourceCard);
+		}
+
+		@Override
+		public Card returnToHand() {
+			return new KeeperOfTheGrove();
 		}
 
 	}
@@ -57,17 +59,15 @@ public class KeeperOfTheGrove extends ChooseOneCard {
 		}
 	}
 
-	private class KeeperMinion extends Minion {
+	public KeeperOfTheGrove() {
+		super("Keeper of the Grove", CardType.MINION, Rarity.RARE, HeroClass.DRUID, 4);
+		setDescription("Choose One - Deal 2 damage; or Silence a minion.");
 
-		public KeeperMinion(MinionCard sourceCard) {
-			super(sourceCard);
-		}
-
-		@Override
-		public Card returnToHand() {
-			return new KeeperOfTheGrove();
-		}
-
+		setCard1(new KeeperDamage());
+		setCard2(new KeeperSilence());
+		
+		setTag(GameTag.BASE_ATTACK, 2);
+		setTag(GameTag.BASE_HP, 4);
 	}
 
 }

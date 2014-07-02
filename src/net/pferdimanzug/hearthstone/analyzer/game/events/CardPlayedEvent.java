@@ -15,22 +15,22 @@ public class CardPlayedEvent extends GameEvent {
 		this.card = card;
 	}
 
-	@Override
-	public GameEventType getEventType() {
-		return GameEventType.CARD_PLAYED;
-	}
-
 	public Card getCard() {
 		return card;
-	}
-
-	public int getPlayerId() {
-		return playerId;
 	}
 
 	@Override
 	public Entity getEventTarget() {
 		return getCard();
+	}
+
+	@Override
+	public GameEventType getEventType() {
+		return GameEventType.CARD_PLAYED;
+	}
+
+	public int getPlayerId() {
+		return playerId;
 	}
 
 }

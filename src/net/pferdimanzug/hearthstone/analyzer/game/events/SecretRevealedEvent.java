@@ -16,21 +16,21 @@ public class SecretRevealedEvent extends GameEvent {
 	}
 
 	@Override
-	public GameEventType getEventType() {
-		return GameEventType.SECRET_REVEALED;
-	}
-
-	@Override
 	public Entity getEventTarget() {
 		return getSecret();
 	}
 
-	public SecretCard getSecret() {
-		return secret;
+	@Override
+	public GameEventType getEventType() {
+		return GameEventType.SECRET_REVEALED;
 	}
 
 	public int getPlayerId() {
 		return playerId;
+	}
+
+	public SecretCard getSecret() {
+		return secret;
 	}
 
 }

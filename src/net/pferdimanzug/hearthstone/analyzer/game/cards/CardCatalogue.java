@@ -178,6 +178,37 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 
 public class CardCatalogue {
 	
+	public static Card getCardByName(String name) {
+		for (Card card : cards) {
+			if (card.getName().equals(name)) {
+				return card.clone();
+			}
+		}
+
+		return null;
+	}
+
+	public static CardCollection query(CardType cardType, Rarity rarity, HeroClass heroClass) {
+		CardCollection result = new CardCollection();
+		for (Card card : cards) {
+			if (!card.isCollectible()) {
+				continue;
+			}
+			if (cardType != null && card.getCardType() != cardType) {
+				continue;
+			}
+			if (rarity != null && card.getRarity() != rarity) {
+				continue;
+			}
+			if (heroClass != null && card.getClassRestriction() != heroClass) {
+				continue;
+			}
+			result.add(card.clone());
+		}
+
+		return result;
+	}
+
 	private final static CardCollection cards = new CardCollection();
 
 	static {
@@ -459,37 +490,6 @@ public class CardCatalogue {
 		cards.add(new Slam());
 		cards.add(new WarsongCommander());
 		cards.add(new Whirlwind());
-	}
-
-	public static Card getCardByName(String name) {
-		for (Card card : cards) {
-			if (card.getName().equals(name)) {
-				return card.clone();
-			}
-		}
-
-		return null;
-	}
-
-	public static CardCollection query(CardType cardType, Rarity rarity, HeroClass heroClass) {
-		CardCollection result = new CardCollection();
-		for (Card card : cards) {
-			if (!card.isCollectible()) {
-				continue;
-			}
-			if (cardType != null && card.getCardType() != cardType) {
-				continue;
-			}
-			if (rarity != null && card.getRarity() != rarity) {
-				continue;
-			}
-			if (heroClass != null && card.getClassRestriction() != heroClass) {
-				continue;
-			}
-			result.add(card.clone());
-		}
-
-		return result;
 	}
 
 }

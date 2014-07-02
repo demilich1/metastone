@@ -13,20 +13,6 @@ public abstract class GameEvent {
 		this.context = context;
 	}
 
-	public abstract GameEventType getEventType();
-
-	public GameContext getGameContext() {
-		return context;
-	}
-	
-	public TriggerLayer getTriggerLayer() {
-		return triggerLayer;
-	}
-
-	public void setTriggerLayer(TriggerLayer triggerLayer) {
-		this.triggerLayer = triggerLayer;
-	}
-	
 	/**
 	 * Spells may specify to be cast on the event target; this is dependent
 	 * on the actual event. For example, a SummonEvent may return the summoned minion,
@@ -34,5 +20,19 @@ public abstract class GameEvent {
 	 * @return
 	 */
 	public abstract Entity getEventTarget();
+
+	public abstract GameEventType getEventType();
+	
+	public GameContext getGameContext() {
+		return context;
+	}
+
+	public TriggerLayer getTriggerLayer() {
+		return triggerLayer;
+	}
+	
+	public void setTriggerLayer(TriggerLayer triggerLayer) {
+		this.triggerLayer = triggerLayer;
+	}
 
 }

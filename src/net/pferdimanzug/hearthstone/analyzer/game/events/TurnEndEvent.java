@@ -13,17 +13,17 @@ public class TurnEndEvent extends GameEvent {
 	}
 
 	@Override
+	public Entity getEventTarget() {
+		return null;
+	}
+
+	@Override
 	public GameEventType getEventType() {
 		return GameEventType.TURN_END;
 	}
 
 	public int getPlayer() {
 		return playerIndex;
-	}
-
-	@Override
-	public Entity getEventTarget() {
-		return null;
 	}
 
 }

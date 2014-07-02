@@ -15,7 +15,7 @@ public class CommandingShout extends SpellCard {
 
 	public CommandingShout() {
 		super("Commanding Shout", Rarity.RARE, HeroClass.WARRIOR, 2);
-		setDescription("Your minions can't be reduced below 1 Health this turn.  Draw a card.");
+		setDescription("Your minions can't be reduced below 1 Health this turn. Draw a card.");
 		
 		Spell commanding = new ApplyTagSpell(GameTag.CANNOT_REDUCE_HP_BELOW_1, true);
 		commanding.setTarget(EntityReference.FRIENDLY_HERO);

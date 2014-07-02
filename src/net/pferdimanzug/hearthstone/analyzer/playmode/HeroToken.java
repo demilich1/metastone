@@ -67,6 +67,15 @@ public class HeroToken extends GameToken {
 		armorLabel.setVisible(visible);
 	}
 	
+	private void updateSecrets(Player player) {
+		secretsAnchor.getChildren().clear();
+		for (int i = 0; i < player.getSecrets().size(); i++) {
+			ImageView secretIcon = new ImageView(IconFactory.getImageUrl("common/secret.png"));
+			secretsAnchor.getChildren().add(secretIcon);
+		}
+		
+	}
+	
 	private void updateWeapon(Weapon weapon) {
 		boolean hasWeapon = weapon != null;
 		weaponPane.setVisible(hasWeapon);
@@ -75,15 +84,6 @@ public class HeroToken extends GameToken {
 			weaponAttackLabel.setText(String.valueOf(weapon.getWeaponDamage()));
 			weaponDurabilityLabel.setText(String.valueOf(weapon.getDurability()));
 		}
-	}
-	
-	private void updateSecrets(Player player) {
-		secretsAnchor.getChildren().clear();
-		for (int i = 0; i < player.getSecrets().size(); i++) {
-			ImageView secretIcon = new ImageView(IconFactory.getImageUrl("common/secret.png"));
-			secretsAnchor.getChildren().add(secretIcon);
-		}
-		
 	}
 
 }

@@ -4,19 +4,19 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
-import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
-import net.pferdimanzug.hearthstone.analyzer.game.events.TargetAcquisitionEvent;
 
-public class SummonNewTargetTrigger extends GameEventTrigger {
-
-	private final ActionType actionType;
+public class SummonNewTargetTrigger extends TargetAcquisitionTrigger {
 
 	public SummonNewTargetTrigger(ActionType actionType) {
-		this.actionType = actionType;
+		super(actionType);
 	}
 
 	@Override
 	public boolean fire(GameEvent event, Entity host) {
+		if (!super.fire(event, host)) {
+			return false;
+		}
+
 		// this is used by secrets like NobleSacrifice, which will summon a new
 		// minion to the board, so it should only trigger if the cap has not yet
 		// been reached
@@ -24,12 +24,7 @@ public class SummonNewTargetTrigger extends GameEventTrigger {
 		if (!event.getGameContext().getLogic().canSummonMoreMinions(owner)) {
 			return false;
 		}
-		TargetAcquisitionEvent targetAcquisitionEvent = (TargetAcquisitionEvent) event;
-		return targetAcquisitionEvent.getActionType() == actionType;
+		return true;
 	}
 
-	@Override
-	public GameEventType interestedIn() {
-		return GameEventType.TARGET_ACQUISITION;
-	}
 }

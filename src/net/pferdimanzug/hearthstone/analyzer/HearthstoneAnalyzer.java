@@ -11,6 +11,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.DebugDecks;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.MinMaxBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.NoAggressionBehaviour;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.PlayRandomBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.KeeperOfTheGrove;
@@ -18,8 +19,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.AnimalCo
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.EaglehornBow;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.ExplosiveShot;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.Flare;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.FreezingTrap;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.Misdirection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.Snipe;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Frostbolt;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.IceBarrier;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.IceLance;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.KirinTorMage;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.MirrorEntity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Vaporize;
@@ -34,6 +39,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.Harvest
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.IronbeakOwl;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.LeperGnome;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.LootHoarder;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.ManaAddict;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.ManaWraith;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.MindControlTech;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.QuestingAdventurer;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.RazorfenHunter;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.ShatteredSunCleric;
@@ -46,6 +54,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.DivineF
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.HolyWrath;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.AuchenaiSoulpriest;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.DivineSpirit;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.Lightwell;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.rogue.Headcrack;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.LightningStorm;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock.Felguard;
@@ -100,17 +109,17 @@ public class HearthstoneAnalyzer extends Application {
 	}
 
 	private void launchHumanDebugGame() {
-		HeroClass humanHeroClass = HeroClass.MAGE;
+		HeroClass humanHeroClass = HeroClass.HUNTER;
 		HeroClass aiHeroClass = HeroClass.MAGE;
 		Hero hero1 = HeroFactory.createHero(humanHeroClass);
 		//Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
-		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new LightningStorm(), new LootHoarder()));
+		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new Misdirection(), new HarvestGolem(), new FreezingTrap()));
 		player1.setBehaviour(new HumanBehaviour());
 		
 		Hero hero2 = HeroFactory.createHero(aiHeroClass);
 		//Player player2 = new Player("Bot", hero2, DebugDecks.getRandomDeck(hero2.getHeroClass()));
 		Player player2 = new Player("Bot", hero2, DebugDecks.getDeckConsistingof(30, new WorgenInfiltrator(), new GoldshireFootman(), new IceBarrier()));
-		player2.setBehaviour(new NoAggressionBehaviour());
+		player2.setBehaviour(new PlayRandomBehaviour());
 		GameContext newGame = new GameContextVisualizable(player1, player2, new GameLogic());
 		ApplicationFacade.getInstance().sendNotification(GameNotification.START_GAME, newGame);		
 	}

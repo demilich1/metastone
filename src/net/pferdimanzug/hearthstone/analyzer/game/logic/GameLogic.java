@@ -384,6 +384,7 @@ public class GameLogic implements Cloneable {
 		int manaCost = card.getManaCost(player);
 		if (card.getCardType() == CardType.MINION) {
 			manaCost += getTotalTagValue(player, GameTag.MINION_MANA_COST);
+			manaCost += getTotalTagValue(GameTag.ALL_MINION_MANA_COST);
 			int minManaCost = getTagValue(player, GameTag.MINION_MIN_MANA_COST, 0);
 			manaCost = MathUtils.clamp(manaCost, minManaCost, Integer.MAX_VALUE);
 		} else if (card.getCardType() == CardType.SPELL) {
@@ -394,6 +395,17 @@ public class GameLogic implements Cloneable {
 		}
 		manaCost = MathUtils.clamp(manaCost, 0, Integer.MAX_VALUE);
 		return manaCost;
+	}
+
+	public int getTagValue(Player player, GameTag tag, int defaultValue) {
+		for (Entity minion : player.getMinions()) {
+			if (!minion.hasTag(tag)) {
+				continue;
+			}
+
+			return minion.getTagValue(tag);
+		}
+		return defaultValue;
 	}
 
 	public int getTotalTagValue(Player player, GameTag tag) {
@@ -408,24 +420,12 @@ public class GameLogic implements Cloneable {
 		return total;
 	}
 
-	public int getTagValue(Player player, GameTag tag, int defaultValue) {
-		for (Entity minion : player.getMinions()) {
-			if (!minion.hasTag(tag)) {
-				continue;
-			}
-
-			return minion.getTagValue(tag);
+	public int getTotalTagValue(GameTag tag) {
+		int total = 0;
+		for (Player player : context.getPlayers()) {
+			total += getTotalTagValue(player, tag);
 		}
-		return defaultValue;
-	}
-
-	public boolean hasTag(Player player, GameTag tag) {
-		for (Entity minion : player.getMinions()) {
-			if (minion.hasTag(tag)) {
-				return true;
-			}
-		}
-		return false;
+		return total;
 	}
 
 	public List<GameAction> getValidActions(int playerId) {
@@ -456,6 +456,15 @@ public class GameLogic implements Cloneable {
 		Spell enrageSpell = (Spell) entity.getTag(GameTag.ENRAGE_SPELL);
 		Player owner = context.getPlayer(entity.getOwner());
 		enrageSpell.cast(context, owner, toList(entity));
+	}
+
+	public boolean hasTag(Player player, GameTag tag) {
+		for (Entity minion : player.getMinions()) {
+			if (minion.hasTag(tag)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void heal(Player player, Actor target, int healing) {
@@ -529,6 +538,12 @@ public class GameLogic implements Cloneable {
 		player.setMana(newMana);
 	}
 
+	public void modifyMaxMana(Player player, int delta) {
+		logger.debug("Maximum mana was changed by {} for {}", delta, player.getName());
+		int maxMana = MathUtils.clamp(player.getMaxMana() + delta, 0, GameLogic.MAX_MANA);
+		player.setMaxMana(maxMana);
+	}
+
 	public void performGameAction(int playerId, GameAction action) {
 		if (action.getTargetRequirement() == TargetSelection.SELF) {
 			action.setTargetKey(action.getSource());
@@ -585,8 +600,10 @@ public class GameLogic implements Cloneable {
 		logger.debug("{} has a new secret activated: {}", player.getName(), secret.getSource());
 		addSpellTrigger(player, secret, player.getHero());
 		player.getSecrets().add(secret.getSource().getTypeId());
-		//TODO: this is grenzwertig, basically it was only added because of the card
-		// 'Kirin Tor Mage', which provides secret cost reduction for one secret.
+		// TODO: this is grenzwertig, basically it was only added because of the
+		// card
+		// 'Kirin Tor Mage', which provides secret cost reduction for one
+		// secret.
 		// this mechanic could not be implemented with current spelltriggers
 		player.getHero().removeTag(GameTag.PLAY_SECRET_AT_NO_COST);
 	}
@@ -700,12 +717,6 @@ public class GameLogic implements Cloneable {
 			refreshAttacksPerRound(minion);
 		}
 		context.fireGameEvent(new TurnStartEvent(context, player.getId()));
-	}
-
-	public void modifyMaxMana(Player player, int delta) {
-		logger.debug("Maximum mana was changed by {} for {}", delta, player.getName());
-		int maxMana = MathUtils.clamp(player.getMaxMana() + delta, 0, GameLogic.MAX_MANA);
-		player.setMaxMana(maxMana);
 	}
 
 	public void summon(int playerId, Minion minion, Card source, Actor nextTo, boolean resolveBattlecry) {

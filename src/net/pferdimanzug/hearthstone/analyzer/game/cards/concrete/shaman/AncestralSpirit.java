@@ -14,14 +14,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class AncestralSpirit extends SpellCard {
 
-	public AncestralSpirit() {
-		super("Ancestral Spirit", Rarity.RARE, HeroClass.SHAMAN, 2);
-		setDescription("Choose a minion. When that minion is destroyed, return it to the battlefield.");
-
-		setSpell(new AncestralSpiritSpell());
-		setTargetRequirement(TargetSelection.MINIONS);
-	}
-
 	private class AncestralSpiritSpell extends Spell {
 
 		@Override
@@ -30,6 +22,14 @@ public class AncestralSpirit extends SpellCard {
 			MinionCard minionCard = (MinionCard) targetMinion.getSourceCard();
 			targetMinion.addDeathrattle(new SummonSpell(minionCard));
 		}
+	}
+
+	public AncestralSpirit() {
+		super("Ancestral Spirit", Rarity.RARE, HeroClass.SHAMAN, 2);
+		setDescription("Choose a minion. When that minion is destroyed, return it to the battlefield.");
+
+		setSpell(new AncestralSpiritSpell());
+		setTargetRequirement(TargetSelection.MINIONS);
 	}
 
 }

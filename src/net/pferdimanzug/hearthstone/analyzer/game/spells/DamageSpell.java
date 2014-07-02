@@ -8,9 +8,15 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 public class DamageSpell extends Spell {
 	
 	private int damage;
+	private final IDamageModifier damageModifier;
 	
 	public DamageSpell(int damage) {
-		this.setDamage(damage);
+		this(null);
+		setDamage(damage);
+	}
+	
+	public DamageSpell(IDamageModifier damageModifier) {
+		this.damageModifier = damageModifier;
 	}
 	
 	public int getDamage() {
@@ -19,7 +25,8 @@ public class DamageSpell extends Spell {
 	
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
-		context.getLogic().damage(player, (Actor)target, getDamage(), applySpellpower);
+		int effectiveDamage = damageModifier != null ? damageModifier.calculateDamage(context, player, target) : getDamage();
+		context.getLogic().damage(player, (Actor)target, effectiveDamage, applySpellpower);
 	}
 
 	public void setDamage(int damage) {

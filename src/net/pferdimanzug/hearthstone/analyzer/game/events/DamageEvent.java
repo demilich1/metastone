@@ -19,17 +19,17 @@ public class DamageEvent extends GameEvent {
 	}
 
 	@Override
+	public Entity getEventTarget() {
+		return getVictim();
+	}
+
+	@Override
 	public GameEventType getEventType() {
 		return GameEventType.DAMAGE;
 	}
 
 	public Entity getVictim() {
 		return victim;
-	}
-
-	@Override
-	public Entity getEventTarget() {
-		return getVictim();
 	}
 
 

@@ -13,17 +13,17 @@ public class KillEvent extends GameEvent {
 	}
 
 	@Override
+	public Entity getEventTarget() {
+		return getVictim();
+	}
+
+	@Override
 	public GameEventType getEventType() {
 		return GameEventType.KILL;
 	}
 
 	public Entity getVictim() {
 		return victim;
-	}
-
-	@Override
-	public Entity getEventTarget() {
-		return getVictim();
 	}
 
 	

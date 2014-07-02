@@ -11,14 +11,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class FeralSpirit extends SpellCard {
 
-	public FeralSpirit() {
-		super("Feral Spirit", Rarity.RARE, HeroClass.SHAMAN, 3);
-		setDescription("Summon two 2/3 Spirit Wolves with Taunt. Overload: (2)");
-
-		setSpell(new SummonSpell(new SpiritWolf(), new SpiritWolf()));
-		setTargetRequirement(TargetSelection.NONE);
-	}
-
 	private class SpiritWolf extends MinionCard {
 
 		public SpiritWolf() {
@@ -32,6 +24,14 @@ public class FeralSpirit extends SpellCard {
 			return createMinion(GameTag.TAUNT);
 		}
 
+	}
+
+	public FeralSpirit() {
+		super("Feral Spirit", Rarity.RARE, HeroClass.SHAMAN, 3);
+		setDescription("Summon two 2/3 Spirit Wolves with Taunt. Overload: (2)");
+
+		setSpell(new SummonSpell(new SpiritWolf(), new SpiritWolf()));
+		setTargetRequirement(TargetSelection.NONE);
 	}
 
 }

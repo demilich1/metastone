@@ -19,6 +19,13 @@ public class Minion extends Actor {
 		setRace(race);
 	}
 
+	public void addDeathrattle(Spell deathrattleSpell) {
+		if (!hasTag(GameTag.DEATHRATTLES)) {
+			setTag(GameTag.DEATHRATTLES, new ArrayList<Spell>());
+		}
+		getDeathrattles().add(deathrattleSpell);
+	}
+
 	@Override
 	public Minion clone() {
 		Minion clone =(Minion) super.clone(); 
@@ -39,6 +46,11 @@ public class Minion extends Actor {
 		return super.getAttack();
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Spell> getDeathrattles() {
+		return (List<Spell>) getTag(GameTag.DEATHRATTLES);
+	}
+
 	@Override
 	public EntityType getEntityType() {
 		return EntityType.MINION;
@@ -48,31 +60,6 @@ public class Minion extends Actor {
 		return (Race) getTag(GameTag.RACE);
 	}
 
-	protected void setBaseStats(int baseAttack, int baseHp) {
-		setBaseAttack(baseAttack);
-		setBaseHp(baseHp);
-	}
-
-	public void setBattlecry(Battlecry battlecry) {
-		setTag(GameTag.BATTLECRY, battlecry);
-	}
-
-	public void addDeathrattle(Spell deathrattleSpell) {
-		if (!hasTag(GameTag.DEATHRATTLES)) {
-			setTag(GameTag.DEATHRATTLES, new ArrayList<Spell>());
-		}
-		getDeathrattles().add(deathrattleSpell);
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Spell> getDeathrattles() {
-		return (List<Spell>) getTag(GameTag.DEATHRATTLES);
-	}
-
-	public void setRace(Race race) {
-		setTag(GameTag.RACE, race);
-	}
-	
 	@Override
 	public int getTypeId() {
 		return getName().hashCode();
@@ -80,6 +67,19 @@ public class Minion extends Actor {
 	
 	public Card returnToHand() {
 		return getSourceCard();
+	}
+
+	protected void setBaseStats(int baseAttack, int baseHp) {
+		setBaseAttack(baseAttack);
+		setBaseHp(baseHp);
+	}
+	
+	public void setBattlecry(Battlecry battlecry) {
+		setTag(GameTag.BATTLECRY, battlecry);
+	}
+	
+	public void setRace(Race race) {
+		setTag(GameTag.RACE, race);
 	}
 
 }

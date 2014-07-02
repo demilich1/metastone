@@ -17,25 +17,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class WarsongCommander extends MinionCard {
 
-	public WarsongCommander() {
-		super("Warsong Commander", 2, 3, Rarity.FREE, HeroClass.WARRIOR, 3);
-		setDescription("Whenever you summon a minion with 3 or less Attack, give it Charge. ");
-	}
-
-	@Override
-	public Minion summon() {
-		Minion warsongCommander = createMinion();
-		Spell chargeSpell = new ApplyTagSpell(GameTag.CHARGE);
-		chargeSpell.setTarget(EntityReference.EVENT_TARGET);
-		//TODO: check interaction with aura buffs. Currently all auras from minions which where played
-		// before the Warsong Commander will also be applied before. Comments on Hearthhead.com state
-		// that auras are ALWAYS applied before other spell triggers, no matter when they were played.
-		// Need to check this
-		SpellTrigger trigger = new SpellTrigger(new BelowThreeAttackTrigger(), chargeSpell);
-		warsongCommander.setSpellTrigger(trigger);
-		return warsongCommander;
-	}
-	
 	private class BelowThreeAttackTrigger extends MinionSummonedTrigger {
 		
 		public BelowThreeAttackTrigger() {
@@ -54,6 +35,25 @@ public class WarsongCommander extends MinionCard {
 			return summonEvent.getMinion().getAttack() <= 3;
 		}
 		
+	}
+
+	public WarsongCommander() {
+		super("Warsong Commander", 2, 3, Rarity.FREE, HeroClass.WARRIOR, 3);
+		setDescription("Whenever you summon a minion with 3 or less Attack, give it Charge. ");
+	}
+	
+	@Override
+	public Minion summon() {
+		Minion warsongCommander = createMinion();
+		Spell chargeSpell = new ApplyTagSpell(GameTag.CHARGE);
+		chargeSpell.setTarget(EntityReference.EVENT_TARGET);
+		//TODO: check interaction with aura buffs. Currently all auras from minions which where played
+		// before the Warsong Commander will also be applied before. Comments on Hearthhead.com state
+		// that auras are ALWAYS applied before other spell triggers, no matter when they were played.
+		// Need to check this
+		SpellTrigger trigger = new SpellTrigger(new BelowThreeAttackTrigger(), chargeSpell);
+		warsongCommander.setSpellTrigger(trigger);
+		return warsongCommander;
 	}
 
 }

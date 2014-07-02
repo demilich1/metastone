@@ -31,13 +31,13 @@ public class PhysicalAttackEvent extends GameEvent {
 	}
 
 	@Override
-	public GameEventType getEventType() {
-		return GameEventType.PHYSICAL_ATTACK;
+	public Entity getEventTarget() {
+		return getDefender();
 	}
 
 	@Override
-	public Entity getEventTarget() {
-		return getDefender();
+	public GameEventType getEventType() {
+		return GameEventType.PHYSICAL_ATTACK;
 	}
 
 }

@@ -1,6 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.spells;
 
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
@@ -43,6 +44,11 @@ public abstract class Spell {
 	}
 
 	protected abstract void onCast(GameContext context, Player player, Entity target);
+	
+	protected <T> T getRandomTarget(List<T> targets) {
+		int randomIndex = ThreadLocalRandom.current().nextInt(targets.size());
+		return targets.get(randomIndex);
+	}
 
 	public void setApplySpellpower(boolean applySpellpower) {
 		this.applySpellpower = applySpellpower;

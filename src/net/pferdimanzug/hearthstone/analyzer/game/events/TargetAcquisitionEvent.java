@@ -20,17 +20,17 @@ public class TargetAcquisitionEvent extends GameEvent {
 	}
 
 	@Override
+	public Entity getEventTarget() {
+		return getTarget();
+	}
+
+	@Override
 	public GameEventType getEventType() {
 		return GameEventType.TARGET_ACQUISITION;
 	}
 
 	public Entity getTarget() {
 		return target;
-	}
-
-	@Override
-	public Entity getEventTarget() {
-		return getTarget();
 	}
 
 }
