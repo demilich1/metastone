@@ -12,11 +12,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.NoAggressionBehaviou
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.IceBarrier;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.GoldshireFootman;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.LootHoarder;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.IronbeakOwl;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.WorgenInfiltrator;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.rogue.BladeFlurry;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.rogue.ColdBlood;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.rogue.PerditionsBlade;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.ShadowMadness;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
@@ -65,13 +63,12 @@ public class HearthstoneAnalyzer extends Application {
 	}
 
 	private void launchHumanDebugGame() {
-		HeroClass humanHeroClass = HeroClass.ROGUE;
+		HeroClass humanHeroClass = HeroClass.PRIEST;
 		HeroClass aiHeroClass = HeroClass.MAGE;
 		Hero hero1 = HeroFactory.createHero(humanHeroClass);
 		// Player player1 = new Player("Human", hero1,
 		// DebugDecks.getRandomDeck(hero1.getHeroClass()));
-		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new PerditionsBlade(), new ColdBlood(),
-				new BladeFlurry(), new LootHoarder()));
+		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new ShadowMadness(), new IronbeakOwl()));
 		player1.setBehaviour(new HumanBehaviour());
 
 		Hero hero2 = HeroFactory.createHero(aiHeroClass);

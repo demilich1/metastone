@@ -29,7 +29,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.KillEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.OverloadEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.PhysicalAttackEvent;
+import net.pferdimanzug.hearthstone.analyzer.game.events.SecretPlayedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.SecretRevealedEvent;
+import net.pferdimanzug.hearthstone.analyzer.game.events.SilenceEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.SpellCastedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.SummonEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.TargetAcquisitionEvent;
@@ -618,6 +620,7 @@ public class GameLogic implements Cloneable {
 		// secret.
 		// this mechanic could not be implemented with current spelltriggers
 		player.getHero().removeTag(GameTag.PLAY_SECRET_AT_NO_COST);
+		context.fireGameEvent(new SecretPlayedEvent(context, (SecretCard) secret.getSource()));
 	}
 
 	public void receiveCard(int playerId, Card card) {
@@ -636,7 +639,7 @@ public class GameLogic implements Cloneable {
 		}
 	}
 
-	private void refreshAttacksPerRound(Entity entity) {
+	public void refreshAttacksPerRound(Entity entity) {
 		int attacks = 1;
 		if (entity.hasTag(GameTag.SUMMONING_SICKNESS) && !entity.hasTag(GameTag.CHARGE)) {
 			attacks = 0;
@@ -687,6 +690,7 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void silence(Minion target) {
+		context.fireGameEvent(new SilenceEvent(context, target));
 		final HashSet<GameTag> immuneToSilence = new HashSet<GameTag>();
 		immuneToSilence.add(GameTag.HP);
 		immuneToSilence.add(GameTag.MAX_HP);
@@ -707,6 +711,9 @@ public class GameLogic implements Cloneable {
 			target.removeTag(tag);
 		}
 		context.removeTriggersAssociatedWith(target.getReference());
+		if (target.hasSpellTrigger()) {
+			target.getSpellTrigger().onRemove(context);
+		}
 		refreshAttacksPerRound(target);
 		target.setHp(target.getMaxHp());
 	}

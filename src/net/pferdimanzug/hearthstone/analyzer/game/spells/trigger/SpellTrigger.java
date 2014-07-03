@@ -14,7 +14,8 @@ import org.slf4j.LoggerFactory;
 public class SpellTrigger implements Cloneable {
 	private final static Logger logger = LoggerFactory.getLogger(SpellTrigger.class);
 
-	private GameEventTrigger trigger;
+	private final GameEventTrigger primaryTrigger;
+	private final GameEventTrigger secondaryTrigger;
 	private Spell spell;
 	private EntityReference hostReference;
 	private final boolean oneTime;
@@ -26,7 +27,12 @@ public class SpellTrigger implements Cloneable {
 	}
 
 	public SpellTrigger(GameEventTrigger trigger, Spell spell, boolean oneTime) {
-		this.trigger = trigger;
+		this(trigger, null, spell, oneTime);
+	}
+
+	public SpellTrigger(GameEventTrigger primaryTrigger, GameEventTrigger secondaryTrigger, Spell spell, boolean oneTime) {
+		this.primaryTrigger = primaryTrigger;
+		this.secondaryTrigger = secondaryTrigger;
 		this.spell = spell;
 		this.oneTime = oneTime;
 	}
@@ -49,15 +55,19 @@ public class SpellTrigger implements Cloneable {
 	}
 
 	public int getOwner() {
-		return trigger.getOwner();
+		return primaryTrigger.getOwner();
 	}
-	
+
 	protected Spell getSpell() {
 		return spell;
 	}
 
-	public GameEventType interestedIn() {
-		return trigger.interestedIn();
+	public boolean interestedIn(GameEventType eventType) {
+		boolean result = primaryTrigger.interestedIn() == eventType;
+		if (secondaryTrigger != null) {
+			result |= secondaryTrigger.interestedIn() == eventType;
+		}
+		return result;
 	}
 
 	public boolean isExpired() {
@@ -72,24 +82,34 @@ public class SpellTrigger implements Cloneable {
 	}
 
 	public void onGameEvent(GameEvent event) {
-		int ownerId = trigger.getOwner();
+		int ownerId = primaryTrigger.getOwner();
 		Entity host = event.getGameContext().resolveSingleTarget(ownerId, hostReference);
 		try {
-			if (!expired && trigger.fire(event, host)) {
+			if (!expired && (triggerFires(primaryTrigger, event, host) || triggerFires(secondaryTrigger, event, host))) {
 				if (oneTime) {
 					expired = true;
 				}
-				
+
 				event.getGameContext().getEnvironment().put(Environment.EVENT_TARGET, event.getEventTarget());
 				onFire(ownerId, spell, event);
 				event.getGameContext().getEnvironment().remove(Environment.EVENT_TARGET);
 			}
 		} catch (Exception e) {
-			logger.error("SpellTrigger cannot be executed; GameEventTrigger: {} Spell: {}", trigger, spell);
+			logger.error("SpellTrigger cannot be executed; GameEventTrigger: {} Spell: {}", primaryTrigger, spell);
 			throw e;
 		}
 	}
-	
+
+	private boolean triggerFires(GameEventTrigger trigger, GameEvent event, Entity host) {
+		if (trigger == null) {
+			return false;
+		}
+		if (trigger.interestedIn() != event.getEventType()) {
+			return false;
+		}
+		return trigger.fire(event, host);
+	}
+
 	public void onRemove(GameContext context) {
 	}
 
@@ -107,7 +127,10 @@ public class SpellTrigger implements Cloneable {
 	}
 
 	public void setOwner(int playerIndex) {
-		trigger.setOwner(playerIndex);
+		primaryTrigger.setOwner(playerIndex);
+		if (secondaryTrigger != null) {
+			secondaryTrigger.setOwner(playerIndex);
+		}
 	}
 
 }

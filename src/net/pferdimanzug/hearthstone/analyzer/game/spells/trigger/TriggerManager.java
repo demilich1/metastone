@@ -1,33 +1,24 @@
 package net.pferdimanzug.hearthstone.analyzer.game.spells.trigger;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
-import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class TriggerManager implements Cloneable {
-	private final HashMap<GameEventType, List<SpellTrigger>> triggers;
+	private final List<SpellTrigger> triggers;
 
 	public TriggerManager() {
-		triggers = new HashMap<>();
+		triggers = new ArrayList<SpellTrigger>();
 	}
 
 	private TriggerManager(TriggerManager otherTriggerManager) {
-		triggers = new HashMap<>();
-		for (GameEventType eventType : otherTriggerManager.triggers.keySet()) {
-			triggers.put(eventType, new ArrayList<SpellTrigger>(otherTriggerManager.triggers.get(eventType)));
-		}
+		triggers = new ArrayList<SpellTrigger>(otherTriggerManager.triggers);
 	}
 
 	public void addTrigger(SpellTrigger trigger) {
-		GameEventType eventType = trigger.interestedIn();
-		if (!triggers.containsKey(eventType)) {
-			triggers.put(eventType, new ArrayList<SpellTrigger>());
-		}
-		triggers.get(eventType).add(trigger);
+		triggers.add(trigger);
 	}
 
 	@Override
@@ -36,40 +27,35 @@ public class TriggerManager implements Cloneable {
 	}
 
 	public void fireGameEvent(GameEvent event) {
-		if (!triggers.containsKey(event.getEventType())) {
-			return;
-		}
-		for (SpellTrigger trigger : getListSnapshot(event.getEventType(), triggers)) {
+		for (SpellTrigger trigger : getListSnapshot(triggers)) {
 			if (trigger.getLayer() != event.getTriggerLayer()) {
+				continue;
+			}
+
+			if (!trigger.interestedIn(event.getEventType())) {
 				continue;
 			}
 			// we need to double check here if the trigger still exists;
 			// after all, a previous trigger may have removed it (i.e. double
 			// corruption)
-			if (triggers.get(event.getEventType()).contains(trigger)) {
+			if (triggers.contains(trigger)) {
 				trigger.onGameEvent(event);
 			}
 
 			if (trigger.isExpired()) {
-				triggers.get(event.getEventType()).remove(trigger);
+				triggers.remove(trigger);
 			}
 		}
 	}
 
-	private List<SpellTrigger> getListSnapshot(GameEventType eventType, HashMap<GameEventType, List<SpellTrigger>> triggerMap) {
-		List<SpellTrigger> snapshot = new ArrayList<SpellTrigger>(triggerMap.get(eventType));
-		return snapshot;
+	private List<SpellTrigger> getListSnapshot(List<SpellTrigger> triggerList) {
+		return new ArrayList<SpellTrigger>(triggerList);
 	}
 
 	public void removeTriggersAssociatedWith(EntityReference entityReference) {
-		for (GameEventType gameEventType : GameEventType.values()) {
-			if (!triggers.containsKey(gameEventType)) {
-				continue;
-			}
-			for (SpellTrigger trigger : getListSnapshot(gameEventType, triggers)) {
-				if (trigger.getHostReference().equals(entityReference)) {
-					triggers.get(gameEventType).remove(trigger);
-				}
+		for (SpellTrigger trigger : getListSnapshot(triggers)) {
+			if (trigger.getHostReference().equals(entityReference)) {
+				triggers.remove(trigger);
 			}
 		}
 	}

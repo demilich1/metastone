@@ -8,7 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SilenceSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class IronbeakOwl extends MinionCard {
 
@@ -21,8 +21,7 @@ public class IronbeakOwl extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion ironbeakOwl = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new SilenceSpell());
-		battlecry.setTargetKey(EntityReference.ALL_MINIONS);
+		Battlecry battlecry = Battlecry.createBattlecry(new SilenceSpell(), TargetSelection.MINIONS);
 		ironbeakOwl.setBattlecry(battlecry);
 		return ironbeakOwl;
 	}
