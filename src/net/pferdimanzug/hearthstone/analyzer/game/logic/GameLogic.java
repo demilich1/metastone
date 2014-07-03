@@ -10,6 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
@@ -559,7 +560,7 @@ public class GameLogic implements Cloneable {
 		Player player = context.getPlayer(playerId);
 		if (action.getTargetRequirement() != TargetSelection.NONE && action.getTargetKey() == null) {
 			List<Entity> validTargets = getValidTargets(playerId, action);
-			if (validTargets.isEmpty() && action.getActionType() == ActionType.MINION_ABILITY) {
+			if (validTargets.isEmpty() && action.getActionType() == ActionType.BATTLECRY) {
 				return;
 			}
 			action.setValidTargets(validTargets);
@@ -673,7 +674,11 @@ public class GameLogic implements Cloneable {
 	}
 
 	private void resolveBattlecry(int playerId, Actor actor) {
-		GameAction battlecry = actor.getBattlecry();
+		Battlecry battlecry = actor.getBattlecry();
+		Player player = context.getPlayer(playerId);
+		if (!battlecry.canBeExecuted(context, player)) {
+			return;
+		}
 		battlecry.setSource(actor.getReference());
 		performGameAction(playerId, battlecry);
 	}

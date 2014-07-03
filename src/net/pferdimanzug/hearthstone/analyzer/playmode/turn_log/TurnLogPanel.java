@@ -42,7 +42,7 @@ public class TurnLogPanel extends JPanel {
 		switch (action.getActionType()) {
 		case HERO_POWER:
 			return new PlayCardActionEntry(player, (PlayCardAction) action);
-		case MINION_ABILITY:
+		case BATTLECRY:
 			return new BattlecryActionEntry((Battlecry) action);
 		case PHYSICAL_ATTACK:
 			return new PhysicalAttackActionEntry(context, player, (PhysicalAttackAction) action);

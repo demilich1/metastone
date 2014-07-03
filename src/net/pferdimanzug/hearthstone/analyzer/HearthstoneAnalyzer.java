@@ -11,10 +11,16 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.MinMaxBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.NoAggressionBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.IceBarrier;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.AmaniBerserker;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.GoldshireFootman;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.IronbeakOwl;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.KoboldGeomancer;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.MagmaRager;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.StampedingKodo;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.WorgenInfiltrator;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.ShadowMadness;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.rogue.SI7Agent;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock.Shadowflame;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
@@ -68,13 +74,13 @@ public class HearthstoneAnalyzer extends Application {
 		Hero hero1 = HeroFactory.createHero(humanHeroClass);
 		// Player player1 = new Player("Human", hero1,
 		// DebugDecks.getRandomDeck(hero1.getHeroClass()));
-		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new ShadowMadness(), new IronbeakOwl()));
+		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new StampedingKodo(), new KoboldGeomancer()));
 		player1.setBehaviour(new HumanBehaviour());
 
 		Hero hero2 = HeroFactory.createHero(aiHeroClass);
 		// Player player2 = new Player("Bot", hero2,
 		// DebugDecks.getRandomDeck(hero2.getHeroClass()));
-		Player player2 = new Player("Bot", hero2, DebugDecks.getDeckConsistingof(30, new WorgenInfiltrator(), new GoldshireFootman(),
+		Player player2 = new Player("Bot", hero2, DebugDecks.getDeckConsistingof(30, new AmaniBerserker(), new MagmaRager(),
 				new IceBarrier()));
 		player2.setBehaviour(new NoAggressionBehaviour());
 		GameContext newGame = new GameContextVisualizable(player1, player2, new GameLogic());

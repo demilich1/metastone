@@ -40,16 +40,19 @@ public class ShadowMadness extends SpellCard {
 
 		@Override
 		protected void onCast(GameContext context, Player player, Entity target) {
+			// mind control minion
 			super.onCast(context, player, target);
 			
+			// minion should be able to attack this turn
 			target.removeTag(GameTag.SUMMONING_SICKNESS);
 			context.getLogic().refreshAttacksPerRound(target);
+			
+			// mind control is terminated either when silenced or turn ends
 			Spell reverseMindcontrolSpell = new ReverseMindControlSpell();
 			reverseMindcontrolSpell.setTarget(EntityReference.SELF);
 			SpellTrigger returnOnSilence = new SpellTrigger(new SilenceTrigger(), new TurnEndTrigger(), reverseMindcontrolSpell, true);
 			context.getLogic().addSpellTrigger(player, returnOnSilence, target);
 		}
-		
 		
 	}
 	

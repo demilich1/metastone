@@ -8,6 +8,6 @@ public enum ActionType {
 	SPELL,
 	SUMMON,
 	HERO_POWER,
-	MINION_ABILITY,
+	BATTLECRY,
 	EQUIP_WEAPON
 }

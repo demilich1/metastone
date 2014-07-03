@@ -32,7 +32,7 @@ public class HumanActionPromptView extends Stage {
 		case HERO_POWER:
 			HeroPowerAction heroPowerAction = (HeroPowerAction) action;
 			return "HERO POWER: " + heroPowerAction.getHeroPower().getName();
-		case MINION_ABILITY:
+		case BATTLECRY:
 			break;
 		case PHYSICAL_ATTACK:
 			PhysicalAttackAction physicalAttackAction = (PhysicalAttackAction) action;
