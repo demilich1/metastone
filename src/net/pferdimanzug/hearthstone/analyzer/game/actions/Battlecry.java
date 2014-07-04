@@ -32,7 +32,8 @@ public class Battlecry extends GameAction {
 		if (!super.canBeExecutedOn(entity)) {
 			return false;
 		}
-		if (getTargetRequirement() != TargetSelection.SELF && getSource().getId() == entity.getId()) {
+		//if (getTargetRequirement() != TargetSelection.SELF && getSource().getId() == entity.getId()) {
+		if (getSource().getId() == entity.getId()) {
 			return false;
 		}
 		return true;

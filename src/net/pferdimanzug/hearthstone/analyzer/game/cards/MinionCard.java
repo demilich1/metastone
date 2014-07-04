@@ -7,6 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public abstract class MinionCard extends Card {
@@ -33,6 +34,10 @@ public abstract class MinionCard extends Card {
 
 	public int getBaseHp() {
 		return getTagValue(GameTag.BASE_HP);
+	}
+	
+	public void setRace(Race race) {
+		setTag(GameTag.RACE, race);
 	}
 
 	@Override

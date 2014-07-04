@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -15,7 +14,7 @@ public class BloodsailCorsair extends MinionCard {
 	public BloodsailCorsair() {
 		super("Bloodsail Corsair", 1, 2, Rarity.RARE, HeroClass.ANY, 1);
 		setDescription("Battlecry: Remove 1 Durability from your opponent's weapon.");
-		setTag(GameTag.RACE, Race.PIRATE);
+		setRace(Race.PIRATE);
 	}
 
 	@Override

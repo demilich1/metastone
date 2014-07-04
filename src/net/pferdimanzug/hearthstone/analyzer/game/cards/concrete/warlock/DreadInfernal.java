@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -16,7 +15,7 @@ public class DreadInfernal extends MinionCard {
 	public DreadInfernal() {
 		super("Dread Infernal", 6, 6, Rarity.FREE, HeroClass.WARLOCK, 6);
 		setDescription("Battlecry: Deal 1 damage to ALL other characters. ");
-		setTag(GameTag.RACE, Race.DEMON);
+		setRace(Race.DEMON);
 	}
 
 	@Override

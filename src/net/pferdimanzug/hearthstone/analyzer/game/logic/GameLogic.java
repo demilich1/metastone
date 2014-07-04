@@ -306,7 +306,10 @@ public class GameLogic implements Cloneable {
 	public void endTurn(int playerId) {
 		Player player = context.getPlayer(playerId);
 		player.getHero().removeTag(GameTag.COMBO);
-		player.getHero().removeTag(GameTag.PLAY_SECRET_AT_NO_COST);
+		consumeTag(player, GameTag.ONE_TIME_FREE_SECRET);
+		consumeTag(context.getOpponent(player), GameTag.ONE_TIME_FREE_SECRET);
+		consumeTag(player, GameTag.ONE_TIME_MINION_MANA_COST);
+		consumeTag(context.getOpponent(player), GameTag.ONE_TIME_MINION_MANA_COST);
 		player.getHero().activateWeapon(false);
 		logger.debug("{} ends his turn.", player.getName());
 		context.fireGameEvent(new TurnEndEvent(context, player.getId()));
@@ -389,24 +392,25 @@ public class GameLogic implements Cloneable {
 		return GameResult.RUNNING;
 	}
 
-	private int getModifiedManaCost(Player player, Card card) {
+	public int getModifiedManaCost(Player player, Card card) {
 		int manaCost = card.getManaCost(player);
 		if (card.getCardType() == CardType.MINION) {
 			manaCost += getTotalTagValue(player, GameTag.MINION_MANA_COST);
 			manaCost += getTotalTagValue(GameTag.ALL_MINION_MANA_COST);
+			manaCost += getTotalTagValue(player, GameTag.ONE_TIME_MINION_MANA_COST);
 			int minManaCost = getTagValue(player, GameTag.MINION_MIN_MANA_COST, 0);
 			manaCost = MathUtils.clamp(manaCost, minManaCost, Integer.MAX_VALUE);
 		} else if (card.getCardType() == CardType.SPELL) {
 			manaCost += getTotalTagValue(player, GameTag.SPELL_MANA_COST);
 		}
-		if (card.hasTag(GameTag.SECRET) && player.getHero().hasTag(GameTag.PLAY_SECRET_AT_NO_COST)) {
+		if (card.hasTag(GameTag.SECRET) && hasTag(player, GameTag.ONE_TIME_FREE_SECRET)) {
 			manaCost = 0;
 		}
 		manaCost = MathUtils.clamp(manaCost, 0, Integer.MAX_VALUE);
 		return manaCost;
 	}
 
-	public int getTagValue(Player player, GameTag tag, int defaultValue) {
+	private int getTagValue(Player player, GameTag tag, int defaultValue) {
 		for (Entity minion : player.getMinions()) {
 			if (!minion.hasTag(tag)) {
 				continue;
@@ -435,6 +439,19 @@ public class GameLogic implements Cloneable {
 			total += getTotalTagValue(player, tag);
 		}
 		return total;
+	}
+
+	private boolean hasTag(Player player, GameTag tag) {
+		if (player.getHero().hasTag(tag)) {
+			return true;
+		}
+		for (Entity minion : player.getMinions()) {
+			if (minion.hasTag(tag)) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	public List<GameAction> getValidActions(int playerId) {
@@ -467,18 +484,9 @@ public class GameLogic implements Cloneable {
 		enrageSpell.cast(context, owner, toList(entity));
 	}
 
-	public boolean hasTag(Player player, GameTag tag) {
-		for (Entity minion : player.getMinions()) {
-			if (minion.hasTag(tag)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	public void heal(Player player, Actor target, int healing) {
 		if (hasTag(player, GameTag.INVERT_HEALING)) {
-			System.out.println("Invert healing, do damage isntead!");
+			logger.debug("All healing inverted, deal damage instead!");
 			damage(player, target, healing, true);
 			return;
 		}
@@ -554,9 +562,9 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void performGameAction(int playerId, GameAction action) {
-		if (action.getTargetRequirement() == TargetSelection.SELF) {
-			action.setTargetKey(action.getSource());
-		}
+//		if (action.getTargetRequirement() == TargetSelection.SELF) {
+//			action.setTargetKey(action.getSource());
+//		}
 		Player player = context.getPlayer(playerId);
 		if (action.getTargetRequirement() != TargetSelection.NONE && action.getTargetKey() == null) {
 			List<Entity> validTargets = getValidTargets(playerId, action);
@@ -620,8 +628,15 @@ public class GameLogic implements Cloneable {
 		// 'Kirin Tor Mage', which provides secret cost reduction for one
 		// secret.
 		// this mechanic could not be implemented with current spelltriggers
-		player.getHero().removeTag(GameTag.PLAY_SECRET_AT_NO_COST);
+		consumeTag(player, GameTag.ONE_TIME_FREE_SECRET);
 		context.fireGameEvent(new SecretPlayedEvent(context, (SecretCard) secret.getSource()));
+	}
+
+	private void consumeTag(Player player, GameTag tag) {
+		player.getHero().removeTag(tag);
+		for (Minion minion : player.getMinions()) {
+			minion.removeTag(tag);
+		}
 	}
 
 	public void receiveCard(int playerId, Card card) {
@@ -706,6 +721,7 @@ public class GameLogic implements Cloneable {
 		immuneToSilence.add(GameTag.AURA_HP_BONUS);
 		immuneToSilence.add(GameTag.RACE);
 		immuneToSilence.add(GameTag.NUMBER_OF_ATTACKS);
+		immuneToSilence.add(GameTag.ONE_TIME_FREE_SECRET);
 
 		List<GameTag> tags = new ArrayList<GameTag>();
 		tags.addAll(target.getTags().keySet());
@@ -756,8 +772,11 @@ public class GameLogic implements Cloneable {
 		// Environment.SUMMONED_MINION
 		// need a stack or another approach here!
 		logger.debug("{} summons {}", player.getName(), minion);
-
 		minion.setOwner(player.getId());
+		
+		if (source != null) {
+			consumeTag(player, GameTag.ONE_TIME_MINION_MANA_COST);
+		}
 
 		if (resolveBattlecry && minion.getBattlecry() != null && !minion.getBattlecry().isResolvedLate()) {
 			resolveBattlecry(player.getId(), minion);

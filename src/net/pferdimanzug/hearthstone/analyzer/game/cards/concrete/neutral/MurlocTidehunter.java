@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -28,7 +27,7 @@ public class MurlocTidehunter extends MinionCard {
 	public MurlocTidehunter() {
 		super("Murloc Tidehunter", 2, 1, Rarity.FREE, HeroClass.ANY, 2);
 		setDescription("Battlecry: Summon a 1/1 Murloc Scout.");
-		setTag(GameTag.RACE, Race.MURLOC);
+		setRace(Race.MURLOC);
 	}
 
 	@Override

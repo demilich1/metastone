@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.aura.Aura;
 import net.pferdimanzug.hearthstone.analyzer.game.aura.BuffAura;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
@@ -15,7 +14,7 @@ public class TimberWolf extends MinionCard {
 	public TimberWolf() {
 		super("Timber Wolf", 1, 1, Rarity.FREE, HeroClass.HUNTER, 1);
 		setDescription("Your other Beasts have +1 Attack.");
-		setTag(GameTag.RACE, Race.BEAST);
+		setRace(Race.BEAST);
 	}
 
 	@Override

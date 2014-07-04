@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -15,7 +14,7 @@ public class IronbeakOwl extends MinionCard {
 	public IronbeakOwl() {
 		super("Ironbeak Owl", 2, 1, Rarity.COMMON, HeroClass.ANY, 2);
 		setDescription("Battlecry: Silence a minion.");
-		setTag(GameTag.RACE, Race.BEAST);
+		setRace(Race.BEAST);
 	}
 
 	@Override

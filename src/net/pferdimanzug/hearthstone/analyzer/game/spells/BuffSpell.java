@@ -19,6 +19,9 @@ public class BuffSpell extends Spell {
 	private int hpBonus;
 	private boolean temporary;
 
+	private IValueProvider attackValueProvider;
+	private IValueProvider hpValueProvider;
+
 	public BuffSpell(int attackBonus) {
 		this(attackBonus, 0);
 	}
@@ -27,13 +30,10 @@ public class BuffSpell extends Spell {
 		this.attackBonus = attackBonus;
 		this.hpBonus = hpBonus;
 	}
-
-	public int getAttackBonus() {
-		return attackBonus;
-	}
-
-	public int getHpBonus() {
-		return hpBonus;
+	
+	public BuffSpell(IValueProvider attackValueProvider, IValueProvider hpValueProvider) {
+		this.attackValueProvider = attackValueProvider;
+		this.hpValueProvider = hpValueProvider;
 	}
 
 	public boolean isTemporary() {
@@ -42,6 +42,13 @@ public class BuffSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
+		if (attackValueProvider != null) {
+			attackBonus = attackValueProvider.provideValue(player, target);
+		}
+		if (hpValueProvider != null) {
+			hpBonus = hpValueProvider.provideValue(player, target);
+		}
+		
 		logger.debug("{} gains ({})", target, attackBonus + "/" + hpBonus);
 		
 		Actor targetActor = (Actor) target;
@@ -59,14 +66,6 @@ public class BuffSpell extends Spell {
 			SpellTrigger removeTrigger = new SpellTrigger(new TurnEndTrigger(), debuff, true);
 			context.getLogic().addSpellTrigger(player, removeTrigger, target);
 		}
-	}
-
-	public void setAttackBonus(int attackBonus) {
-		this.attackBonus = attackBonus;
-	}
-
-	public void setHpBonus(int hpBonus) {
-		this.hpBonus = hpBonus;
 	}
 
 	public void setTemporary(boolean temporary) {

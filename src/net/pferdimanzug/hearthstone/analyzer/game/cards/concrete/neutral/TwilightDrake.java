@@ -6,27 +6,26 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.RaceSpecificBuffSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
-public class ColdlightSeer extends MinionCard {
+public class TwilightDrake extends MinionCard {
 
-	public ColdlightSeer() {
-		super("Coldlight Seer", 2, 3, Rarity.RARE, HeroClass.ANY, 3);
-		setDescription("Battlecry: Give ALL other Murlocs +2 Health.");
-		setRace(Race.MURLOC);
+	public TwilightDrake() {
+		super("Twilight Drake", 4, 1, Rarity.RARE, HeroClass.ANY, 4);
+		setDescription("Battlecry: Gain +1 Health for each card in your hand.");
+		setRace(Race.DRAGON);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion coldlightSeer = createMinion();
-		Spell murlocBuffSpell =new RaceSpecificBuffSpell(0, 2, Race.MURLOC);
-		murlocBuffSpell.setTarget(EntityReference.ALL_MINIONS);
-		Battlecry battlecry = Battlecry.createBattlecry(murlocBuffSpell);
-		coldlightSeer.setBattlecry(battlecry);
-		return coldlightSeer;
+		Minion twilightDrake = createMinion();
+		Spell buffSpell = new BuffSpell(null, (player, target) -> player.getHand().getCount());
+		buffSpell.setTarget(EntityReference.SELF);
+		Battlecry battlecry = Battlecry.createBattlecry(buffSpell);
+		twilightDrake.setBattlecry(battlecry);
+		return twilightDrake;
 	}
-	
 
 }

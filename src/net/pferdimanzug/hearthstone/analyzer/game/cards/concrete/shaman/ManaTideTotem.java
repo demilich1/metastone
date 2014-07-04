@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
@@ -15,7 +14,7 @@ public class ManaTideTotem extends MinionCard {
 	public ManaTideTotem() {
 		super("Mana Tide Totem", 0, 3, Rarity.RARE, HeroClass.SHAMAN, 3);
 		setDescription("At the end of your turn, draw a card.");
-		setTag(GameTag.RACE, Race.TOTEM);
+		setRace(Race.TOTEM);
 	}
 
 	@Override

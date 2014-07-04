@@ -18,7 +18,7 @@ public class BladeFlurry extends SpellCard {
 		super("Blade Flurry", Rarity.RARE, HeroClass.ROGUE, 2);
 		setDescription("Destroy your weapon and deal its damage to all enemies.");
 
-		Spell damageSpell = new DamageSpell((context, player, target) -> player.getHero().getWeapon().getWeaponDamage());
+		Spell damageSpell = new DamageSpell((player, target) -> player.getHero().getWeapon().getWeaponDamage());
 		damageSpell.setTarget(EntityReference.ENEMY_CHARACTERS);
 		Spell destroyWeaponSpell = new DestroyWeaponSpell();
 		destroyWeaponSpell.setTarget(EntityReference.FRIENDLY_HERO);

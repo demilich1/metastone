@@ -2,6 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.playmode;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
@@ -18,8 +19,8 @@ public class CardTooltip extends CardToken {
 	}
 
 	@Override
-	public void setCard(Card card, Player player) {
-		super.setCard(card, player);
+	public void setCard(GameContext context, Card card, Player player) {
+		super.setCard(context, card, player);
 		descriptionLabel.setText(card.getDescription());
 		if (!card.hasTag(GameTag.RACE) || card.getTag(GameTag.RACE) == Race.NONE) {
 			raceLabel.setVisible(false);

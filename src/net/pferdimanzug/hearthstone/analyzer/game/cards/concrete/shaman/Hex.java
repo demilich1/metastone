@@ -16,7 +16,7 @@ public class Hex extends SpellCard {
 
 		public Frog() {
 			super("Frog", 0, 1, Rarity.FREE, HeroClass.ANY, 0);
-			setTag(GameTag.RACE, Race.BEAST);
+			setRace(Race.BEAST);
 			setCollectible(false);
 		}
 

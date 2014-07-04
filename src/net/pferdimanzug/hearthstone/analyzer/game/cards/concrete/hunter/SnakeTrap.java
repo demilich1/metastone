@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SecretCard;
@@ -17,7 +16,7 @@ public class SnakeTrap extends SecretCard {
 
 		public Snake() {
 			super("Snake", 1, 1, Rarity.COMMON, HeroClass.HUNTER, 0);
-			setTag(GameTag.RACE, Race.BEAST);
+			setRace(Race.BEAST);
 			
 			setCollectible(false);
 		}

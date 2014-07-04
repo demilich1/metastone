@@ -12,7 +12,7 @@ public class BluegillWarrior extends MinionCard {
 	public BluegillWarrior() {
 		super("Bluegill Warrior", 2, 1, Rarity.FREE, HeroClass.ANY, 2);
 		setDescription("Charge");
-		setTag(GameTag.RACE, Race.MURLOC);
+		setRace(Race.MURLOC);
 	}
 
 	@Override

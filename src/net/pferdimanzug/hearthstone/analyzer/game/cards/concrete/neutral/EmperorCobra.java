@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
@@ -17,7 +16,7 @@ public class EmperorCobra extends MinionCard {
 	public EmperorCobra() {
 		super("Emperor Cobra", 2, 3, Rarity.RARE, HeroClass.ANY, 3);
 		setDescription("Destroy any minion damaged by this minion.");
-		setTag(GameTag.RACE, Race.BEAST);
+		setRace(Race.BEAST);
 	}
 
 	@Override

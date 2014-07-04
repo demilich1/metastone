@@ -21,7 +21,7 @@ public class UnleashTheHounds extends SpellCard {
 			super("Hound", 1, 1, Rarity.FREE, HeroClass.HUNTER, 1);
 			setDescription("Charge");
 			setCollectible(false);
-			setTag(GameTag.RACE, Race.BEAST);
+			setRace(Race.BEAST);
 		}
 
 		@Override

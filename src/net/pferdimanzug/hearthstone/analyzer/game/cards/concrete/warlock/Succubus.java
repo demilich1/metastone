@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -14,7 +13,7 @@ public class Succubus extends MinionCard {
 	public Succubus() {
 		super("Succubus", 4, 3, Rarity.FREE, HeroClass.WARLOCK, 2);
 		setDescription("Battlecry: Discard a random card.");
-		setTag(GameTag.RACE, Race.DEMON);
+		setRace(Race.DEMON);
 	}
 
 	@Override

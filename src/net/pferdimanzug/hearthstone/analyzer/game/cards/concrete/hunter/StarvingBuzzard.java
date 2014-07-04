@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
@@ -16,7 +15,7 @@ public class StarvingBuzzard extends MinionCard {
 	public StarvingBuzzard() {
 		super("Starving Buzzard", 2, 1, Rarity.FREE, HeroClass.HUNTER, 2);
 		setDescription("Whenever you summon a Beast, draw a card.");
-		setTag(GameTag.RACE, Race.BEAST);
+		setRace(Race.BEAST);
 	}
 
 	@Override

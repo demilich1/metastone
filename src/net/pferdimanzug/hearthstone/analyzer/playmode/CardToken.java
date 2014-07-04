@@ -9,13 +9,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardType;
 
 public class CardToken extends BorderPane {
-	
+
 	@FXML
 	protected Text manaCostLabel;
 	@FXML
@@ -32,7 +33,7 @@ public class CardToken extends BorderPane {
 	protected ImageView attackIcon;
 	@FXML
 	protected ImageView hpIcon;
-	
+
 	protected CardToken(String fxml) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
 		fxmlLoader.setRoot(this);
@@ -44,10 +45,11 @@ public class CardToken extends BorderPane {
 			throw new RuntimeException(exception);
 		}
 	}
-	
-	public void setCard(Card card, Player player) {
+
+	public void setCard(GameContext context, Card card, Player player) {
 		nameLabel.setText(card.getName());
-		setScoreValueLowerIsBetter(manaCostLabel, card.getManaCost(player), card.getBaseManaCost());
+		int modifiedManaCost = context.getLogic().getModifiedManaCost(player, card);
+		setScoreValueLowerIsBetter(manaCostLabel, modifiedManaCost, card.getBaseManaCost());
 		boolean isMinionCard = card.getCardType() == CardType.MINION;
 		attackLabel.setVisible(isMinionCard);
 		hpLabel.setVisible(isMinionCard);
@@ -58,33 +60,29 @@ public class CardToken extends BorderPane {
 			setScoreValue(hpLabel, card.getTagValue(GameTag.BASE_HP));
 		}
 	}
-	
+
 	private void setScoreValue(Text label, int value) {
 		setScoreValue(label, value, value);
 	}
-	
+
 	private void setScoreValue(Text label, int value, int baseValue) {
 		label.setText(String.valueOf(value));
 		if (value > baseValue) {
 			label.setFill(Color.GREEN);
-		}
-		else if (value < baseValue) {
+		} else if (value < baseValue) {
 			label.setFill(Color.RED);
-		}
-		else {
+		} else {
 			label.setFill(Color.WHITE);
 		}
 	}
-	
+
 	private void setScoreValueLowerIsBetter(Text label, int value, int baseValue) {
 		label.setText(String.valueOf(value));
 		if (value < baseValue) {
 			label.setFill(Color.GREEN);
-		}
-		else if (value > baseValue) {
+		} else if (value > baseValue) {
 			label.setFill(Color.RED);
-		}
-		else {
+		} else {
 			label.setFill(Color.WHITE);
 		}
 	}

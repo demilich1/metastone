@@ -198,8 +198,8 @@ public class GameBoardView extends BorderPane {
 		p2Hero.setHero(context.getPlayer2());
 		entityTokenMap.put(context.getPlayer2().getHero(), p2Hero);
 		
-		updateHandCards(context.getPlayer1(), p1Cards);
-		updateHandCards(context.getPlayer2(), p2Cards);
+		updateHandCards(context, context.getPlayer1(), p1Cards);
+		updateHandCards(context, context.getPlayer2(), p2Cards);
 		
 		updateMinionTokens(context.getPlayer1(), p1Minions);
 		updateMinionTokens(context.getPlayer2(), p2Minions);
@@ -207,11 +207,11 @@ public class GameBoardView extends BorderPane {
 		checkForWinner(context);
 	}
 	
-	private void updateHandCards(Player player, HandCard[] handCards) {
+	private void updateHandCards(GameContext context, Player player, HandCard[] handCards) {
 		CardCollection hand = player.getHand();
 		for (int i = 0; i < handCards.length; i++) {
 			if (i < hand.getCount()) {
-				handCards[i].setCard(hand.get(i), player);
+				handCards[i].setCard(context, hand.get(i), player);
 				handCards[i].setManaged(true);
 				handCards[i].setVisible(true);
 			} else {

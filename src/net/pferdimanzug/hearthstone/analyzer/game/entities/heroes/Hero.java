@@ -3,7 +3,6 @@ package net.pferdimanzug.hearthstone.analyzer.game.entities.heroes;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.HeroPower;
 
@@ -62,10 +61,6 @@ public abstract class Hero extends Actor {
 		return heroPower;
 	}
 
-	public Race getRace() {
-		return (Race) getTag(GameTag.RACE);
-	}
-	
 	public Weapon getWeapon() {
 		return weapon;
 	}
@@ -74,10 +69,6 @@ public abstract class Hero extends Actor {
 		// armor cannot fall below zero
 		int newArmor = Math.max(getArmor() + armor, 0);
 		setTag(GameTag.ARMOR, newArmor);
-	}
-
-	public void setRace(Race race) {
-		setTag(GameTag.RACE, race);
 	}
 
 	public void setWeapon(Weapon weapon) {

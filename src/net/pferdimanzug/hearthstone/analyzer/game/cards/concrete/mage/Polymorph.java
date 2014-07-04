@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
@@ -16,8 +15,8 @@ public class Polymorph extends SpellCard {
 
 		public Sheep() {
 			super("Sheep", 1, 1, Rarity.FREE, HeroClass.ANY, 0);
-			setTag(GameTag.RACE, Race.BEAST);
 			setCollectible(false);
+			setRace(Race.BEAST);
 		}
 
 		@Override

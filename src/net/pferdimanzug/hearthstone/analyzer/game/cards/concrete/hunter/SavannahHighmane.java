@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
@@ -13,7 +12,7 @@ public class SavannahHighmane extends MinionCard {
 	public SavannahHighmane() {
 		super("Savannah Highmane", 6, 5, Rarity.RARE, HeroClass.HUNTER, 6);
 		setDescription("Deathrattle: Summon two 2/2 Hyenas.");
-		setTag(GameTag.RACE, Race.BEAST);
+		setRace(Race.BEAST);
 	}
 
 	@Override
@@ -28,7 +27,7 @@ public class SavannahHighmane extends MinionCard {
 		public Hyena() {
 			super("Hyena", 2, 2, Rarity.RARE, HeroClass.HUNTER, 2);
 			setCollectible(false);
-			setTag(GameTag.RACE, Race.BEAST);
+			setRace(Race.BEAST);
 		}
 
 		@Override

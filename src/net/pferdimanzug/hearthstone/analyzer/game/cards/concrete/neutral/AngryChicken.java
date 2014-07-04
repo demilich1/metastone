@@ -13,7 +13,7 @@ public class AngryChicken extends MinionCard {
 	public AngryChicken() {
 		super("Angry Chicken", 1, 1, Rarity.RARE, HeroClass.ANY, 1);
 		setDescription("Enrage: +5 Attack.");
-		setTag(GameTag.RACE, Race.BEAST);
+		setRace(Race.BEAST);
 	}
 
 	@Override

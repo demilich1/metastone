@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardType;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.ChooseOneCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
@@ -29,7 +28,7 @@ public class PowerOfTheWild extends ChooseOneCard {
 		
 		public PowerOfTheWildPanther() {
 			super("Panther", 3, 2, Rarity.COMMON, HeroClass.DRUID, 2);
-			setTag(GameTag.RACE, Race.BEAST);
+			setRace(Race.BEAST);
 		}
 
 		@Override

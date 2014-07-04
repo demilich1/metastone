@@ -12,7 +12,7 @@ public class StranglethornTiger extends MinionCard {
 	public StranglethornTiger() {
 		super("Stranglethorn Tiger", 5, 5, Rarity.COMMON, HeroClass.ANY, 5);
 		setDescription("Stealth");
-		setTag(GameTag.RACE, Race.BEAST);
+		setRace(Race.BEAST);
 	}
 
 	@Override

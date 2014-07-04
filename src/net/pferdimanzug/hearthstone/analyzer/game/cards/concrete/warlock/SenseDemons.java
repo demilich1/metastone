@@ -52,7 +52,7 @@ public class SenseDemons extends SpellCard {
 		public WorthlessImp() {
 			super("Worthless Imp", 1, 1, Rarity.COMMON, HeroClass.WARLOCK, 1);
 			setDescription("You are out of demons! At least there are always imps...");
-			setTag(GameTag.RACE, Race.DEMON);
+			setRace(Race.DEMON);
 		}
 
 		@Override

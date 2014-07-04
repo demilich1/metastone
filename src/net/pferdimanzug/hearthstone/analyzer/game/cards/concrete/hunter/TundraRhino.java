@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
@@ -12,7 +11,7 @@ public class TundraRhino extends MinionCard {
 	public TundraRhino() {
 		super("Tundra Rhino", 2, 5, Rarity.FREE, HeroClass.HUNTER, 5);
 		setDescription("Your Beasts have Charge.");
-		setTag(GameTag.RACE, Race.BEAST);
+		setRace(Race.BEAST);
 	}
 	
 	@Override

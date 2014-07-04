@@ -20,7 +20,7 @@ public class AnimalCompanion extends SpellCard {
 		public Huffer() {
 			super("Huffer", 4, 2, Rarity.FREE, HeroClass.HUNTER, 3);
 			setDescription("Charge");
-			setTag(GameTag.RACE, Race.BEAST);
+			setRace(Race.BEAST);
 			setCollectible(false);
 		}
 
@@ -36,7 +36,7 @@ public class AnimalCompanion extends SpellCard {
 		public Leokk() {
 			super("Leokk", 2, 4, Rarity.FREE, HeroClass.HUNTER, 3);
 			setDescription("Other friendly minions have +1 Attack.");
-			setTag(GameTag.RACE, Race.BEAST);
+			setRace(Race.BEAST);
 			setCollectible(false);
 		}
 
@@ -54,7 +54,7 @@ public class AnimalCompanion extends SpellCard {
 
 		public Misha() {
 			super("Misha", 4, 4, Rarity.FREE, HeroClass.HUNTER, 3);
-			setTag(GameTag.RACE, Race.BEAST);
+			setRace(Race.BEAST);
 			setDescription("Taunt");
 			setCollectible(false);
 		}

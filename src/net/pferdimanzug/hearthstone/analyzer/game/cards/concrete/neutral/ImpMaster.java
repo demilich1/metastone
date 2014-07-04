@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
@@ -20,7 +19,7 @@ public class ImpMaster extends MinionCard {
 
 		public Imp() {
 			super("Imp", 1, 1, Rarity.RARE, HeroClass.ANY, 1);
-			setTag(GameTag.RACE, Race.DEMON);
+			setRace(Race.DEMON);
 		}
 
 		@Override
