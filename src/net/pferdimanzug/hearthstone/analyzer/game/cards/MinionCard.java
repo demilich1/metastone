@@ -1,14 +1,11 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayMinionCardAction;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public abstract class MinionCard extends Card {
 
@@ -42,19 +39,7 @@ public abstract class MinionCard extends Card {
 
 	@Override
 	public PlayCardAction play() {
-		return new PlayCardAction(this) {
-			{
-				setTargetRequirement(TargetSelection.FRIENDLY_MINIONS);
-				setActionType(ActionType.SUMMON);
-			}
-
-			@Override
-			protected void play(GameContext context, int playerId) {
-				Actor nextTo = (Actor) (getTargetKey() != null ? context.resolveSingleTarget(playerId, getTargetKey()) : null);
-				context.getLogic().summon(playerId, summon(), MinionCard.this, nextTo, true);
-			}
-		};
-
+		return new PlayMinionCardAction(this);
 	}
 
 	public abstract Minion summon();

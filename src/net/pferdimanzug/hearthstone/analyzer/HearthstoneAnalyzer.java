@@ -10,20 +10,14 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.DebugDecks;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.MinMaxBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.NoAggressionBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.DruidOfTheClaw;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Innervate;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.KirinTorMage;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.MirrorEntity;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.BloodsailRaider;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.HarvestGolem;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.IronbeakOwl;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.LootHoarder;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.PintSizedSummoner;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.TwilightDrake;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.VioletTeacher;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.WildPyromancer;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.PowerWordShield;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock.VoidTerror;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.FieryWarAxe;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.Upgrade;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.BloodfenRaptor;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.YouthfulBrewmaster;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.AvengingWrath;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock.BaneOfDoom;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
@@ -36,7 +30,7 @@ public class HearthstoneAnalyzer extends Application {
 		//DevCheckCardCompleteness.updateCardCatalogue();
 		//DevCheckCardCompleteness.writeImplementedCardsToFile("implemented_cards.csv");
 		launch(args);
-		// new HearthstoneAnalyzer().launchDebugGame();
+		 //new HearthstoneAnalyzer().launchDebugGame();
 	}
 
 	private void launchDebugGame() {
@@ -77,13 +71,13 @@ public class HearthstoneAnalyzer extends Application {
 		Hero hero1 = HeroFactory.createHero(humanHeroClass);
 		// Player player1 = new Player("Human", hero1,
 		// DebugDecks.getRandomDeck(hero1.getHeroClass()));
-		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new LootHoarder(), new VoidTerror(), new HarvestGolem()));
+		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new BaneOfDoom(), new Innervate()));
 		player1.setBehaviour(new HumanBehaviour());
 
 		Hero hero2 = HeroFactory.createHero(aiHeroClass);
 		// Player player2 = new Player("Bot", hero2,
 		// DebugDecks.getRandomDeck(hero2.getHeroClass()));
-		Player player2 = new Player("Bot", hero2, DebugDecks.getDeckConsistingof(30, new KirinTorMage(), new MirrorEntity()));
+		Player player2 = new Player("Bot", hero2, DebugDecks.getDeckConsistingof(30, new BloodfenRaptor(), new MirrorEntity()));
 		player2.setBehaviour(new NoAggressionBehaviour());
 		GameContext newGame = new GameContextVisualizable(player1, player2, new GameLogic());
 		ApplicationFacade.getInstance().sendNotification(GameNotification.START_GAME, newGame);

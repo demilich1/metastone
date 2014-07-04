@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PhysicalAttackAction;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.ChooseOneCard;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.IChooseOneCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Wrath;
@@ -86,14 +86,15 @@ public class AdvancedMechanicTests extends BasicTests {
 		context.getLogic().performGameAction(opponent.getId(), minionCard.play());
 		
 		player.getHero().getHeroPower().setUsed(true);
-		ChooseOneCard wrath = new Wrath();
+		Card wrath = new Wrath();
+		IChooseOneCard wrathChooseOne = (IChooseOneCard) wrath;
 		context.getLogic().receiveCard(player.getId(), wrath);
 		player.setMana(wrath.getBaseManaCost());
 		List<GameAction> validActions = context.getLogic().getValidActions(player.getId());
 		Assert.assertEquals(validActions.size(), 2);
 		Assert.assertEquals(player.getHand().getCount(), 1);
 		
-		GameAction playWrath = wrath.playCard1();
+		GameAction playWrath = wrathChooseOne.playOption1();
 		playWrath.setTarget(getSingleMinion(opponent.getMinions()));
 		context.getLogic().performGameAction(player.getId(), playWrath);
 		

@@ -28,29 +28,40 @@ public class HumanActionPromptView extends Stage {
 	
 	private static String getActionString(GameContext context, GameAction action) {
 		PlayCardAction playCardAction = null;
+		String actionString = "";
 		switch (action.getActionType()) {
 		case HERO_POWER:
 			HeroPowerAction heroPowerAction = (HeroPowerAction) action;
-			return "HERO POWER: " + heroPowerAction.getHeroPower().getName();
+			actionString = "HERO POWER: " + heroPowerAction.getHeroPower().getName();
+			break;
 		case BATTLECRY:
 			break;
 		case PHYSICAL_ATTACK:
 			PhysicalAttackAction physicalAttackAction = (PhysicalAttackAction) action;
 			Entity attacker = context.resolveSingleTarget(0, physicalAttackAction.getAttackerReference());
-			return "ATTACK with " + attacker.getName();
+			actionString = "ATTACK with " + attacker.getName();
+			break;
 		case SPELL:
 			playCardAction = (PlayCardAction) action;
-			return "CAST SPELL: " + playCardAction.getCard().getName();
+			actionString = "CAST SPELL: " + playCardAction.getCard().getName();
+			break;
 		case SUMMON:
 			playCardAction = (PlayCardAction) action;
-			return "SUMMON: " + playCardAction.getCard().getName();
+			actionString = "SUMMON: " + playCardAction.getCard().getName();
+			break;
 		case EQUIP_WEAPON:
 			playCardAction = (PlayCardAction) action;
-			return "WEAPON: " + playCardAction.getCard().getName();
-		default:
+			actionString = "WEAPON: " + playCardAction.getCard().getName();
 			break;
+		default:
+			return "<unknown action " + action.getActionType() + ">";
 		}
-		return "<unknown action " + action.getActionType() + ">";
+		
+		if (action.getActionSuffix() != null) {
+			actionString += " (" + action.getActionSuffix() + ")";
+		}
+		
+		return actionString;
 	}
 	
 	

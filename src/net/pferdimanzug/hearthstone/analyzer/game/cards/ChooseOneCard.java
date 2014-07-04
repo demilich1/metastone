@@ -4,7 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 
-public abstract class ChooseOneCard extends Card {
+public abstract class ChooseOneCard extends Card implements IChooseOneCard {
 
 	private Card card1;
 	private Card card2;
@@ -32,15 +32,16 @@ public abstract class ChooseOneCard extends Card {
 
 	@Override
 	public PlayCardAction play() {
-		// this method should not be called for this type of card
-		return null;
+		throw new UnsupportedOperationException("The method .play() should not be called for ChooseOneCard");
 	}
 
-	public PlayCardAction playCard1() {
+	@Override
+	public PlayCardAction playOption1() {
 		return card1.play();
 	}
 
-	public PlayCardAction playCard2() {
+	@Override
+	public PlayCardAction playOption2() {
 		return card2.play();
 	}
 

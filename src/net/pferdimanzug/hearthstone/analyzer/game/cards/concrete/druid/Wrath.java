@@ -15,7 +15,7 @@ public class Wrath extends ChooseOneCard {
 	private class WrathDamage extends SpellCard {
 
 		public WrathDamage() {
-			super("Wrath (3 damage)", Rarity.COMMON, HeroClass.SHAMAN, 1);
+			super("Wrath (3 damage)", Rarity.COMMON, HeroClass.DRUID, 2);
 			setDescription("Deal $3 damage to a minion");
 			setSpell(new DamageSpell(3));
 			setTargetRequirement(TargetSelection.MINIONS);
@@ -26,7 +26,7 @@ public class Wrath extends ChooseOneCard {
 	private class WrathDamageAndDraw extends SpellCard {
 
 		public WrathDamageAndDraw() {
-			super("Wrath (1 damage + draw card)", Rarity.COMMON, HeroClass.SHAMAN, 1);
+			super("Wrath (1 damage + draw card)", Rarity.COMMON, HeroClass.DRUID, 2);
 			setDescription("Deal $1 damage to a minion and draw a card.");
 			setSpell(new MetaSpell(new DamageSpell(1), new DrawCardSpell()));
 			setTargetRequirement(TargetSelection.MINIONS);
@@ -35,7 +35,7 @@ public class Wrath extends ChooseOneCard {
 	}
 	
 	public Wrath() {
-		super("Wrath", CardType.SPELL, Rarity.COMMON, HeroClass.DRUID, 1);
+		super("Wrath", CardType.SPELL, Rarity.COMMON, HeroClass.DRUID, 2);
 		setDescription("Choose One - Deal $3 damage to a minion; or $1 damage and draw a card.");
 		setCard1(new WrathDamage());
 		setCard2(new WrathDamageAndDraw());

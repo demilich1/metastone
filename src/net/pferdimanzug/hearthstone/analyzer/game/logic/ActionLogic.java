@@ -9,7 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PhysicalAttackAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.ChooseOneCard;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.IChooseOneCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
@@ -69,12 +69,12 @@ public class ActionLogic {
 			}
 			
 			if (card.hasTag(GameTag.CHOOSE_ONE)) {
-				ChooseOneCard chooseOneCard = (ChooseOneCard) card;
-				GameAction playCardAction = chooseOneCard.playCard1();
+				IChooseOneCard chooseOneCard = (IChooseOneCard) card;
+				GameAction playCardAction = chooseOneCard.playOption1();
 				if (validateAction(context, player, playCardAction)) {
 					playCardActions.add(playCardAction);
 				}	
-				playCardAction = chooseOneCard.playCard2();
+				playCardAction = chooseOneCard.playOption2();
 				if (validateAction(context, player, playCardAction)) {
 					playCardActions.add(playCardAction);
 				}	

@@ -5,25 +5,25 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.ChooseBattlecryCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.SilenceSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.DrawCardSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.HealingSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
-public class KeeperOfTheGrove extends ChooseBattlecryCard {
+public class AncientOfLore extends ChooseBattlecryCard {
 
-	public KeeperOfTheGrove() {
-		super("Keeper of the Grove", 2, 4, Rarity.RARE, HeroClass.DRUID, 4);
-		setDescription("Choose One - Deal 2 damage; or Silence a minion.");
+	public AncientOfLore() {
+		super("Ancient of Lore", 5, 5, Rarity.RARE, HeroClass.DRUID, 7);
+		setDescription("Choose One - Draw 2 cards; or Restore 5 Health.");
 	}
 
 	@Override
 	protected Battlecry getBattlecry1() {
-		return Battlecry.createBattlecry(new DamageSpell(2), TargetSelection.ANY);
+		return Battlecry.createBattlecry(new DrawCardSpell(2));
 	}
 
 	@Override
 	protected Battlecry getBattlecry2() {
-		return Battlecry.createBattlecry(new SilenceSpell(), TargetSelection.MINIONS);
+		return Battlecry.createBattlecry(new HealingSpell(5), TargetSelection.ANY);
 	}
 
 	@Override
@@ -33,12 +33,14 @@ public class KeeperOfTheGrove extends ChooseBattlecryCard {
 
 	@Override
 	protected String getAction1Suffix() {
-		return "2 damage";
+		return "Draw 2 cards";
 	}
 
 	@Override
 	protected String getAction2Suffix() {
-		return "Silence";
+		return "Restore 5 Health";
 	}
+	
+	
 
 }

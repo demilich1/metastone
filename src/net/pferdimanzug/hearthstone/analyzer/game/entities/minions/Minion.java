@@ -1,7 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.entities.minions;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
@@ -49,10 +48,6 @@ public class Minion extends Actor {
 		return getName().hashCode();
 	}
 	
-	public Card returnToHand() {
-		return getSourceCard();
-	}
-
 	protected void setBaseStats(int baseAttack, int baseHp) {
 		setBaseAttack(baseAttack);
 		setBaseHp(baseHp);

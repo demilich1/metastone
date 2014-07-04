@@ -14,6 +14,7 @@ public abstract class GameAction {
 	private List<Entity> validTargets;
 	private EntityReference source;
 	private EntityReference targetKey;
+	private String actionSuffix;
 	
 	public boolean canBeExecutedOn(Entity entity) {
 		return true;
@@ -63,5 +64,13 @@ public abstract class GameAction {
 
 	public void setValidTargets(List<Entity> validTargets) {
 		this.validTargets = validTargets;
+	}
+
+	public String getActionSuffix() {
+		return actionSuffix;
+	}
+
+	public void setActionSuffix(String actionSuffix) {
+		this.actionSuffix = actionSuffix;
 	}
 }
