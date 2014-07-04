@@ -15,9 +15,15 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.MirrorEnti
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.BloodsailRaider;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.HarvestGolem;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.IronbeakOwl;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.LootHoarder;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.PintSizedSummoner;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.TwilightDrake;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.VioletTeacher;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.WildPyromancer;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.PowerWordShield;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock.VoidTerror;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.FieryWarAxe;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.Upgrade;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
@@ -66,12 +72,12 @@ public class HearthstoneAnalyzer extends Application {
 	}
 
 	private void launchHumanDebugGame() {
-		HeroClass humanHeroClass = HeroClass.WARRIOR;
+		HeroClass humanHeroClass = HeroClass.WARLOCK;
 		HeroClass aiHeroClass = HeroClass.MAGE;
 		Hero hero1 = HeroFactory.createHero(humanHeroClass);
 		// Player player1 = new Player("Human", hero1,
 		// DebugDecks.getRandomDeck(hero1.getHeroClass()));
-		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new TwilightDrake(), new FieryWarAxe(), new BloodsailRaider()));
+		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new LootHoarder(), new VoidTerror(), new HarvestGolem()));
 		player1.setBehaviour(new HumanBehaviour());
 
 		Hero hero2 = HeroFactory.createHero(aiHeroClass);
