@@ -13,8 +13,7 @@ public class RockbiterWeapon extends SpellCard {
 	public RockbiterWeapon() {
 		super("Rockbiter Weapon", Rarity.FREE, HeroClass.SHAMAN, 1);
 		setDescription("Give a friendly character +3 Attack this turn.");
-		BuffSpell buff = new BuffSpell(+ATTACK_BONUS);
-		buff.setTemporary(true);
+		BuffSpell buff = new BuffSpell(+ATTACK_BONUS, 0, true);
 		setSpell(buff);
 		setTargetRequirement(TargetSelection.FRIENDLY_CHARACTERS);
 	}

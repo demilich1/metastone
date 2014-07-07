@@ -21,8 +21,7 @@ public class ManaAddict extends MinionCard {
 	public Minion summon() {
 		Minion manaAddict = createMinion();
 
-		BuffSpell buffSpell = new BuffSpell(2);
-		buffSpell.setTemporary(true);
+		BuffSpell buffSpell = new BuffSpell(2, 0, true);
 		buffSpell.setTarget(EntityReference.SELF);
 		manaAddict.setSpellTrigger(new SpellTrigger(new SpellCastedTrigger(TargetPlayer.SELF), buffSpell));
 		return manaAddict;

@@ -25,7 +25,7 @@ public class DamageSpell extends Spell {
 	
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
-		int effectiveDamage = damageModifier != null ? damageModifier.provideValue(player, target) : getDamage();
+		int effectiveDamage = damageModifier != null ? damageModifier.provideValue(context, player, target) : getDamage();
 		context.getLogic().damage(player, (Actor)target, effectiveDamage, applySpellpower);
 	}
 

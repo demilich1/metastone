@@ -10,6 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.ApplyTagSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnStartTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 
@@ -21,7 +22,7 @@ public class IceLance extends SpellCard {
 		private final Spell damageSpell;
 		
 		public IceLanceSpell() {
-			freezeSpell = new ApplyTagSpell(GameTag.FROZEN, true);
+			freezeSpell = new ApplyTagSpell(GameTag.FROZEN, new TurnStartTrigger());
 			damageSpell = new DamageSpell(4);
 			damageSpell.setApplySpellpower(true);
 		}

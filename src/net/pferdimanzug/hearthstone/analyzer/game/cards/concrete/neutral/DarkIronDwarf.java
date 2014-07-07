@@ -20,8 +20,7 @@ public class DarkIronDwarf extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion darkIronDwarf = createMinion();
-		BuffSpell buff = new BuffSpell(+ATTACK_BONUS);
-		buff.setTemporary(true);
+		BuffSpell buff = new BuffSpell(+ATTACK_BONUS, 0, true);
 		Battlecry battlecry = Battlecry.createBattlecry(buff, TargetSelection.MINIONS);
 		darkIronDwarf.setBattlecry(battlecry);
 		return darkIronDwarf;

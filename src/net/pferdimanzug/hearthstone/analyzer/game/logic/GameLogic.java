@@ -218,6 +218,10 @@ public class GameLogic implements Cloneable {
 			logger.debug("{}'s DIVINE SHIELD absorbs the damage", minion);
 			return false;
 		}
+		if (minion.hasTag(GameTag.IMMUNE)) {
+			logger.debug("{} is IMMUNE and does not take damage", minion);
+			return false;
+		}
 		if (damage >= minion.getHp() && player.getHero().hasTag(GameTag.CANNOT_REDUCE_HP_BELOW_1)) {
 			damage = minion.getHp() - 1;
 		}

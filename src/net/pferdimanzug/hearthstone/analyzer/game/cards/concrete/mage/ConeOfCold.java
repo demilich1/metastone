@@ -13,6 +13,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.ApplyTagSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnStartTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class ConeOfCold extends SpellCard {
@@ -20,7 +21,7 @@ public class ConeOfCold extends SpellCard {
 	private class ConeOfColdSpell extends Spell {
 		
 		private final Spell damage = new DamageSpell(1);
-		private final Spell freeze = new ApplyTagSpell(GameTag.FROZEN, true);
+		private final Spell freeze = new ApplyTagSpell(GameTag.FROZEN, new TurnStartTrigger());
 		
 		public ConeOfColdSpell() {
 			damage.setApplySpellpower(true);

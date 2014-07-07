@@ -20,7 +20,7 @@ public class FrostwolfWarlord extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion frostwolfWarlord = createMinion();
-		IValueProvider valueProvider = (player, target) -> player.getMinions().size();
+		IValueProvider valueProvider = (context, player, target) -> player.getMinions().size();
 		Spell buffSpell = new BuffSpell(valueProvider, valueProvider);
 		buffSpell.setTarget(EntityReference.SELF);
 		Battlecry battlecry = Battlecry.createBattlecry(buffSpell);

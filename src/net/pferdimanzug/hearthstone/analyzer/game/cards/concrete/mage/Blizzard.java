@@ -8,6 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.ApplyTagSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnStartTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
@@ -15,8 +16,8 @@ public class Blizzard extends SpellCard {
 
 	public Blizzard() {
 		super("Blizzard", Rarity.RARE, HeroClass.MAGE, 6);
-		
-		Spell blizzardSpell = new MetaSpell(new DamageSpell(2), new ApplyTagSpell(GameTag.FROZEN, true));
+
+		Spell blizzardSpell = new MetaSpell(new DamageSpell(2), new ApplyTagSpell(GameTag.FROZEN, new TurnStartTrigger()));
 		blizzardSpell.setTarget(EntityReference.ENEMY_MINIONS);
 		setTargetRequirement(TargetSelection.NONE);
 	}

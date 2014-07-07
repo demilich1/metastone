@@ -21,7 +21,7 @@ public class TwilightDrake extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion twilightDrake = createMinion();
-		Spell buffSpell = new BuffSpell(null, (player, target) -> player.getHand().getCount());
+		Spell buffSpell = new BuffSpell(null, (context, player, target) -> player.getHand().getCount());
 		buffSpell.setTarget(EntityReference.SELF);
 		Battlecry battlecry = Battlecry.createBattlecry(buffSpell);
 		twilightDrake.setBattlecry(battlecry);

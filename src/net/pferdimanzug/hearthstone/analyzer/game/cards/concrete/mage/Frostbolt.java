@@ -7,6 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.ApplyTagSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnStartTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Frostbolt extends SpellCard {
@@ -14,7 +15,7 @@ public class Frostbolt extends SpellCard {
 	public Frostbolt() {
 		super("Frostbolt", Rarity.FREE, HeroClass.MAGE, 2);
 		setDescription("Deal $3 damage to a character and Freeze it.");
-		setSpell(new MetaSpell(new DamageSpell(3), new ApplyTagSpell(GameTag.FROZEN, true)));
+		setSpell(new MetaSpell(new DamageSpell(3), new ApplyTagSpell(GameTag.FROZEN, new TurnStartTrigger())));
 		setTargetRequirement(TargetSelection.ANY);
 	}
 	

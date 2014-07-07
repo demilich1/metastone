@@ -12,9 +12,14 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.NoAggressionBehaviou
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.DruidOfTheClaw;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Innervate;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.BestialWrath;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.KirinTorMage;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.MirrorEntity;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.ArgentSquire;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.BloodKnight;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.BloodfenRaptor;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.RiverCrocolisk;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.StonetuskBoar;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.YouthfulBrewmaster;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.AvengingWrath;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock.BaneOfDoom;
@@ -66,12 +71,12 @@ public class HearthstoneAnalyzer extends Application {
 	}
 
 	private void launchHumanDebugGame() {
-		HeroClass humanHeroClass = HeroClass.WARLOCK;
+		HeroClass humanHeroClass = HeroClass.DRUID;
 		HeroClass aiHeroClass = HeroClass.MAGE;
 		Hero hero1 = HeroFactory.createHero(humanHeroClass);
 		// Player player1 = new Player("Human", hero1,
 		// DebugDecks.getRandomDeck(hero1.getHeroClass()));
-		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new BaneOfDoom(), new Innervate()));
+		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new BloodKnight(), new ArgentSquire()));
 		player1.setBehaviour(new HumanBehaviour());
 
 		Hero hero2 = HeroFactory.createHero(aiHeroClass);

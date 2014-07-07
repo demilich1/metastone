@@ -12,17 +12,15 @@ public class RemoveTagSpell extends Spell {
 
 	private static Logger logger = LoggerFactory.getLogger(RemoveTagSpell.class);
 
-	private GameTag[] tags;
+	private GameTag tag;
 
-	public RemoveTagSpell(GameTag... tags) {
-		this.tags = tags;
+	public RemoveTagSpell(GameTag tag) {
+		this.tag = tag;
 	}
 
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
-		for (GameTag tag : tags) {
-			logger.debug("Removing tag {} from {}", tag, target);
-			target.removeTag(tag);
-		}
+		logger.debug("Removing tag {} from {}", tag, target);
+		target.removeTag(tag);
 	}
 }

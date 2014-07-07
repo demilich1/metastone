@@ -4,38 +4,35 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnStartTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.GameEventTrigger;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ApplyTagSpell extends Spell {
+public class ApplyTagSpell extends RevertableSpell {
 
 	private static Logger logger = LoggerFactory.getLogger(ApplyTagSpell.class);
 
 	private final GameTag tag;
-	private final boolean temporary;
 
 	public ApplyTagSpell(GameTag tag) {
-		this(tag, false);
+		this(tag, null);
 	}
 
-	public ApplyTagSpell(GameTag tag, boolean temporary) {
+	public ApplyTagSpell(GameTag tag, GameEventTrigger removeTrigger) {
+		super(removeTrigger);
 		this.tag = tag;
-		this.temporary = temporary;
 	}
 
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
 		logger.debug("Applying tag {} to {}", tag, target);
 		target.setTag(tag);
+		super.onCast(context, player, target);
+	}
 
-		if (temporary) {
-			RemoveTagSpell debuff = new RemoveTagSpell(tag);
-			debuff.setTarget(target.getReference());
-			SpellTrigger removeTrigger = new SpellTrigger(new TurnStartTrigger(), debuff, true);
-			context.getLogic().addSpellTrigger(player, removeTrigger, target);
-		}
+	@Override
+	protected Spell getReverseSpell() {
+		return new RemoveTagSpell(tag);
 	}
 }

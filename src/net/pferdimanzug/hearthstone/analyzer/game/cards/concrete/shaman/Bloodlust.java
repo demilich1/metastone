@@ -14,8 +14,7 @@ public class Bloodlust extends SpellCard {
 	public Bloodlust() {
 		super("Bloodlust", Rarity.FREE, HeroClass.SHAMAN, 5);
 		setDescription("Give your minions +3 Attack this turn.");
-		BuffSpell buff = new BuffSpell(+ATTACK_BONUS);
-		buff.setTemporary(true);
+		BuffSpell buff = new BuffSpell(+ATTACK_BONUS, 0, true);
 		buff.setTarget(EntityReference.FRIENDLY_MINIONS);
 		setSpell(buff);
 		setTargetRequirement(TargetSelection.NONE);

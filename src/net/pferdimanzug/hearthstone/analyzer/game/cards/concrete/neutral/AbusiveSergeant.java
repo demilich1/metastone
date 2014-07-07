@@ -21,8 +21,7 @@ public class AbusiveSergeant extends MinionCard {
 	public Minion summon() {
 		Minion abusiveSergeant = createMinion();
 		
-		BuffSpell battlecrySpell = new BuffSpell(+ATTACK_BONUS);
-		battlecrySpell.setTemporary(true);
+		BuffSpell battlecrySpell = new BuffSpell(+ATTACK_BONUS, 0, true);
 		Battlecry battlecryAbusive = Battlecry.createBattlecry(battlecrySpell, TargetSelection.MINIONS);
 		abusiveSergeant.setBattlecry(battlecryAbusive);
 		return abusiveSergeant;

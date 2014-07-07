@@ -5,28 +5,26 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnEndTrigger;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class BuffHeroSpell extends Spell {
+public class BuffHeroSpell extends RevertableSpell {
 
 	private static Logger logger = LoggerFactory.getLogger(BuffHeroSpell.class);
 
 	private final int attackBonus;
 	private final int armorBonus;
-	private final boolean revert;
 
 	public BuffHeroSpell(int attackBonus, int armorBonus) {
 		this(attackBonus, armorBonus, true);
 	}
 	
 	private BuffHeroSpell(int attackBonus, int armorBonus, boolean revert) {
+		super(revert ? new TurnEndTrigger() :null);
 		this.attackBonus = attackBonus;
 		this.armorBonus = armorBonus;
-		this.revert = revert;
 	}
 
 	@Override
@@ -41,12 +39,14 @@ public class BuffHeroSpell extends Spell {
 			hero.modifyArmor(+armorBonus);
 		}
 		
-		if (revert && attackBonus != 0) {
-			BuffHeroSpell debuff = new BuffHeroSpell(-attackBonus, 0, false);
-			debuff.setTarget(hero.getReference());
-			SpellTrigger removeTrigger = new SpellTrigger(new TurnEndTrigger(), debuff, true);
-			context.getLogic().addSpellTrigger(player, removeTrigger, hero);
+		if (attackBonus != 0) {
+			super.onCast(context, player, target);
 		}
+	}
+
+	@Override
+	protected Spell getReverseSpell() {
+		return new BuffHeroSpell(-attackBonus, 0, false);
 	}
 
 }
