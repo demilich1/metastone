@@ -75,7 +75,7 @@ public class CardCollection implements Iterable<Card>, Cloneable {
 		}
 		return false;
 	}
-
+	
 	public boolean isEmpty() {
 		return cards.isEmpty();
 	}

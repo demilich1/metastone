@@ -38,6 +38,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.SummonEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.TargetAcquisitionEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.TurnEndEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.TurnStartEvent;
+import net.pferdimanzug.hearthstone.analyzer.game.events.WeaponDestroyedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.HeroPower;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
@@ -283,7 +284,13 @@ public class GameLogic implements Cloneable {
 
 	private void destroyWeapon(Weapon weapon) {
 		Player owner = context.getPlayer(weapon.getOwner());
+		if (weapon.hasTag(GameTag.DEATHRATTLES)) {
+			for (Spell deathrattle : weapon.getDeathrattles()) {
+				castSpell(owner.getId(), deathrattle);
+			}
+		}
 		owner.getHero().setWeapon(null);
+		context.fireGameEvent(new WeaponDestroyedEvent(context, weapon));
 	}
 
 	public int determineBeginner(int... playerIds) {
@@ -566,9 +573,9 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void performGameAction(int playerId, GameAction action) {
-//		if (action.getTargetRequirement() == TargetSelection.SELF) {
-//			action.setTargetKey(action.getSource());
-//		}
+		// if (action.getTargetRequirement() == TargetSelection.SELF) {
+		// action.setTargetKey(action.getSource());
+		// }
 		Player player = context.getPlayer(playerId);
 		if (action.getTargetRequirement() != TargetSelection.NONE && action.getTargetKey() == null) {
 			List<Entity> validTargets = getValidTargets(playerId, action);
@@ -734,6 +741,9 @@ public class GameLogic implements Cloneable {
 				continue;
 			}
 			target.removeTag(tag);
+			if (tag == GameTag.WINDFURY) {
+				target.modifyTag(GameTag.NUMBER_OF_ATTACKS, -1);
+			}
 		}
 		context.removeTriggersAssociatedWith(target.getReference());
 		if (target.hasSpellTrigger()) {
@@ -777,7 +787,7 @@ public class GameLogic implements Cloneable {
 		// need a stack or another approach here!
 		logger.debug("{} summons {}", player.getName(), minion);
 		minion.setOwner(player.getId());
-		
+
 		if (source != null) {
 			consumeTag(player, GameTag.ONE_TIME_MINION_MANA_COST);
 		}

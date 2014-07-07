@@ -6,7 +6,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
-public class CopyMinionSpell extends Spell {
+public class CloneMinionSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {

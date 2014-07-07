@@ -8,7 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
-public abstract class Spell {
+public abstract class Spell implements Cloneable {
 	
 	private EntityReference target;
 	protected boolean applySpellpower;
@@ -26,6 +26,16 @@ public abstract class Spell {
 		for (Entity target : targets) {
 			onCast(context, player, target);
 		}
+	}
+	
+	@Override
+	public Spell clone() {
+		try {
+			return (Spell) super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public EntityReference getSource() {

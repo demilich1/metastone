@@ -6,7 +6,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 
 public class Weapon extends Actor {
-	
+
 	private boolean active;
 
 	public Weapon(Card sourceCard, int weaponDamage, int durability) {
@@ -19,16 +19,16 @@ public class Weapon extends Actor {
 	public Weapon clone() {
 		return (Weapon) super.clone();
 	}
-	
+
 	public int getDurability() {
 		return getTagValue(GameTag.DURABILITY);
 	}
-	
+
 	@Override
 	public EntityType getEntityType() {
 		return EntityType.WEAPON;
 	}
-	
+
 	public int getWeaponDamage() {
 		return getTagValue(GameTag.WEAPON_DAMAGE);
 	}
@@ -44,10 +44,10 @@ public class Weapon extends Actor {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-	
+
 	@Override
 	public String toString() {
-		String result = "["  + getEntityType() + " '" + getName() + "'id:" + getId() + " ";
+		String result = "[" + getEntityType() + " '" + getName() + "'id:" + getId() + " ";
 		result += getWeaponDamage() + "/" + getDurability();
 		String prefix = " ";
 		for (GameTag tag : getTags().keySet()) {
@@ -60,5 +60,4 @@ public class Weapon extends Actor {
 		result += "]";
 		return result;
 	}
-
 }

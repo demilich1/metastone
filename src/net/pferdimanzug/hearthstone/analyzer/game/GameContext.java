@@ -116,6 +116,10 @@ public class GameContext implements Cloneable {
 		}
 		return adjacentMinions;
 	}
+	
+	public List<SpellTrigger> getTriggersAssociatedWith(EntityReference entityReference) {
+		return triggerManager.getTriggersAssociatedWith(entityReference);
+	}
 
 	public HashMap<Environment, Object> getEnvironment() {
 		return environment;

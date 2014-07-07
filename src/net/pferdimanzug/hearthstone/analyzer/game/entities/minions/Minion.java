@@ -4,7 +4,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 
 public class Minion extends Actor {
 
@@ -16,13 +15,7 @@ public class Minion extends Actor {
 
 	@Override
 	public Minion clone() {
-		Minion clone =(Minion) super.clone(); 
-		if (hasTag(GameTag.DEATHRATTLES)) {
-			clone.removeTag(GameTag.DEATHRATTLES);
-			for (Spell deathrattleSpell : getDeathrattles()) {
-				clone.addDeathrattle(deathrattleSpell);
-			}
-		}
+		Minion clone = (Minion) super.clone();
 		return clone;
 	}
 
@@ -47,12 +40,12 @@ public class Minion extends Actor {
 	public int getTypeId() {
 		return getName().hashCode();
 	}
-	
+
 	protected void setBaseStats(int baseAttack, int baseHp) {
 		setBaseAttack(baseAttack);
 		setBaseHp(baseHp);
 	}
-	
+
 	public void setRace(Race race) {
 		setTag(GameTag.RACE, race);
 	}

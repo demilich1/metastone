@@ -18,7 +18,7 @@ public class Corruption extends SpellCard {
 		setDescription("Choose an enemy minion. At the start of your turn, destroy it.");
 		Spell destroySpell = new DestroySpell();
 		destroySpell.setTarget(EntityReference.SELF);
-		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), destroySpell);
+		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), destroySpell, true);
 		setSpell(new AddSpellTriggerSpell(trigger));
 		setTargetRequirement(TargetSelection.ENEMY_MINIONS);
 	}

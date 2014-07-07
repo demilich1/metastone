@@ -58,6 +58,6 @@ public class EntityReference {
 	
 	@Override
 	public String toString() {
-		return String.format("[EntityReference key:%d]", key);
+		return String.format("[EntityReference id:%d]", key);
 	}
 }

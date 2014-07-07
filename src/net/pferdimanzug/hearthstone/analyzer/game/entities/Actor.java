@@ -36,6 +36,13 @@ public abstract class Actor extends Entity {
 			Actor clone = (Actor) super.clone();
 			clone.tags = new HashMap<>(getTags());
 			clone.spellTrigger = spellTrigger != null ? spellTrigger.clone() : null;
+			if (hasTag(GameTag.DEATHRATTLES)) {
+				clone.removeTag(GameTag.DEATHRATTLES);
+				for (Spell deathrattleSpell : getDeathrattles()) {
+					Spell deathrattleClone = deathrattleSpell.clone();
+					clone.addDeathrattle(deathrattleClone);
+				}
+			}
 			return clone;
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
@@ -125,7 +132,6 @@ public abstract class Actor extends Entity {
 	}
 	
 	public void setSpellTrigger(SpellTrigger spellTrigger) {
-		spellTrigger.setHost(this);
 		this.spellTrigger = spellTrigger;
 	}
 
