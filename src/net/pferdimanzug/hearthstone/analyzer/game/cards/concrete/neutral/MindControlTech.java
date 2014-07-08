@@ -17,6 +17,19 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class MindControlTech extends MinionCard {
 
+	private class RandomMindControlSpell extends MindControlSpell {
+
+		@Override
+		public void cast(GameContext context, Player player, List<Entity> targets) {
+			if (targets == null || targets.size() < 4) {
+				return;
+			}
+			int randomIndex = ThreadLocalRandom.current().nextInt(targets.size());
+			onCast(context, player, targets.get(randomIndex));
+		}
+
+	}
+
 	public MindControlTech() {
 		super("Mind Control Tech", 3, 3, Rarity.RARE, HeroClass.ANY, 3);
 		setDescription("Battlecry: If your opponent has 4 or more minions, take control of one at random.");
@@ -30,19 +43,6 @@ public class MindControlTech extends MinionCard {
 		Battlecry battlecry = Battlecry.createBattlecry(mindControlSpell);
 		mindControlTech.setBattlecry(battlecry);
 		return mindControlTech;
-	}
-
-	private class RandomMindControlSpell extends MindControlSpell {
-
-		@Override
-		public void cast(GameContext context, Player player, List<Entity> targets) {
-			if (targets == null || targets.size() < 4) {
-				return;
-			}
-			int randomIndex = ThreadLocalRandom.current().nextInt(targets.size());
-			onCast(context, player, targets.get(randomIndex));
-		}
-
 	}
 
 }

@@ -20,24 +20,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class BloodKnight extends MinionCard {
 
-	public BloodKnight() {
-		super("Blood Knight", 3, 3, Rarity.EPIC, HeroClass.ANY, 3);
-		setDescription("Battlecry: All minions lose Divine Shield. Gain +3/+3 for each Shield lost.");
-	}
-
-	@Override
-	public Minion summon() {
-		Minion bloodKnight = createMinion();
-		IValueProvider bloodKnightValueProvider = new BloodKnightBuffValueProvider();
-		Spell buffSpell = new BuffSpell(bloodKnightValueProvider, bloodKnightValueProvider);
-		buffSpell.setTarget(EntityReference.SELF);
-		Spell removeDivineShields = new RemoveTagSpell(GameTag.DIVINE_SHIELD);
-		removeDivineShields.setTarget(EntityReference.ALL_MINIONS);
-		Battlecry battlecry = Battlecry.createBattlecry(new MetaSpell(buffSpell, removeDivineShields));
-		bloodKnight.setBattlecry(battlecry);
-		return bloodKnight;
-	}
-	
 	private class BloodKnightBuffValueProvider implements IValueProvider {
 
 		@Override
@@ -52,6 +34,24 @@ public class BloodKnight extends MinionCard {
 			return minionsWithDivineShield * 3;
 		}
 		
+	}
+
+	public BloodKnight() {
+		super("Blood Knight", 3, 3, Rarity.EPIC, HeroClass.ANY, 3);
+		setDescription("Battlecry: All minions lose Divine Shield. Gain +3/+3 for each Shield lost.");
+	}
+	
+	@Override
+	public Minion summon() {
+		Minion bloodKnight = createMinion();
+		IValueProvider bloodKnightValueProvider = new BloodKnightBuffValueProvider();
+		Spell buffSpell = new BuffSpell(bloodKnightValueProvider, bloodKnightValueProvider);
+		buffSpell.setTarget(EntityReference.SELF);
+		Spell removeDivineShields = new RemoveTagSpell(GameTag.DIVINE_SHIELD);
+		removeDivineShields.setTarget(EntityReference.ALL_MINIONS);
+		Battlecry battlecry = Battlecry.createBattlecry(new MetaSpell(buffSpell, removeDivineShields));
+		bloodKnight.setBattlecry(battlecry);
+		return bloodKnight;
 	}
 
 }

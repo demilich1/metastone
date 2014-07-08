@@ -17,6 +17,24 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class VoidTerror extends MinionCard {
 
+	private class VoidTerrorBuffSpell extends Spell {
+
+		@Override
+		protected void onCast(GameContext context, Player player, Entity target) {
+			int attackBonus = 0;
+			int hpBonus = 0;
+			for (Entity adjacent : context.getAdjacentMinions(player, target.getReference())) {
+				Minion minion = (Minion) adjacent;
+				attackBonus += minion.getAttack();
+				hpBonus += minion.getHp();
+			}
+			BuffSpell buffSpell = new BuffSpell(attackBonus, hpBonus);
+			buffSpell.setTarget(target.getReference());
+			context.getLogic().castSpell(player.getId(), buffSpell);
+		}
+
+	}
+
 	public VoidTerror() {
 		super("Void Terror", 3, 3, Rarity.RARE, HeroClass.WARLOCK, 3);
 		setDescription("Battlecry: Destroy the minions on either side of this minion and gain their Attack and Health.");
@@ -34,24 +52,6 @@ public class VoidTerror extends MinionCard {
 		battlecry.setResolvedLate(true);
 		voidTerror.setBattlecry(battlecry);
 		return voidTerror;
-	}
-
-	private class VoidTerrorBuffSpell extends Spell {
-
-		@Override
-		protected void onCast(GameContext context, Player player, Entity target) {
-			int attackBonus = 0;
-			int hpBonus = 0;
-			for (Entity adjacent : context.getAdjacentMinions(player, target.getReference())) {
-				Minion minion = (Minion) adjacent;
-				attackBonus += minion.getAttack();
-				hpBonus += minion.getHp();
-			}
-			BuffSpell buffSpell = new BuffSpell(attackBonus, hpBonus);
-			buffSpell.setTarget(target.getReference());
-			context.getLogic().castSpell(player.getId(), buffSpell);
-		}
-
 	}
 
 }

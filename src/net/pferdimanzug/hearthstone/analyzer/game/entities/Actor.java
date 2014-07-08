@@ -20,6 +20,13 @@ public abstract class Actor extends Entity {
 		this.sourceCard = sourceCard;
 	}
 
+	public void addDeathrattle(Spell deathrattleSpell) {
+		if (!hasTag(GameTag.DEATHRATTLES)) {
+			setTag(GameTag.DEATHRATTLES, new ArrayList<Spell>());
+		}
+		getDeathrattles().add(deathrattleSpell);
+	}
+	
 	public boolean canAttackThisTurn() {
 		if (hasTag(GameTag.CANNOT_ATTACK)) {
 			return false;
@@ -29,7 +36,7 @@ public abstract class Actor extends Entity {
 		}
 		return getAttack() > 0 && getTagValue(GameTag.NUMBER_OF_ATTACKS) > 0;
 	}
-	
+
 	@Override
 	public Actor clone() {
 		try {
@@ -63,6 +70,11 @@ public abstract class Actor extends Entity {
 		return (Battlecry) getTag(GameTag.BATTLECRY);
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Spell> getDeathrattles() {
+		return (List<Spell>) getTag(GameTag.DEATHRATTLES);
+	}
+
 	public Spell getEnrageSpell() {
 		return (Spell) getTag(GameTag.ENRAGE_SPELL);
 	}
@@ -94,7 +106,7 @@ public abstract class Actor extends Entity {
 	public boolean isWounded() {
 		return getHp() != getMaxHp();
 	}
-
+	
 	public void modifyAuraHpBonus(int value) {
 		modifyTag(GameTag.AURA_HP_BONUS, value);
 		modifyTag(GameTag.HP, value);
@@ -104,7 +116,7 @@ public abstract class Actor extends Entity {
 		modifyTag(GameTag.HP_BONUS, value);
 		modifyTag(GameTag.HP, value);
 	}
-	
+
 	public void setBaseAttack(int value) {
 		setTag(GameTag.BASE_ATTACK, value);
 	}
@@ -115,6 +127,10 @@ public abstract class Actor extends Entity {
 		setHp(value);
 	}
 
+	public void setBattlecry(Battlecry battlecry) {
+		setTag(GameTag.BATTLECRY, battlecry);
+	}
+	
 	public void setHp(int value) {
 		setTag(GameTag.HP, value);
 	}
@@ -130,7 +146,7 @@ public abstract class Actor extends Entity {
 			spellTrigger.setHost(this);
 		}
 	}
-	
+
 	public void setSpellTrigger(SpellTrigger spellTrigger) {
 		this.spellTrigger = spellTrigger;
 	}
@@ -149,21 +165,5 @@ public abstract class Actor extends Entity {
 		result += " hashCode: " + hashCode();
 		result += "]";
 		return result;
-	}
-
-	public void addDeathrattle(Spell deathrattleSpell) {
-		if (!hasTag(GameTag.DEATHRATTLES)) {
-			setTag(GameTag.DEATHRATTLES, new ArrayList<Spell>());
-		}
-		getDeathrattles().add(deathrattleSpell);
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Spell> getDeathrattles() {
-		return (List<Spell>) getTag(GameTag.DEATHRATTLES);
-	}
-
-	public void setBattlecry(Battlecry battlecry) {
-		setTag(GameTag.BATTLECRY, battlecry);
 	}
 }

@@ -28,6 +28,11 @@ public class BuffHeroSpell extends RevertableSpell {
 	}
 
 	@Override
+	protected Spell getReverseSpell() {
+		return new BuffHeroSpell(-attackBonus, 0, false);
+	}
+
+	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
 		Hero hero = player.getHero();
 		if (attackBonus != 0) {
@@ -42,11 +47,6 @@ public class BuffHeroSpell extends RevertableSpell {
 		if (attackBonus != 0) {
 			super.onCast(context, player, target);
 		}
-	}
-
-	@Override
-	protected Spell getReverseSpell() {
-		return new BuffHeroSpell(-attackBonus, 0, false);
 	}
 
 }

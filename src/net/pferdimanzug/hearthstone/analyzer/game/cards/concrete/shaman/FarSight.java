@@ -1,22 +1,19 @@
-package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin;
+package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
-public class HolyWrath extends SpellCard {
+public class FarSight extends SpellCard {
 
-	private class HolyWrathSpell extends DamageSpell {
-
-		public HolyWrathSpell() {
-			super(0);
-		}
+	private class FarSightSpell extends Spell {
 
 		@Override
 		protected void onCast(GameContext context, Player player, Entity target) {
@@ -24,18 +21,18 @@ public class HolyWrath extends SpellCard {
 			if (drawnCard == null) {
 				return;
 			}
-			setDamage(drawnCard.getBaseManaCost());
-			super.onCast(context, player, target);
+			drawnCard.setTag(GameTag.MANA_COST_MODIFIER, -3);
 		}
 
 	}
 
-	public HolyWrath() {
-		super("Holy Wrath", Rarity.RARE, HeroClass.PALADIN, 5);
-		setDescription("Draw a card and deal damage equal to its cost.");
+	public FarSight() {
+		super("Far Sight", Rarity.EPIC, HeroClass.SHAMAN, 3);
+		setDescription("Draw a card. That card costs (3) less.");
 		
-		setSpell(new HolyWrathSpell());
-		setTargetRequirement(TargetSelection.ANY);
+		setSpell(new FarSightSpell());
+		setTargetRequirement(TargetSelection.NONE);
+		
 	}
 
 }

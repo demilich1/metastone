@@ -19,7 +19,7 @@ public class ChangeDurabilitySpell extends Spell {
 		if (hero.getWeapon() == null) {
 			return;
 		}
-		context.getLogic().changeDurability(hero.getWeapon(), durabilityChange);
+		context.getLogic().modifyDurability(hero.getWeapon(), durabilityChange);
 	}
 
 }

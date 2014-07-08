@@ -47,6 +47,16 @@ public class DruidOfTheClaw extends ChooseBattlecryCard {
 	}
 
 	@Override
+	protected String getAction1Suffix() {
+		return "Charge";
+	}
+
+	@Override
+	protected String getAction2Suffix() {
+		return "Taunt";
+	}
+
+	@Override
 	protected Battlecry getBattlecry1() {
 		Spell transformSpell = new TransformMinionSpell(new CatForm());
 		transformSpell.setTarget(EntityReference.SELF);
@@ -58,16 +68,6 @@ public class DruidOfTheClaw extends ChooseBattlecryCard {
 		Spell transformSpell = new TransformMinionSpell(new BearForm());
 		transformSpell.setTarget(EntityReference.SELF);
 		return Battlecry.createBattlecry(transformSpell);
-	}
-
-	@Override
-	protected String getAction1Suffix() {
-		return "Charge";
-	}
-
-	@Override
-	protected String getAction2Suffix() {
-		return "Taunt";
 	}
 
 	@Override

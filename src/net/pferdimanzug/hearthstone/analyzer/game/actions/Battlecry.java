@@ -27,6 +27,13 @@ public class Battlecry extends GameAction {
 		setActionType(ActionType.BATTLECRY);
 	}
 
+	public boolean canBeExecuted(GameContext context, Player player) {
+		if (condition == null) {
+			return true;
+		}
+		return condition.isFulfilled(context, player);
+	}
+	
 	@Override
 	public boolean canBeExecutedOn(Entity entity) {
 		if (!super.canBeExecutedOn(entity)) {
@@ -36,13 +43,6 @@ public class Battlecry extends GameAction {
 			return false;
 		}
 		return true;
-	}
-	
-	public boolean canBeExecuted(GameContext context, Player player) {
-		if (condition == null) {
-			return true;
-		}
-		return condition.isFulfilled(context, player);
 	}
 
 
@@ -56,19 +56,19 @@ public class Battlecry extends GameAction {
 		context.getLogic().castSpell(playerId, spell);
 	}
 
-	public boolean isResolvedLate() {
-		return resolvedLate;
-	}
-
-	public void setResolvedLate(boolean resolvedLate) {
-		this.resolvedLate = resolvedLate;
-	}
-
 	public IBattlecryCondition getCondition() {
 		return condition;
 	}
 
+	public boolean isResolvedLate() {
+		return resolvedLate;
+	}
+
 	public void setCondition(IBattlecryCondition condition) {
 		this.condition = condition;
+	}
+
+	public void setResolvedLate(boolean resolvedLate) {
+		this.resolvedLate = resolvedLate;
 	}
 }

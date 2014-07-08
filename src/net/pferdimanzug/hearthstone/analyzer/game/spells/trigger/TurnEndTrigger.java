@@ -6,7 +6,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
 import net.pferdimanzug.hearthstone.analyzer.game.events.TurnEndEvent;
 
 public class TurnEndTrigger extends GameEventTrigger {
-	
+
 	@Override
 	public boolean fire(GameEvent event, Entity host) {
 		TurnEndEvent turnEndEvent = (TurnEndEvent) event;

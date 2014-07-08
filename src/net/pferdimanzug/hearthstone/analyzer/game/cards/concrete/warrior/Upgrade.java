@@ -14,12 +14,18 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Upgrade extends SpellCard {
 
-	public Upgrade() {
-		super("Upgrade!", Rarity.RARE, HeroClass.WARRIOR, 1);
-		setDescription("If you have a weapon, give it +1/+1.  Otherwise equip a 1/3 weapon.");
+	private class HeavyAxe extends WeaponCard {
 
-		setSpell(new UpgradeSpell());
-		setTargetRequirement(TargetSelection.NONE);
+		public HeavyAxe() {
+			super("Heavy Axe", Rarity.RARE, HeroClass.WARRIOR, 1);
+			setCollectible(false);
+		}
+
+		@Override
+		public Weapon getWeapon() {
+			return createWeapon(1, 3);
+		}
+
 	}
 
 	private class UpgradeSpell extends BuffWeaponSpell {
@@ -40,18 +46,12 @@ public class Upgrade extends SpellCard {
 		}
 	}
 
-	private class HeavyAxe extends WeaponCard {
+	public Upgrade() {
+		super("Upgrade!", Rarity.RARE, HeroClass.WARRIOR, 1);
+		setDescription("If you have a weapon, give it +1/+1.  Otherwise equip a 1/3 weapon.");
 
-		public HeavyAxe() {
-			super("Heavy Axe", Rarity.RARE, HeroClass.WARRIOR, 1);
-			setCollectible(false);
-		}
-
-		@Override
-		public Weapon getWeapon() {
-			return createWeapon(1, 3);
-		}
-
+		setSpell(new UpgradeSpell());
+		setTargetRequirement(TargetSelection.NONE);
 	}
 
 }

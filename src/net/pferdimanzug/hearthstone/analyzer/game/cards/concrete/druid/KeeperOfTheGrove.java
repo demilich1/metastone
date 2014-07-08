@@ -17,6 +17,16 @@ public class KeeperOfTheGrove extends ChooseBattlecryCard {
 	}
 
 	@Override
+	protected String getAction1Suffix() {
+		return "2 damage";
+	}
+
+	@Override
+	protected String getAction2Suffix() {
+		return "Silence";
+	}
+
+	@Override
 	protected Battlecry getBattlecry1() {
 		return Battlecry.createBattlecry(new DamageSpell(2), TargetSelection.ANY);
 	}
@@ -29,16 +39,6 @@ public class KeeperOfTheGrove extends ChooseBattlecryCard {
 	@Override
 	public Minion summon() {
 		return createMinion();
-	}
-
-	@Override
-	protected String getAction1Suffix() {
-		return "2 damage";
-	}
-
-	@Override
-	protected String getAction2Suffix() {
-		return "Silence";
 	}
 
 }

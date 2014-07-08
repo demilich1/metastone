@@ -9,7 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public abstract class Spell implements Cloneable {
-	
+
 	private EntityReference target;
 	protected boolean applySpellpower;
 	private EntityReference source;
@@ -27,7 +27,7 @@ public abstract class Spell implements Cloneable {
 			onCast(context, player, target);
 		}
 	}
-	
+
 	@Override
 	public Spell clone() {
 		try {
@@ -38,6 +38,11 @@ public abstract class Spell implements Cloneable {
 		return null;
 	}
 
+	protected <T> T getRandomTarget(List<T> targets) {
+		int randomIndex = ThreadLocalRandom.current().nextInt(targets.size());
+		return targets.get(randomIndex);
+	}
+
 	public EntityReference getSource() {
 		return source;
 	}
@@ -45,7 +50,7 @@ public abstract class Spell implements Cloneable {
 	public EntityReference getTarget() {
 		return target;
 	}
-	
+
 	public boolean hasPredefinedTarget() {
 		if (target != null) {
 			return target.isTargetGroup();
@@ -54,11 +59,6 @@ public abstract class Spell implements Cloneable {
 	}
 
 	protected abstract void onCast(GameContext context, Player player, Entity target);
-	
-	protected <T> T getRandomTarget(List<T> targets) {
-		int randomIndex = ThreadLocalRandom.current().nextInt(targets.size());
-		return targets.get(randomIndex);
-	}
 
 	public void setApplySpellpower(boolean applySpellpower) {
 		this.applySpellpower = applySpellpower;
@@ -70,6 +70,12 @@ public abstract class Spell implements Cloneable {
 
 	public void setTarget(EntityReference target) {
 		this.target = target;
+	}
+
+	@Override
+	public String toString() {
+		return "[SPELL " + getClass().getSimpleName() + " target=" + target + ", applySpellpower=" + applySpellpower + ", source=" + source
+				+ "]";
 	}
 
 }

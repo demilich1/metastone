@@ -29,20 +29,25 @@ public class BuffSpell extends RevertableSpell {
 		this(attackBonus, hpBonus, null);
 	}
 	
+	public BuffSpell(int attackBonus, int hpBonus, boolean temporary) {
+		this(attackBonus, hpBonus, temporary ? new TurnEndTrigger() : null);
+	}
+	
 	public BuffSpell(int attackBonus, int hpBonus, GameEventTrigger removeTrigger) {
 		super(removeTrigger);
 		this.attackBonus = attackBonus;
 		this.hpBonus = hpBonus;
 	}
 	
-	public BuffSpell(int attackBonus, int hpBonus, boolean temporary) {
-		this(attackBonus, hpBonus, temporary ? new TurnEndTrigger() : null);
-	}
-	
 	public BuffSpell(IValueProvider attackValueProvider, IValueProvider hpValueProvider) {
 		super(null);
 		this.attackValueProvider = attackValueProvider;
 		this.hpValueProvider = hpValueProvider;
+	}
+
+	@Override
+	public Spell getReverseSpell() {
+		return new BuffSpell(-attackBonus, -hpBonus);
 	}
 
 	@Override
@@ -66,11 +71,6 @@ public class BuffSpell extends RevertableSpell {
 		}
 
 		super.onCast(context, player, target);
-	}
-
-	@Override
-	public Spell getReverseSpell() {
-		return new BuffSpell(-attackBonus, -hpBonus);
 	}
 
 }

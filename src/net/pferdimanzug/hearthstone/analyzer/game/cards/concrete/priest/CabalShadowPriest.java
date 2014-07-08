@@ -11,18 +11,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class CabalShadowPriest extends MinionCard {
 
-	public CabalShadowPriest() {
-		super("Cabal Shadow Priest", 4, 5, Rarity.EPIC, HeroClass.PRIEST, 6);
-		setDescription("Battlecry: Take control of an enemy minion that has 2 or less Attack.");
-	}
-
-	@Override
-	public Minion summon() {
-		Minion cabalShadowPriest = createMinion();
-		cabalShadowPriest.setBattlecry(new CabalMindControl());
-		return cabalShadowPriest;
-	}
-	
 	private class CabalMindControl extends Battlecry {
 
 		protected CabalMindControl() {
@@ -41,6 +29,18 @@ public class CabalShadowPriest extends MinionCard {
 		
 		
 		
+	}
+
+	public CabalShadowPriest() {
+		super("Cabal Shadow Priest", 4, 5, Rarity.EPIC, HeroClass.PRIEST, 6);
+		setDescription("Battlecry: Take control of an enemy minion that has 2 or less Attack.");
+	}
+	
+	@Override
+	public Minion summon() {
+		Minion cabalShadowPriest = createMinion();
+		cabalShadowPriest.setBattlecry(new CabalMindControl());
+		return cabalShadowPriest;
 	}
 
 }

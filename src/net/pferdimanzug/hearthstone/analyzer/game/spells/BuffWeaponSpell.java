@@ -33,7 +33,7 @@ public class BuffWeaponSpell extends Spell {
 			weapon.modifyTag(GameTag.WEAPON_DAMAGE, damageBonus);
 		}
 		if (durabilityBonus != 0) {
-			context.getLogic().changeDurability(weapon, durabilityBonus);
+			context.getLogic().modifyDurability(weapon, durabilityBonus);
 		}
 	}
 

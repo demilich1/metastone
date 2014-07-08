@@ -16,26 +16,18 @@ public class TransformMinionSpell extends Spell {
 	private final MinionCard templateCard;
 	private final Minion transformTarget;
 
-	public TransformMinionSpell(MinionCard templateCard) {
-		this.templateCard = templateCard;
-		this.transformTarget = null;
-	}
-	
 	public TransformMinionSpell(Minion transformTarget) {
 		this.templateCard = null;
 		this.transformTarget = transformTarget;
 	}
+	
+	public TransformMinionSpell(MinionCard templateCard) {
+		this.templateCard = templateCard;
+		this.transformTarget = null;
+	}
 
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
-		/*
-		 * Player opponent = context.getOpponent(player); int index =
-		 * player.getMinions().indexOf(target); List<Minion> minions = index ==
-		 * -1 ? opponent.getMinions() : player.getMinions(); if (index == -1) {
-		 * index = opponent.getMinions().indexOf(target); } minions.add(index,
-		 * newMinion.summon());
-		 */
-
 		Minion minion = (Minion) target;
 		Minion newMinion = transformTarget != null ? transformTarget : templateCard.summon();
 		logger.debug("{} is transformed into a {}", minion, newMinion);

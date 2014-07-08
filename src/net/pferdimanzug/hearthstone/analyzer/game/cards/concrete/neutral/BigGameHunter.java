@@ -12,18 +12,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class BigGameHunter extends MinionCard {
 
-	public BigGameHunter() {
-		super("Big Game Hunter", 4, 2, Rarity.EPIC, HeroClass.ANY, 3);
-		setDescription("Battlecry: Destroy a minion with an Attack of 7 or more.");
-	}
-
-	@Override
-	public Minion summon() {
-		Minion bigGameHunter = createMinion();
-		bigGameHunter.setBattlecry(new BigGameHunting());
-		return bigGameHunter;
-	}
-
 	private class BigGameHunting extends Battlecry {
 
 		protected BigGameHunting() {
@@ -44,6 +32,18 @@ public class BigGameHunter extends MinionCard {
 			return minion.getAttack() >= 7;
 		}
 
+	}
+
+	public BigGameHunter() {
+		super("Big Game Hunter", 4, 2, Rarity.EPIC, HeroClass.ANY, 3);
+		setDescription("Battlecry: Destroy a minion with an Attack of 7 or more.");
+	}
+
+	@Override
+	public Minion summon() {
+		Minion bigGameHunter = createMinion();
+		bigGameHunter.setBattlecry(new BigGameHunting());
+		return bigGameHunter;
 	}
 
 }

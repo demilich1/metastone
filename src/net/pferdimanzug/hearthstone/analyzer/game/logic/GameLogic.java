@@ -78,13 +78,18 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void addSpellTrigger(Player player, SpellTrigger spellTrigger, Entity target) {
-		// there was a .clone() here before, we don't need this, do we?
-		spellTrigger.setOwner(player.getId());
 		spellTrigger.setHost(target);
+		spellTrigger.setOwner(player.getId());
 		spellTrigger.reset();
 		spellTrigger.onAdd(context);
 		context.addTrigger(spellTrigger);
 		logger.debug("New spelltrigger was added for {} on {}", player.getName(), target);
+	}
+
+	public void afterCardPlayed(int playerId, CardReference cardReference) {
+		Player player = context.getPlayer(playerId);
+		// Card card = context.resolveCardReference(cardReference);
+		player.getHero().modifyTag(GameTag.COMBO, +1);
 	}
 
 	private void assignCardIds(CardCollection cardCollection) {
@@ -156,14 +161,6 @@ public class GameLogic implements Cloneable {
 		}
 	}
 
-	public void changeDurability(Weapon weapon, int durability) {
-		logger.debug("Durability of weapon {} is changed by {}", weapon, durability);
-		weapon.modifyTag(GameTag.DURABILITY, durability);
-		if (weapon.isBroken()) {
-			destroy(weapon);
-		}
-	}
-
 	public void checkForDeadEntities() {
 		for (Player player : context.getPlayers()) {
 			for (Minion minion : new ArrayList<Minion>(player.getMinions())) {
@@ -177,6 +174,13 @@ public class GameLogic implements Cloneable {
 	@Override
 	public GameLogic clone() {
 		return new GameLogic(idFactory.clone());
+	}
+
+	private void consumeTag(Player player, GameTag tag) {
+		player.getHero().removeTag(tag);
+		for (Minion minion : player.getMinions()) {
+			minion.removeTag(tag);
+		}
 	}
 
 	public boolean damage(Player player, Actor target, int damage, boolean applySpellpower) {
@@ -205,6 +209,10 @@ public class GameLogic implements Cloneable {
 	}
 
 	private boolean damageHero(Hero hero, int damage) {
+		if (hero.hasTag(GameTag.IMMUNE)) {
+			logger.debug("{} is IMMUNE and does not take damage", hero);
+			return false;
+		}
 		int effectiveHp = hero.getHp() + hero.getArmor();
 		hero.modifyArmor(-damage);
 		int newHp = Math.min(hero.getHp(), effectiveHp - damage);
@@ -236,10 +244,7 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void destroy(Actor target) {
-		context.removeTriggersAssociatedWith(target.getReference());
-		if (target.hasSpellTrigger()) {
-			target.getSpellTrigger().onRemove(context);
-		}
+		removeSpelltriggers(target);
 
 		switch (target.getEntityType()) {
 		case HERO:
@@ -364,6 +369,10 @@ public class GameLogic implements Cloneable {
 			logger.debug("Target of attack was changed! New Target: {}", target);
 		}
 
+		if (attacker.hasTag(GameTag.IMMUNE_WHILE_ATTACKING)) {
+			attacker.setTag(GameTag.IMMUNE);
+		}
+
 		int attackerDamage = attacker.getAttack();
 		int defenderDamage = target.getAttack();
 		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, target, attackerDamage), TriggerLayer.SECRET);
@@ -377,11 +386,20 @@ public class GameLogic implements Cloneable {
 		if (defenderDamage > 0) {
 			damage(player, attacker, defenderDamage, false);
 		}
+		if (attacker.hasTag(GameTag.IMMUNE_WHILE_ATTACKING)) {
+			attacker.removeTag(GameTag.IMMUNE);
+		}
 
 		if (attacker.getEntityType() == EntityType.HERO) {
 			Hero hero = (Hero) attacker;
-			if (hero.getWeapon() != null && hero.getWeapon().isActive()) {
-				changeDurability(hero.getWeapon(), -1);
+			Weapon weapon = hero.getWeapon();
+			if (weapon != null && weapon.isActive()) {
+				if (weapon.hasTag(GameTag.CONSUME_DAMAGE_INSTEAD_OF_DURABILITY_ON_MINIONS) && defender.getEntityType() == EntityType.MINION) {
+					modifyDurability(hero.getWeapon(), GameTag.WEAPON_DAMAGE, -1);
+				} else {
+					modifyDurability(hero.getWeapon(), GameTag.DURABILITY, -1);
+				}
+
 			}
 		}
 
@@ -432,6 +450,14 @@ public class GameLogic implements Cloneable {
 		return defaultValue;
 	}
 
+	public int getTotalTagValue(GameTag tag) {
+		int total = 0;
+		for (Player player : context.getPlayers()) {
+			total += getTotalTagValue(player, tag);
+		}
+		return total;
+	}
+
 	public int getTotalTagValue(Player player, GameTag tag) {
 		int total = player.getHero().getTagValue(tag);
 		for (Entity minion : player.getMinions()) {
@@ -442,27 +468,6 @@ public class GameLogic implements Cloneable {
 			total += minion.getTagValue(tag);
 		}
 		return total;
-	}
-
-	public int getTotalTagValue(GameTag tag) {
-		int total = 0;
-		for (Player player : context.getPlayers()) {
-			total += getTotalTagValue(player, tag);
-		}
-		return total;
-	}
-
-	private boolean hasTag(Player player, GameTag tag) {
-		if (player.getHero().hasTag(tag)) {
-			return true;
-		}
-		for (Entity minion : player.getMinions()) {
-			if (minion.hasTag(tag)) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	public List<GameAction> getValidActions(int playerId) {
@@ -493,6 +498,19 @@ public class GameLogic implements Cloneable {
 		Spell enrageSpell = (Spell) entity.getTag(GameTag.ENRAGE_SPELL);
 		Player owner = context.getPlayer(entity.getOwner());
 		enrageSpell.cast(context, owner, toList(entity));
+	}
+
+	private boolean hasTag(Player player, GameTag tag) {
+		if (player.getHero().hasTag(tag)) {
+			return true;
+		}
+		for (Entity minion : player.getMinions()) {
+			if (minion.hasTag(tag)) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	public void heal(Player player, Actor target, int healing) {
@@ -566,6 +584,21 @@ public class GameLogic implements Cloneable {
 		player.setMana(newMana);
 	}
 
+	private void modifyDurability(Weapon weapon, GameTag tag, int durability) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("{} of weapon {} is changed by {}", new Object[] { tag, weapon, durability });
+		}
+
+		weapon.modifyTag(tag, durability);
+		if (weapon.isBroken()) {
+			destroy(weapon);
+		}
+	}
+
+	public void modifyDurability(Weapon weapon, int durability) {
+		modifyDurability(weapon, GameTag.DURABILITY, durability);
+	}
+
 	public void modifyMaxMana(Player player, int delta) {
 		logger.debug("Maximum mana was changed by {} for {}", delta, player.getName());
 		int maxMana = MathUtils.clamp(player.getMaxMana() + delta, 0, GameLogic.MAX_MANA);
@@ -624,12 +657,6 @@ public class GameLogic implements Cloneable {
 		}
 	}
 
-	public void afterCardPlayed(int playerId, CardReference cardReference) {
-		Player player = context.getPlayer(playerId);
-		// Card card = context.resolveCardReference(cardReference);
-		player.getHero().modifyTag(GameTag.COMBO, +1);
-	}
-
 	public void playSecret(Player player, Secret secret) {
 		logger.debug("{} has a new secret activated: {}", player.getName(), secret.getSource());
 		addSpellTrigger(player, secret, player.getHero());
@@ -641,13 +668,6 @@ public class GameLogic implements Cloneable {
 		// this mechanic could not be implemented with current spelltriggers
 		consumeTag(player, GameTag.ONE_TIME_FREE_SECRET);
 		context.fireGameEvent(new SecretPlayedEvent(context, (SecretCard) secret.getSource()));
-	}
-
-	private void consumeTag(Player player, GameTag tag) {
-		player.getHero().removeTag(tag);
-		for (Minion minion : player.getMinions()) {
-			minion.removeTag(tag);
-		}
 	}
 
 	public void receiveCard(int playerId, Card card) {
@@ -679,10 +699,7 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void removeMinion(Actor minion) {
-		context.removeTriggersAssociatedWith(minion.getReference());
-		if (minion.hasSpellTrigger()) {
-			minion.getSpellTrigger().onRemove(context);
-		}
+		removeSpelltriggers(minion);
 
 		logger.debug("{} was removed", minion);
 		// set Hp to zero to make .isDead() return true
@@ -697,6 +714,14 @@ public class GameLogic implements Cloneable {
 		// this only works while Secrets are the only SpellTrigger on the heroes
 		context.removeTriggersAssociatedWith(player.getHero().getReference());
 		player.getSecrets().clear();
+	}
+
+	private void removeSpelltriggers(Actor actor) {
+		for (SpellTrigger trigger : context.getTriggersAssociatedWith(actor.getReference())) {
+			logger.debug("SpellTrigger {} was removed for {}", trigger, actor);
+			trigger.onRemove(context);
+		}
+		context.removeTriggersAssociatedWith(actor.getReference());
 	}
 
 	private void resolveBattlecry(int playerId, Actor actor) {
@@ -745,10 +770,7 @@ public class GameLogic implements Cloneable {
 				target.modifyTag(GameTag.NUMBER_OF_ATTACKS, -1);
 			}
 		}
-		context.removeTriggersAssociatedWith(target.getReference());
-		if (target.hasSpellTrigger()) {
-			target.getSpellTrigger().onRemove(context);
-		}
+		removeSpelltriggers(target);
 		refreshAttacksPerRound(target);
 		target.setHp(target.getMaxHp());
 	}
@@ -775,6 +797,10 @@ public class GameLogic implements Cloneable {
 
 	public void summon(int playerId, Minion minion, Card source, Actor nextTo, boolean resolveBattlecry) {
 		Player player = context.getPlayer(playerId);
+		if (!canSummonMoreMinions(player)) {
+			logger.debug("{} cannot summon any more minions, {} is destroyed", player.getName(), minion);
+			return;
+		}
 		minion.setId(idFactory.generateId());
 
 		context.getEnvironment().put(Environment.SUMMONED_MINION, minion);

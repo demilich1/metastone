@@ -22,6 +22,10 @@ public abstract class GameAction {
 	
 	public abstract void execute(GameContext context, int playerId);
 	
+	public String getActionSuffix() {
+		return actionSuffix;
+	}
+
 	public ActionType getActionType() {
 		return actionType;
 	}
@@ -42,10 +46,14 @@ public abstract class GameAction {
 		return validTargets;
 	}
 
+	public void setActionSuffix(String actionSuffix) {
+		this.actionSuffix = actionSuffix;
+	}
+
 	protected void setActionType(ActionType actionType) {
 		this.actionType = actionType;
 	}
-
+	
 	public void setSource(EntityReference source) {
 		this.source = source;
 	}
@@ -53,7 +61,7 @@ public abstract class GameAction {
 	public void setTarget(Entity target) {
 		this.targetKey = EntityReference.pointTo(target);
 	}
-	
+
 	public void setTargetKey(EntityReference targetKey) {
 		this.targetKey = targetKey;
 	}
@@ -64,13 +72,5 @@ public abstract class GameAction {
 
 	public void setValidTargets(List<Entity> validTargets) {
 		this.validTargets = validTargets;
-	}
-
-	public String getActionSuffix() {
-		return actionSuffix;
-	}
-
-	public void setActionSuffix(String actionSuffix) {
-		this.actionSuffix = actionSuffix;
 	}
 }

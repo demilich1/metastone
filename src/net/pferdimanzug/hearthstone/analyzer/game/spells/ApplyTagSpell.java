@@ -25,14 +25,14 @@ public class ApplyTagSpell extends RevertableSpell {
 	}
 
 	@Override
+	protected Spell getReverseSpell() {
+		return new RemoveTagSpell(tag);
+	}
+
+	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
 		logger.debug("Applying tag {} to {}", tag, target);
 		target.setTag(tag);
 		super.onCast(context, player, target);
-	}
-
-	@Override
-	protected Spell getReverseSpell() {
-		return new RemoveTagSpell(tag);
 	}
 }

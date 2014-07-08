@@ -48,18 +48,18 @@ public class TriggerManager implements Cloneable {
 		}
 	}
 	
+	private List<SpellTrigger> getListSnapshot(List<SpellTrigger> triggerList) {
+		return new ArrayList<SpellTrigger>(triggerList);
+	}
+
 	public List<SpellTrigger> getTriggersAssociatedWith(EntityReference entityReference) {
 		List<SpellTrigger> relevantTriggers = new ArrayList<>();
-		for (SpellTrigger trigger : getListSnapshot(triggers)) {
+		for (SpellTrigger trigger : triggers) {
 			if (trigger.getHostReference().equals(entityReference)) {
 				relevantTriggers.add(trigger);
 			}
 		}
 		return relevantTriggers;
-	}
-
-	private List<SpellTrigger> getListSnapshot(List<SpellTrigger> triggerList) {
-		return new ArrayList<SpellTrigger>(triggerList);
 	}
 
 	public void removeTriggersAssociatedWith(EntityReference entityReference) {

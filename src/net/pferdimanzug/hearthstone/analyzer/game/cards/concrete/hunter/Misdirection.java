@@ -15,13 +15,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class Misdirection extends SecretCard {
 
-	public Misdirection() {
-		super("Misdirection", Rarity.RARE, HeroClass.HUNTER, 2);
-		setDescription("Secret: When a character attacks your hero, instead he attacks another random character.");
-		
-		setTriggerAndEffect(new HeroTargetedByPhysicalTrigger(), new MisdirectSpell());
-	}
-	
 	private class MisdirectSpell extends Spell {
 		
 		public MisdirectSpell() {
@@ -40,6 +33,13 @@ public class Misdirection extends SecretCard {
 			Entity randomTarget = getRandomTarget(validTargets);
 			context.getEnvironment().put(Environment.TARGET_OVERRIDE, randomTarget);
 		}
+	}
+	
+	public Misdirection() {
+		super("Misdirection", Rarity.RARE, HeroClass.HUNTER, 2);
+		setDescription("Secret: When a character attacks your hero, instead he attacks another random character.");
+		
+		setTriggerAndEffect(new HeroTargetedByPhysicalTrigger(), new MisdirectSpell());
 	}
 
 }

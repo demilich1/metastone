@@ -20,6 +20,16 @@ public class AncientOfWar extends ChooseBattlecryCard {
 	}
 
 	@Override
+	protected String getAction1Suffix() {
+		return "+5 Attack";
+	}
+
+	@Override
+	protected String getAction2Suffix() {
+		return "+5 Health/Taunt";
+	}
+
+	@Override
 	protected Battlecry getBattlecry1() {
 		Spell buffSpell = new BuffSpell(5);
 		buffSpell.setTarget(EntityReference.SELF);
@@ -38,16 +48,6 @@ public class AncientOfWar extends ChooseBattlecryCard {
 	@Override
 	public Minion summon() {
 		return createMinion();
-	}
-
-	@Override
-	protected String getAction1Suffix() {
-		return "+5 Attack";
-	}
-
-	@Override
-	protected String getAction2Suffix() {
-		return "+5 Health/Taunt";
 	}
 	
 	

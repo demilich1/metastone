@@ -18,24 +18,14 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class ShadowMadness extends SpellCard {
 
-	public ShadowMadness() {
-		super("Shadow Madness", Rarity.RARE, HeroClass.PRIEST, 4);
-		setDescription("Gain control of an enemy minion with 3 or less Attack until end of turn.");
-		
-		setSpell(new ShadowMadnessSpell());
-		setTargetRequirement(TargetSelection.ENEMY_MINIONS);
+	private class ReverseMindControlSpell extends MindControlSpell {
+		@Override
+		protected void onCast(GameContext context, Player player, Entity target) {
+			Player opponent = context.getOpponent(player);
+			super.onCast(context, opponent, target);
+		}
 	}
 	
-	@Override
-	public boolean canBeCastOn(Entity target) {
-		if (!super.canBeCastOn(target)) {
-			return false;
-		}
-		Minion minion = (Minion) target;
-		return minion.getAttack() <= 3;
-	}
-
-
 	private class ShadowMadnessSpell extends MindControlSpell {
 
 		@Override
@@ -55,13 +45,23 @@ public class ShadowMadness extends SpellCard {
 		}
 		
 	}
+
+
+	public ShadowMadness() {
+		super("Shadow Madness", Rarity.RARE, HeroClass.PRIEST, 4);
+		setDescription("Gain control of an enemy minion with 3 or less Attack until end of turn.");
+		
+		setSpell(new ShadowMadnessSpell());
+		setTargetRequirement(TargetSelection.ENEMY_MINIONS);
+	}
 	
-	private class ReverseMindControlSpell extends MindControlSpell {
-		@Override
-		protected void onCast(GameContext context, Player player, Entity target) {
-			Player opponent = context.getOpponent(player);
-			super.onCast(context, opponent, target);
+	@Override
+	public boolean canBeCastOn(Entity target) {
+		if (!super.canBeCastOn(target)) {
+			return false;
 		}
+		Minion minion = (Minion) target;
+		return minion.getAttack() <= 3;
 	}
 
 }

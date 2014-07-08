@@ -13,6 +13,14 @@ public abstract class ChooseBattlecryCard extends MinionCard implements IChooseO
 		setTag(GameTag.CHOOSE_ONE);
 	}
 
+	protected abstract String getAction1Suffix();
+
+	protected abstract String getAction2Suffix();
+
+	protected abstract Battlecry getBattlecry1();
+
+	protected abstract Battlecry getBattlecry2();
+
 	@Override
 	public PlayCardAction playOption1() {
 		PlayCardAction option1 = new PlayMinionCardAction(this, getBattlecry1());
@@ -26,13 +34,5 @@ public abstract class ChooseBattlecryCard extends MinionCard implements IChooseO
 		option2.setActionSuffix(getAction2Suffix());
 		return option2;
 	}
-
-	protected abstract Battlecry getBattlecry1();
-
-	protected abstract Battlecry getBattlecry2();
-
-	protected abstract String getAction1Suffix();
-
-	protected abstract String getAction2Suffix();
 
 }

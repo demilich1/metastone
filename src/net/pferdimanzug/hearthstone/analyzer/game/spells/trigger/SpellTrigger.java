@@ -14,13 +14,20 @@ import org.slf4j.LoggerFactory;
 public class SpellTrigger implements Cloneable {
 	private final static Logger logger = LoggerFactory.getLogger(SpellTrigger.class);
 
-	private final GameEventTrigger primaryTrigger;
-	private final GameEventTrigger secondaryTrigger;
+	private GameEventTrigger primaryTrigger;
+	private GameEventTrigger secondaryTrigger;
 	private Spell spell;
 	private EntityReference hostReference;
 	private final boolean oneTime;
 	private boolean expired;
 	private TriggerLayer layer = TriggerLayer.DEFAULT;
+
+	public SpellTrigger(GameEventTrigger primaryTrigger, GameEventTrigger secondaryTrigger, Spell spell, boolean oneTime) {
+		this.primaryTrigger = primaryTrigger;
+		this.secondaryTrigger = secondaryTrigger;
+		this.spell = spell;
+		this.oneTime = oneTime;
+	}
 
 	public SpellTrigger(GameEventTrigger trigger, Spell spell) {
 		this(trigger, spell, false);
@@ -30,16 +37,15 @@ public class SpellTrigger implements Cloneable {
 		this(trigger, null, spell, oneTime);
 	}
 
-	public SpellTrigger(GameEventTrigger primaryTrigger, GameEventTrigger secondaryTrigger, Spell spell, boolean oneTime) {
-		this.primaryTrigger = primaryTrigger;
-		this.secondaryTrigger = secondaryTrigger;
-		this.spell = spell;
-		this.oneTime = oneTime;
-	}
-
 	public SpellTrigger clone() {
 		try {
-			return (SpellTrigger) super.clone();
+			SpellTrigger clone = (SpellTrigger) super.clone();
+			clone.primaryTrigger = primaryTrigger.clone();
+			if (secondaryTrigger != null) {
+				clone.secondaryTrigger = secondaryTrigger.clone();
+			}
+			clone.spell = spell.clone();
+			return clone;
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
 		}
@@ -100,16 +106,6 @@ public class SpellTrigger implements Cloneable {
 		}
 	}
 
-	private boolean triggerFires(GameEventTrigger trigger, GameEvent event, Entity host) {
-		if (trigger == null) {
-			return false;
-		}
-		if (trigger.interestedIn() != event.getEventType()) {
-			return false;
-		}
-		return trigger.fire(event, host);
-	}
-
 	public void onRemove(GameContext context) {
 	}
 
@@ -132,5 +128,23 @@ public class SpellTrigger implements Cloneable {
 			secondaryTrigger.setOwner(playerIndex);
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "[SpellTrigger primaryTrigger=" + primaryTrigger + ", secondaryTrigger=" + secondaryTrigger + ", spell=" + spell
+				+ ", hostReference=" + hostReference + ", oneTime=" + oneTime + ", expired=" + expired + ", layer=" + layer + "]";
+	}
+
+	private boolean triggerFires(GameEventTrigger trigger, GameEvent event, Entity host) {
+		if (trigger == null) {
+			return false;
+		}
+		if (trigger.interestedIn() != event.getEventType()) {
+			return false;
+		}
+		return trigger.fire(event, host);
+	}
+	
+	
 
 }

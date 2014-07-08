@@ -17,6 +17,16 @@ public class AncientOfLore extends ChooseBattlecryCard {
 	}
 
 	@Override
+	protected String getAction1Suffix() {
+		return "Draw 2 cards";
+	}
+
+	@Override
+	protected String getAction2Suffix() {
+		return "Restore 5 Health";
+	}
+
+	@Override
 	protected Battlecry getBattlecry1() {
 		return Battlecry.createBattlecry(new DrawCardSpell(2));
 	}
@@ -29,16 +39,6 @@ public class AncientOfLore extends ChooseBattlecryCard {
 	@Override
 	public Minion summon() {
 		return createMinion();
-	}
-
-	@Override
-	protected String getAction1Suffix() {
-		return "Draw 2 cards";
-	}
-
-	@Override
-	protected String getAction2Suffix() {
-		return "Restore 5 Health";
 	}
 	
 	

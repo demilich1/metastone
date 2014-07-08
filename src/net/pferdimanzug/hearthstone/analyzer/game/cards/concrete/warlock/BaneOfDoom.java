@@ -13,14 +13,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class BaneOfDoom extends SpellCard {
 
-	public BaneOfDoom() {
-		super("Bane of Doom", Rarity.EPIC, HeroClass.WARLOCK, 5);
-		setDescription("Deal 2 damage to a character.  If that kills it, summon a random Demon.");
-		
-		setSpell(new BaneOfDoomSpell());
-		setTargetRequirement(TargetSelection.ANY);
-	}
-	
 	private class BaneOfDoomSpell extends DamageSpell {
 
 		public BaneOfDoomSpell() {
@@ -44,6 +36,14 @@ public class BaneOfDoom extends SpellCard {
 			}
 		}
 		
+	}
+	
+	public BaneOfDoom() {
+		super("Bane of Doom", Rarity.EPIC, HeroClass.WARLOCK, 5);
+		setDescription("Deal 2 damage to a character.  If that kills it, summon a random Demon.");
+		
+		setSpell(new BaneOfDoomSpell());
+		setTargetRequirement(TargetSelection.ANY);
 	}
 
 }

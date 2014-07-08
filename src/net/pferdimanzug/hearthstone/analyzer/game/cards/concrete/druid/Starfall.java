@@ -12,12 +12,19 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Starfall extends ChooseOneCard {
 
-	public Starfall() {
-		super("Starfall", CardType.SPELL, Rarity.RARE, HeroClass.DRUID, 5);
-		setDescription("Choose One - Deal $5 damage to a minion; or $2 damage to all enemy minions.");
-		
-		setCard1(new StarfallSingleTarget());
-		setCard2(new StarfallAoE());
+	private class StarfallAoE extends SpellCard {
+
+		public StarfallAoE() {
+			super("Starfall (AoE)", Rarity.RARE, HeroClass.DRUID, 5);
+			setDescription("Deal $2 damage to all enemy minions");
+			setCollectible(false);
+
+			Spell damageSpell = new DamageSpell(2);
+			damageSpell.setTarget(EntityReference.ENEMY_MINIONS);
+			setSpell(damageSpell);
+			setTargetRequirement(TargetSelection.NONE);
+		}
+
 	}
 
 	private class StarfallSingleTarget extends SpellCard {
@@ -33,19 +40,12 @@ public class Starfall extends ChooseOneCard {
 
 	}
 
-	private class StarfallAoE extends SpellCard {
-
-		public StarfallAoE() {
-			super("Starfall (AoE)", Rarity.RARE, HeroClass.DRUID, 5);
-			setDescription("Deal $2 damage to all enemy minions");
-			setCollectible(false);
-
-			Spell damageSpell = new DamageSpell(2);
-			damageSpell.setTarget(EntityReference.ENEMY_MINIONS);
-			setSpell(damageSpell);
-			setTargetRequirement(TargetSelection.NONE);
-		}
-
+	public Starfall() {
+		super("Starfall", CardType.SPELL, Rarity.RARE, HeroClass.DRUID, 5);
+		setDescription("Choose One - Deal $5 damage to a minion; or $2 damage to all enemy minions.");
+		
+		setCard1(new StarfallSingleTarget());
+		setCard2(new StarfallAoE());
 	}
 
 }

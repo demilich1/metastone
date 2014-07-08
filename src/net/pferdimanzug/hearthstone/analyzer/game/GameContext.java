@@ -117,10 +117,6 @@ public class GameContext implements Cloneable {
 		return adjacentMinions;
 	}
 	
-	public List<SpellTrigger> getTriggersAssociatedWith(EntityReference entityReference) {
-		return triggerManager.getTriggersAssociatedWith(entityReference);
-	}
-
 	public HashMap<Environment, Object> getEnvironment() {
 		return environment;
 	}
@@ -128,7 +124,7 @@ public class GameContext implements Cloneable {
 	public GameLogic getLogic() {
 		return logic;
 	}
-	
+
 	public int getMinionCount(Player player) {
 		return player.getMinions().size();
 	}
@@ -136,11 +132,11 @@ public class GameContext implements Cloneable {
 	public Player getOpponent(Player player) {
 		return player.getId() == PLAYER_1 ? getPlayer2() : getPlayer1();
 	}
-
+	
 	public Player getPlayer(int index) {
 		return players[index];
 	}
-	
+
 	public Player getPlayer1() {
 		return getPlayers()[PLAYER_1];
 	}
@@ -156,13 +152,17 @@ public class GameContext implements Cloneable {
 	public GameResult getResult() {
 		return result;
 	}
-
+	
 	public int getTotalMinionCount() {
 		int totalMinionCount = 0;
 		for (int i = 0; i < players.length; i++) {
 			totalMinionCount += getMinionCount(players[i]);
 		}
 		return totalMinionCount;
+	}
+
+	public List<SpellTrigger> getTriggersAssociatedWith(EntityReference entityReference) {
+		return triggerManager.getTriggersAssociatedWith(entityReference);
 	}
 
 	public int getTurn() {

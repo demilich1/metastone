@@ -33,13 +33,13 @@ public abstract class MinionCard extends Card {
 		return getTagValue(GameTag.BASE_HP);
 	}
 	
-	public void setRace(Race race) {
-		setTag(GameTag.RACE, race);
-	}
-
 	@Override
 	public PlayCardAction play() {
 		return new PlayMinionCardAction(this);
+	}
+
+	public void setRace(Race race) {
+		setTag(GameTag.RACE, race);
 	}
 
 	public abstract Minion summon();

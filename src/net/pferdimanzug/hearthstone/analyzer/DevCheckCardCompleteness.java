@@ -61,6 +61,18 @@ public class DevCheckCardCompleteness {
 		System.out.println("There are " + missing + " cards missing");
 	}
 
+	private static List<String> getImplementedCardsAsLines() {
+		final String expression = "cards.add(new %s());";
+		final String path = "./src/" + Card.class.getPackage().getName().replace(".", "/") + "/concrete/";
+		List<String> lines = new ArrayList<String>();
+		File folder = new File(path);
+		for (File file : FileUtils.listFiles(folder, new String[] { "java" }, true)) {
+			String cardName = file.getName().replace(".java", "");
+			lines.add(String.format(expression, cardName));
+		}
+		return lines;
+	}
+	
 	private static String toCanonName(String name) {
 		return name.toLowerCase().replace(".java", "").replace(".png", "").replace("_", "").replace("-", "");
 	}
@@ -96,18 +108,6 @@ public class DevCheckCardCompleteness {
 			e.printStackTrace();
 		}
 
-	}
-	
-	private static List<String> getImplementedCardsAsLines() {
-		final String expression = "cards.add(new %s());";
-		final String path = "./src/" + Card.class.getPackage().getName().replace(".", "/") + "/concrete/";
-		List<String> lines = new ArrayList<String>();
-		File folder = new File(path);
-		for (File file : FileUtils.listFiles(folder, new String[] { "java" }, true)) {
-			String cardName = file.getName().replace(".java", "");
-			lines.add(String.format(expression, cardName));
-		}
-		return lines;
 	}
 	
 	public static void writeImplementedCardsToFile(String filename) {
