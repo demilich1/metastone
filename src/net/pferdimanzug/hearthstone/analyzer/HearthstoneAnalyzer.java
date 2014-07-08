@@ -10,32 +10,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.DebugDecks;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.MinMaxBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.NoAggressionBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.DruidOfTheClaw;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.ForceOfNature;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Innervate;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.BestialWrath;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.GladiatorsLongbow;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.IceBarrier;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.KirinTorMage;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.MirrorEntity;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.ArgentSquire;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.BloodKnight;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.BloodfenRaptor;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.Doomsayer;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.FacelessManipulator;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.GadgetzanAuctioneer;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.HarvestGolem;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.RiverCrocolisk;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.StonetuskBoar;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.YouthfulBrewmaster;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.AvengingWrath;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.CabalShadowPriest;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.Doomhammer;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.StormforgedAxe;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock.BaneOfDoom;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock.Corruption;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock.Doomguard;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.Gorehowl;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.ElvenArcher;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.SwordOfJustice;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
@@ -84,18 +60,19 @@ public class HearthstoneAnalyzer extends Application {
 	}
 
 	private void launchHumanDebugGame() {
-		HeroClass humanHeroClass = HeroClass.WARLOCK;
+		HeroClass humanHeroClass = HeroClass.PALADIN;
 		HeroClass aiHeroClass = HeroClass.MAGE;
 		Hero hero1 = HeroFactory.createHero(humanHeroClass);
 		// Player player1 = new Player("Human", hero1,
 		// DebugDecks.getRandomDeck(hero1.getHeroClass()));
-		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new Gorehowl(), new Innervate()));
+		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new SwordOfJustice(), new ElvenArcher()));
 		player1.setBehaviour(new HumanBehaviour());
 
 		Hero hero2 = HeroFactory.createHero(aiHeroClass);
 		// Player player2 = new Player("Bot", hero2,
 		// DebugDecks.getRandomDeck(hero2.getHeroClass()));
-		Player player2 = new Player("Bot", hero2, DebugDecks.getDeckConsistingof(30, new HarvestGolem(), new IceBarrier()));
+		//Player player2 = new Player("Bot", hero2, DebugDecks.getDeckConsistingof(30, new HarvestGolem(), new IceBlock(), new IceBarrier()));
+		Player player2 = new Player("Bot", hero2, DebugDecks.getRandomDeck(aiHeroClass));
 		player2.setBehaviour(new NoAggressionBehaviour());
 		GameContext newGame = new GameContextVisualizable(player1, player2, new GameLogic());
 		ApplicationFacade.getInstance().sendNotification(GameNotification.START_GAME, newGame);

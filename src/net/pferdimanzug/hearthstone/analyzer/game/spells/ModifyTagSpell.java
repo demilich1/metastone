@@ -4,32 +4,30 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnEndTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.GameEventTrigger;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ModifyTagSpell extends Spell {
+public class ModifyTagSpell extends RevertableSpell {
 
 	private static Logger logger = LoggerFactory.getLogger(ModifyTagSpell.class);
 
 	private final GameTag tag;
 	private final int delta;
-	private final boolean temporary;
 
 	public ModifyTagSpell(GameTag tag, int delta) {
-		this(tag, delta, false);
+		this(tag, delta, null);
 	}
 	
-	public ModifyTagSpell(GameTag tag, int delta, boolean temporary) {
+	public ModifyTagSpell(GameTag tag, int delta, GameEventTrigger revertTrigger) {
+		this(tag, delta, revertTrigger, null);
+	}
+	
+	public ModifyTagSpell(GameTag tag, int delta, GameEventTrigger revertTrigger, GameEventTrigger secondRevertTrigger) {
+		super(revertTrigger, secondRevertTrigger);
 		this.tag = tag;
 		this.delta = delta;
-		this.temporary = temporary;
-	}
-
-	private boolean isTemporary() {
-		return temporary;
 	}
 
 	@Override
@@ -43,12 +41,12 @@ public class ModifyTagSpell extends Spell {
 		}
 
 		target.modifyTag(tag, delta);
-		if (isTemporary()) {
-			Spell revertSpell = new ModifyTagSpell(tag, -delta);
-			revertSpell.setTarget(target.getReference());
-			SpellTrigger removeTrigger = new SpellTrigger(new TurnEndTrigger(), revertSpell, true);
-			context.getLogic().addSpellTrigger(player, removeTrigger, target);
-		}
+		super.onCast(context, player, target);
+	}
+
+	@Override
+	protected Spell getReverseSpell() {
+		return new ModifyTagSpell(tag, -delta);
 	}
 
 }

@@ -1,5 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.actions;
 
+import java.util.function.Predicate;
+
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
@@ -21,6 +23,7 @@ public class Battlecry extends GameAction {
 	private final Spell spell;
 	private boolean resolvedLate = false;
 	private IBattlecryCondition condition;
+	private Predicate<Entity> entityFilter;
 
 	protected Battlecry(Spell spell) {
 		this.spell = spell;
@@ -35,14 +38,17 @@ public class Battlecry extends GameAction {
 	}
 	
 	@Override
-	public boolean canBeExecutedOn(Entity entity) {
+	public final boolean canBeExecutedOn(Entity entity) {
 		if (!super.canBeExecutedOn(entity)) {
 			return false;
 		}
 		if (getSource().getId() == entity.getId()) {
 			return false;
 		}
-		return true;
+		if (getEntityFilter() == null) {
+			return true;
+		}
+		return getEntityFilter().test(entity);
 	}
 
 
@@ -70,5 +76,13 @@ public class Battlecry extends GameAction {
 
 	public void setResolvedLate(boolean resolvedLate) {
 		this.resolvedLate = resolvedLate;
+	}
+
+	public Predicate<Entity> getEntityFilter() {
+		return entityFilter;
+	}
+
+	public void setEntityFilter(Predicate<Entity> entityFilter) {
+		this.entityFilter = entityFilter;
 	}
 }

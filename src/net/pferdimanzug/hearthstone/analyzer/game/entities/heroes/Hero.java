@@ -16,7 +16,7 @@ public abstract class Hero extends Actor {
 		super(null);
 		setName(name);
 		this.heroClass = heroClass;
-		this.heroPower = heroPower;
+		this.setHeroPower(heroPower);
 	}
 
 	public void activateWeapon(boolean active) {
@@ -31,7 +31,7 @@ public abstract class Hero extends Actor {
 		if (weapon != null) {
 			clone.setWeapon(getWeapon().clone());
 		}
-		clone.heroPower = heroPower.clone();
+		clone.setHeroPower(getHeroPower().clone());
 		return clone;
 	}
 	
@@ -76,6 +76,10 @@ public abstract class Hero extends Actor {
 		if (weapon != null) {
 			weapon.setOwner(getOwner());
 		}
+	}
+
+	public void setHeroPower(HeroPower heroPower) {
+		this.heroPower = heroPower;
 	}
 	
 }

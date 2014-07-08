@@ -185,7 +185,9 @@ public class GameLogic implements Cloneable {
 
 	public boolean damage(Player player, Actor target, int damage, boolean applySpellpower) {
 		if (applySpellpower) {
-			damage += getTotalTagValue(player, GameTag.SPELL_POWER);
+			int spellpower = getTotalTagValue(player, GameTag.SPELL_POWER);
+			logger.debug("Spellpower value of {} is added to the damage", spellpower);
+			damage += spellpower;
 		}
 		boolean success = false;
 		switch (target.getEntityType()) {
@@ -393,6 +395,8 @@ public class GameLogic implements Cloneable {
 		if (attacker.getEntityType() == EntityType.HERO) {
 			Hero hero = (Hero) attacker;
 			Weapon weapon = hero.getWeapon();
+			// TODO: this is not nice, maybe move this functionality to the
+			// Weapon class?
 			if (weapon != null && weapon.isActive()) {
 				if (weapon.hasTag(GameTag.CONSUME_DAMAGE_INSTEAD_OF_DURABILITY_ON_MINIONS) && defender.getEntityType() == EntityType.MINION) {
 					modifyDurability(hero.getWeapon(), GameTag.WEAPON_DAMAGE, -1);
@@ -422,7 +426,7 @@ public class GameLogic implements Cloneable {
 	}
 
 	public int getModifiedManaCost(Player player, Card card) {
-		int manaCost = card.getManaCost(player);
+		int manaCost = card.getManaCost(context, player);
 		if (card.getCardType() == CardType.MINION) {
 			manaCost += getTotalTagValue(player, GameTag.MINION_MANA_COST);
 			manaCost += getTotalTagValue(GameTag.ALL_MINION_MANA_COST);
@@ -855,7 +859,7 @@ public class GameLogic implements Cloneable {
 
 	public void useHeroPower(int playerId, HeroPower power) {
 		Player player = context.getPlayer(playerId);
-		modifyCurrentMana(playerId, -power.getManaCost(player));
+		modifyCurrentMana(playerId, -power.getManaCost(context, player));
 		logger.debug("{} uses {}", player.getName(), power);
 		power.setUsed(true);
 	}

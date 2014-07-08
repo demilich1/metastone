@@ -1,44 +1,18 @@
 package net.pferdimanzug.hearthstone.analyzer.playmode;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
 
 import javafx.scene.image.Image;
 
 import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.border.Border;
 
-import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.HeroPower;
 
 public class IconFactory {
 
-	public static JComponent createHandCard(Card card, Player player) {
-		JPanel cardPanel = new JPanel(new BorderLayout());
-		cardPanel.setPreferredSize(new Dimension(100, 110));
-		JTextArea nameArea = new JTextArea(card.getName());
-		nameArea.setLineWrap(true);
-		nameArea.setWrapStyleWord(true);
-		nameArea.setEditable(false);
-		nameArea.setFont(new Font("Arial", Font.BOLD, 12));
-		cardPanel.add(nameArea, BorderLayout.CENTER);
-		JLabel costLabel = new JLabel(card.getManaCost(player) + "");
-		costLabel.setAlignmentX(JComponent.LEFT_ALIGNMENT);
-		cardPanel.add(costLabel, BorderLayout.NORTH);
-
-		cardPanel.setBorder(createRarityBorder(card.getRarity()));
-		return cardPanel;
-	}
-	
 	public static Border createRarityBorder(Rarity rarity) {
 		Color color;
 		int thickness = 2;

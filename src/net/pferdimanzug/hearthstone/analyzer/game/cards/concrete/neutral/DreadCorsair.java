@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
@@ -18,12 +19,12 @@ public class DreadCorsair extends MinionCard {
 	}
 
 	@Override
-	public int getManaCost(Player player) {
+	public int getManaCost(GameContext context, Player player) {
 		Weapon weapon = player.getHero().getWeapon();
 		if (weapon == null) {
-			return super.getManaCost(player);
+			return super.getManaCost(context, player);
 		}
-		return Math.max(0, super.getManaCost(player) - weapon.getAttack());
+		return super.getManaCost(context, player) - weapon.getAttack();
 	}
 
 	@Override

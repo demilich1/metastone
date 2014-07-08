@@ -9,13 +9,19 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 public abstract class RevertableSpell extends Spell {
 
 	private final GameEventTrigger revertTrigger;
+	private final GameEventTrigger secondRevertTrigger;
 
 	public RevertableSpell() {
 		this(null);
 	}
 
 	public RevertableSpell(GameEventTrigger revertTrigger) {
+		this(revertTrigger, null);
+	}
+	
+	public RevertableSpell(GameEventTrigger revertTrigger, GameEventTrigger secondRevertTrigger) {
 		this.revertTrigger = revertTrigger;
+		this.secondRevertTrigger = secondRevertTrigger;
 	}
 
 	protected abstract Spell getReverseSpell();
@@ -25,7 +31,7 @@ public abstract class RevertableSpell extends Spell {
 		if (revertTrigger != null) {
 			Spell revert = getReverseSpell();
 			revert.setTarget(target.getReference());
-			SpellTrigger removeTrigger = new SpellTrigger(revertTrigger, revert, true);
+			SpellTrigger removeTrigger = new SpellTrigger(revertTrigger, secondRevertTrigger, revert, true);
 			context.getLogic().addSpellTrigger(player, removeTrigger, target);
 		}
 	}
