@@ -6,7 +6,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroyWeaponSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class AcidicSwampOoze extends MinionCard {
 
@@ -18,7 +19,9 @@ public class AcidicSwampOoze extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion acidicSwampOoze = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new DestroyWeaponSpell(), TargetSelection.ENEMY_HERO);
+		Spell destroyWeaponSpell = new DestroyWeaponSpell();
+		destroyWeaponSpell.setTarget(EntityReference.ENEMY_HERO);
+		Battlecry battlecry = Battlecry.createBattlecry(new DestroyWeaponSpell());
 		acidicSwampOoze.setBattlecry(battlecry);
 		return acidicSwampOoze;
 	}

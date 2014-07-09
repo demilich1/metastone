@@ -6,16 +6,41 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public class ReceiveCardSpell extends Spell {
-	
-	private final Card card;
+
+	private final Card[] cards;
+	private TargetPlayer targetPlayer;
 
 	public ReceiveCardSpell(Card card) {
-		this.card = card;
+		this(TargetPlayer.SELF, card);
+	}
+
+	public ReceiveCardSpell(TargetPlayer targetPlayer, Card... cards) {
+		this.targetPlayer = targetPlayer;
+		this.cards = cards;
 	}
 
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
-		context.getLogic().receiveCard(player.getId(), card.clone());
+		Player opponent = context.getOpponent(player);
+		switch (targetPlayer) {
+		case BOTH:
+			receiveCards(context, player);
+			receiveCards(context, opponent);
+			break;
+		case OPPONENT:
+			receiveCards(context, opponent);
+			break;
+		case SELF:
+			receiveCards(context, player);
+			break;
+		}
+
+	}
+
+	private void receiveCards(GameContext context, Player player) {
+		for (Card card : cards) {
+			context.getLogic().receiveCard(player.getId(), card.clone());
+		}
 	}
 
 }

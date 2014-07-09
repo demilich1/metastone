@@ -7,8 +7,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class DrawCardSpell extends Spell {
 
-	private int numberOfCards;
+	private final int numberOfCards;
 	private final TargetPlayer targetPlayer;
+	private final IValueProvider drawModifier;
 
 	public DrawCardSpell() {
 		this(1);
@@ -19,19 +20,25 @@ public class DrawCardSpell extends Spell {
 	}
 
 	public DrawCardSpell(int numberOfCards, TargetPlayer targetPlayer) {
+		this(null, numberOfCards, targetPlayer);
+	}
+
+	public DrawCardSpell(IValueProvider drawModifier, TargetPlayer targetPlayer) {
+		this(drawModifier, 0, targetPlayer);
+	}
+
+	private DrawCardSpell(IValueProvider drawModifier, int numberOfCards, TargetPlayer targetPlayer) {
+		this.drawModifier = drawModifier;
 		this.numberOfCards = numberOfCards;
 		this.targetPlayer = targetPlayer;
 		setTarget(EntityReference.NONE);
 	}
 
 	private void draw(GameContext context, Player player) {
-		for (int i = 0; i < numberOfCards; i++) {
+		int cardCount = drawModifier != null ? drawModifier.provideValue(context, player, null) : numberOfCards;
+		for (int i = 0; i < cardCount; i++) {
 			context.getLogic().drawCard(player.getId());
 		}
-	}
-
-	public int getNumberOfCards() {
-		return numberOfCards;
 	}
 
 	@Override
@@ -52,9 +59,4 @@ public class DrawCardSpell extends Spell {
 			break;
 		}
 	}
-
-	protected void setNumberOfCards(int numberOfCards) {
-		this.numberOfCards = numberOfCards;
-	}
-
 }
