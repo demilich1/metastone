@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 
 public class DiscardCardSpell extends Spell {
 	
+	public static final int ALL_CARDS = -1;
+	
 	private static Logger logger = LoggerFactory.getLogger(DiscardCardSpell.class);
 	
 	private final int numberOfCards;
@@ -24,7 +26,9 @@ public class DiscardCardSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
-		for (int i = 0; i < numberOfCards; i++) {
+		int cardCount = numberOfCards == ALL_CARDS ? player.getHand().getCount() : numberOfCards;
+		
+		for (int i = 0; i < cardCount; i++) {
 			Card randomHandCard = player.getHand().getRandom();
 			if (randomHandCard == null) {
 				return;

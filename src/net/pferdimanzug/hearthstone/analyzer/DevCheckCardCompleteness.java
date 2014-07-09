@@ -107,7 +107,7 @@ public class DevCheckCardCompleteness {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		System.out.println("CardCatalogue has been successfully updated");
 	}
 	
 	public static void writeImplementedCardsToFile(String filename) {
@@ -124,6 +124,7 @@ public class DevCheckCardCompleteness {
 			out.println(card.getName()+";");
 		}
 		out.close();
+		System.out.println("Implemented cards have been written to " + filename);
 	}
 
 }

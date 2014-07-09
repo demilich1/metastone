@@ -10,8 +10,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.DebugDecks;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.MinMaxBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.NoAggressionBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.ElvenArcher;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.SwordOfJustice;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Innervate;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.EliteTaurenChieftain;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.GelbinMekkatorque;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
@@ -23,7 +24,7 @@ public class HearthstoneAnalyzer extends Application {
 	public static void main(String[] args) {
 		//DevCheckCardCompleteness.updateCardCatalogue();
 		//DevCheckCardCompleteness.writeImplementedCardsToFile("implemented_cards.csv");
-		launch(args);
+		//launch(args);
 		 //new HearthstoneAnalyzer().launchDebugGame();
 	}
 
@@ -60,12 +61,12 @@ public class HearthstoneAnalyzer extends Application {
 	}
 
 	private void launchHumanDebugGame() {
-		HeroClass humanHeroClass = HeroClass.PALADIN;
+		HeroClass humanHeroClass = HeroClass.PRIEST;
 		HeroClass aiHeroClass = HeroClass.MAGE;
 		Hero hero1 = HeroFactory.createHero(humanHeroClass);
 		// Player player1 = new Player("Human", hero1,
 		// DebugDecks.getRandomDeck(hero1.getHeroClass()));
-		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new SwordOfJustice(), new ElvenArcher()));
+		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new GelbinMekkatorque(), new Innervate()));
 		player1.setBehaviour(new HumanBehaviour());
 
 		Hero hero2 = HeroFactory.createHero(aiHeroClass);
@@ -99,6 +100,7 @@ public class HearthstoneAnalyzer extends Application {
 				instance.launchHumanDebugGame();
 			}
 		});
+		t.setDaemon(true);
 		t.start();
 
 		/*

@@ -100,7 +100,7 @@ public class TargetLogic {
 		Player opponent = context.getOpponent(player);
 		List<Entity> entities = new ArrayList<>();
 		if (targetRequirement == TargetSelection.ENEMY_HERO || targetRequirement == TargetSelection.ENEMY_CHARACTERS
-				|| targetRequirement == TargetSelection.ANY) {
+				|| targetRequirement == TargetSelection.ANY || targetRequirement == TargetSelection.HEROES) {
 			entities.add(opponent.getHero());
 		}
 		if (targetRequirement == TargetSelection.ENEMY_MINIONS || targetRequirement == TargetSelection.ENEMY_CHARACTERS
@@ -108,7 +108,7 @@ public class TargetLogic {
 			entities.addAll(opponent.getMinions());
 		}
 		if (targetRequirement == TargetSelection.FRIENDLY_HERO || targetRequirement == TargetSelection.FRIENDLY_CHARACTERS
-				|| targetRequirement == TargetSelection.ANY) {
+				|| targetRequirement == TargetSelection.ANY || targetRequirement == TargetSelection.HEROES) {
 			entities.add(player.getHero());
 		}
 		if (targetRequirement == TargetSelection.FRIENDLY_MINIONS || targetRequirement == TargetSelection.FRIENDLY_CHARACTERS
