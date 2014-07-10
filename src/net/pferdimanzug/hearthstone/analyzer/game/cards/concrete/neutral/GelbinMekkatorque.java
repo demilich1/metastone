@@ -21,20 +21,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class GelbinMekkatorque extends MinionCard {
 
-	public GelbinMekkatorque() {
-		super("Gelbin Mekkatorque", 6, 6, Rarity.LEGENDARY, HeroClass.ANY, 6);
-		setDescription("Battlecry: Summon an AWESOME invention.");
-	}
-
-	@Override
-	public Minion summon() {
-		Minion gelbinMekkatorque = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new SummonRandomSpell(new Emboldener3000(), new HomingChicken(), new Poultryizer(),
-				new RepairBot()));
-		gelbinMekkatorque.setBattlecry(battlecry);
-		return gelbinMekkatorque;
-	}
-
 	private class Emboldener3000 extends MinionCard {
 
 		public Emboldener3000() {
@@ -77,22 +63,6 @@ public class GelbinMekkatorque extends MinionCard {
 
 	private class Poultryizer extends MinionCard {
 
-		public Poultryizer() {
-			super("Poultryizer", 0, 3, Rarity.FREE, HeroClass.ANY, 1);
-			setDescription("At the start of your turn, transform a random minion into a 1/1 Chicken.");
-			setCollectible(false);
-		}
-
-		@Override
-		public Minion summon() {
-			Minion poultryizer = createMinion();
-			Spell chickenizeSpell = new TransformRandomMinionSpell(new Chicken());
-			chickenizeSpell.setTarget(EntityReference.ALL_MINIONS);
-			SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), chickenizeSpell);
-			poultryizer.setSpellTrigger(trigger);
-			return poultryizer;
-		}
-
 		private class Chicken extends MinionCard {
 
 			public Chicken() {
@@ -107,6 +77,22 @@ public class GelbinMekkatorque extends MinionCard {
 				return createMinion();
 			}
 
+		}
+
+		public Poultryizer() {
+			super("Poultryizer", 0, 3, Rarity.FREE, HeroClass.ANY, 1);
+			setDescription("At the start of your turn, transform a random minion into a 1/1 Chicken.");
+			setCollectible(false);
+		}
+
+		@Override
+		public Minion summon() {
+			Minion poultryizer = createMinion();
+			Spell chickenizeSpell = new TransformRandomMinionSpell(new Chicken());
+			chickenizeSpell.setTarget(EntityReference.ALL_MINIONS);
+			SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), chickenizeSpell);
+			poultryizer.setSpellTrigger(trigger);
+			return poultryizer;
 		}
 
 	}
@@ -129,6 +115,20 @@ public class GelbinMekkatorque extends MinionCard {
 			return repairBot;
 		}
 
+	}
+
+	public GelbinMekkatorque() {
+		super("Gelbin Mekkatorque", 6, 6, Rarity.LEGENDARY, HeroClass.ANY, 6);
+		setDescription("Battlecry: Summon an AWESOME invention.");
+	}
+
+	@Override
+	public Minion summon() {
+		Minion gelbinMekkatorque = createMinion();
+		Battlecry battlecry = Battlecry.createBattlecry(new SummonRandomSpell(new Emboldener3000(), new HomingChicken(), new Poultryizer(),
+				new RepairBot()));
+		gelbinMekkatorque.setBattlecry(battlecry);
+		return gelbinMekkatorque;
 	}
 
 }

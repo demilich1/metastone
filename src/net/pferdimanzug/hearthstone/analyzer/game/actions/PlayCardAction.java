@@ -34,7 +34,13 @@ public abstract class PlayCardAction extends GameAction {
 		context.getLogic().playCard(playerId, cardReference);
 		// card was countered, do not actually resolve its effects
 		if (!card.hasTag(GameTag.COUNTERED)) {
-			play(context, playerId);
+			try {
+				play(context, playerId);
+			} catch(Exception e) {
+				System.out.println("ERROR while playing card " + card);
+				throw e;
+			}
+			
 		}
 		context.getLogic().afterCardPlayed(playerId, cardReference);
 		context.getEnvironment().remove(Environment.PENDING_CARD);

@@ -5,6 +5,7 @@ import java.util.List;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class MetaSpell extends Spell {
 
@@ -20,7 +21,6 @@ public class MetaSpell extends Spell {
 			if (!spell.hasPredefinedTarget()) {
 				spell.setTarget(getTarget());
 			}
-			spell.setSource(getSource());
 			context.getLogic().castSpell(player.getId(), spell);
 		}
 	}
@@ -30,11 +30,21 @@ public class MetaSpell extends Spell {
 	}
 
 	@Override
-	public void setApplySpellpower(boolean applySpellpower) {
-		super.setApplySpellpower(applySpellpower);
+	public void setSource(SpellSource source) {
+		super.setSource(source);
 		for (Spell spell : spells) {
-			spell.setApplySpellpower(applySpellpower);
+			spell.setSource(source);
 		}
 	}
+
+	@Override
+	public void setSourceEntity(EntityReference sourceEntity) {
+		super.setSourceEntity(sourceEntity);
+		for (Spell spell : spells) {
+			spell.setSourceEntity(sourceEntity);
+		}
+	}
+	
+	
 
 }

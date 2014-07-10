@@ -15,14 +15,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Mindgames extends SpellCard {
 
-	public Mindgames() {
-		super("Mindgames", Rarity.EPIC, HeroClass.PRIEST, 4);
-		setDescription("Put a copy of a random minion from your opponent's deck into the battlefield.");
-		
-		setSpell(new MindGamesSpell());
-		setTargetRequirement(TargetSelection.NONE);
-	}
-	
 	private class MindGamesSpell extends Spell {
 
 		@Override
@@ -51,6 +43,14 @@ public class Mindgames extends SpellCard {
 			return createMinion();
 		}
 		
+	}
+	
+	public Mindgames() {
+		super("Mindgames", Rarity.EPIC, HeroClass.PRIEST, 4);
+		setDescription("Put a copy of a random minion from your opponent's deck into the battlefield.");
+		
+		setSpell(new MindGamesSpell());
+		setTargetRequirement(TargetSelection.NONE);
 	}
 
 }

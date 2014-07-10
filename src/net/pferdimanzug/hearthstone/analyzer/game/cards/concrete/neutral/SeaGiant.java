@@ -15,16 +15,16 @@ public class SeaGiant extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion();
-	}
-
-	@Override
 	public int getManaCost(GameContext context, Player player) {
 		int minionsOnBattlefield = context.getMinionCount(player);
 		Player opponent = context.getOpponent(player);
 		minionsOnBattlefield += context.getMinionCount(opponent);
 		return super.getManaCost(context, player) - minionsOnBattlefield;
+	}
+
+	@Override
+	public Minion summon() {
+		return createMinion();
 	}
 
 }

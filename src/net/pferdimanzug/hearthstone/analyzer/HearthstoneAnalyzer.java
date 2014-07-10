@@ -11,9 +11,11 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.MinMaxBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.NoAggressionBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Innervate;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.EliteTaurenChieftain;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.GelbinMekkatorque;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.LeeroyJenkins;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.ArcaneMissiles;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.KoboldGeomancer;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.MadBomber;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.Onyxia;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.ProphetVelen;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
@@ -26,7 +28,7 @@ public class HearthstoneAnalyzer extends Application {
 		//DevCheckCardCompleteness.updateCardCatalogue();
 		//DevCheckCardCompleteness.writeImplementedCardsToFile("implemented_cards.csv");
 		launch(args);
-		 //new HearthstoneAnalyzer().launchDebugGame();
+		// new HearthstoneAnalyzer().launchDebugGame();
 	}
 
 	private void launchDebugGame() {
@@ -56,18 +58,18 @@ public class HearthstoneAnalyzer extends Application {
 
 			ApplicationFacade.getInstance().sendNotification(GameNotification.BATCH_STOP);
 		}
-
-		// ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_STATE_UPDATE,
-		// newGame);
+		System.out.println();
+		System.out.println("All games have been completed!");
+		System.exit(0);
 	}
 
 	private void launchHumanDebugGame() {
-		HeroClass humanHeroClass = HeroClass.PRIEST;
+		HeroClass humanHeroClass = HeroClass.WARLOCK;
 		HeroClass aiHeroClass = HeroClass.MAGE;
 		Hero hero1 = HeroFactory.createHero(humanHeroClass);
 		// Player player1 = new Player("Human", hero1,
 		// DebugDecks.getRandomDeck(hero1.getHeroClass()));
-		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new LeeroyJenkins(), new Innervate()));
+		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new ProphetVelen(), new Innervate(), new ArcaneMissiles(), new MadBomber(), new KoboldGeomancer()));
 		player1.setBehaviour(new HumanBehaviour());
 
 		Hero hero2 = HeroFactory.createHero(aiHeroClass);

@@ -71,15 +71,15 @@ public abstract class Hero extends Actor {
 		setTag(GameTag.ARMOR, newArmor);
 	}
 
+	public void setHeroPower(HeroPower heroPower) {
+		this.heroPower = heroPower;
+	}
+
 	public void setWeapon(Weapon weapon) {
 		this.weapon = weapon;
 		if (weapon != null) {
 			weapon.setOwner(getOwner());
 		}
-	}
-
-	public void setHeroPower(HeroPower heroPower) {
-		this.heroPower = heroPower;
 	}
 	
 }

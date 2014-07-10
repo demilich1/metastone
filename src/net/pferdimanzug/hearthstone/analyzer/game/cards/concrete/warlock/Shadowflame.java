@@ -9,6 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroySpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.SpellSource;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
@@ -22,9 +23,9 @@ public class Shadowflame extends SpellCard {
 
 			// deal attack damage to all enemy minions
 			DamageSpell damageSpell = new DamageSpell(targetMinion.getAttack());
-			damageSpell.setApplySpellpower(true);
+			damageSpell.setSource(SpellSource.SPELL_CARD);
 			damageSpell.setTarget(EntityReference.ENEMY_MINIONS);
-			context.getLogic().castSpell(player.getId(), damageSpell, null);
+			context.getLogic().castSpell(player.getId(), damageSpell);
 
 			// destroy minion
 			super.onCast(context, player, target);

@@ -24,7 +24,7 @@ public class EmperorCobra extends MinionCard {
 		Minion emperorCobra = createMinion();
 		Spell killSpell = new DestroySpell();
 		killSpell.setTarget(EntityReference.EVENT_TARGET);
-		emperorCobra.setSpellTrigger(new SpellTrigger(new PhysicalAttackTrigger(), killSpell));
+		emperorCobra.setSpellTrigger(new SpellTrigger(new PhysicalAttackTrigger(false), killSpell));
 		return emperorCobra;
 	}
 	

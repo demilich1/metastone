@@ -24,7 +24,7 @@ public class Swipe extends SpellCard {
 
 		private void damage(GameContext context, Player player, Entity primaryTarget, Actor target) {
 			int damage = target == primaryTarget ? primaryDamage : secondaryDamage;
-			context.getLogic().damage(player, target, damage, true);
+			context.getLogic().damage(player, target, damage, getSource());
 		}
 
 		protected void onCast(GameContext context, Player player, Entity target) {

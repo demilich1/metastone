@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
@@ -22,13 +21,14 @@ public class DamageRandomSpell extends DamageSpell {
 	@Override
 	public void cast(GameContext context, Player player, List<Entity> targets) {
 		int missiles = iterations;
-		if (applySpellpower) {
-			missiles += context.getLogic().getTotalTagValue(player, GameTag.SPELL_POWER);
+		if (getSource() == SpellSource.SPELL_CARD) {
+			missiles = context.getLogic().applySpellpower(player, missiles);
+			missiles = context.getLogic().applyAmplify(player, missiles);
 		}
 		for (int i = 0; i < missiles; i++) {
 			List<Actor> validTargets = getValidTargets(targets);
 			Actor randomTarget = getRandomTarget(validTargets);
-			context.getLogic().damage(player, randomTarget, getDamage(), false);
+			context.getLogic().damage(player, randomTarget, getDamage(), SpellSource.SPELL_TRIGGER);
 		}
 	}
 

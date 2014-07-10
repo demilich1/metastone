@@ -15,14 +15,14 @@ public class MountainGiant extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion();
-	}
-	
-	@Override
 	public int getManaCost(GameContext context, Player player) {
 		int cardCount = player.getHand().getCount() - 1; 
 		return Math.min(super.getManaCost(context, player) - cardCount, getBaseManaCost());
+	}
+	
+	@Override
+	public Minion summon() {
+		return createMinion();
 	}
 
 }

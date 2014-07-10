@@ -13,7 +13,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 public class Player implements Cloneable {
 
 	private final String name;
-	private final Hero hero;
+	private Hero hero;
 
 	private final CardCollection deck;
 	private final CardCollection hand = new CardCollection();
@@ -30,7 +30,7 @@ public class Player implements Cloneable {
 
 	private Player(Player otherPlayer) {
 		this.name = otherPlayer.name;
-		this.hero = otherPlayer.hero.clone();
+		this.setHero(otherPlayer.getHero().clone());
 		this.deck = otherPlayer.getDeck().clone();
 		for (Minion minion : otherPlayer.getMinions()) {
 			minions.add(minion.clone());
@@ -48,7 +48,7 @@ public class Player implements Cloneable {
 	
 	public Player(String name, Hero hero, CardCollection deck) {
 		this.name = name;
-		this.hero = hero;
+		this.setHero(hero);
 		this.deck = deck;
 	}
 	
@@ -100,7 +100,7 @@ public class Player implements Cloneable {
 	}
 
 	public String getName() {
-		return "'" + name + "' (" + hero.getName() + ")";
+		return "'" + name + "' (" + getHero().getName() + ")";
 	}
 
 	public List<Integer> getSecrets() {
@@ -111,10 +111,14 @@ public class Player implements Cloneable {
 		this.behaviour = behaviour;
 	}
 
+	public void setHero(Hero hero) {
+		this.hero = hero;
+	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public void setMana(int mana) {
 		this.mana = mana;
 	}

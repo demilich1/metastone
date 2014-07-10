@@ -11,19 +11,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnEndTrigger;
 
 public class Hogger extends MinionCard {
 
-	public Hogger() {
-		super("Hogger", 4, 4, Rarity.LEGENDARY, HeroClass.ANY, 6);
-		setDescription("At the end of your turn, summon a 2/2 Gnoll with Taunt.");
-	}
-
-	@Override
-	public Minion summon() {
-		Minion hogger = createMinion();
-		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), new SummonSpell(new Gnoll()));
-		hogger.setSpellTrigger(trigger);
-		return hogger;
-	}
-
 	private class Gnoll extends MinionCard {
 
 		public Gnoll() {
@@ -36,6 +23,19 @@ public class Hogger extends MinionCard {
 			return createMinion(GameTag.TAUNT);
 		}
 
+	}
+
+	public Hogger() {
+		super("Hogger", 4, 4, Rarity.LEGENDARY, HeroClass.ANY, 6);
+		setDescription("At the end of your turn, summon a 2/2 Gnoll with Taunt.");
+	}
+
+	@Override
+	public Minion summon() {
+		Minion hogger = createMinion();
+		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), new SummonSpell(new Gnoll()));
+		hogger.setSpellTrigger(trigger);
+		return hogger;
 	}
 
 }

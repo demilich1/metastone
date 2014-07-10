@@ -15,6 +15,18 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class KingMukla extends MinionCard {
 
+	private class Bananas extends SpellCard {
+
+		public Bananas() {
+			super("Bananas", Rarity.FREE, HeroClass.ANY, 1);
+			setCollectible(false);
+
+			setSpell(new BuffSpell(1, 1));
+			setTargetRequirement(TargetSelection.MINIONS);
+		}
+
+	}
+
 	public KingMukla() {
 		super("King Mukla", 5, 5, Rarity.LEGENDARY, HeroClass.ANY, 3);
 		setDescription("Battlecry: Give your opponent 2 Bananas.");
@@ -28,18 +40,6 @@ public class KingMukla extends MinionCard {
 		Battlecry battlecry = Battlecry.createBattlecry(bananasSpell);
 		kingMukla.setBattlecry(battlecry);
 		return kingMukla;
-	}
-
-	private class Bananas extends SpellCard {
-
-		public Bananas() {
-			super("Bananas", Rarity.FREE, HeroClass.ANY, 1);
-			setCollectible(false);
-
-			setSpell(new BuffSpell(1, 1));
-			setTargetRequirement(TargetSelection.MINIONS);
-		}
-
 	}
 
 }

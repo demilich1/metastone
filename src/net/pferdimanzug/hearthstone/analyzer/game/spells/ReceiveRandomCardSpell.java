@@ -17,6 +17,11 @@ public class ReceiveRandomCardSpell extends Spell {
 		this.cards = cards;
 	}
 
+	private Card getRandomCard() {
+		int randomIndex = ThreadLocalRandom.current().nextInt(cards.length);
+		return cards[randomIndex];
+	}
+	
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
 		Player opponent = context.getOpponent(player);
@@ -33,15 +38,10 @@ public class ReceiveRandomCardSpell extends Spell {
 			break;
 		}
 	}
-	
+
 	private void receiveRandomCard(GameContext context, Player player) {
 		Card randomCard = getRandomCard();
 		context.getLogic().receiveCard(player.getId(), randomCard.clone());
-	}
-
-	private Card getRandomCard() {
-		int randomIndex = ThreadLocalRandom.current().nextInt(cards.length);
-		return cards[randomIndex];
 	}
 
 }

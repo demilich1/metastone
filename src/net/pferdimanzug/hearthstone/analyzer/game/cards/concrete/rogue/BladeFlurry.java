@@ -22,7 +22,7 @@ public class BladeFlurry extends SpellCard {
 		damageSpell.setTarget(EntityReference.ENEMY_CHARACTERS);
 		Spell destroyWeaponSpell = new DestroyWeaponSpell();
 		destroyWeaponSpell.setTarget(EntityReference.FRIENDLY_HERO);
-		setSpell(new MetaSpell(damageSpell, new DestroyWeaponSpell()));
+		setSpell(new MetaSpell(damageSpell, destroyWeaponSpell));
 		setTargetRequirement(TargetSelection.NONE);
 	}
 

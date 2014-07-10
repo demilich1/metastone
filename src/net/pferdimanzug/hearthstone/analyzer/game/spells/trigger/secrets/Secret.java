@@ -4,6 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.SpellSource;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerLayer;
 
@@ -13,7 +14,7 @@ public class Secret extends SpellTrigger {
 
 	public Secret(SecretTrigger trigger, Spell spell, Card source) {
 		super(trigger, spell, true);
-		spell.setApplySpellpower(true);
+		spell.setSource(SpellSource.SPELL_CARD);
 		this.source = source;
 		setLayer(TriggerLayer.SECRET);
 	}

@@ -10,9 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class CopyCardSpell extends Spell {
-	
+
 	private static Logger logger = LoggerFactory.getLogger(CopyCardSpell.class);
-	
+
 	private final CardLocation cardLocation;
 	private final int numberOfCardsToCopy;
 
@@ -41,7 +41,7 @@ public class CopyCardSpell extends Spell {
 			logger.error("Trying to copy cards from invalid cardLocation {}", cardLocation);
 			break;
 		}
-		
+
 		for (int i = 0; i < numberOfCardsToCopy; i++) {
 			if (source.isEmpty()) {
 				return;

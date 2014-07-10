@@ -23,15 +23,15 @@ public class DrawCardSpell extends Spell {
 		this(null, numberOfCards, targetPlayer);
 	}
 
-	public DrawCardSpell(IValueProvider drawModifier, TargetPlayer targetPlayer) {
-		this(drawModifier, 0, targetPlayer);
-	}
-
 	private DrawCardSpell(IValueProvider drawModifier, int numberOfCards, TargetPlayer targetPlayer) {
 		this.drawModifier = drawModifier;
 		this.numberOfCards = numberOfCards;
 		this.targetPlayer = targetPlayer;
 		setTarget(EntityReference.NONE);
+	}
+
+	public DrawCardSpell(IValueProvider drawModifier, TargetPlayer targetPlayer) {
+		this(drawModifier, 0, targetPlayer);
 	}
 
 	private void draw(GameContext context, Player player) {

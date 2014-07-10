@@ -5,6 +5,7 @@ public enum CardLocation {
 	DECK,
 	GRAVEYARD,
 	HERO_POWER,
-	PENDING
+	PENDING,
+	EVENT
 
 }

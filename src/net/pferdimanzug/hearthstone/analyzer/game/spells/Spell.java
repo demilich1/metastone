@@ -11,12 +11,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 public abstract class Spell implements Cloneable {
 
 	private EntityReference target;
-	protected boolean applySpellpower;
-	private EntityReference source;
-
-	public boolean applySpellpower() {
-		return applySpellpower;
-	}
+	private SpellSource source;
+	private EntityReference sourceEntity;
 
 	public void cast(GameContext context, Player player, List<Entity> targets) {
 		if (targets == null) {
@@ -43,10 +39,14 @@ public abstract class Spell implements Cloneable {
 		return targets.get(randomIndex);
 	}
 
-	public EntityReference getSource() {
+	public SpellSource getSource() {
 		return source;
 	}
 
+	public EntityReference getSourceEntity() {
+		return sourceEntity;
+	}
+	
 	public EntityReference getTarget() {
 		return target;
 	}
@@ -60,12 +60,12 @@ public abstract class Spell implements Cloneable {
 
 	protected abstract void onCast(GameContext context, Player player, Entity target);
 
-	public void setApplySpellpower(boolean applySpellpower) {
-		this.applySpellpower = applySpellpower;
+	public void setSource(SpellSource source) {
+		this.source = source;
 	}
 
-	public void setSource(EntityReference source) {
-		this.source = source;
+	public void setSourceEntity(EntityReference sourceEntity) {
+		this.sourceEntity = sourceEntity;
 	}
 
 	public void setTarget(EntityReference target) {
@@ -74,7 +74,7 @@ public abstract class Spell implements Cloneable {
 
 	@Override
 	public String toString() {
-		return "[SPELL " + getClass().getSimpleName() + " target=" + target + ", applySpellpower=" + applySpellpower + ", source=" + source
+		return "[SPELL " + getClass().getSimpleName() + " target=" + target + ", source=" + source
 				+ "]";
 	}
 

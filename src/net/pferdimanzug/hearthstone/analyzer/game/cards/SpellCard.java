@@ -7,6 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.SpellSource;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
@@ -64,7 +65,7 @@ public abstract class SpellCard extends Card {
 					spell.setTarget(getTargetKey());
 				}
 
-				context.getLogic().castSpell(playerId, spell, SpellCard.this);
+				context.getLogic().castSpell(playerId, spell);
 			}
 		};
 	}
@@ -75,7 +76,7 @@ public abstract class SpellCard extends Card {
 
 	public void setSpell(Spell spell) {
 		this.spell = spell;
-		spell.setApplySpellpower(true);
+		spell.setSource(SpellSource.SPELL_CARD);
 	}
 
 	public void setTargetRequirement(TargetSelection targetRequirement) {

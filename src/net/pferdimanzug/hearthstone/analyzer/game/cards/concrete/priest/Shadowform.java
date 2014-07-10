@@ -16,13 +16,14 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Shadowform extends SpellCard {
 
-	public Shadowform() {
-		super("Shadowform", Rarity.EPIC, HeroClass.PRIEST, 3);
-		setDescription("Your Hero Power becomes 'Deal 2 damage'. If already in Shadowform: 3 damage.");
+	private class MindShatter extends HeroPower {
+
+		public MindShatter() {
+			super("Mind Shatter", HeroClass.PRIEST);
+			setTargetRequirement(TargetSelection.ANY);
+			setSpell(new DamageSpell(3));
+		}
 		
-		setSpell(new ShadowformSpell());
-		setPredefinedTarget(EntityReference.FRIENDLY_HERO);
-		setTargetRequirement(TargetSelection.NONE);
 	}
 	
 	private class MindSpike extends HeroPower {
@@ -31,16 +32,6 @@ public class Shadowform extends SpellCard {
 			super("Mind Spike", HeroClass.PRIEST);
 			setTargetRequirement(TargetSelection.ANY);
 			setSpell(new DamageSpell(2));
-		}
-		
-	}
-	
-	private class MindShatter extends HeroPower {
-
-		public MindShatter() {
-			super("Mind Shatter", HeroClass.PRIEST);
-			setTargetRequirement(TargetSelection.ANY);
-			setSpell(new DamageSpell(3));
 		}
 		
 	}
@@ -56,6 +47,15 @@ public class Shadowform extends SpellCard {
 			context.getLogic().castSpell(player.getId(), changeHeroPowerSpell);
 		}
 		
+	}
+	
+	public Shadowform() {
+		super("Shadowform", Rarity.EPIC, HeroClass.PRIEST, 3);
+		setDescription("Your Hero Power becomes 'Deal 2 damage'. If already in Shadowform: 3 damage.");
+		
+		setSpell(new ShadowformSpell());
+		setPredefinedTarget(EntityReference.FRIENDLY_HERO);
+		setTargetRequirement(TargetSelection.NONE);
 	}
 
 

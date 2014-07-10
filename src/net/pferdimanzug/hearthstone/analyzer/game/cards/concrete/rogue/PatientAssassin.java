@@ -23,7 +23,7 @@ public class PatientAssassin extends MinionCard {
 		Minion patientAssassin = createMinion(GameTag.STEALTHED);
 		Spell killSpell = new DestroySpell();
 		killSpell.setTarget(EntityReference.EVENT_TARGET);
-		patientAssassin.setSpellTrigger(new SpellTrigger(new PhysicalAttackTrigger(), killSpell));
+		patientAssassin.setSpellTrigger(new SpellTrigger(new PhysicalAttackTrigger(false), killSpell));
 		return patientAssassin;
 	}
 

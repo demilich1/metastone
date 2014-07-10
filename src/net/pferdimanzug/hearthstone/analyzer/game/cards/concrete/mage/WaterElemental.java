@@ -23,7 +23,7 @@ public class WaterElemental extends MinionCard {
 		Minion waterElemental = createMinion();
 		Spell freezeSpell = new ApplyTagSpell(GameTag.FROZEN);
 		freezeSpell.setTarget(EntityReference.EVENT_TARGET);
-		waterElemental.setSpellTrigger(new SpellTrigger(new PhysicalAttackTrigger(), freezeSpell));
+		waterElemental.setSpellTrigger(new SpellTrigger(new PhysicalAttackTrigger(true), freezeSpell));
 		return waterElemental;
 	}
 

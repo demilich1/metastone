@@ -11,6 +11,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.Fireblast;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.LesserHeal;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.LifeTap;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.SpellSource;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -33,7 +34,7 @@ public class HeroPowerTest extends TestBase {
 			
 			@Override
 			public void execute(GameContext context, int playerId) {
-				context.getLogic().damage(context.getPlayer1(), warrior, 2 * ArmorUp.ARMOR_BONUS, false);
+				context.getLogic().damage(context.getPlayer1(), warrior, 2 * ArmorUp.ARMOR_BONUS, SpellSource.SPELL_TRIGGER);
 			}
 		};
 		damage.setTarget(warrior);
@@ -49,7 +50,7 @@ public class HeroPowerTest extends TestBase {
 			
 			@Override
 			public void execute(GameContext context, int playerId) {
-				context.getLogic().damage(context.getPlayer1(), warrior, ArmorUp.ARMOR_BONUS / 2, false);
+				context.getLogic().damage(context.getPlayer1(), warrior, ArmorUp.ARMOR_BONUS / 2, SpellSource.SPELL_TRIGGER);
 			}
 		};
 		damage.setTarget(warrior);

@@ -13,6 +13,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.ApplyTagSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.SpellSource;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnStartTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
@@ -24,9 +25,10 @@ public class ConeOfCold extends SpellCard {
 		private final Spell freeze = new ApplyTagSpell(GameTag.FROZEN, new TurnStartTrigger());
 		
 		public ConeOfColdSpell() {
-			damage.setApplySpellpower(true);
+			damage.setSource(SpellSource.SPELL_CARD);
+			freeze.setSource(SpellSource.SPELL_CARD);
 		}
-
+		
 		@Override
 		protected void onCast(GameContext context, Player player, Entity target) {
 			List<Entity> affected = context.getAdjacentMinions(player, target.getReference());

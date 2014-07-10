@@ -15,14 +15,14 @@ public class MoltenGiant extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion();
-	}
-	
-	@Override
 	public int getManaCost(GameContext context, Player player) {
 		int hpDiff = player.getHero().getMaxHp() - player.getHero().getHp(); 
 		return super.getManaCost(context, player) - hpDiff;
+	}
+	
+	@Override
+	public Minion summon() {
+		return createMinion();
 	}
 
 }

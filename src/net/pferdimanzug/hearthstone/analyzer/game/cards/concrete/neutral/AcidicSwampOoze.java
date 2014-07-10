@@ -21,7 +21,7 @@ public class AcidicSwampOoze extends MinionCard {
 		Minion acidicSwampOoze = createMinion();
 		Spell destroyWeaponSpell = new DestroyWeaponSpell();
 		destroyWeaponSpell.setTarget(EntityReference.ENEMY_HERO);
-		Battlecry battlecry = Battlecry.createBattlecry(new DestroyWeaponSpell());
+		Battlecry battlecry = Battlecry.createBattlecry(destroyWeaponSpell);
 		acidicSwampOoze.setBattlecry(battlecry);
 		return acidicSwampOoze;
 	}

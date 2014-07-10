@@ -6,6 +6,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.SpellSource;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 import org.slf4j.Logger;
@@ -26,6 +27,7 @@ public class SpellTrigger implements Cloneable {
 		this.primaryTrigger = primaryTrigger;
 		this.secondaryTrigger = secondaryTrigger;
 		this.spell = spell;
+		spell.setSource(SpellSource.SPELL_TRIGGER);
 		this.oneTime = oneTime;
 	}
 
@@ -115,7 +117,7 @@ public class SpellTrigger implements Cloneable {
 
 	public void setHost(Entity host) {
 		this.hostReference = host.getReference();
-		spell.setSource(hostReference);
+		spell.setSourceEntity(hostReference);
 	}
 
 	protected void setLayer(TriggerLayer layer) {

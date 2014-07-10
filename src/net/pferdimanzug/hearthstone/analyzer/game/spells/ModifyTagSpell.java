@@ -31,6 +31,11 @@ public class ModifyTagSpell extends RevertableSpell {
 	}
 
 	@Override
+	protected Spell getReverseSpell() {
+		return new ModifyTagSpell(tag, -delta);
+	}
+
+	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
 		if (logger.isDebugEnabled()) {
 			if (delta > 0) {
@@ -42,11 +47,6 @@ public class ModifyTagSpell extends RevertableSpell {
 
 		target.modifyTag(tag, delta);
 		super.onCast(context, player, target);
-	}
-
-	@Override
-	protected Spell getReverseSpell() {
-		return new ModifyTagSpell(tag, -delta);
 	}
 
 }

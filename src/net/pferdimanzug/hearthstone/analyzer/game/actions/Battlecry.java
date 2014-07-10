@@ -6,6 +6,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.SpellSource;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Battlecry extends GameAction {
@@ -27,6 +28,7 @@ public class Battlecry extends GameAction {
 
 	protected Battlecry(Spell spell) {
 		this.spell = spell;
+		spell.setSource(SpellSource.SPELL_TRIGGER);
 		setActionType(ActionType.BATTLECRY);
 	}
 
@@ -58,12 +60,16 @@ public class Battlecry extends GameAction {
 			spell.setTarget(getTargetKey());
 		}
 		
-		spell.setSource(getSource());
+		spell.setSourceEntity(getSource());
 		context.getLogic().castSpell(playerId, spell);
 	}
 
 	public IBattlecryCondition getCondition() {
 		return condition;
+	}
+
+	public Predicate<Entity> getEntityFilter() {
+		return entityFilter;
 	}
 
 	public boolean isResolvedLate() {
@@ -74,15 +80,11 @@ public class Battlecry extends GameAction {
 		this.condition = condition;
 	}
 
-	public void setResolvedLate(boolean resolvedLate) {
-		this.resolvedLate = resolvedLate;
-	}
-
-	public Predicate<Entity> getEntityFilter() {
-		return entityFilter;
-	}
-
 	public void setEntityFilter(Predicate<Entity> entityFilter) {
 		this.entityFilter = entityFilter;
+	}
+
+	public void setResolvedLate(boolean resolvedLate) {
+		this.resolvedLate = resolvedLate;
 	}
 }

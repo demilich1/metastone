@@ -6,6 +6,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnEndTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +26,7 @@ public class BuffHeroSpell extends RevertableSpell {
 		super(revert ? new TurnEndTrigger() :null);
 		this.attackBonus = attackBonus;
 		this.armorBonus = armorBonus;
+		setTarget(EntityReference.FRIENDLY_HERO);
 	}
 
 	@Override
@@ -34,7 +36,7 @@ public class BuffHeroSpell extends RevertableSpell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
-		Hero hero = player.getHero();
+		Hero hero = (Hero) target;
 		if (attackBonus != 0) {
 			logger.debug("{} gains {} attack", hero, attackBonus);
 			hero.modifyTag(GameTag.ATTACK_BONUS, +attackBonus);

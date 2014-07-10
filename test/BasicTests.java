@@ -67,7 +67,6 @@ public class BasicTests extends TestBase {
 		context.getLogic().performGameAction(mage.getId(), devMonsterCard.play());
 		
 		BuffHeroSpell heroBuffSpell = new BuffHeroSpell(damage, 0);
-		heroBuffSpell.setTarget(EntityReference.pointTo(druid.getHero()));
 		context.getLogic().castSpell(druid.getId(), heroBuffSpell);
 		context.getLogic().endTurn(druid.getId());
 		

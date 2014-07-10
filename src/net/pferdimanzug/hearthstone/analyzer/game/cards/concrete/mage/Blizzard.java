@@ -16,9 +16,11 @@ public class Blizzard extends SpellCard {
 
 	public Blizzard() {
 		super("Blizzard", Rarity.RARE, HeroClass.MAGE, 6);
+		setDescription("Deal $2 damage to all enemy minions and Freeze them.");
 
 		Spell blizzardSpell = new MetaSpell(new DamageSpell(2), new ApplyTagSpell(GameTag.FROZEN, new TurnStartTrigger()));
 		blizzardSpell.setTarget(EntityReference.ENEMY_MINIONS);
+		setSpell(blizzardSpell);
 		setTargetRequirement(TargetSelection.NONE);
 	}
 

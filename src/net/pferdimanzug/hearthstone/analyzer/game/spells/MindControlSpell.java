@@ -17,6 +17,7 @@ public class MindControlSpell extends Spell {
 		logger.debug("{} mind controls {}", player.getName(), target);
 		context.getOpponent(player).getMinions().remove(minion);
 		player.getMinions().add(minion);
+		//TODO: we need to change the owner of all spelltriggers as well
 		minion.setOwner(player.getId());
 	}
 

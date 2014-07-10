@@ -5,15 +5,14 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class AuraSpellBuff extends Spell {
-	
-	private static Logger logger = LoggerFactory.getLogger(BuffSpell.class);
+
+	private static Logger logger = LoggerFactory.getLogger(AuraSpellBuff.class);
 
 	private int attackBonus;
 	private int hpBonus;
@@ -46,6 +45,5 @@ public class AuraSpellBuff extends Spell {
 			targetActor.modifyAuraHpBonus(hpBonus);
 		}
 
-		
 	}
 }

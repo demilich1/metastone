@@ -18,22 +18,6 @@ import org.slf4j.LoggerFactory;
 
 public class Alexstrasza extends MinionCard {
 	
-	private static final Logger logger = LoggerFactory.getLogger(AlexstraszaSpell.class);
-
-	public Alexstrasza() {
-		super("Alexstrasza", 8, 8, Rarity.LEGENDARY, HeroClass.ANY, 9);
-		setDescription("Battlecry: Set a hero's remaining Health to 15.");
-		setRace(Race.DRAGON);
-	}
-
-	@Override
-	public Minion summon() {
-		Minion alexstrasza = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new AlexstraszaSpell(), TargetSelection.HEROES);
-		alexstrasza.setBattlecry(battlecry);
-		return alexstrasza;
-	}
-	
 	private class AlexstraszaSpell extends Spell {
 		
 		@Override
@@ -42,6 +26,22 @@ public class Alexstrasza extends MinionCard {
 			actor.setHp(15);
 			logger.debug("{}'s Hp have been set to {}", actor, actor.getHp());
 		}
+	}
+
+	private static final Logger logger = LoggerFactory.getLogger(AlexstraszaSpell.class);
+
+	public Alexstrasza() {
+		super("Alexstrasza", 8, 8, Rarity.LEGENDARY, HeroClass.ANY, 9);
+		setDescription("Battlecry: Set a hero's remaining Health to 15.");
+		setRace(Race.DRAGON);
+	}
+	
+	@Override
+	public Minion summon() {
+		Minion alexstrasza = createMinion();
+		Battlecry battlecry = Battlecry.createBattlecry(new AlexstraszaSpell(), TargetSelection.HEROES);
+		alexstrasza.setBattlecry(battlecry);
+		return alexstrasza;
 	}
 
 }

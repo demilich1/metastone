@@ -8,18 +8,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
 
 public class CairneBloodhoof extends MinionCard {
 
-	public CairneBloodhoof() {
-		super("Cairne Bloodhoof", 4, 5, Rarity.LEGENDARY, HeroClass.ANY, 6);
-		setDescription("Deathrattle: Summon a 4/5 Baine Bloodhoof.");
-	}
-
-	@Override
-	public Minion summon() {
-		Minion cairneBloodhoof = createMinion();
-		cairneBloodhoof.addDeathrattle(new SummonSpell(new BaineBloodhoof()));
-		return cairneBloodhoof;
-	}
-
 	private class BaineBloodhoof extends MinionCard {
 
 		public BaineBloodhoof() {
@@ -32,6 +20,18 @@ public class CairneBloodhoof extends MinionCard {
 			return createMinion();
 		}
 
+	}
+
+	public CairneBloodhoof() {
+		super("Cairne Bloodhoof", 4, 5, Rarity.LEGENDARY, HeroClass.ANY, 6);
+		setDescription("Deathrattle: Summon a 4/5 Baine Bloodhoof.");
+	}
+
+	@Override
+	public Minion summon() {
+		Minion cairneBloodhoof = createMinion();
+		cairneBloodhoof.addDeathrattle(new SummonSpell(new BaineBloodhoof()));
+		return cairneBloodhoof;
 	}
 
 }
