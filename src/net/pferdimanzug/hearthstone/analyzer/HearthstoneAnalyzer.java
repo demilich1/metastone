@@ -12,9 +12,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.NoAggressionBehaviou
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Innervate;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.ArcaneMissiles;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.AbusiveSergeant;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.KoboldGeomancer;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.MadBomber;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.Onyxia;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.TinkmasterOverspark;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.Ysera;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.ProphetVelen;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
@@ -69,7 +72,7 @@ public class HearthstoneAnalyzer extends Application {
 		Hero hero1 = HeroFactory.createHero(humanHeroClass);
 		// Player player1 = new Player("Human", hero1,
 		// DebugDecks.getRandomDeck(hero1.getHeroClass()));
-		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new ProphetVelen(), new Innervate(), new ArcaneMissiles(), new MadBomber(), new KoboldGeomancer()));
+		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new Ysera(), new Innervate()));
 		player1.setBehaviour(new HumanBehaviour());
 
 		Hero hero2 = HeroFactory.createHero(aiHeroClass);

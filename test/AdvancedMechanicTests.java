@@ -261,12 +261,6 @@ public class AdvancedMechanicTests extends BasicTests {
 		warrior.setMana(10);
 		
 		int baseAttack = 1;
-		MinionCard devMonster = new TestMinionCard(baseAttack, 1);
-		mage.getHand().add(devMonster);
-		MinionCard abusiveSergeant = new AbusiveSergeant();
-		mage.getHand().add(abusiveSergeant);
-		
-		context.getLogic().performGameAction(mage.getId(), devMonster.play());
 		mage.setBehaviour(new IBehaviour() {
 			
 			@Override
@@ -279,9 +273,12 @@ public class AdvancedMechanicTests extends BasicTests {
 				return null;
 			}
 		});
+		
+		playCard(context, mage, new TestMinionCard(baseAttack, 1));
 		Actor testSubject = getSingleMinion(mage.getMinions());
 		Assert.assertEquals(testSubject.getAttack(), baseAttack);
-		context.getLogic().performGameAction(mage.getId(), abusiveSergeant.play());
+		
+		playCard(context, mage, new AbusiveSergeant());
 		Assert.assertEquals(testSubject.getAttack(), baseAttack + AbusiveSergeant.ATTACK_BONUS);
 		context.getLogic().endTurn(mage.getId());
 		Assert.assertEquals(testSubject.getAttack(), baseAttack);

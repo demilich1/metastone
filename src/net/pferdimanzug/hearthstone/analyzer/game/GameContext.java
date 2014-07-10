@@ -3,6 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.game;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Stack;
 
 import net.pferdimanzug.hearthstone.analyzer.game.actions.EndTurnAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
@@ -119,6 +120,14 @@ public class GameContext implements Cloneable {
 	
 	public HashMap<Environment, Object> getEnvironment() {
 		return environment;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Stack<Minion> getSummonStack() {
+		if (!environment.containsKey(Environment.SUMMON_STACK)) {
+			environment.put(Environment.SUMMON_STACK, new Stack<Minion>());
+		}
+		return (Stack<Minion>) environment.get(Environment.SUMMON_STACK);
 	}
 
 	public GameLogic getLogic() {

@@ -4,22 +4,17 @@ import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
-public class TransformRandomMinionSpell extends TransformMinionSpell {
-
-	public TransformRandomMinionSpell(MinionCard templateCard) {
-		super(templateCard);
-	}
-
+public class MindControlRandomSpell extends MindControlSpell {
+	
 	@Override
 	public void cast(GameContext context, Player player, List<Entity> targets) {
-		if (targets.isEmpty()) {
+		if (targets == null || targets.isEmpty()) {
 			return;
 		}
-		Entity randomTarget = getRandomTarget(targets);
-		super.onCast(context, player, randomTarget);
+		int randomIndex = context.getLogic().random(targets.size());
+		onCast(context, player, targets.get(randomIndex));
 	}
 
 }

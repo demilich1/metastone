@@ -1,7 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game;
 
 public enum Environment {
-	SUMMONED_MINION,
+	SUMMON_STACK,
 	SUMMONED_WEAPON,
 	KILLED_MINION,
 	PENDING_CARD,

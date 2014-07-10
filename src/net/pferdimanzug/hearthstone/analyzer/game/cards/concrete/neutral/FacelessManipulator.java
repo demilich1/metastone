@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
-import net.pferdimanzug.hearthstone.analyzer.game.Environment;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
@@ -24,7 +23,7 @@ public class FacelessManipulator extends MinionCard {
 			Minion clone = template.clone();
 			clone.setSpellTrigger(null);
 
-			Minion sourceActor = (Minion) context.getEnvironment().get(Environment.SUMMONED_MINION);
+			Minion sourceActor = context.getSummonStack().peek();
 			TransformMinionSpell transformSpell = new TransformMinionSpell(clone);
 			transformSpell.setTarget(sourceActor.getReference());
 			context.getLogic().castSpell(player.getId(), transformSpell);

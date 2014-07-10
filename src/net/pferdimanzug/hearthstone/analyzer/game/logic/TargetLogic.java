@@ -82,8 +82,8 @@ public class TargetLogic {
 
 	private Actor findInEnvironment(GameContext context, EntityReference targetKey) {
 		int targetId = targetKey.getId();
-		if (context.getEnvironment().containsKey(Environment.SUMMONED_MINION)) {
-			Minion summonedMinion = (Minion) context.getEnvironment().get(Environment.SUMMONED_MINION);
+		if (!context.getSummonStack().isEmpty()) {
+			Minion summonedMinion = context.getSummonStack().peek();
 			if (summonedMinion.getId() == targetId) {
 				return summonedMinion;
 			}
