@@ -1,8 +1,10 @@
 package net.pferdimanzug.hearthstone.analyzer.game.logic;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 import net.pferdimanzug.hearthstone.analyzer.game.Environment;
@@ -179,8 +181,13 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void changeHero(Player player, Hero hero) {
-		// TODO: probably need to copy spelltriggers and tags here
-		hero.setId(idFactory.generateId());
+		hero.setId(player.getHero().getId());
+		
+		HashMap<GameTag, Object> tagsToCopy = player.getHero().getTagsCopy();
+		for (Map.Entry<GameTag, Object> entry : tagsToCopy.entrySet()) {
+			hero.setTag(entry.getKey(), entry.getValue());
+		}
+		
 		logger.debug("{}'s hero has been changed to {}", player.getName(), hero);
 		hero.setOwner(player.getId());
 		player.setHero(hero);

@@ -1,0 +1,17 @@
+#classButton {
+	-fx-font-size: 24pt;
+    -fx-font-family: "Arial";
+    -fx-fill: darkgrey;
+}
+
+#defaultButton {
+	-fx-font-size: 18pt;
+    -fx-font-family: "Arial";
+    -fx-fill: darkgrey;
+}
+
+#defaultLabel {
+	-fx-font-size: 18pt;
+    -fx-font-family: "Arial";
+    -fx-fill: darkgrey;
+}

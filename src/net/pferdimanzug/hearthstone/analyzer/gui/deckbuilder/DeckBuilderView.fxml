@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" stylesheets="@../main.css" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <Text id="header" strokeType="OUTSIDE" strokeWidth="0.0" text="Deck Builder" BorderPane.alignment="CENTER" />
+   </top>
+   <padding>
+      <Insets top="20.0" />
+   </padding>
+   <right>
+      <ScrollPane id="panel" fx:id="contentList" prefWidth="240.0" BorderPane.alignment="CENTER">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+        </content>
+      </ScrollPane>
+   </right>
+   <center>
+      <Pane fx:id="contentArea" BorderPane.alignment="CENTER" />
+   </center>
+</fx:root>

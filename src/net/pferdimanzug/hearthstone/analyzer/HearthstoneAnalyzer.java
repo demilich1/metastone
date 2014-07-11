@@ -23,7 +23,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
-import net.pferdimanzug.hearthstone.analyzer.playmode.GameContextVisualizable;
+import net.pferdimanzug.hearthstone.analyzer.gui.playmode.GameContextVisualizable;
 
 public class HearthstoneAnalyzer extends Application {
 
@@ -31,7 +31,7 @@ public class HearthstoneAnalyzer extends Application {
 		//DevCheckCardCompleteness.updateCardCatalogue();
 		//DevCheckCardCompleteness.writeImplementedCardsToFile("implemented_cards.csv");
 		launch(args);
-		// new HearthstoneAnalyzer().launchDebugGame();
+		 //new HearthstoneAnalyzer().launchDebugGame();
 	}
 
 	private void launchDebugGame() {
@@ -99,23 +99,16 @@ public class HearthstoneAnalyzer extends Application {
 		facade.sendNotification(GameNotification.CANVAS_CREATED, canvas);
 		primaryStage.show();
 
-		Thread t = new Thread(new Runnable() {
+//		Thread t = new Thread(new Runnable() {
+//
+//			@Override
+//			public void run() {
+//				instance.launchHumanDebugGame();
+//			}
+//		});
+//		t.setDaemon(true);
+//		t.start();
 
-			@Override
-			public void run() {
-				instance.launchHumanDebugGame();
-			}
-		});
-		t.setDaemon(true);
-		t.start();
-
-		/*
-		 * try { DevCheckCardCompleteness.cardListFromImages(
-		 * "D:\\projects\\images\\hearthstone\\cards\\");
-		 * //DevCheckCardCompleteness.compareClassesWithCardList(
-		 * "D:\\projects\\java\\HearthstoneAnalyzer\\src\\net\\pferdimanzug\\hearthstone\\analyzer\\game\\cards\\concrete"
-		 * ); } catch (IOException e) { e.printStackTrace(); }
-		 */
 	}
 
 }

@@ -1,0 +1,10 @@
+#panel {
+	-fx-background-color: navajowhite;
+}
+
+#header {
+	-fx-font-size: 24pt;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-fill: darkgrey;
+}

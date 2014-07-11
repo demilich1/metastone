@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0" spacing="128.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button id="defaultButton" fx:id="previousButton" contentDisplay="CENTER" mnemonicParsing="false" text="&lt;&lt;" />
+            <Label id="defaultLabel" fx:id="pageLabel" alignment="CENTER" contentDisplay="CENTER" text="Label" />
+            <Button id="defaultButton" fx:id="nextButton" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" text="&gt;&gt;" />
+         </children>
+      </HBox>
+   </bottom>
+   <stylesheets>
+      <URL value="@../main.css" />
+      <URL value="@deckbuilder.css" />
+   </stylesheets>
+   <center>
+      <GridPane fx:id="contentPane" BorderPane.alignment="CENTER">
+        <columnConstraints>
+            <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+   </center>
+</fx:root>

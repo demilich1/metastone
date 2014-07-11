@@ -1,5 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.entities.heroes;
 
+import java.util.HashMap;
+
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
@@ -11,7 +13,7 @@ public abstract class Hero extends Actor {
 	private final HeroClass heroClass;
 	private HeroPower heroPower;
 	private Weapon weapon;
-	
+
 	public Hero(String name, HeroClass heroClass, HeroPower heroPower) {
 		super(null);
 		setName(name);
@@ -34,11 +36,11 @@ public abstract class Hero extends Actor {
 		clone.setHeroPower(getHeroPower().clone());
 		return clone;
 	}
-	
+
 	public int getArmor() {
 		return getTagValue(GameTag.ARMOR);
 	}
-	
+
 	@Override
 	public int getAttack() {
 		int attack = super.getAttack();
@@ -47,7 +49,7 @@ public abstract class Hero extends Actor {
 		}
 		return attack;
 	}
-	
+
 	@Override
 	public EntityType getEntityType() {
 		return EntityType.HERO;
@@ -61,10 +63,22 @@ public abstract class Hero extends Actor {
 		return heroPower;
 	}
 
+	public HashMap<GameTag, Object> getTagsCopy() {
+		HashMap<GameTag, Object> copy = new HashMap<>();
+		for (GameTag tag : tags.keySet()) {
+			if (tag != GameTag.COMBO && tag != GameTag.ONE_TIME_FREE_SECRET && tag != GameTag.ONE_TIME_MINION_MANA_COST
+					&& tag != GameTag.SPELL_MANA_COST) {
+				continue;
+			}
+			copy.put(tag, tags.get(tag));
+		}
+		return copy;
+	}
+
 	public Weapon getWeapon() {
 		return weapon;
 	}
-	
+
 	public void modifyArmor(int armor) {
 		// armor cannot fall below zero
 		int newArmor = Math.max(getArmor() + armor, 0);
@@ -81,5 +95,5 @@ public abstract class Hero extends Actor {
 			weapon.setOwner(getOwner());
 		}
 	}
-	
+
 }

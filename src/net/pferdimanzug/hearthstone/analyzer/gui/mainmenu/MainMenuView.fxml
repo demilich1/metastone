@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button id="button" fx:id="deckBuilderButton" mnemonicParsing="false" prefWidth="200.0" text="Deck Builder" textAlignment="CENTER" />
+            <Button id="button" fx:id="playModeButton" disable="true" layoutX="447.0" layoutY="339.0" mnemonicParsing="false" prefWidth="200.0" text="Play Mode" textAlignment="CENTER" />
+         </children></VBox>
+   </center>
+   <top>
+      <Text id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="HSSim" BorderPane.alignment="CENTER" />
+   </top>
+   <padding>
+      <Insets top="20.0" />
+   </padding>
+   <stylesheets>
+      <URL value="@mainmenu.css" />
+      <URL value="@../main.css" />
+   </stylesheets>
+</fx:root>

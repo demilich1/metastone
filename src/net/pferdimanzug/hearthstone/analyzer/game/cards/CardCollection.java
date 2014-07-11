@@ -104,5 +104,9 @@ public class CardCollection implements Iterable<Card>, Cloneable {
 	public void shuffle() {
 		Collections.shuffle(cards);
 	}
+	
+	public List<Card> toList() {
+		return new ArrayList<>(cards);
+	}
 
 }
