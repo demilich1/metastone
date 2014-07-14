@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.decks;
 
+import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 
@@ -37,5 +38,14 @@ public class Deck {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
+	public int containsHowMany(Card card) {
+		int count = 0;
+		for (Card cardInDeck : cards) {
+			if (card.getTypeId() == cardInDeck.getTypeId()) {
+				count++;
+			}
+		}
+		return count;
+	}
 }

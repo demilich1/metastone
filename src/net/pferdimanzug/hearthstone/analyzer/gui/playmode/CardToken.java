@@ -33,6 +33,7 @@ public class CardToken extends BorderPane {
 	protected ImageView attackIcon;
 	@FXML
 	protected ImageView hpIcon;
+	private Card card;
 
 	protected CardToken(String fxml) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
@@ -47,6 +48,7 @@ public class CardToken extends BorderPane {
 	}
 
 	public void setCard(GameContext context, Card card, Player player) {
+		this.card = card;
 		nameLabel.setText(card.getName());
 		if (context != null || player != null) {
 			int modifiedManaCost = context.getLogic().getModifiedManaCost(player, card);
@@ -90,6 +92,10 @@ public class CardToken extends BorderPane {
 		} else {
 			label.setFill(Color.WHITE);
 		}
+	}
+
+	public Card getCard() {
+		return card;
 	}
 
 }

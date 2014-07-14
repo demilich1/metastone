@@ -3,16 +3,18 @@ package net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder;
 import java.io.IOException;
 import java.util.List;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.gui.playmode.HandCard;
 
-public class CardView extends BorderPane {
+public class CardView extends BorderPane implements EventHandler<MouseEvent> {
 
 	@FXML
 	private GridPane contentPane;
@@ -43,11 +45,11 @@ public class CardView extends BorderPane {
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
-		
-		previousButton.setOnAction(actionEvent->changeOffset(-cardDisplayCount));
-		nextButton.setOnAction(actionEvent->changeOffset(+cardDisplayCount));
+
+		previousButton.setOnAction(actionEvent -> changeOffset(-cardDisplayCount));
+		nextButton.setOnAction(actionEvent -> changeOffset(+cardDisplayCount));
 	}
-	
+
 	private void changeOffset(int delta) {
 		int newOffset = offset + delta;
 		if (newOffset < 0 || newOffset >= cards.size()) {
@@ -71,6 +73,7 @@ public class CardView extends BorderPane {
 		for (int i = offset; i < lastIndex; i++) {
 			Card card = cards.get(i);
 			HandCard cardWidget = new HandCard();
+			cardWidget.addEventHandler(MouseEvent.MOUSE_CLICKED,this);
 			cardWidget.setPrefSize(140, 180);
 			cardWidget.setCard(null, card, null);
 			contentPane.add(cardWidget, currentColumn, currentRow);
@@ -80,6 +83,13 @@ public class CardView extends BorderPane {
 				currentRow++;
 			}
 		}
+	}
+
+	@Override
+	public void handle(MouseEvent event) {
+		HandCard source = (HandCard) event.getSource();
+		Card card = source.getCard();
+		
 	}
 
 }
