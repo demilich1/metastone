@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.*?>
 
-<fx:root id="card_border" prefHeight="240.0" prefWidth="174.0" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root id="card_border" prefHeight="240.0" prefWidth="174.0" stylesheets="@../main.css" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <bottom>
     <StackPane prefHeight="-1.0" prefWidth="-1.0">
       <children>
@@ -44,10 +44,6 @@
       </children>
     </VBox>
   </center>
-  <stylesheets>
-    <URL value="@gameboard.css" />
-      <URL value="@../main.css" />
-  </stylesheets>
   <top>
     <StackPane prefHeight="-1.0" prefWidth="-1.0">
       <children>

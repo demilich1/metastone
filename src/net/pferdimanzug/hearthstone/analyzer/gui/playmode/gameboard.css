@@ -21,10 +21,3 @@
     -fx-font-weight: bold;
     -fx-text-fill: black;
 }
-
-#name_big {
-	-fx-font-size: 14pt;
-    -fx-font-family: "Arial";
-    -fx-font-weight: bold;
-    -fx-text-fill: black;
-}

@@ -57,7 +57,7 @@ public class CardToken extends BorderPane {
 			int modifiedManaCost = context.getLogic().getModifiedManaCost(player, card);
 			setScoreValueLowerIsBetter(manaCostLabel, modifiedManaCost, card.getBaseManaCost());
 		} else {
-			setScoreValueLowerIsBetter(manaCostLabel, card.getBaseManaCost(), card.getBaseManaCost());
+			manaCostLabel.setText(String.valueOf(card.getBaseManaCost()));
 		}
 		
 		boolean isMinionCard = card.getCardType() == CardType.MINION;

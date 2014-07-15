@@ -47,3 +47,11 @@
     -fx-font-weight: bold;
     -fx-font-style : italic;
 }
+
+#name_big {
+	-fx-font-size: 14pt;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+}
+
