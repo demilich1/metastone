@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
@@ -14,10 +15,10 @@
       <Insets top="20.0" />
    </padding>
    <right>
-      <ScrollPane id="panel" fx:id="contentList" prefWidth="240.0" BorderPane.alignment="CENTER">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-        </content>
+      <ScrollPane id="panel" fitToHeight="true" fitToWidth="true" prefViewportWidth="220.0" prefWidth="240.0">
+         <content>
+            <Pane fx:id="contentList" prefWidth="240.0" />
+         </content>
       </ScrollPane>
    </right>
    <center>

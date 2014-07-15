@@ -11,6 +11,8 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
+import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.gui.playmode.HandCard;
 
@@ -89,7 +91,7 @@ public class CardView extends BorderPane implements EventHandler<MouseEvent> {
 	public void handle(MouseEvent event) {
 		HandCard source = (HandCard) event.getSource();
 		Card card = source.getCard();
-		
+		ApplicationFacade.getInstance().sendNotification(GameNotification.ADD_CARD_TO_DECK, card);
 	}
 
 }

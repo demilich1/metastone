@@ -8,3 +8,21 @@
     -fx-font-weight: bold;
     -fx-fill: darkgrey;
 }
+
+#outlined_score {
+ 	-fx-font-size: 14pt;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-fill: white;
+    -fx-stroke: black;
+    -fx-stroke-width: 2;
+}
+
+#outlined_score_yellow {
+ 	-fx-font-size: 14pt;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-fill: yellow;
+    -fx-stroke: black;
+    -fx-stroke-width: 2;
+}

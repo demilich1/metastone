@@ -15,3 +15,16 @@
     -fx-font-family: "Arial";
     -fx-fill: darkgrey;
 }
+
+#card_entry {
+	-fx-border-width: 2;
+	-fx-border-color: black;
+	-fx-background-color: antiquewhite;
+}
+
+#card_entry_name {
+	-fx-font-size: 10pt;
+    -fx-font-family: "Arial";
+    -fx-fill: black;
+    -fx-font-weight: bold;
+}

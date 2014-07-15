@@ -49,5 +49,9 @@ public class DeckProxy extends Proxy<GameNotification> {
 		}
 		return result;
 	}
+	
+	public void removeCardFromDeck(Card card) {
+		activeDeck.getCards().remove(card);
+	}
 
 }
