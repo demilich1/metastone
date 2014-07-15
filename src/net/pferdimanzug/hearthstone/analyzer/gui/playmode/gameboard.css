@@ -2,13 +2,6 @@
 	-fx-background-color: darkkhaki;
 }
 
-#card_border {
-	 -fx-background-color: antiquewhite;
-	 -fx-border-color: black;
-	 -fx-border-style: solid;
-	 -fx-border-width: 1.0;
-}
-
 #center_message {
 	-fx-font-size: 20pt;
     -fx-font-family: "Arial";
@@ -30,7 +23,7 @@
 }
 
 #name_big {
-	-fx-font-size: 16pt;
+	-fx-font-size: 14pt;
     -fx-font-family: "Arial";
     -fx-font-weight: bold;
     -fx-text-fill: black;

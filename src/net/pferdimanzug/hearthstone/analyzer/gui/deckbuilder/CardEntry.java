@@ -22,7 +22,9 @@ public class CardEntry extends HBox {
 	
 	private int stack;
 
-	public CardEntry(Card card) {
+	private Card card;
+
+	public CardEntry() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CardEntry.fxml"));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
@@ -32,15 +34,22 @@ public class CardEntry extends HBox {
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
-
-		addCard(card);
 	}
 
 	public void addCard(Card card) {
+		this.card = card;
 		cardNameLabel.setText(card.getName());
 		manaCostText.setText(String.valueOf(card.getBaseManaCost()));
 		stack++;
 		countText.setText(String.valueOf(stack));
 		countText.setVisible(stack > 1);
+	}
+	
+	public void resetStackCount() {
+		stack = 0;
+	}
+
+	public Card getCard() {
+		return card;
 	}
 }

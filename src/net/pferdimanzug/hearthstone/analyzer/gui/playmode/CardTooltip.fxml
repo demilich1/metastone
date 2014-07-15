@@ -14,12 +14,12 @@
       <children>
         <ImageView fx:id="attackIcon" fitHeight="100.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateX="-8.0" translateY="8.0" StackPane.alignment="BOTTOM_LEFT">
           <image>
-            <Image url="@../resources/img/common/attack_value_icon.png" />
+            <Image url="@../../resources/img/common/attack_value_icon.png" />
           </image>
         </ImageView>
         <ImageView fx:id="hpIcon" fitHeight="100.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateX="8.0" translateY="6.0" StackPane.alignment="BOTTOM_RIGHT">
           <image>
-            <Image url="@../resources/img/common/health_value_icon.png" />
+            <Image url="@../../resources/img/common/health_value_icon.png" />
           </image>
         </ImageView>
         <Text id="outlined_score" fx:id="attackLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="4.0" StackPane.alignment="BOTTOM_LEFT" />
@@ -36,7 +36,7 @@
     <VBox alignment="CENTER" prefHeight="-1.0" prefWidth="-1.0" spacing="16.0" BorderPane.alignment="CENTER">
       <children>
         <Label id="name_big" fx:id="nameLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="150.0" text="&lt;card name&gt;" textAlignment="CENTER" wrapText="true" />
-        <Label fx:id="descriptionLabel" alignment="CENTER" maxWidth="150.0" text="&lt;card description&gt;" textAlignment="CENTER" wrapText="true">
+        <Label id="tooltip_description" fx:id="descriptionLabel" alignment="CENTER" maxWidth="150.0" text="&lt;card description&gt;" textAlignment="CENTER" wrapText="true">
           <font>
             <Font name="Arial Bold" size="13.0" />
           </font>
@@ -46,13 +46,14 @@
   </center>
   <stylesheets>
     <URL value="@gameboard.css" />
+      <URL value="@../main.css" />
   </stylesheets>
   <top>
     <StackPane prefHeight="-1.0" prefWidth="-1.0">
       <children>
         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateX="-8.0" translateY="-8.0" StackPane.alignment="TOP_LEFT">
           <image>
-            <Image url="@../resources/img/common/mana_crystal.png" />
+            <Image url="@../../resources/img/common/mana_crystal.png" />
           </image>
         </ImageView>
         <Text id="outlined_score" fx:id="manaCostLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="4.0" StackPane.alignment="TOP_LEFT" />

@@ -9,6 +9,13 @@
     -fx-fill: darkgrey;
 }
 
+#card_border {
+	 -fx-background-color: antiquewhite;
+	 -fx-border-color: black;
+	 -fx-border-style: solid;
+	 -fx-border-width: 1.0;
+}
+
 #outlined_score {
  	-fx-font-size: 14pt;
     -fx-font-family: "Arial";
@@ -25,4 +32,10 @@
     -fx-fill: yellow;
     -fx-stroke: black;
     -fx-stroke-width: 2;
+}
+
+#tooltip_description {
+	-fx-font-size: 10pt;
+    -fx-font-family: "Arial";
+    -fx-text-fill: black;
 }

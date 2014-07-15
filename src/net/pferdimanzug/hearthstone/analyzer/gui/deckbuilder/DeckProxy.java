@@ -39,6 +39,8 @@ public class DeckProxy extends Proxy<GameNotification> {
 
 	public List<Card> getCards(HeroClass heroClass) {
 		CardCollection cardCollection = CardCatalogue.query(null, null, heroClass);
+		// add neutral cards
+		cardCollection.addAll(CardCatalogue.query(null, null, HeroClass.ANY));
 		return cardCollection.toList();
 	}
 
