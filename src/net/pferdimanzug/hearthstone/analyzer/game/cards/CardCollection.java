@@ -2,6 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -107,6 +108,19 @@ public class CardCollection implements Iterable<Card>, Cloneable {
 	
 	public List<Card> toList() {
 		return new ArrayList<>(cards);
+	}
+	
+	public void sortByManaCost() {
+		Comparator<Card> manaComparator = new Comparator<Card>() {
+
+			@Override
+			public int compare(Card card1, Card card2) {
+				Integer manaCost1 = card1.getBaseManaCost();
+				Integer manaCost2 = card2.getBaseManaCost();
+				return manaCost1.compareTo(manaCost2);
+			}
+		};
+		cards.sort(manaComparator);
 	}
 
 }

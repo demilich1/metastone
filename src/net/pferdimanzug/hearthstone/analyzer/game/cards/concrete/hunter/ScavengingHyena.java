@@ -17,6 +17,7 @@ public class ScavengingHyena extends MinionCard {
 	public ScavengingHyena() {
 		super("Scavenging Hyena", 2, 2, Rarity.COMMON, HeroClass.HUNTER, 2);
 		setDescription("Whenever a friendly Beast dies, gain +2/+1.");
+		setRace(Race.BEAST);
 	}
 
 	@Override

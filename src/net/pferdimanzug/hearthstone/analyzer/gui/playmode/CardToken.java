@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.CacheHint;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -45,6 +46,8 @@ public class CardToken extends BorderPane {
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
+		setCache(true);
+		setCacheHint(CacheHint.DEFAULT);
 	}
 
 	public void setCard(GameContext context, Card card, Player player) {

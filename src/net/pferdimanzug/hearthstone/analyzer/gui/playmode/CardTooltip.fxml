@@ -24,7 +24,7 @@
         </ImageView>
         <Text id="outlined_score" fx:id="attackLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="4.0" StackPane.alignment="BOTTOM_LEFT" />
         <Text id="outlined_score" fx:id="hpLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-4.0" StackPane.alignment="BOTTOM_RIGHT" />
-        <Label fx:id="raceLabel" text="&lt;race&gt;">
+        <Label id="race_label" fx:id="raceLabel" text="&lt;race&gt;">
           <font>
             <Font name="Arial Bold Italic" size="11.0" />
           </font>

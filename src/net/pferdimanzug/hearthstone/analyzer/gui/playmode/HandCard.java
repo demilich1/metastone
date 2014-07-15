@@ -18,7 +18,7 @@ public class HandCard extends CardToken {
 		super.setCard(context, card, player);
 		if (tooltipContent == null) {
 			Tooltip tooltip = new Tooltip();
-			CardTooltip tooltipContent = new CardTooltip();
+			tooltipContent = new CardTooltip();
 			tooltipContent.setCard(context, card, player);
 			tooltip.setGraphic(tooltipContent);
 			Tooltip.install(this, tooltip);
