@@ -2,6 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.gui.playmode;
 
 import java.io.IOException;
 
+import net.pferdimanzug.hearthstone.analyzer.gui.IconFactory;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

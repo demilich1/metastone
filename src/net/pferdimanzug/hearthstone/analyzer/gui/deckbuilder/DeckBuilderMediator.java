@@ -17,6 +17,7 @@ public class DeckBuilderMediator extends Mediator<GameNotification> {
 	private final CardView cardView;
 	private final CardListView cardListView;
 	private final DeckInfoView deckInfoView;
+	private final DeckListView deckListView;
 
 	public DeckBuilderMediator() {
 		super(NAME);
@@ -24,6 +25,7 @@ public class DeckBuilderMediator extends Mediator<GameNotification> {
 		cardView = new CardView();
 		cardListView = new CardListView();
 		deckInfoView = new DeckInfoView();
+		deckListView = new DeckListView();
 	}
 	
 	
@@ -31,6 +33,8 @@ public class DeckBuilderMediator extends Mediator<GameNotification> {
 	@Override
 	public void onRegister() {
 		getFacade().sendNotification(GameNotification.SHOW_VIEW, view);
+		view.showSidebar(deckListView);
+		getFacade().sendNotification(GameNotification.LOAD_DECKS);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -53,6 +57,10 @@ public class DeckBuilderMediator extends Mediator<GameNotification> {
 			break;
 		case FILTERED_CARDS:
 			cardView.displayCards((List<Card>) notification.getBody());
+			break;
+		case DECKS_LOADED:
+			deckListView.displayDecks((List<Deck>) notification.getBody());
+			break;
 		default:
 			break;
 		}
@@ -65,6 +73,7 @@ public class DeckBuilderMediator extends Mediator<GameNotification> {
 		notificationInterests.add(GameNotification.EDIT_DECK);
 		notificationInterests.add(GameNotification.FILTERED_CARDS);
 		notificationInterests.add(GameNotification.ACTIVE_DECK_CHANGED);
+		notificationInterests.add(GameNotification.DECKS_LOADED);
 		return notificationInterests;
 	}
 

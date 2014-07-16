@@ -1,43 +1,36 @@
-package net.pferdimanzug.hearthstone.analyzer.gui.playmode;
-
-import java.awt.Color;
-
+package net.pferdimanzug.hearthstone.analyzer.gui;
 import javafx.scene.image.Image;
-
-import javax.swing.BorderFactory;
-import javax.swing.border.Border;
-
+import javafx.scene.paint.Color;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.HeroPower;
 
 public class IconFactory {
 
-	public static Border createRarityBorder(Rarity rarity) {
-		Color color;
-		int thickness = 2;
+	public static Color getRarityColor(Rarity rarity) {
+		Color color = Color.BLACK;
 		switch (rarity) {
 		case COMMON:
 			color = Color.WHITE;
 			break;
 		case EPIC:
 			// a335ee
-			color = new Color(163, 53, 238);
+			color = Color.rgb(163, 53, 238);
 			break;
 		case LEGENDARY:
 			// ff8000
-			color = new Color(255, 128, 0);
-			thickness = 3;
+			color = Color.rgb(255, 128, 0);
 			break;
 		case RARE:
 			// 0070dd
-			color = new Color(0, 112, 221);
+			color = Color.rgb(0, 112, 221);
 			break;
 		default:
 			color = Color.GRAY;
 			break;
 		}
-		return BorderFactory.createLineBorder(color, thickness);
+		return color;
 
 	}
 
@@ -111,16 +104,23 @@ public class IconFactory {
 			break;
 		default:
 			break;
-	
+
 		}
 		iconPath += ".png";
 		return iconPath;
 	}
 
+	public static Image getClassIcon(HeroClass heroClass) {
+		String iconPath = RESOURCE_PATH + "/img/classes/";
+		iconPath += heroClass.toString().toLowerCase();
+		iconPath += ".png";
+		return new Image(iconPath);
+	}
+
 	public static String getImageUrl(String imageName) {
 		return RESOURCE_PATH + "/img/" + imageName;
 	}
-	
+
 	public static Image getSummonHelper() {
 		String iconPath = RESOURCE_PATH + "/img/common/arrow_down_blue.png";
 		return new Image(iconPath);
@@ -130,9 +130,9 @@ public class IconFactory {
 		String iconPath = RESOURCE_PATH + "/img/common/target.png";
 		return new Image(iconPath);
 	}
-	
+
 	private static final String RESOURCE_PATH = "/net/pferdimanzug/hearthstone/analyzer/resources";
-	
+
 	private IconFactory() {
 	}
 }

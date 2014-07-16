@@ -2,6 +2,14 @@
 	-fx-background-color: navajowhite;
 }
 
+#side-bar {
+	-fx-background: navajowhite;
+	-fx-border-width: 2;
+	-fx-border-color: black;
+	-fx-background-color: antiquewhite;
+	-fx-border-radius: 10;
+}
+
 #header {
 	-fx-font-size: 24pt;
     -fx-font-family: "Arial";

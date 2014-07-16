@@ -18,8 +18,9 @@
 
 #card-entry {
 	-fx-border-width: 2;
-	-fx-border-color: black;
+	-fx-border-color: darkgrey;
 	-fx-background-color: antiquewhite;
+	-fx-border-radius: 10;
 }
 
 #card-entry-name {

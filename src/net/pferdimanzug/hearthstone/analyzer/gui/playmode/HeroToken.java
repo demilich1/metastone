@@ -9,6 +9,7 @@ import javafx.scene.text.Text;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
+import net.pferdimanzug.hearthstone.analyzer.gui.IconFactory;
 
 public class HeroToken extends GameToken {
 

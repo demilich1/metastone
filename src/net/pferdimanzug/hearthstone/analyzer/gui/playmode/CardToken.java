@@ -9,12 +9,15 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardType;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.gui.IconFactory;
 
 public class CardToken extends BorderPane {
 
@@ -34,6 +37,13 @@ public class CardToken extends BorderPane {
 	protected ImageView attackIcon;
 	@FXML
 	protected ImageView hpIcon;
+	
+	@FXML
+	protected Circle rarityGem;
+	
+	private double baseRarityGemSize;
+	
+	
 	private Card card;
 
 	protected CardToken(String fxml) {
@@ -48,11 +58,14 @@ public class CardToken extends BorderPane {
 		}
 		setCache(true);
 		setCacheHint(CacheHint.DEFAULT);
+		
+		baseRarityGemSize = rarityGem.getRadius();
 	}
 
 	public void setCard(GameContext context, Card card, Player player) {
 		this.card = card;
 		nameLabel.setText(card.getName());
+		setRarity(card.getRarity());
 		if (context != null || player != null) {
 			int modifiedManaCost = context.getLogic().getModifiedManaCost(player, card);
 			setScoreValueLowerIsBetter(manaCostLabel, modifiedManaCost, card.getBaseManaCost());
@@ -69,6 +82,12 @@ public class CardToken extends BorderPane {
 			setScoreValue(attackLabel, card.getTagValue(GameTag.BASE_ATTACK));
 			setScoreValue(hpLabel, card.getTagValue(GameTag.BASE_HP));
 		}
+	}
+	
+	private void setRarity(Rarity rarity) {
+		rarityGem.setFill(IconFactory.getRarityColor(rarity));
+		rarityGem.setVisible(rarity != Rarity.FREE);
+		rarityGem.setRadius(rarity == Rarity.LEGENDARY ? baseRarityGemSize * 1.5 : baseRarityGemSize);
 	}
 	
 	private void setScoreValue(Text label, int value) {

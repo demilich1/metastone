@@ -20,8 +20,6 @@ public class DeckBuilderView extends BorderPane {
 	@FXML
 	private Pane infoArea;
 
-	private DeckListView deckListView;
-
 	public DeckBuilderView() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DeckBuilderView.fxml"));
 		fxmlLoader.setRoot(this);
@@ -32,9 +30,6 @@ public class DeckBuilderView extends BorderPane {
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
-
-		deckListView = new DeckListView();
-		showSidebar(deckListView);
 	}
 
 	public void showMainArea(Node content) {

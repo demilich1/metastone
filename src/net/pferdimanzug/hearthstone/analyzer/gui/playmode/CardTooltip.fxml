@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import javafx.scene.control.*?>
@@ -29,6 +30,7 @@
             <Font name="Arial Bold Italic" size="11.0" />
           </font>
         </Label>
+            <Circle fx:id="rarityGem" fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeLineJoin="BEVEL" strokeType="INSIDE" strokeWidth="2.0" translateY="-20.0" />
       </children>
     </StackPane>
   </bottom>
