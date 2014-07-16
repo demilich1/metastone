@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<fx:root id="card_border" prefHeight="120.0" prefWidth="80.0" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root id="card-border" prefHeight="120.0" prefWidth="80.0" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <bottom>
     <StackPane prefHeight="0.0" prefWidth="0.0" translateY="8.0">
       <children>
@@ -22,8 +22,8 @@
             <Image url="@../../resources/img/common/health_value_icon.png" />
           </image>
         </ImageView>
-        <Text id="outlined_score" fx:id="attackLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="4.0" translateY="-6.0" StackPane.alignment="BOTTOM_LEFT" />
-        <Text id="outlined_score" fx:id="hpLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-4.0" translateY="-6.0" StackPane.alignment="BOTTOM_RIGHT" />
+        <Text id="outlined-score" fx:id="attackLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="4.0" translateY="-6.0" StackPane.alignment="BOTTOM_LEFT" />
+        <Text id="outlined-score" fx:id="hpLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-4.0" translateY="-6.0" StackPane.alignment="BOTTOM_RIGHT" />
       </children>
     </StackPane>
   </bottom>
@@ -45,7 +45,7 @@
             <Image url="@../../resources/img/common/mana_crystal.png" />
           </image>
         </ImageView>
-        <Text id="outlined_score" fx:id="manaCostLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" StackPane.alignment="TOP_LEFT" />
+        <Text id="outlined-score" fx:id="manaCostLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" StackPane.alignment="TOP_LEFT" />
       </children>
     </StackPane>
   </top>

@@ -14,10 +14,14 @@ public class CreateNewDeckCommand extends SimpleCommand<GameNotification> {
 		HeroClass heroClass = (HeroClass) notification.getBody();
 
 		Deck newDeck = new Deck(heroClass);
+		//TODO: change
+		int randomNumber = (int)(Math.random() * 100);
+		newDeck.setName("Deck " + randomNumber);
 		deckProxy.setActiveDeck(newDeck);
 
 		getFacade().sendNotification(GameNotification.EDIT_DECK, newDeck);
 		getFacade().sendNotification(GameNotification.FILTERED_CARDS, deckProxy.getCards(heroClass));
+		getFacade().sendNotification(GameNotification.ACTIVE_DECK_CHANGED, newDeck);
 	}
 
 }

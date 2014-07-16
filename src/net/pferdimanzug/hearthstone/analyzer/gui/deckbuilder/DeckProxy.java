@@ -56,5 +56,10 @@ public class DeckProxy extends Proxy<GameNotification> {
 	public void removeCardFromDeck(Card card) {
 		activeDeck.getCards().remove(card);
 	}
+	
+	public void saveActiveDeck() {
+		decks.add(activeDeck);
+		activeDeck = null;
+	}
 
 }

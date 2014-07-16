@@ -2,7 +2,7 @@
 	-fx-background-color: darkkhaki;
 }
 
-#center_message {
+#center-message {
 	-fx-font-size: 20pt;
     -fx-font-family: "Arial";
     -fx-font-weight: bold;
@@ -11,7 +11,7 @@
     -fx-font-style: italic;
 }
 
-#target_button {
+#target-button {
 	-fx-background-color: transparent;
 }
 

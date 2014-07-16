@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root id="card_entry" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="220.0" type="HBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root id="card-entry" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="220.0" type="HBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <StackPane prefHeight="40.0" prefWidth="40.0">
          <children>
@@ -16,11 +16,11 @@
                   <Image url="@../../resources/img/common/mana_crystal.png" />
                </image>
             </ImageView>
-            <Text id="outlined_score" fx:id="manaCostText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Text id="outlined-score" fx:id="manaCostText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
          </children>
       </StackPane>
-      <Label id="card_entry_name" fx:id="cardNameLabel" maxWidth="160.0" minWidth="160.0" text="&lt;cardname&gt;" />
-      <Text id="outlined_score_yellow" fx:id="countText" strokeType="OUTSIDE" strokeWidth="0.0" text="2" />
+      <Label id="card-entry-name" fx:id="cardNameLabel" maxWidth="160.0" minWidth="160.0" text="&lt;cardname&gt;" />
+      <Text id="outlined-score-yellow" fx:id="countText" strokeType="OUTSIDE" strokeWidth="0.0" text="2" />
    </children>
    <stylesheets>
       <URL value="@../main.css" />

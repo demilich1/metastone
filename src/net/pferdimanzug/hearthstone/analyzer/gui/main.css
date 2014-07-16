@@ -9,14 +9,14 @@
     -fx-fill: darkgrey;
 }
 
-#card_border {
+#card-border {
 	 -fx-background-color: antiquewhite;
 	 -fx-border-color: black;
 	 -fx-border-style: solid;
 	 -fx-border-width: 1.0;
 }
 
-#outlined_score {
+#outlined-score {
  	-fx-font-size: 14pt;
     -fx-font-family: "Arial";
     -fx-font-weight: bold;
@@ -25,7 +25,7 @@
     -fx-stroke-width: 2;
 }
 
-#outlined_score_yellow {
+#outlined-score-yellow {
  	-fx-font-size: 14pt;
     -fx-font-family: "Arial";
     -fx-font-weight: bold;
@@ -34,13 +34,13 @@
     -fx-stroke-width: 2;
 }
 
-#tooltip_description {
+#tooltip-description {
 	-fx-font-size: 10pt;
     -fx-font-family: "Arial";
     -fx-text-fill: black;
 }
 
-#race_label {
+#race-label {
 	-fx-font-size: 8pt;
     -fx-font-family: "Arial";
     -fx-text-fill: black;
@@ -48,8 +48,15 @@
     -fx-font-style : italic;
 }
 
-#name_big {
+#name-big {
 	-fx-font-size: 14pt;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+}
+
+#name-small {
+	-fx-font-size: 10pt;
     -fx-font-family: "Arial";
     -fx-font-weight: bold;
     -fx-text-fill: black;

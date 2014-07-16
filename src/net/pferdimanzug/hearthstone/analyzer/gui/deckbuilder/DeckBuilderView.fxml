@@ -11,17 +11,18 @@
    <top>
       <Text id="header" strokeType="OUTSIDE" strokeWidth="0.0" text="Deck Builder" BorderPane.alignment="CENTER" />
    </top>
-   <padding>
-      <Insets top="20.0" />
-   </padding>
    <right>
-      <ScrollPane id="panel" fitToHeight="true" fitToWidth="true" prefViewportWidth="220.0" prefWidth="240.0">
-         <content>
-            <Pane fx:id="contentList" prefWidth="240.0" />
-         </content>
-      </ScrollPane>
+      <VBox spacing="2.0">
+         <children>
+            <ScrollPane id="panel" fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="ALWAYS" prefHeight="640.0" prefViewportWidth="220.0" prefWidth="240.0" vbarPolicy="ALWAYS" />
+            <Pane fx:id="infoArea" prefHeight="50.0" prefWidth="240.0" />
+         </children>
+      </VBox>
    </right>
    <center>
       <Pane fx:id="contentArea" BorderPane.alignment="CENTER" />
    </center>
+   <padding>
+      <Insets top="20.0" />
+   </padding>
 </fx:root>

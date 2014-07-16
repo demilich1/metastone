@@ -3,7 +3,6 @@ package net.pferdimanzug.hearthstone.analyzer.gui.mainmenu;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.scene.layout.Pane;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.DeckBuilderMediator;
 import de.pferdimanzug.nittygrittymvc.Mediator;
@@ -34,6 +33,8 @@ public class MainMenuMediator extends Mediator<GameNotification> {
 		switch (notification.getId()) {
 		case DECK_BUILDER_SELECTED:
 			getFacade().registerMediator(new DeckBuilderMediator());
+			break;
+		default:
 			break;
 		}
 		

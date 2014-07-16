@@ -9,9 +9,9 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0" spacing="128.0" BorderPane.alignment="CENTER">
          <children>
-            <Button id="defaultButton" fx:id="previousButton" contentDisplay="CENTER" mnemonicParsing="false" text="&lt;&lt;" />
-            <Label id="defaultLabel" fx:id="pageLabel" alignment="CENTER" contentDisplay="CENTER" text="Label" />
-            <Button id="defaultButton" fx:id="nextButton" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" text="&gt;&gt;" />
+            <Button id="default-button" fx:id="previousButton" contentDisplay="CENTER" mnemonicParsing="false" text="&lt;&lt;" />
+            <Label id="default-label" fx:id="pageLabel" alignment="CENTER" contentDisplay="CENTER" text="Label" />
+            <Button id="default-button" fx:id="nextButton" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" text="&gt;&gt;" />
          </children>
       </HBox>
    </bottom>

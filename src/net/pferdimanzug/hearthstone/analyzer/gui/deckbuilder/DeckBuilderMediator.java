@@ -16,13 +16,17 @@ public class DeckBuilderMediator extends Mediator<GameNotification> {
 	private final DeckBuilderView view;
 	private final CardView cardView;
 	private final CardListView cardListView;
+	private final DeckInfoView deckInfoView;
 
 	public DeckBuilderMediator() {
 		super(NAME);
 		view = new DeckBuilderView();
 		cardView = new CardView();
 		cardListView = new CardListView();
+		deckInfoView = new DeckInfoView();
 	}
+	
+	
 
 	@Override
 	public void onRegister() {
@@ -40,9 +44,12 @@ public class DeckBuilderMediator extends Mediator<GameNotification> {
 		case EDIT_DECK:
 			view.showMainArea(cardView);
 			view.showSidebar(cardListView);
+			view.showInfoArea(deckInfoView);
 			break;
 		case ACTIVE_DECK_CHANGED:
-			cardListView.displayDeck((Deck) notification.getBody());
+			Deck deck = (Deck) notification.getBody();
+			cardListView.displayDeck(deck);
+			deckInfoView.updateDeck(deck);
 			break;
 		case FILTERED_CARDS:
 			cardView.displayCards((List<Card>) notification.getBody());

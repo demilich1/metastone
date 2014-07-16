@@ -5,16 +5,20 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
 public class DeckBuilderView extends BorderPane {
 
 	@FXML
-	private Pane contentList;
+	private ScrollPane scrollPane;
 
 	@FXML
 	private Pane contentArea;
+	
+	@FXML
+	private Pane infoArea;
 
 	private DeckListView deckListView;
 
@@ -39,10 +43,12 @@ public class DeckBuilderView extends BorderPane {
 	}
 
 	public void showSidebar(Node content) {
-		contentList.getChildren().clear();
-		if (content != null) {
-			contentList.getChildren().add(content);	
-		}
+		scrollPane.setContent(content);
+	}
+	
+	public void showInfoArea(Node content) {
+		infoArea.getChildren().clear();
+		infoArea.getChildren().add(content);
 	}
 
 }

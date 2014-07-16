@@ -23,4 +23,5 @@ public enum GameNotification {
 	FILTERED_CARDS,
 	ADD_CARD_TO_DECK,
 	REMOVE_CARD_FROM_DECK,
+	DECK_COMPLETED
 }

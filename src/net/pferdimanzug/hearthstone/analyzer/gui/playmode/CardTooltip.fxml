@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.*?>
 
-<fx:root id="card_border" prefHeight="240.0" prefWidth="174.0" stylesheets="@../main.css" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root id="card-border" prefHeight="240.0" prefWidth="174.0" stylesheets="@../main.css" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <bottom>
     <StackPane prefHeight="-1.0" prefWidth="-1.0">
       <children>
@@ -22,9 +22,9 @@
             <Image url="@../../resources/img/common/health_value_icon.png" />
           </image>
         </ImageView>
-        <Text id="outlined_score" fx:id="attackLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="4.0" StackPane.alignment="BOTTOM_LEFT" />
-        <Text id="outlined_score" fx:id="hpLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-4.0" StackPane.alignment="BOTTOM_RIGHT" />
-        <Label id="race_label" fx:id="raceLabel" text="&lt;race&gt;">
+        <Text id="outlined-score" fx:id="attackLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="4.0" StackPane.alignment="BOTTOM_LEFT" />
+        <Text id="outlined-score" fx:id="hpLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-4.0" StackPane.alignment="BOTTOM_RIGHT" />
+        <Label id="race-label" fx:id="raceLabel" text="&lt;race&gt;">
           <font>
             <Font name="Arial Bold Italic" size="11.0" />
           </font>
@@ -35,8 +35,8 @@
   <center>
     <VBox alignment="CENTER" prefHeight="-1.0" prefWidth="-1.0" spacing="16.0" BorderPane.alignment="CENTER">
       <children>
-        <Label id="name_big" fx:id="nameLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="150.0" text="&lt;card name&gt;" textAlignment="CENTER" wrapText="true" />
-        <Label id="tooltip_description" fx:id="descriptionLabel" alignment="CENTER" maxWidth="150.0" text="&lt;card description&gt;" textAlignment="CENTER" wrapText="true">
+        <Label id="name-big" fx:id="nameLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="150.0" text="&lt;card name&gt;" textAlignment="CENTER" wrapText="true" />
+        <Label id="tooltip-description" fx:id="descriptionLabel" alignment="CENTER" maxWidth="150.0" text="&lt;card description&gt;" textAlignment="CENTER" wrapText="true">
           <font>
             <Font name="Arial Bold" size="13.0" />
           </font>
@@ -52,7 +52,7 @@
             <Image url="@../../resources/img/common/mana_crystal.png" />
           </image>
         </ImageView>
-        <Text id="outlined_score" fx:id="manaCostLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="4.0" StackPane.alignment="TOP_LEFT" />
+        <Text id="outlined-score" fx:id="manaCostLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="4.0" StackPane.alignment="TOP_LEFT" />
       </children>
     </StackPane>
   </top>
