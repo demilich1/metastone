@@ -49,6 +49,7 @@ public class DeckBuilderMediator extends Mediator<GameNotification> {
 			view.showMainArea(cardView);
 			view.showSidebar(cardListView);
 			view.showInfoArea(deckInfoView);
+			view.showBottomBar(new CardFilterView());
 			break;
 		case ACTIVE_DECK_CHANGED:
 			Deck deck = (Deck) notification.getBody();

@@ -43,7 +43,6 @@ public class CardToken extends BorderPane {
 	
 	private double baseRarityGemSize;
 	
-	
 	private Card card;
 
 	protected CardToken(String fxml) {

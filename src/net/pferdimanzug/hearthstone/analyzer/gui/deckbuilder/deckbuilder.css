@@ -29,3 +29,7 @@
     -fx-fill: black;
     -fx-font-weight: bold;
 }
+
+#search-field {
+   -fx-background-color: antiquewhite;
+}

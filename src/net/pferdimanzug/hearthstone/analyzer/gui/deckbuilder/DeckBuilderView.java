@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
@@ -44,6 +45,11 @@ public class DeckBuilderView extends BorderPane {
 	public void showInfoArea(Node content) {
 		infoArea.getChildren().clear();
 		infoArea.getChildren().add(content);
+	}
+	
+	public void showBottomBar(Node content) {
+		BorderPane.setAlignment(content, Pos.CENTER);
+		setBottom(content);
 	}
 
 }
