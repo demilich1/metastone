@@ -40,7 +40,4 @@ public class AncientOfLore extends ChooseBattlecryCard {
 	public Minion summon() {
 		return createMinion();
 	}
-	
-	
-
 }

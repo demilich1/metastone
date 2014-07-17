@@ -14,7 +14,7 @@
    <right>
       <VBox spacing="2.0">
          <children>
-            <ScrollPane id="side-bar" fx:id="scrollPane" fitToHeight="true" fitToWidth="true" prefHeight="640.0" prefViewportWidth="220.0" prefWidth="240.0">
+            <ScrollPane id="side-bar" fx:id="scrollPane" fitToHeight="true" fitToWidth="true" prefHeight="640.0" prefViewportWidth="220.0" prefWidth="250.0">
                <padding>
                   <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                </padding>
@@ -26,7 +26,10 @@
       </VBox>
    </right>
    <center>
-      <Pane fx:id="contentArea" BorderPane.alignment="CENTER" />
+      <Pane fx:id="contentArea" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+         </padding></Pane>
    </center>
    <padding>
       <Insets top="20.0" />

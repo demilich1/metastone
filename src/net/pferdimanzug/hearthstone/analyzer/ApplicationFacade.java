@@ -2,7 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer;
 
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.AddCardToDeckCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.CreateNewDeckCommand;
-import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.DeckCompletedCommand;
+import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.SaveDeckCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.FilterCardsByTextCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.LoadDecksCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.RemoveCardFromDeckCommand;
@@ -27,7 +27,7 @@ public class ApplicationFacade extends Facade<GameNotification> {
 		registerCommand(GameNotification.CLASS_CHOSEN, new CreateNewDeckCommand());
 		registerCommand(GameNotification.ADD_CARD_TO_DECK, new AddCardToDeckCommand());
 		registerCommand(GameNotification.REMOVE_CARD_FROM_DECK, new RemoveCardFromDeckCommand());
-		registerCommand(GameNotification.DECK_COMPLETED, new DeckCompletedCommand());
+		registerCommand(GameNotification.SAVE_DECK, new SaveDeckCommand());
 		registerCommand(GameNotification.LOAD_DECKS, new LoadDecksCommand());
 		registerCommand(GameNotification.FILTER_CARDS_BY_TEXT, new FilterCardsByTextCommand());
 

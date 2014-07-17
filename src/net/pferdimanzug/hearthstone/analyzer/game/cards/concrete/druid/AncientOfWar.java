@@ -49,6 +49,4 @@ public class AncientOfWar extends ChooseBattlecryCard {
 	public Minion summon() {
 		return createMinion();
 	}
-	
-	
 }

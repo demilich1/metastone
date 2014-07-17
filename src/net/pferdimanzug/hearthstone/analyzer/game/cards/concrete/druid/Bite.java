@@ -14,5 +14,5 @@ public class Bite extends SpellCard {
 		setTargetRequirement(TargetSelection.NONE);
 		setSpell(new BuffHeroSpell(4, 4));
 	}
-
+	
 }

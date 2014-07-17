@@ -260,6 +260,14 @@ public class CardCatalogue {
 
 		return result;
 	}
+	
+	public static CardCollection getAll() {
+		CardCollection result = new CardCollection();
+		for (Card card : cards) {
+			result.add(card);
+		}
+		return result;
+	}
 
 	private final static CardCollection cards = new CardCollection();
 	static {

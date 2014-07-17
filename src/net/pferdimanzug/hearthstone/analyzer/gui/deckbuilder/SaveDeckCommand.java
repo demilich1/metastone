@@ -4,7 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import de.pferdimanzug.nittygrittymvc.SimpleCommand;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
-public class DeckCompletedCommand extends SimpleCommand<GameNotification> {
+public class SaveDeckCommand extends SimpleCommand<GameNotification> {
 
 	@Override
 	public void execute(INotification<GameNotification> notification) {

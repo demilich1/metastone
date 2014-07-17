@@ -1,7 +1,10 @@
 package net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import com.google.gson.Gson;
 
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
@@ -59,7 +62,19 @@ public class DeckProxy extends Proxy<GameNotification> {
 	
 	public void saveActiveDeck() {
 		decks.add(activeDeck);
+		saveToJson(activeDeck);
 		activeDeck = null;
+	}
+	
+	private void saveToJson(Deck deck) {
+		Gson gson = new Gson();
+		HashMap<String, Object> saveData = new HashMap<String, Object>();
+		saveData.put("name", deck.getName());
+		saveData.put("description", deck.getDescription());
+		saveData.put("heroClass", deck.getHeroClass());
+		List<Integer> cardIds = new ArrayList<Integer>();
+		
+		//System.out.println(json);
 	}
 
 }

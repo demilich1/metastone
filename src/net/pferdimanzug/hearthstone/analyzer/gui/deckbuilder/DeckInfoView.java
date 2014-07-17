@@ -31,7 +31,7 @@ public class DeckInfoView extends HBox {
 			throw new RuntimeException(exception);
 		}
 		doneButton.setDisable(true);
-		doneButton.setOnAction(actionEvent -> ApplicationFacade.getInstance().sendNotification(GameNotification.DECK_COMPLETED));
+		doneButton.setOnAction(actionEvent -> ApplicationFacade.getInstance().sendNotification(GameNotification.SAVE_DECK));
 	}
 	
 	public void updateDeck(Deck deck) {

@@ -2,11 +2,19 @@
 	-fx-background-color: navajowhite;
 }
 
-#side-bar {
-	-fx-background: navajowhite;
+#bordered-panel {
+	-fx-background-color: navajowhite;
 	-fx-border-width: 2;
-	-fx-border-color: black;
-	-fx-background-color: antiquewhite;
+	-fx-border-color: slategrey ;
+	-fx-border-radius: 10;
+	-fx-border-insets: 4;
+}
+
+#side-bar {
+	-fx-background: tan;
+	-fx-border-width: 2;
+	-fx-border-color: slategrey ;
+	-fx-background-color: tan;
 	-fx-border-radius: 10;
 }
 
@@ -14,7 +22,7 @@
 	-fx-font-size: 24pt;
     -fx-font-family: "Arial";
     -fx-font-weight: bold;
-    -fx-fill: darkgrey;
+    -fx-fill: slategrey ;
 }
 
 #card-border {

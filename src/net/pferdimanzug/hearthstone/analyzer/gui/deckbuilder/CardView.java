@@ -63,7 +63,7 @@ public class CardView extends BorderPane implements EventHandler<MouseEvent> {
 			HandCard cardWidget = new HandCard();
 			
 			cardWidget.addEventHandler(MouseEvent.MOUSE_CLICKED, this);
-			cardWidget.setPrefSize(160, 180);
+			cardWidget.setPrefSize(140, 180);
 			contentPane.add(cardWidget, currentColumn, currentRow);
 			currentColumn++;
 			if (currentColumn == columns) {

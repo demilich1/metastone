@@ -126,5 +126,45 @@ public class DevCheckCardCompleteness {
 		out.close();
 		System.out.println("Implemented cards have been written to " + filename);
 	}
+	
+	public static void assignUniqueIdToEachCard() {
+		final String path = "./src/" + Card.class.getPackage().getName().replace(".", "/") + "/concrete/";
+		final String idExpression = "public int getTypeId()";
+		File folder = new File(path);
+		int uniqueId = 1;
+		for (File file : FileUtils.listFiles(folder, new String[] { "java" }, true)) {
+			try {
+				List<String> lines = Files.readAllLines(file.toPath());
+				if (containsExpression(lines, idExpression)) {
+					continue;
+				}
+				
+				List<CharSequence> modifiedLines = new ArrayList<CharSequence>();
+				for (String line : lines) {
+					modifiedLines.add(line);
+					if (line.contains("}")) {
+						modifiedLines.add("\n");
+						modifiedLines.add("\t@Override");
+						modifiedLines.add("\tpublic int getTypeId() {");
+						modifiedLines.add("\t\treturn " + uniqueId + ";");
+						modifiedLines.add("\t}");
+						uniqueId++;
+					}
+				}
+				Files.write(file.toPath(), modifiedLines);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private static boolean containsExpression(List<String> lines, String expression) {
+		for (String line : lines) {
+			if (line.contains(expression)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 }
