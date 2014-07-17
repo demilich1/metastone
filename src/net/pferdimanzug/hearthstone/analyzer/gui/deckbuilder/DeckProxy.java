@@ -1,10 +1,14 @@
 package net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import com.google.gson.Gson;
 
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
@@ -14,9 +18,20 @@ import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.validation.DefaultDeckValidator;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.validation.IDeckValidator;
+
+import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
 import de.pferdimanzug.nittygrittymvc.Proxy;
 
 public class DeckProxy extends Proxy<GameNotification> {
+	
+	private static Logger logger = LoggerFactory.getLogger(DeckProxy.class);
 
 	public static final String NAME = "DeckProxy";
 
@@ -62,15 +77,49 @@ public class DeckProxy extends Proxy<GameNotification> {
 		activeDeck = null;
 	}
 	
+	public void loadDecks() throws FileNotFoundException {
+		decks.clear();
+		File folder = new File("./decks/");
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		for (File file : FileUtils.listFiles(folder, new String[] { "json" }, true)) {
+			FileReader reader = new FileReader(file);
+			HashMap<String, Object> map = gson.fromJson(reader, new TypeToken<HashMap<String, Object>>() {}.getType());
+			if (!map.containsKey("heroClass")) {
+				logger.error("Deck {} does not speficy a value for 'heroClass' and is therefor not valid", file.getName());
+				continue;
+			}
+			HeroClass heroClass = HeroClass.valueOf((String) map.get("heroClass"));
+			String deckName = (String) map.get("name");
+			Deck deck = new Deck(heroClass);
+			deck.setName(deckName);
+			@SuppressWarnings("unchecked")
+			List<Double> cardIds = (List<Double>) map.get("cards");
+			for (Double doubleCardId : cardIds) {
+				int cardId = doubleCardId.intValue();
+				Card card = CardCatalogue.getCardById(cardId);
+				deck.getCards().add(card);
+			}
+			decks.add(deck);
+		}
+	}
+	
 	private void saveToJson(Deck deck) {
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		HashMap<String, Object> saveData = new HashMap<String, Object>();
 		saveData.put("name", deck.getName());
 		saveData.put("description", deck.getDescription());
 		saveData.put("heroClass", deck.getHeroClass());
 		List<Integer> cardIds = new ArrayList<Integer>();
-		
-		//System.out.println(json);
+		for(Card card : deck.getCards()) {
+			cardIds.add(card.getTypeId());
+		}
+		saveData.put("cards", cardIds);
+		String jsonData = gson.toJson(saveData);
+		try {
+			Files.write(Paths.get("./decks/" + deck.getName()+ ".json"), jsonData.getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void setActiveDeck(Deck activeDeck) {

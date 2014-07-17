@@ -1,19 +1,19 @@
 #class-button {
 	-fx-font-size: 20pt;
     -fx-font-family: "Arial";
-    -fx-fill: slategrey ;
+    -fx-fill: slategrey;
 }
 
 #default-button {
 	-fx-font-size: 18pt;
     -fx-font-family: "Arial";
-    -fx-fill: slategrey ;
+    -fx-fill: slategrey;
 }
 
 #default-label {
 	-fx-font-size: 18pt;
     -fx-font-family: "Arial";
-    -fx-fill: slategrey ;
+    -fx-fill: slategrey;
 }
 
 #card-entry {

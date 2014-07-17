@@ -1,7 +1,8 @@
 package net.pferdimanzug.hearthstone.analyzer;
 
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.AddCardToDeckCommand;
-import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.CreateNewDeckCommand;
+import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.SetActiveDeckCommand;
+import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.FillDeckWithRandomCardsCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.SaveDeckCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.FilterCardsByTextCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.LoadDecksCommand;
@@ -24,12 +25,13 @@ public class ApplicationFacade extends Facade<GameNotification> {
 		registerCommand(GameNotification.APPLICATION_STARTUP, new ApplicationStartupCommand());
 		registerCommand(GameNotification.START_GAME, new StartGameCommand());
 		
-		registerCommand(GameNotification.CLASS_CHOSEN, new CreateNewDeckCommand());
+		registerCommand(GameNotification.SET_ACTIVE_DECK, new SetActiveDeckCommand());
 		registerCommand(GameNotification.ADD_CARD_TO_DECK, new AddCardToDeckCommand());
 		registerCommand(GameNotification.REMOVE_CARD_FROM_DECK, new RemoveCardFromDeckCommand());
-		registerCommand(GameNotification.SAVE_DECK, new SaveDeckCommand());
+		registerCommand(GameNotification.SAVE_ACTIVE_DECK, new SaveDeckCommand());
 		registerCommand(GameNotification.LOAD_DECKS, new LoadDecksCommand());
 		registerCommand(GameNotification.FILTER_CARDS_BY_TEXT, new FilterCardsByTextCommand());
+		registerCommand(GameNotification.FILL_DECK_WITH_RANDOM_CARDS, new FillDeckWithRandomCardsCommand());
 
 	}
 

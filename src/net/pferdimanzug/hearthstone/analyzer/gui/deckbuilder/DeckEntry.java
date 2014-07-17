@@ -17,6 +17,8 @@ public class DeckEntry extends HBox {
 
 	@FXML
 	private ImageView classIcon;
+
+	private Deck deck;
 	
 	public DeckEntry() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DeckEntry.fxml"));
@@ -31,8 +33,13 @@ public class DeckEntry extends HBox {
 	}
 	
 	public void setDeck(Deck deck) {
+		this.deck = deck;
 		deckNameLabel.setText(deck.getName());
 		classIcon.setImage(IconFactory.getClassIcon(deck.getHeroClass()));
+	}
+	
+	public Deck getDeck() {
+		return deck;
 	}
 
 }

@@ -248,6 +248,17 @@ public class CardCatalogue {
 		return null;
 	}
 	
+	public static Card getCardById(int id) {
+		for (Card card : cards) {
+			if (card.getTypeId() == id) {
+				return card.clone();
+			}
+		}
+
+		return null;
+	}
+
+	
 	public static CardCollection query(CardType cardType, Rarity rarity, HeroClass heroClass) {
 		CardCollection result = new CardCollection();
 		for (Card card : cards) {
