@@ -14,10 +14,16 @@ public class OgreMagi extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 179;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion ogreMagi = createMinion();
 		ogreMagi.setTag(GameTag.SPELL_POWER, 1);
 		return ogreMagi;
 	}
-
 }

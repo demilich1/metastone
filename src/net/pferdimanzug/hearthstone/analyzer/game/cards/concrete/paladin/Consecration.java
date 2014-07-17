@@ -17,4 +17,10 @@ public class Consecration extends SpellCard {
 		setTargetRequirement(TargetSelection.NONE);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 241;
+	}
 }

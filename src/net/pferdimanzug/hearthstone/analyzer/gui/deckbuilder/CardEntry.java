@@ -45,11 +45,11 @@ public class CardEntry extends HBox {
 		countText.setVisible(stack > 1);
 	}
 	
-	public void resetStackCount() {
-		stack = 0;
-	}
-
 	public Card getCard() {
 		return card;
+	}
+
+	public void resetStackCount() {
+		stack = 0;
 	}
 }

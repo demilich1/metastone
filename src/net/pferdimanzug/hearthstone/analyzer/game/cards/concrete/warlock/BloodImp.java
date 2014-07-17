@@ -21,6 +21,13 @@ public class BloodImp extends MinionCard {
 	} 
 	
 	@Override
+	public int getTypeId() {
+		return 335;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion bloodImp = createMinion(GameTag.STEALTHED);
 		Spell spell = new BuffRandomSpell(0, 1);
@@ -29,5 +36,4 @@ public class BloodImp extends MinionCard {
 		bloodImp.setSpellTrigger(trigger);
 		return bloodImp;
 	}
-
 }

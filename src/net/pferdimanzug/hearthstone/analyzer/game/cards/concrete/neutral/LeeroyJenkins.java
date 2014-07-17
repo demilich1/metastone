@@ -33,11 +33,17 @@ public class LeeroyJenkins extends MinionCard {
 	}
 	
 	@Override
+	public int getTypeId() {
+		return 153;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion leeroyJenkins = createMinion(GameTag.CHARGE);
 		Spell summonSpell = new SummonSpell(TargetPlayer.OPPONENT, new Whelp(), new Whelp());
 		leeroyJenkins.setBattlecry(Battlecry.createBattlecry(summonSpell));
 		return leeroyJenkins;
 	}
-
 }

@@ -41,4 +41,10 @@ public class Brawl extends SpellCard {
 
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 363;
+	}
 }

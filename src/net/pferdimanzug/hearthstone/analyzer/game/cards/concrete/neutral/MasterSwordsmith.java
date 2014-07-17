@@ -18,6 +18,13 @@ public class MasterSwordsmith extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 164;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion masterSwordsmith = createMinion();
 		Spell randomBuffSpell = new BuffRandomSpell(+1);
@@ -25,5 +32,4 @@ public class MasterSwordsmith extends MinionCard {
 		masterSwordsmith.setSpellTrigger(new SpellTrigger(new TurnEndTrigger(), randomBuffSpell));
 		return masterSwordsmith;
 	}
-
 }

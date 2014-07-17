@@ -17,6 +17,13 @@ public class CabalShadowPriest extends MinionCard {
 	}
 	
 	@Override
+	public int getTypeId() {
+		return 260;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion cabalShadowPriest = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new MindControlSpell(), TargetSelection.ENEMY_MINIONS);
@@ -30,5 +37,4 @@ public class CabalShadowPriest extends MinionCard {
 		cabalShadowPriest.setBattlecry(battlecry);
 		return cabalShadowPriest;
 	}
-
 }

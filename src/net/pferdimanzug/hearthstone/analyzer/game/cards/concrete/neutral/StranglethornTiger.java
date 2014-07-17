@@ -16,8 +16,14 @@ public class StranglethornTiger extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 210;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.STEALTHED);
 	}
-
 }

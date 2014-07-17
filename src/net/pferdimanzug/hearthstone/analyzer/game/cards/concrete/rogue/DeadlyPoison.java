@@ -24,4 +24,10 @@ public class DeadlyPoison extends SpellCard {
 	
 	
 
+
+
+	@Override
+	public int getTypeId() {
+		return 291;
+	}
 }

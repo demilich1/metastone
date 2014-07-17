@@ -15,4 +15,10 @@ public class SinisterStrike extends SpellCard {
 		setTargetRequirement(TargetSelection.ENEMY_HERO);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 306;
+	}
 }

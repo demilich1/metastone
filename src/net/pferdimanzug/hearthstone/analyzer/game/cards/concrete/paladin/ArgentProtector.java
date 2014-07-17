@@ -17,11 +17,17 @@ public class ArgentProtector extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 235;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion argentProtector = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new ApplyTagSpell(GameTag.DIVINE_SHIELD), TargetSelection.FRIENDLY_MINIONS);
 		argentProtector.setBattlecry(battlecry);
 		return argentProtector;
 	}
-
 }

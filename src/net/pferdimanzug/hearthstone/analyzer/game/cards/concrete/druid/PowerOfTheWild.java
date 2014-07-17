@@ -45,4 +45,10 @@ public class PowerOfTheWild extends ChooseOneCard {
 		setCard2(new PowerOfTheWildPanther());
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 17;
+	}
 }

@@ -42,4 +42,10 @@ public class Wrath extends ChooseOneCard {
 	}
 
 
+
+
+	@Override
+	public int getTypeId() {
+		return 25;
+	}
 }

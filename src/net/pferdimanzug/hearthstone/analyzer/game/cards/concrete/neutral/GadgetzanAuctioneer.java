@@ -17,11 +17,17 @@ public class GadgetzanAuctioneer extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 132;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion gadgetzanAuctioneer = createMinion();
 		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(TargetPlayer.SELF), new DrawCardSpell());
 		gadgetzanAuctioneer.setSpellTrigger(trigger);
 		return gadgetzanAuctioneer;
 	}
-
 }

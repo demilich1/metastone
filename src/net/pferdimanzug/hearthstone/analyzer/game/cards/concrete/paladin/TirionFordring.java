@@ -12,19 +12,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 
 public class TirionFordring extends MinionCard {
 
-	public TirionFordring() {
-		super("Tirion Fordring", 6, 6, Rarity.LEGENDARY, HeroClass.PALADIN, 8);
-		setDescription("Divine Shield. Taunt. Deathrattle: Equip a 5/3 Ashbringer.");
-	}
-
-	@Override
-	public Minion summon() {
-		Minion tirionFordring = createMinion(GameTag.TAUNT, GameTag.DIVINE_SHIELD);
-		Spell deathrattle = new EquipWeaponSpell(new Ashbringer());
-		tirionFordring.addDeathrattle(deathrattle);
-		return tirionFordring;
-	}
-	
 	private class Ashbringer extends WeaponCard {
 
 		public Ashbringer() {
@@ -38,4 +25,23 @@ public class TirionFordring extends MinionCard {
 		
 	}
 
+	public TirionFordring() {
+		super("Tirion Fordring", 6, 6, Rarity.LEGENDARY, HeroClass.PALADIN, 8);
+		setDescription("Divine Shield. Taunt. Deathrattle: Equip a 5/3 Ashbringer.");
+	}
+	
+	@Override
+	public int getTypeId() {
+		return 257;
+	}
+
+
+
+	@Override
+	public Minion summon() {
+		Minion tirionFordring = createMinion(GameTag.TAUNT, GameTag.DIVINE_SHIELD);
+		Spell deathrattle = new EquipWeaponSpell(new Ashbringer());
+		tirionFordring.addDeathrattle(deathrattle);
+		return tirionFordring;
+	}
 }

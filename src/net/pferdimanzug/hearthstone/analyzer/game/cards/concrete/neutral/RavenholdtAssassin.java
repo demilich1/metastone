@@ -14,8 +14,14 @@ public class RavenholdtAssassin extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 188;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.STEALTHED);
 	}
-
 }

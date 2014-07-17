@@ -19,6 +19,13 @@ public class Gruul extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 137;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion gruul = createMinion();
 		Spell buffSpell = new BuffSpell(+1, +1);
@@ -27,5 +34,4 @@ public class Gruul extends MinionCard {
 		gruul.setSpellTrigger(trigger);
 		return gruul;
 	}
-
 }

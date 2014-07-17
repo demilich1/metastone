@@ -14,9 +14,15 @@ public class ArgentCommander extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 89;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion argentCommander = createMinion(GameTag.CHARGE, GameTag.DIVINE_SHIELD);
 		return argentCommander;
 	}
-
 }

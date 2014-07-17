@@ -12,8 +12,14 @@ public class Wisp extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 227;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion();
 	}
-
 }

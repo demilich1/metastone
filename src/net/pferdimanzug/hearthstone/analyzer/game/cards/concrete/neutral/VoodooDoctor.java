@@ -16,11 +16,17 @@ public class VoodooDoctor extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 223;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion voodooDoctor = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new HealingSpell(2), TargetSelection.ANY);
 		voodooDoctor.setBattlecry(battlecry);
 		return voodooDoctor;
 	}
-
 }

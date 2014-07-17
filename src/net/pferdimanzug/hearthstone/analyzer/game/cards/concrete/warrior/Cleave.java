@@ -24,4 +24,10 @@ public class Cleave extends SpellCard {
 	
 	
 
+
+
+	@Override
+	public int getTypeId() {
+		return 365;
+	}
 }

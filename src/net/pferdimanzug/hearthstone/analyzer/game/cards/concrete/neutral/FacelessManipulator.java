@@ -41,11 +41,17 @@ public class FacelessManipulator extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 125;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion facelessManipulator = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new FacelessSpell(), TargetSelection.MINIONS);
 		facelessManipulator.setBattlecry(battlecry);
 		return facelessManipulator;
 	}
-
 }

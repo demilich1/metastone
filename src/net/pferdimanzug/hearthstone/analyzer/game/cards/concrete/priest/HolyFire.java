@@ -24,4 +24,10 @@ public class HolyFire extends SpellCard {
 		setTargetRequirement(TargetSelection.ANY);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 263;
+	}
 }

@@ -24,4 +24,10 @@ public class ForkedLightning extends SpellCard {
 		return context.getOpponent(player).getMinions().size() >= 2;
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 321;
+	}
 }

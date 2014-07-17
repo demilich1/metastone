@@ -18,6 +18,13 @@ public class EaglehornBow extends WeaponCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 30;
+	}
+
+
+
+	@Override
 	public Weapon getWeapon() {
 		Weapon eaglehornBow = createWeapon(3, 2);
 		Spell increaseDurabilitySpell = new ChangeDurabilitySpell(+1);
@@ -25,5 +32,4 @@ public class EaglehornBow extends WeaponCard {
 		eaglehornBow.setSpellTrigger(new SpellTrigger(new SecretRevealedTrigger(), increaseDurabilitySpell));
 		return eaglehornBow;
 	}
-
 }

@@ -18,6 +18,16 @@ public class AncientMage extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 84;
+	}
+	
+	
+	
+
+
+
+	@Override
 	public Minion summon() {
 		Minion ancientMage = createMinion();
 		Spell spellpowerSpell = new ApplyTagSpell(GameTag.SPELL_POWER);
@@ -27,8 +37,4 @@ public class AncientMage extends MinionCard {
 		ancientMage.setBattlecry(battlecry);
 		return ancientMage;
 	}
-	
-	
-	
-
 }

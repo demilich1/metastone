@@ -15,4 +15,10 @@ public class HolyLight extends SpellCard {
 		setSpell(new HealingSpell(6));
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 248;
+	}
 }

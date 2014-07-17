@@ -16,6 +16,12 @@ public class ShatteredSunCleric extends MinionCard{
 	}
 
 	@Override
+	public int getTypeId() {
+		return 196;
+	}
+
+
+	@Override
 	public Minion summon() {
 		Minion shatteredSunCleric = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new BuffSpell(1, 1), TargetSelection.FRIENDLY_MINIONS);

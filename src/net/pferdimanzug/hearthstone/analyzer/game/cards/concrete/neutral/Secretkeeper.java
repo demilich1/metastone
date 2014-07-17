@@ -18,6 +18,13 @@ public class Secretkeeper extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 194;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion secretkeeper = createMinion();
 		Spell buffSpell = new BuffSpell(1, 1);
@@ -25,5 +32,4 @@ public class Secretkeeper extends MinionCard {
 		secretkeeper.setSpellTrigger(new SpellTrigger(new SecretPlayedTrigger(), buffSpell));
 		return secretkeeper;
 	}
-
 }

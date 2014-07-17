@@ -15,8 +15,14 @@ public class DustDevil extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 314;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.WINDFURY);
 	}
-
 }

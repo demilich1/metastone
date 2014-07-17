@@ -41,4 +41,10 @@ public class Shadowflame extends SpellCard {
 		setTargetRequirement(TargetSelection.FRIENDLY_MINIONS);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 351;
+	}
 }

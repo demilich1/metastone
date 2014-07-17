@@ -18,11 +18,17 @@ public class Doomguard extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 338;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion doomguard = createMinion(GameTag.CHARGE);
 		Battlecry battlecry = Battlecry.createBattlecry(new DiscardCardSpell(2));
 		doomguard.setBattlecry(battlecry);
 		return doomguard;
 	}
-
 }

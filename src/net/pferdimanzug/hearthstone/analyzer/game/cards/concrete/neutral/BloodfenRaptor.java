@@ -14,9 +14,15 @@ public class BloodfenRaptor extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 94;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion bloodfenRaptor = createMinion();
 		return bloodfenRaptor;
 	}
-
 }

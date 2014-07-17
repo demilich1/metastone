@@ -19,6 +19,13 @@ public class ManaWyrm extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 67;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion manaWyrm = createMinion();
 		Spell buffSpell = new BuffSpell(1);
@@ -27,5 +34,4 @@ public class ManaWyrm extends MinionCard {
 		manaWyrm.setSpellTrigger(trigger);
 		return manaWyrm;
 	}
-
 }

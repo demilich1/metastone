@@ -14,10 +14,16 @@ public class Archmage extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 88;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion archmage = createMinion();
 		archmage.setTag(GameTag.SPELL_POWER, 1);
 		return archmage;
 	}
-
 }

@@ -14,8 +14,14 @@ public class Sunwalker extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 212;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.TAUNT, GameTag.DIVINE_SHIELD);
 	}
-
 }

@@ -30,4 +30,10 @@ public class DeadlyShot extends SpellCard {
 	
 	
 
+
+
+	@Override
+	public int getTypeId() {
+		return 29;
+	}
 }

@@ -17,6 +17,15 @@ public class ArcaneGolem extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 87;
+	}
+	
+	
+
+
+
+	@Override
 	public Minion summon() {
 		Minion arcaneGolem = createMinion();
 		Spell battlecrySpell = new ModifyMaxManaSpell(1, TargetPlayer.OPPONENT);
@@ -24,7 +33,4 @@ public class ArcaneGolem extends MinionCard {
 		arcaneGolem.setBattlecry(battlecry);
 		return arcaneGolem;
 	}
-	
-	
-
 }

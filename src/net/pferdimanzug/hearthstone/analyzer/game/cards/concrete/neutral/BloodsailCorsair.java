@@ -18,11 +18,17 @@ public class BloodsailCorsair extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 97;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion bloodsailCorsair = createMinion();
 		bloodsailCorsair.setBattlecry(Battlecry.createBattlecry(new ChangeDurabilitySpell(-1),
 				TargetSelection.ENEMY_HERO));
 		return bloodsailCorsair;
 	}
-
 }

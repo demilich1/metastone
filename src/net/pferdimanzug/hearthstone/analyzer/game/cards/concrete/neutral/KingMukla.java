@@ -34,6 +34,13 @@ public class KingMukla extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 150;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion kingMukla = createMinion();
 		Spell bananasSpell = new ReceiveCardSpell(TargetPlayer.OPPONENT, new Bananas(), new Bananas());
@@ -41,5 +48,4 @@ public class KingMukla extends MinionCard {
 		kingMukla.setBattlecry(battlecry);
 		return kingMukla;
 	}
-
 }

@@ -21,6 +21,13 @@ public class Deathwing extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 114;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion deathwing = createMinion();
 		Spell destroySpell = new DestroySpell();
@@ -30,5 +37,4 @@ public class Deathwing extends MinionCard {
 		deathwing.setBattlecry(battlecry);
 		return deathwing;
 	}
-
 }

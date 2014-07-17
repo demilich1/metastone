@@ -61,6 +61,10 @@ public class CardToken extends BorderPane {
 		baseRarityGemSize = rarityGem.getRadius();
 	}
 
+	public Card getCard() {
+		return card;
+	}
+	
 	public void setCard(GameContext context, Card card, Player player) {
 		this.card = card;
 		nameLabel.setText(card.getName());
@@ -88,7 +92,7 @@ public class CardToken extends BorderPane {
 		rarityGem.setVisible(rarity != Rarity.FREE);
 		rarityGem.setRadius(rarity == Rarity.LEGENDARY ? baseRarityGemSize * 1.5 : baseRarityGemSize);
 	}
-	
+
 	private void setScoreValue(Text label, int value) {
 		setScoreValue(label, value, value);
 	}
@@ -113,10 +117,6 @@ public class CardToken extends BorderPane {
 		} else {
 			label.setFill(Color.WHITE);
 		}
-	}
-
-	public Card getCard() {
-		return card;
 	}
 
 }

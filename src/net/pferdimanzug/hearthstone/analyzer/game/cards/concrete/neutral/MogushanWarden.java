@@ -14,8 +14,14 @@ public class MogushanWarden extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 167;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.TAUNT);
 	}
-
 }

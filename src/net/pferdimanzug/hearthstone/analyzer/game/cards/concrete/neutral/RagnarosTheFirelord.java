@@ -19,6 +19,13 @@ public class RagnarosTheFirelord extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 186;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion ragnaros = createMinion(GameTag.CANNOT_ATTACK);
 		Spell damageSpell = new DamageRandomSpell(8, 1);
@@ -27,5 +34,4 @@ public class RagnarosTheFirelord extends MinionCard {
 		ragnaros.setSpellTrigger(trigger);
 		return ragnaros;
 	}
-
 }

@@ -33,23 +33,23 @@ public class DeckBuilderView extends BorderPane {
 		}
 	}
 
-	public void showMainArea(Node content) {
-		contentArea.getChildren().clear();
-		contentArea.getChildren().add(content);
+	public void showBottomBar(Node content) {
+		BorderPane.setAlignment(content, Pos.CENTER);
+		setBottom(content);
 	}
 
-	public void showSidebar(Node content) {
-		scrollPane.setContent(content);
-	}
-	
 	public void showInfoArea(Node content) {
 		infoArea.getChildren().clear();
 		infoArea.getChildren().add(content);
 	}
 	
-	public void showBottomBar(Node content) {
-		BorderPane.setAlignment(content, Pos.CENTER);
-		setBottom(content);
+	public void showMainArea(Node content) {
+		contentArea.getChildren().clear();
+		contentArea.getChildren().add(content);
+	}
+	
+	public void showSidebar(Node content) {
+		scrollPane.setContent(content);
 	}
 
 }

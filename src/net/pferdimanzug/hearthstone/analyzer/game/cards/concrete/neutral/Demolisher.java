@@ -17,6 +17,13 @@ public class Demolisher extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 116;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion demolisher = createMinion();
 		Spell randomDamageSpell = new DamageRandomSpell(2, 1);
@@ -25,5 +32,4 @@ public class Demolisher extends MinionCard {
 		demolisher.setBattlecry(battlecry);
 		return demolisher;
 	}
-
 }

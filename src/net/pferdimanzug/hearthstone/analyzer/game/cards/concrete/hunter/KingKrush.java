@@ -16,8 +16,14 @@ public class KingKrush extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 39;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.CHARGE);
 	}
-
 }

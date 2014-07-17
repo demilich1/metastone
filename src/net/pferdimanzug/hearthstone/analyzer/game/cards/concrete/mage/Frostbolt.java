@@ -20,4 +20,10 @@ public class Frostbolt extends SpellCard {
 	}
 	
 
+
+
+	@Override
+	public int getTypeId() {
+		return 61;
+	}
 }

@@ -36,4 +36,10 @@ public class BattleRage extends SpellCard {
 		setPredefinedTarget(EntityReference.NONE);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 362;
+	}
 }

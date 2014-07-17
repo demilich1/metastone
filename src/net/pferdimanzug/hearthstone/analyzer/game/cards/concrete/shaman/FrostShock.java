@@ -18,4 +18,10 @@ public class FrostShock extends SpellCard {
 		setSpell(new MetaSpell(new DamageSpell(1), new ApplyTagSpell(GameTag.FROZEN)));
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 322;
+	}
 }

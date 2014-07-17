@@ -36,4 +36,10 @@ public class BestialWrath extends SpellCard {
 		return minion.getRace() == Race.BEAST;
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 28;
+	}
 }

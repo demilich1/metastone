@@ -56,24 +56,6 @@ public class CardView extends BorderPane implements EventHandler<MouseEvent> {
 		nextButton.setOnAction(actionEvent -> changeOffset(+cardDisplayCount));
 	}
 	
-	private void setupCardWidgets() {
-		int currentRow = 0;
-		int currentColumn = 0;
-		for (int i = 0; i < cardDisplayCount; i++) {
-			HandCard cardWidget = new HandCard();
-			
-			cardWidget.addEventHandler(MouseEvent.MOUSE_CLICKED, this);
-			cardWidget.setPrefSize(140, 180);
-			contentPane.add(cardWidget, currentColumn, currentRow);
-			currentColumn++;
-			if (currentColumn == columns) {
-				currentColumn = 0;
-				currentRow++;
-			}
-			cardWidgets.add(cardWidget);
-		}
-	}
-
 	private void changeOffset(int delta) {
 		int newOffset = offset + delta;
 		if (newOffset < 0 || newOffset >= cards.size()) {
@@ -103,18 +85,36 @@ public class CardView extends BorderPane implements EventHandler<MouseEvent> {
 			cardWidget.setVisible(true);
 		}
 	}
-	
-	private void updatePageLabel() {
-		int totalPages = (int) Math.ceil(cards.size() / (double)cardDisplayCount);
-		int currentPage = (int) Math.ceil(offset / (double)cardDisplayCount) + 1;
-		pageLabel.setText(currentPage + "/" + totalPages);
-	}
 
 	@Override
 	public void handle(MouseEvent event) {
 		HandCard source = (HandCard) event.getSource();
 		Card card = source.getCard();
 		ApplicationFacade.getInstance().sendNotification(GameNotification.ADD_CARD_TO_DECK, card);
+	}
+	
+	private void setupCardWidgets() {
+		int currentRow = 0;
+		int currentColumn = 0;
+		for (int i = 0; i < cardDisplayCount; i++) {
+			HandCard cardWidget = new HandCard();
+			
+			cardWidget.addEventHandler(MouseEvent.MOUSE_CLICKED, this);
+			cardWidget.setPrefSize(140, 180);
+			contentPane.add(cardWidget, currentColumn, currentRow);
+			currentColumn++;
+			if (currentColumn == columns) {
+				currentColumn = 0;
+				currentRow++;
+			}
+			cardWidgets.add(cardWidget);
+		}
+	}
+
+	private void updatePageLabel() {
+		int totalPages = (int) Math.ceil(cards.size() / (double)cardDisplayCount);
+		int currentPage = (int) Math.ceil(offset / (double)cardDisplayCount) + 1;
+		pageLabel.setText(currentPage + "/" + totalPages);
 	}
 
 }

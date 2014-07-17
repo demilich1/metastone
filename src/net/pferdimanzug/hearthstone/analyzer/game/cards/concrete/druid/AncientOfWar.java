@@ -46,6 +46,12 @@ public class AncientOfWar extends ChooseBattlecryCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 2;
+	}
+
+
+	@Override
 	public Minion summon() {
 		return createMinion();
 	}

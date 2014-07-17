@@ -18,4 +18,10 @@ public class ShieldSlam extends SpellCard {
 		setTargetRequirement(TargetSelection.MINIONS);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 379;
+	}
 }

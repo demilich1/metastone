@@ -18,11 +18,17 @@ public class FireElemental extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 319;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion fireElemental = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new DamageSpell(BATTLECRY_DAMAGE), TargetSelection.ANY);
 		fireElemental.setBattlecry(battlecry);
 		return fireElemental;
 	}
-
 }

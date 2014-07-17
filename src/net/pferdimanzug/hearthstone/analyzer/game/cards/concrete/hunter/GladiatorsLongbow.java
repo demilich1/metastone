@@ -19,6 +19,13 @@ public class GladiatorsLongbow extends WeaponCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 35;
+	}
+
+
+
+	@Override
 	public Weapon getWeapon() {
 		Weapon gladiatorsLongbow = createWeapon(5, 2);
 		Spell immunity = new ApplyTagSpell(GameTag.IMMUNE_WHILE_ATTACKING, new WeaponDestroyedTrigger());
@@ -26,5 +33,4 @@ public class GladiatorsLongbow extends WeaponCard {
 		gladiatorsLongbow.setBattlecry(Battlecry.createBattlecry(immunity));
 		return gladiatorsLongbow;
 	}
-
 }

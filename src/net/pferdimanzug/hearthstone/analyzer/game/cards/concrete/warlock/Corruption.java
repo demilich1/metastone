@@ -23,4 +23,10 @@ public class Corruption extends SpellCard {
 		setTargetRequirement(TargetSelection.ENEMY_MINIONS);
 	}
 	
+
+
+	@Override
+	public int getTypeId() {
+		return 336;
+	}
 }

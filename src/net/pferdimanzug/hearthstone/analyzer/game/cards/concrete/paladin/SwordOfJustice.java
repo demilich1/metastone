@@ -21,6 +21,13 @@ public class SwordOfJustice extends WeaponCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 256;
+	}
+
+
+
+	@Override
 	public Weapon getWeapon() {
 		Weapon swordOfJustice = createWeapon(1, 5);
 		Spell buffSpell = new BuffSpell(1, 1);
@@ -32,5 +39,4 @@ public class SwordOfJustice extends WeaponCard {
 		swordOfJustice.setSpellTrigger(trigger);
 		return swordOfJustice;
 	}
-
 }

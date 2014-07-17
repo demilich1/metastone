@@ -15,4 +15,10 @@ public class Silence extends SpellCard {
 		setTargetRequirement(TargetSelection.MINIONS);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 281;
+	}
 }

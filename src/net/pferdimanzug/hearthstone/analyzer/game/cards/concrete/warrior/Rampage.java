@@ -25,4 +25,10 @@ public class Rampage extends SpellCard {
 	
 	
 
+
+
+	@Override
+	public int getTypeId() {
+		return 377;
+	}
 }

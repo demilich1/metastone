@@ -25,4 +25,10 @@ public class PowerOverwhelming extends SpellCard {
 		setTargetRequirement(TargetSelection.FRIENDLY_MINIONS);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 347;
+	}
 }

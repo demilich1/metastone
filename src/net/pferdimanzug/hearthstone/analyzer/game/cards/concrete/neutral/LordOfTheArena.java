@@ -14,8 +14,14 @@ public class LordOfTheArena extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 157;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.TAUNT);
 	}
-
 }

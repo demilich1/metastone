@@ -14,6 +14,12 @@ public class SorcerersApprentice extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 72;
+	}
+
+
+	@Override
 	public Minion summon() {
 		Minion sorcerersApprentice = createMinion();
 		sorcerersApprentice.setTag(GameTag.SPELL_MANA_COST, -1);

@@ -16,11 +16,17 @@ public class EarthenRingFarseer extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 121;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion earthenRingFarseer = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new HealingSpell(3), TargetSelection.ANY);
 		earthenRingFarseer.setBattlecry(battlecry);
 		return earthenRingFarseer;
 	}
-
 }

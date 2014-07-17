@@ -16,11 +16,17 @@ public class AcolyteOfPain extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 79;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion acolyteOfPain = createMinion();
 		SpellTrigger trigger = new SpellTrigger(new DamageReceivedTrigger(), new DrawCardSpell());
 		acolyteOfPain.setSpellTrigger(trigger);
 		return acolyteOfPain;
 	}
-
 }

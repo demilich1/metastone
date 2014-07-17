@@ -16,11 +16,17 @@ public class Windspeaker extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 333;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion windspeaker = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new WindfurySpell(), TargetSelection.FRIENDLY_MINIONS);
 		windspeaker.setBattlecry(battlecry);
 		return windspeaker;
 	}
-
 }

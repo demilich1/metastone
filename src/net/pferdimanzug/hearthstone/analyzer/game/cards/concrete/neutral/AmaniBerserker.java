@@ -18,10 +18,16 @@ public class AmaniBerserker extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 82;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion amaniBerserker = createMinion();
 		amaniBerserker.setTag(GameTag.ENRAGE_SPELL, new Enrage(ENRAGE_ATTACK_BONUS));
 		return amaniBerserker;
 	}
-
 }

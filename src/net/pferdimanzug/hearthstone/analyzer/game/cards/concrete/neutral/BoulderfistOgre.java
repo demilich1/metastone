@@ -12,8 +12,14 @@ public class BoulderfistOgre extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 101;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion();
 	}
-
 }

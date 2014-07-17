@@ -18,6 +18,13 @@ public class Doomsayer extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 118;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion doomsayer = createMinion();
 		Spell endOfWorldSpell = new DestroySpell();
@@ -26,5 +33,4 @@ public class Doomsayer extends MinionCard {
 		doomsayer.setSpellTrigger(trigger);
 		return doomsayer;
 	}
-
 }

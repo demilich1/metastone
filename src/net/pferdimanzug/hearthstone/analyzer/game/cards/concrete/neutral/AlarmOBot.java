@@ -50,6 +50,13 @@ public class AlarmOBot extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 80;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion alarmOBot = createMinion();
 		Spell alarmOBotSpell = new AlarmOBotSpell();
@@ -57,5 +64,4 @@ public class AlarmOBot extends MinionCard {
 		alarmOBot.setSpellTrigger(new SpellTrigger(new AlarmOBotTrigger(), alarmOBotSpell));
 		return alarmOBot;
 	}
-
 }

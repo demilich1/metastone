@@ -32,6 +32,11 @@ public class Onyxia extends MinionCard {
 		setRace(Race.DRAGON);
 	}
 	
+	@Override
+	public int getTypeId() {
+		return 181;
+	}
+	
 	private MinionCard[] getWhelps() {
 		MinionCard[] whelps = new MinionCard[GameLogic.MAX_MINIONS];
 		for (int i = 0; i < whelps.length; i++) {
@@ -39,7 +44,9 @@ public class Onyxia extends MinionCard {
 		}
 		return whelps;
 	}
-	
+
+
+
 	@Override
 	public Minion summon() {
 		Minion onyxia = createMinion();
@@ -48,5 +55,4 @@ public class Onyxia extends MinionCard {
 		onyxia.setBattlecry(battlecry);
 		return onyxia;
 	}
-
 }

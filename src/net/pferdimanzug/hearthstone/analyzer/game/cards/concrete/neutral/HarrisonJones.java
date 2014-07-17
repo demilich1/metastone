@@ -25,6 +25,13 @@ public class HarrisonJones extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 139;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion harrisonJones = createMinion();
 		IValueProvider valueProvider = new IValueProvider() {
@@ -43,5 +50,4 @@ public class HarrisonJones extends MinionCard {
 		harrisonJones.setBattlecry(battlecry);
 		return harrisonJones;
 	}
-
 }

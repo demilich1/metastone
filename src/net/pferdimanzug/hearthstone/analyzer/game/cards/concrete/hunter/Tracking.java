@@ -53,4 +53,10 @@ public class Tracking extends SpellCard {
 	
 	
 
+
+
+	@Override
+	public int getTypeId() {
+		return 48;
+	}
 }

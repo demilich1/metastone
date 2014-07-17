@@ -15,10 +15,16 @@ public class SpitefulSmith extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 204;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion spitefulSmith = createMinion();
 		spitefulSmith.setTag(GameTag.ENRAGE_SPELL, new EnrageBuffWeapon(2));
 		return spitefulSmith;
 	}
-
 }

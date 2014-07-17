@@ -19,4 +19,10 @@ public class AncestralHealing extends SpellCard {
 		setSpell(new MetaSpell(new HealingSpell(9999), new ApplyTagSpell(GameTag.TAUNT)));
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 310;
+	}
 }

@@ -32,4 +32,10 @@ public class SacrificialPact extends SpellCard {
 	
 	
 
+
+
+	@Override
+	public int getTypeId() {
+		return 348;
+	}
 }

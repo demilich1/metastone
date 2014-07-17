@@ -18,6 +18,13 @@ public class Lightwarden extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 155;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion lightwarden = createMinion();
 		Spell buffSpell = new BuffSpell(2);
@@ -26,5 +33,4 @@ public class Lightwarden extends MinionCard {
 		lightwarden.setSpellTrigger(trigger);
 		return lightwarden;
 	}
-
 }

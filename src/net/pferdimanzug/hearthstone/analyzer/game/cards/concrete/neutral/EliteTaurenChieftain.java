@@ -97,11 +97,17 @@ public class EliteTaurenChieftain extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 122;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion eliteTaurenChieftain = createMinion();
 		Spell randomRockCard = new ReceiveRandomCardSpell(TargetPlayer.BOTH, new IAmMurloc(), new PowerOfTheHorde(), new RoguesDoIt());
 		eliteTaurenChieftain.setBattlecry(Battlecry.createBattlecry(randomRockCard));
 		return eliteTaurenChieftain;
 	}
-
 }

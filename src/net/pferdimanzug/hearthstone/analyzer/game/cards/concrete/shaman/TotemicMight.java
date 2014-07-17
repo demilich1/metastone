@@ -39,4 +39,10 @@ public class TotemicMight extends SpellCard {
 		setPredefinedTarget(EntityReference.FRIENDLY_MINIONS);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 330;
+	}
 }

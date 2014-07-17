@@ -34,4 +34,10 @@ public class BladeFlurry extends SpellCard {
 		return player.getHero().getWeapon() != null;
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 288;
+	}
 }

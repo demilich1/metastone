@@ -32,6 +32,13 @@ public class VioletTeacher extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 222;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion violetTeacher = createMinion();
 		Spell summonSpell = new SummonSpell(new VioletApprentice());
@@ -39,5 +46,4 @@ public class VioletTeacher extends MinionCard {
 		violetTeacher.setSpellTrigger(trigger);
 		return violetTeacher;
 	}
-
 }

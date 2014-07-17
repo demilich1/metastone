@@ -37,6 +37,13 @@ public class UnboundElemental extends MinionCard {
 	}
 	
 	@Override
+	public int getTypeId() {
+		return 331;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion unboundElemental =createMinion();
 		Spell buffSpell = new BuffSpell(1, 1);
@@ -45,5 +52,4 @@ public class UnboundElemental extends MinionCard {
 		unboundElemental.setSpellTrigger(trigger);
 		return unboundElemental;
 	}
-
 }

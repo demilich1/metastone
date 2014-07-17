@@ -19,11 +19,11 @@ public class Demonfire extends SpellCard {
 
 	public Demonfire() {
 		super("Demonfire", Rarity.COMMON, HeroClass.WARLOCK, 2);
-		setDescription("Deal $2 damage to a minion. If it’s a friendly Demon, give it +2/+2 instead.");
+		setDescription("Deal $2 damage to a minion. If it's a friendly Demon, give it +2/+2 instead.");
 		Spell buffSpell = new BuffSpell(2, 2);
 		Spell damageSpell = new DamageSpell(2);
 		ISpellConditionChecker isFriendlyMinion = new ISpellConditionChecker() {
-			
+
 			@Override
 			public boolean isFulfilled(GameContext context, Player player, Entity target) {
 				Minion minion = (Minion) target;
@@ -35,4 +35,10 @@ public class Demonfire extends SpellCard {
 		setTargetRequirement(TargetSelection.MINIONS);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 337;
+	}
 }

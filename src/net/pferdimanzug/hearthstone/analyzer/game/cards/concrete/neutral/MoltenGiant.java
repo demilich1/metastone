@@ -21,8 +21,14 @@ public class MoltenGiant extends MinionCard {
 	}
 	
 	@Override
+	public int getTypeId() {
+		return 168;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion();
 	}
-
 }

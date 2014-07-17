@@ -30,6 +30,12 @@ public class Betrayal extends SpellCard {
 		setTargetRequirement(TargetSelection.ENEMY_MINIONS);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 287;
+	}
 }
 
 

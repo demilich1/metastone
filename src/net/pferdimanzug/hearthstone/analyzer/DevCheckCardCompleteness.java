@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,6 +20,41 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCatalogue;
 import org.apache.commons.io.FileUtils;
 
 public class DevCheckCardCompleteness {
+
+	public static void assignUniqueIdToEachCard() {
+		final String path = "./src/" + Card.class.getPackage().getName().replace(".", "/") + "/concrete/";
+		final String idExpression = "public int getTypeId()";
+		File folder = new File(path);
+		int uniqueId = 1;
+		for (File file : FileUtils.listFiles(folder, new String[] { "java" }, true)) {
+			try {
+				System.out.println("Processing " + file.getName() + "...");
+				List<String> lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
+				if (containsExpression(lines, idExpression)) {
+					System.out.println("Skipping " + file.getName() + " because it already has an id assigned");
+					continue;
+				}
+				
+				for (int i = lines.size() - 1; i > 0; i--) {
+					String line = lines.get(i);
+					if (line.contains("}")) {
+						lines.add(i, "\t}");
+						lines.add(i, "\t\treturn " + uniqueId + ";");
+						lines.add(i, "\tpublic int getTypeId() {");
+						lines.add(i, "\t@Override");
+						lines.add(i, "\n");
+						System.out.println("Assigning id " + uniqueId + " to " + file.getName());
+						uniqueId++;
+						break;
+					}
+				}
+				
+				Files.write(file.toPath(), lines, StandardCharsets.UTF_8);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
 	public static void cardListFromImages(String path) throws IOException {
 		File folder = new File(path);
@@ -60,7 +97,16 @@ public class DevCheckCardCompleteness {
 		}
 		System.out.println("There are " + missing + " cards missing");
 	}
-
+	
+	private static boolean containsExpression(List<String> lines, String expression) {
+		for (String line : lines) {
+			if (line.contains(expression)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	private static List<String> getImplementedCardsAsLines() {
 		final String expression = "cards.add(new %s());";
 		final String path = "./src/" + Card.class.getPackage().getName().replace(".", "/") + "/concrete/";
@@ -125,46 +171,6 @@ public class DevCheckCardCompleteness {
 		}
 		out.close();
 		System.out.println("Implemented cards have been written to " + filename);
-	}
-	
-	public static void assignUniqueIdToEachCard() {
-		final String path = "./src/" + Card.class.getPackage().getName().replace(".", "/") + "/concrete/";
-		final String idExpression = "public int getTypeId()";
-		File folder = new File(path);
-		int uniqueId = 1;
-		for (File file : FileUtils.listFiles(folder, new String[] { "java" }, true)) {
-			try {
-				List<String> lines = Files.readAllLines(file.toPath());
-				if (containsExpression(lines, idExpression)) {
-					continue;
-				}
-				
-				List<CharSequence> modifiedLines = new ArrayList<CharSequence>();
-				for (String line : lines) {
-					modifiedLines.add(line);
-					if (line.contains("}")) {
-						modifiedLines.add("\n");
-						modifiedLines.add("\t@Override");
-						modifiedLines.add("\tpublic int getTypeId() {");
-						modifiedLines.add("\t\treturn " + uniqueId + ";");
-						modifiedLines.add("\t}");
-						uniqueId++;
-					}
-				}
-				Files.write(file.toPath(), modifiedLines);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	private static boolean containsExpression(List<String> lines, String expression) {
-		for (String line : lines) {
-			if (line.contains(expression)) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 }

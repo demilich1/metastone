@@ -17,6 +17,13 @@ public class InjuredBlademaster extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 145;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion injuredBlademaster = createMinion();
 		Spell damageSpell = new DamageSpell(4);
@@ -25,5 +32,4 @@ public class InjuredBlademaster extends MinionCard {
 		injuredBlademaster.setBattlecry(battlecry);
 		return injuredBlademaster;
 	}
-
 }

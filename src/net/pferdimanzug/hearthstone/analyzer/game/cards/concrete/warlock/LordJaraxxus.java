@@ -93,6 +93,13 @@ public class LordJaraxxus extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 344;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion lordJaraxxus = createMinion();
 		Spell spell = new LordJaraxxusSpell();
@@ -101,5 +108,4 @@ public class LordJaraxxus extends MinionCard {
 		lordJaraxxus.setBattlecry(battlecry);
 		return lordJaraxxus;
 	}
-
 }

@@ -15,9 +15,15 @@ public class TundraRhino extends MinionCard {
 	}
 	
 	@Override
+	public int getTypeId() {
+		return 49;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion tundraRhino = createMinion();
 		return tundraRhino;
 	}
-
 }

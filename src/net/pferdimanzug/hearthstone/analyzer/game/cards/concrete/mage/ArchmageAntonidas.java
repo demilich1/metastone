@@ -18,6 +18,13 @@ public class ArchmageAntonidas extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 54;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion archmageAntonidas = createMinion();
 		Spell receiveFireballSpell = new ReceiveCardSpell(new Fireball());
@@ -25,5 +32,4 @@ public class ArchmageAntonidas extends MinionCard {
 		archmageAntonidas.setSpellTrigger(trigger);
 		return archmageAntonidas;
 	}
-
 }

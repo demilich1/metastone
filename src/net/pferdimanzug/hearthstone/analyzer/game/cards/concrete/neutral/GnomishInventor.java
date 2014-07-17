@@ -16,11 +16,17 @@ public class GnomishInventor extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 134;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion gnomishInventor = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new DrawCardSpell(1), TargetSelection.NONE);
 		gnomishInventor.setBattlecry(battlecry);
 		return gnomishInventor;
 	}
-
 }

@@ -14,8 +14,14 @@ public class FenCreeper extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 127;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.TAUNT);
 	}
-
 }

@@ -16,8 +16,14 @@ public class YoungDragonhawk extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 230;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.WINDFURY);
 	}
-
 }

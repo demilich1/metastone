@@ -16,8 +16,14 @@ public class IronfurGrizzly extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 148;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.TAUNT);
 	}
-
 }

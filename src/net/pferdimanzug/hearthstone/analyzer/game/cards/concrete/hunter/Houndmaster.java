@@ -22,6 +22,12 @@ public class Houndmaster extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 36;
+	}
+
+
+	@Override
 	public Minion summon() {
 		Minion houndmaster = createMinion();
 		Spell houndmasterSpell = new MetaSpell(new BuffSpell(2, 2), new ApplyTagSpell(GameTag.TAUNT));

@@ -12,8 +12,14 @@ public class FieryWarAxe extends WeaponCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 369;
+	}
+
+
+
+	@Override
 	public Weapon getWeapon() {
 		return createWeapon(3, 2);
 	}
-
 }

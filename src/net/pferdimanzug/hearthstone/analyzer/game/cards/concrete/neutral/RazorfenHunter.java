@@ -31,6 +31,13 @@ public class RazorfenHunter extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 189;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion razorfenHunter = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(new Boar()), TargetSelection.NONE);
@@ -38,5 +45,4 @@ public class RazorfenHunter extends MinionCard {
 		razorfenHunter.setBattlecry(battlecry);
 		return razorfenHunter;
 	}
-
 }

@@ -19,6 +19,14 @@ public class DreadInfernal extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 340;
+	}
+	
+
+
+
+	@Override
 	public Minion summon() {
 		Minion dreadInfernal = createMinion();
 		Battlecry infernoBattlecry = Battlecry.createBattlecry(new DamageSpell(1), TargetSelection.NONE);
@@ -26,6 +34,4 @@ public class DreadInfernal extends MinionCard {
 		dreadInfernal.setBattlecry(infernoBattlecry);
 		return dreadInfernal;
 	}
-	
-
 }

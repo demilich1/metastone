@@ -42,6 +42,13 @@ public class BloodKnight extends MinionCard {
 	}
 	
 	@Override
+	public int getTypeId() {
+		return 95;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion bloodKnight = createMinion();
 		IValueProvider bloodKnightValueProvider = new BloodKnightBuffValueProvider();
@@ -53,5 +60,4 @@ public class BloodKnight extends MinionCard {
 		bloodKnight.setBattlecry(battlecry);
 		return bloodKnight;
 	}
-
 }

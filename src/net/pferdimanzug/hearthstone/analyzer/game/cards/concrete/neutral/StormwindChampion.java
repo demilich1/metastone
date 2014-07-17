@@ -16,11 +16,17 @@ public class StormwindChampion extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 208;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion stormwindChampion = createMinion();
 		Aura stormwindChampionAura = new BuffAura(1, 1, EntityReference.FRIENDLY_MINIONS);
 		stormwindChampion.setSpellTrigger(stormwindChampionAura);
 		return stormwindChampion;
 	}
-
 }

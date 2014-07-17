@@ -18,11 +18,17 @@ public class ElvenArcher extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 123;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion elvenArcher = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new DamageSpell(BATTLECRY_DAMAGE), TargetSelection.ANY);
 		elvenArcher.setBattlecry(battlecry);
 		return elvenArcher;
 	}
-
 }

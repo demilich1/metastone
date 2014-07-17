@@ -14,8 +14,14 @@ public class KirinTorMage extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 66;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.ONE_TIME_FREE_SECRET);
 	}
-
 }

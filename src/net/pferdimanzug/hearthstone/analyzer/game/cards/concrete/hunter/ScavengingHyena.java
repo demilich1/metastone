@@ -21,6 +21,13 @@ public class ScavengingHyena extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 43;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion scavengingHyena = createMinion();
 		Spell buffAttack = new BuffSpell(2, 1);
@@ -29,5 +36,4 @@ public class ScavengingHyena extends MinionCard {
 		scavengingHyena.setSpellTrigger(trigger);
 		return scavengingHyena;
 	}
-
 }

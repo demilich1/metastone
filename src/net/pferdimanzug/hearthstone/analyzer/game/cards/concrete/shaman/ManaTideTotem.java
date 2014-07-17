@@ -18,10 +18,16 @@ public class ManaTideTotem extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 327;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion manaTideTotem = createMinion();
 		manaTideTotem.setSpellTrigger(new SpellTrigger(new TurnEndTrigger(), new DrawCardSpell()));
 		return manaTideTotem;
 	}
-
 }

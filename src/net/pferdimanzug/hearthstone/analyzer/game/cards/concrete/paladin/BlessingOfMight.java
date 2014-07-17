@@ -14,4 +14,10 @@ public class BlessingOfMight extends SpellCard {
 		setTargetRequirement(TargetSelection.MINIONS);
 		setSpell(new BuffSpell(3, 0));
 	}
+
+
+	@Override
+	public int getTypeId() {
+		return 239;
+	}
 }

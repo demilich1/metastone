@@ -71,8 +71,14 @@ public class DruidOfTheClaw extends ChooseBattlecryCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 6;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion();
 	}
-
 }

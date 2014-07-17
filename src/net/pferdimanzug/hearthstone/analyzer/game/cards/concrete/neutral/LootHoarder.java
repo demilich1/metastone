@@ -15,11 +15,17 @@ public class LootHoarder extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 156;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Spell deathrattle = new DrawCardSpell();
 		Minion lootHoarder = createMinion();
 		lootHoarder.addDeathrattle(deathrattle);
 		return lootHoarder;
 	}
-
 }

@@ -18,11 +18,17 @@ public class TimberWolf extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 47;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion timberWolf = createMinion();
 		Aura timberWolfAura = new BuffAura(1, 0, EntityReference.FRIENDLY_MINIONS, Race.BEAST);
 		timberWolf.setSpellTrigger(timberWolfAura);
 		return timberWolf;
 	}
-
 }

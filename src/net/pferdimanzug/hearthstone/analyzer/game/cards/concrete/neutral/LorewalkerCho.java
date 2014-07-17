@@ -24,13 +24,18 @@ public class LorewalkerCho extends MinionCard {
 			Player opponent = context.getOpponent(player);
 			context.getLogic().receiveCard(opponent.getId(), targetCard.clone());
 		}
-
 	}
 
 	public LorewalkerCho() {
 		super("Lorewalker Cho", 0, 4, Rarity.LEGENDARY, HeroClass.ANY, 2);
-		setDescription("Whenever a player casts a spell, put a copy into the other player’s hand.");
+		setDescription("Whenever a player casts a spell, put a copy into the other player's hand.");
 	}
+
+	@Override
+	public int getTypeId() {
+		return 158;
+	}
+
 
 	@Override
 	public Minion summon() {
@@ -41,5 +46,4 @@ public class LorewalkerCho extends MinionCard {
 		lorewalkerCho.setSpellTrigger(trigger);
 		return lorewalkerCho;
 	}
-
 }

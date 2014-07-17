@@ -19,4 +19,10 @@ public class ExplosiveTrap extends SecretCard {
 		setTriggerAndEffect(new HeroAttackedTrigger(), damageSpell);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 32;
+	}
 }

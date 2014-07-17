@@ -15,4 +15,10 @@ public class HealingTouch extends SpellCard {
 		setSpell(new HealingSpell(8));
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 8;
+	}
 }

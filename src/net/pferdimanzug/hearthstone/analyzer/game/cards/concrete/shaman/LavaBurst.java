@@ -18,4 +18,10 @@ public class LavaBurst extends SpellCard {
 		setTargetRequirement(TargetSelection.ANY);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 324;
+	}
 }

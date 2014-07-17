@@ -19,6 +19,13 @@ public class StampedingKodo extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 205;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion stampedingKodo = createMinion();
 		Spell destroySpell = new DestroyRandomSpell(entity -> ((Minion) entity).getAttack() <= 2);
@@ -27,5 +34,4 @@ public class StampedingKodo extends MinionCard {
 		stampedingKodo.setBattlecry(battlecry);
 		return stampedingKodo;
 	}
-
 }

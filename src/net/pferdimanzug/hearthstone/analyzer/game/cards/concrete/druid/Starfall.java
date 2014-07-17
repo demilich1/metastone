@@ -48,4 +48,10 @@ public class Starfall extends ChooseOneCard {
 		setCard2(new StarfallAoE());
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 21;
+	}
 }

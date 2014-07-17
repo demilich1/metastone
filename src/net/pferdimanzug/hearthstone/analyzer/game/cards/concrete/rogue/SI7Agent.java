@@ -17,6 +17,13 @@ public class SI7Agent extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 305;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion si7Agent = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new DamageSpell(2), TargetSelection.ANY);
@@ -24,5 +31,4 @@ public class SI7Agent extends MinionCard {
 		si7Agent.setBattlecry(battlecry);
 		return si7Agent;
 	}
-
 }

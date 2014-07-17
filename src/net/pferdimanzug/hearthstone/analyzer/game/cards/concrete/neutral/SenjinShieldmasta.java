@@ -14,8 +14,14 @@ public class SenjinShieldmasta extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 195;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.TAUNT);
 	}
-
 }

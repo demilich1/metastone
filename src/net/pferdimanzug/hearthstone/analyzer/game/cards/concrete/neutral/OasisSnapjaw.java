@@ -14,8 +14,14 @@ public class OasisSnapjaw extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 178;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion();
 	}
-
 }

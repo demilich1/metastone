@@ -17,6 +17,13 @@ public class TheBlackKnight extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 216;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion blackKnight = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new DestroySpell(), TargetSelection.ENEMY_MINIONS);
@@ -24,5 +31,4 @@ public class TheBlackKnight extends MinionCard {
 		blackKnight.setBattlecry(battlecry);
 		return blackKnight;
 	}
-
 }

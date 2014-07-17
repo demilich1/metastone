@@ -15,4 +15,10 @@ public class Fireball extends SpellCard {
 		setSpell(new DamageSpell(6));
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 59;
+	}
 }

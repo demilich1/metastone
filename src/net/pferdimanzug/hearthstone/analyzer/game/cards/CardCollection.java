@@ -106,10 +106,6 @@ public class CardCollection implements Iterable<Card>, Cloneable {
 		Collections.shuffle(cards);
 	}
 	
-	public List<Card> toList() {
-		return new ArrayList<>(cards);
-	}
-	
 	public void sortByManaCost() {
 		Comparator<Card> manaComparator = new Comparator<Card>() {
 
@@ -121,6 +117,10 @@ public class CardCollection implements Iterable<Card>, Cloneable {
 			}
 		};
 		cards.sort(manaComparator);
+	}
+	
+	public List<Card> toList() {
+		return new ArrayList<>(cards);
 	}
 
 }

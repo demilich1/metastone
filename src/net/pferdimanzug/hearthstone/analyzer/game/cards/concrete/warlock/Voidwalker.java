@@ -16,8 +16,14 @@ public class Voidwalker extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 358;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.TAUNT);
 	}
-
 }

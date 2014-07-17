@@ -29,11 +29,17 @@ public class HarvestGolem extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 140;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Spell deathrattle = new SummonSpell(new DamagedGolem());
 		Minion harvestGolem = createMinion();
 		harvestGolem.addDeathrattle(deathrattle);
 		return harvestGolem;
 	}
-
 }

@@ -19,6 +19,13 @@ public class WildPyromancer extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 225;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion wildPyromancer = createMinion();
 		Spell damageSpell = new DamageSpell(1);
@@ -27,5 +34,4 @@ public class WildPyromancer extends MinionCard {
 		wildPyromancer.setSpellTrigger(trigger);
 		return wildPyromancer;
 	}
-
 }

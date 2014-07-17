@@ -18,6 +18,13 @@ public class FlesheatingGhoul extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 128;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion flesheatingGhoul = createMinion();
 		Spell buffSpell = new BuffSpell(1);
@@ -26,5 +33,4 @@ public class FlesheatingGhoul extends MinionCard {
 		flesheatingGhoul.setSpellTrigger(spellTrigger);
 		return flesheatingGhoul;
 	}
-
 }

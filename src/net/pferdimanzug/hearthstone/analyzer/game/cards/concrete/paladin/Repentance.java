@@ -19,4 +19,10 @@ public class Repentance extends SecretCard {
 		setTriggerAndEffect(new MinionCardPlayedTrigger(), setHpSpell);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 255;
+	}
 }

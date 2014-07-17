@@ -37,8 +37,14 @@ public class KeeperOfTheGrove extends ChooseBattlecryCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 11;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion();
 	}
-
 }

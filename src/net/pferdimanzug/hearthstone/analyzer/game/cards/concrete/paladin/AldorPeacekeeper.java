@@ -16,11 +16,17 @@ public class AldorPeacekeeper extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 234;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion aldorPeacekepper = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new SetAttackSpell(1), TargetSelection.MINIONS);
 		aldorPeacekepper.setBattlecry(battlecry);
 		return aldorPeacekepper;
 	}
-
 }

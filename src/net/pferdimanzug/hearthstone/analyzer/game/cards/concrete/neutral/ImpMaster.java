@@ -35,6 +35,13 @@ public class ImpMaster extends MinionCard {
 	}
 	
 	@Override
+	public int getTypeId() {
+		return 144;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion impMaster = createMinion();
 		Spell damageSelfSpell = new DamageSpell(1);
@@ -44,5 +51,4 @@ public class ImpMaster extends MinionCard {
 		impMaster.setSpellTrigger(trigger);
 		return impMaster;
 	}
-
 }

@@ -17,4 +17,10 @@ public class PowerWordShield extends SpellCard {
 		setTargetRequirement(TargetSelection.MINIONS);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 275;
+	}
 }

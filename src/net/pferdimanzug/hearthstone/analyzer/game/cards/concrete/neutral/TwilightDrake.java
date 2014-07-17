@@ -19,6 +19,13 @@ public class TwilightDrake extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 220;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion twilightDrake = createMinion();
 		Spell buffSpell = new BuffSpell(null, (context, player, target) -> player.getHand().getCount());
@@ -27,5 +34,4 @@ public class TwilightDrake extends MinionCard {
 		twilightDrake.setBattlecry(battlecry);
 		return twilightDrake;
 	}
-
 }

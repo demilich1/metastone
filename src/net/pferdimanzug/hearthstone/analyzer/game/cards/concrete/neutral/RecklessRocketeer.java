@@ -14,8 +14,14 @@ public class RecklessRocketeer extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 190;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.CHARGE);
 	}
-
 }

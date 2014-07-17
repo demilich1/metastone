@@ -18,4 +18,10 @@ public class HammerOfWrath extends SpellCard {
 	}
 	
 
+
+
+	@Override
+	public int getTypeId() {
+		return 246;
+	}
 }

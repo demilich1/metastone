@@ -12,8 +12,14 @@ public class LightsJustice extends WeaponCard{
 	}
 
 	@Override
+	public int getTypeId() {
+		return 252;
+	}
+
+
+
+	@Override
 	public Weapon getWeapon() {
 		return createWeapon(1, 4);
 	}
-
 }

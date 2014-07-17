@@ -18,6 +18,13 @@ public class BaronGeddon extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 92;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion baronGeddon = createMinion();
 		Spell damageSpell = new DamageSpell(2);
@@ -26,5 +33,4 @@ public class BaronGeddon extends MinionCard {
 		baronGeddon.setSpellTrigger(trigger);
 		return baronGeddon;
 	}
-
 }

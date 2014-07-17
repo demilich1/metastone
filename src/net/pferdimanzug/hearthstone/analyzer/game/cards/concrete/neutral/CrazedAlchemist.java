@@ -35,11 +35,17 @@ public class CrazedAlchemist extends MinionCard {
 	}
 	
 	@Override
+	public int getTypeId() {
+		return 109;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion crazedAlchemist = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new SwapAttackAndHpSpell(), TargetSelection.MINIONS);
 		crazedAlchemist.setBattlecry(battlecry);
 		return crazedAlchemist;
 	}
-
 }

@@ -17,4 +17,10 @@ public class Hellfire extends SpellCard {
 		setPredefinedTarget(EntityReference.ALL_CHARACTERS);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 343;
+	}
 }

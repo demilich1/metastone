@@ -12,8 +12,14 @@ public class WarGolem extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 224;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion();
 	}
-
 }

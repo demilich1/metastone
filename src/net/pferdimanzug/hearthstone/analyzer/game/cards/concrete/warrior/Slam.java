@@ -36,4 +36,10 @@ public class Slam extends SpellCard {
 		setTargetRequirement(TargetSelection.MINIONS);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 380;
+	}
 }

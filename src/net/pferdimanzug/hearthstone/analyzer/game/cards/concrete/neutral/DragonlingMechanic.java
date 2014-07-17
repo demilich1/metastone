@@ -30,6 +30,13 @@ public class DragonlingMechanic extends MinionCard {
 	}
 	
 	@Override
+	public int getTypeId() {
+		return 119;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion dragonlingMechanic = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(new MechanicalDragonling()), TargetSelection.NONE);
@@ -37,5 +44,4 @@ public class DragonlingMechanic extends MinionCard {
 		dragonlingMechanic.setBattlecry(battlecry);
 		return dragonlingMechanic;
 	}
-
 }

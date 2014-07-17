@@ -16,4 +16,10 @@ public class MortalStrike extends SpellCard {
 		setTargetRequirement(TargetSelection.ANY);
 	}
 	
+
+
+	@Override
+	public int getTypeId() {
+		return 376;
+	}
 }

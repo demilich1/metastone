@@ -28,10 +28,16 @@ public class CairneBloodhoof extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 102;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion cairneBloodhoof = createMinion();
 		cairneBloodhoof.addDeathrattle(new SummonSpell(new BaineBloodhoof()));
 		return cairneBloodhoof;
 	}
-
 }

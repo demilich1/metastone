@@ -31,11 +31,17 @@ public class ArathiWeaponsmith extends MinionCard {
 	}
 	
 	@Override
+	public int getTypeId() {
+		return 359;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion arathiWeaponsmith = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new EquipWeaponSpell(new BattleAxe()), TargetSelection.NONE);
 		arathiWeaponsmith.setBattlecry(battlecry);
 		return arathiWeaponsmith;
 	}
-
 }

@@ -16,4 +16,10 @@ public class ShieldBlock extends SpellCard {
 		setSpell(new MetaSpell(new BuffHeroSpell(0, 5), new DrawCardSpell()));
 		setTargetRequirement(TargetSelection.NONE);
 	}
+
+
+	@Override
+	public int getTypeId() {
+		return 378;
+	}
 }

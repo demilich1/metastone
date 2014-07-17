@@ -18,4 +18,8 @@ public class TheCoin extends SpellCard {
 		setSpell(new GainManaSpell(MANA_GAIN));
 	}
 
+	@Override
+	public int getTypeId() {
+		return 217;
+	}
 }

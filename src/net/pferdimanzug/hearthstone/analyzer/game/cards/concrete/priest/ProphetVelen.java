@@ -14,10 +14,16 @@ public class ProphetVelen extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 276;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion prophetVelen = createMinion();
 		prophetVelen.setTag(GameTag.SPELL_AMPLIFY_MULTIPLIER, 1);
 		return prophetVelen;
 	}
-
 }

@@ -16,6 +16,12 @@ public class NoviceEngineer extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 176;
+	}
+
+
+	@Override
 	public Minion summon() {
 		Minion noviceEngineer = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new DrawCardSpell(1), TargetSelection.NONE);

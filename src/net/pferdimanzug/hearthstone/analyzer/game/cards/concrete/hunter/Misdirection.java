@@ -42,4 +42,10 @@ public class Misdirection extends SecretCard {
 		setTriggerAndEffect(new HeroTargetedByPhysicalTrigger(), new MisdirectSpell());
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 40;
+	}
 }

@@ -14,8 +14,14 @@ public class RiverCrocolisk extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 191;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion();
 	}
-
 }

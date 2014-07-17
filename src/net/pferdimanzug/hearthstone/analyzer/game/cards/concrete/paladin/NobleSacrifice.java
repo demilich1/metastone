@@ -35,4 +35,10 @@ public class NobleSacrifice extends SecretCard {
 	}
 	
 
+
+
+	@Override
+	public int getTypeId() {
+		return 253;
+	}
 }

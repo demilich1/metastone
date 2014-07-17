@@ -28,16 +28,16 @@ public class DeckProxy extends Proxy<GameNotification> {
 		super(NAME);
 	}
 
-	public List<Deck> getDecks() {
-		return decks;
+	public boolean addCardToDeck(Card card) {
+		boolean result = deckValidator.canAddCardToDeck(card, activeDeck);
+		if (result) {
+			activeDeck.getCards().add(card);
+		}
+		return result;
 	}
 
 	public Deck getActiveDeck() {
 		return activeDeck;
-	}
-
-	public void setActiveDeck(Deck activeDeck) {
-		this.activeDeck = activeDeck;
 	}
 
 	public List<Card> getCards(HeroClass heroClass) {
@@ -48,14 +48,10 @@ public class DeckProxy extends Proxy<GameNotification> {
 		return cardCollection.toList();
 	}
 
-	public boolean addCardToDeck(Card card) {
-		boolean result = deckValidator.canAddCardToDeck(card, activeDeck);
-		if (result) {
-			activeDeck.getCards().add(card);
-		}
-		return result;
+	public List<Deck> getDecks() {
+		return decks;
 	}
-	
+
 	public void removeCardFromDeck(Card card) {
 		activeDeck.getCards().remove(card);
 	}
@@ -75,6 +71,10 @@ public class DeckProxy extends Proxy<GameNotification> {
 		List<Integer> cardIds = new ArrayList<Integer>();
 		
 		//System.out.println(json);
+	}
+	
+	public void setActiveDeck(Deck activeDeck) {
+		this.activeDeck = activeDeck;
 	}
 
 }

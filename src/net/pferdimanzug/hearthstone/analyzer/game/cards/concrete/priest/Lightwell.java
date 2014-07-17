@@ -18,6 +18,13 @@ public class Lightwell extends MinionCard {
 	}
 	
 	@Override
+	public int getTypeId() {
+		return 268;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion lightwell = createMinion();
 		Spell healRandomSpell = new HealRandomSpell(3);
@@ -25,5 +32,4 @@ public class Lightwell extends MinionCard {
 		lightwell.setSpellTrigger(new SpellTrigger(new TurnStartTrigger(), healRandomSpell));
 		return lightwell;
 	}
-
 }

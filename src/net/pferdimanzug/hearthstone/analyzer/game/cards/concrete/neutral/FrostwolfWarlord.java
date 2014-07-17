@@ -18,6 +18,13 @@ public class FrostwolfWarlord extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 131;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion frostwolfWarlord = createMinion();
 		IValueProvider valueProvider = (context, player, target) -> player.getMinions().size();
@@ -27,5 +34,4 @@ public class FrostwolfWarlord extends MinionCard {
 		frostwolfWarlord.setBattlecry(battlecry);
 		return frostwolfWarlord;
 	}
-
 }

@@ -16,11 +16,17 @@ public class StormpikeCommando extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 207;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion stormpikeCommando = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new DamageSpell(2), TargetSelection.ANY);
 		stormpikeCommando.setBattlecry(battlecry);
 		return stormpikeCommando;
 	}
-
 }

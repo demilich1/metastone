@@ -123,6 +123,13 @@ public class GelbinMekkatorque extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 133;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion gelbinMekkatorque = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new SummonRandomSpell(new Emboldener3000(), new HomingChicken(), new Poultryizer(),
@@ -130,5 +137,4 @@ public class GelbinMekkatorque extends MinionCard {
 		gelbinMekkatorque.setBattlecry(battlecry);
 		return gelbinMekkatorque;
 	}
-
 }

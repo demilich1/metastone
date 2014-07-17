@@ -41,6 +41,13 @@ public class CultMaster extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 110;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		GameEventTrigger minionDieTrigger = new CultMasterTrigger();
 		SpellTrigger trigger = new SpellTrigger(minionDieTrigger, new DrawCardSpell());
@@ -48,5 +55,4 @@ public class CultMaster extends MinionCard {
 		cultMaster.setSpellTrigger(trigger);
 		return cultMaster;
 	}
-
 }

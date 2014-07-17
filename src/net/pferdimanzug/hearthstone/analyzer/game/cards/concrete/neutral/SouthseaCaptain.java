@@ -18,11 +18,17 @@ public class SouthseaCaptain extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 201;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion southseaCaptain = createMinion();
 		Aura buffAura = new BuffAura(+1, +1, EntityReference.FRIENDLY_MINIONS, Race.PIRATE);
 		southseaCaptain.setSpellTrigger(buffAura);
 		return southseaCaptain;
 	}
-
 }

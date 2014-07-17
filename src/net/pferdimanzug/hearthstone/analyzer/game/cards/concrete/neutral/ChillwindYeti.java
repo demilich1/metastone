@@ -12,9 +12,15 @@ public class ChillwindYeti extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion();
+	public int getTypeId() {
+		return 105;
 	}
 
 
+
+
+	@Override
+	public Minion summon() {
+		return createMinion();
+	}
 }

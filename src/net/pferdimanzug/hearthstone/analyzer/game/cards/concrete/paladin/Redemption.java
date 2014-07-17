@@ -19,4 +19,10 @@ public class Redemption extends SecretCard {
 		setTriggerAndEffect(new OwnMinionDeathTrigger(), reviveSpell);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 254;
+	}
 }

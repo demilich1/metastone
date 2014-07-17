@@ -31,6 +31,13 @@ public class MurlocTidehunter extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 172;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion murlocTidehunter = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(new MurlocScout()), TargetSelection.NONE);
@@ -38,5 +45,4 @@ public class MurlocTidehunter extends MinionCard {
 		murlocTidehunter.setBattlecry(battlecry);
 		return murlocTidehunter;
 	}
-
 }

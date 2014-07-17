@@ -19,6 +19,13 @@ public class PatientAssassin extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 299;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion patientAssassin = createMinion(GameTag.STEALTHED);
 		Spell killSpell = new DestroySpell();
@@ -26,5 +33,4 @@ public class PatientAssassin extends MinionCard {
 		patientAssassin.setSpellTrigger(new SpellTrigger(new PhysicalAttackTrigger(false), killSpell));
 		return patientAssassin;
 	}
-
 }

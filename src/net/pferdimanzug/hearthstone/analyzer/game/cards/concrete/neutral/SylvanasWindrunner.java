@@ -16,6 +16,13 @@ public class SylvanasWindrunner extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 213;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion sylvanasWindrunner = createMinion();
 		Spell takeControl = new MindControlRandomSpell();
@@ -23,5 +30,4 @@ public class SylvanasWindrunner extends MinionCard {
 		sylvanasWindrunner.addDeathrattle(takeControl);
 		return sylvanasWindrunner;
 	}
-
 }

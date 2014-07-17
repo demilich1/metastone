@@ -18,6 +18,13 @@ public class DarkIronDwarf extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 112;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion darkIronDwarf = createMinion();
 		BuffSpell buff = new BuffSpell(+ATTACK_BONUS, 0, true);
@@ -25,5 +32,4 @@ public class DarkIronDwarf extends MinionCard {
 		darkIronDwarf.setBattlecry(battlecry);
 		return darkIronDwarf;
 	}
-
 }

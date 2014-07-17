@@ -29,4 +29,10 @@ public class Savagery extends SpellCard {
 	
 	
 
+
+
+	@Override
+	public int getTypeId() {
+		return 19;
+	}
 }

@@ -18,6 +18,13 @@ public class MindControlTech extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 166;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion mindControlTech = createMinion();
 		Spell mindControlSpell = new MindControlRandomSpell();
@@ -30,5 +37,4 @@ public class MindControlTech extends MinionCard {
 		mindControlTech.setBattlecry(battlecry);
 		return mindControlTech;
 	}
-
 }

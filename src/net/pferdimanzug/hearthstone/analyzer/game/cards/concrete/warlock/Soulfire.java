@@ -17,4 +17,10 @@ public class Soulfire extends SpellCard {
 		setTargetRequirement(TargetSelection.ANY);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 353;
+	}
 }

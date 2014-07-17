@@ -14,8 +14,14 @@ public class ScarletCrusader extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 192;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.DIVINE_SHIELD);
 	}
-
 }

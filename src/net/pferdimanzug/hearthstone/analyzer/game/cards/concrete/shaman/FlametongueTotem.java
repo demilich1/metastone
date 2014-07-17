@@ -17,6 +17,13 @@ public class FlametongueTotem extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 320;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion flametongueTotem = createMinion();
 		flametongueTotem.setRace(Race.TOTEM);
@@ -24,5 +31,4 @@ public class FlametongueTotem extends MinionCard {
 		flametongueTotem.setSpellTrigger(flametongueTotemAura);
 		return flametongueTotem;
 	}
-
 }

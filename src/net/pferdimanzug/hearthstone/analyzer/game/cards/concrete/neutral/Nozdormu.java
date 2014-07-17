@@ -18,8 +18,14 @@ public class Nozdormu extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 177;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion();
 	}
-
 }

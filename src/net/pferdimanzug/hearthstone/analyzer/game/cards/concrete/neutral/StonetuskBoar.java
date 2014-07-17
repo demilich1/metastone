@@ -16,8 +16,14 @@ public class StonetuskBoar extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 206;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.CHARGE);
 	}
-
 }

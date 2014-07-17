@@ -36,4 +36,10 @@ public class SnakeTrap extends SecretCard {
 		setTriggerAndEffect(new MinionAttacksTrigger(), summonSpell);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 44;
+	}
 }

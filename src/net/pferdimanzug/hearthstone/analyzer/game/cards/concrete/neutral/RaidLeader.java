@@ -16,11 +16,17 @@ public class RaidLeader extends MinionCard {
 	}
 	
 	@Override
+	public int getTypeId() {
+		return 187;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion raidLeader = createMinion();
 		Aura raidLeaderAura = new BuffAura(1, 0, EntityReference.FRIENDLY_MINIONS);
 		raidLeader.setSpellTrigger(raidLeaderAura);
 		return raidLeader;
 	}
-
 }

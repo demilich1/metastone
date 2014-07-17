@@ -22,6 +22,13 @@ public class MurlocTidecaller extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 171;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion murlocTideCaller = createMinion();
 		Spell buffSpell = new BuffSpell(1);
@@ -30,5 +37,4 @@ public class MurlocTidecaller extends MinionCard {
 		murlocTideCaller.setSpellTrigger(new SpellTrigger(trigger, buffSpell));
 		return murlocTideCaller;
 	}
-
 }

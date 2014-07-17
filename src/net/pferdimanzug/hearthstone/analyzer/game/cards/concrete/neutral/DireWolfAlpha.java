@@ -17,6 +17,13 @@ public class DireWolfAlpha extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 117;
+	}
+	
+
+
+	@Override
 	public Minion summon() {
 		Minion direWolfAlpha = createMinion();
 		direWolfAlpha.setRace(Race.BEAST);
@@ -24,5 +31,4 @@ public class DireWolfAlpha extends MinionCard {
 		direWolfAlpha.setSpellTrigger(direWolfAlphaAura);
 		return direWolfAlpha;
 	}
-	
 }

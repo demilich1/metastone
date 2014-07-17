@@ -17,4 +17,10 @@ public class LightningBolt extends SpellCard {
 		setTargetRequirement(TargetSelection.ANY);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 325;
+	}
 }

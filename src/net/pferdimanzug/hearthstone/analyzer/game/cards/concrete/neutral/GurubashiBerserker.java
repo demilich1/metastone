@@ -21,6 +21,14 @@ public class GurubashiBerserker extends MinionCard {
 	}
 	
 	@Override
+	public int getTypeId() {
+		return 138;
+	}
+	
+
+
+
+	@Override
 	public Minion summon() {
 		Minion gurubashiBerserker = createMinion();
 		Spell buffAttack = new BuffSpell(ATTACK_BONUS);
@@ -29,6 +37,4 @@ public class GurubashiBerserker extends MinionCard {
 		gurubashiBerserker.setSpellTrigger(trigger);
 		return gurubashiBerserker;
 	}
-	
-
 }

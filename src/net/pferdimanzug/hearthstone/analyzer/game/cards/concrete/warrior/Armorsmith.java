@@ -17,11 +17,17 @@ public class Armorsmith extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 361;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion armorsmith = createMinion();
 		SpellTrigger trigger = new SpellTrigger(new MinionDamagedTrigger(TargetPlayer.SELF), new BuffHeroSpell(0, 1));
 		armorsmith.setSpellTrigger(trigger);
 		return armorsmith;
 	}
-
 }

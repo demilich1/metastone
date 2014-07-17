@@ -32,4 +32,10 @@ public class MirrorImage extends SpellCard {
 		setTargetRequirement(TargetSelection.NONE);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 69;
+	}
 }

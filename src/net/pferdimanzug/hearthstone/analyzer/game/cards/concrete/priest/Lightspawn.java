@@ -14,8 +14,14 @@ public class Lightspawn extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 267;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.ATTACK_EQUALS_HP);
 	}
-
 }

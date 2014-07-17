@@ -16,4 +16,10 @@ public class ArcaneMissiles extends SpellCard {
 		setSpell(new DamageRandomSpell(1, 3));
 		setPredefinedTarget(EntityReference.ENEMY_CHARACTERS);
 	}
+
+
+	@Override
+	public int getTypeId() {
+		return 53;
+	}
 }

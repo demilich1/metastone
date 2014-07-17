@@ -23,4 +23,10 @@ public class DrainLife extends SpellCard {
 		
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 339;
+	}
 }

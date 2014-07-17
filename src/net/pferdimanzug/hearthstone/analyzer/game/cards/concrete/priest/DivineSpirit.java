@@ -30,4 +30,10 @@ public class DivineSpirit extends SpellCard {
 		setTargetRequirement(TargetSelection.MINIONS);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 262;
+	}
 }

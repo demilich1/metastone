@@ -35,4 +35,10 @@ public class FarSight extends SpellCard {
 		
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 317;
+	}
 }

@@ -19,6 +19,13 @@ public class FlameImp extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 342;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion flameImp = createMinion();
 		Spell damageHeroSpell = new DamageSpell(3);
@@ -27,5 +34,4 @@ public class FlameImp extends MinionCard {
 		flameImp.setBattlecry(battlecry);
 		return flameImp;
 	}
-
 }

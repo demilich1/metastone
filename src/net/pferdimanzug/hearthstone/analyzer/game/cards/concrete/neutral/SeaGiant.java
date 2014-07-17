@@ -23,8 +23,14 @@ public class SeaGiant extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 193;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion();
 	}
-
 }

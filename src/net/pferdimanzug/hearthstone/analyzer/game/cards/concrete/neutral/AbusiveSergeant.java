@@ -18,6 +18,14 @@ public class AbusiveSergeant extends MinionCard {
 	}
 	
 	@Override
+	public int getTypeId() {
+		return 77;
+	}
+	
+
+
+
+	@Override
 	public Minion summon() {
 		Minion abusiveSergeant = createMinion();
 		
@@ -26,6 +34,4 @@ public class AbusiveSergeant extends MinionCard {
 		abusiveSergeant.setBattlecry(battlecryAbusive);
 		return abusiveSergeant;
 	}
-	
-
 }

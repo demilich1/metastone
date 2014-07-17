@@ -41,4 +41,10 @@ public class MarkOfNature extends ChooseOneCard {
 	}
 
 
+
+
+	@Override
+	public int getTypeId() {
+		return 12;
+	}
 }

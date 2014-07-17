@@ -17,6 +17,13 @@ public class Abomination extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 76;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion abomination = createMinion(GameTag.TAUNT);
 		Spell deathrattle = new DamageSpell(2);
@@ -24,5 +31,4 @@ public class Abomination extends MinionCard {
 		abomination.addDeathrattle(deathrattle);
 		return abomination;
 	}
-
 }

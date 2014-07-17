@@ -31,10 +31,16 @@ public class SavannahHighmane extends MinionCard {
 	}
 	
 	@Override
+	public int getTypeId() {
+		return 42;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion savannahHighmane = createMinion();
 		savannahHighmane.addDeathrattle(new SummonSpell(new Hyena(), new Hyena()));
 		return savannahHighmane;
 	}
-
 }

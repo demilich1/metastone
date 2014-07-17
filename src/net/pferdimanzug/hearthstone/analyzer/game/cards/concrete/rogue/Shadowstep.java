@@ -15,4 +15,10 @@ public class Shadowstep extends SpellCard {
 		setTargetRequirement(TargetSelection.FRIENDLY_MINIONS);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 303;
+	}
 }

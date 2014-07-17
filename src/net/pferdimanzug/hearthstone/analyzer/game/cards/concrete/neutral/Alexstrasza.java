@@ -37,11 +37,17 @@ public class Alexstrasza extends MinionCard {
 	}
 	
 	@Override
+	public int getTypeId() {
+		return 81;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion alexstrasza = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new AlexstraszaSpell(), TargetSelection.HEROES);
 		alexstrasza.setBattlecry(battlecry);
 		return alexstrasza;
 	}
-
 }

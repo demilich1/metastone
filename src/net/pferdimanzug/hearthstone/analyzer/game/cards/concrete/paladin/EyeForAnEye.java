@@ -40,4 +40,10 @@ public class EyeForAnEye extends SecretCard {
 		setSecret(new EyeForAnEyeSecret(this));
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 244;
+	}
 }

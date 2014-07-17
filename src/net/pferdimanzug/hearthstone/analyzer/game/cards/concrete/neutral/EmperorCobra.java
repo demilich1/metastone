@@ -20,6 +20,15 @@ public class EmperorCobra extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 124;
+	}
+	
+	
+
+
+
+	@Override
 	public Minion summon() {
 		Minion emperorCobra = createMinion();
 		Spell killSpell = new DestroySpell();
@@ -27,7 +36,4 @@ public class EmperorCobra extends MinionCard {
 		emperorCobra.setSpellTrigger(new SpellTrigger(new PhysicalAttackTrigger(false), killSpell));
 		return emperorCobra;
 	}
-	
-	
-
 }

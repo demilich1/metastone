@@ -34,6 +34,13 @@ public class IllidanStormrage extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 143;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion illidanStormrage = createMinion();
 		Spell summonSpell = new SummonSpell(new FlameOfAzzinoth());
@@ -41,5 +48,4 @@ public class IllidanStormrage extends MinionCard {
 		illidanStormrage.setSpellTrigger(trigger);
 		return illidanStormrage;
 	}
-
 }

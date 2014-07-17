@@ -17,6 +17,12 @@ public class AcidicSwampOoze extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 78;
+	}
+
+
+	@Override
 	public Minion summon() {
 		Minion acidicSwampOoze = createMinion();
 		Spell destroyWeaponSpell = new DestroyWeaponSpell();

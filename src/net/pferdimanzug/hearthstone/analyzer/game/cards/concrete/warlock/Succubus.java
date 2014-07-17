@@ -17,10 +17,16 @@ public class Succubus extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 354;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion succubus = createMinion();
 		succubus.setBattlecry(Battlecry.createBattlecry(new DiscardCardSpell()));
 		return succubus;
 	}
-
 }

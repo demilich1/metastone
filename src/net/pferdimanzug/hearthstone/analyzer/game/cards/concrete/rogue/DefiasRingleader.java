@@ -32,6 +32,13 @@ public class DefiasRingleader extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 292;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion defiasRingleader = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new ComboSpell(new NullSpell(), new SummonSpell(new DefiasBandit())),
@@ -40,5 +47,4 @@ public class DefiasRingleader extends MinionCard {
 		defiasRingleader.setBattlecry(battlecry);
 		return defiasRingleader;
 	}
-
 }

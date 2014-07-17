@@ -39,6 +39,13 @@ public class SouthseaDeckhand extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 202;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Spell chargeWhileWeaponEquipped = new ChargeWhileWeaponEquipped();
 		chargeWhileWeaponEquipped.setTarget(EntityReference.SELF);
@@ -47,5 +54,4 @@ public class SouthseaDeckhand extends MinionCard {
 		southseaDeckhand.setBattlecry(battlecry);
 		return southseaDeckhand;
 	}
-
 }

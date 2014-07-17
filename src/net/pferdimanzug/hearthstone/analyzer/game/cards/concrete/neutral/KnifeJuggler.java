@@ -19,6 +19,13 @@ public class KnifeJuggler extends MinionCard {
 	}
 	
 	@Override
+	public int getTypeId() {
+		return 151;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion knifeJuggler = createMinion();
 		Spell damageRandomSpell = new DamageRandomSpell(1, 1);
@@ -27,5 +34,4 @@ public class KnifeJuggler extends MinionCard {
 		knifeJuggler.setSpellTrigger(trigger);
 		return knifeJuggler;
 	}
-
 }

@@ -20,4 +20,10 @@ public class Charge extends SpellCard {
 		setSpell(spell);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 364;
+	}
 }

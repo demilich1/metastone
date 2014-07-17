@@ -18,11 +18,17 @@ public class IronbeakOwl extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 146;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion ironbeakOwl = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new SilenceSpell(), TargetSelection.MINIONS);
 		ironbeakOwl.setBattlecry(battlecry);
 		return ironbeakOwl;
 	}
-
 }

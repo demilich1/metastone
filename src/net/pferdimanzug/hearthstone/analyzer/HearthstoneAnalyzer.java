@@ -31,6 +31,7 @@ public class HearthstoneAnalyzer extends Application {
 		//DevCheckCardCompleteness.updateCardCatalogue();
 		//DevCheckCardCompleteness.writeImplementedCardsToFile("implemented_cards.csv");
 		launch(args);
+		//DevCheckCardCompleteness.assignUniqueIdToEachCard();
 		 //new HearthstoneAnalyzer().launchDebugGame();
 	}
 

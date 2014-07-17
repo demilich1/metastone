@@ -15,4 +15,10 @@ public class ArcaneIntellect extends SpellCard {
 		setSpell(new DrawCardSpell(2));
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 52;
+	}
 }

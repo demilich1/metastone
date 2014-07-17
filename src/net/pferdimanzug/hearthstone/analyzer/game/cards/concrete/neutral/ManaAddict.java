@@ -18,6 +18,13 @@ public class ManaAddict extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 162;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion manaAddict = createMinion();
 
@@ -26,5 +33,4 @@ public class ManaAddict extends MinionCard {
 		manaAddict.setSpellTrigger(new SpellTrigger(new SpellCastedTrigger(TargetPlayer.SELF), buffSpell));
 		return manaAddict;
 	}
-
 }

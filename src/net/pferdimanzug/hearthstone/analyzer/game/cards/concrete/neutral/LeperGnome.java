@@ -16,6 +16,13 @@ public class LeperGnome extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 154;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Spell deathrattle = new DamageSpell(2);
 		deathrattle.setTarget(EntityReference.ENEMY_HERO);
@@ -23,5 +30,4 @@ public class LeperGnome extends MinionCard {
 		leperGnome.addDeathrattle(deathrattle);
 		return leperGnome;
 	}
-
 }

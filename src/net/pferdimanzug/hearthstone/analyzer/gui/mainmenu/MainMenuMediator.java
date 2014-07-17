@@ -22,13 +22,6 @@ public class MainMenuMediator extends Mediator<GameNotification> {
 	
 	
 	@Override
-	public void onRegister() {
-		getFacade().sendNotification(GameNotification.SHOW_VIEW, view);
-	}
-
-
-
-	@Override
 	public void handleNotification(final INotification<GameNotification> notification) {
 		switch (notification.getId()) {
 		case DECK_BUILDER_SELECTED:
@@ -39,13 +32,20 @@ public class MainMenuMediator extends Mediator<GameNotification> {
 		}
 		
 	}
-	
+
+
 
 	@Override
 	public List<GameNotification> listNotificationInterests() {
 		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
 		notificationInterests.add(GameNotification.DECK_BUILDER_SELECTED);
 		return notificationInterests;
+	}
+	
+
+	@Override
+	public void onRegister() {
+		getFacade().sendNotification(GameNotification.SHOW_VIEW, view);
 	}
 
 }

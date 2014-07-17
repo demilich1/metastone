@@ -17,4 +17,10 @@ public class HeroicStrike extends SpellCard {
 		setPredefinedTarget(EntityReference.FRIENDLY_HERO);
 	}
 	
+
+
+	@Override
+	public int getTypeId() {
+		return 373;
+	}
 }

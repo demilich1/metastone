@@ -37,4 +37,10 @@ public class KillCommand extends SpellCard {
 		setTargetRequirement(TargetSelection.ANY);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 38;
+	}
 }

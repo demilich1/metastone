@@ -26,4 +26,10 @@ public class Backstab extends SpellCard {
 	
 
 
+
+
+	@Override
+	public int getTypeId() {
+		return 286;
+	}
 }

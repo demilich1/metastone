@@ -8,30 +8,11 @@ import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.HeroPower;
 
 public class IconFactory {
 
-	public static Color getRarityColor(Rarity rarity) {
-		Color color = Color.BLACK;
-		switch (rarity) {
-		case COMMON:
-			color = Color.WHITE;
-			break;
-		case EPIC:
-			// a335ee
-			color = Color.rgb(163, 53, 238);
-			break;
-		case LEGENDARY:
-			// ff8000
-			color = Color.rgb(255, 128, 0);
-			break;
-		case RARE:
-			// 0070dd
-			color = Color.rgb(0, 112, 221);
-			break;
-		default:
-			color = Color.GRAY;
-			break;
-		}
-		return color;
-
+	public static Image getClassIcon(HeroClass heroClass) {
+		String iconPath = RESOURCE_PATH + "/img/classes/";
+		iconPath += heroClass.toString().toLowerCase();
+		iconPath += ".png";
+		return new Image(iconPath);
 	}
 
 	public static String getHeroIconUrl(Hero hero) {
@@ -110,15 +91,34 @@ public class IconFactory {
 		return iconPath;
 	}
 
-	public static Image getClassIcon(HeroClass heroClass) {
-		String iconPath = RESOURCE_PATH + "/img/classes/";
-		iconPath += heroClass.toString().toLowerCase();
-		iconPath += ".png";
-		return new Image(iconPath);
-	}
-
 	public static String getImageUrl(String imageName) {
 		return RESOURCE_PATH + "/img/" + imageName;
+	}
+
+	public static Color getRarityColor(Rarity rarity) {
+		Color color = Color.BLACK;
+		switch (rarity) {
+		case COMMON:
+			color = Color.WHITE;
+			break;
+		case EPIC:
+			// a335ee
+			color = Color.rgb(163, 53, 238);
+			break;
+		case LEGENDARY:
+			// ff8000
+			color = Color.rgb(255, 128, 0);
+			break;
+		case RARE:
+			// 0070dd
+			color = Color.rgb(0, 112, 221);
+			break;
+		default:
+			color = Color.GRAY;
+			break;
+		}
+		return color;
+
 	}
 
 	public static Image getSummonHelper() {

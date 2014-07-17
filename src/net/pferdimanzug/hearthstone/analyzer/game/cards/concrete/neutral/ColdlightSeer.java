@@ -19,6 +19,14 @@ public class ColdlightSeer extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 107;
+	}
+	
+
+
+
+	@Override
 	public Minion summon() {
 		Minion coldlightSeer = createMinion();
 		Spell murlocBuffSpell =new RaceSpecificBuffSpell(0, 2, Race.MURLOC);
@@ -27,6 +35,4 @@ public class ColdlightSeer extends MinionCard {
 		coldlightSeer.setBattlecry(battlecry);
 		return coldlightSeer;
 	}
-	
-
 }

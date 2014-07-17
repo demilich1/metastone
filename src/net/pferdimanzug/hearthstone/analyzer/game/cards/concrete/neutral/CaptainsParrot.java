@@ -48,10 +48,16 @@ public class CaptainsParrot extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 104;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion captainsParrot = createMinion();
 		captainsParrot.setBattlecry(Battlecry.createBattlecry(new CaptainsParrotSpell()));
 		return captainsParrot;
 	}
-
 }

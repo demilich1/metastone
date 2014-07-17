@@ -30,13 +30,6 @@ public class DeckBuilderMediator extends Mediator<GameNotification> {
 	
 	
 
-	@Override
-	public void onRegister() {
-		getFacade().sendNotification(GameNotification.SHOW_VIEW, view);
-		view.showSidebar(deckListView);
-		getFacade().sendNotification(GameNotification.LOAD_DECKS);
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public void handleNotification(final INotification<GameNotification> notification) {
@@ -76,6 +69,13 @@ public class DeckBuilderMediator extends Mediator<GameNotification> {
 		notificationInterests.add(GameNotification.ACTIVE_DECK_CHANGED);
 		notificationInterests.add(GameNotification.DECKS_LOADED);
 		return notificationInterests;
+	}
+
+	@Override
+	public void onRegister() {
+		getFacade().sendNotification(GameNotification.SHOW_VIEW, view);
+		view.showSidebar(deckListView);
+		getFacade().sendNotification(GameNotification.LOAD_DECKS);
 	}
 
 }

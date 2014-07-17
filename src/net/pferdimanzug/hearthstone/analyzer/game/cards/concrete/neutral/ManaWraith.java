@@ -14,10 +14,16 @@ public class ManaWraith extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 163;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion manaWraith = createMinion();
 		manaWraith.setTag(GameTag.ALL_MINION_MANA_COST, +1);
 		return manaWraith;
 	}
-
 }

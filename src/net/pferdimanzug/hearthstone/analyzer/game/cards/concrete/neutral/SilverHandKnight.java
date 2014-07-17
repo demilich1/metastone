@@ -29,6 +29,13 @@ public class SilverHandKnight extends MinionCard {
 	}
 	
 	@Override
+	public int getTypeId() {
+		return 199;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion silverHandKnight = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(new Squire()));
@@ -36,5 +43,4 @@ public class SilverHandKnight extends MinionCard {
 		silverHandKnight.setBattlecry(battlecry);
 		return silverHandKnight;
 	}
-
 }

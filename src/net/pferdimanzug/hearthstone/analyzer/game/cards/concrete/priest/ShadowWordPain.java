@@ -25,4 +25,10 @@ public class ShadowWordPain extends SpellCard {
 	
 	
 
+
+
+	@Override
+	public int getTypeId() {
+		return 280;
+	}
 }

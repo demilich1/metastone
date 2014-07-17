@@ -14,10 +14,16 @@ public class VentureCoMercenary extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 221;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion ventureCoMercenary = createMinion();
 		ventureCoMercenary.setTag(GameTag.MINION_MANA_COST, 3);
 		return ventureCoMercenary;
 	}
-
 }

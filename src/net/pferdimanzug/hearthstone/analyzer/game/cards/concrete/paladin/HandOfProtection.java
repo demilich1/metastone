@@ -16,4 +16,10 @@ public class HandOfProtection extends SpellCard {
 		setSpell(new ApplyTagSpell(GameTag.DIVINE_SHIELD));
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 247;
+	}
 }

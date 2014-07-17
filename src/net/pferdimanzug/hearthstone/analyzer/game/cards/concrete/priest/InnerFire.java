@@ -32,4 +32,10 @@ public class InnerFire extends SpellCard {
 		
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 266;
+	}
 }

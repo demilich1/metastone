@@ -31,11 +31,17 @@ public class Hogger extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 141;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion hogger = createMinion();
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), new SummonSpell(new Gnoll()));
 		hogger.setSpellTrigger(trigger);
 		return hogger;
 	}
-
 }

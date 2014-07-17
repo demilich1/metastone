@@ -15,4 +15,10 @@ public class ArcaneShot extends SpellCard {
 		setSpell(new DamageSpell(2));
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 27;
+	}
 }

@@ -33,4 +33,10 @@ public class DivineFavor extends SpellCard {
 		setTargetRequirement(TargetSelection.NONE);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 242;
+	}
 }

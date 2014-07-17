@@ -12,8 +12,14 @@ public class AssassinsBlade extends WeaponCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 285;
+	}
+
+
+
+	@Override
 	public Weapon getWeapon() {
 		return createWeapon(3, 4);
 	}
-
 }

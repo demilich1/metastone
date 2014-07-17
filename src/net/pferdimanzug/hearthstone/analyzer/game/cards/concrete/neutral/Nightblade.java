@@ -18,11 +18,17 @@ public class Nightblade extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 175;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion nightblade = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new DamageSpell(BATTLECRY_DAMAGE), TargetSelection.ENEMY_HERO);
 		nightblade.setBattlecry(battlecry);
 		return nightblade;
 	}
-
 }

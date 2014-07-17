@@ -19,4 +19,10 @@ public class Snipe extends SecretCard {
 		setTriggerAndEffect(new MinionCardPlayedTrigger(), damageSpell);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 45;
+	}
 }

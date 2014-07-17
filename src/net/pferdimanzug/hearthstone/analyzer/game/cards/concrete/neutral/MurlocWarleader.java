@@ -18,11 +18,17 @@ public class MurlocWarleader extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 173;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion murlocWarleader = createMinion();
 		Aura warleaderAura = new BuffAura(+2, +1, EntityReference.ALL_MINIONS, Race.MURLOC);
 		murlocWarleader.setSpellTrigger(warleaderAura);
 		return murlocWarleader;
 	}
-
 }

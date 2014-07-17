@@ -19,6 +19,13 @@ public class QuestingAdventurer extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 184;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion questingAdventurer = createMinion();
 		Spell buffSpell = new BuffSpell(1, 1);
@@ -27,5 +34,4 @@ public class QuestingAdventurer extends MinionCard {
 		questingAdventurer.setSpellTrigger(trigger);
 		return questingAdventurer;
 	}
-
 }

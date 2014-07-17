@@ -16,11 +16,17 @@ public class AzureDrake extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 91;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion azureDrake = createMinion();
 		azureDrake.setTag(GameTag.SPELL_POWER, 1);
 		azureDrake.setBattlecry(Battlecry.createBattlecry(new DrawCardSpell()));
 		return azureDrake;
 	}
-
 }

@@ -38,4 +38,10 @@ public class HolyWrath extends SpellCard {
 		setTargetRequirement(TargetSelection.ANY);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 249;
+	}
 }

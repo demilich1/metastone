@@ -16,6 +16,14 @@ public class DarkscaleHealer extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 113;
+	}
+
+
+
+
+	@Override
 	public Minion summon() {
 		Minion darkscaleHealer = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new HealingSpell(2));
@@ -23,6 +31,4 @@ public class DarkscaleHealer extends MinionCard {
 		darkscaleHealer.setBattlecry(battlecry);
 		return darkscaleHealer;
 	}
-
-
 }

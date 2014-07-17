@@ -24,22 +24,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Ysera extends MinionCard {
 
-	public Ysera() {
-		super("Ysera", 4, 12, Rarity.LEGENDARY, HeroClass.ANY, 9);
-		setDescription("At the end of your turn, draw a Dream Card.");
-		setRace(Race.DRAGON);
-	}
-
-	@Override
-	public Minion summon() {
-		Minion ysera = createMinion(GameTag.YSERA);
-		Spell receiveDreamCard = new ReceiveRandomCardSpell(TargetPlayer.SELF, new Dream(), new EmeraldDrake(), new LaughingSister(),
-				new Nightmare(), new YseraAwakens());
-		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), receiveDreamCard);
-		ysera.setSpellTrigger(trigger);
-		return ysera;
-	}
-
 	private class Dream extends SpellCard {
 
 		public Dream() {
@@ -109,4 +93,26 @@ public class Ysera extends MinionCard {
 
 	}
 
+	public Ysera() {
+		super("Ysera", 4, 12, Rarity.LEGENDARY, HeroClass.ANY, 9);
+		setDescription("At the end of your turn, draw a Dream Card.");
+		setRace(Race.DRAGON);
+	}
+
+	@Override
+	public int getTypeId() {
+		return 233;
+	}
+
+
+
+	@Override
+	public Minion summon() {
+		Minion ysera = createMinion(GameTag.YSERA);
+		Spell receiveDreamCard = new ReceiveRandomCardSpell(TargetPlayer.SELF, new Dream(), new EmeraldDrake(), new LaughingSister(),
+				new Nightmare(), new YseraAwakens());
+		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), receiveDreamCard);
+		ysera.setSpellTrigger(trigger);
+		return ysera;
+	}
 }

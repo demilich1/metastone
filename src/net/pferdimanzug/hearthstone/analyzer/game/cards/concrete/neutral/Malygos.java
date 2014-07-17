@@ -16,10 +16,16 @@ public class Malygos extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 161;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion malygos = createMinion();
 		malygos.setTag(GameTag.SPELL_POWER, +5);
 		return malygos;
 	}
-
 }

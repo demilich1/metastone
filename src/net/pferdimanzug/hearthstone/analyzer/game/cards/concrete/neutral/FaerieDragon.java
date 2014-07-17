@@ -14,8 +14,14 @@ public class FaerieDragon extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 126;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.UNTARGETABLE_BY_SPELLS);
 	}
-
 }

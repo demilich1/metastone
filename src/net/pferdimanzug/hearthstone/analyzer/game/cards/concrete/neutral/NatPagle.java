@@ -18,6 +18,14 @@ public class NatPagle extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 174;
+	}
+	
+
+
+
+	@Override
 	public Minion summon() {
 		Minion natPagle = createMinion();
 		Spell drawCardSpell = new DrawCardSpell((context, player, target) -> context.getLogic().randomBool() ? 1 : 0, TargetPlayer.SELF);
@@ -25,6 +33,4 @@ public class NatPagle extends MinionCard {
 		natPagle.setSpellTrigger(trigger);
 		return natPagle;
 	}
-	
-
 }

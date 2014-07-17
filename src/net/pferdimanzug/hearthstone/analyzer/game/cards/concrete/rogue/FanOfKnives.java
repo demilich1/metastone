@@ -23,4 +23,10 @@ public class FanOfKnives extends SpellCard {
 		setSpell(new MetaSpell(damageSpell, drawCardSpell));
 	}
 	
+
+
+	@Override
+	public int getTypeId() {
+		return 295;
+	}
 }

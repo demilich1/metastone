@@ -24,4 +24,10 @@ public class CommandingShout extends SpellCard {
 		setTargetRequirement(TargetSelection.NONE);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 366;
+	}
 }

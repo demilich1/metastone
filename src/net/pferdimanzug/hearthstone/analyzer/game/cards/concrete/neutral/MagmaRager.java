@@ -12,8 +12,14 @@ public class MagmaRager extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 160;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion();
 	}
-
 }

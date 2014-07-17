@@ -35,4 +35,10 @@ public class Hex extends SpellCard {
 	}
 	
 
+
+
+	@Override
+	public int getTypeId() {
+		return 323;
+	}
 }

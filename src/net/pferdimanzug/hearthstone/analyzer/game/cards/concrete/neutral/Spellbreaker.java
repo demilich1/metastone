@@ -16,6 +16,13 @@ public class Spellbreaker extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 203;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion spellbreaker = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new SilenceSpell());
@@ -23,5 +30,4 @@ public class Spellbreaker extends MinionCard {
 		spellbreaker.setBattlecry(battlecry);
 		return spellbreaker;
 	}
-
 }

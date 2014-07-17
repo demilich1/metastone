@@ -59,4 +59,10 @@ public class Shadowform extends SpellCard {
 	}
 
 
+
+
+	@Override
+	public int getTypeId() {
+		return 277;
+	}
 }

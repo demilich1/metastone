@@ -23,6 +23,13 @@ public class CardListView extends VBox implements EventHandler<MouseEvent> {
 		this.setPrefSize(240, USE_COMPUTED_SIZE);
 	}
 
+	private void clearChildren() {
+		for (Node child : getChildren()) {
+			child.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);
+		}
+		getChildren().clear();
+	}
+
 	public void displayDeck(Deck deck) {
 		existingCardEntries.clear();
 		clearChildren();
@@ -40,13 +47,6 @@ public class CardListView extends VBox implements EventHandler<MouseEvent> {
 			}
 
 		}
-	}
-
-	private void clearChildren() {
-		for (Node child : getChildren()) {
-			child.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);
-		}
-		getChildren().clear();
 	}
 
 	@Override

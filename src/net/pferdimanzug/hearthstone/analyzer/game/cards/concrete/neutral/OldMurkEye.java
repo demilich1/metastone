@@ -49,6 +49,13 @@ public class OldMurkEye extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 180;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion oldMurkEye = createMinion(GameTag.CHARGE);
 		Spell buffSpell = new OldMurkEyeSpell();
@@ -57,5 +64,4 @@ public class OldMurkEye extends MinionCard {
 		oldMurkEye.setSpellTrigger(trigger);
 		return oldMurkEye;
 	}
-
 }

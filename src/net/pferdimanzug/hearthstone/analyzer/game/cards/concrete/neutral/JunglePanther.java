@@ -14,8 +14,14 @@ public class JunglePanther extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 149;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.STEALTHED);
 	}
-
 }

@@ -28,8 +28,14 @@ public class DreadCorsair extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 120;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.TAUNT);
 	}
-
 }

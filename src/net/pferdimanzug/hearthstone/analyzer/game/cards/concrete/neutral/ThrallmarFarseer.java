@@ -14,8 +14,14 @@ public class ThrallmarFarseer extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 218;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.WINDFURY);
 	}
-
 }

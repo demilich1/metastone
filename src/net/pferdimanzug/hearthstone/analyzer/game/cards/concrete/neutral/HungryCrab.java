@@ -23,6 +23,13 @@ public class HungryCrab extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 142;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion hungryCrab = createMinion();
 		Spell buffSpell = new BuffSpell(2, 2);
@@ -33,5 +40,4 @@ public class HungryCrab extends MinionCard {
 		hungryCrab.setBattlecry(battlecry);
 		return hungryCrab;
 	}
-
 }

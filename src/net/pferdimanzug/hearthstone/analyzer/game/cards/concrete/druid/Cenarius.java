@@ -57,8 +57,14 @@ public class Cenarius extends ChooseBattlecryCard {
 	}
 	
 	@Override
+	public int getTypeId() {
+		return 4;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion();
 	}
-
 }

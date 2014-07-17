@@ -15,4 +15,10 @@ public class HuntersMark extends SpellCard {
 		setTargetRequirement(TargetSelection.ENEMY_MINIONS);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 37;
+	}
 }

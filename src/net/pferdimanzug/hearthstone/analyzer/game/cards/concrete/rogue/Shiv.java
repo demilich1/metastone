@@ -17,4 +17,10 @@ public class Shiv extends SpellCard {
 		setTargetRequirement(TargetSelection.ANY);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 304;
+	}
 }

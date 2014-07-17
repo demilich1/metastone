@@ -14,8 +14,14 @@ public class SilvermoonGuardian extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 200;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.DIVINE_SHIELD);
 	}
-
 }

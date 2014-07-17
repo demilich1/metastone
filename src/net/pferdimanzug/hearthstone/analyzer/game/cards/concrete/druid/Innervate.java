@@ -15,4 +15,10 @@ public class Innervate extends SpellCard {
 		setSpell(new GainManaSpell(2));
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 9;
+	}
 }

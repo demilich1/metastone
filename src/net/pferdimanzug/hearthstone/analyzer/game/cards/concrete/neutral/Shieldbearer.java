@@ -14,8 +14,14 @@ public class Shieldbearer extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 197;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.TAUNT);
 	}
-
 }

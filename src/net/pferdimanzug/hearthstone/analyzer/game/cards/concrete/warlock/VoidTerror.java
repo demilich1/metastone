@@ -42,6 +42,13 @@ public class VoidTerror extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 357;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion voidTerror = createMinion();
 		Spell buffSpell = new VoidTerrorBuffSpell();
@@ -53,5 +60,4 @@ public class VoidTerror extends MinionCard {
 		voidTerror.setBattlecry(battlecry);
 		return voidTerror;
 	}
-
 }

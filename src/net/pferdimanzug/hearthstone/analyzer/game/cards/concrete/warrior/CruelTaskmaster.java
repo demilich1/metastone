@@ -19,6 +19,12 @@ public class CruelTaskmaster extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 367;
+	}
+
+
+	@Override
 	public Minion summon() {
 		Minion cruelTaskmaster = createMinion();
 		Spell cruelBuffSpell = new MetaSpell(new BuffSpell(2, 0), new DamageSpell(1));

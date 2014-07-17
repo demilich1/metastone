@@ -20,4 +20,10 @@ public class Execute extends SpellCard {
 		return target.getHp() < target.getMaxHp();
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 368;
+	}
 }

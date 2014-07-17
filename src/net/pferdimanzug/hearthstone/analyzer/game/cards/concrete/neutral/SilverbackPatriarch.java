@@ -14,8 +14,14 @@ public class SilverbackPatriarch extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 198;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.TAUNT);
 	}
-
 }

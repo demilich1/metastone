@@ -17,11 +17,17 @@ public class Felguard extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 341;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion felguard = createMinion(GameTag.TAUNT);
 		Battlecry battlecry = Battlecry.createBattlecry(new ModifyMaxManaSpell(-1, TargetPlayer.SELF));
 		felguard.setBattlecry(battlecry);
 		return felguard;
 	}
-
 }

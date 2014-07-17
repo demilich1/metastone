@@ -19,6 +19,13 @@ public class FrothingBerserker extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 370;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion frothingBerserker = createMinion();
 		Spell buffSpell = new BuffSpell(1);
@@ -27,5 +34,4 @@ public class FrothingBerserker extends MinionCard {
 		frothingBerserker.setSpellTrigger(trigger);
 		return frothingBerserker;
 	}
-
 }

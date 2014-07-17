@@ -18,6 +18,12 @@ public class PerditionsBlade extends WeaponCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 300;
+	}
+
+
+	@Override
 	public Weapon getWeapon() {
 		Weapon perditionsBlade = createWeapon(2, 2);
 		Spell noCombo = new DamageSpell(1);

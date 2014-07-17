@@ -15,10 +15,16 @@ public class Gorehowl extends WeaponCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 371;
+	}
+
+
+
+	@Override
 	public Weapon getWeapon() {
 		Weapon gorehowl = createWeapon(7, 1);
 		gorehowl.setTag(GameTag.CONSUME_DAMAGE_INSTEAD_OF_DURABILITY_ON_MINIONS);
 		return gorehowl;
 	}
-
 }

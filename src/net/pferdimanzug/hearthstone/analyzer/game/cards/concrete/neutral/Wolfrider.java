@@ -14,8 +14,14 @@ public class Wolfrider extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 228;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.CHARGE);
 	}
-
 }

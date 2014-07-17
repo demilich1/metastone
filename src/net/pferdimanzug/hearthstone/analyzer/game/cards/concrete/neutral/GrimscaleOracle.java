@@ -17,6 +17,13 @@ public class GrimscaleOracle extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 136;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion grimscaleOracle = createMinion();
 		grimscaleOracle.setRace(Race.MURLOC);
@@ -24,5 +31,4 @@ public class GrimscaleOracle extends MinionCard {
 		grimscaleOracle.setSpellTrigger(grimscaleOracleAura);
 		return grimscaleOracle;
 	}
-
 }

@@ -15,10 +15,16 @@ public class RagingWorgen extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 185;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion ragingWorgen = createMinion();
 		ragingWorgen.setTag(GameTag.ENRAGE_SPELL, new EnrageWindfury(1));
 		return ragingWorgen;
 	}
-
 }

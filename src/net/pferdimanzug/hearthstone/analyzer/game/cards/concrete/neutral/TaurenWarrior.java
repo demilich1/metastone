@@ -15,10 +15,16 @@ public class TaurenWarrior extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 214;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion taurenWarrior = createMinion(GameTag.TAUNT);
 		taurenWarrior.setTag(GameTag.ENRAGE_SPELL, new Enrage(3));
 		return taurenWarrior;
 	}
-
 }

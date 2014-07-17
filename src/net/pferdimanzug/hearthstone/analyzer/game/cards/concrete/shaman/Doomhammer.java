@@ -20,6 +20,13 @@ public class Doomhammer extends WeaponCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 313;
+	}
+
+
+
+	@Override
 	public Weapon getWeapon() {
 		Weapon doomhammer = createWeapon(2, 8);
 		Spell windfury = new WindfurySpell(new WeaponDestroyedTrigger());
@@ -27,5 +34,4 @@ public class Doomhammer extends WeaponCard {
 		doomhammer.setBattlecry(Battlecry.createBattlecry(windfury));
 		return doomhammer;
 	}
-
 }

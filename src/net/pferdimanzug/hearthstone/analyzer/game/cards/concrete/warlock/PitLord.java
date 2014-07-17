@@ -17,6 +17,13 @@ public class PitLord extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 346;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion pitLord = createMinion();
 		Spell damageHeroSpell = new DamageSpell(3);
@@ -25,5 +32,4 @@ public class PitLord extends MinionCard {
 		pitLord.setBattlecry(battlecry);
 		return pitLord;
 	}
-
 }

@@ -43,6 +43,13 @@ public class TruesilverChampion extends WeaponCard {
 	}
 	
 	@Override
+	public int getTypeId() {
+		return 258;
+	}
+
+
+
+	@Override
 	public Weapon getWeapon() {
 		Weapon trueSilverChampion = createWeapon(4, 2);
 		Spell healHero = new HealingSpell(2);
@@ -51,5 +58,4 @@ public class TruesilverChampion extends WeaponCard {
 		trueSilverChampion.setSpellTrigger(trigger);
 		return trueSilverChampion;
 	}
-
 }

@@ -14,8 +14,14 @@ public class WorgenInfiltrator extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 229;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.STEALTHED);
 	}
-
 }

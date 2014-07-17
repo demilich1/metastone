@@ -21,6 +21,14 @@ public class DefenderOfArgus extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 115;
+	}
+
+
+
+
+	@Override
 	public Minion summon() {
 		Minion defenderOfArgus = createMinion();
 		Spell buffSpell = new MetaSpell(new BuffSpell(1, 1), new ApplyTagSpell(GameTag.TAUNT));
@@ -30,6 +38,4 @@ public class DefenderOfArgus extends MinionCard {
 		defenderOfArgus.setBattlecry(battlecry);
 		return defenderOfArgus;
 	}
-
-
 }

@@ -14,8 +14,14 @@ public class AlAkirTheWindlord extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 309;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.WINDFURY, GameTag.CHARGE, GameTag.DIVINE_SHIELD, GameTag.TAUNT);
 	}
-
 }

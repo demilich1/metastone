@@ -73,4 +73,10 @@ public class AnimalCompanion extends SpellCard {
 		setTargetRequirement(TargetSelection.NONE);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 26;
+	}
 }

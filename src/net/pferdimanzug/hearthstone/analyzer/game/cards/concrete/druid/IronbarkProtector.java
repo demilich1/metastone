@@ -14,8 +14,14 @@ public class IronbarkProtector extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 10;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.TAUNT);
 	}
-
 }

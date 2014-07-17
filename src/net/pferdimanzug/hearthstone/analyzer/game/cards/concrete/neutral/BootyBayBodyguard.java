@@ -15,8 +15,14 @@ public class BootyBayBodyguard extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 100;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.TAUNT);
 	}
-
 }

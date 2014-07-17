@@ -14,10 +14,16 @@ public class DalaranMage extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 111;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion dalaranMage = createMinion();
 		dalaranMage.setTag(GameTag.SPELL_POWER, 1);
 		return dalaranMage;
 	}
-
 }

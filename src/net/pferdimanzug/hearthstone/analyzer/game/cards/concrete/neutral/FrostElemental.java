@@ -17,11 +17,17 @@ public class FrostElemental extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 129;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion frostElemental = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new ApplyTagSpell(GameTag.FROZEN), TargetSelection.ANY);
 		frostElemental.setBattlecry(battlecry);
 		return frostElemental;
 	}
-
 }

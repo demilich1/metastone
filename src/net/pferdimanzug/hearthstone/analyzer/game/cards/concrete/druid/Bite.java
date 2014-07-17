@@ -15,4 +15,10 @@ public class Bite extends SpellCard {
 		setSpell(new BuffHeroSpell(4, 4));
 	}
 	
+
+
+	@Override
+	public int getTypeId() {
+		return 3;
+	}
 }

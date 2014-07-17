@@ -19,6 +19,13 @@ public class PintSizedSummoner extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 182;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion pintSizedSummoner = createMinion();
 		pintSizedSummoner.setTag(GameTag.ONE_TIME_MINION_MANA_COST, -1);
@@ -27,5 +34,4 @@ public class PintSizedSummoner extends MinionCard {
 		pintSizedSummoner.setSpellTrigger(new SpellTrigger(new TurnStartTrigger(), cheaperMinions));
 		return pintSizedSummoner;
 	}
-
 }

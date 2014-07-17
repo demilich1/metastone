@@ -22,6 +22,13 @@ public class EdwinVanCleef extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 293;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion edwinVanCleef = createMinion();
 		IValueProvider comboValueProvider = new IValueProvider() {
@@ -37,5 +44,4 @@ public class EdwinVanCleef extends MinionCard {
 		edwinVanCleef.setBattlecry(Battlecry.createBattlecry(buffSpell));
 		return edwinVanCleef;
 	}
-
 }

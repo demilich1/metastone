@@ -15,4 +15,10 @@ public class Pyroblast extends SpellCard {
 		setTargetRequirement(TargetSelection.ANY);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 71;
+	}
 }

@@ -19,6 +19,13 @@ public class MillhouseManastorm extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 165;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion millhouseManastorm = createMinion();
 		Spell castSpellsForFree = new ModifyTagSpell(GameTag.SPELL_MANA_COST, -99, new TurnStartTrigger());
@@ -26,5 +33,4 @@ public class MillhouseManastorm extends MinionCard {
 		millhouseManastorm.setBattlecry(Battlecry.createBattlecry(castSpellsForFree));
 		return millhouseManastorm;
 	}
-
 }

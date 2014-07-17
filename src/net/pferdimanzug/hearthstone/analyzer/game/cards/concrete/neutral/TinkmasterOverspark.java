@@ -13,24 +13,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class TinkmasterOverspark extends MinionCard {
 
-	public TinkmasterOverspark() {
-		super("Tinkmaster Overspark", 3, 3, Rarity.LEGENDARY, HeroClass.ANY, 3);
-		setDescription("Battlecry: Transform another random minion into a 5/5 Devilsaur or a 1/1 Squirrel.");
-	}
-
-	@Override
-	public Minion summon() {
-		Minion tinkmasterOverspark = createMinion();
-		Spell devilsaurSpell = new TransformRandomMinionSpell(new Devilsaur());
-		Spell squirellSpell = new TransformRandomMinionSpell(new Squirrel());
-		Spell randomTransformSpell = new EitherOrSpell(devilsaurSpell, squirellSpell, (context, player, target) -> context.getLogic()
-				.randomBool());
-		randomTransformSpell.setTarget(EntityReference.ALL_MINIONS);
-		Battlecry battlecry = Battlecry.createBattlecry(randomTransformSpell);
-		tinkmasterOverspark.setBattlecry(battlecry);
-		return tinkmasterOverspark;
-	}
-
 	private class Devilsaur extends MinionCard {
 
 		public Devilsaur() {
@@ -61,4 +43,28 @@ public class TinkmasterOverspark extends MinionCard {
 
 	}
 
+	public TinkmasterOverspark() {
+		super("Tinkmaster Overspark", 3, 3, Rarity.LEGENDARY, HeroClass.ANY, 3);
+		setDescription("Battlecry: Transform another random minion into a 5/5 Devilsaur or a 1/1 Squirrel.");
+	}
+
+	@Override
+	public int getTypeId() {
+		return 219;
+	}
+
+
+
+	@Override
+	public Minion summon() {
+		Minion tinkmasterOverspark = createMinion();
+		Spell devilsaurSpell = new TransformRandomMinionSpell(new Devilsaur());
+		Spell squirellSpell = new TransformRandomMinionSpell(new Squirrel());
+		Spell randomTransformSpell = new EitherOrSpell(devilsaurSpell, squirellSpell, (context, player, target) -> context.getLogic()
+				.randomBool());
+		randomTransformSpell.setTarget(EntityReference.ALL_MINIONS);
+		Battlecry battlecry = Battlecry.createBattlecry(randomTransformSpell);
+		tinkmasterOverspark.setBattlecry(battlecry);
+		return tinkmasterOverspark;
+	}
 }

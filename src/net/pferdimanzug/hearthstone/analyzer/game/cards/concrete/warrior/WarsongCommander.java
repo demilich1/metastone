@@ -43,6 +43,13 @@ public class WarsongCommander extends MinionCard {
 	}
 	
 	@Override
+	public int getTypeId() {
+		return 382;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion warsongCommander = createMinion();
 		Spell chargeSpell = new ApplyTagSpell(GameTag.CHARGE);
@@ -55,5 +62,4 @@ public class WarsongCommander extends MinionCard {
 		warsongCommander.setSpellTrigger(trigger);
 		return warsongCommander;
 	}
-
 }

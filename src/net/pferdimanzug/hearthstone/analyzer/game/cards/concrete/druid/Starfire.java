@@ -17,4 +17,10 @@ public class Starfire extends SpellCard {
 		setTargetRequirement(TargetSelection.ANY);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 22;
+	}
 }

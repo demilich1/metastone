@@ -64,4 +64,10 @@ public class ShadowMadness extends SpellCard {
 		return minion.getAttack() <= 3;
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 278;
+	}
 }

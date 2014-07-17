@@ -16,11 +16,17 @@ public class YouthfulBrewmaster extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 232;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Battlecry battlecry = Battlecry.createBattlecry(new ReturnMinionToHandSpell(), TargetSelection.FRIENDLY_MINIONS);
 		Minion youthfulBrewmaster = createMinion();
 		youthfulBrewmaster.setBattlecry(battlecry);
 		return youthfulBrewmaster;
 	}
-
 }

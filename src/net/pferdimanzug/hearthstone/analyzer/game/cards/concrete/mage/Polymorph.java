@@ -33,4 +33,10 @@ public class Polymorph extends SpellCard {
 		setSpell(new TransformMinionSpell(new Sheep()));
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 70;
+	}
 }

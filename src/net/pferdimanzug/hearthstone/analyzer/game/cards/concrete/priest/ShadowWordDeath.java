@@ -23,4 +23,10 @@ public class ShadowWordDeath extends SpellCard {
 		return targetActor.getAttack() >= 5;
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 279;
+	}
 }

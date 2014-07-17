@@ -18,4 +18,10 @@ public class RockbiterWeapon extends SpellCard {
 		setTargetRequirement(TargetSelection.FRIENDLY_CHARACTERS);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 328;
+	}
 }

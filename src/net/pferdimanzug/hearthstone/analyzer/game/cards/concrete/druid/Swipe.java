@@ -44,4 +44,10 @@ public class Swipe extends SpellCard {
 		setTargetRequirement(TargetSelection.ENEMY_CHARACTERS);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 23;
+	}
 }

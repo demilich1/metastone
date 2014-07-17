@@ -18,4 +18,10 @@ public class Flamestrike extends SpellCard {
 	}
 
 
+
+
+	@Override
+	public int getTypeId() {
+		return 60;
+	}
 }

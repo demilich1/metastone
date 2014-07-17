@@ -15,8 +15,14 @@ public class EarthElemental extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 315;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.TAUNT);
 	}
-
 }

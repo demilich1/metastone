@@ -35,6 +35,13 @@ public class EtherealArcanist extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 58;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion etherealArcanist = createMinion();
 		Spell buffSpell = new BuffSpell(2, 2);
@@ -43,5 +50,4 @@ public class EtherealArcanist extends MinionCard {
 		etherealArcanist.setSpellTrigger(trigger);
 		return etherealArcanist;
 	}
-
 }

@@ -19,4 +19,10 @@ public class MindBlast extends SpellCard {
 		setPredefinedTarget(EntityReference.ENEMY_HERO);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 270;
+	}
 }

@@ -17,6 +17,13 @@ public class CaptainGreenskin extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 103;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion captainGreenskin = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new BuffWeaponSpell(1, 1));
@@ -24,5 +31,4 @@ public class CaptainGreenskin extends MinionCard {
 		captainGreenskin.setBattlecry(battlecry);
 		return captainGreenskin;
 	}
-
 }

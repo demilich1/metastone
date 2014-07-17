@@ -14,8 +14,14 @@ public class StormwindKnight extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 209;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.CHARGE);
 	}
-
 }

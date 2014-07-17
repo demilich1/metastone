@@ -19,6 +19,13 @@ public class WaterElemental extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 75;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion waterElemental = createMinion();
 		Spell freezeSpell = new ApplyTagSpell(GameTag.FROZEN);
@@ -26,5 +33,4 @@ public class WaterElemental extends MinionCard {
 		waterElemental.setSpellTrigger(new SpellTrigger(new PhysicalAttackTrigger(true), freezeSpell));
 		return waterElemental;
 	}
-
 }

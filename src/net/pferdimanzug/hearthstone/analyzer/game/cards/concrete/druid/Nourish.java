@@ -44,4 +44,10 @@ public class Nourish extends ChooseOneCard {
 		setCard2(new NourishDrawCard());
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 16;
+	}
 }

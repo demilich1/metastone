@@ -14,11 +14,17 @@ public class SummoningPortal extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 355;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion summoningPortal = createMinion();
 		summoningPortal.setTag(GameTag.MINION_MANA_COST, -2);
 		summoningPortal.setTag(GameTag.MINION_MIN_MANA_COST, 1);
 		return summoningPortal;
 	}
-
 }

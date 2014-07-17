@@ -33,4 +33,10 @@ public class Spellbender extends SecretCard {
 		setTriggerAndEffect(new MinionTargetedBySpellTrigger(), spellbenderSpell);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 73;
+	}
 }

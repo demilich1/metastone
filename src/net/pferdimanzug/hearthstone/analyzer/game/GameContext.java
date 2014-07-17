@@ -122,14 +122,6 @@ public class GameContext implements Cloneable {
 		return environment;
 	}
 	
-	@SuppressWarnings("unchecked")
-	public Stack<Minion> getSummonStack() {
-		if (!environment.containsKey(Environment.SUMMON_STACK)) {
-			environment.put(Environment.SUMMON_STACK, new Stack<Minion>());
-		}
-		return (Stack<Minion>) environment.get(Environment.SUMMON_STACK);
-	}
-
 	public GameLogic getLogic() {
 		return logic;
 	}
@@ -137,7 +129,7 @@ public class GameContext implements Cloneable {
 	public int getMinionCount(Player player) {
 		return player.getMinions().size();
 	}
-	
+
 	public Player getOpponent(Player player) {
 		return player.getId() == PLAYER_1 ? getPlayer2() : getPlayer1();
 	}
@@ -145,11 +137,11 @@ public class GameContext implements Cloneable {
 	public Player getPlayer(int index) {
 		return players[index];
 	}
-
+	
 	public Player getPlayer1() {
 		return getPlayers()[PLAYER_1];
 	}
-	
+
 	public Player getPlayer2() {
 		return getPlayers()[PLAYER_2];
 	}
@@ -160,6 +152,14 @@ public class GameContext implements Cloneable {
 	
 	public GameResult getResult() {
 		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Stack<Minion> getSummonStack() {
+		if (!environment.containsKey(Environment.SUMMON_STACK)) {
+			environment.put(Environment.SUMMON_STACK, new Stack<Minion>());
+		}
+		return (Stack<Minion>) environment.get(Environment.SUMMON_STACK);
 	}
 	
 	public int getTotalMinionCount() {

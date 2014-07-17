@@ -230,6 +230,14 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 
 public class CardCatalogue {
 
+	public static CardCollection getAll() {
+		CardCollection result = new CardCollection();
+		for (Card card : cards) {
+			result.add(card);
+		}
+		return result;
+	}
+
 	public static Card getCardByName(String name) {
 		for (Card card : cards) {
 			if (card.getName().equals(name)) {
@@ -239,7 +247,7 @@ public class CardCatalogue {
 
 		return null;
 	}
-
+	
 	public static CardCollection query(CardType cardType, Rarity rarity, HeroClass heroClass) {
 		CardCollection result = new CardCollection();
 		for (Card card : cards) {
@@ -258,14 +266,6 @@ public class CardCatalogue {
 			result.add(card.clone());
 		}
 
-		return result;
-	}
-	
-	public static CardCollection getAll() {
-		CardCollection result = new CardCollection();
-		for (Card card : cards) {
-			result.add(card);
-		}
 		return result;
 	}
 

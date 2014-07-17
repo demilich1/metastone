@@ -14,8 +14,14 @@ public class CoreHound extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 108;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion();
 	}
-
 }

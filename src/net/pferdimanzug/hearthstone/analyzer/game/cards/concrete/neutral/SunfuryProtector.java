@@ -19,6 +19,13 @@ public class SunfuryProtector extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 211;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion sunfuryProtector = createMinion();
 		Spell buffSpell = new ApplyTagSpell(GameTag.TAUNT);
@@ -28,5 +35,4 @@ public class SunfuryProtector extends MinionCard {
 		sunfuryProtector.setBattlecry(battlecry);
 		return sunfuryProtector;
 	}
-
 }

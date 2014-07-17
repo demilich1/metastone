@@ -37,11 +37,17 @@ public class NorthshireCleric extends MinionCard {
 	}
 	
 	@Override
+	public int getTypeId() {
+		return 274;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion northshireCleric = createMinion();
 		SpellTrigger trigger = new SpellTrigger(new NorthshireClericTrigger(), new DrawCardSpell());
 		northshireCleric.setSpellTrigger(trigger);
 		return northshireCleric;
 	}
-
 }

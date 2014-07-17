@@ -18,10 +18,16 @@ public class ColdlightOracle extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 106;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion coldlightOracle = createMinion();
 		coldlightOracle.setBattlecry(Battlecry.createBattlecry(new DrawCardSpell(2, TargetPlayer.BOTH)));
 		return coldlightOracle;
 	}
-
 }

@@ -18,6 +18,13 @@ public class YoungPriestess extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 231;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion youngPriestess = createMinion();
 		Spell spell = new BuffRandomSpell(0, 1);
@@ -26,5 +33,4 @@ public class YoungPriestess extends MinionCard {
 		youngPriestess.setSpellTrigger(trigger);
 		return youngPriestess;
 	}
-
 }

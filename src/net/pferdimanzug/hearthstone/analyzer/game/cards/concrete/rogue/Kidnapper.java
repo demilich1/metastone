@@ -17,6 +17,13 @@ public class Kidnapper extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 297;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion kidnapper = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new ReturnMinionToHandSpell(), TargetSelection.MINIONS);
@@ -24,5 +31,4 @@ public class Kidnapper extends MinionCard {
 		kidnapper.setBattlecry(battlecry);
 		return kidnapper;
 	}
-
 }

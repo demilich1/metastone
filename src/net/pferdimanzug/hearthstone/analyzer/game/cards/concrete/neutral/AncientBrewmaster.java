@@ -16,13 +16,19 @@ public class AncientBrewmaster extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 83;
+	}
+	
+	
+
+
+
+	@Override
 	public Minion summon() {
 		Minion ancientBrewmaster = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new ReturnMinionToHandSpell(), TargetSelection.FRIENDLY_MINIONS);
 		ancientBrewmaster.setBattlecry(battlecry);
 		return ancientBrewmaster;
 	}
-	
-	
-
 }

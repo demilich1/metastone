@@ -14,9 +14,15 @@ public class ArgentSquire extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 90;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion argentSquire = createMinion(GameTag.DIVINE_SHIELD);
 		return argentSquire;
 	}
-
 }

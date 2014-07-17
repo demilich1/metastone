@@ -19,6 +19,13 @@ public class BloodsailRaider extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 98;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion bloodsailRaider = createMinion();
 		Spell buffSpell = new BuffSpell((context, player, target) -> player.getHero().getWeapon().getWeaponDamage(), null);
@@ -29,5 +36,4 @@ public class BloodsailRaider extends MinionCard {
 		bloodsailRaider.setBattlecry(battlecry);
 		return bloodsailRaider;
 	}
-
 }

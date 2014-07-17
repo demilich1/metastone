@@ -15,11 +15,17 @@ public class BloodmageThalnos extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 96;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion bloodmageThalnos = createMinion();
 		bloodmageThalnos.setTag(GameTag.SPELL_POWER, +1);
 		bloodmageThalnos.addDeathrattle(new DrawCardSpell());
 		return bloodmageThalnos;
 	}
-
 }

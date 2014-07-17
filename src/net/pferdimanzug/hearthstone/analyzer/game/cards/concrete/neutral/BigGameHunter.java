@@ -17,6 +17,13 @@ public class BigGameHunter extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 93;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion bigGameHunter = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(new DestroySpell(), TargetSelection.MINIONS);
@@ -30,5 +37,4 @@ public class BigGameHunter extends MinionCard {
 		bigGameHunter.setBattlecry(battlecry);
 		return bigGameHunter;
 	}
-
 }

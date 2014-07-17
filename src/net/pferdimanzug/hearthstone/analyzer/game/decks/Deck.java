@@ -15,6 +15,16 @@ public class Deck {
 		this.heroClass = heroClass;
 	}
 
+	public int containsHowMany(Card card) {
+		int count = 0;
+		for (Card cardInDeck : cards) {
+			if (card.getTypeId() == cardInDeck.getTypeId()) {
+				count++;
+			}
+		}
+		return count;
+	}
+
 	public CardCollection getCards() {
 		return cards;
 	}
@@ -34,18 +44,8 @@ public class Deck {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+	
 	public void setName(String name) {
 		this.name = name;
-	}
-	
-	public int containsHowMany(Card card) {
-		int count = 0;
-		for (Card cardInDeck : cards) {
-			if (card.getTypeId() == cardInDeck.getTypeId()) {
-				count++;
-			}
-		}
-		return count;
 	}
 }

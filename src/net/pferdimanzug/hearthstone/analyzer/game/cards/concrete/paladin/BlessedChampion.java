@@ -31,4 +31,10 @@ public class BlessedChampion extends SpellCard {
 		setTargetRequirement(TargetSelection.MINIONS);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 237;
+	}
 }

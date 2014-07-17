@@ -18,4 +18,10 @@ public class AvengingWrath extends SpellCard {
 		setPredefinedTarget(EntityReference.ENEMY_CHARACTERS);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 236;
+	}
 }

@@ -17,4 +17,10 @@ public class HolySmite extends SpellCard {
 		setSpell(new DamageSpell(DAMAGE));
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 265;
+	}
 }
