@@ -3,6 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.decks;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
+import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 
 public class Deck {
 	
@@ -41,6 +42,10 @@ public class Deck {
 		return name;
 	}
 
+	public boolean isComplete() {
+		return getCards().getCount() == GameLogic.DECK_SIZE;
+	}
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}

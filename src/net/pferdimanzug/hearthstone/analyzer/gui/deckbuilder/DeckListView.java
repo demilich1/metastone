@@ -3,15 +3,18 @@ package net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder;
 import java.io.IOException;
 import java.util.List;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
 
-public class DeckListView extends VBox {
+public class DeckListView extends VBox implements EventHandler<MouseEvent> {
 
 	@FXML
 	private Button newDeckButton;
@@ -30,14 +33,28 @@ public class DeckListView extends VBox {
 		newDeckButton.setOnAction(actionEvent -> ApplicationFacade.getInstance().sendNotification(GameNotification.CREATE_NEW_DECK));
 	}
 	
-	public void displayDecks(List<Deck> decks) {
+	private void clearChildren() {
+		for (Node child : getChildren()) {
+			child.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);
+		}
 		getChildren().clear();
+	}
+	
+	public void displayDecks(List<Deck> decks) {
+		clearChildren();
 		getChildren().add(newDeckButton);
 		for (Deck deck : decks) {
 			DeckEntry deckEntry = new DeckEntry();
 			deckEntry.setDeck(deck);
+			deckEntry.addEventHandler(MouseEvent.MOUSE_CLICKED, this);
 			getChildren().add(deckEntry);
 		}
+	}
+
+	@Override
+	public void handle(MouseEvent event) {
+		DeckEntry deckEntry = (DeckEntry) event.getSource();
+		ApplicationFacade.getInstance().sendNotification(GameNotification.SET_ACTIVE_DECK, deckEntry.getDeck());
 	}
 
 }

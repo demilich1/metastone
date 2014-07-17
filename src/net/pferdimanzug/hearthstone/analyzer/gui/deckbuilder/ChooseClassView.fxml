@@ -16,9 +16,9 @@
    <center>
       <GridPane alignment="TOP_CENTER" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="80.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="80.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="80.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -42,4 +42,13 @@
       <URL value="@../main.css" />
       <URL value="@deckbuilder.css" />
    </stylesheets>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="40.0" spacing="8.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label id="#name-small" text="Or import from:" />
+            <TextField fx:id="importField" promptText="enter URL" />
+            <Button fx:id="importButton" mnemonicParsing="false" text="Import" />
+         </children>
+      </HBox>
+   </bottom>
 </fx:root>

@@ -59,6 +59,9 @@ public class CardToken extends BorderPane {
 		setCacheHint(CacheHint.DEFAULT);
 		
 		baseRarityGemSize = rarityGem.getRadius();
+		manaCostLabel.setCache(true);
+		attackLabel.setCache(true);
+		hpLabel.setCache(true);
 	}
 
 	public Card getCard() {

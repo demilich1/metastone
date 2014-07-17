@@ -5,7 +5,7 @@
 #bordered-panel {
 	-fx-background-color: navajowhite;
 	-fx-border-width: 2;
-	-fx-border-color: slategrey ;
+	-fx-border-color: slategrey;
 	-fx-border-radius: 10;
 	-fx-border-insets: 4;
 }
@@ -13,7 +13,7 @@
 #side-bar {
 	-fx-background: tan;
 	-fx-border-width: 2;
-	-fx-border-color: slategrey ;
+	-fx-border-color: slategrey;
 	-fx-background-color: tan;
 	-fx-border-radius: 10;
 }

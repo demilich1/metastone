@@ -2,14 +2,14 @@ package net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder;
 
 import java.io.IOException;
 
-import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
-import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
+import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 
 public class CardFilterView extends HBox implements ChangeListener<String> {
 	

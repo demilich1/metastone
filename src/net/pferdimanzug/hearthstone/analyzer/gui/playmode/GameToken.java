@@ -2,7 +2,6 @@ package net.pferdimanzug.hearthstone.analyzer.gui.playmode;
 
 import java.io.IOException;
 
-import net.pferdimanzug.hearthstone.analyzer.gui.IconFactory;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -20,6 +19,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import net.pferdimanzug.hearthstone.analyzer.gui.IconFactory;
 
 public class GameToken extends BorderPane {
 
