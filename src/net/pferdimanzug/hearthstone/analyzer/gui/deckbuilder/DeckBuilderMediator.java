@@ -18,6 +18,7 @@ public class DeckBuilderMediator extends Mediator<GameNotification> {
 	private final CardListView cardListView;
 	private final DeckInfoView deckInfoView;
 	private final DeckListView deckListView;
+	private final DeckNameView deckNameView;
 
 	public DeckBuilderMediator() {
 		super(NAME);
@@ -26,9 +27,8 @@ public class DeckBuilderMediator extends Mediator<GameNotification> {
 		cardListView = new CardListView();
 		deckInfoView = new DeckInfoView();
 		deckListView = new DeckListView();
+		deckNameView = new DeckNameView();
 	}
-	
-	
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -41,13 +41,15 @@ public class DeckBuilderMediator extends Mediator<GameNotification> {
 		case EDIT_DECK:
 			view.showMainArea(cardView);
 			view.showSidebar(cardListView);
-			view.showInfoArea(deckInfoView);
+			view.showLowerInfoArea(deckInfoView);
+			view.showUpperInfoArea(deckNameView);
 			view.showBottomBar(new CardFilterView());
 			break;
 		case ACTIVE_DECK_CHANGED:
 			Deck deck = (Deck) notification.getBody();
 			cardListView.displayDeck(deck);
 			deckInfoView.updateDeck(deck);
+			deckNameView.updateDeck(deck);
 			break;
 		case FILTERED_CARDS:
 			cardView.displayCards((List<Card>) notification.getBody());

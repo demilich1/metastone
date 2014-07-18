@@ -7,7 +7,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
@@ -42,12 +41,6 @@ public class ChooseClassView extends BorderPane implements EventHandler<ActionEv
 	@FXML
 	private Button priestButton;
 	
-	@FXML
-	private TextField importField;
-	
-	@FXML
-	private Button importButton;
-
 	public ChooseClassView() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ChooseClassView.fxml"));
 		fxmlLoader.setRoot(this);
@@ -70,18 +63,12 @@ public class ChooseClassView extends BorderPane implements EventHandler<ActionEv
 		shamanButton.setOnAction(this);
 		mageButton.setOnAction(this);
 		priestButton.setOnAction(this);
-		
-		importButton.setOnAction(this);
 	}
 
 	@Override
 	public void handle(ActionEvent event) {
 		Deck newDeck = null;
-		if (event.getSource() == importButton) {
-			ApplicationFacade.getInstance().sendNotification(GameNotification.IMPORT_DECK_FROM_URL, importField.getText());
-			return;
-		}
-		else if (event.getSource() == warriorButton) {
+		if (event.getSource() == warriorButton) {
 			newDeck = new Deck(HeroClass.WARRIOR);
 		} else if (event.getSource() == paladinButton) {
 			newDeck = new Deck(HeroClass.PALADIN);

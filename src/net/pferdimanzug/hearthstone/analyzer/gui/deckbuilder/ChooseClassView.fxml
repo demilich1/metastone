@@ -42,13 +42,4 @@
       <URL value="@../main.css" />
       <URL value="@deckbuilder.css" />
    </stylesheets>
-   <bottom>
-      <HBox alignment="CENTER" prefHeight="40.0" spacing="8.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label id="#name-small" text="Or import from:" />
-            <TextField fx:id="importField" promptText="enter URL" />
-            <Button fx:id="importButton" mnemonicParsing="false" text="Import" />
-         </children>
-      </HBox>
-   </bottom>
 </fx:root>

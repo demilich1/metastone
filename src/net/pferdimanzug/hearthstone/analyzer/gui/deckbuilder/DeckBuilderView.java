@@ -2,24 +2,36 @@ package net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder;
 
 import java.io.IOException;
 
+import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
+import net.pferdimanzug.hearthstone.analyzer.GameNotification;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
-public class DeckBuilderView extends BorderPane {
+public class DeckBuilderView extends BorderPane implements EventHandler<ActionEvent> {
 
 	@FXML
 	private ScrollPane scrollPane;
 
 	@FXML
-	private Pane contentArea;
+	private Pane lowerInfoArea;
 	
 	@FXML
-	private Pane infoArea;
+	private Pane upperInfoArea;
+	
+	@FXML
+	private TextField importField;
+	
+	@FXML
+	private Button importButton;
 
 	public DeckBuilderView() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DeckBuilderView.fxml"));
@@ -31,6 +43,8 @@ public class DeckBuilderView extends BorderPane {
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
+		
+		importButton.setOnAction(this);
 	}
 
 	public void showBottomBar(Node content) {
@@ -38,18 +52,29 @@ public class DeckBuilderView extends BorderPane {
 		setBottom(content);
 	}
 
-	public void showInfoArea(Node content) {
-		infoArea.getChildren().clear();
-		infoArea.getChildren().add(content);
+	public void showLowerInfoArea(Node content) {
+		lowerInfoArea.getChildren().clear();
+		lowerInfoArea.getChildren().add(content);
+	}
+	
+	public void showUpperInfoArea(Node content) {
+		upperInfoArea.getChildren().clear();
+		upperInfoArea.getChildren().add(content);
 	}
 	
 	public void showMainArea(Node content) {
-		contentArea.getChildren().clear();
-		contentArea.getChildren().add(content);
+		setCenter(content);
 	}
 	
 	public void showSidebar(Node content) {
 		scrollPane.setContent(content);
+	}
+
+	@Override
+	public void handle(ActionEvent event) {
+		if (event.getSource() == importButton) {
+			ApplicationFacade.getInstance().sendNotification(GameNotification.IMPORT_DECK_FROM_URL, importField.getText());
+		}
 	}
 
 }

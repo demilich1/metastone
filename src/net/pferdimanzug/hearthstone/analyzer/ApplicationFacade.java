@@ -1,6 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer;
 
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.AddCardToDeckCommand;
+import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.ChangeDeckNameCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.FillDeckWithRandomCardsCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.FilterCardsByTextCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.ImportDeckCommand;
@@ -34,6 +35,7 @@ public class ApplicationFacade extends Facade<GameNotification> {
 		registerCommand(GameNotification.FILTER_CARDS_BY_TEXT, new FilterCardsByTextCommand());
 		registerCommand(GameNotification.FILL_DECK_WITH_RANDOM_CARDS, new FillDeckWithRandomCardsCommand());
 		registerCommand(GameNotification.IMPORT_DECK_FROM_URL, new ImportDeckCommand());
+		registerCommand(GameNotification.CHANGE_DECK_NAME, new ChangeDeckNameCommand());
 
 	}
 

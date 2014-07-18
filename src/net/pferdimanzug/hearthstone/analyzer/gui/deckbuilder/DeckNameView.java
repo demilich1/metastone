@@ -1,0 +1,49 @@
+package net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder;
+
+import java.io.IOException;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
+import net.pferdimanzug.hearthstone.analyzer.GameNotification;
+import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
+import net.pferdimanzug.hearthstone.analyzer.gui.IconFactory;
+
+public class DeckNameView extends HBox implements ChangeListener<String> {
+	
+	@FXML
+	private ImageView classIcon;
+	
+	@FXML
+	private TextField nameField;
+
+	public DeckNameView() {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DeckNameView.fxml"));
+		fxmlLoader.setRoot(this);
+		fxmlLoader.setController(this);
+
+		try {
+			fxmlLoader.load();
+		} catch (IOException exception) {
+			throw new RuntimeException(exception);
+		}
+		
+		nameField.textProperty().addListener(this);
+	}
+	
+	public void updateDeck(Deck deck) {
+		classIcon.setImage(IconFactory.getClassIcon(deck.getHeroClass()));
+		nameField.setText(deck.getName());
+	}
+
+	@Override
+	public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+		ApplicationFacade.getInstance().sendNotification(GameNotification.CHANGE_DECK_NAME, newValue);
+	}
+
+}

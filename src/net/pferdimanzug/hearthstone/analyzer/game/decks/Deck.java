@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 
 public class Deck {
 	
-	private String name;
+	private String name = "";
 	private final HeroClass heroClass;
 	private final CardCollection cards = new CardCollection();
 	private String description;

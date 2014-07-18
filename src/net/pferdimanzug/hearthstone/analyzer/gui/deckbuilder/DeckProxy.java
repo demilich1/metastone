@@ -20,6 +20,7 @@ import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.validation.DefaultD
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.validation.IDeckValidator;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
