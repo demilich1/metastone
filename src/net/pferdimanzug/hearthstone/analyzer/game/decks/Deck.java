@@ -42,15 +42,15 @@ public class Deck {
 		return name;
 	}
 
-	public boolean isComplete() {
-		return getCards().getCount() == GameLogic.DECK_SIZE;
-	}
-	
 	public void setDescription(String description) {
 		this.description = description;
 	}
 	
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public boolean isComplete() {
+		return getCards().getCount() == GameLogic.DECK_SIZE;
 	}
 }

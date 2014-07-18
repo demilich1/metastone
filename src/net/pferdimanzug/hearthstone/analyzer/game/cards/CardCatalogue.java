@@ -238,19 +238,20 @@ public class CardCatalogue {
 		return result;
 	}
 
-	public static Card getCardById(int id) {
+	public static Card getCardByName(String name) {
 		for (Card card : cards) {
-			if (card.getTypeId() == id) {
+			if (card.getName().equals(name)) {
 				return card.clone();
 			}
 		}
 
 		return null;
 	}
+
 	
-	public static Card getCardByName(String name) {
+	public static Card getCardById(int id) {
 		for (Card card : cards) {
-			if (card.getName().equals(name)) {
+			if (card.getTypeId() == id) {
 				return card.clone();
 			}
 		}
