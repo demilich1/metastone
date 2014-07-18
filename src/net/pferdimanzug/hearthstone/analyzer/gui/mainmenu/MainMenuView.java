@@ -16,6 +16,9 @@ public class MainMenuView extends BorderPane {
 
 	@FXML
 	private Button playModeButton;
+	
+	@FXML
+	private Button simulationModeButton;
 
 	public MainMenuView() {
 

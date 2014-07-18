@@ -51,7 +51,7 @@ public class HearthPwnImporter implements IDeckImporter {
 			RequestConfig globalConfig = RequestConfig.custom().setCircularRedirectsAllowed(true).build();
 			CloseableHttpClient httpclient = HttpClientBuilder.create().build();
 			String exportUrl = getExportUrl(url);
-			System.out.println("Requesting: " + exportUrl);
+			logger.debug("Requesting: " + exportUrl);
 
 			HttpGet httpGet = new HttpGet(exportUrl);
 			httpGet.setConfig(globalConfig);
