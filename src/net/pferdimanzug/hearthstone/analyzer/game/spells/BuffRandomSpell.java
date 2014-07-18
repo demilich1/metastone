@@ -18,7 +18,7 @@ public class BuffRandomSpell extends BuffSpell {
 
 	@Override
 	public void cast(GameContext context, Player player, List<Entity> targets) {
-		if (targets == null || targets.size() == 0) {
+		if (targets == null || targets.isEmpty()) {
 			return;
 		}
 		Entity randomTarget = getRandomTarget(targets);

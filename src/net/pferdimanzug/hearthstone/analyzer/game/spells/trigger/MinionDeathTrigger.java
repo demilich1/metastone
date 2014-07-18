@@ -18,6 +18,10 @@ public class MinionDeathTrigger extends GameEventTrigger {
 		this(TargetPlayer.BOTH, null);
 	}
 	
+	public MinionDeathTrigger(TargetPlayer targetPlayer) {
+		this(targetPlayer, null);
+	}
+	
 	public MinionDeathTrigger(TargetPlayer targetPlayer, Race race) {
 		this.targetPlayer = targetPlayer;
 		this.race = race;
