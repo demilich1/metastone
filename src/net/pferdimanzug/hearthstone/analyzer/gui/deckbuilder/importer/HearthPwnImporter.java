@@ -26,10 +26,14 @@ public class HearthPwnImporter implements IDeckImporter {
 
 	private String extractId(String url) {
 		String result = "";
+		boolean digitEncountered = false;
 		for (int i = 0; i < url.length(); i++) {
 			char c = url.charAt(i);
 			if (Character.isDigit(c)) {
 				result += c;
+				digitEncountered = true;
+			} else if (digitEncountered) {
+				break;
 			}
 		}
 		return result;

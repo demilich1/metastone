@@ -116,7 +116,11 @@ public class DeckProxy extends Proxy<GameNotification> {
 		saveData.put("cards", cardIds);
 		String jsonData = gson.toJson(saveData);
 		try {
-			Files.write(Paths.get("./decks/" + deck.getName()+ ".json"), jsonData.getBytes());
+			String filename = deck.getName().toLowerCase();
+			filename = filename.replaceAll(" ", "_");
+			filename = filename.replaceAll("\\W+", "");
+			filename = "./decks/" + filename + ".json";
+			Files.write(Paths.get(filename), jsonData.getBytes());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
