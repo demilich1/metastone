@@ -1,4 +1,4 @@
-package net.pferdimanzug.hearthstone.analyzer.gui.playmode;
+package net.pferdimanzug.hearthstone.analyzer.gui.cards;
 
 import javafx.scene.control.Tooltip;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;

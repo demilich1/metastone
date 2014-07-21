@@ -64,4 +64,9 @@ public class HumanBehaviour implements IBehaviour {
 		waitingForInput = false;
 	}
 
+	@Override
+	public String getName() {
+		return "Human Controlled";
+	}
+
 }

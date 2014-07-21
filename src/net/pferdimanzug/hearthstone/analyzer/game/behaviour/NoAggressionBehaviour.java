@@ -40,4 +40,9 @@ public class NoAggressionBehaviour implements IBehaviour {
 		return null;
 	}
 
+	@Override
+	public String getName() {
+		return "No Aggression";
+	}
+
 }

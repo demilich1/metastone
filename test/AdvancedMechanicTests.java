@@ -272,6 +272,11 @@ public class AdvancedMechanicTests extends BasicTests {
 			public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
 				return null;
 			}
+
+			@Override
+			public String getName() {
+				return "Select-First";
+			}
 		});
 		
 		playCard(context, mage, new TestMinionCard(baseAttack, 1));

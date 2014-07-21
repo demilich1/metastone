@@ -1,4 +1,4 @@
-package net.pferdimanzug.hearthstone.analyzer.gui.playmode;
+package net.pferdimanzug.hearthstone.analyzer.gui.cards;
 
 import java.util.ArrayList;
 import java.util.List;

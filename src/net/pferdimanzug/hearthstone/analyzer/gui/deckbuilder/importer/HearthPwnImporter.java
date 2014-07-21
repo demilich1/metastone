@@ -77,7 +77,7 @@ public class HearthPwnImporter implements IDeckImporter {
 
 	private Deck parse(String htmlContent) {
 		List<Card> cards = new ArrayList<Card>();
-		HeroClass heroClass = null;
+		HeroClass heroClass = HeroClass.ANY;
 		// remove html tags
 		htmlContent = htmlContent.replaceAll("\\<.+?\\>", "");
 		// remove BBCode tags

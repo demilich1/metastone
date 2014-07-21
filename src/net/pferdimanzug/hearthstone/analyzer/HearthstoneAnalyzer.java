@@ -6,12 +6,12 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.DebugDecks;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.MinMaxBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.NoAggressionBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Innervate;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.Ysera;
+import net.pferdimanzug.hearthstone.analyzer.game.decks.DeckFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
@@ -42,10 +42,10 @@ public class HearthstoneAnalyzer extends Application {
 
 				for (int i = 0; i < 100; i++) {
 					Hero hero1 = HeroFactory.createHero(heroClass1);
-					Player player1 = new Player("Human", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
+					Player player1 = new Player("Human", hero1, DeckFactory.getRandomCards(hero1.getHeroClass()));
 					player1.setBehaviour(new MinMaxBehaviour());
 					Hero hero2 = HeroFactory.createHero(heroClass2);
-					Player player2 = new Player("Bot", hero2, DebugDecks.getRandomDeck(hero2.getHeroClass()));
+					Player player2 = new Player("Bot", hero2, DeckFactory.getRandomCards(hero2.getHeroClass()));
 					player2.setBehaviour(new MinMaxBehaviour());
 					GameContext newGame = new GameContext(player1, player2, new GameLogic());
 					ApplicationFacade.getInstance().sendNotification(GameNotification.START_GAME, newGame);
@@ -66,14 +66,14 @@ public class HearthstoneAnalyzer extends Application {
 		Hero hero1 = HeroFactory.createHero(humanHeroClass);
 		// Player player1 = new Player("Human", hero1,
 		// DebugDecks.getRandomDeck(hero1.getHeroClass()));
-		Player player1 = new Player("Human", hero1, DebugDecks.getDeckConsistingof(30, new Ysera(), new Innervate()));
+		Player player1 = new Player("Human", hero1, DeckFactory.getDeckConsistingof(30, new Ysera(), new Innervate()));
 		player1.setBehaviour(new HumanBehaviour());
 
 		Hero hero2 = HeroFactory.createHero(aiHeroClass);
 		// Player player2 = new Player("Bot", hero2,
 		// DebugDecks.getRandomDeck(hero2.getHeroClass()));
 		//Player player2 = new Player("Bot", hero2, DebugDecks.getDeckConsistingof(30, new HarvestGolem(), new IceBlock(), new IceBarrier()));
-		Player player2 = new Player("Bot", hero2, DebugDecks.getRandomDeck(aiHeroClass));
+		Player player2 = new Player("Bot", hero2, DeckFactory.getRandomCards(aiHeroClass));
 		player2.setBehaviour(new NoAggressionBehaviour());
 		GameContext newGame = new GameContextVisualizable(player1, player2, new GameLogic());
 		ApplicationFacade.getInstance().sendNotification(GameNotification.START_GAME, newGame);

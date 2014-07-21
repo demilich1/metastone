@@ -20,7 +20,6 @@ import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.validation.DefaultD
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.validation.IDeckValidator;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,7 +30,7 @@ import com.google.gson.reflect.TypeToken;
 import de.pferdimanzug.nittygrittymvc.Proxy;
 
 public class DeckProxy extends Proxy<GameNotification> {
-	
+
 	private static Logger logger = LoggerFactory.getLogger(DeckProxy.class);
 
 	public static final String NAME = "DeckProxy";
@@ -74,7 +73,8 @@ public class DeckProxy extends Proxy<GameNotification> {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		for (File file : FileUtils.listFiles(folder, new String[] { "json" }, true)) {
 			FileReader reader = new FileReader(file);
-			HashMap<String, Object> map = gson.fromJson(reader, new TypeToken<HashMap<String, Object>>() {}.getType());
+			HashMap<String, Object> map = gson.fromJson(reader, new TypeToken<HashMap<String, Object>>() {
+			}.getType());
 			if (!map.containsKey("heroClass")) {
 				logger.error("Deck {} does not speficy a value for 'heroClass' and is therefor not valid", file.getName());
 				continue;
@@ -93,17 +93,17 @@ public class DeckProxy extends Proxy<GameNotification> {
 			decks.add(deck);
 		}
 	}
-	
+
 	public void removeCardFromDeck(Card card) {
 		activeDeck.getCards().remove(card);
 	}
-	
+
 	public void saveActiveDeck() {
 		decks.add(activeDeck);
 		saveToJson(activeDeck);
 		activeDeck = null;
 	}
-	
+
 	private void saveToJson(Deck deck) {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		HashMap<String, Object> saveData = new HashMap<String, Object>();
@@ -111,7 +111,7 @@ public class DeckProxy extends Proxy<GameNotification> {
 		saveData.put("description", deck.getDescription());
 		saveData.put("heroClass", deck.getHeroClass());
 		List<Integer> cardIds = new ArrayList<Integer>();
-		for(Card card : deck.getCards()) {
+		for (Card card : deck.getCards()) {
 			cardIds.add(card.getTypeId());
 		}
 		saveData.put("cards", cardIds);
@@ -126,7 +126,7 @@ public class DeckProxy extends Proxy<GameNotification> {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void setActiveDeck(Deck activeDeck) {
 		this.activeDeck = activeDeck;
 	}

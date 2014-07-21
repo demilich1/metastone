@@ -26,4 +26,9 @@ public class DoNothingBehaviour implements IBehaviour {
 		return null;
 	}
 
+	@Override
+	public String getName() {
+		return "Do Nothing";
+	}
+
 }

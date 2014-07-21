@@ -25,6 +25,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 import net.pferdimanzug.hearthstone.analyzer.gui.IconFactory;
+import net.pferdimanzug.hearthstone.analyzer.gui.cards.HandCard;
 
 public class GameBoardView extends BorderPane {
 

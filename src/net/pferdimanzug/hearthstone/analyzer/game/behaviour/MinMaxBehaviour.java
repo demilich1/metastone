@@ -140,4 +140,9 @@ public class MinMaxBehaviour implements IBehaviour {
 		return simulation;
 	}
 
+	@Override
+	public String getName() {
+		return "Min-Max";
+	}
+
 }

@@ -4,10 +4,10 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PhysicalAttackAction;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.DebugDecks;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
+import net.pferdimanzug.hearthstone.analyzer.game.decks.DeckFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
@@ -28,6 +28,11 @@ public class TestBase {
 		public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
 			return null;
 		}
+
+		@Override
+		public String getName() {
+			return "Null Behaviour";
+		}
 		
 	}
 	
@@ -38,9 +43,9 @@ public class TestBase {
 	}
 	
 	protected static DebugContext createContext(Hero hero1, Hero hero2) {
-		Player player1 = new Player("P1", hero1, DebugDecks.getRandomDeck(hero1.getHeroClass()));
+		Player player1 = new Player("P1", hero1, DeckFactory.getRandomCards(hero1.getHeroClass()));
 		player1.setBehaviour(new NullBehaviour());
-		Player player2 = new Player("P2", hero2, DebugDecks.getRandomDeck(hero2.getHeroClass()));
+		Player player2 = new Player("P2", hero2, DeckFactory.getRandomCards(hero2.getHeroClass()));
 		player2.setBehaviour(new NullBehaviour());
 		GameLogic logic = new GameLogic();
 		DebugContext context = new DebugContext(player1, player2, logic);

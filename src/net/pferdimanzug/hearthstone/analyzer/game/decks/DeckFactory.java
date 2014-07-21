@@ -1,4 +1,4 @@
-package net.pferdimanzug.hearthstone.analyzer.game.behaviour;
+package net.pferdimanzug.hearthstone.analyzer.game.decks;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -8,7 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 
-public class DebugDecks {
+public class DeckFactory {
 	
 	public static CardCollection getDeckConsistingof(int count, Card... cards) {
 		CardCollection deck = new CardCollection();
@@ -19,7 +19,7 @@ public class DebugDecks {
 		return deck;
 	}
 	
-	public static CardCollection getRandomDeck(HeroClass heroClass) {
+	public static CardCollection getRandomCards(HeroClass heroClass) {
 		CardCollection deck = new CardCollection();
 		CardCollection classCards = CardCatalogue.query(null, null, heroClass);
 		
@@ -41,6 +41,13 @@ public class DebugDecks {
 			
 		}
 		
+		return deck;
+	}
+	
+	public static Deck getRandomDeck(HeroClass heroClass) {
+		Deck deck = new Deck(heroClass);
+		deck.setName("[Random deck]");
+		deck.getCards().addAll(getRandomCards(heroClass));
 		return deck;
 	}
 	

@@ -1,4 +1,4 @@
-package net.pferdimanzug.hearthstone.analyzer.gui.playmode;
+package net.pferdimanzug.hearthstone.analyzer.gui.cards;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

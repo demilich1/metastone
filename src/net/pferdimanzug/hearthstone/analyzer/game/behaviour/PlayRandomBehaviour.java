@@ -54,4 +54,9 @@ public class PlayRandomBehaviour implements IBehaviour {
 		action.setTargetKey(EntityReference.pointTo(randomTarget));
 	}
 
+	@Override
+	public String getName() {
+		return "Play Random";
+	}
+
 }

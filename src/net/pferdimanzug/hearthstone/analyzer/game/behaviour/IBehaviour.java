@@ -8,7 +8,10 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public interface IBehaviour {
-	public Entity provideTargetFor(Player player, GameAction action);
-	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions);
 
+	Entity provideTargetFor(Player player, GameAction action);
+
+	GameAction requestAction(GameContext context, Player player, List<GameAction> validActions);
+
+	String getName();
 }

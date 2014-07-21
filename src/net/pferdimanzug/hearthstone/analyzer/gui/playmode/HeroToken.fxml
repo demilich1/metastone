@@ -10,37 +10,37 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<fx:root type="BorderPane" id="" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<fx:root id="" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <center>
     <StackPane fx:id="targetAnchor" prefHeight="-1.0" prefWidth="-1.0">
       <children>
         <ImageView fx:id="portrait" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
           <image>
-            <Image url="@../resources/img/heroes/garrosh.png" />
+            <Image url="@../../resources/img/heroes/garrosh.png" />
           </image>
         </ImageView>
         <ImageView fitHeight="100.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" translateX="2.0" translateY="2.0" StackPane.alignment="BOTTOM_RIGHT">
           <image>
-            <Image url="@../resources/img/common/health_value_icon.png" />
+            <Image url="@../../resources/img/common/health_value_icon.png" />
           </image>
         </ImageView>
-        <Text id="outlined_score" fx:id="hpLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-8.0" translateY="-2.0" StackPane.alignment="BOTTOM_RIGHT">
+        <Text id="outlined-score" fx:id="hpLabel" cache="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-8.0" translateY="-2.0" StackPane.alignment="BOTTOM_RIGHT">
           <StackPane.margin>
             <Insets />
           </StackPane.margin>
         </Text>
         <ImageView fitHeight="100.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateX="-2.0" translateY="5.0" StackPane.alignment="BOTTOM_LEFT">
           <image>
-            <Image url="@../resources/img/common/attack_value_icon.png" />
+            <Image url="@../../resources/img/common/attack_value_icon.png" />
           </image>
         </ImageView>
-        <Text id="outlined_score" fx:id="attackLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="11.0" translateY="-2.0" StackPane.alignment="BOTTOM_LEFT" />
+        <Text id="outlined-score" fx:id="attackLabel" cache="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="11.0" translateY="-2.0" StackPane.alignment="BOTTOM_LEFT" />
         <ImageView fx:id="armorIcon" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateX="4.0" translateY="8.0" StackPane.alignment="CENTER_RIGHT">
           <image>
-            <Image url="@../resources/img/common/armor.png" />
+            <Image url="@../../resources/img/common/armor.png" />
           </image>
         </ImageView>
-        <Text id="outlined_score" fx:id="armorLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-8.0" translateY="8.0" StackPane.alignment="CENTER_RIGHT" />
+        <Text id="outlined-score" fx:id="armorLabel" cache="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-8.0" translateY="8.0" StackPane.alignment="CENTER_RIGHT" />
         <FlowPane fx:id="secretsAnchor" prefHeight="-1.0" prefWidth="64.0" StackPane.alignment="TOP_CENTER" />
       </children>
       <padding>
@@ -57,8 +57,8 @@
             <Font name="Arial Bold" size="10.0" />
           </font>
         </Label>
-        <Text id="outlined_score" fx:id="weaponAttackLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateY="-20.0" StackPane.alignment="BOTTOM_LEFT" />
-        <Text id="outlined_score" fx:id="weaponDurabilityLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateY="-20.0" StackPane.alignment="BOTTOM_RIGHT" />
+        <Text id="outlined-score" fx:id="weaponAttackLabel" cache="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateY="-20.0" StackPane.alignment="BOTTOM_LEFT" />
+        <Text id="outlined-score" fx:id="weaponDurabilityLabel" cache="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateY="-20.0" StackPane.alignment="BOTTOM_RIGHT" />
       </children>
       <padding>
         <Insets bottom="4.0" left="4.0" top="4.0" />
@@ -73,7 +73,7 @@
       <children>
         <ImageView id="heropower" fx:id="heroPowerIcon" fitHeight="150.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" translateY="0.0" y="0.0">
           <image>
-            <Image url="@../resources/img/powers/armor_up.png" />
+            <Image url="@../../resources/img/powers/armor_up.png" />
           </image>
         </ImageView>
         <Label id="mana" fx:id="manaLabel" alignment="CENTER" maxWidth="64.0" text="Mana: 10/10" textAlignment="LEFT" textFill="#0066ff" translateX="8.0" translateY="4.0" wrapText="true" VBox.vgrow="ALWAYS">
@@ -89,5 +89,6 @@
   </right>
   <stylesheets>
     <URL value="@gameboard.css" />
+      <URL value="@../main.css" />
   </stylesheets>
 </fx:root>

@@ -34,6 +34,8 @@ public class MainMenuView extends BorderPane {
 		
 		deckBuilderButton.setOnAction(actionEvent -> ApplicationFacade.getInstance().sendNotification(
 				GameNotification.DECK_BUILDER_SELECTED));
+		playModeButton.setOnAction(actionEvent -> ApplicationFacade.getInstance().sendNotification(
+				GameNotification.PLAY_MODE_SELECTED));
 	}
 
 }
