@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<fx:root type="BorderPane" prefHeight="-1.0" prefWidth="-1.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<fx:root prefHeight="-1.0" prefWidth="-1.0" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <center>
     <StackPane fx:id="targetAnchor" prefHeight="-1.0" prefWidth="-1.0" BorderPane.alignment="CENTER">
       <children>
@@ -24,16 +24,16 @@
           <children>
             <ImageView fitHeight="100.0" fitWidth="32.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" translateX="-2.0" translateY="3.0" y="0.0" StackPane.alignment="BOTTOM_LEFT">
               <image>
-                <Image url="@../resources/img/common/attack_value_icon.png" />
+                <Image url="@../../resources/img/common/attack_value_icon.png" />
               </image>
             </ImageView>
-            <Text id="outlined_score" fx:id="attack" disable="false" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="LEFT" translateX="10.0" translateY="-4.0" StackPane.alignment="BOTTOM_LEFT" />
+            <Text id="outlined-score" fx:id="attack" disable="false" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="LEFT" translateX="10.0" translateY="-4.0" StackPane.alignment="BOTTOM_LEFT" />
             <ImageView fitHeight="100.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" translateX="2.0" translateY="2.0" StackPane.alignment="BOTTOM_RIGHT">
               <image>
-                <Image url="@../resources/img/common/health_value_icon.png" />
+                <Image url="@../../resources/img/common/health_value_icon.png" />
               </image>
             </ImageView>
-            <Text id="outlined_score" fx:id="hp" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-8.0" translateY="-4.0" StackPane.alignment="BOTTOM_RIGHT" />
+            <Text id="outlined-score" fx:id="hp" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-8.0" translateY="-4.0" StackPane.alignment="BOTTOM_RIGHT" />
           </children>
         </StackPane>
       </children>
@@ -44,5 +44,6 @@
   </padding>
   <stylesheets>
     <URL value="@gameboard.css" />
+      <URL value="@../main.css" />
   </stylesheets>
 </fx:root>

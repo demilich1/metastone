@@ -10,12 +10,15 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 
 public class DeckFactory {
 	
-	public static CardCollection getDeckConsistingof(int count, Card... cards) {
-		CardCollection deck = new CardCollection();
+	public static Deck getDeckConsistingof(int count, Card... cards) {
+		CardCollection cardCollection = new CardCollection();
 		for (int i = 0; i < count; i++) {
 			int randomIndex = ThreadLocalRandom.current().nextInt(cards.length);
-			deck.add(cards[randomIndex].clone());
+			cardCollection.add(cards[randomIndex].clone());
 		}
+		Deck deck = new Deck(HeroClass.ANY);
+		deck.setName("[Debug deck]");
+		deck.getCards().addAll(cardCollection);
 		return deck;
 	}
 	

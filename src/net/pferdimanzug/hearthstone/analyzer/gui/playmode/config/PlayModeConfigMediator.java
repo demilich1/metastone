@@ -5,6 +5,8 @@ import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
+import net.pferdimanzug.hearthstone.analyzer.gui.gameconfig.GameConfig;
+import net.pferdimanzug.hearthstone.analyzer.gui.playmode.PlayModeMediator;
 import de.pferdimanzug.nittygrittymvc.Mediator;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
@@ -33,6 +35,11 @@ public class PlayModeConfigMediator extends Mediator<GameNotification> {
 			List<Deck> decks = (List<Deck>) notification.getBody();
 			view.injectDecks(decks);
 			break;
+		case COMMIT_PLAYMODE_CONFIG:
+			getFacade().registerMediator(new PlayModeMediator());
+			GameConfig gameConfig = (GameConfig) notification.getBody();
+			getFacade().sendNotification(GameNotification.START_GAME, gameConfig);
+			break;
 		default:
 			break;
 		}
@@ -42,6 +49,7 @@ public class PlayModeConfigMediator extends Mediator<GameNotification> {
 	public List<GameNotification> listNotificationInterests() {
 		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
 		notificationInterests.add(GameNotification.ANSWER_DECKS);
+		notificationInterests.add(GameNotification.COMMIT_PLAYMODE_CONFIG);
 		return notificationInterests;
 	}
 

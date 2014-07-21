@@ -5,8 +5,10 @@ import java.util.List;
 
 import javafx.application.Platform;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanActionOptions;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanTargetOptions;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import de.pferdimanzug.nittygrittymvc.Mediator;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
@@ -71,12 +73,11 @@ public class PlayModeMediator extends Mediator<GameNotification> {
 	}
 
 	private void selectTarget(final HumanTargetOptions targetOptions) {
-		// List<Entity> validTargets =
-		// targetOptions.getAction().getValidTargets();
-		// if (validTargets.size() == 1) {
-		// targetOptions.getBehaviour().setSelectedTarget(validTargets.get(0));
-		// return;
-		// }
+		List<Entity> validTargets = targetOptions.getAction().getValidTargets();
+		if (validTargets.size() == 1 && targetOptions.getAction().getActionType() == ActionType.SUMMON) {
+			targetOptions.getBehaviour().setSelectedTarget(validTargets.get(0));
+			return;
+		}
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {

@@ -74,7 +74,9 @@ public class GameBoardView extends BorderPane {
 		// initialize card ui elements
 		for (int i = 0; i < p1Cards.length; i++) {
 			p1Cards[i] = new HandCard();
+			p1Cards[i].setVisible(false);
 			p2Cards[i] = new HandCard();
+			p2Cards[i].setVisible(false);
 		}
 		p1CardPane.getChildren().addAll(p1Cards);
 		p2CardPane.getChildren().addAll(p2Cards);
@@ -84,10 +86,12 @@ public class GameBoardView extends BorderPane {
 			Button summonHelper = createSummonHelper();
 			p1MinionPane.getChildren().add(summonHelper);
 			p1Minions[i] = new MinionToken();
+			p1Minions[i].setVisible(false);
 			p1MinionPane.getChildren().add(p1Minions[i]);
 			summonHelperMap.put(p1Minions[i], summonHelper);
 			
 			p2Minions[i] = new MinionToken();
+			p2Minions[i].setVisible(false);
 		}
 		// create one additional summon helper
 		Button summonHelper = createSummonHelper();
@@ -196,8 +200,10 @@ public class GameBoardView extends BorderPane {
 	public void updateGameState(GameContextVisualizable context) {
 		entityTokenMap.clear();
 		p1Hero.setHero(context.getPlayer1());
+		p1Hero.highlight(context.getActivePlayer() == context.getPlayer1());
 		entityTokenMap.put(context.getPlayer1().getHero(), p1Hero);
 		p2Hero.setHero(context.getPlayer2());
+		p2Hero.highlight(context.getActivePlayer() == context.getPlayer2());
 		entityTokenMap.put(context.getPlayer2().getHero(), p2Hero);
 		
 		updateHandCards(context, context.getPlayer1(), p1Cards);

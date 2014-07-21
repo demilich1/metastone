@@ -42,13 +42,13 @@ public class HearthstoneAnalyzer extends Application {
 
 				for (int i = 0; i < 100; i++) {
 					Hero hero1 = HeroFactory.createHero(heroClass1);
-					Player player1 = new Player("Human", hero1, DeckFactory.getRandomCards(hero1.getHeroClass()));
+					Player player1 = new Player("Human", hero1, DeckFactory.getRandomDeck(heroClass1));
 					player1.setBehaviour(new MinMaxBehaviour());
 					Hero hero2 = HeroFactory.createHero(heroClass2);
-					Player player2 = new Player("Bot", hero2, DeckFactory.getRandomCards(hero2.getHeroClass()));
+					Player player2 = new Player("Bot", hero2, DeckFactory.getRandomDeck(hero2.getHeroClass()));
 					player2.setBehaviour(new MinMaxBehaviour());
 					GameContext newGame = new GameContext(player1, player2, new GameLogic());
-					ApplicationFacade.getInstance().sendNotification(GameNotification.START_GAME, newGame);
+					ApplicationFacade.getInstance().sendNotification(GameNotification.PLAY_GAME, newGame);
 				}
 
 			}
@@ -73,10 +73,10 @@ public class HearthstoneAnalyzer extends Application {
 		// Player player2 = new Player("Bot", hero2,
 		// DebugDecks.getRandomDeck(hero2.getHeroClass()));
 		//Player player2 = new Player("Bot", hero2, DebugDecks.getDeckConsistingof(30, new HarvestGolem(), new IceBlock(), new IceBarrier()));
-		Player player2 = new Player("Bot", hero2, DeckFactory.getRandomCards(aiHeroClass));
+		Player player2 = new Player("Bot", hero2, DeckFactory.getRandomDeck(aiHeroClass));
 		player2.setBehaviour(new NoAggressionBehaviour());
 		GameContext newGame = new GameContextVisualizable(player1, player2, new GameLogic());
-		ApplicationFacade.getInstance().sendNotification(GameNotification.START_GAME, newGame);
+		ApplicationFacade.getInstance().sendNotification(GameNotification.PLAY_GAME, newGame);
 	}
 
 	@Override

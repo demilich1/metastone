@@ -13,9 +13,12 @@
       <Text id="header" strokeType="OUTSIDE" strokeWidth="0.0" text="Play Mode" BorderPane.alignment="CENTER" />
    </top>
    <padding>
-      <Insets top="20.0" />
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
    <center>
       <HBox fx:id="playerArea" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
+   <bottom>
+      <Button id="default-button" fx:id="startButton" mnemonicParsing="false" text="Start" BorderPane.alignment="CENTER" />
+   </bottom>
 </fx:root>

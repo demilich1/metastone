@@ -9,6 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.LoadDecksCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.RemoveCardFromDeckCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.SaveDeckCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.SetActiveDeckCommand;
+import net.pferdimanzug.hearthstone.analyzer.gui.playmode.StartGameCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.playmode.config.RequestDecksCommand;
 import de.pferdimanzug.nittygrittymvc.Facade;
 import de.pferdimanzug.nittygrittymvc.interfaces.IFacade;
@@ -27,6 +28,7 @@ public class ApplicationFacade extends Facade<GameNotification> {
 	public ApplicationFacade() {
 		registerCommand(GameNotification.APPLICATION_STARTUP, new ApplicationStartupCommand());
 		registerCommand(GameNotification.START_GAME, new StartGameCommand());
+		registerCommand(GameNotification.PLAY_GAME, new PlayGameCommand());
 		
 		registerCommand(GameNotification.SET_ACTIVE_DECK, new SetActiveDeckCommand());
 		registerCommand(GameNotification.ADD_CARD_TO_DECK, new AddCardToDeckCommand());

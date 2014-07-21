@@ -4,7 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import de.pferdimanzug.nittygrittymvc.SimpleCommand;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
-public class StartGameCommand extends SimpleCommand<GameNotification> {
+public class PlayGameCommand extends SimpleCommand<GameNotification> {
 
 	@Override
 	public void execute(INotification<GameNotification> notification) {

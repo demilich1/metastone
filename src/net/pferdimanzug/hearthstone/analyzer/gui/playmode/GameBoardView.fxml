@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root type="BorderPane" id="board" prefHeight="768.0" prefWidth="1024.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<fx:root id="board" prefHeight="768.0" prefWidth="1024.0" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <bottom>
     <BorderPane prefHeight="-1.0" prefWidth="-1.0">
       <bottom>
@@ -29,7 +29,7 @@
       <center>
         <HBox id="center_message" alignment="CENTER" prefHeight="-1.0" prefWidth="-1.0" BorderPane.alignment="CENTER">
           <children>
-            <Label id="center_message" fx:id="centerMessageLabel" text="&lt;center message&gt;" visible="false">
+            <Label id="center-message" fx:id="centerMessageLabel" text="&lt;center message&gt;" visible="false">
               <stylesheets>
                 <URL value="@gameboard.css" />
               </stylesheets>

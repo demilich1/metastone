@@ -4,18 +4,6 @@
     -fx-fill: slategrey;
 }
 
-#default-button {
-	-fx-font-size: 18pt;
-    -fx-font-family: "Arial";
-    -fx-fill: slategrey;
-}
-
-#default-label {
-	-fx-font-size: 18pt;
-    -fx-font-family: "Arial";
-    -fx-fill: slategrey;
-}
-
 #card-entry {
 	-fx-border-width: 2;
 	-fx-border-color: black;

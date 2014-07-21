@@ -19,6 +19,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.MinMaxBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.NoAggressionBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.PlayRandomBehaviour;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.DeckFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Anduin;
@@ -55,7 +56,10 @@ public class PlayerConfigView extends VBox {
 
 	private List<Deck> decks = new ArrayList<Deck>();
 
-	public PlayerConfigView() {
+	private PreselectionHint selectionHint;
+
+	public PlayerConfigView(PreselectionHint selectionHint) {
+		this.selectionHint = selectionHint;
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PlayerConfigView.fxml"));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
@@ -71,12 +75,21 @@ public class PlayerConfigView extends VBox {
 		behaviourBox.setConverter(new BehaviourStringConverter());
 		setupHeroes();
 		setupBehaviours();
+		deckBox.valueProperty().addListener((ChangeListener<Deck>) (observableProperty, oldDeck, newDeck) -> {
+			getPlayerConfig().setDeck(newDeck);
+		});
 	}
 
 	public void setupHeroes() {
 		ObservableList<Hero> heroList = FXCollections.observableArrayList();
-		heroList.add(new Garrosh());
-		heroList.add(new Jaina());
+		if (selectionHint == PreselectionHint.HUMAN) {
+			heroList.add(new Jaina());
+			heroList.add(new Garrosh());
+		} else {
+			heroList.add(new Garrosh());
+			heroList.add(new Jaina());
+		}
+		
 		heroList.add(new Rexxar());
 		heroList.add(new Guldan());
 		heroList.add(new Valeera());
@@ -87,29 +100,36 @@ public class PlayerConfigView extends VBox {
 		heroBox.setItems(heroList);
 		heroBox.valueProperty().addListener((ChangeListener<Hero>) (observableValue, oldHero, newHero) -> {
 			selectHero(newHero);
-		  });
+		});
 	}
 
 	public void setupBehaviours() {
 		ObservableList<IBehaviour> behaviourList = FXCollections.observableArrayList();
-		behaviourList.add(new PlayRandomBehaviour());
+		if (selectionHint == PreselectionHint.HUMAN) {
+			behaviourList.add(new HumanBehaviour());
+			behaviourList.add(new PlayRandomBehaviour());
+		} else {
+			behaviourList.add(new PlayRandomBehaviour());
+			behaviourList.add(new HumanBehaviour());
+		}
+		
 		behaviourList.add(new MinMaxBehaviour());
 		behaviourList.add(new NoAggressionBehaviour());
 
 		behaviourBox.setItems(behaviourList);
+		behaviourBox.valueProperty().addListener((ChangeListener<IBehaviour>) (observableValue, oldBehaviour, newBehaviour) -> {
+			getPlayerConfig().setBehaviour(newBehaviour);
+		});
 	}
 
 	public void injectDecks(List<Deck> decks) {
 		this.decks = decks;
-		playerConfig.setHero(heroBox.itemsProperty().getValue().get(0));
-		selectHero(playerConfig.getHero());
-		filterDecks();
-		playerConfig.setDeck(deckBox.itemsProperty().getValue().get(0));
-		playerConfig.setBehaviour(behaviourBox.itemsProperty().getValue().get(0));
+		heroBox.getSelectionModel().selectFirst();
+		behaviourBox.getSelectionModel().selectFirst();
 	}
 
 	private void filterDecks() {
-		HeroClass heroClass = playerConfig.getHero().getHeroClass();
+		HeroClass heroClass = getPlayerConfig().getHero().getHeroClass();
 		ObservableList<Deck> deckList = FXCollections.observableArrayList();
 
 		Deck randomDeck = DeckFactory.getRandomDeck(heroClass);
@@ -120,13 +140,15 @@ public class PlayerConfigView extends VBox {
 			}
 		}
 		deckBox.setItems(deckList);
+		deckBox.getSelectionModel().selectFirst();
 	}
 
 	private void selectHero(Hero hero) {
 		Image heroPortrait = new Image(IconFactory.getHeroIconUrl(hero));
 		heroIcon.setImage(heroPortrait);
 		heroNameLabel.setText(hero.getName());
-		heroBox.setValue(hero);
+		getPlayerConfig().setHero(hero);
+		filterDecks();
 	}
 
 	public PlayerConfig getPlayerConfig() {

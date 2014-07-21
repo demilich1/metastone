@@ -19,10 +19,10 @@ public class CloningTest extends TestBase {
 	public void testCloning() {
 		for (int i = 0; i < 100; i++) {
 			Hero hero1 = new Jaina();
-			Player player1 = new Player("Random dude 1", hero1, DeckFactory.getRandomCards(hero1.getHeroClass()));
+			Player player1 = new Player("Random dude 1", hero1, DeckFactory.getRandomDeck(hero1.getHeroClass()));
 			player1.setBehaviour(new PlayRandomBehaviour());
 			Hero hero2 = new Garrosh();
-			Player player2 = new Player("Random dude 2", hero2, DeckFactory.getRandomCards(hero2.getHeroClass()));
+			Player player2 = new Player("Random dude 2", hero2, DeckFactory.getRandomDeck(hero2.getHeroClass()));
 			player2.setBehaviour(new PlayRandomBehaviour());
 			GameContext original = new GameContext(player1, player2, new GameLogic());
 			TestMinionCard minionCard = new TestMinionCard(3, 3);

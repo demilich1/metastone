@@ -1,5 +1,7 @@
 #panel {
 	-fx-background-color: navajowhite;
+	-fx-background-image: url("noise.png");
+	-fx-background-repeat: repeat;  
 }
 
 #bordered-panel {
@@ -76,5 +78,17 @@
     -fx-font-family: "Arial";
     -fx-font-weight: bold;
     -fx-text-fill: black;
+}
+
+#default-button {
+	-fx-font-size: 18pt;
+    -fx-font-family: "Arial";
+    -fx-fill: slategrey;
+}
+
+#default-label {
+	-fx-font-size: 18pt;
+    -fx-font-family: "Arial";
+    -fx-fill: slategrey;
 }
 
