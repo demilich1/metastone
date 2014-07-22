@@ -22,6 +22,9 @@ public class PlayModeSetupView extends BorderPane implements EventHandler<Action
 
 	@FXML
 	private Button startButton;
+	
+	@FXML
+	private Button backButton;
 
 	private PlayerConfigView player1Config;
 	private PlayerConfigView player2Config;
@@ -45,6 +48,7 @@ public class PlayModeSetupView extends BorderPane implements EventHandler<Action
 		playerArea.getChildren().add(player2Config);
 
 		startButton.setOnAction(this);
+		backButton.setOnAction(this);
 	}
 
 	public void injectDecks(List<Deck> decks) {
@@ -60,6 +64,8 @@ public class PlayModeSetupView extends BorderPane implements EventHandler<Action
 			gameConfig.setPlayerConfig1(player1Config.getPlayerConfig());
 			gameConfig.setPlayerConfig2(player2Config.getPlayerConfig());
 			ApplicationFacade.getInstance().sendNotification(GameNotification.COMMIT_PLAYMODE_CONFIG, gameConfig);
+		} else if (actionEvent.getSource() == backButton) {
+			ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU);
 		}
 	}
 

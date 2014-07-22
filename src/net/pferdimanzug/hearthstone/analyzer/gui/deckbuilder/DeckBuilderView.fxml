@@ -28,7 +28,7 @@
       </VBox>
    </right>
    <padding>
-      <Insets top="20.0" />
+      <Insets bottom="20.0" top="20.0" />
    </padding>
    <center>
       <VBox alignment="CENTER" spacing="16.0" BorderPane.alignment="CENTER">
@@ -51,4 +51,14 @@
       <URL value="@../main.css" />
       <URL value="@deckbuilder.css" />
    </stylesheets>
+   <bottom>
+      <Pane BorderPane.alignment="CENTER_LEFT">
+         <children>
+            <Button id="default-button" fx:id="backButton" mnemonicParsing="false" text="Back" BorderPane.alignment="CENTER_LEFT" />
+         </children>
+         <BorderPane.margin>
+            <Insets left="20.0" />
+         </BorderPane.margin>
+      </Pane>
+   </bottom>
 </fx:root>

@@ -1,7 +1,5 @@
 #panel {
 	-fx-background-color: navajowhite;
-	-fx-background-image: url("noise.png");
-	-fx-background-repeat: repeat;  
 }
 
 #bordered-panel {

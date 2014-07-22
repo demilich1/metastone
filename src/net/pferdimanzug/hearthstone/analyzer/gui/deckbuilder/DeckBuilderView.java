@@ -32,6 +32,9 @@ public class DeckBuilderView extends BorderPane implements EventHandler<ActionEv
 	
 	@FXML
 	private Button importButton;
+	
+	@FXML
+	private Button backButton;
 
 	public DeckBuilderView() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DeckBuilderView.fxml"));
@@ -45,6 +48,7 @@ public class DeckBuilderView extends BorderPane implements EventHandler<ActionEv
 		}
 		
 		importButton.setOnAction(this);
+		backButton.setOnAction(this);
 	}
 
 	public void showBottomBar(Node content) {
@@ -74,6 +78,8 @@ public class DeckBuilderView extends BorderPane implements EventHandler<ActionEv
 	public void handle(ActionEvent event) {
 		if (event.getSource() == importButton) {
 			ApplicationFacade.getInstance().sendNotification(GameNotification.IMPORT_DECK_FROM_URL, importField.getText());
+		} else if (event.getSource() == backButton) {
+			ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU);
 		}
 	}
 

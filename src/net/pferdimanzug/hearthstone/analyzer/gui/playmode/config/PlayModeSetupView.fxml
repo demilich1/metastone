@@ -19,6 +19,11 @@
       <HBox fx:id="playerArea" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
-      <Button id="default-button" fx:id="startButton" mnemonicParsing="false" text="Start" BorderPane.alignment="CENTER" />
+      <AnchorPane>
+         <children>
+            <Button id="default-button" fx:id="backButton" mnemonicParsing="false" text="Back" AnchorPane.leftAnchor="0.0" />
+            <Button id="default-button" fx:id="startButton" mnemonicParsing="false" text="Start" AnchorPane.leftAnchor="380.0" AnchorPane.rightAnchor="380.0" />
+         </children>
+      </AnchorPane>
    </bottom>
 </fx:root>

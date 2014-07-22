@@ -32,6 +32,7 @@ public class MainMenuMediator extends Mediator<GameNotification> {
 		default:
 			break;
 		}
+		getFacade().removeMediator(NAME);
 	}
 
 	@Override

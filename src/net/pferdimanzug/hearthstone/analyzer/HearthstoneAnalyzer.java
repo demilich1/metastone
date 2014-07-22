@@ -91,6 +91,7 @@ public class HearthstoneAnalyzer extends Application {
 		Scene scene = new Scene(canvas);
 		primaryStage.setScene(scene);
 		facade.sendNotification(GameNotification.CANVAS_CREATED, canvas);
+		facade.sendNotification(GameNotification.MAIN_MENU);
 		primaryStage.show();
 
 //		Thread t = new Thread(new Runnable() {

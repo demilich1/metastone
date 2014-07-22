@@ -6,7 +6,10 @@ import java.util.List;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
+import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.DeckBuilderMediator;
 import net.pferdimanzug.hearthstone.analyzer.gui.mainmenu.MainMenuMediator;
+import net.pferdimanzug.hearthstone.analyzer.gui.playmode.PlayModeMediator;
+import net.pferdimanzug.hearthstone.analyzer.gui.playmode.config.PlayModeConfigMediator;
 import de.pferdimanzug.nittygrittymvc.Mediator;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
@@ -25,17 +28,25 @@ public class ApplicationMediator extends Mediator<GameNotification> {
 		switch (notification.getId()) {
 		case CANVAS_CREATED:
 			root = (Pane) notification.getBody();
-			getFacade().registerMediator(new MainMenuMediator());
 			break;
 		case SHOW_VIEW:
 			Node view = (Node) notification.getBody();
 			root.getChildren().clear();
 			root.getChildren().add(view);
 			break;
+		case MAIN_MENU:
+			removeOtherViews();
+			getFacade().registerMediator(new MainMenuMediator());
+			break;
 		default:
 			break;
 		}
-
+	}
+	
+	private void removeOtherViews() {
+		getFacade().removeMediator(PlayModeMediator.NAME);
+		getFacade().removeMediator(PlayModeConfigMediator.NAME);
+		getFacade().removeMediator(DeckBuilderMediator.NAME);
 	}
 
 	@Override
@@ -43,6 +54,7 @@ public class ApplicationMediator extends Mediator<GameNotification> {
 		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
 		notificationInterests.add(GameNotification.CANVAS_CREATED);
 		notificationInterests.add(GameNotification.SHOW_VIEW);
+		notificationInterests.add(GameNotification.MAIN_MENU);
 		return notificationInterests;
 	}
 
