@@ -35,4 +35,10 @@ public class NerubianEgg extends MinionCard {
 
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 394;
+	}
 }

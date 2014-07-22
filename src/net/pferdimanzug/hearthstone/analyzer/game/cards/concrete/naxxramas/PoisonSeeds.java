@@ -35,4 +35,10 @@ public class PoisonSeeds extends SpellCard {
 		}
 
 	}
+
+
+	@Override
+	public int getTypeId() {
+		return 395;
+	}
 }

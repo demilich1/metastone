@@ -38,4 +38,10 @@ public class HauntedCreeper extends MinionCard {
 		}
 		
 	}
+
+
+	@Override
+	public int getTypeId() {
+		return 391;
+	}
 }

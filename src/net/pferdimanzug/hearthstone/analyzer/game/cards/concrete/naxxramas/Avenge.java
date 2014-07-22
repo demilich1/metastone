@@ -20,4 +20,8 @@ public class Avenge extends SecretCard {
 		setTriggerAndEffect(new MinionDeathTrigger(TargetPlayer.SELF), buffRandomSpell);
 	}
 
+	@Override
+	public int getTypeId() {
+		return 385;
+	}
 }

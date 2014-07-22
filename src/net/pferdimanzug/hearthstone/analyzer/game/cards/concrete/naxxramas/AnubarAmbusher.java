@@ -24,4 +24,8 @@ public class AnubarAmbusher extends MinionCard {
 		return anubarAmbusher;
 	}
 
+	@Override
+	public int getTypeId() {
+		return 384;
+	}
 }

@@ -46,7 +46,7 @@ public abstract class Spell implements Cloneable {
 	public EntityReference getSourceEntity() {
 		return sourceEntity;
 	}
-	
+
 	public EntityReference getTarget() {
 		return target;
 	}
@@ -74,8 +74,7 @@ public abstract class Spell implements Cloneable {
 
 	@Override
 	public String toString() {
-		return "[SPELL " + getClass().getSimpleName() + " target=" + target + ", source=" + source
-				+ "]";
+		return "[SPELL " + getClass().getSimpleName() + " target=" + target + ", source=" + source + "]";
 	}
 
 }

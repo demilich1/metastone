@@ -28,13 +28,24 @@ public class Duplicate extends SecretCard {
 
 		@Override
 		protected void onCast(GameContext context, Player player, Entity target) {
+			System.out.println("Casting duplicate on " + target + " spell target is " + getTarget());
 			Minion minion = (Minion) target;
 
 			Card sourceCard = minion.getSourceCard();
 			context.getLogic().receiveCard(player.getId(), sourceCard.clone());
 			context.getLogic().receiveCard(player.getId(), sourceCard.clone());
 		}
+		
+		@Override
+		public void setTarget(EntityReference target) {
+			super.setTarget(target);
+			new Exception().printStackTrace();
+		}
 
 	}
 
+	@Override
+	public int getTypeId() {
+		return 389;
+	}
 }

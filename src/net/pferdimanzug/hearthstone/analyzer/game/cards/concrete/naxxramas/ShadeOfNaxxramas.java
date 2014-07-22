@@ -28,4 +28,10 @@ public class ShadeOfNaxxramas extends MinionCard {
 		return shadeOfNaxxramas;
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 397;
+	}
 }

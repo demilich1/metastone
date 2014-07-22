@@ -27,4 +27,10 @@ public class StoneskinGargoyle extends MinionCard {
 		return stoneskinGargoyle;
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 400;
+	}
 }

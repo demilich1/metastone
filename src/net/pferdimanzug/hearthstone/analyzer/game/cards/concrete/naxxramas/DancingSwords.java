@@ -23,4 +23,8 @@ public class DancingSwords extends MinionCard {
 		return dancingSwords;
 	}
 
+	@Override
+	public int getTypeId() {
+		return 386;
+	}
 }

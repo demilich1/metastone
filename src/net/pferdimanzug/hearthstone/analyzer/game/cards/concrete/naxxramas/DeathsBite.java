@@ -24,4 +24,8 @@ public class DeathsBite extends WeaponCard {
 		return deathsBite;
 	}
 
+	@Override
+	public int getTypeId() {
+		return 388;
+	}
 }

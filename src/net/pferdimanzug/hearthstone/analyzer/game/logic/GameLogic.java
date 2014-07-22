@@ -154,12 +154,13 @@ public class GameLogic implements Cloneable {
 		SpellCard sourceCard = null;
 
 		List<Entity> targets = targetLogic.resolveTargetKey(context, player, source, spell.getTarget());
+	
 		// target can only be changed when there is one target
 		// note: this code block is basically exclusively for the SpellBender
 		// Secret, but it can easily be expanded if targets of area of effect
 		// spell
 		// should be changeable as well
-		if (spell.getSource() == SpellSource.SPELL_CARD && targets != null && targets.size() == 1) {
+		if (spell.getSource() == SpellSource.SPELL_CARD && !spell.hasPredefinedTarget() && targets != null && targets.size() == 1) {
 			Card pendingCard = (Card) context.getEnvironment().get(Environment.PENDING_CARD);
 			if (pendingCard instanceof SpellCard) {
 				sourceCard = (SpellCard) pendingCard;
@@ -171,7 +172,7 @@ public class GameLogic implements Cloneable {
 					targets.remove(0);
 					targets.add((Actor) context.getEnvironment().get(Environment.TARGET_OVERRIDE));
 					spell.setTarget(targets.get(0).getReference());
-					logger.debug("Target for spell has been changed! New target {}", targets.get(0));
+					logger.debug("Target for spell {} has been changed! New target {}", sourceCard, targets.get(0));
 				}
 			}
 

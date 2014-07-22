@@ -25,4 +25,10 @@ public class UnstableGhoul extends MinionCard {
 		return unstableGhoul;
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 402;
+	}
 }

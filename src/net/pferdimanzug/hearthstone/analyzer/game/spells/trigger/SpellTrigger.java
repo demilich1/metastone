@@ -97,7 +97,7 @@ public class SpellTrigger implements Cloneable {
 				if (oneTime) {
 					expired = true;
 				}
-
+				
 				event.getGameContext().getEnvironment().put(Environment.EVENT_TARGET, event.getEventTarget());
 				onFire(ownerId, spell, event);
 				event.getGameContext().getEnvironment().remove(Environment.EVENT_TARGET);

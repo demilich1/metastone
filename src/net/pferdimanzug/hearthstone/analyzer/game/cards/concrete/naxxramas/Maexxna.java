@@ -28,4 +28,10 @@ public class Maexxna extends MinionCard {
 		return maexxna;
 	}
 	
+
+
+	@Override
+	public int getTypeId() {
+		return 393;
+	}
 }

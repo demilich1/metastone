@@ -32,4 +32,10 @@ public class Reincarnate extends SpellCard {
 
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 396;
+	}
 }

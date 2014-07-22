@@ -38,4 +38,10 @@ public class SludgeBelcher extends MinionCard {
 		
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 398;
+	}
 }

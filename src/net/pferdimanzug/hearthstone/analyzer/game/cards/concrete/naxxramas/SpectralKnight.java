@@ -18,4 +18,10 @@ public class SpectralKnight extends MinionCard {
 		return createMinion(GameTag.UNTARGETABLE_BY_SPELLS);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 399;
+	}
 }

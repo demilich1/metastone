@@ -32,4 +32,10 @@ public class EchoingOoze extends MinionCard {
 		return echoingOoze;
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 390;
+	}
 }

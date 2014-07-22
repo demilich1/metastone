@@ -24,4 +24,10 @@ public class ZombieChow extends MinionCard {
 		return zombieChow;
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 404;
+	}
 }

@@ -26,4 +26,10 @@ public class WailingSoul extends MinionCard {
 		return wailingSoul;
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 403;
+	}
 }
