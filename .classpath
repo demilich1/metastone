@@ -16,10 +16,10 @@
 	<classpathentry kind="lib" path="lib/httpcomponents-client-4.3.4/lib/httpmime-4.3.4.jar"/>
 	<classpathentry kind="lib" path="lib/nitty-gritty-mvc.jar"/>
 	<classpathentry kind="con" path="org.testng.TESTNG_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/gson"/>
 	<classpathentry kind="lib" path="lib/controlsfx/controlsfx-8.0.6.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/apache-commons-io"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/apache-commons-lang"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_11/jre/lib/ext/jfxrt.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

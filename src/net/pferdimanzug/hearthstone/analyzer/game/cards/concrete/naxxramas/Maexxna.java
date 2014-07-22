@@ -1,4 +1,4 @@
-package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
+package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas;
 
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -11,25 +11,21 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.PhysicalAttackT
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
-public class EmperorCobra extends MinionCard {
+public class Maexxna extends MinionCard {
 
-	public EmperorCobra() {
-		super("Emperor Cobra", 2, 3, Rarity.RARE, HeroClass.ANY, 3);
+	public Maexxna() {
+		super("Maexxna", 2, 8, Rarity.LEGENDARY, HeroClass.ANY, 6);
 		setDescription("Destroy any minion damaged by this minion.");
 		setRace(Race.BEAST);
 	}
 
 	@Override
-	public int getTypeId() {
-		return 124;
-	}
-
-	@Override
 	public Minion summon() {
-		Minion emperorCobra = createMinion();
+		Minion maexxna = createMinion();
 		Spell killSpell = new DestroySpell();
 		killSpell.setTarget(EntityReference.EVENT_TARGET);
-		emperorCobra.setSpellTrigger(new SpellTrigger(new PhysicalAttackTrigger(false), killSpell));
-		return emperorCobra;
+		maexxna.setSpellTrigger(new SpellTrigger(new PhysicalAttackTrigger(false), killSpell));
+		return maexxna;
 	}
+
 }

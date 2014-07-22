@@ -30,6 +30,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.BoardChangedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.CardPlayedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.DamageEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
+import net.pferdimanzug.hearthstone.analyzer.game.events.HealEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.KillEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.OverloadEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.PhysicalAttackEvent;
@@ -183,12 +184,12 @@ public class GameLogic implements Cloneable {
 
 	public void changeHero(Player player, Hero hero) {
 		hero.setId(player.getHero().getId());
-		
+
 		HashMap<GameTag, Object> tagsToCopy = player.getHero().getTagsCopy();
 		for (Map.Entry<GameTag, Object> entry : tagsToCopy.entrySet()) {
 			hero.setTag(entry.getKey(), entry.getValue());
 		}
-		
+
 		logger.debug("{}'s hero has been changed to {}", player.getName(), hero);
 		hero.setOwner(player.getId());
 		player.setHero(hero);
@@ -245,7 +246,7 @@ public class GameLogic implements Cloneable {
 
 		return success;
 	}
-	
+
 	private boolean damageHero(Hero hero, int damage) {
 		if (hero.hasTag(GameTag.IMMUNE)) {
 			logger.debug("{} is IMMUNE and does not take damage", hero);
@@ -258,7 +259,7 @@ public class GameLogic implements Cloneable {
 		logger.debug(hero.getName() + " receives " + damage + " damage, hp now: " + hero.getHp() + "(" + hero.getArmor() + ")");
 		return true;
 	}
-	
+
 	private boolean damageMinion(Player player, Actor minion, int damage) {
 		if (minion.hasTag(GameTag.DIVINE_SHIELD)) {
 			minion.removeTag(GameTag.DIVINE_SHIELD);
@@ -560,29 +561,38 @@ public class GameLogic implements Cloneable {
 			damage(player, target, healing, spellSource);
 			return;
 		}
+		boolean success = false;
 		switch (target.getEntityType()) {
 		case MINION:
-			healMinion((Actor) target, healing);
+			success = healMinion((Actor) target, healing);
 			break;
 		case HERO:
-			healHero((Hero) target, healing);
+			success = healHero((Hero) target, healing);
 			break;
 		default:
 			break;
 		}
+
+		if (success) {
+			HealEvent healEvent = new HealEvent(context, target, healing);
+			context.fireGameEvent(healEvent);
+		}
 	}
 
-	private void healHero(Hero hero, int healing) {
+	private boolean healHero(Hero hero, int healing) {
 		int newHp = Math.min(MAX_HERO_HP, hero.getHp() + healing);
+		int oldHp = hero.getHp();
 		if (logger.isDebugEnabled()) {
 			logger.debug(hero + " is healed for " + healing + ", hp now: " + hero.getHp());
 		}
 
 		hero.setHp(newHp);
+		return newHp != oldHp;
 	}
 
-	private void healMinion(Actor minion, int healing) {
+	private boolean healMinion(Actor minion, int healing) {
 		int newHp = Math.min(minion.getMaxHp(), minion.getHp() + healing);
+		int oldHp = minion.getHp();
 		if (logger.isDebugEnabled()) {
 			logger.debug(minion + " is healed for " + healing + ", hp now: " + newHp + "/" + minion.getMaxHp());
 		}
@@ -591,6 +601,7 @@ public class GameLogic implements Cloneable {
 		if (minion.hasTag(GameTag.ENRAGE_SPELL)) {
 			handleEnrage(minion);
 		}
+		return newHp != oldHp;
 	}
 
 	public void init(int playerId, boolean begins) {
@@ -860,7 +871,7 @@ public class GameLogic implements Cloneable {
 		minion.setId(idFactory.generateId());
 
 		context.getSummonStack().push(minion);
-		
+
 		logger.debug("{} summons {}", player.getName(), minion);
 		minion.setOwner(player.getId());
 

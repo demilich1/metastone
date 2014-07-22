@@ -15,7 +15,11 @@ public class AddSecretSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
-		context.getLogic().playSecret(player, secret);
+		context.getLogic().playSecret(player, getSecret());
+	}
+
+	public Secret getSecret() {
+		return secret;
 	}
 
 }
