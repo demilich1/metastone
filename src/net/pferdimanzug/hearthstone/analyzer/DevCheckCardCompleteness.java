@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
@@ -25,15 +26,35 @@ public class DevCheckCardCompleteness {
 		final String idExpression = "public int getTypeId()";
 		File folder = new File(path);
 		int uniqueId = 1;
+		HashSet<Integer> assignedIds = new HashSet<>();
+		List<File> filesWithoutId = new ArrayList<>();
 		for (File file : FileUtils.listFiles(folder, new String[] { "java" }, true)) {
 			try {
 				System.out.println("Processing " + file.getName() + "...");
 				List<String> lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
-				if (containsExpression(lines, idExpression)) {
+				int lineIndex = containsExpression(lines, idExpression);
+				if (lineIndex != -1) {
 					System.out.println("Skipping " + file.getName() + " because it already has an id assigned");
+					int id = extractId(lines.get(lineIndex + 1));
+					assignedIds.add(id);
 					continue;
+				} else {
+					filesWithoutId.add(file);
 				}
-				
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		while (assignedIds.contains(uniqueId)) {
+			uniqueId++;
+		}
+
+		for (File file : filesWithoutId) {
+			try {
+				List<String> lines;
+				lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
 				for (int i = lines.size() - 1; i > 0; i--) {
 					String line = lines.get(i);
 					if (line.contains("}")) {
@@ -42,17 +63,27 @@ public class DevCheckCardCompleteness {
 						lines.add(i, "\tpublic int getTypeId() {");
 						lines.add(i, "\t@Override");
 						lines.add(i, "\n");
-						System.out.println("Assigning id " + uniqueId + " to " + file.getName());
 						uniqueId++;
 						break;
 					}
 				}
-				
+
 				Files.write(file.toPath(), lines, StandardCharsets.UTF_8);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	private static int extractId(String line) {
+		String result = "";
+		for (int i = 0; i < line.length(); i++) {
+			char c = line.charAt(i);
+			if (Character.isDigit(c)) {
+				result += c;
+			}
+		}
+		return Integer.parseInt(result);
 	}
 
 	public static void cardListFromImages(String path) throws IOException {
@@ -88,7 +119,7 @@ public class DevCheckCardCompleteness {
 		int missing = 0;
 		for (String card : allCards) {
 			if (allClasses.contains(card)) {
-				//System.out.println("Card found: " + card);
+				// System.out.println("Card found: " + card);
 			} else {
 				missing++;
 				System.out.println("Card missing: " + card);
@@ -96,16 +127,18 @@ public class DevCheckCardCompleteness {
 		}
 		System.out.println("There are " + missing + " cards missing");
 	}
-	
-	private static boolean containsExpression(List<String> lines, String expression) {
+
+	private static int containsExpression(List<String> lines, String expression) {
+		int i = 0;
 		for (String line : lines) {
 			if (line.contains(expression)) {
-				return true;
+				return i;
 			}
+			i++;
 		}
-		return false;
+		return -1;
 	}
-	
+
 	private static List<String> getImplementedCardsAsLines() {
 		final String expression = "cards.add(new %s());";
 		final String path = "./src/" + Card.class.getPackage().getName().replace(".", "/") + "/concrete/";
@@ -117,11 +150,11 @@ public class DevCheckCardCompleteness {
 		}
 		return lines;
 	}
-	
+
 	private static String toCanonName(String name) {
 		return name.toLowerCase().replace(".java", "").replace(".png", "").replace("_", "").replace("-", "");
 	}
-	
+
 	public static void updateCardCatalogue() {
 		final String cataloguePathStr = "./src/" + CardCatalogue.class.getPackage().getName().replace(".", "/") + "/CardCatalogue.java";
 		Path cataloguePath = Paths.get(cataloguePathStr);
@@ -154,7 +187,7 @@ public class DevCheckCardCompleteness {
 		}
 		System.out.println("CardCatalogue has been successfully updated");
 	}
-	
+
 	public static void writeImplementedCardsToFile(String filename) {
 		PrintWriter out = null;
 		try {
@@ -164,9 +197,9 @@ public class DevCheckCardCompleteness {
 			e.printStackTrace();
 			return;
 		}
-		
+
 		for (Card card : CardCatalogue.query(null, null, null)) {
-			out.println(card.getName()+";");
+			out.println(card.getName() + ";");
 		}
 		out.close();
 		System.out.println("Implemented cards have been written to " + filename);

@@ -27,5 +27,5 @@ public class Maexxna extends MinionCard {
 		maexxna.setSpellTrigger(new SpellTrigger(new PhysicalAttackTrigger(false), killSpell));
 		return maexxna;
 	}
-
+	
 }

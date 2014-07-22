@@ -35,5 +35,4 @@ public class PoisonSeeds extends SpellCard {
 		}
 
 	}
-
 }

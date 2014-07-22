@@ -23,5 +23,4 @@ public class DarkCultist extends MinionCard {
 		darkCultist.addDeathrattle(randomBuffSpell);
 		return darkCultist;
 	}
-
 }
