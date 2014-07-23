@@ -32,7 +32,6 @@ public class MadScientist extends MinionCard {
 	}
 	
 	private class PlayRandomSecretSpell extends Spell {
-		
 		private CardCollection findSecretCards(CardCollection cardCollection) {
 			CardCollection secretCards = new CardCollection();
 			for (Card card : cardCollection) {

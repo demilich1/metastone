@@ -11,31 +11,31 @@
 
 <fx:root id="card-border" prefHeight="240.0" prefWidth="174.0" stylesheets="@../main.css" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <bottom>
-    <StackPane prefHeight="-1.0" prefWidth="-1.0">
+    <StackPane prefWidth="-1.0">
       <children>
-        <ImageView fx:id="attackIcon" fitHeight="100.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateX="-8.0" translateY="8.0" StackPane.alignment="BOTTOM_LEFT">
+        <ImageView fx:id="attackIcon" fitHeight="64.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateX="-8.0" translateY="8.0" StackPane.alignment="BOTTOM_LEFT">
           <image>
             <Image url="@../../resources/img/common/attack_value_icon.png" />
           </image>
         </ImageView>
-        <ImageView fx:id="hpIcon" fitHeight="100.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateX="8.0" translateY="6.0" StackPane.alignment="BOTTOM_RIGHT">
+        <ImageView fx:id="hpIcon" fitHeight="64.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateX="8.0" translateY="6.0" StackPane.alignment="BOTTOM_RIGHT">
           <image>
             <Image url="@../../resources/img/common/health_value_icon.png" />
           </image>
         </ImageView>
         <Text id="outlined-score" fx:id="attackLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="4.0" StackPane.alignment="BOTTOM_LEFT" />
         <Text id="outlined-score" fx:id="hpLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-4.0" StackPane.alignment="BOTTOM_RIGHT" />
-        <Label id="race-label" fx:id="raceLabel" text="&lt;race&gt;">
+        <Label id="race-label" fx:id="raceLabel" text="&lt;race&gt;" translateY="8.0">
           <font>
             <Font name="Arial Bold Italic" size="11.0" />
           </font>
         </Label>
-            <Circle fx:id="rarityGem" fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeLineJoin="BEVEL" strokeType="INSIDE" strokeWidth="2.0" translateY="-20.0" />
+            <Circle fx:id="rarityGem" fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeLineJoin="BEVEL" strokeType="INSIDE" strokeWidth="2.0" translateY="-10.0" />
       </children>
     </StackPane>
   </bottom>
   <center>
-    <VBox alignment="CENTER" prefHeight="-1.0" prefWidth="-1.0" spacing="16.0" BorderPane.alignment="CENTER">
+    <VBox alignment="TOP_CENTER" prefHeight="-1.0" prefWidth="-1.0" spacing="16.0" BorderPane.alignment="CENTER">
       <children>
         <Label id="name-big" fx:id="nameLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="150.0" text="&lt;card name&gt;" textAlignment="CENTER" wrapText="true" />
         <Label id="tooltip-description" fx:id="descriptionLabel" alignment="CENTER" maxWidth="150.0" text="&lt;card description&gt;" textAlignment="CENTER" wrapText="true">

@@ -36,12 +36,6 @@ public class Duplicate extends SecretCard {
 			context.getLogic().receiveCard(player.getId(), sourceCard.clone());
 		}
 		
-		@Override
-		public void setTarget(EntityReference target) {
-			super.setTarget(target);
-			new Exception().printStackTrace();
-		}
-
 	}
 
 	@Override

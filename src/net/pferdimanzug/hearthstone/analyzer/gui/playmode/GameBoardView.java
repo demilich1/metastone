@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -146,10 +147,10 @@ public class GameBoardView extends BorderPane {
 		for (final Entity target : action.getValidTargets()) {
 			GameToken token = entityTokenMap.get(target);
 			
-			EventHandler<ActionEvent> clickedHander = new EventHandler<ActionEvent>() {
+			EventHandler<MouseEvent> clickedHander = new EventHandler<MouseEvent>() {
 				
 				@Override
-				public void handle(ActionEvent event) {
+				public void handle(MouseEvent event) {
 					disableTargetSelection();
 					targetOptions.getBehaviour().setSelectedTarget(target);
 				}

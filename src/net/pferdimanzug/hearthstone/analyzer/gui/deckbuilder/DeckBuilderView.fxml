@@ -16,7 +16,7 @@
       <VBox spacing="2.0">
          <children>
             <Pane fx:id="upperInfoArea" prefHeight="50.0" prefWidth="240.0" />
-            <ScrollPane id="side-bar" fx:id="scrollPane" fitToHeight="true" fitToWidth="true" prefHeight="600.0" prefViewportWidth="220.0" prefWidth="250.0">
+            <ScrollPane id="side-bar" fx:id="scrollPane" fitToHeight="true" fitToWidth="true" prefHeight="580.0" prefViewportWidth="220.0" prefWidth="250.0">
                <padding>
                   <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                </padding>
@@ -28,7 +28,7 @@
       </VBox>
    </right>
    <padding>
-      <Insets bottom="20.0" top="20.0" />
+      <Insets top="20.0" />
    </padding>
    <center>
       <VBox alignment="CENTER" spacing="16.0" BorderPane.alignment="CENTER">
@@ -52,13 +52,10 @@
       <URL value="@deckbuilder.css" />
    </stylesheets>
    <bottom>
-      <Pane BorderPane.alignment="CENTER_LEFT">
+      <AnchorPane BorderPane.alignment="TOP_LEFT">
          <children>
-            <Button id="default-button" fx:id="backButton" mnemonicParsing="false" text="Back" BorderPane.alignment="CENTER_LEFT" />
+            <Button id="default-button" fx:id="backButton" mnemonicParsing="false" text="Back" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER" />
          </children>
-         <BorderPane.margin>
-            <Insets left="20.0" />
-         </BorderPane.margin>
-      </Pane>
+      </AnchorPane>
    </bottom>
 </fx:root>

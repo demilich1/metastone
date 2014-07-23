@@ -23,8 +23,8 @@ public class HearthstoneAnalyzer extends Application {
 	public static void main(String[] args) {
 		//DevCheckCardCompleteness.updateCardCatalogue();
 		//DevCheckCardCompleteness.writeImplementedCardsToFile("implemented_cards.csv");
-		//launch(args);
-		DevCheckCardCompleteness.assignUniqueIdToEachCard();
+		launch(args);
+		//DevCheckCardCompleteness.assignUniqueIdToEachCard();
 		 //new HearthstoneAnalyzer().launchDebugGame();
 	}
 

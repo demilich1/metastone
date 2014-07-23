@@ -841,6 +841,7 @@ public class GameLogic implements Cloneable {
 		removeSpelltriggers(target);
 		refreshAttacksPerRound(target);
 		target.setHp(target.getMaxHp());
+		logger.debug("{} was silenced", target);
 	}
 
 	public void startTurn(int playerId) {

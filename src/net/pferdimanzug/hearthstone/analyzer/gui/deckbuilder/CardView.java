@@ -12,15 +12,16 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
-import net.pferdimanzug.hearthstone.analyzer.gui.cards.HandCard;
+import net.pferdimanzug.hearthstone.analyzer.gui.cards.CardTooltip;
 
 public class CardView extends BorderPane implements EventHandler<MouseEvent> {
 
 	@FXML
-	private GridPane contentPane;
+	private Pane contentPane;
 
 	@FXML
 	private Button previousButton;
@@ -32,12 +33,12 @@ public class CardView extends BorderPane implements EventHandler<MouseEvent> {
 	private Label pageLabel;
 
 	private int offset;
-	private final int rows = 3;
-	private final int columns = 3;
+	private final int rows = 4;
+	private final int columns = 2;
 	private final int cardDisplayCount = rows * columns;
 
 	private List<Card> cards;
-	private final List<HandCard> cardWidgets = new ArrayList<HandCard>(cardDisplayCount);
+	private final List<CardTooltip> cardWidgets = new ArrayList<CardTooltip>(cardDisplayCount);
 
 	public CardView() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CardView.fxml"));
@@ -74,13 +75,13 @@ public class CardView extends BorderPane implements EventHandler<MouseEvent> {
 	private void displayCurrentPage() {
 		int lastIndex = Math.min(cards.size(), offset + cardDisplayCount);
 		updatePageLabel();
-		for (HandCard handCard : cardWidgets) {
-			handCard.setVisible(false);
+		for (CardTooltip CardTooltip : cardWidgets) {
+			CardTooltip.setVisible(false);
 		}
 		int widgetIndex = 0;
 		for (int i = offset; i < lastIndex; i++) {
 			Card card = cards.get(i);
-			HandCard cardWidget = cardWidgets.get(widgetIndex++);
+			CardTooltip cardWidget = cardWidgets.get(widgetIndex++);
 			cardWidget.setCard(null, card, null);
 			cardWidget.setVisible(true);
 		}
@@ -88,7 +89,7 @@ public class CardView extends BorderPane implements EventHandler<MouseEvent> {
 
 	@Override
 	public void handle(MouseEvent event) {
-		HandCard source = (HandCard) event.getSource();
+		CardTooltip source = (CardTooltip) event.getSource();
 		Card card = source.getCard();
 		ApplicationFacade.getInstance().sendNotification(GameNotification.ADD_CARD_TO_DECK, card);
 	}
@@ -97,11 +98,14 @@ public class CardView extends BorderPane implements EventHandler<MouseEvent> {
 		int currentRow = 0;
 		int currentColumn = 0;
 		for (int i = 0; i < cardDisplayCount; i++) {
-			HandCard cardWidget = new HandCard();
+			CardTooltip cardWidget = new CardTooltip();
 			
 			cardWidget.addEventHandler(MouseEvent.MOUSE_CLICKED, this);
-			cardWidget.setPrefSize(140, 180);
-			contentPane.add(cardWidget, currentColumn, currentRow);
+			cardWidget.setScaleX(0.95);
+			cardWidget.setScaleY(0.95);
+			cardWidget.setScaleZ(0.95);
+			//contentPane.add(cardWidget, currentColumn, currentRow);
+			contentPane.getChildren().add(cardWidget);
 			currentColumn++;
 			if (currentColumn == columns) {
 				currentColumn = 0;
