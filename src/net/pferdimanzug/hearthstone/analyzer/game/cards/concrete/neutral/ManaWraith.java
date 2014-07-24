@@ -1,10 +1,11 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.costmodifier.MinionCostModifier;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.TargetPlayer;
 
 public class ManaWraith extends MinionCard {
 
@@ -19,11 +20,12 @@ public class ManaWraith extends MinionCard {
 	}
 
 
-
 	@Override
 	public Minion summon() {
 		Minion manaWraith = createMinion();
-		manaWraith.setTag(GameTag.ALL_MINION_MANA_COST, +1);
+		MinionCostModifier minionCostModifier = new MinionCostModifier(1);
+		minionCostModifier.setTargetPlayer(TargetPlayer.BOTH);
+		manaWraith.setCardCostModifier(minionCostModifier);
 		return manaWraith;
 	}
 }

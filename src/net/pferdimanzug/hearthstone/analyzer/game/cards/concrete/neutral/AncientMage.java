@@ -15,17 +15,13 @@ public class AncientMage extends MinionCard {
 	public AncientMage() {
 		super("Ancient Mage", 2, 5, Rarity.RARE, HeroClass.ANY, 4);
 		setDescription("Battlecry: Give adjacent minions Spell Damage +1.");
+		setTag(GameTag.BATTLECRY);
 	}
 
 	@Override
 	public int getTypeId() {
 		return 84;
 	}
-	
-	
-	
-
-
 
 	@Override
 	public Minion summon() {

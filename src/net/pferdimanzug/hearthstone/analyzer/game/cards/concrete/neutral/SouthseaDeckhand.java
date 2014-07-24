@@ -36,14 +36,13 @@ public class SouthseaDeckhand extends MinionCard {
 		super("Southsea Deckhand", 2, 1, Rarity.COMMON, HeroClass.ANY, 1);
 		setDescription("Has Charge while you have a weapon equipped.");
 		setRace(Race.PIRATE);
+		setTag(GameTag.BATTLECRY);
 	}
 
 	@Override
 	public int getTypeId() {
 		return 202;
 	}
-
-
 
 	@Override
 	public Minion summon() {

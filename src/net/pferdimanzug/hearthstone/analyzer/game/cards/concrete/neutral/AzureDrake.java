@@ -13,14 +13,13 @@ public class AzureDrake extends MinionCard {
 	public AzureDrake() {
 		super("Azure Drake", 4, 4, Rarity.RARE, HeroClass.ANY, 5);
 		setDescription("Spell Damage +1. Battlecry: Draw a card.");
+		setTag(GameTag.BATTLECRY);
 	}
 
 	@Override
 	public int getTypeId() {
 		return 91;
 	}
-
-
 
 	@Override
 	public Minion summon() {

@@ -45,6 +45,7 @@ public class CaptainsParrot extends MinionCard {
 		super("Captain's Parrot", 1, 1, Rarity.RARE, HeroClass.ANY, 2);
 		setDescription("Battlecry: Put a random Pirate from your deck into your hand.");
 		setRace(Race.BEAST);
+		setTag(GameTag.BATTLECRY);
 	}
 
 	@Override

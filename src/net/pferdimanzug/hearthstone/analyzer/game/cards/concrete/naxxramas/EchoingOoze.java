@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -17,6 +18,7 @@ public class EchoingOoze extends MinionCard {
 	public EchoingOoze() {
 		super("Echoing Ooze", 1, 2, Rarity.EPIC, HeroClass.ANY, 2);
 		setDescription("Battlecry: Summon an exact copy of this minion at the end of the turn.");
+		setTag(GameTag.BATTLECRY);
 	}
 
 	@Override

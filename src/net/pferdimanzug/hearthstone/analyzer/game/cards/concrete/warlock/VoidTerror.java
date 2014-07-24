@@ -1,6 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
@@ -39,14 +40,13 @@ public class VoidTerror extends MinionCard {
 		super("Void Terror", 3, 3, Rarity.RARE, HeroClass.WARLOCK, 3);
 		setDescription("Battlecry: Destroy the minions on either side of this minion and gain their Attack and Health.");
 		setRace(Race.DEMON);
+		setTag(GameTag.BATTLECRY);
 	}
 
 	@Override
 	public int getTypeId() {
 		return 357;
 	}
-
-
 
 	@Override
 	public Minion summon() {

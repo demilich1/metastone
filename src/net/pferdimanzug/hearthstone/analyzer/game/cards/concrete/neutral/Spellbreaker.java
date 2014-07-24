@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -13,14 +14,13 @@ public class Spellbreaker extends MinionCard {
 	public Spellbreaker() {
 		super("Spellbreaker", 4, 3, Rarity.COMMON, HeroClass.ANY, 4);
 		setDescription("Battlecry: Silence a minion.");
+		setTag(GameTag.BATTLECRY);
 	}
 
 	@Override
 	public int getTypeId() {
 		return 203;
 	}
-
-
 
 	@Override
 	public Minion summon() {

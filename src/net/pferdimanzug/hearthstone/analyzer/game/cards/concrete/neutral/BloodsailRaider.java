@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -16,14 +17,13 @@ public class BloodsailRaider extends MinionCard {
 		super("Bloodsail Raider", 2, 3, Rarity.COMMON, HeroClass.ANY, 2);
 		setDescription("Battlecry: Gain Attack equal to the Attack of your weapon.");
 		setRace(Race.PIRATE);
+		setTag(GameTag.BATTLECRY);
 	}
 
 	@Override
 	public int getTypeId() {
 		return 98;
 	}
-
-
 
 	@Override
 	public Minion summon() {

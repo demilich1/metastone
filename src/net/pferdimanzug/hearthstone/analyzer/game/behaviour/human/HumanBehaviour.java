@@ -28,7 +28,7 @@ public class HumanBehaviour implements IBehaviour {
 
 		waitingForInput = true;
 		ApplicationFacade.getInstance().sendNotification(GameNotification.HUMAN_PROMPT_FOR_TARGET,
-				new HumanTargetOptions(this, action));
+				new HumanTargetOptions(player, this, action));
 		
 		while (waitingForInput) {
 			try {

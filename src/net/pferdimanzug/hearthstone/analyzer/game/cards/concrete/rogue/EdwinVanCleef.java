@@ -26,8 +26,6 @@ public class EdwinVanCleef extends MinionCard {
 		return 293;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion edwinVanCleef = createMinion();

@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -13,15 +14,13 @@ public class DarkscaleHealer extends MinionCard {
 	public DarkscaleHealer() {
 		super("Darkscale Healer", 4, 5, Rarity.FREE, HeroClass.ANY, 5);
 		setDescription("Battlecry: Restore 2 Health to all friendly characters.");
+		setTag(GameTag.BATTLECRY);
 	}
 
 	@Override
 	public int getTypeId() {
 		return 113;
 	}
-
-
-
 
 	@Override
 	public Minion summon() {

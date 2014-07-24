@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -16,6 +17,7 @@ public class ColdlightSeer extends MinionCard {
 		super("Coldlight Seer", 2, 3, Rarity.RARE, HeroClass.ANY, 3);
 		setDescription("Battlecry: Give ALL other Murlocs +2 Health.");
 		setRace(Race.MURLOC);
+		setTag(GameTag.BATTLECRY);
 	}
 
 	@Override
@@ -23,9 +25,6 @@ public class ColdlightSeer extends MinionCard {
 		return 107;
 	}
 	
-
-
-
 	@Override
 	public Minion summon() {
 		Minion coldlightSeer = createMinion();

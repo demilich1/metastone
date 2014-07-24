@@ -11,6 +11,7 @@ public abstract class ChooseBattlecryCard extends MinionCard implements IChooseO
 	public ChooseBattlecryCard(String name, int baseAttack, int baseHp, Rarity rarity, HeroClass classRestriction, int manaCost) {
 		super(name, baseAttack, baseHp, rarity, classRestriction, manaCost);
 		setTag(GameTag.CHOOSE_ONE);
+		setTag(GameTag.BATTLECRY);
 	}
 
 	protected abstract String getAction1Suffix();

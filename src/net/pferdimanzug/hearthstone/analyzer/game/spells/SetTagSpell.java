@@ -44,7 +44,7 @@ public class SetTagSpell extends Spell {
 			Spell revertSpell = new RemoveTagSpell(tag);
 			revertSpell.setTarget(target.getReference());
 			SpellTrigger removeTrigger = new SpellTrigger(new TurnEndTrigger(), revertSpell, true);
-			context.getLogic().addSpellTrigger(player, removeTrigger, target);
+			context.getLogic().addGameEventListener(player, removeTrigger, target);
 		}
 	}
 

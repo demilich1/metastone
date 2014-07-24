@@ -39,14 +39,13 @@ public class BloodKnight extends MinionCard {
 	public BloodKnight() {
 		super("Blood Knight", 3, 3, Rarity.EPIC, HeroClass.ANY, 3);
 		setDescription("Battlecry: All minions lose Divine Shield. Gain +3/+3 for each Shield lost.");
+		setTag(GameTag.BATTLECRY);
 	}
 	
 	@Override
 	public int getTypeId() {
 		return 95;
 	}
-
-
 
 	@Override
 	public Minion summon() {

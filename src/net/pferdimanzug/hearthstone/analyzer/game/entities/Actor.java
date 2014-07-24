@@ -7,6 +7,7 @@ import java.util.List;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.costmodifier.CardCostModifier;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 
@@ -14,6 +15,7 @@ public abstract class Actor extends Entity {
 	
 	private Card sourceCard;
 	private SpellTrigger spellTrigger;
+	private CardCostModifier cardCostModifier;
 	
 	public Actor(Card sourceCard) {
 		this.setName(sourceCard != null ? sourceCard.getName() : null);
@@ -165,5 +167,13 @@ public abstract class Actor extends Entity {
 		result += " hashCode: " + hashCode();
 		result += "]";
 		return result;
+	}
+
+	public CardCostModifier getCardCostModifier() {
+		return cardCostModifier;
+	}
+
+	public void setCardCostModifier(CardCostModifier cardCostModifier) {
+		this.cardCostModifier = cardCostModifier;
 	}
 }

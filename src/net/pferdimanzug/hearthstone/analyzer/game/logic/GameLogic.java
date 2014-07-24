@@ -3,6 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.logic;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
@@ -20,6 +21,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.CardType;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SecretCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.TheCoin;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.costmodifier.CardCostModifier;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
@@ -46,6 +48,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.WeaponDestroyedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.HeroPower;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SpellSource;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.IGameEventListener;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerLayer;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.secrets.Secret;
@@ -83,12 +86,12 @@ public class GameLogic implements Cloneable {
 		this.idFactory = idFactory;
 	}
 
-	public void addSpellTrigger(Player player, SpellTrigger spellTrigger, Entity target) {
-		spellTrigger.setHost(target);
-		spellTrigger.setOwner(player.getId());
-		spellTrigger.reset();
-		spellTrigger.onAdd(context);
-		context.addTrigger(spellTrigger);
+	public void addGameEventListener(Player player, IGameEventListener gameEventListener, Entity target) {
+		gameEventListener.setHost(target);
+		gameEventListener.setOwner(player.getId());
+		gameEventListener.reset();
+		gameEventListener.onAdd(context);
+		context.addTrigger(gameEventListener);
 		logger.debug("New spelltrigger was added for {} on {}", player.getName(), target);
 	}
 
@@ -154,7 +157,7 @@ public class GameLogic implements Cloneable {
 		SpellCard sourceCard = null;
 
 		List<Entity> targets = targetLogic.resolveTargetKey(context, player, source, spell.getTarget());
-	
+
 		// target can only be changed when there is one target
 		// note: this code block is basically exclusively for the SpellBender
 		// Secret, but it can easily be expanded if targets of area of effect
@@ -370,6 +373,13 @@ public class GameLogic implements Cloneable {
 		player.getHero().activateWeapon(false);
 		logger.debug("{} ends his turn.", player.getName());
 		context.fireGameEvent(new TurnEndEvent(context, player.getId()));
+		checkForDeadEntities();
+		for (Iterator<CardCostModifier> iterator = context.getCardCostModifiers().iterator(); iterator.hasNext();) {
+			CardCostModifier cardCostModifier = iterator.next();
+			if (cardCostModifier.isExpired()) {
+				iterator.remove();
+			}
+		}
 	}
 
 	public void equipWeapon(int playerId, Weapon weapon) {
@@ -391,7 +401,7 @@ public class GameLogic implements Cloneable {
 		weapon.setActive(context.getActivePlayer() == player);
 		if (weapon.hasSpellTrigger()) {
 			SpellTrigger spellTrigger = weapon.getSpellTrigger();
-			addSpellTrigger(player, spellTrigger, weapon);
+			addGameEventListener(player, spellTrigger, weapon);
 		}
 	}
 
@@ -464,21 +474,34 @@ public class GameLogic implements Cloneable {
 		return GameResult.RUNNING;
 	}
 
+	public void addManaModifier(Player player, CardCostModifier cardCostModifier, Entity target) {
+		context.getCardCostModifiers().add(cardCostModifier);
+		addGameEventListener(player, cardCostModifier, target);
+	}
+
 	public int getModifiedManaCost(Player player, Card card) {
 		int manaCost = card.getManaCost(context, player);
-		if (card.getCardType() == CardType.MINION) {
-			manaCost += getTotalTagValue(player, GameTag.MINION_MANA_COST);
-			manaCost += getTotalTagValue(GameTag.ALL_MINION_MANA_COST);
-			manaCost += getTotalTagValue(player, GameTag.ONE_TIME_MINION_MANA_COST);
-			int minManaCost = getTagValue(player, GameTag.MINION_MIN_MANA_COST, 0);
-			manaCost = MathUtils.clamp(manaCost, minManaCost, Integer.MAX_VALUE);
-		} else if (card.getCardType() == CardType.SPELL) {
-			manaCost += getTotalTagValue(player, GameTag.SPELL_MANA_COST);
+		/*
+		 * if (card.getCardType() == CardType.MINION) { manaCost +=
+		 * getTotalTagValue(player, GameTag.MINION_MANA_COST); manaCost +=
+		 * getTotalTagValue(GameTag.ALL_MINION_MANA_COST); manaCost +=
+		 * getTotalTagValue(player, GameTag.ONE_TIME_MINION_MANA_COST); int
+		 * minManaCost = getTagValue(player, GameTag.MINION_MIN_MANA_COST, 0);
+		 * manaCost = MathUtils.clamp(manaCost, minManaCost, Integer.MAX_VALUE);
+		 * } else if (card.getCardType() == CardType.SPELL) { manaCost +=
+		 * getTotalTagValue(player, GameTag.SPELL_MANA_COST); } if
+		 * (card.hasTag(GameTag.SECRET) && hasTag(player,
+		 * GameTag.ONE_TIME_FREE_SECRET)) { manaCost = 0; } manaCost =
+		 * MathUtils.clamp(manaCost, 0, Integer.MAX_VALUE);
+		 */
+		int minValue = 0;
+		for (CardCostModifier costModifier : context.getCardCostModifiers()) {
+			manaCost += costModifier.process(card);
+			if (costModifier.getMinValue() > minValue) {
+				minValue = costModifier.getMinValue();
+			}
 		}
-		if (card.hasTag(GameTag.SECRET) && hasTag(player, GameTag.ONE_TIME_FREE_SECRET)) {
-			manaCost = 0;
-		}
-		manaCost = MathUtils.clamp(manaCost, 0, Integer.MAX_VALUE);
+		manaCost = MathUtils.clamp(manaCost, minValue, Integer.MAX_VALUE);
 		return manaCost;
 	}
 
@@ -712,7 +735,7 @@ public class GameLogic implements Cloneable {
 
 	public void playSecret(Player player, Secret secret) {
 		logger.debug("{} has a new secret activated: {}", player.getName(), secret.getSource());
-		addSpellTrigger(player, secret, player.getHero());
+		addGameEventListener(player, secret, player.getHero());
 		player.getSecrets().add(secret.getSource().getTypeId());
 		// TODO: this is grenzwertig, basically it was only added because of the
 		// card
@@ -742,6 +765,7 @@ public class GameLogic implements Cloneable {
 		if (card.getId() == IdFactory.UNASSIGNED) {
 			card.setId(idFactory.generateId());
 		}
+		card.setOwner(playerId);
 		CardCollection hand = player.getHand();
 		if (hand.getCount() < MAX_HAND_CARDS) {
 			logger.debug("{} receives card {}", player.getName(), card);
@@ -785,7 +809,7 @@ public class GameLogic implements Cloneable {
 	}
 
 	private void removeSpelltriggers(Actor actor) {
-		for (SpellTrigger trigger : context.getTriggersAssociatedWith(actor.getReference())) {
+		for (IGameEventListener trigger : context.getTriggersAssociatedWith(actor.getReference())) {
 			logger.debug("SpellTrigger {} was removed for {}", trigger, actor);
 			trigger.onRemove(context);
 		}
@@ -900,7 +924,11 @@ public class GameLogic implements Cloneable {
 		refreshAttacksPerRound(minion);
 
 		if (minion.hasSpellTrigger()) {
-			addSpellTrigger(player, minion.getSpellTrigger(), minion);
+			addGameEventListener(player, minion.getSpellTrigger(), minion);
+		}
+		
+		if (minion.getCardCostModifier() != null) {
+			addManaModifier(player, minion.getCardCostModifier(), minion);
 		}
 
 		if (resolveBattlecry && minion.getBattlecry() != null && minion.getBattlecry().isResolvedLate()) {

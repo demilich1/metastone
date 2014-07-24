@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -26,14 +27,13 @@ public class SilverHandKnight extends MinionCard {
 	public SilverHandKnight() {
 		super("Silver Hand Knight", 4, 4, Rarity.COMMON, HeroClass.ANY, 5);
 		setDescription("Battlecry: Summon a 2/2 Squire.");
+		setTag(GameTag.BATTLECRY);
 	}
 	
 	@Override
 	public int getTypeId() {
 		return 199;
 	}
-
-
 
 	@Override
 	public Minion summon() {

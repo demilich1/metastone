@@ -9,6 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.EndTurnAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.costmodifier.CardCostModifier;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
@@ -16,7 +17,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameResult;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.TargetLogic;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.IGameEventListener;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerLayer;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerManager;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardReference;
@@ -36,6 +37,7 @@ public class GameContext implements Cloneable {
 	private final TargetLogic targetLogic = new TargetLogic();
 	private TriggerManager triggerManager = new TriggerManager();
 	private final HashMap<Environment, Object> environment = new HashMap<>();
+	private final List<CardCostModifier> cardCostModifiers = new ArrayList<>(); 
 
 	protected Player activePlayer;
 	private Player winner;
@@ -52,7 +54,7 @@ public class GameContext implements Cloneable {
 		this.logic.setContext(this);
 	}
 
-	public void addTrigger(SpellTrigger spellTrigger) {
+	public void addTrigger(IGameEventListener spellTrigger) {
 		triggerManager.addTrigger(spellTrigger);
 	}
 
@@ -170,7 +172,7 @@ public class GameContext implements Cloneable {
 		return totalMinionCount;
 	}
 
-	public List<SpellTrigger> getTriggersAssociatedWith(EntityReference entityReference) {
+	public List<IGameEventListener> getTriggersAssociatedWith(EntityReference entityReference) {
 		return triggerManager.getTriggersAssociatedWith(entityReference);
 	}
 
@@ -284,5 +286,13 @@ public class GameContext implements Cloneable {
 		result.append("Turn: " + getTurn());
 
 		return result.toString();
+	}
+	
+	public void addCardCostModfier(CardCostModifier cardCostModifier) {
+		getCardCostModifiers().add(cardCostModifier);
+	}
+
+	public List<CardCostModifier> getCardCostModifiers() {
+		return cardCostModifiers;
 	}
 }

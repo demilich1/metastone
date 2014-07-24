@@ -30,14 +30,13 @@ public class LeeroyJenkins extends MinionCard {
 	public LeeroyJenkins() {
 		super("Leeroy Jenkins", 6, 2, Rarity.LEGENDARY, HeroClass.ANY, 4);
 		setDescription("Charge. Battlecry: Summon two 1/1 Whelps for your opponent.");
+		setTag(GameTag.BATTLECRY);
 	}
 	
 	@Override
 	public int getTypeId() {
 		return 153;
 	}
-
-
 
 	@Override
 	public Minion summon() {

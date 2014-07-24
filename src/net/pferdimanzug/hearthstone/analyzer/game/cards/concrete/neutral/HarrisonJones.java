@@ -1,6 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
@@ -22,14 +23,13 @@ public class HarrisonJones extends MinionCard {
 	public HarrisonJones() {
 		super("Harrison Jones", 5, 4, Rarity.LEGENDARY, HeroClass.ANY, 5);
 		setDescription("Battlecry: Destroy your opponent's weapon and draw cards equal to its Durability.");
+		setTag(GameTag.BATTLECRY);
 	}
 
 	@Override
 	public int getTypeId() {
 		return 139;
 	}
-
-
 
 	@Override
 	public Minion summon() {

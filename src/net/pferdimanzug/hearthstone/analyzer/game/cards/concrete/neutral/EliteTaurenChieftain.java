@@ -3,6 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 import java.util.concurrent.ThreadLocalRandom;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
@@ -94,14 +95,13 @@ public class EliteTaurenChieftain extends MinionCard {
 	public EliteTaurenChieftain() {
 		super("Elite Tauren Chieftain", 5, 5, Rarity.LEGENDARY, HeroClass.ANY, 5);
 		setDescription("Battlecry: Give both players the power to ROCK! (with a Power Chord card)");
+		setTag(GameTag.BATTLECRY);
 	}
 
 	@Override
 	public int getTypeId() {
 		return 122;
 	}
-
-
 
 	@Override
 	public Minion summon() {

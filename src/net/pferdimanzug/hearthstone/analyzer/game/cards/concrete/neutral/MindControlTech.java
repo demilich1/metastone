@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
@@ -15,14 +16,13 @@ public class MindControlTech extends MinionCard {
 	public MindControlTech() {
 		super("Mind Control Tech", 3, 3, Rarity.RARE, HeroClass.ANY, 3);
 		setDescription("Battlecry: If your opponent has 4 or more minions, take control of one at random.");
+		setTag(GameTag.BATTLECRY);
 	}
 
 	@Override
 	public int getTypeId() {
 		return 166;
 	}
-
-
 
 	@Override
 	public Minion summon() {

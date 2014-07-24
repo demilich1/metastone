@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.ChooseBattlecryCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -14,6 +15,7 @@ public class AncientOfLore extends ChooseBattlecryCard {
 	public AncientOfLore() {
 		super("Ancient of Lore", 5, 5, Rarity.RARE, HeroClass.DRUID, 7);
 		setDescription("Choose One - Draw 2 cards; or Restore 5 Health.");
+		setTag(GameTag.BATTLECRY);
 	}
 
 	@Override

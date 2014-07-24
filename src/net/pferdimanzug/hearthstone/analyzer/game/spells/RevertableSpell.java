@@ -32,7 +32,7 @@ public abstract class RevertableSpell extends Spell {
 			Spell revert = getReverseSpell();
 			revert.setTarget(target.getReference());
 			SpellTrigger removeTrigger = new SpellTrigger(revertTrigger, secondRevertTrigger, revert, true);
-			context.getLogic().addSpellTrigger(player, removeTrigger, target);
+			context.getLogic().addGameEventListener(player, removeTrigger, target);
 		}
 	}
 

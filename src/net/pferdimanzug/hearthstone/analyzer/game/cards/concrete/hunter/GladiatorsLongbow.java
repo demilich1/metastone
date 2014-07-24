@@ -23,8 +23,6 @@ public class GladiatorsLongbow extends WeaponCard {
 		return 35;
 	}
 
-
-
 	@Override
 	public Weapon getWeapon() {
 		Weapon gladiatorsLongbow = createWeapon(5, 2);

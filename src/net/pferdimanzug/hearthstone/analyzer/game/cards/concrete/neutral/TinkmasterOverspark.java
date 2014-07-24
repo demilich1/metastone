@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -46,14 +47,13 @@ public class TinkmasterOverspark extends MinionCard {
 	public TinkmasterOverspark() {
 		super("Tinkmaster Overspark", 3, 3, Rarity.LEGENDARY, HeroClass.ANY, 3);
 		setDescription("Battlecry: Transform another random minion into a 5/5 Devilsaur or a 1/1 Squirrel.");
+		setTag(GameTag.BATTLECRY);
 	}
 
 	@Override
 	public int getTypeId() {
 		return 219;
 	}
-
-
 
 	@Override
 	public Minion summon() {

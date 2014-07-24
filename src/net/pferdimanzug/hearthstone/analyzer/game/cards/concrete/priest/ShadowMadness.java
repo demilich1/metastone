@@ -41,7 +41,7 @@ public class ShadowMadness extends SpellCard {
 			Spell reverseMindcontrolSpell = new ReverseMindControlSpell();
 			reverseMindcontrolSpell.setTarget(EntityReference.SELF);
 			SpellTrigger returnOnSilence = new SpellTrigger(new SilenceTrigger(), new TurnEndTrigger(), reverseMindcontrolSpell, true);
-			context.getLogic().addSpellTrigger(player, returnOnSilence, target);
+			context.getLogic().addGameEventListener(player, returnOnSilence, target);
 		}
 		
 	}

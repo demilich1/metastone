@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -14,6 +15,7 @@ public class AcidicSwampOoze extends MinionCard {
 	public AcidicSwampOoze() {
 		super("Acidic Swamp Ooze", 3, 2, Rarity.FREE, HeroClass.ANY, 2);
 		setDescription("Battlecry: Destroy your opponent's weapon.");
+		setTag(GameTag.BATTLECRY);
 	}
 
 	@Override

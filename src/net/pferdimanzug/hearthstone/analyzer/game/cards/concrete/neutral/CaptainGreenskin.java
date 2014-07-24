@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -14,14 +15,13 @@ public class CaptainGreenskin extends MinionCard {
 		super("Captain Greenskin", 5, 4, Rarity.LEGENDARY, HeroClass.ANY, 5);
 		setDescription("Battlecry: Give your weapon +1/+1.");
 		setRace(Race.PIRATE);
+		setTag(GameTag.BATTLECRY);
 	}
 
 	@Override
 	public int getTypeId() {
 		return 103;
 	}
-
-
 
 	@Override
 	public Minion summon() {

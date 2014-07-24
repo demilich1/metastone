@@ -1,8 +1,8 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.costmodifier.MinionCostModifier;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
@@ -18,12 +18,11 @@ public class VentureCoMercenary extends MinionCard {
 		return 221;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion ventureCoMercenary = createMinion();
-		ventureCoMercenary.setTag(GameTag.MINION_MANA_COST, 3);
+		MinionCostModifier costModifier = new MinionCostModifier(3);
+		ventureCoMercenary.setCardCostModifier(costModifier);
 		return ventureCoMercenary;
 	}
 }

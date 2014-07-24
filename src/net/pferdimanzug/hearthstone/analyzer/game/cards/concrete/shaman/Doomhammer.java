@@ -24,8 +24,6 @@ public class Doomhammer extends WeaponCard {
 		return 313;
 	}
 
-
-
 	@Override
 	public Weapon getWeapon() {
 		Weapon doomhammer = createWeapon(2, 8);

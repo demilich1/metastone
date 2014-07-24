@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -120,6 +121,7 @@ public class GelbinMekkatorque extends MinionCard {
 	public GelbinMekkatorque() {
 		super("Gelbin Mekkatorque", 6, 6, Rarity.LEGENDARY, HeroClass.ANY, 6);
 		setDescription("Battlecry: Summon an AWESOME invention.");
+		setTag(GameTag.BATTLECRY);
 	}
 
 	@Override

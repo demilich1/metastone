@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -30,6 +31,7 @@ public class Onyxia extends MinionCard {
 		super("Onyxia", 8, 8, Rarity.LEGENDARY, HeroClass.ANY, 9);
 		setDescription("Battlecry: Summon 1/1 Whelps until your side of the battlefield is full.");
 		setRace(Race.DRAGON);
+		setTag(GameTag.BATTLECRY);
 	}
 	
 	@Override

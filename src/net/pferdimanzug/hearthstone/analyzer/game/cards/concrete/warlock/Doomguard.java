@@ -15,14 +15,13 @@ public class Doomguard extends MinionCard {
 		super("Doomguard", 5, 7, Rarity.RARE, HeroClass.WARLOCK, 5);
 		setDescription("Charge. Battlecry: Discard two random cards.");
 		setRace(Race.DEMON);
+		setTag(GameTag.BATTLECRY);
 	}
 
 	@Override
 	public int getTypeId() {
 		return 338;
 	}
-
-
 
 	@Override
 	public Minion summon() {

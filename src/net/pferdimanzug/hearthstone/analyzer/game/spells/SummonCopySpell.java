@@ -4,7 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.IGameEventListener;
 
 public class SummonCopySpell extends Spell {
 	
@@ -15,9 +15,9 @@ public class SummonCopySpell extends Spell {
 		clone.setSpellTrigger(null);
 		
 		context.getLogic().summon(player.getId(), clone, null, null, false);
-		for (SpellTrigger trigger : context.getTriggersAssociatedWith(template.getReference())) {
-			SpellTrigger triggerClone = trigger.clone();
-			context.getLogic().addSpellTrigger(player, triggerClone, clone);
+		for (IGameEventListener trigger : context.getTriggersAssociatedWith(template.getReference())) {
+			IGameEventListener triggerClone = trigger.clone();
+			context.getLogic().addGameEventListener(player, triggerClone, clone);
 		}
 	}
 

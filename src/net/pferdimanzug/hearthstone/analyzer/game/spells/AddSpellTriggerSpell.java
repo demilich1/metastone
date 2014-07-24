@@ -15,7 +15,7 @@ public class AddSpellTriggerSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
-		context.getLogic().addSpellTrigger(player, spellTrigger, target);
+		context.getLogic().addGameEventListener(player, spellTrigger, target);
 	}
 
 }

@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -14,6 +15,7 @@ public class WailingSoul extends MinionCard {
 	public WailingSoul() {
 		super("Wailing Soul", 3, 5, Rarity.RARE, HeroClass.ANY, 4);
 		setDescription("Battlecry: Silence your other minions.");
+		setTag(GameTag.BATTLECRY);
 	}
 
 	@Override

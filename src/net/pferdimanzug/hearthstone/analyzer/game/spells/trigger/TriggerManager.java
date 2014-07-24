@@ -7,17 +7,17 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class TriggerManager implements Cloneable {
-	private final List<SpellTrigger> triggers;
+	private final List<IGameEventListener> triggers;
 
 	public TriggerManager() {
-		triggers = new ArrayList<SpellTrigger>();
+		triggers = new ArrayList<IGameEventListener>();
 	}
 
 	private TriggerManager(TriggerManager otherTriggerManager) {
-		triggers = new ArrayList<SpellTrigger>(otherTriggerManager.triggers);
+		triggers = new ArrayList<IGameEventListener>(otherTriggerManager.triggers);
 	}
 
-	public void addTrigger(SpellTrigger trigger) {
+	public void addTrigger(IGameEventListener trigger) {
 		triggers.add(trigger);
 	}
 
@@ -27,7 +27,7 @@ public class TriggerManager implements Cloneable {
 	}
 
 	public void fireGameEvent(GameEvent event) {
-		for (SpellTrigger trigger : getListSnapshot(triggers)) {
+		for (IGameEventListener trigger : getListSnapshot(triggers)) {
 			if (trigger.getLayer() != event.getTriggerLayer()) {
 				continue;
 			}
@@ -47,14 +47,14 @@ public class TriggerManager implements Cloneable {
 			}
 		}
 	}
-	
-	private List<SpellTrigger> getListSnapshot(List<SpellTrigger> triggerList) {
-		return new ArrayList<SpellTrigger>(triggerList);
+
+	private List<IGameEventListener> getListSnapshot(List<IGameEventListener> triggerList) {
+		return new ArrayList<IGameEventListener>(triggerList);
 	}
 
-	public List<SpellTrigger> getTriggersAssociatedWith(EntityReference entityReference) {
-		List<SpellTrigger> relevantTriggers = new ArrayList<>();
-		for (SpellTrigger trigger : triggers) {
+	public List<IGameEventListener> getTriggersAssociatedWith(EntityReference entityReference) {
+		List<IGameEventListener> relevantTriggers = new ArrayList<>();
+		for (IGameEventListener trigger : triggers) {
 			if (trigger.getHostReference().equals(entityReference)) {
 				relevantTriggers.add(trigger);
 			}
@@ -63,7 +63,7 @@ public class TriggerManager implements Cloneable {
 	}
 
 	public void removeTriggersAssociatedWith(EntityReference entityReference) {
-		for (SpellTrigger trigger : getListSnapshot(triggers)) {
+		for (IGameEventListener trigger : getListSnapshot(triggers)) {
 			if (trigger.getHostReference().equals(entityReference)) {
 				triggers.remove(trigger);
 			}

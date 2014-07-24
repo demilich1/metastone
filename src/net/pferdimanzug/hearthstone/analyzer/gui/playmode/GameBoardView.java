@@ -55,7 +55,8 @@ public class GameBoardView extends BorderPane {
 	private MinionToken[] p1Minions = new MinionToken[GameLogic.MAX_MINIONS];
 	private MinionToken[] p2Minions = new MinionToken[GameLogic.MAX_MINIONS];
 	
-	private final HashMap<GameToken, Button> summonHelperMap = new HashMap<GameToken, Button>();
+	private final HashMap<GameToken, Button> summonHelperMap1 = new HashMap<GameToken, Button>();
+	private final HashMap<GameToken, Button> summonHelperMap2 = new HashMap<GameToken, Button>();
 	private final HashMap<Actor, GameToken> entityTokenMap = new HashMap<Actor, GameToken>();
 	
 	@FXML
@@ -87,19 +88,23 @@ public class GameBoardView extends BorderPane {
 			Button summonHelper = createSummonHelper();
 			p1MinionPane.getChildren().add(summonHelper);
 			p1Minions[i] = new MinionToken();
-			p1Minions[i].setVisible(false);
 			p1MinionPane.getChildren().add(p1Minions[i]);
-			summonHelperMap.put(p1Minions[i], summonHelper);
+			summonHelperMap1.put(p1Minions[i], summonHelper);
 			
+			summonHelper = createSummonHelper();
+			p2MinionPane.getChildren().add(summonHelper);
 			p2Minions[i] = new MinionToken();
-			p2Minions[i].setVisible(false);
+			p2MinionPane.getChildren().add(p2Minions[i]);
+			summonHelperMap2.put(p2Minions[i], summonHelper);
 		}
 		// create one additional summon helper
 		Button summonHelper = createSummonHelper();
 		p1MinionPane.getChildren().add(summonHelper);
-		summonHelperMap.put(null, summonHelper);
+		summonHelperMap1.put(null, summonHelper);
 		
-		p2MinionPane.getChildren().addAll(p2Minions);
+		summonHelper = createSummonHelper();
+		p2MinionPane.getChildren().add(summonHelper);
+		summonHelperMap2.put(null, summonHelper);
 		
 		p1Hero = new HeroToken();
 		p2Hero = new HeroToken();
@@ -135,7 +140,11 @@ public class GameBoardView extends BorderPane {
 		for (GameToken token : entityTokenMap.values()) {
 			token.hideTargetMarker();
 		}
-		for (Button summonHelper : summonHelperMap.values()) {
+		for (Button summonHelper : summonHelperMap1.values()) {
+			summonHelper.setVisible(false);
+			summonHelper.setManaged(false);
+		}
+		for (Button summonHelper : summonHelperMap2.values()) {
 			summonHelper.setVisible(false);
 			summonHelper.setManaged(false);
 		}
@@ -162,9 +171,10 @@ public class GameBoardView extends BorderPane {
 	
 	private void enableSummonTargets(final HumanTargetOptions targetOptions) {
 		GameAction action = targetOptions.getAction();
+		int playerId = targetOptions.getPlayer().getId();
 		for (final Entity target : action.getValidTargets()) {
 			GameToken token = entityTokenMap.get(target);
-			Button summonHelper = summonHelperMap.get(token);
+			Button summonHelper = playerId == 0 ? summonHelperMap1.get(token) : summonHelperMap2.get(token);
 			summonHelper.setVisible(true);
 			summonHelper.setManaged(true);
 			EventHandler<ActionEvent> clickedHander = new EventHandler<ActionEvent>() {

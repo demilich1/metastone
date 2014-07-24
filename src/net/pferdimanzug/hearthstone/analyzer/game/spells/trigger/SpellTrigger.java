@@ -12,7 +12,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SpellTrigger implements Cloneable {
+public class SpellTrigger implements Cloneable, IGameEventListener {
 	private final static Logger logger = LoggerFactory.getLogger(SpellTrigger.class);
 
 	private GameEventTrigger primaryTrigger;
@@ -39,6 +39,8 @@ public class SpellTrigger implements Cloneable {
 		this(trigger, null, spell, oneTime);
 	}
 
+	
+	@Override
 	public SpellTrigger clone() {
 		try {
 			SpellTrigger clone = (SpellTrigger) super.clone();
@@ -54,14 +56,17 @@ public class SpellTrigger implements Cloneable {
 		return null;
 	}
 
+	@Override
 	public EntityReference getHostReference() {
 		return hostReference;
 	}
 
+	@Override
 	public TriggerLayer getLayer() {
 		return layer;
 	}
 
+	@Override
 	public int getOwner() {
 		return primaryTrigger.getOwner();
 	}
@@ -70,6 +75,7 @@ public class SpellTrigger implements Cloneable {
 		return spell;
 	}
 
+	@Override
 	public boolean interestedIn(GameEventType eventType) {
 		boolean result = primaryTrigger.interestedIn() == eventType;
 		if (secondaryTrigger != null) {
@@ -78,10 +84,12 @@ public class SpellTrigger implements Cloneable {
 		return result;
 	}
 
+	@Override
 	public boolean isExpired() {
 		return expired;
 	}
 
+	@Override
 	public void onAdd(GameContext context) {
 	}
 
@@ -89,6 +97,7 @@ public class SpellTrigger implements Cloneable {
 		event.getGameContext().getLogic().castSpell(ownerId, spell);
 	}
 
+	@Override
 	public void onGameEvent(GameEvent event) {
 		int ownerId = primaryTrigger.getOwner();
 		Entity host = event.getGameContext().resolveSingleTarget(ownerId, hostReference);
@@ -108,13 +117,16 @@ public class SpellTrigger implements Cloneable {
 		}
 	}
 
+	@Override
 	public void onRemove(GameContext context) {
 	}
 
+	@Override
 	public void reset() {
 		expired = false;
 	}
 
+	@Override
 	public void setHost(Entity host) {
 		this.hostReference = host.getReference();
 		spell.setSourceEntity(hostReference);
@@ -124,6 +136,7 @@ public class SpellTrigger implements Cloneable {
 		this.layer = layer;
 	}
 
+	@Override
 	public void setOwner(int playerIndex) {
 		primaryTrigger.setOwner(playerIndex);
 		if (secondaryTrigger != null) {

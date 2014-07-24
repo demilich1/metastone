@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -16,14 +17,13 @@ public class StampedingKodo extends MinionCard {
 		super("Stampeding Kodo", 3, 5, Rarity.RARE, HeroClass.ANY, 5);
 		setDescription("Battlecry: Destroy a random enemy minion with 2 or less Attack.");
 		setRace(Race.BEAST);
+		setTag(GameTag.BATTLECRY);
 	}
 
 	@Override
 	public int getTypeId() {
 		return 205;
 	}
-
-
 
 	@Override
 	public Minion summon() {

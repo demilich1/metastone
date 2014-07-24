@@ -22,8 +22,6 @@ public class BaronGeddon extends MinionCard {
 		return 92;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion baronGeddon = createMinion();

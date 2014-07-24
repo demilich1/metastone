@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -16,14 +17,13 @@ public class TwilightDrake extends MinionCard {
 		super("Twilight Drake", 4, 1, Rarity.RARE, HeroClass.ANY, 4);
 		setDescription("Battlecry: Gain +1 Health for each card in your hand.");
 		setRace(Race.DRAGON);
+		setTag(GameTag.BATTLECRY);
 	}
 
 	@Override
 	public int getTypeId() {
 		return 220;
 	}
-
-
 
 	@Override
 	public Minion summon() {

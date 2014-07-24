@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -16,14 +17,13 @@ public class FlameImp extends MinionCard {
 		super("Flame Imp", 3, 2, Rarity.COMMON, HeroClass.WARLOCK, 1);
 		setDescription("Battlecry: Deal 3 damage to your hero.");
 		setRace(Race.DEMON);
+		setTag(GameTag.BATTLECRY);
 	}
 
 	@Override
 	public int getTypeId() {
 		return 342;
 	}
-
-
 
 	@Override
 	public Minion summon() {
