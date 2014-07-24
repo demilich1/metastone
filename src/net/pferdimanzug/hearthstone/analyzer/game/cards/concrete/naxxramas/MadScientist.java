@@ -17,20 +17,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class MadScientist extends MinionCard {
 
-	public MadScientist() {
-		super("Mad Scientist", 2, 2, Rarity.COMMON, HeroClass.ANY, 2);
-		setDescription("Deathrattle: Put a Secret from your deck into the battlefield.");
-	}
-
-	@Override
-	public Minion summon() {
-		Minion madScientist = createMinion();
-		Spell deathrattle = new PlayRandomSecretSpell();
-		deathrattle.setTarget(EntityReference.NONE);
-		madScientist.addDeathrattle(deathrattle);
-		return madScientist;
-	}
-	
 	private class PlayRandomSecretSpell extends Spell {
 		private CardCollection findSecretCards(CardCollection cardCollection) {
 			CardCollection secretCards = new CardCollection();
@@ -58,10 +44,24 @@ public class MadScientist extends MinionCard {
 		
 	}
 
-
-
+	public MadScientist() {
+		super("Mad Scientist", 2, 2, Rarity.COMMON, HeroClass.ANY, 2);
+		setDescription("Deathrattle: Put a Secret from your deck into the battlefield.");
+	}
+	
 	@Override
 	public int getTypeId() {
 		return 392;
+	}
+
+
+
+	@Override
+	public Minion summon() {
+		Minion madScientist = createMinion();
+		Spell deathrattle = new PlayRandomSecretSpell();
+		deathrattle.setTarget(EntityReference.NONE);
+		madScientist.addDeathrattle(deathrattle);
+		return madScientist;
 	}
 }

@@ -20,6 +20,11 @@ public class TestBase {
 	private static class NullBehaviour implements IBehaviour {
 
 		@Override
+		public String getName() {
+			return "Null Behaviour";
+		}
+
+		@Override
 		public Entity provideTargetFor(Player player, GameAction action) {
 			return null;
 		}
@@ -27,11 +32,6 @@ public class TestBase {
 		@Override
 		public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
 			return null;
-		}
-
-		@Override
-		public String getName() {
-			return "Null Behaviour";
 		}
 		
 	}

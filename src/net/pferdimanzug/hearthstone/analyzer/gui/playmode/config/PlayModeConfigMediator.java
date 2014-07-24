@@ -22,12 +22,6 @@ public class PlayModeConfigMediator extends Mediator<GameNotification> {
 	}
 	
 	@Override
-	public void onRegister() {
-		getFacade().sendNotification(GameNotification.SHOW_VIEW, view);
-		getFacade().sendNotification(GameNotification.REQUEST_DECKS);
-	}
-
-	@Override
 	public void handleNotification(final INotification<GameNotification> notification) {
 		switch (notification.getId()) {
 		case ANSWER_DECKS:
@@ -51,6 +45,12 @@ public class PlayModeConfigMediator extends Mediator<GameNotification> {
 		notificationInterests.add(GameNotification.ANSWER_DECKS);
 		notificationInterests.add(GameNotification.COMMIT_PLAYMODE_CONFIG);
 		return notificationInterests;
+	}
+
+	@Override
+	public void onRegister() {
+		getFacade().sendNotification(GameNotification.SHOW_VIEW, view);
+		getFacade().sendNotification(GameNotification.REQUEST_DECKS);
 	}
 
 }

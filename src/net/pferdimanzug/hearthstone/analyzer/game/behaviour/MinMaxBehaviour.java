@@ -73,6 +73,11 @@ public class MinMaxBehaviour implements IBehaviour {
 	}
 
 	@Override
+	public String getName() {
+		return "Min-Max";
+	}
+
+	@Override
 	public Entity provideTargetFor(Player player, GameAction action) {
 		//TODO: copied from PlayRandomBehaviour
 		List<Entity> validTargets = action.getValidTargets();
@@ -138,11 +143,6 @@ public class MinMaxBehaviour implements IBehaviour {
 		simulation.getLogic().performGameAction(player.getId(), action);
 		GameLogic.logger.debug("********SIMULATION ends**********");
 		return simulation;
-	}
-
-	@Override
-	public String getName() {
-		return "Min-Max";
 	}
 
 }

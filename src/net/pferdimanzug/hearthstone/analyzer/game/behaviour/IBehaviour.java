@@ -9,9 +9,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public interface IBehaviour {
 
+	String getName();
+
 	Entity provideTargetFor(Player player, GameAction action);
 
 	GameAction requestAction(GameContext context, Player player, List<GameAction> validActions);
-
-	String getName();
 }

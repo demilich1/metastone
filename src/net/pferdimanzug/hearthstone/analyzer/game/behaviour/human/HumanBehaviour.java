@@ -16,6 +16,11 @@ public class HumanBehaviour implements IBehaviour {
 	private boolean waitingForInput;
 	private Entity selectedTarget;
 
+	@Override
+	public String getName() {
+		return "Human Controlled";
+	}
+
 	public Entity getSelectedTarget() {
 		return this.selectedTarget;
 	}
@@ -53,20 +58,15 @@ public class HumanBehaviour implements IBehaviour {
 		}
 		return selectedAction;
 	}
-
+	
 	public void setSelectedAction(GameAction selectedAction) {
 		this.selectedAction = selectedAction;
 		waitingForInput = false;
 	}
-	
+
 	public void setSelectedTarget(Entity selectedTarget) {
 		this.selectedTarget = selectedTarget;
 		waitingForInput = false;
-	}
-
-	@Override
-	public String getName() {
-		return "Human Controlled";
 	}
 
 }

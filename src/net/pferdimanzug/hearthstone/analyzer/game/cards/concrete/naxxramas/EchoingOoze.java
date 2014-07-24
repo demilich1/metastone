@@ -22,6 +22,11 @@ public class EchoingOoze extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 390;
+	}
+
+	@Override
 	public Minion summon() {
 		Minion echoingOoze = createMinion();
 		Spell summonCopy = new SummonCopySpell();
@@ -32,10 +37,5 @@ public class EchoingOoze extends MinionCard {
 		Battlecry battlecry = Battlecry.createBattlecry(addTrigger);
 		echoingOoze.setBattlecry(battlecry);
 		return echoingOoze;
-	}
-
-	@Override
-	public int getTypeId() {
-		return 390;
 	}
 }

@@ -16,16 +16,16 @@ public class DarkCultist extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 387;
+	}
+
+	@Override
 	public Minion summon() {
 		Minion darkCultist = createMinion();
 		Spell randomBuffSpell = new BuffRandomSpell(0, 3);
 		randomBuffSpell.setTarget(EntityReference.FRIENDLY_MINIONS);
 		darkCultist.addDeathrattle(randomBuffSpell);
 		return darkCultist;
-	}
-
-	@Override
-	public int getTypeId() {
-		return 387;
 	}
 }

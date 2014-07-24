@@ -37,6 +37,48 @@ import net.pferdimanzug.hearthstone.analyzer.gui.gameconfig.PlayerConfig;
 
 public class PlayerConfigView extends VBox {
 
+	private class BehaviourStringConverter extends StringConverter<IBehaviour> {
+
+		@Override
+		public IBehaviour fromString(String string) {
+			return null;
+		}
+
+		@Override
+		public String toString(IBehaviour behaviour) {
+			return behaviour.getName();
+		}
+
+	}
+
+	private class DeckStringConverter extends StringConverter<Deck> {
+
+		@Override
+		public Deck fromString(String arg0) {
+			return null;
+		}
+
+		@Override
+		public String toString(Deck deck) {
+			return deck.getName();
+		}
+
+	}
+
+	private class HeroStringConverter extends StringConverter<Hero> {
+
+		@Override
+		public Hero fromString(String arg0) {
+			return null;
+		}
+
+		@Override
+		public String toString(Hero hero) {
+			return hero.getHeroClass().toString();
+		}
+
+	}
+
 	@FXML
 	private Label heroNameLabel;
 
@@ -80,27 +122,37 @@ public class PlayerConfigView extends VBox {
 		});
 	}
 
-	public void setupHeroes() {
-		ObservableList<Hero> heroList = FXCollections.observableArrayList();
-		if (selectionHint == PreselectionHint.HUMAN) {
-			heroList.add(new Jaina());
-			heroList.add(new Garrosh());
-		} else {
-			heroList.add(new Garrosh());
-			heroList.add(new Jaina());
-		}
-		
-		heroList.add(new Rexxar());
-		heroList.add(new Guldan());
-		heroList.add(new Valeera());
-		heroList.add(new Thrall());
-		heroList.add(new Anduin());
-		heroList.add(new Uther());
+	private void filterDecks() {
+		HeroClass heroClass = getPlayerConfig().getHero().getHeroClass();
+		ObservableList<Deck> deckList = FXCollections.observableArrayList();
 
-		heroBox.setItems(heroList);
-		heroBox.valueProperty().addListener((ChangeListener<Hero>) (observableValue, oldHero, newHero) -> {
-			selectHero(newHero);
-		});
+		Deck randomDeck = DeckFactory.getRandomDeck(heroClass);
+		deckList.add(randomDeck);
+		for (Deck deck : decks) {
+			if (deck.getHeroClass() == heroClass || deck.getHeroClass() == HeroClass.ANY) {
+				deckList.add(deck);
+			}
+		}
+		deckBox.setItems(deckList);
+		deckBox.getSelectionModel().selectFirst();
+	}
+
+	public PlayerConfig getPlayerConfig() {
+		return playerConfig;
+	}
+
+	public void injectDecks(List<Deck> decks) {
+		this.decks = decks;
+		heroBox.getSelectionModel().selectFirst();
+		behaviourBox.getSelectionModel().selectFirst();
+	}
+
+	private void selectHero(Hero hero) {
+		Image heroPortrait = new Image(IconFactory.getHeroIconUrl(hero));
+		heroIcon.setImage(heroPortrait);
+		heroNameLabel.setText(hero.getName());
+		getPlayerConfig().setHero(hero);
+		filterDecks();
 	}
 
 	public void setupBehaviours() {
@@ -122,79 +174,27 @@ public class PlayerConfigView extends VBox {
 		});
 	}
 
-	public void injectDecks(List<Deck> decks) {
-		this.decks = decks;
-		heroBox.getSelectionModel().selectFirst();
-		behaviourBox.getSelectionModel().selectFirst();
-	}
-
-	private void filterDecks() {
-		HeroClass heroClass = getPlayerConfig().getHero().getHeroClass();
-		ObservableList<Deck> deckList = FXCollections.observableArrayList();
-
-		Deck randomDeck = DeckFactory.getRandomDeck(heroClass);
-		deckList.add(randomDeck);
-		for (Deck deck : decks) {
-			if (deck.getHeroClass() == heroClass || deck.getHeroClass() == HeroClass.ANY) {
-				deckList.add(deck);
-			}
+	public void setupHeroes() {
+		ObservableList<Hero> heroList = FXCollections.observableArrayList();
+		if (selectionHint == PreselectionHint.HUMAN) {
+			heroList.add(new Jaina());
+			heroList.add(new Garrosh());
+		} else {
+			heroList.add(new Garrosh());
+			heroList.add(new Jaina());
 		}
-		deckBox.setItems(deckList);
-		deckBox.getSelectionModel().selectFirst();
-	}
+		
+		heroList.add(new Rexxar());
+		heroList.add(new Guldan());
+		heroList.add(new Valeera());
+		heroList.add(new Thrall());
+		heroList.add(new Anduin());
+		heroList.add(new Uther());
 
-	private void selectHero(Hero hero) {
-		Image heroPortrait = new Image(IconFactory.getHeroIconUrl(hero));
-		heroIcon.setImage(heroPortrait);
-		heroNameLabel.setText(hero.getName());
-		getPlayerConfig().setHero(hero);
-		filterDecks();
-	}
-
-	public PlayerConfig getPlayerConfig() {
-		return playerConfig;
-	}
-
-	private class HeroStringConverter extends StringConverter<Hero> {
-
-		@Override
-		public Hero fromString(String arg0) {
-			return null;
-		}
-
-		@Override
-		public String toString(Hero hero) {
-			return hero.getHeroClass().toString();
-		}
-
-	}
-
-	private class DeckStringConverter extends StringConverter<Deck> {
-
-		@Override
-		public Deck fromString(String arg0) {
-			return null;
-		}
-
-		@Override
-		public String toString(Deck deck) {
-			return deck.getName();
-		}
-
-	}
-
-	private class BehaviourStringConverter extends StringConverter<IBehaviour> {
-
-		@Override
-		public IBehaviour fromString(String string) {
-			return null;
-		}
-
-		@Override
-		public String toString(IBehaviour behaviour) {
-			return behaviour.getName();
-		}
-
+		heroBox.setItems(heroList);
+		heroBox.valueProperty().addListener((ChangeListener<Hero>) (observableValue, oldHero, newHero) -> {
+			selectHero(newHero);
+		});
 	}
 
 }

@@ -2,8 +2,6 @@ package net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder;
 
 import java.io.IOException;
 
-import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
-import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,6 +13,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
+import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 
 public class DeckBuilderView extends BorderPane implements EventHandler<ActionEvent> {
 
@@ -51,19 +51,23 @@ public class DeckBuilderView extends BorderPane implements EventHandler<ActionEv
 		backButton.setOnAction(this);
 	}
 
+	@Override
+	public void handle(ActionEvent event) {
+		if (event.getSource() == importButton) {
+			ApplicationFacade.getInstance().sendNotification(GameNotification.IMPORT_DECK_FROM_URL, importField.getText());
+		} else if (event.getSource() == backButton) {
+			ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU);
+		}
+	}
+
 	public void showBottomBar(Node content) {
 		BorderPane.setAlignment(content, Pos.CENTER);
 		setBottom(content);
 	}
-
+	
 	public void showLowerInfoArea(Node content) {
 		lowerInfoArea.getChildren().clear();
 		lowerInfoArea.getChildren().add(content);
-	}
-	
-	public void showUpperInfoArea(Node content) {
-		upperInfoArea.getChildren().clear();
-		upperInfoArea.getChildren().add(content);
 	}
 	
 	public void showMainArea(Node content) {
@@ -74,13 +78,9 @@ public class DeckBuilderView extends BorderPane implements EventHandler<ActionEv
 		scrollPane.setContent(content);
 	}
 
-	@Override
-	public void handle(ActionEvent event) {
-		if (event.getSource() == importButton) {
-			ApplicationFacade.getInstance().sendNotification(GameNotification.IMPORT_DECK_FROM_URL, importField.getText());
-		} else if (event.getSource() == backButton) {
-			ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU);
-		}
+	public void showUpperInfoArea(Node content) {
+		upperInfoArea.getChildren().clear();
+		upperInfoArea.getChildren().add(content);
 	}
 
 }

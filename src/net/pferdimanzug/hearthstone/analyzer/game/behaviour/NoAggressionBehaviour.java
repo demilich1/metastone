@@ -14,6 +14,11 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 public class NoAggressionBehaviour implements IBehaviour {
 
 	@Override
+	public String getName() {
+		return "No Aggression";
+	}
+
+	@Override
 	public Entity provideTargetFor(Player player, GameAction action) {
 		List<Entity> validTargets = action.getValidTargets();
 		if (validTargets.isEmpty()) {
@@ -38,11 +43,6 @@ public class NoAggressionBehaviour implements IBehaviour {
 			}
 		}
 		return null;
-	}
-
-	@Override
-	public String getName() {
-		return "No Aggression";
 	}
 
 }

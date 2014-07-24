@@ -17,6 +17,11 @@ public class PlayRandomBehaviour implements IBehaviour {
 	private final static Logger logger = LoggerFactory.getLogger(PlayRandomBehaviour.class);
 
 	@Override
+	public String getName() {
+		return "Play Random";
+	}
+
+	@Override
 	public Entity provideTargetFor(Player player, GameAction action) {
 		List<Entity> validTargets = action.getValidTargets();
 		if (validTargets.isEmpty()) {
@@ -30,7 +35,7 @@ public class PlayRandomBehaviour implements IBehaviour {
 		
 		return randomTarget;
 	}
-
+	
 	@Override
 	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
 		if (validActions.isEmpty()) {
@@ -42,7 +47,7 @@ public class PlayRandomBehaviour implements IBehaviour {
 		selectRandomTarget(randomAction);
 		return randomAction;
 	}
-	
+
 	private void selectRandomTarget(GameAction action) {
 		List<Entity> validTargets = action.getValidTargets();
 		if (validTargets == null || validTargets.isEmpty()) {
@@ -52,11 +57,6 @@ public class PlayRandomBehaviour implements IBehaviour {
 		int randomIndex = ThreadLocalRandom.current().nextInt(validTargets.size());
 		Entity randomTarget = validTargets.get(randomIndex);
 		action.setTargetKey(EntityReference.pointTo(randomTarget));
-	}
-
-	@Override
-	public String getName() {
-		return "Play Random";
 	}
 
 }

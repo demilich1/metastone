@@ -18,16 +18,16 @@ public class ToggleCostModifier extends CardCostModifier {
 	}
 
 	@Override
-	public boolean interestedIn(GameEventType eventType) {
-		return eventType == toggleOnTrigger.interestedIn() || eventType == toggleOffTrigger.interestedIn();
-	}
-
-	@Override
 	protected boolean appliesTo(Card card) {
 		if (!ready) {
 			return false;
 		}
 		return super.appliesTo(card);
+	}
+
+	@Override
+	public boolean interestedIn(GameEventType eventType) {
+		return eventType == toggleOnTrigger.interestedIn() || eventType == toggleOffTrigger.interestedIn();
 	}
 
 	@Override
@@ -41,12 +41,12 @@ public class ToggleCostModifier extends CardCostModifier {
 
 	}
 
-	public void setToggleOnTrigger(GameEventTrigger toggleOnTrigger) {
-		this.toggleOnTrigger = toggleOnTrigger;
-	}
-
 	public void setToggleOffTrigger(GameEventTrigger toggleOffTrigger) {
 		this.toggleOffTrigger = toggleOffTrigger;
+	}
+
+	public void setToggleOnTrigger(GameEventTrigger toggleOnTrigger) {
+		this.toggleOnTrigger = toggleOnTrigger;
 	}
 
 }

@@ -66,8 +66,7 @@ public abstract class Hero extends Actor {
 	public HashMap<GameTag, Object> getTagsCopy() {
 		HashMap<GameTag, Object> copy = new HashMap<>();
 		for (GameTag tag : tags.keySet()) {
-			if (tag != GameTag.COMBO && tag != GameTag.ONE_TIME_FREE_SECRET && tag != GameTag.ONE_TIME_MINION_MANA_COST
-					&& tag != GameTag.SPELL_MANA_COST) {
+			if (tag != GameTag.COMBO) {
 				continue;
 			}
 			copy.put(tag, tags.get(tag));

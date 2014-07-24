@@ -51,11 +51,6 @@ public class PlayModeSetupView extends BorderPane implements EventHandler<Action
 		backButton.setOnAction(this);
 	}
 
-	public void injectDecks(List<Deck> decks) {
-		player1Config.injectDecks(decks);
-		player2Config.injectDecks(decks);
-	}
-
 	@Override
 	public void handle(ActionEvent actionEvent) {
 		if (actionEvent.getSource() == startButton) {
@@ -67,6 +62,11 @@ public class PlayModeSetupView extends BorderPane implements EventHandler<Action
 		} else if (actionEvent.getSource() == backButton) {
 			ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU);
 		}
+	}
+
+	public void injectDecks(List<Deck> decks) {
+		player1Config.injectDecks(decks);
+		player2Config.injectDecks(decks);
 	}
 
 }

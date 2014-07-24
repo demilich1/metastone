@@ -13,13 +13,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Reincarnate extends SpellCard {
 
-	public Reincarnate() {
-		super("Reincarnate", Rarity.COMMON, HeroClass.SHAMAN, 2);
-		setDescription("Destroy a minion, then return it to life with full Health.");
-		setSpell(new ReincarnateSpell());
-		setTargetRequirement(TargetSelection.MINIONS);
-	}
-
 	private class ReincarnateSpell extends Spell {
 
 		@Override
@@ -30,6 +23,13 @@ public class Reincarnate extends SpellCard {
 			context.getLogic().summon(player.getId(), sourceCard.summon(), null, null, false);
 		}
 
+	}
+
+	public Reincarnate() {
+		super("Reincarnate", Rarity.COMMON, HeroClass.SHAMAN, 2);
+		setDescription("Destroy a minion, then return it to life with full Health.");
+		setSpell(new ReincarnateSpell());
+		setTargetRequirement(TargetSelection.MINIONS);
 	}
 
 

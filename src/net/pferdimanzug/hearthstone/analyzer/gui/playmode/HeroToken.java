@@ -48,6 +48,18 @@ public class HeroToken extends GameToken {
 		super("HeroToken.fxml");
 	}
 
+	public void highlight(boolean highlight) {
+		StackPane targetAnchor = (StackPane) lookup("#targetAnchor");
+		String cssBorder = null;
+		if (highlight) {
+			cssBorder = "-fx-border-color:greenyellow; \n" + "-fx-border-radius:7;\n" + "-fx-border-width:5.0;";
+		} else {
+			cssBorder = "-fx-border-color:transparent; \n" + "-fx-border-radius:7;\n" + "-fx-border-width:5.0;";
+		}
+
+		targetAnchor.setStyle(cssBorder);
+	}
+
 	public void setHero(Player player) {
 		Hero hero = player.getHero();
 		attackLabel.setText(String.valueOf(hero.getAttack()));
@@ -60,18 +72,6 @@ public class HeroToken extends GameToken {
 		updateArmor(hero.getArmor());
 		updateWeapon(hero.getWeapon());
 		updateSecrets(player);
-	}
-
-	public void highlight(boolean highlight) {
-		StackPane targetAnchor = (StackPane) lookup("#targetAnchor");
-		String cssBorder = null;
-		if (highlight) {
-			cssBorder = "-fx-border-color:greenyellow; \n" + "-fx-border-radius:7;\n" + "-fx-border-width:5.0;";
-		} else {
-			cssBorder = "-fx-border-color:transparent; \n" + "-fx-border-radius:7;\n" + "-fx-border-width:5.0;";
-		}
-
-		targetAnchor.setStyle(cssBorder);
 	}
 
 	private void updateArmor(int armor) {

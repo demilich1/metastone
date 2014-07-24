@@ -11,6 +11,11 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 public class DoNothingBehaviour implements IBehaviour {
 
 	@Override
+	public String getName() {
+		return "Do Nothing";
+	}
+
+	@Override
 	public Entity provideTargetFor(Player player, GameAction action) {
 		List<Entity> validTargets = action.getValidTargets();
 		if (validTargets.isEmpty()) {
@@ -24,11 +29,6 @@ public class DoNothingBehaviour implements IBehaviour {
 	@Override
 	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
 		return null;
-	}
-
-	@Override
-	public String getName() {
-		return "Do Nothing";
 	}
 
 }

@@ -95,6 +95,11 @@ public class GameLogic implements Cloneable {
 		logger.debug("New spelltrigger was added for {} on {}", player.getName(), target);
 	}
 
+	public void addManaModifier(Player player, CardCostModifier cardCostModifier, Entity target) {
+		context.getCardCostModifiers().add(cardCostModifier);
+		addGameEventListener(player, cardCostModifier, target);
+	}
+
 	public void afterCardPlayed(int playerId, CardReference cardReference) {
 		Player player = context.getPlayer(playerId);
 		// Card card = context.resolveCardReference(cardReference);
@@ -472,11 +477,6 @@ public class GameLogic implements Cloneable {
 			return GameResult.DEFEAT;
 		}
 		return GameResult.RUNNING;
-	}
-
-	public void addManaModifier(Player player, CardCostModifier cardCostModifier, Entity target) {
-		context.getCardCostModifiers().add(cardCostModifier);
-		addGameEventListener(player, cardCostModifier, target);
 	}
 
 	public int getModifiedManaCost(Player player, Card card) {

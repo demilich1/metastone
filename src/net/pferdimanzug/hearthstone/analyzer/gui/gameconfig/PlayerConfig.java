@@ -10,24 +10,24 @@ public class PlayerConfig {
 	private Deck deck;
 	private IBehaviour behaviour;
 
+	public IBehaviour getBehaviour() {
+		return behaviour;
+	}
+
 	public Deck getDeck() {
 		return deck;
 	}
 
-	public void setDeck(Deck deck) {
-		this.deck = deck;
-	}
-
-	public IBehaviour getBehaviour() {
-		return behaviour;
+	public Hero getHero() {
+		return hero;
 	}
 
 	public void setBehaviour(IBehaviour behaviour) {
 		this.behaviour = behaviour;
 	}
 
-	public Hero getHero() {
-		return hero;
+	public void setDeck(Deck deck) {
+		this.deck = deck;
 	}
 
 	public void setHero(Hero hero) {

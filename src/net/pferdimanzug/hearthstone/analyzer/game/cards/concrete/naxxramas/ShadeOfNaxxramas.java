@@ -19,6 +19,13 @@ public class ShadeOfNaxxramas extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 397;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion shadeOfNaxxramas = createMinion(GameTag.STEALTHED);
 		Spell buffSpell = new BuffSpell(1, 1);
@@ -26,12 +33,5 @@ public class ShadeOfNaxxramas extends MinionCard {
 		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), buffSpell);
 		shadeOfNaxxramas.setSpellTrigger(trigger);
 		return shadeOfNaxxramas;
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 397;
 	}
 }

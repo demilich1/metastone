@@ -16,21 +16,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class Undertaker extends MinionCard {
 
-	public Undertaker() {
-		super("Undertaker", 1, 2, Rarity.COMMON, HeroClass.ANY, 1);
-		setDescription("Whenever you summon a minion with Deathrattle, gain +1/+1.");
-	}
-
-	@Override
-	public Minion summon() {
-		Minion undertaker = createMinion();
-		Spell buffSpell = new BuffSpell(1, 1);
-		buffSpell.setTarget(EntityReference.SELF);
-		SpellTrigger trigger = new SpellTrigger(new MinionWithDeathRattleSummonedTrigger(), buffSpell);
-		undertaker.setSpellTrigger(trigger);
-		return undertaker;
-	}
-
 	private class MinionWithDeathRattleSummonedTrigger extends MinionSummonedTrigger {
 
 		@Override
@@ -45,10 +30,25 @@ public class Undertaker extends MinionCard {
 
 	}
 
-
+	public Undertaker() {
+		super("Undertaker", 1, 2, Rarity.COMMON, HeroClass.ANY, 1);
+		setDescription("Whenever you summon a minion with Deathrattle, gain +1/+1.");
+	}
 
 	@Override
 	public int getTypeId() {
 		return 401;
+	}
+
+
+
+	@Override
+	public Minion summon() {
+		Minion undertaker = createMinion();
+		Spell buffSpell = new BuffSpell(1, 1);
+		buffSpell.setTarget(EntityReference.SELF);
+		SpellTrigger trigger = new SpellTrigger(new MinionWithDeathRattleSummonedTrigger(), buffSpell);
+		undertaker.setSpellTrigger(trigger);
+		return undertaker;
 	}
 }

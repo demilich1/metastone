@@ -1,8 +1,9 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.costmodifier.CardCostModifier;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.costmodifier.SpellCostModifier;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
@@ -22,7 +23,8 @@ public class SorcerersApprentice extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion sorcerersApprentice = createMinion();
-		sorcerersApprentice.setTag(GameTag.SPELL_MANA_COST, -1);
+		CardCostModifier costModifier = new SpellCostModifier(-1, false);
+		sorcerersApprentice.setCardCostModifier(costModifier);
 		return sorcerersApprentice;
 	}
 }

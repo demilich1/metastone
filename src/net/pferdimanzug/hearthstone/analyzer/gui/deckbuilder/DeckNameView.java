@@ -36,14 +36,14 @@ public class DeckNameView extends HBox implements ChangeListener<String> {
 		nameField.textProperty().addListener(this);
 	}
 	
-	public void updateDeck(Deck deck) {
-		classIcon.setImage(IconFactory.getClassIcon(deck.getHeroClass()));
-		nameField.setText(deck.getName());
-	}
-
 	@Override
 	public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 		ApplicationFacade.getInstance().sendNotification(GameNotification.CHANGE_DECK_NAME, newValue);
+	}
+
+	public void updateDeck(Deck deck) {
+		classIcon.setImage(IconFactory.getClassIcon(deck.getHeroClass()));
+		nameField.setText(deck.getName());
 	}
 
 }

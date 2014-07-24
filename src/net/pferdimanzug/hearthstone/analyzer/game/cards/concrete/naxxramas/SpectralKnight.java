@@ -14,14 +14,14 @@ public class SpectralKnight extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion(GameTag.UNTARGETABLE_BY_SPELLS);
+	public int getTypeId() {
+		return 399;
 	}
 
 
 
 	@Override
-	public int getTypeId() {
-		return 399;
+	public Minion summon() {
+		return createMinion(GameTag.UNTARGETABLE_BY_SPELLS);
 	}
 }

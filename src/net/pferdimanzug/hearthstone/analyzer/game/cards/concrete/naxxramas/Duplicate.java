@@ -15,15 +15,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class Duplicate extends SecretCard {
 
-	public Duplicate() {
-		super("Duplicate", Rarity.COMMON, HeroClass.MAGE, 3);
-		setDescription("Secret: When a friendly minion dies, put 2 copies of it in your hand.");
-
-		Spell duplicate = new DuplicateSpell();
-		duplicate.setTarget(EntityReference.EVENT_TARGET);
-		setTriggerAndEffect(new MinionDeathTrigger(TargetPlayer.SELF), duplicate);
-	}
-
 	private class DuplicateSpell extends Spell {
 
 		@Override
@@ -36,6 +27,15 @@ public class Duplicate extends SecretCard {
 			context.getLogic().receiveCard(player.getId(), sourceCard.clone());
 		}
 		
+	}
+
+	public Duplicate() {
+		super("Duplicate", Rarity.COMMON, HeroClass.MAGE, 3);
+		setDescription("Secret: When a friendly minion dies, put 2 copies of it in your hand.");
+
+		Spell duplicate = new DuplicateSpell();
+		duplicate.setTarget(EntityReference.EVENT_TARGET);
+		setTriggerAndEffect(new MinionDeathTrigger(TargetPlayer.SELF), duplicate);
 	}
 
 	@Override

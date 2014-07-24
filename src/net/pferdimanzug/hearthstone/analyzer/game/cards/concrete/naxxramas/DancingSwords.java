@@ -16,15 +16,15 @@ public class DancingSwords extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 386;
+	}
+
+	@Override
 	public Minion summon() {
 		Minion dancingSwords = createMinion();
 		Spell drawCardSpell = new DrawCardSpell(1, TargetPlayer.OPPONENT);
 		dancingSwords.addDeathrattle(drawCardSpell);
 		return dancingSwords;
-	}
-
-	@Override
-	public int getTypeId() {
-		return 386;
 	}
 }

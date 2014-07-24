@@ -18,6 +18,13 @@ public class StoneskinGargoyle extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 400;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion stoneskinGargoyle = createMinion();
 		Spell healSelf = new HealingSpell(99);
@@ -25,12 +32,5 @@ public class StoneskinGargoyle extends MinionCard {
 		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), healSelf);
 		stoneskinGargoyle.setSpellTrigger(trigger);
 		return stoneskinGargoyle;
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 400;
 	}
 }

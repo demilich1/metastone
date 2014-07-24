@@ -17,18 +17,18 @@ public class UnstableGhoul extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 402;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion unstableGhoul = createMinion(GameTag.TAUNT);
 		Spell deathrattle = new DamageSpell(1);
 		deathrattle.setTarget(EntityReference.ALL_MINIONS);
 		unstableGhoul.addDeathrattle(deathrattle);
 		return unstableGhoul;
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 402;
 	}
 }

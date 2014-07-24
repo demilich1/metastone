@@ -10,20 +10,20 @@ public class GameConfig {
 		return numberOfGames;
 	}
 
-	public void setNumberOfGames(int numberOfGames) {
-		this.numberOfGames = numberOfGames;
-	}
-
 	public PlayerConfig getPlayerConfig1() {
 		return playerConfig1;
 	}
 
-	public void setPlayerConfig1(PlayerConfig playerConfig1) {
-		this.playerConfig1 = playerConfig1;
-	}
-
 	public PlayerConfig getPlayerConfig2() {
 		return playerConfig2;
+	}
+
+	public void setNumberOfGames(int numberOfGames) {
+		this.numberOfGames = numberOfGames;
+	}
+
+	public void setPlayerConfig1(PlayerConfig playerConfig1) {
+		this.playerConfig1 = playerConfig1;
 	}
 
 	public void setPlayerConfig2(PlayerConfig playerConfig2) {

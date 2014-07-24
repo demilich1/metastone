@@ -16,16 +16,16 @@ public class AnubarAmbusher extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 384;
+	}
+
+	@Override
 	public Minion summon() {
 		Minion anubarAmbusher = createMinion();
 		Spell deathrattle = new ReturnRandomMinionToHandSpell();
 		deathrattle.setTarget(EntityReference.FRIENDLY_MINIONS);
 		anubarAmbusher.addDeathrattle(deathrattle);
 		return anubarAmbusher;
-	}
-
-	@Override
-	public int getTypeId() {
-		return 384;
 	}
 }

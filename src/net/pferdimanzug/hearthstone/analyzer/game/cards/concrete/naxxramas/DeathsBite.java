@@ -16,16 +16,16 @@ public class DeathsBite extends WeaponCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 388;
+	}
+
+	@Override
 	public Weapon getWeapon() {
 		Weapon deathsBite = createWeapon(4, 2);
 		Spell deathrattle = new DamageSpell(1);
 		deathrattle.setTarget(EntityReference.ALL_MINIONS);
 		deathsBite.addDeathrattle(deathrattle);
 		return deathsBite;
-	}
-
-	@Override
-	public int getTypeId() {
-		return 388;
 	}
 }

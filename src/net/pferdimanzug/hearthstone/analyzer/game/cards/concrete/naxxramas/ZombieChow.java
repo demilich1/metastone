@@ -16,18 +16,18 @@ public class ZombieChow extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 404;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion zombieChow = createMinion();
 		Spell healEnemyHero = new HealingSpell(5);
 		healEnemyHero.setTarget(EntityReference.ENEMY_HERO);
 		zombieChow.addDeathrattle(healEnemyHero);
 		return zombieChow;
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 404;
 	}
 }

@@ -24,11 +24,6 @@ public class PlayModeMediator extends Mediator<GameNotification> {
 	}
 
 	@Override
-	public void onRegister() {
-		getFacade().sendNotification(GameNotification.SHOW_VIEW, boardView);
-	}
-
-	@Override
 	public void handleNotification(final INotification<GameNotification> notification) {
 		switch (notification.getId()) {
 		case GAME_STATE_UPDATE:
@@ -70,6 +65,11 @@ public class PlayModeMediator extends Mediator<GameNotification> {
 		notificationInterests.add(GameNotification.HUMAN_PROMPT_FOR_TARGET);
 		notificationInterests.add(GameNotification.ANSWER_DECKS);
 		return notificationInterests;
+	}
+
+	@Override
+	public void onRegister() {
+		getFacade().sendNotification(GameNotification.SHOW_VIEW, boardView);
 	}
 
 	private void selectTarget(final HumanTargetOptions targetOptions) {

@@ -75,17 +75,6 @@ public class DevCheckCardCompleteness {
 		}
 	}
 	
-	private static int extractId(String line) {
-		String result = "";
-		for (int i = 0; i < line.length(); i++) {
-			char c = line.charAt(i);
-			if (Character.isDigit(c)) {
-				result += c;
-			}
-		}
-		return Integer.parseInt(result);
-	}
-
 	public static void cardListFromImages(String path) throws IOException {
 		File folder = new File(path);
 
@@ -137,6 +126,17 @@ public class DevCheckCardCompleteness {
 			i++;
 		}
 		return -1;
+	}
+
+	private static int extractId(String line) {
+		String result = "";
+		for (int i = 0; i < line.length(); i++) {
+			char c = line.charAt(i);
+			if (Character.isDigit(c)) {
+				result += c;
+			}
+		}
+		return Integer.parseInt(result);
 	}
 
 	private static List<String> getImplementedCardsAsLines() {

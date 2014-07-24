@@ -52,25 +52,6 @@ public abstract class CardCostModifier implements IGameEventListener {
 		return card.getCardType() == cardType;
 	}
 
-	public int process(Card card) {
-		if (expired || !appliesTo(card)) {
-			return 0;
-		}
-
-		if (oneTime) {
-			expired = true;
-		}
-		return modifyManaCost(card);
-	}
-
-	protected int modifyManaCost(Card card) {
-		return manaModifier;
-	}
-
-	public int getMinValue() {
-		return minValue;
-	}
-
 	@Override
 	public IGameEventListener clone() {
 		try {
@@ -80,6 +61,10 @@ public abstract class CardCostModifier implements IGameEventListener {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	protected void expire() {
+		expired = true;
 	}
 
 	@Override
@@ -92,14 +77,26 @@ public abstract class CardCostModifier implements IGameEventListener {
 		return TriggerLayer.DEFAULT;
 	}
 
+	public int getMinValue() {
+		return minValue;
+	}
+
 	@Override
 	public int getOwner() {
 		return owner;
 	}
 
+	public TargetPlayer getTargetPlayer() {
+		return targetPlayer;
+	}
+
 	@Override
 	public boolean isExpired() {
 		return expired;
+	}
+
+	protected int modifyManaCost(Card card) {
+		return manaModifier;
 	}
 
 	@Override
@@ -109,6 +106,17 @@ public abstract class CardCostModifier implements IGameEventListener {
 	@Override
 	public void onRemove(GameContext context) {
 		expired = true;
+	}
+
+	public int process(Card card) {
+		if (expired || !appliesTo(card)) {
+			return 0;
+		}
+
+		if (oneTime) {
+			expired = true;
+		}
+		return modifyManaCost(card);
 	}
 
 	@Override
@@ -121,25 +129,17 @@ public abstract class CardCostModifier implements IGameEventListener {
 		hostReference = host.getReference();
 	}
 
+	public void setMinValue(int minValue) {
+		this.minValue = minValue;
+	}
+
 	@Override
 	public void setOwner(int playerIndex) {
 		this.owner = playerIndex;
 	}
-
-	public TargetPlayer getTargetPlayer() {
-		return targetPlayer;
-	}
-
+	
 	public void setTargetPlayer(TargetPlayer targetPlayer) {
 		this.targetPlayer = targetPlayer;
-	}
-
-	public void setMinValue(int minValue) {
-		this.minValue = minValue;
-	}
-	
-	protected void expire() {
-		expired = true;
 	}
 
 }

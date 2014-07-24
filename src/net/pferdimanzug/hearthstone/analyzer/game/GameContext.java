@@ -54,6 +54,10 @@ public class GameContext implements Cloneable {
 		this.logic.setContext(this);
 	}
 
+	public void addCardCostModfier(CardCostModifier cardCostModifier) {
+		getCardCostModifiers().add(cardCostModifier);
+	}
+
 	public void addTrigger(IGameEventListener spellTrigger) {
 		triggerManager.addTrigger(spellTrigger);
 	}
@@ -96,7 +100,7 @@ public class GameContext implements Cloneable {
 		result = logic.getMatchResult(activePlayer, getOpponent(activePlayer));
 		return result != GameResult.RUNNING;
 	}
-
+	
 	public Player getActivePlayer() {
 		return activePlayer;
 	}
@@ -120,22 +124,26 @@ public class GameContext implements Cloneable {
 		return adjacentMinions;
 	}
 	
+	public List<CardCostModifier> getCardCostModifiers() {
+		return cardCostModifiers;
+	}
+
 	public HashMap<Environment, Object> getEnvironment() {
 		return environment;
 	}
-	
+
 	public GameLogic getLogic() {
 		return logic;
 	}
-
+	
 	public int getMinionCount(Player player) {
 		return player.getMinions().size();
 	}
-
+	
 	public Player getOpponent(Player player) {
 		return player.getId() == PLAYER_1 ? getPlayer2() : getPlayer1();
 	}
-	
+
 	public Player getPlayer(int index) {
 		return players[index];
 	}
@@ -143,7 +151,7 @@ public class GameContext implements Cloneable {
 	public Player getPlayer1() {
 		return getPlayers()[PLAYER_1];
 	}
-
+	
 	public Player getPlayer2() {
 		return getPlayers()[PLAYER_2];
 	}
@@ -155,7 +163,7 @@ public class GameContext implements Cloneable {
 	public GameResult getResult() {
 		return result;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public Stack<Minion> getSummonStack() {
 		if (!environment.containsKey(Environment.SUMMON_STACK)) {
@@ -163,7 +171,7 @@ public class GameContext implements Cloneable {
 		}
 		return (Stack<Minion>) environment.get(Environment.SUMMON_STACK);
 	}
-	
+
 	public int getTotalMinionCount() {
 		int totalMinionCount = 0;
 		for (int i = 0; i < players.length; i++) {
@@ -171,7 +179,7 @@ public class GameContext implements Cloneable {
 		}
 		return totalMinionCount;
 	}
-
+	
 	public List<IGameEventListener> getTriggersAssociatedWith(EntityReference entityReference) {
 		return triggerManager.getTriggersAssociatedWith(entityReference);
 	}
@@ -179,14 +187,14 @@ public class GameContext implements Cloneable {
 	public int getTurn() {
 		return turn;
 	}
-	
+
 	public Player getWinner() {
 		return winner;
 	}
-
+	
 	protected void onGameStateChanged() {	
 	}
-
+	
 	protected void onWillPerformAction(GameAction action) {
 		
 	}
@@ -204,7 +212,7 @@ public class GameContext implements Cloneable {
 		winner = result == GameResult.WIN ? activePlayer : getOpponent(activePlayer);
 		logger.debug("Game finished after " + turn + " turns, the winner is: " + winner.getName());
 	}
-	
+
 	private void playTurn(Player player) {
 		turn++;
 		logic.startTurn(player.getId());
@@ -223,11 +231,11 @@ public class GameContext implements Cloneable {
 		logic.endTurn(player.getId());
 		activePlayer = getOpponent(player);
 	}
-	
+
 	public void removeTriggersAssociatedWith(EntityReference entityReference) {
 		triggerManager.removeTriggersAssociatedWith(entityReference);
 	}
-
+	
 	public Card resolveCardReference(CardReference cardReference) {
 		Player player = getPlayer(cardReference.getPlayerId());
 		switch (cardReference.getLocation()) {
@@ -286,13 +294,5 @@ public class GameContext implements Cloneable {
 		result.append("Turn: " + getTurn());
 
 		return result.toString();
-	}
-	
-	public void addCardCostModfier(CardCostModifier cardCostModifier) {
-		getCardCostModifiers().add(cardCostModifier);
-	}
-
-	public List<CardCostModifier> getCardCostModifiers() {
-		return cardCostModifiers;
 	}
 }

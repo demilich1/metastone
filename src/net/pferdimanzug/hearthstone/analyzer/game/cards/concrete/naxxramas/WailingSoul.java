@@ -19,6 +19,13 @@ public class WailingSoul extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 403;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion wailingSoul = createMinion();
 		Spell silenceOwnMinions = new SilenceSpell();
@@ -26,12 +33,5 @@ public class WailingSoul extends MinionCard {
 		Battlecry battlecry = Battlecry.createBattlecry(silenceOwnMinions);
 		wailingSoul.setBattlecry(battlecry);
 		return wailingSoul;
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 403;
 	}
 }

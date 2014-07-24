@@ -72,6 +72,10 @@ public abstract class Actor extends Entity {
 		return (Battlecry) getTag(GameTag.BATTLECRY);
 	}
 
+	public CardCostModifier getCardCostModifier() {
+		return cardCostModifier;
+	}
+
 	@SuppressWarnings("unchecked")
 	public List<Spell> getDeathrattles() {
 		return (List<Spell>) getTag(GameTag.DEATHRATTLES);
@@ -104,11 +108,11 @@ public abstract class Actor extends Entity {
 	public boolean isDead() {
 		return getHp() < 1;
 	}
-
+	
 	public boolean isWounded() {
 		return getHp() != getMaxHp();
 	}
-	
+
 	public void modifyAuraHpBonus(int value) {
 		modifyTag(GameTag.AURA_HP_BONUS, value);
 		modifyTag(GameTag.HP, value);
@@ -128,11 +132,15 @@ public abstract class Actor extends Entity {
 		setMaxHp(value);
 		setHp(value);
 	}
-
+	
 	public void setBattlecry(Battlecry battlecry) {
 		setTag(GameTag.BATTLECRY, battlecry);
 	}
-	
+
+	public void setCardCostModifier(CardCostModifier cardCostModifier) {
+		this.cardCostModifier = cardCostModifier;
+	}
+
 	public void setHp(int value) {
 		setTag(GameTag.HP, value);
 	}
@@ -167,13 +175,5 @@ public abstract class Actor extends Entity {
 		result += " hashCode: " + hashCode();
 		result += "]";
 		return result;
-	}
-
-	public CardCostModifier getCardCostModifier() {
-		return cardCostModifier;
-	}
-
-	public void setCardCostModifier(CardCostModifier cardCostModifier) {
-		this.cardCostModifier = cardCostModifier;
 	}
 }

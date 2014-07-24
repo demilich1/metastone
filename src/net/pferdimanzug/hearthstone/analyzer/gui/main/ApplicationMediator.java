@@ -43,12 +43,6 @@ public class ApplicationMediator extends Mediator<GameNotification> {
 		}
 	}
 	
-	private void removeOtherViews() {
-		getFacade().removeMediator(PlayModeMediator.NAME);
-		getFacade().removeMediator(PlayModeConfigMediator.NAME);
-		getFacade().removeMediator(DeckBuilderMediator.NAME);
-	}
-
 	@Override
 	public List<GameNotification> listNotificationInterests() {
 		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
@@ -56,6 +50,12 @@ public class ApplicationMediator extends Mediator<GameNotification> {
 		notificationInterests.add(GameNotification.SHOW_VIEW);
 		notificationInterests.add(GameNotification.MAIN_MENU);
 		return notificationInterests;
+	}
+
+	private void removeOtherViews() {
+		getFacade().removeMediator(PlayModeMediator.NAME);
+		getFacade().removeMediator(PlayModeConfigMediator.NAME);
+		getFacade().removeMediator(DeckBuilderMediator.NAME);
 	}
 
 }

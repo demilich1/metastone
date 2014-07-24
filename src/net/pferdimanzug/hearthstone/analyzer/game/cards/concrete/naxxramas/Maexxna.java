@@ -20,18 +20,18 @@ public class Maexxna extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 393;
+	}
+	
+
+
+	@Override
 	public Minion summon() {
 		Minion maexxna = createMinion();
 		Spell killSpell = new DestroySpell();
 		killSpell.setTarget(EntityReference.EVENT_TARGET);
 		maexxna.setSpellTrigger(new SpellTrigger(new PhysicalAttackTrigger(false), killSpell));
 		return maexxna;
-	}
-	
-
-
-	@Override
-	public int getTypeId() {
-		return 393;
 	}
 }
