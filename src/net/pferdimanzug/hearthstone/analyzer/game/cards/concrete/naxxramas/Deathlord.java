@@ -1,60 +1,49 @@
-package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest;
+package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardType;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
-public class Mindgames extends SpellCard {
+public class Deathlord extends MinionCard {
 
-	private class MindGamesSpell extends Spell {
+	public Deathlord() {
+		super("Deathlord", 2, 8, Rarity.RARE, HeroClass.ANY, 3);
+		setDescription("Taunt. Deathrattle: Your opponent puts a minion from their deck into the battlefield.");
+	}
+
+	@Override
+	public Minion summon() {
+		Minion deathlord = createMinion(GameTag.TAUNT);
+		Spell deathlordSpell = new DeathlordSpell();
+		deathlordSpell.setTarget(EntityReference.NONE);
+		deathlord.addDeathrattle(deathlordSpell);
+		return deathlord;
+	}
+	
+	private class DeathlordSpell extends Spell {
 
 		@Override
 		protected void onCast(GameContext context, Player player, Entity target) {
 			Player opponent = context.getOpponent(player);
 			MinionCard minionCard = (MinionCard) opponent.getDeck().getRandomOfType(CardType.MINION);
 			if (minionCard == null) {
-				minionCard = new ShadowOfNothing();
+				return;
 			}
+			opponent.getDeck().remove(minionCard);
 			SummonSpell summonSpell = new SummonSpell(minionCard);
 			context.getLogic().castSpell(player.getId(), summonSpell);
 		}
 		
 	}
-	
-	private class ShadowOfNothing extends MinionCard {
 
-		public ShadowOfNothing() {
-			super("Shadow of Nothing", 0, 1, Rarity.EPIC, HeroClass.PRIEST, 0);
-			setDescription("Mindgames whiffed! Your opponent had no minions!");
-			setCollectible(false);
-		}
 
-		@Override
-		public Minion summon() {
-			return createMinion();
-		}
-		
-	}
-	
-	public Mindgames() {
-		super("Mindgames", Rarity.EPIC, HeroClass.PRIEST, 4);
-		setDescription("Put a copy of a random minion from your opponent's deck into the battlefield.");
-		
-		setSpell(new MindGamesSpell());
-		setTargetRequirement(TargetSelection.NONE);
-	}
-
-	@Override
-	public int getTypeId() {
-		return 272;
-	}
 }

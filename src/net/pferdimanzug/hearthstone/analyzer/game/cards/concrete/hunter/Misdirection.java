@@ -10,6 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.SecretCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.SpellUtils;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.HeroTargetedByPhysicalTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
@@ -30,7 +31,7 @@ public class Misdirection extends SecretCard {
 			// misdirection cannot redirect to original target
 			validTargets.remove(target);
 			
-			Entity randomTarget = getRandomTarget(validTargets);
+			Entity randomTarget = SpellUtils.getRandomTarget(validTargets);
 			context.getEnvironment().put(Environment.TARGET_OVERRIDE, randomTarget);
 		}
 	}

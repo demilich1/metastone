@@ -29,7 +29,7 @@ public abstract class CardCostModifier implements IGameEventListener {
 	}
 
 	protected boolean appliesTo(Card card) {
-		if (requiredTag != null && !card.hasTag(requiredTag)) {
+		if (getRequiredTag() != null && !card.hasTag(getRequiredTag())) {
 			return false;
 		}
 		switch (getTargetPlayer()) {
@@ -140,6 +140,14 @@ public abstract class CardCostModifier implements IGameEventListener {
 	
 	public void setTargetPlayer(TargetPlayer targetPlayer) {
 		this.targetPlayer = targetPlayer;
+	}
+
+	public GameTag getRequiredTag() {
+		return requiredTag;
+	}
+
+	public void setRequiredTag(GameTag requiredTag) {
+		this.requiredTag = requiredTag;
 	}
 
 }

@@ -28,7 +28,7 @@ public class HealRandomSpell extends HealingSpell {
 			return;
 		}
 
-		super.onCast(context, player, getRandomTarget(validTargets));
+		super.onCast(context, player, SpellUtils.getRandomTarget(validTargets));
 
 	}
 

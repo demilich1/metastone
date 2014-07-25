@@ -10,6 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroySpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.SpellUtils;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
@@ -22,7 +23,7 @@ public class Brawl extends SpellCard {
 				return;
 			}
 			List<Entity> destroyedTargets = new ArrayList<Entity>(targets);
-			Entity randomTarget = getRandomTarget(destroyedTargets);
+			Entity randomTarget = SpellUtils.getRandomTarget(destroyedTargets);
 			destroyedTargets.remove(randomTarget);
 			for (Entity entity : destroyedTargets) {
 				onCast(context, player, entity);

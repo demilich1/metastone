@@ -13,30 +13,21 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.SpellUtils;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class SenseDemons extends SpellCard {
 
 	private class SenseDemonsSpell extends Spell {
 
-		private CardCollection findDemonCards(CardCollection deck) {
-			CardCollection demonCards = new CardCollection();
-			for (Card card : deck) {
-				if (card.getTag(GameTag.RACE) == Race.DEMON) {
-					demonCards.add(card);
-				}
-			}
-			return demonCards;
-		}
-		
 		@Override
 		protected void onCast(GameContext context, Player player, Entity target) {
-			CardCollection demonCards = findDemonCards(player.getDeck());
+			CardCollection demonCards = SpellUtils.getCards(player.getDeck(), card -> card.getTag(GameTag.RACE) == Race.DEMON);
 			for (int i = 0; i < 2; i++) {
 				Card demonCard = null;
 				if (demonCards.isEmpty()) {
 					demonCard = new WorthlessImp();
-					
+
 				} else {
 					demonCard = demonCards.getRandom();
 					demonCards.remove(demonCard);
@@ -46,7 +37,7 @@ public class SenseDemons extends SpellCard {
 			}
 		}
 	}
-	
+
 	private class WorthlessImp extends MinionCard {
 
 		public WorthlessImp() {
@@ -59,17 +50,15 @@ public class SenseDemons extends SpellCard {
 		public Minion summon() {
 			return createMinion();
 		}
-		
+
 	}
-	
+
 	public SenseDemons() {
 		super("Sense Demons", Rarity.COMMON, HeroClass.WARLOCK, 3);
 		setDescription("Put 2 random Demons from your deck into your hand.");
 		setSpell(new SenseDemonsSpell());
 		setTargetRequirement(TargetSelection.NONE);
 	}
-
-
 
 	@Override
 	public int getTypeId() {

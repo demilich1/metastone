@@ -21,7 +21,7 @@ public class BuffRandomSpell extends BuffSpell {
 		if (targets == null || targets.isEmpty()) {
 			return;
 		}
-		Entity randomTarget = getRandomTarget(targets);
+		Entity randomTarget = SpellUtils.getRandomTarget(targets);
 		onCast(context, player, randomTarget);
 	}
 

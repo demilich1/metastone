@@ -18,7 +18,7 @@ public class TransformRandomMinionSpell extends TransformMinionSpell {
 		if (targets.isEmpty()) {
 			return;
 		}
-		Entity randomTarget = getRandomTarget(targets);
+		Entity randomTarget = SpellUtils.getRandomTarget(targets);
 		super.onCast(context, player, randomTarget);
 	}
 

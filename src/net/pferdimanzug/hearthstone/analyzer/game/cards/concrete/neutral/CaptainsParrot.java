@@ -13,24 +13,15 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.SpellUtils;
 
 public class CaptainsParrot extends MinionCard {
 
 	private class CaptainsParrotSpell extends Spell {
 
-		private CardCollection findPirateCards(CardCollection deck) {
-			CardCollection cards = new CardCollection();
-			for (Card card : deck) {
-				if (card.getTag(GameTag.RACE) == Race.PIRATE) {
-					cards.add(card);
-				}
-			}
-			return cards;
-		}
-
 		@Override
 		protected void onCast(GameContext context, Player player, Entity target) {
-			CardCollection pirateCards = findPirateCards(player.getDeck());
+			CardCollection pirateCards = SpellUtils.getCards(player.getDeck(), card -> card.getTag(GameTag.RACE) == Race.PIRATE);
 			if (pirateCards.isEmpty()) {
 				return;
 			}
@@ -52,8 +43,6 @@ public class CaptainsParrot extends MinionCard {
 	public int getTypeId() {
 		return 104;
 	}
-
-
 
 	@Override
 	public Minion summon() {

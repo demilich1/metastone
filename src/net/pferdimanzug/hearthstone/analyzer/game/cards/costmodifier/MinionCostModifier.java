@@ -17,8 +17,6 @@ public class MinionCostModifier extends CardCostModifier {
 
 	@Override
 	public void onGameEvent(GameEvent event) {
-		// TODO Auto-generated method stub
-		
 	}
 
 

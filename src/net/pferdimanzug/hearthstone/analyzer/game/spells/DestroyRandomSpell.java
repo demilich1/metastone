@@ -26,7 +26,7 @@ public class DestroyRandomSpell extends DestroySpell {
 		if (validTargets == null || validTargets.isEmpty()) {
 			return;
 		}
-		Entity randomTarget = getRandomTarget(validTargets);
+		Entity randomTarget = SpellUtils.getRandomTarget(validTargets);
 		onCast(context, player, randomTarget);
 	}
 
