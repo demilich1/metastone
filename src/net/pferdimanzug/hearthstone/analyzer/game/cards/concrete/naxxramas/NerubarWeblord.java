@@ -16,6 +16,11 @@ public class NerubarWeblord extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 408;
+	}
+
+	@Override
 	public Minion summon() {
 		Minion nerubarWeblord = createMinion();
 		MinionCostModifier costModifier = new MinionCostModifier(2);
@@ -24,5 +29,4 @@ public class NerubarWeblord extends MinionCard {
 		nerubarWeblord.setCardCostModifier(costModifier);
 		return nerubarWeblord;
 	}
-
 }

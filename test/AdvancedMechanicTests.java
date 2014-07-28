@@ -269,6 +269,11 @@ public class AdvancedMechanicTests extends BasicTests {
 			}
 
 			@Override
+			public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
+				return new ArrayList<Card>();
+			}
+
+			@Override
 			public Entity provideTargetFor(Player player, GameAction action) {
 				return action.getValidTargets().get(0);
 			}
@@ -276,11 +281,6 @@ public class AdvancedMechanicTests extends BasicTests {
 			@Override
 			public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
 				return null;
-			}
-
-			@Override
-			public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
-				return new ArrayList<Card>();
 			}
 
 		});

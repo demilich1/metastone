@@ -241,8 +241,6 @@ public class GameContext implements Cloneable {
 		switch (cardReference.getLocation()) {
 		case DECK:
 			return findCardinCollection(player.getDeck(), cardReference.getCardId());
-		case GRAVEYARD:
-			return findCardinCollection(player.getGraveyard(), cardReference.getCardId());
 		case HAND:
 			return findCardinCollection(player.getHand(), cardReference.getCardId());
 		case PENDING:

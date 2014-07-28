@@ -24,6 +24,11 @@ public class PlayRandomBehaviour implements IBehaviour {
 	}
 
 	@Override
+	public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
+		return new ArrayList<>();
+	}
+	
+	@Override
 	public Entity provideTargetFor(Player player, GameAction action) {
 		List<Entity> validTargets = action.getValidTargets();
 		if (validTargets.isEmpty()) {
@@ -37,7 +42,7 @@ public class PlayRandomBehaviour implements IBehaviour {
 		
 		return randomTarget;
 	}
-	
+
 	@Override
 	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
 		if (validActions.isEmpty()) {
@@ -59,11 +64,6 @@ public class PlayRandomBehaviour implements IBehaviour {
 		int randomIndex = ThreadLocalRandom.current().nextInt(validTargets.size());
 		Entity randomTarget = validTargets.get(randomIndex);
 		action.setTargetKey(EntityReference.pointTo(randomTarget));
-	}
-
-	@Override
-	public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
-		return new ArrayList<>();
 	}
 
 }

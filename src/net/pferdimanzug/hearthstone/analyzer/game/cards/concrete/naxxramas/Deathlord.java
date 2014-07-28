@@ -15,20 +15,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class Deathlord extends MinionCard {
 
-	public Deathlord() {
-		super("Deathlord", 2, 8, Rarity.RARE, HeroClass.ANY, 3);
-		setDescription("Taunt. Deathrattle: Your opponent puts a minion from their deck into the battlefield.");
-	}
-
-	@Override
-	public Minion summon() {
-		Minion deathlord = createMinion(GameTag.TAUNT);
-		Spell deathlordSpell = new DeathlordSpell();
-		deathlordSpell.setTarget(EntityReference.NONE);
-		deathlord.addDeathrattle(deathlordSpell);
-		return deathlord;
-	}
-	
 	private class DeathlordSpell extends Spell {
 
 		@Override
@@ -45,5 +31,22 @@ public class Deathlord extends MinionCard {
 		
 	}
 
+	public Deathlord() {
+		super("Deathlord", 2, 8, Rarity.RARE, HeroClass.ANY, 3);
+		setDescription("Taunt. Deathrattle: Your opponent puts a minion from their deck into the battlefield.");
+	}
+	
+	@Override
+	public int getTypeId() {
+		return 405;
+	}
 
+	@Override
+	public Minion summon() {
+		Minion deathlord = createMinion(GameTag.TAUNT);
+		Spell deathlordSpell = new DeathlordSpell();
+		deathlordSpell.setTarget(EntityReference.NONE);
+		deathlord.addDeathrattle(deathlordSpell);
+		return deathlord;
+	}
 }

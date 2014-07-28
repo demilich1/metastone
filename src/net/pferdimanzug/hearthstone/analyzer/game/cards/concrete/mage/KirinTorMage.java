@@ -1,10 +1,16 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.CardType;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.costmodifier.OneTurnCostModifier;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.AddCostModifierSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class KirinTorMage extends MinionCard {
 
@@ -18,10 +24,14 @@ public class KirinTorMage extends MinionCard {
 		return 66;
 	}
 
-
-
 	@Override
 	public Minion summon() {
-		return createMinion(GameTag.ONE_TIME_FREE_SECRET);
+		Minion kirinTorMage = createMinion();
+		OneTurnCostModifier costModifier = new OneTurnCostModifier(CardType.SPELL, -99, true);
+		costModifier.setRequiredTag(GameTag.SECRET);
+		Spell castSecretForFree = new AddCostModifierSpell(costModifier);
+		castSecretForFree.setTarget(EntityReference.FRIENDLY_HERO);
+		kirinTorMage.setBattlecry(Battlecry.createBattlecry(castSecretForFree));
+		return kirinTorMage;
 	}
 }

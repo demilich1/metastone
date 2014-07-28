@@ -38,7 +38,7 @@ public class Tracking extends SpellCard {
 			}
 			context.getLogic().receiveCard(player.getId(), drawnCards.remove(0));
 			while (!drawnCards.isEmpty()) {
-				player.getGraveyard().add(drawnCards.remove(0));
+				drawnCards.remove(0);
 			}
 		}
 		

@@ -16,21 +16,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class Voidcaller extends MinionCard {
 
-	public Voidcaller() {
-		super("Voidcaller", 3, 4, Rarity.COMMON, HeroClass.WARLOCK, 4);
-		setDescription("Deathrattle: Put a random Demon from your hand into the battlefield.");
-		setRace(Race.DEMON);
-	}
-
-	@Override
-	public Minion summon() {
-		Minion voidcaller = createMinion();
-		Spell voidcallerSpell = new VoidcallerSpell();
-		voidcallerSpell.setTarget(EntityReference.NONE);
-		voidcaller.addDeathrattle(voidcallerSpell);
-		return voidcaller;
-	}
-	
 	private class VoidcallerSpell extends Spell {
 
 		@Override
@@ -46,4 +31,23 @@ public class Voidcaller extends MinionCard {
 		
 	}
 
+	public Voidcaller() {
+		super("Voidcaller", 3, 4, Rarity.COMMON, HeroClass.WARLOCK, 4);
+		setDescription("Deathrattle: Put a random Demon from your hand into the battlefield.");
+		setRace(Race.DEMON);
+	}
+	
+	@Override
+	public int getTypeId() {
+		return 411;
+	}
+
+	@Override
+	public Minion summon() {
+		Minion voidcaller = createMinion();
+		Spell voidcallerSpell = new VoidcallerSpell();
+		voidcallerSpell.setTarget(EntityReference.NONE);
+		voidcaller.addDeathrattle(voidcallerSpell);
+		return voidcaller;
+	}
 }

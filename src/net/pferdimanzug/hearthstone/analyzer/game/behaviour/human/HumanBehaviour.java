@@ -28,6 +28,20 @@ public class HumanBehaviour implements IBehaviour {
 	}
 
 	@Override
+	public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
+		waitingForInput = true;
+		HumanMulliganOptions options = new HumanMulliganOptions(player, this, cards);
+		ApplicationFacade.getInstance().sendNotification(GameNotification.HUMAN_PROMPT_FOR_MULLIGAN, options);
+		while (waitingForInput) {
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+			}
+		}
+		return mulliganCards;
+	}
+
+	@Override
 	public Entity provideTargetFor(Player player, GameAction action) {
 		if (action.getValidTargets() == null || action.getValidTargets().isEmpty()) {
 			return null;
@@ -46,7 +60,7 @@ public class HumanBehaviour implements IBehaviour {
 
 		return selectedTarget;
 	}
-
+	
 	@Override
 	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
 		waitingForInput = true;
@@ -60,6 +74,11 @@ public class HumanBehaviour implements IBehaviour {
 		}
 		return selectedAction;
 	}
+
+	public void setMulliganCards(List<Card> mulliganCards) {
+		this.mulliganCards = mulliganCards;
+		waitingForInput = false;
+	}
 	
 	public void setSelectedAction(GameAction selectedAction) {
 		this.selectedAction = selectedAction;
@@ -69,25 +88,6 @@ public class HumanBehaviour implements IBehaviour {
 	public void setSelectedTarget(Entity selectedTarget) {
 		this.selectedTarget = selectedTarget;
 		waitingForInput = false;
-	}
-	
-	public void setMulliganCards(List<Card> mulliganCards) {
-		this.mulliganCards = mulliganCards;
-		waitingForInput = false;
-	}
-
-	@Override
-	public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
-		waitingForInput = true;
-		HumanMulliganOptions options = new HumanMulliganOptions(player, this, cards);
-		ApplicationFacade.getInstance().sendNotification(GameNotification.HUMAN_PROMPT_FOR_MULLIGAN, options);
-		while (waitingForInput) {
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-			}
-		}
-		return mulliganCards;
 	}
 
 }

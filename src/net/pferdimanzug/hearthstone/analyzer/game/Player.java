@@ -18,7 +18,7 @@ public class Player implements Cloneable {
 
 	private final CardCollection deck;
 	private final CardCollection hand = new CardCollection();
-	private final CardCollection graveyard = new CardCollection();
+	private final List<Minion> graveyard = new ArrayList<>();
 	private final List<Minion> minions = new ArrayList<>();
 	private final List<Integer> secrets = new ArrayList<>();
 	
@@ -72,7 +72,7 @@ public class Player implements Cloneable {
 		return deck;
 	}
 
-	public CardCollection getGraveyard() {
+	public List<Minion> getGraveyard() {
 		return graveyard;
 	}
 

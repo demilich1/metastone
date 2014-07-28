@@ -21,6 +21,11 @@ public class NoAggressionBehaviour implements IBehaviour {
 	}
 
 	@Override
+	public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
+		return new ArrayList<Card>();
+	}
+
+	@Override
 	public Entity provideTargetFor(Player player, GameAction action) {
 		List<Entity> validTargets = action.getValidTargets();
 		if (validTargets.isEmpty()) {
@@ -45,11 +50,6 @@ public class NoAggressionBehaviour implements IBehaviour {
 			}
 		}
 		return null;
-	}
-
-	@Override
-	public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
-		return new ArrayList<Card>();
 	}
 
 }

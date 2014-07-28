@@ -86,6 +86,10 @@ public abstract class CardCostModifier implements IGameEventListener {
 		return owner;
 	}
 
+	public GameTag getRequiredTag() {
+		return requiredTag;
+	}
+
 	public TargetPlayer getTargetPlayer() {
 		return targetPlayer;
 	}
@@ -132,22 +136,18 @@ public abstract class CardCostModifier implements IGameEventListener {
 	public void setMinValue(int minValue) {
 		this.minValue = minValue;
 	}
-
+	
 	@Override
 	public void setOwner(int playerIndex) {
 		this.owner = playerIndex;
 	}
-	
-	public void setTargetPlayer(TargetPlayer targetPlayer) {
-		this.targetPlayer = targetPlayer;
-	}
-
-	public GameTag getRequiredTag() {
-		return requiredTag;
-	}
 
 	public void setRequiredTag(GameTag requiredTag) {
 		this.requiredTag = requiredTag;
+	}
+
+	public void setTargetPlayer(TargetPlayer targetPlayer) {
+		this.targetPlayer = targetPlayer;
 	}
 
 }

@@ -4,6 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.UniqueMinion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
@@ -85,7 +86,8 @@ public class Ysera extends MinionCard {
 			super("Ysera Awakens", Rarity.FREE, HeroClass.ANY, 2);
 			setDescription("Deal 5 damage to all characters except Ysera.");
 
-			Spell yseraAwakens = new DamageSpell((context, player, target) -> target.hasTag(GameTag.YSERA) ? 0 : 5);
+			Spell yseraAwakens = new DamageSpell(
+					(context, player, target) -> target.getTag(GameTag.UNIQUE_MINION) == UniqueMinion.YSERA ? 0 : 5);
 			yseraAwakens.setTarget(EntityReference.ALL_CHARACTERS);
 			setSpell(yseraAwakens);
 			setTargetRequirement(TargetSelection.NONE);
@@ -104,11 +106,10 @@ public class Ysera extends MinionCard {
 		return 233;
 	}
 
-
-
 	@Override
 	public Minion summon() {
-		Minion ysera = createMinion(GameTag.YSERA);
+		Minion ysera = createMinion();
+		ysera.setTag(GameTag.UNIQUE_MINION, UniqueMinion.YSERA);
 		Spell receiveDreamCard = new ReceiveRandomCardSpell(TargetPlayer.SELF, new Dream(), new EmeraldDrake(), new LaughingSister(),
 				new Nightmare(), new YseraAwakens());
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), receiveDreamCard);

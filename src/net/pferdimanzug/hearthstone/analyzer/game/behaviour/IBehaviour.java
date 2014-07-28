@@ -12,9 +12,9 @@ public interface IBehaviour {
 
 	String getName();
 
-	Entity provideTargetFor(Player player, GameAction action);
-
-	GameAction requestAction(GameContext context, Player player, List<GameAction> validActions);
-	
 	List<Card> mulligan(GameContext context, Player player, List<Card> cards);
+
+	Entity provideTargetFor(Player player, GameAction action);
+	
+	GameAction requestAction(GameContext context, Player player, List<GameAction> validActions);
 }

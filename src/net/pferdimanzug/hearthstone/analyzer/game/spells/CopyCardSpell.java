@@ -29,9 +29,6 @@ public class CopyCardSpell extends Spell {
 		case DECK:
 			source = opponent.getDeck();
 			break;
-		case GRAVEYARD:
-			source = opponent.getGraveyard();
-			break;
 		case HAND:
 			source = opponent.getHand();
 			break;

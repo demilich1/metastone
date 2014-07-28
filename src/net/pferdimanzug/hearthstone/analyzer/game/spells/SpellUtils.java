@@ -9,9 +9,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 
 public class SpellUtils {
 
-	private SpellUtils() {
-	}
-
 	public static CardCollection getCards(CardCollection source, Predicate<Card> filter) {
 		CardCollection result = new CardCollection();
 		for (Card card : source) {
@@ -25,6 +22,9 @@ public class SpellUtils {
 	public static <T> T getRandomTarget(List<T> targets) {
 		int randomIndex = ThreadLocalRandom.current().nextInt(targets.size());
 		return targets.get(randomIndex);
+	}
+
+	private SpellUtils() {
 	}
 
 }

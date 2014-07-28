@@ -22,6 +22,11 @@ public class Loatheb extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 407;
+	}
+
+	@Override
 	public Minion summon() {
 		Minion loatheb = createMinion();
 		OneTurnCostModifier costModifier = new OneTurnCostModifier(CardType.SPELL, 5, false);
@@ -31,5 +36,4 @@ public class Loatheb extends MinionCard {
 		loatheb.setBattlecry(Battlecry.createBattlecry(increaseSpellCost));
 		return loatheb;
 	}
-
 }

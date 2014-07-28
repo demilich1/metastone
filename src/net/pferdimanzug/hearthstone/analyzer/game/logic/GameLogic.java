@@ -220,13 +220,6 @@ public class GameLogic implements Cloneable {
 		return new GameLogic(idFactory.clone());
 	}
 
-	private void consumeTag(Player player, GameTag tag) {
-		player.getHero().removeTag(tag);
-		for (Minion minion : player.getMinions()) {
-			minion.removeTag(tag);
-		}
-	}
-
 	public boolean damage(Player player, Actor target, int baseDamage, SpellSource spellSource) {
 		int damage = baseDamage;
 		if (spellSource == SpellSource.SPELL_CARD) {
@@ -333,6 +326,7 @@ public class GameLogic implements Cloneable {
 			}
 		}
 		owner.getMinions().remove(minion);
+		owner.getGraveyard().add(minion);
 		context.fireGameEvent(new BoardChangedEvent(context));
 	}
 
@@ -371,10 +365,6 @@ public class GameLogic implements Cloneable {
 	public void endTurn(int playerId) {
 		Player player = context.getPlayer(playerId);
 		player.getHero().removeTag(GameTag.COMBO);
-		consumeTag(player, GameTag.ONE_TIME_FREE_SECRET);
-		consumeTag(context.getOpponent(player), GameTag.ONE_TIME_FREE_SECRET);
-		consumeTag(player, GameTag.ONE_TIME_MINION_MANA_COST);
-		consumeTag(context.getOpponent(player), GameTag.ONE_TIME_MINION_MANA_COST);
 		player.getHero().activateWeapon(false);
 		logger.debug("{} ends his turn.", player.getName());
 		context.fireGameEvent(new TurnEndEvent(context, player.getId()));
@@ -626,13 +616,39 @@ public class GameLogic implements Cloneable {
 
 		assignCardIds(player.getDeck());
 		assignCardIds(player.getHand());
-		assignCardIds(player.getGraveyard());
 
 		logger.debug("Setting hero hp to {} for {}", player.getHero().getHp(), player.getName());
 
 		player.getDeck().shuffle();
 
 		mulligan(player, begins);
+	}
+
+	public void modifyCurrentMana(int playerId, int mana) {
+		Player player = context.getPlayer(playerId);
+		int newMana = Math.min(player.getMana() + mana, MAX_MANA);
+		player.setMana(newMana);
+	}
+
+	private void modifyDurability(Weapon weapon, GameTag tag, int durability) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("{} of weapon {} is changed by {}", new Object[] { tag, weapon, durability });
+		}
+
+		weapon.modifyTag(tag, durability);
+		if (weapon.isBroken()) {
+			destroy(weapon);
+		}
+	}
+
+	public void modifyDurability(Weapon weapon, int durability) {
+		modifyDurability(weapon, GameTag.DURABILITY, durability);
+	}
+
+	public void modifyMaxMana(Player player, int delta) {
+		logger.debug("Maximum mana was changed by {} for {}", delta, player.getName());
+		int maxMana = MathUtils.clamp(player.getMaxMana() + delta, 0, GameLogic.MAX_MANA);
+		player.setMaxMana(maxMana);
 	}
 
 	private void mulligan(Player player, boolean begins) {
@@ -676,33 +692,6 @@ public class GameLogic implements Cloneable {
 		}
 	}
 
-	public void modifyCurrentMana(int playerId, int mana) {
-		Player player = context.getPlayer(playerId);
-		int newMana = Math.min(player.getMana() + mana, MAX_MANA);
-		player.setMana(newMana);
-	}
-
-	private void modifyDurability(Weapon weapon, GameTag tag, int durability) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("{} of weapon {} is changed by {}", new Object[] { tag, weapon, durability });
-		}
-
-		weapon.modifyTag(tag, durability);
-		if (weapon.isBroken()) {
-			destroy(weapon);
-		}
-	}
-
-	public void modifyDurability(Weapon weapon, int durability) {
-		modifyDurability(weapon, GameTag.DURABILITY, durability);
-	}
-
-	public void modifyMaxMana(Player player, int delta) {
-		logger.debug("Maximum mana was changed by {} for {}", delta, player.getName());
-		int maxMana = MathUtils.clamp(player.getMaxMana() + delta, 0, GameLogic.MAX_MANA);
-		player.setMaxMana(maxMana);
-	}
-
 	public void performGameAction(int playerId, GameAction action) {
 		// if (action.getTargetRequirement() == TargetSelection.SELF) {
 		// action.setTargetKey(action.getSource());
@@ -734,7 +723,6 @@ public class GameLogic implements Cloneable {
 		modifyCurrentMana(playerId, -getModifiedManaCost(player, card));
 		logger.debug("{} plays {}", player.getName(), card);
 		player.getHand().remove(card);
-		player.getGraveyard().add(card);
 
 		if (card.getCardType() == CardType.SPELL) {
 			GameEvent spellCastedEvent = new SpellCastedEvent(context, playerId, card);
@@ -759,12 +747,6 @@ public class GameLogic implements Cloneable {
 		logger.debug("{} has a new secret activated: {}", player.getName(), secret.getSource());
 		addGameEventListener(player, secret, player.getHero());
 		player.getSecrets().add(secret.getSource().getTypeId());
-		// TODO: this is grenzwertig, basically it was only added because of the
-		// card
-		// 'Kirin Tor Mage', which provides secret cost reduction for one
-		// secret.
-		// this mechanic could not be implemented with current spelltriggers
-		consumeTag(player, GameTag.ONE_TIME_FREE_SECRET);
 		context.fireGameEvent(new SecretPlayedEvent(context, (SecretCard) secret.getSource()));
 	}
 
@@ -793,9 +775,7 @@ public class GameLogic implements Cloneable {
 			logger.debug("{} receives card {}", player.getName(), card);
 			hand.add(card);
 		} else {
-			CardCollection graveyard = player.getGraveyard();
 			logger.debug("{} has too many cards on his hand, card destroyed: {}", player.getName(), card);
-			graveyard.add(card);
 		}
 	}
 
@@ -811,7 +791,7 @@ public class GameLogic implements Cloneable {
 		entity.setTag(GameTag.NUMBER_OF_ATTACKS, attacks);
 	}
 
-	public void removeMinion(Actor minion) {
+	public void removeMinion(Minion minion) {
 		removeSpelltriggers(minion);
 
 		logger.debug("{} was removed", minion);
@@ -820,6 +800,7 @@ public class GameLogic implements Cloneable {
 
 		Player owner = context.getPlayer(minion.getOwner());
 		owner.getMinions().remove(minion);
+		owner.getGraveyard().add(minion);
 		context.fireGameEvent(new BoardChangedEvent(context));
 	}
 
@@ -871,7 +852,7 @@ public class GameLogic implements Cloneable {
 		immuneToSilence.add(GameTag.AURA_HP_BONUS);
 		immuneToSilence.add(GameTag.RACE);
 		immuneToSilence.add(GameTag.NUMBER_OF_ATTACKS);
-		immuneToSilence.add(GameTag.ONE_TIME_FREE_SECRET);
+		immuneToSilence.add(GameTag.UNIQUE_MINION);
 
 		List<GameTag> tags = new ArrayList<GameTag>();
 		tags.addAll(target.getTags().keySet());
@@ -922,10 +903,6 @@ public class GameLogic implements Cloneable {
 
 		logger.debug("{} summons {}", player.getName(), minion);
 		minion.setOwner(player.getId());
-
-		if (source != null) {
-			consumeTag(player, GameTag.ONE_TIME_MINION_MANA_COST);
-		}
 
 		if (resolveBattlecry && minion.getBattlecry() != null && !minion.getBattlecry().isResolvedLate()) {
 			resolveBattlecry(player.getId(), minion);

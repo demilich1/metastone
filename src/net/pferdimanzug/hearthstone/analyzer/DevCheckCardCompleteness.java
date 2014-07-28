@@ -30,11 +30,11 @@ public class DevCheckCardCompleteness {
 		List<File> filesWithoutId = new ArrayList<>();
 		for (File file : FileUtils.listFiles(folder, new String[] { "java" }, true)) {
 			try {
-				System.out.println("Processing " + file.getName() + "...");
+				//System.out.println("Processing " + file.getName() + "...");
 				List<String> lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
 				int lineIndex = containsExpression(lines, idExpression);
 				if (lineIndex != -1) {
-					System.out.println("Skipping " + file.getName() + " because it already has an id assigned");
+					//System.out.println("Skipping " + file.getName() + " because it already has an id assigned");
 					int id = extractId(lines.get(lineIndex + 1));
 					assignedIds.add(id);
 					continue;
@@ -63,6 +63,7 @@ public class DevCheckCardCompleteness {
 						lines.add(i, "\tpublic int getTypeId() {");
 						lines.add(i, "\t@Override");
 						lines.add(i, "\n");
+						System.out.println("Assigning id " + uniqueId + " to " + file.getName());
 						uniqueId++;
 						break;
 					}

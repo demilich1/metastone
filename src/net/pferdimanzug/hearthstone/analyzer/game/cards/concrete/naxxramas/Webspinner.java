@@ -19,19 +19,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class Webspinner extends MinionCard {
 
-	public Webspinner() {
-		super("Webspinner", 1, 1, Rarity.COMMON, HeroClass.ANY, 1);
-		setDescription("Deathrattle: Add a random Beast card to your hand.");
-		setRace(Race.BEAST);
-	}
-
-	@Override
-	public Minion summon() {
-		Minion webspinner = createMinion();
-		webspinner.addDeathrattle(new WebspinnerSpell());
-		return webspinner;
-	}
-
 	private class WebspinnerSpell extends Spell {
 
 		{
@@ -49,4 +36,21 @@ public class Webspinner extends MinionCard {
 
 	}
 
+	public Webspinner() {
+		super("Webspinner", 1, 1, Rarity.COMMON, HeroClass.ANY, 1);
+		setDescription("Deathrattle: Add a random Beast card to your hand.");
+		setRace(Race.BEAST);
+	}
+
+	@Override
+	public int getTypeId() {
+		return 412;
+	}
+
+	@Override
+	public Minion summon() {
+		Minion webspinner = createMinion();
+		webspinner.addDeathrattle(new WebspinnerSpell());
+		return webspinner;
+	}
 }

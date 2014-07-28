@@ -17,16 +17,16 @@ public class HumanMulliganOptions {
 		this.offeredCards = offeredCards;
 	}
 
-	public Player getPlayer() {
-		return player;
-	}
-
 	public HumanBehaviour getBehaviour() {
 		return behaviour;
 	}
 
 	public List<Card> getOfferedCards() {
 		return offeredCards;
+	}
+
+	public Player getPlayer() {
+		return player;
 	}
 
 }
