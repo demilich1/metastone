@@ -87,6 +87,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas.Dupli
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas.EchoingOoze;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas.Feugen;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas.HauntedCreeper;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas.KelThuzad;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas.Loatheb;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas.MadScientist;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas.Maexxna;
@@ -409,6 +410,7 @@ cards.add(new Duplicate());
 cards.add(new EchoingOoze());
 cards.add(new Feugen());
 cards.add(new HauntedCreeper());
+cards.add(new KelThuzad());
 cards.add(new Loatheb());
 cards.add(new MadScientist());
 cards.add(new Maexxna());

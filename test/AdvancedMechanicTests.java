@@ -36,45 +36,6 @@ import org.testng.annotations.Test;
 public class AdvancedMechanicTests extends BasicTests {
 
 	@Test
-	public void testAura() {
-		GameContext context = createContext(new Jaina(), new Garrosh());
-		Player player = context.getPlayer1();
-		Player opponent = context.getPlayer2();
-
-		TestMinionCard minionCard = new TestMinionCard(1, 1);
-		minionCard.getMinion().setSpellTrigger(new TestAura());
-		context.getLogic().receiveCard(player.getId(), minionCard);
-		context.getLogic().performGameAction(player.getId(), minionCard.play());
-
-		Actor minion1 = getSingleMinion(player.getMinions());
-		Assert.assertEquals(minion1.getAttack(), 1);
-
-		minionCard = new TestMinionCard(1, 1);
-		minionCard.getMinion().setSpellTrigger(new TestAura());
-		Actor minion2 = playMinionCard(context, player, minionCard);
-
-		Assert.assertNotEquals(minion1, minion2);
-		Assert.assertEquals(minion1.getAttack(), 2);
-		Assert.assertEquals(minion2.getAttack(), 2);
-
-		TestMinionCard minionCardOpponent = new TestMinionCard(3, 3);
-		Actor enemyMinion = playMinionCard(context, opponent, minionCardOpponent);
-		Assert.assertEquals(enemyMinion.getAttack(), 3);
-
-		Assert.assertEquals(minion1.getAttack(), 2);
-		Assert.assertEquals(minion2.getAttack(), 2);
-		PhysicalAttackAction attackAction = new PhysicalAttackAction(enemyMinion.getReference());
-		attackAction.setTarget(minion2);
-		context.getLogic().performGameAction(opponent.getId(), attackAction);
-		Assert.assertEquals(minion1.getAttack(), 1);
-
-		minionCard = new TestMinionCard(1, 1);
-		minion2 = playMinionCard(context, player, minionCard);
-		Assert.assertEquals(minion1.getAttack(), 1);
-		Assert.assertEquals(minion2.getAttack(), 2);
-	}
-
-	@Test
 	public void testChooseOne() {
 		GameContext context = createContext(new Malfurion(), new Garrosh());
 		Player player = context.getPlayer1();

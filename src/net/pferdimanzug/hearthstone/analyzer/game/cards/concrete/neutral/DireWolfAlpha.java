@@ -20,8 +20,6 @@ public class DireWolfAlpha extends MinionCard {
 	public int getTypeId() {
 		return 117;
 	}
-	
-
 
 	@Override
 	public Minion summon() {

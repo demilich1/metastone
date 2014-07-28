@@ -30,7 +30,7 @@ public class EntityReference {
 		
 	private final int key;
 	
-	private EntityReference(int key) {
+	public EntityReference(int key) {
 		this.key = key;
 	}
 	

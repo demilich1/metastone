@@ -323,6 +323,7 @@ public class GameLogic implements Cloneable {
 		if (minion.getHp() > 0) {
 			minion.setHp(0);
 		}
+		minion.setTag(GameTag.DIED_ON_TURN, context.getTurn());
 
 		owner.getMinions().remove(minion);
 		owner.getGraveyard().add(minion);

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
@@ -71,13 +72,10 @@ public class TestBase {
 		return null;
 	}
 	
-	protected static Minion getSingleMinion(List<Minion> minions, Integer typeId) {
-		for (Minion minion : minions) {
-			if (minion.getTypeId() == typeId) {
-				return minion;
-			}
-		}
-		return null;
+	protected static Minion getSummonedMinion(List<Minion> minions) {
+		List<Minion> minionList = new ArrayList<>(minions);
+		Collections.sort(minionList, (m1, m2) -> Integer.compare(m1.getId(), m2.getId()));
+		return minionList.get(minionList.size() - 1);
 	}
 	
 	protected static void playCard(GameContext context, Player player, Card card) {
@@ -88,7 +86,7 @@ public class TestBase {
 	protected static Minion playMinionCard(GameContext context, Player player, MinionCard minionCard) {
 		context.getLogic().receiveCard(player.getId(), minionCard);
 		context.getLogic().performGameAction(player.getId(), minionCard.play());
-		return getSingleMinion(player.getMinions(), minionCard.summon().getTypeId());
+		return getSummonedMinion(player.getMinions());
 	}
 
 }
