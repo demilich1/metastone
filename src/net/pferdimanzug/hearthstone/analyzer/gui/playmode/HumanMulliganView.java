@@ -51,7 +51,7 @@ public class HumanMulliganView extends BorderPane implements EventHandler<MouseE
 		stage.setScene(new Scene(this));
 		stage.setTitle("Mulligan");
 		stage.initModality(Modality.WINDOW_MODAL);
-		stage.initStyle(StageStyle.TRANSPARENT);
+		stage.initStyle(StageStyle.UNDECORATED);
 		stage.initOwner(parent);
 		stage.show();
 	}

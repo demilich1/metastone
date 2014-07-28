@@ -646,19 +646,30 @@ public class GameLogic implements Cloneable {
 		}
 
 		List<Card> discardedCards = player.getBehaviour().mulligan(context, player, starterCards);
+		
+		// remove player selected cards from starter cards
 		for (Card discardedCard : discardedCards) {
 			logger.debug("Player {} mulligans {} ", player.getName(), discardedCard);
 			starterCards.remove(discardedCard);
+		}
+		
+		// draw random cards from deck until required starter card count is reached
+		while (starterCards.size() < numberOfStarterCards) {
+			Card randomCard = player.getDeck().getRandom();
+			player.getDeck().remove(randomCard);
+			starterCards.add(randomCard);
+		}
+		
+		// put the mulligan cards back in the deck
+		for (Card discardedCard : discardedCards) {
+			player.getDeck().add(discardedCard);
 		}
 
 		for (Card starterCard : starterCards) {
 			receiveCard(player.getId(), starterCard);
 		}
 
-		while (player.getHand().getCount() < numberOfStarterCards) {
-			drawCard(player.getId());
-		}
-
+		// second player gets the coin additionally
 		if (!begins) {
 			TheCoin theCoin = new TheCoin();
 			receiveCard(player.getId(), theCoin);
