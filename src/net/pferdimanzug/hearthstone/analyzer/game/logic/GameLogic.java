@@ -505,17 +505,6 @@ public class GameLogic implements Cloneable {
 		return manaCost;
 	}
 
-	private int getTagValue(Player player, GameTag tag, int defaultValue) {
-		for (Entity minion : player.getMinions()) {
-			if (!minion.hasTag(tag)) {
-				continue;
-			}
-
-			return minion.getTagValue(tag);
-		}
-		return defaultValue;
-	}
-
 	public int getTotalTagValue(GameTag tag) {
 		int total = 0;
 		for (Player player : context.getPlayers()) {
@@ -643,14 +632,36 @@ public class GameLogic implements Cloneable {
 
 		player.getDeck().shuffle();
 
-		for (int j = 0; j < STARTER_CARDS; j++) {
-			drawCard(playerId);
+		mulligan(player, begins);
+	}
+
+	private void mulligan(Player player, boolean begins) {
+		int numberOfStarterCards = begins ? STARTER_CARDS : STARTER_CARDS + 1;
+		List<Card> starterCards = new ArrayList<>();
+		for (int j = 0; j < numberOfStarterCards; j++) {
+			Card randomCard = player.getDeck().getRandom();
+			player.getDeck().remove(randomCard);
+			logger.debug("Player {} been offered card {} for mulligan", player.getName(), randomCard);
+			starterCards.add(randomCard);
 		}
-		// second player gets additional card + TheCoin
+
+		List<Card> discardedCards = player.getBehaviour().mulligan(context, player, starterCards);
+		for (Card discardedCard : discardedCards) {
+			logger.debug("Player {} mulligans {} ", player.getName(), discardedCard);
+			starterCards.remove(discardedCard);
+		}
+
+		for (Card starterCard : starterCards) {
+			receiveCard(player.getId(), starterCard);
+		}
+
+		while (player.getHand().getCount() < numberOfStarterCards) {
+			drawCard(player.getId());
+		}
+
 		if (!begins) {
-			drawCard(playerId);
 			TheCoin theCoin = new TheCoin();
-			receiveCard(playerId, theCoin);
+			receiveCard(player.getId(), theCoin);
 		}
 	}
 
@@ -926,7 +937,7 @@ public class GameLogic implements Cloneable {
 		if (minion.hasSpellTrigger()) {
 			addGameEventListener(player, minion.getSpellTrigger(), minion);
 		}
-		
+
 		if (minion.getCardCostModifier() != null) {
 			addManaModifier(player, minion.getCardCostModifier(), minion);
 		}

@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.behaviour;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -8,6 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SecretCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
@@ -43,6 +45,11 @@ public class NoAggressionBehaviour implements IBehaviour {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
+		return new ArrayList<Card>();
 	}
 
 }

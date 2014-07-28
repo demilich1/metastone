@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanActionOptions;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanMulliganOptions;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanTargetOptions;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import de.pferdimanzug.nittygrittymvc.Mediator;
@@ -50,6 +51,15 @@ public class PlayModeMediator extends Mediator<GameNotification> {
 			HumanTargetOptions targetOptions = (HumanTargetOptions) notification.getBody();
 			selectTarget(targetOptions);
 			break;
+		case HUMAN_PROMPT_FOR_MULLIGAN:
+			HumanMulliganOptions mulliganOptions = (HumanMulliganOptions) notification.getBody();
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					new HumanMulliganView(boardView.getScene().getWindow(), mulliganOptions);
+				}
+			});
+			break;
 		default:
 			break;
 		}
@@ -63,6 +73,7 @@ public class PlayModeMediator extends Mediator<GameNotification> {
 		notificationInterests.add(GameNotification.GAME_ACTION_PERFORMED);
 		notificationInterests.add(GameNotification.HUMAN_PROMPT_FOR_ACTION);
 		notificationInterests.add(GameNotification.HUMAN_PROMPT_FOR_TARGET);
+		notificationInterests.add(GameNotification.HUMAN_PROMPT_FOR_MULLIGAN);
 		notificationInterests.add(GameNotification.ANSWER_DECKS);
 		return notificationInterests;
 	}

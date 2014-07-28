@@ -281,7 +281,7 @@ public class CardCatalogue {
 	}
 
 	public static CardCollection query(CardType cardType, Rarity rarity, HeroClass heroClass) {
-		return query(cardType, rarity, heroClass);
+		return query(cardType, rarity, heroClass, null);
 	}
 
 	public static CardCollection query(GameTag tag) {

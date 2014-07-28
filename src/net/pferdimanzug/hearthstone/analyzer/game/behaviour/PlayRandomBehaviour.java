@@ -1,11 +1,13 @@
 package net.pferdimanzug.hearthstone.analyzer.game.behaviour;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
@@ -57,6 +59,11 @@ public class PlayRandomBehaviour implements IBehaviour {
 		int randomIndex = ThreadLocalRandom.current().nextInt(validTargets.size());
 		Entity randomTarget = validTargets.get(randomIndex);
 		action.setTargetKey(EntityReference.pointTo(randomTarget));
+	}
+
+	@Override
+	public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
+		return new ArrayList<>();
 	}
 
 }

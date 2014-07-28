@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
@@ -32,6 +33,11 @@ public class TestBase {
 		@Override
 		public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
 			return null;
+		}
+
+		@Override
+		public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
+			return new ArrayList<Card>();
 		}
 		
 	}

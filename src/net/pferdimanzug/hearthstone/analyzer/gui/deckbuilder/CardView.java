@@ -81,7 +81,7 @@ public class CardView extends BorderPane implements EventHandler<MouseEvent> {
 		for (int i = offset; i < lastIndex; i++) {
 			Card card = cards.get(i);
 			CardTooltip cardWidget = cardWidgets.get(widgetIndex++);
-			cardWidget.setCard(null, card, null);
+			cardWidget.setCard(card);
 			cardWidget.setVisible(true);
 		}
 	}
@@ -94,8 +94,6 @@ public class CardView extends BorderPane implements EventHandler<MouseEvent> {
 	}
 	
 	private void setupCardWidgets() {
-		int currentRow = 0;
-		int currentColumn = 0;
 		for (int i = 0; i < cardDisplayCount; i++) {
 			CardTooltip cardWidget = new CardTooltip();
 			
@@ -103,13 +101,8 @@ public class CardView extends BorderPane implements EventHandler<MouseEvent> {
 			cardWidget.setScaleX(0.95);
 			cardWidget.setScaleY(0.95);
 			cardWidget.setScaleZ(0.95);
-			//contentPane.add(cardWidget, currentColumn, currentRow);
+			
 			contentPane.getChildren().add(cardWidget);
-			currentColumn++;
-			if (currentColumn == columns) {
-				currentColumn = 0;
-				currentRow++;
-			}
 			cardWidgets.add(cardWidget);
 		}
 	}

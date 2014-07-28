@@ -68,6 +68,10 @@ public class CardToken extends BorderPane {
 		return card;
 	}
 	
+	public void setCard(Card card) {
+		setCard(null, card, null);
+	}
+	
 	public void setCard(GameContext context, Card card, Player player) {
 		this.card = card;
 		nameLabel.setText(card.getName());

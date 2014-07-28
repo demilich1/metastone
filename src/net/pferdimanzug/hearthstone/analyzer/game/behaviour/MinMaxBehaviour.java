@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.behaviour;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -7,6 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
@@ -143,6 +145,17 @@ public class MinMaxBehaviour implements IBehaviour {
 		simulation.getLogic().performGameAction(player.getId(), action);
 		GameLogic.logger.debug("********SIMULATION ends**********");
 		return simulation;
+	}
+
+	@Override
+	public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
+		List<Card> discardedCards = new ArrayList<Card>();
+		for (Card card : cards) {
+			if (card.getBaseManaCost() >= 4) {
+				discardedCards.add(card);
+			}
+		}
+		return discardedCards;
 	}
 
 }

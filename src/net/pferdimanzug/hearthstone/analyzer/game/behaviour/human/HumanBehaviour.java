@@ -8,6 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public class HumanBehaviour implements IBehaviour {
@@ -15,6 +16,7 @@ public class HumanBehaviour implements IBehaviour {
 	private GameAction selectedAction;
 	private boolean waitingForInput;
 	private Entity selectedTarget;
+	private List<Card> mulliganCards;
 
 	@Override
 	public String getName() {
@@ -67,6 +69,25 @@ public class HumanBehaviour implements IBehaviour {
 	public void setSelectedTarget(Entity selectedTarget) {
 		this.selectedTarget = selectedTarget;
 		waitingForInput = false;
+	}
+	
+	public void setMulliganCards(List<Card> mulliganCards) {
+		this.mulliganCards = mulliganCards;
+		waitingForInput = false;
+	}
+
+	@Override
+	public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
+		waitingForInput = true;
+		HumanMulliganOptions options = new HumanMulliganOptions(player, this, cards);
+		ApplicationFacade.getInstance().sendNotification(GameNotification.HUMAN_PROMPT_FOR_MULLIGAN, options);
+		while (waitingForInput) {
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+			}
+		}
+		return mulliganCards;
 	}
 
 }
