@@ -93,17 +93,6 @@ public class HearthstoneAnalyzer extends Application {
 		facade.sendNotification(GameNotification.CANVAS_CREATED, canvas);
 		facade.sendNotification(GameNotification.MAIN_MENU);
 		primaryStage.show();
-
-//		Thread t = new Thread(new Runnable() {
-//
-//			@Override
-//			public void run() {
-//				instance.launchHumanDebugGame();
-//			}
-//		});
-//		t.setDaemon(true);
-//		t.start();
-
 	}
 
 }

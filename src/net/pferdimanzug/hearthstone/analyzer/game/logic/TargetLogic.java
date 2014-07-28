@@ -74,6 +74,12 @@ public class TargetLogic {
 					return minion;
 				}
 			}
+			
+			for (Actor minion : player.getGraveyard()) {
+				if (minion.getId() == targetId) {
+					return minion;
+				}
+			}
 		}
 
 		logger.error("Id " + targetId + " not found!");

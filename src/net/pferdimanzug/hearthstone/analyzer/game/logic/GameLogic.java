@@ -1,6 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.logic;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -207,7 +208,12 @@ public class GameLogic implements Cloneable {
 
 	public void checkForDeadEntities() {
 		for (Player player : context.getPlayers()) {
-			for (Minion minion : new ArrayList<Minion>(player.getMinions())) {
+			List<Minion> minionList = new ArrayList<Minion>(player.getMinions());
+			// sort by id, which has the effect of destroying minions in FIFO
+			// order
+			// which is relevant for deathrattles
+			Collections.sort(minionList, (m1, m2) -> Integer.compare(m1.getId(), m2.getId()));
+			for (Minion minion : minionList) {
 				if (minion.isDead()) {
 					destroy(minion);
 				}
@@ -318,25 +324,16 @@ public class GameLogic implements Cloneable {
 			minion.setHp(0);
 		}
 
-		// TODO: add unit test for deathrattle; also check when exactly it
-		// should be fire
-		if (minion.hasTag(GameTag.DEATHRATTLES)) {
-			for (Spell deathrattle : minion.getDeathrattles()) {
-				castSpell(owner.getId(), deathrattle);
-			}
-		}
 		owner.getMinions().remove(minion);
 		owner.getGraveyard().add(minion);
+		resolveDeathrattles(owner, minion);
+		
 		context.fireGameEvent(new BoardChangedEvent(context));
 	}
 
 	private void destroyWeapon(Weapon weapon) {
 		Player owner = context.getPlayer(weapon.getOwner());
-		if (weapon.hasTag(GameTag.DEATHRATTLES)) {
-			for (Spell deathrattle : weapon.getDeathrattles()) {
-				castSpell(owner.getId(), deathrattle);
-			}
-		}
+		resolveDeathrattles(owner, weapon);
 		owner.getHero().setWeapon(null);
 		context.fireGameEvent(new WeaponDestroyedEvent(context, weapon));
 	}
@@ -662,20 +659,21 @@ public class GameLogic implements Cloneable {
 		}
 
 		List<Card> discardedCards = player.getBehaviour().mulligan(context, player, starterCards);
-		
+
 		// remove player selected cards from starter cards
 		for (Card discardedCard : discardedCards) {
 			logger.debug("Player {} mulligans {} ", player.getName(), discardedCard);
 			starterCards.remove(discardedCard);
 		}
-		
-		// draw random cards from deck until required starter card count is reached
+
+		// draw random cards from deck until required starter card count is
+		// reached
 		while (starterCards.size() < numberOfStarterCards) {
 			Card randomCard = player.getDeck().getRandom();
 			player.getDeck().remove(randomCard);
 			starterCards.add(randomCard);
 		}
-		
+
 		// put the mulligan cards back in the deck
 		for (Card discardedCard : discardedCards) {
 			player.getDeck().add(discardedCard);
@@ -827,6 +825,19 @@ public class GameLogic implements Cloneable {
 		}
 		battlecry.setSource(actor.getReference());
 		performGameAction(playerId, battlecry);
+	}
+
+	private void resolveDeathrattles(Player player, Actor actor) {
+		boolean doubleDeathrattles = hasTag(player, GameTag.DOUBLE_DEATHRATTLES);
+		// TODO: check when and in which order deathrattles should fire
+		if (actor.hasTag(GameTag.DEATHRATTLES)) {
+			for (Spell deathrattle : actor.getDeathrattles()) {
+				castSpell(player.getId(), deathrattle);
+				if (doubleDeathrattles) {
+					castSpell(player.getId(), deathrattle);
+				}
+			}
+		}
 	}
 
 	public void secretTriggered(Player player, Secret secret) {
