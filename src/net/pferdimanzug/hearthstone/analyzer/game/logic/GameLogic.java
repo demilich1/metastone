@@ -53,6 +53,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.IGameEventListe
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerLayer;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.secrets.Secret;
+import net.pferdimanzug.hearthstone.analyzer.game.statistics.Statistic;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.IdFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
@@ -250,6 +251,7 @@ public class GameLogic implements Cloneable {
 			DamageEvent damageEvent = new DamageEvent(context, target, damage);
 			context.fireGameEvent(damageEvent, TriggerLayer.SECRET);
 			context.fireGameEvent(damageEvent);
+			player.getStatistics().add(Statistic.DAMAGE_DEALT, damage);
 		}
 
 		return success;
@@ -454,17 +456,17 @@ public class GameLogic implements Cloneable {
 		context.getEnvironment().remove(Environment.ATTACKER);
 	}
 
-	public GameResult getMatchResult(Player player, Player opponent) {
+	public MatchResult getMatchResult(Player player, Player opponent) {
 		int ownHp = player.getHero().getHp();
 		int opponentHp = opponent.getHero().getHp();
 		if (ownHp < 1 && opponentHp < 1) {
-			return GameResult.DOUBLE_LOSS;
+			return MatchResult.DOUBLE_LOSS;
 		} else if (opponentHp < 1) {
-			return GameResult.WIN;
+			return MatchResult.WIN;
 		} else if (ownHp < 1) {
-			return GameResult.DEFEAT;
+			return MatchResult.DEFEAT;
 		}
-		return GameResult.RUNNING;
+		return MatchResult.RUNNING;
 	}
 
 	public int getModifiedManaCost(Player player, Card card) {
@@ -719,7 +721,9 @@ public class GameLogic implements Cloneable {
 		Player player = context.getPlayer(playerId);
 		Card card = context.resolveCardReference(cardReference);
 
-		modifyCurrentMana(playerId, -getModifiedManaCost(player, card));
+		int modifiedManaCost = getModifiedManaCost(player, card);
+		modifyCurrentMana(playerId, -modifiedManaCost);
+		player.getStatistics().add(Statistic.MANA_SPENT, modifiedManaCost);
 		logger.debug("{} plays {}", player.getName(), card);
 		player.getHand().remove(card);
 

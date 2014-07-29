@@ -5,10 +5,9 @@ import java.util.List;
 
 import javafx.application.Platform;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanActionOptions;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
+import net.pferdimanzug.hearthstone.analyzer.game.statistics.Statistic;
 import net.pferdimanzug.hearthstone.analyzer.gui.gameconfig.GameConfig;
-import net.pferdimanzug.hearthstone.analyzer.gui.playmode.HumanActionPromptView;
 import net.pferdimanzug.hearthstone.analyzer.utils.Tuple;
 
 import org.slf4j.Logger;
@@ -25,11 +24,13 @@ public class SimulationMediator extends Mediator<GameNotification> {
 
 	private final SimulationModeConfigView view;
 	private final WaitForSimulationView waitView;
+	private final SimulationResultView resultView;
 
 	public SimulationMediator() {
 		super(NAME);
 		view = new SimulationModeConfigView();
 		waitView = new WaitForSimulationView();
+		resultView = new SimulationResultView();
 	}
 
 	@Override
@@ -59,7 +60,17 @@ public class SimulationMediator extends Mediator<GameNotification> {
 					waitView.update(progress.getFirst(), progress.getSecond());
 				}
 			});
-			
+			break;
+		case SIMULATION_RESULT:
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					waitView.getScene().getWindow().hide();
+					SimulationResult result = (SimulationResult) notification.getBody();
+					resultView.showSimulationResult(result);
+					getFacade().sendNotification(GameNotification.SHOW_VIEW, resultView);
+				}
+			});
 			break;
 		default:
 			logger.warn("Unhandled notification {} in {}", notification, getClass().getSimpleName());
@@ -74,6 +85,7 @@ public class SimulationMediator extends Mediator<GameNotification> {
 		notificationInterests.add(GameNotification.ANSWER_DECKS);
 		notificationInterests.add(GameNotification.COMMIT_SIMULATIONMODE_CONFIG);
 		notificationInterests.add(GameNotification.SIMULATION_PROGRESS_UPDATE);
+		notificationInterests.add(GameNotification.SIMULATION_RESULT);
 		return notificationInterests;
 	}
 

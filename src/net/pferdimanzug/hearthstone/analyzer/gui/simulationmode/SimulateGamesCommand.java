@@ -15,24 +15,27 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 
 	@Override
 	public void execute(INotification<GameNotification> notification) {
-		GameConfig gameConfig = (GameConfig) notification.getBody();
+		final GameConfig gameConfig = (GameConfig) notification.getBody();
+		final SimulationResult result = new SimulationResult();
 
 		Thread t = new Thread(new Runnable() {
 
 			@Override
 			public void run() {
 				for (int i = 0; i < gameConfig.getNumberOfGames(); i++) {
-					playGame(gameConfig);
+					playGame(gameConfig, result);
 					Tuple<Integer> progress = new Tuple<Integer>(i + 1, gameConfig.getNumberOfGames());
 					getFacade().sendNotification(GameNotification.SIMULATION_PROGRESS_UPDATE, progress);
 				}
+				// all games finished
+				getFacade().sendNotification(GameNotification.SIMULATION_RESULT, result);
 			}
 		});
 		t.setDaemon(true);
 		t.start();
 	}
 
-	private void playGame(GameConfig gameConfig) {
+	private void playGame(GameConfig gameConfig, SimulationResult result) {
 
 		PlayerConfig playerConfig1 = gameConfig.getPlayerConfig1();
 		PlayerConfig playerConfig2 = gameConfig.getPlayerConfig2();
@@ -47,6 +50,8 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 
 		ApplicationFacade.getInstance().sendNotification(GameNotification.PLAY_GAME, newGame);
 
+		result.getPlayer1Stats().merge(player1.getStatistics());
+		result.getPlayer2Stats().merge(player2.getStatistics());
 	}
 
 }

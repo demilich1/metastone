@@ -114,7 +114,9 @@ public class GameBoardView extends BorderPane {
 		
 	}
 	
+	
 	private void checkForWinner(GameContext context) {
+		/*
 		if (context.gameDecided()) {
 			if (context.getWinner() == context.getPlayer1()) {
 				centerMessageLabel.setStyle("-fx-font-size: 72; -fx-text-fill: green;");
@@ -124,7 +126,9 @@ public class GameBoardView extends BorderPane {
 				setCenterMessage("You lost :(");
 			}
 		}
+		*/
 	}
+	
 	
 	private Button createSummonHelper() {
 		ImageView icon = new ImageView(IconFactory.getSummonHelper());

@@ -10,6 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.statistics.GameStatistics;
 
 public class Player implements Cloneable {
 
@@ -21,6 +22,8 @@ public class Player implements Cloneable {
 	private final List<Minion> graveyard = new ArrayList<>();
 	private final List<Minion> minions = new ArrayList<>();
 	private final List<Integer> secrets = new ArrayList<>();
+	
+	private final GameStatistics statistics = new GameStatistics();
 	
 	private int id = -1;
 
@@ -45,6 +48,7 @@ public class Player implements Cloneable {
 		this.mana = otherPlayer.mana;
 		this.maxMana = otherPlayer.maxMana;
 		this.behaviour = otherPlayer.behaviour;
+		this.getStatistics().merge(otherPlayer.getStatistics());
 	}
 	
 	public Player(String name, Hero hero, Deck deck) {
@@ -126,6 +130,10 @@ public class Player implements Cloneable {
 
 	public void setMaxMana(int maxMana) {
 		this.maxMana = maxMana;
+	}
+
+	public GameStatistics getStatistics() {
+		return statistics;
 	}
 
 }

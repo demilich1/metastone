@@ -15,11 +15,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
-import net.pferdimanzug.hearthstone.analyzer.game.logic.GameResult;
+import net.pferdimanzug.hearthstone.analyzer.game.logic.MatchResult;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.TargetLogic;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.IGameEventListener;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerLayer;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerManager;
+import net.pferdimanzug.hearthstone.analyzer.game.statistics.Statistic;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
@@ -37,11 +38,10 @@ public class GameContext implements Cloneable {
 	private final TargetLogic targetLogic = new TargetLogic();
 	private TriggerManager triggerManager = new TriggerManager();
 	private final HashMap<Environment, Object> environment = new HashMap<>();
-	private final List<CardCostModifier> cardCostModifiers = new ArrayList<>(); 
-
+	private final List<CardCostModifier> cardCostModifiers = new ArrayList<>();
+	
 	protected Player activePlayer;
-	private Player winner;
-	private GameResult result;
+	private MatchResult result;
 
 	private int turn;
 
@@ -98,7 +98,7 @@ public class GameContext implements Cloneable {
 
 	public boolean gameDecided() {
 		result = logic.getMatchResult(activePlayer, getOpponent(activePlayer));
-		return result != GameResult.RUNNING;
+		return result != MatchResult.RUNNING;
 	}
 	
 	public Player getActivePlayer() {
@@ -160,7 +160,7 @@ public class GameContext implements Cloneable {
 		return players;
 	}
 	
-	public GameResult getResult() {
+	public MatchResult getResult() {
 		return result;
 	}
 
@@ -188,10 +188,6 @@ public class GameContext implements Cloneable {
 		return turn;
 	}
 
-	public Player getWinner() {
-		return winner;
-	}
-	
 	protected void onGameStateChanged() {	
 	}
 	
@@ -209,8 +205,27 @@ public class GameContext implements Cloneable {
 		while (!gameDecided()) {
 			playTurn(activePlayer);
 		}
-		winner = result == GameResult.WIN ? activePlayer : getOpponent(activePlayer);
-		logger.debug("Game finished after " + turn + " turns, the winner is: " + winner.getName());
+		Player opponent = getOpponent(activePlayer);
+		switch (result) {
+		case DEFEAT:
+			logger.debug("Game finished after " + turn + " turns, the winner is: " + opponent.getName());
+			activePlayer.getStatistics().add(Statistic.GAMES_LOST, 1);
+			opponent.getStatistics().add(Statistic.GAMES_WON, 1);
+			break;
+		case DOUBLE_LOSS:
+			logger.debug("Game finished after " + turn + " turns, DRAW");
+			activePlayer.getStatistics().add(Statistic.GAMES_LOST, 1);
+			opponent.getStatistics().add(Statistic.GAMES_LOST, 1);
+			break;
+		case WIN:
+			logger.debug("Game finished after " + turn + " turns, the winner is: " + activePlayer.getName());
+			activePlayer.getStatistics().add(Statistic.GAMES_WON, 1);
+			opponent.getStatistics().add(Statistic.GAMES_LOST, 1);
+			break;
+		default:
+			logger.error("Invalid game result: " + result);
+			break;
+		}
 	}
 
 	private void playTurn(Player player) {
