@@ -57,17 +57,6 @@ public class SimulationModeConfigView extends BorderPane implements EventHandler
 		setupNumberOfGamesBox();
 	}
 
-	private void setupNumberOfGamesBox() {
-		ObservableList<Integer> numberOfGamesEntries = FXCollections.observableArrayList();
-		numberOfGamesEntries.add(1);
-		numberOfGamesEntries.add(10);
-		numberOfGamesEntries.add(100);
-		numberOfGamesEntries.add(1000);
-		numberOfGamesEntries.add(10000);
-		numberOfGamesBox.setItems(numberOfGamesEntries);
-		numberOfGamesBox.getSelectionModel().select(2);
-	}
-
 	@Override
 	public void handle(ActionEvent actionEvent) {
 		if (actionEvent.getSource() == startButton) {
@@ -84,6 +73,17 @@ public class SimulationModeConfigView extends BorderPane implements EventHandler
 	public void injectDecks(List<Deck> decks) {
 		player1Config.injectDecks(decks);
 		player2Config.injectDecks(decks);
+	}
+
+	private void setupNumberOfGamesBox() {
+		ObservableList<Integer> numberOfGamesEntries = FXCollections.observableArrayList();
+		numberOfGamesEntries.add(1);
+		numberOfGamesEntries.add(10);
+		numberOfGamesEntries.add(100);
+		numberOfGamesEntries.add(1000);
+		numberOfGamesEntries.add(10000);
+		numberOfGamesBox.setItems(numberOfGamesEntries);
+		numberOfGamesBox.getSelectionModel().select(2);
 	}
 
 }

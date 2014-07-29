@@ -59,15 +59,15 @@ public class UserDialog extends BorderPane implements EventHandler<ActionEvent> 
 		}
 	}
 	
+	public void setDialogHandler(IDialogListener dialogHandler) {
+		this.dialogHandler = dialogHandler;
+	}
+
 	private void setDialogResult(DialogResult result) {
 		if (dialogHandler != null) { 
 			dialogHandler.onDialogClosed(result);
 		}
 		this.getScene().getWindow().hide();
-	}
-
-	public void setDialogHandler(IDialogListener dialogHandler) {
-		this.dialogHandler = dialogHandler;
 	}
 	
 

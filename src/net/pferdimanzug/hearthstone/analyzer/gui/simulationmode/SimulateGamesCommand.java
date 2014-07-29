@@ -16,7 +16,7 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 	@Override
 	public void execute(INotification<GameNotification> notification) {
 		final GameConfig gameConfig = (GameConfig) notification.getBody();
-		final SimulationResult result = new SimulationResult();
+		final SimulationResult result = new SimulationResult(gameConfig.getNumberOfGames());
 
 		Thread t = new Thread(new Runnable() {
 
@@ -28,6 +28,7 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 					getFacade().sendNotification(GameNotification.SIMULATION_PROGRESS_UPDATE, progress);
 				}
 				// all games finished
+				result.calculateMetaStatistics();
 				getFacade().sendNotification(GameNotification.SIMULATION_RESULT, result);
 			}
 		});

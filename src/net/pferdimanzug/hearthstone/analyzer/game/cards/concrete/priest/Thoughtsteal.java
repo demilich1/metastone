@@ -16,8 +16,6 @@ public class Thoughtsteal extends SpellCard {
 		setTargetRequirement(TargetSelection.NONE);
 	}
 
-
-
 	@Override
 	public int getTypeId() {
 		return 283;

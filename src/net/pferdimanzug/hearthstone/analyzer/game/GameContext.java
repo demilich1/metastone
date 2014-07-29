@@ -209,18 +209,18 @@ public class GameContext implements Cloneable {
 		switch (result) {
 		case DEFEAT:
 			logger.debug("Game finished after " + turn + " turns, the winner is: " + opponent.getName());
-			activePlayer.getStatistics().add(Statistic.GAMES_LOST, 1);
-			opponent.getStatistics().add(Statistic.GAMES_WON, 1);
+			activePlayer.getStatistics().gameLost();
+			opponent.getStatistics().gameWon();
 			break;
 		case DOUBLE_LOSS:
 			logger.debug("Game finished after " + turn + " turns, DRAW");
-			activePlayer.getStatistics().add(Statistic.GAMES_LOST, 1);
-			opponent.getStatistics().add(Statistic.GAMES_LOST, 1);
+			activePlayer.getStatistics().gameLost();
+			opponent.getStatistics().gameLost();
 			break;
 		case WIN:
 			logger.debug("Game finished after " + turn + " turns, the winner is: " + activePlayer.getName());
-			activePlayer.getStatistics().add(Statistic.GAMES_WON, 1);
-			opponent.getStatistics().add(Statistic.GAMES_LOST, 1);
+			activePlayer.getStatistics().gameWon();
+			opponent.getStatistics().gameLost();
 			break;
 		default:
 			logger.error("Invalid game result: " + result);
@@ -233,12 +233,17 @@ public class GameContext implements Cloneable {
 		logic.startTurn(player.getId());
 		onGameStateChanged();
 		GameAction nextAction = player.getBehaviour().requestAction(this, player, logic.getValidActions(player.getId()));
+		int actionsThisTurn = 0;
 		while (nextAction != null) {
 			onWillPerformAction(nextAction);
 			logic.performGameAction(player.getId(), nextAction);
 			onGameStateChanged();
 			if (gameDecided()) {
 				return;
+			}
+			if (++actionsThisTurn > 99) {
+				logger.warn("Turn has been forcefully ended after {} actions", actionsThisTurn);
+				break;
 			}
 			nextAction = player.getBehaviour().requestAction(this, player, logic.getValidActions(player.getId()));
 		}

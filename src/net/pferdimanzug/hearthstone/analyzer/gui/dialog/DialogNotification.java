@@ -17,20 +17,20 @@ public class DialogNotification extends Notification<GameNotification> {
 		this.dialogType = dialogType;
 	}
 
-	public String getTitle() {
-		return title;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
 	public DialogType getDialogType() {
 		return dialogType;
 	}
 
 	public IDialogListener getHandler() {
 		return handler;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public String getTitle() {
+		return title;
 	}
 
 	public void setHandler(IDialogListener handler) {

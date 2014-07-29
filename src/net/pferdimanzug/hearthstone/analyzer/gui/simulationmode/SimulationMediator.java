@@ -6,7 +6,6 @@ import java.util.List;
 import javafx.application.Platform;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
-import net.pferdimanzug.hearthstone.analyzer.game.statistics.Statistic;
 import net.pferdimanzug.hearthstone.analyzer.gui.gameconfig.GameConfig;
 import net.pferdimanzug.hearthstone.analyzer.utils.Tuple;
 
@@ -31,12 +30,6 @@ public class SimulationMediator extends Mediator<GameNotification> {
 		view = new SimulationModeConfigView();
 		waitView = new WaitForSimulationView();
 		resultView = new SimulationResultView();
-	}
-
-	@Override
-	public void onRegister() {
-		getFacade().sendNotification(GameNotification.SHOW_VIEW, view);
-		getFacade().sendNotification(GameNotification.REQUEST_DECKS);
 	}
 
 	@Override
@@ -87,6 +80,12 @@ public class SimulationMediator extends Mediator<GameNotification> {
 		notificationInterests.add(GameNotification.SIMULATION_PROGRESS_UPDATE);
 		notificationInterests.add(GameNotification.SIMULATION_RESULT);
 		return notificationInterests;
+	}
+
+	@Override
+	public void onRegister() {
+		getFacade().sendNotification(GameNotification.SHOW_VIEW, view);
+		getFacade().sendNotification(GameNotification.REQUEST_DECKS);
 	}
 
 }

@@ -17,8 +17,6 @@ public class InnerRage extends SpellCard {
 		setTargetRequirement(TargetSelection.MINIONS);
 	}
 
-
-
 	@Override
 	public int getTypeId() {
 		return 374;

@@ -53,7 +53,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.IGameEventListe
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerLayer;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.secrets.Secret;
-import net.pferdimanzug.hearthstone.analyzer.game.statistics.Statistic;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.IdFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
@@ -251,7 +250,7 @@ public class GameLogic implements Cloneable {
 			DamageEvent damageEvent = new DamageEvent(context, target, damage);
 			context.fireGameEvent(damageEvent, TriggerLayer.SECRET);
 			context.fireGameEvent(damageEvent);
-			player.getStatistics().add(Statistic.DAMAGE_DEALT, damage);
+			player.getStatistics().damageDealt(damage);
 		}
 
 		return success;
@@ -330,7 +329,7 @@ public class GameLogic implements Cloneable {
 		owner.getMinions().remove(minion);
 		owner.getGraveyard().add(minion);
 		resolveDeathrattles(owner, minion);
-		
+
 		context.fireGameEvent(new BoardChangedEvent(context));
 	}
 
@@ -579,6 +578,7 @@ public class GameLogic implements Cloneable {
 		if (success) {
 			HealEvent healEvent = new HealEvent(context, target, healing);
 			context.fireGameEvent(healEvent);
+			player.getStatistics().heal(healing);
 		}
 	}
 
@@ -723,9 +723,11 @@ public class GameLogic implements Cloneable {
 
 		int modifiedManaCost = getModifiedManaCost(player, card);
 		modifyCurrentMana(playerId, -modifiedManaCost);
-		player.getStatistics().add(Statistic.MANA_SPENT, modifiedManaCost);
+		player.getStatistics().manaSpent(modifiedManaCost);
 		logger.debug("{} plays {}", player.getName(), card);
 		player.getHand().remove(card);
+		
+		player.getStatistics().cardPlayed(card);
 
 		if (card.getCardType() == CardType.SPELL) {
 			GameEvent spellCastedEvent = new SpellCastedEvent(context, playerId, card);
@@ -892,6 +894,7 @@ public class GameLogic implements Cloneable {
 		if (player.getMaxMana() < MAX_MANA) {
 			player.setMaxMana(player.getMaxMana() + 1);
 		}
+		player.getStatistics().startTurn();
 
 		player.setMana(player.getMaxMana() - player.getHero().getTagValue(GameTag.OVERLOAD));
 		player.getHero().removeTag(GameTag.OVERLOAD);
@@ -965,6 +968,7 @@ public class GameLogic implements Cloneable {
 		modifyCurrentMana(playerId, -power.getManaCost(context, player));
 		logger.debug("{} uses {}", player.getName(), power);
 		power.setUsed(true);
+		player.getStatistics().cardPlayed(power);
 	}
 
 }

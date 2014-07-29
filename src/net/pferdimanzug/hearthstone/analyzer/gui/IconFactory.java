@@ -16,6 +16,28 @@ public class IconFactory {
 		return new Image(iconPath);
 	}
 
+	public static Image getDialogIcon(DialogType dialogType) {
+		String iconPath = RESOURCE_PATH + "/img/ui/";
+		switch (dialogType) {
+		case CONFIRM:
+			iconPath += "confirm.png";
+			break;
+		case ERROR:
+			iconPath += "error.png";
+			break;
+		case INFO:
+			iconPath += "info.png";
+			break;
+		case WARNING:
+			iconPath += "warning.png";
+			break;
+		default:
+			break;
+		
+		}
+		return new Image(iconPath);
+	}
+
 	public static String getHeroIconUrl(Hero hero) {
 		String iconPath = RESOURCE_PATH + "/img/heroes/";
 		switch (hero.getHeroClass()) {
@@ -95,7 +117,7 @@ public class IconFactory {
 	public static String getImageUrl(String imageName) {
 		return RESOURCE_PATH + "/img/" + imageName;
 	}
-
+	
 	public static Color getRarityColor(Rarity rarity) {
 		Color color = Color.BLACK;
 		switch (rarity) {
@@ -120,28 +142,6 @@ public class IconFactory {
 		}
 		return color;
 
-	}
-	
-	public static Image getDialogIcon(DialogType dialogType) {
-		String iconPath = RESOURCE_PATH + "/img/ui/";
-		switch (dialogType) {
-		case CONFIRM:
-			iconPath += "confirm.png";
-			break;
-		case ERROR:
-			iconPath += "error.png";
-			break;
-		case INFO:
-			iconPath += "info.png";
-			break;
-		case WARNING:
-			iconPath += "warning.png";
-			break;
-		default:
-			break;
-		
-		}
-		return new Image(iconPath);
 	}
 
 	public static Image getSummonHelper() {

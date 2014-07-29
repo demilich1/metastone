@@ -112,14 +112,18 @@ public class Player implements Cloneable {
 		return secrets;
 	}
 
+	public GameStatistics getStatistics() {
+		return statistics;
+	}
+
 	public void setBehaviour(IBehaviour behaviour) {
 		this.behaviour = behaviour;
 	}
-
+	
 	public void setHero(Hero hero) {
 		this.hero = hero;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -130,10 +134,6 @@ public class Player implements Cloneable {
 
 	public void setMaxMana(int maxMana) {
 		this.maxMana = maxMana;
-	}
-
-	public GameStatistics getStatistics() {
-		return statistics;
 	}
 
 }

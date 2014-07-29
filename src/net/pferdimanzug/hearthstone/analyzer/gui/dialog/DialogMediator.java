@@ -45,6 +45,15 @@ public class DialogMediator extends Mediator<GameNotification> {
 		}
 	}
 	
+	@Override
+	public List<GameNotification> listNotificationInterests() {
+		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
+		notificationInterests.add(GameNotification.CANVAS_CREATED);
+		notificationInterests.add(GameNotification.SHOW_MODAL_DIALOG);
+		notificationInterests.add(GameNotification.SHOW_USER_DIALOG);
+		return notificationInterests;
+	}
+
 	private void showModalDialog(Node content) {
 		new ModalDialog(root, content);
 	}
@@ -53,15 +62,6 @@ public class DialogMediator extends Mediator<GameNotification> {
 		UserDialog userDialog = new UserDialog(notification.getTitle(), notification.getMessage(), notification.getDialogType());
 		userDialog.setDialogHandler(notification.getHandler());
 		showModalDialog(userDialog);
-	}
-
-	@Override
-	public List<GameNotification> listNotificationInterests() {
-		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
-		notificationInterests.add(GameNotification.CANVAS_CREATED);
-		notificationInterests.add(GameNotification.SHOW_MODAL_DIALOG);
-		notificationInterests.add(GameNotification.SHOW_USER_DIALOG);
-		return notificationInterests;
 	}
 
 }

@@ -54,17 +54,17 @@ public class DeckInfoView extends HBox implements EventHandler<ActionEvent>, IDi
 
 	}
 
-	public void updateDeck(Deck deck) {
-		deckComplete = deck.isComplete();
-		cardCountLabel.setText(deck.getCards().getCount() + "/" + GameLogic.DECK_SIZE);
-	}
-
 	@Override
 	public void onDialogClosed(DialogResult result) {
 		if (result == DialogResult.OK) {
 			ApplicationFacade.getInstance().sendNotification(GameNotification.FILL_DECK_WITH_RANDOM_CARDS);
 			ApplicationFacade.getInstance().sendNotification(GameNotification.SAVE_ACTIVE_DECK);
 		}
+	}
+
+	public void updateDeck(Deck deck) {
+		deckComplete = deck.isComplete();
+		cardCountLabel.setText(deck.getCards().getCount() + "/" + GameLogic.DECK_SIZE);
 	}
 
 }
