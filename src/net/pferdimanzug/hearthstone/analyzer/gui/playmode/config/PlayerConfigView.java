@@ -37,48 +37,6 @@ import net.pferdimanzug.hearthstone.analyzer.gui.gameconfig.PlayerConfig;
 
 public class PlayerConfigView extends VBox {
 
-	private class BehaviourStringConverter extends StringConverter<IBehaviour> {
-
-		@Override
-		public IBehaviour fromString(String string) {
-			return null;
-		}
-
-		@Override
-		public String toString(IBehaviour behaviour) {
-			return behaviour.getName();
-		}
-
-	}
-
-	private class DeckStringConverter extends StringConverter<Deck> {
-
-		@Override
-		public Deck fromString(String arg0) {
-			return null;
-		}
-
-		@Override
-		public String toString(Deck deck) {
-			return deck.getName();
-		}
-
-	}
-
-	private class HeroStringConverter extends StringConverter<Hero> {
-
-		@Override
-		public Hero fromString(String arg0) {
-			return null;
-		}
-
-		@Override
-		public String toString(Hero hero) {
-			return hero.getHeroClass().toString();
-		}
-
-	}
-
 	@FXML
 	private Label heroNameLabel;
 
@@ -195,6 +153,48 @@ public class PlayerConfigView extends VBox {
 		heroBox.valueProperty().addListener((ChangeListener<Hero>) (observableValue, oldHero, newHero) -> {
 			selectHero(newHero);
 		});
+	}
+
+	private class BehaviourStringConverter extends StringConverter<IBehaviour> {
+
+		@Override
+		public IBehaviour fromString(String string) {
+			return null;
+		}
+
+		@Override
+		public String toString(IBehaviour behaviour) {
+			return behaviour.getName();
+		}
+
+	}
+
+	private class DeckStringConverter extends StringConverter<Deck> {
+
+		@Override
+		public Deck fromString(String arg0) {
+			return null;
+		}
+
+		@Override
+		public String toString(Deck deck) {
+			return deck.getName();
+		}
+
+	}
+
+	private class HeroStringConverter extends StringConverter<Hero> {
+
+		@Override
+		public Hero fromString(String arg0) {
+			return null;
+		}
+
+		@Override
+		public String toString(Hero hero) {
+			return hero.getHeroClass().toString();
+		}
+
 	}
 
 }

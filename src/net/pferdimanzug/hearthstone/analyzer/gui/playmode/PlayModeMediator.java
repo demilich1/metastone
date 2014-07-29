@@ -56,7 +56,7 @@ public class PlayModeMediator extends Mediator<GameNotification> {
 			Platform.runLater(new Runnable() {
 				@Override
 				public void run() {
-					new HumanMulliganView(boardView.getScene().getWindow(), mulliganOptions);
+					new HumanMulliganView(mulliganOptions);
 				}
 			});
 			break;

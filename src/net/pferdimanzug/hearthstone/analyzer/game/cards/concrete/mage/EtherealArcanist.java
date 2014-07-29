@@ -15,6 +15,28 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class EtherealArcanist extends MinionCard {
 
+	public EtherealArcanist() {
+		super("Ethereal Arcanist", 3, 3, Rarity.RARE, HeroClass.MAGE, 4);
+		setDescription("If you control a Secret at the end of your turn, gain +2/+2.");
+	}
+
+	@Override
+	public int getTypeId() {
+		return 58;
+	}
+
+	@Override
+	public Minion summon() {
+		Minion etherealArcanist = createMinion();
+		Spell buffSpell = new BuffSpell(2, 2);
+		buffSpell.setTarget(EntityReference.SELF);
+		SpellTrigger trigger = new SpellTrigger(new TurnEndAndControlSecretTrigger(), buffSpell);
+		etherealArcanist.setSpellTrigger(trigger);
+		return etherealArcanist;
+	}
+
+
+
 	private class TurnEndAndControlSecretTrigger extends TurnEndTrigger {
 
 		@Override
@@ -27,27 +49,5 @@ public class EtherealArcanist extends MinionCard {
 			return !player.getSecrets().isEmpty();
 		}
 
-	}
-
-	public EtherealArcanist() {
-		super("Ethereal Arcanist", 3, 3, Rarity.RARE, HeroClass.MAGE, 4);
-		setDescription("If you control a Secret at the end of your turn, gain +2/+2.");
-	}
-
-	@Override
-	public int getTypeId() {
-		return 58;
-	}
-
-
-
-	@Override
-	public Minion summon() {
-		Minion etherealArcanist = createMinion();
-		Spell buffSpell = new BuffSpell(2, 2);
-		buffSpell.setTarget(EntityReference.SELF);
-		SpellTrigger trigger = new SpellTrigger(new TurnEndAndControlSecretTrigger(), buffSpell);
-		etherealArcanist.setSpellTrigger(trigger);
-		return etherealArcanist;
 	}
 }

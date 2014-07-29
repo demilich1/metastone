@@ -13,6 +13,25 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.TargetPlayer;
 
 public class LeeroyJenkins extends MinionCard {
 
+	public LeeroyJenkins() {
+		super("Leeroy Jenkins", 6, 2, Rarity.LEGENDARY, HeroClass.ANY, 4);
+		setDescription("Charge. Battlecry: Summon two 1/1 Whelps for your opponent.");
+		setTag(GameTag.BATTLECRY);
+	}
+
+	@Override
+	public int getTypeId() {
+		return 153;
+	}
+	
+	@Override
+	public Minion summon() {
+		Minion leeroyJenkins = createMinion(GameTag.CHARGE);
+		Spell summonSpell = new SummonSpell(TargetPlayer.OPPONENT, new Whelp(), new Whelp());
+		leeroyJenkins.setBattlecry(Battlecry.createBattlecry(summonSpell));
+		return leeroyJenkins;
+	}
+
 	private class Whelp extends MinionCard {
 
 		public Whelp() {
@@ -25,24 +44,5 @@ public class LeeroyJenkins extends MinionCard {
 			return createMinion();
 		}
 		
-	}
-
-	public LeeroyJenkins() {
-		super("Leeroy Jenkins", 6, 2, Rarity.LEGENDARY, HeroClass.ANY, 4);
-		setDescription("Charge. Battlecry: Summon two 1/1 Whelps for your opponent.");
-		setTag(GameTag.BATTLECRY);
-	}
-	
-	@Override
-	public int getTypeId() {
-		return 153;
-	}
-
-	@Override
-	public Minion summon() {
-		Minion leeroyJenkins = createMinion(GameTag.CHARGE);
-		Spell summonSpell = new SummonSpell(TargetPlayer.OPPONENT, new Whelp(), new Whelp());
-		leeroyJenkins.setBattlecry(Battlecry.createBattlecry(summonSpell));
-		return leeroyJenkins;
 	}
 }

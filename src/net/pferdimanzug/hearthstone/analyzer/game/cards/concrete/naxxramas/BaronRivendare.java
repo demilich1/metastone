@@ -14,13 +14,13 @@ public class BaronRivendare extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		Minion baronRivendare = createMinion(GameTag.DOUBLE_DEATHRATTLES);
-		return baronRivendare;
+	public int getTypeId() {
+		return 413;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 413;
+	public Minion summon() {
+		Minion baronRivendare = createMinion(GameTag.DOUBLE_DEATHRATTLES);
+		return baronRivendare;
 	}
 }

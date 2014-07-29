@@ -24,7 +24,35 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class EliteTaurenChieftain extends MinionCard {
 
+	public EliteTaurenChieftain() {
+		super("Elite Tauren Chieftain", 5, 5, Rarity.LEGENDARY, HeroClass.ANY, 5);
+		setDescription("Battlecry: Give both players the power to ROCK! (with a Power Chord card)");
+		setTag(GameTag.BATTLECRY);
+	}
+
+	@Override
+	public int getTypeId() {
+		return 122;
+	}
+
+	@Override
+	public Minion summon() {
+		Minion eliteTaurenChieftain = createMinion();
+		Spell randomRockCard = new ReceiveRandomCardSpell(TargetPlayer.BOTH, new IAmMurloc(), new PowerOfTheHorde(), new RoguesDoIt());
+		eliteTaurenChieftain.setBattlecry(Battlecry.createBattlecry(randomRockCard));
+		return eliteTaurenChieftain;
+	}
+
 	private class IAmMurloc extends SpellCard {
+
+		public IAmMurloc() {
+			super("I Am Murloc", Rarity.FREE, HeroClass.ANY, 4);
+			setDescription("Summon three, four, or five 1/1 Murlocs.");
+			setCollectible(false);
+
+			setSpell(new IAmMurlocSpell());
+			setTargetRequirement(TargetSelection.NONE);
+		}
 
 		private class IAmMurlocSpell extends Spell {
 
@@ -54,15 +82,6 @@ public class EliteTaurenChieftain extends MinionCard {
 
 		}
 
-		public IAmMurloc() {
-			super("I Am Murloc", Rarity.FREE, HeroClass.ANY, 4);
-			setDescription("Summon three, four, or five 1/1 Murlocs.");
-			setCollectible(false);
-
-			setSpell(new IAmMurlocSpell());
-			setTargetRequirement(TargetSelection.NONE);
-		}
-
 	}
 
 	private class PowerOfTheHorde extends SpellCard {
@@ -90,24 +109,5 @@ public class EliteTaurenChieftain extends MinionCard {
 			setTargetRequirement(TargetSelection.ANY);
 		}
 
-	}
-
-	public EliteTaurenChieftain() {
-		super("Elite Tauren Chieftain", 5, 5, Rarity.LEGENDARY, HeroClass.ANY, 5);
-		setDescription("Battlecry: Give both players the power to ROCK! (with a Power Chord card)");
-		setTag(GameTag.BATTLECRY);
-	}
-
-	@Override
-	public int getTypeId() {
-		return 122;
-	}
-
-	@Override
-	public Minion summon() {
-		Minion eliteTaurenChieftain = createMinion();
-		Spell randomRockCard = new ReceiveRandomCardSpell(TargetPlayer.BOTH, new IAmMurloc(), new PowerOfTheHorde(), new RoguesDoIt());
-		eliteTaurenChieftain.setBattlecry(Battlecry.createBattlecry(randomRockCard));
-		return eliteTaurenChieftain;
 	}
 }

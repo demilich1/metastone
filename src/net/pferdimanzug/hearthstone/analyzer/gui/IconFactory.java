@@ -5,6 +5,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.HeroPower;
+import net.pferdimanzug.hearthstone.analyzer.gui.dialog.DialogType;
 
 public class IconFactory {
 
@@ -119,6 +120,28 @@ public class IconFactory {
 		}
 		return color;
 
+	}
+	
+	public static Image getDialogIcon(DialogType dialogType) {
+		String iconPath = RESOURCE_PATH + "/img/ui/";
+		switch (dialogType) {
+		case CONFIRM:
+			iconPath += "confirm.png";
+			break;
+		case ERROR:
+			iconPath += "error.png";
+			break;
+		case INFO:
+			iconPath += "info.png";
+			break;
+		case WARNING:
+			iconPath += "warning.png";
+			break;
+		default:
+			break;
+		
+		}
+		return new Image(iconPath);
 	}
 
 	public static Image getSummonHelper() {

@@ -12,6 +12,20 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Swipe extends SpellCard {
 
+	public Swipe() {
+		super("Swipe", Rarity.FREE, HeroClass.DRUID, 4);
+		setDescription("Deal $4 damage to an enemy and $1 damage to all other enemies.");
+		setSpell(new SwipeSpell(4, 1));
+		setTargetRequirement(TargetSelection.ENEMY_CHARACTERS);
+	}
+
+	@Override
+	public int getTypeId() {
+		return 23;
+	}
+
+
+
 	private class SwipeSpell extends Spell {
 
 		private final int primaryDamage;
@@ -35,19 +49,5 @@ public class Swipe extends SpellCard {
 			}
 		}
 
-	}
-
-	public Swipe() {
-		super("Swipe", Rarity.FREE, HeroClass.DRUID, 4);
-		setDescription("Deal $4 damage to an enemy and $1 damage to all other enemies.");
-		setSpell(new SwipeSpell(4, 1));
-		setTargetRequirement(TargetSelection.ENEMY_CHARACTERS);
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 23;
 	}
 }

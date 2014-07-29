@@ -17,6 +17,25 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class AlarmOBot extends MinionCard {
 
+	public AlarmOBot() {
+		super("Alarm-o-bot", 0, 3, Rarity.RARE, HeroClass.ANY, 3);
+		setDescription("At the start of your turn, swap this minion with a random one in your hand.");
+	}
+
+	@Override
+	public int getTypeId() {
+		return 80;
+	}
+
+	@Override
+	public Minion summon() {
+		Minion alarmOBot = createMinion();
+		Spell alarmOBotSpell = new AlarmOBotSpell();
+		alarmOBotSpell.setTarget(EntityReference.SELF);
+		alarmOBot.setSpellTrigger(new SpellTrigger(new AlarmOBotTrigger(), alarmOBotSpell));
+		return alarmOBot;
+	}
+
 	private class AlarmOBotSpell extends ReturnMinionToHandSpell {
 
 		@Override
@@ -31,6 +50,8 @@ public class AlarmOBot extends MinionCard {
 
 	}
 
+
+
 	private class AlarmOBotTrigger extends TurnStartTrigger {
 
 		@Override
@@ -42,26 +63,5 @@ public class AlarmOBot extends MinionCard {
 			return owningPlayer.getHand().hasCardOfType(CardType.MINION);
 
 		}
-	}
-
-	public AlarmOBot() {
-		super("Alarm-o-bot", 0, 3, Rarity.RARE, HeroClass.ANY, 3);
-		setDescription("At the start of your turn, swap this minion with a random one in your hand.");
-	}
-
-	@Override
-	public int getTypeId() {
-		return 80;
-	}
-
-
-
-	@Override
-	public Minion summon() {
-		Minion alarmOBot = createMinion();
-		Spell alarmOBotSpell = new AlarmOBotSpell();
-		alarmOBotSpell.setTarget(EntityReference.SELF);
-		alarmOBot.setSpellTrigger(new SpellTrigger(new AlarmOBotTrigger(), alarmOBotSpell));
-		return alarmOBot;
 	}
 }

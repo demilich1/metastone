@@ -16,6 +16,20 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Shadowform extends SpellCard {
 
+	public Shadowform() {
+		super("Shadowform", Rarity.EPIC, HeroClass.PRIEST, 3);
+		setDescription("Your Hero Power becomes 'Deal 2 damage'. If already in Shadowform: 3 damage.");
+		
+		setSpell(new ShadowformSpell());
+		setPredefinedTarget(EntityReference.FRIENDLY_HERO);
+		setTargetRequirement(TargetSelection.NONE);
+	}
+	
+	@Override
+	public int getTypeId() {
+		return 277;
+	}
+	
 	private class MindShatter extends HeroPower {
 
 		public MindShatter() {
@@ -35,7 +49,10 @@ public class Shadowform extends SpellCard {
 		}
 		
 	}
-	
+
+
+
+
 	private class ShadowformSpell extends Spell {
 
 		@Override
@@ -47,22 +64,5 @@ public class Shadowform extends SpellCard {
 			context.getLogic().castSpell(player.getId(), changeHeroPowerSpell);
 		}
 		
-	}
-	
-	public Shadowform() {
-		super("Shadowform", Rarity.EPIC, HeroClass.PRIEST, 3);
-		setDescription("Your Hero Power becomes 'Deal 2 damage'. If already in Shadowform: 3 damage.");
-		
-		setSpell(new ShadowformSpell());
-		setPredefinedTarget(EntityReference.FRIENDLY_HERO);
-		setTargetRequirement(TargetSelection.NONE);
-	}
-
-
-
-
-	@Override
-	public int getTypeId() {
-		return 277;
 	}
 }

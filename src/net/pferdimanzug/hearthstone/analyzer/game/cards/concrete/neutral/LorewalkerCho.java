@@ -16,16 +16,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class LorewalkerCho extends MinionCard {
 
-	private class LorewalkerChoSpell extends Spell {
-
-		@Override
-		protected void onCast(GameContext context, Player player, Entity target) {
-			Card targetCard = (Card) target;
-			Player opponent = context.getOpponent(player);
-			context.getLogic().receiveCard(opponent.getId(), targetCard.clone());
-		}
-	}
-
 	public LorewalkerCho() {
 		super("Lorewalker Cho", 0, 4, Rarity.LEGENDARY, HeroClass.ANY, 2);
 		setDescription("Whenever a player casts a spell, put a copy into the other player's hand.");
@@ -36,7 +26,6 @@ public class LorewalkerCho extends MinionCard {
 		return 158;
 	}
 
-
 	@Override
 	public Minion summon() {
 		Minion lorewalkerCho = createMinion();
@@ -45,5 +34,16 @@ public class LorewalkerCho extends MinionCard {
 		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(TargetPlayer.BOTH), copySpell);
 		lorewalkerCho.setSpellTrigger(trigger);
 		return lorewalkerCho;
+	}
+
+
+	private class LorewalkerChoSpell extends Spell {
+
+		@Override
+		protected void onCast(GameContext context, Player player, Entity target) {
+			Card targetCard = (Card) target;
+			Player opponent = context.getOpponent(player);
+			context.getLogic().receiveCard(opponent.getId(), targetCard.clone());
+		}
 	}
 }

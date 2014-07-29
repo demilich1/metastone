@@ -15,6 +15,18 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class UnleashTheHounds extends SpellCard {
 
+	public UnleashTheHounds() {
+		super("Unleash the Hounds", Rarity.COMMON, HeroClass.HUNTER, 3);
+		setDescription("For each enemy minion, summon a 1/1 Hound with Charge.");
+		setSpell(new UnleashTheHoundsSpell());
+		setTargetRequirement(TargetSelection.NONE);
+	}
+	
+	@Override
+	public int getTypeId() {
+		return 50;
+	}
+	
 	private class Hound extends MinionCard {
 
 		public Hound() {
@@ -30,7 +42,9 @@ public class UnleashTheHounds extends SpellCard {
 		}
 		
 	}
-	
+
+
+
 	private class UnleashTheHoundsSpell extends SummonSpell {
 		public UnleashTheHoundsSpell() {
 			super(new Hound());
@@ -43,19 +57,5 @@ public class UnleashTheHounds extends SpellCard {
 				super.onCast(context, player, target);
 			}
 		}
-	}
-	
-	public UnleashTheHounds() {
-		super("Unleash the Hounds", Rarity.COMMON, HeroClass.HUNTER, 3);
-		setDescription("For each enemy minion, summon a 1/1 Hound with Charge.");
-		setSpell(new UnleashTheHoundsSpell());
-		setTargetRequirement(TargetSelection.NONE);
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 50;
 	}
 }

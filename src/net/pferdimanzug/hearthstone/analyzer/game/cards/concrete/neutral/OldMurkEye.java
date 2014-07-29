@@ -19,6 +19,29 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class OldMurkEye extends MinionCard {
 
+	public OldMurkEye() {
+		super("Old Murk-Eye", 2, 4, Rarity.LEGENDARY, HeroClass.ANY, 4);
+		setDescription("Charge. Has +1 Attack for each other Murloc on the battlefield.");
+		setRace(Race.MURLOC);
+	}
+
+	@Override
+	public int getTypeId() {
+		return 180;
+	}
+
+	@Override
+	public Minion summon() {
+		Minion oldMurkEye = createMinion(GameTag.CHARGE);
+		Spell buffSpell = new OldMurkEyeSpell();
+		buffSpell.setTarget(EntityReference.SELF);
+		SpellTrigger trigger = new SpellTrigger(new BoardChangedTrigger(), buffSpell);
+		oldMurkEye.setSpellTrigger(trigger);
+		return oldMurkEye;
+	}
+
+
+
 	private class OldMurkEyeSpell extends Spell {
 
 		@Override
@@ -40,28 +63,5 @@ public class OldMurkEye extends MinionCard {
 			targetActor.modifyTag(GameTag.ATTACK_BONUS, attackBonus);
 		}
 
-	}
-
-	public OldMurkEye() {
-		super("Old Murk-Eye", 2, 4, Rarity.LEGENDARY, HeroClass.ANY, 4);
-		setDescription("Charge. Has +1 Attack for each other Murloc on the battlefield.");
-		setRace(Race.MURLOC);
-	}
-
-	@Override
-	public int getTypeId() {
-		return 180;
-	}
-
-
-
-	@Override
-	public Minion summon() {
-		Minion oldMurkEye = createMinion(GameTag.CHARGE);
-		Spell buffSpell = new OldMurkEyeSpell();
-		buffSpell.setTarget(EntityReference.SELF);
-		SpellTrigger trigger = new SpellTrigger(new BoardChangedTrigger(), buffSpell);
-		oldMurkEye.setSpellTrigger(trigger);
-		return oldMurkEye;
 	}
 }

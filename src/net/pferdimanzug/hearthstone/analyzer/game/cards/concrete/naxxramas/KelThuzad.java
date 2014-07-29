@@ -15,6 +15,24 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class KelThuzad extends MinionCard {
 
+	public KelThuzad() {
+		super("Kel'Thuzad", 6, 8, Rarity.LEGENDARY, HeroClass.ANY, 8);
+		setDescription("At the end of the turn, summon all friendly minions that died this turn.");
+	}
+
+	@Override
+	public int getTypeId() {
+		return 414;
+	}
+	
+	@Override
+	public Minion summon() {
+		Minion kelThuzad = createMinion();
+		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), new KelThuzadSpell());
+		kelThuzad.setSpellTrigger(trigger);
+		return kelThuzad;
+	}
+
 	private class KelThuzadSpell extends Spell {
 		
 		{
@@ -32,23 +50,5 @@ public class KelThuzad extends MinionCard {
 			}
 		}
 		
-	}
-
-	public KelThuzad() {
-		super("Kel'Thuzad", 6, 8, Rarity.LEGENDARY, HeroClass.ANY, 8);
-		setDescription("At the end of the turn, summon all friendly minions that died this turn.");
-	}
-	
-	@Override
-	public int getTypeId() {
-		return 414;
-	}
-
-	@Override
-	public Minion summon() {
-		Minion kelThuzad = createMinion();
-		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), new KelThuzadSpell());
-		kelThuzad.setSpellTrigger(trigger);
-		return kelThuzad;
 	}
 }

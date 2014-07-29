@@ -17,7 +17,6 @@
 	<classpathentry kind="lib" path="lib/nitty-gritty-mvc.jar"/>
 	<classpathentry kind="con" path="org.testng.TESTNG_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/gson"/>
-	<classpathentry kind="lib" path="lib/controlsfx/controlsfx-8.0.6.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/apache-commons-io"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/apache-commons-lang"/>
 	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_11/jre/lib/ext/jfxrt.jar"/>

@@ -4,10 +4,26 @@
 
 #bordered-panel {
 	-fx-background-color: navajowhite;
+	-fx-background-radius: 10;
 	-fx-border-width: 2;
 	-fx-border-color: slategrey;
 	-fx-border-radius: 10;
 	-fx-border-insets: 4;
+}
+
+#bordered-dialog {
+	-fx-background-color: navajowhite;
+	-fx-background-radius: 10;
+	-fx-border-width: 3;
+	-fx-border-color: darkslategrey;
+	-fx-border-radius: 10;
+	-fx-border-insets: 4;
+}
+
+#dialog-text {
+	-fx-font-size: 10pt;
+    -fx-font-family: "Arial";
+    -fx-text-fill: black;
 }
 
 #side-bar {

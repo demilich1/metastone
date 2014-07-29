@@ -9,6 +9,26 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
 
 public class HarvestGolem extends MinionCard {
 
+	public HarvestGolem() {
+		super("Harvest Golem", 2, 3, Rarity.COMMON, HeroClass.ANY, 3);
+		setDescription("Deathrattle: Summon a 2/1 Damaged Golem.");
+	}
+
+	@Override
+	public int getTypeId() {
+		return 140;
+	}
+
+	@Override
+	public Minion summon() {
+		Spell deathrattle = new SummonSpell(new DamagedGolem());
+		Minion harvestGolem = createMinion();
+		harvestGolem.addDeathrattle(deathrattle);
+		return harvestGolem;
+	}
+
+
+
 	private class DamagedGolem extends MinionCard {
 
 		public DamagedGolem() {
@@ -21,25 +41,5 @@ public class HarvestGolem extends MinionCard {
 			return createMinion();
 		}
 
-	}
-
-	public HarvestGolem() {
-		super("Harvest Golem", 2, 3, Rarity.COMMON, HeroClass.ANY, 3);
-		setDescription("Deathrattle: Summon a 2/1 Damaged Golem.");
-	}
-
-	@Override
-	public int getTypeId() {
-		return 140;
-	}
-
-
-
-	@Override
-	public Minion summon() {
-		Spell deathrattle = new SummonSpell(new DamagedGolem());
-		Minion harvestGolem = createMinion();
-		harvestGolem.addDeathrattle(deathrattle);
-		return harvestGolem;
 	}
 }

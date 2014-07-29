@@ -30,21 +30,17 @@ public class Aura extends SpellTrigger {
 	
 	protected boolean affects(GameContext context, Entity target) {
 		if (target.getEntityType() != EntityType.MINION) {
-			System.out.println("Entity not minion");
 			return false;
 		}
 		if (target.getReference().equals(getHostReference())) {
-			System.out.println("Entity is HOST");
 			return false;
 		}
 
 		Actor targetActor = (Actor) target;
 		if (targetActor.isDead()) {
-			System.out.println("Entity is DEAD");
 			return false;
 		}
 
-		System.out.println("Entity is affected!");
 		return true;
 	}
 	
@@ -63,11 +59,9 @@ public class Aura extends SpellTrigger {
 		GameContext context = event.getGameContext();
 		Player owner = context.getPlayer(getOwner());
 		Actor sourceActor = (Actor) context.resolveSingleTarget(getOwner(), getHostReference());
-		System.out.println("Event received for " + sourceActor);
 		List<Entity> resolvedTargets = context.resolveTarget(owner, sourceActor, targets);
 
 		for (Entity target : resolvedTargets) {
-			System.out.println("Aura of " + sourceActor + " is checking potential target " + target);
 			if (!affects(context, target) && !affectedEntities.contains(target.getId())) {
 				continue;
 			} else if (affects(context, target) && !affectedEntities.contains(target.getId())) {

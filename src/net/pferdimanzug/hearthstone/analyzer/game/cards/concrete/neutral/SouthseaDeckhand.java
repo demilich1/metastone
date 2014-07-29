@@ -16,22 +16,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class SouthseaDeckhand extends MinionCard {
 
-	private class ChargeWhileWeaponEquipped extends ApplyTagSpell {
-
-		public ChargeWhileWeaponEquipped() {
-			super(GameTag.CHARGE);
-		}
-
-		@Override
-		protected void onCast(GameContext context, Player player, Entity target) {
-			if (player.getHero().getWeapon() == null) {
-				return;
-			}
-			super.onCast(context, player, target);
-		}
-
-	}
-
 	public SouthseaDeckhand() {
 		super("Southsea Deckhand", 2, 1, Rarity.COMMON, HeroClass.ANY, 1);
 		setDescription("Has Charge while you have a weapon equipped.");
@@ -52,5 +36,21 @@ public class SouthseaDeckhand extends MinionCard {
 		Minion southseaDeckhand = createMinion();
 		southseaDeckhand.setBattlecry(battlecry);
 		return southseaDeckhand;
+	}
+
+	private class ChargeWhileWeaponEquipped extends ApplyTagSpell {
+
+		public ChargeWhileWeaponEquipped() {
+			super(GameTag.CHARGE);
+		}
+
+		@Override
+		protected void onCast(GameContext context, Player player, Entity target) {
+			if (player.getHero().getWeapon() == null) {
+				return;
+			}
+			super.onCast(context, player, target);
+		}
+
 	}
 }

@@ -15,6 +15,21 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class BlessingOfWisdom extends SpellCard {
 
+	public BlessingOfWisdom() {
+		super("Blessing of Wisdom", Rarity.COMMON, HeroClass.PALADIN, 1);
+		setDescription("Choose a minion. Whenever it attacks, draw a card.");
+		SpellTrigger trigger = new SpellTrigger(new BlessingOfWisdomTrigger(), new DrawCardSpell());
+		setSpell(new AddSpellTriggerSpell(trigger));
+		setTargetRequirement(TargetSelection.MINIONS);
+	}
+	
+	@Override
+	public int getTypeId() {
+		return 240;
+	}
+
+
+
 	private class BlessingOfWisdomTrigger extends GameEventTrigger {
 
 		@Override
@@ -28,20 +43,5 @@ public class BlessingOfWisdom extends SpellCard {
 			return GameEventType.PHYSICAL_ATTACK;
 		}
 
-	}
-	
-	public BlessingOfWisdom() {
-		super("Blessing of Wisdom", Rarity.COMMON, HeroClass.PALADIN, 1);
-		setDescription("Choose a minion. Whenever it attacks, draw a card.");
-		SpellTrigger trigger = new SpellTrigger(new BlessingOfWisdomTrigger(), new DrawCardSpell());
-		setSpell(new AddSpellTriggerSpell(trigger));
-		setTargetRequirement(TargetSelection.MINIONS);
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 240;
 	}
 }

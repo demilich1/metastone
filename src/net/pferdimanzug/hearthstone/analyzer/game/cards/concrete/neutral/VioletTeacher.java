@@ -12,6 +12,27 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 
 public class VioletTeacher extends MinionCard {
 
+	public VioletTeacher() {
+		super("Violet Teacher", 3, 5, Rarity.RARE, HeroClass.ANY, 4);
+		setDescription("Whenever you cast a spell, summon a 1/1 Violet Apprentice.");
+	}
+
+	@Override
+	public int getTypeId() {
+		return 222;
+	}
+
+	@Override
+	public Minion summon() {
+		Minion violetTeacher = createMinion();
+		Spell summonSpell = new SummonSpell(new VioletApprentice());
+		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(TargetPlayer.SELF), summonSpell);
+		violetTeacher.setSpellTrigger(trigger);
+		return violetTeacher;
+	}
+
+
+
 	private class VioletApprentice extends MinionCard {
 
 		public VioletApprentice() {
@@ -24,26 +45,5 @@ public class VioletTeacher extends MinionCard {
 			return createMinion();
 		}
 
-	}
-
-	public VioletTeacher() {
-		super("Violet Teacher", 3, 5, Rarity.RARE, HeroClass.ANY, 4);
-		setDescription("Whenever you cast a spell, summon a 1/1 Violet Apprentice.");
-	}
-
-	@Override
-	public int getTypeId() {
-		return 222;
-	}
-
-
-
-	@Override
-	public Minion summon() {
-		Minion violetTeacher = createMinion();
-		Spell summonSpell = new SummonSpell(new VioletApprentice());
-		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(TargetPlayer.SELF), summonSpell);
-		violetTeacher.setSpellTrigger(trigger);
-		return violetTeacher;
 	}
 }

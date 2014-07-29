@@ -16,6 +16,22 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class ForceOfNature extends SpellCard {
 
+	public ForceOfNature() {
+		super("Force of Nature", Rarity.EPIC, HeroClass.DRUID, 6);
+		setDescription("Summon three 2/2 Treants with Charge that die at the end of the turn.");
+
+		//TODO: check if this card can be played when board is full
+		setSpell(new SummonSpell(new Treant(), new Treant(), new Treant()));
+		setTargetRequirement(TargetSelection.NONE);
+	}
+
+	@Override
+	public int getTypeId() {
+		return 7;
+	}
+
+
+
 	private class Treant extends MinionCard {
 
 		public Treant() {
@@ -34,21 +50,5 @@ public class ForceOfNature extends SpellCard {
 			return treant;
 		}
 
-	}
-
-	public ForceOfNature() {
-		super("Force of Nature", Rarity.EPIC, HeroClass.DRUID, 6);
-		setDescription("Summon three 2/2 Treants with Charge that die at the end of the turn.");
-
-		//TODO: check if this card can be played when board is full
-		setSpell(new SummonSpell(new Treant(), new Treant(), new Treant()));
-		setTargetRequirement(TargetSelection.NONE);
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 7;
 	}
 }

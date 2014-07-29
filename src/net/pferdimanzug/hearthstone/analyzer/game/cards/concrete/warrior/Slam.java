@@ -12,6 +12,20 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Slam extends SpellCard {
 
+	public Slam() {
+		super("Slam", Rarity.COMMON, HeroClass.WARRIOR, 2);
+		setDescription("Deal $2 damage to a minion. If it survives, draw a card.");
+		setSpell(new SlamSpell());
+		setTargetRequirement(TargetSelection.MINIONS);
+	}
+
+	@Override
+	public int getTypeId() {
+		return 380;
+	}
+
+
+
 	private class SlamSpell extends DamageSpell {
 
 		public SlamSpell() {
@@ -27,19 +41,5 @@ public class Slam extends SpellCard {
 			}
 		}
 
-	}
-
-	public Slam() {
-		super("Slam", Rarity.COMMON, HeroClass.WARRIOR, 2);
-		setDescription("Deal $2 damage to a minion. If it survives, draw a card.");
-		setSpell(new SlamSpell());
-		setTargetRequirement(TargetSelection.MINIONS);
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 380;
 	}
 }

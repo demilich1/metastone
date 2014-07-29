@@ -15,6 +15,21 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Shadowflame extends SpellCard {
 
+	public Shadowflame() {
+		super("Shadowflame", Rarity.RARE, HeroClass.WARLOCK, 4);
+		setDescription("Destroy a friendly minion and deal its Attack damage to all enemy minions.");
+
+		setSpell(new ShadowflameSpell());
+		setTargetRequirement(TargetSelection.FRIENDLY_MINIONS);
+	}
+
+	@Override
+	public int getTypeId() {
+		return 351;
+	}
+
+
+
 	private class ShadowflameSpell extends DestroySpell {
 
 		@Override
@@ -31,20 +46,5 @@ public class Shadowflame extends SpellCard {
 			super.onCast(context, player, target);
 		}
 
-	}
-
-	public Shadowflame() {
-		super("Shadowflame", Rarity.RARE, HeroClass.WARLOCK, 4);
-		setDescription("Destroy a friendly minion and deal its Attack damage to all enemy minions.");
-
-		setSpell(new ShadowflameSpell());
-		setTargetRequirement(TargetSelection.FRIENDLY_MINIONS);
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 351;
 	}
 }

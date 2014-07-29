@@ -15,6 +15,26 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class CrazedAlchemist extends MinionCard {
 
+	public CrazedAlchemist() {
+		super("Crazed Alchemist", 2, 2, Rarity.RARE, HeroClass.ANY, 2);
+		setDescription("Battlecry: Swap the Attack and Health of a minion.");
+	}
+
+	@Override
+	public int getTypeId() {
+		return 109;
+	}
+	
+	@Override
+	public Minion summon() {
+		Minion crazedAlchemist = createMinion();
+		Battlecry battlecry = Battlecry.createBattlecry(new SwapAttackAndHpSpell(), TargetSelection.MINIONS);
+		crazedAlchemist.setBattlecry(battlecry);
+		return crazedAlchemist;
+	}
+
+
+
 	private class SwapAttackAndHpSpell extends Spell {
 
 		@Override
@@ -27,25 +47,5 @@ public class CrazedAlchemist extends MinionCard {
 			targetActor.setHp(targetActor.getMaxHp());
 		}
 		
-	}
-
-	public CrazedAlchemist() {
-		super("Crazed Alchemist", 2, 2, Rarity.RARE, HeroClass.ANY, 2);
-		setDescription("Battlecry: Swap the Attack and Health of a minion.");
-	}
-	
-	@Override
-	public int getTypeId() {
-		return 109;
-	}
-
-
-
-	@Override
-	public Minion summon() {
-		Minion crazedAlchemist = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new SwapAttackAndHpSpell(), TargetSelection.MINIONS);
-		crazedAlchemist.setBattlecry(battlecry);
-		return crazedAlchemist;
 	}
 }

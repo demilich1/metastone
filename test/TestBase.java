@@ -19,30 +19,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 
 public class TestBase {
 	
-	private static class NullBehaviour implements IBehaviour {
-
-		@Override
-		public String getName() {
-			return "Null Behaviour";
-		}
-
-		@Override
-		public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
-			return new ArrayList<Card>();
-		}
-
-		@Override
-		public Entity provideTargetFor(Player player, GameAction action) {
-			return null;
-		}
-
-		@Override
-		public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
-			return null;
-		}
-		
-	}
-	
 	protected static void attack(GameContext context, Player player, Entity attacker, Entity target) {
 		PhysicalAttackAction physicalAttackAction = new PhysicalAttackAction(attacker.getReference());
 		physicalAttackAction.setTarget(target);
@@ -87,6 +63,30 @@ public class TestBase {
 		context.getLogic().receiveCard(player.getId(), minionCard);
 		context.getLogic().performGameAction(player.getId(), minionCard.play());
 		return getSummonedMinion(player.getMinions());
+	}
+	
+	private static class NullBehaviour implements IBehaviour {
+
+		@Override
+		public String getName() {
+			return "Null Behaviour";
+		}
+
+		@Override
+		public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
+			return new ArrayList<Card>();
+		}
+
+		@Override
+		public Entity provideTargetFor(Player player, GameAction action) {
+			return null;
+		}
+
+		@Override
+		public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
+			return null;
+		}
+		
 	}
 
 }

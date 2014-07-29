@@ -13,6 +13,21 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class PoisonSeeds extends SpellCard {
 
+	public PoisonSeeds() {
+		super("Poison Seeds", Rarity.COMMON, HeroClass.DRUID, 4);
+		setDescription("Destroy all minions and summon 2/2 treants to replace them");
+
+		setSpell(new MetaSpell(new DestroySpell(), new SummonSpell(new Treant())));
+		setTargetRequirement(TargetSelection.NONE);
+		setPredefinedTarget(EntityReference.ALL_MINIONS);
+	}
+
+	@Override
+	public int getTypeId() {
+		return 395;
+	}
+
+
 	private class Treant extends MinionCard {
 
 		public Treant() {
@@ -25,20 +40,5 @@ public class PoisonSeeds extends SpellCard {
 			return createMinion();
 		}
 
-	}
-
-	public PoisonSeeds() {
-		super("Poison Seeds", Rarity.COMMON, HeroClass.DRUID, 4);
-		setDescription("Destroy all minions and summon 2/2 treants to replace them");
-
-		setSpell(new MetaSpell(new DestroySpell(), new SummonSpell(new Treant())));
-		setTargetRequirement(TargetSelection.NONE);
-		setPredefinedTarget(EntityReference.ALL_MINIONS);
-	}
-
-
-	@Override
-	public int getTypeId() {
-		return 395;
 	}
 }

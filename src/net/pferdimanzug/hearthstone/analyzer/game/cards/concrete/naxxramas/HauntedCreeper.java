@@ -11,6 +11,26 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class HauntedCreeper extends MinionCard {
 
+	public HauntedCreeper() {
+		super("Haunted Creeper", 1, 2, Rarity.COMMON, HeroClass.ANY, 2);
+		setRace(Race.BEAST);
+	}
+
+	@Override
+	public int getTypeId() {
+		return 391;
+	}
+	
+	@Override
+	public Minion summon() {
+		Minion hauntedCreeper = createMinion();
+		Spell deathrattle = new SummonSpell(new SpectralSpider(), new SpectralSpider());
+		deathrattle.setTarget(EntityReference.NONE);
+		hauntedCreeper.addDeathrattle(deathrattle);
+		return hauntedCreeper;
+	}
+
+
 	private class SpectralSpider extends MinionCard {
 
 		public SpectralSpider() {
@@ -23,25 +43,5 @@ public class HauntedCreeper extends MinionCard {
 			return createMinion();
 		}
 		
-	}
-
-	public HauntedCreeper() {
-		super("Haunted Creeper", 1, 2, Rarity.COMMON, HeroClass.ANY, 2);
-		setRace(Race.BEAST);
-	}
-	
-	@Override
-	public int getTypeId() {
-		return 391;
-	}
-
-
-	@Override
-	public Minion summon() {
-		Minion hauntedCreeper = createMinion();
-		Spell deathrattle = new SummonSpell(new SpectralSpider(), new SpectralSpider());
-		deathrattle.setTarget(EntityReference.NONE);
-		hauntedCreeper.addDeathrattle(deathrattle);
-		return hauntedCreeper;
 	}
 }

@@ -16,6 +16,28 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class UnboundElemental extends MinionCard {
 
+	public UnboundElemental() {
+		super("Unbound Elemental", 2, 4, Rarity.COMMON, HeroClass.SHAMAN, 3);
+		setDescription("Whenever you play a card with Overload, gain +1/+1.");
+	}
+
+	@Override
+	public int getTypeId() {
+		return 331;
+	}
+	
+	@Override
+	public Minion summon() {
+		Minion unboundElemental =createMinion();
+		Spell buffSpell = new BuffSpell(1, 1);
+		buffSpell.setTarget(EntityReference.SELF);
+		SpellTrigger trigger = new SpellTrigger(new OverloadTrigger(), buffSpell);
+		unboundElemental.setSpellTrigger(trigger);
+		return unboundElemental;
+	}
+
+
+
 	private class OverloadTrigger extends GameEventTrigger {
 
 		@Override
@@ -29,27 +51,5 @@ public class UnboundElemental extends MinionCard {
 			return GameEventType.OVERLOAD;
 		}
 		
-	}
-
-	public UnboundElemental() {
-		super("Unbound Elemental", 2, 4, Rarity.COMMON, HeroClass.SHAMAN, 3);
-		setDescription("Whenever you play a card with Overload, gain +1/+1.");
-	}
-	
-	@Override
-	public int getTypeId() {
-		return 331;
-	}
-
-
-
-	@Override
-	public Minion summon() {
-		Minion unboundElemental =createMinion();
-		Spell buffSpell = new BuffSpell(1, 1);
-		buffSpell.setTarget(EntityReference.SELF);
-		SpellTrigger trigger = new SpellTrigger(new OverloadTrigger(), buffSpell);
-		unboundElemental.setSpellTrigger(trigger);
-		return unboundElemental;
 	}
 }

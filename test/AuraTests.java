@@ -20,6 +20,41 @@ import org.testng.annotations.Test;
 public class AuraTests extends BasicTests {
 
 	@Test
+	public void testAdjacentAura() {
+		GameContext context = createContext(new Jaina(), new Garrosh());
+		Player player = context.getPlayer1();
+
+		TestMinionCard minionCard = new TestMinionCard(1, 1);
+		Minion testMinion1 = playMinionCard(context, player, minionCard);
+
+		MinionCard direWolfCard = new DireWolfAlpha();
+		Minion direWolf = playMinionCard(context, player, direWolfCard);
+
+		minionCard = new TestMinionCard(5, 5);
+		Minion testMinion2 = playMinionCard(context, player, minionCard);
+		minionCard = new TestMinionCard(5, 5);
+		Minion testMinion3 = playMinionCard(context, player, minionCard);
+
+		Assert.assertEquals(direWolf.getAttack(), 2);
+		Assert.assertEquals(testMinion1.getAttack(), 2);
+		Assert.assertEquals(testMinion2.getAttack(), 6);
+		Assert.assertEquals(testMinion3.getAttack(), 5);
+
+		Card destroyCard = new Assassinate();
+		context.getLogic().receiveCard(player.getId(), destroyCard);
+		GameAction destroyAction = destroyCard.play();
+		destroyAction.setTarget(testMinion2);
+		context.getLogic().performGameAction(player.getId(), destroyAction);
+		Assert.assertEquals(testMinion1.getAttack(), 2);
+		Assert.assertEquals(direWolf.getAttack(), 2);
+		Assert.assertEquals(testMinion3.getAttack(), 6);
+
+		playCard(context, player, new Hellfire());
+		Assert.assertEquals(direWolf.getAttack(), 2);
+		Assert.assertEquals(testMinion3.getAttack(), 5);
+	}
+
+	@Test
 	public void testAura() {
 		GameContext context = createContext(new Jaina(), new Garrosh());
 		Player player = context.getPlayer1();
@@ -55,41 +90,6 @@ public class AuraTests extends BasicTests {
 		minion2 = playMinionCard(context, player, minionCard);
 		Assert.assertEquals(minion1.getAttack(), 1);
 		Assert.assertEquals(minion2.getAttack(), 2);
-	}
-
-	@Test
-	public void testAdjacentAura() {
-		GameContext context = createContext(new Jaina(), new Garrosh());
-		Player player = context.getPlayer1();
-
-		TestMinionCard minionCard = new TestMinionCard(1, 1);
-		Minion testMinion1 = playMinionCard(context, player, minionCard);
-
-		MinionCard direWolfCard = new DireWolfAlpha();
-		Minion direWolf = playMinionCard(context, player, direWolfCard);
-
-		minionCard = new TestMinionCard(5, 5);
-		Minion testMinion2 = playMinionCard(context, player, minionCard);
-		minionCard = new TestMinionCard(5, 5);
-		Minion testMinion3 = playMinionCard(context, player, minionCard);
-
-		Assert.assertEquals(direWolf.getAttack(), 2);
-		Assert.assertEquals(testMinion1.getAttack(), 2);
-		Assert.assertEquals(testMinion2.getAttack(), 6);
-		Assert.assertEquals(testMinion3.getAttack(), 5);
-
-		Card destroyCard = new Assassinate();
-		context.getLogic().receiveCard(player.getId(), destroyCard);
-		GameAction destroyAction = destroyCard.play();
-		destroyAction.setTarget(testMinion2);
-		context.getLogic().performGameAction(player.getId(), destroyAction);
-		Assert.assertEquals(testMinion1.getAttack(), 2);
-		Assert.assertEquals(direWolf.getAttack(), 2);
-		Assert.assertEquals(testMinion3.getAttack(), 6);
-
-		playCard(context, player, new Hellfire());
-		Assert.assertEquals(direWolf.getAttack(), 2);
-		Assert.assertEquals(testMinion3.getAttack(), 5);
 	}
 
 }

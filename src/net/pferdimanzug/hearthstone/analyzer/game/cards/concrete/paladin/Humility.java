@@ -12,6 +12,20 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Humility extends SpellCard {
 
+	public Humility() {
+		super("Humility", Rarity.FREE, HeroClass.PALADIN, 1);
+		setDescription("Change a minion's Attack to 1.");
+		setSpell(new HumilitySpell());
+		setTargetRequirement(TargetSelection.MINIONS);
+	}
+	
+	@Override
+	public int getTypeId() {
+		return 250;
+	}
+
+
+
 	private class HumilitySpell extends Spell {
 
 		@Override
@@ -20,19 +34,5 @@ public class Humility extends SpellCard {
 			target.setTag(GameTag.ATTACK_BONUS, 0);
 		}
 		
-	}
-	
-	public Humility() {
-		super("Humility", Rarity.FREE, HeroClass.PALADIN, 1);
-		setDescription("Change a minion's Attack to 1.");
-		setSpell(new HumilitySpell());
-		setTargetRequirement(TargetSelection.MINIONS);
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 250;
 	}
 }

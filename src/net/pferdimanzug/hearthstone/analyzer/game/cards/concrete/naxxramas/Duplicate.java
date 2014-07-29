@@ -15,20 +15,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class Duplicate extends SecretCard {
 
-	private class DuplicateSpell extends Spell {
-
-		@Override
-		protected void onCast(GameContext context, Player player, Entity target) {
-			System.out.println("Casting duplicate on " + target + " spell target is " + getTarget());
-			Minion minion = (Minion) target;
-
-			Card sourceCard = minion.getSourceCard();
-			context.getLogic().receiveCard(player.getId(), sourceCard.clone());
-			context.getLogic().receiveCard(player.getId(), sourceCard.clone());
-		}
-		
-	}
-
 	public Duplicate() {
 		super("Duplicate", Rarity.COMMON, HeroClass.MAGE, 3);
 		setDescription("Secret: When a friendly minion dies, put 2 copies of it in your hand.");
@@ -41,5 +27,19 @@ public class Duplicate extends SecretCard {
 	@Override
 	public int getTypeId() {
 		return 389;
+	}
+
+	private class DuplicateSpell extends Spell {
+
+		@Override
+		protected void onCast(GameContext context, Player player, Entity target) {
+			System.out.println("Casting duplicate on " + target + " spell target is " + getTarget());
+			Minion minion = (Minion) target;
+
+			Card sourceCard = minion.getSourceCard();
+			context.getLogic().receiveCard(player.getId(), sourceCard.clone());
+			context.getLogic().receiveCard(player.getId(), sourceCard.clone());
+		}
+		
 	}
 }

@@ -22,6 +22,32 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class TotemicCall extends HeroPower {
 	
+	private final static String HEALING_TOTEM_NAME = "Healing Totem";
+	private final static String STONECLAW_TOTEM_NAME = "Stoneclaw Totem";
+	private final static String WRATH_OF_AIR_TOTEM_NAME = "Wrath of Air Totem";
+	private final static String SEARING_TOTEM_NAME = "Searing Totem";
+
+	public TotemicCall() {
+		super("Totemic Call", HeroClass.SHAMAN);
+		setTargetRequirement(TargetSelection.NONE);
+		setSpell(new TotemicCallSpell());
+	}
+	
+	@Override
+	public boolean canBeCast(GameContext context, Player player) {
+		if (player.getMinions().size() < 4) {
+			return true;
+		}
+		List<String> availableTotems = new ArrayList<String>();
+		availableTotems.add(HEALING_TOTEM_NAME);
+		availableTotems.add(SEARING_TOTEM_NAME);
+		availableTotems.add(STONECLAW_TOTEM_NAME);
+		availableTotems.add(WRATH_OF_AIR_TOTEM_NAME);
+		for(Minion minion : player.getMinions()) {
+			availableTotems.remove(minion.getName());
+		}
+		return !availableTotems.isEmpty();
+	}
 	private class HealingTotem extends MinionCard {
 
 		public HealingTotem() {
@@ -71,6 +97,7 @@ public class TotemicCall extends HeroPower {
 
 		
 	}
+
 	private class TotemicCallSpell extends Spell {
 
 		private boolean alreadyOnBoard(List<Minion> minions, String minionName) {
@@ -121,33 +148,6 @@ public class TotemicCall extends HeroPower {
 			wrathOfAirTotem.setTag(GameTag.SPELL_POWER, 1);
 			return wrathOfAirTotem;
 		}
-	}
-	
-	private final static String HEALING_TOTEM_NAME = "Healing Totem";
-	private final static String STONECLAW_TOTEM_NAME = "Stoneclaw Totem";
-	private final static String WRATH_OF_AIR_TOTEM_NAME = "Wrath of Air Totem";
-	private final static String SEARING_TOTEM_NAME = "Searing Totem";
-
-	public TotemicCall() {
-		super("Totemic Call", HeroClass.SHAMAN);
-		setTargetRequirement(TargetSelection.NONE);
-		setSpell(new TotemicCallSpell());
-	}
-
-	@Override
-	public boolean canBeCast(GameContext context, Player player) {
-		if (player.getMinions().size() < 4) {
-			return true;
-		}
-		List<String> availableTotems = new ArrayList<String>();
-		availableTotems.add(HEALING_TOTEM_NAME);
-		availableTotems.add(SEARING_TOTEM_NAME);
-		availableTotems.add(STONECLAW_TOTEM_NAME);
-		availableTotems.add(WRATH_OF_AIR_TOTEM_NAME);
-		for(Minion minion : player.getMinions()) {
-			availableTotems.remove(minion.getName());
-		}
-		return !availableTotems.isEmpty();
 	}
 
 }

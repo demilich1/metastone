@@ -15,6 +15,20 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class EyeForAnEye extends SecretCard {
 
+	public EyeForAnEye() {
+		super("Eye for an Eye", Rarity.COMMON, HeroClass.PALADIN, 1);
+		setDescription("Secret: When your hero takes damage, deal that much damage to the enemy hero.");
+
+		setSecret(new EyeForAnEyeSecret(this));
+	}
+
+	@Override
+	public int getTypeId() {
+		return 244;
+	}
+
+
+
 	private class EyeForAnEyeSecret extends Secret {
 		
 		public EyeForAnEyeSecret(Card source) {
@@ -31,19 +45,5 @@ public class EyeForAnEye extends SecretCard {
 			super.onFire(ownerId, spell, event);
 		}
 
-	}
-
-	public EyeForAnEye() {
-		super("Eye for an Eye", Rarity.COMMON, HeroClass.PALADIN, 1);
-		setDescription("Secret: When your hero takes damage, deal that much damage to the enemy hero.");
-
-		setSecret(new EyeForAnEyeSecret(this));
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 244;
 	}
 }

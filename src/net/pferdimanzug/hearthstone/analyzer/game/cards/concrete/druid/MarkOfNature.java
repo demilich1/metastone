@@ -13,6 +13,18 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class MarkOfNature extends ChooseOneCard {
 
+	public MarkOfNature() {
+		super("Mark of Nature", CardType.SPELL, Rarity.COMMON, HeroClass.DRUID, 3);
+		setDescription("Choose One - Give a minion +4 Attack; or +4 Health and Taunt.");
+		setCard1(new AttackBuff());
+		setCard2(new HpBuff());
+	}
+	
+	@Override
+	public int getTypeId() {
+		return 12;
+	}
+	
 	private class AttackBuff extends SpellCard {
 
 		public AttackBuff() {
@@ -22,7 +34,10 @@ public class MarkOfNature extends ChooseOneCard {
 		}
 		
 	}
-	
+
+
+
+
 	private class HpBuff extends SpellCard {
 
 		public HpBuff() {
@@ -31,20 +46,5 @@ public class MarkOfNature extends ChooseOneCard {
 			setTargetRequirement(TargetSelection.MINIONS);
 		}
 		
-	}
-	
-	public MarkOfNature() {
-		super("Mark of Nature", CardType.SPELL, Rarity.COMMON, HeroClass.DRUID, 3);
-		setDescription("Choose One - Give a minion +4 Attack; or +4 Health and Taunt.");
-		setCard1(new AttackBuff());
-		setCard2(new HpBuff());
-	}
-
-
-
-
-	@Override
-	public int getTypeId() {
-		return 12;
 	}
 }

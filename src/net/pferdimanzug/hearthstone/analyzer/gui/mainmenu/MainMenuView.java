@@ -16,7 +16,7 @@ public class MainMenuView extends BorderPane {
 
 	@FXML
 	private Button playModeButton;
-	
+
 	@FXML
 	private Button simulationModeButton;
 
@@ -31,11 +31,10 @@ public class MainMenuView extends BorderPane {
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
-		
+
 		deckBuilderButton.setOnAction(actionEvent -> ApplicationFacade.getInstance().sendNotification(
 				GameNotification.DECK_BUILDER_SELECTED));
-		playModeButton.setOnAction(actionEvent -> ApplicationFacade.getInstance().sendNotification(
-				GameNotification.PLAY_MODE_SELECTED));
+		playModeButton.setOnAction(actionEvent -> ApplicationFacade.getInstance().sendNotification(GameNotification.PLAY_MODE_SELECTED));
 	}
 
 }

@@ -13,6 +13,28 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 
 public class IllidanStormrage extends MinionCard {
 
+	public IllidanStormrage() {
+		super("Illidan Stormrage", 7, 5, Rarity.LEGENDARY, HeroClass.ANY, 6);
+		setDescription("Whenever you play a card, summon a 2/1 Flame of Azzinoth.");
+		setRace(Race.DEMON);
+	}
+
+	@Override
+	public int getTypeId() {
+		return 143;
+	}
+
+	@Override
+	public Minion summon() {
+		Minion illidanStormrage = createMinion();
+		Spell summonSpell = new SummonSpell(new FlameOfAzzinoth());
+		SpellTrigger trigger = new SpellTrigger(new CardPlayedTrigger(TargetPlayer.SELF), summonSpell);
+		illidanStormrage.setSpellTrigger(trigger);
+		return illidanStormrage;
+	}
+
+
+
 	private class FlameOfAzzinoth extends MinionCard {
 
 		public FlameOfAzzinoth() {
@@ -25,27 +47,5 @@ public class IllidanStormrage extends MinionCard {
 			return createMinion();
 		}
 
-	}
-
-	public IllidanStormrage() {
-		super("Illidan Stormrage", 7, 5, Rarity.LEGENDARY, HeroClass.ANY, 6);
-		setDescription("Whenever you play a card, summon a 2/1 Flame of Azzinoth.");
-		setRace(Race.DEMON);
-	}
-
-	@Override
-	public int getTypeId() {
-		return 143;
-	}
-
-
-
-	@Override
-	public Minion summon() {
-		Minion illidanStormrage = createMinion();
-		Spell summonSpell = new SummonSpell(new FlameOfAzzinoth());
-		SpellTrigger trigger = new SpellTrigger(new CardPlayedTrigger(TargetPlayer.SELF), summonSpell);
-		illidanStormrage.setSpellTrigger(trigger);
-		return illidanStormrage;
 	}
 }

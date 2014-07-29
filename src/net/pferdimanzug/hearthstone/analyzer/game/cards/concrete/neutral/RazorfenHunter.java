@@ -11,6 +11,27 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class RazorfenHunter extends MinionCard {
 
+	public RazorfenHunter() {
+		super("Razorfen Hunter", 2, 3, Rarity.FREE, HeroClass.ANY, 3);
+		setDescription("Battlecry: Summon a 1/1 Boar.");
+	}
+
+	@Override
+	public int getTypeId() {
+		return 189;
+	}
+
+	@Override
+	public Minion summon() {
+		Minion razorfenHunter = createMinion();
+		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(new Boar()), TargetSelection.NONE);
+		battlecry.setResolvedLate(true);
+		razorfenHunter.setBattlecry(battlecry);
+		return razorfenHunter;
+	}
+
+
+
 	private class Boar extends MinionCard {
 
 		public Boar() {
@@ -23,26 +44,5 @@ public class RazorfenHunter extends MinionCard {
 			return createMinion();
 		}
 
-	}
-
-	public RazorfenHunter() {
-		super("Razorfen Hunter", 2, 3, Rarity.FREE, HeroClass.ANY, 3);
-		setDescription("Battlecry: Summon a 1/1 Boar.");
-	}
-
-	@Override
-	public int getTypeId() {
-		return 189;
-	}
-
-
-
-	@Override
-	public Minion summon() {
-		Minion razorfenHunter = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(new Boar()), TargetSelection.NONE);
-		battlecry.setResolvedLate(true);
-		razorfenHunter.setBattlecry(battlecry);
-		return razorfenHunter;
 	}
 }

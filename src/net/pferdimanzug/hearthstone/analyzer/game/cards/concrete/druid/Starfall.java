@@ -12,6 +12,19 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Starfall extends ChooseOneCard {
 
+	public Starfall() {
+		super("Starfall", CardType.SPELL, Rarity.RARE, HeroClass.DRUID, 5);
+		setDescription("Choose One - Deal $5 damage to a minion; or $2 damage to all enemy minions.");
+		
+		setCard1(new StarfallSingleTarget());
+		setCard2(new StarfallAoE());
+	}
+
+	@Override
+	public int getTypeId() {
+		return 21;
+	}
+
 	private class StarfallAoE extends SpellCard {
 
 		public StarfallAoE() {
@@ -27,6 +40,8 @@ public class Starfall extends ChooseOneCard {
 
 	}
 
+
+
 	private class StarfallSingleTarget extends SpellCard {
 
 		public StarfallSingleTarget() {
@@ -38,20 +53,5 @@ public class Starfall extends ChooseOneCard {
 			setTargetRequirement(TargetSelection.MINIONS);
 		}
 
-	}
-
-	public Starfall() {
-		super("Starfall", CardType.SPELL, Rarity.RARE, HeroClass.DRUID, 5);
-		setDescription("Choose One - Deal $5 damage to a minion; or $2 damage to all enemy minions.");
-		
-		setCard1(new StarfallSingleTarget());
-		setCard2(new StarfallAoE());
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 21;
 	}
 }

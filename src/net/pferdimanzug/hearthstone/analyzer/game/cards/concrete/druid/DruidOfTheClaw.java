@@ -13,34 +13,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class DruidOfTheClaw extends ChooseBattlecryCard {
 
-	private class BearForm extends MinionCard {
-
-		public BearForm() {
-			super("Druid of the Claw", 4, 6, Rarity.COMMON, HeroClass.DRUID, 5);
-			setCollectible(false);
-		}
-
-		@Override
-		public Minion summon() {
-			return createMinion(GameTag.TAUNT);
-		}
-
-	}
-
-	private class CatForm extends MinionCard {
-
-		public CatForm() {
-			super("Druid of the Claw", 4, 4, Rarity.COMMON, HeroClass.DRUID, 5);
-			setCollectible(false);
-		}
-
-		@Override
-		public Minion summon() {
-			return createMinion(GameTag.CHARGE);
-		}
-
-	}
-
 	public DruidOfTheClaw() {
 		super("Druid of the Claw", 4, 4, Rarity.COMMON, HeroClass.DRUID, 5);
 		setDescription("Choose One - Charge; or +2 Health and Taunt.");
@@ -75,10 +47,38 @@ public class DruidOfTheClaw extends ChooseBattlecryCard {
 		return 6;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		return createMinion();
+	}
+
+	private class BearForm extends MinionCard {
+
+		public BearForm() {
+			super("Druid of the Claw", 4, 6, Rarity.COMMON, HeroClass.DRUID, 5);
+			setCollectible(false);
+		}
+
+		@Override
+		public Minion summon() {
+			return createMinion(GameTag.TAUNT);
+		}
+
+	}
+
+
+
+	private class CatForm extends MinionCard {
+
+		public CatForm() {
+			super("Druid of the Claw", 4, 4, Rarity.COMMON, HeroClass.DRUID, 5);
+			setCollectible(false);
+		}
+
+		@Override
+		public Minion summon() {
+			return createMinion(GameTag.CHARGE);
+		}
+
 	}
 }

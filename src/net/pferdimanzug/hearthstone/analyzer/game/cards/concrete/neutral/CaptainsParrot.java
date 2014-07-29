@@ -17,21 +17,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.SpellUtils;
 
 public class CaptainsParrot extends MinionCard {
 
-	private class CaptainsParrotSpell extends Spell {
-
-		@Override
-		protected void onCast(GameContext context, Player player, Entity target) {
-			CardCollection pirateCards = SpellUtils.getCards(player.getDeck(), card -> card.getTag(GameTag.RACE) == Race.PIRATE);
-			if (pirateCards.isEmpty()) {
-				return;
-			}
-			Card randomPirateCard = pirateCards.getRandom();
-			player.getDeck().remove(randomPirateCard);
-			context.getLogic().receiveCard(player.getId(), randomPirateCard);
-		}
-
-	}
-
 	public CaptainsParrot() {
 		super("Captain's Parrot", 1, 1, Rarity.RARE, HeroClass.ANY, 2);
 		setDescription("Battlecry: Put a random Pirate from your deck into your hand.");
@@ -49,5 +34,20 @@ public class CaptainsParrot extends MinionCard {
 		Minion captainsParrot = createMinion();
 		captainsParrot.setBattlecry(Battlecry.createBattlecry(new CaptainsParrotSpell()));
 		return captainsParrot;
+	}
+
+	private class CaptainsParrotSpell extends Spell {
+
+		@Override
+		protected void onCast(GameContext context, Player player, Entity target) {
+			CardCollection pirateCards = SpellUtils.getCards(player.getDeck(), card -> card.getTag(GameTag.RACE) == Race.PIRATE);
+			if (pirateCards.isEmpty()) {
+				return;
+			}
+			Card randomPirateCard = pirateCards.getRandom();
+			player.getDeck().remove(randomPirateCard);
+			context.getLogic().receiveCard(player.getId(), randomPirateCard);
+		}
+
 	}
 }

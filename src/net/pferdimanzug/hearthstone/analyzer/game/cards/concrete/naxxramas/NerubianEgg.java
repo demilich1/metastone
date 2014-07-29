@@ -9,6 +9,26 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
 
 public class NerubianEgg extends MinionCard {
 
+	public NerubianEgg() {
+		super("Nerubian Egg", 0, 2, Rarity.RARE, HeroClass.ANY, 2);
+		setDescription("Deathrattle: Summon a 4/4 Nerubian.");
+	}
+
+	@Override
+	public int getTypeId() {
+		return 394;
+	}
+
+	@Override
+	public Minion summon() {
+		Minion nerubianEgg = createMinion();
+		Spell deathrattle = new SummonSpell(new Nerubian());
+		nerubianEgg.addDeathrattle(deathrattle);
+		return nerubianEgg;
+	}
+
+
+
 	private class Nerubian extends MinionCard {
 
 		public Nerubian() {
@@ -20,25 +40,5 @@ public class NerubianEgg extends MinionCard {
 			return createMinion();
 		}
 
-	}
-
-	public NerubianEgg() {
-		super("Nerubian Egg", 0, 2, Rarity.RARE, HeroClass.ANY, 2);
-		setDescription("Deathrattle: Summon a 4/4 Nerubian.");
-	}
-
-	@Override
-	public int getTypeId() {
-		return 394;
-	}
-
-
-
-	@Override
-	public Minion summon() {
-		Minion nerubianEgg = createMinion();
-		Spell deathrattle = new SummonSpell(new Nerubian());
-		nerubianEgg.addDeathrattle(deathrattle);
-		return nerubianEgg;
 	}
 }

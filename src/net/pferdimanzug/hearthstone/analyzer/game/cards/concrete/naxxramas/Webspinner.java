@@ -19,23 +19,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class Webspinner extends MinionCard {
 
-	private class WebspinnerSpell extends Spell {
-
-		{
-			setTarget(EntityReference.NONE);
-		}
-
-		@Override
-		protected void onCast(GameContext context, Player player, Entity target) {
-			CardCollection minionCards = CardCatalogue.query(CardType.MINION, null, null);
-			CardCollection beastCards = SpellUtils.getCards(minionCards, card -> card.getTag(GameTag.RACE) == Race.BEAST);
-
-			Card randomBeastCard = beastCards.getRandom();
-			context.getLogic().receiveCard(player.getId(), randomBeastCard);
-		}
-
-	}
-
 	public Webspinner() {
 		super("Webspinner", 1, 1, Rarity.COMMON, HeroClass.ANY, 1);
 		setDescription("Deathrattle: Add a random Beast card to your hand.");
@@ -52,5 +35,22 @@ public class Webspinner extends MinionCard {
 		Minion webspinner = createMinion();
 		webspinner.addDeathrattle(new WebspinnerSpell());
 		return webspinner;
+	}
+
+	private class WebspinnerSpell extends Spell {
+
+		{
+			setTarget(EntityReference.NONE);
+		}
+
+		@Override
+		protected void onCast(GameContext context, Player player, Entity target) {
+			CardCollection minionCards = CardCatalogue.query(CardType.MINION, null, null);
+			CardCollection beastCards = SpellUtils.getCards(minionCards, card -> card.getTag(GameTag.RACE) == Race.BEAST);
+
+			Card randomBeastCard = beastCards.getRandom();
+			context.getLogic().receiveCard(player.getId(), randomBeastCard);
+		}
+
 	}
 }

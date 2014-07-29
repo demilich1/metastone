@@ -14,6 +14,19 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Upgrade extends SpellCard {
 
+	public Upgrade() {
+		super("Upgrade!", Rarity.RARE, HeroClass.WARRIOR, 1);
+		setDescription("If you have a weapon, give it +1/+1.  Otherwise equip a 1/3 weapon.");
+
+		setSpell(new UpgradeSpell());
+		setTargetRequirement(TargetSelection.NONE);
+	}
+
+	@Override
+	public int getTypeId() {
+		return 381;
+	}
+
 	private class HeavyAxe extends WeaponCard {
 
 		public HeavyAxe() {
@@ -27,6 +40,8 @@ public class Upgrade extends SpellCard {
 		}
 
 	}
+
+
 
 	private class UpgradeSpell extends BuffWeaponSpell {
 
@@ -44,20 +59,5 @@ public class Upgrade extends SpellCard {
 			}
 
 		}
-	}
-
-	public Upgrade() {
-		super("Upgrade!", Rarity.RARE, HeroClass.WARRIOR, 1);
-		setDescription("If you have a weapon, give it +1/+1.  Otherwise equip a 1/3 weapon.");
-
-		setSpell(new UpgradeSpell());
-		setTargetRequirement(TargetSelection.NONE);
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 381;
 	}
 }

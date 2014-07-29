@@ -12,6 +12,21 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class HolyWrath extends SpellCard {
 
+	public HolyWrath() {
+		super("Holy Wrath", Rarity.RARE, HeroClass.PALADIN, 5);
+		setDescription("Draw a card and deal damage equal to its cost.");
+		
+		setSpell(new HolyWrathSpell());
+		setTargetRequirement(TargetSelection.ANY);
+	}
+
+	@Override
+	public int getTypeId() {
+		return 249;
+	}
+
+
+
 	private class HolyWrathSpell extends DamageSpell {
 
 		public HolyWrathSpell() {
@@ -28,20 +43,5 @@ public class HolyWrath extends SpellCard {
 			super.onCast(context, player, target);
 		}
 
-	}
-
-	public HolyWrath() {
-		super("Holy Wrath", Rarity.RARE, HeroClass.PALADIN, 5);
-		setDescription("Draw a card and deal damage equal to its cost.");
-		
-		setSpell(new HolyWrathSpell());
-		setTargetRequirement(TargetSelection.ANY);
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 249;
 	}
 }

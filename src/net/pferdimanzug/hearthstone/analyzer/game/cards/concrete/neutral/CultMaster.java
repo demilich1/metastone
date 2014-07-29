@@ -15,6 +15,27 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 
 public class CultMaster extends MinionCard {
 	
+	public CultMaster() {
+		super("Cult Master", 4, 2, Rarity.COMMON, HeroClass.ANY, 4);
+		setDescription("Whenever one of your other minions dies, draw a card.");
+	}
+
+	@Override
+	public int getTypeId() {
+		return 110;
+	}
+
+	@Override
+	public Minion summon() {
+		GameEventTrigger minionDieTrigger = new CultMasterTrigger();
+		SpellTrigger trigger = new SpellTrigger(minionDieTrigger, new DrawCardSpell());
+		Minion cultMaster = createMinion();
+		cultMaster.setSpellTrigger(trigger);
+		return cultMaster;
+	}
+
+
+
 	private class CultMasterTrigger extends MinionDeathTrigger {
 
 		@Override
@@ -33,26 +54,5 @@ public class CultMaster extends MinionCard {
 			return killEvent.getVictim() != host;
 		}
 		
-	}
-
-	public CultMaster() {
-		super("Cult Master", 4, 2, Rarity.COMMON, HeroClass.ANY, 4);
-		setDescription("Whenever one of your other minions dies, draw a card.");
-	}
-
-	@Override
-	public int getTypeId() {
-		return 110;
-	}
-
-
-
-	@Override
-	public Minion summon() {
-		GameEventTrigger minionDieTrigger = new CultMasterTrigger();
-		SpellTrigger trigger = new SpellTrigger(minionDieTrigger, new DrawCardSpell());
-		Minion cultMaster = createMinion();
-		cultMaster.setSpellTrigger(trigger);
-		return cultMaster;
 	}
 }

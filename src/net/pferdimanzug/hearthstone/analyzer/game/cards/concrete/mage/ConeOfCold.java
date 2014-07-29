@@ -19,6 +19,20 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class ConeOfCold extends SpellCard {
 
+	public ConeOfCold() {
+		super("Cone of Cold", Rarity.COMMON, HeroClass.MAGE, 4);
+		setDescription("Freeze a minion and the minions next to it, and deal $1 damage to them.");
+		setSpell(new ConeOfColdSpell());
+		setTargetRequirement(TargetSelection.MINIONS);
+	}
+	
+	@Override
+	public int getTypeId() {
+		return 56;
+	}
+
+
+
 	private class ConeOfColdSpell extends Spell {
 		
 		private final Spell damage = new DamageSpell(1);
@@ -42,19 +56,5 @@ public class ConeOfCold extends SpellCard {
 			}
 		}
 		
-	}
-	
-	public ConeOfCold() {
-		super("Cone of Cold", Rarity.COMMON, HeroClass.MAGE, 4);
-		setDescription("Freeze a minion and the minions next to it, and deal $1 damage to them.");
-		setSpell(new ConeOfColdSpell());
-		setTargetRequirement(TargetSelection.MINIONS);
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 56;
 	}
 }

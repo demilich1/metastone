@@ -12,6 +12,21 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Hex extends SpellCard {
 
+	public Hex() {
+		super("Hex", Rarity.FREE, HeroClass.SHAMAN, 3);
+		setDescription("Transform a minion into a 0/1 Frog with Taunt.");
+		setTargetRequirement(TargetSelection.MINIONS);
+		setSpell(new TransformMinionSpell(new Frog()));
+	}
+	
+	@Override
+	public int getTypeId() {
+		return 323;
+	}
+	
+
+
+
 	private class Frog extends MinionCard {
 
 		public Frog() {
@@ -25,20 +40,5 @@ public class Hex extends SpellCard {
 			return createMinion(GameTag.TAUNT);
 		}
 		
-	}
-	
-	public Hex() {
-		super("Hex", Rarity.FREE, HeroClass.SHAMAN, 3);
-		setDescription("Transform a minion into a 0/1 Frog with Taunt.");
-		setTargetRequirement(TargetSelection.MINIONS);
-		setSpell(new TransformMinionSpell(new Frog()));
-	}
-	
-
-
-
-	@Override
-	public int getTypeId() {
-		return 323;
 	}
 }

@@ -8,33 +8,20 @@ import java.util.List;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.stage.Window;
+import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
+import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanMulliganOptions;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.gui.IconFactory;
 import net.pferdimanzug.hearthstone.analyzer.gui.cards.CardTooltip;
 
 public class HumanMulliganView extends BorderPane implements EventHandler<MouseEvent> {
-
-	private class MulliganEntry {
-
-		public boolean mulligan;
-
-		public ImageView discardIcon;
-		public MulliganEntry(ImageView icon) {
-			this.discardIcon = icon;
-		}
-	}
 
 	@FXML
 	private HBox contentArea;
@@ -43,8 +30,8 @@ public class HumanMulliganView extends BorderPane implements EventHandler<MouseE
 	private Button doneButton;
 
 	private final HashMap<Card, MulliganEntry> mulliganState = new HashMap<Card, MulliganEntry>();
-	
-	public HumanMulliganView(Window parent, HumanMulliganOptions options) {
+
+	public HumanMulliganView(HumanMulliganOptions options) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("HumanMulliganView.fxml"));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
@@ -57,15 +44,9 @@ public class HumanMulliganView extends BorderPane implements EventHandler<MouseE
 
 		displayCards(options);
 
-		Stage stage = new Stage();
-		stage.setScene(new Scene(this));
-		stage.setTitle("Mulligan");
-		stage.initModality(Modality.WINDOW_MODAL);
-		stage.initStyle(StageStyle.UNDECORATED);
-		stage.initOwner(parent);
-		stage.show();
+		ApplicationFacade.getInstance().sendNotification(GameNotification.SHOW_MODAL_DIALOG, this);
 	}
-
+	
 	private void displayCards(final HumanMulliganOptions options) {
 		contentArea.getChildren().clear();
 		for (Card card : options.getOfferedCards()) {
@@ -106,5 +87,15 @@ public class HumanMulliganView extends BorderPane implements EventHandler<MouseE
 		MulliganEntry entry = mulliganState.get(card);
 		entry.mulligan = !entry.mulligan;
 		entry.discardIcon.setVisible(entry.mulligan);
+	}
+
+	private class MulliganEntry {
+
+		public boolean mulligan;
+
+		public ImageView discardIcon;
+		public MulliganEntry(ImageView icon) {
+			this.discardIcon = icon;
+		}
 	}
 }

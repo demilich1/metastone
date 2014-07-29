@@ -13,12 +13,12 @@ import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
+import net.pferdimanzug.hearthstone.analyzer.gui.dialog.DialogNotification;
+import net.pferdimanzug.hearthstone.analyzer.gui.dialog.DialogResult;
+import net.pferdimanzug.hearthstone.analyzer.gui.dialog.DialogType;
+import net.pferdimanzug.hearthstone.analyzer.gui.dialog.IDialogListener;
 
-import org.controlsfx.control.action.Action;
-import org.controlsfx.dialog.Dialog.Actions;
-import org.controlsfx.dialog.Dialogs;
-
-public class DeckInfoView extends HBox implements EventHandler<ActionEvent> {
+public class DeckInfoView extends HBox implements EventHandler<ActionEvent>, IDialogListener {
 
 	@FXML
 	private Button doneButton;
@@ -44,20 +44,27 @@ public class DeckInfoView extends HBox implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent event) {
 		if (!deckComplete) {
-			Action action = Dialogs.create().actions(Actions.NO, Actions.YES).message("Do you want to fill the deck with random cards?")
-					.title("Confirm").showConfirm();
-			if (action == Actions.NO) {
-				return;
-			}
-			ApplicationFacade.getInstance().sendNotification(GameNotification.FILL_DECK_WITH_RANDOM_CARDS);
-			
+			DialogNotification dialogNotification = new DialogNotification("",
+					"Your deck is not complete yet. If you proceed, all open slots will be filled with random cards.", DialogType.CONFIRM);
+			dialogNotification.setHandler(this);
+			ApplicationFacade.getInstance().notifyObservers(dialogNotification);
+		} else {
+			ApplicationFacade.getInstance().sendNotification(GameNotification.SAVE_ACTIVE_DECK);
 		}
-		ApplicationFacade.getInstance().sendNotification(GameNotification.SAVE_ACTIVE_DECK);
+
 	}
 
 	public void updateDeck(Deck deck) {
 		deckComplete = deck.isComplete();
 		cardCountLabel.setText(deck.getCards().getCount() + "/" + GameLogic.DECK_SIZE);
+	}
+
+	@Override
+	public void onDialogClosed(DialogResult result) {
+		if (result == DialogResult.OK) {
+			ApplicationFacade.getInstance().sendNotification(GameNotification.FILL_DECK_WITH_RANDOM_CARDS);
+			ApplicationFacade.getInstance().sendNotification(GameNotification.SAVE_ACTIVE_DECK);
+		}
 	}
 
 }

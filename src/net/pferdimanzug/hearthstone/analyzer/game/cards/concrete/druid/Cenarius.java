@@ -14,20 +14,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class Cenarius extends ChooseBattlecryCard {
 
-	private class Treant extends MinionCard {
-
-		public Treant() {
-			super("Treant", 2, 2, Rarity.FREE, HeroClass.DRUID, 1);
-			setCollectible(false);
-		}
-
-		@Override
-		public Minion summon() {
-			return createMinion(GameTag.TAUNT);
-		}
-		
-	}
-
 	public Cenarius() {
 		super("Cenarius", 5, 8, Rarity.LEGENDARY, HeroClass.DRUID, 9);
 		setDescription("Choose One - Give your other minions +2/+2; or Summon two 2/2 Treants with Taunt.");
@@ -55,16 +41,30 @@ public class Cenarius extends ChooseBattlecryCard {
 		Spell summonSpell = new SummonSpell(new Treant(), new Treant());
 		return Battlecry.createBattlecry(summonSpell);
 	}
-	
+
 	@Override
 	public int getTypeId() {
 		return 4;
 	}
-
-
-
+	
 	@Override
 	public Minion summon() {
 		return createMinion();
+	}
+
+
+
+	private class Treant extends MinionCard {
+
+		public Treant() {
+			super("Treant", 2, 2, Rarity.FREE, HeroClass.DRUID, 1);
+			setCollectible(false);
+		}
+
+		@Override
+		public Minion summon() {
+			return createMinion(GameTag.TAUNT);
+		}
+		
 	}
 }

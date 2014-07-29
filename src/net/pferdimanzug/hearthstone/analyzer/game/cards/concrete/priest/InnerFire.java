@@ -13,6 +13,21 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class InnerFire extends SpellCard {
 
+	public InnerFire() {
+		super("Inner Fire", Rarity.COMMON, HeroClass.PRIEST, 1);
+		setDescription("Change a minion's Attack to be equal to its Health.");
+		setSpell(new InnerFireSpell());
+		setTargetRequirement(TargetSelection.MINIONS);
+		
+	}
+	
+	@Override
+	public int getTypeId() {
+		return 266;
+	}
+
+
+
 	private class InnerFireSpell extends Spell {
 
 		@Override
@@ -22,20 +37,5 @@ public class InnerFire extends SpellCard {
 			target.modifyTag(GameTag.ATTACK_BONUS, buffAmount);
 		}
 		
-	}
-	
-	public InnerFire() {
-		super("Inner Fire", Rarity.COMMON, HeroClass.PRIEST, 1);
-		setDescription("Change a minion's Attack to be equal to its Health.");
-		setSpell(new InnerFireSpell());
-		setTargetRequirement(TargetSelection.MINIONS);
-		
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 266;
 	}
 }

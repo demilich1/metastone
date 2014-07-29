@@ -12,6 +12,37 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
 
 public class Onyxia extends MinionCard {
 
+	public Onyxia() {
+		super("Onyxia", 8, 8, Rarity.LEGENDARY, HeroClass.ANY, 9);
+		setDescription("Battlecry: Summon 1/1 Whelps until your side of the battlefield is full.");
+		setRace(Race.DRAGON);
+		setTag(GameTag.BATTLECRY);
+	}
+
+	@Override
+	public int getTypeId() {
+		return 181;
+	}
+	
+	private MinionCard[] getWhelps() {
+		MinionCard[] whelps = new MinionCard[GameLogic.MAX_MINIONS];
+		for (int i = 0; i < whelps.length; i++) {
+			whelps[i] = new Whelp();
+		}
+		return whelps;
+	}
+	
+	@Override
+	public Minion summon() {
+		Minion onyxia = createMinion();
+		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(getWhelps()));
+		battlecry.setResolvedLate(true);
+		onyxia.setBattlecry(battlecry);
+		return onyxia;
+	}
+
+
+
 	private class Whelp extends MinionCard {
 
 		public Whelp() {
@@ -25,36 +56,5 @@ public class Onyxia extends MinionCard {
 			return createMinion();
 		}
 		
-	}
-
-	public Onyxia() {
-		super("Onyxia", 8, 8, Rarity.LEGENDARY, HeroClass.ANY, 9);
-		setDescription("Battlecry: Summon 1/1 Whelps until your side of the battlefield is full.");
-		setRace(Race.DRAGON);
-		setTag(GameTag.BATTLECRY);
-	}
-	
-	@Override
-	public int getTypeId() {
-		return 181;
-	}
-	
-	private MinionCard[] getWhelps() {
-		MinionCard[] whelps = new MinionCard[GameLogic.MAX_MINIONS];
-		for (int i = 0; i < whelps.length; i++) {
-			whelps[i] = new Whelp();
-		}
-		return whelps;
-	}
-
-
-
-	@Override
-	public Minion summon() {
-		Minion onyxia = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(getWhelps()));
-		battlecry.setResolvedLate(true);
-		onyxia.setBattlecry(battlecry);
-		return onyxia;
 	}
 }

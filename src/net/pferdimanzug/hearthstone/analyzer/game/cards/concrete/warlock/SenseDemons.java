@@ -18,6 +18,18 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class SenseDemons extends SpellCard {
 
+	public SenseDemons() {
+		super("Sense Demons", Rarity.COMMON, HeroClass.WARLOCK, 3);
+		setDescription("Put 2 random Demons from your deck into your hand.");
+		setSpell(new SenseDemonsSpell());
+		setTargetRequirement(TargetSelection.NONE);
+	}
+
+	@Override
+	public int getTypeId() {
+		return 349;
+	}
+
 	private class SenseDemonsSpell extends Spell {
 
 		@Override
@@ -51,17 +63,5 @@ public class SenseDemons extends SpellCard {
 			return createMinion();
 		}
 
-	}
-
-	public SenseDemons() {
-		super("Sense Demons", Rarity.COMMON, HeroClass.WARLOCK, 3);
-		setDescription("Put 2 random Demons from your deck into your hand.");
-		setSpell(new SenseDemonsSpell());
-		setTargetRequirement(TargetSelection.NONE);
-	}
-
-	@Override
-	public int getTypeId() {
-		return 349;
 	}
 }

@@ -12,6 +12,20 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class DivineSpirit extends SpellCard {
 
+	public DivineSpirit() {
+		super("Divine Spirit", Rarity.FREE, HeroClass.PRIEST, 2);
+		setDescription("Double a minion's Health.");
+		setSpell(new DivineSpiritSpell());
+		setTargetRequirement(TargetSelection.MINIONS);
+	}
+	
+	@Override
+	public int getTypeId() {
+		return 262;
+	}
+
+
+
 	private class DivineSpiritSpell extends Spell {
 
 		@Override
@@ -21,19 +35,5 @@ public class DivineSpirit extends SpellCard {
 			targetActor.modifyHpBonus(hpBonus);
 		}
 		
-	}
-	
-	public DivineSpirit() {
-		super("Divine Spirit", Rarity.FREE, HeroClass.PRIEST, 2);
-		setDescription("Double a minion's Health.");
-		setSpell(new DivineSpiritSpell());
-		setTargetRequirement(TargetSelection.MINIONS);
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 262;
 	}
 }

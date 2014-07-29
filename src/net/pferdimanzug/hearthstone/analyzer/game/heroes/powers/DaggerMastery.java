@@ -11,6 +11,13 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class DaggerMastery extends HeroPower {
 
+	public DaggerMastery() {
+		super("Dagger Mastery", HeroClass.ROGUE);
+		setTargetRequirement(TargetSelection.NONE);
+		setSpell(new EquipWeaponSpell(new WickedKnife()));
+		setPredefinedTarget(EntityReference.FRIENDLY_HERO);
+	}
+	
 	private class WickedKnife extends WeaponCard {
 
 		public WickedKnife() {
@@ -23,13 +30,6 @@ public class DaggerMastery extends HeroPower {
 			return createWeapon(1, 2);
 		}
 		
-	}
-	
-	public DaggerMastery() {
-		super("Dagger Mastery", HeroClass.ROGUE);
-		setTargetRequirement(TargetSelection.NONE);
-		setSpell(new EquipWeaponSpell(new WickedKnife()));
-		setPredefinedTarget(EntityReference.FRIENDLY_HERO);
 	}
 
 

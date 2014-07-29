@@ -10,6 +10,27 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class DragonlingMechanic extends MinionCard {
 
+	public DragonlingMechanic() {
+		super("Dragonling Mechanic", 2, 4, Rarity.FREE, HeroClass.ANY, 4);
+		setDescription("Battlecry: Summon a 2/1 Mechanical Dragonling. ");
+	}
+
+	@Override
+	public int getTypeId() {
+		return 119;
+	}
+	
+	@Override
+	public Minion summon() {
+		Minion dragonlingMechanic = createMinion();
+		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(new MechanicalDragonling()), TargetSelection.NONE);
+		battlecry.setResolvedLate(true);
+		dragonlingMechanic.setBattlecry(battlecry);
+		return dragonlingMechanic;
+	}
+
+
+
 	private class MechanicalDragonling extends MinionCard {
 
 		public MechanicalDragonling() {
@@ -22,26 +43,5 @@ public class DragonlingMechanic extends MinionCard {
 			return createMinion();
 		}
 		
-	}
-
-	public DragonlingMechanic() {
-		super("Dragonling Mechanic", 2, 4, Rarity.FREE, HeroClass.ANY, 4);
-		setDescription("Battlecry: Summon a 2/1 Mechanical Dragonling. ");
-	}
-	
-	@Override
-	public int getTypeId() {
-		return 119;
-	}
-
-
-
-	@Override
-	public Minion summon() {
-		Minion dragonlingMechanic = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(new MechanicalDragonling()), TargetSelection.NONE);
-		battlecry.setResolvedLate(true);
-		dragonlingMechanic.setBattlecry(battlecry);
-		return dragonlingMechanic;
 	}
 }

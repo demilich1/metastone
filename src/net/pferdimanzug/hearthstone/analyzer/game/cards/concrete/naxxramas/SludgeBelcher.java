@@ -11,6 +11,27 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class SludgeBelcher extends MinionCard {
 
+	public SludgeBelcher() {
+		super("Sludge Belcher", 3, 5, Rarity.RARE, HeroClass.ANY, 5);
+		setDescription("Taunt. Deathrattle: Summon a 1/2 Slime with Taunt.");
+	}
+
+	@Override
+	public int getTypeId() {
+		return 398;
+	}
+	
+	@Override
+	public Minion summon() {
+		Minion sludgeBelcher = createMinion(GameTag.TAUNT);
+		Spell summonSlime = new SummonSpell(new Slime());
+		summonSlime.setTarget(EntityReference.NONE);
+		sludgeBelcher.addDeathrattle(summonSlime);
+		return sludgeBelcher;
+	}
+
+
+
 	private class Slime extends MinionCard {
 
 		public Slime() {
@@ -22,26 +43,5 @@ public class SludgeBelcher extends MinionCard {
 			return createMinion(GameTag.TAUNT);
 		}
 		
-	}
-
-	public SludgeBelcher() {
-		super("Sludge Belcher", 3, 5, Rarity.RARE, HeroClass.ANY, 5);
-		setDescription("Taunt. Deathrattle: Summon a 1/2 Slime with Taunt.");
-	}
-	
-	@Override
-	public int getTypeId() {
-		return 398;
-	}
-
-
-
-	@Override
-	public Minion summon() {
-		Minion sludgeBelcher = createMinion(GameTag.TAUNT);
-		Spell summonSlime = new SummonSpell(new Slime());
-		summonSlime.setTarget(EntityReference.NONE);
-		sludgeBelcher.addDeathrattle(summonSlime);
-		return sludgeBelcher;
 	}
 }

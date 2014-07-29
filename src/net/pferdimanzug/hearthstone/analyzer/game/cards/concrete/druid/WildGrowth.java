@@ -13,6 +13,18 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class WildGrowth extends SpellCard {
 
+	public WildGrowth() {
+		super("Wild Growth", Rarity.FREE, HeroClass.DRUID, 2);
+		setDescription("Gain an empty Mana Crystal.");
+		setSpell(new WildGrowthSpell());
+		setTargetRequirement(TargetSelection.NONE);
+	}
+
+	@Override
+	public int getTypeId() {
+		return 24;
+	}
+
 	private class ExcessManaCard extends SpellCard {
 
 		public ExcessManaCard() {
@@ -25,6 +37,8 @@ public class WildGrowth extends SpellCard {
 
 	}
 
+
+
 	private class WildGrowthSpell extends Spell {
 
 		@Override
@@ -36,19 +50,5 @@ public class WildGrowth extends SpellCard {
 			}
 
 		}
-	}
-
-	public WildGrowth() {
-		super("Wild Growth", Rarity.FREE, HeroClass.DRUID, 2);
-		setDescription("Gain an empty Mana Crystal.");
-		setSpell(new WildGrowthSpell());
-		setTargetRequirement(TargetSelection.NONE);
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 24;
 	}
 }

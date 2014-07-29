@@ -15,6 +15,18 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class AnimalCompanion extends SpellCard {
 
+	public AnimalCompanion() {
+		super("Animal Companion", Rarity.FREE, HeroClass.HUNTER, 3);
+		setDescription("Summon a random Beast Companion.");
+		setSpell(new SummonRandomSpell(new Huffer(), new Misha(), new Leokk()));
+		setTargetRequirement(TargetSelection.NONE);
+	}
+
+	@Override
+	public int getTypeId() {
+		return 26;
+	}
+	
 	private class Huffer extends MinionCard {
 
 		public Huffer() {
@@ -30,7 +42,7 @@ public class AnimalCompanion extends SpellCard {
 		}
 		
 	}
-
+	
 	private class Leokk extends MinionCard {
 
 		public Leokk() {
@@ -49,7 +61,9 @@ public class AnimalCompanion extends SpellCard {
 		}
 		
 	}
-	
+
+
+
 	private class Misha extends MinionCard {
 
 		public Misha() {
@@ -64,19 +78,5 @@ public class AnimalCompanion extends SpellCard {
 			return createMinion(GameTag.TAUNT);
 		}
 		
-	}
-	
-	public AnimalCompanion() {
-		super("Animal Companion", Rarity.FREE, HeroClass.HUNTER, 3);
-		setDescription("Summon a random Beast Companion.");
-		setSpell(new SummonRandomSpell(new Huffer(), new Misha(), new Leokk()));
-		setTargetRequirement(TargetSelection.NONE);
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 26;
 	}
 }

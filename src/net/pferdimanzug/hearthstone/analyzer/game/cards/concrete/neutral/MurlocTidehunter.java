@@ -11,19 +11,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class MurlocTidehunter extends MinionCard {
 
-	private class MurlocScout extends MinionCard {
-
-		public MurlocScout() {
-			super("Murloc Scout", 1, 1, Rarity.FREE, HeroClass.ANY, 0);
-		}
-
-		@Override
-		public Minion summon() {
-			return createMinion();
-		}
-
-	}
-
 	public MurlocTidehunter() {
 		super("Murloc Tidehunter", 2, 1, Rarity.FREE, HeroClass.ANY, 2);
 		setDescription("Battlecry: Summon a 1/1 Murloc Scout.");
@@ -35,8 +22,6 @@ public class MurlocTidehunter extends MinionCard {
 		return 172;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion murlocTidehunter = createMinion();
@@ -44,5 +29,20 @@ public class MurlocTidehunter extends MinionCard {
 		battlecry.setResolvedLate(true);
 		murlocTidehunter.setBattlecry(battlecry);
 		return murlocTidehunter;
+	}
+
+
+
+	private class MurlocScout extends MinionCard {
+
+		public MurlocScout() {
+			super("Murloc Scout", 1, 1, Rarity.FREE, HeroClass.ANY, 0);
+		}
+
+		@Override
+		public Minion summon() {
+			return createMinion();
+		}
+
 	}
 }

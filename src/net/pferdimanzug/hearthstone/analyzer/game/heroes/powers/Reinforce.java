@@ -9,6 +9,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Reinforce extends HeroPower {
 
+	public Reinforce() {
+		super("Reinforce", HeroClass.PALADIN);
+		setTargetRequirement(TargetSelection.NONE);
+		setSpell(new SummonSpell(new SilverHandRecruit()));
+	}
+
 	private class SilverHandRecruit extends MinionCard {
 
 		public SilverHandRecruit() {
@@ -21,12 +27,6 @@ public class Reinforce extends HeroPower {
 			return createMinion();
 		}
 
-	}
-
-	public Reinforce() {
-		super("Reinforce", HeroClass.PALADIN);
-		setTargetRequirement(TargetSelection.NONE);
-		setSpell(new SummonSpell(new SilverHandRecruit()));
 	}
 
 }

@@ -12,6 +12,28 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class DefiasRingleader extends MinionCard {
 
+	public DefiasRingleader() {
+		super("Defias Ringleader", 2, 2, Rarity.COMMON, HeroClass.ROGUE, 2);
+		setDescription("Combo: Summon a 2/1 Defias Bandit.");
+	}
+
+	@Override
+	public int getTypeId() {
+		return 292;
+	}
+
+	@Override
+	public Minion summon() {
+		Minion defiasRingleader = createMinion();
+		Battlecry battlecry = Battlecry.createBattlecry(new ComboSpell(new NullSpell(), new SummonSpell(new DefiasBandit())),
+				TargetSelection.NONE);
+		battlecry.setResolvedLate(true);
+		defiasRingleader.setBattlecry(battlecry);
+		return defiasRingleader;
+	}
+
+
+
 	private class DefiasBandit extends MinionCard {
 
 		public DefiasBandit() {
@@ -24,27 +46,5 @@ public class DefiasRingleader extends MinionCard {
 			return createMinion();
 		}
 
-	}
-
-	public DefiasRingleader() {
-		super("Defias Ringleader", 2, 2, Rarity.COMMON, HeroClass.ROGUE, 2);
-		setDescription("Combo: Summon a 2/1 Defias Bandit.");
-	}
-
-	@Override
-	public int getTypeId() {
-		return 292;
-	}
-
-
-
-	@Override
-	public Minion summon() {
-		Minion defiasRingleader = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new ComboSpell(new NullSpell(), new SummonSpell(new DefiasBandit())),
-				TargetSelection.NONE);
-		battlecry.setResolvedLate(true);
-		defiasRingleader.setBattlecry(battlecry);
-		return defiasRingleader;
 	}
 }

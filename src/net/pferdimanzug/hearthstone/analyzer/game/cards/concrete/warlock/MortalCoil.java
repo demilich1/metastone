@@ -12,6 +12,20 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class MortalCoil extends SpellCard {
 
+	public MortalCoil() {
+		super("Mortal Coil", Rarity.FREE, HeroClass.WARLOCK, 1);
+		setDescription("Deal $1 damage to a minion. If that kills it, draw a card.");
+		setSpell(new MortalCoilSpell());
+		setTargetRequirement(TargetSelection.MINIONS);
+	}
+	
+	@Override
+	public int getTypeId() {
+		return 345;
+	}
+
+
+
 	private class MortalCoilSpell extends DamageSpell {
 
 		public MortalCoilSpell() {
@@ -27,19 +41,5 @@ public class MortalCoil extends SpellCard {
 			}
 		}
 		
-	}
-	
-	public MortalCoil() {
-		super("Mortal Coil", Rarity.FREE, HeroClass.WARLOCK, 1);
-		setDescription("Deal $1 damage to a minion. If that kills it, draw a card.");
-		setSpell(new MortalCoilSpell());
-		setTargetRequirement(TargetSelection.MINIONS);
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 345;
 	}
 }

@@ -11,6 +11,21 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.MinionTargetedB
 
 public class Spellbender extends SecretCard {
 
+	public Spellbender() {
+		super("Spellbender", Rarity.EPIC, HeroClass.MAGE, 3);
+		setDescription("Secret: When an enemy casts a spell on a minion, summon a 1/3 as the new target.");
+
+		Spell spellbenderSpell = new SummonNewAttackTargetSpell(new SpellbenderMinion());
+		setTriggerAndEffect(new MinionTargetedBySpellTrigger(), spellbenderSpell);
+	}
+
+	@Override
+	public int getTypeId() {
+		return 73;
+	}
+
+
+
 	private class SpellbenderMinion extends MinionCard {
 
 		public SpellbenderMinion() {
@@ -23,20 +38,5 @@ public class Spellbender extends SecretCard {
 			return createMinion();
 		}
 
-	}
-
-	public Spellbender() {
-		super("Spellbender", Rarity.EPIC, HeroClass.MAGE, 3);
-		setDescription("Secret: When an enemy casts a spell on a minion, summon a 1/3 as the new target.");
-
-		Spell spellbenderSpell = new SummonNewAttackTargetSpell(new SpellbenderMinion());
-		setTriggerAndEffect(new MinionTargetedBySpellTrigger(), spellbenderSpell);
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 73;
 	}
 }

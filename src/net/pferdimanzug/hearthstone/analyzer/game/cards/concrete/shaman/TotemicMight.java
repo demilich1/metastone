@@ -14,6 +14,21 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class TotemicMight extends SpellCard {
 
+	public TotemicMight() {
+		super("Totemic Might", Rarity.FREE, HeroClass.SHAMAN, 0);
+		setDescription("Give your Totems +2 Health.");
+		setSpell(new TotemicMightSpell());
+		setTargetRequirement(TargetSelection.NONE);
+		setPredefinedTarget(EntityReference.FRIENDLY_MINIONS);
+	}
+
+	@Override
+	public int getTypeId() {
+		return 330;
+	}
+
+
+
 	private class TotemicMightSpell extends BuffSpell {
 
 		public TotemicMightSpell() {
@@ -29,20 +44,5 @@ public class TotemicMight extends SpellCard {
 			super.onCast(context, player, actor);
 		}
 
-	}
-
-	public TotemicMight() {
-		super("Totemic Might", Rarity.FREE, HeroClass.SHAMAN, 0);
-		setDescription("Give your Totems +2 Health.");
-		setSpell(new TotemicMightSpell());
-		setTargetRequirement(TargetSelection.NONE);
-		setPredefinedTarget(EntityReference.FRIENDLY_MINIONS);
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 330;
 	}
 }

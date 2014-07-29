@@ -18,6 +18,28 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class TruesilverChampion extends WeaponCard {
 
+	public TruesilverChampion() {
+		super("Truesilver Champion", Rarity.FREE, HeroClass.PALADIN, 4);
+		setDescription("Whenever your hero attacks, restore #2 Health to it.");
+	}
+
+	@Override
+	public int getTypeId() {
+		return 258;
+	}
+	
+	@Override
+	public Weapon getWeapon() {
+		Weapon trueSilverChampion = createWeapon(4, 2);
+		Spell healHero = new HealingSpell(2);
+		healHero.setTarget(EntityReference.FRIENDLY_HERO);
+		SpellTrigger trigger = new SpellTrigger(new TruesilverChampionWeaponTrigger(), healHero);
+		trueSilverChampion.setSpellTrigger(trigger);
+		return trueSilverChampion;
+	}
+
+
+
 	private class TruesilverChampionWeaponTrigger extends GameEventTrigger {
 		
 		@Override
@@ -35,27 +57,5 @@ public class TruesilverChampion extends WeaponCard {
 			return GameEventType.PHYSICAL_ATTACK;
 		}
 		
-	}
-
-	public TruesilverChampion() {
-		super("Truesilver Champion", Rarity.FREE, HeroClass.PALADIN, 4);
-		setDescription("Whenever your hero attacks, restore #2 Health to it.");
-	}
-	
-	@Override
-	public int getTypeId() {
-		return 258;
-	}
-
-
-
-	@Override
-	public Weapon getWeapon() {
-		Weapon trueSilverChampion = createWeapon(4, 2);
-		Spell healHero = new HealingSpell(2);
-		healHero.setTarget(EntityReference.FRIENDLY_HERO);
-		SpellTrigger trigger = new SpellTrigger(new TruesilverChampionWeaponTrigger(), healHero);
-		trueSilverChampion.setSpellTrigger(trigger);
-		return trueSilverChampion;
 	}
 }

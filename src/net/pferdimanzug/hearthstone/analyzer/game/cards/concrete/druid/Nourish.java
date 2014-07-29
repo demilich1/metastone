@@ -12,6 +12,19 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Nourish extends ChooseOneCard {
 
+	public Nourish() {
+		super("Nourish", CardType.SPELL, Rarity.RARE, HeroClass.DRUID, 5);
+		setDescription("Choose One - Gain 2 Mana Crystals; or Draw 3 cards.");
+
+		setCard1(new NourishManaCard());
+		setCard2(new NourishDrawCard());
+	}
+
+	@Override
+	public int getTypeId() {
+		return 16;
+	}
+
 	private class NourishDrawCard extends SpellCard {
 
 		public NourishDrawCard() {
@@ -24,6 +37,8 @@ public class Nourish extends ChooseOneCard {
 		}
 	}
 
+
+
 	private class NourishManaCard extends SpellCard {
 
 		public NourishManaCard() {
@@ -34,20 +49,5 @@ public class Nourish extends ChooseOneCard {
 			setSpell(new ModifyMaxManaSpell(2, TargetPlayer.SELF));
 			setTargetRequirement(TargetSelection.NONE);
 		}
-	}
-
-	public Nourish() {
-		super("Nourish", CardType.SPELL, Rarity.RARE, HeroClass.DRUID, 5);
-		setDescription("Choose One - Gain 2 Mana Crystals; or Draw 3 cards.");
-
-		setCard1(new NourishManaCard());
-		setCard2(new NourishDrawCard());
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 16;
 	}
 }
