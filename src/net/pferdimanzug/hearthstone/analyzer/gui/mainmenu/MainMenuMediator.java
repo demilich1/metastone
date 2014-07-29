@@ -6,6 +6,7 @@ import java.util.List;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.DeckBuilderMediator;
 import net.pferdimanzug.hearthstone.analyzer.gui.playmode.config.PlayModeConfigMediator;
+import net.pferdimanzug.hearthstone.analyzer.gui.simulationmode.SimulationMediator;
 import de.pferdimanzug.nittygrittymvc.Mediator;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
@@ -29,10 +30,13 @@ public class MainMenuMediator extends Mediator<GameNotification> {
 		case PLAY_MODE_SELECTED:
 			getFacade().registerMediator(new PlayModeConfigMediator());
 			break;
+		case SIMULATION_MODE_SELECTED:
+			getFacade().registerMediator(new SimulationMediator());
+			break;
 		default:
 			break;
 		}
-		getFacade().removeMediator(NAME);
+		getFacade().removeMediator(MainMenuMediator.NAME);
 	}
 
 	@Override
@@ -40,6 +44,7 @@ public class MainMenuMediator extends Mediator<GameNotification> {
 		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
 		notificationInterests.add(GameNotification.DECK_BUILDER_SELECTED);
 		notificationInterests.add(GameNotification.PLAY_MODE_SELECTED);
+		notificationInterests.add(GameNotification.SIMULATION_MODE_SELECTED);
 		return notificationInterests;
 	}
 

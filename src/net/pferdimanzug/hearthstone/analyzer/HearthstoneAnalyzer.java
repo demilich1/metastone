@@ -6,7 +6,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.MinMaxBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.NoAggressionBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Innervate;
@@ -27,39 +26,7 @@ public class HearthstoneAnalyzer extends Application {
 		//DevCheckCardCompleteness.assignUniqueIdToEachCard();
 		 //new HearthstoneAnalyzer().launchDebugGame();
 	}
-
-	private void launchDebugGame() {
-		ApplicationFacade facade = (ApplicationFacade) ApplicationFacade.getInstance();
-		final HearthstoneAnalyzer instance = new HearthstoneAnalyzer();
-		facade.startUp(instance);
-
-		for (HeroClass heroClass1 : HeroClass.values()) {
-			ApplicationFacade.getInstance().sendNotification(GameNotification.BATCH_START);
-			for (HeroClass heroClass2 : HeroClass.values()) {
-				if (heroClass1 == HeroClass.ANY || heroClass2 == HeroClass.ANY) {
-					continue;
-				}
-
-				for (int i = 0; i < 100; i++) {
-					Hero hero1 = HeroFactory.createHero(heroClass1);
-					Player player1 = new Player("Human", hero1, DeckFactory.getRandomDeck(heroClass1));
-					player1.setBehaviour(new MinMaxBehaviour());
-					Hero hero2 = HeroFactory.createHero(heroClass2);
-					Player player2 = new Player("Bot", hero2, DeckFactory.getRandomDeck(hero2.getHeroClass()));
-					player2.setBehaviour(new MinMaxBehaviour());
-					GameContext newGame = new GameContext(player1, player2, new GameLogic());
-					ApplicationFacade.getInstance().sendNotification(GameNotification.PLAY_GAME, newGame);
-				}
-
-			}
-
-			ApplicationFacade.getInstance().sendNotification(GameNotification.BATCH_STOP);
-		}
-		System.out.println();
-		System.out.println("All games have been completed!");
-		System.exit(0);
-	}
-
+	
 	private void launchHumanDebugGame() {
 		HeroClass humanHeroClass = HeroClass.WARLOCK;
 		HeroClass aiHeroClass = HeroClass.MAGE;
@@ -90,6 +57,7 @@ public class HearthstoneAnalyzer extends Application {
 		Pane canvas = new Pane();
 		Scene scene = new Scene(canvas);
 		primaryStage.setScene(scene);
+		primaryStage.setResizable(false);
 		facade.sendNotification(GameNotification.CANVAS_CREATED, canvas);
 		facade.sendNotification(GameNotification.MAIN_MENU);
 		primaryStage.show();

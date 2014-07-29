@@ -97,7 +97,7 @@ public class GameBoardView extends BorderPane {
 			p2MinionPane.getChildren().add(p2Minions[i]);
 			summonHelperMap2.put(p2Minions[i], summonHelper);
 		}
-		// create one additional summon helper
+		// create one additional summon helper (for each player)
 		Button summonHelper = createSummonHelper();
 		p1MinionPane.getChildren().add(summonHelper);
 		summonHelperMap1.put(null, summonHelper);

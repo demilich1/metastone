@@ -50,7 +50,7 @@ public class Player implements Cloneable {
 	public Player(String name, Hero hero, Deck deck) {
 		this.name = name;
 		this.setHero(hero);
-		this.deck = deck.getCards();
+		this.deck = deck.getCards().clone();
 	}
 	
 	public Player clone() {

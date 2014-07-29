@@ -35,8 +35,6 @@ public class StartGameCommand extends SimpleCommand<GameNotification> {
 		});
 		t.setDaemon(true);
 		t.start();
-
-
 	}
 
 }

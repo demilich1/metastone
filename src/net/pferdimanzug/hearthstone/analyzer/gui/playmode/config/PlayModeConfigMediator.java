@@ -14,11 +14,11 @@ public class PlayModeConfigMediator extends Mediator<GameNotification> {
 
 	public static final String NAME = "PlayModeConfigMediator";
 
-	private final PlayModeSetupView view;
+	private final PlayModeConfigView view;
 
 	public PlayModeConfigMediator() {
 		super(NAME);
-		view = new PlayModeSetupView();
+		view = new PlayModeConfigView();
 	}
 	
 	@Override

@@ -1,7 +1,9 @@
 package net.pferdimanzug.hearthstone.analyzer.gui.playmode.config;
 
-public enum PreselectionHint {
+public enum PlayerConfigType {
 
 	HUMAN,
-	CPU
+	OPPONENT,
+	SIMULATION
+	
 }

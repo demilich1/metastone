@@ -14,24 +14,24 @@ import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
 import net.pferdimanzug.hearthstone.analyzer.gui.gameconfig.GameConfig;
+import net.pferdimanzug.hearthstone.analyzer.gui.gameconfig.PlayerConfigView;
 
-public class PlayModeSetupView extends BorderPane implements EventHandler<ActionEvent> {
-
-	@FXML
-	private HBox playerArea;
+public class PlayModeConfigView extends BorderPane implements EventHandler<ActionEvent> {
 
 	@FXML
-	private Button startButton;
-	
+	protected HBox playerArea;
+
 	@FXML
-	private Button backButton;
+	protected Button startButton;
 
-	private PlayerConfigView player1Config;
-	private PlayerConfigView player2Config;
+	@FXML
+	protected Button backButton;
 
-	public PlayModeSetupView() {
+	protected PlayerConfigView player1Config;
+	protected PlayerConfigView player2Config;
 
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PlayModeSetupView.fxml"));
+	public PlayModeConfigView() {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PlayModeConfigView.fxml"));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
 
@@ -41,8 +41,8 @@ public class PlayModeSetupView extends BorderPane implements EventHandler<Action
 			throw new RuntimeException(exception);
 		}
 
-		player1Config = new PlayerConfigView(PreselectionHint.HUMAN);
-		player2Config = new PlayerConfigView(PreselectionHint.CPU);
+		player1Config = new PlayerConfigView(PlayerConfigType.HUMAN);
+		player2Config = new PlayerConfigView(PlayerConfigType.OPPONENT);
 
 		playerArea.getChildren().add(player1Config);
 		playerArea.getChildren().add(player2Config);

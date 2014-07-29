@@ -1,4 +1,4 @@
-package net.pferdimanzug.hearthstone.analyzer.gui.playmode.config;
+package net.pferdimanzug.hearthstone.analyzer.gui.gameconfig;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,34 +33,34 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Thrall;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Uther;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Valeera;
 import net.pferdimanzug.hearthstone.analyzer.gui.IconFactory;
-import net.pferdimanzug.hearthstone.analyzer.gui.gameconfig.PlayerConfig;
+import net.pferdimanzug.hearthstone.analyzer.gui.playmode.config.PlayerConfigType;
 
 public class PlayerConfigView extends VBox {
 
 	@FXML
-	private Label heroNameLabel;
+	protected Label heroNameLabel;
 
 	@FXML
-	private ImageView heroIcon;
+	protected ImageView heroIcon;
 
 	@FXML
-	private ChoiceBox<IBehaviour> behaviourBox;
+	protected ChoiceBox<IBehaviour> behaviourBox;
 
 	@FXML
-	private ChoiceBox<Hero> heroBox;
+	protected ChoiceBox<Hero> heroBox;
 
 	@FXML
-	private ChoiceBox<Deck> deckBox;
+	protected ChoiceBox<Deck> deckBox;
 
 	private final PlayerConfig playerConfig = new PlayerConfig();
 
 	private List<Deck> decks = new ArrayList<Deck>();
 
-	private PreselectionHint selectionHint;
+	private PlayerConfigType selectionHint;
 
-	public PlayerConfigView(PreselectionHint selectionHint) {
+	public PlayerConfigView(PlayerConfigType selectionHint) {
 		this.selectionHint = selectionHint;
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PlayerConfigView.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(PlayerConfigView.class.getResource("PlayerConfigView.fxml"));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
 
@@ -115,14 +115,14 @@ public class PlayerConfigView extends VBox {
 
 	public void setupBehaviours() {
 		ObservableList<IBehaviour> behaviourList = FXCollections.observableArrayList();
-		if (selectionHint == PreselectionHint.HUMAN) {
-			behaviourList.add(new HumanBehaviour());
-			behaviourList.add(new PlayRandomBehaviour());
-		} else {
-			behaviourList.add(new PlayRandomBehaviour());
+		if (selectionHint == PlayerConfigType.HUMAN) {
 			behaviourList.add(new HumanBehaviour());
 		}
-		
+
+		behaviourList.add(new PlayRandomBehaviour());
+		if (selectionHint == PlayerConfigType.OPPONENT) {
+			behaviourList.add(new HumanBehaviour());
+		}
 		behaviourList.add(new MinMaxBehaviour());
 		behaviourList.add(new NoAggressionBehaviour());
 
@@ -134,14 +134,14 @@ public class PlayerConfigView extends VBox {
 
 	public void setupHeroes() {
 		ObservableList<Hero> heroList = FXCollections.observableArrayList();
-		if (selectionHint == PreselectionHint.HUMAN) {
+		if (selectionHint == PlayerConfigType.HUMAN) {
 			heroList.add(new Jaina());
 			heroList.add(new Garrosh());
 		} else {
 			heroList.add(new Garrosh());
 			heroList.add(new Jaina());
 		}
-		
+
 		heroList.add(new Rexxar());
 		heroList.add(new Guldan());
 		heroList.add(new Valeera());

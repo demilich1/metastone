@@ -44,7 +44,7 @@ public class DeckInfoView extends HBox implements EventHandler<ActionEvent>, IDi
 	@Override
 	public void handle(ActionEvent event) {
 		if (!deckComplete) {
-			DialogNotification dialogNotification = new DialogNotification("",
+			DialogNotification dialogNotification = new DialogNotification("Add random cards",
 					"Your deck is not complete yet. If you proceed, all open slots will be filled with random cards.", DialogType.CONFIRM);
 			dialogNotification.setHandler(this);
 			ApplicationFacade.getInstance().notifyObservers(dialogNotification);

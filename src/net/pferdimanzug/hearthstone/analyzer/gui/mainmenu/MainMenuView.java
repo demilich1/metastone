@@ -32,9 +32,12 @@ public class MainMenuView extends BorderPane {
 			throw new RuntimeException(exception);
 		}
 
-		deckBuilderButton.setOnAction(actionEvent -> ApplicationFacade.getInstance().sendNotification(
-				GameNotification.DECK_BUILDER_SELECTED));
-		playModeButton.setOnAction(actionEvent -> ApplicationFacade.getInstance().sendNotification(GameNotification.PLAY_MODE_SELECTED));
+		deckBuilderButton.setOnAction(event -> ApplicationFacade.getInstance().sendNotification(GameNotification.DECK_BUILDER_SELECTED));
+		
+		playModeButton.setOnAction(event -> ApplicationFacade.getInstance().sendNotification(GameNotification.PLAY_MODE_SELECTED));
+		
+		simulationModeButton.setOnAction(event -> ApplicationFacade.getInstance().sendNotification(
+				GameNotification.SIMULATION_MODE_SELECTED));
 	}
 
 }
