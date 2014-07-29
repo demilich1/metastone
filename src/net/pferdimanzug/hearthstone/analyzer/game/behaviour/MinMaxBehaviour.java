@@ -45,6 +45,10 @@ public class MinMaxBehaviour implements IBehaviour {
 		for (Minion minion : opponent.getMinions()) {
 			score -= calculateMinionScore(minion);
 		}
+		
+		score += player.getHero().getAttack();
+		score -= opponent.getHero().getAttack();
+		
 		return score;
 	}
 
