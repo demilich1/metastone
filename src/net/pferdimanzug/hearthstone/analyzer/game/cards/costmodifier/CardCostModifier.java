@@ -10,7 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.IGameEventListe
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerLayer;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
-public abstract class CardCostModifier implements IGameEventListener {
+public abstract class CardCostModifier implements IGameEventListener, Cloneable {
 
 	private final boolean oneTime;
 	private boolean expired;

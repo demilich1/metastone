@@ -46,7 +46,7 @@ public class SimulationMediator extends Mediator<GameNotification> {
 			getFacade().sendNotification(GameNotification.SIMULATE_GAMES, gameConfig);
 			break;
 		case SIMULATION_PROGRESS_UPDATE:
-			Tuple<Integer> progress = (Tuple<Integer>) notification.getBody();
+			Tuple<Integer, Integer> progress = (Tuple<Integer, Integer>) notification.getBody();
 			Platform.runLater(new Runnable() {
 				@Override
 				public void run() {

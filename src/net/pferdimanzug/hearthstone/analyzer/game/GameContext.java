@@ -20,7 +20,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.logic.TargetLogic;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.IGameEventListener;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerLayer;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerManager;
-import net.pferdimanzug.hearthstone.analyzer.game.statistics.Statistic;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
@@ -41,9 +40,10 @@ public class GameContext implements Cloneable {
 	private final List<CardCostModifier> cardCostModifiers = new ArrayList<>();
 	
 	protected Player activePlayer;
-	private MatchResult result;
+	private Player winner;
 
 	private int turn;
+	private int actionsThisTurn;
 
 	public GameContext(Player player1, Player player2, GameLogic logic) {
 		this.getPlayers()[PLAYER_1] = player1;
@@ -71,7 +71,12 @@ public class GameContext implements Cloneable {
 		clone.triggerManager = triggerManager.clone();
 		clone.activePlayer = activePlayer == getPlayer1() ? player1Clone : player2Clone;
 		clone.turn = turn;
-		clone.result = result;
+		clone.actionsThisTurn = actionsThisTurn;
+		clone.winner = logicClone.getWinner(player1Clone, player2Clone);
+		clone.cardCostModifiers.clear();
+		for (CardCostModifier cardCostModifier : cardCostModifiers) {
+			clone.cardCostModifiers.add(cardCostModifier);
+		}
 		for (Environment key : getEnvironment().keySet()) {
 			clone.getEnvironment().put(key, getEnvironment().get(key));
 		}
@@ -97,7 +102,7 @@ public class GameContext implements Cloneable {
 	}
 
 	public boolean gameDecided() {
-		result = logic.getMatchResult(activePlayer, getOpponent(activePlayer));
+		MatchResult result = logic.getMatchResult(activePlayer, getOpponent(activePlayer));
 		return result != MatchResult.RUNNING;
 	}
 	
@@ -127,7 +132,7 @@ public class GameContext implements Cloneable {
 	public List<CardCostModifier> getCardCostModifiers() {
 		return cardCostModifiers;
 	}
-
+	
 	public HashMap<Environment, Object> getEnvironment() {
 		return environment;
 	}
@@ -135,7 +140,7 @@ public class GameContext implements Cloneable {
 	public GameLogic getLogic() {
 		return logic;
 	}
-	
+
 	public int getMinionCount(Player player) {
 		return player.getMinions().size();
 	}
@@ -143,11 +148,11 @@ public class GameContext implements Cloneable {
 	public Player getOpponent(Player player) {
 		return player.getId() == PLAYER_1 ? getPlayer2() : getPlayer1();
 	}
-
+	
 	public Player getPlayer(int index) {
 		return players[index];
 	}
-	
+
 	public Player getPlayer1() {
 		return getPlayers()[PLAYER_1];
 	}
@@ -160,10 +165,6 @@ public class GameContext implements Cloneable {
 		return players;
 	}
 	
-	public MatchResult getResult() {
-		return result;
-	}
-
 	@SuppressWarnings("unchecked")
 	public Stack<Minion> getSummonStack() {
 		if (!environment.containsKey(Environment.SUMMON_STACK)) {
@@ -171,7 +172,7 @@ public class GameContext implements Cloneable {
 		}
 		return (Stack<Minion>) environment.get(Environment.SUMMON_STACK);
 	}
-
+	
 	public int getTotalMinionCount() {
 		int totalMinionCount = 0;
 		for (int i = 0; i < players.length; i++) {
@@ -179,20 +180,26 @@ public class GameContext implements Cloneable {
 		}
 		return totalMinionCount;
 	}
-	
+
 	public List<IGameEventListener> getTriggersAssociatedWith(EntityReference entityReference) {
 		return triggerManager.getTriggersAssociatedWith(entityReference);
 	}
-
+	
 	public int getTurn() {
 		return turn;
+	}
+
+	public boolean isWinner(int playerId) {
+		if (winner == null) {
+			return false;
+		}
+		return winner.getId() == playerId;
 	}
 
 	protected void onGameStateChanged() {	
 	}
 	
 	protected void onWillPerformAction(GameAction action) {
-		
 	}
 	
 	public void play() {
@@ -202,38 +209,18 @@ public class GameContext implements Cloneable {
 		logger.debug(activePlayer.getName() + " begins");
 		logic.init(activePlayer.getId(), true);
 		logic.init(getOpponent(activePlayer).getId(), false);
-		while (!gameDecided()) {
-			playTurn(activePlayer);
-		}
-		Player opponent = getOpponent(activePlayer);
-		switch (result) {
-		case DEFEAT:
-			logger.debug("Game finished after " + turn + " turns, the winner is: " + opponent.getName());
-			activePlayer.getStatistics().gameLost();
-			opponent.getStatistics().gameWon();
-			break;
-		case DOUBLE_LOSS:
-			logger.debug("Game finished after " + turn + " turns, DRAW");
-			activePlayer.getStatistics().gameLost();
-			opponent.getStatistics().gameLost();
-			break;
-		case WIN:
-			logger.debug("Game finished after " + turn + " turns, the winner is: " + activePlayer.getName());
-			activePlayer.getStatistics().gameWon();
-			opponent.getStatistics().gameLost();
-			break;
-		default:
-			logger.error("Invalid game result: " + result);
-			break;
-		}
+		startTurn(activePlayer);
 	}
 
-	private void playTurn(Player player) {
+	private void startTurn(Player player) {
 		turn++;
 		logic.startTurn(player.getId());
 		onGameStateChanged();
+		actionsThisTurn = 0;
+		playTurn(player);
+		/*
 		GameAction nextAction = player.getBehaviour().requestAction(this, player, logic.getValidActions(player.getId()));
-		int actionsThisTurn = 0;
+		actionsThisTurn = 0;
 		while (nextAction != null) {
 			onWillPerformAction(nextAction);
 			logic.performGameAction(player.getId(), nextAction);
@@ -247,9 +234,48 @@ public class GameContext implements Cloneable {
 			}
 			nextAction = player.getBehaviour().requestAction(this, player, logic.getValidActions(player.getId()));
 		}
+		*/
+		if (!gameDecided()) {
+			onWillPerformAction(new EndTurnAction());
+			logic.endTurn(player.getId());
+			activePlayer = getOpponent(player);	
+		}
+	}
+	
+	private void endGame() {
+		winner = logic.getWinner(activePlayer, getOpponent(activePlayer));
+		if (winner != null) {
+			logger.debug("Game finished after " + turn + " turns, the winner is: " + winner.getName());
+			winner.getStatistics().gameWon();
+			Player looser = getOpponent(winner);
+			looser.getStatistics().gameLost();
+		} else {
+			logger.debug("Game finished after " + turn + " turns, DRAW");
+			getPlayer1().getStatistics().gameLost();
+			getPlayer2().getStatistics().gameLost();
+		}
+	}
+	
+	public void playTurn(Player player) {
+		GameAction nextAction = player.getBehaviour().requestAction(this, player, logic.getValidActions(player.getId()));
+		while (nextAction != null) {
+			onWillPerformAction(nextAction);
+			logic.performGameAction(player.getId(), nextAction);
+			onGameStateChanged();
+			if (gameDecided()) {
+				endGame();
+				return;
+			}
+			if (++actionsThisTurn > 99) {
+				logger.warn("Turn has been forcefully ended after {} actions", actionsThisTurn);
+				break;
+			}
+			nextAction = player.getBehaviour().requestAction(this, player, logic.getValidActions(player.getId()));
+		}
 		onWillPerformAction(new EndTurnAction());
 		logic.endTurn(player.getId());
 		activePlayer = getOpponent(player);
+		startTurn(activePlayer);
 	}
 
 	public void removeTriggersAssociatedWith(EntityReference entityReference) {

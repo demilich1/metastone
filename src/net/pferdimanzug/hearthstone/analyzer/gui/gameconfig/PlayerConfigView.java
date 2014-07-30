@@ -15,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.FlatMonteCarlo;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.MinMaxBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.NoAggressionBehaviour;
@@ -123,6 +124,7 @@ public class PlayerConfigView extends VBox {
 		if (selectionHint == PlayerConfigType.OPPONENT) {
 			behaviourList.add(new HumanBehaviour());
 		}
+		behaviourList.add(new FlatMonteCarlo(100));
 		behaviourList.add(new MinMaxBehaviour());
 		behaviourList.add(new NoAggressionBehaviour());
 

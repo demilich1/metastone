@@ -24,7 +24,7 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 			public void run() {
 				for (int i = 0; i < gameConfig.getNumberOfGames(); i++) {
 					playGame(gameConfig, result);
-					Tuple<Integer> progress = new Tuple<Integer>(i + 1, gameConfig.getNumberOfGames());
+					Tuple<Integer, Integer> progress = new Tuple<>(i + 1, gameConfig.getNumberOfGames());
 					getFacade().sendNotification(GameNotification.SIMULATION_PROGRESS_UPDATE, progress);
 				}
 				// all games finished

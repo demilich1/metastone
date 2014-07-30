@@ -460,12 +460,23 @@ public class GameLogic implements Cloneable {
 		int opponentHp = opponent.getHero().getHp();
 		if (ownHp < 1 && opponentHp < 1) {
 			return MatchResult.DOUBLE_LOSS;
-		} else if (opponentHp < 1) {
-			return MatchResult.WIN;
-		} else if (ownHp < 1) {
-			return MatchResult.DEFEAT;
-		}
+		} else if (opponentHp < 1 || ownHp < 1) {
+			return MatchResult.WON;
+		} 
 		return MatchResult.RUNNING;
+	}
+
+	public Player getWinner(Player player, Player opponent) {
+		int ownHp = player.getHero().getHp();
+		int opponentHp = opponent.getHero().getHp();
+		if (ownHp < 1 && opponentHp < 1) {
+			return null;
+		} else if (opponentHp < 1) {
+			return player;
+		} else if (ownHp < 1) {
+			return opponent;
+		}
+		return null;
 	}
 
 	public int getModifiedManaCost(Player player, Card card) {
@@ -726,7 +737,7 @@ public class GameLogic implements Cloneable {
 		player.getStatistics().manaSpent(modifiedManaCost);
 		logger.debug("{} plays {}", player.getName(), card);
 		player.getHand().remove(card);
-		
+
 		player.getStatistics().cardPlayed(card);
 
 		if (card.getCardType() == CardType.SPELL) {

@@ -45,6 +45,7 @@ public class SimulationResultView extends BorderPane {
 		return "-";
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void showSimulationResult(SimulationResult result) {
 		ObservableList<StatEntry> statEntries = FXCollections.observableArrayList();
 		for (Statistic stat : Statistic.values()) {
