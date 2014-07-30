@@ -7,14 +7,15 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class TriggerManager implements Cloneable {
-	private final List<IGameEventListener> triggers;
+	private final List<IGameEventListener> triggers = new ArrayList<IGameEventListener>();;
 
 	public TriggerManager() {
-		triggers = new ArrayList<IGameEventListener>();
 	}
 
 	private TriggerManager(TriggerManager otherTriggerManager) {
-		triggers = new ArrayList<IGameEventListener>(otherTriggerManager.triggers);
+		for (IGameEventListener gameEventListener : otherTriggerManager.triggers) {
+			triggers.add(gameEventListener.clone());
+		}
 	}
 
 	public void addTrigger(IGameEventListener trigger) {

@@ -123,7 +123,7 @@ public class MinMaxBehaviour implements IBehaviour {
 				if (gameStateScore > bestScore) {
 					bestScore = gameStateScore;
 					bestAction = gameAction;
-					logger.debug("BEST ACTION SO FAR id:{}", bestAction.hashCode());
+					logger.debug("BEST ACTION SO FAR id:{}", bestAction.getActionType());
 				}
 			} else {
 				for (Entity target : gameAction.getValidTargets()) {
@@ -143,7 +143,7 @@ public class MinMaxBehaviour implements IBehaviour {
 		}
 		if (bestAction != null) {
 			bestAction.setTargetKey(bestTarget);
-			logger.debug("Performing best action id:{}", bestAction.hashCode());
+			logger.debug("Performing best action id:{}", bestAction.getActionType());
 			logger.debug("Target is set to {}", bestAction.getTargetKey());
 		}
 		

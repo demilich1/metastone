@@ -10,6 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.SpellSource;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.BoardChangedTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
@@ -25,6 +26,7 @@ public class Aura extends SpellTrigger {
 		super(new BoardChangedTrigger(), applyAuraEffect);
 		this.applyAuraEffect = applyAuraEffect;
 		this.removeAuraEffect = removeAuraEffect;
+		removeAuraEffect.setSource(SpellSource.SPELL_TRIGGER);
 		this.targets = targetSelection;
 	}
 	
@@ -50,12 +52,12 @@ public class Aura extends SpellTrigger {
 		clone.targets = this.targets;
 		clone.applyAuraEffect = this.applyAuraEffect.clone();
 		clone.removeAuraEffect = this.removeAuraEffect.clone();
-		affectedEntities.addAll(this.affectedEntities);
+		clone.affectedEntities.clear();
+		clone.affectedEntities.addAll(this.affectedEntities);
 		return clone;
 	}
 
 	public void onGameEvent(GameEvent event) {
-		
 		GameContext context = event.getGameContext();
 		Player owner = context.getPlayer(getOwner());
 		Actor sourceActor = (Actor) context.resolveSingleTarget(getOwner(), getHostReference());
