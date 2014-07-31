@@ -7,6 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.EndTurnAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
@@ -114,7 +115,7 @@ public class MinMaxBehaviour implements IBehaviour {
 		if (validActions.size() == 1) {
 			return validActions.get(0);
 		}
-		GameAction bestAction = null;
+		GameAction bestAction = new EndTurnAction();
 		EntityReference bestTarget = null;
 		int bestScore = calculateGameStateScore(context, player.getId());
 		logger.debug("Current game state has a score of {}", bestScore, hashCode());
@@ -144,10 +145,9 @@ public class MinMaxBehaviour implements IBehaviour {
 
 			}
 		}
-		if (bestAction != null) {
+		logger.debug("Performing best action: {}", bestAction);
+		if (bestTarget != null) {
 			bestAction.setTargetKey(bestTarget);
-			logger.debug("Performing best action id:{}", bestAction.getActionType());
-			logger.debug("Target is set to {}", bestAction.getTargetKey());
 		}
 		
 		return bestAction;

@@ -179,7 +179,7 @@ public class BasicTests extends TestBase {
 			}
 		};
 		
-		context.setActivePlayer(player);
+		context.setActivePlayer(player.getId());
 		context.getLogic().startTurn(player.getId());
 		Assert.assertEquals(warrior.getAttack(), 0);
 		context.getLogic().receiveCard(player.getId(), weaponCard);

@@ -10,7 +10,7 @@ public class EndTurnAction extends GameAction {
 
 	@Override
 	public void execute(GameContext context, int playerId) {
-		context.endTurn(playerId);
+		context.endTurn();
 	}
 	
 	@Override

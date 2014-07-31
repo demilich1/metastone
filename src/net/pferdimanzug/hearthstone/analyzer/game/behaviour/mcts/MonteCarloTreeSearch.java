@@ -53,8 +53,8 @@ public class MonteCarloTreeSearch implements IBehaviour {
 
 	@Override
 	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
-		if (validActions.isEmpty()) {
-			return null;
+		if (validActions.size() == 0) {
+			return validActions.get(0);
 		}
 		Node root = new Node(null);
 		root.initState(context.clone(), validActions);

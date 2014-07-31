@@ -19,7 +19,7 @@ public class SecretTest extends TestBase {
 	
 	@Test
 	public void testKillingStopsAttack() {
-		GameContext context = createContext(new Jaina(), new Garrosh());
+		DebugContext context = createContext(new Jaina(), new Garrosh());
 		Player mage = context.getPlayer1();
 		mage.setMana(10);
 		Player warrior = context.getPlayer2();
@@ -29,6 +29,7 @@ public class SecretTest extends TestBase {
 		playCard(context, mage, new TestSecretCard(SECRET_DAMAGE));
 		playCard(context, warrior, new TestMinionCard(2, 3));
 		
+		context.setActivePlayer(warrior.getId());
 		Actor minion = getSingleMinion(warrior.getMinions());
 		attack(context, warrior, minion, mage.getHero());
 		Assert.assertEquals(mage.getHero().getHp(), mage.getHero().getMaxHp() - minion.getAttack());
@@ -42,7 +43,7 @@ public class SecretTest extends TestBase {
 	
 	@Test
 	public void testNewSpellTarget() {
-		GameContext context = createContext(new Jaina(), new Garrosh());
+		DebugContext context = createContext(new Jaina(), new Garrosh());
 		Player mage = context.getPlayer1();
 		mage.setMana(10);
 		Player warrior = context.getPlayer2();
@@ -63,6 +64,7 @@ public class SecretTest extends TestBase {
 			GameAction spellAttackAction = testSpellCard.play();
 			spellAttackAction.setTarget(minion);
 			
+			context.setActivePlayer(warrior.getId());
 			context.getLogic().performGameAction(warrior.getId(), spellAttackAction);
 			
 			Assert.assertEquals(minion.getHp(), fullHp);

@@ -40,7 +40,7 @@ public class GameContext implements Cloneable {
 	private final HashMap<Environment, Object> environment = new HashMap<>();
 	private final List<CardCostModifier> cardCostModifiers = new ArrayList<>();
 	
-	protected Player activePlayer;
+	protected int activePlayer;
 	private Player winner;
 
 	private int turn;
@@ -67,10 +67,12 @@ public class GameContext implements Cloneable {
 	public GameContext clone() {
 		GameLogic logicClone = getLogic().clone();
 		Player player1Clone = getPlayer1().clone();
+		player1Clone.getDeck().shuffle();
 		Player player2Clone = getPlayer2().clone();
+		player2Clone.getDeck().shuffle();
 		GameContext clone = new GameContext(player1Clone, player2Clone, logicClone);
 		clone.triggerManager = triggerManager.clone();
-		clone.activePlayer = activePlayer == getPlayer1() ? player1Clone : player2Clone;
+		clone.activePlayer = activePlayer;
 		clone.turn = turn;
 		clone.actionsThisTurn = actionsThisTurn;
 		clone.winner = logicClone.getWinner(player1Clone, player2Clone);
@@ -103,12 +105,12 @@ public class GameContext implements Cloneable {
 	}
 
 	public boolean gameDecided() {
-		MatchResult result = logic.getMatchResult(activePlayer, getOpponent(activePlayer));
+		MatchResult result = logic.getMatchResult(getActivePlayer(), getOpponent(getActivePlayer()));
 		return result != MatchResult.RUNNING;
 	}
 	
 	public Player getActivePlayer() {
-		return activePlayer;
+		return getPlayer(activePlayer);
 	}
 	
 	public List<Entity> getAdjacentMinions(Player player, EntityReference minionReference) {
@@ -206,16 +208,16 @@ public class GameContext implements Cloneable {
 	public void play() {
 		logger.debug("Game starts: " + getPlayer1().getName() + " VS. " + getPlayer2().getName());
 		int startingPlayerId = logic.determineBeginner(PLAYER_1, PLAYER_2);
-		activePlayer = getPlayer(startingPlayerId);
-		logger.debug(activePlayer.getName() + " begins");
-		logic.init(activePlayer.getId(), true);
-		logic.init(getOpponent(activePlayer).getId(), false);
+		activePlayer = getPlayer(startingPlayerId).getId();
+		logger.debug(getActivePlayer().getName() + " begins");
+		logic.init(activePlayer, true);
+		logic.init(getOpponent(getActivePlayer()).getId(), false);
 		startTurn(activePlayer);
 	}
 
-	private void startTurn(Player player) {
+	private void startTurn(int playerId) {
 		turn++;
-		logic.startTurn(player.getId());
+		logic.startTurn(playerId);
 		onGameStateChanged();
 		actionsThisTurn = 0;
 		playTurn();
@@ -239,7 +241,7 @@ public class GameContext implements Cloneable {
 	}
 	
 	private void endGame() {
-		winner = logic.getWinner(activePlayer, getOpponent(activePlayer));
+		winner = logic.getWinner(getActivePlayer(), getOpponent(getActivePlayer()));
 		if (winner != null) {
 			logger.debug("Game finished after " + turn + " turns, the winner is: " + winner.getName());
 			winner.getStatistics().gameWon();
@@ -263,10 +265,12 @@ public class GameContext implements Cloneable {
 			return;
 		}
 		
-		GameAction nextAction = activePlayer.getBehaviour().requestAction(this, activePlayer, getValidActions());
-		performAction(activePlayer.getId(), nextAction);
+		GameAction nextAction = getActivePlayer().getBehaviour().requestAction(this, getActivePlayer(), getValidActions());
+		performAction(activePlayer, nextAction);
 		if (nextAction.getActionType() != ActionType.END_TURN) {
 			playTurn();
+		} else {
+			startTurn(activePlayer);
 		}
 		
 		/*
@@ -285,14 +289,14 @@ public class GameContext implements Cloneable {
 		}*/
 	}
 	
-	public void endTurn(int playerId) {
+	public void endTurn() {
 		onWillPerformAction(new EndTurnAction());
-		logic.endTurn(playerId);
-		activePlayer = getOpponent(getPlayer(playerId));
-		startTurn(activePlayer);
+		logic.endTurn(activePlayer);
+		activePlayer = activePlayer == PLAYER_1 ? PLAYER_2 : PLAYER_1;
+		onGameStateChanged();
 	}
 	
-	public void performAction(int playerId, GameAction gameAction) {
+	private void performAction(int playerId, GameAction gameAction) {
 		onWillPerformAction(gameAction);
 		logic.performGameAction(playerId, gameAction);
 		onGameStateChanged();

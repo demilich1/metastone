@@ -9,8 +9,8 @@ public class DebugContext extends GameContext {
 		super(player1, player2, logic);
 	}
 	
-	public void setActivePlayer(Player player) {
-		this.activePlayer = player;
+	public void setActivePlayer(int playerId) {
+		this.activePlayer = playerId;
 	}
 
 }
