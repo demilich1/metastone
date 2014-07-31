@@ -53,6 +53,9 @@ public class HumanActionPromptView extends Stage {
 			playCardAction = (PlayCardAction) action;
 			actionString = "WEAPON: " + playCardAction.getCard().getName();
 			break;
+		case END_TURN:
+			actionString = "END TURN";
+			break;
 		default:
 			return "<unknown action " + action.getActionType() + ">";
 		}
@@ -90,7 +93,7 @@ public class HumanActionPromptView extends Stage {
 	}
 	
 	private Node createActionButton(final HumanActionOptions options, final GameAction action) {
-		Button button = new Button(action != null ? getActionString(options.getContext(), action) : "END TURN");
+		Button button = new Button(getActionString(options.getContext(), action));
 		button.setMaxWidth(Double.MAX_VALUE);
 		button.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -115,8 +118,6 @@ public class HumanActionPromptView extends Stage {
 		for (GameAction action : options.getValidActions()) {
 			buttons.add(createActionButton(options, action));
 		}
-		// add button for action null, which is 'end turn'
-		buttons.add(createActionButton(options, null));
 		return buttons;
 	}
 

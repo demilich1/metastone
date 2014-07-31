@@ -87,4 +87,9 @@ public class Battlecry extends GameAction {
 	public void setResolvedLate(boolean resolvedLate) {
 		this.resolvedLate = resolvedLate;
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("[%s '%s' resolvedLate:%s]", getActionType(), spell.getClass().getSimpleName(), resolvedLate);
+	}
 }

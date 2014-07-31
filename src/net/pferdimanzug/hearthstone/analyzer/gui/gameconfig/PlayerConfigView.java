@@ -21,6 +21,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.MinMaxBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.NoAggressionBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.PlayRandomBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.mcts.MonteCarloTreeSearch;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.DeckFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Anduin;
@@ -124,6 +125,7 @@ public class PlayerConfigView extends VBox {
 		if (selectionHint == PlayerConfigType.OPPONENT) {
 			behaviourList.add(new HumanBehaviour());
 		}
+		behaviourList.add(new MonteCarloTreeSearch());
 		behaviourList.add(new FlatMonteCarlo(100));
 		behaviourList.add(new MinMaxBehaviour());
 		behaviourList.add(new NoAggressionBehaviour());

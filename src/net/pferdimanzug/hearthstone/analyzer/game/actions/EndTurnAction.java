@@ -10,7 +10,12 @@ public class EndTurnAction extends GameAction {
 
 	@Override
 	public void execute(GameContext context, int playerId) {
-		
+		context.endTurn(playerId);
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("[%s]", getActionType());
 	}
 
 }

@@ -3,6 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.behaviour;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
@@ -43,14 +44,23 @@ public class FlatMonteCarlo implements IBehaviour {
 
 	@Override
 	public Entity provideTargetFor(Player player, GameAction action) {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO: copied from PlayRandomBehaviour
+		List<Entity> validTargets = action.getValidTargets();
+		if (validTargets.isEmpty()) {
+			return null;
+		}
+
+		Entity randomTarget = validTargets.get(ThreadLocalRandom.current().nextInt(validTargets.size()));
+		if (randomTarget != null) {
+			logger.debug(player.getName() + " picks random target: " + randomTarget.getName());
+		}
+		return randomTarget;
 	}
 
 	@Override
 	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
-		if (validActions.isEmpty()) {
-			return null;
+		if (validActions.size() == 1) {
+			return validActions.get(0);
 		}
 		GameLogic.logger.debug("********SIMULATION starts**********");
 		HashMap<Tuple<GameAction, Entity>, Integer> actionScores = new HashMap<>();
@@ -76,10 +86,10 @@ public class FlatMonteCarlo implements IBehaviour {
 		if (target != null) {
 			bestAction.setTarget(target);
 		}
-		
+
 		return bestAction;
 	}
-	
+
 	private Tuple<GameAction, Entity> getBestAction(HashMap<Tuple<GameAction, Entity>, Integer> actionScores) {
 		Tuple<GameAction, Entity> bestAction = null;
 		int bestScore = Integer.MIN_VALUE;
@@ -112,8 +122,8 @@ public class FlatMonteCarlo implements IBehaviour {
 		for (Player player : simulation.getPlayers()) {
 			player.setBehaviour(new PlayRandomBehaviour());
 		}
-		
-		simulation.playTurn(simulation.getActivePlayer());
+
+		simulation.playTurn();
 
 		return simulation.isWinner(playerId) ? 1 : -1;
 	}

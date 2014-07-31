@@ -38,6 +38,9 @@ public class NoAggressionBehaviour implements IBehaviour {
 
 	@Override
 	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
+		if (validActions.size() == 1) {
+			return validActions.get(0);
+		}
 		for (GameAction gameAction : validActions) {
 			if (gameAction.getActionType() == ActionType.SUMMON) {
 				return gameAction;

@@ -15,12 +15,17 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.BoardChangedTri
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Aura extends SpellTrigger {
+	
+	private static Logger logger = LoggerFactory.getLogger(Aura.class);
 
 	private EntityReference targets;
 	private Spell applyAuraEffect;
 	private Spell removeAuraEffect;
-	private final HashSet<Integer> affectedEntities = new HashSet<>();
+	private HashSet<Integer> affectedEntities = new HashSet<>();
 
 	public Aura(Spell applyAuraEffect, Spell removeAuraEffect, EntityReference targetSelection) {
 		super(new BoardChangedTrigger(), applyAuraEffect);
@@ -52,8 +57,7 @@ public class Aura extends SpellTrigger {
 		clone.targets = this.targets;
 		clone.applyAuraEffect = this.applyAuraEffect.clone();
 		clone.removeAuraEffect = this.removeAuraEffect.clone();
-		clone.affectedEntities.clear();
-		clone.affectedEntities.addAll(this.affectedEntities);
+		clone.affectedEntities = new HashSet<>(this.affectedEntities);
 		return clone;
 	}
 
@@ -69,6 +73,7 @@ public class Aura extends SpellTrigger {
 			} else if (affects(context, target) && !affectedEntities.contains(target.getId())) {
 				applyAuraEffect.setTarget(target.getReference());
 				context.getLogic().castSpell(getOwner(), applyAuraEffect);
+				logger.debug("Adding {} to aura list", target.getId());
 				affectedEntities.add(target.getId());
 			} else if (!affects(context, target) && affectedEntities.contains(target.getId())) {
 				removeAuraEffect.setTarget(target.getReference());

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
 
+import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.EndTurnAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
@@ -217,7 +218,7 @@ public class GameContext implements Cloneable {
 		logic.startTurn(player.getId());
 		onGameStateChanged();
 		actionsThisTurn = 0;
-		playTurn(player);
+		playTurn();
 		/*
 		GameAction nextAction = player.getBehaviour().requestAction(this, player, logic.getValidActions(player.getId()));
 		actionsThisTurn = 0;
@@ -235,11 +236,6 @@ public class GameContext implements Cloneable {
 			nextAction = player.getBehaviour().requestAction(this, player, logic.getValidActions(player.getId()));
 		}
 		*/
-		if (!gameDecided()) {
-			onWillPerformAction(new EndTurnAction());
-			logic.endTurn(player.getId());
-			activePlayer = getOpponent(player);	
-		}
 	}
 	
 	private void endGame() {
@@ -256,26 +252,50 @@ public class GameContext implements Cloneable {
 		}
 	}
 	
-	public void playTurn(Player player) {
+	public void playTurn() {
+		if (++actionsThisTurn > 99) {
+			logger.warn("Turn has been forcefully ended after {} actions", actionsThisTurn);
+			return;
+		}
+		
+		if (gameDecided()) {
+			endGame();
+			return;
+		}
+		
+		GameAction nextAction = activePlayer.getBehaviour().requestAction(this, activePlayer, getValidActions());
+		performAction(activePlayer.getId(), nextAction);
+		if (nextAction.getActionType() != ActionType.END_TURN) {
+			playTurn();
+		}
+		
+		/*
 		GameAction nextAction = player.getBehaviour().requestAction(this, player, logic.getValidActions(player.getId()));
-		while (nextAction != null) {
-			onWillPerformAction(nextAction);
-			logic.performGameAction(player.getId(), nextAction);
-			onGameStateChanged();
+		while (nextAction != null && player == activePlayer) {
+			performAction(player.getId(), nextAction);
+			if (++actionsThisTurn > 99) {
+				logger.warn("Turn has been forcefully ended after {} actions", actionsThisTurn);
+				return;
+			}
 			if (gameDecided()) {
 				endGame();
 				return;
 			}
-			if (++actionsThisTurn > 99) {
-				logger.warn("Turn has been forcefully ended after {} actions", actionsThisTurn);
-				break;
-			}
 			nextAction = player.getBehaviour().requestAction(this, player, logic.getValidActions(player.getId()));
-		}
+		}*/
+	}
+	
+	public void endTurn(int playerId) {
 		onWillPerformAction(new EndTurnAction());
-		logic.endTurn(player.getId());
-		activePlayer = getOpponent(player);
+		logic.endTurn(playerId);
+		activePlayer = getOpponent(getPlayer(playerId));
 		startTurn(activePlayer);
+	}
+	
+	public void performAction(int playerId, GameAction gameAction) {
+		onWillPerformAction(gameAction);
+		logic.performGameAction(playerId, gameAction);
+		onGameStateChanged();
 	}
 
 	public void removeTriggersAssociatedWith(EntityReference entityReference) {
@@ -308,6 +328,13 @@ public class GameContext implements Cloneable {
 	
 	public List<Entity> resolveTarget(Player player, Actor source, EntityReference targetKey) {
 		return targetLogic.resolveTargetKey(this, player, source, targetKey);
+	}
+	
+	public List<GameAction> getValidActions() {
+		if (gameDecided()) {
+			return new ArrayList<>();
+		}
+		return logic.getValidActions(getActivePlayer().getId());
 	}
 
 	@Override

@@ -35,7 +35,7 @@ public class DoNothingBehaviour implements IBehaviour {
 
 	@Override
 	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
-		return null;
+		return validActions.get(validActions.size() - 1);
 	}
 
 }

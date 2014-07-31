@@ -45,8 +45,8 @@ public class PlayRandomBehaviour implements IBehaviour {
 
 	@Override
 	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
-		if (validActions.isEmpty()) {
-			return null;
+		if (validActions.size() == 1) {
+			return validActions.get(0);
 		}
 
 		int randomIndex = ThreadLocalRandom.current().nextInt(validActions.size());
