@@ -9,6 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.IdFactory;
 
 public abstract class Card extends Entity {
 
@@ -37,6 +38,12 @@ public abstract class Card extends Entity {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public Card getCopy() {
+		Card copy = clone();
+		copy.setId(IdFactory.UNASSIGNED);
+		return copy;
 	}
 	
 	public int getBaseManaCost() {

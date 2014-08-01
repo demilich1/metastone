@@ -26,6 +26,19 @@ public class MetaSpell extends Spell {
 	}
 
 	@Override
+	public Spell clone() {
+		Spell[] spellsClone = new Spell[spells.length];
+		for (int i = 0; i < spellsClone.length; i++) {
+			spellsClone[i] = spells[i].clone();
+		}
+		MetaSpell clone = new MetaSpell(spellsClone);
+		clone.setSource(getSource());
+		clone.setTarget(getTarget());
+		clone.setSourceEntity(getSourceEntity());
+		return clone;
+	}
+
+	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
 	}
 
@@ -44,7 +57,5 @@ public class MetaSpell extends Spell {
 			spell.setSourceEntity(sourceEntity);
 		}
 	}
-	
-	
 
 }

@@ -7,14 +7,14 @@ import java.util.concurrent.ThreadLocalRandom;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.Behaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MonteCarloTreeSearch implements IBehaviour {
+public class MonteCarloTreeSearch extends Behaviour {
 	
 	private final static Logger logger = LoggerFactory.getLogger(MonteCarloTreeSearch.class);
 	
@@ -69,7 +69,7 @@ public class MonteCarloTreeSearch implements IBehaviour {
 		if (bestTarget != null) {
 			bestAction.setTarget(bestTarget);
 		}
-		logger.info("MCTS selected best action {}", bestAction);
+		//logger.info("MCTS selected best action {}", bestAction);
 		return bestAction;
 	}
 

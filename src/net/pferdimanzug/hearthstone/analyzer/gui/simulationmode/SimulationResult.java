@@ -8,9 +8,12 @@ public class SimulationResult {
 	private final int numberOfGames;
 	private final GameStatistics player1Stats = new GameStatistics();
 	private final GameStatistics player2Stats = new GameStatistics();
+	private final long startTimestamp;
+	private long duration;
 
 	public SimulationResult(int numberOfGames) {
 		this.numberOfGames = numberOfGames;
+		this.startTimestamp = System.currentTimeMillis();
 	}
 
 	public void calculateMetaStatistics() {
@@ -26,6 +29,9 @@ public class SimulationResult {
 		
 		float avgTurns = statistics.getInt(Statistic.TURNS_TAKEN) / gamesPlayed;
 		statistics.set(Statistic.AVG_TURNS_TAKEN, avgTurns);
+		
+		long endTimestamp = System.currentTimeMillis();
+		duration = endTimestamp - startTimestamp;
 	}
 	
 	public int getNumberOfGames() {
@@ -39,5 +45,10 @@ public class SimulationResult {
 	public GameStatistics getPlayer2Stats() {
 		return player2Stats;
 	}
+	
+	public long getDuration() {
+		return this.duration;
+	}
+	
 
 }

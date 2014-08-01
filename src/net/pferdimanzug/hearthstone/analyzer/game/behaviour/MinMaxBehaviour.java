@@ -18,7 +18,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MinMaxBehaviour implements IBehaviour {
+public class MinMaxBehaviour extends Behaviour {
 	
 	private final static Logger logger = LoggerFactory.getLogger(MinMaxBehaviour.class);
 

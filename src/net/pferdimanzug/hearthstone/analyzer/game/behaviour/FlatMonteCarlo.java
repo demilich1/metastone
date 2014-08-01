@@ -16,7 +16,7 @@ import net.pferdimanzug.hearthstone.analyzer.utils.Tuple;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class FlatMonteCarlo implements IBehaviour {
+public class FlatMonteCarlo extends Behaviour {
 
 	private final static Logger logger = LoggerFactory.getLogger(FlatMonteCarlo.class);
 

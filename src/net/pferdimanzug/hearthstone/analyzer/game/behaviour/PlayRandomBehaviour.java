@@ -14,7 +14,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class PlayRandomBehaviour implements IBehaviour {
+public class PlayRandomBehaviour extends Behaviour {
 
 	private final static Logger logger = LoggerFactory.getLogger(PlayRandomBehaviour.class);
 

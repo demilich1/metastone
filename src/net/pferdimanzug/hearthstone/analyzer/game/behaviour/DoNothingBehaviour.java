@@ -10,7 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
-public class DoNothingBehaviour implements IBehaviour {
+public class DoNothingBehaviour extends Behaviour {
 
 	@Override
 	public String getName() {

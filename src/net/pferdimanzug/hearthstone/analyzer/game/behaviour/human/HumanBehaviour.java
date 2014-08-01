@@ -7,11 +7,11 @@ import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.Behaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
-public class HumanBehaviour implements IBehaviour {
+public class HumanBehaviour extends Behaviour {
 
 	private GameAction selectedAction;
 	private boolean waitingForInput;

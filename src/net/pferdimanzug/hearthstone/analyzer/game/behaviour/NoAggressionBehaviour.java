@@ -13,7 +13,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SecretCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
-public class NoAggressionBehaviour implements IBehaviour {
+public class NoAggressionBehaviour extends Behaviour {
 
 	@Override
 	public String getName() {

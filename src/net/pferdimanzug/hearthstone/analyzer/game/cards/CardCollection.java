@@ -32,7 +32,10 @@ public class CardCollection implements Iterable<Card>, Cloneable {
 
 	public CardCollection clone() {
 		CardCollection clone = new CardCollection();
-		clone.addAll(this);
+		for (Card card : cards) {
+			clone.add(card.clone());
+		}
+		
 		return clone;
 	}
 

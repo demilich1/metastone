@@ -6,7 +6,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PhysicalAttackAction;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.Behaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.DeckFactory;
@@ -65,7 +65,7 @@ public class TestBase {
 		return getSummonedMinion(player.getMinions());
 	}
 	
-	private static class NullBehaviour implements IBehaviour {
+	private static class NullBehaviour extends Behaviour {
 
 		@Override
 		public String getName() {

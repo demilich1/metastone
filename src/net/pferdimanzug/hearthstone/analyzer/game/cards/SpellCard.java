@@ -43,6 +43,13 @@ public abstract class SpellCard extends Card {
 		return true;
 	}
 
+	@Override
+	public SpellCard clone() {
+		SpellCard clone = (SpellCard) super.clone();
+		clone.spell = spell.clone();
+		return clone;
+	}
+
 	public Spell getSpell() {
 		return spell;
 	}

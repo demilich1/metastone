@@ -480,19 +480,6 @@ public class GameLogic implements Cloneable {
 
 	public int getModifiedManaCost(Player player, Card card) {
 		int manaCost = card.getManaCost(context, player);
-		/*
-		 * if (card.getCardType() == CardType.MINION) { manaCost +=
-		 * getTotalTagValue(player, GameTag.MINION_MANA_COST); manaCost +=
-		 * getTotalTagValue(GameTag.ALL_MINION_MANA_COST); manaCost +=
-		 * getTotalTagValue(player, GameTag.ONE_TIME_MINION_MANA_COST); int
-		 * minManaCost = getTagValue(player, GameTag.MINION_MIN_MANA_COST, 0);
-		 * manaCost = MathUtils.clamp(manaCost, minManaCost, Integer.MAX_VALUE);
-		 * } else if (card.getCardType() == CardType.SPELL) { manaCost +=
-		 * getTotalTagValue(player, GameTag.SPELL_MANA_COST); } if
-		 * (card.hasTag(GameTag.SECRET) && hasTag(player,
-		 * GameTag.ONE_TIME_FREE_SECRET)) { manaCost = 0; } manaCost =
-		 * MathUtils.clamp(manaCost, 0, Integer.MAX_VALUE);
-		 */
 		int minValue = 0;
 		for (CardCostModifier costModifier : context.getCardCostModifiers()) {
 			manaCost += costModifier.process(card);

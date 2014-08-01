@@ -37,7 +37,7 @@ public abstract class PlayCardAction extends GameAction {
 			try {
 				play(context, playerId);
 			} catch(Exception e) {
-				System.out.println("ERROR while playing card " + card);
+				System.out.println("ERROR while playing card " + card + " id:" + card.getId());
 				throw e;
 			}
 			

@@ -6,7 +6,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PhysicalAttackAction;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.Behaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.IChooseOneCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
@@ -222,7 +222,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		warrior.setMana(10);
 
 		int baseAttack = 1;
-		mage.setBehaviour(new IBehaviour() {
+		mage.setBehaviour(new Behaviour() {
 
 			@Override
 			public String getName() {
