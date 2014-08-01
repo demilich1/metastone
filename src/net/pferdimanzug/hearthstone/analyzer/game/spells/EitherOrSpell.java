@@ -25,7 +25,15 @@ public class EitherOrSpell extends Spell {
 			spellToCast.setTarget(getTarget());
 		}
 		context.getLogic().castSpell(player.getId(), spellToCast);
-
+	}
+	
+	@Override
+	public Spell clone() {
+		EitherOrSpell clone = new EitherOrSpell(either.clone(), or.clone(), condition);
+		clone.setSource(getSource());
+		clone.setTarget(getTarget());
+		clone.setSourceEntity(getSourceEntity());
+		return clone;
 	}
 
 	@Override

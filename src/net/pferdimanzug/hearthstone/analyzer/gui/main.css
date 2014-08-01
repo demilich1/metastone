@@ -94,6 +94,12 @@
     -fx-text-fill: black;
 }
 
+#info-small {
+	-fx-font-size: 10pt;
+    -fx-font-family: "Arial";
+    -fx-text-fill: black;
+}
+
 #default-button {
 	-fx-font-size: 18pt;
     -fx-font-family: "Arial";

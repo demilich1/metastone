@@ -16,8 +16,6 @@ public class Eviscerate extends SpellCard {
 		setTargetRequirement(TargetSelection.ANY);
 	}
 
-
-
 	@Override
 	public int getTypeId() {
 		return 294;

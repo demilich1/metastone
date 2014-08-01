@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
@@ -15,13 +16,24 @@ import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.statistics.GameStatistics;
 import net.pferdimanzug.hearthstone.analyzer.game.statistics.Statistic;
 
-public class SimulationResultView extends BorderPane {
+import org.apache.commons.lang3.time.DurationFormatUtils;
 
+public class SimulationResultView extends BorderPane {
+	
+	@FXML
+	private BorderPane infoArea;
+	
 	@FXML
 	private TableView<StatEntry> resultTable;
 
 	@FXML
 	private Button doneButton;
+	
+	@FXML
+	private Label durationLabel;
+	
+	private PlayerInfoView player1InfoView;
+	private PlayerInfoView player2InfoView;
 
 	public SimulationResultView() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SimulationResultView.fxml"));
@@ -36,6 +48,10 @@ public class SimulationResultView extends BorderPane {
 		
 		doneButton.setOnAction(event -> ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU));
 
+		player1InfoView = new PlayerInfoView();
+		infoArea.setLeft(player1InfoView);
+		player2InfoView = new PlayerInfoView();
+		infoArea.setRight(player2InfoView);
 	}
 
 	private String getStatString(Statistic stat, GameStatistics playerStatistics) {
@@ -47,6 +63,10 @@ public class SimulationResultView extends BorderPane {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void showSimulationResult(SimulationResult result) {
+		player1InfoView.setInfo(result.getConfig().getPlayerConfig1());
+		player2InfoView.setInfo(result.getConfig().getPlayerConfig2());
+		durationLabel.setText("Simulation took " + DurationFormatUtils.formatDurationHMS(result.getDuration()));
+		
 		ObservableList<StatEntry> statEntries = FXCollections.observableArrayList();
 		for (Statistic stat : Statistic.values()) {
 			StatEntry statEntry = new StatEntry();
@@ -63,5 +83,7 @@ public class SimulationResultView extends BorderPane {
 		resultTable.getColumns().get(1).setCellValueFactory(new PropertyValueFactory("player1Value"));
 		resultTable.getColumns().get(2).setCellValueFactory(new PropertyValueFactory("player2Value"));
 	}
+	
+	
 
 }

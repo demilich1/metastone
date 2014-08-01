@@ -16,6 +16,7 @@ public class Player implements Cloneable {
 
 	private final String name;
 	private Hero hero;
+	private final String deckName;
 
 	private final CardCollection deck;
 	private final CardCollection hand = new CardCollection();
@@ -34,6 +35,7 @@ public class Player implements Cloneable {
 
 	private Player(Player otherPlayer) {
 		this.name = otherPlayer.name;
+		this.deckName = otherPlayer.getDeckName();
 		this.setHero(otherPlayer.getHero().clone());
 		this.deck = otherPlayer.getDeck().clone();
 		for (Minion minion : otherPlayer.getMinions()) {
@@ -55,6 +57,7 @@ public class Player implements Cloneable {
 		this.name = name;
 		this.setHero(hero);
 		this.deck = deck.getCards().clone();
+		this.deckName = deck.getName();
 	}
 	
 	public Player clone() {
@@ -76,6 +79,10 @@ public class Player implements Cloneable {
 		return deck;
 	}
 
+	public String getDeckName() {
+		return deckName;
+	}
+
 	public List<Minion> getGraveyard() {
 		return graveyard;
 	}
@@ -83,11 +90,11 @@ public class Player implements Cloneable {
 	public CardCollection getHand() {
 		return hand;
 	}
-
+	
 	public Hero getHero() {
 		return hero;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -115,11 +122,11 @@ public class Player implements Cloneable {
 	public GameStatistics getStatistics() {
 		return statistics;
 	}
-
+	
 	public void setBehaviour(IBehaviour behaviour) {
 		this.behaviour = behaviour;
 	}
-	
+
 	public void setHero(Hero hero) {
 		this.hero = hero;
 	}

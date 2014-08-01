@@ -338,7 +338,7 @@ public class GameContext implements Cloneable {
 		if (gameDecided()) {
 			return new ArrayList<>();
 		}
-		return logic.getValidActions(getActivePlayer().getId());
+		return logic.getValidActions(activePlayer);
 	}
 
 	@Override

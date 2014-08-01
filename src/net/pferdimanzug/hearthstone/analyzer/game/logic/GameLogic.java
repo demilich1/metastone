@@ -691,9 +691,6 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void performGameAction(int playerId, GameAction action) {
-		// if (action.getTargetRequirement() == TargetSelection.SELF) {
-		// action.setTargetKey(action.getSource());
-		// }
 		Player player = context.getPlayer(playerId);
 		if (action.getTargetRequirement() != TargetSelection.NONE && action.getTargetKey() == null) {
 			List<Entity> validTargets = getValidTargets(playerId, action);

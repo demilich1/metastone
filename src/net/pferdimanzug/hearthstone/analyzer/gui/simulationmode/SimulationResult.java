@@ -2,17 +2,18 @@ package net.pferdimanzug.hearthstone.analyzer.gui.simulationmode;
 
 import net.pferdimanzug.hearthstone.analyzer.game.statistics.GameStatistics;
 import net.pferdimanzug.hearthstone.analyzer.game.statistics.Statistic;
+import net.pferdimanzug.hearthstone.analyzer.gui.gameconfig.GameConfig;
 
 public class SimulationResult {
 
-	private final int numberOfGames;
 	private final GameStatistics player1Stats = new GameStatistics();
 	private final GameStatistics player2Stats = new GameStatistics();
 	private final long startTimestamp;
 	private long duration;
+	private final GameConfig config;
 
-	public SimulationResult(int numberOfGames) {
-		this.numberOfGames = numberOfGames;
+	public SimulationResult(GameConfig config) {
+		this.config = config;
 		this.startTimestamp = System.currentTimeMillis();
 	}
 
@@ -22,7 +23,7 @@ public class SimulationResult {
 	}
 
 	private void calculateMetaStatistics(GameStatistics statistics) {
-		float gamesPlayed = numberOfGames;
+		float gamesPlayed = getNumberOfGames();
 		float winRate = statistics.getInt(Statistic.GAMES_WON) / gamesPlayed;
 		String winRateString = (winRate * 100) + "%";
 		statistics.set(Statistic.WIN_RATE, winRateString);
@@ -35,7 +36,7 @@ public class SimulationResult {
 	}
 	
 	public int getNumberOfGames() {
-		return numberOfGames;
+		return getConfig().getNumberOfGames();
 	}
 
 	public GameStatistics getPlayer1Stats() {
@@ -48,6 +49,10 @@ public class SimulationResult {
 	
 	public long getDuration() {
 		return this.duration;
+	}
+
+	public GameConfig getConfig() {
+		return config;
 	}
 	
 

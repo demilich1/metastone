@@ -3,9 +3,8 @@ package net.pferdimanzug.hearthstone.analyzer.gui.simulationmode;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.ForkJoinPool;
-import java.util.concurrent.ForkJoinTask;
-import java.util.concurrent.RecursiveTask;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
@@ -15,19 +14,24 @@ import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 import net.pferdimanzug.hearthstone.analyzer.gui.gameconfig.GameConfig;
 import net.pferdimanzug.hearthstone.analyzer.gui.gameconfig.PlayerConfig;
 import net.pferdimanzug.hearthstone.analyzer.utils.Tuple;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import de.pferdimanzug.nittygrittymvc.Notification;
 import de.pferdimanzug.nittygrittymvc.SimpleCommand;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
 public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 
+	private static Logger logger = LoggerFactory.getLogger(SimulateGamesCommand.class);
+
 	private int gamesCompleted;
 
 	@Override
 	public void execute(INotification<GameNotification> notification) {
 		final GameConfig gameConfig = (GameConfig) notification.getBody();
-		final SimulationResult result = new SimulationResult(gameConfig.getNumberOfGames());
-		long start = System.currentTimeMillis();
+		final SimulationResult result = new SimulationResult(gameConfig);
 
 		gamesCompleted = 0;
 
@@ -35,16 +39,19 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 
 			@Override
 			public void run() {
-				ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(8);
+				int poolSize = Math.max(1, Runtime.getRuntime().availableProcessors() - 1);
+				logger.info("Starting simulation on {} cores", poolSize);
+				ExecutorService executor = new ScheduledThreadPoolExecutor(poolSize);
 				List<PlayGameTask> tasks = new ArrayList<>(gameConfig.getNumberOfGames());
 
 				for (int i = 0; i < gameConfig.getNumberOfGames(); i++) {
 					PlayGameTask task = new PlayGameTask(gameConfig);
 					tasks.add(task);
+					//task.run();
 					executor.execute(task);
 				}
-				
-				while(gamesCompleted < gameConfig.getNumberOfGames()) {
+
+				while (gamesCompleted < gameConfig.getNumberOfGames()) {
 					Iterator<PlayGameTask> iterator = tasks.iterator();
 					while (iterator.hasNext()) {
 						PlayGameTask task = iterator.next();
@@ -57,7 +64,7 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 						}
 					}
 					try {
-						Thread.sleep(100);
+						Thread.sleep(50);
 					} catch (InterruptedException e) {
 					}
 				}
@@ -86,7 +93,7 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 		public PlayGameTask(GameConfig gameConfig) {
 			this.gameConfig = gameConfig;
 		}
-		
+
 		public boolean isDone() {
 			return getResult() != null;
 		}
@@ -104,7 +111,7 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 
 			GameContext newGame = new GameContext(player1, player2, new GameLogic());
 			newGame.play();
-			
+
 			result = newGame;
 		}
 
