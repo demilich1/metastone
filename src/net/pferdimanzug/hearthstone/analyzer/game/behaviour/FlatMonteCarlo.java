@@ -110,7 +110,7 @@ public class FlatMonteCarlo extends Behaviour {
 			action.setTarget(target);
 		}
 		GameLogic.logger.debug("********TESTING FOLLOWING ACTION IN MONTE CARLO**********");
-		simulation.getLogic().performGameAction(playerId, action);
+		simulation.getLogic().performGameAction(simulation.getActivePlayer().getId(), action);
 		int score = 0;
 		for (int i = 0; i < iterations; i++) {
 			score += playRandomUntilEnd(simulation.clone(), playerId);
@@ -125,7 +125,7 @@ public class FlatMonteCarlo extends Behaviour {
 
 		simulation.playTurn();
 
-		return simulation.isWinner(playerId) ? 1 : -1;
+		return simulation.getScore(playerId);
 	}
 
 }

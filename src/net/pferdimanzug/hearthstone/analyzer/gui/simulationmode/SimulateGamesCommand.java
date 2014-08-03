@@ -3,8 +3,11 @@ package net.pferdimanzug.hearthstone.analyzer.gui.simulationmode;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
@@ -42,31 +45,35 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 				int poolSize = Math.max(1, Runtime.getRuntime().availableProcessors() - 1);
 				logger.info("Starting simulation on {} cores", poolSize);
 				ExecutorService executor = new ScheduledThreadPoolExecutor(poolSize);
-				List<PlayGameTask> tasks = new ArrayList<>(gameConfig.getNumberOfGames());
+				List<Future<GameContext>> tasks = new ArrayList<>(gameConfig.getNumberOfGames());
 
+				// send initial status update
+				Tuple<Integer, Integer> progress = new Tuple<>(0, gameConfig.getNumberOfGames());
+				getFacade().sendNotification(GameNotification.SIMULATION_PROGRESS_UPDATE, progress);
 				for (int i = 0; i < gameConfig.getNumberOfGames(); i++) {
 					PlayGameTask task = new PlayGameTask(gameConfig);
-					tasks.add(task);
-					//task.run();
-					executor.execute(task);
+					Future<GameContext> future = executor.submit(task);
+					tasks.add(future);
 				}
 
-				while (gamesCompleted < gameConfig.getNumberOfGames()) {
-					Iterator<PlayGameTask> iterator = tasks.iterator();
-					while (iterator.hasNext()) {
-						PlayGameTask task = iterator.next();
-						if (task.isDone()) {
-							GameContext gameResult = task.getResult();
-							result.getPlayer1Stats().merge(gameResult.getPlayer1().getStatistics());
-							result.getPlayer2Stats().merge(gameResult.getPlayer2().getStatistics());
-							onGameComplete(gameConfig);
-							iterator.remove();
-						}
-					}
+				executor.shutdown();
+				
+				while (!executor.isTerminated()) {
 					try {
 						Thread.sleep(50);
 					} catch (InterruptedException e) {
 					}
+				}
+				
+				for (Future<GameContext> future : tasks) {
+					GameContext gameResult = null;
+					try {
+						gameResult = future.get();
+					} catch (Exception e) {
+						e.printStackTrace();
+					} 
+					result.getPlayer1Stats().merge(gameResult.getPlayer1().getStatistics());
+					result.getPlayer2Stats().merge(gameResult.getPlayer2().getStatistics());
 				}
 
 				result.calculateMetaStatistics();
@@ -85,7 +92,7 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 		getFacade().notifyObservers(updateNotification);
 	}
 
-	private class PlayGameTask implements Runnable {
+	private class PlayGameTask implements Callable<GameContext> {
 
 		private final GameConfig gameConfig;
 		private GameContext result;
@@ -98,8 +105,12 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 			return getResult() != null;
 		}
 
+		public GameContext getResult() {
+			return result;
+		}
+
 		@Override
-		public void run() {
+		public GameContext call() throws Exception {
 			PlayerConfig playerConfig1 = gameConfig.getPlayerConfig1();
 			PlayerConfig playerConfig2 = gameConfig.getPlayerConfig2();
 
@@ -113,9 +124,7 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 			newGame.play();
 
 			result = newGame;
-		}
-
-		public GameContext getResult() {
+			onGameComplete(gameConfig);
 			return result;
 		}
 

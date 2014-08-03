@@ -1,6 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.behaviour.mcts;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,14 +13,14 @@ class Node {
 
 	private GameContext state;
 	private List<Transition> validTransitions;
-	private HashMap<Transition, Node> children;
+	private final List<Node> children = new LinkedList<>();
+	private final Transition incomingTransition;
 	private int visits;
 	private int score;
-	private final String name;
 	private final int player;
 
-	public Node(GameAction transitionAction, int player) {
-		this.name = transitionAction != null ? transitionAction.toString() : "root";
+	public Node(Transition incomingTransition, int player) {
+		this.incomingTransition = incomingTransition;
 		this.player = player;
 	}
 
@@ -52,58 +51,54 @@ class Node {
 		return visits;
 	}
 
-	static int runs;
+	private boolean canFurtherExpanded() {
+		return !validTransitions.isEmpty();
+	}
+
+	private boolean isTerminal() {
+		return state.gameDecided();
+	}
+
+	private Node expand() {
+		Transition transition = validTransitions.remove(0);
+		GameAction action = transition.getAction();
+		Entity target = transition.getTarget();
+		GameContext newState = state.clone();
+		if (target != null) {
+			action.setTarget(target);
+		}
+		try {
+			newState.getLogic().performGameAction(newState.getActivePlayer().getId(), action);
+		} catch (Exception e) {
+			System.err.println("Exception on action: " + action + " state decided: " + state.gameDecided());
+			e.printStackTrace();
+			throw e;
+		}
+
+		Node child = new Node(transition, getPlayer());
+		child.initState(newState, newState.getValidActions());
+		children.add(child);
+		return child;
+	}
 
 	public void process(ITreePolicy treePolicy) {
 		List<Node> visited = new LinkedList<Node>();
 		Node current = this;
 		visited.add(this);
-		runs++;
-		while (!current.isLeaf()) {
-			Node old = current;
-			current = treePolicy.select(current);
-			if (current == null) {
-				System.out.println("Parent: " + old.name + " Children " + old.getChildren().size() + " Transitions: "
-						+ old.validTransitions.size() + " GameState decided: " + old.state.gameDecided() + " runs: " + runs);
+		while (!current.isTerminal()) {
+			if (current.canFurtherExpanded()) {
+				current = current.expand();
+				visited.add(current);
+				break;
+			} else {
+				current = treePolicy.select(current);
+				visited.add(current);
 			}
-			visited.add(current);
 		}
 
-		current.expand();
-		if (!current.isLeaf()) {
-			current = treePolicy.select(current);
-			visited.add(current);
-		}
-		
 		int value = rollOut(current);
 		for (Node node : visited) {
 			node.updateStats(value);
-		}
-	}
-
-	public void expand() {
-		children = new HashMap<Transition, Node>();
-		if (state.gameDecided()) {
-			return;
-		}
-		for (Transition transition : validTransitions) {
-			GameAction action = transition.getAction();
-			Entity target = transition.getTarget();
-			GameContext newState = state.clone();
-			if (target != null) {
-				action.setTarget(target);
-			}
-			try {
-				newState.getLogic().performGameAction(newState.getActivePlayer().getId(), action);
-			} catch(Exception e) {
-				System.err.println("Exception on action: " + action + " state decided: " + state.gameDecided());
-				e.printStackTrace();
-				throw e;
-			}
-			
-			Node child = new Node(action, getPlayer());
-			child.initState(newState, newState.getValidActions());
-			children.put(transition, child);
 		}
 	}
 
@@ -112,13 +107,17 @@ class Node {
 	}
 
 	public int rollOut(Node node) {
+		if (node.getState().gameDecided()) {
+			return node.getState().getScore(getPlayer());
+		}
+
 		GameContext simulation = node.getState().clone();
 		for (Player player : simulation.getPlayers()) {
 			player.setBehaviour(new PlayRandomBehaviour());
 		}
 
 		simulation.playTurn();
-		return simulation.isWinner(getPlayer()) ? 1 : -1;
+		return simulation.getScore(getPlayer());
 	}
 
 	private void updateStats(int value) {
@@ -126,17 +125,16 @@ class Node {
 		score += value;
 	}
 
-	public HashMap<Transition, Node> getChildren() {
+	public List<Node> getChildren() {
 		return children;
 	}
 
 	public Transition getBestAction() {
 		Transition best = null;
 		int bestScore = Integer.MIN_VALUE;
-		for (Transition transition : children.keySet()) {
-			Node node = children.get(transition);
-			if (node.getScore() > bestScore) {
-				best = transition;
+		for (Node node : children) {
+			if (node.getVisits() > bestScore) {
+				best = node.incomingTransition;
 				bestScore = node.getScore();
 			}
 		}

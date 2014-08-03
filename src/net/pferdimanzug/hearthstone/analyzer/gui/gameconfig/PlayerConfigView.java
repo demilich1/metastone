@@ -126,7 +126,7 @@ public class PlayerConfigView extends VBox {
 			behaviourList.add(new HumanBehaviour());
 		}
 		behaviourList.add(new MonteCarloTreeSearch());
-		behaviourList.add(new FlatMonteCarlo(100));
+		behaviourList.add(new FlatMonteCarlo(200));
 		behaviourList.add(new MinMaxBehaviour());
 		behaviourList.add(new NoAggressionBehaviour());
 

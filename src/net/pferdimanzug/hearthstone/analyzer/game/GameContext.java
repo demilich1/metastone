@@ -42,6 +42,7 @@ public class GameContext implements Cloneable {
 	
 	protected int activePlayer;
 	private Player winner;
+	private MatchResult result;
 
 	private int turn;
 	private int actionsThisTurn;
@@ -75,6 +76,7 @@ public class GameContext implements Cloneable {
 		clone.activePlayer = activePlayer;
 		clone.turn = turn;
 		clone.actionsThisTurn = actionsThisTurn;
+		clone.result = result;
 		clone.winner = logicClone.getWinner(player1Clone, player2Clone);
 		clone.cardCostModifiers.clear();
 		for (CardCostModifier cardCostModifier : cardCostModifiers) {
@@ -105,7 +107,8 @@ public class GameContext implements Cloneable {
 	}
 
 	public boolean gameDecided() {
-		MatchResult result = logic.getMatchResult(getActivePlayer(), getOpponent(getActivePlayer()));
+		result = logic.getMatchResult(getActivePlayer(), getOpponent(getActivePlayer()));
+		winner = logic.getWinner(getActivePlayer(), getOpponent(getActivePlayer()));
 		return result != MatchResult.RUNNING;
 	}
 	
@@ -192,13 +195,6 @@ public class GameContext implements Cloneable {
 		return turn;
 	}
 
-	public boolean isWinner(int playerId) {
-		if (winner == null) {
-			return false;
-		}
-		return winner.getId() == playerId;
-	}
-
 	protected void onGameStateChanged() {	
 	}
 	
@@ -221,23 +217,6 @@ public class GameContext implements Cloneable {
 		onGameStateChanged();
 		actionsThisTurn = 0;
 		playTurn();
-		/*
-		GameAction nextAction = player.getBehaviour().requestAction(this, player, logic.getValidActions(player.getId()));
-		actionsThisTurn = 0;
-		while (nextAction != null) {
-			onWillPerformAction(nextAction);
-			logic.performGameAction(player.getId(), nextAction);
-			onGameStateChanged();
-			if (gameDecided()) {
-				return;
-			}
-			if (++actionsThisTurn > 99) {
-				logger.warn("Turn has been forcefully ended after {} actions", actionsThisTurn);
-				break;
-			}
-			nextAction = player.getBehaviour().requestAction(this, player, logic.getValidActions(player.getId()));
-		}
-		*/
 	}
 	
 	private void endGame() {
@@ -257,6 +236,7 @@ public class GameContext implements Cloneable {
 	public void playTurn() {
 		if (++actionsThisTurn > 99) {
 			logger.warn("Turn has been forcefully ended after {} actions", actionsThisTurn);
+			startTurn(getOpponent(getActivePlayer()).getId());
 			return;
 		}
 		
@@ -267,6 +247,7 @@ public class GameContext implements Cloneable {
 		
 		GameAction nextAction = getActivePlayer().getBehaviour().requestAction(this, getActivePlayer(), getValidActions());
 		performAction(activePlayer, nextAction);
+		
 		if (nextAction.getActionType() != ActionType.END_TURN) {
 			playTurn();
 		} else {
@@ -339,6 +320,21 @@ public class GameContext implements Cloneable {
 			return new ArrayList<>();
 		}
 		return logic.getValidActions(activePlayer);
+	}
+	
+	public int getScore(int playerId) {
+		switch (result) {
+		case DOUBLE_LOSS:
+			return 0;
+		case RUNNING:
+			throw new IllegalStateException("Score cannot be determined, game still running");
+		case WON:
+			int hpDiff = Math.max(winner.getHero().getHp() - getOpponent(winner).getHero().getHp(), 1);
+			return winner.getId() == playerId ? hpDiff : 0;
+		default:
+			break;
+		}
+		throw new IllegalStateException("Invalid match result: " + result);
 	}
 
 	@Override
