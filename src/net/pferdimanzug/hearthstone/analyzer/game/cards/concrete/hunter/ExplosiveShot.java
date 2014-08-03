@@ -30,6 +30,15 @@ public class ExplosiveShot extends SpellCard {
 
 		private final Spell primary = new DamageSpell(5);
 		private final Spell secondary = new DamageSpell(2);
+		
+		@Override
+		public Spell clone() {
+			ExplosiveShotSpell clone = new ExplosiveShotSpell();
+			clone.setSource(getSource());
+			clone.setTarget(getTarget());
+			clone.setSourceEntity(getSourceEntity());
+			return clone;
+		}
 
 		@Override
 		protected void onCast(GameContext context, Player player, Entity target) {

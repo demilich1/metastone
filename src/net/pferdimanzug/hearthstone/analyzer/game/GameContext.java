@@ -211,7 +211,7 @@ public class GameContext implements Cloneable {
 		startTurn(activePlayer);
 	}
 
-	private void startTurn(int playerId) {
+	public void startTurn(int playerId) {
 		turn++;
 		logic.startTurn(playerId);
 		onGameStateChanged();
@@ -329,8 +329,7 @@ public class GameContext implements Cloneable {
 		case RUNNING:
 			throw new IllegalStateException("Score cannot be determined, game still running");
 		case WON:
-			int hpDiff = Math.max(winner.getHero().getHp() - getOpponent(winner).getHero().getHp(), 1);
-			return winner.getId() == playerId ? hpDiff : 0;
+			return winner.getId() == playerId ? 1 : 0;
 		default:
 			break;
 		}

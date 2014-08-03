@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.PlayRandomBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
@@ -115,8 +116,13 @@ class Node {
 		for (Player player : simulation.getPlayers()) {
 			player.setBehaviour(new PlayRandomBehaviour());
 		}
-
-		simulation.playTurn();
+		// if this state was reached by performing 'End Turn' then we need to start the new turn first
+		if (node.incomingTransition.getAction().getActionType() == ActionType.END_TURN) {
+			simulation.startTurn(simulation.getActivePlayer().getId());
+		} else {
+			simulation.playTurn();
+		}
+		
 		return simulation.getScore(getPlayer());
 	}
 
