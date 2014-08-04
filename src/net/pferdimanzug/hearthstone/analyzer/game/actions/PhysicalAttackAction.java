@@ -28,6 +28,16 @@ public class PhysicalAttackAction extends GameAction {
 	}
 
 	@Override
+	public boolean isSameActionGroup(GameAction anotherAction) {
+		if (anotherAction.getActionType() != getActionType()) {
+			return false;
+		}
+		PhysicalAttackAction physicalAttackAction = (PhysicalAttackAction) anotherAction;
+		
+		return this.getAttackerReference().equals(physicalAttackAction.getAttackerReference());
+	}
+
+	@Override
 	public String toString() {
 		return String.format("%s Attacker: %s Defender: %s", getActionType(), attackerReference, getTargetKey());
 	}

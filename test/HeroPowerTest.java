@@ -36,6 +36,11 @@ public class HeroPowerTest extends TestBase {
 			public void execute(GameContext context, int playerId) {
 				context.getLogic().damage(context.getPlayer1(), warrior, 2 * ArmorUp.ARMOR_BONUS, SpellSource.SPELL_TRIGGER);
 			}
+
+			@Override
+			public boolean isSameActionGroup(GameAction anotherAction) {
+				return false;
+			}
 		};
 		damage.setTarget(warrior);
 		context.getLogic().performGameAction(context.getPlayer2().getId(), damage);
@@ -51,6 +56,11 @@ public class HeroPowerTest extends TestBase {
 			@Override
 			public void execute(GameContext context, int playerId) {
 				context.getLogic().damage(context.getPlayer1(), warrior, ArmorUp.ARMOR_BONUS / 2, SpellSource.SPELL_TRIGGER);
+			}
+
+			@Override
+			public boolean isSameActionGroup(GameAction anotherAction) {
+				return false;
 			}
 		};
 		damage.setTarget(warrior);

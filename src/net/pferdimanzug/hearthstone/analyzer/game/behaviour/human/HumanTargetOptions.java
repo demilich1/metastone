@@ -1,29 +1,35 @@
 package net.pferdimanzug.hearthstone.analyzer.game.behaviour.human;
 
-import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
+import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 
 public class HumanTargetOptions {
 
 	private final HumanBehaviour behaviour;
-	private final GameAction action;
-	private final Player player;
-	
-	public HumanTargetOptions(Player player, HumanBehaviour behaviour, GameAction action) {
-		this.player = player;
+	private final GameContext context;
+	private final int playerId;
+	private final ActionGroup actionGroup;
+
+	public HumanTargetOptions(HumanBehaviour behaviour, GameContext context, int playerId, ActionGroup actionGroup) {
 		this.behaviour = behaviour;
-		this.action = action;
+		this.context = context;
+		this.playerId = playerId;
+		this.actionGroup = actionGroup;
 	}
 
-	public GameAction getAction() {
-		return action;
+	public ActionGroup getActionGroup() {
+		return actionGroup;
 	}
 
 	public HumanBehaviour getBehaviour() {
 		return behaviour;
 	}
 
-	public Player getPlayer() {
-		return player;
+	public GameContext getContext() {
+		return context;
 	}
+
+	public int getPlayerId() {
+		return playerId;
+	}
+
 }

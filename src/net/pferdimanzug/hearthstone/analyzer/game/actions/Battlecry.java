@@ -9,7 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SpellSource;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
-public class Battlecry extends GameAction implements Cloneable {
+public class Battlecry extends GameAction {
 
 	public static Battlecry createBattlecry(Spell spell) {
 		return createBattlecry(spell, TargetSelection.NONE);
@@ -84,6 +84,11 @@ public class Battlecry extends GameAction implements Cloneable {
 
 	public boolean isResolvedLate() {
 		return resolvedLate;
+	}
+
+	@Override
+	public boolean isSameActionGroup(GameAction anotherAction) {
+		return anotherAction.getActionType() == getActionType();
 	}
 
 	public void setCondition(IBattlecryCondition condition) {

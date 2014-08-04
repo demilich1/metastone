@@ -46,8 +46,13 @@ public class PlayModeMediator extends Mediator<GameNotification> {
 			});
 			break;
 		case HUMAN_PROMPT_FOR_TARGET:
-			HumanTargetOptions targetOptions = (HumanTargetOptions) notification.getBody();
-			//selectTarget(targetOptions);
+			HumanTargetOptions options = (HumanTargetOptions) notification.getBody();
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					boardView.enableTargetSelection(options);
+				}
+			});
 			break;
 		case HUMAN_PROMPT_FOR_MULLIGAN:
 			HumanMulliganOptions mulliganOptions = (HumanMulliganOptions) notification.getBody();
@@ -66,7 +71,6 @@ public class PlayModeMediator extends Mediator<GameNotification> {
 	@Override
 	public List<GameNotification> listNotificationInterests() {
 		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
-		// notificationInterests.add(GameNotification.CANVAS_CREATED);
 		notificationInterests.add(GameNotification.GAME_STATE_UPDATE);
 		notificationInterests.add(GameNotification.GAME_ACTION_PERFORMED);
 		notificationInterests.add(GameNotification.HUMAN_PROMPT_FOR_ACTION);

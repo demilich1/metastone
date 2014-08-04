@@ -5,7 +5,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
-public abstract class GameAction {
+public abstract class GameAction implements Cloneable {
 	
 	private TargetSelection targetRequirement = TargetSelection.NONE;
 	private ActionType actionType = ActionType.UNDEFINED;
@@ -17,12 +17,22 @@ public abstract class GameAction {
 		return true;
 	}
 	
+	@Override
+	public GameAction clone() {
+		try {
+			return (GameAction) super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public abstract void execute(GameContext context, int playerId);
 	
 	public String getActionSuffix() {
 		return actionSuffix;
 	}
-
+	
 	public ActionType getActionType() {
 		return actionType;
 	}
@@ -38,6 +48,8 @@ public abstract class GameAction {
 	public TargetSelection getTargetRequirement() {
 		return targetRequirement;
 	}
+
+	public abstract boolean isSameActionGroup(GameAction anotherAction);
 
 	public void setActionSuffix(String actionSuffix) {
 		this.actionSuffix = actionSuffix;

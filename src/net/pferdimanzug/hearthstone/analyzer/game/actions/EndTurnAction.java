@@ -16,6 +16,11 @@ public class EndTurnAction extends GameAction {
 	}
 	
 	@Override
+	public boolean isSameActionGroup(GameAction anotherAction) {
+		return anotherAction.getActionType() == getActionType();
+	}
+
+	@Override
 	public String toString() {
 		return String.format("[%s]", getActionType());
 	}

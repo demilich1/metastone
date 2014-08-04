@@ -26,7 +26,7 @@ public abstract class PlayCardAction extends GameAction {
 		}
 		return true;
 	}
-	
+
 	@Override
 	public void execute(GameContext context, int playerId) {
 		CardReference cardReference = new CardReference(playerId, CardLocation.HAND, card.getId());
@@ -36,11 +36,11 @@ public abstract class PlayCardAction extends GameAction {
 		if (!card.hasTag(GameTag.COUNTERED)) {
 			try {
 				play(context, playerId);
-			} catch(Exception e) {
+			} catch (Exception e) {
 				System.out.println("ERROR while playing card " + card + " id:" + card.getId());
 				throw e;
 			}
-			
+
 		}
 		context.getLogic().afterCardPlayed(playerId, cardReference);
 		context.getEnvironment().remove(Environment.PENDING_CARD);
@@ -50,8 +50,17 @@ public abstract class PlayCardAction extends GameAction {
 		return card;
 	}
 
+	@Override
+	public boolean isSameActionGroup(GameAction anotherAction) {
+		if (anotherAction.getActionType() != getActionType()) {
+			return false;
+		}
+		PlayCardAction playCardAction = (PlayCardAction) anotherAction;
+		return this.getCard() == playCardAction.getCard();
+	}
+
 	protected abstract void play(GameContext context, int playerId);
-	
+
 	@Override
 	public String toString() {
 		return String.format("%s Card: %s Target: %s", getActionType(), card, getTargetKey());

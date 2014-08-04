@@ -9,22 +9,16 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.Behaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public class HumanBehaviour extends Behaviour {
 
 	private GameAction selectedAction;
 	private boolean waitingForInput;
-	private Entity selectedTarget;
 	private List<Card> mulliganCards;
 
 	@Override
 	public String getName() {
 		return "Human Controlled";
-	}
-
-	public Entity getSelectedTarget() {
-		return this.selectedTarget;
 	}
 
 	@Override
@@ -62,11 +56,6 @@ public class HumanBehaviour extends Behaviour {
 	
 	public void setSelectedAction(GameAction selectedAction) {
 		this.selectedAction = selectedAction;
-		waitingForInput = false;
-	}
-
-	public void setSelectedTarget(Entity selectedTarget) {
-		this.selectedTarget = selectedTarget;
 		waitingForInput = false;
 	}
 

@@ -4,18 +4,25 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanTargetOptions;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 import net.pferdimanzug.hearthstone.analyzer.gui.IconFactory;
@@ -149,53 +156,57 @@ public class GameBoardView extends BorderPane {
 	}
 	
 	
-//	private void enableSpellTargets(final HumanTargetOptions targetOptions) {
-//		GameAction action = targetOptions.getAction();
-//		for (final Entity target : action.getValidTargets()) {
-//			GameToken token = entityTokenMap.get(target);
-//			
-//			EventHandler<MouseEvent> clickedHander = new EventHandler<MouseEvent>() {
-//				
-//				@Override
-//				public void handle(MouseEvent event) {
-//					disableTargetSelection();
-//					targetOptions.getBehaviour().setSelectedTarget(target);
-//				}
-//			};
-//			
-//			token.showTargetMarker(clickedHander);
-//		}
-//	}
-//	
-//	private void enableSummonTargets(final HumanTargetOptions targetOptions) {
-//		GameAction action = targetOptions.getAction();
-//		int playerId = targetOptions.getPlayer().getId();
-//		for (final Entity target : action.getValidTargets()) {
-//			GameToken token = entityTokenMap.get(target);
-//			Button summonHelper = playerId == 0 ? summonHelperMap1.get(token) : summonHelperMap2.get(token);
-//			summonHelper.setVisible(true);
-//			summonHelper.setManaged(true);
-//			EventHandler<ActionEvent> clickedHander = new EventHandler<ActionEvent>() {
-//				
-//				@Override
-//				public void handle(ActionEvent event) {
-//					disableTargetSelection();
-//					targetOptions.getBehaviour().setSelectedTarget(target);
-//				}
-//			};
-//			summonHelper.setOnAction(clickedHander);
-//		}
-//	}
-//	
-//	public void enableTargetSelection(final HumanTargetOptions targetOptions) {
-//		GameAction action = targetOptions.getAction();
-//		if (action.getActionType() == ActionType.SUMMON) {
-//			enableSummonTargets(targetOptions);
-//		} else {
-//			enableSpellTargets(targetOptions);
-//		}
-//		setCenterMessage("Select target for " + action.getActionType());
-//	}
+	private void enableSpellTargets(final HumanTargetOptions targetOptions) {
+		int playerId = targetOptions.getPlayerId();
+		GameContext context = targetOptions.getContext();
+		
+		for (final GameAction action : targetOptions.getActionGroup().getActionsInGroup()) {
+			Entity target = context.resolveSingleTarget(playerId, action.getTargetKey());
+			GameToken token = entityTokenMap.get(target);
+			
+			EventHandler<MouseEvent> clickedHander = new EventHandler<MouseEvent>() {
+				
+				@Override
+				public void handle(MouseEvent event) {
+					disableTargetSelection();
+					targetOptions.getBehaviour().setSelectedAction(action);
+				}
+			};
+			
+			token.showTargetMarker(clickedHander);
+		}
+	}
+	
+	private void enableSummonTargets(final HumanTargetOptions targetOptions) {
+		int playerId = targetOptions.getPlayerId();
+		GameContext context = targetOptions.getContext();
+		for (final GameAction action : targetOptions.getActionGroup().getActionsInGroup()) {
+			Entity target = context.resolveSingleTarget(playerId, action.getTargetKey());
+			GameToken token = entityTokenMap.get(target);
+			Button summonHelper = playerId == 0 ? summonHelperMap1.get(token) : summonHelperMap2.get(token);
+			summonHelper.setVisible(true);
+			summonHelper.setManaged(true);
+			EventHandler<ActionEvent> clickedHander = new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent event) {
+					disableTargetSelection();
+					targetOptions.getBehaviour().setSelectedAction(action);
+				}
+			};
+			summonHelper.setOnAction(clickedHander);
+		}
+	}
+	
+	public void enableTargetSelection(final HumanTargetOptions targetOptions) {
+		GameAction action = targetOptions.getActionGroup().getPrototype();
+		if (action.getActionType() == ActionType.SUMMON) {
+			enableSummonTargets(targetOptions);
+		} else {
+			enableSpellTargets(targetOptions);
+		}
+		setCenterMessage("Select target for " + action.getActionType());
+	}
 	
 	private void hideCenterMessage() {
 		centerMessageLabel.setVisible(false);
