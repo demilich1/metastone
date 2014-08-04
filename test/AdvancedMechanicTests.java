@@ -235,13 +235,9 @@ public class AdvancedMechanicTests extends BasicTests {
 			}
 
 			@Override
-			public Entity provideTargetFor(Player player, GameAction action) {
-				return action.getValidTargets().get(0);
-			}
-
-			@Override
 			public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
-				return null;
+				System.out.println("Action: " + validActions.get(0));
+				return validActions.get(0);
 			}
 
 		});

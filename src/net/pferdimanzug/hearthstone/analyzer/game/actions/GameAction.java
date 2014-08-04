@@ -1,7 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.actions;
 
-import java.util.List;
-
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
@@ -11,7 +9,6 @@ public abstract class GameAction {
 	
 	private TargetSelection targetRequirement = TargetSelection.NONE;
 	private ActionType actionType = ActionType.UNDEFINED;
-	private List<Entity> validTargets;
 	private EntityReference source;
 	private EntityReference targetKey;
 	private String actionSuffix;
@@ -42,10 +39,6 @@ public abstract class GameAction {
 		return targetRequirement;
 	}
 
-	public List<Entity> getValidTargets() {
-		return validTargets;
-	}
-
 	public void setActionSuffix(String actionSuffix) {
 		this.actionSuffix = actionSuffix;
 	}
@@ -68,9 +61,5 @@ public abstract class GameAction {
 
 	protected void setTargetRequirement(TargetSelection targetRequirement) {
 		this.targetRequirement = targetRequirement;
-	}
-
-	public void setValidTargets(List<Entity> validTargets) {
-		this.validTargets = validTargets;
 	}
 }

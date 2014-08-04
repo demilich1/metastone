@@ -88,6 +88,27 @@ public class GameContext implements Cloneable {
 		return clone;
 	}
 
+	private void endGame() {
+		winner = logic.getWinner(getActivePlayer(), getOpponent(getActivePlayer()));
+		if (winner != null) {
+			logger.debug("Game finished after " + turn + " turns, the winner is: " + winner.getName());
+			winner.getStatistics().gameWon();
+			Player looser = getOpponent(winner);
+			looser.getStatistics().gameLost();
+		} else {
+			logger.debug("Game finished after " + turn + " turns, DRAW");
+			getPlayer1().getStatistics().gameLost();
+			getPlayer2().getStatistics().gameLost();
+		}
+	}
+
+	public void endTurn() {
+		onWillPerformAction(new EndTurnAction());
+		logic.endTurn(activePlayer);
+		activePlayer = activePlayer == PLAYER_1 ? PLAYER_2 : PLAYER_1;
+		onGameStateChanged();
+	}
+
 	private Card findCardinCollection(CardCollection cardCollection, int cardId) {
 		for (Card card : cardCollection) {
 			if (card.getId() == cardId) {
@@ -100,12 +121,12 @@ public class GameContext implements Cloneable {
 	public void fireGameEvent(GameEvent gameEvent) {
 		fireGameEvent(gameEvent, TriggerLayer.DEFAULT);
 	}
-
+	
 	public void fireGameEvent(GameEvent gameEvent, TriggerLayer layer) {
 		gameEvent.setTriggerLayer(layer);
 		triggerManager.fireGameEvent(gameEvent);
 	}
-
+	
 	public boolean gameDecided() {
 		result = logic.getMatchResult(getActivePlayer(), getOpponent(getActivePlayer()));
 		winner = logic.getWinner(getActivePlayer(), getOpponent(getActivePlayer()));
@@ -134,23 +155,23 @@ public class GameContext implements Cloneable {
 		}
 		return adjacentMinions;
 	}
-	
+
 	public List<CardCostModifier> getCardCostModifiers() {
 		return cardCostModifiers;
 	}
-	
+
 	public HashMap<Environment, Object> getEnvironment() {
 		return environment;
 	}
-
+	
 	public GameLogic getLogic() {
 		return logic;
 	}
-
+	
 	public int getMinionCount(Player player) {
 		return player.getMinions().size();
 	}
-	
+
 	public Player getOpponent(Player player) {
 		return player.getId() == PLAYER_1 ? getPlayer2() : getPlayer1();
 	}
@@ -158,7 +179,7 @@ public class GameContext implements Cloneable {
 	public Player getPlayer(int index) {
 		return players[index];
 	}
-
+	
 	public Player getPlayer1() {
 		return getPlayers()[PLAYER_1];
 	}
@@ -170,6 +191,20 @@ public class GameContext implements Cloneable {
 	public Player[] getPlayers() {
 		return players;
 	}
+
+	public int getScore(int playerId) {
+		switch (result) {
+		case DOUBLE_LOSS:
+			return 0;
+		case RUNNING:
+			throw new IllegalStateException("Score cannot be determined, game still running");
+		case WON:
+			return winner.getId() == playerId ? 1 : 0;
+		default:
+			break;
+		}
+		throw new IllegalStateException("Invalid match result: " + result);
+	}
 	
 	@SuppressWarnings("unchecked")
 	public Stack<Minion> getSummonStack() {
@@ -178,7 +213,7 @@ public class GameContext implements Cloneable {
 		}
 		return (Stack<Minion>) environment.get(Environment.SUMMON_STACK);
 	}
-	
+
 	public int getTotalMinionCount() {
 		int totalMinionCount = 0;
 		for (int i = 0; i < players.length; i++) {
@@ -186,7 +221,7 @@ public class GameContext implements Cloneable {
 		}
 		return totalMinionCount;
 	}
-
+	
 	public List<IGameEventListener> getTriggersAssociatedWith(EntityReference entityReference) {
 		return triggerManager.getTriggersAssociatedWith(entityReference);
 	}
@@ -195,10 +230,23 @@ public class GameContext implements Cloneable {
 		return turn;
 	}
 
+	public List<GameAction> getValidActions() {
+		if (gameDecided()) {
+			return new ArrayList<>();
+		}
+		return logic.getValidActions(activePlayer);
+	}
+	
 	protected void onGameStateChanged() {	
 	}
 	
 	protected void onWillPerformAction(GameAction action) {
+	}
+	
+	private void performAction(int playerId, GameAction gameAction) {
+		onWillPerformAction(gameAction);
+		logic.performGameAction(playerId, gameAction);
+		onGameStateChanged();
 	}
 	
 	public void play() {
@@ -211,28 +259,6 @@ public class GameContext implements Cloneable {
 		startTurn(activePlayer);
 	}
 
-	public void startTurn(int playerId) {
-		turn++;
-		logic.startTurn(playerId);
-		onGameStateChanged();
-		actionsThisTurn = 0;
-		playTurn();
-	}
-	
-	private void endGame() {
-		winner = logic.getWinner(getActivePlayer(), getOpponent(getActivePlayer()));
-		if (winner != null) {
-			logger.debug("Game finished after " + turn + " turns, the winner is: " + winner.getName());
-			winner.getStatistics().gameWon();
-			Player looser = getOpponent(winner);
-			looser.getStatistics().gameLost();
-		} else {
-			logger.debug("Game finished after " + turn + " turns, DRAW");
-			getPlayer1().getStatistics().gameLost();
-			getPlayer2().getStatistics().gameLost();
-		}
-	}
-	
 	public void playTurn() {
 		if (++actionsThisTurn > 99) {
 			logger.warn("Turn has been forcefully ended after {} actions", actionsThisTurn);
@@ -270,23 +296,10 @@ public class GameContext implements Cloneable {
 		}*/
 	}
 	
-	public void endTurn() {
-		onWillPerformAction(new EndTurnAction());
-		logic.endTurn(activePlayer);
-		activePlayer = activePlayer == PLAYER_1 ? PLAYER_2 : PLAYER_1;
-		onGameStateChanged();
-	}
-	
-	private void performAction(int playerId, GameAction gameAction) {
-		onWillPerformAction(gameAction);
-		logic.performGameAction(playerId, gameAction);
-		onGameStateChanged();
-	}
-
 	public void removeTriggersAssociatedWith(EntityReference entityReference) {
 		triggerManager.removeTriggersAssociatedWith(entityReference);
 	}
-	
+
 	public Card resolveCardReference(CardReference cardReference) {
 		Player player = getPlayer(cardReference.getPlayerId());
 		switch (cardReference.getLocation()) {
@@ -305,8 +318,11 @@ public class GameContext implements Cloneable {
 		logger.error("Could not resolve cardReference [}", cardReference);
 		return null;
 	}
-
+	
 	public Entity resolveSingleTarget(int playerId, EntityReference targetKey) {
+		if (targetKey == null) {
+			return null;
+		}
 		Player player = getPlayer(playerId);
 		return targetLogic.resolveTargetKey(this, player, null, targetKey).get(0);
 	}
@@ -315,25 +331,12 @@ public class GameContext implements Cloneable {
 		return targetLogic.resolveTargetKey(this, player, source, targetKey);
 	}
 	
-	public List<GameAction> getValidActions() {
-		if (gameDecided()) {
-			return new ArrayList<>();
-		}
-		return logic.getValidActions(activePlayer);
-	}
-	
-	public int getScore(int playerId) {
-		switch (result) {
-		case DOUBLE_LOSS:
-			return 0;
-		case RUNNING:
-			throw new IllegalStateException("Score cannot be determined, game still running");
-		case WON:
-			return winner.getId() == playerId ? 1 : 0;
-		default:
-			break;
-		}
-		throw new IllegalStateException("Invalid match result: " + result);
+	public void startTurn(int playerId) {
+		turn++;
+		logic.startTurn(playerId);
+		onGameStateChanged();
+		actionsThisTurn = 0;
+		playTurn();
 	}
 
 	@Override

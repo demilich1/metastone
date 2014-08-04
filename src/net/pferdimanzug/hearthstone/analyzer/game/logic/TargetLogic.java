@@ -134,13 +134,6 @@ public class TargetLogic {
 		return taunters;
 	}
 
-	// Blue post:
-	// Heroes and minions can attack any opposing character, be it minion or
-	// hero.
-	// Friendly minions cannot attack each other, but may target each other with
-	// Battlecry effects as long as the ability does not specify friendly or
-	// opposing.
-	// http://www.blizzposts.com/topic/en/216948/the-consistency-of-rules
 	public List<Entity> getValidTargets(GameContext context, Player player, GameAction action) {
 		TargetSelection targetRequirement = action.getTargetRequirement();
 		ActionType actionType = action.getActionType();
@@ -158,11 +151,11 @@ public class TargetLogic {
 			// (=null)
 			// in which case the minion will appear to the very right of your
 			// board
-			List<Entity> summonTargets = getEntities(context, player, action.getTargetRequirement());
+			List<Entity> summonTargets = getEntities(context, player, targetRequirement);
 			summonTargets.add(null);
 			return summonTargets;
 		}
-		List<Entity> potentialTargets = getEntities(context, player, action.getTargetRequirement());
+		List<Entity> potentialTargets = getEntities(context, player, targetRequirement);
 		return filterTargets(action, potentialTargets);
 	}
 

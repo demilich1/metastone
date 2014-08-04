@@ -16,77 +16,89 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardLocation;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardReference;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class ActionLogic {
 
 	private final TargetLogic targetLogic = new TargetLogic();
 
-	private GameAction getHeroAttackAction(GameContext context, Player player) {
+	private List<GameAction> getHeroAttackActions(GameContext context, Player player) {
+		List<GameAction> heroAttackActions = new ArrayList<GameAction>();
 		Hero hero = player.getHero();
 		if (!hero.canAttackThisTurn()) {
-			return null;
+			return heroAttackActions;
 		}
-		return new PhysicalAttackAction(hero.getReference());
+		
+		for (Entity validTarget : targetLogic.getValidTargets(context, player, new PhysicalAttackAction(hero.getReference()))) {
+			GameAction heroAttackAction = new PhysicalAttackAction(hero.getReference());
+			heroAttackAction.setTarget(validTarget);
+			heroAttackActions.add(heroAttackAction);
+		}
+		return heroAttackActions;
 	}
 
-	private GameAction getHeroPowerAction(GameContext context, Player player) {
+	private List<GameAction> getHeroPowerActions(GameContext context, Player player) {
+		List<GameAction> heroPowerActions = new ArrayList<GameAction>();
 		Hero hero = player.getHero();
 		CardReference heroPowerReference = new CardReference(player.getId(), CardLocation.HERO_POWER, hero.getHeroPower().getId());
 		if (!context.getLogic().canPlayCard(player.getId(), heroPowerReference)) {
-			return null;
+			return heroPowerActions;
 		}
-		return hero.getHeroPower().play();
+		for (Entity validTarget : targetLogic.getValidTargets(context, player, hero.getHeroPower().play())) {
+			GameAction heroPowerAction = hero.getHeroPower().play();
+			heroPowerAction.setTarget(validTarget);
+			heroPowerActions.add(heroPowerAction);
+		}
+		return heroPowerActions;
 	}
 
 	private List<GameAction> getPhysicalAttackActions(GameContext context, Player player) {
 		List<GameAction> physicalAttackActions = new ArrayList<GameAction>();
-		GameAction heroAttackAction = getHeroAttackAction(context, player);
-		if (validateAction(context, player, heroAttackAction)) {
-			physicalAttackActions.add(heroAttackAction);
-		}
+		physicalAttackActions.addAll(getHeroAttackActions(context, player));
+		
 		for (Minion minion : player.getMinions()) {
 			if (!minion.canAttackThisTurn()) {
 				continue;
 			}
-			PhysicalAttackAction minionAttackAction = new PhysicalAttackAction(minion.getReference());
-			if (validateAction(context, player, minionAttackAction)) {
+			
+			for (Entity validTarget : targetLogic.getValidTargets(context, player, new PhysicalAttackAction(minion.getReference()))) {
+				PhysicalAttackAction minionAttackAction = new PhysicalAttackAction(minion.getReference());
+				minionAttackAction.setTarget(validTarget);
 				physicalAttackActions.add(minionAttackAction);
 			}
 		}
 		return physicalAttackActions;
 	}
-
+	
 	private List<GameAction> getPlayCardActions(GameContext context, Player player) {
 		List<GameAction> playCardActions = new ArrayList<GameAction>();
-		GameAction heroPowerAction = getHeroPowerAction(context, player);
-		if (validateAction(context, player, heroPowerAction)) {
-			playCardActions.add(heroPowerAction);
-		}
+		playCardActions.addAll(getHeroPowerActions(context, player));
+		
 		for (Card card : player.getHand()) {
 			CardReference cardReference = new CardReference(player.getId(), CardLocation.HAND, card.getId());
 			if (!context.getLogic().canPlayCard(player.getId(), cardReference)) {
 				continue;
 			}
-			
+
 			if (card.hasTag(GameTag.CHOOSE_ONE)) {
 				IChooseOneCard chooseOneCard = (IChooseOneCard) card;
-				GameAction playCardAction = chooseOneCard.playOption1();
-				if (validateAction(context, player, playCardAction)) {
+				for (Entity validTarget : targetLogic.getValidTargets(context, player, chooseOneCard.playOption1())) {
+					GameAction playCardAction = chooseOneCard.playOption1();
+					playCardAction.setTarget(validTarget);
 					playCardActions.add(playCardAction);
-				}	
-				playCardAction = chooseOneCard.playOption2();
-				if (validateAction(context, player, playCardAction)) {
+				}
+				for (Entity validTarget : targetLogic.getValidTargets(context, player, chooseOneCard.playOption2())) {
+					GameAction playCardAction = chooseOneCard.playOption2();
+					playCardAction.setTarget(validTarget);
 					playCardActions.add(playCardAction);
-				}	
+				}
 			} else {
-				GameAction playCardAction = card.play();
-				if (validateAction(context, player, playCardAction)) {
+				for (Entity validTarget : targetLogic.getValidTargets(context, player, card.play())) {
+					GameAction playCardAction = card.play();
+					playCardAction.setTarget(validTarget);
 					playCardActions.add(playCardAction);
-				}	
+				}
+				
 			}
-			
-			
 		}
 		return playCardActions;
 	}
@@ -97,21 +109,6 @@ public class ActionLogic {
 		validActions.addAll(getPlayCardActions(context, player));
 		validActions.add(new EndTurnAction());
 		return validActions;
-	}
-
-	private boolean validateAction(GameContext context, Player player, GameAction action) {
-		if (action == null) {
-			return false;
-		}
-		if (action.getTargetRequirement() == TargetSelection.NONE) {
-			return true;
-		}
-		List<Entity> validTargets = targetLogic.getValidTargets(context, player, action);
-		if (validTargets.isEmpty()) {
-			return false;
-		}
-		action.setValidTargets(validTargets);
-		return true;
 	}
 
 }

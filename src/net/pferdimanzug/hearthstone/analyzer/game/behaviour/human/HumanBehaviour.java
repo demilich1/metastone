@@ -42,26 +42,6 @@ public class HumanBehaviour extends Behaviour {
 	}
 
 	@Override
-	public Entity provideTargetFor(Player player, GameAction action) {
-		if (action.getValidTargets() == null || action.getValidTargets().isEmpty()) {
-			return null;
-		}
-
-		waitingForInput = true;
-		ApplicationFacade.getInstance().sendNotification(GameNotification.HUMAN_PROMPT_FOR_TARGET,
-				new HumanTargetOptions(player, this, action));
-		
-		while (waitingForInput) {
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-			}
-		}
-
-		return selectedTarget;
-	}
-	
-	@Override
 	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
 		waitingForInput = true;
 		HumanActionOptions options = new HumanActionOptions(this, context, player, validActions);

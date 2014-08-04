@@ -3,7 +3,6 @@ package net.pferdimanzug.hearthstone.analyzer.game.behaviour;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
@@ -26,6 +25,20 @@ public class FlatMonteCarlo extends Behaviour {
 		this.iterations = iterations;
 	}
 
+	private Tuple<GameAction, Entity> getBestAction(HashMap<Tuple<GameAction, Entity>, Integer> actionScores) {
+		Tuple<GameAction, Entity> bestAction = null;
+		int bestScore = Integer.MIN_VALUE;
+		for (Tuple<GameAction, Entity> actionEntry : actionScores.keySet()) {
+			int score = actionScores.get(actionEntry);
+			if (score > bestScore) {
+				bestAction = actionEntry;
+				bestScore = score;
+			}
+		}
+		logger.debug("Best action determined by MonteCarlo: " + bestAction.getFirst().getActionType());
+		return bestAction;
+	}
+
 	@Override
 	public String getName() {
 		return "Flat Monte-Carlo " + iterations;
@@ -42,19 +55,14 @@ public class FlatMonteCarlo extends Behaviour {
 		return discardedCards;
 	}
 
-	@Override
-	public Entity provideTargetFor(Player player, GameAction action) {
-		// TODO: copied from PlayRandomBehaviour
-		List<Entity> validTargets = action.getValidTargets();
-		if (validTargets.isEmpty()) {
-			return null;
+	private int playRandomUntilEnd(GameContext simulation, int playerId) {
+		for (Player player : simulation.getPlayers()) {
+			player.setBehaviour(new PlayRandomBehaviour());
 		}
 
-		Entity randomTarget = validTargets.get(ThreadLocalRandom.current().nextInt(validTargets.size()));
-		if (randomTarget != null) {
-			logger.debug(player.getName() + " picks random target: " + randomTarget.getName());
-		}
-		return randomTarget;
+		simulation.playTurn();
+
+		return simulation.getScore(playerId);
 	}
 
 	@Override
@@ -65,19 +73,12 @@ public class FlatMonteCarlo extends Behaviour {
 		GameLogic.logger.debug("********SIMULATION starts**********");
 		HashMap<Tuple<GameAction, Entity>, Integer> actionScores = new HashMap<>();
 		for (GameAction gameAction : validActions) {
-			if (gameAction.getValidTargets() == null) {
-				int score = simulate(context, player.getId(), gameAction, null);
-				Tuple<GameAction, Entity> actionEntry = new Tuple<GameAction, Entity>(gameAction, null);
-				actionScores.put(actionEntry, score);
-				logger.debug("Action {} gets score of {}", gameAction.getActionType(), score);
-			} else {
-				for (Entity target : gameAction.getValidTargets()) {
-					int score = simulate(context, player.getId(), gameAction, target);
-					Tuple<GameAction, Entity> actionEntry = new Tuple<GameAction, Entity>(gameAction, target);
-					actionScores.put(actionEntry, score);
-					logger.debug("Action {} gets score of {}", gameAction.getActionType(), score);
-				}
-			}
+			Entity target = context.resolveSingleTarget(player.getId(), gameAction.getTargetKey());
+			int score = simulate(context, player.getId(), gameAction, target);
+			Tuple<GameAction, Entity> actionEntry = new Tuple<GameAction, Entity>(gameAction, target);
+			actionScores.put(actionEntry, score);
+			logger.debug("Action {} gets score of {}", gameAction.getActionType(), score);
+
 		}
 		GameLogic.logger.debug("********SIMULATION ENDS**********");
 		Tuple<GameAction, Entity> bestActionEntry = getBestAction(actionScores);
@@ -87,20 +88,6 @@ public class FlatMonteCarlo extends Behaviour {
 			bestAction.setTarget(target);
 		}
 
-		return bestAction;
-	}
-
-	private Tuple<GameAction, Entity> getBestAction(HashMap<Tuple<GameAction, Entity>, Integer> actionScores) {
-		Tuple<GameAction, Entity> bestAction = null;
-		int bestScore = Integer.MIN_VALUE;
-		for (Tuple<GameAction, Entity> actionEntry : actionScores.keySet()) {
-			int score = actionScores.get(actionEntry);
-			if (score > bestScore) {
-				bestAction = actionEntry;
-				bestScore = score;
-			}
-		}
-		logger.debug("Best action determined by MonteCarlo: " + bestAction.getFirst().getActionType());
 		return bestAction;
 	}
 
@@ -116,16 +103,6 @@ public class FlatMonteCarlo extends Behaviour {
 			score += playRandomUntilEnd(simulation.clone(), playerId);
 		}
 		return score;
-	}
-
-	private int playRandomUntilEnd(GameContext simulation, int playerId) {
-		for (Player player : simulation.getPlayers()) {
-			player.setBehaviour(new PlayRandomBehaviour());
-		}
-
-		simulation.playTurn();
-
-		return simulation.getScore(playerId);
 	}
 
 }

@@ -35,24 +35,24 @@ public class SimulationResult {
 		duration = endTimestamp - startTimestamp;
 	}
 	
+	public GameConfig getConfig() {
+		return config;
+	}
+
+	public long getDuration() {
+		return this.duration;
+	}
+
 	public int getNumberOfGames() {
 		return getConfig().getNumberOfGames();
 	}
-
+	
 	public GameStatistics getPlayer1Stats() {
 		return player1Stats;
 	}
 
 	public GameStatistics getPlayer2Stats() {
 		return player2Stats;
-	}
-	
-	public long getDuration() {
-		return this.duration;
-	}
-
-	public GameConfig getConfig() {
-		return config;
 	}
 	
 

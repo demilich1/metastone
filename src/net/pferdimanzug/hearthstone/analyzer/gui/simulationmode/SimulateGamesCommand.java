@@ -1,12 +1,9 @@
 package net.pferdimanzug.hearthstone.analyzer.gui.simulationmode;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
@@ -101,14 +98,6 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 			this.gameConfig = gameConfig;
 		}
 
-		public boolean isDone() {
-			return getResult() != null;
-		}
-
-		public GameContext getResult() {
-			return result;
-		}
-
 		@Override
 		public GameContext call() throws Exception {
 			PlayerConfig playerConfig1 = gameConfig.getPlayerConfig1();
@@ -126,6 +115,14 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 			result = newGame;
 			onGameComplete(gameConfig);
 			return result;
+		}
+
+		public GameContext getResult() {
+			return result;
+		}
+
+		public boolean isDone() {
+			return getResult() != null;
 		}
 
 	}

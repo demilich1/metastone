@@ -18,6 +18,15 @@ public class EitherOrSpell extends Spell {
 	}
 
 	@Override
+	public Spell clone() {
+		EitherOrSpell clone = new EitherOrSpell(either.clone(), or.clone(), condition);
+		clone.setSource(getSource());
+		clone.setTarget(getTarget());
+		clone.setSourceEntity(getSourceEntity());
+		return clone;
+	}
+	
+	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
 		Spell spellToCast = condition.isFulfilled(context, player, target) ? either : or;
 
@@ -25,15 +34,6 @@ public class EitherOrSpell extends Spell {
 			spellToCast.setTarget(getTarget());
 		}
 		context.getLogic().castSpell(player.getId(), spellToCast);
-	}
-	
-	@Override
-	public Spell clone() {
-		EitherOrSpell clone = new EitherOrSpell(either.clone(), or.clone(), condition);
-		clone.setSource(getSource());
-		clone.setTarget(getTarget());
-		clone.setSourceEntity(getSourceEntity());
-		return clone;
 	}
 
 	@Override

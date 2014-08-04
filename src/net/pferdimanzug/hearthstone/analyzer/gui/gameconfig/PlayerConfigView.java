@@ -16,10 +16,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.FlatMonteCarlo;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.GreedyOptimizeMove;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.MinMaxBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.NoAggressionBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.PlayRandomBehaviour;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.heuristic.WeightedHeuristic;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.mcts.MonteCarloTreeSearch;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
@@ -127,7 +128,7 @@ public class PlayerConfigView extends VBox {
 		}
 		behaviourList.add(new MonteCarloTreeSearch());
 		behaviourList.add(new FlatMonteCarlo(200));
-		behaviourList.add(new MinMaxBehaviour());
+		behaviourList.add(new GreedyOptimizeMove(new WeightedHeuristic()));
 		behaviourList.add(new NoAggressionBehaviour());
 
 		behaviourBox.setItems(behaviourList);

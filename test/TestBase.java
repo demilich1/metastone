@@ -78,13 +78,8 @@ public class TestBase {
 		}
 
 		@Override
-		public Entity provideTargetFor(Player player, GameAction action) {
-			return null;
-		}
-
-		@Override
 		public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
-			return null;
+			return validActions.get(0);
 		}
 		
 	}

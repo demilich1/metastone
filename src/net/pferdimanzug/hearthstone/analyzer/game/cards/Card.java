@@ -40,22 +40,22 @@ public abstract class Card extends Entity {
 		return null;
 	}
 	
-	public Card getCopy() {
-		Card copy = clone();
-		copy.setId(IdFactory.UNASSIGNED);
-		return copy;
-	}
-	
 	public int getBaseManaCost() {
 		return manaCost;
 	}
-
+	
 	public CardType getCardType() {
 		return cardType;
 	}
 
 	public HeroClass getClassRestriction() {
 		return classRestriction;
+	}
+
+	public Card getCopy() {
+		Card copy = clone();
+		copy.setId(IdFactory.UNASSIGNED);
+		return copy;
 	}
 
 	public String getDescription() {

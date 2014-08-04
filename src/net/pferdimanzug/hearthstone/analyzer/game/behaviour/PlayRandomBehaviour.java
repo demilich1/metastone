@@ -8,15 +8,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class PlayRandomBehaviour extends Behaviour {
-
-	private final static Logger logger = LoggerFactory.getLogger(PlayRandomBehaviour.class);
 
 	@Override
 	public String getName() {
@@ -27,21 +20,6 @@ public class PlayRandomBehaviour extends Behaviour {
 	public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
 		return new ArrayList<>();
 	}
-	
-	@Override
-	public Entity provideTargetFor(Player player, GameAction action) {
-		List<Entity> validTargets = action.getValidTargets();
-		if (validTargets.isEmpty()) {
-			return null;
-		}
-
-		Entity randomTarget = validTargets.get(ThreadLocalRandom.current().nextInt(validTargets.size()));
-		if (randomTarget != null) {
-			logger.debug(player.getName() + " picks random target: " + randomTarget.getName());
-		}
-		
-		return randomTarget;
-	}
 
 	@Override
 	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
@@ -51,19 +29,7 @@ public class PlayRandomBehaviour extends Behaviour {
 
 		int randomIndex = ThreadLocalRandom.current().nextInt(validActions.size());
 		GameAction randomAction = validActions.get(randomIndex);
-		selectRandomTarget(randomAction);
 		return randomAction;
-	}
-
-	private void selectRandomTarget(GameAction action) {
-		List<Entity> validTargets = action.getValidTargets();
-		if (validTargets == null || validTargets.isEmpty()) {
-			return;
-		}
-		
-		int randomIndex = ThreadLocalRandom.current().nextInt(validTargets.size());
-		Entity randomTarget = validTargets.get(randomIndex);
-		action.setTargetKey(EntityReference.pointTo(randomTarget));
 	}
 
 }

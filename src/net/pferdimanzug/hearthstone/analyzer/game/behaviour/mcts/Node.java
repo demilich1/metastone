@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.behaviour.mcts;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,30 +9,79 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.PlayRandomBehaviour;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 class Node {
 
 	private GameContext state;
-	private List<Transition> validTransitions;
+	private List<GameAction> validTransitions;
 	private final List<Node> children = new LinkedList<>();
-	private final Transition incomingTransition;
+	private final GameAction incomingAction;
 	private int visits;
 	private int score;
 	private final int player;
 
-	public Node(Transition incomingTransition, int player) {
-		this.incomingTransition = incomingTransition;
+	public Node(GameAction incomingAction, int player) {
+		this.incomingAction = incomingAction;
 		this.player = player;
+	}
+
+	private boolean canFurtherExpanded() {
+		return !validTransitions.isEmpty();
+	}
+
+	private Node expand() {
+		GameAction action = validTransitions.remove(0);
+		GameContext newState = state.clone();
+
+		try {
+			newState.getLogic().performGameAction(newState.getActivePlayer().getId(), action);
+		} catch (Exception e) {
+			System.err.println("Exception on action: " + action + " state decided: " + state.gameDecided());
+			e.printStackTrace();
+			throw e;
+		}
+
+		Node child = new Node(action, getPlayer());
+		child.initState(newState, newState.getValidActions());
+		children.add(child);
+		return child;
+	}
+
+	public GameAction getBestAction() {
+		GameAction best = null;
+		int bestScore = Integer.MIN_VALUE;
+		for (Node node : children) {
+			if (node.getVisits() > bestScore) {
+				best = node.incomingAction;
+				bestScore = node.getScore();
+			}
+		}
+		return best;
+	}
+
+	public List<Node> getChildren() {
+		return children;
+	}
+
+	public int getPlayer() {
+		return player;
+	}
+
+	public int getScore() {
+		return score;
 	}
 
 	public GameContext getState() {
 		return state;
 	}
 
+	public int getVisits() {
+		return visits;
+	}
+
 	public void initState(GameContext state, List<GameAction> validActions) {
 		this.state = state;
-		this.validTransitions = Transition.generate(validActions);
+		this.validTransitions = new ArrayList<GameAction>(validActions);
 	}
 
 	public boolean isExpandable() {
@@ -44,42 +94,12 @@ class Node {
 		return getChildren().size() < validTransitions.size();
 	}
 
-	public int getScore() {
-		return score;
-	}
-
-	public int getVisits() {
-		return visits;
-	}
-
-	private boolean canFurtherExpanded() {
-		return !validTransitions.isEmpty();
+	public boolean isLeaf() {
+		return children == null || children.isEmpty();
 	}
 
 	private boolean isTerminal() {
 		return state.gameDecided();
-	}
-
-	private Node expand() {
-		Transition transition = validTransitions.remove(0);
-		GameAction action = transition.getAction();
-		Entity target = transition.getTarget();
-		GameContext newState = state.clone();
-		if (target != null) {
-			action.setTarget(target);
-		}
-		try {
-			newState.getLogic().performGameAction(newState.getActivePlayer().getId(), action);
-		} catch (Exception e) {
-			System.err.println("Exception on action: " + action + " state decided: " + state.gameDecided());
-			e.printStackTrace();
-			throw e;
-		}
-
-		Node child = new Node(transition, getPlayer());
-		child.initState(newState, newState.getValidActions());
-		children.add(child);
-		return child;
 	}
 
 	public void process(ITreePolicy treePolicy) {
@@ -103,10 +123,6 @@ class Node {
 		}
 	}
 
-	public boolean isLeaf() {
-		return children == null || children.isEmpty();
-	}
-
 	public int rollOut(Node node) {
 		if (node.getState().gameDecided()) {
 			return node.getState().getScore(getPlayer());
@@ -117,8 +133,9 @@ class Node {
 			player.setBehaviour(new PlayRandomBehaviour());
 		}
 		// if this state was reached by performing 'End Turn' then we need to start the new turn first
-		if (node.incomingTransition.getAction().getActionType() == ActionType.END_TURN) {
-			simulation.startTurn(simulation.getActivePlayer().getId());
+		if (node.incomingAction.getActionType() == ActionType.END_TURN) {
+			//simulation.startTurn(simulation.getActivePlayer().getId());
+			simulation.playTurn();
 		} else {
 			simulation.playTurn();
 		}
@@ -129,26 +146,6 @@ class Node {
 	private void updateStats(int value) {
 		visits++;
 		score += value;
-	}
-
-	public List<Node> getChildren() {
-		return children;
-	}
-
-	public Transition getBestAction() {
-		Transition best = null;
-		int bestScore = Integer.MIN_VALUE;
-		for (Node node : children) {
-			if (node.getVisits() > bestScore) {
-				best = node.incomingTransition;
-				bestScore = node.getScore();
-			}
-		}
-		return best;
-	}
-
-	public int getPlayer() {
-		return player;
 	}
 
 }

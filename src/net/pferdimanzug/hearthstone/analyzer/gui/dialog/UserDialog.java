@@ -2,7 +2,6 @@ package net.pferdimanzug.hearthstone.analyzer.gui.dialog;
 
 import java.io.IOException;
 
-import net.pferdimanzug.hearthstone.analyzer.gui.IconFactory;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import net.pferdimanzug.hearthstone.analyzer.gui.IconFactory;
 
 public class UserDialog extends BorderPane implements EventHandler<ActionEvent> {
 	

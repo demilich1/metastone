@@ -9,18 +9,18 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SpellSource;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
-public class Battlecry extends GameAction {
-	
+public class Battlecry extends GameAction implements Cloneable {
+
 	public static Battlecry createBattlecry(Spell spell) {
 		return createBattlecry(spell, TargetSelection.NONE);
 	}
-	
+
 	public static Battlecry createBattlecry(Spell spell, TargetSelection targetSelection) {
 		Battlecry battlecry = new Battlecry(spell);
 		battlecry.setTargetRequirement(targetSelection);
 		return battlecry;
 	}
-	
+
 	private final Spell spell;
 	private boolean resolvedLate = false;
 	private IBattlecryCondition condition;
@@ -38,7 +38,7 @@ public class Battlecry extends GameAction {
 		}
 		return condition.isFulfilled(context, player);
 	}
-	
+
 	@Override
 	public final boolean canBeExecutedOn(Entity entity) {
 		if (!super.canBeExecutedOn(entity)) {
@@ -53,13 +53,23 @@ public class Battlecry extends GameAction {
 		return getEntityFilter().test(entity);
 	}
 
+	@Override
+	public Battlecry clone() {
+		Battlecry clone = Battlecry.createBattlecry(spell, getTargetRequirement());
+		clone.setActionSuffix(getActionSuffix());
+		clone.setCondition(getCondition());
+		clone.setEntityFilter(getEntityFilter());
+		clone.setResolvedLate(isResolvedLate());
+		clone.setSource(getSource());
+		return clone;
+	}
 
 	@Override
 	public void execute(GameContext context, int playerId) {
 		if (!spell.hasPredefinedTarget()) {
 			spell.setTarget(getTargetKey());
 		}
-		
+
 		spell.setSourceEntity(getSource());
 		context.getLogic().castSpell(playerId, spell);
 	}
@@ -87,7 +97,7 @@ public class Battlecry extends GameAction {
 	public void setResolvedLate(boolean resolvedLate) {
 		this.resolvedLate = resolvedLate;
 	}
-	
+
 	@Override
 	public String toString() {
 		return String.format("[%s '%s' resolvedLate:%s]", getActionType(), spell.getClass().getSimpleName(), resolvedLate);

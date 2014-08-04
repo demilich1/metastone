@@ -5,11 +5,9 @@ import java.util.List;
 
 import javafx.application.Platform;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanActionOptions;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanMulliganOptions;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanTargetOptions;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import de.pferdimanzug.nittygrittymvc.Mediator;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
@@ -49,7 +47,7 @@ public class PlayModeMediator extends Mediator<GameNotification> {
 			break;
 		case HUMAN_PROMPT_FOR_TARGET:
 			HumanTargetOptions targetOptions = (HumanTargetOptions) notification.getBody();
-			selectTarget(targetOptions);
+			//selectTarget(targetOptions);
 			break;
 		case HUMAN_PROMPT_FOR_MULLIGAN:
 			HumanMulliganOptions mulliganOptions = (HumanMulliganOptions) notification.getBody();
@@ -81,20 +79,6 @@ public class PlayModeMediator extends Mediator<GameNotification> {
 	@Override
 	public void onRegister() {
 		getFacade().sendNotification(GameNotification.SHOW_VIEW, boardView);
-	}
-
-	private void selectTarget(final HumanTargetOptions targetOptions) {
-		List<Entity> validTargets = targetOptions.getAction().getValidTargets();
-		if (validTargets.size() == 1 && targetOptions.getAction().getActionType() == ActionType.SUMMON) {
-			targetOptions.getBehaviour().setSelectedTarget(validTargets.get(0));
-			return;
-		}
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				boardView.enableTargetSelection(targetOptions);
-			}
-		});
 	}
 
 }
