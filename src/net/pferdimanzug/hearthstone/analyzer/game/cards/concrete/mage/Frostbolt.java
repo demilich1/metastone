@@ -15,12 +15,9 @@ public class Frostbolt extends SpellCard {
 	public Frostbolt() {
 		super("Frostbolt", Rarity.FREE, HeroClass.MAGE, 2);
 		setDescription("Deal $3 damage to a character and Freeze it.");
-		setSpell(new MetaSpell(new DamageSpell(3), new ApplyTagSpell(GameTag.FROZEN, new TurnStartTrigger())));
+		setSpell(new MetaSpell(new ApplyTagSpell(GameTag.FROZEN, new TurnStartTrigger()), new DamageSpell(3)));
 		setTargetRequirement(TargetSelection.ANY);
 	}
-	
-
-
 
 	@Override
 	public int getTypeId() {

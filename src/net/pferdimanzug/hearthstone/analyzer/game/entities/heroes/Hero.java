@@ -86,6 +86,7 @@ public abstract class Hero extends Actor {
 
 	public void setHeroPower(HeroPower heroPower) {
 		this.heroPower = heroPower;
+		heroPower.setOwner(getOwner());
 	}
 
 	public void setWeapon(Weapon weapon) {

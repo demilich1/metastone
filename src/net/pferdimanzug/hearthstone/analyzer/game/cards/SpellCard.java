@@ -60,7 +60,7 @@ public abstract class SpellCard extends Card {
 
 	@Override
 	public PlayCardAction play() {
-		return new PlayCardAction(this) {
+		return new PlayCardAction(getCardReference()) {
 			{
 				setTargetRequirement(targetRequirement);
 				setActionType(ActionType.SPELL);

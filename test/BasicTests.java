@@ -65,8 +65,7 @@ public class BasicTests extends TestBase {
 
 		int damage = 1;
 		TestMinionCard devMonsterCard = new TestMinionCard(damage, 2);
-		mage.getHand().add(devMonsterCard);
-		context.getLogic().performGameAction(mage.getId(), devMonsterCard.play());
+		playCard(context, mage, devMonsterCard);
 		
 		BuffHeroSpell heroBuffSpell = new BuffHeroSpell(damage, 0);
 		context.getLogic().castSpell(druid.getId(), heroBuffSpell);

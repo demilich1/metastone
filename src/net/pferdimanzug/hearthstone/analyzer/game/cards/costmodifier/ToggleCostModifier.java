@@ -32,7 +32,7 @@ public class ToggleCostModifier extends CardCostModifier {
 
 	@Override
 	public void onGameEvent(GameEvent event) {
-		Entity host = event.getGameContext().resolveSingleTarget(getOwner(), getHostReference());
+		Entity host = event.getGameContext().resolveSingleTarget(getHostReference());
 		if (toggleOnTrigger.interestedIn() == event.getEventType() && toggleOnTrigger.fire(event, host)) {
 			ready = true;
 		} else if (toggleOffTrigger.interestedIn() == event.getEventType() && toggleOffTrigger.fire(event, host)) {

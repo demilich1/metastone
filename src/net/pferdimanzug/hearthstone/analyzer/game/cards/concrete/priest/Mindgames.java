@@ -11,6 +11,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardLocation;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Mindgames extends SpellCard {
@@ -37,6 +38,7 @@ public class Mindgames extends SpellCard {
 			if (minionCard == null) {
 				minionCard = new ShadowOfNothing();
 			}
+			minionCard.setLocation(CardLocation.VOID);
 			SummonSpell summonSpell = new SummonSpell(minionCard);
 			context.getLogic().castSpell(player.getId(), summonSpell);
 		}

@@ -3,6 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardLocation;
 
 public abstract class ChooseOneCard extends Card implements IChooseOneCard {
 
@@ -20,14 +21,6 @@ public abstract class ChooseOneCard extends Card implements IChooseOneCard {
 		clone.card1 = card1.clone();
 		clone.card2 = card2.clone();
 		return clone;
-	}
-
-	public Card getCard1() {
-		return card1;
-	}
-
-	public Card getCard2() {
-		return card2;
 	}
 
 	@Override
@@ -52,7 +45,21 @@ public abstract class ChooseOneCard extends Card implements IChooseOneCard {
 	public void setCard2(Card card2) {
 		this.card2 = card2;
 	}
-	
+
+	@Override
+	public void setLocation(CardLocation cardLocation) {
+		super.setLocation(cardLocation);
+		card1.setLocation(cardLocation);
+		card2.setLocation(cardLocation);
+	}
+
+	@Override
+	public void setOwner(int ownerId) {
+		super.setOwner(ownerId);
+		card1.setOwner(ownerId);
+		card2.setOwner(ownerId);
+	}
+
 	@Override
 	public void setId(int id) {
 		super.setId(id);

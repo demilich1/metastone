@@ -40,8 +40,8 @@ public class Battlecry extends GameAction {
 	}
 
 	@Override
-	public final boolean canBeExecutedOn(Entity entity) {
-		if (!super.canBeExecutedOn(entity)) {
+	public final boolean canBeExecutedOn(GameContext context, Entity entity) {
+		if (!super.canBeExecutedOn(context, entity)) {
 			return false;
 		}
 		if (getSource().getId() == entity.getId()) {

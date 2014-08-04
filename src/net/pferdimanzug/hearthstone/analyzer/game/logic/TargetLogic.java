@@ -9,6 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
@@ -37,7 +38,7 @@ public class TargetLogic {
 		return false;
 	}
 
-	private List<Entity> filterTargets(GameAction action, List<Entity> potentialTargets) {
+	private List<Entity> filterTargets(GameContext context, GameAction action, List<Entity> potentialTargets) {
 		List<Entity> validTargets = new ArrayList<>();
 		for (Entity entity : potentialTargets) {
 			if ((action.getActionType() == ActionType.SPELL || action.getActionType() == ActionType.HERO_POWER)
@@ -49,16 +50,16 @@ public class TargetLogic {
 				continue;
 			}
 
-			if (action.canBeExecutedOn(entity)) {
+			if (action.canBeExecutedOn(context, entity)) {
 				validTargets.add(entity);
 			}
 		}
 		return validTargets;
 	}
 
-	private Actor findEntity(GameContext context, EntityReference targetKey) {
+	public Entity findEntity(GameContext context, EntityReference targetKey) {
 		int targetId = targetKey.getId();
-		Actor environmentResult = findInEnvironment(context, targetKey);
+		Entity environmentResult = findInEnvironment(context, targetKey);
 		if (environmentResult != null) {
 			return environmentResult;
 		}
@@ -81,12 +82,35 @@ public class TargetLogic {
 				}
 			}
 		}
+		
+		Entity cardResult = findInCards(context.getPlayer1(), targetId);
+		if (cardResult == null) {
+			cardResult = findInCards(context.getPlayer2(), targetId);
+		}
+		if (cardResult != null) {
+			return cardResult;
+		}
 
 		logger.error("Id " + targetId + " not found!");
 		throw new RuntimeException("Target not found exception: " + targetKey);
 	}
+	
+	private Entity findInCards(Player player, int targetId) {
+		for (Card card : player.getHand()) {
+			if (card.getId() == targetId) {
+				return card;
+			}
+		}
+		for (Card card : player.getDeck()) {
+			if (card.getId() == targetId) {
+				return card;
+			}
+		}
 
-	private Actor findInEnvironment(GameContext context, EntityReference targetKey) {
+		return null;
+	}
+
+	private Entity findInEnvironment(GameContext context, EntityReference targetKey) {
 		int targetId = targetKey.getId();
 		if (!context.getSummonStack().isEmpty()) {
 			Minion summonedMinion = context.getSummonStack().peek();
@@ -156,7 +180,7 @@ public class TargetLogic {
 			return summonTargets;
 		}
 		List<Entity> potentialTargets = getEntities(context, player, targetRequirement);
-		return filterTargets(action, potentialTargets);
+		return filterTargets(context, action, potentialTargets);
 	}
 
 	public List<Entity> resolveTargetKey(GameContext context, Player player, Actor source, EntityReference targetKey) {

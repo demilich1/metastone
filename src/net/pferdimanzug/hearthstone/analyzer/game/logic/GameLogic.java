@@ -53,6 +53,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.IGameEventListe
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerLayer;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.secrets.Secret;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardLocation;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.IdFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
@@ -78,7 +79,7 @@ public class GameLogic implements Cloneable {
 	private final ActionLogic actionLogic = new ActionLogic();
 	private final IdFactory idFactory;
 	private GameContext context;
-	private boolean loggingEnabled;
+	private boolean loggingEnabled = true;
 
 	public GameLogic() {
 		idFactory = new IdFactory();
@@ -104,8 +105,9 @@ public class GameLogic implements Cloneable {
 
 	public void afterCardPlayed(int playerId, CardReference cardReference) {
 		Player player = context.getPlayer(playerId);
-		// Card card = context.resolveCardReference(cardReference);
 		player.getHero().modifyTag(GameTag.COMBO, +1);
+		Card card = context.resolveCardReference(cardReference);
+		card.setLocation(CardLocation.VOID);
 	}
 
 	public int applyAmplify(Player player, int baseValue) {
@@ -121,6 +123,7 @@ public class GameLogic implements Cloneable {
 	private void assignCardIds(CardCollection cardCollection) {
 		for (Card card : cardCollection) {
 			card.setId(idFactory.generateId());
+			card.setLocation(CardLocation.DECK);
 		}
 	}
 
@@ -159,12 +162,11 @@ public class GameLogic implements Cloneable {
 		Player player = context.getPlayer(playerId);
 		Actor source = null;
 		if (spell.getSourceEntity() != null) {
-			source = (Actor) context.resolveSingleTarget(playerId, spell.getSourceEntity());
+			source = (Actor) context.resolveSingleTarget(spell.getSourceEntity());
 		}
 		SpellCard sourceCard = null;
 
 		List<Entity> targets = targetLogic.resolveTargetKey(context, player, source, spell.getTarget());
-
 		// target can only be changed when there is one target
 		// note: this code block is basically exclusively for the SpellBender
 		// Secret, but it can easily be expanded if targets of area of effect
@@ -627,16 +629,20 @@ public class GameLogic implements Cloneable {
 	}
 
 	private void log(String message) {
-		log(message, null, null);
+		if (isLoggingEnabled() && logger.isDebugEnabled()) {
+			logger.debug(message);
+		}
 	}
 
 	private void log(String message, Object param1) {
-		log(message, param1, null);
+		if (isLoggingEnabled() && logger.isDebugEnabled()) {
+			logger.debug(message, param1);
+		}
 	}
 
 	private void log(String message, Object param1, Object param2) {
 		if (isLoggingEnabled() && logger.isDebugEnabled()) {
-			log(message, param1, param2);
+			logger.debug(message, param1, param2);
 		}
 	}
 
@@ -776,8 +782,10 @@ public class GameLogic implements Cloneable {
 		if (hand.getCount() < MAX_HAND_CARDS) {
 			log("{} receives card {}", player.getName(), card);
 			hand.add(card);
+			card.setLocation(CardLocation.HAND);
 		} else {
 			log("{} has too many cards on his hand, card destroyed: {}", player.getName(), card);
+			card.setLocation(CardLocation.VOID);
 		}
 	}
 
@@ -983,8 +991,9 @@ public class GameLogic implements Cloneable {
 		return list;
 	}
 
-	public void useHeroPower(int playerId, HeroPower power) {
+	public void useHeroPower(int playerId) {
 		Player player = context.getPlayer(playerId);
+		HeroPower power = player.getHero().getHeroPower();
 		modifyCurrentMana(playerId, -power.getManaCost(context, player));
 		log("{} uses {}", player.getName(), power);
 		power.setUsed(true);

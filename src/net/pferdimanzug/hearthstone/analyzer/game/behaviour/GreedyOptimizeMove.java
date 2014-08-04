@@ -9,7 +9,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.EndTurnAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.heuristic.IGameStateHeuristic;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
@@ -53,16 +52,14 @@ public class GreedyOptimizeMove extends Behaviour {
 		int bestScore = heuristic.getScore(context, player.getId());
 		logger.debug("Current game state has a score of {}", bestScore, hashCode());
 		for (GameAction gameAction : validActions) {
-			Entity target = context.resolveSingleTarget(player.getId(), gameAction.getTargetKey());
-			GameContext simulationResult = simulateAction(context, player, gameAction, target);
+			GameContext simulationResult = simulateAction(context, player, gameAction);
 			int gameStateScore = heuristic.getScore(simulationResult, player.getId());
-			logger.debug("Action (target {}) gains score of {}", target, gameStateScore);
+			logger.debug("Action {} gains score of {}", gameAction, gameStateScore);
 			if (gameStateScore > bestScore) {
 				bestScore = gameStateScore;
 				bestAction = gameAction;
 				bestTarget = bestAction.getTargetKey();
 				logger.debug("BEST ACTION SO FAR id:{}", bestAction.hashCode());
-				logger.debug("Target is set to {}", target);
 			}
 
 		}
@@ -74,13 +71,9 @@ public class GreedyOptimizeMove extends Behaviour {
 		return bestAction;
 	}
 
-	private GameContext simulateAction(GameContext context, Player player, GameAction action, Entity target) {
+	private GameContext simulateAction(GameContext context, Player player, GameAction action) {
 		GameContext simulation = context.clone();
 		GameLogic.logger.debug("********SIMULATION starts**********");
-		if (target != null) {
-			action.setTarget(target);
-		}
-
 		simulation.getLogic().performGameAction(player.getId(), action);
 		GameLogic.logger.debug("********SIMULATION ends**********");
 		return simulation;

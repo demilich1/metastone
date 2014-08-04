@@ -1,22 +1,22 @@
 package net.pferdimanzug.hearthstone.analyzer.game.actions;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class PlayMinionCardAction extends PlayCardAction {
 
 	private final Battlecry battlecry;
 
-	public PlayMinionCardAction(Card card) {
-		this(card, null);
+	public PlayMinionCardAction(CardReference cardReference) {
+		this(cardReference, null);
 	}
 
-	public PlayMinionCardAction(Card card, Battlecry battlecry) {
-		super(card);
+	public PlayMinionCardAction(CardReference cardReference, Battlecry battlecry) {
+		super(cardReference);
 		this.battlecry = battlecry;
 		setTargetRequirement(TargetSelection.FRIENDLY_MINIONS);
 		setActionType(ActionType.SUMMON);
@@ -24,8 +24,11 @@ public class PlayMinionCardAction extends PlayCardAction {
 
 	@Override
 	protected void play(GameContext context, int playerId) {
-		MinionCard minionCard = (MinionCard) getCard();
-		Actor nextTo = (Actor) (getTargetKey() != null ? context.resolveSingleTarget(playerId, getTargetKey()) : null);
+		MinionCard minionCard = (MinionCard) context.resolveCardReference(getCardReference());
+		if (minionCard == null) {
+			System.out.println("MinionCard is NULL: " + getCardReference());
+		}
+		Actor nextTo = (Actor) (getTargetKey() != null ? context.resolveSingleTarget(getTargetKey()) : null);
 		Minion minion = minionCard.summon();
 		if (battlecry != null) {
 			minion.setBattlecry(battlecry);

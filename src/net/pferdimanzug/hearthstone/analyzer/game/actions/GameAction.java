@@ -13,7 +13,7 @@ public abstract class GameAction implements Cloneable {
 	private EntityReference targetKey;
 	private String actionSuffix;
 	
-	public boolean canBeExecutedOn(Entity entity) {
+	public boolean canBeExecutedOn(GameContext gameContext, Entity entity) {
 		return true;
 	}
 	

@@ -35,7 +35,7 @@ public abstract class MinionCard extends Card {
 	
 	@Override
 	public PlayCardAction play() {
-		return new PlayMinionCardAction(this);
+		return new PlayMinionCardAction(getCardReference());
 	}
 
 	public void setRace(Race race) {

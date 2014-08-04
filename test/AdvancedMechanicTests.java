@@ -43,8 +43,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		player.getHand().removeAll();
 
 		TestMinionCard minionCard = new TestMinionCard(1, 4);
-		context.getLogic().receiveCard(opponent.getId(), minionCard);
-		context.getLogic().performGameAction(opponent.getId(), minionCard.play());
+		playCard(context, opponent, minionCard);
 
 		player.getHero().getHeroPower().setUsed(true);
 		Card wrath = new Wrath();

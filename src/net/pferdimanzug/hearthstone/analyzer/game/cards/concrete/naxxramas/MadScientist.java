@@ -13,6 +13,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.AddSecretSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardLocation;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class MadScientist extends MinionCard {
@@ -60,6 +61,7 @@ public class MadScientist extends MinionCard {
 			SecretCard secretCard = (SecretCard) secretCards.getRandom();
 			AddSecretSpell secretSpell = (AddSecretSpell) secretCard.getSpell();
 			context.getLogic().playSecret(player, secretSpell.getSecret());
+			secretCard.setLocation(CardLocation.VOID);
 			player.getDeck().remove(secretCard);
 		}
 		

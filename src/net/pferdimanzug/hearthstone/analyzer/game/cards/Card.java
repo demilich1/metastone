@@ -9,6 +9,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardLocation;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.IdFactory;
 
 public abstract class Card extends Entity {
@@ -19,6 +21,7 @@ public abstract class Card extends Entity {
 	private final Rarity rarity;
 	private final HeroClass classRestriction;
 	private boolean collectible = true;
+	private CardLocation location;
 	
 	public Card(String name, CardType cardType, Rarity rarity, HeroClass classRestriction, int manaCost) {
 		setName(name);
@@ -50,6 +53,10 @@ public abstract class Card extends Entity {
 
 	public HeroClass getClassRestriction() {
 		return classRestriction;
+	}
+	
+	public CardReference getCardReference() {
+		return new CardReference(getOwner(), getLocation(), getId());
 	}
 
 	public Card getCopy() {
@@ -92,6 +99,14 @@ public abstract class Card extends Entity {
 	@Override
 	public String toString() {
 		return String.format("[%s '%s' Manacost:%d]", getCardType(), getName(), manaCost);
+	}
+
+	public CardLocation getLocation() {
+		return location;
+	}
+
+	public void setLocation(CardLocation location) {
+		this.location = location;
 	}
 
 }

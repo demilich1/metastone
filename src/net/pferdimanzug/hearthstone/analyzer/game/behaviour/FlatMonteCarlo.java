@@ -8,9 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
-import net.pferdimanzug.hearthstone.analyzer.utils.Tuple;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,17 +23,17 @@ public class FlatMonteCarlo extends Behaviour {
 		this.iterations = iterations;
 	}
 
-	private Tuple<GameAction, Entity> getBestAction(HashMap<Tuple<GameAction, Entity>, Integer> actionScores) {
-		Tuple<GameAction, Entity> bestAction = null;
+	private GameAction getBestAction(HashMap<GameAction, Integer> actionScores) {
+		GameAction bestAction = null;
 		int bestScore = Integer.MIN_VALUE;
-		for (Tuple<GameAction, Entity> actionEntry : actionScores.keySet()) {
+		for (GameAction actionEntry : actionScores.keySet()) {
 			int score = actionScores.get(actionEntry);
 			if (score > bestScore) {
 				bestAction = actionEntry;
 				bestScore = score;
 			}
 		}
-		logger.debug("Best action determined by MonteCarlo: " + bestAction.getFirst().getActionType());
+		logger.debug("Best action determined by MonteCarlo: " + bestAction.getActionType());
 		return bestAction;
 	}
 
@@ -71,31 +69,20 @@ public class FlatMonteCarlo extends Behaviour {
 			return validActions.get(0);
 		}
 		GameLogic.logger.debug("********SIMULATION starts**********");
-		HashMap<Tuple<GameAction, Entity>, Integer> actionScores = new HashMap<>();
+		HashMap<GameAction, Integer> actionScores = new HashMap<>();
 		for (GameAction gameAction : validActions) {
-			Entity target = context.resolveSingleTarget(player.getId(), gameAction.getTargetKey());
-			int score = simulate(context, player.getId(), gameAction, target);
-			Tuple<GameAction, Entity> actionEntry = new Tuple<GameAction, Entity>(gameAction, target);
-			actionScores.put(actionEntry, score);
+			int score = simulate(context, player.getId(), gameAction);
+			actionScores.put(gameAction, score);
 			logger.debug("Action {} gets score of {}", gameAction.getActionType(), score);
 
 		}
 		GameLogic.logger.debug("********SIMULATION ENDS**********");
-		Tuple<GameAction, Entity> bestActionEntry = getBestAction(actionScores);
-		GameAction bestAction = bestActionEntry.getFirst();
-		Entity target = bestActionEntry.getSecond();
-		if (target != null) {
-			bestAction.setTarget(target);
-		}
-
+		GameAction bestAction = getBestAction(actionScores);
 		return bestAction;
 	}
 
-	private int simulate(GameContext context, int playerId, GameAction action, Entity target) {
+	private int simulate(GameContext context, int playerId, GameAction action) {
 		GameContext simulation = context.clone();
-		if (target != null) {
-			action.setTarget(target);
-		}
 		GameLogic.logger.debug("********TESTING FOLLOWING ACTION IN MONTE CARLO**********");
 		simulation.getLogic().performGameAction(simulation.getActivePlayer().getId(), action);
 		int score = 0;

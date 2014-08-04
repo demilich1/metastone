@@ -31,9 +31,9 @@ public abstract class HeroPower extends SpellCard {
 	
 	@Override
 	public PlayCardAction play() {
-		return new HeroPowerAction(this) {
+		return new HeroPowerAction(getOwner(), getId()) {
 			{
-				setTargetRequirement(getTargetRequirement());
+				setTargetRequirement(HeroPower.this.getTargetRequirement());
 				setActionType(ActionType.HERO_POWER);
 			}
 
@@ -47,6 +47,7 @@ public abstract class HeroPower extends SpellCard {
 		};
 	}
 	
+	@Override
 	public void setSpell(Spell spell) {
 		super.setSpell(spell);
 		spell.setSource(SpellSource.HERO_POWER);

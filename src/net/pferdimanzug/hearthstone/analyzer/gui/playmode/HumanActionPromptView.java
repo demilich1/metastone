@@ -25,6 +25,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.ActionGroup;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanActionOptions;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanTargetOptions;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
@@ -32,30 +33,35 @@ public class HumanActionPromptView extends Stage {
 
 	private static String getActionString(GameContext context, GameAction action) {
 		PlayCardAction playCardAction = null;
+		Card card = null;
 		String actionString = "";
 		switch (action.getActionType()) {
 		case HERO_POWER:
 			HeroPowerAction heroPowerAction = (HeroPowerAction) action;
-			actionString = "HERO POWER: " + heroPowerAction.getHeroPower().getName();
+			card = context.resolveCardReference(heroPowerAction.getCardReference());
+			actionString = "HERO POWER: " + card.getName();
 			break;
 		case BATTLECRY:
 			break;
 		case PHYSICAL_ATTACK:
 			PhysicalAttackAction physicalAttackAction = (PhysicalAttackAction) action;
-			Entity attacker = context.resolveSingleTarget(0, physicalAttackAction.getAttackerReference());
+			Entity attacker = context.resolveSingleTarget(physicalAttackAction.getAttackerReference());
 			actionString = "ATTACK with " + attacker.getName();
 			break;
 		case SPELL:
 			playCardAction = (PlayCardAction) action;
-			actionString = "CAST SPELL: " + playCardAction.getCard().getName();
+			card = context.resolveCardReference(playCardAction.getCardReference());
+			actionString = "CAST SPELL: " + card.getName();
 			break;
 		case SUMMON:
 			playCardAction = (PlayCardAction) action;
-			actionString = "SUMMON: " + playCardAction.getCard().getName();
+			card = context.resolveCardReference(playCardAction.getCardReference());
+			actionString = "SUMMON: " + card.getName();
 			break;
 		case EQUIP_WEAPON:
 			playCardAction = (PlayCardAction) action;
-			actionString = "WEAPON: " + playCardAction.getCard().getName();
+			card = context.resolveCardReference(playCardAction.getCardReference());
+			actionString = "WEAPON: " + card.getName();
 			break;
 		case END_TURN:
 			actionString = "END TURN";

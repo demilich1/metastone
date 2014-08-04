@@ -1,29 +1,20 @@
 package net.pferdimanzug.hearthstone.analyzer.game.actions;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.HeroPower;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardLocation;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardReference;
 
 public abstract class HeroPowerAction extends PlayCardAction {
 
-	public HeroPowerAction(HeroPower heroPower) {
-		super(heroPower);
+	public HeroPowerAction(int playerId, int cardId) {
+		super(new CardReference(playerId, CardLocation.HERO_POWER, cardId));
 		setActionType(ActionType.HERO_POWER);
 	}
 	
 	@Override
 	public void execute(GameContext context, int playerId) {
-		context.getLogic().useHeroPower(playerId, getHeroPower());
+		context.getLogic().useHeroPower(playerId);
 		play(context, playerId);
-	}
-	
-	public HeroPower getHeroPower() {
-		return (HeroPower) getCard();
-	}
-
-	@Override
-	public TargetSelection getTargetRequirement() {
-		return getHeroPower().getTargetRequirement();
 	}
 	
 }

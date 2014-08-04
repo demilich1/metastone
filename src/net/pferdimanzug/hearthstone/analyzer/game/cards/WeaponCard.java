@@ -20,7 +20,7 @@ public abstract class WeaponCard extends Card {
 	
 	@Override
 	public PlayCardAction play() {
-		return new PlayCardAction(this) {
+		return new PlayCardAction(getCardReference()) {
 			
 			{
 				setActionType(ActionType.EQUIP_WEAPON);

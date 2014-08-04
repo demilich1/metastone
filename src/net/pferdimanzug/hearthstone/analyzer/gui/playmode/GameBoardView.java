@@ -157,11 +157,10 @@ public class GameBoardView extends BorderPane {
 	
 	
 	private void enableSpellTargets(final HumanTargetOptions targetOptions) {
-		int playerId = targetOptions.getPlayerId();
 		GameContext context = targetOptions.getContext();
 		
 		for (final GameAction action : targetOptions.getActionGroup().getActionsInGroup()) {
-			Entity target = context.resolveSingleTarget(playerId, action.getTargetKey());
+			Entity target = context.resolveSingleTarget(action.getTargetKey());
 			GameToken token = entityTokenMap.get(target);
 			
 			EventHandler<MouseEvent> clickedHander = new EventHandler<MouseEvent>() {
@@ -181,7 +180,7 @@ public class GameBoardView extends BorderPane {
 		int playerId = targetOptions.getPlayerId();
 		GameContext context = targetOptions.getContext();
 		for (final GameAction action : targetOptions.getActionGroup().getActionsInGroup()) {
-			Entity target = context.resolveSingleTarget(playerId, action.getTargetKey());
+			Entity target = context.resolveSingleTarget(action.getTargetKey());
 			GameToken token = entityTokenMap.get(target);
 			Button summonHelper = playerId == 0 ? summonHelperMap1.get(token) : summonHelperMap2.get(token);
 			summonHelper.setVisible(true);

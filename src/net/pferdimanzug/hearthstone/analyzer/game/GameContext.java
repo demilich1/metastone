@@ -139,7 +139,7 @@ public class GameContext implements Cloneable {
 	
 	public List<Entity> getAdjacentMinions(Player player, EntityReference minionReference) {
 		List<Entity> adjacentMinions = new ArrayList<>();
-		Actor minion = (Actor) resolveSingleTarget(player.getId(), minionReference);
+		Actor minion = (Actor) resolveSingleTarget(minionReference);
 		List<Minion> minions = getPlayer(minion.getOwner()).getMinions();
 		int index = minions.indexOf(minion);
 		if (index == -1) {
@@ -302,6 +302,10 @@ public class GameContext implements Cloneable {
 
 	public Card resolveCardReference(CardReference cardReference) {
 		Player player = getPlayer(cardReference.getPlayerId());
+		Card pendingCard = (Card) getEnvironment().get(Environment.PENDING_CARD);
+		if (pendingCard != null && pendingCard.getCardReference().equals(cardReference)) {
+			return pendingCard;
+		}
 		switch (cardReference.getLocation()) {
 		case DECK:
 			return findCardinCollection(player.getDeck(), cardReference.getCardId());
@@ -315,16 +319,15 @@ public class GameContext implements Cloneable {
 			break;
 		
 		}
-		logger.error("Could not resolve cardReference [}", cardReference);
+		logger.error("Could not resolve cardReference {}", cardReference);
 		return null;
 	}
 	
-	public Entity resolveSingleTarget(int playerId, EntityReference targetKey) {
+	public Entity resolveSingleTarget(EntityReference targetKey) {
 		if (targetKey == null) {
 			return null;
 		}
-		Player player = getPlayer(playerId);
-		return targetLogic.resolveTargetKey(this, player, null, targetKey).get(0);
+		return targetLogic.findEntity(this, targetKey);
 	}
 	
 	public List<Entity> resolveTarget(Player player, Actor source, EntityReference targetKey) {

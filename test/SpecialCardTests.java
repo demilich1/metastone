@@ -52,7 +52,7 @@ public class SpecialCardTests extends TestBase {
 		
 		
 		GameAction useFireblast = mage.getHero().getHeroPower().play();
-		validTargets = context.getLogic().getValidTargets(warrior.getId(), useFireblast);
+		validTargets = context.getLogic().getValidTargets(mage.getId(), useFireblast);
 		// should be three valid targets, both heroes + minion which is not the faerie dragon
 		Assert.assertEquals(validTargets.size(), 3);
 		Assert.assertFalse(validTargets.contains(elusiveOne));
@@ -74,12 +74,10 @@ public class SpecialCardTests extends TestBase {
 		warrior.setMana(10);
 
 		MinionCard gurubashiBerserkerCard = new GurubashiBerserker();
-		warrior.getHand().add(gurubashiBerserkerCard);
-		context.getLogic().performGameAction(warrior.getId(), gurubashiBerserkerCard.play());
+		playCard(context, warrior, gurubashiBerserkerCard);
 		
 		MinionCard oasisSnapjawCard = new OasisSnapjaw();
-		mage.getHand().add(oasisSnapjawCard);
-		context.getLogic().performGameAction(mage.getId(), oasisSnapjawCard.play());
+		playCard(context, mage, oasisSnapjawCard);
 		
 		Actor attacker = getSingleMinion(mage.getMinions());
 		Actor defender = getSingleMinion(warrior.getMinions());

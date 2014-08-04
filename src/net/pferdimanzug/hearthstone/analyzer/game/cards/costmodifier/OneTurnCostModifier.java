@@ -22,7 +22,7 @@ public class OneTurnCostModifier extends CardCostModifier {
 
 	@Override
 	public void onGameEvent(GameEvent event) {
-		Entity host = event.getGameContext().resolveSingleTarget(getOwner(), getHostReference());
+		Entity host = event.getGameContext().resolveSingleTarget(getHostReference());
 		if (expirationTrigger.fire(event, host)) {
 			expire();
 		}

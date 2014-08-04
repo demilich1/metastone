@@ -64,7 +64,7 @@ public class Aura extends SpellTrigger {
 	public void onGameEvent(GameEvent event) {
 		GameContext context = event.getGameContext();
 		Player owner = context.getPlayer(getOwner());
-		Actor sourceActor = (Actor) context.resolveSingleTarget(getOwner(), getHostReference());
+		Actor sourceActor = (Actor) context.resolveSingleTarget(getHostReference());
 		List<Entity> resolvedTargets = context.resolveTarget(owner, sourceActor, targets);
 
 		for (Entity target : resolvedTargets) {
@@ -88,7 +88,7 @@ public class Aura extends SpellTrigger {
 	public void onRemove(GameContext context) {
 		for (int targetId : affectedEntities) {
 			EntityReference targetKey = new EntityReference(targetId);
-			Entity target = context.resolveSingleTarget(getOwner(), targetKey);
+			Entity target = context.resolveSingleTarget(targetKey);
 			removeAuraEffect.setTarget(target.getReference());
 			context.getLogic().castSpell(getOwner(), removeAuraEffect);
 		}

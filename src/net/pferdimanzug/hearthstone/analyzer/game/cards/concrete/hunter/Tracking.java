@@ -27,10 +27,6 @@ public class Tracking extends SpellCard {
 		return 48;
 	}
 	
-	
-
-
-
 	// Tracking description:
 	// "Look at the top three cards of your deck.
 	// Draw one and discard the others."

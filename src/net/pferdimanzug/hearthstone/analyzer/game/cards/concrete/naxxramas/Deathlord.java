@@ -11,6 +11,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardLocation;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class Deathlord extends MinionCard {
@@ -43,6 +44,7 @@ public class Deathlord extends MinionCard {
 			if (minionCard == null) {
 				return;
 			}
+			minionCard.setLocation(CardLocation.VOID);
 			opponent.getDeck().remove(minionCard);
 			SummonSpell summonSpell = new SummonSpell(minionCard);
 			context.getLogic().castSpell(player.getId(), summonSpell);

@@ -24,14 +24,14 @@ public abstract class ChooseBattlecryCard extends MinionCard implements IChooseO
 
 	@Override
 	public PlayCardAction playOption1() {
-		PlayCardAction option1 = new PlayMinionCardAction(this, getBattlecry1());
+		PlayCardAction option1 = new PlayMinionCardAction(getCardReference(), getBattlecry1());
 		option1.setActionSuffix(getAction1Suffix());
 		return option1;
 	}
 
 	@Override
 	public PlayCardAction playOption2() {
-		PlayCardAction option2 = new PlayMinionCardAction(this, getBattlecry2());
+		PlayCardAction option2 = new PlayMinionCardAction(getCardReference(), getBattlecry2());
 		option2.setActionSuffix(getAction2Suffix());
 		return option2;
 	}

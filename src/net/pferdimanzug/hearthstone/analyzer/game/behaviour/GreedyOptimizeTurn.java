@@ -8,7 +8,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.heuristic.IGameStateHeuristic;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,27 +43,33 @@ public class GreedyOptimizeTurn extends Behaviour {
 		if (validActions.size() == 1) {
 			return validActions.get(0);
 		}
-		GameAction bestAction = null;
 		
+		GameAction bestAction = null;
+		int bestScore = 0;
+		for (GameAction gameAction : validActions) {
+			int score = simulateAction(context.clone(), player.getId(), gameAction);
+			if (score > bestScore) {
+				bestAction = gameAction;
+				bestScore = score;
+			}
+		}
+		
+		logger.info("Selecting best action {} with score {}", bestAction, bestScore);
 		
 		return bestAction;
 	}
 
-	private int simulateAction(GameContext simulation, int playerId, GameAction action, Entity target) {
-		if (target != null) {
-			action.setTarget(target);
-		}
-		
+	private int simulateAction(GameContext simulation, int playerId, GameAction action) {
 		simulation.getLogic().performGameAction(playerId, action);
 		List<GameAction> validActions = simulation.getValidActions();
 		if (validActions.size() == 1) {
 			return heuristic.getScore(simulation, playerId);
 		} 
-		int accumulatedScore = 0;
+		int bestScore = 0;
 		for (GameAction gameAction : validActions) {
-			//accumulatedScore += si
+			bestScore = Math.max(bestScore, simulateAction(simulation.clone(), playerId, gameAction));
 		}
-		return accumulatedScore;
+		return bestScore;
 	}
 
 }

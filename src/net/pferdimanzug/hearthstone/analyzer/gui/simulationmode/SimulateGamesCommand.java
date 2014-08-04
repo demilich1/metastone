@@ -27,6 +27,7 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 	private static Logger logger = LoggerFactory.getLogger(SimulateGamesCommand.class);
 
 	private int gamesCompleted;
+	private long lastUpdate;
 
 	@Override
 	public void execute(INotification<GameNotification> notification) {
@@ -47,6 +48,7 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 				// send initial status update
 				Tuple<Integer, Integer> progress = new Tuple<>(0, gameConfig.getNumberOfGames());
 				getFacade().sendNotification(GameNotification.SIMULATION_PROGRESS_UPDATE, progress);
+				lastUpdate = System.currentTimeMillis();
 				for (int i = 0; i < gameConfig.getNumberOfGames(); i++) {
 					PlayGameTask task = new PlayGameTask(gameConfig);
 					Future<GameContext> future = executor.submit(task);
@@ -83,7 +85,12 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 	}
 
 	private void onGameComplete(GameConfig gameConfig) {
+		long timeStamp = System.currentTimeMillis();
 		gamesCompleted++;
+		if (timeStamp - lastUpdate < 100) {
+			return;
+		}
+		lastUpdate = timeStamp;
 		Tuple<Integer, Integer> progress = new Tuple<>(gamesCompleted, gameConfig.getNumberOfGames());
 		Notification<GameNotification> updateNotification = new Notification<>(GameNotification.SIMULATION_PROGRESS_UPDATE, progress);
 		getFacade().notifyObservers(updateNotification);
