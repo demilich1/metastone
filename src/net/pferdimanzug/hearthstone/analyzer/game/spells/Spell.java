@@ -14,6 +14,8 @@ public abstract class Spell extends CloneContainer {
 	private SpellSource source;
 	private EntityReference sourceEntity;
 	
+	public int assignedGC;
+	
 	public void cast(GameContext context, Player player, List<Entity> targets) {
 		if (targets == null) {
 			onCast(context, player, null);
@@ -26,7 +28,9 @@ public abstract class Spell extends CloneContainer {
 
 	@Override
 	public Spell clone() {
-		return (Spell) super.clone();
+		Spell clone = (Spell) super.clone();
+		clone.assignedGC = 0;
+		return clone;
 	}
 	
 	public SpellSource getSource() {

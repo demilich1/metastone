@@ -33,32 +33,21 @@ public class ConeOfCold extends SpellCard {
 
 	private class ConeOfColdSpell extends Spell {
 
-		public ConeOfColdSpell() {
-			Spell damage = new DamageSpell(1);
-			damage.setSource(SpellSource.SPELL_CARD);
-			Spell freeze = new ApplyTagSpell(GameTag.FROZEN, new TurnStartTrigger());
-			freeze.setSource(SpellSource.SPELL_CARD);
-			setCloneableData(damage, freeze);
-		}
-
-		public Spell getDamage() {
-			return (Spell) getCloneableData()[0];
-		}
-
-		public Spell getFreeze() {
-			return (Spell) getCloneableData()[1];
-		}
-
 		@Override
 		protected void onCast(GameContext context, Player player, Entity target) {
 			List<Entity> affected = context.getAdjacentMinions(player, target.getReference());
 			affected.add((Actor) target);
 
+			Spell damage = new DamageSpell(1);
+			damage.setSource(SpellSource.SPELL_CARD);
+			Spell freeze = new ApplyTagSpell(GameTag.FROZEN, new TurnStartTrigger());
+			freeze.setSource(SpellSource.SPELL_CARD);
+
 			for (Entity minion : affected) {
-				getDamage().setTarget(minion.getReference());
-				context.getLogic().castSpell(player.getId(), getDamage());
-				getFreeze().setTarget(minion.getReference());
-				context.getLogic().castSpell(player.getId(), getFreeze());
+				damage.setTarget(minion.getReference());
+				context.getLogic().castSpell(player.getId(), damage);
+				freeze.setTarget(minion.getReference());
+				context.getLogic().castSpell(player.getId(), freeze);
 			}
 		}
 

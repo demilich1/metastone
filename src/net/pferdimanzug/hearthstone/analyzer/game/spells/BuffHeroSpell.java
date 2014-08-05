@@ -21,9 +21,9 @@ public class BuffHeroSpell extends RevertableSpell {
 	public BuffHeroSpell(int attackBonus, int armorBonus) {
 		this(attackBonus, armorBonus, true);
 	}
-	
+
 	private BuffHeroSpell(int attackBonus, int armorBonus, boolean revert) {
-		super(revert ? new TurnEndTrigger() :null);
+		super(revert ? new TurnEndTrigger() : null);
 		this.attackBonus = attackBonus;
 		this.armorBonus = armorBonus;
 		setTarget(EntityReference.FRIENDLY_HERO);
@@ -45,7 +45,7 @@ public class BuffHeroSpell extends RevertableSpell {
 			logger.debug("{} gains {} armor", hero, armorBonus);
 			hero.modifyArmor(+armorBonus);
 		}
-		
+
 		if (attackBonus != 0) {
 			super.onCast(context, player, target);
 		}

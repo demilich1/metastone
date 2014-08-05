@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.logic.CustomCloneable;
 import net.pferdimanzug.hearthstone.analyzer.game.statistics.GameStatistics;
 
-public class Player implements Cloneable {
+public class Player extends CustomCloneable {
 
 	private final String name;
 	private Hero hero;
@@ -41,9 +41,7 @@ public class Player implements Cloneable {
 		for (Minion minion : otherPlayer.getMinions()) {
 			minions.add(minion.clone());
 		}
-		for (Card card : otherPlayer.hand) {
-			this.hand.add(card.clone());
-		}
+		this.hand.addAll(otherPlayer.hand);
 		this.graveyard.addAll(otherPlayer.graveyard);
 		this.secrets.addAll(otherPlayer.secrets);
 		this.id = otherPlayer.id;
@@ -60,6 +58,7 @@ public class Player implements Cloneable {
 		this.deckName = deck.getName();
 	}
 	
+	@Override
 	public Player clone() {
 		return new Player(this);
 	}

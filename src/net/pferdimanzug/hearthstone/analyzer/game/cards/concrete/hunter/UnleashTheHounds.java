@@ -10,6 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
@@ -40,22 +41,19 @@ public class UnleashTheHounds extends SpellCard {
 		public Minion summon() {
 			return createMinion(GameTag.CHARGE);
 		}
-		
 	}
 
-
-
-	private class UnleashTheHoundsSpell extends SummonSpell {
-		public UnleashTheHoundsSpell() {
-			super(new Hound());
-		}
-
+	private class UnleashTheHoundsSpell extends Spell {
+		
 		@Override
 		protected void onCast(GameContext context, Player player, Entity target) {
 			int enemyMinions = context.getMinionCount(context.getOpponent(player));
-			for (int i = 0; i < enemyMinions; i++) {
-				super.onCast(context, player, target);
+			MinionCard[] houndCards = new MinionCard[enemyMinions];
+			for (int i = 0; i < houndCards.length; i++) {
+				houndCards[i] = new Hound();
 			}
+			SummonSpell summonHounds = new SummonSpell(houndCards);
+			context.getLogic().castSpell(player.getId(), summonHounds);
 		}
 	}
 }

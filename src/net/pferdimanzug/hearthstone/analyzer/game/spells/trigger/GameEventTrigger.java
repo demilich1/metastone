@@ -20,6 +20,11 @@ public abstract class GameEventTrigger extends CustomCloneable {
 	public void setOwner(int playerIndex) {
 		this.owner = playerIndex;
 	}
+	
+	@Override
+	public GameEventTrigger clone() {
+		return (GameEventTrigger) super.clone();
+	}
 
 	@Override
 	public String toString() {

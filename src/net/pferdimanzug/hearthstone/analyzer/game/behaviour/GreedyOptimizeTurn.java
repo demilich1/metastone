@@ -54,7 +54,7 @@ public class GreedyOptimizeTurn extends Behaviour {
 			}
 		}
 		
-		logger.info("Selecting best action {} with score {}", bestAction, bestScore);
+		//logger.info("Selecting best action {} with score {}", bestAction, bestScore);
 		
 		return bestAction;
 	}

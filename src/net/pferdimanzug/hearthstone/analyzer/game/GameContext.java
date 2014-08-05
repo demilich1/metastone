@@ -23,11 +23,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerLayer;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerManager;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
+import net.pferdimanzug.hearthstone.analyzer.utils.IDisposable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class GameContext implements Cloneable {
+public class GameContext implements Cloneable, IDisposable {
 	public static final int PLAYER_1 = 0;
 	public static final int PLAYER_2 = 1;
 	
@@ -320,6 +321,7 @@ public class GameContext implements Cloneable {
 		
 		}
 		logger.error("Could not resolve cardReference {}", cardReference);
+		new RuntimeException().printStackTrace();
 		return null;
 	}
 	
@@ -370,5 +372,19 @@ public class GameContext implements Cloneable {
 		result.append("Turn: " + getTurn());
 
 		return result.toString();
+	}
+
+	@Override
+	public void dispose() {
+		for (Player player : getPlayers()) {
+			player.getMinions().clear();
+			player.getGraveyard().clear();
+			player.getHand().removeAll();
+			player.getDeck().removeAll();
+			player.getSecrets().clear();
+		}
+		getCardCostModifiers().clear();
+		triggerManager.dispose();
+		environment.clear();
 	}
 }

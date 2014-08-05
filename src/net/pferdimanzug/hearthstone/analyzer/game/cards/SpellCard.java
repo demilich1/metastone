@@ -46,7 +46,13 @@ public abstract class SpellCard extends Card {
 	@Override
 	public SpellCard clone() {
 		SpellCard clone = (SpellCard) super.clone();
-		clone.spell = spell.clone();
+		try {
+			clone.spell = spell.clone();
+		} catch(Exception e) {
+			System.err.println("Error while cloning " + this);
+			e.printStackTrace();
+		}
+		
 		return clone;
 	}
 

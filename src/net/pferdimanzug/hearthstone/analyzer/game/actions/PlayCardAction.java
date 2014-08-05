@@ -25,23 +25,24 @@ public abstract class PlayCardAction extends GameAction {
 		}
 		return true;
 	}
-	
+
 	@Override
 	public void execute(GameContext context, int playerId) {
-		Card card = context.resolveCardReference(getCardReference());
-		
-		context.getEnvironment().put(Environment.PENDING_CARD, card);
-		context.getLogic().playCard(playerId, getCardReference());
-		// card was countered, do not actually resolve its effects
-		if (!card.hasTag(GameTag.COUNTERED)) {
-			try {
+			Card card = context.resolveCardReference(getCardReference());
+			context.getEnvironment().put(Environment.PENDING_CARD, card);
+			
+		try {
+			context.getLogic().playCard(playerId, getCardReference());
+			// card was countered, do not actually resolve its effects
+			if (!card.hasTag(GameTag.COUNTERED)) {
 				play(context, playerId);
-			} catch (Exception e) {
-				System.out.println("ERROR while playing card " + card + " id:" + card.getId());
-				throw e;
 			}
 
+		} catch (Exception e) {
+			System.out.println("ERROR while playing card " + card + " id:" + card.getId());
+			throw e;
 		}
+
 		context.getLogic().afterCardPlayed(playerId, getCardReference());
 		context.getEnvironment().remove(Environment.PENDING_CARD);
 	}

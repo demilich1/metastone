@@ -19,8 +19,6 @@ public class FreezingTrap extends SecretCard {
 		setTriggerAndEffect(new MinionAttacksTrigger(), returnToHandSpell);
 	}
 
-
-
 	@Override
 	public int getTypeId() {
 		return 34;

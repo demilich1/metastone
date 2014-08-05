@@ -88,19 +88,20 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 	private void onGameComplete(GameConfig gameConfig) {
 		long timeStamp = System.currentTimeMillis();
 		gamesCompleted++;
-		if (timeStamp - lastUpdate < 100) {
-			return;
+		if (timeStamp - lastUpdate > 100) {
+			lastUpdate = timeStamp;
+			Tuple<Integer, Integer> progress = new Tuple<>(gamesCompleted, gameConfig.getNumberOfGames());
+			Notification<GameNotification> updateNotification = new Notification<>(GameNotification.SIMULATION_PROGRESS_UPDATE, progress);
+			getFacade().notifyObservers(updateNotification);
 		}
-		lastUpdate = timeStamp;
-		Tuple<Integer, Integer> progress = new Tuple<>(gamesCompleted, gameConfig.getNumberOfGames());
-		Notification<GameNotification> updateNotification = new Notification<>(GameNotification.SIMULATION_PROGRESS_UPDATE, progress);
-		getFacade().notifyObservers(updateNotification);
+		
+		
+		
 	}
 
 	private class PlayGameTask implements Callable<GameContext> {
 
 		private final GameConfig gameConfig;
-		private GameContext result;
 
 		public PlayGameTask(GameConfig gameConfig) {
 			this.gameConfig = gameConfig;
@@ -120,17 +121,9 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 			GameContext newGame = new GameContext(player1, player2, new GameLogic());
 			newGame.play();
 
-			result = newGame;
 			onGameComplete(gameConfig);
-			return result;
-		}
-
-		public GameContext getResult() {
-			return result;
-		}
-
-		public boolean isDone() {
-			return getResult() != null;
+			newGame.dispose();
+			return newGame;
 		}
 
 	}

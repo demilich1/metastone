@@ -23,7 +23,6 @@ public class GreedyOptimizeMove extends Behaviour {
 
 	public GreedyOptimizeMove(IGameStateHeuristic heuristic) {
 		this.heuristic = heuristic;
-
 	}
 
 	@Override

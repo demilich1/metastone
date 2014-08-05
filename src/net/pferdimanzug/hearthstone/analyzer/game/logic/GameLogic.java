@@ -159,6 +159,13 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void castSpell(int playerId, Spell spell) {
+		if (spell.assignedGC != 0 && spell.assignedGC != hashCode()) {
+			logger.warn("Spell {} has been cast in another GameContext!!", spell);
+		}
+		
+		spell.assignedGC = hashCode();
+		
+		
 		Player player = context.getPlayer(playerId);
 		Actor source = null;
 		if (spell.getSourceEntity() != null) {
@@ -180,9 +187,13 @@ public class GameLogic implements Cloneable {
 
 			if (sourceCard != null && sourceCard.getTargetRequirement() != TargetSelection.NONE) {
 				context.fireGameEvent(new TargetAcquisitionEvent(context, ActionType.SPELL, targets.get(0)), TriggerLayer.SECRET);
-				if (context.getEnvironment().containsKey(Environment.TARGET_OVERRIDE)) {
+				Entity targetOverride = (Entity) context.getEnvironment().get(Environment.TARGET_OVERRIDE);
+				if (targetOverride != null && targetOverride.getId() != IdFactory.UNASSIGNED) {
 					targets.remove(0);
-					targets.add((Actor) context.getEnvironment().get(Environment.TARGET_OVERRIDE));
+					targets.add(targetOverride);
+					if (targets.get(0).getReference().getId() == 0) {
+						logger.error("SPellbender minion id is ZERO!!!");
+					}
 					spell.setTarget(targets.get(0).getReference());
 					log("Target for spell {} has been changed! New target {}", sourceCard, targets.get(0));
 				}

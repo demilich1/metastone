@@ -13,6 +13,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.ReturnMinionToHandSpell
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnStartTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardLocation;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class AlarmOBot extends MinionCard {
@@ -45,6 +46,7 @@ public class AlarmOBot extends MinionCard {
 			// summon a random minion and remove the corresponding card
 			MinionCard randomMinionCard = (MinionCard) player.getHand().getRandomOfType(CardType.MINION);
 			player.getHand().remove(randomMinionCard);
+			randomMinionCard.setLocation(CardLocation.VOID);
 			context.getLogic().summon(player.getId(), randomMinionCard.summon(), null, null, false);
 		}
 

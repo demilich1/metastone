@@ -46,7 +46,7 @@ public class WildGrowth extends SpellCard {
 			if (player.getMaxMana() < GameLogic.MAX_MANA) {
 				context.getLogic().modifyMaxMana(player, +1);
 			} else {
-				player.getHand().add(new ExcessManaCard());
+				context.getLogic().receiveCard(player.getId(), new ExcessManaCard());
 			}
 
 		}

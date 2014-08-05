@@ -1,6 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game;
 
 public enum GameTag {
+	DEBUG,
 	HP,
 	MAX_HP,
 	ARMOR,

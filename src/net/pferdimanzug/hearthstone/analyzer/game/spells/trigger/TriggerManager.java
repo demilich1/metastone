@@ -5,8 +5,9 @@ import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
+import net.pferdimanzug.hearthstone.analyzer.utils.IDisposable;
 
-public class TriggerManager implements Cloneable {
+public class TriggerManager implements Cloneable, IDisposable {
 	private final List<IGameEventListener> triggers = new ArrayList<IGameEventListener>();;
 
 	public TriggerManager() {
@@ -69,6 +70,11 @@ public class TriggerManager implements Cloneable {
 				triggers.remove(trigger);
 			}
 		}
+	}
+
+	@Override
+	public void dispose() {
+		triggers.clear();
 	}
 
 }

@@ -49,9 +49,6 @@ public class Tracking extends SpellCard {
 				drawnCards.add(player.getDeck().removeFirst());
 			}
 			context.getLogic().receiveCard(player.getId(), drawnCards.remove(0));
-			while (!drawnCards.isEmpty()) {
-				drawnCards.remove(0);
-			}
 		}
 		
 	}
