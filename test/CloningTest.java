@@ -1,6 +1,10 @@
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.PlayRandomBehaviour;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Polymorph;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.DeckFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
@@ -32,25 +36,58 @@ public class CloningTest extends TestBase {
 			
 			GameContext clone = original.clone();
 			
-			Assert.assertNotEquals(original, clone);
-			Assert.assertNotEquals(original.getPlayer1(), clone.getPlayer1());
+			Assert.assertNotSame(original, clone);
+			Assert.assertNotSame(original.getPlayer1(), clone.getPlayer1());
+			
+			logger.debug("Comparing hands");
+			compareCardCollections(original.getPlayer1().getHand(), clone.getPlayer1().getHand());
+			logger.debug("Comparing decks");
+			compareCardCollections(original.getPlayer1().getDeck(), clone.getPlayer1().getDeck());
+			
 			Assert.assertNotSame(original.getPlayer2().getMinions(), clone.getPlayer2().getMinions());
 			Actor originalMinion = getSingleMinion(original.getPlayer1().getMinions());
 			Actor cloneMinion = getSingleMinion(clone.getPlayer1().getMinions());
 			Assert.assertNotSame(originalMinion, cloneMinion);
-			System.out.println(originalMinion.toString());
-			System.out.println(cloneMinion.toString());
 			Assert.assertEquals(original.getPlayer2().getMinions().size(), clone.getPlayer2().getMinions().size());
 			Assert.assertEquals(original.getPlayer1().getMana(), clone.getPlayer1().getMana());
 			
 			clone.play();
-			System.out.println("\n********ORIGINAL********\n");
-			System.out.println(original.toString());
-			System.out.println("\n********CLONE********\n");
-			System.out.println(clone.toString());	
+			logger.info("");
+			logger.info("********ORIGINAL********");
+			logger.info(original.toString());
+			logger.info("");
+			logger.info("********CLONE********");
+			logger.info(clone.toString());	
 			Assert.assertNotEquals(original.getTurn(), clone.getTurn());
 			Assert.assertEquals(testMinion.getHp(), 3);
 		}
-		
+	}
+	
+	private void compareCardCollections(CardCollection collection1, CardCollection collection2) {
+		Assert.assertEquals(collection1.getCount(), collection2.getCount());
+		Assert.assertNotSame(collection1, collection2);
+		for (int j = 0; j < collection1.getCount(); j++) {
+			Card originalCard = collection1.get(j);
+			logger.debug("Original card: " + originalCard);
+			Card cloneCard = collection2.get(j);
+			logger.debug("Clone card: " + cloneCard);
+			Assert.assertNotSame(originalCard, cloneCard);
+			if (originalCard instanceof SpellCard) {
+				Assert.assertTrue(cloneCard instanceof SpellCard, "cloneCard is instanceof " + cloneCard.getClass().getSimpleName());
+				SpellCard originalSpellCard = (SpellCard) originalCard;
+				SpellCard cloneSpellCard = (SpellCard) cloneCard;
+				Assert.assertNotSame(originalSpellCard.getSpell(), cloneSpellCard.getSpell());
+			}
+		}
+	}
+	
+	@Test
+	public void testCloneSpellCard() {
+		Card original = new Polymorph();
+		Card clone = original.clone();
+		Assert.assertNotSame(original, clone);
+		SpellCard originalSpellCard = (SpellCard) original;
+		SpellCard cloneSpellCard = (SpellCard) clone;
+		Assert.assertNotSame(originalSpellCard.getSpell(), cloneSpellCard.getSpell());
 	}
 }

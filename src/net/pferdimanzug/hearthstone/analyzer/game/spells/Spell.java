@@ -9,7 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.logic.CloneContainer;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public abstract class Spell extends CloneContainer {
-
+	
 	private EntityReference target;
 	private SpellSource source;
 	private EntityReference sourceEntity;
@@ -68,7 +68,7 @@ public abstract class Spell extends CloneContainer {
 
 	@Override
 	public String toString() {
-		return "[SPELL " + getClass().getSimpleName() + " target=" + target + ", source=" + source + "]";
+		return "[SPELL " + getClass().getSimpleName() + " target=" + target + ", source=" + source + ", hashCode: " + hashCode() + "]";
 	}
 
 }

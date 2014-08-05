@@ -69,9 +69,9 @@ public class GameContext implements Cloneable, IDisposable {
 	public GameContext clone() {
 		GameLogic logicClone = getLogic().clone();
 		Player player1Clone = getPlayer1().clone();
-		player1Clone.getDeck().shuffle();
+		//player1Clone.getDeck().shuffle();
 		Player player2Clone = getPlayer2().clone();
-		player2Clone.getDeck().shuffle();
+		//player2Clone.getDeck().shuffle();
 		GameContext clone = new GameContext(player1Clone, player2Clone, logicClone);
 		clone.triggerManager = triggerManager.clone();
 		clone.activePlayer = activePlayer;
@@ -346,7 +346,7 @@ public class GameContext implements Cloneable, IDisposable {
 
 	@Override
 	public String toString() {
-		StringBuilder result = new StringBuilder();
+		StringBuilder result = new StringBuilder("GameContext hashCode: " + hashCode() +"\nPlayer: ");
 		for (Player player : players) {
 			result.append(player.getName());
 			result.append(" Mana: ");

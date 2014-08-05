@@ -38,22 +38,15 @@ public abstract class SpellCard extends Card {
 		}
 		return true;
 	}
+	
+	public SpellCard clone() {
+		SpellCard clone = (SpellCard) super.clone();
+		clone.spell = spell.clone();
+		return clone;
+	}
 
 	public boolean canBeCastOn(Entity target) {
 		return true;
-	}
-
-	@Override
-	public SpellCard clone() {
-		SpellCard clone = (SpellCard) super.clone();
-		try {
-			clone.spell = spell.clone();
-		} catch(Exception e) {
-			System.err.println("Error while cloning " + this);
-			e.printStackTrace();
-		}
-		
-		return clone;
 	}
 
 	public Spell getSpell() {
@@ -90,6 +83,7 @@ public abstract class SpellCard extends Card {
 	public void setSpell(Spell spell) {
 		this.spell = spell;
 		spell.setSource(SpellSource.SPELL_CARD);
+		setCloneableData(spell);
 	}
 
 	public void setTargetRequirement(TargetSelection targetRequirement) {

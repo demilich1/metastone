@@ -33,7 +33,7 @@ public abstract class Hero extends Actor {
 		if (weapon != null) {
 			clone.setWeapon(getWeapon().clone());
 		}
-		clone.setHeroPower(getHeroPower().clone());
+		clone.setHeroPower((HeroPower) getHeroPower().clone());
 		return clone;
 	}
 

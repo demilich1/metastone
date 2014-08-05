@@ -41,8 +41,6 @@ public class Upgrade extends SpellCard {
 
 	}
 
-
-
 	private class UpgradeSpell extends BuffWeaponSpell {
 
 		public UpgradeSpell() {

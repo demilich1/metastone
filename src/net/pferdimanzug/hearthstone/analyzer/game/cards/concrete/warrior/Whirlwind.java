@@ -17,8 +17,6 @@ public class Whirlwind extends SpellCard {
 		setPredefinedTarget(EntityReference.ALL_MINIONS);
 	}
 
-
-
 	@Override
 	public int getTypeId() {
 		return 383;
