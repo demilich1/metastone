@@ -4,6 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardLocation;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,7 @@ public class DiscardCardSpell extends Spell {
 				return;
 			}
 			logger.debug("{} discards {}", player.getName(), randomHandCard);
+			randomHandCard.setLocation(CardLocation.VOID);
 			player.getHand().remove(randomHandCard);
 		}
 		

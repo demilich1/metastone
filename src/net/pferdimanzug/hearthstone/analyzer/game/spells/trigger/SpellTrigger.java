@@ -5,6 +5,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
+import net.pferdimanzug.hearthstone.analyzer.game.logic.CustomCloneable;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SpellSource;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
@@ -12,7 +13,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SpellTrigger implements Cloneable, IGameEventListener {
+public class SpellTrigger extends CustomCloneable implements IGameEventListener {
 	private final static Logger logger = LoggerFactory.getLogger(SpellTrigger.class);
 
 	private GameEventTrigger primaryTrigger;
@@ -39,21 +40,15 @@ public class SpellTrigger implements Cloneable, IGameEventListener {
 		this(trigger, null, spell, oneTime);
 	}
 
-	
 	@Override
 	public SpellTrigger clone() {
-		try {
-			SpellTrigger clone = (SpellTrigger) super.clone();
-			clone.primaryTrigger = primaryTrigger.clone();
-			if (secondaryTrigger != null) {
-				clone.secondaryTrigger = secondaryTrigger.clone();
-			}
-			clone.spell = spell.clone();
-			return clone;
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
+		SpellTrigger clone = (SpellTrigger) super.clone();
+		clone.primaryTrigger = (GameEventTrigger) primaryTrigger.clone();
+		if (secondaryTrigger != null) {
+			clone.secondaryTrigger = (GameEventTrigger) secondaryTrigger.clone();
 		}
-		return null;
+		clone.spell = (Spell) spell.clone();
+		return clone;
 	}
 
 	@Override
@@ -106,7 +101,7 @@ public class SpellTrigger implements Cloneable, IGameEventListener {
 				if (oneTime) {
 					expired = true;
 				}
-				
+
 				event.getGameContext().getEnvironment().put(Environment.EVENT_TARGET, event.getEventTarget());
 				onFire(ownerId, spell, event);
 				event.getGameContext().getEnvironment().remove(Environment.EVENT_TARGET);
@@ -159,7 +154,5 @@ public class SpellTrigger implements Cloneable, IGameEventListener {
 		}
 		return trigger.fire(event, host);
 	}
-	
-	
 
 }

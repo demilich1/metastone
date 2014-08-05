@@ -22,8 +22,6 @@ public class ArchmageAntonidas extends MinionCard {
 		return 54;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion archmageAntonidas = createMinion();

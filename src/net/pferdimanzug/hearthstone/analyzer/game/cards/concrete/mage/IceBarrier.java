@@ -14,8 +14,6 @@ public class IceBarrier extends SecretCard {
 		setTriggerAndEffect(new HeroAttackedTrigger(), new BuffHeroSpell(0, 8));
 	}
 
-
-
 	@Override
 	public int getTypeId() {
 		return 63;

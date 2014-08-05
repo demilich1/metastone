@@ -10,7 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerLayer;
 
 public class Secret extends SpellTrigger {
 
-	private final Card source;
+	private Card source;
 
 	public Secret(SecretTrigger trigger, Spell spell, Card source) {
 		super(trigger, spell, true);
@@ -18,7 +18,7 @@ public class Secret extends SpellTrigger {
 		this.source = source;
 		setLayer(TriggerLayer.SECRET);
 	}
-
+	
 	public Card getSource() {
 		return source;
 	}

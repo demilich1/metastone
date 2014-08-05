@@ -23,8 +23,6 @@ public class IceLance extends SpellCard {
 		setTargetRequirement(TargetSelection.ANY);
 	}
 
-
-
 	@Override
 	public int getTypeId() {
 		return 65;

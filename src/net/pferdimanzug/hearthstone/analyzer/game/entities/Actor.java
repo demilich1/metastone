@@ -12,11 +12,11 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 
 public abstract class Actor extends Entity {
-	
+
 	private Card sourceCard;
 	private SpellTrigger spellTrigger;
 	private CardCostModifier cardCostModifier;
-	
+
 	public Actor(Card sourceCard) {
 		this.setName(sourceCard != null ? sourceCard.getName() : null);
 		this.sourceCard = sourceCard;
@@ -28,7 +28,7 @@ public abstract class Actor extends Entity {
 		}
 		getDeathrattles().add(deathrattleSpell);
 	}
-	
+
 	public boolean canAttackThisTurn() {
 		if (hasTag(GameTag.CANNOT_ATTACK)) {
 			return false;
@@ -41,27 +41,23 @@ public abstract class Actor extends Entity {
 
 	@Override
 	public Actor clone() {
-		try {
-			Actor clone = (Actor) super.clone();
-			clone.tags = new HashMap<>(getTags());
-			clone.spellTrigger = spellTrigger != null ? spellTrigger.clone() : null;
-			if (hasTag(GameTag.DEATHRATTLES)) {
-				clone.removeTag(GameTag.DEATHRATTLES);
-				for (Spell deathrattleSpell : getDeathrattles()) {
-					Spell deathrattleClone = deathrattleSpell.clone();
-					clone.addDeathrattle(deathrattleClone);
-				}
+		Actor clone = (Actor) super.clone();
+		clone.tags = new HashMap<>(getTags());
+		clone.spellTrigger = spellTrigger != null ? spellTrigger.clone() : null;
+		if (hasTag(GameTag.DEATHRATTLES)) {
+			clone.removeTag(GameTag.DEATHRATTLES);
+			for (Spell deathrattleSpell : getDeathrattles()) {
+				Spell deathrattleClone = deathrattleSpell.clone();
+				clone.addDeathrattle(deathrattleClone);
 			}
-			return clone;
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
 		}
-		return null;
+		return clone;
 	}
 
 	protected boolean displayGameTag(GameTag tag) {
 		return tag == GameTag.CHARGE || tag == GameTag.ENRAGED || tag == GameTag.FROZEN || tag == GameTag.DIVINE_SHIELD
-				|| tag == GameTag.WINDFURY || tag == GameTag.SPELL_POWER || tag == GameTag.STEALTHED || tag == GameTag.TAUNT || tag == GameTag.CANNOT_ATTACK;
+				|| tag == GameTag.WINDFURY || tag == GameTag.SPELL_POWER || tag == GameTag.STEALTHED || tag == GameTag.TAUNT
+				|| tag == GameTag.CANNOT_ATTACK;
 	}
 
 	public int getAttack() {
@@ -108,7 +104,7 @@ public abstract class Actor extends Entity {
 	public boolean isDead() {
 		return getHp() < 1;
 	}
-	
+
 	public boolean isWounded() {
 		return getHp() != getMaxHp();
 	}
@@ -132,7 +128,7 @@ public abstract class Actor extends Entity {
 		setMaxHp(value);
 		setHp(value);
 	}
-	
+
 	public void setBattlecry(Battlecry battlecry) {
 		setTag(GameTag.BATTLECRY, battlecry);
 	}
@@ -163,7 +159,7 @@ public abstract class Actor extends Entity {
 
 	@Override
 	public String toString() {
-		String result = "["  + getEntityType() + " '" + getName() + "'id:" + getId() + " ";
+		String result = "[" + getEntityType() + " '" + getName() + "'id:" + getId() + " ";
 		result += getAttack() + "/" + getHp();
 		String prefix = " ";
 		for (GameTag tag : getTags().keySet()) {

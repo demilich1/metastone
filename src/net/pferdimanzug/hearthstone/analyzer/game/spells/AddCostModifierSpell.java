@@ -7,15 +7,17 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public class AddCostModifierSpell extends Spell {
 	
-	private final CardCostModifier costModifier;
-
 	public AddCostModifierSpell(CardCostModifier costModifier) {
-		this.costModifier = costModifier;
+		setCloneableData(costModifier);
+	}
+
+	public CardCostModifier getCostModifier() {
+		return (CardCostModifier) getCloneableData()[0];
 	}
 
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
-		context.getLogic().addManaModifier(player, costModifier, target);
+		context.getLogic().addManaModifier(player, getCostModifier(), target);
 	}
 
 }

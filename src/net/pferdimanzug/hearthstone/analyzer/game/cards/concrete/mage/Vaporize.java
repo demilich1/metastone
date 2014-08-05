@@ -19,8 +19,6 @@ public class Vaporize extends SecretCard {
 		setTriggerAndEffect(new HeroAttackedByMinionTrigger(), destroySpell);
 	}
 
-
-
 	@Override
 	public int getTypeId() {
 		return 74;

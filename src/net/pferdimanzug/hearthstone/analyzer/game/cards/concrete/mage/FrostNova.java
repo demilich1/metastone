@@ -19,8 +19,6 @@ public class FrostNova extends SpellCard {
 		setPredefinedTarget(EntityReference.ENEMY_MINIONS);
 	}
 
-
-
 	@Override
 	public int getTypeId() {
 		return 62;

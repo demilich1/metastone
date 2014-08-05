@@ -24,8 +24,6 @@ public class Spellbender extends SecretCard {
 		return 73;
 	}
 
-
-
 	private class SpellbenderMinion extends MinionCard {
 
 		public SpellbenderMinion() {

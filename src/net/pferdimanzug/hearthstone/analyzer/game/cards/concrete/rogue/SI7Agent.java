@@ -21,8 +21,6 @@ public class SI7Agent extends MinionCard {
 		return 305;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion si7Agent = createMinion();

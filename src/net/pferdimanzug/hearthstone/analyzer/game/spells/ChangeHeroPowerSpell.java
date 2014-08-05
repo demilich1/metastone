@@ -13,16 +13,18 @@ public class ChangeHeroPowerSpell extends Spell {
 
 	private static Logger logger = LoggerFactory.getLogger(ChangeHeroPowerSpell.class);
 
-	private final HeroPower heroPower;
-
 	public ChangeHeroPowerSpell(HeroPower heroPower) {
-		this.heroPower = heroPower;
+		setCloneableData(heroPower);
+	}
+
+	public HeroPower getHeroPower() {
+		return (HeroPower) getCloneableData()[0];
 	}
 
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
 		Hero targetHero = (Hero) target;
-		logger.debug("{}'s hero power was changed to {}", targetHero.getName(), heroPower);
-		targetHero.setHeroPower(heroPower);
+		logger.debug("{}'s hero power was changed to {}", targetHero.getName(), getHeroPower());
+		targetHero.setHeroPower(getHeroPower());
 	}
 }

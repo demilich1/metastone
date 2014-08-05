@@ -19,7 +19,6 @@ public class SorcerersApprentice extends MinionCard {
 		return 72;
 	}
 
-
 	@Override
 	public Minion summon() {
 		Minion sorcerersApprentice = createMinion();

@@ -1,6 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.spells;
 
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
@@ -9,20 +9,18 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public class SummonRandomSpell extends Spell {
 	
-	private final MinionCard[] minions;
-
 	public SummonRandomSpell(MinionCard... minions) {
-		this.minions = minions;
+		setCloneableData(minions);
 	}
 
-	private MinionCard getRandomMinion() {
-		int randomIndex = ThreadLocalRandom.current().nextInt(minions.length);
-		return minions[randomIndex];
+	public List<MinionCard> getMinions() {
+		return getCloneableDataCollection();
 	}
-	
+
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
-		MinionCard randomMinionCard = getRandomMinion();
+		List<MinionCard> minionCards = getMinions();
+		MinionCard randomMinionCard = minionCards.get(context.getLogic().random(minionCards.size()));
 		context.getLogic().summon(player.getId(), randomMinionCard.summon(), null, null, false);
 	}
 

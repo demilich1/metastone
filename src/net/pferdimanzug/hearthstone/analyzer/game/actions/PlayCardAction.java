@@ -46,6 +46,10 @@ public abstract class PlayCardAction extends GameAction {
 		context.getEnvironment().remove(Environment.PENDING_CARD);
 	}
 
+	public CardReference getCardReference() {
+		return cardReference;
+	}
+
 	@Override
 	public boolean isSameActionGroup(GameAction anotherAction) {
 		if (anotherAction.getActionType() != getActionType()) {
@@ -60,10 +64,6 @@ public abstract class PlayCardAction extends GameAction {
 	@Override
 	public String toString() {
 		return String.format("%s Card: %s Target: %s", getActionType(), cardReference, getTargetKey());
-	}
-
-	public CardReference getCardReference() {
-		return cardReference;
 	}
 
 }

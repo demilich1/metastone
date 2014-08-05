@@ -3,9 +3,10 @@ package net.pferdimanzug.hearthstone.analyzer.game.entities;
 import java.util.HashMap;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
+import net.pferdimanzug.hearthstone.analyzer.game.logic.CustomCloneable;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
-public abstract class Entity implements Cloneable {
+public abstract class Entity extends CustomCloneable {
 
 	private String name;
 	protected HashMap<GameTag, Object> tags = new HashMap<GameTag, Object>();

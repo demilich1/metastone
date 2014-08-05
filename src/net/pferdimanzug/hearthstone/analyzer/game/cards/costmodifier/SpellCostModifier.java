@@ -12,14 +12,11 @@ public class SpellCostModifier extends CardCostModifier {
 
 	@Override
 	public boolean interestedIn(GameEventType eventType) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public void onGameEvent(GameEvent event) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

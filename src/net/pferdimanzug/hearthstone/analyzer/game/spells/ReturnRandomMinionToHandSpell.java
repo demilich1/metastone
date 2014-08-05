@@ -16,7 +16,5 @@ public class ReturnRandomMinionToHandSpell extends ReturnMinionToHandSpell {
 		
 		onCast(context, player, SpellUtils.getRandomTarget(targets));
 	}
-	
-	
 
 }

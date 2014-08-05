@@ -6,9 +6,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
-public interface IGameEventListener extends Cloneable {
+public interface IGameEventListener {
 
-	public abstract IGameEventListener clone();
+	public IGameEventListener clone();
 
 	public abstract EntityReference getHostReference();
 
@@ -29,7 +29,7 @@ public interface IGameEventListener extends Cloneable {
 	public abstract void reset();
 
 	public abstract void setHost(Entity host);
-
+	
 	public abstract void setOwner(int playerIndex);
 
 }

@@ -24,8 +24,6 @@ public class Blizzard extends SpellCard {
 		setTargetRequirement(TargetSelection.NONE);
 	}
 
-
-
 	@Override
 	public int getTypeId() {
 		return 55;

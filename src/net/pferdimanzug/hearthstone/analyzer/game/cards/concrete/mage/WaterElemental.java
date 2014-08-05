@@ -23,8 +23,6 @@ public class WaterElemental extends MinionCard {
 		return 75;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion waterElemental = createMinion();

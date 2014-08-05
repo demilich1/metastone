@@ -47,6 +47,13 @@ public abstract class ChooseOneCard extends Card implements IChooseOneCard {
 	}
 
 	@Override
+	public void setId(int id) {
+		super.setId(id);
+		card1.setId(id);
+		card2.setId(id);
+	}
+
+	@Override
 	public void setLocation(CardLocation cardLocation) {
 		super.setLocation(cardLocation);
 		card1.setLocation(cardLocation);
@@ -58,13 +65,6 @@ public abstract class ChooseOneCard extends Card implements IChooseOneCard {
 		super.setOwner(ownerId);
 		card1.setOwner(ownerId);
 		card2.setOwner(ownerId);
-	}
-
-	@Override
-	public void setId(int id) {
-		super.setId(id);
-		card1.setId(id);
-		card2.setId(id);
 	}
 
 }

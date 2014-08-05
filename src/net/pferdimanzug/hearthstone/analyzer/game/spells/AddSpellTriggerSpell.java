@@ -7,15 +7,17 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 
 public class AddSpellTriggerSpell extends Spell {
 	
-	private SpellTrigger spellTrigger;
-
 	public AddSpellTriggerSpell(SpellTrigger spellTrigger) {
-		this.spellTrigger = spellTrigger;
+		setCloneableData(spellTrigger);
+	}
+
+	public SpellTrigger getSpellTrigger() {
+		return (SpellTrigger) getCloneableData()[0];
 	}
 
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
-		context.getLogic().addGameEventListener(player, spellTrigger, target);
+		context.getLogic().addGameEventListener(player, getSpellTrigger(), target);
 	}
 
 }

@@ -39,8 +39,6 @@ public class Alexstrasza extends MinionCard {
 		return alexstrasza;
 	}
 
-
-
 	private class AlexstraszaSpell extends Spell {
 		
 		@Override

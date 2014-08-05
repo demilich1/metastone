@@ -7,14 +7,13 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.secrets.Secret;
 
 public class AddSecretSpell extends Spell {
 
-	private final Secret secret;
 
 	public AddSecretSpell(Secret secret) {
-		this.secret = secret;
+		setCloneableData(secret);
 	}
 
 	public Secret getSecret() {
-		return secret;
+		return (Secret) getCloneableData()[0];
 	}
 
 	@Override

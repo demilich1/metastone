@@ -7,28 +7,29 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class EitherOrSpell extends Spell {
 
-	private final Spell either;
-	private final Spell or;
 	private final ISpellConditionChecker condition;
 
 	public EitherOrSpell(Spell either, Spell or, ISpellConditionChecker condition) {
-		this.either = either;
-		this.or = or;
+		setCloneableData(either, or);
 		this.condition = condition;
 	}
 
 	@Override
-	public Spell clone() {
-		EitherOrSpell clone = new EitherOrSpell(either.clone(), or.clone(), condition);
-		clone.setSource(getSource());
-		clone.setTarget(getTarget());
-		clone.setSourceEntity(getSourceEntity());
-		return clone;
+	public EitherOrSpell clone() {
+		return (EitherOrSpell) super.clone();
 	}
 	
+	public Spell getEither() {
+		return (Spell) getCloneableData()[0];
+	}
+
+	public Spell getOr() {
+		return (Spell) getCloneableData()[1];
+	}
+
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
-		Spell spellToCast = condition.isFulfilled(context, player, target) ? either : or;
+		Spell spellToCast = condition.isFulfilled(context, player, target) ? getEither() : getOr();
 
 		if (!spellToCast.hasPredefinedTarget()) {
 			spellToCast.setTarget(getTarget());
@@ -39,15 +40,15 @@ public class EitherOrSpell extends Spell {
 	@Override
 	public void setSource(SpellSource source) {
 		super.setSource(source);
-		either.setSource(source);
-		or.setSource(source);
+		getEither().setSource(source);
+		getOr().setSource(source);
 	}
 
 	@Override
 	public void setSourceEntity(EntityReference sourceEntity) {
 		super.setSourceEntity(sourceEntity);
-		either.setSourceEntity(sourceEntity);
-		or.setSourceEntity(sourceEntity);
+		getEither().setSourceEntity(sourceEntity);
+		getOr().setSourceEntity(sourceEntity);
 	}
 
 }

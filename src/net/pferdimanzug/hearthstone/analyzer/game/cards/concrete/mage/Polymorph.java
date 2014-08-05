@@ -23,8 +23,6 @@ public class Polymorph extends SpellCard {
 		return 70;
 	}
 
-
-
 	private class Sheep extends MinionCard {
 
 		public Sheep() {

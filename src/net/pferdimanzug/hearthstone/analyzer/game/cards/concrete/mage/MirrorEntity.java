@@ -19,8 +19,6 @@ public class MirrorEntity extends SecretCard {
 		setTriggerAndEffect(new MinionCardPlayedTrigger(), copySpell);
 	}
 
-
-
 	@Override
 	public int getTypeId() {
 		return 68;

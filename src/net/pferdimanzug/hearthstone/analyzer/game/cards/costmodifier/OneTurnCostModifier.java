@@ -14,6 +14,13 @@ public class OneTurnCostModifier extends CardCostModifier {
 	public OneTurnCostModifier(CardType cardType, int manaModifier, boolean oneTime) {
 		super(cardType, manaModifier, oneTime);
 	}
+	
+	@Override
+	public OneTurnCostModifier clone() {
+		OneTurnCostModifier clone = (OneTurnCostModifier) super.clone();
+		clone.expirationTrigger = (GameEventTrigger) expirationTrigger.clone();
+		return clone;
+	}
 
 	@Override
 	public boolean interestedIn(GameEventType eventType) {

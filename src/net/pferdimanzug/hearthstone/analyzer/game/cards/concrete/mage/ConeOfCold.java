@@ -25,36 +25,42 @@ public class ConeOfCold extends SpellCard {
 		setSpell(new ConeOfColdSpell());
 		setTargetRequirement(TargetSelection.MINIONS);
 	}
-	
+
 	@Override
 	public int getTypeId() {
 		return 56;
 	}
 
-
-
 	private class ConeOfColdSpell extends Spell {
-		
-		private final Spell damage = new DamageSpell(1);
-		private final Spell freeze = new ApplyTagSpell(GameTag.FROZEN, new TurnStartTrigger());
-		
+
 		public ConeOfColdSpell() {
+			Spell damage = new DamageSpell(1);
 			damage.setSource(SpellSource.SPELL_CARD);
+			Spell freeze = new ApplyTagSpell(GameTag.FROZEN, new TurnStartTrigger());
 			freeze.setSource(SpellSource.SPELL_CARD);
+			setCloneableData(damage, freeze);
 		}
-		
+
+		public Spell getDamage() {
+			return (Spell) getCloneableData()[0];
+		}
+
+		public Spell getFreeze() {
+			return (Spell) getCloneableData()[1];
+		}
+
 		@Override
 		protected void onCast(GameContext context, Player player, Entity target) {
 			List<Entity> affected = context.getAdjacentMinions(player, target.getReference());
 			affected.add((Actor) target);
-			
+
 			for (Entity minion : affected) {
-				damage.setTarget(minion.getReference());
-				context.getLogic().castSpell(player.getId(), damage);
-				freeze.setTarget(minion.getReference());
-				context.getLogic().castSpell(player.getId(), freeze);
+				getDamage().setTarget(minion.getReference());
+				context.getLogic().castSpell(player.getId(), getDamage());
+				getFreeze().setTarget(minion.getReference());
+				context.getLogic().castSpell(player.getId(), getFreeze());
 			}
 		}
-		
+
 	}
 }

@@ -6,17 +6,19 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public class AddDeathrattleSpell extends Spell {
-	
-	private final Spell deathrattleSpell;
 
 	public AddDeathrattleSpell(Spell deathrattleSpell) {
-		this.deathrattleSpell = deathrattleSpell;
+		setCloneableData(deathrattleSpell);
+	}
+
+	public Spell getDeathrattleSpell() {
+		return (Spell) getCloneableData()[0];
 	}
 
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
 		Actor minion = (Actor) target;
-		minion.addDeathrattle(deathrattleSpell);
+		minion.addDeathrattle(getDeathrattleSpell());
 	}
 
 }

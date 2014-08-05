@@ -35,8 +35,6 @@ public class EtherealArcanist extends MinionCard {
 		return etherealArcanist;
 	}
 
-
-
 	private class TurnEndAndControlSecretTrigger extends TurnEndTrigger {
 
 		@Override

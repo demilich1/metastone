@@ -1,5 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.spells;
 
+import java.util.List;
+
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
@@ -7,7 +9,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public class SummonSpell extends Spell {
 	
-	private final MinionCard[] minionCards;
 	private final TargetPlayer targetPlayer;
 	
 	public SummonSpell(MinionCard... minionCards) {
@@ -16,9 +17,13 @@ public class SummonSpell extends Spell {
 	
 	public SummonSpell(TargetPlayer targetPlayer, MinionCard... minionCards) {
 		this.targetPlayer = targetPlayer;
-		this.minionCards = minionCards;
+		setCloneableData(minionCards);
 	}
 
+	public List<MinionCard> getMinionCards() {
+		return getCloneableDataCollection();
+	}
+	
 	@Override
 	protected void onCast(GameContext context, Player player, Entity target) {
 		Player opponent = context.getOpponent(player);
@@ -35,9 +40,9 @@ public class SummonSpell extends Spell {
 			break;
 		}
 	}
-	
+
 	private void summon(GameContext context, Player player) {
-		for (MinionCard minionCard : minionCards) {
+		for (MinionCard minionCard : getMinionCards()) {
 			context.getLogic().summon(player.getId(), minionCard.summon(), null, null, false);
 		}
 	}

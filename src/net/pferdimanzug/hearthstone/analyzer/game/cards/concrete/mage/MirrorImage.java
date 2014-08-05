@@ -23,8 +23,6 @@ public class MirrorImage extends SpellCard {
 		return 69;
 	}
 
-
-
 	private class MirrorImageMinionCard extends MinionCard {
 
 		public MirrorImageMinionCard() {

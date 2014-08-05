@@ -22,7 +22,7 @@ public abstract class Card extends Entity {
 	private final HeroClass classRestriction;
 	private boolean collectible = true;
 	private CardLocation location;
-	
+
 	public Card(String name, CardType cardType, Rarity rarity, HeroClass classRestriction, int manaCost) {
 		setName(name);
 		this.cardType = cardType;
@@ -30,33 +30,28 @@ public abstract class Card extends Entity {
 		this.classRestriction = classRestriction;
 		this.manaCost = manaCost;
 	}
-	
+
 	@Override
 	public Card clone() {
-		try {
-			Card clone = (Card) super.clone();
-			clone.tags = new HashMap<>(getTags());
-			return clone;
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
-		return null;
+		Card clone = (Card) super.clone();
+		clone.tags = new HashMap<>(getTags());
+		return clone;
 	}
-	
+
 	public int getBaseManaCost() {
 		return manaCost;
 	}
-	
+
+	public CardReference getCardReference() {
+		return new CardReference(getOwner(), getLocation(), getId());
+	}
+
 	public CardType getCardType() {
 		return cardType;
 	}
 
 	public HeroClass getClassRestriction() {
 		return classRestriction;
-	}
-	
-	public CardReference getCardReference() {
-		return new CardReference(getOwner(), getLocation(), getId());
 	}
 
 	public Card getCopy() {
@@ -68,10 +63,14 @@ public abstract class Card extends Entity {
 	public String getDescription() {
 		return description;
 	}
-	
+
 	@Override
 	public EntityType getEntityType() {
 		return EntityType.CARD;
+	}
+
+	public CardLocation getLocation() {
+		return location;
 	}
 
 	public int getManaCost(GameContext context, Player player) {
@@ -81,13 +80,13 @@ public abstract class Card extends Entity {
 	public Rarity getRarity() {
 		return rarity;
 	}
-	
+
 	public boolean isCollectible() {
 		return collectible;
 	}
 
 	public abstract PlayCardAction play();
-	
+
 	public void setCollectible(boolean collectible) {
 		this.collectible = collectible;
 	}
@@ -96,17 +95,13 @@ public abstract class Card extends Entity {
 		this.description = description;
 	}
 
+	public void setLocation(CardLocation location) {
+		this.location = location;
+	}
+
 	@Override
 	public String toString() {
 		return String.format("[%s '%s' Manacost:%d]", getCardType(), getName(), manaCost);
-	}
-
-	public CardLocation getLocation() {
-		return location;
-	}
-
-	public void setLocation(CardLocation location) {
-		this.location = location;
 	}
 
 }

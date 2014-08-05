@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.spells;
 
+import java.util.Collection;
 import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
@@ -9,15 +10,13 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class MetaSpell extends Spell {
 
-	protected final Spell[] spells;
-
 	public MetaSpell(Spell... spells) {
-		this.spells = spells;
+		setCloneableData(spells);
 	}
 
 	@Override
 	public void cast(GameContext context, Player player, List<Entity> targets) {
-		for (Spell spell : spells) {
+		for (Spell spell : getSpells()) {
 			if (!spell.hasPredefinedTarget()) {
 				spell.setTarget(getTarget());
 			}
@@ -26,16 +25,12 @@ public class MetaSpell extends Spell {
 	}
 
 	@Override
-	public Spell clone() {
-		Spell[] spellsClone = new Spell[spells.length];
-		for (int i = 0; i < spellsClone.length; i++) {
-			spellsClone[i] = spells[i].clone();
-		}
-		MetaSpell clone = new MetaSpell(spellsClone);
-		clone.setSource(getSource());
-		clone.setTarget(getTarget());
-		clone.setSourceEntity(getSourceEntity());
-		return clone;
+	public MetaSpell clone() {
+		return (MetaSpell) super.clone();
+	}
+	
+	public Collection<Spell> getSpells() {
+		return getCloneableDataCollection();
 	}
 
 	@Override
@@ -45,7 +40,7 @@ public class MetaSpell extends Spell {
 	@Override
 	public void setSource(SpellSource source) {
 		super.setSource(source);
-		for (Spell spell : spells) {
+		for (Spell spell : getSpells()) {
 			spell.setSource(source);
 		}
 	}
@@ -53,7 +48,7 @@ public class MetaSpell extends Spell {
 	@Override
 	public void setSourceEntity(EntityReference sourceEntity) {
 		super.setSourceEntity(sourceEntity);
-		for (Spell spell : spells) {
+		for (Spell spell : getSpells()) {
 			spell.setSourceEntity(sourceEntity);
 		}
 	}

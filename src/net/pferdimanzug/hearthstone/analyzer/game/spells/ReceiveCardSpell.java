@@ -1,5 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.spells;
 
+import java.util.Collection;
+
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
@@ -7,7 +9,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public class ReceiveCardSpell extends Spell {
 
-	private final Card[] cards;
 	private TargetPlayer targetPlayer;
 
 	public ReceiveCardSpell(Card card) {
@@ -16,7 +17,11 @@ public class ReceiveCardSpell extends Spell {
 
 	public ReceiveCardSpell(TargetPlayer targetPlayer, Card... cards) {
 		this.targetPlayer = targetPlayer;
-		this.cards = cards;
+		setCloneableData(cards);
+	}
+
+	public Collection<Card> getCards() {
+		return getCloneableDataCollection();
 	}
 
 	@Override
@@ -38,7 +43,7 @@ public class ReceiveCardSpell extends Spell {
 	}
 
 	private void receiveCards(GameContext context, Player player) {
-		for (Card card : cards) {
+		for (Card card : getCards()) {
 			context.getLogic().receiveCard(player.getId(), card.clone());
 		}
 	}

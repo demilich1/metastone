@@ -40,7 +40,8 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 
 			@Override
 			public void run() {
-				int poolSize = Math.max(1, Runtime.getRuntime().availableProcessors() - 1);
+				int poolSize = Math.max(1, Runtime.getRuntime().availableProcessors() / 2);
+				//int poolSize = 1;
 				logger.info("Starting simulation on {} cores", poolSize);
 				ExecutorService executor = new ScheduledThreadPoolExecutor(poolSize);
 				List<Future<GameContext>> tasks = new ArrayList<>(gameConfig.getNumberOfGames());

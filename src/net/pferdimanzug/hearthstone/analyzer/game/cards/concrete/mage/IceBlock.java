@@ -21,8 +21,6 @@ public class IceBlock extends SecretCard {
 		setTriggerAndEffect(new HeroFatalDamageTrigger(), iceBlockSpell);
 	}
 
-
-
 	@Override
 	public int getTypeId() {
 		return 64;

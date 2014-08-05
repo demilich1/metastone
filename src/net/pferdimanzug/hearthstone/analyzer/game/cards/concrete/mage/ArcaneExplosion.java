@@ -17,8 +17,6 @@ public class ArcaneExplosion extends SpellCard {
 		setPredefinedTarget(EntityReference.ENEMY_MINIONS);
 	}
 
-
-
 	@Override
 	public int getTypeId() {
 		return 51;

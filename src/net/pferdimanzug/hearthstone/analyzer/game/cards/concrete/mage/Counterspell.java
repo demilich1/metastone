@@ -21,8 +21,6 @@ public class Counterspell extends SecretCard {
 		setTriggerAndEffect(new SpellCastedTrigger(TargetPlayer.OPPONENT), counterSpell);
 	}
 
-
-
 	@Override
 	public int getTypeId() {
 		return 57;

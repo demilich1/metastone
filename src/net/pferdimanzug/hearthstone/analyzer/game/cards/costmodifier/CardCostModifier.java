@@ -5,12 +5,13 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardType;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.logic.CustomCloneable;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.TargetPlayer;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.IGameEventListener;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerLayer;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
-public abstract class CardCostModifier implements IGameEventListener, Cloneable {
+public abstract class CardCostModifier extends CustomCloneable implements IGameEventListener {
 
 	private final boolean oneTime;
 	private boolean expired;
@@ -53,14 +54,9 @@ public abstract class CardCostModifier implements IGameEventListener, Cloneable 
 	}
 
 	@Override
-	public IGameEventListener clone() {
-		try {
-			CardCostModifier clone = (CardCostModifier) super.clone();
-			return clone;
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
-		return null;
+	public CardCostModifier clone() {
+		CardCostModifier clone = (CardCostModifier) super.clone();
+		return clone;
 	}
 
 	protected void expire() {
@@ -136,7 +132,7 @@ public abstract class CardCostModifier implements IGameEventListener, Cloneable 
 	public void setMinValue(int minValue) {
 		this.minValue = minValue;
 	}
-	
+
 	@Override
 	public void setOwner(int playerIndex) {
 		this.owner = playerIndex;

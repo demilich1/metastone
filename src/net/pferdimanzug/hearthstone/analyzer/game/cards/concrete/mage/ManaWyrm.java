@@ -23,8 +23,6 @@ public class ManaWyrm extends MinionCard {
 		return 67;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion manaWyrm = createMinion();
