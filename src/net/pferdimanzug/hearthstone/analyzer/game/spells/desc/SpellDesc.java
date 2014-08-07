@@ -11,6 +11,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 public class SpellDesc extends CustomCloneable {
 
 	private final HashMap<SpellArg, Object> arguments = new HashMap<>();
+	
+	public int assignedGC;
 
 	public SpellDesc() {
 	}
@@ -20,8 +22,10 @@ public class SpellDesc extends CustomCloneable {
 		setSpellClass(spellClass);
 	}
 
+	@Override
 	public SpellDesc clone() {
 		SpellDesc clone = new SpellDesc();
+		clone.assignedGC = 0;
 		for (SpellArg spellArg : arguments.keySet()) {
 			Object value = arguments.get(spellArg);
 			if (value instanceof CustomCloneable) {

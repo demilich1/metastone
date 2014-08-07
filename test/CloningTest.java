@@ -72,6 +72,10 @@ public class CloningTest extends TestBase {
 			logger.debug("Comparing decks");
 			compareCardCollections(original.getPlayer1().getDeck(), clone.getPlayer1().getDeck());
 			
+			GameContext cloneOfClone = clone.clone();
+			compareCardCollections(clone.getPlayer1().getHand(), cloneOfClone.getPlayer1().getHand());
+			compareCardCollections(clone.getPlayer1().getDeck(), cloneOfClone.getPlayer1().getDeck());
+			
 			Assert.assertNotSame(original.getPlayer2().getMinions(), clone.getPlayer2().getMinions());
 			Actor originalMinion = getSingleMinion(original.getPlayer1().getMinions());
 			Actor cloneMinion = getSingleMinion(clone.getPlayer1().getMinions());

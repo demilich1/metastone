@@ -71,9 +71,6 @@ public class GreedyOptimizeMove extends Behaviour {
 		GameLogic.logger.debug("");
 		GameLogic.logger.debug("********SIMULATION starts********** " + simulation.getLogic().hashCode());
 		simulation.getLogic().performGameAction(player.getId(), action);
-		if (simulation.gameDecided()) {
-			logger.info("Action {} ended the game", action);
-		}
 		GameLogic.logger.debug("********SIMULATION ends**********");
 		GameLogic.logger.debug("");
 		return simulation;

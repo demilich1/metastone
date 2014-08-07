@@ -162,6 +162,11 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void castSpell(int playerId, SpellDesc spellDesc) {
+//		if (spellDesc.assignedGC != 0 && spellDesc.assignedGC != context.hashCode()) {
+//			logger.warn("Spell {} has been cast in another context!", spellDesc);
+//		}
+//		
+//		spellDesc.assignedGC = context.hashCode();
 		
 		Player player = context.getPlayer(playerId);
 		Actor source = null;
