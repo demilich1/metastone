@@ -11,7 +11,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.ApplyTagSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Houndmaster extends MinionCard {
@@ -26,11 +26,10 @@ public class Houndmaster extends MinionCard {
 		return 36;
 	}
 
-
 	@Override
 	public Minion summon() {
 		Minion houndmaster = createMinion();
-		Spell houndmasterSpell = new MetaSpell(new BuffSpell(2, 2), new ApplyTagSpell(GameTag.TAUNT));
+		SpellDesc houndmasterSpell = MetaSpell.create(BuffSpell.create(2, 2), ApplyTagSpell.create(GameTag.TAUNT));
 		Battlecry battlecry = Battlecry.createBattlecry(houndmasterSpell, TargetSelection.FRIENDLY_MINIONS);
 		battlecry.setEntityFilter(new EntityRaceFilter(Race.BEAST));
 		houndmaster.setBattlecry(battlecry);

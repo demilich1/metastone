@@ -12,10 +12,8 @@ public class ArcaneShot extends SpellCard {
 		super("Arcane Shot", Rarity.FREE, HeroClass.HUNTER, 1);
 		setDescription("Deal $2 damage.");
 		setTargetRequirement(TargetSelection.ANY);
-		setSpell(new DamageSpell(2));
+		setSpell(DamageSpell.create(2));
 	}
-
-
 
 	@Override
 	public int getTypeId() {

@@ -5,8 +5,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.ReceiveCardSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.TargetPlayer;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellCastedTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 
@@ -25,7 +25,7 @@ public class ArchmageAntonidas extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion archmageAntonidas = createMinion();
-		Spell receiveFireballSpell = new ReceiveCardSpell(new Fireball());
+		SpellDesc receiveFireballSpell = ReceiveCardSpell.create(new Fireball());
 		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(TargetPlayer.SELF), receiveFireballSpell);
 		archmageAntonidas.setSpellTrigger(trigger);
 		return archmageAntonidas;

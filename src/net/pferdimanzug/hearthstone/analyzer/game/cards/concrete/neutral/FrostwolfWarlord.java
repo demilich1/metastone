@@ -8,7 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.IValueProvider;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class FrostwolfWarlord extends MinionCard {
@@ -28,7 +28,7 @@ public class FrostwolfWarlord extends MinionCard {
 	public Minion summon() {
 		Minion frostwolfWarlord = createMinion();
 		IValueProvider valueProvider = (context, player, target) -> player.getMinions().size();
-		Spell buffSpell = new BuffSpell(valueProvider, valueProvider);
+		SpellDesc buffSpell = BuffSpell.create(valueProvider, valueProvider);
 		buffSpell.setTarget(EntityReference.SELF);
 		Battlecry battlecry = Battlecry.createBattlecry(buffSpell);
 		frostwolfWarlord.setBattlecry(battlecry);

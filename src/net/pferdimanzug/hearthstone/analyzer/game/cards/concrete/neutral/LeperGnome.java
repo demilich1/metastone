@@ -5,7 +5,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class LeperGnome extends MinionCard {
@@ -20,11 +20,9 @@ public class LeperGnome extends MinionCard {
 		return 154;
 	}
 
-
-
 	@Override
 	public Minion summon() {
-		Spell deathrattle = new DamageSpell(2);
+		SpellDesc deathrattle = DamageSpell.create(2);
 		deathrattle.setTarget(EntityReference.ENEMY_HERO);
 		Minion leperGnome = createMinion();
 		leperGnome.addDeathrattle(deathrattle);

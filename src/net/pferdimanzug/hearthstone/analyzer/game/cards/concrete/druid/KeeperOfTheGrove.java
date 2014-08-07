@@ -28,20 +28,18 @@ public class KeeperOfTheGrove extends ChooseBattlecryCard {
 
 	@Override
 	protected Battlecry getBattlecry1() {
-		return Battlecry.createBattlecry(new DamageSpell(2), TargetSelection.ANY);
+		return Battlecry.createBattlecry(DamageSpell.create(2), TargetSelection.ANY);
 	}
 
 	@Override
 	protected Battlecry getBattlecry2() {
-		return Battlecry.createBattlecry(new SilenceSpell(), TargetSelection.MINIONS);
+		return Battlecry.createBattlecry(SilenceSpell.create(), TargetSelection.MINIONS);
 	}
 
 	@Override
 	public int getTypeId() {
 		return 11;
 	}
-
-
 
 	@Override
 	public Minion summon() {

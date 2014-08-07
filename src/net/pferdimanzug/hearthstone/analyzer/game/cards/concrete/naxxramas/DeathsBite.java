@@ -5,7 +5,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.WeaponCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class DeathsBite extends WeaponCard {
@@ -23,7 +23,7 @@ public class DeathsBite extends WeaponCard {
 	@Override
 	public Weapon getWeapon() {
 		Weapon deathsBite = createWeapon(4, 2);
-		Spell deathrattle = new DamageSpell(1);
+		SpellDesc deathrattle = DamageSpell.create(1);
 		deathrattle.setTarget(EntityReference.ALL_MINIONS);
 		deathsBite.addDeathrattle(deathrattle);
 		return deathsBite;

@@ -23,7 +23,7 @@ public class DragonlingMechanic extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion dragonlingMechanic = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(new MechanicalDragonling()), TargetSelection.NONE);
+		Battlecry battlecry = Battlecry.createBattlecry(SummonSpell.create(new MechanicalDragonling()), TargetSelection.NONE);
 		battlecry.setResolvedLate(true);
 		dragonlingMechanic.setBattlecry(battlecry);
 		return dragonlingMechanic;

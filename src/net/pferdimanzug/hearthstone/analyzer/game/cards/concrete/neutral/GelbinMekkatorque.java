@@ -12,9 +12,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroySpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DrawCardSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.HealRandomSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonRandomSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.TransformRandomMinionSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnEndTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnStartTrigger;
@@ -36,7 +36,7 @@ public class GelbinMekkatorque extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion gelbinMekkatorque = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new SummonRandomSpell(new Emboldener3000(), new HomingChicken(), new Poultryizer(),
+		Battlecry battlecry = Battlecry.createBattlecry(SummonRandomSpell.create(new Emboldener3000(), new HomingChicken(), new Poultryizer(),
 				new RepairBot()));
 		gelbinMekkatorque.setBattlecry(battlecry);
 		return gelbinMekkatorque;
@@ -53,7 +53,7 @@ public class GelbinMekkatorque extends MinionCard {
 		@Override
 		public Minion summon() {
 			Minion emboldener3000 = createMinion();
-			Spell buffSpell = new BuffRandomSpell(1, 1);
+			SpellDesc buffSpell = BuffRandomSpell.create(1, 1);
 			buffSpell.setTarget(EntityReference.ALL_MINIONS);
 			SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), buffSpell);
 			emboldener3000.setSpellTrigger(trigger);
@@ -73,9 +73,9 @@ public class GelbinMekkatorque extends MinionCard {
 		@Override
 		public Minion summon() {
 			Minion homingChicken = createMinion();
-			Spell destroySpell = new DestroySpell();
+			SpellDesc destroySpell = DestroySpell.create();
 			destroySpell.setTarget(EntityReference.SELF);
-			Spell homingChickenSpell = new MetaSpell(new DrawCardSpell(3), destroySpell);
+			SpellDesc homingChickenSpell = MetaSpell.create(DrawCardSpell.create(3), destroySpell);
 			SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), homingChickenSpell);
 			homingChicken.setSpellTrigger(trigger);
 			return homingChicken;
@@ -93,7 +93,7 @@ public class GelbinMekkatorque extends MinionCard {
 		@Override
 		public Minion summon() {
 			Minion poultryizer = createMinion();
-			Spell chickenizeSpell = new TransformRandomMinionSpell(new Chicken());
+			SpellDesc chickenizeSpell = TransformRandomMinionSpell.create(new Chicken());
 			chickenizeSpell.setTarget(EntityReference.ALL_MINIONS);
 			SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), chickenizeSpell);
 			poultryizer.setSpellTrigger(trigger);
@@ -118,8 +118,6 @@ public class GelbinMekkatorque extends MinionCard {
 
 	}
 
-
-
 	private class RepairBot extends MinionCard {
 
 		public RepairBot() {
@@ -131,7 +129,7 @@ public class GelbinMekkatorque extends MinionCard {
 		@Override
 		public Minion summon() {
 			Minion repairBot = createMinion();
-			Spell healRandomSpell = new HealRandomSpell(6);
+			SpellDesc healRandomSpell = HealRandomSpell.create(6);
 			healRandomSpell.setTarget(EntityReference.ALL_CHARACTERS);
 			SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), healRandomSpell);
 			repairBot.setSpellTrigger(trigger);

@@ -1,17 +1,12 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
-import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.CardType;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardLocation;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.custom.DeathlordSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class Deathlord extends MinionCard {
@@ -29,26 +24,11 @@ public class Deathlord extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion deathlord = createMinion(GameTag.TAUNT);
-		Spell deathlordSpell = new DeathlordSpell();
+		SpellDesc deathlordSpell = DeathlordSpell.create();
 		deathlordSpell.setTarget(EntityReference.NONE);
 		deathlord.addDeathrattle(deathlordSpell);
 		return deathlord;
 	}
 
-	private class DeathlordSpell extends Spell {
-
-		@Override
-		protected void onCast(GameContext context, Player player, Entity target) {
-			Player opponent = context.getOpponent(player);
-			MinionCard minionCard = (MinionCard) opponent.getDeck().getRandomOfType(CardType.MINION);
-			if (minionCard == null) {
-				return;
-			}
-			minionCard.setLocation(CardLocation.VOID);
-			opponent.getDeck().remove(minionCard);
-			SummonSpell summonSpell = new SummonSpell(minionCard);
-			context.getLogic().castSpell(player.getId(), summonSpell);
-		}
-		
-	}
+	
 }

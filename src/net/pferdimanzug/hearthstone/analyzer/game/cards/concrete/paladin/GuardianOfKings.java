@@ -26,7 +26,7 @@ public class GuardianOfKings extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion guardianOfKings = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new HealingSpell(6), TargetSelection.FRIENDLY_HERO);
+		Battlecry battlecry = Battlecry.createBattlecry(HealingSpell.create(6), TargetSelection.FRIENDLY_HERO);
 		guardianOfKings.setBattlecry(battlecry);
 		return guardianOfKings;
 	}

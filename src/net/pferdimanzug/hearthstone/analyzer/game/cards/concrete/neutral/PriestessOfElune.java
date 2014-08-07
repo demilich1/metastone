@@ -24,7 +24,7 @@ public class PriestessOfElune extends MinionCard {
 
 	@Override
 	public Minion summon() {
-		Battlecry battlecry = Battlecry.createBattlecry(new HealingSpell(4), TargetSelection.FRIENDLY_HERO);
+		Battlecry battlecry = Battlecry.createBattlecry(HealingSpell.create(4), TargetSelection.FRIENDLY_HERO);
 		Minion priestessOfElune = createMinion();
 		priestessOfElune.setBattlecry(battlecry);
 		return priestessOfElune;

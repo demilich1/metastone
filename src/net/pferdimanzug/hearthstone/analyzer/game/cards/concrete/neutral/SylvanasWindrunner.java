@@ -5,7 +5,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MindControlRandomSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class SylvanasWindrunner extends MinionCard {
@@ -20,12 +20,10 @@ public class SylvanasWindrunner extends MinionCard {
 		return 213;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion sylvanasWindrunner = createMinion();
-		Spell takeControl = new MindControlRandomSpell();
+		SpellDesc takeControl = MindControlRandomSpell.create();
 		takeControl.setTarget(EntityReference.ENEMY_MINIONS);
 		sylvanasWindrunner.addDeathrattle(takeControl);
 		return sylvanasWindrunner;

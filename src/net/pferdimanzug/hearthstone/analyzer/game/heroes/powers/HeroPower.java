@@ -8,8 +8,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.CardType;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.SpellSource;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellSource;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public abstract class HeroPower extends SpellCard {
@@ -23,7 +23,7 @@ public abstract class HeroPower extends SpellCard {
 	public boolean hasBeenUsed() {
 		return used;
 	}
-	
+
 	@Override
 	public PlayCardAction play() {
 		return new HeroPowerAction(getOwner(), getId()) {
@@ -41,16 +41,15 @@ public abstract class HeroPower extends SpellCard {
 			}
 		};
 	}
-	
+
 	@Override
-	public void setSpell(Spell spell) {
+	public void setSpell(SpellDesc spell) {
 		super.setSpell(spell);
 		spell.setSource(SpellSource.HERO_POWER);
 	}
-	
+
 	public void setUsed(boolean used) {
 		this.used = used;
 	}
-	
 
 }

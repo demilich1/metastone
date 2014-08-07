@@ -27,7 +27,7 @@ public class IronbeakOwl extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion ironbeakOwl = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new SilenceSpell(), TargetSelection.MINIONS);
+		Battlecry battlecry = Battlecry.createBattlecry(SilenceSpell.create(), TargetSelection.MINIONS);
 		ironbeakOwl.setBattlecry(battlecry);
 		return ironbeakOwl;
 	}

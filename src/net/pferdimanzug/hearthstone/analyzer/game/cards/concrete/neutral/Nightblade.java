@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class Nightblade extends MinionCard {
@@ -28,7 +28,7 @@ public class Nightblade extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion nightblade = createMinion();
-		Spell damageEnemyHero = new DamageSpell(BATTLECRY_DAMAGE);
+		SpellDesc damageEnemyHero = DamageSpell.create(BATTLECRY_DAMAGE);
 		damageEnemyHero.setTarget(EntityReference.ENEMY_HERO);
 		Battlecry battlecry = Battlecry.createBattlecry(damageEnemyHero);
 		nightblade.setBattlecry(battlecry);

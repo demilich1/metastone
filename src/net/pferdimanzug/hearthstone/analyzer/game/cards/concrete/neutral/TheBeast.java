@@ -5,9 +5,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.TargetPlayer;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 
 public class TheBeast extends MinionCard {
 
@@ -25,12 +25,10 @@ public class TheBeast extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion theBeast = createMinion();
-		Spell deathrattle = new SummonSpell(TargetPlayer.OPPONENT, new FinkleEinhorn());
+		SpellDesc deathrattle = SummonSpell.create(TargetPlayer.OPPONENT, new FinkleEinhorn());
 		theBeast.addDeathrattle(deathrattle);
 		return theBeast;
 	}
-
-
 
 	private class FinkleEinhorn extends MinionCard {
 

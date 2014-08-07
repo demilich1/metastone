@@ -14,7 +14,7 @@ public class Savagery extends SpellCard {
 		super("Savagery", Rarity.RARE, HeroClass.DRUID, 1);
 		setDescription("Deal damage equal to your hero's Attack to a minion.");
 		
-		setSpell(new DamageSpell((context, player, target) -> player.getHero().getAttack()));
+		setSpell(DamageSpell.create((context, player, target) -> player.getHero().getAttack()));
 		setTargetRequirement(TargetSelection.MINIONS);
 	}
 
@@ -26,10 +26,6 @@ public class Savagery extends SpellCard {
 		
 		return player.getHero().getAttack() > 0;
 	}
-	
-	
-
-
 
 	@Override
 	public int getTypeId() {

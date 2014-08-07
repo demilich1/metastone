@@ -9,8 +9,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.SpellSource;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellSource;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.BoardChangedTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
@@ -23,11 +23,11 @@ public class Aura extends SpellTrigger {
 	private static Logger logger = LoggerFactory.getLogger(Aura.class);
 
 	private EntityReference targets;
-	private Spell applyAuraEffect;
-	private Spell removeAuraEffect;
+	private SpellDesc applyAuraEffect;
+	private SpellDesc removeAuraEffect;
 	private HashSet<Integer> affectedEntities = new HashSet<>();
 
-	public Aura(Spell applyAuraEffect, Spell removeAuraEffect, EntityReference targetSelection) {
+	public Aura(SpellDesc applyAuraEffect, SpellDesc removeAuraEffect, EntityReference targetSelection) {
 		super(new BoardChangedTrigger(), applyAuraEffect);
 		this.applyAuraEffect = applyAuraEffect;
 		this.removeAuraEffect = removeAuraEffect;

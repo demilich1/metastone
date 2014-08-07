@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.AddSpellTriggerSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroySpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnEndTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
@@ -18,14 +18,12 @@ public class PowerOverwhelming extends SpellCard {
 	public PowerOverwhelming() {
 		super("Power Overwhelming", Rarity.COMMON, HeroClass.WARLOCK, 1);
 		setDescription("Give a friendly minion +4/+4 until end of turn. Then, it dies. Horribly.");
-		Spell destroySpell = new DestroySpell();
+		SpellDesc destroySpell = DestroySpell.create();
 		destroySpell.setTarget(EntityReference.SELF);
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), destroySpell);
-		setSpell(new MetaSpell(new BuffSpell(4, 4), new AddSpellTriggerSpell(trigger)));
+		setSpell(MetaSpell.create(BuffSpell.create(4, 4), AddSpellTriggerSpell.create(trigger)));
 		setTargetRequirement(TargetSelection.FRIENDLY_MINIONS);
 	}
-
-
 
 	@Override
 	public int getTypeId() {

@@ -15,7 +15,7 @@ public class Polymorph extends SpellCard {
 		super("Polymorph", Rarity.FREE, HeroClass.MAGE, 4);
 		setDescription("Transform a minion into a 1/1 Sheep.");
 		setTargetRequirement(TargetSelection.MINIONS);
-		setSpell(new TransformMinionSpell(new Sheep()));
+		setSpell(TransformMinionSpell.create(new Sheep()));
 	}
 	
 	@Override

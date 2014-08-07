@@ -5,7 +5,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.AddSecretSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.GameEventTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.secrets.Secret;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.secrets.SecretTrigger;
@@ -24,13 +24,13 @@ public class SecretCard extends SpellCard {
 	}
 
 	public void setSecret(Secret secret) {
-		Spell spell = new AddSecretSpell(secret);
+		SpellDesc spell = AddSecretSpell.create(secret);
 		spell.setTarget(EntityReference.FRIENDLY_HERO);
 		setTargetRequirement(TargetSelection.NONE);
 		setSpell(spell);
 	}
 	
-	public void setTriggerAndEffect(GameEventTrigger trigger, Spell effect) {
+	public void setTriggerAndEffect(GameEventTrigger trigger, SpellDesc effect) {
 		SecretTrigger secretTrigger = new SecretTrigger(trigger);
 		setSecret(new Secret(secretTrigger, effect, this));
 	}

@@ -5,8 +5,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class HauntedCreeper extends MinionCard {
@@ -24,7 +24,7 @@ public class HauntedCreeper extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion hauntedCreeper = createMinion();
-		Spell deathrattle = new SummonSpell(new SpectralSpider(), new SpectralSpider());
+		SpellDesc deathrattle = SummonSpell.create(new SpectralSpider(), new SpectralSpider());
 		deathrattle.setTarget(EntityReference.NONE);
 		hauntedCreeper.addDeathrattle(deathrattle);
 		return hauntedCreeper;

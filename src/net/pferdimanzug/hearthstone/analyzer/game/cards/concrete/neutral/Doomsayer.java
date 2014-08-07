@@ -5,7 +5,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroySpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnStartTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
@@ -27,7 +27,7 @@ public class Doomsayer extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion doomsayer = createMinion();
-		Spell endOfWorldSpell = new DestroySpell();
+		SpellDesc endOfWorldSpell = DestroySpell.create();
 		endOfWorldSpell.setTarget(EntityReference.ALL_MINIONS);
 		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), endOfWorldSpell);
 		doomsayer.setSpellTrigger(trigger);

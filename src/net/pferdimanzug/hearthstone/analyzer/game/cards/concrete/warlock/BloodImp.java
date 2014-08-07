@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffRandomSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnEndTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
@@ -25,12 +25,10 @@ public class BloodImp extends MinionCard {
 		return 335;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion bloodImp = createMinion(GameTag.STEALTHED);
-		Spell spell = new BuffRandomSpell(0, 1);
+		SpellDesc spell = BuffRandomSpell.create(0, 1);
 		spell.setTarget(EntityReference.OTHER_FRIENDLY_MINIONS);
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), spell);
 		bloodImp.setSpellTrigger(trigger);

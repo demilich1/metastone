@@ -12,7 +12,7 @@ public class MortalStrike extends SpellCard {
 		super("Mortal Strike", Rarity.RARE, HeroClass.WARRIOR, 4);
 		setDescription("Deal 4 damage. If you have 12 or less Health, deal 6 instead.");
 		
-		setSpell(new DamageSpell((context, player, target) -> player.getHero().getHp() > 12 ? 4 : 6));
+		setSpell(DamageSpell.create((context, player, target) -> player.getHero().getHp() > 12 ? 4 : 6));
 		setTargetRequirement(TargetSelection.ANY);
 	}
 	

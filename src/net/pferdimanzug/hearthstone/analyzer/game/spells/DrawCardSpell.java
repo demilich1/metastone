@@ -3,38 +3,38 @@ package net.pferdimanzug.hearthstone.analyzer.game.spells;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellArg;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class DrawCardSpell extends Spell {
 
-	private final int numberOfCards;
-	private final TargetPlayer targetPlayer;
-	private final IValueProvider drawModifier;
-
-	public DrawCardSpell() {
-		this(1);
+	public static SpellDesc create() {
+		return create(1);
 	}
 
-	public DrawCardSpell(int numberOfCards) {
-		this(numberOfCards, TargetPlayer.SELF);
+	public static SpellDesc create(int numberOfCards) {
+		return create(numberOfCards, TargetPlayer.SELF);
 	}
 
-	public DrawCardSpell(int numberOfCards, TargetPlayer targetPlayer) {
-		this(null, numberOfCards, targetPlayer);
+	public static SpellDesc create(int numberOfCards, TargetPlayer targetPlayer) {
+		return create(null, numberOfCards, targetPlayer);
 	}
 
-	private DrawCardSpell(IValueProvider drawModifier, int numberOfCards, TargetPlayer targetPlayer) {
-		this.drawModifier = drawModifier;
-		this.numberOfCards = numberOfCards;
-		this.targetPlayer = targetPlayer;
-		setTarget(EntityReference.NONE);
+	private static SpellDesc create(IValueProvider drawModifier, int numberOfCards, TargetPlayer targetPlayer) {
+		SpellDesc desc = new SpellDesc(DrawCardSpell.class);
+		desc.set(SpellArg.VALUE_PROVIDER, drawModifier);
+		desc.set(SpellArg.NUMBER_OF_CARDS, numberOfCards);
+		desc.setTargetPlayer(targetPlayer);
+		desc.setTarget(EntityReference.NONE);
+		return desc;
 	}
 
-	public DrawCardSpell(IValueProvider drawModifier, TargetPlayer targetPlayer) {
-		this(drawModifier, 0, targetPlayer);
+	public static SpellDesc create(IValueProvider drawModifier, TargetPlayer targetPlayer) {
+		return create(drawModifier, 0, targetPlayer);
 	}
 
-	private void draw(GameContext context, Player player) {
+	private void draw(GameContext context, Player player, int numberOfCards, IValueProvider drawModifier) {
 		int cardCount = drawModifier != null ? drawModifier.provideValue(context, player, null) : numberOfCards;
 		for (int i = 0; i < cardCount; i++) {
 			context.getLogic().drawCard(player.getId());
@@ -42,18 +42,21 @@ public class DrawCardSpell extends Spell {
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, Entity target) {
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+		int numberOfCards = desc.getInt(SpellArg.NUMBER_OF_CARDS);
+		TargetPlayer targetPlayer = desc.getTargetPlayer();
+		IValueProvider drawModifier = desc.getValueProvider();
 		Player opponent = context.getOpponent(player);
 		switch (targetPlayer) {
 		case BOTH:
-			draw(context, player);
-			draw(context, opponent);
+			draw(context, player, numberOfCards, drawModifier);
+			draw(context, opponent, numberOfCards, drawModifier);
 			break;
 		case OPPONENT:
-			draw(context, opponent);
+			draw(context, opponent, numberOfCards, drawModifier);
 			break;
 		case SELF:
-			draw(context, player);
+			draw(context, player, numberOfCards, drawModifier);
 			break;
 		default:
 			break;

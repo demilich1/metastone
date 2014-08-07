@@ -26,7 +26,7 @@ public class ArgentProtector extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion argentProtector = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new ApplyTagSpell(GameTag.DIVINE_SHIELD), TargetSelection.FRIENDLY_MINIONS);
+		Battlecry battlecry = Battlecry.createBattlecry(ApplyTagSpell.create(GameTag.DIVINE_SHIELD), TargetSelection.FRIENDLY_MINIONS);
 		argentProtector.setBattlecry(battlecry);
 		return argentProtector;
 	}

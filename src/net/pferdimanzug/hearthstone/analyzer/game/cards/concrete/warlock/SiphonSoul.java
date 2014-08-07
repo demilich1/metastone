@@ -6,7 +6,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroySpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.HealingSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
@@ -16,15 +16,13 @@ public class SiphonSoul extends SpellCard {
 		super("Siphon Soul", Rarity.RARE, HeroClass.WARLOCK, 6);
 		setDescription("Destroy a minion. Restore 3 Health to your hero.");
 
-		Spell destroySpell = new DestroySpell();
-		Spell healingSpell = new HealingSpell(3);
+		SpellDesc destroySpell = DestroySpell.create();
+		SpellDesc healingSpell = HealingSpell.create(3);
 		healingSpell.setTarget(EntityReference.FRIENDLY_HERO);
-		setSpell(new MetaSpell(destroySpell, healingSpell));
+		setSpell(MetaSpell.create(destroySpell, healingSpell));
 
 		setTargetRequirement(TargetSelection.MINIONS);
 	}
-
-
 
 	@Override
 	public int getTypeId() {

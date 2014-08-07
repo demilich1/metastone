@@ -8,7 +8,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.costmodifier.CardCostModifier;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 
 public abstract class Actor extends Entity {
@@ -22,9 +24,9 @@ public abstract class Actor extends Entity {
 		this.sourceCard = sourceCard;
 	}
 
-	public void addDeathrattle(Spell deathrattleSpell) {
+	public void addDeathrattle(SpellDesc deathrattleSpell) {
 		if (!hasTag(GameTag.DEATHRATTLES)) {
-			setTag(GameTag.DEATHRATTLES, new ArrayList<Spell>());
+			setTag(GameTag.DEATHRATTLES, new ArrayList<SpellDesc>());
 		}
 		getDeathrattles().add(deathrattleSpell);
 	}
@@ -46,8 +48,8 @@ public abstract class Actor extends Entity {
 		clone.spellTrigger = spellTrigger != null ? spellTrigger.clone() : null;
 		if (hasTag(GameTag.DEATHRATTLES)) {
 			clone.removeTag(GameTag.DEATHRATTLES);
-			for (Spell deathrattleSpell : getDeathrattles()) {
-				Spell deathrattleClone = deathrattleSpell.clone();
+			for (SpellDesc deathrattleSpell : getDeathrattles()) {
+				SpellDesc deathrattleClone = deathrattleSpell.clone();
 				clone.addDeathrattle(deathrattleClone);
 			}
 		}
@@ -73,8 +75,8 @@ public abstract class Actor extends Entity {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Spell> getDeathrattles() {
-		return (List<Spell>) getTag(GameTag.DEATHRATTLES);
+	public List<SpellDesc> getDeathrattles() {
+		return (List<SpellDesc>) getTag(GameTag.DEATHRATTLES);
 	}
 
 	public Spell getEnrageSpell() {
@@ -87,6 +89,10 @@ public abstract class Actor extends Entity {
 
 	public int getMaxHp() {
 		return getTagValue(GameTag.MAX_HP) + getTagValue(GameTag.HP_BONUS);
+	}
+
+	public Race getRace() {
+		return (Race) getTag(GameTag.RACE);
 	}
 
 	public Card getSourceCard() {
@@ -151,6 +157,10 @@ public abstract class Actor extends Entity {
 		if (hasSpellTrigger()) {
 			spellTrigger.setHost(this);
 		}
+	}
+
+	public void setRace(Race race) {
+		setTag(GameTag.RACE, race);
 	}
 
 	public void setSpellTrigger(SpellTrigger spellTrigger) {

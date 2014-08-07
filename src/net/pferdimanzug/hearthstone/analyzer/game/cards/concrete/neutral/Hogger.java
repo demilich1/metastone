@@ -24,7 +24,7 @@ public class Hogger extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion hogger = createMinion();
-		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), new SummonSpell(new Gnoll()));
+		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), SummonSpell.create(new Gnoll()));
 		hogger.setSpellTrigger(trigger);
 		return hogger;
 	}

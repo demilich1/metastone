@@ -13,7 +13,7 @@ public class Shiv extends SpellCard {
 	public Shiv() {
 		super("Shiv", Rarity.FREE, HeroClass.ROGUE, 2);
 		setDescription("Deal $1 damage. Draw a card.");
-		setSpell(new MetaSpell(new DamageSpell(1), new DrawCardSpell()));
+		setSpell(MetaSpell.create(DamageSpell.create(1), DrawCardSpell.create()));
 		setTargetRequirement(TargetSelection.ANY);
 	}
 

@@ -13,7 +13,7 @@ public class ShieldBlock extends SpellCard {
 	public ShieldBlock() {
 		super("Shield Block", Rarity.FREE, HeroClass.WARRIOR, 3);
 		setDescription("Gain 5 Armor. Draw a card.");
-		setSpell(new MetaSpell(new BuffHeroSpell(0, 5), new DrawCardSpell()));
+		setSpell(MetaSpell.create(BuffHeroSpell.create(0, 5), DrawCardSpell.create()));
 		setTargetRequirement(TargetSelection.NONE);
 	}
 

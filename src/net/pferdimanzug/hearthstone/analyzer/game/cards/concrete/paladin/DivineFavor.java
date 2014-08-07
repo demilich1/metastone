@@ -28,7 +28,7 @@ public class DivineFavor extends SpellCard {
 				return cardDifference;
 			}
 		};
-		setSpell(new DrawCardSpell(matchOpponentCardCount, TargetPlayer.SELF));
+		setSpell(DrawCardSpell.create(matchOpponentCardCount, TargetPlayer.SELF));
 		
 		setTargetRequirement(TargetSelection.NONE);
 	}

@@ -6,7 +6,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageRandomSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnEndTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
@@ -23,12 +23,10 @@ public class RagnarosTheFirelord extends MinionCard {
 		return 186;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion ragnaros = createMinion(GameTag.CANNOT_ATTACK);
-		Spell damageSpell = new DamageRandomSpell(8, 1);
+		SpellDesc damageSpell = DamageRandomSpell.create(8, 1);
 		damageSpell.setTarget(EntityReference.ENEMY_CHARACTERS);
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), damageSpell);
 		ragnaros.setSpellTrigger(trigger);

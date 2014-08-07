@@ -6,6 +6,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.TargetPlayer;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellCastedTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
@@ -22,13 +23,10 @@ public class ManaAddict extends MinionCard {
 		return 162;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion manaAddict = createMinion();
-
-		BuffSpell buffSpell = new BuffSpell(2, 0, true);
+		SpellDesc buffSpell = BuffSpell.create(2, 0, true);
 		buffSpell.setTarget(EntityReference.SELF);
 		manaAddict.setSpellTrigger(new SpellTrigger(new SpellCastedTrigger(TargetPlayer.SELF), buffSpell));
 		return manaAddict;

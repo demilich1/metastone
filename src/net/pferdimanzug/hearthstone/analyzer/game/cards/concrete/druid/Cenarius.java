@@ -8,8 +8,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class Cenarius extends ChooseBattlecryCard {
@@ -31,14 +31,14 @@ public class Cenarius extends ChooseBattlecryCard {
 
 	@Override
 	protected Battlecry getBattlecry1() {
-		Spell buffSpell = new BuffSpell(2, 2);
+		SpellDesc buffSpell = BuffSpell.create(2, 2);
 		buffSpell.setTarget(EntityReference.FRIENDLY_MINIONS);
 		return Battlecry.createBattlecry(buffSpell);
 	}
 
 	@Override
 	protected Battlecry getBattlecry2() {
-		Spell summonSpell = new SummonSpell(new Treant(), new Treant());
+		SpellDesc summonSpell = SummonSpell.create(new Treant(), new Treant());
 		return Battlecry.createBattlecry(summonSpell);
 	}
 
@@ -51,7 +51,6 @@ public class Cenarius extends ChooseBattlecryCard {
 	public Minion summon() {
 		return createMinion();
 	}
-
 
 
 	private class Treant extends MinionCard {

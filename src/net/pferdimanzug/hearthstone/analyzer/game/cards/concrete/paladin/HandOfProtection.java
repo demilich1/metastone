@@ -13,7 +13,7 @@ public class HandOfProtection extends SpellCard {
 		super("Hand of Protection", Rarity.FREE, HeroClass.PALADIN, 1);
 		setDescription("Give a minion Divine Shield.");
 		setTargetRequirement(TargetSelection.MINIONS);
-		setSpell(new ApplyTagSpell(GameTag.DIVINE_SHIELD));
+		setSpell(ApplyTagSpell.create(GameTag.DIVINE_SHIELD));
 	}
 
 

@@ -16,7 +16,7 @@ public class Hex extends SpellCard {
 		super("Hex", Rarity.FREE, HeroClass.SHAMAN, 3);
 		setDescription("Transform a minion into a 0/1 Frog with Taunt.");
 		setTargetRequirement(TargetSelection.MINIONS);
-		setSpell(new TransformMinionSpell(new Frog()));
+		setSpell(TransformMinionSpell.create(new Frog()));
 	}
 	
 	@Override

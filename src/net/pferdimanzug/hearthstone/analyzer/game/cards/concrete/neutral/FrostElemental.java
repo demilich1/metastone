@@ -26,7 +26,7 @@ public class FrostElemental extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion frostElemental = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new ApplyTagSpell(GameTag.FROZEN), TargetSelection.ANY);
+		Battlecry battlecry = Battlecry.createBattlecry(ApplyTagSpell.create(GameTag.FROZEN), TargetSelection.ANY);
 		frostElemental.setBattlecry(battlecry);
 		return frostElemental;
 	}

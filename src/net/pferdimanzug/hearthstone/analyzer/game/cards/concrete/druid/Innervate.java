@@ -12,10 +12,8 @@ public class Innervate extends SpellCard {
 		super("Innervate", Rarity.FREE, HeroClass.DRUID, 0);
 		setDescription("Gain 2 Mana Crystals this turn only.");
 		setTargetRequirement(TargetSelection.NONE);
-		setSpell(new GainManaSpell(2));
+		setSpell(GainManaSpell.create(2));
 	}
-
-
 
 	@Override
 	public int getTypeId() {

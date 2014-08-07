@@ -32,12 +32,10 @@ public class Nourish extends ChooseOneCard {
 			setDescription("Draw 3 cards");
 			setCollectible(false);
 
-			setSpell(new DrawCardSpell(3));
+			setSpell(DrawCardSpell.create(3));
 			setTargetRequirement(TargetSelection.NONE);
 		}
 	}
-
-
 
 	private class NourishManaCard extends SpellCard {
 
@@ -46,7 +44,7 @@ public class Nourish extends ChooseOneCard {
 			setDescription("Gain 2 Mana Crystals");
 			setCollectible(false);
 
-			setSpell(new ModifyMaxManaSpell(2, TargetPlayer.SELF));
+			setSpell(ModifyMaxManaSpell.create(2, TargetPlayer.SELF));
 			setTargetRequirement(TargetSelection.NONE);
 		}
 	}

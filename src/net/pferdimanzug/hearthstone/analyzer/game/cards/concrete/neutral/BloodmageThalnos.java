@@ -25,7 +25,7 @@ public class BloodmageThalnos extends MinionCard {
 	public Minion summon() {
 		Minion bloodmageThalnos = createMinion();
 		bloodmageThalnos.setTag(GameTag.SPELL_POWER, +1);
-		bloodmageThalnos.addDeathrattle(new DrawCardSpell());
+		bloodmageThalnos.addDeathrattle(DrawCardSpell.create());
 		return bloodmageThalnos;
 	}
 }

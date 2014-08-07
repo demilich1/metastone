@@ -8,7 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class CruelTaskmaster extends MinionCard {
@@ -23,11 +23,10 @@ public class CruelTaskmaster extends MinionCard {
 		return 367;
 	}
 
-
 	@Override
 	public Minion summon() {
 		Minion cruelTaskmaster = createMinion();
-		Spell cruelBuffSpell = new MetaSpell(new BuffSpell(2, 0), new DamageSpell(1));
+		SpellDesc cruelBuffSpell = MetaSpell.create(BuffSpell.create(2, 0), DamageSpell.create(1));
 		Battlecry battlecry = Battlecry.createBattlecry(cruelBuffSpell, TargetSelection.MINIONS);
 		cruelTaskmaster.setBattlecry(battlecry);
 		return cruelTaskmaster;

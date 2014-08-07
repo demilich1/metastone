@@ -12,7 +12,7 @@ public class BlessingOfMight extends SpellCard {
 		super("Blessing of Might", Rarity.FREE, HeroClass.PALADIN, 1);
 		setDescription("Give a minion +3 Attack.");
 		setTargetRequirement(TargetSelection.MINIONS);
-		setSpell(new BuffSpell(3, 0));
+		setSpell(BuffSpell.create(3, 0));
 	}
 
 

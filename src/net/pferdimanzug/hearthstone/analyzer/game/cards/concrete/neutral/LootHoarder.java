@@ -5,7 +5,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DrawCardSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 
 public class LootHoarder extends MinionCard {
 
@@ -19,11 +19,9 @@ public class LootHoarder extends MinionCard {
 		return 156;
 	}
 
-
-
 	@Override
 	public Minion summon() {
-		Spell deathrattle = new DrawCardSpell();
+		SpellDesc deathrattle = DrawCardSpell.create();
 		Minion lootHoarder = createMinion();
 		lootHoarder.addDeathrattle(deathrattle);
 		return lootHoarder;

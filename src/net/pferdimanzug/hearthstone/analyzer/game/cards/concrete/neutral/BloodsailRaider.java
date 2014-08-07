@@ -8,7 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class BloodsailRaider extends MinionCard {
@@ -28,7 +28,7 @@ public class BloodsailRaider extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion bloodsailRaider = createMinion();
-		Spell buffSpell = new BuffSpell((context, player, target) -> player.getHero().getWeapon().getWeaponDamage(), null);
+		SpellDesc buffSpell = BuffSpell.create((context, player, target) -> player.getHero().getWeapon().getWeaponDamage(), null);
 		buffSpell.setTarget(EntityReference.SELF);
 		Battlecry battlecry = Battlecry.createBattlecry(buffSpell);
 		battlecry.setCondition((context, player) -> player.getHero().getWeapon() != null);

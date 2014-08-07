@@ -9,8 +9,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.SummonEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.ApplyTagSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.TargetPlayer;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.MinionSummonedTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
@@ -30,7 +30,7 @@ public class WarsongCommander extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion warsongCommander = createMinion();
-		Spell chargeSpell = new ApplyTagSpell(GameTag.CHARGE);
+		SpellDesc chargeSpell = ApplyTagSpell.create(GameTag.CHARGE);
 		chargeSpell.setTarget(EntityReference.EVENT_TARGET);
 		//TODO: check interaction with aura buffs. Currently all auras from minions which where played
 		// before the Warsong Commander will also be applied before. Comments on Hearthhead.com state
@@ -40,8 +40,6 @@ public class WarsongCommander extends MinionCard {
 		warsongCommander.setSpellTrigger(trigger);
 		return warsongCommander;
 	}
-
-
 
 	private class BelowThreeAttackTrigger extends MinionSummonedTrigger {
 		

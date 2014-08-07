@@ -30,19 +30,18 @@ public class AncientOfLore extends ChooseBattlecryCard {
 
 	@Override
 	protected Battlecry getBattlecry1() {
-		return Battlecry.createBattlecry(new DrawCardSpell(2));
+		return Battlecry.createBattlecry(DrawCardSpell.create(2));
 	}
 
 	@Override
 	protected Battlecry getBattlecry2() {
-		return Battlecry.createBattlecry(new HealingSpell(5), TargetSelection.ANY);
+		return Battlecry.createBattlecry(HealingSpell.create(5), TargetSelection.ANY);
 	}
 
 	@Override
 	public int getTypeId() {
 		return 1;
 	}
-
 
 	@Override
 	public Minion summon() {

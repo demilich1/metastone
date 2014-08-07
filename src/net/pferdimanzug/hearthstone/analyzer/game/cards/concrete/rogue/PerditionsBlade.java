@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.ComboSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class PerditionsBlade extends WeaponCard {
@@ -22,13 +22,12 @@ public class PerditionsBlade extends WeaponCard {
 		return 300;
 	}
 
-
 	@Override
 	public Weapon getWeapon() {
 		Weapon perditionsBlade = createWeapon(2, 2);
-		Spell noCombo = new DamageSpell(1);
-		Spell combo = new DamageSpell(2);
-		Battlecry battlecry = Battlecry.createBattlecry(new ComboSpell(noCombo, combo), TargetSelection.ANY);
+		SpellDesc noCombo = DamageSpell.create(1);
+		SpellDesc combo = DamageSpell.create(2);
+		Battlecry battlecry = Battlecry.createBattlecry(ComboSpell.create(noCombo, combo), TargetSelection.ANY);
 		perditionsBlade.setBattlecry(battlecry);
 		return perditionsBlade;
 	}

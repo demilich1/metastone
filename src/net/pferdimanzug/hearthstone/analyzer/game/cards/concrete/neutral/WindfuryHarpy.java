@@ -18,8 +18,6 @@ public class WindfuryHarpy extends MinionCard {
 		return 226;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		return createMinion(GameTag.WINDFURY);

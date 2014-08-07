@@ -23,12 +23,10 @@ public class StarvingBuzzard extends MinionCard {
 		return 46;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion starvingBuzzard = createMinion();
-		SpellTrigger trigger = new SpellTrigger(new MinionSummonedTrigger(TargetPlayer.SELF, Race.BEAST), new DrawCardSpell());
+		SpellTrigger trigger = new SpellTrigger(new MinionSummonedTrigger(TargetPlayer.SELF, Race.BEAST), DrawCardSpell.create());
 		starvingBuzzard.setSpellTrigger(trigger);
 		return starvingBuzzard;
 	}

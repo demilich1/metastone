@@ -24,7 +24,7 @@ public class RazorfenHunter extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion razorfenHunter = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(new Boar()), TargetSelection.NONE);
+		Battlecry battlecry = Battlecry.createBattlecry(SummonSpell.create(new Boar()), TargetSelection.NONE);
 		battlecry.setResolvedLate(true);
 		razorfenHunter.setBattlecry(battlecry);
 		return razorfenHunter;

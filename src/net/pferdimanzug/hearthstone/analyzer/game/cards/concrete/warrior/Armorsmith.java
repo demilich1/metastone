@@ -26,7 +26,7 @@ public class Armorsmith extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion armorsmith = createMinion();
-		SpellTrigger trigger = new SpellTrigger(new MinionDamagedTrigger(TargetPlayer.SELF), new BuffHeroSpell(0, 1));
+		SpellTrigger trigger = new SpellTrigger(new MinionDamagedTrigger(TargetPlayer.SELF), BuffHeroSpell.create(0, 1));
 		armorsmith.setSpellTrigger(trigger);
 		return armorsmith;
 	}

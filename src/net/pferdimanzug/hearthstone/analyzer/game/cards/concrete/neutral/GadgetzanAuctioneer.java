@@ -26,7 +26,7 @@ public class GadgetzanAuctioneer extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion gadgetzanAuctioneer = createMinion();
-		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(TargetPlayer.SELF), new DrawCardSpell());
+		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(TargetPlayer.SELF), DrawCardSpell.create());
 		gadgetzanAuctioneer.setSpellTrigger(trigger);
 		return gadgetzanAuctioneer;
 	}

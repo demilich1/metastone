@@ -9,8 +9,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.costmodifier.OneTurnCost
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.AddCostModifierSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.TargetPlayer;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class MillhouseManastorm extends MinionCard {
@@ -31,7 +31,7 @@ public class MillhouseManastorm extends MinionCard {
 		Minion millhouseManastorm = createMinion();
 		OneTurnCostModifier costModifier = new OneTurnCostModifier(CardType.SPELL, -99, false);
 		costModifier.setTargetPlayer(TargetPlayer.OPPONENT);
-		Spell castSpellsForFree = new AddCostModifierSpell(costModifier);
+		SpellDesc castSpellsForFree = AddCostModifierSpell.create(costModifier);
 		castSpellsForFree.setTarget(EntityReference.ENEMY_HERO);
 		millhouseManastorm.setBattlecry(Battlecry.createBattlecry(castSpellsForFree));
 		return millhouseManastorm;

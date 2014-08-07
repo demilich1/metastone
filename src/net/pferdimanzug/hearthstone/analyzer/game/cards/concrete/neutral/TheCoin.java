@@ -15,7 +15,7 @@ public class TheCoin extends SpellCard {
 		setDescription("Gain 1 Mana Crystal this turn only.");
 		setCollectible(false);
 		setTargetRequirement(TargetSelection.NONE);
-		setSpell(new GainManaSpell(MANA_GAIN));
+		setSpell(GainManaSpell.create(MANA_GAIN));
 	}
 
 	@Override

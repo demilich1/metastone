@@ -16,7 +16,7 @@ public class BuffAura extends Aura {
 	}
 	
 	public BuffAura(int attackBonus, int hpBonus, EntityReference targetSelection, Race raceRestriction) {
-		super(new AuraSpellBuff(attackBonus, hpBonus), new AuraSpellBuff(-attackBonus, -hpBonus), targetSelection);
+		super(AuraSpellBuff.create(attackBonus, hpBonus), AuraSpellBuff.create(-attackBonus, -hpBonus), targetSelection);
 		this.raceRestriction = raceRestriction;
 	}
 

@@ -10,8 +10,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.ReceiveCardSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.TargetPlayer;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class KingMukla extends MinionCard {
@@ -31,7 +31,7 @@ public class KingMukla extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion kingMukla = createMinion();
-		Spell bananasSpell = new ReceiveCardSpell(TargetPlayer.OPPONENT, new Bananas(), new Bananas());
+		SpellDesc bananasSpell = ReceiveCardSpell.create(TargetPlayer.OPPONENT, new Bananas(), new Bananas());
 		Battlecry battlecry = Battlecry.createBattlecry(bananasSpell);
 		kingMukla.setBattlecry(battlecry);
 		return kingMukla;
@@ -43,7 +43,7 @@ public class KingMukla extends MinionCard {
 			super("Bananas", Rarity.FREE, HeroClass.ANY, 1);
 			setCollectible(false);
 
-			setSpell(new BuffSpell(1, 1));
+			setSpell(BuffSpell.create(1, 1));
 			setTargetRequirement(TargetSelection.MINIONS);
 		}
 

@@ -6,7 +6,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageRandomSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
@@ -22,12 +22,10 @@ public class MadBomber extends MinionCard {
 		return 159;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion madBomber = createMinion();
-		Spell spell = new DamageRandomSpell(1, 3);
+		SpellDesc spell = DamageRandomSpell.create(1, 3);
 		spell.setTarget(EntityReference.ALL_CHARACTERS);
 		Battlecry battlecry = Battlecry.createBattlecry(spell, TargetSelection.NONE);
 		madBomber.setBattlecry(battlecry);

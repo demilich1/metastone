@@ -12,7 +12,7 @@ public class ArcaneIntellect extends SpellCard {
 		super("Arcane Intellect", Rarity.FREE, HeroClass.MAGE, 3);
 		setDescription("Draw 2 cards.");
 		setTargetRequirement(TargetSelection.NONE);
-		setSpell(new DrawCardSpell(2));
+		setSpell(DrawCardSpell.create(2));
 	}
 
 	@Override

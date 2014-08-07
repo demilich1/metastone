@@ -7,29 +7,25 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.UniqueMinion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellArg;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 
 public class IfXDiedSummonYSpell extends Spell {
 	
-	private final UniqueMinion x;
-
-	public IfXDiedSummonYSpell(UniqueMinion x, MinionCard y) {
-		this.x = x;
-		setCloneableData(y);
-	}
-
-	public UniqueMinion getX() {
-		return x;
-	}
-
-	public MinionCard getY() {
-		return (MinionCard) getCloneableData()[0];
+	public static SpellDesc create(UniqueMinion x, MinionCard y) {
+		SpellDesc desc = new SpellDesc(IfXDiedSummonYSpell.class);
+		desc.set(SpellArg.UNIQUE_MINION, x);
+		desc.set(SpellArg.CARD, y);
+		return desc;
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, Entity target) {
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+		UniqueMinion x = (UniqueMinion) desc.get(SpellArg.UNIQUE_MINION);
+		MinionCard y = (MinionCard) desc.get(SpellArg.CARD);
 		for (Minion deadMinion : player.getGraveyard()) {
-			if (deadMinion.getTag(GameTag.UNIQUE_MINION) == getX()) {
-				context.getLogic().summon(player.getId(), getY().summon(), null, null, false);
+			if (deadMinion.getTag(GameTag.UNIQUE_MINION) == x) {
+				context.getLogic().summon(player.getId(), y.summon(), null, null, false);
 				break;
 			}
 		}

@@ -8,7 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.EquipWeaponSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 
 public class TirionFordring extends MinionCard {
 
@@ -25,12 +25,10 @@ public class TirionFordring extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion tirionFordring = createMinion(GameTag.TAUNT, GameTag.DIVINE_SHIELD);
-		Spell deathrattle = new EquipWeaponSpell(new Ashbringer());
+		SpellDesc deathrattle = EquipWeaponSpell.create(new Ashbringer());
 		tirionFordring.addDeathrattle(deathrattle);
 		return tirionFordring;
 	}
-
-
 
 	private class Ashbringer extends WeaponCard {
 

@@ -24,7 +24,7 @@ public class SI7Agent extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion si7Agent = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new DamageSpell(2), TargetSelection.ANY);
+		Battlecry battlecry = Battlecry.createBattlecry(DamageSpell.create(2), TargetSelection.ANY);
 		battlecry.setCondition((context, player) -> player.getHero().hasTag(GameTag.COMBO));
 		si7Agent.setBattlecry(battlecry);
 		return si7Agent;

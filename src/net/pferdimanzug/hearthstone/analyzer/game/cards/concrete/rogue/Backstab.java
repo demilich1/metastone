@@ -14,7 +14,7 @@ public class Backstab extends SpellCard {
 		super("Backstab", Rarity.FREE, HeroClass.ROGUE, 0);
 		setDescription("Deal $2 damage to an undamaged minion.");
 		setTargetRequirement(TargetSelection.MINIONS);
-		setSpell(new DamageSpell(2));
+		setSpell(DamageSpell.create(2));
 	}
 
 	@Override

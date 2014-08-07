@@ -26,7 +26,7 @@ public class Doomguard extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion doomguard = createMinion(GameTag.CHARGE);
-		Battlecry battlecry = Battlecry.createBattlecry(new DiscardCardSpell(2));
+		Battlecry battlecry = Battlecry.createBattlecry(DiscardCardSpell.create(2));
 		doomguard.setBattlecry(battlecry);
 		return doomguard;
 	}

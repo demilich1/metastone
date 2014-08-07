@@ -11,7 +11,7 @@ public class Assassinate extends SpellCard {
 	public Assassinate() {
 		super("Assassinate", Rarity.FREE, HeroClass.ROGUE, 5);
 		setDescription("Destroy an enemy minion.");
-		setSpell(new DestroySpell());
+		setSpell(DestroySpell.create());
 		setTargetRequirement(TargetSelection.ENEMY_MINIONS);
 	}
 	

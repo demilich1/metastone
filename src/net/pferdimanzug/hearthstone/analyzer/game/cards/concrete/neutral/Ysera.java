@@ -15,8 +15,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroySpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.ReceiveRandomCardSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.ReturnMinionToHandSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.TargetPlayer;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnEndTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnStartTrigger;
@@ -40,7 +40,7 @@ public class Ysera extends MinionCard {
 	public Minion summon() {
 		Minion ysera = createMinion();
 		ysera.setTag(GameTag.UNIQUE_MINION, UniqueMinion.YSERA);
-		Spell receiveDreamCard = new ReceiveRandomCardSpell(TargetPlayer.SELF, new Dream(), new EmeraldDrake(), new LaughingSister(),
+		SpellDesc receiveDreamCard = ReceiveRandomCardSpell.create(TargetPlayer.SELF, new Dream(), new EmeraldDrake(), new LaughingSister(),
 				new Nightmare(), new YseraAwakens());
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), receiveDreamCard);
 		ysera.setSpellTrigger(trigger);
@@ -54,7 +54,7 @@ public class Ysera extends MinionCard {
 			setDescription("Return a minion to its owners's hand.");
 			setCollectible(false);
 
-			setSpell(new ReturnMinionToHandSpell());
+			setSpell(ReturnMinionToHandSpell.create());
 			setTargetRequirement(TargetSelection.MINIONS);
 		}
 
@@ -94,10 +94,10 @@ public class Ysera extends MinionCard {
 		public Nightmare() {
 			super("Nightmare", Rarity.FREE, HeroClass.ANY, 0);
 			setDescription("Give a minion +5/+5. At the start of your next turn, destroy it.");
-			Spell destroySpell = new DestroySpell();
+			SpellDesc destroySpell = DestroySpell.create();
 			destroySpell.setTarget(EntityReference.SELF);
 			SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), destroySpell);
-			setSpell(new MetaSpell(new BuffSpell(5, 5), new AddSpellTriggerSpell(trigger)));
+			setSpell(MetaSpell.create(BuffSpell.create(5, 5), AddSpellTriggerSpell.create(trigger)));
 			setTargetRequirement(TargetSelection.MINIONS);
 		}
 	}
@@ -107,8 +107,7 @@ public class Ysera extends MinionCard {
 		public YseraAwakens() {
 			super("Ysera Awakens", Rarity.FREE, HeroClass.ANY, 2);
 			setDescription("Deal 5 damage to all characters except Ysera.");
-
-			Spell yseraAwakens = new DamageSpell(
+			SpellDesc yseraAwakens = DamageSpell.create(
 					(context, player, target) -> target.getTag(GameTag.UNIQUE_MINION) == UniqueMinion.YSERA ? 0 : 5);
 			yseraAwakens.setTarget(EntityReference.ALL_CHARACTERS);
 			setSpell(yseraAwakens);

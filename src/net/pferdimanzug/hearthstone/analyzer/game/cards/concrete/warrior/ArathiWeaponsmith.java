@@ -25,12 +25,10 @@ public class ArathiWeaponsmith extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion arathiWeaponsmith = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new EquipWeaponSpell(new BattleAxe()), TargetSelection.NONE);
+		Battlecry battlecry = Battlecry.createBattlecry(EquipWeaponSpell.create(new BattleAxe()), TargetSelection.NONE);
 		arathiWeaponsmith.setBattlecry(battlecry);
 		return arathiWeaponsmith;
 	}
-
-
 
 	private class BattleAxe extends WeaponCard {
 

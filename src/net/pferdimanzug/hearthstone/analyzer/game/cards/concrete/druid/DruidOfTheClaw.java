@@ -7,8 +7,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.TransformMinionSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class DruidOfTheClaw extends ChooseBattlecryCard {
@@ -30,14 +30,14 @@ public class DruidOfTheClaw extends ChooseBattlecryCard {
 
 	@Override
 	protected Battlecry getBattlecry1() {
-		Spell transformSpell = new TransformMinionSpell(new CatForm());
+		SpellDesc transformSpell = TransformMinionSpell.create(new CatForm());
 		transformSpell.setTarget(EntityReference.SELF);
 		return Battlecry.createBattlecry(transformSpell);
 	}
 
 	@Override
 	protected Battlecry getBattlecry2() {
-		Spell transformSpell = new TransformMinionSpell(new BearForm());
+		SpellDesc transformSpell = TransformMinionSpell.create(new BearForm());
 		transformSpell.setTarget(EntityReference.SELF);
 		return Battlecry.createBattlecry(transformSpell);
 	}
@@ -65,8 +65,6 @@ public class DruidOfTheClaw extends ChooseBattlecryCard {
 		}
 
 	}
-
-
 
 	private class CatForm extends MinionCard {
 

@@ -25,7 +25,7 @@ public class VoodooDoctor extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion voodooDoctor = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new HealingSpell(2), TargetSelection.ANY);
+		Battlecry battlecry = Battlecry.createBattlecry(HealingSpell.create(2), TargetSelection.ANY);
 		voodooDoctor.setBattlecry(battlecry);
 		return voodooDoctor;
 	}

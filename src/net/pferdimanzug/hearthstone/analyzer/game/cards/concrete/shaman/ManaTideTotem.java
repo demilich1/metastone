@@ -27,7 +27,7 @@ public class ManaTideTotem extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion manaTideTotem = createMinion();
-		manaTideTotem.setSpellTrigger(new SpellTrigger(new TurnEndTrigger(), new DrawCardSpell()));
+		manaTideTotem.setSpellTrigger(new SpellTrigger(new TurnEndTrigger(), DrawCardSpell.create()));
 		return manaTideTotem;
 	}
 }

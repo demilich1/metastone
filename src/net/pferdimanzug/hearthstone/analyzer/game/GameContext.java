@@ -89,6 +89,20 @@ public class GameContext implements Cloneable, IDisposable {
 		return clone;
 	}
 
+	@Override
+	public void dispose() {
+		for (Player player : getPlayers()) {
+			player.getMinions().clear();
+			player.getGraveyard().clear();
+			player.getHand().removeAll();
+			player.getDeck().removeAll();
+			player.getSecrets().clear();
+		}
+		getCardCostModifiers().clear();
+		triggerManager.dispose();
+		environment.clear();
+	}
+
 	private void endGame() {
 		winner = logic.getWinner(getActivePlayer(), getOpponent(getActivePlayer()));
 		if (winner != null) {
@@ -118,7 +132,7 @@ public class GameContext implements Cloneable, IDisposable {
 		}
 		return null;
 	}
-
+	
 	public void fireGameEvent(GameEvent gameEvent) {
 		fireGameEvent(gameEvent, TriggerLayer.DEFAULT);
 	}
@@ -137,7 +151,7 @@ public class GameContext implements Cloneable, IDisposable {
 	public Player getActivePlayer() {
 		return getPlayer(activePlayer);
 	}
-	
+
 	public List<Entity> getAdjacentMinions(Player player, EntityReference minionReference) {
 		List<Entity> adjacentMinions = new ArrayList<>();
 		Actor minion = (Actor) resolveSingleTarget(minionReference);
@@ -160,7 +174,7 @@ public class GameContext implements Cloneable, IDisposable {
 	public List<CardCostModifier> getCardCostModifiers() {
 		return cardCostModifiers;
 	}
-
+	
 	public HashMap<Environment, Object> getEnvironment() {
 		return environment;
 	}
@@ -168,11 +182,11 @@ public class GameContext implements Cloneable, IDisposable {
 	public GameLogic getLogic() {
 		return logic;
 	}
-	
+
 	public int getMinionCount(Player player) {
 		return player.getMinions().size();
 	}
-
+	
 	public Player getOpponent(Player player) {
 		return player.getId() == PLAYER_1 ? getPlayer2() : getPlayer1();
 	}
@@ -188,11 +202,11 @@ public class GameContext implements Cloneable, IDisposable {
 	public Player getPlayer2() {
 		return getPlayers()[PLAYER_2];
 	}
-	
+
 	public Player[] getPlayers() {
 		return players;
 	}
-
+	
 	public int getScore(int playerId) {
 		switch (result) {
 		case DOUBLE_LOSS:
@@ -206,7 +220,7 @@ public class GameContext implements Cloneable, IDisposable {
 		}
 		throw new IllegalStateException("Invalid match result: " + result);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public Stack<Minion> getSummonStack() {
 		if (!environment.containsKey(Environment.SUMMON_STACK)) {
@@ -214,7 +228,7 @@ public class GameContext implements Cloneable, IDisposable {
 		}
 		return (Stack<Minion>) environment.get(Environment.SUMMON_STACK);
 	}
-
+	
 	public int getTotalMinionCount() {
 		int totalMinionCount = 0;
 		for (int i = 0; i < players.length; i++) {
@@ -226,11 +240,11 @@ public class GameContext implements Cloneable, IDisposable {
 	public List<IGameEventListener> getTriggersAssociatedWith(EntityReference entityReference) {
 		return triggerManager.getTriggersAssociatedWith(entityReference);
 	}
-	
+
 	public int getTurn() {
 		return turn;
 	}
-
+	
 	public List<GameAction> getValidActions() {
 		if (gameDecided()) {
 			return new ArrayList<>();
@@ -249,7 +263,7 @@ public class GameContext implements Cloneable, IDisposable {
 		logic.performGameAction(playerId, gameAction);
 		onGameStateChanged();
 	}
-	
+
 	public void play() {
 		logger.debug("Game starts: " + getPlayer1().getName() + " VS. " + getPlayer2().getName());
 		int startingPlayerId = logic.determineBeginner(PLAYER_1, PLAYER_2);
@@ -259,7 +273,7 @@ public class GameContext implements Cloneable, IDisposable {
 		logic.init(getOpponent(getActivePlayer()).getId(), false);
 		startTurn(activePlayer);
 	}
-
+	
 	public void playTurn() {
 		if (++actionsThisTurn > 99) {
 			logger.warn("Turn has been forcefully ended after {} actions", actionsThisTurn);
@@ -296,11 +310,11 @@ public class GameContext implements Cloneable, IDisposable {
 			nextAction = player.getBehaviour().requestAction(this, player, logic.getValidActions(player.getId()));
 		}*/
 	}
-	
+
 	public void removeTriggersAssociatedWith(EntityReference entityReference) {
 		triggerManager.removeTriggersAssociatedWith(entityReference);
 	}
-
+	
 	public Card resolveCardReference(CardReference cardReference) {
 		Player player = getPlayer(cardReference.getPlayerId());
 		Card pendingCard = (Card) getEnvironment().get(Environment.PENDING_CARD);
@@ -335,7 +349,7 @@ public class GameContext implements Cloneable, IDisposable {
 	public List<Entity> resolveTarget(Player player, Actor source, EntityReference targetKey) {
 		return targetLogic.resolveTargetKey(this, player, source, targetKey);
 	}
-	
+
 	public void startTurn(int playerId) {
 		turn++;
 		logic.startTurn(playerId);
@@ -372,19 +386,5 @@ public class GameContext implements Cloneable, IDisposable {
 		result.append("Turn: " + getTurn());
 
 		return result.toString();
-	}
-
-	@Override
-	public void dispose() {
-		for (Player player : getPlayers()) {
-			player.getMinions().clear();
-			player.getGraveyard().clear();
-			player.getHand().removeAll();
-			player.getDeck().removeAll();
-			player.getSecrets().clear();
-		}
-		getCardCostModifiers().clear();
-		triggerManager.dispose();
-		environment.clear();
 	}
 }

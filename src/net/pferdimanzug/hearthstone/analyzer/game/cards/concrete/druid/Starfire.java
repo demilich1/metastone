@@ -13,11 +13,9 @@ public class Starfire extends SpellCard {
 	public Starfire() {
 		super("Starfire", Rarity.FREE, HeroClass.DRUID, 6);
 		setDescription("Deal $5 damage.");
-		setSpell(new MetaSpell(new DamageSpell(5), new DrawCardSpell()));
+		setSpell(MetaSpell.create(DamageSpell.create(5), DrawCardSpell.create()));
 		setTargetRequirement(TargetSelection.ANY);
 	}
-
-
 
 	@Override
 	public int getTypeId() {

@@ -14,11 +14,9 @@ public class MarkOfTheWild extends SpellCard {
 	public MarkOfTheWild() {
 		super("Mark of the Wild", Rarity.FREE, HeroClass.DRUID, 2);
 		setDescription("Give a minion Taunt and +2/+2. (+2 Attack/+2 Health)");
-		setSpell(new MetaSpell(new BuffSpell(2, 2), new ApplyTagSpell(GameTag.TAUNT)));
+		setSpell(MetaSpell.create(BuffSpell.create(2, 2), ApplyTagSpell.create(GameTag.TAUNT)));
 		setTargetRequirement(TargetSelection.MINIONS);
 	}
-
-
 
 	@Override
 	public int getTypeId() {

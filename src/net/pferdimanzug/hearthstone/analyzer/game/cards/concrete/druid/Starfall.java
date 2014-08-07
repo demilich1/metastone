@@ -6,7 +6,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
@@ -32,15 +32,13 @@ public class Starfall extends ChooseOneCard {
 			setDescription("Deal $2 damage to all enemy minions");
 			setCollectible(false);
 
-			Spell damageSpell = new DamageSpell(2);
+			SpellDesc damageSpell = DamageSpell.create(2);
 			damageSpell.setTarget(EntityReference.ENEMY_MINIONS);
 			setSpell(damageSpell);
 			setTargetRequirement(TargetSelection.NONE);
 		}
 
 	}
-
-
 
 	private class StarfallSingleTarget extends SpellCard {
 
@@ -49,7 +47,7 @@ public class Starfall extends ChooseOneCard {
 			setDescription("Deal 5 damage to a minion");
 			setCollectible(false);
 
-			setSpell(new DamageSpell(5));
+			setSpell(DamageSpell.create(5));
 			setTargetRequirement(TargetSelection.MINIONS);
 		}
 

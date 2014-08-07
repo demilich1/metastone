@@ -9,6 +9,11 @@ public abstract class GameEventTrigger extends CustomCloneable {
 
 	private int owner;
 
+	@Override
+	public GameEventTrigger clone() {
+		return (GameEventTrigger) super.clone();
+	}
+
 	public abstract boolean fire(GameEvent event, Entity host);
 
 	public int getOwner() {
@@ -16,14 +21,9 @@ public abstract class GameEventTrigger extends CustomCloneable {
 	}
 
 	public abstract GameEventType interestedIn();
-
+	
 	public void setOwner(int playerIndex) {
 		this.owner = playerIndex;
-	}
-	
-	@Override
-	public GameEventTrigger clone() {
-		return (GameEventTrigger) super.clone();
 	}
 
 	@Override

@@ -11,7 +11,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.Fireblast;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.LesserHeal;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.LifeTap;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.SpellSource;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellSource;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

@@ -29,21 +29,18 @@ public class Wrath extends ChooseOneCard {
 		public WrathDamage() {
 			super("Wrath (3 damage)", Rarity.COMMON, HeroClass.DRUID, 2);
 			setDescription("Deal $3 damage to a minion");
-			setSpell(new DamageSpell(3));
+			setSpell(DamageSpell.create(3));
 			setTargetRequirement(TargetSelection.MINIONS);
 		}
 		
 	}
-
-
-
 
 	private class WrathDamageAndDraw extends SpellCard {
 
 		public WrathDamageAndDraw() {
 			super("Wrath (1 damage + draw card)", Rarity.COMMON, HeroClass.DRUID, 2);
 			setDescription("Deal $1 damage to a minion and draw a card.");
-			setSpell(new MetaSpell(new DamageSpell(1), new DrawCardSpell()));
+			setSpell(MetaSpell.create(DamageSpell.create(1), DrawCardSpell.create()));
 			setTargetRequirement(TargetSelection.MINIONS);
 		}
 		

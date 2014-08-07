@@ -1,9 +1,11 @@
 package net.pferdimanzug.hearthstone.analyzer.game.spells;
 
-public class DestroyWeaponSpell extends ChangeDurabilitySpell {
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 
-	public DestroyWeaponSpell() {
-		super(-999);
+public class DestroyWeaponSpell extends ChangeDurabilitySpell {
+	
+	public static SpellDesc create() {
+		return ChangeDurabilitySpell.create(-99);
 	}
 
 }

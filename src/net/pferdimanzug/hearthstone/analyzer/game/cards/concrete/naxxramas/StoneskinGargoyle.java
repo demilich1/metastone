@@ -5,7 +5,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.HealingSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnStartTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
@@ -22,12 +22,10 @@ public class StoneskinGargoyle extends MinionCard {
 		return 400;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion stoneskinGargoyle = createMinion();
-		Spell healSelf = new HealingSpell(99);
+		SpellDesc healSelf = HealingSpell.create(99);
 		healSelf.setTarget(EntityReference.SELF);
 		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), healSelf);
 		stoneskinGargoyle.setSpellTrigger(trigger);

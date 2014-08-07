@@ -11,7 +11,7 @@ public class Sprint extends SpellCard {
 	public Sprint() {
 		super("Sprint", Rarity.FREE, HeroClass.ROGUE, 7);
 		setDescription("Draw 4 cards.");
-		setSpell(new DrawCardSpell(4));
+		setSpell(DrawCardSpell.create(4));
 		setTargetRequirement(TargetSelection.NONE);
 	}
 

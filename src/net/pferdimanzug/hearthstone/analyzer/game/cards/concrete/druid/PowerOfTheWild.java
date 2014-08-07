@@ -30,13 +30,11 @@ public class PowerOfTheWild extends ChooseOneCard {
 
 		protected PowerOfTheWildBuff() {
 			super("Power of the Wild (+1/+1)", Rarity.COMMON, HeroClass.DRUID, 2);
-			setSpell(new BuffSpell(1, 1));
+			setSpell(BuffSpell.create(1, 1));
 			setTargetRequirement(TargetSelection.NONE);
 			setPredefinedTarget(EntityReference.FRIENDLY_MINIONS);
 		}
 	}
-
-
 
 	private class PowerOfTheWildPanther extends MinionCard {
 		

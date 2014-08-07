@@ -33,7 +33,7 @@ public class KillCommand extends SpellCard {
 				return hasBeast(player) ? 5 : 3;
 			}
 		};
-		setSpell(new DamageSpell(hasBeast));
+		setSpell(DamageSpell.create(hasBeast));
 		setTargetRequirement(TargetSelection.ANY);
 	}
 

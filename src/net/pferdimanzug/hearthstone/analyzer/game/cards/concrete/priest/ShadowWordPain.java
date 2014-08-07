@@ -13,7 +13,7 @@ public class ShadowWordPain extends SpellCard {
 	public ShadowWordPain() {
 		super("Shadow Word: Pain", Rarity.FREE, HeroClass.PRIEST, 2);
 		setDescription("Destroy a minion with 3 or less Attack.");
-		setSpell(new DestroySpell());
+		setSpell(DestroySpell.create());
 		setTargetRequirement(TargetSelection.MINIONS);
 	}
 

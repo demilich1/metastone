@@ -1,49 +1,47 @@
 package net.pferdimanzug.hearthstone.analyzer.game.spells;
 
-import java.util.List;
-
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellArg;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 
 public class SummonSpell extends Spell {
-	
-	private final TargetPlayer targetPlayer;
-	
-	public SummonSpell(MinionCard... minionCards) {
-		this(TargetPlayer.SELF, minionCards);
-	}
-	
-	public SummonSpell(TargetPlayer targetPlayer, MinionCard... minionCards) {
-		this.targetPlayer = targetPlayer;
-		setCloneableData(minionCards);
+
+	public static SpellDesc create(MinionCard... minionCards) {
+		return create(TargetPlayer.SELF, minionCards);
 	}
 
-	public List<MinionCard> getMinionCards() {
-		return getCloneableDataCollection();
+	public static SpellDesc create(TargetPlayer targetPlayer, MinionCard... minionCards) {
+		SpellDesc desc = new SpellDesc(SummonSpell.class);
+		desc.set(SpellArg.CARDS, minionCards);
+		desc.setTargetPlayer(targetPlayer);
+		return desc;
 	}
-	
+
 	@Override
-	protected void onCast(GameContext context, Player player, Entity target) {
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+		MinionCard[] minionCards = (MinionCard[]) desc.get(SpellArg.CARDS);
+		TargetPlayer targetPlayer = desc.getTargetPlayer();
 		Player opponent = context.getOpponent(player);
 		switch (targetPlayer) {
 		case BOTH:
-			summon(context, player);
-			summon(context, opponent);
+			summon(context, player.getId(), minionCards);
+			summon(context, opponent.getId(), minionCards);
 			break;
 		case OPPONENT:
-			summon(context, opponent);
+			summon(context, opponent.getId(), minionCards);
 			break;
 		case SELF:
-			summon(context, player);
+			summon(context, player.getId(), minionCards);
 			break;
 		}
 	}
 
-	private void summon(GameContext context, Player player) {
-		for (MinionCard minionCard : getMinionCards()) {
-			context.getLogic().summon(player.getId(), minionCard.summon(), null, null, false);
+	private void summon(GameContext context, int playerId, MinionCard[] minionCards) {
+		for (MinionCard minionCard : minionCards) {
+			context.getLogic().summon(playerId, minionCard.summon(), null, null, false);
 		}
 	}
 

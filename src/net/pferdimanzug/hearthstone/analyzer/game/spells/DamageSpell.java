@@ -4,36 +4,32 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellArg;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 
 public class DamageSpell extends Spell {
 	
-	private int damage;
-	private final IValueProvider damageModifier;
-	
-	public DamageSpell(int damage) {
-		this(null);
-		setDamage(damage);
+	public static SpellDesc create(int damage) {
+		SpellDesc desc = new SpellDesc(DamageSpell.class);
+		desc.set(SpellArg.DAMAGE, damage);
+		return desc;
 	}
 	
-	public DamageSpell(IValueProvider damageModifier) {
-		this.damageModifier = damageModifier;
-	}
-	
-	public int getDamage() {
-		return damage;
+	public static SpellDesc create(IValueProvider damageModfier) {
+		SpellDesc desc = new SpellDesc(DamageSpell.class);
+		desc.set(SpellArg.VALUE_PROVIDER, damageModfier);
+		return desc;
 	}
 	
 	@Override
-	protected void onCast(GameContext context, Player player, Entity target) {
-		int effectiveDamage = damageModifier != null ? damageModifier.provideValue(context, player, target) : getDamage();
-		if (effectiveDamage == 0) {
-			return;
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+		int damage = desc.getInt(SpellArg.DAMAGE);
+		IValueProvider damageModifier = (IValueProvider) desc.get(SpellArg.VALUE_PROVIDER);
+		if (damageModifier != null) {
+			damage = damageModifier.provideValue(context, player, target);
 		}
-		context.getLogic().damage(player, (Actor)target, effectiveDamage, getSource());
-	}
-
-	public void setDamage(int damage) {
-		this.damage = damage;
+		
+		context.getLogic().damage(player, (Actor)target, damage, desc.getSource());
 	}
 
 }

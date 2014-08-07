@@ -19,6 +19,34 @@ import org.testng.annotations.Test;
 public class CloningTest extends TestBase {
 	
 	
+	private void compareCardCollections(CardCollection collection1, CardCollection collection2) {
+		Assert.assertEquals(collection1.getCount(), collection2.getCount());
+		Assert.assertNotSame(collection1, collection2);
+		for (int j = 0; j < collection1.getCount(); j++) {
+			Card originalCard = collection1.get(j);
+			logger.debug("Original card: " + originalCard);
+			Card cloneCard = collection2.get(j);
+			logger.debug("Clone card: " + cloneCard);
+			Assert.assertNotSame(originalCard, cloneCard);
+			if (originalCard instanceof SpellCard) {
+				Assert.assertTrue(cloneCard instanceof SpellCard, "cloneCard is instanceof " + cloneCard.getClass().getSimpleName());
+				SpellCard originalSpellCard = (SpellCard) originalCard;
+				SpellCard cloneSpellCard = (SpellCard) cloneCard;
+				Assert.assertNotSame(originalSpellCard.getSpell(), cloneSpellCard.getSpell());
+			}
+		}
+	}
+	
+	@Test
+	public void testCloneSpellCard() {
+		Card original = new Polymorph();
+		Card clone = original.clone();
+		Assert.assertNotSame(original, clone);
+		SpellCard originalSpellCard = (SpellCard) original;
+		SpellCard cloneSpellCard = (SpellCard) clone;
+		Assert.assertNotSame(originalSpellCard.getSpell(), cloneSpellCard.getSpell());
+	}
+	
 	@Test
 	public void testCloning() {
 		for (int i = 0; i < 100; i++) {
@@ -61,33 +89,5 @@ public class CloningTest extends TestBase {
 			Assert.assertNotEquals(original.getTurn(), clone.getTurn());
 			Assert.assertEquals(testMinion.getHp(), 3);
 		}
-	}
-	
-	private void compareCardCollections(CardCollection collection1, CardCollection collection2) {
-		Assert.assertEquals(collection1.getCount(), collection2.getCount());
-		Assert.assertNotSame(collection1, collection2);
-		for (int j = 0; j < collection1.getCount(); j++) {
-			Card originalCard = collection1.get(j);
-			logger.debug("Original card: " + originalCard);
-			Card cloneCard = collection2.get(j);
-			logger.debug("Clone card: " + cloneCard);
-			Assert.assertNotSame(originalCard, cloneCard);
-			if (originalCard instanceof SpellCard) {
-				Assert.assertTrue(cloneCard instanceof SpellCard, "cloneCard is instanceof " + cloneCard.getClass().getSimpleName());
-				SpellCard originalSpellCard = (SpellCard) originalCard;
-				SpellCard cloneSpellCard = (SpellCard) cloneCard;
-				Assert.assertNotSame(originalSpellCard.getSpell(), cloneSpellCard.getSpell());
-			}
-		}
-	}
-	
-	@Test
-	public void testCloneSpellCard() {
-		Card original = new Polymorph();
-		Card clone = original.clone();
-		Assert.assertNotSame(original, clone);
-		SpellCard originalSpellCard = (SpellCard) original;
-		SpellCard cloneSpellCard = (SpellCard) clone;
-		Assert.assertNotSame(originalSpellCard.getSpell(), cloneSpellCard.getSpell());
 	}
 }

@@ -32,10 +32,6 @@ public class Minion extends Actor {
 		return EntityType.MINION;
 	}
 
-	public Race getRace() {
-		return (Race) getTag(GameTag.RACE);
-	}
-
 	@Override
 	public int getTypeId() {
 		return getName().hashCode();
@@ -44,10 +40,6 @@ public class Minion extends Actor {
 	protected void setBaseStats(int baseAttack, int baseHp) {
 		setBaseAttack(baseAttack);
 		setBaseHp(baseHp);
-	}
-
-	public void setRace(Race race) {
-		setTag(GameTag.RACE, race);
 	}
 
 }

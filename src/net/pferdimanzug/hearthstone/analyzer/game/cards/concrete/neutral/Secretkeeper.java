@@ -5,7 +5,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SecretPlayedTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
@@ -22,12 +22,10 @@ public class Secretkeeper extends MinionCard {
 		return 194;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion secretkeeper = createMinion();
-		Spell buffSpell = new BuffSpell(1, 1);
+		SpellDesc buffSpell = BuffSpell.create(1, 1);
 		buffSpell.setTarget(EntityReference.SELF);
 		secretkeeper.setSpellTrigger(new SpellTrigger(new SecretPlayedTrigger(), buffSpell));
 		return secretkeeper;

@@ -6,7 +6,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroySpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.PhysicalAttackTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
@@ -29,7 +29,7 @@ public class Maexxna extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion maexxna = createMinion();
-		Spell killSpell = new DestroySpell();
+		SpellDesc killSpell = DestroySpell.create();
 		killSpell.setTarget(EntityReference.EVENT_TARGET);
 		maexxna.setSpellTrigger(new SpellTrigger(new PhysicalAttackTrigger(false), killSpell));
 		return maexxna;

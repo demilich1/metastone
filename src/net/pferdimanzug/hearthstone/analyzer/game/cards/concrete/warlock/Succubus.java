@@ -26,7 +26,7 @@ public class Succubus extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion succubus = createMinion();
-		succubus.setBattlecry(Battlecry.createBattlecry(new DiscardCardSpell()));
+		succubus.setBattlecry(Battlecry.createBattlecry(DiscardCardSpell.create()));
 		return succubus;
 	}
 }

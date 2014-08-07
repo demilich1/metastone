@@ -12,9 +12,8 @@ public class Bite extends SpellCard {
 		super("Bite", Rarity.RARE, HeroClass.DRUID, 4);
 		setDescription("Give your hero +4 Attack this turn and 4 Armor.");
 		setTargetRequirement(TargetSelection.NONE);
-		setSpell(new BuffHeroSpell(4, 4));
+		setSpell(BuffHeroSpell.create(4, 4));
 	}
-	
 
 
 	@Override

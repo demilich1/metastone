@@ -25,7 +25,7 @@ public class Spellbreaker extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion spellbreaker = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new SilenceSpell());
+		Battlecry battlecry = Battlecry.createBattlecry(SilenceSpell.create());
 		battlecry.setTargetKey(EntityReference.ALL_MINIONS);
 		spellbreaker.setBattlecry(battlecry);
 		return spellbreaker;

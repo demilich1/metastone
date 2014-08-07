@@ -13,7 +13,7 @@ public class EarthShock extends SpellCard {
 	public EarthShock() {
 		super("Earth Shock", Rarity.COMMON, HeroClass.SHAMAN, 1);
 		setDescription("Silence a minion, then deal $1 damage to it.");
-		setSpell(new MetaSpell(new SilenceSpell(), new DamageSpell(1)));
+		setSpell(MetaSpell.create(SilenceSpell.create(), DamageSpell.create(1)));
 		setTargetRequirement(TargetSelection.MINIONS);
 	}
 

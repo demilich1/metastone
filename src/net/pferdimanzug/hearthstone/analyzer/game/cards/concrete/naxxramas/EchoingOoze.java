@@ -7,8 +7,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.AddSpellTriggerSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonCopySpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnEndTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
@@ -29,10 +29,10 @@ public class EchoingOoze extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion echoingOoze = createMinion();
-		Spell summonCopy = new SummonCopySpell();
+		SpellDesc summonCopy = SummonCopySpell.create();
 		summonCopy.setTarget(EntityReference.SELF);
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), summonCopy);
-		Spell addTrigger = new AddSpellTriggerSpell(trigger);
+		SpellDesc addTrigger = AddSpellTriggerSpell.create(trigger);
 		addTrigger.setTarget(EntityReference.SELF);
 		Battlecry battlecry = Battlecry.createBattlecry(addTrigger);
 		echoingOoze.setBattlecry(battlecry);

@@ -28,7 +28,7 @@ public class CultMaster extends MinionCard {
 	@Override
 	public Minion summon() {
 		GameEventTrigger minionDieTrigger = new CultMasterTrigger();
-		SpellTrigger trigger = new SpellTrigger(minionDieTrigger, new DrawCardSpell());
+		SpellTrigger trigger = new SpellTrigger(minionDieTrigger, DrawCardSpell.create());
 		Minion cultMaster = createMinion();
 		cultMaster.setSpellTrigger(trigger);
 		return cultMaster;

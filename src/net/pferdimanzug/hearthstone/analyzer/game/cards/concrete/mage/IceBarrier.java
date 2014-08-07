@@ -11,7 +11,7 @@ public class IceBarrier extends SecretCard {
 	public IceBarrier() {
 		super("Ice Barrier", Rarity.COMMON, HeroClass.MAGE, 3);
 		setDescription("Secret: As soon as your hero is attacked, gain 8 Armor.");
-		setTriggerAndEffect(new HeroAttackedTrigger(), new BuffHeroSpell(0, 8));
+		setTriggerAndEffect(new HeroAttackedTrigger(), BuffHeroSpell.create(0, 8));
 	}
 
 	@Override

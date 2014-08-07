@@ -4,8 +4,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 
 public class NerubianEgg extends MinionCard {
 
@@ -22,12 +22,10 @@ public class NerubianEgg extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion nerubianEgg = createMinion();
-		Spell deathrattle = new SummonSpell(new Nerubian());
+		SpellDesc deathrattle = SummonSpell.create(new Nerubian());
 		nerubianEgg.addDeathrattle(deathrattle);
 		return nerubianEgg;
 	}
-
-
 
 	private class Nerubian extends MinionCard {
 

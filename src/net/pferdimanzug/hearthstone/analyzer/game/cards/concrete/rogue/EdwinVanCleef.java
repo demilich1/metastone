@@ -11,7 +11,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.IValueProvider;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class EdwinVanCleef extends MinionCard {
@@ -37,7 +37,7 @@ public class EdwinVanCleef extends MinionCard {
 				return player.getHero().getTagValue(GameTag.COMBO) * 2;
 			}
 		};
-		Spell buffSpell = new BuffSpell(comboValueProvider, comboValueProvider);
+		SpellDesc buffSpell = BuffSpell.create(comboValueProvider, comboValueProvider);
 		buffSpell.setTarget(EntityReference.SELF);
 		edwinVanCleef.setBattlecry(Battlecry.createBattlecry(buffSpell));
 		return edwinVanCleef;

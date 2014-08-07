@@ -7,8 +7,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnEndTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
@@ -28,15 +28,13 @@ public class ImpMaster extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion impMaster = createMinion();
-		Spell damageSelfSpell = new DamageSpell(1);
-		Spell summonSpell = new SummonSpell(new Imp());
+		SpellDesc damageSelfSpell = DamageSpell.create(1);
+		SpellDesc summonSpell = SummonSpell.create(new Imp());
 		summonSpell.setTarget(EntityReference.NONE);
-		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), new MetaSpell(damageSelfSpell, summonSpell));
+		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), MetaSpell.create(damageSelfSpell, summonSpell));
 		impMaster.setSpellTrigger(trigger);
 		return impMaster;
 	}
-
-
 
 	private class Imp extends MinionCard {
 

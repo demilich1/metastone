@@ -35,7 +35,7 @@ public class Onyxia extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion onyxia = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(getWhelps()));
+		Battlecry battlecry = Battlecry.createBattlecry(SummonSpell.create(getWhelps()));
 		battlecry.setResolvedLate(true);
 		onyxia.setBattlecry(battlecry);
 		return onyxia;

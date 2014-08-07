@@ -6,6 +6,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class AbusiveSergeant extends MinionCard {
@@ -22,14 +23,10 @@ public class AbusiveSergeant extends MinionCard {
 		return 77;
 	}
 	
-
-
-
 	@Override
 	public Minion summon() {
 		Minion abusiveSergeant = createMinion();
-		
-		BuffSpell battlecrySpell = new BuffSpell(+ATTACK_BONUS, 0, true);
+		SpellDesc battlecrySpell = BuffSpell.create(+ATTACK_BONUS, 0, true);
 		Battlecry battlecryAbusive = Battlecry.createBattlecry(battlecrySpell, TargetSelection.MINIONS);
 		abusiveSergeant.setBattlecry(battlecryAbusive);
 		return abusiveSergeant;

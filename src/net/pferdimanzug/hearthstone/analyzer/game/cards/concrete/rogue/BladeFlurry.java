@@ -8,7 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroyWeaponSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
@@ -18,11 +18,11 @@ public class BladeFlurry extends SpellCard {
 		super("Blade Flurry", Rarity.RARE, HeroClass.ROGUE, 2);
 		setDescription("Destroy your weapon and deal its damage to all enemies.");
 
-		Spell damageSpell = new DamageSpell((context, player, target) -> player.getHero().getWeapon().getWeaponDamage());
+		SpellDesc damageSpell = DamageSpell.create((context, player, target) -> player.getHero().getWeapon().getWeaponDamage());
 		damageSpell.setTarget(EntityReference.ENEMY_CHARACTERS);
-		Spell destroyWeaponSpell = new DestroyWeaponSpell();
+		SpellDesc destroyWeaponSpell = DestroyWeaponSpell.create();
 		destroyWeaponSpell.setTarget(EntityReference.FRIENDLY_HERO);
-		setSpell(new MetaSpell(damageSpell, destroyWeaponSpell));
+		setSpell(MetaSpell.create(damageSpell, destroyWeaponSpell));
 		setTargetRequirement(TargetSelection.NONE);
 	}
 

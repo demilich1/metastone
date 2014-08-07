@@ -9,8 +9,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.costmodifier.OneTurnCost
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.AddCostModifierSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.TargetPlayer;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class Loatheb extends MinionCard {
@@ -31,7 +31,7 @@ public class Loatheb extends MinionCard {
 		Minion loatheb = createMinion();
 		OneTurnCostModifier costModifier = new OneTurnCostModifier(CardType.SPELL, 5, false);
 		costModifier.setTargetPlayer(TargetPlayer.OPPONENT);
-		Spell increaseSpellCost = new AddCostModifierSpell(costModifier);
+		SpellDesc increaseSpellCost = AddCostModifierSpell.create(costModifier);
 		increaseSpellCost.setTarget(EntityReference.ENEMY_HERO);
 		loatheb.setBattlecry(Battlecry.createBattlecry(increaseSpellCost));
 		return loatheb;

@@ -13,7 +13,7 @@ public class MultiShot extends SpellCard {
 	public MultiShot() {
 		super("Multi-Shot", Rarity.FREE, HeroClass.HUNTER, 4);
 		setDescription("Deal $3 damage to two random enemy minions.");
-		setSpell(new MultiTargetDamageSpell(3, 2));
+		setSpell(MultiTargetDamageSpell.create(3, 2));
 		setTargetRequirement(TargetSelection.NONE);
 	}
 
@@ -24,8 +24,6 @@ public class MultiShot extends SpellCard {
 		}
 		return context.getOpponent(player).getMinions().size() >= 2;
 	}
-
-
 
 	@Override
 	public int getTypeId() {

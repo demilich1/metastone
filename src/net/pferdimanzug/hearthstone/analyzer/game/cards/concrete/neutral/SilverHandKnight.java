@@ -24,7 +24,7 @@ public class SilverHandKnight extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion silverHandKnight = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new SummonSpell(new Squire()));
+		Battlecry battlecry = Battlecry.createBattlecry(SummonSpell.create(new Squire()));
 		battlecry.setResolvedLate(true);
 		silverHandKnight.setBattlecry(battlecry);
 		return silverHandKnight;

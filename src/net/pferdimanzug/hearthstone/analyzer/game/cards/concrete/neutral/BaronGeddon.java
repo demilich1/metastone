@@ -5,7 +5,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnEndTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
@@ -25,7 +25,7 @@ public class BaronGeddon extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion baronGeddon = createMinion();
-		Spell damageSpell = new DamageSpell(2);
+		SpellDesc damageSpell = DamageSpell.create(2);
 		damageSpell.setTarget(EntityReference.ALL_CHARACTERS);
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), damageSpell);
 		baronGeddon.setSpellTrigger(trigger);

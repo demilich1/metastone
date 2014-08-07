@@ -3,52 +3,35 @@ package net.pferdimanzug.hearthstone.analyzer.game.spells;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellArg;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 
 public class EitherOrSpell extends Spell {
 
-	private final ISpellConditionChecker condition;
-
-	public EitherOrSpell(Spell either, Spell or, ISpellConditionChecker condition) {
-		setCloneableData(either, or);
-		this.condition = condition;
+	public static SpellDesc create(SpellDesc either, SpellDesc or, ISpellConditionChecker condition) {
+		SpellDesc desc = new SpellDesc(EitherOrSpell.class);
+		desc.set(SpellArg.SPELL_1, either);
+		desc.set(SpellArg.SPELL_2, or);
+		desc.set(SpellArg.SPELL_CONDITION_CHECKER, condition);
+		return desc;
 	}
 
 	@Override
-	public EitherOrSpell clone() {
-		return (EitherOrSpell) super.clone();
-	}
-	
-	public Spell getEither() {
-		return (Spell) getCloneableData()[0];
-	}
-
-	public Spell getOr() {
-		return (Spell) getCloneableData()[1];
-	}
-
-	@Override
-	protected void onCast(GameContext context, Player player, Entity target) {
-		Spell spellToCast = condition.isFulfilled(context, player, target) ? getEither() : getOr();
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+		ISpellConditionChecker condition = (ISpellConditionChecker) desc.get(SpellArg.SPELL_CONDITION_CHECKER);
+		SpellDesc either = (SpellDesc) desc.get(SpellArg.SPELL_1);
+		SpellDesc or = (SpellDesc) desc.get(SpellArg.SPELL_2);
+		
+		SpellDesc spellToCast = condition.isFulfilled(context, player, target) ? either : or;
 
 		if (!spellToCast.hasPredefinedTarget()) {
-			spellToCast.setTarget(getTarget());
+			spellToCast.setTarget(desc.getTarget());
 		}
+		spellToCast.setSource(desc.getSource());
+		spellToCast.setSourceEntity(desc.getSourceEntity());
 		context.getLogic().castSpell(player.getId(), spellToCast);
 	}
 
-	@Override
-	public void setSource(SpellSource source) {
-		super.setSource(source);
-		getEither().setSource(source);
-		getOr().setSource(source);
-	}
-
-	@Override
-	public void setSourceEntity(EntityReference sourceEntity) {
-		super.setSourceEntity(sourceEntity);
-		getEither().setSourceEntity(sourceEntity);
-		getOr().setSourceEntity(sourceEntity);
-	}
+	
 
 }

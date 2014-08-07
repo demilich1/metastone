@@ -13,7 +13,7 @@ public class Rampage extends SpellCard {
 	public Rampage() {
 		super("Rampage", Rarity.COMMON, HeroClass.WARRIOR, 2);
 		setDescription("Give a damaged minion +3/+3.");
-		setSpell(new BuffSpell(3, 3));
+		setSpell(BuffSpell.create(3, 3));
 		setTargetRequirement(TargetSelection.MINIONS);
 	}
 

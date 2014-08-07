@@ -28,6 +28,11 @@ public class TriggerManager implements Cloneable, IDisposable {
 		return new TriggerManager(this);
 	}
 
+	@Override
+	public void dispose() {
+		triggers.clear();
+	}
+
 	public void fireGameEvent(GameEvent event) {
 		for (IGameEventListener trigger : getListSnapshot(triggers)) {
 			if (trigger.getLayer() != event.getTriggerLayer()) {
@@ -70,11 +75,6 @@ public class TriggerManager implements Cloneable, IDisposable {
 				triggers.remove(trigger);
 			}
 		}
-	}
-
-	@Override
-	public void dispose() {
-		triggers.clear();
 	}
 
 }

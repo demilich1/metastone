@@ -5,7 +5,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MinMaxDamageSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
@@ -16,13 +16,11 @@ public class LightningStorm extends SpellCard {
 		setDescription("Deal 2-3 damage to all enemy minions. Overload: (2)");
 		setTag(GameTag.OVERLOAD, 2);
 
-		Spell lightningStorm = new MinMaxDamageSpell(2, 3);
+		SpellDesc lightningStorm = MinMaxDamageSpell.create(2, 3);
 		lightningStorm.setTarget(EntityReference.ENEMY_MINIONS);
 		setSpell(lightningStorm);
 		setTargetRequirement(TargetSelection.NONE);
 	}
-
-
 
 	@Override
 	public int getTypeId() {

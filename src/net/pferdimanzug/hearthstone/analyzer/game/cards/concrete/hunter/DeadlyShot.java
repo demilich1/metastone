@@ -14,7 +14,7 @@ public class DeadlyShot extends SpellCard {
 	public DeadlyShot() {
 		super("Deadly Shot", Rarity.COMMON, HeroClass.HUNTER, 3);
 		setDescription("Destroy a random enemy minion.");
-		setSpell(new DestroyRandomSpell());
+		setSpell(DestroyRandomSpell.create());
 		setPredefinedTarget(EntityReference.ENEMY_MINIONS);
 		setTargetRequirement(TargetSelection.NONE);
 	}
@@ -27,10 +27,6 @@ public class DeadlyShot extends SpellCard {
 		Player opponent = context.getOpponent(player);
 		return opponent.getMinions().size() > 0;
 	}
-	
-	
-
-
 
 	@Override
 	public int getTypeId() {

@@ -12,10 +12,8 @@ public class HealingTouch extends SpellCard {
 		super("Healing Touch", Rarity.FREE, HeroClass.DRUID, 3);
 		setDescription("Restore #8 Health.");
 		setTargetRequirement(TargetSelection.ANY);
-		setSpell(new HealingSpell(8));
+		setSpell(HealingSpell.create(8));
 	}
-
-
 
 	@Override
 	public int getTypeId() {

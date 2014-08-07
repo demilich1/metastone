@@ -12,7 +12,7 @@ public class Whirlwind extends SpellCard {
 	public Whirlwind() {
 		super("Whirlwind", Rarity.FREE, HeroClass.WARRIOR, 1);
 		setDescription("Deal $1 damage to ALL minions.");
-		setSpell(new DamageSpell(1));
+		setSpell(DamageSpell.create(1));
 		setTargetRequirement(TargetSelection.NONE);
 		setPredefinedTarget(EntityReference.ALL_MINIONS);
 	}

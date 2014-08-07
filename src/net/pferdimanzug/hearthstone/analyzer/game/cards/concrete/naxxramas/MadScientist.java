@@ -1,19 +1,11 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
-import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.SecretCard;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.AddSecretSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardLocation;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.custom.PlayRandomSecretSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class MadScientist extends MinionCard {
@@ -31,39 +23,11 @@ public class MadScientist extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion madScientist = createMinion();
-		Spell deathrattle = new PlayRandomSecretSpell();
+		SpellDesc deathrattle = PlayRandomSecretSpell.create();
 		deathrattle.setTarget(EntityReference.NONE);
 		madScientist.addDeathrattle(deathrattle);
 		return madScientist;
 	}
 
-
-
-	private class PlayRandomSecretSpell extends Spell {
-		private CardCollection findSecretCards(CardCollection cardCollection) {
-			CardCollection secretCards = new CardCollection();
-			for (Card card : cardCollection) {
-				if (card.hasTag(GameTag.SECRET)) {
-					secretCards.add(card);
-				}
-			}
-			return secretCards;
-		}
-
-		@Override
-		protected void onCast(GameContext context, Player player, Entity target) {
-			CardCollection secretCards = findSecretCards(player.getDeck());
-			
-			if (secretCards.isEmpty()) {
-				return;
-			}
-			
-			SecretCard secretCard = (SecretCard) secretCards.getRandom();
-			AddSecretSpell secretSpell = (AddSecretSpell) secretCard.getSpell();
-			context.getLogic().playSecret(player, secretSpell.getSecret());
-			secretCard.setLocation(CardLocation.VOID);
-			player.getDeck().remove(secretCard);
-		}
-		
-	}
+	
 }

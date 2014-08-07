@@ -6,14 +6,14 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.SpellSource;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellSource;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public abstract class SpellCard extends Card {
 
-	private Spell spell;
+	private SpellDesc spell;
 	private TargetSelection targetRequirement;
 
 	protected SpellCard(String name, CardType cardType, Rarity rarity, HeroClass classRestriction, int manaCost) {
@@ -38,18 +38,18 @@ public abstract class SpellCard extends Card {
 		}
 		return true;
 	}
-	
+
+	public boolean canBeCastOn(Entity target) {
+		return true;
+	}
+
 	public SpellCard clone() {
 		SpellCard clone = (SpellCard) super.clone();
 		clone.spell = spell.clone();
 		return clone;
 	}
 
-	public boolean canBeCastOn(Entity target) {
-		return true;
-	}
-
-	public Spell getSpell() {
+	public SpellDesc getSpell() {
 		return spell;
 	}
 
@@ -76,14 +76,13 @@ public abstract class SpellCard extends Card {
 		};
 	}
 
-	public void setPredefinedTarget(EntityReference target) {
-		spell.setTarget(target);
+	protected void setPredefinedTarget(EntityReference entityReference) {
+		spell.setTarget(entityReference);
 	}
 
-	public void setSpell(Spell spell) {
+	public void setSpell(SpellDesc spell) {
 		this.spell = spell;
 		spell.setSource(SpellSource.SPELL_CARD);
-		setCloneableData(spell);
 	}
 
 	public void setTargetRequirement(TargetSelection targetRequirement) {

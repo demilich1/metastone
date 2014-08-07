@@ -12,7 +12,7 @@ public class Vanish extends SpellCard {
 	public Vanish() {
 		super("Vanish", Rarity.FREE, HeroClass.ROGUE, 6);
 		setDescription("Return all minions to their owner's hand. ");
-		setSpell(new ReturnMinionToHandSpell());
+		setSpell(ReturnMinionToHandSpell.create());
 		setTargetRequirement(TargetSelection.NONE);
 		setPredefinedTarget(EntityReference.ENEMY_MINIONS);
 	}

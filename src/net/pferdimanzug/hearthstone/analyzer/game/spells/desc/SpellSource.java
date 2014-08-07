@@ -1,4 +1,4 @@
-package net.pferdimanzug.hearthstone.analyzer.game.spells;
+package net.pferdimanzug.hearthstone.analyzer.game.spells.desc;
 
 public enum SpellSource {
 	SPELL_CARD,

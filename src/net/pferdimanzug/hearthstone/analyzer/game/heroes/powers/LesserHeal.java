@@ -11,7 +11,7 @@ public class LesserHeal extends HeroPower {
 	public LesserHeal() {
 		super("Lesser Heal", HeroClass.PRIEST);
 		setTargetRequirement(TargetSelection.ANY);
-		setSpell(new HealingSpell(HEALING));
+		setSpell(HealingSpell.create(2));
 	}
 
 }

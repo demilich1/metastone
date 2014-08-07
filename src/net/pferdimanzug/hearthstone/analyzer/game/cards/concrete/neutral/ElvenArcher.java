@@ -27,7 +27,7 @@ public class ElvenArcher extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion elvenArcher = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new DamageSpell(BATTLECRY_DAMAGE), TargetSelection.ANY);
+		Battlecry battlecry = Battlecry.createBattlecry(DamageSpell.create(BATTLECRY_DAMAGE), TargetSelection.ANY);
 		elvenArcher.setBattlecry(battlecry);
 		return elvenArcher;
 	}

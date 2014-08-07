@@ -9,7 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.ApplyTagSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class AncientOfWar extends ChooseBattlecryCard {
@@ -31,18 +31,19 @@ public class AncientOfWar extends ChooseBattlecryCard {
 
 	@Override
 	protected Battlecry getBattlecry1() {
-		Spell buffSpell = new BuffSpell(5);
+		SpellDesc buffSpell = BuffSpell.create(5);
 		buffSpell.setTarget(EntityReference.SELF);
 		return Battlecry.createBattlecry(buffSpell);
 	}
 
 	@Override
 	protected Battlecry getBattlecry2() {
-		Spell buffHpSpell = new BuffSpell(0, 5);
+		SpellDesc buffHpSpell = BuffSpell.create(0, 5);
 		buffHpSpell.setTarget(EntityReference.SELF);
-		Spell tauntUpSpell = new ApplyTagSpell(GameTag.TAUNT);
+		SpellDesc tauntUpSpell = ApplyTagSpell.create(GameTag.TAUNT);
 		tauntUpSpell.setTarget(EntityReference.SELF);
-		return Battlecry.createBattlecry(new MetaSpell(buffHpSpell, tauntUpSpell));
+		
+		return Battlecry.createBattlecry(MetaSpell.create(buffHpSpell, tauntUpSpell));
 	}
 
 	@Override

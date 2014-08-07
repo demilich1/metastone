@@ -5,7 +5,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.MinionDeathTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
@@ -22,12 +22,10 @@ public class FlesheatingGhoul extends MinionCard {
 		return 128;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion flesheatingGhoul = createMinion();
-		Spell buffSpell = new BuffSpell(1);
+		SpellDesc buffSpell = BuffSpell.create(1);
 		buffSpell.setTarget(EntityReference.SELF);
 		SpellTrigger spellTrigger = new SpellTrigger(new MinionDeathTrigger(), buffSpell);
 		flesheatingGhoul.setSpellTrigger(spellTrigger);

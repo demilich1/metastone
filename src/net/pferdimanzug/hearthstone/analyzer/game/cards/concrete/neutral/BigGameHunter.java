@@ -26,7 +26,7 @@ public class BigGameHunter extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion bigGameHunter = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new DestroySpell(), TargetSelection.MINIONS);
+		Battlecry battlecry = Battlecry.createBattlecry(DestroySpell.create(), TargetSelection.MINIONS);
 		battlecry.setEntityFilter(entity -> {
 			if (entity.getEntityType() != EntityType.MINION) {
 				return false;

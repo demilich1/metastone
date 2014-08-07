@@ -4,8 +4,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 
 public class HarvestGolem extends MinionCard {
 
@@ -21,13 +21,11 @@ public class HarvestGolem extends MinionCard {
 
 	@Override
 	public Minion summon() {
-		Spell deathrattle = new SummonSpell(new DamagedGolem());
+		SpellDesc deathrattle = SummonSpell.create(new DamagedGolem());
 		Minion harvestGolem = createMinion();
 		harvestGolem.addDeathrattle(deathrattle);
 		return harvestGolem;
 	}
-
-
 
 	private class DamagedGolem extends MinionCard {
 

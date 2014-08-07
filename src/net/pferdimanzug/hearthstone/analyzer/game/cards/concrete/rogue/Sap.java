@@ -11,7 +11,7 @@ public class Sap extends SpellCard {
 	public Sap() {
 		super("Sap", Rarity.FREE, HeroClass.ROGUE, 2);
 		setDescription("Return an enemy minion to your opponent's hand.");
-		setSpell(new ReturnMinionToHandSpell());
+		setSpell(ReturnMinionToHandSpell.create());
 		setTargetRequirement(TargetSelection.ENEMY_MINIONS);
 	}
 

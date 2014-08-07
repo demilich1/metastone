@@ -25,7 +25,7 @@ public class Felguard extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion felguard = createMinion(GameTag.TAUNT);
-		Battlecry battlecry = Battlecry.createBattlecry(new ModifyMaxManaSpell(-1, TargetPlayer.SELF));
+		Battlecry battlecry = Battlecry.createBattlecry(ModifyMaxManaSpell.create(-1, TargetPlayer.SELF));
 		felguard.setBattlecry(battlecry);
 		return felguard;
 	}

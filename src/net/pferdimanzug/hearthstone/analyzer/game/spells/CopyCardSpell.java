@@ -4,6 +4,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellArg;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardLocation;
 
 import org.slf4j.Logger;
@@ -11,18 +13,20 @@ import org.slf4j.LoggerFactory;
 
 public class CopyCardSpell extends Spell {
 
+	public static SpellDesc create(CardLocation cardLocation, int numberOfCardsToCopy) {
+		SpellDesc desc = new SpellDesc(CopyCardSpell.class);
+		desc.set(SpellArg.CARD_LOCATION, cardLocation);
+		desc.set(SpellArg.NUMBER_OF_CARDS, numberOfCardsToCopy);
+		return desc;
+	}
+	
 	private static Logger logger = LoggerFactory.getLogger(CopyCardSpell.class);
 
-	private final CardLocation cardLocation;
-	private final int numberOfCardsToCopy;
-
-	public CopyCardSpell(CardLocation cardLocation, int numberOfCardsToCopy) {
-		this.cardLocation = cardLocation;
-		this.numberOfCardsToCopy = numberOfCardsToCopy;
-	}
-
 	@Override
-	protected void onCast(GameContext context, Player player, Entity target) {
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+		CardLocation cardLocation = (CardLocation) desc.get(SpellArg.CARD_LOCATION);
+		int numberOfCardsToCopy = desc.getInt(SpellArg.NUMBER_OF_CARDS);
+		
 		Player opponent = context.getOpponent(player);
 		CardCollection source = null;
 		switch (cardLocation) {

@@ -5,8 +5,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DrawCardSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.TargetPlayer;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 
 public class DancingSwords extends MinionCard {
 
@@ -23,7 +23,7 @@ public class DancingSwords extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion dancingSwords = createMinion();
-		Spell drawCardSpell = new DrawCardSpell(1, TargetPlayer.OPPONENT);
+		SpellDesc drawCardSpell = DrawCardSpell.create(1, TargetPlayer.OPPONENT);
 		dancingSwords.addDeathrattle(drawCardSpell);
 		return dancingSwords;
 	}

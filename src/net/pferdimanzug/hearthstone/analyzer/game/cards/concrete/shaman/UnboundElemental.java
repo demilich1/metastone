@@ -9,7 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
 import net.pferdimanzug.hearthstone.analyzer.game.events.OverloadEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.GameEventTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
@@ -29,14 +29,12 @@ public class UnboundElemental extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion unboundElemental =createMinion();
-		Spell buffSpell = new BuffSpell(1, 1);
+		SpellDesc buffSpell = BuffSpell.create(1, 1);
 		buffSpell.setTarget(EntityReference.SELF);
 		SpellTrigger trigger = new SpellTrigger(new OverloadTrigger(), buffSpell);
 		unboundElemental.setSpellTrigger(trigger);
 		return unboundElemental;
 	}
-
-
 
 	private class OverloadTrigger extends GameEventTrigger {
 

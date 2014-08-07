@@ -14,7 +14,7 @@ public class Execute extends SpellCard {
 		super("Execute", Rarity.FREE, HeroClass.WARRIOR, 1);
 		setDescription("Destroy a damaged enemy minion.");
 		setTargetRequirement(TargetSelection.ENEMY_MINIONS);
-		setSpell(new DestroySpell());
+		setSpell(DestroySpell.create());
 	}
 	
 	@Override

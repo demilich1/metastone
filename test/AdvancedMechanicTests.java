@@ -27,7 +27,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Rexxar;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Thrall;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SetHpSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SilenceSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 import org.testng.Assert;
@@ -191,7 +191,7 @@ public class AdvancedMechanicTests extends BasicTests {
 
 		int modifiedHp = 1;
 		// cast a spell on the minion which modifies the hp
-		Spell setHpSpell = new SetHpSpell(modifiedHp);
+		SpellDesc setHpSpell = SetHpSpell.create(modifiedHp);
 		SpellCard spellCard = new TestSpellCard(setHpSpell);
 		spellCard.setTargetRequirement(TargetSelection.MINIONS);
 		context.getLogic().receiveCard(player.getId(), spellCard);
@@ -202,7 +202,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		Assert.assertEquals(minion.getMaxHp(), modifiedHp);
 
 		// silence the creature - hp should be back to original value
-		Spell silenceSpell = new SilenceSpell();
+		SpellDesc silenceSpell = SilenceSpell.create();
 		spellCard = new TestSpellCard(silenceSpell);
 		spellCard.setTargetRequirement(TargetSelection.MINIONS);
 		context.getLogic().receiveCard(player.getId(), spellCard);

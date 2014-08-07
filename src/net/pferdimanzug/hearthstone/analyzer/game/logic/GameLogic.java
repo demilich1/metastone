@@ -48,7 +48,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.TurnStartEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.WeaponDestroyedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.HeroPower;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.SpellSource;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellFactory;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellSource;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.IGameEventListener;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerLayer;
@@ -77,6 +79,7 @@ public class GameLogic implements Cloneable {
 
 	private final TargetLogic targetLogic = new TargetLogic();
 	private final ActionLogic actionLogic = new ActionLogic();
+	private final SpellFactory spellFactory = new SpellFactory();
 	private final IdFactory idFactory;
 	private GameContext context;
 	private boolean loggingEnabled = true;
@@ -158,28 +161,21 @@ public class GameLogic implements Cloneable {
 		return player.getMinions().size() < MAX_MINIONS;
 	}
 
-	public void castSpell(int playerId, Spell spell) {
-		if (spell.assignedGC != 0 && spell.assignedGC != context.hashCode()) {
-			logger.warn("Spell {} has been cast in another GameContext, current: " + context.hashCode() + " spell: " + spell.assignedGC, spell);
-		}
-		
-		spell.assignedGC = context.hashCode();
-		
+	public void castSpell(int playerId, SpellDesc spellDesc) {
 		
 		Player player = context.getPlayer(playerId);
 		Actor source = null;
-		if (spell.getSourceEntity() != null) {
-			source = (Actor) context.resolveSingleTarget(spell.getSourceEntity());
+		if (spellDesc.getSourceEntity() != null) {
+			source = (Actor) context.resolveSingleTarget(spellDesc.getSourceEntity());
 		}
 		SpellCard sourceCard = null;
-
-		List<Entity> targets = targetLogic.resolveTargetKey(context, player, source, spell.getTarget());
+		List<Entity> targets = targetLogic.resolveTargetKey(context, player, source, spellDesc.getTarget());
 		// target can only be changed when there is one target
 		// note: this code block is basically exclusively for the SpellBender
 		// Secret, but it can easily be expanded if targets of area of effect
 		// spell
 		// should be changeable as well
-		if (spell.getSource() == SpellSource.SPELL_CARD && !spell.hasPredefinedTarget() && targets != null && targets.size() == 1) {
+		if (spellDesc.getSource() == SpellSource.SPELL_CARD && !spellDesc.hasPredefinedTarget() && targets != null && targets.size() == 1) {
 			Card pendingCard = (Card) context.getEnvironment().get(Environment.PENDING_CARD);
 			if (pendingCard instanceof SpellCard) {
 				sourceCard = (SpellCard) pendingCard;
@@ -194,13 +190,27 @@ public class GameLogic implements Cloneable {
 					if (targets.get(0).getReference().getId() == 0) {
 						logger.error("SPellbender minion id is ZERO!!!");
 					}
-					spell.setTarget(targets.get(0).getReference());
+					spellDesc.setTarget(targets.get(0).getReference());
 					log("Target for spell {} has been changed! New target {}", sourceCard, targets.get(0));
 				}
 			}
 
 		}
-		spell.cast(context, player, targets);
+		try {
+			
+			Spell spell = spellFactory.getSpell(spellDesc);
+			spell.cast(context, player, spellDesc, targets);
+		} catch(Exception e) {
+			Card pendingCard = (Card) context.getEnvironment().get(Environment.PENDING_CARD);
+			if (pendingCard instanceof SpellCard) {
+				sourceCard = (SpellCard) pendingCard;
+			}
+			logger.error("Error while playing card: " + sourceCard);
+			logger.error("Error while casting spell: " + spellDesc);
+			e.printStackTrace();
+		}
+		
+		
 		if (sourceCard != null) {
 			context.getEnvironment().remove(Environment.TARGET_OVERRIDE);
 		}
@@ -310,8 +320,9 @@ public class GameLogic implements Cloneable {
 
 		switch (target.getEntityType()) {
 		case HERO:
-			logger.error("Destroying hero not implemented!");
-			throw new RuntimeException();
+			log("Hero {} has been destroyed.", target.getName());
+			target.setHp(0);
+			break;
 		case MINION:
 			destroyMinion((Minion) target);
 			break;
@@ -552,7 +563,7 @@ public class GameLogic implements Cloneable {
 
 		Spell enrageSpell = (Spell) entity.getTag(GameTag.ENRAGE_SPELL);
 		Player owner = context.getPlayer(entity.getOwner());
-		enrageSpell.cast(context, owner, toList(entity));
+		enrageSpell.cast(context, owner, null, toList(entity));
 	}
 
 	private boolean hasTag(Player player, GameTag tag) {
@@ -873,7 +884,7 @@ public class GameLogic implements Cloneable {
 		boolean doubleDeathrattles = hasTag(player, GameTag.DOUBLE_DEATHRATTLES);
 		// TODO: check when and in which order deathrattles should fire
 		if (actor.hasTag(GameTag.DEATHRATTLES)) {
-			for (Spell deathrattle : actor.getDeathrattles()) {
+			for (SpellDesc deathrattle : actor.getDeathrattles()) {
 				castSpell(player.getId(), deathrattle);
 				if (doubleDeathrattles) {
 					castSpell(player.getId(), deathrattle);

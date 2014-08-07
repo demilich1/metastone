@@ -26,7 +26,7 @@ public class CaptainGreenskin extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion captainGreenskin = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new BuffWeaponSpell(1, 1));
+		Battlecry battlecry = Battlecry.createBattlecry(BuffWeaponSpell.create(1, 1));
 		battlecry.setCondition((context, player) -> player.getHero().getWeapon() != null);
 		captainGreenskin.setBattlecry(battlecry);
 		return captainGreenskin;

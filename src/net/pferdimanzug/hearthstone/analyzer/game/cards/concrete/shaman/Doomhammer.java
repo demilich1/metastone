@@ -6,8 +6,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.WeaponCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.WindfurySpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.WeaponDestroyedTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
@@ -27,7 +27,7 @@ public class Doomhammer extends WeaponCard {
 	@Override
 	public Weapon getWeapon() {
 		Weapon doomhammer = createWeapon(2, 8);
-		Spell windfury = new WindfurySpell(new WeaponDestroyedTrigger());
+		SpellDesc windfury = WindfurySpell.create(new WeaponDestroyedTrigger());
 		windfury.setTarget(EntityReference.FRIENDLY_HERO);
 		doomhammer.setBattlecry(Battlecry.createBattlecry(windfury));
 		return doomhammer;

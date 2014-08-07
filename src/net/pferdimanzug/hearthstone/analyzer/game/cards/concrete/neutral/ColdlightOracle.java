@@ -27,7 +27,7 @@ public class ColdlightOracle extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion coldlightOracle = createMinion();
-		coldlightOracle.setBattlecry(Battlecry.createBattlecry(new DrawCardSpell(2, TargetPlayer.BOTH)));
+		coldlightOracle.setBattlecry(Battlecry.createBattlecry(DrawCardSpell.create(2, TargetPlayer.BOTH)));
 		return coldlightOracle;
 	}
 }

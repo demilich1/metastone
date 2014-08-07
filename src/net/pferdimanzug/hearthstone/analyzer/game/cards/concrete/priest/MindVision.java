@@ -12,7 +12,7 @@ public class MindVision extends SpellCard {
 	public MindVision() {
 		super("Mind Vision", Rarity.FREE, HeroClass.PRIEST, 1);
 		setDescription("Put a copy of a random card in your opponent's hand into your hand.");
-		setSpell(new CopyCardSpell(CardLocation.HAND, 1));
+		setSpell(CopyCardSpell.create(CardLocation.HAND, 1));
 		setTargetRequirement(TargetSelection.NONE);
 	}
 

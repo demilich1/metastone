@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SilenceSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class WailingSoul extends MinionCard {
@@ -23,12 +23,10 @@ public class WailingSoul extends MinionCard {
 		return 403;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion wailingSoul = createMinion();
-		Spell silenceOwnMinions = new SilenceSpell();
+		SpellDesc silenceOwnMinions = SilenceSpell.create();
 		silenceOwnMinions.setTarget(EntityReference.FRIENDLY_MINIONS);
 		Battlecry battlecry = Battlecry.createBattlecry(silenceOwnMinions);
 		wailingSoul.setBattlecry(battlecry);

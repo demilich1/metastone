@@ -25,7 +25,7 @@ public class IronforgeRifleman extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion ironforgeRifleman = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new DamageSpell(1), TargetSelection.ANY);
+		Battlecry battlecry = Battlecry.createBattlecry(DamageSpell.create(1), TargetSelection.ANY);
 		ironforgeRifleman.setBattlecry(battlecry);
 		return ironforgeRifleman;
 	}

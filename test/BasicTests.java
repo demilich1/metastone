@@ -18,7 +18,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Malfurion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffHeroSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 import org.testng.Assert;
@@ -44,7 +44,7 @@ public class BasicTests extends TestBase {
 		warrior.setMana(10);
 
 		TestMinionCard devMonster = new TestMinionCard(3, 3);
-		Spell damageSpell = new DamageSpell(3);
+		SpellDesc damageSpell = DamageSpell.create(3);
 		damageSpell.setTarget(EntityReference.ENEMY_HERO);
 		Battlecry testBattlecry = Battlecry.createBattlecry(damageSpell);
 		testBattlecry.setTarget(warrior.getHero());
@@ -67,7 +67,7 @@ public class BasicTests extends TestBase {
 		TestMinionCard devMonsterCard = new TestMinionCard(damage, 2);
 		playCard(context, mage, devMonsterCard);
 		
-		BuffHeroSpell heroBuffSpell = new BuffHeroSpell(damage, 0);
+		SpellDesc heroBuffSpell = BuffHeroSpell.create(damage, 0);
 		context.getLogic().castSpell(druid.getId(), heroBuffSpell);
 		context.getLogic().endTurn(druid.getId());
 		

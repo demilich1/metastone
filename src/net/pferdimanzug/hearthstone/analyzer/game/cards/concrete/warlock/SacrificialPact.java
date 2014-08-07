@@ -9,7 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroySpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.HealingSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
@@ -18,10 +18,10 @@ public class SacrificialPact extends SpellCard {
 	public SacrificialPact() {
 		super("Sacrificial Pact", Rarity.FREE, HeroClass.WARLOCK, 0);
 		setDescription("Destroy a Demon. Restore #5 Health to your hero.");
-		Spell destroyDemon = new DestroySpell();
-		Spell heal = new HealingSpell(5);
+		SpellDesc destroyDemon = DestroySpell.create();
+		SpellDesc heal = HealingSpell.create(5);
 		heal.setTarget(EntityReference.FRIENDLY_HERO);
-		setSpell(new MetaSpell(destroyDemon, heal));
+		setSpell(MetaSpell.create(destroyDemon, heal));
 		setTargetRequirement(TargetSelection.ANY);
 	}
 
@@ -29,10 +29,6 @@ public class SacrificialPact extends SpellCard {
 	public boolean canBeCastOn(Entity target) {
 		return target.getTag(GameTag.RACE) == Race.DEMON;
 	}
-	
-	
-
-
 
 	@Override
 	public int getTypeId() {

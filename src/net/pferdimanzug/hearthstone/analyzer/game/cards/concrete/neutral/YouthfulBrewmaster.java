@@ -24,7 +24,7 @@ public class YouthfulBrewmaster extends MinionCard {
 
 	@Override
 	public Minion summon() {
-		Battlecry battlecry = Battlecry.createBattlecry(new ReturnMinionToHandSpell(), TargetSelection.FRIENDLY_MINIONS);
+		Battlecry battlecry = Battlecry.createBattlecry(ReturnMinionToHandSpell.create(), TargetSelection.FRIENDLY_MINIONS);
 		Minion youthfulBrewmaster = createMinion();
 		youthfulBrewmaster.setBattlecry(battlecry);
 		return youthfulBrewmaster;

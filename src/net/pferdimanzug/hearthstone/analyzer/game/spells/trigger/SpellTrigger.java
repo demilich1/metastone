@@ -6,8 +6,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.CustomCloneable;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.SpellSource;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellSource;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 import org.slf4j.Logger;
@@ -18,13 +18,13 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 
 	private GameEventTrigger primaryTrigger;
 	private GameEventTrigger secondaryTrigger;
-	private Spell spell;
+	private SpellDesc spell;
 	private EntityReference hostReference;
 	private final boolean oneTime;
 	private boolean expired;
 	private TriggerLayer layer = TriggerLayer.DEFAULT;
 
-	public SpellTrigger(GameEventTrigger primaryTrigger, GameEventTrigger secondaryTrigger, Spell spell, boolean oneTime) {
+	public SpellTrigger(GameEventTrigger primaryTrigger, GameEventTrigger secondaryTrigger, SpellDesc spell, boolean oneTime) {
 		this.primaryTrigger = primaryTrigger;
 		this.secondaryTrigger = secondaryTrigger;
 		this.spell = spell;
@@ -32,11 +32,11 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 		this.oneTime = oneTime;
 	}
 
-	public SpellTrigger(GameEventTrigger trigger, Spell spell) {
+	public SpellTrigger(GameEventTrigger trigger, SpellDesc spell) {
 		this(trigger, spell, false);
 	}
 
-	public SpellTrigger(GameEventTrigger trigger, Spell spell, boolean oneTime) {
+	public SpellTrigger(GameEventTrigger trigger, SpellDesc spell, boolean oneTime) {
 		this(trigger, null, spell, oneTime);
 	}
 
@@ -47,7 +47,7 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 		if (secondaryTrigger != null) {
 			clone.secondaryTrigger = (GameEventTrigger) secondaryTrigger.clone();
 		}
-		clone.spell = (Spell) spell.clone();
+		clone.spell = spell.clone();
 		return clone;
 	}
 
@@ -66,7 +66,7 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 		return primaryTrigger.getOwner();
 	}
 
-	protected Spell getSpell() {
+	protected SpellDesc getSpell() {
 		return spell;
 	}
 
@@ -88,7 +88,7 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 	public void onAdd(GameContext context) {
 	}
 
-	protected void onFire(int ownerId, Spell spell, GameEvent event) {
+	protected void onFire(int ownerId, SpellDesc spell, GameEvent event) {
 		event.getGameContext().getLogic().castSpell(ownerId, spell);
 	}
 

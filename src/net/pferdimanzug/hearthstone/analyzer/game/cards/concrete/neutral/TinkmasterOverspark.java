@@ -8,8 +8,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.EitherOrSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.TransformRandomMinionSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class TinkmasterOverspark extends MinionCard {
@@ -28,9 +28,9 @@ public class TinkmasterOverspark extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion tinkmasterOverspark = createMinion();
-		Spell devilsaurSpell = new TransformRandomMinionSpell(new Devilsaur());
-		Spell squirellSpell = new TransformRandomMinionSpell(new Squirrel());
-		Spell randomTransformSpell = new EitherOrSpell(devilsaurSpell, squirellSpell, (context, player, target) -> context.getLogic()
+		SpellDesc devilsaurSpell = TransformRandomMinionSpell.create(new Devilsaur());
+		SpellDesc squirellSpell = TransformRandomMinionSpell.create(new Squirrel());
+		SpellDesc randomTransformSpell = EitherOrSpell.create(devilsaurSpell, squirellSpell, (context, player, target) -> context.getLogic()
 				.randomBool());
 		randomTransformSpell.setTarget(EntityReference.ALL_MINIONS);
 		Battlecry battlecry = Battlecry.createBattlecry(randomTransformSpell);

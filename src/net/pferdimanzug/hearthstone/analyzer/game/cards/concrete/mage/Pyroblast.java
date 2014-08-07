@@ -11,7 +11,7 @@ public class Pyroblast extends SpellCard {
 	public Pyroblast() {
 		super("Pyroblast", Rarity.EPIC, HeroClass.MAGE, 10);
 		setDescription("Deal $10 damage.");
-		setSpell(new DamageSpell(10));
+		setSpell(DamageSpell.create(10));
 		setTargetRequirement(TargetSelection.ANY);
 	}
 

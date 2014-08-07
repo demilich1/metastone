@@ -14,7 +14,7 @@ public class LavaBurst extends SpellCard {
 		setDescription("Deal $5 damage. Overload: (2)");
 		setTag(GameTag.OVERLOAD, 2);
 
-		setSpell(new DamageSpell(5));
+		setSpell(DamageSpell.create(5));
 		setTargetRequirement(TargetSelection.ANY);
 	}
 

@@ -14,8 +14,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroyWeaponSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DrawCardSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.IValueProvider;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.TargetPlayer;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class HarrisonJones extends MinionCard {
@@ -43,10 +43,10 @@ public class HarrisonJones extends MinionCard {
 				return weapon != null ? weapon.getDurability() : 0;
 			}
 		};
-		Spell drawCardSpell = new DrawCardSpell(valueProvider, TargetPlayer.SELF);
-		Spell destroyWeaponSpell = new DestroyWeaponSpell();
+		SpellDesc drawCardSpell = DrawCardSpell.create(valueProvider, TargetPlayer.SELF);
+		SpellDesc destroyWeaponSpell = DestroyWeaponSpell.create();
 		destroyWeaponSpell.setTarget(EntityReference.ENEMY_HERO);
-		Battlecry battlecry = Battlecry.createBattlecry(new MetaSpell(drawCardSpell, destroyWeaponSpell));
+		Battlecry battlecry = Battlecry.createBattlecry(MetaSpell.create(drawCardSpell, destroyWeaponSpell));
 		harrisonJones.setBattlecry(battlecry);
 		return harrisonJones;
 	}

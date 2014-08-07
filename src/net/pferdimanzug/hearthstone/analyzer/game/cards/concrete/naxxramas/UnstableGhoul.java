@@ -6,7 +6,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class UnstableGhoul extends MinionCard {
@@ -21,12 +21,10 @@ public class UnstableGhoul extends MinionCard {
 		return 402;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion unstableGhoul = createMinion(GameTag.TAUNT);
-		Spell deathrattle = new DamageSpell(1);
+		SpellDesc deathrattle = DamageSpell.create(1);
 		deathrattle.setTarget(EntityReference.ALL_MINIONS);
 		unstableGhoul.addDeathrattle(deathrattle);
 		return unstableGhoul;

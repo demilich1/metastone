@@ -25,7 +25,7 @@ public class EarthenRingFarseer extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion earthenRingFarseer = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new HealingSpell(3), TargetSelection.ANY);
+		Battlecry battlecry = Battlecry.createBattlecry(HealingSpell.create(3), TargetSelection.ANY);
 		earthenRingFarseer.setBattlecry(battlecry);
 		return earthenRingFarseer;
 	}

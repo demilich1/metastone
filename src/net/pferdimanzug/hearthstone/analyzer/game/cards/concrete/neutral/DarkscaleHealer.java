@@ -25,7 +25,7 @@ public class DarkscaleHealer extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion darkscaleHealer = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new HealingSpell(2));
+		Battlecry battlecry = Battlecry.createBattlecry(HealingSpell.create(2));
 		battlecry.setTargetKey(EntityReference.FRIENDLY_CHARACTERS);
 		darkscaleHealer.setBattlecry(battlecry);
 		return darkscaleHealer;

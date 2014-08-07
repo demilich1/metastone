@@ -11,7 +11,7 @@ public class Fireblast extends HeroPower {
 	public Fireblast() {
 		super("Fireblast", HeroClass.MAGE);
 		setTargetRequirement(TargetSelection.ANY);
-		setSpell(new DamageSpell(1));
+		setSpell(DamageSpell.create(1));
 	}
 
 }

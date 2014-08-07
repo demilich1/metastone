@@ -11,11 +11,9 @@ public class Windfury extends SpellCard {
 	public Windfury() {
 		super("Windfury", Rarity.FREE, HeroClass.SHAMAN, 2);
 		setDescription("Give a minion Windfury.");
-		setSpell(new WindfurySpell());
+		setSpell(WindfurySpell.create());
 		setTargetRequirement(TargetSelection.MINIONS);
 	}
-
-
 
 	@Override
 	public int getTypeId() {

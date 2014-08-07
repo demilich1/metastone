@@ -25,7 +25,7 @@ public class GnomishInventor extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion gnomishInventor = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new DrawCardSpell(1), TargetSelection.NONE);
+		Battlecry battlecry = Battlecry.createBattlecry(DrawCardSpell.create(1), TargetSelection.NONE);
 		gnomishInventor.setBattlecry(battlecry);
 		return gnomishInventor;
 	}

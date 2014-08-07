@@ -27,7 +27,7 @@ public class FireElemental extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion fireElemental = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new DamageSpell(BATTLECRY_DAMAGE), TargetSelection.ANY);
+		Battlecry battlecry = Battlecry.createBattlecry(DamageSpell.create(BATTLECRY_DAMAGE), TargetSelection.ANY);
 		fireElemental.setBattlecry(battlecry);
 		return fireElemental;
 	}

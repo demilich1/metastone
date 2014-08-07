@@ -13,7 +13,7 @@ public class Hellfire extends SpellCard {
 		super("Hellfire", Rarity.FREE, HeroClass.WARLOCK, 4);
 		setDescription("Deal $3 damage to ALL characters.");
 		setTargetRequirement(TargetSelection.NONE);
-		setSpell(new DamageSpell(3));
+		setSpell(DamageSpell.create(3));
 		setPredefinedTarget(EntityReference.ALL_CHARACTERS);
 	}
 

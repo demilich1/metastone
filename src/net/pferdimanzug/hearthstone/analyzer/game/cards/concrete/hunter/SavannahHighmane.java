@@ -23,7 +23,7 @@ public class SavannahHighmane extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion savannahHighmane = createMinion();
-		savannahHighmane.addDeathrattle(new SummonSpell(new Hyena(), new Hyena()));
+		savannahHighmane.addDeathrattle(SummonSpell.create(new Hyena(), new Hyena()));
 		return savannahHighmane;
 	}
 

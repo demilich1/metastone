@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class InjuredBlademaster extends MinionCard {
@@ -26,7 +26,7 @@ public class InjuredBlademaster extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion injuredBlademaster = createMinion();
-		Spell damageSpell = new DamageSpell(4);
+		SpellDesc damageSpell = DamageSpell.create(4);
 		damageSpell.setTarget(EntityReference.SELF);
 		Battlecry battlecry = Battlecry.createBattlecry(damageSpell);
 		injuredBlademaster.setBattlecry(battlecry);

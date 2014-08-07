@@ -11,7 +11,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
 import net.pferdimanzug.hearthstone.analyzer.game.events.PhysicalAttackEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.HealingSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.GameEventTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
@@ -31,14 +31,12 @@ public class TruesilverChampion extends WeaponCard {
 	@Override
 	public Weapon getWeapon() {
 		Weapon trueSilverChampion = createWeapon(4, 2);
-		Spell healHero = new HealingSpell(2);
+		SpellDesc healHero = HealingSpell.create(2);
 		healHero.setTarget(EntityReference.FRIENDLY_HERO);
 		SpellTrigger trigger = new SpellTrigger(new TruesilverChampionWeaponTrigger(), healHero);
 		trueSilverChampion.setSpellTrigger(trigger);
 		return trueSilverChampion;
 	}
-
-
 
 	private class TruesilverChampionWeaponTrigger extends GameEventTrigger {
 		

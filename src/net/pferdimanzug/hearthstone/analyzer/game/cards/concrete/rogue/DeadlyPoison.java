@@ -13,7 +13,7 @@ public class DeadlyPoison extends SpellCard {
 	public DeadlyPoison() {
 		super("Deadly Poison", Rarity.FREE, HeroClass.ROGUE, 1);
 		setDescription("Give your weapon +2 Attack.");
-		setSpell(new BuffWeaponSpell(2));
+		setSpell(BuffWeaponSpell.create(2));
 		setTargetRequirement(TargetSelection.NONE);
 	}
 
@@ -22,10 +22,6 @@ public class DeadlyPoison extends SpellCard {
 		return player.getHero().getWeapon() != null;
 	}
 	
-	
-
-
-
 	@Override
 	public int getTypeId() {
 		return 291;

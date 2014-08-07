@@ -8,7 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MindControlRandomSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class MindControlTech extends MinionCard {
@@ -27,7 +27,7 @@ public class MindControlTech extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion mindControlTech = createMinion();
-		Spell mindControlSpell = new MindControlRandomSpell();
+		SpellDesc mindControlSpell = MindControlRandomSpell.create();
 		mindControlSpell.setTarget(EntityReference.ENEMY_MINIONS);
 		Battlecry battlecry = Battlecry.createBattlecry(mindControlSpell);
 		battlecry.setCondition((context, player)-> {

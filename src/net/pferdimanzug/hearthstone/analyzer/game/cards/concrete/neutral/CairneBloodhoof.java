@@ -21,7 +21,7 @@ public class CairneBloodhoof extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion cairneBloodhoof = createMinion();
-		cairneBloodhoof.addDeathrattle(new SummonSpell(new BaineBloodhoof()));
+		cairneBloodhoof.addDeathrattle(SummonSpell.create(new BaineBloodhoof()));
 		return cairneBloodhoof;
 	}
 

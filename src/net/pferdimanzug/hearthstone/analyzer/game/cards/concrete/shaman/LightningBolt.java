@@ -13,7 +13,7 @@ public class LightningBolt extends SpellCard {
 		super("Lightning Bolt", Rarity.COMMON, HeroClass.SHAMAN, 1);
 		setDescription("Deal 3 damage. Overload: (1)");
 		setTag(GameTag.OVERLOAD, 1);
-		setSpell(new DamageSpell(3));
+		setSpell(DamageSpell.create(3));
 		setTargetRequirement(TargetSelection.ANY);
 	}
 

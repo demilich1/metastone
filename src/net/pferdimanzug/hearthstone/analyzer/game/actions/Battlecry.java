@@ -5,28 +5,28 @@ import java.util.function.Predicate;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.SpellSource;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellSource;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Battlecry extends GameAction {
 
-	public static Battlecry createBattlecry(Spell spell) {
+	public static Battlecry createBattlecry(SpellDesc spell) {
 		return createBattlecry(spell, TargetSelection.NONE);
 	}
 
-	public static Battlecry createBattlecry(Spell spell, TargetSelection targetSelection) {
+	public static Battlecry createBattlecry(SpellDesc spell, TargetSelection targetSelection) {
 		Battlecry battlecry = new Battlecry(spell);
 		battlecry.setTargetRequirement(targetSelection);
 		return battlecry;
 	}
 
-	private final Spell spell;
+	private final SpellDesc spell;
 	private boolean resolvedLate = false;
 	private IBattlecryCondition condition;
 	private Predicate<Entity> entityFilter;
 
-	protected Battlecry(Spell spell) {
+	protected Battlecry(SpellDesc spell) {
 		this.spell = spell;
 		spell.setSource(SpellSource.SPELL_TRIGGER);
 		setActionType(ActionType.BATTLECRY);

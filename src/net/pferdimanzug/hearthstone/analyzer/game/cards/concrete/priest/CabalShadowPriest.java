@@ -21,12 +21,10 @@ public class CabalShadowPriest extends MinionCard {
 		return 260;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion cabalShadowPriest = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new MindControlSpell(), TargetSelection.ENEMY_MINIONS);
+		Battlecry battlecry = Battlecry.createBattlecry(MindControlSpell.create(), TargetSelection.ENEMY_MINIONS);
 		battlecry.setEntityFilter(entity -> {
 			if (entity.getEntityType() != EntityType.MINION) {
 				return false;

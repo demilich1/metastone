@@ -25,7 +25,7 @@ public class TempleEnforcer extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion templeEnforcer = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new BuffSpell(0, 3), TargetSelection.FRIENDLY_MINIONS);
+		Battlecry battlecry = Battlecry.createBattlecry(BuffSpell.create(0, 3), TargetSelection.FRIENDLY_MINIONS);
 		templeEnforcer.setBattlecry(battlecry);
 		return templeEnforcer;
 	}

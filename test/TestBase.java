@@ -22,8 +22,6 @@ import org.slf4j.LoggerFactory;
 
 public class TestBase {
 	
-	protected static Logger logger = LoggerFactory.getLogger(TestBase.class);
-	
 	protected static void attack(GameContext context, Player player, Entity attacker, Entity target) {
 		PhysicalAttackAction physicalAttackAction = new PhysicalAttackAction(attacker.getReference());
 		physicalAttackAction.setTarget(target);
@@ -69,6 +67,8 @@ public class TestBase {
 		context.getLogic().performGameAction(player.getId(), minionCard.play());
 		return getSummonedMinion(player.getMinions());
 	}
+	
+	protected static Logger logger = LoggerFactory.getLogger(TestBase.class);
 	
 	private static class NullBehaviour extends Behaviour {
 

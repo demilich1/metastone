@@ -9,7 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.costmodifier.OneTurnCost
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.AddCostModifierSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class KirinTorMage extends MinionCard {
@@ -29,7 +29,7 @@ public class KirinTorMage extends MinionCard {
 		Minion kirinTorMage = createMinion();
 		OneTurnCostModifier costModifier = new OneTurnCostModifier(CardType.SPELL, -99, true);
 		costModifier.setRequiredTag(GameTag.SECRET);
-		Spell castSecretForFree = new AddCostModifierSpell(costModifier);
+		SpellDesc castSecretForFree = AddCostModifierSpell.create(costModifier);
 		castSecretForFree.setTarget(EntityReference.FRIENDLY_HERO);
 		kirinTorMage.setBattlecry(Battlecry.createBattlecry(castSecretForFree));
 		return kirinTorMage;

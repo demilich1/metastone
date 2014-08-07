@@ -15,7 +15,7 @@ public class FeralSpirit extends SpellCard {
 		super("Feral Spirit", Rarity.RARE, HeroClass.SHAMAN, 3);
 		setDescription("Summon two 2/3 Spirit Wolves with Taunt. Overload: (2)");
 
-		setSpell(new SummonSpell(new SpiritWolf(), new SpiritWolf()));
+		setSpell(SummonSpell.create(new SpiritWolf(), new SpiritWolf()));
 		setTargetRequirement(TargetSelection.NONE);
 	}
 

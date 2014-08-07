@@ -28,7 +28,7 @@ public class NorthshireCleric extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion northshireCleric = createMinion();
-		SpellTrigger trigger = new SpellTrigger(new NorthshireClericTrigger(), new DrawCardSpell());
+		SpellTrigger trigger = new SpellTrigger(new NorthshireClericTrigger(), DrawCardSpell.create());
 		northshireCleric.setSpellTrigger(trigger);
 		return northshireCleric;
 	}

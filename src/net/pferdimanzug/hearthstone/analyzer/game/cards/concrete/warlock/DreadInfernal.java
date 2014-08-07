@@ -29,7 +29,7 @@ public class DreadInfernal extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion dreadInfernal = createMinion();
-		Battlecry infernoBattlecry = Battlecry.createBattlecry(new DamageSpell(1), TargetSelection.NONE);
+		Battlecry infernoBattlecry = Battlecry.createBattlecry(DamageSpell.create(1), TargetSelection.NONE);
 		infernoBattlecry.setTargetKey(EntityReference.ALL_CHARACTERS);
 		dreadInfernal.setBattlecry(infernoBattlecry);
 		return dreadInfernal;

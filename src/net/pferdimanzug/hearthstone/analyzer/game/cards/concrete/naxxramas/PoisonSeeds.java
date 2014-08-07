@@ -17,7 +17,7 @@ public class PoisonSeeds extends SpellCard {
 		super("Poison Seeds", Rarity.COMMON, HeroClass.DRUID, 4);
 		setDescription("Destroy all minions and summon 2/2 treants to replace them");
 
-		setSpell(new MetaSpell(new DestroySpell(), new SummonSpell(new Treant())));
+		setSpell(MetaSpell.create(DestroySpell.create(), SummonSpell.create(new Treant())));
 		setTargetRequirement(TargetSelection.NONE);
 		setPredefinedTarget(EntityReference.ALL_MINIONS);
 	}

@@ -9,7 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.ApplyTagSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
@@ -31,7 +31,7 @@ public class DefenderOfArgus extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion defenderOfArgus = createMinion();
-		Spell buffSpell = new MetaSpell(new BuffSpell(1, 1), new ApplyTagSpell(GameTag.TAUNT));
+		SpellDesc buffSpell = MetaSpell.create(BuffSpell.create(1, 1), ApplyTagSpell.create(GameTag.TAUNT));
 		buffSpell.setTarget(EntityReference.ADJACENT_MINIONS);
 		Battlecry battlecry = Battlecry.createBattlecry(buffSpell, TargetSelection.NONE);
 		battlecry.setResolvedLate(true);

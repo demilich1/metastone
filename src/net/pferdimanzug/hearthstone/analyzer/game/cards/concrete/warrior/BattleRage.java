@@ -31,7 +31,7 @@ public class BattleRage extends SpellCard {
 				return woundedCharacters;
 			}
 		};
-		setSpell(new DrawCardSpell(damagedCharacterCounter, TargetPlayer.SELF));
+		setSpell(DrawCardSpell.create(damagedCharacterCounter, TargetPlayer.SELF));
 		setTargetRequirement(TargetSelection.NONE);
 		setPredefinedTarget(EntityReference.NONE);
 	}

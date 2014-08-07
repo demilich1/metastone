@@ -22,8 +22,6 @@ public class TimberWolf extends MinionCard {
 		return 47;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion timberWolf = createMinion();

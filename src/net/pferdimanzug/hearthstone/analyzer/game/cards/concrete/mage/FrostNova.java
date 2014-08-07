@@ -14,7 +14,7 @@ public class FrostNova extends SpellCard {
 	public FrostNova() {
 		super("Frost Nova", Rarity.FREE, HeroClass.MAGE, 3);
 		setDescription("Freeze all enemy minions.");
-		setSpell(new ApplyTagSpell(GameTag.FROZEN, new TurnStartTrigger()));
+		setSpell(ApplyTagSpell.create(GameTag.FROZEN, new TurnStartTrigger()));
 		setTargetRequirement(TargetSelection.NONE);
 		setPredefinedTarget(EntityReference.ENEMY_MINIONS);
 	}

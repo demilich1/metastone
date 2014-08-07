@@ -13,7 +13,7 @@ public class PowerWordShield extends SpellCard {
 	public PowerWordShield() {
 		super("Power Word: Shield", Rarity.FREE, HeroClass.PRIEST, 1);
 		setDescription("Draw a card.");
-		setSpell(new MetaSpell(new BuffSpell(0, 2), new DrawCardSpell()));
+		setSpell(MetaSpell.create(BuffSpell.create(0, 2), DrawCardSpell.create()));
 		setTargetRequirement(TargetSelection.MINIONS);
 	}
 

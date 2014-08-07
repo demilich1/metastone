@@ -15,7 +15,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.IValueProvider;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.RemoveTagSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class BloodKnight extends MinionCard {
@@ -35,11 +35,11 @@ public class BloodKnight extends MinionCard {
 	public Minion summon() {
 		Minion bloodKnight = createMinion();
 		IValueProvider bloodKnightValueProvider = new BloodKnightBuffValueProvider();
-		Spell buffSpell = new BuffSpell(bloodKnightValueProvider, bloodKnightValueProvider);
+		SpellDesc buffSpell = BuffSpell.create(bloodKnightValueProvider, bloodKnightValueProvider);
 		buffSpell.setTarget(EntityReference.SELF);
-		Spell removeDivineShields = new RemoveTagSpell(GameTag.DIVINE_SHIELD);
+		SpellDesc removeDivineShields = RemoveTagSpell.create(GameTag.DIVINE_SHIELD);
 		removeDivineShields.setTarget(EntityReference.ALL_MINIONS);
-		Battlecry battlecry = Battlecry.createBattlecry(new MetaSpell(buffSpell, removeDivineShields));
+		Battlecry battlecry = Battlecry.createBattlecry(MetaSpell.create(buffSpell, removeDivineShields));
 		bloodKnight.setBattlecry(battlecry);
 		return bloodKnight;
 	}

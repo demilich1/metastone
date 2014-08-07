@@ -15,7 +15,7 @@ public class ForkedLightning extends SpellCard {
 		super("Forked Lightning", Rarity.COMMON, HeroClass.SHAMAN, 1);
 		setDescription("Deal 2 damage to 2 random enemy minions. Overload: (2)");
 		setTag(GameTag.OVERLOAD, 2);
-		setSpell(new MultiTargetDamageSpell(2, 2));
+		setSpell(MultiTargetDamageSpell.create(2, 2));
 		setTargetRequirement(TargetSelection.NONE);
 	}
 	
@@ -23,8 +23,6 @@ public class ForkedLightning extends SpellCard {
 	public boolean canBeCast(GameContext context, Player player) {
 		return context.getOpponent(player).getMinions().size() >= 2;
 	}
-
-
 
 	@Override
 	public int getTypeId() {

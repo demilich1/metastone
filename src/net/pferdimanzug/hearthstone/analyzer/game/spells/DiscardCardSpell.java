@@ -4,6 +4,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellArg;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardLocation;
 
 import org.slf4j.Logger;
@@ -11,22 +13,23 @@ import org.slf4j.LoggerFactory;
 
 public class DiscardCardSpell extends Spell {
 	
+	public static SpellDesc create() {
+		return create(1);
+	}
+	
+	public static SpellDesc create(int numberOfCards) {
+		SpellDesc desc = new SpellDesc(DiscardCardSpell.class);
+		desc.set(SpellArg.NUMBER_OF_CARDS, numberOfCards);
+		return desc;
+	}
+	
 	public static final int ALL_CARDS = -1;
 	
 	private static Logger logger = LoggerFactory.getLogger(DiscardCardSpell.class);
-	
-	private final int numberOfCards;
-
-	public DiscardCardSpell() {
-		this(1);
-	}
-	
-	public DiscardCardSpell(int numberOfCards) {
-		this.numberOfCards = numberOfCards;
-	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, Entity target) {
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+		int numberOfCards = desc.getInt(SpellArg.NUMBER_OF_CARDS);
 		int cardCount = numberOfCards == ALL_CARDS ? player.getHand().getCount() : numberOfCards;
 		
 		for (int i = 0; i < cardCount; i++) {

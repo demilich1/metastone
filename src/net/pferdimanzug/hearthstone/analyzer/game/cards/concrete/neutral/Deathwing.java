@@ -10,7 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroySpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DiscardCardSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class Deathwing extends MinionCard {
@@ -30,10 +30,10 @@ public class Deathwing extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion deathwing = createMinion();
-		Spell destroySpell = new DestroySpell();
+		SpellDesc destroySpell = DestroySpell.create();
 		destroySpell.setTarget(EntityReference.ALL_MINIONS);
-		Spell discardSpell = new DiscardCardSpell(DiscardCardSpell.ALL_CARDS);
-		Battlecry battlecry = Battlecry.createBattlecry(new MetaSpell(destroySpell, discardSpell));
+		SpellDesc discardSpell = DiscardCardSpell.create(DiscardCardSpell.ALL_CARDS);
+		Battlecry battlecry = Battlecry.createBattlecry(MetaSpell.create(destroySpell, discardSpell));
 		deathwing.setBattlecry(battlecry);
 		return deathwing;
 	}

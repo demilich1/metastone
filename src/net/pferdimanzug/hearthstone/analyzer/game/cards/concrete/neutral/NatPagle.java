@@ -5,8 +5,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DrawCardSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.TargetPlayer;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnStartTrigger;
 
@@ -22,13 +22,10 @@ public class NatPagle extends MinionCard {
 		return 174;
 	}
 	
-
-
-
 	@Override
 	public Minion summon() {
 		Minion natPagle = createMinion();
-		Spell drawCardSpell = new DrawCardSpell((context, player, target) -> context.getLogic().randomBool() ? 1 : 0, TargetPlayer.SELF);
+		SpellDesc drawCardSpell = DrawCardSpell.create((context, player, target) -> context.getLogic().randomBool() ? 1 : 0, TargetPlayer.SELF);
 		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), drawCardSpell);
 		natPagle.setSpellTrigger(trigger);
 		return natPagle;

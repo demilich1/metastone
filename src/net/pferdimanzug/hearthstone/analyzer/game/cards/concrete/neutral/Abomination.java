@@ -6,7 +6,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class Abomination extends MinionCard {
@@ -21,12 +21,10 @@ public class Abomination extends MinionCard {
 		return 76;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion abomination = createMinion(GameTag.TAUNT);
-		Spell deathrattle = new DamageSpell(2);
+		SpellDesc deathrattle = DamageSpell.create(2);
 		deathrattle.setTarget(EntityReference.ALL_CHARACTERS);
 		abomination.addDeathrattle(deathrattle);
 		return abomination;

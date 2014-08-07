@@ -14,7 +14,7 @@ public class DaggerMastery extends HeroPower {
 	public DaggerMastery() {
 		super("Dagger Mastery", HeroClass.ROGUE);
 		setTargetRequirement(TargetSelection.NONE);
-		setSpell(new EquipWeaponSpell(new WickedKnife()));
+		setSpell(EquipWeaponSpell.create(new WickedKnife()));
 		setPredefinedTarget(EntityReference.FRIENDLY_HERO);
 	}
 	

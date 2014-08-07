@@ -7,7 +7,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.events.DamageEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellArg;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.HeroDamagedTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.secrets.Secret;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.secrets.SecretTrigger;
@@ -27,21 +28,18 @@ public class EyeForAnEye extends SecretCard {
 		return 244;
 	}
 
-
-
 	private class EyeForAnEyeSecret extends Secret {
 		
 		public EyeForAnEyeSecret(Card source) {
-			super(new SecretTrigger(new HeroDamagedTrigger()), new DamageSpell(0), source);
+			super(new SecretTrigger(new HeroDamagedTrigger()), DamageSpell.create(0), source);
 			getSpell().setTarget(EntityReference.EVENT_TARGET);
 		}
 
 
 		@Override
-		protected void onFire(int ownerId, Spell spell, GameEvent event) {
-			DamageSpell damageSpell = (DamageSpell) spell;
+		protected void onFire(int ownerId, SpellDesc spell, GameEvent event) {
 			DamageEvent damageEvent = (DamageEvent) event;
-			damageSpell.setDamage(damageEvent.getDamage());
+			spell.set(SpellArg.DAMAGE, damageEvent.getDamage());
 			super.onFire(ownerId, spell, event);
 		}
 

@@ -1,56 +1,67 @@
 package net.pferdimanzug.hearthstone.analyzer.game.spells;
 
-import java.util.Collection;
 import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellArg;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 
 public class MetaSpell extends Spell {
-
-	public MetaSpell(Spell... spells) {
-		setCloneableData(spells);
+	
+	public static SpellDesc create(SpellDesc spell1, SpellDesc spell2) {
+		return create(spell1, spell2, null);
+	}
+	
+	public static SpellDesc create(SpellDesc spell1, SpellDesc spell2, SpellDesc spell3) {
+		SpellDesc desc = new SpellDesc(MetaSpell.class);
+		desc.set(SpellArg.SPELL_1, spell1);
+		desc.set(SpellArg.SPELL_2, spell2);
+		if (spell3 != null) {
+			desc.set(SpellArg.SPELL_3, spell3);
+		}
+		
+		return desc;
 	}
 
 	@Override
-	public void cast(GameContext context, Player player, List<Entity> targets) {
-		for (Spell spell : getSpells()) {
+	public void cast(GameContext context, Player player, SpellDesc desc, List<Entity> targets) {
+		for (SpellDesc spell : getSpells(desc)) {
 			if (!spell.hasPredefinedTarget()) {
-				spell.setTarget(getTarget());
+				spell.setTarget(desc.getTarget());
 			}
+			spell.setSource(desc.getSource());
+			spell.setSourceEntity(desc.getSourceEntity());
 			context.getLogic().castSpell(player.getId(), spell);
 		}
 	}
-
-	@Override
-	public MetaSpell clone() {
-		return (MetaSpell) super.clone();
-	}
 	
-	public Collection<Spell> getSpells() {
-		return getCloneableDataCollection();
-	}
-
-	@Override
-	protected void onCast(GameContext context, Player player, Entity target) {
-	}
-
-	@Override
-	public void setSource(SpellSource source) {
-		super.setSource(source);
-		for (Spell spell : getSpells()) {
-			spell.setSource(source);
+	private SpellDesc[] getSpells(SpellDesc desc) {
+		SpellDesc[] spells;
+		if (desc.get(SpellArg.SPELL_3) != null) {
+			spells = new SpellDesc[3];
+		} else if (desc.get(SpellArg.SPELL_2) != null) {
+			spells = new SpellDesc[2];
+		} else {
+			spells = new SpellDesc[1];
 		}
+		
+		if (spells.length >= 3) {
+			spells[2] = (SpellDesc) desc.get(SpellArg.SPELL_3);
+		}
+		if (spells.length >= 2) {
+			spells[1] = (SpellDesc) desc.get(SpellArg.SPELL_2);
+		}
+		if (spells.length >= 1) {
+			spells[0] = (SpellDesc) desc.get(SpellArg.SPELL_1);
+		}
+		return spells;
 	}
 
 	@Override
-	public void setSourceEntity(EntityReference sourceEntity) {
-		super.setSourceEntity(sourceEntity);
-		for (Spell spell : getSpells()) {
-			spell.setSourceEntity(sourceEntity);
-		}
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 	}
+
 
 }

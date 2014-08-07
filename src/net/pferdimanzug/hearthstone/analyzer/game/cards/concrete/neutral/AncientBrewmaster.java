@@ -27,7 +27,7 @@ public class AncientBrewmaster extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion ancientBrewmaster = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(new ReturnMinionToHandSpell(), TargetSelection.FRIENDLY_MINIONS);
+		Battlecry battlecry = Battlecry.createBattlecry(ReturnMinionToHandSpell.create(), TargetSelection.FRIENDLY_MINIONS);
 		ancientBrewmaster.setBattlecry(battlecry);
 		return ancientBrewmaster;
 	}

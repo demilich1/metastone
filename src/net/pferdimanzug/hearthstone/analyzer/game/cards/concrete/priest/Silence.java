@@ -11,7 +11,7 @@ public class Silence extends SpellCard {
 	public Silence() {
 		super("Silence", Rarity.COMMON, HeroClass.PRIEST, 0);
 		setDescription("Silence a minion.");
-		setSpell(new SilenceSpell());
+		setSpell(SilenceSpell.create());
 		setTargetRequirement(TargetSelection.MINIONS);
 	}
 
