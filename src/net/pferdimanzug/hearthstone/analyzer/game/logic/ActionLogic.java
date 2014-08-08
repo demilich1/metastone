@@ -7,6 +7,7 @@ import java.util.List;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
+import net.pferdimanzug.hearthstone.analyzer.game.TurnState;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.EndTurnAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PhysicalAttackAction;
@@ -86,7 +87,10 @@ public class ActionLogic {
 		List<GameAction> validActions = new ArrayList<GameAction>();
 		validActions.addAll(getPhysicalAttackActions(context, player));
 		validActions.addAll(getPlayCardActions(context, player));
-		validActions.add(new EndTurnAction());
+		if (context.getTurnState() != TurnState.TURN_ENDED) {
+			validActions.add(new EndTurnAction());	
+		}
+		
 		return validActions;
 	}
 

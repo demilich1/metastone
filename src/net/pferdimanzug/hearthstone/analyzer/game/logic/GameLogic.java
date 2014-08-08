@@ -421,7 +421,7 @@ public class GameLogic implements Cloneable {
 
 		log("{} equips weapon {}", player.getHero(), weapon);
 		player.getHero().setWeapon(weapon);
-		weapon.setActive(context.getActivePlayer() == player);
+		weapon.setActive(context.getActivePlayerId() == playerId);
 		if (weapon.hasSpellTrigger()) {
 			SpellTrigger spellTrigger = weapon.getSpellTrigger();
 			addGameEventListener(player, spellTrigger, weapon);
@@ -743,6 +743,9 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void performGameAction(int playerId, GameAction action) {
+		if (playerId != context.getActivePlayerId()) {
+			logger.warn("Player {} tries to perform an action, but it is not his turn!", context.getPlayer(playerId));
+		}
 		action.execute(context, playerId);
 		checkForDeadEntities();
 	}

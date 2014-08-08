@@ -44,6 +44,7 @@ public class GameContext implements Cloneable, IDisposable {
 	protected int activePlayer;
 	private Player winner;
 	private MatchResult result;
+	private TurnState turnState = TurnState.TURN_ENDED;
 
 	private int turn;
 	private int actionsThisTurn;
@@ -78,6 +79,7 @@ public class GameContext implements Cloneable, IDisposable {
 		clone.turn = turn;
 		clone.actionsThisTurn = actionsThisTurn;
 		clone.result = result;
+		clone.turnState = turnState;
 		clone.winner = logicClone.getWinner(player1Clone, player2Clone);
 		clone.cardCostModifiers.clear();
 		for (CardCostModifier cardCostModifier : cardCostModifiers) {
@@ -122,6 +124,7 @@ public class GameContext implements Cloneable, IDisposable {
 		logic.endTurn(activePlayer);
 		activePlayer = activePlayer == PLAYER_1 ? PLAYER_2 : PLAYER_1;
 		onGameStateChanged();
+		turnState = TurnState.TURN_ENDED;
 	}
 
 	private Card findCardinCollection(CardCollection cardCollection, int cardId) {
@@ -146,6 +149,10 @@ public class GameContext implements Cloneable, IDisposable {
 		result = logic.getMatchResult(getActivePlayer(), getOpponent(getActivePlayer()));
 		winner = logic.getWinner(getActivePlayer(), getOpponent(getActivePlayer()));
 		return result != MatchResult.RUNNING;
+	}
+	
+	public int getActivePlayerId() {
+		return activePlayer;
 	}
 	
 	public Player getActivePlayer() {
@@ -277,7 +284,8 @@ public class GameContext implements Cloneable, IDisposable {
 	public void playTurn() {
 		if (++actionsThisTurn > 99) {
 			logger.warn("Turn has been forcefully ended after {} actions", actionsThisTurn);
-			startTurn(getOpponent(getActivePlayer()).getId());
+			endTurn();
+			startTurn(activePlayer);
 			return;
 		}
 		
@@ -355,7 +363,12 @@ public class GameContext implements Cloneable, IDisposable {
 		logic.startTurn(playerId);
 		onGameStateChanged();
 		actionsThisTurn = 0;
+		turnState = TurnState.TURN_IN_PROGRESS;
 		playTurn();
+	}
+	
+	public TurnState getTurnState() {
+		return turnState;
 	}
 
 	@Override

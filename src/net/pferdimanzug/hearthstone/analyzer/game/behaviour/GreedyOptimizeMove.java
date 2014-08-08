@@ -46,9 +46,8 @@ public class GreedyOptimizeMove extends Behaviour {
 		if (validActions.size() == 1) {
 			return validActions.get(0);
 		}
-		GameAction bestAction = new EndTurnAction();
-		EntityReference bestTarget = null;
-		int bestScore = heuristic.getScore(context, player.getId());
+		GameAction bestAction = null;
+		int bestScore = Integer.MIN_VALUE;
 		logger.debug("Current game state has a score of {}", bestScore, hashCode());
 		for (GameAction gameAction : validActions) {
 			GameContext simulationResult = simulateAction(context.clone(), player, gameAction);

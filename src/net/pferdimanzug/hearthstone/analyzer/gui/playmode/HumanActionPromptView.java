@@ -18,6 +18,7 @@ import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.HeroPowerAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PhysicalAttackAction;
@@ -42,6 +43,8 @@ public class HumanActionPromptView extends Stage {
 			actionString = "HERO POWER: " + card.getName();
 			break;
 		case BATTLECRY:
+			Battlecry battlecry = (Battlecry) action;
+			actionString = "BATTLECRY " + battlecry.getSpell().getSpellClass().getSimpleName();
 			break;
 		case PHYSICAL_ATTACK:
 			PhysicalAttackAction physicalAttackAction = (PhysicalAttackAction) action;

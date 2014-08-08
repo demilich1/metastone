@@ -1,27 +1,27 @@
 package net.pferdimanzug.hearthstone.analyzer.game.targeting;
 
-public class IdFactory implements Cloneable {
+import net.pferdimanzug.hearthstone.analyzer.game.logic.CustomCloneable;
+
+public class IdFactory extends CustomCloneable {
 	
 	public static final int UNASSIGNED = 0;
 	
 	private int id;
 	
+	public IdFactory() {
+	}
+	
+	private IdFactory(int resumeId) {
+		this.id = resumeId;
+	}
+	
 	@Override
 	public IdFactory clone() {
-		try {
-			return (IdFactory) super.clone();
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
-		return null;
+		return new IdFactory(id);
 	}
 	
 	public int generateId() {
 		return ++id;
 	}
 	
-	public void reset() {
-		id = 0;
-	}
-
 }

@@ -55,7 +55,7 @@ public class Battlecry extends GameAction {
 
 	@Override
 	public Battlecry clone() {
-		Battlecry clone = Battlecry.createBattlecry(spell, getTargetRequirement());
+		Battlecry clone = Battlecry.createBattlecry(getSpell(), getTargetRequirement());
 		clone.setActionSuffix(getActionSuffix());
 		clone.setCondition(getCondition());
 		clone.setEntityFilter(getEntityFilter());
@@ -66,12 +66,12 @@ public class Battlecry extends GameAction {
 
 	@Override
 	public void execute(GameContext context, int playerId) {
-		if (!spell.hasPredefinedTarget()) {
-			spell.setTarget(getTargetKey());
+		if (!getSpell().hasPredefinedTarget()) {
+			getSpell().setTarget(getTargetKey());
 		}
 
-		spell.setSourceEntity(getSource());
-		context.getLogic().castSpell(playerId, spell);
+		getSpell().setSourceEntity(getSource());
+		context.getLogic().castSpell(playerId, getSpell());
 	}
 
 	public IBattlecryCondition getCondition() {
@@ -105,6 +105,10 @@ public class Battlecry extends GameAction {
 
 	@Override
 	public String toString() {
-		return String.format("[%s '%s' resolvedLate:%s]", getActionType(), spell.getClass().getSimpleName(), resolvedLate);
+		return String.format("[%s '%s' resolvedLate:%s]", getActionType(), getSpell().getClass().getSimpleName(), resolvedLate);
+	}
+
+	public SpellDesc getSpell() {
+		return spell;
 	}
 }
