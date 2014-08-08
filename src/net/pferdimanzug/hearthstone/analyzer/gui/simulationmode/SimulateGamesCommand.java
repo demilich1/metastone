@@ -1,9 +1,11 @@
 package net.pferdimanzug.hearthstone.analyzer.gui.simulationmode;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
@@ -43,7 +45,7 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 				int poolSize = Math.max(1, Runtime.getRuntime().availableProcessors() / 2);
 				//int poolSize = 1;
 				logger.info("Starting simulation on {} cores", poolSize);
-				ExecutorService executor = new ScheduledThreadPoolExecutor(poolSize);
+				ExecutorService executor = Executors.newWorkStealingPool();
 				List<Future<GameContext>> tasks = new ArrayList<>(gameConfig.getNumberOfGames());
 
 				// send initial status update
@@ -55,26 +57,30 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 					Future<GameContext> future = executor.submit(task);
 					tasks.add(future);
 				}
-
-				executor.shutdown();
 				
-				while (!executor.isTerminated()) {
+				while (!tasks.isEmpty()) {
+					Iterator<Future<GameContext>> iterator = tasks.iterator();
+					while(iterator.hasNext()) {
+						
+						GameContext gameResult = null;
+						try {
+							gameResult = iterator.next().get();
+							iterator.remove();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						synchronized (result) {
+							result.getPlayer1Stats().merge(gameResult.getPlayer1().getStatistics());
+							result.getPlayer2Stats().merge(gameResult.getPlayer2().getStatistics());
+						}
+					}
 					try {
 						Thread.sleep(50);
 					} catch (InterruptedException e) {
 					}
 				}
 				
-				for (Future<GameContext> future : tasks) {
-					GameContext gameResult = null;
-					try {
-						gameResult = future.get();
-					} catch (Exception e) {
-						e.printStackTrace();
-					} 
-					result.getPlayer1Stats().merge(gameResult.getPlayer1().getStatistics());
-					result.getPlayer2Stats().merge(gameResult.getPlayer2().getStatistics());
-				}
+				executor.shutdown();
 
 				result.calculateMetaStatistics();
 				getFacade().sendNotification(GameNotification.SIMULATION_RESULT, result);
@@ -94,9 +100,6 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 			Notification<GameNotification> updateNotification = new Notification<>(GameNotification.SIMULATION_PROGRESS_UPDATE, progress);
 			getFacade().notifyObservers(updateNotification);
 		}
-		
-		
-		
 	}
 
 	private class PlayGameTask implements Callable<GameContext> {

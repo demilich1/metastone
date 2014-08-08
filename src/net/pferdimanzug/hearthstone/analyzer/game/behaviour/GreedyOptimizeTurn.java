@@ -68,9 +68,12 @@ public class GreedyOptimizeTurn extends Behaviour {
 
 		GameAction bestAction = null;
 		int bestScore = Integer.MIN_VALUE;
+		int beta = heuristic.getScore(context, player.getId());
+		
 		for (GameAction gameAction : validActions) {
 			logger.debug("********************* SIMULATION STARTS *********************");
-			int score = simulateAction(context, player.getId(), gameAction);
+			//int score = simulateAction(context, player.getId(), gameAction);
+			int score = alphaBeta(context, player.getId(), gameAction, 100, Integer.MIN_VALUE, beta);
 			if (score > bestScore) {
 				bestAction = gameAction;
 				bestScore = score;
@@ -89,6 +92,27 @@ public class GreedyOptimizeTurn extends Behaviour {
 		logger.info("Selecting best action {} with score {}", bestAction, bestScore);
 
 		return bestAction;
+	}
+	
+	private int alphaBeta(GameContext context, int playerId, GameAction action, int depth, int alpha, int beta) {
+		GameContext simulation = context.clone();
+		simulation.getLogic().performGameAction(playerId, action);
+		if (!evaluatedActions.containsKey(action.getActionType())) {
+			evaluatedActions.put(action.getActionType(), 0);
+		}
+		evaluatedActions.put(action.getActionType(), evaluatedActions.get(action.getActionType()) + 1);
+		if (depth == 0 || simulation.getActivePlayerId() != playerId || simulation.gameDecided()) {
+			return heuristic.getScore(simulation, playerId);
+		}
+		List<GameAction> validActions = simulation.getValidActions();
+		
+		for (GameAction gameAction : validActions) {
+			alpha = Math.max(alpha, alphaBeta(simulation, playerId, gameAction, depth - 1, alpha, beta));
+			if (beta <= alpha) {
+				break;
+			}
+		}
+		return alpha;
 	}
 
 	private int simulateAction(GameContext context, int playerId, GameAction action) {
