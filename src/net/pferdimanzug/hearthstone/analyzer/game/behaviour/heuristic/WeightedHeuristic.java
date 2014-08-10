@@ -64,9 +64,6 @@ public class WeightedHeuristic implements IGameStateHeuristic {
 			score -= calculateMinionScore(minion);
 		}
 		
-		score += player.getHero().getAttack();
-		score -= opponent.getHero().getAttack();
-		
 		return score;
 	}
 

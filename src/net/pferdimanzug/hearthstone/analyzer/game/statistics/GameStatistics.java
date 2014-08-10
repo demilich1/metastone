@@ -30,9 +30,7 @@ public class GameStatistics implements Cloneable {
 			add(Statistic.SPELLS_CAST, 1);
 			break;
 		case WEAPON:
-			add(Statistic.WEAPONS_EQUIPPED, 1);
 			break;
-
 		}
 	}
 
@@ -89,6 +87,10 @@ public class GameStatistics implements Cloneable {
 
 	public void set(Statistic key, Object value) {
 		stats.put(key, value);
+	}
+	
+	public void equipWeapon() {
+		add(Statistic.WEAPONS_EQUIPPED, 1);
 	}
 
 	public void startTurn() {

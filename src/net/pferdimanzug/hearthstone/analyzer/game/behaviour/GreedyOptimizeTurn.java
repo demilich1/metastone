@@ -22,6 +22,7 @@ public class GreedyOptimizeTurn extends Behaviour {
 
 	private int assignedGC;
 	private final HashMap<ActionType, Integer> evaluatedActions = new HashMap<ActionType, Integer>();
+	private final TranspositionTable table = new TranspositionTable();
 
 	public GreedyOptimizeTurn(IGameStateHeuristic heuristic) {
 		this.heuristic = heuristic;
@@ -65,15 +66,16 @@ public class GreedyOptimizeTurn extends Behaviour {
 
 		assignedGC = context.hashCode();
 		evaluatedActions.clear();
+		table.clear();
 
 		GameAction bestAction = null;
 		int bestScore = Integer.MIN_VALUE;
-		int beta = heuristic.getScore(context, player.getId());
+		int beta = heuristic.getScore(context, player.getId()) * 100;
 		
 		for (GameAction gameAction : validActions) {
 			logger.debug("********************* SIMULATION STARTS *********************");
 			//int score = simulateAction(context, player.getId(), gameAction);
-			int score = alphaBeta(context, player.getId(), gameAction, 100, Integer.MIN_VALUE, beta);
+			int score = alphaBeta(context, player.getId(), gameAction, 3, Integer.MIN_VALUE, beta);
 			if (score > bestScore) {
 				bestAction = gameAction;
 				bestScore = score;
@@ -85,11 +87,11 @@ public class GreedyOptimizeTurn extends Behaviour {
 		int totalActionCount = 0;
 		for (ActionType actionType : evaluatedActions.keySet()) {
 			int count = evaluatedActions.get(actionType);
-			logger.info("{} actions of type {} have been evaluated this turn", count, actionType);
+			logger.debug("{} actions of type {} have been evaluated this turn", count, actionType);
 			totalActionCount += count;
 		}
-		logger.info("{} actions in total have been evaluated this turn", totalActionCount);
-		logger.info("Selecting best action {} with score {}", bestAction, bestScore);
+		logger.debug("{} actions in total have been evaluated this turn", totalActionCount);
+		logger.debug("Selecting best action {} with score {}", bestAction, bestScore);
 
 		return bestAction;
 	}
@@ -106,12 +108,19 @@ public class GreedyOptimizeTurn extends Behaviour {
 		}
 		List<GameAction> validActions = simulation.getValidActions();
 		
-		for (GameAction gameAction : validActions) {
-			alpha = Math.max(alpha, alphaBeta(simulation, playerId, gameAction, depth - 1, alpha, beta));
-			if (beta <= alpha) {
-				break;
+		if (table.known(simulation)) {
+			return table.getScore(simulation);
+			//logger.info("GameState is known, has score of {}", score);
+		} else {
+			for (GameAction gameAction : validActions) {
+				alpha = Math.max(alpha, alphaBeta(simulation, playerId, gameAction, depth - 1, alpha, beta));
+//				if (alpha >= beta) {
+//					break;
+//				}
 			}
+			table.save(simulation, alpha); 
 		}
+
 		return alpha;
 	}
 

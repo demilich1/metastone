@@ -407,6 +407,7 @@ public class GameLogic implements Cloneable {
 
 	public void equipWeapon(int playerId, Weapon weapon) {
 		Player player = context.getPlayer(playerId);
+		player.getStatistics().equipWeapon();
 		weapon.setId(idFactory.generateId());
 		context.getEnvironment().put(Environment.SUMMONED_WEAPON, weapon);
 		Weapon currentWeapon = player.getHero().getWeapon();
