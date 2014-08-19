@@ -32,7 +32,10 @@ public class TransformMinionSpell extends Spell {
 		Minion minion = (Minion) target;
 		Minion transformTarget = (Minion) desc.get(SpellArg.ENTITY);
 		MinionCard templateCard = (MinionCard) desc.get(SpellArg.CARD);
-		templateCard = (MinionCard) templateCard.clone();
+		if (templateCard != null) {
+			templateCard = (MinionCard) templateCard.clone();	
+		}
+		
 		Minion newMinion = transformTarget != null ? transformTarget : templateCard.summon();
 		logger.debug("{} is transformed into a {}", minion, newMinion);
 		context.getLogic().removeMinion(minion);
