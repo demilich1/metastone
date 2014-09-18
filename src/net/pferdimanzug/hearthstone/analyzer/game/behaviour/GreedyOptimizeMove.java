@@ -5,12 +5,10 @@ import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.EndTurnAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.heuristic.IGameStateHeuristic;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,11 +45,11 @@ public class GreedyOptimizeMove extends Behaviour {
 			return validActions.get(0);
 		}
 		GameAction bestAction = null;
-		int bestScore = Integer.MIN_VALUE;
+		double bestScore = Integer.MIN_VALUE;
 		logger.debug("Current game state has a score of {}", bestScore, hashCode());
 		for (GameAction gameAction : validActions) {
 			GameContext simulationResult = simulateAction(context.clone(), player, gameAction);
-			int gameStateScore = heuristic.getScore(simulationResult, player.getId());
+			double gameStateScore = heuristic.getScore(simulationResult, player.getId());
 			logger.debug("Action {} gains score of {}", gameAction, gameStateScore);
 			if (gameStateScore > bestScore) {
 				bestScore = gameStateScore;

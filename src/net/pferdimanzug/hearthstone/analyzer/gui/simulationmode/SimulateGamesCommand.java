@@ -12,6 +12,8 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.heuristic.TDWeightHeuristic;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.heuristic.WeightedFeature;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 import net.pferdimanzug.hearthstone.analyzer.gui.gameconfig.GameConfig;
 import net.pferdimanzug.hearthstone.analyzer.gui.gameconfig.PlayerConfig;
@@ -37,6 +39,12 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 		final SimulationResult result = new SimulationResult(gameConfig);
 
 		gamesCompleted = 0;
+		
+		logger.info("BEFORE");
+		for (WeightedFeature feature : TDWeightHeuristic.weights.keySet()) {
+			logger.info(feature + ": " + TDWeightHeuristic.weights.get(feature));
+			
+		}
 
 		Thread t = new Thread(new Runnable() {
 
@@ -46,6 +54,7 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 				//int poolSize = 1;
 				logger.info("Starting simulation on {} cores", poolSize);
 				ExecutorService executor = Executors.newWorkStealingPool();
+				//ExecutorService executor = Executors.newSingleThreadExecutor();
 				List<Future<GameContext>> tasks = new ArrayList<>(gameConfig.getNumberOfGames());
 
 				// send initial status update
@@ -84,6 +93,12 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 
 				result.calculateMetaStatistics();
 				getFacade().sendNotification(GameNotification.SIMULATION_RESULT, result);
+				
+				logger.info("AFTER");
+				for (WeightedFeature feature : TDWeightHeuristic.weights.keySet()) {
+					logger.info(feature + ": " + TDWeightHeuristic.weights.get(feature));
+					
+				}
 
 			}
 		});

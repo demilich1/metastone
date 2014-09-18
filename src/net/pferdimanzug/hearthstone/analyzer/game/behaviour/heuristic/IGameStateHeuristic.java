@@ -4,5 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 
 public interface IGameStateHeuristic {
 
-	int getScore(GameContext context, int playerId);
+	double getScore(GameContext context, int playerId);
+	
+	void onActionSelected(GameContext context, int playerId);
 }

@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
 public class GameContext implements Cloneable, IDisposable {
 	public static final int PLAYER_1 = 0;
 	public static final int PLAYER_2 = 1;
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(GameContext.class);
 
 	private final Player[] players = new Player[2];
@@ -40,7 +40,7 @@ public class GameContext implements Cloneable, IDisposable {
 	private TriggerManager triggerManager = new TriggerManager();
 	private final HashMap<Environment, Object> environment = new HashMap<>();
 	private final List<CardCostModifier> cardCostModifiers = new ArrayList<>();
-	
+
 	protected int activePlayer;
 	private Player winner;
 	private MatchResult result;
@@ -70,9 +70,9 @@ public class GameContext implements Cloneable, IDisposable {
 	public GameContext clone() {
 		GameLogic logicClone = getLogic().clone();
 		Player player1Clone = getPlayer1().clone();
-		//player1Clone.getDeck().shuffle();
+		// player1Clone.getDeck().shuffle();
 		Player player2Clone = getPlayer2().clone();
-		//player2Clone.getDeck().shuffle();
+		// player2Clone.getDeck().shuffle();
 		GameContext clone = new GameContext(player1Clone, player2Clone, logicClone);
 		clone.triggerManager = triggerManager.clone();
 		clone.activePlayer = activePlayer;
@@ -135,26 +135,26 @@ public class GameContext implements Cloneable, IDisposable {
 		}
 		return null;
 	}
-	
+
 	public void fireGameEvent(GameEvent gameEvent) {
 		fireGameEvent(gameEvent, TriggerLayer.DEFAULT);
 	}
-	
+
 	public void fireGameEvent(GameEvent gameEvent, TriggerLayer layer) {
 		gameEvent.setTriggerLayer(layer);
 		triggerManager.fireGameEvent(gameEvent);
 	}
-	
+
 	public boolean gameDecided() {
 		result = logic.getMatchResult(getActivePlayer(), getOpponent(getActivePlayer()));
 		winner = logic.getWinner(getActivePlayer(), getOpponent(getActivePlayer()));
 		return result != MatchResult.RUNNING;
 	}
-	
+
 	public int getActivePlayerId() {
 		return activePlayer;
 	}
-	
+
 	public Player getActivePlayer() {
 		return getPlayer(activePlayer);
 	}
@@ -181,11 +181,11 @@ public class GameContext implements Cloneable, IDisposable {
 	public List<CardCostModifier> getCardCostModifiers() {
 		return cardCostModifiers;
 	}
-	
+
 	public HashMap<Environment, Object> getEnvironment() {
 		return environment;
 	}
-	
+
 	public GameLogic getLogic() {
 		return logic;
 	}
@@ -193,19 +193,19 @@ public class GameContext implements Cloneable, IDisposable {
 	public int getMinionCount(Player player) {
 		return player.getMinions().size();
 	}
-	
+
 	public Player getOpponent(Player player) {
 		return player.getId() == PLAYER_1 ? getPlayer2() : getPlayer1();
 	}
-	
+
 	public Player getPlayer(int index) {
 		return players[index];
 	}
-	
+
 	public Player getPlayer1() {
 		return getPlayers()[PLAYER_1];
 	}
-	
+
 	public Player getPlayer2() {
 		return getPlayers()[PLAYER_2];
 	}
@@ -213,7 +213,7 @@ public class GameContext implements Cloneable, IDisposable {
 	public Player[] getPlayers() {
 		return players;
 	}
-	
+
 	public int getScore(int playerId) {
 		switch (result) {
 		case DOUBLE_LOSS:
@@ -235,7 +235,7 @@ public class GameContext implements Cloneable, IDisposable {
 		}
 		return (Stack<Minion>) environment.get(Environment.SUMMON_STACK);
 	}
-	
+
 	public int getTotalMinionCount() {
 		int totalMinionCount = 0;
 		for (int i = 0; i < players.length; i++) {
@@ -243,7 +243,7 @@ public class GameContext implements Cloneable, IDisposable {
 		}
 		return totalMinionCount;
 	}
-	
+
 	public List<IGameEventListener> getTriggersAssociatedWith(EntityReference entityReference) {
 		return triggerManager.getTriggersAssociatedWith(entityReference);
 	}
@@ -251,20 +251,20 @@ public class GameContext implements Cloneable, IDisposable {
 	public int getTurn() {
 		return turn;
 	}
-	
+
 	public List<GameAction> getValidActions() {
 		if (gameDecided()) {
 			return new ArrayList<>();
 		}
 		return logic.getValidActions(activePlayer);
 	}
-	
-	protected void onGameStateChanged() {	
+
+	protected void onGameStateChanged() {
 	}
-	
+
 	protected void onWillPerformAction(GameAction action) {
 	}
-	
+
 	private void performAction(int playerId, GameAction gameAction) {
 		onWillPerformAction(gameAction);
 		logic.performGameAction(playerId, gameAction);
@@ -280,7 +280,7 @@ public class GameContext implements Cloneable, IDisposable {
 		logic.init(getOpponent(getActivePlayer()).getId(), false);
 		startTurn(activePlayer);
 	}
-	
+
 	public void playTurn() {
 		if (++actionsThisTurn > 99) {
 			logger.warn("Turn has been forcefully ended after {} actions", actionsThisTurn);
@@ -288,41 +288,41 @@ public class GameContext implements Cloneable, IDisposable {
 			startTurn(activePlayer);
 			return;
 		}
-		
+
 		if (gameDecided()) {
 			endGame();
 			return;
 		}
-		
+
 		GameAction nextAction = getActivePlayer().getBehaviour().requestAction(this, getActivePlayer(), getValidActions());
+		if (nextAction == null) {
+			throw new RuntimeException("Behaviour " + getActivePlayer().getBehaviour().getName() + " selected NULL action while "
+					+ getValidActions().size() + " actions were available");
+		}
 		performAction(activePlayer, nextAction);
-		
+
 		if (nextAction.getActionType() != ActionType.END_TURN) {
 			playTurn();
 		} else {
 			startTurn(activePlayer);
 		}
-		
+
 		/*
-		GameAction nextAction = player.getBehaviour().requestAction(this, player, logic.getValidActions(player.getId()));
-		while (nextAction != null && player == activePlayer) {
-			performAction(player.getId(), nextAction);
-			if (++actionsThisTurn > 99) {
-				logger.warn("Turn has been forcefully ended after {} actions", actionsThisTurn);
-				return;
-			}
-			if (gameDecided()) {
-				endGame();
-				return;
-			}
-			nextAction = player.getBehaviour().requestAction(this, player, logic.getValidActions(player.getId()));
-		}*/
+		 * GameAction nextAction = player.getBehaviour().requestAction(this,
+		 * player, logic.getValidActions(player.getId())); while (nextAction !=
+		 * null && player == activePlayer) { performAction(player.getId(),
+		 * nextAction); if (++actionsThisTurn > 99) {
+		 * logger.warn("Turn has been forcefully ended after {} actions",
+		 * actionsThisTurn); return; } if (gameDecided()) { endGame(); return; }
+		 * nextAction = player.getBehaviour().requestAction(this, player,
+		 * logic.getValidActions(player.getId())); }
+		 */
 	}
 
 	public void removeTriggersAssociatedWith(EntityReference entityReference) {
 		triggerManager.removeTriggersAssociatedWith(entityReference);
 	}
-	
+
 	public Card resolveCardReference(CardReference cardReference) {
 		Player player = getPlayer(cardReference.getPlayerId());
 		Card pendingCard = (Card) getEnvironment().get(Environment.PENDING_CARD);
@@ -335,25 +335,25 @@ public class GameContext implements Cloneable, IDisposable {
 		case HAND:
 			return findCardinCollection(player.getHand(), cardReference.getCardId());
 		case PENDING:
-			return (Card)getEnvironment().get(Environment.PENDING_CARD);
+			return (Card) getEnvironment().get(Environment.PENDING_CARD);
 		case HERO_POWER:
 			return player.getHero().getHeroPower();
 		default:
 			break;
-		
+
 		}
 		logger.error("Could not resolve cardReference {}", cardReference);
 		new RuntimeException().printStackTrace();
 		return null;
 	}
-	
+
 	public Entity resolveSingleTarget(EntityReference targetKey) {
 		if (targetKey == null) {
 			return null;
 		}
 		return targetLogic.findEntity(this, targetKey);
 	}
-	
+
 	public List<Entity> resolveTarget(Player player, Actor source, EntityReference targetKey) {
 		return targetLogic.resolveTargetKey(this, player, source, targetKey);
 	}
@@ -366,14 +366,14 @@ public class GameContext implements Cloneable, IDisposable {
 		turnState = TurnState.TURN_IN_PROGRESS;
 		playTurn();
 	}
-	
+
 	public TurnState getTurnState() {
 		return turnState;
 	}
 
 	@Override
 	public String toString() {
-		StringBuilder result = new StringBuilder("GameContext hashCode: " + hashCode() +"\nPlayer: ");
+		StringBuilder result = new StringBuilder("GameContext hashCode: " + hashCode() + "\nPlayer: ");
 		for (Player player : players) {
 			result.append(player.getName());
 			result.append(" Mana: ");

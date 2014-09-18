@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
 public class WeightedHeuristic implements IGameStateHeuristic {
 
-	private int calculateMinionScore(Minion minion) {
+	private float calculateMinionScore(Minion minion) {
 		float minionScore = minion.getAttack() + minion.getHp();
 		float baseScore = minionScore;
 		if (minion.hasTag(GameTag.FROZEN)) {
@@ -35,19 +35,19 @@ public class WeightedHeuristic implements IGameStateHeuristic {
 			minionScore += 1.5f * baseScore;
 		}
 		
-		return (int) minionScore;
+		return minionScore;
 	}
 	
 	@Override
-	public int getScore(GameContext context, int playerId) {
-		int score = 0;
+	public double getScore(GameContext context, int playerId) {
+		float score = 0;
 		Player player = context.getPlayer(playerId);
 		Player opponent = context.getOpponent(player);
 		if (player.getHero().isDead()) {
-			return Integer.MIN_VALUE;
+			return Float.NEGATIVE_INFINITY;
 		} 
 		if (opponent.getHero().isDead()) {
-			return Integer.MAX_VALUE;
+			return Float.POSITIVE_INFINITY;
 		} 
 		int ownHp = player.getHero().getHp() + player.getHero().getArmor();
 		int opponentHp = opponent.getHero().getHp() + opponent.getHero().getArmor();
@@ -56,7 +56,7 @@ public class WeightedHeuristic implements IGameStateHeuristic {
 		score += player.getHand().getCount() * 3;
 		score -= opponent.getHand().getCount() * 3;
 		score += player.getMinions().size() * 2;
-		score -= player.getMinions().size() * 2;
+		score -= opponent.getMinions().size() * 2;
 		for (Minion minion : player.getMinions()) {
 			score += calculateMinionScore(minion);
 		}
@@ -65,6 +65,10 @@ public class WeightedHeuristic implements IGameStateHeuristic {
 		}
 		
 		return score;
+	}
+
+	@Override
+	public void onActionSelected(GameContext context, int playerId) {
 	}
 
 }

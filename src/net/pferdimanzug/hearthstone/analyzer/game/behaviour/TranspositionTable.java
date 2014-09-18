@@ -10,7 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public class TranspositionTable {
 	
-	private HashMap<Integer, Integer> knownScores = new HashMap<Integer, Integer>();
+	private HashMap<Integer, Double> knownScores = new HashMap<Integer, Double>();
 	//private HashMap<Integer, GameContext> debug = new HashMap<Integer, GameContext>();
 	private int cachedKey;
 	private GameContext cachedState;
@@ -67,7 +67,7 @@ public class TranspositionTable {
 		knownScores.clear();
 	}
 	
-	public void save(GameContext context, int score) {
+	public void save(GameContext context, double score) {
 		int key = hash(context);
 		knownScores.put(key, score);
 		//debug.put(key, context);
@@ -83,7 +83,7 @@ public class TranspositionTable {
 		return knownScores.containsKey(key);
 	}
 	
-	public int getScore(GameContext context) {
+	public double getScore(GameContext context) {
 		return knownScores.get(hash(context));
 	}
 
