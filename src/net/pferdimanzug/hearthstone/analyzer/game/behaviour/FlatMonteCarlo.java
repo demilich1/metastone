@@ -59,8 +59,7 @@ public class FlatMonteCarlo extends Behaviour {
 		}
 
 		simulation.playTurn();
-
-		return simulation.getScore(playerId);
+		return simulation.getWinningPlayerId() == playerId ? 1 : 0;
 	}
 
 	@Override

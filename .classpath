@@ -15,6 +15,12 @@
 	<classpathentry kind="lib" path="lib/httpcomponents-client-4.3.4/lib/httpcore-4.3.2.jar"/>
 	<classpathentry kind="lib" path="lib/httpcomponents-client-4.3.4/lib/httpmime-4.3.4.jar"/>
 	<classpathentry kind="lib" path="lib/nitty-gritty-mvc.jar"/>
+	<classpathentry kind="lib" path="lib/encog-core-3.2.0/lib/commons-math3-3.0.jar"/>
+	<classpathentry kind="lib" path="lib/encog-core-3.2.0/lib/encog-core-3.2.0.jar" sourcepath="lib/encog-core-3.2.0/src">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/D:/projects/java/HearthstoneAnalyzer/lib/encog-core-3.2.0/apidocs/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.testng.TESTNG_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/gson"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/apache-commons-io"/>

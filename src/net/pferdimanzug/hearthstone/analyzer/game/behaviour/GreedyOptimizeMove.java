@@ -44,8 +44,8 @@ public class GreedyOptimizeMove extends Behaviour {
 		if (validActions.size() == 1) {
 			return validActions.get(0);
 		}
-		GameAction bestAction = null;
-		double bestScore = Integer.MIN_VALUE;
+		GameAction bestAction = validActions.get(0);
+		double bestScore = Double.NEGATIVE_INFINITY;
 		logger.debug("Current game state has a score of {}", bestScore, hashCode());
 		for (GameAction gameAction : validActions) {
 			GameContext simulationResult = simulateAction(context.clone(), player, gameAction);

@@ -16,4 +16,6 @@ public interface IBehaviour extends Cloneable {
 	List<Card> mulligan(GameContext context, Player player, List<Card> cards);
 	
 	GameAction requestAction(GameContext context, Player player, List<GameAction> validActions);
+	
+	void onGameOver(GameContext context, int playerId, int winningPlayerId);
 }

@@ -7,13 +7,10 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.heuristic.TDWeightHeuristic;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.heuristic.WeightedFeature;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 import net.pferdimanzug.hearthstone.analyzer.gui.gameconfig.GameConfig;
 import net.pferdimanzug.hearthstone.analyzer.gui.gameconfig.PlayerConfig;
@@ -40,19 +37,11 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 
 		gamesCompleted = 0;
 		
-		logger.info("BEFORE");
-		for (WeightedFeature feature : TDWeightHeuristic.weights.keySet()) {
-			logger.info(feature + ": " + TDWeightHeuristic.weights.get(feature));
-			
-		}
-
 		Thread t = new Thread(new Runnable() {
 
 			@Override
 			public void run() {
-				int poolSize = Math.max(1, Runtime.getRuntime().availableProcessors() / 2);
-				//int poolSize = 1;
-				logger.info("Starting simulation on {} cores", poolSize);
+				logger.info("Simulation started");
 				ExecutorService executor = Executors.newWorkStealingPool();
 				//ExecutorService executor = Executors.newSingleThreadExecutor();
 				List<Future<GameContext>> tasks = new ArrayList<>(gameConfig.getNumberOfGames());
@@ -93,12 +82,6 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 
 				result.calculateMetaStatistics();
 				getFacade().sendNotification(GameNotification.SIMULATION_RESULT, result);
-				
-				logger.info("AFTER");
-				for (WeightedFeature feature : TDWeightHeuristic.weights.keySet()) {
-					logger.info(feature + ": " + TDWeightHeuristic.weights.get(feature));
-					
-				}
 
 			}
 		});

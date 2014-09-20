@@ -8,7 +8,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardReference;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public abstract class PlayCardAction extends GameAction {
+
+	public static Logger logger = LoggerFactory.getLogger(PlayCardAction.class);
 
 	private final CardReference cardReference;
 
@@ -28,9 +33,9 @@ public abstract class PlayCardAction extends GameAction {
 
 	@Override
 	public void execute(GameContext context, int playerId) {
-			Card card = context.resolveCardReference(getCardReference());
-			context.getEnvironment().put(Environment.PENDING_CARD, card);
-			
+		Card card = context.resolveCardReference(getCardReference());
+		context.getEnvironment().put(Environment.PENDING_CARD, card);
+
 		try {
 			context.getLogic().playCard(playerId, getCardReference());
 			// card was countered, do not actually resolve its effects
@@ -39,8 +44,13 @@ public abstract class PlayCardAction extends GameAction {
 			}
 
 		} catch (Exception e) {
-			System.out.println("ERROR while playing card " + card + " id:" + card.getId());
-			throw e;
+
+			logger.error("ERROR while playing card " + card + " reference: " + cardReference);
+			logger.error("Player1: " + context.getPlayer1().getName());
+			logger.error("Player2: " + context.getPlayer2().getName());
+			e.printStackTrace();
+			System.exit(-1);
+			// throw e;
 		}
 
 		context.getLogic().afterCardPlayed(playerId, getCardReference());

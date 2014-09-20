@@ -15,8 +15,6 @@ public class Sap extends SpellCard {
 		setTargetRequirement(TargetSelection.ENEMY_MINIONS);
 	}
 
-
-
 	@Override
 	public int getTypeId() {
 		return 302;

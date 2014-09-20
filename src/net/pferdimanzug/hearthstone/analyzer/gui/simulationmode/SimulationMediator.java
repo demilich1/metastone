@@ -6,7 +6,6 @@ import java.util.List;
 import javafx.application.Platform;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
-import net.pferdimanzug.hearthstone.analyzer.gui.gameconfig.GameConfig;
 import net.pferdimanzug.hearthstone.analyzer.utils.Tuple;
 
 import org.slf4j.Logger;
@@ -42,8 +41,7 @@ public class SimulationMediator extends Mediator<GameNotification> {
 			break;
 		case COMMIT_SIMULATIONMODE_CONFIG:
 			getFacade().sendNotification(GameNotification.SHOW_MODAL_DIALOG, waitView);
-			GameConfig gameConfig = (GameConfig) notification.getBody();
-			getFacade().sendNotification(GameNotification.SIMULATE_GAMES, gameConfig);
+			getFacade().sendNotification(GameNotification.SIMULATE_GAMES, notification.getBody());
 			break;
 		case SIMULATION_PROGRESS_UPDATE:
 			Tuple<Integer, Integer> progress = (Tuple<Integer, Integer>) notification.getBody();

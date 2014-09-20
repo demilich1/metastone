@@ -1,0 +1,24 @@
+-classpath
+'/usr/share/tomcat7/.jenkins/jobs/Encog Mainline Core/workspace/target/classes:/usr/share/tomcat7/.m2/repository/org/apache/commons/commons-math3/3.0/commons-math3-3.0.jar'
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'/usr/share/tomcat7/.jenkins/jobs/Encog Mainline Core/workspace/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2014. All Rights Reserved.'
+-charset
+'UTF-8'
+-d
+'/usr/share/tomcat7/.jenkins/jobs/Encog Mainline Core/workspace/target/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'Encog Core 3.2.0 API'
+-link
+'http://java.sun.com/javase/6/docs/api'
+-use
+-version
+-windowtitle
+'Encog Core 3.2.0 API'

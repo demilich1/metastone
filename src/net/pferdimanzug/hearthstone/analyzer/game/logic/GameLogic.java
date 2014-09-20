@@ -805,9 +805,7 @@ public class GameLogic implements Cloneable {
 
 	public void receiveCard(int playerId, Card card) {
 		Player player = context.getPlayer(playerId);
-		if (card.getId() == IdFactory.UNASSIGNED) {
-			card.setId(idFactory.generateId());
-		}
+		card.setId(idFactory.generateId());
 		card.setOwner(playerId);
 		CardCollection hand = player.getHand();
 		if (hand.getCount() < MAX_HAND_CARDS) {

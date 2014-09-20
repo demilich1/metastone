@@ -125,22 +125,24 @@ class Node {
 
 	public int rollOut(Node node) {
 		if (node.getState().gameDecided()) {
-			return node.getState().getScore(getPlayer());
+			GameContext state = node.getState();
+			return state.getWinningPlayerId() == getPlayer() ? 1 : 0;
 		}
 
 		GameContext simulation = node.getState().clone();
 		for (Player player : simulation.getPlayers()) {
 			player.setBehaviour(new PlayRandomBehaviour());
 		}
-		// if this state was reached by performing 'End Turn' then we need to start the new turn first
+		// if this state was reached by performing 'End Turn' then we need to
+		// start the new turn first
 		if (node.incomingAction.getActionType() == ActionType.END_TURN) {
-			//simulation.startTurn(simulation.getActivePlayer().getId());
+			// simulation.startTurn(simulation.getActivePlayer().getId());
 			simulation.playTurn();
 		} else {
 			simulation.playTurn();
 		}
-		
-		return simulation.getScore(getPlayer());
+
+		return simulation.getWinningPlayerId() == getPlayer() ? 1 : 0; 
 	}
 
 	private void updateStats(int value) {

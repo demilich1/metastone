@@ -9,6 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
@@ -20,33 +21,46 @@ public class PowerOfTheWild extends ChooseOneCard {
 		setCard1(new PowerOfTheWildBuff());
 		setCard2(new PowerOfTheWildPanther());
 	}
-	
+
 	@Override
 	public int getTypeId() {
 		return 17;
 	}
-	
+
 	private class PowerOfTheWildBuff extends SpellCard {
 
 		protected PowerOfTheWildBuff() {
 			super("Power of the Wild (+1/+1)", Rarity.COMMON, HeroClass.DRUID, 2);
+			setDescription("Give your minions +1/+1");
+
 			setSpell(BuffSpell.create(1, 1));
 			setTargetRequirement(TargetSelection.NONE);
 			setPredefinedTarget(EntityReference.FRIENDLY_MINIONS);
 		}
+
 	}
 
-	private class PowerOfTheWildPanther extends MinionCard {
-		
+	private class PowerOfTheWildPanther extends SpellCard {
+
 		public PowerOfTheWildPanther() {
-			super("Panther", 3, 2, Rarity.COMMON, HeroClass.DRUID, 2);
-			setRace(Race.BEAST);
+			super("Power of the Wild (Summon Panther)", Rarity.COMMON, HeroClass.DRUID, 2);
+			setDescription("Summon a 3/2 Panther.");
+
+			setSpell(SummonSpell.create(new Panther()));
+			setTargetRequirement(TargetSelection.NONE);
 		}
 
-		@Override
-		public Minion summon() {
-			return createMinion();
+		private class Panther extends MinionCard {
+			public Panther() {
+				super("Panther", 3, 2, Rarity.COMMON, HeroClass.DRUID, 2);
+				setRace(Race.BEAST);
+			}
+
+			@Override
+			public Minion summon() {
+				return createMinion();
+			}
 		}
-		
+
 	}
 }

@@ -23,6 +23,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.PlayRandomBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.heuristic.TDWeightHeuristic;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.heuristic.WeightedHeuristic;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.learning.TDLearningBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.DeckFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Anduin;
@@ -129,6 +130,7 @@ public class PlayerConfigView extends VBox {
 		
 		behaviourList.add(new GreedyOptimizeTurn(new TDWeightHeuristic()));
 		behaviourList.add(new GreedyOptimizeMove(new WeightedHeuristic()));
+		behaviourList.add(new TDLearningBehaviour(false));
 		behaviourList.add(new NoAggressionBehaviour());
 
 		behaviourBox.setItems(behaviourList);

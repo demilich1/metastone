@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.actions;
 
+import net.pferdimanzug.hearthstone.analyzer.game.Environment;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
@@ -24,10 +25,8 @@ public class PlayMinionCardAction extends PlayCardAction {
 
 	@Override
 	protected void play(GameContext context, int playerId) {
-		MinionCard minionCard = (MinionCard) context.resolveCardReference(getCardReference());
-		if (minionCard == null) {
-			System.out.println("MinionCard is NULL: " + getCardReference());
-		}
+		//MinionCard minionCard = (MinionCard) context.resolveCardReference(getCardReference());
+		MinionCard minionCard = (MinionCard) context.getEnvironment().get(Environment.PENDING_CARD);
 		Actor nextTo = (Actor) (getTargetKey() != null ? context.resolveSingleTarget(getTargetKey()) : null);
 		Minion minion = minionCard.summon();
 		if (battlecry != null) {

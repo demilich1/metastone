@@ -11,6 +11,7 @@ import net.pferdimanzug.hearthstone.analyzer.gui.mainmenu.MainMenuMediator;
 import net.pferdimanzug.hearthstone.analyzer.gui.playmode.PlayModeMediator;
 import net.pferdimanzug.hearthstone.analyzer.gui.playmode.config.PlayModeConfigMediator;
 import net.pferdimanzug.hearthstone.analyzer.gui.simulationmode.SimulationMediator;
+import net.pferdimanzug.hearthstone.analyzer.gui.trainingmode.TrainingModeMediator;
 import de.pferdimanzug.nittygrittymvc.Mediator;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
@@ -58,6 +59,7 @@ public class ApplicationMediator extends Mediator<GameNotification> {
 		getFacade().removeMediator(PlayModeConfigMediator.NAME);
 		getFacade().removeMediator(DeckBuilderMediator.NAME);
 		getFacade().removeMediator(SimulationMediator.NAME);
+		getFacade().removeMediator(TrainingModeMediator.NAME);
 	}
 
 }

@@ -18,6 +18,7 @@ public class LorewalkerChoSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		Card targetCard = (Card) target;
 		Player opponent = context.getOpponent(player);
-		context.getLogic().receiveCard(opponent.getId(), targetCard.clone());
+		Card copy = targetCard.clone();
+		context.getLogic().receiveCard(opponent.getId(), copy);
 	}
 }

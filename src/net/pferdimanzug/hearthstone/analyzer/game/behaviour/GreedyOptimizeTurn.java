@@ -80,11 +80,9 @@ public class GreedyOptimizeTurn extends Behaviour {
 
 		GameAction bestAction = validActions.get(0);
 		double bestScore = Double.NEGATIVE_INFINITY;
-		// int beta = heuristic.getScore(context, player.getId()) * 100;
 
 		for (GameAction gameAction : validActions) {
 			logger.debug("********************* SIMULATION STARTS *********************");
-			// int score = simulateAction(context, player.getId(), gameAction);
 			double score = alphaBeta(context, player.getId(), gameAction, 3);
 			if (score > bestScore) {
 				bestAction = gameAction;

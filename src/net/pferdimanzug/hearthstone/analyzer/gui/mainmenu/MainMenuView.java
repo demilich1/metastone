@@ -19,6 +19,9 @@ public class MainMenuView extends BorderPane {
 
 	@FXML
 	private Button simulationModeButton;
+	
+	@FXML
+	private Button trainingModeButton;
 
 	public MainMenuView() {
 
@@ -38,6 +41,9 @@ public class MainMenuView extends BorderPane {
 		
 		simulationModeButton.setOnAction(event -> ApplicationFacade.getInstance().sendNotification(
 				GameNotification.SIMULATION_MODE_SELECTED));
+		
+		trainingModeButton.setOnAction(event -> ApplicationFacade.getInstance().sendNotification(
+				GameNotification.TRAINING_MODE_SELECTED));
 	}
 
 }

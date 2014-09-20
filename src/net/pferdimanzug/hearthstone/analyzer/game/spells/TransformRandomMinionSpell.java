@@ -22,7 +22,7 @@ public class TransformRandomMinionSpell extends TransformMinionSpell {
 			return;
 		}
 		Entity randomTarget = SpellUtils.getRandomTarget(targets);
-		super.onCast(context, player, null, randomTarget);
+		super.onCast(context, player, desc, randomTarget);
 	}
 
 }

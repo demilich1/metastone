@@ -29,6 +29,7 @@ public class ImpMaster extends MinionCard {
 	public Minion summon() {
 		Minion impMaster = createMinion();
 		SpellDesc damageSelfSpell = DamageSpell.create(1);
+		damageSelfSpell.setTarget(EntityReference.SELF);
 		SpellDesc summonSpell = SummonSpell.create(new Imp());
 		summonSpell.setTarget(EntityReference.NONE);
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), MetaSpell.create(damageSelfSpell, summonSpell));

@@ -33,7 +33,7 @@ public class ReturnMinionToHandSpell extends Spell {
 		Player owner = context.getPlayer(minion.getOwner());
 		logger.debug("{} is returned to {}'s hand", minion, owner.getName());
 		context.getLogic().removeMinion(minion);
-		Card sourceCard = minion.getSourceCard();
+		Card sourceCard = minion.getSourceCard().clone();
 		context.getLogic().receiveCard(minion.getOwner(), sourceCard);
 		sourceCard.setTag(GameTag.MANA_COST_MODIFIER, manaCostModifier);
 	}

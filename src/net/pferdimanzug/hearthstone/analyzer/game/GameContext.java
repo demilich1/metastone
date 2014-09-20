@@ -107,6 +107,10 @@ public class GameContext implements Cloneable, IDisposable {
 
 	private void endGame() {
 		winner = logic.getWinner(getActivePlayer(), getOpponent(getActivePlayer()));
+		for (Player player : getPlayers()) {
+			player.getBehaviour().onGameOver(this, player.getId(), winner != null ? winner.getId() : -1);
+		}
+
 		if (winner != null) {
 			logger.debug("Game finished after " + turn + " turns, the winner is: " + winner.getName());
 			winner.getStatistics().gameWon();
@@ -214,18 +218,8 @@ public class GameContext implements Cloneable, IDisposable {
 		return players;
 	}
 
-	public int getScore(int playerId) {
-		switch (result) {
-		case DOUBLE_LOSS:
-			return 0;
-		case RUNNING:
-			throw new IllegalStateException("Score cannot be determined, game still running");
-		case WON:
-			return winner.getId() == playerId ? 1 : 0;
-		default:
-			break;
-		}
-		throw new IllegalStateException("Invalid match result: " + result);
+	public int getWinningPlayerId() {
+		return winner == null ? -1 : winner.getId();
 	}
 
 	@SuppressWarnings("unchecked")

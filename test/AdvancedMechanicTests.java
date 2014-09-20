@@ -42,16 +42,18 @@ public class AdvancedMechanicTests extends BasicTests {
 		Player opponent = context.getPlayer2();
 		player.getHand().removeAll();
 
+		context.endTurn();
 		TestMinionCard minionCard = new TestMinionCard(1, 4);
 		playCard(context, opponent, minionCard);
+		context.endTurn();
 
 		player.getHero().getHeroPower().setUsed(true);
 		Card wrath = new Wrath();
 		IChooseOneCard wrathChooseOne = (IChooseOneCard) wrath;
 		context.getLogic().receiveCard(player.getId(), wrath);
-		player.setMana(wrath.getBaseManaCost());
+		player.setMana(wrath.getBaseManaCost() + 1);
 		List<GameAction> validActions = context.getLogic().getValidActions(player.getId());
-		Assert.assertEquals(validActions.size(), 3);
+		Assert.assertEquals(validActions.size(), 2);
 		Assert.assertEquals(player.getHand().getCount(), 1);
 
 		GameAction playWrath = wrathChooseOne.playOption1();
@@ -59,7 +61,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		context.getLogic().performGameAction(player.getId(), playWrath);
 
 		validActions = context.getLogic().getValidActions(player.getId());
-		Assert.assertEquals(validActions.size(), 1);
+		Assert.assertEquals(validActions.size(), 0);
 		Assert.assertEquals(player.getHand().getCount(), 0);
 	}
 
