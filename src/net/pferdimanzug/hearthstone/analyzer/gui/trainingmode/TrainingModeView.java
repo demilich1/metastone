@@ -15,7 +15,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.BorderPane;
 import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.learning.TDLearningBehaviour;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.learning.LearningBehaviour;
 
 public class TrainingModeView extends BorderPane implements EventHandler<ActionEvent> {
 
@@ -82,12 +82,15 @@ public class TrainingModeView extends BorderPane implements EventHandler<ActionE
 		}
 		double winRate = progress.getGamesWon() / (double) progress.getGamesCompleted();
 		series.getData().add(new XYChart.Data<Number, Number>(progress.getGamesCompleted(), winRate));
+		if (progress.getGamesCompleted() == progress.getGamesTotal()) {
+			backButton.setDisable(false);
+		}
 	}
 
 	@Override
 	public void handle(ActionEvent actionEvent) {
 		if (actionEvent.getSource() == startButton) {
-			TrainingConfig trainingConfig = new TrainingConfig(new TDLearningBehaviour(true));
+			TrainingConfig trainingConfig = new TrainingConfig(new LearningBehaviour(true));
 			trainingConfig.setNumberOfGames(numberOfGamesBox.getSelectionModel().getSelectedItem());
 			ApplicationFacade.getInstance().sendNotification(GameNotification.COMMIT_TRAININGMODE_CONFIG, trainingConfig);
 		} else if (actionEvent.getSource() == backButton) {

@@ -13,17 +13,17 @@ import net.pferdimanzug.hearthstone.analyzer.utils.MathUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Brain {
+public class Brain implements IBrain {
 
 	private static Logger logger = LoggerFactory.getLogger(Brain.class);
 
-	private static final int INPUTS = 51;
-	private static final int HIDDEN_NEURONS = 80;
+	private static final int INPUTS = 15;
+	private static final int HIDDEN_NEURONS = 40;
 	private static final int OUTPUTS = 1;
 
-	private static final double ALPHA = 0.01;
-	private static final double BETA = 0.01;
-	private static final double LAMBDA = 0.0;
+	private static final double ALPHA = 0.1;
+	private static final double BETA = 0.1;
+	private static final double LAMBDA = 0.6;
 
 	private boolean learning;
 	private NeuralNetwork neuralNetwork;
@@ -36,15 +36,18 @@ public class Brain {
 		ev = new double[INPUTS][HIDDEN_NEURONS][OUTPUTS];
 	}
 
+	@Override
 	public double[] getOutput(GameContext context, int playerId) {
 		double[] input = gameStateToInput(context, playerId);
 		return neuralNetwork.getValue(input);
 	}
 
+	@Override
 	public double getEstimatedUtility(double[] output) {
 		return output[0];
 	}
 
+	@Override
 	public void learn(GameContext originalState, int playerId, double[] nextOutput) {
 		double[] currentInput = gameStateToInput(originalState, playerId);
 		double[] currentOutput = getOutput(originalState, playerId);
@@ -60,7 +63,7 @@ public class Brain {
 		// compute eligability traces
 		for (int j = 0; j < neuralNetwork.hidden[0].length; j++) {
 			for (int k = 0; k < out.length; k++) {
-				ew[j][k] = (LAMBDA * ew[j][k]) + gradient(neuralNetwork.hidden[1][k]) * neuralNetwork.hidden[0][j].getValue();
+				ew[j][k] = LAMBDA * ew[j][k] + gradient(neuralNetwork.hidden[1][k]) * neuralNetwork.hidden[0][j].getValue();
 				for (int i = 0; i < in.length; i++) {
 					ev[i][j][k] = LAMBDA * ev[i][j][k] + gradient(neuralNetwork.hidden[1][k]) * neuralNetwork.hidden[1][k].weights[j]
 							* gradient(neuralNetwork.hidden[0][j]) * in[i];
@@ -88,10 +91,12 @@ public class Brain {
 		return hiddenUnit.getValue() * (1.0 - hiddenUnit.getValue());
 	}
 
+	@Override
 	public boolean isLearning() {
 		return learning;
 	}
 
+	@Override
 	public void setLearning(boolean learning) {
 		this.learning = learning;
 	}
@@ -102,18 +107,26 @@ public class Brain {
 		Player opponent = context.getOpponent(player);
 		encodePlayer(player, input, 0);
 		encodePlayer(opponent, input, INPUTS / 2);
-		input[50] = MathUtils.clamp01(context.getTurn() / 20.0);
+		input[INPUTS - 1] = MathUtils.clamp01(context.getTurn() / 20.0);
+//		logger.info(context.toString());
+//		for (int i = 0; i < input.length; i++) {
+//			logger.info(java.util.Arrays.toString(input) );
+//		}
 		return input;
 	}
 
 	private void encodePlayer(Player player, double[] data, int offset) {
 		List<Minion> minions = player.getMinions();
+		int totalMinionAttack = 0;
+		int totalMinionHp = 0;
 		for (int i = 0; i < 7; i++) {
 			Minion minion = i < minions.size() ? player.getMinions().get(i) : null;
-			data[offset++] = minion != null ? MathUtils.clamp01(minion.getAttack() / 15.0) : -1;
-			data[offset++] = minion != null ? MathUtils.clamp01(minion.getHp() / 15.0) : -1;
-			data[offset++] = minion != null ? (minion.getSpellTrigger() != null ? 1 : -1) : -1;
+			totalMinionAttack += minion != null ? minion.getAttack() : 0;
+			totalMinionHp += minion != null ? minion.getHp() : 0;
 		}
+		data[offset++] = minions.size() / 7.0;
+		data[offset++] = MathUtils.clamp01(totalMinionAttack / 40.0);
+		data[offset++] = MathUtils.clamp01(totalMinionHp / 40.0);
 		data[offset++] = MathUtils.clamp01(player.getHero().getAttack() / 10.0);
 		data[offset++] = MathUtils.clamp01((player.getHero().getHp() + player.getHero().getArmor()) / 30.0);
 		data[offset++] = player.getHand().getCount() / 10.0;

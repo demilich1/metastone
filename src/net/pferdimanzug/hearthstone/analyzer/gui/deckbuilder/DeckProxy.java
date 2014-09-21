@@ -67,6 +67,15 @@ public class DeckProxy extends Proxy<GameNotification> {
 		return decks;
 	}
 
+	public Deck getDeckByName(String deckName) {
+		for (Deck deck : decks) {
+			if (deck.getName().equals(deckName)) {
+				return deck;
+			}
+		}
+		return null;
+	}
+
 	public void loadDecks() throws FileNotFoundException {
 		decks.clear();
 		File folder = new File("./decks/");

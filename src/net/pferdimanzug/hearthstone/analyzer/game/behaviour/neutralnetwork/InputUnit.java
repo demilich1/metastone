@@ -2,7 +2,11 @@ package net.pferdimanzug.hearthstone.analyzer.game.behaviour.neutralnetwork;
 
 public class InputUnit implements Unit {
   
-  // the current value of the input
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8699533068346744182L;
+// the current value of the input
   protected double value;
   
   /**

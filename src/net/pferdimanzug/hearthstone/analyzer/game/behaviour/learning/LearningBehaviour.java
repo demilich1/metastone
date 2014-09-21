@@ -3,6 +3,9 @@ package net.pferdimanzug.hearthstone.analyzer.game.behaviour.learning;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
@@ -10,14 +13,16 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.Behaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 
-public class TDLearningBehaviour extends Behaviour {
+public class LearningBehaviour extends Behaviour {
+	
+	private static Logger logger = LoggerFactory.getLogger(LearningBehaviour.class);
 	
 	private static final String SAVE_PATH = "brain.ser"; 
 
-	private final Brain brain = new Brain();
+	private static final IBrain brain = new Brain();
 	
-	public TDLearningBehaviour(boolean learn) {
-		brain.load(SAVE_PATH);
+	public LearningBehaviour(boolean learn) {
+		//brain.load(SAVE_PATH);
 		brain.setLearning(learn);
 	}
 
@@ -54,6 +59,7 @@ public class TDLearningBehaviour extends Behaviour {
 			simulation.getLogic().performGameAction(player.getId(), gameAction);
 			double[] output = brain.getOutput(simulation, player.getId());
 			double utility = brain.getEstimatedUtility(output);
+			//logger.info("Action {} received utility of {}", gameAction, utility);
 			if (utility > expectedUtility) {
 				bestAction = gameAction;
 				expectedUtility = utility;
@@ -82,11 +88,10 @@ public class TDLearningBehaviour extends Behaviour {
 		}
 
 		brain.learn(context, playerId, actual);
-		//brain.wipeEligabilityTraces();
 	}
 	
 	public void save() {
-		brain.save(SAVE_PATH);
+		//brain.save(SAVE_PATH);
 	}
 
 }
