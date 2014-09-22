@@ -1,6 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.behaviour.learning;
 
-import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
@@ -53,7 +53,7 @@ public class Brain implements IBrain {
 		double[] currentOutput = getOutput(originalState, playerId);
 		backPropagation(currentInput, currentOutput, nextOutput);
 	}
-	
+
 	public void wipeEligabilityTraces() {
 		ew = new double[HIDDEN_NEURONS][OUTPUTS];
 		ev = new double[INPUTS][HIDDEN_NEURONS][OUTPUTS];
@@ -108,10 +108,10 @@ public class Brain implements IBrain {
 		encodePlayer(player, input, 0);
 		encodePlayer(opponent, input, INPUTS / 2);
 		input[INPUTS - 1] = MathUtils.clamp01(context.getTurn() / 20.0);
-//		logger.info(context.toString());
-//		for (int i = 0; i < input.length; i++) {
-//			logger.info(java.util.Arrays.toString(input) );
-//		}
+		// logger.info(context.toString());
+		// for (int i = 0; i < input.length; i++) {
+		// logger.info(java.util.Arrays.toString(input) );
+		// }
 		return input;
 	}
 
@@ -133,22 +133,34 @@ public class Brain implements IBrain {
 		data[offset++] = MathUtils.clamp01(player.getDeck().getCount() / 30.0);
 	}
 
-	public void load(String path) {
-		try {
-			neuralNetwork = NeuralNetwork.readFrom(path);
-			logger.info("Saved brain data loaded");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			logger.info("Brain data not found, using unlearned neural network");
+	private void printWeights() {
+		for (int i = 0; i < neuralNetwork.hidden.length; i++) {
+			for (int j = 0; j < neuralNetwork.hidden[i].length; j++) {
+				for (int k = 0; k < neuralNetwork.hidden[i][j].weights.length; k++) {
+					System.out.println(Arrays.toString(neuralNetwork.hidden[i][j].weights));
+				}
+			}
 		}
 	}
 
+	public void load(String path) {
+		// try {
+		// neuralNetwork = NeuralNetwork.readFrom(path);
+		// logger.info("Saved brain data loaded");
+		// } catch (ClassNotFoundException e) {
+		// e.printStackTrace();
+		// } catch (IOException e) {
+		// logger.info("Brain data not found, using unlearned neural network");
+		// }
+		
+	}
+
 	public void save(String path) {
-		try {
-			neuralNetwork.writeTo(path);
-			logger.info("Brain data saved to: " + path);
-		} catch (IOException e) {
-		}
+		
+		// try {
+		// neuralNetwork.writeTo(path);
+		// logger.info("Brain data saved to: " + path);
+		// } catch (IOException e) {
+		// }
 	}
 }

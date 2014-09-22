@@ -22,13 +22,13 @@ public class LearningBehaviour extends Behaviour {
 	private static final IBrain brain = new Brain();
 	
 	public LearningBehaviour(boolean learn) {
-		//brain.load(SAVE_PATH);
+		brain.load(SAVE_PATH);
 		brain.setLearning(learn);
 	}
 
 	@Override
 	public String getName() {
-		return "TD Learning";
+		return "Learning";
 	}
 
 	@Override
@@ -59,11 +59,12 @@ public class LearningBehaviour extends Behaviour {
 			simulation.getLogic().performGameAction(player.getId(), gameAction);
 			double[] output = brain.getOutput(simulation, player.getId());
 			double utility = brain.getEstimatedUtility(output);
-			//logger.info("Action {} received utility of {}", gameAction, utility);
+			
 			if (utility > expectedUtility) {
 				bestAction = gameAction;
 				expectedUtility = utility;
 				nextOutput = output;
+				logger.info("Action {} received utility of {}", gameAction, utility);
 			}
 		}
 
@@ -91,7 +92,7 @@ public class LearningBehaviour extends Behaviour {
 	}
 	
 	public void save() {
-		//brain.save(SAVE_PATH);
+		brain.save(SAVE_PATH);
 	}
 
 }

@@ -48,7 +48,7 @@ public class HearthstoneAnalyzer extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		primaryStage.setTitle("Professor Hearthstone");
+		primaryStage.setTitle("MetaStone");
 
 		ApplicationFacade facade = (ApplicationFacade) ApplicationFacade.getInstance();
 		final HearthstoneAnalyzer instance = new HearthstoneAnalyzer();

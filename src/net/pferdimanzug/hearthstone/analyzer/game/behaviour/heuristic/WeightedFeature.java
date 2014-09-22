@@ -2,8 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.behaviour.heuristic;
 
 public enum WeightedFeature {
 	HP_DIFFERENCE,
-	OWN_CARDS,
-	OPPONENT_CARDS,
+	CARD_DIFFERENCE,
 	OWN_MINION_COUNT,
 	OPPONENT_MINION_COUNT,
 	MINION_ATTACK,
