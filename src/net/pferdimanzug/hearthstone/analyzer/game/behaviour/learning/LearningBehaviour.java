@@ -64,7 +64,7 @@ public class LearningBehaviour extends Behaviour {
 				bestAction = gameAction;
 				expectedUtility = utility;
 				nextOutput = output;
-				logger.info("Action {} received utility of {}", gameAction, utility);
+				//logger.info("Action {} received utility of {}", gameAction, utility);
 			}
 		}
 

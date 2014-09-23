@@ -386,7 +386,8 @@ public class GameLogic implements Cloneable {
 			return null;
 		}
 
-		Card card = deck.removeFirst();
+		Card card = deck.getRandom();
+		deck.remove(card);
 		receiveCard(playerId, card);
 		return card;
 	}
