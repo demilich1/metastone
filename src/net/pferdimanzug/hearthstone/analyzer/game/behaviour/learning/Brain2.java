@@ -23,11 +23,11 @@ public class Brain2 implements IBrain {
 	private static Logger logger = LoggerFactory.getLogger(Brain2.class);
 
 	private static final int INPUTS = 15;
-	private static final int HIDDEN_NEURONS = 40;
+	private static final int HIDDEN_NEURONS = 15;
 	private static final int OUTPUTS = 1;
 
-	private static final double ALPHA = 0.1;
-	private static final double LAMBDA = 0.01;
+	private static final double ALPHA = 0.05;
+	private static final double GAMMA = 0.7;
 
 	private BasicNetwork neuralNetwork;
 	private boolean learning;
@@ -79,7 +79,7 @@ public class Brain2 implements IBrain {
 
 	@Override
 	public double getEstimatedUtility(double[] output) {
-		return output[0];
+		return 1 - output[0];
 	}
 
 	@Override
@@ -88,11 +88,11 @@ public class Brain2 implements IBrain {
 		double[] output = getOutput(originalState, playerId);
 		double[] error = new double[OUTPUTS];
 		for (int i = 0; i < error.length; i++) {
-			error[i] = reward + nextOutput[i] - output[i];
+			error[i] = reward + GAMMA * output[i] - nextOutput[i];
 		}
 
-		MLDataSet training = new BasicMLDataSet(new double[][] {input}, new double[][] {error});
-		final MLTrain train =  new Backpropagation(neuralNetwork, training, ALPHA, 0.3);
+		MLDataSet training = new BasicMLDataSet(new double[][] {input}, new double[][] {nextOutput});
+		final MLTrain train =  new Backpropagation(neuralNetwork, training);
 		train.iteration();
 	}
 

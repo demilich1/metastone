@@ -23,7 +23,7 @@ public class Brain implements IBrain {
 
 	private static final double ALPHA = 0.1;
 	private static final double BETA = 0.1;
-	private static final double LAMBDA = 0.6;
+	private static final double LAMBDA = 0.5;
 
 	private boolean learning;
 	private NeuralNetwork neuralNetwork;
@@ -51,6 +51,9 @@ public class Brain implements IBrain {
 	public void learn(GameContext originalState, int playerId, double[] nextOutput, double reward) {
 		double[] currentInput = gameStateToInput(originalState, playerId);
 		double[] currentOutput = getOutput(originalState, playerId);
+		for (int i = 0; i < nextOutput.length; i++) {
+			nextOutput[i] += reward;
+		}
 		backPropagation(currentInput, currentOutput, nextOutput);
 	}
 
@@ -107,7 +110,7 @@ public class Brain implements IBrain {
 		Player opponent = context.getOpponent(player);
 		encodePlayer(player, input, 0);
 		encodePlayer(opponent, input, INPUTS / 2);
-		input[INPUTS - 1] = MathUtils.clamp01(context.getTurn() / 20.0);
+		input[INPUTS - 1] = MathUtils.clamp01(context.getTurn() / 10.0);
 		return input;
 	}
 
@@ -124,7 +127,7 @@ public class Brain implements IBrain {
 		data[offset++] = MathUtils.clamp01(totalMinionAttack / 40.0);
 		data[offset++] = MathUtils.clamp01(totalMinionHp / 40.0);
 		data[offset++] = MathUtils.clamp01(player.getHero().getAttack() / 10.0);
-		data[offset++] = MathUtils.clamp01((player.getHero().getHp() + player.getHero().getArmor()) / 30.0);
+		data[offset++] = MathUtils.clamp01((player.getHero().getHp() + player.getHero().getArmor()) / 40.0);
 		data[offset++] = player.getHand().getCount() / 10.0;
 		data[offset++] = MathUtils.clamp01(player.getDeck().getCount() / 30.0);
 	}

@@ -3,7 +3,9 @@ package net.pferdimanzug.hearthstone.analyzer.gui.trainingmode;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.GreedyOptimizeMove;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.PlayRandomBehaviour;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.heuristic.WeightedHeuristic;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
@@ -52,7 +54,7 @@ public class PerformTrainingCommand extends SimpleCommand<GameNotification> {
 					player1.setBehaviour(config.getLearner());
 
 					Player player2 = new Player("Opponent", HeroFactory.createHero(player2Deck.getHeroClass()), player2Deck);
-					player2.setBehaviour(new PlayRandomBehaviour());
+					player2.setBehaviour(new GreedyOptimizeMove(new WeightedHeuristic()));
 
 					GameContext newGame = new GameContext(player1, player2, new GameLogic());
 					newGame.play();
@@ -73,19 +75,9 @@ public class PerformTrainingCommand extends SimpleCommand<GameNotification> {
 	}
 
 	private void onGameComplete(TrainingConfig config, GameContext completedGame) {
-		logger.info("Game: " + gamesCompleted);
-		//logger.info(completedGame.toString());
-		logger.info("Player1 " + completedGame.getPlayer1().getStatistics().toString());
-		logger.info("Player2 " + completedGame.getPlayer2().getStatistics().toString());
-		logger.info("=================================\n");
 		gamesCompleted++;
 		
 		gamesWon += completedGame.getPlayer1().getStatistics().getInt(Statistic.GAMES_WON);
-//		if (completedGame.getWinningPlayerId() == GameContext.PLAYER_1) {
-//			gamesWon++;
-//		}
-		double winRate = gamesWon / (double) gamesCompleted;
-		System.out.println("Winrate: " + winRate);
 		TrainingProgressReport progress = new TrainingProgressReport(gamesCompleted, config.getNumberOfGames(), gamesWon);
 		Notification<GameNotification> updateNotification = new Notification<>(GameNotification.TRAINING_PROGRESS_UPDATE, progress);
 		getFacade().notifyObservers(updateNotification);

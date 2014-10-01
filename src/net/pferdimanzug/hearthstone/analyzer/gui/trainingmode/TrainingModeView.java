@@ -76,7 +76,7 @@ public class TrainingModeView extends BorderPane implements EventHandler<ActionE
 	}
 
 	public void showProgress(TrainingProgressReport progress) {
-		int progressMark = Math.max(progress.getGamesTotal() / 100, 10);
+		int progressMark = Math.max(progress.getGamesTotal() / 25, 10);
 		if (progress.getGamesCompleted() % progressMark != 0 || progress.getGamesCompleted() == 0) {
 			return;
 		}
@@ -90,7 +90,7 @@ public class TrainingModeView extends BorderPane implements EventHandler<ActionE
 	@Override
 	public void handle(ActionEvent actionEvent) {
 		if (actionEvent.getSource() == startButton) {
-			TrainingConfig trainingConfig = new TrainingConfig(new LearningBehaviour(false));
+			TrainingConfig trainingConfig = new TrainingConfig(new LearningBehaviour(true));
 			trainingConfig.setNumberOfGames(numberOfGamesBox.getSelectionModel().getSelectedItem());
 			ApplicationFacade.getInstance().sendNotification(GameNotification.COMMIT_TRAININGMODE_CONFIG, trainingConfig);
 		} else if (actionEvent.getSource() == backButton) {

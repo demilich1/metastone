@@ -63,11 +63,6 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 						GameContext gameResult = null;
 						try {
 							gameResult = iterator.next().get();
-							logger.info("Game: " + gamesCompleted);
-							//logger.info(completedGame.toString());
-							logger.info("Player1 " + gameResult.getPlayer1().getStatistics().toString());
-							logger.info("Player2 " + gameResult.getPlayer2().getStatistics().toString());
-							logger.info("=================================\n");
 							iterator.remove();
 						} catch (Exception e) {
 							e.printStackTrace();
