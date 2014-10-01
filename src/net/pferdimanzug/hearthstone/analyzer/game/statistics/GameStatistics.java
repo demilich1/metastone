@@ -97,4 +97,18 @@ public class GameStatistics implements Cloneable {
 		add(Statistic.TURNS_TAKEN, 1);
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder("[GameStatistics]\n");
+		for (Statistic stat : stats.keySet()) {
+			builder.append(stat);
+			builder.append(": ");
+			builder.append(stats.get(stat));
+			builder.append("\n");
+		}
+		return builder.toString();
+	}
+	
+	
+
 }

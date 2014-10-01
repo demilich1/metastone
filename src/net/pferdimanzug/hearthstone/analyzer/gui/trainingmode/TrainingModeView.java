@@ -90,7 +90,7 @@ public class TrainingModeView extends BorderPane implements EventHandler<ActionE
 	@Override
 	public void handle(ActionEvent actionEvent) {
 		if (actionEvent.getSource() == startButton) {
-			TrainingConfig trainingConfig = new TrainingConfig(new LearningBehaviour(true));
+			TrainingConfig trainingConfig = new TrainingConfig(new LearningBehaviour(false));
 			trainingConfig.setNumberOfGames(numberOfGamesBox.getSelectionModel().getSelectedItem());
 			ApplicationFacade.getInstance().sendNotification(GameNotification.COMMIT_TRAININGMODE_CONFIG, trainingConfig);
 		} else if (actionEvent.getSource() == backButton) {

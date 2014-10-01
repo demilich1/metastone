@@ -42,8 +42,8 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 			@Override
 			public void run() {
 				logger.info("Simulation started");
-				ExecutorService executor = Executors.newWorkStealingPool();
-				//ExecutorService executor = Executors.newSingleThreadExecutor();
+				//ExecutorService executor = Executors.newWorkStealingPool();
+				ExecutorService executor = Executors.newSingleThreadExecutor();
 				List<Future<GameContext>> tasks = new ArrayList<>(gameConfig.getNumberOfGames());
 
 				// send initial status update
@@ -63,6 +63,11 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 						GameContext gameResult = null;
 						try {
 							gameResult = iterator.next().get();
+							logger.info("Game: " + gamesCompleted);
+							//logger.info(completedGame.toString());
+							logger.info("Player1 " + gameResult.getPlayer1().getStatistics().toString());
+							logger.info("Player2 " + gameResult.getPlayer2().getStatistics().toString());
+							logger.info("=================================\n");
 							iterator.remove();
 						} catch (Exception e) {
 							e.printStackTrace();

@@ -7,6 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.PlayRandomBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
+import net.pferdimanzug.hearthstone.analyzer.game.statistics.Statistic;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.DeckProxy;
 
 import org.slf4j.Logger;
@@ -72,10 +73,19 @@ public class PerformTrainingCommand extends SimpleCommand<GameNotification> {
 	}
 
 	private void onGameComplete(TrainingConfig config, GameContext completedGame) {
+		logger.info("Game: " + gamesCompleted);
+		//logger.info(completedGame.toString());
+		logger.info("Player1 " + completedGame.getPlayer1().getStatistics().toString());
+		logger.info("Player2 " + completedGame.getPlayer2().getStatistics().toString());
+		logger.info("=================================\n");
 		gamesCompleted++;
-		if (completedGame.getWinningPlayerId() == GameContext.PLAYER_1) {
-			gamesWon++;
-		}
+		
+		gamesWon += completedGame.getPlayer1().getStatistics().getInt(Statistic.GAMES_WON);
+//		if (completedGame.getWinningPlayerId() == GameContext.PLAYER_1) {
+//			gamesWon++;
+//		}
+		double winRate = gamesWon / (double) gamesCompleted;
+		System.out.println("Winrate: " + winRate);
 		TrainingProgressReport progress = new TrainingProgressReport(gamesCompleted, config.getNumberOfGames(), gamesWon);
 		Notification<GameNotification> updateNotification = new Notification<>(GameNotification.TRAINING_PROGRESS_UPDATE, progress);
 		getFacade().notifyObservers(updateNotification);

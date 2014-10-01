@@ -19,7 +19,7 @@ public class LearningBehaviour extends Behaviour {
 	
 	private static final String SAVE_PATH = "brain.ser"; 
 
-	private static final IBrain brain = new Brain();
+	private static final IBrain brain = new Brain2();
 	
 	public LearningBehaviour(boolean learn) {
 		brain.load(SAVE_PATH);
@@ -51,7 +51,7 @@ public class LearningBehaviour extends Behaviour {
 		}
 
 		GameAction bestAction = null;
-		double expectedUtility = -1.0;
+		double expectedUtility = -2.0;
 		double[] nextOutput = null;
 
 		for (GameAction gameAction : validActions) {
@@ -69,7 +69,7 @@ public class LearningBehaviour extends Behaviour {
 		}
 
 		if (brain.isLearning()) {
-			brain.learn(context, player.getId(), nextOutput);
+			brain.learn(context, player.getId(), nextOutput, 0);
 		}
 
 		return bestAction;
@@ -81,14 +81,15 @@ public class LearningBehaviour extends Behaviour {
 			return;
 		}
 
+		double reward = 0;
 		double[] actual = new double[1];
 		if (playerId == winningPlayerId) {
-			actual[0] = 1.0;
+			actual[0] = reward = 1.0;
 		} else {
-			actual[0] = 0.0;
+			actual[0] = reward = -1.0;
 		}
 
-		brain.learn(context, playerId, actual);
+		brain.learn(context, playerId, actual, reward);
 	}
 	
 	public void save() {

@@ -48,7 +48,7 @@ public class Brain implements IBrain {
 	}
 
 	@Override
-	public void learn(GameContext originalState, int playerId, double[] nextOutput) {
+	public void learn(GameContext originalState, int playerId, double[] nextOutput, double reward) {
 		double[] currentInput = gameStateToInput(originalState, playerId);
 		double[] currentOutput = getOutput(originalState, playerId);
 		backPropagation(currentInput, currentOutput, nextOutput);
@@ -108,10 +108,6 @@ public class Brain implements IBrain {
 		encodePlayer(player, input, 0);
 		encodePlayer(opponent, input, INPUTS / 2);
 		input[INPUTS - 1] = MathUtils.clamp01(context.getTurn() / 20.0);
-		// logger.info(context.toString());
-		// for (int i = 0; i < input.length; i++) {
-		// logger.info(java.util.Arrays.toString(input) );
-		// }
 		return input;
 	}
 

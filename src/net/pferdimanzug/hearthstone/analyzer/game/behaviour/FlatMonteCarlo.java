@@ -8,7 +8,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
-import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,11 +22,11 @@ public class FlatMonteCarlo extends Behaviour {
 		this.iterations = iterations;
 	}
 
-	private GameAction getBestAction(HashMap<GameAction, Integer> actionScores) {
+	private GameAction getBestAction(HashMap<GameAction, Double> actionScores) {
 		GameAction bestAction = null;
-		int bestScore = Integer.MIN_VALUE;
+		double bestScore = Integer.MIN_VALUE;
 		for (GameAction actionEntry : actionScores.keySet()) {
-			int score = actionScores.get(actionEntry);
+			double score = actionScores.get(actionEntry);
 			if (score > bestScore) {
 				bestAction = actionEntry;
 				bestScore = score;
@@ -57,7 +56,6 @@ public class FlatMonteCarlo extends Behaviour {
 		for (Player player : simulation.getPlayers()) {
 			player.setBehaviour(new PlayRandomBehaviour());
 		}
-
 		simulation.playTurn();
 		return simulation.getWinningPlayerId() == playerId ? 1 : 0;
 	}
@@ -67,24 +65,24 @@ public class FlatMonteCarlo extends Behaviour {
 		if (validActions.size() == 1) {
 			return validActions.get(0);
 		}
-		GameLogic.logger.debug("********SIMULATION starts**********");
-		HashMap<GameAction, Integer> actionScores = new HashMap<>();
+		HashMap<GameAction, Double> actionScores = new HashMap<>();
 		for (GameAction gameAction : validActions) {
-			int score = simulate(context, player.getId(), gameAction);
+			double score = simulate(context, player.getId(), gameAction);
 			actionScores.put(gameAction, score);
 			logger.debug("Action {} gets score of {}", gameAction.getActionType(), score);
 
 		}
-		GameLogic.logger.debug("********SIMULATION ENDS**********");
 		GameAction bestAction = getBestAction(actionScores);
 		return bestAction;
 	}
 
-	private int simulate(GameContext context, int playerId, GameAction action) {
+	private double simulate(GameContext context, int playerId, GameAction action) {
 		GameContext simulation = context.clone();
-		GameLogic.logger.debug("********TESTING FOLLOWING ACTION IN MONTE CARLO**********");
 		simulation.getLogic().performGameAction(simulation.getActivePlayer().getId(), action);
-		int score = 0;
+		if (simulation.gameDecided()) {
+			return simulation.getWinningPlayerId() == playerId ? 1 : 0;
+		}
+		double score = 0;
 		for (int i = 0; i < iterations; i++) {
 			score += playRandomUntilEnd(simulation.clone(), playerId);
 		}

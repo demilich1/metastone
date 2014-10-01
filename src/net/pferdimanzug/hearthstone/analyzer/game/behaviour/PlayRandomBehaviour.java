@@ -2,7 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.behaviour;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Random;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
@@ -10,6 +10,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 
 public class PlayRandomBehaviour extends Behaviour {
+
+	private Random random = new Random();
 
 	@Override
 	public String getName() {
@@ -27,7 +29,7 @@ public class PlayRandomBehaviour extends Behaviour {
 			return validActions.get(0);
 		}
 
-		int randomIndex = ThreadLocalRandom.current().nextInt(validActions.size());
+		int randomIndex = random.nextInt(validActions.size());
 		GameAction randomAction = validActions.get(randomIndex);
 		return randomAction;
 	}

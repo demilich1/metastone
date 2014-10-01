@@ -8,7 +8,7 @@ public interface IBrain {
 
 	public abstract double getEstimatedUtility(double[] output);
 
-	public abstract void learn(GameContext originalState, int playerId, double[] nextOutput);
+	public abstract void learn(GameContext originalState, int playerId, double[] nextOutput, double reward);
 
 	public abstract boolean isLearning();
 
