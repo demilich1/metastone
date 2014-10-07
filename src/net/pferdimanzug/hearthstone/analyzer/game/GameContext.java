@@ -264,14 +264,18 @@ public class GameContext implements Cloneable, IDisposable {
 		logic.performGameAction(playerId, gameAction);
 		onGameStateChanged();
 	}
-
-	public void play() {
-		logger.debug("Game starts: " + getPlayer1().getName() + " VS. " + getPlayer2().getName());
+	
+	public void init() {
 		int startingPlayerId = logic.determineBeginner(PLAYER_1, PLAYER_2);
 		activePlayer = getPlayer(startingPlayerId).getId();
 		logger.debug(getActivePlayer().getName() + " begins");
 		logic.init(activePlayer, true);
 		logic.init(getOpponent(getActivePlayer()).getId(), false);
+	}
+
+	public void play() {
+		logger.debug("Game starts: " + getPlayer1().getName() + " VS. " + getPlayer2().getName());
+		init();
 		startTurn(activePlayer);
 	}
 

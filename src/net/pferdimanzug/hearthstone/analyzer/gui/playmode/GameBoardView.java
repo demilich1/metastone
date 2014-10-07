@@ -216,7 +216,7 @@ public class GameBoardView extends BorderPane {
 		centerMessageLabel.setVisible(true);
 	}
 	
-	public void updateGameState(GameContextVisualizable context) {
+	public void updateGameState(GameContext context) {
 		entityTokenMap.clear();
 		p1Hero.setHero(context.getPlayer1());
 		p1Hero.highlight(context.getActivePlayer() == context.getPlayer1());

@@ -11,6 +11,7 @@ import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.SaveDeckCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.SetActiveDeckCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.playmode.StartGameCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.playmode.config.RequestDecksCommand;
+import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.CreateNewSandboxCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.simulationmode.SimulateGamesCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.trainingmode.PerformTrainingCommand;
 import de.pferdimanzug.nittygrittymvc.Facade;
@@ -45,6 +46,8 @@ public class ApplicationFacade extends Facade<GameNotification> {
 		registerCommand(GameNotification.CHANGE_DECK_NAME, new ChangeDeckNameCommand());
 		
 		registerCommand(GameNotification.REQUEST_DECKS, new RequestDecksCommand());
+		
+		registerCommand(GameNotification.CREATE_NEW_SANDBOX, new CreateNewSandboxCommand());
 
 	}
 

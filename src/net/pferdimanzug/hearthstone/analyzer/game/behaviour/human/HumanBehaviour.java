@@ -18,7 +18,7 @@ public class HumanBehaviour extends Behaviour {
 
 	@Override
 	public String getName() {
-		return "Human Controlled";
+		return "<Human controlled>";
 	}
 
 	@Override

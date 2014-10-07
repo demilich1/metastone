@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import java.net.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<fx:root id="bordered-panel" orientation="VERTICAL" stylesheets="@../main.css" type="ToolBar" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <items>
+      <Label id="default-label" text="Toolbox" />
+      <Label id="info-small" text="Cards:" />
+      <ComboBox fx:id="cardComboBox" prefWidth="160.0" promptText="&lt;select a card&gt;" />
+   </items>
+</fx:root>

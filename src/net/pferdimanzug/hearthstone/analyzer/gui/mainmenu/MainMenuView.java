@@ -21,6 +21,9 @@ public class MainMenuView extends BorderPane {
 	private Button simulationModeButton;
 	
 	@FXML
+	private Button sandboxModeButton;
+	
+	@FXML
 	private Button trainingModeButton;
 
 	public MainMenuView() {
@@ -41,6 +44,9 @@ public class MainMenuView extends BorderPane {
 		
 		simulationModeButton.setOnAction(event -> ApplicationFacade.getInstance().sendNotification(
 				GameNotification.SIMULATION_MODE_SELECTED));
+		
+		sandboxModeButton.setOnAction(event -> ApplicationFacade.getInstance().sendNotification(
+				GameNotification.SANDBOX_MODE_SELECTED));
 		
 		trainingModeButton.setOnAction(event -> ApplicationFacade.getInstance().sendNotification(
 				GameNotification.TRAINING_MODE_SELECTED));

@@ -5,7 +5,6 @@ import java.util.List;
 
 import javafx.application.Platform;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
-import net.pferdimanzug.hearthstone.analyzer.gui.mainmenu.MainMenuMediator;
 import de.pferdimanzug.nittygrittymvc.Mediator;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
@@ -40,7 +39,6 @@ public class TrainingModeMediator extends Mediator<GameNotification> {
 		default:
 			break;
 		}
-		getFacade().removeMediator(MainMenuMediator.NAME);
 	}
 
 	@Override

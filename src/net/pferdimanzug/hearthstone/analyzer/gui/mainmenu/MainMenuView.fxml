@@ -15,6 +15,7 @@
             <Button id="button" fx:id="deckBuilderButton" mnemonicParsing="false" prefWidth="200.0" text="Deck Builder" textAlignment="CENTER" />
             <Button id="button" fx:id="simulationModeButton" layoutX="422.0" layoutY="313.0" mnemonicParsing="false" prefWidth="200.0" text="Simulation Mode" textAlignment="CENTER" />
             <Button id="button" fx:id="trainingModeButton" layoutX="422.0" layoutY="391.0" mnemonicParsing="false" prefWidth="200.0" text="Training Mode" textAlignment="CENTER" />
+            <Button id="button" fx:id="sandboxModeButton" layoutX="422.0" layoutY="417.0" mnemonicParsing="false" prefWidth="200.0" text="Sandbox Mode" textAlignment="CENTER" />
          </children></VBox>
    </center>
    <top>
