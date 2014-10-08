@@ -20,8 +20,7 @@ public class FilterCardsByTextCommand extends SimpleCommand<GameNotification> {
 		List<Card> cards = deckProxy.getCards(deckProxy.getActiveDeck().getHeroClass());
 		List<Card> filteredCards = new ArrayList<Card>();
 		for (Card card : cards) {
-			String lowerCaseName = card.getName().toLowerCase();
-			if (lowerCaseName.contains(filterText)) {
+			if (card.matchesFilter(filterText)) {
 				filteredCards.add(card);
 			}
 		}

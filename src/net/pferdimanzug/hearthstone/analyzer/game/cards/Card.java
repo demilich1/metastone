@@ -98,6 +98,11 @@ public abstract class Card extends Entity {
 	public void setLocation(CardLocation location) {
 		this.location = location;
 	}
+	
+	public boolean matchesFilter(String filter) {
+		String lowerCaseName = getName().toLowerCase();
+		return lowerCaseName.contains(filter);
+	}
 
 	@Override
 	public String toString() {

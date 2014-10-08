@@ -44,6 +44,7 @@ public class SandboxModeView extends BorderPane implements EventHandler<ActionEv
 
 	public void updateSandbox(GameContext context) {
 		boardView.updateGameState(context);
+		toolboxView.setContext(context);
 	}
 
 	@Override

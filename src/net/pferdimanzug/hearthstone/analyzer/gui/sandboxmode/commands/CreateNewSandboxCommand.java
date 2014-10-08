@@ -1,4 +1,4 @@
-package net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode;
+package net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.commands;
 
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
@@ -9,6 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
+import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.SandboxProxy;
 import de.pferdimanzug.nittygrittymvc.SimpleCommand;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
