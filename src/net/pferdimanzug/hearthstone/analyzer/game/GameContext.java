@@ -48,6 +48,8 @@ public class GameContext implements Cloneable, IDisposable {
 
 	private int turn;
 	private int actionsThisTurn;
+	
+	private boolean ignoreEvents;
 
 	public GameContext(Player player1, Player player2, GameLogic logic) {
 		this.getPlayers()[PLAYER_1] = player1;
@@ -145,6 +147,9 @@ public class GameContext implements Cloneable, IDisposable {
 	}
 
 	public void fireGameEvent(GameEvent gameEvent, TriggerLayer layer) {
+		if (ignoreEvents()) {
+			return;
+		}
 		gameEvent.setTriggerLayer(layer);
 		triggerManager.fireGameEvent(gameEvent);
 	}
@@ -396,5 +401,13 @@ public class GameContext implements Cloneable, IDisposable {
 		builder.append("Winner: " + (winner == null ? "tbd" : winner.getName()));
 
 		return builder.toString();
+	}
+
+	public boolean ignoreEvents() {
+		return ignoreEvents;
+	}
+
+	public void setIgnoreEvents(boolean ignoreEvents) {
+		this.ignoreEvents = ignoreEvents;
 	}
 }

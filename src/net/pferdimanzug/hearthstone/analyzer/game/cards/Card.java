@@ -100,6 +100,9 @@ public abstract class Card extends Entity {
 	}
 	
 	public boolean matchesFilter(String filter) {
+		if (filter == null) {
+			return true;
+		}
 		String lowerCaseName = getName().toLowerCase();
 		return lowerCaseName.contains(filter);
 	}

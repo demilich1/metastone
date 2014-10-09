@@ -7,10 +7,11 @@ import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.IActionSelectionListener;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.Behaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 
-public class HumanBehaviour extends Behaviour {
+public class HumanBehaviour extends Behaviour implements IActionSelectionListener {
 
 	private GameAction selectedAction;
 	private boolean waitingForInput;
@@ -54,8 +55,9 @@ public class HumanBehaviour extends Behaviour {
 		waitingForInput = false;
 	}
 	
-	public void setSelectedAction(GameAction selectedAction) {
-		this.selectedAction = selectedAction;
+	@Override
+	public void onActionSelected(GameAction action) {
+		this.selectedAction = action;
 		waitingForInput = false;
 	}
 

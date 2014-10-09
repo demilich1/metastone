@@ -5,9 +5,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
-public class SpellbenderMinion extends MinionCard {
+public class SpellbenderToken extends MinionCard {
 
-	public SpellbenderMinion() {
+	public SpellbenderToken() {
 		super("Spellbender", 1, 3, Rarity.EPIC, HeroClass.MAGE, 0);
 
 		setCollectible(false);

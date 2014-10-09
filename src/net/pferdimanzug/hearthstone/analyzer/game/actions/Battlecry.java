@@ -111,4 +111,9 @@ public class Battlecry extends GameAction {
 	public SpellDesc getSpell() {
 		return spell;
 	}
+
+	@Override
+	public String getPromptText() {
+		return "[Battlecry]";
+	}
 }

@@ -9,5 +9,5 @@ public enum ActionType {
 	SUMMON,
 	HERO_POWER,
 	BATTLECRY,
-	EQUIP_WEAPON
+	EQUIP_WEAPON,
 }

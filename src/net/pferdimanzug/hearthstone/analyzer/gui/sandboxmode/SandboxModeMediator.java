@@ -6,6 +6,7 @@ import java.util.List;
 import javafx.application.Platform;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanTargetOptions;
 import de.pferdimanzug.nittygrittymvc.Mediator;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
@@ -31,7 +32,10 @@ public class SandboxModeMediator extends Mediator<GameNotification> {
 					view.updateSandbox(context);
 				}
 			});
-			
+			break;
+		case SELECT_TARGET:
+			HumanTargetOptions targetOptions = (HumanTargetOptions) notification.getBody();
+			view.getBoardView().enableTargetSelection(targetOptions);
 			break;
 		default:
 			break;
@@ -42,6 +46,7 @@ public class SandboxModeMediator extends Mediator<GameNotification> {
 	public List<GameNotification> listNotificationInterests() {
 		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
 		notificationInterests.add(GameNotification.UPDATE_SANDBOX_STATE);
+		notificationInterests.add(GameNotification.SELECT_TARGET);
 		return notificationInterests;
 	}
 

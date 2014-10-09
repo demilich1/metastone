@@ -42,4 +42,9 @@ public class PhysicalAttackAction extends GameAction {
 		return String.format("%s Attacker: %s Defender: %s", getActionType(), attackerReference, getTargetKey());
 	}
 
+	@Override
+	public String getPromptText() {
+		return "[Physical Attack]";
+	}
+
 }

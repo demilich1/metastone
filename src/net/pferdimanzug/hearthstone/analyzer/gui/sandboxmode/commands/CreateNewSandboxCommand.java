@@ -28,6 +28,7 @@ public class CreateNewSandboxCommand extends SimpleCommand<GameNotification> {
 		player2.setBehaviour(new DoNothingBehaviour());
 
 		GameContext sandbox = new GameContext(player1, player2, new GameLogic());
+		sandbox.setIgnoreEvents(true);
 		sandbox.init();
 		sandboxProxy.setSandbox(sandbox);
 		sendNotification(GameNotification.UPDATE_SANDBOX_STATE, sandbox);

@@ -110,7 +110,7 @@ public class HumanActionPromptView extends Stage {
 		if (actionGroup.getActionsInGroup().size() == 1 && (actionGroup.getPrototype().getTargetRequirement() == TargetSelection.NONE
 				|| actionGroup.getPrototype().getActionType() == ActionType.SUMMON)) {
 			button.setOnAction(event -> {
-				options.getBehaviour().setSelectedAction(actionGroup.getPrototype());
+				options.getBehaviour().onActionSelected(actionGroup.getPrototype());
 				close();
 			});
 			return button;

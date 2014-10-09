@@ -25,4 +25,9 @@ public class EndTurnAction extends GameAction {
 		return String.format("[%s]", getActionType());
 	}
 
+	@Override
+	public String getPromptText() {
+		return "[End turn]";
+	}
+
 }

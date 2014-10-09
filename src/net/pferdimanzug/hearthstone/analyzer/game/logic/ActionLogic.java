@@ -94,7 +94,7 @@ public class ActionLogic {
 		return validActions;
 	}
 
-	private void rollout(GameAction action, GameContext context, Player player, Collection<GameAction> actions) {
+	public void rollout(GameAction action, GameContext context, Player player, Collection<GameAction> actions) {
 		if (action.getTargetRequirement() == TargetSelection.NONE) {
 			actions.add(action);
 		} else {

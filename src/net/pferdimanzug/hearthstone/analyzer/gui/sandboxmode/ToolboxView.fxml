@@ -13,10 +13,16 @@
    <items>
       <Label id="default-label" text="Toolbox" />
       <Label id="info-small" layoutX="10.0" layoutY="41.0" text="Select player:" />
-      <ChoiceBox fx:id="playerChoiceBox" prefWidth="150.0" />
+      <ChoiceBox fx:id="playerChoiceBox" prefWidth="200.0" />
       <Separator prefWidth="200.0" />
       <Label id="info-small" text="Cards:" />
       <Button fx:id="editHandButton" mnemonicParsing="false" text="Edit hand" />
       <Button fx:id="editDeckButton" layoutX="10.0" layoutY="117.0" mnemonicParsing="false" text="Edit deck" />
+      <Separator prefWidth="200.0" />
+      <Label id="info-small" layoutX="10.0" layoutY="97.0" text="Minions" />
+      <ComboBox fx:id="minionComboBox" prefWidth="200.0" promptText="&lt;select a minion&gt;" />
+      <TextField fx:id="filterMinionsTextField" prefWidth="200.0" promptText="&lt;filter minions&gt;" />
+      <Button fx:id="spawnMinionButton" mnemonicParsing="false" text="Spawn" />
+      <Button fx:id="killMinionButton" layoutX="10.0" layoutY="260.0" mnemonicParsing="false" text="Kill" />
    </items>
 </fx:root>

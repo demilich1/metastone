@@ -25,7 +25,6 @@ public class PlayMinionCardAction extends PlayCardAction {
 
 	@Override
 	protected void play(GameContext context, int playerId) {
-		//MinionCard minionCard = (MinionCard) context.resolveCardReference(getCardReference());
 		MinionCard minionCard = (MinionCard) context.getEnvironment().get(Environment.PENDING_CARD);
 		Actor nextTo = (Actor) (getTargetKey() != null ? context.resolveSingleTarget(getTargetKey()) : null);
 		Minion minion = minionCard.summon();
@@ -33,6 +32,11 @@ public class PlayMinionCardAction extends PlayCardAction {
 			minion.setBattlecry(battlecry);
 		}
 		context.getLogic().summon(playerId, minion, minionCard, nextTo, true);
+	}
+
+	@Override
+	public String getPromptText() {
+		return "[Summon minion]";
 	}
 
 }

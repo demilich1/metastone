@@ -44,13 +44,12 @@ public abstract class PlayCardAction extends GameAction {
 			}
 
 		} catch (Exception e) {
-
 			logger.error("ERROR while playing card " + card + " reference: " + cardReference);
 			logger.error("Player1: " + context.getPlayer1().getName());
 			logger.error("Player2: " + context.getPlayer2().getName());
 			e.printStackTrace();
 			System.exit(-1);
-			// throw e;
+			throw e;
 		}
 
 		context.getLogic().afterCardPlayed(playerId, getCardReference());
@@ -71,6 +70,11 @@ public abstract class PlayCardAction extends GameAction {
 	}
 
 	protected abstract void play(GameContext context, int playerId);
+	
+	@Override
+	public String getPromptText() {
+		return "[Play card]";
+	}
 
 	@Override
 	public String toString() {

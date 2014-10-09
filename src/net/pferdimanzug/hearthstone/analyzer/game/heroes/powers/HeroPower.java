@@ -39,6 +39,11 @@ public abstract class HeroPower extends SpellCard {
 				}
 				context.getLogic().castSpell(playerId, getSpell());
 			}
+
+			@Override
+			public String getPromptText() {
+				return "[Use hero power]";
+			}
 		};
 	}
 

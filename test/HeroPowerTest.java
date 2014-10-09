@@ -30,17 +30,13 @@ public class HeroPowerTest extends TestBase {
 		Assert.assertEquals(warrior.getHp(), GameLogic.MAX_HERO_HP);
 		Assert.assertEquals(warrior.getArmor(), ArmorUp.ARMOR_BONUS);
 		
-		GameAction damage = new GameAction() {
+		GameAction damage = new TestAction() {
 			
 			@Override
 			public void execute(GameContext context, int playerId) {
 				context.getLogic().damage(context.getPlayer1(), warrior, 2 * ArmorUp.ARMOR_BONUS, SpellSource.SPELL_TRIGGER);
 			}
-
-			@Override
-			public boolean isSameActionGroup(GameAction anotherAction) {
-				return false;
-			}
+			
 		};
 		damage.setTarget(warrior);
 		context.getLogic().performGameAction(context.getPlayer2().getId(), damage);
@@ -51,17 +47,13 @@ public class HeroPowerTest extends TestBase {
 		// the damage dealt was less than the total armor. Following test
 		// covers that scenario
 		context.getLogic().performGameAction(context.getPlayer1().getId(), armorUp);
-        damage = new GameAction() {
+        damage = new TestAction() {
 			
 			@Override
 			public void execute(GameContext context, int playerId) {
 				context.getLogic().damage(context.getPlayer1(), warrior, ArmorUp.ARMOR_BONUS / 2, SpellSource.SPELL_TRIGGER);
 			}
-
-			@Override
-			public boolean isSameActionGroup(GameAction anotherAction) {
-				return false;
-			}
+			
 		};
 		damage.setTarget(warrior);
 		context.getLogic().performGameAction(context.getPlayer2().getId(), damage);

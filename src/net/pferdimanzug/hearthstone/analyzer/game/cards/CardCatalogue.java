@@ -220,7 +220,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.hunter.M
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.hunter.Snake;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.mage.MirrorImageToken;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.mage.Sheep;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.mage.SpellbenderMinion;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.mage.SpellbenderToken;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.naxxramas.Nerubian;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.naxxramas.Slime;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.naxxramas.SpectralSpider;
@@ -377,6 +377,10 @@ public class CardCatalogue {
 		}
 
 		return result;
+	}
+	
+	public static CardCollection query(CardType cardType) {
+		return query(cardType, null, null);
 	}
 
 	public static CardCollection query(GameTag tag) {
@@ -761,7 +765,7 @@ public class CardCatalogue {
 		cards.add(new Snake());
 		cards.add(new MirrorImageToken());
 		cards.add(new Sheep());
-		cards.add(new SpellbenderMinion());
+		cards.add(new SpellbenderToken());
 		cards.add(new Nerubian());
 		cards.add(new Slime());
 		cards.add(new SpectralSpider());
@@ -861,5 +865,4 @@ public class CardCatalogue {
 		cards.add(new WarsongCommander());
 		cards.add(new Whirlwind());
 	}
-
 }

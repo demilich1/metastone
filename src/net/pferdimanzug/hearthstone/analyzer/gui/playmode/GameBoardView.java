@@ -111,7 +111,6 @@ public class GameBoardView extends BorderPane {
 		
 		p1HeroAnchor.getChildren().add(p1Hero);
 		p2HeroAnchor.getChildren().add(p2Hero);
-		
 	}
 	
 	
@@ -168,7 +167,7 @@ public class GameBoardView extends BorderPane {
 				@Override
 				public void handle(MouseEvent event) {
 					disableTargetSelection();
-					targetOptions.getBehaviour().setSelectedAction(action);
+					targetOptions.getActionSelectionListener().onActionSelected(action);
 				}
 			};
 			
@@ -190,7 +189,7 @@ public class GameBoardView extends BorderPane {
 				@Override
 				public void handle(ActionEvent event) {
 					disableTargetSelection();
-					targetOptions.getBehaviour().setSelectedAction(action);
+					targetOptions.getActionSelectionListener().onActionSelected(action);
 				}
 			};
 			summonHelper.setOnAction(clickedHander);
@@ -204,7 +203,7 @@ public class GameBoardView extends BorderPane {
 		} else {
 			enableSpellTargets(targetOptions);
 		}
-		setCenterMessage("Select target for " + action.getActionType());
+		setCenterMessage("Select target for " + action.getPromptText());
 	}
 	
 	private void hideCenterMessage() {

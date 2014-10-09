@@ -19,7 +19,6 @@ import javafx.util.StringConverter;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCatalogue;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
-import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 
 public class CardCollectionEditor extends BorderPane {
 

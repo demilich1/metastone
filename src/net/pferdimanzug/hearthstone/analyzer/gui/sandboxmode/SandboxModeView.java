@@ -18,8 +18,8 @@ public class SandboxModeView extends BorderPane implements EventHandler<ActionEv
 	@FXML
 	private Button backButton;
 
-	private GameBoardView boardView;
-	private ToolboxView toolboxView;
+	private final GameBoardView boardView;
+	private final ToolboxView toolboxView;
 	
 
 	public SandboxModeView() {
@@ -36,14 +36,17 @@ public class SandboxModeView extends BorderPane implements EventHandler<ActionEv
 		backButton.setOnAction(this);
 
 		boardView = new GameBoardView();
-		setCenter(boardView);
+		boardView.setScaleX(0.9);
+		boardView.setScaleY(0.9);
+		boardView.setScaleZ(0.9);
+		setCenter(getBoardView());
 		
 		toolboxView = new ToolboxView();
 		setRight(toolboxView);
 	}
 
 	public void updateSandbox(GameContext context) {
-		boardView.updateGameState(context);
+		getBoardView().updateGameState(context);
 		toolboxView.setContext(context);
 	}
 
@@ -52,6 +55,10 @@ public class SandboxModeView extends BorderPane implements EventHandler<ActionEv
 		if (actionEvent.getSource() == backButton) {
 			ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU);
 		}
+	}
+
+	public GameBoardView getBoardView() {
+		return boardView;
 	}
 
 }

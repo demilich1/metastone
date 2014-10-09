@@ -11,15 +11,14 @@ public class ModifyPlayerHandCommand extends SimpleCommand<GameNotification>{
 
 	@Override
 	public void execute(INotification<GameNotification> notification) {
-		ModifyPlayerHandNotification modifyHandNotification = (ModifyPlayerHandNotification) notification;
+		SandboxProxy sandboxProxy = (SandboxProxy) getFacade().retrieveProxy(SandboxProxy.NAME);
 		
-		Player player = modifyHandNotification.getPlayer();
-		CardCollection modifiedHand = modifyHandNotification.getModifiedHand();
+		Player player = sandboxProxy.getSelectedPlayer();
+		CardCollection modifiedHand = (CardCollection) notification.getBody();
 		
 		player.getHand().removeAll();
 		player.getHand().addAll(modifiedHand);
 		
-		SandboxProxy sandboxProxy = (SandboxProxy) getFacade().retrieveProxy(SandboxProxy.NAME);
 		sendNotification(GameNotification.UPDATE_SANDBOX_STATE, sandboxProxy.getSandbox());
 	}
 
