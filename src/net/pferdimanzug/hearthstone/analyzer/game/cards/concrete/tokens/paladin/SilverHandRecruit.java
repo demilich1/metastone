@@ -9,6 +9,7 @@ public class SilverHandRecruit extends MinionCard {
 
 	public SilverHandRecruit() {
 		super("SilverHand Recruit", 1, 1, Rarity.FREE, HeroClass.PALADIN, 1);
+
 		setCollectible(false);
 	}
 
@@ -17,4 +18,8 @@ public class SilverHandRecruit extends MinionCard {
 		return createMinion();
 	}
 
+	@Override
+	public int getTypeId() {
+		return 455;
+	}
 }

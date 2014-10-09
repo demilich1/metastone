@@ -16,6 +16,7 @@ public class ForceOfNatureTreant extends MinionCard {
 	public ForceOfNatureTreant() {
 		super("Treant", 2, 2, Rarity.COMMON, HeroClass.DRUID, 1);
 		setDescription("Charge. At the end of the turn, destroy this minion.");
+		
 		setCollectible(false);
 	}
 
@@ -29,4 +30,8 @@ public class ForceOfNatureTreant extends MinionCard {
 		return treant;
 	}
 
+	@Override
+	public int getTypeId() {
+		return 417;
+	}
 }

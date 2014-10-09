@@ -11,6 +11,7 @@ public class Boar extends MinionCard {
 	public Boar() {
 		super("Boar", 1, 1, Rarity.FREE, HeroClass.ANY, 1);
 		setRace(Race.BEAST);
+
 		setCollectible(false);
 	}
 
@@ -19,4 +20,8 @@ public class Boar extends MinionCard {
 		return createMinion();
 	}
 
+	@Override
+	public int getTypeId() {
+		return 433;
+	}
 }

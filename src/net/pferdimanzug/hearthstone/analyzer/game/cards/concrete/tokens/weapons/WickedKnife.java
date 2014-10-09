@@ -9,6 +9,7 @@ public class WickedKnife extends WeaponCard {
 
 	public WickedKnife() {
 		super("Wicked Knife", Rarity.FREE, HeroClass.ROGUE, 1);
+
 		setCollectible(false);
 	}
 
@@ -16,5 +17,9 @@ public class WickedKnife extends WeaponCard {
 	public Weapon getWeapon() {
 		return createWeapon(1, 2);
 	}
-	
+
+	@Override
+	public int getTypeId() {
+		return 475;
+	}
 }

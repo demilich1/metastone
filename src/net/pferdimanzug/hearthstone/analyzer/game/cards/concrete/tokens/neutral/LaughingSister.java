@@ -10,11 +10,17 @@ public class LaughingSister extends MinionCard {
 
 	public LaughingSister() {
 		super("Laughing Sister", 3, 5, Rarity.FREE, HeroClass.ANY, 3);
+
 		setCollectible(false);
 	}
 
 	@Override
 	public Minion summon() {
 		return createMinion(GameTag.UNTARGETABLE_BY_SPELLS);
+	}
+
+	@Override
+	public int getTypeId() {
+		return 444;
 	}
 }

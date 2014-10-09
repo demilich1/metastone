@@ -11,10 +11,15 @@ public class Dream extends SpellCard {
 	public Dream() {
 		super("Dream", Rarity.FREE, HeroClass.ANY, 0);
 		setDescription("Return a minion to its owners's hand.");
-		setCollectible(false);
 
 		setSpell(ReturnMinionToHandSpell.create());
 		setTargetRequirement(TargetSelection.MINIONS);
+
+		setCollectible(false);
 	}
 
+	@Override
+	public int getTypeId() {
+		return 463;
+	}
 }

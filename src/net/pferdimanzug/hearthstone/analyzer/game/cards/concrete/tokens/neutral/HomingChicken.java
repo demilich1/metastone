@@ -17,6 +17,7 @@ public class HomingChicken extends MinionCard {
 	public HomingChicken() {
 		super("Homing Chicken", 0, 1, Rarity.FREE, HeroClass.ANY, 1);
 		setDescription("At the start of your turn, destroy this minion and draw 3 cards.");
+
 		setCollectible(false);
 	}
 
@@ -29,5 +30,10 @@ public class HomingChicken extends MinionCard {
 		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), homingChickenSpell);
 		homingChicken.setSpellTrigger(trigger);
 		return homingChicken;
+	}
+
+	@Override
+	public int getTypeId() {
+		return 442;
 	}
 }

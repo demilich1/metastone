@@ -9,6 +9,7 @@ public class Squire extends MinionCard {
 
 	public Squire() {
 		super("Squire", 2, 2, Rarity.COMMON, HeroClass.ANY, 1);
+
 		setCollectible(false);
 	}
 
@@ -16,5 +17,9 @@ public class Squire extends MinionCard {
 	public Minion summon() {
 		return createMinion();
 	}
-	
+
+	@Override
+	public int getTypeId() {
+		return 450;
+	}
 }

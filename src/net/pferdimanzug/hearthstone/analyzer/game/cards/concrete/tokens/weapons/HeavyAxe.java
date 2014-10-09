@@ -9,11 +9,17 @@ public class HeavyAxe extends WeaponCard {
 
 	public HeavyAxe() {
 		super("Heavy Axe", Rarity.RARE, HeroClass.WARRIOR, 1);
+
 		setCollectible(false);
 	}
 
 	@Override
 	public Weapon getWeapon() {
 		return createWeapon(1, 3);
+	}
+
+	@Override
+	public int getTypeId() {
+		return 474;
 	}
 }

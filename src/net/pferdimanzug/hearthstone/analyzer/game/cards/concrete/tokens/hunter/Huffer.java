@@ -13,6 +13,7 @@ public class Huffer extends MinionCard {
 		super("Huffer", 4, 2, Rarity.FREE, HeroClass.HUNTER, 3);
 		setDescription("Charge");
 		setRace(Race.BEAST);
+		
 		setCollectible(false);
 	}
 
@@ -20,5 +21,9 @@ public class Huffer extends MinionCard {
 	public Minion summon() {
 		return createMinion(GameTag.CHARGE);
 	}
-	
+
+	@Override
+	public int getTypeId() {
+		return 421;
+	}
 }

@@ -9,6 +9,7 @@ public class FinkleEinhorn extends MinionCard {
 
 	public FinkleEinhorn() {
 		super("Finkle Einhorn", 3, 3, Rarity.LEGENDARY, HeroClass.ANY, 2);
+
 		setCollectible(false);
 	}
 
@@ -17,4 +18,8 @@ public class FinkleEinhorn extends MinionCard {
 		return createMinion();
 	}
 
+	@Override
+	public int getTypeId() {
+		return 439;
+	}
 }

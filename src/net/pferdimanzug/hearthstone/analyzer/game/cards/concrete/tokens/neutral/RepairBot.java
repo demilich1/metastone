@@ -15,6 +15,7 @@ public class RepairBot extends MinionCard {
 	public RepairBot() {
 		super("Repair Bot", 0, 3, Rarity.FREE, HeroClass.ANY, 1);
 		setDescription("At the end of your turn, restore 6 Health to a damaged character.");
+
 		setCollectible(false);
 	}
 
@@ -28,4 +29,8 @@ public class RepairBot extends MinionCard {
 		return repairBot;
 	}
 
+	@Override
+	public int getTypeId() {
+		return 449;
+	}
 }

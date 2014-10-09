@@ -11,6 +11,7 @@ public class Squirrel extends MinionCard {
 	public Squirrel() {
 		super("Squirrel", 1, 1, Rarity.COMMON, HeroClass.ANY, 1);
 		setRace(Race.BEAST);
+
 		setCollectible(false);
 	}
 
@@ -19,4 +20,8 @@ public class Squirrel extends MinionCard {
 		return createMinion();
 	}
 
+	@Override
+	public int getTypeId() {
+		return 451;
+	}
 }

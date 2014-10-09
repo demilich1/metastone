@@ -9,6 +9,7 @@ public class SpellbenderMinion extends MinionCard {
 
 	public SpellbenderMinion() {
 		super("Spellbender", 1, 3, Rarity.EPIC, HeroClass.MAGE, 0);
+
 		setCollectible(false);
 	}
 
@@ -17,4 +18,8 @@ public class SpellbenderMinion extends MinionCard {
 		return createMinion();
 	}
 
+	@Override
+	public int getTypeId() {
+		return 428;
+	}
 }

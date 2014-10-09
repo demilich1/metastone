@@ -9,6 +9,7 @@ public class BattleAxe extends WeaponCard {
 
 	public BattleAxe() {
 		super("Battle Axe", Rarity.FREE, HeroClass.WARRIOR, 1);
+
 		setCollectible(false);
 	}
 
@@ -16,5 +17,9 @@ public class BattleAxe extends WeaponCard {
 	public Weapon getWeapon() {
 		return createWeapon(2, 2);
 	}
-	
+
+	@Override
+	public int getTypeId() {
+		return 472;
+	}
 }

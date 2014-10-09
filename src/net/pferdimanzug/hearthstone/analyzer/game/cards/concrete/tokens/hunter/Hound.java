@@ -12,12 +12,18 @@ public class Hound extends MinionCard {
 	public Hound() {
 		super("Hound", 1, 1, Rarity.FREE, HeroClass.HUNTER, 1);
 		setDescription("Charge");
-		setCollectible(false);
 		setRace(Race.BEAST);
+		
+		setCollectible(false);
 	}
 
 	@Override
 	public Minion summon() {
 		return createMinion(GameTag.CHARGE);
+	}
+
+	@Override
+	public int getTypeId() {
+		return 420;
 	}
 }

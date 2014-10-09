@@ -9,6 +9,7 @@ public class VioletApprentice extends MinionCard {
 
 	public VioletApprentice() {
 		super("Violet Apprentice", 1, 1, Rarity.FREE, HeroClass.ANY, 0);
+
 		setCollectible(false);
 	}
 
@@ -17,4 +18,8 @@ public class VioletApprentice extends MinionCard {
 		return createMinion();
 	}
 
+	@Override
+	public int getTypeId() {
+		return 452;
+	}
 }

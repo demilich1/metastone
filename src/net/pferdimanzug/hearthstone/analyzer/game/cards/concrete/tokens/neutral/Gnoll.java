@@ -10,6 +10,7 @@ public class Gnoll extends MinionCard {
 
 	public Gnoll() {
 		super("Gnoll", 2, 2, Rarity.FREE, HeroClass.ANY, 2);
+
 		setCollectible(false);
 	}
 
@@ -18,4 +19,8 @@ public class Gnoll extends MinionCard {
 		return createMinion(GameTag.TAUNT);
 	}
 
+	@Override
+	public int getTypeId() {
+		return 441;
+	}
 }

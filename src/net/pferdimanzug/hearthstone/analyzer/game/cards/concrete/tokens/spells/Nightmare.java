@@ -18,10 +18,18 @@ public class Nightmare extends SpellCard {
 	public Nightmare() {
 		super("Nightmare", Rarity.FREE, HeroClass.ANY, 0);
 		setDescription("Give a minion +5/+5. At the start of your next turn, destroy it.");
+
 		SpellDesc destroySpell = DestroySpell.create();
 		destroySpell.setTarget(EntityReference.SELF);
 		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), destroySpell);
 		setSpell(MetaSpell.create(BuffSpell.create(5, 5), AddSpellTriggerSpell.create(trigger)));
 		setTargetRequirement(TargetSelection.MINIONS);
+
+		setCollectible(false);
+	}
+
+	@Override
+	public int getTypeId() {
+		return 466;
 	}
 }

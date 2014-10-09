@@ -12,8 +12,9 @@ public class WrathOfAirTotem extends MinionCard {
 
 	public WrathOfAirTotem() {
 		super("Wrath of Air Totem", 0, 2, Rarity.FREE, HeroClass.SHAMAN, 1);
-		setCollectible(false);
 		setRace(Race.TOTEM);
+
+		setCollectible(false);
 	}
 
 	@Override
@@ -22,5 +23,10 @@ public class WrathOfAirTotem extends MinionCard {
 		wrathOfAirTotem.setTag(GameTag.UNIQUE_MINION, UniqueMinion.WRATH_OF_AIR_TOTEM);
 		wrathOfAirTotem.setTag(GameTag.SPELL_POWER, 1);
 		return wrathOfAirTotem;
+	}
+
+	@Override
+	public int getTypeId() {
+		return 461;
 	}
 }

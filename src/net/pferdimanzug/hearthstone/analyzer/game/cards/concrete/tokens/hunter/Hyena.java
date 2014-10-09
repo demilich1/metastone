@@ -10,8 +10,9 @@ public class Hyena extends MinionCard {
 
 	public Hyena() {
 		super("Hyena", 2, 2, Rarity.RARE, HeroClass.HUNTER, 2);
-		setCollectible(false);
 		setRace(Race.BEAST);
+		
+		setCollectible(false);
 	}
 
 	@Override
@@ -19,4 +20,8 @@ public class Hyena extends MinionCard {
 		return createMinion();
 	}
 	
+	@Override
+	public int getTypeId() {
+		return 422;
+	}
 }

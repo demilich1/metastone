@@ -9,6 +9,7 @@ public class SpectralSpider extends MinionCard {
 
 	public SpectralSpider() {
 		super("Spectral Spider", 1, 1, Rarity.COMMON, HeroClass.ANY, 1);
+
 		setCollectible(false);
 	}
 
@@ -16,5 +17,9 @@ public class SpectralSpider extends MinionCard {
 	public Minion summon() {
 		return createMinion();
 	}
-	
+
+	@Override
+	public int getTypeId() {
+		return 431;
+	}
 }

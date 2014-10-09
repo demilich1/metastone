@@ -10,11 +10,17 @@ public class Panther extends MinionCard {
 	public Panther() {
 		super("Panther", 3, 2, Rarity.COMMON, HeroClass.DRUID, 2);
 		setRace(Race.BEAST);
+		
 		setCollectible(false);
 	}
 
 	@Override
 	public Minion summon() {
 		return createMinion();
+	}
+
+	@Override
+	public int getTypeId() {
+		return 418;
 	}
 }

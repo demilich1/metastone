@@ -9,6 +9,7 @@ public class Thaddius extends MinionCard {
 
 	public Thaddius() {
 		super("Thaddius", 11, 11, Rarity.LEGENDARY, HeroClass.ANY, 10);
+
 		setCollectible(false);
 	}
 

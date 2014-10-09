@@ -9,6 +9,7 @@ public class Defender extends MinionCard {
 
 	public Defender() {
 		super("Defender", 2, 1, Rarity.COMMON, HeroClass.PALADIN, 1);
+
 		setCollectible(false);
 	}
 
@@ -16,5 +17,9 @@ public class Defender extends MinionCard {
 	public Minion summon() {
 		return createMinion();
 	}
-	
+
+	@Override
+	public int getTypeId() {
+		return 454;
+	}
 }

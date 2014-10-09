@@ -11,11 +11,17 @@ public class Imp extends MinionCard {
 	public Imp() {
 		super("Imp", 1, 1, Rarity.RARE, HeroClass.ANY, 1);
 		setRace(Race.DEMON);
+
+		setCollectible(false);
 	}
 
 	@Override
 	public Minion summon() {
 		return createMinion();
 	}
-	
+
+	@Override
+	public int getTypeId() {
+		return 443;
+	}
 }

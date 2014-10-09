@@ -15,6 +15,7 @@ public class Leokk extends MinionCard {
 		super("Leokk", 2, 4, Rarity.FREE, HeroClass.HUNTER, 3);
 		setDescription("Other friendly minions have +1 Attack.");
 		setRace(Race.BEAST);
+		
 		setCollectible(false);
 	}
 
@@ -25,5 +26,9 @@ public class Leokk extends MinionCard {
 		leokk.setSpellTrigger(leokkAura);
 		return leokk;
 	}
-	
+
+	@Override
+	public int getTypeId() {
+		return 423;
+	}
 }

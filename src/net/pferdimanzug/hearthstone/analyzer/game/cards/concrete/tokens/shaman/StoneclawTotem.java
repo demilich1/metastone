@@ -12,8 +12,9 @@ public class StoneclawTotem extends MinionCard {
 
 	public StoneclawTotem() {
 		super("Stoneclaw Totem", 0, 2, Rarity.FREE, HeroClass.SHAMAN, 1);
-		setCollectible(false);
 		setRace(Race.TOTEM);
+
+		setCollectible(false);
 	}
 
 	@Override
@@ -21,5 +22,10 @@ public class StoneclawTotem extends MinionCard {
 		Minion stoneclawTotem = createMinion(GameTag.TAUNT);
 		stoneclawTotem.setTag(GameTag.UNIQUE_MINION, UniqueMinion.STONECLAW_TOTEM);
 		return stoneclawTotem;
+	}
+
+	@Override
+	public int getTypeId() {
+		return 460;
 	}
 }

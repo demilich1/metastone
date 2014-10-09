@@ -11,6 +11,7 @@ public class Murloc extends MinionCard {
 	public Murloc() {
 		super("Murloc", 1, 1, Rarity.FREE, HeroClass.ANY, 1);
 		setRace(Race.MURLOC);
+
 		setCollectible(false);
 	}
 
@@ -19,4 +20,8 @@ public class Murloc extends MinionCard {
 		return createMinion();
 	}
 
+	@Override
+	public int getTypeId() {
+		return 446;
+	}
 }

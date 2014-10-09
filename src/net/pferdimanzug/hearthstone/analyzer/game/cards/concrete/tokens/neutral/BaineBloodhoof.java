@@ -9,6 +9,7 @@ public class BaineBloodhoof extends MinionCard {
 
 	public BaineBloodhoof() {
 		super("Baine Bloodhoof", 4, 5, Rarity.LEGENDARY, HeroClass.ANY, 4);
+
 		setCollectible(false);
 	}
 
@@ -17,4 +18,8 @@ public class BaineBloodhoof extends MinionCard {
 		return createMinion();
 	}
 
+	@Override
+	public int getTypeId() {
+		return 432;
+	}
 }

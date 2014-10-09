@@ -9,6 +9,7 @@ public class DefiasBandit extends MinionCard {
 
 	public DefiasBandit() {
 		super("Defias Bandit", 2, 1, Rarity.FREE, HeroClass.ROGUE, 2);
+
 		setCollectible(false);
 	}
 
@@ -17,4 +18,8 @@ public class DefiasBandit extends MinionCard {
 		return createMinion();
 	}
 
+	@Override
+	public int getTypeId() {
+		return 456;
+	}
 }

@@ -10,8 +10,9 @@ public class Sheep extends MinionCard {
 
 	public Sheep() {
 		super("Sheep", 1, 1, Rarity.FREE, HeroClass.ANY, 0);
-		setCollectible(false);
 		setRace(Race.BEAST);
+		
+		setCollectible(false);
 	}
 
 	@Override
@@ -19,4 +20,8 @@ public class Sheep extends MinionCard {
 		return createMinion();
 	}
 	
+	@Override
+	public int getTypeId() {
+		return 427;
+	}
 }

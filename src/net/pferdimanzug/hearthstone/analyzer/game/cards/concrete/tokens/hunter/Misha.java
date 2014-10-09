@@ -13,6 +13,7 @@ public class Misha extends MinionCard {
 		super("Misha", 4, 4, Rarity.FREE, HeroClass.HUNTER, 3);
 		setRace(Race.BEAST);
 		setDescription("Taunt");
+		
 		setCollectible(false);
 	}
 
@@ -21,4 +22,8 @@ public class Misha extends MinionCard {
 		return createMinion(GameTag.TAUNT);
 	}
 	
+	@Override
+	public int getTypeId() {
+		return 424;
+	}
 }

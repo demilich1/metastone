@@ -9,6 +9,7 @@ public class Ashbringer extends WeaponCard {
 
 	public Ashbringer() {
 		super("Ashbringer", Rarity.LEGENDARY, HeroClass.PALADIN, 5);
+
 		setCollectible(false);
 	}
 
@@ -16,5 +17,9 @@ public class Ashbringer extends WeaponCard {
 	public Weapon getWeapon() {
 		return createWeapon(5, 3);
 	}
-	
+
+	@Override
+	public int getTypeId() {
+		return 471;
+	}
 }

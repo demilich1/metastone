@@ -10,6 +10,7 @@ public class Slime extends MinionCard {
 
 	public Slime() {
 		super("Slime", 1, 2, Rarity.COMMON, HeroClass.ANY, 1);
+
 		setCollectible(false);
 	}
 
@@ -17,5 +18,9 @@ public class Slime extends MinionCard {
 	public Minion summon() {
 		return createMinion(GameTag.TAUNT);
 	}
-	
+
+	@Override
+	public int getTypeId() {
+		return 430;
+	}
 }

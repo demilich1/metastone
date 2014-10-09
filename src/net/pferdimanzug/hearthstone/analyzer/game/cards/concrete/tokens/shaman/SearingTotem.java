@@ -12,8 +12,9 @@ public class SearingTotem extends MinionCard {
 
 	public SearingTotem() {
 		super("Searing Totem", 1, 1, Rarity.FREE, HeroClass.SHAMAN, 1);
-		setCollectible(false);
 		setRace(Race.TOTEM);
+
+		setCollectible(false);
 	}
 
 	@Override
@@ -22,5 +23,9 @@ public class SearingTotem extends MinionCard {
 		searingTotem.setTag(GameTag.UNIQUE_MINION, UniqueMinion.SEARING_TOTEM);
 		return searingTotem;
 	}
-	
+
+	@Override
+	public int getTypeId() {
+		return 458;
+	}
 }

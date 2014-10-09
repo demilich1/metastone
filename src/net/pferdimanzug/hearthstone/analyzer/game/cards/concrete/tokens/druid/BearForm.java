@@ -10,6 +10,7 @@ public class BearForm extends MinionCard {
 
 	public BearForm() {
 		super("Druid of the Claw (Bear)", 4, 6, Rarity.COMMON, HeroClass.DRUID, 5);
+		
 		setCollectible(false);
 	}
 
@@ -18,4 +19,8 @@ public class BearForm extends MinionCard {
 		return createMinion(GameTag.TAUNT);
 	}
 
+	@Override
+	public int getTypeId() {
+		return 415;
+	}
 }

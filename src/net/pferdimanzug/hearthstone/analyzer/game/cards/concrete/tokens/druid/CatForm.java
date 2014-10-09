@@ -10,6 +10,7 @@ public class CatForm extends MinionCard {
 
 	public CatForm() {
 		super("Druid of the Claw (Cat)", 4, 4, Rarity.COMMON, HeroClass.DRUID, 5);
+		
 		setCollectible(false);
 	}
 
@@ -18,4 +19,8 @@ public class CatForm extends MinionCard {
 		return createMinion(GameTag.CHARGE);
 	}
 
+	@Override
+	public int getTypeId() {
+		return 416;
+	}
 }

@@ -11,6 +11,7 @@ public class MirrorImageToken extends MinionCard {
 	public MirrorImageToken() {
 		super("Mirror Image", 0, 2, Rarity.FREE, HeroClass.MAGE, 0);
 		setDescription("Taunt");
+		
 		setCollectible(false);
 	}
 
@@ -18,5 +19,9 @@ public class MirrorImageToken extends MinionCard {
 	public Minion summon() {
 		return createMinion(GameTag.TAUNT);
 	}
-	
+
+	@Override
+	public int getTypeId() {
+		return 426;
+	}
 }

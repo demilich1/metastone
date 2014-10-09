@@ -9,6 +9,7 @@ public class FlameOfAzzinoth extends MinionCard {
 
 	public FlameOfAzzinoth() {
 		super("Flame of Azzinoth", 2, 1, Rarity.FREE, HeroClass.ANY, 1);
+
 		setCollectible(false);
 	}
 
@@ -17,4 +18,8 @@ public class FlameOfAzzinoth extends MinionCard {
 		return createMinion();
 	}
 
+	@Override
+	public int getTypeId() {
+		return 440;
+	}
 }

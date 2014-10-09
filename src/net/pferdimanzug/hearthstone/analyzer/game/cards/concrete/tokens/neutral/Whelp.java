@@ -11,11 +11,17 @@ public class Whelp extends MinionCard {
 	public Whelp() {
 		super("Whelp", 1, 1, Rarity.FREE, HeroClass.ANY, 1);
 		setRace(Race.DRAGON);
+
+		setCollectible(false);
 	}
 
 	@Override
 	public Minion summon() {
 		return createMinion();
 	}
-	
+
+	@Override
+	public int getTypeId() {
+		return 453;
+	}
 }

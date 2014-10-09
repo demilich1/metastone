@@ -13,10 +13,15 @@ public class RoguesDoIt extends SpellCard {
 	public RoguesDoIt() {
 		super("Rogues Do it...", Rarity.FREE, HeroClass.ANY, 4);
 		setDescription("Deal 4 damage. Draw a card.");
-		setCollectible(false);
 
 		setSpell(MetaSpell.create(DamageSpell.create(4), DrawCardSpell.create()));
 		setTargetRequirement(TargetSelection.ANY);
+
+		setCollectible(false);
 	}
 
+	@Override
+	public int getTypeId() {
+		return 468;
+	}
 }

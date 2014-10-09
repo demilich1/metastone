@@ -9,6 +9,7 @@ public class BloodFury extends WeaponCard {
 
 	public BloodFury() {
 		super("Blood Fury", Rarity.COMMON, HeroClass.WARLOCK, 3);
+
 		setCollectible(false);
 	}
 
@@ -17,4 +18,8 @@ public class BloodFury extends WeaponCard {
 		return createWeapon(3, 8);
 	}
 
+	@Override
+	public int getTypeId() {
+		return 473;
+	}
 }

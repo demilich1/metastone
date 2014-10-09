@@ -15,6 +15,7 @@ public class Emboldener3000 extends MinionCard {
 	public Emboldener3000() {
 		super("Emboldener 3000", 0, 4, Rarity.FREE, HeroClass.ANY, 1);
 		setDescription("At the end of your turn, give a random minion +1/+1.");
+
 		setCollectible(false);
 	}
 
@@ -28,4 +29,8 @@ public class Emboldener3000 extends MinionCard {
 		return emboldener3000;
 	}
 
+	@Override
+	public int getTypeId() {
+		return 437;
+	}
 }

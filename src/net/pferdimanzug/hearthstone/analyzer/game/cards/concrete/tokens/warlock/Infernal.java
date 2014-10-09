@@ -20,4 +20,8 @@ public class Infernal extends MinionCard {
 		return createMinion();
 	}
 
+	@Override
+	public int getTypeId() {
+		return 470;
+	}
 }

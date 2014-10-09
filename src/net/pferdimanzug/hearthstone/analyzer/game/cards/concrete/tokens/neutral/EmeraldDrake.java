@@ -10,9 +10,9 @@ public class EmeraldDrake extends MinionCard {
 
 	public EmeraldDrake() {
 		super("Emerald Drake", 7, 6, Rarity.FREE, HeroClass.ANY, 4);
-		setCollectible(false);
-
 		setRace(Race.DRAGON);
+
+		setCollectible(false);
 	}
 
 	@Override
@@ -20,4 +20,8 @@ public class EmeraldDrake extends MinionCard {
 		return createMinion();
 	}
 
+	@Override
+	public int getTypeId() {
+		return 438;
+	}
 }

@@ -17,8 +17,9 @@ public class HealingTotem extends MinionCard {
 
 	public HealingTotem() {
 		super("Healing Totem", 0, 2, Rarity.FREE, HeroClass.SHAMAN, 1);
-		setCollectible(false);
 		setRace(Race.TOTEM);
+
+		setCollectible(false);
 	}
 
 	@Override
@@ -31,5 +32,9 @@ public class HealingTotem extends MinionCard {
 		healingTotem.setSpellTrigger(trigger);
 		return healingTotem;
 	}
-	
+
+	@Override
+	public int getTypeId() {
+		return 457;
+	}
 }

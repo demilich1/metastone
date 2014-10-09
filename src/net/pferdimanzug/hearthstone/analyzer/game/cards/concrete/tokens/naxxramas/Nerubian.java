@@ -9,6 +9,7 @@ public class Nerubian extends MinionCard {
 
 	public Nerubian() {
 		super("Nerubian", 4, 4, Rarity.FREE, HeroClass.ANY, 2);
+
 		setCollectible(false);
 	}
 
@@ -17,4 +18,8 @@ public class Nerubian extends MinionCard {
 		return createMinion();
 	}
 
+	@Override
+	public int getTypeId() {
+		return 429;
+	}
 }

@@ -13,6 +13,7 @@ public class Treant extends MinionCard {
 	public Treant(GameTag... tags) {
 		super("Treant", 2, 2, Rarity.FREE, HeroClass.DRUID, 1);
 		treantTags = tags;
+		
 		setCollectible(false);
 	}
 
@@ -20,5 +21,9 @@ public class Treant extends MinionCard {
 	public Minion summon() {
 		return createMinion(treantTags);
 	}
-	
+
+	@Override
+	public int getTypeId() {
+		return 419;
+	}
 }

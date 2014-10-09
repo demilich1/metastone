@@ -11,9 +11,15 @@ public class ExcessManaCard extends SpellCard {
 	public ExcessManaCard() {
 		super("Excess Mana", Rarity.FREE, HeroClass.DRUID, 0);
 		setDescription("Draw a card. (You can only have 10 Mana in your tray.)");
-		setCollectible(false);
+
 		setSpell(DrawCardSpell.create(1));
 		setTargetRequirement(TargetSelection.NONE);
+
+		setCollectible(false);
 	}
 
+	@Override
+	public int getTypeId() {
+		return 464;
+	}
 }

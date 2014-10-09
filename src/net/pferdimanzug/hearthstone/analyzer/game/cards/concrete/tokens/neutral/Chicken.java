@@ -12,6 +12,7 @@ public class Chicken extends MinionCard {
 		super("Chicken", 1, 1, Rarity.FREE, HeroClass.ANY, 0);
 		setDescription("Hey Chicken!");
 		setRace(Race.BEAST);
+
 		setCollectible(false);
 	}
 
@@ -20,4 +21,8 @@ public class Chicken extends MinionCard {
 		return createMinion();
 	}
 
+	@Override
+	public int getTypeId() {
+		return 434;
+	}
 }

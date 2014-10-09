@@ -9,6 +9,7 @@ public class MechanicalDragonling extends MinionCard {
 
 	public MechanicalDragonling() {
 		super("Mechanical Dragonling", 2, 1, Rarity.FREE, HeroClass.ANY, 1);
+
 		setCollectible(false);
 	}
 
@@ -16,5 +17,9 @@ public class MechanicalDragonling extends MinionCard {
 	public Minion summon() {
 		return createMinion();
 	}
-	
+
+	@Override
+	public int getTypeId() {
+		return 445;
+	}
 }

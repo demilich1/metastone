@@ -11,6 +11,7 @@ public class SpiritWolf extends MinionCard {
 	public SpiritWolf() {
 		super("Spirit Wolf", 2, 3, Rarity.RARE, HeroClass.SHAMAN, 2);
 		setDescription("Taunt");
+
 		setCollectible(false);
 	}
 
@@ -19,4 +20,8 @@ public class SpiritWolf extends MinionCard {
 		return createMinion(GameTag.TAUNT);
 	}
 
+	@Override
+	public int getTypeId() {
+		return 459;
+	}
 }

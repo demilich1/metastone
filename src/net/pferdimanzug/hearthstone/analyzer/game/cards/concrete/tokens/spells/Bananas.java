@@ -10,10 +10,15 @@ public class Bananas extends SpellCard {
 
 	public Bananas() {
 		super("Bananas", Rarity.FREE, HeroClass.ANY, 1);
-		setCollectible(false);
 
 		setSpell(BuffSpell.create(1, 1));
 		setTargetRequirement(TargetSelection.MINIONS);
+
+		setCollectible(false);
 	}
 
+	@Override
+	public int getTypeId() {
+		return 462;
+	}
 }

@@ -15,11 +15,18 @@ public class YseraAwakens extends SpellCard {
 	public YseraAwakens() {
 		super("Ysera Awakens", Rarity.FREE, HeroClass.ANY, 2);
 		setDescription("Deal 5 damage to all characters except Ysera.");
-		SpellDesc yseraAwakens = DamageSpell.create(
-				(context, player, target) -> target.getTag(GameTag.UNIQUE_MINION) == UniqueMinion.YSERA ? 0 : 5);
+
+		SpellDesc yseraAwakens = DamageSpell
+				.create((context, player, target) -> target.getTag(GameTag.UNIQUE_MINION) == UniqueMinion.YSERA ? 0 : 5);
 		yseraAwakens.setTarget(EntityReference.ALL_CHARACTERS);
 		setSpell(yseraAwakens);
 		setTargetRequirement(TargetSelection.NONE);
+
+		setCollectible(false);
 	}
 
+	@Override
+	public int getTypeId() {
+		return 469;
+	}
 }

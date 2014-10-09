@@ -11,6 +11,7 @@ public class Snake extends MinionCard {
 	public Snake() {
 		super("Snake", 1, 1, Rarity.COMMON, HeroClass.HUNTER, 0);
 		setRace(Race.BEAST);
+		
 		setCollectible(false);
 	}
 
@@ -19,4 +20,8 @@ public class Snake extends MinionCard {
 		return createMinion();
 	}
 	
+	@Override
+	public int getTypeId() {
+		return 425;
+	}
 }

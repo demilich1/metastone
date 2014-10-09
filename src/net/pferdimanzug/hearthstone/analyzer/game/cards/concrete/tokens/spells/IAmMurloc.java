@@ -11,10 +11,15 @@ public class IAmMurloc extends SpellCard {
 	public IAmMurloc() {
 		super("I Am Murloc", Rarity.FREE, HeroClass.ANY, 4);
 		setDescription("Summon three, four, or five 1/1 Murlocs.");
-		setCollectible(false);
 
 		setSpell(IAmMurlocSpell.create());
 		setTargetRequirement(TargetSelection.NONE);
+
+		setCollectible(false);
 	}
 
+	@Override
+	public int getTypeId() {
+		return 465;
+	}
 }

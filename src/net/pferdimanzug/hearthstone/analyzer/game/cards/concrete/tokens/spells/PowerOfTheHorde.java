@@ -17,11 +17,16 @@ public class PowerOfTheHorde extends SpellCard {
 	public PowerOfTheHorde() {
 		super("Power of the Horde", Rarity.FREE, HeroClass.ANY, 4);
 		setDescription("Summon a random Horde Warrior.");
-		setCollectible(false);
 
 		setSpell(SummonRandomSpell.create(new FrostwolfGrunt(), new TaurenWarrior(), new SenjinShieldmasta(), new ThrallmarFarseer(),
 				new SilvermoonGuardian(), new CairneBloodhoof()));
 		setTargetRequirement(TargetSelection.NONE);
+
+		setCollectible(false);
 	}
 
+	@Override
+	public int getTypeId() {
+		return 467;
+	}
 }

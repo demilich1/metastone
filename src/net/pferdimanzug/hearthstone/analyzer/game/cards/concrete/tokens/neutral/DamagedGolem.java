@@ -9,6 +9,7 @@ public class DamagedGolem extends MinionCard {
 
 	public DamagedGolem() {
 		super("Damaged Golem", 2, 1, Rarity.COMMON, HeroClass.ANY, 1);
+
 		setCollectible(false);
 	}
 
@@ -17,4 +18,8 @@ public class DamagedGolem extends MinionCard {
 		return createMinion();
 	}
 
+	@Override
+	public int getTypeId() {
+		return 435;
+	}
 }
