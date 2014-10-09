@@ -13,7 +13,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 public class StarvingBuzzard extends MinionCard {
 
 	public StarvingBuzzard() {
-		super("Starving Buzzard", 2, 1, Rarity.FREE, HeroClass.HUNTER, 2);
+		super("Starving Buzzard", 3, 2, Rarity.FREE, HeroClass.HUNTER, 5);
 		setDescription("Whenever you summon a Beast, draw a card.");
 		setRace(Race.BEAST);
 	}

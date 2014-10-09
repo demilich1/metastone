@@ -2,6 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter;
 
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.hunter.Hyena;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
@@ -25,22 +26,5 @@ public class SavannahHighmane extends MinionCard {
 		Minion savannahHighmane = createMinion();
 		savannahHighmane.addDeathrattle(SummonSpell.create(new Hyena(), new Hyena()));
 		return savannahHighmane;
-	}
-
-
-
-	private class Hyena extends MinionCard {
-
-		public Hyena() {
-			super("Hyena", 2, 2, Rarity.RARE, HeroClass.HUNTER, 2);
-			setCollectible(false);
-			setRace(Race.BEAST);
-		}
-
-		@Override
-		public Minion summon() {
-			return createMinion();
-		}
-		
 	}
 }

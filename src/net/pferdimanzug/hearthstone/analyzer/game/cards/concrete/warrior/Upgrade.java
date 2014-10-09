@@ -2,9 +2,8 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior;
 
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.WeaponCard;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.weapons.HeavyAxe;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffWeaponSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.EitherOrSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.EquipWeaponSpell;
@@ -27,19 +26,6 @@ public class Upgrade extends SpellCard {
 	@Override
 	public int getTypeId() {
 		return 381;
-	}
-
-	private class HeavyAxe extends WeaponCard {
-
-		public HeavyAxe() {
-			super("Heavy Axe", Rarity.RARE, HeroClass.WARRIOR, 1);
-			setCollectible(false);
-		}
-
-		@Override
-		public Weapon getWeapon() {
-			return createWeapon(1, 3);
-		}
 	}
 
 	

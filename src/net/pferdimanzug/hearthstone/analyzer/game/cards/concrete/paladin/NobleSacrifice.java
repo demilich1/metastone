@@ -1,11 +1,10 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin;
 
 import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SecretCard;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.paladin.Defender;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonNewAttackTargetSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SummonNewTargetTrigger;
@@ -23,19 +22,5 @@ public class NobleSacrifice extends SecretCard {
 	@Override
 	public int getTypeId() {
 		return 253;
-	}
-
-	private class Defender extends MinionCard {
-
-		public Defender() {
-			super("Defender", 2, 1, Rarity.COMMON, HeroClass.PALADIN, 1);
-			setCollectible(false);
-		}
-
-		@Override
-		public Minion summon() {
-			return createMinion();
-		}
-		
 	}
 }

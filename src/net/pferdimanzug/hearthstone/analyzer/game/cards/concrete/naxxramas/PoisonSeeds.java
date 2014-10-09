@@ -1,10 +1,9 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas;
 
-import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.druid.Treant;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroySpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
@@ -27,18 +26,4 @@ public class PoisonSeeds extends SpellCard {
 		return 395;
 	}
 
-
-	private class Treant extends MinionCard {
-
-		public Treant() {
-			super("Treant", 2, 2, Rarity.FREE, HeroClass.ANY, 2);
-			setCollectible(false);
-		}
-
-		@Override
-		public Minion summon() {
-			return createMinion();
-		}
-
-	}
 }

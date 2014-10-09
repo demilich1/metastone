@@ -1,14 +1,10 @@
 package net.pferdimanzug.hearthstone.analyzer.game.spells.custom;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.hunter.Hound;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
@@ -29,20 +25,5 @@ public class UnleashTheHoundsSpell extends Spell {
 		}
 		SpellDesc summonHounds = SummonSpell.create(houndCards);
 		context.getLogic().castSpell(player.getId(), summonHounds);
-	}
-	
-	private class Hound extends MinionCard {
-
-		public Hound() {
-			super("Hound", 1, 1, Rarity.FREE, HeroClass.HUNTER, 1);
-			setDescription("Charge");
-			setCollectible(false);
-			setRace(Race.BEAST);
-		}
-
-		@Override
-		public Minion summon() {
-			return createMinion(GameTag.CHARGE);
-		}
 	}
 }

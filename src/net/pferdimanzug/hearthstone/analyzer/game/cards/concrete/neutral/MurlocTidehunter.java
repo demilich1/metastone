@@ -3,6 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.neutral.MurlocScout;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
@@ -29,20 +30,5 @@ public class MurlocTidehunter extends MinionCard {
 		battlecry.setResolvedLate(true);
 		murlocTidehunter.setBattlecry(battlecry);
 		return murlocTidehunter;
-	}
-
-
-
-	private class MurlocScout extends MinionCard {
-
-		public MurlocScout() {
-			super("Murloc Scout", 1, 1, Rarity.FREE, HeroClass.ANY, 0);
-		}
-
-		@Override
-		public Minion summon() {
-			return createMinion();
-		}
-
 	}
 }

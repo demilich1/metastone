@@ -1,10 +1,10 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.ChooseBattlecryCard;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.druid.BearForm;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.druid.CatForm;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.TransformMinionSpell;
@@ -50,33 +50,5 @@ public class DruidOfTheClaw extends ChooseBattlecryCard {
 	@Override
 	public Minion summon() {
 		return createMinion();
-	}
-
-	private class BearForm extends MinionCard {
-
-		public BearForm() {
-			super("Druid of the Claw", 4, 6, Rarity.COMMON, HeroClass.DRUID, 5);
-			setCollectible(false);
-		}
-
-		@Override
-		public Minion summon() {
-			return createMinion(GameTag.TAUNT);
-		}
-
-	}
-
-	private class CatForm extends MinionCard {
-
-		public CatForm() {
-			super("Druid of the Claw", 4, 4, Rarity.COMMON, HeroClass.DRUID, 5);
-			setCollectible(false);
-		}
-
-		@Override
-		public Minion summon() {
-			return createMinion(GameTag.CHARGE);
-		}
-
 	}
 }

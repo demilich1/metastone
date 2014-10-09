@@ -18,8 +18,6 @@ public class MurlocRaider extends MinionCard {
 		return 170;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		return createMinion();

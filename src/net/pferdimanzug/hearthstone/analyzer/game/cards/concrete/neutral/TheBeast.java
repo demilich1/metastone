@@ -2,6 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.neutral.FinkleEinhorn;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
@@ -28,19 +29,5 @@ public class TheBeast extends MinionCard {
 		SpellDesc deathrattle = SummonSpell.create(TargetPlayer.OPPONENT, new FinkleEinhorn());
 		theBeast.addDeathrattle(deathrattle);
 		return theBeast;
-	}
-
-	private class FinkleEinhorn extends MinionCard {
-
-		public FinkleEinhorn() {
-			super("Finkle Einhorn", 3, 3, Rarity.LEGENDARY, HeroClass.ANY, 2);
-			setCollectible(false);
-		}
-
-		@Override
-		public Minion summon() {
-			return createMinion();
-		}
-
 	}
 }

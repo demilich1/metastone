@@ -100,7 +100,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas.Sludg
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas.SpectralKnight;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas.Stalagg;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas.StoneskinGargoyle;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas.Thaddius;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas.Undertaker;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas.UnstableGhoul;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas.Voidcaller;
@@ -208,6 +207,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.TotemicM
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.UnboundElemental;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.Windfury;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.Windspeaker;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.naxxramas.Thaddius;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock.BaneOfDoom;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock.BloodImp;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock.Corruption;

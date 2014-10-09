@@ -4,6 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.rogue.DefiasBandit;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
@@ -28,21 +29,5 @@ public class DefiasRingleader extends MinionCard {
 		battlecry.setResolvedLate(true);
 		defiasRingleader.setBattlecry(battlecry);
 		return defiasRingleader;
-	}
-
-
-
-	private class DefiasBandit extends MinionCard {
-
-		public DefiasBandit() {
-			super("Defias Bandit", 2, 1, Rarity.FREE, HeroClass.ROGUE, 2);
-			setCollectible(false);
-		}
-
-		@Override
-		public Minion summon() {
-			return createMinion();
-		}
-
 	}
 }

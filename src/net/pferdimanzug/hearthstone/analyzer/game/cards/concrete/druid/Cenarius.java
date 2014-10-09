@@ -3,8 +3,8 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.ChooseBattlecryCard;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.druid.Treant;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
@@ -38,7 +38,7 @@ public class Cenarius extends ChooseBattlecryCard {
 
 	@Override
 	protected Battlecry getBattlecry2() {
-		SpellDesc summonSpell = SummonSpell.create(new Treant(), new Treant());
+		SpellDesc summonSpell = SummonSpell.create(new Treant(GameTag.TAUNT), new Treant(GameTag.TAUNT));
 		return Battlecry.createBattlecry(summonSpell);
 	}
 
@@ -50,20 +50,5 @@ public class Cenarius extends ChooseBattlecryCard {
 	@Override
 	public Minion summon() {
 		return createMinion();
-	}
-
-
-	private class Treant extends MinionCard {
-
-		public Treant() {
-			super("Treant", 2, 2, Rarity.FREE, HeroClass.DRUID, 1);
-			setCollectible(false);
-		}
-
-		@Override
-		public Minion summon() {
-			return createMinion(GameTag.TAUNT);
-		}
-		
 	}
 }

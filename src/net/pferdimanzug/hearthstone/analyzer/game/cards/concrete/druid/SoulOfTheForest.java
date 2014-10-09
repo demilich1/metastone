@@ -1,10 +1,9 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid;
 
-import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.druid.Treant;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.AddDeathrattleSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
@@ -29,17 +28,5 @@ public class SoulOfTheForest extends SpellCard {
 	public int getTypeId() {
 		return 20;
 	}
-
-	private class Treant extends MinionCard {
-
-		public Treant() {
-			super("Treant", 2, 2, Rarity.COMMON, HeroClass.DRUID, 1);
-			setCollectible(false);
-		}
-
-		@Override
-		public Minion summon() {
-			return createMinion();
-		}
-	}
+	
 }

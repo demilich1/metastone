@@ -4,15 +4,13 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.spells.Bananas;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.ReceiveCardSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.TargetPlayer;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class KingMukla extends MinionCard {
 
@@ -35,17 +33,5 @@ public class KingMukla extends MinionCard {
 		Battlecry battlecry = Battlecry.createBattlecry(bananasSpell);
 		kingMukla.setBattlecry(battlecry);
 		return kingMukla;
-	}
-
-	private class Bananas extends SpellCard {
-
-		public Bananas() {
-			super("Bananas", Rarity.FREE, HeroClass.ANY, 1);
-			setCollectible(false);
-
-			setSpell(BuffSpell.create(1, 1));
-			setTargetRequirement(TargetSelection.MINIONS);
-		}
-
 	}
 }

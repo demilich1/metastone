@@ -4,9 +4,10 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.neutral.Devilsaur;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.neutral.Squirrel;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.EitherOrSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.TransformRandomMinionSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
@@ -36,35 +37,5 @@ public class TinkmasterOverspark extends MinionCard {
 		Battlecry battlecry = Battlecry.createBattlecry(randomTransformSpell);
 		tinkmasterOverspark.setBattlecry(battlecry);
 		return tinkmasterOverspark;
-	}
-
-	private class Devilsaur extends MinionCard {
-
-		public Devilsaur() {
-			super("Devilsaur", 5, 5, Rarity.COMMON, HeroClass.ANY, 5);
-			setRace(Race.BEAST);
-			setCollectible(false);
-		}
-
-		@Override
-		public Minion summon() {
-			return createMinion();
-		}
-
-	}
-
-	private class Squirrel extends MinionCard {
-
-		public Squirrel() {
-			super("Squirrel", 1, 1, Rarity.COMMON, HeroClass.ANY, 1);
-			setRace(Race.BEAST);
-			setCollectible(false);
-		}
-
-		@Override
-		public Minion summon() {
-			return createMinion();
-		}
-
 	}
 }

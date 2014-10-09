@@ -15,7 +15,6 @@ public class Bite extends SpellCard {
 		setSpell(BuffHeroSpell.create(4, 4));
 	}
 
-
 	@Override
 	public int getTypeId() {
 		return 3;

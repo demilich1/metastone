@@ -2,9 +2,9 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.neutral.Imp;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
@@ -35,19 +35,5 @@ public class ImpMaster extends MinionCard {
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), MetaSpell.create(damageSelfSpell, summonSpell));
 		impMaster.setSpellTrigger(trigger);
 		return impMaster;
-	}
-
-	private class Imp extends MinionCard {
-
-		public Imp() {
-			super("Imp", 1, 1, Rarity.RARE, HeroClass.ANY, 1);
-			setRace(Race.DEMON);
-		}
-
-		@Override
-		public Minion summon() {
-			return createMinion();
-		}
-		
 	}
 }

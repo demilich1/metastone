@@ -20,8 +20,6 @@ public class BluegillWarrior extends MinionCard {
 		return 99;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		return createMinion(GameTag.CHARGE);

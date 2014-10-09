@@ -1,8 +1,8 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.neutral.Gnoll;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
@@ -27,21 +27,5 @@ public class Hogger extends MinionCard {
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), SummonSpell.create(new Gnoll()));
 		hogger.setSpellTrigger(trigger);
 		return hogger;
-	}
-
-
-
-	private class Gnoll extends MinionCard {
-
-		public Gnoll() {
-			super("Gnoll", 2, 2, Rarity.FREE, HeroClass.ANY, 2);
-			setCollectible(false);
-		}
-
-		@Override
-		public Minion summon() {
-			return createMinion(GameTag.TAUNT);
-		}
-
 	}
 }

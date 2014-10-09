@@ -1,26 +1,20 @@
-package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas;
+package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.neutral;
 
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
-public class Thaddius extends MinionCard {
+public class BaineBloodhoof extends MinionCard {
 
-	public Thaddius() {
-		super("Thaddius", 11, 11, Rarity.LEGENDARY, HeroClass.ANY, 10);
+	public BaineBloodhoof() {
+		super("Baine Bloodhoof", 4, 5, Rarity.LEGENDARY, HeroClass.ANY, 4);
 		setCollectible(false);
 	}
-
-	@Override
-	public int getTypeId() {
-		return 410;
-	}
-
-
 
 	@Override
 	public Minion summon() {
 		return createMinion();
 	}
+
 }

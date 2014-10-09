@@ -20,8 +20,6 @@ public class GnomishInventor extends MinionCard {
 		return 134;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion gnomishInventor = createMinion();

@@ -2,6 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.neutral.VioletApprentice;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
@@ -29,19 +30,5 @@ public class VioletTeacher extends MinionCard {
 		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(TargetPlayer.SELF), summonSpell);
 		violetTeacher.setSpellTrigger(trigger);
 		return violetTeacher;
-	}
-
-	private class VioletApprentice extends MinionCard {
-
-		public VioletApprentice() {
-			super("Violet Apprentice", 1, 1, Rarity.FREE, HeroClass.ANY, 0);
-			setCollectible(false);
-		}
-
-		@Override
-		public Minion summon() {
-			return createMinion();
-		}
-
 	}
 }

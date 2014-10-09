@@ -21,8 +21,6 @@ public class GrimscaleOracle extends MinionCard {
 		return 136;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion grimscaleOracle = createMinion();

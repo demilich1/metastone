@@ -3,10 +3,9 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.WeaponCard;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.weapons.BattleAxe;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.EquipWeaponSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
@@ -28,18 +27,5 @@ public class ArathiWeaponsmith extends MinionCard {
 		Battlecry battlecry = Battlecry.createBattlecry(EquipWeaponSpell.create(new BattleAxe()), TargetSelection.NONE);
 		arathiWeaponsmith.setBattlecry(battlecry);
 		return arathiWeaponsmith;
-	}
-
-	private class BattleAxe extends WeaponCard {
-
-		public BattleAxe() {
-			super("Battle Axe", Rarity.FREE, HeroClass.WARRIOR, 1);
-		}
-
-		@Override
-		public Weapon getWeapon() {
-			return createWeapon(2, 2);
-		}
-		
 	}
 }
