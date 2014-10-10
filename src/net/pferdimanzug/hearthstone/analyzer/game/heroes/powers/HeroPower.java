@@ -33,16 +33,16 @@ public abstract class HeroPower extends SpellCard {
 			}
 
 			@Override
+			public String getPromptText() {
+				return "[Use hero power]";
+			}
+
+			@Override
 			protected void play(GameContext context, int playerId) {
 				if (getTargetRequirement() != TargetSelection.NONE) {
 					getSpell().setTarget(getTargetKey());
 				}
 				context.getLogic().castSpell(playerId, getSpell());
-			}
-
-			@Override
-			public String getPromptText() {
-				return "[Use hero power]";
 			}
 		};
 	}

@@ -14,12 +14,12 @@ public class Ashbringer extends WeaponCard {
 	}
 
 	@Override
-	public Weapon getWeapon() {
-		return createWeapon(5, 3);
+	public int getTypeId() {
+		return 471;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 471;
+	public Weapon getWeapon() {
+		return createWeapon(5, 3);
 	}
 }

@@ -18,14 +18,14 @@ public class SearingTotem extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 458;
+	}
+
+	@Override
 	public Minion summon() {
 		Minion searingTotem = createMinion();
 		searingTotem.setTag(GameTag.UNIQUE_MINION, UniqueMinion.SEARING_TOTEM);
 		return searingTotem;
-	}
-
-	@Override
-	public int getTypeId() {
-		return 458;
 	}
 }

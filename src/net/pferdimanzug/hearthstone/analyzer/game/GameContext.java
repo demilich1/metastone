@@ -160,12 +160,12 @@ public class GameContext implements Cloneable, IDisposable {
 		return result != MatchResult.RUNNING;
 	}
 
-	public int getActivePlayerId() {
-		return activePlayer;
-	}
-
 	public Player getActivePlayer() {
 		return getPlayer(activePlayer);
+	}
+
+	public int getActivePlayerId() {
+		return activePlayer;
 	}
 
 	public List<Entity> getAdjacentMinions(Player player, EntityReference minionReference) {
@@ -223,10 +223,6 @@ public class GameContext implements Cloneable, IDisposable {
 		return players;
 	}
 
-	public int getWinningPlayerId() {
-		return winner == null ? -1 : winner.getId();
-	}
-
 	@SuppressWarnings("unchecked")
 	public Stack<Minion> getSummonStack() {
 		if (!environment.containsKey(Environment.SUMMON_STACK)) {
@@ -251,6 +247,10 @@ public class GameContext implements Cloneable, IDisposable {
 		return turn;
 	}
 
+	public TurnState getTurnState() {
+		return turnState;
+	}
+
 	public List<GameAction> getValidActions() {
 		if (gameDecided()) {
 			return new ArrayList<>();
@@ -258,6 +258,22 @@ public class GameContext implements Cloneable, IDisposable {
 		return logic.getValidActions(activePlayer);
 	}
 
+	public int getWinningPlayerId() {
+		return winner == null ? -1 : winner.getId();
+	}
+
+	public boolean ignoreEvents() {
+		return ignoreEvents;
+	}
+
+	public void init() {
+		int startingPlayerId = logic.determineBeginner(PLAYER_1, PLAYER_2);
+		activePlayer = getPlayer(startingPlayerId).getId();
+		logger.debug(getActivePlayer().getName() + " begins");
+		logic.init(activePlayer, true);
+		logic.init(getOpponent(getActivePlayer()).getId(), false);
+	}
+	
 	protected void onGameStateChanged() {
 	}
 
@@ -268,14 +284,6 @@ public class GameContext implements Cloneable, IDisposable {
 		onWillPerformAction(gameAction);
 		logic.performGameAction(playerId, gameAction);
 		onGameStateChanged();
-	}
-	
-	public void init() {
-		int startingPlayerId = logic.determineBeginner(PLAYER_1, PLAYER_2);
-		activePlayer = getPlayer(startingPlayerId).getId();
-		logger.debug(getActivePlayer().getName() + " begins");
-		logic.init(activePlayer, true);
-		logic.init(getOpponent(getActivePlayer()).getId(), false);
 	}
 
 	public void play() {
@@ -357,6 +365,10 @@ public class GameContext implements Cloneable, IDisposable {
 		return targetLogic.resolveTargetKey(this, player, source, targetKey);
 	}
 
+	public void setIgnoreEvents(boolean ignoreEvents) {
+		this.ignoreEvents = ignoreEvents;
+	}
+
 	public void startTurn(int playerId) {
 		turn++;
 		logic.startTurn(playerId);
@@ -364,10 +376,6 @@ public class GameContext implements Cloneable, IDisposable {
 		actionsThisTurn = 0;
 		turnState = TurnState.TURN_IN_PROGRESS;
 		playTurn();
-	}
-
-	public TurnState getTurnState() {
-		return turnState;
 	}
 
 	@Override
@@ -401,13 +409,5 @@ public class GameContext implements Cloneable, IDisposable {
 		builder.append("Winner: " + (winner == null ? "tbd" : winner.getName()));
 
 		return builder.toString();
-	}
-
-	public boolean ignoreEvents() {
-		return ignoreEvents;
-	}
-
-	public void setIgnoreEvents(boolean ignoreEvents) {
-		this.ignoreEvents = ignoreEvents;
 	}
 }

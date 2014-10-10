@@ -23,6 +23,11 @@ public class HealingTotem extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 457;
+	}
+
+	@Override
 	public Minion summon() {
 		Minion healingTotem = createMinion();
 		healingTotem.setTag(GameTag.UNIQUE_MINION, UniqueMinion.HEALING_TOTEM);
@@ -31,10 +36,5 @@ public class HealingTotem extends MinionCard {
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), healSpell);
 		healingTotem.setSpellTrigger(trigger);
 		return healingTotem;
-	}
-
-	@Override
-	public int getTypeId() {
-		return 457;
 	}
 }

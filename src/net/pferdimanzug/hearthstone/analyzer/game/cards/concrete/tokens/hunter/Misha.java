@@ -18,12 +18,12 @@ public class Misha extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion(GameTag.TAUNT);
+	public int getTypeId() {
+		return 424;
 	}
 	
 	@Override
-	public int getTypeId() {
-		return 424;
+	public Minion summon() {
+		return createMinion(GameTag.TAUNT);
 	}
 }

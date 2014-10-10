@@ -16,6 +16,11 @@ public class EndTurnAction extends GameAction {
 	}
 	
 	@Override
+	public String getPromptText() {
+		return "[End turn]";
+	}
+
+	@Override
 	public boolean isSameActionGroup(GameAction anotherAction) {
 		return anotherAction.getActionType() == getActionType();
 	}
@@ -23,11 +28,6 @@ public class EndTurnAction extends GameAction {
 	@Override
 	public String toString() {
 		return String.format("[%s]", getActionType());
-	}
-
-	@Override
-	public String getPromptText() {
-		return "[End turn]";
 	}
 
 }

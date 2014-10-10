@@ -15,12 +15,12 @@ public class BearForm extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion(GameTag.TAUNT);
+	public int getTypeId() {
+		return 415;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 415;
+	public Minion summon() {
+		return createMinion(GameTag.TAUNT);
 	}
 }

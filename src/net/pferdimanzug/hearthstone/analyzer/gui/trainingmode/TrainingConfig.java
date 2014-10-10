@@ -17,24 +17,24 @@ public class TrainingConfig {
 		this.learner = learner;
 	}
 
-	public int getNumberOfGames() {
-		return numberOfGames;
-	}
-
-	public void setNumberOfGames(int numberOfGames) {
-		this.numberOfGames = numberOfGames;
-	}
-
 	public List<Deck> getDecks() {
 		return decks;
+	}
+
+	public LearningBehaviour getLearner() {
+		return learner;
+	}
+
+	public int getNumberOfGames() {
+		return numberOfGames;
 	}
 	
 	public Deck getRandomDeck() {
 		return decks.get(ThreadLocalRandom.current().nextInt(decks.size()));
 	}
 
-	public LearningBehaviour getLearner() {
-		return learner;
+	public void setNumberOfGames(int numberOfGames) {
+		this.numberOfGames = numberOfGames;
 	}
 
 }

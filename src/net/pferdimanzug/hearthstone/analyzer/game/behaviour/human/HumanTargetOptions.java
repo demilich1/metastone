@@ -21,16 +21,16 @@ public class HumanTargetOptions {
 		return actionGroup;
 	}
 
+	public IActionSelectionListener getActionSelectionListener() {
+		return actionSelectionListener;
+	}
+
 	public GameContext getContext() {
 		return context;
 	}
 
 	public int getPlayerId() {
 		return playerId;
-	}
-
-	public IActionSelectionListener getActionSelectionListener() {
-		return actionSelectionListener;
 	}
 
 }

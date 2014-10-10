@@ -28,6 +28,36 @@ public class GreedyOptimizeTurn extends Behaviour {
 		this.heuristic = heuristic;
 	}
 
+	private double alphaBeta(GameContext context, int playerId, GameAction action, int depth) {
+		GameContext simulation = context.clone();
+		simulation.getLogic().performGameAction(playerId, action);
+		if (!evaluatedActions.containsKey(action.getActionType())) {
+			evaluatedActions.put(action.getActionType(), 0);
+		}
+		evaluatedActions.put(action.getActionType(), evaluatedActions.get(action.getActionType()) + 1);
+		if (depth == 0 || simulation.getActivePlayerId() != playerId || simulation.gameDecided()) {
+			return heuristic.getScore(simulation, playerId);
+		}
+		
+		List<GameAction> validActions = simulation.getValidActions();
+
+		double score = Float.NEGATIVE_INFINITY;
+		if (table.known(simulation)) {
+			return table.getScore(simulation);
+			// logger.info("GameState is known, has score of {}", score);
+		} else {
+			for (GameAction gameAction : validActions) {
+				score = Math.max(score, alphaBeta(simulation, playerId, gameAction, depth - 1));
+				if (score >= 10000) {
+					break;
+				}
+			}
+			table.save(simulation, score);
+		}
+
+		return score;
+	}
+
 	@Override
 	public IBehaviour clone() {
 		try {
@@ -57,7 +87,7 @@ public class GreedyOptimizeTurn extends Behaviour {
 		}
 		return discardedCards;
 	}
-
+	
 	@Override
 	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
 		if (validActions.size() == 1) {
@@ -102,36 +132,6 @@ public class GreedyOptimizeTurn extends Behaviour {
 		heuristic.onActionSelected(context, player.getId());
 
 		return bestAction;
-	}
-	
-	private double alphaBeta(GameContext context, int playerId, GameAction action, int depth) {
-		GameContext simulation = context.clone();
-		simulation.getLogic().performGameAction(playerId, action);
-		if (!evaluatedActions.containsKey(action.getActionType())) {
-			evaluatedActions.put(action.getActionType(), 0);
-		}
-		evaluatedActions.put(action.getActionType(), evaluatedActions.get(action.getActionType()) + 1);
-		if (depth == 0 || simulation.getActivePlayerId() != playerId || simulation.gameDecided()) {
-			return heuristic.getScore(simulation, playerId);
-		}
-		
-		List<GameAction> validActions = simulation.getValidActions();
-
-		double score = Float.NEGATIVE_INFINITY;
-		if (table.known(simulation)) {
-			return table.getScore(simulation);
-			// logger.info("GameState is known, has score of {}", score);
-		} else {
-			for (GameAction gameAction : validActions) {
-				score = Math.max(score, alphaBeta(simulation, playerId, gameAction, depth - 1));
-				if (score >= 10000) {
-					break;
-				}
-			}
-			table.save(simulation, score);
-		}
-
-		return score;
 	}
 
 	private double simulateAction(GameContext context, int playerId, GameAction action) {

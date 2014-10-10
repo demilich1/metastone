@@ -10,10 +10,37 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public class TranspositionTable {
 	
+	private static int hash(Entity entity) {
+		int hash = entity.getName().hashCode();
+		for (GameTag tag : entity.getTags().keySet()) {
+			Object value = entity.getTags().get(tag);
+			if (!(value instanceof Integer)) {
+				continue;
+			}
+			hash = mergeHashes(hash, entity.getTag(tag).hashCode());
+		}
+		return hash;
+	}
+	private static int mergeHashes(int hash1, int hash2) {
+		int hash = 0;
+	    hash = hash * 33 ^ hash1;
+	    hash = hash * 33 ^ hash2;
+	    return hash;
+	}
 	private HashMap<Integer, Double> knownScores = new HashMap<Integer, Double>();
+	
 	//private HashMap<Integer, GameContext> debug = new HashMap<Integer, GameContext>();
 	private int cachedKey;
+	
 	private GameContext cachedState;
+	
+	public void clear() {
+		knownScores.clear();
+	}
+	
+	public double getScore(GameContext context) {
+		return knownScores.get(hash(context));
+	}
 	
 	private int hash(GameContext context) {
 		if (context == cachedState) {
@@ -44,35 +71,6 @@ public class TranspositionTable {
 		return hash;
 	}
 	
-	private static int hash(Entity entity) {
-		int hash = entity.getName().hashCode();
-		for (GameTag tag : entity.getTags().keySet()) {
-			Object value = entity.getTags().get(tag);
-			if (!(value instanceof Integer)) {
-				continue;
-			}
-			hash = mergeHashes(hash, entity.getTag(tag).hashCode());
-		}
-		return hash;
-	}
-	
-	private static int mergeHashes(int hash1, int hash2) {
-		int hash = 0;
-	    hash = hash * 33 ^ hash1;
-	    hash = hash * 33 ^ hash2;
-	    return hash;
-	}
-	
-	public void clear() {
-		knownScores.clear();
-	}
-	
-	public void save(GameContext context, double score) {
-		int key = hash(context);
-		knownScores.put(key, score);
-		//debug.put(key, context);
-	}
-	
 	public boolean known(GameContext context) {
 		int key = hash(context);
 		//if (knownScores.containsKey(key)) {
@@ -83,8 +81,10 @@ public class TranspositionTable {
 		return knownScores.containsKey(key);
 	}
 	
-	public double getScore(GameContext context) {
-		return knownScores.get(hash(context));
+	public void save(GameContext context, double score) {
+		int key = hash(context);
+		knownScores.put(key, score);
+		//debug.put(key, context);
 	}
 
 }

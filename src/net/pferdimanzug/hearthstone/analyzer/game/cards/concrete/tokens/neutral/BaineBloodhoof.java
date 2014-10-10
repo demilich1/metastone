@@ -14,12 +14,12 @@ public class BaineBloodhoof extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion();
+	public int getTypeId() {
+		return 432;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 432;
+	public Minion summon() {
+		return createMinion();
 	}
 }

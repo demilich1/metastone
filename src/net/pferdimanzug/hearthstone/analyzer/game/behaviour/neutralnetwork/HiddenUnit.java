@@ -18,20 +18,6 @@ public class HiddenUnit implements Unit {
 
 	/**
 	 * Builds a hidden unit taking the provided number of inputs. Sets the
-	 * initial weights to be random values to be 0.
-	 *
-	 * @param units
-	 *            The input units to this unit
-	 * @param random
-	 *            The random number generator
-	 */
-	protected HiddenUnit(Unit[] units, Random random) {
-		this.units = units;
-		this.weights = new double[units.length];
-	}
-
-	/**
-	 * Builds a hidden unit taking the provided number of inputs. Sets the
 	 * initial weights to be a copy of the provided weights
 	 *
 	 * @param units
@@ -47,15 +33,17 @@ public class HiddenUnit implements Unit {
 	}
 
 	/**
-	 * Generates a new weight
+	 * Builds a hidden unit taking the provided number of inputs. Sets the
+	 * initial weights to be random values to be 0.
 	 *
+	 * @param units
+	 *            The input units to this unit
 	 * @param random
-	 *            The rng
-	 * @return A new value
+	 *            The random number generator
 	 */
-	public void randomizeWeights(Random random) {
-		for (int i = 0; i < weights.length; i++)
-			weights[i] = random.nextDouble() * 0.2;
+	protected HiddenUnit(Unit[] units, Random random) {
+		this.units = units;
+		this.weights = new double[units.length];
 	}
 
 	/**
@@ -73,19 +61,31 @@ public class HiddenUnit implements Unit {
 	}
 
 	/**
-	 * Recomputes the value of this hidden unit, querying it's prior inputs.
-	 */
-	public void recompute() {
-		value = sigmoid(getSum());
-	}
-
-	/**
 	 * Returns the current value of this input
 	 *
 	 * @return The current value of this input
 	 */
 	public double getValue() {
 		return value;
+	}
+
+	/**
+	 * Generates a new weight
+	 *
+	 * @param random
+	 *            The rng
+	 * @return A new value
+	 */
+	public void randomizeWeights(Random random) {
+		for (int i = 0; i < weights.length; i++)
+			weights[i] = random.nextDouble() * 0.2;
+	}
+
+	/**
+	 * Recomputes the value of this hidden unit, querying it's prior inputs.
+	 */
+	public void recompute() {
+		value = sigmoid(getSum());
 	}
 
 	/**

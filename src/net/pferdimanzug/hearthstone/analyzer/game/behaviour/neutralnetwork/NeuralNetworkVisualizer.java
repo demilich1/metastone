@@ -15,6 +15,12 @@ import javax.swing.JScrollPane;
 
 public class NeuralNetworkVisualizer extends JFrame {
   
+  public static void main(String[] args) {
+    NeuralNetworkVisualizer vis = new NeuralNetworkVisualizer(new NeuralNetwork(198, new int[] {40, 1}));
+   
+    
+  }
+  
   // the panel showing the network
   protected NeuralNetworkPanel panel;
   
@@ -84,6 +90,28 @@ public class NeuralNetworkVisualizer extends JFrame {
     }
     
     /**
+     * Returns the node at the given lcoation, or null if none exists
+     *
+     * @param x The x location
+     * @param y The y location
+     * @return The node selected, or null
+     */
+    protected int[] getNode(int x, int y) {
+      if (Math.abs(y - getY(0, 0)) <= NODE_DIAMETER/2) 
+        for (int j=0; j<net.input.length; j++)
+          if (Math.sqrt((x-getX(0, j)) * (x-getX(0, j)) + (y-getY(0, j)) * (y-getY(0, j))) <= NODE_DIAMETER/2)
+            return new int[] {0, j};
+          
+      for (int i=0; i<net.hidden.length; i++)
+        if (Math.abs(y - getY(i+1, 0)) <= NODE_DIAMETER/2)
+          for (int j=0; j<net.hidden[i].length; j++)
+            if (Math.sqrt((x-getX(i+1, j)) * (x-getX(i+1, j)) + (y-getY(i+1, j)) * (y-getY(i+1, j))) <= NODE_DIAMETER/2)
+              return new int[] {i+1, j};
+      
+      return null;
+    }
+    
+    /**
      * Returns the preferred size of this panel
      *
      * @return The size of this panel
@@ -91,6 +119,51 @@ public class NeuralNetworkVisualizer extends JFrame {
     public Dimension getPreferredSize() {
       return new Dimension(WIDTH, HEIGHT);
     }
+    
+    /**
+     * Returns the x-coordinate of the given node
+     * 
+     * @param level The level
+     * @param num The num
+     */
+    protected int getX(int level, int num) {
+      if (level == 0)
+        return (num+1) * (WIDTH / (net.input.length+1));
+      else
+        return (num+1) * (WIDTH / (net.hidden[level-1].length+1));
+    }
+    
+    /**
+     * Returns the y-coordinate of the given node
+     * 
+     * @param level The level
+     * @param num The num
+     */
+    protected int getY(int level, int num) {
+      return HEIGHT - BORDER - ((level) * LEVEL_SPACING);
+    }
+    
+    /**
+     * Returns whetehr or not the node is slected
+     *
+     * @reutrn Whether or not the node is selected
+     */
+    protected boolean isSelected(int level, int num) {
+      return (selected != null) && (selected[0] == level) && (selected[1] == num);
+    }   
+    
+    public void mouseClicked(MouseEvent e) {
+      selected = getNode(e.getX(), e.getY());
+      NeuralNetworkVisualizer.this.repaint();
+    }
+
+    public void mouseEntered(MouseEvent e) {}
+    
+    public void mouseExited(MouseEvent e) {}
+    
+    public void mousePressed(MouseEvent e) {}
+    
+    public void mouseReleased(MouseEvent e) {}
     
     /**
      * Draws this panel.  
@@ -105,42 +178,6 @@ public class NeuralNetworkVisualizer extends JFrame {
       
       paintConnections(g2);
       paintNodes(g2);
-    }
-    
-    /**
-      * Paints the connections between the nodes
-     *
-     * @param g2 The grpahics
-     */
-    protected void paintConnections(Graphics2D g2) {
-      for (int i=0; i<net.input.length; i++)
-        paintConnection(g2, getX(0, i), getY(0, i), getX(0, i), getY(0, i) + INPUT_LENGTH, 0, false);
-      
-      for (int i=0; i<net.hidden.length; i++) 
-        for (int j=0; j<net.hidden[i].length; j++)       
-          if (i == 0) 
-            for (int k=0; k<net.input.length; k++)
-              paintConnection(g2, getX(0, k), getY(0, k), getX(1, j), getY(1, j), net.hidden[i][j].weights[k], isSelected(1, j) || isSelected(0, k));
-          else
-            for (int k=0; k<net.hidden[i-1].length; k++)
-              paintConnection(g2, getX(i, k), getY(i, k), getX(i+1, j), getY(i+1, j), net.hidden[i][j].weights[k], isSelected(i+1, j) || isSelected(i, k));
-      
-      for (int i=0; i<net.hidden[net.hidden.length-1].length; i++) 
-        paintConnection(g2, getX(net.hidden.length, i), getY(net.hidden.length, i), 
-                        getX(net.hidden.length, i), getY(net.hidden.length, i) - INPUT_LENGTH, 0, false); 
-      
-      if (selected != null) 
-        for (int i=0; i<net.hidden.length; i++) 
-          for (int j=0; j<net.hidden[i].length; j++) 
-            if (i == 0) {
-              for (int k=0; k<net.input.length; k++)
-                if (isSelected(1, j) || isSelected(0, k))
-                  paintConnection(g2, getX(0, k), getY(0, k), getX(1, j), getY(1, j), net.hidden[i][j].weights[k], isSelected(1, j) || isSelected(0, k));
-            } else {
-              for (int k=0; k<net.hidden[i-1].length; k++)
-                if (isSelected(i+1, j) || isSelected(i, k)) 
-                  paintConnection(g2, getX(i, k), getY(i, k), getX(i+1, j), getY(i+1, j), net.hidden[i][j].weights[k], isSelected(i+1, j) || isSelected(i, k));
-            }
     }
     
     /**
@@ -199,31 +236,41 @@ public class NeuralNetworkVisualizer extends JFrame {
         g2.drawLine(x1, y1, x2, y2);
       }
     }
-    
     /**
-     * Paints the nodes
+      * Paints the connections between the nodes
      *
      * @param g2 The grpahics
      */
-    protected void paintNodes(Graphics2D g2) {
-      // paint the input level
-      for (int i=0; i<net.input.length; i++) 
-        paintNode(g2, getX(0, i), getY(0, i), "I" + i, isSelected(0, i));
+    protected void paintConnections(Graphics2D g2) {
+      for (int i=0; i<net.input.length; i++)
+        paintConnection(g2, getX(0, i), getY(0, i), getX(0, i), getY(0, i) + INPUT_LENGTH, 0, false);
       
       for (int i=0; i<net.hidden.length; i++) 
-        for (int j=0; j<net.hidden[i].length; j++) 
-          paintNode(g2, getX(i+1, j), getY(i+1, j), ((i < net.hidden.length - 1) ? "H" + i + "," : "O") + j, isSelected(i+1, j));
-    }   
-    
-    /**
-     * Returns whetehr or not the node is slected
-     *
-     * @reutrn Whether or not the node is selected
-     */
-    protected boolean isSelected(int level, int num) {
-      return (selected != null) && (selected[0] == level) && (selected[1] == num);
+        for (int j=0; j<net.hidden[i].length; j++)       
+          if (i == 0) 
+            for (int k=0; k<net.input.length; k++)
+              paintConnection(g2, getX(0, k), getY(0, k), getX(1, j), getY(1, j), net.hidden[i][j].weights[k], isSelected(1, j) || isSelected(0, k));
+          else
+            for (int k=0; k<net.hidden[i-1].length; k++)
+              paintConnection(g2, getX(i, k), getY(i, k), getX(i+1, j), getY(i+1, j), net.hidden[i][j].weights[k], isSelected(i+1, j) || isSelected(i, k));
+      
+      for (int i=0; i<net.hidden[net.hidden.length-1].length; i++) 
+        paintConnection(g2, getX(net.hidden.length, i), getY(net.hidden.length, i), 
+                        getX(net.hidden.length, i), getY(net.hidden.length, i) - INPUT_LENGTH, 0, false); 
+      
+      if (selected != null) 
+        for (int i=0; i<net.hidden.length; i++) 
+          for (int j=0; j<net.hidden[i].length; j++) 
+            if (i == 0) {
+              for (int k=0; k<net.input.length; k++)
+                if (isSelected(1, j) || isSelected(0, k))
+                  paintConnection(g2, getX(0, k), getY(0, k), getX(1, j), getY(1, j), net.hidden[i][j].weights[k], isSelected(1, j) || isSelected(0, k));
+            } else {
+              for (int k=0; k<net.hidden[i-1].length; k++)
+                if (isSelected(i+1, j) || isSelected(i, k)) 
+                  paintConnection(g2, getX(i, k), getY(i, k), getX(i+1, j), getY(i+1, j), net.hidden[i][j].weights[k], isSelected(i+1, j) || isSelected(i, k));
+            }
     }
-
     /**
      * Paints a node at the given location
      *
@@ -235,7 +282,6 @@ public class NeuralNetworkVisualizer extends JFrame {
     protected void paintNode(Graphics2D g2, int x, int y, String label) {
       paintNode(g2, x, y, label, false);
     }
-    
     /**
      * Paints a node at the given location
      *
@@ -263,66 +309,20 @@ public class NeuralNetworkVisualizer extends JFrame {
       
       g2.drawString(label, (int) (x - fm.getStringBounds(label, g2).getWidth()/2), y + fm.getAscent()/2);
     }
-    
-    /**
-     * Returns the x-coordinate of the given node
-     * 
-     * @param level The level
-     * @param num The num
-     */
-    protected int getX(int level, int num) {
-      if (level == 0)
-        return (num+1) * (WIDTH / (net.input.length+1));
-      else
-        return (num+1) * (WIDTH / (net.hidden[level-1].length+1));
-    }
-    
-    /**
-     * Returns the y-coordinate of the given node
-     * 
-     * @param level The level
-     * @param num The num
-     */
-    protected int getY(int level, int num) {
-      return HEIGHT - BORDER - ((level) * LEVEL_SPACING);
-    }
-    
-    /**
-     * Returns the node at the given lcoation, or null if none exists
-     *
-     * @param x The x location
-     * @param y The y location
-     * @return The node selected, or null
-     */
-    protected int[] getNode(int x, int y) {
-      if (Math.abs(y - getY(0, 0)) <= NODE_DIAMETER/2) 
-        for (int j=0; j<net.input.length; j++)
-          if (Math.sqrt((x-getX(0, j)) * (x-getX(0, j)) + (y-getY(0, j)) * (y-getY(0, j))) <= NODE_DIAMETER/2)
-            return new int[] {0, j};
-          
-      for (int i=0; i<net.hidden.length; i++)
-        if (Math.abs(y - getY(i+1, 0)) <= NODE_DIAMETER/2)
-          for (int j=0; j<net.hidden[i].length; j++)
-            if (Math.sqrt((x-getX(i+1, j)) * (x-getX(i+1, j)) + (y-getY(i+1, j)) * (y-getY(i+1, j))) <= NODE_DIAMETER/2)
-              return new int[] {i+1, j};
-      
-      return null;
-    }
-    
-    public void mouseEntered(MouseEvent e) {}
-    public void mouseExited(MouseEvent e) {}
-    public void mousePressed(MouseEvent e) {}
-    public void mouseReleased(MouseEvent e) {}
 
-    public void mouseClicked(MouseEvent e) {
-      selected = getNode(e.getX(), e.getY());
-      NeuralNetworkVisualizer.this.repaint();
+    /**
+     * Paints the nodes
+     *
+     * @param g2 The grpahics
+     */
+    protected void paintNodes(Graphics2D g2) {
+      // paint the input level
+      for (int i=0; i<net.input.length; i++) 
+        paintNode(g2, getX(0, i), getY(0, i), "I" + i, isSelected(0, i));
+      
+      for (int i=0; i<net.hidden.length; i++) 
+        for (int j=0; j<net.hidden[i].length; j++) 
+          paintNode(g2, getX(i+1, j), getY(i+1, j), ((i < net.hidden.length - 1) ? "H" + i + "," : "O") + j, isSelected(i+1, j));
     }
-  }
-  
-  public static void main(String[] args) {
-    NeuralNetworkVisualizer vis = new NeuralNetworkVisualizer(new NeuralNetwork(198, new int[] {40, 1}));
-   
-    
   }
 }

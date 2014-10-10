@@ -14,12 +14,12 @@ public class Squire extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion();
+	public int getTypeId() {
+		return 450;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 450;
+	public Minion summon() {
+		return createMinion();
 	}
 }

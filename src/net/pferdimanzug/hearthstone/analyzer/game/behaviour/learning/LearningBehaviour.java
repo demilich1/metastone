@@ -3,15 +3,15 @@ package net.pferdimanzug.hearthstone.analyzer.game.behaviour.learning;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.Behaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LearningBehaviour extends Behaviour {
 	
@@ -40,6 +40,23 @@ public class LearningBehaviour extends Behaviour {
 			}
 		}
 		return discardedCards;
+	}
+
+	@Override
+	public void onGameOver(GameContext context, int playerId, int winningPlayerId) {
+		if (!brain.isLearning()) {
+			return;
+		}
+
+		double reward = 0;
+		double[] actual = new double[1];
+		if (playerId == winningPlayerId) {
+			actual[0] = reward = 1.0;
+		} else {
+			actual[0] = reward = -1.0;
+		}
+
+		brain.learn(context, playerId, actual, reward);
 	}
 
 	@Override
@@ -73,23 +90,6 @@ public class LearningBehaviour extends Behaviour {
 		}
 
 		return bestAction;
-	}
-
-	@Override
-	public void onGameOver(GameContext context, int playerId, int winningPlayerId) {
-		if (!brain.isLearning()) {
-			return;
-		}
-
-		double reward = 0;
-		double[] actual = new double[1];
-		if (playerId == winningPlayerId) {
-			actual[0] = reward = 1.0;
-		} else {
-			actual[0] = reward = -1.0;
-		}
-
-		brain.learn(context, playerId, actual, reward);
 	}
 	
 	public void save() {

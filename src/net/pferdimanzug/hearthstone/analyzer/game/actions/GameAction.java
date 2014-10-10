@@ -29,8 +29,6 @@ public abstract class GameAction implements Cloneable {
 	
 	public abstract void execute(GameContext context, int playerId);
 	
-	public abstract String getPromptText();
-	
 	public String getActionSuffix() {
 		return actionSuffix;
 	}
@@ -38,6 +36,8 @@ public abstract class GameAction implements Cloneable {
 	public ActionType getActionType() {
 		return actionType;
 	}
+	
+	public abstract String getPromptText();
 
 	public EntityReference getSource() {
 		return source;

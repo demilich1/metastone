@@ -14,12 +14,12 @@ public class SpectralSpider extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion();
+	public int getTypeId() {
+		return 431;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 431;
+	public Minion summon() {
+		return createMinion();
 	}
 }

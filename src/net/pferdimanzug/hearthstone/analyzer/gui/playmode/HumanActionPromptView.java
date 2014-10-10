@@ -2,6 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.gui.playmode;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -30,7 +31,21 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
-public class HumanActionPromptView extends Stage {
+public class HumanActionPromptView extends VBox {
+
+	public static HumanActionPromptView createAsUtilityWindow(Window parent) {
+		Stage stage = new Stage(StageStyle.UTILITY);
+		stage.initOwner(parent);
+		HumanActionPromptView root = new HumanActionPromptView();
+		Scene scene = new Scene(root);
+
+		stage.setScene(scene);
+		stage.setX(parent.getX() + parent.getWidth());
+		stage.setY(parent.getY());
+		stage.show();
+
+		return root;
+	}
 
 	private static String getActionString(GameContext context, GameAction action) {
 		PlayCardAction playCardAction = null;
@@ -80,38 +95,33 @@ public class HumanActionPromptView extends Stage {
 		return actionString;
 	}
 
-	public HumanActionPromptView(Window parent, HumanActionOptions options) {
-		super(StageStyle.UTILITY);
-		initOwner(parent);
+	private final List<Node> existingButtons = new ArrayList<Node>();
 
+	public HumanActionPromptView() {
 		Label headerLabel = new Label("Choose action:");
 		headerLabel.setStyle("-fx-font-family: Arial;-fx-font-weight: bold; -fx-font-size: 16pt;");
-		VBox root = new VBox();
-		root.setPrefWidth(Region.USE_COMPUTED_SIZE);
-		root.setSpacing(2);
-		root.setPadding(new Insets(8));
-		root.setAlignment(Pos.CENTER);
-		root.getChildren().add(headerLabel);
 
-		Scene scene = new Scene(root);
-		root.getChildren().addAll(createActionButtons(options));
+		setPrefWidth(Region.USE_COMPUTED_SIZE);
+		setSpacing(2);
+		setPadding(new Insets(8));
+		setAlignment(Pos.CENTER);
+		getChildren().add(headerLabel);
 
-		setScene(scene);
-		setX(parent.getX() + parent.getWidth());
-		setY(parent.getY());
-		show();
+		setVisible(false);
 	}
 
 	private Node createActionButton(final ActionGroup actionGroup, HumanActionOptions options) {
 		GameContext context = options.getContext();
 		Button button = new Button(getActionString(context, actionGroup.getPrototype()));
 		button.setPrefWidth(200);
-		// only one action with no target selection or summon with no other minion on board
-		if (actionGroup.getActionsInGroup().size() == 1 && (actionGroup.getPrototype().getTargetRequirement() == TargetSelection.NONE
-				|| actionGroup.getPrototype().getActionType() == ActionType.SUMMON)) {
+		// only one action with no target selection or summon with no other
+		// minion on board
+		if (actionGroup.getActionsInGroup().size() == 1
+				&& (actionGroup.getPrototype().getTargetRequirement() == TargetSelection.NONE || actionGroup.getPrototype().getActionType() == ActionType.SUMMON)) {
 			button.setOnAction(event -> {
 				options.getBehaviour().onActionSelected(actionGroup.getPrototype());
-				close();
+				setVisible(false);
+
 			});
 			return button;
 		}
@@ -119,7 +129,7 @@ public class HumanActionPromptView extends Stage {
 				actionGroup);
 		button.setOnAction(event -> {
 			ApplicationFacade.getInstance().sendNotification(GameNotification.HUMAN_PROMPT_FOR_TARGET, humanTargetOptions);
-			close();
+			setVisible(false);
 		});
 
 		return button;
@@ -153,6 +163,16 @@ public class HumanActionPromptView extends Stage {
 			}
 		}
 		return false;
+	}
+
+	public void setActions(HumanActionOptions options) {
+		getChildren().removeAll(existingButtons);
+		existingButtons.clear();
+
+		Collection<Node> buttons = createActionButtons(options);
+		existingButtons.addAll(buttons);
+		getChildren().addAll(buttons);
+		setVisible(true);
 	}
 
 }

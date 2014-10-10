@@ -18,12 +18,12 @@ public class Treant extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion(treantTags);
+	public int getTypeId() {
+		return 419;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 419;
+	public Minion summon() {
+		return createMinion(treantTags);
 	}
 }

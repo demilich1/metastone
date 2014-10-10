@@ -72,6 +72,49 @@ public class ToolboxView extends ToolBar {
 		killMinionButton.setOnAction(this::handleKillMinionButton);
 	}
 
+	private void handleEditDeckButton(ActionEvent actionEvent) {
+		CardCollection deck = selectedPlayer.getDeck();
+		CardCollectionEditor cardCollectionEditor = new CardCollectionEditor("Edit deck", deck, this::onDeckFinishedEditing,
+				GameLogic.DECK_SIZE);
+		ApplicationFacade.getInstance().sendNotification(GameNotification.SHOW_MODAL_DIALOG, cardCollectionEditor);
+	}
+
+	private void handleEditHandButton(ActionEvent actionEvent) {
+		CardCollection hand = selectedPlayer.getHand();
+		CardCollectionEditor cardCollectionEditor = new CardCollectionEditor("Edit hand", hand, this::onHandFinishedEditing,
+				GameLogic.MAX_HAND_CARDS);
+		ApplicationFacade.getInstance().sendNotification(GameNotification.SHOW_MODAL_DIALOG, cardCollectionEditor);
+	}
+	
+	private void handleKillMinionButton(ActionEvent actionEvent) {
+		KillAction killAction = new KillAction();
+		ApplicationFacade.getInstance().sendNotification(GameNotification.PERFORM_ACTION, killAction);
+	}
+
+	public void handlePlayerChanged(ObservableValue<? extends Player> ov, Player oldSelected, Player newSelected) {
+		selectedPlayer = newSelected;
+		editHandButton.setDisable(selectedPlayer == null);
+		editDeckButton.setDisable(selectedPlayer == null);
+		ApplicationFacade.getInstance().sendNotification(GameNotification.SELECT_PLAYER, selectedPlayer);
+	}
+	
+	private void handleSpawnMinionButton(ActionEvent actionEvent) {
+		MinionCard selectedMinion = minionComboBox.getSelectionModel().getSelectedItem();
+		ApplicationFacade.getInstance().sendNotification(GameNotification.SPAWN_MINION, selectedMinion);
+	}
+
+	private void onDeckFinishedEditing(CardCollection cardCollection) {
+		ApplicationFacade.getInstance().sendNotification(GameNotification.MODIFY_PLAYER_DECK, cardCollection);
+	}
+
+	private void onHandFinishedEditing(CardCollection cardCollection) {
+		ApplicationFacade.getInstance().sendNotification(GameNotification.MODIFY_PLAYER_HAND, cardCollection);
+	}
+
+	private void onMinionFilterChanged(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+		populateMinions(newValue);
+	}
+
 	private void populateMinions(String filter) {
 		ObservableList<MinionCard> data = FXCollections.observableArrayList();
 		for (Card card : CardCatalogue.getAll()) {
@@ -104,49 +147,6 @@ public class ToolboxView extends ToolBar {
 				break;
 			}
 		}
-	}
-	
-	private void onMinionFilterChanged(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-		populateMinions(newValue);
-	}
-
-	private void handleSpawnMinionButton(ActionEvent actionEvent) {
-		MinionCard selectedMinion = minionComboBox.getSelectionModel().getSelectedItem();
-		ApplicationFacade.getInstance().sendNotification(GameNotification.SPAWN_MINION, selectedMinion);
-	}
-	
-	private void handleKillMinionButton(ActionEvent actionEvent) {
-		KillAction killAction = new KillAction();
-		ApplicationFacade.getInstance().sendNotification(GameNotification.PERFORM_ACTION, killAction);
-	}
-
-	private void handleEditHandButton(ActionEvent actionEvent) {
-		CardCollection hand = selectedPlayer.getHand();
-		CardCollectionEditor cardCollectionEditor = new CardCollectionEditor("Edit hand", hand, this::onHandFinishedEditing,
-				GameLogic.MAX_HAND_CARDS);
-		ApplicationFacade.getInstance().sendNotification(GameNotification.SHOW_MODAL_DIALOG, cardCollectionEditor);
-	}
-
-	private void onHandFinishedEditing(CardCollection cardCollection) {
-		ApplicationFacade.getInstance().sendNotification(GameNotification.MODIFY_PLAYER_HAND, cardCollection);
-	}
-
-	private void handleEditDeckButton(ActionEvent actionEvent) {
-		CardCollection deck = selectedPlayer.getDeck();
-		CardCollectionEditor cardCollectionEditor = new CardCollectionEditor("Edit deck", deck, this::onDeckFinishedEditing,
-				GameLogic.DECK_SIZE);
-		ApplicationFacade.getInstance().sendNotification(GameNotification.SHOW_MODAL_DIALOG, cardCollectionEditor);
-	}
-
-	private void onDeckFinishedEditing(CardCollection cardCollection) {
-		ApplicationFacade.getInstance().sendNotification(GameNotification.MODIFY_PLAYER_DECK, cardCollection);
-	}
-
-	public void handlePlayerChanged(ObservableValue<? extends Player> ov, Player oldSelected, Player newSelected) {
-		selectedPlayer = newSelected;
-		editHandButton.setDisable(selectedPlayer == null);
-		editDeckButton.setDisable(selectedPlayer == null);
-		ApplicationFacade.getInstance().sendNotification(GameNotification.SELECT_PLAYER, selectedPlayer);
 	}
 
 	private class PlayerStringConverter extends StringConverter<Player> {

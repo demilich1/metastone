@@ -18,14 +18,14 @@ public class StoneclawTotem extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 460;
+	}
+
+	@Override
 	public Minion summon() {
 		Minion stoneclawTotem = createMinion(GameTag.TAUNT);
 		stoneclawTotem.setTag(GameTag.UNIQUE_MINION, UniqueMinion.STONECLAW_TOTEM);
 		return stoneclawTotem;
-	}
-
-	@Override
-	public int getTypeId() {
-		return 460;
 	}
 }

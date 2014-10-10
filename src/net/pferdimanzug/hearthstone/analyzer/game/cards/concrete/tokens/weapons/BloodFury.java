@@ -14,12 +14,12 @@ public class BloodFury extends WeaponCard {
 	}
 
 	@Override
-	public Weapon getWeapon() {
-		return createWeapon(3, 8);
+	public int getTypeId() {
+		return 473;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 473;
+	public Weapon getWeapon() {
+		return createWeapon(3, 8);
 	}
 }

@@ -3,13 +3,13 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 public abstract class TestAction extends GameAction {
 
 	@Override
-	public boolean isSameActionGroup(GameAction anotherAction) {
-		return false;
+	public String getPromptText() {
+		return "[Test Action]";
 	}
 
 	@Override
-	public String getPromptText() {
-		return "[Test Action]";
+	public boolean isSameActionGroup(GameAction anotherAction) {
+		return false;
 	}
 
 }

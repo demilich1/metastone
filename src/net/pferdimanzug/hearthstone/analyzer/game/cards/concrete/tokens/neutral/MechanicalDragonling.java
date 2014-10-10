@@ -14,12 +14,12 @@ public class MechanicalDragonling extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion();
+	public int getTypeId() {
+		return 445;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 445;
+	public Minion summon() {
+		return createMinion();
 	}
 }

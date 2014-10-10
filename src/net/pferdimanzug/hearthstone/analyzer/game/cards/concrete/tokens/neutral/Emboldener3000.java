@@ -20,6 +20,11 @@ public class Emboldener3000 extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 437;
+	}
+
+	@Override
 	public Minion summon() {
 		Minion emboldener3000 = createMinion();
 		SpellDesc buffSpell = BuffRandomSpell.create(1, 1);
@@ -27,10 +32,5 @@ public class Emboldener3000 extends MinionCard {
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), buffSpell);
 		emboldener3000.setSpellTrigger(trigger);
 		return emboldener3000;
-	}
-
-	@Override
-	public int getTypeId() {
-		return 437;
 	}
 }

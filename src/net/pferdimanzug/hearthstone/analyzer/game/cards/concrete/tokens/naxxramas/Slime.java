@@ -15,12 +15,12 @@ public class Slime extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion(GameTag.TAUNT);
+	public int getTypeId() {
+		return 430;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 430;
+	public Minion summon() {
+		return createMinion(GameTag.TAUNT);
 	}
 }

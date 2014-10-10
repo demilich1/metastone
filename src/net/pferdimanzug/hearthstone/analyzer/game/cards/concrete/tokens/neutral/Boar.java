@@ -16,12 +16,12 @@ public class Boar extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion();
+	public int getTypeId() {
+		return 433;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 433;
+	public Minion summon() {
+		return createMinion();
 	}
 }

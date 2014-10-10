@@ -16,12 +16,12 @@ public class Imp extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion();
+	public int getTypeId() {
+		return 443;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 443;
+	public Minion summon() {
+		return createMinion();
 	}
 }

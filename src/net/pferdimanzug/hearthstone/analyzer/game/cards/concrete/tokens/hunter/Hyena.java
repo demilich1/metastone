@@ -16,12 +16,12 @@ public class Hyena extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion();
+	public int getTypeId() {
+		return 422;
 	}
 	
 	@Override
-	public int getTypeId() {
-		return 422;
+	public Minion summon() {
+		return createMinion();
 	}
 }

@@ -63,10 +63,6 @@ public class DeckProxy extends Proxy<GameNotification> {
 		return cardCollection.toList();
 	}
 
-	public List<Deck> getDecks() {
-		return decks;
-	}
-
 	public Deck getDeckByName(String deckName) {
 		for (Deck deck : decks) {
 			if (deck.getName().equals(deckName)) {
@@ -74,6 +70,10 @@ public class DeckProxy extends Proxy<GameNotification> {
 			}
 		}
 		return null;
+	}
+
+	public List<Deck> getDecks() {
+		return decks;
 	}
 
 	public void loadDecks() throws FileNotFoundException {

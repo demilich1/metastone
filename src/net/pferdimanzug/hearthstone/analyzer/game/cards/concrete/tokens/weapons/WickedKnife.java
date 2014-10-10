@@ -14,12 +14,12 @@ public class WickedKnife extends WeaponCard {
 	}
 
 	@Override
-	public Weapon getWeapon() {
-		return createWeapon(1, 2);
+	public int getTypeId() {
+		return 475;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 475;
+	public Weapon getWeapon() {
+		return createWeapon(1, 2);
 	}
 }

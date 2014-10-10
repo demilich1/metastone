@@ -18,12 +18,12 @@ public class Hound extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion(GameTag.CHARGE);
+	public int getTypeId() {
+		return 420;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 420;
+	public Minion summon() {
+		return createMinion(GameTag.CHARGE);
 	}
 }

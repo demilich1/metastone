@@ -17,12 +17,12 @@ public class Chicken extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion();
+	public int getTypeId() {
+		return 434;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 434;
+	public Minion summon() {
+		return createMinion();
 	}
 }

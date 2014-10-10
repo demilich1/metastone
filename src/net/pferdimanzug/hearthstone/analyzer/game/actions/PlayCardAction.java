@@ -61,6 +61,11 @@ public abstract class PlayCardAction extends GameAction {
 	}
 
 	@Override
+	public String getPromptText() {
+		return "[Play card]";
+	}
+
+	@Override
 	public boolean isSameActionGroup(GameAction anotherAction) {
 		if (anotherAction.getActionType() != getActionType()) {
 			return false;
@@ -68,13 +73,8 @@ public abstract class PlayCardAction extends GameAction {
 		PlayCardAction playCardAction = (PlayCardAction) anotherAction;
 		return this.cardReference.equals(playCardAction.cardReference);
 	}
-
-	protected abstract void play(GameContext context, int playerId);
 	
-	@Override
-	public String getPromptText() {
-		return "[Play card]";
-	}
+	protected abstract void play(GameContext context, int playerId);
 
 	@Override
 	public String toString() {

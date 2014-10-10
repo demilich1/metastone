@@ -82,6 +82,15 @@ public class Battlecry extends GameAction {
 		return entityFilter;
 	}
 
+	@Override
+	public String getPromptText() {
+		return "[Battlecry]";
+	}
+
+	public SpellDesc getSpell() {
+		return spell;
+	}
+
 	public boolean isResolvedLate() {
 		return resolvedLate;
 	}
@@ -106,14 +115,5 @@ public class Battlecry extends GameAction {
 	@Override
 	public String toString() {
 		return String.format("[%s '%s' resolvedLate:%s]", getActionType(), getSpell().getClass().getSimpleName(), resolvedLate);
-	}
-
-	public SpellDesc getSpell() {
-		return spell;
-	}
-
-	@Override
-	public String getPromptText() {
-		return "[Battlecry]";
 	}
 }

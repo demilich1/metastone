@@ -85,6 +85,14 @@ public abstract class Card extends Entity {
 		return collectible;
 	}
 
+	public boolean matchesFilter(String filter) {
+		if (filter == null) {
+			return true;
+		}
+		String lowerCaseName = getName().toLowerCase();
+		return lowerCaseName.contains(filter);
+	}
+
 	public abstract PlayCardAction play();
 
 	public void setCollectible(boolean collectible) {
@@ -94,17 +102,9 @@ public abstract class Card extends Entity {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+	
 	public void setLocation(CardLocation location) {
 		this.location = location;
-	}
-	
-	public boolean matchesFilter(String filter) {
-		if (filter == null) {
-			return true;
-		}
-		String lowerCaseName = getName().toLowerCase();
-		return lowerCaseName.contains(filter);
 	}
 
 	@Override

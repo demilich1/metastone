@@ -64,6 +64,10 @@ public class TDWeightHeuristic implements IGameStateHeuristic {
 		return minionScore;
 	}
 
+	private double getCurrentValue(WeightedFeature feature) {
+		return currentValues.containsKey(feature) ? currentValues.get(feature) : 0f;
+	}
+
 	@Override
 	public double getScore(GameContext context, int playerId) {
 		double score = 0;
@@ -95,18 +99,6 @@ public class TDWeightHeuristic implements IGameStateHeuristic {
 		return MathUtils.clamp(score, -1, 1);
 	}
 
-	private double registerFeatureValue(WeightedFeature feature, double value) {
-		if (!currentValues.containsKey(feature)) {
-			currentValues.put(feature, 0.0);
-		}
-		currentValues.put(feature, currentValues.get(feature) + value);
-		return value * weights.get(feature);
-	}
-
-	private double getCurrentValue(WeightedFeature feature) {
-		return currentValues.containsKey(feature) ? currentValues.get(feature) : 0f;
-	}
-
 	public synchronized void onActionSelected(GameContext context, int playerId) {
 		double newGameStateValue = getScore(context, playerId);
 
@@ -117,6 +109,14 @@ public class TDWeightHeuristic implements IGameStateHeuristic {
 			weights.put(feature, weight);
 		}
 		oldGameStateValue = newGameStateValue;
+	}
+
+	private double registerFeatureValue(WeightedFeature feature, double value) {
+		if (!currentValues.containsKey(feature)) {
+			currentValues.put(feature, 0.0);
+		}
+		currentValues.put(feature, currentValues.get(feature) + value);
+		return value * weights.get(feature);
 	}
 
 }

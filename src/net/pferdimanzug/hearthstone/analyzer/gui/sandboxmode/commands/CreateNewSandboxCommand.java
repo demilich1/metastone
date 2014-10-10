@@ -9,6 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
+import net.pferdimanzug.hearthstone.analyzer.gui.playmode.GameContextVisualizable;
 import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.SandboxProxy;
 import de.pferdimanzug.nittygrittymvc.SimpleCommand;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
@@ -27,7 +28,7 @@ public class CreateNewSandboxCommand extends SimpleCommand<GameNotification> {
 		Player player2 = new Player("Player 2", hero2, DeckFactory.getRandomDeck(hero2.getHeroClass()));
 		player2.setBehaviour(new DoNothingBehaviour());
 
-		GameContext sandbox = new GameContext(player1, player2, new GameLogic());
+		GameContext sandbox = new GameContextVisualizable(player1, player2, new GameLogic());
 		sandbox.setIgnoreEvents(true);
 		sandbox.init();
 		sandboxProxy.setSandbox(sandbox);

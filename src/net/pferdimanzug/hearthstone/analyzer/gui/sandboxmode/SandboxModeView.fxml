@@ -27,6 +27,7 @@
       <AnchorPane>
          <children>
             <Button id="default-button" fx:id="backButton" mnemonicParsing="false" text="Back" AnchorPane.leftAnchor="0.0" />
+            <Button id="default-button" fx:id="playButton" alignment="TOP_CENTER" mnemonicParsing="false" text="Play!" AnchorPane.rightAnchor="440.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
    </bottom>

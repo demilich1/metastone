@@ -20,6 +20,11 @@ public class Poultryizer extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 448;
+	}
+
+	@Override
 	public Minion summon() {
 		Minion poultryizer = createMinion();
 		SpellDesc chickenizeSpell = TransformRandomMinionSpell.create(new Chicken());
@@ -27,10 +32,5 @@ public class Poultryizer extends MinionCard {
 		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), chickenizeSpell);
 		poultryizer.setSpellTrigger(trigger);
 		return poultryizer;
-	}
-
-	@Override
-	public int getTypeId() {
-		return 448;
 	}
 }

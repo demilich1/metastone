@@ -14,12 +14,12 @@ public class HeavyAxe extends WeaponCard {
 	}
 
 	@Override
-	public Weapon getWeapon() {
-		return createWeapon(1, 3);
+	public int getTypeId() {
+		return 474;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 474;
+	public Weapon getWeapon() {
+		return createWeapon(1, 3);
 	}
 }

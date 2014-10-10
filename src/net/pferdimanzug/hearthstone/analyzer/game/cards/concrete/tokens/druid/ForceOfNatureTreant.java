@@ -21,6 +21,11 @@ public class ForceOfNatureTreant extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 417;
+	}
+
+	@Override
 	public Minion summon() {
 		Minion treant = createMinion(GameTag.CHARGE);
 		SpellDesc destroySpell = DestroySpell.create();
@@ -28,10 +33,5 @@ public class ForceOfNatureTreant extends MinionCard {
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), destroySpell);
 		treant.setSpellTrigger(trigger);
 		return treant;
-	}
-
-	@Override
-	public int getTypeId() {
-		return 417;
 	}
 }

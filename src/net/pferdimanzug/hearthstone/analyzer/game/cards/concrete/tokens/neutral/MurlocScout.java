@@ -16,12 +16,12 @@ public class MurlocScout extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion();
+	public int getTypeId() {
+		return 447;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 447;
+	public Minion summon() {
+		return createMinion();
 	}
 }

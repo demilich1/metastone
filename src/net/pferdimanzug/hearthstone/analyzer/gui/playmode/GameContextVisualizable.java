@@ -43,6 +43,9 @@ public class GameContextVisualizable extends GameContext {
 	
 	@Override
 	protected void onGameStateChanged() {
+		if (ignoreEvents()) {
+			return;
+		}
 		try {
 			Thread.sleep(500);
 		} catch (InterruptedException e) {

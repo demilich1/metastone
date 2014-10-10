@@ -14,12 +14,12 @@ public class DefiasBandit extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion();
+	public int getTypeId() {
+		return 456;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 456;
+	public Minion summon() {
+		return createMinion();
 	}
 }

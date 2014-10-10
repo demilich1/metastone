@@ -15,12 +15,12 @@ public class CatForm extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion(GameTag.CHARGE);
+	public int getTypeId() {
+		return 416;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 416;
+	public Minion summon() {
+		return createMinion(GameTag.CHARGE);
 	}
 }

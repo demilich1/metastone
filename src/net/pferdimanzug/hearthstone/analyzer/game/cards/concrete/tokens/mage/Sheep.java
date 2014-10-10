@@ -16,12 +16,12 @@ public class Sheep extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion();
+	public int getTypeId() {
+		return 427;
 	}
 	
 	@Override
-	public int getTypeId() {
-		return 427;
+	public Minion summon() {
+		return createMinion();
 	}
 }

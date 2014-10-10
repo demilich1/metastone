@@ -20,15 +20,15 @@ public class Leokk extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 423;
+	}
+
+	@Override
 	public Minion summon() {
 		Minion leokk = createMinion();
 		Aura leokkAura = new BuffAura(1, 0, EntityReference.FRIENDLY_MINIONS);
 		leokk.setSpellTrigger(leokkAura);
 		return leokk;
-	}
-
-	@Override
-	public int getTypeId() {
-		return 423;
 	}
 }

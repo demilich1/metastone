@@ -6,6 +6,7 @@ import java.util.List;
 import javafx.application.Platform;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanActionOptions;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanTargetOptions;
 import de.pferdimanzug.nittygrittymvc.Mediator;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
@@ -23,19 +24,24 @@ public class SandboxModeMediator extends Mediator<GameNotification> {
 
 	@Override
 	public void handleNotification(final INotification<GameNotification> notification) {
+
 		switch (notification.getId()) {
+		case GAME_STATE_UPDATE:
 		case UPDATE_SANDBOX_STATE:
 			GameContext context = (GameContext) notification.getBody();
-			Platform.runLater(new Runnable() {
-				@Override
-				public void run() {
-					view.updateSandbox(context);
-				}
-			});
+			Platform.runLater(() -> view.updateSandbox(context));
 			break;
 		case SELECT_TARGET:
 			HumanTargetOptions targetOptions = (HumanTargetOptions) notification.getBody();
-			view.getBoardView().enableTargetSelection(targetOptions);
+			Platform.runLater(() -> view.getBoardView().enableTargetSelection(targetOptions));
+			break;
+		case HUMAN_PROMPT_FOR_ACTION:
+			HumanActionOptions actionOptions = (HumanActionOptions) notification.getBody();
+			Platform.runLater(() -> view.getActionPromptView().setActions(actionOptions));
+			break;
+		case HUMAN_PROMPT_FOR_TARGET:
+			HumanTargetOptions options = (HumanTargetOptions) notification.getBody();
+			Platform.runLater(() -> view.getBoardView().enableTargetSelection(options));
 			break;
 		default:
 			break;
@@ -47,6 +53,9 @@ public class SandboxModeMediator extends Mediator<GameNotification> {
 		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
 		notificationInterests.add(GameNotification.UPDATE_SANDBOX_STATE);
 		notificationInterests.add(GameNotification.SELECT_TARGET);
+		notificationInterests.add(GameNotification.HUMAN_PROMPT_FOR_ACTION);
+		notificationInterests.add(GameNotification.HUMAN_PROMPT_FOR_TARGET);
+		notificationInterests.add(GameNotification.GAME_STATE_UPDATE);
 		return notificationInterests;
 	}
 

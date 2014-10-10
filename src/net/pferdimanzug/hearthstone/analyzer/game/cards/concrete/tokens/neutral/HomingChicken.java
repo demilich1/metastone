@@ -22,6 +22,11 @@ public class HomingChicken extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 442;
+	}
+
+	@Override
 	public Minion summon() {
 		Minion homingChicken = createMinion();
 		SpellDesc destroySpell = DestroySpell.create();
@@ -30,10 +35,5 @@ public class HomingChicken extends MinionCard {
 		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), homingChickenSpell);
 		homingChicken.setSpellTrigger(trigger);
 		return homingChicken;
-	}
-
-	@Override
-	public int getTypeId() {
-		return 442;
 	}
 }

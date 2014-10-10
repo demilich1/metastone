@@ -14,12 +14,12 @@ public class BattleAxe extends WeaponCard {
 	}
 
 	@Override
-	public Weapon getWeapon() {
-		return createWeapon(2, 2);
+	public int getTypeId() {
+		return 472;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 472;
+	public Weapon getWeapon() {
+		return createWeapon(2, 2);
 	}
 }

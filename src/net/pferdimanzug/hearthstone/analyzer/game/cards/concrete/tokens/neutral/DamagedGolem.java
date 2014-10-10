@@ -14,12 +14,12 @@ public class DamagedGolem extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion();
+	public int getTypeId() {
+		return 435;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 435;
+	public Minion summon() {
+		return createMinion();
 	}
 }

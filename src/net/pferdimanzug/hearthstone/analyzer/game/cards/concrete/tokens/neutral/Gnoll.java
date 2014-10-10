@@ -15,12 +15,12 @@ public class Gnoll extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion(GameTag.TAUNT);
+	public int getTypeId() {
+		return 441;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 441;
+	public Minion summon() {
+		return createMinion(GameTag.TAUNT);
 	}
 }

@@ -20,6 +20,11 @@ public class RepairBot extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 449;
+	}
+
+	@Override
 	public Minion summon() {
 		Minion repairBot = createMinion();
 		SpellDesc healRandomSpell = HealRandomSpell.create(6);
@@ -27,10 +32,5 @@ public class RepairBot extends MinionCard {
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), healRandomSpell);
 		repairBot.setSpellTrigger(trigger);
 		return repairBot;
-	}
-
-	@Override
-	public int getTypeId() {
-		return 449;
 	}
 }

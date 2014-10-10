@@ -51,6 +51,17 @@ public class TrainingModeView extends BorderPane implements EventHandler<ActionE
 		resultChart.setVisible(false);
 	}
 
+	@Override
+	public void handle(ActionEvent actionEvent) {
+		if (actionEvent.getSource() == startButton) {
+			TrainingConfig trainingConfig = new TrainingConfig(new LearningBehaviour(true));
+			trainingConfig.setNumberOfGames(numberOfGamesBox.getSelectionModel().getSelectedItem());
+			ApplicationFacade.getInstance().sendNotification(GameNotification.COMMIT_TRAININGMODE_CONFIG, trainingConfig);
+		} else if (actionEvent.getSource() == backButton) {
+			ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU);
+		}
+	}
+
 	private void setupNumberOfGamesBox() {
 		ObservableList<Integer> numberOfGamesEntries = FXCollections.observableArrayList();
 		numberOfGamesEntries.add(1);
@@ -61,18 +72,6 @@ public class TrainingModeView extends BorderPane implements EventHandler<ActionE
 		numberOfGamesEntries.add(100000);
 		numberOfGamesBox.setItems(numberOfGamesEntries);
 		numberOfGamesBox.getSelectionModel().select(2);
-	}
-
-	public void startTraining() {
-		resultChart.getData().clear();
-		startButton.setDisable(true);
-		backButton.setDisable(true);
-		numberOfGamesBox.setDisable(true);
-		resultChart.setVisible(true);
-		series = new XYChart.Series<>();
-		series.setName("Win rate");
-		resultChart.getData().add(series);
-		series.getData().add(new XYChart.Data<Number, Number>(0, 0));
 	}
 
 	public void showProgress(TrainingProgressReport progress) {
@@ -87,15 +86,16 @@ public class TrainingModeView extends BorderPane implements EventHandler<ActionE
 		}
 	}
 
-	@Override
-	public void handle(ActionEvent actionEvent) {
-		if (actionEvent.getSource() == startButton) {
-			TrainingConfig trainingConfig = new TrainingConfig(new LearningBehaviour(true));
-			trainingConfig.setNumberOfGames(numberOfGamesBox.getSelectionModel().getSelectedItem());
-			ApplicationFacade.getInstance().sendNotification(GameNotification.COMMIT_TRAININGMODE_CONFIG, trainingConfig);
-		} else if (actionEvent.getSource() == backButton) {
-			ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU);
-		}
+	public void startTraining() {
+		resultChart.getData().clear();
+		startButton.setDisable(true);
+		backButton.setDisable(true);
+		numberOfGamesBox.setDisable(true);
+		resultChart.setVisible(true);
+		series = new XYChart.Series<>();
+		series.setName("Win rate");
+		resultChart.getData().add(series);
+		series.getData().add(new XYChart.Data<Number, Number>(0, 0));
 	}
 
 }

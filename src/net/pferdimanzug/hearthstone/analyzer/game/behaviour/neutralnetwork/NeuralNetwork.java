@@ -10,14 +10,28 @@ import java.util.Random;
 
 public class NeuralNetwork implements Serializable {
 
+	/**
+	 * Method which reads and returns a network from the given file
+	 *
+	 * @param filename
+	 *            The file to read from
+	 */
+	public static NeuralNetwork readFrom(String filename) throws IOException, ClassNotFoundException {
+		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename));
+		NeuralNetwork net = (NeuralNetwork) ois.readObject();
+		ois.close();
+
+		return net;
+	}
+
 	// serialver for backwards compatibility
 	private static final long serialVersionUID = 1165374168397424904L;
 
 	// the random number generator
 	public static final Random random = new Random();
-
 	// the layers of the network
 	public InputUnit[] input;
+
 	public HiddenUnit[][] hidden;
 
 	/**
@@ -118,19 +132,5 @@ public class NeuralNetwork implements Serializable {
 		oos.writeObject(this);
 		oos.flush();
 		oos.close();
-	}
-
-	/**
-	 * Method which reads and returns a network from the given file
-	 *
-	 * @param filename
-	 *            The file to read from
-	 */
-	public static NeuralNetwork readFrom(String filename) throws IOException, ClassNotFoundException {
-		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename));
-		NeuralNetwork net = (NeuralNetwork) ois.readObject();
-		ois.close();
-
-		return net;
 	}
 }

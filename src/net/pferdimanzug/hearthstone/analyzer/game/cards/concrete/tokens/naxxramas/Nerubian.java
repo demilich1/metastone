@@ -14,12 +14,12 @@ public class Nerubian extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion();
+	public int getTypeId() {
+		return 429;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 429;
+	public Minion summon() {
+		return createMinion();
 	}
 }

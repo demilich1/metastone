@@ -16,12 +16,12 @@ public class MirrorImageToken extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion(GameTag.TAUNT);
+	public int getTypeId() {
+		return 426;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 426;
+	public Minion summon() {
+		return createMinion(GameTag.TAUNT);
 	}
 }

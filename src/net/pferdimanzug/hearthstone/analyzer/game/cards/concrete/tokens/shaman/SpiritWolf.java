@@ -16,12 +16,12 @@ public class SpiritWolf extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion(GameTag.TAUNT);
+	public int getTypeId() {
+		return 459;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 459;
+	public Minion summon() {
+		return createMinion(GameTag.TAUNT);
 	}
 }

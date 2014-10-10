@@ -20,12 +20,12 @@ public class SandboxProxy extends Proxy<GameNotification> {
 		return sandbox;
 	}
 
-	public void setSandbox(GameContext sandbox) {
-		this.sandbox = sandbox;
-	}
-
 	public Player getSelectedPlayer() {
 		return selectedPlayer;
+	}
+
+	public void setSandbox(GameContext sandbox) {
+		this.sandbox = sandbox;
 	}
 
 	public void setSelectedPlayer(Player selectedPlayer) {

@@ -18,12 +18,12 @@ public class Huffer extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion(GameTag.CHARGE);
+	public int getTypeId() {
+		return 421;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 421;
+	public Minion summon() {
+		return createMinion(GameTag.CHARGE);
 	}
 }

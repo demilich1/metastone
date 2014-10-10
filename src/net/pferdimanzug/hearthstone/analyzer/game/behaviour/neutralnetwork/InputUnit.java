@@ -21,12 +21,12 @@ public class InputUnit implements Unit {
   }
   
   /**
-   * Sets the value of this input unit
+   * Returns the current value of this input
    *
-   * @return the value
+   * @return The current value of this input
    */
-  protected void setValue(double value) {
-    this.value = value;
+  public double getValue() {
+    return value;
   }
   
   /**
@@ -37,11 +37,11 @@ public class InputUnit implements Unit {
   }
   
   /**
-   * Returns the current value of this input
+   * Sets the value of this input unit
    *
-   * @return The current value of this input
+   * @return the value
    */
-  public double getValue() {
-    return value;
+  protected void setValue(double value) {
+    this.value = value;
   }
 }

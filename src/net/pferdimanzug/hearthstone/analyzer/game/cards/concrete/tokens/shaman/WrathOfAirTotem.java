@@ -18,15 +18,15 @@ public class WrathOfAirTotem extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 461;
+	}
+
+	@Override
 	public Minion summon() {
 		Minion wrathOfAirTotem = createMinion();
 		wrathOfAirTotem.setTag(GameTag.UNIQUE_MINION, UniqueMinion.WRATH_OF_AIR_TOTEM);
 		wrathOfAirTotem.setTag(GameTag.SPELL_POWER, 1);
 		return wrathOfAirTotem;
-	}
-
-	@Override
-	public int getTypeId() {
-		return 461;
 	}
 }

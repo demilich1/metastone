@@ -14,12 +14,12 @@ public class SpellbenderToken extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion();
+	public int getTypeId() {
+		return 428;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 428;
+	public Minion summon() {
+		return createMinion();
 	}
 }

@@ -14,12 +14,12 @@ public class SilverHandRecruit extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion();
+	public int getTypeId() {
+		return 455;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 455;
+	public Minion summon() {
+		return createMinion();
 	}
 }

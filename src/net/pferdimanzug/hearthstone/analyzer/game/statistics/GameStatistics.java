@@ -48,6 +48,10 @@ public class GameStatistics implements Cloneable {
 		add(Statistic.DAMAGE_DEALT, damage);
 	}
 
+	public void equipWeapon() {
+		add(Statistic.WEAPONS_EQUIPPED, 1);
+	}
+
 	public void gameLost() {
 		add(Statistic.GAMES_LOST, 1);
 	}
@@ -63,11 +67,11 @@ public class GameStatistics implements Cloneable {
 	public int getInt(Statistic key) {
 		return stats.containsKey(key) ? (int) stats.get(key) : 0;
 	}
-
+	
 	public void heal(int healing) {
 		add(Statistic.HEALING_DONE, healing);
 	}
-	
+
 	public void manaSpent(int mana) {
 		add(Statistic.MANA_SPENT, mana);
 	}
@@ -84,13 +88,9 @@ public class GameStatistics implements Cloneable {
 			}
 		}
 	}
-
+	
 	public void set(Statistic key, Object value) {
 		stats.put(key, value);
-	}
-	
-	public void equipWeapon() {
-		add(Statistic.WEAPONS_EQUIPPED, 1);
 	}
 
 	public void startTurn() {

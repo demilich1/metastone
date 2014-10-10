@@ -16,12 +16,12 @@ public class EmeraldDrake extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion();
+	public int getTypeId() {
+		return 438;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 438;
+	public Minion summon() {
+		return createMinion();
 	}
 }

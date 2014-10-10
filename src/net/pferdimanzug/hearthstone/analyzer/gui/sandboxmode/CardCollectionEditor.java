@@ -84,20 +84,37 @@ public class CardCollectionEditor extends BorderPane {
 		removeCardButton.setOnAction(this::handleRemoveCardButton);
 	}
 
-	private void populateEditableView(CardCollection cardCollection) {
-		ObservableList<Card> data = FXCollections.observableArrayList();
-		for (Card card : cardCollection) {
-			data.add(card);
+	private void handleAddCardButton(ActionEvent actionEvent) {
+		for (Card card : catalogueListView.getSelectionModel().getSelectedItems()) {
+			editableListView.getItems().add(card.clone());
 		}
-		data.addListener(this::handleEditableCardListChanged);
-		handleEditableCardListChanged(null);
-		editableListView.setItems(data);
+	}
+
+	private void handleCancelButton(ActionEvent actionEvent) {
+		this.getScene().getWindow().hide();
 	}
 
 	private void handleEditableCardListChanged(Change<? extends Card> change) {
 		int count = editableListView.getItems().size();
 		cardCountLabel.setText("Cards in collection: " + count + "/" + cardLimit);
 		addCardButton.setDisable(count >= cardLimit);
+	}
+
+	private void handleOkButton(ActionEvent actionEvent) {
+		CardCollection changedCollection = new CardCollection();
+		for (Card card : editableListView.getItems()) {
+			changedCollection.add(card);
+		}
+		listener.onFinishedEditing(changedCollection);
+		this.getScene().getWindow().hide();
+	}
+
+	private void handleRemoveCardButton(ActionEvent actionEvent) {
+		editableListView.getItems().removeAll(editableListView.getSelectionModel().getSelectedItems());
+	}
+
+	private void onFilterTextChanged(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+		populateCatalogueView(newValue);
 	}
 
 	private void populateCatalogueView(String filter) {
@@ -110,31 +127,14 @@ public class CardCollectionEditor extends BorderPane {
 		catalogueListView.setItems(data);
 	}
 
-	private void handleCancelButton(ActionEvent actionEvent) {
-		this.getScene().getWindow().hide();
-	}
-
-	private void handleOkButton(ActionEvent actionEvent) {
-		CardCollection changedCollection = new CardCollection();
-		for (Card card : editableListView.getItems()) {
-			changedCollection.add(card);
+	private void populateEditableView(CardCollection cardCollection) {
+		ObservableList<Card> data = FXCollections.observableArrayList();
+		for (Card card : cardCollection) {
+			data.add(card);
 		}
-		listener.onFinishedEditing(changedCollection);
-		this.getScene().getWindow().hide();
-	}
-
-	private void onFilterTextChanged(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-		populateCatalogueView(newValue);
-	}
-
-	private void handleRemoveCardButton(ActionEvent actionEvent) {
-		editableListView.getItems().removeAll(editableListView.getSelectionModel().getSelectedItems());
-	}
-
-	private void handleAddCardButton(ActionEvent actionEvent) {
-		for (Card card : catalogueListView.getSelectionModel().getSelectedItems()) {
-			editableListView.getItems().add(card.clone());
-		}
+		data.addListener(this::handleEditableCardListChanged);
+		handleEditableCardListChanged(null);
+		editableListView.setItems(data);
 	}
 
 	private class CardStringConverter extends StringConverter<Card> {

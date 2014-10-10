@@ -37,6 +37,12 @@ public class HumanBehaviour extends Behaviour implements IActionSelectionListene
 	}
 
 	@Override
+	public void onActionSelected(GameAction action) {
+		this.selectedAction = action;
+		waitingForInput = false;
+	}
+
+	@Override
 	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
 		waitingForInput = true;
 		HumanActionOptions options = new HumanActionOptions(this, context, player, validActions);
@@ -49,15 +55,9 @@ public class HumanBehaviour extends Behaviour implements IActionSelectionListene
 		}
 		return selectedAction;
 	}
-
+	
 	public void setMulliganCards(List<Card> mulliganCards) {
 		this.mulliganCards = mulliganCards;
-		waitingForInput = false;
-	}
-	
-	@Override
-	public void onActionSelected(GameAction action) {
-		this.selectedAction = action;
 		waitingForInput = false;
 	}
 

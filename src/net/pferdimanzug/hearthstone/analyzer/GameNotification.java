@@ -61,4 +61,5 @@ public enum GameNotification {
 	PERFORM_ACTION,
 	UPDATE_SANDBOX_STATE,
 	CREATE_NEW_SANDBOX,
+	PLAY_SANDBOX,
 }

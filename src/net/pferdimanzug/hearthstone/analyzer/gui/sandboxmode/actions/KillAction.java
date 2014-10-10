@@ -20,13 +20,13 @@ public class KillAction extends GameAction {
 	}
 
 	@Override
-	public boolean isSameActionGroup(GameAction anotherAction) {
-		return anotherAction instanceof KillAction;
+	public String getPromptText() {
+		return "[Kill]";
 	}
 
 	@Override
-	public String getPromptText() {
-		return "[Kill]";
+	public boolean isSameActionGroup(GameAction anotherAction) {
+		return anotherAction instanceof KillAction;
 	}
 
 }

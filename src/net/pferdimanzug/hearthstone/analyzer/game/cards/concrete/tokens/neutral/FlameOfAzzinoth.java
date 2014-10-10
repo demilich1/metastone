@@ -14,12 +14,12 @@ public class FlameOfAzzinoth extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion();
+	public int getTypeId() {
+		return 440;
 	}
 
 	@Override
-	public int getTypeId() {
-		return 440;
+	public Minion summon() {
+		return createMinion();
 	}
 }

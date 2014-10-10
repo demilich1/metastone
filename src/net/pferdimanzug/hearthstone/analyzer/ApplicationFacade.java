@@ -15,6 +15,7 @@ import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.commands.CreateNewS
 import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.commands.ModifyPlayerDeckCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.commands.ModifyPlayerHandCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.commands.PerformActionCommand;
+import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.commands.PlaySandboxCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.commands.SelectPlayerCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.commands.SpawnMinionCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.simulationmode.SimulateGamesCommand;
@@ -58,6 +59,7 @@ public class ApplicationFacade extends Facade<GameNotification> {
 		registerCommand(GameNotification.SELECT_PLAYER, new SelectPlayerCommand());
 		registerCommand(GameNotification.SPAWN_MINION, new SpawnMinionCommand());
 		registerCommand(GameNotification.PERFORM_ACTION, new PerformActionCommand());
+		registerCommand(GameNotification.PLAY_SANDBOX, new PlaySandboxCommand());
 	}
 
 	public void startUp(HearthstoneAnalyzer main) {
