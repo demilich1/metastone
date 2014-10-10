@@ -314,7 +314,7 @@ public class GameLogic implements Cloneable {
 
 		log("{} is damaged for {}", minion, damage);
 		minion.setHp(minion.getHp() - damage);
-		if (minion.hasStatus(GameTag.ENRAGE_SPELL)) {
+		if (minion.hasTag(GameTag.ENRAGE_SPELL)) {
 			handleEnrage(minion);
 		}
 		return true;
@@ -746,7 +746,7 @@ public class GameLogic implements Cloneable {
 
 	public void performGameAction(int playerId, GameAction action) {
 		if (playerId != context.getActivePlayerId()) {
-			logger.warn("Player {} tries to perform an action, but it is not his turn!", context.getPlayer(playerId));
+			logger.warn("Player {} tries to perform an action, but it is not his turn!", context.getPlayer(playerId).getName());
 		}
 		action.execute(context, playerId);
 		checkForDeadEntities();
