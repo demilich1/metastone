@@ -71,7 +71,7 @@ public class ActionLogic {
 				continue;
 			}
 
-			if (card.hasTag(GameTag.CHOOSE_ONE)) {
+			if (card.hasStatus(GameTag.CHOOSE_ONE)) {
 				IChooseOneCard chooseOneCard = (IChooseOneCard) card;
 				rollout(chooseOneCard.playOption1(), context, player, playCardActions);
 				rollout(chooseOneCard.playOption2(), context, player, playCardActions);

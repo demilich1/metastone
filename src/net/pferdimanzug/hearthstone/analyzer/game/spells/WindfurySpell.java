@@ -27,7 +27,7 @@ public class WindfurySpell extends ApplyTagSpell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
-		if (target.hasTag(GameTag.WINDFURY)) {
+		if (target.hasStatus(GameTag.WINDFURY)) {
 			return;
 		}
 		target.modifyTag(GameTag.NUMBER_OF_ATTACKS, +1);

@@ -17,4 +17,9 @@ public abstract class HeroPowerAction extends PlayCardAction {
 		play(context, playerId);
 	}
 	
+	@Override
+	public String getPromptText() {
+		return "[Use hero power]";
+	}
+	
 }

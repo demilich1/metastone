@@ -7,14 +7,10 @@ import java.util.List;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.stage.Window;
 import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
@@ -32,20 +28,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class HumanActionPromptView extends VBox {
-
-	public static HumanActionPromptView createAsUtilityWindow(Window parent) {
-		Stage stage = new Stage(StageStyle.UTILITY);
-		stage.initOwner(parent);
-		HumanActionPromptView root = new HumanActionPromptView();
-		Scene scene = new Scene(root);
-
-		stage.setScene(scene);
-		stage.setX(parent.getX() + parent.getWidth());
-		stage.setY(parent.getY());
-		stage.show();
-
-		return root;
-	}
 
 	private static String getActionString(GameContext context, GameAction action) {
 		PlayCardAction playCardAction = null;

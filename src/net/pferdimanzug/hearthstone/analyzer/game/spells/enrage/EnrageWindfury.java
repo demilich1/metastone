@@ -15,7 +15,7 @@ public class EnrageWindfury extends Enrage {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		super.onCast(context, player, desc, target);
-		if (target.hasTag(GameTag.ENRAGED)) {
+		if (target.hasStatus(GameTag.ENRAGED)) {
 			target.setTag(GameTag.WINDFURY);
 		} else {
 			target.removeTag(GameTag.WINDFURY);

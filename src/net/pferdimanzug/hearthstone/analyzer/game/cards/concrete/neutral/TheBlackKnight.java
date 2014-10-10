@@ -21,13 +21,11 @@ public class TheBlackKnight extends MinionCard {
 		return 216;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion blackKnight = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(DestroySpell.create(), TargetSelection.ENEMY_MINIONS);
-		battlecry.setEntityFilter(entity -> entity.hasTag(GameTag.TAUNT));
+		battlecry.setEntityFilter(entity -> entity.hasStatus(GameTag.TAUNT));
 		blackKnight.setBattlecry(battlecry);
 		return blackKnight;
 	}

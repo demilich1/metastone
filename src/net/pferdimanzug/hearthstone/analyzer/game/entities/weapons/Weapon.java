@@ -38,7 +38,7 @@ public class Weapon extends Actor {
 	}
 
 	public boolean isBroken() {
-		return !hasTag(GameTag.DURABILITY) || getTagValue(GameTag.DURABILITY) < 1 || getTagValue(GameTag.WEAPON_DAMAGE) <= 0;
+		return !hasStatus(GameTag.DURABILITY) || getTagValue(GameTag.WEAPON_DAMAGE) <= 0;
 	}
 
 	public void setActive(boolean active) {

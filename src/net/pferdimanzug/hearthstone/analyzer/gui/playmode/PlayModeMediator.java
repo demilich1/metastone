@@ -16,13 +16,15 @@ public class PlayModeMediator extends Mediator<GameNotification> {
 
 	public static final String NAME = "PlayModeMediator";
 
+	private final PlayModeView view;
 	private final GameBoardView boardView;
 	private final HumanActionPromptView actionPromptView;
 
 	public PlayModeMediator() {
 		super(NAME);
-		boardView = new GameBoardView();
-		actionPromptView = HumanActionPromptView.createAsUtilityWindow(boardView.getScene().getWindow());
+		view = new PlayModeView();
+		boardView = view.getBoardView();
+		actionPromptView = view.getActionPromptView();
 	}
 
 	@Override
@@ -66,7 +68,7 @@ public class PlayModeMediator extends Mediator<GameNotification> {
 
 	@Override
 	public void onRegister() {
-		getFacade().sendNotification(GameNotification.SHOW_VIEW, boardView);
+		getFacade().sendNotification(GameNotification.SHOW_VIEW, view);
 	}
 
 }

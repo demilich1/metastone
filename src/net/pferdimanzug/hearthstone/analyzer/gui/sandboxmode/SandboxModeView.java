@@ -61,7 +61,7 @@ public class SandboxModeView extends BorderPane {
 	}
 
 	private void startPlayMode(ActionEvent actionEvent) {
-		ApplicationFacade.getInstance().sendNotification(GameNotification.PLAY_SANDBOX);
+		ApplicationFacade.getInstance().sendNotification(GameNotification.START_PLAY_SANDBOX);
 		setRight(getActionPromptView());
 		backButton.setVisible(false);
 		playButton.setText("Stop");
@@ -69,6 +69,7 @@ public class SandboxModeView extends BorderPane {
 	}
 
 	private void stopPlayMode(ActionEvent actionEvent) {
+		ApplicationFacade.getInstance().sendNotification(GameNotification.STOP_PLAY_SANDBOX);
 		setRight(toolboxView);
 		backButton.setVisible(false);
 		playButton.setText("Play");

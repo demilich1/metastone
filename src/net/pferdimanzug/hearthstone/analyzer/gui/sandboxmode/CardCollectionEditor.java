@@ -1,29 +1,22 @@
 package net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode;
 
-import java.io.IOException;
-
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.TextFieldListCell;
-import javafx.scene.layout.BorderPane;
 import javafx.util.StringConverter;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCatalogue;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 
-public class CardCollectionEditor extends BorderPane {
-
-	@FXML
-	private Label headerLabel;
+public class CardCollectionEditor extends SandboxEditor {
 
 	@FXML
 	private Label cardCountLabel;
@@ -43,30 +36,16 @@ public class CardCollectionEditor extends BorderPane {
 	@FXML
 	private Button removeCardButton;
 
-	@FXML
-	private Button okButton;
-
-	@FXML
-	private Button cancelButton;
-
 	private ICardCollectionEditingListener listener;
 
 	private int cardLimit;
 
 	public CardCollectionEditor(String title, CardCollection cardCollection, ICardCollectionEditingListener listener, int cardLimit) {
+		super("CardCollectionEditor.fxml");
 		this.listener = listener;
 		this.cardLimit = cardLimit;
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CardCollectionEditor.fxml"));
-		fxmlLoader.setRoot(this);
-		fxmlLoader.setController(this);
-
-		try {
-			fxmlLoader.load();
-		} catch (IOException exception) {
-			throw new RuntimeException(exception);
-		}
-
-		headerLabel.setText(title);
+		
+		setTitle(title);
 
 		populateEditableView(cardCollection);
 		editableListView.setCellFactory(TextFieldListCell.forListView(new CardStringConverter()));

@@ -20,7 +20,7 @@ public class Headcrack extends SpellCard {
 		SpellDesc noComboSpell = DamageSpell.create(2);
 		noComboSpell.setTarget(EntityReference.ENEMY_HERO);
 		SpellDesc comboSpell = ReceiveCardSpell.create(this);
-		SpellDesc headCrack = ConditionalEffectSpell.create(noComboSpell, comboSpell, (context, player, target) -> player.getHero().hasTag(GameTag.COMBO));
+		SpellDesc headCrack = ConditionalEffectSpell.create(noComboSpell, comboSpell, (context, player, target) -> player.getHero().hasStatus(GameTag.COMBO));
 		setSpell(headCrack);
 		setTargetRequirement(TargetSelection.NONE);
 	}

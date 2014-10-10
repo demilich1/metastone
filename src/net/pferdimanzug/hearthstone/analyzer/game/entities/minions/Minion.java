@@ -21,7 +21,7 @@ public class Minion extends Actor {
 
 	@Override
 	public int getAttack() {
-		if (hasTag(GameTag.ATTACK_EQUALS_HP)) {
+		if (hasStatus(GameTag.ATTACK_EQUALS_HP)) {
 			return getHp();
 		}
 		return super.getAttack();

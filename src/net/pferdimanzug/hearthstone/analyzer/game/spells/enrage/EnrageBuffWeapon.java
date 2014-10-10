@@ -18,7 +18,7 @@ public class EnrageBuffWeapon extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
-		int weaponDamageModifier = target.hasTag(GameTag.ENRAGED) ? +damageBonus : -damageBonus;
+		int weaponDamageModifier = target.hasStatus(GameTag.ENRAGED) ? +damageBonus : -damageBonus;
 		Weapon weapon = player.getHero().getWeapon();
 		if (weapon == null) {
 			return;

@@ -25,7 +25,7 @@ public class DefiasRingleader extends MinionCard {
 	public Minion summon() {
 		Minion defiasRingleader = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(SummonSpell.create(new DefiasBandit()));
-		battlecry.setCondition((context, player) -> player.getHero().hasTag(GameTag.COMBO));
+		battlecry.setCondition((context, player) -> player.getHero().hasStatus(GameTag.COMBO));
 		battlecry.setResolvedLate(true);
 		defiasRingleader.setBattlecry(battlecry);
 		return defiasRingleader;

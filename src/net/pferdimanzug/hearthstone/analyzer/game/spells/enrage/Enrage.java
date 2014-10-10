@@ -17,7 +17,7 @@ public class Enrage extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
-		int attackModifier = target.hasTag(GameTag.ENRAGED) ? +attackBonus : -attackBonus;
+		int attackModifier = target.hasStatus(GameTag.ENRAGED) ? +attackBonus : -attackBonus;
 		target.modifyTag(GameTag.ATTACK_BONUS, attackModifier);
 	}
 

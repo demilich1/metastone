@@ -19,7 +19,7 @@ public class IceLance extends SpellCard {
 		setDescription("Freeze a character. If it was already Frozen, deal $4 damage instead.");
 		SpellDesc damageSpell = DamageSpell.create(4);
 		SpellDesc freezeSpell = ApplyTagSpell.create(GameTag.FROZEN, new TurnStartTrigger());
-		setSpell(EitherOrSpell.create(damageSpell, freezeSpell, (context, player, target) -> target.hasTag(GameTag.FROZEN)));
+		setSpell(EitherOrSpell.create(damageSpell, freezeSpell, (context, player, target) -> target.hasStatus(GameTag.FROZEN)));
 		setTargetRequirement(TargetSelection.ANY);
 	}
 

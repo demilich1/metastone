@@ -26,7 +26,7 @@ public class CardInteractionTests extends TestBase {
 		playCard(context, warrior, new MurlocRaider());
 		
 		Minion bloodsailRaider = playMinionCard(context, warrior, new BloodsailRaider());
-		Assert.assertTrue(bloodsailRaider.hasTag(GameTag.CHARGE));
+		Assert.assertTrue(bloodsailRaider.hasStatus(GameTag.CHARGE));
 		Assert.assertEquals(bloodsailRaider.getAttack(), 7);
 	}
 

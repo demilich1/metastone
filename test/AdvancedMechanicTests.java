@@ -134,14 +134,14 @@ public class AdvancedMechanicTests extends BasicTests {
 		Actor defender = getSingleMinion(priest.getMinions());
 
 		Assert.assertEquals(defender.getAttack(), AmaniBerserker.BASE_ATTACK);
-		Assert.assertEquals(defender.hasTag(GameTag.ENRAGED), false);
+		Assert.assertEquals(defender.hasStatus(GameTag.ENRAGED), false);
 
 		// attack once, should apply the enrage attack bonus
 		GameAction attackAction = new PhysicalAttackAction(attacker.getReference());
 		attackAction.setTarget(defender);
 		context.getLogic().performGameAction(mage.getId(), attackAction);
 		Assert.assertEquals(defender.getAttack(), AmaniBerserker.BASE_ATTACK + AmaniBerserker.ENRAGE_ATTACK_BONUS);
-		Assert.assertEquals(defender.hasTag(GameTag.ENRAGED), true);
+		Assert.assertEquals(defender.hasStatus(GameTag.ENRAGED), true);
 		// attack second time, enrage bonus should not increase
 		context.getLogic().performGameAction(mage.getId(), attackAction);
 		Assert.assertEquals(defender.getAttack(), AmaniBerserker.BASE_ATTACK + AmaniBerserker.ENRAGE_ATTACK_BONUS);
@@ -151,7 +151,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		healAction.setTarget(defender);
 		context.getLogic().performGameAction(priest.getId(), healAction);
 		Assert.assertEquals(defender.getAttack(), AmaniBerserker.BASE_ATTACK);
-		Assert.assertEquals(defender.hasTag(GameTag.ENRAGED), false);
+		Assert.assertEquals(defender.hasStatus(GameTag.ENRAGED), false);
 	}
 
 	@Test

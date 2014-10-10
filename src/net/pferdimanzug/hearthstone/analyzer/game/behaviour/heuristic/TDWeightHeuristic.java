@@ -41,23 +41,23 @@ public class TDWeightHeuristic implements IGameStateHeuristic {
 		minionScore += registerFeatureValue(WeightedFeature.MINION_HP, minion.getHp());
 		float baseScore = minion.getAttack() + minion.getHp();
 
-		if (minion.hasTag(GameTag.TAUNT)) {
+		if (minion.hasStatus(GameTag.TAUNT)) {
 			minionScore += registerFeatureValue(WeightedFeature.MINION_TAUNT, baseScore);
 		}
-		if (minion.hasTag(GameTag.WINDFURY)) {
+		if (minion.hasStatus(GameTag.WINDFURY)) {
 			minionScore += registerFeatureValue(WeightedFeature.MINION_WINDFURY, baseScore);
 		}
-		if (minion.hasTag(GameTag.DIVINE_SHIELD)) {
+		if (minion.hasStatus(GameTag.DIVINE_SHIELD)) {
 			minionScore += registerFeatureValue(WeightedFeature.MINION_DIVINE_SHIELD, baseScore);
 		}
-		if (minion.hasTag(GameTag.SPELL_POWER)) {
+		if (minion.hasStatus(GameTag.SPELL_POWER)) {
 			minionScore += registerFeatureValue(WeightedFeature.MINION_SPELL_POWER, minion.getTagValue(GameTag.SPELL_POWER));
 		}
 
-		if (minion.hasTag(GameTag.STEALTHED)) {
+		if (minion.hasStatus(GameTag.STEALTHED)) {
 			minionScore += registerFeatureValue(WeightedFeature.MINION_STEALTHED, baseScore);
 		}
-		if (minion.hasTag(GameTag.UNTARGETABLE_BY_SPELLS)) {
+		if (minion.hasStatus(GameTag.UNTARGETABLE_BY_SPELLS)) {
 			minionScore += registerFeatureValue(WeightedFeature.MINION_UNTARGETABLE_BY_SPELLS, baseScore);
 		}
 

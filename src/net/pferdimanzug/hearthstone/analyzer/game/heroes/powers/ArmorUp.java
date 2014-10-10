@@ -17,5 +17,4 @@ public class ArmorUp extends HeroPower {
 	}
 
 
-
 }

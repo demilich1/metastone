@@ -11,7 +11,7 @@ public abstract class Entity extends CustomCloneable {
 	private String name;
 	protected HashMap<GameTag, Object> tags = new HashMap<GameTag, Object>();
 	private int id;
-	private int ownerIndex;
+	private int ownerIndex = -1;
 	
 	public abstract EntityType getEntityType();
 
@@ -60,6 +60,10 @@ public abstract class Entity extends CustomCloneable {
 
 	public boolean hasTag(GameTag tag) {
 		return tags.get(tag) != null;
+	}
+	
+	public boolean hasStatus(GameTag tag) {
+		return tags.get(tag) != null && getTagValue(tag) > 0;
 	}
 
 	public void modifyTag(GameTag tag, int value) {

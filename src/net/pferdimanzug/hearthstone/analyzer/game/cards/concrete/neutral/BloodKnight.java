@@ -51,7 +51,7 @@ public class BloodKnight extends MinionCard {
 			List<Entity> allMinions = context.resolveTarget(player, null, EntityReference.ALL_MINIONS);
 			int minionsWithDivineShield = 0;
 			for (Entity entity : allMinions) {
-				if (entity.hasTag(GameTag.DIVINE_SHIELD)) {
+				if (entity.hasStatus(GameTag.DIVINE_SHIELD)) {
 					minionsWithDivineShield++;
 				}
 			}

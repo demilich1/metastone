@@ -16,7 +16,7 @@ public class RemoveWindfurySpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
-		if (!target.hasTag(GameTag.WINDFURY)) {
+		if (!target.hasStatus(GameTag.WINDFURY)) {
 			return;
 		}
 		target.removeTag(GameTag.WINDFURY);

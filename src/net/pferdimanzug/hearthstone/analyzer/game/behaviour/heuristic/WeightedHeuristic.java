@@ -10,28 +10,28 @@ public class WeightedHeuristic implements IGameStateHeuristic {
 	private float calculateMinionScore(Minion minion) {
 		float minionScore = minion.getAttack() + minion.getHp();
 		float baseScore = minionScore;
-		if (minion.hasTag(GameTag.FROZEN)) {
+		if (minion.hasStatus(GameTag.FROZEN)) {
 			return minion.getHp();
 		}
-		if (minion.hasTag(GameTag.TAUNT)) {
+		if (minion.hasStatus(GameTag.TAUNT)) {
 			minionScore += 2;
 		}
-		if (minion.hasTag(GameTag.WINDFURY)) {
+		if (minion.hasStatus(GameTag.WINDFURY)) {
 			minionScore += minion.getAttack() * 0.5f;
 		}
-		if (minion.hasTag(GameTag.DIVINE_SHIELD)) {
+		if (minion.hasStatus(GameTag.DIVINE_SHIELD)) {
 			minionScore += 1.5f * baseScore;
 		}
-		if (minion.hasTag(GameTag.SPELL_POWER)) {
+		if (minion.hasStatus(GameTag.SPELL_POWER)) {
 			minionScore += minion.getTagValue(GameTag.SPELL_POWER);
 		}
-		if (minion.hasTag(GameTag.ENRAGED)) {
+		if (minion.hasStatus(GameTag.ENRAGED)) {
 			minionScore += 1;
 		}
-		if (minion.hasTag(GameTag.STEALTHED)) {
+		if (minion.hasStatus(GameTag.STEALTHED)) {
 			minionScore += 1;
 		}
-		if (minion.hasTag(GameTag.UNTARGETABLE_BY_SPELLS)) {
+		if (minion.hasStatus(GameTag.UNTARGETABLE_BY_SPELLS)) {
 			minionScore += 1.5f * baseScore;
 		}
 		
