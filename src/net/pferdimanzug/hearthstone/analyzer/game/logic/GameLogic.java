@@ -162,12 +162,13 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void castSpell(int playerId, SpellDesc spellDesc) {
-//		if (spellDesc.assignedGC != 0 && spellDesc.assignedGC != context.hashCode()) {
-//			logger.warn("Spell {} has been cast in another context!", spellDesc);
-//		}
-//		
-//		spellDesc.assignedGC = context.hashCode();
-		
+		// if (spellDesc.assignedGC != 0 && spellDesc.assignedGC !=
+		// context.hashCode()) {
+		// logger.warn("Spell {} has been cast in another context!", spellDesc);
+		// }
+		//
+		// spellDesc.assignedGC = context.hashCode();
+
 		Player player = context.getPlayer(playerId);
 		Actor source = null;
 		if (spellDesc.getSourceEntity() != null) {
@@ -202,10 +203,10 @@ public class GameLogic implements Cloneable {
 
 		}
 		try {
-			
+
 			Spell spell = spellFactory.getSpell(spellDesc);
 			spell.cast(context, player, spellDesc, targets);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			Card pendingCard = (Card) context.getEnvironment().get(Environment.PENDING_CARD);
 			if (pendingCard instanceof SpellCard) {
 				sourceCard = (SpellCard) pendingCard;
@@ -214,8 +215,7 @@ public class GameLogic implements Cloneable {
 			logger.error("Error while casting spell: " + spellDesc);
 			e.printStackTrace();
 		}
-		
-		
+
 		if (sourceCard != null) {
 			context.getEnvironment().remove(Environment.TARGET_OVERRIDE);
 		}
@@ -448,6 +448,7 @@ public class GameLogic implements Cloneable {
 		if (attacker.hasStatus(GameTag.IMMUNE_WHILE_ATTACKING)) {
 			attacker.setTag(GameTag.IMMUNE);
 		}
+		attacker.removeTag(GameTag.STEALTHED);
 
 		int attackerDamage = attacker.getAttack();
 		int defenderDamage = target.getAttack();
@@ -472,7 +473,8 @@ public class GameLogic implements Cloneable {
 			// TODO: this is not nice, maybe move this functionality to the
 			// Weapon class?
 			if (weapon != null && weapon.isActive()) {
-				if (weapon.hasStatus(GameTag.CONSUME_DAMAGE_INSTEAD_OF_DURABILITY_ON_MINIONS) && defender.getEntityType() == EntityType.MINION) {
+				if (weapon.hasStatus(GameTag.CONSUME_DAMAGE_INSTEAD_OF_DURABILITY_ON_MINIONS)
+						&& defender.getEntityType() == EntityType.MINION) {
 					modifyDurability(hero.getWeapon(), GameTag.WEAPON_DAMAGE, -1);
 				} else {
 					modifyDurability(hero.getWeapon(), GameTag.DURABILITY, -1);
@@ -782,14 +784,14 @@ public class GameLogic implements Cloneable {
 			context.fireGameEvent(new OverloadEvent(context, playerId));
 		}
 	}
-	
+
 	public void playSecret(Player player, Secret secret) {
 		log("{} has a new secret activated: {}", player.getName(), secret.getSource());
 		addGameEventListener(player, secret, player.getHero());
 		player.getSecrets().add(secret.getSource().getTypeId());
 		context.fireGameEvent(new SecretPlayedEvent(context, (SecretCard) secret.getSource()));
 	}
-	
+
 	/**
 	 * 
 	 * @param max
@@ -799,7 +801,7 @@ public class GameLogic implements Cloneable {
 	public int random(int max) {
 		return ThreadLocalRandom.current().nextInt(max);
 	}
-	
+
 	public boolean randomBool() {
 		return ThreadLocalRandom.current().nextBoolean();
 	}
@@ -873,7 +875,7 @@ public class GameLogic implements Cloneable {
 			if (validTargets.isEmpty()) {
 				return;
 			}
-			
+
 			List<GameAction> battlecryActions = new ArrayList<>();
 			for (Entity validTarget : validTargets) {
 				GameAction targetedBattlecry = battlecry.clone();

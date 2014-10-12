@@ -1,9 +1,3 @@
-- Battlecry effects are not probably implemented: 
-Most of the time the Battlecry should be resolved BEFORE the minion enters the battlefield.
-However, in some cases, the Battlecry needs to be resolved AFTER the minion enters the battlefield,
-i.e. Defender of Argus. He can only buff adjacent minions when he already entered the battlefield,
-because otherwise adjacent minions cannot be determined
-
-Minions with STEALTHED do not loose this property upon attacking
+Minions with STEALTHED do not loose this property when a damaging spelltrigger is set off (Knife Juggler)
 
 Class specific:

@@ -23,8 +23,6 @@ public class KnifeJuggler extends MinionCard {
 		return 151;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion knifeJuggler = createMinion();
