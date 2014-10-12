@@ -105,7 +105,7 @@ public class EntityEditor extends SandboxEditor {
 	}
 
 	private IntegerTextField getNumericTextField() {
-		IntegerTextField textField = new IntegerTextField(2);
+		IntegerTextField textField = new IntegerTextField(3);
 		textField.setMaxWidth(100);
 		return textField;
 	}
@@ -153,9 +153,9 @@ public class EntityEditor extends SandboxEditor {
 			if (tagValueType == TagValueType.INTEGER) {
 				IntegerTextField numericTextfield = getNumericTextField();
 				numericTextfield.setIntValue(entry.getValueInt());
-				numericTextfield.textProperty().addListener(new ChangeListener<String>() {
+				numericTextfield.valueProperty().addListener(new ChangeListener<Number>() {
 					@Override
-					public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+					public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
 						workingCopy.put(tag, numericTextfield.getIntValue());
 					}
 				});

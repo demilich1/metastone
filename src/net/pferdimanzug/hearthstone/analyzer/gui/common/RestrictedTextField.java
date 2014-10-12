@@ -56,6 +56,10 @@ public class RestrictedTextField extends TextField {
 		return maxLength;
 	}
 	
+	protected void validInput(String validInput) {
+		
+	}
+	
 	public RestrictedTextField() {
 
 		textProperty().addListener(new ChangeListener<String>() {
@@ -69,14 +73,19 @@ public class RestrictedTextField extends TextField {
 				if (maxLength.get() > -1 && s1.length() > maxLength.get()) {
 					ignore = true;
 					setText(s1.substring(0, maxLength.get()));
+					validInput(getText());
 					ignore = false;
+					return;
 				}
 
-				if (restrict.get() != null && !restrict.get().equals("") && !s1.matches(restrict.get() + "*")) {
+				if (restrict.get() != null && !restrict.get().equals("") && !s1.matches(restrict.get())) {
 					ignore = true;
 					setText(s);
 					ignore = false;
+					return;
 				}
+				
+				validInput(getText());
 			}
 		});
 	}

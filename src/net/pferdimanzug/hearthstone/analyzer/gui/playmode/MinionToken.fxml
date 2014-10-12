@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import javafx.geometry.*?>
@@ -14,7 +15,19 @@
   <center>
     <StackPane fx:id="targetAnchor" prefHeight="-1.0" prefWidth="-1.0" BorderPane.alignment="CENTER">
       <children>
-        <Circle fill="#bfbfbf" radius="40.0" stroke="BLACK" strokeDashOffset="0.0" strokeLineCap="SQUARE" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fx:id="defaultToken" fill="#bfbfbf" radius="40.0" stroke="BLACK" strokeDashOffset="0.0" strokeLineCap="SQUARE" strokeType="INSIDE" strokeWidth="2.0" />
+            <Polygon fx:id="taunt" fill="#bfbfbf" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" translateY="5.0" visible="false">
+              <points>
+                <Double fx:value="-50.0" />
+                <Double fx:value="-20.0" />
+                <Double fx:value="50.0" />
+                <Double fx:value="-20.0" />
+				<Double fx:value="20.0" />
+                <Double fx:value="70.0" />
+				<Double fx:value="-20.0" />
+                <Double fx:value="70.0" />
+              </points>
+            </Polygon>
         <Label fx:id="name" alignment="CENTER" labelFor="$name" maxWidth="80.0" text="&lt;minion name&gt;" textAlignment="CENTER" textOverrun="ELLIPSIS" wrapText="true" StackPane.alignment="CENTER">
           <font>
             <Font name="Arial Bold" size="12.0" />
@@ -22,6 +35,11 @@
         </Label>
         <StackPane prefHeight="-1.0" prefWidth="-1.0" translateY="0.0" StackPane.alignment="BOTTOM_CENTER">
           <children>
+                  <ImageView fx:id="deathrattle" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" translateY="8.0" visible="false" StackPane.alignment="BOTTOM_CENTER">
+                     <image>
+                        <Image url="@../../resources/img/common/deathrattle.png" />
+                     </image>
+                  </ImageView>
             <ImageView fitHeight="100.0" fitWidth="32.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" translateX="-2.0" translateY="3.0" y="0.0" StackPane.alignment="BOTTOM_LEFT">
               <image>
                 <Image url="@../../resources/img/common/attack_value_icon.png" />
@@ -36,6 +54,21 @@
             <Text id="outlined-score" fx:id="hp" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-8.0" translateY="-4.0" StackPane.alignment="BOTTOM_RIGHT" />
           </children>
         </StackPane>
+            <Ellipse fx:id="divineShield" radiusX="30.0" radiusY="50.0" stroke="BLACK" strokeType="INSIDE" visible="false">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#f0e80033" />
+                        <Stop color="WHITE" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Ellipse>
+            <Text fx:id="windfury" fill="#e8964f" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="2.0" text="x2" translateX="-38.0" translateY="12.0" visible="false">
+               <font>
+                  <Font name="Arial" size="22.0" />
+               </font>
+            </Text>
       </children>
     </StackPane>
   </center>
