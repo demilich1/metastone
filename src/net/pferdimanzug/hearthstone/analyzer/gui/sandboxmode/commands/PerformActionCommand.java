@@ -10,6 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.ActionGroup;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanTargetOptions;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.ActionLogic;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.SandboxProxy;
 import de.pferdimanzug.nittygrittymvc.SimpleCommand;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
@@ -26,13 +27,17 @@ public class PerformActionCommand extends SimpleCommand<GameNotification> {
 		Player selectedPlayer = sandboxProxy.getSelectedPlayer();
 		List<GameAction> rolledOutActions = new ArrayList<GameAction>();
 		actionLogic.rollout(gameAction, context, selectedPlayer, rolledOutActions);
-		ActionGroup actionGroup = new ActionGroup(rolledOutActions.get(0));
-		for (GameAction rolledAction : rolledOutActions) {
-			actionGroup.add(rolledAction);
+		if (gameAction.getTargetRequirement() != TargetSelection.NONE) {
+			ActionGroup actionGroup = new ActionGroup(rolledOutActions.get(0));
+			for (GameAction rolledAction : rolledOutActions) {
+				actionGroup.add(rolledAction);
+			}
+			HumanTargetOptions targetOptions = new HumanTargetOptions(this::performAction, context, selectedPlayer.getId(), actionGroup);
+			sendNotification(GameNotification.SELECT_TARGET, targetOptions);
+		} else {
+			performAction(gameAction);
 		}
 
-		HumanTargetOptions targetOptions = new HumanTargetOptions(this::performAction, context, selectedPlayer.getId(), actionGroup);
-		sendNotification(GameNotification.SELECT_TARGET, targetOptions);
 	}
 
 	private void performAction(GameAction action) {

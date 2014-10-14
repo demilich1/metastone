@@ -6,6 +6,7 @@ import java.util.List;
 import javafx.application.Platform;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
+import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanActionOptions;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanTargetOptions;
 import de.pferdimanzug.nittygrittymvc.Mediator;
@@ -43,6 +44,9 @@ public class SandboxModeMediator extends Mediator<GameNotification> {
 			HumanTargetOptions options = (HumanTargetOptions) notification.getBody();
 			Platform.runLater(() -> view.getBoardView().enableTargetSelection(options));
 			break;
+		case SELECT_PLAYER:
+			view.onPlayerSelectionChanged((Player) notification.getBody());
+			break;
 		default:
 			break;
 		}
@@ -56,6 +60,7 @@ public class SandboxModeMediator extends Mediator<GameNotification> {
 		notificationInterests.add(GameNotification.HUMAN_PROMPT_FOR_ACTION);
 		notificationInterests.add(GameNotification.HUMAN_PROMPT_FOR_TARGET);
 		notificationInterests.add(GameNotification.GAME_STATE_UPDATE);
+		notificationInterests.add(GameNotification.SELECT_PLAYER);
 		return notificationInterests;
 	}
 

@@ -10,6 +10,7 @@ import javafx.scene.layout.BorderPane;
 import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
+import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.gui.playmode.GameBoardView;
 import net.pferdimanzug.hearthstone.analyzer.gui.playmode.HumanActionPromptView;
 
@@ -79,6 +80,10 @@ public class SandboxModeView extends BorderPane {
 	public void updateSandbox(GameContext context) {
 		getBoardView().updateGameState(context);
 		toolboxView.setContext(context);
+	}
+	
+	public void onPlayerSelectionChanged(Player selectedPlayer) {
+		toolboxView.onPlayerSelectionChanged(selectedPlayer);
 	}
 
 }

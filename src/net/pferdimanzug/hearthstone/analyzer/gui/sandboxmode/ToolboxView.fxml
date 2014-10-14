@@ -12,13 +12,6 @@
 <fx:root id="bordered-panel" orientation="VERTICAL" stylesheets="@../main.css" type="ToolBar" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <items>
       <Label id="default-label" text="Toolbox" />
-      <Label id="info-small" layoutX="10.0" layoutY="41.0" text="Select player:" />
-      <ChoiceBox fx:id="playerChoiceBox" prefWidth="200.0" />
-      <Button fx:id="editEntityButton" mnemonicParsing="false" text="Edit entity..." />
-      <Separator prefWidth="200.0" />
-      <Label id="info-small" text="Cards:" />
-      <Button fx:id="editHandButton" mnemonicParsing="false" text="Edit hand" />
-      <Button fx:id="editDeckButton" layoutX="10.0" layoutY="117.0" mnemonicParsing="false" text="Edit deck" />
       <Separator prefWidth="200.0" />
    </items>
 </fx:root>

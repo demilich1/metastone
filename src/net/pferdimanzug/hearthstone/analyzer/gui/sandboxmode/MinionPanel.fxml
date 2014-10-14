@@ -15,6 +15,7 @@
       <ComboBox fx:id="minionComboBox" prefWidth="200.0" promptText="&lt;select a minion&gt;" />
       <TextField fx:id="filterMinionsTextField" prefWidth="200.0" promptText="&lt;filter minions&gt;" />
       <Button fx:id="spawnMinionButton" mnemonicParsing="false" text="Spawn" />
-      <Button fx:id="killMinionButton" mnemonicParsing="false" text="Kill" />
+      <Button fx:id="killMinionButton" mnemonicParsing="false" text="Kill..." />
+      <Button fx:id="silenceButton" layoutX="10.0" layoutY="117.0" mnemonicParsing="false" text="Silence..." />
    </children>
 </fx:root>

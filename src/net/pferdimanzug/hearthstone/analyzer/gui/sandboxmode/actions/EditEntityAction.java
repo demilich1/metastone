@@ -3,15 +3,17 @@ package net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.actions;
 import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.EntityEditor;
 
-public class EditPropertiesAction extends GameAction {
+public class EditEntityAction extends GameAction {
 
-	public EditPropertiesAction() {
+	public EditEntityAction() {
 		setTargetRequirement(TargetSelection.ANY);
+		setActionType(ActionType.BATTLECRY);
 	}
 
 	@Override
@@ -23,7 +25,7 @@ public class EditPropertiesAction extends GameAction {
 
 	@Override
 	public String getPromptText() {
-		return "[Edit properties]";
+		return "[Edit entity]";
 	}
 
 	@Override

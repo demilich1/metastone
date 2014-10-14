@@ -21,9 +21,10 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCatalogue;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardType;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.actions.KillAction;
+import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.actions.SilenceAction;
 
 public class MinionPanel extends VBox {
-	
+
 	@FXML
 	private ComboBox<MinionCard> minionComboBox;
 	@FXML
@@ -32,7 +33,9 @@ public class MinionPanel extends VBox {
 	private Button spawnMinionButton;
 	@FXML
 	private Button killMinionButton;
-	
+	@FXML
+	private Button silenceButton;
+
 	public MinionPanel() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MinionPanel.fxml"));
 		fxmlLoader.setRoot(this);
@@ -48,22 +51,28 @@ public class MinionPanel extends VBox {
 		filterMinionsTextField.textProperty().addListener(this::onMinionFilterChanged);
 		spawnMinionButton.setOnAction(this::handleSpawnMinionButton);
 		killMinionButton.setOnAction(this::handleKillMinionButton);
+		silenceButton.setOnAction(this::handleSilenceButton);
 	}
-	
+
 	private void handleKillMinionButton(ActionEvent actionEvent) {
 		KillAction killAction = new KillAction();
 		ApplicationFacade.getInstance().sendNotification(GameNotification.PERFORM_ACTION, killAction);
 	}
-	
+
+	private void handleSilenceButton(ActionEvent actionEvent) {
+		SilenceAction silenceAction = new SilenceAction();
+		ApplicationFacade.getInstance().sendNotification(GameNotification.PERFORM_ACTION, silenceAction);
+	}
+
 	private void handleSpawnMinionButton(ActionEvent actionEvent) {
 		MinionCard selectedMinion = minionComboBox.getSelectionModel().getSelectedItem();
 		ApplicationFacade.getInstance().sendNotification(GameNotification.SPAWN_MINION, selectedMinion);
 	}
-	
+
 	private void onMinionFilterChanged(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 		populateMinions(newValue);
 	}
-	
+
 	private void populateMinions(String filter) {
 		ObservableList<MinionCard> data = FXCollections.observableArrayList();
 		for (Card card : CardCatalogue.getAll()) {
@@ -78,10 +87,10 @@ public class MinionPanel extends VBox {
 		}
 		minionComboBox.setItems(data);
 		minionComboBox.getSelectionModel().selectFirst();
-		
+
 		spawnMinionButton.setDisable(minionComboBox.getSelectionModel().getSelectedItem() == null);
 	}
-	
+
 	public void setContext(GameContext context) {
 		killMinionButton.setDisable(true);
 		for (Player player : context.getPlayers()) {
@@ -90,6 +99,7 @@ public class MinionPanel extends VBox {
 				break;
 			}
 		}
+		silenceButton.setDisable(killMinionButton.isDisabled());
 	}
 
 }
