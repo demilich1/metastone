@@ -35,13 +35,13 @@ public class ToolboxView extends ToolBar {
 		getItems().add(minionPanel);
 	}
 
+	public void onPlayerSelectionChanged(Player selectedPlayer) {
+		cardPanel.onPlayerSelectionChanged(selectedPlayer);
+	}
+	
 	public void setContext(GameContext context) {
 		playerPanel.setContext(context);
 		minionPanel.setContext(context);
-	}
-	
-	public void onPlayerSelectionChanged(Player selectedPlayer) {
-		cardPanel.onPlayerSelectionChanged(selectedPlayer);
 	}
 
 }

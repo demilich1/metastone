@@ -111,21 +111,23 @@ public class GameBoardView extends BorderPane {
 		
 		p1HeroAnchor.getChildren().add(p1Hero);
 		p2HeroAnchor.getChildren().add(p2Hero);
+		
+		setCache(true);
 	}
 	
 	
 	private void checkForWinner(GameContext context) {
-		/*
 		if (context.gameDecided()) {
-			if (context.getWinner() == context.getPlayer1()) {
-				centerMessageLabel.setStyle("-fx-font-size: 72; -fx-text-fill: green;");
-				setCenterMessage("You won!!!");
+			if (context.getWinningPlayerId() == -1) {
+				centerMessageLabel.setStyle("-fx-text-fill: red;");
+				setCenterMessage("Game has ended in a draw.");
 			} else {
-				centerMessageLabel.setStyle("-fx-font-size: 72; -fx-text-fill: red;");
-				setCenterMessage("You lost :(");
+				centerMessageLabel.setStyle("-fx-text-fill: green;");
+				Player winner = context.getPlayer(context.getWinningPlayerId());
+				setCenterMessage("Player " + winner.getName() + " has won the game.");
 			}
 		}
-		*/
+		
 	}
 	
 	

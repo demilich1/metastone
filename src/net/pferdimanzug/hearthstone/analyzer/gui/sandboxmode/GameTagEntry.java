@@ -16,28 +16,28 @@ public class GameTagEntry {
 		this.valueType = GameTagUtils.getTagValueType(tag);
 	}
 
-	public GameTag getTag() {
-		return tag;
+	public String getName() {
+		return GameTagUtils.getTagName(getTag());
 	}
 
-	public TagValueType getValueType() {
-		return valueType;
+	public GameTag getTag() {
+		return tag;
 	}
 
 	public Object getValue() {
 		return value;
 	}
 
-	public int getValueInt() {
-		return (int) value;
-	}
-
 	public boolean getValueBool() {
 		return (int) value >= 1;
 	}
+
+	public int getValueInt() {
+		return (int) value;
+	}
 	
-	public String getName() {
-		return GameTagUtils.getTagName(getTag());
+	public TagValueType getValueType() {
+		return valueType;
 	}
 
 }

@@ -6,5 +6,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<fx:root id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" stylesheets="@../main.css" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
+<fx:root id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" stylesheets="@../main.css" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <right>
+      <VBox fx:id="sidePane" alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <Button id="default-button" fx:id="backButton" alignment="BOTTOM_CENTER" maxWidth="160.0" mnemonicParsing="false" text="Back to main menu" wrapText="true" />
+         </children>
+      </VBox>
+   </right>
+</fx:root>

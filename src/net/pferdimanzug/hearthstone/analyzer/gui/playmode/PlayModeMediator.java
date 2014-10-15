@@ -17,13 +17,11 @@ public class PlayModeMediator extends Mediator<GameNotification> {
 	public static final String NAME = "PlayModeMediator";
 
 	private final PlayModeView view;
-	private final GameBoardView boardView;
 	private final HumanActionPromptView actionPromptView;
 
 	public PlayModeMediator() {
 		super(NAME);
 		view = new PlayModeView();
-		boardView = view.getBoardView();
 		actionPromptView = view.getActionPromptView();
 	}
 
@@ -32,7 +30,7 @@ public class PlayModeMediator extends Mediator<GameNotification> {
 		switch (notification.getId()) {
 		case GAME_STATE_UPDATE:
 			GameContext context = (GameContext) notification.getBody();
-			Platform.runLater(() -> boardView.updateGameState(context));
+			Platform.runLater(() -> view.updateGameState(context));
 			break;
 		case GAME_ACTION_PERFORMED:
 			// view.updateTurnLog((GameContext) notification.getBody());
@@ -43,7 +41,7 @@ public class PlayModeMediator extends Mediator<GameNotification> {
 			break;
 		case HUMAN_PROMPT_FOR_TARGET:
 			HumanTargetOptions options = (HumanTargetOptions) notification.getBody();
-			Platform.runLater(() -> boardView.enableTargetSelection(options));
+			Platform.runLater(() -> view.enableTargetSelection(options));
 			break;
 		case HUMAN_PROMPT_FOR_MULLIGAN:
 			HumanMulliganOptions mulliganOptions = (HumanMulliganOptions) notification.getBody();

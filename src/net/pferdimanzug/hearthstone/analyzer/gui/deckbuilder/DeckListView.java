@@ -31,6 +31,7 @@ public class DeckListView extends VBox implements EventHandler<MouseEvent> {
 		}
 
 		newDeckButton.setOnAction(actionEvent -> ApplicationFacade.getInstance().sendNotification(GameNotification.CREATE_NEW_DECK));
+		setCache(true);
 	}
 	
 	private void clearChildren() {

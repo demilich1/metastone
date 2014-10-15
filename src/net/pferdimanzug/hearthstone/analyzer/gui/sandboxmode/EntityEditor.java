@@ -57,6 +57,13 @@ public class EntityEditor extends SandboxEditor {
 		populateTable(entity);
 	}
 
+	private void addTagIfMissing(Entity entity, GameTag tag, Object defaultValue) {
+		if (entity.hasTag(tag)) {
+			return;
+		}
+		entity.setTag(tag, defaultValue);
+	}
+	
 	private void addTagsIfMissing(Entity entity) {
 		switch (entity.getEntityType()) {
 		case CARD:
@@ -81,28 +88,6 @@ public class EntityEditor extends SandboxEditor {
 
 		}
 	}
-	
-	private void addTagIfMissing(Entity entity, GameTag tag, Object defaultValue) {
-		if (entity.hasTag(tag)) {
-			return;
-		}
-		entity.setTag(tag, defaultValue);
-	}
-
-	private void populateTable(Entity entity) {
-		HashMap<GameTag, Object> tags = entity.getTags();
-		ObservableList<GameTagEntry> data = FXCollections.observableArrayList();
-
-		for (GameTag tag : tags.keySet()) {
-			Object value = tags.get(tag);
-			workingCopy.put(tag, value);
-
-			GameTagEntry entry = new GameTagEntry(tag, value);
-			data.add(entry);
-
-		}
-		propertiesTable.getItems().setAll(data);
-	}
 
 	private IntegerTextField getNumericTextField() {
 		IntegerTextField textField = new IntegerTextField(3);
@@ -125,17 +110,25 @@ public class EntityEditor extends SandboxEditor {
 		}
 	}
 
+	private void populateTable(Entity entity) {
+		HashMap<GameTag, Object> tags = entity.getTags();
+		ObservableList<GameTagEntry> data = FXCollections.observableArrayList();
+
+		for (GameTag tag : tags.keySet()) {
+			Object value = tags.get(tag);
+			workingCopy.put(tag, value);
+
+			GameTagEntry entry = new GameTagEntry(tag, value);
+			data.add(entry);
+
+		}
+		propertiesTable.getItems().setAll(data);
+	}
+
 	private class PairKeyFactory implements Callback<TableColumn.CellDataFeatures<GameTagEntry, String>, ObservableValue<String>> {
 		@Override
 		public ObservableValue<String> call(TableColumn.CellDataFeatures<GameTagEntry, String> data) {
 			return new ReadOnlyObjectWrapper<>(data.getValue().getName());
-		}
-	}
-
-	private class PairValueFactory implements Callback<TableColumn.CellDataFeatures<GameTagEntry, Object>, ObservableValue<Object>> {
-		@Override
-		public ObservableValue<Object> call(TableColumn.CellDataFeatures<GameTagEntry, Object> data) {
-			return new ReadOnlyObjectWrapper<>(data.getValue());
 		}
 	}
 
@@ -181,6 +174,13 @@ public class EntityEditor extends SandboxEditor {
 				setText(entry.getValue().toString());
 			}
 
+		}
+	}
+
+	private class PairValueFactory implements Callback<TableColumn.CellDataFeatures<GameTagEntry, Object>, ObservableValue<Object>> {
+		@Override
+		public ObservableValue<Object> call(TableColumn.CellDataFeatures<GameTagEntry, Object> data) {
+			return new ReadOnlyObjectWrapper<>(data.getValue());
 		}
 	}
 

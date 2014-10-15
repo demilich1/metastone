@@ -34,9 +34,6 @@ public class CardEntry extends HBox {
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
-		
-		manaCostText.setCache(true);
-		countText.setCache(true);
 	}
 
 	public void addCard(Card card) {

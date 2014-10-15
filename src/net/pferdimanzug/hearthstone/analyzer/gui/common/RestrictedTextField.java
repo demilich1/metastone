@@ -19,47 +19,6 @@ public class RestrictedTextField extends TextField {
 
 	private IntegerProperty maxLength = new SimpleIntegerProperty(-1);
 
-	public int getMaxLength() {
-		return maxLength.get();
-	}
-
-	/**
-	 * Sets the max length of the text field.
-	 *
-	 * @param maxLength
-	 *            The max length.
-	 */
-	public void setMaxLength(int maxLength) {
-		this.maxLength.set(maxLength);
-	}
-
-	/**
-	 * Sets a regular expression character class which restricts the user input.<br/>
-	 * E.g. [0-9] only allows numeric values.
-	 *
-	 * @param restrict
-	 *            The regular expression.
-	 */
-	public void setRestrict(String restrict) {
-		this.restrict.set(restrict);
-	}
-
-	public String getRestrict() {
-		return restrict.get();
-	}
-
-	public StringProperty restrictProperty() {
-		return restrict;
-	}
-
-	public IntegerProperty maxLengthProperty() {
-		return maxLength;
-	}
-	
-	protected void validInput(String validInput) {
-		
-	}
-	
 	public RestrictedTextField() {
 
 		textProperty().addListener(new ChangeListener<String>() {
@@ -88,5 +47,46 @@ public class RestrictedTextField extends TextField {
 				validInput(getText());
 			}
 		});
+	}
+
+	public int getMaxLength() {
+		return maxLength.get();
+	}
+
+	public String getRestrict() {
+		return restrict.get();
+	}
+
+	public IntegerProperty maxLengthProperty() {
+		return maxLength;
+	}
+
+	public StringProperty restrictProperty() {
+		return restrict;
+	}
+
+	/**
+	 * Sets the max length of the text field.
+	 *
+	 * @param maxLength
+	 *            The max length.
+	 */
+	public void setMaxLength(int maxLength) {
+		this.maxLength.set(maxLength);
+	}
+	
+	/**
+	 * Sets a regular expression character class which restricts the user input.<br/>
+	 * E.g. [0-9] only allows numeric values.
+	 *
+	 * @param restrict
+	 *            The regular expression.
+	 */
+	public void setRestrict(String restrict) {
+		this.restrict.set(restrict);
+	}
+	
+	protected void validInput(String validInput) {
+		
 	}
 }

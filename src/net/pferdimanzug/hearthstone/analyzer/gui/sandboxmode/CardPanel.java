@@ -38,12 +38,6 @@ public class CardPanel extends VBox {
 		editDeckButton.setOnAction(this::handleEditDeckButton);
 	}
 
-	public void onPlayerSelectionChanged(Player selectedPlayer) {
-		this.selectedPlayer = selectedPlayer;
-		editHandButton.setDisable(selectedPlayer == null);
-		editDeckButton.setDisable(selectedPlayer == null);
-	}
-
 	private void handleEditDeckButton(ActionEvent actionEvent) {
 		CardCollection deck = selectedPlayer.getDeck();
 		CardCollectionEditor cardCollectionEditor = new CardCollectionEditor("Edit deck", deck, this::onDeckFinishedEditing,
@@ -64,6 +58,12 @@ public class CardPanel extends VBox {
 
 	private void onHandFinishedEditing(CardCollection cardCollection) {
 		ApplicationFacade.getInstance().sendNotification(GameNotification.MODIFY_PLAYER_HAND, cardCollection);
+	}
+
+	public void onPlayerSelectionChanged(Player selectedPlayer) {
+		this.selectedPlayer = selectedPlayer;
+		editHandButton.setDisable(selectedPlayer == null);
+		editDeckButton.setDisable(selectedPlayer == null);
 	}
 
 }

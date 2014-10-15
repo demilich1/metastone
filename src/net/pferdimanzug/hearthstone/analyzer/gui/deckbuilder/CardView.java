@@ -54,6 +54,8 @@ public class CardView extends BorderPane implements EventHandler<MouseEvent> {
 		
 		previousButton.setOnAction(actionEvent -> changeOffset(-cardDisplayCount));
 		nextButton.setOnAction(actionEvent -> changeOffset(+cardDisplayCount));
+		
+		setCache(true);
 	}
 	
 	private void changeOffset(int delta) {

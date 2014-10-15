@@ -28,12 +28,6 @@ public abstract class Hero extends Actor {
 	}
 
 	@Override
-	public void setOwner(int ownerIndex) {
-		super.setOwner(ownerIndex);
-		heroPower.setOwner(ownerIndex);
-	}
-
-	@Override
 	public Hero clone() {
 		Hero clone = (Hero) super.clone();
 		if (weapon != null) {
@@ -93,6 +87,12 @@ public abstract class Hero extends Actor {
 	public void setHeroPower(HeroPower heroPower) {
 		this.heroPower = heroPower;
 		heroPower.setOwner(getOwner());
+	}
+
+	@Override
+	public void setOwner(int ownerIndex) {
+		super.setOwner(ownerIndex);
+		heroPower.setOwner(ownerIndex);
 	}
 
 	public void setWeapon(Weapon weapon) {

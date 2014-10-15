@@ -4,8 +4,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 
 public class GameTagUtils {
 	
-	private GameTagUtils() {
-		
+	public static String getTagName(GameTag tag) {
+		return tag.toString();
 	}
 
 	public static TagValueType getTagValueType(GameTag tag) {
@@ -65,8 +65,8 @@ public class GameTagUtils {
 		return TagValueType.OTHER;
 	}
 	
-	public static String getTagName(GameTag tag) {
-		return tag.toString();
+	private GameTagUtils() {
+		
 	}
 
 }

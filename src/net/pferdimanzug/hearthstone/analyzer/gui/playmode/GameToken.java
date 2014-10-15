@@ -53,8 +53,6 @@ public class GameToken extends BorderPane {
 		Blend green = new Blend(BlendMode.MULTIPLY, monochrome, new ColorInput(0, 0, targetIcon.getImage().getWidth(), targetIcon
 				.getImage().getHeight(), new Color(0, 1, 0, 0.5)));
 
-		targetIcon.setCache(true);
-
 		targetButton = targetIcon;
 
 		targetIcon.effectProperty().bind(Bindings.when(targetButton.hoverProperty()).then((Effect) green).otherwise((Effect) red));

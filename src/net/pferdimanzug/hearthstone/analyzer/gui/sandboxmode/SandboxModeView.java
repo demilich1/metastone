@@ -61,6 +61,10 @@ public class SandboxModeView extends BorderPane {
 		return boardView;
 	}
 
+	public void onPlayerSelectionChanged(Player selectedPlayer) {
+		toolboxView.onPlayerSelectionChanged(selectedPlayer);
+	}
+
 	private void startPlayMode(ActionEvent actionEvent) {
 		ApplicationFacade.getInstance().sendNotification(GameNotification.START_PLAY_SANDBOX);
 		setRight(getActionPromptView());
@@ -76,14 +80,10 @@ public class SandboxModeView extends BorderPane {
 		playButton.setText("Play");
 		playButton.setOnAction(this::startPlayMode);
 	}
-
+	
 	public void updateSandbox(GameContext context) {
 		getBoardView().updateGameState(context);
 		toolboxView.setContext(context);
-	}
-	
-	public void onPlayerSelectionChanged(Player selectedPlayer) {
-		toolboxView.onPlayerSelectionChanged(selectedPlayer);
 	}
 
 }

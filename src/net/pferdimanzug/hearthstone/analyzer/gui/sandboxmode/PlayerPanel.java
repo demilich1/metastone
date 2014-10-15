@@ -57,17 +57,6 @@ public class PlayerPanel extends VBox {
 		editEntityButton.setOnAction(this::handleEditEntityButton);
 	}
 
-	private void handleEditEntityButton(ActionEvent actionEvent) {
-		EditEntityAction editAction = new EditEntityAction();
-		ApplicationFacade.getInstance().sendNotification(GameNotification.PERFORM_ACTION, editAction);
-	}
-
-	private void handlePlayerChanged(ObservableValue<? extends Player> ov, Player oldSelected, Player newSelected) {
-		selectedPlayer = newSelected;
-		ApplicationFacade.getInstance().sendNotification(GameNotification.SELECT_PLAYER, selectedPlayer);
-		populateManaBoxes();
-	}
-
 	private void handleCurrentManaChanged(ObservableValue<? extends Number> ov, Number oldIndex, Number newIndex) {
 		if (selectedPlayer == null || ignoreManaChange) {
 			return;
@@ -75,6 +64,11 @@ public class PlayerPanel extends VBox {
 		Integer newValue = currentManaBox.getSelectionModel().getSelectedItem();
 		SetManaAction setManaAction = new SetManaAction(selectedPlayer.getId(), newValue);
 		ApplicationFacade.getInstance().sendNotification(GameNotification.PERFORM_ACTION, setManaAction);
+	}
+
+	private void handleEditEntityButton(ActionEvent actionEvent) {
+		EditEntityAction editAction = new EditEntityAction();
+		ApplicationFacade.getInstance().sendNotification(GameNotification.PERFORM_ACTION, editAction);
 	}
 
 	private void handleMaxManaChanged(ObservableValue<? extends Number> ov, Number oldIndex, Number newIndex) {
@@ -86,13 +80,9 @@ public class PlayerPanel extends VBox {
 		ApplicationFacade.getInstance().sendNotification(GameNotification.PERFORM_ACTION, setMaxManaAction);
 	}
 
-	public void setContext(GameContext context) {
-		if (playerChoiceBox.getSelectionModel().isEmpty()) {
-			ObservableList<Player> players = FXCollections.observableArrayList();
-			players.addAll(context.getPlayers());
-			playerChoiceBox.setItems(players);
-			playerChoiceBox.getSelectionModel().selectFirst();
-		}
+	private void handlePlayerChanged(ObservableValue<? extends Player> ov, Player oldSelected, Player newSelected) {
+		selectedPlayer = newSelected;
+		ApplicationFacade.getInstance().sendNotification(GameNotification.SELECT_PLAYER, selectedPlayer);
 		populateManaBoxes();
 	}
 
@@ -109,6 +99,16 @@ public class PlayerPanel extends VBox {
 		currentManaBox.getSelectionModel().select(selectedPlayer.getMana());
 		maxManaBox.getSelectionModel().select(selectedPlayer.getMaxMana());
 		ignoreManaChange = false;
+	}
+
+	public void setContext(GameContext context) {
+		if (playerChoiceBox.getSelectionModel().isEmpty()) {
+			ObservableList<Player> players = FXCollections.observableArrayList();
+			players.addAll(context.getPlayers());
+			playerChoiceBox.setItems(players);
+			playerChoiceBox.getSelectionModel().selectFirst();
+		}
+		populateManaBoxes();
 	}
 
 	private class PlayerStringConverter extends StringConverter<Player> {
