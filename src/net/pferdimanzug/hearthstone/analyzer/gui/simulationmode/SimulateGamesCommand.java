@@ -1,12 +1,9 @@
 package net.pferdimanzug.hearthstone.analyzer.gui.simulationmode;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
@@ -29,14 +26,15 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 
 	private int gamesCompleted;
 	private long lastUpdate;
+	private SimulationResult result;
 
 	@Override
 	public void execute(INotification<GameNotification> notification) {
 		final GameConfig gameConfig = (GameConfig) notification.getBody();
-		final SimulationResult result = new SimulationResult(gameConfig);
+		result = new SimulationResult(gameConfig);
 
 		gamesCompleted = 0;
-		
+
 		Thread t = new Thread(new Runnable() {
 
 			@Override
@@ -44,7 +42,6 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 				logger.info("Simulation started");
 				//ExecutorService executor = Executors.newWorkStealingPool();
 				ExecutorService executor = Executors.newSingleThreadExecutor();
-				List<Future<GameContext>> tasks = new ArrayList<>(gameConfig.getNumberOfGames());
 
 				// send initial status update
 				Tuple<Integer, Integer> progress = new Tuple<>(0, gameConfig.getNumberOfGames());
@@ -52,36 +49,19 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 				lastUpdate = System.currentTimeMillis();
 				for (int i = 0; i < gameConfig.getNumberOfGames(); i++) {
 					PlayGameTask task = new PlayGameTask(gameConfig);
-					Future<GameContext> future = executor.submit(task);
-					tasks.add(future);
+					executor.submit(task);
 				}
-				
-				while (!tasks.isEmpty()) {
-					Iterator<Future<GameContext>> iterator = tasks.iterator();
-					while(iterator.hasNext()) {
-						
-						GameContext gameResult = null;
-						try {
-							gameResult = iterator.next().get();
-							iterator.remove();
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-						synchronized (result) {
-							result.getPlayer1Stats().merge(gameResult.getPlayer1().getStatistics());
-							result.getPlayer2Stats().merge(gameResult.getPlayer2().getStatistics());
-						}
-					}
-					try {
-						Thread.sleep(50);
-					} catch (InterruptedException e) {
-					}
-				}
-				
+
 				executor.shutdown();
+				try {
+					executor.awaitTermination(10000, TimeUnit.HOURS);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 
 				result.calculateMetaStatistics();
 				getFacade().sendNotification(GameNotification.SIMULATION_RESULT, result);
+				logger.info("Simulation finished");
 
 			}
 		});
@@ -89,7 +69,7 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 		t.start();
 	}
 
-	private void onGameComplete(GameConfig gameConfig) {
+	private void onGameComplete(GameConfig gameConfig, GameContext context) {
 		long timeStamp = System.currentTimeMillis();
 		gamesCompleted++;
 		if (timeStamp - lastUpdate > 100) {
@@ -97,6 +77,10 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 			Tuple<Integer, Integer> progress = new Tuple<>(gamesCompleted, gameConfig.getNumberOfGames());
 			Notification<GameNotification> updateNotification = new Notification<>(GameNotification.SIMULATION_PROGRESS_UPDATE, progress);
 			getFacade().notifyObservers(updateNotification);
+		}
+		synchronized (result) {
+			result.getPlayer1Stats().merge(context.getPlayer1().getStatistics());
+			result.getPlayer2Stats().merge(context.getPlayer2().getStatistics());
 		}
 	}
 
@@ -122,7 +106,7 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 			GameContext newGame = new GameContext(player1, player2, new GameLogic());
 			newGame.play();
 
-			onGameComplete(gameConfig);
+			onGameComplete(gameConfig, newGame);
 			newGame.dispose();
 			return newGame;
 		}

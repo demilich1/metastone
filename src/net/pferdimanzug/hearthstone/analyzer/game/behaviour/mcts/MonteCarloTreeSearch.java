@@ -41,7 +41,7 @@ public class MonteCarloTreeSearch extends Behaviour {
 			return validActions.get(0);
 		}
 		Node root = new Node(null, player.getId());
-		root.initState(context.clone(), validActions);
+		root.initState(context, validActions);
 		UctPolicy treePolicy = new UctPolicy();
 		for (int i = 0; i < ITERATIONS; i++) {
 			root.process(treePolicy);

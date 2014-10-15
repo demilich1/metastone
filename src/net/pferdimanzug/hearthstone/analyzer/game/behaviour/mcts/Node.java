@@ -6,7 +6,6 @@ import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.PlayRandomBehaviour;
 
@@ -51,7 +50,7 @@ class Node {
 		GameAction best = null;
 		int bestScore = Integer.MIN_VALUE;
 		for (Node node : children) {
-			if (node.getVisits() > bestScore) {
+			if (node.getScore() > bestScore) {
 				best = node.incomingAction;
 				bestScore = node.getScore();
 			}
@@ -80,7 +79,7 @@ class Node {
 	}
 
 	public void initState(GameContext state, List<GameAction> validActions) {
-		this.state = state;
+		this.state = state.clone();
 		this.validTransitions = new ArrayList<GameAction>(validActions);
 	}
 
@@ -133,16 +132,10 @@ class Node {
 		for (Player player : simulation.getPlayers()) {
 			player.setBehaviour(new PlayRandomBehaviour());
 		}
-		// if this state was reached by performing 'End Turn' then we need to
-		// start the new turn first
-		if (node.incomingAction.getActionType() == ActionType.END_TURN) {
-			// simulation.startTurn(simulation.getActivePlayer().getId());
-			simulation.playTurn();
-		} else {
-			simulation.playTurn();
-		}
 
-		return simulation.getWinningPlayerId() == getPlayer() ? 1 : 0; 
+		simulation.playTurn();
+
+		return simulation.getWinningPlayerId() == getPlayer() ? 1 : 0;
 	}
 
 	private void updateStats(int value) {

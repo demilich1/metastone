@@ -2,7 +2,6 @@ package net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.commands;
 
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.SandboxProxy;
 import de.pferdimanzug.nittygrittymvc.SimpleCommand;
@@ -18,9 +17,7 @@ public class ModifyPlayerDeckCommand extends SimpleCommand<GameNotification>{
 		CardCollection modifiedDeck = (CardCollection) notification.getBody();
 		
 		player.getDeck().removeAll();
-		for (Card card : modifiedDeck) {
-			
-		}
+		player.getDeck().addAll(modifiedDeck);
 		
 		sendNotification(GameNotification.UPDATE_SANDBOX_STATE, sandboxProxy.getSandbox());
 	}

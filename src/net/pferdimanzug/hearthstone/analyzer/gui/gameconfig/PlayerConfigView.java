@@ -15,7 +15,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.FlatMonteCarlo;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.GreedyOptimizeMove;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.GreedyOptimizeTurn;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
@@ -25,6 +24,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.heuristic.TDWeightHe
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.heuristic.WeightedHeuristic;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.learning.LearningBehaviour;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.mcts.MonteCarloTreeSearch;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.DeckFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Anduin;
@@ -129,9 +129,8 @@ public class PlayerConfigView extends VBox {
 			behaviourList.add(new HumanBehaviour());
 		}
 		
-		behaviourList.add(new GreedyOptimizeTurn(new TDWeightHeuristic()));
+		behaviourList.add(new GreedyOptimizeTurn(new WeightedHeuristic()));
 		behaviourList.add(new GreedyOptimizeMove(new WeightedHeuristic()));
-		behaviourList.add(new FlatMonteCarlo(100));
 		behaviourList.add(new LearningBehaviour(true));
 		behaviourList.add(new NoAggressionBehaviour());
 
