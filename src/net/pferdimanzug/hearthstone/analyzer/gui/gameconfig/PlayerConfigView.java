@@ -20,11 +20,10 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.GreedyOptimizeTurn;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.NoAggressionBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.PlayRandomBehaviour;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.heuristic.TDWeightHeuristic;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.heuristic.WeightedHeuristic;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.learning.LearningBehaviour;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.mcts.MonteCarloTreeSearch;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.value.ThatValueBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.DeckFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Anduin;
@@ -131,6 +130,7 @@ public class PlayerConfigView extends VBox {
 		
 		behaviourList.add(new GreedyOptimizeTurn(new WeightedHeuristic()));
 		behaviourList.add(new GreedyOptimizeMove(new WeightedHeuristic()));
+		behaviourList.add(new ThatValueBehaviour());
 		behaviourList.add(new LearningBehaviour(true));
 		behaviourList.add(new NoAggressionBehaviour());
 

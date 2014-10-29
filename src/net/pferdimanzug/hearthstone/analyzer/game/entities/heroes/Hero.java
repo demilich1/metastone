@@ -88,6 +88,10 @@ public abstract class Hero extends Actor {
 		this.heroPower = heroPower;
 		heroPower.setOwner(getOwner());
 	}
+	
+	public int getEffectiveHp() {
+		return getHp() + getArmor();
+	}
 
 	@Override
 	public void setOwner(int ownerIndex) {

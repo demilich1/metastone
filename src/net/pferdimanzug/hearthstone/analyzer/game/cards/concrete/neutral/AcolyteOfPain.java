@@ -20,8 +20,6 @@ public class AcolyteOfPain extends MinionCard {
 		return 79;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion acolyteOfPain = createMinion();

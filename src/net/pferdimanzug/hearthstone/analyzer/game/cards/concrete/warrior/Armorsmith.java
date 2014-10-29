@@ -21,8 +21,6 @@ public class Armorsmith extends MinionCard {
 		return 361;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion armorsmith = createMinion();

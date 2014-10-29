@@ -34,6 +34,8 @@ public class CardEntry extends HBox {
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
+		
+		setCache(true);
 	}
 
 	public void addCard(Card card) {
