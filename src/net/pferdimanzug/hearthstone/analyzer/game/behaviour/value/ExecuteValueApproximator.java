@@ -10,7 +10,8 @@ public class ExecuteValueApproximator implements IValueApproximator {
 	public float getValue(GameContext context, GameAction action, int playerId) {
 		// Execute target has to be a minion
 		Minion minion = (Minion) context.resolveSingleTarget(action.getTargetKey());
-		return Values.getMinionValue(minion);
+		int factor = minion.getOwner() == playerId ? -1 : 1;
+		return Values.getMinionValue(minion) * factor;
 	}
 
 }

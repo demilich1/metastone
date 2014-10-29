@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SilenceSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Spellbreaker extends MinionCard {
 
@@ -25,8 +25,7 @@ public class Spellbreaker extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion spellbreaker = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(SilenceSpell.create());
-		battlecry.setTargetKey(EntityReference.ALL_MINIONS);
+		Battlecry battlecry = Battlecry.createBattlecry(SilenceSpell.create(), TargetSelection.MINIONS);
 		spellbreaker.setBattlecry(battlecry);
 		return spellbreaker;
 	}

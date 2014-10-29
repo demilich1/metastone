@@ -3,6 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.behaviour.value;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
@@ -26,6 +27,14 @@ class Values {
 			return 100000;
 		}
 		return damage;
+	}
+	
+	public static int signHarmful(Entity entity, int playerId) {
+		return entity.getOwner() == playerId ? -1 : 1;
+	}
+	
+	public static int signBeneficial(Entity entity, int playerId) {
+		return -signHarmful(entity, playerId);
 	}
 	
 	public static float getSilenceScore(GameContext context, Minion minion) {

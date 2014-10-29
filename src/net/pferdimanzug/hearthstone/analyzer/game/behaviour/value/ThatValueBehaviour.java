@@ -3,14 +3,14 @@ package net.pferdimanzug.hearthstone.analyzer.game.behaviour.value;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.Behaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ThatValueBehaviour extends Behaviour {
 	

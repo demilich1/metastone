@@ -24,12 +24,12 @@ public class PhysicalAttackValueApproximator implements IValueApproximator {
 		} else {
 			Minion attackerMinion = (Minion) attacker;
 			if (Divination.willMinionDie(context, attackerMinion, defender.getAttack())) {
-				value -= Values.getMinionValue(attackerMinion);
+				value -= Values.getMinionValue(attackerMinion) * 3;
 			} 
 		}
 		Minion defenderMinion = (Minion) defender;
 		if (Divination.willMinionDie(context, defenderMinion, attacker.getAttack())) {
-			value += Values.getMinionValue(defenderMinion);
+			value += Values.getMinionValue(defenderMinion) * 3;
 		} 
 		return value;
 	}

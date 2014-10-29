@@ -6,6 +6,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.Spellbreaker;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.TheCoin;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.Execute;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.Slam;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.Whirlwind;
@@ -23,6 +25,9 @@ public class ValueApproximator implements IValueApproximator {
 	private final PhysicalAttackValueApproximator attackValueApproximator = new PhysicalAttackValueApproximator(); 
 	private final BasicMinionValueApproximator minionValueApproximator = new BasicMinionValueApproximator();
 	private final BasicWeaponValueApproximator weaponValueApproximator = new BasicWeaponValueApproximator();
+	private final BattlecryValueApproximator battlecryValueApproximator = new BattlecryValueApproximator();
+	
+	private final Card theCoin = new TheCoin();
 	
 	{
 		// hero powers
@@ -31,6 +36,7 @@ public class ValueApproximator implements IValueApproximator {
 		cardValueApproximators.put(new Slam().getTypeId(), new SlamValueApproximator());
 		cardValueApproximators.put(new Whirlwind().getTypeId(), new WhirlwindValueApproximator());
 		cardValueApproximators.put(new Execute().getTypeId(), new ExecuteValueApproximator());
+		cardValueApproximators.put(new Spellbreaker().getTypeId(), new SpellBreakerValueApproximator());
 	}
 	
 	@Override
@@ -46,9 +52,9 @@ public class ValueApproximator implements IValueApproximator {
 		}
 		switch (action.getActionType()) {
 		case BATTLECRY:
-			break;
+			return battlecryValueApproximator.getValue(context, action, playerId);
 		case END_TURN:
-			return 0;
+			return 0.1f;
 		case EQUIP_WEAPON:
 			return weaponValueApproximator.getValue(context, action, playerId);
 		case HERO_POWER:
@@ -56,6 +62,12 @@ public class ValueApproximator implements IValueApproximator {
 		case PHYSICAL_ATTACK:
 			return attackValueApproximator.getValue(context, action, playerId);
 		case SPELL:
+			PlayCardAction playCardAction = (PlayCardAction) action;
+			Card card = context.resolveCardReference(playCardAction.getCardReference());
+			if (card.getTypeId() == theCoin.getTypeId()) {
+				// do not value playing The Coin by itself
+				return -0.1f;
+			}
 			break;
 		case SUMMON:
 			return minionValueApproximator.getValue(context, action, playerId);
