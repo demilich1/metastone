@@ -19,7 +19,7 @@ public class LearningBehaviour extends Behaviour {
 	
 	private static final String SAVE_PATH = "brain.ser"; 
 
-	private static final IBrain brain = new Brain2();
+	private static final IBrain brain = new Brain();
 	
 	public LearningBehaviour(boolean learn) {
 		brain.load(SAVE_PATH);
