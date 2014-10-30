@@ -33,6 +33,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Guldan;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Malfurion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Rexxar;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Thrall;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Uther;
@@ -152,12 +153,13 @@ public class PlayerConfigView extends VBox {
 			heroList.add(new Jaina());
 		}
 
-		heroList.add(new Rexxar());
-		heroList.add(new Guldan());
 		heroList.add(new Valeera());
+		heroList.add(new Guldan());
+		heroList.add(new Rexxar());
 		heroList.add(new Thrall());
 		heroList.add(new Anduin());
 		heroList.add(new Uther());
+		heroList.add(new Malfurion());
 
 		heroBox.setItems(heroList);
 		heroBox.valueProperty().addListener((ChangeListener<Hero>) (observableValue, oldHero, newHero) -> {

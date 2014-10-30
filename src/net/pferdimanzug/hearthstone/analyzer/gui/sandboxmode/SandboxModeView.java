@@ -11,6 +11,7 @@ import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanTargetOptions;
 import net.pferdimanzug.hearthstone.analyzer.gui.playmode.GameBoardView;
 import net.pferdimanzug.hearthstone.analyzer.gui.playmode.HumanActionPromptView;
 
@@ -60,6 +61,15 @@ public class SandboxModeView extends BorderPane {
 	public GameBoardView getBoardView() {
 		return boardView;
 	}
+	
+	public void enableTargetSelection(HumanTargetOptions targetOptions) {
+		boardView.enableTargetSelection(targetOptions);
+	}
+	
+	public void disableTargetSelection() {
+		boardView.disableTargetSelection();
+		actionPromptView.setVisible(true);
+	}
 
 	public void onPlayerSelectionChanged(Player selectedPlayer) {
 		toolboxView.onPlayerSelectionChanged(selectedPlayer);
@@ -76,7 +86,7 @@ public class SandboxModeView extends BorderPane {
 	private void stopPlayMode(ActionEvent actionEvent) {
 		ApplicationFacade.getInstance().sendNotification(GameNotification.STOP_PLAY_SANDBOX);
 		setRight(toolboxView);
-		backButton.setVisible(false);
+		backButton.setVisible(true);
 		playButton.setText("Play");
 		playButton.setOnAction(this::startPlayMode);
 	}

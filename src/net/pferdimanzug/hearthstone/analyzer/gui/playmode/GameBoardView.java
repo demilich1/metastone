@@ -34,17 +34,17 @@ public class GameBoardView extends BorderPane {
 	private HBox p1CardPane;
 	@FXML
 	private HBox p2CardPane;
-	
+
 	@FXML
 	private HBox p1MinionPane;
 	@FXML
 	private HBox p2MinionPane;
-	
+
 	@FXML
 	private VBox p1HeroAnchor;
 	@FXML
 	private VBox p2HeroAnchor;
-	
+
 	@FXML
 	private HBox centerMessageArea;
 
@@ -54,11 +54,11 @@ public class GameBoardView extends BorderPane {
 	private HandCard[] p2Cards = new HandCard[GameLogic.MAX_HAND_CARDS];
 	private MinionToken[] p1Minions = new MinionToken[GameLogic.MAX_MINIONS];
 	private MinionToken[] p2Minions = new MinionToken[GameLogic.MAX_MINIONS];
-	
+
 	private final HashMap<GameToken, Button> summonHelperMap1 = new HashMap<GameToken, Button>();
 	private final HashMap<GameToken, Button> summonHelperMap2 = new HashMap<GameToken, Button>();
 	private final HashMap<Actor, GameToken> entityTokenMap = new HashMap<Actor, GameToken>();
-	
+
 	@FXML
 	private Label centerMessageLabel;
 
@@ -82,7 +82,7 @@ public class GameBoardView extends BorderPane {
 		}
 		p1CardPane.getChildren().addAll(p1Cards);
 		p2CardPane.getChildren().addAll(p2Cards);
-		
+
 		// initialize minion tokens elements
 		for (int i = 0; i < p1Minions.length; i++) {
 			Button summonHelper = createSummonHelper();
@@ -90,7 +90,7 @@ public class GameBoardView extends BorderPane {
 			p1Minions[i] = new MinionToken();
 			p1MinionPane.getChildren().add(p1Minions[i]);
 			summonHelperMap1.put(p1Minions[i], summonHelper);
-			
+
 			summonHelper = createSummonHelper();
 			p2MinionPane.getChildren().add(summonHelper);
 			p2Minions[i] = new MinionToken();
@@ -101,21 +101,20 @@ public class GameBoardView extends BorderPane {
 		Button summonHelper = createSummonHelper();
 		p1MinionPane.getChildren().add(summonHelper);
 		summonHelperMap1.put(null, summonHelper);
-		
+
 		summonHelper = createSummonHelper();
 		p2MinionPane.getChildren().add(summonHelper);
 		summonHelperMap2.put(null, summonHelper);
-		
+
 		p1Hero = new HeroToken();
 		p2Hero = new HeroToken();
-		
+
 		p1HeroAnchor.getChildren().add(p1Hero);
 		p2HeroAnchor.getChildren().add(p2Hero);
-		
+
 		setCache(true);
 	}
-	
-	
+
 	private void checkForWinner(GameContext context) {
 		if (context.gameDecided()) {
 			if (context.getWinningPlayerId() == -1) {
@@ -127,10 +126,9 @@ public class GameBoardView extends BorderPane {
 				setCenterMessage("Player " + winner.getName() + " has won the game.");
 			}
 		}
-		
+
 	}
-	
-	
+
 	private Button createSummonHelper() {
 		ImageView icon = new ImageView(IconFactory.getSummonHelper());
 		icon.setFitWidth(32);
@@ -140,8 +138,8 @@ public class GameBoardView extends BorderPane {
 		helper.setManaged(false);
 		return helper;
 	}
-	
-	private void disableTargetSelection() {
+
+	public void disableTargetSelection() {
 		for (GameToken token : entityTokenMap.values()) {
 			token.hideTargetMarker();
 		}
@@ -155,28 +153,27 @@ public class GameBoardView extends BorderPane {
 		}
 		hideCenterMessage();
 	}
-	
-	
+
 	private void enableSpellTargets(final HumanTargetOptions targetOptions) {
 		GameContext context = targetOptions.getContext();
-		
+
 		for (final GameAction action : targetOptions.getActionGroup().getActionsInGroup()) {
 			Entity target = context.resolveSingleTarget(action.getTargetKey());
 			GameToken token = entityTokenMap.get(target);
-			
+
 			EventHandler<MouseEvent> clickedHander = new EventHandler<MouseEvent>() {
-				
+
 				@Override
 				public void handle(MouseEvent event) {
 					disableTargetSelection();
 					targetOptions.getActionSelectionListener().onActionSelected(action);
 				}
 			};
-			
+
 			token.showTargetMarker(clickedHander);
 		}
 	}
-	
+
 	private void enableSummonTargets(final HumanTargetOptions targetOptions) {
 		int playerId = targetOptions.getPlayerId();
 		GameContext context = targetOptions.getContext();
@@ -187,7 +184,7 @@ public class GameBoardView extends BorderPane {
 			summonHelper.setVisible(true);
 			summonHelper.setManaged(true);
 			EventHandler<ActionEvent> clickedHander = new EventHandler<ActionEvent>() {
-				
+
 				@Override
 				public void handle(ActionEvent event) {
 					disableTargetSelection();
@@ -197,7 +194,7 @@ public class GameBoardView extends BorderPane {
 			summonHelper.setOnAction(clickedHander);
 		}
 	}
-	
+
 	public void enableTargetSelection(final HumanTargetOptions targetOptions) {
 		GameAction action = targetOptions.getActionGroup().getPrototype();
 		if (action.getActionType() == ActionType.SUMMON) {
@@ -205,9 +202,9 @@ public class GameBoardView extends BorderPane {
 		} else {
 			enableSpellTargets(targetOptions);
 		}
-		setCenterMessage("Select target for " + action.getPromptText());
+		setCenterMessage("Select target for " + action.getPromptText() + " - ESC to cancel");
 	}
-	
+
 	private void hideCenterMessage() {
 		centerMessageLabel.setVisible(false);
 	}
@@ -216,7 +213,7 @@ public class GameBoardView extends BorderPane {
 		centerMessageLabel.setText(message);
 		centerMessageLabel.setVisible(true);
 	}
-	
+
 	public void updateGameState(GameContext context) {
 		entityTokenMap.clear();
 		p1Hero.setHero(context.getPlayer1());
@@ -225,16 +222,16 @@ public class GameBoardView extends BorderPane {
 		p2Hero.setHero(context.getPlayer2());
 		p2Hero.highlight(context.getActivePlayer() == context.getPlayer2());
 		entityTokenMap.put(context.getPlayer2().getHero(), p2Hero);
-		
+
 		updateHandCards(context, context.getPlayer1(), p1Cards);
 		updateHandCards(context, context.getPlayer2(), p2Cards);
-		
+
 		updateMinionTokens(context.getPlayer1(), p1Minions);
 		updateMinionTokens(context.getPlayer2(), p2Minions);
-		
+
 		checkForWinner(context);
 	}
-	
+
 	private void updateHandCards(GameContext context, Player player, HandCard[] handCards) {
 		CardCollection hand = player.getHand();
 		for (int i = 0; i < handCards.length; i++) {
@@ -248,7 +245,7 @@ public class GameBoardView extends BorderPane {
 			}
 		}
 	}
-	
+
 	private void updateMinionTokens(Player player, MinionToken[] minionTokens) {
 		List<Minion> minions = player.getMinions();
 		for (int i = 0; i < minionTokens.length; i++) {
@@ -266,4 +263,3 @@ public class GameBoardView extends BorderPane {
 	}
 
 }
-

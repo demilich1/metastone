@@ -48,6 +48,11 @@ public class PlayModeView extends BorderPane {
 		boardView.enableTargetSelection(targetOptions);
 	}
 	
+	public void disableTargetSelection() {
+		boardView.disableTargetSelection();
+		actionPromptView.setVisible(true);
+	}
+	
 	public HumanActionPromptView getActionPromptView() {
 		return actionPromptView;
 	}

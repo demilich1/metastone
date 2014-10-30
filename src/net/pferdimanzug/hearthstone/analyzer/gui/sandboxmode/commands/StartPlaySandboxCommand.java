@@ -3,6 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.commands;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
+import net.pferdimanzug.hearthstone.analyzer.game.TurnState;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.SandboxProxy;
 import de.pferdimanzug.nittygrittymvc.SimpleCommand;
@@ -24,7 +25,11 @@ public class StartPlaySandboxCommand extends SimpleCommand<GameNotification> {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				context.playTurn();
+				if (context.getTurnState() == TurnState.TURN_ENDED) {
+					context.startTurn(context.getActivePlayerId());
+				} else {
+					context.playTurn();
+				}
 			}
 		}).start();
 		

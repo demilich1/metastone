@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.application.Platform;
+import javafx.event.EventHandler;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
@@ -12,7 +15,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanTargetOpt
 import de.pferdimanzug.nittygrittymvc.Mediator;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
-public class SandboxModeMediator extends Mediator<GameNotification> {
+public class SandboxModeMediator extends Mediator<GameNotification> implements EventHandler<KeyEvent> {
 
 	public static final String NAME = "SandboxModeMediator";
 
@@ -42,7 +45,7 @@ public class SandboxModeMediator extends Mediator<GameNotification> {
 			break;
 		case HUMAN_PROMPT_FOR_TARGET:
 			HumanTargetOptions options = (HumanTargetOptions) notification.getBody();
-			Platform.runLater(() -> view.getBoardView().enableTargetSelection(options));
+			Platform.runLater(() -> view.enableTargetSelection(options));
 			break;
 		case SELECT_PLAYER:
 			view.onPlayerSelectionChanged((Player) notification.getBody());
@@ -67,7 +70,17 @@ public class SandboxModeMediator extends Mediator<GameNotification> {
 	@Override
 	public void onRegister() {
 		getFacade().sendNotification(GameNotification.SHOW_VIEW, view);
+		view.setOnKeyPressed(this);
 		getFacade().sendNotification(GameNotification.CREATE_NEW_SANDBOX);
+	}
+
+	@Override
+	public void handle(KeyEvent keyEvent) {
+		if (keyEvent.getCode() != KeyCode.ESCAPE) {
+			return;
+		}
+
+		view.disableTargetSelection();
 	}
 
 }

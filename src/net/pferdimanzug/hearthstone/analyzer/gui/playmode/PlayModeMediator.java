@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.application.Platform;
+import javafx.event.EventHandler;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanActionOptions;
@@ -12,7 +15,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanTargetOpt
 import de.pferdimanzug.nittygrittymvc.Mediator;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
-public class PlayModeMediator extends Mediator<GameNotification> {
+public class PlayModeMediator extends Mediator<GameNotification> implements EventHandler<KeyEvent> {
 
 	public static final String NAME = "PlayModeMediator";
 
@@ -67,6 +70,16 @@ public class PlayModeMediator extends Mediator<GameNotification> {
 	@Override
 	public void onRegister() {
 		getFacade().sendNotification(GameNotification.SHOW_VIEW, view);
+		view.getScene().setOnKeyPressed(this);
+	}
+
+	@Override
+	public void handle(KeyEvent keyEvent) {
+		if (keyEvent.getCode() != KeyCode.ESCAPE) {
+			return;
+		}
+		
+		view.disableTargetSelection();		
 	}
 
 }
