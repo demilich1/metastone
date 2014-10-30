@@ -40,8 +40,8 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 			@Override
 			public void run() {
 				logger.info("Simulation started");
-				//ExecutorService executor = Executors.newWorkStealingPool();
-				ExecutorService executor = Executors.newSingleThreadExecutor();
+				ExecutorService executor = Executors.newWorkStealingPool();
+				//ExecutorService executor = Executors.newSingleThreadExecutor();
 
 				// send initial status update
 				Tuple<Integer, Integer> progress = new Tuple<>(0, gameConfig.getNumberOfGames());

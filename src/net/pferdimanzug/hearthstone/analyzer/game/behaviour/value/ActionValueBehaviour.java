@@ -12,15 +12,15 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ThatValueBehaviour extends Behaviour {
+public class ActionValueBehaviour extends Behaviour {
 	
-	private static Logger logger = LoggerFactory.getLogger(ThatValueBehaviour.class);
+	private static Logger logger = LoggerFactory.getLogger(ActionValueBehaviour.class);
 	
 	private final IValueApproximator valueApproximator = new ValueApproximator();
 
 	@Override
 	public String getName() {
-		return "Dat value";
+		return "Action-value";
 	}
 
 	@Override
