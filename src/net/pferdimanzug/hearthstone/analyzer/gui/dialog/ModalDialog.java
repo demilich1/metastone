@@ -19,6 +19,8 @@ public class ModalDialog extends StackPane {
 		stage.initModality(Modality.WINDOW_MODAL);
 		stage.initStyle(StageStyle.TRANSPARENT);
 		stage.initOwner(parent);
+		stage.setX(parent.getX());
+		stage.setY(parent.getY());
 
 		setPrefSize(parent.getWidth(), parent.getHeight());
 		setStyle("-fx-background-color: rgba(0, 0, 0, 0.5);");

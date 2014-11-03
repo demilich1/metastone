@@ -24,6 +24,14 @@ public class ToggleCostModifier extends CardCostModifier {
 		}
 		return super.appliesTo(card);
 	}
+	
+	@Override
+	public CardCostModifier clone() {
+		ToggleCostModifier clone = (ToggleCostModifier) super.clone();
+		clone.toggleOnTrigger = toggleOnTrigger.clone();
+		clone.toggleOffTrigger = toggleOffTrigger.clone();
+		return clone;
+	}
 
 	@Override
 	public boolean interestedIn(GameEventType eventType) {
