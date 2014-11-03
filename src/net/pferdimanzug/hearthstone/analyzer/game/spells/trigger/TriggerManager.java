@@ -21,6 +21,9 @@ public class TriggerManager implements Cloneable, IDisposable {
 
 	public void addTrigger(IGameEventListener trigger) {
 		triggers.add(trigger);
+		if (triggers.size() > 100) {
+			System.out.println("Warning, many triggers: " + triggers.size() + " adding one of type: " + trigger);
+		}
 	}
 
 	@Override

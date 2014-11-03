@@ -43,7 +43,7 @@ public abstract class Card extends Entity {
 	}
 
 	public CardReference getCardReference() {
-		return new CardReference(getOwner(), getLocation(), getId());
+		return new CardReference(getOwner(), getLocation(), getId(), getName());
 	}
 
 	public CardType getCardType() {

@@ -15,9 +15,9 @@ import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.commands.CreateNewS
 import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.commands.ModifyPlayerDeckCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.commands.ModifyPlayerHandCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.commands.PerformActionCommand;
-import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.commands.StartPlaySandboxCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.commands.SelectPlayerCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.commands.SpawnMinionCommand;
+import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.commands.StartPlaySandboxCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.simulationmode.SimulateGamesCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.trainingmode.PerformTrainingCommand;
 import de.pferdimanzug.nittygrittymvc.Facade;

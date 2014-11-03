@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.logic.CustomCloneable;
 
 public abstract class GameEventTrigger extends CustomCloneable {
 
-	private int owner;
+	private int owner = -1;
 
 	@Override
 	public GameEventTrigger clone() {

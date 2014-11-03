@@ -27,6 +27,15 @@ public class SandboxModeMediator extends Mediator<GameNotification> implements E
 	}
 
 	@Override
+	public void handle(KeyEvent keyEvent) {
+		if (keyEvent.getCode() != KeyCode.ESCAPE) {
+			return;
+		}
+
+		view.disableTargetSelection();
+	}
+
+	@Override
 	public void handleNotification(final INotification<GameNotification> notification) {
 
 		switch (notification.getId()) {
@@ -72,15 +81,6 @@ public class SandboxModeMediator extends Mediator<GameNotification> implements E
 		getFacade().sendNotification(GameNotification.SHOW_VIEW, view);
 		view.setOnKeyPressed(this);
 		getFacade().sendNotification(GameNotification.CREATE_NEW_SANDBOX);
-	}
-
-	@Override
-	public void handle(KeyEvent keyEvent) {
-		if (keyEvent.getCode() != KeyCode.ESCAPE) {
-			return;
-		}
-
-		view.disableTargetSelection();
 	}
 
 }

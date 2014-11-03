@@ -31,7 +31,7 @@ public class EchoingOoze extends MinionCard {
 		Minion echoingOoze = createMinion();
 		SpellDesc summonCopy = SummonCopySpell.create();
 		summonCopy.setTarget(EntityReference.SELF);
-		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), summonCopy);
+		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), summonCopy, true);
 		SpellDesc addTrigger = AddSpellTriggerSpell.create(trigger);
 		addTrigger.setTarget(EntityReference.SELF);
 		Battlecry battlecry = Battlecry.createBattlecry(addTrigger);

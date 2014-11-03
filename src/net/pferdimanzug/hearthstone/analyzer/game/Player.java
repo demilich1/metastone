@@ -54,7 +54,7 @@ public class Player extends CustomCloneable {
 	public Player(String name, Hero hero, Deck deck) {
 		this.name = name;
 		this.setHero(hero);
-		this.deck = deck.getCards().clone();
+		this.deck = deck.getCardsCopy();;
 		this.deckName = deck.getName();
 	}
 	
@@ -140,6 +140,11 @@ public class Player extends CustomCloneable {
 
 	public void setMaxMana(int maxMana) {
 		this.maxMana = maxMana;
+	}
+	
+	@Override
+	public String toString() {
+		return "[PLAYER " + "id: " + getId() + ", name: " + getName() + ", hero: " + getHero() + "]";
 	}
 
 }

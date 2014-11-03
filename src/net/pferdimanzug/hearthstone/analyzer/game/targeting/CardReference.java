@@ -5,11 +5,13 @@ public class CardReference {
 	private final int playerId;
 	private final CardLocation location;
 	private final int cardId;
+	private final String cardName;
 
-	public CardReference(int playerId, CardLocation location, int cardId) {
+	public CardReference(int playerId, CardLocation location, int cardId, String cardName) {
 		this.playerId = playerId;
 		this.location = location;
 		this.cardId = cardId;
+		this.cardName = cardName;
 	}
 
 	@Override
@@ -25,6 +27,10 @@ public class CardReference {
 		return cardId;
 	}
 
+	public String getCardName() {
+		return cardName;
+	}
+
 	public CardLocation getLocation() {
 		return location;
 	}
@@ -35,7 +41,7 @@ public class CardReference {
 
 	@Override
 	public String toString() {
-		return String.format("[CardReference playerId:%d cardLocation:%s cardId:%d]", playerId, location.toString(), cardId);
+		return String.format("[CardReference playerId:%d cardName:%s cardLocation:%s cardId:%d]", playerId, cardName, location.toString(), cardId);
 	}
 
 }

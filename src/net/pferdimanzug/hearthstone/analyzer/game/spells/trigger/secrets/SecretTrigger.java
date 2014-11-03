@@ -14,6 +14,13 @@ public class SecretTrigger extends GameEventTrigger {
 		this.trigger = trigger;
 	}
 
+	@Override
+	public GameEventTrigger clone() {
+		GameEventTrigger clone = new SecretTrigger(trigger.clone());
+		clone.setOwner(getOwner());
+		return clone;
+	}
+
 	public boolean fire(GameEvent event, Entity host) {
 		GameContext context = event.getGameContext();
 		// Secrets can only be triggered on opponents turn
@@ -28,7 +35,7 @@ public class SecretTrigger extends GameEventTrigger {
 	public GameEventType interestedIn() {
 		return trigger.interestedIn();
 	}
-
+	
 	@Override
 	public void setOwner(int playerIndex) {
 		super.setOwner(playerIndex);

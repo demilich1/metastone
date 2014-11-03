@@ -2,15 +2,15 @@ package net.pferdimanzug.hearthstone.analyzer.gui.playmode;
 
 import java.io.IOException;
 
-import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
-import net.pferdimanzug.hearthstone.analyzer.GameNotification;
-import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanTargetOptions;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
+import net.pferdimanzug.hearthstone.analyzer.GameNotification;
+import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanTargetOptions;
 
 public class PlayModeView extends BorderPane {
 	
@@ -44,13 +44,13 @@ public class PlayModeView extends BorderPane {
 		backButton.setOnAction(actionEvent -> ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU));
 	}
 	
-	public void enableTargetSelection(HumanTargetOptions targetOptions) {
-		boardView.enableTargetSelection(targetOptions);
-	}
-	
 	public void disableTargetSelection() {
 		boardView.disableTargetSelection();
 		actionPromptView.setVisible(true);
+	}
+	
+	public void enableTargetSelection(HumanTargetOptions targetOptions) {
+		boardView.enableTargetSelection(targetOptions);
 	}
 	
 	public HumanActionPromptView getActionPromptView() {

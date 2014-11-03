@@ -48,8 +48,7 @@ public class BuffHeroSpell extends RevertableSpell {
 			hero.modifyTag(GameTag.ATTACK_BONUS, +attackBonus);
 		}
 		if (armorBonus != 0) {
-			logger.debug("{} gains {} armor", hero, armorBonus);
-			hero.modifyArmor(+armorBonus);
+			context.getLogic().gainArmor(player, armorBonus);
 		}
 
 		if (attackBonus != 0) {

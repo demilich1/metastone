@@ -7,15 +7,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
 public class SpellBreakerValueApproximator extends BasicMinionValueApproximator {
 
-	@Override
-	public float getValue(GameContext context, GameAction action, int playerId) {
-		Player player = context.getPlayer(playerId);
-		float battlecryValue = getBestBattlecryValue(context, player, -5);
-		Player opponent = context.getOpponent(player);
-		battlecryValue = getBestBattlecryValue(context, opponent, battlecryValue);
-		return super.getValue(context, action, playerId) + battlecryValue;
-	}
-
 	private float getBestBattlecryValue(GameContext context, Player player, float bestValueSoFar) {
 		float bestValue = bestValueSoFar;
 
@@ -26,6 +17,15 @@ public class SpellBreakerValueApproximator extends BasicMinionValueApproximator 
 			}
 		}
 		return bestValue;
+	}
+
+	@Override
+	public float getValue(GameContext context, GameAction action, int playerId) {
+		Player player = context.getPlayer(playerId);
+		float battlecryValue = getBestBattlecryValue(context, player, -5);
+		Player opponent = context.getOpponent(player);
+		battlecryValue = getBestBattlecryValue(context, opponent, battlecryValue);
+		return super.getValue(context, action, playerId) + battlecryValue;
 	}
 
 }

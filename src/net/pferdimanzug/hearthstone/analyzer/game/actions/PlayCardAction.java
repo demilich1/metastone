@@ -28,6 +28,7 @@ public abstract class PlayCardAction extends GameAction {
 			SpellCard spellCard = (SpellCard) card;
 			return spellCard.canBeCastOn(entity);
 		}
+
 		return true;
 	}
 
@@ -73,12 +74,11 @@ public abstract class PlayCardAction extends GameAction {
 		PlayCardAction playCardAction = (PlayCardAction) anotherAction;
 		return this.cardReference.equals(playCardAction.cardReference);
 	}
-	
+
 	protected abstract void play(GameContext context, int playerId);
 
 	@Override
 	public String toString() {
 		return String.format("%s Card: %s Target: %s", getActionType(), cardReference, getTargetKey());
 	}
-
 }

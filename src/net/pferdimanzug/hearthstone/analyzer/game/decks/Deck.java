@@ -29,6 +29,10 @@ public class Deck {
 	public CardCollection getCards() {
 		return cards;
 	}
+	
+	public CardCollection getCardsCopy() {
+		return getCards().clone();
+	}
 
 	public String getDescription() {
 		return description;
@@ -43,7 +47,7 @@ public class Deck {
 	}
 
 	public boolean isComplete() {
-		return getCards().getCount() == GameLogic.DECK_SIZE;
+		return cards.getCount() == GameLogic.DECK_SIZE;
 	}
 	
 	public void setDescription(String description) {

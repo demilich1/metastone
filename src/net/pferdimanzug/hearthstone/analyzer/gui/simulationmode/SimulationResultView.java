@@ -20,19 +20,57 @@ import org.apache.commons.lang3.time.DurationFormatUtils;
 
 public class SimulationResultView extends BorderPane {
 	
-	@FXML
-	private BorderPane infoArea;
+	private static String getStatName(Statistic stat) {
+		switch (stat) {
+		case ARMOR_GAINED:
+			return "Armor gained";
+		case CARDS_DRAWN:
+			return "Cards drawn";
+		case CARDS_PLAYED:
+			return "Cards played";
+		case DAMAGE_DEALT:
+			return "Damage dealt";
+		case FATIGUE_DAMAGE:
+			return "Fatigue damage";
+		case GAMES_LOST:
+			return "Games Lost";
+		case GAMES_WON:
+			return "Games won";
+		case HEALING_DONE:
+			return "Healing done";
+		case HERO_POWER_USED:
+			return "Hero power used";
+		case MANA_SPENT:
+			return "Mana spent";
+		case MINIONS_PLAYED:
+			return "Minions played";
+		case SPELLS_CAST:
+			return "Spells cast";
+		case TURNS_TAKEN:
+			return "Turns taken";
+		case WEAPONS_EQUIPPED:
+			return "Weapons equipped";
+		case WIN_RATE:
+			return "Win rate";
+		default:
+			break;
+		}
+		return stat.toString();
+	}
 	
 	@FXML
-	private TableView<StatEntry> resultTable;
+	private BorderPane infoArea;
 
+	@FXML
+	private TableView<StatEntry> resultTable;
+	
 	@FXML
 	private Button doneButton;
 	
 	@FXML
 	private Label durationLabel;
-	
 	private PlayerInfoView player1InfoView;
+
 	private PlayerInfoView player2InfoView;
 
 	public SimulationResultView() {
@@ -60,7 +98,7 @@ public class SimulationResultView extends BorderPane {
 		}
 		return "-";
 	}
-
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void showSimulationResult(SimulationResult result) {
 		player1InfoView.setInfo(result.getConfig().getPlayerConfig1());
@@ -70,7 +108,7 @@ public class SimulationResultView extends BorderPane {
 		ObservableList<StatEntry> statEntries = FXCollections.observableArrayList();
 		for (Statistic stat : Statistic.values()) {
 			StatEntry statEntry = new StatEntry();
-			statEntry.setStatName(stat.toString());
+			statEntry.setStatName(getStatName(stat));
 			statEntry.setPlayer1Value(getStatString(stat, result.getPlayer1Stats()));
 			statEntry.setPlayer2Value(getStatString(stat, result.getPlayer2Stats()));
 			statEntries.add(statEntry);

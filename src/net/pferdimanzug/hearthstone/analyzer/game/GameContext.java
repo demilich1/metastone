@@ -95,12 +95,8 @@ public class GameContext implements Cloneable, IDisposable {
 
 	@Override
 	public void dispose() {
-		for (Player player : getPlayers()) {
-			player.getMinions().clear();
-			player.getGraveyard().clear();
-			player.getHand().removeAll();
-			player.getDeck().removeAll();
-			player.getSecrets().clear();
+		for (int i = 0; i < players.length; i++) {
+			players[i] = null;
 		}
 		getCardCostModifiers().clear();
 		triggerManager.dispose();
@@ -401,6 +397,12 @@ public class GameContext implements Cloneable, IDisposable {
 			for (Card card : player.getHand()) {
 				builder.append('\t');
 				builder.append(card);
+				builder.append('\n');
+			}
+			builder.append("Secrets:\n");
+			for (int secretId : player.getSecrets()) {
+				builder.append('\t');
+				builder.append(secretId);
 				builder.append('\n');
 			}
 		}

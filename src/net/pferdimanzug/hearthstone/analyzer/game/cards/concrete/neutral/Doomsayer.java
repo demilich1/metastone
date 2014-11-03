@@ -22,8 +22,6 @@ public class Doomsayer extends MinionCard {
 		return 118;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion doomsayer = createMinion();

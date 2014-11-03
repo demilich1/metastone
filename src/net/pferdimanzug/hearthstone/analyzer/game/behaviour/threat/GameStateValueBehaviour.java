@@ -16,13 +16,13 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ThreatBasedBehaviour extends Behaviour {
+public class GameStateValueBehaviour extends Behaviour {
 
 	private final Logger logger = LoggerFactory.getLogger(GreedyOptimizeTurn.class);
 
 	private final IGameStateHeuristic heuristic;
 
-	public ThreatBasedBehaviour() {
+	public GameStateValueBehaviour() {
 		this.heuristic = new ThreatBasedHeuristic();
 	}
 
@@ -49,12 +49,12 @@ public class ThreatBasedBehaviour extends Behaviour {
 
 	@Override
 	public IBehaviour clone() {
-		return new ThreatBasedBehaviour();
+		return new GameStateValueBehaviour();
 	}
 
 	@Override
 	public String getName() {
-		return "Threat based";
+		return "Game state value (2 turns look-ahead)";
 	}
 
 	@Override
@@ -76,7 +76,7 @@ public class ThreatBasedBehaviour extends Behaviour {
 		}
 
 		int depth = 2;
-		// for now, do not evaluate battecry actions
+		// when evaluating battlecry actions, only optimize the immediate value
 		if (validActions.get(0).getActionType() == ActionType.BATTLECRY) {
 			depth = 0;
 		}

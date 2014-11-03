@@ -21,7 +21,7 @@ public class Nightmare extends SpellCard {
 
 		SpellDesc destroySpell = DestroySpell.create();
 		destroySpell.setTarget(EntityReference.SELF);
-		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), destroySpell);
+		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), destroySpell, true);
 		setSpell(MetaSpell.create(BuffSpell.create(5, 5), AddSpellTriggerSpell.create(trigger)));
 		setTargetRequirement(TargetSelection.MINIONS);
 

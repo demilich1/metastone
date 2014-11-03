@@ -2,16 +2,16 @@ package net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode;
 
 import java.io.IOException;
 
-import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
-import net.pferdimanzug.hearthstone.analyzer.GameNotification;
-import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
-import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
+import net.pferdimanzug.hearthstone.analyzer.GameNotification;
+import net.pferdimanzug.hearthstone.analyzer.game.Player;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
+import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 
 public class CardPanel extends VBox {
 

@@ -29,6 +29,15 @@ public class PlayModeMediator extends Mediator<GameNotification> implements Even
 	}
 
 	@Override
+	public void handle(KeyEvent keyEvent) {
+		if (keyEvent.getCode() != KeyCode.ESCAPE) {
+			return;
+		}
+		
+		view.disableTargetSelection();		
+	}
+
+	@Override
 	public void handleNotification(final INotification<GameNotification> notification) {
 		switch (notification.getId()) {
 		case GAME_STATE_UPDATE:
@@ -71,15 +80,6 @@ public class PlayModeMediator extends Mediator<GameNotification> implements Even
 	public void onRegister() {
 		getFacade().sendNotification(GameNotification.SHOW_VIEW, view);
 		view.getScene().setOnKeyPressed(this);
-	}
-
-	@Override
-	public void handle(KeyEvent keyEvent) {
-		if (keyEvent.getCode() != KeyCode.ESCAPE) {
-			return;
-		}
-		
-		view.disableTargetSelection();		
 	}
 
 }

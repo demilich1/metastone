@@ -14,6 +14,7 @@ public class GrimscaleOracle extends MinionCard {
 	public GrimscaleOracle() {
 		super("Grimscale Oracle", 1, 1, Rarity.FREE, HeroClass.ANY, 1);
 		setDescription("ALL other Murlocs have +1 Attack.");
+		setRace(Race.MURLOC);
 	}
 
 	@Override
@@ -24,8 +25,7 @@ public class GrimscaleOracle extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion grimscaleOracle = createMinion();
-		grimscaleOracle.setRace(Race.MURLOC);
-		Aura grimscaleOracleAura = new BuffAura(1, 0, EntityReference.ALL_MINIONS);
+		Aura grimscaleOracleAura = new BuffAura(1, 0, EntityReference.ALL_MINIONS, Race.MURLOC);
 		grimscaleOracle.setSpellTrigger(grimscaleOracleAura);
 		return grimscaleOracle;
 	}

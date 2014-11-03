@@ -50,6 +50,10 @@ public abstract class Hero extends Actor {
 		return attack;
 	}
 
+	public int getEffectiveHp() {
+		return getHp() + getArmor();
+	}
+
 	@Override
 	public EntityType getEntityType() {
 		return EntityType.HERO;
@@ -83,14 +87,10 @@ public abstract class Hero extends Actor {
 		int newArmor = Math.max(getArmor() + armor, 0);
 		setTag(GameTag.ARMOR, newArmor);
 	}
-
+	
 	public void setHeroPower(HeroPower heroPower) {
 		this.heroPower = heroPower;
 		heroPower.setOwner(getOwner());
-	}
-	
-	public int getEffectiveHp() {
-		return getHp() + getArmor();
 	}
 
 	@Override

@@ -23,13 +23,13 @@ public class SimulationResult {
 	}
 
 	private void calculateMetaStatistics(GameStatistics statistics) {
-		float gamesPlayed = getNumberOfGames();
-		float winRate = statistics.getInt(Statistic.GAMES_WON) / gamesPlayed;
-		String winRateString = (winRate * 100) + "%";
+		double gamesPlayed = getNumberOfGames();
+		double winRate = statistics.getInt(Statistic.GAMES_WON) / gamesPlayed;
+		String winRateString = Math.round(winRate * 100) + "%";
 		statistics.set(Statistic.WIN_RATE, winRateString);
 		
-		float avgTurns = statistics.getInt(Statistic.TURNS_TAKEN) / gamesPlayed;
-		statistics.set(Statistic.AVG_TURNS_TAKEN, avgTurns);
+		//float avgTurns = statistics.getInt(Statistic.TURNS_TAKEN) / gamesPlayed;
+		//statistics.set(Statistic.AVG_TURNS_TAKEN, avgTurns);
 		
 		long endTimestamp = System.currentTimeMillis();
 		duration = endTimestamp - startTimestamp;

@@ -7,5 +7,6 @@ public enum Environment {
 	PENDING_CARD,
 	TARGET_OVERRIDE,
 	ATTACKER,
-	EVENT_TARGET
+	EVENT_TARGET,
+	DEBUG
 }

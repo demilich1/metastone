@@ -54,21 +54,21 @@ public class SandboxModeView extends BorderPane {
 		actionPromptView = new HumanActionPromptView();
 	}
 
-	public HumanActionPromptView getActionPromptView() {
-		return actionPromptView;
+	public void disableTargetSelection() {
+		boardView.disableTargetSelection();
+		actionPromptView.setVisible(true);
 	}
 
-	public GameBoardView getBoardView() {
-		return boardView;
-	}
-	
 	public void enableTargetSelection(HumanTargetOptions targetOptions) {
 		boardView.enableTargetSelection(targetOptions);
 	}
 	
-	public void disableTargetSelection() {
-		boardView.disableTargetSelection();
-		actionPromptView.setVisible(true);
+	public HumanActionPromptView getActionPromptView() {
+		return actionPromptView;
+	}
+	
+	public GameBoardView getBoardView() {
+		return boardView;
 	}
 
 	public void onPlayerSelectionChanged(Player selectedPlayer) {

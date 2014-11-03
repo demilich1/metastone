@@ -9,16 +9,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
 class Values {
 
-	public static final int DRAW_CARD_VALUE = 2;
-
-	public static float getMinionValue(Minion minion) {
-		return minion.getSourceCard().getBaseManaCost();
-	}
-	
-	public static float getMinionCardValue(MinionCard minionCard) {
-		return minionCard.getBaseManaCost();
-	}
-	
 	public static float getHeroDamageValue(GameContext context, Hero target, int damage) {
 		if (target.hasStatus(GameTag.IMMUNE)) {
 			return 0;
@@ -28,13 +18,13 @@ class Values {
 		}
 		return damage;
 	}
-	
-	public static int signHarmful(Entity entity, int playerId) {
-		return entity.getOwner() == playerId ? -1 : 1;
+
+	public static float getMinionCardValue(MinionCard minionCard) {
+		return minionCard.getBaseManaCost();
 	}
 	
-	public static int signBeneficial(Entity entity, int playerId) {
-		return -signHarmful(entity, playerId);
+	public static float getMinionValue(Minion minion) {
+		return minion.getSourceCard().getBaseManaCost();
 	}
 	
 	public static float getSilenceScore(GameContext context, Minion minion) {
@@ -50,5 +40,15 @@ class Values {
 		score += minion.hasStatus(GameTag.UNTARGETABLE_BY_SPELLS) ? 2 : 0;
 		return score;
 	}
+	
+	public static int signBeneficial(Entity entity, int playerId) {
+		return -signHarmful(entity, playerId);
+	}
+	
+	public static int signHarmful(Entity entity, int playerId) {
+		return entity.getOwner() == playerId ? -1 : 1;
+	}
+	
+	public static final int DRAW_CARD_VALUE = 2;
 
 }

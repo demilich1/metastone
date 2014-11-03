@@ -39,7 +39,7 @@ public class ActionLogic {
 	private List<GameAction> getHeroPowerActions(GameContext context, Player player) {
 		List<GameAction> heroPowerActions = new ArrayList<GameAction>();
 		HeroPower heroPower = player.getHero().getHeroPower();
-		CardReference heroPowerReference = new CardReference(player.getId(), CardLocation.HERO_POWER, heroPower.getId());
+		CardReference heroPowerReference = new CardReference(player.getId(), CardLocation.HERO_POWER, heroPower.getId(), heroPower.getName());
 		if (!context.getLogic().canPlayCard(player.getId(), heroPowerReference)) {
 			return heroPowerActions;
 		}
@@ -66,7 +66,7 @@ public class ActionLogic {
 		playCardActions.addAll(getHeroPowerActions(context, player));
 
 		for (Card card : player.getHand()) {
-			CardReference cardReference = new CardReference(player.getId(), CardLocation.HAND, card.getId());
+			CardReference cardReference = new CardReference(player.getId(), CardLocation.HAND, card.getId(), card.getName());
 			if (!context.getLogic().canPlayCard(player.getId(), cardReference)) {
 				continue;
 			}

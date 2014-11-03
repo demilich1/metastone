@@ -16,6 +16,14 @@ public class GameStatistics implements Cloneable {
 		stats.put(key, oldValue + value);
 	}
 
+	public void armorGained(int armor) {
+		add(Statistic.ARMOR_GAINED, armor);
+	}
+	
+	public void cardDrawn() {
+		add(Statistic.CARDS_DRAWN, 1);
+	}
+	
 	public void cardPlayed(Card card) {
 		add(Statistic.CARDS_PLAYED, 1);
 
@@ -33,7 +41,7 @@ public class GameStatistics implements Cloneable {
 			break;
 		}
 	}
-
+	
 	public GameStatistics clone() {
 		GameStatistics clone = new GameStatistics();
 		clone.stats.putAll(stats);
@@ -50,6 +58,10 @@ public class GameStatistics implements Cloneable {
 
 	public void equipWeapon() {
 		add(Statistic.WEAPONS_EQUIPPED, 1);
+	}
+
+	public void fatigueDamage(int fatigueDamage) {
+		add(Statistic.FATIGUE_DAMAGE, fatigueDamage);
 	}
 
 	public void gameLost() {

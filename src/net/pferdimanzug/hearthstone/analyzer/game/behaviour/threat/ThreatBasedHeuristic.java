@@ -10,42 +10,23 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
 public class ThreatBasedHeuristic implements IGameStateHeuristic {
 
-	@Override
-	public double getScore(GameContext context, int playerId) {
+	private static ThreatLevel calcuateThreatLevel(GameContext context, int playerId) {
+		int damageOnBoard = 0;
 		Player player = context.getPlayer(playerId);
 		Player opponent = context.getOpponent(player);
-		if (player.getHero().isDead()) {
-			return Float.NEGATIVE_INFINITY;
-		}
-		if (opponent.getHero().isDead()) {
-			return Float.POSITIVE_INFINITY;
-		}
-		double score = 0;
-
-		ThreatLevel threatLevel = calcuateThreatLevel(context, playerId);
-		switch (threatLevel) {
-		case RED:
-			score -= 50;
-			break;
-		case YELLOW:
-			score -= 10;
-			break;
-		default:
-			break;
-		}
-		score += player.getHero().getEffectiveHp() - opponent.getHero().getEffectiveHp();
-		int cardDiff = player.getHand().getCount() - opponent.getHand().getCount();
-		score += cardDiff * 3;
-
-		for (Minion minion : player.getMinions()) {
-			score += calculateMinionScore(minion, threatLevel);
-		}
-
 		for (Minion minion : opponent.getMinions()) {
-			score -= calculateMinionScore(minion, threatLevel);
+			damageOnBoard += minion.getAttack() * minion.getTagValue(GameTag.NUMBER_OF_ATTACKS);
+		}
+		damageOnBoard += getHeroDamage(opponent.getHero());
+
+		int hpDiff = player.getHero().getEffectiveHp() - damageOnBoard;
+		if (hpDiff <= 0) {
+			return ThreatLevel.RED;
+		} else if (hpDiff <= 14) {
+			return ThreatLevel.YELLOW;
 		}
 
-		return score;
+		return ThreatLevel.GREEN;
 	}
 
 	private static float calculateMinionScore(Minion minion, ThreatLevel threatLevel) {
@@ -88,25 +69,6 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 		return minionScore;
 	}
 
-	private static ThreatLevel calcuateThreatLevel(GameContext context, int playerId) {
-		int damageOnBoard = 0;
-		Player player = context.getPlayer(playerId);
-		Player opponent = context.getOpponent(player);
-		for (Minion minion : opponent.getMinions()) {
-			damageOnBoard += minion.getAttack() * minion.getTagValue(GameTag.NUMBER_OF_ATTACKS);
-		}
-		damageOnBoard += getHeroDamage(opponent.getHero());
-
-		int hpDiff = player.getHero().getEffectiveHp() - damageOnBoard;
-		if (hpDiff <= 0) {
-			return ThreatLevel.RED;
-		} else if (hpDiff <= 14) {
-			return ThreatLevel.YELLOW;
-		}
-
-		return ThreatLevel.GREEN;
-	}
-
 	private static int getHeroDamage(Hero hero) {
 		int heroDamage = 0;
 		if (hero.getHeroClass() == HeroClass.MAGE) {
@@ -120,6 +82,44 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 			heroDamage += hero.getWeapon().getDurability();
 		}
 		return heroDamage;
+	}
+
+	@Override
+	public double getScore(GameContext context, int playerId) {
+		Player player = context.getPlayer(playerId);
+		Player opponent = context.getOpponent(player);
+		if (player.getHero().isDead()) {
+			return Float.NEGATIVE_INFINITY;
+		}
+		if (opponent.getHero().isDead()) {
+			return Float.POSITIVE_INFINITY;
+		}
+		double score = 0;
+
+		ThreatLevel threatLevel = calcuateThreatLevel(context, playerId);
+		switch (threatLevel) {
+		case RED:
+			score -= 50;
+			break;
+		case YELLOW:
+			score -= 10;
+			break;
+		default:
+			break;
+		}
+		score += player.getHero().getEffectiveHp() - opponent.getHero().getEffectiveHp();
+		int cardDiff = player.getHand().getCount() - opponent.getHand().getCount();
+		score += cardDiff * 3;
+
+		for (Minion minion : player.getMinions()) {
+			score += calculateMinionScore(minion, threatLevel);
+		}
+
+		for (Minion minion : opponent.getMinions()) {
+			score -= calculateMinionScore(minion, threatLevel);
+		}
+
+		return score;
 	}
 
 	@Override

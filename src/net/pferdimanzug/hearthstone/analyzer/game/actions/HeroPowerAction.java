@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardReference;
 public abstract class HeroPowerAction extends PlayCardAction {
 
 	public HeroPowerAction(int playerId, int cardId) {
-		super(new CardReference(playerId, CardLocation.HERO_POWER, cardId));
+		super(new CardReference(playerId, CardLocation.HERO_POWER, cardId, "Hero power"));
 		setActionType(ActionType.HERO_POWER);
 	}
 	

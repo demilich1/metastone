@@ -23,7 +23,7 @@ public class SummonNewTargetTrigger extends TargetAcquisitionTrigger {
 		Player owner = event.getGameContext().getPlayer(getOwner());
 		if (!event.getGameContext().getLogic().canSummonMoreMinions(owner)) {
 			return false;
-		}
+		} 
 		return true;
 	}
 

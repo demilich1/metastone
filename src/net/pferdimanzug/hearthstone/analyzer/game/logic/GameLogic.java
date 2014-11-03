@@ -203,7 +203,6 @@ public class GameLogic implements Cloneable {
 
 		}
 		try {
-
 			Spell spell = spellFactory.getSpell(spellDesc);
 			spell.cast(context, player, spellDesc, targets);
 		} catch (Exception e) {
@@ -383,9 +382,11 @@ public class GameLogic implements Cloneable {
 			hero.setTag(GameTag.FATIGUE, fatigue + 1);
 			damage(player, hero, fatigue, SpellSource.FATIGUE);
 			log("{}'s deck is empty, taking {} fatigue damage!", player.getName(), fatigue);
+			player.getStatistics().fatigueDamage(fatigue);
 			return null;
 		}
-
+		
+		player.getStatistics().cardDrawn();
 		Card card = deck.getRandom();
 		deck.remove(card);
 		receiveCard(playerId, card);
@@ -458,6 +459,9 @@ public class GameLogic implements Cloneable {
 			return;
 		}
 
+		if (target.getOwner() == -1) {
+			System.out.println("Ownerless minion: " + target);
+		}
 		Player owningPlayer = context.getPlayer(target.getOwner());
 		boolean damaged = damage(owningPlayer, target, attackerDamage, SpellSource.PHYSICAL_ATTACK);
 		if (defenderDamage > 0) {
@@ -486,6 +490,12 @@ public class GameLogic implements Cloneable {
 		attacker.modifyTag(GameTag.NUMBER_OF_ATTACKS, -1);
 		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, target, damaged ? attackerDamage : 0));
 		context.getEnvironment().remove(Environment.ATTACKER);
+	}
+	
+	public void gainArmor(Player player, int armor) {
+		logger.debug("{} gains {} armor", player.getHero(), armor);
+		player.getHero().modifyArmor(armor);
+		player.getStatistics().armorGained(armor);
 	}
 
 	public MatchResult getMatchResult(Player player, Player opponent) {
@@ -677,6 +687,22 @@ public class GameLogic implements Cloneable {
 		}
 	}
 
+	public void mindControl(Player player, Minion minion) {
+		log("{} mind controls {}", player.getName(), minion);
+		Player opponent = context.getOpponent(player);
+		if (!opponent.getMinions().contains(minion)) {
+			logger.warn("Minion {} cannot be mind-controlled, because opponent does not own it.", minion);
+		}
+		context.getOpponent(player).getMinions().remove(minion);
+		player.getMinions().add(minion);
+		//TODO: we need to change the owner of all spelltriggers as well
+		minion.setOwner(player.getId());
+		List<IGameEventListener> triggers = context.getTriggersAssociatedWith(minion.getReference());
+		for (IGameEventListener trigger : triggers) {
+			trigger.setOwner(player.getId());
+		}
+	}
+
 	public void modifyCurrentMana(int playerId, int mana) {
 		Player player = context.getPlayer(playerId);
 		int newMana = Math.min(player.getMana() + mana, MAX_MANA);
@@ -685,7 +711,7 @@ public class GameLogic implements Cloneable {
 
 	private void modifyDurability(Weapon weapon, GameTag tag, int durability) {
 		if (logger.isDebugEnabled()) {
-			log("{} of weapon {} is changed by {}", new Object[] { tag, weapon, durability });
+			log(tag + " of weapon {} is changed by {}", weapon, durability);
 		}
 
 		weapon.modifyTag(tag, durability);
@@ -969,7 +995,7 @@ public class GameLogic implements Cloneable {
 		}
 		context.fireGameEvent(new TurnStartEvent(context, player.getId()));
 	}
-
+	
 	public void summon(int playerId, Minion minion, Card source, Actor nextTo, boolean resolveBattlecry) {
 		Player player = context.getPlayer(playerId);
 		if (!canSummonMoreMinions(player)) {
