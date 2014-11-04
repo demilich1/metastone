@@ -31,6 +31,8 @@ public class Player extends CustomCloneable {
 	private int mana;
 	private int maxMana;
 	
+	private boolean hideCards;
+	
 	private IBehaviour behaviour;
 
 	private Player(Player otherPlayer) {
@@ -145,6 +147,14 @@ public class Player extends CustomCloneable {
 	@Override
 	public String toString() {
 		return "[PLAYER " + "id: " + getId() + ", name: " + getName() + ", hero: " + getHero() + "]";
+	}
+
+	public boolean hideCards() {
+		return hideCards;
+	}
+
+	public void setHideCards(boolean hideCards) {
+		this.hideCards = hideCards;
 	}
 
 }

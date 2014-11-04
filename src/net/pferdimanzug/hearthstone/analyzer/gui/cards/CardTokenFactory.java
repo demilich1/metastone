@@ -19,7 +19,7 @@ public class CardTokenFactory {
 		}
 	}
 	
-	public HandCard createHandCard(GameContext context, Card card, Player player) {
+	public CardToken createHandCard(GameContext context, Card card, Player player) {
 		HandCard handCard = getHandCard();
 		handCard.setCard(context, card, player);
 		return handCard;

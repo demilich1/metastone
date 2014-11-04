@@ -36,13 +36,13 @@ public class CardToken extends BorderPane {
 	protected ImageView attackIcon;
 	@FXML
 	protected ImageView hpIcon;
-	
+
 	@FXML
 	protected Circle rarityGem;
-	
+
 	private double baseRarityGemSize;
-	
-	private Card card;
+
+	protected Card card;
 
 	protected CardToken(String fxml) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
@@ -54,18 +54,18 @@ public class CardToken extends BorderPane {
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
-		
+
 		baseRarityGemSize = rarityGem.getRadius();
 	}
 
 	public Card getCard() {
 		return card;
 	}
-	
+
 	public void setCard(Card card) {
 		setCard(null, card, null);
 	}
-	
+
 	public void setCard(GameContext context, Card card, Player player) {
 		this.card = card;
 		nameLabel.setText(card.getName());
@@ -76,7 +76,7 @@ public class CardToken extends BorderPane {
 		} else {
 			manaCostLabel.setText(String.valueOf(card.getBaseManaCost()));
 		}
-		
+
 		boolean isMinionCard = card.getCardType() == CardType.MINION;
 		attackLabel.setVisible(isMinionCard);
 		hpLabel.setVisible(isMinionCard);
@@ -87,7 +87,7 @@ public class CardToken extends BorderPane {
 			setScoreValue(hpLabel, card.getTagValue(GameTag.BASE_HP));
 		}
 	}
-	
+
 	private void setRarity(Rarity rarity) {
 		rarityGem.setFill(IconFactory.getRarityColor(rarity));
 		rarityGem.setVisible(rarity != Rarity.FREE);

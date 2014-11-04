@@ -9,6 +9,7 @@ public class PlayerConfig {
 	private Hero hero;
 	private Deck deck;
 	private IBehaviour behaviour;
+	private boolean hideCards;
 
 	public IBehaviour getBehaviour() {
 		return behaviour;
@@ -32,6 +33,14 @@ public class PlayerConfig {
 
 	public void setHero(Hero hero) {
 		this.hero = hero;
+	}
+
+	public boolean hideCards() {
+		return hideCards;
+	}
+
+	public void setHideCards(boolean hideCards) {
+		this.hideCards = hideCards;
 	}
 
 }

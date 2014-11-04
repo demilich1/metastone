@@ -10,7 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.custom.WebspinnerSpell;
 public class Webspinner extends MinionCard {
 
 	public Webspinner() {
-		super("Webspinner", 1, 1, Rarity.COMMON, HeroClass.ANY, 1);
+		super("Webspinner", 1, 1, Rarity.COMMON, HeroClass.HUNTER, 1);
 		setDescription("Deathrattle: Add a random Beast card to your hand.");
 		setRace(Race.BEAST);
 	}

@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -55,6 +57,9 @@ public class PlayerConfigView extends VBox {
 	@FXML
 	protected ChoiceBox<Deck> deckBox;
 
+	@FXML
+	protected CheckBox hideCardsCheckBox;
+
 	private final PlayerConfig playerConfig = new PlayerConfig();
 
 	private List<Deck> decks = new ArrayList<Deck>();
@@ -76,11 +81,21 @@ public class PlayerConfigView extends VBox {
 		heroBox.setConverter(new HeroStringConverter());
 		deckBox.setConverter(new DeckStringConverter());
 		behaviourBox.setConverter(new BehaviourStringConverter());
+
+		setupHideCardsBox(selectionHint);
 		setupHeroes();
 		setupBehaviours();
 		deckBox.valueProperty().addListener((ChangeListener<Deck>) (observableProperty, oldDeck, newDeck) -> {
 			getPlayerConfig().setDeck(newDeck);
 		});
+	}
+
+	private void setupHideCardsBox(PlayerConfigType configType) {
+		hideCardsCheckBox.selectedProperty().addListener(this::onHideCardBoxChanged);
+		hideCardsCheckBox.setSelected(selectionHint == PlayerConfigType.OPPONENT);
+		if (configType == PlayerConfigType.SIMULATION) {
+			hideCardsCheckBox.setVisible(false);
+		}
 	}
 
 	private void filterDecks() {
@@ -96,6 +111,10 @@ public class PlayerConfigView extends VBox {
 		}
 		deckBox.setItems(deckList);
 		deckBox.getSelectionModel().selectFirst();
+	}
+
+	private void onHideCardBoxChanged(ObservableValue<? extends Boolean> ov, Boolean oldValue, Boolean newValue) {
+		playerConfig.setHideCards(newValue);
 	}
 
 	public PlayerConfig getPlayerConfig() {
@@ -126,15 +145,18 @@ public class PlayerConfigView extends VBox {
 		if (selectionHint == PlayerConfigType.OPPONENT) {
 			behaviourList.add(new HumanBehaviour());
 		}
-		
+
 		behaviourList.add(new GameStateValueBehaviour());
 		behaviourList.add(new GreedyOptimizeMove(new WeightedHeuristic()));
 		behaviourList.add(new NoAggressionBehaviour());
 
 		behaviourBox.setItems(behaviourList);
-		behaviourBox.valueProperty().addListener((ChangeListener<IBehaviour>) (observableValue, oldBehaviour, newBehaviour) -> {
-			getPlayerConfig().setBehaviour(newBehaviour);
-		});
+		behaviourBox.valueProperty().addListener(this::onBehaviourChanged);
+	}
+	
+	private void onBehaviourChanged(ObservableValue<? extends IBehaviour> ov, IBehaviour oldBehaviour, IBehaviour newBehaviour) {
+		getPlayerConfig().setBehaviour(newBehaviour);
+		hideCardsCheckBox.setDisable(newBehaviour instanceof HumanBehaviour);
 	}
 
 	public void setupHeroes() {

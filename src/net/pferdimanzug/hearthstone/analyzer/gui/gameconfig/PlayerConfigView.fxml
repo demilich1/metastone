@@ -22,6 +22,8 @@
       <Separator prefWidth="200.0" />
       <Label id="name-small" text="Deck:" />
       <ChoiceBox fx:id="deckBox" prefWidth="150.0" />
+      <Separator prefWidth="200.0" />
+      <CheckBox id="name-small" fx:id="hideCardsCheckBox" mnemonicParsing="false" text="Hide cards" />
    </children>
    <opaqueInsets>
       <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />

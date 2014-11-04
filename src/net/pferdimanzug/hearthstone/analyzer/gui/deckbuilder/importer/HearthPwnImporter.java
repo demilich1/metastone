@@ -111,6 +111,9 @@ public class HearthPwnImporter implements IDeckImporter {
 		for (Card card : cards) {
 			deck.getCards().add(card);
 		}
+		if (!deck.isComplete()) {
+			return null;
+		}
 		return deck;
 	}
 

@@ -12,7 +12,7 @@
 
 <fx:root id="card-border" prefHeight="120.0" prefWidth="80.0" stylesheets="@../main.css" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <bottom>
-    <StackPane prefHeight="0.0" prefWidth="0.0" translateY="8.0">
+    <StackPane fx:id="bottomPane" prefHeight="0.0" prefWidth="0.0" translateY="8.0">
       <children>
         <ImageView fx:id="attackIcon" fitHeight="150.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" translateX="-5.0" translateY="-2.0" StackPane.alignment="BOTTOM_LEFT">
           <image>
@@ -31,7 +31,7 @@
     </StackPane>
   </bottom>
   <center>
-      <VBox alignment="TOP_CENTER" spacing="32.0">
+      <VBox fx:id="centerPane" alignment="TOP_CENTER" spacing="32.0">
          <children>
           <Label fx:id="nameLabel" alignment="CENTER" maxWidth="78.0" text="&lt;card name&gt;" textAlignment="CENTER" wrapText="true" BorderPane.alignment="TOP_CENTER">
             <font>
@@ -42,7 +42,7 @@
       </VBox>
   </center>
   <top>
-    <StackPane prefHeight="-1.0" prefWidth="-1.0">
+    <StackPane fx:id="topPane" prefHeight="-1.0" prefWidth="-1.0">
       <children>
         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" translateX="-8.0" translateY="-4.0" StackPane.alignment="TOP_LEFT">
           <image>

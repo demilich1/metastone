@@ -153,6 +153,11 @@ public class IconFactory {
 		String iconPath = RESOURCE_PATH + "/img/common/target.png";
 		return new Image(iconPath);
 	}
+	
+	public static Image getDefaultCardBack() {
+		String iconPath = RESOURCE_PATH + "/img/common/card_back_default.png";
+		return new Image(iconPath);
+	}
 
 	private static final String RESOURCE_PATH = "/net/pferdimanzug/hearthstone/analyzer/resources";
 
