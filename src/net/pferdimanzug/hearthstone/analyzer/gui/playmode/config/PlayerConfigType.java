@@ -4,6 +4,6 @@ public enum PlayerConfigType {
 
 	HUMAN,
 	OPPONENT,
-	SIMULATION
-	
+	SIMULATION,
+	SANDBOX	
 }

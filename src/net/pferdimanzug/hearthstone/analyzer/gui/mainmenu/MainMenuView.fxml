@@ -28,4 +28,18 @@
       <URL value="@mainmenu.css" />
       <URL value="@../main.css" />
    </stylesheets>
+   <bottom>
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <Label id="name-small" fx:id="versionLabel" text="v0.8">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </padding>
+            </Label>
+         </children>
+      </HBox>
+   </bottom>
 </fx:root>

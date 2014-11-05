@@ -72,7 +72,7 @@ public class PlayModeMediator extends Mediator<GameNotification> implements Even
 		notificationInterests.add(GameNotification.HUMAN_PROMPT_FOR_ACTION);
 		notificationInterests.add(GameNotification.HUMAN_PROMPT_FOR_TARGET);
 		notificationInterests.add(GameNotification.HUMAN_PROMPT_FOR_MULLIGAN);
-		notificationInterests.add(GameNotification.ANSWER_DECKS);
+		notificationInterests.add(GameNotification.REPLY_DECKS);
 		return notificationInterests;
 	}
 

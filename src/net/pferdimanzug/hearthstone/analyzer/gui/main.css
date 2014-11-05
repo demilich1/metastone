@@ -1,9 +1,9 @@
 #panel {
-	-fx-background-color: navajowhite;
+	-fx-background-color: linen;
 }
 
 #bordered-panel {
-	-fx-background-color: navajowhite;
+	-fx-background-color: linen;
 	-fx-background-radius: 10;
 	-fx-border-width: 2;
 	-fx-border-color: slategrey;
@@ -12,7 +12,7 @@
 }
 
 #bordered-dialog {
-	-fx-background-color: navajowhite;
+	-fx-background-color: linen;
 	-fx-background-radius: 10;
 	-fx-border-width: 3;
 	-fx-border-color: darkslategrey;

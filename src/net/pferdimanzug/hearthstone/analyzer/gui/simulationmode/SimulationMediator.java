@@ -35,7 +35,7 @@ public class SimulationMediator extends Mediator<GameNotification> {
 	@SuppressWarnings("unchecked")
 	public void handleNotification(final INotification<GameNotification> notification) {
 		switch (notification.getId()) {
-		case ANSWER_DECKS:
+		case REPLY_DECKS:
 			List<Deck> decks = (List<Deck>) notification.getBody();
 			view.injectDecks(decks);
 			break;
@@ -73,7 +73,7 @@ public class SimulationMediator extends Mediator<GameNotification> {
 	@Override
 	public List<GameNotification> listNotificationInterests() {
 		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
-		notificationInterests.add(GameNotification.ANSWER_DECKS);
+		notificationInterests.add(GameNotification.REPLY_DECKS);
 		notificationInterests.add(GameNotification.COMMIT_SIMULATIONMODE_CONFIG);
 		notificationInterests.add(GameNotification.SIMULATION_PROGRESS_UPDATE);
 		notificationInterests.add(GameNotification.SIMULATION_RESULT);

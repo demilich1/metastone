@@ -12,6 +12,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanActionOptions;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanTargetOptions;
+import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
 import de.pferdimanzug.nittygrittymvc.Mediator;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
@@ -19,10 +20,12 @@ public class SandboxModeMediator extends Mediator<GameNotification> implements E
 
 	public static final String NAME = "SandboxModeMediator";
 
+	private final SandboxModeConfigView configView;
 	private final SandboxModeView view;
 
 	public SandboxModeMediator() {
 		super(NAME);
+		configView = new SandboxModeConfigView();
 		view = new SandboxModeView();
 	}
 
@@ -35,6 +38,7 @@ public class SandboxModeMediator extends Mediator<GameNotification> implements E
 		view.disableTargetSelection();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void handleNotification(final INotification<GameNotification> notification) {
 
@@ -59,6 +63,14 @@ public class SandboxModeMediator extends Mediator<GameNotification> implements E
 		case SELECT_PLAYER:
 			view.onPlayerSelectionChanged((Player) notification.getBody());
 			break;
+		case COMMIT_SANDBOXMODE_CONFIG:
+			getFacade().sendNotification(GameNotification.SHOW_VIEW, view);
+			view.setOnKeyPressed(this);
+			getFacade().sendNotification(GameNotification.CREATE_NEW_SANDBOX, notification.getBody());
+			break;
+		case REPLY_DECKS:
+			configView.injectDecks((List<Deck>) notification.getBody());
+			break;
 		default:
 			break;
 		}
@@ -73,14 +85,15 @@ public class SandboxModeMediator extends Mediator<GameNotification> implements E
 		notificationInterests.add(GameNotification.HUMAN_PROMPT_FOR_TARGET);
 		notificationInterests.add(GameNotification.GAME_STATE_UPDATE);
 		notificationInterests.add(GameNotification.SELECT_PLAYER);
+		notificationInterests.add(GameNotification.COMMIT_SANDBOXMODE_CONFIG);
+		notificationInterests.add(GameNotification.REPLY_DECKS);
 		return notificationInterests;
 	}
 
 	@Override
 	public void onRegister() {
-		getFacade().sendNotification(GameNotification.SHOW_VIEW, view);
-		view.setOnKeyPressed(this);
-		getFacade().sendNotification(GameNotification.CREATE_NEW_SANDBOX);
+		getFacade().sendNotification(GameNotification.SHOW_VIEW, configView);
+		getFacade().sendNotification(GameNotification.REQUEST_DECKS);
 	}
 
 }

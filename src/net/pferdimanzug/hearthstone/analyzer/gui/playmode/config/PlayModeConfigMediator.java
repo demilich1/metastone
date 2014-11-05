@@ -24,7 +24,7 @@ public class PlayModeConfigMediator extends Mediator<GameNotification> {
 	@Override
 	public void handleNotification(final INotification<GameNotification> notification) {
 		switch (notification.getId()) {
-		case ANSWER_DECKS:
+		case REPLY_DECKS:
 			@SuppressWarnings("unchecked")
 			List<Deck> decks = (List<Deck>) notification.getBody();
 			view.injectDecks(decks);
@@ -42,7 +42,7 @@ public class PlayModeConfigMediator extends Mediator<GameNotification> {
 	@Override
 	public List<GameNotification> listNotificationInterests() {
 		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
-		notificationInterests.add(GameNotification.ANSWER_DECKS);
+		notificationInterests.add(GameNotification.REPLY_DECKS);
 		notificationInterests.add(GameNotification.COMMIT_PLAYMODE_CONFIG);
 		return notificationInterests;
 	}

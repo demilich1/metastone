@@ -17,7 +17,7 @@ public class RequestDecksCommand extends SimpleCommand<GameNotification> {
 		getFacade().sendNotification(GameNotification.LOAD_DECKS);
 		
 		List<Deck> decks = deckProxy.getDecks();
-		getFacade().sendNotification(GameNotification.ANSWER_DECKS, decks);
+		getFacade().sendNotification(GameNotification.REPLY_DECKS, decks);
 	}
 
 	

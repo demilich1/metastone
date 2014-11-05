@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
@@ -25,6 +26,9 @@ public class MainMenuView extends BorderPane {
 	
 	@FXML
 	private Button trainingModeButton;
+	
+	@FXML
+	private Label versionLabel;
 
 	public MainMenuView() {
 
@@ -50,6 +54,9 @@ public class MainMenuView extends BorderPane {
 		
 		trainingModeButton.setOnAction(event -> ApplicationFacade.getInstance().sendNotification(
 				GameNotification.TRAINING_MODE_SELECTED));
+		
+		trainingModeButton.setVisible(false);
+		trainingModeButton.setManaged(false);
 	}
 
 }

@@ -93,7 +93,7 @@ public class PlayerConfigView extends VBox {
 	private void setupHideCardsBox(PlayerConfigType configType) {
 		hideCardsCheckBox.selectedProperty().addListener(this::onHideCardBoxChanged);
 		hideCardsCheckBox.setSelected(selectionHint == PlayerConfigType.OPPONENT);
-		if (configType == PlayerConfigType.SIMULATION) {
+		if (configType == PlayerConfigType.SIMULATION || configType == PlayerConfigType.SANDBOX) {
 			hideCardsCheckBox.setVisible(false);
 		}
 	}
@@ -137,7 +137,7 @@ public class PlayerConfigView extends VBox {
 
 	public void setupBehaviours() {
 		ObservableList<IBehaviour> behaviourList = FXCollections.observableArrayList();
-		if (selectionHint == PlayerConfigType.HUMAN) {
+		if (selectionHint == PlayerConfigType.HUMAN || selectionHint == PlayerConfigType.SANDBOX) {
 			behaviourList.add(new HumanBehaviour());
 		}
 
@@ -153,7 +153,7 @@ public class PlayerConfigView extends VBox {
 		behaviourBox.setItems(behaviourList);
 		behaviourBox.valueProperty().addListener(this::onBehaviourChanged);
 	}
-	
+
 	private void onBehaviourChanged(ObservableValue<? extends IBehaviour> ov, IBehaviour oldBehaviour, IBehaviour newBehaviour) {
 		getPlayerConfig().setBehaviour(newBehaviour);
 		hideCardsCheckBox.setDisable(newBehaviour instanceof HumanBehaviour);
@@ -161,14 +161,9 @@ public class PlayerConfigView extends VBox {
 
 	public void setupHeroes() {
 		ObservableList<Hero> heroList = FXCollections.observableArrayList();
-		if (selectionHint == PlayerConfigType.HUMAN) {
-			heroList.add(new Jaina());
-			heroList.add(new Garrosh());
-		} else {
-			heroList.add(new Garrosh());
-			heroList.add(new Jaina());
-		}
 
+		heroList.add(new Garrosh());
+		heroList.add(new Jaina());
 		heroList.add(new Valeera());
 		heroList.add(new Guldan());
 		heroList.add(new Rexxar());
