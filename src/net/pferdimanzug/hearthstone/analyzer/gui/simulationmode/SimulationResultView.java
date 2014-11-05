@@ -19,7 +19,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.statistics.Statistic;
 import org.apache.commons.lang3.time.DurationFormatUtils;
 
 public class SimulationResultView extends BorderPane {
-	
+
 	private static String getStatName(Statistic stat) {
 		switch (stat) {
 		case ARMOR_GAINED:
@@ -57,16 +57,19 @@ public class SimulationResultView extends BorderPane {
 		}
 		return stat.toString();
 	}
-	
+
 	@FXML
 	private BorderPane infoArea;
 
 	@FXML
-	private TableView<StatEntry> resultTable;
-	
+	private TableView<StatEntry> absoluteResultTable;
+
+	@FXML
+	private TableView<StatEntry> averageResultTable;
+
 	@FXML
 	private Button doneButton;
-	
+
 	@FXML
 	private Label durationLabel;
 	private PlayerInfoView player1InfoView;
@@ -83,7 +86,7 @@ public class SimulationResultView extends BorderPane {
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
-		
+
 		doneButton.setOnAction(event -> ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU));
 
 		player1InfoView = new PlayerInfoView();
@@ -98,30 +101,53 @@ public class SimulationResultView extends BorderPane {
 		}
 		return "-";
 	}
-	
+
+	private String getAverageStatString(Statistic stat, GameStatistics playerStatistics, int numberOfGames) {
+		if (playerStatistics.contains(stat)) {
+			Object statValue = playerStatistics.get(stat);
+			if (statValue instanceof Number) {
+				double value = ((Number) statValue).doubleValue();
+				return String.valueOf(value / numberOfGames);
+			}
+
+		}
+		return "-";
+	}
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void showSimulationResult(SimulationResult result) {
 		player1InfoView.setInfo(result.getConfig().getPlayerConfig1());
 		player2InfoView.setInfo(result.getConfig().getPlayerConfig2());
 		durationLabel.setText("Simulation took " + DurationFormatUtils.formatDurationHMS(result.getDuration()));
-		
-		ObservableList<StatEntry> statEntries = FXCollections.observableArrayList();
+
+		ObservableList<StatEntry> absoluteStatEntries = FXCollections.observableArrayList();
+		ObservableList<StatEntry> averageStatEntries = FXCollections.observableArrayList();
 		for (Statistic stat : Statistic.values()) {
-			StatEntry statEntry = new StatEntry();
-			statEntry.setStatName(getStatName(stat));
-			statEntry.setPlayer1Value(getStatString(stat, result.getPlayer1Stats()));
-			statEntry.setPlayer2Value(getStatString(stat, result.getPlayer2Stats()));
-			statEntries.add(statEntry);
+			StatEntry absoluteStatEntry = new StatEntry();
+			absoluteStatEntry.setStatName(getStatName(stat));
+			absoluteStatEntry.setPlayer1Value(getStatString(stat, result.getPlayer1Stats()));
+			absoluteStatEntry.setPlayer2Value(getStatString(stat, result.getPlayer2Stats()));
+			absoluteStatEntries.add(absoluteStatEntry);
+
+			StatEntry averageStatEntry = new StatEntry();
+			averageStatEntry.setStatName(getStatName(stat));
+			averageStatEntry.setPlayer1Value(getAverageStatString(stat, result.getPlayer1Stats(), result.getNumberOfGames()));
+			averageStatEntry.setPlayer2Value(getAverageStatString(stat, result.getPlayer2Stats(), result.getNumberOfGames()));
+			averageStatEntries.add(averageStatEntry);
 
 		}
 
-		resultTable.setItems(statEntries);
+		absoluteResultTable.setItems(absoluteStatEntries);
 
-		resultTable.getColumns().get(0).setCellValueFactory(new PropertyValueFactory("statName"));
-		resultTable.getColumns().get(1).setCellValueFactory(new PropertyValueFactory("player1Value"));
-		resultTable.getColumns().get(2).setCellValueFactory(new PropertyValueFactory("player2Value"));
+		absoluteResultTable.getColumns().get(0).setCellValueFactory(new PropertyValueFactory("statName"));
+		absoluteResultTable.getColumns().get(1).setCellValueFactory(new PropertyValueFactory("player1Value"));
+		absoluteResultTable.getColumns().get(2).setCellValueFactory(new PropertyValueFactory("player2Value"));
+		
+		averageResultTable.setItems(averageStatEntries);
+
+		averageResultTable.getColumns().get(0).setCellValueFactory(new PropertyValueFactory("statName"));
+		averageResultTable.getColumns().get(1).setCellValueFactory(new PropertyValueFactory("player1Value"));
+		averageResultTable.getColumns().get(2).setCellValueFactory(new PropertyValueFactory("player2Value"));
 	}
-	
-	
 
 }

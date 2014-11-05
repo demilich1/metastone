@@ -14,15 +14,6 @@
          </image>
       </ImageView>
       <Label id="card-entry-name" fx:id="deckNameLabel" maxWidth="170.0" minWidth="170.0" text="&lt;deckname&gt;" />
-      <Button fx:id="deleteButton" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" translateX="-20.0" translateY="-12.0">
-         <graphic>
-            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../resources/img/ui/delete.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
    </children>
    <stylesheets>
       <URL value="@deckbuilder.css" />

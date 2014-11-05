@@ -23,17 +23,40 @@
                </padding>
             </BorderPane>
             <Label id="name-small" fx:id="durationLabel" text="&lt;simulation duration&gt;" textAlignment="CENTER" />
-            <ScrollPane prefViewportHeight="440.0" prefViewportWidth="620.0">
-               <content>
-                  <TableView fx:id="resultTable" prefWidth="600.0">
-                    <columns>
-                      <TableColumn minWidth="100.0" prefWidth="200.0" text="Statistic" />
-                      <TableColumn minWidth="100.0" prefWidth="200.0" text="Player 1" />
-                        <TableColumn minWidth="100.0" prefWidth="200.0" text="Player 2" />
-                    </columns>
-                  </TableView>
-               </content>
-            </ScrollPane>
+            <TabPane>
+               <tabs>
+                  <Tab closable="false" text="Absolute values (over all games)">
+                     <content>
+                        <ScrollPane prefViewportHeight="440.0" prefViewportWidth="620.0">
+                           <content>
+                              <TableView fx:id="absoluteResultTable" prefWidth="600.0">
+                                <columns>
+                                  <TableColumn minWidth="100.0" prefWidth="200.0" text="Statistic" />
+                                  <TableColumn minWidth="100.0" prefWidth="200.0" text="Player 1" />
+                                    <TableColumn minWidth="100.0" prefWidth="200.0" text="Player 2" />
+                                </columns>
+                              </TableView>
+                           </content>
+                        </ScrollPane>
+                     </content>
+                  </Tab>
+                  <Tab closable="false" text="Average values (per game)">
+                     <content>
+                        <ScrollPane prefViewportHeight="440.0" prefViewportWidth="620.0">
+                           <content>
+                              <TableView fx:id="averageResultTable" prefWidth="600.0">
+                                 <columns>
+                                    <TableColumn minWidth="100.0" prefWidth="200.0" text="Statistic" />
+                                    <TableColumn minWidth="100.0" prefWidth="200.0" text="Player 1" />
+                                    <TableColumn minWidth="100.0" prefWidth="200.0" text="Player 2" />
+                                 </columns>
+                              </TableView>
+                           </content>
+                        </ScrollPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
          </children>
          <padding>
             <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
