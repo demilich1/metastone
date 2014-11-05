@@ -23,6 +23,10 @@ public class PlayModeView extends BorderPane {
 	private final GameBoardView boardView;
 	private final HumanActionPromptView actionPromptView;
 	
+	private final LoadingBoardView loadingView;
+	
+	private boolean firstUpdate = true;
+	
 	public PlayModeView() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PlayModeView.fxml"));
 		fxmlLoader.setRoot(this);
@@ -35,7 +39,9 @@ public class PlayModeView extends BorderPane {
 		}
 		
 		boardView = new GameBoardView();
-		setCenter(boardView);
+		//setCenter(boardView);
+		loadingView = new LoadingBoardView();
+		setCenter(loadingView);
 		
 		actionPromptView = new HumanActionPromptView();
 		sidePane.getChildren().remove(backButton);
@@ -58,6 +64,10 @@ public class PlayModeView extends BorderPane {
 	}
 
 	public void updateGameState(GameContext context) {
+		if (firstUpdate) {
+			setCenter(boardView);
+			firstUpdate = false;
+		}
 		boardView.updateGameState(context);
 		if (context.gameDecided()) {
 			sidePane.getChildren().clear();

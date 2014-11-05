@@ -15,13 +15,13 @@
          </image>
       </ImageView>
       <Label id="name-small" text="Choose hero:" />
-      <ChoiceBox fx:id="heroBox" prefWidth="150.0" />
+      <ComboBox  fx:id="heroBox" prefWidth="150.0" />
       <Separator prefWidth="200.0" />
       <Label id="name-small" text="Behaviour:" />
-      <ChoiceBox fx:id="behaviourBox" prefWidth="150.0" />
+      <ComboBox  fx:id="behaviourBox" prefWidth="150.0" />
       <Separator prefWidth="200.0" />
       <Label id="name-small" text="Deck:" />
-      <ChoiceBox fx:id="deckBox" prefWidth="150.0" />
+      <ComboBox  fx:id="deckBox" prefWidth="150.0" />
       <Separator prefWidth="200.0" />
       <CheckBox id="name-small" fx:id="hideCardsCheckBox" mnemonicParsing="false" text="Hide cards" />
    </children>

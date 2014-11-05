@@ -20,15 +20,15 @@
          <children>
             <HBox fx:id="playerArea" alignment="CENTER" maxHeight="400.0" BorderPane.alignment="CENTER" />
             <Label id="name-small" text="Number of games" />
-            <ChoiceBox fx:id="numberOfGamesBox" prefWidth="150.0" />
+            <ComboBox fx:id="numberOfGamesBox" prefWidth="150.0" />
          </children>
       </VBox>
    </center>
    <bottom>
       <AnchorPane>
          <children>
-            <Button id="default-button" fx:id="backButton" mnemonicParsing="false" text="Back" AnchorPane.leftAnchor="0.0" />
-            <Button id="default-button" fx:id="startButton" mnemonicParsing="false" text="Start" AnchorPane.leftAnchor="380.0" AnchorPane.rightAnchor="380.0" />
+            <Button  fx:id="backButton" mnemonicParsing="false" text="Back" AnchorPane.leftAnchor="0.0" />
+            <Button  fx:id="startButton" mnemonicParsing="false" text="Start" AnchorPane.leftAnchor="380.0" AnchorPane.rightAnchor="380.0" />
          </children>
       </AnchorPane>
    </bottom>

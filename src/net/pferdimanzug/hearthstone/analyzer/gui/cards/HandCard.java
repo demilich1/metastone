@@ -27,6 +27,7 @@ public class HandCard extends CardToken {
 
 	public HandCard() {
 		super("HandCard.fxml");
+		hideCard(true);
 	}
 
 	@Override
@@ -41,15 +42,17 @@ public class HandCard extends CardToken {
 		} else {
 			tooltipContent.setCard(context, card, player);
 		}
+		
+		hideCard(player.hideCards());
+		
 		if (player.hideCards()) {
-			hideAllElements(true);
 			Tooltip.uninstall(this, tooltip);
 			tooltipContent = null;
 			tooltip = null;
-		}
+		} 
 	}
 	
-	private void hideAllElements(boolean hide) {
+	private void hideCard(boolean hide) {
 		topPane.setVisible(!hide);
 		centerPane.setVisible(!hide);
 		bottomPane.setVisible(!hide);
@@ -58,9 +61,7 @@ public class HandCard extends CardToken {
 			BackgroundImage image = new BackgroundImage(IconFactory.getDefaultCardBack(), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
 			Background background = new Background(image);
 			setBackground(background);
-		} else {
-			setBackground(null);
-		}
+		} 
 	}
 
 }

@@ -1,7 +1,6 @@
 #class-button {
 	-fx-font-size: 20pt;
-    -fx-font-family: "Arial";
-    -fx-fill: slategrey;
+    -fx-font-family: "System";
 }
 
 #card-entry {
@@ -20,7 +19,7 @@
 
 #card-entry-name {
 	-fx-font-size: 10pt;
-    -fx-font-family: "Arial";
+    -fx-font-family: "System";
     -fx-fill: black;
     -fx-font-weight: bold;
 }

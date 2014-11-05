@@ -75,6 +75,7 @@ public class DeckBuilderView extends BorderPane implements EventHandler<ActionEv
 	}
 	
 	public void showSidebar(Node content) {
+		scrollPane.setVisible(content != null);
 		scrollPane.setContent(content);
 	}
 

@@ -11,7 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.BorderPane;
 import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
@@ -26,7 +26,7 @@ public class TrainingModeView extends BorderPane implements EventHandler<ActionE
 	protected Button backButton;
 
 	@FXML
-	protected ChoiceBox<Integer> numberOfGamesBox;
+	protected ComboBox<Integer> numberOfGamesBox;
 
 	@FXML
 	private LineChart<Number, Number> resultChart;

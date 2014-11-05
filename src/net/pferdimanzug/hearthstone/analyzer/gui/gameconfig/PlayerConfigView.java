@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -49,13 +49,13 @@ public class PlayerConfigView extends VBox {
 	protected ImageView heroIcon;
 
 	@FXML
-	protected ChoiceBox<IBehaviour> behaviourBox;
+	protected ComboBox<IBehaviour> behaviourBox;
 
 	@FXML
-	protected ChoiceBox<Hero> heroBox;
+	protected ComboBox<Hero> heroBox;
 
 	@FXML
-	protected ChoiceBox<Deck> deckBox;
+	protected ComboBox<Deck> deckBox;
 
 	@FXML
 	protected CheckBox hideCardsCheckBox;

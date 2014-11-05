@@ -9,7 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
@@ -24,14 +24,14 @@ import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.actions.SetMaxManaA
 public class PlayerPanel extends VBox {
 
 	@FXML
-	private ChoiceBox<Player> playerChoiceBox;
+	private ComboBox<Player> playerComboBox;
 	@FXML
 	private Button editEntityButton;
 
 	@FXML
-	private ChoiceBox<Integer> currentManaBox;
+	private ComboBox<Integer> currentManaBox;
 	@FXML
-	private ChoiceBox<Integer> maxManaBox;
+	private ComboBox<Integer> maxManaBox;
 	
 	private boolean ignoreManaChange;
 
@@ -48,8 +48,8 @@ public class PlayerPanel extends VBox {
 			throw new RuntimeException(exception);
 		}
 
-		playerChoiceBox.setConverter(new PlayerStringConverter());
-		playerChoiceBox.getSelectionModel().selectedItemProperty().addListener(this::handlePlayerChanged);
+		playerComboBox.setConverter(new PlayerStringConverter());
+		playerComboBox.getSelectionModel().selectedItemProperty().addListener(this::handlePlayerChanged);
 		
 		currentManaBox.getSelectionModel().selectedItemProperty().addListener(this::handleCurrentManaChanged);
 		maxManaBox.getSelectionModel().selectedItemProperty().addListener(this::handleMaxManaChanged);
@@ -102,11 +102,11 @@ public class PlayerPanel extends VBox {
 	}
 
 	public void setContext(GameContext context) {
-		if (playerChoiceBox.getSelectionModel().isEmpty()) {
+		if (playerComboBox.getSelectionModel().isEmpty()) {
 			ObservableList<Player> players = FXCollections.observableArrayList();
 			players.addAll(context.getPlayers());
-			playerChoiceBox.setItems(players);
-			playerChoiceBox.getSelectionModel().selectFirst();
+			playerComboBox.setItems(players);
+			playerComboBox.getSelectionModel().selectFirst();
 		}
 		populateManaBoxes();
 	}

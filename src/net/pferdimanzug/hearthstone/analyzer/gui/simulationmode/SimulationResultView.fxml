@@ -64,7 +64,7 @@
       </VBox>
    </center>
    <bottom>
-      <Button id="default-button" fx:id="doneButton" mnemonicParsing="false" text="Close" BorderPane.alignment="CENTER">
+      <Button  fx:id="doneButton" mnemonicParsing="false" text="Close" BorderPane.alignment="CENTER">
          <padding>
             <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
          </padding>

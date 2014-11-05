@@ -13,7 +13,7 @@
             <Label id="name-small" text="Cards" textAlignment="CENTER" />
          </children>
       </VBox>
-      <Button id="default-button" fx:id="doneButton" alignment="BASELINE_CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="140.0" text="Done" />
+      <Button  fx:id="doneButton" alignment="BASELINE_CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="140.0" text="Done" />
    </children>
    <stylesheets>
       <URL value="@../main.css" />

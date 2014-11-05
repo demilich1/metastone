@@ -54,7 +54,7 @@
    <bottom>
       <AnchorPane BorderPane.alignment="TOP_LEFT">
          <children>
-            <Button id="default-button" fx:id="backButton" mnemonicParsing="false" text="Back" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER" />
+            <Button  fx:id="backButton" mnemonicParsing="false" text="Back" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER" />
          </children>
       </AnchorPane>
    </bottom>

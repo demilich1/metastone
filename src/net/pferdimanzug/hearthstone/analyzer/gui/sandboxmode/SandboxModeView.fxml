@@ -14,7 +14,7 @@
       <Text id="header" strokeType="OUTSIDE" strokeWidth="0.0" text="Sandbox Mode" BorderPane.alignment="CENTER" />
    </top>
    <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
    <center>
       <VBox alignment="CENTER" spacing="8.0" BorderPane.alignment="CENTER">
@@ -26,8 +26,8 @@
    <bottom>
       <AnchorPane>
          <children>
-            <Button id="default-button" fx:id="backButton" mnemonicParsing="false" text="Back" AnchorPane.leftAnchor="0.0" />
-            <Button id="default-button" fx:id="playButton" alignment="TOP_CENTER" mnemonicParsing="false" text="Play!" AnchorPane.rightAnchor="440.0" AnchorPane.topAnchor="0.0" />
+            <Button  fx:id="backButton" mnemonicParsing="false" text="Back" AnchorPane.leftAnchor="0.0" />
+            <Button  fx:id="playButton" alignment="TOP_CENTER" mnemonicParsing="false" text="Play!" AnchorPane.rightAnchor="440.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
    </bottom>

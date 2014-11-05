@@ -10,7 +10,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
@@ -30,7 +30,7 @@ public class SimulationModeConfigView extends BorderPane implements EventHandler
 	protected Button backButton;
 
 	@FXML
-	protected ChoiceBox<Integer> numberOfGamesBox;
+	protected ComboBox<Integer> numberOfGamesBox;
 
 	protected PlayerConfigView player1Config;
 	protected PlayerConfigView player2Config;

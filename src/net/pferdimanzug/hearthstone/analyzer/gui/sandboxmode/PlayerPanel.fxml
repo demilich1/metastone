@@ -13,13 +13,13 @@
    <children>
       <Label id="info-small" text="Player" />
       <Label id="info-small" layoutX="10.0" layoutY="41.0" text="Select player:" />
-      <ChoiceBox fx:id="playerChoiceBox" prefWidth="200.0" />
+      <ComboBox fx:id="playerComboBox" prefWidth="200.0" />
       <HBox alignment="CENTER_LEFT" spacing="8.0">
          <children>
             <Label text="Mana:" />
-            <ChoiceBox fx:id="currentManaBox" prefWidth="50.0" />
+            <ComboBox fx:id="currentManaBox" prefWidth="50.0" />
             <Label layoutX="10.0" layoutY="10.0" text="/" />
-            <ChoiceBox fx:id="maxManaBox" layoutX="51.0" layoutY="10.0" prefWidth="50.0" />
+            <ComboBox fx:id="maxManaBox" layoutX="51.0" layoutY="10.0" prefWidth="50.0" />
          </children>
          <opaqueInsets>
             <Insets />

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -11,19 +12,25 @@
    <center>
       <VBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Button id="button" fx:id="playModeButton" layoutX="447.0" layoutY="339.0" mnemonicParsing="false" prefWidth="200.0" text="Play Mode" textAlignment="CENTER" />
-            <Button id="button" fx:id="deckBuilderButton" mnemonicParsing="false" prefWidth="200.0" text="Deck Builder" textAlignment="CENTER" />
-            <Button id="button" fx:id="simulationModeButton" layoutX="422.0" layoutY="313.0" mnemonicParsing="false" prefWidth="200.0" text="Simulation Mode" textAlignment="CENTER" />
-            <Button id="button" fx:id="trainingModeButton" layoutX="422.0" layoutY="391.0" mnemonicParsing="false" prefWidth="200.0" text="Training Mode" textAlignment="CENTER" />
-            <Button id="button" fx:id="sandboxModeButton" layoutX="422.0" layoutY="417.0" mnemonicParsing="false" prefWidth="200.0" text="Sandbox Mode" textAlignment="CENTER" />
+            <Button id="main-button" fx:id="playModeButton" layoutX="447.0" layoutY="339.0" mnemonicParsing="false" prefWidth="200.0" text="Play Mode" textAlignment="CENTER" />
+            <Button id="main-button" fx:id="deckBuilderButton" mnemonicParsing="false" prefWidth="200.0" text="Deck Builder" textAlignment="CENTER" />
+            <Button id="main-button" fx:id="simulationModeButton" layoutX="422.0" layoutY="313.0" mnemonicParsing="false" prefWidth="200.0" text="Simulation Mode" textAlignment="CENTER" />
+            <Button id="main-button" fx:id="trainingModeButton" layoutX="422.0" layoutY="391.0" mnemonicParsing="false" prefWidth="200.0" text="Training Mode" textAlignment="CENTER" />
+            <Button id="main-button" fx:id="sandboxModeButton" layoutX="422.0" layoutY="417.0" mnemonicParsing="false" prefWidth="200.0" text="Sandbox Mode" textAlignment="CENTER" />
          </children></VBox>
    </center>
    <top>
-      <Text id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="MetaStone" BorderPane.alignment="CENTER" />
+      <HBox alignment="CENTER">
+         <children>
+            <ImageView fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/img/ui/logo.png" />
+               </image>
+            </ImageView>
+            <Text id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="MetaStone" BorderPane.alignment="CENTER" />
+         </children>
+      </HBox>
    </top>
-   <padding>
-      <Insets top="20.0" />
-   </padding>
    <stylesheets>
       <URL value="@mainmenu.css" />
       <URL value="@../main.css" />
@@ -42,4 +49,7 @@
          </children>
       </HBox>
    </bottom>
+   <padding>
+      <Insets top="20.0" />
+   </padding>
 </fx:root>

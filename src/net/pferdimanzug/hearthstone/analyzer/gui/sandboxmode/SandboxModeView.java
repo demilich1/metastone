@@ -14,6 +14,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.human.HumanTargetOptions;
 import net.pferdimanzug.hearthstone.analyzer.gui.playmode.GameBoardView;
 import net.pferdimanzug.hearthstone.analyzer.gui.playmode.HumanActionPromptView;
+import net.pferdimanzug.hearthstone.analyzer.gui.playmode.LoadingBoardView;
 
 public class SandboxModeView extends BorderPane {
 
@@ -26,6 +27,8 @@ public class SandboxModeView extends BorderPane {
 	private final GameBoardView boardView;
 	private final ToolboxView toolboxView;
 	private final HumanActionPromptView actionPromptView;
+	private final LoadingBoardView loadingBoardView;
+	private boolean firstUpdate = true;
 
 	public SandboxModeView() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SandboxModeView.fxml"));
@@ -46,7 +49,12 @@ public class SandboxModeView extends BorderPane {
 		boardView.setScaleX(0.9);
 		boardView.setScaleY(0.9);
 		boardView.setScaleZ(0.9);
-		setCenter(getBoardView());
+		
+		loadingBoardView = new LoadingBoardView();
+		loadingBoardView.setScaleX(0.9);
+		loadingBoardView.setScaleY(0.9);
+		loadingBoardView.setScaleZ(0.9);
+		setCenter(loadingBoardView);
 
 		toolboxView = new ToolboxView();
 		setRight(toolboxView);
@@ -92,6 +100,10 @@ public class SandboxModeView extends BorderPane {
 	}
 	
 	public void updateSandbox(GameContext context) {
+		if (firstUpdate) {
+			setCenter(getBoardView());
+			firstUpdate = false;
+		}
 		getBoardView().updateGameState(context);
 		toolboxView.setContext(context);
 	}

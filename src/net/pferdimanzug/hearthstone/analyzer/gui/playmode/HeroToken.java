@@ -52,7 +52,7 @@ public class HeroToken extends GameToken {
 		StackPane targetAnchor = (StackPane) lookup("#targetAnchor");
 		String cssBorder = null;
 		if (highlight) {
-			cssBorder = "-fx-border-color:greenyellow; \n" + "-fx-border-radius:7;\n" + "-fx-border-width:5.0;";
+			cssBorder = "-fx-border-color:seagreen; \n" + "-fx-border-radius:7;\n" + "-fx-border-width:5.0;";
 		} else {
 			cssBorder = "-fx-border-color:transparent; \n" + "-fx-border-radius:7;\n" + "-fx-border-width:5.0;";
 		}

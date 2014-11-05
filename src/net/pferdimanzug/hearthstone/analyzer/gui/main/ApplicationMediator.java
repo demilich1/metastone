@@ -33,7 +33,7 @@ public class ApplicationMediator extends Mediator<GameNotification> {
 			root = (Pane) notification.getBody();
 			break;
 		case SHOW_VIEW:
-			Node view = (Node) notification.getBody();
+			final Node view = (Node) notification.getBody();
 			root.getChildren().clear();
 			root.getChildren().add(view);
 			break;
@@ -45,7 +45,7 @@ public class ApplicationMediator extends Mediator<GameNotification> {
 			break;
 		}
 	}
-	
+
 	@Override
 	public List<GameNotification> listNotificationInterests() {
 		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();

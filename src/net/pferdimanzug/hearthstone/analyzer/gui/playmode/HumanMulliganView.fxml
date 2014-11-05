@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root id="bordered-panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../main.css" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root id="bordered-dialog" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../main.css" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <HBox fx:id="contentArea" alignment="CENTER" spacing="16.0" BorderPane.alignment="CENTER">
          <children>
@@ -21,7 +21,7 @@
       </HBox>
    </center>
    <bottom>
-      <Button id="default-button" fx:id="doneButton" alignment="CENTER" mnemonicParsing="false" text="Done" BorderPane.alignment="CENTER">
+      <Button  fx:id="doneButton" alignment="CENTER" mnemonicParsing="false" text="Done" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
          </BorderPane.margin>

@@ -31,8 +31,14 @@ public class PlayModeConfigMediator extends Mediator<GameNotification> {
 			break;
 		case COMMIT_PLAYMODE_CONFIG:
 			getFacade().registerMediator(new PlayModeMediator());
-			GameConfig gameConfig = (GameConfig) notification.getBody();
-			getFacade().sendNotification(GameNotification.START_GAME, gameConfig);
+			new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					GameConfig gameConfig = (GameConfig) notification.getBody();
+					getFacade().sendNotification(GameNotification.START_GAME, gameConfig);
+				}
+			}).start();
 			break;
 		default:
 			break;

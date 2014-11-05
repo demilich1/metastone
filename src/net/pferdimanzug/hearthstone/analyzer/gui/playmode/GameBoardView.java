@@ -236,9 +236,10 @@ public class GameBoardView extends BorderPane {
 		CardCollection hand = player.getHand();
 		for (int i = 0; i < handCards.length; i++) {
 			if (i < hand.getCount()) {
-				handCards[i].setCard(context, hand.get(i), player);
 				handCards[i].setManaged(true);
 				handCards[i].setVisible(true);
+				handCards[i].setCard(context, hand.get(i), player);
+				
 			} else {
 				handCards[i].setManaged(false);
 				handCards[i].setVisible(false);
