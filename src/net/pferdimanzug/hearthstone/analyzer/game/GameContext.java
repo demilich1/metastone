@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Stack;
 
 import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.EndTurnAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
@@ -122,7 +121,6 @@ public class GameContext implements Cloneable, IDisposable {
 	}
 
 	public void endTurn() {
-		onWillPerformAction(new EndTurnAction());
 		logic.endTurn(activePlayer);
 		activePlayer = activePlayer == PLAYER_1 ? PLAYER_2 : PLAYER_1;
 		onGameStateChanged();
@@ -273,11 +271,7 @@ public class GameContext implements Cloneable, IDisposable {
 	protected void onGameStateChanged() {
 	}
 
-	protected void onWillPerformAction(GameAction action) {
-	}
-
 	private void performAction(int playerId, GameAction gameAction) {
-		onWillPerformAction(gameAction);
 		logic.performGameAction(playerId, gameAction);
 		onGameStateChanged();
 	}

@@ -23,7 +23,7 @@
       		<maxFileSize>1000MB</maxFileSize>
     	</triggeringPolicy>
     	
-		<append>false</append>
+		<append>true</append>
 		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
 			by default -->
 		<encoder>
