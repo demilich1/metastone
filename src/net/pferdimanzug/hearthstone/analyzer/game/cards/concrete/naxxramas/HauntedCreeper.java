@@ -14,6 +14,7 @@ public class HauntedCreeper extends MinionCard {
 
 	public HauntedCreeper() {
 		super("Haunted Creeper", 1, 2, Rarity.COMMON, HeroClass.ANY, 2);
+		setDescription("Deathrattle: Summon two 1/1 Spectral Spiders.");
 		setRace(Race.BEAST);
 	}
 

@@ -33,6 +33,8 @@ public class ToolboxView extends ToolBar {
 		getItems().add(new Separator());
 		minionPanel = new MinionPanel();
 		getItems().add(minionPanel);
+		
+		setCache(true);
 	}
 
 	public void onPlayerSelectionChanged(Player selectedPlayer) {

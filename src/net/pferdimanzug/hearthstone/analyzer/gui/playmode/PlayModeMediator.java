@@ -42,7 +42,11 @@ public class PlayModeMediator extends Mediator<GameNotification> implements Even
 		switch (notification.getId()) {
 		case GAME_STATE_UPDATE:
 			GameContext context = (GameContext) notification.getBody();
-			Platform.runLater(() -> view.updateGameState(context));
+			Platform.runLater(() -> view.showAnimations(context));
+			break;
+		case GAME_STATE_LATE_UPDATE:
+			GameContext context2 = (GameContext) notification.getBody();
+			Platform.runLater(() -> view.updateGameState(context2));
 			break;
 		case HUMAN_PROMPT_FOR_ACTION:
 			HumanActionOptions actionOptions = (HumanActionOptions) notification.getBody();
@@ -65,6 +69,7 @@ public class PlayModeMediator extends Mediator<GameNotification> implements Even
 	public List<GameNotification> listNotificationInterests() {
 		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
 		notificationInterests.add(GameNotification.GAME_STATE_UPDATE);
+		notificationInterests.add(GameNotification.GAME_STATE_LATE_UPDATE);
 		notificationInterests.add(GameNotification.HUMAN_PROMPT_FOR_ACTION);
 		notificationInterests.add(GameNotification.HUMAN_PROMPT_FOR_TARGET);
 		notificationInterests.add(GameNotification.HUMAN_PROMPT_FOR_MULLIGAN);

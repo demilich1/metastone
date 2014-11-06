@@ -43,10 +43,14 @@ public class SandboxModeMediator extends Mediator<GameNotification> implements E
 	public void handleNotification(final INotification<GameNotification> notification) {
 
 		switch (notification.getId()) {
-		case GAME_STATE_UPDATE:
+		case GAME_STATE_LATE_UPDATE:
 		case UPDATE_SANDBOX_STATE:
 			GameContext context = (GameContext) notification.getBody();
 			Platform.runLater(() -> view.updateSandbox(context));
+			break;
+		case GAME_STATE_UPDATE:
+			GameContext context2 = (GameContext) notification.getBody();
+			Platform.runLater(() -> view.showAnimations(context2));
 			break;
 		case SELECT_TARGET:
 			HumanTargetOptions targetOptions = (HumanTargetOptions) notification.getBody();
@@ -84,6 +88,7 @@ public class SandboxModeMediator extends Mediator<GameNotification> implements E
 		notificationInterests.add(GameNotification.HUMAN_PROMPT_FOR_ACTION);
 		notificationInterests.add(GameNotification.HUMAN_PROMPT_FOR_TARGET);
 		notificationInterests.add(GameNotification.GAME_STATE_UPDATE);
+		notificationInterests.add(GameNotification.GAME_STATE_LATE_UPDATE);
 		notificationInterests.add(GameNotification.SELECT_PLAYER);
 		notificationInterests.add(GameNotification.COMMIT_SANDBOXMODE_CONFIG);
 		notificationInterests.add(GameNotification.REPLY_DECKS);

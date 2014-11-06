@@ -13,6 +13,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 public class GameContextVisualizable extends GameContext {
 	
 	private final List<GameEvent> gameEvents = new ArrayList<>();
+	
+	private boolean blockedByAnimation;
 
 	public GameContextVisualizable(Player player1, Player player2, GameLogic logic) {
 		super(player1, player2, logic);
@@ -30,19 +32,29 @@ public class GameContextVisualizable extends GameContext {
 		if (ignoreEvents()) {
 			return;
 		}
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-		}
+		
+		setBlockedByAnimation(true);
 		ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_STATE_UPDATE, this);
+		
+		while (blockedByAnimation) {
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+			}
+		}
+		ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_STATE_LATE_UPDATE, this);
 	}
 
-	public List<GameEvent> getGameEvents() {
+	public synchronized List<GameEvent> getGameEvents() {
 		return gameEvents;
 	}
-	
-	
-	
-	
+
+	public boolean isBlockedByAnimation() {
+		return blockedByAnimation;
+	}
+
+	public void setBlockedByAnimation(boolean blockedByAnimation) {
+		this.blockedByAnimation = blockedByAnimation;
+	}
 
 }

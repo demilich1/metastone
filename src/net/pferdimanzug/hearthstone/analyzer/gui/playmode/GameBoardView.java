@@ -27,6 +27,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 import net.pferdimanzug.hearthstone.analyzer.gui.IconFactory;
 import net.pferdimanzug.hearthstone.analyzer.gui.cards.HandCard;
+import net.pferdimanzug.hearthstone.analyzer.gui.playmode.animation.EventVisualizerDispatcher;
 
 public class GameBoardView extends BorderPane {
 
@@ -58,6 +59,8 @@ public class GameBoardView extends BorderPane {
 	private final HashMap<GameToken, Button> summonHelperMap1 = new HashMap<GameToken, Button>();
 	private final HashMap<GameToken, Button> summonHelperMap2 = new HashMap<GameToken, Button>();
 	private final HashMap<Actor, GameToken> entityTokenMap = new HashMap<Actor, GameToken>();
+	
+	private final EventVisualizerDispatcher gameEventVisualizer = new EventVisualizerDispatcher();
 
 	@FXML
 	private Label centerMessageLabel;
@@ -159,7 +162,7 @@ public class GameBoardView extends BorderPane {
 
 		for (final GameAction action : targetOptions.getActionGroup().getActionsInGroup()) {
 			Entity target = context.resolveSingleTarget(action.getTargetKey());
-			GameToken token = entityTokenMap.get(target);
+			GameToken token = getToken(target);
 
 			EventHandler<MouseEvent> clickedHander = new EventHandler<MouseEvent>() {
 
@@ -173,13 +176,17 @@ public class GameBoardView extends BorderPane {
 			token.showTargetMarker(clickedHander);
 		}
 	}
+	
+	public GameToken getToken(Entity entity) {
+		return entityTokenMap.get(entity);
+	}
 
 	private void enableSummonTargets(final HumanTargetOptions targetOptions) {
 		int playerId = targetOptions.getPlayerId();
 		GameContext context = targetOptions.getContext();
 		for (final GameAction action : targetOptions.getActionGroup().getActionsInGroup()) {
 			Entity target = context.resolveSingleTarget(action.getTargetKey());
-			GameToken token = entityTokenMap.get(target);
+			GameToken token = getToken(target);
 			Button summonHelper = playerId == 0 ? summonHelperMap1.get(token) : summonHelperMap2.get(token);
 			summonHelper.setVisible(true);
 			summonHelper.setManaged(true);
@@ -213,6 +220,10 @@ public class GameBoardView extends BorderPane {
 		centerMessageLabel.setText(message);
 		centerMessageLabel.setVisible(true);
 	}
+	
+	public void showAnimations(GameContext context) {
+		gameEventVisualizer.visualize((GameContextVisualizable) context, this);
+	}
 
 	public void updateGameState(GameContext context) {
 		entityTokenMap.clear();
@@ -231,7 +242,7 @@ public class GameBoardView extends BorderPane {
 
 		checkForWinner(context);
 	}
-
+	
 	private void updateHandCards(GameContext context, Player player, HandCard[] handCards) {
 		CardCollection hand = player.getHand();
 		for (int i = 0; i < handCards.length; i++) {

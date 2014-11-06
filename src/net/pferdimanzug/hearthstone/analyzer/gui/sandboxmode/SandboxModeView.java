@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.CacheHint;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
@@ -49,6 +50,8 @@ public class SandboxModeView extends BorderPane {
 		boardView.setScaleX(0.9);
 		boardView.setScaleY(0.9);
 		boardView.setScaleZ(0.9);
+		boardView.setCache(true);
+		boardView.setCacheHint(CacheHint.SCALE);
 		
 		loadingBoardView = new LoadingBoardView();
 		loadingBoardView.setScaleX(0.9);
@@ -84,6 +87,8 @@ public class SandboxModeView extends BorderPane {
 	}
 
 	private void startPlayMode(ActionEvent actionEvent) {
+		getTop().setVisible(false);
+		getTop().setManaged(false);
 		ApplicationFacade.getInstance().sendNotification(GameNotification.START_PLAY_SANDBOX);
 		setRight(getActionPromptView());
 		backButton.setVisible(false);
@@ -92,6 +97,8 @@ public class SandboxModeView extends BorderPane {
 	}
 
 	private void stopPlayMode(ActionEvent actionEvent) {
+		getTop().setVisible(true);
+		getTop().setManaged(true);
 		ApplicationFacade.getInstance().sendNotification(GameNotification.STOP_PLAY_SANDBOX);
 		setRight(toolboxView);
 		backButton.setVisible(true);
@@ -99,13 +106,21 @@ public class SandboxModeView extends BorderPane {
 		playButton.setOnAction(this::startPlayMode);
 	}
 	
+	public void showAnimations(GameContext context) {
+		getBoardView().showAnimations(context);
+	}
+	
 	public void updateSandbox(GameContext context) {
 		if (firstUpdate) {
 			setCenter(getBoardView());
 			firstUpdate = false;
 		}
+		
 		getBoardView().updateGameState(context);
-		toolboxView.setContext(context);
+		
+		if (toolboxView.getParent() != null) {
+			toolboxView.setContext(context);
+		}
 	}
 
 }

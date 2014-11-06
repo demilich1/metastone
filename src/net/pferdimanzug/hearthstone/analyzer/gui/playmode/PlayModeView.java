@@ -62,6 +62,10 @@ public class PlayModeView extends BorderPane {
 	public HumanActionPromptView getActionPromptView() {
 		return actionPromptView;
 	}
+	
+	public void showAnimations(GameContext context) {
+		boardView.showAnimations(context);
+	}
 
 	public void updateGameState(GameContext context) {
 		if (firstUpdate) {

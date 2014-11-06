@@ -49,7 +49,7 @@ public class HumanBehaviour extends Behaviour implements IActionSelectionListene
 		ApplicationFacade.getInstance().sendNotification(GameNotification.HUMAN_PROMPT_FOR_ACTION, options);
 		while (waitingForInput) {
 			try {
-				Thread.sleep(100);
+				Thread.sleep(50);
 			} catch (InterruptedException e) {
 			}
 		}
