@@ -15,6 +15,7 @@ public class EventVisualizerDispatcher {
 
 	static {
 		visualizers.put(GameEventType.DAMAGE, new DamageEventVisualizer());
+		visualizers.put(GameEventType.HEAL, new HealEventVisualizer());
 	}
 
 	public void visualize(GameContextVisualizable gameContext, GameBoardView boardView) {
