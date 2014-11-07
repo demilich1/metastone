@@ -6,9 +6,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root id="bordered-dialog" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" stylesheets="@../main.css" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root styleClass="bordered-dialog" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" stylesheets="@../main.css" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <Label id="name-big" fx:id="headerLabel" text="&lt;Header&gt;" BorderPane.alignment="CENTER">
+      <Label styleClass="name-big" fx:id="headerLabel" text="&lt;Header&gt;" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets top="10.0" />
          </BorderPane.margin></Label>
@@ -21,7 +21,7 @@
                   <Image url="@../../resources/img/ui/confirm.png" />
                </image>
             </ImageView>
-            <Label id="dialog-text" fx:id="textLabel" maxWidth="240.0" text="Lorem ipsum und der ganze Klabautermann mit langem Text im Nacken" wrapText="true" />
+            <Label styleClass="dialog-text" fx:id="textLabel" maxWidth="240.0" text="Lorem ipsum und der ganze Klabautermann mit langem Text im Nacken" wrapText="true" />
          </children>
          <padding>
             <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />

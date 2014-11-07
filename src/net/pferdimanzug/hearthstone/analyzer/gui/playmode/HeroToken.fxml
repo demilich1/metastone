@@ -24,7 +24,7 @@
             <Image url="@../../resources/img/common/health_value_icon.png" />
           </image>
         </ImageView>
-        <Text id="outlined-score" fx:id="hpLabel" cache="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-8.0" translateY="-2.0" StackPane.alignment="BOTTOM_RIGHT">
+        <Text styleClass="outlined-score" fx:id="hpLabel" cache="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-8.0" translateY="-2.0" StackPane.alignment="BOTTOM_RIGHT">
           <StackPane.margin>
             <Insets />
           </StackPane.margin>
@@ -34,13 +34,13 @@
             <Image url="@../../resources/img/common/attack_value_icon.png" />
           </image>
         </ImageView>
-        <Text id="outlined-score" fx:id="attackLabel" cache="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="11.0" translateY="-2.0" StackPane.alignment="BOTTOM_LEFT" />
+        <Text styleClass="outlined-score" fx:id="attackLabel" cache="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="11.0" translateY="-2.0" StackPane.alignment="BOTTOM_LEFT" />
         <ImageView fx:id="armorIcon" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateX="4.0" translateY="8.0" StackPane.alignment="CENTER_RIGHT">
           <image>
             <Image url="@../../resources/img/common/armor.png" />
           </image>
         </ImageView>
-        <Text id="outlined-score" fx:id="armorLabel" cache="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-8.0" translateY="8.0" StackPane.alignment="CENTER_RIGHT" />
+        <Text styleClass="outlined-score" fx:id="armorLabel" cache="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-8.0" translateY="8.0" StackPane.alignment="CENTER_RIGHT" />
         <FlowPane fx:id="secretsAnchor" prefHeight="-1.0" prefWidth="64.0" StackPane.alignment="TOP_CENTER" />
       </children>
       <padding>
@@ -52,13 +52,13 @@
     <StackPane fx:id="weaponPane" prefHeight="-1.0" prefWidth="-1.0">
       <children>
         <Circle fill="#404040" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-        <Label fx:id="weaponNameLabel" maxWidth="70.0" text="&lt;weapon name&gt;" textAlignment="CENTER" textFill="WHITE" wrapText="true" StackPane.alignment="CENTER">
+        <Label fx:id="weaponNameLabel" maxWidth="70.0" styleClass="label-white" text="&lt;weapon name&gt;" textAlignment="CENTER" textFill="WHITE" wrapText="true" StackPane.alignment="CENTER">
           <font>
             <Font name="Arial Bold" size="10.0" />
           </font>
         </Label>
-        <Text id="outlined-score" fx:id="weaponAttackLabel" cache="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateY="-20.0" StackPane.alignment="BOTTOM_LEFT" />
-        <Text id="outlined-score" fx:id="weaponDurabilityLabel" cache="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateY="-20.0" StackPane.alignment="BOTTOM_RIGHT" />
+        <Text styleClass="outlined-score" fx:id="weaponAttackLabel" cache="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateY="-20.0" StackPane.alignment="BOTTOM_LEFT" />
+        <Text styleClass="outlined-score" fx:id="weaponDurabilityLabel" cache="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateY="-20.0" StackPane.alignment="BOTTOM_RIGHT" />
       </children>
       <padding>
         <Insets bottom="4.0" left="4.0" top="4.0" />

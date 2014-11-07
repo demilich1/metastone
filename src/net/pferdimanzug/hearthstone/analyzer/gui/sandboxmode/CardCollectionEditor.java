@@ -47,11 +47,11 @@ public class CardCollectionEditor extends SandboxEditor {
 		
 		setTitle(title);
 
-		populateEditableView(cardCollection);
 		editableListView.setCellFactory(TextFieldListCell.forListView(new CardStringConverter()));
+		populateEditableView(cardCollection);
 
-		populateCatalogueView(null);
 		catalogueListView.setCellFactory(TextFieldListCell.forListView(new CardStringConverter()));
+		populateCatalogueView(null);
 
 		filterTextfield.textProperty().addListener(this::onFilterTextChanged);
 		clearFilterButton.setOnAction(actionEvent -> filterTextfield.clear());
@@ -111,9 +111,9 @@ public class CardCollectionEditor extends SandboxEditor {
 		for (Card card : cardCollection) {
 			data.add(card);
 		}
+		editableListView.setItems(data);
 		data.addListener(this::handleEditableCardListChanged);
 		handleEditableCardListChanged(null);
-		editableListView.setItems(data);
 	}
 
 	private class CardStringConverter extends StringConverter<Card> {

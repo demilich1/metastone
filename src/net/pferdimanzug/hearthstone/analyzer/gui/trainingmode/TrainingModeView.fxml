@@ -9,9 +9,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" stylesheets="@../main.css" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root styleClass="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" stylesheets="@../main.css" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <Text id="header" strokeType="OUTSIDE" strokeWidth="0.0" text="Training Mode" BorderPane.alignment="CENTER" />
+      <Text styleClass="header" strokeType="OUTSIDE" strokeWidth="0.0" text="Training Mode" BorderPane.alignment="CENTER" />
    </top>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -20,7 +20,7 @@
       <VBox alignment="CENTER" spacing="8.0" BorderPane.alignment="CENTER">
          <children>
             <HBox fx:id="playerArea" alignment="CENTER" maxHeight="400.0" BorderPane.alignment="CENTER" />
-            <Label id="name-small" text="Number of games" />
+            <Label styleClass="name-small" text="Number of games" />
             <ComboBox fx:id="numberOfGamesBox" prefWidth="150.0" />
             <LineChart fx:id="resultChart" title="Training results">
               <xAxis>

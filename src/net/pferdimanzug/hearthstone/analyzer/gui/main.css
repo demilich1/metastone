@@ -1,8 +1,8 @@
-#panel {
-	-fx-background-color: darkgray;
+.panel {
+	-fx-background-color: gray;
 }
 
-#bordered-panel {
+.bordered-panel {
 	-fx-background-color: darkgray;
 	-fx-background-radius: 10;
 	-fx-border-width: 2;
@@ -11,7 +11,7 @@
 	-fx-border-insets: 4;
 }
 
-#bordered-dialog {
+.bordered-dialog {
 	-fx-background-color: linen;
 	-fx-background-radius: 10;
 	-fx-border-width: 3;
@@ -20,13 +20,13 @@
 	-fx-border-insets: 4;
 }
 
-#dialog-text {
+.dialog-text {
 	-fx-font-size: 10pt;
     -fx-font-family: "System";
     -fx-text-fill: black;
 }
 
-#side-bar {
+.sidebar {
 	-fx-background: tan;
 	-fx-border-width: 2;
 	-fx-border-color: darkslategrey;
@@ -34,21 +34,21 @@
 	-fx-border-radius: 10;
 }
 
-#header {
+.header {
 	-fx-font-size: 24pt;
     -fx-font-family: "System";
     -fx-font-weight: bold;
     -fx-fill: black;
 }
 
-#card-border {
+.card-border {
 	 -fx-background-color: navajowhite;
 	 -fx-border-color: black;
 	 -fx-border-style: solid;
 	 -fx-border-width: 1.0;
 }
 
-#outlined-score {
+.outlined-score {
  	-fx-font-size: 14pt;
     -fx-font-family: "System";
     -fx-font-weight: bold;
@@ -57,7 +57,7 @@
     -fx-stroke-width: 2;
 }
 
-#outlined-score-yellow {
+.outlined-score-yellow {
  	-fx-font-size: 14pt;
     -fx-font-family: "System";
     -fx-font-weight: bold;
@@ -66,13 +66,13 @@
     -fx-stroke-width: 2;
 }
 
-#tooltip-description {
-	-fx-font-size: 10pt;
+.tooltip-description {
+	-fx-font-size: 11pt;
     -fx-font-family: "System";
     -fx-text-fill: black;
 }
 
-#race-label {
+.race-label {
 	-fx-font-size: 8pt;
     -fx-font-family: "System";
     -fx-text-fill: black;
@@ -80,21 +80,21 @@
     -fx-font-style : italic;
 }
 
-#name-big {
+.name-big {
 	-fx-font-size: 14pt;
     -fx-font-family: "System";
     -fx-font-weight: bold;
     -fx-text-fill: black;
 }
 
-#name-small {
+.name-small {
 	-fx-font-size: 10pt;
     -fx-font-family: "System";
     -fx-font-weight: bold;
     -fx-text-fill: black;
 }
 
-#info-small {
+.info-small {
 	-fx-font-size: 10pt;
     -fx-font-family: "System";
     -fx-text-fill: black;
@@ -122,6 +122,11 @@
 	-fx-text-fill: black;
 }
 
+.label-white {
+	-fx-font-family: "System";
+	-fx-text-fill: white;
+}
+
 .button {
 	-fx-background-color:
         #090a0c,
@@ -147,7 +152,7 @@
     -fx-text-fill: darkorange;
 }
 
-#default-label {
+.default-label {
 	-fx-font-size: 18pt;
     -fx-font-family: "System";
     -fx-fill: dimgray;
@@ -162,5 +167,11 @@
 { 
 	-fx-border-style: solid;
 	-fx-border-width: 0.5px;
+}
+
+.text-field {
+   -fx-background-color: antiquewhite;
+   -fx-border-width: 1;
+   -fx-border-color: black;
 }
 

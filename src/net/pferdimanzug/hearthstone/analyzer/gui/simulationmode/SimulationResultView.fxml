@@ -7,13 +7,13 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" stylesheets="@../main.css" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root styleClass="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" stylesheets="@../main.css" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox alignment="CENTER" fillWidth="false" spacing="16.0">
          <children>
             <BorderPane fx:id="infoArea">
                <center>
-                  <Label id="name-big" alignment="BASELINE_CENTER" text="vs." BorderPane.alignment="CENTER">
+                  <Label styleClass="name-big" alignment="BASELINE_CENTER" text="vs." BorderPane.alignment="CENTER">
                      <padding>
                         <Insets left="64.0" right="64.0" />
                      </padding></Label>
@@ -22,7 +22,7 @@
                   <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
                </padding>
             </BorderPane>
-            <Label id="name-small" fx:id="durationLabel" text="&lt;simulation duration&gt;" textAlignment="CENTER" />
+            <Label styleClass="name-small" fx:id="durationLabel" text="&lt;simulation duration&gt;" textAlignment="CENTER" />
             <TabPane>
                <tabs>
                   <Tab closable="false" text="Absolute values (over all games)">
@@ -71,7 +71,7 @@
       </Button>
    </bottom>
    <top>
-      <Text id="header" strokeType="OUTSIDE" strokeWidth="0.0" text="Simulation Results" BorderPane.alignment="CENTER" />
+      <Text styleClass="header" strokeType="OUTSIDE" strokeWidth="0.0" text="Simulation Results" BorderPane.alignment="CENTER" />
    </top>
    <padding>
       <Insets bottom="8.0" top="20.0" />

@@ -1,4 +1,4 @@
-#title {
+.title {
 	-fx-font-size: 32pt;
     -fx-font-family: "System";
     -fx-font-weight: bold;
@@ -6,7 +6,7 @@
     -fx-fill: white;
 }
 
-#main-button {
+.main-button {
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
     -fx-font-family: "System";
     -fx-text-fill: linear-gradient(white, #d0d0d0);
@@ -14,6 +14,6 @@
     -fx-font-weight: bold;
 }
 
-#main-button:hover {
+.main-button:hover {
     -fx-text-fill: darkorange;
 }

@@ -1,29 +1,25 @@
-#class-button {
+.class-button {
 	-fx-font-size: 20pt;
     -fx-font-family: "System";
 }
 
-#card-entry {
+.card-entry {
 	-fx-border-width: 2;
 	-fx-border-color: black;
 	-fx-background-color: tan;
 	-fx-border-radius: 10;
 }
 
-#card-entry:hover {
+.card-entry:hover {
 	-fx-border-width: 3;
 	-fx-border-color: yellow;
 	-fx-background-color: silver;
 	-fx-border-radius: 10;
 }
 
-#card-entry-name {
+.card-entry-name {
 	-fx-font-size: 10pt;
     -fx-font-family: "System";
     -fx-fill: black;
     -fx-font-weight: bold;
-}
-
-#search-field {
-   -fx-background-color: antiquewhite;
 }

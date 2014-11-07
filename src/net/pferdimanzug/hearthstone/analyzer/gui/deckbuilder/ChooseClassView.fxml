@@ -9,7 +9,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="760.0" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root styleClass="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="760.0" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
       <Insets top="20.0" />
    </padding>
@@ -26,7 +26,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button id="class-button" fx:id="warriorButton" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="160.0" prefWidth="160.0" text="Warrior" textAlignment="CENTER">
+            <Button styleClass="class-button" fx:id="warriorButton" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="160.0" prefWidth="160.0" text="Warrior" textAlignment="CENTER">
                <graphic>
                   <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -34,7 +34,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button id="class-button" fx:id="paladinButton" alignment="CENTER" contentDisplay="TOP" layoutX="81.0" layoutY="29.0" mnemonicParsing="false" prefHeight="160.0" prefWidth="160.0" text="Paladin" textAlignment="CENTER" GridPane.columnIndex="1">
+            <Button styleClass="class-button" fx:id="paladinButton" alignment="CENTER" contentDisplay="TOP" layoutX="81.0" layoutY="29.0" mnemonicParsing="false" prefHeight="160.0" prefWidth="160.0" text="Paladin" textAlignment="CENTER" GridPane.columnIndex="1">
                <graphic>
                   <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -42,7 +42,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button id="class-button" fx:id="druidButton" alignment="CENTER" contentDisplay="TOP" layoutX="423.0" layoutY="29.0" mnemonicParsing="false" prefHeight="160.0" prefWidth="160.0" text="Druid" textAlignment="CENTER" GridPane.columnIndex="2">
+            <Button styleClass="class-button" fx:id="druidButton" alignment="CENTER" contentDisplay="TOP" layoutX="423.0" layoutY="29.0" mnemonicParsing="false" prefHeight="160.0" prefWidth="160.0" text="Druid" textAlignment="CENTER" GridPane.columnIndex="2">
                <graphic>
                   <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -50,7 +50,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button id="class-button" fx:id="rogueButton" alignment="CENTER" contentDisplay="TOP" layoutX="764.0" layoutY="29.0" mnemonicParsing="false" prefHeight="160.0" prefWidth="160.0" text="Rogue" textAlignment="CENTER" GridPane.rowIndex="1">
+            <Button styleClass="class-button" fx:id="rogueButton" alignment="CENTER" contentDisplay="TOP" layoutX="764.0" layoutY="29.0" mnemonicParsing="false" prefHeight="160.0" prefWidth="160.0" text="Rogue" textAlignment="CENTER" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -58,7 +58,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button id="class-button" fx:id="warlockButton" alignment="CENTER" contentDisplay="TOP" layoutX="81.0" layoutY="267.0" mnemonicParsing="false" prefHeight="160.0" prefWidth="160.0" text="Warlock" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Button styleClass="class-button" fx:id="warlockButton" alignment="CENTER" contentDisplay="TOP" layoutX="81.0" layoutY="267.0" mnemonicParsing="false" prefHeight="160.0" prefWidth="160.0" text="Warlock" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -66,7 +66,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button id="class-button" fx:id="hunterButton" alignment="CENTER" contentDisplay="TOP" layoutX="423.0" layoutY="267.0" mnemonicParsing="false" prefHeight="160.0" prefWidth="160.0" text="Hunter" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Button styleClass="class-button" fx:id="hunterButton" alignment="CENTER" contentDisplay="TOP" layoutX="423.0" layoutY="267.0" mnemonicParsing="false" prefHeight="160.0" prefWidth="160.0" text="Hunter" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -74,7 +74,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button id="class-button" fx:id="shamanButton" alignment="CENTER" contentDisplay="TOP" layoutX="764.0" layoutY="267.0" mnemonicParsing="false" prefHeight="160.0" prefWidth="160.0" text="Shaman" textAlignment="CENTER" GridPane.rowIndex="2">
+            <Button styleClass="class-button" fx:id="shamanButton" alignment="CENTER" contentDisplay="TOP" layoutX="764.0" layoutY="267.0" mnemonicParsing="false" prefHeight="160.0" prefWidth="160.0" text="Shaman" textAlignment="CENTER" GridPane.rowIndex="2">
                <graphic>
                   <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -82,7 +82,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button id="class-button" fx:id="mageButton" alignment="CENTER" contentDisplay="TOP" layoutX="81.0" layoutY="504.0" mnemonicParsing="false" prefHeight="160.0" prefWidth="160.0" text="Mage" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Button styleClass="class-button" fx:id="mageButton" alignment="CENTER" contentDisplay="TOP" layoutX="81.0" layoutY="504.0" mnemonicParsing="false" prefHeight="160.0" prefWidth="160.0" text="Mage" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <graphic>
                   <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -90,7 +90,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button id="class-button" fx:id="priestButton" alignment="CENTER" contentDisplay="TOP" layoutX="423.0" layoutY="504.0" mnemonicParsing="false" prefHeight="160.0" prefWidth="160.0" text="Priest" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <Button styleClass="class-button" fx:id="priestButton" alignment="CENTER" contentDisplay="TOP" layoutX="423.0" layoutY="504.0" mnemonicParsing="false" prefHeight="160.0" prefWidth="160.0" text="Priest" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <graphic>
                   <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                      <image>

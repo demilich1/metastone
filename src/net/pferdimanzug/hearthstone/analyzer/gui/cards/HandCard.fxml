@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<fx:root id="card-border" prefHeight="120.0" prefWidth="80.0" stylesheets="@../main.css" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root styleClass="card-border" prefHeight="120.0" prefWidth="80.0" stylesheets="@../main.css" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <bottom>
     <StackPane fx:id="bottomPane" prefHeight="0.0" prefWidth="0.0" translateY="8.0">
       <children>
@@ -24,8 +24,8 @@
             <Image url="@../../resources/img/common/health_value_icon.png" />
           </image>
         </ImageView>
-        <Text id="outlined-score" fx:id="attackLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="4.0" translateY="-6.0" StackPane.alignment="BOTTOM_LEFT" />
-        <Text id="outlined-score" fx:id="hpLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-4.0" translateY="-6.0" StackPane.alignment="BOTTOM_RIGHT" />
+        <Text styleClass="outlined-score" fx:id="attackLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="4.0" translateY="-6.0" StackPane.alignment="BOTTOM_LEFT" />
+        <Text styleClass="outlined-score" fx:id="hpLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-4.0" translateY="-6.0" StackPane.alignment="BOTTOM_RIGHT" />
             <Circle fx:id="rarityGem" fill="#4989cd" radius="6.0" stroke="BLACK" strokeLineJoin="BEVEL" strokeType="INSIDE" strokeWidth="2.0" translateY="-20.0" />
       </children>
     </StackPane>
@@ -49,7 +49,7 @@
             <Image url="@../../resources/img/common/mana_crystal.png" />
           </image>
         </ImageView>
-        <Text id="outlined-score" fx:id="manaCostLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" StackPane.alignment="TOP_LEFT" />
+        <Text styleClass="outlined-score" fx:id="manaCostLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" StackPane.alignment="TOP_LEFT" />
       </children>
     </StackPane>
   </top>

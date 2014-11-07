@@ -9,9 +9,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root id="bordered-panel" orientation="VERTICAL" stylesheets="@../main.css" type="ToolBar" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root styleClass="bordered-panel" orientation="VERTICAL" stylesheets="@../main.css" type="ToolBar" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <items>
-      <Label id="default-label" text="Toolbox" />
+      <Label styleClass="default-label" text="Toolbox" />
       <Separator prefWidth="200.0" />
    </items>
 </fx:root>
