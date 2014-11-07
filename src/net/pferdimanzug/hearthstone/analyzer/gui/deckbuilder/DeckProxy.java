@@ -79,6 +79,10 @@ public class DeckProxy extends Proxy<GameNotification> {
 	public void loadDecks() throws FileNotFoundException {
 		decks.clear();
 		File folder = new File("./decks/");
+		if (!folder.exists()) {
+			logger.warn("/decks directory not found");
+			return;
+		}
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		for (File file : FileUtils.listFiles(folder, new String[] { "json" }, true)) {
 			FileReader reader = new FileReader(file);

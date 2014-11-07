@@ -19,8 +19,6 @@ public class RagingWorgen extends MinionCard {
 		return 185;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion ragingWorgen = createMinion();

@@ -114,8 +114,6 @@ public class GameBoardView extends BorderPane {
 
 		p1HeroAnchor.getChildren().add(p1Hero);
 		p2HeroAnchor.getChildren().add(p2Hero);
-
-		setCache(true);
 	}
 
 	private void checkForWinner(GameContext context) {
@@ -234,6 +232,7 @@ public class GameBoardView extends BorderPane {
 		p2Hero.highlight(context.getActivePlayer() == context.getPlayer2());
 		entityTokenMap.put(context.getPlayer2().getHero(), p2Hero);
 
+		
 		updateHandCards(context, context.getPlayer1(), p1Cards);
 		updateHandCards(context, context.getPlayer2(), p2Cards);
 

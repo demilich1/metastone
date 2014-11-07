@@ -55,7 +55,7 @@ public class GameToken extends BorderPane {
 
 		targetButton = targetIcon;
 
-		targetIcon.effectProperty().bind(Bindings.when(targetButton.hoverProperty()).then((Effect) green).otherwise((Effect) red));
+		//targetIcon.effectProperty().bind(Bindings.when(targetButton.hoverProperty()).then((Effect) green).otherwise((Effect) red));
 		targetButton.setId("target_button");
 		hideTargetMarker();
 		target.getChildren().add(targetButton);

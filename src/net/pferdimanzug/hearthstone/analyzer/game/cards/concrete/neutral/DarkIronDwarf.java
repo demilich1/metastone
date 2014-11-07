@@ -23,8 +23,6 @@ public class DarkIronDwarf extends MinionCard {
 		return 112;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion darkIronDwarf = createMinion();

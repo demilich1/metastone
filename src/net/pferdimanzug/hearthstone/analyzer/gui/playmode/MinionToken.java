@@ -26,15 +26,23 @@ public class MinionToken extends GameToken {
 	@FXML
 	private Node deathrattle;
 	
+	private int cached;
+	
 	public MinionToken() {
 		super("MinionToken.fxml");
 	}
 
 	public void setMinion(Minion minion) {
+		int hash = minion.hashCode();
+		// minion did not change, we do not need to update this ui element
+		if (hash == cached) {
+			return;
+		}
 		name.setText(minion.getName());
 		setScoreValue(attack, minion.getAttack(), minion.getTagValue(GameTag.BASE_ATTACK));
 		setScoreValue(hp, minion.getHp(), minion.getTagValue(GameTag.BASE_HP));
 		visualizeStatus(minion);
+		cached = hash;
 	}
 	
 	private void visualizeStatus(Minion minion) {
