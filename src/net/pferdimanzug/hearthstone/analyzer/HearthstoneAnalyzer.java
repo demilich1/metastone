@@ -1,7 +1,9 @@
 package net.pferdimanzug.hearthstone.analyzer;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -31,7 +33,6 @@ public class HearthstoneAnalyzer extends Application {
 		root.setAlignment(Pos.CENTER);
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
-		primaryStage.setResizable(false);
 		facade.sendNotification(GameNotification.CANVAS_CREATED, root);
 		facade.sendNotification(GameNotification.MAIN_MENU);
 		primaryStage.show();
