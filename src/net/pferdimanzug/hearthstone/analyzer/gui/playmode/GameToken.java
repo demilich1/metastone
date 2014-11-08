@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.beans.binding.Bindings;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.effect.Blend;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.effect.ColorAdjust;
@@ -16,7 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
+import net.pferdimanzug.hearthstone.analyzer.gui.DigitFactory;
 import net.pferdimanzug.hearthstone.analyzer.gui.IconFactory;
 
 public class GameToken extends BorderPane {
@@ -55,7 +56,7 @@ public class GameToken extends BorderPane {
 
 		targetButton = targetIcon;
 
-		//targetIcon.effectProperty().bind(Bindings.when(targetButton.hoverProperty()).then((Effect) green).otherwise((Effect) red));
+		targetIcon.effectProperty().bind(Bindings.when(targetButton.hoverProperty()).then((Effect) green).otherwise((Effect) red));
 		targetButton.setId("target_button");
 		hideTargetMarker();
 		target.getChildren().add(targetButton);
@@ -69,19 +70,18 @@ public class GameToken extends BorderPane {
 		return target;
 	}
 
-	protected void setScoreValue(Text label, int value) {
-		setScoreValue(label, value, value);
+	protected void setScoreValue(Group group, int value) {
+		setScoreValue(group, value, value);
 	}
 
-	protected void setScoreValue(Text label, int value, int baseValue) {
-		label.setText(String.valueOf(value));
+	protected void setScoreValue(Group group, int value, int baseValue) {
+		Color color = Color.WHITE;
 		if (value > baseValue) {
-			label.setFill(Color.GREEN);
+			color = Color.GREEN;
 		} else if (value < baseValue) {
-			label.setFill(Color.RED);
-		} else {
-			label.setFill(Color.WHITE);
+			color = Color.RED;
 		}
+		usePreRenderedDigits(group, value, color);
 	}
 
 	public void showTargetMarker(EventHandler<MouseEvent> clickedHander) {
@@ -91,6 +91,15 @@ public class GameToken extends BorderPane {
 		targetButton.addEventHandler(MouseEvent.MOUSE_CLICKED, clickedHander);
 		targetButton.setVisible(true);
 		existingEventHandler = clickedHander;
+	}
+	
+	protected void usePreRenderedDigits(Group group, int number) {
+		usePreRenderedDigits(group, number, Color.WHITE);
+	}
+	
+	protected void usePreRenderedDigits(Group group, int number, Color color) {
+		group.getChildren().clear();
+		group.getChildren().add(DigitFactory.getCachedDigitImage(number, color));
 	}
 
 }

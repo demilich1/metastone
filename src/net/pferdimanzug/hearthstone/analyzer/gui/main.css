@@ -175,3 +175,10 @@
    -fx-border-color: black;
 }
 
+.mana-label {
+	-fx-font-size: 12pt;
+    -fx-font-family: "System";
+    -fx-text-fill: blue;
+    -fx-font-weight: bold;
+}
+

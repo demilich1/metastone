@@ -1,8 +1,8 @@
-#board {
+.board {
 	-fx-background-color: bisque;
 }
 
-#center-message {
+.center-message {
 	-fx-font-size: 20pt;
     -fx-font-family: "System";
     -fx-font-weight: bold;
@@ -13,11 +13,4 @@
 
 #target-button {
 	-fx-background-color: transparent;
-}
-
-#name {
-	-fx-font-size: 10pt;
-    -fx-font-family: "System";
-    -fx-font-weight: bold;
-    -fx-text-fill: black;
 }

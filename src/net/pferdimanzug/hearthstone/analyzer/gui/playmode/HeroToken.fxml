@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import javafx.geometry.*?>
@@ -24,23 +25,19 @@
             <Image url="@../../resources/img/common/health_value_icon.png" />
           </image>
         </ImageView>
-        <Text styleClass="outlined-score" fx:id="hpLabel" cache="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-8.0" translateY="-2.0" StackPane.alignment="BOTTOM_RIGHT">
-          <StackPane.margin>
-            <Insets />
-          </StackPane.margin>
-        </Text>
+            <Group fx:id="hpAnchor" translateX="-5.0" translateY="-2.0" StackPane.alignment="BOTTOM_RIGHT" />
         <ImageView fitHeight="100.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateX="-2.0" translateY="5.0" StackPane.alignment="BOTTOM_LEFT">
           <image>
             <Image url="@../../resources/img/common/attack_value_icon.png" />
           </image>
         </ImageView>
-        <Text styleClass="outlined-score" fx:id="attackLabel" cache="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="11.0" translateY="-2.0" StackPane.alignment="BOTTOM_LEFT" />
+            <Group fx:id="attackAnchor" translateX="7.0" translateY="-2.0" StackPane.alignment="BOTTOM_LEFT" />
         <ImageView fx:id="armorIcon" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateX="4.0" translateY="8.0" StackPane.alignment="CENTER_RIGHT">
           <image>
             <Image url="@../../resources/img/common/armor.png" />
           </image>
         </ImageView>
-        <Text styleClass="outlined-score" fx:id="armorLabel" cache="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-8.0" translateY="8.0" StackPane.alignment="CENTER_RIGHT" />
+            <Group fx:id="armorAnchor" translateX="-6.0" translateY="5.0" StackPane.alignment="CENTER_RIGHT" />
         <FlowPane fx:id="secretsAnchor" prefHeight="-1.0" prefWidth="64.0" StackPane.alignment="TOP_CENTER" />
       </children>
       <padding>
@@ -57,8 +54,8 @@
             <Font name="Arial Bold" size="10.0" />
           </font>
         </Label>
-        <Text styleClass="outlined-score" fx:id="weaponAttackLabel" cache="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateY="-20.0" StackPane.alignment="BOTTOM_LEFT" />
-        <Text styleClass="outlined-score" fx:id="weaponDurabilityLabel" cache="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateY="-20.0" StackPane.alignment="BOTTOM_RIGHT" />
+            <Group fx:id="weaponAttackAnchor" translateY="-20.0" StackPane.alignment="BOTTOM_LEFT" />
+            <Group fx:id="weaponDurabilityAnchor" translateY="-20.0" StackPane.alignment="BOTTOM_RIGHT" />
       </children>
       <padding>
         <Insets bottom="4.0" left="4.0" top="4.0" />
@@ -76,7 +73,7 @@
             <Image url="@../../resources/img/powers/armor_up.png" />
           </image>
         </ImageView>
-        <Label id="mana" fx:id="manaLabel" alignment="CENTER" maxWidth="64.0" text="Mana: 10/10" textAlignment="LEFT" textFill="#0066ff" translateX="8.0" translateY="4.0" wrapText="true" VBox.vgrow="ALWAYS">
+        <Label id="mana" fx:id="manaLabel" alignment="CENTER" maxWidth="64.0" styleClass="mana-label" text="Mana: 10/10" textAlignment="LEFT" textFill="#0066ff" translateX="8.0" translateY="4.0" wrapText="true" VBox.vgrow="ALWAYS">
           <font>
             <Font name="Arial Bold" size="16.0" />
           </font>

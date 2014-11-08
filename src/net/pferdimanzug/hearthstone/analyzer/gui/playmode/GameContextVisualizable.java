@@ -3,10 +3,12 @@ package net.pferdimanzug.hearthstone.analyzer.gui.playmode;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.pferdimanzug.hearthstone.analyzer.AppConfig;
 import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
+import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 
@@ -22,11 +24,13 @@ public class GameContextVisualizable extends GameContext {
 
 	@Override
 	public void fireGameEvent(GameEvent gameEvent) {
+		if (ignoreEvents()) {
+			return;
+		}
 		super.fireGameEvent(gameEvent);
-		
 		getGameEvents().add(gameEvent);
 	}
-
+	
 	@Override
 	protected void onGameStateChanged() {
 		if (ignoreEvents()) {
@@ -38,12 +42,26 @@ public class GameContextVisualizable extends GameContext {
 		
 		while (blockedByAnimation) {
 			try {
-				Thread.sleep(100);
+				Thread.sleep(AppConfig.DEFAULT_SLEEP_DELAY);
 			} catch (InterruptedException e) {
 			}
 		}
 		ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_STATE_LATE_UPDATE, this);
 	}
+	
+	protected boolean acceptAction(GameAction nextAction) {
+		if (!ignoreEvents()) {
+			return true;
+		}
+		while (ignoreEvents()) {
+			try {
+				Thread.sleep(AppConfig.DEFAULT_SLEEP_DELAY);
+			} catch (InterruptedException e) {
+			}
+		}
+		return false;
+	}
+	
 
 	public synchronized List<GameEvent> getGameEvents() {
 		return gameEvents;

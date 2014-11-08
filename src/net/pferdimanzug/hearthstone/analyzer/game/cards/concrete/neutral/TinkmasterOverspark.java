@@ -30,10 +30,12 @@ public class TinkmasterOverspark extends MinionCard {
 	public Minion summon() {
 		Minion tinkmasterOverspark = createMinion();
 		SpellDesc devilsaurSpell = TransformRandomMinionSpell.create(new Devilsaur());
+		devilsaurSpell.setTarget(EntityReference.ALL_MINIONS);
 		SpellDesc squirellSpell = TransformRandomMinionSpell.create(new Squirrel());
+		squirellSpell.setTarget(EntityReference.ALL_MINIONS);
 		SpellDesc randomTransformSpell = EitherOrSpell.create(devilsaurSpell, squirellSpell, (context, player, target) -> context.getLogic()
 				.randomBool());
-		randomTransformSpell.setTarget(EntityReference.ALL_MINIONS);
+		randomTransformSpell.setTarget(EntityReference.NONE);
 		Battlecry battlecry = Battlecry.createBattlecry(randomTransformSpell);
 		tinkmasterOverspark.setBattlecry(battlecry);
 		return tinkmasterOverspark;

@@ -8,15 +8,15 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root styleClass="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" styleClass="panel" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Button styleClass="main-button" fx:id="playModeButton" layoutX="447.0" layoutY="339.0" mnemonicParsing="false" prefWidth="200.0" text="Play Mode" textAlignment="CENTER" />
-            <Button styleClass="main-button" fx:id="deckBuilderButton" mnemonicParsing="false" prefWidth="200.0" text="Deck Builder" textAlignment="CENTER" />
-            <Button styleClass="main-button" fx:id="simulationModeButton" layoutX="422.0" layoutY="313.0" mnemonicParsing="false" prefWidth="200.0" text="Simulation Mode" textAlignment="CENTER" />
-            <Button styleClass="main-button" fx:id="trainingModeButton" layoutX="422.0" layoutY="391.0" mnemonicParsing="false" prefWidth="200.0" text="Training Mode" textAlignment="CENTER" />
-            <Button styleClass="main-button" fx:id="sandboxModeButton" layoutX="422.0" layoutY="417.0" mnemonicParsing="false" prefWidth="200.0" text="Sandbox Mode" textAlignment="CENTER" />
+            <Button fx:id="playModeButton" layoutX="447.0" layoutY="339.0" mnemonicParsing="false" prefWidth="200.0" styleClass="main-button" text="Play Mode" textAlignment="CENTER" />
+            <Button fx:id="deckBuilderButton" mnemonicParsing="false" prefWidth="200.0" styleClass="main-button" text="Deck Builder" textAlignment="CENTER" />
+            <Button fx:id="simulationModeButton" layoutX="422.0" layoutY="313.0" mnemonicParsing="false" prefWidth="200.0" styleClass="main-button" text="Simulation Mode" textAlignment="CENTER" />
+            <Button fx:id="trainingModeButton" layoutX="422.0" layoutY="391.0" mnemonicParsing="false" prefWidth="200.0" styleClass="main-button" text="Training Mode" textAlignment="CENTER" />
+            <Button fx:id="sandboxModeButton" layoutX="422.0" layoutY="417.0" mnemonicParsing="false" prefWidth="200.0" styleClass="main-button" text="Sandbox Mode" textAlignment="CENTER" />
          </children></VBox>
    </center>
    <top>
@@ -27,7 +27,7 @@
                   <Image url="@../../resources/img/ui/logo.png" />
                </image>
             </ImageView>
-            <Text styleClass="title" strokeType="OUTSIDE" strokeWidth="0.0" text="MetaStone" BorderPane.alignment="CENTER" />
+            <Text cache="true" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="MetaStone" BorderPane.alignment="CENTER" />
          </children>
       </HBox>
    </top>
@@ -38,7 +38,7 @@
    <bottom>
       <HBox BorderPane.alignment="CENTER">
          <children>
-            <Label styleClass="name-small" fx:id="versionLabel" text="v0.8">
+            <Label fx:id="versionLabel" styleClass="name-small" text="v0.8">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

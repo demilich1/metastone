@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.paint.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
@@ -45,13 +46,13 @@
                 <Image url="@../../resources/img/common/attack_value_icon.png" />
               </image>
             </ImageView>
-            <Text styleClass="outlined-score" fx:id="attack" disable="false" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="LEFT" translateX="10.0" translateY="-4.0" StackPane.alignment="BOTTOM_LEFT" />
+                  <Group fx:id="attackAnchor" translateX="8.0" translateY="-3.0" StackPane.alignment="BOTTOM_LEFT" />
             <ImageView fitHeight="100.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" translateX="2.0" translateY="2.0" StackPane.alignment="BOTTOM_RIGHT">
               <image>
                 <Image url="@../../resources/img/common/health_value_icon.png" />
               </image>
             </ImageView>
-            <Text styleClass="outlined-score" fx:id="hp" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-8.0" translateY="-4.0" StackPane.alignment="BOTTOM_RIGHT" />
+                  <Group fx:id="hpAnchor" translateX="-6.0" translateY="-3.0" StackPane.alignment="BOTTOM_RIGHT" />
           </children>
         </StackPane>
             <Ellipse fx:id="divineShield" radiusX="30.0" radiusY="50.0" stroke="BLACK" strokeType="INSIDE" visible="false">

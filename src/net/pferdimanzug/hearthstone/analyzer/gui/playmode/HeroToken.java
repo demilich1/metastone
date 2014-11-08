@@ -1,12 +1,12 @@
 package net.pferdimanzug.hearthstone.analyzer.gui.playmode;
 
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
@@ -15,14 +15,14 @@ import net.pferdimanzug.hearthstone.analyzer.gui.IconFactory;
 public class HeroToken extends GameToken {
 
 	@FXML
-	private Text attackLabel;
+	private Group attackAnchor;
 	@FXML
-	private Text hpLabel;
+	private Group hpAnchor;
 	@FXML
 	private Label manaLabel;
 
 	@FXML
-	private Text armorLabel;
+	private Group armorAnchor;
 	@FXML
 	private ImageView armorIcon;
 
@@ -31,9 +31,9 @@ public class HeroToken extends GameToken {
 	@FXML
 	private Label weaponNameLabel;
 	@FXML
-	private Text weaponAttackLabel;
+	private Group weaponAttackAnchor;
 	@FXML
-	private Text weaponDurabilityLabel;
+	private Group weaponDurabilityAnchor;
 
 	@FXML
 	private ImageView portrait;
@@ -62,12 +62,12 @@ public class HeroToken extends GameToken {
 
 	public void setHero(Player player) {
 		Hero hero = player.getHero();
-		attackLabel.setText(String.valueOf(hero.getAttack()));
+		usePreRenderedDigits(attackAnchor, hero.getAttack());
 		Image portraitImage = new Image(IconFactory.getHeroIconUrl(hero));
 		portrait.setImage(portraitImage);
 		Image heroPowerImage = new Image(IconFactory.getHeroPowerIconUrl(hero.getHeroPower()));
 		heroPowerIcon.setImage(heroPowerImage);
-		hpLabel.setText(String.valueOf(hero.getHp()));
+		usePreRenderedDigits(hpAnchor, hero.getHp());
 		manaLabel.setText("Mana: " + player.getMana() + "/" + player.getMaxMana());
 		updateArmor(hero.getArmor());
 		updateWeapon(hero.getWeapon());
@@ -75,10 +75,10 @@ public class HeroToken extends GameToken {
 	}
 
 	private void updateArmor(int armor) {
-		armorLabel.setText(String.valueOf(armor));
+		usePreRenderedDigits(armorAnchor, armor);
 		boolean visible = armor > 0;
 		armorIcon.setVisible(visible);
-		armorLabel.setVisible(visible);
+		armorAnchor.setVisible(visible);
 	}
 
 	private void updateSecrets(Player player) {
@@ -95,8 +95,8 @@ public class HeroToken extends GameToken {
 		weaponPane.setVisible(hasWeapon);
 		if (hasWeapon) {
 			weaponNameLabel.setText(weapon.getName());
-			weaponAttackLabel.setText(String.valueOf(weapon.getWeaponDamage()));
-			weaponDurabilityLabel.setText(String.valueOf(weapon.getDurability()));
+			usePreRenderedDigits(weaponAttackAnchor, weapon.getWeaponDamage());
+			usePreRenderedDigits(weaponDurabilityAnchor, weapon.getDurability());
 		}
 	}
 

@@ -44,7 +44,7 @@ public class CardCollectionEditor extends SandboxEditor {
 		super("CardCollectionEditor.fxml");
 		this.listener = listener;
 		this.cardLimit = cardLimit;
-		
+
 		setTitle(title);
 
 		editableListView.setCellFactory(TextFieldListCell.forListView(new CardStringConverter()));
@@ -64,8 +64,8 @@ public class CardCollectionEditor extends SandboxEditor {
 	}
 
 	private void handleAddCardButton(ActionEvent actionEvent) {
-		for (Card card : catalogueListView.getSelectionModel().getSelectedItems()) {
-			editableListView.getItems().add(card.clone());
+		for (Card selectedCard : catalogueListView.getSelectionModel().getSelectedItems()) {
+			editableListView.getItems().add(selectedCard.clone());
 		}
 	}
 
@@ -89,7 +89,7 @@ public class CardCollectionEditor extends SandboxEditor {
 	}
 
 	private void handleRemoveCardButton(ActionEvent actionEvent) {
-		editableListView.getItems().removeAll(editableListView.getSelectionModel().getSelectedItems());
+		editableListView.getItems().remove(editableListView.getSelectionModel().getSelectedItem());
 	}
 
 	private void onFilterTextChanged(ObservableValue<? extends String> observable, String oldValue, String newValue) {

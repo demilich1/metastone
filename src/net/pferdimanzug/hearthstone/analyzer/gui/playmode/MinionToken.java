@@ -1,9 +1,10 @@
 package net.pferdimanzug.hearthstone.analyzer.gui.playmode;
 
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.text.Text;
+import javafx.scene.paint.Color;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
@@ -11,9 +12,9 @@ public class MinionToken extends GameToken {
 	@FXML
 	private Label name;
 	@FXML
-	private Text attack;
+	private Group attackAnchor;
 	@FXML
-	private Text hp;
+	private Group hpAnchor;
 	
 	@FXML
 	private Node defaultToken;
@@ -26,23 +27,21 @@ public class MinionToken extends GameToken {
 	@FXML
 	private Node deathrattle;
 	
-	private int cached;
-	
 	public MinionToken() {
 		super("MinionToken.fxml");
 	}
 
 	public void setMinion(Minion minion) {
-		int hash = minion.hashCode();
-		// minion did not change, we do not need to update this ui element
-		if (hash == cached) {
-			return;
-		}
 		name.setText(minion.getName());
-		setScoreValue(attack, minion.getAttack(), minion.getTagValue(GameTag.BASE_ATTACK));
-		setScoreValue(hp, minion.getHp(), minion.getTagValue(GameTag.BASE_HP));
+		setScoreValue(attackAnchor, minion.getAttack(), minion.getTagValue(GameTag.BASE_ATTACK));
+		Color color = Color.WHITE;
+		if (minion.getHp() < minion.getMaxHp()) {
+			color = Color.RED;
+		} else if (minion.getHp() > minion.getTagValue(GameTag.BASE_HP)) {
+			color = Color.GREEN;
+		}
+		usePreRenderedDigits(hpAnchor, minion.getHp(), color);
 		visualizeStatus(minion);
-		cached = hash;
 	}
 	
 	private void visualizeStatus(Minion minion) {

@@ -205,6 +205,7 @@ public class GameLogic implements Cloneable {
 		try {
 			Spell spell = spellFactory.getSpell(spellDesc);
 			spell.cast(context, player, spellDesc, targets);
+			System.out.println("Casting spell: " + spellDesc);
 		} catch (Exception e) {
 			Card pendingCard = (Card) context.getEnvironment().get(Environment.PENDING_CARD);
 			if (pendingCard instanceof SpellCard) {

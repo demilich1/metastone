@@ -9,7 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 
 public class ToolboxView extends ToolBar {
-
+	
 	private final PlayerPanel playerPanel;
 	private final CardPanel cardPanel;
 	private final MinionPanel minionPanel;
@@ -33,8 +33,6 @@ public class ToolboxView extends ToolBar {
 		getItems().add(new Separator());
 		minionPanel = new MinionPanel();
 		getItems().add(minionPanel);
-		
-		setCache(true);
 	}
 
 	public void onPlayerSelectionChanged(Player selectedPlayer) {

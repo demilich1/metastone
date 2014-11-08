@@ -9,6 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.SummonEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.TargetPlayer;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.MinionSummonedTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
@@ -37,6 +38,10 @@ public class Undertaker extends MinionCard {
 	}
 
 	private class MinionWithDeathRattleSummonedTrigger extends MinionSummonedTrigger {
+
+		public MinionWithDeathRattleSummonedTrigger() {
+			super(TargetPlayer.SELF);
+		}
 
 		@Override
 		public boolean fire(GameEvent event, Entity host) {

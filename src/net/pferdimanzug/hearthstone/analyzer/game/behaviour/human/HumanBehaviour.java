@@ -1,7 +1,9 @@
 package net.pferdimanzug.hearthstone.analyzer.game.behaviour.human;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import net.pferdimanzug.hearthstone.analyzer.AppConfig;
 import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
@@ -24,12 +26,15 @@ public class HumanBehaviour extends Behaviour implements IActionSelectionListene
 
 	@Override
 	public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
+		if (context.ignoreEvents()) {
+			return new ArrayList<Card>();
+		}
 		waitingForInput = true;
 		HumanMulliganOptions options = new HumanMulliganOptions(player, this, cards);
 		ApplicationFacade.getInstance().sendNotification(GameNotification.HUMAN_PROMPT_FOR_MULLIGAN, options);
 		while (waitingForInput) {
 			try {
-				Thread.sleep(100);
+				Thread.sleep(AppConfig.DEFAULT_SLEEP_DELAY);
 			} catch (InterruptedException e) {
 			}
 		}
@@ -49,7 +54,10 @@ public class HumanBehaviour extends Behaviour implements IActionSelectionListene
 		ApplicationFacade.getInstance().sendNotification(GameNotification.HUMAN_PROMPT_FOR_ACTION, options);
 		while (waitingForInput) {
 			try {
-				Thread.sleep(50);
+				Thread.sleep(AppConfig.DEFAULT_SLEEP_DELAY);
+				if (context.ignoreEvents()) {
+					return null;
+				}
 			} catch (InterruptedException e) {
 			}
 		}

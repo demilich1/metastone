@@ -6,13 +6,14 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellArg;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 
 public class TransformRandomMinionSpell extends TransformMinionSpell {
-	
+
 	public static SpellDesc create(MinionCard templateCard) {
-		SpellDesc desc = TransformMinionSpell.create(templateCard);
-		desc.setSpellClass(TransformRandomMinionSpell.class);
+		SpellDesc desc = new SpellDesc(TransformRandomMinionSpell.class);
+		desc.set(SpellArg.CARD, templateCard);
 		return desc;
 	}
 

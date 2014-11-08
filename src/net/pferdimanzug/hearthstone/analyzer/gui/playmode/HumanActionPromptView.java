@@ -88,13 +88,12 @@ public class HumanActionPromptView extends VBox {
 		setPadding(new Insets(8));
 		setAlignment(Pos.CENTER);
 		getChildren().add(headerLabel);
-
-		setVisible(false);
 	}
 
 	private Node createActionButton(final ActionGroup actionGroup, HumanActionOptions options) {
 		GameContext context = options.getContext();
 		Button button = new Button(getActionString(context, actionGroup.getPrototype()));
+		button.setStyle("-fx-font-size: 12px; -fx-padding: 4 8 4 8;");
 		button.setPrefWidth(200);
 		// only one action with no target selection or summon with no other
 		// minion on board

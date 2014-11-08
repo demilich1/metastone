@@ -40,7 +40,7 @@ public class GameContext implements Cloneable, IDisposable {
 	private final HashMap<Environment, Object> environment = new HashMap<>();
 	private final List<CardCostModifier> cardCostModifiers = new ArrayList<>();
 
-	protected int activePlayer;
+	protected int activePlayer = -1;
 	private Player winner;
 	private MatchResult result;
 	private TurnState turnState = TurnState.TURN_ENDED;
@@ -303,6 +303,9 @@ public class GameContext implements Cloneable, IDisposable {
 		}
 
 		GameAction nextAction = getActivePlayer().getBehaviour().requestAction(this, getActivePlayer(), getValidActions());
+		while(!acceptAction(nextAction)) {
+			nextAction = getActivePlayer().getBehaviour().requestAction(this, getActivePlayer(), getValidActions());
+		}
 		if (nextAction == null) {
 			throw new RuntimeException("Behaviour " + getActivePlayer().getBehaviour().getName() + " selected NULL action while "
 					+ getValidActions().size() + " actions were available");
@@ -315,7 +318,11 @@ public class GameContext implements Cloneable, IDisposable {
 			startTurn(activePlayer);
 		}
 	}
-
+	
+	protected boolean acceptAction(GameAction nextAction) {
+		return true;
+	}
+	
 	public void removeTriggersAssociatedWith(EntityReference entityReference) {
 		triggerManager.removeTriggersAssociatedWith(entityReference);
 	}

@@ -17,7 +17,7 @@ public class CreateNewSandboxCommand extends SimpleCommand<GameNotification> {
 
 	@Override
 	public void execute(INotification<GameNotification> notification) {
-		new Thread(new Runnable() {
+		Thread thread = new Thread(new Runnable() {
 
 			@Override
 			public void run() {
@@ -35,16 +35,19 @@ public class CreateNewSandboxCommand extends SimpleCommand<GameNotification> {
 				player2.setBehaviour(new DoNothingBehaviour());
 
 				GameContext sandbox = new GameContextVisualizable(player1, player2, new GameLogic());
-				sandbox.setIgnoreEvents(true);
-				sandbox.init();
 				sandboxProxy.setSandbox(sandbox);
 				sendNotification(GameNotification.UPDATE_SANDBOX_STATE, sandbox);
 				
 				player1.setBehaviour(player1Config.getBehaviour());
 				player2.setBehaviour(player2Config.getBehaviour());
+				sandbox.setIgnoreEvents(true);
+				sandbox.play();
 
 			}
-		}).start();
+		});
+		thread.setDaemon(true);
+		thread.setUncaughtExceptionHandler((t, exception) -> exception.printStackTrace()); 
+		thread.start();
 	}
 
 }

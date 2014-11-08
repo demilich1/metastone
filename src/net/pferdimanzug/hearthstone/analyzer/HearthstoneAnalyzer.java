@@ -1,16 +1,12 @@
 package net.pferdimanzug.hearthstone.analyzer;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Duration;
-
-import com.sun.javafx.perf.PerformanceTracker;
+import net.pferdimanzug.hearthstone.analyzer.gui.IconFactory;
 
 public class HearthstoneAnalyzer extends Application {
 
@@ -18,6 +14,7 @@ public class HearthstoneAnalyzer extends Application {
 		//DevCheckCardCompleteness.updateCardCatalogue();
 		//DevCheckCardCompleteness.writeImplementedCardsToFile("implemented_cards.csv");
 		launch(args);
+		
 		//DevCheckCardCompleteness.assignUniqueIdToEachCard();
 		 //new HearthstoneAnalyzer().launchDebugGame();
 	}
@@ -35,25 +32,11 @@ public class HearthstoneAnalyzer extends Application {
 		StackPane root = new StackPane();
 		root.setAlignment(Pos.CENTER);
 		Scene scene = new Scene(root);
+		scene.getStylesheets().add(IconFactory.class.getResource("main.css").toExternalForm());
 		primaryStage.setScene(scene);
 		facade.sendNotification(GameNotification.CANVAS_CREATED, root);
 		facade.sendNotification(GameNotification.MAIN_MENU);
 		primaryStage.show();
-		
-		enableFpsLogging(false, scene);
-	}
-	
-	private void enableFpsLogging(boolean enable, Scene scene) {
-		if (!enable) {
-			return;
-		}
-		PerformanceTracker tracker = PerformanceTracker.getSceneTracker(scene);
-		Timeline timeline = new Timeline(
-		   new KeyFrame(Duration.seconds(1), t -> {
-		      System.out.println("::FPS = " + tracker.getAverageFPS());
-		   }));
-		timeline.setCycleCount(Timeline.INDEFINITE);
-		timeline.play();
 	}
 
 }

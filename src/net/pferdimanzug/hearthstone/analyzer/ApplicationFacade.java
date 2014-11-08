@@ -21,6 +21,7 @@ import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.commands.PerformAct
 import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.commands.SelectPlayerCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.commands.SpawnMinionCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.commands.StartPlaySandboxCommand;
+import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.commands.StopPlaySandboxCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.simulationmode.SimulateGamesCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.trainingmode.PerformTrainingCommand;
 import de.pferdimanzug.nittygrittymvc.Facade;
@@ -63,6 +64,7 @@ public class ApplicationFacade extends Facade<GameNotification> {
 		registerCommand(GameNotification.SPAWN_MINION, new SpawnMinionCommand());
 		registerCommand(GameNotification.PERFORM_ACTION, new PerformActionCommand());
 		registerCommand(GameNotification.START_PLAY_SANDBOX, new StartPlaySandboxCommand());
+		registerCommand(GameNotification.STOP_PLAY_SANDBOX, new StopPlaySandboxCommand());
 
 		registerCommand(GameNotification.GAME_STATE_UPDATE, new AnimationLockCommand());
 		registerCommand(GameNotification.ANIMATION_STARTED, new AnimationStartedCommand());
