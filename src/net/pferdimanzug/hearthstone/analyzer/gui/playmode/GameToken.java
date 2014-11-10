@@ -81,7 +81,7 @@ public class GameToken extends BorderPane {
 		} else if (value < baseValue) {
 			color = Color.RED;
 		}
-		usePreRenderedDigits(group, value, color);
+		DigitFactory.showPreRenderedDigits(group, value, color);
 	}
 
 	public void showTargetMarker(EventHandler<MouseEvent> clickedHander) {
@@ -91,15 +91,6 @@ public class GameToken extends BorderPane {
 		targetButton.addEventHandler(MouseEvent.MOUSE_CLICKED, clickedHander);
 		targetButton.setVisible(true);
 		existingEventHandler = clickedHander;
-	}
-	
-	protected void usePreRenderedDigits(Group group, int number) {
-		usePreRenderedDigits(group, number, Color.WHITE);
-	}
-	
-	protected void usePreRenderedDigits(Group group, int number, Color color) {
-		group.getChildren().clear();
-		group.getChildren().add(DigitFactory.getCachedDigitImage(number, color));
 	}
 
 }

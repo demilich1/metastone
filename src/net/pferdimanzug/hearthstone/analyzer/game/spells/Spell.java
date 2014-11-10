@@ -17,7 +17,6 @@ public abstract class Spell {
 			return;
 		}
 		
-		Object pups = desc.get(SpellArg.ENTITY_FILTER);
 		@SuppressWarnings("unchecked")
 		Predicate<Entity> targetFilter = (Predicate<Entity>) desc.get(SpellArg.ENTITY_FILTER);
 		List<Entity> validTargets = SpellUtils.getValidTargets(targets, targetFilter);

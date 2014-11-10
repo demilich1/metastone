@@ -4,33 +4,34 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardType;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.gui.DigitFactory;
 import net.pferdimanzug.hearthstone.analyzer.gui.IconFactory;
 
 public class CardToken extends BorderPane {
 
 	@FXML
-	protected Text manaCostLabel;
+	protected Group manaCostAnchor;
 	@FXML
 	protected Label nameLabel;
 	@FXML
 	protected Label descriptionLabel;
 
 	@FXML
-	protected Text attackLabel;
+	protected Group attackAnchor;
 	@FXML
-	protected Text hpLabel;
+	protected Group hpAnchor;
 
 	@FXML
 	protected ImageView attackIcon;
@@ -72,19 +73,19 @@ public class CardToken extends BorderPane {
 		setRarity(card.getRarity());
 		if (context != null || player != null) {
 			int modifiedManaCost = context.getLogic().getModifiedManaCost(player, card);
-			setScoreValueLowerIsBetter(manaCostLabel, modifiedManaCost, card.getBaseManaCost());
+			setScoreValueLowerIsBetter(manaCostAnchor, modifiedManaCost, card.getBaseManaCost());
 		} else {
-			manaCostLabel.setText(String.valueOf(card.getBaseManaCost()));
+			setScoreValue(manaCostAnchor, card.getBaseManaCost());
 		}
 
 		boolean isMinionCard = card.getCardType() == CardType.MINION;
-		attackLabel.setVisible(isMinionCard);
-		hpLabel.setVisible(isMinionCard);
+		attackAnchor.setVisible(isMinionCard);
+		hpAnchor.setVisible(isMinionCard);
 		attackIcon.setVisible(isMinionCard);
 		hpIcon.setVisible(isMinionCard);
 		if (isMinionCard) {
-			setScoreValue(attackLabel, card.getTagValue(GameTag.BASE_ATTACK));
-			setScoreValue(hpLabel, card.getTagValue(GameTag.BASE_HP));
+			setScoreValue(attackAnchor, card.getTagValue(GameTag.BASE_ATTACK));
+			setScoreValue(hpAnchor, card.getTagValue(GameTag.BASE_HP));
 		}
 	}
 
@@ -94,30 +95,28 @@ public class CardToken extends BorderPane {
 		rarityGem.setRadius(rarity == Rarity.LEGENDARY ? baseRarityGemSize * 1.5 : baseRarityGemSize);
 	}
 
-	private void setScoreValue(Text label, int value) {
-		setScoreValue(label, value, value);
+	private void setScoreValue(Group group, int value) {
+		setScoreValue(group, value, value);
 	}
 
-	private void setScoreValue(Text label, int value, int baseValue) {
-		label.setText(String.valueOf(value));
+	private void setScoreValue(Group group, int value, int baseValue) {
+		Color color = Color.WHITE;
 		if (value > baseValue) {
-			label.setFill(Color.GREEN);
+			color = Color.GREEN;
 		} else if (value < baseValue) {
-			label.setFill(Color.RED);
-		} else {
-			label.setFill(Color.WHITE);
+			color = Color.RED;
 		}
+		DigitFactory.showPreRenderedDigits(group, value, color);
 	}
 
-	private void setScoreValueLowerIsBetter(Text label, int value, int baseValue) {
-		label.setText(String.valueOf(value));
+	private void setScoreValueLowerIsBetter(Group group, int value, int baseValue) {
+		Color color = Color.WHITE;
 		if (value < baseValue) {
-			label.setFill(Color.GREEN);
+			color = Color.GREEN;
 		} else if (value > baseValue) {
-			label.setFill(Color.RED);
-		} else {
-			label.setFill(Color.WHITE);
+			color = Color.RED;
 		}
+		DigitFactory.showPreRenderedDigits(group, value, color);
 	}
 
 }

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
@@ -62,7 +63,7 @@ public class DigitFactory {
 		stage.close();
 	}
 
-	public static Node getCachedDigitImage(int number, Color color) {
+	private static Node getCachedDigitImage(int number, Color color) {
 		String numberString = String.valueOf(number);
 		if (numberString.length() == 1) {
 			char digitToChar = Character.forDigit(number, 10);
@@ -89,5 +90,14 @@ public class DigitFactory {
 		image.setClip(new ImageView(image.getImage()));
 		image.setEffect(blend);
 		image.setCache(true);
+	}
+	
+	public static void showPreRenderedDigits(Group group, int number) {
+		showPreRenderedDigits(group, number, Color.WHITE);
+	}
+	
+	public static void showPreRenderedDigits(Group group, int number, Color color) {
+		group.getChildren().clear();
+		group.getChildren().add(DigitFactory.getCachedDigitImage(number, color));
 	}
 }

@@ -10,6 +10,7 @@ import javafx.scene.layout.StackPane;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
+import net.pferdimanzug.hearthstone.analyzer.gui.DigitFactory;
 import net.pferdimanzug.hearthstone.analyzer.gui.IconFactory;
 
 public class HeroToken extends GameToken {
@@ -62,12 +63,12 @@ public class HeroToken extends GameToken {
 
 	public void setHero(Player player) {
 		Hero hero = player.getHero();
-		usePreRenderedDigits(attackAnchor, hero.getAttack());
+		DigitFactory.showPreRenderedDigits(attackAnchor, hero.getAttack());
 		Image portraitImage = new Image(IconFactory.getHeroIconUrl(hero));
 		portrait.setImage(portraitImage);
 		Image heroPowerImage = new Image(IconFactory.getHeroPowerIconUrl(hero.getHeroPower()));
 		heroPowerIcon.setImage(heroPowerImage);
-		usePreRenderedDigits(hpAnchor, hero.getHp());
+		DigitFactory.showPreRenderedDigits(hpAnchor, hero.getHp());
 		manaLabel.setText("Mana: " + player.getMana() + "/" + player.getMaxMana());
 		updateArmor(hero.getArmor());
 		updateWeapon(hero.getWeapon());
@@ -75,7 +76,7 @@ public class HeroToken extends GameToken {
 	}
 
 	private void updateArmor(int armor) {
-		usePreRenderedDigits(armorAnchor, armor);
+		DigitFactory.showPreRenderedDigits(armorAnchor, armor);
 		boolean visible = armor > 0;
 		armorIcon.setVisible(visible);
 		armorAnchor.setVisible(visible);
@@ -95,8 +96,8 @@ public class HeroToken extends GameToken {
 		weaponPane.setVisible(hasWeapon);
 		if (hasWeapon) {
 			weaponNameLabel.setText(weapon.getName());
-			usePreRenderedDigits(weaponAttackAnchor, weapon.getWeaponDamage());
-			usePreRenderedDigits(weaponDurabilityAnchor, weapon.getDurability());
+			DigitFactory.showPreRenderedDigits(weaponAttackAnchor, weapon.getWeaponDamage());
+			DigitFactory.showPreRenderedDigits(weaponDurabilityAnchor, weapon.getDurability());
 		}
 	}
 

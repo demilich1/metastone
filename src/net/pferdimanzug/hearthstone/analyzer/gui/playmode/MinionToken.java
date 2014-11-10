@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.gui.DigitFactory;
 
 public class MinionToken extends GameToken {
 	@FXML
@@ -40,7 +41,7 @@ public class MinionToken extends GameToken {
 		} else if (minion.getHp() > minion.getTagValue(GameTag.BASE_HP)) {
 			color = Color.GREEN;
 		}
-		usePreRenderedDigits(hpAnchor, minion.getHp(), color);
+		DigitFactory.showPreRenderedDigits(hpAnchor, minion.getHp(), color);
 		visualizeStatus(minion);
 	}
 	

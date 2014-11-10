@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
@@ -9,7 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.*?>
 
-<fx:root styleClass="card-border" prefHeight="240.0" prefWidth="174.0" stylesheets="@../main.css" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="240.0" prefWidth="174.0" styleClass="card-border" stylesheets="@../main.css" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <bottom>
     <StackPane prefWidth="-1.0">
       <children>
@@ -23,9 +24,9 @@
             <Image url="@../../resources/img/common/health_value_icon.png" />
           </image>
         </ImageView>
-        <Text styleClass="outlined-score" fx:id="attackLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="4.0" StackPane.alignment="BOTTOM_LEFT" />
-        <Text styleClass="outlined-score" fx:id="hpLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="-4.0" StackPane.alignment="BOTTOM_RIGHT" />
-        <Label styleClass="race-label" fx:id="raceLabel" text="&lt;race&gt;" translateY="8.0">
+            <Group fx:id="attackAnchor" translateX="1.0" translateY="2.0" StackPane.alignment="BOTTOM_LEFT" />
+            <Group fx:id="hpAnchor" translateX="-1.0" translateY="2.0" StackPane.alignment="BOTTOM_RIGHT" />
+        <Label fx:id="raceLabel" styleClass="race-label" text="&lt;race&gt;" translateY="8.0">
           <font>
             <Font name="Arial Bold Italic" size="11.0" />
           </font>
@@ -37,8 +38,8 @@
   <center>
     <VBox alignment="TOP_CENTER" prefHeight="-1.0" prefWidth="-1.0" spacing="16.0" BorderPane.alignment="CENTER">
       <children>
-        <Label styleClass="name-big" fx:id="nameLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="150.0" text="&lt;card name&gt;" textAlignment="CENTER" wrapText="true" />
-        <Label styleClass="tooltip-description" fx:id="descriptionLabel" alignment="CENTER" maxWidth="150.0" text="&lt;card description&gt;" textAlignment="CENTER" wrapText="true">
+        <Label fx:id="nameLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="150.0" styleClass="name-big" text="&lt;card name&gt;" textAlignment="CENTER" wrapText="true" />
+        <Label fx:id="descriptionLabel" alignment="CENTER" maxWidth="150.0" styleClass="tooltip-description" text="&lt;card description&gt;" textAlignment="CENTER" wrapText="true">
           <font>
             <Font name="Arial Bold" size="13.0" />
           </font>
@@ -54,7 +55,7 @@
             <Image url="@../../resources/img/common/mana_crystal.png" />
           </image>
         </ImageView>
-        <Text styleClass="outlined-score" fx:id="manaCostLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="0" translateX="4.0" StackPane.alignment="TOP_LEFT" />
+            <Group fx:id="manaCostAnchor" translateY="-4.0" StackPane.alignment="TOP_LEFT" />
       </children>
     </StackPane>
   </top>
