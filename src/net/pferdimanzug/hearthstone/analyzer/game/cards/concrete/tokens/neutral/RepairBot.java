@@ -4,7 +4,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.HealRandomSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.HealingSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnEndTrigger;
@@ -15,6 +16,7 @@ public class RepairBot extends MinionCard {
 	public RepairBot() {
 		super("Repair Bot", 0, 3, Rarity.FREE, HeroClass.ANY, 1);
 		setDescription("At the end of your turn, restore 6 Health to a damaged character.");
+		setRace(Race.MECH);
 
 		setCollectible(false);
 	}
@@ -27,7 +29,7 @@ public class RepairBot extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion repairBot = createMinion();
-		SpellDesc healRandomSpell = HealRandomSpell.create(6);
+		SpellDesc healRandomSpell = HealingSpell.createWithRandomTarget(6);
 		healRandomSpell.setTarget(EntityReference.ALL_CHARACTERS);
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), healRandomSpell);
 		repairBot.setSpellTrigger(trigger);

@@ -79,10 +79,6 @@ public abstract class Actor extends Entity {
 		return (List<SpellDesc>) getTag(GameTag.DEATHRATTLES);
 	}
 
-	public Spell getEnrageSpell() {
-		return (Spell) getTag(GameTag.ENRAGE_SPELL);
-	}
-
 	public int getHp() {
 		return getTagValue(GameTag.HP);
 	}

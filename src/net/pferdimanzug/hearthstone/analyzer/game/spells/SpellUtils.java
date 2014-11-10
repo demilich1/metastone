@@ -1,11 +1,16 @@
 package net.pferdimanzug.hearthstone.analyzer.game.spells;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 
 public class SpellUtils {
 
@@ -22,6 +27,25 @@ public class SpellUtils {
 	public static <T> T getRandomTarget(List<T> targets) {
 		int randomIndex = ThreadLocalRandom.current().nextInt(targets.size());
 		return targets.get(randomIndex);
+	}
+	
+	public static List<Actor> getValidRandomTargets(List<Entity> targets) {
+		List<Actor> validTargets = new ArrayList<Actor>();
+		for (Entity entity : targets) {
+			Actor actor = (Actor) entity;
+			if (!actor.isDead() || actor.getEntityType() == EntityType.HERO) {
+				validTargets.add(actor);
+			}
+
+		}
+		return validTargets;
+	}
+	
+	public static List<Entity> getValidTargets(List<Entity> allTargets, Predicate<Entity> filter) {
+		if (filter == null) {
+			return allTargets;
+		}
+		return allTargets.stream().filter(filter).collect(Collectors.<Entity> toList());
 	}
 
 	private SpellUtils() {

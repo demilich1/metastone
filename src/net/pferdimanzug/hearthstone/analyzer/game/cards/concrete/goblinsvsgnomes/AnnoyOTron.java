@@ -1,27 +1,24 @@
-package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.neutral;
+package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 
-public class MechanicalDragonling extends MinionCard {
+public class AnnoyOTron extends MinionCard {
 
-	public MechanicalDragonling() {
-		super("Mechanical Dragonling", 2, 1, Rarity.FREE, HeroClass.ANY, 1);
+	public AnnoyOTron() {
+		super("Annoy-o-Tron", 1, 2, Rarity.COMMON, HeroClass.ANY, 2);
+		setDescription("Taunt. Divine Shield");
+		
 		setRace(Race.MECH);
-
-		setCollectible(false);
-	}
-
-	@Override
-	public int getTypeId() {
-		return 445;
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion();
+		return createMinion(GameTag.TAUNT, GameTag.DIVINE_SHIELD);
 	}
+
 }

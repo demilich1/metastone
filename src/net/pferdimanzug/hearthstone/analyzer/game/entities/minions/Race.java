@@ -7,5 +7,6 @@ public enum Race {
 	PIRATE,
 	DEMON,
 	DRAGON,
-	TOTEM
+	TOTEM,
+	MECH
 }

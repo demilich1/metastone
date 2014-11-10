@@ -106,6 +106,10 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas.Voidc
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas.WailingSoul;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas.Webspinner;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas.ZombieChow;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas.tokens.Nerubian;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas.tokens.Slime;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas.tokens.SpectralSpider;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas.tokens.Thaddius;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.*;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.AldorPeacekeeper;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.ArgentProtector;
@@ -221,10 +225,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.hunter.S
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.mage.MirrorImageToken;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.mage.Sheep;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.mage.SpellbenderToken;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.naxxramas.Nerubian;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.naxxramas.Slime;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.naxxramas.SpectralSpider;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.naxxramas.Thaddius;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.neutral.BaineBloodhoof;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.neutral.Boar;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.neutral.Chicken;

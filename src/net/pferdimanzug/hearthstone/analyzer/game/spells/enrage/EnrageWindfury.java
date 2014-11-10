@@ -5,13 +5,16 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.WindfurySpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellArg;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.RemoveWindfurySpell;
 
 public class EnrageWindfury extends Enrage {
-
-	public EnrageWindfury(int attackBonus) {
-		super(attackBonus);
+	
+	public static SpellDesc create(int attackBonus) {
+		SpellDesc desc = new SpellDesc(EnrageWindfury.class);
+		desc.set(SpellArg.ATTACK_BONUS, attackBonus);
+		return desc;
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
+package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
@@ -6,27 +6,25 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 
-public class MoltenGiant extends MinionCard {
+public class ClockworkGiant extends MinionCard {
 
-	public MoltenGiant() {
-		super("Molten Giant", 8, 8, Rarity.EPIC, HeroClass.ANY, 20);
-		setDescription("Costs (1) less for each damage your hero has taken.");
+	public ClockworkGiant() {
+		super("Clockwork Giant", 8, 8, Rarity.EPIC, HeroClass.ANY, 12);
+		setDescription("Costs (1) less Mana for each card in your opponent's hand.");
+		setRace(Race.MECH);
 	}
-
+	
 	@Override
 	public int getManaCost(GameContext context, Player player) {
-		int hpDiff = player.getHero().getMaxHp() - player.getHero().getHp();
-		return super.getManaCost(context, player) - hpDiff;
-	}
-
-	@Override
-	public int getTypeId() {
-		return 168;
+		Player opponent = context.getOpponent(player);
+		return super.getManaCost(context, player) - opponent.getHand().getCount();
 	}
 
 	@Override
 	public Minion summon() {
 		return createMinion();
 	}
+
 }

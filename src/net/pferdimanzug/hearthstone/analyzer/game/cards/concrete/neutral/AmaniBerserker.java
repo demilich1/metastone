@@ -8,7 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.enrage.Enrage;
 
 public class AmaniBerserker extends MinionCard {
-	
+
 	public static final int BASE_ATTACK = 2;
 	public static final int ENRAGE_ATTACK_BONUS = 3;
 
@@ -22,12 +22,10 @@ public class AmaniBerserker extends MinionCard {
 		return 82;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion amaniBerserker = createMinion();
-		amaniBerserker.setTag(GameTag.ENRAGE_SPELL, new Enrage(ENRAGE_ATTACK_BONUS));
+		amaniBerserker.setTag(GameTag.ENRAGE_SPELL, Enrage.create(ENRAGE_ATTACK_BONUS));
 		return amaniBerserker;
 	}
 }

@@ -19,12 +19,10 @@ public class TaurenWarrior extends MinionCard {
 		return 214;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion taurenWarrior = createMinion(GameTag.TAUNT);
-		taurenWarrior.setTag(GameTag.ENRAGE_SPELL, new Enrage(3));
+		taurenWarrior.setTag(GameTag.ENRAGE_SPELL, Enrage.create(3));
 		return taurenWarrior;
 	}
 }

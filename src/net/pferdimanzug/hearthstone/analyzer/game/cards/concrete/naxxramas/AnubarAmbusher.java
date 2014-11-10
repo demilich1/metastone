@@ -4,7 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.ReturnRandomMinionToHandSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.ReturnMinionToHandSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
@@ -23,7 +23,8 @@ public class AnubarAmbusher extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion anubarAmbusher = createMinion();
-		SpellDesc deathrattle = ReturnRandomMinionToHandSpell.create();
+		SpellDesc deathrattle = ReturnMinionToHandSpell.create();
+		deathrattle.pickRandomTarget(true);
 		deathrattle.setTarget(EntityReference.FRIENDLY_MINIONS);
 		anubarAmbusher.addDeathrattle(deathrattle);
 		return anubarAmbusher;

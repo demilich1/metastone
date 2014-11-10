@@ -19,12 +19,10 @@ public class GrommashHellscream extends MinionCard {
 		return 372;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion grommashHellscream = createMinion(GameTag.CHARGE);
-		grommashHellscream.setTag(GameTag.ENRAGE_SPELL, new Enrage(6));
+		grommashHellscream.setTag(GameTag.ENRAGE_SPELL, Enrage.create(6));
 		return grommashHellscream;
 	}
 }

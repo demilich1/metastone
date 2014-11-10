@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroyRandomSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroySpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
@@ -28,7 +28,9 @@ public class StampedingKodo extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion stampedingKodo = createMinion();
-		SpellDesc destroySpell = DestroyRandomSpell.create(entity -> ((Minion) entity).getAttack() <= 2);
+		SpellDesc destroySpell = DestroySpell.create();
+		destroySpell.pickRandomTarget(true);
+		destroySpell.setTargetFilter(entity -> ((Minion) entity).getAttack() <= 2);
 		destroySpell.setTarget(EntityReference.ENEMY_MINIONS);
 		Battlecry battlecry = Battlecry.createBattlecry(destroySpell);
 		stampedingKodo.setBattlecry(battlecry);

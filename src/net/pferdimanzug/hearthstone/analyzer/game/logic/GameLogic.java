@@ -581,9 +581,10 @@ public class GameLogic implements Cloneable {
 			entity.removeTag(GameTag.ENRAGED);
 		}
 
-		Spell enrageSpell = (Spell) entity.getTag(GameTag.ENRAGE_SPELL);
+		SpellDesc enrageSpell = (SpellDesc) entity.getTag(GameTag.ENRAGE_SPELL);
+		enrageSpell.setTarget(entity.getReference());
 		Player owner = context.getPlayer(entity.getOwner());
-		enrageSpell.cast(context, owner, null, toList(entity));
+		castSpell(owner.getId(), enrageSpell);
 	}
 
 	private boolean hasTag(Player player, GameTag tag) {
@@ -1042,12 +1043,6 @@ public class GameLogic implements Cloneable {
 
 		context.getSummonStack().pop();
 		context.fireGameEvent(new BoardChangedEvent(context));
-	}
-
-	private List<Entity> toList(Actor entity) {
-		List<Entity> list = new ArrayList<>(1);
-		list.add(entity);
-		return list;
 	}
 
 	public void useHeroPower(int playerId) {

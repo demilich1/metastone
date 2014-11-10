@@ -12,5 +12,12 @@ public class DebugContext extends GameContext {
 	public void setActivePlayer(int playerId) {
 		this.activePlayer = playerId;
 	}
+	
+	@Override
+	public void init() {
+		activePlayer = getPlayer(PLAYER_1).getId();
+		getLogic().init(activePlayer, true);
+		getLogic().init(getOpponent(getActivePlayer()).getId(), false);
+	}
 
 }

@@ -36,8 +36,7 @@ public class TestBase {
 		GameLogic logic = new GameLogic();
 		DebugContext context = new DebugContext(player1, player2, logic);
 		logic.setContext(context);
-		logic.init(GameContext.PLAYER_1, true);
-		logic.init(GameContext.PLAYER_2, false);
+		context.init();
 		return context;
 	}
 	

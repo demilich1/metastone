@@ -4,6 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.TransformRandomMinionSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
@@ -15,6 +16,7 @@ public class Poultryizer extends MinionCard {
 	public Poultryizer() {
 		super("Poultryizer", 0, 3, Rarity.FREE, HeroClass.ANY, 1);
 		setDescription("At the start of your turn, transform a random minion into a 1/1 Chicken.");
+		setRace(Race.MECH);
 
 		setCollectible(false);
 	}

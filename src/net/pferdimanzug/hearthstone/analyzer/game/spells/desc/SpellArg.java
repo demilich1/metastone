@@ -37,5 +37,6 @@ public enum SpellArg {
 	RACE,
 	CARD,
 	CARDS,
-	ENTITY
+	ENTITY,
+	RANDOM_TARGET
 }

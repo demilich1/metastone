@@ -1,25 +1,26 @@
-package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.naxxramas;
+package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas.tokens;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
-public class Thaddius extends MinionCard {
+public class Slime extends MinionCard {
 
-	public Thaddius() {
-		super("Thaddius", 11, 11, Rarity.LEGENDARY, HeroClass.ANY, 10);
+	public Slime() {
+		super("Slime", 1, 2, Rarity.COMMON, HeroClass.ANY, 1);
 
 		setCollectible(false);
 	}
 
 	@Override
 	public int getTypeId() {
-		return 410;
+		return 430;
 	}
 
 	@Override
 	public Minion summon() {
-		return createMinion();
+		return createMinion(GameTag.TAUNT);
 	}
 }

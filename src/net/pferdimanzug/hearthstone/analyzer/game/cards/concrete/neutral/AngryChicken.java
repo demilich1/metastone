@@ -21,12 +21,10 @@ public class AngryChicken extends MinionCard {
 		return 86;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion angryChicken = createMinion();
-		angryChicken.setTag(GameTag.ENRAGE_SPELL, new Enrage(5));
+		angryChicken.setTag(GameTag.ENRAGE_SPELL, Enrage.create(5));
 		return angryChicken;
 	}
 }

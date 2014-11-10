@@ -22,7 +22,7 @@ public class RagingWorgen extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion ragingWorgen = createMinion();
-		ragingWorgen.setTag(GameTag.ENRAGE_SPELL, new EnrageWindfury(1));
+		ragingWorgen.setTag(GameTag.ENRAGE_SPELL, EnrageWindfury.create(1));
 		return ragingWorgen;
 	}
 }

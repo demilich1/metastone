@@ -19,12 +19,10 @@ public class SpitefulSmith extends MinionCard {
 		return 204;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion spitefulSmith = createMinion();
-		spitefulSmith.setTag(GameTag.ENRAGE_SPELL, new EnrageBuffWeapon(2));
+		spitefulSmith.setTag(GameTag.ENRAGE_SPELL, EnrageBuffWeapon.create(2));
 		return spitefulSmith;
 	}
 }

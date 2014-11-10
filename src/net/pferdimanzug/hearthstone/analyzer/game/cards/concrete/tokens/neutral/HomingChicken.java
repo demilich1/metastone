@@ -4,6 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroySpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DrawCardSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
@@ -17,6 +18,7 @@ public class HomingChicken extends MinionCard {
 	public HomingChicken() {
 		super("Homing Chicken", 0, 1, Rarity.FREE, HeroClass.ANY, 1);
 		setDescription("At the start of your turn, destroy this minion and draw 3 cards.");
+		setRace(Race.MECH);
 
 		setCollectible(false);
 	}

@@ -1,7 +1,9 @@
 package net.pferdimanzug.hearthstone.analyzer.game.spells.desc;
 
 import java.util.HashMap;
+import java.util.function.Predicate;
 
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.CustomCloneable;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.IValueProvider;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
@@ -44,6 +46,10 @@ public class SpellDesc extends CustomCloneable {
 
 	public int getInt(SpellArg spellArg) {
 		return arguments.containsKey(spellArg) ? (int) get(spellArg) : 0;
+	}
+	
+	public boolean getBool(SpellArg spellArg) {
+		return arguments.containsKey(spellArg) ? (boolean) get(spellArg) : false;
 	}
 
 	public SpellSource getSource() {
@@ -104,6 +110,14 @@ public class SpellDesc extends CustomCloneable {
 
 	public void setValueProvider(IValueProvider valueProvider) {
 		set(SpellArg.TARGET_PLAYER, valueProvider);
+	}
+	
+	public void setTargetFilter(Predicate<Entity> targetFilter) {
+		set(SpellArg.ENTITY_FILTER, targetFilter);
+	}
+	
+	public void pickRandomTarget(boolean randomTarget) {
+		set(SpellArg.RANDOM_TARGET, randomTarget);
 	}
 
 	@Override
