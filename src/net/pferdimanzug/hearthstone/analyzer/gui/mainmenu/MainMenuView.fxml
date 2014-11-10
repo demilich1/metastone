@@ -38,7 +38,7 @@
    <bottom>
       <HBox BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="versionLabel" styleClass="name-small" text="v0.8">
+            <Label fx:id="versionLabel" styleClass="info-small" text="x.x.x">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

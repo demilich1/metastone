@@ -35,7 +35,7 @@ public class CardCollection implements Iterable<Card>, Cloneable {
 		for (Card card : cards) {
 			clone.add(card.clone());
 		}
-		
+
 		return clone;
 	}
 
@@ -57,7 +57,7 @@ public class CardCollection implements Iterable<Card>, Cloneable {
 		}
 		return cards.get(ThreadLocalRandom.current().nextInt(cards.size()));
 	}
-	
+
 	public Card getRandomOfType(CardType cardType) {
 		List<Card> relevantCards = new ArrayList<>();
 		for (Card card : cards) {
@@ -79,7 +79,7 @@ public class CardCollection implements Iterable<Card>, Cloneable {
 		}
 		return false;
 	}
-	
+
 	public boolean isEmpty() {
 		return cards.isEmpty();
 	}
@@ -108,7 +108,7 @@ public class CardCollection implements Iterable<Card>, Cloneable {
 	public void shuffle() {
 		Collections.shuffle(cards);
 	}
-	
+
 	public void sortByManaCost() {
 		Comparator<Card> manaComparator = new Comparator<Card>() {
 
@@ -121,7 +121,11 @@ public class CardCollection implements Iterable<Card>, Cloneable {
 		};
 		cards.sort(manaComparator);
 	}
-	
+
+	public void sortByName() {
+		cards.sort((card1, card2) -> card1.getName().compareTo(card2.getName()));
+	}
+
 	public List<Card> toList() {
 		return new ArrayList<>(cards);
 	}

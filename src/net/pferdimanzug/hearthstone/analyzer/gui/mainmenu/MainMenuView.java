@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import net.pferdimanzug.hearthstone.analyzer.AppConfig;
 import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 
@@ -57,6 +58,8 @@ public class MainMenuView extends BorderPane {
 		
 		trainingModeButton.setVisible(false);
 		trainingModeButton.setManaged(false);
+		
+		versionLabel.setText(AppConfig.VERSION);
 	}
 
 }

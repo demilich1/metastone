@@ -26,7 +26,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Starfire;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Swipe;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.WildGrowth;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Wrath;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes.MekgineerThermaplugg;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.AnimalCompanion;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.ArcaneShot;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.BestialWrath;
@@ -359,7 +358,7 @@ public class CardCatalogue {
 	public static CardCollection query(CardType cardType, Rarity rarity, HeroClass heroClass) {
 		return query(cardType, rarity, heroClass, null);
 	}
-	
+
 	public static CardCollection query(CardType cardType, Rarity rarity, HeroClass heroClass, GameTag tag) {
 		CardCollection result = new CardCollection();
 		for (Card card : cards) {
@@ -865,5 +864,7 @@ public class CardCatalogue {
 		cards.add(new Upgrade());
 		cards.add(new WarsongCommander());
 		cards.add(new Whirlwind());
+
+		cards.sortByName();
 	}
 }

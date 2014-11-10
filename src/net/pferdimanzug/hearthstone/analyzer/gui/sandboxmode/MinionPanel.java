@@ -85,7 +85,7 @@ public class MinionPanel extends VBox {
 			MinionCard minionCard = (MinionCard) card;
 			data.add(minionCard);
 		}
-		data.sort((card1, card2) -> card1.getName().compareTo(card2.getName()));
+		
 		minionComboBox.setItems(data);
 		minionComboBox.getSelectionModel().selectFirst();
 

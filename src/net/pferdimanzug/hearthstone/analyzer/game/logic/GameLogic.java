@@ -852,6 +852,8 @@ public class GameLogic implements Cloneable {
 			attacks = 0;
 		} else if (entity.hasStatus(GameTag.WINDFURY)) {
 			attacks = 2;
+		} else if (entity.hasStatus(GameTag.MEGA_WINDFURY)) {
+			attacks = 4;
 		}
 		entity.setTag(GameTag.NUMBER_OF_ATTACKS, attacks);
 	}

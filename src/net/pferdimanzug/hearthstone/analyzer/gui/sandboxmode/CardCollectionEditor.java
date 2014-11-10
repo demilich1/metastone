@@ -103,7 +103,6 @@ public class CardCollectionEditor extends SandboxEditor {
 				data.add(card);
 			}
 		}
-		data.sort((card1, card2) -> card1.getName().compareTo(card2.getName()));
 		catalogueListView.setItems(data);
 	}
 

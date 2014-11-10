@@ -7,6 +7,7 @@ public enum SpellArg {
 	MIN_DAMAGE,
 	MAX_DAMAGE,
 	HEALING,
+	POWER,
 	TARGET,
 	SOURCE_ENTITY,
 	SPELL_SOURCE,
