@@ -84,7 +84,6 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 						e.printStackTrace();
 					}
 				}
-				
 
 				result.calculateMetaStatistics();
 				getFacade().sendNotification(GameNotification.SIMULATION_RESULT, result);

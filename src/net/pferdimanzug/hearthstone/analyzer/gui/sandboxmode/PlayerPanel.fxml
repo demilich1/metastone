@@ -9,17 +9,17 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root styleClass="panel" spacing="4.0" stylesheets="@../main.css" type="VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root spacing="4.0" styleClass="panel" stylesheets="@../main.css" type="VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label styleClass="info-small" text="Player" />
-      <Label styleClass="info-small" layoutX="10.0" layoutY="41.0" text="Select player:" />
+      <Label layoutX="10.0" layoutY="41.0" styleClass="info-small" text="Select player:" />
       <ComboBox fx:id="playerComboBox" prefWidth="200.0" />
       <HBox alignment="CENTER_LEFT" spacing="8.0">
          <children>
             <Label text="Mana:" />
-            <ComboBox fx:id="currentManaBox" prefWidth="50.0" />
+            <ComboBox fx:id="currentManaBox" prefWidth="60.0" />
             <Label layoutX="10.0" layoutY="10.0" text="/" />
-            <ComboBox fx:id="maxManaBox" layoutX="51.0" layoutY="10.0" prefWidth="50.0" />
+            <ComboBox fx:id="maxManaBox" layoutX="51.0" layoutY="10.0" prefWidth="60.0" />
          </children>
          <opaqueInsets>
             <Insets />

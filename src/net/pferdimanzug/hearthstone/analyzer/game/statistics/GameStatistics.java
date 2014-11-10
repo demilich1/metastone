@@ -8,12 +8,12 @@ public class GameStatistics implements Cloneable {
 
 	private final HashMap<Statistic, Object> stats = new HashMap<Statistic, Object>();
 
-	private void add(Statistic key, int value) {
+	private void add(Statistic key, long value) {
 		if (!stats.containsKey(key)) {
-			stats.put(key, 0);
+			stats.put(key, 0L);
 		}
-		int oldValue = getInt(key);
-		stats.put(key, oldValue + value);
+		long newValue = getLong(key) + value;
+		stats.put(key, newValue);
 	}
 
 	public void armorGained(int armor) {
@@ -76,8 +76,8 @@ public class GameStatistics implements Cloneable {
 		return stats.get(key);
 	}
 
-	public int getInt(Statistic key) {
-		return stats.containsKey(key) ? (int) stats.get(key) : 0;
+	public long getLong(Statistic key) {
+		return stats.containsKey(key) ? (long) stats.get(key) : 0L;
 	}
 	
 	public void heal(int healing) {
@@ -92,8 +92,8 @@ public class GameStatistics implements Cloneable {
 		for (Statistic stat : otherStatistics.stats.keySet()) {
 			Object value = get(stat);
 			if (value != null) {
-				if (value instanceof Integer) {
-					add(stat, (int) otherStatistics.stats.get(stat));
+				if (value instanceof Long) {
+					add(stat, otherStatistics.getLong(stat));
 				}
 			} else {
 				stats.put(stat, otherStatistics.get(stat));

@@ -26,6 +26,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Starfire;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Swipe;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.WildGrowth;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Wrath;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes.MekgineerThermaplugg;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.AnimalCompanion;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.ArcaneShot;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.BestialWrath;

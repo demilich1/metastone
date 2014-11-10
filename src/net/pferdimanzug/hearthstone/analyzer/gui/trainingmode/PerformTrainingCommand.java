@@ -76,7 +76,7 @@ public class PerformTrainingCommand extends SimpleCommand<GameNotification> {
 	private void onGameComplete(TrainingConfig config, GameContext completedGame) {
 		gamesCompleted++;
 		
-		gamesWon += completedGame.getPlayer1().getStatistics().getInt(Statistic.GAMES_WON);
+		gamesWon += completedGame.getPlayer1().getStatistics().getLong(Statistic.GAMES_WON);
 		TrainingProgressReport progress = new TrainingProgressReport(gamesCompleted, config.getNumberOfGames(), gamesWon);
 		Notification<GameNotification> updateNotification = new Notification<>(GameNotification.TRAINING_PROGRESS_UPDATE, progress);
 		getFacade().notifyObservers(updateNotification);

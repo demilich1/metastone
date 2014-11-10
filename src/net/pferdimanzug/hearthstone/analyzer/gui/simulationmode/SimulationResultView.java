@@ -1,6 +1,8 @@
 package net.pferdimanzug.hearthstone.analyzer.gui.simulationmode;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -76,6 +78,8 @@ public class SimulationResultView extends BorderPane {
 
 	private PlayerInfoView player2InfoView;
 
+	private final NumberFormat formatter = DecimalFormat.getInstance();
+
 	public SimulationResultView() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SimulationResultView.fxml"));
 		fxmlLoader.setRoot(this);
@@ -93,11 +97,18 @@ public class SimulationResultView extends BorderPane {
 		infoArea.setLeft(player1InfoView);
 		player2InfoView = new PlayerInfoView();
 		infoArea.setRight(player2InfoView);
+
+		formatter.setMinimumFractionDigits(0);
+		formatter.setMaximumFractionDigits(2);
 	}
 
 	private String getStatString(Statistic stat, GameStatistics playerStatistics) {
 		if (playerStatistics.contains(stat)) {
-			return String.valueOf(playerStatistics.get(stat));
+			Object statValue = playerStatistics.get(stat);
+			if (statValue instanceof Number) {
+				return formatter.format(playerStatistics.get(stat));
+			}
+			return statValue.toString();
 		}
 		return "-";
 	}
@@ -107,7 +118,7 @@ public class SimulationResultView extends BorderPane {
 			Object statValue = playerStatistics.get(stat);
 			if (statValue instanceof Number) {
 				double value = ((Number) statValue).doubleValue();
-				return String.valueOf(value / numberOfGames);
+				return formatter.format(value / numberOfGames);
 			}
 
 		}
@@ -142,7 +153,7 @@ public class SimulationResultView extends BorderPane {
 		absoluteResultTable.getColumns().get(0).setCellValueFactory(new PropertyValueFactory("statName"));
 		absoluteResultTable.getColumns().get(1).setCellValueFactory(new PropertyValueFactory("player1Value"));
 		absoluteResultTable.getColumns().get(2).setCellValueFactory(new PropertyValueFactory("player2Value"));
-		
+
 		averageResultTable.setItems(averageStatEntries);
 
 		averageResultTable.getColumns().get(0).setCellValueFactory(new PropertyValueFactory("statName"));

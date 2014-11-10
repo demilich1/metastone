@@ -92,6 +92,7 @@ public class PlayerPanel extends VBox {
 		for (int i = 0; i <= selectedPlayer.getMaxMana(); i++) {
 			currentManaBox.getItems().add(i);
 		}
+		currentManaBox.autosize();
 		maxManaBox.getItems().clear();
 		for (int i = 0; i <= GameLogic.MAX_MANA; i++) {
 			maxManaBox.getItems().add(i);

@@ -179,8 +179,7 @@ public class GameLogic implements Cloneable {
 		// target can only be changed when there is one target
 		// note: this code block is basically exclusively for the SpellBender
 		// Secret, but it can easily be expanded if targets of area of effect
-		// spell
-		// should be changeable as well
+		// spell should be changeable as well
 		if (spellDesc.getSource() == SpellSource.SPELL_CARD && !spellDesc.hasPredefinedTarget() && targets != null && targets.size() == 1) {
 			Card pendingCard = (Card) context.getEnvironment().get(Environment.PENDING_CARD);
 			if (pendingCard instanceof SpellCard) {
@@ -193,9 +192,6 @@ public class GameLogic implements Cloneable {
 				if (targetOverride != null && targetOverride.getId() != IdFactory.UNASSIGNED) {
 					targets.remove(0);
 					targets.add(targetOverride);
-					if (targets.get(0).getReference().getId() == 0) {
-						logger.error("SPellbender minion id is ZERO!!!");
-					}
 					spellDesc.setTarget(targets.get(0).getReference());
 					log("Target for spell {} has been changed! New target {}", sourceCard, targets.get(0));
 				}
@@ -205,7 +201,6 @@ public class GameLogic implements Cloneable {
 		try {
 			Spell spell = spellFactory.getSpell(spellDesc);
 			spell.cast(context, player, spellDesc, targets);
-			System.out.println("Casting spell: " + spellDesc);
 		} catch (Exception e) {
 			Card pendingCard = (Card) context.getEnvironment().get(Environment.PENDING_CARD);
 			if (pendingCard instanceof SpellCard) {
