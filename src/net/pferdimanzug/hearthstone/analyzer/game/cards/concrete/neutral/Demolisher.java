@@ -4,6 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageRandomSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
@@ -15,6 +16,7 @@ public class Demolisher extends MinionCard {
 	public Demolisher() {
 		super("Demolisher", 1, 4, Rarity.RARE, HeroClass.ANY, 3);
 		setDescription("At the start of your turn, deal 2 damage to a random enemy.");
+		setRace(Race.MECH);
 	}
 
 	@Override

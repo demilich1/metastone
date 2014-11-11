@@ -29,6 +29,9 @@ public class MainMenuView extends BorderPane {
 	private Button trainingModeButton;
 	
 	@FXML
+	private Button battleOfDecksButton;
+	
+	@FXML
 	private Label versionLabel;
 
 	public MainMenuView() {
@@ -55,6 +58,9 @@ public class MainMenuView extends BorderPane {
 		
 		trainingModeButton.setOnAction(event -> ApplicationFacade.getInstance().sendNotification(
 				GameNotification.TRAINING_MODE_SELECTED));
+		
+		battleOfDecksButton.setOnAction(event -> ApplicationFacade.getInstance().sendNotification(
+				GameNotification.BATTLE_OF_DECKS_SELECTED));
 		
 		trainingModeButton.setVisible(false);
 		trainingModeButton.setManaged(false);

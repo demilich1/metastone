@@ -7,6 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.custom.AlarmOBotSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
@@ -19,6 +20,7 @@ public class AlarmOBot extends MinionCard {
 	public AlarmOBot() {
 		super("Alarm-o-bot", 0, 3, Rarity.RARE, HeroClass.ANY, 3);
 		setDescription("At the start of your turn, swap this minion with a random one in your hand.");
+		setRace(Race.MECH);
 	}
 
 	@Override

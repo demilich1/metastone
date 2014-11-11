@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" styleClass="panel" stylesheets="@../main.css" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header" text="Battle of Decks" BorderPane.alignment="CENTER" />
+   </top>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+   <center>
+      <VBox alignment="TOP_CENTER" spacing="8.0" BorderPane.alignment="TOP_CENTER">
+         <children>
+            <HBox fx:id="playerArea" alignment="CENTER" maxHeight="400.0" BorderPane.alignment="CENTER" />
+            <Label styleClass="name-small" text="Number of games (per match)" />
+            <ComboBox fx:id="numberOfGamesBox" prefWidth="150.0" />
+            <Label layoutX="407.0" layoutY="310.0" styleClass="name-small" text="Behaviour" />
+            <ComboBox fx:id="behaviourBox" layoutX="427.0" layoutY="324.0" prefWidth="150.0" />
+            <HBox alignment="CENTER" spacing="8.0">
+               <children>
+                  <VBox>
+                     <children>
+                        <Label styleClass="name-small" text="Available Decks" />
+                        <ScrollPane prefViewportHeight="300.0" prefViewportWidth="300.0">
+                           <content>
+                              <ListView fx:id="availableDecksListView" prefHeight="300.0" prefWidth="300.0" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" spacing="8.0">
+                     <children>
+                        <Button fx:id="addButton" mnemonicParsing="false" text="&gt;&gt;" />
+                        <Button fx:id="removeButton" mnemonicParsing="false" text="&lt;&lt;" />
+                     </children>
+                  </VBox>
+                  <VBox>
+                     <children>
+                        <Label styleClass="name-small" text="Selected Decks" />
+                        <ScrollPane prefViewportHeight="300.0" prefViewportWidth="300.0">
+                           <content>
+                              <ListView fx:id="selectedDecksListView" prefHeight="300.0" prefWidth="300.0" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </VBox>
+   </center>
+   <bottom>
+      <AnchorPane>
+         <children>
+            <Button fx:id="backButton" mnemonicParsing="false" text="Back" AnchorPane.leftAnchor="0.0" />
+            <Button fx:id="startButton" mnemonicParsing="false" text="Start" AnchorPane.leftAnchor="380.0" AnchorPane.rightAnchor="380.0" />
+         </children>
+      </AnchorPane>
+   </bottom>
+</fx:root>

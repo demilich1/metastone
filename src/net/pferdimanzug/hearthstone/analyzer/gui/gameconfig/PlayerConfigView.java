@@ -16,7 +16,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javafx.util.StringConverter;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.GreedyOptimizeMove;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.NoAggressionBehaviour;
@@ -38,6 +37,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Thrall;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Uther;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Valeera;
 import net.pferdimanzug.hearthstone.analyzer.gui.IconFactory;
+import net.pferdimanzug.hearthstone.analyzer.gui.common.BehaviourStringConverter;
+import net.pferdimanzug.hearthstone.analyzer.gui.common.DeckStringConverter;
+import net.pferdimanzug.hearthstone.analyzer.gui.common.HeroStringConverter;
 import net.pferdimanzug.hearthstone.analyzer.gui.playmode.config.PlayerConfigType;
 
 public class PlayerConfigView extends VBox {
@@ -176,48 +178,6 @@ public class PlayerConfigView extends VBox {
 		heroBox.valueProperty().addListener((ChangeListener<Hero>) (observableValue, oldHero, newHero) -> {
 			selectHero(newHero);
 		});
-	}
-
-	private class BehaviourStringConverter extends StringConverter<IBehaviour> {
-
-		@Override
-		public IBehaviour fromString(String string) {
-			return null;
-		}
-
-		@Override
-		public String toString(IBehaviour behaviour) {
-			return behaviour.getName();
-		}
-
-	}
-
-	private class DeckStringConverter extends StringConverter<Deck> {
-
-		@Override
-		public Deck fromString(String arg0) {
-			return null;
-		}
-
-		@Override
-		public String toString(Deck deck) {
-			return deck.getName();
-		}
-
-	}
-
-	private class HeroStringConverter extends StringConverter<Hero> {
-
-		@Override
-		public Hero fromString(String arg0) {
-			return null;
-		}
-
-		@Override
-		public String toString(Hero hero) {
-			return hero.getHeroClass().toString();
-		}
-
 	}
 
 }

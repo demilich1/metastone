@@ -19,11 +19,11 @@ public class GameStatistics implements Cloneable {
 	public void armorGained(int armor) {
 		add(Statistic.ARMOR_GAINED, armor);
 	}
-	
+
 	public void cardDrawn() {
 		add(Statistic.CARDS_DRAWN, 1);
 	}
-	
+
 	public void cardPlayed(Card card) {
 		add(Statistic.CARDS_PLAYED, 1);
 
@@ -41,7 +41,12 @@ public class GameStatistics implements Cloneable {
 			break;
 		}
 	}
-	
+
+	private void updateWinRate() {
+		double winRate = getLong(Statistic.GAMES_WON) / (double) (getLong(Statistic.GAMES_WON) + getLong(Statistic.GAMES_LOST));
+		set(Statistic.WIN_RATE, winRate);
+	}
+
 	public GameStatistics clone() {
 		GameStatistics clone = new GameStatistics();
 		clone.stats.putAll(stats);
@@ -66,10 +71,12 @@ public class GameStatistics implements Cloneable {
 
 	public void gameLost() {
 		add(Statistic.GAMES_LOST, 1);
+		updateWinRate();
 	}
 
 	public void gameWon() {
 		add(Statistic.GAMES_WON, 1);
+		updateWinRate();
 	}
 
 	public Object get(Statistic key) {
@@ -79,7 +86,11 @@ public class GameStatistics implements Cloneable {
 	public long getLong(Statistic key) {
 		return stats.containsKey(key) ? (long) stats.get(key) : 0L;
 	}
-	
+
+	public double getDouble(Statistic key) {
+		return stats.containsKey(key) ? (double) stats.get(key) : 0.0;
+	}
+
 	public void heal(int healing) {
 		add(Statistic.HEALING_DONE, healing);
 	}
@@ -99,8 +110,9 @@ public class GameStatistics implements Cloneable {
 				stats.put(stat, otherStatistics.get(stat));
 			}
 		}
+		updateWinRate();
 	}
-	
+
 	public void set(Statistic key, Object value) {
 		stats.put(key, value);
 	}
@@ -120,7 +132,5 @@ public class GameStatistics implements Cloneable {
 		}
 		return builder.toString();
 	}
-	
-	
 
 }

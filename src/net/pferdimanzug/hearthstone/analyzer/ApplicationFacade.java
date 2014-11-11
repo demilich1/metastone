@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer;
 
+import net.pferdimanzug.hearthstone.analyzer.gui.battleofdecks.StartBattleOfDecksCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.AddCardToDeckCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.ChangeDeckNameCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.FillDeckWithRandomCardsCommand;
@@ -44,6 +45,7 @@ public class ApplicationFacade extends Facade<GameNotification> {
 		registerCommand(GameNotification.PLAY_GAME, new PlayGameCommand());
 		registerCommand(GameNotification.SIMULATE_GAMES, new SimulateGamesCommand());
 		registerCommand(GameNotification.START_TRAINING, new PerformTrainingCommand());
+		registerCommand(GameNotification.COMMIT_BATTLE_OF_DECKS_CONFIG, new StartBattleOfDecksCommand());
 
 		registerCommand(GameNotification.SET_ACTIVE_DECK, new SetActiveDeckCommand());
 		registerCommand(GameNotification.ADD_CARD_TO_DECK, new AddCardToDeckCommand());

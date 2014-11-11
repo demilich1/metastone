@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
+import net.pferdimanzug.hearthstone.analyzer.gui.battleofdecks.BattleOfDecksMediator;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.DeckBuilderMediator;
 import net.pferdimanzug.hearthstone.analyzer.gui.playmode.config.PlayModeConfigMediator;
 import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.SandboxModeMediator;
@@ -41,6 +42,9 @@ public class MainMenuMediator extends Mediator<GameNotification> {
 		case TRAINING_MODE_SELECTED:
 			getFacade().registerMediator(new TrainingModeMediator());
 			break;
+		case BATTLE_OF_DECKS_SELECTED:
+			getFacade().registerMediator(new BattleOfDecksMediator());
+			break;
 		default:
 			break;
 		}
@@ -55,6 +59,7 @@ public class MainMenuMediator extends Mediator<GameNotification> {
 		notificationInterests.add(GameNotification.SIMULATION_MODE_SELECTED);
 		notificationInterests.add(GameNotification.SANDBOX_MODE_SELECTED);
 		notificationInterests.add(GameNotification.TRAINING_MODE_SELECTED);
+		notificationInterests.add(GameNotification.BATTLE_OF_DECKS_SELECTED);
 		return notificationInterests;
 	}
 

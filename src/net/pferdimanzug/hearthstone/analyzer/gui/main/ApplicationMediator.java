@@ -13,6 +13,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 import net.pferdimanzug.hearthstone.analyzer.AppConfig;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
+import net.pferdimanzug.hearthstone.analyzer.gui.battleofdecks.BattleOfDecksMediator;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.DeckBuilderMediator;
 import net.pferdimanzug.hearthstone.analyzer.gui.mainmenu.MainMenuMediator;
 import net.pferdimanzug.hearthstone.analyzer.gui.playmode.PlayModeMediator;
@@ -77,6 +78,7 @@ public class ApplicationMediator extends Mediator<GameNotification> {
 		getFacade().removeMediator(SimulationMediator.NAME);
 		getFacade().removeMediator(TrainingModeMediator.NAME);
 		getFacade().removeMediator(SandboxModeMediator.NAME);
+		getFacade().removeMediator(BattleOfDecksMediator.NAME);
 	}
 	
 	private Label getFpsDisplay() {
