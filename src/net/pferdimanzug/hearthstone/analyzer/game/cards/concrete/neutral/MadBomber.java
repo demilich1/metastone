@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -15,6 +16,7 @@ public class MadBomber extends MinionCard {
 	public MadBomber() {
 		super("Mad Bomber", 3, 2, Rarity.COMMON, HeroClass.ANY, 2);
 		setDescription("Battlecry: Deal 3 damage randomly split between all other characters.");
+		setTag(GameTag.BATTLECRY);
 	}
 
 	@Override
