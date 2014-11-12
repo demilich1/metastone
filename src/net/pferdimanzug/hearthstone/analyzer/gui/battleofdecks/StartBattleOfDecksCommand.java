@@ -30,6 +30,7 @@ public class StartBattleOfDecksCommand extends SimpleCommand<GameNotification> {
 	private static Logger logger = LoggerFactory.getLogger(StartBattleOfDecksCommand.class);
 
 	private BattleResult result;
+	private long lastUpdate;
 
 	@Override
 	public void execute(INotification<GameNotification> notification) {
@@ -45,15 +46,20 @@ public class StartBattleOfDecksCommand extends SimpleCommand<GameNotification> {
 
 				List<Future<Void>> futures = new ArrayList<Future<Void>>();
 				HashSet<Deck> processedDecks = new HashSet<>();
-				for (Deck deck : battleConfig.getDecks()) {
-					processedDecks.add(deck);
+				for (Deck deck1 : battleConfig.getDecks()) {
+					processedDecks.add(deck1);
 					for (Deck deck2 : battleConfig.getDecks()) {
 						if (processedDecks.contains(deck2)) {
 							continue;
 						}
-						PlayBatchTask task = new PlayBatchTask(deck, deck2, battleConfig.getBehaviour(), battleConfig.getNumberOfGames());
-						Future<Void> future = executor.submit(task);
-						futures.add(future);
+						BattleBatchResult batchResult = new BattleBatchResult(deck1, deck2, battleConfig.getNumberOfGames());
+						result.addBatchResult(batchResult);
+
+						for (int i = 0; i < battleConfig.getNumberOfGames(); i++) {
+							PlayGameTask task = new PlayGameTask(deck1, deck2, battleConfig.getBehaviour(), batchResult);
+							Future<Void> future = executor.submit(task);
+							futures.add(future);
+						}
 					}
 				}
 
@@ -76,13 +82,14 @@ public class StartBattleOfDecksCommand extends SimpleCommand<GameNotification> {
 					}
 					futures.removeIf(future -> future.isDone());
 					try {
-						Thread.sleep(50);
+						Thread.sleep(100);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
 				}
 
-				//getFacade().sendNotification(GameNotification.SIMULATION_RESULT, result);
+				// getFacade().sendNotification(GameNotification.SIMULATION_RESULT,
+				// result);
 				logger.info("Battle of Decks finished");
 
 			}
@@ -91,49 +98,46 @@ public class StartBattleOfDecksCommand extends SimpleCommand<GameNotification> {
 		t.start();
 	}
 
-	private class PlayBatchTask implements Callable<Void> {
+	private void periodicUpdate() {
+		if (System.currentTimeMillis() - lastUpdate > 1000) {
+			sendNotification(GameNotification.BATTLE_OF_DECKS_PROGRESS_UPDATE, result);
+			lastUpdate = System.currentTimeMillis();
+		}
+	}
+
+	private class PlayGameTask implements Callable<Void> {
 
 		private final Deck deck1;
 		private final Deck deck2;
 		private final IBehaviour behaviour;
-		private final int numberOfGames;
+		private final BattleBatchResult batchResult;
 
-		public PlayBatchTask(Deck deck1, Deck deck2, IBehaviour behaviour, int numberOfGames) {
+		public PlayGameTask(Deck deck1, Deck deck2, IBehaviour behaviour, BattleBatchResult batchResult) {
 			this.deck1 = deck1;
 			this.deck2 = deck2;
 			this.behaviour = behaviour;
-			this.numberOfGames = numberOfGames;
+			this.batchResult = batchResult;
 		}
 
 		@Override
 		public Void call() throws Exception {
-			BattleBatchResult batchResult = new BattleBatchResult(deck1, deck2, numberOfGames);
-			for (int i = 0; i < numberOfGames; i++) {
-				Hero hero1 = HeroFactory.createHero(deck1.getHeroClass());
-				Player player1 = new Player("Player 1", hero1, deck1);
-				player1.setBehaviour(behaviour.clone());
 
-				Hero hero2 = HeroFactory.createHero(deck2.getHeroClass());
-				Player player2 = new Player("Player 2", hero2, deck2);
-				player2.setBehaviour(behaviour.clone());
+			Hero hero1 = HeroFactory.createHero(deck1.getHeroClass());
+			Player player1 = new Player("Player 1", hero1, deck1);
+			player1.setBehaviour(behaviour.clone());
 
-				GameContext newGame = new GameContext(player1, player2, new GameLogic());
-				newGame.play();
+			Hero hero2 = HeroFactory.createHero(deck2.getHeroClass());
+			Player player2 = new Player("Player 2", hero2, deck2);
+			player2.setBehaviour(behaviour.clone());
 
-				batchResult.onGameEnded(newGame);
+			GameContext newGame = new GameContext(player1, player2, new GameLogic());
+			newGame.play();
 
-				synchronized (result) {
-					result.onGameEnded(newGame);
-				}
+			batchResult.onGameEnded(newGame);
+			result.onGameEnded(newGame);
 
-				newGame.dispose();
-
-			}
-
-			synchronized (result) {
-				result.addBatchResult(batchResult);
-				sendNotification(GameNotification.BATTLE_OF_DECKS_PROGRESS_UPDATE, result);
-			}
+			periodicUpdate();
+			newGame.dispose();
 
 			return null;
 		}

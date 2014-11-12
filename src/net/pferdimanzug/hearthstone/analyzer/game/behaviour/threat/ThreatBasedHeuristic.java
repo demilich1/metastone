@@ -9,6 +9,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
 public class ThreatBasedHeuristic implements IGameStateHeuristic {
+	
+	private float AGGRESSION_FACTOR = 1;
 
 	private static ThreatLevel calcuateThreatLevel(GameContext context, int playerId) {
 		int damageOnBoard = 0;
@@ -19,10 +21,10 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 		}
 		damageOnBoard += getHeroDamage(opponent.getHero());
 
-		int hpDiff = player.getHero().getEffectiveHp() - damageOnBoard;
-		if (hpDiff <= 0) {
+		int remainingHp = player.getHero().getEffectiveHp() - damageOnBoard;
+		if (remainingHp < 1) {
 			return ThreatLevel.RED;
-		} else if (hpDiff <= 14) {
+		} else if (remainingHp < 15) {
 			return ThreatLevel.YELLOW;
 		}
 
@@ -107,7 +109,8 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 		default:
 			break;
 		}
-		score += player.getHero().getEffectiveHp() - opponent.getHero().getEffectiveHp();
+		int hpDiff = player.getHero().getEffectiveHp() - opponent.getHero().getEffectiveHp();
+		score += hpDiff;
 		int cardDiff = player.getHand().getCount() - opponent.getHand().getCount();
 		score += cardDiff * 3;
 

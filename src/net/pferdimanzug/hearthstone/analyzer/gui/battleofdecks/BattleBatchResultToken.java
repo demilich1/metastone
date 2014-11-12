@@ -5,8 +5,11 @@ import java.io.IOException;
 import net.pferdimanzug.hearthstone.analyzer.gui.IconFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
@@ -29,6 +32,10 @@ public class BattleBatchResultToken extends BorderPane {
 	private ProgressBar winrate2Bar;
 	@FXML
 	private Label winrate2Label;
+	@FXML
+	private Node contentPane;
+	@FXML
+	private ProgressIndicator progressIndicator;
 	
 	public BattleBatchResultToken() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BattleBatchResultToken.fxml"));
@@ -40,9 +47,27 @@ public class BattleBatchResultToken extends BorderPane {
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
+		contentPane.setOpacity(0.25);
+		winrate1Bar.setVisible(false);
+		winrate1Label.setVisible(false);
+		winrate2Bar.setVisible(false);
+		winrate2Label.setVisible(false);
 	}
 	
 	public void displayBatchResult(BattleBatchResult result) {
+		if (!result.isCompleted()) {
+			progressIndicator.setProgress(result.getProgress());
+			Tooltip.install(this, new Tooltip("In progress\n\n" + result.getDeck1().getName() + "\nVS.\n" + result.getDeck2().getName()));
+		}
+		else if (contentPane.getOpacity() < 1) {
+			contentPane.setOpacity(1);
+			progressIndicator.setVisible(false);
+			winrate1Bar.setVisible(true);
+			winrate1Label.setVisible(true);
+			winrate2Bar.setVisible(true);
+			winrate2Label.setVisible(true);
+			Tooltip.install(this, null);
+		}
 		deck1Label.setText(result.getDeck1().getName());
 		deck1Icon.setImage(IconFactory.getClassIcon(result.getDeck1().getHeroClass()));
 		deck2Label.setText(result.getDeck2().getName());

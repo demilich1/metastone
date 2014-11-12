@@ -7,7 +7,6 @@ import java.util.List;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.statistics.GameStatistics;
-import net.pferdimanzug.hearthstone.analyzer.game.statistics.Statistic;
 
 public class BattleResult {
 
@@ -19,7 +18,7 @@ public class BattleResult {
 		this.numberOfGames = numberOfGames;
 	}
 
-	public synchronized void onGameEnded(GameContext result) {
+	public void onGameEnded(GameContext result) {
 		for (Player player : result.getPlayers()) {
 			updateStats(player);
 		}
@@ -27,31 +26,38 @@ public class BattleResult {
 
 	private void updateStats(Player player) {
 		String deckName = player.getDeckName();
-		if (!deckResults.containsKey(deckName)) {
-			deckResults.put(deckName, new GameStatistics());
+		synchronized (deckResults) {
+			if (!deckResults.containsKey(deckName)) {
+				deckResults.put(deckName, new GameStatistics());
+			}
+			GameStatistics stats = deckResults.get(deckName);
+			stats.merge(player.getStatistics());
 		}
-		GameStatistics stats = deckResults.get(deckName);
-		stats.merge(player.getStatistics());
 	}
 
 	public int getNumberOfGames() {
 		return numberOfGames;
 	}
-	
-	public synchronized void addBatchResult(BattleBatchResult batchResult) {
-		batchResults.add(batchResult);
+
+	public void addBatchResult(BattleBatchResult batchResult) {
+		synchronized (batchResults) {
+			batchResults.add(batchResult);
+		}
 	}
 
-	public synchronized List<BattleBatchResult> getBatchResults() {
-		return new ArrayList<BattleBatchResult>(batchResults);
+	public List<BattleBatchResult> getBatchResults() {
+		synchronized (batchResults) {
+			return new ArrayList<BattleBatchResult>(batchResults);
+		}
 	}
-	
-	public synchronized List<BattleDeckResult> getDeckResults() {
+
+	public List<BattleDeckResult> getDeckResults() {
 		List<BattleDeckResult> resultList = new ArrayList<BattleDeckResult>();
-		for (String deckName : deckResults.keySet()) {
-			
-			BattleDeckResult deckResult = new BattleDeckResult(deckName, deckResults.get(deckName));
-			resultList.add(deckResult);
+		synchronized (deckResults) {
+			for (String deckName : deckResults.keySet()) {
+				BattleDeckResult deckResult = new BattleDeckResult(deckName, deckResults.get(deckName));
+				resultList.add(deckResult);
+			}	
 		}
 		return resultList;
 	}
