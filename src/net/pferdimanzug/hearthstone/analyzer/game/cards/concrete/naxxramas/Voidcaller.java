@@ -5,7 +5,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.custom.VoidcallerSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.PutRandomMinionOnBoardSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.TargetPlayer;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
@@ -25,7 +26,7 @@ public class Voidcaller extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion voidcaller = createMinion();
-		SpellDesc voidcallerSpell = VoidcallerSpell.create();
+		SpellDesc voidcallerSpell = PutRandomMinionOnBoardSpell.create(TargetPlayer.SELF, Race.DEMON);
 		voidcallerSpell.setTarget(EntityReference.NONE);
 		voidcaller.addDeathrattle(voidcallerSpell);
 		return voidcaller;

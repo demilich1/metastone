@@ -5,7 +5,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.custom.DeathlordSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.PutRandomMinionOnBoardSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.TargetPlayer;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
@@ -24,7 +25,7 @@ public class Deathlord extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion deathlord = createMinion(GameTag.TAUNT);
-		SpellDesc deathlordSpell = DeathlordSpell.create();
+		SpellDesc deathlordSpell = PutRandomMinionOnBoardSpell.create(TargetPlayer.OPPONENT);
 		deathlordSpell.setTarget(EntityReference.NONE);
 		deathlord.addDeathrattle(deathlordSpell);
 		return deathlord;

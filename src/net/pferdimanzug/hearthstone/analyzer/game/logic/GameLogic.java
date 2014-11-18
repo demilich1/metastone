@@ -401,6 +401,7 @@ public class GameLogic implements Cloneable {
 				iterator.remove();
 			}
 		}
+		checkForDeadEntities();
 	}
 
 	public void equipWeapon(int playerId, Weapon weapon) {
@@ -455,9 +456,6 @@ public class GameLogic implements Cloneable {
 			return;
 		}
 
-		if (target.getOwner() == -1) {
-			System.out.println("Ownerless minion: " + target);
-		}
 		Player owningPlayer = context.getPlayer(target.getOwner());
 		boolean damaged = damage(owningPlayer, target, attackerDamage, SpellSource.PHYSICAL_ATTACK);
 		if (defenderDamage > 0) {

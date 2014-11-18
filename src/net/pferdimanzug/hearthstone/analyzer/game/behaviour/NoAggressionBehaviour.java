@@ -31,7 +31,7 @@ public class NoAggressionBehaviour extends Behaviour {
 				return gameAction;
 			}
 		}
-		return null;
+		return validActions.get(validActions.size() - 1);
 	}
 
 }
