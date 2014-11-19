@@ -72,9 +72,9 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 
 	@Override
 	public boolean interestedIn(GameEventType eventType) {
-		boolean result = primaryTrigger.interestedIn() == eventType;
+		boolean result = primaryTrigger.interestedIn() == eventType || primaryTrigger.interestedIn() == GameEventType.ALL;
 		if (secondaryTrigger != null) {
-			result |= secondaryTrigger.interestedIn() == eventType;
+			result |= secondaryTrigger.interestedIn() == eventType || secondaryTrigger.interestedIn() == GameEventType.ALL;
 		}
 		return result;
 	}
@@ -149,7 +149,7 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 		if (trigger == null) {
 			return false;
 		}
-		if (trigger.interestedIn() != event.getEventType()) {
+		if (trigger.interestedIn() != event.getEventType() && trigger.interestedIn() != GameEventType.ALL) {
 			return false;
 		}
 		return trigger.fire(event, host);

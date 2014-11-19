@@ -24,7 +24,7 @@ public class OneTurnCostModifier extends CardCostModifier {
 
 	@Override
 	public boolean interestedIn(GameEventType eventType) {
-		return eventType == expirationTrigger.interestedIn();
+		return eventType == expirationTrigger.interestedIn() || expirationTrigger.interestedIn() == GameEventType.ALL;
 	}
 
 	@Override

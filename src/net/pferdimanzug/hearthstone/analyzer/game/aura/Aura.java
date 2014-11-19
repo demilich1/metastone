@@ -73,7 +73,6 @@ public class Aura extends SpellTrigger {
 			} else if (affects(context, target) && !affectedEntities.contains(target.getId())) {
 				applyAuraEffect.setTarget(target.getReference());
 				context.getLogic().castSpell(getOwner(), applyAuraEffect);
-				logger.debug("Adding {} to aura list", target.getId());
 				affectedEntities.add(target.getId());
 			} else if (!affects(context, target) && affectedEntities.contains(target.getId())) {
 				removeAuraEffect.setTarget(target.getReference());

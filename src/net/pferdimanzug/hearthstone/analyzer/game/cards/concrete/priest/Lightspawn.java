@@ -18,10 +18,9 @@ public class Lightspawn extends MinionCard {
 		return 267;
 	}
 
-
-
 	@Override
 	public Minion summon() {
-		return createMinion(GameTag.ATTACK_EQUALS_HP);
+		Minion lightspawn = createMinion(GameTag.ATTACK_EQUALS_HP); 
+		return lightspawn;
 	}
 }

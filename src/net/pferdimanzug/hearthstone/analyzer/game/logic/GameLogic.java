@@ -32,6 +32,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
 import net.pferdimanzug.hearthstone.analyzer.game.events.BoardChangedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.CardPlayedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.DamageEvent;
+import net.pferdimanzug.hearthstone.analyzer.game.events.ReceiveCardEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.HealEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.KillEvent;
@@ -836,6 +837,7 @@ public class GameLogic implements Cloneable {
 			log("{} receives card {}", player.getName(), card);
 			hand.add(card);
 			card.setLocation(CardLocation.HAND);
+			context.fireGameEvent(new ReceiveCardEvent(context, playerId, card));
 		} else {
 			log("{} has too many cards on his hand, card destroyed: {}", player.getName(), card);
 			card.setLocation(CardLocation.VOID);

@@ -4,8 +4,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SecretCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.ReviveMinionSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.TargetPlayer;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.OwnMinionDeathTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.MinionDeathTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class Redemption extends SecretCard {
@@ -16,7 +17,7 @@ public class Redemption extends SecretCard {
 		
 		SpellDesc reviveSpell = ReviveMinionSpell.create(1);
 		reviveSpell.setTarget(EntityReference.KILLED_MINION);
-		setTriggerAndEffect(new OwnMinionDeathTrigger(), reviveSpell);
+		setTriggerAndEffect(new MinionDeathTrigger(TargetPlayer.SELF), reviveSpell);
 	}
 
 	@Override

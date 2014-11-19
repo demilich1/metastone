@@ -1,6 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.events;
 
 public enum GameEventType {
+	ALL,
 	DAMAGE,
 	SUMMON,
 	HEAL,
@@ -10,7 +11,8 @@ public enum GameEventType {
 	TURN_END,
 	SPELL_CASTED,
 	OVERLOAD,
-	CARD_PLAYED,
+	RECEIVE_CARD,
+	PLAY_CARD,
 	TARGET_ACQUISITION,
 	SECRET_PLAYED,
 	SECRET_REVEALED,

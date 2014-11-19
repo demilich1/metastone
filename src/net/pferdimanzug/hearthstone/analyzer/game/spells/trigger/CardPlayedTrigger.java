@@ -40,7 +40,7 @@ public class CardPlayedTrigger extends GameEventTrigger {
 
 	@Override
 	public GameEventType interestedIn() {
-		return GameEventType.CARD_PLAYED;
+		return GameEventType.PLAY_CARD;
 	}
 
 }

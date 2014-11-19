@@ -4,29 +4,29 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
-public class CardPlayedEvent extends GameEvent {
+public class ReceiveCardEvent extends GameEvent {
 
-	private final int playerId;
 	private final Card card;
+	private final int playerId;
 
-	public CardPlayedEvent(GameContext context, int playerId, Card card) {
+	public ReceiveCardEvent(GameContext context, int playerId, Card card) {
 		super(context);
 		this.playerId = playerId;
 		this.card = card;
 	}
 
-	public Card getCard() {
+	@Override
+	public Entity getEventTarget() {
 		return card;
 	}
 
 	@Override
-	public Entity getEventTarget() {
-		return getCard();
+	public GameEventType getEventType() {
+		return GameEventType.RECEIVE_CARD;
 	}
 
-	@Override
-	public GameEventType getEventType() {
-		return GameEventType.PLAY_CARD;
+	public Card getCard() {
+		return card;
 	}
 
 	public int getPlayerId() {
