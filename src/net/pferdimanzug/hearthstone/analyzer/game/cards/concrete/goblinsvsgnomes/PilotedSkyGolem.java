@@ -1,0 +1,27 @@
+package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes;
+
+import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonManaCostMinionSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
+
+public class PilotedSkyGolem extends MinionCard {
+
+	public PilotedSkyGolem() {
+		super("Piloted Sky Golem", 6, 4, Rarity.EPIC, HeroClass.ANY, 6);
+		setDescription("Deathrattle: Summon a random 4-Cost minion.");
+		setRace(Race.MECH);
+	}
+
+	@Override
+	public Minion summon() {
+		Minion pilotedSkyGolem = createMinion();
+		SpellDesc summonRandom = SummonManaCostMinionSpell.create(4);
+		pilotedSkyGolem.addDeathrattle(summonRandom);
+		return pilotedSkyGolem;
+	}
+
+}

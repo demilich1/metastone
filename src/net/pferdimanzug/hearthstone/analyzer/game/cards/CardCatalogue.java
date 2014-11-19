@@ -26,8 +26,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Starfire;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Swipe;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.WildGrowth;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Wrath;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes.GoblinSapper;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes.MimironsHead;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.AnimalCompanion;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.ArcaneShot;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.BestialWrath;
@@ -392,7 +390,6 @@ public class CardCatalogue {
 	private final static CardCollection cards = new CardCollection();
 	
 	static {
-		cards.add(new MimironsHead());
 		cards.add(new AncientOfLore());
 		cards.add(new AncientOfWar());
 		cards.add(new Bite());

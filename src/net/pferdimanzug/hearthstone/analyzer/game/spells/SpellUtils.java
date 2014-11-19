@@ -8,7 +8,10 @@ import java.util.stream.Collectors;
 
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCatalogue;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.CardType;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
@@ -34,7 +37,7 @@ public class SpellUtils {
 		}
 		return result.getRandom();
 	}
-
+	
 	public static <T> T getRandomTarget(List<T> targets) {
 		int randomIndex = ThreadLocalRandom.current().nextInt(targets.size());
 		return targets.get(randomIndex);

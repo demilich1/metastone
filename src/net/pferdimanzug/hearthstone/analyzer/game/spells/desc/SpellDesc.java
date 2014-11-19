@@ -43,6 +43,14 @@ public class SpellDesc extends CustomCloneable {
 	public Object get(SpellArg spellArg) {
 		return arguments.get(spellArg);
 	}
+	
+	public int getValue() {
+		return getInt(SpellArg.VALUE);
+	}
+	
+	public void setValue(int value) {
+		set(SpellArg.VALUE, value);
+	}
 
 	public int getInt(SpellArg spellArg) {
 		return arguments.containsKey(spellArg) ? (int) get(spellArg) : 0;
