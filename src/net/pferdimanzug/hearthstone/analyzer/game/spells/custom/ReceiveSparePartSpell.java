@@ -14,8 +14,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 public class ReceiveSparePartSpell extends ReceiveRandomCardSpell {
 
 	public static SpellDesc create(TargetPlayer targetPlayer) {
-		return ReceiveRandomCardSpell.create(targetPlayer, new ArmorPlating(), new EmergencyCoolant(), new FinickyCloakfield(),
+		SpellDesc desc = ReceiveRandomCardSpell.create(targetPlayer, new ArmorPlating(), new EmergencyCoolant(), new FinickyCloakfield(),
 				new ReversingSwitch(), new RustyHorn(), new TimeRewinder(), new WhirlingBlades());
+		return desc;
 	}
 
 }

@@ -5,7 +5,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.TransformRandomMinionSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.TransformMinionSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnStartTrigger;
@@ -29,8 +29,9 @@ public class Poultryizer extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion poultryizer = createMinion();
-		SpellDesc chickenizeSpell = TransformRandomMinionSpell.create(new Chicken());
+		SpellDesc chickenizeSpell = TransformMinionSpell.create(new Chicken());
 		chickenizeSpell.setTarget(EntityReference.ALL_MINIONS);
+		chickenizeSpell.pickRandomTarget(true);
 		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), chickenizeSpell);
 		poultryizer.setSpellTrigger(trigger);
 		return poultryizer;

@@ -6,6 +6,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellArg;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class SummonSpell extends Spell {
 
@@ -17,6 +18,7 @@ public class SummonSpell extends Spell {
 		SpellDesc desc = new SpellDesc(SummonSpell.class);
 		desc.set(SpellArg.CARDS, minionCards);
 		desc.setTargetPlayer(targetPlayer);
+		desc.setTarget(EntityReference.NONE);
 		return desc;
 	}
 

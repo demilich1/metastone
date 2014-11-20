@@ -8,20 +8,20 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonRandomMinionPredicateSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 
-public class PilotedShredder extends MinionCard {
+public class SneedsOldShredder extends MinionCard {
 
-	public PilotedShredder() {
-		super("Piloted Shredder", 4, 3, Rarity.COMMON, HeroClass.ANY, 4);
-		setDescription("Deathrattle: Summon a random 2-cost minion.");
+	public SneedsOldShredder() {
+		super("Sneed's Old Shredder", 5, 7, Rarity.LEGENDARY, HeroClass.ANY, 8);
+		setDescription("Deathrattle: Summon a random legendary minion.");
 		setRace(Race.MECH);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion pilotedShredder = createMinion();
-		SpellDesc summonRandom = SummonRandomMinionPredicateSpell.create(card -> card.getBaseManaCost() == 2);
-		pilotedShredder.addDeathrattle(summonRandom);
-		return pilotedShredder;
+		Minion sneedsOldShredder = createMinion();
+		SpellDesc deathrattle = SummonRandomMinionPredicateSpell.create(card -> card.getRarity() == Rarity.LEGENDARY);
+		sneedsOldShredder.addDeathrattle(deathrattle);
+		return sneedsOldShredder;
 	}
 
 }

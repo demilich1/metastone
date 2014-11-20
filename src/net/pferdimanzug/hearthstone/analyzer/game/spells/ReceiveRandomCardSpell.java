@@ -6,12 +6,14 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellArg;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class ReceiveRandomCardSpell extends Spell {
 	
 	public static SpellDesc create(TargetPlayer targetPlayer, Card... cards) {
 		SpellDesc desc = new SpellDesc(ReceiveRandomCardSpell.class);
 		desc.set(SpellArg.CARDS, cards);
+		desc.setTarget(EntityReference.NONE);
 		desc.setTargetPlayer(targetPlayer);
 		return desc;
 	}

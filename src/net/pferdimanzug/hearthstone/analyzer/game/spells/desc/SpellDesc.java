@@ -120,7 +120,7 @@ public class SpellDesc extends CustomCloneable {
 		set(SpellArg.TARGET_PLAYER, valueProvider);
 	}
 	
-	public void setTargetFilter(Predicate<Entity> targetFilter) {
+	public void setTargetFilter(Predicate<? extends Entity> targetFilter) {
 		set(SpellArg.ENTITY_FILTER, targetFilter);
 	}
 	

@@ -7,12 +7,14 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellArg;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class EquipWeaponSpell extends Spell {
 	
 	public static SpellDesc create(WeaponCard weaponCard) {
 		SpellDesc desc = new SpellDesc(EquipWeaponSpell.class);
 		desc.set(SpellArg.CARD, weaponCard);
+		desc.setTarget(EntityReference.NONE);
 		return desc;
 	}
 
