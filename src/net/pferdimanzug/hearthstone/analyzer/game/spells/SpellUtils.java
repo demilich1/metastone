@@ -6,6 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
@@ -26,7 +27,7 @@ public class SpellUtils {
 		}
 		return result;
 	}
-	
+
 	public static Card getRandomCard(CardCollection source, Predicate<Card> filter) {
 		CardCollection result = getCards(source, filter);
 		if (result.isEmpty()) {
@@ -34,12 +35,12 @@ public class SpellUtils {
 		}
 		return result.getRandom();
 	}
-	
+
 	public static <T> T getRandomTarget(List<T> targets) {
 		int randomIndex = ThreadLocalRandom.current().nextInt(targets.size());
 		return targets.get(randomIndex);
 	}
-	
+
 	public static boolean hasMinionOfRace(Player player, Race race) {
 		for (Minion minion : player.getMinions()) {
 			if (minion.getRace() == race) {
@@ -48,7 +49,7 @@ public class SpellUtils {
 		}
 		return false;
 	}
-	
+
 	public static List<Actor> getValidRandomTargets(List<Entity> targets) {
 		List<Actor> validTargets = new ArrayList<Actor>();
 		for (Entity entity : targets) {
@@ -60,12 +61,16 @@ public class SpellUtils {
 		}
 		return validTargets;
 	}
-	
+
 	public static List<Entity> getValidTargets(List<Entity> allTargets, Predicate<Entity> filter) {
 		if (filter == null) {
 			return allTargets;
 		}
 		return allTargets.stream().filter(filter).collect(Collectors.<Entity> toList());
+	}
+
+	public static Card drawFromDeck(GameContext context, Player player) {
+		return context.getLogic().drawCard(player.getId());
 	}
 
 	private SpellUtils() {

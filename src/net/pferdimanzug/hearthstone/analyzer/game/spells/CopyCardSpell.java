@@ -36,8 +36,6 @@ public class CopyCardSpell extends Spell {
 		case HAND:
 			source = opponent.getHand();
 			break;
-		case HERO_POWER:
-		case PENDING:
 		default:
 			logger.error("Trying to copy cards from invalid cardLocation {}", cardLocation);
 			break;

@@ -6,5 +6,6 @@ public enum CardLocation {
 	DECK,
 	HERO_POWER,
 	PENDING,
-	EVENT
+	EVENT,
+	CATALOGUE
 }
