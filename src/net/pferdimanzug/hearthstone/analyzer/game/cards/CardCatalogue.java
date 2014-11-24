@@ -388,7 +388,7 @@ public class CardCatalogue {
 	}
 
 	private final static CardCollection cards = new CardCollection();
-	
+
 	static {
 		cards.add(new AncientOfLore());
 		cards.add(new AncientOfWar());

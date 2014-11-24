@@ -433,7 +433,9 @@ public class GameLogic implements Cloneable {
 		log("{} attacks {}", attacker, defender);
 
 		context.getEnvironment().put(Environment.ATTACKER, attacker);
-		context.fireGameEvent(new TargetAcquisitionEvent(context, ActionType.PHYSICAL_ATTACK, defender), TriggerLayer.SECRET);
+		TargetAcquisitionEvent targetAcquisitionEvent = new TargetAcquisitionEvent(context, ActionType.PHYSICAL_ATTACK, defender);
+		context.fireGameEvent(targetAcquisitionEvent, TriggerLayer.SECRET);
+		context.fireGameEvent(targetAcquisitionEvent);
 		Actor target = defender;
 		if (context.getEnvironment().containsKey(Environment.TARGET_OVERRIDE)) {
 			target = (Actor) context.getEnvironment().get(Environment.TARGET_OVERRIDE);

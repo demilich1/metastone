@@ -19,8 +19,6 @@ public class Gorehowl extends WeaponCard {
 		return 371;
 	}
 
-
-
 	@Override
 	public Weapon getWeapon() {
 		Weapon gorehowl = createWeapon(7, 1);
