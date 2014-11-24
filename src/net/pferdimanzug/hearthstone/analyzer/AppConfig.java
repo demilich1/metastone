@@ -7,5 +7,7 @@ public final class AppConfig {
 	public static final boolean SHOW_FPS = true;
 	
 	public static final int DEFAULT_SLEEP_DELAY = 100;
+	
+	public static boolean DEV_BUILD = true;
 
 }

@@ -22,8 +22,11 @@ public class GameStateValueBehaviour extends Behaviour {
 
 	private final IGameStateHeuristic heuristic;
 
-	public GameStateValueBehaviour() {
-		this.heuristic = new ThreatBasedHeuristic();
+	private final FeatureVector featureVector;
+
+	public GameStateValueBehaviour(FeatureVector featureVector) {
+		this.featureVector = featureVector;
+		this.heuristic = new ThreatBasedHeuristic(featureVector);
 	}
 
 	private double alphaBeta(GameContext context, int playerId, GameAction action, int depth) {
@@ -49,7 +52,7 @@ public class GameStateValueBehaviour extends Behaviour {
 
 	@Override
 	public IBehaviour clone() {
-		return new GameStateValueBehaviour();
+		return new GameStateValueBehaviour(featureVector.clone());
 	}
 
 	@Override

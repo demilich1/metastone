@@ -62,10 +62,12 @@ public class MainMenuView extends BorderPane {
 		battleOfDecksButton.setOnAction(event -> ApplicationFacade.getInstance().sendNotification(
 				GameNotification.BATTLE_OF_DECKS_SELECTED));
 		
-		trainingModeButton.setVisible(false);
-		trainingModeButton.setManaged(false);
+		if (!AppConfig.DEV_BUILD) {
+			trainingModeButton.setVisible(false);
+			trainingModeButton.setManaged(false);
+		}
 		
-		versionLabel.setText(AppConfig.VERSION);
+		versionLabel.setText(AppConfig.VERSION + (AppConfig.DEV_BUILD ? " (Dev build)" : ""));
 	}
 
 }

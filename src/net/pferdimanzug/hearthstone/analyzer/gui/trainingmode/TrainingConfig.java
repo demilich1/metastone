@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.learning.LearningBehaviour;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
 
 public class TrainingConfig {
 	
 	private int numberOfGames;
 	private final List<Deck> decks = new ArrayList<Deck>();
-	private final LearningBehaviour learner;
+	private final IBehaviour learner;
 	
-	public TrainingConfig(LearningBehaviour learner) {
+	public TrainingConfig(IBehaviour learner) {
 		this.learner = learner;
 	}
 
@@ -21,7 +21,7 @@ public class TrainingConfig {
 		return decks;
 	}
 
-	public LearningBehaviour getLearner() {
+	public IBehaviour getLearner() {
 		return learner;
 	}
 

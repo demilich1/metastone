@@ -15,7 +15,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.BorderPane;
 import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.learning.LearningBehaviour;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.threat.FeatureVector;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.threat.GameStateValueBehaviour;
 
 public class TrainingModeView extends BorderPane implements EventHandler<ActionEvent> {
 
@@ -54,7 +55,7 @@ public class TrainingModeView extends BorderPane implements EventHandler<ActionE
 	@Override
 	public void handle(ActionEvent actionEvent) {
 		if (actionEvent.getSource() == startButton) {
-			TrainingConfig trainingConfig = new TrainingConfig(new LearningBehaviour(true));
+			TrainingConfig trainingConfig = new TrainingConfig(new GameStateValueBehaviour(FeatureVector.getDefault()));
 			trainingConfig.setNumberOfGames(numberOfGamesBox.getSelectionModel().getSelectedItem());
 			ApplicationFacade.getInstance().sendNotification(GameNotification.COMMIT_TRAININGMODE_CONFIG, trainingConfig);
 		} else if (actionEvent.getSource() == backButton) {
@@ -75,8 +76,8 @@ public class TrainingModeView extends BorderPane implements EventHandler<ActionE
 	}
 
 	public void showProgress(TrainingProgressReport progress) {
-		int progressMark = Math.max(progress.getGamesTotal() / 25, 10);
-		if (progress.getGamesCompleted() % progressMark != 0 || progress.getGamesCompleted() == 0) {
+		//int progressMark = Math.max(progress.getGamesTotal() / 25, 10);
+		if (progress.getGamesCompleted() == 0) {
 			return;
 		}
 		double winRate = progress.getGamesWon() / (double) progress.getGamesCompleted();

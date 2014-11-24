@@ -10,8 +10,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
 public class ThreatBasedHeuristic implements IGameStateHeuristic {
 	
-	private float AGGRESSION_FACTOR = 1;
+	private final FeatureVector weights;
 
+	public ThreatBasedHeuristic(FeatureVector vector) {
+		this.weights = vector;
+	}
+	
 	private static ThreatLevel calcuateThreatLevel(GameContext context, int playerId) {
 		int damageOnBoard = 0;
 		Player player = context.getPlayer(playerId);
@@ -31,41 +35,39 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 		return ThreatLevel.GREEN;
 	}
 
-	private static float calculateMinionScore(Minion minion, ThreatLevel threatLevel) {
-		float minionScore = 1 + minion.getAttack() + minion.getHp();
-		if (minion.hasStatus(GameTag.FROZEN)) {
-			return minion.getHp();
-		}
+	private double calculateMinionScore(Minion minion, ThreatLevel threatLevel) {
+		double minionScore = weights.get(WeightedFeature.MINION_INTRINSIC_VALUE);
+		minionScore += weights.get(WeightedFeature.MINION_ATTACK_FACTOR) * minion.getAttack();
+		minionScore += weights.get(WeightedFeature.MINION_HP_FACTOR) * minion.getHp();
+		
 		if (minion.hasStatus(GameTag.TAUNT)) {
 			switch (threatLevel) {
 			case RED:
-				minionScore += 8;
+				minionScore += weights.get(WeightedFeature.MINION_RED_TAUNT_MODIFIER);
 				break;
 			case YELLOW:
-				minionScore += 4;
+				minionScore += weights.get(WeightedFeature.MINION_YELLOW_TAUNT_MODIFIER);
 				break;
 			default:
-				minionScore += 2;
+				minionScore += weights.get(WeightedFeature.MINION_DEFAULT_TAUNT_MODIFIER);
 				break;
 			}
 		}
 		if (minion.hasStatus(GameTag.WINDFURY)) {
-			minionScore += 2;
+			minionScore += weights.get(WeightedFeature.MINION_WINDFURY_MODIFIER);
 		}
 		if (minion.hasStatus(GameTag.DIVINE_SHIELD)) {
-			minionScore += 1.5f;
+			minionScore += weights.get(WeightedFeature.MINION_DIVINE_SHIELD_MODIFIER);
 		}
 		if (minion.hasStatus(GameTag.SPELL_POWER)) {
-			minionScore += minion.getTagValue(GameTag.SPELL_POWER);
+			minionScore += minion.getTagValue(GameTag.SPELL_POWER) * weights.get(WeightedFeature.MINION_SPELL_POWER_MODIFIER);
 		}
-		if (minion.hasStatus(GameTag.ENRAGED)) {
-			minionScore += 1;
-		}
+
 		if (minion.hasStatus(GameTag.STEALTHED)) {
-			minionScore += 1;
+			minionScore += weights.get(WeightedFeature.MINION_STEALTHED_MODIFIER);
 		}
 		if (minion.hasStatus(GameTag.UNTARGETABLE_BY_SPELLS)) {
-			minionScore += 1.5f;
+			minionScore += weights.get(WeightedFeature.MINION_UNTARGETABLE_BY_SPELLS_MODIFIER);
 		}
 
 		return minionScore;
@@ -101,18 +103,19 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 		ThreatLevel threatLevel = calcuateThreatLevel(context, playerId);
 		switch (threatLevel) {
 		case RED:
-			score -= 50;
+			score += weights.get(WeightedFeature.RED_MODIFIER);
 			break;
 		case YELLOW:
-			score -= 10;
+			score += weights.get(WeightedFeature.YELLOW_MODIFIER);
 			break;
 		default:
 			break;
 		}
-		int hpDiff = player.getHero().getEffectiveHp() - opponent.getHero().getEffectiveHp();
-		score += hpDiff;
-		int cardDiff = player.getHand().getCount() - opponent.getHand().getCount();
-		score += cardDiff * 3;
+		score += player.getHero().getEffectiveHp() * weights.get(WeightedFeature.OWN_HP_FACTOR);
+		score += opponent.getHero().getEffectiveHp() * weights.get(WeightedFeature.OPPONENT_HP_FACTOR);
+		
+		score += player.getHand().getCount() * weights.get(WeightedFeature.OWN_CARD_COUNT);
+		score += opponent.getHand().getCount() * weights.get(WeightedFeature.OPPONENT_CARD_COUNT);
 
 		for (Minion minion : player.getMinions()) {
 			score += calculateMinionScore(minion, threatLevel);
