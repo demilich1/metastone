@@ -24,5 +24,5 @@ public class TotemicMight extends SpellCard {
 	public int getTypeId() {
 		return 330;
 	}
-	
+
 }

@@ -24,11 +24,11 @@ public class ColdlightSeer extends MinionCard {
 	public int getTypeId() {
 		return 107;
 	}
-	
+
 	@Override
 	public Minion summon() {
 		Minion coldlightSeer = createMinion();
-		SpellDesc murlocBuffSpell =RaceSpecificBuffSpell.create(0, 2, Race.MURLOC);
+		SpellDesc murlocBuffSpell = RaceSpecificBuffSpell.create(0, 2, Race.MURLOC);
 		murlocBuffSpell.setTarget(EntityReference.ALL_MINIONS);
 		Battlecry battlecry = Battlecry.createBattlecry(murlocBuffSpell);
 		coldlightSeer.setBattlecry(battlecry);

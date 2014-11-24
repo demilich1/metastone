@@ -1,7 +1,5 @@
 package net.pferdimanzug.hearthstone.analyzer.game.spells;
 
-import java.util.List;
-
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
@@ -25,18 +23,6 @@ public class MetaSpell extends Spell {
 		return desc;
 	}
 
-	@Override
-	public void cast(GameContext context, Player player, SpellDesc desc, List<Entity> targets) {
-		for (SpellDesc spell : getSpells(desc)) {
-			if (!spell.hasPredefinedTarget()) {
-				spell.setTarget(desc.getTarget());
-			}
-			spell.setSource(desc.getSource());
-			spell.setSourceEntity(desc.getSourceEntity());
-			context.getLogic().castSpell(player.getId(), spell);
-		}
-	}
-	
 	private SpellDesc[] getSpells(SpellDesc desc) {
 		SpellDesc[] spells;
 		if (desc.get(SpellArg.SPELL_3) != null) {
@@ -61,6 +47,14 @@ public class MetaSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+		for (SpellDesc spell : getSpells(desc)) {
+			if (!spell.hasPredefinedTarget()) {
+				spell.setTarget(desc.getTarget());
+			}
+			spell.setSource(desc.getSource());
+			spell.setSourceEntity(desc.getSourceEntity());
+			context.getLogic().castSpell(player.getId(), spell);
+		}
 	}
 
 
