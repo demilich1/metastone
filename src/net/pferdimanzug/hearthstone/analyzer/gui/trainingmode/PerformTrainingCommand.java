@@ -61,7 +61,7 @@ public class PerformTrainingCommand extends SimpleCommand<GameNotification> {
 					player1.setBehaviour(new GameStateValueBehaviour(fittest, "(fittest)"));
 
 					Player player2 = new Player("Opponent", HeroFactory.createHero(player2Deck.getHeroClass()), player2Deck);
-					player2.setBehaviour(new GameStateValueBehaviour());
+					player2.setBehaviour(new GameStateValueBehaviour(FeatureVector.getFittest(), "(former fittest)"));
 
 					GameContext newGame = new GameContext(player1, player2, new GameLogic());
 					newGame.play();

@@ -97,7 +97,7 @@ public class WinRateFitnessFunction extends FitnessFunction {
 
 			Hero hero2 = HeroFactory.createHero(deck2.getHeroClass());
 			Player player2 = new Player("Player 2 (static)", hero2, deck2);
-			player2.setBehaviour(new GameStateValueBehaviour());
+			player2.setBehaviour(new GameStateValueBehaviour(FeatureVector.getFittest(), "(former fittest)"));
 
 			GameContext newGame = new GameContext(player1, player2, new GameLogic());
 			newGame.play();

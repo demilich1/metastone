@@ -24,7 +24,7 @@ public class GeneticFeatureOptimizer {
 		try {
 			IChromosome sampleChromosome = new Chromosome(gaConf, toGenes(FeatureVector.getDefault(), gaConf));
 			gaConf.setSampleChromosome(sampleChromosome);
-			gaConf.setPopulationSize(10);
+			gaConf.setPopulationSize(50);
 			gaConf.setFitnessFunction(new WinRateFitnessFunction(deck1, deck2));
 			genotype = new Genotype(gaConf, new Population(gaConf, sampleChromosome));
 		} catch (InvalidConfigurationException e) {
