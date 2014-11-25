@@ -12,21 +12,21 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.PhysicalAttackT
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
-public class SnowBrokenBot extends MinionCard {
+public class Snowchugger extends MinionCard {
 
-	public SnowBrokenBot() {
-		super("<PH>Snow Broken Bot", 2, 3, Rarity.COMMON, HeroClass.MAGE, 2);
+	public Snowchugger() {
+		super("Snowchugger", 2, 3, Rarity.COMMON, HeroClass.MAGE, 2);
 		setDescription("Freeze any character damaged by this minion.");
 		setRace(Race.MECH);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion snowBrokenBot = createMinion();
+		Minion snowchugger = createMinion();
 		SpellDesc freezeSpell = ApplyTagSpell.create(GameTag.FROZEN);
 		freezeSpell.setTarget(EntityReference.EVENT_TARGET);
-		snowBrokenBot.setSpellTrigger(new SpellTrigger(new PhysicalAttackTrigger(true), freezeSpell));
-		return snowBrokenBot;
+		snowchugger.setSpellTrigger(new SpellTrigger(new PhysicalAttackTrigger(true), freezeSpell));
+		return snowchugger;
 	}
 
 }

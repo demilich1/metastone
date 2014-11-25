@@ -10,8 +10,6 @@ import java.util.concurrent.Future;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.GreedyOptimizeMove;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.heuristic.WeightedHeuristic;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.threat.FeatureVector;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.threat.GameStateValueBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
@@ -31,7 +29,7 @@ public class WinRateFitnessFunction extends FitnessFunction {
 	 */
 	private static final long serialVersionUID = 2616303666130026770L;
 	
-	private static final int NUMBER_OF_GAMES = 20;
+	private static final int NUMBER_OF_GAMES = 50;
 	
 	private final Deck deck1;
 	private final Deck deck2;
@@ -70,7 +68,7 @@ public class WinRateFitnessFunction extends FitnessFunction {
 			}
 			futures.removeIf(future -> future.isDone());
 			try {
-				Thread.sleep(50);
+				Thread.sleep(20);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -95,11 +93,11 @@ public class WinRateFitnessFunction extends FitnessFunction {
 			Hero hero1 = HeroFactory.createHero(deck1.getHeroClass());
 			Player player1 = new Player("Player 1 (learning)", hero1, deck1);
 			FeatureVector vector = GeneticFeatureOptimizer.toVector(chromosome);
-			player1.setBehaviour(new GameStateValueBehaviour(vector));
+			player1.setBehaviour(new GameStateValueBehaviour(vector, "(current)"));
 
 			Hero hero2 = HeroFactory.createHero(deck2.getHeroClass());
 			Player player2 = new Player("Player 2 (static)", hero2, deck2);
-			player2.setBehaviour(new GreedyOptimizeMove(new WeightedHeuristic()));
+			player2.setBehaviour(new GameStateValueBehaviour());
 
 			GameContext newGame = new GameContext(player1, player2, new GameLogic());
 			newGame.play();

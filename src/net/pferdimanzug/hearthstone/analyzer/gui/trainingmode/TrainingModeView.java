@@ -15,7 +15,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.BorderPane;
 import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.threat.FeatureVector;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.threat.GameStateValueBehaviour;
 
 public class TrainingModeView extends BorderPane implements EventHandler<ActionEvent> {
@@ -55,7 +54,7 @@ public class TrainingModeView extends BorderPane implements EventHandler<ActionE
 	@Override
 	public void handle(ActionEvent actionEvent) {
 		if (actionEvent.getSource() == startButton) {
-			TrainingConfig trainingConfig = new TrainingConfig(new GameStateValueBehaviour(FeatureVector.getDefault()));
+			TrainingConfig trainingConfig = new TrainingConfig(new GameStateValueBehaviour());
 			trainingConfig.setNumberOfGames(numberOfGamesBox.getSelectionModel().getSelectedItem());
 			ApplicationFacade.getInstance().sendNotification(GameNotification.COMMIT_TRAININGMODE_CONFIG, trainingConfig);
 		} else if (actionEvent.getSource() == backButton) {

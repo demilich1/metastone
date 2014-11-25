@@ -10,6 +10,7 @@ import org.jgap.Gene;
 import org.jgap.Genotype;
 import org.jgap.IChromosome;
 import org.jgap.InvalidConfigurationException;
+import org.jgap.Population;
 import org.jgap.impl.DefaultConfiguration;
 import org.jgap.impl.DoubleGene;
 
@@ -23,9 +24,9 @@ public class GeneticFeatureOptimizer {
 		try {
 			IChromosome sampleChromosome = new Chromosome(gaConf, toGenes(FeatureVector.getDefault(), gaConf));
 			gaConf.setSampleChromosome(sampleChromosome);
-			gaConf.setPopulationSize(5);
+			gaConf.setPopulationSize(10);
 			gaConf.setFitnessFunction(new WinRateFitnessFunction(deck1, deck2));
-			genotype = Genotype.randomInitialGenotype(gaConf);
+			genotype = new Genotype(gaConf, new Population(gaConf, sampleChromosome));
 		} catch (InvalidConfigurationException e) {
 			e.printStackTrace();
 		}

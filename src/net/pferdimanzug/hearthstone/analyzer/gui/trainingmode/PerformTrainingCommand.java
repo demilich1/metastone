@@ -58,10 +58,10 @@ public class PerformTrainingCommand extends SimpleCommand<GameNotification> {
 					FeatureVector fittest = learner.getBest();
 					
 					Player player1 = new Player("Learner", HeroFactory.createHero(player1Deck.getHeroClass()), player1Deck);
-					player1.setBehaviour(new GameStateValueBehaviour(fittest));
+					player1.setBehaviour(new GameStateValueBehaviour(fittest, "(fittest)"));
 
 					Player player2 = new Player("Opponent", HeroFactory.createHero(player2Deck.getHeroClass()), player2Deck);
-					player2.setBehaviour(new GameStateValueBehaviour(FeatureVector.getDefault()));
+					player2.setBehaviour(new GameStateValueBehaviour());
 
 					GameContext newGame = new GameContext(player1, player2, new GameLogic());
 					newGame.play();
@@ -69,13 +69,15 @@ public class PerformTrainingCommand extends SimpleCommand<GameNotification> {
 					onGameComplete(config, newGame);
 					newGame.dispose();
 					
-					System.out.println(fittest);
+					System.out.println("Iteration " + i + " Fittest: " + fittest);
 					learner.train();
 				}
 
 				getFacade().sendNotification(GameNotification.TRAINING_PROGRESS_UPDATE,
 						new TrainingProgressReport(gamesCompleted, config.getNumberOfGames(), gamesWon));
 				logger.info("Training ended");
+				FeatureVector fittest = learner.getBest();
+				logger.info("**************Final weights: {}", fittest);
 			}
 		});
 		t.setDaemon(true);

@@ -26,17 +26,17 @@ import net.pferdimanzug.hearthstone.analyzer.gui.common.BehaviourStringConverter
 import net.pferdimanzug.hearthstone.analyzer.gui.common.DeckStringConverter;
 
 public class BattleOfDecksConfigView extends BorderPane {
-	
+
 	@FXML
 	private ComboBox<Integer> numberOfGamesBox;
 	@FXML
 	private ComboBox<IBehaviour> behaviourBox;
-	
+
 	@FXML
 	private ListView<Deck> selectedDecksListView;
 	@FXML
 	private ListView<Deck> availableDecksListView;
-	
+
 	@FXML
 	private Button addButton;
 	@FXML
@@ -45,7 +45,7 @@ public class BattleOfDecksConfigView extends BorderPane {
 	private Button startButton;
 	@FXML
 	private Button backButton;
-	
+
 	public BattleOfDecksConfigView() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BattleOfDecksConfigView.fxml"));
 		fxmlLoader.setRoot(this);
@@ -56,22 +56,22 @@ public class BattleOfDecksConfigView extends BorderPane {
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
-		
+
 		setupBehaviourBox();
 		setupNumberOfGamesBox();
-		
+
 		selectedDecksListView.setCellFactory(TextFieldListCell.forListView(new DeckStringConverter()));
 		selectedDecksListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		availableDecksListView.setCellFactory(TextFieldListCell.forListView(new DeckStringConverter()));
 		availableDecksListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		
+
 		addButton.setOnAction(this::handleAddButton);
 		removeButton.setOnAction(this::handleRemoveButton);
-		
+
 		backButton.setOnAction(event -> ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU));
 		startButton.setOnAction(this::handleStartButton);
 	}
-	
+
 	private void handleStartButton(ActionEvent event) {
 		int numberOfGames = numberOfGamesBox.getSelectionModel().getSelectedItem();
 		IBehaviour behaviour = behaviourBox.getSelectionModel().getSelectedItem();
@@ -79,13 +79,14 @@ public class BattleOfDecksConfigView extends BorderPane {
 		BattleConfig battleConfig = new BattleConfig(numberOfGames, behaviour, decks);
 		ApplicationFacade.getInstance().sendNotification(GameNotification.COMMIT_BATTLE_OF_DECKS_CONFIG, battleConfig);
 	}
-	
+
 	private void setupBehaviourBox() {
 		behaviourBox.setConverter(new BehaviourStringConverter());
-		behaviourBox.getItems().setAll(new GameStateValueBehaviour(FeatureVector.getDefault()), new PlayRandomBehaviour());
+		behaviourBox.getItems().setAll(new GameStateValueBehaviour(), new GameStateValueBehaviour(FeatureVector.getFittest(), "(fittest)"),
+				new PlayRandomBehaviour());
 		behaviourBox.getSelectionModel().selectFirst();
 	}
-	
+
 	private void setupNumberOfGamesBox() {
 		ObservableList<Integer> numberOfGamesEntries = FXCollections.observableArrayList();
 		numberOfGamesEntries.add(1);
@@ -95,18 +96,18 @@ public class BattleOfDecksConfigView extends BorderPane {
 		numberOfGamesBox.setItems(numberOfGamesEntries);
 		numberOfGamesBox.getSelectionModel().select(2);
 	}
-	
+
 	public void injectDecks(List<Deck> decks) {
 		selectedDecksListView.getItems().clear();
 		availableDecksListView.getItems().setAll(decks);
 	}
-	
+
 	private void handleAddButton(ActionEvent event) {
 		Collection<Deck> selectedDecks = availableDecksListView.getSelectionModel().getSelectedItems();
 		selectedDecksListView.getItems().addAll(selectedDecks);
 		availableDecksListView.getItems().removeAll(selectedDecks);
 	}
-	
+
 	private void handleRemoveButton(ActionEvent event) {
 		Collection<Deck> selectedDecks = selectedDecksListView.getSelectionModel().getSelectedItems();
 		availableDecksListView.getItems().addAll(selectedDecks);

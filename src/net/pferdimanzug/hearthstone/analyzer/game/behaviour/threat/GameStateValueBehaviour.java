@@ -24,8 +24,15 @@ public class GameStateValueBehaviour extends Behaviour {
 
 	private final FeatureVector featureVector;
 
-	public GameStateValueBehaviour(FeatureVector featureVector) {
+	private final String featureVectorName;
+
+	public GameStateValueBehaviour() {
+		this (FeatureVector.getDefault(), "(default)");
+	}
+	
+	public GameStateValueBehaviour(FeatureVector featureVector, String featureVectorName) {
 		this.featureVector = featureVector;
+		this.featureVectorName = featureVectorName;
 		this.heuristic = new ThreatBasedHeuristic(featureVector);
 	}
 
@@ -52,12 +59,12 @@ public class GameStateValueBehaviour extends Behaviour {
 
 	@Override
 	public IBehaviour clone() {
-		return new GameStateValueBehaviour(featureVector.clone());
+		return new GameStateValueBehaviour(featureVector.clone(), featureVectorName);
 	}
 
 	@Override
 	public String getName() {
-		return "Game state value (2 turns look-ahead)";
+		return "Game state value " + featureVectorName;
 	}
 
 	@Override

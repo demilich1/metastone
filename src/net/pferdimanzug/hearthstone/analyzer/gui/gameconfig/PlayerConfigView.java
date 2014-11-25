@@ -149,7 +149,9 @@ public class PlayerConfigView extends VBox {
 			behaviourList.add(new HumanBehaviour());
 		}
 
-		behaviourList.add(new GameStateValueBehaviour(FeatureVector.getDefault()));
+		behaviourList.add(new GameStateValueBehaviour(FeatureVector.getFittest(), "(fittest)"));
+		behaviourList.add(new GameStateValueBehaviour());
+
 		behaviourList.add(new GreedyOptimizeMove(new WeightedHeuristic()));
 		behaviourList.add(new NoAggressionBehaviour());
 
