@@ -52,11 +52,7 @@ public class OgreWarmaul extends WeaponCard {
 				return false;
 			}
 			// this trigger only sometimes fires
-			boolean result = event.getGameContext().getLogic().randomBool();
-			if (result) {
-			} else {
-			}
-			return result;
+			return event.getGameContext().getLogic().randomBool();
 		}
 	}
 }
