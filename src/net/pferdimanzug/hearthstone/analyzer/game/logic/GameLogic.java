@@ -995,6 +995,7 @@ public class GameLogic implements Cloneable {
 			refreshAttacksPerRound(minion);
 		}
 		context.fireGameEvent(new TurnStartEvent(context, player.getId()));
+		checkForDeadEntities();
 	}
 	
 	public void summon(int playerId, Minion minion, Card source, Actor nextTo, boolean resolveBattlecry) {

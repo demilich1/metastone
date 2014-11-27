@@ -2,6 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
@@ -35,11 +36,15 @@ public class CultMaster extends MinionCard {
 	}
 
 
-
 	private class CultMasterTrigger extends MinionDeathTrigger {
 
 		@Override
 		public boolean fire(GameEvent event, Entity host) {
+			Actor cultMaster = (Actor) host;
+			if (cultMaster.isDead()) {
+				return false;
+			}
+			
 			KillEvent killEvent = (KillEvent) event;
 			// not a minion
 			if (killEvent.getVictim().getEntityType() != EntityType.MINION) {
