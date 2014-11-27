@@ -26,6 +26,12 @@ public class OneTurnCostModifier extends CardCostModifier {
 	public boolean interestedIn(GameEventType eventType) {
 		return eventType == expirationTrigger.interestedIn() || expirationTrigger.interestedIn() == GameEventType.ALL;
 	}
+	
+	@Override
+	public void setOwner(int playerIndex) {
+		super.setOwner(playerIndex);
+		expirationTrigger.setOwner(playerIndex);
+	}
 
 	@Override
 	public void onGameEvent(GameEvent event) {

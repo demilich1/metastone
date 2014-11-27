@@ -32,7 +32,7 @@ public class MillhouseManastorm extends MinionCard {
 		OneTurnCostModifier costModifier = new OneTurnCostModifier(CardType.SPELL, -99, false);
 		costModifier.setTargetPlayer(TargetPlayer.OPPONENT);
 		SpellDesc castSpellsForFree = AddCostModifierSpell.create(costModifier);
-		castSpellsForFree.setTarget(EntityReference.ENEMY_HERO);
+		castSpellsForFree.setTarget(EntityReference.FRIENDLY_HERO);
 		millhouseManastorm.setBattlecry(Battlecry.createBattlecry(castSpellsForFree));
 		return millhouseManastorm;
 	}
