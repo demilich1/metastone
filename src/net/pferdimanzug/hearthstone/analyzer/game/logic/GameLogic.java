@@ -322,7 +322,7 @@ public class GameLogic implements Cloneable {
 		target.setTag(GameTag.DEAD);
 	}
 
-	private void destroy(Actor target) {
+	public void destroy(Actor target) {
 		removeSpelltriggers(target);
 
 		switch (target.getEntityType()) {

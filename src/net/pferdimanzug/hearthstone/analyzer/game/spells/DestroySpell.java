@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 
 public class DestroySpell extends Spell {
-	
+
 	public static SpellDesc create() {
 		SpellDesc desc = new SpellDesc(DestroySpell.class);
 		return desc;
