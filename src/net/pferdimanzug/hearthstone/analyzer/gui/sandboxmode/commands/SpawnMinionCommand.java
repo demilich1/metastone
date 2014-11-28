@@ -49,7 +49,8 @@ public class SpawnMinionCommand extends SimpleCommand<GameNotification> {
 		
 		Minion minion = minionCard.summon();
 		Actor nextTo = (Actor) context.resolveSingleTarget(action.getTargetKey());
-		context.getLogic().summon(selectedPlayer.getId(), minion, minionCard, nextTo, false);
+		int index = selectedPlayer.getMinions().indexOf(nextTo);
+		context.getLogic().summon(selectedPlayer.getId(), minion, minionCard, index, false);
 		
 		sendNotification(GameNotification.UPDATE_SANDBOX_STATE, context);
 	}

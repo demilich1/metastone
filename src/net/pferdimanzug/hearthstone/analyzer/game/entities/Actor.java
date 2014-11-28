@@ -104,7 +104,7 @@ public abstract class Actor extends Entity {
 	}
 
 	public boolean isDead() {
-		return getHp() < 1;
+		return getHp() < 1 || super.isDead();
 	}
 
 	public boolean isWounded() {

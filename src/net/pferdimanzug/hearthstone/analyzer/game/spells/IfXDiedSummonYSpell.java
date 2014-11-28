@@ -25,7 +25,7 @@ public class IfXDiedSummonYSpell extends Spell {
 		MinionCard y = (MinionCard) desc.get(SpellArg.CARD);
 		for (Minion deadMinion : player.getGraveyard()) {
 			if (deadMinion.getTag(GameTag.UNIQUE_MINION) == x) {
-				context.getLogic().summon(player.getId(), y.summon(), null, null, false);
+				context.getLogic().summon(player.getId(), y.summon());
 				break;
 			}
 		}

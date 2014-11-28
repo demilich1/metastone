@@ -32,12 +32,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
 import net.pferdimanzug.hearthstone.analyzer.game.events.BoardChangedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.CardPlayedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.DamageEvent;
-import net.pferdimanzug.hearthstone.analyzer.game.events.ReceiveCardEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.HealEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.KillEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.OverloadEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.PhysicalAttackEvent;
+import net.pferdimanzug.hearthstone.analyzer.game.events.ReceiveCardEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.SecretPlayedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.SecretRevealedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.SilenceEvent;
@@ -316,6 +316,10 @@ public class GameLogic implements Cloneable {
 		return true;
 	}
 
+	public void markAsDestroyed(Actor target) {
+		target.setTag(GameTag.DEAD);
+	}
+
 	public void destroy(Actor target) {
 		removeSpelltriggers(target);
 
@@ -346,15 +350,15 @@ public class GameLogic implements Cloneable {
 		context.fireGameEvent(killEvent);
 		context.getEnvironment().remove(Environment.KILLED_MINION);
 
-		// set Hp to zero to make .isDead() return true
-		if (minion.getHp() > 0) {
-			minion.setHp(0);
-		}
+		minion.setTag(GameTag.DEAD);
 		minion.setTag(GameTag.DIED_ON_TURN, context.getTurn());
 
-		owner.getMinions().remove(minion);
+		int tokenIndex = owner.getMinions().indexOf(minion);
+		context.getEnvironment().put(Environment.TOKEN_INDEX, tokenIndex);
+		owner.getMinions().remove(tokenIndex);
 		owner.getGraveyard().add(minion);
 		resolveDeathrattles(owner, minion);
+		context.getEnvironment().remove(Environment.TOKEN_INDEX);
 
 		context.fireGameEvent(new BoardChangedEvent(context));
 	}
@@ -382,7 +386,7 @@ public class GameLogic implements Cloneable {
 			player.getStatistics().fatigueDamage(fatigue);
 			return null;
 		}
-		
+
 		player.getStatistics().cardDrawn();
 		Card card = deck.getRandom();
 		deck.remove(card);
@@ -488,7 +492,7 @@ public class GameLogic implements Cloneable {
 		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, target, damaged ? attackerDamage : 0));
 		context.getEnvironment().remove(Environment.ATTACKER);
 	}
-	
+
 	public void gainArmor(Player player, int armor) {
 		logger.debug("{} gains {} armor", player.getHero(), armor);
 		player.getHero().modifyArmor(armor);
@@ -693,7 +697,7 @@ public class GameLogic implements Cloneable {
 		}
 		context.getOpponent(player).getMinions().remove(minion);
 		player.getMinions().add(minion);
-		//TODO: we need to change the owner of all spelltriggers as well
+		// TODO: we need to change the owner of all spelltriggers as well
 		minion.setOwner(player.getId());
 		List<IGameEventListener> triggers = context.getTriggersAssociatedWith(minion.getReference());
 		for (IGameEventListener trigger : triggers) {
@@ -997,8 +1001,12 @@ public class GameLogic implements Cloneable {
 		context.fireGameEvent(new TurnStartEvent(context, player.getId()));
 		checkForDeadEntities();
 	}
-	
-	public void summon(int playerId, Minion minion, Card source, Actor nextTo, boolean resolveBattlecry) {
+
+	public void summon(int playerId, Minion minion) {
+		summon(playerId, minion, null, -1, false);
+	}
+
+	public void summon(int playerId, Minion minion, Card source, int index, boolean resolveBattlecry) {
 		Player player = context.getPlayer(playerId);
 		if (!canSummonMoreMinions(player)) {
 			log("{} cannot summon any more minions, {} is destroyed", player.getName(), minion);
@@ -1015,8 +1023,7 @@ public class GameLogic implements Cloneable {
 			resolveBattlecry(player.getId(), minion);
 		}
 
-		int index = player.getMinions().indexOf(nextTo);
-		if (index == -1) {
+		if (index < 0 || index >= player.getMinions().size()) {
 			player.getMinions().add(minion);
 		} else {
 			player.getMinions().add(index, minion);

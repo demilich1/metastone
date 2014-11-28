@@ -27,7 +27,7 @@ public class AlarmOBotSpell extends ReturnMinionToHandSpell {
 		MinionCard randomMinionCard = (MinionCard) player.getHand().getRandomOfType(CardType.MINION);
 		player.getHand().remove(randomMinionCard);
 		randomMinionCard.setLocation(CardLocation.VOID);
-		context.getLogic().summon(player.getId(), randomMinionCard.summon(), null, null, false);
+		context.getLogic().summon(player.getId(), randomMinionCard.summon());
 	}
 
 }

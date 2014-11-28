@@ -2,6 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.actions;
 
 import net.pferdimanzug.hearthstone.analyzer.game.Environment;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
+import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
@@ -36,7 +37,9 @@ public class PlayMinionCardAction extends PlayCardAction {
 		if (battlecry != null) {
 			minion.setBattlecry(battlecry);
 		}
-		context.getLogic().summon(playerId, minion, minionCard, nextTo, true);
+		Player player = context.getPlayer(playerId);
+		int index = player.getMinions().indexOf(nextTo);
+		context.getLogic().summon(playerId, minion, minionCard, index, true);
 	}
 
 }

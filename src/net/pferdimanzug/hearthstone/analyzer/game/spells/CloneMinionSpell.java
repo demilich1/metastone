@@ -18,7 +18,7 @@ public class CloneMinionSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		Minion template = (Minion) target;
 		MinionCard sourceCard = (MinionCard) template.getSourceCard();
-		context.getLogic().summon(player.getId(), sourceCard.summon(), null, null, false);
+		context.getLogic().summon(player.getId(), sourceCard.summon());
 	}
 
 }

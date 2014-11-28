@@ -20,7 +20,7 @@ public class SummonCopySpell extends Spell {
 		Minion clone = template.clone();
 		clone.setSpellTrigger(null);
 		
-		context.getLogic().summon(player.getId(), clone, null, null, false);
+		context.getLogic().summon(player.getId(), clone);
 		for (IGameEventListener trigger : context.getTriggersAssociatedWith(template.getReference())) {
 			IGameEventListener triggerClone = trigger.clone();
 			context.getLogic().addGameEventListener(player, triggerClone, clone);

@@ -20,7 +20,7 @@ public class ReincarnateSpell extends Spell {
 		Minion minion = (Minion) target;
 		MinionCard sourceCard = (MinionCard) minion.getSourceCard();
 		context.getLogic().destroy(minion);
-		context.getLogic().summon(player.getId(), sourceCard.summon(), null, null, false);
+		context.getLogic().summon(player.getId(), sourceCard.summon());
 	}
 
 }

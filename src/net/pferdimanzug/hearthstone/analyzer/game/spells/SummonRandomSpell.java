@@ -19,7 +19,7 @@ public class SummonRandomSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		MinionCard[] minionCards = (MinionCard[]) desc.get(SpellArg.CARDS);
 		MinionCard randomMinionCard = minionCards[context.getLogic().random(minionCards.length)];
-		context.getLogic().summon(player.getId(), randomMinionCard.summon(), null, null, false);
+		context.getLogic().summon(player.getId(), randomMinionCard.summon());
 	}
 
 }

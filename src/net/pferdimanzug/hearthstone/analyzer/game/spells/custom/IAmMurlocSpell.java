@@ -22,7 +22,7 @@ public class IAmMurlocSpell extends Spell {
 		int numberOfMurlocs = ThreadLocalRandom.current().nextInt(3, 6);
 		MinionCard murlocCard = new Murloc();
 		for (int i = 0; i < numberOfMurlocs; i++) {
-			context.getLogic().summon(player.getId(), murlocCard.summon(), null, null, false);
+			context.getLogic().summon(player.getId(), murlocCard.summon());
 		}
 	}
 

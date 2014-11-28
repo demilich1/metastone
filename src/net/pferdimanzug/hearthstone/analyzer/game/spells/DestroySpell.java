@@ -15,7 +15,7 @@ public class DestroySpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
-		context.getLogic().destroy((Actor) target);
+		context.getLogic().markAsDestroyed((Actor) target);
 	}
 
 }

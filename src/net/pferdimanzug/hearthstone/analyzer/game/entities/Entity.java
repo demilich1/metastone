@@ -79,6 +79,10 @@ public abstract class Entity extends CustomCloneable {
 	public int getTagValue(GameTag tag) {
 		return tags.containsKey(tag) ? (int) tags.get(tag) : 0;
 	}
+	
+	public boolean isDead() {
+		return hasStatus(GameTag.DEAD);
+	}
 
 	/**
 	 * Returns an unique identifier for this Entity type.

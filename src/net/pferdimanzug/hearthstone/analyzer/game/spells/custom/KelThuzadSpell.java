@@ -22,7 +22,7 @@ public class KelThuzadSpell extends Spell {
 		for (Minion deadMinion : player.getGraveyard()) {
 			if (deadMinion.getTagValue(GameTag.DIED_ON_TURN) == currentTurn) {
 				MinionCard minionCard = (MinionCard) deadMinion.getSourceCard();
-				context.getLogic().summon(player.getId(), minionCard.summon(), null, null, false);
+				context.getLogic().summon(player.getId(), minionCard.summon());
 			}
 		}
 	}

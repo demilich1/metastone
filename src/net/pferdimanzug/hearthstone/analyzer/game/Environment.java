@@ -8,5 +8,6 @@ public enum Environment {
 	TARGET_OVERRIDE,
 	ATTACKER,
 	EVENT_TARGET,
+	TOKEN_INDEX,
 	DEBUG
 }

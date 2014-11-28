@@ -43,7 +43,7 @@ public class SummonSpell extends Spell {
 
 	private void summon(GameContext context, int playerId, MinionCard[] minionCards) {
 		for (MinionCard minionCard : minionCards) {
-			context.getLogic().summon(playerId, minionCard.summon(), null, null, false);
+			context.getLogic().summon(playerId, minionCard.summon());
 		}
 	}
 

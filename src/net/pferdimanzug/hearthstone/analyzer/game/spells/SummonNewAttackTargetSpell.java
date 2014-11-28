@@ -27,7 +27,7 @@ public class SummonNewAttackTargetSpell extends Spell {
 		MinionCard minionCard = (MinionCard) desc.get(SpellArg.CARD);
 		Minion targetMinion = ((MinionCard) minionCard.clone()).summon();
 		context.getEnvironment().put(Environment.TARGET_OVERRIDE, targetMinion);
-		context.getLogic().summon(player.getId(), targetMinion, null, null, false);
+		context.getLogic().summon(player.getId(), targetMinion);
 	}
 	
 

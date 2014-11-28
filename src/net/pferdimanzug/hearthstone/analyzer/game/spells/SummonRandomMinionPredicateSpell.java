@@ -28,7 +28,7 @@ public class SummonRandomMinionPredicateSpell extends Spell {
 		@SuppressWarnings("unchecked")
 		Predicate<Card> cardFilter = (Predicate<Card>) desc.get(SpellArg.CARD_FILTER);
 		MinionCard minionCard = getRandomMatchingMinionCard(cardFilter);
-		context.getLogic().summon(player.getId(), minionCard.summon(), null, null, false);
+		context.getLogic().summon(player.getId(), minionCard.summon());
 	}
 	
 	private static MinionCard getRandomMatchingMinionCard(Predicate<Card> cardFilter) {

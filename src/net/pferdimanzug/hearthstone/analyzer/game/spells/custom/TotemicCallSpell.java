@@ -53,7 +53,7 @@ public class TotemicCallSpell extends Spell {
 		}
 
 		Minion randomTotem = availableTotems.get(ThreadLocalRandom.current().nextInt(availableTotems.size()));
-		context.getLogic().summon(player.getId(), randomTotem, null, null, true);
+		context.getLogic().summon(player.getId(), randomTotem);
 	}
 	
 }
