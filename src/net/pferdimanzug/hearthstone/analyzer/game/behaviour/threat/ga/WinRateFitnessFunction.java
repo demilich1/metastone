@@ -43,7 +43,9 @@ public class WinRateFitnessFunction extends FitnessFunction {
 	protected double evaluate(IChromosome chromosome) {
 		GameStatistics stats = new GameStatistics();
 		
-		ExecutorService executor = Executors.newCachedThreadPool();
+		int cores = Runtime.getRuntime().availableProcessors();
+		ExecutorService executor = Executors.newFixedThreadPool(cores);
+		
 		List<Future<Void>> futures = new ArrayList<Future<Void>>(); 
 		for (int i = 0; i < NUMBER_OF_GAMES; i++) {
 			PlayGameTask task = new PlayGameTask(stats, chromosome);
