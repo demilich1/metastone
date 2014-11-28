@@ -28,8 +28,6 @@ public class BlessingOfWisdom extends SpellCard {
 		return 240;
 	}
 
-
-
 	private class BlessingOfWisdomTrigger extends GameEventTrigger {
 
 		@Override

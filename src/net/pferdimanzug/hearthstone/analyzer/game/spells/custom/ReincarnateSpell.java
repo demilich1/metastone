@@ -19,7 +19,7 @@ public class ReincarnateSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		Minion minion = (Minion) target;
 		MinionCard sourceCard = (MinionCard) minion.getSourceCard();
-		context.getLogic().destroy(minion);
+		context.getLogic().markAsDestroyed(minion);
 		context.getLogic().summon(player.getId(), sourceCard.summon());
 	}
 

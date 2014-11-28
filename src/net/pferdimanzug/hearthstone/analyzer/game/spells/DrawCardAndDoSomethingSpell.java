@@ -22,6 +22,10 @@ public class DrawCardAndDoSomethingSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		ICardProvider cardProvider = (ICardProvider) desc.get(SpellArg.CARD_PROVIDER);
 		Card card = cardProvider.getCard(context, player);
+		// card may be null (i.e. try to draw from deck, but already in fatigue)
+		if (card == null) {
+			return;
+		}
 		ICardPostProcessor cardPostProcessor = (ICardPostProcessor) desc.get(SpellArg.CARD_PROCESSOR);
 		cardPostProcessor.processCard(context, player, card);
 	}
