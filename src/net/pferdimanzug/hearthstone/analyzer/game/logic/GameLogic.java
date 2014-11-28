@@ -921,7 +921,7 @@ public class GameLogic implements Cloneable {
 		performGameAction(playerId, battlecryAction);
 	}
 
-	private void resolveDeathrattles(Player player, Actor actor) {
+	public void resolveDeathrattles(Player player, Actor actor) {
 		boolean doubleDeathrattles = hasTag(player, GameTag.DOUBLE_DEATHRATTLES);
 		// TODO: check when and in which order deathrattles should fire
 		if (actor.hasTag(GameTag.DEATHRATTLES)) {
