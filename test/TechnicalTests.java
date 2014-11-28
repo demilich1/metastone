@@ -1,11 +1,19 @@
+import java.util.ArrayList;
+import java.util.List;
+
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.WildPyromancer;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.MindBlast;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock.Corruption;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Anduin;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Guldan;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
@@ -41,6 +49,32 @@ public class TechnicalTests extends TestBase {
 		context.getLogic().startTurn(GameContext.PLAYER_2);
 		context.getLogic().endTurn(GameContext.PLAYER_2);
 		context.getLogic().startTurn(GameContext.PLAYER_1);
+	}
+	
+	@Test
+	public void testTriplePyromancer() {
+		GameContext context = createContext(new Anduin(), new Garrosh());
+		Player player1 = context.getPlayer1();
+		player1.setMana(10);
 		
+		for (int i = 0; i < 3; i++) {
+			playCard(context, player1, new WildPyromancer());
+		}
+		
+		List<Minion> copyOfMinionList = new ArrayList<Minion>();
+		copyOfMinionList.addAll(player1.getMinions());
+		Assert.assertEquals(copyOfMinionList.size(), 3);
+		// three pyromancers summoned, all should be at max HP
+		for (Minion minion : copyOfMinionList) {
+			Assert.assertEquals(minion.getHp(), minion.getMaxHp());
+		}
+		
+		playCard(context, player1, new MindBlast());
+		// after playing a spell:
+		// all three pyromancers should have triggered, even though all are dead after the first two
+		// this tests that minions are only removed from board after all effects are resolved
+		for (Minion minion : copyOfMinionList) {
+			Assert.assertEquals(minion.getHp(), -1);
+		}
 	}
 }
