@@ -987,7 +987,8 @@ public class GameLogic implements Cloneable {
 		}
 		player.getStatistics().startTurn();
 
-		player.setMana(player.getMaxMana() - player.getHero().getTagValue(GameTag.OVERLOAD));
+		int mana = MathUtils.clamp(player.getMaxMana() - player.getHero().getTagValue(GameTag.OVERLOAD), 0, MAX_MANA);
+		player.setMana(mana);
 		player.getHero().removeTag(GameTag.OVERLOAD);
 		log("{} starts his turn with {} mana", player.getName(), player.getMana() + "/" + player.getMaxMana());
 		player.getHero().getHeroPower().setUsed(false);

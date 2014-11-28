@@ -64,7 +64,7 @@ public class GameBoardView extends BorderPane {
 
 	@FXML
 	private Label centerMessageLabel;
-
+	
 	public GameBoardView() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GameBoardView.fxml"));
 		fxmlLoader.setRoot(this);
@@ -272,5 +272,4 @@ public class GameBoardView extends BorderPane {
 			}
 		}
 	}
-
 }
