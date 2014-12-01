@@ -39,6 +39,7 @@ public class ActionLogic {
 	private List<GameAction> getHeroPowerActions(GameContext context, Player player) {
 		List<GameAction> heroPowerActions = new ArrayList<GameAction>();
 		HeroPower heroPower = player.getHero().getHeroPower();
+		heroPower.onWillUse(context, player);
 		CardReference heroPowerReference = new CardReference(player.getId(), CardLocation.HERO_POWER, heroPower.getId(), heroPower.getName());
 		if (!context.getLogic().canPlayCard(player.getId(), heroPowerReference)) {
 			return heroPowerActions;

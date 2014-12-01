@@ -84,7 +84,7 @@ public class GameLogic implements Cloneable {
 	private final IdFactory idFactory;
 	private GameContext context;
 	private boolean loggingEnabled = true;
-	
+
 	public GameLogic() {
 		idFactory = new IdFactory();
 	}
@@ -239,8 +239,10 @@ public class GameLogic implements Cloneable {
 			// which is relevant for deathrattles
 			Collections.sort(minionList, (m1, m2) -> Integer.compare(m1.getId(), m2.getId()));
 			for (Minion minion : minionList) {
-				// need to check if minion is still on the players minion list...
-				// it may have been removed by another minion dying before (i.e. Anub'ar Ambusher)
+				// need to check if minion is still on the players minion
+				// list...
+				// it may have been removed by another minion dying before (i.e.
+				// Anub'ar Ambusher)
 				if (minion.isDead() && player.getMinions().contains(minion)) {
 					destroy(minion);
 				}
@@ -359,7 +361,7 @@ public class GameLogic implements Cloneable {
 		context.getEnvironment().put(Environment.TOKEN_INDEX, tokenIndex);
 		owner.getMinions().remove(tokenIndex);
 		owner.getGraveyard().add(minion);
-		
+
 		resolveDeathrattles(owner, minion);
 		context.getEnvironment().remove(Environment.TOKEN_INDEX);
 
@@ -590,7 +592,7 @@ public class GameLogic implements Cloneable {
 		castSpell(owner.getId(), enrageSpell);
 	}
 
-	private boolean hasTag(Player player, GameTag tag) {
+	public boolean hasTag(Player player, GameTag tag) {
 		if (player.getHero().hasStatus(tag)) {
 			return true;
 		}
@@ -871,7 +873,7 @@ public class GameLogic implements Cloneable {
 		removeSpelltriggers(minion);
 
 		log("{} was removed", minion);
-		
+
 		minion.setTag(GameTag.DEAD);
 
 		Player owner = context.getPlayer(minion.getOwner());

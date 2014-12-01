@@ -1,6 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.heroes.powers;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
+import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.HeroPowerAction;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.PlayCardAction;
@@ -45,6 +46,10 @@ public abstract class HeroPower extends SpellCard {
 				context.getLogic().castSpell(playerId, getSpell());
 			}
 		};
+	}
+	
+	public void onWillUse(GameContext context, Player player) {
+		
 	}
 
 	@Override
