@@ -7,6 +7,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.ThreadLocalRandom;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
@@ -29,14 +30,12 @@ public class WinRateFitnessFunction extends FitnessFunction {
 	 */
 	private static final long serialVersionUID = 2616303666130026770L;
 	
-	private static final int NUMBER_OF_GAMES = 50;
+	private static final int NUMBER_OF_GAMES = 100;
 	
-	private final Deck deck1;
-	private final Deck deck2;
+	private final List<Deck> decks;
 
-	public WinRateFitnessFunction(Deck deck1, Deck deck2) {
-		this.deck1 = deck1;
-		this.deck2 = deck2;
+	public WinRateFitnessFunction(List<Deck> decks) {
+		this.decks = decks;
 	}
 
 	@Override
@@ -79,6 +78,10 @@ public class WinRateFitnessFunction extends FitnessFunction {
 		return stats.getDouble(Statistic.WIN_RATE) * 100;
 	}
 	
+	private Deck getRandomDeck() {
+		return decks.get(ThreadLocalRandom.current().nextInt(decks.size()));
+	}
+	
 	
 	private class PlayGameTask implements Callable<Void> {
 
@@ -92,14 +95,17 @@ public class WinRateFitnessFunction extends FitnessFunction {
 
 		@Override
 		public Void call() throws Exception {
+			Deck deck1 = getRandomDeck();
 			Hero hero1 = HeroFactory.createHero(deck1.getHeroClass());
 			Player player1 = new Player("Player 1 (learning)", hero1, deck1);
 			FeatureVector vector = GeneticFeatureOptimizer.toVector(chromosome);
 			player1.setBehaviour(new GameStateValueBehaviour(vector, "(current)"));
 
+			Deck deck2 = getRandomDeck();
 			Hero hero2 = HeroFactory.createHero(deck2.getHeroClass());
 			Player player2 = new Player("Player 2 (static)", hero2, deck2);
-			player2.setBehaviour(new GameStateValueBehaviour(FeatureVector.getFittest(), "(former fittest)"));
+			//player2.setBehaviour(new GameStateValueBehaviour(FeatureVector.getFittest(), "(former fittest)"));
+			player2.setBehaviour(new GameStateValueBehaviour());
 
 			GameContext newGame = new GameContext(player1, player2, new GameLogic());
 			newGame.play();

@@ -47,9 +47,8 @@ public class PerformTrainingCommand extends SimpleCommand<GameNotification> {
 				logger.info("Training started");
 
 				GeneticFeatureOptimizer learner = new GeneticFeatureOptimizer();
-				Deck player1Deck = config.getRandomDeck();
-				Deck player2Deck = config.getRandomDeck();
-				learner.init(player1Deck, player2Deck);
+				
+				learner.init(config.getDecks());
 
 				// send initial status update
 				TrainingProgressReport progress = new TrainingProgressReport(gamesCompleted, config.getNumberOfGames(), gamesWon);
@@ -57,11 +56,14 @@ public class PerformTrainingCommand extends SimpleCommand<GameNotification> {
 				for (int i = 0; i < config.getNumberOfGames(); i++) {
 					FeatureVector fittest = learner.getBest();
 					
+					Deck player1Deck = config.getRandomDeck();
+					Deck player2Deck = config.getRandomDeck();
 					Player player1 = new Player("Learner", HeroFactory.createHero(player1Deck.getHeroClass()), player1Deck);
 					player1.setBehaviour(new GameStateValueBehaviour(fittest, "(fittest)"));
 
 					Player player2 = new Player("Opponent", HeroFactory.createHero(player2Deck.getHeroClass()), player2Deck);
-					player2.setBehaviour(new GameStateValueBehaviour(FeatureVector.getFittest(), "(former fittest)"));
+					//player2.setBehaviour(new GameStateValueBehaviour(FeatureVector.getFittest(), "(former fittest)"));
+					player2.setBehaviour(new GameStateValueBehaviour());
 
 					GameContext newGame = new GameContext(player1, player2, new GameLogic());
 					newGame.play();

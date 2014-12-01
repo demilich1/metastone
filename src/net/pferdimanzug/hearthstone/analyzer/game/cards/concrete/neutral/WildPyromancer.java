@@ -14,7 +14,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 public class WildPyromancer extends MinionCard {
 
 	public WildPyromancer() {
-		super("Wild Pyromancer", 3, 2, Rarity.RARE, HeroClass.PRIEST, 2);
+		super("Wild Pyromancer", 3, 2, Rarity.RARE, HeroClass.ANY, 2);
 		setDescription("After you cast a spell, deal 1 damage to ALL minions.");
 	}
 
