@@ -4,7 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes.tokens.DruidOfTheFangToken;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes.tokens.CobraForm;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
@@ -24,7 +24,7 @@ public class DruidOfTheFang extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion druidOfTheFang = createMinion();
-		SpellDesc transformSpell = TransformMinionSpell.create(new DruidOfTheFangToken());
+		SpellDesc transformSpell = TransformMinionSpell.create(new CobraForm());
 		transformSpell.setTarget(EntityReference.SELF);
 		Battlecry battleCry = Battlecry.createBattlecry(transformSpell);
 		battleCry.setCondition((context, player) -> SpellUtils.hasMinionOfRace(player, Race.BEAST));

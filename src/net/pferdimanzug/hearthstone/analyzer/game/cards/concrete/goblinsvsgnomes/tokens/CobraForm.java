@@ -4,11 +4,13 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 
-public class DruidOfTheFangToken extends MinionCard {
+public class CobraForm extends MinionCard {
 
-	public DruidOfTheFangToken() {
-		super("Druid Of The Fang Token", 7, 7, Rarity.FREE, HeroClass.DRUID, 5);
+	public CobraForm() {
+		super("Druid Of The Fang (Cobra Form)", 7, 7, Rarity.FREE, HeroClass.DRUID, 5);
+		setRace(Race.BEAST);
 		setCollectible(false);
 	}
 

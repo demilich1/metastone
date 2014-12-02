@@ -30,7 +30,7 @@ public class WinRateFitnessFunction extends FitnessFunction {
 	 */
 	private static final long serialVersionUID = 2616303666130026770L;
 	
-	private static final int NUMBER_OF_GAMES = 100;
+	private static final int NUMBER_OF_GAMES = 50;
 	
 	private final List<Deck> decks;
 

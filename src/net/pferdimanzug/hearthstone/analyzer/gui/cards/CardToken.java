@@ -15,6 +15,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardType;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.gui.DigitFactory;
 import net.pferdimanzug.hearthstone.analyzer.gui.IconFactory;
@@ -84,7 +85,8 @@ public class CardToken extends BorderPane {
 		attackIcon.setVisible(isMinionCard);
 		hpIcon.setVisible(isMinionCard);
 		if (isMinionCard) {
-			setScoreValue(attackAnchor, card.getTagValue(GameTag.BASE_ATTACK));
+			MinionCard minionCard = (MinionCard) card;
+			setScoreValue(attackAnchor, minionCard.getAttack(), minionCard.getBaseAttack());
 			setScoreValue(hpAnchor, card.getTagValue(GameTag.BASE_HP));
 		}
 	}
