@@ -1,6 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode;
 
-import java.util.HashMap;
+import java.util.EnumMap;
+import java.util.Map;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ChangeListener;
@@ -22,7 +23,7 @@ import net.pferdimanzug.hearthstone.analyzer.utils.ICallback;
 
 public class EntityEditor extends SandboxEditor {
 
-	private final HashMap<GameTag, Object> workingCopy = new HashMap<GameTag, Object>();
+	private final Map<GameTag, Object> workingCopy = new EnumMap<GameTag, Object>(GameTag.class);
 	private final Entity entity;
 
 	@FXML
@@ -111,7 +112,7 @@ public class EntityEditor extends SandboxEditor {
 	}
 
 	private void populateTable(Entity entity) {
-		HashMap<GameTag, Object> tags = entity.getTags();
+		Map<GameTag, Object> tags = entity.getTags();
 		ObservableList<GameTagEntry> data = FXCollections.observableArrayList();
 
 		for (GameTag tag : tags.keySet()) {

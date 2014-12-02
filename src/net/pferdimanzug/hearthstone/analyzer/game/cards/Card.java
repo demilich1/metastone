@@ -1,6 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
@@ -34,7 +34,7 @@ public abstract class Card extends Entity {
 	@Override
 	public Card clone() {
 		Card clone = (Card) super.clone();
-		clone.tags = new HashMap<>(getTags());
+		clone.tags = new EnumMap<>(getTags());
 		return clone;
 	}
 

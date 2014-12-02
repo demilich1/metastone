@@ -1,7 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.entities;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
@@ -43,7 +43,7 @@ public abstract class Actor extends Entity {
 	@Override
 	public Actor clone() {
 		Actor clone = (Actor) super.clone();
-		clone.tags = new HashMap<>(getTags());
+		clone.tags = new EnumMap<>(getTags());
 		clone.spellTrigger = spellTrigger != null ? spellTrigger.clone() : null;
 		if (hasTag(GameTag.DEATHRATTLES)) {
 			clone.removeTag(GameTag.DEATHRATTLES);

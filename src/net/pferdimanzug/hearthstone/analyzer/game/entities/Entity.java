@@ -1,6 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.entities;
 
-import java.util.HashMap;
+import java.util.EnumMap;
+import java.util.Map;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.CustomCloneable;
@@ -9,7 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 public abstract class Entity extends CustomCloneable {
 
 	private String name;
-	protected HashMap<GameTag, Object> tags = new HashMap<GameTag, Object>();
+	protected Map<GameTag, Object> tags = new EnumMap<GameTag, Object>(GameTag.class);
 	private int id;
 	private int ownerIndex = -1;
 	
@@ -72,7 +73,7 @@ public abstract class Entity extends CustomCloneable {
 		return tags.get(tag);
 	}
 
-	public HashMap<GameTag, Object> getTags() {
+	public Map<GameTag, Object> getTags() {
 		return tags;
 	}
 

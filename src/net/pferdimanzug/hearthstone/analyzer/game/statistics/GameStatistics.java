@@ -1,12 +1,13 @@
 package net.pferdimanzug.hearthstone.analyzer.game.statistics;
 
-import java.util.HashMap;
+import java.util.EnumMap;
+import java.util.Map;
 
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 
 public class GameStatistics implements Cloneable {
 
-	private final HashMap<Statistic, Object> stats = new HashMap<Statistic, Object>();
+	private final Map<Statistic, Object> stats = new EnumMap<Statistic, Object>(Statistic.class);
 
 	private void add(Statistic key, long value) {
 		if (!stats.containsKey(key)) {

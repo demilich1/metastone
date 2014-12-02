@@ -1,6 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.spells.desc;
 
-import java.util.HashMap;
+import java.util.EnumMap;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
@@ -12,7 +13,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class SpellDesc extends CustomCloneable {
 
-	private final HashMap<SpellArg, Object> arguments = new HashMap<>();
+	private final Map<SpellArg, Object> arguments = new EnumMap<>(SpellArg.class);
 	
 	public int assignedGC;
 
