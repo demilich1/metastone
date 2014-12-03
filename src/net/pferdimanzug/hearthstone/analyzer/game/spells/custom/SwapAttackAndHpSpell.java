@@ -9,7 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 
 public class SwapAttackAndHpSpell extends Spell {
-	
+
 	public static SpellDesc create() {
 		SpellDesc desc = new SpellDesc(SwapAttackAndHpSpell.class);
 		return desc;
@@ -24,5 +24,5 @@ public class SwapAttackAndHpSpell extends Spell {
 		targetActor.setTag(GameTag.HP_BONUS, hpBonus);
 		targetActor.setHp(targetActor.getMaxHp());
 	}
-	
+
 }

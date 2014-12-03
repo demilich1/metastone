@@ -1,6 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.behaviour.threat;
 
-import java.util.HashMap;
+import java.util.EnumMap;
+import java.util.Map;
 
 public class FeatureVector implements Cloneable {
 
@@ -48,7 +49,7 @@ public class FeatureVector implements Cloneable {
 		return defaultVector;
 	}
 
-	private final HashMap<WeightedFeature, Double> values = new HashMap<WeightedFeature, Double>();
+	private final Map<WeightedFeature, Double> values = new EnumMap<WeightedFeature, Double>(WeightedFeature.class);
 
 	public void set(WeightedFeature param, double value) {
 		getValues().put(param, value);
@@ -80,7 +81,7 @@ public class FeatureVector implements Cloneable {
 		return builder.toString();
 	}
 
-	public HashMap<WeightedFeature, Double> getValues() {
+	public Map<WeightedFeature, Double> getValues() {
 		return values;
 	}
 

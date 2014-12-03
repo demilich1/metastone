@@ -49,6 +49,16 @@ public class SpellUtils {
 		}
 		return false;
 	}
+	
+	public static int hasHowManyOfRace(Player player, Race race) {
+		int count = 0;
+		for (Minion minion : player.getMinions()) {
+			if (minion.getRace() == race) {
+				count++;
+			}
+		}
+		return count;
+	}
 
 	public static List<Actor> getValidRandomTargets(List<Entity> targets) {
 		List<Actor> validTargets = new ArrayList<Actor>();

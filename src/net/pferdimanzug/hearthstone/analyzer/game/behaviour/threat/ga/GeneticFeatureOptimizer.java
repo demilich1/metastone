@@ -1,7 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.behaviour.threat.ga;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.threat.FeatureVector;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.threat.WeightedFeature;
@@ -58,7 +58,7 @@ public class GeneticFeatureOptimizer {
 
 	public static Gene[] toGenes(FeatureVector featureVector, Configuration configuration) {
 		Gene[] genes = new Gene[featureVector.getValues().size()];
-		HashMap<WeightedFeature, Double> values = featureVector.getValues();
+		Map<WeightedFeature, Double> values = featureVector.getValues();
 		int i = 0;
 		for (WeightedFeature feature : values.keySet()) {
 			try {

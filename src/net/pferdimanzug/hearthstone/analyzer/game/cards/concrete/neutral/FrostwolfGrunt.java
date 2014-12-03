@@ -18,8 +18,6 @@ public class FrostwolfGrunt extends MinionCard {
 		return 130;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		return createMinion(GameTag.TAUNT);

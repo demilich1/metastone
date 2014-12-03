@@ -56,7 +56,7 @@ public class Player extends CustomCloneable {
 	public Player(String name, Hero hero, Deck deck) {
 		this.name = name;
 		this.setHero(hero);
-		this.deck = deck.getCardsCopy();;
+		this.deck = deck.getCardsCopy();
 		this.deckName = deck.getName();
 	}
 	

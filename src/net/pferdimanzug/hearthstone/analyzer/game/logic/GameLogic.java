@@ -848,10 +848,10 @@ public class GameLogic implements Cloneable {
 			log("{} receives card {}", player.getName(), card);
 			hand.add(card);
 			card.setLocation(CardLocation.HAND);
-			context.fireGameEvent(new ReceiveCardEvent(context, playerId, card));
 			if (card instanceof IGameEventListener) {
 				addGameEventListener(player, (IGameEventListener)card, card);
 			}
+			context.fireGameEvent(new ReceiveCardEvent(context, playerId, card));
 		} else {
 			log("{} has too many cards on his hand, card destroyed: {}", player.getName(), card);
 			card.setLocation(CardLocation.VOID);

@@ -3,6 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.game;
 public enum GameTag {
 	DEBUG,
 	HP,
+	ATTACK,
 	MAX_HP,
 	ARMOR,
 	ATTACK_BONUS,
@@ -49,5 +50,7 @@ public enum GameTag {
 	CANNOT_REDUCE_HP_BELOW_1, 
 	COUNTERED,
 	UNIQUE_MINION,
-	DIED_ON_TURN, HERO_POWER_CAN_TARGET_MINIONS,
+	DIED_ON_TURN, 
+	HERO_POWER_CAN_TARGET_MINIONS,
+	ATTACK_AND_HP_SWAPPED,
 }

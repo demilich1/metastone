@@ -113,8 +113,6 @@ public class WinRateFitnessFunction extends FitnessFunction {
 				stats.merge(player1.getStatistics());
 			}
 			
-			newGame.dispose();
-			
 			return null;
 		}
 
