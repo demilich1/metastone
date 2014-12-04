@@ -12,13 +12,14 @@ public abstract class MinionCard extends Card {
 	public MinionCard(String name, int baseAttack, int baseHp, Rarity rarity, HeroClass classRestriction, int manaCost) {
 		super(name, CardType.MINION, rarity, classRestriction, manaCost);
 		setTag(GameTag.BASE_ATTACK, baseAttack);
+		setTag(GameTag.ATTACK, baseAttack);
 		setTag(GameTag.BASE_HP, baseHp);
 	}
 
 	protected Minion createMinion(GameTag... tags) {
 		Minion minion = new Minion(this);
 		minion.setBaseAttack(getBaseAttack());
-		minion.setTag(GameTag.ATTACK_BONUS, getTagValue(GameTag.ATTACK_BONUS));
+		minion.setTag(GameTag.ATTACK, getAttack());
 		minion.setBaseHp(getBaseHp());
 		for (GameTag gameTag : tags) {
 			minion.setTag(gameTag);
@@ -27,7 +28,7 @@ public abstract class MinionCard extends Card {
 	}
 	
 	public int getAttack() {
-		return getTagValue(GameTag.BASE_ATTACK) + getTagValue(GameTag.ATTACK_BONUS);
+		return getTagValue(GameTag.ATTACK);
 	}
 	
 	public int getBaseAttack() {

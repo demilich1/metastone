@@ -11,7 +11,7 @@ public class GameTagUtils {
 	public static TagValueType getTagValueType(GameTag tag) {
 		switch (tag) {
 		case ARMOR:
-		case ATTACK_BONUS:
+		case TEMPORARY_ATTACK_BONUS:
 		case AURA_ATTACK_BONUS:
 		case AURA_HP_BONUS:
 		case BASE_ATTACK:

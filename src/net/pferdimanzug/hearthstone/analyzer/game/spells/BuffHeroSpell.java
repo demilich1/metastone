@@ -13,7 +13,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class BuffHeroSpell extends RevertableSpell {
+public class BuffHeroSpell extends Spell {
 
 	public static SpellDesc create(int attackBonus, int armorBonus) {
 		return create(attackBonus, armorBonus, true);
@@ -33,11 +33,6 @@ public class BuffHeroSpell extends RevertableSpell {
 	private static Logger logger = LoggerFactory.getLogger(BuffHeroSpell.class);
 
 	@Override
-	protected SpellDesc getReverseSpell(SpellDesc desc) {
-		return create(-desc.getInt(SpellArg.ATTACK_BONUS), 0, false);
-	}
-
-	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		Hero hero = (Hero) target;
 		int attackBonus = desc.getInt(SpellArg.ATTACK_BONUS);
@@ -45,14 +40,10 @@ public class BuffHeroSpell extends RevertableSpell {
 		
 		if (attackBonus != 0) {
 			logger.debug("{} gains {} attack", hero, attackBonus);
-			hero.modifyTag(GameTag.ATTACK_BONUS, +attackBonus);
+			hero.modifyTag(GameTag.TEMPORARY_ATTACK_BONUS, +attackBonus);
 		}
 		if (armorBonus != 0) {
 			context.getLogic().gainArmor(player, armorBonus);
-		}
-
-		if (attackBonus != 0) {
-			super.onCast(context, player, desc, target);
 		}
 	}
 

@@ -92,6 +92,7 @@ public class TargetLogic {
 		}
 
 		logger.error("Id " + targetId + " not found!");
+		logger.error(context.toString());
 		throw new RuntimeException("Target not found exception: " + targetKey);
 	}
 	

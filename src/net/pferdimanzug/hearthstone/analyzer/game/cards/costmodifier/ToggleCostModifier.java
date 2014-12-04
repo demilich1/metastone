@@ -30,6 +30,7 @@ public class ToggleCostModifier extends CardCostModifier {
 		ToggleCostModifier clone = (ToggleCostModifier) super.clone();
 		clone.toggleOnTrigger = toggleOnTrigger.clone();
 		clone.toggleOffTrigger = toggleOffTrigger.clone();
+		clone.ready = ready;
 		return clone;
 	}
 

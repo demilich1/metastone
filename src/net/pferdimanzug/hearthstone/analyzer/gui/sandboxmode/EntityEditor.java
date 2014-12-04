@@ -76,7 +76,7 @@ public class EntityEditor extends SandboxEditor {
 			addTagIfMissing(entity, GameTag.DIVINE_SHIELD, 0);
 			addTagIfMissing(entity, GameTag.WINDFURY, 0);
 			addTagIfMissing(entity, GameTag.FROZEN, 0);
-			addTagIfMissing(entity, GameTag.ATTACK_BONUS, 0);
+			addTagIfMissing(entity, GameTag.TEMPORARY_ATTACK_BONUS, 0);
 			addTagIfMissing(entity, GameTag.HP_BONUS, 0);
 			addTagIfMissing(entity, GameTag.CHARGE, 0);
 			addTagIfMissing(entity, GameTag.STEALTHED, 0);

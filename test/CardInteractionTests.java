@@ -13,6 +13,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SilenceSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.TemporaryAttackSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.custom.SwapAttackAndHpSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
@@ -90,7 +91,6 @@ public class CardInteractionTests extends TestBase {
 		Assert.assertEquals(minion.getHp(), 6);
 	}
 	
-	/*
 	@Test
 	public void testSwapWithBuffs() {
 		GameContext context = createContext(new Guldan(), new Garrosh());
@@ -102,7 +102,7 @@ public class CardInteractionTests extends TestBase {
 		playCard(context, player, minionCard);
 		
 		// buff test minion with temporary buff
-		SpellDesc buffSpell = BuffSpell.create(+4, 0, true);
+		SpellDesc buffSpell = TemporaryAttackSpell.create(+4);
 		buffSpell.setTarget(EntityReference.FRIENDLY_MINIONS);
 		SpellCard buffSpellCard = new TestSpellCard(buffSpell);
 		buffSpellCard.setTargetRequirement(TargetSelection.NONE);
@@ -126,6 +126,5 @@ public class CardInteractionTests extends TestBase {
 		Assert.assertEquals(minion.getAttack(), 3);
 		Assert.assertEquals(minion.getHp(), 5);
 	}
-	*/
 
 }

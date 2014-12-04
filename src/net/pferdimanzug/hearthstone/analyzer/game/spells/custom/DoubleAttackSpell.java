@@ -9,7 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 
 public class DoubleAttackSpell extends Spell {
-	
+
 	public static SpellDesc create() {
 		SpellDesc desc = new SpellDesc(DoubleAttackSpell.class);
 		return desc;
@@ -18,7 +18,8 @@ public class DoubleAttackSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		Actor targetActor = (Actor) target;
-		target.modifyTag(GameTag.ATTACK_BONUS, targetActor.getAttack());
+		int attackMultiplier = targetActor.getAttackMultiplier();
+		target.setTag(GameTag.ATTACK_MULTIPLIER, attackMultiplier * 2);
 	}
-	
+
 }

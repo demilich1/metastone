@@ -29,7 +29,7 @@ class Values {
 	
 	public static float getSilenceScore(GameContext context, Minion minion) {
 		float score = 0;
-		score += minion.getTagValue(GameTag.ATTACK_BONUS);
+		score += minion.getTagValue(GameTag.ATTACK) - minion.getTagValue(GameTag.BASE_ATTACK);
 		score += minion.getTagValue(GameTag.HP_BONUS) > 0 ? 1 : 0;
 		score += minion.hasStatus(GameTag.WINDFURY) ? 2 : 0;
 		score += minion.hasStatus(GameTag.DIVINE_SHIELD) ? 2 : 0;

@@ -58,6 +58,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerLayer;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.secrets.Secret;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardLocation;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardReference;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.IdFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 import net.pferdimanzug.hearthstone.analyzer.utils.MathUtils;
@@ -403,6 +404,10 @@ public class GameLogic implements Cloneable {
 		Player player = context.getPlayer(playerId);
 		player.getHero().removeTag(GameTag.COMBO);
 		player.getHero().activateWeapon(false);
+		player.getHero().removeTag(GameTag.TEMPORARY_ATTACK_BONUS);
+		for (Minion minion : player.getMinions()) {
+			minion.removeTag(GameTag.TEMPORARY_ATTACK_BONUS);
+		}
 		log("{} ends his turn.", player.getName());
 		context.fireGameEvent(new TurnEndEvent(context, player.getId()));
 		for (Iterator<CardCostModifier> iterator = context.getCardCostModifiers().iterator(); iterator.hasNext();) {
@@ -893,11 +898,18 @@ public class GameLogic implements Cloneable {
 	}
 
 	private void removeSpelltriggers(Actor actor) {
+		EntityReference actorReference = actor.getReference();
 		for (IGameEventListener trigger : context.getTriggersAssociatedWith(actor.getReference())) {
 			log("SpellTrigger {} was removed for {}", trigger, actor);
 			trigger.onRemove(context);
 		}
-		context.removeTriggersAssociatedWith(actor.getReference());
+		context.removeTriggersAssociatedWith(actorReference);
+		for (Iterator<CardCostModifier> iterator = context.getCardCostModifiers().iterator(); iterator.hasNext();) {
+			CardCostModifier cardCostModifier = iterator.next();
+			if (cardCostModifier.getHostReference().equals(actorReference)) {
+				iterator.remove();
+			}
+		}
 	}
 
 	private void resolveBattlecry(int playerId, Actor actor) {
@@ -984,6 +996,8 @@ public class GameLogic implements Cloneable {
 		}
 		removeSpelltriggers(target);
 		refreshAttacksPerRound(target);
+		target.setMaxHp(target.getTagValue(GameTag.BASE_HP));
+		target.setAttack(target.getTagValue(GameTag.BASE_ATTACK));
 		target.setHp(target.getMaxHp());
 		log("{} was silenced", target);
 	}

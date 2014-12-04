@@ -25,7 +25,7 @@ public class BuffWhenRaceIsOnBoardSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		Actor targetActor = (Actor) target;
-		targetActor.setTag(GameTag.ATTACK_BONUS, 0);
+		targetActor.setTag(GameTag.CONDITIONAL_ATTACK_BONUS, 0);
 		List<Entity> allMinions = context.resolveTarget(player, targetActor, EntityReference.FRIENDLY_MINIONS);
 		Race race = (Race) desc.get(SpellArg.RACE);
 		int attackBonus = 0;
@@ -39,7 +39,7 @@ public class BuffWhenRaceIsOnBoardSpell extends Spell {
 				break;
 			}
 		}
-		targetActor.modifyTag(GameTag.ATTACK_BONUS, attackBonus);
+		targetActor.modifyTag(GameTag.CONDITIONAL_ATTACK_BONUS, attackBonus);
 	}
 
 }

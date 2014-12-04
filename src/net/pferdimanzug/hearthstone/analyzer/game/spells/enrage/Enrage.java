@@ -20,7 +20,7 @@ public class Enrage extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		int attackBonus = desc.getInt(SpellArg.ATTACK_BONUS);
 		int attackModifier = target.hasStatus(GameTag.ENRAGED) ? +attackBonus : -attackBonus;
-		target.modifyTag(GameTag.ATTACK_BONUS, attackModifier);
+		target.modifyTag(GameTag.ATTACK, attackModifier);
 	}
 
 }

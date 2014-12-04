@@ -19,7 +19,7 @@ public class InnerFireSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		Actor targetActor = (Actor) target;
 		int buffAmount = targetActor.getHp() - targetActor.getAttack();
-		target.modifyTag(GameTag.ATTACK_BONUS, buffAmount);
+		target.modifyTag(GameTag.ATTACK, buffAmount);
 	}
 	
 }

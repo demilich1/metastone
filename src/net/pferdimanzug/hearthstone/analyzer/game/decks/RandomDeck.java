@@ -20,6 +20,7 @@ public class RandomDeck extends Deck {
 		IDeckValidator deckValidator = new DefaultDeckValidator();
 		CardCollection catalogue = CardCatalogue.query(null, null, getHeroClass());
 		catalogue.addAll(CardCatalogue.query(null, null, HeroClass.ANY));
+		
 		while (!copyDeck.isComplete()) {
 			Card randomCard = catalogue.getRandom();
 			if (deckValidator.canAddCardToDeck(randomCard, copyDeck)) {

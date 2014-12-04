@@ -4,8 +4,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.TargetPlayer;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.TemporaryAttackSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellCastedTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
@@ -26,7 +26,7 @@ public class ManaAddict extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion manaAddict = createMinion();
-		SpellDesc buffSpell = BuffSpell.create(2, 0, true);
+		SpellDesc buffSpell = TemporaryAttackSpell.create(2);
 		buffSpell.setTarget(EntityReference.SELF);
 		manaAddict.setSpellTrigger(new SpellTrigger(new SpellCastedTrigger(TargetPlayer.SELF), buffSpell));
 		return manaAddict;
