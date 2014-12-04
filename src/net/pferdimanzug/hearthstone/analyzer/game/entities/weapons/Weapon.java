@@ -30,7 +30,7 @@ public class Weapon extends Actor {
 	}
 
 	public int getWeaponDamage() {
-		return getTagValue(GameTag.WEAPON_DAMAGE);
+		return getTagValue(GameTag.WEAPON_DAMAGE) + getTagValue(GameTag.CONDITIONAL_ATTACK_BONUS);
 	}
 
 	public boolean isActive() {

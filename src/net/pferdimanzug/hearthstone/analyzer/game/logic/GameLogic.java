@@ -52,6 +52,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellSource;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.BoardChangedTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.IGameEventListener;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerLayer;
@@ -441,6 +442,7 @@ public class GameLogic implements Cloneable {
 			SpellTrigger spellTrigger = weapon.getSpellTrigger();
 			addGameEventListener(player, spellTrigger, weapon);
 		}
+		context.fireGameEvent(new BoardChangedEvent(context));
 	}
 
 	public void fight(Player player, Actor attacker, Actor defender) {

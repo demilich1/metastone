@@ -7,6 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellArg;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,7 @@ public class BuffWeaponSpell extends Spell {
 		SpellDesc desc = new SpellDesc(BuffWeaponSpell.class);
 		desc.set(SpellArg.ATTACK_BONUS, attackBonus);
 		desc.set(SpellArg.HP_BONUS, durabilityBonus);
+		desc.setTarget(EntityReference.NONE);
 		return desc;
 	}
 	

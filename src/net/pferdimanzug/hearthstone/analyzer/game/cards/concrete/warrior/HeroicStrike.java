@@ -16,8 +16,6 @@ public class HeroicStrike extends SpellCard {
 		setSpell(BuffHeroSpell.create(4, 0));
 		setPredefinedTarget(EntityReference.FRIENDLY_HERO);
 	}
-	
-
 
 	@Override
 	public int getTypeId() {
