@@ -22,4 +22,10 @@ public class CobraShot extends SpellCard {
 		setTargetRequirement(TargetSelection.MINIONS);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 485;
+	}
 }

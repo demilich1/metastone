@@ -18,4 +18,10 @@ public class ArmorPlating extends SpellCard {
 		setCollectible(false);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 583;
+	}
 }

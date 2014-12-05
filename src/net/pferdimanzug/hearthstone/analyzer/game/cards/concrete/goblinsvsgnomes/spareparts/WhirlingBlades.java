@@ -18,4 +18,10 @@ public class WhirlingBlades extends SpellCard {
 		setCollectible(false);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 589;
+	}
 }

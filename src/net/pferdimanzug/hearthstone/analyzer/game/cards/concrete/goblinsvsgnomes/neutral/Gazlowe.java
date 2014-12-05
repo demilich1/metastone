@@ -22,6 +22,11 @@ public class Gazlowe extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 516;
+	}
+	
+	@Override
 	public Minion summon() {
 		Minion gazlowe = createMinion();
 		SpellDesc getRandomMech = ReceiveRandomRaceCardSpell.create(Race.MECH, 1);
@@ -29,7 +34,9 @@ public class Gazlowe extends MinionCard {
 		gazlowe.setSpellTrigger(trigger);
 		return gazlowe;
 	}
-	
+
+
+
 	private class GazloweTrigger extends SpellCastedTrigger {
 
 		public GazloweTrigger() {
@@ -46,5 +53,4 @@ public class Gazlowe extends MinionCard {
 		}
 		
 	}
-
 }

@@ -18,6 +18,13 @@ public class Illuminator extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 523;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion illuminator = createMinion();
 		SpellDesc healHeroSpell = HealingSpell.create(4);
@@ -26,5 +33,4 @@ public class Illuminator extends MinionCard {
 		illuminator.setSpellTrigger(trigger);
 		return illuminator;
 	}
-
 }

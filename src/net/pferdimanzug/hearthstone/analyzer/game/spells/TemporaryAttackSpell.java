@@ -13,13 +13,13 @@ import org.slf4j.LoggerFactory;
 
 public class TemporaryAttackSpell extends Spell {
 
-	private static Logger logger = LoggerFactory.getLogger(TemporaryAttackSpell.class);
-
 	public static SpellDesc create(int attackBonus) {
 		SpellDesc desc = new SpellDesc(TemporaryAttackSpell.class);
 		desc.set(SpellArg.ATTACK_BONUS, attackBonus);
 		return desc;
 	}
+
+	private static Logger logger = LoggerFactory.getLogger(TemporaryAttackSpell.class);
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {

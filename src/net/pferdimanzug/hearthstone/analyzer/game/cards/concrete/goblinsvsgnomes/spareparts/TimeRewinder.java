@@ -18,4 +18,10 @@ public class TimeRewinder extends SpellCard {
 		setCollectible(false);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 588;
+	}
 }

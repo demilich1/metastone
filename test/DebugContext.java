@@ -9,15 +9,15 @@ public class DebugContext extends GameContext {
 		super(player1, player2, logic);
 	}
 	
-	public void setActivePlayer(int playerId) {
-		this.activePlayer = playerId;
-	}
-	
 	@Override
 	public void init() {
 		activePlayer = getPlayer(PLAYER_1).getId();
 		getLogic().init(activePlayer, true);
 		getLogic().init(getOpponent(getActivePlayer()).getId(), false);
+	}
+	
+	public void setActivePlayer(int playerId) {
+		this.activePlayer = playerId;
 	}
 
 }

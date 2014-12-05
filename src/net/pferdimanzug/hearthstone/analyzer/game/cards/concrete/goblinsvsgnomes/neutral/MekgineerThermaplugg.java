@@ -20,6 +20,13 @@ public class MekgineerThermaplugg extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 532;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion mekgineerThermaplugg = createMinion();
 		MinionDeathTrigger minionDeathTrigger = new MinionDeathTrigger(TargetPlayer.OPPONENT);
@@ -27,5 +34,4 @@ public class MekgineerThermaplugg extends MinionCard {
 		mekgineerThermaplugg.setSpellTrigger(trigger);
 		return mekgineerThermaplugg;
 	}
-
 }

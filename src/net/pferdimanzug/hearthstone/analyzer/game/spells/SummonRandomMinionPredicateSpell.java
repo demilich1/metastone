@@ -23,14 +23,6 @@ public class SummonRandomMinionPredicateSpell extends Spell {
 		return desc;
 	}
 
-	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
-		@SuppressWarnings("unchecked")
-		Predicate<Card> cardFilter = (Predicate<Card>) desc.get(SpellArg.CARD_FILTER);
-		MinionCard minionCard = getRandomMatchingMinionCard(cardFilter);
-		context.getLogic().summon(player.getId(), minionCard.summon());
-	}
-	
 	private static MinionCard getRandomMatchingMinionCard(Predicate<Card> cardFilter) {
 		CardCollection allMinions = CardCatalogue.query(CardType.MINION);
 		CardCollection relevantMinions = new CardCollection();
@@ -40,6 +32,14 @@ public class SummonRandomMinionPredicateSpell extends Spell {
 			}
 		}
 		return (MinionCard) relevantMinions.getRandom();
+	}
+	
+	@Override
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+		@SuppressWarnings("unchecked")
+		Predicate<Card> cardFilter = (Predicate<Card>) desc.get(SpellArg.CARD_FILTER);
+		MinionCard minionCard = getRandomMatchingMinionCard(cardFilter);
+		context.getLogic().summon(player.getId(), minionCard.summon());
 	}
 
 }

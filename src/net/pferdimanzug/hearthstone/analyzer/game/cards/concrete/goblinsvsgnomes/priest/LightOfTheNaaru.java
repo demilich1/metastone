@@ -27,4 +27,10 @@ public class LightOfTheNaaru extends SpellCard {
 	}
 	
 
+
+
+	@Override
+	public int getTypeId() {
+		return 560;
+	}
 }

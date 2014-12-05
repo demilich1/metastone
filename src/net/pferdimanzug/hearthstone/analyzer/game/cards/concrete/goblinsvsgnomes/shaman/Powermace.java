@@ -18,6 +18,13 @@ public class Powermace extends WeaponCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 579;
+	}
+
+
+
+	@Override
 	public Weapon getWeapon() {
 		Weapon powermace = createWeapon(3, 2);
 		SpellDesc buffMech = BuffSpell.create(+2, +2);
@@ -27,5 +34,4 @@ public class Powermace extends WeaponCard {
 		powermace.addDeathrattle(buffMech);
 		return powermace;
 	}
-
 }

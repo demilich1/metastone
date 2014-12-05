@@ -23,4 +23,10 @@ public class MusterForBattle extends SpellCard {
 		setPredefinedTarget(EntityReference.NONE);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 554;
+	}
 }

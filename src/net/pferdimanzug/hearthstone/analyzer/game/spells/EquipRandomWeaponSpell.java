@@ -18,6 +18,12 @@ public class EquipRandomWeaponSpell extends Spell {
 		return desc;
 	}
 
+	private Weapon getRandomWeapon() {
+		CardCollection allWeapons = CardCatalogue.query(CardType.WEAPON);
+		WeaponCard weaponCard = (WeaponCard) allWeapons.getRandom();
+		return weaponCard.getWeapon();
+	}
+
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		Player opponent = context.getOpponent(player);
@@ -36,12 +42,6 @@ public class EquipRandomWeaponSpell extends Spell {
 			break;
 		}
 
-	}
-
-	private Weapon getRandomWeapon() {
-		CardCollection allWeapons = CardCatalogue.query(CardType.WEAPON);
-		WeaponCard weaponCard = (WeaponCard) allWeapons.getRandom();
-		return weaponCard.getWeapon();
 	}
 
 }

@@ -20,6 +20,13 @@ public class Shadowboxer extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 562;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion shadowboxer = createMinion();
 		SpellDesc damageRandomEnemy = DamageSpell.create(1);
@@ -29,5 +36,4 @@ public class Shadowboxer extends MinionCard {
 		shadowboxer.setSpellTrigger(trigger);
 		return shadowboxer;
 	}
-
 }

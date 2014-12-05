@@ -20,6 +20,13 @@ public class Gahzrilla extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 487;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion gahzrilla = createMinion();
 		SpellDesc buffSpell = DoubleAttackSpell.create();
@@ -28,5 +35,4 @@ public class Gahzrilla extends MinionCard {
 		gahzrilla.setSpellTrigger(trigger);
 		return gahzrilla;
 	}
-
 }

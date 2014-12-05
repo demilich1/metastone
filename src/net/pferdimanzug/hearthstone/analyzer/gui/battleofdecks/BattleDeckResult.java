@@ -25,36 +25,36 @@ public class BattleDeckResult {
 		return this.deckName;
 	}
 
-	public final String getDeckName() {
-		return this.deckNameProperty().get();
-	}
-
-	public final void setDeckName(final String deckName) {
-		this.deckNameProperty().set(deckName);
-	}
-
 	public final ObjectProperty<GameStatistics> deckStatisticsProperty() {
 		return this.deckStatistics;
+	}
+
+	public final String getDeckName() {
+		return this.deckNameProperty().get();
 	}
 
 	public final GameStatistics getDeckStatistics() {
 		return this.deckStatisticsProperty().get();
 	}
 
-	public final void setDeckStatistics(final GameStatistics deckStatistics) {
-		this.deckStatisticsProperty().set(deckStatistics);
-	}
-
-	public final DoubleProperty winRateProperty() {
-		return this.winRate;
-	}
-
 	public final double getWinRate() {
 		return this.winRateProperty().get();
 	}
 
+	public final void setDeckName(final String deckName) {
+		this.deckNameProperty().set(deckName);
+	}
+
+	public final void setDeckStatistics(final GameStatistics deckStatistics) {
+		this.deckStatisticsProperty().set(deckStatistics);
+	}
+
 	public final void setWinRate(final double winRate) {
 		this.winRateProperty().set(winRate);
+	}
+
+	public final DoubleProperty winRateProperty() {
+		return this.winRate;
 	}
 
 }

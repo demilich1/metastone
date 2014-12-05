@@ -19,6 +19,13 @@ public class Shieldmaiden extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 608;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion shieldmaiden = createMinion();
 		SpellDesc gainArmorSpell = BuffHeroSpell.create(0, 5);
@@ -27,5 +34,4 @@ public class Shieldmaiden extends MinionCard {
 		shieldmaiden.setBattlecry(battlecry);
 		return shieldmaiden;
 	}
-
 }

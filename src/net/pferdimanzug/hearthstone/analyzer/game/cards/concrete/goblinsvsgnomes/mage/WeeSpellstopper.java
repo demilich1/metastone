@@ -17,11 +17,17 @@ public class WeeSpellstopper extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 499;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion weeSpellstopper = createMinion();
 		Aura direWolfAlphaAura = new AuraApplyTag(GameTag.UNTARGETABLE_BY_SPELLS, EntityReference.ADJACENT_MINIONS);
 		weeSpellstopper.setSpellTrigger(direWolfAlphaAura);
 		return weeSpellstopper;
 	}
-
 }

@@ -14,9 +14,15 @@ public class OgreNinja extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 570;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion ogreNinja = createMinion(GameTag.STEALTHED, GameTag.FUMBLE);
 		return ogreNinja;
 	}
-
 }

@@ -16,10 +16,16 @@ public class SootSpewer extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 497;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion sootSpewer = createMinion();
 		sootSpewer.setTag(GameTag.SPELL_POWER, +1);
 		return sootSpewer;
 	}
-
 }

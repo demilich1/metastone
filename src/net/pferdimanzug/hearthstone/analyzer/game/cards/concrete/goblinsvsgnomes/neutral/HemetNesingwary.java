@@ -20,6 +20,13 @@ public class HemetNesingwary extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 521;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion hemetNesingwary = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(DestroySpell.create(), TargetSelection.MINIONS);
@@ -27,5 +34,4 @@ public class HemetNesingwary extends MinionCard {
 		hemetNesingwary.setBattlecry(battlecry);
 		return hemetNesingwary;
 	}
-
 }

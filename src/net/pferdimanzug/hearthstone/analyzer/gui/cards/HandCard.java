@@ -30,6 +30,18 @@ public class HandCard extends CardToken {
 		hideCard(true);
 	}
 
+	private void hideCard(boolean hide) {
+		topPane.setVisible(!hide);
+		centerPane.setVisible(!hide);
+		bottomPane.setVisible(!hide);
+		if (hide) {
+			BackgroundSize size = new BackgroundSize(getWidth(), getHeight(), false, false, true, false);
+			BackgroundImage image = new BackgroundImage(IconFactory.getDefaultCardBack(), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
+			Background background = new Background(image);
+			setBackground(background);
+		} 
+	}
+	
 	@Override
 	public void setCard(GameContext context, Card card, Player player) {
 		super.setCard(context, card, player);
@@ -49,18 +61,6 @@ public class HandCard extends CardToken {
 			Tooltip.uninstall(this, tooltip);
 			tooltipContent = null;
 			tooltip = null;
-		} 
-	}
-	
-	private void hideCard(boolean hide) {
-		topPane.setVisible(!hide);
-		centerPane.setVisible(!hide);
-		bottomPane.setVisible(!hide);
-		if (hide) {
-			BackgroundSize size = new BackgroundSize(getWidth(), getHeight(), false, false, true, false);
-			BackgroundImage image = new BackgroundImage(IconFactory.getDefaultCardBack(), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
-			Background background = new Background(image);
-			setBackground(background);
 		} 
 	}
 

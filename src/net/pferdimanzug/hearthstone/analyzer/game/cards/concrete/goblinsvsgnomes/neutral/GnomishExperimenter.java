@@ -17,11 +17,17 @@ public class GnomishExperimenter extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 519;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion gnomishExperimenter = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(GnomishExperimenterSpell.create());
 		gnomishExperimenter.setBattlecry(battlecry);
 		return gnomishExperimenter;
 	}
-
 }

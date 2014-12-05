@@ -18,11 +18,17 @@ public class MechanicalYeti extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 530;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion mechanicalYeti = createMinion();
 		SpellDesc deathrattle = ReceiveSparePartSpell.create(TargetPlayer.BOTH);
 		mechanicalYeti.addDeathrattle(deathrattle);
 		return mechanicalYeti;
 	}
-
 }

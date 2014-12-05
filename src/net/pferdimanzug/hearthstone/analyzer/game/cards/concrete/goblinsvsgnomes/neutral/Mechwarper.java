@@ -17,6 +17,13 @@ public class Mechwarper extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 531;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion mechwarper = createMinion();
 		MinionCostModifier minionCostModifier = new MinionCostModifier(-1);
@@ -25,5 +32,4 @@ public class Mechwarper extends MinionCard {
 		mechwarper.setCardCostModifier(minionCostModifier);
 		return mechwarper;
 	}
-
 }

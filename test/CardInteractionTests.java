@@ -26,21 +26,6 @@ import org.testng.annotations.Test;
 public class CardInteractionTests extends TestBase {
 	
 	@Test
-	public void testWarriorCards() {
-		GameContext context = createContext(new Garrosh(), new Jaina());
-		Player warrior = context.getPlayer1();
-		warrior.setMana(10);
-		
-		playCard(context, warrior, new ArcaniteReaper());
-		playCard(context, warrior, new WarsongCommander());
-		playCard(context, warrior, new MurlocRaider());
-		
-		Minion bloodsailRaider = playMinionCard(context, warrior, new BloodsailRaider());
-		Assert.assertTrue(bloodsailRaider.hasStatus(GameTag.CHARGE));
-		Assert.assertEquals(bloodsailRaider.getAttack(), 7);
-	}
-	
-	@Test
 	public void testSilenceWithBuffs() {
 		GameContext context = createContext(new Guldan(), new Garrosh());
 		Player player = context.getPlayer1();
@@ -125,6 +110,21 @@ public class CardInteractionTests extends TestBase {
 		context.endTurn();
 		Assert.assertEquals(minion.getAttack(), 3);
 		Assert.assertEquals(minion.getHp(), 5);
+	}
+	
+	@Test
+	public void testWarriorCards() {
+		GameContext context = createContext(new Garrosh(), new Jaina());
+		Player warrior = context.getPlayer1();
+		warrior.setMana(10);
+		
+		playCard(context, warrior, new ArcaniteReaper());
+		playCard(context, warrior, new WarsongCommander());
+		playCard(context, warrior, new MurlocRaider());
+		
+		Minion bloodsailRaider = playMinionCard(context, warrior, new BloodsailRaider());
+		Assert.assertTrue(bloodsailRaider.hasStatus(GameTag.CHARGE));
+		Assert.assertEquals(bloodsailRaider.getAttack(), 7);
 	}
 
 }

@@ -21,6 +21,13 @@ public class MicroMachine extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 533;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion microMachine = createMinion();
 		TurnStartTrigger turnStartTrigger = new TurnStartTrigger(TargetPlayer.BOTH);
@@ -30,5 +37,4 @@ public class MicroMachine extends MinionCard {
 		microMachine.setSpellTrigger(trigger);
 		return microMachine;
 	}
-
 }

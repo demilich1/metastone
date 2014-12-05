@@ -81,10 +81,6 @@ public abstract class Entity extends CustomCloneable {
 		return tags.containsKey(tag) ? (int) tags.get(tag) : 0;
 	}
 	
-	public boolean isDead() {
-		return hasStatus(GameTag.DEAD);
-	}
-
 	/**
 	 * Returns an unique identifier for this Entity type.
 	 * This method can be used in cases where only one-of-a-kind
@@ -103,9 +99,13 @@ public abstract class Entity extends CustomCloneable {
 	public boolean hasStatus(GameTag tag) {
 		return tags.get(tag) != null && getTagValue(tag) > 0;
 	}
-	
+
 	public boolean hasTag(GameTag tag) {
 		return tags.get(tag) != null;
+	}
+	
+	public boolean isDead() {
+		return hasStatus(GameTag.DEAD);
 	}
 
 	public void modifyTag(GameTag tag, int value) {

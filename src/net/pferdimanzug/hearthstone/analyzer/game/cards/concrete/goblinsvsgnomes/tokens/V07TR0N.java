@@ -17,8 +17,14 @@ public class V07TR0N extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 594;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.CHARGE, GameTag.MEGA_WINDFURY);
 	}
-
 }

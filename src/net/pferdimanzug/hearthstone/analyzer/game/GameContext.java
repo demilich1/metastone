@@ -59,6 +59,10 @@ public class GameContext implements Cloneable, IDisposable {
 		this.logic.setContext(this);
 	}
 
+	protected boolean acceptAction(GameAction nextAction) {
+		return true;
+	}
+
 	public void addCardCostModfier(CardCostModifier cardCostModifier) {
 		getCardCostModifiers().add(cardCostModifier);
 	}
@@ -259,7 +263,7 @@ public class GameContext implements Cloneable, IDisposable {
 	public boolean ignoreEvents() {
 		return ignoreEvents;
 	}
-
+	
 	public void init() {
 		int startingPlayerId = logic.determineBeginner(PLAYER_1, PLAYER_2);
 		activePlayer = getPlayer(startingPlayerId).getId();
@@ -267,7 +271,7 @@ public class GameContext implements Cloneable, IDisposable {
 		logic.init(activePlayer, true);
 		logic.init(getOpponent(getActivePlayer()).getId(), false);
 	}
-	
+
 	protected void onGameStateChanged() {
 	}
 
@@ -281,7 +285,7 @@ public class GameContext implements Cloneable, IDisposable {
 		init();
 		startTurn(activePlayer);
 	}
-
+	
 	public void playTurn() {
 		if (++actionsThisTurn > 99) {
 			logger.warn("Turn has been forcefully ended after {} actions", actionsThisTurn);
@@ -317,10 +321,6 @@ public class GameContext implements Cloneable, IDisposable {
 		} else {
 			startTurn(activePlayer);
 		}
-	}
-	
-	protected boolean acceptAction(GameAction nextAction) {
-		return true;
 	}
 	
 	public void removeTriggersAssociatedWith(EntityReference entityReference) {

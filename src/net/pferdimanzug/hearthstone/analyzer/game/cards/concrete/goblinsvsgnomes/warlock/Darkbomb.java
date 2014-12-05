@@ -15,4 +15,10 @@ public class Darkbomb extends SpellCard {
 		setSpell(DamageSpell.create(3));
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 596;
+	}
 }

@@ -23,6 +23,13 @@ public class EnhanceOMechano extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 510;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion enhanceOMechano = createMinion();
 		SpellDesc randomBuff = CastRandomSpellSpell.create(WindfurySpell.create(), ApplyTagSpell.create(GameTag.TAUNT),
@@ -32,5 +39,4 @@ public class EnhanceOMechano extends MinionCard {
 		enhanceOMechano.setBattlecry(battlecry);
 		return enhanceOMechano;
 	}
-
 }

@@ -17,6 +17,13 @@ public class Shrinkmeister extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 563;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion shrinkmeister = createMinion();
 		SpellDesc buff = TemporaryAttackSpell.create(-2);
@@ -24,5 +31,4 @@ public class Shrinkmeister extends MinionCard {
 		shrinkmeister.setBattlecry(battlecry);
 		return shrinkmeister;
 	}
-
 }

@@ -21,6 +21,13 @@ public class IronSensai extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 569;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion ironSensai = createMinion();
 		SpellDesc buffSpell = BuffSpell.create(+2, +2);
@@ -31,5 +38,4 @@ public class IronSensai extends MinionCard {
 		ironSensai.setSpellTrigger(trigger);
 		return ironSensai;
 	}
-
 }

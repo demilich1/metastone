@@ -21,11 +21,17 @@ public class SiltfinSpiritwalker extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 580;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion siltfinSpiritwalker = createMinion();
 		SpellTrigger trigger = new SpellTrigger(new MinionDeathTrigger(TargetPlayer.SELF, Race.MURLOC), DrawCardSpell.create());
 		siltfinSpiritwalker.setSpellTrigger(trigger);
 		return siltfinSpiritwalker;
 	}
-
 }

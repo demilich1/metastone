@@ -19,6 +19,13 @@ public class ClockworkGnome extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 507;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion clockworkGnome = createMinion();
 		SpellDesc deathrattle = ReceiveSparePartSpell.create(TargetPlayer.SELF);
@@ -26,5 +33,4 @@ public class ClockworkGnome extends MinionCard {
 		clockworkGnome.addDeathrattle(deathrattle);
 		return clockworkGnome;
 	}
-
 }

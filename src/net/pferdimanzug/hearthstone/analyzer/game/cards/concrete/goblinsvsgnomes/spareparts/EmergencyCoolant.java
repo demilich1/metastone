@@ -20,4 +20,10 @@ public class EmergencyCoolant extends SpellCard {
 		setCollectible(false);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 584;
+	}
 }

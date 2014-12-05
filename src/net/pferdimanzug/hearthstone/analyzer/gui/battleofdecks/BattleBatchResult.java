@@ -21,6 +21,42 @@ public class BattleBatchResult {
 		this.numberOfGames = numberOfGames;
 	}
 
+	public Deck getDeck1() {
+		return deck1;
+	}
+
+	public double getDeck1Winrate() {
+		return getPlayer1Results().getDouble(Statistic.WIN_RATE);
+	}
+	
+	public Deck getDeck2() {
+		return deck2;
+	}
+
+	public double getDeck2Winrate() {
+		return getPlayer2Results().getDouble(Statistic.WIN_RATE);
+	}
+	
+	public int getNumberOfGames() {
+		return numberOfGames;
+	}
+
+	public GameStatistics getPlayer1Results() {
+		return player1Results;
+	}
+
+	public GameStatistics getPlayer2Results() {
+		return player2Results;
+	}
+
+	public double getProgress() {
+		return gamesCompleted / (double)numberOfGames;
+	}
+
+	public boolean isCompleted() {
+		return completed;
+	}
+
 	public void onGameEnded(GameContext result) {
 		getPlayer1Results().merge(result.getPlayer1().getStatistics());
 		getPlayer2Results().merge(result.getPlayer2().getStatistics());
@@ -30,43 +66,7 @@ public class BattleBatchResult {
 		}
 	}
 
-	public int getNumberOfGames() {
-		return numberOfGames;
-	}
-	
-	public double getProgress() {
-		return gamesCompleted / (double)numberOfGames;
-	}
-
-	public double getDeck1Winrate() {
-		return getPlayer1Results().getDouble(Statistic.WIN_RATE);
-	}
-	
-	public double getDeck2Winrate() {
-		return getPlayer2Results().getDouble(Statistic.WIN_RATE);
-	}
-
-	public Deck getDeck1() {
-		return deck1;
-	}
-
-	public Deck getDeck2() {
-		return deck2;
-	}
-
-	public boolean isCompleted() {
-		return completed;
-	}
-
 	public void setCompleted(boolean completed) {
 		this.completed = completed;
-	}
-
-	public GameStatistics getPlayer1Results() {
-		return player1Results;
-	}
-
-	public GameStatistics getPlayer2Results() {
-		return player2Results;
 	}
 }

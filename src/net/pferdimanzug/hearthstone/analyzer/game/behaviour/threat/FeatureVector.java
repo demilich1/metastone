@@ -51,14 +51,6 @@ public class FeatureVector implements Cloneable {
 
 	private final Map<WeightedFeature, Double> values = new EnumMap<WeightedFeature, Double>(WeightedFeature.class);
 
-	public void set(WeightedFeature param, double value) {
-		getValues().put(param, value);
-	}
-
-	public double get(WeightedFeature param) {
-		return getValues().get(param);
-	}
-	
 	@Override
 	public FeatureVector clone() {
 		FeatureVector clone = new FeatureVector();
@@ -66,6 +58,18 @@ public class FeatureVector implements Cloneable {
 			clone.set(feature, get(feature));
 		}
 		return clone;
+	}
+
+	public double get(WeightedFeature param) {
+		return getValues().get(param);
+	}
+	
+	public Map<WeightedFeature, Double> getValues() {
+		return values;
+	}
+
+	public void set(WeightedFeature param, double value) {
+		getValues().put(param, value);
 	}
 
 	@Override
@@ -79,10 +83,6 @@ public class FeatureVector implements Cloneable {
 			builder.append("\n");
 		}
 		return builder.toString();
-	}
-
-	public Map<WeightedFeature, Double> getValues() {
-		return values;
 	}
 
 }

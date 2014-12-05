@@ -72,6 +72,18 @@ public class TrainingConfigView extends BorderPane {
 		startButton.setOnAction(this::handleStartButton);
 	}
 
+	private void handleAddButton(ActionEvent event) {
+		Collection<Deck> selectedDecks = availableDecksListView.getSelectionModel().getSelectedItems();
+		selectedDecksListView.getItems().addAll(selectedDecks);
+		availableDecksListView.getItems().removeAll(selectedDecks);
+	}
+
+	private void handleRemoveButton(ActionEvent event) {
+		Collection<Deck> selectedDecks = selectedDecksListView.getSelectionModel().getSelectedItems();
+		availableDecksListView.getItems().addAll(selectedDecks);
+		selectedDecksListView.getItems().removeAll(selectedDecks);
+	}
+
 	private void handleStartButton(ActionEvent event) {
 		int numberOfGames = numberOfGamesBox.getSelectionModel().getSelectedItem();
 		IBehaviour behaviour = behaviourBox.getSelectionModel().getSelectedItem();
@@ -81,6 +93,11 @@ public class TrainingConfigView extends BorderPane {
 		trainingConfig.setNumberOfGames(numberOfGames);
 		trainingConfig.getDecks().addAll(decks);
 		ApplicationFacade.getInstance().sendNotification(GameNotification.COMMIT_TRAININGMODE_CONFIG, trainingConfig);
+	}
+
+	public void injectDecks(List<Deck> decks) {
+		selectedDecksListView.getItems().clear();
+		availableDecksListView.getItems().setAll(decks);
 	}
 
 	private void setupBehaviourBox() {
@@ -98,23 +115,6 @@ public class TrainingConfigView extends BorderPane {
 		numberOfGamesEntries.add(1000);
 		numberOfGamesBox.setItems(numberOfGamesEntries);
 		numberOfGamesBox.getSelectionModel().select(2);
-	}
-
-	public void injectDecks(List<Deck> decks) {
-		selectedDecksListView.getItems().clear();
-		availableDecksListView.getItems().setAll(decks);
-	}
-
-	private void handleAddButton(ActionEvent event) {
-		Collection<Deck> selectedDecks = availableDecksListView.getSelectionModel().getSelectedItems();
-		selectedDecksListView.getItems().addAll(selectedDecks);
-		availableDecksListView.getItems().removeAll(selectedDecks);
-	}
-
-	private void handleRemoveButton(ActionEvent event) {
-		Collection<Deck> selectedDecks = selectedDecksListView.getSelectionModel().getSelectedItems();
-		availableDecksListView.getItems().addAll(selectedDecks);
-		selectedDecksListView.getItems().removeAll(selectedDecks);
 	}
 
 

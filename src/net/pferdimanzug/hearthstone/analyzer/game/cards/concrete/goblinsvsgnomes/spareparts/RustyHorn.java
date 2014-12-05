@@ -19,4 +19,10 @@ public class RustyHorn extends SpellCard {
 		setCollectible(false);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 587;
+	}
 }

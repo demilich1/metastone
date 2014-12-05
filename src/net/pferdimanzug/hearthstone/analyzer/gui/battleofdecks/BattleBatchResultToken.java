@@ -2,7 +2,6 @@ package net.pferdimanzug.hearthstone.analyzer.gui.battleofdecks;
 
 import java.io.IOException;
 
-import net.pferdimanzug.hearthstone.analyzer.gui.IconFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -12,6 +11,7 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import net.pferdimanzug.hearthstone.analyzer.gui.IconFactory;
 
 public class BattleBatchResultToken extends BorderPane {
 	

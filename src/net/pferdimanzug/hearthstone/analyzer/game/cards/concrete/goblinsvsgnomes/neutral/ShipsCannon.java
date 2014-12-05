@@ -20,6 +20,13 @@ public class ShipsCannon extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 543;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion shipsCannon = createMinion();
 		SpellDesc damage = DamageSpell.create(2);
@@ -29,5 +36,4 @@ public class ShipsCannon extends MinionCard {
 		shipsCannon.setSpellTrigger(trigger);
 		return shipsCannon;
 	}
-
 }

@@ -19,6 +19,13 @@ public class OgreWarmaul extends WeaponCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 606;
+	}
+
+
+
+	@Override
 	public Weapon getWeapon() {
 		Weapon ogreWarmaul = createWeapon(4, 2);
 		SpellDesc fumble = ApplyTagSpell.create(GameTag.FUMBLE, new WeaponDestroyedTrigger());
@@ -26,5 +33,4 @@ public class OgreWarmaul extends WeaponCard {
 		ogreWarmaul.setBattlecry(Battlecry.createBattlecry(fumble));
 		return ogreWarmaul;
 	}
-
 }

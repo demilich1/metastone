@@ -21,6 +21,13 @@ public class FelCannon extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 598;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion felCannon = createMinion();
 		SpellDesc damage = DamageSpell.create(2);
@@ -31,5 +38,4 @@ public class FelCannon extends MinionCard {
 		felCannon.setSpellTrigger(trigger);
 		return felCannon;
 	}
-
 }

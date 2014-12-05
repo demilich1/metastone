@@ -14,8 +14,14 @@ public class LostTallstrider extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 528;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion();
 	}
-
 }

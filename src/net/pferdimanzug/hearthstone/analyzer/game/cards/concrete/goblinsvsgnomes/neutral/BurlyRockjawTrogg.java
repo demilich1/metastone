@@ -19,6 +19,13 @@ public class BurlyRockjawTrogg extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 505;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion burlyRockjawTrogg = createMinion();
 		SpellDesc buffSpell = BuffSpell.create(+2);
@@ -27,5 +34,4 @@ public class BurlyRockjawTrogg extends MinionCard {
 		burlyRockjawTrogg.setSpellTrigger(trigger);
 		return burlyRockjawTrogg;
 	}
-
 }

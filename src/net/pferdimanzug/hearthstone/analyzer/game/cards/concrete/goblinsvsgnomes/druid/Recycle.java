@@ -16,4 +16,10 @@ public class Recycle extends SpellCard {
 		setTargetRequirement(TargetSelection.ENEMY_MINIONS);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 482;
+	}
 }

@@ -18,44 +18,6 @@ import org.jgap.impl.DefaultConfiguration;
 import org.jgap.impl.DoubleGene;
 
 public class GeneticFeatureOptimizer {
-	private Genotype genotype;
-
-	public void init(List<Deck> decks) {
-		Configuration gaConf = new DefaultConfiguration();
-		gaConf.setPreservFittestIndividual(true);
-
-		try {
-			IChromosome sampleChromosome = new Chromosome(gaConf, toGenes(FeatureVector.getDefault(), gaConf));
-			gaConf.setSampleChromosome(sampleChromosome);
-			gaConf.setPopulationSize(50);
-			gaConf.setFitnessFunction(new WinRateFitnessFunction(decks));
-			genotype = new Genotype(gaConf, new Population(gaConf, sampleChromosome));
-		} catch (InvalidConfigurationException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void train() {
-		genotype.evolve();
-	}
-
-	public FeatureVector getBest() {
-		IChromosome fittest = genotype.getFittestChromosome();
-		System.out.println("Fitness value: " + fittest.getFitnessValue());
-		return toVector(fittest);
-	}
-
-	public static FeatureVector toVector(IChromosome chromosome) {
-		FeatureVector vector = new FeatureVector();
-		WeightedFeature[] values = WeightedFeature.values();
-		for (int i = 0; i < values.length; i++) {
-			WeightedFeature feature = values[i];
-			double value = (double) chromosome.getGene(i).getAllele();
-			vector.set(feature, value);
-		}
-		return vector;
-	}
-
 	public static Gene[] toGenes(FeatureVector featureVector, Configuration configuration) {
 		Gene[] genes = new Gene[featureVector.getValues().size()];
 		Map<WeightedFeature, Double> values = featureVector.getValues();
@@ -103,6 +65,44 @@ public class GeneticFeatureOptimizer {
 			}
 		}
 		return genes;
+	}
+
+	public static FeatureVector toVector(IChromosome chromosome) {
+		FeatureVector vector = new FeatureVector();
+		WeightedFeature[] values = WeightedFeature.values();
+		for (int i = 0; i < values.length; i++) {
+			WeightedFeature feature = values[i];
+			double value = (double) chromosome.getGene(i).getAllele();
+			vector.set(feature, value);
+		}
+		return vector;
+	}
+
+	private Genotype genotype;
+
+	public FeatureVector getBest() {
+		IChromosome fittest = genotype.getFittestChromosome();
+		System.out.println("Fitness value: " + fittest.getFitnessValue());
+		return toVector(fittest);
+	}
+
+	public void init(List<Deck> decks) {
+		Configuration gaConf = new DefaultConfiguration();
+		gaConf.setPreservFittestIndividual(true);
+
+		try {
+			IChromosome sampleChromosome = new Chromosome(gaConf, toGenes(FeatureVector.getDefault(), gaConf));
+			gaConf.setSampleChromosome(sampleChromosome);
+			gaConf.setPopulationSize(50);
+			gaConf.setFitnessFunction(new WinRateFitnessFunction(decks));
+			genotype = new Genotype(gaConf, new Population(gaConf, sampleChromosome));
+		} catch (InvalidConfigurationException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void train() {
+		genotype.evolve();
 	}
 
 }

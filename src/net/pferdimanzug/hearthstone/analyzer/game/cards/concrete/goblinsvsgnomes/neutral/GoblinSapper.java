@@ -19,6 +19,12 @@ public class GoblinSapper extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 520;
+	}
+
+
+	@Override
 	public Minion summon() {
 		Minion goblinSapper = createMinion();
 		SpellDesc buffSpell = ConditionalAttackBonusSpell.create((context, player, target) -> {

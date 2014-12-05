@@ -16,8 +16,14 @@ public class TargetDummy extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 547;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.TAUNT);
 	}
-
 }

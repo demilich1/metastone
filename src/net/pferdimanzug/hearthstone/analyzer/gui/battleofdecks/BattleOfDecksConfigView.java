@@ -72,12 +72,29 @@ public class BattleOfDecksConfigView extends BorderPane {
 		startButton.setOnAction(this::handleStartButton);
 	}
 
+	private void handleAddButton(ActionEvent event) {
+		Collection<Deck> selectedDecks = availableDecksListView.getSelectionModel().getSelectedItems();
+		selectedDecksListView.getItems().addAll(selectedDecks);
+		availableDecksListView.getItems().removeAll(selectedDecks);
+	}
+
+	private void handleRemoveButton(ActionEvent event) {
+		Collection<Deck> selectedDecks = selectedDecksListView.getSelectionModel().getSelectedItems();
+		availableDecksListView.getItems().addAll(selectedDecks);
+		selectedDecksListView.getItems().removeAll(selectedDecks);
+	}
+
 	private void handleStartButton(ActionEvent event) {
 		int numberOfGames = numberOfGamesBox.getSelectionModel().getSelectedItem();
 		IBehaviour behaviour = behaviourBox.getSelectionModel().getSelectedItem();
 		Collection<Deck> decks = selectedDecksListView.getItems();
 		BattleConfig battleConfig = new BattleConfig(numberOfGames, behaviour, decks);
 		ApplicationFacade.getInstance().sendNotification(GameNotification.COMMIT_BATTLE_OF_DECKS_CONFIG, battleConfig);
+	}
+
+	public void injectDecks(List<Deck> decks) {
+		selectedDecksListView.getItems().clear();
+		availableDecksListView.getItems().setAll(decks);
 	}
 
 	private void setupBehaviourBox() {
@@ -95,23 +112,6 @@ public class BattleOfDecksConfigView extends BorderPane {
 		numberOfGamesEntries.add(1000);
 		numberOfGamesBox.setItems(numberOfGamesEntries);
 		numberOfGamesBox.getSelectionModel().select(2);
-	}
-
-	public void injectDecks(List<Deck> decks) {
-		selectedDecksListView.getItems().clear();
-		availableDecksListView.getItems().setAll(decks);
-	}
-
-	private void handleAddButton(ActionEvent event) {
-		Collection<Deck> selectedDecks = availableDecksListView.getSelectionModel().getSelectedItems();
-		selectedDecksListView.getItems().addAll(selectedDecks);
-		availableDecksListView.getItems().removeAll(selectedDecks);
-	}
-
-	private void handleRemoveButton(ActionEvent event) {
-		Collection<Deck> selectedDecks = selectedDecksListView.getSelectionModel().getSelectedItems();
-		availableDecksListView.getItems().addAll(selectedDecks);
-		selectedDecksListView.getItems().removeAll(selectedDecks);
 	}
 
 }

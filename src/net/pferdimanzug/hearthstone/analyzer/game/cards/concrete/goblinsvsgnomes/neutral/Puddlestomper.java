@@ -14,8 +14,14 @@ public class Puddlestomper extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 540;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion();
 	}
-
 }

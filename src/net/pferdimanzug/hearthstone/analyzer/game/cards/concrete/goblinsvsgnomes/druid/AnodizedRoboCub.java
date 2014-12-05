@@ -20,11 +20,6 @@ public class AnodizedRoboCub extends ChooseBattlecryCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion(GameTag.TAUNT);
-	}
-
-	@Override
 	protected String getAction1Suffix() {
 		return "+1 Attack";
 	}
@@ -48,4 +43,15 @@ public class AnodizedRoboCub extends ChooseBattlecryCard {
 		return Battlecry.createBattlecry(spell);
 	}
 
+	@Override
+	public int getTypeId() {
+		return 476;
+	}
+
+
+
+	@Override
+	public Minion summon() {
+		return createMinion(GameTag.TAUNT);
+	}
 }

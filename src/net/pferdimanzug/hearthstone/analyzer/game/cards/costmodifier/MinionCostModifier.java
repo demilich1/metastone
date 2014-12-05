@@ -15,11 +15,6 @@ public class MinionCostModifier extends CardCostModifier {
 		super(CardType.MINION, manaModifier, false);
 	}
 
-	@Override
-	public boolean interestedIn(GameEventType eventType) {
-		return false;
-	}
-
 	protected boolean appliesTo(Card card) {
 		if (!super.appliesTo(card)) {
 			return false;
@@ -30,12 +25,17 @@ public class MinionCostModifier extends CardCostModifier {
 		return true;
 	}
 
-	@Override
-	public void onGameEvent(GameEvent event) {
-	}
-
 	public Race getRequiredRace() {
 		return requiredRace;
+	}
+
+	@Override
+	public boolean interestedIn(GameEventType eventType) {
+		return false;
+	}
+
+	@Override
+	public void onGameEvent(GameEvent event) {
 	}
 
 	public void setRequiredRace(Race requiredRace) {

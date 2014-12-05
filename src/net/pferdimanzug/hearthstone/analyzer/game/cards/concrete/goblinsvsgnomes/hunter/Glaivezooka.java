@@ -19,6 +19,13 @@ public class Glaivezooka extends WeaponCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 488;
+	}
+
+
+
+	@Override
 	public Weapon getWeapon() {
 		Weapon weapon = createWeapon(2, 2);
 		SpellDesc randomBuffSpell = BuffSpell.create(+1);
@@ -28,5 +35,4 @@ public class Glaivezooka extends WeaponCard {
 		weapon.setBattlecry(battlecry);
 		return weapon;
 	}
-
 }

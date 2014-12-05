@@ -23,10 +23,6 @@ public abstract class Actor extends Entity {
 		this.sourceCard = sourceCard;
 	}
 	
-	public int getAttackMultiplier() {
-		return hasTag(GameTag.ATTACK_MULTIPLIER) ? getTagValue(GameTag.ATTACK_MULTIPLIER) : 1;
-	}
-
 	public void addDeathrattle(SpellDesc deathrattleSpell) {
 		if (!hasTag(GameTag.DEATHRATTLES)) {
 			setTag(GameTag.DEATHRATTLES, new ArrayList<SpellDesc>());
@@ -69,6 +65,10 @@ public abstract class Actor extends Entity {
 		int attack = getTagValue(GameTag.ATTACK) + getTagValue(GameTag.AURA_ATTACK_BONUS)
 				+ getTagValue(GameTag.TEMPORARY_ATTACK_BONUS) + getTagValue(GameTag.CONDITIONAL_ATTACK_BONUS);
 		return attack * getAttackMultiplier();
+	}
+
+	public int getAttackMultiplier() {
+		return hasTag(GameTag.ATTACK_MULTIPLIER) ? getTagValue(GameTag.ATTACK_MULTIPLIER) : 1;
 	}
 
 	public Battlecry getBattlecry() {
@@ -126,13 +126,13 @@ public abstract class Actor extends Entity {
 		modifyTag(GameTag.HP, value);
 	}
 
+	public void setAttack(int value) {
+		setTag(GameTag.ATTACK, value);
+	}
+	
 	public void setBaseAttack(int value) {
 		setTag(GameTag.BASE_ATTACK, value);
 		setAttack(value);
-	}
-	
-	public void setAttack(int value) {
-		setTag(GameTag.ATTACK, value);
 	}
 
 	public void setBaseHp(int value) {

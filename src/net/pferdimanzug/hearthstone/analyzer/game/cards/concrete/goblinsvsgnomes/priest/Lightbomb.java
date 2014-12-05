@@ -25,6 +25,13 @@ public class Lightbomb extends SpellCard {
 		setTargetRequirement(TargetSelection.NONE);
 	}
 
+	@Override
+	public int getTypeId() {
+		return 559;
+	}
+
+
+
 	private class LightbombDamageModifier implements IValueProvider {
 
 		@Override
@@ -34,5 +41,4 @@ public class Lightbomb extends SpellCard {
 		}
 
 	}
-
 }

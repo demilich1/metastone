@@ -14,9 +14,15 @@ public class GilblinStalker extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 517;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion gilblinStalker = createMinion(GameTag.STEALTHED);
 		return gilblinStalker;
 	}
-
 }

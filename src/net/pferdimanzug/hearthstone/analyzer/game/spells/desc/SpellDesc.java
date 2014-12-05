@@ -45,26 +45,18 @@ public class SpellDesc extends CustomCloneable {
 		return arguments.get(spellArg);
 	}
 	
-	public int getValue() {
-		return getInt(SpellArg.VALUE);
-	}
-	
-	public void setValue(int value) {
-		set(SpellArg.VALUE, value);
-	}
-
-	public int getInt(SpellArg spellArg) {
-		return arguments.containsKey(spellArg) ? (int) get(spellArg) : 0;
-	}
-	
 	public boolean getBool(SpellArg spellArg) {
 		return arguments.containsKey(spellArg) ? (boolean) get(spellArg) : false;
+	}
+	
+	public int getInt(SpellArg spellArg) {
+		return arguments.containsKey(spellArg) ? (int) get(spellArg) : 0;
 	}
 
 	public SpellSource getSource() {
 		return (SpellSource) arguments.get(SpellArg.SPELL_SOURCE);
 	}
-
+	
 	public EntityReference getSourceEntity() {
 		return (EntityReference) arguments.get(SpellArg.SOURCE_ENTITY);
 	}
@@ -82,6 +74,10 @@ public class SpellDesc extends CustomCloneable {
 		return (TargetPlayer) get(SpellArg.TARGET_PLAYER);
 	}
 
+	public int getValue() {
+		return getInt(SpellArg.VALUE);
+	}
+
 	public IValueProvider getValueProvider() {
 		return (IValueProvider) get(SpellArg.VALUE_PROVIDER);
 	}
@@ -91,6 +87,10 @@ public class SpellDesc extends CustomCloneable {
 			return getTarget().isTargetGroup();
 		}
 		return false;
+	}
+
+	public void pickRandomTarget(boolean randomTarget) {
+		set(SpellArg.RANDOM_TARGET, randomTarget);
 	}
 
 	public void set(SpellArg spellArg, Object value) {
@@ -113,20 +113,20 @@ public class SpellDesc extends CustomCloneable {
 		arguments.put(SpellArg.TARGET, target);
 	}
 
-	public void setTargetPlayer(TargetPlayer targetPlayer) {
-		set(SpellArg.TARGET_PLAYER, targetPlayer);
-	}
-
-	public void setValueProvider(IValueProvider valueProvider) {
-		set(SpellArg.TARGET_PLAYER, valueProvider);
-	}
-	
 	public void setTargetFilter(Predicate<? extends Entity> targetFilter) {
 		set(SpellArg.ENTITY_FILTER, targetFilter);
 	}
+
+	public void setTargetPlayer(TargetPlayer targetPlayer) {
+		set(SpellArg.TARGET_PLAYER, targetPlayer);
+	}
 	
-	public void pickRandomTarget(boolean randomTarget) {
-		set(SpellArg.RANDOM_TARGET, randomTarget);
+	public void setValue(int value) {
+		set(SpellArg.VALUE, value);
+	}
+	
+	public void setValueProvider(IValueProvider valueProvider) {
+		set(SpellArg.TARGET_PLAYER, valueProvider);
 	}
 
 	@Override

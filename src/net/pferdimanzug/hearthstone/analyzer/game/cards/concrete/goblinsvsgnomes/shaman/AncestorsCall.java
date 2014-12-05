@@ -17,4 +17,10 @@ public class AncestorsCall extends SpellCard {
 		setTargetRequirement(TargetSelection.NONE);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 575;
+	}
 }

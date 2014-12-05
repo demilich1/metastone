@@ -16,11 +16,17 @@ public class MogorTheOgre extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 536;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion mogorTheOgre = createMinion(GameTag.FUMBLE);
 		AuraApplyTag aura = new AuraApplyTag(GameTag.FUMBLE, EntityReference.ALL_MINIONS);
 		mogorTheOgre.setSpellTrigger(aura);
 		return mogorTheOgre;
 	}
-
 }

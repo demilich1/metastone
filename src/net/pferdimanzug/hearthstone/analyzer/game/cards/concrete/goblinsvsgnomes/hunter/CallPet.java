@@ -24,10 +24,16 @@ public class CallPet extends SpellCard {
 		setTargetRequirement(TargetSelection.NONE);
 	}
 
+	@Override
+	public int getTypeId() {
+		return 484;
+	}
+
+
+
 	private void reduceBeastManaCost(GameContext context, Player player, Card card) {
 		if (card.getTag(GameTag.RACE) == Race.BEAST) {
 			card.setTag(GameTag.MANA_COST_MODIFIER, -4);
 		}
 	}
-
 }

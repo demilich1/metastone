@@ -14,9 +14,15 @@ public class GnomereganInfantry extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 518;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion gnomereganInfantry = createMinion(GameTag.CHARGE, GameTag.TAUNT);
 		return gnomereganInfantry;
 	}
-
 }

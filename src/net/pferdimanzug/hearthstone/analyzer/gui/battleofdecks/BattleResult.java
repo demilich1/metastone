@@ -18,27 +18,6 @@ public class BattleResult {
 		this.numberOfGames = numberOfGames;
 	}
 
-	public void onGameEnded(GameContext result) {
-		for (Player player : result.getPlayers()) {
-			updateStats(player);
-		}
-	}
-
-	private void updateStats(Player player) {
-		String deckName = player.getDeckName();
-		synchronized (deckResults) {
-			if (!deckResults.containsKey(deckName)) {
-				deckResults.put(deckName, new GameStatistics());
-			}
-			GameStatistics stats = deckResults.get(deckName);
-			stats.merge(player.getStatistics());
-		}
-	}
-
-	public int getNumberOfGames() {
-		return numberOfGames;
-	}
-
 	public void addBatchResult(BattleBatchResult batchResult) {
 		synchronized (batchResults) {
 			batchResults.add(batchResult);
@@ -60,6 +39,27 @@ public class BattleResult {
 			}	
 		}
 		return resultList;
+	}
+
+	public int getNumberOfGames() {
+		return numberOfGames;
+	}
+
+	public void onGameEnded(GameContext result) {
+		for (Player player : result.getPlayers()) {
+			updateStats(player);
+		}
+	}
+
+	private void updateStats(Player player) {
+		String deckName = player.getDeckName();
+		synchronized (deckResults) {
+			if (!deckResults.containsKey(deckName)) {
+				deckResults.put(deckName, new GameStatistics());
+			}
+			GameStatistics stats = deckResults.get(deckName);
+			stats.merge(player.getStatistics());
+		}
 	}
 
 }

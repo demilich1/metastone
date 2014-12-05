@@ -22,6 +22,11 @@ public class FloatingWatcher extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 599;
+	}
+	
+	@Override
 	public Minion summon() {
 		Minion floatingWatcher = createMinion();
 		SpellDesc buffSpell = BuffSpell.create(+2, +2);
@@ -30,7 +35,9 @@ public class FloatingWatcher extends MinionCard {
 		floatingWatcher.setSpellTrigger(trigger);
 		return floatingWatcher;
 	}
-	
+
+
+
 	private class FloatingWatcherTrigger extends HeroDamagedTrigger {
 		
 		
@@ -42,5 +49,4 @@ public class FloatingWatcher extends MinionCard {
 			return event.getGameContext().getActivePlayerId() == getOwner();
 		}
 	}
-
 }

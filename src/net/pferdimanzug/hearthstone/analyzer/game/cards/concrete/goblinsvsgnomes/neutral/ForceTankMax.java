@@ -16,9 +16,15 @@ public class ForceTankMax extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 515;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion forceTankMax = createMinion(GameTag.DIVINE_SHIELD);
 		return forceTankMax;
 	}
-
 }

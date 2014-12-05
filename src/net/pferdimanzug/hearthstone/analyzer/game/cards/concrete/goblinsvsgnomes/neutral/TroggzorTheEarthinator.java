@@ -18,6 +18,13 @@ public class TroggzorTheEarthinator extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 550;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion troggzor = createMinion();
 		SpellDesc summonTrogg = SummonSpell.create(new BurlyRockjawTrogg());
@@ -25,5 +32,4 @@ public class TroggzorTheEarthinator extends MinionCard {
 		troggzor.setSpellTrigger(trigger);
 		return troggzor;
 	}
-
 }

@@ -17,11 +17,17 @@ public class PilotedShredder extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 538;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion pilotedShredder = createMinion();
 		SpellDesc summonRandom = SummonRandomMinionPredicateSpell.create(card -> card.getBaseManaCost() == 2);
 		pilotedShredder.addDeathrattle(summonRandom);
 		return pilotedShredder;
 	}
-
 }

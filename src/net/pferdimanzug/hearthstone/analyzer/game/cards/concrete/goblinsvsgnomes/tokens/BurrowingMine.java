@@ -44,6 +44,11 @@ public class BurrowingMine extends SpellCard implements IGameEventListener {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 591;
+	}
+
+	@Override
 	public boolean interestedIn(GameEventType eventType) {
 		return eventType == GameEventType.RECEIVE_CARD;
 	}
@@ -82,9 +87,10 @@ public class BurrowingMine extends SpellCard implements IGameEventListener {
 		fired = false;
 	}
 
+
+
 	@Override
 	public void setHost(Entity host) {
 		this.hostReference = host.getReference();
 	}
-
 }

@@ -23,6 +23,13 @@ public class LilExorcist extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 527;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion lilExorcist = createMinion(GameTag.TAUNT);
 		IValueProvider valueProvider = new IValueProvider() {
@@ -45,5 +52,4 @@ public class LilExorcist extends MinionCard {
 		lilExorcist.setBattlecry(battlecry);
 		return lilExorcist;
 	}
-
 }

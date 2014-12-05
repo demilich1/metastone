@@ -19,6 +19,13 @@ public class Toshley extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 549;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion toshley = createMinion();
 		SpellDesc sparePartSpell = ReceiveSparePartSpell.create(TargetPlayer.SELF);
@@ -27,5 +34,4 @@ public class Toshley extends MinionCard {
 		toshley.addDeathrattle(sparePartSpell);
 		return toshley;
 	}
-
 }

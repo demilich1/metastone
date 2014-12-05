@@ -18,6 +18,13 @@ public class ExplosiveSheep extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 511;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion explosiveSheep = createMinion();
 		
@@ -26,5 +33,4 @@ public class ExplosiveSheep extends MinionCard {
 		explosiveSheep.addDeathrattle(explosion);
 		return explosiveSheep;
 	}
-
 }

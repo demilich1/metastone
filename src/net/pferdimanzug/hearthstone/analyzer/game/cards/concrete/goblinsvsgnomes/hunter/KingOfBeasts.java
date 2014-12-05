@@ -22,6 +22,13 @@ public class KingOfBeasts extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 489;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion kingOfBeasts = createMinion(GameTag.TAUNT);
 		SpellDesc buffSpell = BuffSpell.create((context, player, entity) -> SpellUtils.hasHowManyOfRace(player, Race.BEAST), null);
@@ -30,5 +37,4 @@ public class KingOfBeasts extends MinionCard {
 		kingOfBeasts.setBattlecry(battlecry);
 		return kingOfBeasts;
 	}
-
 }

@@ -14,8 +14,14 @@ public class SaltyDog extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 542;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion();
 	}
-
 }

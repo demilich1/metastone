@@ -43,6 +43,7 @@ public class DevCheckCardCompleteness {
 				}
 
 			} catch (IOException e) {
+				System.err.println("Error while parsing file: " + file.getName());
 				e.printStackTrace();
 			}
 		}

@@ -16,8 +16,14 @@ public class WhirlingZapOmatic extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 582;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.WINDFURY);
 	}
-
 }

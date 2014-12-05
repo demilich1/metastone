@@ -20,6 +20,13 @@ public class Coghammer extends WeaponCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 553;
+	}
+
+
+
+	@Override
 	public Weapon getWeapon() {
 		Weapon coghammer = createWeapon(2, 3);
 		SpellDesc divineShield = ApplyTagSpell.create(GameTag.DIVINE_SHIELD);
@@ -31,5 +38,4 @@ public class Coghammer extends WeaponCard {
 		coghammer.setBattlecry(battlecry);
 		return coghammer;
 	}
-
 }

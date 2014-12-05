@@ -19,6 +19,13 @@ public class Cogmaster extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 508;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion cogmaster = createMinion();
 		SpellDesc buffSpell = BuffWhenRaceIsOnBoardSpell.create(Race.MECH, +2);
@@ -27,5 +34,4 @@ public class Cogmaster extends MinionCard {
 		cogmaster.setSpellTrigger(trigger);
 		return cogmaster;
 	}
-
 }

@@ -323,10 +323,6 @@ public class GameLogic implements Cloneable {
 		return damage;
 	}
 
-	public void markAsDestroyed(Actor target) {
-		target.setTag(GameTag.DEAD);
-	}
-
 	public void destroy(Actor target) {
 		removeSpelltriggers(target);
 
@@ -511,6 +507,13 @@ public class GameLogic implements Cloneable {
 		context.getEnvironment().remove(Environment.ATTACKER);
 	}
 
+	public void gainArmor(Player player, int armor) {
+		logger.debug("{} gains {} armor", player.getHero(), armor);
+		player.getHero().modifyArmor(armor);
+		player.getStatistics().armorGained(armor);
+		context.fireGameEvent(new ArmorGainedEvent(context, player.getHero()));
+	}
+
 	public Actor getAnotherRandomTarget(Player player, Actor attacker, Actor originalTarget) {
 		List<Entity> validTargets = context.resolveTarget(player, null, EntityReference.ALL_CHARACTERS);
 		// cannot redirect to attacker
@@ -519,13 +522,6 @@ public class GameLogic implements Cloneable {
 		validTargets.remove(originalTarget);
 
 		return (Actor) SpellUtils.getRandomTarget(validTargets);
-	}
-
-	public void gainArmor(Player player, int armor) {
-		logger.debug("{} gains {} armor", player.getHero(), armor);
-		player.getHero().modifyArmor(armor);
-		player.getStatistics().armorGained(armor);
-		context.fireGameEvent(new ArmorGainedEvent(context, player.getHero()));
 	}
 
 	public MatchResult getMatchResult(Player player, Player opponent) {
@@ -716,6 +712,10 @@ public class GameLogic implements Cloneable {
 		if (isLoggingEnabled() && logger.isDebugEnabled()) {
 			logger.debug(message, param1, param2);
 		}
+	}
+
+	public void markAsDestroyed(Actor target) {
+		target.setTag(GameTag.DEAD);
 	}
 
 	public void mindControl(Player player, Minion minion) {

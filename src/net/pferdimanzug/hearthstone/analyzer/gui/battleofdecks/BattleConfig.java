@@ -17,16 +17,16 @@ public class BattleConfig {
 		this.decks = decks;
 	}
 
-	public int getNumberOfGames() {
-		return numberOfGames;
-	}
-
 	public IBehaviour getBehaviour() {
 		return behaviour;
 	}
 
 	public Collection<Deck> getDecks() {
 		return decks;
+	}
+
+	public int getNumberOfGames() {
+		return numberOfGames;
 	}
 
 }

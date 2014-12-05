@@ -20,6 +20,13 @@ public class MistressOfPain extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 602;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion mistressOfPain = createMinion();
 		SpellDesc lifeLeech = LifeLeechSpell.create();
@@ -28,5 +35,4 @@ public class MistressOfPain extends MinionCard {
 		mistressOfPain.setSpellTrigger(trigger);
 		return mistressOfPain;
 	}
-
 }

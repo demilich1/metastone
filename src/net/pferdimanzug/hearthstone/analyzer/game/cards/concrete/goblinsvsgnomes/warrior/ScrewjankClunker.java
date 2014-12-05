@@ -22,6 +22,13 @@ public class ScrewjankClunker extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 607;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion screwjankClunker = createMinion();
 		SpellDesc buffMechSpell = BuffSpell.create(+2, +2);
@@ -30,5 +37,4 @@ public class ScrewjankClunker extends MinionCard {
 		screwjankClunker.setBattlecry(battlecry);
 		return screwjankClunker;
 	}
-
 }

@@ -17,6 +17,13 @@ public class BombLobber extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 504;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion bombLobber = createMinion();
 		SpellDesc damageRandom = DamageRandomSpell.create(4, 1);
@@ -25,5 +32,4 @@ public class BombLobber extends MinionCard {
 		bombLobber.setBattlecry(battlecry);
 		return bombLobber;
 	}
-
 }

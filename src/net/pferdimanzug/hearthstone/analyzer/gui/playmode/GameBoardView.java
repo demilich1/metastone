@@ -175,10 +175,6 @@ public class GameBoardView extends BorderPane {
 		}
 	}
 	
-	public GameToken getToken(Entity entity) {
-		return entityTokenMap.get(entity);
-	}
-
 	private void enableSummonTargets(final HumanTargetOptions targetOptions) {
 		int playerId = targetOptions.getPlayerId();
 		GameContext context = targetOptions.getContext();
@@ -208,6 +204,10 @@ public class GameBoardView extends BorderPane {
 			enableSpellTargets(targetOptions);
 		}
 		setCenterMessage("Select target for " + action.getPromptText() + " - ESC to cancel");
+	}
+
+	public GameToken getToken(Entity entity) {
+		return entityTokenMap.get(entity);
 	}
 
 	private void hideCenterMessage() {

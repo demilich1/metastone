@@ -21,4 +21,10 @@ public class GallywixsCoin extends SpellCard {
 		setCollectible(false);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 593;
+	}
 }

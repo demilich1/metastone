@@ -21,6 +21,13 @@ public class MetaltoothLeaper extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 490;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion metaltoothLeaper = createMinion();
 		SpellDesc buffSpell = BuffSpell.create(+2);
@@ -29,5 +36,4 @@ public class MetaltoothLeaper extends MinionCard {
 		metaltoothLeaper.setBattlecry(battlecry);
 		return metaltoothLeaper;
 	}
-
 }

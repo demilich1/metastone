@@ -15,9 +15,15 @@ public class DunemaulShaman extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 577;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion dunemaulShaman = createMinion(GameTag.WINDFURY, GameTag.FUMBLE);
 		return dunemaulShaman;
 	}
-
 }

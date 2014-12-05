@@ -16,9 +16,15 @@ public class FlyingMachine extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 513;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion flyingMachine = createMinion(GameTag.WINDFURY);
 		return flyingMachine;
 	}
-
 }

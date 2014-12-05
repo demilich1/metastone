@@ -27,14 +27,33 @@ import javax.imageio.ImageIO;
 
 public class DigitFactory {
 
-	private final static HashMap<Character, Image> digits = new HashMap<>();
+	private static void applyFontColor(ImageView image, Color color) {
+		ColorAdjust monochrome = new ColorAdjust();
+		monochrome.setSaturation(-1.0);
+		Effect colorInput = new ColorInput(0, 0, image.getImage().getWidth(), image.getImage().getHeight(), color);
+		Blend blend = new Blend(BlendMode.MULTIPLY, new ImageInput(image.getImage()), colorInput);
+		image.setClip(new ImageView(image.getImage()));
+		image.setEffect(blend);
+		image.setCache(true);
+	}
 
-	static {
-		digits.put('-', new Image(IconFactory.RESOURCE_PATH + "/img/common/digits/-.png"));
-		for (int i = 0; i < 10; i++) {
-			char digitToChar = Character.forDigit(i, 10);
-			digits.put(digitToChar, new Image(IconFactory.RESOURCE_PATH + "/img/common/digits/" + digitToChar + ".png"));
+	private static Node getCachedDigitImage(int number, Color color) {
+		String numberString = String.valueOf(number);
+		if (numberString.length() == 1) {
+			char digitToChar = Character.forDigit(number, 10);
+			ImageView image =new ImageView(digits.get(digitToChar));
+			applyFontColor(image, color);
+			return image;
 		}
+		
+		HBox layoutPane = new HBox(-4);
+		for (int i = 0; i < numberString.length(); i++) {
+			char digitToChar = numberString.charAt(i);
+			ImageView image =new ImageView(digits.get(digitToChar));
+			applyFontColor(image, color);
+			layoutPane.getChildren().add(image);
+		}
+		return layoutPane;
 	}
 
 	public static void saveAllDigits() {
@@ -63,35 +82,6 @@ public class DigitFactory {
 		stage.close();
 	}
 
-	private static Node getCachedDigitImage(int number, Color color) {
-		String numberString = String.valueOf(number);
-		if (numberString.length() == 1) {
-			char digitToChar = Character.forDigit(number, 10);
-			ImageView image =new ImageView(digits.get(digitToChar));
-			applyFontColor(image, color);
-			return image;
-		}
-		
-		HBox layoutPane = new HBox(-4);
-		for (int i = 0; i < numberString.length(); i++) {
-			char digitToChar = numberString.charAt(i);
-			ImageView image =new ImageView(digits.get(digitToChar));
-			applyFontColor(image, color);
-			layoutPane.getChildren().add(image);
-		}
-		return layoutPane;
-	}
-	
-	private static void applyFontColor(ImageView image, Color color) {
-		ColorAdjust monochrome = new ColorAdjust();
-		monochrome.setSaturation(-1.0);
-		Effect colorInput = new ColorInput(0, 0, image.getImage().getWidth(), image.getImage().getHeight(), color);
-		Blend blend = new Blend(BlendMode.MULTIPLY, new ImageInput(image.getImage()), colorInput);
-		image.setClip(new ImageView(image.getImage()));
-		image.setEffect(blend);
-		image.setCache(true);
-	}
-	
 	public static void showPreRenderedDigits(Group group, int number) {
 		showPreRenderedDigits(group, number, Color.WHITE);
 	}
@@ -99,5 +89,15 @@ public class DigitFactory {
 	public static void showPreRenderedDigits(Group group, int number, Color color) {
 		group.getChildren().clear();
 		group.getChildren().add(DigitFactory.getCachedDigitImage(number, color));
+	}
+	
+	private final static HashMap<Character, Image> digits = new HashMap<>();
+	
+	static {
+		digits.put('-', new Image(IconFactory.RESOURCE_PATH + "/img/common/digits/-.png"));
+		for (int i = 0; i < 10; i++) {
+			char digitToChar = Character.forDigit(i, 10);
+			digits.put(digitToChar, new Image(IconFactory.RESOURCE_PATH + "/img/common/digits/" + digitToChar + ".png"));
+		}
 	}
 }

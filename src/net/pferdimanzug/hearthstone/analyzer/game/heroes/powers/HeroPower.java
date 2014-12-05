@@ -25,6 +25,10 @@ public abstract class HeroPower extends SpellCard {
 		return used;
 	}
 
+	public void onWillUse(GameContext context, Player player) {
+		
+	}
+	
 	@Override
 	public PlayCardAction play() {
 		return new HeroPowerAction(getOwner(), getId()) {
@@ -46,10 +50,6 @@ public abstract class HeroPower extends SpellCard {
 				context.getLogic().castSpell(playerId, getSpell());
 			}
 		};
-	}
-	
-	public void onWillUse(GameContext context, Player player) {
-		
 	}
 
 	@Override

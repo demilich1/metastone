@@ -24,6 +24,11 @@ public class AnimaGolem extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 595;
+	}
+
+	@Override
 	public Minion summon() {
 		Minion animaGolem = createMinion();
 		SpellDesc destroySpell = DestroySpell.create();
@@ -32,6 +37,8 @@ public class AnimaGolem extends MinionCard {
 		animaGolem.setSpellTrigger(trigger);
 		return animaGolem;
 	}
+
+
 
 	private class AnimaGolemTrigger extends TurnEndTrigger {
 		public AnimaGolemTrigger() {
@@ -48,5 +55,4 @@ public class AnimaGolem extends MinionCard {
 		}
 
 	}
-
 }

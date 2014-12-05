@@ -20,6 +20,13 @@ public class SiegeEngine extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 609;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion siegeEngine = createMinion();
 		SpellDesc gainAttack = BuffSpell.create(+1);
@@ -28,5 +35,4 @@ public class SiegeEngine extends MinionCard {
 		siegeEngine.setSpellTrigger(trigger);
 		return siegeEngine;
 	}
-
 }

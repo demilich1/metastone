@@ -16,9 +16,15 @@ public class ArcaneNullifierX21 extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 502;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion arcaneNullifierX21 = createMinion(GameTag.TAUNT, GameTag.UNTARGETABLE_BY_SPELLS);
 		return arcaneNullifierX21;
 	}
-
 }

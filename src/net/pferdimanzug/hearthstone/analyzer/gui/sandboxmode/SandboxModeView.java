@@ -88,6 +88,10 @@ public class SandboxModeView extends BorderPane {
 		toolboxView.onPlayerSelectionChanged(selectedPlayer);
 	}
 
+	public void showAnimations(GameContext context) {
+		getBoardView().showAnimations(context);
+	}
+
 	private void startPlayMode(ActionEvent actionEvent) {
 		sidebar.getChildren().setAll(getActionPromptView(), navigationPane);
 		backButton.setVisible(false);
@@ -97,7 +101,7 @@ public class SandboxModeView extends BorderPane {
 		playButton.setOnAction(this::stopPlayMode);
 		ApplicationFacade.getInstance().sendNotification(GameNotification.START_PLAY_SANDBOX);
 	}
-
+	
 	private void stopPlayMode(ActionEvent actionEvent) {
 		sidebar.getChildren().setAll(toolboxView, navigationPane);
 		backButton.setVisible(true);
@@ -106,10 +110,6 @@ public class SandboxModeView extends BorderPane {
 		buttonGraphic.setImage(new Image(IconFactory.getImageUrl("ui/play_icon.png")));
 		playButton.setOnAction(this::startPlayMode);
 		ApplicationFacade.getInstance().sendNotification(GameNotification.STOP_PLAY_SANDBOX);
-	}
-	
-	public void showAnimations(GameContext context) {
-		getBoardView().showAnimations(context);
 	}
 	
 	public void updateSandbox(GameContext context) {

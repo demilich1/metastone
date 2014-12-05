@@ -20,6 +20,13 @@ public class VitalityTotem extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 581;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion vitalityTotem = createMinion();
 		SpellDesc heal = HealingSpell.create(4);
@@ -28,5 +35,4 @@ public class VitalityTotem extends MinionCard {
 		vitalityTotem.setSpellTrigger(trigger);
 		return vitalityTotem;
 	}
-
 }

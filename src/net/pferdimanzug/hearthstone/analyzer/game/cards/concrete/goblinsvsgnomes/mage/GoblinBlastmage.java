@@ -21,6 +21,13 @@ public class GoblinBlastmage extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 495;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion goblinBlastmage = createMinion();
 		SpellDesc spell = DamageRandomSpell.create(1, 4);
@@ -30,5 +37,4 @@ public class GoblinBlastmage extends MinionCard {
 		goblinBlastmage.setBattlecry(battlecry);
 		return goblinBlastmage;
 	}
-
 }

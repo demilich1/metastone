@@ -17,11 +17,17 @@ public class Malorne extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 480;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion malorne = createMinion();
 		SpellDesc shuffleToDeck = ShuffleMinionToDeckSpell.create(new Malorne());
 		malorne.addDeathrattle(shuffleToDeck);
 		return malorne;
 	}
-
 }

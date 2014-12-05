@@ -20,6 +20,13 @@ public class FelReaver extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 512;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion felReaver = createMinion();
 		SpellDesc discard = DiscardCardsFromDeckSpell.create(3);
@@ -27,5 +34,4 @@ public class FelReaver extends MinionCard {
 		felReaver.setSpellTrigger(trigger);
 		return felReaver;
 	}
-
 }

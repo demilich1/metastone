@@ -15,6 +15,10 @@ public class ReceiveCardEvent extends GameEvent {
 		this.card = card;
 	}
 
+	public Card getCard() {
+		return card;
+	}
+
 	@Override
 	public Entity getEventTarget() {
 		return card;
@@ -23,10 +27,6 @@ public class ReceiveCardEvent extends GameEvent {
 	@Override
 	public GameEventType getEventType() {
 		return GameEventType.RECEIVE_CARD;
-	}
-
-	public Card getCard() {
-		return card;
 	}
 
 	public int getPlayerId() {

@@ -15,22 +15,22 @@ public class AnimationProxy extends Proxy<GameNotification> {
 		super(NAME);
 	}
 
-	public GameContextVisualizable getContext() {
-		return context;
-	}
-
-	public void setContext(GameContextVisualizable context) {
-		this.context = context;
-	}
-	
-	public void animationStarted() {
-		animationsRunning++;
-	}
-	
 	public void animationCompleted() {
 		if (--animationsRunning == 0) {
 			context.setBlockedByAnimation(false);
 		}
+	}
+
+	public void animationStarted() {
+		animationsRunning++;
+	}
+	
+	public GameContextVisualizable getContext() {
+		return context;
+	}
+	
+	public void setContext(GameContextVisualizable context) {
+		this.context = context;
 	}
 
 }

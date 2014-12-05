@@ -17,11 +17,17 @@ public class PilotedSkyGolem extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 539;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion pilotedSkyGolem = createMinion();
 		SpellDesc summonRandom = SummonRandomMinionPredicateSpell.create(card -> card.getBaseManaCost() == 4);
 		pilotedSkyGolem.addDeathrattle(summonRandom);
 		return pilotedSkyGolem;
 	}
-
 }

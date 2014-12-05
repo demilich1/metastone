@@ -62,12 +62,12 @@ public class GameToken extends BorderPane {
 		target.getChildren().add(targetButton);
 	}
 
-	public void hideTargetMarker() {
-		targetButton.setVisible(false);
-	}
-	
 	public StackPane getAnchor() {
 		return target;
+	}
+	
+	public void hideTargetMarker() {
+		targetButton.setVisible(false);
 	}
 
 	protected void setScoreValue(Group group, int value) {

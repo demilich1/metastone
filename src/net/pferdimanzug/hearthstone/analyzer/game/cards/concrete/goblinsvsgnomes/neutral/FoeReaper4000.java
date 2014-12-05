@@ -22,6 +22,13 @@ public class FoeReaper4000 extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 514;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion foeReaper4000 = createMinion();
 		SpellDesc damage = DamageSpell.create((context, player, target) -> {
@@ -34,5 +41,4 @@ public class FoeReaper4000 extends MinionCard {
 		foeReaper4000.setSpellTrigger(trigger);
 		return foeReaper4000;
 	}
-
 }

@@ -20,6 +20,13 @@ public class Neptulon extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 578;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion neptulon = createMinion();
 		SpellDesc murlocs = ReceiveRandomRaceCardSpell.create(Race.MURLOC, 4);
@@ -27,5 +34,4 @@ public class Neptulon extends MinionCard {
 		neptulon.setBattlecry(battlecry);
 		return neptulon;
 	}
-
 }

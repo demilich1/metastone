@@ -21,6 +21,13 @@ public class UpgradedRepairBot extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 564;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion upgradedRepairBot = createMinion();
 		SpellDesc buffSpell = BuffSpell.create(0, 4);
@@ -29,5 +36,4 @@ public class UpgradedRepairBot extends MinionCard {
 		upgradedRepairBot.setBattlecry(battlecry);
 		return upgradedRepairBot;
 	}
-
 }

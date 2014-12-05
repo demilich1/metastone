@@ -51,16 +51,16 @@ public class SandboxModeConfigView extends BorderPane {
 		backButton.setOnAction(this::handleBackButton);
 	}
 	
+	private void handleBackButton(ActionEvent event) {
+		ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU);
+	}
+	
 	private void handleStartButton(ActionEvent event) {
 		GameConfig gameConfig = new GameConfig();
 		gameConfig.setNumberOfGames(1);
 		gameConfig.setPlayerConfig1(player1Config.getPlayerConfig());
 		gameConfig.setPlayerConfig2(player2Config.getPlayerConfig());
 		ApplicationFacade.getInstance().sendNotification(GameNotification.COMMIT_SANDBOXMODE_CONFIG, gameConfig);
-	}
-	
-	private void handleBackButton(ActionEvent event) {
-		ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU);
 	}
 
 	public void injectDecks(List<Deck> decks) {

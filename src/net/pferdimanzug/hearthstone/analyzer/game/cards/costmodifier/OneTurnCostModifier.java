@@ -28,17 +28,17 @@ public class OneTurnCostModifier extends CardCostModifier {
 	}
 	
 	@Override
-	public void setOwner(int playerIndex) {
-		super.setOwner(playerIndex);
-		expirationTrigger.setOwner(playerIndex);
-	}
-
-	@Override
 	public void onGameEvent(GameEvent event) {
 		Entity host = event.getGameContext().resolveSingleTarget(getHostReference());
 		if (expirationTrigger.fire(event, host)) {
 			expire();
 		}
+	}
+
+	@Override
+	public void setOwner(int playerIndex) {
+		super.setOwner(playerIndex);
+		expirationTrigger.setOwner(playerIndex);
 	}
 
 }

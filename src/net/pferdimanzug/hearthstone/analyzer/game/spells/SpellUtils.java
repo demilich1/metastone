@@ -18,6 +18,10 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 
 public class SpellUtils {
 
+	public static Card drawFromDeck(GameContext context, Player player) {
+		return context.getLogic().drawCard(player.getId());
+	}
+
 	public static CardCollection getCards(CardCollection source, Predicate<Card> filter) {
 		CardCollection result = new CardCollection();
 		for (Card card : source) {
@@ -40,26 +44,7 @@ public class SpellUtils {
 		int randomIndex = ThreadLocalRandom.current().nextInt(targets.size());
 		return targets.get(randomIndex);
 	}
-
-	public static boolean hasMinionOfRace(Player player, Race race) {
-		for (Minion minion : player.getMinions()) {
-			if (minion.getRace() == race) {
-				return true;
-			}
-		}
-		return false;
-	}
 	
-	public static int hasHowManyOfRace(Player player, Race race) {
-		int count = 0;
-		for (Minion minion : player.getMinions()) {
-			if (minion.getRace() == race) {
-				count++;
-			}
-		}
-		return count;
-	}
-
 	public static List<Actor> getValidRandomTargets(List<Entity> targets) {
 		List<Actor> validTargets = new ArrayList<Actor>();
 		for (Entity entity : targets) {
@@ -79,8 +64,23 @@ public class SpellUtils {
 		return allTargets.stream().filter(filter).collect(Collectors.<Entity> toList());
 	}
 
-	public static Card drawFromDeck(GameContext context, Player player) {
-		return context.getLogic().drawCard(player.getId());
+	public static int hasHowManyOfRace(Player player, Race race) {
+		int count = 0;
+		for (Minion minion : player.getMinions()) {
+			if (minion.getRace() == race) {
+				count++;
+			}
+		}
+		return count;
+	}
+
+	public static boolean hasMinionOfRace(Player player, Race race) {
+		for (Minion minion : player.getMinions()) {
+			if (minion.getRace() == race) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private SpellUtils() {

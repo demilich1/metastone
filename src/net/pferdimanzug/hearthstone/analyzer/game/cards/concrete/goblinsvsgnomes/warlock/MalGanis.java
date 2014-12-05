@@ -24,6 +24,13 @@ public class MalGanis extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 601;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion malGanis = createMinion();
 		// aura apply
@@ -44,5 +51,4 @@ public class MalGanis extends MinionCard {
 		malGanis.setSpellTrigger(aura);
 		return malGanis;
 	}
-
 }

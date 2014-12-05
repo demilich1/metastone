@@ -22,6 +22,13 @@ public class IronJuggernaut extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 605;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion ironJuggernaut = createMinion();
 		SpellDesc burrowingMine = ShuffleToDeckSpell.create(TargetPlayer.OPPONENT, new BurrowingMine());
@@ -29,5 +36,4 @@ public class IronJuggernaut extends MinionCard {
 		ironJuggernaut.setBattlecry(battlecry);
 		return ironJuggernaut;
 	}
-
 }

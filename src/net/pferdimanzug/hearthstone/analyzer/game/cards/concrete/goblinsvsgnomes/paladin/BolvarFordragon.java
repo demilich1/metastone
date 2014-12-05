@@ -25,14 +25,25 @@ public class BolvarFordragon extends MinionCard implements IGameEventListener {
 	}
 
 	@Override
-	public Minion summon() {
-		Minion bolvarFordragon = createMinion();
-		return bolvarFordragon;
+	public BolvarFordragon clone() {
+		BolvarFordragon clone = (BolvarFordragon) super.clone();
+		clone.hostReference = hostReference != null ? new EntityReference(hostReference.getId()) : null;
+		return clone;
+	}
+
+	@Override
+	public EntityReference getHostReference() {
+		return hostReference;
 	}
 
 	@Override
 	public TriggerLayer getLayer() {
 		return TriggerLayer.DEFAULT;
+	}
+
+	@Override
+	public int getTypeId() {
+		return 551;
 	}
 
 	@Override
@@ -72,16 +83,11 @@ public class BolvarFordragon extends MinionCard implements IGameEventListener {
 		this.hostReference = host.getReference();
 	}
 
-	@Override
-	public BolvarFordragon clone() {
-		BolvarFordragon clone = (BolvarFordragon) super.clone();
-		clone.hostReference = hostReference != null ? new EntityReference(hostReference.getId()) : null;
-		return clone;
-	}
+
 
 	@Override
-	public EntityReference getHostReference() {
-		return hostReference;
+	public Minion summon() {
+		Minion bolvarFordragon = createMinion();
+		return bolvarFordragon;
 	}
-
 }

@@ -22,6 +22,13 @@ public class OneEyedCheat extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 571;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion oneEyedCheat = createMinion();
 		SpellDesc stealth = ApplyTagSpell.create(GameTag.STEALTHED);
@@ -30,5 +37,4 @@ public class OneEyedCheat extends MinionCard {
 		oneEyedCheat.setSpellTrigger(trigger);
 		return oneEyedCheat;
 	}
-
 }

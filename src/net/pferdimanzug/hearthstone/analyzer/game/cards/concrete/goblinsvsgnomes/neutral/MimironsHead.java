@@ -27,6 +27,11 @@ public class MimironsHead extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 534;
+	}
+
+	@Override
 	public Minion summon() {
 		Minion mimironsHead = createMinion();
 		SpellDesc destroyAllMechs = DestroySpell.create();
@@ -40,6 +45,8 @@ public class MimironsHead extends MinionCard {
 		mimironsHead.setSpellTrigger(trigger);
 		return mimironsHead;
 	}
+
+
 
 	private class StartOfTurnHaveMechsTrigger extends TurnStartTrigger {
 
@@ -59,5 +66,4 @@ public class MimironsHead extends MinionCard {
 		}
 
 	}
-
 }

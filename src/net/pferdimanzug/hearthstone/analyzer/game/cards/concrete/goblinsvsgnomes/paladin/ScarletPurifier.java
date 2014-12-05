@@ -19,6 +19,13 @@ public class ScarletPurifier extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 556;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion scarletPurifier = createMinion();
 		SpellDesc damage = DamageSpell.create(2);
@@ -28,5 +35,4 @@ public class ScarletPurifier extends MinionCard {
 		scarletPurifier.setBattlecry(battlecry);
 		return scarletPurifier;
 	}
-
 }

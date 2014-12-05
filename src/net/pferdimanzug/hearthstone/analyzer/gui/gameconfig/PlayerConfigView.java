@@ -93,14 +93,6 @@ public class PlayerConfigView extends VBox {
 		});
 	}
 
-	private void setupHideCardsBox(PlayerConfigType configType) {
-		hideCardsCheckBox.selectedProperty().addListener(this::onHideCardBoxChanged);
-		hideCardsCheckBox.setSelected(selectionHint == PlayerConfigType.OPPONENT);
-		if (configType == PlayerConfigType.SIMULATION || configType == PlayerConfigType.SANDBOX) {
-			hideCardsCheckBox.setVisible(false);
-		}
-	}
-
 	private void filterDecks() {
 		HeroClass heroClass = getPlayerConfig().getHero().getHeroClass();
 		ObservableList<Deck> deckList = FXCollections.observableArrayList();
@@ -116,10 +108,6 @@ public class PlayerConfigView extends VBox {
 		deckBox.getSelectionModel().selectFirst();
 	}
 
-	private void onHideCardBoxChanged(ObservableValue<? extends Boolean> ov, Boolean oldValue, Boolean newValue) {
-		playerConfig.setHideCards(newValue);
-	}
-
 	public PlayerConfig getPlayerConfig() {
 		return playerConfig;
 	}
@@ -128,6 +116,15 @@ public class PlayerConfigView extends VBox {
 		this.decks = decks;
 		heroBox.getSelectionModel().selectFirst();
 		behaviourBox.getSelectionModel().selectFirst();
+	}
+
+	private void onBehaviourChanged(ObservableValue<? extends IBehaviour> ov, IBehaviour oldBehaviour, IBehaviour newBehaviour) {
+		getPlayerConfig().setBehaviour(newBehaviour);
+		hideCardsCheckBox.setDisable(newBehaviour instanceof HumanBehaviour);
+	}
+
+	private void onHideCardBoxChanged(ObservableValue<? extends Boolean> ov, Boolean oldValue, Boolean newValue) {
+		playerConfig.setHideCards(newValue);
 	}
 
 	private void selectHero(Hero hero) {
@@ -159,11 +156,6 @@ public class PlayerConfigView extends VBox {
 		behaviourBox.valueProperty().addListener(this::onBehaviourChanged);
 	}
 
-	private void onBehaviourChanged(ObservableValue<? extends IBehaviour> ov, IBehaviour oldBehaviour, IBehaviour newBehaviour) {
-		getPlayerConfig().setBehaviour(newBehaviour);
-		hideCardsCheckBox.setDisable(newBehaviour instanceof HumanBehaviour);
-	}
-
 	public void setupHeroes() {
 		ObservableList<Hero> heroList = FXCollections.observableArrayList();
 
@@ -181,6 +173,14 @@ public class PlayerConfigView extends VBox {
 		heroBox.valueProperty().addListener((ChangeListener<Hero>) (observableValue, oldHero, newHero) -> {
 			selectHero(newHero);
 		});
+	}
+
+	private void setupHideCardsBox(PlayerConfigType configType) {
+		hideCardsCheckBox.selectedProperty().addListener(this::onHideCardBoxChanged);
+		hideCardsCheckBox.setSelected(selectionHint == PlayerConfigType.OPPONENT);
+		if (configType == PlayerConfigType.SIMULATION || configType == PlayerConfigType.SANDBOX) {
+			hideCardsCheckBox.setVisible(false);
+		}
 	}
 
 }

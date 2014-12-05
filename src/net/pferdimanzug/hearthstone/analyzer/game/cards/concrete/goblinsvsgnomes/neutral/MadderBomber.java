@@ -18,6 +18,13 @@ public class MadderBomber extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 529;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion madderBomber = createMinion();
 		SpellDesc spell = DamageRandomSpell.create(1, 6);
@@ -26,5 +33,4 @@ public class MadderBomber extends MinionCard {
 		madderBomber.setBattlecry(battlecry);
 		return madderBomber;
 	}
-
 }

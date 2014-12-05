@@ -24,6 +24,11 @@ public class TradePrinceGallywix extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 574;
+	}
+
+	@Override
 	public Minion summon() {
 		Minion tradePriceGallywix = createMinion();
 		SpellDesc copySpell = CopySpellCardSpell.create();
@@ -32,6 +37,8 @@ public class TradePrinceGallywix extends MinionCard {
 		tradePriceGallywix.setSpellTrigger(trigger);
 		return tradePriceGallywix;
 	}
+
+
 
 	private class GallywixTrigger extends SpellCastedTrigger {
 
@@ -50,5 +57,4 @@ public class TradePrinceGallywix extends MinionCard {
 		}
 
 	}
-
 }

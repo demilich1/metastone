@@ -19,6 +19,13 @@ public class StonesplinterTrogg extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 546;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion stonesplinterTrogg = createMinion();
 		SpellDesc buffSpell = BuffSpell.create(+1);
@@ -27,5 +34,4 @@ public class StonesplinterTrogg extends MinionCard {
 		stonesplinterTrogg.setSpellTrigger(trigger);
 		return stonesplinterTrogg;
 	}
-
 }

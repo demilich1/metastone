@@ -18,11 +18,17 @@ public class Voljin extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 566;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion voljin = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(VoljinSpell.create(), TargetSelection.MINIONS);
 		voljin.setBattlecry(battlecry);
 		return voljin;
 	}
-
 }

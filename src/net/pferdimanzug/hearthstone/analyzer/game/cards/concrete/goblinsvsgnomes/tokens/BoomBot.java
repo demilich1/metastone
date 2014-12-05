@@ -20,6 +20,13 @@ public class BoomBot extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 590;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion boomBot = createMinion();
 		SpellDesc boom = MinMaxDamageSpell.create(1, 4);
@@ -29,5 +36,4 @@ public class BoomBot extends MinionCard {
 
 		return boomBot;
 	}
-
 }

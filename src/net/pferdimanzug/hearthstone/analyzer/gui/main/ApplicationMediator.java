@@ -38,6 +38,31 @@ public class ApplicationMediator extends Mediator<GameNotification> {
 		super(NAME);
 	}
 
+	@SuppressWarnings("restriction")
+	private void enableFpsLogging(boolean enable) {
+		if (!enable) {
+			return;
+		}
+		fpsView = getFpsDisplay();
+		fpsView.setTranslateX(440);
+		fpsView.setTranslateY(360);
+		PerformanceTracker tracker = PerformanceTracker.getSceneTracker(root.getScene());
+		Timeline timeline = new Timeline(
+		   new KeyFrame(Duration.seconds(1), t -> {
+		      fpsView.setText("Fps: " + String.format("%.2f", tracker.getAverageFPS()));
+		   }));
+		timeline.setCycleCount(Timeline.INDEFINITE);
+		timeline.play();
+	}
+
+	private Label getFpsDisplay() {
+		Label fpsLabel = new Label();
+		fpsLabel.setStyle("-fx-font-size: 18pt; -fx-font-family: \"System\";-fx-font-weight: bolder;-fx-text-fill: black;");
+		fpsLabel.setAlignment(Pos.BOTTOM_LEFT);
+		fpsLabel.setTextAlignment(TextAlignment.LEFT);
+		return fpsLabel;
+	}
+
 	@Override
 	public void handleNotification(final INotification<GameNotification> notification) {
 		switch (notification.getId()) {
@@ -61,7 +86,7 @@ public class ApplicationMediator extends Mediator<GameNotification> {
 			break;
 		}
 	}
-
+	
 	@Override
 	public List<GameNotification> listNotificationInterests() {
 		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
@@ -70,7 +95,7 @@ public class ApplicationMediator extends Mediator<GameNotification> {
 		notificationInterests.add(GameNotification.MAIN_MENU);
 		return notificationInterests;
 	}
-
+	
 	private void removeOtherViews() {
 		getFacade().removeMediator(PlayModeMediator.NAME);
 		getFacade().removeMediator(PlayModeConfigMediator.NAME);
@@ -79,31 +104,6 @@ public class ApplicationMediator extends Mediator<GameNotification> {
 		getFacade().removeMediator(TrainingModeMediator.NAME);
 		getFacade().removeMediator(SandboxModeMediator.NAME);
 		getFacade().removeMediator(BattleOfDecksMediator.NAME);
-	}
-	
-	private Label getFpsDisplay() {
-		Label fpsLabel = new Label();
-		fpsLabel.setStyle("-fx-font-size: 18pt; -fx-font-family: \"System\";-fx-font-weight: bolder;-fx-text-fill: black;");
-		fpsLabel.setAlignment(Pos.BOTTOM_LEFT);
-		fpsLabel.setTextAlignment(TextAlignment.LEFT);
-		return fpsLabel;
-	}
-	
-	@SuppressWarnings("restriction")
-	private void enableFpsLogging(boolean enable) {
-		if (!enable) {
-			return;
-		}
-		fpsView = getFpsDisplay();
-		fpsView.setTranslateX(440);
-		fpsView.setTranslateY(360);
-		PerformanceTracker tracker = PerformanceTracker.getSceneTracker(root.getScene());
-		Timeline timeline = new Timeline(
-		   new KeyFrame(Duration.seconds(1), t -> {
-		      fpsView.setText("Fps: " + String.format("%.2f", tracker.getAverageFPS()));
-		   }));
-		timeline.setCycleCount(Timeline.INDEFINITE);
-		timeline.play();
 	}
 
 }

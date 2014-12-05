@@ -22,6 +22,19 @@ public class GameContextVisualizable extends GameContext {
 		super(player1, player2, logic);
 	}
 
+	protected boolean acceptAction(GameAction nextAction) {
+		if (!ignoreEvents()) {
+			return true;
+		}
+		while (ignoreEvents()) {
+			try {
+				Thread.sleep(AppConfig.DEFAULT_SLEEP_DELAY);
+			} catch (InterruptedException e) {
+			}
+		}
+		return false;
+	}
+	
 	@Override
 	public void fireGameEvent(GameEvent gameEvent) {
 		if (ignoreEvents()) {
@@ -31,6 +44,15 @@ public class GameContextVisualizable extends GameContext {
 		getGameEvents().add(gameEvent);
 	}
 	
+	public synchronized List<GameEvent> getGameEvents() {
+		return gameEvents;
+	}
+	
+
+	public boolean isBlockedByAnimation() {
+		return blockedByAnimation;
+	}
+
 	@Override
 	protected void onGameStateChanged() {
 		if (ignoreEvents()) {
@@ -47,28 +69,6 @@ public class GameContextVisualizable extends GameContext {
 			}
 		}
 		ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_STATE_LATE_UPDATE, this);
-	}
-	
-	protected boolean acceptAction(GameAction nextAction) {
-		if (!ignoreEvents()) {
-			return true;
-		}
-		while (ignoreEvents()) {
-			try {
-				Thread.sleep(AppConfig.DEFAULT_SLEEP_DELAY);
-			} catch (InterruptedException e) {
-			}
-		}
-		return false;
-	}
-	
-
-	public synchronized List<GameEvent> getGameEvents() {
-		return gameEvents;
-	}
-
-	public boolean isBlockedByAnimation() {
-		return blockedByAnimation;
 	}
 
 	public void setBlockedByAnimation(boolean blockedByAnimation) {

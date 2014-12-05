@@ -24,4 +24,10 @@ public class SealOfLight extends SpellCard {
 
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 557;
+	}
 }

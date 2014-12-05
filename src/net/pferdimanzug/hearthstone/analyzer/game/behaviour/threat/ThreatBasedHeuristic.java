@@ -10,12 +10,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
 public class ThreatBasedHeuristic implements IGameStateHeuristic {
 	
-	private final FeatureVector weights;
-
-	public ThreatBasedHeuristic(FeatureVector vector) {
-		this.weights = vector;
-	}
-	
 	private static ThreatLevel calcuateThreatLevel(GameContext context, int playerId) {
 		int damageOnBoard = 0;
 		Player player = context.getPlayer(playerId);
@@ -33,6 +27,27 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 		}
 
 		return ThreatLevel.GREEN;
+	}
+
+	private static int getHeroDamage(Hero hero) {
+		int heroDamage = 0;
+		if (hero.getHeroClass() == HeroClass.MAGE) {
+			heroDamage += 1;
+		} else if (hero.getHeroClass() == HeroClass.HUNTER) {
+			heroDamage += 2;
+		} else if (hero.getHeroClass() == HeroClass.DRUID) {
+			heroDamage += 1;
+		}
+		if (hero.getWeapon() != null) {
+			heroDamage += hero.getWeapon().getDurability();
+		}
+		return heroDamage;
+	}
+	
+	private final FeatureVector weights;
+
+	public ThreatBasedHeuristic(FeatureVector vector) {
+		this.weights = vector;
 	}
 
 	private double calculateMinionScore(Minion minion, ThreatLevel threatLevel) {
@@ -71,21 +86,6 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 		}
 
 		return minionScore;
-	}
-
-	private static int getHeroDamage(Hero hero) {
-		int heroDamage = 0;
-		if (hero.getHeroClass() == HeroClass.MAGE) {
-			heroDamage += 1;
-		} else if (hero.getHeroClass() == HeroClass.HUNTER) {
-			heroDamage += 2;
-		} else if (hero.getHeroClass() == HeroClass.DRUID) {
-			heroDamage += 1;
-		}
-		if (hero.getWeapon() != null) {
-			heroDamage += hero.getWeapon().getDurability();
-		}
-		return heroDamage;
 	}
 
 	@Override

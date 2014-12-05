@@ -21,6 +21,13 @@ public class GoblinAutoBarber extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 568;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion goblinAutoBarber = createMinion();
 		SpellDesc buffWeaponSpell = BuffWeaponSpell.create(+1);
@@ -30,5 +37,4 @@ public class GoblinAutoBarber extends MinionCard {
 		goblinAutoBarber.setBattlecry(battlecry);
 		return goblinAutoBarber;
 	}
-
 }

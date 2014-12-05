@@ -22,6 +22,13 @@ public class DruidOfTheFang extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 478;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion druidOfTheFang = createMinion();
 		SpellDesc transformSpell = TransformMinionSpell.create(new CobraForm());
@@ -31,5 +38,4 @@ public class DruidOfTheFang extends MinionCard {
 		druidOfTheFang.setBattlecry(battleCry);
 		return druidOfTheFang;
 	}
-
 }

@@ -19,7 +19,7 @@ public class Demonheart extends SpellCard {
 
 	public Demonheart() {
 		super("Demonheart", Rarity.EPIC, HeroClass.WARLOCK, 5);
-		setDescription("Deal $5 damage to a minion. If it’s a friendly Demon, give it +5/+5 instead.");
+		setDescription("Deal $5 damage to a minion. If it's a friendly Demon, give it +5/+5 instead.");
 		SpellDesc buffSpell = BuffSpell.create(2, 2);
 		SpellDesc damageSpell = DamageSpell.create(2);
 		ISpellConditionChecker isFriendlyMinion = new ISpellConditionChecker() {
@@ -36,4 +36,10 @@ public class Demonheart extends SpellCard {
 
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 597;
+	}
 }

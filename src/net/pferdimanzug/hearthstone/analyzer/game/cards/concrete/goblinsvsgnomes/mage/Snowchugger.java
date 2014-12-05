@@ -21,6 +21,13 @@ public class Snowchugger extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 496;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion snowchugger = createMinion();
 		SpellDesc freezeSpell = ApplyTagSpell.create(GameTag.FROZEN);
@@ -28,5 +35,4 @@ public class Snowchugger extends MinionCard {
 		snowchugger.setSpellTrigger(new SpellTrigger(new PhysicalAttackTrigger(true), freezeSpell));
 		return snowchugger;
 	}
-
 }

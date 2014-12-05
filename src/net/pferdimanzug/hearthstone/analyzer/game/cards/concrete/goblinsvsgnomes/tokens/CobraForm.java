@@ -15,8 +15,14 @@ public class CobraForm extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 592;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion();
 	}
-
 }

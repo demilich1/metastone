@@ -124,6 +124,10 @@ public class Player extends CustomCloneable {
 		return statistics;
 	}
 	
+	public boolean hideCards() {
+		return hideCards;
+	}
+
 	public void setBehaviour(IBehaviour behaviour) {
 		this.behaviour = behaviour;
 	}
@@ -132,10 +136,14 @@ public class Player extends CustomCloneable {
 		this.hero = hero;
 	}
 
+	public void setHideCards(boolean hideCards) {
+		this.hideCards = hideCards;
+	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-
+	
 	public void setMana(int mana) {
 		this.mana = mana;
 	}
@@ -143,18 +151,10 @@ public class Player extends CustomCloneable {
 	public void setMaxMana(int maxMana) {
 		this.maxMana = maxMana;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "[PLAYER " + "id: " + getId() + ", name: " + getName() + ", hero: " + getHero() + "]";
-	}
-
-	public boolean hideCards() {
-		return hideCards;
-	}
-
-	public void setHideCards(boolean hideCards) {
-		this.hideCards = hideCards;
 	}
 
 }

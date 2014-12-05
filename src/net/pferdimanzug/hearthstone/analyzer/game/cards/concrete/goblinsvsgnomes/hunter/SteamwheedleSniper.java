@@ -14,9 +14,15 @@ public class SteamwheedleSniper extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 491;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion steamwheedleSniper = createMinion(GameTag.HERO_POWER_CAN_TARGET_MINIONS);
 		return steamwheedleSniper;
 	}
-
 }

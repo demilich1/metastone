@@ -22,14 +22,9 @@ public class DarkWispers extends ChooseOneCard {
 		setCard2(new BuffAndTaunt());
 	}
 
-	private class SummonWisps extends SpellCard {
-
-		public SummonWisps() {
-			super("Dark Wispers (5 Wisps)", Rarity.EPIC, HeroClass.DRUID, 6);
-
-			setSpell(SummonSpell.create(new Wisp(), new Wisp(), new Wisp(), new Wisp(), new Wisp()));
-			setTargetRequirement(TargetSelection.NONE);
-		}
+	@Override
+	public int getTypeId() {
+		return 477;
 	}
 	
 	private class BuffAndTaunt extends SpellCard {
@@ -41,4 +36,15 @@ public class DarkWispers extends ChooseOneCard {
 		}
 	}
 
+
+
+	private class SummonWisps extends SpellCard {
+
+		public SummonWisps() {
+			super("Dark Wispers (5 Wisps)", Rarity.EPIC, HeroClass.DRUID, 6);
+
+			setSpell(SummonSpell.create(new Wisp(), new Wisp(), new Wisp(), new Wisp(), new Wisp()));
+			setTargetRequirement(TargetSelection.NONE);
+		}
+	}
 }

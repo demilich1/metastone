@@ -18,4 +18,10 @@ public class ReversingSwitch extends SpellCard {
 		setCollectible(false);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 586;
+	}
 }

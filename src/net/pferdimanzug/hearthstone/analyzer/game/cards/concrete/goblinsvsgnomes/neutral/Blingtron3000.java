@@ -20,6 +20,13 @@ public class Blingtron3000 extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 503;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion blingtron3000 = createMinion();
 		SpellDesc equipRandomWeapons = EquipRandomWeaponSpell.create(TargetPlayer.BOTH);
@@ -28,5 +35,4 @@ public class Blingtron3000 extends MinionCard {
 		blingtron3000.setBattlecry(battlecry);
 		return blingtron3000;
 	}
-
 }

@@ -20,4 +20,10 @@ public class FinickyCloakfield extends SpellCard {
 		setCollectible(false);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 585;
+	}
 }

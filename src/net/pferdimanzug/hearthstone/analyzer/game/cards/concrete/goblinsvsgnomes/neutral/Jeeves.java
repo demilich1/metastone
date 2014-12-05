@@ -20,6 +20,13 @@ public class Jeeves extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 524;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion jeeves = createMinion();
 		SpellDesc drawCardSpell = JeevesSpell.create();
@@ -27,5 +34,4 @@ public class Jeeves extends MinionCard {
 		jeeves.setSpellTrigger(trigger);
 		return jeeves;
 	}
-
 }

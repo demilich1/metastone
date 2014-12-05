@@ -17,8 +17,14 @@ public class AnnoyOTron extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 500;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion(GameTag.TAUNT, GameTag.DIVINE_SHIELD);
 	}
-
 }

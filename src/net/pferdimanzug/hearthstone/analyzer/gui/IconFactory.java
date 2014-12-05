@@ -16,6 +16,11 @@ public class IconFactory {
 		return new Image(iconPath);
 	}
 
+	public static Image getDefaultCardBack() {
+		String iconPath = RESOURCE_PATH + "/img/common/card_back_default.png";
+		return new Image(iconPath);
+	}
+
 	public static Image getDialogIcon(DialogType dialogType) {
 		String iconPath = RESOURCE_PATH + "/img/ui/";
 		switch (dialogType) {
@@ -113,11 +118,11 @@ public class IconFactory {
 		iconPath += ".png";
 		return iconPath;
 	}
-
+	
 	public static String getImageUrl(String imageName) {
 		return RESOURCE_PATH + "/img/" + imageName;
 	}
-	
+
 	public static Color getRarityColor(Rarity rarity) {
 		Color color = Color.BLACK;
 		switch (rarity) {
@@ -148,14 +153,9 @@ public class IconFactory {
 		String iconPath = RESOURCE_PATH + "/img/common/arrow_down_blue.png";
 		return new Image(iconPath);
 	}
-
+	
 	public static Image getTargetIcon() {
 		String iconPath = RESOURCE_PATH + "/img/common/target.png";
-		return new Image(iconPath);
-	}
-	
-	public static Image getDefaultCardBack() {
-		String iconPath = RESOURCE_PATH + "/img/common/card_back_default.png";
 		return new Image(iconPath);
 	}
 

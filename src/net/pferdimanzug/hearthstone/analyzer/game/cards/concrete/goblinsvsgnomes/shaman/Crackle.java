@@ -18,4 +18,10 @@ public class Crackle extends SpellCard {
 		setTargetRequirement(TargetSelection.ANY);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 576;
+	}
 }

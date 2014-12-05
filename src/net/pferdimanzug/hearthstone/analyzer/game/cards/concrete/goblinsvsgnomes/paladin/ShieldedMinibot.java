@@ -16,9 +16,15 @@ public class ShieldedMinibot extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 558;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion shieldedMinibot = createMinion(GameTag.DIVINE_SHIELD);
 		return shieldedMinibot;
 	}
-
 }

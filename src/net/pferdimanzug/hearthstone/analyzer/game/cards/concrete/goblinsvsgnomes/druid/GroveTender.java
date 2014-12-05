@@ -17,12 +17,6 @@ public class GroveTender extends ChooseBattlecryCard {
 	}
 
 	@Override
-	public Minion summon() {
-		Minion groveTender = createMinion();
-		return groveTender;
-	}
-
-	@Override
 	protected String getAction1Suffix() {
 		return "Mana Crystal";
 	}
@@ -44,4 +38,16 @@ public class GroveTender extends ChooseBattlecryCard {
 		return battlecry;
 	}
 
+	@Override
+	public int getTypeId() {
+		return 479;
+	}
+
+
+
+	@Override
+	public Minion summon() {
+		Minion groveTender = createMinion();
+		return groveTender;
+	}
 }

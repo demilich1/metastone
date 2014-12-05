@@ -14,8 +14,14 @@ public class SpiderTank extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 545;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion();
 	}
-
 }

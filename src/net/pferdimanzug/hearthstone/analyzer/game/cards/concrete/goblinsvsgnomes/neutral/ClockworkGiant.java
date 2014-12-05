@@ -23,8 +23,14 @@ public class ClockworkGiant extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 506;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion();
 	}
-
 }

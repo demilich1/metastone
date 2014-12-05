@@ -20,6 +20,13 @@ public class Shadowbomber extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 561;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion shadowbomber = createMinion();
 		SpellDesc damageOpponent = DamageSpell.create(3);
@@ -30,5 +37,4 @@ public class Shadowbomber extends MinionCard {
 		shadowbomber.setBattlecry(battlecry);
 		return shadowbomber;
 	}
-
 }

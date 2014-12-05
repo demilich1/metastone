@@ -31,4 +31,10 @@ public class Crush extends SpellCard {
 		return super.getManaCost(context, player) - discount;
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 604;
+	}
 }

@@ -43,11 +43,6 @@ public class GameStatistics implements Cloneable {
 		}
 	}
 
-	private void updateWinRate() {
-		double winRate = getLong(Statistic.GAMES_WON) / (double) (getLong(Statistic.GAMES_WON) + getLong(Statistic.GAMES_LOST));
-		set(Statistic.WIN_RATE, winRate);
-	}
-
 	public GameStatistics clone() {
 		GameStatistics clone = new GameStatistics();
 		clone.stats.putAll(stats);
@@ -84,12 +79,12 @@ public class GameStatistics implements Cloneable {
 		return stats.get(key);
 	}
 
-	public long getLong(Statistic key) {
-		return stats.containsKey(key) ? (long) stats.get(key) : 0L;
-	}
-
 	public double getDouble(Statistic key) {
 		return stats.containsKey(key) ? (double) stats.get(key) : 0.0;
+	}
+
+	public long getLong(Statistic key) {
+		return stats.containsKey(key) ? (long) stats.get(key) : 0L;
 	}
 
 	public void heal(int healing) {
@@ -132,6 +127,11 @@ public class GameStatistics implements Cloneable {
 			builder.append("\n");
 		}
 		return builder.toString();
+	}
+
+	private void updateWinRate() {
+		double winRate = getLong(Statistic.GAMES_WON) / (double) (getLong(Statistic.GAMES_WON) + getLong(Statistic.GAMES_LOST));
+		set(Statistic.WIN_RATE, winRate);
 	}
 
 }

@@ -17,6 +17,13 @@ public class DrBoom extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 509;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion drBoom = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(SummonSpell.create(new BoomBot(), new BoomBot()), TargetSelection.NONE);
@@ -24,5 +31,4 @@ public class DrBoom extends MinionCard {
 		drBoom.setBattlecry(battlecry);
 		return drBoom;
 	}
-
 }

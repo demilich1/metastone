@@ -17,11 +17,17 @@ public class SneedsOldShredder extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 544;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion sneedsOldShredder = createMinion();
 		SpellDesc deathrattle = SummonRandomMinionPredicateSpell.create(card -> card.getRarity() == Rarity.LEGENDARY);
 		sneedsOldShredder.addDeathrattle(deathrattle);
 		return sneedsOldShredder;
 	}
-
 }

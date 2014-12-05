@@ -28,11 +28,6 @@ public class FlameLeviathan extends MinionCard implements IGameEventListener {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion();
-	}
-
-	@Override
 	public FlameLeviathan clone() {
 		FlameLeviathan clone =(FlameLeviathan) super.clone();
 		clone.hostReference = hostReference != null ? new EntityReference(hostReference.getId()) : null;
@@ -47,6 +42,11 @@ public class FlameLeviathan extends MinionCard implements IGameEventListener {
 	@Override
 	public TriggerLayer getLayer() {
 		return TriggerLayer.DEFAULT;
+	}
+
+	@Override
+	public int getTypeId() {
+		return 494;
 	}
 
 	@Override
@@ -91,4 +91,10 @@ public class FlameLeviathan extends MinionCard implements IGameEventListener {
 		this.hostReference = host.getReference();
 	}
 
+
+
+	@Override
+	public Minion summon() {
+		return createMinion();
+	}
 }

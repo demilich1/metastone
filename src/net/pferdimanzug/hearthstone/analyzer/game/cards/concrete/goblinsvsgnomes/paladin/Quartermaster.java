@@ -20,6 +20,13 @@ public class Quartermaster extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 555;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion quartermaster = createMinion();
 		SpellDesc buffRecruits = BuffSpell.create(+2, +2);
@@ -29,5 +36,4 @@ public class Quartermaster extends MinionCard {
 		quartermaster.setBattlecry(battlecry);
 		return quartermaster;
 	}
-
 }

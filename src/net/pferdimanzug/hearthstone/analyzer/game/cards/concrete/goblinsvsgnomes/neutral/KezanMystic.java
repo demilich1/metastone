@@ -17,11 +17,17 @@ public class KezanMystic extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 526;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion kezanMystic = createMinion();
 		Battlecry battlecry = Battlecry.createBattlecry(StealRandomSecretSpell.create());
 		kezanMystic.setBattlecry(battlecry);
 		return kezanMystic;
 	}
-
 }

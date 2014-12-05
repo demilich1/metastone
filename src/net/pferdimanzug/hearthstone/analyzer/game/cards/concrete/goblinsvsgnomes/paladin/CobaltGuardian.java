@@ -22,6 +22,13 @@ public class CobaltGuardian extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 552;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion cobaltGuardian = createMinion();
 		SpellDesc gainDivineShield = ApplyTagSpell.create(GameTag.DIVINE_SHIELD);
@@ -30,5 +37,4 @@ public class CobaltGuardian extends MinionCard {
 		cobaltGuardian.setSpellTrigger(trigger);
 		return cobaltGuardian;
 	}
-
 }

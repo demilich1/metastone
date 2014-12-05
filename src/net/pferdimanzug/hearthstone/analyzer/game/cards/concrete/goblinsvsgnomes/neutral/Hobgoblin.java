@@ -21,6 +21,11 @@ public class Hobgoblin extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 522;
+	}
+	
+	@Override
 	public Minion summon() {
 		Minion hobgoblin = createMinion();
 		SpellDesc buff = BuffSpell.create(+2, +2);
@@ -29,7 +34,9 @@ public class Hobgoblin extends MinionCard {
 		hobgoblin.setSpellTrigger(trigger);
 		return hobgoblin;
 	}
-	
+
+
+
 	private class HobgoblinTrigger extends MinionCardPlayedTrigger {
 		
 		@Override
@@ -47,5 +54,4 @@ public class Hobgoblin extends MinionCard {
 		}
 		
 	}
-
 }

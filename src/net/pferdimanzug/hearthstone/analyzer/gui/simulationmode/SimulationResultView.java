@@ -102,17 +102,6 @@ public class SimulationResultView extends BorderPane {
 		formatter.setMaximumFractionDigits(2);
 	}
 
-	private String getStatString(Statistic stat, GameStatistics playerStatistics) {
-		if (playerStatistics.contains(stat)) {
-			Object statValue = playerStatistics.get(stat);
-			if (statValue instanceof Number) {
-				return formatter.format(playerStatistics.get(stat));
-			}
-			return statValue.toString();
-		}
-		return "-";
-	}
-
 	private String getAverageStatString(Statistic stat, GameStatistics playerStatistics, int numberOfGames) {
 		if (playerStatistics.contains(stat)) {
 			Object statValue = playerStatistics.get(stat);
@@ -121,6 +110,17 @@ public class SimulationResultView extends BorderPane {
 				return formatter.format(value / numberOfGames);
 			}
 
+		}
+		return "-";
+	}
+
+	private String getStatString(Statistic stat, GameStatistics playerStatistics) {
+		if (playerStatistics.contains(stat)) {
+			Object statValue = playerStatistics.get(stat);
+			if (statValue instanceof Number) {
+				return formatter.format(playerStatistics.get(stat));
+			}
+			return statValue.toString();
 		}
 		return "-";
 	}

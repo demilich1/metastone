@@ -17,10 +17,16 @@ public class Warbot extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 610;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion warbot = createMinion();
 		warbot.setTag(GameTag.ENRAGE_SPELL, Enrage.create(+1));
 		return warbot;
 	}
-
 }

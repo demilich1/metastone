@@ -19,6 +19,13 @@ public class Recombolator extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 541;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion recombolator = createMinion();
 		SpellDesc transformSpell = TransformToMinionWithManaCostSpell.create();
@@ -28,5 +35,4 @@ public class Recombolator extends MinionCard {
 		recombolator.setBattlecry(battlecry);
 		return recombolator;
 	}
-
 }

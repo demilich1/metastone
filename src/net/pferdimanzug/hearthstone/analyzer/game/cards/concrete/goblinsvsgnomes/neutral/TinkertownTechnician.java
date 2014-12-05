@@ -24,6 +24,13 @@ public class TinkertownTechnician extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 548;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion tinkertownTechnician = createMinion();
 		SpellDesc buffSpell = BuffSpell.create(+1, +1);
@@ -34,5 +41,4 @@ public class TinkertownTechnician extends MinionCard {
 		tinkertownTechnician.setBattlecry(battlecry);
 		return tinkertownTechnician;
 	}
-
 }

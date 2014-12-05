@@ -21,6 +21,13 @@ public class Junkbot extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 525;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion junkbot = createMinion();
 		SpellDesc buff = BuffSpell.create(2, 2);
@@ -29,5 +36,4 @@ public class Junkbot extends MinionCard {
 		junkbot.setSpellTrigger(trigger);
 		return junkbot;
 	}
-
 }

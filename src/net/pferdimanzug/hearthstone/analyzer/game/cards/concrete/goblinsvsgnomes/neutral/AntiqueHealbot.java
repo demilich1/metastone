@@ -19,6 +19,13 @@ public class AntiqueHealbot extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 501;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion antiqueHealbot = createMinion();
 		SpellDesc healSpell = HealingSpell.create(8);
@@ -27,5 +34,4 @@ public class AntiqueHealbot extends MinionCard {
 		antiqueHealbot.setBattlecry(battlecry);
 		return antiqueHealbot;
 	}
-
 }
