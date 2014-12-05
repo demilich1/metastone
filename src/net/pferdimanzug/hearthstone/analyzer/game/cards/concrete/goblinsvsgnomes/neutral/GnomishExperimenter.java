@@ -21,8 +21,6 @@ public class GnomishExperimenter extends MinionCard {
 		return 519;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion gnomishExperimenter = createMinion();

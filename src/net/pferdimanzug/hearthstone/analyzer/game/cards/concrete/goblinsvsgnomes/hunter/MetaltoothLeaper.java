@@ -10,6 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.filter.RaceFilter;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class MetaltoothLeaper extends MinionCard {
 
@@ -25,12 +26,11 @@ public class MetaltoothLeaper extends MinionCard {
 		return 490;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion metaltoothLeaper = createMinion();
 		SpellDesc buffSpell = BuffSpell.create(+2);
+		buffSpell.setTarget(EntityReference.OTHER_FRIENDLY_MINIONS);
 		buffSpell.setTargetFilter(new RaceFilter(Race.BEAST));
 		Battlecry battlecry = Battlecry.createBattlecry(buffSpell);
 		metaltoothLeaper.setBattlecry(battlecry);

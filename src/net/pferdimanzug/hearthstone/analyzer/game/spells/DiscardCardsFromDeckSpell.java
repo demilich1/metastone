@@ -21,6 +21,12 @@ public class DiscardCardsFromDeckSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		int howMany = desc.getValue();
 		for (int i = 0; i < howMany; i++) {
+			// Question: If I have no cards left and my Fel Reaver discards 3, do I draw 3 Fatigues or do I only Fatigue more when I draw a card?
+			// Answer: Fel Reaver won't trigger fatigue
+			// Source: Blue post
+			if (player.getDeck().isEmpty()) {
+				return;
+			}
 			Card card = context.getLogic().drawCard(player.getId());
 			player.getHand().remove(card);
 			card.setLocation(CardLocation.VOID);

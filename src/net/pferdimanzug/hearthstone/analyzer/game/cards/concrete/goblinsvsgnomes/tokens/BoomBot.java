@@ -24,8 +24,6 @@ public class BoomBot extends MinionCard {
 		return 590;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion boomBot = createMinion();

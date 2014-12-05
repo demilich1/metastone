@@ -24,8 +24,6 @@ public class FelReaver extends MinionCard {
 		return 512;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion felReaver = createMinion();

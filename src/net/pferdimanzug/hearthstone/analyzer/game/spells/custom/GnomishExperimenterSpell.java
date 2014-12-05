@@ -21,6 +21,9 @@ public class GnomishExperimenterSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		Card card = context.getLogic().drawCard(player.getId());
+		if (card == null) {
+			return;
+		}
 		if (card.getCardType() == CardType.MINION) {
 			player.getHand().remove(card);
 			context.getLogic().receiveCard(player.getId(), new Chicken());

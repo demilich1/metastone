@@ -176,7 +176,13 @@ public class GameLogic implements Cloneable {
 		Player player = context.getPlayer(playerId);
 		Actor source = null;
 		if (spellDesc.getSourceEntity() != null) {
-			source = (Actor) context.resolveSingleTarget(spellDesc.getSourceEntity());
+			try {
+				source = (Actor) context.resolveSingleTarget(spellDesc.getSourceEntity());	
+			} catch(Exception e) {
+				logger.error("Error resolving source entity while casting spell: " + spellDesc);
+				System.exit(-1);
+			}
+			
 		}
 		SpellCard sourceCard = null;
 		List<Entity> targets = targetLogic.resolveTargetKey(context, player, source, spellDesc.getTarget());
@@ -520,6 +526,9 @@ public class GameLogic implements Cloneable {
 		validTargets.remove(attacker);
 		// cannot redirect to original target
 		validTargets.remove(originalTarget);
+		if (validTargets.isEmpty()) {
+			return originalTarget;
+		}
 
 		return (Actor) SpellUtils.getRandomTarget(validTargets);
 	}
@@ -909,10 +918,24 @@ public class GameLogic implements Cloneable {
 		context.fireGameEvent(new BoardChangedEvent(context));
 	}
 
+	public List<IGameEventListener> getSecrets(Player player) {
+		List<IGameEventListener> secrets = context.getTriggersAssociatedWith(player.getHero().getReference());
+		for (Iterator<IGameEventListener> iterator = secrets.iterator(); iterator.hasNext();) {
+			IGameEventListener trigger = iterator.next();
+			if (!(trigger instanceof Secret)) {
+				iterator.remove();
+			}
+		}
+		return secrets;
+	}
+
 	public void removeSecrets(Player player) {
 		log("All secrets for {} have been destroyed", player.getName());
 		// this only works while Secrets are the only SpellTrigger on the heroes
-		context.removeTriggersAssociatedWith(player.getHero().getReference());
+		for (IGameEventListener secret : getSecrets(player)) {
+			secret.onRemove(context);
+			context.removeTrigger(secret);
+		}
 		player.getSecrets().clear();
 	}
 

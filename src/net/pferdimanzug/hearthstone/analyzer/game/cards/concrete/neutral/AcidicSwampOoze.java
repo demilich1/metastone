@@ -23,7 +23,6 @@ public class AcidicSwampOoze extends MinionCard {
 		return 78;
 	}
 
-
 	@Override
 	public Minion summon() {
 		Minion acidicSwampOoze = createMinion();

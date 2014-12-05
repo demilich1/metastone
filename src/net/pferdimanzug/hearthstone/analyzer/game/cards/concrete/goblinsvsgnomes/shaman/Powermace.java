@@ -22,8 +22,6 @@ public class Powermace extends WeaponCard {
 		return 579;
 	}
 
-
-
 	@Override
 	public Weapon getWeapon() {
 		Weapon powermace = createWeapon(3, 2);

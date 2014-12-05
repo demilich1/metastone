@@ -67,8 +67,12 @@ public class GameContext implements Cloneable, IDisposable {
 		getCardCostModifiers().add(cardCostModifier);
 	}
 
-	public void addTrigger(IGameEventListener spellTrigger) {
-		triggerManager.addTrigger(spellTrigger);
+	public void addTrigger(IGameEventListener trigger) {
+		triggerManager.addTrigger(trigger);
+	}
+	
+	public void removeTrigger(IGameEventListener trigger) {
+		triggerManager.addTrigger(trigger);
 	}
 
 	@Override

@@ -11,7 +11,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.secrets.Secret;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class StealRandomSecretSpell extends Spell {
-	
+
 	public static SpellDesc create() {
 		SpellDesc desc = new SpellDesc(StealRandomSecretSpell.class);
 		desc.setTarget(EntityReference.NONE);
@@ -21,7 +21,7 @@ public class StealRandomSecretSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		Player opponent = context.getOpponent(player);
-		List<IGameEventListener> secrets = context.getTriggersAssociatedWith(opponent.getHero().getReference());
+		List<IGameEventListener> secrets = context.getLogic().getSecrets(opponent);
 		if (secrets.isEmpty()) {
 			return;
 		}
@@ -29,7 +29,7 @@ public class StealRandomSecretSpell extends Spell {
 		secret.setHost(player.getHero());
 		secret.setOwner(player.getId());
 		player.getSecrets().add(secret.getSource().getTypeId());
-		opponent.getSecrets().remove((Integer)secret.getSource().getTypeId());
+		opponent.getSecrets().remove((Integer) secret.getSource().getTypeId());
 	}
 
 }

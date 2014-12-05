@@ -28,8 +28,6 @@ public class MalGanis extends MinionCard {
 		return 601;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion malGanis = createMinion();

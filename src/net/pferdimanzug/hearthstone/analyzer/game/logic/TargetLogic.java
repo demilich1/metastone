@@ -118,7 +118,8 @@ public class TargetLogic {
 			if (summonedMinion.getId() == targetId) {
 				return summonedMinion;
 			}
-		} else if (context.getEnvironment().containsKey(Environment.SUMMONED_WEAPON)) {
+		} 
+		if (context.getEnvironment().containsKey(Environment.SUMMONED_WEAPON)) {
 			Actor summonedWeapon = (Actor) context.getEnvironment().get(Environment.SUMMONED_WEAPON);
 			if (summonedWeapon.getId() == targetId) {
 				return summonedWeapon;

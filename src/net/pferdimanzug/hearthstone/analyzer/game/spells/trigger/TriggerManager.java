@@ -25,6 +25,12 @@ public class TriggerManager implements Cloneable, IDisposable {
 			System.out.println("Warning, many triggers: " + triggers.size() + " adding one of type: " + trigger);
 		}
 	}
+	
+	public void removeTrigger(IGameEventListener trigger) {
+		if (!triggers.remove(trigger)) {
+			System.out.println("Failed to remove trigger " + trigger);
+		}
+	}
 
 	@Override
 	public TriggerManager clone() {

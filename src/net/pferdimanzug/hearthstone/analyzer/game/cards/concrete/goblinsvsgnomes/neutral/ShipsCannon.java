@@ -24,8 +24,6 @@ public class ShipsCannon extends MinionCard {
 		return 543;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion shipsCannon = createMinion();

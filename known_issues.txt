@@ -1,3 +1,9 @@
 Minions with STEALTHED do not loose this property when a damaging spelltrigger is set off (Knife Juggler)
 
+Blingtron and weapon battlecries do not work correctly
+
+Getting a Burrowing mine from Thoughsteal and MindVision should not trigger it
+
+Flame Leviathan in opening hand does not trigger as well
+
 Class specific:

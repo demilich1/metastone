@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes.neutral;
 
+import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
@@ -25,7 +26,7 @@ public class Gazlowe extends MinionCard {
 	public int getTypeId() {
 		return 516;
 	}
-	
+
 	@Override
 	public Minion summon() {
 		Minion gazlowe = createMinion();
@@ -35,22 +36,25 @@ public class Gazlowe extends MinionCard {
 		return gazlowe;
 	}
 
-
-
 	private class GazloweTrigger extends SpellCastedTrigger {
 
 		public GazloweTrigger() {
 			super(TargetPlayer.SELF);
 		}
-		
+
 		@Override
 		public boolean fire(GameEvent event, Entity host) {
 			if (!super.fire(event, host)) {
 				return false;
 			}
 			SpellCastedEvent spellCastedEvent = (SpellCastedEvent) event;
-			return spellCastedEvent.getSourceCard().getBaseManaCost() == 1;
+			// Question: How does Gazlowe work with Sorcerer's Apprentice? Will Ice Lance trigger it or Frostbolt?
+			// Answer: In example: A zero mana Ice Lance will not trigger Gazlowe, but a 1 mana Frostbolt will.
+			// Source: Blue post
+			Player player = event.getGameContext().getPlayer(spellCastedEvent.getPlayerId());
+			int realManaCost = event.getGameContext().getLogic().getModifiedManaCost(player, spellCastedEvent.getSourceCard());
+			return realManaCost == 1;
 		}
-		
+
 	}
 }
