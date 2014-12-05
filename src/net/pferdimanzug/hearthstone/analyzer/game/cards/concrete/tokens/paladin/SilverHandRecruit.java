@@ -3,7 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.paladin
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.UniqueMinion;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.UniqueEntity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
@@ -22,7 +22,7 @@ public class SilverHandRecruit extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion silverHandRecruit = createMinion();
-		silverHandRecruit.setTag(GameTag.UNIQUE_MINION, UniqueMinion.SILVER_HAND_RECRUIT);
+		silverHandRecruit.setTag(GameTag.UNIQUE_ENTITY, UniqueEntity.SILVER_HAND_RECRUIT);
 		return silverHandRecruit;
 	}
 }

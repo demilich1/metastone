@@ -29,6 +29,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
+import net.pferdimanzug.hearthstone.analyzer.game.events.ArmorGainedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.BoardChangedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.CardPlayedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.DamageEvent;
@@ -52,7 +53,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellSource;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.BoardChangedTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.IGameEventListener;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerLayer;
@@ -257,7 +257,7 @@ public class GameLogic implements Cloneable {
 		return new GameLogic(idFactory.clone());
 	}
 
-	public boolean damage(Player player, Actor target, int baseDamage, SpellSource spellSource) {
+	public int damage(Player player, Actor target, int baseDamage, SpellSource spellSource) {
 		int damage = baseDamage;
 		if (spellSource == SpellSource.SPELL_CARD) {
 			damage = applySpellpower(player, baseDamage);
@@ -265,50 +265,50 @@ public class GameLogic implements Cloneable {
 		if (spellSource == SpellSource.SPELL_CARD || spellSource == SpellSource.HERO_POWER) {
 			damage = applyAmplify(player, damage);
 		}
-		boolean success = false;
+		int damageDealt = 0;
 		switch (target.getEntityType()) {
 		case MINION:
-			success = damageMinion(player, (Actor) target, damage);
+			damageDealt = damageMinion(player, (Actor) target, damage);
 			break;
 		case HERO:
-			success = damageHero((Hero) target, damage);
+			damageDealt = damageHero((Hero) target, damage);
 			break;
 		default:
 			break;
 		}
 
-		if (success) {
+		if (damageDealt > 0) {
 			DamageEvent damageEvent = new DamageEvent(context, target, damage);
 			context.fireGameEvent(damageEvent, TriggerLayer.SECRET);
 			context.fireGameEvent(damageEvent);
 			player.getStatistics().damageDealt(damage);
 		}
 
-		return success;
+		return damageDealt;
 	}
 
-	private boolean damageHero(Hero hero, int damage) {
+	private int damageHero(Hero hero, int damage) {
 		if (hero.hasStatus(GameTag.IMMUNE)) {
 			log("{} is IMMUNE and does not take damage", hero);
-			return false;
+			return 0;
 		}
 		int effectiveHp = hero.getHp() + hero.getArmor();
 		hero.modifyArmor(-damage);
 		int newHp = Math.min(hero.getHp(), effectiveHp - damage);
 		hero.setHp(newHp);
 		log(hero.getName() + " receives " + damage + " damage, hp now: " + hero.getHp() + "(" + hero.getArmor() + ")");
-		return true;
+		return 0;
 	}
 
-	private boolean damageMinion(Player player, Actor minion, int damage) {
+	private int damageMinion(Player player, Actor minion, int damage) {
 		if (minion.hasStatus(GameTag.DIVINE_SHIELD)) {
 			minion.removeTag(GameTag.DIVINE_SHIELD);
 			log("{}'s DIVINE SHIELD absorbs the damage", minion);
-			return false;
+			return 0;
 		}
 		if (minion.hasStatus(GameTag.IMMUNE)) {
 			log("{} is IMMUNE and does not take damage", minion);
-			return false;
+			return 0;
 		}
 		if (damage >= minion.getHp() && player.getHero().hasStatus(GameTag.CANNOT_REDUCE_HP_BELOW_1)) {
 			damage = minion.getHp() - 1;
@@ -319,7 +319,7 @@ public class GameLogic implements Cloneable {
 		if (minion.hasTag(GameTag.ENRAGE_SPELL)) {
 			handleEnrage(minion);
 		}
-		return true;
+		return damage;
 	}
 
 	public void markAsDestroyed(Actor target) {
@@ -476,7 +476,7 @@ public class GameLogic implements Cloneable {
 		}
 
 		Player owningPlayer = context.getPlayer(target.getOwner());
-		boolean damaged = damage(owningPlayer, target, attackerDamage, SpellSource.PHYSICAL_ATTACK);
+		boolean damaged = damage(owningPlayer, target, attackerDamage, SpellSource.PHYSICAL_ATTACK) > 0;
 		if (defenderDamage > 0) {
 			damage(player, attacker, defenderDamage, SpellSource.PHYSICAL_ATTACK);
 		}
@@ -509,6 +509,7 @@ public class GameLogic implements Cloneable {
 		logger.debug("{} gains {} armor", player.getHero(), armor);
 		player.getHero().modifyArmor(armor);
 		player.getStatistics().armorGained(armor);
+		context.fireGameEvent(new ArmorGainedEvent(context, player.getHero()));
 	}
 
 	public MatchResult getMatchResult(Player player, Player opponent) {
@@ -856,7 +857,7 @@ public class GameLogic implements Cloneable {
 			hand.add(card);
 			card.setLocation(CardLocation.HAND);
 			if (card instanceof IGameEventListener) {
-				addGameEventListener(player, (IGameEventListener)card, card);
+				addGameEventListener(player, (IGameEventListener) card, card);
 			}
 			context.fireGameEvent(new ReceiveCardEvent(context, playerId, card));
 		} else {
@@ -983,7 +984,7 @@ public class GameLogic implements Cloneable {
 		immuneToSilence.add(GameTag.AURA_HP_BONUS);
 		immuneToSilence.add(GameTag.RACE);
 		immuneToSilence.add(GameTag.NUMBER_OF_ATTACKS);
-		immuneToSilence.add(GameTag.UNIQUE_MINION);
+		immuneToSilence.add(GameTag.UNIQUE_ENTITY);
 
 		List<GameTag> tags = new ArrayList<GameTag>();
 		tags.addAll(target.getTags().keySet());

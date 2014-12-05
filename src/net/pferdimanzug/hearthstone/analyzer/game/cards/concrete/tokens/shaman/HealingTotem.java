@@ -3,7 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.shaman;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.UniqueMinion;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.UniqueEntity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
@@ -30,7 +30,7 @@ public class HealingTotem extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion healingTotem = createMinion();
-		healingTotem.setTag(GameTag.UNIQUE_MINION, UniqueMinion.HEALING_TOTEM);
+		healingTotem.setTag(GameTag.UNIQUE_ENTITY, UniqueEntity.HEALING_TOTEM);
 		SpellDesc healSpell = HealingSpell.create(1);
 		healSpell.setTarget(EntityReference.FRIENDLY_MINIONS);
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), healSpell);

@@ -26,6 +26,11 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Starfire;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Swipe;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.WildGrowth;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.Wrath;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes.warlock.FloatingWatcher;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes.warlock.Implosion;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes.warlock.MalGanis;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes.warlock.MistressOfPain;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes.warrior.SiegeEngine;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.AnimalCompanion;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.ArcaneShot;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter.BestialWrath;
@@ -390,6 +395,7 @@ public class CardCatalogue {
 	private final static CardCollection cards = new CardCollection();
 
 	static {
+		cards.add(new SiegeEngine());
 		cards.add(new AncientOfLore());
 		cards.add(new AncientOfWar());
 		cards.add(new Bite());

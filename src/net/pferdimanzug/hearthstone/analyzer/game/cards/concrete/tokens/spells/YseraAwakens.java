@@ -3,7 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.spells;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.UniqueMinion;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.UniqueEntity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
@@ -17,7 +17,7 @@ public class YseraAwakens extends SpellCard {
 		setDescription("Deal 5 damage to all characters except Ysera.");
 
 		SpellDesc yseraAwakens = DamageSpell
-				.create((context, player, target) -> target.getTag(GameTag.UNIQUE_MINION) == UniqueMinion.YSERA ? 0 : 5);
+				.create((context, player, target) -> target.getTag(GameTag.UNIQUE_ENTITY) == UniqueEntity.YSERA ? 0 : 5);
 		yseraAwakens.setTarget(EntityReference.ALL_CHARACTERS);
 		setSpell(yseraAwakens);
 		setTargetRequirement(TargetSelection.NONE);

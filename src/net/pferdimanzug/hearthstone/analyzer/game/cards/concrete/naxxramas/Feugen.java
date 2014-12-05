@@ -3,7 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.UniqueMinion;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.UniqueEntity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas.tokens.Thaddius;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
@@ -26,8 +26,8 @@ public class Feugen extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion feugen = createMinion();
-		feugen.setTag(GameTag.UNIQUE_MINION, UniqueMinion.FEUGEN);
-		SpellDesc deathrattle = IfXDiedSummonYSpell.create(UniqueMinion.STALAGG, new Thaddius());
+		feugen.setTag(GameTag.UNIQUE_ENTITY, UniqueEntity.FEUGEN);
+		SpellDesc deathrattle = IfXDiedSummonYSpell.create(UniqueEntity.STALAGG, new Thaddius());
 		deathrattle.setTarget(EntityReference.NONE);
 		feugen.addDeathrattle(deathrattle);
 		return feugen;

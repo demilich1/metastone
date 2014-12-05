@@ -4,7 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.UniqueMinion;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.UniqueEntity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
@@ -24,7 +24,7 @@ public class Quartermaster extends MinionCard {
 		Minion quartermaster = createMinion();
 		SpellDesc buffRecruits = BuffSpell.create(+2, +2);
 		buffRecruits.setTarget(EntityReference.FRIENDLY_MINIONS);
-		buffRecruits.setTargetFilter(entity -> entity.getTag(GameTag.UNIQUE_MINION) == UniqueMinion.SILVER_HAND_RECRUIT);
+		buffRecruits.setTargetFilter(entity -> entity.getTag(GameTag.UNIQUE_ENTITY) == UniqueEntity.SILVER_HAND_RECRUIT);
 		Battlecry battlecry = Battlecry.createBattlecry(buffRecruits);
 		quartermaster.setBattlecry(battlecry);
 		return quartermaster;

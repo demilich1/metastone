@@ -57,7 +57,7 @@ public class GameTagUtils {
 		case ENRAGE_SPELL:
 		case MANA_COST_MODIFIER:
 		case RACE:
-		case UNIQUE_MINION:
+		case UNIQUE_ENTITY:
 			return TagValueType.OTHER;
 		default:
 			break;

@@ -3,7 +3,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.UniqueMinion;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.UniqueEntity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.neutral.EmeraldDrake;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.neutral.LaughingSister;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.spells.Dream;
@@ -34,7 +34,7 @@ public class Ysera extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion ysera = createMinion();
-		ysera.setTag(GameTag.UNIQUE_MINION, UniqueMinion.YSERA);
+		ysera.setTag(GameTag.UNIQUE_ENTITY, UniqueEntity.YSERA);
 		SpellDesc receiveDreamCard = ReceiveRandomCardSpell.create(TargetPlayer.SELF, new Dream(), new EmeraldDrake(), new LaughingSister(),
 				new Nightmare(), new YseraAwakens());
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), receiveDreamCard);

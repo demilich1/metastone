@@ -7,7 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.UniqueMinion;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.UniqueEntity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.shaman.HealingTotem;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.shaman.SearingTotem;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.shaman.StoneclawTotem;
@@ -24,9 +24,9 @@ public class TotemicCallSpell extends Spell {
 		return desc;
 	}
 	
-	private boolean alreadyOnBoard(List<Minion> minions, UniqueMinion uniqueMinion) {
+	private boolean alreadyOnBoard(List<Minion> minions, UniqueEntity uniqueMinion) {
 		for (Entity minion : minions) {
-			if (minion.getTag(GameTag.UNIQUE_MINION) == uniqueMinion) {
+			if (minion.getTag(GameTag.UNIQUE_ENTITY) == uniqueMinion) {
 				return true;
 			}
 		}
@@ -47,7 +47,7 @@ public class TotemicCallSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		List<Minion> availableTotems = new ArrayList<Minion>();
 		for (Minion totem : getTotems()) {
-			if (!alreadyOnBoard(player.getMinions(), (UniqueMinion) totem.getTag(GameTag.UNIQUE_MINION))) {
+			if (!alreadyOnBoard(player.getMinions(), (UniqueEntity) totem.getTag(GameTag.UNIQUE_ENTITY))) {
 				availableTotems.add(totem);
 			}
 		}

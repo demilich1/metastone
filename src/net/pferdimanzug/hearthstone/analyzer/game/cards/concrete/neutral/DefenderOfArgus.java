@@ -33,7 +33,7 @@ public class DefenderOfArgus extends MinionCard {
 		tauntSpell.setTarget(EntityReference.ADJACENT_MINIONS);
 		SpellDesc battlecrySpell = MetaSpell.create(buffSpell, tauntSpell);
 		battlecrySpell.setTarget(EntityReference.NONE);
-		Battlecry battlecry = Battlecry.createBattlecry(buffSpell);
+		Battlecry battlecry = Battlecry.createBattlecry(battlecrySpell);
 		battlecry.setResolvedLate(true);
 		defenderOfArgus.setBattlecry(battlecry);
 		return defenderOfArgus;

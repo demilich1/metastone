@@ -4,8 +4,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.CopySpellCardSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.TargetPlayer;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.custom.LorewalkerChoSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellCastedTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
@@ -26,7 +26,7 @@ public class LorewalkerCho extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion lorewalkerCho = createMinion();
-		SpellDesc copySpell = LorewalkerChoSpell.create();
+		SpellDesc copySpell = CopySpellCardSpell.create();
 		copySpell.setTarget(EntityReference.EVENT_TARGET);
 		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(TargetPlayer.BOTH), copySpell);
 		lorewalkerCho.setSpellTrigger(trigger);

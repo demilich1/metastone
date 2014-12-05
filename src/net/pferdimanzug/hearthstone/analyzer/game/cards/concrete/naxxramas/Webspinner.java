@@ -5,7 +5,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.custom.WebspinnerSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.ReceiveRandomRaceCardSpell;
 
 public class Webspinner extends MinionCard {
 
@@ -23,7 +23,7 @@ public class Webspinner extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion webspinner = createMinion();
-		webspinner.addDeathrattle(WebspinnerSpell.create());
+		webspinner.addDeathrattle(ReceiveRandomRaceCardSpell.create(Race.BEAST, 1));
 		return webspinner;
 	}
 
