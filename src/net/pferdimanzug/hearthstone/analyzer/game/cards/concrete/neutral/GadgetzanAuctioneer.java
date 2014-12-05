@@ -12,7 +12,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 public class GadgetzanAuctioneer extends MinionCard {
 
 	public GadgetzanAuctioneer() {
-		super("Gadgetzan Auctioneer", 4, 4, Rarity.RARE, HeroClass.ANY, 5);
+		super("Gadgetzan Auctioneer", 4, 4, Rarity.RARE, HeroClass.ANY, 6);
 		setDescription("Whenever you cast a spell, draw a card.");
 	}
 
@@ -20,8 +20,6 @@ public class GadgetzanAuctioneer extends MinionCard {
 	public int getTypeId() {
 		return 132;
 	}
-
-
 
 	@Override
 	public Minion summon() {

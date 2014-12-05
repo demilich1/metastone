@@ -11,13 +11,11 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class Soulfire extends SpellCard {
 
 	public Soulfire() {
-		super("Soulfire", Rarity.FREE, HeroClass.WARLOCK, 0);
+		super("Soulfire", Rarity.FREE, HeroClass.WARLOCK, 1);
 		setDescription("Deal $4 damage. Discard a random card.");
 		setSpell(MetaSpell.create(DamageSpell.create(4), DiscardCardSpell.create()));
 		setTargetRequirement(TargetSelection.ANY);
 	}
-
-
 
 	@Override
 	public int getTypeId() {

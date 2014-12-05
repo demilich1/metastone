@@ -16,7 +16,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class Flare extends SpellCard {
 
 	public Flare() {
-		super("Flare", Rarity.RARE, HeroClass.HUNTER, 1);
+		super("Flare", Rarity.RARE, HeroClass.HUNTER, 2);
 		setDescription("All minions lose Stealth. Destroy all enemy Secrets. Draw a card.");
 		SpellDesc drawCardSpell = DrawCardSpell.create();
 		SpellDesc removeStealthSpell = RemoveTagSpell.create(GameTag.STEALTHED);
