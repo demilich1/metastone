@@ -27,8 +27,6 @@ public class HungryCrab extends MinionCard {
 		return 142;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion hungryCrab = createMinion();

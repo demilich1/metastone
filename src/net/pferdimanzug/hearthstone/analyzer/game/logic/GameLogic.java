@@ -50,6 +50,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.TurnStartEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.WeaponDestroyedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.HeroPower;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.SpellUtils;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellSource;
@@ -458,6 +459,11 @@ public class GameLogic implements Cloneable {
 		}
 		context.getEnvironment().remove(Environment.TARGET_OVERRIDE);
 
+		if (attacker.hasStatus(GameTag.FUMBLE) && randomBool()) {
+			log("{} fumbled and hits another target", attacker);
+			target = getAnotherRandomTarget(player, attacker, defender);
+		}
+
 		if (target != defender) {
 			log("Target of attack was changed! New Target: {}", target);
 		}
@@ -503,6 +509,16 @@ public class GameLogic implements Cloneable {
 		attacker.modifyTag(GameTag.NUMBER_OF_ATTACKS, -1);
 		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, target, damaged ? attackerDamage : 0));
 		context.getEnvironment().remove(Environment.ATTACKER);
+	}
+
+	public Actor getAnotherRandomTarget(Player player, Actor attacker, Actor originalTarget) {
+		List<Entity> validTargets = context.resolveTarget(player, null, EntityReference.ALL_CHARACTERS);
+		// cannot redirect to attacker
+		validTargets.remove(attacker);
+		// cannot redirect to original target
+		validTargets.remove(originalTarget);
+
+		return (Actor) SpellUtils.getRandomTarget(validTargets);
 	}
 
 	public void gainArmor(Player player, int armor) {

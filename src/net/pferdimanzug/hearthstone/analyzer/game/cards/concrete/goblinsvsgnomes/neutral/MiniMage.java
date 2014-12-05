@@ -1,4 +1,4 @@
-package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes.rogue;
+package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes.neutral;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
@@ -6,17 +6,18 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
-public class OgreNinja extends MinionCard {
+public class MiniMage extends MinionCard {
 
-	public OgreNinja() {
-		super("Ogre Ninja", 6, 6, Rarity.RARE, HeroClass.ROGUE, 5);
-		setDescription("Stealth. 50% chance to attack the wrong enemy.");
+	public MiniMage() {
+		super("Mini-Mage", 4, 1, Rarity.EPIC, HeroClass.ANY, 4);
+		setDescription("Stealth. Spell Damage +1");
 	}
 
 	@Override
 	public Minion summon() {
-		Minion ogreNinja = createMinion(GameTag.STEALTHED, GameTag.FUMBLE);
-		return ogreNinja;
+		Minion miniMage = createMinion(GameTag.STEALTHED);
+		miniMage.setTag(GameTag.SPELL_POWER, +1);
+		return miniMage;
 	}
 
 }

@@ -1,22 +1,23 @@
-package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes.rogue;
+package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes.neutral;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 
-public class OgreNinja extends MinionCard {
+public class TargetDummy extends MinionCard {
 
-	public OgreNinja() {
-		super("Ogre Ninja", 6, 6, Rarity.RARE, HeroClass.ROGUE, 5);
-		setDescription("Stealth. 50% chance to attack the wrong enemy.");
+	public TargetDummy() {
+		super("Target Dummy", 0, 2, Rarity.RARE, HeroClass.ANY, 0);
+		setDescription("Taunt");
+		setRace(Race.MECH);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion ogreNinja = createMinion(GameTag.STEALTHED, GameTag.FUMBLE);
-		return ogreNinja;
+		return createMinion(GameTag.TAUNT);
 	}
 
 }

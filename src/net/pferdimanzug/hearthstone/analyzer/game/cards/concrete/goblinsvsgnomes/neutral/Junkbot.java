@@ -1,4 +1,4 @@
-package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter;
+package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes.neutral;
 
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
@@ -12,26 +12,22 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.MinionDeathTrig
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
-public class ScavengingHyena extends MinionCard {
+public class Junkbot extends MinionCard {
 
-	public ScavengingHyena() {
-		super("Scavenging Hyena", 2, 2, Rarity.COMMON, HeroClass.HUNTER, 2);
-		setDescription("Whenever a friendly Beast dies, gain +2/+1.");
-		setRace(Race.BEAST);
-	}
-
-	@Override
-	public int getTypeId() {
-		return 43;
+	public Junkbot() {
+		super("Junkbot", 1, 5, Rarity.EPIC, HeroClass.ANY, 5);
+		setDescription("Whenever a friendly Mech dies, gain +2/+2.");
+		setRace(Race.MECH);
 	}
 
 	@Override
 	public Minion summon() {
-		Minion scavengingHyena = createMinion();
-		SpellDesc buff = BuffSpell.create(2, 1);
+		Minion junkbot = createMinion();
+		SpellDesc buff = BuffSpell.create(2, 2);
 		buff.setTarget(EntityReference.SELF);
-		SpellTrigger trigger = new SpellTrigger(new MinionDeathTrigger(TargetPlayer.SELF, Race.BEAST), buff);
-		scavengingHyena.setSpellTrigger(trigger);
-		return scavengingHyena;
+		SpellTrigger trigger = new SpellTrigger(new MinionDeathTrigger(TargetPlayer.SELF, Race.MECH), buff);
+		junkbot.setSpellTrigger(trigger);
+		return junkbot;
 	}
+
 }
