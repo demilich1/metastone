@@ -1,6 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.game.entities.heroes;
 
-import java.util.HashMap;
+import java.util.EnumMap;
+import java.util.Map;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
@@ -67,8 +68,8 @@ public abstract class Hero extends Actor {
 		return heroPower;
 	}
 
-	public HashMap<GameTag, Object> getTagsCopy() {
-		HashMap<GameTag, Object> copy = new HashMap<>();
+	public Map<GameTag, Object> getTagsCopy() {
+		Map<GameTag, Object> copy = new EnumMap<>(GameTag.class);
 		for (GameTag tag : tags.keySet()) {
 			if (tag != GameTag.COMBO) {
 				continue;
@@ -87,7 +88,7 @@ public abstract class Hero extends Actor {
 		int newArmor = Math.max(getArmor() + armor, 0);
 		setTag(GameTag.ARMOR, newArmor);
 	}
-	
+
 	public void setHeroPower(HeroPower heroPower) {
 		this.heroPower = heroPower;
 		heroPower.setOwner(getOwner());

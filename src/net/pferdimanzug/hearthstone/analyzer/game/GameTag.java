@@ -4,6 +4,7 @@ public enum GameTag {
 	DEBUG,
 	HP,
 	ATTACK,
+	ATTACK_BONUS,
 	ATTACK_MULTIPLIER,
 	MAX_HP,
 	ARMOR,

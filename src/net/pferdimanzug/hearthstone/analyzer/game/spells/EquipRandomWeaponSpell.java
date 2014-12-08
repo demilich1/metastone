@@ -23,7 +23,9 @@ public class EquipRandomWeaponSpell extends Spell {
 	private Weapon getRandomWeapon() {
 		CardCollection allWeapons = CardCatalogue.query(CardType.WEAPON);
 		WeaponCard weaponCard = (WeaponCard) allWeapons.getRandom();
-		return weaponCard.getWeapon();
+		Weapon weapon = weaponCard.getWeapon();
+		weapon.setBattlecry(null);
+		return weapon;
 	}
 
 	@Override

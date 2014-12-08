@@ -7,8 +7,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.RaceSpecificBuffSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.filter.RaceFilter;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class ColdlightSeer extends MinionCard {
@@ -28,7 +29,8 @@ public class ColdlightSeer extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion coldlightSeer = createMinion();
-		SpellDesc murlocBuffSpell = RaceSpecificBuffSpell.create(0, 2, Race.MURLOC);
+		SpellDesc murlocBuffSpell = BuffSpell.create(0, 2);
+		murlocBuffSpell.setTargetFilter(new RaceFilter(Race.MURLOC));
 		murlocBuffSpell.setTarget(EntityReference.ALL_MINIONS);
 		Battlecry battlecry = Battlecry.createBattlecry(murlocBuffSpell);
 		coldlightSeer.setBattlecry(battlecry);

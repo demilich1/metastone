@@ -5,7 +5,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.neutral.BaineBloodhoof;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.SpawnTokenSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
 
 public class CairneBloodhoof extends MinionCard {
 
@@ -22,7 +22,7 @@ public class CairneBloodhoof extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion cairneBloodhoof = createMinion();
-		cairneBloodhoof.addDeathrattle(SpawnTokenSpell.create(new BaineBloodhoof()));
+		cairneBloodhoof.addDeathrattle(SummonSpell.create(new BaineBloodhoof()));
 		return cairneBloodhoof;
 	}
 }

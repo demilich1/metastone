@@ -34,6 +34,10 @@ public class BuffWeaponSpell extends Spell {
 		int durabilityBonus = desc.getInt(SpellArg.HP_BONUS);
 		
 		Weapon weapon = player.getHero().getWeapon();
+		if (weapon == null) {
+			return;
+		}
+		
 		logger.debug("{} gains ({})", weapon, damageBonus + "/" + durabilityBonus);
 		if (damageBonus != 0) {
 			weapon.modifyTag(GameTag.WEAPON_DAMAGE, damageBonus);

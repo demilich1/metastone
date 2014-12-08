@@ -66,7 +66,7 @@ public class BolvarFordragon extends MinionCard implements IGameEventListener {
 		if (killEvent.getVictim().getOwner() != getOwner()) {
 			return;
 		}
-		modifyTag(GameTag.ATTACK, +1);
+		modifyTag(GameTag.ATTACK_BONUS, +1);
 	}
 
 	@Override
@@ -75,15 +75,13 @@ public class BolvarFordragon extends MinionCard implements IGameEventListener {
 
 	@Override
 	public void reset() {
-		setTag(GameTag.ATTACK, getBaseAttack());
+		removeTag(GameTag.ATTACK_BONUS);
 	}
 
 	@Override
 	public void setHost(Entity host) {
 		this.hostReference = host.getReference();
 	}
-
-
 
 	@Override
 	public Minion summon() {

@@ -85,5 +85,13 @@ public class TriggerManager implements Cloneable, IDisposable {
 			}
 		}
 	}
+	
+	public void printCurrentTriggers() {
+		for (IGameEventListener trigger : triggers) {
+			System.out.println();
+			System.out.println(trigger.toString());
+			System.out.println();
+		}
+	}
 
 }

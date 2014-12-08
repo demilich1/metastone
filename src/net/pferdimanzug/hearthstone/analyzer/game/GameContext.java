@@ -47,7 +47,7 @@ public class GameContext implements Cloneable, IDisposable {
 
 	private int turn;
 	private int actionsThisTurn;
-	
+
 	private boolean ignoreEvents;
 
 	public GameContext(Player player1, Player player2, GameLogic logic) {
@@ -70,7 +70,7 @@ public class GameContext implements Cloneable, IDisposable {
 	public void addTrigger(IGameEventListener trigger) {
 		triggerManager.addTrigger(trigger);
 	}
-	
+
 	public void removeTrigger(IGameEventListener trigger) {
 		triggerManager.addTrigger(trigger);
 	}
@@ -108,6 +108,11 @@ public class GameContext implements Cloneable, IDisposable {
 		getCardCostModifiers().clear();
 		triggerManager.dispose();
 		environment.clear();
+	}
+
+	public void printCurrentTriggers() {
+		logger.info("Active spelltriggers:");
+		triggerManager.printCurrentTriggers();
 	}
 
 	private void endGame() {
@@ -267,7 +272,7 @@ public class GameContext implements Cloneable, IDisposable {
 	public boolean ignoreEvents() {
 		return ignoreEvents;
 	}
-	
+
 	public void init() {
 		int startingPlayerId = logic.determineBeginner(PLAYER_1, PLAYER_2);
 		activePlayer = getPlayer(startingPlayerId).getId();
@@ -289,7 +294,7 @@ public class GameContext implements Cloneable, IDisposable {
 		init();
 		startTurn(activePlayer);
 	}
-	
+
 	public void playTurn() {
 		if (++actionsThisTurn > 99) {
 			logger.warn("Turn has been forcefully ended after {} actions", actionsThisTurn);
@@ -302,7 +307,7 @@ public class GameContext implements Cloneable, IDisposable {
 			endGame();
 			return;
 		}
-		
+
 		List<GameAction> validActions = getValidActions();
 		if (validActions.size() == 0) {
 			endTurn();
@@ -311,7 +316,7 @@ public class GameContext implements Cloneable, IDisposable {
 		}
 
 		GameAction nextAction = getActivePlayer().getBehaviour().requestAction(this, getActivePlayer(), getValidActions());
-		while(!acceptAction(nextAction)) {
+		while (!acceptAction(nextAction)) {
 			nextAction = getActivePlayer().getBehaviour().requestAction(this, getActivePlayer(), getValidActions());
 		}
 		if (nextAction == null) {
@@ -326,7 +331,7 @@ public class GameContext implements Cloneable, IDisposable {
 			startTurn(activePlayer);
 		}
 	}
-	
+
 	public void removeTriggersAssociatedWith(EntityReference entityReference) {
 		triggerManager.removeTriggersAssociatedWith(entityReference);
 	}

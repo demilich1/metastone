@@ -1,6 +1,8 @@
 package net.pferdimanzug.hearthstone.analyzer.game.entities.weapons;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
+import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
@@ -43,6 +45,14 @@ public class Weapon extends Actor {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+	
+	public void onEquip(GameContext context, Player player) {
+		
+	}
+	
+	public void onUnequip(GameContext context, Player player) {
+		
 	}
 
 	@Override

@@ -2,7 +2,6 @@ package net.pferdimanzug.hearthstone.analyzer.game.logic;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -51,6 +50,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.WeaponDestroyedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.HeroPower;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SpellUtils;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellArg;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellSource;
@@ -87,6 +87,9 @@ public class GameLogic implements Cloneable {
 	private final IdFactory idFactory;
 	private GameContext context;
 	private boolean loggingEnabled = true;
+	
+	//DEBUG
+	private SpellDesc lastSpell;
 
 	public GameLogic() {
 		idFactory = new IdFactory();
@@ -173,16 +176,17 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void castSpell(int playerId, SpellDesc spellDesc) {
+		lastSpell = spellDesc;
 		Player player = context.getPlayer(playerId);
 		Actor source = null;
 		if (spellDesc.getSourceEntity() != null) {
 			try {
-				source = (Actor) context.resolveSingleTarget(spellDesc.getSourceEntity());	
-			} catch(Exception e) {
+				source = (Actor) context.resolveSingleTarget(spellDesc.getSourceEntity());
+			} catch (Exception e) {
 				logger.error("Error resolving source entity while casting spell: " + spellDesc);
 				System.exit(-1);
 			}
-			
+
 		}
 		SpellCard sourceCard = null;
 		List<Entity> targets = targetLogic.resolveTargetKey(context, player, source, spellDesc.getTarget());
@@ -218,6 +222,7 @@ public class GameLogic implements Cloneable {
 			}
 			logger.error("Error while playing card: " + sourceCard);
 			logger.error("Error while casting spell: " + spellDesc);
+			logger.error("LastSpell: " + lastSpell);
 			e.printStackTrace();
 		}
 
@@ -228,14 +233,15 @@ public class GameLogic implements Cloneable {
 
 	public void changeHero(Player player, Hero hero) {
 		hero.setId(player.getHero().getId());
-
-		HashMap<GameTag, Object> tagsToCopy = player.getHero().getTagsCopy();
+		
+		Map<GameTag, Object> tagsToCopy = player.getHero().getTagsCopy();
 		for (Map.Entry<GameTag, Object> entry : tagsToCopy.entrySet()) {
 			hero.setTag(entry.getKey(), entry.getValue());
 		}
 
 		log("{}'s hero has been changed to {}", player.getName(), hero);
 		hero.setOwner(player.getId());
+		hero.setWeapon(player.getHero().getWeapon());
 		player.setHero(hero);
 		refreshAttacksPerRound(hero);
 	}
@@ -335,7 +341,7 @@ public class GameLogic implements Cloneable {
 		switch (target.getEntityType()) {
 		case HERO:
 			log("Hero {} has been destroyed.", target.getName());
-			target.setHp(0);
+			target.setTag(GameTag.DEAD);
 			break;
 		case MINION:
 			destroyMinion((Minion) target);
@@ -362,13 +368,11 @@ public class GameLogic implements Cloneable {
 		minion.setTag(GameTag.DEAD);
 		minion.setTag(GameTag.DIED_ON_TURN, context.getTurn());
 
-		int tokenIndex = owner.getMinions().indexOf(minion);
-		context.getEnvironment().put(Environment.TOKEN_INDEX, tokenIndex);
-		owner.getMinions().remove(tokenIndex);
+		int boardPosition = owner.getMinions().indexOf(minion);
+		owner.getMinions().remove(boardPosition);
 		owner.getGraveyard().add(minion);
 
-		resolveDeathrattles(owner, minion);
-		context.getEnvironment().remove(Environment.TOKEN_INDEX);
+		resolveDeathrattles(owner, minion, boardPosition);
 
 		context.fireGameEvent(new BoardChangedEvent(context));
 	}
@@ -376,6 +380,7 @@ public class GameLogic implements Cloneable {
 	private void destroyWeapon(Weapon weapon) {
 		Player owner = context.getPlayer(weapon.getOwner());
 		resolveDeathrattles(owner, weapon);
+		weapon.onUnequip(context, owner);
 		owner.getHero().setWeapon(null);
 		context.fireGameEvent(new WeaponDestroyedEvent(context, weapon));
 	}
@@ -407,11 +412,13 @@ public class GameLogic implements Cloneable {
 	public void endTurn(int playerId) {
 		Player player = context.getPlayer(playerId);
 		player.getHero().removeTag(GameTag.COMBO);
-		player.getHero().activateWeapon(false);
 		player.getHero().removeTag(GameTag.TEMPORARY_ATTACK_BONUS);
+		player.getHero().removeTag(GameTag.CANNOT_REDUCE_HP_BELOW_1);
 		for (Minion minion : player.getMinions()) {
 			minion.removeTag(GameTag.TEMPORARY_ATTACK_BONUS);
+			minion.removeTag(GameTag.CANNOT_REDUCE_HP_BELOW_1);
 		}
+		player.getHero().activateWeapon(false);
 		log("{} ends his turn.", player.getName());
 		context.fireGameEvent(new TurnEndEvent(context, player.getId()));
 		for (Iterator<CardCostModifier> iterator = context.getCardCostModifiers().iterator(); iterator.hasNext();) {
@@ -440,6 +447,7 @@ public class GameLogic implements Cloneable {
 
 		log("{} equips weapon {}", player.getHero(), weapon);
 		player.getHero().setWeapon(weapon);
+		weapon.onEquip(context, player);
 		weapon.setActive(context.getActivePlayerId() == playerId);
 		if (weapon.hasSpellTrigger()) {
 			SpellTrigger spellTrigger = weapon.getSpellTrigger();
@@ -463,7 +471,7 @@ public class GameLogic implements Cloneable {
 
 		if (attacker.hasStatus(GameTag.FUMBLE) && randomBool()) {
 			log("{} fumbled and hits another target", attacker);
-			target = getAnotherRandomTarget(player, attacker, defender);
+			target = getAnotherRandomTarget(player, attacker, defender, EntityReference.ENEMY_CHARACTERS);
 		}
 
 		if (target != defender) {
@@ -520,8 +528,8 @@ public class GameLogic implements Cloneable {
 		context.fireGameEvent(new ArmorGainedEvent(context, player.getHero()));
 	}
 
-	public Actor getAnotherRandomTarget(Player player, Actor attacker, Actor originalTarget) {
-		List<Entity> validTargets = context.resolveTarget(player, null, EntityReference.ALL_CHARACTERS);
+	public Actor getAnotherRandomTarget(Player player, Actor attacker, Actor originalTarget, EntityReference potentialTargets) {
+		List<Entity> validTargets = context.resolveTarget(player, null, potentialTargets);
 		// cannot redirect to attacker
 		validTargets.remove(attacker);
 		// cannot redirect to original target
@@ -941,7 +949,7 @@ public class GameLogic implements Cloneable {
 
 	private void removeSpelltriggers(Actor actor) {
 		EntityReference actorReference = actor.getReference();
-		for (IGameEventListener trigger : context.getTriggersAssociatedWith(actor.getReference())) {
+		for (IGameEventListener trigger : context.getTriggersAssociatedWith(actorReference)) {
 			log("SpellTrigger {} was removed for {}", trigger, actor);
 			trigger.onRemove(context);
 		}
@@ -982,16 +990,24 @@ public class GameLogic implements Cloneable {
 		}
 		performGameAction(playerId, battlecryAction);
 	}
-
+	
 	public void resolveDeathrattles(Player player, Actor actor) {
+		resolveDeathrattles(player, actor, -1);
+	}
+
+	public void resolveDeathrattles(Player player, Actor actor, int boardPosition) {
+		if (!actor.hasTag(GameTag.DEATHRATTLES)) {
+			return;
+		}
+		if (boardPosition == -1) {
+			player.getMinions().indexOf(actor);
+		}
 		boolean doubleDeathrattles = hasTag(player, GameTag.DOUBLE_DEATHRATTLES);
-		// TODO: check when and in which order deathrattles should fire
-		if (actor.hasTag(GameTag.DEATHRATTLES)) {
-			for (SpellDesc deathrattle : actor.getDeathrattles()) {
+		for (SpellDesc deathrattle : actor.getDeathrattles()) {
+			deathrattle.set(SpellArg.BOARD_POSITION, boardPosition);
+			castSpell(player.getId(), deathrattle);
+			if (doubleDeathrattles) {
 				castSpell(player.getId(), deathrattle);
-				if (doubleDeathrattles) {
-					castSpell(player.getId(), deathrattle);
-				}
 			}
 		}
 	}
@@ -1100,6 +1116,9 @@ public class GameLogic implements Cloneable {
 
 		minion.setTag(GameTag.SUMMONING_SICKNESS);
 		refreshAttacksPerRound(minion);
+		if (player.getHero().hasStatus(GameTag.CANNOT_REDUCE_HP_BELOW_1)) {
+			minion.setTag(GameTag.CANNOT_REDUCE_HP_BELOW_1);
+		}
 
 		if (minion.hasSpellTrigger()) {
 			addGameEventListener(player, minion.getSpellTrigger(), minion);

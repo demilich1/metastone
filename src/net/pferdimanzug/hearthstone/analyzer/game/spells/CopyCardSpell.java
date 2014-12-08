@@ -2,6 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.spells;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellArg;
@@ -45,7 +46,8 @@ public class CopyCardSpell extends Spell {
 			if (source.isEmpty()) {
 				return;
 			}
-			context.getLogic().receiveCard(player.getId(), source.getRandom().clone());
+			Card clone = source.getRandom().clone();
+			context.getLogic().receiveCard(player.getId(), clone);
 		}
 	}
 

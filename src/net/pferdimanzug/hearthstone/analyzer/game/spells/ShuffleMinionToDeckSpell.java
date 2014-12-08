@@ -29,8 +29,10 @@ public class ShuffleMinionToDeckSpell extends Spell {
 		MinionCard targetCard = (MinionCard) desc.get(SpellArg.CARD);
 		if (targetCard == null) {
 			Minion minion = (Minion) target;
-			targetCard = (MinionCard) minion.getSourceCard().clone();
+			targetCard = (MinionCard) minion.getSourceCard();
 		}
+		
+		targetCard = (MinionCard) targetCard.clone();
 
 		Card randomCard = player.getDeck().getRandom();
 		if (randomCard == null) {

@@ -45,6 +45,10 @@ public class SpellDesc extends CustomCloneable {
 		return arguments.get(spellArg);
 	}
 	
+	public boolean contains(SpellArg spellArg) {
+		return arguments.containsKey(spellArg);
+	}
+	
 	public boolean getBool(SpellArg spellArg) {
 		return arguments.containsKey(spellArg) ? (boolean) get(spellArg) : false;
 	}

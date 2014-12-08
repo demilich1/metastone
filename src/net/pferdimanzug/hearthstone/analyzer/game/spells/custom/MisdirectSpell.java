@@ -20,7 +20,7 @@ public class MisdirectSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		Actor attacker = (Actor) context.getEnvironment().get(Environment.ATTACKER);
-		Actor randomTarget = context.getLogic().getAnotherRandomTarget(player, attacker, (Actor) target);
+		Actor randomTarget = context.getLogic().getAnotherRandomTarget(player, attacker, (Actor) target, EntityReference.ALL_CHARACTERS);
 		context.getEnvironment().put(Environment.TARGET_OVERRIDE, randomTarget);
 	}
 }

@@ -10,6 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class MusterForBattle extends SpellCard {
 
@@ -21,9 +22,8 @@ public class MusterForBattle extends SpellCard {
 		SpellDesc equipWeaponSpell = EquipWeaponSpell.create(new LightsJustice());
 		setSpell(MetaSpell.create(summonSpell, equipWeaponSpell));
 		setPredefinedTarget(EntityReference.NONE);
+		setTargetRequirement(TargetSelection.NONE);
 	}
-
-
 
 	@Override
 	public int getTypeId() {

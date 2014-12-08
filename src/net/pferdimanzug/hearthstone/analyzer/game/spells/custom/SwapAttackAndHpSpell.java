@@ -18,11 +18,6 @@ public class SwapAttackAndHpSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		Actor targetActor = (Actor) target;
-//		int attackBonus = targetActor.getHp() - targetActor.getTagValue(GameTag.BASE_ATTACK);
-//		int hpBonus = targetActor.getAttack() - targetActor.getTagValue(GameTag.MAX_HP);
-//		targetActor.setTag(GameTag.ATTACK_BONUS, attackBonus);
-//		targetActor.setTag(GameTag.HP_BONUS, hpBonus);
-//		targetActor.setHp(targetActor.getMaxHp());
 		
 		int attack = targetActor.getAttack();
 		int hp = targetActor.getHp();
@@ -30,6 +25,7 @@ public class SwapAttackAndHpSpell extends Spell {
 		targetActor.setMaxHp(attack);
 		targetActor.setHp(attack);
 		targetActor.removeTag(GameTag.TEMPORARY_ATTACK_BONUS);
+		targetActor.removeTag(GameTag.ATTACK_BONUS);
 	}
 
 }

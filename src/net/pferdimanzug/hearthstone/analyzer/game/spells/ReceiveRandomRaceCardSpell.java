@@ -31,7 +31,7 @@ public class ReceiveRandomRaceCardSpell extends Spell {
 
 		int count = desc.getValue();
 		for (int i = 0; i < count; i++) {
-			Card randomRaceCard = raceCards.getRandom();
+			Card randomRaceCard = raceCards.getRandom().clone();
 			context.getLogic().receiveCard(player.getId(), randomRaceCard);	
 		}
 	}

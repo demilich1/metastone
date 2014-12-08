@@ -1,15 +1,12 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.hunter;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
+import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.WeaponCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.ApplyTagSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.WeaponDestroyedTrigger;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class GladiatorsLongbow extends WeaponCard {
 
@@ -25,10 +22,19 @@ public class GladiatorsLongbow extends WeaponCard {
 
 	@Override
 	public Weapon getWeapon() {
-		Weapon gladiatorsLongbow = createWeapon(5, 2);
-		SpellDesc immunity = ApplyTagSpell.create(GameTag.IMMUNE_WHILE_ATTACKING, new WeaponDestroyedTrigger());
-		immunity.setTarget(EntityReference.FRIENDLY_HERO);
-		gladiatorsLongbow.setBattlecry(Battlecry.createBattlecry(immunity));
+		Weapon gladiatorsLongbow = new Weapon(this, 5, 2) {
+
+			@Override
+			public void onEquip(GameContext context, Player player) {
+				player.getHero().setTag(GameTag.IMMUNE_WHILE_ATTACKING);
+			}
+
+			@Override
+			public void onUnequip(GameContext context, Player player) {
+				player.getHero().removeTag(GameTag.IMMUNE_WHILE_ATTACKING);
+			}
+		};
+
 		return gladiatorsLongbow;
 	}
 }

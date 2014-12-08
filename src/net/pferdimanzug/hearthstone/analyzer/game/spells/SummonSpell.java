@@ -25,25 +25,26 @@ public class SummonSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		MinionCard[] minionCards = (MinionCard[]) desc.get(SpellArg.CARDS);
+		int boardPosition = desc.contains(SpellArg.BOARD_POSITION) ? desc.getInt(SpellArg.BOARD_POSITION) : -1;
 		TargetPlayer targetPlayer = desc.getTargetPlayer();
 		Player opponent = context.getOpponent(player);
 		switch (targetPlayer) {
 		case BOTH:
-			summon(context, player.getId(), minionCards);
-			summon(context, opponent.getId(), minionCards);
+			summon(context, player, minionCards, boardPosition);
+			summon(context, opponent, minionCards, boardPosition);
 			break;
 		case OPPONENT:
-			summon(context, opponent.getId(), minionCards);
+			summon(context, opponent, minionCards, boardPosition);
 			break;
 		case SELF:
-			summon(context, player.getId(), minionCards);
+			summon(context, player, minionCards, boardPosition);
 			break;
 		}
 	}
 
-	private void summon(GameContext context, int playerId, MinionCard[] minionCards) {
+	private void summon(GameContext context, Player player, MinionCard[] minionCards, int boardPosition) {
 		for (MinionCard minionCard : minionCards) {
-			context.getLogic().summon(playerId, minionCard.summon());
+			context.getLogic().summon(player.getId(), minionCard.summon(), null, boardPosition, false);
 		}
 	}
 

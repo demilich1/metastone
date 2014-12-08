@@ -11,6 +11,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.ReceiveCardEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DrawCardSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.NullSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.IGameEventListener;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerLayer;
@@ -27,9 +28,7 @@ public class BurrowingMine extends SpellCard implements IGameEventListener {
 		setDescription("When you draw this, it explodes. You take 10 damage and draw a card.");
 		setCollectible(false);
 		
-		SpellDesc damage = DamageSpell.create(10);
-		damage.setTarget(EntityReference.FRIENDLY_HERO);
-		setSpell(MetaSpell.create(damage, DrawCardSpell.create()));
+		setSpell(NullSpell.create());
 		setTargetRequirement(TargetSelection.NONE);
 	}
 
@@ -78,7 +77,10 @@ public class BurrowingMine extends SpellCard implements IGameEventListener {
 		}
 		
 		fired = true;
-		event.getGameContext().getLogic().castSpell(cardEvent.getPlayerId(), getSpell());
+		SpellDesc damage = DamageSpell.create(10);
+		damage.setTarget(EntityReference.FRIENDLY_HERO);
+		setSpell(MetaSpell.create(damage, DrawCardSpell.create()));
+		event.getGameContext().getLogic().castSpell(cardEvent.getPlayerId(), damage);
 	}
 
 	@Override

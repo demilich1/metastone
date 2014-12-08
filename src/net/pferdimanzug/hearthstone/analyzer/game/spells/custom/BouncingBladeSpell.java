@@ -11,7 +11,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellArg;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 
 public class BouncingBladeSpell extends DamageSpell {
-	
+
 	public static SpellDesc create() {
 		SpellDesc desc = new SpellDesc(BouncingBladeSpell.class);
 		desc.pickRandomTarget(true);
@@ -21,7 +21,11 @@ public class BouncingBladeSpell extends DamageSpell {
 			if (actor.isDead()) {
 				return false;
 			}
-			
+
+			if (actor.hasStatus(GameTag.CANNOT_REDUCE_HP_BELOW_1) && actor.getHp() == 1) {
+				return false;
+			}
+
 			return true;
 		});
 		return desc;
@@ -32,12 +36,14 @@ public class BouncingBladeSpell extends DamageSpell {
 		if (target == null) {
 			return;
 		}
-		
+
 		super.onCast(context, player, desc, target);
-		if (((Actor)target).isDead()) {
+		if (((Actor) target).isDead()) {
 			return;
 		}
-		// player has commanding shout active; check if there are targets with >1 hp
+
+		// player has commanding shout active; check if there are targets with
+		// >1 hp
 		if (player.getHero().hasStatus(GameTag.CANNOT_REDUCE_HP_BELOW_1)) {
 			boolean validTargets = false;
 			for (Minion minion : player.getMinions()) {
@@ -50,7 +56,7 @@ public class BouncingBladeSpell extends DamageSpell {
 				return;
 			}
 		}
-		
+
 		context.getLogic().castSpell(player.getId(), desc);
 	}
 

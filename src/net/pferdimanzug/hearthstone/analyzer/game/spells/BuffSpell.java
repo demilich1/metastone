@@ -53,7 +53,7 @@ public class BuffSpell extends Spell {
 		Actor targetActor = (Actor) target;
 
 		if (attackBonus != 0) {
-			targetActor.modifyTag(GameTag.ATTACK, +attackBonus);
+			targetActor.modifyTag(GameTag.ATTACK_BONUS, +attackBonus);
 		}
 		if (hpBonus != 0) {
 			targetActor.modifyHpBonus(+hpBonus);

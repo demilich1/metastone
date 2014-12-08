@@ -22,7 +22,7 @@ public abstract class Actor extends Entity {
 		this.setName(sourceCard != null ? sourceCard.getName() : null);
 		this.sourceCard = sourceCard;
 	}
-	
+
 	public void addDeathrattle(SpellDesc deathrattleSpell) {
 		if (!hasTag(GameTag.DEATHRATTLES)) {
 			setTag(GameTag.DEATHRATTLES, new ArrayList<SpellDesc>());
@@ -62,7 +62,7 @@ public abstract class Actor extends Entity {
 	}
 
 	public int getAttack() {
-		int attack = getTagValue(GameTag.ATTACK) + getTagValue(GameTag.AURA_ATTACK_BONUS)
+		int attack = getTagValue(GameTag.ATTACK) + getTagValue(GameTag.ATTACK_BONUS) + getTagValue(GameTag.AURA_ATTACK_BONUS)
 				+ getTagValue(GameTag.TEMPORARY_ATTACK_BONUS) + getTagValue(GameTag.CONDITIONAL_ATTACK_BONUS);
 		return attack * getAttackMultiplier();
 	}
@@ -129,7 +129,7 @@ public abstract class Actor extends Entity {
 	public void setAttack(int value) {
 		setTag(GameTag.ATTACK, value);
 	}
-	
+
 	public void setBaseAttack(int value) {
 		setTag(GameTag.BASE_ATTACK, value);
 		setAttack(value);

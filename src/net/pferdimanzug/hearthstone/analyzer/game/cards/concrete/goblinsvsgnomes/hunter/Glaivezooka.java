@@ -23,8 +23,6 @@ public class Glaivezooka extends WeaponCard {
 		return 488;
 	}
 
-
-
 	@Override
 	public Weapon getWeapon() {
 		Weapon weapon = createWeapon(2, 2);

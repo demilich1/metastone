@@ -19,8 +19,6 @@ public class StormforgedAxe extends WeaponCard {
 		return 329;
 	}
 
-
-
 	@Override
 	public Weapon getWeapon() {
 		return createWeapon(2, 3);

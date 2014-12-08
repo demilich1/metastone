@@ -24,8 +24,6 @@ public class CogmastersWrench extends WeaponCard {
 		return 567;
 	}
 
-
-
 	@Override
 	public Weapon getWeapon() {
 		Weapon cogmastersWrench = createWeapon(1, 3);

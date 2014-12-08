@@ -6,9 +6,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.naxxramas.tokens.Slime;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.SpawnTokenSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class SludgeBelcher extends MinionCard {
 
@@ -21,12 +20,11 @@ public class SludgeBelcher extends MinionCard {
 	public int getTypeId() {
 		return 398;
 	}
-	
+
 	@Override
 	public Minion summon() {
 		Minion sludgeBelcher = createMinion(GameTag.TAUNT);
-		SpellDesc summonSlime = SpawnTokenSpell.create(new Slime());
-		summonSlime.setTarget(EntityReference.NONE);
+		SpellDesc summonSlime = SummonSpell.create(new Slime());
 		sludgeBelcher.addDeathrattle(summonSlime);
 		return sludgeBelcher;
 	}
