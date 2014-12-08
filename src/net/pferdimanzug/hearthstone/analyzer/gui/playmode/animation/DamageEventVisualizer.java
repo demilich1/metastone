@@ -11,10 +11,12 @@ public class DamageEventVisualizer implements IGameEventVisualizer {
 	@Override
 	public void visualizeEvent(GameContext gameContext, GameEvent event, GameBoardView boardView) {
 		DamageEvent damageEvent = (DamageEvent) event;
-		GameToken targetToken = boardView.getToken(damageEvent.getEventTarget());
+		GameToken targetToken = boardView.getToken(damageEvent.getVictim());
 		if (targetToken == null) {
+			System.out.println("Token is NULL for " + damageEvent.getVictim());
 			return;
 		}
+		System.out.println("Creating damage numbner for: " + damageEvent.getVictim());
 		new DamageNumber("-"  + damageEvent.getDamage(), targetToken);
 	}
 

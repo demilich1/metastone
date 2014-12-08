@@ -12,6 +12,7 @@ public class WrathOfAirTotem extends MinionCard {
 
 	public WrathOfAirTotem() {
 		super("Wrath of Air Totem", 0, 2, Rarity.FREE, HeroClass.SHAMAN, 1);
+		setDescription("Spell Damage +1");
 		setRace(Race.TOTEM);
 
 		setCollectible(false);

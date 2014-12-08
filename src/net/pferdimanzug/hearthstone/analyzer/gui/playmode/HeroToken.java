@@ -6,7 +6,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
@@ -50,7 +49,6 @@ public class HeroToken extends GameToken {
 	}
 
 	public void highlight(boolean highlight) {
-		StackPane targetAnchor = (StackPane) lookup("#targetAnchor");
 		String cssBorder = null;
 		if (highlight) {
 			cssBorder = "-fx-border-color:seagreen; \n" + "-fx-border-radius:7;\n" + "-fx-border-width:5.0;";
@@ -58,7 +56,7 @@ public class HeroToken extends GameToken {
 			cssBorder = "-fx-border-color:transparent; \n" + "-fx-border-radius:7;\n" + "-fx-border-width:5.0;";
 		}
 
-		targetAnchor.setStyle(cssBorder);
+		target.setStyle(cssBorder);
 	}
 
 	public void setHero(Player player) {

@@ -108,6 +108,7 @@ public abstract class Actor extends Entity {
 		return spellTrigger != null;
 	}
 
+	@Override
 	public boolean isDead() {
 		return getHp() < 1 || super.isDead();
 	}

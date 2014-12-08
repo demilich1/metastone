@@ -17,6 +17,7 @@ public class HealingTotem extends MinionCard {
 
 	public HealingTotem() {
 		super("Healing Totem", 0, 2, Rarity.FREE, HeroClass.SHAMAN, 1);
+		setDescription("At the end of your turn, restore 1 Health to all friendly minions.");
 		setRace(Race.TOTEM);
 
 		setCollectible(false);

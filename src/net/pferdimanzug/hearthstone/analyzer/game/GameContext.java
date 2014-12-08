@@ -92,11 +92,12 @@ public class GameContext implements Cloneable, IDisposable {
 		clone.winner = logicClone.getWinner(player1Clone, player2Clone);
 		clone.cardCostModifiers.clear();
 		for (CardCostModifier cardCostModifier : cardCostModifiers) {
-			clone.cardCostModifiers.add(cardCostModifier);
+			clone.cardCostModifiers.add(cardCostModifier.clone());
 		}
 		for (Environment key : getEnvironment().keySet()) {
 			clone.getEnvironment().put(key, getEnvironment().get(key));
 		}
+		clone.getLogic().setLoggingEnabled(false);
 		return clone;
 	}
 

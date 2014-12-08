@@ -94,10 +94,13 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 
 	@Override
 	public void onGameEvent(GameEvent event) {
+		if (expired) {
+			return;
+		}
 		int ownerId = primaryTrigger.getOwner();
 		try {
 			Entity host = event.getGameContext().resolveSingleTarget(hostReference);
-			if (!expired && (triggerFires(primaryTrigger, event, host) || triggerFires(secondaryTrigger, event, host))) {
+			if (triggerFires(primaryTrigger, event, host) || triggerFires(secondaryTrigger, event, host)) {
 				if (oneTime) {
 					expired = true;
 				}

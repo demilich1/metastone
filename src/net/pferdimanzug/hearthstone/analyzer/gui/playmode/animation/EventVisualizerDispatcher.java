@@ -26,7 +26,7 @@ public class EventVisualizerDispatcher {
 			if (gameEventVisualizer == null) {
 				continue;
 			}
-			
+			System.out.println("Visualizing: " + event);
 			gameEventVisualizer.visualizeEvent(gameContext, event, boardView);
 		}
 		gameContext.getGameEvents().clear();

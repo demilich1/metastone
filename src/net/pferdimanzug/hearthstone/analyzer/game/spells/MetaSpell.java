@@ -49,7 +49,7 @@ public class MetaSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		for (SpellDesc spell : getSpells(desc)) {
 			if (!spell.hasPredefinedTarget()) {
-				spell.setTarget(desc.getTarget());
+				spell.setTarget(target.getReference());
 			}
 			spell.setSource(desc.getSource());
 			spell.setSourceEntity(desc.getSourceEntity());

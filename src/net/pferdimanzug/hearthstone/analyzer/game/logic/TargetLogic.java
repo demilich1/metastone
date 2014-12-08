@@ -38,7 +38,7 @@ public class TargetLogic {
 		return false;
 	}
 
-	private List<Entity> filterTargets(GameContext context, GameAction action, List<Entity> potentialTargets) {
+	private List<Entity> filterTargets(GameContext context, Player player, GameAction action, List<Entity> potentialTargets) {
 		List<Entity> validTargets = new ArrayList<>();
 		for (Entity entity : potentialTargets) {
 			if ((action.getActionType() == ActionType.SPELL || action.getActionType() == ActionType.HERO_POWER)
@@ -46,7 +46,7 @@ public class TargetLogic {
 				continue;
 			}
 
-			if (entity.hasStatus(GameTag.STEALTHED)) {
+			if (entity.getOwner() != player.getId() && entity.hasStatus(GameTag.STEALTHED)) {
 				continue;
 			}
 
@@ -182,7 +182,7 @@ public class TargetLogic {
 			return summonTargets;
 		}
 		List<Entity> potentialTargets = getEntities(context, player, targetRequirement);
-		return filterTargets(context, action, potentialTargets);
+		return filterTargets(context, player, action, potentialTargets);
 	}
 
 	public List<Entity> resolveTargetKey(GameContext context, Player player, Actor source, EntityReference targetKey) {

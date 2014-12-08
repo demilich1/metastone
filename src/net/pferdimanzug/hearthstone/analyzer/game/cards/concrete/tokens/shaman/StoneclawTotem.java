@@ -12,6 +12,7 @@ public class StoneclawTotem extends MinionCard {
 
 	public StoneclawTotem() {
 		super("Stoneclaw Totem", 0, 2, Rarity.FREE, HeroClass.SHAMAN, 1);
+		setDescription("Taunt");
 		setRace(Race.TOTEM);
 
 		setCollectible(false);

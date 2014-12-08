@@ -263,6 +263,16 @@ public class GameLogic implements Cloneable {
 				}
 			}
 		}
+		
+		// a death of one minion may trigger the death of another one, so if there are still dead entities: run again
+		for (Player player : context.getPlayers()) {
+			for (Minion minion : player.getMinions()) {
+				if (minion.isDead()) {
+					checkForDeadEntities();
+					break;
+				}
+			}
+		}
 	}
 
 	@Override
@@ -310,7 +320,7 @@ public class GameLogic implements Cloneable {
 		int newHp = Math.min(hero.getHp(), effectiveHp - damage);
 		hero.setHp(newHp);
 		log(hero.getName() + " receives " + damage + " damage, hp now: " + hero.getHp() + "(" + hero.getArmor() + ")");
-		return 0;
+		return damage;
 	}
 
 	private int damageMinion(Player player, Actor minion, int damage) {

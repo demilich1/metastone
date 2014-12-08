@@ -22,7 +22,7 @@ import net.pferdimanzug.hearthstone.analyzer.gui.IconFactory;
 
 public class GameToken extends BorderPane {
 
-	private StackPane target;
+	protected StackPane target;
 	private ImageView targetButton;
 	private EventHandler<MouseEvent> existingEventHandler;
 
