@@ -9,7 +9,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellArg;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardLocation;
 
 public class PutRandomMinionOnBoardSpell extends Spell {
 
@@ -57,10 +56,9 @@ public class PutRandomMinionOnBoardSpell extends Spell {
 		if (minionCard == null) {
 			return;
 		}
-		minionCard.setLocation(CardLocation.VOID);
-		player.getDeck().remove(minionCard);
 		SpellDesc summonSpell = SummonSpell.create(minionCard);
 		context.getLogic().castSpell(player.getId(), summonSpell);
+		context.getLogic().discardCard(player.getId(), minionCard);
 	}
 
 }

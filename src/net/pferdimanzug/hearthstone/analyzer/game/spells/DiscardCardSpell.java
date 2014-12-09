@@ -6,42 +6,37 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellArg;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.CardLocation;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class DiscardCardSpell extends Spell {
-	
+
 	public static SpellDesc create() {
 		return create(1);
 	}
-	
+
 	public static SpellDesc create(int numberOfCards) {
 		SpellDesc desc = new SpellDesc(DiscardCardSpell.class);
 		desc.set(SpellArg.NUMBER_OF_CARDS, numberOfCards);
+		desc.setTarget(EntityReference.NONE);
 		return desc;
 	}
-	
+
 	public static final int ALL_CARDS = -1;
-	
-	private static Logger logger = LoggerFactory.getLogger(DiscardCardSpell.class);
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		int numberOfCards = desc.getInt(SpellArg.NUMBER_OF_CARDS);
 		int cardCount = numberOfCards == ALL_CARDS ? player.getHand().getCount() : numberOfCards;
-		
+
 		for (int i = 0; i < cardCount; i++) {
 			Card randomHandCard = player.getHand().getRandom();
 			if (randomHandCard == null) {
 				return;
 			}
-			logger.debug("{} discards {}", player.getName(), randomHandCard);
-			randomHandCard.setLocation(CardLocation.VOID);
-			player.getHand().remove(randomHandCard);
+			context.getLogic().discardCard(player.getId(), randomHandCard);
+
 		}
-		
+
 	}
 
 }

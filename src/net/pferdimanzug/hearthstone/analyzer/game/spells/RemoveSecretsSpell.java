@@ -4,12 +4,14 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class RemoveSecretsSpell extends Spell {
 	
 	public static SpellDesc create(TargetPlayer targetPlayer) {
 		SpellDesc desc = new SpellDesc(RemoveSecretsSpell.class);
 		desc.setTargetPlayer(targetPlayer);
+		desc.setTarget(EntityReference.NONE);
 		return desc;
 	}
 	

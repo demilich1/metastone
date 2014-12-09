@@ -47,8 +47,8 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 			public void run() {
 				int cores = Runtime.getRuntime().availableProcessors();
 				logger.info("Starting simulation on " + cores + " cores");
-				//ExecutorService executor = Executors.newFixedThreadPool(cores);
-				ExecutorService executor = Executors.newSingleThreadExecutor();
+				ExecutorService executor = Executors.newFixedThreadPool(cores);
+				//ExecutorService executor = Executors.newSingleThreadExecutor();
 
 				List<Future<Void>> futures = new ArrayList<Future<Void>>(); 
 				// send initial status update

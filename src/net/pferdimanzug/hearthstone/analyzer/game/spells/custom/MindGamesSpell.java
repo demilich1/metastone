@@ -27,7 +27,7 @@ public class MindGamesSpell extends Spell {
 		if (minionCard == null) {
 			minionCard = new ShadowOfNothing();
 		}
-		minionCard.setLocation(CardLocation.VOID);
+		context.getLogic().discardCard(player.getId(), minionCard);
 		SpellDesc summonSpell = SummonSpell.create(minionCard);
 		context.getLogic().castSpell(player.getId(), summonSpell);
 	}

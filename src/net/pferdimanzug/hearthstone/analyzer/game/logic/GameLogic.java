@@ -117,7 +117,7 @@ public class GameLogic implements Cloneable {
 		Player player = context.getPlayer(playerId);
 		player.getHero().modifyTag(GameTag.COMBO, +1);
 		Card card = context.resolveCardReference(cardReference);
-		card.setLocation(CardLocation.VOID);
+		discardCard(playerId, card);
 	}
 
 	public int applyAmplify(Player player, int baseValue) {
@@ -397,6 +397,16 @@ public class GameLogic implements Cloneable {
 
 	public int determineBeginner(int... playerIds) {
 		return ThreadLocalRandom.current().nextBoolean() ? playerIds[0] : playerIds[1];
+	}
+	
+	public void discardCard(int playerId, Card card) {
+		Player player = context.getPlayer(playerId);
+		logger.debug("{} discards {}", player.getName(), card);
+		card.setLocation(CardLocation.VOID);
+		if (card instanceof IGameEventListener) {
+			removeSpelltriggers(card);
+		}
+		player.getHand().remove(card);
 	}
 
 	public Card drawCard(int playerId) {
@@ -906,7 +916,7 @@ public class GameLogic implements Cloneable {
 			context.fireGameEvent(new ReceiveCardEvent(context, playerId, card));
 		} else {
 			log("{} has too many cards on his hand, card destroyed: {}", player.getName(), card);
-			card.setLocation(CardLocation.VOID);
+			discardCard(playerId, card);
 		}
 	}
 
@@ -958,16 +968,16 @@ public class GameLogic implements Cloneable {
 		player.getSecrets().clear();
 	}
 
-	private void removeSpelltriggers(Actor actor) {
-		EntityReference actorReference = actor.getReference();
-		for (IGameEventListener trigger : context.getTriggersAssociatedWith(actorReference)) {
-			log("SpellTrigger {} was removed for {}", trigger, actor);
+	private void removeSpelltriggers(Entity entity) {
+		EntityReference entityReference = entity.getReference();
+		for (IGameEventListener trigger : context.getTriggersAssociatedWith(entityReference)) {
+			log("SpellTrigger {} was removed for {}", trigger, entity);
 			trigger.onRemove(context);
 		}
-		context.removeTriggersAssociatedWith(actorReference);
+		context.removeTriggersAssociatedWith(entityReference);
 		for (Iterator<CardCostModifier> iterator = context.getCardCostModifiers().iterator(); iterator.hasNext();) {
 			CardCostModifier cardCostModifier = iterator.next();
-			if (cardCostModifier.getHostReference().equals(actorReference)) {
+			if (cardCostModifier.getHostReference().equals(entityReference)) {
 				iterator.remove();
 			}
 		}

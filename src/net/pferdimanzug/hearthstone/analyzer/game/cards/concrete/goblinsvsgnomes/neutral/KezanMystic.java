@@ -21,8 +21,6 @@ public class KezanMystic extends MinionCard {
 		return 526;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion kezanMystic = createMinion();
