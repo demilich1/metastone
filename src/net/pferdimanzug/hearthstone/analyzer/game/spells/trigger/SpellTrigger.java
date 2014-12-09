@@ -121,11 +121,6 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 	}
 
 	@Override
-	public void reset() {
-		expired = false;
-	}
-
-	@Override
 	public void setHost(Entity host) {
 		this.hostReference = host.getReference();
 		spell.setSourceEntity(hostReference);

@@ -120,11 +120,6 @@ public abstract class CardCostModifier extends CustomCloneable implements IGameE
 	}
 
 	@Override
-	public void reset() {
-		expired = false;
-	}
-
-	@Override
 	public void setHost(Entity host) {
 		hostReference = host.getReference();
 	}

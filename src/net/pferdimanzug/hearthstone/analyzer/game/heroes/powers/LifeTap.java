@@ -14,11 +14,13 @@ public class LifeTap extends HeroPower {
 	
 	public LifeTap() {
 		super("Life Tap", HeroClass.WARLOCK);
-		setTargetRequirement(TargetSelection.NONE);
+		
 		SpellDesc damage = DamageSpell.create(2);
 		damage.setTarget(EntityReference.FRIENDLY_HERO);
 		SpellDesc draw = DrawCardSpell.create();
 		setSpell(MetaSpell.create(damage, draw));
+		setPredefinedTarget(EntityReference.NONE);
+		setTargetRequirement(TargetSelection.NONE);
 	}
 
 }

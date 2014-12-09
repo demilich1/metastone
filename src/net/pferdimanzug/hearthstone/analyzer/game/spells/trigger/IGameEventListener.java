@@ -26,8 +26,6 @@ public interface IGameEventListener {
 
 	public abstract void onRemove(GameContext context);
 
-	public abstract void reset();
-
 	public abstract void setHost(Entity host);
 	
 	public abstract void setOwner(int playerIndex);

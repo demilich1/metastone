@@ -32,6 +32,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.ArmorGainedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.BoardChangedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.CardPlayedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.DamageEvent;
+import net.pferdimanzug.hearthstone.analyzer.game.events.DrawCardEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.HealEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.KillEvent;
@@ -102,7 +103,6 @@ public class GameLogic implements Cloneable {
 	public void addGameEventListener(Player player, IGameEventListener gameEventListener, Entity target) {
 		gameEventListener.setHost(target);
 		gameEventListener.setOwner(player.getId());
-		gameEventListener.reset();
 		gameEventListener.onAdd(context);
 		context.addTrigger(gameEventListener);
 		log("New spelltrigger was added for {} on {}", player.getName(), target);
@@ -416,6 +416,7 @@ public class GameLogic implements Cloneable {
 		Card card = deck.getRandom();
 		deck.remove(card);
 		receiveCard(playerId, card);
+		context.fireGameEvent(new DrawCardEvent(context, playerId, card));
 		return card;
 	}
 

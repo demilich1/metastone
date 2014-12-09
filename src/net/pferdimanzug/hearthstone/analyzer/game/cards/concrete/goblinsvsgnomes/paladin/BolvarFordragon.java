@@ -58,6 +58,7 @@ public class BolvarFordragon extends MinionCard implements IGameEventListener {
 
 	@Override
 	public void onAdd(GameContext context) {
+		removeTag(GameTag.ATTACK_BONUS);
 	}
 
 	@Override
@@ -71,11 +72,6 @@ public class BolvarFordragon extends MinionCard implements IGameEventListener {
 
 	@Override
 	public void onRemove(GameContext context) {
-	}
-
-	@Override
-	public void reset() {
-		removeTag(GameTag.ATTACK_BONUS);
 	}
 
 	@Override

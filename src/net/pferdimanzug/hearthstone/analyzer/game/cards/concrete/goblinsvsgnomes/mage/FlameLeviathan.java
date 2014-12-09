@@ -7,9 +7,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
+import net.pferdimanzug.hearthstone.analyzer.game.events.DrawCardEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
-import net.pferdimanzug.hearthstone.analyzer.game.events.ReceiveCardEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.IGameEventListener;
@@ -17,7 +17,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TriggerLayer;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class FlameLeviathan extends MinionCard implements IGameEventListener {
-	
+
 	private EntityReference hostReference;
 	private boolean fired;
 
@@ -29,7 +29,7 @@ public class FlameLeviathan extends MinionCard implements IGameEventListener {
 
 	@Override
 	public FlameLeviathan clone() {
-		FlameLeviathan clone =(FlameLeviathan) super.clone();
+		FlameLeviathan clone = (FlameLeviathan) super.clone();
 		clone.hostReference = hostReference != null ? new EntityReference(hostReference.getId()) : null;
 		return clone;
 	}
@@ -51,7 +51,7 @@ public class FlameLeviathan extends MinionCard implements IGameEventListener {
 
 	@Override
 	public boolean interestedIn(GameEventType eventType) {
-		return eventType == GameEventType.RECEIVE_CARD;
+		return eventType == GameEventType.DRAW_CARD;
 	}
 
 	@Override
@@ -61,16 +61,16 @@ public class FlameLeviathan extends MinionCard implements IGameEventListener {
 
 	@Override
 	public void onAdd(GameContext context) {
-		
+		fired = false;
 	}
 
 	@Override
 	public void onGameEvent(GameEvent event) {
-		ReceiveCardEvent cardEvent = (ReceiveCardEvent) event;
+		DrawCardEvent cardEvent = (DrawCardEvent) event;
 		if (cardEvent.getCard() != this) {
 			return;
 		}
-		
+
 		fired = true;
 		SpellDesc damage = DamageSpell.create(2);
 		damage.setTarget(EntityReference.ALL_CHARACTERS);
@@ -82,16 +82,9 @@ public class FlameLeviathan extends MinionCard implements IGameEventListener {
 	}
 
 	@Override
-	public void reset() {
-		fired = false;
-	}
-
-	@Override
 	public void setHost(Entity host) {
 		this.hostReference = host.getReference();
 	}
-
-
 
 	@Override
 	public Minion summon() {

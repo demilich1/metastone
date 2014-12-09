@@ -30,7 +30,6 @@ public class ToggleCostModifier extends CardCostModifier {
 		ToggleCostModifier clone = (ToggleCostModifier) super.clone();
 		clone.toggleOnTrigger = toggleOnTrigger.clone();
 		clone.toggleOffTrigger = toggleOffTrigger.clone();
-		clone.ready = ready;
 		return clone;
 	}
 
@@ -47,7 +46,13 @@ public class ToggleCostModifier extends CardCostModifier {
 		} else if (toggleOffTrigger.interestedIn() == event.getEventType() && toggleOffTrigger.fire(event, host)) {
 			ready = false;
 		}
-
+	}
+	
+	@Override
+	public void setOwner(int playerIndex) {
+		super.setOwner(playerIndex);
+		toggleOnTrigger.setOwner(playerIndex);
+		toggleOffTrigger.setOwner(playerIndex);
 	}
 
 	public void setToggleOffTrigger(GameEventTrigger toggleOffTrigger) {

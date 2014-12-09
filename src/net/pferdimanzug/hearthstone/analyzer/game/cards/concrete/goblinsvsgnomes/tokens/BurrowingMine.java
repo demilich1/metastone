@@ -5,9 +5,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
+import net.pferdimanzug.hearthstone.analyzer.game.events.DrawCardEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
-import net.pferdimanzug.hearthstone.analyzer.game.events.ReceiveCardEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DrawCardSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
@@ -19,7 +19,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class BurrowingMine extends SpellCard implements IGameEventListener {
-	
+
 	private EntityReference hostReference;
 	private boolean fired;
 
@@ -27,7 +27,7 @@ public class BurrowingMine extends SpellCard implements IGameEventListener {
 		super("Burrowing Mine", Rarity.FREE, HeroClass.ANY, 0);
 		setDescription("When you draw this, it explodes. You take 10 damage and draw a card.");
 		setCollectible(false);
-		
+
 		setSpell(NullSpell.create());
 		setTargetRequirement(TargetSelection.NONE);
 	}
@@ -56,7 +56,7 @@ public class BurrowingMine extends SpellCard implements IGameEventListener {
 
 	@Override
 	public boolean interestedIn(GameEventType eventType) {
-		return eventType == GameEventType.RECEIVE_CARD;
+		return eventType == GameEventType.DRAW_CARD;
 	}
 
 	@Override
@@ -66,16 +66,16 @@ public class BurrowingMine extends SpellCard implements IGameEventListener {
 
 	@Override
 	public void onAdd(GameContext context) {
-		
+		fired = false;
 	}
 
 	@Override
 	public void onGameEvent(GameEvent event) {
-		ReceiveCardEvent cardEvent = (ReceiveCardEvent) event;
+		DrawCardEvent cardEvent = (DrawCardEvent) event;
 		if (cardEvent.getCard() != this) {
 			return;
 		}
-		
+
 		fired = true;
 		SpellDesc damage = DamageSpell.create(10);
 		damage.setTarget(EntityReference.FRIENDLY_HERO);
@@ -86,13 +86,6 @@ public class BurrowingMine extends SpellCard implements IGameEventListener {
 	@Override
 	public void onRemove(GameContext context) {
 	}
-
-	@Override
-	public void reset() {
-		fired = false;
-	}
-
-
 
 	@Override
 	public void setHost(Entity host) {
