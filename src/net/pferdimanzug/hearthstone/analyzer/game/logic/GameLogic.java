@@ -89,8 +89,8 @@ public class GameLogic implements Cloneable {
 	private final IdFactory idFactory;
 	private GameContext context;
 	private boolean loggingEnabled = true;
-	
-	//DEBUG
+
+	// DEBUG
 	private SpellDesc lastSpell;
 
 	public GameLogic() {
@@ -234,7 +234,7 @@ public class GameLogic implements Cloneable {
 
 	public void changeHero(Player player, Hero hero) {
 		hero.setId(player.getHero().getId());
-		
+
 		Map<GameTag, Object> tagsToCopy = player.getHero().getTagsCopy();
 		for (Map.Entry<GameTag, Object> entry : tagsToCopy.entrySet()) {
 			hero.setTag(entry.getKey(), entry.getValue());
@@ -264,8 +264,9 @@ public class GameLogic implements Cloneable {
 				}
 			}
 		}
-		
-		// a death of one minion may trigger the death of another one, so if there are still dead entities: run again
+
+		// a death of one minion may trigger the death of another one, so if
+		// there are still dead entities: run again
 		for (Player player : context.getPlayers()) {
 			for (Minion minion : player.getMinions()) {
 				if (minion.isDead()) {
@@ -399,7 +400,7 @@ public class GameLogic implements Cloneable {
 	public int determineBeginner(int... playerIds) {
 		return ThreadLocalRandom.current().nextBoolean() ? playerIds[0] : playerIds[1];
 	}
-	
+
 	public void discardCard(int playerId, Card card) {
 		Player player = context.getPlayer(playerId);
 		logger.debug("{} discards {}", player.getName(), card);
@@ -1012,7 +1013,7 @@ public class GameLogic implements Cloneable {
 		}
 		performGameAction(playerId, battlecryAction);
 	}
-	
+
 	public void resolveDeathrattles(Player player, Actor actor) {
 		resolveDeathrattles(player, actor, -1);
 	}
@@ -1075,10 +1076,18 @@ public class GameLogic implements Cloneable {
 			}
 		}
 		removeSpelltriggers(target);
-		refreshAttacksPerRound(target);
+
+		int maxHpDiff = target.getTagValue(GameTag.BASE_HP) - target.getMaxHp();
 		target.setMaxHp(target.getTagValue(GameTag.BASE_HP));
 		target.setAttack(target.getTagValue(GameTag.BASE_ATTACK));
-		target.setHp(target.getMaxHp());
+		if (maxHpDiff > 0) {
+			target.setHp(target.getHp() + maxHpDiff);
+		}
+		else if (maxHpDiff < 0 && target.getHp() > target.getMaxHp()) {
+			target.setHp(target.getMaxHp());
+		}
+		refreshAttacksPerRound(target);
+
 		log("{} was silenced", target);
 	}
 
