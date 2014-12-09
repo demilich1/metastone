@@ -81,6 +81,7 @@ public class GameLogic implements Cloneable {
 	public static final int MAX_MANA = 10;
 	public static final int MAX_SECRETS = 5;
 	public static final int DECK_SIZE = 30;
+	public static final int TURN_LIMIT = 100;
 
 	private final TargetLogic targetLogic = new TargetLogic();
 	private final ActionLogic actionLogic = new ActionLogic();

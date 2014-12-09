@@ -293,27 +293,28 @@ public class GameContext implements Cloneable, IDisposable {
 	public void play() {
 		logger.debug("Game starts: " + getPlayer1().getName() + " VS. " + getPlayer2().getName());
 		init();
-		startTurn(activePlayer);
+		while (!gameDecided()) {
+			startTurn(activePlayer);
+			while(playTurn());
+			if (getTurn() > GameLogic.TURN_LIMIT) {
+				break;
+			}
+		}
+		endGame();
+
 	}
 
-	public void playTurn() {
+	public boolean playTurn() {
 		if (++actionsThisTurn > 99) {
 			logger.warn("Turn has been forcefully ended after {} actions", actionsThisTurn);
 			endTurn();
-			startTurn(activePlayer);
-			return;
-		}
-
-		if (gameDecided()) {
-			endGame();
-			return;
+			return false;
 		}
 
 		List<GameAction> validActions = getValidActions();
 		if (validActions.size() == 0) {
 			endTurn();
-			startTurn(activePlayer);
-			return;
+			return false;
 		}
 
 		GameAction nextAction = getActivePlayer().getBehaviour().requestAction(this, getActivePlayer(), getValidActions());
@@ -326,11 +327,7 @@ public class GameContext implements Cloneable, IDisposable {
 		}
 		performAction(activePlayer, nextAction);
 
-		if (nextAction.getActionType() != ActionType.END_TURN) {
-			playTurn();
-		} else {
-			startTurn(activePlayer);
-		}
+		return nextAction.getActionType() != ActionType.END_TURN;
 	}
 
 	public void removeTriggersAssociatedWith(EntityReference entityReference) {
@@ -376,13 +373,12 @@ public class GameContext implements Cloneable, IDisposable {
 		this.ignoreEvents = ignoreEvents;
 	}
 
-	public void startTurn(int playerId) {
+	private void startTurn(int playerId) {
 		turn++;
 		logic.startTurn(playerId);
 		onGameStateChanged();
 		actionsThisTurn = 0;
 		turnState = TurnState.TURN_IN_PROGRESS;
-		playTurn();
 	}
 
 	@Override
