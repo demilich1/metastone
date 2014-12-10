@@ -6,7 +6,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.HealingSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class GuardianOfKings extends MinionCard {
 
@@ -19,14 +20,13 @@ public class GuardianOfKings extends MinionCard {
 	public int getTypeId() {
 		return 245;
 	}
-	
-
-
 
 	@Override
 	public Minion summon() {
 		Minion guardianOfKings = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(HealingSpell.create(6), TargetSelection.FRIENDLY_HERO);
+		SpellDesc healHero = HealingSpell.create(6);
+		healHero.setTarget(EntityReference.FRIENDLY_HERO);
+		Battlecry battlecry = Battlecry.createBattlecry(healHero);
 		guardianOfKings.setBattlecry(battlecry);
 		return guardianOfKings;
 	}

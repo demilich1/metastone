@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.TargetPlayer;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellCastedTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.AfterSpellCastedTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
@@ -28,7 +28,7 @@ public class WildPyromancer extends MinionCard {
 		Minion wildPyromancer = createMinion();
 		SpellDesc damageSpell = DamageSpell.create(1);
 		damageSpell.setTarget(EntityReference.ALL_MINIONS);
-		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(TargetPlayer.SELF), damageSpell);
+		SpellTrigger trigger = new SpellTrigger(new AfterSpellCastedTrigger(TargetPlayer.SELF), damageSpell);
 		wildPyromancer.setSpellTrigger(trigger);
 		return wildPyromancer;
 	}

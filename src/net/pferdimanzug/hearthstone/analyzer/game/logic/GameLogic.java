@@ -28,6 +28,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
+import net.pferdimanzug.hearthstone.analyzer.game.events.AfterSpellCastedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.ArmorGainedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.BoardChangedEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.CardPlayedEvent;
@@ -118,7 +119,16 @@ public class GameLogic implements Cloneable {
 		Player player = context.getPlayer(playerId);
 		player.getHero().modifyTag(GameTag.COMBO, +1);
 		Card card = context.resolveCardReference(cardReference);
-		discardCard(playerId, card);
+		if (card.getCardType() == CardType.SPELL) {
+			context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, card));
+		}
+
+		removeCard(playerId, card);
+	}
+
+	public void discardCard(Player player, Card card) {
+		logger.debug("{} discards {}", player.getName(), card);
+		removeCard(player.getId(), card);
 	}
 
 	public int applyAmplify(Player player, int baseValue) {
@@ -401,9 +411,8 @@ public class GameLogic implements Cloneable {
 		return ThreadLocalRandom.current().nextBoolean() ? playerIds[0] : playerIds[1];
 	}
 
-	public void discardCard(int playerId, Card card) {
+	public void removeCard(int playerId, Card card) {
 		Player player = context.getPlayer(playerId);
-		logger.debug("{} discards {}", player.getName(), card);
 		card.setLocation(CardLocation.VOID);
 		if (card instanceof IGameEventListener) {
 			removeSpelltriggers(card);
@@ -434,9 +443,9 @@ public class GameLogic implements Cloneable {
 
 	public void endTurn(int playerId) {
 		Player player = context.getPlayer(playerId);
-		
+
 		player.getHero().removeTag(GameTag.TEMPORARY_ATTACK_BONUS);
-		
+
 		player.getHero().removeTag(GameTag.CANNOT_REDUCE_HP_BELOW_1);
 		for (Minion minion : player.getMinions()) {
 			minion.removeTag(GameTag.TEMPORARY_ATTACK_BONUS);
@@ -864,6 +873,11 @@ public class GameLogic implements Cloneable {
 		player.getHand().remove(card);
 
 		player.getStatistics().cardPlayed(card);
+		context.fireGameEvent(new CardPlayedEvent(context, playerId, card));
+
+		if (card.hasTag(GameTag.OVERLOAD)) {
+			context.fireGameEvent(new OverloadEvent(context, playerId));
+		}
 
 		if (card.getCardType() == CardType.SPELL) {
 			GameEvent spellCastedEvent = new SpellCastedEvent(context, playerId, card);
@@ -876,11 +890,8 @@ public class GameLogic implements Cloneable {
 			}
 		}
 
-		context.fireGameEvent(new CardPlayedEvent(context, playerId, card));
-
 		if (card.hasTag(GameTag.OVERLOAD)) {
 			player.getHero().modifyTag(GameTag.OVERLOAD, card.getTagValue(GameTag.OVERLOAD));
-			context.fireGameEvent(new OverloadEvent(context, playerId));
 		}
 	}
 
@@ -920,7 +931,7 @@ public class GameLogic implements Cloneable {
 			context.fireGameEvent(new ReceiveCardEvent(context, playerId, card));
 		} else {
 			log("{} has too many cards on his hand, card destroyed: {}", player.getName(), card);
-			discardCard(playerId, card);
+			discardCard(player, card);
 		}
 	}
 
@@ -1103,12 +1114,12 @@ public class GameLogic implements Cloneable {
 		int mana = MathUtils.clamp(player.getMaxMana() - player.getHero().getTagValue(GameTag.OVERLOAD), 0, MAX_MANA);
 		player.setMana(mana);
 		log("{} starts his turn with {} mana", player.getName(), player.getMana() + "/" + player.getMaxMana());
-		
+
 		player.getHero().removeTag(GameTag.OVERLOAD);
 		for (Minion minion : player.getMinions()) {
 			minion.removeTag(GameTag.TEMPORARY_ATTACK_BONUS);
 		}
-		
+
 		player.getHero().getHeroPower().setUsed(false);
 		player.getHero().activateWeapon(true);
 		refreshAttacksPerRound(player.getHero());

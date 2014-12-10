@@ -58,7 +58,7 @@ public class PutRandomMinionOnBoardSpell extends Spell {
 		}
 		SpellDesc summonSpell = SummonSpell.create(minionCard);
 		context.getLogic().castSpell(player.getId(), summonSpell);
-		context.getLogic().discardCard(player.getId(), minionCard);
+		context.getLogic().removeCard(player.getId(), minionCard);
 	}
 
 }

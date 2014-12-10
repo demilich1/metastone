@@ -33,7 +33,7 @@ public class DiscardCardSpell extends Spell {
 			if (randomHandCard == null) {
 				return;
 			}
-			context.getLogic().discardCard(player.getId(), randomHandCard);
+			context.getLogic().discardCard(player, randomHandCard);
 
 		}
 

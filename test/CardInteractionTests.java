@@ -4,12 +4,15 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.BloodsailRaider;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.MurlocRaider;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.WildPyromancer;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.Equality;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.ArcaniteReaper;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.WarsongCommander;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Guldan;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Uther;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SilenceSpell;
@@ -125,6 +128,32 @@ public class CardInteractionTests extends TestBase {
 		Minion bloodsailRaider = playMinionCard(context, warrior, new BloodsailRaider());
 		Assert.assertTrue(bloodsailRaider.hasStatus(GameTag.CHARGE));
 		Assert.assertEquals(bloodsailRaider.getAttack(), 7);
+	}
+	
+	@Test
+	public void testWildPyroPlusEquality() {
+		GameContext context = createContext(new Uther(), new Garrosh());
+		Player paladin = context.getPlayer1();
+		playCard(context, paladin, new TestMinionCard(3, 2, 0));
+		playCard(context, paladin, new TestMinionCard(4, 4, 0));
+		context.getLogic().endTurn(paladin.getId());
+		
+		Player warrior = context.getPlayer2();
+		playCard(context, warrior, new TestMinionCard(5, 5, 0));
+		playCard(context, warrior, new TestMinionCard(1, 2, 0));
+		playCard(context, warrior, new TestMinionCard(8, 8, 0));
+		playCard(context, warrior, new TestMinionCard(2, 1, 0));
+		context.getLogic().endTurn(warrior.getId());
+		
+		Assert.assertEquals(paladin.getMinions().size(), 2);
+		Assert.assertEquals(warrior.getMinions().size(), 4);
+		
+		playCard(context, paladin, new WildPyromancer());
+		playCard(context, paladin, new Equality());
+		
+		// wild pyromancer +  equality should wipe the board if there no deathrattles
+		Assert.assertEquals(paladin.getMinions().size(), 0);
+		Assert.assertEquals(warrior.getMinions().size(), 0);
 	}
 
 }
