@@ -113,6 +113,7 @@ public class TrainingConfigView extends BorderPane {
 		numberOfGamesEntries.add(10);
 		numberOfGamesEntries.add(100);
 		numberOfGamesEntries.add(1000);
+		numberOfGamesEntries.add(10000);
 		numberOfGamesBox.setItems(numberOfGamesEntries);
 		numberOfGamesBox.getSelectionModel().select(2);
 	}

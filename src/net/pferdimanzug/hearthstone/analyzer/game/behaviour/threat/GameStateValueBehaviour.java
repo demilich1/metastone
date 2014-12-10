@@ -49,7 +49,7 @@ public class GameStateValueBehaviour extends Behaviour {
 		
 		for (GameAction gameAction : validActions) {
 			score = Math.max(score, alphaBeta(simulation, playerId, gameAction, depth - 1));
-			if (score >= 10000) {
+			if (score >= 100000) {
 				break;
 			}
 		}

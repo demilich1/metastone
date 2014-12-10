@@ -12,6 +12,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroySpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.SpellUtils;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SummonSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
@@ -46,8 +47,6 @@ public class MimironsHead extends MinionCard {
 		return mimironsHead;
 	}
 
-
-
 	private class StartOfTurnHaveMechsTrigger extends TurnStartTrigger {
 
 		@Override
@@ -56,12 +55,7 @@ public class MimironsHead extends MinionCard {
 				return false;
 			}
 			Player player = event.getGameContext().getPlayer(host.getOwner());
-			int mechCount = 0;
-			for (Minion minion : player.getMinions()) {
-				if (minion.getRace() == Race.MECH) {
-					mechCount++;
-				}
-			}
+			int mechCount = SpellUtils.hasHowManyOfRace(player, Race.MECH);
 			return mechCount >= 3;
 		}
 

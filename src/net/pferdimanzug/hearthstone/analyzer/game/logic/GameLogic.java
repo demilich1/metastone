@@ -434,13 +434,15 @@ public class GameLogic implements Cloneable {
 
 	public void endTurn(int playerId) {
 		Player player = context.getPlayer(playerId);
-		player.getHero().removeTag(GameTag.COMBO);
+		
 		player.getHero().removeTag(GameTag.TEMPORARY_ATTACK_BONUS);
+		
 		player.getHero().removeTag(GameTag.CANNOT_REDUCE_HP_BELOW_1);
 		for (Minion minion : player.getMinions()) {
 			minion.removeTag(GameTag.TEMPORARY_ATTACK_BONUS);
 			minion.removeTag(GameTag.CANNOT_REDUCE_HP_BELOW_1);
 		}
+		player.getHero().removeTag(GameTag.COMBO);
 		player.getHero().activateWeapon(false);
 		log("{} ends his turn.", player.getName());
 		context.fireGameEvent(new TurnEndEvent(context, player.getId()));
@@ -1100,8 +1102,13 @@ public class GameLogic implements Cloneable {
 
 		int mana = MathUtils.clamp(player.getMaxMana() - player.getHero().getTagValue(GameTag.OVERLOAD), 0, MAX_MANA);
 		player.setMana(mana);
-		player.getHero().removeTag(GameTag.OVERLOAD);
 		log("{} starts his turn with {} mana", player.getName(), player.getMana() + "/" + player.getMaxMana());
+		
+		player.getHero().removeTag(GameTag.OVERLOAD);
+		for (Minion minion : player.getMinions()) {
+			minion.removeTag(GameTag.TEMPORARY_ATTACK_BONUS);
+		}
+		
 		player.getHero().getHeroPower().setUsed(false);
 		player.getHero().activateWeapon(true);
 		refreshAttacksPerRound(player.getHero());

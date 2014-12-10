@@ -9,7 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
 public class ThreatBasedHeuristic implements IGameStateHeuristic {
-	
+
 	private static ThreatLevel calcuateThreatLevel(GameContext context, int playerId) {
 		int damageOnBoard = 0;
 		Player player = context.getPlayer(playerId);
@@ -43,7 +43,7 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 		}
 		return heroDamage;
 	}
-	
+
 	private final FeatureVector weights;
 
 	public ThreatBasedHeuristic(FeatureVector vector) {
@@ -52,9 +52,10 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 
 	private double calculateMinionScore(Minion minion, ThreatLevel threatLevel) {
 		double minionScore = weights.get(WeightedFeature.MINION_INTRINSIC_VALUE);
-		minionScore += weights.get(WeightedFeature.MINION_ATTACK_FACTOR) * minion.getAttack();
+		minionScore += weights.get(WeightedFeature.MINION_ATTACK_FACTOR)
+				* (minion.getAttack() - minion.getTagValue(GameTag.TEMPORARY_ATTACK_BONUS));
 		minionScore += weights.get(WeightedFeature.MINION_HP_FACTOR) * minion.getHp();
-		
+
 		if (minion.hasStatus(GameTag.TAUNT)) {
 			switch (threatLevel) {
 			case RED:
@@ -113,7 +114,7 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 		}
 		score += player.getHero().getEffectiveHp() * weights.get(WeightedFeature.OWN_HP_FACTOR);
 		score += opponent.getHero().getEffectiveHp() * weights.get(WeightedFeature.OPPONENT_HP_FACTOR);
-		
+
 		score += player.getHand().getCount() * weights.get(WeightedFeature.OWN_CARD_COUNT);
 		score += opponent.getHand().getCount() * weights.get(WeightedFeature.OPPONENT_CARD_COUNT);
 

@@ -82,7 +82,6 @@ public class GeneticFeatureOptimizer {
 
 	public FeatureVector getBest() {
 		IChromosome fittest = genotype.getFittestChromosome();
-		System.out.println("Fitness value: " + fittest.getFitnessValue());
 		return toVector(fittest);
 	}
 
@@ -93,7 +92,7 @@ public class GeneticFeatureOptimizer {
 		try {
 			IChromosome sampleChromosome = new Chromosome(gaConf, toGenes(FeatureVector.getDefault(), gaConf));
 			gaConf.setSampleChromosome(sampleChromosome);
-			gaConf.setPopulationSize(50);
+			gaConf.setPopulationSize(40);
 			gaConf.setFitnessFunction(new WinRateFitnessFunction(decks));
 			genotype = new Genotype(gaConf, new Population(gaConf, sampleChromosome));
 		} catch (InvalidConfigurationException e) {
@@ -103,6 +102,8 @@ public class GeneticFeatureOptimizer {
 
 	public void train() {
 		genotype.evolve();
+		IChromosome fittest = genotype.getFittestChromosome();
+		System.out.println("Fitness value: " + fittest.getFitnessValue());
 	}
 
 }

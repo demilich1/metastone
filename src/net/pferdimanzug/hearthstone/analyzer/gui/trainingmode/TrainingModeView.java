@@ -75,8 +75,8 @@ public class TrainingModeView extends BorderPane implements EventHandler<ActionE
 	}
 
 	public void showProgress(TrainingProgressReport progress) {
-		//int progressMark = Math.max(progress.getGamesTotal() / 25, 10);
-		if (progress.getGamesCompleted() == 0) {
+		int progressMark = Math.max(progress.getGamesTotal() / 100, 10);
+		if (progress.getGamesCompleted() == 0 || progress.getGamesCompleted() % progressMark != 0) {
 			return;
 		}
 		double winRate = progress.getGamesWon() / (double) progress.getGamesCompleted();

@@ -71,8 +71,10 @@ public class PerformTrainingCommand extends SimpleCommand<GameNotification> {
 					onGameComplete(config, newGame);
 					newGame.dispose();
 					
-					System.out.println("Iteration " + i + " Fittest: " + fittest);
-					learner.train();
+					if (i % 100 == 0) {
+						learner.train();
+						System.out.println("Iteration " + i + " Fittest: " + fittest);
+					}
 				}
 
 				getFacade().sendNotification(GameNotification.TRAINING_PROGRESS_UPDATE,
