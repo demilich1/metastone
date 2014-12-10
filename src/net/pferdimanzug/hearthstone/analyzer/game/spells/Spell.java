@@ -21,7 +21,7 @@ public abstract class Spell {
 		Predicate<Entity> targetFilter = (Predicate<Entity>) desc.get(SpellArg.ENTITY_FILTER);
 		List<Entity> validTargets = SpellUtils.getValidTargets(targets, targetFilter);
 		if (validTargets.size() > 0 && desc.getBool(SpellArg.RANDOM_TARGET)) {
-			Entity target = SpellUtils.getRandomTarget(targets);
+			Entity target = SpellUtils.getRandomTarget(validTargets);
 			onCast(context, player, desc, target);
 		} else {
 			for (Entity target : validTargets) {

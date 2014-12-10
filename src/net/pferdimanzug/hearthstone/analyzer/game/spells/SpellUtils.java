@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
@@ -44,7 +43,7 @@ public class SpellUtils {
 		int randomIndex = ThreadLocalRandom.current().nextInt(targets.size());
 		return targets.get(randomIndex);
 	}
-	
+
 	public static List<Actor> getValidRandomTargets(List<Entity> targets) {
 		List<Actor> validTargets = new ArrayList<Actor>();
 		for (Entity entity : targets) {
@@ -61,7 +60,13 @@ public class SpellUtils {
 		if (filter == null) {
 			return allTargets;
 		}
-		return allTargets.stream().filter(filter).collect(Collectors.<Entity> toList());
+		List<Entity> validTargets = new ArrayList<>();
+		for (Entity entity : allTargets) {
+			if (filter.test(entity)) {
+				validTargets.add(entity);
+			}
+		}
+		return validTargets;
 	}
 
 	public static int hasHowManyOfRace(Player player, Race race) {

@@ -1085,7 +1085,7 @@ public class GameLogic implements Cloneable {
 		if (maxHpDiff > 0) {
 			target.setHp(target.getHp() + maxHpDiff);
 		}
-		else if (maxHpDiff < 0 && target.getHp() > target.getMaxHp()) {
+		if (target.getHp() > target.getMaxHp()) {
 			target.setHp(target.getMaxHp());
 		}
 		refreshAttacksPerRound(target);

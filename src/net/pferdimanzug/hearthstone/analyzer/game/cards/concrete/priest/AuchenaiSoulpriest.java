@@ -18,8 +18,6 @@ public class AuchenaiSoulpriest extends MinionCard {
 		return 259;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion auchenaiSoulpriest = createMinion(GameTag.INVERT_HEALING);

@@ -17,12 +17,12 @@ public abstract class MinionCard extends Card {
 
 	protected Minion createMinion(GameTag... tags) {
 		Minion minion = new Minion(this);
-		minion.setBaseAttack(getBaseAttack());
-		minion.setTag(GameTag.ATTACK_BONUS, getTagValue(GameTag.ATTACK_BONUS));
-		minion.setBaseHp(getBaseHp());
 		for (GameTag gameTag : tags) {
 			minion.setTag(gameTag);
 		}
+		minion.setBaseAttack(getBaseAttack());
+		minion.setTag(GameTag.ATTACK_BONUS, getTagValue(GameTag.ATTACK_BONUS));
+		minion.setBaseHp(getBaseHp());
 		return minion;
 	}
 	

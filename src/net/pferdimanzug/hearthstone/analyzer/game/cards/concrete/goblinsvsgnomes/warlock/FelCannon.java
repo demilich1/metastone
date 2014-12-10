@@ -25,8 +25,6 @@ public class FelCannon extends MinionCard {
 		return 598;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion felCannon = createMinion();
