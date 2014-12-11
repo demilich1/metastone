@@ -24,6 +24,11 @@ public class MathUtils {
 		return clamp(value, 0.0, 1.0);
 	}
 
+	public static double levy(double xMin, double alpha) {
+		double u = Math.random();
+		return xMin * Math.pow(u, -1 / alpha);
+	}
+
 	private MathUtils() {
 	}
 

@@ -100,7 +100,7 @@ public class GeneticFeatureOptimizer {
 		}
 	}
 
-	public void train() {
+	public void evolve() {
 		genotype.evolve();
 		IChromosome fittest = genotype.getFittestChromosome();
 		System.out.println("Fitness value: " + fittest.getFitnessValue());

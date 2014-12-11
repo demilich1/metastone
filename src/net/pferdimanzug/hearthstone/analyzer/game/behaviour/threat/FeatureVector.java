@@ -26,7 +26,7 @@ public class FeatureVector implements Cloneable {
 		defaultVector.set(WeightedFeature.MINION_UNTARGETABLE_BY_SPELLS_MODIFIER, 1.5);
 		return defaultVector;
 	}
-	
+
 	public static FeatureVector getFittest() {
 		FeatureVector defaultVector = new FeatureVector();
 		defaultVector.set(WeightedFeature.RED_MODIFIER, -20);
@@ -63,7 +63,7 @@ public class FeatureVector implements Cloneable {
 	public double get(WeightedFeature param) {
 		return getValues().get(param);
 	}
-	
+
 	public Map<WeightedFeature, Double> getValues() {
 		return values;
 	}

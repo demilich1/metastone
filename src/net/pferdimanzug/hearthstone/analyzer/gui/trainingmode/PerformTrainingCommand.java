@@ -5,6 +5,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.threat.FeatureVector;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.threat.GameStateValueBehaviour;
+import net.pferdimanzug.hearthstone.analyzer.game.behaviour.threat.cuckoo.CuckooLearner;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.threat.ga.GeneticFeatureOptimizer;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
@@ -46,15 +47,16 @@ public class PerformTrainingCommand extends SimpleCommand<GameNotification> {
 			public void run() {
 				logger.info("Training started");
 
-				GeneticFeatureOptimizer learner = new GeneticFeatureOptimizer();
+				//GeneticFeatureOptimizer learner = new GeneticFeatureOptimizer();
+				CuckooLearner learner = new CuckooLearner(config.getDecks());
 				
-				learner.init(config.getDecks());
+				//learner.init(config.getDecks());
 
 				// send initial status update
 				TrainingProgressReport progress = new TrainingProgressReport(gamesCompleted, config.getNumberOfGames(), gamesWon);
 				getFacade().sendNotification(GameNotification.TRAINING_PROGRESS_UPDATE, progress);
 				for (int i = 0; i < config.getNumberOfGames(); i++) {
-					FeatureVector fittest = learner.getBest();
+					FeatureVector fittest = learner.getFittest();
 					
 					Deck player1Deck = config.getRandomDeck();
 					Deck player2Deck = config.getRandomDeck();
@@ -71,16 +73,15 @@ public class PerformTrainingCommand extends SimpleCommand<GameNotification> {
 					onGameComplete(config, newGame);
 					newGame.dispose();
 					
-					if (i % 100 == 0) {
-						learner.train();
-						System.out.println("Iteration " + i + " Fittest: " + fittest);
+					if (i % 10 == 0) {
+						learner.evolve();
 					}
 				}
 
 				getFacade().sendNotification(GameNotification.TRAINING_PROGRESS_UPDATE,
 						new TrainingProgressReport(gamesCompleted, config.getNumberOfGames(), gamesWon));
 				logger.info("Training ended");
-				FeatureVector fittest = learner.getBest();
+				FeatureVector fittest = learner.getFittest();
 				logger.info("**************Final weights: {}", fittest);
 			}
 		});
