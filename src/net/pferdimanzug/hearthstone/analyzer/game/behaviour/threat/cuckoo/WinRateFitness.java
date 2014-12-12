@@ -24,9 +24,11 @@ public class WinRateFitness implements IFitnessFunction {
 	
 	private static final int NUMBER_OF_GAMES = 50;
 	
+	private final Deck deckToTrain;
 	private final List<Deck> decks;
 
-	public WinRateFitness(List<Deck> decks) {
+	public WinRateFitness(Deck deckToTrain, List<Deck> decks) {
+		this.deckToTrain = deckToTrain;
 		this.decks = decks;
 	}
 
@@ -87,7 +89,7 @@ public class WinRateFitness implements IFitnessFunction {
 
 		@Override
 		public Void call() throws Exception {
-			Deck deck1 = getRandomDeck();
+			Deck deck1 = deckToTrain;
 			Hero hero1 = HeroFactory.createHero(deck1.getHeroClass());
 			Player player1 = new Player("Player 1 (learning)", hero1, deck1);
 			player1.setBehaviour(new GameStateValueBehaviour(solution, "(current)"));

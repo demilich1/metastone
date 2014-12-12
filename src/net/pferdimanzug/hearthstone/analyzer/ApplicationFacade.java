@@ -25,6 +25,8 @@ import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.commands.StartPlayS
 import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.commands.StopPlaySandboxCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.simulationmode.SimulateGamesCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.trainingmode.PerformTrainingCommand;
+import net.pferdimanzug.hearthstone.analyzer.gui.trainingmode.RequestTrainingDataCommand;
+import net.pferdimanzug.hearthstone.analyzer.gui.trainingmode.SaveTrainingDataCommand;
 import de.pferdimanzug.nittygrittymvc.Facade;
 import de.pferdimanzug.nittygrittymvc.interfaces.IFacade;
 
@@ -71,6 +73,9 @@ public class ApplicationFacade extends Facade<GameNotification> {
 		registerCommand(GameNotification.GAME_STATE_UPDATE, new AnimationLockCommand());
 		registerCommand(GameNotification.ANIMATION_STARTED, new AnimationStartedCommand());
 		registerCommand(GameNotification.ANIMATION_COMPLETED, new AnimationCompletedCommand());
+		
+		registerCommand(GameNotification.SAVE_TRAINING_DATA, new SaveTrainingDataCommand());
+		registerCommand(GameNotification.REQUEST_TRAINING_DATA, new RequestTrainingDataCommand());
 	}
 
 	public void startUp(HearthstoneAnalyzer main) {

@@ -3,36 +3,35 @@ package net.pferdimanzug.hearthstone.analyzer.game.behaviour.threat;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.ActionType;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.Behaviour;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.GreedyOptimizeTurn;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.heuristic.IGameStateHeuristic;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
+import net.pferdimanzug.hearthstone.analyzer.gui.trainingmode.RequestTrainingDataNotification;
+import net.pferdimanzug.hearthstone.analyzer.gui.trainingmode.TrainingData;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class GameStateValueBehaviour extends Behaviour {
 
-	private final Logger logger = LoggerFactory.getLogger(GreedyOptimizeTurn.class);
+	private final Logger logger = LoggerFactory.getLogger(GameStateValueBehaviour.class);
 
-	private final IGameStateHeuristic heuristic;
-
-	private final FeatureVector featureVector;
-
-	private final String featureVectorName;
+	private IGameStateHeuristic heuristic;
+	private FeatureVector featureVector;
+	private String nameSuffix = "";
 
 	public GameStateValueBehaviour() {
-		this (FeatureVector.getDefault(), "(default)");
 	}
-	
-	public GameStateValueBehaviour(FeatureVector featureVector, String featureVectorName) {
+
+	public GameStateValueBehaviour(FeatureVector featureVector, String nameSuffix) {
 		this.featureVector = featureVector;
-		this.featureVectorName = featureVectorName;
+		this.nameSuffix = nameSuffix;
 		this.heuristic = new ThreatBasedHeuristic(featureVector);
 	}
 
@@ -46,7 +45,7 @@ public class GameStateValueBehaviour extends Behaviour {
 		List<GameAction> validActions = simulation.getValidActions();
 
 		double score = Float.NEGATIVE_INFINITY;
-		
+
 		for (GameAction gameAction : validActions) {
 			score = Math.max(score, alphaBeta(simulation, playerId, gameAction, depth - 1));
 			if (score >= 100000) {
@@ -59,16 +58,35 @@ public class GameStateValueBehaviour extends Behaviour {
 
 	@Override
 	public IBehaviour clone() {
-		return new GameStateValueBehaviour(featureVector.clone(), featureVectorName);
+		if (featureVector != null) {
+			return new GameStateValueBehaviour(featureVector.clone(), nameSuffix);	
+		}
+		return new GameStateValueBehaviour();
 	}
 
 	@Override
 	public String getName() {
-		return "Game state value " + featureVectorName;
+		return "Game state value " + nameSuffix;
+	}
+
+	private void requestTrainingData(Player player) {
+		if (heuristic != null) {
+			return;
+		}
+
+		RequestTrainingDataNotification request = new RequestTrainingDataNotification(player.getDeckName(), this::answerTrainingData);
+		ApplicationFacade.getInstance().notifyObservers(request);
+	}
+
+	private void answerTrainingData(TrainingData trainingData) {
+		featureVector = trainingData != null ? trainingData.getFeatureVector() : FeatureVector.getFittest();
+		heuristic = new ThreatBasedHeuristic(featureVector);
+		this.nameSuffix = trainingData != null ? "(trained)" : "(untrained)";
 	}
 
 	@Override
 	public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
+		requestTrainingData(player);
 		List<Card> discardedCards = new ArrayList<Card>();
 		for (Card card : cards) {
 			if (card.getBaseManaCost() > 3) {
@@ -81,7 +99,6 @@ public class GameStateValueBehaviour extends Behaviour {
 	@Override
 	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
 		if (validActions.size() == 1) {
-			heuristic.onActionSelected(context, player.getId());
 			return validActions.get(0);
 		}
 
@@ -103,7 +120,6 @@ public class GameStateValueBehaviour extends Behaviour {
 		}
 
 		logger.debug("Selecting best action {} with score {}", bestAction, bestScore);
-		heuristic.onActionSelected(context, player.getId());
 
 		return bestAction;
 	}

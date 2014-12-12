@@ -29,23 +29,23 @@ public class FeatureVector implements Cloneable {
 
 	public static FeatureVector getFittest() {
 		FeatureVector defaultVector = new FeatureVector();
-		defaultVector.set(WeightedFeature.RED_MODIFIER, -20);
-		defaultVector.set(WeightedFeature.YELLOW_MODIFIER, -3);
-		defaultVector.set(WeightedFeature.OWN_HP_FACTOR, 1);
-		defaultVector.set(WeightedFeature.OPPONENT_HP_FACTOR, -50);
-		defaultVector.set(WeightedFeature.OWN_CARD_COUNT, 1);
-		defaultVector.set(WeightedFeature.OPPONENT_CARD_COUNT, 2);
-		defaultVector.set(WeightedFeature.MINION_INTRINSIC_VALUE, 81);
-		defaultVector.set(WeightedFeature.MINION_ATTACK_FACTOR, 99);
-		defaultVector.set(WeightedFeature.MINION_HP_FACTOR, 42);
-		defaultVector.set(WeightedFeature.MINION_RED_TAUNT_MODIFIER, 99);
-		defaultVector.set(WeightedFeature.MINION_YELLOW_TAUNT_MODIFIER, 4);
-		defaultVector.set(WeightedFeature.MINION_DEFAULT_TAUNT_MODIFIER, 63.1);
-		defaultVector.set(WeightedFeature.MINION_WINDFURY_MODIFIER, 3);
-		defaultVector.set(WeightedFeature.MINION_DIVINE_SHIELD_MODIFIER, 1.5);
-		defaultVector.set(WeightedFeature.MINION_SPELL_POWER_MODIFIER, 45);
-		defaultVector.set(WeightedFeature.MINION_STEALTHED_MODIFIER, 12);
-		defaultVector.set(WeightedFeature.MINION_UNTARGETABLE_BY_SPELLS_MODIFIER, 1.5);
+		defaultVector.set(WeightedFeature.RED_MODIFIER, -43);
+		defaultVector.set(WeightedFeature.YELLOW_MODIFIER, -17);
+		defaultVector.set(WeightedFeature.OWN_HP_FACTOR, 0.214);
+		defaultVector.set(WeightedFeature.OPPONENT_HP_FACTOR, -1.115);
+		defaultVector.set(WeightedFeature.OWN_CARD_COUNT, 3.572);
+		defaultVector.set(WeightedFeature.OPPONENT_CARD_COUNT, 0);
+		defaultVector.set(WeightedFeature.MINION_INTRINSIC_VALUE, 1.181);
+		defaultVector.set(WeightedFeature.MINION_ATTACK_FACTOR, 2.419);
+		defaultVector.set(WeightedFeature.MINION_HP_FACTOR, 3);
+		defaultVector.set(WeightedFeature.MINION_RED_TAUNT_MODIFIER, 10.1);
+		defaultVector.set(WeightedFeature.MINION_YELLOW_TAUNT_MODIFIER, 7.1);
+		defaultVector.set(WeightedFeature.MINION_DEFAULT_TAUNT_MODIFIER, 0.671);
+		defaultVector.set(WeightedFeature.MINION_WINDFURY_MODIFIER, 15.71);
+		defaultVector.set(WeightedFeature.MINION_DIVINE_SHIELD_MODIFIER, 6.1);
+		defaultVector.set(WeightedFeature.MINION_SPELL_POWER_MODIFIER, 3.841);
+		defaultVector.set(WeightedFeature.MINION_STEALTHED_MODIFIER, 1.281);
+		defaultVector.set(WeightedFeature.MINION_UNTARGETABLE_BY_SPELLS_MODIFIER, 0);
 		return defaultVector;
 	}
 

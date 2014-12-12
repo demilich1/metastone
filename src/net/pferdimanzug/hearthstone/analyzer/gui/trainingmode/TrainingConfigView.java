@@ -17,20 +17,15 @@ import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.layout.BorderPane;
 import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.PlayRandomBehaviour;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.threat.FeatureVector;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.threat.GameStateValueBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
-import net.pferdimanzug.hearthstone.analyzer.gui.common.BehaviourStringConverter;
 import net.pferdimanzug.hearthstone.analyzer.gui.common.DeckStringConverter;
 
 public class TrainingConfigView extends BorderPane {
-	
+
 	@FXML
 	private ComboBox<Integer> numberOfGamesBox;
 	@FXML
-	private ComboBox<IBehaviour> behaviourBox;
+	private ComboBox<Deck> deckBox;
 
 	@FXML
 	private ListView<Deck> selectedDecksListView;
@@ -57,7 +52,7 @@ public class TrainingConfigView extends BorderPane {
 			throw new RuntimeException(exception);
 		}
 
-		setupBehaviourBox();
+		setupDeckBox();
 		setupNumberOfGamesBox();
 
 		selectedDecksListView.setCellFactory(TextFieldListCell.forListView(new DeckStringConverter()));
@@ -86,10 +81,10 @@ public class TrainingConfigView extends BorderPane {
 
 	private void handleStartButton(ActionEvent event) {
 		int numberOfGames = numberOfGamesBox.getSelectionModel().getSelectedItem();
-		IBehaviour behaviour = behaviourBox.getSelectionModel().getSelectedItem();
+		Deck deckToTrain = deckBox.getSelectionModel().getSelectedItem();
 		Collection<Deck> decks = selectedDecksListView.getItems();
-		
-		TrainingConfig trainingConfig = new TrainingConfig(behaviour);
+
+		TrainingConfig trainingConfig = new TrainingConfig(deckToTrain);
 		trainingConfig.setNumberOfGames(numberOfGames);
 		trainingConfig.getDecks().addAll(decks);
 		ApplicationFacade.getInstance().sendNotification(GameNotification.COMMIT_TRAININGMODE_CONFIG, trainingConfig);
@@ -98,13 +93,12 @@ public class TrainingConfigView extends BorderPane {
 	public void injectDecks(List<Deck> decks) {
 		selectedDecksListView.getItems().clear();
 		availableDecksListView.getItems().setAll(decks);
+		deckBox.getItems().setAll(decks);
+		deckBox.getSelectionModel().selectFirst();
 	}
 
-	private void setupBehaviourBox() {
-		behaviourBox.setConverter(new BehaviourStringConverter());
-		behaviourBox.getItems().setAll(new GameStateValueBehaviour(), new GameStateValueBehaviour(FeatureVector.getFittest(), "(fittest)"),
-				new PlayRandomBehaviour());
-		behaviourBox.getSelectionModel().selectFirst();
+	private void setupDeckBox() {
+		deckBox.setConverter(new DeckStringConverter());
 	}
 
 	private void setupNumberOfGamesBox() {
@@ -117,6 +111,5 @@ public class TrainingConfigView extends BorderPane {
 		numberOfGamesBox.setItems(numberOfGamesEntries);
 		numberOfGamesBox.getSelectionModel().select(2);
 	}
-
 
 }

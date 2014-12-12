@@ -5,6 +5,7 @@ import net.pferdimanzug.hearthstone.analyzer.gui.dialog.DialogMediator;
 import net.pferdimanzug.hearthstone.analyzer.gui.main.ApplicationMediator;
 import net.pferdimanzug.hearthstone.analyzer.gui.playmode.animation.AnimationProxy;
 import net.pferdimanzug.hearthstone.analyzer.gui.sandboxmode.SandboxProxy;
+import net.pferdimanzug.hearthstone.analyzer.gui.trainingmode.TrainingProxy;
 import de.pferdimanzug.nittygrittymvc.SimpleCommand;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
@@ -13,6 +14,7 @@ public class ApplicationStartupCommand extends SimpleCommand<GameNotification> {
 	@Override
 	public void execute(INotification<GameNotification> notification) {
 		getFacade().registerProxy(new DeckProxy());
+		getFacade().registerProxy(new TrainingProxy());
 		getFacade().registerProxy(new SandboxProxy());
 		getFacade().registerProxy(new AnimationProxy());
 		

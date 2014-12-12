@@ -29,7 +29,7 @@ public class CuckooAgent implements Comparable<CuckooAgent> {
 	}
 
 	public void setFitness(double fitness) {
-		if (fitness < 0) {
+		if (this.fitness < 0) {
 			this.fitness = fitness;	
 		} else {
 			this.fitness = (this.fitness + fitness) * 0.5;

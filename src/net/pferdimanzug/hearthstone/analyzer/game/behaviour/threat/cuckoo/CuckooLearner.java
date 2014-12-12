@@ -13,21 +13,21 @@ import net.pferdimanzug.hearthstone.analyzer.utils.MathUtils;
 
 public class CuckooLearner {
 
-	private static int POPULATION_SIZE = 20;
-	private static double DISCARD_FRACTION = 0.2;
+	private static int POPULATION_SIZE = 15;
+	private static double DISCOVERY_RATE = 0.25;
 
 	private final List<CuckooAgent> nests;
 	private final IFitnessFunction fitnessFunction;
 	private CuckooAgent fittest;
 
-	public CuckooLearner(List<Deck> decks) {
+	public CuckooLearner(Deck deckToTrain, List<Deck> decks) {
 		nests = new ArrayList<CuckooAgent>(POPULATION_SIZE);
 		for (int i = 0; i < POPULATION_SIZE; i++) {
 			nests.add(newRandomSolution());
 		}
 		fittest = nests.get(0);
 
-		fitnessFunction = new WinRateFitness(decks);
+		fitnessFunction = new WinRateFitness(deckToTrain, decks);
 	}
 
 	public void evolve() {
@@ -59,7 +59,7 @@ public class CuckooLearner {
 		}
 		Collections.sort(nests);
 		// discard a portion of the worst ones
-		int discardAmount = (int) (POPULATION_SIZE * DISCARD_FRACTION);
+		int discardAmount = (int) (POPULATION_SIZE * DISCOVERY_RATE);
 		for (int k = 0; k < discardAmount; k++) {
 			CuckooAgent notFitEnough = nests.remove(nests.size() - 1);
 			System.out.println("Solution with fitness value " + notFitEnough.getFitness() + " has been removed");
