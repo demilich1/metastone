@@ -73,7 +73,7 @@ public class GameStateValueBehaviour extends Behaviour {
 		if (heuristic != null) {
 			return;
 		}
-
+		
 		RequestTrainingDataNotification request = new RequestTrainingDataNotification(player.getDeckName(), this::answerTrainingData);
 		ApplicationFacade.getInstance().notifyObservers(request);
 	}
@@ -81,7 +81,7 @@ public class GameStateValueBehaviour extends Behaviour {
 	private void answerTrainingData(TrainingData trainingData) {
 		featureVector = trainingData != null ? trainingData.getFeatureVector() : FeatureVector.getFittest();
 		heuristic = new ThreatBasedHeuristic(featureVector);
-		this.nameSuffix = trainingData != null ? "(trained)" : "(untrained)";
+		nameSuffix = trainingData != null ? "(trained)" : "(untrained)";
 	}
 
 	@Override

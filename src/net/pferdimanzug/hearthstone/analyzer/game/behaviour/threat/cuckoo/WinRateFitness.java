@@ -35,12 +35,20 @@ public class WinRateFitness implements IFitnessFunction {
 	@Override
 	public double evaluate(FeatureVector solution) {
 		GameStatistics stats = new GameStatistics();
+		double earlyWinRate = launchGames(solution, stats, 10);
+		if (earlyWinRate < 40) {
+			return earlyWinRate;
+		}
+		return launchGames(solution, stats, NUMBER_OF_GAMES - 10);
 		
+	}
+	
+	private double launchGames(FeatureVector solution, GameStatistics stats, int numberOfGames) {
 		int cores = Runtime.getRuntime().availableProcessors();
 		ExecutorService executor = Executors.newFixedThreadPool(cores);
 		
 		List<Future<Void>> futures = new ArrayList<Future<Void>>(); 
-		for (int i = 0; i < NUMBER_OF_GAMES; i++) {
+		for (int i = 0; i < numberOfGames; i++) {
 			PlayGameTask task = new PlayGameTask(stats, solution);
 			Future<Void> future = executor.submit(task);
 			futures.add(future);

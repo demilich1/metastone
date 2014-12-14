@@ -32,6 +32,14 @@ public class TrainingProxy extends Proxy<GameNotification> {
 
 	public TrainingProxy() {
 		super(NAME);
+		if (new File("./training/").mkdir()) {
+			logger.info("./training folder created");
+		}
+		try {
+			loadTrainingData();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void loadTrainingData() throws FileNotFoundException {
@@ -74,6 +82,7 @@ public class TrainingProxy extends Proxy<GameNotification> {
 	public void saveTrainingData(TrainingData trainingData) {
 		String deckName = trainingData.getDeckName();
 		FeatureVector featureVector = trainingData.getFeatureVector();
+		this.trainingData.put(deckName, featureVector);
 
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		HashMap<String, Object> saveData = new HashMap<String, Object>();
