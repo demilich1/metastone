@@ -7,7 +7,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.threat.FeatureVector
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.threat.GameStateValueBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.threat.cuckoo.CuckooLearner;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 import net.pferdimanzug.hearthstone.analyzer.game.statistics.Statistic;
 
@@ -51,10 +50,10 @@ public class PerformTrainingCommand extends SimpleCommand<GameNotification> {
 
 					Deck player1Deck = config.getDeckToTrain();
 					Deck player2Deck = config.getRandomDeck();
-					Player player1 = new Player("Learner", HeroFactory.createHero(player1Deck.getHeroClass()), player1Deck);
+					Player player1 = new Player("Learner", player1Deck);
 					player1.setBehaviour(new GameStateValueBehaviour(fittest, "(fittest)"));
 
-					Player player2 = new Player("Opponent", HeroFactory.createHero(player2Deck.getHeroClass()), player2Deck);
+					Player player2 = new Player("Opponent", player2Deck);
 					player2.setBehaviour(new GameStateValueBehaviour());
 
 					GameContext newGame = new GameContext(player1, player2, new GameLogic());
@@ -70,11 +69,11 @@ public class PerformTrainingCommand extends SimpleCommand<GameNotification> {
 
 				getFacade().sendNotification(GameNotification.TRAINING_PROGRESS_UPDATE,
 						new TrainingProgressReport(gamesCompleted, config.getNumberOfGames(), gamesWon));
-				
+
 				logger.info("Training ended");
 				FeatureVector fittest = learner.getFittest();
 				logger.info("**************Final weights: {}", fittest);
-				
+
 				// save training data
 				getFacade().sendNotification(GameNotification.SAVE_TRAINING_DATA,
 						new TrainingData(config.getDeckToTrain().getName(), fittest));

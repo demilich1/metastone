@@ -47,14 +47,13 @@ public class BattleOfDecksResultView extends BorderPane {
 		}
 
 		TableColumn<BattleDeckResult, String> nameColumn = new TableColumn<>("Deck name");
-		nameColumn.setPrefWidth(rankingTable.getWidth() / 2);
+		nameColumn.setPrefWidth(300);
 		TableColumn<BattleDeckResult, Double> winRateColumn = new TableColumn<>("Win rate");
-		winRateColumn.setPrefWidth(rankingTable.getWidth() / 2);
+		winRateColumn.setPrefWidth(300);
 
 		nameColumn.setCellValueFactory(new PropertyValueFactory<BattleDeckResult, String>("deckName"));
 		winRateColumn.setCellValueFactory(new PropertyValueFactory<BattleDeckResult, Double>("winRate"));
-		// winRateColumn.setCellFactory(ProgressBarTableCell.<BattleDeckResult>
-		// forTableColumn());
+		
 		winRateColumn.setCellFactory(new Callback<TableColumn<BattleDeckResult, Double>, TableCell<BattleDeckResult, Double>>() {
 			public TableCell<BattleDeckResult, Double> call(TableColumn<BattleDeckResult, Double> p) {
 				TableCell<BattleDeckResult, Double> cell = new TableCell<BattleDeckResult, Double>() {

@@ -14,8 +14,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -121,13 +119,10 @@ public class StartBattleOfDecksCommand extends SimpleCommand<GameNotification> {
 
 		@Override
 		public Void call() throws Exception {
-
-			Hero hero1 = HeroFactory.createHero(deck1.getHeroClass());
-			Player player1 = new Player("Player 1", hero1, deck1);
+			Player player1 = new Player("Player 1", deck1);
 			player1.setBehaviour(behaviour.clone());
 
-			Hero hero2 = HeroFactory.createHero(deck2.getHeroClass());
-			Player player2 = new Player("Player 2", hero2, deck2);
+			Player player2 = new Player("Player 2", deck2);
 			player2.setBehaviour(behaviour.clone());
 
 			GameContext newGame = new GameContext(player1, player2, new GameLogic());

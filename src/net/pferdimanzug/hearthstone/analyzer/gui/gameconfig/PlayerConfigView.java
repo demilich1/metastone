@@ -28,15 +28,15 @@ import net.pferdimanzug.hearthstone.analyzer.game.decks.DeckFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Anduin;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Guldan;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroTemplate;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Malfurion;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.MetaHero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Rexxar;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Thrall;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Uther;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Valeera;
-import net.pferdimanzug.hearthstone.analyzer.gui.IconFactory;
 import net.pferdimanzug.hearthstone.analyzer.gui.common.BehaviourStringConverter;
 import net.pferdimanzug.hearthstone.analyzer.gui.common.DeckStringConverter;
 import net.pferdimanzug.hearthstone.analyzer.gui.common.HeroStringConverter;
@@ -54,7 +54,7 @@ public class PlayerConfigView extends VBox {
 	protected ComboBox<IBehaviour> behaviourBox;
 
 	@FXML
-	protected ComboBox<Hero> heroBox;
+	protected ComboBox<HeroTemplate> heroBox;
 
 	@FXML
 	protected ComboBox<Deck> deckBox;
@@ -93,16 +93,29 @@ public class PlayerConfigView extends VBox {
 	}
 
 	private void filterDecks() {
-		HeroClass heroClass = getPlayerConfig().getHero().getHeroClass();
+		HeroClass heroClass = getPlayerConfig().getHeroTemplate().getHeroClass();
 		ObservableList<Deck> deckList = FXCollections.observableArrayList();
 
-		Deck randomDeck = DeckFactory.getRandomDeck(heroClass);
-		deckList.add(randomDeck);
-		for (Deck deck : decks) {
-			if (deck.getHeroClass() == heroClass || deck.getHeroClass() == HeroClass.ANY) {
+		if (heroClass == HeroClass.META) {
+			for (Deck deck : decks) {
+				if (deck.getHeroClass() != HeroClass.META) {
+					continue;
+				}
 				deckList.add(deck);
 			}
+		} else {
+			Deck randomDeck = DeckFactory.getRandomDeck(heroClass);
+			deckList.add(randomDeck);
+			for (Deck deck : decks) {
+				if (deck.getHeroClass() == HeroClass.META) {
+					continue;
+				}
+				if (deck.getHeroClass() == heroClass || deck.getHeroClass() == HeroClass.ANY) {
+					deckList.add(deck);
+				}
+			}
 		}
+
 		deckBox.setItems(deckList);
 		deckBox.getSelectionModel().selectFirst();
 	}
@@ -126,11 +139,11 @@ public class PlayerConfigView extends VBox {
 		playerConfig.setHideCards(newValue);
 	}
 
-	private void selectHero(Hero hero) {
-		Image heroPortrait = new Image(IconFactory.getHeroIconUrl(hero));
+	private void selectHero(HeroTemplate heroTemplate) {
+		Image heroPortrait = heroTemplate.getImage();
 		heroIcon.setImage(heroPortrait);
-		heroNameLabel.setText(hero.getName());
-		getPlayerConfig().setHero(hero);
+		heroNameLabel.setText(heroTemplate.getName());
+		getPlayerConfig().setHeroTemplate(heroTemplate);
 		filterDecks();
 	}
 
@@ -140,12 +153,13 @@ public class PlayerConfigView extends VBox {
 			behaviourList.add(new HumanBehaviour());
 		}
 
-		behaviourList.add(new PlayRandomBehaviour());
+		behaviourList.add(new GameStateValueBehaviour());
+		
 		if (selectionHint == PlayerConfigType.OPPONENT) {
 			behaviourList.add(new HumanBehaviour());
 		}
 
-		behaviourList.add(new GameStateValueBehaviour());
+		behaviourList.add(new PlayRandomBehaviour());
 
 		behaviourList.add(new GreedyOptimizeMove(new WeightedHeuristic()));
 		behaviourList.add(new NoAggressionBehaviour());
@@ -155,20 +169,21 @@ public class PlayerConfigView extends VBox {
 	}
 
 	public void setupHeroes() {
-		ObservableList<Hero> heroList = FXCollections.observableArrayList();
+		ObservableList<HeroTemplate> heroList = FXCollections.observableArrayList();
 
-		heroList.add(new Garrosh());
-		heroList.add(new Jaina());
-		heroList.add(new Valeera());
-		heroList.add(new Guldan());
-		heroList.add(new Rexxar());
-		heroList.add(new Thrall());
-		heroList.add(new Anduin());
-		heroList.add(new Uther());
-		heroList.add(new Malfurion());
+		heroList.add(Garrosh.getTemplate());
+		heroList.add(Jaina.getTemplate());
+		heroList.add(Valeera.getTemplate());
+		heroList.add(Guldan.getTemplate());
+		heroList.add(Rexxar.getTemplate());
+		heroList.add(Thrall.getTemplate());
+		heroList.add(Anduin.getTemplate());
+		heroList.add(Uther.getTemplate());
+		heroList.add(Malfurion.getTemplate());
+		heroList.add(new MetaHero());
 
 		heroBox.setItems(heroList);
-		heroBox.valueProperty().addListener((ChangeListener<Hero>) (observableValue, oldHero, newHero) -> {
+		heroBox.valueProperty().addListener((ChangeListener<HeroTemplate>) (observableValue, oldHero, newHero) -> {
 			selectHero(newHero);
 		});
 	}

@@ -2,11 +2,11 @@ package net.pferdimanzug.hearthstone.analyzer.gui.gameconfig;
 
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroTemplate;
 
 public class PlayerConfig {
 
-	private Hero hero;
+	private HeroTemplate heroTemplate;
 	private Deck deck;
 	private IBehaviour behaviour;
 	private boolean hideCards;
@@ -17,10 +17,6 @@ public class PlayerConfig {
 
 	public Deck getDeck() {
 		return deck;
-	}
-
-	public Hero getHero() {
-		return hero;
 	}
 
 	public boolean hideCards() {
@@ -35,12 +31,16 @@ public class PlayerConfig {
 		this.deck = deck;
 	}
 
-	public void setHero(Hero hero) {
-		this.hero = hero;
-	}
-
 	public void setHideCards(boolean hideCards) {
 		this.hideCards = hideCards;
+	}
+
+	public HeroTemplate getHeroTemplate() {
+		return heroTemplate;
+	}
+
+	public void setHeroTemplate(HeroTemplate heroTemplate) {
+		this.heroTemplate = heroTemplate;
 	}
 
 }

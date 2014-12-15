@@ -29,9 +29,9 @@ public class TestBase {
 	}
 	
 	protected static DebugContext createContext(Hero hero1, Hero hero2) {
-		Player player1 = new Player("P1", hero1, DeckFactory.getRandomDeck(hero1.getHeroClass()));
+		Player player1 = new Player("P1", DeckFactory.getRandomDeck(hero1.getHeroClass()));
 		player1.setBehaviour(new NullBehaviour());
-		Player player2 = new Player("P2", hero2, DeckFactory.getRandomDeck(hero2.getHeroClass()));
+		Player player2 = new Player("P2", DeckFactory.getRandomDeck(hero2.getHeroClass()));
 		player2.setBehaviour(new NullBehaviour());
 		GameLogic logic = new GameLogic();
 		DebugContext context = new DebugContext(player1, player2, logic);

@@ -10,10 +10,10 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.TransformToMinionWithMa
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
-public class Recombolator extends MinionCard {
+public class Recombobulator extends MinionCard {
 
-	public Recombolator() {
-		super("Recombolator", 3, 2, Rarity.EPIC, HeroClass.ANY, 2);
+	public Recombobulator() {
+		super("Recombobulator", 3, 2, Rarity.EPIC, HeroClass.ANY, 2);
 		setDescription("Battlecry: Transform a friendly minion into a random minion with the same Cost.");
 		setTag(GameTag.BATTLECRY);
 	}
@@ -22,8 +22,6 @@ public class Recombolator extends MinionCard {
 	public int getTypeId() {
 		return 541;
 	}
-
-
 
 	@Override
 	public Minion summon() {

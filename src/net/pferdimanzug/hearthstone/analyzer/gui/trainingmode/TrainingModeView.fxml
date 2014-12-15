@@ -19,7 +19,18 @@
    <center>
       <VBox alignment="CENTER" spacing="8.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox fx:id="playerArea" alignment="CENTER" maxHeight="400.0" BorderPane.alignment="CENTER" />
+            <Label fx:id="trainingLabel" text="Training: Special Tactics Deck">
+               <styleClass>
+                  <String fx:value="info-small" />
+                  <String fx:value="default-label" />
+               </styleClass>
+            </Label>
+            <Label fx:id="progressLabel" layoutX="488.0" layoutY="120.0" text="Label">
+               <styleClass>
+                  <String fx:value="info-small" />
+                  <String fx:value="name-small" />
+               </styleClass>
+            </Label>
             <LineChart fx:id="resultChart" title="Training results">
               <xAxis>
                 <NumberAxis label="Games played" side="BOTTOM" />

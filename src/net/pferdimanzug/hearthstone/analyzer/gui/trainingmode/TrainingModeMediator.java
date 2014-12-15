@@ -34,12 +34,13 @@ public class TrainingModeMediator extends Mediator<GameNotification> {
 					view.showProgress(progress);
 				}
 			});
-			
 			break;
 		case COMMIT_TRAININGMODE_CONFIG:
 			getFacade().sendNotification(GameNotification.SHOW_VIEW, view);
+			TrainingConfig trainingConfig = (TrainingConfig) notification.getBody();
+			view.setDeckName(trainingConfig.getDeckToTrain().getName());
 			view.startTraining();
-			getFacade().sendNotification(GameNotification.START_TRAINING, notification.getBody());
+			getFacade().sendNotification(GameNotification.START_TRAINING, trainingConfig);
 			break;
 		case REPLY_DECKS:
 			configView.injectDecks((List<Deck>) notification.getBody());

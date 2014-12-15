@@ -62,7 +62,7 @@ public class HeroToken extends GameToken {
 	public void setHero(Player player) {
 		Hero hero = player.getHero();
 		DigitFactory.showPreRenderedDigits(attackAnchor, hero.getAttack());
-		Image portraitImage = new Image(IconFactory.getHeroIconUrl(hero));
+		Image portraitImage = new Image(IconFactory.getHeroIconUrl(hero.getHeroClass()));
 		portrait.setImage(portraitImage);
 		Image heroPowerImage = new Image(IconFactory.getHeroPowerIconUrl(hero.getHeroPower()));
 		heroPowerIcon.setImage(heroPowerImage);

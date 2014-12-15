@@ -7,7 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroTemplate;
 import net.pferdimanzug.hearthstone.analyzer.gui.IconFactory;
 import net.pferdimanzug.hearthstone.analyzer.gui.gameconfig.PlayerConfig;
 
@@ -38,9 +38,9 @@ public class PlayerInfoView extends Pane {
 	}
 	
 	public void setInfo(PlayerConfig playerConfig) {
-		Hero hero = playerConfig.getHero();
-		classIcon.setImage(IconFactory.getClassIcon(hero.getHeroClass()));
-		heroLabel.setText(hero.getName());
+		HeroTemplate heroTemplate = playerConfig.getHeroTemplate();
+		classIcon.setImage(IconFactory.getClassIcon(heroTemplate.getHeroClass()));
+		heroLabel.setText(heroTemplate.getName());
 		deckLabel.setText(playerConfig.getDeck().getName());
 		behaviourLabel.setText(playerConfig.getBehaviour().getName());
 	}

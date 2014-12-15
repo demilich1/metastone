@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
@@ -16,7 +17,13 @@ import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 public class TrainingModeView extends BorderPane implements EventHandler<ActionEvent> {
 
 	@FXML
-	protected Button backButton;
+	private Button backButton;
+	
+	@FXML
+	private Label trainingLabel;
+	
+	@FXML
+	private Label progressLabel;
 
 	@FXML
 	private LineChart<Number, Number> resultChart;
@@ -41,13 +48,17 @@ public class TrainingModeView extends BorderPane implements EventHandler<ActionE
 
 	@Override
 	public void handle(ActionEvent actionEvent) {
-
 		if (actionEvent.getSource() == backButton) {
 			ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU);
 		}
 	}
+	
+	public void setDeckName(String deckname) {
+		trainingLabel.setText("Training: " + deckname);
+	}
 
 	public void showProgress(TrainingProgressReport progress) {
+		progressLabel.setText(progress.getGamesCompleted() + " out of " + progress.getGamesTotal() + " games completed");
 		int progressMark = Math.max(progress.getGamesTotal() / 100, 10);
 		if (progress.getGamesCompleted() == 0 || progress.getGamesCompleted() % progressMark != 0) {
 			return;

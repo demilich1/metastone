@@ -14,8 +14,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.threat.FeatureVector;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.threat.GameStateValueBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 import net.pferdimanzug.hearthstone.analyzer.game.statistics.GameStatistics;
 import net.pferdimanzug.hearthstone.analyzer.game.statistics.Statistic;
@@ -98,13 +96,11 @@ public class WinRateFitness implements IFitnessFunction {
 		@Override
 		public Void call() throws Exception {
 			Deck deck1 = deckToTrain;
-			Hero hero1 = HeroFactory.createHero(deck1.getHeroClass());
-			Player player1 = new Player("Player 1 (learning)", hero1, deck1);
+			Player player1 = new Player("Player 1 (learning)", deck1);
 			player1.setBehaviour(new GameStateValueBehaviour(solution, "(current)"));
 
 			Deck deck2 = getRandomDeck();
-			Hero hero2 = HeroFactory.createHero(deck2.getHeroClass());
-			Player player2 = new Player("Player 2 (static)", hero2, deck2);
+			Player player2 = new Player("Player 2 (static)", deck2);
 			//player2.setBehaviour(new GameStateValueBehaviour(FeatureVector.getFittest(), "(former fittest)"));
 			player2.setBehaviour(new GameStateValueBehaviour());
 

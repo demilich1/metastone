@@ -11,8 +11,6 @@ import java.util.concurrent.Future;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 import net.pferdimanzug.hearthstone.analyzer.gui.gameconfig.GameConfig;
 import net.pferdimanzug.hearthstone.analyzer.gui.gameconfig.PlayerConfig;
@@ -48,13 +46,14 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 				int cores = Runtime.getRuntime().availableProcessors();
 				logger.info("Starting simulation on " + cores + " cores");
 				ExecutorService executor = Executors.newFixedThreadPool(cores);
-				//ExecutorService executor = Executors.newSingleThreadExecutor();
+				// ExecutorService executor =
+				// Executors.newSingleThreadExecutor();
 
-				List<Future<Void>> futures = new ArrayList<Future<Void>>(); 
+				List<Future<Void>> futures = new ArrayList<Future<Void>>();
 				// send initial status update
 				Tuple<Integer, Integer> progress = new Tuple<>(0, gameConfig.getNumberOfGames());
 				getFacade().sendNotification(GameNotification.SIMULATION_PROGRESS_UPDATE, progress);
-				
+
 				// queue up all games as tasks
 				lastUpdate = System.currentTimeMillis();
 				for (int i = 0; i < gameConfig.getNumberOfGames(); i++) {
@@ -126,20 +125,18 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 			PlayerConfig playerConfig1 = gameConfig.getPlayerConfig1();
 			PlayerConfig playerConfig2 = gameConfig.getPlayerConfig2();
 
-			Hero hero1 = HeroFactory.createHero(playerConfig1.getHero().getHeroClass());
-			Player player1 = new Player("Player 1", hero1, playerConfig1.getDeck());
+			Player player1 = new Player("Player 1", playerConfig1.getDeck());
 			player1.setBehaviour(playerConfig1.getBehaviour().clone());
 
-			Hero hero2 = HeroFactory.createHero(playerConfig2.getHero().getHeroClass());
-			Player player2 = new Player("Player 2", hero2, playerConfig2.getDeck());
+			Player player2 = new Player("Player 2", playerConfig2.getDeck());
 			player2.setBehaviour(playerConfig2.getBehaviour().clone());
 
 			GameContext newGame = new GameContext(player1, player2, new GameLogic());
 			newGame.play();
-			
+
 			onGameComplete(gameConfig, newGame);
 			newGame.dispose();
-			
+
 			return null;
 		}
 

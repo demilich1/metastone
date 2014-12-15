@@ -91,7 +91,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes.neutral.PilotedShredder;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes.neutral.PilotedSkyGolem;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes.neutral.Puddlestomper;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes.neutral.Recombolator;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes.neutral.Recombobulator;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes.neutral.SaltyDog;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes.neutral.ShipsCannon;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.goblinsvsgnomes.neutral.SneedsOldShredder;
@@ -615,7 +615,7 @@ public class CardCatalogue {
 		cards.add(new PilotedShredder());
 		cards.add(new PilotedSkyGolem());
 		cards.add(new Puddlestomper());
-		cards.add(new Recombolator());
+		cards.add(new Recombobulator());
 		cards.add(new SaltyDog());
 		cards.add(new ShipsCannon());
 		cards.add(new SneedsOldShredder());

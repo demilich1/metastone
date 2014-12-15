@@ -19,11 +19,11 @@ public class StartGameCommand extends SimpleCommand<GameNotification> {
 		PlayerConfig playerConfig1 = gameConfig.getPlayerConfig1();
 		PlayerConfig playerConfig2 = gameConfig.getPlayerConfig2();
 
-		Player player1 = new Player("Player 1", playerConfig1.getHero(), playerConfig1.getDeck());
+		Player player1 = new Player("Player 1", playerConfig1.getDeck());
 		player1.setHideCards(playerConfig1.hideCards());
 		player1.setBehaviour(playerConfig1.getBehaviour());
 
-		Player player2 = new Player("Player 2", playerConfig2.getHero(), playerConfig2.getDeck());
+		Player player2 = new Player("Player 2", playerConfig2.getDeck());
 		player2.setHideCards(playerConfig2.hideCards());
 		player2.setBehaviour(playerConfig2.getBehaviour());
 

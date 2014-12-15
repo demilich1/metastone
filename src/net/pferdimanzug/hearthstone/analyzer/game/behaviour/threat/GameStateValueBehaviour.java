@@ -72,7 +72,7 @@ public class GameStateValueBehaviour extends Behaviour {
 
 	@Override
 	public String getName() {
-		return "Game state value V2 " + nameSuffix;
+		return "Game state value " + nameSuffix;
 	}
 
 	@Override

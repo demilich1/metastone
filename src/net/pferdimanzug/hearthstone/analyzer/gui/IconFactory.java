@@ -1,8 +1,8 @@
 package net.pferdimanzug.hearthstone.analyzer.gui;
+
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.HeroPower;
 import net.pferdimanzug.hearthstone.analyzer.gui.dialog.DialogType;
@@ -38,14 +38,14 @@ public class IconFactory {
 			break;
 		default:
 			break;
-		
+
 		}
 		return new Image(iconPath);
 	}
 
-	public static String getHeroIconUrl(Hero hero) {
+	public static String getHeroIconUrl(HeroClass heroClass) {
 		String iconPath = RESOURCE_PATH + "/img/heroes/";
-		switch (hero.getHeroClass()) {
+		switch (heroClass) {
 		case DRUID:
 			iconPath += "malfurion";
 			break;
@@ -75,6 +75,7 @@ public class IconFactory {
 			break;
 		default:
 		case ANY:
+			iconPath += "unknown";
 			break;
 
 		}
@@ -118,7 +119,7 @@ public class IconFactory {
 		iconPath += ".png";
 		return iconPath;
 	}
-	
+
 	public static String getImageUrl(String imageName) {
 		return RESOURCE_PATH + "/img/" + imageName;
 	}
@@ -153,7 +154,7 @@ public class IconFactory {
 		String iconPath = RESOURCE_PATH + "/img/common/arrow_down_blue.png";
 		return new Image(iconPath);
 	}
-	
+
 	public static Image getTargetIcon() {
 		String iconPath = RESOURCE_PATH + "/img/common/target.png";
 		return new Image(iconPath);

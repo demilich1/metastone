@@ -9,12 +9,14 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCatalogue;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
+import net.pferdimanzug.hearthstone.analyzer.game.decks.MetaDeck;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.validation.DefaultDeckValidator;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.validation.IDeckValidator;
@@ -94,17 +96,33 @@ public class DeckProxy extends Proxy<GameNotification> {
 			}
 			HeroClass heroClass = HeroClass.valueOf((String) map.get("heroClass"));
 			String deckName = (String) map.get("name");
-			Deck deck = new Deck(heroClass);
-			deck.setName(deckName);
-			@SuppressWarnings("unchecked")
-			List<Double> cardIds = (List<Double>) map.get("cards");
-			for (Double doubleCardId : cardIds) {
-				int cardId = doubleCardId.intValue();
-				Card card = CardCatalogue.getCardById(cardId);
-				deck.getCards().add(card);
+			Deck deck = null;
+			if (map.containsKey("decks")) {
+				deck = parseMetaDeck(map);
+			} else {
+				deck = parseStandardDeck(heroClass, map);
 			}
+			deck.setName(deckName);
 			decks.add(deck);
 		}
+	}
+
+	private Deck parseStandardDeck(HeroClass heroClass, Map<String, Object> map) {
+		Deck deck = new Deck(heroClass);
+		@SuppressWarnings("unchecked")
+		List<Double> cardIds = (List<Double>) map.get("cards");
+		for (Double doubleCardId : cardIds) {
+			int cardId = doubleCardId.intValue();
+			Card card = CardCatalogue.getCardById(cardId);
+			deck.getCards().add(card);
+		}
+		return deck;
+	}
+
+	private Deck parseMetaDeck(Map<String, Object> map) {
+		@SuppressWarnings("unchecked")
+		List<String> referencedDecks = (List<String>) map.get("decks");
+		return new MetaDeck(referencedDecks);
 	}
 
 	public void removeCardFromDeck(Card card) {

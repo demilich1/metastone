@@ -6,8 +6,11 @@ import java.util.List;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
+import net.pferdimanzug.hearthstone.analyzer.game.decks.MetaDeck;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.CustomCloneable;
 import net.pferdimanzug.hearthstone.analyzer.game.statistics.GameStatistics;
@@ -53,10 +56,14 @@ public class Player extends CustomCloneable {
 		this.getStatistics().merge(otherPlayer.getStatistics());
 	}
 	
-	public Player(String name, Hero hero, Deck deck) {
+	public Player(String name, Deck deck) {
 		this.name = name;
-		this.setHero(hero);
+		if (deck.getHeroClass() == HeroClass.META) {
+			MetaDeck metaDeck = (MetaDeck) deck;
+			metaDeck.selectRandom();
+		}
 		this.deck = deck.getCardsCopy();
+		this.setHero(HeroFactory.createHero(deck.getHeroClass()));
 		this.deckName = deck.getName();
 	}
 	
