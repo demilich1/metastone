@@ -71,10 +71,6 @@ public class GameContext implements Cloneable, IDisposable {
 		triggerManager.addTrigger(trigger);
 	}
 
-	public void removeTrigger(IGameEventListener trigger) {
-		triggerManager.addTrigger(trigger);
-	}
-
 	@Override
 	public GameContext clone() {
 		GameLogic logicClone = getLogic().clone();
@@ -109,11 +105,6 @@ public class GameContext implements Cloneable, IDisposable {
 		getCardCostModifiers().clear();
 		triggerManager.dispose();
 		environment.clear();
-	}
-
-	public void printCurrentTriggers() {
-		logger.info("Active spelltriggers:");
-		triggerManager.printCurrentTriggers();
 	}
 
 	private void endGame() {
@@ -328,6 +319,15 @@ public class GameContext implements Cloneable, IDisposable {
 		performAction(activePlayer, nextAction);
 
 		return nextAction.getActionType() != ActionType.END_TURN;
+	}
+
+	public void printCurrentTriggers() {
+		logger.info("Active spelltriggers:");
+		triggerManager.printCurrentTriggers();
+	}
+
+	public void removeTrigger(IGameEventListener trigger) {
+		triggerManager.addTrigger(trigger);
 	}
 
 	public void removeTriggersAssociatedWith(EntityReference entityReference) {

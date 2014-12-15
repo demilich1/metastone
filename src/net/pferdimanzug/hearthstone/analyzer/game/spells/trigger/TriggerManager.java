@@ -26,12 +26,6 @@ public class TriggerManager implements Cloneable, IDisposable {
 		}
 	}
 	
-	public void removeTrigger(IGameEventListener trigger) {
-		if (!triggers.remove(trigger)) {
-			System.out.println("Failed to remove trigger " + trigger);
-		}
-	}
-
 	@Override
 	public TriggerManager clone() {
 		return new TriggerManager(this);
@@ -78,19 +72,25 @@ public class TriggerManager implements Cloneable, IDisposable {
 		return relevantTriggers;
 	}
 
-	public void removeTriggersAssociatedWith(EntityReference entityReference) {
-		for (IGameEventListener trigger : getListSnapshot(triggers)) {
-			if (trigger.getHostReference().equals(entityReference)) {
-				triggers.remove(trigger);
-			}
-		}
-	}
-	
 	public void printCurrentTriggers() {
 		for (IGameEventListener trigger : triggers) {
 			System.out.println();
 			System.out.println(trigger.toString());
 			System.out.println();
+		}
+	}
+
+	public void removeTrigger(IGameEventListener trigger) {
+		if (!triggers.remove(trigger)) {
+			System.out.println("Failed to remove trigger " + trigger);
+		}
+	}
+	
+	public void removeTriggersAssociatedWith(EntityReference entityReference) {
+		for (IGameEventListener trigger : getListSnapshot(triggers)) {
+			if (trigger.getHostReference().equals(entityReference)) {
+				triggers.remove(trigger);
+			}
 		}
 	}
 

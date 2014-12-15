@@ -1,7 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.behaviour.threat;
 
 public enum WeightedFeature {
-	//TODO: do we need this two times(self and opponent)?
 	RED_MODIFIER,
 	YELLOW_MODIFIER,
 	OWN_HP_FACTOR,
@@ -19,5 +18,5 @@ public enum WeightedFeature {
 	MINION_SPELL_POWER_MODIFIER,
 	MINION_STEALTHED_MODIFIER,
 	MINION_UNTARGETABLE_BY_SPELLS_MODIFIER,
-
+	HARD_REMOVAL_VALUE
 }

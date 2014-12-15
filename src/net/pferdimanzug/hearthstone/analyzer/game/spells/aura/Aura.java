@@ -19,7 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Aura extends SpellTrigger {
-	
+
 	private static Logger logger = LoggerFactory.getLogger(Aura.class);
 
 	private EntityReference targets;
@@ -34,7 +34,7 @@ public class Aura extends SpellTrigger {
 		removeAuraEffect.setSource(SpellSource.SPELL_TRIGGER);
 		this.targets = targetSelection;
 	}
-	
+
 	protected boolean affects(GameContext context, Entity target) {
 		if (target.getEntityType() != EntityType.MINION) {
 			return false;
@@ -50,7 +50,7 @@ public class Aura extends SpellTrigger {
 
 		return true;
 	}
-	
+
 	@Override
 	public Aura clone() {
 		Aura clone = (Aura) super.clone();

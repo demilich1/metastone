@@ -20,6 +20,10 @@ public class TrainingConfig {
 		return decks;
 	}
 
+	public Deck getDeckToTrain() {
+		return deckToTrain;
+	}
+
 	public int getNumberOfGames() {
 		return numberOfGames;
 	}
@@ -30,10 +34,6 @@ public class TrainingConfig {
 
 	public void setNumberOfGames(int numberOfGames) {
 		this.numberOfGames = numberOfGames;
-	}
-
-	public Deck getDeckToTrain() {
-		return deckToTrain;
 	}
 
 }

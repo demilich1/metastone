@@ -42,6 +42,10 @@ public class TrainingProxy extends Proxy<GameNotification> {
 		}
 	}
 
+	public TrainingData getTrainingData(String deckName) {
+		return trainingData.containsKey(deckName) ? new TrainingData(deckName, trainingData.get(deckName)) : null;
+	}
+
 	public void loadTrainingData() throws FileNotFoundException {
 		trainingData.clear();
 		File folder = new File("./training/");
@@ -101,10 +105,6 @@ public class TrainingProxy extends Proxy<GameNotification> {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public TrainingData getTrainingData(String deckName) {
-		return trainingData.containsKey(deckName) ? new TrainingData(deckName, trainingData.get(deckName)) : null;
 	}
 
 }

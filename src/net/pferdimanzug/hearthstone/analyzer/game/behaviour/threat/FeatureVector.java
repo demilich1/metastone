@@ -24,6 +24,7 @@ public class FeatureVector implements Cloneable {
 		defaultVector.set(WeightedFeature.MINION_SPELL_POWER_MODIFIER, 1);
 		defaultVector.set(WeightedFeature.MINION_STEALTHED_MODIFIER, 1);
 		defaultVector.set(WeightedFeature.MINION_UNTARGETABLE_BY_SPELLS_MODIFIER, 1.5);
+		defaultVector.set(WeightedFeature.HARD_REMOVAL_VALUE, 2);
 		return defaultVector;
 	}
 
@@ -46,10 +47,17 @@ public class FeatureVector implements Cloneable {
 		defaultVector.set(WeightedFeature.MINION_SPELL_POWER_MODIFIER, 3.841);
 		defaultVector.set(WeightedFeature.MINION_STEALTHED_MODIFIER, 1.281);
 		defaultVector.set(WeightedFeature.MINION_UNTARGETABLE_BY_SPELLS_MODIFIER, 0);
+		defaultVector.set(WeightedFeature.HARD_REMOVAL_VALUE, 2);
 		return defaultVector;
 	}
 
 	private final Map<WeightedFeature, Double> values = new EnumMap<WeightedFeature, Double>(WeightedFeature.class);
+
+	public FeatureVector() {
+		for (WeightedFeature feature : WeightedFeature.values()) {
+			set(feature, 0);
+		}
+	}
 
 	@Override
 	public FeatureVector clone() {
@@ -61,7 +69,7 @@ public class FeatureVector implements Cloneable {
 	}
 
 	public double get(WeightedFeature param) {
-		return getValues().get(param);
+		return values.get(param);
 	}
 
 	public Map<WeightedFeature, Double> getValues() {

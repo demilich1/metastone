@@ -43,16 +43,16 @@ public class Weapon extends Actor {
 		return !hasStatus(GameTag.DURABILITY) || getTagValue(GameTag.WEAPON_DAMAGE) <= 0;
 	}
 
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-	
 	public void onEquip(GameContext context, Player player) {
 		
 	}
 	
 	public void onUnequip(GameContext context, Player player) {
 		
+	}
+	
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 	@Override

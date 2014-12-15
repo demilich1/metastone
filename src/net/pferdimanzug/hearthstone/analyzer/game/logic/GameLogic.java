@@ -126,11 +126,6 @@ public class GameLogic implements Cloneable {
 		removeCard(playerId, card);
 	}
 
-	public void discardCard(Player player, Card card) {
-		logger.debug("{} discards {}", player.getName(), card);
-		removeCard(player.getId(), card);
-	}
-
 	public int applyAmplify(Player player, int baseValue) {
 		int amplify = 1 + getTotalTagValue(player, GameTag.SPELL_AMPLIFY_MULTIPLIER);
 		return baseValue * amplify;
@@ -411,13 +406,9 @@ public class GameLogic implements Cloneable {
 		return ThreadLocalRandom.current().nextBoolean() ? playerIds[0] : playerIds[1];
 	}
 
-	public void removeCard(int playerId, Card card) {
-		Player player = context.getPlayer(playerId);
-		card.setLocation(CardLocation.VOID);
-		if (card instanceof IGameEventListener) {
-			removeSpelltriggers(card);
-		}
-		player.getHand().remove(card);
+	public void discardCard(Player player, Card card) {
+		logger.debug("{} discards {}", player.getName(), card);
+		removeCard(player.getId(), card);
 	}
 
 	public Card drawCard(int playerId) {
@@ -599,6 +590,17 @@ public class GameLogic implements Cloneable {
 		return manaCost;
 	}
 
+	public List<IGameEventListener> getSecrets(Player player) {
+		List<IGameEventListener> secrets = context.getTriggersAssociatedWith(player.getHero().getReference());
+		for (Iterator<IGameEventListener> iterator = secrets.iterator(); iterator.hasNext();) {
+			IGameEventListener trigger = iterator.next();
+			if (!(trigger instanceof Secret)) {
+				iterator.remove();
+			}
+		}
+		return secrets;
+	}
+
 	public int getTotalTagValue(GameTag tag) {
 		int total = 0;
 		for (Player player : context.getPlayers()) {
@@ -777,12 +779,13 @@ public class GameLogic implements Cloneable {
 		}
 		context.getOpponent(player).getMinions().remove(minion);
 		player.getMinions().add(minion);
-		// TODO: we need to change the owner of all spelltriggers as well
 		minion.setOwner(player.getId());
 		List<IGameEventListener> triggers = context.getTriggersAssociatedWith(minion.getReference());
+		removeSpelltriggers(minion);
 		for (IGameEventListener trigger : triggers) {
-			trigger.setOwner(player.getId());
+			addGameEventListener(player, trigger, minion);
 		}
+		context.fireGameEvent(new BoardChangedEvent(context));
 	}
 
 	public void modifyCurrentMana(int playerId, int mana) {
@@ -949,6 +952,15 @@ public class GameLogic implements Cloneable {
 		entity.setTag(GameTag.NUMBER_OF_ATTACKS, attacks);
 	}
 
+	public void removeCard(int playerId, Card card) {
+		Player player = context.getPlayer(playerId);
+		card.setLocation(CardLocation.VOID);
+		if (card instanceof IGameEventListener) {
+			removeSpelltriggers(card);
+		}
+		player.getHand().remove(card);
+	}
+
 	public void removeMinion(Minion minion) {
 		removeSpelltriggers(minion);
 
@@ -960,17 +972,6 @@ public class GameLogic implements Cloneable {
 		owner.getMinions().remove(minion);
 		owner.getGraveyard().add(minion);
 		context.fireGameEvent(new BoardChangedEvent(context));
-	}
-
-	public List<IGameEventListener> getSecrets(Player player) {
-		List<IGameEventListener> secrets = context.getTriggersAssociatedWith(player.getHero().getReference());
-		for (Iterator<IGameEventListener> iterator = secrets.iterator(); iterator.hasNext();) {
-			IGameEventListener trigger = iterator.next();
-			if (!(trigger instanceof Secret)) {
-				iterator.remove();
-			}
-		}
-		return secrets;
 	}
 
 	public void removeSecrets(Player player) {

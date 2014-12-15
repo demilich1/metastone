@@ -43,6 +43,10 @@ public class WinRateFitness implements IFitnessFunction {
 		
 	}
 	
+	private Deck getRandomDeck() {
+		return decks.get(ThreadLocalRandom.current().nextInt(decks.size()));
+	}
+	
 	private double launchGames(FeatureVector solution, GameStatistics stats, int numberOfGames) {
 		int cores = Runtime.getRuntime().availableProcessors();
 		ExecutorService executor = Executors.newFixedThreadPool(cores);
@@ -78,10 +82,6 @@ public class WinRateFitness implements IFitnessFunction {
 		}
 		
 		return stats.getDouble(Statistic.WIN_RATE) * 100;
-	}
-	
-	private Deck getRandomDeck() {
-		return decks.get(ThreadLocalRandom.current().nextInt(decks.size()));
 	}
 	
 	

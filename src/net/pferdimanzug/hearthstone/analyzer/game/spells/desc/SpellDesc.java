@@ -41,12 +41,12 @@ public class SpellDesc extends CustomCloneable {
 		return clone;
 	}
 
-	public Object get(SpellArg spellArg) {
-		return arguments.get(spellArg);
-	}
-	
 	public boolean contains(SpellArg spellArg) {
 		return arguments.containsKey(spellArg);
+	}
+	
+	public Object get(SpellArg spellArg) {
+		return arguments.get(spellArg);
 	}
 	
 	public boolean getBool(SpellArg spellArg) {

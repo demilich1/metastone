@@ -56,6 +56,12 @@ public class GameStateValueBehaviour extends Behaviour {
 		return score;
 	}
 
+	private void answerTrainingData(TrainingData trainingData) {
+		featureVector = trainingData != null ? trainingData.getFeatureVector() : FeatureVector.getFittest();
+		heuristic = new ThreatBasedHeuristic(featureVector);
+		nameSuffix = trainingData != null ? "(trained)" : "(untrained)";
+	}
+
 	@Override
 	public IBehaviour clone() {
 		if (featureVector != null) {
@@ -66,22 +72,7 @@ public class GameStateValueBehaviour extends Behaviour {
 
 	@Override
 	public String getName() {
-		return "Game state value " + nameSuffix;
-	}
-
-	private void requestTrainingData(Player player) {
-		if (heuristic != null) {
-			return;
-		}
-		
-		RequestTrainingDataNotification request = new RequestTrainingDataNotification(player.getDeckName(), this::answerTrainingData);
-		ApplicationFacade.getInstance().notifyObservers(request);
-	}
-
-	private void answerTrainingData(TrainingData trainingData) {
-		featureVector = trainingData != null ? trainingData.getFeatureVector() : FeatureVector.getFittest();
-		heuristic = new ThreatBasedHeuristic(featureVector);
-		nameSuffix = trainingData != null ? "(trained)" : "(untrained)";
+		return "Game state value V2 " + nameSuffix;
 	}
 
 	@Override
@@ -122,6 +113,15 @@ public class GameStateValueBehaviour extends Behaviour {
 		logger.debug("Selecting best action {} with score {}", bestAction, bestScore);
 
 		return bestAction;
+	}
+
+	private void requestTrainingData(Player player) {
+		if (heuristic != null) {
+			return;
+		}
+		
+		RequestTrainingDataNotification request = new RequestTrainingDataNotification(player.getDeckName(), this::answerTrainingData);
+		ApplicationFacade.getInstance().notifyObservers(request);
 	}
 
 }
