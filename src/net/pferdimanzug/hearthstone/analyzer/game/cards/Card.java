@@ -89,6 +89,18 @@ public abstract class Card extends Entity {
 		if (filter == null) {
 			return true;
 		}
+		if (getRarity().toString().toLowerCase().contains(filter)) {
+			return true;
+		}
+		String className = getClass().getName();
+		if (filter.contains("gvg") && className.contains("goblins")) {
+			return true;
+		} else if (filter.contains("naxx") && className.contains("naxx")) {
+			return true;
+		} else if ((filter.contains("classic") || filter.contains("vanilla")) && !className.contains("naxx")
+				&& !className.contains("goblins")) {
+			return true;
+		}
 		String lowerCaseName = getName().toLowerCase();
 		return lowerCaseName.contains(filter);
 	}
@@ -102,7 +114,7 @@ public abstract class Card extends Entity {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public void setLocation(CardLocation location) {
 		this.location = location;
 	}

@@ -1,3 +1,5 @@
 Minions with STEALTHED do not loose this property when a damaging spelltrigger is set off (Knife Juggler)
 
 Class specific:
+
+Tracking is not implemented correctly
