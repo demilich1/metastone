@@ -8,9 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.WildPyr
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.MindBlast;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock.Corruption;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Anduin;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Guldan;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
 import org.testng.Assert;
@@ -21,7 +19,7 @@ public class TechnicalTests extends TestBase {
 	
 	@Test
 	public void testDoubleCorruption() {
-		GameContext context = createContext(new Guldan(), new Garrosh());
+		GameContext context = createContext(HeroClass.WARLOCK, HeroClass.WARRIOR);
 		Player warlock = context.getPlayer1();
 		warlock.setMana(10);
 		Player warrior = context.getPlayer2();
@@ -53,7 +51,7 @@ public class TechnicalTests extends TestBase {
 	
 	@Test
 	public void testTriplePyromancer() {
-		GameContext context = createContext(new Anduin(), new Garrosh());
+		GameContext context = createContext(HeroClass.PRIEST, HeroClass.WARRIOR);
 		Player player1 = context.getPlayer1();
 		player1.setMana(10);
 		

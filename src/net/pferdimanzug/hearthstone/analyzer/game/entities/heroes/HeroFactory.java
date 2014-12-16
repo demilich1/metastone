@@ -26,11 +26,10 @@ public class HeroFactory {
 			return new Garrosh();
 		default:
 			logger.error("Cannot instantiate heroClass {}", heroClass);
-			break;
+			throw new RuntimeException("Cannot instantiate heroClass " + heroClass);
 		}
-		return null;
 	}
-	
+
 	private final static Logger logger = LoggerFactory.getLogger(HeroFactory.class);
 
 }

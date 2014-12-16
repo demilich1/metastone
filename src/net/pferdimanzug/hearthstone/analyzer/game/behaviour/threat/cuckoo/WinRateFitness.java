@@ -17,11 +17,12 @@ import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 import net.pferdimanzug.hearthstone.analyzer.game.statistics.GameStatistics;
 import net.pferdimanzug.hearthstone.analyzer.game.statistics.Statistic;
+import net.pferdimanzug.hearthstone.analyzer.gui.gameconfig.PlayerConfig;
 
 public class WinRateFitness implements IFitnessFunction {
-	
+
 	private static final int NUMBER_OF_GAMES = 50;
-	
+
 	private final Deck deckToTrain;
 	private final List<Deck> decks;
 
@@ -38,18 +39,18 @@ public class WinRateFitness implements IFitnessFunction {
 			return earlyWinRate;
 		}
 		return launchGames(solution, stats, NUMBER_OF_GAMES - 10);
-		
+
 	}
-	
+
 	private Deck getRandomDeck() {
 		return decks.get(ThreadLocalRandom.current().nextInt(decks.size()));
 	}
-	
+
 	private double launchGames(FeatureVector solution, GameStatistics stats, int numberOfGames) {
 		int cores = Runtime.getRuntime().availableProcessors();
 		ExecutorService executor = Executors.newFixedThreadPool(cores);
-		
-		List<Future<Void>> futures = new ArrayList<Future<Void>>(); 
+
+		List<Future<Void>> futures = new ArrayList<Future<Void>>();
 		for (int i = 0; i < numberOfGames; i++) {
 			PlayGameTask task = new PlayGameTask(stats, solution);
 			Future<Void> future = executor.submit(task);
@@ -78,11 +79,10 @@ public class WinRateFitness implements IFitnessFunction {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return stats.getDouble(Statistic.WIN_RATE) * 100;
 	}
-	
-	
+
 	private class PlayGameTask implements Callable<Void> {
 
 		private final GameStatistics stats;
@@ -95,21 +95,20 @@ public class WinRateFitness implements IFitnessFunction {
 
 		@Override
 		public Void call() throws Exception {
-			Deck deck1 = deckToTrain;
-			Player player1 = new Player("Player 1 (learning)", deck1);
-			player1.setBehaviour(new GameStateValueBehaviour(solution, "(current)"));
+			PlayerConfig player1Config = new PlayerConfig(deckToTrain, new GameStateValueBehaviour(solution, "(current)"));
+			player1Config.setName("Player 1 (learning)");
+			Player player1 = new Player(player1Config);
 
-			Deck deck2 = getRandomDeck();
-			Player player2 = new Player("Player 2 (static)", deck2);
-			//player2.setBehaviour(new GameStateValueBehaviour(FeatureVector.getFittest(), "(former fittest)"));
-			player2.setBehaviour(new GameStateValueBehaviour());
+			PlayerConfig player2Config = new PlayerConfig(getRandomDeck(), new GameStateValueBehaviour());
+			player2Config.setName("Player 2 (static)");
+			Player player2 = new Player(player2Config);
 
 			GameContext newGame = new GameContext(player1, player2, new GameLogic());
 			newGame.play();
 			synchronized (stats) {
 				stats.merge(player1.getStatistics());
 			}
-			
+
 			return null;
 		}
 

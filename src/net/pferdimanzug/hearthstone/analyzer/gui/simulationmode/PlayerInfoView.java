@@ -40,7 +40,7 @@ public class PlayerInfoView extends Pane {
 	public void setInfo(PlayerConfig playerConfig) {
 		HeroTemplate heroTemplate = playerConfig.getHeroTemplate();
 		classIcon.setImage(IconFactory.getClassIcon(heroTemplate.getHeroClass()));
-		heroLabel.setText(heroTemplate.getName());
+		heroLabel.setText(playerConfig.getName());
 		deckLabel.setText(playerConfig.getDeck().getName());
 		behaviourLabel.setText(playerConfig.getBehaviour().getName());
 	}

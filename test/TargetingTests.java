@@ -10,8 +10,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.Shieldb
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.Wisp;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -21,7 +20,7 @@ public class TargetingTests extends TestBase {
 	
 	@Test
 	public void testTaunt() {
-		GameContext context = createContext(new Jaina(), new Garrosh());
+		GameContext context = createContext(HeroClass.MAGE, HeroClass.WARRIOR);
 		Player mage = context.getPlayer1();
 		Player victim = context.getPlayer2();
 		

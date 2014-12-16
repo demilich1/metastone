@@ -19,12 +19,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.MindBlas
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.Thoughtsteal;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Anduin;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Malfurion;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Rexxar;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Thrall;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SetHpSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SilenceSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
@@ -37,7 +32,7 @@ public class AdvancedMechanicTests extends BasicTests {
 
 	@Test
 	public void testChooseOne() {
-		GameContext context = createContext(new Malfurion(), new Garrosh());
+		GameContext context = createContext(HeroClass.DRUID, HeroClass.WARRIOR);
 		Player player = context.getPlayer1();
 		Player opponent = context.getPlayer2();
 		player.getHand().removeAll();
@@ -67,7 +62,7 @@ public class AdvancedMechanicTests extends BasicTests {
 
 	@Test
 	public void testCopyCards() {
-		GameContext context = createContext(new Anduin(), new Garrosh());
+		GameContext context = createContext(HeroClass.PRIEST, HeroClass.WARRIOR);
 		Player player = context.getPlayer1();
 		Player opponent = context.getPlayer2();
 		player.getHand().removeAll();
@@ -83,7 +78,7 @@ public class AdvancedMechanicTests extends BasicTests {
 
 	@Test
 	public void testDivineShield() {
-		GameContext context = createContext(new Jaina(), new Garrosh());
+		GameContext context = createContext(HeroClass.MAGE, HeroClass.WARRIOR);
 		Player mage = context.getPlayer1();
 		mage.setMana(10);
 		Player warrior = context.getPlayer2();
@@ -116,7 +111,7 @@ public class AdvancedMechanicTests extends BasicTests {
 
 	@Test
 	public void testEnrage() {
-		GameContext context = createContext(new Jaina(), new Anduin());
+		GameContext context = createContext(HeroClass.MAGE, HeroClass.PRIEST);
 		Player mage = context.getPlayer1();
 		mage.setMana(10);
 		Player priest = context.getPlayer2();
@@ -156,7 +151,7 @@ public class AdvancedMechanicTests extends BasicTests {
 
 	@Test
 	public void testOverload() {
-		GameContext context = createContext(new Thrall(), new Garrosh());
+		GameContext context = createContext(HeroClass.SHAMAN, HeroClass.WARRIOR);
 		Player player = context.getPlayer1();
 		int playerId = player.getId();
 
@@ -181,7 +176,7 @@ public class AdvancedMechanicTests extends BasicTests {
 
 	@Test
 	public void testSetHpPlusSilence() {
-		GameContext context = createContext(new Rexxar(), new Garrosh());
+		GameContext context = createContext(HeroClass.HUNTER, HeroClass.WARRIOR);
 		Player player = context.getPlayer1();
 		Player opponent = context.getPlayer2();
 
@@ -216,7 +211,7 @@ public class AdvancedMechanicTests extends BasicTests {
 
 	@Test
 	public void testShorttermBuffs() {
-		GameContext context = createContext(new Jaina(), new Garrosh());
+		GameContext context = createContext(HeroClass.MAGE, HeroClass.WARRIOR);
 		Player mage = context.getPlayer1();
 		mage.setMana(10);
 		Player warrior = context.getPlayer2();
@@ -255,7 +250,7 @@ public class AdvancedMechanicTests extends BasicTests {
 
 	@Test
 	public void testSpellpower() {
-		GameContext context = createContext(new Anduin(), new Garrosh());
+		GameContext context = createContext(HeroClass.PRIEST, HeroClass.WARRIOR);
 		Player priest = context.getPlayer1();
 		priest.setMana(10);
 		Player warrior = context.getPlayer2();

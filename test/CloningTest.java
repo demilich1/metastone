@@ -9,6 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.decks.DeckFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
+import net.pferdimanzug.hearthstone.analyzer.gui.gameconfig.PlayerConfig;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -46,10 +47,14 @@ public class CloningTest extends TestBase {
 	@Test
 	public void testCloning() {
 		for (int i = 0; i < 100; i++) {
-			Player player1 = new Player("Random dude 1", DeckFactory.getRandomDeck(HeroClass.MAGE));
-			player1.setBehaviour(new PlayRandomBehaviour());
-			Player player2 = new Player("Random dude 2", DeckFactory.getRandomDeck(HeroClass.WARRIOR));
-			player2.setBehaviour(new PlayRandomBehaviour());
+			PlayerConfig player1Config = new PlayerConfig(DeckFactory.getRandomDeck(HeroClass.MAGE), new PlayRandomBehaviour());
+			player1Config.setName("Player 1");
+			Player player1 = new Player(player1Config);
+			
+			PlayerConfig player2Config = new PlayerConfig(DeckFactory.getRandomDeck(HeroClass.WARRIOR), new PlayRandomBehaviour());
+			player2Config.setName("Player 2");
+			Player player2 = new Player(player2Config);
+			
 			GameContext original = new GameContext(player1, player2, new GameLogic());
 			TestMinionCard minionCard = new TestMinionCard(3, 3);
 			original.getLogic().receiveCard(player1.getId(), minionCard);

@@ -21,6 +21,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.PlayRandomBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.threat.GameStateValueBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.gui.common.BehaviourStringConverter;
 import net.pferdimanzug.hearthstone.analyzer.gui.common.DeckStringConverter;
 
@@ -93,7 +94,13 @@ public class BattleOfDecksConfigView extends BorderPane {
 
 	public void injectDecks(List<Deck> decks) {
 		selectedDecksListView.getItems().clear();
-		availableDecksListView.getItems().setAll(decks);
+		ObservableList<Deck> validDecks = FXCollections.observableArrayList();
+		for (Deck deck : decks) {
+			if (deck.getHeroClass() == HeroClass.MAGE) {
+				continue;
+			}
+		}
+		availableDecksListView.getItems().setAll(validDecks);
 	}
 
 	private void setupBehaviourBox() {

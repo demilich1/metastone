@@ -125,11 +125,8 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 			PlayerConfig playerConfig1 = gameConfig.getPlayerConfig1();
 			PlayerConfig playerConfig2 = gameConfig.getPlayerConfig2();
 
-			Player player1 = new Player("Player 1", playerConfig1.getDeck());
-			player1.setBehaviour(playerConfig1.getBehaviour().clone());
-
-			Player player2 = new Player("Player 2", playerConfig2.getDeck());
-			player2.setBehaviour(playerConfig2.getBehaviour().clone());
+			Player player1 = new Player(playerConfig1);
+			Player player2 = new Player(playerConfig2);
 
 			GameContext newGame = new GameContext(player1, player2, new GameLogic());
 			newGame.play();

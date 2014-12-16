@@ -6,9 +6,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.threat.FeatureVector;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.threat.GameStateValueBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.threat.cuckoo.CuckooLearner;
-import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 import net.pferdimanzug.hearthstone.analyzer.game.statistics.Statistic;
+import net.pferdimanzug.hearthstone.analyzer.gui.gameconfig.PlayerConfig;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,13 +48,14 @@ public class PerformTrainingCommand extends SimpleCommand<GameNotification> {
 				for (int i = 0; i < config.getNumberOfGames(); i++) {
 					FeatureVector fittest = learner.getFittest();
 
-					Deck player1Deck = config.getDeckToTrain();
-					Deck player2Deck = config.getRandomDeck();
-					Player player1 = new Player("Learner", player1Deck);
-					player1.setBehaviour(new GameStateValueBehaviour(fittest, "(fittest)"));
+					PlayerConfig learnerConfig = new PlayerConfig(config.getDeckToTrain(),
+							new GameStateValueBehaviour(fittest, "(fittest)"));
+					learnerConfig.setName("Learner");
+					Player player1 = new Player(learnerConfig);
 
-					Player player2 = new Player("Opponent", player2Deck);
-					player2.setBehaviour(new GameStateValueBehaviour());
+					PlayerConfig opponentConfig = new PlayerConfig(config.getRandomDeck(), new GameStateValueBehaviour());
+					opponentConfig.setName("Opponent");
+					Player player2 = new Player(opponentConfig);
 
 					GameContext newGame = new GameContext(player1, player2, new GameLogic());
 					newGame.play();

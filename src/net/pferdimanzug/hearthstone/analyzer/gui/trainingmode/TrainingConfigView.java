@@ -18,6 +18,7 @@ import javafx.scene.layout.BorderPane;
 import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.gui.common.DeckStringConverter;
 
 public class TrainingConfigView extends BorderPane {
@@ -91,9 +92,15 @@ public class TrainingConfigView extends BorderPane {
 	}
 
 	public void injectDecks(List<Deck> decks) {
+		List<Deck> filteredDecks = FXCollections.observableArrayList();
+		for (Deck deck : decks) {
+			if (deck.getHeroClass() != HeroClass.META) {
+				filteredDecks.add(deck);
+			}
+		}
 		selectedDecksListView.getItems().clear();
-		availableDecksListView.getItems().setAll(decks);
-		deckBox.getItems().setAll(decks);
+		availableDecksListView.getItems().setAll(filteredDecks);
+		deckBox.getItems().setAll(filteredDecks);
 		deckBox.getSelectionModel().selectFirst();
 	}
 

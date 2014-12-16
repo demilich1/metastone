@@ -6,14 +6,13 @@ import java.util.List;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
-import net.pferdimanzug.hearthstone.analyzer.game.decks.MetaDeck;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroFactory;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.CustomCloneable;
 import net.pferdimanzug.hearthstone.analyzer.game.statistics.GameStatistics;
+import net.pferdimanzug.hearthstone.analyzer.gui.gameconfig.PlayerConfig;
 
 public class Player extends CustomCloneable {
 
@@ -26,16 +25,16 @@ public class Player extends CustomCloneable {
 	private final List<Minion> graveyard = new ArrayList<>();
 	private final List<Minion> minions = new ArrayList<>();
 	private final List<Integer> secrets = new ArrayList<>();
-	
+
 	private final GameStatistics statistics = new GameStatistics();
-	
+
 	private int id = -1;
 
 	private int mana;
 	private int maxMana;
-	
+
 	private boolean hideCards;
-	
+
 	private IBehaviour behaviour;
 
 	private Player(Player otherPlayer) {
@@ -55,18 +54,17 @@ public class Player extends CustomCloneable {
 		this.behaviour = otherPlayer.behaviour;
 		this.getStatistics().merge(otherPlayer.getStatistics());
 	}
-	
-	public Player(String name, Deck deck) {
-		this.name = name;
-		if (deck.getHeroClass() == HeroClass.META) {
-			MetaDeck metaDeck = (MetaDeck) deck;
-			metaDeck.selectRandom();
-		}
-		this.deck = deck.getCardsCopy();
-		this.setHero(HeroFactory.createHero(deck.getHeroClass()));
-		this.deckName = deck.getName();
+
+	public Player(PlayerConfig config) {
+		Deck selectedDeck = config.getDeckForPlay();
+		this.name = config.getName();
+		this.deck = selectedDeck.getCardsCopy();
+		this.setHero(HeroFactory.createHero(selectedDeck.getHeroClass()));
+		this.deckName = selectedDeck.getName();
+		setBehaviour(config.getBehaviour().clone());
+		setHideCards(config.hideCards());
 	}
-	
+
 	@Override
 	public Player clone() {
 		return new Player(this);
@@ -82,7 +80,7 @@ public class Player extends CustomCloneable {
 		characters.addAll(getMinions());
 		return characters;
 	}
-	
+
 	public CardCollection getDeck() {
 		return deck;
 	}
@@ -98,7 +96,7 @@ public class Player extends CustomCloneable {
 	public CardCollection getHand() {
 		return hand;
 	}
-	
+
 	public Hero getHero() {
 		return hero;
 	}
@@ -130,7 +128,7 @@ public class Player extends CustomCloneable {
 	public GameStatistics getStatistics() {
 		return statistics;
 	}
-	
+
 	public boolean hideCards() {
 		return hideCards;
 	}
@@ -150,7 +148,7 @@ public class Player extends CustomCloneable {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public void setMana(int mana) {
 		this.mana = mana;
 	}

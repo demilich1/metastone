@@ -7,9 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Frostbolt;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Spellbender;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -19,7 +17,7 @@ public class SecretTest extends TestBase {
 	
 	@Test
 	public void testKillingStopsAttack() {
-		DebugContext context = createContext(new Jaina(), new Garrosh());
+		DebugContext context = createContext(HeroClass.MAGE, HeroClass.WARRIOR);
 		Player mage = context.getPlayer1();
 		mage.setMana(10);
 		Player warrior = context.getPlayer2();
@@ -43,7 +41,7 @@ public class SecretTest extends TestBase {
 	
 	@Test
 	public void testNewSpellTarget() {
-		DebugContext context = createContext(new Jaina(), new Garrosh());
+		DebugContext context = createContext(HeroClass.MAGE, HeroClass.WARRIOR);
 		Player mage = context.getPlayer1();
 		mage.setMana(10);
 		Player warrior = context.getPlayer2();
@@ -77,7 +75,7 @@ public class SecretTest extends TestBase {
 	
 	@Test
 	public void testPlayOnlyOnce() {
-		GameContext context = createContext(new Jaina(), new Garrosh());
+		GameContext context = createContext(HeroClass.MAGE, HeroClass.WARRIOR);
 		Player mage = context.getPlayer1();
 		mage.setMana(10);
 		Player warrior = context.getPlayer2();

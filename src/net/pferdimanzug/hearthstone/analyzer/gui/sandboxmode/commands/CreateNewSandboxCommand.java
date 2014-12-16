@@ -24,11 +24,13 @@ public class CreateNewSandboxCommand extends SimpleCommand<GameNotification> {
 				SandboxProxy sandboxProxy = (SandboxProxy) getFacade().retrieveProxy(SandboxProxy.NAME);
 
 				PlayerConfig player1Config = gameConfig.getPlayerConfig1();
-				Player player1 = new Player("Player 1", player1Config.getDeck());
+				player1Config.setName("Player 1");
+				Player player1 = new Player(player1Config);
 				player1.setBehaviour(new DoNothingBehaviour());
 
 				PlayerConfig player2Config = gameConfig.getPlayerConfig2();
-				Player player2 = new Player("Player 2", player2Config.getDeck());
+				player2Config.setName("Player 2");
+				Player player2 = new Player(player2Config);
 				player2.setBehaviour(new DoNothingBehaviour());
 
 				GameContext sandbox = new GameContextVisualizable(player1, player2, new GameLogic());

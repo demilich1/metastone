@@ -15,6 +15,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.behaviour.IBehaviour;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
+import net.pferdimanzug.hearthstone.analyzer.gui.gameconfig.PlayerConfig;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
@@ -105,25 +106,22 @@ public class StartBattleOfDecksCommand extends SimpleCommand<GameNotification> {
 
 	private class PlayGameTask implements Callable<Void> {
 
-		private final Deck deck1;
-		private final Deck deck2;
-		private final IBehaviour behaviour;
+		private final PlayerConfig player1Config;
+		private final PlayerConfig player2Config;
 		private final BattleBatchResult batchResult;
 
 		public PlayGameTask(Deck deck1, Deck deck2, IBehaviour behaviour, BattleBatchResult batchResult) {
-			this.deck1 = deck1;
-			this.deck2 = deck2;
-			this.behaviour = behaviour;
+			this.player1Config = new PlayerConfig(deck1, behaviour);
+			player1Config.setName("Player 1");
+			this.player2Config = new PlayerConfig(deck2, behaviour);
+			player2Config.setName("Player 2");
 			this.batchResult = batchResult;
 		}
 
 		@Override
 		public Void call() throws Exception {
-			Player player1 = new Player("Player 1", deck1);
-			player1.setBehaviour(behaviour.clone());
-
-			Player player2 = new Player("Player 2", deck2);
-			player2.setBehaviour(behaviour.clone());
+			Player player1 = new Player(player1Config);
+			Player player2 = new Player(player2Config);
 
 			GameContext newGame = new GameContext(player1, player2, new GameLogic());
 			newGame.play();

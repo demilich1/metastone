@@ -9,9 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.MindCont
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.rogue.Assassinate;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock.Hellfire;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Anduin;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Garrosh;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Jaina;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.aura.BuffAura;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
@@ -23,7 +21,7 @@ public class AuraTests extends BasicTests {
 
 	@Test
 	public void testAdjacentAura() {
-		GameContext context = createContext(new Jaina(), new Garrosh());
+		GameContext context = createContext(HeroClass.MAGE, HeroClass.WARRIOR);
 		Player player = context.getPlayer1();
 
 		TestMinionCard minionCard = new TestMinionCard(1, 1);
@@ -58,7 +56,7 @@ public class AuraTests extends BasicTests {
 
 	@Test
 	public void testAura() {
-		GameContext context = createContext(new Jaina(), new Garrosh());
+		GameContext context = createContext(HeroClass.MAGE, HeroClass.WARRIOR);
 		Player player = context.getPlayer1();
 		Player opponent = context.getPlayer2();
 
@@ -93,32 +91,32 @@ public class AuraTests extends BasicTests {
 		Assert.assertEquals(minion1.getAttack(), 1);
 		Assert.assertEquals(minion2.getAttack(), 2);
 	}
-	
+
 	@Test
 	public void testAuraPlusMindControl() {
-		GameContext context = createContext(new Anduin(), new Garrosh());
+		GameContext context = createContext(HeroClass.PRIEST, HeroClass.WARRIOR);
 		Player player = context.getPlayer1();
 		Player opponent = context.getPlayer2();
 
 		context.getLogic().endTurn(player.getId());
-		
+
 		TestMinionCard minionCard = new TestMinionCard(1, 1);
 		minionCard.getMinion().setSpellTrigger(new BuffAura(1, 1, EntityReference.FRIENDLY_MINIONS));
 		Minion auraMinion = playMinionCard(context, opponent, minionCard);
 		Minion opponentMinion = playMinionCard(context, opponent, new TestMinionCard(1, 1));
 		Assert.assertEquals(opponentMinion.getAttack(), 2);
 		context.getLogic().endTurn(opponent.getId());
-		
+
 		minionCard = new TestMinionCard(1, 1);
 		Actor minion1 = playMinionCard(context, player, minionCard);
 		Assert.assertEquals(minion1.getAttack(), 1);
-		
+
 		Card mindControlCard = new MindControl();
 		context.getLogic().receiveCard(player.getId(), mindControlCard);
 		GameAction mindControl = mindControlCard.play();
 		mindControl.setTarget(auraMinion);
 		context.getLogic().performGameAction(player.getId(), mindControl);
-		
+
 		Assert.assertEquals(auraMinion.getOwner(), player.getId());
 		Assert.assertEquals(minion1.getAttack(), 2);
 		Assert.assertEquals(opponentMinion.getAttack(), 1);
