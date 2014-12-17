@@ -12,6 +12,7 @@ import javafx.scene.layout.HBox;
 import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
+import net.pferdimanzug.hearthstone.analyzer.game.decks.MetaDeck;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
 import net.pferdimanzug.hearthstone.analyzer.gui.dialog.DialogNotification;
 import net.pferdimanzug.hearthstone.analyzer.gui.dialog.DialogResult;
@@ -24,9 +25,12 @@ public class DeckInfoView extends HBox implements EventHandler<ActionEvent>, IDi
 	private Button doneButton;
 
 	@FXML
-	private Label cardCountLabel;
+	private Label typeLabel;
+	
+	@FXML
+	private Label countLabel;
 
-	private boolean deckComplete;
+	private Deck activeDeck;
 
 	public DeckInfoView() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DeckInfoView.fxml"));
@@ -43,7 +47,12 @@ public class DeckInfoView extends HBox implements EventHandler<ActionEvent>, IDi
 
 	@Override
 	public void handle(ActionEvent event) {
-		if (!deckComplete) {
+		if (activeDeck.isMetaDeck() && !activeDeck.isComplete()) {
+			DialogNotification dialogNotification = new DialogNotification("Warning",
+					"Your deck collection is not complete yet. Each deck collection has to contain at least 2 (or more) decks. ", DialogType.WARNING);
+			ApplicationFacade.getInstance().notifyObservers(dialogNotification);
+		}
+		else if (!activeDeck.isMetaDeck() && !activeDeck.isComplete()) {
 			DialogNotification dialogNotification = new DialogNotification("Add random cards",
 					"Your deck is not complete yet. If you proceed, all open slots will be filled with random cards.", DialogType.CONFIRM);
 			dialogNotification.setHandler(this);
@@ -63,8 +72,16 @@ public class DeckInfoView extends HBox implements EventHandler<ActionEvent>, IDi
 	}
 
 	public void updateDeck(Deck deck) {
-		deckComplete = deck.isComplete();
-		cardCountLabel.setText(deck.getCards().getCount() + "/" + GameLogic.DECK_SIZE);
+		this.activeDeck = deck;
+		if (deck.isMetaDeck()) {
+			MetaDeck metaDeck = (MetaDeck) deck;
+			typeLabel.setText("Decks");
+			countLabel.setText(metaDeck.getDecks().size() + "");
+		} else {
+			typeLabel.setText("Cards");
+			countLabel.setText(deck.getCards().getCount() + "/" + GameLogic.DECK_SIZE);	
+		}
+		
 	}
 
 }

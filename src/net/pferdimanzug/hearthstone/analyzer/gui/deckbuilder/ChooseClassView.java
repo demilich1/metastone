@@ -11,6 +11,7 @@ import javafx.scene.layout.BorderPane;
 import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
+import net.pferdimanzug.hearthstone.analyzer.game.decks.MetaDeck;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 
 public class ChooseClassView extends BorderPane implements EventHandler<ActionEvent> {
@@ -40,7 +41,10 @@ public class ChooseClassView extends BorderPane implements EventHandler<ActionEv
 
 	@FXML
 	private Button priestButton;
-	
+
+	@FXML
+	private Button collectionButton;
+
 	public ChooseClassView() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ChooseClassView.fxml"));
 		fxmlLoader.setRoot(this);
@@ -63,6 +67,8 @@ public class ChooseClassView extends BorderPane implements EventHandler<ActionEv
 		shamanButton.setOnAction(this);
 		mageButton.setOnAction(this);
 		priestButton.setOnAction(this);
+		
+		collectionButton.setOnAction(this);
 	}
 
 	@Override
@@ -86,6 +92,8 @@ public class ChooseClassView extends BorderPane implements EventHandler<ActionEv
 			newDeck = new Deck(HeroClass.MAGE);
 		} else if (event.getSource() == priestButton) {
 			newDeck = new Deck(HeroClass.PRIEST);
+		} else if (event.getSource() == collectionButton) {
+			newDeck = new MetaDeck();
 		}
 		ApplicationFacade.getInstance().sendNotification(GameNotification.SET_ACTIVE_DECK, newDeck);
 	}

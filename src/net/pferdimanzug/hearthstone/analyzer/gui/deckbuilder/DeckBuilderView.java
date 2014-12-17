@@ -1,6 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder;
 
 import java.io.IOException;
+import java.util.List;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,6 +16,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import net.pferdimanzug.hearthstone.analyzer.ApplicationFacade;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
+import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
+import net.pferdimanzug.hearthstone.analyzer.game.decks.MetaDeck;
+import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.metadeck.MetaDeckListView;
+import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.metadeck.MetaDeckView;
 
 public class DeckBuilderView extends BorderPane implements EventHandler<ActionEvent> {
 
@@ -23,18 +29,26 @@ public class DeckBuilderView extends BorderPane implements EventHandler<ActionEv
 
 	@FXML
 	private Pane lowerInfoArea;
-	
+
 	@FXML
 	private Pane upperInfoArea;
-	
+
 	@FXML
 	private TextField importField;
-	
+
 	@FXML
 	private Button importButton;
-	
+
 	@FXML
 	private Button backButton;
+
+	private final CardView cardView;
+	private final CardListView cardListView;
+	private final DeckInfoView deckInfoView;
+	private final DeckListView deckListView;
+	private final DeckNameView deckNameView;
+	private final MetaDeckView metaDeckView;
+	private final MetaDeckListView metaDeckListView;
 
 	public DeckBuilderView() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DeckBuilderView.fxml"));
@@ -46,9 +60,62 @@ public class DeckBuilderView extends BorderPane implements EventHandler<ActionEv
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
-		
+
 		importButton.setOnAction(this);
 		backButton.setOnAction(this);
+
+		cardView = new CardView();
+		cardListView = new CardListView();
+		deckInfoView = new DeckInfoView();
+		deckListView = new DeckListView();
+		deckNameView = new DeckNameView();
+		
+		metaDeckView = new MetaDeckView();
+		metaDeckListView = new MetaDeckListView();
+		showSidebar(deckListView);
+	}
+
+	public void createNewDeck() {
+		showMainArea(new ChooseClassView());
+		showSidebar(null);
+	}
+
+	public void editDeck(Deck deck) {
+		if (deck.isMetaDeck()) {
+			showMainArea(metaDeckView);
+			showSidebar(metaDeckListView);
+		} else {
+			showMainArea(cardView);
+			showSidebar(cardListView);
+			showBottomBar(new CardFilterView());
+		}
+		showLowerInfoArea(deckInfoView);
+		showUpperInfoArea(deckNameView);
+
+	}
+
+	public void activeDeckChanged(Deck activeDeck) {
+		if (activeDeck.isMetaDeck()) {
+			MetaDeck metaDeck = (MetaDeck) activeDeck;
+			metaDeckListView.displayDecks(metaDeck.getDecks());
+			metaDeckView.deckChanged(metaDeck);
+		} else {
+			activeDeck.getCards().sortByManaCost();
+			cardListView.displayDeck(activeDeck);
+
+		}
+		deckInfoView.updateDeck(activeDeck);
+		deckNameView.updateDeck(activeDeck);
+
+	}
+
+	public void filteredCards(List<Card> filteredCards) {
+		cardView.displayCards(filteredCards);
+	}
+
+	public void displayDecks(List<Deck> decks) {
+		deckListView.displayDecks(decks);
+		metaDeckView.displayDecks(decks);
 	}
 
 	@Override
@@ -60,26 +127,26 @@ public class DeckBuilderView extends BorderPane implements EventHandler<ActionEv
 		}
 	}
 
-	public void showBottomBar(Node content) {
+	private void showBottomBar(Node content) {
 		BorderPane.setAlignment(content, Pos.CENTER);
 		setBottom(content);
 	}
-	
-	public void showLowerInfoArea(Node content) {
+
+	private void showLowerInfoArea(Node content) {
 		lowerInfoArea.getChildren().clear();
 		lowerInfoArea.getChildren().add(content);
 	}
-	
-	public void showMainArea(Node content) {
+
+	private void showMainArea(Node content) {
 		setCenter(content);
 	}
-	
-	public void showSidebar(Node content) {
+
+	private void showSidebar(Node content) {
 		scrollPane.setVisible(content != null);
 		scrollPane.setContent(content);
 	}
 
-	public void showUpperInfoArea(Node content) {
+	private void showUpperInfoArea(Node content) {
 		upperInfoArea.getChildren().clear();
 		upperInfoArea.getChildren().add(content);
 	}

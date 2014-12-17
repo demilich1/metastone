@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +54,15 @@ public class DeckProxy extends Proxy<GameNotification> {
 		return result;
 	}
 
+	public boolean nameAvailable(Deck deck) {
+		for (Deck existingDeck : decks) {
+			if (existingDeck != deck && existingDeck.getName().equals(deck.getName())) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	public Deck getActiveDeck() {
 		return activeDeck;
 	}
@@ -86,7 +96,13 @@ public class DeckProxy extends Proxy<GameNotification> {
 			return;
 		}
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		for (File file : FileUtils.listFiles(folder, new String[] { "json" }, true)) {
+		Collection<File> files = FileUtils.listFiles(folder, new String[] { "json" }, true);
+		loadStandardDecks(files, gson);
+		loadMetaDecks(files, gson);
+	}
+
+	private void loadStandardDecks(Collection<File> files, Gson gson) throws FileNotFoundException {
+		for (File file : files) {
 			FileReader reader = new FileReader(file);
 			HashMap<String, Object> map = gson.fromJson(reader, new TypeToken<HashMap<String, Object>>() {
 			}.getType());
@@ -97,10 +113,33 @@ public class DeckProxy extends Proxy<GameNotification> {
 			HeroClass heroClass = HeroClass.valueOf((String) map.get("heroClass"));
 			String deckName = (String) map.get("name");
 			Deck deck = null;
+			// this one is a meta deck; we need to parse those after all other
+			// decks are done
 			if (map.containsKey("decks")) {
-				deck = parseMetaDeck(map);
+				continue;
 			} else {
 				deck = parseStandardDeck(heroClass, map);
+			}
+			deck.setName(deckName);
+			decks.add(deck);
+		}
+	}
+
+	private void loadMetaDecks(Collection<File> files, Gson gson) throws FileNotFoundException {
+		for (File file : files) {
+			FileReader reader = new FileReader(file);
+			HashMap<String, Object> map = gson.fromJson(reader, new TypeToken<HashMap<String, Object>>() {
+			}.getType());
+			if (!map.containsKey("heroClass")) {
+				logger.error("Deck {} does not speficy a value for 'heroClass' and is therefor not valid", file.getName());
+				continue;
+			}
+			String deckName = (String) map.get("name");
+			Deck deck = null;
+			if (!map.containsKey("decks")) {
+				continue;
+			} else {
+				deck = parseMetaDeck(map);
 			}
 			deck.setName(deckName);
 			decks.add(deck);
@@ -122,7 +161,16 @@ public class DeckProxy extends Proxy<GameNotification> {
 	private Deck parseMetaDeck(Map<String, Object> map) {
 		@SuppressWarnings("unchecked")
 		List<String> referencedDecks = (List<String>) map.get("decks");
-		return new MetaDeck(referencedDecks);
+		List<Deck> decksInMetaDeck = new ArrayList<>();
+		for (String deckName : referencedDecks) {
+			Deck deck = getDeckByName(deckName);
+			if (deck == null) {
+				logger.error("Metadeck {} contains invalid reference to deck {}", map.get("name"), deckName);
+				continue;
+			}
+			decksInMetaDeck.add(deck);
+		}
+		return new MetaDeck(decksInMetaDeck);
 	}
 
 	public void removeCardFromDeck(Card card) {
@@ -141,11 +189,21 @@ public class DeckProxy extends Proxy<GameNotification> {
 		saveData.put("name", deck.getName());
 		saveData.put("description", deck.getDescription());
 		saveData.put("heroClass", deck.getHeroClass());
-		List<Integer> cardIds = new ArrayList<Integer>();
-		for (Card card : deck.getCards()) {
-			cardIds.add(card.getTypeId());
+		if (deck.isMetaDeck()) {
+			MetaDeck metaDeck = (MetaDeck) deck;
+			List<String> referencedDecks = new ArrayList<>();
+			for (Deck referencedDeck : metaDeck.getDecks()) {
+				referencedDecks.add(referencedDeck.getName());
+			}
+			saveData.put("decks", referencedDecks);
+		} else {
+			List<Integer> cardIds = new ArrayList<Integer>();
+			for (Card card : deck.getCards()) {
+				cardIds.add(card.getTypeId());
+			}
+			saveData.put("cards", cardIds);	
 		}
-		saveData.put("cards", cardIds);
+		
 		String jsonData = gson.toJson(saveData);
 		try {
 			String filename = deck.getName().toLowerCase();

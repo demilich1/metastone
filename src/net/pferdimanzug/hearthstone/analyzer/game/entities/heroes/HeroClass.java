@@ -2,7 +2,7 @@ package net.pferdimanzug.hearthstone.analyzer.game.entities.heroes;
 
 public enum HeroClass {
 	ANY,
-	META,
+	DECK_COLLECTION,
 	MAGE,
 	WARLOCK,
 	WARRIOR,

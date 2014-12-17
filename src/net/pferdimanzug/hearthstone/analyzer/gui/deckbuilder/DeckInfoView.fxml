@@ -5,15 +5,15 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root styleClass="panel" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="230.0" style="-fx-border-color: darkgrey; -fx-border-width: 1; -fx-border-radius: 10; -fx-background-radius: 10;" type="HBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="230.0" style="-fx-border-color: darkgrey; -fx-border-width: 1; -fx-border-radius: 10; -fx-background-radius: 10;" styleClass="panel" type="HBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="CENTER" prefHeight="40.0" prefWidth="80.0">
          <children>
-            <Label styleClass="name-big" fx:id="cardCountLabel" text="0/30" />
-            <Label styleClass="name-small" text="Cards" textAlignment="CENTER" />
+            <Label fx:id="countLabel" styleClass="name-big" text="0/30" />
+            <Label fx:id="typeLabel" styleClass="name-small" text="Cards" textAlignment="CENTER" />
          </children>
       </VBox>
-      <Button  fx:id="doneButton" alignment="BASELINE_CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="140.0" text="Done" />
+      <Button fx:id="doneButton" alignment="BASELINE_CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="140.0" text="Done" />
    </children>
    <stylesheets>
       <URL value="@../main.css" />

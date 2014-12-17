@@ -6,6 +6,8 @@ import java.util.List;
 import net.pferdimanzug.hearthstone.analyzer.GameNotification;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.decks.Deck;
+import net.pferdimanzug.hearthstone.analyzer.gui.dialog.DialogNotification;
+import net.pferdimanzug.hearthstone.analyzer.gui.dialog.DialogType;
 import de.pferdimanzug.nittygrittymvc.Mediator;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
@@ -14,20 +16,10 @@ public class DeckBuilderMediator extends Mediator<GameNotification> {
 	public static final String NAME = "DeckBuilderMediator";
 
 	private final DeckBuilderView view;
-	private final CardView cardView;
-	private final CardListView cardListView;
-	private final DeckInfoView deckInfoView;
-	private final DeckListView deckListView;
-	private final DeckNameView deckNameView;
 
 	public DeckBuilderMediator() {
 		super(NAME);
 		view = new DeckBuilderView();
-		cardView = new CardView();
-		cardListView = new CardListView();
-		deckInfoView = new DeckInfoView();
-		deckListView = new DeckListView();
-		deckNameView = new DeckNameView();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -35,28 +27,28 @@ public class DeckBuilderMediator extends Mediator<GameNotification> {
 	public void handleNotification(final INotification<GameNotification> notification) {
 		switch (notification.getId()) {
 		case CREATE_NEW_DECK:
-			view.showMainArea(new ChooseClassView());
-			view.showSidebar(null);
+			view.createNewDeck();
 			break;
 		case EDIT_DECK:
-			view.showMainArea(cardView);
-			view.showSidebar(cardListView);
-			view.showLowerInfoArea(deckInfoView);
-			view.showUpperInfoArea(deckNameView);
-			view.showBottomBar(new CardFilterView());
+			view.editDeck((Deck) notification.getBody());
 			break;
 		case ACTIVE_DECK_CHANGED:
-			Deck deck = (Deck) notification.getBody();
-			deck.getCards().sortByManaCost();
-			cardListView.displayDeck(deck);
-			deckInfoView.updateDeck(deck);
-			deckNameView.updateDeck(deck);
+			view.activeDeckChanged((Deck) notification.getBody());
 			break;
 		case FILTERED_CARDS:
-			cardView.displayCards((List<Card>) notification.getBody());
+			view.filteredCards((List<Card>) notification.getBody());
 			break;
 		case DECKS_LOADED:
-			deckListView.displayDecks((List<Deck>) notification.getBody());
+			view.displayDecks((List<Deck>) notification.getBody());
+			break;
+		case INVALID_DECK_NAME:
+			DialogNotification dialogNotification = new DialogNotification("Name your deck", "Please enter a valid name for this deck.",
+					DialogType.WARNING);
+			getFacade().notifyObservers(dialogNotification);
+			break;
+		case DUPLICATE_DECK_NAME:
+			getFacade().notifyObservers(new DialogNotification("Duplicate deck name", "This deck name was already used for another deck. Please choose another name",
+					DialogType.WARNING));
 			break;
 		default:
 			break;
@@ -71,13 +63,14 @@ public class DeckBuilderMediator extends Mediator<GameNotification> {
 		notificationInterests.add(GameNotification.FILTERED_CARDS);
 		notificationInterests.add(GameNotification.ACTIVE_DECK_CHANGED);
 		notificationInterests.add(GameNotification.DECKS_LOADED);
+		notificationInterests.add(GameNotification.INVALID_DECK_NAME);
+		notificationInterests.add(GameNotification.DUPLICATE_DECK_NAME);
 		return notificationInterests;
 	}
 
 	@Override
 	public void onRegister() {
 		getFacade().sendNotification(GameNotification.SHOW_VIEW, view);
-		view.showSidebar(deckListView);
 		getFacade().sendNotification(GameNotification.LOAD_DECKS);
 	}
 

@@ -10,6 +10,8 @@ import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.LoadDecksCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.RemoveCardFromDeckCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.SaveDeckCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.SetActiveDeckCommand;
+import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.metadeck.AddDeckToMetaDeckCommand;
+import net.pferdimanzug.hearthstone.analyzer.gui.deckbuilder.metadeck.RemoveDeckFromMetaDeckCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.playmode.StartGameCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.playmode.animation.AnimationCompletedCommand;
 import net.pferdimanzug.hearthstone.analyzer.gui.playmode.animation.AnimationLockCommand;
@@ -58,6 +60,8 @@ public class ApplicationFacade extends Facade<GameNotification> {
 		registerCommand(GameNotification.FILL_DECK_WITH_RANDOM_CARDS, new FillDeckWithRandomCardsCommand());
 		registerCommand(GameNotification.IMPORT_DECK_FROM_URL, new ImportDeckCommand());
 		registerCommand(GameNotification.CHANGE_DECK_NAME, new ChangeDeckNameCommand());
+		registerCommand(GameNotification.ADD_DECK_TO_META_DECK, new AddDeckToMetaDeckCommand());
+		registerCommand(GameNotification.REMOVE_DECK_FROM_META_DECK, new RemoveDeckFromMetaDeckCommand());
 
 		registerCommand(GameNotification.REQUEST_DECKS, new RequestDecksCommand());
 

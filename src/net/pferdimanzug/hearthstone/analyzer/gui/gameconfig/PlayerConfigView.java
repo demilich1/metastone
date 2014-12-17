@@ -96,9 +96,9 @@ public class PlayerConfigView extends VBox {
 		HeroClass heroClass = getPlayerConfig().getHeroTemplate().getHeroClass();
 		ObservableList<Deck> deckList = FXCollections.observableArrayList();
 
-		if (heroClass == HeroClass.META) {
+		if (heroClass == HeroClass.DECK_COLLECTION) {
 			for (Deck deck : decks) {
-				if (deck.getHeroClass() != HeroClass.META) {
+				if (deck.getHeroClass() != HeroClass.DECK_COLLECTION) {
 					continue;
 				}
 				deckList.add(deck);
@@ -107,7 +107,7 @@ public class PlayerConfigView extends VBox {
 			Deck randomDeck = DeckFactory.getRandomDeck(heroClass);
 			deckList.add(randomDeck);
 			for (Deck deck : decks) {
-				if (deck.getHeroClass() == HeroClass.META) {
+				if (deck.getHeroClass() == HeroClass.DECK_COLLECTION) {
 					continue;
 				}
 				if (deck.getHeroClass() == heroClass || deck.getHeroClass() == HeroClass.ANY) {

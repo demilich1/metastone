@@ -14,9 +14,7 @@ public class AddCardToDeckCommand extends SimpleCommand<GameNotification> {
 		Card card = (Card) notification.getBody();
 		if (deckProxy.addCardToDeck(card)) {
 			getFacade().sendNotification(GameNotification.ACTIVE_DECK_CHANGED, deckProxy.getActiveDeck());
-		} else {
-			//TODO:error
-		}
+		} 
 	}
 
 }

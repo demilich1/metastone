@@ -57,4 +57,8 @@ public class Deck {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public boolean isMetaDeck() {
+		return getHeroClass() == HeroClass.DECK_COLLECTION;
+	}
 }

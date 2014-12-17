@@ -94,7 +94,7 @@ public class TrainingConfigView extends BorderPane {
 	public void injectDecks(List<Deck> decks) {
 		List<Deck> filteredDecks = FXCollections.observableArrayList();
 		for (Deck deck : decks) {
-			if (deck.getHeroClass() != HeroClass.META) {
+			if (deck.getHeroClass() != HeroClass.DECK_COLLECTION) {
 				filteredDecks.add(deck);
 			}
 		}
