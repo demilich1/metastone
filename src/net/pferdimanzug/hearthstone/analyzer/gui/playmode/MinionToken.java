@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Shape;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.gui.DigitFactory;
@@ -30,6 +31,9 @@ public class MinionToken extends GameToken {
 	@FXML
 	private Node deathrattle;
 	
+	@FXML
+	private Shape frozen;
+	
 	private CardTooltip cardTooltip;
 	
 	public MinionToken() {
@@ -38,6 +42,7 @@ public class MinionToken extends GameToken {
 		cardTooltip = new CardTooltip();
 		tooltip.setGraphic(cardTooltip);
 		Tooltip.install(this, tooltip);
+		frozen.getStrokeDashArray().add(16.0);
 	}
 
 	public void setMinion(Minion minion) {
@@ -60,6 +65,7 @@ public class MinionToken extends GameToken {
 		divineShield.setVisible(minion.hasStatus(GameTag.DIVINE_SHIELD));
 		windfury.setVisible(minion.hasStatus(GameTag.WINDFURY));
 		deathrattle.setVisible(minion.hasTag(GameTag.DEATHRATTLES));
+		frozen.setVisible(minion.hasStatus(GameTag.FROZEN));
 		visualizeStealth(minion);
 	}
 	

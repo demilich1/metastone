@@ -39,6 +39,7 @@
         </ImageView>
             <Group fx:id="armorAnchor" translateX="-6.0" translateY="5.0" StackPane.alignment="CENTER_RIGHT" />
         <FlowPane fx:id="secretsAnchor" prefHeight="-1.0" prefWidth="64.0" StackPane.alignment="TOP_CENTER" />
+        <Ellipse fx:id="frozen" fill="#ffffff00" radiusX="50.0" radiusY="30.0" smooth="false" stroke="#0e90e8" strokeDashOffset="10.0" strokeType="OUTSIDE" strokeWidth="5.0" visible="false" />
       </children>
       <padding>
         <Insets left="8.0" />

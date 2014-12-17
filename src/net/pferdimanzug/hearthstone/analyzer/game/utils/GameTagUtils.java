@@ -14,8 +14,6 @@ public class GameTagUtils {
 		case TEMPORARY_ATTACK_BONUS:
 		case AURA_ATTACK_BONUS:
 		case AURA_HP_BONUS:
-		case BASE_ATTACK:
-		case BASE_HP:
 		case DURABILITY:
 		case HP:
 		case HP_BONUS:
@@ -28,6 +26,8 @@ public class GameTagUtils {
 		case SPELL_AMPLIFY_MULTIPLIER:
 		case SPELL_POWER:
 		case WEAPON_DAMAGE:
+		case ATTACK:
+		case ATTACK_BONUS:
 			return TagValueType.INTEGER;
 		case ATTACK_EQUALS_HP:
 		case CANNOT_ATTACK:
@@ -51,6 +51,8 @@ public class GameTagUtils {
 		case UNTARGETABLE_BY_SPELLS:
 		case WINDFURY:
 			return TagValueType.BOOLEAN;
+		case BASE_ATTACK:
+		case BASE_HP:
 		case BATTLECRY:
 		case DEATHRATTLES:
 		case DEBUG:

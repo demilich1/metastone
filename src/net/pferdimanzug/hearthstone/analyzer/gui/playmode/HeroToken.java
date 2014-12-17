@@ -6,6 +6,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Shape;
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.weapons.Weapon;
@@ -43,9 +45,13 @@ public class HeroToken extends GameToken {
 
 	@FXML
 	private Pane secretsAnchor;
+	
+	@FXML
+	private Shape frozen;
 
 	public HeroToken() {
 		super("HeroToken.fxml");
+		frozen.getStrokeDashArray().add(16.0);
 	}
 
 	public void highlight(boolean highlight) {
@@ -71,6 +77,7 @@ public class HeroToken extends GameToken {
 		updateArmor(hero.getArmor());
 		updateWeapon(hero.getWeapon());
 		updateSecrets(player);
+		updateStatus(hero);
 	}
 
 	private void updateArmor(int armor) {
@@ -79,6 +86,10 @@ public class HeroToken extends GameToken {
 		armorIcon.setVisible(visible);
 		armorAnchor.setVisible(visible);
 	}
+	
+	private void updateStatus(Hero hero) {
+		frozen.setVisible(hero.hasStatus(GameTag.FROZEN));
+	}
 
 	private void updateSecrets(Player player) {
 		secretsAnchor.getChildren().clear();
@@ -86,7 +97,6 @@ public class HeroToken extends GameToken {
 			ImageView secretIcon = new ImageView(IconFactory.getImageUrl("common/secret.png"));
 			secretsAnchor.getChildren().add(secretIcon);
 		}
-
 	}
 
 	private void updateWeapon(Weapon weapon) {
