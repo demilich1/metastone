@@ -5,7 +5,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageRandomSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.RemoveTagSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnEndTrigger;
@@ -26,9 +28,12 @@ public class RagnarosTheFirelord extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion ragnaros = createMinion(GameTag.CANNOT_ATTACK);
-		SpellDesc damageSpell = DamageRandomSpell.create(8, 1);
+		SpellDesc damageSpell = DamageSpell.create(8);
 		damageSpell.setTarget(EntityReference.ENEMY_CHARACTERS);
-		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), damageSpell);
+		damageSpell.pickRandomTarget(true);
+		SpellDesc removeStealth = RemoveTagSpell.create(GameTag.STEALTHED);
+		removeStealth.setTarget(EntityReference.SELF);
+		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), MetaSpell.create(damageSpell, removeStealth));
 		ragnaros.setSpellTrigger(trigger);
 		return ragnaros;
 	}

@@ -1,11 +1,14 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageRandomSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.RemoveTagSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnStartTrigger;
@@ -27,9 +30,12 @@ public class Demolisher extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion demolisher = createMinion();
-		SpellDesc randomDamageSpell = DamageRandomSpell.create(2, 1);
+		SpellDesc randomDamageSpell = DamageSpell.create(2);
 		randomDamageSpell.setTarget(EntityReference.ENEMY_CHARACTERS);
-		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), randomDamageSpell);
+		randomDamageSpell.pickRandomTarget(true);
+		SpellDesc removeStealth = RemoveTagSpell.create(GameTag.STEALTHED);
+		removeStealth.setTarget(EntityReference.SELF);
+		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), MetaSpell.create(randomDamageSpell, removeStealth));
 		demolisher.setSpellTrigger(trigger);
 		return demolisher;
 	}

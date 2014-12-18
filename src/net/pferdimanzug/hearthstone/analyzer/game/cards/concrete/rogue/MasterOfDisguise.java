@@ -21,8 +21,6 @@ public class MasterOfDisguise extends MinionCard {
 		return 298;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion masterOfDisguise = createMinion();

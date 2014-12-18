@@ -24,8 +24,6 @@ public class Shadowbomber extends MinionCard {
 		return 561;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion shadowbomber = createMinion();
