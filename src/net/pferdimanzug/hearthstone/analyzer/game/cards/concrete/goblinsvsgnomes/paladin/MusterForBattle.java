@@ -15,7 +15,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 public class MusterForBattle extends SpellCard {
 
 	public MusterForBattle() {
-		super("Muster For Battle", Rarity.RARE, HeroClass.PALADIN, 3);
+		super("Muster for Battle", Rarity.RARE, HeroClass.PALADIN, 3);
 		setDescription("Summon three 1/1 Silver Hand Recruits. Equip a 1/4 Weapon.");
 		
 		SpellDesc summonSpell = SummonSpell.create(new SilverHandRecruit(), new SilverHandRecruit(), new SilverHandRecruit());

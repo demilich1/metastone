@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.spells.aura;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -15,12 +16,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.BoardChangedTri
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class Aura extends SpellTrigger {
-
-	private static Logger logger = LoggerFactory.getLogger(Aura.class);
 
 	private EntityReference targets;
 	private SpellDesc applyAuraEffect;
@@ -35,7 +31,7 @@ public class Aura extends SpellTrigger {
 		this.targets = targetSelection;
 	}
 
-	protected boolean affects(GameContext context, Entity target) {
+	protected boolean affects(GameContext context, Entity target, List<Entity> resolvedTargets) {
 		if (target.getEntityType() != EntityType.MINION) {
 			return false;
 		}
@@ -47,8 +43,7 @@ public class Aura extends SpellTrigger {
 		if (targetActor.isDead()) {
 			return false;
 		}
-
-		return true;
+		return resolvedTargets.contains(target);
 	}
 
 	@Override
@@ -66,21 +61,25 @@ public class Aura extends SpellTrigger {
 		Player owner = context.getPlayer(getOwner());
 		Actor sourceActor = (Actor) context.resolveSingleTarget(getHostReference());
 		List<Entity> resolvedTargets = context.resolveTarget(owner, sourceActor, targets);
+		List<Entity> relevantTargets = new ArrayList<Entity>(resolvedTargets);
+		for (int entityId : affectedEntities) {
+			EntityReference entityReference = new EntityReference(entityId);
+			Entity affectedEntity = context.resolveSingleTarget(entityReference);
+			relevantTargets.add(affectedEntity);
+		}
 
-		for (Entity target : resolvedTargets) {
-			if (!affects(context, target) && !affectedEntities.contains(target.getId())) {
-				continue;
-			} else if (affects(context, target) && !affectedEntities.contains(target.getId())) {
+		for (Entity target : relevantTargets) {
+			if (affects(context, target, resolvedTargets) && !affectedEntities.contains(target.getId())) {
 				applyAuraEffect.setTarget(target.getReference());
 				context.getLogic().castSpell(getOwner(), applyAuraEffect);
 				affectedEntities.add(target.getId());
-			} else if (!affects(context, target) && affectedEntities.contains(target.getId())) {
+				// target is not affected anymore, remove effect
+			} else if (!affects(context, target, resolvedTargets) && affectedEntities.contains(target.getId())) {
 				removeAuraEffect.setTarget(target.getReference());
 				context.getLogic().castSpell(getOwner(), removeAuraEffect);
 				affectedEntities.remove(target.getId());
 			}
 		}
-
 	}
 
 	@Override
