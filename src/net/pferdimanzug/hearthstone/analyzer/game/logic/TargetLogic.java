@@ -75,14 +75,14 @@ public class TargetLogic {
 					return minion;
 				}
 			}
-			
+
 			for (Actor minion : player.getGraveyard()) {
 				if (minion.getId() == targetId) {
 					return minion;
 				}
 			}
 		}
-		
+
 		Entity cardResult = findInCards(context.getPlayer1(), targetId);
 		if (cardResult == null) {
 			cardResult = findInCards(context.getPlayer2(), targetId);
@@ -95,7 +95,7 @@ public class TargetLogic {
 		logger.error(context.toString());
 		throw new RuntimeException("Target not found exception: " + targetKey);
 	}
-	
+
 	private Entity findInCards(Player player, int targetId) {
 		for (Card card : player.getHand()) {
 			if (card.getId() == targetId) {
@@ -118,7 +118,7 @@ public class TargetLogic {
 			if (summonedMinion.getId() == targetId) {
 				return summonedMinion;
 			}
-		} 
+		}
 		if (context.getEnvironment().containsKey(Environment.SUMMONED_WEAPON)) {
 			Actor summonedWeapon = (Actor) context.getEnvironment().get(Environment.SUMMONED_WEAPON);
 			if (summonedWeapon.getId() == targetId) {
@@ -207,6 +207,10 @@ public class TargetLogic {
 			return getEntities(context, player, TargetSelection.FRIENDLY_MINIONS);
 		} else if (targetKey == EntityReference.OTHER_FRIENDLY_MINIONS) {
 			List<Entity> targets = getEntities(context, player, TargetSelection.FRIENDLY_MINIONS);
+			targets.remove(source);
+			return targets;
+		} else if (targetKey == EntityReference.ALL_OTHER_CHARACTERS) {
+			List<Entity> targets = getEntities(context, player, TargetSelection.ANY);
 			targets.remove(source);
 			return targets;
 		} else if (targetKey == EntityReference.ADJACENT_MINIONS) {

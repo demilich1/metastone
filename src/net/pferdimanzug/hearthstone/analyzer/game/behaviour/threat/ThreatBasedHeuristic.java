@@ -88,6 +88,9 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 	}
 
 	private double calculateMinionScore(Minion minion, ThreatLevel threatLevel) {
+		if (minion.hasStatus(GameTag.MARKED_FOR_DEATH)) {
+			return 0;
+		}
 		double minionScore = weights.get(WeightedFeature.MINION_INTRINSIC_VALUE);
 		minionScore += weights.get(WeightedFeature.MINION_ATTACK_FACTOR)
 				* (minion.getAttack() - minion.getTagValue(GameTag.TEMPORARY_ATTACK_BONUS));

@@ -55,4 +55,7 @@ public enum GameTag {
 	DIED_ON_TURN, 
 	HERO_POWER_CAN_TARGET_MINIONS,
 	FUMBLE,
+	
+	// AI flags
+	MARKED_FOR_DEATH,
 }

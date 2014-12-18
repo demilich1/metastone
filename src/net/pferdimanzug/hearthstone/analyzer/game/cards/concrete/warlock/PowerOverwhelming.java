@@ -1,9 +1,11 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.AddSpellTriggerSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.ApplyTagSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroySpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
@@ -21,7 +23,7 @@ public class PowerOverwhelming extends SpellCard {
 		SpellDesc destroySpell = DestroySpell.create();
 		destroySpell.setTarget(EntityReference.SELF);
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), destroySpell);
-		setSpell(MetaSpell.create(BuffSpell.create(4, 4), AddSpellTriggerSpell.create(trigger)));
+		setSpell(MetaSpell.create(BuffSpell.create(4, 4), AddSpellTriggerSpell.create(trigger), ApplyTagSpell.create(GameTag.MARKED_FOR_DEATH)));
 		setTargetRequirement(TargetSelection.FRIENDLY_MINIONS);
 	}
 
