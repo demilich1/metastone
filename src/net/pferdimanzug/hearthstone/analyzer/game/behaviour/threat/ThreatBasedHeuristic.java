@@ -16,6 +16,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.Equalit
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.Humility;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.ShadowWordDeath;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.rogue.Assassinate;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.rogue.Sap;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman.Hex;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock.SiphonSoul;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.Execute;
@@ -24,7 +25,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 
 public class ThreatBasedHeuristic implements IGameStateHeuristic {
-	
+
 	private static ThreatLevel calcuateThreatLevel(GameContext context, int playerId) {
 		int damageOnBoard = 0;
 		Player player = context.getPlayer(playerId);
@@ -43,7 +44,7 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 
 		return ThreatLevel.GREEN;
 	}
-	
+
 	private static int getHeroDamage(Hero hero) {
 		int heroDamage = 0;
 		if (hero.getHeroClass() == HeroClass.MAGE) {
@@ -79,6 +80,7 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 		hardRemoval.add(new Humility().getTypeId());
 		hardRemoval.add(new Equality().getTypeId());
 		hardRemoval.add(new DeadlyShot().getTypeId());
+		hardRemoval.add(new Sap().getTypeId());
 	}
 
 	private final FeatureVector weights;
@@ -128,7 +130,7 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 
 		return minionScore;
 	}
-	
+
 	@Override
 	public double getScore(GameContext context, int playerId) {
 		Player player = context.getPlayer(playerId);
