@@ -3,9 +3,11 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.BloodsailRaider;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.KnifeJuggler;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.MurlocRaider;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.WildPyromancer;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.paladin.Equality;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.rogue.Conceal;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.ArcaniteReaper;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warrior.WarsongCommander;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
@@ -152,6 +154,20 @@ public class CardInteractionTests extends TestBase {
 		// deathrattles
 		Assert.assertEquals(paladin.getMinions().size(), 0);
 		Assert.assertEquals(warrior.getMinions().size(), 0);
+	}
+	
+	@Test
+	public void testKnifeJugglerPlusStealth() {
+		GameContext context = createContext(HeroClass.ROGUE, HeroClass.WARRIOR);
+		Player player = context.getPlayer1();
+		
+		Minion knifeJuggler = playMinionCard(context, player, new KnifeJuggler());
+		playCard(context, player, new Conceal());
+		// knife juggler should be stealthed
+		Assert.assertTrue(knifeJuggler.hasStatus(GameTag.STEALTHED));
+		// knife juggler should be unstealthed as soon as another minion is played and his trigger fires
+		playCard(context, player, new TestMinionCard(1, 1));
+		Assert.assertFalse(knifeJuggler.hasStatus(GameTag.STEALTHED));
 	}
 
 }
