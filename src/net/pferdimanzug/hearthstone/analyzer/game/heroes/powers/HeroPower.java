@@ -9,8 +9,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.CardType;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellSource;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public abstract class HeroPower extends SpellCard {
@@ -26,9 +24,9 @@ public abstract class HeroPower extends SpellCard {
 	}
 
 	public void onWillUse(GameContext context, Player player) {
-		
+
 	}
-	
+
 	@Override
 	public PlayCardAction play() {
 		return new HeroPowerAction(getOwner(), getId()) {
@@ -44,18 +42,13 @@ public abstract class HeroPower extends SpellCard {
 
 			@Override
 			protected void play(GameContext context, int playerId) {
+				getSpell().setSourceEntity(HeroPower.this.getReference());
 				if (getTargetRequirement() != TargetSelection.NONE) {
 					getSpell().setTarget(getTargetKey());
 				}
 				context.getLogic().castSpell(playerId, getSpell());
 			}
 		};
-	}
-
-	@Override
-	public void setSpell(SpellDesc spell) {
-		super.setSpell(spell);
-		spell.setSource(SpellSource.HERO_POWER);
 	}
 
 	public void setUsed(boolean used) {

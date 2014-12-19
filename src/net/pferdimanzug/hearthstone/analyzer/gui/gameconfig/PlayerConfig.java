@@ -30,6 +30,26 @@ public class PlayerConfig {
 		return deck;
 	}
 
+	public Deck getDeckForPlay() {
+		if (deck instanceof MetaDeck) {
+			MetaDeck metaDeck = (MetaDeck) deck;
+			return metaDeck.selectRandom();
+		}
+		return deck;
+	}
+
+	public HeroClass getHeroClass() {
+		return deck.getHeroClass();
+	}
+
+	public HeroTemplate getHeroTemplate() {
+		return heroTemplate;
+	}
+
+	public String getName() {
+		return name != null ? name : heroTemplate.getName();
+	}
+
 	public boolean hideCards() {
 		return hideCards;
 	}
@@ -42,32 +62,12 @@ public class PlayerConfig {
 		this.deck = deck;
 	}
 
-	public void setHideCards(boolean hideCards) {
-		this.hideCards = hideCards;
-	}
-
-	public HeroTemplate getHeroTemplate() {
-		return heroTemplate;
-	}
-
 	public void setHeroTemplate(HeroTemplate heroTemplate) {
 		this.heroTemplate = heroTemplate;
 	}
 
-	public String getName() {
-		return name != null ? name : heroTemplate.getName();
-	}
-
-	public HeroClass getHeroClass() {
-		return deck.getHeroClass();
-	}
-
-	public Deck getDeckForPlay() {
-		if (deck instanceof MetaDeck) {
-			MetaDeck metaDeck = (MetaDeck) deck;
-			return metaDeck.selectRandom();
-		}
-		return deck;
+	public void setHideCards(boolean hideCards) {
+		this.hideCards = hideCards;
 	}
 
 	public void setName(String name) {

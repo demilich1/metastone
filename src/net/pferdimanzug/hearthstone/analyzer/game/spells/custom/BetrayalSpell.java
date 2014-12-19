@@ -16,8 +16,9 @@ public class BetrayalSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
-		for (Entity adjacentMinion : context.getAdjacentMinions(player, target.getReference())) {
-			context.getLogic().fight(player, (Actor) target, (Actor) adjacentMinion);
+		Actor attacker = (Actor) target;
+		for (Actor adjacentMinion : context.getAdjacentMinions(player, target.getReference())) {
+			context.getLogic().damage(player, adjacentMinion, attacker.getAttack(), attacker);
 		}
 	}
 	

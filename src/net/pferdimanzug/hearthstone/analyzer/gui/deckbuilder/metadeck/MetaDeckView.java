@@ -36,6 +36,13 @@ public class MetaDeckView extends BorderPane {
 		setCache(true);
 	}
 
+	public void deckChanged(MetaDeck metaDeck) {
+		for (Node node : contentPane.getChildren()) {
+			Deck deck = (Deck) node.getUserData();
+			node.setDisable(metaDeck.getDecks().contains(deck));
+		}
+	}
+
 	public void displayDecks(List<Deck> decks) {
 		contentPane.getChildren().clear();
 		for (Deck deck : decks) {
@@ -55,13 +62,6 @@ public class MetaDeckView extends BorderPane {
 			deckButton.setOnAction(event -> ApplicationFacade.getInstance().sendNotification(GameNotification.ADD_DECK_TO_META_DECK, deck));
 			deckButton.setUserData(deck);
 			contentPane.getChildren().add(deckButton);
-		}
-	}
-
-	public void deckChanged(MetaDeck metaDeck) {
-		for (Node node : contentPane.getChildren()) {
-			Deck deck = (Deck) node.getUserData();
-			node.setDisable(metaDeck.getDecks().contains(deck));
 		}
 	}
 

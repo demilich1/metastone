@@ -1,15 +1,18 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
+import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.actions.Battlecry;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroySpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.MetaSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.custom.VoidTerrorBuffSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
@@ -30,7 +33,7 @@ public class VoidTerror extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion voidTerror = createMinion();
-		SpellDesc buffSpell = VoidTerrorBuffSpell.create();
+		SpellDesc buffSpell = BuffSpell.create(this::provideAttackValue, this::provideHpValue);
 		buffSpell.setTarget(EntityReference.SELF);
 		SpellDesc destroySpell = DestroySpell.create();
 		destroySpell.setTarget(EntityReference.ADJACENT_MINIONS);
@@ -38,6 +41,24 @@ public class VoidTerror extends MinionCard {
 		battlecry.setResolvedLate(true);
 		voidTerror.setBattlecry(battlecry);
 		return voidTerror;
+	}
+	
+	private int provideAttackValue(GameContext context, Player player, Entity target) {
+		int attackBonus = 0;
+		for (Entity adjacent : context.getAdjacentMinions(player, target.getReference())) {
+			Minion minion = (Minion) adjacent;
+			attackBonus += minion.getAttack();
+		}
+		return attackBonus;
+	}
+	
+	private int provideHpValue(GameContext context, Player player, Entity target) {
+		int hpBonus = 0;
+		for (Entity adjacent : context.getAdjacentMinions(player, target.getReference())) {
+			Minion minion = (Minion) adjacent;
+			hpBonus += minion.getHp();
+		}
+		return hpBonus;
 	}
 
 	

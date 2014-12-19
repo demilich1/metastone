@@ -17,9 +17,10 @@ public class SwipeSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		int primaryDamage = 4;
 		int secondaryDamage = 1;
+		Entity source = context.resolveSingleTarget(desc.getSourceEntity());
 		for (Actor character : context.getOpponent(player).getCharacters()) {
 			int damage = character == target ? primaryDamage : secondaryDamage;
-			context.getLogic().damage(player, character, damage, desc.getSource());
+			context.getLogic().damage(player, character, damage, source);
 		}
 	}
 

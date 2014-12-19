@@ -75,9 +75,29 @@ public class DeckBuilderView extends BorderPane implements EventHandler<ActionEv
 		showSidebar(deckListView);
 	}
 
+	public void activeDeckChanged(Deck activeDeck) {
+		if (activeDeck.isMetaDeck()) {
+			MetaDeck metaDeck = (MetaDeck) activeDeck;
+			metaDeckListView.displayDecks(metaDeck.getDecks());
+			metaDeckView.deckChanged(metaDeck);
+		} else {
+			activeDeck.getCards().sortByManaCost();
+			cardListView.displayDeck(activeDeck);
+
+		}
+		deckInfoView.updateDeck(activeDeck);
+		deckNameView.updateDeck(activeDeck);
+
+	}
+
 	public void createNewDeck() {
 		showMainArea(new ChooseClassView());
 		showSidebar(null);
+	}
+
+	public void displayDecks(List<Deck> decks) {
+		deckListView.displayDecks(decks);
+		metaDeckView.displayDecks(decks);
 	}
 
 	public void editDeck(Deck deck) {
@@ -94,28 +114,8 @@ public class DeckBuilderView extends BorderPane implements EventHandler<ActionEv
 
 	}
 
-	public void activeDeckChanged(Deck activeDeck) {
-		if (activeDeck.isMetaDeck()) {
-			MetaDeck metaDeck = (MetaDeck) activeDeck;
-			metaDeckListView.displayDecks(metaDeck.getDecks());
-			metaDeckView.deckChanged(metaDeck);
-		} else {
-			activeDeck.getCards().sortByManaCost();
-			cardListView.displayDeck(activeDeck);
-
-		}
-		deckInfoView.updateDeck(activeDeck);
-		deckNameView.updateDeck(activeDeck);
-
-	}
-
 	public void filteredCards(List<Card> filteredCards) {
 		cardView.displayCards(filteredCards);
-	}
-
-	public void displayDecks(List<Deck> decks) {
-		deckListView.displayDecks(decks);
-		metaDeckView.displayDecks(decks);
 	}
 
 	@Override

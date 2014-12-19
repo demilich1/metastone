@@ -18,7 +18,8 @@ public class HealToFullSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		Actor actor = (Actor) target;
 		int missingHp = MathUtils.clamp(actor.getMaxHp() - actor.getHp(), 0, 9999);
-		context.getLogic().heal(player, actor, missingHp, desc.getSource());
+		Entity source = context.resolveSingleTarget(desc.getSourceEntity());
+		context.getLogic().heal(player, actor, missingHp, source);
 	}
 
 }

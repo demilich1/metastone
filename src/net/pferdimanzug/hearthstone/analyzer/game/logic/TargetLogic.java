@@ -97,6 +97,9 @@ public class TargetLogic {
 	}
 
 	private Entity findInCards(Player player, int targetId) {
+		if (player.getHero().getHeroPower().getId() == targetId) {
+			return player.getHero().getHeroPower();
+		}
 		for (Card card : player.getHand()) {
 			if (card.getId() == targetId) {
 				return card;
@@ -113,6 +116,10 @@ public class TargetLogic {
 
 	private Entity findInEnvironment(GameContext context, EntityReference targetKey) {
 		int targetId = targetKey.getId();
+		Card pendingCard = (Card) context.getEnvironment().get(Environment.PENDING_CARD);
+		if (pendingCard != null && pendingCard.getReference().equals(targetKey)) {
+			return pendingCard;
+		}
 		if (!context.getSummonStack().isEmpty()) {
 			Minion summonedMinion = context.getSummonStack().peek();
 			if (summonedMinion.getId() == targetId) {
@@ -185,7 +192,7 @@ public class TargetLogic {
 		return filterTargets(context, player, action, potentialTargets);
 	}
 
-	public List<Entity> resolveTargetKey(GameContext context, Player player, Actor source, EntityReference targetKey) {
+	public List<Entity> resolveTargetKey(GameContext context, Player player, Entity source, EntityReference targetKey) {
 		if (targetKey == null) {
 			return null;
 		}
@@ -214,7 +221,7 @@ public class TargetLogic {
 			targets.remove(source);
 			return targets;
 		} else if (targetKey == EntityReference.ADJACENT_MINIONS) {
-			return context.getAdjacentMinions(player, source.getReference());
+			return new ArrayList<>(context.getAdjacentMinions(player, source.getReference()));
 		} else if (targetKey == EntityReference.SELF) {
 			return singleTargetAsList(source);
 		} else if (targetKey == EntityReference.EVENT_TARGET) {

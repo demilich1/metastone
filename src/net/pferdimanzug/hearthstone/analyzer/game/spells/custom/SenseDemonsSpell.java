@@ -5,11 +5,8 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
+import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.warlock.WorthlessImp;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.SpellUtils;
@@ -37,20 +34,5 @@ public class SenseDemonsSpell extends Spell {
 			}
 			context.getLogic().receiveCard(player.getId(), demonCard);
 		}
-	}
-	
-	private class WorthlessImp extends MinionCard {
-
-		public WorthlessImp() {
-			super("Worthless Imp", 1, 1, Rarity.COMMON, HeroClass.WARLOCK, 1);
-			setDescription("You are out of demons! At least there are always imps...");
-			setRace(Race.DEMON);
-		}
-
-		@Override
-		public Minion summon() {
-			return createMinion();
-		}
-
 	}
 }

@@ -4,13 +4,15 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 
 public class DamageEvent extends GameEvent {
-	
+
 	private final Entity victim;
 	private final int damage;
+	private final Entity source;
 
-	public DamageEvent(GameContext context, Entity victim, int damage) {
+	public DamageEvent(GameContext context, Entity victim, Entity source, int damage) {
 		super(context);
 		this.victim = victim;
+		this.source = source;
 		this.damage = damage;
 	}
 
@@ -28,9 +30,12 @@ public class DamageEvent extends GameEvent {
 		return GameEventType.DAMAGE;
 	}
 
+	public Entity getSource() {
+		return source;
+	}
+
 	public Entity getVictim() {
 		return victim;
 	}
-
 
 }

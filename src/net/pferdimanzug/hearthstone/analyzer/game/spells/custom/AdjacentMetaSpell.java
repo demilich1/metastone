@@ -25,7 +25,6 @@ public class AdjacentMetaSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		SpellDesc primary = (SpellDesc) desc.get(SpellArg.SPELL_1);
 		if (primary != null) {
-			primary.setSource(desc.getSource());
 			primary.setSourceEntity(desc.getSourceEntity());
 			primary.setTarget(desc.getTarget());
 			context.getLogic().castSpell(player.getId(), primary);
@@ -35,7 +34,6 @@ public class AdjacentMetaSpell extends Spell {
 		if (secondary == null) {
 			secondary = primary;
 		} else {
-			secondary.setSource(desc.getSource());
 			secondary.setSourceEntity(desc.getSourceEntity());
 		}
 		for (Entity adjacent : context.getAdjacentMinions(player, target.getReference())) {

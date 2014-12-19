@@ -167,8 +167,8 @@ public class GameContext implements Cloneable, IDisposable {
 		return activePlayer;
 	}
 
-	public List<Entity> getAdjacentMinions(Player player, EntityReference minionReference) {
-		List<Entity> adjacentMinions = new ArrayList<>();
+	public List<Actor> getAdjacentMinions(Player player, EntityReference minionReference) {
+		List<Actor> adjacentMinions = new ArrayList<>();
 		Actor minion = (Actor) resolveSingleTarget(minionReference);
 		List<Minion> minions = getPlayer(minion.getOwner()).getMinions();
 		int index = minions.indexOf(minion);

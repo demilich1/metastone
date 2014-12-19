@@ -29,6 +29,7 @@ public class ShadowMadnessSpell extends MindControlSpell {
 		
 		// mind control is terminated either when silenced or turn ends
 		SpellDesc reverseMindcontrolSpell = ReverseMindControlSpell.create();
+		reverseMindcontrolSpell.setSourceEntity(desc.getSourceEntity());
 		reverseMindcontrolSpell.setTarget(EntityReference.SELF);
 		SpellTrigger returnOnSilence = new SpellTrigger(new SilenceTrigger(), new TurnEndTrigger(), reverseMindcontrolSpell, true);
 		context.getLogic().addGameEventListener(player, returnOnSilence, target);

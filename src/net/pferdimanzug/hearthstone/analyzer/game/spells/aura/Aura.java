@@ -11,7 +11,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellSource;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.BoardChangedTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
@@ -27,7 +26,6 @@ public class Aura extends SpellTrigger {
 		super(new BoardChangedTrigger(), applyAuraEffect);
 		this.applyAuraEffect = applyAuraEffect;
 		this.removeAuraEffect = removeAuraEffect;
-		removeAuraEffect.setSource(SpellSource.SPELL_TRIGGER);
 		this.targets = targetSelection;
 	}
 
@@ -71,11 +69,13 @@ public class Aura extends SpellTrigger {
 		for (Entity target : relevantTargets) {
 			if (affects(context, target, resolvedTargets) && !affectedEntities.contains(target.getId())) {
 				applyAuraEffect.setTarget(target.getReference());
+				applyAuraEffect.setSourceEntity(getHostReference());
 				context.getLogic().castSpell(getOwner(), applyAuraEffect);
 				affectedEntities.add(target.getId());
 				// target is not affected anymore, remove effect
 			} else if (!affects(context, target, resolvedTargets) && affectedEntities.contains(target.getId())) {
 				removeAuraEffect.setTarget(target.getReference());
+				removeAuraEffect.setSourceEntity(getHostReference());
 				context.getLogic().castSpell(getOwner(), removeAuraEffect);
 				affectedEntities.remove(target.getId());
 			}
@@ -88,6 +88,7 @@ public class Aura extends SpellTrigger {
 			EntityReference targetKey = new EntityReference(targetId);
 			Entity target = context.resolveSingleTarget(targetKey);
 			removeAuraEffect.setTarget(target.getReference());
+			removeAuraEffect.setSourceEntity(getHostReference());
 			context.getLogic().castSpell(getOwner(), removeAuraEffect);
 		}
 		affectedEntities.clear();

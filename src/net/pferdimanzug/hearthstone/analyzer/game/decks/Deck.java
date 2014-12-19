@@ -50,15 +50,15 @@ public class Deck {
 		return cards.getCount() == GameLogic.DECK_SIZE;
 	}
 	
+	public boolean isMetaDeck() {
+		return getHeroClass() == HeroClass.DECK_COLLECTION;
+	}
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}
 	
 	public void setName(String name) {
 		this.name = name;
-	}
-	
-	public boolean isMetaDeck() {
-		return getHeroClass() == HeroClass.DECK_COLLECTION;
 	}
 }

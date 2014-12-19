@@ -23,16 +23,17 @@ public class PoisonSeedsSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		Player opponent = context.getOpponent(player);
 		
-		poisonSeeds(context, opponent);
-		poisonSeeds(context, player);
+		poisonSeeds(context, opponent, desc.getSourceEntity());
+		poisonSeeds(context, player, desc.getSourceEntity());
 	}
 	
-	private void poisonSeeds(GameContext context, Player player) {
+	private void poisonSeeds(GameContext context, Player player, EntityReference source) {
 		int minionCount = player.getMinions().size();
 		if (minionCount == 0) {
 			return;
 		}
 		SpellDesc destroy = InstantDestroySpell.create();
+		destroy.setSourceEntity(source);
 		destroy.setTarget(EntityReference.FRIENDLY_MINIONS);
 		context.getLogic().castSpell(player.getId(), destroy);
 		
@@ -41,6 +42,7 @@ public class PoisonSeedsSpell extends Spell {
 			treants[i] = new Treant();
 		}
 		SpellDesc summonTreants = SummonSpell.create(treants);
+		summonTreants.setSourceEntity(source);
 		context.getLogic().castSpell(player.getId(), summonTreants);
 		
 		

@@ -65,6 +65,7 @@ public class BasicTests extends TestBase {
 		playCard(context, mage, devMonsterCard);
 
 		SpellDesc heroBuffSpell = BuffHeroSpell.create(damage, 0);
+		heroBuffSpell.setSourceEntity(druid.getHero().getReference());
 		context.getLogic().castSpell(druid.getId(), heroBuffSpell);
 		context.getLogic().endTurn(druid.getId());
 

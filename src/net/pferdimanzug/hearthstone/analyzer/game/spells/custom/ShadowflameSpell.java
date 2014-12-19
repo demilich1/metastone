@@ -7,11 +7,10 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroySpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellSource;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class ShadowflameSpell extends DestroySpell {
-	
+
 	public static SpellDesc create() {
 		SpellDesc desc = new SpellDesc(ShadowflameSpell.class);
 		return desc;
@@ -23,7 +22,7 @@ public class ShadowflameSpell extends DestroySpell {
 
 		// deal attack damage to all enemy minions
 		SpellDesc damageSpell = DamageSpell.create(targetMinion.getAttack());
-		damageSpell.setSource(SpellSource.SPELL_CARD);
+		damageSpell.setSourceEntity(desc.getSourceEntity());
 		damageSpell.setTarget(EntityReference.ENEMY_MINIONS);
 		context.getLogic().castSpell(player.getId(), damageSpell);
 

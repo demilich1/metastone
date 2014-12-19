@@ -13,20 +13,20 @@ public class HeroTemplate {
 		this.heroClass = heroClass;
 	}
 	
-	public Image getImage() {
-		return new Image(IconFactory.getHeroIconUrl(getHeroClass()));
-	}
-
-	public String getName() {
-		return name;
+	public Hero createHero() {
+		return HeroFactory.createHero(heroClass);
 	}
 
 	public HeroClass getHeroClass() {
 		return heroClass;
 	}
+
+	public Image getImage() {
+		return new Image(IconFactory.getHeroIconUrl(getHeroClass()));
+	}
 	
-	public Hero createHero() {
-		return HeroFactory.createHero(heroClass);
+	public String getName() {
+		return name;
 	}
 
 }

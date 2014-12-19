@@ -8,7 +8,9 @@ import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.Fireblast;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.LesserHeal;
 import net.pferdimanzug.hearthstone.analyzer.game.heroes.powers.LifeTap;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellSource;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -27,16 +29,10 @@ public class HeroPowerTest extends TestBase {
 		Assert.assertEquals(warrior.getHp(), GameLogic.MAX_HERO_HP);
 		Assert.assertEquals(warrior.getArmor(), ArmorUp.ARMOR_BONUS);
 
-		GameAction damage = new TestAction() {
-
-			@Override
-			public void execute(GameContext context, int playerId) {
-				context.getLogic().damage(context.getPlayer1(), warrior, 2 * ArmorUp.ARMOR_BONUS, SpellSource.SPELL_TRIGGER);
-			}
-
-		};
-		damage.setTarget(warrior);
-		context.getLogic().performGameAction(context.getPlayer2().getId(), damage);
+		
+		SpellDesc damage = DamageSpell.create(2 * ArmorUp.ARMOR_BONUS);
+		damage.setTarget(EntityReference.FRIENDLY_HERO);
+		playCard(context, context.getPlayer1(), new TestSpellCard(damage));
 		Assert.assertEquals(warrior.getHp(), GameLogic.MAX_HERO_HP - ArmorUp.ARMOR_BONUS);
 		Assert.assertEquals(warrior.getArmor(), 0);
 
@@ -45,16 +41,10 @@ public class HeroPowerTest extends TestBase {
 		// the damage dealt was less than the total armor. Following test
 		// covers that scenario
 		context.getLogic().performGameAction(context.getPlayer1().getId(), armorUp);
-		damage = new TestAction() {
-
-			@Override
-			public void execute(GameContext context, int playerId) {
-				context.getLogic().damage(context.getPlayer1(), warrior, ArmorUp.ARMOR_BONUS / 2, SpellSource.SPELL_TRIGGER);
-			}
-
-		};
-		damage.setTarget(warrior);
-		context.getLogic().performGameAction(context.getPlayer2().getId(), damage);
+		damage = DamageSpell.create(ArmorUp.ARMOR_BONUS / 2);
+		damage.setTarget(EntityReference.FRIENDLY_HERO);
+		playCard(context, context.getPlayer1(), new TestSpellCard(damage));		
+		
 		Assert.assertEquals(warrior.getHp(), GameLogic.MAX_HERO_HP - ArmorUp.ARMOR_BONUS);
 		Assert.assertEquals(warrior.getArmor(), ArmorUp.ARMOR_BONUS / 2);
 	}

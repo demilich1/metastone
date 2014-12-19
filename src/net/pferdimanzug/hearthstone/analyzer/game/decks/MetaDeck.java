@@ -19,16 +19,16 @@ public class MetaDeck extends Deck {
 		this.decks = decks;
 	}
 
-	public Deck selectRandom() {
-		return getDecks().get(ThreadLocalRandom.current().nextInt(getDecks().size()));
-	}
-
 	public List<Deck> getDecks() {
 		return decks;
 	}
 
 	public boolean isComplete() {
 		return decks.size() > 1;
+	}
+
+	public Deck selectRandom() {
+		return getDecks().get(ThreadLocalRandom.current().nextInt(getDecks().size()));
 	}
 
 }

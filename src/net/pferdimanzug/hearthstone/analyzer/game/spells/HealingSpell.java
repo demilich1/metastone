@@ -26,7 +26,8 @@ public class HealingSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		int healing = desc.getInt(SpellArg.HEALING);
-		context.getLogic().heal(player, (Actor) target, healing, desc.getSource());
+		Entity source = context.resolveSingleTarget(desc.getSourceEntity());
+		context.getLogic().heal(player, (Actor) target, healing, source);
 	}
 
 }

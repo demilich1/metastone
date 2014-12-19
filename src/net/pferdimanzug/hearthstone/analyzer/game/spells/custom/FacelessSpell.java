@@ -27,6 +27,7 @@ public class FacelessSpell extends Spell {
 		Minion sourceActor = context.getSummonStack().peek();
 		SpellDesc transformSpell = TransformMinionSpell.create(clone);
 		transformSpell.setTarget(sourceActor.getReference());
+		transformSpell.setSourceEntity(desc.getSourceEntity());
 		context.getLogic().castSpell(player.getId(), transformSpell);
 		
 		for (IGameEventListener trigger : context.getTriggersAssociatedWith(template.getReference())) {

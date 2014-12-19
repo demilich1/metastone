@@ -20,7 +20,8 @@ public class LifeLeechSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		Minion attacker = (Minion) context.getEnvironment().get(Environment.ATTACKER);
 		int healing = attacker.getAttack();
-		context.getLogic().heal(player, (Actor) target, healing, desc.getSource());
+		Entity source = context.resolveSingleTarget(desc.getSourceEntity());
+		context.getLogic().heal(player, (Actor) target, healing, source);
 	}
 
 }

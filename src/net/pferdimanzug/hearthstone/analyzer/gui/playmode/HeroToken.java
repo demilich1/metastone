@@ -87,16 +87,16 @@ public class HeroToken extends GameToken {
 		armorAnchor.setVisible(visible);
 	}
 	
-	private void updateStatus(Hero hero) {
-		frozen.setVisible(hero.hasStatus(GameTag.FROZEN));
-	}
-
 	private void updateSecrets(Player player) {
 		secretsAnchor.getChildren().clear();
 		for (int i = 0; i < player.getSecrets().size(); i++) {
 			ImageView secretIcon = new ImageView(IconFactory.getImageUrl("common/secret.png"));
 			secretsAnchor.getChildren().add(secretIcon);
 		}
+	}
+
+	private void updateStatus(Hero hero) {
+		frozen.setVisible(hero.hasStatus(GameTag.FROZEN));
 	}
 
 	private void updateWeapon(Weapon weapon) {

@@ -28,7 +28,8 @@ public class ImplosionSpell extends Spell {
 		int damageRoll = minDamage + ThreadLocalRandom.current().nextInt(damageRange + 1);
 		desc.set(SpellArg.DAMAGE, damageRoll);
 
-		int effectiveDamage = context.getLogic().damage(player, (Actor) target, damageRoll, desc.getSource());
+		Entity source = context.resolveSingleTarget(desc.getSourceEntity());
+		int effectiveDamage = context.getLogic().damage(player, (Actor) target, damageRoll, source);
 		for (int i = 0; i < effectiveDamage; i++) {
 			context.getLogic().summon(player.getId(), new Imp().summon());
 		}

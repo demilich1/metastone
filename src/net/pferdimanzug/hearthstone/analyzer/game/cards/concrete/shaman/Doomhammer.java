@@ -32,6 +32,7 @@ public class Doomhammer extends WeaponCard {
 			@Override
 			public void onEquip(GameContext context, Player player) {
 				SpellDesc windfury = WindfurySpell.create();
+				windfury.setSourceEntity(getReference());
 				windfury.setTarget(EntityReference.FRIENDLY_HERO);
 				context.getLogic().castSpell(player.getId(), windfury);
 			}
@@ -39,6 +40,7 @@ public class Doomhammer extends WeaponCard {
 			@Override
 			public void onUnequip(GameContext context, Player player) {
 				SpellDesc removeWindfury = RemoveWindfurySpell.create();
+				removeWindfury.setSourceEntity(getReference());
 				removeWindfury.setTarget(EntityReference.FRIENDLY_HERO);
 				context.getLogic().castSpell(player.getId(), removeWindfury);
 			}

@@ -57,10 +57,6 @@ public class SpellDesc extends CustomCloneable {
 		return arguments.containsKey(spellArg) ? (int) get(spellArg) : 0;
 	}
 
-	public SpellSource getSource() {
-		return (SpellSource) arguments.get(SpellArg.SPELL_SOURCE);
-	}
-	
 	public EntityReference getSourceEntity() {
 		return (EntityReference) arguments.get(SpellArg.SOURCE_ENTITY);
 	}
@@ -99,10 +95,6 @@ public class SpellDesc extends CustomCloneable {
 
 	public void set(SpellArg spellArg, Object value) {
 		arguments.put(spellArg, value);
-	}
-
-	public void setSource(SpellSource source) {
-		arguments.put(SpellArg.SPELL_SOURCE, source);
 	}
 
 	public void setSourceEntity(EntityReference sourceEntity) {

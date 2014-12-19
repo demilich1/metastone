@@ -23,6 +23,7 @@ public class ShadowformSpell extends Spell {
 		Hero hero = (Hero) target;
 		HeroPower newHeroPower = hero.getHeroPower() instanceof MindSpike ? new MindShatter() : new MindSpike();
 		SpellDesc changeHeroPowerSpell = ChangeHeroPowerSpell.create(newHeroPower);
+		changeHeroPowerSpell.setSourceEntity(desc.getSourceEntity());
 		changeHeroPowerSpell.setTarget(hero.getReference());
 		context.getLogic().castSpell(player.getId(), changeHeroPowerSpell);
 	}

@@ -20,7 +20,6 @@ public class ConditionalEffectSpell extends Spell {
 		if (!spell.hasPredefinedTarget()) {
 			spell.setTarget(wrapper.getTarget());
 		}
-		spell.setSource(wrapper.getSource());
 		spell.setSourceEntity(wrapper.getSourceEntity());
 		context.getLogic().castSpell(playerId, spell);
 	}

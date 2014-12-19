@@ -7,7 +7,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.events.GameEvent;
 import net.pferdimanzug.hearthstone.analyzer.game.events.GameEventType;
 import net.pferdimanzug.hearthstone.analyzer.game.logic.CustomCloneable;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellSource;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 import org.slf4j.Logger;
@@ -28,7 +27,6 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 		this.primaryTrigger = primaryTrigger;
 		this.secondaryTrigger = secondaryTrigger;
 		this.spell = spell;
-		spell.setSource(SpellSource.SPELL_TRIGGER);
 		this.oneTime = oneTime;
 	}
 
@@ -105,6 +103,7 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 					expired = true;
 				}
 
+				spell.setSourceEntity(hostReference);
 				event.getGameContext().getEnvironment().put(Environment.EVENT_TARGET, event.getEventTarget());
 				onFire(ownerId, spell, event);
 				event.getGameContext().getEnvironment().remove(Environment.EVENT_TARGET);

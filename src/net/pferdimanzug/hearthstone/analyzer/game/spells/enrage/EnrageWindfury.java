@@ -23,10 +23,12 @@ public class EnrageWindfury extends Enrage {
 		if (target.hasStatus(GameTag.ENRAGED)) {
 			SpellDesc windfurySpell = WindfurySpell.create();
 			windfurySpell.setTarget(target.getReference());
+			windfurySpell.setSourceEntity(desc.getSourceEntity());
 			context.getLogic().castSpell(player.getId(), windfurySpell);
 		} else {
 			SpellDesc removeWindfurySpell = RemoveWindfurySpell.create();
 			removeWindfurySpell.setTarget(target.getReference());
+			removeWindfurySpell.setSourceEntity(desc.getSourceEntity());
 			context.getLogic().castSpell(player.getId(), removeWindfurySpell);
 		}
 	}

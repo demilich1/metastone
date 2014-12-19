@@ -9,6 +9,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellArg;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
+import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class PutRandomMinionOnBoardSpell extends Spell {
 
@@ -29,23 +30,24 @@ public class PutRandomMinionOnBoardSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		Player opponent = context.getOpponent(player);
 		Race race = (Race) desc.get(SpellArg.RACE);
+		EntityReference source = desc.getSourceEntity();
 		switch (desc.getTargetPlayer()) {
 		case BOTH:
-			putRandomMinionFromDeckOnBoard(context, player, race);
-			putRandomMinionFromDeckOnBoard(context, opponent, race);
+			putRandomMinionFromDeckOnBoard(context, player, race, source);
+			putRandomMinionFromDeckOnBoard(context, opponent, race, source);
 			break;
 		case OPPONENT:
-			putRandomMinionFromDeckOnBoard(context, opponent, race);
+			putRandomMinionFromDeckOnBoard(context, opponent, race, source);
 			break;
 		case SELF:
-			putRandomMinionFromDeckOnBoard(context, player, race);
+			putRandomMinionFromDeckOnBoard(context, player, race, source);
 			break;
 		default:
 			break;
 		}
 	}
 
-	private void putRandomMinionFromDeckOnBoard(GameContext context, Player player, Race race) {
+	private void putRandomMinionFromDeckOnBoard(GameContext context, Player player, Race race, EntityReference source) {
 		MinionCard minionCard = null;
 		if (race == null) {
 			minionCard = (MinionCard) player.getDeck().getRandomOfType(CardType.MINION);
@@ -57,6 +59,7 @@ public class PutRandomMinionOnBoardSpell extends Spell {
 			return;
 		}
 		SpellDesc summonSpell = SummonSpell.create(minionCard);
+		summonSpell.setSourceEntity(source);
 		context.getLogic().castSpell(player.getId(), summonSpell);
 		context.getLogic().removeCard(player.getId(), minionCard);
 	}

@@ -6,7 +6,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
 import net.pferdimanzug.hearthstone.analyzer.game.Player;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellSource;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
 
 public class Battlecry extends GameAction {
@@ -28,7 +27,6 @@ public class Battlecry extends GameAction {
 
 	protected Battlecry(SpellDesc spell) {
 		this.spell = spell;
-		spell.setSource(SpellSource.SPELL_TRIGGER);
 		setActionType(ActionType.BATTLECRY);
 	}
 

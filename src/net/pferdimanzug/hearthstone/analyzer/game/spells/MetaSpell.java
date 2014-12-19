@@ -51,7 +51,6 @@ public class MetaSpell extends Spell {
 			if (!spell.hasPredefinedTarget()) {
 				spell.setTarget(target.getReference());
 			}
-			spell.setSource(desc.getSource());
 			spell.setSourceEntity(desc.getSourceEntity());
 			context.getLogic().castSpell(player.getId(), spell);
 		}

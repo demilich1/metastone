@@ -11,11 +11,10 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.ApplyTagSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellSource;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnStartTrigger;
 
 public class ConeOfColdSpell extends Spell {
-	
+
 	public static SpellDesc create() {
 		SpellDesc desc = new SpellDesc(ConeOfColdSpell.class);
 		return desc;
@@ -23,13 +22,13 @@ public class ConeOfColdSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
-		List<Entity> affected = context.getAdjacentMinions(player, target.getReference());
+		List<Actor> affected = context.getAdjacentMinions(player, target.getReference());
 		affected.add((Actor) target);
 
 		SpellDesc damage = DamageSpell.create(1);
-		damage.setSource(SpellSource.SPELL_CARD);
+		damage.setSourceEntity(desc.getSourceEntity());
 		SpellDesc freeze = ApplyTagSpell.create(GameTag.FROZEN, new TurnStartTrigger());
-		freeze.setSource(SpellSource.SPELL_CARD);
+		freeze.setSourceEntity(desc.getSourceEntity());
 
 		for (Entity minion : affected) {
 			damage.setTarget(minion.getReference());

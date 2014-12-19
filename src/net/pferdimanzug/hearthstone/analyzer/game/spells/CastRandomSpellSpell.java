@@ -33,7 +33,6 @@ public class CastRandomSpellSpell extends Spell {
 			break;
 		}
 		spell.setTarget(target.getReference());
-		spell.setSource(desc.getSource());
 		spell.setSourceEntity(desc.getSourceEntity());
 		context.getLogic().castSpell(player.getId(), spell);
 	}

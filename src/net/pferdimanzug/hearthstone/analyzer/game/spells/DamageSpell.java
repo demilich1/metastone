@@ -29,7 +29,8 @@ public class DamageSpell extends Spell {
 			damage = damageModifier.provideValue(context, player, target);
 		}
 		
-		context.getLogic().damage(player, (Actor)target, damage, desc.getSource());
+		Entity source = context.resolveSingleTarget(desc.getSourceEntity());
+		context.getLogic().damage(player, (Actor)target, damage, source);
 	}
 
 }

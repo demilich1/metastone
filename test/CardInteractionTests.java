@@ -27,6 +27,20 @@ import org.testng.annotations.Test;
 public class CardInteractionTests extends TestBase {
 
 	@Test
+	public void testKnifeJugglerPlusStealth() {
+		GameContext context = createContext(HeroClass.ROGUE, HeroClass.WARRIOR);
+		Player player = context.getPlayer1();
+		
+		Minion knifeJuggler = playMinionCard(context, player, new KnifeJuggler());
+		playCard(context, player, new Conceal());
+		// knife juggler should be stealthed
+		Assert.assertTrue(knifeJuggler.hasStatus(GameTag.STEALTHED));
+		// knife juggler should be unstealthed as soon as another minion is played and his trigger fires
+		playCard(context, player, new TestMinionCard(1, 1));
+		Assert.assertFalse(knifeJuggler.hasStatus(GameTag.STEALTHED));
+	}
+
+	@Test
 	public void testSilenceWithBuffs() {
 		GameContext context = createContext(HeroClass.WARLOCK, HeroClass.WARRIOR);
 		Player player = context.getPlayer1();
@@ -128,7 +142,7 @@ public class CardInteractionTests extends TestBase {
 		Assert.assertTrue(bloodsailRaider.hasStatus(GameTag.CHARGE));
 		Assert.assertEquals(bloodsailRaider.getAttack(), 7);
 	}
-
+	
 	@Test
 	public void testWildPyroPlusEquality() {
 		GameContext context = createContext(HeroClass.PALADIN, HeroClass.WARRIOR);
@@ -154,20 +168,6 @@ public class CardInteractionTests extends TestBase {
 		// deathrattles
 		Assert.assertEquals(paladin.getMinions().size(), 0);
 		Assert.assertEquals(warrior.getMinions().size(), 0);
-	}
-	
-	@Test
-	public void testKnifeJugglerPlusStealth() {
-		GameContext context = createContext(HeroClass.ROGUE, HeroClass.WARRIOR);
-		Player player = context.getPlayer1();
-		
-		Minion knifeJuggler = playMinionCard(context, player, new KnifeJuggler());
-		playCard(context, player, new Conceal());
-		// knife juggler should be stealthed
-		Assert.assertTrue(knifeJuggler.hasStatus(GameTag.STEALTHED));
-		// knife juggler should be unstealthed as soon as another minion is played and his trigger fires
-		playCard(context, player, new TestMinionCard(1, 1));
-		Assert.assertFalse(knifeJuggler.hasStatus(GameTag.STEALTHED));
 	}
 
 }

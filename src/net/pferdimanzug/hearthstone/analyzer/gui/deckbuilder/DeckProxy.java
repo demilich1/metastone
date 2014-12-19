@@ -54,15 +54,6 @@ public class DeckProxy extends Proxy<GameNotification> {
 		return result;
 	}
 
-	public boolean nameAvailable(Deck deck) {
-		for (Deck existingDeck : decks) {
-			if (existingDeck != deck && existingDeck.getName().equals(deck.getName())) {
-				return false;
-			}
-		}
-		return true;
-	}
-
 	public Deck getActiveDeck() {
 		return activeDeck;
 	}
@@ -101,6 +92,27 @@ public class DeckProxy extends Proxy<GameNotification> {
 		loadMetaDecks(files, gson);
 	}
 
+	private void loadMetaDecks(Collection<File> files, Gson gson) throws FileNotFoundException {
+		for (File file : files) {
+			FileReader reader = new FileReader(file);
+			HashMap<String, Object> map = gson.fromJson(reader, new TypeToken<HashMap<String, Object>>() {
+			}.getType());
+			if (!map.containsKey("heroClass")) {
+				logger.error("Deck {} does not speficy a value for 'heroClass' and is therefor not valid", file.getName());
+				continue;
+			}
+			String deckName = (String) map.get("name");
+			Deck deck = null;
+			if (!map.containsKey("decks")) {
+				continue;
+			} else {
+				deck = parseMetaDeck(map);
+			}
+			deck.setName(deckName);
+			decks.add(deck);
+		}
+	}
+
 	private void loadStandardDecks(Collection<File> files, Gson gson) throws FileNotFoundException {
 		for (File file : files) {
 			FileReader reader = new FileReader(file);
@@ -125,37 +137,13 @@ public class DeckProxy extends Proxy<GameNotification> {
 		}
 	}
 
-	private void loadMetaDecks(Collection<File> files, Gson gson) throws FileNotFoundException {
-		for (File file : files) {
-			FileReader reader = new FileReader(file);
-			HashMap<String, Object> map = gson.fromJson(reader, new TypeToken<HashMap<String, Object>>() {
-			}.getType());
-			if (!map.containsKey("heroClass")) {
-				logger.error("Deck {} does not speficy a value for 'heroClass' and is therefor not valid", file.getName());
-				continue;
+	public boolean nameAvailable(Deck deck) {
+		for (Deck existingDeck : decks) {
+			if (existingDeck != deck && existingDeck.getName().equals(deck.getName())) {
+				return false;
 			}
-			String deckName = (String) map.get("name");
-			Deck deck = null;
-			if (!map.containsKey("decks")) {
-				continue;
-			} else {
-				deck = parseMetaDeck(map);
-			}
-			deck.setName(deckName);
-			decks.add(deck);
 		}
-	}
-
-	private Deck parseStandardDeck(HeroClass heroClass, Map<String, Object> map) {
-		Deck deck = new Deck(heroClass);
-		@SuppressWarnings("unchecked")
-		List<Double> cardIds = (List<Double>) map.get("cards");
-		for (Double doubleCardId : cardIds) {
-			int cardId = doubleCardId.intValue();
-			Card card = CardCatalogue.getCardById(cardId);
-			deck.getCards().add(card);
-		}
-		return deck;
+		return true;
 	}
 
 	private Deck parseMetaDeck(Map<String, Object> map) {
@@ -171,6 +159,18 @@ public class DeckProxy extends Proxy<GameNotification> {
 			decksInMetaDeck.add(deck);
 		}
 		return new MetaDeck(decksInMetaDeck);
+	}
+
+	private Deck parseStandardDeck(HeroClass heroClass, Map<String, Object> map) {
+		Deck deck = new Deck(heroClass);
+		@SuppressWarnings("unchecked")
+		List<Double> cardIds = (List<Double>) map.get("cards");
+		for (Double doubleCardId : cardIds) {
+			int cardId = doubleCardId.intValue();
+			Card card = CardCatalogue.getCardById(cardId);
+			deck.getCards().add(card);
+		}
+		return deck;
 	}
 
 	public void removeCardFromDeck(Card card) {

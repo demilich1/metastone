@@ -6,9 +6,11 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.ApplyTagSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.TargetPlayer;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.PhysicalAttackTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnStartTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
 public class WaterElemental extends MinionCard {
@@ -26,7 +28,7 @@ public class WaterElemental extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion waterElemental = createMinion();
-		SpellDesc freezeSpell = ApplyTagSpell.create(GameTag.FROZEN);
+		SpellDesc freezeSpell = ApplyTagSpell.create(GameTag.FROZEN, new TurnStartTrigger(TargetPlayer.SELF));
 		freezeSpell.setTarget(EntityReference.EVENT_TARGET);
 		waterElemental.setSpellTrigger(new SpellTrigger(new PhysicalAttackTrigger(true), freezeSpell));
 		return waterElemental;

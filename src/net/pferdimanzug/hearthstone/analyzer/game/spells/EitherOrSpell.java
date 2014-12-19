@@ -27,7 +27,6 @@ public class EitherOrSpell extends Spell {
 		if (!spellToCast.hasPredefinedTarget()) {
 			spellToCast.setTarget(desc.getTarget());
 		}
-		spellToCast.setSource(desc.getSource());
 		spellToCast.setSourceEntity(desc.getSourceEntity());
 		context.getLogic().castSpell(player.getId(), spellToCast);
 	}
