@@ -24,7 +24,7 @@ public class DreadCorsair extends MinionCard {
 		if (weapon == null) {
 			return super.getManaCost(context, player);
 		}
-		return super.getManaCost(context, player) - weapon.getAttack();
+		return super.getManaCost(context, player) - weapon.getWeaponDamage();
 	}
 
 	@Override
