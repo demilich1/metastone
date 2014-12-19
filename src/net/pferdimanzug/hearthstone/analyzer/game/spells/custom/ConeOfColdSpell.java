@@ -11,7 +11,6 @@ import net.pferdimanzug.hearthstone.analyzer.game.spells.ApplyTagSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.Spell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnStartTrigger;
 
 public class ConeOfColdSpell extends Spell {
 
@@ -27,7 +26,7 @@ public class ConeOfColdSpell extends Spell {
 
 		SpellDesc damage = DamageSpell.create(1);
 		damage.setSourceEntity(desc.getSourceEntity());
-		SpellDesc freeze = ApplyTagSpell.create(GameTag.FROZEN, new TurnStartTrigger());
+		SpellDesc freeze = ApplyTagSpell.create(GameTag.FROZEN);
 		freeze.setSourceEntity(desc.getSourceEntity());
 
 		for (Entity minion : affected) {

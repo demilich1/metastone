@@ -21,8 +21,6 @@ public class FrostElemental extends MinionCard {
 		return 129;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion frostElemental = createMinion();

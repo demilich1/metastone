@@ -18,8 +18,6 @@ public class FrostShock extends SpellCard {
 		setSpell(MetaSpell.create(DamageSpell.create(1), ApplyTagSpell.create(GameTag.FROZEN)));
 	}
 
-
-
 	@Override
 	public int getTypeId() {
 		return 322;
