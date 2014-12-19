@@ -200,7 +200,8 @@ public class GameLogic implements Cloneable {
 		// Secret, but it can easily be expanded if targets of area of effect
 		// spell should be changeable as well
 		Card sourceCard = source.getEntityType() == EntityType.CARD ? (Card) source : null;
-		if (sourceCard != null && sourceCard.getCardType() == CardType.SPELL && !spellDesc.hasPredefinedTarget() && targets != null && targets.size() == 1) {
+		if (sourceCard != null && sourceCard.getCardType() == CardType.SPELL && !spellDesc.hasPredefinedTarget() && targets != null
+				&& targets.size() == 1) {
 			if (sourceCard instanceof SpellCard) {
 				spellCard = (SpellCard) sourceCard;
 			}
@@ -289,7 +290,7 @@ public class GameLogic implements Cloneable {
 	public int damage(Player player, Actor target, int baseDamage, Entity source) {
 		int damage = baseDamage;
 		Card sourceCard = source != null && source.getEntityType() == EntityType.CARD ? (Card) source : null;
-		if (source != null && source.getEntityType() == EntityType.CARD &&  sourceCard.getCardType() == CardType.SPELL) {
+		if (source != null && source.getEntityType() == EntityType.CARD && sourceCard.getCardType() == CardType.SPELL) {
 			damage = applySpellpower(player, baseDamage);
 		}
 		if (sourceCard != null && (sourceCard.getCardType() == CardType.SPELL || sourceCard.getCardType() == CardType.HERO_POWER)) {
@@ -435,15 +436,21 @@ public class GameLogic implements Cloneable {
 	public void endTurn(int playerId) {
 		Player player = context.getPlayer(playerId);
 
-		player.getHero().removeTag(GameTag.TEMPORARY_ATTACK_BONUS);
-
-		player.getHero().removeTag(GameTag.CANNOT_REDUCE_HP_BELOW_1);
+		Hero hero = player.getHero();
+		hero.removeTag(GameTag.TEMPORARY_ATTACK_BONUS);
+		hero.removeTag(GameTag.CANNOT_REDUCE_HP_BELOW_1);
+		if (hero.hasStatus(GameTag.FROZEN) && hero.getTagValue(GameTag.NUMBER_OF_ATTACKS) > 0) {
+			hero.removeTag(GameTag.FROZEN);
+		}
 		for (Minion minion : player.getMinions()) {
 			minion.removeTag(GameTag.TEMPORARY_ATTACK_BONUS);
 			minion.removeTag(GameTag.CANNOT_REDUCE_HP_BELOW_1);
+			if (minion.hasStatus(GameTag.FROZEN) && minion.getTagValue(GameTag.NUMBER_OF_ATTACKS) > 0) {
+				minion.removeTag(GameTag.FROZEN);
+			}
 		}
-		player.getHero().removeTag(GameTag.COMBO);
-		player.getHero().activateWeapon(false);
+		hero.removeTag(GameTag.COMBO);
+		hero.activateWeapon(false);
 		log("{} ends his turn.", player.getName());
 		context.fireGameEvent(new TurnEndEvent(context, player.getId()));
 		for (Iterator<CardCostModifier> iterator = context.getCardCostModifiers().iterator(); iterator.hasNext();) {
@@ -943,8 +950,6 @@ public class GameLogic implements Cloneable {
 	public void refreshAttacksPerRound(Entity entity) {
 		int attacks = 1;
 		if (entity.hasStatus(GameTag.SUMMONING_SICKNESS) && !entity.hasStatus(GameTag.CHARGE)) {
-			attacks = 0;
-		} else if (entity.hasStatus(GameTag.FROZEN)) {
 			attacks = 0;
 		} else if (entity.hasStatus(GameTag.WINDFURY)) {
 			attacks = 2;

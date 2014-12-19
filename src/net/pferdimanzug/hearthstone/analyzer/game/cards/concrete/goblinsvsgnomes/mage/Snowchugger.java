@@ -8,7 +8,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.ApplyTagSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.PhysicalAttackTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.DamageCausedTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
@@ -25,14 +25,12 @@ public class Snowchugger extends MinionCard {
 		return 496;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion snowchugger = createMinion();
 		SpellDesc freezeSpell = ApplyTagSpell.create(GameTag.FROZEN);
 		freezeSpell.setTarget(EntityReference.EVENT_TARGET);
-		snowchugger.setSpellTrigger(new SpellTrigger(new PhysicalAttackTrigger(true), freezeSpell));
+		snowchugger.setSpellTrigger(new SpellTrigger(new DamageCausedTrigger(true), freezeSpell));
 		return snowchugger;
 	}
 }

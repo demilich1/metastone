@@ -7,7 +7,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.DestroySpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.PhysicalAttackTrigger;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.DamageCausedTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
 
@@ -28,7 +28,7 @@ public class PatientAssassin extends MinionCard {
 		Minion patientAssassin = createMinion(GameTag.STEALTHED);
 		SpellDesc killSpell = DestroySpell.create();
 		killSpell.setTarget(EntityReference.EVENT_TARGET);
-		patientAssassin.setSpellTrigger(new SpellTrigger(new PhysicalAttackTrigger(false), killSpell));
+		patientAssassin.setSpellTrigger(new SpellTrigger(new DamageCausedTrigger(false), killSpell));
 		return patientAssassin;
 	}
 }

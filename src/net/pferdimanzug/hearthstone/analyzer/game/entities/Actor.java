@@ -34,6 +34,9 @@ public abstract class Actor extends Entity {
 		if (hasStatus(GameTag.CANNOT_ATTACK)) {
 			return false;
 		}
+		if (hasStatus(GameTag.FROZEN)) {
+			return false;
+		}
 		if (hasStatus(GameTag.SUMMONING_SICKNESS) && !hasStatus(GameTag.CHARGE)) {
 			return false;
 		}
