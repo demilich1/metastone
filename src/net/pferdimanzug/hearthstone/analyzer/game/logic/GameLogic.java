@@ -118,7 +118,7 @@ public class GameLogic implements Cloneable {
 		Player player = context.getPlayer(playerId);
 		player.getHero().modifyTag(GameTag.COMBO, +1);
 		Card card = context.resolveCardReference(cardReference);
-		if (card.getCardType() == CardType.SPELL) {
+		if (card.getCardType() == CardType.SPELL && !card.hasStatus(GameTag.COUNTERED)) {
 			context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, card));
 		}
 
