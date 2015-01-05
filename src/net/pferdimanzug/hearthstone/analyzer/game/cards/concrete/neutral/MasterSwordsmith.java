@@ -4,7 +4,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffRandomSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnEndTrigger;
@@ -25,8 +25,9 @@ public class MasterSwordsmith extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion masterSwordsmith = createMinion();
-		SpellDesc randomBuffSpell = BuffRandomSpell.create(+1);
+		SpellDesc randomBuffSpell = BuffSpell.create(+1);
 		randomBuffSpell.setTarget(EntityReference.OTHER_FRIENDLY_MINIONS);
+		randomBuffSpell.pickRandomTarget(true);
 		masterSwordsmith.setSpellTrigger(new SpellTrigger(new TurnEndTrigger(), randomBuffSpell));
 		return masterSwordsmith;
 	}

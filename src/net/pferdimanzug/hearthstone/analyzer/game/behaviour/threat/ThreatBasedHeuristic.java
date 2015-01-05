@@ -53,9 +53,11 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 			heroDamage += 2;
 		} else if (hero.getHeroClass() == HeroClass.DRUID) {
 			heroDamage += 1;
+		} else if (hero.getHeroClass() == HeroClass.ROGUE) {
+			heroDamage += 1;
 		}
 		if (hero.getWeapon() != null) {
-			heroDamage += hero.getWeapon().getDurability();
+			heroDamage += hero.getWeapon().getWeaponDamage();
 		}
 		return heroDamage;
 	}

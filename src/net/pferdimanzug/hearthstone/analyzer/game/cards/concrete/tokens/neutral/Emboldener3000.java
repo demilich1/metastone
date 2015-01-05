@@ -5,7 +5,7 @@ import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
 import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Race;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffRandomSpell;
+import net.pferdimanzug.hearthstone.analyzer.game.spells.BuffSpell;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.SpellTrigger;
 import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.TurnEndTrigger;
@@ -29,8 +29,9 @@ public class Emboldener3000 extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion emboldener3000 = createMinion();
-		SpellDesc buffSpell = BuffRandomSpell.create(1, 1);
+		SpellDesc buffSpell = BuffSpell.create(1, 1);
 		buffSpell.setTarget(EntityReference.ALL_MINIONS);
+		buffSpell.pickRandomTarget(true);
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), buffSpell);
 		emboldener3000.setSpellTrigger(trigger);
 		return emboldener3000;
