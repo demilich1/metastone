@@ -1,5 +1,6 @@
 package net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.shaman;
 
+import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
 import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.tokens.shaman.SpiritWolf;
@@ -13,6 +14,7 @@ public class FeralSpirit extends SpellCard {
 		super("Feral Spirit", Rarity.RARE, HeroClass.SHAMAN, 3);
 		setDescription("Summon two 2/3 Spirit Wolves with Taunt. Overload: (2)");
 
+		setTag(GameTag.OVERLOAD, 2);
 		setSpell(SummonSpell.create(new SpiritWolf(), new SpiritWolf()));
 		setTargetRequirement(TargetSelection.NONE);
 	}

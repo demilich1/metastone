@@ -1,7 +1,10 @@
 package net.pferdimanzug.hearthstone.analyzer.gui.mainmenu;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -33,6 +36,9 @@ public class MainMenuView extends BorderPane {
 	
 	@FXML
 	private Label versionLabel;
+	
+	@FXML
+	private Button donationButton;
 
 	public MainMenuView() {
 
@@ -68,6 +74,18 @@ public class MainMenuView extends BorderPane {
 		}
 		
 		versionLabel.setText(AppConfig.VERSION + (AppConfig.DEV_BUILD ? " (Dev build)" : ""));
+		
+		donationButton.setOnAction(this::openDonation);
+	}
+	
+	private void openDonation(ActionEvent event) {
+		try {
+			java.awt.Desktop.getDesktop().browse(new URI("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=92DYWPZUVDMEY"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

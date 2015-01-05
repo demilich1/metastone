@@ -11,14 +11,14 @@ import net.pferdimanzug.hearthstone.analyzer.gui.IconFactory;
 public class HearthstoneAnalyzer extends Application {
 
 	public static void main(String[] args) {
-		//DevCheckCardCompleteness.updateCardCatalogue();
-		//DevCheckCardCompleteness.writeImplementedCardsToFile("implemented_cards.csv");
+		// DevCheckCardCompleteness.updateCardCatalogue();
+		// DevCheckCardCompleteness.writeImplementedCardsToFile("implemented_cards.csv");
 		launch(args);
-		
-		//DevCheckCardCompleteness.assignUniqueIdToEachCard();
-		 //new HearthstoneAnalyzer().launchDebugGame();
+
+		// DevCheckCardCompleteness.assignUniqueIdToEachCard();
+		// new HearthstoneAnalyzer().launchDebugGame();
 	}
-	
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("MetaStone");

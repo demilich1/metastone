@@ -18,11 +18,9 @@ public class DamageCausedTrigger extends GameEventTrigger {
 	public boolean fire(GameEvent event, Entity host) {
 		DamageEvent damageEvent = (DamageEvent) event;
 		if (damageEvent.getSource() == null) {
-			System.out.println("Source is NULL");
 			return false;
 		}
 		if (!worksOnHeroes && damageEvent.getVictim().getEntityType() == EntityType.HERO) {
-			System.out.println("Source is hero");
 			return false;
 		}
 		return damageEvent.getSource() == host;

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.web.*?>
 <?import javafx.scene.image.*?>
 <?import java.net.*?>
 <?import javafx.geometry.*?>
@@ -37,9 +38,9 @@
       <URL value="@../main.css" />
    </stylesheets>
    <bottom>
-      <HBox BorderPane.alignment="CENTER">
+      <AnchorPane>
          <children>
-            <Label fx:id="versionLabel" styleClass="info-small" text="x.x.x">
+            <Label fx:id="versionLabel" styleClass="info-small" text="x.x.x" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -47,8 +48,17 @@
                   <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                </padding>
             </Label>
+            <Button fx:id="donationButton" mnemonicParsing="false" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="433.0" AnchorPane.rightAnchor="433.0">
+               <graphic>
+                  <ImageView fitHeight="47.0" fitWidth="126.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../resources/img/ui/paypal_donate_button.gif" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
-      </HBox>
+      </AnchorPane>
    </bottom>
    <padding>
       <Insets top="20.0" />

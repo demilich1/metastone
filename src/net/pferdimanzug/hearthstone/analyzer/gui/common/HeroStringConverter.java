@@ -1,7 +1,7 @@
 package net.pferdimanzug.hearthstone.analyzer.gui.common;
 
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroTemplate;
 import javafx.util.StringConverter;
+import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroTemplate;
 
 public class HeroStringConverter extends StringConverter<HeroTemplate> {
 

@@ -47,10 +47,9 @@ public class ApplicationMediator extends Mediator<GameNotification> {
 		fpsView.setTranslateX(440);
 		fpsView.setTranslateY(360);
 		PerformanceTracker tracker = PerformanceTracker.getSceneTracker(root.getScene());
-		Timeline timeline = new Timeline(
-		   new KeyFrame(Duration.seconds(1), t -> {
-		      fpsView.setText("Fps: " + String.format("%.2f", tracker.getAverageFPS()));
-		   }));
+		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), t -> {
+			fpsView.setText("Fps: " + String.format("%.2f", tracker.getAverageFPS()));
+		}));
 		timeline.setCycleCount(Timeline.INDEFINITE);
 		timeline.play();
 	}
@@ -86,7 +85,7 @@ public class ApplicationMediator extends Mediator<GameNotification> {
 			break;
 		}
 	}
-	
+
 	@Override
 	public List<GameNotification> listNotificationInterests() {
 		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
@@ -95,7 +94,7 @@ public class ApplicationMediator extends Mediator<GameNotification> {
 		notificationInterests.add(GameNotification.MAIN_MENU);
 		return notificationInterests;
 	}
-	
+
 	private void removeOtherViews() {
 		getFacade().removeMediator(PlayModeMediator.NAME);
 		getFacade().removeMediator(PlayModeConfigMediator.NAME);
