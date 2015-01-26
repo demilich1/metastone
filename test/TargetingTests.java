@@ -1,16 +1,16 @@
 import java.util.List;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
-import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.PhysicalAttackAction;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.Shieldbearer;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.Wisp;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.EntityType;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.actions.PhysicalAttackAction;
+import net.demilich.metastone.game.cards.MinionCard;
+import net.demilich.metastone.game.cards.concrete.neutral.Shieldbearer;
+import net.demilich.metastone.game.cards.concrete.neutral.Wisp;
+import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.entities.EntityType;
+import net.demilich.metastone.game.entities.heroes.HeroClass;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

@@ -1,21 +1,21 @@
 import java.util.List;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.PhysicalAttackAction;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.druid.SavageRoar;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.ArcaneExplosion;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.FaerieDragon;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.GurubashiBerserker;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.OasisSnapjaw;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock.SummoningPortal;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.Hero;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.actions.PhysicalAttackAction;
+import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.MinionCard;
+import net.demilich.metastone.game.cards.concrete.druid.SavageRoar;
+import net.demilich.metastone.game.cards.concrete.mage.ArcaneExplosion;
+import net.demilich.metastone.game.cards.concrete.neutral.FaerieDragon;
+import net.demilich.metastone.game.cards.concrete.neutral.GurubashiBerserker;
+import net.demilich.metastone.game.cards.concrete.neutral.OasisSnapjaw;
+import net.demilich.metastone.game.cards.concrete.warlock.SummoningPortal;
+import net.demilich.metastone.game.entities.Actor;
+import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.entities.heroes.Hero;
+import net.demilich.metastone.game.entities.heroes.HeroClass;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

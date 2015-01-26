@@ -1,8 +1,8 @@
-import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.TargetSelection;
+import net.demilich.metastone.game.cards.Rarity;
+import net.demilich.metastone.game.cards.SpellCard;
+import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.targeting.TargetSelection;
 
 
 public class TestSpellCard extends SpellCard {

@@ -1,15 +1,15 @@
 import java.util.ArrayList;
 import java.util.List;
 
-import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.actions.GameAction;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.neutral.WildPyromancer;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.priest.MindBlast;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.warlock.Corruption;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Entity;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.cards.concrete.neutral.WildPyromancer;
+import net.demilich.metastone.game.cards.concrete.priest.MindBlast;
+import net.demilich.metastone.game.cards.concrete.warlock.Corruption;
+import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.entities.minions.Minion;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

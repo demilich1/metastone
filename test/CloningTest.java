@@ -1,15 +1,15 @@
-import net.pferdimanzug.hearthstone.analyzer.game.GameContext;
-import net.pferdimanzug.hearthstone.analyzer.game.Player;
-import net.pferdimanzug.hearthstone.analyzer.game.behaviour.PlayRandomBehaviour;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCollection;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.SpellCard;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.concrete.mage.Polymorph;
-import net.pferdimanzug.hearthstone.analyzer.game.decks.DeckFactory;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.logic.GameLogic;
-import net.pferdimanzug.hearthstone.analyzer.gui.gameconfig.PlayerConfig;
+import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.behaviour.PlayRandomBehaviour;
+import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.SpellCard;
+import net.demilich.metastone.game.cards.concrete.mage.Polymorph;
+import net.demilich.metastone.game.decks.DeckFactory;
+import net.demilich.metastone.game.entities.Actor;
+import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.logic.GameLogic;
+import net.demilich.metastone.gui.gameconfig.PlayerConfig;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

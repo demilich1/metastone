@@ -1,9 +1,9 @@
-import net.pferdimanzug.hearthstone.analyzer.game.GameTag;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.MinionCard;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.Actor;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.minions.Minion;
+import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.cards.MinionCard;
+import net.demilich.metastone.game.cards.Rarity;
+import net.demilich.metastone.game.entities.Actor;
+import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.entities.minions.Minion;
 
 
 public class TestMinionCard extends MinionCard {

@@ -1,10 +1,10 @@
-import net.pferdimanzug.hearthstone.analyzer.game.cards.Rarity;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.SecretCard;
-import net.pferdimanzug.hearthstone.analyzer.game.entities.heroes.HeroClass;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.DamageSpell;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.desc.SpellDesc;
-import net.pferdimanzug.hearthstone.analyzer.game.spells.trigger.HeroAttackedTrigger;
-import net.pferdimanzug.hearthstone.analyzer.game.targeting.EntityReference;
+import net.demilich.metastone.game.cards.Rarity;
+import net.demilich.metastone.game.cards.SecretCard;
+import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.spells.DamageSpell;
+import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.trigger.HeroAttackedTrigger;
+import net.demilich.metastone.game.targeting.EntityReference;
 
 
 public class TestSecretCard extends SecretCard {

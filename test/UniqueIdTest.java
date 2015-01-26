@@ -1,7 +1,7 @@
 import java.util.HashMap;
 
-import net.pferdimanzug.hearthstone.analyzer.game.cards.Card;
-import net.pferdimanzug.hearthstone.analyzer.game.cards.CardCatalogue;
+import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCatalogue;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
