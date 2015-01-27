@@ -12,7 +12,7 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 public class MechanicalYeti extends MinionCard {
 
 	public MechanicalYeti() {
-		super("Mechanical Yeti", 4, 5, Rarity.COMMON, HeroClass.ANY, 5);
+		super("Mechanical Yeti", 4, 5, Rarity.COMMON, HeroClass.ANY, 4);
 		setDescription("Deathrattle: Give each player a Spare Part.");
 		setRace(Race.MECH);
 	}
@@ -21,7 +21,6 @@ public class MechanicalYeti extends MinionCard {
 	public int getTypeId() {
 		return 530;
 	}
-
 
 
 	@Override

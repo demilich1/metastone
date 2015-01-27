@@ -10,6 +10,7 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.AddCostModifierSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.trigger.SecretPlayedTrigger;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class KirinTorMage extends MinionCard {
@@ -27,7 +28,7 @@ public class KirinTorMage extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion kirinTorMage = createMinion();
-		OneTurnCostModifier costModifier = new OneTurnCostModifier(CardType.SPELL, -99, true);
+		OneTurnCostModifier costModifier = new OneTurnCostModifier(CardType.SPELL, -99, new SecretPlayedTrigger());
 		costModifier.setRequiredTag(GameTag.SECRET);
 		SpellDesc castSecretForFree = AddCostModifierSpell.create(costModifier);
 		castSecretForFree.setTarget(EntityReference.FRIENDLY_HERO);

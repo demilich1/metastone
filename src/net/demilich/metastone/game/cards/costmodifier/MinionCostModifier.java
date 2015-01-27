@@ -12,7 +12,7 @@ public class MinionCostModifier extends CardCostModifier {
 	private Race requiredRace;
 
 	public MinionCostModifier(int manaModifier) {
-		super(CardType.MINION, manaModifier, false);
+		super(CardType.MINION, manaModifier);
 	}
 
 	protected boolean appliesTo(Card card) {

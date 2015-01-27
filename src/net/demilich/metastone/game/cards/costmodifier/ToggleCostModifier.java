@@ -13,8 +13,8 @@ public class ToggleCostModifier extends CardCostModifier {
 	private GameEventTrigger toggleOffTrigger;
 	private boolean ready;
 
-	public ToggleCostModifier(CardType cardType, int manaModifier, boolean oneTime) {
-		super(cardType, manaModifier, oneTime);
+	public ToggleCostModifier(CardType cardType, int manaModifier) {
+		super(cardType, manaModifier);
 	}
 
 	@Override

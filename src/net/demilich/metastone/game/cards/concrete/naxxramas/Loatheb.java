@@ -29,7 +29,7 @@ public class Loatheb extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion loatheb = createMinion();
-		OneTurnCostModifier costModifier = new OneTurnCostModifier(CardType.SPELL, +5, false);
+		OneTurnCostModifier costModifier = new OneTurnCostModifier(CardType.SPELL, +5);
 		costModifier.setTargetPlayer(TargetPlayer.OPPONENT);
 		SpellDesc increaseSpellCost = AddCostModifierSpell.create(costModifier);
 		increaseSpellCost.setTarget(EntityReference.FRIENDLY_HERO);

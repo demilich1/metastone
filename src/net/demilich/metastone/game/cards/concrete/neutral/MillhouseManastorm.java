@@ -29,7 +29,7 @@ public class MillhouseManastorm extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion millhouseManastorm = createMinion();
-		OneTurnCostModifier costModifier = new OneTurnCostModifier(CardType.SPELL, -99, false);
+		OneTurnCostModifier costModifier = new OneTurnCostModifier(CardType.SPELL, -99);
 		costModifier.setTargetPlayer(TargetPlayer.OPPONENT);
 		SpellDesc castSpellsForFree = AddCostModifierSpell.create(costModifier);
 		castSpellsForFree.setTarget(EntityReference.FRIENDLY_HERO);

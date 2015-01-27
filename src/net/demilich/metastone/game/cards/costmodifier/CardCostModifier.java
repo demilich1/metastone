@@ -13,7 +13,6 @@ import net.demilich.metastone.game.targeting.EntityReference;
 
 public abstract class CardCostModifier extends CustomCloneable implements IGameEventListener {
 
-	private final boolean oneTime;
 	private boolean expired;
 	private int owner;
 	private EntityReference hostReference;
@@ -23,10 +22,9 @@ public abstract class CardCostModifier extends CustomCloneable implements IGameE
 	private GameTag requiredTag;
 	private TargetPlayer targetPlayer = TargetPlayer.SELF;
 
-	public CardCostModifier(CardType cardType, int manaModifier, boolean oneTime) {
+	public CardCostModifier(CardType cardType, int manaModifier) {
 		this.cardType = cardType;
 		this.manaModifier = manaModifier;
-		this.oneTime = oneTime;
 	}
 
 	protected boolean appliesTo(Card card) {
@@ -113,9 +111,6 @@ public abstract class CardCostModifier extends CustomCloneable implements IGameE
 			return 0;
 		}
 
-		if (oneTime) {
-			expired = true;
-		}
 		return modifyManaCost(card);
 	}
 

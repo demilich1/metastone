@@ -789,6 +789,7 @@ public class GameLogic implements Cloneable {
 		context.getOpponent(player).getMinions().remove(minion);
 		player.getMinions().add(minion);
 		minion.setOwner(player.getId());
+		minion.setTag(GameTag.SUMMONING_SICKNESS);
 		List<IGameEventListener> triggers = context.getTriggersAssociatedWith(minion.getReference());
 		removeSpelltriggers(minion);
 		for (IGameEventListener trigger : triggers) {

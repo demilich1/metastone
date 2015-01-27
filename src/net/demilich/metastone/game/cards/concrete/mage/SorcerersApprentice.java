@@ -22,7 +22,7 @@ public class SorcerersApprentice extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion sorcerersApprentice = createMinion();
-		CardCostModifier costModifier = new SpellCostModifier(-1, false);
+		CardCostModifier costModifier = new SpellCostModifier(-1);
 		sorcerersApprentice.setCardCostModifier(costModifier);
 		return sorcerersApprentice;
 	}

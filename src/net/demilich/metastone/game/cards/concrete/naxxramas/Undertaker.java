@@ -19,7 +19,7 @@ public class Undertaker extends MinionCard {
 
 	public Undertaker() {
 		super("Undertaker", 1, 2, Rarity.COMMON, HeroClass.ANY, 1);
-		setDescription("Whenever you summon a minion with Deathrattle, gain +1/+1.");
+		setDescription("Whenever you summon a minion with Deathrattle, gain +1 Attack");
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class Undertaker extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion undertaker = createMinion();
-		SpellDesc buffSpell = BuffSpell.create(1, 1);
+		SpellDesc buffSpell = BuffSpell.create(1);
 		buffSpell.setTarget(EntityReference.SELF);
 		SpellTrigger trigger = new SpellTrigger(new MinionWithDeathRattleSummonedTrigger(), buffSpell);
 		undertaker.setSpellTrigger(trigger);

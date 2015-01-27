@@ -6,8 +6,8 @@ import net.demilich.metastone.game.events.GameEventType;
 
 public class SpellCostModifier extends CardCostModifier {
 
-	public SpellCostModifier(int manaModifier, boolean oneTime) {
-		super(CardType.SPELL, manaModifier, oneTime);
+	public SpellCostModifier(int manaModifier) {
+		super(CardType.SPELL, manaModifier);
 	}
 
 	@Override

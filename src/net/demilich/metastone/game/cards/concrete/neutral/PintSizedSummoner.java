@@ -25,7 +25,7 @@ public class PintSizedSummoner extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion pintSizedSummoner = createMinion();
-		ToggleCostModifier costModifier = new ToggleCostModifier(CardType.MINION, -1, false);
+		ToggleCostModifier costModifier = new ToggleCostModifier(CardType.MINION, -1);
 		costModifier.setToggleOnTrigger(new TurnStartTrigger());
 		costModifier.setToggleOffTrigger(new CardPlayedTrigger(TargetPlayer.SELF, CardType.MINION));
 		pintSizedSummoner.setCardCostModifier(costModifier);
