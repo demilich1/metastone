@@ -21,8 +21,6 @@ public class PilotedSkyGolem extends MinionCard {
 		return 539;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion pilotedSkyGolem = createMinion();

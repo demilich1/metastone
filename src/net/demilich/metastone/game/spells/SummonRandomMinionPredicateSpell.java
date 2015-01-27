@@ -15,7 +15,7 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class SummonRandomMinionPredicateSpell extends Spell {
-	
+
 	public static SpellDesc create(Predicate<Card> cardFilter) {
 		SpellDesc desc = new SpellDesc(SummonRandomMinionPredicateSpell.class);
 		desc.set(SpellArg.CARD_FILTER, cardFilter);
@@ -33,13 +33,14 @@ public class SummonRandomMinionPredicateSpell extends Spell {
 		}
 		return (MinionCard) relevantMinions.getRandom();
 	}
-	
+
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		@SuppressWarnings("unchecked")
 		Predicate<Card> cardFilter = (Predicate<Card>) desc.get(SpellArg.CARD_FILTER);
+		int boardPosition = desc.contains(SpellArg.BOARD_POSITION) ? desc.getInt(SpellArg.BOARD_POSITION) : -1;
 		MinionCard minionCard = getRandomMatchingMinionCard(cardFilter);
-		context.getLogic().summon(player.getId(), minionCard.summon());
+		context.getLogic().summon(player.getId(), minionCard.summon(), null, boardPosition, false);
 	}
 
 }
