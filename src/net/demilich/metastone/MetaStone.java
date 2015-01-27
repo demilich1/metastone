@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import net.demilich.metastone.gui.IconFactory;
 
-public class HearthstoneAnalyzer extends Application {
+public class MetaStone extends Application {
 
 	public static void main(String[] args) {
 		// DevCheckCardCompleteness.updateCardCatalogue();
@@ -26,7 +26,7 @@ public class HearthstoneAnalyzer extends Application {
 		primaryStage.setResizable(false);
 
 		ApplicationFacade facade = (ApplicationFacade) ApplicationFacade.getInstance();
-		final HearthstoneAnalyzer instance = new HearthstoneAnalyzer();
+		final MetaStone instance = new MetaStone();
 		facade.startUp(instance);
 
 		StackPane root = new StackPane();

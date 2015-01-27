@@ -160,7 +160,7 @@ public class IconFactory {
 		return new Image(iconPath);
 	}
 
-	public static final String RESOURCE_PATH = "/net/pferdimanzug/hearthstone/analyzer/resources";
+	public static final String RESOURCE_PATH = "/net/demilich/metastone/resources";
 
 	private IconFactory() {
 	}

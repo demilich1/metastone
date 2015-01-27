@@ -132,7 +132,11 @@ public class PlayerConfigView extends VBox {
 
 	private void onBehaviourChanged(ObservableValue<? extends IBehaviour> ov, IBehaviour oldBehaviour, IBehaviour newBehaviour) {
 		getPlayerConfig().setBehaviour(newBehaviour);
-		hideCardsCheckBox.setDisable(newBehaviour instanceof HumanBehaviour);
+		boolean humanBehaviourSelected = newBehaviour instanceof HumanBehaviour; 
+		hideCardsCheckBox.setDisable(humanBehaviourSelected);
+		if (humanBehaviourSelected) {
+			hideCardsCheckBox.setSelected(false);
+		}
 	}
 
 	private void onHideCardBoxChanged(ObservableValue<? extends Boolean> ov, Boolean oldValue, Boolean newValue) {

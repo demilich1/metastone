@@ -82,7 +82,7 @@ public class ApplicationFacade extends Facade<GameNotification> {
 		registerCommand(GameNotification.REQUEST_TRAINING_DATA, new RequestTrainingDataCommand());
 	}
 
-	public void startUp(HearthstoneAnalyzer main) {
+	public void startUp(MetaStone main) {
 		sendNotification(GameNotification.APPLICATION_STARTUP);
 	}
 

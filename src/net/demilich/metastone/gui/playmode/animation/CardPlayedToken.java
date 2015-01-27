@@ -29,7 +29,7 @@ public class CardPlayedToken {
 		cardToken.setCard(card);
 
 		ApplicationFacade.getInstance().sendNotification(GameNotification.ANIMATION_STARTED);
-		FadeTransition animation = new FadeTransition(Duration.seconds(1.5), cardToken);
+		FadeTransition animation = new FadeTransition(Duration.seconds(1.0), cardToken);
 		animation.setDelay(Duration.seconds(0.5));
 		animation.setOnFinished(this::onComplete);
 		animation.setFromValue(1);

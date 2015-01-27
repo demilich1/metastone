@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.demilich.metastone.game.behaviour.IBehaviour;
+import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.entities.Actor;
@@ -130,7 +131,7 @@ public class Player extends CustomCloneable {
 	}
 
 	public boolean hideCards() {
-		return hideCards;
+		return hideCards && !(behaviour instanceof HumanBehaviour);
 	}
 
 	public void setBehaviour(IBehaviour behaviour) {
