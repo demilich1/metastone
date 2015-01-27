@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ASCII"?>
 <anttasks:AntTask xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:anttasks="http://org.eclipse.fx.ide.jdt/1.0" buildDirectory="${project}/build" cssToBin="true">
   <deploy height="768" width="1024" packagingFormat="exe">
-    <application name="JavaFxTest" mainclass="net.demilich.metastone.MetaStone" version="0.8" toolkit="fx"/>
-    <info title="Metastone" vendor="Metagames"/>
+    <application name="JavaFxTest" mainclass="net.demilich.metastone.MetaStone" version="0.9" toolkit="fx"/>
+    <info title="Metastone" vendor="demilich"/>
   </deploy>
   <signjar/>
 </anttasks:AntTask>

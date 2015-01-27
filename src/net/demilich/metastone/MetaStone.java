@@ -3,6 +3,7 @@ package net.demilich.metastone;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -24,6 +25,7 @@ public class MetaStone extends Application {
 		primaryStage.setTitle("MetaStone");
 		primaryStage.initStyle(StageStyle.UNIFIED);
 		primaryStage.setResizable(false);
+		primaryStage.getIcons().add(new Image(IconFactory.getImageUrl("ui/app_icon.png")));
 
 		ApplicationFacade facade = (ApplicationFacade) ApplicationFacade.getInstance();
 		final MetaStone instance = new MetaStone();

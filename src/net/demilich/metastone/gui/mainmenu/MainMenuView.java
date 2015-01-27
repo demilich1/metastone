@@ -71,6 +71,8 @@ public class MainMenuView extends BorderPane {
 		if (!AppConfig.DEV_BUILD) {
 			trainingModeButton.setVisible(false);
 			trainingModeButton.setManaged(false);
+			battleOfDecksButton.setVisible(false);
+			battleOfDecksButton.setManaged(false);
 		}
 		
 		versionLabel.setText(AppConfig.VERSION + (AppConfig.DEV_BUILD ? " (Dev build)" : ""));

@@ -15,9 +15,9 @@
 	<classpathentry kind="lib" path="lib/httpcomponents-client-4.3.4/lib/httpcore-4.3.2.jar"/>
 	<classpathentry kind="lib" path="lib/httpcomponents-client-4.3.4/lib/httpmime-4.3.4.jar"/>
 	<classpathentry kind="lib" path="lib/nitty-gritty-mvc.jar"/>
+	<classpathentry kind="lib" path="lib/commons-io-2.4/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="lib/google-gson-2.2.4/gson-2.2.4.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang3-3.3.2/commons-lang3-3.3.2.jar"/>
 	<classpathentry kind="con" path="org.testng.TESTNG_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/gson"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/apache-commons-io"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/apache-commons-lang"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
