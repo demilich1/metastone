@@ -21,14 +21,12 @@ public class Mechwarper extends MinionCard {
 		return 531;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion mechwarper = createMinion();
 		MinionCostModifier minionCostModifier = new MinionCostModifier(-1);
 		minionCostModifier.setRequiredRace(Race.MECH);
-		minionCostModifier.setTargetPlayer(TargetPlayer.BOTH);
+		minionCostModifier.setTargetPlayer(TargetPlayer.SELF);
 		mechwarper.setCardCostModifier(minionCostModifier);
 		return mechwarper;
 	}

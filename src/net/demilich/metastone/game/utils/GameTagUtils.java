@@ -33,7 +33,6 @@ public class GameTagUtils {
 		case CANNOT_ATTACK:
 		case CANNOT_REDUCE_HP_BELOW_1:
 		case CHARGE:
-		case CHOOSE_ONE:
 		case CONSUME_DAMAGE_INSTEAD_OF_DURABILITY_ON_MINIONS:
 		case COUNTERED:
 		case DIVINE_SHIELD:

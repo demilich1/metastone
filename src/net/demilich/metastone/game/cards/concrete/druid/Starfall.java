@@ -28,7 +28,7 @@ public class Starfall extends ChooseOneCard {
 	private class StarfallAoE extends SpellCard {
 
 		public StarfallAoE() {
-			super("Starfall (AoE)", Rarity.RARE, HeroClass.DRUID, 5);
+			super("2 damage AoE", Rarity.RARE, HeroClass.DRUID, 5);
 			setDescription("Deal $2 damage to all enemy minions");
 			setCollectible(false);
 
@@ -43,7 +43,7 @@ public class Starfall extends ChooseOneCard {
 	private class StarfallSingleTarget extends SpellCard {
 
 		public StarfallSingleTarget() {
-			super("Starfall (single target)", Rarity.RARE, HeroClass.DRUID, 5);
+			super("5 damage single target", Rarity.RARE, HeroClass.DRUID, 5);
 			setDescription("Deal 5 damage to a minion");
 			setCollectible(false);
 

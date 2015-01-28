@@ -13,7 +13,7 @@ import net.demilich.metastone.game.targeting.TargetSelection;
 public class MadderBomber extends MinionCard {
 
 	public MadderBomber() {
-		super("Madder Bomber", 5, 6, Rarity.RARE, HeroClass.ANY, 5);
+		super("Madder Bomber", 5, 4, Rarity.RARE, HeroClass.ANY, 5);
 		setDescription("Battlecry: Deal 6 damage randomly split between all other characters.");
 	}
 
@@ -21,8 +21,6 @@ public class MadderBomber extends MinionCard {
 	public int getTypeId() {
 		return 529;
 	}
-
-
 
 	@Override
 	public Minion summon() {

@@ -16,6 +16,7 @@ public abstract class PlayCardAction extends GameAction {
 	public static Logger logger = LoggerFactory.getLogger(PlayCardAction.class);
 
 	private final CardReference cardReference;
+	private int groupIndex;
 
 	public PlayCardAction(CardReference cardReference) {
 		this.cardReference = cardReference;
@@ -72,7 +73,7 @@ public abstract class PlayCardAction extends GameAction {
 			return false;
 		}
 		PlayCardAction playCardAction = (PlayCardAction) anotherAction;
-		return this.cardReference.equals(playCardAction.cardReference);
+		return playCardAction.getGroupIndex() == getGroupIndex() && this.cardReference.equals(playCardAction.cardReference);
 	}
 
 	protected abstract void play(GameContext context, int playerId);
@@ -80,5 +81,13 @@ public abstract class PlayCardAction extends GameAction {
 	@Override
 	public String toString() {
 		return String.format("%s Card: %s Target: %s", getActionType(), cardReference, getTargetKey());
+	}
+
+	public int getGroupIndex() {
+		return groupIndex;
+	}
+
+	public void setGroupIndex(int groupIndex) {
+		this.groupIndex = groupIndex;
 	}
 }

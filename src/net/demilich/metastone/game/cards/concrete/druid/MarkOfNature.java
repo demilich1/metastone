@@ -28,7 +28,7 @@ public class MarkOfNature extends ChooseOneCard {
 	private class AttackBuff extends SpellCard {
 
 		public AttackBuff() {
-			super("Mark of Nature (+4 Attack)", Rarity.COMMON, HeroClass.DRUID, 3);
+			super("+4 Attack", Rarity.COMMON, HeroClass.DRUID, 3);
 			setSpell(BuffSpell.create(4));
 			setTargetRequirement(TargetSelection.MINIONS);
 		}
@@ -38,7 +38,7 @@ public class MarkOfNature extends ChooseOneCard {
 	private class HpBuff extends SpellCard {
 
 		public HpBuff() {
-			super("Mark of Nature (+4 Hp, Taunt)", Rarity.COMMON, HeroClass.DRUID, 3);
+			super("+4 Hp, Taunt", Rarity.COMMON, HeroClass.DRUID, 3);
 			setSpell(MetaSpell.create(BuffSpell.create(0, 4), ApplyTagSpell.create(GameTag.TAUNT)));
 			setTargetRequirement(TargetSelection.MINIONS);
 		}

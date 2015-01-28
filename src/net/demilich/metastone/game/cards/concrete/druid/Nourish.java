@@ -28,7 +28,7 @@ public class Nourish extends ChooseOneCard {
 	private class NourishDrawCard extends SpellCard {
 
 		public NourishDrawCard() {
-			super("Nourish (Mana)", Rarity.RARE, HeroClass.DRUID, 5);
+			super("Draw 3", Rarity.RARE, HeroClass.DRUID, 5);
 			setDescription("Draw 3 cards");
 			setCollectible(false);
 
@@ -40,7 +40,7 @@ public class Nourish extends ChooseOneCard {
 	private class NourishManaCard extends SpellCard {
 
 		public NourishManaCard() {
-			super("Nourish (Mana)", Rarity.RARE, HeroClass.DRUID, 5);
+			super("+2 Mana crystals", Rarity.RARE, HeroClass.DRUID, 5);
 			setDescription("Gain 2 Mana Crystals");
 			setCollectible(false);
 

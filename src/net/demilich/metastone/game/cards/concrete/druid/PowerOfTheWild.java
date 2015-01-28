@@ -28,7 +28,7 @@ public class PowerOfTheWild extends ChooseOneCard {
 	private class PowerOfTheWildBuff extends SpellCard {
 
 		protected PowerOfTheWildBuff() {
-			super("Power of the Wild (+1/+1)", Rarity.COMMON, HeroClass.DRUID, 2);
+			super("+1/+1", Rarity.COMMON, HeroClass.DRUID, 2);
 			setDescription("Give your minions +1/+1");
 
 			setSpell(BuffSpell.create(1, 1));
@@ -41,7 +41,7 @@ public class PowerOfTheWild extends ChooseOneCard {
 	private class PowerOfTheWildPanther extends SpellCard {
 
 		public PowerOfTheWildPanther() {
-			super("Power of the Wild (Summon Panther)", Rarity.COMMON, HeroClass.DRUID, 2);
+			super("Summon Panther", Rarity.COMMON, HeroClass.DRUID, 2);
 			setDescription("Summon a 3/2 Panther.");
 
 			setSpell(SummonSpell.create(new Panther()));

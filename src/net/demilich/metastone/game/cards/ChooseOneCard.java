@@ -30,12 +30,18 @@ public abstract class ChooseOneCard extends Card implements IChooseOneCard {
 
 	@Override
 	public PlayCardAction playOption1() {
-		return card1.play();
+		PlayCardAction card1Action = card1.play();
+		card1Action.setActionSuffix(card1.getName());
+		card1Action.setGroupIndex(0);
+		return card1Action;
 	}
 
 	@Override
 	public PlayCardAction playOption2() {
-		return card2.play();
+		PlayCardAction card2Action = card2.play();
+		card2Action.setActionSuffix(card2.getName());
+		card2Action.setGroupIndex(1);
+		return card2Action;
 	}
 
 	public void setCard1(Card card1) {

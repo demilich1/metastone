@@ -26,6 +26,7 @@ public abstract class ChooseBattlecryCard extends MinionCard implements IChooseO
 	public PlayCardAction playOption1() {
 		PlayCardAction option1 = new PlayMinionCardAction(getCardReference(), getBattlecry1());
 		option1.setActionSuffix(getAction1Suffix());
+		option1.setGroupIndex(0);
 		return option1;
 	}
 
@@ -33,6 +34,7 @@ public abstract class ChooseBattlecryCard extends MinionCard implements IChooseO
 	public PlayCardAction playOption2() {
 		PlayCardAction option2 = new PlayMinionCardAction(getCardReference(), getBattlecry2());
 		option2.setActionSuffix(getAction2Suffix());
+		option2.setGroupIndex(1);
 		return option2;
 	}
 
