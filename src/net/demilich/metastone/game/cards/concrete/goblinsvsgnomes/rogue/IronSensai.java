@@ -32,7 +32,7 @@ public class IronSensai extends MinionCard {
 		Minion ironSensai = createMinion();
 		SpellDesc buffSpell = BuffSpell.create(+2, +2);
 		buffSpell.setTargetFilter(target -> target.getTag(GameTag.RACE) == Race.MECH);
-		buffSpell.setTarget(EntityReference.FRIENDLY_MINIONS);
+		buffSpell.setTarget(EntityReference.OTHER_FRIENDLY_MINIONS);
 		buffSpell.pickRandomTarget(true);
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), buffSpell);
 		ironSensai.setSpellTrigger(trigger);

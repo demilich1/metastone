@@ -195,7 +195,7 @@
 			<manifest>
 				<attribute name="Implementation-Vendor" value="demilich" />
 				<attribute name="Implementation-Title" value="Metastone" />
-				<attribute name="Implementation-Version" value="0.9" />
+				<attribute name="Implementation-Version" value="0.9.1" />
 				<attribute name="JavaFX-Feature-Proxy" value="None" />
 			</manifest>
 		</fx:jar>

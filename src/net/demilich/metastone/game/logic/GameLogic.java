@@ -207,7 +207,7 @@ public class GameLogic implements Cloneable {
 			}
 
 			if (spellCard != null && spellCard.getTargetRequirement() != TargetSelection.NONE) {
-				context.fireGameEvent(new TargetAcquisitionEvent(context, ActionType.SPELL, targets.get(0)), TriggerLayer.SECRET);
+				context.fireGameEvent(new TargetAcquisitionEvent(context, ActionType.SPELL, spellCard, targets.get(0)), TriggerLayer.SECRET);
 				Entity targetOverride = (Entity) context.getEnvironment().get(Environment.TARGET_OVERRIDE);
 				if (targetOverride != null && targetOverride.getId() != IdFactory.UNASSIGNED) {
 					targets.remove(0);
@@ -492,7 +492,7 @@ public class GameLogic implements Cloneable {
 		log("{} attacks {}", attacker, defender);
 
 		context.getEnvironment().put(Environment.ATTACKER, attacker);
-		TargetAcquisitionEvent targetAcquisitionEvent = new TargetAcquisitionEvent(context, ActionType.PHYSICAL_ATTACK, defender);
+		TargetAcquisitionEvent targetAcquisitionEvent = new TargetAcquisitionEvent(context, ActionType.PHYSICAL_ATTACK, attacker, defender);
 		context.fireGameEvent(targetAcquisitionEvent, TriggerLayer.SECRET);
 		context.fireGameEvent(targetAcquisitionEvent);
 		Actor target = defender;
@@ -950,9 +950,7 @@ public class GameLogic implements Cloneable {
 
 	public void refreshAttacksPerRound(Entity entity) {
 		int attacks = 1;
-		if (entity.hasStatus(GameTag.SUMMONING_SICKNESS) && !entity.hasStatus(GameTag.CHARGE)) {
-			attacks = 0;
-		} else if (entity.hasStatus(GameTag.WINDFURY)) {
+		if (entity.hasStatus(GameTag.WINDFURY)) {
 			attacks = 2;
 		} else if (entity.hasStatus(GameTag.MEGA_WINDFURY)) {
 			attacks = 4;

@@ -7,11 +7,13 @@ import net.demilich.metastone.game.entities.Entity;
 public class TargetAcquisitionEvent extends GameEvent {
 
 	private final Entity target;
+	private final Entity source;
 	private final ActionType actionType;
 
-	public TargetAcquisitionEvent(GameContext context, ActionType actionType, Entity target) {
+	public TargetAcquisitionEvent(GameContext context, ActionType actionType, Entity source, Entity target) {
 		super(context);
 		this.actionType = actionType;
+		this.source = source;
 		this.target = target;
 	}
 
@@ -31,6 +33,10 @@ public class TargetAcquisitionEvent extends GameEvent {
 
 	public Entity getTarget() {
 		return target;
+	}
+
+	public Entity getSource() {
+		return source;
 	}
 
 }

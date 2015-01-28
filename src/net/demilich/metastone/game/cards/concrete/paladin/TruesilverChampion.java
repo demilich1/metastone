@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.cards.concrete.paladin;
 
+import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.WeaponCard;
 import net.demilich.metastone.game.entities.Entity;
@@ -9,11 +10,11 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.weapons.Weapon;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
-import net.demilich.metastone.game.events.PhysicalAttackEvent;
+import net.demilich.metastone.game.events.TargetAcquisitionEvent;
 import net.demilich.metastone.game.spells.HealingSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.spells.trigger.GameEventTrigger;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
+import net.demilich.metastone.game.spells.trigger.TargetAcquisitionTrigger;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class TruesilverChampion extends WeaponCard {
@@ -27,7 +28,7 @@ public class TruesilverChampion extends WeaponCard {
 	public int getTypeId() {
 		return 258;
 	}
-	
+
 	@Override
 	public Weapon getWeapon() {
 		Weapon trueSilverChampion = createWeapon(4, 2);
@@ -38,22 +39,26 @@ public class TruesilverChampion extends WeaponCard {
 		return trueSilverChampion;
 	}
 
-	private class TruesilverChampionWeaponTrigger extends GameEventTrigger {
-		
+	private class TruesilverChampionWeaponTrigger extends TargetAcquisitionTrigger {
+
+		public TruesilverChampionWeaponTrigger() {
+			super(ActionType.PHYSICAL_ATTACK, EntityType.HERO);
+		}
+
 		@Override
 		public boolean fire(GameEvent event, Entity host) {
-			PhysicalAttackEvent physicalAttackEvent = (PhysicalAttackEvent) event;
-			if (physicalAttackEvent.getAttacker().getEntityType() != EntityType.HERO) {
+			if (!super.fire(event, host)) {
 				return false;
 			}
-			Hero hero = (Hero) physicalAttackEvent.getAttacker();
+			TargetAcquisitionEvent targetAcquisitionEvent = (TargetAcquisitionEvent) event;
+			Hero hero = (Hero) targetAcquisitionEvent.getSource();
 			return hero.getWeapon() == host;
 		}
 
 		@Override
 		public GameEventType interestedIn() {
-			return GameEventType.PHYSICAL_ATTACK;
+			return GameEventType.TARGET_ACQUISITION;
 		}
-		
+
 	}
 }

@@ -8,7 +8,7 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.TransformToMinionWithManaCostSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.targeting.EntityReference;
+import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class Recombobulator extends MinionCard {
 
@@ -27,9 +27,7 @@ public class Recombobulator extends MinionCard {
 	public Minion summon() {
 		Minion recombolator = createMinion();
 		SpellDesc transformSpell = TransformToMinionWithManaCostSpell.create();
-		transformSpell.setTarget(EntityReference.FRIENDLY_MINIONS);
-		transformSpell.pickRandomTarget(true);
-		Battlecry battlecry = Battlecry.createBattlecry(transformSpell);
+		Battlecry battlecry = Battlecry.createBattlecry(transformSpell, TargetSelection.FRIENDLY_MINIONS);
 		recombolator.setBattlecry(battlecry);
 		return recombolator;
 	}

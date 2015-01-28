@@ -2,7 +2,7 @@ package net.demilich.metastone;
 
 public final class AppConfig {
 	
-	public static final String VERSION = "0.9.0 beta";
+	public static final String VERSION = "0.9.1 beta";
 	
 	public static final int DEFAULT_SLEEP_DELAY = 100;
 	
