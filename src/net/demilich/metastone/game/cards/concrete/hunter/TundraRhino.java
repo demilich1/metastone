@@ -13,13 +13,11 @@ public class TundraRhino extends MinionCard {
 		setDescription("Your Beasts have Charge.");
 		setRace(Race.BEAST);
 	}
-	
+
 	@Override
 	public int getTypeId() {
 		return 49;
 	}
-
-
 
 	@Override
 	public Minion summon() {

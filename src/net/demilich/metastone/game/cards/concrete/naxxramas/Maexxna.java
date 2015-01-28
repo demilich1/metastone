@@ -7,7 +7,7 @@ import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.DestroySpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.spells.trigger.PhysicalAttackTrigger;
+import net.demilich.metastone.game.spells.trigger.DamageCausedTrigger;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 import net.demilich.metastone.game.targeting.EntityReference;
 
@@ -23,15 +23,13 @@ public class Maexxna extends MinionCard {
 	public int getTypeId() {
 		return 393;
 	}
-	
-
 
 	@Override
 	public Minion summon() {
 		Minion maexxna = createMinion();
 		SpellDesc killSpell = DestroySpell.create();
 		killSpell.setTarget(EntityReference.EVENT_TARGET);
-		maexxna.setSpellTrigger(new SpellTrigger(new PhysicalAttackTrigger(false), killSpell));
+		maexxna.setSpellTrigger(new SpellTrigger(new DamageCausedTrigger(false), killSpell));
 		return maexxna;
 	}
 }
