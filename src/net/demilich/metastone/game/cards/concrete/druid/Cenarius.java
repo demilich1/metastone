@@ -21,12 +21,12 @@ public class Cenarius extends ChooseBattlecryCard {
 
 	@Override
 	protected String getAction1Suffix() {
-		return "friendly minions +2/2";
+		return "+2/2";
 	}
 
 	@Override
 	protected String getAction2Suffix() {
-		return "summon 2 Treants";
+		return "2 Treants";
 	}
 
 	@Override
