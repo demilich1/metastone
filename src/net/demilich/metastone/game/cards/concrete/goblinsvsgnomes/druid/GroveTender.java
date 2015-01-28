@@ -6,8 +6,11 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.DrawCardSpell;
+import net.demilich.metastone.game.spells.GainManaSpell;
+import net.demilich.metastone.game.spells.MetaSpell;
 import net.demilich.metastone.game.spells.ModifyMaxManaSpell;
 import net.demilich.metastone.game.spells.TargetPlayer;
+import net.demilich.metastone.game.spells.desc.SpellDesc;
 
 public class GroveTender extends ChooseBattlecryCard {
 
@@ -28,7 +31,8 @@ public class GroveTender extends ChooseBattlecryCard {
 
 	@Override
 	protected Battlecry getBattlecry1() {
-		Battlecry battlecry = Battlecry.createBattlecry(ModifyMaxManaSpell.create(+1, TargetPlayer.BOTH));
+		SpellDesc spell = MetaSpell.create(ModifyMaxManaSpell.create(+1, TargetPlayer.BOTH), GainManaSpell.create(1));
+		Battlecry battlecry = Battlecry.createBattlecry(spell);
 		return battlecry;
 	}
 
