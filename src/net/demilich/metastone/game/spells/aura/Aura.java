@@ -5,10 +5,12 @@ import java.util.HashSet;
 import java.util.List;
 
 import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
+import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.BoardChangedTrigger;
@@ -20,6 +22,8 @@ public class Aura extends SpellTrigger {
 	private EntityReference targets;
 	private SpellDesc applyAuraEffect;
 	private SpellDesc removeAuraEffect;
+	private Race raceRestriction;
+
 	private HashSet<Integer> affectedEntities = new HashSet<>();
 
 	public Aura(SpellDesc applyAuraEffect, SpellDesc removeAuraEffect, EntityReference targetSelection) {
@@ -39,6 +43,9 @@ public class Aura extends SpellTrigger {
 
 		Actor targetActor = (Actor) target;
 		if (targetActor.isDead()) {
+			return false;
+		}
+		if (getRaceRestriction() != null && target.getTag(GameTag.RACE) != getRaceRestriction()) {
 			return false;
 		}
 		return resolvedTargets.contains(target);
@@ -92,6 +99,14 @@ public class Aura extends SpellTrigger {
 			context.getLogic().castSpell(getOwner(), removeAuraEffect);
 		}
 		affectedEntities.clear();
+	}
+
+	public Race getRaceRestriction() {
+		return raceRestriction;
+	}
+
+	public void setRaceRestriction(Race raceRestriction) {
+		this.raceRestriction = raceRestriction;
 	}
 
 }
