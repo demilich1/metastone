@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.GameContext;
@@ -94,7 +95,9 @@ public class HumanActionPromptView extends VBox {
 		GameContext context = options.getContext();
 		Button button = new Button(getActionString(context, actionGroup.getPrototype()));
 		button.setStyle("-fx-font-size: 12px; -fx-padding: 4 8 4 8;");
+		button.setWrapText(true);
 		button.setPrefWidth(200);
+		button.setTextAlignment(TextAlignment.CENTER);
 		// only one action with no target selection or summon with no other
 		// minion on board
 		if (actionGroup.getActionsInGroup().size() == 1

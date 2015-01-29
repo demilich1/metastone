@@ -121,6 +121,7 @@ public class GameLogic implements Cloneable {
 		if (card.getCardType() == CardType.SPELL && !card.hasStatus(GameTag.COUNTERED)) {
 			context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, card));
 		}
+		card.removeTag(GameTag.MANA_COST_MODIFIER);
 
 		removeCard(playerId, card);
 	}
@@ -418,7 +419,8 @@ public class GameLogic implements Cloneable {
 		if (deck.isEmpty()) {
 			Hero hero = player.getHero();
 			int fatigue = hero.hasStatus(GameTag.FATIGUE) ? hero.getTagValue(GameTag.FATIGUE) : 0;
-			hero.setTag(GameTag.FATIGUE, fatigue + 1);
+			fatigue++;
+			hero.setTag(GameTag.FATIGUE, fatigue);
 			damage(player, hero, fatigue, null);
 			log("{}'s deck is empty, taking {} fatigue damage!", player.getName(), fatigue);
 			player.getStatistics().fatigueDamage(fatigue);

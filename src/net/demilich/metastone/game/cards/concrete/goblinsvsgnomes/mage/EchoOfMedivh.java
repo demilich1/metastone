@@ -18,8 +18,6 @@ public class EchoOfMedivh extends SpellCard {
 		setTargetRequirement(TargetSelection.NONE);
 	}
 
-
-
 	@Override
 	public int getTypeId() {
 		return 492;

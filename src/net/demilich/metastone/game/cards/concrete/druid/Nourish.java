@@ -44,7 +44,7 @@ public class Nourish extends ChooseOneCard {
 			setDescription("Gain 2 Mana Crystals");
 			setCollectible(false);
 
-			setSpell(ModifyMaxManaSpell.create(2, TargetPlayer.SELF));
+			setSpell(ModifyMaxManaSpell.create(2, TargetPlayer.SELF, true));
 			setTargetRequirement(TargetSelection.NONE);
 		}
 	}
