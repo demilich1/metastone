@@ -18,8 +18,7 @@ public class DoubleAttackSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		Actor targetActor = (Actor) target;
-		int attackMultiplier = targetActor.getAttackMultiplier();
-		target.setTag(GameTag.ATTACK_MULTIPLIER, attackMultiplier * 2);
+		targetActor.modifyTag(GameTag.ATTACK_BONUS, targetActor.getAttack());
 	}
 
 }

@@ -24,8 +24,6 @@ public class Gahzrilla extends MinionCard {
 		return 487;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion gahzrilla = createMinion();

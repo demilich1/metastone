@@ -31,7 +31,7 @@ public class MetaltoothLeaper extends MinionCard {
 		Minion metaltoothLeaper = createMinion();
 		SpellDesc buffSpell = BuffSpell.create(+2);
 		buffSpell.setTarget(EntityReference.OTHER_FRIENDLY_MINIONS);
-		buffSpell.setTargetFilter(new RaceFilter(Race.BEAST));
+		buffSpell.setTargetFilter(new RaceFilter(Race.MECH));
 		Battlecry battlecry = Battlecry.createBattlecry(buffSpell);
 		metaltoothLeaper.setBattlecry(battlecry);
 		return metaltoothLeaper;

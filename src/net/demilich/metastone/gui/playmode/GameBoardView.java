@@ -59,12 +59,12 @@ public class GameBoardView extends BorderPane {
 	private final HashMap<GameToken, Button> summonHelperMap1 = new HashMap<GameToken, Button>();
 	private final HashMap<GameToken, Button> summonHelperMap2 = new HashMap<GameToken, Button>();
 	private final HashMap<Actor, GameToken> entityTokenMap = new HashMap<Actor, GameToken>();
-	
+
 	private final EventVisualizerDispatcher gameEventVisualizer = new EventVisualizerDispatcher();
 
 	@FXML
 	private Label centerMessageLabel;
-	
+
 	public GameBoardView() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GameBoardView.fxml"));
 		fxmlLoader.setRoot(this);
@@ -135,6 +135,7 @@ public class GameBoardView extends BorderPane {
 		icon.setFitWidth(32);
 		icon.setFitHeight(32);
 		Button helper = new Button("", icon);
+		helper.setStyle("-fx-padding: 2 2 2 2;");
 		helper.setVisible(false);
 		helper.setManaged(false);
 		return helper;
@@ -174,7 +175,7 @@ public class GameBoardView extends BorderPane {
 			token.showTargetMarker(clickedHander);
 		}
 	}
-	
+
 	private void enableSummonTargets(final HumanTargetOptions targetOptions) {
 		int playerId = targetOptions.getPlayerId();
 		GameContext context = targetOptions.getContext();
@@ -218,7 +219,7 @@ public class GameBoardView extends BorderPane {
 		centerMessageLabel.setText(message);
 		centerMessageLabel.setVisible(true);
 	}
-	
+
 	public void showAnimations(GameContext context) {
 		gameEventVisualizer.visualize((GameContextVisualizable) context, this);
 	}
@@ -232,7 +233,6 @@ public class GameBoardView extends BorderPane {
 		p2Hero.highlight(context.getActivePlayer() == context.getPlayer2());
 		entityTokenMap.put(context.getPlayer2().getHero(), p2Hero);
 
-		
 		updateHandCards(context, context.getPlayer1(), p1Cards);
 		updateHandCards(context, context.getPlayer2(), p2Cards);
 
@@ -241,7 +241,7 @@ public class GameBoardView extends BorderPane {
 
 		checkForWinner(context);
 	}
-	
+
 	private void updateHandCards(GameContext context, Player player, HandCard[] handCards) {
 		CardCollection hand = player.getHand();
 		for (int i = 0; i < handCards.length; i++) {
@@ -249,7 +249,7 @@ public class GameBoardView extends BorderPane {
 				handCards[i].setManaged(true);
 				handCards[i].setVisible(true);
 				handCards[i].setCard(context, hand.get(i), player);
-				
+
 			} else {
 				handCards[i].setManaged(false);
 				handCards[i].setVisible(false);

@@ -17,7 +17,6 @@ public class HumilitySpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		target.setTag(GameTag.ATTACK, 1);
-		target.removeTag(GameTag.ATTACK_MULTIPLIER);
 		target.removeTag(GameTag.TEMPORARY_ATTACK_BONUS);
 		target.removeTag(GameTag.ATTACK_BONUS);
 	}

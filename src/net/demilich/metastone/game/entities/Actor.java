@@ -67,11 +67,7 @@ public abstract class Actor extends Entity {
 	public int getAttack() {
 		int attack = getTagValue(GameTag.ATTACK) + getTagValue(GameTag.ATTACK_BONUS) + getTagValue(GameTag.AURA_ATTACK_BONUS)
 				+ getTagValue(GameTag.TEMPORARY_ATTACK_BONUS) + getTagValue(GameTag.CONDITIONAL_ATTACK_BONUS);
-		return attack * getAttackMultiplier();
-	}
-
-	public int getAttackMultiplier() {
-		return hasTag(GameTag.ATTACK_MULTIPLIER) ? getTagValue(GameTag.ATTACK_MULTIPLIER) : 1;
+		return attack;
 	}
 
 	public Battlecry getBattlecry() {
