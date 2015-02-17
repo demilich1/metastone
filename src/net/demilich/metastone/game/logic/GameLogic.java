@@ -1109,7 +1109,8 @@ public class GameLogic implements Cloneable {
 		if (target.getHp() > target.getMaxHp()) {
 			target.setHp(target.getMaxHp());
 		}
-		refreshAttacksPerRound(target);
+		// this cannot be right, because it makes silenced minions be able to attack again
+		//refreshAttacksPerRound(target);
 
 		log("{} was silenced", target);
 	}

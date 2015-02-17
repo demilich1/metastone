@@ -23,7 +23,7 @@ public class AldorPeacekeeper extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion aldorPeacekepper = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(HumilitySpell.create(), TargetSelection.MINIONS);
+		Battlecry battlecry = Battlecry.createBattlecry(HumilitySpell.create(), TargetSelection.ENEMY_MINIONS);
 		aldorPeacekepper.setBattlecry(battlecry);
 		return aldorPeacekepper;
 	}
