@@ -5,7 +5,10 @@ import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.spells.enrage.EnrageBuffWeapon;
+import net.demilich.metastone.game.spells.BuffWeaponSpell;
+import net.demilich.metastone.game.spells.aura.Aura;
+import net.demilich.metastone.game.spells.aura.EnrageAura;
+import net.demilich.metastone.game.targeting.EntityReference;
 
 public class SpitefulSmith extends MinionCard {
 
@@ -21,8 +24,9 @@ public class SpitefulSmith extends MinionCard {
 
 	@Override
 	public Minion summon() {
-		Minion spitefulSmith = createMinion();
-		spitefulSmith.setTag(GameTag.ENRAGE_SPELL, EnrageBuffWeapon.create(2));
+		Minion spitefulSmith = createMinion(GameTag.ENRAGABLE);
+		Aura aura = new EnrageAura(BuffWeaponSpell.create(+2), BuffWeaponSpell.create(-2), EntityReference.FRIENDLY_WEAPON);
+		spitefulSmith.setSpellTrigger(aura);
 		return spitefulSmith;
 	}
 }

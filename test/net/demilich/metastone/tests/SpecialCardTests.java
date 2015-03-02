@@ -1,3 +1,5 @@
+package net.demilich.metastone.tests;
+
 import java.util.List;
 
 import net.demilich.metastone.game.GameContext;
@@ -6,16 +8,25 @@ import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.actions.PhysicalAttackAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.MinionCard;
+import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.cards.concrete.druid.SavageRoar;
 import net.demilich.metastone.game.cards.concrete.mage.ArcaneExplosion;
 import net.demilich.metastone.game.cards.concrete.neutral.FaerieDragon;
 import net.demilich.metastone.game.cards.concrete.neutral.GurubashiBerserker;
 import net.demilich.metastone.game.cards.concrete.neutral.OasisSnapjaw;
+import net.demilich.metastone.game.cards.concrete.neutral.SpitefulSmith;
 import net.demilich.metastone.game.cards.concrete.warlock.SummoningPortal;
+import net.demilich.metastone.game.cards.concrete.warrior.FieryWarAxe;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.spells.DamageSpell;
+import net.demilich.metastone.game.spells.DestroySpell;
+import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.targeting.EntityReference;
+import net.demilich.metastone.game.targeting.TargetSelection;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -160,6 +171,48 @@ public class SpecialCardTests extends TestBase {
 		context.getLogic().performGameAction(player.getId(), testMinionCard.play());
 		Assert.assertEquals(player.getMana(), 3);
 
+	}
+
+	@Test
+	public void testSpitefulSmith() {
+		GameContext context = createContext(HeroClass.WARRIOR, HeroClass.WARRIOR);
+		Player player = context.getPlayer1();
+		player.setMana(10);
+
+		Card fieryWarAxe = new FieryWarAxe();
+		playCard(context, player, fieryWarAxe);
+
+		Assert.assertTrue(player.getHero().getWeapon() != null);
+		Assert.assertEquals(player.getHero().getWeapon().getWeaponDamage(), 3);
+
+		Minion spitefulSmith = playMinionCard(context, player, new SpitefulSmith());
+		// Smith has been played, but is not enraged yet, so weapon damage
+		// should still be unaltered
+		Assert.assertEquals(player.getHero().getWeapon().getWeaponDamage(), 3);
+
+		SpellCard damageSpell = new TestSpellCard(DamageSpell.create(1));
+		damageSpell.setTargetRequirement(TargetSelection.ANY);
+		context.getLogic().receiveCard(player.getId(), damageSpell);
+		GameAction spellAction = damageSpell.play();
+		spellAction.setTarget(spitefulSmith);
+		context.getLogic().performGameAction(player.getId(), spellAction);
+
+		// Smith is damaged now, so weapon should be buffed
+		Assert.assertEquals(player.getHero().getWeapon().getWeaponDamage(), 5);
+
+		// equip a new weapon; this one should get buffed too
+		fieryWarAxe = new FieryWarAxe();
+		playCard(context, player, fieryWarAxe);
+		Assert.assertEquals(player.getHero().getWeapon().getWeaponDamage(), 5);
+
+		// wipe everything
+		SpellDesc wipeSpell = DestroySpell.create();
+		wipeSpell.setTarget(EntityReference.ALL_MINIONS);
+		SpellCard wipe = new TestSpellCard(wipeSpell);
+		playCard(context, player, wipe);
+
+		// Smith is destroyed, weapon power should be back to normal
+		Assert.assertEquals(player.getHero().getWeapon().getWeaponDamage(), 3);
 	}
 
 }

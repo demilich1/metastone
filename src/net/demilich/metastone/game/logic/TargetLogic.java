@@ -42,7 +42,8 @@ public class TargetLogic {
 		List<Entity> validTargets = new ArrayList<>();
 		for (Entity entity : potentialTargets) {
 			// special case for 'SYSTEM' action, which are used in Sandbox Mode
-			// we do not want to restrict those actions by STEALTH or UNTARGETABLE_BY_SPELLS
+			// we do not want to restrict those actions by STEALTH or
+			// UNTARGETABLE_BY_SPELLS
 			if (action.getActionType() == ActionType.SYSTEM && action.canBeExecutedOn(context, entity)) {
 				validTargets.add(entity);
 				continue;
@@ -82,9 +83,9 @@ public class TargetLogic {
 				}
 			}
 
-			for (Actor minion : player.getGraveyard()) {
-				if (minion.getId() == targetId) {
-					return minion;
+			for (Actor actor : player.getGraveyard()) {
+				if (actor.getId() == targetId) {
+					return actor;
 				}
 			}
 		}
@@ -178,7 +179,7 @@ public class TargetLogic {
 		ActionType actionType = action.getActionType();
 		Player opponent = context.getOpponent(player);
 
-		// if there is a minion with TAUNT and the action is of type basic
+		// if there is a minion with TAUNT and the action is of type physical
 		// attack only allow corresponding minions as targets
 		if (actionType == ActionType.PHYSICAL_ATTACK
 				&& (targetRequirement == TargetSelection.ENEMY_CHARACTERS || targetRequirement == TargetSelection.ENEMY_MINIONS)
@@ -238,6 +239,19 @@ public class TargetLogic {
 			return singleTargetAsList((Entity) context.getEnvironment().get(Environment.ATTACKER));
 		} else if (targetKey == EntityReference.PENDING_CARD) {
 			return singleTargetAsList((Entity) context.getEnvironment().get(Environment.PENDING_CARD));
+		} else if (targetKey == EntityReference.FRIENDLY_WEAPON) {
+			if (player.getHero().getWeapon() != null) {
+				return singleTargetAsList(player.getHero().getWeapon());
+			} else {
+				return new ArrayList<>();
+			}
+		} else if (targetKey == EntityReference.ENEMY_WEAPON) {
+			Player opponent = context.getOpponent(player);
+			if (opponent.getHero().getWeapon() != null) {
+				return singleTargetAsList(opponent.getHero().getWeapon());
+			} else {
+				return new ArrayList<>();
+			}
 		} else if (targetKey == EntityReference.NONE) {
 			return null;
 		}

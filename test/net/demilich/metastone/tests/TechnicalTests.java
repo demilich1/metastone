@@ -1,3 +1,4 @@
+package net.demilich.metastone.tests;
 import java.util.ArrayList;
 import java.util.List;
 

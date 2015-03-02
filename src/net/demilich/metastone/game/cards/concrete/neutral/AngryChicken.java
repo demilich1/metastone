@@ -6,7 +6,9 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
-import net.demilich.metastone.game.spells.enrage.Enrage;
+import net.demilich.metastone.game.spells.EnrageSpell;
+import net.demilich.metastone.game.spells.trigger.EnrageChangedTrigger;
+import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 
 public class AngryChicken extends MinionCard {
 
@@ -23,8 +25,9 @@ public class AngryChicken extends MinionCard {
 
 	@Override
 	public Minion summon() {
-		Minion angryChicken = createMinion();
-		angryChicken.setTag(GameTag.ENRAGE_SPELL, Enrage.create(5));
+		Minion angryChicken = createMinion(GameTag.ENRAGABLE);
+		SpellTrigger trigger = new SpellTrigger(new EnrageChangedTrigger(), EnrageSpell.create(+5));
+		angryChicken.setSpellTrigger(trigger);
 		return angryChicken;
 	}
 }

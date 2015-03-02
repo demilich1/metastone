@@ -1,3 +1,4 @@
+package net.demilich.metastone.tests;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.entities.heroes.HeroClass;

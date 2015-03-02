@@ -1,3 +1,4 @@
+package net.demilich.metastone.tests;
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;

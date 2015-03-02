@@ -364,6 +364,14 @@ public class GameContext implements Cloneable, IDisposable {
 		}
 		return targetLogic.findEntity(this, targetKey);
 	}
+	
+	public Entity tryFind(EntityReference targetKey) {
+		try {
+			return resolveSingleTarget(targetKey);
+		} catch (Exception e) {
+		}
+		return null;
+	}
 
 	public List<Entity> resolveTarget(Player player, Actor source, EntityReference targetKey) {
 		return targetLogic.resolveTargetKey(this, player, source, targetKey);

@@ -34,6 +34,7 @@ import net.demilich.metastone.game.events.BoardChangedEvent;
 import net.demilich.metastone.game.events.CardPlayedEvent;
 import net.demilich.metastone.game.events.DamageEvent;
 import net.demilich.metastone.game.events.DrawCardEvent;
+import net.demilich.metastone.game.events.EnrageChangedEvent;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.HealEvent;
 import net.demilich.metastone.game.events.KillEvent;
@@ -134,6 +135,25 @@ public class GameLogic implements Cloneable {
 	public int applySpellpower(Player player, int baseValue) {
 		int spellpower = getTotalTagValue(player, GameTag.SPELL_POWER);
 		return baseValue + spellpower;
+	}
+
+	public void applyTag(Entity entity, GameTag tag) {
+		if (tag == GameTag.WINDFURY && !entity.hasStatus(GameTag.WINDFURY)) {
+			entity.modifyTag(GameTag.NUMBER_OF_ATTACKS, +1);
+		}
+		entity.setTag(tag);
+		log("Applying tag {} to {}", tag, entity);
+	}
+
+	public void removeTag(Entity entity, GameTag tag) {
+		if (!entity.hasStatus(tag)) {
+			return;
+		}
+		if (tag == GameTag.WINDFURY) {
+			entity.modifyTag(GameTag.NUMBER_OF_ATTACKS, -1);
+		}
+		entity.removeTag(tag);
+		log("Removing tag {} from {}", tag, entity);
 	}
 
 	private void assignCardIds(CardCollection cardCollection) {
@@ -348,7 +368,7 @@ public class GameLogic implements Cloneable {
 
 		log("{} is damaged for {}", minion, damage);
 		minion.setHp(minion.getHp() - damage);
-		if (minion.hasTag(GameTag.ENRAGE_SPELL)) {
+		if (minion.hasTag(GameTag.ENRAGABLE)) {
 			handleEnrage(minion);
 		}
 		return damage;
@@ -360,7 +380,7 @@ public class GameLogic implements Cloneable {
 		switch (target.getEntityType()) {
 		case HERO:
 			log("Hero {} has been destroyed.", target.getName());
-			target.setTag(GameTag.DEAD);
+			applyTag(target, GameTag.DEAD);
 			break;
 		case MINION:
 			destroyMinion((Minion) target);
@@ -373,6 +393,8 @@ public class GameLogic implements Cloneable {
 			logger.error("Trying to destroy unknown entity type {}", target.getEntityType());
 			break;
 		}
+		
+		context.fireGameEvent(new BoardChangedEvent(context));
 	}
 
 	private void destroyMinion(Minion minion) {
@@ -392,8 +414,6 @@ public class GameLogic implements Cloneable {
 		owner.getGraveyard().add(minion);
 
 		resolveDeathrattles(owner, minion, boardPosition);
-
-		context.fireGameEvent(new BoardChangedEvent(context));
 	}
 
 	private void destroyWeapon(Weapon weapon) {
@@ -401,6 +421,7 @@ public class GameLogic implements Cloneable {
 		resolveDeathrattles(owner, weapon);
 		weapon.onUnequip(context, owner);
 		owner.getHero().setWeapon(null);
+		owner.getGraveyard().add(weapon);
 		context.fireGameEvent(new WeaponDestroyedEvent(context, weapon));
 	}
 
@@ -513,9 +534,10 @@ public class GameLogic implements Cloneable {
 		}
 
 		if (attacker.hasStatus(GameTag.IMMUNE_WHILE_ATTACKING)) {
-			attacker.setTag(GameTag.IMMUNE);
+			applyTag(attacker, GameTag.IMMUNE);
 		}
-		attacker.removeTag(GameTag.STEALTHED);
+
+		removeTag(attacker, GameTag.STEALTHED);
 
 		int attackerDamage = attacker.getAttack();
 		int defenderDamage = target.getAttack();
@@ -668,12 +690,7 @@ public class GameLogic implements Cloneable {
 			entity.removeTag(GameTag.ENRAGED);
 		}
 
-		SpellDesc enrageSpell = (SpellDesc) entity.getTag(GameTag.ENRAGE_SPELL);
-		EntityReference entityReference = entity.getReference();
-		enrageSpell.setTarget(entityReference);
-		enrageSpell.setSourceEntity(entityReference);
-		Player owner = context.getPlayer(entity.getOwner());
-		castSpell(owner.getId(), enrageSpell);
+		context.fireGameEvent(new EnrageChangedEvent(context, entity));
 	}
 
 	public boolean hasTag(Player player, GameTag tag) {
@@ -733,7 +750,7 @@ public class GameLogic implements Cloneable {
 		}
 
 		minion.setHp(newHp);
-		if (minion.hasTag(GameTag.ENRAGE_SPELL)) {
+		if (minion.hasTag(GameTag.ENRAGABLE)) {
 			handleEnrage(minion);
 		}
 		return newHp != oldHp;
@@ -791,7 +808,7 @@ public class GameLogic implements Cloneable {
 		context.getOpponent(player).getMinions().remove(minion);
 		player.getMinions().add(minion);
 		minion.setOwner(player.getId());
-		minion.setTag(GameTag.SUMMONING_SICKNESS);
+		applyTag(minion, GameTag.SUMMONING_SICKNESS);
 		List<IGameEventListener> triggers = context.getTriggersAssociatedWith(minion.getReference());
 		removeSpelltriggers(minion);
 		for (IGameEventListener trigger : triggers) {
@@ -1109,8 +1126,9 @@ public class GameLogic implements Cloneable {
 		if (target.getHp() > target.getMaxHp()) {
 			target.setHp(target.getMaxHp());
 		}
-		// this cannot be right, because it makes silenced minions be able to attack again
-		//refreshAttacksPerRound(target);
+		// this cannot be right, because it makes silenced minions be able to
+		// attack again
+		// refreshAttacksPerRound(target);
 
 		log("{} was silenced", target);
 	}
@@ -1174,7 +1192,7 @@ public class GameLogic implements Cloneable {
 		context.fireGameEvent(summonEvent, TriggerLayer.SECRET);
 		context.fireGameEvent(summonEvent, TriggerLayer.DEFAULT);
 
-		minion.setTag(GameTag.SUMMONING_SICKNESS);
+		applyTag(minion, GameTag.SUMMONING_SICKNESS);
 		refreshAttacksPerRound(minion);
 		if (player.getHero().hasStatus(GameTag.CANNOT_REDUCE_HP_BELOW_1)) {
 			minion.setTag(GameTag.CANNOT_REDUCE_HP_BELOW_1);

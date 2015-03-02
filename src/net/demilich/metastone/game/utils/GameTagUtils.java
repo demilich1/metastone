@@ -55,7 +55,6 @@ public class GameTagUtils {
 		case BATTLECRY:
 		case DEATHRATTLES:
 		case DEBUG:
-		case ENRAGE_SPELL:
 		case MANA_COST_MODIFIER:
 		case RACE:
 		case UNIQUE_ENTITY:

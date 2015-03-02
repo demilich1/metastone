@@ -1,3 +1,5 @@
+package net.demilich.metastone.tests;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -117,13 +119,9 @@ public class AdvancedMechanicTests extends BasicTests {
 		Player priest = context.getPlayer2();
 		priest.setMana(10);
 
-		MinionCard amaniBerserkerCard = new AmaniBerserker();
-		context.getLogic().receiveCard(priest.getId(), amaniBerserkerCard);
-		context.getLogic().performGameAction(priest.getId(), amaniBerserkerCard.play());
+		playCard(context, priest, new AmaniBerserker());
 
-		MinionCard monsterCard = new TestMinionCard(1, 10);
-		context.getLogic().receiveCard(mage.getId(), monsterCard);
-		context.getLogic().performGameAction(mage.getId(), monsterCard.play());
+		playCard(context, mage, new TestMinionCard(1, 10));
 
 		Entity attacker = getSingleMinion(mage.getMinions());
 		Actor defender = getSingleMinion(priest.getMinions());

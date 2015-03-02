@@ -6,7 +6,9 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
-import net.demilich.metastone.game.spells.enrage.Enrage;
+import net.demilich.metastone.game.spells.EnrageSpell;
+import net.demilich.metastone.game.spells.trigger.EnrageChangedTrigger;
+import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 
 public class Warbot extends MinionCard {
 
@@ -21,12 +23,11 @@ public class Warbot extends MinionCard {
 		return 610;
 	}
 
-
-
 	@Override
 	public Minion summon() {
-		Minion warbot = createMinion();
-		warbot.setTag(GameTag.ENRAGE_SPELL, Enrage.create(+1));
+		Minion warbot = createMinion(GameTag.ENRAGABLE);
+		SpellTrigger trigger = new SpellTrigger(new EnrageChangedTrigger(), EnrageSpell.create(+1));
+		warbot.setSpellTrigger(trigger);
 		return warbot;
 	}
 }

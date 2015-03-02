@@ -5,7 +5,9 @@ import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.spells.enrage.Enrage;
+import net.demilich.metastone.game.spells.EnrageSpell;
+import net.demilich.metastone.game.spells.trigger.EnrageChangedTrigger;
+import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 
 public class TaurenWarrior extends MinionCard {
 
@@ -21,8 +23,9 @@ public class TaurenWarrior extends MinionCard {
 
 	@Override
 	public Minion summon() {
-		Minion taurenWarrior = createMinion(GameTag.TAUNT);
-		taurenWarrior.setTag(GameTag.ENRAGE_SPELL, Enrage.create(3));
+		Minion taurenWarrior = createMinion(GameTag.TAUNT, GameTag.ENRAGABLE);
+		SpellTrigger trigger = new SpellTrigger(new EnrageChangedTrigger(), EnrageSpell.create(+3));
+		taurenWarrior.setSpellTrigger(trigger);
 		return taurenWarrior;
 	}
 }

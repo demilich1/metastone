@@ -1,3 +1,5 @@
+package net.demilich.metastone.tests;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -17,10 +19,17 @@ import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.gui.gameconfig.PlayerConfig;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
+
 public class TestBase {
+
+	static {
+		Logger root = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+		root.setLevel(Level.DEBUG);
+	}
 
 	protected static void attack(GameContext context, Player player, Entity attacker, Entity target) {
 		PhysicalAttackAction physicalAttackAction = new PhysicalAttackAction(attacker.getReference());
@@ -36,7 +45,7 @@ public class TestBase {
 		PlayerConfig player2Config = new PlayerConfig(DeckFactory.getRandomDeck(hero2), new NullBehaviour());
 		player2Config.setName("Player 2");
 		Player player2 = new Player(player2Config);
-		
+
 		GameLogic logic = new GameLogic();
 		DebugContext context = new DebugContext(player1, player2, logic);
 		logic.setContext(context);
@@ -70,8 +79,6 @@ public class TestBase {
 		context.getLogic().performGameAction(player.getId(), minionCard.play());
 		return getSummonedMinion(player.getMinions());
 	}
-
-	protected static Logger logger = LoggerFactory.getLogger(TestBase.class);
 
 	private static class NullBehaviour extends Behaviour {
 

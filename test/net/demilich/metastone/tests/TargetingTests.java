@@ -1,3 +1,4 @@
+package net.demilich.metastone.tests;
 import java.util.List;
 
 import net.demilich.metastone.game.GameContext;

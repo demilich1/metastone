@@ -30,6 +30,11 @@ public class Weapon extends Actor {
 	public EntityType getEntityType() {
 		return EntityType.WEAPON;
 	}
+	
+	@Override
+	public boolean isDead() {
+		return hasStatus(GameTag.DEAD) || isBroken();
+	}
 
 	public int getWeaponDamage() {
 		return getTagValue(GameTag.WEAPON_DAMAGE) + getTagValue(GameTag.CONDITIONAL_ATTACK_BONUS);

@@ -5,7 +5,9 @@ import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.spells.enrage.Enrage;
+import net.demilich.metastone.game.spells.EnrageSpell;
+import net.demilich.metastone.game.spells.trigger.EnrageChangedTrigger;
+import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 
 public class AmaniBerserker extends MinionCard {
 
@@ -24,8 +26,9 @@ public class AmaniBerserker extends MinionCard {
 
 	@Override
 	public Minion summon() {
-		Minion amaniBerserker = createMinion();
-		amaniBerserker.setTag(GameTag.ENRAGE_SPELL, Enrage.create(ENRAGE_ATTACK_BONUS));
+		Minion amaniBerserker = createMinion(GameTag.ENRAGABLE);
+		SpellTrigger trigger = new SpellTrigger(new EnrageChangedTrigger(), EnrageSpell.create(ENRAGE_ATTACK_BONUS));
+		amaniBerserker.setSpellTrigger(trigger);
 		return amaniBerserker;
 	}
 }

@@ -7,9 +7,6 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class RemoveTagSpell extends Spell {
 
 	public static SpellDesc create(GameTag tag) {
@@ -18,12 +15,9 @@ public class RemoveTagSpell extends Spell {
 		return desc;
 	}
 
-	private static Logger logger = LoggerFactory.getLogger(RemoveTagSpell.class);
-
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		GameTag tag = (GameTag) desc.get(SpellArg.GAME_TAG);
-		logger.debug("Removing tag {} from {}", tag, target);
-		target.removeTag(tag);
+		context.getLogic().removeTag(target, tag);
 	}
 }

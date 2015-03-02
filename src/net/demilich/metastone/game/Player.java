@@ -23,7 +23,7 @@ public class Player extends CustomCloneable {
 
 	private final CardCollection deck;
 	private final CardCollection hand = new CardCollection();
-	private final List<Minion> graveyard = new ArrayList<>();
+	private final List<Actor> graveyard = new ArrayList<>();
 	private final List<Minion> minions = new ArrayList<>();
 	private final List<Integer> secrets = new ArrayList<>();
 
@@ -90,7 +90,7 @@ public class Player extends CustomCloneable {
 		return deckName;
 	}
 
-	public List<Minion> getGraveyard() {
+	public List<Actor> getGraveyard() {
 		return graveyard;
 	}
 

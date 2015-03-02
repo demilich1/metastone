@@ -1,3 +1,4 @@
+package net.demilich.metastone.tests;
 import java.util.HashMap;
 
 import net.demilich.metastone.game.cards.Card;
