@@ -71,7 +71,7 @@ public class ValueApproximator implements IValueApproximator {
 			break;
 		case SUMMON:
 			return minionValueApproximator.getValue(context, action, playerId);
-		case UNDEFINED:
+		case SYSTEM:
 			break;
 		default:
 			break;

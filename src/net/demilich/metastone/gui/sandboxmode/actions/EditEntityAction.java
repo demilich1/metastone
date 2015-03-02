@@ -13,7 +13,7 @@ public class EditEntityAction extends GameAction {
 
 	public EditEntityAction() {
 		setTargetRequirement(TargetSelection.ANY);
-		setActionType(ActionType.BATTLECRY);
+		setActionType(ActionType.SYSTEM);
 	}
 
 	@Override

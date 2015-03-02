@@ -2,7 +2,7 @@ package net.demilich.metastone.game.actions;
 
 public enum ActionType {
 	
-	UNDEFINED,
+	SYSTEM,
 	END_TURN,
 	PHYSICAL_ATTACK,
 	SPELL,

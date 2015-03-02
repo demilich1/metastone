@@ -8,7 +8,7 @@ import net.demilich.metastone.game.targeting.TargetSelection;
 public abstract class GameAction implements Cloneable {
 	
 	private TargetSelection targetRequirement = TargetSelection.NONE;
-	private ActionType actionType = ActionType.UNDEFINED;
+	private ActionType actionType = ActionType.SYSTEM;
 	private EntityReference source;
 	private EntityReference targetKey;
 	private String actionSuffix;

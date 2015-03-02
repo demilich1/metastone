@@ -27,6 +27,9 @@ public class PerformActionCommand extends SimpleCommand<GameNotification> {
 		Player selectedPlayer = sandboxProxy.getSelectedPlayer();
 		List<GameAction> rolledOutActions = new ArrayList<GameAction>();
 		actionLogic.rollout(gameAction, context, selectedPlayer, rolledOutActions);
+		if (rolledOutActions.isEmpty()) {
+			return;
+		}
 		if (gameAction.getTargetRequirement() != TargetSelection.NONE) {
 			ActionGroup actionGroup = new ActionGroup(rolledOutActions.get(0));
 			for (GameAction rolledAction : rolledOutActions) {

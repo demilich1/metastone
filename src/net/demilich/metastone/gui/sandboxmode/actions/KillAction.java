@@ -10,7 +10,7 @@ public class KillAction extends GameAction {
 
 	public KillAction() {
 		setTargetRequirement(TargetSelection.MINIONS);
-		setActionType(ActionType.BATTLECRY);
+		setActionType(ActionType.SYSTEM);
 	}
 
 	@Override

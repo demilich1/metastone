@@ -41,6 +41,12 @@ public class TargetLogic {
 	private List<Entity> filterTargets(GameContext context, Player player, GameAction action, List<Entity> potentialTargets) {
 		List<Entity> validTargets = new ArrayList<>();
 		for (Entity entity : potentialTargets) {
+			// special case for 'SYSTEM' action, which are used in Sandbox Mode
+			// we do not want to restrict those actions by STEALTH or UNTARGETABLE_BY_SPELLS
+			if (action.getActionType() == ActionType.SYSTEM && action.canBeExecutedOn(context, entity)) {
+				validTargets.add(entity);
+				continue;
+			}
 			if ((action.getActionType() == ActionType.SPELL || action.getActionType() == ActionType.HERO_POWER)
 					&& entity.hasStatus(GameTag.UNTARGETABLE_BY_SPELLS)) {
 				continue;

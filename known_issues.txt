@@ -12,9 +12,6 @@ Clicking "Stop" when selecting a Battlecry in Sandbox Mode crashes the program.
 
 Feature Request: There is currently no way to go back when in the Deck Creation screen without saving the current deck.
 
-Sandbox Mode:
-Giving a minion Stealth in Sandbox mode makes the creature untargetable to Sandbox editting
-
 Mechanics:
 Enrage effects persist after changes to max health are made (Crazed Alchemist/Voljin)
 Spiteful Smith enrage effect is not applied to new weapons that are equipped
