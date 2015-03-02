@@ -24,6 +24,9 @@ public class CardPlayedTrigger extends GameEventTrigger {
 	@Override
 	public boolean fire(GameEvent event, Entity host) {
 		CardPlayedEvent cardPlayedEvent = (CardPlayedEvent) event;
+		if (cardType != null) {
+			return cardPlayedEvent.getCard().getCardType() == cardType;
+		}
 		switch (targetPlayer) {
 		case BOTH:
 			return true;
@@ -32,9 +35,7 @@ public class CardPlayedTrigger extends GameEventTrigger {
 		case OPPONENT:
 			return cardPlayedEvent.getPlayerId() != host.getOwner();
 		}
-		if (cardType != null) {
-			return cardPlayedEvent.getCard().getCardType() == cardType;
-		}
+		
 		return false;
 	}
 

@@ -8,17 +8,13 @@ When summoned with 5 minions on the board, Cenarius should only summon the right
 
 Dr. Boom should be summoned between his Boom Bots, not to the side of them.
 
-Pint-Sized Summoner's effect disappears if you cast a spell before playing your first minion.
-
-Choosing "Kill..." in Sandbox Mode doesn't appear to do anything. The selected minion is still on the board.
-
 Clicking "Stop" when selecting a Battlecry in Sandbox Mode crashes the program.
 
 Feature Request: There is currently no way to go back when in the Deck Creation screen without saving the current deck.
 
 Sandbox Mode:
 Giving a minion Stealth in Sandbox mode makes the creature untargetable to Sandbox editting
-Sandbox mode "Kill" does not work.
+
 Mechanics:
 Enrage effects persist after changes to max health are made (Crazed Alchemist/Voljin)
 Spiteful Smith enrage effect is not applied to new weapons that are equipped
