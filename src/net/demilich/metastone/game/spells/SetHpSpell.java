@@ -20,8 +20,7 @@ public class SetHpSpell extends Spell {
 		int hp = desc.getValue();
 		Actor targetActor = (Actor) target;
 		targetActor.removeTag(GameTag.HP_BONUS);
-		targetActor.setMaxHp(hp);
-		targetActor.setHp(hp);
+		context.getLogic().modifyMaxHp(targetActor, hp);
 	}
 
 }

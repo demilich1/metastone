@@ -22,11 +22,9 @@ public class VoljinSpell extends Spell {
 		Actor targetActor = (Actor) target;
 		int sourceHp = voljin.getHp();
 		int targetHp = targetActor.getHp();
-		voljin.setHp(targetHp);
-		voljin.setMaxHp(targetHp);
+		context.getLogic().modifyMaxHp(voljin, targetHp);
 		voljin.setTag(GameTag.HP_BONUS, 0);
-		targetActor.setHp(sourceHp);
-		targetActor.setMaxHp(sourceHp);
+		context.getLogic().modifyMaxHp(targetActor, sourceHp);
 		targetActor.setTag(GameTag.HP_BONUS, 0);
 	}
 

@@ -12,11 +12,6 @@ Clicking "Stop" when selecting a Battlecry in Sandbox Mode crashes the program.
 
 Feature Request: There is currently no way to go back when in the Deck Creation screen without saving the current deck.
 
-Mechanics:
-Enrage effects persist after changes to max health are made (Crazed Alchemist/Voljin)
-Spiteful Smith enrage effect is not applied to new weapons that are equipped
-Spiteful Smith enrage effect persists after death/removal from board
-
 Minion summoning/morphing effects (Dragonling Mechanic, Imp Master, Polymorph, Recombobulate, etc.) place the new minion on the far right instead of in the minions old space or right of minion. Dr. Boom, Onyxia have special case summonings as well that fail
 Ice Block does not stop lethal damage
 Bot AI:
@@ -28,3 +23,5 @@ Cards in deck counter
 Secrets display when hovered over (Mad scientists?)
 Milled cards displayed somewhere
 Method of conceding or ending match
+
+Buffed weapons do not display their stats in green

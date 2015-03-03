@@ -145,17 +145,6 @@ public class GameLogic implements Cloneable {
 		log("Applying tag {} to {}", tag, entity);
 	}
 
-	public void removeTag(Entity entity, GameTag tag) {
-		if (!entity.hasStatus(tag)) {
-			return;
-		}
-		if (tag == GameTag.WINDFURY) {
-			entity.modifyTag(GameTag.NUMBER_OF_ATTACKS, -1);
-		}
-		entity.removeTag(tag);
-		log("Removing tag {} from {}", tag, entity);
-	}
-
 	private void assignCardIds(CardCollection cardCollection) {
 		for (Card card : cardCollection) {
 			card.setId(idFactory.generateId());
@@ -368,9 +357,7 @@ public class GameLogic implements Cloneable {
 
 		log("{} is damaged for {}", minion, damage);
 		minion.setHp(minion.getHp() - damage);
-		if (minion.hasTag(GameTag.ENRAGABLE)) {
-			handleEnrage(minion);
-		}
+		handleEnrage(minion);
 		return damage;
 	}
 
@@ -393,7 +380,7 @@ public class GameLogic implements Cloneable {
 			logger.error("Trying to destroy unknown entity type {}", target.getEntityType());
 			break;
 		}
-		
+
 		context.fireGameEvent(new BoardChangedEvent(context));
 	}
 
@@ -676,6 +663,9 @@ public class GameLogic implements Cloneable {
 	}
 
 	private void handleEnrage(Actor entity) {
+		if (!entity.hasStatus(GameTag.ENRAGABLE)) {
+			return;
+		}
 		boolean enraged = entity.getHp() < entity.getMaxHp();
 		// enrage state has not changed; do nothing
 		if (entity.hasStatus(GameTag.ENRAGED) == enraged) {
@@ -750,9 +740,7 @@ public class GameLogic implements Cloneable {
 		}
 
 		minion.setHp(newHp);
-		if (minion.hasTag(GameTag.ENRAGABLE)) {
-			handleEnrage(minion);
-		}
+		handleEnrage(minion);
 		return newHp != oldHp;
 	}
 
@@ -836,6 +824,12 @@ public class GameLogic implements Cloneable {
 
 	public void modifyDurability(Weapon weapon, int durability) {
 		modifyDurability(weapon, GameTag.DURABILITY, durability);
+	}
+
+	public void modifyMaxHp(Actor actor, int value) {
+		actor.setMaxHp(value);
+		actor.setHp(value);
+		handleEnrage(actor);
 	}
 
 	public void modifyMaxMana(Player player, int delta) {
@@ -1024,6 +1018,17 @@ public class GameLogic implements Cloneable {
 		}
 	}
 
+	public void removeTag(Entity entity, GameTag tag) {
+		if (!entity.hasStatus(tag)) {
+			return;
+		}
+		if (tag == GameTag.WINDFURY) {
+			entity.modifyTag(GameTag.NUMBER_OF_ATTACKS, -1);
+		}
+		entity.removeTag(tag);
+		log("Removing tag {} from {}", tag, entity);
+	}
+
 	private void resolveBattlecry(int playerId, Actor actor) {
 		Battlecry battlecry = actor.getBattlecry();
 		Player player = context.getPlayer(playerId);
@@ -1209,6 +1214,8 @@ public class GameLogic implements Cloneable {
 		if (resolveBattlecry && minion.getBattlecry() != null && minion.getBattlecry().isResolvedLate()) {
 			resolveBattlecry(player.getId(), minion);
 		}
+		
+		handleEnrage(minion);
 
 		context.getSummonStack().pop();
 		context.fireGameEvent(new BoardChangedEvent(context));
