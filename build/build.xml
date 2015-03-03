@@ -20,7 +20,7 @@
 
 		<copy todir="externalLibs">
 			<fileset dir="C:\projects\java\MetaStone\lib">
-				<filename name="logback-classic-1.0.9.jar" />
+				<filename name="logback-classic-1.1.2.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
@@ -55,7 +55,7 @@
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="C:\projects\java\MetaStone\lib">
-				<filename name="slf4j-api-1.6.6.jar" />
+				<filename name="slf4j-api-1.7.10.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
@@ -85,7 +85,7 @@
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="C:\projects\java\MetaStone\lib">
-				<filename name="logback-core-1.0.9.jar" />
+				<filename name="logback-core-1.1.2.jar" />
 			</fileset>
 		</copy>
 
@@ -108,14 +108,14 @@
 		<copy todir="build/libs">
 			<fileset dir="externalLibs">
 				<include name="commons-codec-1.6.jar" />
-				<include name="logback-core-1.0.9.jar" />
+				<include name="logback-core-1.1.2.jar" />
 				<include name="lib" />
 				<include name="httpclient-cache-4.3.4.jar" />
 				<include name="commons-lang3-3.3.2.jar" />
 				<include name="httpmime-4.3.4.jar" />
-				<include name="slf4j-api-1.6.6.jar" />
+				<include name="slf4j-api-1.7.10.jar" />
 				<include name="gson-2.2.4.jar" />
-				<include name="logback-classic-1.0.9.jar" />
+				<include name="logback-classic-1.1.2.jar" />
 				<include name="nitty-gritty-mvc.jar" />
 				<include name="httpcore-4.3.2.jar" />
 				<include name="fluent-hc-4.3.4.jar" />
@@ -163,10 +163,10 @@
 				<include name="*" />
 			</fileset>
 		</copy>
-		
+
 		<copy todir="dist/decks">
-		    <fileset dir="../decks"/>
-		  </copy>
+			<fileset dir="../decks" />
+		</copy>
 
 		<copy todir="deploy/decks">
 			<fileset dir="C:\projects\java\MetaStone\decks\">
@@ -184,18 +184,19 @@
 
 		<mkdir dir="build/classes/META-INF" />
 
-
-
 		<fx:jar destfile="dist/MetaStone.jar">
 			<fx:application refid="fxApplication" />
 			<fileset dir="build/classes">
 			</fileset>
 			<fx:resources refid="appRes" />
+			<fx:platform javafx="2.1+">
+				<fx:jvmarg value="-Xmx1024m" />
+			</fx:platform>
 
 			<manifest>
 				<attribute name="Implementation-Vendor" value="demilich" />
-				<attribute name="Implementation-Title" value="Metastone" />
-				<attribute name="Implementation-Version" value="0.9.1" />
+				<attribute name="Implementation-Title" value="MetaStone" />
+				<attribute name="Implementation-Version" value="0.9.3" />
 				<attribute name="JavaFX-Feature-Proxy" value="None" />
 			</manifest>
 		</fx:jar>
@@ -203,11 +204,14 @@
 
 		<mkdir dir="deploy" />
 		<!-- Need to use ${basedir} because somehow the ant task is calculating the directory differently -->
-		<fx:deploy embedJNLP="false" extension="false" width="1024" height="768" includeDT="false" offlineAllowed="true" outdir="${basedir}/deploy" outfile="MetaStone" nativeBundles="exe" updatemode="background">
+		<fx:deploy embedJNLP="false" extension="false" width="1024" height="768" includeDT="false" offlineAllowed="true" outdir="${basedir}/deploy" outfile="MetaStone" nativeBundles="exe" updatemode="background" verbose="false">
 
 			<fx:info title="MetaStone" vendor="demilich" />
 			<fx:application refId="fxApplication" />
 			<fx:resources refid="appRes" />
+			<fx:platform javafx="2.1+">
+				<fx:jvmarg value="-Xmx1024m" />
+			</fx:platform>
 		</fx:deploy>
 
 		<fx:csstobin outdir="build/classes">

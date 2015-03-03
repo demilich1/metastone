@@ -3,7 +3,7 @@
 [Setup]
 AppId={{fxApplication}}
 AppName=Metastone
-AppVersion=0.9.2
+AppVersion=0.9.3
 AppVerName=Metastone
 AppPublisher=demilich
 AppComments=MetaStone
@@ -13,12 +13,12 @@ AppCopyright=Copyright (C) 2015
 ;AppUpdatesURL=http://java.com/
 DefaultDirName={localappdata}\Metastone
 DisableStartupPrompt=Yes
-DisableDirPage=Yes
+DisableDirPage=No
 DisableProgramGroupPage=Yes
 DisableReadyPage=Yes
-DisableFinishedPage=Yes
-DisableWelcomePage=Yes
-DefaultGroupName=demilich
+DisableFinishedPage=No
+DisableWelcomePage=No
+DefaultGroupName=MetaStone
 ;Optional License
 LicenseFile=
 ;WinXP or above

@@ -14,14 +14,13 @@ public class ArgentProtector extends MinionCard {
 	public ArgentProtector() {
 		super("Argent Protector", 2, 2, Rarity.COMMON, HeroClass.PALADIN, 2);
 		setDescription("Battlecry: Give a friendly minion Divine Shield.");
+		setTag(GameTag.BATTLECRY);
 	}
 
 	@Override
 	public int getTypeId() {
 		return 235;
 	}
-
-
 
 	@Override
 	public Minion summon() {
