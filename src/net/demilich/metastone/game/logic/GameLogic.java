@@ -84,6 +84,9 @@ public class GameLogic implements Cloneable {
 	public static final int DECK_SIZE = 30;
 	public static final int TURN_LIMIT = 100;
 
+	private static final int WINDFURY_ATTACKS = 2;
+	private static final int MEGA_WINDFURY_ATTACKS = 4;
+
 	private final TargetLogic targetLogic = new TargetLogic();
 	private final ActionLogic actionLogic = new ActionLogic();
 	private final SpellFactory spellFactory = new SpellFactory();
@@ -139,7 +142,9 @@ public class GameLogic implements Cloneable {
 
 	public void applyTag(Entity entity, GameTag tag) {
 		if (tag == GameTag.WINDFURY && !entity.hasStatus(GameTag.WINDFURY)) {
-			entity.modifyTag(GameTag.NUMBER_OF_ATTACKS, +1);
+			entity.modifyTag(GameTag.NUMBER_OF_ATTACKS, WINDFURY_ATTACKS - 1);
+		} else if (tag == GameTag.MEGA_WINDFURY && !entity.hasStatus(GameTag.MEGA_WINDFURY)) {
+			entity.modifyTag(GameTag.NUMBER_OF_ATTACKS, MEGA_WINDFURY_ATTACKS - 1);
 		}
 		entity.setTag(tag);
 		log("Applying tag {} to {}", tag, entity);
@@ -239,6 +244,7 @@ public class GameLogic implements Cloneable {
 			logger.error("Error while playing card: " + spellCard);
 			logger.error("Error while casting spell: " + spellDesc);
 			logger.error("LastSpell: " + lastSpell);
+			logger.error("Exception while casting spell", e);
 			e.printStackTrace();
 		}
 
@@ -343,7 +349,7 @@ public class GameLogic implements Cloneable {
 
 	private int damageMinion(Player player, Actor minion, int damage) {
 		if (minion.hasStatus(GameTag.DIVINE_SHIELD)) {
-			minion.removeTag(GameTag.DIVINE_SHIELD);
+			removeTag(minion, GameTag.DIVINE_SHIELD);
 			log("{}'s DIVINE SHIELD absorbs the damage", minion);
 			return 0;
 		}
@@ -1019,11 +1025,13 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void removeTag(Entity entity, GameTag tag) {
-		if (!entity.hasStatus(tag)) {
+		if (!entity.hasTag(tag)) {
 			return;
 		}
 		if (tag == GameTag.WINDFURY) {
-			entity.modifyTag(GameTag.NUMBER_OF_ATTACKS, -1);
+			entity.modifyTag(GameTag.NUMBER_OF_ATTACKS, 1 - WINDFURY_ATTACKS);
+		} else if (tag == GameTag.MEGA_WINDFURY) {
+			entity.modifyTag(GameTag.NUMBER_OF_ATTACKS, 1 - MEGA_WINDFURY_ATTACKS);
 		}
 		entity.removeTag(tag);
 		log("Removing tag {} from {}", tag, entity);
@@ -1115,10 +1123,7 @@ public class GameLogic implements Cloneable {
 			if (immuneToSilence.contains(tag)) {
 				continue;
 			}
-			target.removeTag(tag);
-			if (tag == GameTag.WINDFURY) {
-				target.modifyTag(GameTag.NUMBER_OF_ATTACKS, -1);
-			}
+			removeTag(target, tag);
 		}
 		removeSpelltriggers(target);
 
@@ -1214,7 +1219,7 @@ public class GameLogic implements Cloneable {
 		if (resolveBattlecry && minion.getBattlecry() != null && minion.getBattlecry().isResolvedLate()) {
 			resolveBattlecry(player.getId(), minion);
 		}
-		
+
 		handleEnrage(minion);
 
 		context.getSummonStack().pop();

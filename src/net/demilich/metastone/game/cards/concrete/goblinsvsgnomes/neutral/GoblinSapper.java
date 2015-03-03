@@ -23,7 +23,6 @@ public class GoblinSapper extends MinionCard {
 		return 520;
 	}
 
-
 	@Override
 	public Minion summon() {
 		Minion goblinSapper = createMinion();
