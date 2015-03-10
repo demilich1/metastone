@@ -13,7 +13,7 @@ public abstract class Spell {
 
 	public void cast(GameContext context, Player player, SpellDesc desc, List<Entity> targets) {
 		if (targets == null) {
-			onCast(context, player, desc, null);
+			castForPlayer(context, player, desc, null);
 			return;
 		}
 		
@@ -22,11 +22,34 @@ public abstract class Spell {
 		List<Entity> validTargets = SpellUtils.getValidTargets(targets, targetFilter);
 		if (validTargets.size() > 0 && desc.getBool(SpellArg.RANDOM_TARGET)) {
 			Entity target = SpellUtils.getRandomTarget(validTargets);
+			castForPlayer(context, player, desc, target);
 			onCast(context, player, desc, target);
 		} else {
 			for (Entity target : validTargets) {
-				onCast(context, player, desc, target);
+				castForPlayer(context, player, desc, target);
 			}
+		}
+	}
+	
+	private void castForPlayer(GameContext context, Player player, SpellDesc desc, Entity target) {
+		TargetPlayer targetPlayer = desc.getTargetPlayer();
+		if (targetPlayer == null) {
+			targetPlayer = TargetPlayer.SELF;
+		}
+		Player opponent = context.getOpponent(player);
+		switch (targetPlayer) {
+		case BOTH:
+			onCast(context, player, desc, target);
+			onCast(context, opponent, desc, target);
+			break;
+		case OPPONENT:
+			onCast(context, opponent, desc, target);
+			break;
+		case SELF:
+			onCast(context, player, desc, target);
+			break;
+		default:
+			break;
 		}
 	}
 

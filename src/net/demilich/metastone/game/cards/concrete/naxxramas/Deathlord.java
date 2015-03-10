@@ -8,7 +8,7 @@ import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.PutRandomMinionOnBoardSpell;
 import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.targeting.EntityReference;
+import net.demilich.metastone.game.targeting.CardLocation;
 
 public class Deathlord extends MinionCard {
 
@@ -21,15 +21,14 @@ public class Deathlord extends MinionCard {
 	public int getTypeId() {
 		return 405;
 	}
-	
+
 	@Override
 	public Minion summon() {
 		Minion deathlord = createMinion(GameTag.TAUNT);
-		SpellDesc deathlordSpell = PutRandomMinionOnBoardSpell.create(TargetPlayer.OPPONENT);
-		deathlordSpell.setTarget(EntityReference.NONE);
+		SpellDesc deathlordSpell = PutRandomMinionOnBoardSpell.create(null, CardLocation.DECK);
+		deathlordSpell.setTargetPlayer(TargetPlayer.OPPONENT);
 		deathlord.addDeathrattle(deathlordSpell);
 		return deathlord;
 	}
 
-	
 }

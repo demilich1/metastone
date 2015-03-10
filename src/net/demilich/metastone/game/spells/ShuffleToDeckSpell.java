@@ -21,23 +21,7 @@ public class ShuffleToDeckSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		Card targetCard = (Card) desc.get(SpellArg.CARD);
-		TargetPlayer targetPlayer = desc.getTargetPlayer();
-		Player opponent = context.getOpponent(player);
-		switch (targetPlayer) {
-		case BOTH:
-			shuffleToDeck(player, targetCard);
-			shuffleToDeck(opponent, targetCard);
-			break;
-		case OPPONENT:
-			shuffleToDeck(opponent, targetCard);
-			break;
-		case SELF:
-			shuffleToDeck(player, targetCard);
-			break;
-		default:
-			break;
-		}
-
+		shuffleToDeck(player, targetCard);	
 	}
 
 	private void shuffleToDeck(Player player, Card card) {

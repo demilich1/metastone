@@ -21,8 +21,6 @@ public class BigGameHunter extends MinionCard {
 		return 93;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion bigGameHunter = createMinion();

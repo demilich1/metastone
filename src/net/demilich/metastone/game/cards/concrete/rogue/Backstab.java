@@ -22,11 +22,6 @@ public class Backstab extends SpellCard {
 		Actor targetActor = (Actor) target;
 		return targetActor.getHp() == targetActor.getMaxHp();
 	}
-	
-	
-
-
-
 
 	@Override
 	public int getTypeId() {

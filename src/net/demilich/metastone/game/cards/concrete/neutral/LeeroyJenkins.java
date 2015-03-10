@@ -27,7 +27,8 @@ public class LeeroyJenkins extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion leeroyJenkins = createMinion(GameTag.CHARGE);
-		SpellDesc summonSpell = SummonSpell.create(TargetPlayer.OPPONENT, new Whelp(), new Whelp());
+		SpellDesc summonSpell = SummonSpell.create(new Whelp(), new Whelp());
+		summonSpell.setTargetPlayer(TargetPlayer.OPPONENT);
 		leeroyJenkins.setBattlecry(Battlecry.createBattlecry(summonSpell));
 		return leeroyJenkins;
 	}

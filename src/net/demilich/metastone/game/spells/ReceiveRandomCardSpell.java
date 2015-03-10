@@ -21,23 +21,6 @@ public class ReceiveRandomCardSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		Card[] cards = (Card[]) desc.get(SpellArg.CARDS);
-		TargetPlayer targetPlayer = desc.getTargetPlayer();
-		Player opponent = context.getOpponent(player);
-		switch (targetPlayer) {
-		case BOTH:
-			receiveRandomCard(context, player, cards);
-			receiveRandomCard(context, opponent, cards);
-			break;
-		case OPPONENT:
-			receiveRandomCard(context, opponent, cards);
-			break;
-		case SELF:
-			receiveRandomCard(context, player, cards);
-			break;
-		}
-	}
-
-	private void receiveRandomCard(GameContext context, Player player, Card[] cards) {
 		Card randomCard = cards[context.getLogic().random(cards.length)];
 		context.getLogic().receiveCard(player.getId(), randomCard.clone());
 	}

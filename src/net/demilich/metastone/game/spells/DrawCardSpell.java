@@ -44,22 +44,7 @@ public class DrawCardSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		int numberOfCards = desc.getInt(SpellArg.NUMBER_OF_CARDS);
-		TargetPlayer targetPlayer = desc.getTargetPlayer();
 		IValueProvider drawModifier = desc.getValueProvider();
-		Player opponent = context.getOpponent(player);
-		switch (targetPlayer) {
-		case BOTH:
-			draw(context, player, numberOfCards, drawModifier);
-			draw(context, opponent, numberOfCards, drawModifier);
-			break;
-		case OPPONENT:
-			draw(context, opponent, numberOfCards, drawModifier);
-			break;
-		case SELF:
-			draw(context, player, numberOfCards, drawModifier);
-			break;
-		default:
-			break;
-		}
+		draw(context, player, numberOfCards, drawModifier);
 	}
 }

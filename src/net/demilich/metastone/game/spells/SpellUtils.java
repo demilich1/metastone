@@ -6,6 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 
 import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCollection;
@@ -82,6 +83,15 @@ public class SpellUtils {
 	public static boolean hasMinionOfRace(Player player, Race race) {
 		for (Minion minion : player.getMinions()) {
 			if (minion.getRace() == race) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static boolean holdsMinionOfRace(Player player, Race race) {
+		for (Card card : player.getHand()) {
+			if (card.getTag(GameTag.RACE) == race) {
 				return true;
 			}
 		}

@@ -26,8 +26,9 @@ public class ArcaneGolem extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion arcaneGolem = createMinion(GameTag.CHARGE);
-		SpellDesc battlecrySpell = ModifyMaxManaSpell.create(1, TargetPlayer.OPPONENT, false);
-		Battlecry battlecry = Battlecry.createBattlecry(battlecrySpell);
+		SpellDesc giveManaSpell = ModifyMaxManaSpell.create(1, false);
+		giveManaSpell.setTargetPlayer(TargetPlayer.OPPONENT);
+		Battlecry battlecry = Battlecry.createBattlecry(giveManaSpell);
 		arcaneGolem.setBattlecry(battlecry);
 		return arcaneGolem;
 	}

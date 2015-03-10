@@ -7,7 +7,6 @@ import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.DrawCardSpell;
 import net.demilich.metastone.game.spells.ModifyMaxManaSpell;
-import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class Nourish extends ChooseOneCard {
@@ -44,7 +43,7 @@ public class Nourish extends ChooseOneCard {
 			setDescription("Gain 2 Mana Crystals");
 			setCollectible(false);
 
-			setSpell(ModifyMaxManaSpell.create(2, TargetPlayer.SELF, true));
+			setSpell(ModifyMaxManaSpell.create(2, true));
 			setTargetRequirement(TargetSelection.NONE);
 		}
 	}

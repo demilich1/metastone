@@ -21,8 +21,6 @@ public class PilotedShredder extends MinionCard {
 		return 538;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion pilotedShredder = createMinion();

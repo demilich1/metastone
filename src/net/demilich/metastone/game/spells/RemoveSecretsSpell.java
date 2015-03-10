@@ -17,20 +17,7 @@ public class RemoveSecretsSpell extends Spell {
 	
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
-		TargetPlayer targetPlayer = desc.getTargetPlayer();
-		Player opponent = context.getOpponent(player);
-		switch (targetPlayer) {
-		case BOTH:
-			context.getLogic().removeSecrets(player);
-			context.getLogic().removeSecrets(opponent);
-			break;
-		case OPPONENT:
-			context.getLogic().removeSecrets(opponent);
-			break;
-		case SELF:
-			context.getLogic().removeSecrets(player);
-			break;
-		}
+		context.getLogic().removeSecrets(player);
 	}
 
 }

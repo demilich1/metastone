@@ -20,32 +20,14 @@ public class EquipRandomWeaponSpell extends Spell {
 		return desc;
 	}
 
-	private Weapon getRandomWeapon() {
+	@Override
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		CardCollection allWeapons = CardCatalogue.query(CardType.WEAPON);
 		WeaponCard weaponCard = (WeaponCard) allWeapons.getRandom();
 		Weapon weapon = weaponCard.getWeapon();
 		weapon.setBattlecry(null);
-		return weapon;
-	}
-
-	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
-		Player opponent = context.getOpponent(player);
-		switch (desc.getTargetPlayer()) {
-		case BOTH:
-			context.getLogic().equipWeapon(player.getId(), getRandomWeapon());
-			context.getLogic().equipWeapon(opponent.getId(), getRandomWeapon());
-			break;
-		case OPPONENT:
-			context.getLogic().equipWeapon(opponent.getId(), getRandomWeapon());
-			break;
-		case SELF:
-			context.getLogic().equipWeapon(player.getId(), getRandomWeapon());
-			break;
-		default:
-			break;
-		}
-
+		
+		context.getLogic().equipWeapon(player.getId(), weapon);
 	}
 
 }

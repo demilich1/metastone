@@ -23,8 +23,6 @@ public class ScarletPurifier extends MinionCard {
 		return 556;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion scarletPurifier = createMinion();

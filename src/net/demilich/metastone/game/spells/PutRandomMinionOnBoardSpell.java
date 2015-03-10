@@ -15,40 +15,22 @@ import net.demilich.metastone.game.targeting.EntityReference;
 
 public class PutRandomMinionOnBoardSpell extends Spell {
 
-	public static SpellDesc create(TargetPlayer targetPlayer) {
-		return create(targetPlayer, null, CardLocation.DECK);
-	}
-
-	public static SpellDesc create(TargetPlayer targetPlayer, Race race, CardLocation cardLocation) {
+	public static SpellDesc create(Race race, CardLocation cardLocation) {
 		SpellDesc desc = new SpellDesc(PutRandomMinionOnBoardSpell.class);
-		desc.setTargetPlayer(targetPlayer);
 		if (race != null) {
 			desc.set(SpellArg.RACE, race);
 		}
 		desc.set(SpellArg.CARD_LOCATION, cardLocation);
+		desc.setTarget(EntityReference.NONE);
 		return desc;
 	}
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
-		Player opponent = context.getOpponent(player);
 		Race race = (Race) desc.get(SpellArg.RACE);
 		EntityReference source = desc.getSourceEntity();
 		CardLocation cardLocation = (CardLocation) desc.get(SpellArg.CARD_LOCATION);
-		switch (desc.getTargetPlayer()) {
-		case BOTH:
-			putRandomMinionFromDeckOnBoard(context, player, race, source, cardLocation);
-			putRandomMinionFromDeckOnBoard(context, opponent, race, source, cardLocation);
-			break;
-		case OPPONENT:
-			putRandomMinionFromDeckOnBoard(context, opponent, race, source, cardLocation);
-			break;
-		case SELF:
-			putRandomMinionFromDeckOnBoard(context, player, race, source, cardLocation);
-			break;
-		default:
-			break;
-		}
+		putRandomMinionFromDeckOnBoard(context, player, race, source, cardLocation);
 	}
 
 	private void putRandomMinionFromDeckOnBoard(GameContext context, Player player, Race race, EntityReference source, CardLocation cardLocation) {

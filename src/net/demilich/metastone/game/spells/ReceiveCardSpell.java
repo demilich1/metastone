@@ -23,28 +23,10 @@ public class ReceiveCardSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		Card[] cards = (Card[]) desc.get(SpellArg.CARDS);
-		TargetPlayer targetPlayer = desc.getTargetPlayer();
-
-		Player opponent = context.getOpponent(player);
-		switch (targetPlayer) {
-		case BOTH:
-			receiveCards(context, player.getId(), cards);
-			receiveCards(context, opponent.getId(), cards);
-			break;
-		case OPPONENT:
-			receiveCards(context, opponent.getId(), cards);
-			break;
-		case SELF:
-			receiveCards(context, player.getId(), cards);
-			break;
-		}
-	}
-	
-	private void receiveCards(GameContext context, int playerId, Card[] cards) {
 		for (Card card : cards) {
-			context.getLogic().receiveCard(playerId, card.clone());
+			context.getLogic().receiveCard(player.getId(), card.clone());
 		}
-		
+
 	}
 
 }
