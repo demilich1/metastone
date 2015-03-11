@@ -4,6 +4,7 @@ import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.custom.KelThuzadSpell;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 import net.demilich.metastone.game.spells.trigger.TurnEndTrigger;
@@ -23,10 +24,9 @@ public class KelThuzad extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion kelThuzad = createMinion();
-		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), KelThuzadSpell.create());
+		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(TargetPlayer.BOTH), KelThuzadSpell.create());
 		kelThuzad.setSpellTrigger(trigger);
 		return kelThuzad;
 	}
-
 	
 }

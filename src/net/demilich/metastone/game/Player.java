@@ -33,6 +33,7 @@ public class Player extends CustomCloneable {
 
 	private int mana;
 	private int maxMana;
+	private int lockedMana;
 
 	private boolean hideCards;
 
@@ -52,6 +53,7 @@ public class Player extends CustomCloneable {
 		this.id = otherPlayer.id;
 		this.mana = otherPlayer.mana;
 		this.maxMana = otherPlayer.maxMana;
+		this.lockedMana = otherPlayer.lockedMana;
 		this.behaviour = otherPlayer.behaviour;
 		this.getStatistics().merge(otherPlayer.getStatistics());
 	}
@@ -161,6 +163,14 @@ public class Player extends CustomCloneable {
 	@Override
 	public String toString() {
 		return "[PLAYER " + "id: " + getId() + ", name: " + getName() + ", hero: " + getHero() + "]";
+	}
+
+	public int getLockedMana() {
+		return lockedMana;
+	}
+
+	public void setLockedMana(int lockedMana) {
+		this.lockedMana = lockedMana;
 	}
 
 }
