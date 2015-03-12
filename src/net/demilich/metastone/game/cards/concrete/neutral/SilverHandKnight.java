@@ -7,6 +7,7 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.concrete.tokens.neutral.Squire;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.entities.minions.RelativeToSource;
 import net.demilich.metastone.game.spells.SummonSpell;
 
 public class SilverHandKnight extends MinionCard {
@@ -25,7 +26,7 @@ public class SilverHandKnight extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion silverHandKnight = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(SummonSpell.create(new Squire()));
+		Battlecry battlecry = Battlecry.createBattlecry(SummonSpell.create(RelativeToSource.RIGHT, new Squire()));
 		battlecry.setResolvedLate(true);
 		silverHandKnight.setBattlecry(battlecry);
 		return silverHandKnight;

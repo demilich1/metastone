@@ -38,7 +38,7 @@ public class SummonRandomMinionPredicateSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
 		@SuppressWarnings("unchecked")
 		Predicate<Card> cardFilter = (Predicate<Card>) desc.get(SpellArg.CARD_FILTER);
-		int boardPosition = desc.contains(SpellArg.BOARD_POSITION) ? desc.getInt(SpellArg.BOARD_POSITION) : -1;
+		int boardPosition = desc.contains(SpellArg.BOARD_POSITION_ABSOLUTE) ? desc.getInt(SpellArg.BOARD_POSITION_ABSOLUTE) : -1;
 		MinionCard minionCard = getRandomMatchingMinionCard(cardFilter);
 		context.getLogic().summon(player.getId(), minionCard.summon(), null, boardPosition, false);
 	}

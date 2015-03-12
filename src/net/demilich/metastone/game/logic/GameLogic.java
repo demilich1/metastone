@@ -480,7 +480,7 @@ public class GameLogic implements Cloneable {
 
 	public void equipWeapon(int playerId, Weapon weapon) {
 		Player player = context.getPlayer(playerId);
-		player.getStatistics().equipWeapon();
+		player.getStatistics().equipWeapon(weapon);
 		weapon.setId(idFactory.generateId());
 		context.getEnvironment().put(Environment.SUMMONED_WEAPON, weapon);
 		Weapon currentWeapon = player.getHero().getWeapon();
@@ -1079,7 +1079,7 @@ public class GameLogic implements Cloneable {
 		}
 		boolean doubleDeathrattles = hasTag(player, GameTag.DOUBLE_DEATHRATTLES);
 		for (SpellDesc deathrattle : actor.getDeathrattles()) {
-			deathrattle.set(SpellArg.BOARD_POSITION, boardPosition);
+			deathrattle.set(SpellArg.BOARD_POSITION_ABSOLUTE, boardPosition);
 			deathrattle.setSourceEntity(actor.getReference());
 			castSpell(player.getId(), deathrattle);
 			if (doubleDeathrattles) {

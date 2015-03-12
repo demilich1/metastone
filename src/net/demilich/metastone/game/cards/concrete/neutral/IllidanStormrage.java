@@ -6,6 +6,7 @@ import net.demilich.metastone.game.cards.concrete.tokens.neutral.FlameOfAzzinoth
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
+import net.demilich.metastone.game.entities.minions.RelativeToSource;
 import net.demilich.metastone.game.spells.SummonSpell;
 import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -28,7 +29,7 @@ public class IllidanStormrage extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion illidanStormrage = createMinion();
-		SpellDesc summonSpell = SummonSpell.create(new FlameOfAzzinoth());
+		SpellDesc summonSpell = SummonSpell.create(RelativeToSource.RIGHT, new FlameOfAzzinoth());
 		SpellTrigger trigger = new SpellTrigger(new CardPlayedTrigger(TargetPlayer.SELF), summonSpell);
 		illidanStormrage.setSpellTrigger(trigger);
 		return illidanStormrage;

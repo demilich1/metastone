@@ -22,8 +22,6 @@ public class TroggzorTheEarthinator extends MinionCard {
 		return 550;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion troggzor = createMinion();

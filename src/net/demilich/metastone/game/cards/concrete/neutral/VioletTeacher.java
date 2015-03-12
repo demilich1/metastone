@@ -5,6 +5,7 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.concrete.tokens.neutral.VioletApprentice;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.entities.minions.RelativeToSource;
 import net.demilich.metastone.game.spells.SummonSpell;
 import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -26,7 +27,7 @@ public class VioletTeacher extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion violetTeacher = createMinion();
-		SpellDesc summonSpell = SummonSpell.create(new VioletApprentice());
+		SpellDesc summonSpell = SummonSpell.create(RelativeToSource.RIGHT, new VioletApprentice());
 		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(TargetPlayer.SELF), summonSpell);
 		violetTeacher.setSpellTrigger(trigger);
 		return violetTeacher;

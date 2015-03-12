@@ -6,6 +6,7 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.concrete.tokens.neutral.Boar;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.entities.minions.RelativeToSource;
 import net.demilich.metastone.game.spells.SummonSpell;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
@@ -24,7 +25,7 @@ public class RazorfenHunter extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion razorfenHunter = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(SummonSpell.create(new Boar()), TargetSelection.NONE);
+		Battlecry battlecry = Battlecry.createBattlecry(SummonSpell.create(RelativeToSource.RIGHT, new Boar()), TargetSelection.NONE);
 		battlecry.setResolvedLate(true);
 		razorfenHunter.setBattlecry(battlecry);
 		return razorfenHunter;

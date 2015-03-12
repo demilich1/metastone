@@ -3,7 +3,6 @@ package net.demilich.metastone.game.spells;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
-import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
@@ -14,7 +13,7 @@ public class GainManaSpell extends Spell {
 
 	public static SpellDesc create(int mana) {
 		SpellDesc desc = new SpellDesc(GainManaSpell.class);
-		desc.set(SpellArg.MANA, mana);
+		desc.setValue(mana);
 		desc.setTarget(EntityReference.NONE);
 		return desc;
 	}
@@ -23,7 +22,7 @@ public class GainManaSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
-		int mana = desc.getInt(SpellArg.MANA);
+		int mana = desc.getValue();
 		logger.debug("{} gains {} mana", player.getName(), mana);
 		context.getLogic().modifyCurrentMana(player.getId(), mana);
 	}

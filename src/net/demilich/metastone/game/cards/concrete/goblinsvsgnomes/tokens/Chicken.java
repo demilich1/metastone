@@ -20,4 +20,8 @@ public class Chicken extends MinionCard {
 		return createMinion();
 	}
 
+	@Override
+	public int getTypeId() {
+		return 611;
+	}
 }

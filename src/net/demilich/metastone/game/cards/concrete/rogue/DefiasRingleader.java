@@ -7,6 +7,7 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.concrete.tokens.rogue.DefiasBandit;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.entities.minions.RelativeToSource;
 import net.demilich.metastone.game.spells.SummonSpell;
 
 public class DefiasRingleader extends MinionCard {
@@ -24,7 +25,7 @@ public class DefiasRingleader extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion defiasRingleader = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(SummonSpell.create(new DefiasBandit()));
+		Battlecry battlecry = Battlecry.createBattlecry(SummonSpell.create(RelativeToSource.RIGHT, new DefiasBandit()));
 		battlecry.setCondition((context, player) -> player.getHero().hasStatus(GameTag.COMBO));
 		battlecry.setResolvedLate(true);
 		defiasRingleader.setBattlecry(battlecry);

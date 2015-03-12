@@ -19,4 +19,10 @@ public class WorthlessImp extends MinionCard {
 		return createMinion();
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 613;
+	}
 }

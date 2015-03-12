@@ -3,6 +3,9 @@ package net.demilich.metastone.gui.simulationmode;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,6 +18,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCatalogue;
+import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.statistics.GameStatistics;
 import net.demilich.metastone.game.statistics.Statistic;
 
@@ -147,7 +153,24 @@ public class SimulationResultView extends BorderPane {
 			averageStatEntries.add(averageStatEntry);
 
 		}
-
+		StatEntry favouriteMinionCard = new StatEntry();
+		favouriteMinionCard.setStatName("Favourite minion card");
+		favouriteMinionCard.setPlayer1Value(getFavouriteCardName(result.getPlayer1Stats(), CardType.MINION));
+		favouriteMinionCard.setPlayer2Value(getFavouriteCardName(result.getPlayer2Stats(), CardType.MINION));
+		absoluteStatEntries.add(favouriteMinionCard);
+		
+		StatEntry favouriteSpellCard = new StatEntry();
+		favouriteSpellCard.setStatName("Favourite spell card");
+		favouriteSpellCard.setPlayer1Value(getFavouriteCardName(result.getPlayer1Stats(), CardType.SPELL));
+		favouriteSpellCard.setPlayer2Value(getFavouriteCardName(result.getPlayer2Stats(), CardType.SPELL));
+		absoluteStatEntries.add(favouriteSpellCard);
+		
+		StatEntry favouriteWeaponCard = new StatEntry();
+		favouriteWeaponCard.setStatName("Favourite weapon card");
+		favouriteWeaponCard.setPlayer1Value(getFavouriteCardName(result.getPlayer1Stats(), CardType.WEAPON));
+		favouriteWeaponCard.setPlayer2Value(getFavouriteCardName(result.getPlayer2Stats(), CardType.WEAPON));
+		absoluteStatEntries.add(favouriteWeaponCard);
+		
 		absoluteResultTable.setItems(absoluteStatEntries);
 
 		absoluteResultTable.getColumns().get(0).setCellValueFactory(new PropertyValueFactory("statName"));
@@ -159,6 +182,28 @@ public class SimulationResultView extends BorderPane {
 		averageResultTable.getColumns().get(0).setCellValueFactory(new PropertyValueFactory("statName"));
 		averageResultTable.getColumns().get(1).setCellValueFactory(new PropertyValueFactory("player1Value"));
 		averageResultTable.getColumns().get(2).setCellValueFactory(new PropertyValueFactory("player2Value"));
+	}
+	
+	private String getFavouriteCardName(GameStatistics stats, CardType cardType) {
+		List<Card> cards = new ArrayList<Card>();
+		for (int cardId : stats.getCardsPlayed().keySet()) {
+			Card card = CardCatalogue.getCardById(cardId);
+			if (card.getCardType() == cardType) {
+				cards.add(card);	
+			}
+		}
+		
+		if (cards.isEmpty()) {
+			return "-";
+		}
+		
+		Collections.sort(cards, (c1, c2) ->  {
+			int c1Count = stats.getCardsPlayed().get(c1.getTypeId()); 
+			int c2Count = stats.getCardsPlayed().get(c2.getTypeId());
+			// sort descending
+			return Integer.compare(c2Count, c1Count);
+		});
+		return cards.get(0).getName();
 	}
 
 }

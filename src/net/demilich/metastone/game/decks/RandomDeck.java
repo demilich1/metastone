@@ -1,5 +1,7 @@
 package net.demilich.metastone.game.decks;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
@@ -18,11 +20,12 @@ public class RandomDeck extends Deck {
 	public CardCollection getCardsCopy() {
 		Deck copyDeck = new Deck(getHeroClass());
 		IDeckValidator deckValidator = new DefaultDeckValidator();
-		CardCollection catalogue = CardCatalogue.query(null, null, getHeroClass());
-		catalogue.addAll(CardCatalogue.query(null, null, HeroClass.ANY));
+		CardCollection classCards = CardCatalogue.query(null, null, getHeroClass());
+		CardCollection neutralCards = CardCatalogue.query(null, null, HeroClass.ANY);
 		
 		while (!copyDeck.isComplete()) {
-			Card randomCard = catalogue.getRandom();
+			// random deck consists of rougly 50% class cards and 50% neutral cards
+			Card randomCard = ThreadLocalRandom.current().nextBoolean() ? classCards.getRandom() : neutralCards.getRandom();
 			if (deckValidator.canAddCardToDeck(randomCard, copyDeck)) {
 				copyDeck.getCards().add(randomCard);
 			}

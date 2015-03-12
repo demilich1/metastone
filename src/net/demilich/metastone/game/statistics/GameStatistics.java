@@ -1,13 +1,17 @@
 package net.demilich.metastone.game.statistics;
 
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.Map;
 
 import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardType;
+import net.demilich.metastone.game.entities.weapons.Weapon;
 
 public class GameStatistics implements Cloneable {
 
 	private final Map<Statistic, Object> stats = new EnumMap<Statistic, Object>(Statistic.class);
+	private final Map<Integer, Integer> cardsPlayed = new HashMap<Integer, Integer>();
 
 	private void add(Statistic key, long value) {
 		if (!stats.containsKey(key)) {
@@ -41,11 +45,24 @@ public class GameStatistics implements Cloneable {
 		case WEAPON:
 			break;
 		}
+		increaseCardCount(card);
+	}
+
+	private void increaseCardCount(Card card) {
+		if (card.getCardType() == CardType.HERO_POWER) {
+			return;
+		}
+		int cardId = card.getTypeId();
+		if (!getCardsPlayed().containsKey(cardId)) {
+			getCardsPlayed().put(cardId, 0);
+		}
+		getCardsPlayed().put(cardId, getCardsPlayed().get(cardId) + 1);
 	}
 
 	public GameStatistics clone() {
 		GameStatistics clone = new GameStatistics();
 		clone.stats.putAll(stats);
+		clone.getCardsPlayed().putAll(getCardsPlayed());
 		return clone;
 	}
 
@@ -57,7 +74,7 @@ public class GameStatistics implements Cloneable {
 		add(Statistic.DAMAGE_DEALT, damage);
 	}
 
-	public void equipWeapon() {
+	public void equipWeapon(Weapon weapon) {
 		add(Statistic.WEAPONS_EQUIPPED, 1);
 	}
 
@@ -106,6 +123,12 @@ public class GameStatistics implements Cloneable {
 				stats.put(stat, otherStatistics.get(stat));
 			}
 		}
+		for (int cardId : otherStatistics.getCardsPlayed().keySet()) {
+			if (!getCardsPlayed().containsKey(cardId)) {
+				getCardsPlayed().put(cardId, 0);
+			}
+			getCardsPlayed().put(cardId, getCardsPlayed().get(cardId) + otherStatistics.getCardsPlayed().get(cardId));
+		}
 		updateWinRate();
 	}
 
@@ -132,6 +155,10 @@ public class GameStatistics implements Cloneable {
 	private void updateWinRate() {
 		double winRate = getLong(Statistic.GAMES_WON) / (double) (getLong(Statistic.GAMES_WON) + getLong(Statistic.GAMES_LOST));
 		set(Statistic.WIN_RATE, winRate);
+	}
+
+	public Map<Integer, Integer> getCardsPlayed() {
+		return cardsPlayed;
 	}
 
 }

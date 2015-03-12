@@ -5,6 +5,7 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.concrete.tokens.neutral.Imp;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.entities.minions.RelativeToSource;
 import net.demilich.metastone.game.spells.DamageSpell;
 import net.demilich.metastone.game.spells.MetaSpell;
 import net.demilich.metastone.game.spells.SummonSpell;
@@ -30,8 +31,7 @@ public class ImpMaster extends MinionCard {
 		Minion impMaster = createMinion();
 		SpellDesc damageSelfSpell = DamageSpell.create(1);
 		damageSelfSpell.setTarget(EntityReference.SELF);
-		SpellDesc summonSpell = SummonSpell.create(new Imp());
-		summonSpell.setTarget(EntityReference.NONE);
+		SpellDesc summonSpell = SummonSpell.create(RelativeToSource.RIGHT, new Imp());
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), MetaSpell.create(damageSelfSpell, summonSpell));
 		impMaster.setSpellTrigger(trigger);
 		return impMaster;

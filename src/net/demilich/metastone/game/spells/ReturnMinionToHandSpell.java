@@ -6,7 +6,6 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
 import org.slf4j.Logger;
@@ -20,7 +19,7 @@ public class ReturnMinionToHandSpell extends Spell {
 	
 	public static SpellDesc create(int manaModifier) {
 		SpellDesc desc = new SpellDesc(ReturnMinionToHandSpell.class);
-		desc.set(SpellArg.MANA, manaModifier);
+		desc.setValue(manaModifier);
 		return desc;
 	}
 	
@@ -28,7 +27,7 @@ public class ReturnMinionToHandSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
-		int manaCostModifier = desc.getInt(SpellArg.MANA);
+		int manaCostModifier = desc.getValue();
 		Minion minion = (Minion) target;
 		Player owner = context.getPlayer(minion.getOwner());
 		logger.debug("{} is returned to {}'s hand", minion, owner.getName());

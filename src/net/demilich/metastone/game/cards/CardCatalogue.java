@@ -384,6 +384,7 @@ import net.demilich.metastone.game.cards.concrete.tokens.neutral.VioletApprentic
 import net.demilich.metastone.game.cards.concrete.tokens.neutral.Whelp;
 import net.demilich.metastone.game.cards.concrete.tokens.paladin.Defender;
 import net.demilich.metastone.game.cards.concrete.tokens.paladin.SilverHandRecruit;
+import net.demilich.metastone.game.cards.concrete.tokens.priest.ShadowOfNothing;
 import net.demilich.metastone.game.cards.concrete.tokens.rogue.DefiasBandit;
 import net.demilich.metastone.game.cards.concrete.tokens.shaman.HealingTotem;
 import net.demilich.metastone.game.cards.concrete.tokens.shaman.SearingTotem;
@@ -399,6 +400,7 @@ import net.demilich.metastone.game.cards.concrete.tokens.spells.PowerOfTheHorde;
 import net.demilich.metastone.game.cards.concrete.tokens.spells.RoguesDoIt;
 import net.demilich.metastone.game.cards.concrete.tokens.spells.YseraAwakens;
 import net.demilich.metastone.game.cards.concrete.tokens.warlock.Infernal;
+import net.demilich.metastone.game.cards.concrete.tokens.warlock.WorthlessImp;
 import net.demilich.metastone.game.cards.concrete.tokens.weapons.Ashbringer;
 import net.demilich.metastone.game.cards.concrete.tokens.weapons.BattleAxe;
 import net.demilich.metastone.game.cards.concrete.tokens.weapons.BloodFury;
@@ -666,6 +668,7 @@ public class CardCatalogue {
 		cards.add(new WhirlingBlades());
 		cards.add(new BoomBot());
 		cards.add(new BurrowingMine());
+		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.tokens.Chicken());
 		cards.add(new CobraForm());
 		cards.add(new GallywixsCoin());
 		cards.add(new V07TR0N());
@@ -1065,6 +1068,7 @@ public class CardCatalogue {
 		cards.add(new Whelp());
 		cards.add(new Defender());
 		cards.add(new SilverHandRecruit());
+		cards.add(new ShadowOfNothing());
 		cards.add(new DefiasBandit());
 		cards.add(new HealingTotem());
 		cards.add(new SearingTotem());
@@ -1080,6 +1084,7 @@ public class CardCatalogue {
 		cards.add(new RoguesDoIt());
 		cards.add(new YseraAwakens());
 		cards.add(new Infernal());
+		cards.add(new WorthlessImp());
 		cards.add(new Ashbringer());
 		cards.add(new BattleAxe());
 		cards.add(new BloodFury());

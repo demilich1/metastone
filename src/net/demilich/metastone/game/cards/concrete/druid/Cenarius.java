@@ -7,7 +7,9 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.concrete.tokens.druid.Treant;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.entities.minions.RelativeToSource;
 import net.demilich.metastone.game.spells.BuffSpell;
+import net.demilich.metastone.game.spells.MetaSpell;
 import net.demilich.metastone.game.spells.SummonSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -38,15 +40,18 @@ public class Cenarius extends ChooseBattlecryCard {
 
 	@Override
 	protected Battlecry getBattlecry2() {
-		SpellDesc summonSpell = SummonSpell.create(new Treant(GameTag.TAUNT), new Treant(GameTag.TAUNT));
-		return Battlecry.createBattlecry(summonSpell);
+		SpellDesc summonSpell1 = SummonSpell.create(RelativeToSource.LEFT, new Treant(GameTag.TAUNT));
+		SpellDesc summonSpell2 = SummonSpell.create(RelativeToSource.RIGHT, new Treant(GameTag.TAUNT));
+		Battlecry battlecry = Battlecry.createBattlecry(MetaSpell.create(summonSpell1, summonSpell2));
+		battlecry.setResolvedLate(true);
+		return battlecry;
 	}
 
 	@Override
 	public int getTypeId() {
 		return 4;
 	}
-	
+
 	@Override
 	public Minion summon() {
 		return createMinion();

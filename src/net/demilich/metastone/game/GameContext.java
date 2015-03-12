@@ -376,6 +376,18 @@ public class GameContext implements Cloneable, IDisposable {
 	public List<Entity> resolveTarget(Player player, Actor source, EntityReference targetKey) {
 		return targetLogic.resolveTargetKey(this, player, source, targetKey);
 	}
+	
+	public int getBoardPosition(Minion minion) {
+		for (Player player : getPlayers()) {
+			List<Minion> minions = player.getMinions();
+			for (int i = 0; i < minions.size(); i++) {
+				if (minions.get(i) == minion) {
+					return i;
+				}
+			}
+		}
+		return -1;
+	}
 
 	public void setIgnoreEvents(boolean ignoreEvents) {
 		this.ignoreEvents = ignoreEvents;

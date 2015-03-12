@@ -24,8 +24,6 @@ public class MekgineerThermaplugg extends MinionCard {
 		return 532;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion mekgineerThermaplugg = createMinion();
