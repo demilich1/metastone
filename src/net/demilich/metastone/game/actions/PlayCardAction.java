@@ -62,6 +62,10 @@ public abstract class PlayCardAction extends GameAction {
 		return cardReference;
 	}
 
+	public int getGroupIndex() {
+		return groupIndex;
+	}
+
 	@Override
 	public String getPromptText() {
 		return "[Play card]";
@@ -78,16 +82,12 @@ public abstract class PlayCardAction extends GameAction {
 
 	protected abstract void play(GameContext context, int playerId);
 
+	public void setGroupIndex(int groupIndex) {
+		this.groupIndex = groupIndex;
+	}
+
 	@Override
 	public String toString() {
 		return String.format("%s Card: %s Target: %s", getActionType(), cardReference, getTargetKey());
-	}
-
-	public int getGroupIndex() {
-		return groupIndex;
-	}
-
-	public void setGroupIndex(int groupIndex) {
-		this.groupIndex = groupIndex;
 	}
 }

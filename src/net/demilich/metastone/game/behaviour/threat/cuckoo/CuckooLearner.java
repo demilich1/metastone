@@ -13,6 +13,9 @@ import net.demilich.metastone.utils.MathUtils;
 
 public class CuckooLearner {
 
+	private static int POPULATION_SIZE = 15;
+	private static double DISCOVERY_RATE = 0.25;
+
 	private static double levyClamped(double base, double min, double max) {
 		int sign = Math.random() < 0.5 ? -1 : 1;
 		double value = base + sign * MathUtils.levy(1, 2);
@@ -58,13 +61,10 @@ public class CuckooLearner {
 		}
 		return variant;
 	}
-
 	private static CuckooAgent newRandomSolution() {
 		FeatureVector solution = levyFlight(FeatureVector.getDefault());
 		return new CuckooAgent(solution);
 	}
-	private static int POPULATION_SIZE = 15;
-	private static double DISCOVERY_RATE = 0.25;
 
 	private final List<CuckooAgent> nests;
 

@@ -12,10 +12,6 @@ import net.demilich.metastone.game.targeting.EntityReference;
 
 public class AdjacentMetaSpell extends Spell {
 	
-	public static SpellDesc create(SpellDesc primarySpell, SpellDesc secondarySpell) {
-		return create(null, primarySpell, secondarySpell);
-	}
-
 	public static SpellDesc create(EntityReference target, SpellDesc primarySpell, SpellDesc secondarySpell) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(AdjacentMetaSpell.class);
 		arguments.put(SpellArg.SPELL_1, primarySpell);
@@ -28,6 +24,10 @@ public class AdjacentMetaSpell extends Spell {
 		}
 		arguments.put(SpellArg.TARGET,  target);
 		return new SpellDesc(arguments);
+	}
+
+	public static SpellDesc create(SpellDesc primarySpell, SpellDesc secondarySpell) {
+		return create(null, primarySpell, secondarySpell);
 	}
 
 	@Override

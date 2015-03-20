@@ -16,14 +16,14 @@ import org.slf4j.LoggerFactory;
 
 public class CopyCardSpell extends Spell {
 
+	private static Logger logger = LoggerFactory.getLogger(CopyCardSpell.class);
+	
 	public static SpellDesc create(CardLocation cardLocation, int numberOfCardsToCopy) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(CopyCardSpell.class);
 		arguments.put(SpellArg.CARD_LOCATION, cardLocation);
 		arguments.put(SpellArg.VALUE, numberOfCardsToCopy);
 		return new SpellDesc(arguments);
 	}
-	
-	private static Logger logger = LoggerFactory.getLogger(CopyCardSpell.class);
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {

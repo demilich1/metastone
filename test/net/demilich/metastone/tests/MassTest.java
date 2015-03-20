@@ -20,6 +20,15 @@ import ch.qos.logback.classic.Logger;
 
 public class MassTest extends TestBase {
 	
+	private static HeroClass getRandomClass() {
+		HeroClass randomClass = HeroClass.ANY;
+		HeroClass[] values = HeroClass.values();
+		while (randomClass == HeroClass.ANY || randomClass == HeroClass.DECK_COLLECTION) {
+			randomClass = values[ThreadLocalRandom.current().nextInt(values.length)];
+		}
+		return randomClass;
+	}
+
 	@BeforeTest
 	private void loggerSetup() {
 		Logger root = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
@@ -43,15 +52,6 @@ public class MassTest extends TestBase {
 			Assert.fail("Exception occured", e);
 		}
 
-	}
-
-	private static HeroClass getRandomClass() {
-		HeroClass randomClass = HeroClass.ANY;
-		HeroClass[] values = HeroClass.values();
-		while (randomClass == HeroClass.ANY || randomClass == HeroClass.DECK_COLLECTION) {
-			randomClass = values[ThreadLocalRandom.current().nextInt(values.length)];
-		}
-		return randomClass;
 	}
 
 }

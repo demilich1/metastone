@@ -16,8 +16,14 @@ public class Whelp extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 623;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		return createMinion();
 	}
-
 }

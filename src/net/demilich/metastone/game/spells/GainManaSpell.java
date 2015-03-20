@@ -14,14 +14,14 @@ import org.slf4j.LoggerFactory;
 
 public class GainManaSpell extends Spell {
 
+	private static Logger logger = LoggerFactory.getLogger(GainManaSpell.class);
+
 	public static SpellDesc create(int mana) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(GainManaSpell.class);
 		arguments.put(SpellArg.VALUE, mana);
 		arguments.put(SpellArg.TARGET, EntityReference.NONE);
 		return new SpellDesc(arguments);
 	}
-
-	private static Logger logger = LoggerFactory.getLogger(GainManaSpell.class);
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {

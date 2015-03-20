@@ -13,14 +13,10 @@ import net.demilich.metastone.game.targeting.EntityReference;
 
 public class HealingSpell extends Spell {
 
-	public static SpellDesc create(int healing) {
-		return create(null, healing);
-	}
-	
 	public static SpellDesc create(EntityReference target, int healing) {
 		return create(target, healing, false);
 	}
-
+	
 	public static SpellDesc create(EntityReference target, int healing, boolean randomTarget) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(HealingSpell.class);
 		arguments.put(SpellArg.VALUE, healing);
@@ -38,6 +34,10 @@ public class HealingSpell extends Spell {
 
 		}
 		return new SpellDesc(arguments);
+	}
+
+	public static SpellDesc create(int healing) {
+		return create(null, healing);
 	}
 
 	@Override

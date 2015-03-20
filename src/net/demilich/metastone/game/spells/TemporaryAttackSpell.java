@@ -16,9 +16,7 @@ import org.slf4j.LoggerFactory;
 
 public class TemporaryAttackSpell extends Spell {
 	
-	public static SpellDesc create(int attackBonus) {
-		return create(null, attackBonus);
-	}
+	private static Logger logger = LoggerFactory.getLogger(TemporaryAttackSpell.class);
 
 	public static SpellDesc create(EntityReference target, int attackBonus) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(TemporaryAttackSpell.class);
@@ -27,7 +25,9 @@ public class TemporaryAttackSpell extends Spell {
 		return new SpellDesc(arguments);
 	}
 
-	private static Logger logger = LoggerFactory.getLogger(TemporaryAttackSpell.class);
+	public static SpellDesc create(int attackBonus) {
+		return create(null, attackBonus);
+	}
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {

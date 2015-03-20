@@ -20,6 +20,13 @@ public class DragonkinSorcerer extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 618;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion dragonkinSorcerer = createMinion();
 		SpellDesc buff = BuffSpell.create(EntityReference.SELF, +1, +1);
@@ -27,5 +34,4 @@ public class DragonkinSorcerer extends MinionCard {
 		dragonkinSorcerer.setSpellTrigger(trigger);
 		return dragonkinSorcerer;
 	}
-
 }

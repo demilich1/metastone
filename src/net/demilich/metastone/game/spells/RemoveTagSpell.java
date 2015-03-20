@@ -11,15 +11,15 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class RemoveTagSpell extends Spell {
-	public static SpellDesc create(GameTag tag) {
-		return create(null, tag);
-	}
-
 	public static SpellDesc create(EntityReference target, GameTag tag) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(RemoveTagSpell.class);
 		arguments.put(SpellArg.GAME_TAG, tag);
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
+	}
+
+	public static SpellDesc create(GameTag tag) {
+		return create(null, tag);
 	}
 
 	@Override

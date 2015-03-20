@@ -18,15 +18,15 @@ public class PutCopyInHandSpell extends Spell {
 		return create(1);
 	}
 	
-	public static SpellDesc create(int amount) {
-		return create(null, amount);
-	}
-	
 	public static SpellDesc create(EntityReference target, int amount) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(PutCopyInHandSpell.class);
 		arguments.put(SpellArg.VALUE, amount);
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
+	}
+	
+	public static SpellDesc create(int amount) {
+		return create(null, amount);
 	}
 
 	@Override

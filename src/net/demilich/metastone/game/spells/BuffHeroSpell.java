@@ -16,6 +16,8 @@ import org.slf4j.LoggerFactory;
 
 public class BuffHeroSpell extends Spell {
 	
+	private static Logger logger = LoggerFactory.getLogger(BuffHeroSpell.class);
+
 	public static SpellDesc create(EntityReference target, int attackBonus, int armorBonus) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(BuffHeroSpell.class);
 		arguments.put(SpellArg.ATTACK_BONUS, attackBonus);
@@ -23,8 +25,6 @@ public class BuffHeroSpell extends Spell {
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
 	}
-
-	private static Logger logger = LoggerFactory.getLogger(BuffHeroSpell.class);
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {

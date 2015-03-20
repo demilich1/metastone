@@ -30,17 +30,6 @@ public class VoidTerror extends MinionCard {
 		return 357;
 	}
 
-	@Override
-	public Minion summon() {
-		Minion voidTerror = createMinion();
-		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, this::provideAttackValue, this::provideHpValue);
-		SpellDesc destroySpell = DestroySpell.create(EntityReference.ADJACENT_MINIONS);
-		BattlecryAction battlecry = BattlecryAction.createBattlecry(MetaSpell.create(buffSpell, destroySpell));
-		battlecry.setResolvedLate(true);
-		voidTerror.setBattlecry(battlecry);
-		return voidTerror;
-	}
-	
 	private int provideAttackValue(GameContext context, Player player, Entity target) {
 		int attackBonus = 0;
 		for (Entity adjacent : context.getAdjacentMinions(player, target.getReference())) {
@@ -57,6 +46,17 @@ public class VoidTerror extends MinionCard {
 			hpBonus += minion.getHp();
 		}
 		return hpBonus;
+	}
+	
+	@Override
+	public Minion summon() {
+		Minion voidTerror = createMinion();
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, this::provideAttackValue, this::provideHpValue);
+		SpellDesc destroySpell = DestroySpell.create(EntityReference.ADJACENT_MINIONS);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(MetaSpell.create(buffSpell, destroySpell));
+		battlecry.setResolvedLate(true);
+		voidTerror.setBattlecry(battlecry);
+		return voidTerror;
 	}
 
 	

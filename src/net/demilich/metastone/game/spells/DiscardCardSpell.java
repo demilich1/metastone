@@ -12,6 +12,8 @@ import net.demilich.metastone.game.targeting.EntityReference;
 
 public class DiscardCardSpell extends Spell {
 
+	public static final int ALL_CARDS = -1;
+
 	public static SpellDesc create() {
 		return create(1);
 	}
@@ -22,8 +24,6 @@ public class DiscardCardSpell extends Spell {
 		arguments.put(SpellArg.TARGET, EntityReference.NONE);
 		return new SpellDesc(arguments);
 	}
-
-	public static final int ALL_CARDS = -1;
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {

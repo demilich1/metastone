@@ -44,6 +44,10 @@ public abstract class Card extends Entity {
 		return manaCost;
 	}
 
+	public BattlecryDesc getBattlecry() {
+		return battlecry;
+	}
+
 	public CardReference getCardReference() {
 		return new CardReference(getOwner(), getLocation(), getId(), getName());
 	}
@@ -83,6 +87,10 @@ public abstract class Card extends Entity {
 		return rarity;
 	}
 
+	public boolean hasBattlecry() {
+		return this.battlecry != null;
+	}
+
 	public boolean isCollectible() {
 		return collectible;
 	}
@@ -109,6 +117,10 @@ public abstract class Card extends Entity {
 
 	public abstract PlayCardAction play();
 
+	public void setBattlecry(BattlecryDesc battlecry) {
+		this.battlecry = battlecry;
+	}
+
 	public void setCollectible(boolean collectible) {
 		this.collectible = collectible;
 	}
@@ -120,22 +132,10 @@ public abstract class Card extends Entity {
 	public void setLocation(CardLocation location) {
 		this.location = location;
 	}
-
+	
 	@Override
 	public String toString() {
 		return String.format("[%s '%s' Manacost:%d]", getCardType(), getName(), manaCost);
-	}
-
-	public BattlecryDesc getBattlecry() {
-		return battlecry;
-	}
-
-	public void setBattlecry(BattlecryDesc battlecry) {
-		this.battlecry = battlecry;
-	}
-	
-	public boolean hasBattlecry() {
-		return this.battlecry != null;
 	}
 
 }

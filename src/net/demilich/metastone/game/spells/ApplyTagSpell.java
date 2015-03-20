@@ -13,24 +13,24 @@ import net.demilich.metastone.game.targeting.EntityReference;
 
 public class ApplyTagSpell extends RevertableSpell {
 
-	public static SpellDesc create(GameTag tag) {
-		return create(tag, null);
-	}
-	
-	public static SpellDesc create(GameTag tag, GameEventTrigger revertTrigger) {
-		return create(null, tag, revertTrigger);
-	}
-	
 	public static SpellDesc create(EntityReference target, GameTag tag) {
 		return create(target, tag, null);
 	}
-
+	
 	public static SpellDesc create(EntityReference target, GameTag tag, GameEventTrigger revertTrigger) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(ApplyTagSpell.class);
 		arguments.put(SpellArg.GAME_TAG, tag);
 		arguments.put(SpellArg.REVERT_TRIGGER, revertTrigger);
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
+	}
+	
+	public static SpellDesc create(GameTag tag) {
+		return create(tag, null);
+	}
+
+	public static SpellDesc create(GameTag tag, GameEventTrigger revertTrigger) {
+		return create(null, tag, revertTrigger);
 	}
 
 	@Override

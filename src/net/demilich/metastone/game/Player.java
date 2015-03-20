@@ -108,6 +108,10 @@ public class Player extends CustomCloneable {
 		return id;
 	}
 
+	public int getLockedMana() {
+		return lockedMana;
+	}
+
 	public int getMana() {
 		return mana;
 	}
@@ -152,6 +156,10 @@ public class Player extends CustomCloneable {
 		this.id = id;
 	}
 
+	public void setLockedMana(int lockedMana) {
+		this.lockedMana = lockedMana;
+	}
+
 	public void setMana(int mana) {
 		this.mana = mana;
 	}
@@ -163,14 +171,6 @@ public class Player extends CustomCloneable {
 	@Override
 	public String toString() {
 		return "[PLAYER " + "id: " + getId() + ", name: " + getName() + ", hero: " + getHero() + "]";
-	}
-
-	public int getLockedMana() {
-		return lockedMana;
-	}
-
-	public void setLockedMana(int lockedMana) {
-		this.lockedMana = lockedMana;
 	}
 
 }

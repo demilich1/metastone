@@ -20,6 +20,13 @@ public class RendBlackhand extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 622;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion rendBlackhand = createMinion();
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(DestroySpell.create(), TargetSelection.MINIONS);
@@ -31,5 +38,4 @@ public class RendBlackhand extends MinionCard {
 		rendBlackhand.setBattlecry(battlecry);
 		return rendBlackhand;
 	}
-
 }

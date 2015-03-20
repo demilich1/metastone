@@ -13,10 +13,6 @@ import net.demilich.metastone.game.targeting.EntityReference;
 
 public class MinMaxDamageSpell extends DamageSpell {
 	
-	public static SpellDesc create(int minDamage, int maxDamage) {
-		return create(null, minDamage, maxDamage, false);
-	}
-	
 	public static SpellDesc create(EntityReference target, int minDamage, int maxDamage, boolean randomTarget) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(MinMaxDamageSpell.class);
 		arguments.put(SpellArg.MIN_DAMAGE, minDamage);
@@ -24,6 +20,10 @@ public class MinMaxDamageSpell extends DamageSpell {
 		arguments.put(SpellArg.TARGET, target);
 		arguments.put(SpellArg.RANDOM_TARGET, randomTarget);
 		return new SpellDesc(arguments);
+	}
+	
+	public static SpellDesc create(int minDamage, int maxDamage) {
+		return create(null, minDamage, maxDamage, false);
 	}
 
 	@Override

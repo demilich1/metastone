@@ -27,6 +27,16 @@ import javax.imageio.ImageIO;
 
 public class DigitFactory {
 
+	private final static HashMap<Character, Image> digits = new HashMap<>();
+
+	static {
+		digits.put('-', new Image(IconFactory.RESOURCE_PATH + "/img/common/digits/-.png"));
+		for (int i = 0; i < 10; i++) {
+			char digitToChar = Character.forDigit(i, 10);
+			digits.put(digitToChar, new Image(IconFactory.RESOURCE_PATH + "/img/common/digits/" + digitToChar + ".png"));
+		}
+	}
+
 	private static void applyFontColor(ImageView image, Color color) {
 		ColorAdjust monochrome = new ColorAdjust();
 		monochrome.setSaturation(-1.0);
@@ -55,7 +65,7 @@ public class DigitFactory {
 		}
 		return layoutPane;
 	}
-
+	
 	public static void saveAllDigits() {
 		Stage stage = new Stage(StageStyle.TRANSPARENT);
 		DigitTemplate root = new DigitTemplate();
@@ -81,7 +91,7 @@ public class DigitFactory {
 
 		stage.close();
 	}
-
+	
 	public static void showPreRenderedDigits(Group group, int number) {
 		showPreRenderedDigits(group, number, Color.WHITE);
 	}
@@ -89,15 +99,5 @@ public class DigitFactory {
 	public static void showPreRenderedDigits(Group group, int number, Color color) {
 		group.getChildren().clear();
 		group.getChildren().add(DigitFactory.getCachedDigitImage(number, color));
-	}
-	
-	private final static HashMap<Character, Image> digits = new HashMap<>();
-	
-	static {
-		digits.put('-', new Image(IconFactory.RESOURCE_PATH + "/img/common/digits/-.png"));
-		for (int i = 0; i < 10; i++) {
-			char digitToChar = Character.forDigit(i, 10);
-			digits.put(digitToChar, new Image(IconFactory.RESOURCE_PATH + "/img/common/digits/" + digitToChar + ".png"));
-		}
 	}
 }

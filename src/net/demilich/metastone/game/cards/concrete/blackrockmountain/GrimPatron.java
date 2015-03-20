@@ -16,11 +16,17 @@ public class GrimPatron extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 619;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion grimPatron = createMinion();
 		SpellTrigger trigger = new SpellTrigger(new DamageSurvivedTrigger(), SummonSpell.create(new GrimPatron()));
 		grimPatron.setSpellTrigger(trigger);
 		return grimPatron;
 	}
-
 }

@@ -11,18 +11,24 @@ import net.demilich.metastone.game.targeting.EntityReference;
 
 public class SpellDesc extends CustomCloneable {
 
-	private final Map<SpellArg, Object> arguments;
-
 	public static Map<SpellArg, Object> build(Class<? extends Spell> spellClass) {
 		final Map<SpellArg, Object> arguments = new EnumMap<>(SpellArg.class);
 		arguments.put(SpellArg.SPELL_CLASS, spellClass);
 		return arguments;
 	}
 
+	private final Map<SpellArg, Object> arguments;
+
 	public SpellDesc(Map<SpellArg, Object> arguments) {
 		this.arguments = arguments;
 	}
 
+	public SpellDesc addArg(SpellArg spellArg, Object value) {
+		SpellDesc clone = clone();
+		clone.arguments.put(spellArg, value);
+		return clone;
+	}
+	
 	@Override
 	public SpellDesc clone() {
 		SpellDesc clone = new SpellDesc(build(getSpellClass()));
@@ -35,12 +41,6 @@ public class SpellDesc extends CustomCloneable {
 				clone.arguments.put(spellArg, value);
 			}
 		}
-		return clone;
-	}
-	
-	public SpellDesc addArg(SpellArg spellArg, Object value) {
-		SpellDesc clone = clone();
-		clone.arguments.put(spellArg, value);
 		return clone;
 	}
 
@@ -81,6 +81,10 @@ public class SpellDesc extends CustomCloneable {
 		return (IValueProvider) get(SpellArg.VALUE_PROVIDER);
 	}
 
+	public boolean hasPredefinedTarget() {
+		return arguments.get(SpellArg.TARGET) != null;
+	}
+
 	@Override
 	public String toString() {
 		String result = "[SpellDesc arguments= {\n";
@@ -89,10 +93,6 @@ public class SpellDesc extends CustomCloneable {
 		}
 		result += "}";
 		return result;
-	}
-
-	public boolean hasPredefinedTarget() {
-		return arguments.get(SpellArg.TARGET) != null;
 	}
 
 }

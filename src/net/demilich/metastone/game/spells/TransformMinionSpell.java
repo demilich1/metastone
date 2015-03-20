@@ -16,9 +16,7 @@ import org.slf4j.LoggerFactory;
 
 public class TransformMinionSpell extends Spell {
 	
-	public static SpellDesc create(Minion transformTarget) {
-		return create(null, transformTarget, false);
-	}
+	private static Logger logger = LoggerFactory.getLogger(TransformMinionSpell.class);
 
 	public static SpellDesc create(EntityReference target, Minion transformTarget, boolean randomTarget) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(TransformMinionSpell.class);
@@ -28,10 +26,6 @@ public class TransformMinionSpell extends Spell {
 		return new SpellDesc(arguments);
 	}
 
-	public static SpellDesc create(MinionCard templateCard) {
-		return create(null, templateCard, false);
-	}
-	
 	public static SpellDesc create(EntityReference target, MinionCard templateCard, boolean randomTarget) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(TransformMinionSpell.class);
 		arguments.put(SpellArg.CARD, templateCard);
@@ -39,8 +33,14 @@ public class TransformMinionSpell extends Spell {
 		arguments.put(SpellArg.RANDOM_TARGET, randomTarget);
 		return new SpellDesc(arguments);
 	}
+	
+	public static SpellDesc create(Minion transformTarget) {
+		return create(null, transformTarget, false);
+	}
 
-	private static Logger logger = LoggerFactory.getLogger(TransformMinionSpell.class);
+	public static SpellDesc create(MinionCard templateCard) {
+		return create(null, templateCard, false);
+	}
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {

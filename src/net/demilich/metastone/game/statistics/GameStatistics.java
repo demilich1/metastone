@@ -48,17 +48,6 @@ public class GameStatistics implements Cloneable {
 		increaseCardCount(card);
 	}
 
-	private void increaseCardCount(Card card) {
-		if (card.getCardType() == CardType.HERO_POWER) {
-			return;
-		}
-		int cardId = card.getTypeId();
-		if (!getCardsPlayed().containsKey(cardId)) {
-			getCardsPlayed().put(cardId, 0);
-		}
-		getCardsPlayed().put(cardId, getCardsPlayed().get(cardId) + 1);
-	}
-
 	public GameStatistics clone() {
 		GameStatistics clone = new GameStatistics();
 		clone.stats.putAll(stats);
@@ -96,6 +85,10 @@ public class GameStatistics implements Cloneable {
 		return stats.get(key);
 	}
 
+	public Map<Integer, Integer> getCardsPlayed() {
+		return cardsPlayed;
+	}
+
 	public double getDouble(Statistic key) {
 		return stats.containsKey(key) ? (double) stats.get(key) : 0.0;
 	}
@@ -106,6 +99,17 @@ public class GameStatistics implements Cloneable {
 
 	public void heal(int healing) {
 		add(Statistic.HEALING_DONE, healing);
+	}
+
+	private void increaseCardCount(Card card) {
+		if (card.getCardType() == CardType.HERO_POWER) {
+			return;
+		}
+		int cardId = card.getTypeId();
+		if (!getCardsPlayed().containsKey(cardId)) {
+			getCardsPlayed().put(cardId, 0);
+		}
+		getCardsPlayed().put(cardId, getCardsPlayed().get(cardId) + 1);
 	}
 
 	public void manaSpent(int mana) {
@@ -155,10 +159,6 @@ public class GameStatistics implements Cloneable {
 	private void updateWinRate() {
 		double winRate = getLong(Statistic.GAMES_WON) / (double) (getLong(Statistic.GAMES_WON) + getLong(Statistic.GAMES_LOST));
 		set(Statistic.WIN_RATE, winRate);
-	}
-
-	public Map<Integer, Integer> getCardsPlayed() {
-		return cardsPlayed;
 	}
 
 }

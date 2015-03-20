@@ -12,15 +12,15 @@ import net.demilich.metastone.game.targeting.EntityReference;
 
 public class ChangeDurabilitySpell extends Spell {
 	
-	public static SpellDesc create(int durability) {
-		return create(null, durability);
-	}
-	
 	public static SpellDesc create(EntityReference target, int durability) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(ChangeDurabilitySpell.class);
 		arguments.put(SpellArg.VALUE, durability);
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
+	}
+	
+	public static SpellDesc create(int durability) {
+		return create(null, durability);
 	}
 
 	@Override

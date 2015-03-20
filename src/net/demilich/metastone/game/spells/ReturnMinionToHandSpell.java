@@ -17,6 +17,8 @@ import org.slf4j.LoggerFactory;
 
 public class ReturnMinionToHandSpell extends Spell {
 
+	private static Logger logger = LoggerFactory.getLogger(ReturnMinionToHandSpell.class);
+	
 	public static SpellDesc create() {
 		return create(null, 0, false);
 	}
@@ -28,8 +30,6 @@ public class ReturnMinionToHandSpell extends Spell {
 		arguments.put(SpellArg.RANDOM_TARGET, randomTarget);
 		return new SpellDesc(arguments);
 	}
-	
-	private static Logger logger = LoggerFactory.getLogger(ReturnMinionToHandSpell.class);
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {

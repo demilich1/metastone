@@ -21,6 +21,13 @@ public class HungryDragon extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 620;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion hungryDragon = createMinion();
 		SpellDesc summonSpell = SummonRandomMinionPredicateSpell.create(TargetPlayer.OPPONENT, card -> card.getBaseManaCost() == 1);
@@ -28,5 +35,4 @@ public class HungryDragon extends MinionCard {
 		hungryDragon.setBattlecry(battlecry);
 		return hungryDragon;
 	}
-
 }

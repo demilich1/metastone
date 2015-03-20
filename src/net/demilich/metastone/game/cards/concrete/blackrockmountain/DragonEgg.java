@@ -19,6 +19,11 @@ public class DragonEgg extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 617;
+	}
+
+	@Override
 	public Minion summon() {
 		Minion dragonEgg = createMinion();
 		SpellDesc summonSpell = SummonSpell.create(TargetPlayer.SELF, RelativeToSource.RIGHT, new Whelp());
@@ -26,5 +31,4 @@ public class DragonEgg extends MinionCard {
 		dragonEgg.setSpellTrigger(trigger);
 		return dragonEgg;
 	}
-
 }

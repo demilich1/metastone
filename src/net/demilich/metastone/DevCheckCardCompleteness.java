@@ -30,11 +30,12 @@ public class DevCheckCardCompleteness {
 		List<File> filesWithoutId = new ArrayList<>();
 		for (File file : FileUtils.listFiles(folder, new String[] { "java" }, true)) {
 			try {
-				//System.out.println("Processing " + file.getName() + "...");
+				// System.out.println("Processing " + file.getName() + "...");
 				List<String> lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
 				int lineIndex = containsExpression(lines, idExpression);
 				if (lineIndex != -1) {
-					//System.out.println("Skipping " + file.getName() + " because it already has an id assigned");
+					// System.out.println("Skipping " + file.getName() +
+					// " because it already has an id assigned");
 					int id = extractId(lines.get(lineIndex + 1));
 					assignedIds.add(id);
 					continue;
@@ -47,7 +48,7 @@ public class DevCheckCardCompleteness {
 				e.printStackTrace();
 			}
 		}
-		
+
 		while (assignedIds.contains(uniqueId)) {
 			uniqueId++;
 		}
@@ -76,7 +77,7 @@ public class DevCheckCardCompleteness {
 			}
 		}
 	}
-	
+
 	public static void cardListFromImages(String path) throws IOException {
 		File folder = new File(path);
 
@@ -88,6 +89,19 @@ public class DevCheckCardCompleteness {
 			}
 		}
 		out.close();
+	}
+
+	private static String changeFileNameToClassName(String name) {
+		if (name == null) {
+			throw new IllegalArgumentException("File Name == null");
+		}
+		String className = name.replace(".java", "");
+
+		className = className.replace('/', '.');
+		className = className.replace('\\', '.');
+		className = className.replace("..src.", "");
+
+		return className;
 	}
 
 	public static void compareClassesWithCardList(String path) throws IOException {
@@ -147,8 +161,10 @@ public class DevCheckCardCompleteness {
 		List<String> lines = new ArrayList<String>();
 		File folder = new File(path);
 		for (File file : FileUtils.listFiles(folder, new String[] { "java" }, true)) {
-			String cardName = file.getName().replace(".java", "");
-			lines.add(String.format(expression, cardName));
+			String cardFileName = file.getPath();
+			String cardClassName = changeFileNameToClassName(cardFileName);
+			// System.out.println(changeFileNameToClassName(cardName));
+			lines.add(String.format(expression, cardClassName));
 		}
 		return lines;
 	}

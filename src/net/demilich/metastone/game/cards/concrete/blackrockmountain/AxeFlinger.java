@@ -18,6 +18,13 @@ public class AxeFlinger extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 614;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion axeFlinger = createMinion();
 		SpellDesc damageEnemyHero = DamageSpell.create(EntityReference.ENEMY_HERO, 2);
@@ -25,5 +32,4 @@ public class AxeFlinger extends MinionCard {
 		axeFlinger.setSpellTrigger(trigger);
 		return axeFlinger;
 	}
-
 }

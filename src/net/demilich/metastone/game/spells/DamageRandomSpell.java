@@ -16,16 +16,16 @@ import net.demilich.metastone.game.targeting.EntityReference;
 
 public class DamageRandomSpell extends DamageSpell {
 	
-	public static SpellDesc create(int damage, int iterations) {
-		return create(null, damage, iterations);
-	}
-	
 	public static SpellDesc create(EntityReference target, int damage, int iterations) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(DamageRandomSpell.class);
 		arguments.put(SpellArg.VALUE, damage);
 		arguments.put(SpellArg.ITERATIONS, iterations);
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
+	}
+	
+	public static SpellDesc create(int damage, int iterations) {
+		return create(null, damage, iterations);
 	}
 
 	@Override

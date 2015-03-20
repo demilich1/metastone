@@ -12,15 +12,15 @@ import net.demilich.metastone.game.targeting.EntityReference;
 
 public class AddSpellPowerSpell extends Spell {
 	
-	public static SpellDesc create(int spellPower) {
-		return create(null, spellPower);
-	}
-
 	public static SpellDesc create(EntityReference target, int spellPower) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(AddSpellPowerSpell.class);
 		arguments.put(SpellArg.VALUE, spellPower);
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
+	}
+
+	public static SpellDesc create(int spellPower) {
+		return create(null, spellPower);
 	}
 
 	@Override

@@ -13,10 +13,6 @@ import net.demilich.metastone.game.targeting.EntityReference;
 
 public class DamageSpell extends Spell {
 	
-	public static SpellDesc create(int damage) {
-		return create(null, damage);
-	}
-	
 	public static SpellDesc create(EntityReference target, int damage) {
 		return create(target, damage, false);
 	}
@@ -36,15 +32,19 @@ public class DamageSpell extends Spell {
 		return new SpellDesc(arguments);
 	}
 	
-	public static SpellDesc create(IValueProvider damageModfier) {
-		return create(null, damageModfier);
-	}
-	
 	public static SpellDesc create(EntityReference target, IValueProvider damageModfier) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(DamageSpell.class);
 		arguments.put(SpellArg.VALUE_PROVIDER, damageModfier);
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
+	}
+	
+	public static SpellDesc create(int damage) {
+		return create(null, damage);
+	}
+	
+	public static SpellDesc create(IValueProvider damageModfier) {
+		return create(null, damageModfier);
 	}
 	
 	@Override

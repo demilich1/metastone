@@ -31,11 +31,6 @@ public class Weapon extends Actor {
 		return EntityType.WEAPON;
 	}
 	
-	@Override
-	public boolean isDead() {
-		return hasStatus(GameTag.DEAD) || isBroken();
-	}
-
 	public int getWeaponDamage() {
 		return getTagValue(GameTag.WEAPON_DAMAGE) + getTagValue(GameTag.CONDITIONAL_ATTACK_BONUS);
 	}
@@ -46,6 +41,11 @@ public class Weapon extends Actor {
 
 	public boolean isBroken() {
 		return !hasStatus(GameTag.DURABILITY) || getTagValue(GameTag.WEAPON_DAMAGE) <= 0;
+	}
+
+	@Override
+	public boolean isDead() {
+		return hasStatus(GameTag.DEAD) || isBroken();
 	}
 
 	public void onEquip(GameContext context, Player player) {

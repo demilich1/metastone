@@ -3,12 +3,6 @@ package net.demilich.metastone.game.targeting;
 import net.demilich.metastone.game.entities.Entity;
 
 public class EntityReference {
-	public static EntityReference pointTo(Entity entity) {
-		if (entity == null) {
-			return null;
-		}
-		return new EntityReference(entity.getId());
-	}
 	public static final EntityReference NONE = new EntityReference(-1);
 	public static final EntityReference ENEMY_CHARACTERS = new EntityReference(-2);
 	public static final EntityReference ENEMY_MINIONS = new EntityReference(-3);
@@ -23,13 +17,19 @@ public class EntityReference {
 	public static final EntityReference ALL_OTHER_CHARACTERS = new EntityReference(-12);
 	public static final EntityReference FRIENDLY_WEAPON = new EntityReference(-13);
 	public static final EntityReference ENEMY_WEAPON = new EntityReference(-14);
-	
 	public static final EntityReference EVENT_TARGET = new EntityReference(-20);
+	
 	public static final EntityReference SELF = new EntityReference(-21);
 	public static final EntityReference KILLED_MINION = new EntityReference(-22);
 	public static final EntityReference ATTACKER = new EntityReference(-23);
-	
 	public static final EntityReference PENDING_CARD = new EntityReference(-24);
+	
+	public static EntityReference pointTo(Entity entity) {
+		if (entity == null) {
+			return null;
+		}
+		return new EntityReference(entity.getId());
+	}
 		
 	private final int key;
 	

@@ -17,6 +17,8 @@ import org.slf4j.LoggerFactory;
 
 public class AuraSpellBuff extends Spell {
 
+	private static Logger logger = LoggerFactory.getLogger(AuraSpellBuff.class);
+	
 	public static SpellDesc create(int attackBonus) {
 		return create(attackBonus, 0);
 	}
@@ -35,8 +37,6 @@ public class AuraSpellBuff extends Spell {
 		
 		return new SpellDesc(arguments);
 	}
-	
-	private static Logger logger = LoggerFactory.getLogger(AuraSpellBuff.class);
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {

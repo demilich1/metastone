@@ -12,13 +12,13 @@ public class OneTurnCostModifier extends CardCostModifier {
 	private GameEventTrigger expirationTrigger;
 	private GameEventTrigger turnStartTrigger = new TurnStartTrigger();
 
+	public OneTurnCostModifier(CardType cardType, int manaModifier) {
+		this(cardType, manaModifier, null);
+	}
+
 	public OneTurnCostModifier(CardType cardType, int manaModifier, GameEventTrigger expirationTrigger) {
 		super(cardType, manaModifier);
 		this.expirationTrigger = expirationTrigger;
-	}
-
-	public OneTurnCostModifier(CardType cardType, int manaModifier) {
-		this(cardType, manaModifier, null);
 	}
 
 	@Override

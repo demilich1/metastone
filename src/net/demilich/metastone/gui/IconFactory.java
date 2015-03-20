@@ -9,6 +9,8 @@ import net.demilich.metastone.gui.dialog.DialogType;
 
 public class IconFactory {
 
+	public static final String RESOURCE_PATH = "/net/demilich/metastone/resources";
+
 	public static Image getClassIcon(HeroClass heroClass) {
 		String iconPath = RESOURCE_PATH + "/img/classes/";
 		iconPath += heroClass.toString().toLowerCase();
@@ -159,8 +161,6 @@ public class IconFactory {
 		String iconPath = RESOURCE_PATH + "/img/common/target.png";
 		return new Image(iconPath);
 	}
-
-	public static final String RESOURCE_PATH = "/net/demilich/metastone/resources";
 
 	private IconFactory() {
 	}

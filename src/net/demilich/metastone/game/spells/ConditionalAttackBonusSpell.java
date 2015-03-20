@@ -12,15 +12,15 @@ import net.demilich.metastone.game.targeting.EntityReference;
 
 public class ConditionalAttackBonusSpell extends Spell {
 	
-	public static SpellDesc create(IValueProvider valueProvider) {
-		return create(null, valueProvider);
-	}
-	
 	public static SpellDesc create(EntityReference target, IValueProvider valueProvider) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(ConditionalAttackBonusSpell.class);
 		arguments.put(SpellArg.VALUE_PROVIDER, valueProvider);
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
+	}
+	
+	public static SpellDesc create(IValueProvider valueProvider) {
+		return create(null, valueProvider);
 	}
 
 	@Override

@@ -13,10 +13,6 @@ import net.demilich.metastone.game.targeting.EntityReference;
 
 public class EquipWeaponSpell extends Spell {
 	
-	public static SpellDesc create(WeaponCard weaponCard) {
-		return create(TargetPlayer.SELF, weaponCard);
-	}
-	
 	public static SpellDesc create(TargetPlayer targetPlayer, WeaponCard weaponCard) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(EquipWeaponSpell.class);
 		arguments.put(SpellArg.CARD, weaponCard);
@@ -25,6 +21,10 @@ public class EquipWeaponSpell extends Spell {
 			arguments.put(SpellArg.TARGET_PLAYER, targetPlayer);	
 		}
 		return new SpellDesc(arguments);
+	}
+	
+	public static SpellDesc create(WeaponCard weaponCard) {
+		return create(TargetPlayer.SELF, weaponCard);
 	}
 
 	@Override

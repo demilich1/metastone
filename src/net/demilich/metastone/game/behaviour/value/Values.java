@@ -9,6 +9,8 @@ import net.demilich.metastone.game.entities.minions.Minion;
 
 class Values {
 
+	public static final int DRAW_CARD_VALUE = 2;
+
 	public static float getHeroDamageValue(GameContext context, Hero target, int damage) {
 		if (target.hasStatus(GameTag.IMMUNE)) {
 			return 0;
@@ -18,7 +20,7 @@ class Values {
 		}
 		return damage;
 	}
-
+	
 	public static float getMinionCardValue(MinionCard minionCard) {
 		return minionCard.getBaseManaCost();
 	}
@@ -48,7 +50,5 @@ class Values {
 	public static int signHarmful(Entity entity, int playerId) {
 		return entity.getOwner() == playerId ? -1 : 1;
 	}
-	
-	public static final int DRAW_CARD_VALUE = 2;
 
 }

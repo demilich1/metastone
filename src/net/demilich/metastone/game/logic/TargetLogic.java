@@ -21,13 +21,13 @@ import org.slf4j.LoggerFactory;
 
 public class TargetLogic {
 
+	private static Logger logger = LoggerFactory.getLogger(TargetLogic.class);
+
 	private static List<Entity> singleTargetAsList(Entity target) {
 		ArrayList<Entity> list = new ArrayList<>(1);
 		list.add(target);
 		return list;
 	}
-
-	private static Logger logger = LoggerFactory.getLogger(TargetLogic.class);
 
 	private boolean containsTaunters(List<Minion> minions) {
 		for (Entity entity : minions) {

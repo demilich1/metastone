@@ -10,6 +10,12 @@ import java.util.Random;
 
 public class NeuralNetwork implements Serializable {
 
+	// serialver for backwards compatibility
+	private static final long serialVersionUID = 1165374168397424904L;
+
+	// the random number generator
+	public static final Random random = new Random();
+
 	/**
 	 * Method which reads and returns a network from the given file
 	 *
@@ -23,12 +29,6 @@ public class NeuralNetwork implements Serializable {
 
 		return net;
 	}
-
-	// serialver for backwards compatibility
-	private static final long serialVersionUID = 1165374168397424904L;
-
-	// the random number generator
-	public static final Random random = new Random();
 	// the layers of the network
 	public InputUnit[] input;
 

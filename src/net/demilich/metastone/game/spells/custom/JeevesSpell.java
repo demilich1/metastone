@@ -11,12 +11,12 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 
 public class JeevesSpell extends Spell {
 	
+	private final static int DRAW_UP_TO = 3;
+
 	public static SpellDesc create() {
 		Map<SpellArg, Object> arguments = SpellDesc.build(JeevesSpell.class);
 		return new SpellDesc(arguments);
 	}
-
-	private final static int DRAW_UP_TO = 3;
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {

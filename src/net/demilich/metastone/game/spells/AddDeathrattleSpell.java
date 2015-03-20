@@ -12,15 +12,15 @@ import net.demilich.metastone.game.targeting.EntityReference;
 
 public class AddDeathrattleSpell extends Spell {
 	
-	public static SpellDesc create(SpellDesc deathrattle) {
-		return create(null, deathrattle);
-	}
-	
 	public static SpellDesc create(EntityReference target, SpellDesc deathrattle) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(AddDeathrattleSpell.class);
 		arguments.put(SpellArg.DEATHRATTLE, deathrattle);
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
+	}
+	
+	public static SpellDesc create(SpellDesc deathrattle) {
+		return create(null, deathrattle);
 	}
 
 	@Override

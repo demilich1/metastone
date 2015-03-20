@@ -16,16 +16,16 @@ import net.demilich.metastone.game.targeting.EntityReference;
 
 public class BuffWhenRaceIsOnBoardSpell extends Spell {
 	
-	public static SpellDesc create(Race race, int attackBonus) {
-		return create(null, race, attackBonus);
-	}
-
 	public static SpellDesc create(EntityReference target, Race race, int attackBonus) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(BuffWhenRaceIsOnBoardSpell.class);
 		arguments.put(SpellArg.ATTACK_BONUS, attackBonus);
 		arguments.put(SpellArg.RACE, race);
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
+	}
+
+	public static SpellDesc create(Race race, int attackBonus) {
+		return create(null, race, attackBonus);
 	}
 
 	@Override

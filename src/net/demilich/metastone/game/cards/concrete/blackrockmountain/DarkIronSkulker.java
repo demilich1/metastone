@@ -20,6 +20,13 @@ public class DarkIronSkulker extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 616;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion darkIronSkulker = createMinion();
 		SpellDesc aoeBackstab = DamageSpell.create(EntityReference.ENEMY_MINIONS, 2, entity -> !((Actor)entity).isWounded(), false);
@@ -27,5 +34,4 @@ public class DarkIronSkulker extends MinionCard {
 		darkIronSkulker.setBattlecry(battlecry);
 		return darkIronSkulker;
 	}
-
 }

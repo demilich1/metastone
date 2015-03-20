@@ -31,12 +31,12 @@ public class TargetAcquisitionEvent extends GameEvent {
 		return GameEventType.TARGET_ACQUISITION;
 	}
 
-	public Entity getTarget() {
-		return target;
-	}
-
 	public Entity getSource() {
 		return source;
+	}
+
+	public Entity getTarget() {
+		return target;
 	}
 
 }

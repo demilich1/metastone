@@ -186,6 +186,18 @@ public class GameContext implements Cloneable, IDisposable {
 		return adjacentMinions;
 	}
 
+	public int getBoardPosition(Minion minion) {
+		for (Player player : getPlayers()) {
+			List<Minion> minions = player.getMinions();
+			for (int i = 0; i < minions.size(); i++) {
+				if (minions.get(i) == minion) {
+					return i;
+				}
+			}
+		}
+		return -1;
+	}
+
 	public List<CardCostModifier> getCardCostModifiers() {
 		return cardCostModifiers;
 	}
@@ -357,38 +369,18 @@ public class GameContext implements Cloneable, IDisposable {
 		new RuntimeException().printStackTrace();
 		return null;
 	}
-
+	
 	public Entity resolveSingleTarget(EntityReference targetKey) {
 		if (targetKey == null) {
 			return null;
 		}
 		return targetLogic.findEntity(this, targetKey);
 	}
-	
-	public Entity tryFind(EntityReference targetKey) {
-		try {
-			return resolveSingleTarget(targetKey);
-		} catch (Exception e) {
-		}
-		return null;
-	}
 
 	public List<Entity> resolveTarget(Player player, Actor source, EntityReference targetKey) {
 		return targetLogic.resolveTargetKey(this, player, source, targetKey);
 	}
 	
-	public int getBoardPosition(Minion minion) {
-		for (Player player : getPlayers()) {
-			List<Minion> minions = player.getMinions();
-			for (int i = 0; i < minions.size(); i++) {
-				if (minions.get(i) == minion) {
-					return i;
-				}
-			}
-		}
-		return -1;
-	}
-
 	public void setIgnoreEvents(boolean ignoreEvents) {
 		this.ignoreEvents = ignoreEvents;
 	}
@@ -438,5 +430,13 @@ public class GameContext implements Cloneable, IDisposable {
 		builder.append("Winner: " + (winner == null ? "tbd" : winner.getName()));
 
 		return builder.toString();
+	}
+
+	public Entity tryFind(EntityReference targetKey) {
+		try {
+			return resolveSingleTarget(targetKey);
+		} catch (Exception e) {
+		}
+		return null;
 	}
 }

@@ -12,11 +12,11 @@ import org.slf4j.LoggerFactory;
 
 public class AlexstraszaSpell extends Spell {
 	
+	private static final Logger logger = LoggerFactory.getLogger(AlexstraszaSpell.class);
+	
 	public static SpellDesc create() {
 		return new SpellDesc(SpellDesc.build(AlexstraszaSpell.class));
 	}
-	
-	private static final Logger logger = LoggerFactory.getLogger(AlexstraszaSpell.class);
 	
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {

@@ -17,13 +17,7 @@ import org.slf4j.LoggerFactory;
 
 public class BuffSpell extends Spell {
 
-	public static SpellDesc create(int attackBonus) {
-		return create(null, attackBonus, 0, false);
-	}
-	
-	public static SpellDesc create(int attackBonus, int hpBonus) {
-		return create(null, attackBonus, hpBonus);
-	}
+	private static Logger logger = LoggerFactory.getLogger(BuffSpell.class);
 	
 	public static SpellDesc create(EntityReference target, int attackBonus, int hpBonus) {
 		return create(target, attackBonus, hpBonus, false);
@@ -32,7 +26,7 @@ public class BuffSpell extends Spell {
 	public static SpellDesc create(EntityReference target, int attackBonus, int hpBonus, boolean randomTarget) {
 		return create(target, attackBonus, hpBonus, null, randomTarget);
 	}
-
+	
 	public static SpellDesc create(EntityReference target, int attackBonus, int hpBonus, Predicate<Entity> targetFilter, boolean randomTarget) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(BuffSpell.class);
 		arguments.put(SpellArg.ATTACK_BONUS, attackBonus);
@@ -44,10 +38,6 @@ public class BuffSpell extends Spell {
 		}
 		return new SpellDesc(arguments);
 	}
-	
-	public static SpellDesc create(IValueProvider attackValueProvider, IValueProvider hpValueProvider) {
-		return create(null, attackValueProvider, hpValueProvider);
-	}
 
 	public static SpellDesc create(EntityReference target, IValueProvider attackValueProvider, IValueProvider hpValueProvider) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(BuffSpell.class);
@@ -56,8 +46,18 @@ public class BuffSpell extends Spell {
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
 	}
+	
+	public static SpellDesc create(int attackBonus) {
+		return create(null, attackBonus, 0, false);
+	}
 
-	private static Logger logger = LoggerFactory.getLogger(BuffSpell.class);
+	public static SpellDesc create(int attackBonus, int hpBonus) {
+		return create(null, attackBonus, hpBonus);
+	}
+
+	public static SpellDesc create(IValueProvider attackValueProvider, IValueProvider hpValueProvider) {
+		return create(null, attackValueProvider, hpValueProvider);
+	}
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {

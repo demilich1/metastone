@@ -27,15 +27,15 @@ public class Aura extends SpellTrigger {
 
 	private HashSet<Integer> affectedEntities = new HashSet<>();
 
-	public Aura(SpellDesc applyAuraEffect, SpellDesc removeAuraEffect, EntityReference targetSelection) {
-		this(null, applyAuraEffect, removeAuraEffect, targetSelection);
-	}
-
 	public Aura(GameEventTrigger secondaryTrigger, SpellDesc applyAuraEffect, SpellDesc removeAuraEffect, EntityReference targetSelection) {
 		super(new BoardChangedTrigger(), secondaryTrigger, applyAuraEffect, false);
 		this.applyAuraEffect = applyAuraEffect;
 		this.removeAuraEffect = removeAuraEffect;
 		this.targets = targetSelection;
+	}
+
+	public Aura(SpellDesc applyAuraEffect, SpellDesc removeAuraEffect, EntityReference targetSelection) {
+		this(null, applyAuraEffect, removeAuraEffect, targetSelection);
 	}
 
 	protected boolean affects(GameContext context, Entity target, List<Entity> resolvedTargets) {
@@ -61,6 +61,10 @@ public class Aura extends SpellTrigger {
 		clone.removeAuraEffect = this.removeAuraEffect.clone();
 		clone.affectedEntities = new HashSet<>(this.affectedEntities);
 		return clone;
+	}
+
+	public Race getRaceRestriction() {
+		return raceRestriction;
 	}
 
 	public void onGameEvent(GameEvent event) {
@@ -101,10 +105,6 @@ public class Aura extends SpellTrigger {
 			context.getLogic().castSpell(getOwner(), removeAuraEffect, getHostReference(), target.getReference());
 		}
 		affectedEntities.clear();
-	}
-
-	public Race getRaceRestriction() {
-		return raceRestriction;
 	}
 
 	public void setRaceRestriction(Race raceRestriction) {

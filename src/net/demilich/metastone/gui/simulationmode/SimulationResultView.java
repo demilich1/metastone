@@ -120,6 +120,31 @@ public class SimulationResultView extends BorderPane {
 		return "-";
 	}
 
+	private String getFavouriteCardName(GameStatistics stats, CardType cardType) {
+		List<Card> cards = new ArrayList<Card>();
+		for (int cardId : stats.getCardsPlayed().keySet()) {
+			Card card = CardCatalogue.getCardById(cardId);
+			if (card == null) {
+				System.out.println("Invalid card with id: " + cardId);
+			}
+			if (card.getCardType() == cardType) {
+				cards.add(card);	
+			}
+		}
+		
+		if (cards.isEmpty()) {
+			return "-";
+		}
+		
+		Collections.sort(cards, (c1, c2) ->  {
+			int c1Count = stats.getCardsPlayed().get(c1.getTypeId()); 
+			int c2Count = stats.getCardsPlayed().get(c2.getTypeId());
+			// sort descending
+			return Integer.compare(c2Count, c1Count);
+		});
+		return cards.get(0).getName();
+	}
+
 	private String getStatString(Statistic stat, GameStatistics playerStatistics) {
 		if (playerStatistics.contains(stat)) {
 			Object statValue = playerStatistics.get(stat);
@@ -130,7 +155,7 @@ public class SimulationResultView extends BorderPane {
 		}
 		return "-";
 	}
-
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void showSimulationResult(SimulationResult result) {
 		player1InfoView.setInfo(result.getConfig().getPlayerConfig1());
@@ -182,31 +207,6 @@ public class SimulationResultView extends BorderPane {
 		averageResultTable.getColumns().get(0).setCellValueFactory(new PropertyValueFactory("statName"));
 		averageResultTable.getColumns().get(1).setCellValueFactory(new PropertyValueFactory("player1Value"));
 		averageResultTable.getColumns().get(2).setCellValueFactory(new PropertyValueFactory("player2Value"));
-	}
-	
-	private String getFavouriteCardName(GameStatistics stats, CardType cardType) {
-		List<Card> cards = new ArrayList<Card>();
-		for (int cardId : stats.getCardsPlayed().keySet()) {
-			Card card = CardCatalogue.getCardById(cardId);
-			if (card == null) {
-				System.out.println("Invalid card with id: " + cardId);
-			}
-			if (card.getCardType() == cardType) {
-				cards.add(card);	
-			}
-		}
-		
-		if (cards.isEmpty()) {
-			return "-";
-		}
-		
-		Collections.sort(cards, (c1, c2) ->  {
-			int c1Count = stats.getCardsPlayed().get(c1.getTypeId()); 
-			int c2Count = stats.getCardsPlayed().get(c2.getTypeId());
-			// sort descending
-			return Integer.compare(c2Count, c1Count);
-		});
-		return cards.get(0).getName();
 	}
 
 }

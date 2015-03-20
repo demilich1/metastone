@@ -144,36 +144,6 @@ public class SpecialCardTests extends TestBase {
 	}
 
 	@Test
-	public void testSummoningPortal() {
-		GameContext context = createContext(HeroClass.WARLOCK, HeroClass.WARRIOR);
-		Player player = context.getPlayer1();
-		player.setMana(10);
-
-		Card summoningPortal1 = new SummoningPortal();
-		context.getLogic().receiveCard(player.getId(), summoningPortal1);
-		Card summoningPortal2 = new SummoningPortal();
-		context.getLogic().receiveCard(player.getId(), summoningPortal2);
-
-		MinionCard testMinionCard = new TestMinionCard(1, 1, 4);
-		context.getLogic().receiveCard(player.getId(), testMinionCard);
-		Assert.assertEquals(player.getMana(), 10);
-
-		// first summoning portal costs full 4 mana
-		context.getLogic().performGameAction(player.getId(), summoningPortal1.play());
-		Assert.assertEquals(player.getMana(), 6);
-
-		// second summoning portal affected by first one, costs only 2 mana
-		context.getLogic().performGameAction(player.getId(), summoningPortal2.play());
-		Assert.assertEquals(player.getMana(), 4);
-
-		// base cost of minion card is 4, reduced by both summoning portals, but
-		// not below 1
-		context.getLogic().performGameAction(player.getId(), testMinionCard.play());
-		Assert.assertEquals(player.getMana(), 3);
-
-	}
-
-	@Test
 	public void testSpitefulSmith() {
 		GameContext context = createContext(HeroClass.WARRIOR, HeroClass.WARRIOR);
 		Player player = context.getPlayer1();
@@ -212,6 +182,36 @@ public class SpecialCardTests extends TestBase {
 
 		// Smith is destroyed, weapon power should be back to normal
 		Assert.assertEquals(player.getHero().getWeapon().getWeaponDamage(), 3);
+	}
+
+	@Test
+	public void testSummoningPortal() {
+		GameContext context = createContext(HeroClass.WARLOCK, HeroClass.WARRIOR);
+		Player player = context.getPlayer1();
+		player.setMana(10);
+
+		Card summoningPortal1 = new SummoningPortal();
+		context.getLogic().receiveCard(player.getId(), summoningPortal1);
+		Card summoningPortal2 = new SummoningPortal();
+		context.getLogic().receiveCard(player.getId(), summoningPortal2);
+
+		MinionCard testMinionCard = new TestMinionCard(1, 1, 4);
+		context.getLogic().receiveCard(player.getId(), testMinionCard);
+		Assert.assertEquals(player.getMana(), 10);
+
+		// first summoning portal costs full 4 mana
+		context.getLogic().performGameAction(player.getId(), summoningPortal1.play());
+		Assert.assertEquals(player.getMana(), 6);
+
+		// second summoning portal affected by first one, costs only 2 mana
+		context.getLogic().performGameAction(player.getId(), summoningPortal2.play());
+		Assert.assertEquals(player.getMana(), 4);
+
+		// base cost of minion card is 4, reduced by both summoning portals, but
+		// not below 1
+		context.getLogic().performGameAction(player.getId(), testMinionCard.play());
+		Assert.assertEquals(player.getMana(), 3);
+
 	}
 
 }

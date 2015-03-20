@@ -1,28 +1,29 @@
-package net.demilich.metastone.game.cards.concrete.tokens.warlock;
+package net.demilich.metastone.game.cards.concrete.tokens.shaman;
 
+import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
 
-public class WorthlessImp extends MinionCard {
+public class Frog extends MinionCard {
 
-	public WorthlessImp() {
-		super("Worthless Imp", 1, 1, Rarity.COMMON, HeroClass.WARLOCK, 1);
-		setDescription("You are out of demons! At least there are always imps...");
-		setRace(Race.DEMON);
+	public Frog() {
+		super("Frog", 0, 1, Rarity.FREE, HeroClass.ANY, 0);
+		setRace(Race.BEAST);
+		setCollectible(false);
 	}
 
 	@Override
 	public int getTypeId() {
-		return 613;
+		return 624;
 	}
 
 
 
 	@Override
 	public Minion summon() {
-		return createMinion();
+		return createMinion(GameTag.TAUNT);
 	}
 }

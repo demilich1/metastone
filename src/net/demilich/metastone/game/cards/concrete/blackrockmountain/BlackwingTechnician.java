@@ -21,6 +21,13 @@ public class BlackwingTechnician extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 615;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion blackwingTechnician = createMinion();
 		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, 1, 1);
@@ -29,5 +36,4 @@ public class BlackwingTechnician extends MinionCard {
 		blackwingTechnician.setBattlecry(battlecry);
 		return blackwingTechnician;
 	}
-
 }

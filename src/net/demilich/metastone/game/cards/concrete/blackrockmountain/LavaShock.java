@@ -18,4 +18,10 @@ public class LavaShock extends SpellCard {
 		setTargetRequirement(TargetSelection.ANY);
 	}
 
+
+
+	@Override
+	public int getTypeId() {
+		return 621;
+	}
 }

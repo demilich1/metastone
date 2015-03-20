@@ -11,10 +11,6 @@ import net.demilich.metastone.game.targeting.EntityReference;
 
 public class EitherOrSpell extends Spell {
 	
-	public static SpellDesc create(SpellDesc either, SpellDesc or, ISpellConditionChecker condition) {
-		return create(null, either, or, condition);
-	}
-
 	public static SpellDesc create(EntityReference target, SpellDesc either, SpellDesc or, ISpellConditionChecker condition) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(EitherOrSpell.class);
 		arguments.put(SpellArg.SPELL_1, either);
@@ -22,6 +18,10 @@ public class EitherOrSpell extends Spell {
 		arguments.put(SpellArg.SPELL_CONDITION_CHECKER, condition);
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
+	}
+
+	public static SpellDesc create(SpellDesc either, SpellDesc or, ISpellConditionChecker condition) {
+		return create(null, either, or, condition);
 	}
 
 	@Override
