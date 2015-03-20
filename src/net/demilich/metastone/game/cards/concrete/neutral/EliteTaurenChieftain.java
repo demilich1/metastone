@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.neutral;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.concrete.tokens.spells.IAmMurloc;
@@ -30,7 +30,7 @@ public class EliteTaurenChieftain extends MinionCard {
 	public Minion summon() {
 		Minion eliteTaurenChieftain = createMinion();
 		SpellDesc randomRockCard = ReceiveRandomCardSpell.create(TargetPlayer.BOTH, new IAmMurloc(), new PowerOfTheHorde(), new RoguesDoIt());
-		eliteTaurenChieftain.setBattlecry(Battlecry.createBattlecry(randomRockCard));
+		eliteTaurenChieftain.setBattlecry(BattlecryAction.createBattlecry(randomRockCard));
 		return eliteTaurenChieftain;
 	}
 }

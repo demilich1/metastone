@@ -31,8 +31,7 @@ public class HeroPowerTest extends TestBase {
 		Assert.assertEquals(warrior.getArmor(), ArmorUp.ARMOR_BONUS);
 
 		
-		SpellDesc damage = DamageSpell.create(2 * ArmorUp.ARMOR_BONUS);
-		damage.setTarget(EntityReference.FRIENDLY_HERO);
+		SpellDesc damage = DamageSpell.create(EntityReference.FRIENDLY_HERO, 2 * ArmorUp.ARMOR_BONUS);
 		playCard(context, context.getPlayer1(), new TestSpellCard(damage));
 		Assert.assertEquals(warrior.getHp(), GameLogic.MAX_HERO_HP - ArmorUp.ARMOR_BONUS);
 		Assert.assertEquals(warrior.getArmor(), 0);
@@ -42,8 +41,7 @@ public class HeroPowerTest extends TestBase {
 		// the damage dealt was less than the total armor. Following test
 		// covers that scenario
 		context.getLogic().performGameAction(context.getPlayer1().getId(), armorUp);
-		damage = DamageSpell.create(ArmorUp.ARMOR_BONUS / 2);
-		damage.setTarget(EntityReference.FRIENDLY_HERO);
+		damage = DamageSpell.create(EntityReference.FRIENDLY_HERO, ArmorUp.ARMOR_BONUS / 2);
 		playCard(context, context.getPlayer1(), new TestSpellCard(damage));		
 		
 		Assert.assertEquals(warrior.getHp(), GameLogic.MAX_HERO_HP - ArmorUp.ARMOR_BONUS);

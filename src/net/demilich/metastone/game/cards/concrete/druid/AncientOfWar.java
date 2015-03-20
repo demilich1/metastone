@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.druid;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.ChooseBattlecryCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -30,20 +30,17 @@ public class AncientOfWar extends ChooseBattlecryCard {
 	}
 
 	@Override
-	protected Battlecry getBattlecry1() {
-		SpellDesc buffSpell = BuffSpell.create(5);
-		buffSpell.setTarget(EntityReference.SELF);
-		return Battlecry.createBattlecry(buffSpell);
+	protected BattlecryAction getBattlecry1() {
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, 5, 0);
+		return BattlecryAction.createBattlecry(buffSpell);
 	}
 
 	@Override
-	protected Battlecry getBattlecry2() {
-		SpellDesc buffHpSpell = BuffSpell.create(0, 5);
-		buffHpSpell.setTarget(EntityReference.SELF);
-		SpellDesc tauntUpSpell = ApplyTagSpell.create(GameTag.TAUNT);
-		tauntUpSpell.setTarget(EntityReference.SELF);
+	protected BattlecryAction getBattlecry2() {
+		SpellDesc buffHpSpell = BuffSpell.create(EntityReference.SELF, 0, 5);
+		SpellDesc tauntUpSpell = ApplyTagSpell.create(EntityReference.SELF, GameTag.TAUNT, null);
 		
-		return Battlecry.createBattlecry(MetaSpell.create(buffHpSpell, tauntUpSpell));
+		return BattlecryAction.createBattlecry(MetaSpell.create(buffHpSpell, tauntUpSpell));
 	}
 
 	@Override

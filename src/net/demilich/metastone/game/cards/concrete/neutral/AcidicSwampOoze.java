@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.neutral;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -26,9 +26,8 @@ public class AcidicSwampOoze extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion acidicSwampOoze = createMinion();
-		SpellDesc destroyWeaponSpell = DestroyWeaponSpell.create();
-		destroyWeaponSpell.setTarget(EntityReference.ENEMY_HERO);
-		Battlecry battlecry = Battlecry.createBattlecry(destroyWeaponSpell);
+		SpellDesc destroyWeaponSpell = DestroyWeaponSpell.create(EntityReference.ENEMY_HERO);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(destroyWeaponSpell);
 		acidicSwampOoze.setBattlecry(battlecry);
 		return acidicSwampOoze;
 	}

@@ -16,10 +16,8 @@ public class FanOfKnives extends SpellCard {
 		super("Fan of Knives", Rarity.FREE, HeroClass.ROGUE, 3);
 		setDescription("Deal $1 damage to all enemy minions. Draw a card.");
 		setTargetRequirement(TargetSelection.NONE);
-		SpellDesc damageSpell = DamageSpell.create(1);
-		damageSpell.setTarget(EntityReference.ENEMY_MINIONS);
+		SpellDesc damageSpell = DamageSpell.create(EntityReference.ENEMY_MINIONS, 1);
 		SpellDesc drawCardSpell = DrawCardSpell.create();
-		drawCardSpell.setTarget(EntityReference.NONE);
 		setSpell(MetaSpell.create(damageSpell, drawCardSpell));
 	}
 

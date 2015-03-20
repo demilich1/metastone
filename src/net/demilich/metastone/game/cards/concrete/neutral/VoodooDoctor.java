@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.cards.concrete.neutral;
 
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -25,7 +25,7 @@ public class VoodooDoctor extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion voodooDoctor = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(HealingSpell.create(2), TargetSelection.ANY);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(HealingSpell.create(2), TargetSelection.ANY);
 		voodooDoctor.setBattlecry(battlecry);
 		return voodooDoctor;
 	}

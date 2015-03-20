@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.actions.PlayMinionCardAction;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -17,9 +17,9 @@ public abstract class ChooseBattlecryCard extends MinionCard implements IChooseO
 
 	protected abstract String getAction2Suffix();
 
-	protected abstract Battlecry getBattlecry1();
+	protected abstract BattlecryAction getBattlecry1();
 
-	protected abstract Battlecry getBattlecry2();
+	protected abstract BattlecryAction getBattlecry2();
 
 	@Override
 	public PlayCardAction playOption1() {

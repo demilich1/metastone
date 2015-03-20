@@ -29,8 +29,7 @@ public class ForceOfNatureTreant extends MinionCard {
 	public Minion summon() {
 		Minion treant = createMinion(GameTag.CHARGE);
 		treant.setTag(GameTag.MARKED_FOR_DEATH);
-		SpellDesc destroySpell = DestroySpell.create();
-		destroySpell.setTarget(EntityReference.SELF);
+		SpellDesc destroySpell = DestroySpell.create(EntityReference.SELF);
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), destroySpell);
 		treant.setSpellTrigger(trigger);
 		return treant;

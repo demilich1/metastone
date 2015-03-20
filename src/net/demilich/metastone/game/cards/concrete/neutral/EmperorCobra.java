@@ -27,8 +27,7 @@ public class EmperorCobra extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion emperorCobra = createMinion();
-		SpellDesc killSpell = DestroySpell.create();
-		killSpell.setTarget(EntityReference.EVENT_TARGET);
+		SpellDesc killSpell = DestroySpell.create(EntityReference.EVENT_TARGET);
 		emperorCobra.setSpellTrigger(new SpellTrigger(new DamageCausedTrigger(false), killSpell));
 		return emperorCobra;
 	}

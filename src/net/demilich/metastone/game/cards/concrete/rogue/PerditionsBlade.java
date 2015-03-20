@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.cards.concrete.rogue;
 
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.WeaponCard;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -27,7 +27,7 @@ public class PerditionsBlade extends WeaponCard {
 		Weapon perditionsBlade = createWeapon(2, 2);
 		SpellDesc noCombo = DamageSpell.create(1);
 		SpellDesc combo = DamageSpell.create(2);
-		Battlecry battlecry = Battlecry.createBattlecry(ComboSpell.create(noCombo, combo), TargetSelection.ANY);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(ComboSpell.create(noCombo, combo), TargetSelection.ANY);
 		perditionsBlade.setBattlecry(battlecry);
 		return perditionsBlade;
 	}

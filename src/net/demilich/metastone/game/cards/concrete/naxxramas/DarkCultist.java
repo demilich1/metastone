@@ -23,9 +23,7 @@ public class DarkCultist extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion darkCultist = createMinion();
-		SpellDesc randomBuffSpell = BuffSpell.create(0, 3);
-		randomBuffSpell.setTarget(EntityReference.FRIENDLY_MINIONS);
-		randomBuffSpell.pickRandomTarget(true);
+		SpellDesc randomBuffSpell = BuffSpell.create(EntityReference.FRIENDLY_MINIONS, 0, 3, true);
 		darkCultist.addDeathrattle(randomBuffSpell);
 		return darkCultist;
 	}

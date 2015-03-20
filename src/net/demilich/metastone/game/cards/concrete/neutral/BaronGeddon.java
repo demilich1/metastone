@@ -25,8 +25,7 @@ public class BaronGeddon extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion baronGeddon = createMinion();
-		SpellDesc damageSpell = DamageSpell.create(2);
-		damageSpell.setTarget(EntityReference.ALL_OTHER_CHARACTERS);
+		SpellDesc damageSpell = DamageSpell.create(EntityReference.ALL_OTHER_CHARACTERS, 2);
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), damageSpell);
 		baronGeddon.setSpellTrigger(trigger);
 		return baronGeddon;

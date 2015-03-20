@@ -27,9 +27,7 @@ public class BoomBot extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion boomBot = createMinion();
-		SpellDesc boom = MinMaxDamageSpell.create(1, 4);
-		boom.pickRandomTarget(true);
-		boom.setTarget(EntityReference.ENEMY_CHARACTERS);
+		SpellDesc boom = MinMaxDamageSpell.create(EntityReference.ENEMY_CHARACTERS, 1, 4, true);
 		boomBot.addDeathrattle(boom);
 
 		return boomBot;

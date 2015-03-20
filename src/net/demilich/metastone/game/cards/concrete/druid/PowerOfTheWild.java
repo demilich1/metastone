@@ -31,9 +31,8 @@ public class PowerOfTheWild extends ChooseOneCard {
 			super("+1/+1", Rarity.COMMON, HeroClass.DRUID, 2);
 			setDescription("Give your minions +1/+1");
 
-			setSpell(BuffSpell.create(1, 1));
+			setSpell(BuffSpell.create(EntityReference.FRIENDLY_MINIONS, 1, 1));
 			setTargetRequirement(TargetSelection.NONE);
-			setPredefinedTarget(EntityReference.FRIENDLY_MINIONS);
 		}
 
 	}

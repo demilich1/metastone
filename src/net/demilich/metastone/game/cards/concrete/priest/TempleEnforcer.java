@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.cards.concrete.priest;
 
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -25,7 +25,7 @@ public class TempleEnforcer extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion templeEnforcer = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(BuffSpell.create(0, 3), TargetSelection.FRIENDLY_MINIONS);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(BuffSpell.create(0, 3), TargetSelection.FRIENDLY_MINIONS);
 		templeEnforcer.setBattlecry(battlecry);
 		return templeEnforcer;
 	}

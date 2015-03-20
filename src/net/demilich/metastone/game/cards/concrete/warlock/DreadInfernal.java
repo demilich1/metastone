@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.cards.concrete.warlock;
 
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -29,7 +29,7 @@ public class DreadInfernal extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion dreadInfernal = createMinion();
-		Battlecry infernoBattlecry = Battlecry.createBattlecry(DamageSpell.create(1), TargetSelection.NONE);
+		BattlecryAction infernoBattlecry = BattlecryAction.createBattlecry(DamageSpell.create(1), TargetSelection.NONE);
 		infernoBattlecry.setTargetKey(EntityReference.ALL_CHARACTERS);
 		dreadInfernal.setBattlecry(infernoBattlecry);
 		return dreadInfernal;

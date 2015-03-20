@@ -13,8 +13,7 @@ public class Equality extends SpellCard {
 	public Equality() {
 		super("Equality", Rarity.RARE, HeroClass.PALADIN, 2);
 		setDescription("Change the Health of ALL minions to 1.");
-		SpellDesc spell = SetHpSpell.create(1);
-		spell.setTarget(EntityReference.ALL_MINIONS);
+		SpellDesc spell = SetHpSpell.create(EntityReference.ALL_MINIONS, 1);
 		setSpell(spell);
 		setTargetRequirement(TargetSelection.NONE);
 	}

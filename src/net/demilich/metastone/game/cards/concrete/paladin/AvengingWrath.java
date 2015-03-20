@@ -14,11 +14,8 @@ public class AvengingWrath extends SpellCard {
 		setDescription("Deal 8 damage randomly split among enemy characters.");
 		
 		setTargetRequirement(TargetSelection.NONE);
-		setSpell(DamageRandomSpell.create(1, 8));
-		setPredefinedTarget(EntityReference.ENEMY_CHARACTERS);
+		setSpell(DamageRandomSpell.create(EntityReference.ENEMY_CHARACTERS, 1, 8));
 	}
-
-
 
 	@Override
 	public int getTypeId() {

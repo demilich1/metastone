@@ -1,8 +1,11 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.rogue;
 
+import java.util.function.Predicate;
+
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
+import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
@@ -25,15 +28,11 @@ public class IronSensai extends MinionCard {
 		return 569;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion ironSensai = createMinion();
-		SpellDesc buffSpell = BuffSpell.create(+2, +2);
-		buffSpell.setTargetFilter(target -> target.getTag(GameTag.RACE) == Race.MECH);
-		buffSpell.setTarget(EntityReference.OTHER_FRIENDLY_MINIONS);
-		buffSpell.pickRandomTarget(true);
+		Predicate<Entity> targetFilter = target -> target.getTag(GameTag.RACE) == Race.MECH;
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.OTHER_FRIENDLY_MINIONS, +2, +2, targetFilter, true);
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), buffSpell);
 		ironSensai.setSpellTrigger(trigger);
 		return ironSensai;

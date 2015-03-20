@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.naxxramas;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
@@ -31,9 +31,8 @@ public class Loatheb extends MinionCard {
 		Minion loatheb = createMinion();
 		OneTurnCostModifier costModifier = new OneTurnCostModifier(CardType.SPELL, +5);
 		costModifier.setTargetPlayer(TargetPlayer.OPPONENT);
-		SpellDesc increaseSpellCost = AddCostModifierSpell.create(costModifier);
-		increaseSpellCost.setTarget(EntityReference.FRIENDLY_HERO);
-		loatheb.setBattlecry(Battlecry.createBattlecry(increaseSpellCost));
+		SpellDesc increaseSpellCost = AddCostModifierSpell.create(EntityReference.FRIENDLY_HERO, costModifier);
+		loatheb.setBattlecry(BattlecryAction.createBattlecry(increaseSpellCost));
 		return loatheb;
 	}
 }

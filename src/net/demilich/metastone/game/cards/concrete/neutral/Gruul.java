@@ -26,8 +26,7 @@ public class Gruul extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion gruul = createMinion();
-		SpellDesc buffSpell = BuffSpell.create(+1, +1);
-		buffSpell.setTarget(EntityReference.SELF);
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, +1, +1);
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(TargetPlayer.BOTH), buffSpell);
 		gruul.setSpellTrigger(trigger);
 		return gruul;

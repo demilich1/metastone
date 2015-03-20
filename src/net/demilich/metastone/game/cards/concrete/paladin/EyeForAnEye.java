@@ -7,7 +7,6 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.events.DamageEvent;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.spells.DamageSpell;
-import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.HeroDamagedTrigger;
 import net.demilich.metastone.game.spells.trigger.secrets.Secret;
@@ -29,17 +28,15 @@ public class EyeForAnEye extends SecretCard {
 	}
 
 	private class EyeForAnEyeSecret extends Secret {
-		
-		public EyeForAnEyeSecret(Card source) {
-			super(new SecretTrigger(new HeroDamagedTrigger()), DamageSpell.create(0), source);
-			getSpell().setTarget(EntityReference.EVENT_TARGET);
-		}
 
+		public EyeForAnEyeSecret(Card source) {
+			super(new SecretTrigger(new HeroDamagedTrigger()), DamageSpell.create(EntityReference.EVENT_TARGET, 0), source);
+		}
 
 		@Override
 		protected void onFire(int ownerId, SpellDesc spell, GameEvent event) {
 			DamageEvent damageEvent = (DamageEvent) event;
-			spell.set(SpellArg.DAMAGE, damageEvent.getDamage());
+			SpellDesc damage = DamageSpell.create(EntityReference.EVENT_TARGET, damageEvent.getDamage());
 			super.onFire(ownerId, spell, event);
 		}
 

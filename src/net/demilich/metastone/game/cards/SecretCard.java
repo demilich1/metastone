@@ -9,7 +9,6 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.GameEventTrigger;
 import net.demilich.metastone.game.spells.trigger.secrets.Secret;
 import net.demilich.metastone.game.spells.trigger.secrets.SecretTrigger;
-import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class SecretCard extends SpellCard {
@@ -25,7 +24,6 @@ public class SecretCard extends SpellCard {
 
 	public void setSecret(Secret secret) {
 		SpellDesc spell = AddSecretSpell.create(secret);
-		spell.setTarget(EntityReference.FRIENDLY_HERO);
 		setTargetRequirement(TargetSelection.NONE);
 		setSpell(spell);
 	}

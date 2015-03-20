@@ -14,8 +14,7 @@ public class FreezingTrap extends SecretCard {
 		super("Freezing Trap", Rarity.COMMON, HeroClass.HUNTER, 2);
 		setDescription("Secret: When an enemy minion attacks, return it to its owner's hand and it costs (2) more.");
 		
-		SpellDesc returnToHandSpell = ReturnMinionToHandSpell.create(2);
-		returnToHandSpell.setTarget(EntityReference.ATTACKER);
+		SpellDesc returnToHandSpell = ReturnMinionToHandSpell.create(EntityReference.ATTACKER, 2, false);
 		setTriggerAndEffect(new MinionAttacksTrigger(), returnToHandSpell);
 	}
 

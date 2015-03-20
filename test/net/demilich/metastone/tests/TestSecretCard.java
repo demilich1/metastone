@@ -19,8 +19,7 @@ public class TestSecretCard extends SecretCard {
 		setDescription("Secret for unit testing. Deals $" + damage + " damage to all enemies");
 		setCollectible(false);
 		
-		SpellDesc damageSpell = DamageSpell.create(damage);
-		damageSpell.setTarget(EntityReference.ENEMY_CHARACTERS);
+		SpellDesc damageSpell = DamageSpell.create(EntityReference.ENEMY_CHARACTERS, damage);
 		setTriggerAndEffect(new HeroAttackedTrigger(), damageSpell);
 	}
 

@@ -4,7 +4,6 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.custom.BrawlSpell;
-import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class Brawl extends SpellCard {
@@ -15,9 +14,7 @@ public class Brawl extends SpellCard {
 
 		//TODO: check if this spell can be played with 1 minion on the board
 		setSpell(BrawlSpell.create());
-		setPredefinedTarget(EntityReference.ALL_MINIONS);
 		setTargetRequirement(TargetSelection.NONE);
-
 	}
 
 	@Override

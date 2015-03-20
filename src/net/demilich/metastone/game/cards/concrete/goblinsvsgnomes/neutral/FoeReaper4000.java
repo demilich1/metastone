@@ -26,8 +26,6 @@ public class FoeReaper4000 extends MinionCard {
 		return 514;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion foeReaper4000 = createMinion();
@@ -35,8 +33,7 @@ public class FoeReaper4000 extends MinionCard {
 			Minion attacker = (Minion) context.getEnvironment().get(Environment.ATTACKER);
 			return attacker.getAttack();
 		});
-		SpellDesc cleave = AdjacentMetaSpell.create(null, damage);
-		cleave.setTarget(EntityReference.EVENT_TARGET);
+		SpellDesc cleave = AdjacentMetaSpell.create(EntityReference.EVENT_TARGET, null, damage);
 		SpellTrigger trigger = new SpellTrigger(new PhysicalAttackTrigger(false), cleave);
 		foeReaper4000.setSpellTrigger(trigger);
 		return foeReaper4000;

@@ -12,8 +12,7 @@ public class Flamestrike extends SpellCard {
 	public Flamestrike() {
 		super("Flamestrike", Rarity.FREE, HeroClass.MAGE, 7);
 		setDescription("Deal $4 damage to all enemy minions.");
-		setSpell(DamageSpell.create(4));
-		setPredefinedTarget(EntityReference.ENEMY_MINIONS);
+		setSpell(DamageSpell.create(EntityReference.ENEMY_MINIONS, 4));
 		setTargetRequirement(TargetSelection.NONE);
 	}
 

@@ -26,13 +26,10 @@ public class OneEyedCheat extends MinionCard {
 		return 571;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion oneEyedCheat = createMinion();
-		SpellDesc stealth = ApplyTagSpell.create(GameTag.STEALTHED);
-		stealth.setTarget(EntityReference.SELF);
+		SpellDesc stealth = ApplyTagSpell.create(EntityReference.SELF, GameTag.STEALTHED);
 		SpellTrigger trigger = new SpellTrigger(new MinionSummonedTrigger(TargetPlayer.SELF, Race.PIRATE), stealth);
 		oneEyedCheat.setSpellTrigger(trigger);
 		return oneEyedCheat;

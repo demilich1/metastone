@@ -14,8 +14,7 @@ public class Repentance extends SecretCard {
 		super("Repentance", Rarity.COMMON, HeroClass.PALADIN, 1);
 		setDescription("Secret: When your opponent plays a minion, reduce its Health to 1.");
 
-		SpellDesc setHpSpell = SetHpSpell.create(1);
-		setHpSpell.setTarget(EntityReference.EVENT_TARGET);
+		SpellDesc setHpSpell = SetHpSpell.create(EntityReference.EVENT_TARGET, 1);
 		setTriggerAndEffect(new MinionCardPlayedTrigger(), setHpSpell);
 	}
 

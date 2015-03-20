@@ -28,14 +28,11 @@ public class Hobgoblin extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion hobgoblin = createMinion();
-		SpellDesc buff = BuffSpell.create(+2, +2);
-		buff.setTarget(EntityReference.EVENT_TARGET);
+		SpellDesc buff = BuffSpell.create(EntityReference.EVENT_TARGET, +2, +2);
 		SpellTrigger trigger = new SpellTrigger(new HobgoblinTrigger(), buff);
 		hobgoblin.setSpellTrigger(trigger);
 		return hobgoblin;
 	}
-
-
 
 	private class HobgoblinTrigger extends MinionCardPlayedTrigger {
 		

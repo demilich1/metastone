@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.neutral;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -28,9 +28,8 @@ public class TwilightDrake extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion twilightDrake = createMinion();
-		SpellDesc buffSpell = BuffSpell.create(null, (context, player, target) -> player.getHand().getCount());
-		buffSpell.setTarget(EntityReference.SELF);
-		Battlecry battlecry = Battlecry.createBattlecry(buffSpell);
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, null, (context, player, target) -> player.getHand().getCount());
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(buffSpell);
 		twilightDrake.setBattlecry(battlecry);
 		return twilightDrake;
 	}

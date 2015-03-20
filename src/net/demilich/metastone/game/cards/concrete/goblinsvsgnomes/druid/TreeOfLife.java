@@ -13,12 +13,9 @@ public class TreeOfLife extends SpellCard {
 		super("Tree of Life", Rarity.EPIC, HeroClass.DRUID, 9);
 		setDescription("Restore all characters to full Health.");
 
-		setSpell(HealToFullSpell.create());
-		setPredefinedTarget(EntityReference.ALL_CHARACTERS);
+		setSpell(HealToFullSpell.create(EntityReference.ALL_CHARACTERS));
 		setTargetRequirement(TargetSelection.NONE);
 	}
-
-
 
 	@Override
 	public int getTypeId() {

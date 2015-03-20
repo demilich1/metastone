@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.warrior;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -23,14 +23,11 @@ public class Shieldmaiden extends MinionCard {
 		return 608;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion shieldmaiden = createMinion();
-		SpellDesc gainArmorSpell = BuffHeroSpell.create(0, 5);
-		gainArmorSpell.setTarget(EntityReference.FRIENDLY_HERO);
-		Battlecry battlecry = Battlecry.createBattlecry(gainArmorSpell);
+		SpellDesc gainArmorSpell = BuffHeroSpell.create(EntityReference.FRIENDLY_HERO, 0, 5);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(gainArmorSpell);
 		shieldmaiden.setBattlecry(battlecry);
 		return shieldmaiden;
 	}

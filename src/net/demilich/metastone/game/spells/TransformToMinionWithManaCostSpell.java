@@ -1,5 +1,7 @@
 package net.demilich.metastone.game.spells;
 
+import java.util.Map;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
@@ -15,8 +17,8 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 public class TransformToMinionWithManaCostSpell extends TransformMinionSpell {
 
 	public static SpellDesc create() {
-		SpellDesc desc = new SpellDesc(TransformToMinionWithManaCostSpell.class);
-		return desc;
+		Map<SpellArg, Object> arguments = SpellDesc.build(TransformToMinionWithManaCostSpell.class);
+		return new SpellDesc(arguments);
 	}
 
 	private static MinionCard getRandomMinionWithCost(int manaCost) {
@@ -32,11 +34,11 @@ public class TransformToMinionWithManaCostSpell extends TransformMinionSpell {
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Minion minion = (Minion) target;
 		int manaCost = minion.getSourceCard().getBaseManaCost();
-		desc.set(SpellArg.CARD, getRandomMinionWithCost(manaCost));
-		super.onCast(context, player, desc, target);
+		SpellDesc transformMinionSpell = TransformMinionSpell.create(getRandomMinionWithCost(manaCost));
+		super.onCast(context, player, transformMinionSpell, source, target);
 	}
 
 }

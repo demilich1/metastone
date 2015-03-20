@@ -17,8 +17,7 @@ public class Blizzard extends SpellCard {
 		super("Blizzard", Rarity.RARE, HeroClass.MAGE, 6);
 		setDescription("Deal $2 damage to all enemy minions and Freeze them.");
 
-		SpellDesc blizzardSpell = MetaSpell.create(DamageSpell.create(2), ApplyTagSpell.create(GameTag.FROZEN));
-		blizzardSpell.setTarget(EntityReference.ENEMY_MINIONS);
+		SpellDesc blizzardSpell = MetaSpell.create(EntityReference.ENEMY_MINIONS, DamageSpell.create(2), ApplyTagSpell.create(GameTag.FROZEN));
 		setSpell(blizzardSpell);
 		setTargetRequirement(TargetSelection.NONE);
 	}

@@ -26,8 +26,7 @@ public class FrothingBerserker extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion frothingBerserker = createMinion();
-		SpellDesc buffSpell = BuffSpell.create(1);
-		buffSpell.setTarget(EntityReference.SELF);
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, +1, 0);
 		SpellTrigger trigger = new SpellTrigger(new MinionDamagedTrigger(TargetPlayer.BOTH), buffSpell);
 		frothingBerserker.setSpellTrigger(trigger);
 		return frothingBerserker;

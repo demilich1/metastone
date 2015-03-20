@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.priest;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -27,11 +27,9 @@ public class Shadowbomber extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion shadowbomber = createMinion();
-		SpellDesc damageOpponent = DamageSpell.create(3);
-		damageOpponent.setTarget(EntityReference.ENEMY_HERO);
-		SpellDesc damageSelf = DamageSpell.create(3);
-		damageSelf.setTarget(EntityReference.FRIENDLY_HERO);
-		Battlecry battlecry = Battlecry.createBattlecry(MetaSpell.create(damageOpponent, damageSelf));
+		SpellDesc damageOpponent = DamageSpell.create(EntityReference.ENEMY_HERO, 3);
+		SpellDesc damageSelf = DamageSpell.create(EntityReference.FRIENDLY_HERO, 3);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(MetaSpell.create(damageOpponent, damageSelf));
 		shadowbomber.setBattlecry(battlecry);
 		return shadowbomber;
 	}

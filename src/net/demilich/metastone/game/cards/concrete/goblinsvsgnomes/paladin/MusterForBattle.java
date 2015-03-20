@@ -20,8 +20,7 @@ public class MusterForBattle extends SpellCard {
 		
 		SpellDesc summonSpell = SummonSpell.create(new SilverHandRecruit(), new SilverHandRecruit(), new SilverHandRecruit());
 		SpellDesc equipWeaponSpell = EquipWeaponSpell.create(new LightsJustice());
-		setSpell(MetaSpell.create(summonSpell, equipWeaponSpell));
-		setPredefinedTarget(EntityReference.NONE);
+		setSpell(MetaSpell.create(EntityReference.NONE, summonSpell, equipWeaponSpell));
 		setTargetRequirement(TargetSelection.NONE);
 	}
 

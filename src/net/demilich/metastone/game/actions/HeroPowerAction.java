@@ -1,25 +1,31 @@
 package net.demilich.metastone.game.actions;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.targeting.CardLocation;
-import net.demilich.metastone.game.targeting.CardReference;
+import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.targeting.TargetSelection;
 
-public abstract class HeroPowerAction extends PlayCardAction {
+public class HeroPowerAction extends PlaySpellCardAction {
 
-	public HeroPowerAction(int playerId, int cardId) {
-		super(new CardReference(playerId, CardLocation.HERO_POWER, cardId, "Hero power"));
+	public HeroPowerAction(SpellDesc spell, Card card, TargetSelection targetSelection) {
+		super(spell, card, targetSelection);
 		setActionType(ActionType.HERO_POWER);
 	}
-	
+
 	@Override
 	public void execute(GameContext context, int playerId) {
 		context.getLogic().useHeroPower(playerId);
 		play(context, playerId);
 	}
-	
+
 	@Override
 	public String getPromptText() {
 		return "[Use hero power]";
 	}
-	
+
+	@Override
+	public void play(GameContext context, int playerId) {
+		context.getLogic().castSpell(playerId, spell, cardReference, getTargetKey());
+	}
+
 }

@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.cards.concrete.priest;
 
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.EntityType;
@@ -24,7 +24,7 @@ public class CabalShadowPriest extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion cabalShadowPriest = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(MindControlSpell.create(), TargetSelection.ENEMY_MINIONS);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(MindControlSpell.create(null, false), TargetSelection.ENEMY_MINIONS);
 		battlecry.setEntityFilter(entity -> {
 			if (entity.getEntityType() != EntityType.MINION) {
 				return false;

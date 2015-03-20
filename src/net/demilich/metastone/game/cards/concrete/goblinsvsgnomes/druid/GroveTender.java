@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.druid;
 
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.ChooseBattlecryCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -28,16 +28,15 @@ public class GroveTender extends ChooseBattlecryCard {
 	}
 
 	@Override
-	protected Battlecry getBattlecry1() {
-		SpellDesc gainManaSpell = ModifyMaxManaSpell.create(+1, true);
-		gainManaSpell.setTargetPlayer(TargetPlayer.BOTH);
-		Battlecry battlecry = Battlecry.createBattlecry(gainManaSpell);
+	protected BattlecryAction getBattlecry1() {
+		SpellDesc gainManaSpell = ModifyMaxManaSpell.create(TargetPlayer.BOTH, +1, true);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(gainManaSpell);
 		return battlecry;
 	}
 
 	@Override
-	protected Battlecry getBattlecry2() {
-		Battlecry battlecry = Battlecry.createBattlecry(DrawCardSpell.create(1, TargetPlayer.BOTH));
+	protected BattlecryAction getBattlecry2() {
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(DrawCardSpell.create(1, TargetPlayer.BOTH));
 		return battlecry;
 	}
 

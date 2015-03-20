@@ -1,5 +1,7 @@
 package net.demilich.metastone.game.spells;
 
+import java.util.Map;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
@@ -11,17 +13,17 @@ import net.demilich.metastone.game.targeting.EntityReference;
 public class ShuffleToDeckSpell extends Spell {
 
 	public static SpellDesc create(TargetPlayer targetPlayer, Card card) {
-		SpellDesc desc = new SpellDesc(ShuffleToDeckSpell.class);
-		desc.set(SpellArg.CARD, card);
-		desc.setTargetPlayer(targetPlayer);
-		desc.setTarget(EntityReference.NONE);
-		return desc;
+		Map<SpellArg, Object> arguments = SpellDesc.build(ShuffleToDeckSpell.class);
+		arguments.put(SpellArg.CARD, card);
+		arguments.put(SpellArg.TARGET, EntityReference.NONE);
+		arguments.put(SpellArg.TARGET_PLAYER, targetPlayer);
+		return new SpellDesc(arguments);
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Card targetCard = (Card) desc.get(SpellArg.CARD);
-		shuffleToDeck(player, targetCard);	
+		shuffleToDeck(player, targetCard);
 	}
 
 	private void shuffleToDeck(Player player, Card card) {

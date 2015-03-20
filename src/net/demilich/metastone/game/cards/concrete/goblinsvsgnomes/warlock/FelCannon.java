@@ -1,8 +1,11 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.warlock;
 
+import java.util.function.Predicate;
+
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
+import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
@@ -28,10 +31,8 @@ public class FelCannon extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion felCannon = createMinion();
-		SpellDesc damage = DamageSpell.create(2);
-		damage.setTarget(EntityReference.ALL_MINIONS);
-		damage.pickRandomTarget(true);
-		damage.setTargetFilter(entity -> entity.getTag(GameTag.RACE) != Race.MECH);
+		Predicate<Entity> targetFilter = entity -> entity.getTag(GameTag.RACE) != Race.MECH;
+		SpellDesc damage = DamageSpell.create(EntityReference.ALL_MINIONS, 2, targetFilter, true);
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), damage);
 		felCannon.setSpellTrigger(trigger);
 		return felCannon;

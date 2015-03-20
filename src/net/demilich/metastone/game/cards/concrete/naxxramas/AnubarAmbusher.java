@@ -23,9 +23,7 @@ public class AnubarAmbusher extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion anubarAmbusher = createMinion();
-		SpellDesc deathrattle = ReturnMinionToHandSpell.create();
-		deathrattle.pickRandomTarget(true);
-		deathrattle.setTarget(EntityReference.FRIENDLY_MINIONS);
+		SpellDesc deathrattle = ReturnMinionToHandSpell.create(EntityReference.FRIENDLY_MINIONS, 0, true);
 		anubarAmbusher.addDeathrattle(deathrattle);
 		return anubarAmbusher;
 	}

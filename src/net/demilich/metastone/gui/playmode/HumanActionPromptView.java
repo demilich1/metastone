@@ -16,7 +16,7 @@ import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.actions.ActionType;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.actions.HeroPowerAction;
 import net.demilich.metastone.game.actions.PhysicalAttackAction;
@@ -41,7 +41,7 @@ public class HumanActionPromptView extends VBox {
 			actionString = "HERO POWER: " + card.getName();
 			break;
 		case BATTLECRY:
-			Battlecry battlecry = (Battlecry) action;
+			BattlecryAction battlecry = (BattlecryAction) action;
 			actionString = "BATTLECRY " + battlecry.getSpell().getSpellClass().getSimpleName();
 			break;
 		case PHYSICAL_ATTACK:

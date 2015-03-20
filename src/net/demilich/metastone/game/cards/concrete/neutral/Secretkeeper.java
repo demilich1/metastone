@@ -25,8 +25,7 @@ public class Secretkeeper extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion secretkeeper = createMinion();
-		SpellDesc buffSpell = BuffSpell.create(1, 1);
-		buffSpell.setTarget(EntityReference.SELF);
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, 1, 1);
 		secretkeeper.setSpellTrigger(new SpellTrigger(new SecretPlayedTrigger(), buffSpell));
 		return secretkeeper;
 	}

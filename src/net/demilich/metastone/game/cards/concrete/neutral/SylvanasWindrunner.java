@@ -4,7 +4,7 @@ import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.spells.MindControlRandomSpell;
+import net.demilich.metastone.game.spells.MindControlSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
@@ -23,8 +23,7 @@ public class SylvanasWindrunner extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion sylvanasWindrunner = createMinion();
-		SpellDesc takeControl = MindControlRandomSpell.create();
-		takeControl.setTarget(EntityReference.ENEMY_MINIONS);
+		SpellDesc takeControl = MindControlSpell.create(EntityReference.ENEMY_MINIONS, true);
 		sylvanasWindrunner.addDeathrattle(takeControl);
 		return sylvanasWindrunner;
 	}

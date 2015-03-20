@@ -27,9 +27,7 @@ public class ShipsCannon extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion shipsCannon = createMinion();
-		SpellDesc damage = DamageSpell.create(2);
-		damage.setTarget(EntityReference.ENEMY_CHARACTERS);
-		damage.pickRandomTarget(true);
+		SpellDesc damage = DamageSpell.create(EntityReference.ENEMY_CHARACTERS, 2, true);
 		SpellTrigger trigger = new SpellTrigger(new MinionSummonedTrigger(TargetPlayer.SELF, Race.PIRATE), damage);
 		shipsCannon.setSpellTrigger(trigger);
 		return shipsCannon;

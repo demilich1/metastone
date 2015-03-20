@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.neutral;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -26,9 +26,8 @@ public class AncientMage extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion ancientMage = createMinion();
-		SpellDesc spellpowerSpell = AddSpellPowerSpell.create(1);
-		spellpowerSpell.setTarget(EntityReference.ADJACENT_MINIONS);
-		Battlecry battlecry = Battlecry.createBattlecry(spellpowerSpell);
+		SpellDesc spellpowerSpell = AddSpellPowerSpell.create(EntityReference.ADJACENT_MINIONS, 1);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(spellpowerSpell);
 		battlecry.setResolvedLate(true);
 		ancientMage.setBattlecry(battlecry);
 		return ancientMage;

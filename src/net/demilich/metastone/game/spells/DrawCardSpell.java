@@ -1,5 +1,7 @@
 package net.demilich.metastone.game.spells;
 
+import java.util.Map;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
@@ -22,12 +24,12 @@ public class DrawCardSpell extends Spell {
 	}
 
 	private static SpellDesc create(IValueProvider drawModifier, int numberOfCards, TargetPlayer targetPlayer) {
-		SpellDesc desc = new SpellDesc(DrawCardSpell.class);
-		desc.set(SpellArg.VALUE_PROVIDER, drawModifier);
-		desc.set(SpellArg.NUMBER_OF_CARDS, numberOfCards);
-		desc.setTargetPlayer(targetPlayer);
-		desc.setTarget(EntityReference.NONE);
-		return desc;
+		Map<SpellArg, Object> arguments = SpellDesc.build(DrawCardSpell.class);
+		arguments.put(SpellArg.VALUE_PROVIDER, drawModifier);
+		arguments.put(SpellArg.VALUE, numberOfCards);
+		arguments.put(SpellArg.TARGET, EntityReference.NONE);
+		arguments.put(SpellArg.TARGET_PLAYER, targetPlayer);
+		return new SpellDesc(arguments);
 	}
 
 	public static SpellDesc create(IValueProvider drawModifier, TargetPlayer targetPlayer) {
@@ -42,8 +44,8 @@ public class DrawCardSpell extends Spell {
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
-		int numberOfCards = desc.getInt(SpellArg.NUMBER_OF_CARDS);
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
+		int numberOfCards = desc.getInt(SpellArg.VALUE);
 		IValueProvider drawModifier = desc.getValueProvider();
 		draw(context, player, numberOfCards, drawModifier);
 	}

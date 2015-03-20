@@ -23,13 +23,10 @@ public class Cogmaster extends MinionCard {
 		return 508;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion cogmaster = createMinion();
-		SpellDesc buffSpell = BuffWhenRaceIsOnBoardSpell.create(Race.MECH, +2);
-		buffSpell.setTarget(EntityReference.SELF);
+		SpellDesc buffSpell = BuffWhenRaceIsOnBoardSpell.create(EntityReference.SELF, Race.MECH, +2);
 		SpellTrigger trigger = new SpellTrigger(new BoardChangedTrigger(), buffSpell);
 		cogmaster.setSpellTrigger(trigger);
 		return cogmaster;

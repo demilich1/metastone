@@ -19,10 +19,9 @@ public class Flare extends SpellCard {
 		super("Flare", Rarity.RARE, HeroClass.HUNTER, 2);
 		setDescription("All minions lose Stealth. Destroy all enemy Secrets. Draw a card.");
 		SpellDesc drawCardSpell = DrawCardSpell.create();
-		SpellDesc removeStealthSpell = RemoveTagSpell.create(GameTag.STEALTHED);
-		removeStealthSpell.setTarget(EntityReference.ALL_MINIONS);
+		SpellDesc removeStealthSpell = RemoveTagSpell.create(EntityReference.ALL_MINIONS, GameTag.STEALTHED);
 		SpellDesc removeSecretsSpell = RemoveSecretsSpell.create(TargetPlayer.OPPONENT);
-		setSpell(MetaSpell.create(drawCardSpell, removeStealthSpell, removeSecretsSpell));
+		setSpell(MetaSpell.create(EntityReference.NONE, drawCardSpell, removeStealthSpell, removeSecretsSpell, false));
 		setTargetRequirement(TargetSelection.NONE);
 	}
 

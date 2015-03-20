@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.rogue;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -24,7 +24,7 @@ public class SI7Agent extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion si7Agent = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(DamageSpell.create(2), TargetSelection.ANY);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(DamageSpell.create(2), TargetSelection.ANY);
 		battlecry.setCondition((context, player) -> player.getHero().hasStatus(GameTag.COMBO));
 		si7Agent.setBattlecry(battlecry);
 		return si7Agent;

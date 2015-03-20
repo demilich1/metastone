@@ -25,14 +25,11 @@ public class MicroMachine extends MinionCard {
 		return 533;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion microMachine = createMinion();
 		TurnStartTrigger turnStartTrigger = new TurnStartTrigger(TargetPlayer.BOTH);
-		SpellDesc buffSpell = BuffSpell.create(1);
-		buffSpell.setTarget(EntityReference.SELF);
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, 1, 0);
 		SpellTrigger trigger = new SpellTrigger(turnStartTrigger, buffSpell);
 		microMachine.setSpellTrigger(trigger);
 		return microMachine;

@@ -18,10 +18,8 @@ public class BladeFlurry extends SpellCard {
 		super("Blade Flurry", Rarity.RARE, HeroClass.ROGUE, 2);
 		setDescription("Destroy your weapon and deal its damage to all enemies.");
 
-		SpellDesc damageSpell = DamageSpell.create((context, player, target) -> player.getHero().getWeapon().getWeaponDamage());
-		damageSpell.setTarget(EntityReference.ENEMY_CHARACTERS);
-		SpellDesc destroyWeaponSpell = DestroyWeaponSpell.create();
-		destroyWeaponSpell.setTarget(EntityReference.FRIENDLY_HERO);
+		SpellDesc damageSpell = DamageSpell.create(EntityReference.ENEMY_CHARACTERS, (context, player, target) -> player.getHero().getWeapon().getWeaponDamage());
+		SpellDesc destroyWeaponSpell = DestroyWeaponSpell.create(EntityReference.FRIENDLY_HERO);
 		setSpell(MetaSpell.create(damageSpell, destroyWeaponSpell));
 		setTargetRequirement(TargetSelection.NONE);
 	}
@@ -33,8 +31,6 @@ public class BladeFlurry extends SpellCard {
 		}
 		return player.getHero().getWeapon() != null;
 	}
-
-
 
 	@Override
 	public int getTypeId() {

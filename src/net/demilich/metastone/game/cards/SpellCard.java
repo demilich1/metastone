@@ -2,12 +2,11 @@ package net.demilich.metastone.game.cards;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.PlayCardAction;
+import net.demilich.metastone.game.actions.PlaySpellCardAction;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
 public abstract class SpellCard extends Card {
@@ -59,26 +58,7 @@ public abstract class SpellCard extends Card {
 
 	@Override
 	public PlayCardAction play() {
-		return new PlayCardAction(getCardReference()) {
-			{
-				setTargetRequirement(targetRequirement);
-				setActionType(ActionType.SPELL);
-			}
-
-			@Override
-			protected void play(GameContext context, int playerId) {
-				getSpell().setSourceEntity(SpellCard.this.getReference());
-				if (!spell.hasPredefinedTarget()) {
-					spell.setTarget(getTargetKey());
-				}
-
-				context.getLogic().castSpell(playerId, spell);
-			}
-		};
-	}
-
-	protected void setPredefinedTarget(EntityReference entityReference) {
-		spell.setTarget(entityReference);
+		return new PlaySpellCardAction(getSpell(), this, getTargetRequirement());
 	}
 
 	public void setSpell(SpellDesc spell) {

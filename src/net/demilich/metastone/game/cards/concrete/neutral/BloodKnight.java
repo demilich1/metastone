@@ -5,7 +5,7 @@ import java.util.List;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.Entity;
@@ -35,11 +35,9 @@ public class BloodKnight extends MinionCard {
 	public Minion summon() {
 		Minion bloodKnight = createMinion();
 		IValueProvider bloodKnightValueProvider = new BloodKnightBuffValueProvider();
-		SpellDesc buffSpell = BuffSpell.create(bloodKnightValueProvider, bloodKnightValueProvider);
-		buffSpell.setTarget(EntityReference.SELF);
-		SpellDesc removeDivineShields = RemoveTagSpell.create(GameTag.DIVINE_SHIELD);
-		removeDivineShields.setTarget(EntityReference.ALL_MINIONS);
-		Battlecry battlecry = Battlecry.createBattlecry(MetaSpell.create(buffSpell, removeDivineShields));
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, bloodKnightValueProvider, bloodKnightValueProvider);
+		SpellDesc removeDivineShields = RemoveTagSpell.create(EntityReference.ALL_MINIONS, GameTag.DIVINE_SHIELD);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(MetaSpell.create(buffSpell, removeDivineShields));
 		bloodKnight.setBattlecry(battlecry);
 		return bloodKnight;
 	}

@@ -30,11 +30,8 @@ public class Shadowboxer extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion shadowboxer = createMinion();
-		SpellDesc damageRandomEnemy = DamageSpell.create(1);
-		damageRandomEnemy.setTarget(EntityReference.ENEMY_CHARACTERS);
-		damageRandomEnemy.pickRandomTarget(true);
-		SpellDesc removeStealth = RemoveTagSpell.create(GameTag.STEALTHED);
-		removeStealth.setTarget(EntityReference.SELF);
+		SpellDesc damageRandomEnemy = DamageSpell.create(EntityReference.ENEMY_CHARACTERS, 1, true);
+		SpellDesc removeStealth = RemoveTagSpell.create(EntityReference.SELF, GameTag.STEALTHED);
 		SpellTrigger trigger = new SpellTrigger(new HealingTrigger(), MetaSpell.create(damageRandomEnemy, removeStealth));
 		shadowboxer.setSpellTrigger(trigger);
 		return shadowboxer;

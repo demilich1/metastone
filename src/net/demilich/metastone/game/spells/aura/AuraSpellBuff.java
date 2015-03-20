@@ -1,5 +1,8 @@
 package net.demilich.metastone.game.spells.aura;
 
+import java.util.Map;
+import java.util.function.Predicate;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
@@ -19,16 +22,24 @@ public class AuraSpellBuff extends Spell {
 	}
 	
 	public static SpellDesc create(int attackBonus, int hpBonus) {
-		SpellDesc desc = new SpellDesc(AuraSpellBuff.class);
-		desc.set(SpellArg.ATTACK_BONUS, attackBonus);
-		desc.set(SpellArg.HP_BONUS, hpBonus);
-		return desc;
+		return create(attackBonus, hpBonus, null);
+	}
+	
+	public static SpellDesc create(int attackBonus, int hpBonus, Predicate<Entity> targetFilter) {
+		Map<SpellArg, Object> arguments = SpellDesc.build(AuraSpellBuff.class);
+		arguments.put(SpellArg.ATTACK_BONUS, attackBonus);
+		arguments.put(SpellArg.HP_BONUS, hpBonus);
+		if (targetFilter != null) {
+			arguments.put(SpellArg.ENTITY_FILTER, targetFilter);	
+		}
+		
+		return new SpellDesc(arguments);
 	}
 	
 	private static Logger logger = LoggerFactory.getLogger(AuraSpellBuff.class);
 
 	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int attackBonus = desc.getInt(SpellArg.ATTACK_BONUS);
 		int hpBonus = desc.getInt(SpellArg.HP_BONUS);
 		Actor targetActor = (Actor) target;

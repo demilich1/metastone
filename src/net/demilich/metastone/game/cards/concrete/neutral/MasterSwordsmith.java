@@ -25,9 +25,7 @@ public class MasterSwordsmith extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion masterSwordsmith = createMinion();
-		SpellDesc randomBuffSpell = BuffSpell.create(+1);
-		randomBuffSpell.setTarget(EntityReference.OTHER_FRIENDLY_MINIONS);
-		randomBuffSpell.pickRandomTarget(true);
+		SpellDesc randomBuffSpell = BuffSpell.create(EntityReference.OTHER_FRIENDLY_MINIONS, +1, 0, true);
 		masterSwordsmith.setSpellTrigger(new SpellTrigger(new TurnEndTrigger(), randomBuffSpell));
 		return masterSwordsmith;
 	}

@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.neutral;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -28,9 +28,8 @@ public class FrostwolfWarlord extends MinionCard {
 	public Minion summon() {
 		Minion frostwolfWarlord = createMinion();
 		IValueProvider valueProvider = (context, player, target) -> player.getMinions().size();
-		SpellDesc buffSpell = BuffSpell.create(valueProvider, valueProvider);
-		buffSpell.setTarget(EntityReference.SELF);
-		Battlecry battlecry = Battlecry.createBattlecry(buffSpell);
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, valueProvider, valueProvider);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(buffSpell);
 		frostwolfWarlord.setBattlecry(battlecry);
 		return frostwolfWarlord;
 	}

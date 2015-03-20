@@ -12,9 +12,7 @@ public class ArmorUp extends HeroPower {
 	public ArmorUp() {
 		super("Armor Up!", HeroClass.WARRIOR);
 		setTargetRequirement(TargetSelection.NONE);
-		setSpell(BuffHeroSpell.create(0, ARMOR_BONUS));
-		setPredefinedTarget(EntityReference.FRIENDLY_HERO);
+		setSpell(BuffHeroSpell.create(EntityReference.FRIENDLY_HERO, 0, ARMOR_BONUS));
 	}
-
 
 }

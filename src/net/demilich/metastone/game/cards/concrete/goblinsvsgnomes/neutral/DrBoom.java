@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.neutral;
 
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.tokens.BoomBot;
@@ -28,7 +28,7 @@ public class DrBoom extends MinionCard {
 		Minion drBoom = createMinion();
 		SpellDesc summonSpell1 = SummonSpell.create(RelativeToSource.LEFT, new BoomBot());
 		SpellDesc summonSpell2 = SummonSpell.create(RelativeToSource.RIGHT, new BoomBot());
-		Battlecry battlecry = Battlecry.createBattlecry(MetaSpell.create(summonSpell1, summonSpell2));
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(MetaSpell.create(summonSpell1, summonSpell2));
 		battlecry.setResolvedLate(true);
 		drBoom.setBattlecry(battlecry);
 		return drBoom;

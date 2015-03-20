@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.cards.concrete.neutral;
 
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -23,7 +23,7 @@ public class CrazedAlchemist extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion crazedAlchemist = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(SwapAttackAndHpSpell.create(), TargetSelection.MINIONS);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(SwapAttackAndHpSpell.create(), TargetSelection.MINIONS);
 		crazedAlchemist.setBattlecry(battlecry);
 		return crazedAlchemist;
 	}

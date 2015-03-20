@@ -15,8 +15,7 @@ public class AncestorsCall extends SpellCard {
 		super("Ancestor's Call", Rarity.EPIC, HeroClass.SHAMAN, 4);
 		setDescription("Put a random minion from each player's hand into the battlefield.");
 
-		SpellDesc spell = PutRandomMinionOnBoardSpell.create(null, CardLocation.HAND);
-		spell.setTargetPlayer(TargetPlayer.BOTH);
+		SpellDesc spell = PutRandomMinionOnBoardSpell.create(TargetPlayer.BOTH, null, CardLocation.HAND);
 		setSpell(spell);
 		setTargetRequirement(TargetSelection.NONE);
 	}

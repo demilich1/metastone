@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.cards.concrete.warrior;
 
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.concrete.tokens.weapons.BattleAxe;
@@ -24,7 +24,7 @@ public class ArathiWeaponsmith extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion arathiWeaponsmith = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(EquipWeaponSpell.create(new BattleAxe()), TargetSelection.NONE);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(EquipWeaponSpell.create(new BattleAxe()), TargetSelection.NONE);
 		arathiWeaponsmith.setBattlecry(battlecry);
 		return arathiWeaponsmith;
 	}

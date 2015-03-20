@@ -27,7 +27,7 @@ public class VioletTeacher extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion violetTeacher = createMinion();
-		SpellDesc summonSpell = SummonSpell.create(RelativeToSource.RIGHT, new VioletApprentice());
+		SpellDesc summonSpell = SummonSpell.create(TargetPlayer.SELF, RelativeToSource.RIGHT, new VioletApprentice());
 		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(TargetPlayer.SELF), summonSpell);
 		violetTeacher.setSpellTrigger(trigger);
 		return violetTeacher;

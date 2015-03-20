@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.druid;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.ChooseBattlecryCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -29,13 +29,13 @@ public class AncientOfLore extends ChooseBattlecryCard {
 	}
 
 	@Override
-	protected Battlecry getBattlecry1() {
-		return Battlecry.createBattlecry(DrawCardSpell.create(2));
+	protected BattlecryAction getBattlecry1() {
+		return BattlecryAction.createBattlecry(DrawCardSpell.create(2));
 	}
 
 	@Override
-	protected Battlecry getBattlecry2() {
-		return Battlecry.createBattlecry(HealingSpell.create(5), TargetSelection.ANY);
+	protected BattlecryAction getBattlecry2() {
+		return BattlecryAction.createBattlecry(HealingSpell.create(5), TargetSelection.ANY);
 	}
 
 	@Override

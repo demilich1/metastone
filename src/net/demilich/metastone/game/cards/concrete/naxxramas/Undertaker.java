@@ -30,8 +30,7 @@ public class Undertaker extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion undertaker = createMinion();
-		SpellDesc buffSpell = BuffSpell.create(1);
-		buffSpell.setTarget(EntityReference.SELF);
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, 1, 0);
 		SpellTrigger trigger = new SpellTrigger(new MinionWithDeathRattleSummonedTrigger(), buffSpell);
 		undertaker.setSpellTrigger(trigger);
 		return undertaker;

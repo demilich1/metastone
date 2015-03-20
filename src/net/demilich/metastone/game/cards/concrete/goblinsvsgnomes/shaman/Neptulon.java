@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.shaman;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -30,7 +30,7 @@ public class Neptulon extends MinionCard {
 	public Minion summon() {
 		Minion neptulon = createMinion();
 		SpellDesc murlocs = ReceiveRandomRaceCardSpell.create(Race.MURLOC, 4);
-		Battlecry battlecry = Battlecry.createBattlecry(murlocs);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(murlocs);
 		neptulon.setBattlecry(battlecry);
 		return neptulon;
 	}

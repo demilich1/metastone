@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.cards.concrete.druid;
 
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.ChooseBattlecryCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.concrete.tokens.druid.BearForm;
@@ -29,17 +29,15 @@ public class DruidOfTheClaw extends ChooseBattlecryCard {
 	}
 
 	@Override
-	protected Battlecry getBattlecry1() {
-		SpellDesc transformSpell = TransformMinionSpell.create(new CatForm());
-		transformSpell.setTarget(EntityReference.SELF);
-		return Battlecry.createBattlecry(transformSpell);
+	protected BattlecryAction getBattlecry1() {
+		SpellDesc transformSpell = TransformMinionSpell.create(EntityReference.SELF, new CatForm(), false);
+		return BattlecryAction.createBattlecry(transformSpell);
 	}
 
 	@Override
-	protected Battlecry getBattlecry2() {
-		SpellDesc transformSpell = TransformMinionSpell.create(new BearForm());
-		transformSpell.setTarget(EntityReference.SELF);
-		return Battlecry.createBattlecry(transformSpell);
+	protected BattlecryAction getBattlecry2() {
+		SpellDesc transformSpell = TransformMinionSpell.create(EntityReference.SELF, new BearForm(), false);
+		return BattlecryAction.createBattlecry(transformSpell);
 	}
 
 	@Override

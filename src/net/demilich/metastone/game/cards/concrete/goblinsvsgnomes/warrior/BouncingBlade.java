@@ -4,7 +4,6 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.custom.BouncingBladeSpell;
-import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class BouncingBlade extends SpellCard {
@@ -14,7 +13,6 @@ public class BouncingBlade extends SpellCard {
 		setDescription("Deals $1 damage to a random minion. Repeat until a minion dies.");
 		
 		setSpell(BouncingBladeSpell.create());
-		setPredefinedTarget(EntityReference.ALL_MINIONS);
 		setTargetRequirement(TargetSelection.NONE);
 	}
 

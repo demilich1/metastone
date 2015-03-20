@@ -17,21 +17,14 @@ public class Sabotage extends SpellCard {
 		super("Sabotage", Rarity.EPIC, HeroClass.ROGUE, 4);
 		setDescription("Destroy a random enemy minion. Combo: And your opponent's weapon.");
 		
-		SpellDesc destroyMinionSpell = DestroySpell.create();
-		destroyMinionSpell.setTarget(EntityReference.ENEMY_MINIONS);
-		destroyMinionSpell.pickRandomTarget(true);
+		SpellDesc destroyMinionSpell = DestroySpell.create(EntityReference.ENEMY_MINIONS, true);
 		
-		SpellDesc destroyWeaponSpell = DestroyWeaponSpell.create(); 
-		destroyWeaponSpell.setTarget(EntityReference.ENEMY_HERO);
+		SpellDesc destroyWeaponSpell = DestroyWeaponSpell.create(EntityReference.ENEMY_HERO); 
 		
-		SpellDesc comboSpell = MetaSpell.create(destroyMinionSpell, destroyWeaponSpell);
-		comboSpell.setTarget(EntityReference.NONE);
-		
+		SpellDesc comboSpell = MetaSpell.create(EntityReference.NONE, destroyMinionSpell, destroyWeaponSpell);
 		setSpell(ComboSpell.create(destroyMinionSpell, comboSpell));
 		setTargetRequirement(TargetSelection.NONE);
 	}
-
-
 
 	@Override
 	public int getTypeId() {

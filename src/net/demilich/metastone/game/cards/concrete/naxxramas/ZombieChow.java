@@ -23,8 +23,7 @@ public class ZombieChow extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion zombieChow = createMinion();
-		SpellDesc healEnemyHero = HealingSpell.create(5);
-		healEnemyHero.setTarget(EntityReference.ENEMY_HERO);
+		SpellDesc healEnemyHero = HealingSpell.create(EntityReference.ENEMY_HERO, 5);
 		zombieChow.addDeathrattle(healEnemyHero);
 		return zombieChow;
 	}

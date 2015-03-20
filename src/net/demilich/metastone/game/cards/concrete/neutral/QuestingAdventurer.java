@@ -26,8 +26,7 @@ public class QuestingAdventurer extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion questingAdventurer = createMinion();
-		SpellDesc buffSpell = BuffSpell.create(1, 1);
-		buffSpell.setTarget(EntityReference.SELF);
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, 1, 1);
 		SpellTrigger trigger = new SpellTrigger(new CardPlayedTrigger(TargetPlayer.SELF), buffSpell);
 		questingAdventurer.setSpellTrigger(trigger);
 		return questingAdventurer;

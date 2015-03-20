@@ -1,5 +1,7 @@
 package net.demilich.metastone.game.spells;
 
+import java.util.Map;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
@@ -15,27 +17,27 @@ import org.slf4j.LoggerFactory;
 public class CopyCardSpell extends Spell {
 
 	public static SpellDesc create(CardLocation cardLocation, int numberOfCardsToCopy) {
-		SpellDesc desc = new SpellDesc(CopyCardSpell.class);
-		desc.set(SpellArg.CARD_LOCATION, cardLocation);
-		desc.set(SpellArg.NUMBER_OF_CARDS, numberOfCardsToCopy);
-		return desc;
+		Map<SpellArg, Object> arguments = SpellDesc.build(CopyCardSpell.class);
+		arguments.put(SpellArg.CARD_LOCATION, cardLocation);
+		arguments.put(SpellArg.VALUE, numberOfCardsToCopy);
+		return new SpellDesc(arguments);
 	}
 	
 	private static Logger logger = LoggerFactory.getLogger(CopyCardSpell.class);
 
 	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		CardLocation cardLocation = (CardLocation) desc.get(SpellArg.CARD_LOCATION);
-		int numberOfCardsToCopy = desc.getInt(SpellArg.NUMBER_OF_CARDS);
+		int numberOfCardsToCopy = desc.getInt(SpellArg.VALUE);
 		
 		Player opponent = context.getOpponent(player);
-		CardCollection source = null;
+		CardCollection sourceCollection = null;
 		switch (cardLocation) {
 		case DECK:
-			source = opponent.getDeck();
+			sourceCollection = opponent.getDeck();
 			break;
 		case HAND:
-			source = opponent.getHand();
+			sourceCollection = opponent.getHand();
 			break;
 		default:
 			logger.error("Trying to copy cards from invalid cardLocation {}", cardLocation);
@@ -43,10 +45,10 @@ public class CopyCardSpell extends Spell {
 		}
 
 		for (int i = 0; i < numberOfCardsToCopy; i++) {
-			if (source.isEmpty()) {
+			if (sourceCollection.isEmpty()) {
 				return;
 			}
-			Card clone = source.getRandom().clone();
+			Card clone = sourceCollection.getRandom().clone();
 			context.getLogic().receiveCard(player.getId(), clone);
 		}
 	}

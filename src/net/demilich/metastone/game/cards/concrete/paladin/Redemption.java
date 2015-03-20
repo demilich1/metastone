@@ -15,8 +15,7 @@ public class Redemption extends SecretCard {
 		super("Redemption", Rarity.COMMON, HeroClass.PALADIN, 1);
 		setDescription("Secret: When one of your minions dies, return it to life with 1 Health.");
 		
-		SpellDesc reviveSpell = ReviveMinionSpell.create(1);
-		reviveSpell.setTarget(EntityReference.KILLED_MINION);
+		SpellDesc reviveSpell = ReviveMinionSpell.create(EntityReference.KILLED_MINION, 1);
 		setTriggerAndEffect(new MinionDeathTrigger(TargetPlayer.SELF), reviveSpell);
 	}
 

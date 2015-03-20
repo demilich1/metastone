@@ -14,13 +14,11 @@ public class FeignDeath extends SpellCard {
 		super("Feign Death", Rarity.EPIC, HeroClass.HUNTER, 2);
 		setDescription("Trigger all Deathrattles on your minions.");
 
-		SpellDesc triggerDeathrattles = TriggerDeathrattleSpell.create();
-		triggerDeathrattles.setTarget(EntityReference.FRIENDLY_MINIONS);
+		SpellDesc triggerDeathrattles = TriggerDeathrattleSpell.create(EntityReference.FRIENDLY_MINIONS);
 		setSpell(triggerDeathrattles);
 
 		setTargetRequirement(TargetSelection.NONE);
 	}
-
 
 
 	@Override

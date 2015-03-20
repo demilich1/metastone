@@ -16,8 +16,7 @@ public class LightningStorm extends SpellCard {
 		setDescription("Deal 2-3 damage to all enemy minions. Overload: (2)");
 		setTag(GameTag.OVERLOAD, 2);
 
-		SpellDesc lightningStorm = MinMaxDamageSpell.create(2, 3);
-		lightningStorm.setTarget(EntityReference.ENEMY_MINIONS);
+		SpellDesc lightningStorm = MinMaxDamageSpell.create(EntityReference.ENEMY_MINIONS, 2, 3, false);
 		setSpell(lightningStorm);
 		setTargetRequirement(TargetSelection.NONE);
 	}

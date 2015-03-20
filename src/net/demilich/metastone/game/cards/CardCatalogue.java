@@ -1,6 +1,8 @@
 package net.demilich.metastone.game.cards;
 
 import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.cards.concrete.blackrockmountain.DragonEgg;
+import net.demilich.metastone.game.cards.concrete.blackrockmountain.DragonkinSorcerer;
 import net.demilich.metastone.game.cards.concrete.druid.AncientOfLore;
 import net.demilich.metastone.game.cards.concrete.druid.AncientOfWar;
 import net.demilich.metastone.game.cards.concrete.druid.Bite;
@@ -527,6 +529,8 @@ public class CardCatalogue {
 	private final static CardCollection cards = new CardCollection();
 
 	static {
+		cards.add(new DragonkinSorcerer());
+		cards.add(new DragonEgg());
 		cards.add(new AncientOfLore());
 		cards.add(new AncientOfWar());
 		cards.add(new Bite());

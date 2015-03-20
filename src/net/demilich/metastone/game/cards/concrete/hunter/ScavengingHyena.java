@@ -28,8 +28,7 @@ public class ScavengingHyena extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion scavengingHyena = createMinion();
-		SpellDesc buff = BuffSpell.create(2, 1);
-		buff.setTarget(EntityReference.SELF);
+		SpellDesc buff = BuffSpell.create(EntityReference.SELF, 2, 1);
 		SpellTrigger trigger = new SpellTrigger(new MinionDeathTrigger(TargetPlayer.SELF, Race.BEAST), buff);
 		scavengingHyena.setSpellTrigger(trigger);
 		return scavengingHyena;

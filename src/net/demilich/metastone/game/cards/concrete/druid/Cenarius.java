@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.druid;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.ChooseBattlecryCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.concrete.tokens.druid.Treant;
@@ -32,17 +32,16 @@ public class Cenarius extends ChooseBattlecryCard {
 	}
 
 	@Override
-	protected Battlecry getBattlecry1() {
-		SpellDesc buffSpell = BuffSpell.create(2, 2);
-		buffSpell.setTarget(EntityReference.FRIENDLY_MINIONS);
-		return Battlecry.createBattlecry(buffSpell);
+	protected BattlecryAction getBattlecry1() {
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.FRIENDLY_MINIONS, 2, 2);
+		return BattlecryAction.createBattlecry(buffSpell);
 	}
 
 	@Override
-	protected Battlecry getBattlecry2() {
+	protected BattlecryAction getBattlecry2() {
 		SpellDesc summonSpell1 = SummonSpell.create(RelativeToSource.LEFT, new Treant(GameTag.TAUNT));
 		SpellDesc summonSpell2 = SummonSpell.create(RelativeToSource.RIGHT, new Treant(GameTag.TAUNT));
-		Battlecry battlecry = Battlecry.createBattlecry(MetaSpell.create(summonSpell1, summonSpell2));
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(MetaSpell.create(summonSpell1, summonSpell2));
 		battlecry.setResolvedLate(true);
 		return battlecry;
 	}

@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.neutral;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -29,10 +29,8 @@ public class ColdlightSeer extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion coldlightSeer = createMinion();
-		SpellDesc murlocBuffSpell = BuffSpell.create(0, 2);
-		murlocBuffSpell.setTargetFilter(new RaceFilter(Race.MURLOC));
-		murlocBuffSpell.setTarget(EntityReference.ALL_MINIONS);
-		Battlecry battlecry = Battlecry.createBattlecry(murlocBuffSpell);
+		SpellDesc murlocBuffSpell = BuffSpell.create(EntityReference.ALL_MINIONS, 0, 2, new RaceFilter(Race.MURLOC), false);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(murlocBuffSpell);
 		coldlightSeer.setBattlecry(battlecry);
 		return coldlightSeer;
 	}

@@ -87,7 +87,7 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 	}
 
 	protected void onFire(int ownerId, SpellDesc spell, GameEvent event) {
-		event.getGameContext().getLogic().castSpell(ownerId, spell);
+		event.getGameContext().getLogic().castSpell(ownerId, spell, hostReference, null);
 	}
 
 	@Override
@@ -103,7 +103,6 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 					expired = true;
 				}
 
-				spell.setSourceEntity(hostReference);
 				event.getGameContext().getEnvironment().put(Environment.EVENT_TARGET, event.getEventTarget());
 				onFire(ownerId, spell, event);
 				event.getGameContext().getEnvironment().remove(Environment.EVENT_TARGET);
@@ -122,7 +121,6 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 	@Override
 	public void setHost(Entity host) {
 		this.hostReference = host.getReference();
-		spell.setSourceEntity(hostReference);
 	}
 
 	protected void setLayer(TriggerLayer layer) {

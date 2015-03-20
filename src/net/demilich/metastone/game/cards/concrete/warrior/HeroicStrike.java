@@ -13,8 +13,7 @@ public class HeroicStrike extends SpellCard {
 		super("Heroic Strike", Rarity.FREE, HeroClass.WARRIOR, 2);
 		setDescription("Give your hero +4 Attack this turn.");
 		setTargetRequirement(TargetSelection.NONE);
-		setSpell(BuffHeroSpell.create(4, 0));
-		setPredefinedTarget(EntityReference.FRIENDLY_HERO);
+		setSpell(BuffHeroSpell.create(EntityReference.FRIENDLY_HERO, 4, 0));
 	}
 
 	@Override

@@ -27,9 +27,7 @@ public class ExplosiveSheep extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion explosiveSheep = createMinion();
-		
-		SpellDesc explosion = DamageSpell.create(2);
-		explosion.setTarget(EntityReference.ALL_MINIONS);
+		SpellDesc explosion = DamageSpell.create(EntityReference.ALL_MINIONS, 2);
 		explosiveSheep.addDeathrattle(explosion);
 		return explosiveSheep;
 	}

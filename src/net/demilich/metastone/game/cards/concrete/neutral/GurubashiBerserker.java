@@ -28,8 +28,7 @@ public class GurubashiBerserker extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion gurubashiBerserker = createMinion();
-		SpellDesc buffAttack = BuffSpell.create(ATTACK_BONUS);
-		buffAttack.setTarget(EntityReference.EVENT_TARGET);
+		SpellDesc buffAttack = BuffSpell.create(EntityReference.SELF, ATTACK_BONUS, 0);
 		SpellTrigger trigger = new SpellTrigger(new DamageReceivedTrigger(), buffAttack);
 		gurubashiBerserker.setSpellTrigger(trigger);
 		return gurubashiBerserker;

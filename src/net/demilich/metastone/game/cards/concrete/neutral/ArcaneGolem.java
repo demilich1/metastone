@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.neutral;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -26,9 +26,8 @@ public class ArcaneGolem extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion arcaneGolem = createMinion(GameTag.CHARGE);
-		SpellDesc giveManaSpell = ModifyMaxManaSpell.create(1, false);
-		giveManaSpell.setTargetPlayer(TargetPlayer.OPPONENT);
-		Battlecry battlecry = Battlecry.createBattlecry(giveManaSpell);
+		SpellDesc giveManaSpell = ModifyMaxManaSpell.create(TargetPlayer.OPPONENT, 1, false);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(giveManaSpell);
 		arcaneGolem.setBattlecry(battlecry);
 		return arcaneGolem;
 	}

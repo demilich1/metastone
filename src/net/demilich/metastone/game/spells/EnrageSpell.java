@@ -1,5 +1,7 @@
 package net.demilich.metastone.game.spells;
 
+import java.util.Map;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
@@ -15,15 +17,15 @@ public class EnrageSpell extends Spell {
 	}
 
 	public static SpellDesc create(int attackBonus, GameTag tag) {
-		SpellDesc desc = new SpellDesc(EnrageSpell.class);
-		desc.setValue(attackBonus);
-		desc.set(SpellArg.GAME_TAG, tag);
-		desc.setTarget(EntityReference.SELF);
-		return desc;
+		Map<SpellArg, Object> arguments = SpellDesc.build(EnrageSpell.class);
+		arguments.put(SpellArg.VALUE, attackBonus);
+		arguments.put(SpellArg.TARGET, EntityReference.SELF);
+		arguments.put(SpellArg.GAME_TAG, tag);
+		return new SpellDesc(arguments);
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int attackBonus = desc.getValue();
 		boolean enraged = target.hasStatus(GameTag.ENRAGED);
 		target.setTag(GameTag.CONDITIONAL_ATTACK_BONUS, enraged ? attackBonus : 0);

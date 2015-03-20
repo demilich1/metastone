@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.blackrockmountain;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -23,9 +23,8 @@ public class HungryDragon extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion hungryDragon = createMinion();
-		SpellDesc summonSpell = SummonRandomMinionPredicateSpell.create(card -> card.getBaseManaCost() == 1);
-		summonSpell.setTargetPlayer(TargetPlayer.OPPONENT);
-		Battlecry battlecry = Battlecry.createBattlecry(summonSpell);
+		SpellDesc summonSpell = SummonRandomMinionPredicateSpell.create(TargetPlayer.OPPONENT, card -> card.getBaseManaCost() == 1);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(summonSpell);
 		hungryDragon.setBattlecry(battlecry);
 		return hungryDragon;
 	}

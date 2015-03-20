@@ -29,13 +29,11 @@ public class FloatingWatcher extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion floatingWatcher = createMinion();
-		SpellDesc buffSpell = BuffSpell.create(+2, +2);
-		buffSpell.setTarget(EntityReference.SELF);
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, +2, +2);
 		SpellTrigger trigger = new SpellTrigger(new FloatingWatcherTrigger(), buffSpell);
 		floatingWatcher.setSpellTrigger(trigger);
 		return floatingWatcher;
 	}
-
 
 
 	private class FloatingWatcherTrigger extends HeroDamagedTrigger {

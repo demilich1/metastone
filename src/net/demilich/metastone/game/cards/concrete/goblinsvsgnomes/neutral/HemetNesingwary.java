@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.neutral;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.EntityRaceFilter;
@@ -29,7 +29,7 @@ public class HemetNesingwary extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion hemetNesingwary = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(DestroySpell.create(), TargetSelection.MINIONS);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(DestroySpell.create(), TargetSelection.MINIONS);
 		battlecry.setEntityFilter(new EntityRaceFilter(Race.BEAST));
 		hemetNesingwary.setBattlecry(battlecry);
 		return hemetNesingwary;

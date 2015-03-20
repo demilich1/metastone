@@ -17,8 +17,7 @@ public class SoulOfTheForest extends SpellCard {
 		setDescription("Give your minions \"Deathrattle: Summon a 2/2 Treant.\"");
 
 		SpellDesc summonSpell = SummonSpell.create(new Treant());
-		SpellDesc addDeathrattleSpell = AddDeathrattleSpell.create(summonSpell);
-		addDeathrattleSpell.setTarget(EntityReference.FRIENDLY_MINIONS);
+		SpellDesc addDeathrattleSpell = AddDeathrattleSpell.create(EntityReference.FRIENDLY_MINIONS, summonSpell);
 		setSpell(addDeathrattleSpell);
 
 		setTargetRequirement(TargetSelection.NONE);

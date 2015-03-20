@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.neutral;
 
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -25,10 +25,8 @@ public class BombLobber extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion bombLobber = createMinion();
-		SpellDesc damageRandom = DamageSpell.create(4);
-		damageRandom.setTarget(EntityReference.ENEMY_MINIONS);
-		damageRandom.pickRandomTarget(true);
-		Battlecry battlecry = Battlecry.createBattlecry(damageRandom);
+		SpellDesc damageRandom = DamageSpell.create(EntityReference.ENEMY_MINIONS, 4, true);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(damageRandom);
 		battlecry.setCondition((context, player) -> {
 			Player opponent = context.getOpponent(player);
 			return context.getMinionCount(opponent) > 0;

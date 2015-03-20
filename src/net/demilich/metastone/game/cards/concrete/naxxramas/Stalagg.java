@@ -9,7 +9,6 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.IfXDiedSummonYSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.targeting.EntityReference;
 
 public class Stalagg extends MinionCard {
 
@@ -28,7 +27,6 @@ public class Stalagg extends MinionCard {
 		Minion stalagg = createMinion();
 		stalagg.setTag(GameTag.UNIQUE_ENTITY, UniqueEntity.STALAGG);
 		SpellDesc deathrattle = IfXDiedSummonYSpell.create(UniqueEntity.FEUGEN, new Thaddius());
-		deathrattle.setTarget(EntityReference.NONE);
 		stalagg.addDeathrattle(deathrattle);
 		return stalagg;
 	}

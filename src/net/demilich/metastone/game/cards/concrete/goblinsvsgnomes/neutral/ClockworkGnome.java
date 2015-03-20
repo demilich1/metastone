@@ -8,7 +8,6 @@ import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.custom.ReceiveSparePartSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.targeting.EntityReference;
 
 public class ClockworkGnome extends MinionCard {
 
@@ -24,12 +23,10 @@ public class ClockworkGnome extends MinionCard {
 	}
 
 
-
 	@Override
 	public Minion summon() {
 		Minion clockworkGnome = createMinion();
 		SpellDesc deathrattle = ReceiveSparePartSpell.create(TargetPlayer.SELF);
-		deathrattle.setTarget(EntityReference.NONE);
 		clockworkGnome.addDeathrattle(deathrattle);
 		return clockworkGnome;
 	}

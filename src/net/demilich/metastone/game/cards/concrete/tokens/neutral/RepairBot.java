@@ -29,8 +29,7 @@ public class RepairBot extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion repairBot = createMinion();
-		SpellDesc healRandomSpell = HealingSpell.createWithRandomTarget(6);
-		healRandomSpell.setTarget(EntityReference.ALL_CHARACTERS);
+		SpellDesc healRandomSpell = HealingSpell.create(EntityReference.ALL_CHARACTERS, 6, true);
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), healRandomSpell);
 		repairBot.setSpellTrigger(trigger);
 		return repairBot;

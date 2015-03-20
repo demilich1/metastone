@@ -25,12 +25,11 @@ public class UnboundElemental extends MinionCard {
 	public int getTypeId() {
 		return 331;
 	}
-	
+
 	@Override
 	public Minion summon() {
-		Minion unboundElemental =createMinion();
-		SpellDesc buffSpell = BuffSpell.create(1, 1);
-		buffSpell.setTarget(EntityReference.SELF);
+		Minion unboundElemental = createMinion();
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, 1, 1);
 		SpellTrigger trigger = new SpellTrigger(new OverloadTrigger(), buffSpell);
 		unboundElemental.setSpellTrigger(trigger);
 		return unboundElemental;
@@ -48,6 +47,6 @@ public class UnboundElemental extends MinionCard {
 		public GameEventType interestedIn() {
 			return GameEventType.OVERLOAD;
 		}
-		
+
 	}
 }

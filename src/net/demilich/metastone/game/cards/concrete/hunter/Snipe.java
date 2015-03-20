@@ -14,8 +14,7 @@ public class Snipe extends SecretCard {
 		super("Snipe", Rarity.COMMON, HeroClass.HUNTER, 2);
 		setDescription("Secret: When your opponent plays a minion, deal $4 damage to it.");
 		
-		SpellDesc damageSpell = DamageSpell.create(4);
-		damageSpell.setTarget(EntityReference.EVENT_TARGET);
+		SpellDesc damageSpell = DamageSpell.create(EntityReference.EVENT_TARGET, 4);
 		setTriggerAndEffect(new MinionCardPlayedTrigger(), damageSpell);
 	}
 

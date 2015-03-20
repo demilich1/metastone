@@ -26,8 +26,7 @@ public class TheBeast extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion theBeast = createMinion();
-		SpellDesc deathrattle = SummonSpell.create(new FinkleEinhorn());
-		deathrattle.setTargetPlayer(TargetPlayer.OPPONENT);
+		SpellDesc deathrattle = SummonSpell.create(TargetPlayer.OPPONENT, new FinkleEinhorn());
 		theBeast.addDeathrattle(deathrattle);
 		return theBeast;
 	}

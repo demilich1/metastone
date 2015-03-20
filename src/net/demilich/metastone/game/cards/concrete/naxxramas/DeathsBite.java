@@ -23,8 +23,7 @@ public class DeathsBite extends WeaponCard {
 	@Override
 	public Weapon getWeapon() {
 		Weapon deathsBite = createWeapon(4, 2);
-		SpellDesc deathrattle = DamageSpell.create(1);
-		deathrattle.setTarget(EntityReference.ALL_MINIONS);
+		SpellDesc deathrattle = DamageSpell.create(EntityReference.ALL_MINIONS, 1);
 		deathsBite.addDeathrattle(deathrattle);
 		return deathsBite;
 	}

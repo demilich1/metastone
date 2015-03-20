@@ -3,7 +3,7 @@ package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.neutral;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.Entity;
@@ -46,9 +46,8 @@ public class LilExorcist extends MinionCard {
 				return deathrattleCount;
 			}
 		};
-		SpellDesc buffSpell = BuffSpell.create(valueProvider, valueProvider);
-		buffSpell.setTarget(EntityReference.SELF);
-		Battlecry battlecry = Battlecry.createBattlecry(buffSpell);
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, valueProvider, valueProvider);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(buffSpell);
 		lilExorcist.setBattlecry(battlecry);
 		return lilExorcist;
 	}

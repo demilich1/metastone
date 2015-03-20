@@ -1,32 +1,48 @@
 package net.demilich.metastone.game.spells;
 
+import java.util.Map;
+import java.util.function.Predicate;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.targeting.EntityReference;
 
 public class HealingSpell extends Spell {
 
 	public static SpellDesc create(int healing) {
-		SpellDesc desc = new SpellDesc(HealingSpell.class);
-		desc.set(SpellArg.HEALING, healing);
-		return desc;
+		return create(null, healing);
+	}
+	
+	public static SpellDesc create(EntityReference target, int healing) {
+		return create(target, healing, false);
 	}
 
-	public static SpellDesc createWithRandomTarget(int healing) {
-		SpellDesc desc = new SpellDesc(HealingSpell.class);
-		desc.set(SpellArg.HEALING, healing);
-		desc.set(SpellArg.RANDOM_TARGET, true);
-		desc.setTargetFilter(entity -> ((Actor) entity).isWounded());
-		return desc;
+	public static SpellDesc create(EntityReference target, int healing, boolean randomTarget) {
+		Map<SpellArg, Object> arguments = SpellDesc.build(HealingSpell.class);
+		arguments.put(SpellArg.VALUE, healing);
+		arguments.put(SpellArg.TARGET, target);
+		if (randomTarget) {
+			arguments.put(SpellArg.RANDOM_TARGET, true);
+			arguments.put(SpellArg.ENTITY_FILTER, new Predicate<Entity>() {
+
+				@Override
+				public boolean test(Entity entity) {
+					return ((Actor) entity).isWounded();
+				}
+
+			});
+
+		}
+		return new SpellDesc(arguments);
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
-		int healing = desc.getInt(SpellArg.HEALING);
-		Entity source = context.resolveSingleTarget(desc.getSourceEntity());
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
+		int healing = desc.getInt(SpellArg.VALUE);
 		context.getLogic().heal(player, (Actor) target, healing, source);
 	}
 

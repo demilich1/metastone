@@ -25,8 +25,7 @@ public class Doomsayer extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion doomsayer = createMinion();
-		SpellDesc endOfWorldSpell = DestroySpell.create();
-		endOfWorldSpell.setTarget(EntityReference.ALL_MINIONS);
+		SpellDesc endOfWorldSpell = DestroySpell.create(EntityReference.ALL_MINIONS);
 		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), endOfWorldSpell);
 		doomsayer.setSpellTrigger(trigger);
 		return doomsayer;

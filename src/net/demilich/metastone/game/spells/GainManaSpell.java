@@ -1,8 +1,11 @@
 package net.demilich.metastone.game.spells;
 
+import java.util.Map;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
@@ -12,16 +15,16 @@ import org.slf4j.LoggerFactory;
 public class GainManaSpell extends Spell {
 
 	public static SpellDesc create(int mana) {
-		SpellDesc desc = new SpellDesc(GainManaSpell.class);
-		desc.setValue(mana);
-		desc.setTarget(EntityReference.NONE);
-		return desc;
+		Map<SpellArg, Object> arguments = SpellDesc.build(GainManaSpell.class);
+		arguments.put(SpellArg.VALUE, mana);
+		arguments.put(SpellArg.TARGET, EntityReference.NONE);
+		return new SpellDesc(arguments);
 	}
 
 	private static Logger logger = LoggerFactory.getLogger(GainManaSpell.class);
 
 	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int mana = desc.getValue();
 		logger.debug("{} gains {} mana", player.getName(), mana);
 		context.getLogic().modifyCurrentMana(player.getId(), mana);

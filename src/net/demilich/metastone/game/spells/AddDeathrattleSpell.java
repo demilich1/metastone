@@ -1,22 +1,30 @@
 package net.demilich.metastone.game.spells;
 
+import java.util.Map;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.targeting.EntityReference;
 
 public class AddDeathrattleSpell extends Spell {
 	
 	public static SpellDesc create(SpellDesc deathrattle) {
-		SpellDesc desc = new SpellDesc(AddDeathrattleSpell.class);
-		desc.set(SpellArg.DEATHRATTLE, deathrattle);
-		return desc;
+		return create(null, deathrattle);
+	}
+	
+	public static SpellDesc create(EntityReference target, SpellDesc deathrattle) {
+		Map<SpellArg, Object> arguments = SpellDesc.build(AddDeathrattleSpell.class);
+		arguments.put(SpellArg.DEATHRATTLE, deathrattle);
+		arguments.put(SpellArg.TARGET, target);
+		return new SpellDesc(arguments);
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Actor minion = (Actor) target;
 		SpellDesc deathrattle = (SpellDesc) desc.get(SpellArg.DEATHRATTLE);
 		minion.addDeathrattle(deathrattle);

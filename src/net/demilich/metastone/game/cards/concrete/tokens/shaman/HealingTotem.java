@@ -32,8 +32,7 @@ public class HealingTotem extends MinionCard {
 	public Minion summon() {
 		Minion healingTotem = createMinion();
 		healingTotem.setTag(GameTag.UNIQUE_ENTITY, UniqueEntity.HEALING_TOTEM);
-		SpellDesc healSpell = HealingSpell.create(1);
-		healSpell.setTarget(EntityReference.FRIENDLY_MINIONS);
+		SpellDesc healSpell = HealingSpell.create(EntityReference.FRIENDLY_MINIONS, 1);
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), healSpell);
 		healingTotem.setSpellTrigger(trigger);
 		return healingTotem;

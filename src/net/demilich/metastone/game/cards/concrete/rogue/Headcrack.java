@@ -17,8 +17,7 @@ public class Headcrack extends SpellCard {
 		super("Headcrack", Rarity.RARE, HeroClass.ROGUE, 2);
 		setDescription("Deal $2 damage to the enemy hero. Combo: Return this to your hand next turn.");
 
-		SpellDesc noComboSpell = DamageSpell.create(2);
-		noComboSpell.setTarget(EntityReference.ENEMY_HERO);
+		SpellDesc noComboSpell = DamageSpell.create(EntityReference.ENEMY_HERO, 2);
 		SpellDesc comboSpell = ReceiveCardSpell.create(this);
 		SpellDesc headCrack = ConditionalEffectSpell.create(noComboSpell, comboSpell, (context, player, target) -> player.getHero().hasStatus(GameTag.COMBO));
 		setSpell(headCrack);

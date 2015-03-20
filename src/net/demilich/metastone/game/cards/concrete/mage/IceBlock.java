@@ -16,8 +16,7 @@ public class IceBlock extends SecretCard {
 		super("Ice Block", Rarity.EPIC, HeroClass.MAGE, 3);
 		setDescription("Secret: When your hero takes fatal damage, prevent it and become Immune this turn.");
 		
-		SpellDesc iceBlockSpell = ApplyTagSpell.create(GameTag.IMMUNE, new TurnStartTrigger());
-		iceBlockSpell.setTarget(EntityReference.FRIENDLY_HERO);
+		SpellDesc iceBlockSpell = ApplyTagSpell.create(EntityReference.FRIENDLY_HERO, GameTag.IMMUNE, new TurnStartTrigger());
 		setTriggerAndEffect(new HeroFatalDamageTrigger(), iceBlockSpell);
 	}
 

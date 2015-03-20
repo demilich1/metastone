@@ -31,9 +31,8 @@ public class HomingChicken extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion homingChicken = createMinion();
-		SpellDesc destroySpell = DestroySpell.create();
-		destroySpell.setTarget(EntityReference.SELF);
-		SpellDesc homingChickenSpell = MetaSpell.create(DrawCardSpell.create(3), destroySpell);
+		SpellDesc destroySpell = DestroySpell.create(EntityReference.SELF);
+		SpellDesc homingChickenSpell = MetaSpell.create(EntityReference.NONE, DrawCardSpell.create(3), destroySpell);
 		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), homingChickenSpell, true);
 		homingChicken.setSpellTrigger(trigger);
 		return homingChicken;

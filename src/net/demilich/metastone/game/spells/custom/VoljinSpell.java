@@ -1,5 +1,7 @@
 package net.demilich.metastone.game.spells.custom;
 
+import java.util.Map;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
@@ -7,17 +9,18 @@ import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.Spell;
+import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
 public class VoljinSpell extends Spell {
 
 	public static SpellDesc create() {
-		SpellDesc desc = new SpellDesc(VoljinSpell.class);
-		return desc;
+		Map<SpellArg, Object> arguments = SpellDesc.build(VoljinSpell.class);
+		return new SpellDesc(arguments);
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Minion voljin = context.getSummonStack().peek();
 		Actor targetActor = (Actor) target;
 		int sourceHp = voljin.getHp();

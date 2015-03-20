@@ -13,7 +13,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.ActionType;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCollection;
@@ -195,13 +195,13 @@ public class GameLogic implements Cloneable {
 		return minionsInPlay < MAX_MINIONS;
 	}
 
-	public void castSpell(int playerId, SpellDesc spellDesc) {
+	public void castSpell(int playerId, SpellDesc spellDesc, EntityReference sourceReference, EntityReference targetReference) {
 		lastSpell = spellDesc;
 		Player player = context.getPlayer(playerId);
 		Entity source = null;
-		if (spellDesc.getSourceEntity() != null) {
+		if (sourceReference != null) {
 			try {
-				source = context.resolveSingleTarget(spellDesc.getSourceEntity());
+				source = context.resolveSingleTarget(sourceReference);
 			} catch (Exception e) {
 				e.printStackTrace();
 				logger.error("Error resolving source entity while casting spell: " + spellDesc);
@@ -209,7 +209,8 @@ public class GameLogic implements Cloneable {
 
 		}
 		SpellCard spellCard = null;
-		List<Entity> targets = targetLogic.resolveTargetKey(context, player, source, spellDesc.getTarget());
+		EntityReference spellTarget = spellDesc.hasPredefinedTarget() ? spellDesc.getTarget() : targetReference;
+		List<Entity> targets = targetLogic.resolveTargetKey(context, player, source, spellTarget);
 		// target can only be changed when there is one target
 		// note: this code block is basically exclusively for the SpellBender
 		// Secret, but it can easily be expanded if targets of area of effect
@@ -222,12 +223,13 @@ public class GameLogic implements Cloneable {
 			}
 
 			if (spellCard != null && spellCard.getTargetRequirement() != TargetSelection.NONE) {
-				context.fireGameEvent(new TargetAcquisitionEvent(context, ActionType.SPELL, spellCard, targets.get(0)), TriggerLayer.SECRET);
+				GameEvent spellTargetEvent = new TargetAcquisitionEvent(context, ActionType.SPELL, spellCard, targets.get(0));
+				context.fireGameEvent(spellTargetEvent, TriggerLayer.SECRET);
+				context.fireGameEvent(spellTargetEvent);
 				Entity targetOverride = (Entity) context.getEnvironment().get(Environment.TARGET_OVERRIDE);
 				if (targetOverride != null && targetOverride.getId() != IdFactory.UNASSIGNED) {
 					targets.remove(0);
 					targets.add(targetOverride);
-					spellDesc.setTarget(targets.get(0).getReference());
 					log("Target for spell {} has been changed! New target {}", spellCard, targets.get(0));
 				}
 			}
@@ -235,7 +237,7 @@ public class GameLogic implements Cloneable {
 		}
 		try {
 			Spell spell = spellFactory.getSpell(spellDesc);
-			spell.cast(context, player, spellDesc, targets);
+			spell.cast(context, player, spellDesc, source, targets);
 		} catch (Exception e) {
 			Card pendingCard = (Card) context.getEnvironment().get(Environment.PENDING_CARD);
 			if (pendingCard instanceof SpellCard) {
@@ -926,14 +928,14 @@ public class GameLogic implements Cloneable {
 			player.getHero().modifyTag(GameTag.OVERLOAD, card.getTagValue(GameTag.OVERLOAD));
 		}
 	}
-
+	
 	public void playSecret(Player player, Secret secret) {
 		log("{} has a new secret activated: {}", player.getName(), secret.getSource());
 		addGameEventListener(player, secret, player.getHero());
 		player.getSecrets().add(secret.getSource().getTypeId());
 		context.fireGameEvent(new SecretPlayedEvent(context, (SecretCard) secret.getSource()));
 	}
-
+	
 	/**
 	 * 
 	 * @param max
@@ -1038,7 +1040,7 @@ public class GameLogic implements Cloneable {
 	}
 
 	private void resolveBattlecry(int playerId, Actor actor) {
-		Battlecry battlecry = actor.getBattlecry();
+		BattlecryAction battlecry = actor.getBattlecry();
 		Player player = context.getPlayer(playerId);
 		if (!battlecry.canBeExecuted(context, player)) {
 			return;
@@ -1078,12 +1080,12 @@ public class GameLogic implements Cloneable {
 			player.getMinions().indexOf(actor);
 		}
 		boolean doubleDeathrattles = hasTag(player, GameTag.DOUBLE_DEATHRATTLES);
-		for (SpellDesc deathrattle : actor.getDeathrattles()) {
-			deathrattle.set(SpellArg.BOARD_POSITION_ABSOLUTE, boardPosition);
-			deathrattle.setSourceEntity(actor.getReference());
-			castSpell(player.getId(), deathrattle);
+		EntityReference sourceRefenrence = actor.getReference();
+		for (SpellDesc deathrattleTemplate : actor.getDeathrattles()) {
+			SpellDesc deathrattle = deathrattleTemplate.addArg(SpellArg.BOARD_POSITION_ABSOLUTE, boardPosition);
+			castSpell(player.getId(), deathrattle, sourceRefenrence, EntityReference.NONE);
 			if (doubleDeathrattles) {
-				castSpell(player.getId(), deathrattle);
+				castSpell(player.getId(), deathrattle, sourceRefenrence, EntityReference.NONE);
 			}
 		}
 	}

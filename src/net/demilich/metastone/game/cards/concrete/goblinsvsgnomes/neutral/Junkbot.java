@@ -30,8 +30,7 @@ public class Junkbot extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion junkbot = createMinion();
-		SpellDesc buff = BuffSpell.create(2, 2);
-		buff.setTarget(EntityReference.SELF);
+		SpellDesc buff = BuffSpell.create(EntityReference.SELF, 2, 2);
 		SpellTrigger trigger = new SpellTrigger(new MinionDeathTrigger(TargetPlayer.SELF, Race.MECH), buff);
 		junkbot.setSpellTrigger(trigger);
 		return junkbot;

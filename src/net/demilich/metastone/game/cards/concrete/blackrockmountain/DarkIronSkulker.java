@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.blackrockmountain;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.Actor;
@@ -22,10 +22,8 @@ public class DarkIronSkulker extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion darkIronSkulker = createMinion();
-		SpellDesc aoeBackstab = DamageSpell.create(2);
-		aoeBackstab.setTarget(EntityReference.ENEMY_MINIONS);
-		aoeBackstab.setTargetFilter(entity -> !((Actor)entity).isWounded());
-		Battlecry battlecry = Battlecry.createBattlecry(aoeBackstab);
+		SpellDesc aoeBackstab = DamageSpell.create(EntityReference.ENEMY_MINIONS, 2, entity -> !((Actor)entity).isWounded(), false);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(aoeBackstab);
 		darkIronSkulker.setBattlecry(battlecry);
 		return darkIronSkulker;
 	}

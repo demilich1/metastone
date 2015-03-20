@@ -27,8 +27,8 @@ public class CogmastersWrench extends WeaponCard {
 	@Override
 	public Weapon getWeapon() {
 		Weapon cogmastersWrench = createWeapon(1, 3);
-		SpellDesc buffAttack = ConditionalAttackBonusSpell.create((context, player, target) -> SpellUtils.hasMinionOfRace(player, Race.MECH) ? +2 : 0);
-		buffAttack.setTarget(EntityReference.SELF);
+		SpellDesc buffAttack = ConditionalAttackBonusSpell.create(EntityReference.SELF,
+				(context, player, target) -> SpellUtils.hasMinionOfRace(player, Race.MECH) ? +2 : 0);
 		SpellTrigger trigger = new SpellTrigger(new BoardChangedTrigger(), buffAttack);
 		cogmastersWrench.setSpellTrigger(trigger);
 		return cogmastersWrench;

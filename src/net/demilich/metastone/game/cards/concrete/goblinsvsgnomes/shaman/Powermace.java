@@ -25,10 +25,7 @@ public class Powermace extends WeaponCard {
 	@Override
 	public Weapon getWeapon() {
 		Weapon powermace = createWeapon(3, 2);
-		SpellDesc buffMech = BuffSpell.create(+2, +2);
-		buffMech.setTarget(EntityReference.FRIENDLY_MINIONS);
-		buffMech.setTargetFilter(new RaceFilter(Race.MECH));
-		buffMech.pickRandomTarget(true);
+		SpellDesc buffMech = BuffSpell.create(EntityReference.FRIENDLY_MINIONS, +2, +2, new RaceFilter(Race.MECH), true);
 		powermace.addDeathrattle(buffMech);
 		return powermace;
 	}

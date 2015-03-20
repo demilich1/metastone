@@ -2,6 +2,7 @@ package net.demilich.metastone.game.spells;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 import net.demilich.metastone.game.GameContext;
@@ -15,21 +16,20 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 public class MultiTargetDamageSpell extends DamageSpell {
 
 	public static SpellDesc create(int damage, int targets) {
-		SpellDesc desc = new SpellDesc(MultiTargetDamageSpell.class);
-		desc.set(SpellArg.DAMAGE, damage);
-		desc.set(SpellArg.ITERATIONS, targets);
-		return desc;
+		Map<SpellArg, Object> arguments = SpellDesc.build(MultiTargetDamageSpell.class);
+		arguments.put(SpellArg.VALUE, damage);
+		arguments.put(SpellArg.ITERATIONS, targets);
+		return new SpellDesc(arguments);
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
-		int damage = desc.getInt(SpellArg.DAMAGE);
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
+		int damage = desc.getValue();
 		int targets = desc.getInt(SpellArg.ITERATIONS);
 		List<Minion> validTargets = new ArrayList<>(context.getOpponent(player).getMinions());
 		for (int i = 0; i < targets; i++) {
 			int randomIndex = ThreadLocalRandom.current().nextInt(validTargets.size());
 			Actor randomTarget = validTargets.remove(randomIndex);
-			Entity source = context.resolveSingleTarget(desc.getSourceEntity());
 			context.getLogic().damage(player, randomTarget, damage, source);
 		}
 	}

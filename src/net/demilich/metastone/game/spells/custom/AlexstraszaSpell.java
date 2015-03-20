@@ -13,14 +13,13 @@ import org.slf4j.LoggerFactory;
 public class AlexstraszaSpell extends Spell {
 	
 	public static SpellDesc create() {
-		SpellDesc desc = new SpellDesc(AlexstraszaSpell.class);
-		return desc;
+		return new SpellDesc(SpellDesc.build(AlexstraszaSpell.class));
 	}
 	
 	private static final Logger logger = LoggerFactory.getLogger(AlexstraszaSpell.class);
 	
 	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Actor actor = (Actor) target;
 		actor.setHp(15);
 		logger.debug("{}'s Hp have been set to {}", actor, actor.getHp());

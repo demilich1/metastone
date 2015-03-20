@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.priest;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -31,7 +31,7 @@ public class UpgradedRepairBot extends MinionCard {
 	public Minion summon() {
 		Minion upgradedRepairBot = createMinion();
 		SpellDesc buffSpell = BuffSpell.create(0, 4);
-		Battlecry battlecry = Battlecry.createBattlecry(buffSpell, TargetSelection.FRIENDLY_MINIONS);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(buffSpell, TargetSelection.FRIENDLY_MINIONS);
 		battlecry.setEntityFilter(entity -> entity.getTag(GameTag.RACE) == Race.MECH);
 		upgradedRepairBot.setBattlecry(battlecry);
 		return upgradedRepairBot;

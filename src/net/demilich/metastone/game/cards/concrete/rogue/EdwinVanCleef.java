@@ -3,7 +3,7 @@ package net.demilich.metastone.game.cards.concrete.rogue;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.Entity;
@@ -37,9 +37,8 @@ public class EdwinVanCleef extends MinionCard {
 				return player.getHero().getTagValue(GameTag.COMBO) * 2;
 			}
 		};
-		SpellDesc buffSpell = BuffSpell.create(comboValueProvider, comboValueProvider);
-		buffSpell.setTarget(EntityReference.SELF);
-		edwinVanCleef.setBattlecry(Battlecry.createBattlecry(buffSpell));
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, comboValueProvider, comboValueProvider);
+		edwinVanCleef.setBattlecry(BattlecryAction.createBattlecry(buffSpell));
 		return edwinVanCleef;
 	}
 }

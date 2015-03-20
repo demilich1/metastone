@@ -1,5 +1,7 @@
 package net.demilich.metastone.game.spells;
 
+import java.util.Map;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
@@ -15,17 +17,17 @@ public class DiscardCardSpell extends Spell {
 	}
 
 	public static SpellDesc create(int numberOfCards) {
-		SpellDesc desc = new SpellDesc(DiscardCardSpell.class);
-		desc.set(SpellArg.NUMBER_OF_CARDS, numberOfCards);
-		desc.setTarget(EntityReference.NONE);
-		return desc;
+		Map<SpellArg, Object> arguments = SpellDesc.build(DiscardCardSpell.class);
+		arguments.put(SpellArg.VALUE, numberOfCards);
+		arguments.put(SpellArg.TARGET, EntityReference.NONE);
+		return new SpellDesc(arguments);
 	}
 
 	public static final int ALL_CARDS = -1;
 
 	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
-		int numberOfCards = desc.getInt(SpellArg.NUMBER_OF_CARDS);
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
+		int numberOfCards = desc.getInt(SpellArg.VALUE);
 		int cardCount = numberOfCards == ALL_CARDS ? player.getHand().getCount() : numberOfCards;
 
 		for (int i = 0; i < cardCount; i++) {
@@ -34,9 +36,7 @@ public class DiscardCardSpell extends Spell {
 				return;
 			}
 			context.getLogic().discardCard(player, randomHandCard);
-
 		}
-
 	}
 
 }

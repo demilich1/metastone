@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.cards.concrete.neutral;
 
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -25,7 +25,7 @@ public class Alexstrasza extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion alexstrasza = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(AlexstraszaSpell.create(), TargetSelection.HEROES);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(AlexstraszaSpell.create(), TargetSelection.HEROES);
 		alexstrasza.setBattlecry(battlecry);
 		return alexstrasza;
 	}

@@ -1,30 +1,39 @@
 package net.demilich.metastone.game.spells;
 
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.targeting.EntityReference;
 
 public class MinMaxDamageSpell extends DamageSpell {
 	
 	public static SpellDesc create(int minDamage, int maxDamage) {
-		SpellDesc desc = new SpellDesc(MinMaxDamageSpell.class);
-		desc.set(SpellArg.MIN_DAMAGE, minDamage);
-		desc.set(SpellArg.MAX_DAMAGE, maxDamage);
-		return desc;
+		return create(null, minDamage, maxDamage, false);
+	}
+	
+	public static SpellDesc create(EntityReference target, int minDamage, int maxDamage, boolean randomTarget) {
+		Map<SpellArg, Object> arguments = SpellDesc.build(MinMaxDamageSpell.class);
+		arguments.put(SpellArg.MIN_DAMAGE, minDamage);
+		arguments.put(SpellArg.MAX_DAMAGE, maxDamage);
+		arguments.put(SpellArg.TARGET, target);
+		arguments.put(SpellArg.RANDOM_TARGET, randomTarget);
+		return new SpellDesc(arguments);
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int minDamage = desc.getInt(SpellArg.MIN_DAMAGE);
 		int maxDamage = desc.getInt(SpellArg.MAX_DAMAGE);
 		int damageRange = maxDamage - minDamage;
 		int damageRoll = minDamage + ThreadLocalRandom.current().nextInt(damageRange + 1);
-		desc.set(SpellArg.DAMAGE, damageRoll);
-		super.onCast(context, player, desc, target);
+
+		context.getLogic().damage(player, (Actor)target, damageRoll, source);
 	}
 
 }

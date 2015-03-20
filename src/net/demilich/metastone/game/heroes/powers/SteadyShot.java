@@ -16,8 +16,7 @@ public class SteadyShot extends HeroPower {
 	public SteadyShot() {
 		super("Steady Shot", HeroClass.HUNTER);
 		setTargetRequirement(TargetSelection.NONE);
-		SpellDesc damage = DamageSpell.create(DAMAGE);
-		damage.setTarget(EntityReference.ENEMY_HERO);
+		SpellDesc damage = DamageSpell.create(EntityReference.ENEMY_HERO, DAMAGE);
 		setSpell(damage);
 	}
 
@@ -26,10 +25,10 @@ public class SteadyShot extends HeroPower {
 		super.onWillUse(context, player);
 		if (context.getLogic().hasTag(player, GameTag.HERO_POWER_CAN_TARGET_MINIONS)) {
 			setTargetRequirement(TargetSelection.ANY);
-			getSpell().setTarget(null);
+			//getSpell().setTarget(null);
 		} else {
 			setTargetRequirement(TargetSelection.NONE);
-			getSpell().setTarget(EntityReference.ENEMY_HERO);
+			//getSpell().setTarget(EntityReference.ENEMY_HERO);
 		}
 	}
 	

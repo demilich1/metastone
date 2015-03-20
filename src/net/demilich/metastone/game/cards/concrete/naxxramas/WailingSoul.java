@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.naxxramas;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -26,9 +26,8 @@ public class WailingSoul extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion wailingSoul = createMinion();
-		SpellDesc silenceOwnMinions = SilenceSpell.create();
-		silenceOwnMinions.setTarget(EntityReference.FRIENDLY_MINIONS);
-		Battlecry battlecry = Battlecry.createBattlecry(silenceOwnMinions);
+		SpellDesc silenceOwnMinions = SilenceSpell.create(EntityReference.FRIENDLY_MINIONS);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(silenceOwnMinions);
 		wailingSoul.setBattlecry(battlecry);
 		return wailingSoul;
 	}

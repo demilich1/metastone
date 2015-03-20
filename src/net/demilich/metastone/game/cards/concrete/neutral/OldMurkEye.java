@@ -35,7 +35,7 @@ public class OldMurkEye extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion oldMurkEye = createMinion(GameTag.CHARGE);
-		SpellDesc buffSpell = ConditionalAttackBonusSpell.create(new IValueProvider() {
+		SpellDesc buffSpell = ConditionalAttackBonusSpell.create(EntityReference.SELF, new IValueProvider() {
 			
 			@Override
 			public int provideValue(GameContext context, Player player, Entity target) {
@@ -56,7 +56,6 @@ public class OldMurkEye extends MinionCard {
 				return attackBonus;
 			}
 		});
-		buffSpell.setTarget(EntityReference.SELF);
 		SpellTrigger trigger = new SpellTrigger(new BoardChangedTrigger(), buffSpell);
 		oldMurkEye.setSpellTrigger(trigger);
 		return oldMurkEye;

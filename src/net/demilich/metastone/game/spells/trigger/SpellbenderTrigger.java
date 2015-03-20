@@ -7,9 +7,9 @@ import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.TargetAcquisitionEvent;
 
-public class MinionTargetedBySpellTrigger extends SummonNewTargetTrigger {
+public class SpellbenderTrigger extends SummonNewTargetTrigger {
 
-	public MinionTargetedBySpellTrigger() {
+	public SpellbenderTrigger() {
 		super(ActionType.SPELL);
 	}
 	

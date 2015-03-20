@@ -8,7 +8,6 @@ import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.PutRandomMinionOnBoardSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.CardLocation;
-import net.demilich.metastone.game.targeting.EntityReference;
 
 public class Voidcaller extends MinionCard {
 
@@ -27,7 +26,6 @@ public class Voidcaller extends MinionCard {
 	public Minion summon() {
 		Minion voidcaller = createMinion();
 		SpellDesc voidcallerSpell = PutRandomMinionOnBoardSpell.create(Race.DEMON, CardLocation.HAND);
-		voidcallerSpell.setTarget(EntityReference.NONE);
 		voidcaller.addDeathrattle(voidcallerSpell);
 		return voidcaller;
 	}

@@ -1,5 +1,7 @@
 package net.demilich.metastone.game.spells;
 
+import java.util.Map;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.MinionCard;
@@ -8,21 +10,24 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.targeting.EntityReference;
 
 public class ReviveMinionSpell extends Spell {
 	
-	public static SpellDesc create() {
-		return create(0);
+	public static SpellDesc create(EntityReference target) {
+		return create(target, 0);
 	}
 	
-	public static SpellDesc create(int hpAdjustment) {
-		SpellDesc desc = new SpellDesc(ReviveMinionSpell.class);
-		desc.set(SpellArg.HP_BONUS, hpAdjustment);
-		return desc;
+	public static SpellDesc create(EntityReference target, int hpAdjustment) {
+		Map<SpellArg, Object> arguments = SpellDesc.build(ReviveMinionSpell.class);
+		arguments.put(SpellArg.VALUE, hpAdjustment);
+		arguments.put(SpellArg.TARGET, target);
+		
+		return new SpellDesc(arguments);
 	}
 	
 	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int hpAdjustment = desc.getInt(SpellArg.HP_BONUS);
 		Actor targetActor = (Actor) target;
 		MinionCard minionCard = (MinionCard) targetActor.getSourceCard();

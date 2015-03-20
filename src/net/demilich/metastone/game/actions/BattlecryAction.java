@@ -6,16 +6,17 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
-public class Battlecry extends GameAction {
+public class BattlecryAction extends GameAction {
 
-	public static Battlecry createBattlecry(SpellDesc spell) {
+	public static BattlecryAction createBattlecry(SpellDesc spell) {
 		return createBattlecry(spell, TargetSelection.NONE);
 	}
 
-	public static Battlecry createBattlecry(SpellDesc spell, TargetSelection targetSelection) {
-		Battlecry battlecry = new Battlecry(spell);
+	public static BattlecryAction createBattlecry(SpellDesc spell, TargetSelection targetSelection) {
+		BattlecryAction battlecry = new BattlecryAction(spell);
 		battlecry.setTargetRequirement(targetSelection);
 		return battlecry;
 	}
@@ -25,7 +26,7 @@ public class Battlecry extends GameAction {
 	private IBattlecryCondition condition;
 	private Predicate<Entity> entityFilter;
 
-	protected Battlecry(SpellDesc spell) {
+	protected BattlecryAction(SpellDesc spell) {
 		this.spell = spell;
 		setActionType(ActionType.BATTLECRY);
 	}
@@ -52,8 +53,8 @@ public class Battlecry extends GameAction {
 	}
 
 	@Override
-	public Battlecry clone() {
-		Battlecry clone = Battlecry.createBattlecry(getSpell(), getTargetRequirement());
+	public BattlecryAction clone() {
+		BattlecryAction clone = BattlecryAction.createBattlecry(getSpell(), getTargetRequirement());
 		clone.setActionSuffix(getActionSuffix());
 		clone.setCondition(getCondition());
 		clone.setEntityFilter(getEntityFilter());
@@ -64,12 +65,8 @@ public class Battlecry extends GameAction {
 
 	@Override
 	public void execute(GameContext context, int playerId) {
-		if (!getSpell().hasPredefinedTarget()) {
-			getSpell().setTarget(getTargetKey());
-		}
-
-		getSpell().setSourceEntity(getSource());
-		context.getLogic().castSpell(playerId, getSpell());
+		EntityReference target = getSpell().hasPredefinedTarget() ? getSpell().getTarget() : getTargetKey();
+		context.getLogic().castSpell(playerId, getSpell(), getSource(), target);
 	}
 
 	public IBattlecryCondition getCondition() {

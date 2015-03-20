@@ -31,8 +31,7 @@ public class AnimaGolem extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion animaGolem = createMinion();
-		SpellDesc destroySpell = DestroySpell.create();
-		destroySpell.setTarget(EntityReference.SELF);
+		SpellDesc destroySpell = DestroySpell.create(EntityReference.SELF);
 		SpellTrigger trigger = new SpellTrigger(new AnimaGolemTrigger(), destroySpell);
 		animaGolem.setSpellTrigger(trigger);
 		return animaGolem;

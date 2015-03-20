@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.warlock;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -28,9 +28,8 @@ public class FlameImp extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion flameImp = createMinion();
-		SpellDesc damageHeroSpell = DamageSpell.create(3);
-		damageHeroSpell.setTarget(EntityReference.FRIENDLY_HERO);
-		Battlecry battlecry = Battlecry.createBattlecry(damageHeroSpell);
+		SpellDesc damageHeroSpell = DamageSpell.create(EntityReference.FRIENDLY_HERO, 3);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(damageHeroSpell);
 		flameImp.setBattlecry(battlecry);
 		return flameImp;
 	}

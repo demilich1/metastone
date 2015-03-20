@@ -14,8 +14,7 @@ public class Vaporize extends SecretCard {
 		super("Vaporize", Rarity.RARE, HeroClass.MAGE, 3);
 		setDescription("Secret: When a minion attacks your hero, destroy it.");
 
-		SpellDesc destroySpell = DestroySpell.create();
-		destroySpell.setTarget(EntityReference.ATTACKER);
+		SpellDesc destroySpell = DestroySpell.create(EntityReference.ATTACKER);
 		setTriggerAndEffect(new HeroAttackedByMinionTrigger(), destroySpell);
 	}
 

@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.hunter;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -29,10 +29,8 @@ public class MetaltoothLeaper extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion metaltoothLeaper = createMinion();
-		SpellDesc buffSpell = BuffSpell.create(+2);
-		buffSpell.setTarget(EntityReference.OTHER_FRIENDLY_MINIONS);
-		buffSpell.setTargetFilter(new RaceFilter(Race.MECH));
-		Battlecry battlecry = Battlecry.createBattlecry(buffSpell);
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.OTHER_FRIENDLY_MINIONS, +2, 0, new RaceFilter(Race.MECH), false);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(buffSpell);
 		metaltoothLeaper.setBattlecry(battlecry);
 		return metaltoothLeaper;
 	}

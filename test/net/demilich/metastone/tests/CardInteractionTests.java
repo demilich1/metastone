@@ -58,8 +58,7 @@ public class CardInteractionTests extends TestBase {
 		playCard(context, player, minionCard);
 
 		// buff test minion
-		SpellDesc buffSpell = BuffSpell.create(1, 1);
-		buffSpell.setTarget(EntityReference.FRIENDLY_MINIONS);
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.FRIENDLY_MINIONS, 1, 1);
 		SpellCard buffSpellCard = new TestSpellCard(buffSpell);
 		buffSpellCard.setTargetRequirement(TargetSelection.NONE);
 		playCard(context, player, buffSpellCard);
@@ -74,8 +73,7 @@ public class CardInteractionTests extends TestBase {
 		Assert.assertEquals(minion.getHp(), 3);
 
 		// swap hp and attack of wounded test minion
-		SpellDesc swapHpAttackSpell = SwapAttackAndHpSpell.create();
-		swapHpAttackSpell.setTarget(EntityReference.FRIENDLY_MINIONS);
+		SpellDesc swapHpAttackSpell = SwapAttackAndHpSpell.create(EntityReference.FRIENDLY_MINIONS);
 		SpellCard swapSpellCard = new TestSpellCard(swapHpAttackSpell);
 		buffSpellCard.setTargetRequirement(TargetSelection.NONE);
 		playCard(context, player, swapSpellCard);
@@ -83,8 +81,7 @@ public class CardInteractionTests extends TestBase {
 		Assert.assertEquals(minion.getHp(), 7);
 
 		// silence minion and check if it regains original stats
-		SpellDesc silenceSpell = SilenceSpell.create();
-		silenceSpell.setTarget(EntityReference.FRIENDLY_MINIONS);
+		SpellDesc silenceSpell = SilenceSpell.create(EntityReference.FRIENDLY_MINIONS);
 		SpellCard silenceSpellCard = new TestSpellCard(silenceSpell);
 		silenceSpellCard.setTargetRequirement(TargetSelection.NONE);
 		playCard(context, player, silenceSpellCard);
@@ -103,8 +100,7 @@ public class CardInteractionTests extends TestBase {
 		playCard(context, player, minionCard);
 
 		// buff test minion with temporary buff
-		SpellDesc buffSpell = TemporaryAttackSpell.create(+4);
-		buffSpell.setTarget(EntityReference.FRIENDLY_MINIONS);
+		SpellDesc buffSpell = TemporaryAttackSpell.create(EntityReference.FRIENDLY_MINIONS, +4);
 		SpellCard buffSpellCard = new TestSpellCard(buffSpell);
 		buffSpellCard.setTargetRequirement(TargetSelection.NONE);
 		playCard(context, player, buffSpellCard);
@@ -114,8 +110,7 @@ public class CardInteractionTests extends TestBase {
 		Assert.assertEquals(minion.getHp(), 3);
 
 		// swap hp and attack of wounded test minion
-		SpellDesc swapHpAttackSpell = SwapAttackAndHpSpell.create();
-		swapHpAttackSpell.setTarget(EntityReference.FRIENDLY_MINIONS);
+		SpellDesc swapHpAttackSpell = SwapAttackAndHpSpell.create(EntityReference.FRIENDLY_MINIONS);
 		SpellCard swapSpellCard = new TestSpellCard(swapHpAttackSpell);
 		buffSpellCard.setTargetRequirement(TargetSelection.NONE);
 		playCard(context, player, swapSpellCard);

@@ -29,8 +29,7 @@ public class VitalityTotem extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion vitalityTotem = createMinion();
-		SpellDesc heal = HealingSpell.create(4);
-		heal.setTarget(EntityReference.FRIENDLY_HERO);
+		SpellDesc heal = HealingSpell.create(EntityReference.FRIENDLY_HERO, 4);
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), heal);
 		vitalityTotem.setSpellTrigger(trigger);
 		return vitalityTotem;

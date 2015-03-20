@@ -3,7 +3,7 @@ package net.demilich.metastone.game.cards.concrete.warlock;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.Entity;
@@ -33,11 +33,9 @@ public class VoidTerror extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion voidTerror = createMinion();
-		SpellDesc buffSpell = BuffSpell.create(this::provideAttackValue, this::provideHpValue);
-		buffSpell.setTarget(EntityReference.SELF);
-		SpellDesc destroySpell = DestroySpell.create();
-		destroySpell.setTarget(EntityReference.ADJACENT_MINIONS);
-		Battlecry battlecry = Battlecry.createBattlecry(MetaSpell.create(buffSpell, destroySpell));
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, this::provideAttackValue, this::provideHpValue);
+		SpellDesc destroySpell = DestroySpell.create(EntityReference.ADJACENT_MINIONS);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(MetaSpell.create(buffSpell, destroySpell));
 		battlecry.setResolvedLate(true);
 		voidTerror.setBattlecry(battlecry);
 		return voidTerror;

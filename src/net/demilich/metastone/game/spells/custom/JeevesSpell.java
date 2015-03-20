@@ -1,22 +1,25 @@
 package net.demilich.metastone.game.spells.custom;
 
+import java.util.Map;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.Spell;
+import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
 public class JeevesSpell extends Spell {
-
+	
 	public static SpellDesc create() {
-		SpellDesc desc = new SpellDesc(JeevesSpell.class);
-		return desc;
+		Map<SpellArg, Object> arguments = SpellDesc.build(JeevesSpell.class);
+		return new SpellDesc(arguments);
 	}
 
 	private final static int DRAW_UP_TO = 3;
 
 	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Player activePlayer = context.getActivePlayer();
 		if (activePlayer.getHand().getCount() >= DRAW_UP_TO) {
 			return;

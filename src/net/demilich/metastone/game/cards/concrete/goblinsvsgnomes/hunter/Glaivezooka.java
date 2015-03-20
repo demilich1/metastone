@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.hunter;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.WeaponCard;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -26,10 +26,8 @@ public class Glaivezooka extends WeaponCard {
 	@Override
 	public Weapon getWeapon() {
 		Weapon weapon = createWeapon(2, 2);
-		SpellDesc randomBuffSpell = BuffSpell.create(+1);
-		randomBuffSpell.setTarget(EntityReference.FRIENDLY_MINIONS);
-		randomBuffSpell.pickRandomTarget(true);
-		Battlecry battlecry = Battlecry.createBattlecry(randomBuffSpell);
+		SpellDesc randomBuffSpell = BuffSpell.create(EntityReference.FRIENDLY_MINIONS, +1, 0, true);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(randomBuffSpell);
 		weapon.setBattlecry(battlecry);
 		return weapon;
 	}

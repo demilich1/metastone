@@ -5,7 +5,7 @@ import java.util.EnumMap;
 import java.util.List;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
 import net.demilich.metastone.game.entities.minions.Race;
@@ -70,8 +70,8 @@ public abstract class Actor extends Entity {
 		return attack;
 	}
 
-	public Battlecry getBattlecry() {
-		return (Battlecry) getTag(GameTag.BATTLECRY);
+	public BattlecryAction getBattlecry() {
+		return (BattlecryAction) getTag(GameTag.BATTLECRY);
 	}
 
 	public CardCostModifier getCardCostModifier() {
@@ -141,7 +141,7 @@ public abstract class Actor extends Entity {
 		setHp(value);
 	}
 
-	public void setBattlecry(Battlecry battlecry) {
+	public void setBattlecry(BattlecryAction battlecry) {
 		setTag(GameTag.BATTLECRY, battlecry);
 	}
 

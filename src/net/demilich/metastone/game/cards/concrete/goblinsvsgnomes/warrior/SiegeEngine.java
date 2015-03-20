@@ -29,8 +29,7 @@ public class SiegeEngine extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion siegeEngine = createMinion();
-		SpellDesc gainAttack = BuffSpell.create(+1);
-		gainAttack.setTarget(EntityReference.SELF);
+		SpellDesc gainAttack = BuffSpell.create(EntityReference.SELF, +1, 0);
 		SpellTrigger trigger = new SpellTrigger(new ArmorGainedTrigger(), gainAttack);
 		siegeEngine.setSpellTrigger(trigger);
 		return siegeEngine;

@@ -83,15 +83,11 @@ public class Aura extends SpellTrigger {
 
 		for (Entity target : relevantTargets) {
 			if (affects(context, target, resolvedTargets) && !affectedEntities.contains(target.getId())) {
-				applyAuraEffect.setTarget(target.getReference());
-				applyAuraEffect.setSourceEntity(getHostReference());
-				context.getLogic().castSpell(getOwner(), applyAuraEffect);
+				context.getLogic().castSpell(getOwner(), applyAuraEffect, getHostReference(), target.getReference());
 				affectedEntities.add(target.getId());
 				// target is not affected anymore, remove effect
 			} else if (!affects(context, target, resolvedTargets) && affectedEntities.contains(target.getId())) {
-				removeAuraEffect.setTarget(target.getReference());
-				removeAuraEffect.setSourceEntity(getHostReference());
-				context.getLogic().castSpell(getOwner(), removeAuraEffect);
+				context.getLogic().castSpell(getOwner(), removeAuraEffect, getHostReference(), target.getReference());
 				affectedEntities.remove(target.getId());
 			}
 		}
@@ -102,9 +98,7 @@ public class Aura extends SpellTrigger {
 		for (int targetId : affectedEntities) {
 			EntityReference targetKey = new EntityReference(targetId);
 			Entity target = context.resolveSingleTarget(targetKey);
-			removeAuraEffect.setTarget(target.getReference());
-			removeAuraEffect.setSourceEntity(getHostReference());
-			context.getLogic().castSpell(getOwner(), removeAuraEffect);
+			context.getLogic().castSpell(getOwner(), removeAuraEffect, getHostReference(), target.getReference());
 		}
 		affectedEntities.clear();
 	}

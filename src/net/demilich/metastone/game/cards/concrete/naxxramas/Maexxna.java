@@ -27,8 +27,7 @@ public class Maexxna extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion maexxna = createMinion();
-		SpellDesc killSpell = DestroySpell.create();
-		killSpell.setTarget(EntityReference.EVENT_TARGET);
+		SpellDesc killSpell = DestroySpell.create(EntityReference.EVENT_TARGET);
 		maexxna.setSpellTrigger(new SpellTrigger(new DamageCausedTrigger(false), killSpell));
 		return maexxna;
 	}

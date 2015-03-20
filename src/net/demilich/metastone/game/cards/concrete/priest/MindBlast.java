@@ -14,12 +14,9 @@ public class MindBlast extends SpellCard {
 	public MindBlast() {
 		super("Mind Blast", Rarity.FREE, HeroClass.PRIEST, 2);
 		setDescription("Deal $5 damage to the enemy hero.");
-		setSpell(DamageSpell.create(DAMAGE));
+		setSpell(DamageSpell.create(EntityReference.ENEMY_HERO, DAMAGE));
 		setTargetRequirement(TargetSelection.NONE);
-		setPredefinedTarget(EntityReference.ENEMY_HERO);
 	}
-
-
 
 	@Override
 	public int getTypeId() {

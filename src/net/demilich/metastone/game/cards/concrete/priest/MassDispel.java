@@ -16,8 +16,7 @@ public class MassDispel extends SpellCard {
 		super("Mass Dispel", Rarity.RARE, HeroClass.PRIEST, 4);
 		setDescription("Silence all enemy minions. Draw a card.");
 		
-		SpellDesc silenceAll = SilenceSpell.create();
-		silenceAll.setTarget(EntityReference.ENEMY_MINIONS);
+		SpellDesc silenceAll = SilenceSpell.create(EntityReference.ENEMY_MINIONS);
 		SpellDesc draw = DrawCardSpell.create();
 		setSpell(MetaSpell.create(silenceAll, draw));
 		setTargetRequirement(TargetSelection.NONE);

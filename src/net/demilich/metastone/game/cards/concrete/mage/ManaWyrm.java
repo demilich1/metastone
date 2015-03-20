@@ -26,8 +26,7 @@ public class ManaWyrm extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion manaWyrm = createMinion();
-		SpellDesc buffSpell = BuffSpell.create(1);
-		buffSpell.setTarget(EntityReference.SELF);
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, 1, 0);
 		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(TargetPlayer.SELF), buffSpell);
 		manaWyrm.setSpellTrigger(trigger);
 		return manaWyrm;

@@ -1,34 +1,40 @@
 package net.demilich.metastone.game.spells;
 
+import java.util.Map;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.targeting.EntityReference;
 
 public class EitherOrSpell extends Spell {
-
+	
 	public static SpellDesc create(SpellDesc either, SpellDesc or, ISpellConditionChecker condition) {
-		SpellDesc desc = new SpellDesc(EitherOrSpell.class);
-		desc.set(SpellArg.SPELL_1, either);
-		desc.set(SpellArg.SPELL_2, or);
-		desc.set(SpellArg.SPELL_CONDITION_CHECKER, condition);
-		return desc;
+		return create(null, either, or, condition);
+	}
+
+	public static SpellDesc create(EntityReference target, SpellDesc either, SpellDesc or, ISpellConditionChecker condition) {
+		Map<SpellArg, Object> arguments = SpellDesc.build(EitherOrSpell.class);
+		arguments.put(SpellArg.SPELL_1, either);
+		arguments.put(SpellArg.SPELL_2, or);
+		arguments.put(SpellArg.SPELL_CONDITION_CHECKER, condition);
+		arguments.put(SpellArg.TARGET, target);
+		return new SpellDesc(arguments);
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		ISpellConditionChecker condition = (ISpellConditionChecker) desc.get(SpellArg.SPELL_CONDITION_CHECKER);
 		SpellDesc either = (SpellDesc) desc.get(SpellArg.SPELL_1);
 		SpellDesc or = (SpellDesc) desc.get(SpellArg.SPELL_2);
 		
 		SpellDesc spellToCast = condition.isFulfilled(context, player, target) ? either : or;
 
-		if (!spellToCast.hasPredefinedTarget()) {
-			spellToCast.setTarget(desc.getTarget());
-		}
-		spellToCast.setSourceEntity(desc.getSourceEntity());
-		context.getLogic().castSpell(player.getId(), spellToCast);
+		EntityReference sourceReference = source != null ? source.getReference() : null;
+		EntityReference targetReference = spellToCast.hasPredefinedTarget() ? spellToCast.getTarget() : target.getReference();
+		context.getLogic().castSpell(player.getId(), spellToCast, sourceReference, targetReference);
 	}
 
 	

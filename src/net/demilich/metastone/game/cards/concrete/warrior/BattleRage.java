@@ -10,7 +10,6 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.DrawCardSpell;
 import net.demilich.metastone.game.spells.IValueProvider;
 import net.demilich.metastone.game.spells.TargetPlayer;
-import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class BattleRage extends SpellCard {
@@ -33,10 +32,7 @@ public class BattleRage extends SpellCard {
 		};
 		setSpell(DrawCardSpell.create(damagedCharacterCounter, TargetPlayer.SELF));
 		setTargetRequirement(TargetSelection.NONE);
-		setPredefinedTarget(EntityReference.NONE);
 	}
-
-
 
 	@Override
 	public int getTypeId() {

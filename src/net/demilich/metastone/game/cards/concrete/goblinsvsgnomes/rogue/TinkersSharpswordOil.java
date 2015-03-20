@@ -16,20 +16,15 @@ public class TinkersSharpswordOil extends SpellCard {
 	public TinkersSharpswordOil() {
 		super("Tinker's Sharpsword Oil", Rarity.COMMON, HeroClass.ROGUE, 4);
 		setDescription("Give your weapon +3 Attack. Combo: Give a random friendly minion +3 Attack.");
-		
+
 		SpellDesc buffWeapon = BuffWeaponSpell.create(+3);
-		SpellDesc buffRandomMinion = BuffSpell.create(+3);
-		buffRandomMinion.setTarget(EntityReference.FRIENDLY_MINIONS);
-		buffRandomMinion.pickRandomTarget(true);
-		
-		SpellDesc comboSpell = MetaSpell.create(buffWeapon, buffRandomMinion);
-		comboSpell.setTarget(EntityReference.NONE);
-		
+		SpellDesc buffRandomMinion = BuffSpell.create(EntityReference.FRIENDLY_MINIONS, +3, 0, true);
+
+		SpellDesc comboSpell = MetaSpell.create(EntityReference.NONE, buffWeapon, buffRandomMinion);
+
 		setSpell(ComboSpell.create(buffWeapon, comboSpell));
 		setTargetRequirement(TargetSelection.NONE);
 	}
-
-
 
 	@Override
 	public int getTypeId() {

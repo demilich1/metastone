@@ -24,8 +24,7 @@ public class Abomination extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion abomination = createMinion(GameTag.TAUNT);
-		SpellDesc deathrattle = DamageSpell.create(2);
-		deathrattle.setTarget(EntityReference.ALL_CHARACTERS);
+		SpellDesc deathrattle = DamageSpell.create(EntityReference.ALL_CHARACTERS, 2);
 		abomination.addDeathrattle(deathrattle);
 		return abomination;
 	}

@@ -1,5 +1,7 @@
 package net.demilich.metastone.game.spells;
 
+import java.util.Map;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
@@ -13,19 +15,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class BuffHeroSpell extends Spell {
-
-	public static SpellDesc create(int attackBonus, int armorBonus) {
-		SpellDesc desc = new SpellDesc(BuffHeroSpell.class);
-		desc.set(SpellArg.ATTACK_BONUS, attackBonus);
-		desc.set(SpellArg.ARMOR_BONUS, armorBonus);
-		desc.setTarget(EntityReference.FRIENDLY_HERO);
-		return desc;
+	
+	public static SpellDesc create(EntityReference target, int attackBonus, int armorBonus) {
+		Map<SpellArg, Object> arguments = SpellDesc.build(BuffHeroSpell.class);
+		arguments.put(SpellArg.ATTACK_BONUS, attackBonus);
+		arguments.put(SpellArg.ARMOR_BONUS, armorBonus);
+		arguments.put(SpellArg.TARGET, target);
+		return new SpellDesc(arguments);
 	}
 
 	private static Logger logger = LoggerFactory.getLogger(BuffHeroSpell.class);
 
 	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Hero hero = (Hero) target;
 		int attackBonus = desc.getInt(SpellArg.ATTACK_BONUS);
 		int armorBonus = desc.getInt(SpellArg.ARMOR_BONUS);

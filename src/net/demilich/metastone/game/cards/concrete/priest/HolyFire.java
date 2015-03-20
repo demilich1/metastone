@@ -17,8 +17,7 @@ public class HolyFire extends SpellCard {
 		setDescription("Deal $5 damage. Restore 5 Health to your hero.");
 
 		SpellDesc damageSpell = DamageSpell.create(5);
-		SpellDesc healHeroSpell = HealingSpell.create(5);
-		healHeroSpell.setTarget(EntityReference.FRIENDLY_HERO);
+		SpellDesc healHeroSpell = HealingSpell.create(EntityReference.FRIENDLY_HERO, 5);
 
 		setSpell(MetaSpell.create(damageSpell, healHeroSpell));
 		setTargetRequirement(TargetSelection.ANY);

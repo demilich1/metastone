@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.paladin;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -25,7 +25,7 @@ public class AldorPeacekeeper extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion aldorPeacekepper = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(HumilitySpell.create(), TargetSelection.ENEMY_MINIONS);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(HumilitySpell.create(), TargetSelection.ENEMY_MINIONS);
 		aldorPeacekepper.setBattlecry(battlecry);
 		return aldorPeacekepper;
 	}

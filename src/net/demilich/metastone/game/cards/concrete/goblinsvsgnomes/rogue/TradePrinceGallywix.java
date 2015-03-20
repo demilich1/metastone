@@ -14,7 +14,6 @@ import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.SpellCastedTrigger;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
-import net.demilich.metastone.game.targeting.EntityReference;
 
 public class TradePrinceGallywix extends MinionCard {
 
@@ -32,13 +31,10 @@ public class TradePrinceGallywix extends MinionCard {
 	public Minion summon() {
 		Minion tradePriceGallywix = createMinion();
 		SpellDesc copySpell = CopySpellCardSpell.create();
-		copySpell.setTarget(EntityReference.EVENT_TARGET);
 		SpellTrigger trigger = new SpellTrigger(new GallywixTrigger(), copySpell);
 		tradePriceGallywix.setSpellTrigger(trigger);
 		return tradePriceGallywix;
 	}
-
-
 
 	private class GallywixTrigger extends SpellCastedTrigger {
 

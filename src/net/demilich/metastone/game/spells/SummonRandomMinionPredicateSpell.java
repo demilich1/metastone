@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.spells;
 
+import java.util.Map;
 import java.util.function.Predicate;
 
 import net.demilich.metastone.game.GameContext;
@@ -15,12 +16,17 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class SummonRandomMinionPredicateSpell extends Spell {
-
+	
 	public static SpellDesc create(Predicate<Card> cardFilter) {
-		SpellDesc desc = new SpellDesc(SummonRandomMinionPredicateSpell.class);
-		desc.set(SpellArg.CARD_FILTER, cardFilter);
-		desc.setTarget(EntityReference.NONE);
-		return desc;
+		return create(TargetPlayer.SELF, cardFilter);
+	}
+
+	public static SpellDesc create(TargetPlayer targetPlayer, Predicate<Card> cardFilter) {
+		Map<SpellArg, Object> arguments = SpellDesc.build(SummonRandomMinionPredicateSpell.class);
+		arguments.put(SpellArg.CARD_FILTER, cardFilter);
+		arguments.put(SpellArg.TARGET, EntityReference.NONE);
+		arguments.put(SpellArg.TARGET_PLAYER, targetPlayer);
+		return new SpellDesc(arguments);
 	}
 
 	private static MinionCard getRandomMatchingMinionCard(Predicate<Card> cardFilter) {
@@ -35,7 +41,7 @@ public class SummonRandomMinionPredicateSpell extends Spell {
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		@SuppressWarnings("unchecked")
 		Predicate<Card> cardFilter = (Predicate<Card>) desc.get(SpellArg.CARD_FILTER);
 		int boardPosition = desc.contains(SpellArg.BOARD_POSITION_ABSOLUTE) ? desc.getInt(SpellArg.BOARD_POSITION_ABSOLUTE) : -1;

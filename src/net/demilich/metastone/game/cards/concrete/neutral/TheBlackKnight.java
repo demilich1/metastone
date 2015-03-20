@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.neutral;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -24,7 +24,7 @@ public class TheBlackKnight extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion blackKnight = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(DestroySpell.create(), TargetSelection.ENEMY_MINIONS);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(DestroySpell.create(), TargetSelection.ENEMY_MINIONS);
 		battlecry.setEntityFilter(entity -> entity.hasStatus(GameTag.TAUNT));
 		blackKnight.setBattlecry(battlecry);
 		return blackKnight;

@@ -26,11 +26,10 @@ public class GoblinSapper extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion goblinSapper = createMinion();
-		SpellDesc buffSpell = ConditionalAttackBonusSpell.create((context, player, target) -> {
+		SpellDesc buffSpell = ConditionalAttackBonusSpell.create(EntityReference.SELF, (context, player, target) -> {
 			Player opponent = context.getOpponent(player);
 			return opponent.getHand().getCount() >= 6 ? +4 : 0;
 		});
-		buffSpell.setTarget(EntityReference.SELF);
 		SpellTrigger trigger = new SpellTrigger(new GameStateChangedTrigger(), buffSpell);
 		goblinSapper.setSpellTrigger(trigger);
 		return goblinSapper;

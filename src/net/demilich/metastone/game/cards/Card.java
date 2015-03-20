@@ -9,6 +9,7 @@ import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.spells.desc.BattlecryDesc;
 import net.demilich.metastone.game.targeting.CardLocation;
 import net.demilich.metastone.game.targeting.CardReference;
 import net.demilich.metastone.game.targeting.IdFactory;
@@ -22,6 +23,7 @@ public abstract class Card extends Entity {
 	private final HeroClass classRestriction;
 	private boolean collectible = true;
 	private CardLocation location;
+	private BattlecryDesc battlecry;
 
 	public Card(String name, CardType cardType, Rarity rarity, HeroClass classRestriction, int manaCost) {
 		setName(name);
@@ -122,6 +124,18 @@ public abstract class Card extends Entity {
 	@Override
 	public String toString() {
 		return String.format("[%s '%s' Manacost:%d]", getCardType(), getName(), manaCost);
+	}
+
+	public BattlecryDesc getBattlecry() {
+		return battlecry;
+	}
+
+	public void setBattlecry(BattlecryDesc battlecry) {
+		this.battlecry = battlecry;
+	}
+	
+	public boolean hasBattlecry() {
+		return this.battlecry != null;
 	}
 
 }

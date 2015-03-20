@@ -18,9 +18,7 @@ public class Avenge extends SecretCard {
 		super("Avenge", Rarity.COMMON, HeroClass.PALADIN, 1);
 		setDescription("Secret: When one of your minions dies, give a random friendly minion +3/+2");
 
-		SpellDesc buffRandomSpell = BuffSpell.create(3, 2);
-		buffRandomSpell.setTarget(EntityReference.FRIENDLY_MINIONS);
-		buffRandomSpell.pickRandomTarget(true);
+		SpellDesc buffRandomSpell = BuffSpell.create(EntityReference.FRIENDLY_MINIONS, 3, 2, true);
 		setTriggerAndEffect(new AvengeTrigger(), buffRandomSpell);
 	}
 

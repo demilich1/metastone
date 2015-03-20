@@ -13,8 +13,7 @@ public class TwistingNether extends SpellCard {
 		super("Twisting Nether", Rarity.EPIC, HeroClass.WARLOCK, 8);
 		setDescription("Destroy all minions.");
 		
-		setSpell(DestroySpell.create());
-		setPredefinedTarget(EntityReference.ALL_MINIONS);
+		setSpell(DestroySpell.create(EntityReference.ALL_MINIONS));
 		setTargetRequirement(TargetSelection.NONE);
 	}
 

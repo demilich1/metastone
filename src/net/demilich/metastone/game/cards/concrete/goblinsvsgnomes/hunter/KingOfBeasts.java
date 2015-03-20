@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.hunter;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -26,14 +26,11 @@ public class KingOfBeasts extends MinionCard {
 		return 489;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion kingOfBeasts = createMinion(GameTag.TAUNT);
-		SpellDesc buffSpell = BuffSpell.create((context, player, entity) -> SpellUtils.hasHowManyOfRace(player, Race.BEAST), null);
-		buffSpell.setTarget(EntityReference.SELF);
-		Battlecry battlecry = Battlecry.createBattlecry(buffSpell);
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, (context, player, entity) -> SpellUtils.hasHowManyOfRace(player, Race.BEAST), null);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(buffSpell);
 		kingOfBeasts.setBattlecry(battlecry);
 		return kingOfBeasts;
 	}

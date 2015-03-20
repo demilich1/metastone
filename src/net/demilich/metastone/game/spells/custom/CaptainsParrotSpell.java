@@ -14,12 +14,12 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 public class CaptainsParrotSpell extends Spell {
 	
 	public static SpellDesc create() {
-		SpellDesc desc = new SpellDesc(CaptainsParrotSpell.class);
+		SpellDesc desc = new SpellDesc(SpellDesc.build(CaptainsParrotSpell.class));
 		return desc;
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		CardCollection pirateCards = SpellUtils.getCards(player.getDeck(), card -> card.getTag(GameTag.RACE) == Race.PIRATE);
 		if (pirateCards.isEmpty()) {
 			return;

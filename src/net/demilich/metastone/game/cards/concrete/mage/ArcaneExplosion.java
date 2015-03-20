@@ -13,8 +13,7 @@ public class ArcaneExplosion extends SpellCard {
 		super("Arcane Explosion", Rarity.FREE, HeroClass.MAGE, 2);
 		setDescription("Deal $1 damage to all enemy minions.");
 		setTargetRequirement(TargetSelection.NONE);
-		setSpell(DamageSpell.create(1));
-		setPredefinedTarget(EntityReference.ENEMY_MINIONS);
+		setSpell(DamageSpell.create(EntityReference.ENEMY_MINIONS, 1));
 	}
 
 	@Override

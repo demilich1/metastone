@@ -32,8 +32,7 @@ public class Starfall extends ChooseOneCard {
 			setDescription("Deal $2 damage to all enemy minions");
 			setCollectible(false);
 
-			SpellDesc damageSpell = DamageSpell.create(2);
-			damageSpell.setTarget(EntityReference.ENEMY_MINIONS);
+			SpellDesc damageSpell = DamageSpell.create(EntityReference.ENEMY_MINIONS, 2);
 			setSpell(damageSpell);
 			setTargetRequirement(TargetSelection.NONE);
 		}

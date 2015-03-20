@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.cards.concrete.shaman;
 
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -27,7 +27,7 @@ public class FireElemental extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion fireElemental = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(DamageSpell.create(BATTLECRY_DAMAGE), TargetSelection.ANY);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(DamageSpell.create(BATTLECRY_DAMAGE), TargetSelection.ANY);
 		fireElemental.setBattlecry(battlecry);
 		return fireElemental;
 	}

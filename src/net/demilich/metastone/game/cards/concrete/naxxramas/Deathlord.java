@@ -25,8 +25,7 @@ public class Deathlord extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion deathlord = createMinion(GameTag.TAUNT);
-		SpellDesc deathlordSpell = PutRandomMinionOnBoardSpell.create(null, CardLocation.DECK);
-		deathlordSpell.setTargetPlayer(TargetPlayer.OPPONENT);
+		SpellDesc deathlordSpell = PutRandomMinionOnBoardSpell.create(TargetPlayer.OPPONENT, null, CardLocation.DECK);
 		deathlord.addDeathrattle(deathlordSpell);
 		return deathlord;
 	}

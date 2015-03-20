@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.neutral;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -28,9 +28,8 @@ public class SunfuryProtector extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion sunfuryProtector = createMinion();
-		SpellDesc buffSpell = ApplyTagSpell.create(GameTag.TAUNT);
-		buffSpell.setTarget(EntityReference.ADJACENT_MINIONS);
-		Battlecry battlecry = Battlecry.createBattlecry(buffSpell, TargetSelection.NONE);
+		SpellDesc buffSpell = ApplyTagSpell.create(EntityReference.ADJACENT_MINIONS, GameTag.TAUNT);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(buffSpell, TargetSelection.NONE);
 		battlecry.setResolvedLate(true);
 		sunfuryProtector.setBattlecry(battlecry);
 		return sunfuryProtector;

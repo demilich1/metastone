@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.paladin;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.WeaponCard;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -29,10 +29,8 @@ public class Coghammer extends WeaponCard {
 		Weapon coghammer = createWeapon(2, 3);
 		SpellDesc divineShield = ApplyTagSpell.create(GameTag.DIVINE_SHIELD);
 		SpellDesc taunt = ApplyTagSpell.create(GameTag.TAUNT);
-		SpellDesc spell = MetaSpell.create(divineShield, taunt);
-		spell.setTarget(EntityReference.FRIENDLY_MINIONS);
-		spell.pickRandomTarget(true);
-		Battlecry battlecry = Battlecry.createBattlecry(spell);
+		SpellDesc spell = MetaSpell.create(EntityReference.FRIENDLY_MINIONS, divineShield, taunt, true);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(spell);
 		coghammer.setBattlecry(battlecry);
 		return coghammer;
 	}

@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.druid;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.ChooseBattlecryCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -30,17 +30,15 @@ public class AnodizedRoboCub extends ChooseBattlecryCard {
 	}
 
 	@Override
-	protected Battlecry getBattlecry1() {
-		SpellDesc spell = BuffSpell.create(+1);
-		spell.setTarget(EntityReference.SELF);
-		return Battlecry.createBattlecry(spell);
+	protected BattlecryAction getBattlecry1() {
+		SpellDesc spell = BuffSpell.create(EntityReference.SELF, +1, 0);
+		return BattlecryAction.createBattlecry(spell);
 	}
 
 	@Override
-	protected Battlecry getBattlecry2() {
-		SpellDesc spell = BuffSpell.create(0, +1);
-		spell.setTarget(EntityReference.SELF);
-		return Battlecry.createBattlecry(spell);
+	protected BattlecryAction getBattlecry2() {
+		SpellDesc spell = BuffSpell.create(EntityReference.SELF, 0, +1);
+		return BattlecryAction.createBattlecry(spell);
 	}
 
 	@Override

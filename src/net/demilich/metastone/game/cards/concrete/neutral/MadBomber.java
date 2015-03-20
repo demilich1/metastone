@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.neutral;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -27,9 +27,8 @@ public class MadBomber extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion madBomber = createMinion();
-		SpellDesc spell = DamageRandomSpell.create(1, 3);
-		spell.setTarget(EntityReference.ALL_CHARACTERS);
-		Battlecry battlecry = Battlecry.createBattlecry(spell, TargetSelection.NONE);
+		SpellDesc spell = DamageRandomSpell.create(EntityReference.ALL_CHARACTERS, 1, 3);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(spell, TargetSelection.NONE);
 		madBomber.setBattlecry(battlecry);
 		return madBomber;
 	}

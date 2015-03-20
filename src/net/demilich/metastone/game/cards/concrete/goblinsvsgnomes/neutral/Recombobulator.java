@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.neutral;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -27,7 +27,7 @@ public class Recombobulator extends MinionCard {
 	public Minion summon() {
 		Minion recombolator = createMinion();
 		SpellDesc transformSpell = TransformToMinionWithManaCostSpell.create();
-		Battlecry battlecry = Battlecry.createBattlecry(transformSpell, TargetSelection.FRIENDLY_MINIONS);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(transformSpell, TargetSelection.FRIENDLY_MINIONS);
 		recombolator.setBattlecry(battlecry);
 		return recombolator;
 	}

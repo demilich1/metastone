@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.cards.concrete.druid;
 
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.ChooseBattlecryCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -27,13 +27,13 @@ public class KeeperOfTheGrove extends ChooseBattlecryCard {
 	}
 
 	@Override
-	protected Battlecry getBattlecry1() {
-		return Battlecry.createBattlecry(DamageSpell.create(2), TargetSelection.ANY);
+	protected BattlecryAction getBattlecry1() {
+		return BattlecryAction.createBattlecry(DamageSpell.create(2), TargetSelection.ANY);
 	}
 
 	@Override
-	protected Battlecry getBattlecry2() {
-		return Battlecry.createBattlecry(SilenceSpell.create(), TargetSelection.MINIONS);
+	protected BattlecryAction getBattlecry2() {
+		return BattlecryAction.createBattlecry(SilenceSpell.create(), TargetSelection.MINIONS);
 	}
 
 	@Override

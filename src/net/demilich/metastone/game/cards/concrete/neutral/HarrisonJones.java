@@ -3,7 +3,7 @@ package net.demilich.metastone.game.cards.concrete.neutral;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.Entity;
@@ -44,9 +44,8 @@ public class HarrisonJones extends MinionCard {
 			}
 		};
 		SpellDesc drawCardSpell = DrawCardSpell.create(valueProvider, TargetPlayer.SELF);
-		SpellDesc destroyWeaponSpell = DestroyWeaponSpell.create();
-		destroyWeaponSpell.setTarget(EntityReference.ENEMY_HERO);
-		Battlecry battlecry = Battlecry.createBattlecry(MetaSpell.create(drawCardSpell, destroyWeaponSpell));
+		SpellDesc destroyWeaponSpell = DestroyWeaponSpell.create(EntityReference.ENEMY_HERO);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(MetaSpell.create(drawCardSpell, destroyWeaponSpell));
 		harrisonJones.setBattlecry(battlecry);
 		return harrisonJones;
 	}

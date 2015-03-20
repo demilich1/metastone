@@ -1,26 +1,38 @@
 package net.demilich.metastone.game.spells;
 
+import java.util.Map;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.targeting.EntityReference;
 
 public class MetaSpell extends Spell {
 	
 	public static SpellDesc create(SpellDesc spell1, SpellDesc spell2) {
-		return create(spell1, spell2, null);
+		return create(null, spell1, spell2, null, false);
+	}
+
+	public static SpellDesc create(EntityReference target, SpellDesc spell1, SpellDesc spell2) {
+		return create(target, spell1, spell2, null, false);
 	}
 	
-	public static SpellDesc create(SpellDesc spell1, SpellDesc spell2, SpellDesc spell3) {
-		SpellDesc desc = new SpellDesc(MetaSpell.class);
-		desc.set(SpellArg.SPELL_1, spell1);
-		desc.set(SpellArg.SPELL_2, spell2);
+	public static SpellDesc create(EntityReference target, SpellDesc spell1, SpellDesc spell2, boolean randomTarget) {
+		return create(target, spell1, spell2, null, randomTarget);
+	}
+
+	public static SpellDesc create(EntityReference target, SpellDesc spell1, SpellDesc spell2, SpellDesc spell3, boolean randomTarget) {
+		Map<SpellArg, Object> arguments = SpellDesc.build(MetaSpell.class);
+		arguments.put(SpellArg.TARGET, target);
+		arguments.put(SpellArg.SPELL_1, spell1);
+		arguments.put(SpellArg.SPELL_2, spell2);
 		if (spell3 != null) {
-			desc.set(SpellArg.SPELL_3, spell3);
+			arguments.put(SpellArg.SPELL_3, spell3);
 		}
-		
-		return desc;
+		arguments.put(SpellArg.RANDOM_TARGET, true);
+		return new SpellDesc(arguments);
 	}
 
 	private SpellDesc[] getSpells(SpellDesc desc) {
@@ -32,7 +44,7 @@ public class MetaSpell extends Spell {
 		} else {
 			spells = new SpellDesc[1];
 		}
-		
+
 		if (spells.length >= 3) {
 			spells[2] = (SpellDesc) desc.get(SpellArg.SPELL_3);
 		}
@@ -46,15 +58,15 @@ public class MetaSpell extends Spell {
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
+		EntityReference sourceReference = source != null ? source.getReference() : null;
 		for (SpellDesc spell : getSpells(desc)) {
-			if (!spell.hasPredefinedTarget()) {
-				spell.setTarget(target.getReference());
+			EntityReference targetReference = spell.getTarget();
+			if (targetReference == null && target != null) {
+				targetReference = target.getReference();
 			}
-			spell.setSourceEntity(desc.getSourceEntity());
-			context.getLogic().castSpell(player.getId(), spell);
+			context.getLogic().castSpell(player.getId(), spell, sourceReference, targetReference);
 		}
 	}
-
 
 }

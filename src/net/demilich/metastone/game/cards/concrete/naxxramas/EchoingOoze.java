@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.naxxramas;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -29,12 +29,10 @@ public class EchoingOoze extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion echoingOoze = createMinion();
-		SpellDesc summonCopy = SummonCopySpell.create();
-		summonCopy.setTarget(EntityReference.SELF);
+		SpellDesc summonCopy = SummonCopySpell.create(EntityReference.SELF);
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), summonCopy, true);
-		SpellDesc addTrigger = AddSpellTriggerSpell.create(trigger);
-		addTrigger.setTarget(EntityReference.SELF);
-		Battlecry battlecry = Battlecry.createBattlecry(addTrigger);
+		SpellDesc addTrigger = AddSpellTriggerSpell.create(EntityReference.SELF, trigger);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(addTrigger);
 		echoingOoze.setBattlecry(battlecry);
 		return echoingOoze;
 	}

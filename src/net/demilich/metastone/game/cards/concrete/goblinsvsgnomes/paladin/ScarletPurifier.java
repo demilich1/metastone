@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.paladin;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -26,10 +26,8 @@ public class ScarletPurifier extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion scarletPurifier = createMinion();
-		SpellDesc damage = DamageSpell.create(2);
-		damage.setTarget(EntityReference.ALL_MINIONS);
-		damage.setTargetFilter(entity -> entity.hasTag(GameTag.DEATHRATTLES));
-		Battlecry battlecry = Battlecry.createBattlecry(damage);
+		SpellDesc damage = DamageSpell.create(EntityReference.ALL_MINIONS, 2, entity -> entity.hasTag(GameTag.DEATHRATTLES), false);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(damage);
 		scarletPurifier.setBattlecry(battlecry);
 		return scarletPurifier;
 	}

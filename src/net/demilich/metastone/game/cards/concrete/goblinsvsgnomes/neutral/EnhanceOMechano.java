@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.neutral;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -29,10 +29,9 @@ public class EnhanceOMechano extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion enhanceOMechano = createMinion();
-		SpellDesc randomBuff = CastRandomSpellSpell.create(ApplyTagSpell.create(GameTag.WINDFURY), ApplyTagSpell.create(GameTag.TAUNT),
+		SpellDesc randomBuff = CastRandomSpellSpell.create(EntityReference.FRIENDLY_MINIONS, ApplyTagSpell.create(GameTag.WINDFURY), ApplyTagSpell.create(GameTag.TAUNT),
 				ApplyTagSpell.create(GameTag.DIVINE_SHIELD));
-		randomBuff.setTarget(EntityReference.FRIENDLY_MINIONS);
-		Battlecry battlecry = Battlecry.createBattlecry(randomBuff);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(randomBuff);
 		enhanceOMechano.setBattlecry(battlecry);
 		return enhanceOMechano;
 	}

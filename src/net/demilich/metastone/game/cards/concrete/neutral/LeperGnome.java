@@ -22,9 +22,8 @@ public class LeperGnome extends MinionCard {
 
 	@Override
 	public Minion summon() {
-		SpellDesc deathrattle = DamageSpell.create(2);
-		deathrattle.setTarget(EntityReference.ENEMY_HERO);
 		Minion leperGnome = createMinion();
+		SpellDesc deathrattle = DamageSpell.create(EntityReference.ENEMY_HERO, 2);
 		leperGnome.addDeathrattle(deathrattle);
 		return leperGnome;
 	}

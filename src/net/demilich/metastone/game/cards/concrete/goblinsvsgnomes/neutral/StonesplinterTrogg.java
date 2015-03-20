@@ -23,13 +23,10 @@ public class StonesplinterTrogg extends MinionCard {
 		return 546;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion stonesplinterTrogg = createMinion();
-		SpellDesc buffSpell = BuffSpell.create(+1);
-		buffSpell.setTarget(EntityReference.SELF);
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, +1, 0);
 		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(TargetPlayer.OPPONENT), buffSpell);
 		stonesplinterTrogg.setSpellTrigger(trigger);
 		return stonesplinterTrogg;

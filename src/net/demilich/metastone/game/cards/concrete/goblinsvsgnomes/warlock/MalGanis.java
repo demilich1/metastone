@@ -32,17 +32,13 @@ public class MalGanis extends MinionCard {
 	public Minion summon() {
 		Minion malGanis = createMinion();
 		// aura apply
-		SpellDesc demonBuff = AuraSpellBuff.create(+2, +2);
-		demonBuff.setTargetFilter(new RaceFilter(Race.DEMON));
-		SpellDesc immunity = ApplyTagSpell.create(GameTag.IMMUNE);
-		immunity.setTarget(EntityReference.FRIENDLY_HERO);
+		SpellDesc demonBuff = AuraSpellBuff.create(+2, +2, new RaceFilter(Race.DEMON));
+		SpellDesc immunity = ApplyTagSpell.create(EntityReference.FRIENDLY_HERO, GameTag.IMMUNE);
 		SpellDesc applyAuraSpell = MetaSpell.create(demonBuff, immunity);
 		
 		// aura remove
-		SpellDesc removeDemonBuff = AuraSpellBuff.create(-2, -2);
-		demonBuff.setTargetFilter(new RaceFilter(Race.DEMON));
-		SpellDesc removeImmunity = RemoveTagSpell.create(GameTag.IMMUNE);
-		removeImmunity.setTarget(EntityReference.FRIENDLY_HERO);
+		SpellDesc removeDemonBuff = AuraSpellBuff.create(-2, -2, new RaceFilter(Race.DEMON));
+		SpellDesc removeImmunity = RemoveTagSpell.create(EntityReference.FRIENDLY_HERO, GameTag.IMMUNE);
 		SpellDesc removeAuraSpell = MetaSpell.create(removeDemonBuff, removeImmunity);
 		
 		Aura aura = new Aura(applyAuraSpell, removeAuraSpell, EntityReference.FRIENDLY_MINIONS);

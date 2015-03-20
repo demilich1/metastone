@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.mage;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -25,14 +25,11 @@ public class GoblinBlastmage extends MinionCard {
 		return 495;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion goblinBlastmage = createMinion();
-		SpellDesc spell = DamageRandomSpell.create(1, 4);
-		spell.setTarget(EntityReference.ENEMY_CHARACTERS);
-		Battlecry battlecry = Battlecry.createBattlecry(spell);
+		SpellDesc spell = DamageRandomSpell.create(EntityReference.ENEMY_CHARACTERS, 1, 4);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(spell);
 		battlecry.setCondition((context, player) -> SpellUtils.hasMinionOfRace(player, Race.MECH));
 		goblinBlastmage.setBattlecry(battlecry);
 		return goblinBlastmage;

@@ -25,8 +25,7 @@ public class FlesheatingGhoul extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion flesheatingGhoul = createMinion();
-		SpellDesc buffSpell = BuffSpell.create(1);
-		buffSpell.setTarget(EntityReference.SELF);
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, 1, 0);
 		SpellTrigger spellTrigger = new SpellTrigger(new MinionDeathTrigger(), buffSpell);
 		flesheatingGhoul.setSpellTrigger(spellTrigger);
 		return flesheatingGhoul;

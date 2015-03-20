@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.neutral;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -24,7 +24,7 @@ public class KezanMystic extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion kezanMystic = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(StealRandomSecretSpell.create());
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(StealRandomSecretSpell.create());
 		kezanMystic.setBattlecry(battlecry);
 		return kezanMystic;
 	}

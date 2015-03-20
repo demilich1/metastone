@@ -72,10 +72,8 @@ public class FlameLeviathan extends MinionCard implements IGameEventListener {
 		}
 
 		fired = true;
-		SpellDesc damage = DamageSpell.create(2);
-		damage.setTarget(EntityReference.ALL_CHARACTERS);
-		damage.setSourceEntity(getReference());
-		event.getGameContext().getLogic().castSpell(getOwner(), damage);
+		SpellDesc damage = DamageSpell.create(EntityReference.ALL_CHARACTERS, 2);
+		event.getGameContext().getLogic().castSpell(getOwner(), damage, getReference(), EntityReference.NONE);
 	}
 
 	@Override

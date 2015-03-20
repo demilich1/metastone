@@ -25,8 +25,7 @@ public class Lightwarden extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion lightwarden = createMinion();
-		SpellDesc buffSpell = BuffSpell.create(2);
-		buffSpell.setTarget(EntityReference.SELF);
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, 2, 0);
 		SpellTrigger trigger = new SpellTrigger(new HealingTrigger(), buffSpell);
 		lightwarden.setSpellTrigger(trigger);
 		return lightwarden;

@@ -26,8 +26,7 @@ public class WildPyromancer extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion wildPyromancer = createMinion();
-		SpellDesc damageSpell = DamageSpell.create(1);
-		damageSpell.setTarget(EntityReference.ALL_MINIONS);
+		SpellDesc damageSpell = DamageSpell.create(EntityReference.ALL_MINIONS, 1);
 		SpellTrigger trigger = new SpellTrigger(new AfterSpellCastedTrigger(TargetPlayer.SELF), damageSpell);
 		wildPyromancer.setSpellTrigger(trigger);
 		return wildPyromancer;

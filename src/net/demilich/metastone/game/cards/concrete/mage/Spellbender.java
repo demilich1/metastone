@@ -6,7 +6,7 @@ import net.demilich.metastone.game.cards.concrete.tokens.mage.SpellbenderToken;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.SummonNewAttackTargetSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.spells.trigger.MinionTargetedBySpellTrigger;
+import net.demilich.metastone.game.spells.trigger.SpellbenderTrigger;
 
 public class Spellbender extends SecretCard {
 
@@ -15,7 +15,7 @@ public class Spellbender extends SecretCard {
 		setDescription("Secret: When an enemy casts a spell on a minion, summon a 1/3 as the new target.");
 
 		SpellDesc spellbenderSpell = SummonNewAttackTargetSpell.create(new SpellbenderToken());
-		setTriggerAndEffect(new MinionTargetedBySpellTrigger(), spellbenderSpell);
+		setTriggerAndEffect(new SpellbenderTrigger(), spellbenderSpell);
 	}
 
 	@Override

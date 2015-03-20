@@ -29,9 +29,7 @@ public class Emboldener3000 extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion emboldener3000 = createMinion();
-		SpellDesc buffSpell = BuffSpell.create(1, 1);
-		buffSpell.setTarget(EntityReference.ALL_MINIONS);
-		buffSpell.pickRandomTarget(true);
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.ALL_MINIONS, 1, 1, true);
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), buffSpell);
 		emboldener3000.setSpellTrigger(trigger);
 		return emboldener3000;

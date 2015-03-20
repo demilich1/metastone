@@ -188,6 +188,9 @@ public class SimulationResultView extends BorderPane {
 		List<Card> cards = new ArrayList<Card>();
 		for (int cardId : stats.getCardsPlayed().keySet()) {
 			Card card = CardCatalogue.getCardById(cardId);
+			if (card == null) {
+				System.out.println("Invalid card with id: " + cardId);
+			}
 			if (card.getCardType() == cardType) {
 				cards.add(card);	
 			}

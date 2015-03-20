@@ -6,7 +6,6 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.CloneMinionSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.MinionCardPlayedTrigger;
-import net.demilich.metastone.game.targeting.EntityReference;
 
 public class MirrorEntity extends SecretCard {
 
@@ -15,7 +14,6 @@ public class MirrorEntity extends SecretCard {
 		setDescription("Secret: When your opponent plays a minion, summon a copy of it.");
 		
 		SpellDesc copySpell = CloneMinionSpell.create();
-		copySpell.setTarget(EntityReference.EVENT_TARGET);
 		setTriggerAndEffect(new MinionCardPlayedTrigger(), copySpell);
 	}
 

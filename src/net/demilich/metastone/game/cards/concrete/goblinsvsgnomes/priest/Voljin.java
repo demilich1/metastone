@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.priest;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -27,7 +27,7 @@ public class Voljin extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion voljin = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(VoljinSpell.create(), TargetSelection.MINIONS);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(VoljinSpell.create(), TargetSelection.MINIONS);
 		voljin.setBattlecry(battlecry);
 		return voljin;
 	}

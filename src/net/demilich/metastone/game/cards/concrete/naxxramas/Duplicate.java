@@ -15,8 +15,7 @@ public class Duplicate extends SecretCard {
 		super("Duplicate", Rarity.COMMON, HeroClass.MAGE, 3);
 		setDescription("Secret: When a friendly minion dies, put 2 copies of it in your hand.");
 
-		SpellDesc duplicate = PutCopyInHandSpell.create(2);
-		duplicate.setTarget(EntityReference.EVENT_TARGET);
+		SpellDesc duplicate = PutCopyInHandSpell.create(EntityReference.EVENT_TARGET, 2);
 		setTriggerAndEffect(new MinionDeathTrigger(TargetPlayer.SELF), duplicate);
 	}
 

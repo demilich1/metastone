@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.neutral;
 
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -28,9 +28,8 @@ public class AntiqueHealbot extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion antiqueHealbot = createMinion();
-		SpellDesc healSpell = HealingSpell.create(8);
-		healSpell.setTarget(EntityReference.FRIENDLY_HERO);
-		Battlecry battlecry = Battlecry.createBattlecry(healSpell);
+		SpellDesc healSpell = HealingSpell.create(EntityReference.FRIENDLY_HERO, 8);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(healSpell);
 		antiqueHealbot.setBattlecry(battlecry);
 		return antiqueHealbot;
 	}

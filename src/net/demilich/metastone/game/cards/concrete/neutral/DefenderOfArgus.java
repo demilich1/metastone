@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.neutral;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -29,9 +29,8 @@ public class DefenderOfArgus extends MinionCard {
 		Minion defenderOfArgus = createMinion();
 		SpellDesc buffSpell = BuffSpell.create(+1, +1);
 		SpellDesc tauntSpell = ApplyTagSpell.create(GameTag.TAUNT);
-		SpellDesc battlecrySpell = MetaSpell.create(buffSpell, tauntSpell);
-		battlecrySpell.setTarget(EntityReference.ADJACENT_MINIONS);
-		Battlecry battlecry = Battlecry.createBattlecry(battlecrySpell);
+		SpellDesc battlecrySpell = MetaSpell.create(EntityReference.ADJACENT_MINIONS, buffSpell, tauntSpell);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(battlecrySpell);
 		battlecry.setResolvedLate(true);
 		defenderOfArgus.setBattlecry(battlecry);
 		return defenderOfArgus;

@@ -77,11 +77,9 @@ public class BurrowingMine extends SpellCard implements IGameEventListener {
 		}
 
 		fired = true;
-		SpellDesc damage = DamageSpell.create(10);
-		damage.setTarget(EntityReference.FRIENDLY_HERO);
+		SpellDesc damage = DamageSpell.create(EntityReference.FRIENDLY_HERO,10);
 		SpellDesc mineExplodes = MetaSpell.create(damage, DrawCardSpell.create());
-		mineExplodes.setSourceEntity(getReference());
-		event.getGameContext().getLogic().castSpell(cardEvent.getPlayerId(), mineExplodes);
+		event.getGameContext().getLogic().castSpell(cardEvent.getPlayerId(), mineExplodes, getReference(), EntityReference.NONE);
 	}
 
 	@Override

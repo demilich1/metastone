@@ -13,8 +13,7 @@ public class SavageRoar extends SpellCard {
 	public SavageRoar() {
 		super("Savage Roar", Rarity.FREE, HeroClass.DRUID, 3);
 		setDescription("Give your characters +2 Attack this turn.");
-		SpellDesc buff = TemporaryAttackSpell.create(+2);
-		buff.setTarget(EntityReference.FRIENDLY_CHARACTERS);
+		SpellDesc buff = TemporaryAttackSpell.create(EntityReference.FRIENDLY_CHARACTERS, +2);
 		setSpell(buff);
 		setTargetRequirement(TargetSelection.NONE);
 	}

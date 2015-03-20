@@ -1,7 +1,7 @@
 package net.demilich.metastone.tests;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.actions.PhysicalAttackAction;
 import net.demilich.metastone.game.cards.Card;
@@ -42,9 +42,8 @@ public class BasicTests extends TestBase {
 		warrior.setMana(10);
 
 		TestMinionCard devMonster = new TestMinionCard(3, 3);
-		SpellDesc damageSpell = DamageSpell.create(3);
-		damageSpell.setTarget(EntityReference.ENEMY_HERO);
-		Battlecry testBattlecry = Battlecry.createBattlecry(damageSpell);
+		SpellDesc damageSpell = DamageSpell.create(EntityReference.ENEMY_HERO, 3);
+		BattlecryAction testBattlecry = BattlecryAction.createBattlecry(damageSpell);
 		testBattlecry.setTarget(warrior.getHero());
 		devMonster.getMinion().setBattlecry(testBattlecry);
 		context.getLogic().receiveCard(mage.getId(), devMonster);
@@ -65,9 +64,8 @@ public class BasicTests extends TestBase {
 		TestMinionCard devMonsterCard = new TestMinionCard(damage, 2);
 		playCard(context, mage, devMonsterCard);
 
-		SpellDesc heroBuffSpell = BuffHeroSpell.create(damage, 0);
-		heroBuffSpell.setSourceEntity(druid.getHero().getReference());
-		context.getLogic().castSpell(druid.getId(), heroBuffSpell);
+		SpellDesc heroBuffSpell = BuffHeroSpell.create(EntityReference.FRIENDLY_HERO, damage, 0);
+		context.getLogic().castSpell(druid.getId(), heroBuffSpell, druid.getHero().getReference(), null);
 		context.getLogic().endTurn(druid.getId());
 
 		Actor devMonster = getSingleMinion(mage.getMinions());
@@ -79,7 +77,7 @@ public class BasicTests extends TestBase {
 		Assert.assertEquals(devMonster.getHp(), devMonster.getMaxHp());
 		context.getLogic().endTurn(mage.getId());
 
-		context.getLogic().castSpell(druid.getId(), heroBuffSpell);
+		context.getLogic().castSpell(druid.getId(), heroBuffSpell, druid.getHero().getReference(), null);
 		GameAction heroAttackAction = new PhysicalAttackAction(druid.getHero().getReference());
 		heroAttackAction.setTarget(devMonster);
 		context.getLogic().performGameAction(mage.getId(), heroAttackAction);

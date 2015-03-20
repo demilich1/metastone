@@ -1,5 +1,7 @@
 package net.demilich.metastone.game.spells.custom;
 
+import java.util.Map;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
@@ -7,18 +9,20 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.TransformMinionSpell;
+import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.IGameEventListener;
+import net.demilich.metastone.game.targeting.EntityReference;
 
 public class FacelessSpell extends Spell {
 	
 	public static SpellDesc create() {
-		SpellDesc desc = new SpellDesc(FacelessSpell.class);
-		return desc;
+		Map<SpellArg, Object> arguments = SpellDesc.build(FacelessSpell.class);
+		return new SpellDesc(arguments);
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Minion template = (Minion) target;
 		Minion clone = template.clone();
 		clone.setSpellTrigger(null);
@@ -26,9 +30,8 @@ public class FacelessSpell extends Spell {
 
 		Minion sourceActor = context.getSummonStack().peek();
 		SpellDesc transformSpell = TransformMinionSpell.create(clone);
-		transformSpell.setTarget(sourceActor.getReference());
-		transformSpell.setSourceEntity(desc.getSourceEntity());
-		context.getLogic().castSpell(player.getId(), transformSpell);
+		EntityReference sourceReference = source != null ? source.getReference() : null;
+		context.getLogic().castSpell(player.getId(), transformSpell, sourceReference, sourceActor.getReference());
 		
 		for (IGameEventListener trigger : context.getTriggersAssociatedWith(template.getReference())) {
 			IGameEventListener triggerClone = trigger.clone();

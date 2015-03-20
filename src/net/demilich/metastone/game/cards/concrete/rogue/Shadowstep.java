@@ -11,11 +11,9 @@ public class Shadowstep extends SpellCard {
 	public Shadowstep() {
 		super("Shadowstep", Rarity.COMMON, HeroClass.ROGUE, 0);
 		setDescription("Return a friendly minion to your hand. It costs (2) less.");
-		setSpell(ReturnMinionToHandSpell.create(-2));
+		setSpell(ReturnMinionToHandSpell.create(null, -2, false));
 		setTargetRequirement(TargetSelection.FRIENDLY_MINIONS);
 	}
-
-
 
 	@Override
 	public int getTypeId() {

@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.cards.concrete.neutral;
 
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.EntityRaceFilter;
@@ -30,10 +30,9 @@ public class HungryCrab extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion hungryCrab = createMinion();
-		SpellDesc buffSpell = BuffSpell.create(2, 2);
-		buffSpell.setTarget(EntityReference.SELF);
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, 2, 2);
 		SpellDesc hungryCrabSpell = MetaSpell.create(DestroySpell.create(), buffSpell);
-		Battlecry battlecry = Battlecry.createBattlecry(hungryCrabSpell, TargetSelection.MINIONS);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(hungryCrabSpell, TargetSelection.MINIONS);
 		battlecry.setEntityFilter(new EntityRaceFilter(Race.MURLOC));
 		hungryCrab.setBattlecry(battlecry);
 		return hungryCrab;

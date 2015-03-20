@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.neutral;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -24,7 +24,7 @@ public class GnomishExperimenter extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion gnomishExperimenter = createMinion();
-		Battlecry battlecry = Battlecry.createBattlecry(GnomishExperimenterSpell.create());
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(GnomishExperimenterSpell.create());
 		gnomishExperimenter.setBattlecry(battlecry);
 		return gnomishExperimenter;
 	}

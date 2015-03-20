@@ -1,5 +1,8 @@
 package net.demilich.metastone.game.spells.custom;
 
+import java.util.Map;
+import java.util.function.Predicate;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
@@ -9,14 +12,15 @@ import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.DamageSpell;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.targeting.EntityReference;
 
 public class BouncingBladeSpell extends DamageSpell {
 
 	public static SpellDesc create() {
-		SpellDesc desc = new SpellDesc(BouncingBladeSpell.class);
-		desc.pickRandomTarget(true);
-		desc.set(SpellArg.DAMAGE, 1);
-		desc.setTargetFilter(entity -> {
+		Map<SpellArg, Object> arguments = SpellDesc.build(BouncingBladeSpell.class);
+		arguments.put(SpellArg.RANDOM_TARGET, true);
+		arguments.put(SpellArg.VALUE, 1);
+		Predicate<Entity> targetFilter = entity -> {
 			Actor actor = (Actor) entity;
 			if (actor.isDead()) {
 				return false;
@@ -27,17 +31,19 @@ public class BouncingBladeSpell extends DamageSpell {
 			}
 
 			return true;
-		});
-		return desc;
+		};
+		arguments.put(SpellArg.ENTITY_FILTER, targetFilter);
+		arguments.put(SpellArg.TARGET, EntityReference.ALL_MINIONS);
+		return new SpellDesc(arguments);
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		if (target == null) {
 			return;
 		}
 
-		super.onCast(context, player, desc, target);
+		super.onCast(context, player, desc, source, target);
 		if (((Actor) target).isDead()) {
 			return;
 		}
@@ -57,7 +63,8 @@ public class BouncingBladeSpell extends DamageSpell {
 			}
 		}
 
-		context.getLogic().castSpell(player.getId(), desc);
+		EntityReference sourceReference = source != null ? source.getReference() : null;
+		context.getLogic().castSpell(player.getId(), desc, sourceReference, desc.getTarget());
 	}
 
 }

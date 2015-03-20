@@ -13,8 +13,7 @@ public class EchoOfMedivh extends SpellCard {
 		super("Echo of Medivh", Rarity.EPIC, HeroClass.MAGE, 4);
 		setDescription("Put a copy of each friendly minion into your hand.");
 		
-		setSpell(PutCopyInHandSpell.create());
-		setPredefinedTarget(EntityReference.FRIENDLY_MINIONS);
+		setSpell(PutCopyInHandSpell.create(EntityReference.FRIENDLY_MINIONS, 1));
 		setTargetRequirement(TargetSelection.NONE);
 	}
 

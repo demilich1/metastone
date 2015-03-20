@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.neutral;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -29,7 +29,7 @@ public class Blingtron3000 extends MinionCard {
 	public Minion summon() {
 		Minion blingtron3000 = createMinion();
 		SpellDesc equipRandomWeapons = EquipRandomWeaponSpell.create(TargetPlayer.BOTH);
-		Battlecry battlecry = Battlecry.createBattlecry(equipRandomWeapons);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(equipRandomWeapons);
 		blingtron3000.setBattlecry(battlecry);
 		return blingtron3000;
 	}

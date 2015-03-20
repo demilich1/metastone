@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.warrior;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -32,7 +32,7 @@ public class ScrewjankClunker extends MinionCard {
 	public Minion summon() {
 		Minion screwjankClunker = createMinion();
 		SpellDesc buffMechSpell = BuffSpell.create(+2, +2);
-		Battlecry battlecry = Battlecry.createBattlecry(buffMechSpell, TargetSelection.FRIENDLY_MINIONS);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(buffMechSpell, TargetSelection.FRIENDLY_MINIONS);
 		battlecry.setEntityFilter(entity -> entity.getTag(GameTag.RACE) == Race.MECH);
 		screwjankClunker.setBattlecry(battlecry);
 		return screwjankClunker;

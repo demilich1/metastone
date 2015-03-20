@@ -4,7 +4,7 @@ import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.spells.HealingSpell;
+import net.demilich.metastone.game.spells.HealToFullSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 import net.demilich.metastone.game.spells.trigger.TurnStartTrigger;
@@ -25,8 +25,7 @@ public class StoneskinGargoyle extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion stoneskinGargoyle = createMinion();
-		SpellDesc healSelf = HealingSpell.create(99);
-		healSelf.setTarget(EntityReference.SELF);
+		SpellDesc healSelf = HealToFullSpell.create(EntityReference.SELF);
 		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), healSelf);
 		stoneskinGargoyle.setSpellTrigger(trigger);
 		return stoneskinGargoyle;

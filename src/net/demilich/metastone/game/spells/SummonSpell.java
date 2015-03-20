@@ -1,5 +1,7 @@
 package net.demilich.metastone.game.spells;
 
+import java.util.Map;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.MinionCard;
@@ -13,29 +15,37 @@ import net.demilich.metastone.game.targeting.EntityReference;
 public class SummonSpell extends Spell {
 	
 	public static SpellDesc create(MinionCard... minionCards) {
-		return create(null, minionCards);
+		return create(TargetPlayer.SELF, minionCards);
+	}
+	
+	public static SpellDesc create(TargetPlayer targetPlayer, MinionCard... minionCards) {
+		return create(targetPlayer, null, minionCards);
+	}
+	
+	public static SpellDesc create(RelativeToSource relativeBoardPosition, MinionCard... minionCards) {
+		return create(TargetPlayer.SELF, relativeBoardPosition, minionCards);
 	}
 
-	public static SpellDesc create(RelativeToSource relativeBoardPosition, MinionCard... minionCards) {
-		SpellDesc desc = new SpellDesc(SummonSpell.class);
-		desc.set(SpellArg.CARDS, minionCards);
-		desc.setTarget(EntityReference.NONE);
+	public static SpellDesc create(TargetPlayer targetPlayer, RelativeToSource relativeBoardPosition, MinionCard... minionCards) {
+		Map<SpellArg, Object> arguments = SpellDesc.build(SummonSpell.class);
+		arguments.put(SpellArg.CARD, minionCards);
+		arguments.put(SpellArg.TARGET, EntityReference.NONE);
 		if (relativeBoardPosition != null) {
-			desc.set(SpellArg.BOARD_POSITION_RELATIVE, relativeBoardPosition);
+			arguments.put(SpellArg.BOARD_POSITION_RELATIVE, relativeBoardPosition);
 		}
-		return desc;
+		return new SpellDesc(arguments);
 	}
 
 	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
-		MinionCard[] minionCards = (MinionCard[]) desc.get(SpellArg.CARDS);
-		int boardPosition = getBoardPosition(context, player, desc);
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
+		MinionCard[] minionCards = (MinionCard[]) desc.get(SpellArg.CARD);
+		int boardPosition = getBoardPosition(context, player, desc, source);
 		for (MinionCard minionCard : minionCards) {
 			context.getLogic().summon(player.getId(), minionCard.summon(), null, boardPosition, false);
 		}
 	}
 	
-	private int getBoardPosition(GameContext context, Player player, SpellDesc desc) {
+	private int getBoardPosition(GameContext context, Player player, SpellDesc desc, Entity source) {
 		final int UNDEFINED = -1;
 		int boardPosition = desc.contains(SpellArg.BOARD_POSITION_ABSOLUTE) ? desc.getInt(SpellArg.BOARD_POSITION_ABSOLUTE) : -1;
 		if (boardPosition != UNDEFINED) {
@@ -45,9 +55,8 @@ public class SummonSpell extends Spell {
 		if (relativeBoardPosition == null) {
 			return UNDEFINED;
 		}
-		Minion sourceMinion = (Minion) context.resolveSingleTarget(desc.getSourceEntity());
 		
-		int sourcePosition = context.getBoardPosition(sourceMinion);
+		int sourcePosition = context.getBoardPosition((Minion) source);
 		if (sourcePosition == UNDEFINED) {
 			return UNDEFINED;
 		}

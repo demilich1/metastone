@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.warlock;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -26,7 +26,7 @@ public class Succubus extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion succubus = createMinion();
-		succubus.setBattlecry(Battlecry.createBattlecry(DiscardCardSpell.create()));
+		succubus.setBattlecry(BattlecryAction.createBattlecry(DiscardCardSpell.create()));
 		return succubus;
 	}
 }

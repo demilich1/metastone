@@ -1,9 +1,12 @@
 package net.demilich.metastone.game.cards.concrete.neutral;
 
+import java.util.function.Predicate;
+
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
+import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
@@ -28,11 +31,9 @@ public class StampedingKodo extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion stampedingKodo = createMinion();
-		SpellDesc destroySpell = DestroySpell.create();
-		destroySpell.pickRandomTarget(true);
-		destroySpell.setTargetFilter(entity -> ((Minion) entity).getAttack() <= 2);
-		destroySpell.setTarget(EntityReference.ENEMY_MINIONS);
-		Battlecry battlecry = Battlecry.createBattlecry(destroySpell);
+		Predicate<Entity> targetFilter = entity -> ((Minion) entity).getAttack() <= 2;
+		SpellDesc destroySpell = DestroySpell.create(EntityReference.ENEMY_MINIONS, targetFilter, true);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(destroySpell);
 		stampedingKodo.setBattlecry(battlecry);
 		return stampedingKodo;
 	}

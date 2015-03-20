@@ -35,13 +35,9 @@ public class MimironsHead extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion mimironsHead = createMinion();
-		SpellDesc destroyAllMechs = DestroySpell.create();
-		destroyAllMechs.setTargetFilter(entity -> entity.getTag(GameTag.RACE) == Race.MECH);
-		destroyAllMechs.setTarget(EntityReference.FRIENDLY_MINIONS);
+		SpellDesc destroyAllMechs = DestroySpell.create(EntityReference.FRIENDLY_MINIONS, entity -> entity.getTag(GameTag.RACE) == Race.MECH, false);
 		SpellDesc summon = SummonSpell.create(new V07TR0N());
-		summon.setTarget(EntityReference.NONE);
-		SpellDesc metaSpell = MetaSpell.create(destroyAllMechs, summon);
-		metaSpell.setTarget(EntityReference.NONE);
+		SpellDesc metaSpell = MetaSpell.create(EntityReference.NONE, destroyAllMechs, summon);
 		SpellTrigger trigger = new SpellTrigger(new StartOfTurnHaveMechsTrigger(), metaSpell);
 		mimironsHead.setSpellTrigger(trigger);
 		return mimironsHead;

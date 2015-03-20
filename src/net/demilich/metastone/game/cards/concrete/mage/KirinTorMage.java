@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.mage;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
@@ -30,9 +30,8 @@ public class KirinTorMage extends MinionCard {
 		Minion kirinTorMage = createMinion();
 		OneTurnCostModifier costModifier = new OneTurnCostModifier(CardType.SPELL, -99, new SecretPlayedTrigger());
 		costModifier.setRequiredTag(GameTag.SECRET);
-		SpellDesc castSecretForFree = AddCostModifierSpell.create(costModifier);
-		castSecretForFree.setTarget(EntityReference.FRIENDLY_HERO);
-		kirinTorMage.setBattlecry(Battlecry.createBattlecry(castSecretForFree));
+		SpellDesc castSecretForFree = AddCostModifierSpell.create(EntityReference.FRIENDLY_HERO, costModifier);
+		kirinTorMage.setBattlecry(BattlecryAction.createBattlecry(castSecretForFree));
 		return kirinTorMage;
 	}
 }

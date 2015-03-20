@@ -29,9 +29,7 @@ public class Poultryizer extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion poultryizer = createMinion();
-		SpellDesc chickenizeSpell = TransformMinionSpell.create(new Chicken());
-		chickenizeSpell.setTarget(EntityReference.ALL_MINIONS);
-		chickenizeSpell.pickRandomTarget(true);
+		SpellDesc chickenizeSpell = TransformMinionSpell.create(EntityReference.ALL_MINIONS, new Chicken(), true);
 		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), chickenizeSpell);
 		poultryizer.setSpellTrigger(trigger);
 		return poultryizer;

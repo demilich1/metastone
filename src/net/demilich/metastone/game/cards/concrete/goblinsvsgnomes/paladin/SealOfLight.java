@@ -17,14 +17,10 @@ public class SealOfLight extends SpellCard {
 		setDescription("Restore 4 Health to your hero and gain +2 Attack this turn.");
 
 		SpellDesc heal = HealingSpell.create(4);
-		SpellDesc attack = BuffHeroSpell.create(+2, 0);
-		setSpell(MetaSpell.create(heal, attack));
+		SpellDesc attack = BuffHeroSpell.create(EntityReference.FRIENDLY_HERO, +2, 0);
+		setSpell(MetaSpell.create(EntityReference.FRIENDLY_HERO, heal, attack));
 		setTargetRequirement(TargetSelection.NONE);
-		setPredefinedTarget(EntityReference.FRIENDLY_HERO);
-
 	}
-
-
 
 	@Override
 	public int getTypeId() {

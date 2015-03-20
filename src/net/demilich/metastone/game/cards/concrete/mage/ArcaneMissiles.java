@@ -13,8 +13,7 @@ public class ArcaneMissiles extends SpellCard {
 		super("Arcane Missiles", Rarity.FREE, HeroClass.MAGE, 1);
 		setDescription("Deal $3 damage randomly split among enemy characters.");
 		setTargetRequirement(TargetSelection.NONE);
-		setSpell(DamageRandomSpell.create(1, 3));
-		setPredefinedTarget(EntityReference.ENEMY_CHARACTERS);
+		setSpell(DamageRandomSpell.create(EntityReference.ENEMY_CHARACTERS, 1, 3));
 	}
 
 	@Override

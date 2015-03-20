@@ -9,7 +9,6 @@ import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.SpellCastedTrigger;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
-import net.demilich.metastone.game.targeting.EntityReference;
 
 public class LorewalkerCho extends MinionCard {
 
@@ -27,7 +26,6 @@ public class LorewalkerCho extends MinionCard {
 	public Minion summon() {
 		Minion lorewalkerCho = createMinion();
 		SpellDesc copySpell = CopySpellCardSpell.create();
-		copySpell.setTarget(EntityReference.EVENT_TARGET);
 		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(TargetPlayer.BOTH), copySpell);
 		lorewalkerCho.setSpellTrigger(trigger);
 		return lorewalkerCho;

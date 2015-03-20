@@ -13,7 +13,6 @@ import net.demilich.metastone.game.spells.custom.AlarmOBotSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 import net.demilich.metastone.game.spells.trigger.TurnStartTrigger;
-import net.demilich.metastone.game.targeting.EntityReference;
 
 public class AlarmOBot extends MinionCard {
 
@@ -32,7 +31,6 @@ public class AlarmOBot extends MinionCard {
 	public Minion summon() {
 		Minion alarmOBot = createMinion();
 		SpellDesc alarmOBotSpell = AlarmOBotSpell.create();
-		alarmOBotSpell.setTarget(EntityReference.SELF);
 		alarmOBot.setSpellTrigger(new SpellTrigger(new AlarmOBotTrigger(), alarmOBotSpell));
 		return alarmOBot;
 	}

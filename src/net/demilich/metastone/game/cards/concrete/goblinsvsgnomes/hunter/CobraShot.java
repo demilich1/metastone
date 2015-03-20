@@ -16,13 +16,10 @@ public class CobraShot extends SpellCard {
 		setDescription("Deal 3 damage to a minion and the enemy hero.");
 		
 		SpellDesc damageMinion = DamageSpell.create(3);
-		SpellDesc damageHero = DamageSpell.create(3);
-		damageHero.setTarget(EntityReference.ENEMY_HERO);
+		SpellDesc damageHero = DamageSpell.create(EntityReference.ENEMY_HERO, 3);
 		setSpell(MetaSpell.create(damageMinion, damageHero));
 		setTargetRequirement(TargetSelection.MINIONS);
 	}
-
-
 
 	@Override
 	public int getTypeId() {

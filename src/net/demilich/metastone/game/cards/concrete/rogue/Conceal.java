@@ -15,13 +15,10 @@ public class Conceal extends SpellCard {
 	public Conceal() {
 		super("Conceal", Rarity.COMMON, HeroClass.ROGUE, 1);
 		setDescription("Give your minions Stealth until your next turn.");
-		SpellDesc stealth = ApplyTagSpell.create(GameTag.STEALTHED, new TurnStartTrigger());
+		SpellDesc stealth = ApplyTagSpell.create(EntityReference.FRIENDLY_MINIONS, GameTag.STEALTHED, new TurnStartTrigger());
 		setSpell(stealth);
-		setPredefinedTarget(EntityReference.FRIENDLY_MINIONS);
 		setTargetRequirement(TargetSelection.NONE);
 	}
-
-
 
 	@Override
 	public int getTypeId() {

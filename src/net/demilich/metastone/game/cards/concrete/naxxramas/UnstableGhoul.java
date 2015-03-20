@@ -24,8 +24,7 @@ public class UnstableGhoul extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion unstableGhoul = createMinion(GameTag.TAUNT);
-		SpellDesc deathrattle = DamageSpell.create(1);
-		deathrattle.setTarget(EntityReference.ALL_MINIONS);
+		SpellDesc deathrattle = DamageSpell.create(EntityReference.ALL_MINIONS, 1);
 		unstableGhoul.addDeathrattle(deathrattle);
 		return unstableGhoul;
 	}

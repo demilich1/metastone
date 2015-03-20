@@ -206,8 +206,7 @@ public class SpecialCardTests extends TestBase {
 		Assert.assertEquals(player.getHero().getWeapon().getWeaponDamage(), 5);
 
 		// wipe everything
-		SpellDesc wipeSpell = DestroySpell.create();
-		wipeSpell.setTarget(EntityReference.ALL_MINIONS);
+		SpellDesc wipeSpell = DestroySpell.create(EntityReference.ALL_MINIONS);
 		SpellCard wipe = new TestSpellCard(wipeSpell);
 		playCard(context, player, wipe);
 

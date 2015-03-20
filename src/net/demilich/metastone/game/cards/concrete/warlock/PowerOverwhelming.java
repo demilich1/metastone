@@ -20,10 +20,9 @@ public class PowerOverwhelming extends SpellCard {
 	public PowerOverwhelming() {
 		super("Power Overwhelming", Rarity.COMMON, HeroClass.WARLOCK, 1);
 		setDescription("Give a friendly minion +4/+4 until end of turn. Then, it dies. Horribly.");
-		SpellDesc destroySpell = DestroySpell.create();
-		destroySpell.setTarget(EntityReference.SELF);
+		SpellDesc destroySpell = DestroySpell.create(EntityReference.SELF);
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), destroySpell);
-		setSpell(MetaSpell.create(BuffSpell.create(4, 4), AddSpellTriggerSpell.create(trigger), ApplyTagSpell.create(GameTag.MARKED_FOR_DEATH)));
+		setSpell(MetaSpell.create(null, BuffSpell.create(4, 4), AddSpellTriggerSpell.create(trigger), ApplyTagSpell.create(GameTag.MARKED_FOR_DEATH), false));
 		setTargetRequirement(TargetSelection.FRIENDLY_MINIONS);
 	}
 

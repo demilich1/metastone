@@ -11,9 +11,9 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 
 public abstract class Spell {
 
-	public void cast(GameContext context, Player player, SpellDesc desc, List<Entity> targets) {
+	public void cast(GameContext context, Player player, SpellDesc desc, Entity source, List<Entity> targets) {
 		if (targets == null) {
-			castForPlayer(context, player, desc, null);
+			castForPlayer(context, player, desc, source, null);
 			return;
 		}
 		
@@ -22,16 +22,16 @@ public abstract class Spell {
 		List<Entity> validTargets = SpellUtils.getValidTargets(targets, targetFilter);
 		if (validTargets.size() > 0 && desc.getBool(SpellArg.RANDOM_TARGET)) {
 			Entity target = SpellUtils.getRandomTarget(validTargets);
-			castForPlayer(context, player, desc, target);
-			onCast(context, player, desc, target);
+			castForPlayer(context, player, desc, source, target);
+			//onCast(context, player, desc, null, target);
 		} else {
 			for (Entity target : validTargets) {
-				castForPlayer(context, player, desc, target);
+				castForPlayer(context, player, desc, source, target);
 			}
 		}
 	}
 	
-	private void castForPlayer(GameContext context, Player player, SpellDesc desc, Entity target) {
+	private void castForPlayer(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		TargetPlayer targetPlayer = desc.getTargetPlayer();
 		if (targetPlayer == null) {
 			targetPlayer = TargetPlayer.SELF;
@@ -39,21 +39,21 @@ public abstract class Spell {
 		Player opponent = context.getOpponent(player);
 		switch (targetPlayer) {
 		case BOTH:
-			onCast(context, player, desc, target);
-			onCast(context, opponent, desc, target);
+			onCast(context, player, desc, source, target);
+			onCast(context, opponent, desc, source, target);
 			break;
 		case OPPONENT:
-			onCast(context, opponent, desc, target);
+			onCast(context, opponent, desc, source, target);
 			break;
 		case SELF:
-			onCast(context, player, desc, target);
+			onCast(context, player, desc, source, target);
 			break;
 		default:
 			break;
 		}
 	}
 
-	protected abstract void onCast(GameContext context, Player player, SpellDesc desc, Entity target);
+	protected abstract void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target);
 
 	@Override
 	public String toString() {

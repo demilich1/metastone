@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.cards.concrete.warrior;
 
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -27,7 +27,7 @@ public class CruelTaskmaster extends MinionCard {
 	public Minion summon() {
 		Minion cruelTaskmaster = createMinion();
 		SpellDesc cruelBuffSpell = MetaSpell.create(BuffSpell.create(2, 0), DamageSpell.create(1));
-		Battlecry battlecry = Battlecry.createBattlecry(cruelBuffSpell, TargetSelection.MINIONS);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(cruelBuffSpell, TargetSelection.MINIONS);
 		cruelTaskmaster.setBattlecry(battlecry);
 		return cruelTaskmaster;
 	}

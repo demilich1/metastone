@@ -14,8 +14,7 @@ public class ExplosiveTrap extends SecretCard {
 		super("Explosive Trap", Rarity.COMMON, HeroClass.HUNTER, 2);
 		setDescription("Secret: When your hero is attacked, deal $2 damage to all enemies.");
 		
-		SpellDesc damageSpell = DamageSpell.create(2);
-		damageSpell.setTarget(EntityReference.ENEMY_CHARACTERS);
+		SpellDesc damageSpell = DamageSpell.create(EntityReference.ENEMY_CHARACTERS, 2);
 		setTriggerAndEffect(new HeroAttackedTrigger(), damageSpell);
 	}
 

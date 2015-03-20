@@ -17,8 +17,7 @@ public class SiphonSoul extends SpellCard {
 		setDescription("Destroy a minion. Restore 3 Health to your hero.");
 
 		SpellDesc destroySpell = DestroySpell.create();
-		SpellDesc healingSpell = HealingSpell.create(3);
-		healingSpell.setTarget(EntityReference.FRIENDLY_HERO);
+		SpellDesc healingSpell = HealingSpell.create(EntityReference.FRIENDLY_HERO, 3);
 		setSpell(MetaSpell.create(destroySpell, healingSpell));
 
 		setTargetRequirement(TargetSelection.MINIONS);

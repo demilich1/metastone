@@ -6,7 +6,6 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.custom.PlayRandomSecretSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.targeting.EntityReference;
 
 public class MadScientist extends MinionCard {
 
@@ -24,7 +23,6 @@ public class MadScientist extends MinionCard {
 	public Minion summon() {
 		Minion madScientist = createMinion();
 		SpellDesc deathrattle = PlayRandomSecretSpell.create();
-		deathrattle.setTarget(EntityReference.NONE);
 		madScientist.addDeathrattle(deathrattle);
 		return madScientist;
 	}

@@ -1,5 +1,7 @@
 package net.demilich.metastone.game.spells;
 
+import java.util.Map;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
@@ -19,17 +21,17 @@ public class BuffWeaponSpell extends Spell {
 	}
 	
 	public static SpellDesc create(int attackBonus, int durabilityBonus) {
-		SpellDesc desc = new SpellDesc(BuffWeaponSpell.class);
-		desc.set(SpellArg.ATTACK_BONUS, attackBonus);
-		desc.set(SpellArg.HP_BONUS, durabilityBonus);
-		desc.setTarget(EntityReference.NONE);
-		return desc;
+		Map<SpellArg, Object> arguments = SpellDesc.build(BuffWeaponSpell.class);
+		arguments.put(SpellArg.ATTACK_BONUS, attackBonus);
+		arguments.put(SpellArg.HP_BONUS, durabilityBonus);
+		arguments.put(SpellArg.TARGET, EntityReference.NONE);
+		return new SpellDesc(arguments);
 	}
 	
 	private static Logger logger = LoggerFactory.getLogger(BuffWeaponSpell.class);
 
 	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity target) {
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int damageBonus = desc.getInt(SpellArg.ATTACK_BONUS);
 		int durabilityBonus = desc.getInt(SpellArg.HP_BONUS);
 		

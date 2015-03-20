@@ -20,8 +20,7 @@ public class Preparation extends SpellCard {
 
 		OneTurnCostModifier costModifier = new OneTurnCostModifier(CardType.SPELL, -3, new CardPlayedTrigger(TargetPlayer.SELF,
 				CardType.SPELL));
-		SpellDesc spellCostReduce = AddCostModifierSpell.create(costModifier);
-		spellCostReduce.setTarget(EntityReference.FRIENDLY_HERO);
+		SpellDesc spellCostReduce = AddCostModifierSpell.create(EntityReference.FRIENDLY_HERO, costModifier);
 		setSpell(spellCostReduce);
 		setTargetRequirement(TargetSelection.NONE);
 	}

@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.priest;
 
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -27,7 +27,7 @@ public class Shrinkmeister extends MinionCard {
 	public Minion summon() {
 		Minion shrinkmeister = createMinion();
 		SpellDesc buff = TemporaryAttackSpell.create(-2);
-		Battlecry battlecry = Battlecry.createBattlecry(buff, TargetSelection.MINIONS);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(buff, TargetSelection.MINIONS);
 		shrinkmeister.setBattlecry(battlecry);
 		return shrinkmeister;
 	}

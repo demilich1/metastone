@@ -16,8 +16,7 @@ public class Counterspell extends SecretCard {
 		super("Counterspell", Rarity.RARE, HeroClass.MAGE, 3);
 		setDescription("Secret: When your opponent casts a spell, Counter it.");
 
-		SpellDesc counterSpell = ApplyTagSpell.create(GameTag.COUNTERED);
-		counterSpell.setTarget(EntityReference.PENDING_CARD);
+		SpellDesc counterSpell = ApplyTagSpell.create(EntityReference.PENDING_CARD, GameTag.COUNTERED);
 		setTriggerAndEffect(new SpellCastedTrigger(TargetPlayer.OPPONENT), counterSpell);
 	}
 

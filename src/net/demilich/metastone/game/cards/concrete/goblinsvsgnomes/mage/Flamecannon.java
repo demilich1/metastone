@@ -14,15 +14,10 @@ public class Flamecannon extends SpellCard {
 		super("Flamecannon", Rarity.COMMON, HeroClass.MAGE, 2);
 		setDescription("Deal 4 damage to a random enemy minion.");
 		
-		SpellDesc spellDesc = DamageSpell.create(4);
-		spellDesc.pickRandomTarget(true);
-		spellDesc.setTarget(EntityReference.ENEMY_MINIONS);
+		SpellDesc spellDesc = DamageSpell.create(EntityReference.ENEMY_MINIONS, 4, true);
 		setSpell(spellDesc);
-		
 		setTargetRequirement(TargetSelection.NONE);
 	}
-
-
 
 	@Override
 	public int getTypeId() {

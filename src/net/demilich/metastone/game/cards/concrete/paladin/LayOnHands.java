@@ -16,8 +16,7 @@ public class LayOnHands extends SpellCard {
 		super("Lay on Hands", Rarity.EPIC, HeroClass.PALADIN, 8);
 		setDescription("Restore 8 Health. Draw 3 cards.");
 		
-		SpellDesc healSpell = HealingSpell.create(8);
-		healSpell.setTarget(EntityReference.FRIENDLY_HERO);
+		SpellDesc healSpell = HealingSpell.create(EntityReference.FRIENDLY_HERO, 8);
 		SpellDesc drawSpell = DrawCardSpell.create(3);
 		setSpell(MetaSpell.create(healSpell, drawSpell));
 		setTargetRequirement(TargetSelection.ANY);

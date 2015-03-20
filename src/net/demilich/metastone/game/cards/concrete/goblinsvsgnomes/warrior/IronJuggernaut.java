@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.warrior;
 
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.actions.Battlecry;
+import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.tokens.BurrowingMine;
@@ -32,7 +32,7 @@ public class IronJuggernaut extends MinionCard {
 	public Minion summon() {
 		Minion ironJuggernaut = createMinion();
 		SpellDesc burrowingMine = ShuffleToDeckSpell.create(TargetPlayer.OPPONENT, new BurrowingMine());
-		Battlecry battlecry = Battlecry.createBattlecry(burrowingMine);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(burrowingMine);
 		ironJuggernaut.setBattlecry(battlecry);
 		return ironJuggernaut;
 	}
