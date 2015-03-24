@@ -1,5 +1,6 @@
 package net.demilich.metastone;
 
+import net.demilich.metastone.game.cards.CardProxy;
 import net.demilich.metastone.gui.deckbuilder.DeckProxy;
 import net.demilich.metastone.gui.dialog.DialogMediator;
 import net.demilich.metastone.gui.main.ApplicationMediator;
@@ -13,6 +14,7 @@ public class ApplicationStartupCommand extends SimpleCommand<GameNotification> {
 
 	@Override
 	public void execute(INotification<GameNotification> notification) {
+		getFacade().registerProxy(new CardProxy());
 		getFacade().registerProxy(new DeckProxy());
 		getFacade().registerProxy(new TrainingProxy());
 		getFacade().registerProxy(new SandboxProxy());
