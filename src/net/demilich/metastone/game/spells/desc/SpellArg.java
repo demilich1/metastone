@@ -2,7 +2,7 @@ package net.demilich.metastone.game.spells.desc;
 
 public enum SpellArg {
 	
-	SPELL_CLASS,
+	CLASS,
 	MIN_DAMAGE,
 	MAX_DAMAGE,
 	VALUE,

@@ -98,7 +98,7 @@ public class DeckProxy extends Proxy<GameNotification> {
 			HashMap<String, Object> map = gson.fromJson(reader, new TypeToken<HashMap<String, Object>>() {
 			}.getType());
 			if (!map.containsKey("heroClass")) {
-				logger.error("Deck {} does not speficy a value for 'heroClass' and is therefor not valid", file.getName());
+				logger.error("Deck {} does not specify a value for 'heroClass' and is therefor not valid", file.getName());
 				continue;
 			}
 			String deckName = (String) map.get("name");

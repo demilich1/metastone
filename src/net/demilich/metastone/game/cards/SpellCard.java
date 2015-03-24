@@ -9,7 +9,7 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
-public abstract class SpellCard extends Card {
+public class SpellCard extends Card {
 
 	private SpellDesc spell;
 	private TargetSelection targetRequirement;

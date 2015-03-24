@@ -13,7 +13,7 @@ public class SpellDesc extends CustomCloneable {
 
 	public static Map<SpellArg, Object> build(Class<? extends Spell> spellClass) {
 		final Map<SpellArg, Object> arguments = new EnumMap<>(SpellArg.class);
-		arguments.put(SpellArg.SPELL_CLASS, spellClass);
+		arguments.put(SpellArg.CLASS, spellClass);
 		return arguments;
 	}
 
@@ -62,7 +62,7 @@ public class SpellDesc extends CustomCloneable {
 
 	@SuppressWarnings("unchecked")
 	public Class<? extends Spell> getSpellClass() {
-		return (Class<? extends Spell>) arguments.get(SpellArg.SPELL_CLASS);
+		return (Class<? extends Spell>) arguments.get(SpellArg.CLASS);
 	}
 
 	public EntityReference getTarget() {
