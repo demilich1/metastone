@@ -395,9 +395,7 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.Ysera());
 		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.AldorPeacekeeper());
 		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.ArgentProtector());
-		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.AvengingWrath());
 		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.BlessedChampion());
-		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.BlessingOfKings());
 		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.BlessingOfMight());
 		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.BlessingOfWisdom());
 		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.Consecration());
@@ -405,12 +403,8 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.Equality());
 		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.EyeForAnEye());
 		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.GuardianOfKings());
-		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.HammerOfWrath());
-		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.HandOfProtection());
-		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.HolyLight());
 		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.HolyWrath());
 		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.Humility());
-		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.LayOnHands());
 		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.LightsJustice());
 		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.NobleSacrifice());
 		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.Redemption());
