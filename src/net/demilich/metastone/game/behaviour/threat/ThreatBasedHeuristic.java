@@ -111,7 +111,7 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 			minionScore += minion.getTagValue(GameTag.SPELL_POWER) * weights.get(WeightedFeature.MINION_SPELL_POWER_MODIFIER);
 		}
 
-		if (minion.hasStatus(GameTag.STEALTHED)) {
+		if (minion.hasStatus(GameTag.STEALTH)) {
 			minionScore += weights.get(WeightedFeature.MINION_STEALTHED_MODIFIER);
 		}
 		if (minion.hasStatus(GameTag.UNTARGETABLE_BY_SPELLS)) {

@@ -44,7 +44,7 @@ public class GameTagUtils {
 		case INVERT_HEALING:
 		case SECRET:
 		case SILENCED:
-		case STEALTHED:
+		case STEALTH:
 		case SUMMONING_SICKNESS:
 		case TAUNT:
 		case UNTARGETABLE_BY_SPELLS:

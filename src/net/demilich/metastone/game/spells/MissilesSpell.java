@@ -14,10 +14,10 @@ import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
-public class DamageRandomSpell extends DamageSpell {
+public class MissilesSpell extends DamageSpell {
 	
 	public static SpellDesc create(EntityReference target, int damage, int iterations) {
-		Map<SpellArg, Object> arguments = SpellDesc.build(DamageRandomSpell.class);
+		Map<SpellArg, Object> arguments = SpellDesc.build(MissilesSpell.class);
 		arguments.put(SpellArg.VALUE, damage);
 		arguments.put(SpellArg.ITERATIONS, iterations);
 		arguments.put(SpellArg.TARGET, target);
@@ -40,7 +40,7 @@ public class DamageRandomSpell extends DamageSpell {
 		for (int i = 0; i < missiles; i++) {
 			List<Actor> validTargets = SpellUtils.getValidRandomTargets(targets);
 			Actor randomTarget = SpellUtils.getRandomTarget(validTargets);
-			context.getLogic().damage(player, randomTarget, damage, source);
+			context.getLogic().damage(player, randomTarget, damage, source, true);
 		}
 	}
 

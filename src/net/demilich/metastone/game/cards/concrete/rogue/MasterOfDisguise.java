@@ -24,7 +24,7 @@ public class MasterOfDisguise extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion masterOfDisguise = createMinion();
-		BattlecryAction battlecry = BattlecryAction.createBattlecry(AddAttributeSpell.create(GameTag.STEALTHED), TargetSelection.FRIENDLY_MINIONS);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(AddAttributeSpell.create(GameTag.STEALTH), TargetSelection.FRIENDLY_MINIONS);
 		masterOfDisguise.setBattlecry(battlecry);
 		return masterOfDisguise;
 	}

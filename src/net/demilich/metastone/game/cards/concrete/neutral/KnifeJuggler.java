@@ -5,7 +5,7 @@ import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.spells.DamageRandomSpell;
+import net.demilich.metastone.game.spells.MissilesSpell;
 import net.demilich.metastone.game.spells.MetaSpell;
 import net.demilich.metastone.game.spells.RemoveAttributeSpell;
 import net.demilich.metastone.game.spells.TargetPlayer;
@@ -29,8 +29,8 @@ public class KnifeJuggler extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion knifeJuggler = createMinion();
-		SpellDesc damageRandomSpell = DamageRandomSpell.create(EntityReference.ENEMY_CHARACTERS, 1, 1);
-		SpellDesc removeStealth = RemoveAttributeSpell.create(EntityReference.SELF, GameTag.STEALTHED);
+		SpellDesc damageRandomSpell = MissilesSpell.create(EntityReference.ENEMY_CHARACTERS, 1, 1);
+		SpellDesc removeStealth = RemoveAttributeSpell.create(EntityReference.SELF, GameTag.STEALTH);
 		SpellTrigger trigger = new SpellTrigger(new MinionSummonedTrigger(TargetPlayer.SELF), MetaSpell.create(damageRandomSpell,
 				removeStealth));
 		knifeJuggler.setSpellTrigger(trigger);

@@ -5,7 +5,7 @@ import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.spells.DamageRandomSpell;
+import net.demilich.metastone.game.spells.MissilesSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
@@ -25,7 +25,7 @@ public class MadderBomber extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion madderBomber = createMinion();
-		SpellDesc spell = DamageRandomSpell.create(EntityReference.ALL_CHARACTERS, 1, 6);
+		SpellDesc spell = MissilesSpell.create(EntityReference.ALL_CHARACTERS, 1, 6);
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(spell, TargetSelection.NONE);
 		madderBomber.setBattlecry(battlecry);
 		return madderBomber;

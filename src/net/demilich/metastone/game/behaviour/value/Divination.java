@@ -12,7 +12,7 @@ public class Divination {
 			return false;
 		}
 		
-		if (minion.hasStatus(GameTag.STEALTHED)) {
+		if (minion.hasStatus(GameTag.STEALTH)) {
 			return false;
 		}
 		

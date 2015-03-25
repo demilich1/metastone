@@ -7,7 +7,7 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
-import net.demilich.metastone.game.spells.DamageRandomSpell;
+import net.demilich.metastone.game.spells.MissilesSpell;
 import net.demilich.metastone.game.spells.SpellUtils;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -28,7 +28,7 @@ public class GoblinBlastmage extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion goblinBlastmage = createMinion();
-		SpellDesc spell = DamageRandomSpell.create(EntityReference.ENEMY_CHARACTERS, 1, 4);
+		SpellDesc spell = MissilesSpell.create(EntityReference.ENEMY_CHARACTERS, 1, 4);
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(spell);
 		battlecry.setCondition((context, player) -> SpellUtils.hasMinionOfRace(player, Race.MECH));
 		goblinBlastmage.setBattlecry(battlecry);

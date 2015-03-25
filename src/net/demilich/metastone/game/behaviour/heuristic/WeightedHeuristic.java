@@ -28,7 +28,7 @@ public class WeightedHeuristic implements IGameStateHeuristic {
 		if (minion.hasStatus(GameTag.ENRAGED)) {
 			minionScore += 1;
 		}
-		if (minion.hasStatus(GameTag.STEALTHED)) {
+		if (minion.hasStatus(GameTag.STEALTH)) {
 			minionScore += 1;
 		}
 		if (minion.hasStatus(GameTag.UNTARGETABLE_BY_SPELLS)) {

@@ -71,7 +71,7 @@ public class MinionToken extends GameToken {
 	
 	private void visualizeStealth(Minion minion) {
 		Node token = minion.hasStatus(GameTag.TAUNT) ? taunt : defaultToken;
-		token.setOpacity(minion.hasStatus(GameTag.STEALTHED) ? 0.5 : 1);
+		token.setOpacity(minion.hasStatus(GameTag.STEALTH) ? 0.5 : 1);
 	}
 
 }

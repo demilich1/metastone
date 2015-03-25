@@ -307,14 +307,18 @@ public class GameLogic implements Cloneable {
 	public GameLogic clone() {
 		return new GameLogic(idFactory.clone());
 	}
-
+	
 	public int damage(Player player, Actor target, int baseDamage, Entity source) {
+		return damage(player, target, baseDamage, source, false);
+	}
+
+	public int damage(Player player, Actor target, int baseDamage, Entity source, boolean ignoreSpellPower) {
 		int damage = baseDamage;
 		Card sourceCard = source != null && source.getEntityType() == EntityType.CARD ? (Card) source : null;
-		if (source != null && source.getEntityType() == EntityType.CARD && sourceCard.getCardType() == CardType.SPELL) {
+		if (!ignoreSpellPower && sourceCard != null) {
 			damage = applySpellpower(player, baseDamage);
 		}
-		if (sourceCard != null && (sourceCard.getCardType() == CardType.SPELL || sourceCard.getCardType() == CardType.HERO_POWER)) {
+		if (!ignoreSpellPower && sourceCard != null && (sourceCard.getCardType() == CardType.SPELL || sourceCard.getCardType() == CardType.HERO_POWER)) {
 			damage = applyAmplify(player, damage);
 		}
 		int damageDealt = 0;
@@ -535,7 +539,7 @@ public class GameLogic implements Cloneable {
 			applyTag(attacker, GameTag.IMMUNE);
 		}
 
-		removeTag(attacker, GameTag.STEALTHED);
+		removeTag(attacker, GameTag.STEALTH);
 
 		int attackerDamage = attacker.getAttack();
 		int defenderDamage = target.getAttack();

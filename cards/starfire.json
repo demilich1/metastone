@@ -1,15 +1,15 @@
 {
-	"name" : "Moonfire",
-	"description" : "Deal 1 damage.",
-	"id" : "moonfire",
+	"name" : "Starfire",
+	"description" : "Deal 5 damage. Draw a card.",
+	"id" : "starfire",
 	"type" : "SPELL",
 	"rarity" : "FREE",
 	"heroClass" : "DRUID",
-	"baseManaCost" : 0,
+	"baseManaCost" : 6,
 	"targetSelection" : "ANY",
 	"spell" : {
 		"class" : "DamageSpell",
-		"value" : 1
+		"value" : 5
 	},
 	"fileFormatVersion" : 1
 }
