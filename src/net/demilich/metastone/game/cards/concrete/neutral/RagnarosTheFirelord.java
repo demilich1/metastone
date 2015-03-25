@@ -29,7 +29,7 @@ public class RagnarosTheFirelord extends MinionCard {
 	public Minion summon() {
 		Minion ragnaros = createMinion(GameTag.CANNOT_ATTACK);
 		SpellDesc damageSpell = DamageSpell.create(EntityReference.ENEMY_CHARACTERS, 8, true);
-		SpellDesc removeStealth = RemoveAttributeSpell.create(EntityReference.SELF, GameTag.STEALTHED);
+		SpellDesc removeStealth = RemoveAttributeSpell.create(EntityReference.SELF, GameTag.STEALTH);
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), MetaSpell.create(damageSpell, removeStealth));
 		ragnaros.setSpellTrigger(trigger);
 		return ragnaros;

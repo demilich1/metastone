@@ -35,10 +35,10 @@ public class CardInteractionTests extends TestBase {
 		Minion knifeJuggler = playMinionCard(context, player, new KnifeJuggler());
 		playCard(context, player, new Conceal());
 		// knife juggler should be stealthed
-		Assert.assertTrue(knifeJuggler.hasStatus(GameTag.STEALTHED));
+		Assert.assertTrue(knifeJuggler.hasStatus(GameTag.STEALTH));
 		// knife juggler should be unstealthed as soon as another minion is played and his trigger fires
 		playCard(context, player, new TestMinionCard(1, 1));
-		Assert.assertFalse(knifeJuggler.hasStatus(GameTag.STEALTHED));
+		Assert.assertFalse(knifeJuggler.hasStatus(GameTag.STEALTH));
 	}
 
 	@Test

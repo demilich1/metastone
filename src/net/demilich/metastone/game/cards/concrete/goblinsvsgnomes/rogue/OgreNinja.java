@@ -22,7 +22,7 @@ public class OgreNinja extends MinionCard {
 
 	@Override
 	public Minion summon() {
-		Minion ogreNinja = createMinion(GameTag.STEALTHED, GameTag.FUMBLE);
+		Minion ogreNinja = createMinion(GameTag.STEALTH, GameTag.FUMBLE);
 		return ogreNinja;
 	}
 }

@@ -58,7 +58,7 @@ public class TargetingTests extends TestBase {
 		
 		// taunt should be ignored when the minion is stealthed
 		defender.setTag(GameTag.TAUNT);
-		defender.setTag(GameTag.STEALTHED);
+		defender.setTag(GameTag.STEALTH);
 		validTargets = context.getLogic().getValidTargets(mage.getId(), attackAction);
 		Assert.assertEquals(validTargets.size(), 1);
 		Assert.assertEquals(validTargets.get(0).getEntityType(), EntityType.HERO);

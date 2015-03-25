@@ -10,7 +10,6 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.SpellCard;
-import net.demilich.metastone.game.cards.concrete.mage.ArcaneExplosion;
 import net.demilich.metastone.game.cards.concrete.neutral.FaerieDragon;
 import net.demilich.metastone.game.cards.concrete.neutral.GurubashiBerserker;
 import net.demilich.metastone.game.cards.concrete.neutral.OasisSnapjaw;
@@ -64,7 +63,7 @@ public class SpecialCardTests extends TestBase {
 		Assert.assertEquals(validTargets.size(), 3);
 		Assert.assertFalse(validTargets.contains(elusiveOne));
 
-		Card arcaneExplosionCard = new ArcaneExplosion();
+		Card arcaneExplosionCard = CardCatalogue.getCardById("arcane_explosion");
 		context.getLogic().receiveCard(mage.getId(), arcaneExplosionCard);
 		int faerieDragonHp = elusiveOne.getHp();
 		context.getLogic().performGameAction(mage.getId(), arcaneExplosionCard.play());

@@ -31,7 +31,7 @@ public class TargetLogic {
 
 	private boolean containsTaunters(List<Minion> minions) {
 		for (Entity entity : minions) {
-			if (entity.hasStatus(GameTag.TAUNT) && !entity.hasStatus(GameTag.STEALTHED)) {
+			if (entity.hasStatus(GameTag.TAUNT) && !entity.hasStatus(GameTag.STEALTH)) {
 				return true;
 			}
 		}
@@ -53,7 +53,7 @@ public class TargetLogic {
 				continue;
 			}
 
-			if (entity.getOwner() != player.getId() && entity.hasStatus(GameTag.STEALTHED)) {
+			if (entity.getOwner() != player.getId() && entity.hasStatus(GameTag.STEALTH)) {
 				continue;
 			}
 
@@ -167,7 +167,7 @@ public class TargetLogic {
 	private List<Entity> getTaunters(List<Minion> entities) {
 		List<Entity> taunters = new ArrayList<>();
 		for (Actor entity : entities) {
-			if (entity.hasStatus(GameTag.TAUNT) && !entity.hasStatus(GameTag.STEALTHED)) {
+			if (entity.hasStatus(GameTag.TAUNT) && !entity.hasStatus(GameTag.STEALTH)) {
 				taunters.add(entity);
 			}
 		}

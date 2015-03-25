@@ -26,8 +26,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.druid.IronbarkProtector());
 		cards.add(new net.demilich.metastone.game.cards.concrete.druid.KeeperOfTheGrove());
 		cards.add(new net.demilich.metastone.game.cards.concrete.druid.Savagery());
-		cards.add(new net.demilich.metastone.game.cards.concrete.druid.SoulOfTheForest());
-		cards.add(new net.demilich.metastone.game.cards.concrete.druid.Starfire());
 		cards.add(new net.demilich.metastone.game.cards.concrete.druid.Swipe());
 		cards.add(new net.demilich.metastone.game.cards.concrete.druid.WildGrowth());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.druid.AnodizedRoboCub());
@@ -166,17 +164,13 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.warrior.SiegeEngine());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.warrior.Warbot());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.AnimalCompanion());
-		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.ArcaneShot());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.BestialWrath());
-		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.DeadlyShot());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.EaglehornBow());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.ExplosiveShot());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.ExplosiveTrap());
-		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.Flare());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.FreezingTrap());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.GladiatorsLongbow());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.Houndmaster());
-		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.HuntersMark());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.KillCommand());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.KingKrush());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.Misdirection());
@@ -190,11 +184,8 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.Tracking());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.TundraRhino());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.UnleashTheHounds());
-		cards.add(new net.demilich.metastone.game.cards.concrete.mage.ArcaneExplosion());
-		cards.add(new net.demilich.metastone.game.cards.concrete.mage.ArcaneIntellect());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.ArcaneMissiles());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.ArchmageAntonidas());
-		cards.add(new net.demilich.metastone.game.cards.concrete.mage.Blizzard());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.ConeOfCold());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.Counterspell());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.EtherealArcanist());

@@ -22,6 +22,6 @@ public class JunglePanther extends MinionCard {
 
 	@Override
 	public Minion summon() {
-		return createMinion(GameTag.STEALTHED);
+		return createMinion(GameTag.STEALTH);
 	}
 }

@@ -14,7 +14,7 @@ public class AddDeathrattleSpell extends Spell {
 	
 	public static SpellDesc create(EntityReference target, SpellDesc deathrattle) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(AddDeathrattleSpell.class);
-		arguments.put(SpellArg.DEATHRATTLE, deathrattle);
+		arguments.put(SpellArg.SPELL_1, deathrattle);
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
 	}
@@ -26,7 +26,7 @@ public class AddDeathrattleSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Actor minion = (Actor) target;
-		SpellDesc deathrattle = (SpellDesc) desc.get(SpellArg.DEATHRATTLE);
+		SpellDesc deathrattle = (SpellDesc) desc.get(SpellArg.SPELL_1);
 		minion.addDeathrattle(deathrattle);
 	}
 

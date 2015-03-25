@@ -44,6 +44,7 @@ public class SpellDescDeserializer implements JsonDeserializer<SpellDesc> {
 		parseArgument(SpellArg.SPELL_2, jsonData, spellArgs, SpellValueType.SPELL);
 		parseArgument(SpellArg.SPELL_3, jsonData, spellArgs, SpellValueType.SPELL);
 		parseArgument(SpellArg.ATTRIBUTE, jsonData, spellArgs, SpellValueType.ATTRIBUTE);
+		parseArgument(SpellArg.RANDOM_TARGET, jsonData, spellArgs, SpellValueType.BOOLEAN);
 		return new SpellDesc(spellArgs);
 	}
 
@@ -58,6 +59,9 @@ public class SpellDescDeserializer implements JsonDeserializer<SpellDesc> {
 		switch (valueType) {
 		case INTEGER:
 			value = entry.getAsInt();
+			break;
+		case BOOLEAN:
+			value = entry.getAsBoolean();
 			break;
 		case TARGET_REFERENCE:
 			value = parseEntityReference(entry.getAsString());

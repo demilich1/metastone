@@ -27,7 +27,7 @@ public class BloodImp extends MinionCard {
 
 	@Override
 	public Minion summon() {
-		Minion bloodImp = createMinion(GameTag.STEALTHED);
+		Minion bloodImp = createMinion(GameTag.STEALTH);
 		SpellDesc spell = BuffSpell.create(EntityReference.OTHER_FRIENDLY_MINIONS, 0, 1, true);
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), spell);
 		bloodImp.setSpellTrigger(trigger);

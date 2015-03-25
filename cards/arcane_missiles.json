@@ -1,0 +1,16 @@
+{
+	"name" : "Arcane Missiles",
+	"description" : "Deal 3 damage randomly split among enemy characters.",
+	"id" : "arcane_missiles",
+	"type" : "SPELL",
+	"rarity" : "FREE",
+	"heroClass" : "MAGE",
+	"baseManaCost" : 1,
+	"targetSelection" : "NONE",
+	"spell" : {
+		"class" : "MissilesSpell",
+		"value" : 1,
+		"iterations" : 3
+	},
+	"fileFormatVersion" : 1
+}

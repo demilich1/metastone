@@ -22,7 +22,7 @@ public class GilblinStalker extends MinionCard {
 
 	@Override
 	public Minion summon() {
-		Minion gilblinStalker = createMinion(GameTag.STEALTHED);
+		Minion gilblinStalker = createMinion(GameTag.STEALTH);
 		return gilblinStalker;
 	}
 }
