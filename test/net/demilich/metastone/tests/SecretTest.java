@@ -2,10 +2,10 @@ package net.demilich.metastone.tests;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.SecretCard;
-import net.demilich.metastone.game.cards.SpellCard;
-import net.demilich.metastone.game.cards.concrete.mage.Frostbolt;
 import net.demilich.metastone.game.cards.concrete.mage.Spellbender;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -58,7 +58,7 @@ public class SecretTest extends TestBase {
 			playCard(context, mage, new Spellbender());
 			Assert.assertEquals(mage.getSecrets().size(), 1);
 			
-			SpellCard testSpellCard = new Frostbolt();
+			Card testSpellCard = CardCatalogue.getCardById("frostbolt");
 			context.getLogic().receiveCard(warrior.getId(), testSpellCard);
 			GameAction spellAttackAction = testSpellCard.play();
 			spellAttackAction.setTarget(minion);

@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.cards.concrete.mage;
 
+import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -25,7 +26,7 @@ public class ArchmageAntonidas extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion archmageAntonidas = createMinion();
-		SpellDesc receiveFireballSpell = ReceiveCardSpell.create(new Fireball());
+		SpellDesc receiveFireballSpell = ReceiveCardSpell.create(CardCatalogue.getCardById("fireball"));
 		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(TargetPlayer.SELF), receiveFireballSpell);
 		archmageAntonidas.setSpellTrigger(trigger);
 		return archmageAntonidas;
