@@ -8,7 +8,7 @@ import net.demilich.metastone.game.entities.EntityRaceFilter;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
-import net.demilich.metastone.game.spells.ApplyTagSpell;
+import net.demilich.metastone.game.spells.AddAttributeSpell;
 import net.demilich.metastone.game.spells.BuffSpell;
 import net.demilich.metastone.game.spells.MetaSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -29,7 +29,7 @@ public class Houndmaster extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion houndmaster = createMinion();
-		SpellDesc houndmasterSpell = MetaSpell.create(BuffSpell.create(2, 2), ApplyTagSpell.create(GameTag.TAUNT));
+		SpellDesc houndmasterSpell = MetaSpell.create(BuffSpell.create(2, 2), AddAttributeSpell.create(GameTag.TAUNT));
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(houndmasterSpell, TargetSelection.FRIENDLY_MINIONS);
 		battlecry.setEntityFilter(new EntityRaceFilter(Race.BEAST));
 		houndmaster.setBattlecry(battlecry);

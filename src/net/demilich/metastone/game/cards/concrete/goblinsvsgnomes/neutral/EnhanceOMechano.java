@@ -7,7 +7,7 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
-import net.demilich.metastone.game.spells.ApplyTagSpell;
+import net.demilich.metastone.game.spells.AddAttributeSpell;
 import net.demilich.metastone.game.spells.CastRandomSpellSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -29,8 +29,8 @@ public class EnhanceOMechano extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion enhanceOMechano = createMinion();
-		SpellDesc randomBuff = CastRandomSpellSpell.create(EntityReference.FRIENDLY_MINIONS, ApplyTagSpell.create(GameTag.WINDFURY), ApplyTagSpell.create(GameTag.TAUNT),
-				ApplyTagSpell.create(GameTag.DIVINE_SHIELD));
+		SpellDesc randomBuff = CastRandomSpellSpell.create(EntityReference.FRIENDLY_MINIONS, AddAttributeSpell.create(GameTag.WINDFURY), AddAttributeSpell.create(GameTag.TAUNT),
+				AddAttributeSpell.create(GameTag.DIVINE_SHIELD));
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(randomBuff);
 		enhanceOMechano.setBattlecry(battlecry);
 		return enhanceOMechano;

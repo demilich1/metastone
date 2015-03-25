@@ -4,7 +4,7 @@ import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
-import net.demilich.metastone.game.spells.ApplyTagSpell;
+import net.demilich.metastone.game.spells.AddAttributeSpell;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class RustyHorn extends SpellCard {
@@ -13,7 +13,7 @@ public class RustyHorn extends SpellCard {
 		super("Rusty Horn", Rarity.FREE, HeroClass.ANY, 1);
 		setDescription("Give a minion Taunt.");
 		
-		setSpell(ApplyTagSpell.create(GameTag.TAUNT));
+		setSpell(AddAttributeSpell.create(GameTag.TAUNT));
 		setTargetRequirement(TargetSelection.MINIONS);
 		
 		setCollectible(false);

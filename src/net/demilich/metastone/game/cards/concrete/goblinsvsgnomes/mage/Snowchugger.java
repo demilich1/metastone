@@ -6,7 +6,7 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
-import net.demilich.metastone.game.spells.ApplyTagSpell;
+import net.demilich.metastone.game.spells.AddAttributeSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.DamageCausedTrigger;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
@@ -28,7 +28,7 @@ public class Snowchugger extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion snowchugger = createMinion();
-		SpellDesc freezeSpell = ApplyTagSpell.create(EntityReference.EVENT_TARGET, GameTag.FROZEN);
+		SpellDesc freezeSpell = AddAttributeSpell.create(EntityReference.EVENT_TARGET, GameTag.FROZEN);
 		snowchugger.setSpellTrigger(new SpellTrigger(new DamageCausedTrigger(true), freezeSpell));
 		return snowchugger;
 	}

@@ -6,9 +6,9 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
-import net.demilich.metastone.game.spells.ApplyTagSpell;
+import net.demilich.metastone.game.spells.AddAttributeSpell;
 import net.demilich.metastone.game.spells.MetaSpell;
-import net.demilich.metastone.game.spells.RemoveTagSpell;
+import net.demilich.metastone.game.spells.RemoveAttributeSpell;
 import net.demilich.metastone.game.spells.aura.Aura;
 import net.demilich.metastone.game.spells.aura.AuraSpellBuff;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -33,12 +33,12 @@ public class MalGanis extends MinionCard {
 		Minion malGanis = createMinion();
 		// aura apply
 		SpellDesc demonBuff = AuraSpellBuff.create(+2, +2, new RaceFilter(Race.DEMON));
-		SpellDesc immunity = ApplyTagSpell.create(EntityReference.FRIENDLY_HERO, GameTag.IMMUNE);
+		SpellDesc immunity = AddAttributeSpell.create(EntityReference.FRIENDLY_HERO, GameTag.IMMUNE);
 		SpellDesc applyAuraSpell = MetaSpell.create(demonBuff, immunity);
 		
 		// aura remove
 		SpellDesc removeDemonBuff = AuraSpellBuff.create(-2, -2, new RaceFilter(Race.DEMON));
-		SpellDesc removeImmunity = RemoveTagSpell.create(EntityReference.FRIENDLY_HERO, GameTag.IMMUNE);
+		SpellDesc removeImmunity = RemoveAttributeSpell.create(EntityReference.FRIENDLY_HERO, GameTag.IMMUNE);
 		SpellDesc removeAuraSpell = MetaSpell.create(removeDemonBuff, removeImmunity);
 		
 		Aura aura = new Aura(applyAuraSpell, removeAuraSpell, EntityReference.FRIENDLY_MINIONS);

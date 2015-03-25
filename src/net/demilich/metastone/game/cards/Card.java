@@ -6,6 +6,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.PlayCardAction;
+import net.demilich.metastone.game.cards.desc.CardDesc;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -24,6 +25,7 @@ public abstract class Card extends Entity {
 	private boolean collectible = true;
 	private CardLocation location;
 	private BattlecryDesc battlecry;
+	private final String cardId;
 
 	public Card(String name, CardType cardType, Rarity rarity, HeroClass classRestriction, int manaCost) {
 		setName(name);
@@ -31,6 +33,22 @@ public abstract class Card extends Entity {
 		this.rarity = rarity;
 		this.classRestriction = classRestriction;
 		this.manaCost = manaCost;
+		this.cardId = null;
+	}
+	
+	public Card(CardDesc desc) {
+		cardId = desc.id;
+		setName(desc.name);
+		setDescription(desc.description);
+		setCollectible(desc.collectible);
+		cardType = desc.type;
+		rarity = desc.rarity;
+		classRestriction = desc.heroClass;
+		manaCost = desc.baseManaCost;
+		
+		if (desc.attributes != null) {
+			tags.putAll(desc.attributes);
+		}
 	}
 
 	@Override
@@ -50,6 +68,11 @@ public abstract class Card extends Entity {
 
 	public CardReference getCardReference() {
 		return new CardReference(getOwner(), getLocation(), getId(), getName());
+	}
+	
+	@Override
+	public int getTypeId() {
+		return getCardId() != null ? getCardId().hashCode() : super.getTypeId();
 	}
 
 	public CardType getCardType() {
@@ -136,6 +159,10 @@ public abstract class Card extends Entity {
 	@Override
 	public String toString() {
 		return String.format("[%s '%s' Manacost:%d]", getCardType(), getName(), manaCost);
+	}
+
+	public String getCardId() {
+		return cardId;
 	}
 
 }

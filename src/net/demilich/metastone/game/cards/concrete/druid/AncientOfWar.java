@@ -6,7 +6,7 @@ import net.demilich.metastone.game.cards.ChooseBattlecryCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.spells.ApplyTagSpell;
+import net.demilich.metastone.game.spells.AddAttributeSpell;
 import net.demilich.metastone.game.spells.BuffSpell;
 import net.demilich.metastone.game.spells.MetaSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -38,7 +38,7 @@ public class AncientOfWar extends ChooseBattlecryCard {
 	@Override
 	protected BattlecryAction getBattlecry2() {
 		SpellDesc buffHpSpell = BuffSpell.create(EntityReference.SELF, 0, 5);
-		SpellDesc tauntUpSpell = ApplyTagSpell.create(EntityReference.SELF, GameTag.TAUNT, null);
+		SpellDesc tauntUpSpell = AddAttributeSpell.create(EntityReference.SELF, GameTag.TAUNT, null);
 		
 		return BattlecryAction.createBattlecry(MetaSpell.create(buffHpSpell, tauntUpSpell));
 	}

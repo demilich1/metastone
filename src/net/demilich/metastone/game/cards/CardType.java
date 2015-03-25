@@ -4,5 +4,6 @@ public enum CardType {
 	MINION,
 	SPELL,
 	WEAPON,
-	HERO_POWER
+	HERO_POWER,
+	CHOOSE_ONE
 }

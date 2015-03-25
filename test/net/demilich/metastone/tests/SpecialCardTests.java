@@ -7,9 +7,9 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.actions.PhysicalAttackAction;
 import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.SpellCard;
-import net.demilich.metastone.game.cards.concrete.druid.SavageRoar;
 import net.demilich.metastone.game.cards.concrete.mage.ArcaneExplosion;
 import net.demilich.metastone.game.cards.concrete.neutral.FaerieDragon;
 import net.demilich.metastone.game.cards.concrete.neutral.GurubashiBerserker;
@@ -128,7 +128,7 @@ public class SpecialCardTests extends TestBase {
 		Assert.assertEquals(druid.getAttack(), 1);
 		Assert.assertEquals(minion.getAttack(), 1);
 
-		Card savageRoar = new SavageRoar();
+		Card savageRoar = CardCatalogue.getCardById("savage_roar");
 		context.getLogic().receiveCard(player.getId(), savageRoar);
 		context.getLogic().performGameAction(player.getId(), savageRoar.play());
 		Assert.assertEquals(druid.getAttack(), 3);

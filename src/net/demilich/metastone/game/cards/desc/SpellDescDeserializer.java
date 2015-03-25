@@ -3,7 +3,9 @@ package net.demilich.metastone.game.cards.desc;
 import java.lang.reflect.Type;
 import java.util.Map;
 
+import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.spells.Spell;
+import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -34,27 +36,45 @@ public class SpellDescDeserializer implements JsonDeserializer<SpellDesc> {
 		Map<SpellArg, Object> spellArgs = SpellDesc.build(spellClass);
 		parseArgument(SpellArg.ATTACK_BONUS, jsonData, spellArgs, SpellValueType.INTEGER);
 		parseArgument(SpellArg.ARMOR_BONUS, jsonData, spellArgs, SpellValueType.INTEGER);
+		parseArgument(SpellArg.HP_BONUS, jsonData, spellArgs, SpellValueType.INTEGER);
 		parseArgument(SpellArg.TARGET, jsonData, spellArgs, SpellValueType.TARGET_REFERENCE);
+		parseArgument(SpellArg.TARGET_PLAYER, jsonData, spellArgs, SpellValueType.TARGET_PLAYER);
+		parseArgument(SpellArg.VALUE, jsonData, spellArgs, SpellValueType.INTEGER);
+		parseArgument(SpellArg.SPELL_1, jsonData, spellArgs, SpellValueType.SPELL);
+		parseArgument(SpellArg.SPELL_2, jsonData, spellArgs, SpellValueType.SPELL);
+		parseArgument(SpellArg.SPELL_3, jsonData, spellArgs, SpellValueType.SPELL);
+		parseArgument(SpellArg.ATTRIBUTE, jsonData, spellArgs, SpellValueType.ATTRIBUTE);
 		return new SpellDesc(spellArgs);
 	}
 
 	private void parseArgument(SpellArg spellArg, JsonObject jsonData, Map<SpellArg, Object> spellArgs, SpellValueType valueType) {
 		String argName = toCamelCase(spellArg.toString());
 		System.out.println("ArgName: " + argName);
-		if (jsonData.has(argName)) {
+		if (!jsonData.has(argName)) {
 			return;
 		}
 		Object value = null;
+		JsonElement entry = jsonData.get(argName);
 		switch (valueType) {
 		case INTEGER:
-			value = jsonData.get(argName).getAsInt();
+			value = entry.getAsInt();
 			break;
 		case TARGET_REFERENCE:
-			value = parseEntityReference(jsonData.get(argName).getAsString());
+			value = parseEntityReference(entry.getAsString());
+			break;
+		case TARGET_PLAYER:
+			value = Enum.valueOf(TargetPlayer.class, entry.getAsString());
+			break;
+		case SPELL:
+			value = deserialize(entry, SpellDesc.class, null);
+			break;
+		case ATTRIBUTE:
+			value = Enum.valueOf(GameTag.class, entry.getAsString());
 			break;
 		default:
 			break;
 		}
+		System.out.println("Setting spellArg " + spellArg + " to "  +value);
 		spellArgs.put(spellArg, value);
 	}
 	

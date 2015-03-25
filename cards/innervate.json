@@ -1,0 +1,15 @@
+{
+	"name" : "Innervate",
+	"description" : "Gain 2 Mana Crystals this turn only.",
+	"id" : "innervate",
+	"type" : "SPELL",
+	"rarity" : "FREE",
+	"heroClass" : "DRUID",
+	"baseManaCost" : 0,
+	"targetSelection" : "NONE",
+	"spell" : {
+		"class" : "GainManaSpell",
+		"value" : 2
+	},
+	"fileFormatVersion" : 1
+}

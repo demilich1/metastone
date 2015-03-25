@@ -31,7 +31,6 @@ public class MetaStone extends Application {
 		final MetaStone instance = new MetaStone();
 		facade.startUp(instance);
 		
-		/*
 		StackPane root = new StackPane();
 		root.setAlignment(Pos.CENTER);
 		Scene scene = new Scene(root);
@@ -40,7 +39,6 @@ public class MetaStone extends Application {
 		facade.sendNotification(GameNotification.CANVAS_CREATED, root);
 		facade.sendNotification(GameNotification.MAIN_MENU);
 		primaryStage.show();
-		*/
 	}
 
 }

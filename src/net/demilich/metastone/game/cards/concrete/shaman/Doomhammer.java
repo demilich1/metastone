@@ -7,8 +7,8 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.WeaponCard;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.weapons.Weapon;
-import net.demilich.metastone.game.spells.ApplyTagSpell;
-import net.demilich.metastone.game.spells.RemoveTagSpell;
+import net.demilich.metastone.game.spells.AddAttributeSpell;
+import net.demilich.metastone.game.spells.RemoveAttributeSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
@@ -31,13 +31,13 @@ public class Doomhammer extends WeaponCard {
 
 			@Override
 			public void onEquip(GameContext context, Player player) {
-				SpellDesc windfury = ApplyTagSpell.create(GameTag.WINDFURY);
+				SpellDesc windfury = AddAttributeSpell.create(GameTag.WINDFURY);
 				context.getLogic().castSpell(player.getId(), windfury, getReference(), EntityReference.FRIENDLY_HERO);
 			}
 
 			@Override
 			public void onUnequip(GameContext context, Player player) {
-				SpellDesc removeWindfury = RemoveTagSpell.create(GameTag.WINDFURY);
+				SpellDesc removeWindfury = RemoveAttributeSpell.create(GameTag.WINDFURY);
 				context.getLogic().castSpell(player.getId(), removeWindfury, getReference(), EntityReference.FRIENDLY_HERO);
 			}
 

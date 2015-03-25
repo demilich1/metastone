@@ -4,6 +4,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.actions.PlaySpellCardAction;
+import net.demilich.metastone.game.cards.desc.SpellCardDesc;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -20,6 +21,12 @@ public class SpellCard extends Card {
 
 	public SpellCard(String name, Rarity rarity, HeroClass classRestriction, int manaCost) {
 		super(name, CardType.SPELL, rarity, classRestriction, manaCost);
+	}
+	
+	public SpellCard(SpellCardDesc desc) {
+		super(desc);
+		setTargetRequirement(desc.targetSelection);
+		setSpell(desc.spell);
 	}
 
 	public boolean canBeCast(GameContext context, Player player) {

@@ -4,7 +4,7 @@ import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
-import net.demilich.metastone.game.spells.ApplyTagSpell;
+import net.demilich.metastone.game.spells.AddAttributeSpell;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class EmergencyCoolant extends SpellCard {
@@ -13,7 +13,7 @@ public class EmergencyCoolant extends SpellCard {
 		super("Emergency Coolant", Rarity.FREE, HeroClass.ANY, 1);
 		setDescription("Freeze a minion.");
 
-		setSpell(ApplyTagSpell.create(GameTag.FROZEN));
+		setSpell(AddAttributeSpell.create(GameTag.FROZEN));
 		setTargetRequirement(TargetSelection.MINIONS);
 
 		setCollectible(false);
