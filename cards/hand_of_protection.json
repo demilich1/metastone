@@ -1,0 +1,15 @@
+{
+	"name" : "Hand of Protection",
+	"description" : "Give a minion Divine Shield.",
+	"id" : "hand_of_protection",
+	"type" : "SPELL",
+	"rarity" : "FREE",
+	"heroClass" : "PALADIN",
+	"baseManaCost" : 1,
+	"targetSelection" : "MINIONS",
+	"spell" : {
+		"class" : "AddAttributeSpell",
+		"attribute" : "DIVINE_SHIELD"
+	},
+	"fileFormatVersion" : 1
+}
