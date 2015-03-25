@@ -6,7 +6,7 @@ import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.spells.ApplyTagSpell;
+import net.demilich.metastone.game.spells.AddAttributeSpell;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class FrostElemental extends MinionCard {
@@ -24,7 +24,7 @@ public class FrostElemental extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion frostElemental = createMinion();
-		BattlecryAction battlecry = BattlecryAction.createBattlecry(ApplyTagSpell.create(GameTag.FROZEN), TargetSelection.ANY);
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(AddAttributeSpell.create(GameTag.FROZEN), TargetSelection.ANY);
 		frostElemental.setBattlecry(battlecry);
 		return frostElemental;
 	}

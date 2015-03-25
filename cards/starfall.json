@@ -1,0 +1,13 @@
+{
+	"name" : "Starfall",
+	"description" : "Choose One - Deal 5 damage to a minion; or 2 damage to all enemy minions.",
+	"id" : "starfall",
+	"type" : "CHOOSE_ONE",
+	"rarity" : "RARE",
+	"heroClass" : "DRUID",
+	"baseManaCost" : 5,
+	"targetSelection" : "NONE",
+	"option1" : "starfall_1",
+	"option2" : "starfall_2",
+	"fileFormatVersion" : 1
+}

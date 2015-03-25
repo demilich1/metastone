@@ -6,7 +6,7 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
-import net.demilich.metastone.game.spells.ApplyTagSpell;
+import net.demilich.metastone.game.spells.AddAttributeSpell;
 import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.MinionSummonedTrigger;
@@ -31,7 +31,7 @@ public class CobaltGuardian extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion cobaltGuardian = createMinion();
-		SpellDesc gainDivineShield = ApplyTagSpell.create(EntityReference.SELF, GameTag.DIVINE_SHIELD);
+		SpellDesc gainDivineShield = AddAttributeSpell.create(EntityReference.SELF, GameTag.DIVINE_SHIELD);
 		SpellTrigger trigger = new SpellTrigger(new MinionSummonedTrigger(TargetPlayer.SELF, Race.MECH), gainDivineShield);
 		cobaltGuardian.setSpellTrigger(trigger);
 		return cobaltGuardian;

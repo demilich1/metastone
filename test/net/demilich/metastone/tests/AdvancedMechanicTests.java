@@ -10,10 +10,10 @@ import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.actions.PhysicalAttackAction;
 import net.demilich.metastone.game.behaviour.Behaviour;
 import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.IChooseOneCard;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.SpellCard;
-import net.demilich.metastone.game.cards.concrete.druid.Wrath;
 import net.demilich.metastone.game.cards.concrete.neutral.AbusiveSergeant;
 import net.demilich.metastone.game.cards.concrete.neutral.AmaniBerserker;
 import net.demilich.metastone.game.cards.concrete.neutral.KoboldGeomancer;
@@ -45,7 +45,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		context.endTurn();
 
 		player.getHero().getHeroPower().setUsed(true);
-		Card wrath = new Wrath();
+		Card wrath = CardCatalogue.getCardById("wrath");
 		IChooseOneCard wrathChooseOne = (IChooseOneCard) wrath;
 		context.getLogic().receiveCard(player.getId(), wrath);
 		player.setMana(wrath.getBaseManaCost() + 1);

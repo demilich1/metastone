@@ -8,7 +8,7 @@ import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
-import net.demilich.metastone.game.spells.ApplyTagSpell;
+import net.demilich.metastone.game.spells.AddAttributeSpell;
 import net.demilich.metastone.game.spells.MetaSpell;
 import net.demilich.metastone.game.spells.TemporaryAttackSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -22,7 +22,7 @@ public class BestialWrath extends SpellCard {
 		setDescription("Give a Beast +2 Attack and Immune this turn.");
 		
 		SpellDesc buffAttackSpell = TemporaryAttackSpell.create(2);
-		SpellDesc immunitySpell = ApplyTagSpell.create(GameTag.IMMUNE, new TurnEndTrigger());
+		SpellDesc immunitySpell = AddAttributeSpell.create(GameTag.IMMUNE, new TurnEndTrigger());
 		setSpell(MetaSpell.create(buffAttackSpell, immunitySpell));
 		setTargetRequirement(TargetSelection.MINIONS);
 	}

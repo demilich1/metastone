@@ -11,15 +11,15 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.GameEventTrigger;
 import net.demilich.metastone.game.targeting.EntityReference;
 
-public class ApplyTagSpell extends RevertableSpell {
+public class AddAttributeSpell extends RevertableSpell {
 
 	public static SpellDesc create(EntityReference target, GameTag tag) {
 		return create(target, tag, null);
 	}
 	
 	public static SpellDesc create(EntityReference target, GameTag tag, GameEventTrigger revertTrigger) {
-		Map<SpellArg, Object> arguments = SpellDesc.build(ApplyTagSpell.class);
-		arguments.put(SpellArg.GAME_TAG, tag);
+		Map<SpellArg, Object> arguments = SpellDesc.build(AddAttributeSpell.class);
+		arguments.put(SpellArg.ATTRIBUTE, tag);
 		arguments.put(SpellArg.REVERT_TRIGGER, revertTrigger);
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
@@ -35,12 +35,12 @@ public class ApplyTagSpell extends RevertableSpell {
 
 	@Override
 	protected SpellDesc getReverseSpell(SpellDesc desc, EntityReference target) {
-		return RemoveTagSpell.create(target, (GameTag) desc.get(SpellArg.GAME_TAG));
+		return RemoveAttributeSpell.create(target, (GameTag) desc.get(SpellArg.ATTRIBUTE));
 	}
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		GameTag tag = (GameTag) desc.get(SpellArg.GAME_TAG);
+		GameTag tag = (GameTag) desc.get(SpellArg.ATTRIBUTE);
 		context.getLogic().applyTag(target, tag);
 		super.onCast(context, player, desc, source, target);
 	}

@@ -8,7 +8,7 @@ import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.DamageSpell;
 import net.demilich.metastone.game.spells.MetaSpell;
-import net.demilich.metastone.game.spells.RemoveTagSpell;
+import net.demilich.metastone.game.spells.RemoveAttributeSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 import net.demilich.metastone.game.spells.trigger.TurnStartTrigger;
@@ -31,7 +31,7 @@ public class Demolisher extends MinionCard {
 	public Minion summon() {
 		Minion demolisher = createMinion();
 		SpellDesc randomDamageSpell = DamageSpell.create(EntityReference.ENEMY_CHARACTERS, 2, true);
-		SpellDesc removeStealth = RemoveTagSpell.create(EntityReference.SELF, GameTag.STEALTHED);
+		SpellDesc removeStealth = RemoveAttributeSpell.create(EntityReference.SELF, GameTag.STEALTHED);
 		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), MetaSpell.create(randomDamageSpell, removeStealth));
 		demolisher.setSpellTrigger(trigger);
 		return demolisher;

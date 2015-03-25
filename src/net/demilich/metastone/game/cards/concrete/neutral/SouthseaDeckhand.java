@@ -7,7 +7,7 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
-import net.demilich.metastone.game.spells.ApplyTagSpell;
+import net.demilich.metastone.game.spells.AddAttributeSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
@@ -26,7 +26,7 @@ public class SouthseaDeckhand extends MinionCard {
 
 	@Override
 	public Minion summon() {
-		SpellDesc chargeWhileWeaponEquipped = ApplyTagSpell.create(EntityReference.SELF, GameTag.CHARGE);
+		SpellDesc chargeWhileWeaponEquipped = AddAttributeSpell.create(EntityReference.SELF, GameTag.CHARGE);
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(chargeWhileWeaponEquipped);
 		battlecry.setCondition((context, player) -> player.getHero().getWeapon() != null);
 		Minion southseaDeckhand = createMinion();

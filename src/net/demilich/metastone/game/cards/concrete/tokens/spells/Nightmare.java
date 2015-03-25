@@ -5,7 +5,7 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.AddSpellTriggerSpell;
-import net.demilich.metastone.game.spells.ApplyTagSpell;
+import net.demilich.metastone.game.spells.AddAttributeSpell;
 import net.demilich.metastone.game.spells.BuffSpell;
 import net.demilich.metastone.game.spells.DestroySpell;
 import net.demilich.metastone.game.spells.MetaSpell;
@@ -23,7 +23,7 @@ public class Nightmare extends SpellCard {
 
 		SpellDesc destroySpell = DestroySpell.create(EntityReference.SELF);
 		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), destroySpell, true);
-		setSpell(MetaSpell.create(null, BuffSpell.create(5, 5), AddSpellTriggerSpell.create(trigger), ApplyTagSpell.create(GameTag.MARKED_FOR_DEATH), false));
+		setSpell(MetaSpell.create(null, BuffSpell.create(5, 5), AddSpellTriggerSpell.create(trigger), AddAttributeSpell.create(GameTag.MARKED_FOR_DEATH), false));
 		setTargetRequirement(TargetSelection.MINIONS);
 
 		setCollectible(false);

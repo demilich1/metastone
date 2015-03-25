@@ -9,65 +9,28 @@ public class CardCatalogue {
 
 	static {
 		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.AxeFlinger());
-		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.BlackwindCorruptor());
 		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.BlackwingTechnician());
-		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.Chromaggus());
-		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.CoreRager());
 		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.DarkIronSkulker());
-		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.Demonwrath());
-		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.DragonConsort());
 		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.DragonEgg());
 		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.DragonkinSorcerer());
-		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.DragonsBreath());
-		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.DruidOfTheFlame());
-		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.EmperorThaurissan());
-		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.FireguardDestroyer());
-		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.FlameBirdForm());
-		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.FlameLionForm());
-		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.Flamewaker());
-		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.GangUp());
 		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.GrimPatron());
 		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.HungryDragon());
-		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.ImpGangBoss());
 		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.LavaShock());
-		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.MajordomoExecutus());
-		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.Nefarian());
-		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.QuickShot());
 		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.RendBlackhand());
-		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.Resurrect());
-		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.Revenge());
-		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.SolemnVigil());
-		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.TwilightWhelp());
-		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.VolcanicDrake());
-		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.VolcanicLumberer());
 		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.Whelp());
 		cards.add(new net.demilich.metastone.game.cards.concrete.druid.AncientOfLore());
 		cards.add(new net.demilich.metastone.game.cards.concrete.druid.AncientOfWar());
-		cards.add(new net.demilich.metastone.game.cards.concrete.druid.Bite());
 		cards.add(new net.demilich.metastone.game.cards.concrete.druid.Cenarius());
-		cards.add(new net.demilich.metastone.game.cards.concrete.druid.Claw());
 		cards.add(new net.demilich.metastone.game.cards.concrete.druid.DruidOfTheClaw());
 		cards.add(new net.demilich.metastone.game.cards.concrete.druid.ForceOfNature());
-		cards.add(new net.demilich.metastone.game.cards.concrete.druid.HealingTouch());
-		cards.add(new net.demilich.metastone.game.cards.concrete.druid.Innervate());
 		cards.add(new net.demilich.metastone.game.cards.concrete.druid.IronbarkProtector());
 		cards.add(new net.demilich.metastone.game.cards.concrete.druid.KeeperOfTheGrove());
-		cards.add(new net.demilich.metastone.game.cards.concrete.druid.MarkOfNature());
-		cards.add(new net.demilich.metastone.game.cards.concrete.druid.MarkOfTheWild());
-		cards.add(new net.demilich.metastone.game.cards.concrete.druid.Moonfire());
-		cards.add(new net.demilich.metastone.game.cards.concrete.druid.Naturalize());
-		cards.add(new net.demilich.metastone.game.cards.concrete.druid.Nourish());
-		cards.add(new net.demilich.metastone.game.cards.concrete.druid.PowerOfTheWild());
-		cards.add(new net.demilich.metastone.game.cards.concrete.druid.SavageRoar());
 		cards.add(new net.demilich.metastone.game.cards.concrete.druid.Savagery());
 		cards.add(new net.demilich.metastone.game.cards.concrete.druid.SoulOfTheForest());
-		cards.add(new net.demilich.metastone.game.cards.concrete.druid.Starfall());
 		cards.add(new net.demilich.metastone.game.cards.concrete.druid.Starfire());
 		cards.add(new net.demilich.metastone.game.cards.concrete.druid.Swipe());
 		cards.add(new net.demilich.metastone.game.cards.concrete.druid.WildGrowth());
-		cards.add(new net.demilich.metastone.game.cards.concrete.druid.Wrath());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.druid.AnodizedRoboCub());
-		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.druid.DarkWispers());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.druid.DruidOfTheFang());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.druid.GroveTender());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.druid.Malorne());
@@ -656,6 +619,10 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.WarsongCommander());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.Whirlwind());
 	}
+	
+	public static void add(Card card) {
+		cards.add(card);
+	}
 
 	public static CardCollection getAll() {
 		CardCollection result = new CardCollection();
@@ -664,10 +631,20 @@ public class CardCatalogue {
 		}
 		return result;
 	}
-
+	
 	public static Card getCardById(int id) {
 		for (Card card : cards) {
 			if (card.getTypeId() == id) {
+				return card.clone();
+			}
+		}
+
+		return null;
+	}
+
+	public static Card getCardById(String id) {
+		for (Card card : cards) {
+			if (card.getCardId() != null && card.getCardId().equalsIgnoreCase(id)) {
 				return card.clone();
 			}
 		}

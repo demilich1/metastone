@@ -14,7 +14,7 @@ import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.BuffSpell;
 import net.demilich.metastone.game.spells.IValueProvider;
 import net.demilich.metastone.game.spells.MetaSpell;
-import net.demilich.metastone.game.spells.RemoveTagSpell;
+import net.demilich.metastone.game.spells.RemoveAttributeSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
@@ -36,7 +36,7 @@ public class BloodKnight extends MinionCard {
 		Minion bloodKnight = createMinion();
 		IValueProvider bloodKnightValueProvider = new BloodKnightBuffValueProvider();
 		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, bloodKnightValueProvider, bloodKnightValueProvider);
-		SpellDesc removeDivineShields = RemoveTagSpell.create(EntityReference.ALL_MINIONS, GameTag.DIVINE_SHIELD);
+		SpellDesc removeDivineShields = RemoveAttributeSpell.create(EntityReference.ALL_MINIONS, GameTag.DIVINE_SHIELD);
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(MetaSpell.create(buffSpell, removeDivineShields));
 		bloodKnight.setBattlecry(battlecry);
 		return bloodKnight;

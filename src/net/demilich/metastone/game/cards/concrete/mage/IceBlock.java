@@ -4,7 +4,7 @@ import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.SecretCard;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
-import net.demilich.metastone.game.spells.ApplyTagSpell;
+import net.demilich.metastone.game.spells.AddAttributeSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.HeroFatalDamageTrigger;
 import net.demilich.metastone.game.spells.trigger.TurnStartTrigger;
@@ -16,7 +16,7 @@ public class IceBlock extends SecretCard {
 		super("Ice Block", Rarity.EPIC, HeroClass.MAGE, 3);
 		setDescription("Secret: When your hero takes fatal damage, prevent it and become Immune this turn.");
 		
-		SpellDesc iceBlockSpell = ApplyTagSpell.create(EntityReference.FRIENDLY_HERO, GameTag.IMMUNE, new TurnStartTrigger());
+		SpellDesc iceBlockSpell = AddAttributeSpell.create(EntityReference.FRIENDLY_HERO, GameTag.IMMUNE, new TurnStartTrigger());
 		setTriggerAndEffect(new HeroFatalDamageTrigger(), iceBlockSpell);
 	}
 

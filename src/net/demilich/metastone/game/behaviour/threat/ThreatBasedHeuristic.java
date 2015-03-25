@@ -8,41 +8,29 @@ import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.behaviour.heuristic.IGameStateHeuristic;
 import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.concrete.druid.Naturalize;
-import net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.warrior.Crush;
-import net.demilich.metastone.game.cards.concrete.hunter.DeadlyShot;
-import net.demilich.metastone.game.cards.concrete.mage.Polymorph;
-import net.demilich.metastone.game.cards.concrete.paladin.Equality;
-import net.demilich.metastone.game.cards.concrete.paladin.Humility;
-import net.demilich.metastone.game.cards.concrete.priest.ShadowWordDeath;
-import net.demilich.metastone.game.cards.concrete.rogue.Assassinate;
-import net.demilich.metastone.game.cards.concrete.rogue.Sap;
-import net.demilich.metastone.game.cards.concrete.shaman.Hex;
-import net.demilich.metastone.game.cards.concrete.warlock.SiphonSoul;
-import net.demilich.metastone.game.cards.concrete.warrior.Execute;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 
 public class ThreatBasedHeuristic implements IGameStateHeuristic {
 
-	private static List<Integer> hardRemoval;
+	private static List<String> hardRemoval;
 
 	static {
-		hardRemoval = new ArrayList<Integer>();
-		hardRemoval.add(new Polymorph().getTypeId());
-		hardRemoval.add(new Execute().getTypeId());
-		hardRemoval.add(new Crush().getTypeId());
-		hardRemoval.add(new Assassinate().getTypeId());
-		hardRemoval.add(new SiphonSoul().getTypeId());
-		hardRemoval.add(new ShadowWordDeath().getTypeId());
-		hardRemoval.add(new Execute().getTypeId());
-		hardRemoval.add(new Naturalize().getTypeId());
-		hardRemoval.add(new Hex().getTypeId());
-		hardRemoval.add(new Humility().getTypeId());
-		hardRemoval.add(new Equality().getTypeId());
-		hardRemoval.add(new DeadlyShot().getTypeId());
-		hardRemoval.add(new Sap().getTypeId());
+		hardRemoval = new ArrayList<String>();
+		hardRemoval.add("polymorph");
+		hardRemoval.add("execute");
+		hardRemoval.add("crush");
+		hardRemoval.add("assassinate");
+		hardRemoval.add("siphon_soul");
+		hardRemoval.add("shadow_word_death");
+		hardRemoval.add("execute");
+		hardRemoval.add("naturalize");
+		hardRemoval.add("hex");
+		hardRemoval.add("humility");
+		hardRemoval.add("equality");
+		hardRemoval.add("deadly_shot");
+		hardRemoval.add("sap");
 	}
 
 	private static ThreatLevel calcuateThreatLevel(GameContext context, int playerId) {
@@ -82,7 +70,7 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 	}
 
 	private static boolean isHardRemoval(Card card) {
-		return hardRemoval.contains(card.getTypeId());
+		return hardRemoval.contains(card.getCardId());
 	}
 
 	private final FeatureVector weights;

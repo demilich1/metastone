@@ -6,7 +6,7 @@
 	"rarity" : "RARE",
 	"heroClass" : "DRUID",
 	"baseManaCost" : 4,
-	"targetRequirement" : "NONE",
+	"targetSelection" : "NONE",
 	"spell" : {
 		"class" : "BuffHeroSpell",
 		"attackBonus" : 4,

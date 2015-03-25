@@ -20,7 +20,7 @@ public class EnrageSpell extends Spell {
 		Map<SpellArg, Object> arguments = SpellDesc.build(EnrageSpell.class);
 		arguments.put(SpellArg.VALUE, attackBonus);
 		arguments.put(SpellArg.TARGET, EntityReference.SELF);
-		arguments.put(SpellArg.GAME_TAG, tag);
+		arguments.put(SpellArg.ATTRIBUTE, tag);
 		return new SpellDesc(arguments);
 	}
 
@@ -29,7 +29,7 @@ public class EnrageSpell extends Spell {
 		int attackBonus = desc.getValue();
 		boolean enraged = target.hasStatus(GameTag.ENRAGED);
 		target.setTag(GameTag.CONDITIONAL_ATTACK_BONUS, enraged ? attackBonus : 0);
-		GameTag tag = (GameTag) desc.get(SpellArg.GAME_TAG);
+		GameTag tag = (GameTag) desc.get(SpellArg.ATTRIBUTE);
 		if (tag != null) {
 			if (enraged) {
 				context.getLogic().applyTag(target, tag);

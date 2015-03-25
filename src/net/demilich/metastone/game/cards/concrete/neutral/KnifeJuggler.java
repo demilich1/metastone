@@ -7,7 +7,7 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.DamageRandomSpell;
 import net.demilich.metastone.game.spells.MetaSpell;
-import net.demilich.metastone.game.spells.RemoveTagSpell;
+import net.demilich.metastone.game.spells.RemoveAttributeSpell;
 import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.MinionSummonedTrigger;
@@ -30,7 +30,7 @@ public class KnifeJuggler extends MinionCard {
 	public Minion summon() {
 		Minion knifeJuggler = createMinion();
 		SpellDesc damageRandomSpell = DamageRandomSpell.create(EntityReference.ENEMY_CHARACTERS, 1, 1);
-		SpellDesc removeStealth = RemoveTagSpell.create(EntityReference.SELF, GameTag.STEALTHED);
+		SpellDesc removeStealth = RemoveAttributeSpell.create(EntityReference.SELF, GameTag.STEALTHED);
 		SpellTrigger trigger = new SpellTrigger(new MinionSummonedTrigger(TargetPlayer.SELF), MetaSpell.create(damageRandomSpell,
 				removeStealth));
 		knifeJuggler.setSpellTrigger(trigger);

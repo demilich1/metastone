@@ -7,7 +7,7 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.DamageSpell;
 import net.demilich.metastone.game.spells.MetaSpell;
-import net.demilich.metastone.game.spells.RemoveTagSpell;
+import net.demilich.metastone.game.spells.RemoveAttributeSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 import net.demilich.metastone.game.spells.trigger.TurnEndTrigger;
@@ -29,7 +29,7 @@ public class RagnarosTheFirelord extends MinionCard {
 	public Minion summon() {
 		Minion ragnaros = createMinion(GameTag.CANNOT_ATTACK);
 		SpellDesc damageSpell = DamageSpell.create(EntityReference.ENEMY_CHARACTERS, 8, true);
-		SpellDesc removeStealth = RemoveTagSpell.create(EntityReference.SELF, GameTag.STEALTHED);
+		SpellDesc removeStealth = RemoveAttributeSpell.create(EntityReference.SELF, GameTag.STEALTHED);
 		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), MetaSpell.create(damageSpell, removeStealth));
 		ragnaros.setSpellTrigger(trigger);
 		return ragnaros;

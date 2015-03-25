@@ -8,7 +8,7 @@ import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
-import net.demilich.metastone.game.spells.ApplyTagSpell;
+import net.demilich.metastone.game.spells.AddAttributeSpell;
 import net.demilich.metastone.game.spells.DamageSpell;
 import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.desc.SpellArg;
@@ -28,7 +28,7 @@ public class ConeOfColdSpell extends Spell {
 		affected.add((Actor) target);
 
 		SpellDesc damage = DamageSpell.create(1);
-		SpellDesc freeze = ApplyTagSpell.create(GameTag.FROZEN);
+		SpellDesc freeze = AddAttributeSpell.create(GameTag.FROZEN);
 		
 		EntityReference sourceReference = source != null ? source.getReference() : null;
 		
