@@ -184,14 +184,10 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.Tracking());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.TundraRhino());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.UnleashTheHounds());
-		cards.add(new net.demilich.metastone.game.cards.concrete.mage.ArcaneMissiles());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.ArchmageAntonidas());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.ConeOfCold());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.Counterspell());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.EtherealArcanist());
-		cards.add(new net.demilich.metastone.game.cards.concrete.mage.Fireball());
-		cards.add(new net.demilich.metastone.game.cards.concrete.mage.Flamestrike());
-		cards.add(new net.demilich.metastone.game.cards.concrete.mage.Frostbolt());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.FrostNova());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.IceBarrier());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.IceBlock());
@@ -201,7 +197,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.MirrorEntity());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.MirrorImage());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.Polymorph());
-		cards.add(new net.demilich.metastone.game.cards.concrete.mage.Pyroblast());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.SorcerersApprentice());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.Spellbender());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.Vaporize());
