@@ -25,7 +25,7 @@ public class ReturnMinionToHandSpell extends Spell {
 	
 	public static SpellDesc create(EntityReference target, int manaModifier, boolean randomTarget) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(ReturnMinionToHandSpell.class);
-		arguments.put(SpellArg.VALUE, manaModifier);
+		arguments.put(SpellArg.MANA_MODIFIER, manaModifier);
 		arguments.put(SpellArg.TARGET, target);
 		arguments.put(SpellArg.RANDOM_TARGET, randomTarget);
 		return new SpellDesc(arguments);
@@ -33,7 +33,7 @@ public class ReturnMinionToHandSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		int manaCostModifier = desc.getValue();
+		int manaCostModifier = desc.getInt(SpellArg.MANA_MODIFIER);
 		Minion minion = (Minion) target;
 		Player owner = context.getPlayer(minion.getOwner());
 		logger.debug("{} is returned to {}'s hand", minion, owner.getName());

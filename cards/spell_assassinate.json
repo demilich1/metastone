@@ -1,0 +1,14 @@
+{
+	"name" : "Assassinate",
+	"description" : "Destroy an enemy minion.",
+	"id" : "spell_assassinate",
+	"type" : "SPELL",
+	"rarity" : "FREE",
+	"heroClass" : "ROGUE",
+	"baseManaCost" : 5,
+	"targetSelection" : "ENEMY_MINIONS",
+	"spell" : {
+		"class" : "DestroySpell"
+	},
+	"fileFormatVersion" : 1
+}

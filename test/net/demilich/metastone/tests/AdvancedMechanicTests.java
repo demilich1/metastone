@@ -17,7 +17,6 @@ import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.cards.concrete.neutral.AbusiveSergeant;
 import net.demilich.metastone.game.cards.concrete.neutral.AmaniBerserker;
 import net.demilich.metastone.game.cards.concrete.neutral.KoboldGeomancer;
-import net.demilich.metastone.game.cards.concrete.priest.MindBlast;
 import net.demilich.metastone.game.cards.concrete.priest.Thoughtsteal;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
@@ -255,11 +254,12 @@ public class AdvancedMechanicTests extends BasicTests {
 		warrior.setMana(10);
 
 		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp());
-		SpellCard damageSpell = new MindBlast();
+		Card damageSpell = CardCatalogue.getCardById("spell_mind_blast");
+		int mindBlastDamage = 5;
 		context.getLogic().receiveCard(priest.getId(), damageSpell);
 
 		context.getLogic().performGameAction(priest.getId(), damageSpell.play());
-		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - MindBlast.DAMAGE);
+		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - mindBlastDamage);
 
 		MinionCard spellPowerMinionCard = new KoboldGeomancer();
 		context.getLogic().receiveCard(priest.getId(), spellPowerMinionCard);
@@ -267,6 +267,6 @@ public class AdvancedMechanicTests extends BasicTests {
 		context.getLogic().receiveCard(priest.getId(), damageSpell);
 		context.getLogic().performGameAction(priest.getId(), damageSpell.play());
 		int spellPower = getSingleMinion(priest.getMinions()).getTagValue(GameTag.SPELL_POWER);
-		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - 2 * MindBlast.DAMAGE - spellPower);
+		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - 2 * mindBlastDamage - spellPower);
 	}
 }

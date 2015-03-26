@@ -5,7 +5,7 @@ import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.BuffSpell;
 import net.demilich.metastone.game.spells.BuffWeaponSpell;
-import net.demilich.metastone.game.spells.ComboSpell;
+import net.demilich.metastone.game.spells.ComboExclusiveSpell;
 import net.demilich.metastone.game.spells.MetaSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -22,7 +22,7 @@ public class TinkersSharpswordOil extends SpellCard {
 
 		SpellDesc comboSpell = MetaSpell.create(EntityReference.NONE, buffWeapon, buffRandomMinion);
 
-		setSpell(ComboSpell.create(buffWeapon, comboSpell));
+		setSpell(ComboExclusiveSpell.create(buffWeapon, comboSpell));
 		setTargetRequirement(TargetSelection.NONE);
 	}
 

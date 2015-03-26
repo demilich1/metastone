@@ -29,7 +29,7 @@ public class ConditionalEffectSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		ISpellConditionChecker condition = (ISpellConditionChecker) desc.get(SpellArg.SPELL_CONDITION_CHECKER);
+		ISpellConditionChecker condition = getCondition(desc);
 		SpellDesc base = (SpellDesc) desc.get(SpellArg.SPELL_1);
 		SpellDesc additional = (SpellDesc) desc.get(SpellArg.SPELL_2);
 
@@ -40,6 +40,10 @@ public class ConditionalEffectSpell extends Spell {
 			castSpell(context, player.getId(), additional, target, sourceReference);
 		}
 
+	}
+	
+	protected ISpellConditionChecker getCondition(SpellDesc desc) {
+		return (ISpellConditionChecker) desc.get(SpellArg.SPELL_CONDITION_CHECKER);
 	}
 
 }

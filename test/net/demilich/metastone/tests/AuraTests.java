@@ -5,15 +5,17 @@ import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.actions.PhysicalAttackAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.MinionCard;
+import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.cards.concrete.neutral.DireWolfAlpha;
 import net.demilich.metastone.game.cards.concrete.priest.MindControl;
-import net.demilich.metastone.game.cards.concrete.rogue.Assassinate;
 import net.demilich.metastone.game.cards.concrete.warlock.Hellfire;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.spells.DestroySpell;
 import net.demilich.metastone.game.spells.aura.BuffAura;
 import net.demilich.metastone.game.targeting.EntityReference;
+import net.demilich.metastone.game.targeting.TargetSelection;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -41,7 +43,8 @@ public class AuraTests extends BasicTests {
 		Assert.assertEquals(testMinion2.getAttack(), 6);
 		Assert.assertEquals(testMinion3.getAttack(), 5);
 
-		Card destroyCard = new Assassinate();
+		SpellCard destroyCard = new TestSpellCard(DestroySpell.create());
+		destroyCard.setTargetRequirement(TargetSelection.ANY);
 		context.getLogic().receiveCard(player.getId(), destroyCard);
 		GameAction destroyAction = destroyCard.play();
 		destroyAction.setTarget(testMinion2);

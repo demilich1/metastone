@@ -1,0 +1,23 @@
+{
+	"name" : "Fan of Knives",
+	"description" : "Deal 1 damage to all enemy minions. Draw a card.",
+	"id" : "spell_fan_of_knives",
+	"type" : "SPELL",
+	"rarity" : "FREE",
+	"heroClass" : "ROGUE",
+	"baseManaCost" : 3,
+	"targetSelection" : "NONE",
+	"spell" : {
+		"class" : "MetaSpell",
+		"spell1" : {
+			"class" : "DamageSpell",
+			"value" : 1,
+			"target" : "ENEMY_MINIONS"
+		},
+		"spell2" : {
+			"class" : "DrawCardSpell",
+			"value" : 1
+		}
+	},
+	"fileFormatVersion" : 1
+}

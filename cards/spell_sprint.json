@@ -1,0 +1,15 @@
+{
+	"name" : "Sprint",
+	"description" : "Draw 4 cards.",
+	"id" : "spell_sprint",
+	"type" : "SPELL",
+	"rarity" : "FREE",
+	"heroClass" : "ROGUE",
+	"baseManaCost" : 7,
+	"targetSelection" : "NONE",
+	"spell" : {
+		"class" : "DrawCardSpell",
+		"value" : 4
+	},
+	"fileFormatVersion" : 1
+}
