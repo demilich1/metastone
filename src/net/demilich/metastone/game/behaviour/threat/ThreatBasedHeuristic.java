@@ -18,19 +18,18 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 
 	static {
 		hardRemoval = new ArrayList<String>();
-		hardRemoval.add("polymorph");
-		hardRemoval.add("execute");
-		hardRemoval.add("crush");
-		hardRemoval.add("assassinate");
-		hardRemoval.add("siphon_soul");
-		hardRemoval.add("shadow_word_death");
-		hardRemoval.add("execute");
-		hardRemoval.add("naturalize");
-		hardRemoval.add("hex");
-		hardRemoval.add("humility");
-		hardRemoval.add("equality");
-		hardRemoval.add("deadly_shot");
-		hardRemoval.add("sap");
+		hardRemoval.add("spell_polymorph");
+		hardRemoval.add("spell_execute");
+		hardRemoval.add("spell_crush");
+		hardRemoval.add("spell_assassinate");
+		hardRemoval.add("spell_siphon_soul");
+		hardRemoval.add("spell_shadow_word_death");
+		hardRemoval.add("spell_naturalize");
+		hardRemoval.add("spell_hex");
+		hardRemoval.add("spell_humility");
+		hardRemoval.add("spell_equality");
+		hardRemoval.add("spell_deadly_shot");
+		hardRemoval.add("spell_sap");
 	}
 
 	private static ThreatLevel calcuateThreatLevel(GameContext context, int playerId) {

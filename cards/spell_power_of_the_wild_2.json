@@ -10,7 +10,7 @@
 	"collectible" : false,
 	"spell" : {
 		"class" : "SummonSpell",
-		"card" : "panther"
+		"card" : "minion_panther"
 		
 	},
 	"fileFormatVersion" : 1
