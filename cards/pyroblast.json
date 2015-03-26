@@ -1,7 +1,7 @@
 {
 	"name" : "Pyroblast",
 	"description" : "Deal 10 damage.",
-	"id" : "pyroblast",
+	"id" : "spell_pyroblast",
 	"type" : "SPELL",
 	"rarity" : "EPIC",
 	"heroClass" : "MAGE",

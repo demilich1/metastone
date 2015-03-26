@@ -1,7 +1,7 @@
 {
 	"name" : "Bite",
 	"description" : "Give your hero +4 Attack this turn and 4 Armor.",
-	"id" : "bite",
+	"id" : "spell_bite",
 	"type" : "SPELL",
 	"rarity" : "RARE",
 	"heroClass" : "DRUID",

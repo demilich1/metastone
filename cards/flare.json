@@ -1,7 +1,7 @@
 {
 	"name" : "Flare",
 	"description" : "All minions lose Stealth. Destroy all enemy Secrets. Draw a card.",
-	"id" : "flare",
+	"id" : "spell_flare",
 	"type" : "SPELL",
 	"rarity" : "RARE",
 	"heroClass" : "HUNTER",

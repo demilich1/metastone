@@ -1,7 +1,7 @@
 {
 	"name" : "Blizzard",
 	"description" : "Deal 2 damage to all enemy minions and Freeze them.",
-	"id" : "blizzard",
+	"id" : "spell_blizzard",
 	"type" : "SPELL",
 	"rarity" : "RARE",
 	"heroClass" : "MAGE",

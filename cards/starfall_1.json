@@ -1,7 +1,7 @@
 {
 	"name" : "5 damage single",
 	"description" : "Deal 5 damage to a minion",
-	"id" : "starfall_1",
+	"id" : "spell_starfall_1",
 	"type" : "SPELL",
 	"rarity" : "RARE",
 	"heroClass" : "DRUID",

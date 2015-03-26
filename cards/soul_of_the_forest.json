@@ -1,7 +1,7 @@
 {
 	"name" : "Soul of the Forest",
 	"description" : "Give your minions \"Deathrattle: Summon a 2/2 Treant.\"",
-	"id" : "soul_of_the_forest",
+	"id" : "spell_soul_of_the_forest",
 	"type" : "SPELL",
 	"rarity" : "COMMON",
 	"heroClass" : "DRUID",

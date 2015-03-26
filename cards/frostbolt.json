@@ -1,7 +1,7 @@
 {
 	"name" : "Frostbolt",
 	"description" : "Deal 3 damage to a character and Freeze it.",
-	"id" : "frostbolt",
+	"id" : "spell_frostbolt",
 	"type" : "SPELL",
 	"rarity" : "FREE",
 	"heroClass" : "MAGE",

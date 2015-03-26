@@ -1,7 +1,7 @@
 {
 	"name" : "Mark of the Wild",
 	"description" : "Give a minion Taunt and +2/+2. (+2 Attack/+2 Health)",
-	"id" : "mark_of_the_wild",
+	"id" : "spell_mark_of_the_wild",
 	"type" : "SPELL",
 	"rarity" : "FREE",
 	"heroClass" : "DRUID",

@@ -1,7 +1,7 @@
 {
 	"name" : "Arcane Shot",
 	"description" : "Deal 2 damage.",
-	"id" : "arcane_shot",
+	"id" : "spell_arcane_shot",
 	"type" : "SPELL",
 	"rarity" : "FREE",
 	"heroClass" : "HUNTER",

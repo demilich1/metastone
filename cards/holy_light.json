@@ -1,7 +1,7 @@
 {
 	"name" : "Holy Light",
 	"description" : "Restore 6 Health.",
-	"id" : "holy_light",
+	"id" : "spell_holy_light",
 	"type" : "SPELL",
 	"rarity" : "FREE",
 	"heroClass" : "PALADIN",

@@ -188,13 +188,11 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.ConeOfCold());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.Counterspell());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.EtherealArcanist());
-		cards.add(new net.demilich.metastone.game.cards.concrete.mage.FrostNova());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.IceBarrier());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.IceBlock());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.IceLance());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.KirinTorMage());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.ManaWyrm());
-		cards.add(new net.demilich.metastone.game.cards.concrete.mage.MirrorEntity());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.MirrorImage());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.Polymorph());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.SorcerersApprentice());

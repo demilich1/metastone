@@ -1,7 +1,7 @@
 {
 	"name" : "Blessing of Kings",
 	"description" : "Give a minion +4/+4. (+4 Attack/+4 Health)",
-	"id" : "blessing_of_kings",
+	"id" : "spell_blessing_of_kings",
 	"type" : "SPELL",
 	"rarity" : "FREE",
 	"heroClass" : "PALADIN",
