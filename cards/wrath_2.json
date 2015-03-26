@@ -1,7 +1,7 @@
 {
 	"name" : "1 damage + draw card",
 	"description" : "Deal 1 damage to a minion and draw a card.",
-	"id" : "wrath_2",
+	"id" : "spell_wrath_2",
 	"type" : "SPELL",
 	"rarity" : "COMMON",
 	"heroClass" : "DRUID",

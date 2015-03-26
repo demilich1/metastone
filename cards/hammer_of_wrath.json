@@ -1,7 +1,7 @@
 {
 	"name" : "Hammer of Wrath",
 	"description" : "Deal 3 damage. Draw a card.",
-	"id" : "hammer_of_wrath",
+	"id" : "spell_hammer_of_wrath",
 	"type" : "SPELL",
 	"rarity" : "FREE",
 	"heroClass" : "PALADIN",

@@ -1,7 +1,7 @@
 {
 	"name" : "+4 Health, Taunt",
 	"description" : "+4 Health and Taunt",
-	"id" : "mark_of_nature_2",
+	"id" : "spell_mark_of_nature_2",
 	"type" : "SPELL",
 	"rarity" : "COMMON",
 	"heroClass" : "DRUID",

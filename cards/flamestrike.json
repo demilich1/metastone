@@ -1,7 +1,7 @@
 {
 	"name" : "Flamestrike",
 	"description" : "Deal 4 damage to all enemy minions.",
-	"id" : "flamestrike",
+	"id" : "spell_flamestrike",
 	"type" : "SPELL",
 	"rarity" : "FREE",
 	"heroClass" : "MAGE",

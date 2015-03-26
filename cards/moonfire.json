@@ -1,7 +1,7 @@
 {
 	"name" : "Moonfire",
 	"description" : "Deal 1 damage.",
-	"id" : "moonfire",
+	"id" : "spell_moonfire",
 	"type" : "SPELL",
 	"rarity" : "FREE",
 	"heroClass" : "DRUID",

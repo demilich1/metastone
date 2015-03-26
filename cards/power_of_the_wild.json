@@ -1,7 +1,7 @@
 {
 	"name" : "Power of the Wild",
 	"description" : "Choose One - Give your minions +1/+1; or Summon a 3/2 Panther.",
-	"id" : "power_of_the_wild",
+	"id" : "spell_power_of_the_wild",
 	"type" : "CHOOSE_ONE",
 	"rarity" : "COMMON",
 	"heroClass" : "DRUID",

@@ -1,7 +1,7 @@
 {
 	"name" : "Starfire",
 	"description" : "Deal 5 damage. Draw a card.",
-	"id" : "starfire",
+	"id" : "spell_starfire",
 	"type" : "SPELL",
 	"rarity" : "FREE",
 	"heroClass" : "DRUID",

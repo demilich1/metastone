@@ -1,7 +1,7 @@
 {
 	"name" : "2 damage AoE",
 	"description" : "Deal 2 damage to all enemy minions",
-	"id" : "starfall_2",
+	"id" : "spell_starfall_2",
 	"type" : "SPELL",
 	"rarity" : "RARE",
 	"heroClass" : "DRUID",

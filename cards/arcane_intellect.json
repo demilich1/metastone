@@ -1,7 +1,7 @@
 {
 	"name" : "Arcane Intellect",
 	"description" : "Draw 2 cards.",
-	"id" : "arcane_intellect",
+	"id" : "spell_arcane_intellect",
 	"type" : "SPELL",
 	"rarity" : "FREE",
 	"heroClass" : "MAGE",

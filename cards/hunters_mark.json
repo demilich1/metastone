@@ -1,7 +1,7 @@
 {
 	"name" : "Hunter's Mark",
 	"description" : "Change a minion's Health to 1.",
-	"id" : "hunters_mark",
+	"id" : "spell_hunters_mark",
 	"type" : "SPELL",
 	"rarity" : "FREE",
 	"heroClass" : "HUNTER",

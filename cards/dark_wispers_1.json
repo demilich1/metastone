@@ -1,7 +1,7 @@
 {
 	"name" : "Summon 5 Wisps",
 	"description" : "Summon 5 Wisps",
-	"id" : "dark_wispers_1",
+	"id" : "spell_dark_wispers_1",
 	"type" : "SPELL",
 	"rarity" : "EPIC",
 	"heroClass" : "DRUID",
@@ -10,7 +10,8 @@
 	"targetSelection" : "NONE",
 	"spell" : {
 		"class" : "SummonSpell",
-		"card" : "wisp"
+		"card" : "wisp",
+		"value" : 5
 	},
 	"fileFormatVersion" : 1
 }

@@ -1,7 +1,7 @@
 {
 	"name" : "+2 Mana Crystals",
 	"description" : "Gain 2 Mana Crystals",
-	"id" : "nourish_1",
+	"id" : "spell_nourish_1",
 	"type" : "SPELL",
 	"rarity" : "RARE",
 	"heroClass" : "DRUID",

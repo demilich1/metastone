@@ -1,7 +1,7 @@
 {
 	"name" : "+4 Attack",
 	"description" : "Give a minion +4 Attack",
-	"id" : "mark_of_nature_1",
+	"id" : "spell_mark_of_nature_1",
 	"type" : "SPELL",
 	"rarity" : "COMMON",
 	"heroClass" : "DRUID",

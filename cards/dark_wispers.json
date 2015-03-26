@@ -1,7 +1,7 @@
 {
 	"name" : "Dark Wispers",
 	"description" : "Choose One - Summon 5 Wisps; or Give a minion +5/+5 and Taunt.",
-	"id" : "dark_wispers",
+	"id" : "spell_dark_wispers",
 	"type" : "CHOOSE_ONE",
 	"rarity" : "EPIC",
 	"heroClass" : "DRUID",

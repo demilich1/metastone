@@ -1,7 +1,7 @@
 {
 	"name" : "Fireball",
 	"description" : "Deal 6 damage.",
-	"id" : "arcane_shot",
+	"id" : "spell_arcane_shot",
 	"type" : "SPELL",
 	"rarity" : "FREE",
 	"heroClass" : "MAGE",

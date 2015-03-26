@@ -1,7 +1,7 @@
 {
 	"name" : "Draw 3 cards",
 	"description" : "Draw 3 cards",
-	"id" : "nourish_2",
+	"id" : "spell_nourish_2",
 	"type" : "SPELL",
 	"rarity" : "RARE",
 	"heroClass" : "DRUID",

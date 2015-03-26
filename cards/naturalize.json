@@ -1,7 +1,7 @@
 {
 	"name" : "Naturalize",
 	"description" : "Destroy a minion. Your opponent draws 2 cards.",
-	"id" : "naturalize",
+	"id" : "spell_naturalize",
 	"type" : "SPELL",
 	"rarity" : "COMMON",
 	"heroClass" : "DRUID",

@@ -1,7 +1,7 @@
 {
 	"name" : "Innervate",
 	"description" : "Gain 2 Mana Crystals this turn only.",
-	"id" : "innervate",
+	"id" : "spell_innervate",
 	"type" : "SPELL",
 	"rarity" : "FREE",
 	"heroClass" : "DRUID",

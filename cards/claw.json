@@ -1,7 +1,7 @@
 {
 	"name" : "Claw",
 	"description" : "Give your hero +2 Attack this turn and 2 Armor.",
-	"id" : "claw",
+	"id" : "spell_claw",
 	"type" : "SPELL",
 	"rarity" : "FREE",
 	"heroClass" : "DRUID",

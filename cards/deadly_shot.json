@@ -1,7 +1,7 @@
 {
 	"name" : "Deadly Shot",
 	"description" : "Destroy a random enemy minion.",
-	"id" : "deadly_shot",
+	"id" : "spell_deadly_shot",
 	"type" : "SPELL",
 	"rarity" : "COMMON",
 	"heroClass" : "HUNTER",

@@ -1,7 +1,7 @@
 {
 	"name" : "Summon Panther",
 	"description" : "Summon a 3/2 Panther.",
-	"id" : "power_of_the_wild_2",
+	"id" : "spell_power_of_the_wild_2",
 	"type" : "SPELL",
 	"rarity" : "COMMON",
 	"heroClass" : "DRUID",

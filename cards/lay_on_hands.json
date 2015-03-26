@@ -1,7 +1,7 @@
 {
 	"name" : "Lay on Hands",
 	"description" : "Restore 8 Health. Draw 3 cards.",
-	"id" : "lay_on_hands",
+	"id" : "spell_lay_on_hands",
 	"type" : "SPELL",
 	"rarity" : "EPIC",
 	"heroClass" : "PALADIN",

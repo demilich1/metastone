@@ -1,7 +1,7 @@
 {
 	"name" : "3 damage",
 	"description" : "Deal 3 damage to a minion",
-	"id" : "wrath_1",
+	"id" : "spell_wrath_1",
 	"type" : "SPELL",
 	"rarity" : "COMMON",
 	"heroClass" : "DRUID",

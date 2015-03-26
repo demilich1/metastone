@@ -1,7 +1,7 @@
 {
 	"name" : "Arcane Explosion",
 	"description" : "Deal 1 damage to all enemy minions.",
-	"id" : "arcane_explosion",
+	"id" : "spell_arcane_explosion",
 	"type" : "SPELL",
 	"rarity" : "FREE",
 	"heroClass" : "MAGE",
