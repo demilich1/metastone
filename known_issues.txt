@@ -18,3 +18,5 @@ Milled cards displayed somewhere
 Method of conceding or ending match
 
 Buffed weapons do not display their stats in green
+
+Check impact of mana cost modifiers on "Choose One" spell cards

@@ -11,7 +11,7 @@
 		"class" : "AddDeathrattleSpell",
 		"spell1" : {
 			"class" : "SummonSpell",
-			"card" : "treant"
+			"card" : "minion_treant"
 		},
 		"target" : "FRIENDLY_MINIONS"
 		

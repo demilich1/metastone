@@ -1,13 +1,13 @@
 {
 	"name" : "Nourish",
 	"description" : "Choose One - Gain 2 Mana Crystals; or Draw 3 cards.",
-	"id" : "spell_nourish",
+	"id" : "choose_one_nourish",
 	"type" : "CHOOSE_ONE",
 	"rarity" : "RARE",
 	"heroClass" : "DRUID",
 	"baseManaCost" : 5,
 	"targetSelection" : "NONE",
-	"option1" : "nourish_1",
-	"option2" : "nourish_2",
+	"option1" : "spell_nourish_1",
+	"option2" : "spell_nourish_2",
 	"fileFormatVersion" : 1
 }

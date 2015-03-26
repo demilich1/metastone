@@ -10,7 +10,7 @@
 	"targetSelection" : "NONE",
 	"spell" : {
 		"class" : "SummonSpell",
-		"card" : "wisp",
+		"card" : "minion_wisp",
 		"value" : 5
 	},
 	"fileFormatVersion" : 1
