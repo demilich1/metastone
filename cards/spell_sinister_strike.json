@@ -1,0 +1,16 @@
+{
+	"name" : "Sinister Strike",
+	"description" : "Deal 3 damage to the enemy hero.",
+	"id" : "spell_sinister_strike",
+	"type" : "SPELL",
+	"rarity" : "FREE",
+	"heroClass" : "ROGUE",
+	"baseManaCost" : 1,
+	"targetSelection" : "NONE",
+	"spell" : {
+		"class" : "DamageSpell",
+		"value" : 3,
+		"target" : "ENEMY_HERO"
+	},
+	"fileFormatVersion" : 1
+}

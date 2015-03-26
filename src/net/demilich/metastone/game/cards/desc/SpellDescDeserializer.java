@@ -37,6 +37,7 @@ public class SpellDescDeserializer implements JsonDeserializer<SpellDesc> {
 		parseArgument(SpellArg.ATTACK_BONUS, jsonData, spellArgs, SpellValueType.INTEGER);
 		parseArgument(SpellArg.ARMOR_BONUS, jsonData, spellArgs, SpellValueType.INTEGER);
 		parseArgument(SpellArg.HP_BONUS, jsonData, spellArgs, SpellValueType.INTEGER);
+		parseArgument(SpellArg.MANA_MODIFIER, jsonData, spellArgs, SpellValueType.INTEGER);
 		parseArgument(SpellArg.TARGET, jsonData, spellArgs, SpellValueType.TARGET_REFERENCE);
 		parseArgument(SpellArg.TARGET_PLAYER, jsonData, spellArgs, SpellValueType.TARGET_PLAYER);
 		parseArgument(SpellArg.VALUE, jsonData, spellArgs, SpellValueType.INTEGER);
@@ -45,6 +46,7 @@ public class SpellDescDeserializer implements JsonDeserializer<SpellDesc> {
 		parseArgument(SpellArg.SPELL_3, jsonData, spellArgs, SpellValueType.SPELL);
 		parseArgument(SpellArg.ATTRIBUTE, jsonData, spellArgs, SpellValueType.ATTRIBUTE);
 		parseArgument(SpellArg.RANDOM_TARGET, jsonData, spellArgs, SpellValueType.BOOLEAN);
+		
 		return new SpellDesc(spellArgs);
 	}
 

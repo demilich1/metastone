@@ -1,0 +1,22 @@
+{
+	"name" : "Eviscerate",
+	"description" : "Deal 2 damage. Combo: Deal 4 damage instead.",
+	"id" : "spell_eviscerate",
+	"type" : "SPELL",
+	"rarity" : "COMMON",
+	"heroClass" : "ROGUE",
+	"baseManaCost" : 2,
+	"targetSelection" : "ANY",
+	"spell" : {
+		"class" : "ComboExclusiveSpell",
+		"spell1" : {
+			"class" : "DamageSpell",
+			"value" : 2
+		},
+		"spell2" : {
+			"class" : "DamageSpell",
+			"value" : 4
+		}
+	},
+	"fileFormatVersion" : 1
+}

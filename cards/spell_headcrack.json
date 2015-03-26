@@ -1,0 +1,23 @@
+{
+	"name" : "Headcrack",
+	"description" : "Deal 2 damage to the enemy hero. Combo: Return this to your hand next turn.",
+	"id" : "spell_headcrack",
+	"type" : "SPELL",
+	"rarity" : "RARE",
+	"heroClass" : "ROGUE",
+	"baseManaCost" : 2,
+	"targetSelection" : "NONE",
+	"spell" : {
+		"class" : "ComboInclusiveSpell",
+		"spell1" : {
+			"class" : "DamageSpell",
+			"value" : 2,
+			"target" : "ENEMY_HERO"
+		},
+		"spell2" : {
+			"class" : "ReceiveCardSpell",
+			"card" : "spell_headcrack"
+		}
+	},
+	"fileFormatVersion" : 1
+}

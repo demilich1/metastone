@@ -6,11 +6,12 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.concrete.neutral.WildPyromancer;
-import net.demilich.metastone.game.cards.concrete.priest.MindBlast;
 import net.demilich.metastone.game.cards.concrete.warlock.Corruption;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.spells.DamageSpell;
+import net.demilich.metastone.game.targeting.EntityReference;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -68,7 +69,7 @@ public class TechnicalTests extends TestBase {
 			Assert.assertEquals(minion.getHp(), minion.getMaxHp());
 		}
 		
-		playCard(context, player1, new MindBlast());
+		playCard(context, player1, new TestSpellCard(DamageSpell.create(EntityReference.ENEMY_HERO, 1)));
 		// after playing a spell:
 		// all three pyromancers should have triggered, even though all are dead after the first two
 		// this tests that minions are only removed from board after all effects are resolved

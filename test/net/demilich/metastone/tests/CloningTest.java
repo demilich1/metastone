@@ -3,9 +3,9 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.behaviour.PlayRandomBehaviour;
 import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.cards.SpellCard;
-import net.demilich.metastone.game.cards.concrete.mage.Polymorph;
 import net.demilich.metastone.game.decks.DeckFactory;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -41,7 +41,7 @@ public class CloningTest extends TestBase {
 
 	@Test
 	public void testCloneSpellCard() {
-		Card original = new Polymorph();
+		Card original = CardCatalogue.getCardById("spell_polymorph");
 		Card clone = original.clone();
 		Assert.assertNotSame(original, clone);
 		SpellCard originalSpellCard = (SpellCard) original;
