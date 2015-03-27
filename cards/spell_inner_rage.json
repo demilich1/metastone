@@ -1,0 +1,22 @@
+{
+	"name" : "Inner Rage",
+	"description" : "Deal 1 damage to a minion and give it +2 Attack.",
+	"id" : "spell_inner_rage",
+	"type" : "SPELL",
+	"rarity" : "COMMON",
+	"heroClass" : "WARRIOR",
+	"baseManaCost" : 0,
+	"targetSelection" : "MINIONS",
+	"spell" : {
+		"class" : "MetaSpell",
+		"spell1" : {
+			"class" : "DamageSpell",
+			"value" : 1
+		},
+		"spell2" : {
+			"class" : "BuffSpell",
+			"attackBonus" : 2
+		}
+	},
+	"fileFormatVersion" : 1
+}

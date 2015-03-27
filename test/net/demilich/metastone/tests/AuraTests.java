@@ -4,11 +4,11 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.actions.PhysicalAttackAction;
 import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.cards.concrete.neutral.DireWolfAlpha;
 import net.demilich.metastone.game.cards.concrete.priest.MindControl;
-import net.demilich.metastone.game.cards.concrete.warlock.Hellfire;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
@@ -53,7 +53,7 @@ public class AuraTests extends BasicTests {
 		Assert.assertEquals(direWolf.getAttack(), 2);
 		Assert.assertEquals(testMinion3.getAttack(), 6);
 
-		playCard(context, player, new Hellfire());
+		playCard(context, player, CardCatalogue.getCardById("spell_hellfire"));
 		Assert.assertEquals(direWolf.getAttack(), 2);
 		Assert.assertEquals(testMinion3.getAttack(), 5);
 	}
