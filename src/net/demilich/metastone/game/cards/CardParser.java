@@ -3,7 +3,11 @@ package net.demilich.metastone.game.cards;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.lang.reflect.Type;
+import java.util.Map;
 
+import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.cards.desc.AttributeDeserializer;
 import net.demilich.metastone.game.cards.desc.CardDesc;
 import net.demilich.metastone.game.cards.desc.ChooseOneCardDesc;
 import net.demilich.metastone.game.cards.desc.SpellCardDesc;
@@ -16,16 +20,20 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
+import com.google.gson.reflect.TypeToken;
 
 public class CardParser {
 
 	private static Logger logger = LoggerFactory.getLogger(CardParser.class);
 
 	private final Gson gson;
-	
+
 	public CardParser() {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.registerTypeAdapter(SpellDesc.class, new SpellDescDeserializer());
+		Type mapType = new TypeToken<Map<GameTag, Object>>() {
+		}.getType();
+		gsonBuilder.registerTypeAdapter(mapType, new AttributeDeserializer());
 		gson = gsonBuilder.create();
 	}
 
@@ -37,7 +45,7 @@ public class CardParser {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		
+
 		JsonElement jsonData = gson.fromJson(reader, JsonElement.class);
 
 		CardType type = CardType.valueOf((String) jsonData.getAsJsonObject().get("type").getAsString());
