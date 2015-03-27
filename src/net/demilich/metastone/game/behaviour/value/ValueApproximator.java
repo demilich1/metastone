@@ -10,7 +10,6 @@ import net.demilich.metastone.game.cards.concrete.neutral.Spellbreaker;
 import net.demilich.metastone.game.cards.concrete.neutral.TheCoin;
 import net.demilich.metastone.game.cards.concrete.warrior.Execute;
 import net.demilich.metastone.game.cards.concrete.warrior.Slam;
-import net.demilich.metastone.game.cards.concrete.warrior.Whirlwind;
 import net.demilich.metastone.game.heroes.powers.ArmorUp;
 
 import org.slf4j.Logger;
@@ -34,7 +33,6 @@ public class ValueApproximator implements IValueApproximator {
 		cardValueApproximators.put(new ArmorUp().getTypeId(), new ArmorUpValueApproximator());
 		
 		cardValueApproximators.put(new Slam().getTypeId(), new SlamValueApproximator());
-		cardValueApproximators.put(new Whirlwind().getTypeId(), new WhirlwindValueApproximator());
 		cardValueApproximators.put(new Execute().getTypeId(), new ExecuteValueApproximator());
 		cardValueApproximators.put(new Spellbreaker().getTypeId(), new SpellBreakerValueApproximator());
 	}

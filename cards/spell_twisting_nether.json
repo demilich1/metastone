@@ -1,0 +1,15 @@
+{
+	"name" : "Twisting Nether",
+	"description" : "Destroy all minions.",
+	"id" : "spell_twisting_nether",
+	"type" : "SPELL",
+	"rarity" : "EPIC",
+	"heroClass" : "WARLOCK",
+	"baseManaCost" : 8,
+	"targetSelection" : "NONE",
+	"spell" : {
+		"class" : "DestroySpell",
+		"target" : "ALL_MINIONS"
+	},
+	"fileFormatVersion" : 1
+}

@@ -1,0 +1,16 @@
+{
+	"name" : "Cleave",
+	"description" : "Deal 2 damage to two random enemy minions.",
+	"id" : "spell_cleave",
+	"type" : "SPELL",
+	"rarity" : "FREE",
+	"heroClass" : "WARRIOR",
+	"baseManaCost" : 2,
+	"targetSelection" : "NONE",
+	"spell" : {
+		"class" : "MultiTargetDamageSpell",
+		"value" : 2,
+		"iterations" : 2
+	},
+	"fileFormatVersion" : 1
+}
