@@ -4,9 +4,9 @@ import java.util.EnumMap;
 import java.util.Map;
 
 import net.demilich.metastone.game.logic.CustomCloneable;
-import net.demilich.metastone.game.spells.IValueProvider;
 import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.TargetPlayer;
+import net.demilich.metastone.game.spells.desc.valueprovider.IValueProvider;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class SpellDesc extends CustomCloneable {

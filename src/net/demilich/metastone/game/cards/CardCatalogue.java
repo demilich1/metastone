@@ -22,11 +22,8 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.druid.AncientOfWar());
 		cards.add(new net.demilich.metastone.game.cards.concrete.druid.Cenarius());
 		cards.add(new net.demilich.metastone.game.cards.concrete.druid.DruidOfTheClaw());
-		cards.add(new net.demilich.metastone.game.cards.concrete.druid.ForceOfNature());
 		cards.add(new net.demilich.metastone.game.cards.concrete.druid.IronbarkProtector());
 		cards.add(new net.demilich.metastone.game.cards.concrete.druid.KeeperOfTheGrove());
-		cards.add(new net.demilich.metastone.game.cards.concrete.druid.Savagery());
-		cards.add(new net.demilich.metastone.game.cards.concrete.druid.Swipe());
 		cards.add(new net.demilich.metastone.game.cards.concrete.druid.WildGrowth());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.druid.AnodizedRoboCub());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.druid.DruidOfTheFang());

@@ -10,8 +10,8 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.BuffSpell;
-import net.demilich.metastone.game.spells.IValueProvider;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.valueprovider.IValueProvider;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class LilExorcist extends MinionCard {

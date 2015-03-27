@@ -1,12 +1,11 @@
 package net.demilich.metastone.game.cards.desc;
 
-enum SpellValueType {
-	
+public enum ParseValueType {
 	BOOLEAN,
 	INTEGER,
 	TARGET_REFERENCE,
 	TARGET_PLAYER,
 	SPELL,
-	ATTRIBUTE
-
+	ATTRIBUTE,
+	VALUE_PROVIDER
 }
