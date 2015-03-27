@@ -8,8 +8,8 @@ import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.DrawCardSpell;
-import net.demilich.metastone.game.spells.IValueProvider;
 import net.demilich.metastone.game.spells.TargetPlayer;
+import net.demilich.metastone.game.spells.desc.valueprovider.IValueProvider;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class BattleRage extends SpellCard {

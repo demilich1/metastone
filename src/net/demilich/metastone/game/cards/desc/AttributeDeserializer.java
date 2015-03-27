@@ -19,11 +19,11 @@ public class AttributeDeserializer implements JsonDeserializer<Map<GameTag, Obje
 		Map<GameTag, Object> map = new EnumMap<GameTag, Object>(GameTag.class);
 		JsonObject jsonData = json.getAsJsonObject();
 		System.out.println("Parsing ATTRIBUTES");
-		parseAttribute(GameTag.OVERLOAD, jsonData, map, AttributeValueType.INTEGER);
+		parseAttribute(GameTag.OVERLOAD, jsonData, map, ParseValueType.INTEGER);
 		return map;
 	}
 
-	private void parseAttribute(GameTag attribute, JsonObject jsonData, Map<GameTag, Object> map, AttributeValueType valueType) {
+	private void parseAttribute(GameTag attribute, JsonObject jsonData, Map<GameTag, Object> map, ParseValueType valueType) {
 		String argName = ParseUtils.toCamelCase(attribute.toString());
 		System.out.println("Attribute: " + argName);
 		if (!jsonData.has(argName)) {

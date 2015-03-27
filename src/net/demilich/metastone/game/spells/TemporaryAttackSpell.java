@@ -9,6 +9,7 @@ import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.valueprovider.IValueProvider;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 import org.slf4j.Logger;

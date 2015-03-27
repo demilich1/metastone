@@ -1,4 +1,4 @@
-package net.demilich.metastone.game.spells;
+package net.demilich.metastone.game.spells.desc;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;

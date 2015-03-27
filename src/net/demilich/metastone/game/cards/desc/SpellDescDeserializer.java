@@ -3,12 +3,9 @@ package net.demilich.metastone.game.cards.desc;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.spells.Spell;
-import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.targeting.EntityReference;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
@@ -34,96 +31,34 @@ public class SpellDescDeserializer implements JsonDeserializer<SpellDesc> {
 			throw new JsonParseException("SpellDesc parser encountered an invalid spell class: " + spellClassName);
 		}
 		Map<SpellArg, Object> spellArgs = SpellDesc.build(spellClass);
-		parseArgument(SpellArg.ATTACK_BONUS, jsonData, spellArgs, SpellValueType.INTEGER);
-		parseArgument(SpellArg.ARMOR_BONUS, jsonData, spellArgs, SpellValueType.INTEGER);
-		parseArgument(SpellArg.HP_BONUS, jsonData, spellArgs, SpellValueType.INTEGER);
-		parseArgument(SpellArg.MANA_MODIFIER, jsonData, spellArgs, SpellValueType.INTEGER);
-		parseArgument(SpellArg.TARGET, jsonData, spellArgs, SpellValueType.TARGET_REFERENCE);
-		parseArgument(SpellArg.TARGET_PLAYER, jsonData, spellArgs, SpellValueType.TARGET_PLAYER);
-		parseArgument(SpellArg.VALUE, jsonData, spellArgs, SpellValueType.INTEGER);
-		parseArgument(SpellArg.SPELL_1, jsonData, spellArgs, SpellValueType.SPELL);
-		parseArgument(SpellArg.SPELL_2, jsonData, spellArgs, SpellValueType.SPELL);
-		parseArgument(SpellArg.SPELL_3, jsonData, spellArgs, SpellValueType.SPELL);
-		parseArgument(SpellArg.ATTRIBUTE, jsonData, spellArgs, SpellValueType.ATTRIBUTE);
-		parseArgument(SpellArg.RANDOM_TARGET, jsonData, spellArgs, SpellValueType.BOOLEAN);
+		parseArgument(SpellArg.ATTACK_BONUS, jsonData, spellArgs, ParseValueType.INTEGER);
+		parseArgument(SpellArg.ARMOR_BONUS, jsonData, spellArgs, ParseValueType.INTEGER);
+		parseArgument(SpellArg.HP_BONUS, jsonData, spellArgs, ParseValueType.INTEGER);
+		parseArgument(SpellArg.MANA_MODIFIER, jsonData, spellArgs, ParseValueType.INTEGER);
+		parseArgument(SpellArg.TARGET, jsonData, spellArgs, ParseValueType.TARGET_REFERENCE);
+		parseArgument(SpellArg.TARGET_PLAYER, jsonData, spellArgs, ParseValueType.TARGET_PLAYER);
+		parseArgument(SpellArg.VALUE, jsonData, spellArgs, ParseValueType.INTEGER);
+		parseArgument(SpellArg.SECONDARY_VALUE, jsonData, spellArgs, ParseValueType.INTEGER);
+		parseArgument(SpellArg.SPELL_1, jsonData, spellArgs, ParseValueType.SPELL);
+		parseArgument(SpellArg.SPELL_2, jsonData, spellArgs, ParseValueType.SPELL);
+		parseArgument(SpellArg.SPELL_3, jsonData, spellArgs, ParseValueType.SPELL);
+		parseArgument(SpellArg.ATTRIBUTE, jsonData, spellArgs, ParseValueType.ATTRIBUTE);
+		parseArgument(SpellArg.RANDOM_TARGET, jsonData, spellArgs, ParseValueType.BOOLEAN);
+		parseArgument(SpellArg.VALUE_PROVIDER, jsonData, spellArgs, ParseValueType.VALUE_PROVIDER);
 		
 		return new SpellDesc(spellArgs);
 	}
 
-	private void parseArgument(SpellArg spellArg, JsonObject jsonData, Map<SpellArg, Object> spellArgs, SpellValueType valueType) {
+	private void parseArgument(SpellArg spellArg, JsonObject jsonData, Map<SpellArg, Object> spellArgs, ParseValueType valueType) {
 		String argName = ParseUtils.toCamelCase(spellArg.toString());
 		System.out.println("ArgName: " + argName);
 		if (!jsonData.has(argName)) {
 			return;
 		}
-		Object value = null;
-		JsonElement entry = jsonData.get(argName);
-		switch (valueType) {
-		case INTEGER:
-			value = entry.getAsInt();
-			break;
-		case BOOLEAN:
-			value = entry.getAsBoolean();
-			break;
-		case TARGET_REFERENCE:
-			value = parseEntityReference(entry.getAsString());
-			break;
-		case TARGET_PLAYER:
-			value = Enum.valueOf(TargetPlayer.class, entry.getAsString());
-			break;
-		case SPELL:
-			value = deserialize(entry, SpellDesc.class, null);
-			break;
-		case ATTRIBUTE:
-			value = Enum.valueOf(GameTag.class, entry.getAsString());
-			break;
-		default:
-			break;
-		}
+		Object value = ParseUtils.parse(argName, jsonData, valueType);
+		
 		System.out.println("Setting spellArg " + spellArg + " to "  +value);
 		spellArgs.put(spellArg, value);
 	}
-	
-	private static EntityReference parseEntityReference(String str) {
-		String lowerCaseName = str.toLowerCase();
-		switch (lowerCaseName) {
-		case "none":
-			return EntityReference.NONE;
-		case "enemy_characters":
-			return EntityReference.ENEMY_CHARACTERS;
-		case "enemy_minions":
-			return EntityReference.ENEMY_MINIONS;
-		case "enemy_hero":
-			return EntityReference.ENEMY_HERO;
-		case "enemy_weapon":
-			return EntityReference.ENEMY_WEAPON;
-		case "friendly_characters":
-			return EntityReference.FRIENDLY_CHARACTERS;
-		case "friendly_minions":
-			return EntityReference.FRIENDLY_MINIONS;
-		case "other_friendly_minions":
-			return EntityReference.OTHER_FRIENDLY_MINIONS;
-		case "adjacent_minions":
-			return EntityReference.ADJACENT_MINIONS;
-		case "friendly_hero":
-			return EntityReference.FRIENDLY_HERO;
-		case "friendly_weapon":
-			return EntityReference.FRIENDLY_WEAPON;
-		case "all_minions":
-			return EntityReference.ALL_MINIONS;
-		case "all_characters":
-			return EntityReference.ALL_CHARACTERS;
-		case "all_other_characters":
-			return EntityReference.ALL_OTHER_CHARACTERS;
-		case "event_target":
-			return EntityReference.EVENT_TARGET;
-		case "self":
-			return EntityReference.SELF;
-		default:
-			return null;
-		}
-	}
-
-	
 
 }

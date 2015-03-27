@@ -12,10 +12,10 @@ import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.weapons.Weapon;
 import net.demilich.metastone.game.spells.DestroyWeaponSpell;
 import net.demilich.metastone.game.spells.DrawCardSpell;
-import net.demilich.metastone.game.spells.IValueProvider;
 import net.demilich.metastone.game.spells.MetaSpell;
 import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.valueprovider.IValueProvider;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class HarrisonJones extends MinionCard {

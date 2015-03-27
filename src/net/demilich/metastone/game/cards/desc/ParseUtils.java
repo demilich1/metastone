@@ -1,7 +1,19 @@
 package net.demilich.metastone.game.cards.desc;
 
+import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.spells.TargetPlayer;
+import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderDesc;
+import net.demilich.metastone.game.targeting.EntityReference;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 class ParseUtils {
-	
+
+	private static SpellDescDeserializer spellDescParser = new SpellDescDeserializer();
+	private static ValueProviderDeserializer valueProviderParser = new ValueProviderDeserializer();
+
 	public static String toCamelCase(String input) {
 		String inputLowerCase = input.toLowerCase();
 		StringBuilder sb = new StringBuilder();
@@ -21,6 +33,70 @@ class ParseUtils {
 		}
 
 		return sb.toString();
+	}
+
+	public static Object parse(String argName, JsonObject jsonData, ParseValueType valueType) {
+		JsonElement entry = jsonData.get(argName);
+		switch (valueType) {
+		case INTEGER:
+			return entry.getAsInt();
+		case BOOLEAN:
+			return entry.getAsBoolean();
+		case TARGET_REFERENCE:
+			return parseEntityReference(entry.getAsString());
+		case TARGET_PLAYER:
+			return Enum.valueOf(TargetPlayer.class, entry.getAsString());
+		case SPELL:
+			return spellDescParser.deserialize(entry, SpellDesc.class, null);
+		case ATTRIBUTE:
+			return Enum.valueOf(GameTag.class, entry.getAsString());
+		case VALUE_PROVIDER:
+			ValueProviderDesc valueProviderDesc = valueProviderParser.deserialize(entry, ValueProviderDesc.class, null);
+			return valueProviderDesc.create();
+		default:
+			break;
+		}
+		return null;
+	}
+
+	private static EntityReference parseEntityReference(String str) {
+		String lowerCaseName = str.toLowerCase();
+		switch (lowerCaseName) {
+		case "none":
+			return EntityReference.NONE;
+		case "enemy_characters":
+			return EntityReference.ENEMY_CHARACTERS;
+		case "enemy_minions":
+			return EntityReference.ENEMY_MINIONS;
+		case "enemy_hero":
+			return EntityReference.ENEMY_HERO;
+		case "enemy_weapon":
+			return EntityReference.ENEMY_WEAPON;
+		case "friendly_characters":
+			return EntityReference.FRIENDLY_CHARACTERS;
+		case "friendly_minions":
+			return EntityReference.FRIENDLY_MINIONS;
+		case "other_friendly_minions":
+			return EntityReference.OTHER_FRIENDLY_MINIONS;
+		case "adjacent_minions":
+			return EntityReference.ADJACENT_MINIONS;
+		case "friendly_hero":
+			return EntityReference.FRIENDLY_HERO;
+		case "friendly_weapon":
+			return EntityReference.FRIENDLY_WEAPON;
+		case "all_minions":
+			return EntityReference.ALL_MINIONS;
+		case "all_characters":
+			return EntityReference.ALL_CHARACTERS;
+		case "all_other_characters":
+			return EntityReference.ALL_OTHER_CHARACTERS;
+		case "event_target":
+			return EntityReference.EVENT_TARGET;
+		case "self":
+			return EntityReference.SELF;
+		default:
+			return null;
+		}
 	}
 
 }

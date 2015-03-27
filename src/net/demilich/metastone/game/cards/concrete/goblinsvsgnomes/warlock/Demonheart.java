@@ -11,7 +11,7 @@ import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.BuffSpell;
 import net.demilich.metastone.game.spells.DamageSpell;
 import net.demilich.metastone.game.spells.EitherOrSpell;
-import net.demilich.metastone.game.spells.ISpellConditionChecker;
+import net.demilich.metastone.game.spells.desc.ISpellConditionChecker;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.TargetSelection;
 

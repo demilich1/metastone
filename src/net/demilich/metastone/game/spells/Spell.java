@@ -23,7 +23,6 @@ public abstract class Spell {
 		if (validTargets.size() > 0 && desc.getBool(SpellArg.RANDOM_TARGET)) {
 			Entity target = SpellUtils.getRandomTarget(validTargets);
 			castForPlayer(context, player, desc, source, target);
-			//onCast(context, player, desc, null, target);
 		} else {
 			for (Entity target : validTargets) {
 				castForPlayer(context, player, desc, source, target);
