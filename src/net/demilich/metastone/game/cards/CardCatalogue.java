@@ -160,7 +160,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.warrior.Shieldmaiden());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.warrior.SiegeEngine());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.warrior.Warbot());
-		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.AnimalCompanion());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.BestialWrath());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.EaglehornBow());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.ExplosiveShot());
@@ -178,7 +177,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.Snipe());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.StarvingBuzzard());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.TimberWolf());
-		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.Tracking());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.TundraRhino());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.UnleashTheHounds());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.ArchmageAntonidas());
