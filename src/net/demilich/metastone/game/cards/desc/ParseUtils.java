@@ -6,6 +6,7 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
@@ -42,6 +43,15 @@ class ParseUtils {
 			return entry.getAsInt();
 		case BOOLEAN:
 			return entry.getAsBoolean();
+		case STRING:
+			return entry.getAsString();
+		case STRING_ARRAY:
+			JsonArray jsonArray = entry.getAsJsonArray();
+			String[] array = new String[jsonArray.size()];
+			for (int i = 0; i < array.length; i++) {
+				array[i] = jsonArray.get(i).getAsString();
+			}
+			return array;
 		case TARGET_REFERENCE:
 			return parseEntityReference(entry.getAsString());
 		case TARGET_PLAYER:

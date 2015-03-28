@@ -1,0 +1,19 @@
+{
+	"name" : "Animal Companion",
+	"description" : "Summon a random Beast Companion.",
+	"id" : "spell_animal_companion",
+	"type" : "SPELL",
+	"rarity" : "FREE",
+	"heroClass" : "HUNTER",
+	"baseManaCost" : 3,
+	"targetSelection" : "NONE",
+	"spell" : {
+		"class" : "SummonRandomSpell",
+		"cards" : [
+			"minion_huffer",
+			"minion_misha",
+			"minion_leokk"
+		]
+	},
+	"fileFormatVersion" : 1
+}
