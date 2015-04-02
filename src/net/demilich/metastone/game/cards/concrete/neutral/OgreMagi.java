@@ -23,7 +23,7 @@ public class OgreMagi extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion ogreMagi = createMinion();
-		ogreMagi.setTag(GameTag.SPELL_POWER, 1);
+		ogreMagi.setTag(GameTag.SPELL_DAMAGE, 1);
 		return ogreMagi;
 	}
 }

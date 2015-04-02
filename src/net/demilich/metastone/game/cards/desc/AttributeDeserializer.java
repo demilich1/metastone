@@ -20,6 +20,13 @@ public class AttributeDeserializer implements JsonDeserializer<Map<GameTag, Obje
 		JsonObject jsonData = json.getAsJsonObject();
 		System.out.println("Parsing ATTRIBUTES");
 		parseAttribute(GameTag.OVERLOAD, jsonData, map, ParseValueType.INTEGER);
+		parseAttribute(GameTag.CANNOT_ATTACK, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(GameTag.CHARGE, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(GameTag.DIVINE_SHIELD, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(GameTag.STEALTH, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(GameTag.UNTARGETABLE_BY_SPELLS, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(GameTag.WINDFURY, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(GameTag.SPELL_DAMAGE, jsonData, map, ParseValueType.INTEGER);
 		return map;
 	}
 
@@ -35,7 +42,9 @@ public class AttributeDeserializer implements JsonDeserializer<Map<GameTag, Obje
 		case INTEGER:
 			value = entry.getAsInt();
 			break;
-
+		case BOOLEAN:
+			value = entry.getAsBoolean() ? 1 : 0;
+			break;
 		default:
 			break;
 		}

@@ -1,0 +1,16 @@
+{
+	"name" : "Faerie Dragon",
+	"description" : "Can't be targeted by Spells or Hero Powers.",
+	"id" : "minion_faerie_dragon",
+	"type" : "MINION",
+	"rarity" : "COMMON",
+	"heroClass" : "ANY",
+	"baseManaCost" : 2,
+	"baseAttack" : 3,
+	"baseHp" : 2,
+	"race" : "DRAGON",
+	"attributes" : {
+		"untargetableBySpells" : true
+	},
+	"fileFormatVersion" : 1
+}

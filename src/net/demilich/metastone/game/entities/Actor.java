@@ -60,7 +60,7 @@ public abstract class Actor extends Entity {
 
 	protected boolean displayGameTag(GameTag tag) {
 		return tag == GameTag.CHARGE || tag == GameTag.ENRAGED || tag == GameTag.FROZEN || tag == GameTag.DIVINE_SHIELD
-				|| tag == GameTag.WINDFURY || tag == GameTag.SPELL_POWER || tag == GameTag.STEALTH || tag == GameTag.TAUNT
+				|| tag == GameTag.WINDFURY || tag == GameTag.SPELL_DAMAGE || tag == GameTag.STEALTH || tag == GameTag.TAUNT
 				|| tag == GameTag.CANNOT_ATTACK || tag == GameTag.UNTARGETABLE_BY_SPELLS || tag == GameTag.MEGA_WINDFURY;
 	}
 

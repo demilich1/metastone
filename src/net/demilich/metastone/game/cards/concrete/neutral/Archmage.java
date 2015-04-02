@@ -23,7 +23,7 @@ public class Archmage extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion archmage = createMinion();
-		archmage.setTag(GameTag.SPELL_POWER, 1);
+		archmage.setTag(GameTag.SPELL_DAMAGE, 1);
 		return archmage;
 	}
 }

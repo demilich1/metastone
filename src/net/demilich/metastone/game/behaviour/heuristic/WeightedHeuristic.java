@@ -22,8 +22,8 @@ public class WeightedHeuristic implements IGameStateHeuristic {
 		if (minion.hasStatus(GameTag.DIVINE_SHIELD)) {
 			minionScore += 1.5f * baseScore;
 		}
-		if (minion.hasStatus(GameTag.SPELL_POWER)) {
-			minionScore += minion.getTagValue(GameTag.SPELL_POWER);
+		if (minion.hasStatus(GameTag.SPELL_DAMAGE)) {
+			minionScore += minion.getTagValue(GameTag.SPELL_DAMAGE);
 		}
 		if (minion.hasStatus(GameTag.ENRAGED)) {
 			minionScore += 1;

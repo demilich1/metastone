@@ -23,7 +23,7 @@ public class DalaranMage extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion dalaranMage = createMinion();
-		dalaranMage.setTag(GameTag.SPELL_POWER, 1);
+		dalaranMage.setTag(GameTag.SPELL_DAMAGE, 1);
 		return dalaranMage;
 	}
 }

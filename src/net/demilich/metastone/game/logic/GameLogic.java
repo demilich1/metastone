@@ -136,7 +136,7 @@ public class GameLogic implements Cloneable {
 	}
 
 	public int applySpellpower(Player player, int baseValue) {
-		int spellpower = getTotalTagValue(player, GameTag.SPELL_POWER);
+		int spellpower = getTotalTagValue(player, GameTag.SPELL_DAMAGE);
 		return baseValue + spellpower;
 	}
 

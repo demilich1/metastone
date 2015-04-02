@@ -27,7 +27,7 @@ public class WrathOfAirTotem extends MinionCard {
 	public Minion summon() {
 		Minion wrathOfAirTotem = createMinion();
 		wrathOfAirTotem.setTag(GameTag.UNIQUE_ENTITY, UniqueEntity.WRATH_OF_AIR_TOTEM);
-		wrathOfAirTotem.setTag(GameTag.SPELL_POWER, 1);
+		wrathOfAirTotem.setTag(GameTag.SPELL_DAMAGE, 1);
 		return wrathOfAirTotem;
 	}
 }
