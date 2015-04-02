@@ -10,7 +10,6 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.SpellCard;
-import net.demilich.metastone.game.cards.concrete.neutral.FaerieDragon;
 import net.demilich.metastone.game.cards.concrete.neutral.GurubashiBerserker;
 import net.demilich.metastone.game.cards.concrete.neutral.OasisSnapjaw;
 import net.demilich.metastone.game.cards.concrete.neutral.SpitefulSmith;
@@ -40,7 +39,7 @@ public class SpecialCardTests extends TestBase {
 		Player warrior = context.getPlayer2();
 		warrior.setMana(10);
 
-		MinionCard faerieDragonCard = new FaerieDragon();
+		MinionCard faerieDragonCard = (MinionCard) CardCatalogue.getCardById("minion_faerie_dragon");
 		context.getLogic().receiveCard(warrior.getId(), faerieDragonCard);
 		context.getLogic().performGameAction(warrior.getId(), faerieDragonCard.play());
 

@@ -25,7 +25,7 @@ public class SootSpewer extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion sootSpewer = createMinion();
-		sootSpewer.setTag(GameTag.SPELL_POWER, +1);
+		sootSpewer.setTag(GameTag.SPELL_DAMAGE, +1);
 		return sootSpewer;
 	}
 }

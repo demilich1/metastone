@@ -25,7 +25,7 @@ public class Malygos extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion malygos = createMinion();
-		malygos.setTag(GameTag.SPELL_POWER, +5);
+		malygos.setTag(GameTag.SPELL_DAMAGE, +5);
 		return malygos;
 	}
 }

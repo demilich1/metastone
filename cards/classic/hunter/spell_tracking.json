@@ -8,7 +8,7 @@
 	"baseManaCost" : 1,
 	"targetSelection" : "NONE",
 	"spell" : {
-		"class" : "TrackingSpell"
+		"class" : "custom.TrackingSpell"
 	},
 	"fileFormatVersion" : 1
 }

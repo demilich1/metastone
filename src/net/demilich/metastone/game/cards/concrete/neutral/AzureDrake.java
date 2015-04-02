@@ -26,7 +26,7 @@ public class AzureDrake extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion azureDrake = createMinion();
-		azureDrake.setTag(GameTag.SPELL_POWER, 1);
+		azureDrake.setTag(GameTag.SPELL_DAMAGE, 1);
 		azureDrake.setBattlecry(BattlecryAction.createBattlecry(DrawCardSpell.create()));
 		return azureDrake;
 	}

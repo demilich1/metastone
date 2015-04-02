@@ -23,7 +23,7 @@ public class MiniMage extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion miniMage = createMinion(GameTag.STEALTH);
-		miniMage.setTag(GameTag.SPELL_POWER, +1);
+		miniMage.setTag(GameTag.SPELL_DAMAGE, +1);
 		return miniMage;
 	}
 }

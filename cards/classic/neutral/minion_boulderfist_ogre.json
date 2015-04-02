@@ -1,0 +1,11 @@
+{
+	"name" : "Boulderfist Ogre",
+	"id" : "minion_boulderfist_ogre",
+	"type" : "MINION",
+	"rarity" : "FREE",
+	"heroClass" : "ANY",
+	"baseManaCost" : 6,
+	"baseAttack" : 6,
+	"baseHp" : 7,
+	"fileFormatVersion" : 1
+}

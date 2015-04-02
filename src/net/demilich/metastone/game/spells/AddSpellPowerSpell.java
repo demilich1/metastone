@@ -26,7 +26,7 @@ public class AddSpellPowerSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int power = desc.getValue();
-		target.modifyTag(GameTag.SPELL_POWER, power);
+		target.modifyTag(GameTag.SPELL_DAMAGE, power);
 	}
 
 }
