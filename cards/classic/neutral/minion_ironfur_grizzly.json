@@ -1,0 +1,16 @@
+{
+	"name" : "Ironfur Grizzly",
+	"description" : "Taunt",
+	"id" : "minion_ironfur_grizzly",
+	"type" : "MINION",
+	"rarity" : "FREE",
+	"heroClass" : "ANY",
+	"baseManaCost" : 3,
+	"baseAttack" : 3,
+	"baseHp" : 3,
+	"race" : "BEAST",
+	"attributes" : {
+		"taunt" : true
+	},
+	"fileFormatVersion" : 1
+}

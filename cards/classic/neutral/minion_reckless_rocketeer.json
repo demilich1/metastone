@@ -1,0 +1,15 @@
+{
+	"name" : "Reckless Rocketeer",
+	"description" : "Charge",
+	"id" : "minion_reckless_rocketeer",
+	"type" : "MINION",
+	"rarity" : "FREE",
+	"heroClass" : "ANY",
+	"baseManaCost" : 6,
+	"baseAttack" : 5,
+	"baseHp" : 2,
+	"attributes" : {
+		"charge" : true
+	},
+	"fileFormatVersion" : 1
+}

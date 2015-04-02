@@ -1,0 +1,15 @@
+{
+	"name" : "Thrallmar Farseer",
+	"description" : "Windfury",
+	"id" : "minion_thrallmar_farseer",
+	"type" : "MINION",
+	"rarity" : "COMMON",
+	"heroClass" : "ANY",
+	"baseManaCost" : 3,
+	"baseAttack" : 2,
+	"baseHp" : 3,
+	"attributes" : {
+		"windfury" : true
+	},
+	"fileFormatVersion" : 1
+}

@@ -11,7 +11,6 @@ import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.cards.concrete.neutral.GurubashiBerserker;
-import net.demilich.metastone.game.cards.concrete.neutral.OasisSnapjaw;
 import net.demilich.metastone.game.cards.concrete.neutral.SpitefulSmith;
 import net.demilich.metastone.game.cards.concrete.warlock.SummoningPortal;
 import net.demilich.metastone.game.cards.concrete.warrior.FieryWarAxe;
@@ -81,7 +80,7 @@ public class SpecialCardTests extends TestBase {
 		MinionCard gurubashiBerserkerCard = new GurubashiBerserker();
 		playCard(context, warrior, gurubashiBerserkerCard);
 
-		MinionCard oasisSnapjawCard = new OasisSnapjaw();
+		MinionCard oasisSnapjawCard = (MinionCard) CardCatalogue.getCardById("minion_oasis_snapjaw");
 		playCard(context, mage, oasisSnapjawCard);
 
 		Actor attacker = getSingleMinion(mage.getMinions());

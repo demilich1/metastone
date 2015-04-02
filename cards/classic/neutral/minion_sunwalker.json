@@ -1,0 +1,16 @@
+{
+	"name" : "Sunwalker",
+	"description" : "Taunt. Divine Shield",
+	"id" : "minion_sunwalker",
+	"type" : "MINION",
+	"rarity" : "RARE",
+	"heroClass" : "ANY",
+	"baseManaCost" : 6,
+	"baseAttack" : 4,
+	"baseHp" : 5,
+	"attributes" : {
+		"taunt" : true,
+		"divineShield" : true
+	},
+	"fileFormatVersion" : 1
+}

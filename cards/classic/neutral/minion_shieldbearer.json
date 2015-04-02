@@ -1,0 +1,15 @@
+{
+	"name" : "Shieldbearer",
+	"description" : "Taunt",
+	"id" : "minion_shieldbearer",
+	"type" : "MINION",
+	"rarity" : "COMMON",
+	"heroClass" : "ANY",
+	"baseManaCost" : 1,
+	"baseAttack" : 0,
+	"baseHp" : 4,
+	"attributes" : {
+		"taunt" : true
+	},
+	"fileFormatVersion" : 1
+}
