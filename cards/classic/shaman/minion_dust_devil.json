@@ -1,0 +1,16 @@
+{
+	"name" : "Dust Devil",
+	"description" : "Windfury. Overload: (2)",
+	"id" : "minion_dust_devil",
+	"type" : "MINION",
+	"rarity" : "COMMON",
+	"heroClass" : "SHAMAN",
+	"baseManaCost" : 1,
+	"baseAttack" : 3,
+	"baseHp" : 1,
+	"attributes" : {
+		"overload" : 2,
+		"windfury" : true
+	},
+	"fileFormatVersion" : 1
+}

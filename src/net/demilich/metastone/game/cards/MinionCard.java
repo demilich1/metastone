@@ -23,7 +23,8 @@ public class MinionCard extends Card {
 				GameTag.CHARGE,
 				GameTag.DIVINE_SHIELD,
 				GameTag.WINDFURY,
-				GameTag.SPELL_DAMAGE
+				GameTag.SPELL_DAMAGE,
+				GameTag.ATTACK_EQUALS_HP
 				
 			}
 		));

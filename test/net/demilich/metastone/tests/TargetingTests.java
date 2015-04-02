@@ -6,9 +6,8 @@ import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.actions.PhysicalAttackAction;
+import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.MinionCard;
-import net.demilich.metastone.game.cards.concrete.neutral.Shieldbearer;
-import net.demilich.metastone.game.cards.concrete.neutral.Wisp;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -25,10 +24,10 @@ public class TargetingTests extends TestBase {
 		Player mage = context.getPlayer1();
 		Player victim = context.getPlayer2();
 		
-		MinionCard tauntCard = new Shieldbearer();
+		MinionCard tauntCard = (MinionCard) CardCatalogue.getCardById("minion_shieldbearer");
 		context.getLogic().receiveCard(victim.getId(), tauntCard);
 		
-		MinionCard attackerCard = new Wisp();
+		MinionCard attackerCard = new TestMinionCard(1, 1, 0);
 		context.getLogic().receiveCard(mage.getId(), attackerCard);
 		
 		context.getLogic().performGameAction(victim.getId(), tauntCard.play());

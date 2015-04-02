@@ -1,0 +1,16 @@
+{
+	"name" : "The Coin",
+	"description" : "Gain 1 Mana Crystals this turn only.",
+	"id" : "spell_the_coin",
+	"type" : "SPELL",
+	"rarity" : "FREE",
+	"heroClass" : "ANY",
+	"baseManaCost" : 0,
+	"collectible" : false,
+	"targetSelection" : "NONE",
+	"spell" : {
+		"class" : "GainManaSpell",
+		"value" : 1
+	},
+	"fileFormatVersion" : 1
+}

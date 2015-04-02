@@ -1,0 +1,15 @@
+{
+	"name" : "Worgen Infiltrator",
+	"description" : "Stealth",
+	"id" : "minion_worgen_infiltrator",
+	"type" : "MINION",
+	"rarity" : "COMMON",
+	"heroClass" : "ANY",
+	"baseManaCost" : 1,
+	"baseAttack" : 2,
+	"baseHp" : 1,
+	"attributes" : {
+		"stealth" : true
+	},
+	"fileFormatVersion" : 1
+}

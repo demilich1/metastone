@@ -9,7 +9,6 @@ import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.WeaponCard;
-import net.demilich.metastone.game.cards.concrete.neutral.TheCoin;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -24,10 +23,10 @@ import org.testng.annotations.Test;
 
 public class BasicTests extends TestBase {
 
-	private TheCoin getTheCoin(CardCollection cards) {
+	private Card getTheCoin(CardCollection cards) {
 		for (Card card : cards) {
-			if (card instanceof TheCoin) {
-				return (TheCoin) card;
+			if (card.getCardId().equalsIgnoreCase("spell_the_coin")) {
+				return card;
 			}
 		}
 		return null;
@@ -155,7 +154,7 @@ public class BasicTests extends TestBase {
 		Player mage = context.getPlayer1();
 		Player warrior = context.getPlayer2();
 
-		TheCoin theCoin = getTheCoin(mage.getHand());
+		Card theCoin = getTheCoin(mage.getHand());
 		Assert.assertEquals(theCoin, null);
 		theCoin = getTheCoin(warrior.getHand());
 		Assert.assertNotEquals(theCoin, null);

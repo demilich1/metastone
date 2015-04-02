@@ -16,11 +16,11 @@ import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.SecretCard;
 import net.demilich.metastone.game.cards.SpellCard;
-import net.demilich.metastone.game.cards.concrete.neutral.TheCoin;
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
@@ -887,7 +887,7 @@ public class GameLogic implements Cloneable {
 
 		// second player gets the coin additionally
 		if (!begins) {
-			TheCoin theCoin = new TheCoin();
+			Card theCoin = CardCatalogue.getCardById("spell_the_coin");
 			receiveCard(player.getId(), theCoin);
 		}
 	}
