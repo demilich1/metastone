@@ -21,7 +21,7 @@ public class BattlecryDesc {
 	}
 
 	public TargetSelection getTargetSelection() {
-		return targetSelection;
+		return targetSelection != null ? targetSelection : TargetSelection.NONE;
 	}
 
 }

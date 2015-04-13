@@ -14,7 +14,6 @@ import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.IChooseOneCard;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.SpellCard;
-import net.demilich.metastone.game.cards.concrete.neutral.AbusiveSergeant;
 import net.demilich.metastone.game.cards.concrete.neutral.AmaniBerserker;
 import net.demilich.metastone.game.cards.concrete.priest.Thoughtsteal;
 import net.demilich.metastone.game.entities.Actor;
@@ -238,8 +237,8 @@ public class AdvancedMechanicTests extends BasicTests {
 		Actor testSubject = getSingleMinion(mage.getMinions());
 		Assert.assertEquals(testSubject.getAttack(), baseAttack);
 
-		playCard(context, mage, new AbusiveSergeant());
-		Assert.assertEquals(testSubject.getAttack(), baseAttack + AbusiveSergeant.ATTACK_BONUS);
+		playCard(context, mage, CardCatalogue.getCardById("minion_abusive_sergeant"));
+		Assert.assertEquals(testSubject.getAttack(), baseAttack + 2);
 		context.getLogic().endTurn(mage.getId());
 		Assert.assertEquals(testSubject.getAttack(), baseAttack);
 	}

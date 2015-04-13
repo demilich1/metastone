@@ -1,0 +1,18 @@
+{
+	"name" : "Ancient Brewmaster",
+	"description" : "Battlecry: Return a friendly minion from the battlefield to your hand.",
+	"id" : "minion_ancient_brewmaster",
+	"type" : "MINION",
+	"rarity" : "COMMON",
+	"heroClass" : "ANY",
+	"baseManaCost" : 4,
+	"baseAttack" : 5,
+	"baseHp" : 4,
+	"battlecry" : {
+		"targetSelection" : "FRIENDLY_MINIONS",
+		"spell" : {
+			"class" : "ReturnMinionToHandSpell"
+		}
+	},
+	"fileFormatVersion" : 1
+}

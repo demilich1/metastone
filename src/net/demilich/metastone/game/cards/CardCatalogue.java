@@ -223,13 +223,9 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.naxxramas.WailingSoul());
 		cards.add(new net.demilich.metastone.game.cards.concrete.naxxramas.Webspinner());
 		cards.add(new net.demilich.metastone.game.cards.concrete.naxxramas.ZombieChow());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.AbusiveSergeant());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.AcidicSwampOoze());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.AcolyteOfPain());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.AlarmOBot());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.Alexstrasza());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.AmaniBerserker());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.AncientBrewmaster());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.AncientMage());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.AngryChicken());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.ArcaneGolem());
@@ -257,7 +253,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.Doomsayer());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.DragonlingMechanic());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.DreadCorsair());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.EarthenRingFarseer());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.EliteTaurenChieftain());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.ElvenArcher());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.EmperorCobra());
@@ -331,7 +326,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.VoodooDoctor());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.WildPyromancer());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.YoungPriestess());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.YouthfulBrewmaster());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.Ysera());
 		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.AldorPeacekeeper());
 		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.ArgentProtector());
