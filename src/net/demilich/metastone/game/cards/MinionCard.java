@@ -11,6 +11,7 @@ import net.demilich.metastone.game.cards.desc.MinionCardDesc;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
+import net.demilich.metastone.game.spells.desc.SpellDesc;
 
 public class MinionCard extends Card {
 	
@@ -29,6 +30,8 @@ public class MinionCard extends Card {
 			}
 		));
 	
+	private SpellDesc deathrattle;
+	
 	public MinionCard(String name, int baseAttack, int baseHp, Rarity rarity, HeroClass classRestriction, int manaCost) {
 		super(name, CardType.MINION, rarity, classRestriction, manaCost);
 		setTag(GameTag.BASE_ATTACK, baseAttack);
@@ -42,6 +45,7 @@ public class MinionCard extends Card {
 		if (desc.race != null) {
 			setRace(desc.race);
 		}
+		deathrattle = desc.deathrattle;
 	}
 
 	protected Minion createMinion(GameTag... tags) {
@@ -54,6 +58,9 @@ public class MinionCard extends Card {
 		minion.setBaseAttack(getBaseAttack());
 		minion.setTag(GameTag.ATTACK_BONUS, getTagValue(GameTag.ATTACK_BONUS));
 		minion.setBaseHp(getBaseHp());
+		if (deathrattle != null) {
+			minion.addDeathrattle(deathrattle);
+		}
 		return minion;
 	}
 	

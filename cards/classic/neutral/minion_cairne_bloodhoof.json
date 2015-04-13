@@ -1,0 +1,16 @@
+{
+	"name" : "Cairne Bloodhoof",
+	"description" : "Deathrattle: Summon a 4/5 Baine Bloodhoof.",
+	"id" : "minion_cairne_bloodhoof",
+	"type" : "MINION",
+	"rarity" : "LEGENDARY",
+	"heroClass" : "ANY",
+	"baseManaCost" : 6,
+	"baseAttack" : 4,
+	"baseHp" : 5,
+	"deathrattle" : {
+		"class" : "SummonSpell",
+		"card" : "minion_baine_bloodhoof"
+	},
+	"fileFormatVersion" : 1
+}

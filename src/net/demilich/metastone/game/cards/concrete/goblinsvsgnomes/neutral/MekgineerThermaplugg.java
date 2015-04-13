@@ -2,7 +2,6 @@ package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.neutral;
 
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
-import net.demilich.metastone.game.cards.concrete.neutral.LeperGnome;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
@@ -28,7 +27,7 @@ public class MekgineerThermaplugg extends MinionCard {
 	public Minion summon() {
 		Minion mekgineerThermaplugg = createMinion();
 		MinionDeathTrigger minionDeathTrigger = new MinionDeathTrigger(TargetPlayer.OPPONENT);
-		SpellTrigger trigger = new SpellTrigger(minionDeathTrigger, SummonSpell.create(new LeperGnome()));
+		SpellTrigger trigger = new SpellTrigger(minionDeathTrigger, SummonSpell.create("minion_leper_gnome"));
 		mekgineerThermaplugg.setSpellTrigger(trigger);
 		return mekgineerThermaplugg;
 	}
