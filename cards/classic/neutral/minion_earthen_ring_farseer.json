@@ -1,0 +1,19 @@
+{
+	"name" : "Earthen Ring Farseer",
+	"description" : "Battlecry: Restore 3 Health.",
+	"id" : "minion_earthen_ring_farseer",
+	"type" : "MINION",
+	"rarity" : "COMMON",
+	"heroClass" : "ANY",
+	"baseManaCost" : 3,
+	"baseAttack" : 3,
+	"baseHp" : 3,
+	"battlecry" : {
+		"targetSelection" : "ANY",
+		"spell" : {
+			"class" : "HealingSpell",
+			"value" : 3
+		}
+	},
+	"fileFormatVersion" : 1
+}
