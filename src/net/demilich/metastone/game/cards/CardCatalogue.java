@@ -224,7 +224,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.naxxramas.WailingSoul());
 		cards.add(new net.demilich.metastone.game.cards.concrete.naxxramas.Webspinner());
 		cards.add(new net.demilich.metastone.game.cards.concrete.naxxramas.ZombieChow());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.Abomination());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.AbusiveSergeant());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.AcidicSwampOoze());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.AcolyteOfPain());
@@ -243,7 +242,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.BloodmageThalnos());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.BloodsailCorsair());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.BloodsailRaider());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.CairneBloodhoof());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.CaptainGreenskin());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.CaptainsParrot());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.ColdlightOracle());
@@ -275,7 +273,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.Gruul());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.GurubashiBerserker());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.HarrisonJones());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.HarvestGolem());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.Hogger());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.HungryCrab());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.IllidanStormrage());
@@ -286,9 +283,7 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.KingMukla());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.KnifeJuggler());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.LeeroyJenkins());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.LeperGnome());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.Lightwarden());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.LootHoarder());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.LorewalkerCho());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.MadBomber());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.ManaAddict());
@@ -327,7 +322,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.StormpikeCommando());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.StormwindChampion());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.SunfuryProtector());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.SylvanasWindrunner());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.TaurenWarrior());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.TheBeast());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.TheBlackKnight());
@@ -417,7 +411,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.neutral.BaineBloodhoof());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.neutral.Boar());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.neutral.Chicken());
-		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.neutral.DamagedGolem());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.neutral.Devilsaur());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.neutral.Emboldener3000());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.neutral.EmeraldDrake());
