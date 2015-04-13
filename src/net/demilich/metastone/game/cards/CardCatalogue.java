@@ -169,7 +169,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.KillCommand());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.Misdirection());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.MultiShot());
-		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.SavannahHighmane());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.ScavengingHyena());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.SnakeTrap());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.Snipe());
@@ -350,7 +349,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.Redemption());
 		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.Repentance());
 		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.SwordOfJustice());
-		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.TirionFordring());
 		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.TruesilverChampion());
 		cards.add(new net.demilich.metastone.game.cards.concrete.priest.AuchenaiSoulpriest());
 		cards.add(new net.demilich.metastone.game.cards.concrete.priest.CabalShadowPriest());
@@ -399,12 +397,7 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.druid.ForceOfNatureTreant());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.druid.Panther());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.druid.Treant());
-		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.hunter.Hound());
-		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.hunter.Huffer());
-		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.hunter.Hyena());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.hunter.Leokk());
-		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.hunter.Misha());
-		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.hunter.Snake());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.mage.MirrorImageToken());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.mage.Sheep());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.mage.SpellbenderToken());

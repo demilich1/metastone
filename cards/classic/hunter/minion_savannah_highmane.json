@@ -1,0 +1,17 @@
+{
+	"name" : "Savannah Highmane",
+	"description" : "Deathrattle: Summon two 2/2 Hyenas.",
+	"id" : "minion_savannah_highmane",
+	"type" : "MINION",
+	"rarity" : "RARE",
+	"heroClass" : "HUNTER",
+	"baseManaCost" : 6,
+	"baseAttack" : 6,
+	"baseHp" : 5,
+	"deathrattle" : {
+		"class" : "SummonSpell",
+		"cards" : ["minion_hyena", "minion_hyena"]
+	},
+	"race" : "BEAST",
+	"fileFormatVersion" : 1
+}
