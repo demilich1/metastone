@@ -1,0 +1,16 @@
+{
+	"name" : "Hound",
+	"id" : "minion_hound",
+	"type" : "MINION",
+	"rarity" : "COMMON",
+	"heroClass" : "HUNTER",
+	"baseManaCost" : 1,
+	"baseAttack" : 1,
+	"baseHp" : 1,
+	"race" : "BEAST",
+	"attributes" : {
+		"charge" : true
+	},
+	"collectible" : false,
+	"fileFormatVersion" : 1
+}

@@ -1,0 +1,20 @@
+{
+	"name" : "Tirion Fordring",
+	"description" : "Divine Shield. Taunt. Deathrattle: Equip a 5/3 Ashbringer.",
+	"id" : "minion_tirion_fordring",
+	"type" : "MINION",
+	"rarity" : "LEGENDARY",
+	"heroClass" : "PALADIN",
+	"baseManaCost" : 8,
+	"baseAttack" : 6,
+	"baseHp" : 6,
+	"attributes" : {
+		"taunt" : true,
+		"divine_shield" : true
+	},
+	"deathrattle" : {
+		"class" : "EquipWeaponSpell",
+		"card" : "weapon_ashbringer"
+	},
+	"fileFormatVersion" : 1
+}
