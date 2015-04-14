@@ -2,6 +2,7 @@ package net.demilich.metastone.tools;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.EnumMap;
 
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -18,6 +19,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
+import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.desc.CardDesc;
@@ -33,42 +35,45 @@ class EditorMainWindow extends BorderPane {
 
 	@FXML
 	private RadioButton minionRadioButton;
-	
+
 	@FXML
 	private RadioButton spellRadioButton;
-	
+
 	@FXML
 	private RadioButton weaponRadioButton;
-	
+
 	@FXML
 	private TextField nameField;
-	
+
 	@FXML
 	private Label idLabel;
-	
+
 	@FXML
 	private TextField descriptionField;
-	
+
 	@FXML
 	private ChoiceBox<Rarity> rarityBox;
-	
+
 	@FXML
 	private ChoiceBox<HeroClass> heroClassBox;
-	
+
 	@FXML
 	private TextField manaCostField;
-	
+
 	@FXML
 	private CheckBox collectibleBox;
-	
+
+	@FXML
+	private CheckBox attributesBox;
+
 	@FXML
 	private Pane contentPanel;
-	
+
 	@FXML
 	private Button saveButton;
-	
+
 	private final ToggleGroup cardTypeGroup = new ToggleGroup();
-	
+
 	private CardDesc card;
 
 	public EditorMainWindow() {
@@ -82,49 +87,59 @@ class EditorMainWindow extends BorderPane {
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
-		
+
 		minionRadioButton.setToggleGroup(cardTypeGroup);
 		spellRadioButton.setToggleGroup(cardTypeGroup);
 		weaponRadioButton.setToggleGroup(cardTypeGroup);
 		minionRadioButton.setSelected(true);
-		
+
 		nameField.textProperty().addListener(this::onNameChanged);
 		descriptionField.textProperty().addListener(this::onDescriptionChanged);
-		
+
 		rarityBox.setItems(FXCollections.observableArrayList(Rarity.values()));
 		heroClassBox.setItems(FXCollections.observableArrayList(HeroClass.values()));
-		
+
 		setCardEditor(new MinionCardPanel());
-		
+
 		rarityBox.valueProperty().addListener(this::onRarityChanged);
 		saveButton.setOnAction(this::onSaveButton);
 		heroClassBox.valueProperty().addListener(this::onHeroClassChanged);
 		collectibleBox.setOnAction(this::onCollectibleChanged);
+		attributesBox.setOnAction(this::onAttributesChanged);
 		manaCostField.textProperty().addListener(new IntegerListener(value -> card.baseManaCost = value));
 	}
-	
+
 	private void onCollectibleChanged(ActionEvent event) {
 		card.collectible = collectibleBox.isSelected();
 	}
-	
+
+	private void onAttributesChanged(ActionEvent event) {
+		if (attributesBox.isSelected()) {
+			card.attributes = new EnumMap<GameTag, Object>(GameTag.class);
+			card.attributes.put(GameTag.OVERLOAD, 1);
+		} else {
+			card.attributes = null;
+		}
+	}
+
 	private void onNameChanged(ObservableValue<? extends String> ov, String oldValue, String newValue) {
 		card.name = newValue;
 		card.id = getCardId(card.name, card.type);
 		idLabel.setText(card.id);
 	}
-	
+
 	private void onDescriptionChanged(ObservableValue<? extends String> ov, String oldValue, String newValue) {
 		card.description = newValue;
 	}
-	
+
 	private void onRarityChanged(ObservableValue<? extends Rarity> ov, Rarity oldRarity, Rarity newRarity) {
 		card.rarity = newRarity;
 	}
-	
+
 	private void onHeroClassChanged(ObservableValue<? extends HeroClass> ov, HeroClass oldHeroClass, HeroClass newHeroClass) {
 		card.heroClass = newHeroClass;
 	}
-	
+
 	private void setCardEditor(ICardEditor cardEditor) {
 		CardDesc newCard = cardEditor.getCardDesc();
 		if (card != null) {
@@ -143,7 +158,7 @@ class EditorMainWindow extends BorderPane {
 		card = newCard;
 		card.id = getCardId(card.name, card.type);
 		contentPanel.getChildren().setAll(cardEditor.getPanel());
-		
+
 		// update ui
 		nameField.setText(card.name);
 		idLabel.setText(card.id);
@@ -153,11 +168,11 @@ class EditorMainWindow extends BorderPane {
 		manaCostField.setText(String.valueOf(card.baseManaCost));
 		collectibleBox.setSelected(card.collectible);
 	}
-	
+
 	private void onSaveButton(ActionEvent event) {
 		save();
 	}
-	
+
 	private void save() {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Save card");
@@ -175,7 +190,7 @@ class EditorMainWindow extends BorderPane {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private static String getCardId(String cardName, CardType cardType) {
 		String result = "";
 		String prefix = "";
@@ -195,7 +210,7 @@ class EditorMainWindow extends BorderPane {
 			break;
 		default:
 			break;
-		
+
 		}
 		for (String word : cardName.split(" ")) {
 			result += prefix + word.replace("'", "").toLowerCase();
