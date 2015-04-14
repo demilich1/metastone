@@ -56,7 +56,10 @@ public class MinionCard extends Card {
 		minion.setTag(GameTag.ATTACK_BONUS, getTagValue(GameTag.ATTACK_BONUS));
 		minion.setBaseHp(getBaseHp());
 		if (battlecry != null) {
-			minion.setBattlecry(BattlecryAction.createBattlecry(battlecry.getSpell(), battlecry.getTargetSelection()));
+			BattlecryAction battlecryAction = BattlecryAction.createBattlecry(battlecry.spell, battlecry.getTargetSelection());
+			battlecryAction.setResolvedLate(battlecry.resolvedLate);
+			minion.setBattlecry(battlecryAction);
+
 		}
 		if (deathrattle != null) {
 			minion.addDeathrattle(deathrattle);

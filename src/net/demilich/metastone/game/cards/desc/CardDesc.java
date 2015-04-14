@@ -19,6 +19,7 @@ public abstract class CardDesc {
 	public int baseManaCost;
 	public boolean collectible;
 	public Map<GameTag, Object> attributes;
+	public int fileFormatVersion = 1;
 	
 	public abstract Card createInstance();
 

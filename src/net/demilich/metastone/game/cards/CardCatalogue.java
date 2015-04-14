@@ -226,9 +226,7 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.AcolyteOfPain());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.AlarmOBot());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.AmaniBerserker());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.AncientMage());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.AngryChicken());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.ArcaneGolem());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.Archmage());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.AzureDrake());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.BaronGeddon());

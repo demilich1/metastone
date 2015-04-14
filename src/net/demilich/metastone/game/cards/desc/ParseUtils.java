@@ -10,7 +10,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-class ParseUtils {
+public class ParseUtils {
 
 	private static SpellDescDeserializer spellDescParser = new SpellDescDeserializer();
 	private static ValueProviderDeserializer valueProviderParser = new ValueProviderDeserializer();
