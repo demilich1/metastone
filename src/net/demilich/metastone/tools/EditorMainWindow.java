@@ -1,5 +1,6 @@
 package net.demilich.metastone.tools;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -99,6 +100,9 @@ class EditorMainWindow extends BorderPane {
 		spellRadioButton.setToggleGroup(cardTypeGroup);
 		weaponRadioButton.setToggleGroup(cardTypeGroup);
 		minionRadioButton.setSelected(true);
+		
+		minionRadioButton.setOnAction(event -> setCardEditor(new MinionCardPanel()));
+		spellRadioButton.setOnAction(event -> setCardEditor(new SpellCardPanel()));
 
 		nameField.textProperty().addListener(this::onNameChanged);
 		descriptionField.textProperty().addListener(this::onDescriptionChanged);
@@ -241,6 +245,7 @@ class EditorMainWindow extends BorderPane {
 		String json = gson.toJson(card);
 		try {
 			Files.writeFile(json, file);
+			Desktop.getDesktop().open(file);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

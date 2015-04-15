@@ -10,7 +10,7 @@ import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.spells.desc.valueprovider.IValueProvider;
+import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 import org.slf4j.Logger;
@@ -40,7 +40,7 @@ public class BuffSpell extends Spell {
 		return new SpellDesc(arguments);
 	}
 
-	public static SpellDesc create(EntityReference target, IValueProvider attackValueProvider, IValueProvider hpValueProvider) {
+	public static SpellDesc create(EntityReference target, ValueProvider attackValueProvider, ValueProvider hpValueProvider) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(BuffSpell.class);
 		arguments.put(SpellArg.VALUE_PROVIDER, attackValueProvider);
 		arguments.put(SpellArg.SECOND_VALUE_PROVIDER, hpValueProvider);
@@ -56,7 +56,7 @@ public class BuffSpell extends Spell {
 		return create(null, attackBonus, hpBonus);
 	}
 
-	public static SpellDesc create(IValueProvider attackValueProvider, IValueProvider hpValueProvider) {
+	public static SpellDesc create(ValueProvider attackValueProvider, ValueProvider hpValueProvider) {
 		return create(null, attackValueProvider, hpValueProvider);
 	}
 
@@ -65,14 +65,19 @@ public class BuffSpell extends Spell {
 		int attackBonus = desc.getInt(SpellArg.ATTACK_BONUS);
 		int hpBonus = desc.getInt(SpellArg.HP_BONUS);
 
-		IValueProvider attackValueProvider = (IValueProvider) desc.get(SpellArg.VALUE_PROVIDER);
-		IValueProvider hpValueProvider = (IValueProvider) desc.get(SpellArg.SECOND_VALUE_PROVIDER);
+		ValueProvider attackValueProvider = (ValueProvider) desc.get(SpellArg.VALUE_PROVIDER);
+		ValueProvider hpValueProvider = (ValueProvider) desc.get(SpellArg.SECOND_VALUE_PROVIDER);
 
 		if (attackValueProvider != null) {
 			attackBonus = attackValueProvider.provideValue(context, player, target);
 		}
+		
 		if (hpValueProvider != null) {
 			hpBonus = hpValueProvider.provideValue(context, player, target);
+		}
+		// use the first value provider for both values if hp bonus is not explicitely set to 0
+		else if (hpBonus == 0 && attackValueProvider != null) {
+			hpBonus = attackValueProvider.provideValue(context, player, target);
 		}
 
 		logger.debug("{} gains ({})", target, attackBonus + "/" + hpBonus);

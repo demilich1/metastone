@@ -1,0 +1,15 @@
+{
+  "spell": {
+    "class": "custom.IAmMurlocSpell"
+  },
+  "id": "spell_i_am_murloc",
+  "name": "I Am Murloc",
+  "description": "Summon three, four, or five 1/1 Murlocs.",
+  "type": "SPELL",
+  "heroClass": "ANY",
+  "rarity": "FREE",
+  "baseManaCost": 4,
+  "collectible": false,
+  "targetSelection" : "NONE",
+  "fileFormatVersion": 1
+}

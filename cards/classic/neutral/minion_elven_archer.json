@@ -1,0 +1,23 @@
+{
+  "baseAttack": 1,
+  "baseHp": 1,
+  "battlecry": {
+    "spell": {
+      "class": "DamageSpell",
+	  "value" : 1
+    },
+    "resolvedLate": false
+  },
+  "id": "minion_elven_archer",
+  "name": "Elven Archer",
+  "description": "Battlecry: Deal 1 damage.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "FREE",
+  "baseManaCost": 1,
+  "collectible": true,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "fileFormatVersion": 1
+}

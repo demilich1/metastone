@@ -40,7 +40,8 @@ public class ComboBoxKeyHandler<T> implements EventHandler<KeyEvent> {
 		}
 
 		for (T item : box.getItems()) {
-			String name = item.toString().toLowerCase();
+			
+			String name = box.getConverter().toString(item).toLowerCase();
 			if (name.startsWith(s)) {
 				select(item);
 				return;

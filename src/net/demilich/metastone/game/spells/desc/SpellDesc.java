@@ -6,7 +6,7 @@ import java.util.Map;
 import net.demilich.metastone.game.logic.CustomCloneable;
 import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.TargetPlayer;
-import net.demilich.metastone.game.spells.desc.valueprovider.IValueProvider;
+import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class SpellDesc extends CustomCloneable {
@@ -77,8 +77,8 @@ public class SpellDesc extends CustomCloneable {
 		return getInt(SpellArg.VALUE);
 	}
 
-	public IValueProvider getValueProvider() {
-		return (IValueProvider) get(SpellArg.VALUE_PROVIDER);
+	public ValueProvider getValueProvider() {
+		return (ValueProvider) get(SpellArg.VALUE_PROVIDER);
 	}
 
 	public boolean hasPredefinedTarget() {

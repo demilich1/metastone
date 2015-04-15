@@ -9,7 +9,7 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.DamageSpell;
 import net.demilich.metastone.game.spells.SpellUtils;
-import net.demilich.metastone.game.spells.desc.valueprovider.IValueProvider;
+import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class KillCommand extends SpellCard {
@@ -17,7 +17,7 @@ public class KillCommand extends SpellCard {
 	public KillCommand() {
 		super("Kill Command", Rarity.FREE, HeroClass.HUNTER, 3);
 		setDescription("Deal $3 damage. If you have a Beast, deal $5 damage instead.");
-		IValueProvider hasBeast = new IValueProvider() {
+		ValueProvider hasBeast = new ValueProvider(null) {
 
 			@Override
 			public int provideValue(GameContext context, Player player, Entity target) {

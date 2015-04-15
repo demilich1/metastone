@@ -1,0 +1,20 @@
+{
+  "baseAttack": 2,
+  "baseHp": 4,
+  "battlecry": {
+    "spell": {
+      "class": "DrawCardSpell",
+	  "value" : 1
+    },
+    "resolvedLate": false
+  },
+  "id": "minion_gnomish_inventor",
+  "name": "Gnomish Inventor",
+  "description": "Battlecry: Draw a card.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "FREE",
+  "baseManaCost": 4,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

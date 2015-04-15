@@ -8,17 +8,16 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.targeting.EntityReference;
 
-public class AttributeCounter implements IValueProvider {
+public class AttributeCounter extends ValueProvider {
 
-	private final ValueProviderDesc desc;
 
 	public AttributeCounter(ValueProviderDesc desc) {
-		this.desc = desc;
+		super(desc);
 	}
 
 	@Override
 	public int provideValue(GameContext context, Player player, Entity target) {
-		EntityReference source = (EntityReference) desc.get(ValueProviderArg.SOURCE);
+		EntityReference source = desc.getSource();
 		List<Entity> relevantEntities = context.resolveTarget(player, null, source);
 		int count = 0;
 		GameTag attribute = (GameTag) desc.get(ValueProviderArg.ATTRIBUTE);

@@ -9,7 +9,7 @@ import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.spells.desc.valueprovider.IValueProvider;
+import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class DamageSpell extends Spell {
@@ -33,7 +33,7 @@ public class DamageSpell extends Spell {
 		return new SpellDesc(arguments);
 	}
 	
-	public static SpellDesc create(EntityReference target, IValueProvider damageModfier) {
+	public static SpellDesc create(EntityReference target, ValueProvider damageModfier) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(DamageSpell.class);
 		arguments.put(SpellArg.VALUE_PROVIDER, damageModfier);
 		arguments.put(SpellArg.TARGET, target);
@@ -44,14 +44,14 @@ public class DamageSpell extends Spell {
 		return create(null, damage);
 	}
 	
-	public static SpellDesc create(IValueProvider damageModfier) {
+	public static SpellDesc create(ValueProvider damageModfier) {
 		return create(null, damageModfier);
 	}
 	
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int damage = desc.getInt(SpellArg.VALUE);
-		IValueProvider damageModifier = (IValueProvider) desc.get(SpellArg.VALUE_PROVIDER);
+		ValueProvider damageModifier = (ValueProvider) desc.get(SpellArg.VALUE_PROVIDER);
 		if (damageModifier != null) {
 			damage = damageModifier.provideValue(context, player, target);
 		}

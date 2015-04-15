@@ -10,7 +10,7 @@ import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
-public class DiscardCardSpell extends Spell {
+public class DiscardSpell extends Spell {
 
 	public static final int ALL_CARDS = -1;
 
@@ -19,7 +19,7 @@ public class DiscardCardSpell extends Spell {
 	}
 
 	public static SpellDesc create(int numberOfCards) {
-		Map<SpellArg, Object> arguments = SpellDesc.build(DiscardCardSpell.class);
+		Map<SpellArg, Object> arguments = SpellDesc.build(DiscardSpell.class);
 		arguments.put(SpellArg.VALUE, numberOfCards);
 		arguments.put(SpellArg.TARGET, EntityReference.NONE);
 		return new SpellDesc(arguments);

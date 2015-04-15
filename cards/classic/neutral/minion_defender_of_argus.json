@@ -1,0 +1,32 @@
+{
+  "baseAttack": 2,
+  "baseHp": 3,
+  "battlecry": {
+    "spell": {
+      "class": "MetaSpell",
+	  "spell1" : {
+		"class" : "BuffSpell",
+		"attackBonus" : 1,
+		"hpBonus" : 1
+	  },
+	  "spell2" : {
+		"class" : "AddAttributeSpell",
+		"attribute" : "TAUNT"
+	  },
+	  "target" : "ADJACENT_MINIONS"
+    },
+    "resolvedLate": true
+  },
+  "id": "minion_defender_of_argus",
+  "name": "Defender of Argus",
+  "description": "Battlecry: Give adjacent minions +1/+1 and Taunt.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "RARE",
+  "baseManaCost": 4,
+  "collectible": true,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "fileFormatVersion": 1
+}

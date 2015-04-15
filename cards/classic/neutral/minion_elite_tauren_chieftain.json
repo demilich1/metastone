@@ -1,0 +1,27 @@
+{
+  "baseAttack": 5,
+  "baseHp": 5,
+  "battlecry": {
+    "spell": {
+      "class": "ReceiveRandomCardSpell",
+	  "cards" : [
+		"spell_i_am_murloc",
+		"spell_power_of_the_horde",
+		"spell_rogues_do_it"
+	  ]
+    },
+    "resolvedLate": false
+  },
+  "id": "minion_elite_tauren_chieftain",
+  "name": "Elite Tauren Chieftain",
+  "description": "Battlecry: Give both players the power to ROCK! (with a Power Chord card)",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "LEGENDARY",
+  "baseManaCost": 5,
+  "collectible": true,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "fileFormatVersion": 1
+}

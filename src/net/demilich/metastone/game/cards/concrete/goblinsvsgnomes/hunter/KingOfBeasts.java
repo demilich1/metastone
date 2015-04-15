@@ -8,7 +8,6 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.BuffSpell;
-import net.demilich.metastone.game.spells.SpellUtils;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
@@ -29,7 +28,8 @@ public class KingOfBeasts extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion kingOfBeasts = createMinion(GameTag.TAUNT);
-		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, (context, player, entity) -> SpellUtils.hasHowManyOfRace(player, Race.BEAST), null);
+		//SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, new EntityCounter(desc), null);
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, null, null);
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(buffSpell);
 		kingOfBeasts.setBattlecry(battlecry);
 		return kingOfBeasts;

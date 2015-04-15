@@ -9,7 +9,7 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.DamageSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.spells.desc.valueprovider.IValueProvider;
+import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
@@ -29,7 +29,7 @@ public class Lightbomb extends SpellCard {
 		return 559;
 	}
 
-	private class LightbombDamageModifier implements IValueProvider {
+	private class LightbombDamageModifier extends ValueProvider {
 
 		@Override
 		public int provideValue(GameContext context, Player player, Entity target) {

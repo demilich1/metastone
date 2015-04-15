@@ -7,7 +7,7 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
-import net.demilich.metastone.game.spells.DiscardCardSpell;
+import net.demilich.metastone.game.spells.DiscardSpell;
 
 public class Succubus extends MinionCard {
 
@@ -26,7 +26,7 @@ public class Succubus extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion succubus = createMinion();
-		succubus.setBattlecry(BattlecryAction.createBattlecry(DiscardCardSpell.create()));
+		succubus.setBattlecry(BattlecryAction.createBattlecry(DiscardSpell.create()));
 		return succubus;
 	}
 }

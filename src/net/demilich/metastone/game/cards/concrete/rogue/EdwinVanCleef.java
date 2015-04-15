@@ -11,7 +11,7 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.BuffSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.spells.desc.valueprovider.IValueProvider;
+import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class EdwinVanCleef extends MinionCard {
@@ -29,7 +29,7 @@ public class EdwinVanCleef extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion edwinVanCleef = createMinion();
-		IValueProvider comboValueProvider = new IValueProvider() {
+		ValueProvider comboValueProvider = new ValueProvider(null) {
 			
 			@Override
 			public int provideValue(GameContext context, Player player, Entity target) {
