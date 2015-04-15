@@ -10,7 +10,7 @@
 	"baseHp" : 2,
 	"race" : "BEAST",
 	"attributes" : {
-		"stealth" : true
+		"STEALTH" : true
 	},
 	"fileFormatVersion" : 1
 }

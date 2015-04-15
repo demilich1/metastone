@@ -9,7 +9,7 @@
 	"baseAttack" : 1,
 	"baseHp" : 7,
 	"attributes" : {
-		"taunt" : true
+		"TAUNT" : true
 	},
 	"fileFormatVersion" : 1
 }

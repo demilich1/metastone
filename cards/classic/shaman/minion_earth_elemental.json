@@ -9,8 +9,8 @@
 	"baseAttack" : 7,
 	"baseHp" : 8,
 	"attributes" : {
-		"overload" : 3,
-		"taunt" : true
+		"OVERLOAD" : 3,
+		"TAUNT" : true
 	},
 	"fileFormatVersion" : 1
 }

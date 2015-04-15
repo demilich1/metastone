@@ -9,7 +9,7 @@
 	"baseAttack" : 2,
 	"baseHp" : 3,
 	"attributes" : {
-		"windfury" : true
+		"WINDFURY" : true
 	},
 	"fileFormatVersion" : 1
 }

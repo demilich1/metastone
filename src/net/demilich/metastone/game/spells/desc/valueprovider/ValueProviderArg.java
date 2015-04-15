@@ -4,5 +4,6 @@ public enum ValueProviderArg {
 	CLASS,
 	SOURCE,
 	ATTRIBUTE,
+	MULTIPLIER,
 
 }

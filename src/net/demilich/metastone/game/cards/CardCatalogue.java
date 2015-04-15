@@ -227,16 +227,9 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.AlarmOBot());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.AmaniBerserker());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.AngryChicken());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.Archmage());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.AzureDrake());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.BaronGeddon());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.BigGameHunter());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.BloodKnight());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.BloodmageThalnos());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.BloodsailCorsair());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.BloodsailRaider());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.CaptainGreenskin());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.CaptainsParrot());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.ColdlightOracle());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.ColdlightSeer());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.CrazedAlchemist());
@@ -301,7 +294,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.RagnarosTheFirelord());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.RaidLeader());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.RazorfenHunter());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.ScarletCrusader());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.SeaGiant());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.Secretkeeper());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.ShatteredSunCleric());

@@ -566,9 +566,9 @@ public class GameLogic implements Cloneable {
 			if (weapon != null && weapon.isActive()) {
 				if (weapon.hasStatus(GameTag.CONSUME_DAMAGE_INSTEAD_OF_DURABILITY_ON_MINIONS)
 						&& defender.getEntityType() == EntityType.MINION) {
-					modifyDurability(hero.getWeapon(), GameTag.WEAPON_DAMAGE, -1);
+					modifyDurability(hero.getWeapon(), GameTag.ATTACK, -1);
 				} else {
-					modifyDurability(hero.getWeapon(), GameTag.DURABILITY, -1);
+					modifyDurability(hero.getWeapon(), GameTag.HP, -1);
 				}
 
 			}
@@ -838,7 +838,7 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void modifyDurability(Weapon weapon, int durability) {
-		modifyDurability(weapon, GameTag.DURABILITY, durability);
+		modifyDurability(weapon, GameTag.HP, durability);
 	}
 
 	public void modifyMaxHp(Actor actor, int value) {

@@ -9,7 +9,7 @@
 	"baseHp" : 4,
 	"race" : "BEAST",
 	"attributes" : {
-		"taunt" : true
+		"TAUNT" : true
 	},
 	"collectible" : false,
 	"fileFormatVersion" : 1

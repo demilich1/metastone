@@ -9,7 +9,7 @@
 	"baseAttack" : 2,
 	"baseHp" : 5,
 	"attributes" : {
-		"charge" : true
+		"CHARGE" : true
 	},
 	"fileFormatVersion" : 1
 }

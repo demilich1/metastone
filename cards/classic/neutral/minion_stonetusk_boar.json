@@ -10,7 +10,7 @@
 	"baseHp" : 1,
 	"race" : "BEAST",
 	"attributes" : {
-		"charge" : true
+		"CHARGE" : true
 	},
 	"fileFormatVersion" : 1
 }

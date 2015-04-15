@@ -9,7 +9,7 @@
 	"baseAttack" : 1,
 	"baseHp" : 3,
 	"attributes" : {
-		"taunt" : true
+		"TAUNT" : true
 	},
 	"race" : "DEMON",
 	"fileFormatVersion" : 1

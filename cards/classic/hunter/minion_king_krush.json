@@ -9,7 +9,7 @@
 	"baseAttack" : 8,
 	"baseHp" : 8,
 	"attributes" : {
-		"charge" : true
+		"CHARGE" : true
 	},
 	"race" : "BEAST",
 	"fileFormatVersion" : 1

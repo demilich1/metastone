@@ -9,7 +9,7 @@
 	"baseAttack" : 2,
 	"baseHp" : 2,
 	"attributes" : {
-		"spellDamage" : 1
+		"SPELL_DAMAGE" : 1
 	},
 	"fileFormatVersion" : 1
 }

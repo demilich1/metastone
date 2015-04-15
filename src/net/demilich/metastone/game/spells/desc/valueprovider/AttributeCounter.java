@@ -1,30 +1,34 @@
 package net.demilich.metastone.game.spells.desc.valueprovider;
 
+import java.util.List;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.targeting.EntityReference;
 
-public class AttributeValueProvider implements IValueProvider {
-	
+public class AttributeCounter implements IValueProvider {
+
 	private final ValueProviderDesc desc;
 
-	public AttributeValueProvider(ValueProviderDesc desc) {
+	public AttributeCounter(ValueProviderDesc desc) {
 		this.desc = desc;
 	}
 
 	@Override
 	public int provideValue(GameContext context, Player player, Entity target) {
-		EntityReference sourceReference = (EntityReference) desc.get(ValueProviderArg.SOURCE);
+		EntityReference source = (EntityReference) desc.get(ValueProviderArg.SOURCE);
+		List<Entity> relevantEntities = context.resolveTarget(player, null, source);
+		int count = 0;
 		GameTag attribute = (GameTag) desc.get(ValueProviderArg.ATTRIBUTE);
-		Actor source = (Actor) context.resolveTarget(player, null, sourceReference).get(0);
-		if (attribute == GameTag.ATTACK) {
-			return source.getAttack();
+		for (Entity entity : relevantEntities) {
+			if (entity.hasStatus(attribute)) {
+				count++;
+			}
 		}
-
-		return source.getTagValue(attribute);
+		int multiplier = desc.getInt(ValueProviderArg.MULTIPLIER);
+		return count * multiplier;
 	}
 
 }

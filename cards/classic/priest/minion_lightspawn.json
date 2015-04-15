@@ -9,7 +9,7 @@
 	"baseAttack" : 0,
 	"baseHp" : 5,
 	"attributes" : {
-		"attack_equals_hp" : true
+		"ATTACK_EQUALS_HP" : true
 	},
 	"fileFormatVersion" : 1
 }

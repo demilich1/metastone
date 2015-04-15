@@ -9,7 +9,7 @@
 	"baseAttack" : 4,
 	"baseHp" : 4,
 	"attributes" : {
-		"taunt" : true
+		"TAUNT" : true
 	},
 	"deathrattle" : {
 		"class" : "DamageSpell",

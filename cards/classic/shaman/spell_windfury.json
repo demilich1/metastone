@@ -1,7 +1,7 @@
 {
 	"name" : "Windfury",
 	"description" : "Give a minion Windfury.",
-	"id" : "spell_windfury",
+	"id" : "spell_WINDFURY",
 	"type" : "SPELL",
 	"rarity" : "FREE",
 	"heroClass" : "SHAMAN",

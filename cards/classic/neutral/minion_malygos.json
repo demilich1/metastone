@@ -9,7 +9,7 @@
 	"baseAttack" : 4,
 	"baseHp" : 12,
 	"attributes" : {
-		"spellDamage" : 5
+		"SPELL_DAMAGE" : 5
 	},
 	"race" : "DRAGON",
 	"fileFormatVersion" : 1

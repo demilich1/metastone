@@ -9,7 +9,7 @@
 	"baseAttack" : 2,
 	"baseHp" : 1,
 	"attributes" : {
-		"charge" : true
+		"CHARGE" : true
 	},
 	"race" : "MURLOC",
 	"fileFormatVersion" : 1

@@ -9,7 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import net.demilich.metastone.game.cards.CardType;
@@ -20,13 +20,14 @@ import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.desc.BattlecryDesc;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.TargetSelection;
+import net.demilich.metastone.gui.common.ComboBoxKeyHandler;
 
 import org.apache.commons.io.FileUtils;
 
 class MinionCardPanel extends VBox implements ICardEditor {
 
 	@FXML
-	private ChoiceBox<Race> raceBox;
+	private ComboBox<Race> raceBox;
 
 	@FXML
 	private TextField attackField;
@@ -35,12 +36,12 @@ class MinionCardPanel extends VBox implements ICardEditor {
 	private TextField hpField;
 
 	@FXML
-	private ChoiceBox<Class<? extends Spell>> battlecrySpellBox;
+	private ComboBox<Class<? extends Spell>> battlecrySpellBox;
 	@FXML
-	private ChoiceBox<TargetSelection> battlecryTargetSelectionBox;
+	private ComboBox<TargetSelection> battlecryTargetSelectionBox;
 
 	@FXML
-	private ChoiceBox<Class<? extends Spell>> deathrattleSpellBox;
+	private ComboBox<Class<? extends Spell>> deathrattleSpellBox;
 
 	private final MinionCardDesc card = new MinionCardDesc();
 
@@ -76,7 +77,7 @@ class MinionCardPanel extends VBox implements ICardEditor {
 	}
 
 	@SuppressWarnings("unchecked")
-	private void fillWithSpells(ChoiceBox<Class<? extends Spell>> choiceBox) {
+	private void fillWithSpells(ComboBox<Class<? extends Spell>> comboBox) {
 		ObservableList<Class<? extends Spell>> items = FXCollections.observableArrayList();
 		String spellPath = "./src/" + Spell.class.getPackage().getName().replace(".", "/") + "/";
 		for (File file : FileUtils.listFiles(new File(spellPath), new String[] { "java" }, false)) {
@@ -91,7 +92,8 @@ class MinionCardPanel extends VBox implements ICardEditor {
 
 			items.add(spellClass);
 		}
-		choiceBox.setItems(items);
+		comboBox.setItems(items);
+		comboBox.setOnKeyReleased(new ComboBoxKeyHandler<Class<? extends Spell>>(comboBox));
 
 	}
 
