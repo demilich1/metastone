@@ -1,0 +1,14 @@
+{
+  "baseAttack": 2,
+  "baseHp": 1,
+  "race": "MECH",
+  "id": "minion_mechanical_dragonling",
+  "name": "Mechanical Dragonling",
+  "description": "",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "FREE",
+  "baseManaCost": 1,
+  "collectible": false,
+  "fileFormatVersion": 1
+}

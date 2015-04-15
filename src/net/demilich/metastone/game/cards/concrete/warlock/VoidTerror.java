@@ -51,7 +51,8 @@ public class VoidTerror extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion voidTerror = createMinion();
-		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, this::provideAttackValue, this::provideHpValue);
+		//SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, this::provideAttackValue, this::provideHpValue);
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, null, null);
 		SpellDesc destroySpell = DestroySpell.create(EntityReference.ADJACENT_MINIONS);
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(MetaSpell.create(buffSpell, destroySpell));
 		battlecry.setResolvedLate(true);

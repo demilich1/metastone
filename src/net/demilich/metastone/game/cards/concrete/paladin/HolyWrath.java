@@ -14,14 +14,15 @@ public class HolyWrath extends SpellCard {
 		super("Holy Wrath", Rarity.RARE, HeroClass.PALADIN, 5);
 		setDescription("Draw a card and deal damage equal to its cost.");
 		
-		SpellDesc holyWrathSpell = DamageSpell.create((context, player, target) -> {
-			Card drawnCard = context.getLogic().drawCard(player.getId());
-			if (drawnCard == null) {
-				return 0;
-			}
-			return drawnCard.getBaseManaCost();
-		});
-		setSpell(holyWrathSpell);
+//		SpellDesc holyWrathSpell = DamageSpell.create((context, player, target) -> {
+//			Card drawnCard = context.getLogic().drawCard(player.getId());
+//			if (drawnCard == null) {
+//				return 0;
+//			}
+//			return drawnCard.getBaseManaCost();
+//		});
+		//setSpell(holyWrathSpell);
+		setSpell(null);
 		setTargetRequirement(TargetSelection.ANY);
 	}
 

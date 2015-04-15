@@ -9,7 +9,7 @@ import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.spells.desc.valueprovider.IValueProvider;
+import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 import org.slf4j.Logger;
@@ -34,7 +34,7 @@ public class TemporaryAttackSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int attackBonus = desc.getValue();
 
-		IValueProvider attackValueProvider = (IValueProvider) desc.get(SpellArg.VALUE_PROVIDER);
+		ValueProvider attackValueProvider = (ValueProvider) desc.get(SpellArg.VALUE_PROVIDER);
 
 		if (attackValueProvider != null) {
 			attackBonus = attackValueProvider.provideValue(context, player, target);

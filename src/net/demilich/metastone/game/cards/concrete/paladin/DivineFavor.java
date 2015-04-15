@@ -8,7 +8,7 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.DrawCardSpell;
 import net.demilich.metastone.game.spells.TargetPlayer;
-import net.demilich.metastone.game.spells.desc.valueprovider.IValueProvider;
+import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class DivineFavor extends SpellCard {
@@ -16,7 +16,7 @@ public class DivineFavor extends SpellCard {
 	public DivineFavor() {
 		super("Divine Favor", Rarity.RARE, HeroClass.PALADIN, 3);
 		setDescription("Draw cards until you have as many in hand as your opponent.");
-		IValueProvider matchOpponentCardCount = new IValueProvider() {
+		ValueProvider matchOpponentCardCount = new ValueProvider(null) {
 			
 			@Override
 			public int provideValue(GameContext context, Player player, Entity target) {

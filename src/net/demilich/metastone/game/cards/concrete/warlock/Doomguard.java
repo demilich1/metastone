@@ -7,7 +7,7 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
-import net.demilich.metastone.game.spells.DiscardCardSpell;
+import net.demilich.metastone.game.spells.DiscardSpell;
 
 public class Doomguard extends MinionCard {
 
@@ -26,7 +26,7 @@ public class Doomguard extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion doomguard = createMinion(GameTag.CHARGE);
-		BattlecryAction battlecry = BattlecryAction.createBattlecry(DiscardCardSpell.create(2));
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(DiscardSpell.create(2));
 		doomguard.setBattlecry(battlecry);
 		return doomguard;
 	}

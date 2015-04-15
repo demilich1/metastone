@@ -11,7 +11,7 @@ public class UnleashTheHounds extends SpellCard {
 	public UnleashTheHounds() {
 		super("Unleash the Hounds", Rarity.COMMON, HeroClass.HUNTER, 3);
 		setDescription("For each enemy minion, summon a 1/1 Hound with Charge.");
-		//TODO implement as summon spell with IValueProvider
+		//TODO implement as summon spell with ValueProvider
 		setSpell(UnleashTheHoundsSpell.create());
 		setTargetRequirement(TargetSelection.NONE);
 	}

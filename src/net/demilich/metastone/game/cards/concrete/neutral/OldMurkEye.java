@@ -14,7 +14,7 @@ import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.ConditionalAttackBonusSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.spells.desc.valueprovider.IValueProvider;
+import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.spells.trigger.BoardChangedTrigger;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -35,7 +35,7 @@ public class OldMurkEye extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion oldMurkEye = createMinion(GameTag.CHARGE);
-		SpellDesc buffSpell = ConditionalAttackBonusSpell.create(EntityReference.SELF, new IValueProvider() {
+		SpellDesc buffSpell = ConditionalAttackBonusSpell.create(EntityReference.SELF, new ValueProvider(null) {
 			
 			@Override
 			public int provideValue(GameContext context, Player player, Entity target) {

@@ -25,7 +25,8 @@ public class NatPagle extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion natPagle = createMinion();
-		SpellDesc drawCardSpell = DrawCardSpell.create((context, player, target) -> context.getLogic().randomBool() ? 1 : 0, TargetPlayer.SELF);
+		//SpellDesc drawCardSpell = DrawCardSpell.create((context, player, target) -> context.getLogic().randomBool() ? 1 : 0, TargetPlayer.SELF);
+		SpellDesc drawCardSpell = DrawCardSpell.create(null, TargetPlayer.SELF);
 		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), drawCardSpell);
 		natPagle.setSpellTrigger(trigger);
 		return natPagle;

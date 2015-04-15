@@ -1,17 +1,10 @@
 package net.demilich.metastone.tools;
 
-import java.io.File;
-import java.io.IOException;
-
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.desc.CardDesc;
 import net.demilich.metastone.game.cards.desc.MinionCardDesc;
@@ -20,11 +13,8 @@ import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.desc.BattlecryDesc;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.TargetSelection;
-import net.demilich.metastone.gui.common.ComboBoxKeyHandler;
 
-import org.apache.commons.io.FileUtils;
-
-class MinionCardPanel extends VBox implements ICardEditor {
+class MinionCardPanel extends CardEditor {
 
 	@FXML
 	private ComboBox<Race> raceBox;
@@ -46,16 +36,7 @@ class MinionCardPanel extends VBox implements ICardEditor {
 	private final MinionCardDesc card = new MinionCardDesc();
 
 	public MinionCardPanel() {
-
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MinionCardPanel.fxml"));
-		fxmlLoader.setRoot(this);
-		fxmlLoader.setController(this);
-
-		try {
-			fxmlLoader.load();
-		} catch (IOException exception) {
-			throw new RuntimeException(exception);
-		}
+		super("MinionCardPanel.fxml");
 
 		raceBox.setItems(FXCollections.observableArrayList(Race.values()));
 		raceBox.valueProperty().addListener(this::onRaceChanged);
@@ -74,27 +55,6 @@ class MinionCardPanel extends VBox implements ICardEditor {
 
 		attackField.textProperty().addListener(new IntegerListener(value -> card.baseAttack = value));
 		hpField.textProperty().addListener(new IntegerListener(value -> card.baseHp = value));
-	}
-
-	@SuppressWarnings("unchecked")
-	private void fillWithSpells(ComboBox<Class<? extends Spell>> comboBox) {
-		ObservableList<Class<? extends Spell>> items = FXCollections.observableArrayList();
-		String spellPath = "./src/" + Spell.class.getPackage().getName().replace(".", "/") + "/";
-		for (File file : FileUtils.listFiles(new File(spellPath), new String[] { "java" }, false)) {
-			String fileName = file.getName().replace(".java", "");
-			String spellClassName = Spell.class.getPackage().getName() + "." + fileName;
-			Class<? extends Spell> spellClass = null;
-			try {
-				spellClass = (Class<? extends Spell>) Class.forName(spellClassName);
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-
-			items.add(spellClass);
-		}
-		comboBox.setItems(items);
-		comboBox.setOnKeyReleased(new ComboBoxKeyHandler<Class<? extends Spell>>(comboBox));
-
 	}
 
 	private void onTargetSelectionChanged(ObservableValue<? extends TargetSelection> ov, TargetSelection oldValue, TargetSelection newValue) {
@@ -125,13 +85,10 @@ class MinionCardPanel extends VBox implements ICardEditor {
 	@Override
 	public CardDesc getCardDesc() {
 		card.type = CardType.MINION;
-		card.name = "New Minion";
+		card.name = "";
 		return card;
 	}
 
-	@Override
-	public Node getPanel() {
-		return this;
-	}
+	
 
 }

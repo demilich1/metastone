@@ -12,12 +12,6 @@
                     "attribute": "DIVINE_SHIELD",
                     "multiplier": 3
                 },
-				"secondValueProvider": {
-                    "class": "AttributeCounter",
-                    "source": "ALL_MINIONS",
-                    "attribute": "DIVINE_SHIELD",
-                    "multiplier": 3
-                },
 				"target" : "SELF"
             },
             "spell2": {
