@@ -9,8 +9,8 @@
 	"baseAttack" : 6,
 	"baseHp" : 6,
 	"attributes" : {
-		"taunt" : true,
-		"divine_shield" : true
+		"TAUNT" : true,
+		"DIVINE_SHIELD" : true
 	},
 	"deathrattle" : {
 		"class" : "EquipWeaponSpell",

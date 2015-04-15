@@ -9,7 +9,7 @@
 	"baseAttack" : 1,
 	"baseHp" : 1,
 	"attributes" : {
-		"divineShield" : true
+		"DIVINE_SHIELD" : true
 	},
 	"fileFormatVersion" : 1
 }

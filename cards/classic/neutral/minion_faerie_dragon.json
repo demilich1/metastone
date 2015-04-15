@@ -10,7 +10,7 @@
 	"baseHp" : 2,
 	"race" : "DRAGON",
 	"attributes" : {
-		"untargetableBySpells" : true
+		"UNTARGETABLE_BY_SPELLS" : true
 	},
 	"fileFormatVersion" : 1
 }

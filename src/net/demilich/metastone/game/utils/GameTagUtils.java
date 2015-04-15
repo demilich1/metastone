@@ -14,7 +14,6 @@ public class GameTagUtils {
 		case TEMPORARY_ATTACK_BONUS:
 		case AURA_ATTACK_BONUS:
 		case AURA_HP_BONUS:
-		case DURABILITY:
 		case HP:
 		case HP_BONUS:
 		case COMBO:
@@ -25,7 +24,6 @@ public class GameTagUtils {
 		case OVERLOAD:
 		case SPELL_AMPLIFY_MULTIPLIER:
 		case SPELL_DAMAGE:
-		case WEAPON_DAMAGE:
 		case ATTACK:
 		case ATTACK_BONUS:
 			return TagValueType.INTEGER;

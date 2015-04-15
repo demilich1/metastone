@@ -1,7 +1,7 @@
 {
 	"name" : "Charge",
 	"description" : "Give a friendly minion +2 Attack and Charge.",
-	"id" : "spell_charge",
+	"id" : "spell_CHARGE",
 	"type" : "SPELL",
 	"rarity" : "FREE",
 	"heroClass" : "WARRIOR",

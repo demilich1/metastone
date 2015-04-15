@@ -9,8 +9,8 @@
 	"baseAttack" : 4,
 	"baseHp" : 2,
 	"attributes" : {
-		"charge" : true,
-		"divineShield" : true
+		"CHARGE" : true,
+		"DIVINE_SHIELD" : true
 	},
 	"fileFormatVersion" : 1
 }

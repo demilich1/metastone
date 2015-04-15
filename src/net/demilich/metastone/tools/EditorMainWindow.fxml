@@ -56,7 +56,7 @@
             <HBox layoutX="10.0" layoutY="319.0" spacing="8.0">
                <children>
                   <Label minWidth="84.0" text="Rarity:" />
-                  <ChoiceBox fx:id="rarityBox" prefWidth="150.0" />
+                  <ComboBox fx:id="rarityBox" prefWidth="150.0" />
                </children>
                <padding>
                   <Insets left="16.0" />
@@ -65,13 +65,12 @@
             <HBox layoutX="10.0" layoutY="336.0" spacing="8.0">
                <children>
                   <Label minWidth="84.0" text="Hero Class:" />
-                  <ChoiceBox fx:id="heroClassBox" prefWidth="150.0" />
+                  <ComboBox fx:id="heroClassBox" prefWidth="150.0" />
                </children>
                <padding>
                   <Insets left="16.0" />
                </padding>
             </HBox>
-            <Pane fx:id="contentPanel" />
             <HBox layoutX="10.0" layoutY="37.0" spacing="8.0">
                <children>
                   <Label minWidth="84.0" text="Mana Cost:" />
@@ -92,17 +91,45 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="249.0" spacing="8.0">
                <children>
-                  <Label minWidth="84.0" text="Attributes:" />
-                  <CheckBox fx:id="attributesBox" mnemonicParsing="false" text="Add 'attributes' block" />
+                  <VBox>
+                     <children>
+                        <Label minWidth="84.0" text="Attributes:" />
+                        <HBox>
+                           <children>
+                              <ComboBox fx:id="attributeBox1" prefWidth="150.0" />
+                              <TextField fx:id="attributeField1" promptText="enter value" />
+                           </children>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="27.0">
+                           <children>
+                              <ComboBox fx:id="attributeBox2" prefWidth="150.0" />
+                              <TextField fx:id="attributeField2" promptText="enter value" />
+                           </children>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="52.0">
+                           <children>
+                              <ComboBox fx:id="attributeBox3" prefWidth="150.0" />
+                              <TextField fx:id="attributeField3" promptText="enter value" />
+                           </children>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="77.0">
+                           <children>
+                              <ComboBox fx:id="attributeBox4" prefWidth="150.0" />
+                              <TextField fx:id="attributeField4" promptText="enter value" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </children>
                <padding>
                   <Insets left="16.0" />
                </padding>
             </HBox>
+            <Pane fx:id="contentPanel" />
          </children></VBox>
    </center>
    <padding>
-      <Insets bottom="16.0" left="32.0" right="32.0" top="32.0" />
+      <Insets bottom="8.0" left="24.0" right="24.0" top="24.0" />
    </padding>
    <bottom>
       <HBox alignment="BOTTOM_CENTER" BorderPane.alignment="BOTTOM_CENTER">

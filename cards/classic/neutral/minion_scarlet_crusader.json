@@ -1,13 +1,13 @@
 {
-	"name" : "Silvermoon Guardian",
+	"name" : "Scarlet Crusader",
 	"description" : "Divine Shield",
-	"id" : "minion_silvermoon_guardian",
+	"id" : "minion_scarlet_crusader",
 	"type" : "MINION",
 	"rarity" : "COMMON",
 	"heroClass" : "ANY",
 	"baseManaCost" : 3,
 	"baseAttack" : 3,
-	"baseHp" : 4,
+	"baseHp" : 1,
 	"attributes" : {
 		"DIVINE_SHIELD" : true
 	},

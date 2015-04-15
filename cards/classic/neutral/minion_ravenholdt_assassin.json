@@ -9,7 +9,7 @@
 	"baseAttack" : 7,
 	"baseHp" : 5,
 	"attributes" : {
-		"stealth" : true
+		"STEALTH" : true
 	},
 	"fileFormatVersion" : 1
 }

@@ -13,7 +13,7 @@
 		"iterations" : 2
 	},
 	"attributes" : {
-		"overload" : 2
+		"OVERLOAD" : 2
 	},
 	"fileFormatVersion" : 1
 }

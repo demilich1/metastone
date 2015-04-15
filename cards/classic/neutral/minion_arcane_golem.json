@@ -1,6 +1,6 @@
 {
 	"attributes" : {
-		"charge" : true
+		"CHARGE" : true
 	},
 	"baseAttack": 4,
 	"baseHp": 2,

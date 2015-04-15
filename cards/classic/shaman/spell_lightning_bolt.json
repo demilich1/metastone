@@ -12,7 +12,7 @@
 		"value" : 3
 	},
 	"attributes" : {
-		"overload" : 1
+		"OVERLOAD" : 1
 	},
 	"fileFormatVersion" : 1
 }

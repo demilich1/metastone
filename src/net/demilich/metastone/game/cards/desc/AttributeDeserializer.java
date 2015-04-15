@@ -32,8 +32,7 @@ public class AttributeDeserializer implements JsonDeserializer<Map<GameTag, Obje
 	}
 
 	private void parseAttribute(GameTag attribute, JsonObject jsonData, Map<GameTag, Object> map, ParseValueType valueType) {
-		String argName = ParseUtils.toCamelCase(attribute.toString());
-		System.out.println("Attribute: " + argName);
+		String argName = attribute.toString();
 		if (!jsonData.has(argName)) {
 			return;
 		}

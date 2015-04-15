@@ -1,6 +1,7 @@
 package net.demilich.metastone.game.cards.desc;
 
 import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderDesc;
@@ -56,6 +57,8 @@ public class ParseUtils {
 			return parseEntityReference(entry.getAsString());
 		case TARGET_PLAYER:
 			return Enum.valueOf(TargetPlayer.class, entry.getAsString());
+		case RACE:
+			return Enum.valueOf(Race.class, entry.getAsString());
 		case SPELL:
 			return spellDescParser.deserialize(entry, SpellDesc.class, null);
 		case ATTRIBUTE:
@@ -106,6 +109,24 @@ public class ParseUtils {
 			return EntityReference.SELF;
 		default:
 			return null;
+		}
+	}
+
+	public static boolean tryParseInt(String value) {
+		try {
+			Integer.parseInt(value);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	public static boolean tryParseBool(String value) {
+		try {
+			Boolean.parseBoolean(value);
+			return true;
+		} catch (Exception e) {
+			return false;
 		}
 	}
 

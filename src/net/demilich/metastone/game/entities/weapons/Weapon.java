@@ -13,8 +13,8 @@ public class Weapon extends Actor {
 
 	public Weapon(Card sourceCard, int weaponDamage, int durability) {
 		super(sourceCard);
-		setTag(GameTag.WEAPON_DAMAGE, weaponDamage);
-		setTag(GameTag.DURABILITY, durability);
+		setTag(GameTag.ATTACK, weaponDamage);
+		setTag(GameTag.HP, durability);
 	}
 
 	@Override
@@ -23,7 +23,7 @@ public class Weapon extends Actor {
 	}
 
 	public int getDurability() {
-		return getTagValue(GameTag.DURABILITY);
+		return getTagValue(GameTag.HP);
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class Weapon extends Actor {
 	}
 	
 	public int getWeaponDamage() {
-		return getTagValue(GameTag.WEAPON_DAMAGE) + getTagValue(GameTag.CONDITIONAL_ATTACK_BONUS);
+		return getTagValue(GameTag.ATTACK) + getTagValue(GameTag.CONDITIONAL_ATTACK_BONUS);
 	}
 
 	public boolean isActive() {
@@ -40,7 +40,7 @@ public class Weapon extends Actor {
 	}
 
 	public boolean isBroken() {
-		return !hasStatus(GameTag.DURABILITY) || getTagValue(GameTag.WEAPON_DAMAGE) <= 0;
+		return !hasStatus(GameTag.HP) || getTagValue(GameTag.ATTACK) <= 0;
 	}
 
 	@Override

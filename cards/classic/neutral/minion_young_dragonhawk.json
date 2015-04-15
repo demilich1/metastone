@@ -10,7 +10,7 @@
 	"baseHp" : 1,
 	"race" : "BEAST",
 	"attributes" : {
-		"windfury" : true
+		"WINDFURY" : true
 	},
 	"fileFormatVersion" : 1
 }

@@ -9,8 +9,8 @@
 	"baseAttack" : 3,
 	"baseHp" : 1,
 	"attributes" : {
-		"overload" : 2,
-		"windfury" : true
+		"OVERLOAD" : 2,
+		"WINDFURY" : true
 	},
 	"fileFormatVersion" : 1
 }

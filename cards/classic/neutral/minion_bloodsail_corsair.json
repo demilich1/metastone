@@ -1,0 +1,25 @@
+{
+  "baseAttack": 1,
+  "baseHp": 2,
+  "race": "PIRATE",
+  "battlecry": {
+    "spell": {
+      "class": "ChangeDurabilitySpell",
+	  "value" : -1,
+	  "target" : "ENEMY_HERO"
+    },
+    "resolvedLate": false
+  },
+  "id": "minion_bloodsail_corsair",
+  "name": "Bloodsail Corsair",
+  "description": "Battlecry: Remove 1 Durability from your opponent\u0027s weapon.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "RARE",
+  "baseManaCost": 1,
+  "collectible": true,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "fileFormatVersion": 1
+}

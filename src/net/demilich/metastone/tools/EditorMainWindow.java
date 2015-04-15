@@ -2,16 +2,20 @@ package net.demilich.metastone.tools;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EnumMap;
+import java.util.List;
 
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -23,9 +27,12 @@ import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.desc.CardDesc;
+import net.demilich.metastone.game.cards.desc.ParseUtils;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.gui.common.ComboBoxKeyHandler;
 
+import org.apache.commons.lang3.StringUtils;
 import org.testng.reporters.Files;
 
 import com.google.gson.Gson;
@@ -52,10 +59,10 @@ class EditorMainWindow extends BorderPane {
 	private TextField descriptionField;
 
 	@FXML
-	private ChoiceBox<Rarity> rarityBox;
+	private ComboBox<Rarity> rarityBox;
 
 	@FXML
-	private ChoiceBox<HeroClass> heroClassBox;
+	private ComboBox<HeroClass> heroClassBox;
 
 	@FXML
 	private TextField manaCostField;
@@ -64,15 +71,15 @@ class EditorMainWindow extends BorderPane {
 	private CheckBox collectibleBox;
 
 	@FXML
-	private CheckBox attributesBox;
-
-	@FXML
 	private Pane contentPanel;
 
 	@FXML
 	private Button saveButton;
 
 	private final ToggleGroup cardTypeGroup = new ToggleGroup();
+
+	private List<ComboBox<GameTag>> attributeBoxes;
+	private List<TextField> attributeFields;
 
 	private CardDesc card;
 
@@ -105,21 +112,69 @@ class EditorMainWindow extends BorderPane {
 		saveButton.setOnAction(this::onSaveButton);
 		heroClassBox.valueProperty().addListener(this::onHeroClassChanged);
 		collectibleBox.setOnAction(this::onCollectibleChanged);
-		attributesBox.setOnAction(this::onAttributesChanged);
 		manaCostField.textProperty().addListener(new IntegerListener(value -> card.baseManaCost = value));
+
+		attributeBoxes = new ArrayList<>();
+		attributeFields = new ArrayList<>();
+		for (int i = 1; i < 99; i++) {
+			@SuppressWarnings("unchecked")
+			ComboBox<GameTag> box = (ComboBox<GameTag>) lookup("#attributeBox" + i);
+			if (box == null) {
+				break;
+			}
+			TextField field = (TextField) lookup("#attributeField" + i);
+			attributeBoxes.add(box);
+			attributeFields.add(field);
+		}
+		setupAttributeBoxes();
+	}
+
+	private void setupAttributeBoxes() {
+		for (ComboBox<GameTag> comboBox : attributeBoxes) {
+			ObservableList<GameTag> items = FXCollections.observableArrayList(GameTag.values());
+			Collections.sort(items, (tag1, tag2) -> tag1.toString().compareTo(tag2.toString()));
+			comboBox.setItems(items);
+			comboBox.valueProperty().addListener((ov, oldValue, newValue) -> onAttributesChanged());
+			comboBox.setOnKeyReleased(new ComboBoxKeyHandler<GameTag>(comboBox));
+		}
+		for (TextField attributeField : attributeFields) {
+			attributeField.textProperty().addListener((ov, oldValue, newValue) -> onAttributesChanged());
+		}
 	}
 
 	private void onCollectibleChanged(ActionEvent event) {
 		card.collectible = collectibleBox.isSelected();
 	}
+	
+	private void onAttributesChanged() {
+		card.attributes = new EnumMap<GameTag, Object>(GameTag.class);
+		for (int i = 0; i < attributeBoxes.size(); i++) {
+			ComboBox<GameTag> attributeBox = attributeBoxes.get(i);
+			TextField attributeField = attributeFields.get(i);
+			if (attributeBox.getSelectionModel().getSelectedItem() == null) {
+				continue;
+			}
+			
+			if (StringUtils.isEmpty(attributeField.getText())) {
+				attributeField.setText("true");
+			}
 
-	private void onAttributesChanged(ActionEvent event) {
-		if (attributesBox.isSelected()) {
-			card.attributes = new EnumMap<GameTag, Object>(GameTag.class);
-			card.attributes.put(GameTag.OVERLOAD, 1);
-		} else {
-			card.attributes = null;
+			GameTag attribute = attributeBox.getSelectionModel().getSelectedItem();
+			Object value = getAttributeValue(attributeField.getText());
+			card.attributes.put(attribute, value);
 		}
+	}
+
+	private Object getAttributeValue(String valueString) {
+		Object value = null;
+		if (ParseUtils.tryParseInt(valueString)) {
+			value = Integer.parseInt(valueString);
+		} else if (ParseUtils.tryParseBool(valueString)) {
+			value = Boolean.parseBoolean(valueString);
+		} else {
+			value = valueString;
+		}
+		return value;
 	}
 
 	private void onNameChanged(ObservableValue<? extends String> ov, String oldValue, String newValue) {
@@ -149,7 +204,7 @@ class EditorMainWindow extends BorderPane {
 			newCard.heroClass = card.heroClass;
 			newCard.baseManaCost = card.baseManaCost;
 		} else {
-			newCard.name = "New card";
+			newCard.name = "";
 			newCard.rarity = Rarity.FREE;
 			newCard.heroClass = HeroClass.ANY;
 			newCard.baseManaCost = 0;

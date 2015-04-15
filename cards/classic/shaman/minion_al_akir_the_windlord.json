@@ -9,10 +9,10 @@
 	"baseAttack" : 3,
 	"baseHp" : 5,
 	"attributes" : {
-		"windfury" : true,
-		"charge" : true,
-		"divineShield" : true,
-		"taunt" : true
+		"WINDFURY" : true,
+		"CHARGE" : true,
+		"DIVINE_SHIELD" : true,
+		"TAUNT" : true
 	},
 	"fileFormatVersion" : 1
 }
