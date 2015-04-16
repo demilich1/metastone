@@ -1,0 +1,17 @@
+{
+  "targetSelection": "NONE",
+  "spell": {
+    "class": "CopyCardSpell",
+	"value" : 2,
+	"cardLocation" : "DECK"
+  },
+  "id": "spell_thoughtsteal",
+  "name": "Thoughtsteal",
+  "description": "Copy 2 cards from your opponent\u0027s deck and put them into your hand.",
+  "type": "SPELL",
+  "heroClass": "PRIEST",
+  "rarity": "COMMON",
+  "baseManaCost": 3,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

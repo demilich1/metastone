@@ -25,7 +25,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.desc.CardDesc;
 import net.demilich.metastone.game.cards.desc.ParseUtils;
@@ -33,8 +32,8 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.gui.common.ComboBoxKeyHandler;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.testng.reporters.Files;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -273,7 +272,7 @@ class EditorMainWindow extends BorderPane {
 		Gson gson = builder.create();
 		String json = gson.toJson(card);
 		try {
-			Files.writeFile(json, file);
+			FileUtils.writeStringToFile(file, json);
 			Desktop.getDesktop().open(file);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -302,7 +301,8 @@ class EditorMainWindow extends BorderPane {
 
 		}
 		for (String word : card.name.split(" ")) {
-			result += prefix + word.replace("'", "").toLowerCase();
+			String cleansedWord = word.replace("'", "").replace(":", "");
+			result += prefix + cleansedWord.toLowerCase();
 			prefix = "_";
 		}
 		return result;
