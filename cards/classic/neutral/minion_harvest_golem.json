@@ -10,7 +10,7 @@
 	"baseHp" : 3,
 	"deathrattle" : {
 		"class" : "SummonSpell",
-		"card" : "minion_damaged_golem"
+		"card" : "token_damaged_golem"
 	},
 	"fileFormatVersion" : 1
 }

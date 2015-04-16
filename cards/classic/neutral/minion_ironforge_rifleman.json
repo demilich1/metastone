@@ -1,0 +1,24 @@
+{
+  "baseAttack": 2,
+  "baseHp": 2,
+  "battlecry": {
+    "spell": {
+      "class": "DamageSpell",
+	  "value" : 1
+    },
+	"targetSelection" : "ANY",
+    "resolvedLate": false
+  },
+  "id": "minion_ironforge_rifleman",
+  "name": "Ironforge Rifleman",
+  "description": "Battlecry: Deal 1 damage.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "FREE",
+  "baseManaCost": 3,
+  "collectible": true,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "fileFormatVersion": 1
+}

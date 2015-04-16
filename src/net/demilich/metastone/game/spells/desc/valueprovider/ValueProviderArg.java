@@ -5,6 +5,7 @@ public enum ValueProviderArg {
 	SOURCE,
 	ATTRIBUTE,
 	MULTIPLIER,
-	RACE
+	RACE,
+	TARGET_PLAYER
 
 }

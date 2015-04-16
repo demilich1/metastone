@@ -37,7 +37,7 @@ public class TemporaryAttackSpell extends Spell {
 		ValueProvider attackValueProvider = (ValueProvider) desc.get(SpellArg.VALUE_PROVIDER);
 
 		if (attackValueProvider != null) {
-			attackBonus = attackValueProvider.provideValue(context, player, target);
+			attackBonus = attackValueProvider.getValue(context, player, target);
 		}
 
 		logger.debug("{} gains {} attack", target, attackBonus);

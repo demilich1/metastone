@@ -7,7 +7,6 @@ import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCollection;
-import net.demilich.metastone.game.cards.concrete.tokens.warlock.WorthlessImp;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.Spell;
@@ -28,7 +27,7 @@ public class SenseDemonsSpell extends Spell {
 		for (int i = 0; i < 2; i++) {
 			Card demonCard = null;
 			if (demonCards.isEmpty()) {
-				demonCard = new WorthlessImp();
+				//demonCard = new WorthlessImp();
 
 			} else {
 				demonCard = demonCards.getRandom();

@@ -16,7 +16,7 @@ public class EntityCounter extends ValueProvider {
 	}
 
 	@Override
-	public int provideValue(GameContext context, Player player, Entity target) {
+	protected int provideValue(GameContext context, Player player, Entity target) {
 		EntityReference source = desc.getSource();
 		List<Entity> relevantEntities = context.resolveTarget(player, null, source);
 		int count = 0;

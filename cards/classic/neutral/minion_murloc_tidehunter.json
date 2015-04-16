@@ -1,0 +1,25 @@
+{
+  "baseAttack": 2,
+  "baseHp": 1,
+  "race": "MURLOC",
+  "battlecry": {
+    "spell": {
+      "class": "SummonSpell",
+	  "card" : "token_murloc_scout",
+	  "boardPositionRelative" : "RIGHT"
+    },
+    "resolvedLate": true
+  },
+  "id": "minion_murloc_tidehunter",
+  "name": "Murloc Tidehunter",
+  "description": "Battlecry: Summon a 1/1 Murloc Scout.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "FREE",
+  "baseManaCost": 2,
+  "collectible": true,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "fileFormatVersion": 1
+}

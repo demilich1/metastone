@@ -10,7 +10,7 @@
 	"baseHp" : 5,
 	"deathrattle" : {
 		"class" : "SummonSpell",
-		"cards" : ["minion_hyena", "minion_hyena"]
+		"cards" : ["token_hyena", "token_hyena"]
 	},
 	"race" : "BEAST",
 	"fileFormatVersion" : 1

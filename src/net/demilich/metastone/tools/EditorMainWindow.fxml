@@ -126,6 +126,11 @@
                </padding>
             </HBox>
             <Pane fx:id="contentPanel" />
+            <HBox>
+               <children>
+                  <Button fx:id="resetButton" mnemonicParsing="false" text="Reset attributes" />
+               </children>
+            </HBox>
          </children></VBox>
    </center>
    <padding>

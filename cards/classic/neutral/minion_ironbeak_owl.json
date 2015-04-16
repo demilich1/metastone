@@ -1,0 +1,24 @@
+{
+  "baseAttack": 2,
+  "baseHp": 1,
+  "race": "BEAST",
+  "battlecry": {
+    "spell": {
+      "class": "SilenceSpell"
+    },
+	"targetSelection" : "MINIONS",
+    "resolvedLate": false
+  },
+  "id": "minion_ironbeak_owl",
+  "name": "Ironbeak Owl",
+  "description": "Battlecry: Silence a minion.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "COMMON",
+  "baseManaCost": 2,
+  "collectible": true,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "fileFormatVersion": 1
+}

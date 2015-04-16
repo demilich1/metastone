@@ -5,7 +5,7 @@
     "spell": {
       "class": "SummonSpell",
 	  "boardPositionRelative" : "RIGHT",
-	  "card" : "minion_mechanical_dragonling"
+	  "card" : "token_mechanical_dragonling"
     },
     "resolvedLate": true
   },

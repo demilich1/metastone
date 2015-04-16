@@ -79,7 +79,7 @@ class MinionCardPanel extends CardEditor {
 	}
 
 	private void onRaceChanged(ObservableValue<? extends Race> ov, Race oldRace, Race newRace) {
-		card.race = newRace;
+		card.race = newRace != Race.NONE ? newRace : null;
 	}
 
 	@Override
@@ -87,6 +87,15 @@ class MinionCardPanel extends CardEditor {
 		card.type = CardType.MINION;
 		card.name = "";
 		return card;
+	}
+
+	@Override
+	public void reset() {
+		battlecrySpellBox.valueProperty().set(null);
+		battlecryTargetSelectionBox.getSelectionModel().select(TargetSelection.NONE);
+		card.battlecry = null;
+		deathrattleSpellBox.valueProperty().set(null);
+		card.deathrattle = null;
 	}
 
 	

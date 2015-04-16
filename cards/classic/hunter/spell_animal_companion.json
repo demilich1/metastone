@@ -10,9 +10,9 @@
 	"spell" : {
 		"class" : "SummonRandomSpell",
 		"cards" : [
-			"minion_huffer",
-			"minion_misha",
-			"minion_leokk"
+			"token_huffer",
+			"token_misha",
+			"token_leokk"
 		]
 	},
 	"fileFormatVersion" : 1

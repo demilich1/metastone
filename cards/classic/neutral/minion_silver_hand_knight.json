@@ -1,0 +1,24 @@
+{
+  "baseAttack": 4,
+  "baseHp": 4,
+  "battlecry": {
+    "spell": {
+      "class": "SummonSpell",
+	  "card" : "token_squire",
+	  "relativeBoardPosition" : "RIGHT"
+    },
+    "resolvedLate": true
+  },
+  "id": "minion_silver_hand_knight",
+  "name": "Silver Hand Knight",
+  "description": "Battlecry: Summon a 2/2 Squire.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "COMMON",
+  "baseManaCost": 5,
+  "collectible": true,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "fileFormatVersion": 1
+}

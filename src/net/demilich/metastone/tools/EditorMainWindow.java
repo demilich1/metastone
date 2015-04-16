@@ -75,6 +75,9 @@ class EditorMainWindow extends BorderPane {
 	private Pane contentPanel;
 
 	@FXML
+	private Button resetButton;
+	
+	@FXML
 	private Button saveButton;
 
 	private final ToggleGroup cardTypeGroup = new ToggleGroup();
@@ -82,6 +85,7 @@ class EditorMainWindow extends BorderPane {
 	private List<ComboBox<GameTag>> attributeBoxes;
 	private List<TextField> attributeFields;
 
+	private ICardEditor cardEditor;
 	private CardDesc card;
 
 	public EditorMainWindow() {
@@ -113,6 +117,7 @@ class EditorMainWindow extends BorderPane {
 		setCardEditor(new MinionCardPanel());
 
 		rarityBox.valueProperty().addListener(this::onRarityChanged);
+		resetButton.setOnAction(this::reset);
 		saveButton.setOnAction(this::onSaveButton);
 		heroClassBox.valueProperty().addListener(this::onHeroClassChanged);
 		collectibleBox.setOnAction(this::onCollectibleChanged);
@@ -135,8 +140,20 @@ class EditorMainWindow extends BorderPane {
 
 	private void setupAttributeBoxes() {
 		for (ComboBox<GameTag> comboBox : attributeBoxes) {
-			ObservableList<GameTag> items = FXCollections.observableArrayList(GameTag.values());
-			Collections.sort(items, (tag1, tag2) -> tag1.toString().compareTo(tag2.toString()));
+			ObservableList<GameTag> items = FXCollections.observableArrayList();
+			items.addAll(GameTag.values());
+			Collections.sort(items, (obj1, obj2) -> { 
+				if (obj1 == obj2) {
+			        return 0;
+			    }
+			    if (obj1 == null) {
+			        return -1;
+			    }
+			    if (obj2 == null) {
+			        return 1;
+			    }
+			    return obj1.toString().compareTo(obj2.toString());
+			});
 			comboBox.setItems(items);
 			comboBox.valueProperty().addListener((ov, oldValue, newValue) -> onAttributesChanged());
 			comboBox.setOnKeyReleased(new ComboBoxKeyHandler<GameTag>(comboBox));
@@ -148,6 +165,14 @@ class EditorMainWindow extends BorderPane {
 
 	private void onCollectibleChanged(ActionEvent event) {
 		card.collectible = collectibleBox.isSelected();
+	}
+	
+	private void reset(ActionEvent event) {
+		for (int i = 0; i < attributeBoxes.size(); i++) {
+			attributeBoxes.get(i).valueProperty().set(null);
+		}
+		card.attributes = null;
+		cardEditor.reset();
 	}
 	
 	private void onAttributesChanged() {
@@ -183,7 +208,7 @@ class EditorMainWindow extends BorderPane {
 
 	private void onNameChanged(ObservableValue<? extends String> ov, String oldValue, String newValue) {
 		card.name = newValue;
-		card.id = getCardId(card.name, card.type);
+		card.id = getCardId(card);
 		idLabel.setText(card.id);
 	}
 
@@ -200,6 +225,7 @@ class EditorMainWindow extends BorderPane {
 	}
 
 	private void setCardEditor(ICardEditor cardEditor) {
+		this.cardEditor = cardEditor;
 		CardDesc newCard = cardEditor.getCardDesc();
 		if (card != null) {
 			newCard.name = card.name;
@@ -215,7 +241,7 @@ class EditorMainWindow extends BorderPane {
 			newCard.collectible = true;
 		}
 		card = newCard;
-		card.id = getCardId(card.name, card.type);
+		card.id = getCardId(card);
 		contentPanel.getChildren().setAll(cardEditor.getPanel());
 
 		// update ui
@@ -238,6 +264,9 @@ class EditorMainWindow extends BorderPane {
 		fileChooser.setInitialDirectory(new File("./cards/"));
 		fileChooser.setInitialFileName(card.id + ".json");
 		File file = fileChooser.showSaveDialog(getScene().getWindow());
+		if (file == null) {
+			return;
+		}
 		System.out.println("Saving to: " + file.getName());
 		GsonBuilder builder = new GsonBuilder().setPrettyPrinting();
 		builder.registerTypeAdapter(SpellDesc.class, new SpellDescSerializer());
@@ -251,15 +280,15 @@ class EditorMainWindow extends BorderPane {
 		}
 	}
 
-	private static String getCardId(String cardName, CardType cardType) {
+	private static String getCardId(CardDesc card) {
 		String result = "";
 		String prefix = "";
-		switch (cardType) {
+		switch (card.type) {
 		case HERO_POWER:
 			prefix = "hero_power_";
 			break;
 		case MINION:
-			prefix = "minion_";
+			prefix = card.collectible ? "minion_" : "token_";
 			break;
 		case SPELL:
 		case CHOOSE_ONE:
@@ -272,7 +301,7 @@ class EditorMainWindow extends BorderPane {
 			break;
 
 		}
-		for (String word : cardName.split(" ")) {
+		for (String word : card.name.split(" ")) {
 			result += prefix + word.replace("'", "").toLowerCase();
 			prefix = "_";
 		}

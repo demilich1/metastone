@@ -38,6 +38,7 @@ public class SpellDescDeserializer implements JsonDeserializer<SpellDesc> {
 		parseArgument(SpellArg.TARGET, jsonData, spellArgs, ParseValueType.TARGET_REFERENCE);
 		parseArgument(SpellArg.TARGET_PLAYER, jsonData, spellArgs, ParseValueType.TARGET_PLAYER);
 		parseArgument(SpellArg.VALUE, jsonData, spellArgs, ParseValueType.INTEGER);
+		parseArgument(SpellArg.HOW_MANY, jsonData, spellArgs, ParseValueType.INTEGER);
 		parseArgument(SpellArg.SECONDARY_VALUE, jsonData, spellArgs, ParseValueType.INTEGER);
 		parseArgument(SpellArg.SPELL_1, jsonData, spellArgs, ParseValueType.SPELL);
 		parseArgument(SpellArg.SPELL_2, jsonData, spellArgs, ParseValueType.SPELL);

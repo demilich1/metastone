@@ -48,4 +48,10 @@ public class SpellCardPanel extends CardEditor {
 		card.name = "";
 		return card;
 	}
+
+	@Override
+	public void reset() {
+		spellBox.valueProperty().set(null);
+		card.spell = null;
+	}
 }
