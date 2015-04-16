@@ -1,0 +1,33 @@
+{
+  "baseAttack": 8,
+  "baseHp": 8,
+  "race": "DRAGON",
+  "battlecry": {
+    "spell": {
+      "class": "MetaSpell",
+	  "spell1" : {
+		"class" : "SummonSpell",
+		"cards" : ["token_whelp","token_whelp","token_whelp"],
+		"relativeBoardPosition" : "LEFT"
+	  },
+	  "spell2" : {
+		"class" : "SummonSpell",
+		"cards" : ["token_whelp","token_whelp","token_whelp"],
+		"relativeBoardPosition" : "RIGHT"
+	  }
+    },
+    "resolvedLate": true
+  },
+  "id": "minion_onyxia",
+  "name": "Onyxia",
+  "description": "Battlecry: Summon 1/1 Whelps until your side of the battlefield is full.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "LEGENDARY",
+  "baseManaCost": 9,
+  "collectible": true,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "fileFormatVersion": 1
+}

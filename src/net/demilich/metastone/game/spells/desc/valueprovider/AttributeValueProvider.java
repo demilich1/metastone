@@ -16,7 +16,7 @@ public class AttributeValueProvider extends ValueProvider {
 	}
 
 	@Override
-	public int provideValue(GameContext context, Player player, Entity target) {
+	protected int provideValue(GameContext context, Player player, Entity target) {
 		EntityReference sourceReference = (EntityReference) desc.get(ValueProviderArg.SOURCE);
 		GameTag attribute = (GameTag) desc.get(ValueProviderArg.ATTRIBUTE);
 		List<Entity> entities = context.resolveTarget(player, null, sourceReference);

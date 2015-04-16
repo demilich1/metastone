@@ -9,7 +9,7 @@
 	"targetSelection" : "NONE",
 	"spell" : {
 		"class" : "SummonSpell",
-		"cards" : ["minion_mirror_image", "minion_mirror_image"]
+		"cards" : ["token_mirror_image", "token_mirror_image"]
 	},
 	"fileFormatVersion" : 1
 }

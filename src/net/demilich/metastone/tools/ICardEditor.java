@@ -8,5 +8,7 @@ public interface ICardEditor {
 	public CardDesc getCardDesc();
 	
 	public Node getPanel();
+	
+	public void reset();
 
 }

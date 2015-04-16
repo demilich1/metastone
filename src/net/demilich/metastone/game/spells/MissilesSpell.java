@@ -19,7 +19,7 @@ public class MissilesSpell extends DamageSpell {
 	public static SpellDesc create(EntityReference target, int damage, int iterations) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(MissilesSpell.class);
 		arguments.put(SpellArg.VALUE, damage);
-		arguments.put(SpellArg.ITERATIONS, iterations);
+		arguments.put(SpellArg.HOW_MANY, iterations);
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
 	}
@@ -30,7 +30,7 @@ public class MissilesSpell extends DamageSpell {
 
 	@Override
 	public void cast(GameContext context, Player player, SpellDesc desc, Entity source, List<Entity> targets) {
-		int missiles = desc.getInt(SpellArg.ITERATIONS);
+		int missiles = desc.getInt(SpellArg.HOW_MANY);
 		int damage = desc.getInt(SpellArg.VALUE);
 		
 		if (source.getEntityType() == EntityType.CARD && ((Card)source).getCardType() == CardType.SPELL) {

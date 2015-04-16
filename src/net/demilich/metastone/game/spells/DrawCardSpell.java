@@ -38,7 +38,7 @@ public class DrawCardSpell extends Spell {
 	}
 
 	private void draw(GameContext context, Player player, int numberOfCards, ValueProvider drawModifier) {
-		int cardCount = drawModifier != null ? drawModifier.provideValue(context, player, null) : numberOfCards;
+		int cardCount = drawModifier != null ? drawModifier.getValue(context, player, null) : numberOfCards;
 		for (int i = 0; i < cardCount; i++) {
 			context.getLogic().drawCard(player.getId());
 		}

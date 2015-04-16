@@ -10,7 +10,7 @@
 	"baseHp" : 5,
 	"deathrattle" : {
 		"class" : "SummonSpell",
-		"card" : "minion_baine_bloodhoof"
+		"card" : "token_baine_bloodhoof"
 	},
 	"fileFormatVersion" : 1
 }

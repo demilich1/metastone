@@ -1,0 +1,13 @@
+{
+  "baseAttack": 2,
+  "baseHp": 1,
+  "race": "MURLOC",
+  "id": "minion_murloc_raider",
+  "name": "Murloc Raider",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "FREE",
+  "baseManaCost": 1,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

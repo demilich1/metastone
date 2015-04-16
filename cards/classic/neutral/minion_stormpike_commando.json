@@ -1,0 +1,24 @@
+{
+  "baseAttack": 4,
+  "baseHp": 2,
+  "battlecry": {
+    "spell": {
+      "class": "DamageSpell",
+	  "value" : 2
+    },
+    "targetSelection": "ANY",
+    "resolvedLate": false
+  },
+  "id": "minion_stormpike_commando",
+  "name": "Stormpike Commando",
+  "description": "Battlecry: Deal 2 damage.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "FREE",
+  "baseManaCost": 5,
+  "collectible": true,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "fileFormatVersion": 1
+}

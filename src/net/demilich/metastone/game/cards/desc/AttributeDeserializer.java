@@ -36,18 +36,7 @@ public class AttributeDeserializer implements JsonDeserializer<Map<GameTag, Obje
 		if (!jsonData.has(argName)) {
 			return;
 		}
-		Object value = null;
-		JsonElement entry = jsonData.get(argName);
-		switch (valueType) {
-		case INTEGER:
-			value = entry.getAsInt();
-			break;
-		case BOOLEAN:
-			value = entry.getAsBoolean() ? 1 : 0;
-			break;
-		default:
-			break;
-		}
+		Object value = ParseUtils.parse(argName, jsonData, valueType);
 		map.put(attribute, value);
 	}
 

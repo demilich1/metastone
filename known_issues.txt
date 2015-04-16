@@ -21,4 +21,5 @@ Buffed weapons do not display their stats in green
 
 Check impact of mana cost modifiers on "Choose One" spell cards
 Check impact of spellpower on "Choose One" spell cards
+Check removal of UNIQUE_ENTITY, replacement is card_id
 Facelessing a Murloc Warleader does not resolve correctly

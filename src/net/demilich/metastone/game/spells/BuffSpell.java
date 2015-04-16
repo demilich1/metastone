@@ -69,15 +69,15 @@ public class BuffSpell extends Spell {
 		ValueProvider hpValueProvider = (ValueProvider) desc.get(SpellArg.SECOND_VALUE_PROVIDER);
 
 		if (attackValueProvider != null) {
-			attackBonus = attackValueProvider.provideValue(context, player, target);
+			attackBonus = attackValueProvider.getValue(context, player, target);
 		}
 		
 		if (hpValueProvider != null) {
-			hpBonus = hpValueProvider.provideValue(context, player, target);
+			hpBonus = hpValueProvider.getValue(context, player, target);
 		}
 		// use the first value provider for both values if hp bonus is not explicitely set to 0
 		else if (hpBonus == 0 && attackValueProvider != null) {
-			hpBonus = attackValueProvider.provideValue(context, player, target);
+			hpBonus = attackValueProvider.getValue(context, player, target);
 		}
 
 		logger.debug("{} gains ({})", target, attackBonus + "/" + hpBonus);
