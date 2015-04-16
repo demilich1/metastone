@@ -120,6 +120,7 @@ public class GameLogic implements Cloneable {
 
 	public void afterCardPlayed(int playerId, CardReference cardReference) {
 		Player player = context.getPlayer(playerId);
+		
 		player.getHero().modifyTag(GameTag.COMBO, +1);
 		Card card = context.resolveCardReference(cardReference);
 		if (card.getCardType() == CardType.SPELL && !card.hasStatus(GameTag.COUNTERED)) {

@@ -5,7 +5,7 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
-import net.demilich.metastone.game.spells.custom.DoubleAttackSpell;
+import net.demilich.metastone.game.spells.DoubleAttackSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.DamageReceivedTrigger;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;

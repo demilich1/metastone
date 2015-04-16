@@ -12,4 +12,5 @@ public enum ParseValueType {
 	STRING,
 	STRING_ARRAY,
 	BOARD_POSITION_RELATIVE,
+	CARD_LOCATION
 }

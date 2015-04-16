@@ -1,0 +1,24 @@
+{
+  "baseAttack": 2,
+  "baseHp": 2,
+  "battlecry": {
+    "spell": {
+      "class": "AddAttributeSpell",
+	  "attribute" : "DIVINE_SHIELD"
+    },
+    "targetSelection": "FRIENDLY_MINIONS",
+    "resolvedLate": false
+  },
+  "id": "minion_argent_protector",
+  "name": "Argent Protector",
+  "description": "Battlecry: Give a friendly minion Divine Shield.",
+  "type": "MINION",
+  "heroClass": "PALADIN",
+  "rarity": "COMMON",
+  "baseManaCost": 2,
+  "collectible": true,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "fileFormatVersion": 1
+}

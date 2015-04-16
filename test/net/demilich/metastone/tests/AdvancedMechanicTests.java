@@ -15,7 +15,6 @@ import net.demilich.metastone.game.cards.IChooseOneCard;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.cards.concrete.neutral.AmaniBerserker;
-import net.demilich.metastone.game.cards.concrete.priest.Thoughtsteal;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -68,7 +67,7 @@ public class AdvancedMechanicTests extends BasicTests {
 
 		int cardsInHand = player.getHand().getCount();
 		int cardsInOpponentsDeck = opponent.getDeck().getCount();
-		Card thoughtsteal = new Thoughtsteal();
+		Card thoughtsteal = CardCatalogue.getCardById("spell_thoughtspell");
 		context.getLogic().receiveCard(player.getId(), thoughtsteal);
 		context.getLogic().performGameAction(player.getId(), thoughtsteal.play());
 		Assert.assertEquals(opponent.getDeck().getCount(), cardsInOpponentsDeck);

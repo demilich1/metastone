@@ -17,7 +17,7 @@ public abstract class CardDesc {
 	public HeroClass heroClass;
 	public Rarity rarity;
 	public int baseManaCost;
-	public boolean collectible;
+	public boolean collectible = true;
 	public Map<GameTag, Object> attributes;
 	public int fileFormatVersion = 1;
 	

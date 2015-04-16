@@ -12,7 +12,7 @@
   "name": "Shield Slam",
   "description": "Deal 1 damage to a minion for each Armor you have.",
   "type": "SPELL",
-  "heroClass": "ANY",
+  "heroClass": "WARRIOR",
   "rarity": "EPIC",
   "baseManaCost": 1,
   "collectible": true,

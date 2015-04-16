@@ -8,7 +8,6 @@ import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.cards.concrete.neutral.DireWolfAlpha;
-import net.demilich.metastone.game.cards.concrete.priest.MindControl;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
@@ -115,7 +114,7 @@ public class AuraTests extends BasicTests {
 		Actor minion1 = playMinionCard(context, player, minionCard);
 		Assert.assertEquals(minion1.getAttack(), 1);
 
-		Card mindControlCard = new MindControl();
+		Card mindControlCard = CardCatalogue.getCardById("spell_mindcontrol");
 		context.getLogic().receiveCard(player.getId(), mindControlCard);
 		GameAction mindControl = mindControlCard.play();
 		mindControl.setTarget(auraMinion);

@@ -2,11 +2,11 @@ package net.demilich.metastone.tests;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.cards.concrete.neutral.BloodsailRaider;
 import net.demilich.metastone.game.cards.concrete.neutral.KnifeJuggler;
 import net.demilich.metastone.game.cards.concrete.neutral.WildPyromancer;
-import net.demilich.metastone.game.cards.concrete.paladin.Equality;
 import net.demilich.metastone.game.cards.concrete.rogue.Conceal;
 import net.demilich.metastone.game.cards.concrete.warrior.ArcaniteReaper;
 import net.demilich.metastone.game.cards.concrete.warrior.WarsongCommander;
@@ -157,7 +157,7 @@ public class CardInteractionTests extends TestBase {
 		Assert.assertEquals(warrior.getMinions().size(), 4);
 
 		playCard(context, paladin, new WildPyromancer());
-		playCard(context, paladin, new Equality());
+		playCard(context, paladin, CardCatalogue.getCardById("spell_equality"));
 
 		// wild pyromancer + equality should wipe the board if there no
 		// deathrattles
