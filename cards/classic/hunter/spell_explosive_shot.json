@@ -1,0 +1,23 @@
+{
+  "targetSelection": "MINIONS",
+  "spell": {
+    "class": "AdjacentMetaSpell",
+	"spell1" : {
+		"class" : "DamageSpell",
+		"value" : 5
+	},
+	"spell2" : {
+		"class" : "DamageSpell",
+		"value" : 2
+	}
+  },
+  "id": "spell_explosive_shot",
+  "name": "Explosive Shot",
+  "description": "Deal 5 damage to a minion and 2 damage to adjacent ones.",
+  "type": "SPELL",
+  "heroClass": "HUNTER",
+  "rarity": "RARE",
+  "baseManaCost": 5,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

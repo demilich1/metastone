@@ -5,6 +5,9 @@ import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.entities.minions.RelativeToSource;
 import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.condition.ConditionDesc;
+import net.demilich.metastone.game.spells.desc.filter.FilterDesc;
+import net.demilich.metastone.game.spells.desc.filter.Operation;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderDesc;
 import net.demilich.metastone.game.targeting.CardLocation;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -17,6 +20,8 @@ public class ParseUtils {
 
 	private static SpellDescDeserializer spellDescParser = new SpellDescDeserializer();
 	private static ValueProviderDeserializer valueProviderParser = new ValueProviderDeserializer();
+	private static FilterDeserializer filterParser = new FilterDeserializer();
+	private static ConditionDeserializer conditionParser = new ConditionDeserializer();
 
 	public static String toCamelCase(String input) {
 		String inputLowerCase = input.toLowerCase();
@@ -69,9 +74,17 @@ public class ParseUtils {
 			return Enum.valueOf(RelativeToSource.class, entry.getAsString());
 		case CARD_LOCATION:
 			return Enum.valueOf(CardLocation.class, entry.getAsString());
+		case OPERATION:
+			return Enum.valueOf(Operation.class, entry.getAsString());
 		case VALUE_PROVIDER:
 			ValueProviderDesc valueProviderDesc = valueProviderParser.deserialize(entry, ValueProviderDesc.class, null);
 			return valueProviderDesc.create();
+		case ENTITY_FILTER:
+			FilterDesc filterDesc = filterParser.deserialize(entry, FilterDesc.class, null);
+			return filterDesc.create();
+		case CONDITION:
+			ConditionDesc conditionDesc = conditionParser.deserialize(entry, ConditionDesc.class, null);
+			return conditionDesc.create();
 		default:
 			break;
 		}

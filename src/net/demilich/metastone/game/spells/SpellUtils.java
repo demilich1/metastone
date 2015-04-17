@@ -15,6 +15,7 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
+import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 
 public class SpellUtils {
 
@@ -57,13 +58,13 @@ public class SpellUtils {
 		return validTargets;
 	}
 
-	public static List<Entity> getValidTargets(List<Entity> allTargets, Predicate<Entity> filter) {
+	public static List<Entity> getValidTargets(List<Entity> allTargets, EntityFilter filter) {
 		if (filter == null) {
 			return allTargets;
 		}
 		List<Entity> validTargets = new ArrayList<>();
 		for (Entity entity : allTargets) {
-			if (filter.test(entity)) {
+			if (filter.matches(entity)) {
 				validTargets.add(entity);
 			}
 		}

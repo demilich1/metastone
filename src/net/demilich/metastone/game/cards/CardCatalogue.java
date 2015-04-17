@@ -161,12 +161,9 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.warrior.Warbot());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.BestialWrath());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.EaglehornBow());
-		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.ExplosiveShot());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.ExplosiveTrap());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.FreezingTrap());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.GladiatorsLongbow());
-		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.Houndmaster());
-		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.KillCommand());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.Misdirection());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.MultiShot());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.ScavengingHyena());
@@ -228,7 +225,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.AmaniBerserker());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.AngryChicken());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.BaronGeddon());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.BigGameHunter());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.BloodsailRaider());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.ColdlightSeer());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.CultMaster());
@@ -244,7 +240,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.Gruul());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.GurubashiBerserker());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.Hogger());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.HungryCrab());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.IllidanStormrage());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.ImpMaster());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.KnifeJuggler());
@@ -271,10 +266,8 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.SouthseaCaptain());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.SouthseaDeckhand());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.SpitefulSmith());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.StampedingKodo());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.StormwindChampion());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.TaurenWarrior());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.TheBlackKnight());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.TinkmasterOverspark());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.VentureCoMercenary());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.VioletTeacher());

@@ -35,7 +35,7 @@ public class BuffSpell extends Spell {
 		arguments.put(SpellArg.TARGET, target);
 		arguments.put(SpellArg.RANDOM_TARGET, randomTarget);
 		if (targetFilter != null) {
-			arguments.put(SpellArg.ENTITY_FILTER, targetFilter);
+			arguments.put(SpellArg.FILTER, targetFilter);
 		}
 		return new SpellDesc(arguments);
 	}

@@ -59,7 +59,6 @@ public class MinionCard extends Card {
 			BattlecryAction battlecryAction = BattlecryAction.createBattlecry(battlecry.spell, battlecry.getTargetSelection());
 			battlecryAction.setResolvedLate(battlecry.resolvedLate);
 			minion.setBattlecry(battlecryAction);
-
 		}
 		if (deathrattle != null) {
 			minion.addDeathrattle(deathrattle);

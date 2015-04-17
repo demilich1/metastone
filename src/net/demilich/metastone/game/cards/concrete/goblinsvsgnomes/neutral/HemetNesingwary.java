@@ -4,11 +4,11 @@ import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
-import net.demilich.metastone.game.entities.EntityRaceFilter;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.DestroySpell;
+import net.demilich.metastone.game.spells.desc.filter.RaceFilter;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class HemetNesingwary extends MinionCard {
@@ -30,7 +30,7 @@ public class HemetNesingwary extends MinionCard {
 	public Minion summon() {
 		Minion hemetNesingwary = createMinion();
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(DestroySpell.create(), TargetSelection.MINIONS);
-		battlecry.setEntityFilter(new EntityRaceFilter(Race.BEAST));
+		//battlecry.setEntityFilter(new RaceFilter(Race.BEAST));
 		hemetNesingwary.setBattlecry(battlecry);
 		return hemetNesingwary;
 	}

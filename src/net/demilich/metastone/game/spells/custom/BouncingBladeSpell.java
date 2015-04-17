@@ -32,7 +32,7 @@ public class BouncingBladeSpell extends DamageSpell {
 
 			return true;
 		};
-		arguments.put(SpellArg.ENTITY_FILTER, targetFilter);
+		arguments.put(SpellArg.FILTER, targetFilter);
 		arguments.put(SpellArg.TARGET, EntityReference.ALL_MINIONS);
 		return new SpellDesc(arguments);
 	}

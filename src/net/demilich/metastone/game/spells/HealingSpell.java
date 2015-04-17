@@ -23,7 +23,7 @@ public class HealingSpell extends Spell {
 		arguments.put(SpellArg.TARGET, target);
 		if (randomTarget) {
 			arguments.put(SpellArg.RANDOM_TARGET, true);
-			arguments.put(SpellArg.ENTITY_FILTER, new Predicate<Entity>() {
+			arguments.put(SpellArg.FILTER, new Predicate<Entity>() {
 
 				@Override
 				public boolean test(Entity entity) {
