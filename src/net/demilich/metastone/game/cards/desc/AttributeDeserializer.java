@@ -27,6 +27,7 @@ public class AttributeDeserializer implements JsonDeserializer<Map<GameTag, Obje
 		parseAttribute(GameTag.STEALTH, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(GameTag.UNTARGETABLE_BY_SPELLS, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(GameTag.WINDFURY, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(GameTag.TAUNT, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(GameTag.SPELL_DAMAGE, jsonData, map, ParseValueType.INTEGER);
 		return map;
 	}
@@ -37,6 +38,10 @@ public class AttributeDeserializer implements JsonDeserializer<Map<GameTag, Obje
 			return;
 		}
 		Object value = ParseUtils.parse(argName, jsonData, valueType);
+		Boolean bool = value instanceof Boolean ? (Boolean) value : null;
+		if (bool != null && bool == true) {
+			value = 1;
+		}
 		map.put(attribute, value);
 	}
 

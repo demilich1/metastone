@@ -8,9 +8,9 @@ import net.demilich.metastone.game.targeting.EntityReference;
 
 public class ValueProviderDesc {
 
-	public static Map<ValueProviderArg, Object> build(Class<? extends ValueProvider> spellClass) {
+	public static Map<ValueProviderArg, Object> build(Class<? extends ValueProvider> providerClass) {
 		final Map<ValueProviderArg, Object> arguments = new EnumMap<>(ValueProviderArg.class);
-		arguments.put(ValueProviderArg.CLASS, spellClass);
+		arguments.put(ValueProviderArg.CLASS, providerClass);
 		return arguments;
 	}
 

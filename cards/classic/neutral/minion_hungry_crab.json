@@ -1,0 +1,37 @@
+{
+  "baseAttack": 1,
+  "baseHp": 2,
+  "race": "BEAST",
+  "battlecry": {
+    "spell": {
+      "class": "MetaSpell",
+	  "spell1" : {
+		"class" : "DestroySpell"
+	  },
+	  "spell2" : {
+		"class" : "BuffSpell",
+		"attackBonus" : 2,
+		"hpBonus" : 2,
+		"target" : "SELF"
+	  },
+	  "filter" : {
+		"class" : "RaceFilter",
+		"race" : "MURLOC"
+	  }
+    },
+    "targetSelection": "MINIONS",
+    "resolvedLate": false
+  },
+  "id": "minion_hungry_crab",
+  "name": "Hungry Crab",
+  "description": "Battlecry: Destroy a Murloc and gain +2/+2.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "EPIC",
+  "baseManaCost": 1,
+  "collectible": true,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "fileFormatVersion": 1
+}

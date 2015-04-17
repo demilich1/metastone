@@ -1,11 +1,8 @@
 package net.demilich.metastone.game.cards.concrete.paladin;
 
-import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
-import net.demilich.metastone.game.spells.DamageSpell;
-import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class HolyWrath extends SpellCard {

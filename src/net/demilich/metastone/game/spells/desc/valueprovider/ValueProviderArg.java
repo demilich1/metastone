@@ -6,6 +6,9 @@ public enum ValueProviderArg {
 	ATTRIBUTE,
 	MULTIPLIER,
 	RACE,
-	TARGET_PLAYER
+	TARGET_PLAYER,
+	IF_TRUE,
+	IF_FALSE,
+	CONDITION
 
 }

@@ -1,13 +1,13 @@
 package net.demilich.metastone.game.spells;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 
 public abstract class Spell {
 
@@ -17,8 +17,7 @@ public abstract class Spell {
 			return;
 		}
 		
-		@SuppressWarnings("unchecked")
-		Predicate<Entity> targetFilter = (Predicate<Entity>) desc.get(SpellArg.ENTITY_FILTER);
+		EntityFilter targetFilter = desc.getEntityFilter();
 		List<Entity> validTargets = SpellUtils.getValidTargets(targets, targetFilter);
 		if (validTargets.size() > 0 && desc.getBool(SpellArg.RANDOM_TARGET)) {
 			Entity target = SpellUtils.getRandomTarget(validTargets);

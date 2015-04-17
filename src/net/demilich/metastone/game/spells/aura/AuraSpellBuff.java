@@ -32,7 +32,7 @@ public class AuraSpellBuff extends Spell {
 		arguments.put(SpellArg.ATTACK_BONUS, attackBonus);
 		arguments.put(SpellArg.HP_BONUS, hpBonus);
 		if (targetFilter != null) {
-			arguments.put(SpellArg.ENTITY_FILTER, targetFilter);	
+			arguments.put(SpellArg.FILTER, targetFilter);	
 		}
 		
 		return new SpellDesc(arguments);
