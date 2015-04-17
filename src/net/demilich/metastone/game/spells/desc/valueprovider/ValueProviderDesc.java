@@ -24,17 +24,23 @@ public class ValueProviderDesc {
 		return arguments.containsKey(arg);
 	}
 
+	public ValueProvider create() {
+		Class<? extends ValueProvider> valueProviderClass = getValueProviderClass();
+		try {
+			return valueProviderClass.getConstructor(ValueProviderDesc.class).newInstance(this);
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	public Object get(ValueProviderArg arg) {
 		return arguments.get(arg);
 	}
 
 	public boolean getBool(ValueProviderArg arg) {
 		return arguments.containsKey(arg) ? (boolean) get(arg) : false;
-	}
-
-	@SuppressWarnings("unchecked")
-	public Class<? extends ValueProvider> getValueProviderClass() {
-		return (Class<? extends ValueProvider>) arguments.get(ValueProviderArg.CLASS);
 	}
 
 	public int getInt(ValueProviderArg arg) {
@@ -45,15 +51,9 @@ public class ValueProviderDesc {
 		return (EntityReference) get(ValueProviderArg.SOURCE);
 	}
 
-	public ValueProvider create() {
-		Class<? extends ValueProvider> valueProviderClass = getValueProviderClass();
-		try {
-			return valueProviderClass.getConstructor(ValueProviderDesc.class).newInstance(this);
-		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-				| NoSuchMethodException | SecurityException e) {
-			e.printStackTrace();
-		}
-		return null;
+	@SuppressWarnings("unchecked")
+	public Class<? extends ValueProvider> getValueProviderClass() {
+		return (Class<? extends ValueProvider>) arguments.get(ValueProviderArg.CLASS);
 	}
 
 }

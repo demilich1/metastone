@@ -19,15 +19,15 @@ public class SummonSpell extends Spell {
 		return create(TargetPlayer.SELF, minionCards);
 	}
 	
+	public static SpellDesc create(RelativeToSource relativeBoardPosition, MinionCard... minionCards) {
+		return create(TargetPlayer.SELF, relativeBoardPosition, minionCards);
+	}
+	
 	public static SpellDesc create(String minionCard) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(SummonSpell.class);
 		arguments.put(SpellArg.CARD, minionCard);
 		arguments.put(SpellArg.TARGET, EntityReference.NONE);
 		return new SpellDesc(arguments);
-	}
-	
-	public static SpellDesc create(RelativeToSource relativeBoardPosition, MinionCard... minionCards) {
-		return create(TargetPlayer.SELF, relativeBoardPosition, minionCards);
 	}
 	
 	public static SpellDesc create(TargetPlayer targetPlayer, MinionCard... minionCards) {

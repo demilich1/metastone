@@ -57,6 +57,10 @@ public class SpellDesc extends CustomCloneable {
 		return arguments.containsKey(spellArg) ? (boolean) get(spellArg) : false;
 	}
 
+	public EntityFilter getEntityFilter() {
+		return (EntityFilter) get(SpellArg.FILTER);
+	}
+
 	public int getInt(SpellArg spellArg) {
 		return arguments.containsKey(spellArg) ? (int) get(spellArg) : 0;
 	}
@@ -81,13 +85,9 @@ public class SpellDesc extends CustomCloneable {
 	public ValueProvider getValueProvider() {
 		return (ValueProvider) get(SpellArg.VALUE_PROVIDER);
 	}
-
+	
 	public boolean hasPredefinedTarget() {
 		return arguments.get(SpellArg.TARGET) != null;
-	}
-	
-	public EntityFilter getEntityFilter() {
-		return (EntityFilter) get(SpellArg.FILTER);
 	}
 
 	@Override

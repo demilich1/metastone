@@ -27,15 +27,6 @@ public abstract class Card extends Entity {
 	private BattlecryDesc battlecry;
 	private final String cardId;
 
-	public Card(String name, CardType cardType, Rarity rarity, HeroClass classRestriction, int manaCost) {
-		setName(name);
-		this.cardType = cardType;
-		this.rarity = rarity;
-		this.classRestriction = classRestriction;
-		this.manaCost = manaCost;
-		this.cardId = null;
-	}
-	
 	public Card(CardDesc desc) {
 		cardId = desc.id;
 		setName(desc.name);
@@ -49,6 +40,15 @@ public abstract class Card extends Entity {
 		if (desc.attributes != null) {
 			tags.putAll(desc.attributes);
 		}
+	}
+	
+	public Card(String name, CardType cardType, Rarity rarity, HeroClass classRestriction, int manaCost) {
+		setName(name);
+		this.cardType = cardType;
+		this.rarity = rarity;
+		this.classRestriction = classRestriction;
+		this.manaCost = manaCost;
+		this.cardId = null;
 	}
 
 	@Override
@@ -66,13 +66,12 @@ public abstract class Card extends Entity {
 		return battlecry;
 	}
 
-	public CardReference getCardReference() {
-		return new CardReference(getOwner(), getLocation(), getId(), getName());
+	public String getCardId() {
+		return cardId;
 	}
 	
-	@Override
-	public int getTypeId() {
-		return getCardId() != null ? getCardId().hashCode() : super.getTypeId();
+	public CardReference getCardReference() {
+		return new CardReference(getOwner(), getLocation(), getId(), getName());
 	}
 
 	public CardType getCardType() {
@@ -108,6 +107,11 @@ public abstract class Card extends Entity {
 
 	public Rarity getRarity() {
 		return rarity;
+	}
+
+	@Override
+	public int getTypeId() {
+		return getCardId() != null ? getCardId().hashCode() : super.getTypeId();
 	}
 
 	public boolean hasBattlecry() {
@@ -151,18 +155,14 @@ public abstract class Card extends Entity {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+	
 	public void setLocation(CardLocation location) {
 		this.location = location;
 	}
-	
+
 	@Override
 	public String toString() {
 		return String.format("[%s '%s' Manacost:%d]", getCardType(), getName(), manaCost);
-	}
-
-	public String getCardId() {
-		return cardId;
 	}
 
 }

@@ -26,14 +26,6 @@ public class MinionCard extends Card {
 	private final BattlecryDesc battlecry;
 	private final SpellDesc deathrattle;
 
-	public MinionCard(String name, int baseAttack, int baseHp, Rarity rarity, HeroClass classRestriction, int manaCost) {
-		super(name, CardType.MINION, rarity, classRestriction, manaCost);
-		setTag(GameTag.BASE_ATTACK, baseAttack);
-		setTag(GameTag.BASE_HP, baseHp);
-		this.battlecry = null;
-		this.deathrattle = null;
-	}
-
 	public MinionCard(MinionCardDesc desc) {
 		super(desc);
 		setTag(GameTag.BASE_ATTACK, desc.baseAttack);
@@ -43,6 +35,14 @@ public class MinionCard extends Card {
 		}
 		battlecry = desc.battlecry;
 		deathrattle = desc.deathrattle;
+	}
+
+	public MinionCard(String name, int baseAttack, int baseHp, Rarity rarity, HeroClass classRestriction, int manaCost) {
+		super(name, CardType.MINION, rarity, classRestriction, manaCost);
+		setTag(GameTag.BASE_ATTACK, baseAttack);
+		setTag(GameTag.BASE_HP, baseHp);
+		this.battlecry = null;
+		this.deathrattle = null;
 	}
 
 	protected Minion createMinion(GameTag... tags) {

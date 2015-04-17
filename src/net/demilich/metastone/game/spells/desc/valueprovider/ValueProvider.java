@@ -9,13 +9,13 @@ public abstract class ValueProvider {
 
 	protected final ValueProviderDesc desc;
 
-	public ValueProvider(ValueProviderDesc desc) {
-		this.desc = desc;
-	}
-
 	// TODO: remove once all cards have been externalized
 	public ValueProvider() {
 		this.desc = null;
+	}
+
+	public ValueProvider(ValueProviderDesc desc) {
+		this.desc = desc;
 	}
 
 	public int getValue(GameContext context, Player player, Entity target) {

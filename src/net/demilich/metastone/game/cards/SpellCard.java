@@ -15,18 +15,18 @@ public class SpellCard extends Card {
 	private SpellDesc spell;
 	private TargetSelection targetRequirement;
 
-	protected SpellCard(String name, CardType cardType, Rarity rarity, HeroClass classRestriction, int manaCost) {
-		super(name, cardType, rarity, classRestriction, manaCost);
-	}
-
-	public SpellCard(String name, Rarity rarity, HeroClass classRestriction, int manaCost) {
-		super(name, CardType.SPELL, rarity, classRestriction, manaCost);
-	}
-	
 	public SpellCard(SpellCardDesc desc) {
 		super(desc);
 		setTargetRequirement(desc.targetSelection);
 		setSpell(desc.spell);
+	}
+
+	protected SpellCard(String name, CardType cardType, Rarity rarity, HeroClass classRestriction, int manaCost) {
+		super(name, cardType, rarity, classRestriction, manaCost);
+	}
+	
+	public SpellCard(String name, Rarity rarity, HeroClass classRestriction, int manaCost) {
+		super(name, CardType.SPELL, rarity, classRestriction, manaCost);
 	}
 
 	public boolean canBeCast(GameContext context, Player player) {

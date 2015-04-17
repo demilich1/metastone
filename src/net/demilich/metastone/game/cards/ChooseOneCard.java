@@ -10,11 +10,6 @@ public class ChooseOneCard extends Card implements IChooseOneCard {
 	private String card1Id;
 	private String card2Id;
 
-	public ChooseOneCard(String name, CardType cardType, Rarity rarity, HeroClass classRestriction, int manaCost) {
-		super(name, cardType, rarity, classRestriction, manaCost);
-		setTag(GameTag.CHOOSE_ONE);
-	}
-	
 	public ChooseOneCard(ChooseOneCardDesc desc) {
 		super(desc);
 		setTag(GameTag.CHOOSE_ONE);
@@ -22,12 +17,9 @@ public class ChooseOneCard extends Card implements IChooseOneCard {
 		card2Id = desc.option2;
 	}
 	
-	private Card getCard(String cardId) {
-		Card card = CardCatalogue.getCardById(cardId);
-		card.setLocation(getLocation());
-		card.setOwner(getOwner());
-		card.setId(getId());
-		return card;
+	public ChooseOneCard(String name, CardType cardType, Rarity rarity, HeroClass classRestriction, int manaCost) {
+		super(name, cardType, rarity, classRestriction, manaCost);
+		setTag(GameTag.CHOOSE_ONE);
 	}
 	
 	@Override
@@ -36,6 +28,14 @@ public class ChooseOneCard extends Card implements IChooseOneCard {
 		clone.card1Id = card1Id;
 		clone.card2Id = card2Id;
 		return clone;
+	}
+	
+	private Card getCard(String cardId) {
+		Card card = CardCatalogue.getCardById(cardId);
+		card.setLocation(getLocation());
+		card.setOwner(getOwner());
+		card.setId(getId());
+		return card;
 	}
 
 	@Override

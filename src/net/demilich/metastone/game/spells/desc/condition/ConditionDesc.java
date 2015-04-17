@@ -4,10 +4,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.EnumMap;
 import java.util.Map;
 
-import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderDesc;
-
 public class ConditionDesc {
-	
+
 	public static Map<ConditionArg, Object> build(Class<? extends Condition> conditionClass) {
 		final Map<ConditionArg, Object> arguments = new EnumMap<>(ConditionArg.class);
 		arguments.put(ConditionArg.CLASS, conditionClass);
@@ -22,6 +20,17 @@ public class ConditionDesc {
 
 	public boolean contains(ConditionArg arg) {
 		return arguments.containsKey(arg);
+	}
+
+	public Condition create() {
+		Class<? extends Condition> valueProviderClass = getConditionClass();
+		try {
+			return valueProviderClass.getConstructor(ConditionDesc.class).newInstance(this);
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public Object get(ConditionArg arg) {
@@ -39,17 +48,6 @@ public class ConditionDesc {
 
 	public int getInt(ConditionArg arg) {
 		return arguments.containsKey(arg) ? (int) get(arg) : 0;
-	}
-
-	public Condition create() {
-		Class<? extends Condition> valueProviderClass = getConditionClass();
-		try {
-			return valueProviderClass.getConstructor(ConditionDesc.class).newInstance(this);
-		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-				| NoSuchMethodException | SecurityException e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 
 }
