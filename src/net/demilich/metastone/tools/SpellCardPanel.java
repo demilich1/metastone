@@ -32,8 +32,12 @@ public class SpellCardPanel extends CardEditor {
 		spellBox.valueProperty().addListener(this::onSpellChanged);
 	}
 
-	private void onTargetSelectionChanged(ObservableValue<? extends TargetSelection> ov, TargetSelection oldValue, TargetSelection newValue) {
-		card.targetSelection = newValue;
+	@Override
+	public CardDesc getCardDesc() {
+		card.type = CardType.SPELL;
+		card.targetSelection = TargetSelection.NONE;
+		card.name = "";
+		return card;
 	}
 
 	private void onSpellChanged(ObservableValue<? extends Class<? extends Spell>> ov, Class<? extends Spell> oldSpell,
@@ -41,12 +45,8 @@ public class SpellCardPanel extends CardEditor {
 		card.spell = new SpellDesc(SpellDesc.build(newSpell));
 	}
 
-	@Override
-	public CardDesc getCardDesc() {
-		card.type = CardType.SPELL;
-		card.targetSelection = TargetSelection.NONE;
-		card.name = "";
-		return card;
+	private void onTargetSelectionChanged(ObservableValue<? extends TargetSelection> ov, TargetSelection oldValue, TargetSelection newValue) {
+		card.targetSelection = newValue;
 	}
 
 	@Override

@@ -22,6 +22,17 @@ public class FilterDesc {
 		return arguments.containsKey(arg);
 	}
 
+	public EntityFilter create() {
+		Class<? extends EntityFilter> filterClass = getFilterClass();
+		try {
+			return filterClass.getConstructor(FilterDesc.class).newInstance(this);
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	public Object get(FilterArg arg) {
 		return arguments.get(arg);
 	}
@@ -35,19 +46,8 @@ public class FilterDesc {
 		return (Class<? extends EntityFilter>) arguments.get(FilterArg.CLASS);
 	}
 
+
 	public int getInt(FilterArg arg) {
 		return arguments.containsKey(arg) ? (int) get(arg) : 0;
-	}
-
-
-	public EntityFilter create() {
-		Class<? extends EntityFilter> filterClass = getFilterClass();
-		try {
-			return filterClass.getConstructor(FilterDesc.class).newInstance(this);
-		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-				| NoSuchMethodException | SecurityException e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 }

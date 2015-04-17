@@ -40,6 +40,35 @@ import com.google.gson.GsonBuilder;
 
 class EditorMainWindow extends BorderPane {
 
+	private static String getCardId(CardDesc card) {
+		String result = "";
+		String prefix = "";
+		switch (card.type) {
+		case HERO_POWER:
+			prefix = "hero_power_";
+			break;
+		case MINION:
+			prefix = card.collectible ? "minion_" : "token_";
+			break;
+		case SPELL:
+		case CHOOSE_ONE:
+			prefix = "spell_";
+			break;
+		case WEAPON:
+			prefix = "weapon_";
+			break;
+		default:
+			break;
+
+		}
+		for (String word : card.name.split(" ")) {
+			String cleansedWord = word.replace("'", "").replace(":", "");
+			result += prefix + cleansedWord.toLowerCase();
+			prefix = "_";
+		}
+		return result;
+	}
+
 	@FXML
 	private RadioButton minionRadioButton;
 
@@ -72,19 +101,19 @@ class EditorMainWindow extends BorderPane {
 
 	@FXML
 	private Pane contentPanel;
-
+	
 	@FXML
 	private Button resetButton;
-	
+
 	@FXML
 	private Button saveButton;
 
 	private final ToggleGroup cardTypeGroup = new ToggleGroup();
-
 	private List<ComboBox<GameTag>> attributeBoxes;
-	private List<TextField> attributeFields;
 
+	private List<TextField> attributeFields;
 	private ICardEditor cardEditor;
+
 	private CardDesc card;
 
 	public EditorMainWindow() {
@@ -137,41 +166,16 @@ class EditorMainWindow extends BorderPane {
 		setupAttributeBoxes();
 	}
 
-	private void setupAttributeBoxes() {
-		for (ComboBox<GameTag> comboBox : attributeBoxes) {
-			ObservableList<GameTag> items = FXCollections.observableArrayList();
-			items.addAll(GameTag.values());
-			Collections.sort(items, (obj1, obj2) -> { 
-				if (obj1 == obj2) {
-			        return 0;
-			    }
-			    if (obj1 == null) {
-			        return -1;
-			    }
-			    if (obj2 == null) {
-			        return 1;
-			    }
-			    return obj1.toString().compareTo(obj2.toString());
-			});
-			comboBox.setItems(items);
-			comboBox.valueProperty().addListener((ov, oldValue, newValue) -> onAttributesChanged());
-			comboBox.setOnKeyReleased(new ComboBoxKeyHandler<GameTag>(comboBox));
+	private Object getAttributeValue(String valueString) {
+		Object value = null;
+		if (ParseUtils.tryParseInt(valueString)) {
+			value = Integer.parseInt(valueString);
+		} else if (ParseUtils.tryParseBool(valueString)) {
+			value = Boolean.parseBoolean(valueString);
+		} else {
+			value = valueString;
 		}
-		for (TextField attributeField : attributeFields) {
-			attributeField.textProperty().addListener((ov, oldValue, newValue) -> onAttributesChanged());
-		}
-	}
-
-	private void onCollectibleChanged(ActionEvent event) {
-		card.collectible = collectibleBox.isSelected();
-	}
-	
-	private void reset(ActionEvent event) {
-		for (int i = 0; i < attributeBoxes.size(); i++) {
-			attributeBoxes.get(i).valueProperty().set(null);
-		}
-		card.attributes = null;
-		cardEditor.reset();
+		return value;
 	}
 	
 	private void onAttributesChanged() {
@@ -192,17 +196,17 @@ class EditorMainWindow extends BorderPane {
 			card.attributes.put(attribute, value);
 		}
 	}
+	
+	private void onCollectibleChanged(ActionEvent event) {
+		card.collectible = collectibleBox.isSelected();
+	}
 
-	private Object getAttributeValue(String valueString) {
-		Object value = null;
-		if (ParseUtils.tryParseInt(valueString)) {
-			value = Integer.parseInt(valueString);
-		} else if (ParseUtils.tryParseBool(valueString)) {
-			value = Boolean.parseBoolean(valueString);
-		} else {
-			value = valueString;
-		}
-		return value;
+	private void onDescriptionChanged(ObservableValue<? extends String> ov, String oldValue, String newValue) {
+		card.description = newValue;
+	}
+
+	private void onHeroClassChanged(ObservableValue<? extends HeroClass> ov, HeroClass oldHeroClass, HeroClass newHeroClass) {
+		card.heroClass = newHeroClass;
 	}
 
 	private void onNameChanged(ObservableValue<? extends String> ov, String oldValue, String newValue) {
@@ -211,16 +215,42 @@ class EditorMainWindow extends BorderPane {
 		idLabel.setText(card.id);
 	}
 
-	private void onDescriptionChanged(ObservableValue<? extends String> ov, String oldValue, String newValue) {
-		card.description = newValue;
-	}
-
 	private void onRarityChanged(ObservableValue<? extends Rarity> ov, Rarity oldRarity, Rarity newRarity) {
 		card.rarity = newRarity;
 	}
 
-	private void onHeroClassChanged(ObservableValue<? extends HeroClass> ov, HeroClass oldHeroClass, HeroClass newHeroClass) {
-		card.heroClass = newHeroClass;
+	private void onSaveButton(ActionEvent event) {
+		save();
+	}
+
+	private void reset(ActionEvent event) {
+		for (int i = 0; i < attributeBoxes.size(); i++) {
+			attributeBoxes.get(i).valueProperty().set(null);
+		}
+		card.attributes = null;
+		cardEditor.reset();
+	}
+
+	private void save() {
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Save card");
+		fileChooser.setInitialDirectory(new File("./cards/"));
+		fileChooser.setInitialFileName(card.id + ".json");
+		File file = fileChooser.showSaveDialog(getScene().getWindow());
+		if (file == null) {
+			return;
+		}
+		System.out.println("Saving to: " + file.getName());
+		GsonBuilder builder = new GsonBuilder().setPrettyPrinting();
+		builder.registerTypeAdapter(SpellDesc.class, new SpellDescSerializer());
+		Gson gson = builder.create();
+		String json = gson.toJson(card);
+		try {
+			FileUtils.writeStringToFile(file, json);
+			Desktop.getDesktop().open(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void setCardEditor(ICardEditor cardEditor) {
@@ -253,59 +283,29 @@ class EditorMainWindow extends BorderPane {
 		collectibleBox.setSelected(card.collectible);
 	}
 
-	private void onSaveButton(ActionEvent event) {
-		save();
-	}
-
-	private void save() {
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Save card");
-		fileChooser.setInitialDirectory(new File("./cards/"));
-		fileChooser.setInitialFileName(card.id + ".json");
-		File file = fileChooser.showSaveDialog(getScene().getWindow());
-		if (file == null) {
-			return;
+	private void setupAttributeBoxes() {
+		for (ComboBox<GameTag> comboBox : attributeBoxes) {
+			ObservableList<GameTag> items = FXCollections.observableArrayList();
+			items.addAll(GameTag.values());
+			Collections.sort(items, (obj1, obj2) -> { 
+				if (obj1 == obj2) {
+			        return 0;
+			    }
+			    if (obj1 == null) {
+			        return -1;
+			    }
+			    if (obj2 == null) {
+			        return 1;
+			    }
+			    return obj1.toString().compareTo(obj2.toString());
+			});
+			comboBox.setItems(items);
+			comboBox.valueProperty().addListener((ov, oldValue, newValue) -> onAttributesChanged());
+			comboBox.setOnKeyReleased(new ComboBoxKeyHandler<GameTag>(comboBox));
 		}
-		System.out.println("Saving to: " + file.getName());
-		GsonBuilder builder = new GsonBuilder().setPrettyPrinting();
-		builder.registerTypeAdapter(SpellDesc.class, new SpellDescSerializer());
-		Gson gson = builder.create();
-		String json = gson.toJson(card);
-		try {
-			FileUtils.writeStringToFile(file, json);
-			Desktop.getDesktop().open(file);
-		} catch (IOException e) {
-			e.printStackTrace();
+		for (TextField attributeField : attributeFields) {
+			attributeField.textProperty().addListener((ov, oldValue, newValue) -> onAttributesChanged());
 		}
-	}
-
-	private static String getCardId(CardDesc card) {
-		String result = "";
-		String prefix = "";
-		switch (card.type) {
-		case HERO_POWER:
-			prefix = "hero_power_";
-			break;
-		case MINION:
-			prefix = card.collectible ? "minion_" : "token_";
-			break;
-		case SPELL:
-		case CHOOSE_ONE:
-			prefix = "spell_";
-			break;
-		case WEAPON:
-			prefix = "weapon_";
-			break;
-		default:
-			break;
-
-		}
-		for (String word : card.name.split(" ")) {
-			String cleansedWord = word.replace("'", "").replace(":", "");
-			result += prefix + cleansedWord.toLowerCase();
-			prefix = "_";
-		}
-		return result;
 	}
 
 }

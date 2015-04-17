@@ -23,27 +23,6 @@ public class ParseUtils {
 	private static FilterDeserializer filterParser = new FilterDeserializer();
 	private static ConditionDeserializer conditionParser = new ConditionDeserializer();
 
-	public static String toCamelCase(String input) {
-		String inputLowerCase = input.toLowerCase();
-		StringBuilder sb = new StringBuilder();
-		final char delim = '_';
-		char value;
-		boolean capitalize = false;
-		for (int i = 0; i < inputLowerCase.length(); ++i) {
-			value = inputLowerCase.charAt(i);
-			if (value == delim) {
-				capitalize = true;
-			} else if (capitalize) {
-				sb.append(Character.toUpperCase(value));
-				capitalize = false;
-			} else {
-				sb.append(value);
-			}
-		}
-
-		return sb.toString();
-	}
-
 	public static Object parse(String argName, JsonObject jsonData, ParseValueType valueType) {
 		JsonElement entry = jsonData.get(argName);
 		switch (valueType) {
@@ -131,18 +110,39 @@ public class ParseUtils {
 		}
 	}
 
-	public static boolean tryParseInt(String value) {
+	public static String toCamelCase(String input) {
+		String inputLowerCase = input.toLowerCase();
+		StringBuilder sb = new StringBuilder();
+		final char delim = '_';
+		char value;
+		boolean capitalize = false;
+		for (int i = 0; i < inputLowerCase.length(); ++i) {
+			value = inputLowerCase.charAt(i);
+			if (value == delim) {
+				capitalize = true;
+			} else if (capitalize) {
+				sb.append(Character.toUpperCase(value));
+				capitalize = false;
+			} else {
+				sb.append(value);
+			}
+		}
+
+		return sb.toString();
+	}
+
+	public static boolean tryParseBool(String value) {
 		try {
-			Integer.parseInt(value);
+			Boolean.parseBoolean(value);
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
 	}
 	
-	public static boolean tryParseBool(String value) {
+	public static boolean tryParseInt(String value) {
 		try {
-			Boolean.parseBoolean(value);
+			Integer.parseInt(value);
 			return true;
 		} catch (Exception e) {
 			return false;

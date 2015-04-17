@@ -25,6 +25,10 @@ public class EitherOrSpell extends Spell {
 		return create(null, either, or, condition);
 	}
 
+	protected ISpellConditionChecker getCondition(SpellDesc desc) {
+		return (ISpellConditionChecker) desc.get(SpellArg.SPELL_CONDITION_CHECKER);
+	}
+	
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		ISpellConditionChecker condition = getCondition(desc);
@@ -36,10 +40,6 @@ public class EitherOrSpell extends Spell {
 		EntityReference sourceReference = source != null ? source.getReference() : null;
 		EntityReference targetReference = spellToCast.hasPredefinedTarget() ? spellToCast.getTarget() : target.getReference();
 		context.getLogic().castSpell(player.getId(), spellToCast, sourceReference, targetReference);
-	}
-	
-	protected ISpellConditionChecker getCondition(SpellDesc desc) {
-		return (ISpellConditionChecker) desc.get(SpellArg.SPELL_CONDITION_CHECKER);
 	}
 
 	

@@ -57,11 +57,11 @@ class MinionCardPanel extends CardEditor {
 		hpField.textProperty().addListener(new IntegerListener(value -> card.baseHp = value));
 	}
 
-	private void onTargetSelectionChanged(ObservableValue<? extends TargetSelection> ov, TargetSelection oldValue, TargetSelection newValue) {
-		if (card.battlecry == null) {
-			card.battlecry = new BattlecryDesc();
-		}
-		card.battlecry.targetSelection = newValue;
+	@Override
+	public CardDesc getCardDesc() {
+		card.type = CardType.MINION;
+		card.name = "";
+		return card;
 	}
 
 	private void onBattlecryChanged(ObservableValue<? extends Class<? extends Spell>> ov, Class<? extends Spell> oldSpell,
@@ -82,11 +82,11 @@ class MinionCardPanel extends CardEditor {
 		card.race = newRace != Race.NONE ? newRace : null;
 	}
 
-	@Override
-	public CardDesc getCardDesc() {
-		card.type = CardType.MINION;
-		card.name = "";
-		return card;
+	private void onTargetSelectionChanged(ObservableValue<? extends TargetSelection> ov, TargetSelection oldValue, TargetSelection newValue) {
+		if (card.battlecry == null) {
+			card.battlecry = new BattlecryDesc();
+		}
+		card.battlecry.targetSelection = newValue;
 	}
 
 	@Override

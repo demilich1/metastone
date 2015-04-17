@@ -29,11 +29,6 @@ public abstract class CardEditor extends VBox implements ICardEditor {
 		}
 	}
 	
-	@Override
-	public Node getPanel() {
-		return this;
-	}
-
 	@SuppressWarnings("unchecked")
 	protected void fillWithSpells(ComboBox<Class<? extends Spell>> comboBox) {
 		ObservableList<Class<? extends Spell>> items = FXCollections.observableArrayList();
@@ -53,6 +48,11 @@ public abstract class CardEditor extends VBox implements ICardEditor {
 		comboBox.setItems(items);
 		comboBox.setOnKeyReleased(new ComboBoxKeyHandler<Class<? extends Spell>>(comboBox));
 	
+	}
+
+	@Override
+	public Node getPanel() {
+		return this;
 	}
 
 }
