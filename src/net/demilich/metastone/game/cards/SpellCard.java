@@ -8,6 +8,7 @@ import net.demilich.metastone.game.cards.desc.SpellCardDesc;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class SpellCard extends Card {
@@ -45,7 +46,11 @@ public class SpellCard extends Card {
 	}
 
 	public boolean canBeCastOn(Entity target) {
-		return true;
+		EntityFilter filter = spell.getEntityFilter();
+		if (filter == null) {
+			return true;
+		}
+		return filter.matches(target);
 	}
 
 	@Override

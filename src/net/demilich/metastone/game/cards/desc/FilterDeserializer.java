@@ -35,6 +35,7 @@ public class FilterDeserializer implements JsonDeserializer<FilterDesc> {
 		parseArgument(FilterArg.ATTRIBUTE, jsonData, arguments, ParseValueType.ATTRIBUTE);
 		parseArgument(FilterArg.RACE, jsonData, arguments, ParseValueType.RACE);
 		parseArgument(FilterArg.OPERATION, jsonData, arguments, ParseValueType.OPERATION);
+		parseArgument(FilterArg.DAMAGED, jsonData, arguments, ParseValueType.BOOLEAN);
 
 		return new FilterDesc(arguments);
 	}
