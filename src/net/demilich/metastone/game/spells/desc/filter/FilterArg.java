@@ -5,5 +5,6 @@ public enum FilterArg {
 	VALUE,
 	RACE,
 	OPERATION,
-	ATTRIBUTE
+	ATTRIBUTE,
+	DAMAGED
 }

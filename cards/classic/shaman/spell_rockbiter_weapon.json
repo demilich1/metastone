@@ -1,0 +1,16 @@
+{
+  "targetSelection": "FRIENDLY_CHARACTERS",
+  "spell": {
+    "class": "TemporaryAttackSpell",
+	"value" : 3
+  },
+  "id": "spell_rockbiter_weapon",
+  "name": "Rockbiter Weapon",
+  "description": "Give a friendly character +3 Attack this turn.",
+  "type": "SPELL",
+  "heroClass": "SHAMAN",
+  "rarity": "FREE",
+  "baseManaCost": 1,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

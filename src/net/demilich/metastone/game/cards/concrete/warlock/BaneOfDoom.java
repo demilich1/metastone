@@ -18,12 +18,13 @@ public class BaneOfDoom extends SpellCard {
 		
 		SpellDesc damage = DamageSpell.create(2);
 		SpellDesc summonRandomDemon = SummonRandomSpell.create(
-					new BloodImp(),
+					new BloodImp()
 					//new Voidwalker(),
-					new FlameImp(),
-					new Succubus(),
-					new Felguard(),
-					new DreadInfernal());
+					//new FlameImp(),
+					//new Succubus()
+					//new Felguard(),
+					//new DreadInfernal()
+					);
 		
 		SpellDesc baneOfDoom = ConditionalEffectSpell.create(damage, summonRandomDemon,(context, player, entity) -> {
 			Actor target = (Actor) entity;
