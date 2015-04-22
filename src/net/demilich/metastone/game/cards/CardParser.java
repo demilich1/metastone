@@ -10,10 +10,12 @@ import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.cards.desc.AttributeDeserializer;
 import net.demilich.metastone.game.cards.desc.CardDesc;
 import net.demilich.metastone.game.cards.desc.ChooseOneCardDesc;
+import net.demilich.metastone.game.cards.desc.ConditionDeserializer;
 import net.demilich.metastone.game.cards.desc.MinionCardDesc;
 import net.demilich.metastone.game.cards.desc.SpellCardDesc;
 import net.demilich.metastone.game.cards.desc.SpellDescDeserializer;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.condition.ConditionDesc;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +37,7 @@ public class CardParser {
 		Type mapType = new TypeToken<Map<GameTag, Object>>() {
 		}.getType();
 		gsonBuilder.registerTypeAdapter(mapType, new AttributeDeserializer());
+		gsonBuilder.registerTypeAdapter(ConditionDesc.class, new ConditionDeserializer());
 		gson = gsonBuilder.create();
 	}
 

@@ -1,0 +1,23 @@
+{
+  "targetSelection": "NONE",
+  "spell": {
+    "class": "MultiTargetDamageSpell",
+	"value" : 3,
+	"howMany" : 2
+  },
+  "condition" : {
+	"class" : "MinionCountCondition",
+	"targetPlayer" : "OPPONENT",
+	"value" : 1,
+	"operation" : "GREATER"
+  },
+  "id": "spell_multi-shot",
+  "name": "Multi-Shot",
+  "description": "Deal 3 damage to two random enemy minions.",
+  "type": "SPELL",
+  "heroClass": "HUNTER",
+  "rarity": "FREE",
+  "baseManaCost": 4,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

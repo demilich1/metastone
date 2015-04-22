@@ -165,7 +165,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.FreezingTrap());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.GladiatorsLongbow());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.Misdirection());
-		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.MultiShot());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.ScavengingHyena());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.SnakeTrap());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.Snipe());
@@ -360,20 +359,13 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.ArathiWeaponsmith());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.ArcaniteReaper());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.Armorsmith());
-		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.BattleRage());
-		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.Brawl());
-		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.Cleave());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.CommandingShout());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.CruelTaskmaster());
-		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.Execute());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.FieryWarAxe());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.FrothingBerserker());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.Gorehowl());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.GrommashHellscream());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.MortalStrike());
-		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.Rampage());
-		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.ShieldBlock());
-		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.Slam());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.Upgrade());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.WarsongCommander());
 	}

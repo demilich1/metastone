@@ -8,6 +8,7 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.ISpellConditionChecker;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.condition.Condition;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class EitherOrSpell extends Spell {
@@ -25,21 +26,14 @@ public class EitherOrSpell extends Spell {
 		return create(null, either, or, condition);
 	}
 
-	protected ISpellConditionChecker getCondition(SpellDesc desc) {
-		return (ISpellConditionChecker) desc.get(SpellArg.SPELL_CONDITION_CHECKER);
-	}
-	
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		ISpellConditionChecker condition = getCondition(desc);
+		Condition condition = (Condition) desc.get(SpellArg.CONDITION);
 		SpellDesc either = (SpellDesc) desc.get(SpellArg.SPELL_1);
 		SpellDesc or = (SpellDesc) desc.get(SpellArg.SPELL_2);
 		
 		SpellDesc spellToCast = condition.isFulfilled(context, player, target) ? either : or;
-
-		EntityReference sourceReference = source != null ? source.getReference() : null;
-		EntityReference targetReference = spellToCast.hasPredefinedTarget() ? spellToCast.getTarget() : target.getReference();
-		context.getLogic().castSpell(player.getId(), spellToCast, sourceReference, targetReference);
+		SpellUtils.castChildSpell(context, player, spellToCast, source, target);
 	}
 
 	

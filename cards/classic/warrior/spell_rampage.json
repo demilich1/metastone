@@ -1,0 +1,21 @@
+{
+  "targetSelection": "MINIONS",
+  "spell": {
+    "class": "BuffSpell",
+	"attackBonus" : 3,
+	"hpBonus" : 3,
+	"filter" : {
+		"class" : "DamagedFilter",
+		"damaged" : true
+	}
+  },
+  "id": "spell_rampage",
+  "name": "Rampage",
+  "description": "Give a damaged minion +3/+3.",
+  "type": "SPELL",
+  "heroClass": "WARRIOR",
+  "rarity": "COMMON",
+  "baseManaCost": 2,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

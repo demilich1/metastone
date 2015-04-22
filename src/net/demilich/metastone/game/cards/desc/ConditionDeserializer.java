@@ -32,6 +32,10 @@ public class ConditionDeserializer implements JsonDeserializer<ConditionDesc> {
 		}
 		Map<ConditionArg, Object> arguments = ConditionDesc.build(conditionClass);
 		parseArgument(ConditionArg.RACE, jsonData, arguments, ParseValueType.RACE);
+		parseArgument(ConditionArg.VALUE, jsonData, arguments, ParseValueType.INTEGER);
+		parseArgument(ConditionArg.TARGET_PLAYER, jsonData, arguments, ParseValueType.TARGET_PLAYER);
+		parseArgument(ConditionArg.OPERATION, jsonData, arguments, ParseValueType.OPERATION);
+		parseArgument(ConditionArg.SATISFIED, jsonData, arguments, ParseValueType.BOOLEAN);
 
 		return new ConditionDesc(arguments);
 	}

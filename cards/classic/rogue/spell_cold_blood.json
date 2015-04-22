@@ -8,7 +8,7 @@
 	"baseManaCost" : 1,
 	"targetSelection" : "MINIONS",
 	"spell" : {
-		"class" : "ComboExclusiveSpell",
+		"class" : "ComboSpell",
 		"spell1" : {
 			"class" : "BuffSpell",
 			"attackBonus" : 2
@@ -16,7 +16,8 @@
 		"spell2" : {
 			"class" : "BuffSpell",
 			"attackBonus" : 4
-		}
+		},
+		"exclusive" : true
 	},
 	"fileFormatVersion" : 1
 }

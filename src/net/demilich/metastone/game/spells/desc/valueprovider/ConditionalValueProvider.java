@@ -17,7 +17,7 @@ public class ConditionalValueProvider extends ValueProvider {
 		int ifFalse = desc.getInt(ValueProviderArg.IF_FALSE);
 
 		Condition condition = (Condition) desc.get(ValueProviderArg.CONDITION);
-		return condition.isFulfilled(context, player) ? ifTrue : ifFalse;
+		return condition.isFulfilled(context, player, null) ? ifTrue : ifFalse;
 	}
 
 }

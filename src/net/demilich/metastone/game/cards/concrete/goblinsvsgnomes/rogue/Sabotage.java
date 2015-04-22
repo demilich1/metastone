@@ -3,7 +3,7 @@ package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.rogue;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
-import net.demilich.metastone.game.spells.ComboExclusiveSpell;
+import net.demilich.metastone.game.spells.ComboSpell;
 import net.demilich.metastone.game.spells.DestroySpell;
 import net.demilich.metastone.game.spells.DestroyWeaponSpell;
 import net.demilich.metastone.game.spells.MetaSpell;
@@ -22,7 +22,7 @@ public class Sabotage extends SpellCard {
 		SpellDesc destroyWeaponSpell = DestroyWeaponSpell.create(EntityReference.ENEMY_HERO); 
 		
 		SpellDesc comboSpell = MetaSpell.create(EntityReference.NONE, destroyMinionSpell, destroyWeaponSpell);
-		setSpell(ComboExclusiveSpell.create(destroyMinionSpell, comboSpell));
+		setSpell(ComboSpell.create(destroyMinionSpell, comboSpell, true));
 		setTargetRequirement(TargetSelection.NONE);
 	}
 

@@ -3,6 +3,7 @@ package net.demilich.metastone.game.spells.desc.filter;
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.spells.SpellUtils;
 
 public class AttributeFilter extends EntityFilter {
 
@@ -26,18 +27,7 @@ public class AttributeFilter extends EntityFilter {
 			actualValue = entity.getTagValue(attribute);
 		}
 		
-		switch (operation) {
-		case EQUAL:
-			return actualValue == targetValue;
-		case GREATER:
-			return actualValue > targetValue;
-		case LESS:
-			return actualValue < targetValue;
-		default:
-			break;
-		
-		}
-		return false;
+		return SpellUtils.evaluateOperation(operation, actualValue, targetValue);
 	}
 
 }

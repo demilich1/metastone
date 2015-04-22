@@ -5,10 +5,10 @@
 	"type" : "SPELL",
 	"rarity" : "RARE",
 	"heroClass" : "ROGUE",
-	"baseManaCost" : 2,
+	"baseManaCost" : 3,
 	"targetSelection" : "NONE",
 	"spell" : {
-		"class" : "ComboInclusiveSpell",
+		"class" : "ComboSpell",
 		"spell1" : {
 			"class" : "DamageSpell",
 			"value" : 2,
