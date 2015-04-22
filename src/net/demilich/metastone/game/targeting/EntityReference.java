@@ -17,8 +17,10 @@ public class EntityReference {
 	public static final EntityReference ALL_OTHER_CHARACTERS = new EntityReference(-12);
 	public static final EntityReference FRIENDLY_WEAPON = new EntityReference(-13);
 	public static final EntityReference ENEMY_WEAPON = new EntityReference(-14);
-	public static final EntityReference EVENT_TARGET = new EntityReference(-20);
 	
+	public static final EntityReference TARGET = new EntityReference(-17);
+	
+	public static final EntityReference EVENT_TARGET = new EntityReference(-20);
 	public static final EntityReference SELF = new EntityReference(-21);
 	public static final EntityReference KILLED_MINION = new EntityReference(-22);
 	public static final EntityReference ATTACKER = new EntityReference(-23);

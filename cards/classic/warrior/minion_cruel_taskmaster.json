@@ -1,0 +1,31 @@
+{
+  "baseAttack": 2,
+  "baseHp": 2,
+  "battlecry": {
+    "spell": {
+      "class": "MetaSpell",
+	  "spell1" : {
+		"class" : "BuffSpell",
+		"attackBonus" : 2
+	  },
+	  "spell2" : {
+		"class" : "DamageSpell",
+		"value" : 1
+	  }
+    },
+    "targetSelection": "MINIONS",
+    "resolvedLate": false
+  },
+  "id": "minion_cruel_taskmaster",
+  "name": "Cruel Taskmaster",
+  "description": "Battlecry: Deal 1 damage to a minion and give it +2 Attack.",
+  "type": "MINION",
+  "heroClass": "WARRIOR",
+  "rarity": "COMMON",
+  "baseManaCost": 2,
+  "collectible": true,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "fileFormatVersion": 1
+}

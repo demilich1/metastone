@@ -350,22 +350,17 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.Corruption());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.Demonfire());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.LordJaraxxus());
-		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.MortalCoil());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.PowerOverwhelming());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.SenseDemons());
-		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.Shadowflame());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.SummoningPortal());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.VoidTerror());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.ArathiWeaponsmith());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.ArcaniteReaper());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.Armorsmith());
-		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.CommandingShout());
-		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.CruelTaskmaster());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.FieryWarAxe());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.FrothingBerserker());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.Gorehowl());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.GrommashHellscream());
-		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.MortalStrike());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.Upgrade());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.WarsongCommander());
 	}
