@@ -8,6 +8,7 @@ import net.demilich.metastone.game.cards.desc.SpellCardDesc;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.condition.Condition;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
@@ -15,11 +16,15 @@ public class SpellCard extends Card {
 
 	private SpellDesc spell;
 	private TargetSelection targetRequirement;
+	private Condition condition;
 
 	public SpellCard(SpellCardDesc desc) {
 		super(desc);
 		setTargetRequirement(desc.targetSelection);
 		setSpell(desc.spell);
+		if (desc.condition != null) {
+			condition = desc.condition.create();
+		}
 	}
 
 	protected SpellCard(String name, CardType cardType, Rarity rarity, HeroClass classRestriction, int manaCost) {
@@ -42,6 +47,9 @@ public class SpellCard extends Card {
 		default:
 			break;
 		}
+		if (condition != null) {
+			return condition.isFulfilled(context, player, null);
+		}
 		return true;
 	}
 
@@ -57,6 +65,7 @@ public class SpellCard extends Card {
 	public SpellCard clone() {
 		SpellCard clone = (SpellCard) super.clone();
 		clone.spell = spell.clone();
+		clone.condition = condition;
 		return clone;
 	}
 

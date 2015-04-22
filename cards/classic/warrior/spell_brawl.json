@@ -1,0 +1,15 @@
+{
+  "targetSelection": "NONE",
+  "spell": {
+    "class": "custom.BrawlSpell"
+  },
+  "id": "spell_brawl",
+  "name": "Brawl",
+  "description": "Destroy all minions except one.  (chosen randomly)",
+  "type": "SPELL",
+  "heroClass": "WARRIOR",
+  "rarity": "EPIC",
+  "baseManaCost": 5,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

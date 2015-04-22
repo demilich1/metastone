@@ -59,13 +59,8 @@ public class MetaSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		EntityReference sourceReference = source != null ? source.getReference() : null;
 		for (SpellDesc spell : getSpells(desc)) {
-			EntityReference targetReference = spell.getTarget();
-			if (targetReference == null && target != null) {
-				targetReference = target.getReference();
-			}
-			context.getLogic().castSpell(player.getId(), spell, sourceReference, targetReference);
+			SpellUtils.castChildSpell(context, player, spell, source, target);
 		}
 	}
 

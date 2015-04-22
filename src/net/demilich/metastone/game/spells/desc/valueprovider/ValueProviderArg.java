@@ -9,6 +9,7 @@ public enum ValueProviderArg {
 	TARGET_PLAYER,
 	IF_TRUE,
 	IF_FALSE,
-	CONDITION
+	CONDITION,
+	FILTER
 
 }

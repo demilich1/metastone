@@ -2,6 +2,7 @@ package net.demilich.metastone.game.spells.desc.condition;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.entities.Entity;
 
 public abstract class Condition {
 	
@@ -11,10 +12,10 @@ public abstract class Condition {
 		this.desc = desc;
 	}
 	
-	public boolean isFulfilled(GameContext context, Player player) {
-		return isFulfilled(context, player, desc);
+	public boolean isFulfilled(GameContext context, Player player, Entity target) {
+		return isFulfilled(context, player, desc, target);
 	}
 	
-	protected abstract boolean isFulfilled(GameContext context, Player player, ConditionDesc desc);
+	protected abstract boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity target);
 
 }

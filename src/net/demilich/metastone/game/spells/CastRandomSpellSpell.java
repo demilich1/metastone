@@ -36,8 +36,7 @@ public class CastRandomSpellSpell extends Spell {
 		default:
 			break;
 		}
-		EntityReference sourceReference = source != null ? source.getReference() : null;
-		context.getLogic().castSpell(player.getId(), spell, sourceReference, target.getReference());
+		SpellUtils.castChildSpell(context, player, spell, source, target);
 	}
 
 }
