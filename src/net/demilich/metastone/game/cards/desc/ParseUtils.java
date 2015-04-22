@@ -103,6 +103,8 @@ public class ParseUtils {
 			return EntityReference.ALL_OTHER_CHARACTERS;
 		case "event_target":
 			return EntityReference.EVENT_TARGET;
+		case "target":
+			return EntityReference.TARGET;
 		case "self":
 			return EntityReference.SELF;
 		default:

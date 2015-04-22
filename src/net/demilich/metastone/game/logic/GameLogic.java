@@ -897,7 +897,14 @@ public class GameLogic implements Cloneable {
 		if (playerId != context.getActivePlayerId()) {
 			logger.warn("Player {} tries to perform an action, but it is not his turn!", context.getPlayer(playerId).getName());
 		}
+		if (action.getTargetRequirement() != TargetSelection.NONE) {
+			Entity target = context.resolveSingleTarget(action.getTargetKey());
+			System.out.println("Target set to " + target);
+			context.getEnvironment().put(Environment.TARGET, target);
+		}
 		action.execute(context, playerId);
+		System.out.println("Target set to NULL");
+		context.getEnvironment().remove(Environment.TARGET);
 		checkForDeadEntities();
 	}
 
