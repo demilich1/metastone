@@ -14,34 +14,42 @@ import net.demilich.metastone.game.targeting.EntityReference;
 
 public class ShuffleMinionToDeckSpell extends Spell {
 
-	public static SpellDesc create() {
-		return create(null);
+	public static SpellDesc create(MinionCard card) {
+		return create(EntityReference.NONE, card, 1);
 	}
 
-	public static SpellDesc create(MinionCard card) {
+	public static SpellDesc create(EntityReference target, MinionCard card, int amount) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(ShuffleMinionToDeckSpell.class);
 		arguments.put(SpellArg.CARD, card);
-		arguments.put(SpellArg.TARGET, EntityReference.NONE);
+		if (target != null) {
+			arguments.put(SpellArg.TARGET, target);	
+		}
+		arguments.put(SpellArg.VALUE, amount);
+		
 		return new SpellDesc(arguments);
 	}
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		MinionCard targetCard = (MinionCard) desc.get(SpellArg.CARD);
+
 		if (targetCard == null) {
 			Minion minion = (Minion) target;
 			targetCard = (MinionCard) minion.getSourceCard();
 		}
-		
-		targetCard = (MinionCard) targetCard.clone();
 
-		Card randomCard = player.getDeck().getRandom();
-		if (randomCard == null) {
-			player.getDeck().add(targetCard);
-		} else {
-			player.getDeck().addAfter(targetCard, randomCard);
+		int amount = desc.getValue();
+		for (int i = 0; i < amount; i++) {
+			targetCard = (MinionCard) targetCard.clone();
+
+			Card randomCard = player.getDeck().getRandom();
+			if (randomCard == null) {
+				player.getDeck().add(targetCard);
+			} else {
+				player.getDeck().addAfter(targetCard, randomCard);
+			}
+
 		}
-
 	}
 
 }

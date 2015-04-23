@@ -257,6 +257,9 @@ public class GameLogic implements Cloneable {
 
 	public void changeHero(Player player, Hero hero) {
 		hero.setId(player.getHero().getId());
+		if (hero.getHeroClass() == null) {
+			hero.setHeroClass(player.getHero().getHeroClass());
+		}
 
 		Map<GameTag, Object> tagsToCopy = player.getHero().getTagsCopy();
 		for (Map.Entry<GameTag, Object> entry : tagsToCopy.entrySet()) {

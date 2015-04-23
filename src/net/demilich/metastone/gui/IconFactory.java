@@ -115,6 +115,7 @@ public class IconFactory {
 			iconPath += "armor_up";
 			break;
 		default:
+			iconPath += "unknown";
 			break;
 
 		}

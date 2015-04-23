@@ -20,8 +20,6 @@ public class GrimPatron extends MinionCard {
 		return 619;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion grimPatron = createMinion();

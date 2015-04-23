@@ -6,6 +6,7 @@ import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.DrawCardSpell;
 
 public class AzureDrake extends MinionCard {
@@ -14,6 +15,7 @@ public class AzureDrake extends MinionCard {
 		super("Azure Drake", 4, 4, Rarity.RARE, HeroClass.ANY, 5);
 		setDescription("Spell Damage +1. Battlecry: Draw a card.");
 		setTag(GameTag.BATTLECRY);
+		setRace(Race.DRAGON);
 	}
 
 	@Override

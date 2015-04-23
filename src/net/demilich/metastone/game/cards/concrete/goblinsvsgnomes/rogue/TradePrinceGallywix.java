@@ -9,7 +9,7 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.SpellCastedEvent;
-import net.demilich.metastone.game.spells.CopySpellCardSpell;
+import net.demilich.metastone.game.spells.CopyPlayedCardSpell;
 import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.SpellCastedTrigger;
@@ -30,7 +30,7 @@ public class TradePrinceGallywix extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion tradePriceGallywix = createMinion();
-		SpellDesc copySpell = CopySpellCardSpell.create();
+		SpellDesc copySpell = CopyPlayedCardSpell.create();
 		SpellTrigger trigger = new SpellTrigger(new GallywixTrigger(), copySpell);
 		tradePriceGallywix.setSpellTrigger(trigger);
 		return tradePriceGallywix;

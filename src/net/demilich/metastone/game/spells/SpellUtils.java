@@ -98,6 +98,24 @@ public class SpellUtils {
 		return false;
 	}
 
+	public static int howManyMinionsDiedThisTurn(GameContext context) {
+		int currentTurn = context.getTurn();
+		int count = 0;
+		for (Player player : context.getPlayers()) {
+			for (Entity deadEntity : player.getGraveyard()) {
+				if (deadEntity.getEntityType() != EntityType.MINION) {
+					continue;
+				}
+
+				if (deadEntity.getTagValue(GameTag.DIED_ON_TURN) == currentTurn) {
+					count++;
+				}
+
+			}
+		}
+		return count;
+	}
+
 	private SpellUtils() {
 	}
 

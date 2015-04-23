@@ -25,8 +25,6 @@ public class BlackwingTechnician extends MinionCard {
 		return 615;
 	}
 
-
-
 	@Override
 	public Minion summon() {
 		Minion blackwingTechnician = createMinion();

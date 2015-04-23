@@ -11,14 +11,14 @@ import net.demilich.metastone.game.heroes.powers.HeroPower;
 
 public abstract class Hero extends Actor {
 
-	private final HeroClass heroClass;
+	private HeroClass heroClass;
 	private HeroPower heroPower;
 	private Weapon weapon;
 
 	public Hero(String name, HeroClass heroClass, HeroPower heroPower) {
 		super(null);
 		setName(name);
-		this.heroClass = heroClass;
+		this.setHeroClass(heroClass);
 		this.setHeroPower(heroPower);
 	}
 
@@ -105,6 +105,10 @@ public abstract class Hero extends Actor {
 		if (weapon != null) {
 			weapon.setOwner(getOwner());
 		}
+	}
+
+	public void setHeroClass(HeroClass heroClass) {
+		this.heroClass = heroClass;
 	}
 
 }

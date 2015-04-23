@@ -4,7 +4,7 @@ import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.spells.CopySpellCardSpell;
+import net.demilich.metastone.game.spells.CopyPlayedCardSpell;
 import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.SpellCastedTrigger;
@@ -25,7 +25,7 @@ public class LorewalkerCho extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion lorewalkerCho = createMinion();
-		SpellDesc copySpell = CopySpellCardSpell.create();
+		SpellDesc copySpell = CopyPlayedCardSpell.create();
 		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(TargetPlayer.BOTH), copySpell);
 		lorewalkerCho.setSpellTrigger(trigger);
 		return lorewalkerCho;

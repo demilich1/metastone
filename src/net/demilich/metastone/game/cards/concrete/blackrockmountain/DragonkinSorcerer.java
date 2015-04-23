@@ -25,7 +25,6 @@ public class DragonkinSorcerer extends MinionCard {
 	}
 
 
-
 	@Override
 	public Minion summon() {
 		Minion dragonkinSorcerer = createMinion();
