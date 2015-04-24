@@ -7,7 +7,13 @@ import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.utils.IDisposable;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class TriggerManager implements Cloneable, IDisposable {
+	
+	public static Logger logger = LoggerFactory.getLogger(TriggerManager.class);
+	
 	private final List<IGameEventListener> triggers = new ArrayList<IGameEventListener>();;
 
 	public TriggerManager() {
@@ -22,7 +28,7 @@ public class TriggerManager implements Cloneable, IDisposable {
 	public void addTrigger(IGameEventListener trigger) {
 		triggers.add(trigger);
 		if (triggers.size() > 100) {
-			System.out.println("Warning, many triggers: " + triggers.size() + " adding one of type: " + trigger);
+			logger.warn("Warning, many triggers: " + triggers.size() + " adding one of type: " + trigger);
 		}
 	}
 	
