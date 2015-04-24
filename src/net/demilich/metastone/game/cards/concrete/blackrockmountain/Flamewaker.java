@@ -4,7 +4,7 @@ import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.spells.DamageRandomSpell;
+import net.demilich.metastone.game.spells.MissilesSpell;
 import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.AfterSpellCastedTrigger;
@@ -21,13 +21,11 @@ public class Flamewaker extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion flamewaker = createMinion();
-		SpellDesc spell = DamageRandomSpell.create(EntityReference.ENEMY_CHARACTERS, 1, 2);
+		SpellDesc spell = MissilesSpell.create(EntityReference.ENEMY_CHARACTERS, 1, 2);
 		SpellTrigger trigger = new SpellTrigger(new AfterSpellCastedTrigger(TargetPlayer.SELF), spell);
 		flamewaker.setSpellTrigger(trigger);
 		return flamewaker;
 	}
-
-
 
 	@Override
 	public int getTypeId() {

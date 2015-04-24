@@ -12,12 +12,10 @@ public class Revenge extends SpellCard {
 	public Revenge() {
 		super("Revenge", Rarity.RARE, HeroClass.WARRIOR, 2);
 		setDescription("Deal 1 damage to all minions. If you have 12 or less Health, deal 3 damage instead.");
-		
-		setSpell(DamageSpell.create(EntityReference.ALL_MINIONS, (context, player, target) -> player.getHero().getHp() > 12 ? 1 :3));
+		// (context, player, target) -> player.getHero().getHp() > 12 ? 1 :3
+		setSpell(DamageSpell.create(EntityReference.ALL_MINIONS, null) );
 		setTargetRequirement(TargetSelection.NONE);
 	}
-
-
 
 	@Override
 	public int getTypeId() {

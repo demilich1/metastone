@@ -7,7 +7,6 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.BuffSpell;
-import net.demilich.metastone.game.spells.IValueProvider;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
@@ -23,8 +22,8 @@ public class FireguardDestroyer extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion fireguardDestroyer = createMinion();
-		IValueProvider valueProvider = (context, player, target) -> 1 + context.getLogic().random(4);
-		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, valueProvider, null);
+		//IValueProvider valueProvider = (context, player, target) -> 1 + context.getLogic().random(4);
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, null, null);
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(buffSpell);
 		fireguardDestroyer.setBattlecry(battlecry);
 		return fireguardDestroyer;
