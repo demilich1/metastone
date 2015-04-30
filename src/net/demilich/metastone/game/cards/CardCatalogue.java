@@ -159,7 +159,7 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.priest.Voljin());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.rogue.CogmastersWrench());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.rogue.GoblinAutoBarber());
-		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.rogue.IronSensai());
+		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.rogue.IronSensei());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.rogue.OgreNinja());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.rogue.OneEyedCheat());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.rogue.Sabotage());

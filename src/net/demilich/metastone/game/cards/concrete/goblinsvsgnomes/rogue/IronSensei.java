@@ -15,10 +15,10 @@ import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 import net.demilich.metastone.game.spells.trigger.TurnEndTrigger;
 import net.demilich.metastone.game.targeting.EntityReference;
 
-public class IronSensai extends MinionCard {
+public class IronSensei extends MinionCard {
 
-	public IronSensai() {
-		super("Iron Sensai", 2, 2, Rarity.RARE, HeroClass.ROGUE, 3);
+	public IronSensei() {
+		super("Iron Sensei", 2, 2, Rarity.RARE, HeroClass.ROGUE, 3);
 		setDescription("At the end of your turn, give another friendly Mech +2/+2.");
 		setRace(Race.MECH);
 	}

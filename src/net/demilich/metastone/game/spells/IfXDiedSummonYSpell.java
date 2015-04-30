@@ -29,7 +29,15 @@ public class IfXDiedSummonYSpell extends Spell {
 		for (Entity deadEntity : player.getGraveyard()) {
 			if (deadEntity.getTag(GameTag.UNIQUE_ENTITY) == x) {
 				context.getLogic().summon(player.getId(), y.summon());
-				break;
+				return;
+			}
+		}
+		
+		Player opponent = context.getOpponent(player);
+		for (Entity deadEntity : opponent.getGraveyard()) {
+			if (deadEntity.getTag(GameTag.UNIQUE_ENTITY) == x) {
+				context.getLogic().summon(player.getId(), y.summon());
+				return;
 			}
 		}
 	}

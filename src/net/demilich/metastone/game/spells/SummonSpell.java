@@ -30,6 +30,7 @@ public class SummonSpell extends Spell {
 		Map<SpellArg, Object> arguments = SpellDesc.build(SummonSpell.class);
 		arguments.put(SpellArg.CARD, minionCards);
 		arguments.put(SpellArg.TARGET, EntityReference.NONE);
+		arguments.put(SpellArg.TARGET_PLAYER, targetPlayer);
 		if (relativeBoardPosition != null) {
 			arguments.put(SpellArg.BOARD_POSITION_RELATIVE, relativeBoardPosition);
 		}
