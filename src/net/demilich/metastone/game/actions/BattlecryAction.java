@@ -33,10 +33,10 @@ public class BattlecryAction extends GameAction {
 	}
 
 	public boolean canBeExecuted(GameContext context, Player player) {
-		if (condition == null) {
+		if (getCondition() == null) {
 			return true;
 		}
-		return condition.isFulfilled(context, player, null);
+		return getCondition().isFulfilled(context, player, null);
 	}
 
 	@Override
@@ -96,6 +96,14 @@ public class BattlecryAction extends GameAction {
 
 	public void setResolvedLate(boolean resolvedLate) {
 		this.resolvedLate = resolvedLate;
+	}
+	
+	private Condition getCondition() {
+		return condition;
+	}
+	
+	public void setCondition(Condition condition) {
+		this.condition = condition;
 	}
 
 	@Override

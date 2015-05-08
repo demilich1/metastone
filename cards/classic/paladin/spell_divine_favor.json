@@ -1,0 +1,18 @@
+{
+  "targetSelection": "NONE",
+  "spell": {
+    "class": "DrawCardSpell",
+	"valueProvider" : {
+		"class" : "CardDifferenceCounter"
+	}
+  },
+  "id": "spell_divine_favor",
+  "name": "Divine Favor",
+  "description": "Draw cards until you have as many in hand as your opponent.",
+  "type": "SPELL",
+  "heroClass": "PALADIN",
+  "rarity": "RARE",
+  "baseManaCost": 3,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

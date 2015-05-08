@@ -1,0 +1,23 @@
+{
+  "baseAttack": 1,
+  "baseHp": 3,
+   "trigger": {
+   "eventTrigger" : {
+		"class" : "HealingTrigger",
+		"entityType" : "MINION"
+	},
+	"spell" : {
+		"class": "DrawCardSpell",
+		"value" : 1
+	}
+  },
+  "id": "minion_northshire_cleric",
+  "name": "Northshire Cleric",
+  "description": "Whenever a minion is healed, draw a card.",
+  "type": "MINION",
+  "heroClass": "PRIEST",
+  "rarity": "FREE",
+  "baseManaCost": 1,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

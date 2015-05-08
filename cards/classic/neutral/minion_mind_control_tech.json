@@ -5,15 +5,15 @@
     "spell": {
       "class": "MindControlSpell",
 	  "target" : "ENEMY_MINIONS",
-	  "randomTarget" : true,
-	  "condition" : {
+	  "randomTarget" : true
+    },
+    "resolvedLate": false,
+	 "condition" : {
 	  "class" : "MinionCountCondition",
 	  "targetPlayer" : "OPPONENT",
 	  "value" : 3,
 	  "operation" : "GREATER"
      }
-    },
-    "resolvedLate": false
   },
   "id": "minion_mind_control_tech",
   "name": "Mind Control Tech",
