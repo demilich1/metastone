@@ -5,18 +5,18 @@ import net.demilich.metastone.game.events.AfterSpellCastedEvent;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.spells.TargetPlayer;
+import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
 public class AfterSpellCastedTrigger extends GameEventTrigger {
 
-	private final TargetPlayer targetPlayer;
-
-	public AfterSpellCastedTrigger(TargetPlayer targetPlayer) {
-		this.targetPlayer = targetPlayer;
+	public AfterSpellCastedTrigger(EventTriggerDesc desc) {
+		super(desc);
 	}
 
 	@Override
-	public boolean fire(GameEvent event, Entity host) {
+	protected boolean fire(GameEvent event, Entity host) {
 		AfterSpellCastedEvent spellCastedEvent = (AfterSpellCastedEvent) event;
+		TargetPlayer targetPlayer = desc.getTargetPlayer();
 		switch (targetPlayer) {
 		case BOTH:
 			return true;

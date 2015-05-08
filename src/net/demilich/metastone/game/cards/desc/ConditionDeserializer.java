@@ -28,7 +28,7 @@ public class ConditionDeserializer implements JsonDeserializer<ConditionDesc> {
 			conditionClass = (Class<? extends Condition>) Class.forName(conditionClassName);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			throw new JsonParseException("ValueProvider parser encountered an invalid class: " + conditionClassName);
+			throw new JsonParseException("Condition parser encountered an invalid class: " + conditionClassName);
 		}
 		Map<ConditionArg, Object> arguments = ConditionDesc.build(conditionClass);
 		parseArgument(ConditionArg.RACE, jsonData, arguments, ParseValueType.RACE);

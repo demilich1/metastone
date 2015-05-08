@@ -24,7 +24,7 @@ public class TwilightWhelp extends MinionCard {
 	public Minion summon() {
 		Minion twilightWhelp = createMinion();
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(BuffSpell.create(EntityReference.SELF, 0, 2));
-		battlecry.setCondition((context, player) -> SpellUtils.holdsMinionOfRace(player, Race.DRAGON));
+		//battlecry.setCondition((context, player) -> SpellUtils.holdsMinionOfRace(player, Race.DRAGON));
 		twilightWhelp.setBattlecry(battlecry);
 		return twilightWhelp;
 	}

@@ -24,7 +24,8 @@ public class KelThuzad extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion kelThuzad = createMinion();
-		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(TargetPlayer.BOTH), KelThuzadSpell.create());
+		//SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(TargetPlayer.BOTH), KelThuzadSpell.create());
+		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(null), KelThuzadSpell.create());
 		kelThuzad.setSpellTrigger(trigger);
 		return kelThuzad;
 	}

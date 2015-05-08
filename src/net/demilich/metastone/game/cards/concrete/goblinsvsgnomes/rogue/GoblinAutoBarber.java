@@ -31,7 +31,7 @@ public class GoblinAutoBarber extends MinionCard {
 		Minion goblinAutoBarber = createMinion();
 		SpellDesc buffWeaponSpell = BuffWeaponSpell.create(+1);
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(buffWeaponSpell);
-		battlecry.setCondition((context, player) -> player.getHero().getWeapon() != null);
+		//battlecry.setCondition((context, player) -> player.getHero().getWeapon() != null);
 		goblinAutoBarber.setBattlecry(battlecry);
 		return goblinAutoBarber;
 	}

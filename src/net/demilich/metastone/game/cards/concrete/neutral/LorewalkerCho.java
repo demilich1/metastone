@@ -26,7 +26,8 @@ public class LorewalkerCho extends MinionCard {
 	public Minion summon() {
 		Minion lorewalkerCho = createMinion();
 		SpellDesc copySpell = CopyPlayedCardSpell.create();
-		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(TargetPlayer.BOTH), copySpell);
+		//SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(TargetPlayer.BOTH), copySpell);
+		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(null), copySpell);
 		lorewalkerCho.setSpellTrigger(trigger);
 		return lorewalkerCho;
 	}

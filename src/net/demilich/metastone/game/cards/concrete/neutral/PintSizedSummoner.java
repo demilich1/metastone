@@ -27,7 +27,8 @@ public class PintSizedSummoner extends MinionCard {
 		Minion pintSizedSummoner = createMinion();
 		ToggleCostModifier costModifier = new ToggleCostModifier(CardType.MINION, -1);
 		costModifier.setToggleOnTrigger(new TurnStartTrigger());
-		costModifier.setToggleOffTrigger(new CardPlayedTrigger(TargetPlayer.SELF, CardType.MINION));
+		//costModifier.setToggleOffTrigger(new CardPlayedTrigger(TargetPlayer.SELF, CardType.MINION));
+		costModifier.setToggleOffTrigger(new CardPlayedTrigger(null));
 		pintSizedSummoner.setCardCostModifier(costModifier);
 		return pintSizedSummoner;
 	}

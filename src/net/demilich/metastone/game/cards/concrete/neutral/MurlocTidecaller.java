@@ -30,7 +30,8 @@ public class MurlocTidecaller extends MinionCard {
 	public Minion summon() {
 		Minion murlocTideCaller = createMinion();
 		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, +1, 0);
-		GameEventTrigger trigger = new MinionSummonedTrigger(TargetPlayer.BOTH, Race.MURLOC);
+		//GameEventTrigger trigger = new MinionSummonedTrigger(TargetPlayer.BOTH, Race.MURLOC);
+		GameEventTrigger trigger = new MinionSummonedTrigger(null);
 		murlocTideCaller.setSpellTrigger(new SpellTrigger(trigger, buffSpell));
 		return murlocTideCaller;
 	}

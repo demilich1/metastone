@@ -31,26 +31,27 @@ public class TradePrinceGallywix extends MinionCard {
 	public Minion summon() {
 		Minion tradePriceGallywix = createMinion();
 		SpellDesc copySpell = CopyPlayedCardSpell.create();
-		SpellTrigger trigger = new SpellTrigger(new GallywixTrigger(), copySpell);
+		//SpellTrigger trigger = new SpellTrigger(new GallywixTrigger(), copySpell);
+		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(null), copySpell);
 		tradePriceGallywix.setSpellTrigger(trigger);
 		return tradePriceGallywix;
 	}
 
-	private class GallywixTrigger extends SpellCastedTrigger {
-
-		public GallywixTrigger() {
-			super(TargetPlayer.OPPONENT);
-		}
-
-		@Override
-		public boolean fire(GameEvent event, Entity host) {
-			if (!super.fire(event, host)) {
-				return false;
-			}
-			SpellCastedEvent spellCastedEvent = (SpellCastedEvent) event;
-			return spellCastedEvent.getSourceCard().getTag(GameTag.UNIQUE_ENTITY) != UniqueEntity.GALLYWIX_COIN;
-
-		}
-
-	}
+//	private class GallywixTrigger extends SpellCastedTrigger {
+//
+//		public GallywixTrigger() {
+//			super(TargetPlayer.OPPONENT);
+//		}
+//
+//		@Override
+//		public boolean fire(GameEvent event, Entity host) {
+//			if (!super.fire(event, host)) {
+//				return false;
+//			}
+//			SpellCastedEvent spellCastedEvent = (SpellCastedEvent) event;
+//			return spellCastedEvent.getSourceCard().getTag(GameTag.UNIQUE_ENTITY) != UniqueEntity.GALLYWIX_COIN;
+//
+//		}
+//
+//	}
 }

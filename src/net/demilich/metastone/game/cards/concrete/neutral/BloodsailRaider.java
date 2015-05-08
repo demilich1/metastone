@@ -31,7 +31,7 @@ public class BloodsailRaider extends MinionCard {
 		//SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, (context, player, target) -> player.getHero().getWeapon().getWeaponDamage(), null);
 		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, null, null);
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(buffSpell);
-		battlecry.setCondition((context, player) -> player.getHero().getWeapon() != null);
+		//battlecry.setCondition((context, player) -> player.getHero().getWeapon() != null);
 		battlecry.setResolvedLate(true);
 		bloodsailRaider.setBattlecry(battlecry);
 		return bloodsailRaider;

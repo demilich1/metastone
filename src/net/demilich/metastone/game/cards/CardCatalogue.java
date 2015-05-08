@@ -165,14 +165,11 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.FreezingTrap());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.GladiatorsLongbow());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.Misdirection());
-		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.ScavengingHyena());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.SnakeTrap());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.Snipe());
-		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.StarvingBuzzard());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.TimberWolf());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.TundraRhino());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.UnleashTheHounds());
-		cards.add(new net.demilich.metastone.game.cards.concrete.mage.ArchmageAntonidas());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.ConeOfCold());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.Counterspell());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.EtherealArcanist());
@@ -180,11 +177,9 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.IceBlock());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.IceLance());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.KirinTorMage());
-		cards.add(new net.demilich.metastone.game.cards.concrete.mage.ManaWyrm());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.SorcerersApprentice());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.Spellbender());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.Vaporize());
-		cards.add(new net.demilich.metastone.game.cards.concrete.mage.WaterElemental());
 		cards.add(new net.demilich.metastone.game.cards.concrete.naxxramas.AnubarAmbusher());
 		cards.add(new net.demilich.metastone.game.cards.concrete.naxxramas.Avenge());
 		cards.add(new net.demilich.metastone.game.cards.concrete.naxxramas.BaronRivendare());
@@ -225,7 +220,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.AngryChicken());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.BaronGeddon());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.BloodsailRaider());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.ColdlightSeer());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.CultMaster());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.Demolisher());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.DireWolfAlpha());
@@ -248,7 +242,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.ManaWraith());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.MasterSwordsmith());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.MillhouseManastorm());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.MindControlTech());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.MoltenGiant());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.MountainGiant());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.MurlocTidecaller());
@@ -273,7 +266,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.WildPyromancer());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.YoungPriestess());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.Ysera());
-		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.BlessingOfWisdom());
 		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.DivineFavor());
 		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.EyeForAnEye());
 		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.HolyWrath());

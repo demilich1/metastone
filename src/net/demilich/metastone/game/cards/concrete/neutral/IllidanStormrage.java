@@ -30,7 +30,8 @@ public class IllidanStormrage extends MinionCard {
 	public Minion summon() {
 		Minion illidanStormrage = createMinion();
 		SpellDesc summonSpell = SummonSpell.create(RelativeToSource.RIGHT, new FlameOfAzzinoth());
-		SpellTrigger trigger = new SpellTrigger(new CardPlayedTrigger(TargetPlayer.SELF), summonSpell);
+		//SpellTrigger trigger = new SpellTrigger(new CardPlayedTrigger(TargetPlayer.SELF), summonSpell);
+		SpellTrigger trigger = new SpellTrigger(new CardPlayedTrigger(null), summonSpell);
 		illidanStormrage.setSpellTrigger(trigger);
 		return illidanStormrage;
 	}

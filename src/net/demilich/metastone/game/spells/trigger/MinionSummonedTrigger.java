@@ -1,36 +1,35 @@
 package net.demilich.metastone.game.spells.trigger;
 
+import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.events.SummonEvent;
 import net.demilich.metastone.game.spells.TargetPlayer;
+import net.demilich.metastone.game.spells.desc.trigger.EventTriggerArg;
+import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
 public class MinionSummonedTrigger extends GameEventTrigger {
 
-	private final TargetPlayer targetPlayer;
-	private final Race race;
-
-	public MinionSummonedTrigger() {
-		this(TargetPlayer.BOTH);
-	}
-
-	public MinionSummonedTrigger(TargetPlayer targetPlayer) {
-		this(targetPlayer, null);
-	}
-
-	public MinionSummonedTrigger(TargetPlayer targetPlayer, Race race) {
-		this.targetPlayer = targetPlayer;
-		this.race = race;
+	public MinionSummonedTrigger(EventTriggerDesc desc) {
+		super(desc);
 	}
 
 	@Override
-	public boolean fire(GameEvent event, Entity host) {
+	protected boolean fire(GameEvent event, Entity host) {
 		SummonEvent summonEvent = (SummonEvent) event;
+		Race race = (Race) desc.get(EventTriggerArg.RACE);
 		if (race != null && summonEvent.getMinion().getRace() != race) {
 			return false;
 		}
+		
+		GameTag requiredAttribute = (GameTag) desc.get(EventTriggerArg.REQUIRED_ATTRIBUTE);
+		if (requiredAttribute != null && !summonEvent.getMinion().hasTag(requiredAttribute)) {
+			return false;
+		}
+		
+		TargetPlayer targetPlayer = desc.getTargetPlayer();
 		switch (targetPlayer) {
 		case BOTH:
 			return true;

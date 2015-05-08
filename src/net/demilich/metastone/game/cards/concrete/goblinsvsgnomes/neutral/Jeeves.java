@@ -30,7 +30,8 @@ public class Jeeves extends MinionCard {
 	public Minion summon() {
 		Minion jeeves = createMinion();
 		SpellDesc drawCardSpell = JeevesSpell.create();
-		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(TargetPlayer.BOTH), drawCardSpell);
+		//SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(TargetPlayer.BOTH), drawCardSpell);
+		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(null), drawCardSpell);
 		jeeves.setSpellTrigger(trigger);
 		return jeeves;
 	}

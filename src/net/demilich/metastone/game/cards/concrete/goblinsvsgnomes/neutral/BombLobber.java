@@ -27,10 +27,10 @@ public class BombLobber extends MinionCard {
 		Minion bombLobber = createMinion();
 		SpellDesc damageRandom = DamageSpell.create(EntityReference.ENEMY_MINIONS, 4, true);
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(damageRandom);
-		battlecry.setCondition((context, player) -> {
-			Player opponent = context.getOpponent(player);
-			return context.getMinionCount(opponent) > 0;
-		});
+//		battlecry.setCondition((context, player) -> {
+//			Player opponent = context.getOpponent(player);
+//			return context.getMinionCount(opponent) > 0;
+//		});
 		bombLobber.setBattlecry(battlecry);
 		return bombLobber;
 	}

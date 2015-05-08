@@ -6,6 +6,7 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.SetHpSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.MinionCardPlayedTrigger;
+import net.demilich.metastone.game.spells.trigger.secrets.Secret;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class Repentance extends SecretCard {
@@ -15,7 +16,7 @@ public class Repentance extends SecretCard {
 		setDescription("Secret: When your opponent plays a minion, reduce its Health to 1.");
 
 		SpellDesc setHpSpell = SetHpSpell.create(EntityReference.EVENT_TARGET, 1);
-		setTriggerAndEffect(new MinionCardPlayedTrigger(), setHpSpell);
+		setSecret(new Secret(new MinionCardPlayedTrigger(null), setHpSpell, this));
 	}
 
 	@Override

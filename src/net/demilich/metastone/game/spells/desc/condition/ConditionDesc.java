@@ -4,7 +4,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.EnumMap;
 import java.util.Map;
 
-public class ConditionDesc {
+import net.demilich.metastone.game.cards.desc.Desc;
+
+public class ConditionDesc extends Desc<ConditionArg> {
 
 	public static Map<ConditionArg, Object> build(Class<? extends Condition> conditionClass) {
 		final Map<ConditionArg, Object> arguments = new EnumMap<>(ConditionArg.class);
@@ -12,20 +14,15 @@ public class ConditionDesc {
 		return arguments;
 	}
 
-	private final Map<ConditionArg, Object> arguments;
 
 	public ConditionDesc(Map<ConditionArg, Object> arguments) {
-		this.arguments = arguments;
-	}
-
-	public boolean contains(ConditionArg arg) {
-		return arguments.containsKey(arg);
+		super(arguments);
 	}
 
 	public Condition create() {
-		Class<? extends Condition> valueProviderClass = getConditionClass();
+		Class<? extends Condition> conditionClass = getConditionClass();
 		try {
-			return valueProviderClass.getConstructor(ConditionDesc.class).newInstance(this);
+			return conditionClass.getConstructor(ConditionDesc.class).newInstance(this);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
@@ -33,21 +30,9 @@ public class ConditionDesc {
 		return null;
 	}
 
-	public Object get(ConditionArg arg) {
-		return arguments.get(arg);
-	}
-
-	public boolean getBool(ConditionArg arg) {
-		return arguments.containsKey(arg) ? (boolean) get(arg) : false;
-	}
-
 	@SuppressWarnings("unchecked")
 	public Class<? extends Condition> getConditionClass() {
-		return (Class<? extends Condition>) arguments.get(ConditionArg.CLASS);
-	}
-
-	public int getInt(ConditionArg arg) {
-		return arguments.containsKey(arg) ? (int) get(arg) : 0;
+		return (Class<? extends Condition>) get(ConditionArg.CLASS);
 	}
 
 }

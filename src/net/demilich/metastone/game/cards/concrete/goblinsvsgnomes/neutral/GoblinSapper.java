@@ -28,7 +28,7 @@ public class GoblinSapper extends MinionCard {
 //			return opponent.getHand().getCount() >= 6 ? +4 : 0;
 //		});
 		SpellDesc buffSpell = null;
-		SpellTrigger trigger = new SpellTrigger(new GameStateChangedTrigger(), buffSpell);
+		SpellTrigger trigger = new SpellTrigger(new GameStateChangedTrigger(null), buffSpell);
 		goblinSapper.setSpellTrigger(trigger);
 		return goblinSapper;
 	}

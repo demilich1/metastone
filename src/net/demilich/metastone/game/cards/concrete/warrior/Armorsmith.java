@@ -5,8 +5,7 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.BuffHeroSpell;
-import net.demilich.metastone.game.spells.TargetPlayer;
-import net.demilich.metastone.game.spells.trigger.MinionDamagedTrigger;
+import net.demilich.metastone.game.spells.trigger.DamageReceivedTrigger;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 import net.demilich.metastone.game.targeting.EntityReference;
 
@@ -25,7 +24,8 @@ public class Armorsmith extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion armorsmith = createMinion();
-		SpellTrigger trigger = new SpellTrigger(new MinionDamagedTrigger(TargetPlayer.SELF), BuffHeroSpell.create(EntityReference.FRIENDLY_HERO, 0, 1));
+		//SpellTrigger trigger = new SpellTrigger(new MinionDamagedTrigger(TargetPlayer.SELF), BuffHeroSpell.create(EntityReference.FRIENDLY_HERO, 0, 1));
+		SpellTrigger trigger = new SpellTrigger(new DamageReceivedTrigger(null), BuffHeroSpell.create(EntityReference.FRIENDLY_HERO, 0, 1));
 		armorsmith.setSpellTrigger(trigger);
 		return armorsmith;
 	}

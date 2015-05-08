@@ -4,9 +4,9 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.SecretCard;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.ReviveMinionSpell;
-import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.MinionDeathTrigger;
+import net.demilich.metastone.game.spells.trigger.secrets.Secret;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class Redemption extends SecretCard {
@@ -16,7 +16,7 @@ public class Redemption extends SecretCard {
 		setDescription("Secret: When one of your minions dies, return it to life with 1 Health.");
 		
 		SpellDesc reviveSpell = ReviveMinionSpell.create(EntityReference.KILLED_MINION, 1);
-		setTriggerAndEffect(new MinionDeathTrigger(TargetPlayer.SELF), reviveSpell);
+		setSecret(new Secret(new MinionDeathTrigger(null), reviveSpell, this));
 	}
 
 	@Override

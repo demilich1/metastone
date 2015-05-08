@@ -26,7 +26,8 @@ public class MekgineerThermaplugg extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion mekgineerThermaplugg = createMinion();
-		MinionDeathTrigger minionDeathTrigger = new MinionDeathTrigger(TargetPlayer.OPPONENT);
+		//MinionDeathTrigger minionDeathTrigger = new MinionDeathTrigger(TargetPlayer.OPPONENT);
+		MinionDeathTrigger minionDeathTrigger = new MinionDeathTrigger(null);
 		SpellTrigger trigger = new SpellTrigger(minionDeathTrigger, SummonSpell.create("minion_leper_gnome"));
 		mekgineerThermaplugg.setSpellTrigger(trigger);
 		return mekgineerThermaplugg;

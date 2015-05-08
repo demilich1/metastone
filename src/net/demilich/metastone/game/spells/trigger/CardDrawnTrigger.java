@@ -5,19 +5,18 @@ import net.demilich.metastone.game.events.DrawCardEvent;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.spells.TargetPlayer;
+import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
 public class CardDrawnTrigger extends GameEventTrigger {
 
-	private TargetPlayer targetPlayer;
-
-	public CardDrawnTrigger(TargetPlayer targetPlayer) {
-		this.targetPlayer = targetPlayer;
+	public CardDrawnTrigger(EventTriggerDesc desc) {
+		super(desc);
 	}
 
 	@Override
-	public boolean fire(GameEvent event, Entity host) {
+	protected boolean fire(GameEvent event, Entity host) {
 		DrawCardEvent drawEvent = (DrawCardEvent) event;
-
+		TargetPlayer targetPlayer = desc.getTargetPlayer();
 		switch (targetPlayer) {
 		case BOTH:
 			return true;

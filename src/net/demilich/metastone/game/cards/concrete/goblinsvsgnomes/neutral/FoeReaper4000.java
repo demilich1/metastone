@@ -7,7 +7,7 @@ import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.AdjacentMetaSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.spells.trigger.PhysicalAttackTrigger;
+import net.demilich.metastone.game.spells.trigger.DamageCausedTrigger;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 import net.demilich.metastone.game.targeting.EntityReference;
 
@@ -33,7 +33,8 @@ public class FoeReaper4000 extends MinionCard {
 //		});
 		
 		SpellDesc cleave = AdjacentMetaSpell.create(EntityReference.EVENT_TARGET, null, null);
-		SpellTrigger trigger = new SpellTrigger(new PhysicalAttackTrigger(false), cleave);
+		//SpellTrigger trigger = new SpellTrigger(new PhysicalAttackTrigger(false), cleave);
+		SpellTrigger trigger = new SpellTrigger(new DamageCausedTrigger(null), cleave);
 		foeReaper4000.setSpellTrigger(trigger);
 		return foeReaper4000;
 	}

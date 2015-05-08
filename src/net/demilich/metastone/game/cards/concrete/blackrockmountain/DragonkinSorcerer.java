@@ -29,7 +29,7 @@ public class DragonkinSorcerer extends MinionCard {
 	public Minion summon() {
 		Minion dragonkinSorcerer = createMinion();
 		SpellDesc buff = BuffSpell.create(EntityReference.SELF, +1, +1);
-		SpellTrigger trigger = new SpellTrigger(new TargetedBySpellTrigger(), buff);
+		SpellTrigger trigger = new SpellTrigger(new TargetedBySpellTrigger(null), buff);
 		dragonkinSorcerer.setSpellTrigger(trigger);
 		return dragonkinSorcerer;
 	}

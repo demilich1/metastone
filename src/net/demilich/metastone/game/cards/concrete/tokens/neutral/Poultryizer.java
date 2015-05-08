@@ -30,7 +30,7 @@ public class Poultryizer extends MinionCard {
 	public Minion summon() {
 		Minion poultryizer = createMinion();
 		SpellDesc chickenizeSpell = TransformMinionSpell.create(EntityReference.ALL_MINIONS, new Chicken(), true);
-		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), chickenizeSpell);
+		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(null), chickenizeSpell);
 		poultryizer.setSpellTrigger(trigger);
 		return poultryizer;
 	}

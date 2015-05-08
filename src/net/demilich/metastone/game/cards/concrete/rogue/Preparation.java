@@ -18,8 +18,9 @@ public class Preparation extends SpellCard {
 		super("Preparation", Rarity.EPIC, HeroClass.ROGUE, 0);
 		setDescription("The next spell you cast this turn costs (3) less.");
 
-		OneTurnCostModifier costModifier = new OneTurnCostModifier(CardType.SPELL, -3, new CardPlayedTrigger(TargetPlayer.SELF,
-				CardType.SPELL));
+		//OneTurnCostModifier costModifier = new OneTurnCostModifier(CardType.SPELL, -3, new CardPlayedTrigger(TargetPlayer.SELF,
+		//		CardType.SPELL));
+		OneTurnCostModifier costModifier = new OneTurnCostModifier(CardType.SPELL, -3, new CardPlayedTrigger(null));
 		SpellDesc spellCostReduce = AddCostModifierSpell.create(EntityReference.FRIENDLY_HERO, costModifier);
 		setSpell(spellCostReduce);
 		setTargetRequirement(TargetSelection.NONE);

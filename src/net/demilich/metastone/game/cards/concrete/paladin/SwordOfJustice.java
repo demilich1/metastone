@@ -31,7 +31,8 @@ public class SwordOfJustice extends WeaponCard {
 		SpellDesc buffSpell = BuffSpell.create(EntityReference.EVENT_TARGET, 1, 1);
 		SpellDesc loseDurability = ChangeDurabilitySpell.create(EntityReference.FRIENDLY_HERO, -1);
 		SpellDesc swordOfJusticeSpell = MetaSpell.create(buffSpell, loseDurability);
-		SpellTrigger trigger = new SpellTrigger(new MinionSummonedTrigger(TargetPlayer.SELF), swordOfJusticeSpell);
+		//SpellTrigger trigger = new SpellTrigger(new MinionSummonedTrigger(TargetPlayer.SELF), swordOfJusticeSpell);
+		SpellTrigger trigger = new SpellTrigger(new MinionSummonedTrigger(null), swordOfJusticeSpell);
 		swordOfJustice.setSpellTrigger(trigger);
 		return swordOfJustice;
 	}

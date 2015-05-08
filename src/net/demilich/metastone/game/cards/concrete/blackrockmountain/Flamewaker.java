@@ -22,7 +22,8 @@ public class Flamewaker extends MinionCard {
 	public Minion summon() {
 		Minion flamewaker = createMinion();
 		SpellDesc spell = MissilesSpell.create(EntityReference.ENEMY_CHARACTERS, 1, 2);
-		SpellTrigger trigger = new SpellTrigger(new AfterSpellCastedTrigger(TargetPlayer.SELF), spell);
+		//SpellTrigger trigger = new SpellTrigger(new AfterSpellCastedTrigger(TargetPlayer.SELF), spell);
+		SpellTrigger trigger = new SpellTrigger(new AfterSpellCastedTrigger(null), spell);
 		flamewaker.setSpellTrigger(trigger);
 		return flamewaker;
 	}

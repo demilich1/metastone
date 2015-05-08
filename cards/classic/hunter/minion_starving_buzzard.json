@@ -1,0 +1,25 @@
+{
+  "baseAttack": 3,
+  "baseHp": 2,
+  "race": "BEAST",
+  "trigger": {
+   "eventTrigger" : {
+		"class" : "MinionSummonedTrigger",
+		"targetPlayer" : "SELF",
+		"race" : "BEAST"
+	},
+	"spell" : {
+		"class": "DrawCardSpell",
+		"value" : 1
+	}
+  },
+  "id": "minion_starving_buzzard",
+  "name": "Starving Buzzard",
+  "description": "Whenever you summon a Beast, draw a card.",
+  "type": "MINION",
+  "heroClass": "HUNTER",
+  "rarity": "FREE",
+  "baseManaCost": 5,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

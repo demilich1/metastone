@@ -40,7 +40,7 @@ public class DragonConsort extends MinionCard {
 
 	private class DragonCostModifier extends MinionCostModifier {
 		
-		private final GameEventTrigger dragonPlayedTrigger = new DragonPlayedTrigger(TargetPlayer.SELF); 
+		private final GameEventTrigger dragonPlayedTrigger = new CardPlayedTrigger(null); 
 
 		public DragonCostModifier(int manaModifier) {
 			super(manaModifier);
@@ -55,31 +55,12 @@ public class DragonConsort extends MinionCard {
 		@Override
 		public void onGameEvent(GameEvent event) {
 			Entity host = event.getGameContext().resolveSingleTarget(getHostReference());
-			if (dragonPlayedTrigger.fire(event, host)) {
+			if (dragonPlayedTrigger.fires(event, host)) {
 				expire();
 			}
 		}
 
 	}
-
-	private class DragonPlayedTrigger extends CardPlayedTrigger {
-
-		public DragonPlayedTrigger(TargetPlayer targetPlayer) {
-			super(targetPlayer, CardType.MINION);
-		}
-
-		@Override
-		public boolean fire(GameEvent event, Entity host) {
-			if (!super.fire(event, host)) {
-				return false;
-			}
-			CardPlayedEvent cardPlayedEvent = (CardPlayedEvent) event;
-			return cardPlayedEvent.getCard().getTag(GameTag.RACE) == Race.DRAGON;
-		}
-
-	}
-
-
 
 	@Override
 	public int getTypeId() {

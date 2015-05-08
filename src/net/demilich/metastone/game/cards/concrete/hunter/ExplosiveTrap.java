@@ -6,6 +6,7 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.DamageSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.HeroAttackedTrigger;
+import net.demilich.metastone.game.spells.trigger.secrets.Secret;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class ExplosiveTrap extends SecretCard {
@@ -15,7 +16,7 @@ public class ExplosiveTrap extends SecretCard {
 		setDescription("Secret: When your hero is attacked, deal $2 damage to all enemies.");
 		
 		SpellDesc damageSpell = DamageSpell.create(EntityReference.ENEMY_CHARACTERS, 2);
-		setTriggerAndEffect(new HeroAttackedTrigger(), damageSpell);
+		setSecret(new Secret(new HeroAttackedTrigger(null), damageSpell, this));
 	}
 
 	@Override

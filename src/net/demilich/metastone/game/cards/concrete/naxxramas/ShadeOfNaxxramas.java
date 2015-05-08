@@ -27,7 +27,7 @@ public class ShadeOfNaxxramas extends MinionCard {
 	public Minion summon() {
 		Minion shadeOfNaxxramas = createMinion(GameTag.STEALTH);
 		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, 1, 1);
-		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), buffSpell);
+		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(null), buffSpell);
 		shadeOfNaxxramas.setSpellTrigger(trigger);
 		return shadeOfNaxxramas;
 	}

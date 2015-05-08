@@ -26,7 +26,7 @@ public class AngryChicken extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion angryChicken = createMinion(GameTag.ENRAGABLE);
-		SpellTrigger trigger = new SpellTrigger(new EnrageChangedTrigger(), EnrageSpell.create(+5));
+		SpellTrigger trigger = new SpellTrigger(new EnrageChangedTrigger(null), EnrageSpell.create(+5));
 		angryChicken.setSpellTrigger(trigger);
 		return angryChicken;
 	}

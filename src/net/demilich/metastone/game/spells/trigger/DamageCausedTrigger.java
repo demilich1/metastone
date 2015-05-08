@@ -5,21 +5,22 @@ import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.events.DamageEvent;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
+import net.demilich.metastone.game.spells.desc.trigger.EventTriggerArg;
+import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
 public class DamageCausedTrigger extends GameEventTrigger {
 
-	private final boolean worksOnHeroes;
-
-	public DamageCausedTrigger(boolean worksOnHeroes) {
-		this.worksOnHeroes = worksOnHeroes;
+	public DamageCausedTrigger(EventTriggerDesc desc) {
+		super(desc);
 	}
 
 	@Override
-	public boolean fire(GameEvent event, Entity host) {
+	protected boolean fire(GameEvent event, Entity host) {
 		DamageEvent damageEvent = (DamageEvent) event;
 		if (damageEvent.getSource() == null) {
 			return false;
 		}
+		boolean worksOnHeroes = desc.getBool(EventTriggerArg.WORKS_ON_HERO);
 		if (!worksOnHeroes && damageEvent.getVictim().getEntityType() == EntityType.HERO) {
 			return false;
 		}

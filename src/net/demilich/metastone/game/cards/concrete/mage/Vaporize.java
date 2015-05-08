@@ -6,6 +6,7 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.DestroySpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.HeroAttackedByMinionTrigger;
+import net.demilich.metastone.game.spells.trigger.secrets.Secret;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class Vaporize extends SecretCard {
@@ -15,7 +16,7 @@ public class Vaporize extends SecretCard {
 		setDescription("Secret: When a minion attacks your hero, destroy it.");
 
 		SpellDesc destroySpell = DestroySpell.create(EntityReference.ATTACKER);
-		setTriggerAndEffect(new HeroAttackedByMinionTrigger(), destroySpell);
+		setSecret(new Secret(new HeroAttackedByMinionTrigger(null), destroySpell, this));
 	}
 
 	@Override

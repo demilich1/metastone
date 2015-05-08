@@ -26,7 +26,7 @@ public class StoneskinGargoyle extends MinionCard {
 	public Minion summon() {
 		Minion stoneskinGargoyle = createMinion();
 		SpellDesc healSelf = HealToFullSpell.create(EntityReference.SELF);
-		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), healSelf);
+		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(null), healSelf);
 		stoneskinGargoyle.setSpellTrigger(trigger);
 		return stoneskinGargoyle;
 	}

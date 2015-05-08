@@ -28,7 +28,7 @@ public class CultMaster extends MinionCard {
 
 	@Override
 	public Minion summon() {
-		GameEventTrigger minionDieTrigger = new CultMasterTrigger();
+		GameEventTrigger minionDieTrigger = new MinionDeathTrigger(null);
 		SpellTrigger trigger = new SpellTrigger(minionDieTrigger, DrawCardSpell.create());
 		Minion cultMaster = createMinion();
 		cultMaster.setSpellTrigger(trigger);
@@ -36,28 +36,28 @@ public class CultMaster extends MinionCard {
 	}
 
 
-	private class CultMasterTrigger extends MinionDeathTrigger {
-
-		@Override
-		public boolean fire(GameEvent event, Entity host) {
-			Actor cultMaster = (Actor) host;
-			if (cultMaster.isDead()) {
-				return false;
-			}
-			
-			KillEvent killEvent = (KillEvent) event;
-			// not a minion
-			if (killEvent.getVictim().getEntityType() != EntityType.MINION) {
-				return false;
-			}
-			// not a friendly minion
-			if (killEvent.getVictim().getOwner() != host.getOwner()) {
-				return false;
-			}
-			
-			// card says 'when one of your OTHER minion dies'
-			return killEvent.getVictim() != host;
-		}
-		
-	}
+//	private class CultMasterTrigger extends MinionDeathTrigger {
+//
+//		@Override
+//		public boolean fire(GameEvent event, Entity host) {
+//			Actor cultMaster = (Actor) host;
+//			if (cultMaster.isDead()) {
+//				return false;
+//			}
+//			
+//			KillEvent killEvent = (KillEvent) event;
+//			// not a minion
+//			if (killEvent.getVictim().getEntityType() != EntityType.MINION) {
+//				return false;
+//			}
+//			// not a friendly minion
+//			if (killEvent.getVictim().getOwner() != host.getOwner()) {
+//				return false;
+//			}
+//			
+//			// card says 'when one of your OTHER minion dies'
+//			return killEvent.getVictim() != host;
+//		}
+//		
+//	}
 }

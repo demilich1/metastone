@@ -902,7 +902,6 @@ public class GameLogic implements Cloneable {
 		}
 		if (action.getTargetRequirement() != TargetSelection.NONE) {
 			Entity target = context.resolveSingleTarget(action.getTargetKey());
-			System.out.println("Target set to " + target);
 			context.getEnvironment().put(Environment.TARGET, target);
 		}
 		action.execute(context, playerId);

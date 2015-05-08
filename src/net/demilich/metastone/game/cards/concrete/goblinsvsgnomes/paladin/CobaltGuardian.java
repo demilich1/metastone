@@ -32,7 +32,8 @@ public class CobaltGuardian extends MinionCard {
 	public Minion summon() {
 		Minion cobaltGuardian = createMinion();
 		SpellDesc gainDivineShield = AddAttributeSpell.create(EntityReference.SELF, GameTag.DIVINE_SHIELD);
-		SpellTrigger trigger = new SpellTrigger(new MinionSummonedTrigger(TargetPlayer.SELF, Race.MECH), gainDivineShield);
+		//SpellTrigger trigger = new SpellTrigger(new MinionSummonedTrigger(TargetPlayer.SELF, Race.MECH), gainDivineShield);
+		SpellTrigger trigger = new SpellTrigger(new MinionSummonedTrigger(null), gainDivineShield);
 		cobaltGuardian.setSpellTrigger(trigger);
 		return cobaltGuardian;
 	}

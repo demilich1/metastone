@@ -23,7 +23,7 @@ public class GrimPatron extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion grimPatron = createMinion();
-		SpellTrigger trigger = new SpellTrigger(new DamageSurvivedTrigger(), SummonSpell.create(new GrimPatron()));
+		SpellTrigger trigger = new SpellTrigger(new DamageSurvivedTrigger(null), SummonSpell.create(new GrimPatron()));
 		grimPatron.setSpellTrigger(trigger);
 		return grimPatron;
 	}

@@ -35,28 +35,28 @@ public class WarsongCommander extends MinionCard {
 		// before the Warsong Commander will also be applied before. Comments on Hearthhead.com state
 		// that auras are ALWAYS applied before other spell triggers, no matter when they were played.
 		// Need to check this
-		SpellTrigger trigger = new SpellTrigger(new BelowThreeAttackTrigger(), chargeSpell);
+		SpellTrigger trigger = new SpellTrigger(new MinionSummonedTrigger(null), chargeSpell);
 		warsongCommander.setSpellTrigger(trigger);
 		return warsongCommander;
 	}
 
-	private class BelowThreeAttackTrigger extends MinionSummonedTrigger {
-		
-		public BelowThreeAttackTrigger() {
-			super(TargetPlayer.SELF);
-		}
-
-		@Override
-		public boolean fire(GameEvent event, Entity host) {
-			if (!super.fire(event, host)) {
-				return false;
-			}
-			SummonEvent summonEvent = (SummonEvent) event;
-			if (summonEvent.getMinion().isDead()) {
-				return false;
-			}
-			return summonEvent.getMinion().getAttack() <= 3;
-		}
-		
-	}
+//	private class BelowThreeAttackTrigger extends MinionSummonedTrigger {
+//		
+//		public BelowThreeAttackTrigger() {
+//			super(TargetPlayer.SELF);
+//		}
+//
+//		@Override
+//		public boolean fire(GameEvent event, Entity host) {
+//			if (!super.fire(event, host)) {
+//				return false;
+//			}
+//			SummonEvent summonEvent = (SummonEvent) event;
+//			if (summonEvent.getMinion().isDead()) {
+//				return false;
+//			}
+//			return summonEvent.getMinion().getAttack() <= 3;
+//		}
+//		
+//	}
 }

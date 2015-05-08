@@ -29,26 +29,27 @@ public class Hobgoblin extends MinionCard {
 	public Minion summon() {
 		Minion hobgoblin = createMinion();
 		SpellDesc buff = BuffSpell.create(EntityReference.EVENT_TARGET, +2, +2);
-		SpellTrigger trigger = new SpellTrigger(new HobgoblinTrigger(), buff);
+		//SpellTrigger trigger = new SpellTrigger(new HobgoblinTrigger(), buff);
+		SpellTrigger trigger = new SpellTrigger(new MinionCardPlayedTrigger(null), buff);
 		hobgoblin.setSpellTrigger(trigger);
 		return hobgoblin;
 	}
 
-	private class HobgoblinTrigger extends MinionCardPlayedTrigger {
-		
-		@Override
-		public boolean fire(GameEvent event, Entity host) {
-			if (!super.fire(event, host)) {
-				return false;
-			}
-			
-			SummonEvent summonEvent = (SummonEvent) event;
-			if (summonEvent.getMinion().getOwner() != getOwner()) {
-				return false;
-			}
-			
-			return summonEvent.getMinion().getAttack() == 1;
-		}
-		
-	}
+//	private class HobgoblinTrigger extends MinionCardPlayedTrigger {
+//		
+//		@Override
+//		public boolean fire(GameEvent event, Entity host) {
+//			if (!super.fire(event, host)) {
+//				return false;
+//			}
+//			
+//			SummonEvent summonEvent = (SummonEvent) event;
+//			if (summonEvent.getMinion().getOwner() != getOwner()) {
+//				return false;
+//			}
+//			
+//			return summonEvent.getMinion().getAttack() == 1;
+//		}
+//		
+//	}
 }

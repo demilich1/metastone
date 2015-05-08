@@ -1,6 +1,9 @@
 package net.demilich.metastone.game.cards.desc;
 
 import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.actions.ActionType;
+import net.demilich.metastone.game.cards.CardType;
+import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.entities.minions.RelativeToSource;
 import net.demilich.metastone.game.spells.TargetPlayer;
@@ -8,6 +11,9 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.condition.ConditionDesc;
 import net.demilich.metastone.game.spells.desc.filter.FilterDesc;
 import net.demilich.metastone.game.spells.desc.filter.Operation;
+import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
+import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDeserializer;
+import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderDesc;
 import net.demilich.metastone.game.targeting.CardLocation;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -18,10 +24,11 @@ import com.google.gson.JsonObject;
 
 public class ParseUtils {
 
-	private static SpellDescDeserializer spellDescParser = new SpellDescDeserializer();
+	private static SpellDeserializer spellParser = new SpellDeserializer();
 	private static ValueProviderDeserializer valueProviderParser = new ValueProviderDeserializer();
 	private static FilterDeserializer filterParser = new FilterDeserializer();
 	private static ConditionDeserializer conditionParser = new ConditionDeserializer();
+	private static EventTriggerDeserializer triggerParser = new EventTriggerDeserializer();
 
 	public static Object parse(String argName, JsonObject jsonData, ParseValueType valueType) {
 		JsonElement entry = jsonData.get(argName);
@@ -46,7 +53,7 @@ public class ParseUtils {
 		case RACE:
 			return Enum.valueOf(Race.class, entry.getAsString());
 		case SPELL:
-			return spellDescParser.deserialize(entry, SpellDesc.class, null);
+			return spellParser.deserialize(entry, SpellDesc.class, null);
 		case ATTRIBUTE:
 			return Enum.valueOf(GameTag.class, entry.getAsString());
 		case BOARD_POSITION_RELATIVE:
@@ -55,6 +62,12 @@ public class ParseUtils {
 			return Enum.valueOf(CardLocation.class, entry.getAsString());
 		case OPERATION:
 			return Enum.valueOf(Operation.class, entry.getAsString());
+		case CARD_TYPE:
+			return Enum.valueOf(CardType.class, entry.getAsString());
+		case ENTITY_TYPE:
+			return Enum.valueOf(EntityType.class, entry.getAsString());
+		case ACTION_TYPE:
+			return Enum.valueOf(ActionType.class, entry.getAsString());
 		case VALUE_PROVIDER:
 			ValueProviderDesc valueProviderDesc = valueProviderParser.deserialize(entry, ValueProviderDesc.class, null);
 			return valueProviderDesc.create();
@@ -64,6 +77,12 @@ public class ParseUtils {
 		case CONDITION:
 			ConditionDesc conditionDesc = conditionParser.deserialize(entry, ConditionDesc.class, null);
 			return conditionDesc.create();
+		case TRIGGER:
+			JsonObject triggerObject = entry.getAsJsonObject();
+			TriggerDesc triggerDesc = new TriggerDesc();
+			triggerDesc.eventTrigger = triggerParser.deserialize(triggerObject.get("eventTrigger"), EventTriggerDesc.class, null);
+			triggerDesc.spell = spellParser.deserialize(triggerObject.get("spell"), SpellDesc.class, null);
+			return triggerDesc;
 		default:
 			break;
 		}

@@ -4,9 +4,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.EnumMap;
 import java.util.Map;
 
+import net.demilich.metastone.game.cards.desc.Desc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
-public class ValueProviderDesc {
+public class ValueProviderDesc extends Desc<ValueProviderArg> {
 
 	public static Map<ValueProviderArg, Object> build(Class<? extends ValueProvider> providerClass) {
 		final Map<ValueProviderArg, Object> arguments = new EnumMap<>(ValueProviderArg.class);
@@ -14,14 +15,9 @@ public class ValueProviderDesc {
 		return arguments;
 	}
 
-	private final Map<ValueProviderArg, Object> arguments;
 
 	public ValueProviderDesc(Map<ValueProviderArg, Object> arguments) {
-		this.arguments = arguments;
-	}
-
-	public boolean contains(ValueProviderArg arg) {
-		return arguments.containsKey(arg);
+		super(arguments);
 	}
 
 	public ValueProvider create() {
@@ -35,25 +31,13 @@ public class ValueProviderDesc {
 		return null;
 	}
 
-	public Object get(ValueProviderArg arg) {
-		return arguments.get(arg);
-	}
-
-	public boolean getBool(ValueProviderArg arg) {
-		return arguments.containsKey(arg) ? (boolean) get(arg) : false;
-	}
-
-	public int getInt(ValueProviderArg arg) {
-		return arguments.containsKey(arg) ? (int) get(arg) : 0;
-	}
-
 	public EntityReference getSource() {
 		return (EntityReference) get(ValueProviderArg.SOURCE);
 	}
 
 	@SuppressWarnings("unchecked")
 	public Class<? extends ValueProvider> getValueProviderClass() {
-		return (Class<? extends ValueProvider>) arguments.get(ValueProviderArg.CLASS);
+		return (Class<? extends ValueProvider>) get(ValueProviderArg.CLASS);
 	}
 
 }

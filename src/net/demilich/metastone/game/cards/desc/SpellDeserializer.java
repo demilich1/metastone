@@ -13,7 +13,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
-public class SpellDescDeserializer implements JsonDeserializer<SpellDesc> {
+public class SpellDeserializer implements JsonDeserializer<SpellDesc> {
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -55,6 +55,7 @@ public class SpellDescDeserializer implements JsonDeserializer<SpellDesc> {
 		parseArgument(SpellArg.BOARD_POSITION_RELATIVE, jsonData, spellArgs, ParseValueType.BOARD_POSITION_RELATIVE);
 		parseArgument(SpellArg.EXCLUSIVE, jsonData, spellArgs, ParseValueType.BOOLEAN);
 		parseArgument(SpellArg.CONDITION, jsonData, spellArgs, ParseValueType.CONDITION);
+		parseArgument(SpellArg.TRIGGER, jsonData, spellArgs, ParseValueType.TRIGGER);
 		
 		return new SpellDesc(spellArgs);
 	}

@@ -5,18 +5,18 @@ import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.events.ReceiveCardEvent;
 import net.demilich.metastone.game.spells.TargetPlayer;
+import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
 public class CardReceivedTrigger extends GameEventTrigger {
 
-	private final TargetPlayer targetPlayer;
-
-	public CardReceivedTrigger(TargetPlayer targetPlayer) {
-		this.targetPlayer = targetPlayer;
+	public CardReceivedTrigger(EventTriggerDesc desc) {
+		super(desc);
 	}
 
 	@Override
-	public boolean fire(GameEvent event, Entity host) {
+	protected boolean fire(GameEvent event, Entity host) {
 		ReceiveCardEvent receiveCardEvent = (ReceiveCardEvent) event;
+		TargetPlayer targetPlayer = desc.getTargetPlayer();
 		switch (targetPlayer) {
 		case BOTH:
 			return true;

@@ -27,7 +27,7 @@ public class DragonEgg extends MinionCard {
 	public Minion summon() {
 		Minion dragonEgg = createMinion();
 		SpellDesc summonSpell = SummonSpell.create(TargetPlayer.SELF, RelativeToSource.RIGHT, new Whelp());
-		SpellTrigger trigger = new SpellTrigger(new DamageReceivedTrigger(), summonSpell);
+		SpellTrigger trigger = new SpellTrigger(new DamageReceivedTrigger(null), summonSpell);
 		dragonEgg.setSpellTrigger(trigger);
 		return dragonEgg;
 	}

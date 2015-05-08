@@ -5,18 +5,18 @@ import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.events.SpellCastedEvent;
 import net.demilich.metastone.game.spells.TargetPlayer;
+import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
 public class SpellCastedTrigger extends GameEventTrigger {
 
-	private final TargetPlayer targetPlayer;
-
-	public SpellCastedTrigger(TargetPlayer targetPlayer) {
-		this.targetPlayer = targetPlayer;
+	public SpellCastedTrigger(EventTriggerDesc desc) {
+		super(desc);
 	}
 
 	@Override
-	public boolean fire(GameEvent event, Entity host) {
+	protected boolean fire(GameEvent event, Entity host) {
 		SpellCastedEvent spellCastedEvent = (SpellCastedEvent) event;
+		TargetPlayer targetPlayer = desc.getTargetPlayer();
 		switch (targetPlayer) {
 		case BOTH:
 			return true;

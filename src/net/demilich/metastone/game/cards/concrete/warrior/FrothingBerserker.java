@@ -5,9 +5,8 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.BuffSpell;
-import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.spells.trigger.MinionDamagedTrigger;
+import net.demilich.metastone.game.spells.trigger.DamageReceivedTrigger;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 import net.demilich.metastone.game.targeting.EntityReference;
 
@@ -27,7 +26,8 @@ public class FrothingBerserker extends MinionCard {
 	public Minion summon() {
 		Minion frothingBerserker = createMinion();
 		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, +1, 0);
-		SpellTrigger trigger = new SpellTrigger(new MinionDamagedTrigger(TargetPlayer.BOTH), buffSpell);
+		//SpellTrigger trigger = new SpellTrigger(new MinionDamagedTrigger(TargetPlayer.BOTH), buffSpell);
+		SpellTrigger trigger = new SpellTrigger(new DamageReceivedTrigger(null), buffSpell);
 		frothingBerserker.setSpellTrigger(trigger);
 		return frothingBerserker;
 	}

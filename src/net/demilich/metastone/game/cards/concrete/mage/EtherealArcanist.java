@@ -26,7 +26,7 @@ public class EtherealArcanist extends MinionCard {
 	public Minion summon() {
 		Minion etherealArcanist = createMinion();
 		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, 2, 2);
-		SpellTrigger trigger = new SpellTrigger(new TurnEndAndControlSecretTrigger(), buffSpell);
+		SpellTrigger trigger = new SpellTrigger(new TurnEndAndControlSecretTrigger(null), buffSpell);
 		etherealArcanist.setSpellTrigger(trigger);
 		return etherealArcanist;
 	}

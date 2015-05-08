@@ -29,7 +29,8 @@ public class Snowchugger extends MinionCard {
 	public Minion summon() {
 		Minion snowchugger = createMinion();
 		SpellDesc freezeSpell = AddAttributeSpell.create(EntityReference.EVENT_TARGET, GameTag.FROZEN);
-		snowchugger.setSpellTrigger(new SpellTrigger(new DamageCausedTrigger(true), freezeSpell));
+		//snowchugger.setSpellTrigger(new SpellTrigger(new DamageCausedTrigger(true), freezeSpell));
+		snowchugger.setSpellTrigger(new SpellTrigger(new DamageCausedTrigger(null), freezeSpell));
 		return snowchugger;
 	}
 }

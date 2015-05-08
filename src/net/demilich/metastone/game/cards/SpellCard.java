@@ -64,6 +64,9 @@ public class SpellCard extends Card {
 	@Override
 	public SpellCard clone() {
 		SpellCard clone = (SpellCard) super.clone();
+		if (spell == null) {
+			throw new RuntimeException("Spell is NULL for SpellCard " + getName());
+		}
 		clone.spell = spell.clone();
 		clone.condition = condition;
 		return clone;

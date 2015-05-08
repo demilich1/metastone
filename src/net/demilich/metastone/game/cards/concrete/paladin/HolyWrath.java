@@ -3,6 +3,7 @@ package net.demilich.metastone.game.cards.concrete.paladin;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.spells.DamageSpell;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class HolyWrath extends SpellCard {
@@ -19,7 +20,7 @@ public class HolyWrath extends SpellCard {
 //			return drawnCard.getBaseManaCost();
 //		});
 		//setSpell(holyWrathSpell);
-		setSpell(null);
+		setSpell(DamageSpell.create(0));
 		setTargetRequirement(TargetSelection.ANY);
 	}
 

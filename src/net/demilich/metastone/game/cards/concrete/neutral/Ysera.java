@@ -37,7 +37,7 @@ public class Ysera extends MinionCard {
 		ysera.setTag(GameTag.UNIQUE_ENTITY, UniqueEntity.YSERA);
 		SpellDesc receiveDreamCard = ReceiveRandomCardSpell.create(TargetPlayer.SELF, new Dream(), new EmeraldDrake(), new LaughingSister(),
 				new Nightmare(), new YseraAwakens());
-		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), receiveDreamCard);
+		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(null), receiveDreamCard);
 		ysera.setSpellTrigger(trigger);
 		return ysera;
 	}

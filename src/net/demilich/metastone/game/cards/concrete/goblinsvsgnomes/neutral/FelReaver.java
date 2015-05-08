@@ -28,7 +28,8 @@ public class FelReaver extends MinionCard {
 	public Minion summon() {
 		Minion felReaver = createMinion();
 		SpellDesc discard = DiscardCardsFromDeckSpell.create(3);
-		SpellTrigger trigger = new SpellTrigger(new CardPlayedTrigger(TargetPlayer.OPPONENT), discard);
+		//SpellTrigger trigger = new SpellTrigger(new CardPlayedTrigger(TargetPlayer.OPPONENT), discard);
+		SpellTrigger trigger = new SpellTrigger(new CardPlayedTrigger(null), discard);
 		felReaver.setSpellTrigger(trigger);
 		return felReaver;
 	}

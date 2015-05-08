@@ -38,22 +38,23 @@ public class MimironsHead extends MinionCard {
 		SpellDesc destroyAllMechs = DestroySpell.create(EntityReference.FRIENDLY_MINIONS, entity -> entity.getTag(GameTag.RACE) == Race.MECH, false);
 		SpellDesc summon = SummonSpell.create(new V07TR0N());
 		SpellDesc metaSpell = MetaSpell.create(EntityReference.NONE, destroyAllMechs, summon);
-		SpellTrigger trigger = new SpellTrigger(new StartOfTurnHaveMechsTrigger(), metaSpell);
+		//SpellTrigger trigger = new SpellTrigger(new StartOfTurnHaveMechsTrigger(), metaSpell);
+		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(null), metaSpell);
 		mimironsHead.setSpellTrigger(trigger);
 		return mimironsHead;
 	}
 
-	private class StartOfTurnHaveMechsTrigger extends TurnStartTrigger {
-
-		@Override
-		public boolean fire(GameEvent event, Entity host) {
-			if (!super.fire(event, host)) {
-				return false;
-			}
-			Player player = event.getGameContext().getPlayer(host.getOwner());
-			int mechCount = SpellUtils.hasHowManyOfRace(player, Race.MECH);
-			return mechCount >= 3;
-		}
-
-	}
+//	private class StartOfTurnHaveMechsTrigger extends TurnStartTrigger {
+//
+//		@Override
+//		public boolean fire(GameEvent event, Entity host) {
+//			if (!super.fire(event, host)) {
+//				return false;
+//			}
+//			Player player = event.getGameContext().getPlayer(host.getOwner());
+//			int mechCount = SpellUtils.hasHowManyOfRace(player, Race.MECH);
+//			return mechCount >= 3;
+//		}
+//
+//	}
 }

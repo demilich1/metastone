@@ -13,7 +13,6 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.desc.BattlecryDesc;
-import net.demilich.metastone.game.spells.desc.SpellDesc;
 
 public class MinionCard extends Card {
 
@@ -23,8 +22,7 @@ public class MinionCard extends Card {
 
 	}));
 
-	private final BattlecryDesc battlecry;
-	private final SpellDesc deathrattle;
+	private final MinionCardDesc desc;
 
 	public MinionCard(MinionCardDesc desc) {
 		super(desc);
@@ -33,16 +31,14 @@ public class MinionCard extends Card {
 		if (desc.race != null) {
 			setRace(desc.race);
 		}
-		battlecry = desc.battlecry;
-		deathrattle = desc.deathrattle;
+		this.desc = desc;
 	}
 
 	public MinionCard(String name, int baseAttack, int baseHp, Rarity rarity, HeroClass classRestriction, int manaCost) {
 		super(name, CardType.MINION, rarity, classRestriction, manaCost);
 		setTag(GameTag.BASE_ATTACK, baseAttack);
 		setTag(GameTag.BASE_HP, baseHp);
-		this.battlecry = null;
-		this.deathrattle = null;
+		this.desc = new MinionCardDesc();
 	}
 
 	protected Minion createMinion(GameTag... tags) {
@@ -55,13 +51,19 @@ public class MinionCard extends Card {
 		minion.setBaseAttack(getBaseAttack());
 		minion.setTag(GameTag.ATTACK_BONUS, getTagValue(GameTag.ATTACK_BONUS));
 		minion.setBaseHp(getBaseHp());
+		BattlecryDesc battlecry = desc.battlecry;
 		if (battlecry != null) {
 			BattlecryAction battlecryAction = BattlecryAction.createBattlecry(battlecry.spell, battlecry.getTargetSelection());
 			battlecryAction.setResolvedLate(battlecry.resolvedLate);
+
 			minion.setBattlecry(battlecryAction);
 		}
-		if (deathrattle != null) {
-			minion.addDeathrattle(deathrattle);
+
+		if (desc.deathrattle != null) {
+			minion.addDeathrattle(desc.deathrattle);
+		}
+		if (desc.trigger != null) {
+			minion.setSpellTrigger(desc.trigger.create());
 		}
 		return minion;
 	}

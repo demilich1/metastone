@@ -23,7 +23,7 @@ public class ImpGangBoss extends MinionCard {
 	public Minion summon() {
 		Minion impGangBoss = createMinion();
 		SpellDesc summonImp = SummonSpell.create(new Imp());
-		SpellTrigger trigger = new SpellTrigger(new DamageReceivedTrigger(), summonImp);
+		SpellTrigger trigger = new SpellTrigger(new DamageReceivedTrigger(null), summonImp);
 		impGangBoss.setSpellTrigger(trigger);
 		return impGangBoss;
 	}

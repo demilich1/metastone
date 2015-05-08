@@ -28,7 +28,7 @@ public class Gahzrilla extends MinionCard {
 	public Minion summon() {
 		Minion gahzrilla = createMinion();
 		SpellDesc buffSpell = DoubleAttackSpell.create(EntityReference.SELF);
-		SpellTrigger trigger = new SpellTrigger(new DamageReceivedTrigger(), buffSpell);
+		SpellTrigger trigger = new SpellTrigger(new DamageReceivedTrigger(null), buffSpell);
 		gahzrilla.setSpellTrigger(trigger);
 		return gahzrilla;
 	}

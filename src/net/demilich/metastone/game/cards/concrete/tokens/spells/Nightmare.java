@@ -22,7 +22,7 @@ public class Nightmare extends SpellCard {
 		setDescription("Give a minion +5/+5. At the start of your next turn, destroy it.");
 
 		SpellDesc destroySpell = DestroySpell.create(EntityReference.SELF);
-		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), destroySpell, true);
+		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(null), destroySpell, true);
 		setSpell(MetaSpell.create(null, BuffSpell.create(5, 5), AddSpellTriggerSpell.create(trigger), AddAttributeSpell.create(GameTag.MARKED_FOR_DEATH), false));
 		setTargetRequirement(TargetSelection.MINIONS);
 

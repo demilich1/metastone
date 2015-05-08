@@ -27,7 +27,7 @@ public class Kidnapper extends MinionCard {
 	public Minion summon() {
 		Minion kidnapper = createMinion();
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(ReturnMinionToHandSpell.create(), TargetSelection.MINIONS);
-		battlecry.setCondition((context, player) -> player.getHero().hasStatus(GameTag.COMBO));
+		//battlecry.setCondition((context, player) -> player.getHero().hasStatus(GameTag.COMBO));
 		kidnapper.setBattlecry(battlecry);
 		return kidnapper;
 	}

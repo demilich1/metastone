@@ -28,7 +28,8 @@ public class EmperorCobra extends MinionCard {
 	public Minion summon() {
 		Minion emperorCobra = createMinion();
 		SpellDesc killSpell = DestroySpell.create(EntityReference.EVENT_TARGET);
-		emperorCobra.setSpellTrigger(new SpellTrigger(new DamageCausedTrigger(false), killSpell));
+		//emperorCobra.setSpellTrigger(new SpellTrigger(new DamageCausedTrigger(false), killSpell));
+		emperorCobra.setSpellTrigger(new SpellTrigger(new DamageCausedTrigger(null), killSpell));
 		return emperorCobra;
 	}
 }

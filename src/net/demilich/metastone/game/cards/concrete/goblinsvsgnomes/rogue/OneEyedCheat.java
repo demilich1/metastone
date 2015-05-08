@@ -7,7 +7,6 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.AddAttributeSpell;
-import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.MinionSummonedTrigger;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
@@ -30,7 +29,8 @@ public class OneEyedCheat extends MinionCard {
 	public Minion summon() {
 		Minion oneEyedCheat = createMinion();
 		SpellDesc stealth = AddAttributeSpell.create(EntityReference.SELF, GameTag.STEALTH);
-		SpellTrigger trigger = new SpellTrigger(new MinionSummonedTrigger(TargetPlayer.SELF, Race.PIRATE), stealth);
+		//SpellTrigger trigger = new SpellTrigger(new MinionSummonedTrigger(TargetPlayer.SELF, Race.PIRATE), stealth);
+		SpellTrigger trigger = new SpellTrigger(new MinionSummonedTrigger(null), stealth);
 		oneEyedCheat.setSpellTrigger(trigger);
 		return oneEyedCheat;
 	}

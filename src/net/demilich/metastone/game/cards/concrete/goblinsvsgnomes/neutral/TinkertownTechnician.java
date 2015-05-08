@@ -34,7 +34,7 @@ public class TinkertownTechnician extends MinionCard {
 		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, +1, +1);
 		SpellDesc sparePartSpell = ReceiveSparePartSpell.create(TargetPlayer.SELF);
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(MetaSpell.create(buffSpell, sparePartSpell));
-		battlecry.setCondition((context, player) -> SpellUtils.hasMinionOfRace(player, Race.MECH));
+		//battlecry.setCondition((context, player) -> SpellUtils.hasMinionOfRace(player, Race.MECH));
 		tinkertownTechnician.setBattlecry(battlecry);
 		return tinkertownTechnician;
 	}

@@ -30,7 +30,7 @@ public class GoblinBlastmage extends MinionCard {
 		Minion goblinBlastmage = createMinion();
 		SpellDesc spell = MissilesSpell.create(EntityReference.ENEMY_CHARACTERS, 1, 4);
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(spell);
-		battlecry.setCondition((context, player) -> SpellUtils.hasMinionOfRace(player, Race.MECH));
+		//battlecry.setCondition((context, player) -> SpellUtils.hasMinionOfRace(player, Race.MECH));
 		goblinBlastmage.setBattlecry(battlecry);
 		return goblinBlastmage;
 	}

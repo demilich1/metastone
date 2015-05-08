@@ -25,7 +25,7 @@ public class BlackwindCorruptor extends MinionCard {
 		Minion blackwindCorruptor = createMinion();
 		SpellDesc damageSpell = DamageSpell.create(3);
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(damageSpell, TargetSelection.ANY);
-		battlecry.setCondition((context, player) -> SpellUtils.holdsMinionOfRace(player, Race.DRAGON));
+		//battlecry.setCondition((context, player) -> SpellUtils.holdsMinionOfRace(player, Race.DRAGON));
 		blackwindCorruptor.setBattlecry(battlecry);
 		return blackwindCorruptor;
 	}

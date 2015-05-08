@@ -31,7 +31,9 @@ public class KnifeJuggler extends MinionCard {
 		Minion knifeJuggler = createMinion();
 		SpellDesc damageRandomSpell = MissilesSpell.create(EntityReference.ENEMY_CHARACTERS, 1, 1);
 		SpellDesc removeStealth = RemoveAttributeSpell.create(EntityReference.SELF, GameTag.STEALTH);
-		SpellTrigger trigger = new SpellTrigger(new MinionSummonedTrigger(TargetPlayer.SELF), MetaSpell.create(damageRandomSpell,
+		//SpellTrigger trigger = new SpellTrigger(new MinionSummonedTrigger(TargetPlayer.SELF), MetaSpell.create(damageRandomSpell,
+		//		removeStealth));
+		SpellTrigger trigger = new SpellTrigger(new MinionSummonedTrigger(null), MetaSpell.create(damageRandomSpell,
 				removeStealth));
 		knifeJuggler.setSpellTrigger(trigger);
 		return knifeJuggler;

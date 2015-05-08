@@ -27,7 +27,7 @@ public class ReceiveCardSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		for (Card card : SpellUtils.getCards(desc)) {
-			context.getLogic().receiveCard(player.getId(), card.clone());
+			context.getLogic().receiveCard(player.getId(), card);
 		}
 
 	}

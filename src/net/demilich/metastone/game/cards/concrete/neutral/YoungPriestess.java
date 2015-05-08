@@ -26,7 +26,7 @@ public class YoungPriestess extends MinionCard {
 	public Minion summon() {
 		Minion youngPriestess = createMinion();
 		SpellDesc spell = BuffSpell.create(EntityReference.OTHER_FRIENDLY_MINIONS, 0, 1, true);
-		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), spell);
+		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(null), spell);
 		youngPriestess.setSpellTrigger(trigger);
 		return youngPriestess;
 	}

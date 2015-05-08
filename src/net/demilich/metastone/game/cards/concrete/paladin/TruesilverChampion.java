@@ -33,31 +33,31 @@ public class TruesilverChampion extends WeaponCard {
 	public Weapon getWeapon() {
 		Weapon trueSilverChampion = createWeapon(4, 2);
 		SpellDesc healHero = HealingSpell.create(EntityReference.FRIENDLY_HERO, 2);
-		SpellTrigger trigger = new SpellTrigger(new TruesilverChampionWeaponTrigger(), healHero);
+		SpellTrigger trigger = new SpellTrigger(new TargetAcquisitionTrigger(null), healHero);
 		trueSilverChampion.setSpellTrigger(trigger);
 		return trueSilverChampion;
 	}
 
-	private class TruesilverChampionWeaponTrigger extends TargetAcquisitionTrigger {
-
-		public TruesilverChampionWeaponTrigger() {
-			super(ActionType.PHYSICAL_ATTACK, EntityType.HERO);
-		}
-
-		@Override
-		public boolean fire(GameEvent event, Entity host) {
-			if (!super.fire(event, host)) {
-				return false;
-			}
-			TargetAcquisitionEvent targetAcquisitionEvent = (TargetAcquisitionEvent) event;
-			Hero hero = (Hero) targetAcquisitionEvent.getSource();
-			return hero.getWeapon() == host;
-		}
-
-		@Override
-		public GameEventType interestedIn() {
-			return GameEventType.TARGET_ACQUISITION;
-		}
-
-	}
+//	private class TruesilverChampionWeaponTrigger extends TargetAcquisitionTrigger {
+//
+//		public TruesilverChampionWeaponTrigger() {
+//			super(ActionType.PHYSICAL_ATTACK, EntityType.HERO);
+//		}
+//
+//		@Override
+//		public boolean fire(GameEvent event, Entity host) {
+//			if (!super.fire(event, host)) {
+//				return false;
+//			}
+//			TargetAcquisitionEvent targetAcquisitionEvent = (TargetAcquisitionEvent) event;
+//			Hero hero = (Hero) targetAcquisitionEvent.getSource();
+//			return hero.getWeapon() == host;
+//		}
+//
+//		@Override
+//		public GameEventType interestedIn() {
+//			return GameEventType.TARGET_ACQUISITION;
+//		}
+//
+//	}
 }

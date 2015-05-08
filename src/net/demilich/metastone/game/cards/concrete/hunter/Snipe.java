@@ -6,6 +6,7 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.DamageSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.MinionCardPlayedTrigger;
+import net.demilich.metastone.game.spells.trigger.secrets.Secret;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class Snipe extends SecretCard {
@@ -15,7 +16,7 @@ public class Snipe extends SecretCard {
 		setDescription("Secret: When your opponent plays a minion, deal $4 damage to it.");
 		
 		SpellDesc damageSpell = DamageSpell.create(EntityReference.EVENT_TARGET, 4);
-		setTriggerAndEffect(new MinionCardPlayedTrigger(), damageSpell);
+		setSecret(new Secret(new MinionCardPlayedTrigger(null), damageSpell, this));
 	}
 
 	@Override

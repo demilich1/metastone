@@ -31,21 +31,22 @@ public class AlarmOBot extends MinionCard {
 	public Minion summon() {
 		Minion alarmOBot = createMinion();
 		SpellDesc alarmOBotSpell = AlarmOBotSpell.create();
-		alarmOBot.setSpellTrigger(new SpellTrigger(new AlarmOBotTrigger(), alarmOBotSpell));
+		//alarmOBot.setSpellTrigger(new SpellTrigger(new AlarmOBotTrigger(), alarmOBotSpell));
+		alarmOBot.setSpellTrigger(new SpellTrigger(new TurnStartTrigger(null), alarmOBotSpell));
 		return alarmOBot;
 	}
 
 
-	private class AlarmOBotTrigger extends TurnStartTrigger {
-
-		@Override
-		public boolean fire(GameEvent event, Entity host) {
-			if (!super.fire(event, host)) {
-				return false;
-			}
-			Player owningPlayer = event.getGameContext().getPlayer(host.getOwner());
-			return owningPlayer.getHand().hasCardOfType(CardType.MINION);
-
-		}
-	}
+//	private class AlarmOBotTrigger extends TurnStartTrigger {
+//
+//		@Override
+//		public boolean fire(GameEvent event, Entity host) {
+//			if (!super.fire(event, host)) {
+//				return false;
+//			}
+//			Player owningPlayer = event.getGameContext().getPlayer(host.getOwner());
+//			return owningPlayer.getHand().hasCardOfType(CardType.MINION);
+//
+//		}
+//	}
 }

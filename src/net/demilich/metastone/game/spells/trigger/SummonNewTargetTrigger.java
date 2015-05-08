@@ -1,18 +1,18 @@
 package net.demilich.metastone.game.spells.trigger;
 
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.events.GameEvent;
+import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
 public class SummonNewTargetTrigger extends TargetAcquisitionTrigger {
 
-	public SummonNewTargetTrigger(ActionType actionType) {
-		super(actionType);
+	public SummonNewTargetTrigger(EventTriggerDesc desc) {
+		super(desc);
 	}
 
 	@Override
-	public boolean fire(GameEvent event, Entity host) {
+	protected boolean fire(GameEvent event, Entity host) {
 		if (!super.fire(event, host)) {
 			return false;
 		}

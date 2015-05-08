@@ -32,7 +32,7 @@ public class Demolisher extends MinionCard {
 		Minion demolisher = createMinion();
 		SpellDesc randomDamageSpell = DamageSpell.create(EntityReference.ENEMY_CHARACTERS, 2, true);
 		SpellDesc removeStealth = RemoveAttributeSpell.create(EntityReference.SELF, GameTag.STEALTH);
-		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(), MetaSpell.create(randomDamageSpell, removeStealth));
+		SpellTrigger trigger = new SpellTrigger(new TurnStartTrigger(null), MetaSpell.create(randomDamageSpell, removeStealth));
 		demolisher.setSpellTrigger(trigger);
 		return demolisher;
 	}

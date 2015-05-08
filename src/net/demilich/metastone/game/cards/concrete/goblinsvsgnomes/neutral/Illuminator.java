@@ -26,7 +26,7 @@ public class Illuminator extends MinionCard {
 	public Minion summon() {
 		Minion illuminator = createMinion();
 		SpellDesc healHeroSpell = HealingSpell.create(EntityReference.FRIENDLY_HERO, 4);
-		SpellTrigger trigger = new SpellTrigger(new TurnEndAndControlSecretTrigger(), healHeroSpell);
+		SpellTrigger trigger = new SpellTrigger(new TurnEndAndControlSecretTrigger(null), healHeroSpell);
 		illuminator.setSpellTrigger(trigger);
 		return illuminator;
 	}

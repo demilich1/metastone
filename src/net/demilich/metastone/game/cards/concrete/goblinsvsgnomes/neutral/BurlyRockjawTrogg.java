@@ -27,7 +27,8 @@ public class BurlyRockjawTrogg extends MinionCard {
 	public Minion summon() {
 		Minion burlyRockjawTrogg = createMinion();
 		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, +2, 0);
-		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(TargetPlayer.OPPONENT), buffSpell);
+		//SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(TargetPlayer.OPPONENT), buffSpell);
+		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(null), buffSpell);
 		burlyRockjawTrogg.setSpellTrigger(trigger);
 		return burlyRockjawTrogg;
 	}

@@ -26,7 +26,8 @@ public class TroggzorTheEarthinator extends MinionCard {
 	public Minion summon() {
 		Minion troggzor = createMinion();
 		SpellDesc summonTrogg = SummonSpell.create(new BurlyRockjawTrogg());
-		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(TargetPlayer.OPPONENT), summonTrogg);
+		//SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(TargetPlayer.OPPONENT), summonTrogg);
+		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(null), summonTrogg);
 		troggzor.setSpellTrigger(trigger);
 		return troggzor;
 	}

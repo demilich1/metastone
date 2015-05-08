@@ -31,7 +31,7 @@ public class DruidOfTheFang extends MinionCard {
 		Minion druidOfTheFang = createMinion();
 		SpellDesc transformSpell = TransformMinionSpell.create(EntityReference.SELF, new CobraForm(), false);
 		BattlecryAction battleCry = BattlecryAction.createBattlecry(transformSpell);
-		battleCry.setCondition((context, player) -> SpellUtils.hasMinionOfRace(player, Race.BEAST));
+		//battleCry.setCondition((context, player) -> SpellUtils.hasMinionOfRace(player, Race.BEAST));
 		druidOfTheFang.setBattlecry(battleCry);
 		return druidOfTheFang;
 	}

@@ -34,7 +34,7 @@ public class RendBlackhand extends MinionCard {
 			Minion minion = (Minion) entity;
 			return minion.getSourceCard().getRarity() == Rarity.LEGENDARY;
 		});
-		battlecry.setCondition((context, player) -> SpellUtils.holdsMinionOfRace(player, Race.DRAGON));
+		//battlecry.setCondition((context, player) -> SpellUtils.holdsMinionOfRace(player, Race.DRAGON));
 		rendBlackhand.setBattlecry(battlecry);
 		return rendBlackhand;
 	}

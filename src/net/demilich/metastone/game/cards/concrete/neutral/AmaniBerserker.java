@@ -27,7 +27,7 @@ public class AmaniBerserker extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion amaniBerserker = createMinion(GameTag.ENRAGABLE);
-		SpellTrigger trigger = new SpellTrigger(new EnrageChangedTrigger(), EnrageSpell.create(ENRAGE_ATTACK_BONUS));
+		SpellTrigger trigger = new SpellTrigger(new EnrageChangedTrigger(null), EnrageSpell.create(ENRAGE_ATTACK_BONUS));
 		amaniBerserker.setSpellTrigger(trigger);
 		return amaniBerserker;
 	}

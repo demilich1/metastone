@@ -30,7 +30,7 @@ public class BlackwingTechnician extends MinionCard {
 		Minion blackwingTechnician = createMinion();
 		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, 1, 1);
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(buffSpell);
-		battlecry.setCondition((context, player) -> SpellUtils.holdsMinionOfRace(player, Race.DRAGON));
+		//battlecry.setCondition((context, player) -> SpellUtils.holdsMinionOfRace(player, Race.DRAGON));
 		blackwingTechnician.setBattlecry(battlecry);
 		return blackwingTechnician;
 	}

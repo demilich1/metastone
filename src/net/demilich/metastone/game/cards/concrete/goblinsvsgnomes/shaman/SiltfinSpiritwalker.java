@@ -30,7 +30,8 @@ public class SiltfinSpiritwalker extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion siltfinSpiritwalker = createMinion();
-		SpellTrigger trigger = new SpellTrigger(new MinionDeathTrigger(TargetPlayer.SELF, Race.MURLOC), DrawCardSpell.create());
+		//SpellTrigger trigger = new SpellTrigger(new MinionDeathTrigger(TargetPlayer.SELF, Race.MURLOC), DrawCardSpell.create());
+		SpellTrigger trigger = new SpellTrigger(new MinionDeathTrigger(null), DrawCardSpell.create());
 		siltfinSpiritwalker.setSpellTrigger(trigger);
 		return siltfinSpiritwalker;
 	}

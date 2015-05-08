@@ -8,27 +8,17 @@ import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.events.KillEvent;
 import net.demilich.metastone.game.spells.TargetPlayer;
+import net.demilich.metastone.game.spells.desc.trigger.EventTriggerArg;
+import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
 public class MinionDeathTrigger extends GameEventTrigger {
 	
-	private TargetPlayer targetPlayer;
-	private Race race;
+	public MinionDeathTrigger(EventTriggerDesc desc) {
+		super(desc);
+	}
 
-	public MinionDeathTrigger() {
-		this(TargetPlayer.BOTH, null);
-	}
-	
-	public MinionDeathTrigger(TargetPlayer targetPlayer) {
-		this(targetPlayer, null);
-	}
-	
-	public MinionDeathTrigger(TargetPlayer targetPlayer, Race race) {
-		this.targetPlayer = targetPlayer;
-		this.race = race;
-	}
-	
 	@Override
-	public boolean fire(GameEvent event, Entity host) {
+	protected boolean fire(GameEvent event, Entity host) {
 		KillEvent killEvent = (KillEvent) event;
 		if (killEvent.getVictim().getEntityType() != EntityType.MINION) {
 			return false;
@@ -36,10 +26,12 @@ public class MinionDeathTrigger extends GameEventTrigger {
 		
 		Minion minion = (Minion) killEvent.getVictim();
 		
+		Race race = (Race) desc.get(EventTriggerArg.RACE);
 		if (race != null && minion.getRace() != race) {
 			return false;
 		}
 		
+		TargetPlayer targetPlayer = desc.getTargetPlayer();
 		switch (targetPlayer) {
 		case BOTH:
 			return true;

@@ -3,10 +3,10 @@ package net.demilich.metastone.game.cards.concrete.naxxramas;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.SecretCard;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
-import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.custom.PutCopyInHandSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.MinionDeathTrigger;
+import net.demilich.metastone.game.spells.trigger.secrets.Secret;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class Duplicate extends SecretCard {
@@ -16,7 +16,8 @@ public class Duplicate extends SecretCard {
 		setDescription("Secret: When a friendly minion dies, put 2 copies of it in your hand.");
 
 		SpellDesc duplicate = PutCopyInHandSpell.create(EntityReference.EVENT_TARGET, 2);
-		setTriggerAndEffect(new MinionDeathTrigger(TargetPlayer.SELF), duplicate);
+		//setTriggerAndEffect(new MinionDeathTrigger(TargetPlayer.SELF), duplicate);
+		setSecret(new Secret(new MinionDeathTrigger(null), duplicate, this));
 	}
 
 	@Override

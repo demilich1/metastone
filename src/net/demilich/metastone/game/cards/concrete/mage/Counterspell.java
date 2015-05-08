@@ -8,6 +8,7 @@ import net.demilich.metastone.game.spells.AddAttributeSpell;
 import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.SpellCastedTrigger;
+import net.demilich.metastone.game.spells.trigger.secrets.Secret;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class Counterspell extends SecretCard {
@@ -17,7 +18,8 @@ public class Counterspell extends SecretCard {
 		setDescription("Secret: When your opponent casts a spell, Counter it.");
 
 		SpellDesc counterSpell = AddAttributeSpell.create(EntityReference.PENDING_CARD, GameTag.COUNTERED);
-		setTriggerAndEffect(new SpellCastedTrigger(TargetPlayer.OPPONENT), counterSpell);
+		// set targetPlayer to OPPONENT
+		setSecret(new Secret(new SpellCastedTrigger(null), counterSpell, this));
 	}
 
 	@Override

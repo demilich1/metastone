@@ -28,7 +28,7 @@ public class AxeFlinger extends MinionCard {
 	public Minion summon() {
 		Minion axeFlinger = createMinion();
 		SpellDesc damageEnemyHero = DamageSpell.create(EntityReference.ENEMY_HERO, 2);
-		SpellTrigger trigger = new SpellTrigger(new DamageReceivedTrigger(), damageEnemyHero);
+		SpellTrigger trigger = new SpellTrigger(new DamageReceivedTrigger(null), damageEnemyHero);
 		axeFlinger.setSpellTrigger(trigger);
 		return axeFlinger;
 	}

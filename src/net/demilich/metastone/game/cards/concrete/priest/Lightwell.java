@@ -26,7 +26,7 @@ public class Lightwell extends MinionCard {
 	public Minion summon() {
 		Minion lightwell = createMinion();
 		SpellDesc healRandomSpell = HealingSpell.create(EntityReference.FRIENDLY_CHARACTERS, 3, true);
-		lightwell.setSpellTrigger(new SpellTrigger(new TurnStartTrigger(), healRandomSpell));
+		lightwell.setSpellTrigger(new SpellTrigger(new TurnStartTrigger(null), healRandomSpell));
 		return lightwell;
 	}
 }

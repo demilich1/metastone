@@ -5,27 +5,23 @@ import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.events.TurnEndEvent;
 import net.demilich.metastone.game.spells.TargetPlayer;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
 public class TurnEndTrigger extends GameEventTrigger {
 	
-	private static Logger logger = LoggerFactory.getLogger(TurnEndTrigger.class);
-
-	private final TargetPlayer targetPlayer;
-
-	public TurnEndTrigger() {
-		this(TargetPlayer.SELF);
+	public TurnEndTrigger(EventTriggerDesc desc) {
+		super(desc);
 	}
-
-	public TurnEndTrigger(TargetPlayer targetPlayer) {
-		this.targetPlayer = targetPlayer;
+	
+	public TurnEndTrigger() {
+		this(EventTriggerDesc.createEmpty(TurnEndTrigger.class));
 	}
 
 	@Override
-	public boolean fire(GameEvent event, Entity host) {
+	protected boolean fire(GameEvent event, Entity host) {
 		TurnEndEvent turnEndEvent = (TurnEndEvent) event;
+		
+		TargetPlayer targetPlayer = desc.getTargetPlayer();
 		switch (targetPlayer) {
 		case BOTH:
 			return true;
@@ -35,7 +31,6 @@ public class TurnEndTrigger extends GameEventTrigger {
 			return turnEndEvent.getPlayer() == getOwner();
 		}
 		
-		logger.warn("Invalid TargetPlayer type: " + targetPlayer);
 		return false;
 	}
 

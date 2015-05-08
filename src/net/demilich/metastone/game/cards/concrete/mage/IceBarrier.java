@@ -5,6 +5,7 @@ import net.demilich.metastone.game.cards.SecretCard;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.BuffHeroSpell;
 import net.demilich.metastone.game.spells.trigger.HeroAttackedTrigger;
+import net.demilich.metastone.game.spells.trigger.secrets.Secret;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class IceBarrier extends SecretCard {
@@ -12,7 +13,7 @@ public class IceBarrier extends SecretCard {
 	public IceBarrier() {
 		super("Ice Barrier", Rarity.COMMON, HeroClass.MAGE, 3);
 		setDescription("Secret: As soon as your hero is attacked, gain 8 Armor.");
-		setTriggerAndEffect(new HeroAttackedTrigger(), BuffHeroSpell.create(EntityReference.FRIENDLY_HERO, 0, 8));
+		setSecret(new Secret(new HeroAttackedTrigger(null), BuffHeroSpell.create(EntityReference.FRIENDLY_HERO, 0, 8), this));
 	}
 
 	@Override

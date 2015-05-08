@@ -5,7 +5,8 @@ import net.demilich.metastone.game.cards.SecretCard;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.ReturnMinionToHandSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.spells.trigger.MinionAttacksTrigger;
+import net.demilich.metastone.game.spells.trigger.AnyMinionAttacksTrigger;
+import net.demilich.metastone.game.spells.trigger.secrets.Secret;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class FreezingTrap extends SecretCard {
@@ -15,7 +16,7 @@ public class FreezingTrap extends SecretCard {
 		setDescription("Secret: When an enemy minion attacks, return it to its owner's hand and it costs (2) more.");
 		
 		SpellDesc returnToHandSpell = ReturnMinionToHandSpell.create(EntityReference.ATTACKER, 2, false);
-		setTriggerAndEffect(new MinionAttacksTrigger(), returnToHandSpell);
+		setSecret(new Secret(new AnyMinionAttacksTrigger(null), returnToHandSpell, this));
 	}
 
 	@Override

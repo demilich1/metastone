@@ -1,32 +1,34 @@
 package net.demilich.metastone.game.spells.trigger;
 
+import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.events.CardPlayedEvent;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.spells.TargetPlayer;
+import net.demilich.metastone.game.spells.desc.trigger.EventTriggerArg;
+import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
 public class CardPlayedTrigger extends GameEventTrigger {
 	
-	private final TargetPlayer targetPlayer;
-	private final CardType cardType;
-
-	public CardPlayedTrigger(TargetPlayer targetPlayer) {
-		this(targetPlayer, null);
-	}
-	
-	public CardPlayedTrigger(TargetPlayer targetPlayer, CardType cardType) {
-		this.targetPlayer = targetPlayer;
-		this.cardType = cardType;
+	public CardPlayedTrigger(EventTriggerDesc desc) {
+		super(desc);
 	}
 
 	@Override
-	public boolean fire(GameEvent event, Entity host) {
+	protected boolean fire(GameEvent event, Entity host) {
 		CardPlayedEvent cardPlayedEvent = (CardPlayedEvent) event;
+		CardType cardType = (CardType) desc.get(EventTriggerArg.CARD_TYPE);
 		if (cardType != null) {
 			return cardPlayedEvent.getCard().getCardType() == cardType;
 		}
+		Race race = (Race) desc.get(EventTriggerArg.RACE);
+		if (race != null && cardPlayedEvent.getCard().getTag(GameTag.RACE) != race) {
+			return false;
+		}
+		TargetPlayer targetPlayer = desc.getTargetPlayer();
 		switch (targetPlayer) {
 		case BOTH:
 			return true;

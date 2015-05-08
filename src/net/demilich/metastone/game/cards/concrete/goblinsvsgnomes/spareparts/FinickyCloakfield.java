@@ -14,12 +14,11 @@ public class FinickyCloakfield extends SpellCard {
 		super("Finicky Cloakfield", Rarity.FREE, HeroClass.ANY, 1);
 		setDescription("Give a friendly minion Stealth until your next turn.");
 		
-		setSpell(AddAttributeSpell.create(GameTag.STEALTH, new TurnStartTrigger()));
+		setSpell(AddAttributeSpell.create(GameTag.STEALTH, new TurnStartTrigger(null)));
 		setTargetRequirement(TargetSelection.FRIENDLY_MINIONS);
 		
 		setCollectible(false);
 	}
-
 
 
 	@Override

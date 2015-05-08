@@ -32,26 +32,26 @@ public class AnimaGolem extends MinionCard {
 	public Minion summon() {
 		Minion animaGolem = createMinion();
 		SpellDesc destroySpell = DestroySpell.create(EntityReference.SELF);
-		SpellTrigger trigger = new SpellTrigger(new AnimaGolemTrigger(), destroySpell);
+		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(null), destroySpell);
 		animaGolem.setSpellTrigger(trigger);
 		return animaGolem;
 	}
 
 
 
-	private class AnimaGolemTrigger extends TurnEndTrigger {
-		public AnimaGolemTrigger() {
-			super(TargetPlayer.BOTH);
-		}
-
-		@Override
-		public boolean fire(GameEvent event, Entity host) {
-			if (!super.fire(event, host)) {
-				return false;
-			}
-			Player owner = event.getGameContext().getPlayer(getOwner());
-			return owner.getMinions().size() < 2;
-		}
-
-	}
+//	private class AnimaGolemTrigger extends TurnEndTrigger {
+//		public AnimaGolemTrigger() {
+//			super(TargetPlayer.BOTH);
+//		}
+//
+//		@Override
+//		public boolean fire(GameEvent event, Entity host) {
+//			if (!super.fire(event, host)) {
+//				return false;
+//			}
+//			Player owner = event.getGameContext().getPlayer(getOwner());
+//			return owner.getMinions().size() < 2;
+//		}
+//
+//	}
 }

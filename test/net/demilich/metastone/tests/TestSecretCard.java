@@ -4,7 +4,9 @@ import net.demilich.metastone.game.cards.SecretCard;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.DamageSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 import net.demilich.metastone.game.spells.trigger.HeroAttackedTrigger;
+import net.demilich.metastone.game.spells.trigger.secrets.Secret;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 
@@ -20,7 +22,7 @@ public class TestSecretCard extends SecretCard {
 		setCollectible(false);
 		
 		SpellDesc damageSpell = DamageSpell.create(EntityReference.ENEMY_CHARACTERS, damage);
-		setTriggerAndEffect(new HeroAttackedTrigger(), damageSpell);
+		setSecret(new Secret(new HeroAttackedTrigger(EventTriggerDesc.createEmpty(HeroAttackedTrigger.class)), damageSpell, this));
 	}
 
 }

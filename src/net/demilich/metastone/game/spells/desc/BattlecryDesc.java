@@ -7,7 +7,6 @@ public class BattlecryDesc {
 	public SpellDesc spell;
 	public TargetSelection targetSelection;
 	public boolean resolvedLate;
-	
 
 	public TargetSelection getTargetSelection() {
 		return targetSelection != null ? targetSelection : TargetSelection.NONE;

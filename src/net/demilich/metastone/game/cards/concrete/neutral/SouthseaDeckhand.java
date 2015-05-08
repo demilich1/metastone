@@ -28,7 +28,7 @@ public class SouthseaDeckhand extends MinionCard {
 	public Minion summon() {
 		SpellDesc chargeWhileWeaponEquipped = AddAttributeSpell.create(EntityReference.SELF, GameTag.CHARGE);
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(chargeWhileWeaponEquipped);
-		battlecry.setCondition((context, player) -> player.getHero().getWeapon() != null);
+		//battlecry.setCondition((context, player) -> player.getHero().getWeapon() != null);
 		Minion southseaDeckhand = createMinion();
 		southseaDeckhand.setBattlecry(battlecry);
 		return southseaDeckhand;

@@ -28,7 +28,7 @@ public class MechBearCat extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion mechBearCat = createMinion();
-		SpellTrigger trigger = new SpellTrigger(new DamageReceivedTrigger(), ReceiveSparePartSpell.create(TargetPlayer.SELF));
+		SpellTrigger trigger = new SpellTrigger(new DamageReceivedTrigger(null), ReceiveSparePartSpell.create(TargetPlayer.SELF));
 		mechBearCat.setSpellTrigger(trigger);
 		return mechBearCat;
 	}

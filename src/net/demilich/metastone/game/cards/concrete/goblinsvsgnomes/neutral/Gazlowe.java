@@ -31,30 +31,31 @@ public class Gazlowe extends MinionCard {
 	public Minion summon() {
 		Minion gazlowe = createMinion();
 		SpellDesc getRandomMech = ReceiveRandomRaceCardSpell.create(Race.MECH, 1);
-		SpellTrigger trigger = new SpellTrigger(new GazloweTrigger(), getRandomMech);
+		//SpellTrigger trigger = new SpellTrigger(new GazloweTrigger(), getRandomMech);
+		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(null), getRandomMech);
 		gazlowe.setSpellTrigger(trigger);
 		return gazlowe;
 	}
 
-	private class GazloweTrigger extends SpellCastedTrigger {
-
-		public GazloweTrigger() {
-			super(TargetPlayer.SELF);
-		}
-
-		@Override
-		public boolean fire(GameEvent event, Entity host) {
-			if (!super.fire(event, host)) {
-				return false;
-			}
-			SpellCastedEvent spellCastedEvent = (SpellCastedEvent) event;
-			// Question: How does Gazlowe work with Sorcerer's Apprentice? Will Ice Lance trigger it or Frostbolt?
-			// Answer: In example: A zero mana Ice Lance will not trigger Gazlowe, but a 1 mana Frostbolt will.
-			// Source: Blue post
-			Player player = event.getGameContext().getPlayer(spellCastedEvent.getPlayerId());
-			int realManaCost = event.getGameContext().getLogic().getModifiedManaCost(player, spellCastedEvent.getSourceCard());
-			return realManaCost == 1;
-		}
-
-	}
+//	private class GazloweTrigger extends SpellCastedTrigger {
+//
+//		public GazloweTrigger() {
+//			super(TargetPlayer.SELF);
+//		}
+//
+//		@Override
+//		public boolean fire(GameEvent event, Entity host) {
+//			if (!super.fire(event, host)) {
+//				return false;
+//			}
+//			SpellCastedEvent spellCastedEvent = (SpellCastedEvent) event;
+//			// Question: How does Gazlowe work with Sorcerer's Apprentice? Will Ice Lance trigger it or Frostbolt?
+//			// Answer: In example: A zero mana Ice Lance will not trigger Gazlowe, but a 1 mana Frostbolt will.
+//			// Source: Blue post
+//			Player player = event.getGameContext().getPlayer(spellCastedEvent.getPlayerId());
+//			int realManaCost = event.getGameContext().getLogic().getModifiedManaCost(player, spellCastedEvent.getSourceCard());
+//			return realManaCost == 1;
+//		}
+//
+//	}
 }

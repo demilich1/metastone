@@ -2,11 +2,9 @@ package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.warlock;
 
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
-import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
-import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.spells.BuffSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.HeroDamagedTrigger;
@@ -30,21 +28,12 @@ public class FloatingWatcher extends MinionCard {
 	public Minion summon() {
 		Minion floatingWatcher = createMinion();
 		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, +2, +2);
-		SpellTrigger trigger = new SpellTrigger(new FloatingWatcherTrigger(), buffSpell);
+		//set ownTurnOnly to TRUE
+		SpellTrigger trigger = new SpellTrigger(new HeroDamagedTrigger(null), buffSpell);
 		floatingWatcher.setSpellTrigger(trigger);
 		return floatingWatcher;
 	}
 
 
-	private class FloatingWatcherTrigger extends HeroDamagedTrigger {
-		
-		
-		@Override
-		public boolean fire(GameEvent event, Entity host) {
-			if (!super.fire(event, host)) {
-				return false;
-			}
-			return event.getGameContext().getActivePlayerId() == getOwner();
-		}
-	}
+	
 }

@@ -26,7 +26,7 @@ public class EaglehornBow extends WeaponCard {
 	public Weapon getWeapon() {
 		Weapon eaglehornBow = createWeapon(3, 2);
 		SpellDesc increaseDurabilitySpell = ChangeDurabilitySpell.create(EntityReference.FRIENDLY_HERO, +1);
-		eaglehornBow.setSpellTrigger(new SpellTrigger(new SecretRevealedTrigger(), increaseDurabilitySpell));
+		eaglehornBow.setSpellTrigger(new SpellTrigger(new SecretRevealedTrigger(null), increaseDurabilitySpell));
 		return eaglehornBow;
 	}
 }

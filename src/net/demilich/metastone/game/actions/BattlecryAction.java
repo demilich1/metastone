@@ -6,6 +6,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.condition.Condition;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
@@ -24,7 +25,7 @@ public class BattlecryAction extends GameAction {
 
 	private final SpellDesc spell;
 	private boolean resolvedLate = false;
-	private IBattlecryCondition condition;
+	private Condition condition;
 
 	protected BattlecryAction(SpellDesc spell) {
 		this.spell = spell;
@@ -35,7 +36,7 @@ public class BattlecryAction extends GameAction {
 		if (condition == null) {
 			return true;
 		}
-		return condition.isFulfilled(context, player);
+		return condition.isFulfilled(context, player, null);
 	}
 
 	@Override
@@ -56,7 +57,6 @@ public class BattlecryAction extends GameAction {
 	public BattlecryAction clone() {
 		BattlecryAction clone = BattlecryAction.createBattlecry(getSpell(), getTargetRequirement());
 		clone.setActionSuffix(getActionSuffix());
-		clone.setCondition(getCondition());
 		clone.setResolvedLate(isResolvedLate());
 		clone.setSource(getSource());
 		return clone;
@@ -68,14 +68,10 @@ public class BattlecryAction extends GameAction {
 		context.getLogic().castSpell(playerId, getSpell(), getSource(), target);
 	}
 
-	public IBattlecryCondition getCondition() {
-		return condition;
-	}
-
 	public EntityFilter getEntityFilter() {
 		return spell.getEntityFilter();
 	}
-
+	
 	@Override
 	public String getPromptText() {
 		return "[Battlecry]";
@@ -92,10 +88,6 @@ public class BattlecryAction extends GameAction {
 	@Override
 	public boolean isSameActionGroup(GameAction anotherAction) {
 		return anotherAction.getActionType() == getActionType();
-	}
-
-	public void setCondition(IBattlecryCondition condition) {
-		this.condition = condition;
 	}
 
 	public void setEntityFilter(Predicate<Entity> entityFilter) {

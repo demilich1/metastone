@@ -28,7 +28,7 @@ public class KirinTorMage extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion kirinTorMage = createMinion();
-		OneTurnCostModifier costModifier = new OneTurnCostModifier(CardType.SPELL, -99, new SecretPlayedTrigger());
+		OneTurnCostModifier costModifier = new OneTurnCostModifier(CardType.SPELL, -99, new SecretPlayedTrigger(null));
 		costModifier.setRequiredTag(GameTag.SECRET);
 		SpellDesc castSecretForFree = AddCostModifierSpell.create(EntityReference.FRIENDLY_HERO, costModifier);
 		kirinTorMage.setBattlecry(BattlecryAction.createBattlecry(castSecretForFree));

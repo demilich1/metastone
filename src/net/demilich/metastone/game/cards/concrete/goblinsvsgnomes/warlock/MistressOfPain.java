@@ -7,7 +7,7 @@ import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.custom.LifeLeechSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.spells.trigger.PhysicalAttackTrigger;
+import net.demilich.metastone.game.spells.trigger.DamageCausedTrigger;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 
 public class MistressOfPain extends MinionCard {
@@ -27,7 +27,8 @@ public class MistressOfPain extends MinionCard {
 	public Minion summon() {
 		Minion mistressOfPain = createMinion();
 		SpellDesc lifeLeech = LifeLeechSpell.create();
-		SpellTrigger trigger = new SpellTrigger(new PhysicalAttackTrigger(true), lifeLeech);
+		//SpellTrigger trigger = new SpellTrigger(new PhysicalAttackTrigger(true), lifeLeech);
+		SpellTrigger trigger = new SpellTrigger(new DamageCausedTrigger(null), lifeLeech);
 		mistressOfPain.setSpellTrigger(trigger);
 		return mistressOfPain;
 	}

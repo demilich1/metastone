@@ -23,12 +23,10 @@ public class CoreRager extends MinionCard {
 	public Minion summon() {
 		Minion coreRager = createMinion();
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(BuffSpell.create(EntityReference.SELF, 3, 3));
-		battlecry.setCondition((context, player) -> player.getHand().isEmpty());
+		//battlecry.setCondition((context, player) -> player.getHand().isEmpty());
 		coreRager.setBattlecry(battlecry);
 		return coreRager;
 	}
-
-
 
 	@Override
 	public int getTypeId() {
