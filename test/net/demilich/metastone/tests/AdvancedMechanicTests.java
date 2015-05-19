@@ -14,7 +14,6 @@ import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.IChooseOneCard;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.SpellCard;
-import net.demilich.metastone.game.cards.concrete.neutral.AmaniBerserker;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -115,31 +114,33 @@ public class AdvancedMechanicTests extends BasicTests {
 		Player priest = context.getPlayer2();
 		priest.setMana(10);
 
-		playCard(context, priest, new AmaniBerserker());
+		final int BASE_ATTACK = 2;
+		final int ENRAGE_ATTACK_BONUS = 3;
+		playCard(context, priest, CardCatalogue.getCardByName("minion_amani_berserker"));
 
 		playCard(context, mage, new TestMinionCard(1, 10));
 
 		Entity attacker = getSingleMinion(mage.getMinions());
 		Actor defender = getSingleMinion(priest.getMinions());
 
-		Assert.assertEquals(defender.getAttack(), AmaniBerserker.BASE_ATTACK);
+		Assert.assertEquals(defender.getAttack(), BASE_ATTACK);
 		Assert.assertEquals(defender.hasStatus(GameTag.ENRAGED), false);
 
 		// attack once, should apply the enrage attack bonus
 		GameAction attackAction = new PhysicalAttackAction(attacker.getReference());
 		attackAction.setTarget(defender);
 		context.getLogic().performGameAction(mage.getId(), attackAction);
-		Assert.assertEquals(defender.getAttack(), AmaniBerserker.BASE_ATTACK + AmaniBerserker.ENRAGE_ATTACK_BONUS);
+		Assert.assertEquals(defender.getAttack(), BASE_ATTACK + ENRAGE_ATTACK_BONUS);
 		Assert.assertEquals(defender.hasStatus(GameTag.ENRAGED), true);
 		// attack second time, enrage bonus should not increase
 		context.getLogic().performGameAction(mage.getId(), attackAction);
-		Assert.assertEquals(defender.getAttack(), AmaniBerserker.BASE_ATTACK + AmaniBerserker.ENRAGE_ATTACK_BONUS);
+		Assert.assertEquals(defender.getAttack(), BASE_ATTACK + ENRAGE_ATTACK_BONUS);
 
 		// heal - enrage attack bonus should be gone
 		GameAction healAction = priest.getHero().getHeroPower().play();
 		healAction.setTarget(defender);
 		context.getLogic().performGameAction(priest.getId(), healAction);
-		Assert.assertEquals(defender.getAttack(), AmaniBerserker.BASE_ATTACK);
+		Assert.assertEquals(defender.getAttack(), BASE_ATTACK);
 		Assert.assertEquals(defender.hasStatus(GameTag.ENRAGED), false);
 	}
 

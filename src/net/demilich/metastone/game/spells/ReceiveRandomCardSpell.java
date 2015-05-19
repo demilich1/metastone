@@ -22,9 +22,9 @@ public class ReceiveRandomCardSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		Card[] cards = (Card[]) desc.get(SpellArg.CARD);
+		Card[] cards = SpellUtils.getCards(desc);
 		Card randomCard = cards[context.getLogic().random(cards.length)];
-		context.getLogic().receiveCard(player.getId(), randomCard.clone());
+		context.getLogic().receiveCard(player.getId(), randomCard);
 	}
 
 }

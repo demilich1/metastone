@@ -1,0 +1,24 @@
+{
+  "baseAttack": 2,
+  "baseHp": 3,
+  "trigger" : {
+	"eventTrigger" : {
+		"class" : "DamageCausedTrigger",
+		"worksOnHero" : false
+	},
+	"spell" : {
+		"class": "DestroySpell",
+		"target" : "EVENT_TARGET"
+	}
+  },
+  "race": "BEAST",
+  "id": "minion_emperor_cobra",
+  "name": "Emperor Cobra",
+  "description": "Destroy any minion damaged by this minion.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "RARE",
+  "baseManaCost": 3,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

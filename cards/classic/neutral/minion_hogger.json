@@ -1,0 +1,24 @@
+{
+  "baseAttack": 4,
+  "baseHp": 4,
+  "trigger": {
+   "eventTrigger" : {
+		"class" : "TurnEndTrigger",
+		"targetPlayer" : "SELF"
+	},
+	"spell" : {
+		"class": "SummonSpell",
+		"card" : "token_gnoll",
+		"boardPositionRelative" : "RIGHT"
+	}
+  },
+  "id": "minion_hogger",
+  "name": "Hogger",
+  "description": "At the end of your turn, summon a 2/2 Gnoll with Taunt.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "LEGENDARY",
+  "baseManaCost": 6,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

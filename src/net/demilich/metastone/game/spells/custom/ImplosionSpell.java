@@ -5,7 +5,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.cards.concrete.tokens.neutral.Imp;
+import net.demilich.metastone.game.cards.CardCatalogue;
+import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.Spell;
@@ -30,7 +31,8 @@ public class ImplosionSpell extends Spell {
 
 		int effectiveDamage = context.getLogic().damage(player, (Actor) target, damageRoll, source);
 		for (int i = 0; i < effectiveDamage; i++) {
-			context.getLogic().summon(player.getId(), new Imp().summon());
+			MinionCard imp = (MinionCard) CardCatalogue.getCardByName("token_imp");
+			context.getLogic().summon(player.getId(), imp.summon());
 		}
 	}
 

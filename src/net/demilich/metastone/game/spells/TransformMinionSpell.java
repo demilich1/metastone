@@ -4,6 +4,7 @@ import java.util.Map;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Minion;
@@ -46,11 +47,9 @@ public class TransformMinionSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Minion minion = (Minion) target;
 		Minion transformTarget = (Minion) desc.get(SpellArg.ENTITY);
-		MinionCard templateCard = (MinionCard) desc.get(SpellArg.CARD);
-		if (templateCard != null) {
-			templateCard = (MinionCard) templateCard.clone();
-		}
-
+		String cardName = (String) desc.get(SpellArg.CARD);
+		MinionCard templateCard = cardName != null ? (MinionCard) CardCatalogue.getCardByName(cardName) : null;
+		
 		Minion newMinion = transformTarget != null ? transformTarget : templateCard.summon();
 		int boardPosition = context.getBoardPosition(minion);
 		logger.debug("{} is transformed into a {}", minion, newMinion);

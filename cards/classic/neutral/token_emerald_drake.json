@@ -1,0 +1,14 @@
+{
+  "baseAttack": 7,
+  "baseHp": 6,
+  "race": "DRAGON",
+  "id": "token_emerald_drake",
+  "name": "Emerald Drake",
+  "description": "",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "FREE",
+  "baseManaCost": 4,
+  "collectible": false,
+  "fileFormatVersion": 1
+}

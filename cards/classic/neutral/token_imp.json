@@ -1,0 +1,14 @@
+{
+  "baseAttack": 1,
+  "baseHp": 1,
+  "race": "DEMON",
+  "id": "token_imp",
+  "name": "Imp",
+  "description": "",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "RARE",
+  "baseManaCost": 1,
+  "collectible": false,
+  "fileFormatVersion": 1
+}
