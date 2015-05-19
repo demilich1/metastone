@@ -1,0 +1,23 @@
+{
+  "baseAttack": 3,
+  "baseHp": 3,
+  "battlecry": {
+    "spell": {
+      "class": "EquipWeaponSpell",
+	  "card" : "weapon_battle_axe"
+    },
+    "resolvedLate": false
+  },
+  "id": "minion_arathi_weaponsmith",
+  "name": "Arathi Weaponsmith",
+  "description": "Battlecry: Equip a 2/2 weapon.",
+  "type": "MINION",
+  "heroClass": "WARRIOR",
+  "rarity": "COMMON",
+  "baseManaCost": 4,
+  "collectible": true,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "fileFormatVersion": 1
+}

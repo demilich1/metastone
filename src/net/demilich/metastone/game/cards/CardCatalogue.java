@@ -278,7 +278,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.rogue.AssassinsBlade());
 		cards.add(new net.demilich.metastone.game.cards.concrete.rogue.Betrayal());
 		cards.add(new net.demilich.metastone.game.cards.concrete.rogue.Conceal());
-		cards.add(new net.demilich.metastone.game.cards.concrete.rogue.PatientAssassin());
 		cards.add(new net.demilich.metastone.game.cards.concrete.rogue.PerditionsBlade());
 		cards.add(new net.demilich.metastone.game.cards.concrete.rogue.Preparation());
 		cards.add(new net.demilich.metastone.game.cards.concrete.shaman.AncestralSpirit());
@@ -286,9 +285,7 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.shaman.FarSight());
 		cards.add(new net.demilich.metastone.game.cards.concrete.shaman.FlametongueTotem());
 		cards.add(new net.demilich.metastone.game.cards.concrete.shaman.ForkedLightning());
-		cards.add(new net.demilich.metastone.game.cards.concrete.shaman.ManaTideTotem());
 		cards.add(new net.demilich.metastone.game.cards.concrete.shaman.StormforgedAxe());
-		cards.add(new net.demilich.metastone.game.cards.concrete.shaman.UnboundElemental());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.druid.BearForm());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.druid.CatForm());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.druid.ForceOfNatureTreant());
@@ -327,7 +324,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.weapons.HeavyAxe());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.weapons.WickedKnife());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.BaneOfDoom());
-		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.BloodImp());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.Corruption());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.Demonfire());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.LordJaraxxus());
@@ -335,13 +331,9 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.SenseDemons());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.SummoningPortal());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.VoidTerror());
-		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.ArathiWeaponsmith());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.ArcaniteReaper());
-		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.Armorsmith());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.FieryWarAxe());
-		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.FrothingBerserker());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.Gorehowl());
-		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.GrommashHellscream());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.Upgrade());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.WarsongCommander());
 	}

@@ -1,0 +1,25 @@
+{
+  "baseAttack": 2,
+  "baseHp": 4,
+  "trigger": {
+   "eventTrigger" : {
+		"class" : "DamageReceivedTrigger",
+		"entityType" : "MINION",
+		"targetPlayer" : "BOTH"
+	},
+	"spell" : {
+		"class": "BuffSpell",
+		"attackBonus" : 1,
+		"target" : "SELF"
+	}
+  },
+  "id": "minion_frothing_berserker",
+  "name": "Frothing Berserker",
+  "description": "Whenever a minion takes damage, gain +1 Attack.",
+  "type": "MINION",
+  "heroClass": "WARRIOR",
+  "rarity": "RARE",
+  "baseManaCost": 3,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

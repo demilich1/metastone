@@ -18,7 +18,7 @@ public class BaneOfDoom extends SpellCard {
 		
 		SpellDesc damage = DamageSpell.create(2);
 		SpellDesc summonRandomDemon = SummonRandomSpell.create(
-					new BloodImp()
+					//new BloodImp()
 					//new Voidwalker(),
 					//new FlameImp(),
 					//new Succubus()

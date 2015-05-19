@@ -18,7 +18,8 @@ public class MinionCard extends Card {
 
 	private static final Set<GameTag> inheritedAttributes = new HashSet<GameTag>(Arrays.asList(new GameTag[] { GameTag.STEALTH,
 			GameTag.CANNOT_ATTACK, GameTag.TAUNT, GameTag.UNTARGETABLE_BY_SPELLS, GameTag.CHARGE, GameTag.DIVINE_SHIELD, GameTag.WINDFURY,
-			GameTag.MEGA_WINDFURY, GameTag.SPELL_DAMAGE, GameTag.ATTACK_EQUALS_HP, GameTag.INVERT_HEALING, GameTag.SPELL_AMPLIFY_MULTIPLIER
+			GameTag.MEGA_WINDFURY, GameTag.SPELL_DAMAGE, GameTag.ATTACK_EQUALS_HP, GameTag.INVERT_HEALING,
+			GameTag.SPELL_AMPLIFY_MULTIPLIER, GameTag.ENRAGABLE
 
 	}));
 
@@ -56,7 +57,7 @@ public class MinionCard extends Card {
 			BattlecryAction battlecryAction = BattlecryAction.createBattlecry(battlecry.spell, battlecry.getTargetSelection());
 			battlecryAction.setResolvedLate(battlecry.resolvedLate);
 			if (battlecry.condition != null) {
-				battlecryAction.setCondition(battlecry.condition.create());	
+				battlecryAction.setCondition(battlecry.condition.create());
 			}
 
 			minion.setBattlecry(battlecryAction);
