@@ -71,7 +71,6 @@ public class SummonSpell extends Spell {
 	
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		
 		int boardPosition = getBoardPosition(context, player, desc, source);
 		for (Card card : SpellUtils.getCards(desc)) {
 			MinionCard minionCard = (MinionCard) card;

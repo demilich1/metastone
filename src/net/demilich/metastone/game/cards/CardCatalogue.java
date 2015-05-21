@@ -23,7 +23,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.druid.Cenarius());
 		cards.add(new net.demilich.metastone.game.cards.concrete.druid.DruidOfTheClaw());
 		cards.add(new net.demilich.metastone.game.cards.concrete.druid.KeeperOfTheGrove());
-		cards.add(new net.demilich.metastone.game.cards.concrete.druid.WildGrowth());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.druid.AnodizedRoboCub());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.druid.DruidOfTheFang());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.druid.GroveTender());
@@ -159,7 +158,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.warrior.Shieldmaiden());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.warrior.SiegeEngine());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.warrior.Warbot());
-		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.BestialWrath());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.EaglehornBow());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.ExplosiveTrap());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.FreezingTrap());
@@ -268,7 +266,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.shaman.StoneclawTotem());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.shaman.WrathOfAirTotem());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.spells.Dream());
-		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.spells.ExcessManaCard());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.spells.Nightmare());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.spells.YseraAwakens());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.weapons.Ashbringer());

@@ -19,5 +19,6 @@ public enum ParseValueType {
 	CARD_TYPE,
 	ENTITY_TYPE,
 	ACTION_TYPE,
-	TRIGGER
+	TRIGGER,
+	EVENT_TRIGGER
 }

@@ -83,6 +83,8 @@ public class ParseUtils {
 			triggerDesc.eventTrigger = triggerParser.deserialize(triggerObject.get("eventTrigger"), EventTriggerDesc.class, null);
 			triggerDesc.spell = spellParser.deserialize(triggerObject.get("spell"), SpellDesc.class, null);
 			return triggerDesc;
+		case EVENT_TRIGGER:
+			return triggerParser.deserialize(entry, EventTriggerDesc.class, null);
 		default:
 			break;
 		}
