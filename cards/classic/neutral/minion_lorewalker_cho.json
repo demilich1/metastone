@@ -1,0 +1,24 @@
+{
+  "baseAttack": 0,
+  "baseHp": 4,
+  "trigger": {
+   "eventTrigger" : {
+		"class" : "SpellCastedTrigger",
+		"targetPlayer" : "BOTH"
+	},
+	"spell" : {
+		"class": "CopyPlayedCardSpell",
+		"targetPlayer" : "OPPONENT",
+		"target" : "EVENT_TARGET"
+	}
+  },
+  "id": "minion_lorewalker_cho",
+  "name": "Lorewalker Cho",
+  "description": "Whenever a player casts a spell, put a copy into the other player\u0027s hand.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "LEGENDARY",
+  "baseManaCost": 2,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

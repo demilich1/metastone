@@ -19,6 +19,7 @@ public class NullSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
+		// intentionally do nothing
 	}
 
 }

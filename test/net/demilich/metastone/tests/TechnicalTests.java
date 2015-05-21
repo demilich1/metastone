@@ -5,7 +5,7 @@ import java.util.List;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
-import net.demilich.metastone.game.cards.concrete.neutral.WildPyromancer;
+import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.concrete.warlock.Corruption;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -58,7 +58,7 @@ public class TechnicalTests extends TestBase {
 		player1.setMana(10);
 		
 		for (int i = 0; i < 3; i++) {
-			playCard(context, player1, new WildPyromancer());
+			playCard(context, player1, CardCatalogue.getCardByName("minion_wild_pyromancer"));
 		}
 		
 		List<Minion> copyOfMinionList = new ArrayList<Minion>();

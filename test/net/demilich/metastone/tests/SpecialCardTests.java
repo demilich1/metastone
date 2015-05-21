@@ -10,7 +10,6 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.SpellCard;
-import net.demilich.metastone.game.cards.concrete.neutral.GurubashiBerserker;
 import net.demilich.metastone.game.cards.concrete.neutral.SpitefulSmith;
 import net.demilich.metastone.game.cards.concrete.warlock.SummoningPortal;
 import net.demilich.metastone.game.cards.concrete.warrior.FieryWarAxe;
@@ -77,7 +76,10 @@ public class SpecialCardTests extends TestBase {
 		Player warrior = context.getPlayer2();
 		warrior.setMana(10);
 
-		MinionCard gurubashiBerserkerCard = new GurubashiBerserker();
+		final int BASE_ATTACK = 2;
+		final int ATTACK_BONUS = 3;
+		
+		MinionCard gurubashiBerserkerCard = (MinionCard) CardCatalogue.getCardByName("minion_gurubashi_berserker");
 		playCard(context, warrior, gurubashiBerserkerCard);
 
 		MinionCard oasisSnapjawCard = (MinionCard) CardCatalogue.getCardById("minion_oasis_snapjaw");
@@ -87,22 +89,22 @@ public class SpecialCardTests extends TestBase {
 		Actor defender = getSingleMinion(warrior.getMinions());
 
 		// Gurubashi Berserker should start with just his base attack
-		Assert.assertEquals(defender.getAttack(), GurubashiBerserker.BASE_ATTACK);
+		Assert.assertEquals(defender.getAttack(), BASE_ATTACK);
 
 		// first attack, Gurubashi Berserker should have increased attack
 		GameAction attackAction = new PhysicalAttackAction(attacker.getReference());
 		attackAction.setTarget(defender);
 		context.getLogic().performGameAction(mage.getId(), attackAction);
 
-		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp() - GurubashiBerserker.BASE_ATTACK);
+		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp() - BASE_ATTACK);
 		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - attacker.getAttack());
-		Assert.assertEquals(defender.getAttack(), GurubashiBerserker.BASE_ATTACK + GurubashiBerserker.ATTACK_BONUS);
+		Assert.assertEquals(defender.getAttack(), BASE_ATTACK + ATTACK_BONUS);
 
 		// second attack, Gurubashi Berserker should become even stronger
 		context.getLogic().performGameAction(mage.getId(), attackAction);
-		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp() - 2 * GurubashiBerserker.BASE_ATTACK - GurubashiBerserker.ATTACK_BONUS);
+		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp() - 2 * BASE_ATTACK - ATTACK_BONUS);
 		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - 2 * attacker.getAttack());
-		Assert.assertEquals(defender.getAttack(), GurubashiBerserker.BASE_ATTACK + 2 * GurubashiBerserker.ATTACK_BONUS);
+		Assert.assertEquals(defender.getAttack(), BASE_ATTACK + 2 * ATTACK_BONUS);
 	}
 
 	@Test

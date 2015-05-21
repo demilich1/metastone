@@ -3,10 +3,9 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.CardCatalogue;
+import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.cards.concrete.neutral.BloodsailRaider;
-import net.demilich.metastone.game.cards.concrete.neutral.KnifeJuggler;
-import net.demilich.metastone.game.cards.concrete.neutral.WildPyromancer;
 import net.demilich.metastone.game.cards.concrete.rogue.Conceal;
 import net.demilich.metastone.game.cards.concrete.warrior.ArcaniteReaper;
 import net.demilich.metastone.game.cards.concrete.warrior.WarsongCommander;
@@ -31,7 +30,7 @@ public class CardInteractionTests extends TestBase {
 		GameContext context = createContext(HeroClass.ROGUE, HeroClass.WARRIOR);
 		Player player = context.getPlayer1();
 		
-		Minion knifeJuggler = playMinionCard(context, player, new KnifeJuggler());
+		Minion knifeJuggler = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardByName("minion_knife_juggler"));
 		playCard(context, player, new Conceal());
 		// knife juggler should be stealthed
 		Assert.assertTrue(knifeJuggler.hasStatus(GameTag.STEALTH));
@@ -156,7 +155,7 @@ public class CardInteractionTests extends TestBase {
 		Assert.assertEquals(paladin.getMinions().size(), 2);
 		Assert.assertEquals(warrior.getMinions().size(), 4);
 
-		playCard(context, paladin, new WildPyromancer());
+		playCard(context, paladin, CardCatalogue.getCardByName("minion_wild_pyromancer"));
 		playCard(context, paladin, CardCatalogue.getCardById("spell_equality"));
 
 		// wild pyromancer + equality should wipe the board if there no

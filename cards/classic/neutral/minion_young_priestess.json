@@ -1,0 +1,25 @@
+{
+  "baseAttack": 2,
+  "baseHp": 1,
+  "trigger": {
+   "eventTrigger" : {
+		"class" : "TurnEndTrigger",
+		"targetPlayer" : "SELF"
+	},
+	"spell" : {
+		"class": "BuffSpell",
+		"hpBonus" : 1,
+		"target" : "OTHER_FRIENDLY_MINIONS",
+		"randomTarget" : true
+	}
+  },
+  "id": "minion_young_priestess",
+  "name": "Young Priestess",
+  "description": "At the end of your turn, give another random friendly minion +1 Health.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "RARE",
+  "baseManaCost": 1,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

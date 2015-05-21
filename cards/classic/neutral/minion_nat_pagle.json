@@ -1,0 +1,30 @@
+{
+  "baseAttack": 0,
+  "baseHp": 4,
+  "trigger": {
+   "eventTrigger" : {
+		"class" : "TurnStartTrigger",
+		"targetPlayer" : "SELF"
+	},
+	"spell" : {
+		"class": "DrawCardSpell",
+		"valueProvider" : {
+			"class" : "ConditionalValueProvider",
+			"ifTrue" : 1,
+			"ifFalse" : 0,
+			"condition" : {
+				"class" : "RandomCondition"
+			}
+		}
+	}
+  },
+  "id": "minion_nat_pagle",
+  "name": "Nat Pagle",
+  "description": "At the start of your turn, you have a 50% chance to draw an extra card.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "LEGENDARY",
+  "baseManaCost": 2,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

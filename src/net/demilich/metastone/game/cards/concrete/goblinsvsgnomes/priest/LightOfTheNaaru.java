@@ -1,8 +1,8 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.priest;
 
+import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.SpellCard;
-import net.demilich.metastone.game.cards.concrete.neutral.Lightwarden;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.ConditionalEffectSpell;
@@ -17,7 +17,8 @@ public class LightOfTheNaaru extends SpellCard {
 		super("Light of the Naaru", Rarity.RARE, HeroClass.PRIEST, 1);
 		setDescription("Restore 3 Health. If the target is still damaged, summon a Lightwarden.");
 		SpellDesc heal = HealingSpell.create(3);
-		SpellDesc summonLightwarden = SummonSpell.create(new Lightwarden());
+		//SpellDesc summonLightwarden = SummonSpell.create(new Lightwarden());
+		SpellDesc summonLightwarden = SummonSpell.create((MinionCard[])null);
 		SpellDesc lightOfTheNaaru = ConditionalEffectSpell.create(heal, summonLightwarden, (context, player, target) -> {
 			Actor actor = (Actor) target;
 			return actor.isWounded();
