@@ -182,7 +182,7 @@ public class GameLogic implements Cloneable {
 	}
 
 	public boolean canPlaySecret(Player player, SecretCard card) {
-		return player.getSecrets().size() < MAX_SECRETS && !player.getSecrets().contains(card.getTypeId());
+		return player.getSecrets().size() < MAX_SECRETS && !player.getSecrets().contains(card.getCardId());
 	}
 
 	public boolean canSummonMoreMinions(Player player) {
@@ -945,7 +945,7 @@ public class GameLogic implements Cloneable {
 	public void playSecret(Player player, Secret secret) {
 		log("{} has a new secret activated: {}", player.getName(), secret.getSource());
 		addGameEventListener(player, secret, player.getHero());
-		player.getSecrets().add(secret.getSource().getTypeId());
+		player.getSecrets().add(secret.getSource().getCardId());
 		context.fireGameEvent(new SecretPlayedEvent(context, (SecretCard) secret.getSource()));
 	}
 	
@@ -1105,7 +1105,7 @@ public class GameLogic implements Cloneable {
 
 	public void secretTriggered(Player player, Secret secret) {
 		log("Secret was trigged: {}", secret.getSource());
-		player.getSecrets().remove((Integer) secret.getSource().getTypeId());
+		player.getSecrets().remove(secret.getSource().getCardId());
 		context.fireGameEvent(new SecretRevealedEvent(context, (SecretCard) secret.getSource(), player.getId()));
 	}
 

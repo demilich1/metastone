@@ -128,6 +128,8 @@ public class ParseUtils {
 			return EntityReference.TARGET;
 		case "self":
 			return EntityReference.SELF;
+		case "attacker":
+			return EntityReference.ATTACKER;
 		default:
 			return null;
 		}

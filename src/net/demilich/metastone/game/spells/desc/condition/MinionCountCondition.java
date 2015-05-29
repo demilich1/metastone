@@ -15,9 +15,23 @@ public class MinionCountCondition extends Condition {
 
 	@Override
 	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity target) {
-		TargetPlayer targetPlayer = (TargetPlayer) desc.get(ConditionArg.TARGET_PLAYER);
-		Player actualPlayer = targetPlayer == null || targetPlayer == TargetPlayer.SELF ? player : context.getOpponent(player);
-		int minionCount = actualPlayer.getMinions().size();
+		TargetPlayer targetPlayer = desc.contains(ConditionArg.TARGET_PLAYER) ? (TargetPlayer) desc.get(ConditionArg.TARGET_PLAYER) : TargetPlayer.SELF;
+		
+		int minionCount = 0;
+		switch (targetPlayer) {
+		case BOTH:
+			minionCount = context.getTotalMinionCount();
+			break;
+		case OPPONENT:
+			minionCount = context.getOpponent(player).getMinions().size();
+			break;
+		case SELF:
+			minionCount = player.getMinions().size();
+			break;
+		default:
+			break;
+		
+		}
 		int targetValue = desc.getInt(ConditionArg.VALUE);
 		Operation operation = (Operation) desc.get(ConditionArg.OPERATION);
 		return SpellUtils.evaluateOperation(operation, minionCount, targetValue);

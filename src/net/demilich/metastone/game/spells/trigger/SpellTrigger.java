@@ -148,7 +148,7 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 		if (trigger.interestedIn() != event.getEventType() && trigger.interestedIn() != GameEventType.ALL) {
 			return false;
 		}
-		return trigger.fire(event, host);
+		return trigger.fires(event, host);
 	}
 
 }

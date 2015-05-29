@@ -5,6 +5,7 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.logic.CustomCloneable;
+import net.demilich.metastone.game.spells.desc.condition.Condition;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerArg;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
@@ -30,6 +31,10 @@ public abstract class GameEventTrigger extends CustomCloneable {
 		boolean breaksStealth = desc.getBool(EventTriggerArg.BREAKS_STEALTH);
 		if (breaksStealth) {
 			event.getGameContext().getLogic().removeTag(host, GameTag.STEALTH);
+		}
+		Condition condition = (Condition) desc.get(EventTriggerArg.CONDITION);
+		if (condition != null && !condition.isFulfilled(event.getGameContext(), event.getGameContext().getActivePlayer(), event.getEventTarget())) {
+			return false;
 		}
 		return fire(event, host);
 	}

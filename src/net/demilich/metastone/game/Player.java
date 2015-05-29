@@ -25,7 +25,7 @@ public class Player extends CustomCloneable {
 	private final CardCollection hand = new CardCollection();
 	private final List<Actor> graveyard = new ArrayList<>();
 	private final List<Minion> minions = new ArrayList<>();
-	private final List<Integer> secrets = new ArrayList<>();
+	private final List<String> secrets = new ArrayList<>();
 
 	private final GameStatistics statistics = new GameStatistics();
 
@@ -128,7 +128,7 @@ public class Player extends CustomCloneable {
 		return "'" + name + "' (" + getHero().getName() + ")";
 	}
 
-	public List<Integer> getSecrets() {
+	public List<String> getSecrets() {
 		return secrets;
 	}
 

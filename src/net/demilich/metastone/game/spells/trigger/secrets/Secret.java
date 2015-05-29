@@ -24,7 +24,7 @@ public class Secret extends SpellTrigger {
 	
 	@Override
 	public void onGameEvent(GameEvent event) {
-		if (event.getGameContext().getActivePlayerId() != getOwner()) {
+		if (event.getGameContext().getActivePlayerId() == getOwner()) {
 			return;
 		}
 		super.onGameEvent(event);

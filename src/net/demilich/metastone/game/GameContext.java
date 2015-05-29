@@ -419,7 +419,7 @@ public class GameContext implements Cloneable, IDisposable {
 				builder.append('\n');
 			}
 			builder.append("Secrets:\n");
-			for (int secretId : player.getSecrets()) {
+			for (String secretId : player.getSecrets()) {
 				builder.append('\t');
 				builder.append(secretId);
 				builder.append('\n');

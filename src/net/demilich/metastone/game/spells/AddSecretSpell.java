@@ -18,6 +18,7 @@ public class AddSecretSpell extends Spell {
 		arguments.put(SpellArg.TARGET, EntityReference.FRIENDLY_HERO);
 		return new SpellDesc(arguments);
 	}
+	
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {

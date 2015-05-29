@@ -13,6 +13,7 @@ import net.demilich.metastone.game.cards.desc.ChooseBattlecryCardDesc;
 import net.demilich.metastone.game.cards.desc.ChooseOneCardDesc;
 import net.demilich.metastone.game.cards.desc.ConditionDeserializer;
 import net.demilich.metastone.game.cards.desc.MinionCardDesc;
+import net.demilich.metastone.game.cards.desc.SecretCardDesc;
 import net.demilich.metastone.game.cards.desc.SpellCardDesc;
 import net.demilich.metastone.game.cards.desc.SpellDeserializer;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -57,10 +58,13 @@ public class CardParser {
 		JsonElement jsonData = gson.fromJson(reader, JsonElement.class);
 
 		CardType type = CardType.valueOf((String) jsonData.getAsJsonObject().get("type").getAsString());
-		System.out.println("CardType: " + type);
 		switch (type) {
 		case SPELL:
-			return gson.fromJson(jsonData, SpellCardDesc.class);
+			if (jsonData.getAsJsonObject().has("trigger")) {
+				return gson.fromJson(jsonData, SecretCardDesc.class);
+			} else {
+				return gson.fromJson(jsonData, SpellCardDesc.class);	
+			}
 		case CHOOSE_ONE:
 			return gson.fromJson(jsonData, ChooseOneCardDesc.class);
 		case MINION:

@@ -152,12 +152,7 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.warrior.SiegeEngine());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.warrior.Warbot());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.EaglehornBow());
-		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.ExplosiveTrap());
-		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.FreezingTrap());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.GladiatorsLongbow());
-		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.Misdirection());
-		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.SnakeTrap());
-		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.Snipe());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.TimberWolf());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.TundraRhino());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.UnleashTheHounds());
