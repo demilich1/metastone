@@ -5,7 +5,6 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.SpellCard;
-import net.demilich.metastone.game.cards.concrete.neutral.BloodsailRaider;
 import net.demilich.metastone.game.cards.concrete.rogue.Conceal;
 import net.demilich.metastone.game.cards.concrete.warrior.ArcaniteReaper;
 import net.demilich.metastone.game.cards.concrete.warrior.WarsongCommander;
@@ -132,7 +131,7 @@ public class CardInteractionTests extends TestBase {
 		playCard(context, warrior, new WarsongCommander());
 		playCard(context, warrior, new TestMinionCard(2, 1, 0));
 
-		Minion bloodsailRaider = playMinionCard(context, warrior, new BloodsailRaider());
+		Minion bloodsailRaider = playMinionCard(context, warrior, (MinionCard) CardCatalogue.getCardByName("minion_bloodsail_raider"));
 		Assert.assertTrue(bloodsailRaider.hasStatus(GameTag.CHARGE));
 		Assert.assertEquals(bloodsailRaider.getAttack(), 7);
 	}

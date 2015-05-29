@@ -108,6 +108,6 @@ public class BattlecryAction extends GameAction {
 
 	@Override
 	public String toString() {
-		return String.format("[%s '%s' resolvedLate:%s]", getActionType(), getSpell().getClass().getSimpleName(), resolvedLate);
+		return String.format("[%s '%s' resolvedLate:%s]", getActionType(), getSpell().getSpellClass().getSimpleName(), resolvedLate);
 	}
 }

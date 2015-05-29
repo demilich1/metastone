@@ -905,7 +905,6 @@ public class GameLogic implements Cloneable {
 			context.getEnvironment().put(Environment.TARGET, target);
 		}
 		action.execute(context, playerId);
-		System.out.println("Target set to NULL");
 		context.getEnvironment().remove(Environment.TARGET);
 		checkForDeadEntities();
 	}

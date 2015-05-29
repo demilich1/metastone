@@ -18,14 +18,7 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.LavaShock());
 		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.RendBlackhand());
 		cards.add(new net.demilich.metastone.game.cards.concrete.blackrockmountain.Whelp());
-		cards.add(new net.demilich.metastone.game.cards.concrete.druid.AncientOfLore());
-		cards.add(new net.demilich.metastone.game.cards.concrete.druid.AncientOfWar());
-		cards.add(new net.demilich.metastone.game.cards.concrete.druid.Cenarius());
-		cards.add(new net.demilich.metastone.game.cards.concrete.druid.DruidOfTheClaw());
-		cards.add(new net.demilich.metastone.game.cards.concrete.druid.KeeperOfTheGrove());
-		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.druid.AnodizedRoboCub());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.druid.DruidOfTheFang());
-		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.druid.GroveTender());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.druid.Malorne());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.druid.MechBearCat());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.druid.Recycle());
@@ -213,7 +206,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.naxxramas.Webspinner());
 		cards.add(new net.demilich.metastone.game.cards.concrete.naxxramas.ZombieChow());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.AlarmOBot());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.BloodsailRaider());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.DireWolfAlpha());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.DreadCorsair());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.GrimscaleOracle());
@@ -251,8 +243,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.shaman.FlametongueTotem());
 		cards.add(new net.demilich.metastone.game.cards.concrete.shaman.ForkedLightning());
 		cards.add(new net.demilich.metastone.game.cards.concrete.shaman.StormforgedAxe());
-		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.druid.BearForm());
-		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.druid.CatForm());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.druid.ForceOfNatureTreant());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.druid.Panther());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.druid.Treant());

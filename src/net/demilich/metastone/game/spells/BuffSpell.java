@@ -43,7 +43,7 @@ public class BuffSpell extends Spell {
 	public static SpellDesc create(EntityReference target, ValueProvider attackValueProvider, ValueProvider hpValueProvider) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(BuffSpell.class);
 		arguments.put(SpellArg.VALUE_PROVIDER, attackValueProvider);
-		arguments.put(SpellArg.SECOND_VALUE_PROVIDER, hpValueProvider);
+		arguments.put(SpellArg.HP_VALUE_PROVIDER, hpValueProvider);
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
 	}
@@ -65,19 +65,21 @@ public class BuffSpell extends Spell {
 		int attackBonus = desc.getInt(SpellArg.ATTACK_BONUS);
 		int hpBonus = desc.getInt(SpellArg.HP_BONUS);
 
-		ValueProvider attackValueProvider = (ValueProvider) desc.get(SpellArg.VALUE_PROVIDER);
-		ValueProvider hpValueProvider = (ValueProvider) desc.get(SpellArg.SECOND_VALUE_PROVIDER);
+		ValueProvider valueProvider = (ValueProvider) desc.get(SpellArg.VALUE_PROVIDER);
+		ValueProvider attackValueProvider = (ValueProvider) desc.get(SpellArg.ATTACK_VALUE_PROVIDER);
+		ValueProvider hpValueProvider = (ValueProvider) desc.get(SpellArg.HP_VALUE_PROVIDER);
 
 		if (attackValueProvider != null) {
 			attackBonus = attackValueProvider.getValue(context, player, target);
+		} else if (valueProvider != null) {
+			attackBonus = valueProvider.getValue(context, player, target);
 		}
 		
 		if (hpValueProvider != null) {
 			hpBonus = hpValueProvider.getValue(context, player, target);
 		}
-		// use the first value provider for both values if hp bonus is not explicitely set to 0
-		else if (hpBonus == 0 && attackValueProvider != null) {
-			hpBonus = attackValueProvider.getValue(context, player, target);
+		else if (valueProvider != null) {
+			hpBonus = valueProvider.getValue(context, player, target);
 		}
 
 		logger.debug("{} gains ({})", target, attackBonus + "/" + hpBonus);

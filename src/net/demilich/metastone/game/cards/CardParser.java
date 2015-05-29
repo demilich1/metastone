@@ -9,6 +9,7 @@ import java.util.Map;
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.cards.desc.AttributeDeserializer;
 import net.demilich.metastone.game.cards.desc.CardDesc;
+import net.demilich.metastone.game.cards.desc.ChooseBattlecryCardDesc;
 import net.demilich.metastone.game.cards.desc.ChooseOneCardDesc;
 import net.demilich.metastone.game.cards.desc.ConditionDeserializer;
 import net.demilich.metastone.game.cards.desc.MinionCardDesc;
@@ -63,7 +64,11 @@ public class CardParser {
 		case CHOOSE_ONE:
 			return gson.fromJson(jsonData, ChooseOneCardDesc.class);
 		case MINION:
-			return gson.fromJson(jsonData, MinionCardDesc.class);
+			if (jsonData.getAsJsonObject().has("option1")) {
+				return gson.fromJson(jsonData, ChooseBattlecryCardDesc.class);
+			} else {
+				return gson.fromJson(jsonData, MinionCardDesc.class);
+			}
 		default:
 			System.out.println("Unknown cardType: " + type);
 			break;

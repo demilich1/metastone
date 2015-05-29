@@ -1,0 +1,28 @@
+{
+  "baseAttack": 2,
+  "baseHp": 4,
+  "option1": {
+    "spell": {
+      "class": "DamageSpell",
+	  "value" : 2
+    },
+	"targetSelection" : "ANY",
+    "description": "2 damage"
+  },
+  "option2": {
+    "spell": {
+      "class": "SilenceSpell"
+    },
+	"targetSelection" : "MINIONS",
+    "description": "Silence"
+  },
+  "id": "minion_keeper_of_the_grove",
+  "name": "Keeper of the Grove",
+  "description": "Choose One - Deal 2 damage; or Silence a minion.",
+  "type": "MINION",
+  "heroClass": "DRUID",
+  "rarity": "RARE",
+  "baseManaCost": 4,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

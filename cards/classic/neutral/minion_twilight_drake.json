@@ -6,7 +6,7 @@
     "spell": {
       "class": "BuffSpell",
 	  "target" : "SELF",
-	  "secondValueProvider": {
+	  "hpValueProvider": {
 		"class": "CardCounter",
 		"targetPlayer": "SELF"
 		}

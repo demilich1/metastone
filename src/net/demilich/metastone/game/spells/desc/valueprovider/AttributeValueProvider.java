@@ -25,7 +25,6 @@ public class AttributeValueProvider extends ValueProvider {
 			return 0;
 		}
 		Actor source = (Actor) entities.get(0);
-		System.out.println("Source is " + source);
 		if (attribute == GameTag.ATTACK) {
 			return source.getAttack();
 		}

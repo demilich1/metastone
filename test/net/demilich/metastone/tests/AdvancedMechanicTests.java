@@ -40,7 +40,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		context.endTurn();
 
 		player.getHero().getHeroPower().setUsed(true);
-		Card wrath = CardCatalogue.getCardById("wrath");
+		Card wrath = CardCatalogue.getCardById("spell_wrath");
 		IChooseOneCard wrathChooseOne = (IChooseOneCard) wrath;
 		context.getLogic().receiveCard(player.getId(), wrath);
 		player.setMana(wrath.getBaseManaCost() + 1);

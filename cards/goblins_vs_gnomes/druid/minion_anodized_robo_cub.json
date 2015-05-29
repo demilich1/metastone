@@ -1,0 +1,33 @@
+{
+  "baseAttack": 2,
+  "baseHp": 2,
+  "option1": {
+    "spell": {
+      "class": "BuffSpell",
+	  "attackBonus" : 1,
+	  "target" : "SELF"
+    },
+    "description": "+1 Attack"
+  },
+  "option2": {
+    "spell": {
+      "class": "BuffSpell",
+	  "hpBonus" : 1,
+	  "target" : "SELF"
+    },
+    "description": "+1 Health"
+  },
+  "race": "MECH",
+  "id": "minion_anodized_robo_cub",
+  "name": "Anodized Robo Cub",
+  "description": "Taunt. Choose One - +1 Attack; or +1 Health.",
+  "type": "MINION",
+  "heroClass": "DRUID",
+  "rarity": "COMMON",
+  "baseManaCost": 2,
+  "collectible": true,
+  "attributes" : {
+	"TAUNT" : true
+  },
+  "fileFormatVersion": 1
+}

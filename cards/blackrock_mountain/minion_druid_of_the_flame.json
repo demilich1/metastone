@@ -1,0 +1,29 @@
+{
+  "baseAttack": 2,
+  "baseHp": 2,
+  "option1": {
+    "spell": {
+      "class": "TransformMinionSpell",
+	  "card" : "token_flame_lion_form",
+	  "target" : "SELF"
+    },
+    "description": "5/2"
+  },
+   "option2": {
+    "spell": {
+      "class": "TransformMinionSpell",
+	  "card" : "token_flame_bird_form",
+	  "target" : "SELF"
+    },
+    "description": "2/5"
+  },
+  "id": "minion_druid_of_the_flame",
+  "name": "Druid of the Flame",
+  "description": "Choose One - Transform into a 5/2 minion; or a 2/5 minion.",
+  "type": "MINION",
+  "heroClass": "DRUID",
+  "rarity": "COMMON",
+  "baseManaCost": 3,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

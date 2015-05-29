@@ -9,6 +9,7 @@ public class BattlecryDesc {
 	public TargetSelection targetSelection;
 	public ConditionDesc condition;
 	public boolean resolvedLate;
+	public String description;
 
 	public TargetSelection getTargetSelection() {
 		return targetSelection != null ? targetSelection : TargetSelection.NONE;
