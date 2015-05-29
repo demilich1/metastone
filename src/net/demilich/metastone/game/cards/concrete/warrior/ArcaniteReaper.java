@@ -16,8 +16,6 @@ public class ArcaniteReaper extends WeaponCard {
 		return 360;
 	}
 
-
-
 	@Override
 	public Weapon getWeapon() {
 		return createWeapon(5, 2);

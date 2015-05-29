@@ -35,6 +35,7 @@ import net.demilich.metastone.game.events.CardPlayedEvent;
 import net.demilich.metastone.game.events.DamageEvent;
 import net.demilich.metastone.game.events.DrawCardEvent;
 import net.demilich.metastone.game.events.EnrageChangedEvent;
+import net.demilich.metastone.game.events.FatalDamageEvent;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.HealEvent;
 import net.demilich.metastone.game.events.KillEvent;
@@ -328,6 +329,10 @@ public class GameLogic implements Cloneable {
 			damageDealt = damageMinion(player, (Actor) target, damage);
 			break;
 		case HERO:
+			if (isFatalDamage(target, damage)) {
+				FatalDamageEvent fatalDamageEvent = new FatalDamageEvent(context, target);
+				context.fireGameEvent(fatalDamageEvent, TriggerLayer.SECRET);
+			}
 			damageDealt = damageHero((Hero) target, damage);
 			break;
 		default:
@@ -342,6 +347,11 @@ public class GameLogic implements Cloneable {
 		}
 
 		return damageDealt;
+	}
+	
+	private boolean isFatalDamage(Entity entity, int damage) {
+		Hero hero = (Hero) entity;
+		return damage >= hero.getEffectiveHp();
 	}
 
 	private int damageHero(Hero hero, int damage) {

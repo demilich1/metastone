@@ -1,7 +1,7 @@
 {
   "baseAttack": 7,
   "baseHp": 5,
-   "trigger": {
+  "trigger": {
    "eventTrigger" : {
 		"class" : "TurnEndTrigger",
 		"targetPlayer" : "SELF"

@@ -6,7 +6,6 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.SecretCard;
-import net.demilich.metastone.game.cards.concrete.mage.Spellbender;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 
@@ -55,7 +54,7 @@ public class SecretTest extends TestBase {
 		context.getLogic().endTurn(mage.getId());
 
 		for (int i = 0; i < 2; i++) {
-			playCard(context, mage, new Spellbender());
+			playCard(context, mage, CardCatalogue.getCardById("secret_spellbender"));
 			Assert.assertEquals(mage.getSecrets().size(), 1);
 			
 			Card testSpellCard = CardCatalogue.getCardById("frostbolt");

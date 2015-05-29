@@ -23,8 +23,8 @@ public class SummonNewAttackTargetSpell extends Spell {
 	
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		MinionCard minionCard = (MinionCard) desc.get(SpellArg.CARD);
-		Minion targetMinion = ((MinionCard) minionCard.clone()).summon();
+		MinionCard minionCard = (MinionCard) SpellUtils.getCards(desc)[0];
+		Minion targetMinion = minionCard.summon();
 		context.getEnvironment().put(Environment.TARGET_OVERRIDE, targetMinion);
 		context.getLogic().summon(player.getId(), targetMinion);
 	}

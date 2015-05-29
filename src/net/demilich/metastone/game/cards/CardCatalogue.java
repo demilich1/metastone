@@ -157,15 +157,9 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.TundraRhino());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.UnleashTheHounds());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.ConeOfCold());
-		cards.add(new net.demilich.metastone.game.cards.concrete.mage.Counterspell());
-		cards.add(new net.demilich.metastone.game.cards.concrete.mage.EtherealArcanist());
-		cards.add(new net.demilich.metastone.game.cards.concrete.mage.IceBarrier());
-		cards.add(new net.demilich.metastone.game.cards.concrete.mage.IceBlock());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.IceLance());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.KirinTorMage());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.SorcerersApprentice());
-		cards.add(new net.demilich.metastone.game.cards.concrete.mage.Spellbender());
-		cards.add(new net.demilich.metastone.game.cards.concrete.mage.Vaporize());
 		cards.add(new net.demilich.metastone.game.cards.concrete.naxxramas.AnubarAmbusher());
 		cards.add(new net.demilich.metastone.game.cards.concrete.naxxramas.Avenge());
 		cards.add(new net.demilich.metastone.game.cards.concrete.naxxramas.BaronRivendare());
