@@ -16,6 +16,7 @@ import net.demilich.metastone.game.cards.desc.MinionCardDesc;
 import net.demilich.metastone.game.cards.desc.SecretCardDesc;
 import net.demilich.metastone.game.cards.desc.SpellCardDesc;
 import net.demilich.metastone.game.cards.desc.SpellDeserializer;
+import net.demilich.metastone.game.cards.desc.WeaponCardDesc;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.condition.ConditionDesc;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
@@ -73,8 +74,10 @@ public class CardParser {
 			} else {
 				return gson.fromJson(jsonData, MinionCardDesc.class);
 			}
+		case WEAPON:
+			return gson.fromJson(jsonData, WeaponCardDesc.class);
 		default:
-			System.out.println("Unknown cardType: " + type);
+			logger.error("Unknown cardType: " + type);
 			break;
 		}
 		return null;

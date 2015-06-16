@@ -12,7 +12,6 @@ import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.cards.concrete.neutral.SpitefulSmith;
 import net.demilich.metastone.game.cards.concrete.warlock.SummoningPortal;
-import net.demilich.metastone.game.cards.concrete.warrior.FieryWarAxe;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.Hero;
@@ -148,7 +147,7 @@ public class SpecialCardTests extends TestBase {
 		Player player = context.getPlayer1();
 		player.setMana(10);
 
-		Card fieryWarAxe = new FieryWarAxe();
+		Card fieryWarAxe = CardCatalogue.getCardByName("weapon_fiery_war_axe");
 		playCard(context, player, fieryWarAxe);
 
 		Assert.assertTrue(player.getHero().getWeapon() != null);
@@ -170,7 +169,7 @@ public class SpecialCardTests extends TestBase {
 		Assert.assertEquals(player.getHero().getWeapon().getWeaponDamage(), 5);
 
 		// equip a new weapon; this one should get buffed too
-		fieryWarAxe = new FieryWarAxe();
+		fieryWarAxe = CardCatalogue.getCardByName("weapon_fiery_war_axe");
 		playCard(context, player, fieryWarAxe);
 		Assert.assertEquals(player.getHero().getWeapon().getWeaponDamage(), 5);
 

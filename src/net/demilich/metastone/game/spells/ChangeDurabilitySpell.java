@@ -5,7 +5,6 @@ import java.util.Map;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
-import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -25,12 +24,12 @@ public class ChangeDurabilitySpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		int durabilityChange = desc.getInt(SpellArg.VALUE); 
-		Hero hero = (Hero) target;
-		if (hero.getWeapon() == null) {
+		// if there is no weapon, just do nothing
+		if (player.getHero().getWeapon() == null) {
 			return;
 		}
-		context.getLogic().modifyDurability(hero.getWeapon(), durabilityChange);
+		int durabilityChange = desc.getInt(SpellArg.VALUE); 
+		context.getLogic().modifyDurability(player.getHero().getWeapon(), durabilityChange);
 	}
 
 }

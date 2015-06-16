@@ -6,6 +6,7 @@ import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.events.TargetAcquisitionEvent;
+import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerArg;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
@@ -18,6 +19,7 @@ public class TargetAcquisitionTrigger extends GameEventTrigger {
 	@Override
 	protected boolean fire(GameEvent event, Entity host) {
 		TargetAcquisitionEvent targetAcquisitionEvent = (TargetAcquisitionEvent) event;
+		
 		ActionType actionType = (ActionType) desc.get(EventTriggerArg.ACTION_TYPE);
 		if (targetAcquisitionEvent.getActionType() != actionType) {
 			System.out.println("ActionType is false");
@@ -33,7 +35,18 @@ public class TargetAcquisitionTrigger extends GameEventTrigger {
 			System.out.println("targetEntityType is false");
 			return false;
 		}
-		return true;
+		
+		TargetPlayer targetPlayer = desc.getTargetPlayer();
+		int playerId = targetAcquisitionEvent.getSource().getOwner();
+		switch (targetPlayer) {
+		case BOTH:
+			return true;
+		case SELF:
+			return playerId == host.getOwner();
+		case OPPONENT:
+			return playerId != host.getOwner();
+		}
+		return false;
 	}
 
 	@Override

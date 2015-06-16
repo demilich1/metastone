@@ -6,7 +6,6 @@ import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.cards.concrete.rogue.Conceal;
-import net.demilich.metastone.game.cards.concrete.warrior.ArcaniteReaper;
 import net.demilich.metastone.game.cards.concrete.warrior.WarsongCommander;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -127,7 +126,7 @@ public class CardInteractionTests extends TestBase {
 		Player warrior = context.getPlayer1();
 		warrior.setMana(10);
 
-		playCard(context, warrior, new ArcaniteReaper());
+		playCard(context, warrior, CardCatalogue.getCardByName("weapon_arcanite_reaper"));
 		playCard(context, warrior, new WarsongCommander());
 		playCard(context, warrior, new TestMinionCard(2, 1, 0));
 

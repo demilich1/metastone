@@ -6,7 +6,7 @@
     "spell": {
       "class": "ChangeDurabilitySpell",
 	  "value" : -1,
-	  "target" : "ENEMY_HERO"
+	  "targetPlayer" : "OPPONENT"
     },
     "resolvedLate": false
   },

@@ -151,8 +151,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.warrior.Shieldmaiden());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.warrior.SiegeEngine());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.warrior.Warbot());
-		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.EaglehornBow());
-		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.GladiatorsLongbow());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.TimberWolf());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.TundraRhino());
 		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.UnleashTheHounds());
@@ -213,18 +211,13 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.StormwindChampion());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.VentureCoMercenary());
 		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.EyeForAnEye());
-		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.LightsJustice());
 		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.NobleSacrifice());
 		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.Redemption());
 		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.Repentance());
-		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.SwordOfJustice());
-		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.TruesilverChampion());
 		cards.add(new net.demilich.metastone.game.cards.concrete.priest.Shadowform());
 		cards.add(new net.demilich.metastone.game.cards.concrete.priest.ShadowMadness());
-		cards.add(new net.demilich.metastone.game.cards.concrete.rogue.AssassinsBlade());
 		cards.add(new net.demilich.metastone.game.cards.concrete.rogue.Betrayal());
 		cards.add(new net.demilich.metastone.game.cards.concrete.rogue.Conceal());
-		cards.add(new net.demilich.metastone.game.cards.concrete.rogue.PerditionsBlade());
 		cards.add(new net.demilich.metastone.game.cards.concrete.rogue.Preparation());
 		cards.add(new net.demilich.metastone.game.cards.concrete.shaman.AncestralSpirit());
 		cards.add(new net.demilich.metastone.game.cards.concrete.shaman.Doomhammer());
@@ -247,11 +240,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.spells.Dream());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.spells.Nightmare());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.spells.YseraAwakens());
-		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.weapons.Ashbringer());
-		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.weapons.BattleAxe());
-		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.weapons.BloodFury());
-		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.weapons.HeavyAxe());
-		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.weapons.WickedKnife());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.BaneOfDoom());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.Corruption());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.Demonfire());
@@ -260,10 +248,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.SenseDemons());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.SummoningPortal());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.VoidTerror());
-		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.ArcaniteReaper());
-		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.FieryWarAxe());
-		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.Gorehowl());
-		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.Upgrade());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warrior.WarsongCommander());
 	}
 	

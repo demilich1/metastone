@@ -4,7 +4,6 @@ import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.SpellCard;
-import net.demilich.metastone.game.cards.concrete.paladin.LightsJustice;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.EquipWeaponSpell;
 import net.demilich.metastone.game.spells.MetaSpell;
@@ -20,7 +19,7 @@ public class MusterForBattle extends SpellCard {
 		setDescription("Summon three 1/1 Silver Hand Recruits. Equip a 1/4 Weapon.");
 		
 		SpellDesc summonSpell = SummonSpell.create((MinionCard)CardCatalogue.getCardByName("token_silver_hand_recruit"));
-		SpellDesc equipWeaponSpell = EquipWeaponSpell.create(new LightsJustice());
+		SpellDesc equipWeaponSpell = EquipWeaponSpell.create("weapon_lights_justice");
 		setSpell(MetaSpell.create(EntityReference.NONE, summonSpell, equipWeaponSpell));
 		setTargetRequirement(TargetSelection.NONE);
 	}

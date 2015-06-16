@@ -1,0 +1,26 @@
+{
+	"name" : "Truesilver Champion",
+	"description" : "Whenever your hero attacks, restore 2 Health to it.",
+	"collectible" : true,
+	"id" : "weapon_truesilver_champion",
+	"type" : "WEAPON",
+	"rarity" : "FREE",
+	"heroClass" : "PALADIN",
+	"baseManaCost" : 4,
+	"damage" : 4,
+	"durability" : 2,
+	"trigger" : {
+		"eventTrigger" : {
+			"class" : "TargetAcquisitionTrigger",
+			"targetPlayer" : "SELF",
+			"entityType" : "HERO",
+			"actionType" : "PHYSICAL_ATTACK"
+		},
+		"spell" : {
+			"class": "HealingSpell",
+			"target" : "FRIENDLY_HERO",
+			"value" : 2
+		}
+	},
+	"fileFormatVersion" : 1
+}
