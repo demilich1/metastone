@@ -30,6 +30,13 @@ public class SummonSpell extends Spell {
 		return new SpellDesc(arguments);
 	}
 	
+	public static SpellDesc create(String[] minionCards) {
+		Map<SpellArg, Object> arguments = SpellDesc.build(SummonSpell.class);
+		arguments.put(SpellArg.CARDS, minionCards);
+		arguments.put(SpellArg.TARGET, EntityReference.NONE);
+		return new SpellDesc(arguments);
+	}
+	
 	public static SpellDesc create(TargetPlayer targetPlayer, MinionCard... minionCards) {
 		return create(targetPlayer, null, minionCards);
 	}

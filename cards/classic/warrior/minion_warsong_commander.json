@@ -1,0 +1,30 @@
+{
+  "baseAttack": 2,
+  "baseHp": 3,
+  "trigger": {
+   "eventTrigger" : {
+		"class" : "MinionSummonedTrigger",
+		"targetPlayer" : "SELF",
+		"condition" : {
+			"class" : "AttributeCondition",
+			"attribute" : "ATTACK",
+			"value" : 4,
+			"operation" : "LESS"
+		}
+	},
+	"spell" : {
+		"class": "AddAttributeSpell",
+		"attribute" : "CHARGE",
+		"target" : "EVENT_TARGET"
+	}
+  },
+  "id": "minion_warsong_commander",
+  "name": "Warsong Commander",
+  "description": "Whenever you summon a minion with 3 or less Attack, give it Charge.",
+  "type": "MINION",
+  "heroClass": "WARRIOR",
+  "rarity": "FREE",
+  "baseManaCost": 3,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

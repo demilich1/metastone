@@ -10,7 +10,6 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.SpellCard;
-import net.demilich.metastone.game.cards.concrete.neutral.SpitefulSmith;
 import net.demilich.metastone.game.cards.concrete.warlock.SummoningPortal;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
@@ -153,7 +152,8 @@ public class SpecialCardTests extends TestBase {
 		Assert.assertTrue(player.getHero().getWeapon() != null);
 		Assert.assertEquals(player.getHero().getWeapon().getWeaponDamage(), 3);
 
-		Minion spitefulSmith = playMinionCard(context, player, new SpitefulSmith());
+		MinionCard spitefulSmithCard = (MinionCard) CardCatalogue.getCardById("minion_spiteful_smith");
+		Minion spitefulSmith = playMinionCard(context, player, spitefulSmithCard);
 		// Smith has been played, but is not enraged yet, so weapon damage
 		// should still be unaltered
 		Assert.assertEquals(player.getHero().getWeapon().getWeaponDamage(), 3);

@@ -15,9 +15,9 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AuraSpellBuff extends Spell {
+public class AuraBuffSpell extends Spell {
 
-	private static Logger logger = LoggerFactory.getLogger(AuraSpellBuff.class);
+	private static Logger logger = LoggerFactory.getLogger(AuraBuffSpell.class);
 	
 	public static SpellDesc create(int attackBonus) {
 		return create(attackBonus, 0);
@@ -28,7 +28,7 @@ public class AuraSpellBuff extends Spell {
 	}
 	
 	public static SpellDesc create(int attackBonus, int hpBonus, Predicate<Entity> targetFilter) {
-		Map<SpellArg, Object> arguments = SpellDesc.build(AuraSpellBuff.class);
+		Map<SpellArg, Object> arguments = SpellDesc.build(AuraBuffSpell.class);
 		arguments.put(SpellArg.ATTACK_BONUS, attackBonus);
 		arguments.put(SpellArg.HP_BONUS, hpBonus);
 		if (targetFilter != null) {

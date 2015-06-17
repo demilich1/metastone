@@ -1,0 +1,13 @@
+{
+  "baseAttack": 0,
+  "baseHp": 1,
+  "id": "token_shadow_of_nothing",
+  "name": "Shadow of Nothing",
+  "description": "Mindgames whiffed! Your opponent had no minions!",
+  "type": "MINION",
+  "heroClass": "PRIEST",
+  "rarity": "EPIC",
+  "baseManaCost": 0,
+  "collectible": false,
+  "fileFormatVersion": 1
+}

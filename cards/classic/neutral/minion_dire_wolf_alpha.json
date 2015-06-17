@@ -1,0 +1,19 @@
+{
+  "baseAttack": 2,
+  "baseHp": 2,
+  "aura" : {
+	"class" : "BuffAura",
+	"attackBonus" : 1,
+	"target" : "ADJACENT_MINIONS"
+  },
+  "race": "BEAST",
+  "id": "minion_dire_wolf_alpha",
+  "name": "Dire Wolf Alpha",
+  "description": "Adjacent minions have +1 Attack.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "COMMON",
+  "baseManaCost": 2,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

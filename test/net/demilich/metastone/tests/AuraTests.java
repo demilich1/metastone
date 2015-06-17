@@ -7,7 +7,6 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.SpellCard;
-import net.demilich.metastone.game.cards.concrete.neutral.DireWolfAlpha;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
@@ -29,7 +28,7 @@ public class AuraTests extends BasicTests {
 		TestMinionCard minionCard = new TestMinionCard(1, 1);
 		Minion testMinion1 = playMinionCard(context, player, minionCard);
 
-		MinionCard direWolfCard = new DireWolfAlpha();
+		MinionCard direWolfCard = (MinionCard) CardCatalogue.getCardById("minion_dire_wolf_alpha");
 		Minion direWolf = playMinionCard(context, player, direWolfCard);
 
 		minionCard = new TestMinionCard(5, 5);
@@ -64,14 +63,14 @@ public class AuraTests extends BasicTests {
 		Player opponent = context.getPlayer2();
 
 		TestMinionCard minionCard = new TestMinionCard(1, 1);
-		minionCard.getMinion().setSpellTrigger(new BuffAura(1, 1, EntityReference.FRIENDLY_MINIONS));
+		minionCard.getMinion().setSpellTrigger(new BuffAura(1, 1, EntityReference.FRIENDLY_MINIONS, null));
 		playCard(context, player, minionCard);
 
 		Actor minion1 = getSingleMinion(player.getMinions());
 		Assert.assertEquals(minion1.getAttack(), 1);
 
 		minionCard = new TestMinionCard(1, 1);
-		minionCard.getMinion().setSpellTrigger(new BuffAura(1, 1, EntityReference.FRIENDLY_MINIONS));
+		minionCard.getMinion().setSpellTrigger(new BuffAura(1, 1, EntityReference.FRIENDLY_MINIONS, null));
 		Actor minion2 = playMinionCard(context, player, minionCard);
 
 		Assert.assertNotEquals(minion1, minion2);
@@ -104,7 +103,7 @@ public class AuraTests extends BasicTests {
 		context.getLogic().endTurn(player.getId());
 
 		TestMinionCard minionCard = new TestMinionCard(1, 1);
-		minionCard.getMinion().setSpellTrigger(new BuffAura(1, 1, EntityReference.FRIENDLY_MINIONS));
+		minionCard.getMinion().setSpellTrigger(new BuffAura(1, 1, EntityReference.FRIENDLY_MINIONS, null));
 		Minion auraMinion = playMinionCard(context, opponent, minionCard);
 		Minion opponentMinion = playMinionCard(context, opponent, new TestMinionCard(1, 1));
 		Assert.assertEquals(opponentMinion.getAttack(), 2);

@@ -68,6 +68,8 @@ public class MinionCard extends Card {
 		}
 		if (desc.trigger != null) {
 			minion.setSpellTrigger(desc.trigger.create());
+		} else if (desc.aura != null) {
+			minion.setSpellTrigger(desc.aura.create());
 		}
 		return minion;
 	}

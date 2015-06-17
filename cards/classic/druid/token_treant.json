@@ -1,0 +1,13 @@
+{
+  "baseAttack": 2,
+  "baseHp": 2,
+  "id": "token_treant",
+  "name": "Treant",
+  "description": "",
+  "type": "MINION",
+  "heroClass": "DRUID",
+  "rarity": "FREE",
+  "baseManaCost": 1,
+  "collectible": false,
+  "fileFormatVersion": 1
+}

@@ -13,6 +13,7 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.aura.AuraDesc;
 import net.demilich.metastone.game.spells.trigger.BoardChangedTrigger;
 import net.demilich.metastone.game.spells.trigger.GameEventTrigger;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
@@ -36,6 +37,10 @@ public class Aura extends SpellTrigger {
 
 	public Aura(SpellDesc applyAuraEffect, SpellDesc removeAuraEffect, EntityReference targetSelection) {
 		this(null, applyAuraEffect, removeAuraEffect, targetSelection);
+	}
+	
+	public Aura(AuraDesc desc) {
+		this(desc.getApplyEffect(), desc.getRemoveEffect(), desc.getTarget());
 	}
 
 	protected boolean affects(GameContext context, Entity target, List<Entity> resolvedTargets) {

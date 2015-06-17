@@ -4,8 +4,6 @@ import java.util.Map;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.cards.MinionCard;
-import net.demilich.metastone.game.cards.concrete.tokens.druid.Treant;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.InstantDestroySpell;
 import net.demilich.metastone.game.spells.Spell;
@@ -39,9 +37,9 @@ public class PoisonSeedsSpell extends Spell {
 		SpellDesc destroy = InstantDestroySpell.create();
 		context.getLogic().castSpell(player.getId(), destroy, source, EntityReference.FRIENDLY_MINIONS);
 		
-		MinionCard[] treants = new MinionCard[minionCount];
+		String[] treants = new String[minionCount];
 		for (int i = 0; i < minionCount; i++) {
-			treants[i] = new Treant();
+			treants[i] = "token_treant";
 		}
 		SpellDesc summonTreants = SummonSpell.create(treants);
 		context.getLogic().castSpell(player.getId(), summonTreants, source, EntityReference.NONE);

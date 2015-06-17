@@ -7,6 +7,12 @@
 	"heroClass" : "SHAMAN",
 	"baseManaCost" : 1,
 	"targetSelection" : "NONE",
+	"condition" : {
+		"class" : "MinionCountCondition",
+		"targetPlayer" : "OPPONENT",
+		"value" : 1,
+		"operation" : "GREATER"
+	},
 	"spell" : {
 		"class" : "MultiTargetDamageSpell",
 		"value" : 2,

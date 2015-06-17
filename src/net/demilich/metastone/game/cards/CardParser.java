@@ -8,6 +8,7 @@ import java.util.Map;
 
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.cards.desc.AttributeDeserializer;
+import net.demilich.metastone.game.cards.desc.AuraDeserializer;
 import net.demilich.metastone.game.cards.desc.CardDesc;
 import net.demilich.metastone.game.cards.desc.ChooseBattlecryCardDesc;
 import net.demilich.metastone.game.cards.desc.ChooseOneCardDesc;
@@ -18,6 +19,7 @@ import net.demilich.metastone.game.cards.desc.SpellCardDesc;
 import net.demilich.metastone.game.cards.desc.SpellDeserializer;
 import net.demilich.metastone.game.cards.desc.WeaponCardDesc;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.aura.AuraDesc;
 import net.demilich.metastone.game.spells.desc.condition.ConditionDesc;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDeserializer;
@@ -44,6 +46,7 @@ public class CardParser {
 		gsonBuilder.registerTypeAdapter(mapType, new AttributeDeserializer());
 		gsonBuilder.registerTypeAdapter(ConditionDesc.class, new ConditionDeserializer());
 		gsonBuilder.registerTypeAdapter(EventTriggerDesc.class, new EventTriggerDeserializer());
+		gsonBuilder.registerTypeAdapter(AuraDesc.class, new AuraDeserializer());
 		gson = gsonBuilder.create();
 	}
 

@@ -9,8 +9,7 @@
 	"targetSelection" : "NONE",
 	"spell" : {
 		"class" : "SummonSpell",
-		"card" : "minion_spirit_wolf",
-		"value" : 2
+		"cards" : ["token_spirit_wolf", "token_spirit_wolf"]
 	},
 	"attributes" : {
 		"OVERLOAD" : 2

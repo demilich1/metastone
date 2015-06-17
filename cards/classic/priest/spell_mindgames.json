@@ -5,7 +5,7 @@
   },
   "id": "spell_mindgames",
   "name": "Mindgames",
-  "description": "Put a copy of a random minion from your opponent\u0027s deck into the battlefield.",
+  "description": "Put a copy of a random minion from your opponent's deck into the battlefield.",
   "type": "SPELL",
   "heroClass": "PRIEST",
   "rarity": "EPIC",
