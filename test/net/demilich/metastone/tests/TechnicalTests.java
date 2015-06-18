@@ -5,8 +5,8 @@ import java.util.List;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.cards.concrete.warlock.Corruption;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
@@ -31,8 +31,8 @@ public class TechnicalTests extends TestBase {
 		context.getLogic().receiveCard(warrior.getId(), victimCard);
 		context.getLogic().performGameAction(warrior.getId(), victimCard.play());
 		
-		Corruption corruption1 = new Corruption();
-		Corruption corruption2 = new Corruption();
+		Card corruption1 = CardCatalogue.getCardById("spell_corruption");
+		Card corruption2 = CardCatalogue.getCardById("spell_corruption");
 		context.getLogic().receiveCard(warlock.getId(), corruption1);
 		context.getLogic().receiveCard(warlock.getId(), corruption2);
 		

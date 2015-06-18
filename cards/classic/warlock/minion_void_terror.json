@@ -1,0 +1,42 @@
+{
+  "baseAttack": 3,
+  "baseHp": 3,
+  "race": "DEMON",
+  "battlecry": {
+	"spell": {
+	  "class" : "MetaSpell",
+	  "spell1" : {
+		"class": "BuffSpell",
+		"attackValueProvider": {
+			"class": "AttributeValueProvider",
+			"source": "ADJACENT_MINIONS",
+			"attribute": "ATTACK"
+		},
+		"hpValueProvider": {
+			"class": "AttributeValueProvider",
+			"source": "ADJACENT_MINIONS",
+			"attribute": "HP"
+		},
+		"target" : "SELF"
+	  },
+	  "spell2" : {
+		"class": "DestroySpell",
+		"target" : "ADJACENT_MINIONS"
+	  }
+	},
+	"targetSelection": "NONE",
+	"resolvedLate": true
+   },
+  "id": "minion_void_terror",
+  "name": "Void Terror",
+  "description": "Battlecry: Destroy the minions on either side of this minion and gain their Attack and Health.",
+  "type": "MINION",
+  "heroClass": "WARLOCK",
+  "rarity": "RARE",
+  "baseManaCost": 3,
+  "collectible": true,
+  "attributes" : {
+	"BATTLECRY" : true
+  },
+  "fileFormatVersion": 1
+}

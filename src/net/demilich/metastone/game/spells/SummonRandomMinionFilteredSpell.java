@@ -13,27 +13,28 @@ import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.targeting.EntityReference;
 
-public class SummonRandomMinionPredicateSpell extends Spell {
+public class SummonRandomMinionFilteredSpell extends Spell {
 	
 	public static SpellDesc create(Predicate<Card> cardFilter) {
 		return create(TargetPlayer.SELF, cardFilter);
 	}
 
 	public static SpellDesc create(TargetPlayer targetPlayer, Predicate<Card> cardFilter) {
-		Map<SpellArg, Object> arguments = SpellDesc.build(SummonRandomMinionPredicateSpell.class);
+		Map<SpellArg, Object> arguments = SpellDesc.build(SummonRandomMinionFilteredSpell.class);
 		arguments.put(SpellArg.CARD_FILTER, cardFilter);
 		arguments.put(SpellArg.TARGET, EntityReference.NONE);
 		arguments.put(SpellArg.TARGET_PLAYER, targetPlayer);
 		return new SpellDesc(arguments);
 	}
 
-	private static MinionCard getRandomMatchingMinionCard(Predicate<Card> cardFilter) {
+	private static MinionCard getRandomMatchingMinionCard(EntityFilter cardFilter) {
 		CardCollection allMinions = CardCatalogue.query(CardType.MINION);
 		CardCollection relevantMinions = new CardCollection();
 		for (Card card : allMinions) {
-			if (cardFilter.test(card)) {
+			if (cardFilter.matches(card)) {
 				relevantMinions.add(card);
 			}
 		}
@@ -42,8 +43,7 @@ public class SummonRandomMinionPredicateSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		@SuppressWarnings("unchecked")
-		Predicate<Card> cardFilter = (Predicate<Card>) desc.get(SpellArg.CARD_FILTER);
+		EntityFilter cardFilter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
 		int boardPosition = desc.contains(SpellArg.BOARD_POSITION_ABSOLUTE) ? desc.getInt(SpellArg.BOARD_POSITION_ABSOLUTE) : -1;
 		MinionCard minionCard = getRandomMatchingMinionCard(cardFilter);
 		context.getLogic().summon(player.getId(), minionCard.summon(), null, boardPosition, false);

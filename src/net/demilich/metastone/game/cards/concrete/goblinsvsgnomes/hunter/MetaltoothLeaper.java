@@ -9,7 +9,6 @@ import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.BuffSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.spells.filter.RaceFilter;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class MetaltoothLeaper extends MinionCard {
@@ -29,7 +28,8 @@ public class MetaltoothLeaper extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion metaltoothLeaper = createMinion();
-		SpellDesc buffSpell = BuffSpell.create(EntityReference.OTHER_FRIENDLY_MINIONS, +2, 0, new RaceFilter(Race.MECH), false);
+		//SpellDesc buffSpell = BuffSpell.create(EntityReference.OTHER_FRIENDLY_MINIONS, +2, 0, new RaceFilter(Race.MECH), false);
+		SpellDesc buffSpell = BuffSpell.create(EntityReference.OTHER_FRIENDLY_MINIONS, +2, 0, null, false);
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(buffSpell);
 		metaltoothLeaper.setBattlecry(battlecry);
 		return metaltoothLeaper;

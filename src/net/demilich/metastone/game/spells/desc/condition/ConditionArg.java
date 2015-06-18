@@ -9,5 +9,8 @@ public enum ConditionArg {
 	OPERATION,
 	SATISFIED,
 	ATTRIBUTE,
-	CARD_TYPE
+	CARD_TYPE,
+	CONDITION_1,
+	CONDITION_2
+	
 }

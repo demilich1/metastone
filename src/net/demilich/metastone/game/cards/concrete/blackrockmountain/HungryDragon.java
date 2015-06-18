@@ -7,7 +7,7 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
-import net.demilich.metastone.game.spells.SummonRandomMinionPredicateSpell;
+import net.demilich.metastone.game.spells.SummonRandomMinionFilteredSpell;
 import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
@@ -30,7 +30,7 @@ public class HungryDragon extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion hungryDragon = createMinion();
-		SpellDesc summonSpell = SummonRandomMinionPredicateSpell.create(TargetPlayer.OPPONENT, card -> card.getBaseManaCost() == 1);
+		SpellDesc summonSpell = SummonRandomMinionFilteredSpell.create(TargetPlayer.OPPONENT, card -> card.getBaseManaCost() == 1);
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(summonSpell);
 		hungryDragon.setBattlecry(battlecry);
 		return hungryDragon;

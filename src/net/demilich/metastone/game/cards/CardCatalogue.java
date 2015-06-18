@@ -216,14 +216,9 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.spells.Dream());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.spells.Nightmare());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.spells.YseraAwakens());
-		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.BaneOfDoom());
-		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.Corruption());
-		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.Demonfire());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.LordJaraxxus());
-		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.PowerOverwhelming());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.SenseDemons());
 		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.SummoningPortal());
-		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.VoidTerror());
 	}
 	
 	public static void add(Card card) {

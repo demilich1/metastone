@@ -5,7 +5,7 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
-import net.demilich.metastone.game.spells.SummonRandomMinionPredicateSpell;
+import net.demilich.metastone.game.spells.SummonRandomMinionFilteredSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
 public class PilotedShredder extends MinionCard {
@@ -24,7 +24,7 @@ public class PilotedShredder extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion pilotedShredder = createMinion();
-		SpellDesc summonRandom = SummonRandomMinionPredicateSpell.create(card -> card.getBaseManaCost() == 2);
+		SpellDesc summonRandom = SummonRandomMinionFilteredSpell.create(card -> card.getBaseManaCost() == 2);
 		pilotedShredder.addDeathrattle(summonRandom);
 		return pilotedShredder;
 	}
