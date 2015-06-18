@@ -116,7 +116,7 @@ public class AdvancedMechanicTests extends BasicTests {
 
 		final int BASE_ATTACK = 2;
 		final int ENRAGE_ATTACK_BONUS = 3;
-		playCard(context, priest, CardCatalogue.getCardByName("minion_amani_berserker"));
+		playCard(context, priest, CardCatalogue.getCardById("minion_amani_berserker"));
 
 		playCard(context, mage, new TestMinionCard(1, 10));
 

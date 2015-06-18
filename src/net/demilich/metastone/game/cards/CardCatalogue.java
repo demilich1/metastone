@@ -204,7 +204,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.priest.Shadowform());
 		cards.add(new net.demilich.metastone.game.cards.concrete.priest.ShadowMadness());
 		cards.add(new net.demilich.metastone.game.cards.concrete.rogue.Betrayal());
-		cards.add(new net.demilich.metastone.game.cards.concrete.rogue.Conceal());
 		cards.add(new net.demilich.metastone.game.cards.concrete.rogue.Preparation());
 		cards.add(new net.demilich.metastone.game.cards.concrete.shaman.AncestralSpirit());
 		cards.add(new net.demilich.metastone.game.cards.concrete.shaman.FarSight());

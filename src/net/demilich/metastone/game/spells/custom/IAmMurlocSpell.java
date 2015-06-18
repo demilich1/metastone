@@ -23,7 +23,7 @@ public class IAmMurlocSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int numberOfMurlocs = ThreadLocalRandom.current().nextInt(3, 6);
 		//MinionCard murlocCard = new Murloc();
-		MinionCard murlocCard = (MinionCard) CardCatalogue.getCardByName("token_murloc");
+		MinionCard murlocCard = (MinionCard) CardCatalogue.getCardById("token_murloc");
 		for (int i = 0; i < numberOfMurlocs; i++) {
 			context.getLogic().summon(player.getId(), murlocCard.summon());
 		}

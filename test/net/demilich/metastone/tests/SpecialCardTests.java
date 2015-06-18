@@ -77,7 +77,7 @@ public class SpecialCardTests extends TestBase {
 		final int BASE_ATTACK = 2;
 		final int ATTACK_BONUS = 3;
 		
-		MinionCard gurubashiBerserkerCard = (MinionCard) CardCatalogue.getCardByName("minion_gurubashi_berserker");
+		MinionCard gurubashiBerserkerCard = (MinionCard) CardCatalogue.getCardById("minion_gurubashi_berserker");
 		playCard(context, warrior, gurubashiBerserkerCard);
 
 		MinionCard oasisSnapjawCard = (MinionCard) CardCatalogue.getCardById("minion_oasis_snapjaw");
@@ -146,7 +146,7 @@ public class SpecialCardTests extends TestBase {
 		Player player = context.getPlayer1();
 		player.setMana(10);
 
-		Card fieryWarAxe = CardCatalogue.getCardByName("weapon_fiery_war_axe");
+		Card fieryWarAxe = CardCatalogue.getCardById("weapon_fiery_war_axe");
 		playCard(context, player, fieryWarAxe);
 
 		Assert.assertTrue(player.getHero().getWeapon() != null);

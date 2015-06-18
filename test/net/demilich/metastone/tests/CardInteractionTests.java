@@ -5,7 +5,6 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.SpellCard;
-import net.demilich.metastone.game.cards.concrete.rogue.Conceal;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
@@ -27,8 +26,8 @@ public class CardInteractionTests extends TestBase {
 		GameContext context = createContext(HeroClass.ROGUE, HeroClass.WARRIOR);
 		Player player = context.getPlayer1();
 		
-		Minion knifeJuggler = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardByName("minion_knife_juggler"));
-		playCard(context, player, new Conceal());
+		Minion knifeJuggler = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_knife_juggler"));
+		playCard(context, player, CardCatalogue.getCardById("spell_conceal"));
 		// knife juggler should be stealthed
 		Assert.assertTrue(knifeJuggler.hasStatus(GameTag.STEALTH));
 		// knife juggler should be unstealthed as soon as another minion is played and his trigger fires
@@ -129,7 +128,7 @@ public class CardInteractionTests extends TestBase {
 		playCard(context, warrior, CardCatalogue.getCardById("minion_warsong_commaner"));
 		playCard(context, warrior, new TestMinionCard(2, 1, 0));
 
-		Minion bloodsailRaider = playMinionCard(context, warrior, (MinionCard) CardCatalogue.getCardByName("minion_bloodsail_raider"));
+		Minion bloodsailRaider = playMinionCard(context, warrior, (MinionCard) CardCatalogue.getCardById("minion_bloodsail_raider"));
 		Assert.assertTrue(bloodsailRaider.hasStatus(GameTag.CHARGE));
 		Assert.assertEquals(bloodsailRaider.getAttack(), 7);
 	}
@@ -152,7 +151,7 @@ public class CardInteractionTests extends TestBase {
 		Assert.assertEquals(paladin.getMinions().size(), 2);
 		Assert.assertEquals(warrior.getMinions().size(), 4);
 
-		playCard(context, paladin, CardCatalogue.getCardByName("minion_wild_pyromancer"));
+		playCard(context, paladin, CardCatalogue.getCardById("minion_wild_pyromancer"));
 		playCard(context, paladin, CardCatalogue.getCardById("spell_equality"));
 
 		// wild pyromancer + equality should wipe the board if there no

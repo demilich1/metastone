@@ -31,7 +31,7 @@ public class ImplosionSpell extends Spell {
 
 		int effectiveDamage = context.getLogic().damage(player, (Actor) target, damageRoll, source);
 		for (int i = 0; i < effectiveDamage; i++) {
-			MinionCard imp = (MinionCard) CardCatalogue.getCardByName("token_imp");
+			MinionCard imp = (MinionCard) CardCatalogue.getCardById("token_imp");
 			context.getLogic().summon(player.getId(), imp.summon());
 		}
 	}

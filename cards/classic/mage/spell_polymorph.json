@@ -9,7 +9,7 @@
 	"targetSelection" : "MINIONS",
 	"spell" : {
 		"class" : "TransformMinionSpell",
-		"card" : "minion_sheep"
+		"card" : "token_sheep"
 	},
 	"fileFormatVersion" : 1
 }
