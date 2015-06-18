@@ -11,6 +11,7 @@ import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.RelativeToSource;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class SummonSpell extends Spell {
@@ -79,9 +80,13 @@ public class SummonSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int boardPosition = getBoardPosition(context, player, desc, source);
+		ValueProvider valueProvider = (ValueProvider) desc.get(SpellArg.VALUE_PROVIDER);
+		int count = valueProvider != null ? valueProvider.getValue(context, player, target) : 1;
 		for (Card card : SpellUtils.getCards(desc)) {
-			MinionCard minionCard = (MinionCard) card;
-			context.getLogic().summon(player.getId(), minionCard.summon(), null, boardPosition, false);
+			for (int i = 0; i < count; i++) {
+				MinionCard minionCard = count == 1 ? (MinionCard) card : (MinionCard) card.clone();
+				context.getLogic().summon(player.getId(), minionCard.summon(), null, boardPosition, false);	
+			}
 		}
 	}
 

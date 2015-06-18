@@ -9,10 +9,10 @@ import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
-public class AdjacentMetaSpell extends Spell {
+public class AdjacentEffectSpell extends Spell {
 	
 	public static SpellDesc create(EntityReference target, SpellDesc primarySpell, SpellDesc secondarySpell) {
-		Map<SpellArg, Object> arguments = SpellDesc.build(AdjacentMetaSpell.class);
+		Map<SpellArg, Object> arguments = SpellDesc.build(AdjacentEffectSpell.class);
 		arguments.put(SpellArg.SPELL_1, primarySpell);
 		
 		if (secondarySpell != null) {

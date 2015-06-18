@@ -151,9 +151,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.warrior.Shieldmaiden());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.warrior.SiegeEngine());
 		cards.add(new net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.warrior.Warbot());
-		cards.add(new net.demilich.metastone.game.cards.concrete.hunter.UnleashTheHounds());
-		cards.add(new net.demilich.metastone.game.cards.concrete.mage.ConeOfCold());
-		cards.add(new net.demilich.metastone.game.cards.concrete.mage.IceLance());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.KirinTorMage());
 		cards.add(new net.demilich.metastone.game.cards.concrete.mage.SorcerersApprentice());
 		cards.add(new net.demilich.metastone.game.cards.concrete.naxxramas.AnubarAmbusher());
@@ -190,7 +187,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.naxxramas.WailingSoul());
 		cards.add(new net.demilich.metastone.game.cards.concrete.naxxramas.Webspinner());
 		cards.add(new net.demilich.metastone.game.cards.concrete.naxxramas.ZombieChow());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.AlarmOBot());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.DreadCorsair());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.ManaWraith());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.MillhouseManastorm());

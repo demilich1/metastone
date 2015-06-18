@@ -1,7 +1,7 @@
 {
   "targetSelection": "MINIONS",
   "spell": {
-    "class": "AdjacentMetaSpell",
+    "class": "AdjacentEffectSpell",
 	"spell1" : {
 		"class" : "DamageSpell",
 		"value" : 5

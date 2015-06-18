@@ -5,9 +5,9 @@
 	"type" : "MINION",
 	"rarity" : "COMMON",
 	"heroClass" : "ANY",
-	"baseManaCost" : 3,
+	"baseManaCost" : 4,
 	"baseAttack" : 3,
-	"baseHp" : 4,
+	"baseHp" : 3,
 	"attributes" : {
 		"DIVINE_SHIELD" : true
 	},

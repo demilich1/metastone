@@ -6,7 +6,7 @@ import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.ConditionalEffectSpell;
 import net.demilich.metastone.game.spells.DamageSpell;
-import net.demilich.metastone.game.spells.SummonRandomSpell;
+import net.demilich.metastone.game.spells.SummonSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
@@ -17,7 +17,7 @@ public class BaneOfDoom extends SpellCard {
 		setDescription("Deal 2 damage to a character.  If that kills it, summon a random Demon.");
 		
 		SpellDesc damage = DamageSpell.create(2);
-		SpellDesc summonRandomDemon = SummonRandomSpell.create(
+		SpellDesc summonRandomDemon = SummonSpell.create(
 					//new BloodImp()
 					//new Voidwalker(),
 					//new FlameImp(),

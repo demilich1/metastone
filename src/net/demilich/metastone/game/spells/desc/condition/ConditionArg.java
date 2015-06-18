@@ -8,5 +8,6 @@ public enum ConditionArg {
 	TARGET_PLAYER,
 	OPERATION,
 	SATISFIED,
-	ATTRIBUTE
+	ATTRIBUTE,
+	CARD_TYPE
 }

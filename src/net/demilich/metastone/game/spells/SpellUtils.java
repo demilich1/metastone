@@ -11,6 +11,7 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
@@ -89,6 +90,15 @@ public class SpellUtils {
 	public static boolean hasMinionOfRace(Player player, Race race) {
 		for (Minion minion : player.getMinions()) {
 			if (minion.getRace() == race) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static boolean holdsCardOfType(Player player, CardType cardType) {
+		for (Card card : player.getHand()) {
+			if (card.getCardType() == cardType) {
 				return true;
 			}
 		}

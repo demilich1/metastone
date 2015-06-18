@@ -19,7 +19,7 @@ public class Lightbomb extends SpellCard {
 		super("Lightbomb", Rarity.EPIC, HeroClass.PRIEST, 6);
 		setDescription("Deal damage to each minion equal to its Attack.");
 
-		SpellDesc lightbombSpell = DamageSpell.create(EntityReference.ALL_MINIONS, new LightbombDamageModifier());
+		SpellDesc lightbombSpell = DamageSpell.create(EntityReference.ALL_MINIONS, null);
 		setSpell(lightbombSpell);
 		setTargetRequirement(TargetSelection.NONE);
 	}
@@ -29,13 +29,13 @@ public class Lightbomb extends SpellCard {
 		return 559;
 	}
 
-	private class LightbombDamageModifier extends ValueProvider {
-
-		@Override
-		public int provideValue(GameContext context, Player player, Entity target) {
-			Actor actor = (Actor) target;
-			return actor.getAttack();
-		}
-
-	}
+//	private class LightbombDamageModifier extends ValueProvider {
+//
+//		@Override
+//		public int provideValue(GameContext context, Player player, Entity target) {
+//			Actor actor = (Actor) target;
+//			return actor.getAttack();
+//		}
+//
+//	}
 }
