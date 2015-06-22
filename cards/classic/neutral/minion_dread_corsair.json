@@ -1,0 +1,22 @@
+{
+  "baseAttack": 3,
+  "baseHp": 3,
+  "race": "PIRATE",
+  "id": "minion_dread_corsair",
+  "manaCostModifier" : {
+	"class" : "AttributeValueProvider",
+	"source" : "FRIENDLY_WEAPON",
+	"attribute" : "ATTACK"
+  },
+  "name": "Dread Corsair",
+  "description": "Taunt. Costs (1) less per Attack of your weapon.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "COMMON",
+  "baseManaCost": 4,
+  "collectible": true,
+  "attributes": {
+    "TAUNT": true
+  },
+  "fileFormatVersion": 1
+}

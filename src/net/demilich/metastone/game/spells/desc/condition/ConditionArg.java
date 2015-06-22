@@ -11,6 +11,7 @@ public enum ConditionArg {
 	ATTRIBUTE,
 	CARD_TYPE,
 	CONDITION_1,
-	CONDITION_2
+	CONDITION_2,
+	CARD_NAME
 	
 }

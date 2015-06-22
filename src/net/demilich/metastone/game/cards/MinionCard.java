@@ -71,6 +71,9 @@ public class MinionCard extends Card {
 		} else if (desc.aura != null) {
 			minion.setSpellTrigger(desc.aura.create());
 		}
+		if (desc.cardCostModifier != null) {
+			minion.setCardCostModifier(desc.cardCostModifier.create());
+		}
 		return minion;
 	}
 

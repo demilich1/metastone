@@ -8,7 +8,7 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.costmodifier.OneTurnCostModifier;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.spells.AddCostModifierSpell;
+import net.demilich.metastone.game.spells.CardCostModifierSpell;
 import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -29,10 +29,10 @@ public class Loatheb extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion loatheb = createMinion();
-		OneTurnCostModifier costModifier = new OneTurnCostModifier(CardType.SPELL, +5);
-		costModifier.setTargetPlayer(TargetPlayer.OPPONENT);
-		SpellDesc increaseSpellCost = AddCostModifierSpell.create(EntityReference.FRIENDLY_HERO, costModifier);
-		loatheb.setBattlecry(BattlecryAction.createBattlecry(increaseSpellCost));
+//		OneTurnManaModifier costModifier = new OneTurnManaModifier(CardType.SPELL, +5);
+//		costModifier.setTargetPlayer(TargetPlayer.OPPONENT);
+//		SpellDesc increaseSpellCost = AddManaModifierSpell.create(EntityReference.FRIENDLY_HERO, costModifier);
+//		loatheb.setBattlecry(BattlecryAction.createBattlecry(increaseSpellCost));
 		return loatheb;
 	}
 }

@@ -11,6 +11,7 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.desc.BattlecryDesc;
+import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.targeting.CardLocation;
 import net.demilich.metastone.game.targeting.CardReference;
 import net.demilich.metastone.game.targeting.IdFactory;
@@ -25,6 +26,7 @@ public abstract class Card extends Entity {
 	private boolean collectible = true;
 	private CardLocation location;
 	private BattlecryDesc battlecry;
+	private ValueProvider manaCostModifier;
 	private final String cardId;
 
 	public Card(CardDesc desc) {
@@ -39,6 +41,10 @@ public abstract class Card extends Entity {
 		
 		if (desc.attributes != null) {
 			tags.putAll(desc.attributes);
+		}
+		
+		if (desc.manaCostModifier != null) {
+			manaCostModifier = desc.manaCostModifier.create();
 		}
 	}
 	
@@ -102,7 +108,11 @@ public abstract class Card extends Entity {
 	}
 
 	public int getManaCost(GameContext context, Player player) {
-		return manaCost + getTagValue(GameTag.MANA_COST_MODIFIER);
+		int actualManaCost = manaCost + getTagValue(GameTag.MANA_COST_MODIFIER);
+		if (manaCostModifier != null) {
+			actualManaCost -= manaCostModifier.getValue(context, player, null);
+		}
+		return actualManaCost;
 	}
 
 	public Rarity getRarity() {

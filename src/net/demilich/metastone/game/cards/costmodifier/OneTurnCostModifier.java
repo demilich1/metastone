@@ -1,9 +1,11 @@
 package net.demilich.metastone.game.cards.costmodifier;
 
-import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
+import net.demilich.metastone.game.spells.desc.manamodifier.CardCostModifierArg;
+import net.demilich.metastone.game.spells.desc.manamodifier.CardCostModifierDesc;
+import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 import net.demilich.metastone.game.spells.trigger.GameEventTrigger;
 import net.demilich.metastone.game.spells.trigger.TurnStartTrigger;
 
@@ -12,13 +14,12 @@ public class OneTurnCostModifier extends CardCostModifier {
 	private GameEventTrigger expirationTrigger;
 	private GameEventTrigger turnStartTrigger = new TurnStartTrigger();
 
-	public OneTurnCostModifier(CardType cardType, int manaModifier) {
-		this(cardType, manaModifier, null);
-	}
-
-	public OneTurnCostModifier(CardType cardType, int manaModifier, GameEventTrigger expirationTrigger) {
-		super(cardType, manaModifier);
-		this.expirationTrigger = expirationTrigger;
+	public OneTurnCostModifier(CardCostModifierDesc desc) {
+		super(desc);
+		EventTriggerDesc triggerDesc = (EventTriggerDesc) desc.get(CardCostModifierArg.EXPIRATION_TRIGGER);
+		if (triggerDesc != null) {
+			this.expirationTrigger = triggerDesc.create();
+		}
 	}
 
 	@Override

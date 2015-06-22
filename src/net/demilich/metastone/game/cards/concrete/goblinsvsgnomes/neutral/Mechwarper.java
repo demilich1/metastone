@@ -2,7 +2,6 @@ package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.neutral;
 
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
-import net.demilich.metastone.game.cards.costmodifier.MinionCostModifier;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
@@ -24,10 +23,10 @@ public class Mechwarper extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion mechwarper = createMinion();
-		MinionCostModifier minionCostModifier = new MinionCostModifier(-1);
-		minionCostModifier.setRequiredRace(Race.MECH);
-		minionCostModifier.setTargetPlayer(TargetPlayer.SELF);
-		mechwarper.setCardCostModifier(minionCostModifier);
+		//MinionCostModifier minionCostModifier = new MinionCostModifier(-1);
+		//minionCostModifier.setRequiredRace(Race.MECH);
+		//minionCostModifier.setTargetPlayer(TargetPlayer.SELF);
+		//mechwarper.setCardCostModifier(minionCostModifier);
 		return mechwarper;
 	}
 }

@@ -10,7 +10,6 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.SpellCard;
-import net.demilich.metastone.game.cards.concrete.warlock.SummoningPortal;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.Hero;
@@ -188,9 +187,9 @@ public class SpecialCardTests extends TestBase {
 		Player player = context.getPlayer1();
 		player.setMana(10);
 
-		Card summoningPortal1 = new SummoningPortal();
+		Card summoningPortal1 = CardCatalogue.getCardById("minion_summoning_portal");
 		context.getLogic().receiveCard(player.getId(), summoningPortal1);
-		Card summoningPortal2 = new SummoningPortal();
+		Card summoningPortal2 = CardCatalogue.getCardById("minion_summoning_portal");
 		context.getLogic().receiveCard(player.getId(), summoningPortal2);
 
 		MinionCard testMinionCard = new TestMinionCard(1, 1, 4);

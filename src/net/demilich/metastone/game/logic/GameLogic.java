@@ -622,6 +622,9 @@ public class GameLogic implements Cloneable {
 		int manaCost = card.getManaCost(context, player);
 		int minValue = 0;
 		for (CardCostModifier costModifier : context.getCardCostModifiers()) {
+			if (!costModifier.appliesTo(card)) {
+				continue;
+			}
 			manaCost += costModifier.process(card);
 			if (costModifier.getMinValue() > minValue) {
 				minValue = costModifier.getMinValue();

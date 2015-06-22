@@ -3,7 +3,16 @@
   "spell": {
     "class": "DrawCardSpell",
 	"valueProvider" : {
-		"class" : "CardDifferenceCounter"
+		"class" : "AlgebraicValueProvider",
+		"valueProvider1" : {
+			"class" : "CardCounter",
+			"targetPlayer" : "OPPONENT"
+		},
+		"valueProvider2" : {
+			"class" : "CardCounter",
+			"targetPlayer" : "SELF"
+		},
+		"operation" : "SUBTRACT"
 	}
   },
   "id": "spell_divine_favor",

@@ -17,7 +17,8 @@ public abstract class ValueProvider {
 		TargetPlayer targetPlayer = (TargetPlayer) desc.get(ValueProviderArg.TARGET_PLAYER);
 		Player providingPlayer = targetPlayer == null || targetPlayer == TargetPlayer.SELF ? player : context.getOpponent(player);
 		int multiplier = desc.contains(ValueProviderArg.MULTIPLIER) ? desc.getInt(ValueProviderArg.MULTIPLIER) : 1;
-		int value = provideValue(context, providingPlayer, target) * multiplier;
+		int offset = desc.contains(ValueProviderArg.OFFSET) ? desc.getInt(ValueProviderArg.OFFSET) : 0;
+		int value = provideValue(context, providingPlayer, target) * multiplier + offset;
 		return value;
 	}
 

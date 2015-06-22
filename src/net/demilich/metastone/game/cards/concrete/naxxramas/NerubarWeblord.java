@@ -3,7 +3,6 @@ package net.demilich.metastone.game.cards.concrete.naxxramas;
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
-import net.demilich.metastone.game.cards.costmodifier.MinionCostModifier;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.TargetPlayer;
@@ -23,10 +22,10 @@ public class NerubarWeblord extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion nerubarWeblord = createMinion();
-		MinionCostModifier costModifier = new MinionCostModifier(2);
-		costModifier.setTargetPlayer(TargetPlayer.BOTH);
-		costModifier.setRequiredTag(GameTag.BATTLECRY);
-		nerubarWeblord.setCardCostModifier(costModifier);
+//		MinionCostModifier costModifier = new MinionCostModifier(2);
+//		costModifier.setTargetPlayer(TargetPlayer.BOTH);
+//		costModifier.setRequiredTag(GameTag.BATTLECRY);
+//		nerubarWeblord.setCardCostModifier(costModifier);
 		return nerubarWeblord;
 	}
 }

@@ -5,32 +5,42 @@ import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.entities.minions.Race;
+import net.demilich.metastone.game.events.GameEvent;
+import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.logic.CustomCloneable;
 import net.demilich.metastone.game.spells.TargetPlayer;
+import net.demilich.metastone.game.spells.desc.manamodifier.CardCostModifierArg;
+import net.demilich.metastone.game.spells.desc.manamodifier.CardCostModifierDesc;
 import net.demilich.metastone.game.spells.trigger.IGameEventListener;
 import net.demilich.metastone.game.spells.trigger.TriggerLayer;
 import net.demilich.metastone.game.targeting.EntityReference;
 
-public abstract class CardCostModifier extends CustomCloneable implements IGameEventListener {
+public class CardCostModifier extends CustomCloneable implements IGameEventListener {
 
 	private boolean expired;
 	private int owner;
 	private EntityReference hostReference;
-	private int manaModifier;
-	private int minValue;
-	private CardType cardType;
-	private GameTag requiredTag;
-	private TargetPlayer targetPlayer = TargetPlayer.SELF;
+	
+	private CardCostModifierDesc desc;
 
-	public CardCostModifier(CardType cardType, int manaModifier) {
-		this.cardType = cardType;
-		this.manaModifier = manaModifier;
+	public CardCostModifier(CardCostModifierDesc desc) {
+		this.desc = desc;
 	}
 
-	protected boolean appliesTo(Card card) {
-		if (getRequiredTag() != null && !card.hasTag(getRequiredTag())) {
+	public boolean appliesTo(Card card) {
+		if (expired) {
 			return false;
 		}
+		
+		if (getRequiredAttribute() != null && !card.hasTag(getRequiredAttribute())) {
+			return false;
+		}
+		
+		if (getRequiredRace() != null && !(card.getTag(GameTag.RACE) != getRequiredRace())) {
+			return false;
+		}
+		
 		switch (getTargetPlayer()) {
 		case BOTH:
 			break;
@@ -48,7 +58,7 @@ public abstract class CardCostModifier extends CustomCloneable implements IGameE
 			break;
 
 		}
-		return card.getCardType() == cardType;
+		return card.getCardType() == getCardType();
 	}
 
 	@Override
@@ -59,6 +69,10 @@ public abstract class CardCostModifier extends CustomCloneable implements IGameE
 
 	protected void expire() {
 		expired = true;
+	}
+	
+	protected Object get(CardCostModifierArg arg) {
+		return desc.get(arg);
 	}
 
 	@Override
@@ -72,7 +86,7 @@ public abstract class CardCostModifier extends CustomCloneable implements IGameE
 	}
 
 	public int getMinValue() {
-		return minValue;
+		return desc.getInt(CardCostModifierArg.MIN_VALUE);
 	}
 
 	@Override
@@ -80,21 +94,28 @@ public abstract class CardCostModifier extends CustomCloneable implements IGameE
 		return owner;
 	}
 
-	public GameTag getRequiredTag() {
-		return requiredTag;
+	protected GameTag getRequiredAttribute() {
+		return (GameTag) desc.get(CardCostModifierArg.REQUIRED_ATTRIBUTE);
 	}
 
-	public TargetPlayer getTargetPlayer() {
-		return targetPlayer;
+	protected TargetPlayer getTargetPlayer() {
+		if (!desc.contains(CardCostModifierArg.TARGET_PLAYER)) {
+			return TargetPlayer.SELF;
+		}
+		return (TargetPlayer) desc.get(CardCostModifierArg.TARGET_PLAYER);
+	}
+	
+	protected Race getRequiredRace() {
+		return (Race) get(CardCostModifierArg.RACE);
+	}
+	
+	protected CardType getCardType() {
+		return (CardType) desc.get(CardCostModifierArg.CARD_TYPE);
 	}
 
 	@Override
 	public boolean isExpired() {
 		return expired;
-	}
-
-	protected int modifyManaCost(Card card) {
-		return manaModifier;
 	}
 
 	@Override
@@ -107,11 +128,7 @@ public abstract class CardCostModifier extends CustomCloneable implements IGameE
 	}
 
 	public int process(Card card) {
-		if (expired || !appliesTo(card)) {
-			return 0;
-		}
-
-		return modifyManaCost(card);
+		return desc.getInt(CardCostModifierArg.VALUE);
 	}
 
 	@Override
@@ -119,21 +136,20 @@ public abstract class CardCostModifier extends CustomCloneable implements IGameE
 		hostReference = host.getReference();
 	}
 
-	public void setMinValue(int minValue) {
-		this.minValue = minValue;
-	}
 
 	@Override
 	public void setOwner(int playerIndex) {
 		this.owner = playerIndex;
 	}
 
-	public void setRequiredTag(GameTag requiredTag) {
-		this.requiredTag = requiredTag;
+	@Override
+	public boolean interestedIn(GameEventType eventType) {
+		return false;
 	}
 
-	public void setTargetPlayer(TargetPlayer targetPlayer) {
-		this.targetPlayer = targetPlayer;
+	@Override
+	public void onGameEvent(GameEvent event) {
+		
 	}
 
 }

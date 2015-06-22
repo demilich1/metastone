@@ -2,19 +2,16 @@ package net.demilich.metastone.game.cards.concrete.blackrockmountain;
 
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.actions.BattlecryAction;
-import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
-import net.demilich.metastone.game.cards.costmodifier.MinionCostModifier;
+import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
-import net.demilich.metastone.game.events.CardPlayedEvent;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
-import net.demilich.metastone.game.spells.AddCostModifierSpell;
-import net.demilich.metastone.game.spells.TargetPlayer;
+import net.demilich.metastone.game.spells.CardCostModifierSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.CardPlayedTrigger;
 import net.demilich.metastone.game.spells.trigger.GameEventTrigger;
@@ -32,19 +29,19 @@ public class DragonConsort extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion dragonConsort = createMinion();
-		SpellDesc spellCostReduce = AddCostModifierSpell.create(EntityReference.FRIENDLY_HERO, new DragonCostModifier(-2));
+		SpellDesc spellCostReduce = CardCostModifierSpell.create(EntityReference.FRIENDLY_HERO, new DragonCostModifier(-2));
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(spellCostReduce);
 		dragonConsort.setBattlecry(battlecry);
 		return dragonConsort;
 	}
 
-	private class DragonCostModifier extends MinionCostModifier {
+	private class DragonCostModifier extends CardCostModifier {
 		
 		private final GameEventTrigger dragonPlayedTrigger = new CardPlayedTrigger(null); 
 
 		public DragonCostModifier(int manaModifier) {
-			super(manaModifier);
-			setRequiredRace(Race.DRAGON);
+			super(null);
+			//setRequiredRace(Race.DRAGON);
 		}
 		
 		@Override

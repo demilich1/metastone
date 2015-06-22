@@ -11,9 +11,11 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.condition.ConditionDesc;
 import net.demilich.metastone.game.spells.desc.filter.FilterDesc;
 import net.demilich.metastone.game.spells.desc.filter.Operation;
+import net.demilich.metastone.game.spells.desc.manamodifier.CardCostModifierDesc;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDeserializer;
 import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
+import net.demilich.metastone.game.spells.desc.valueprovider.AlgebraicOperation;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderDesc;
 import net.demilich.metastone.game.targeting.CardLocation;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -29,6 +31,7 @@ public class ParseUtils {
 	private static FilterDeserializer filterParser = new FilterDeserializer();
 	private static ConditionDeserializer conditionParser = new ConditionDeserializer();
 	private static EventTriggerDeserializer triggerParser = new EventTriggerDeserializer();
+	private static CardCostModifierDeserializer manaModifierParser = new CardCostModifierDeserializer();
 
 	public static Object parse(String argName, JsonObject jsonData, ParseValueType valueType) {
 		JsonElement entry = jsonData.get(argName);
@@ -68,6 +71,8 @@ public class ParseUtils {
 			return Enum.valueOf(EntityType.class, entry.getAsString());
 		case ACTION_TYPE:
 			return Enum.valueOf(ActionType.class, entry.getAsString());
+		case ALGEBRAIC_OPERATION:
+			return Enum.valueOf(AlgebraicOperation.class, entry.getAsString());
 		case VALUE_PROVIDER:
 			ValueProviderDesc valueProviderDesc = valueProviderParser.deserialize(entry, ValueProviderDesc.class, null);
 			return valueProviderDesc.create();
@@ -85,6 +90,8 @@ public class ParseUtils {
 			return triggerDesc;
 		case EVENT_TRIGGER:
 			return triggerParser.deserialize(entry, EventTriggerDesc.class, null);
+		case CARD_COST_MODIFIER:
+			return manaModifierParser.deserialize(entry, CardCostModifierDesc.class, null);
 		default:
 			break;
 		}

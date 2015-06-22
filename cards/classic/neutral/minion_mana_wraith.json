@@ -1,0 +1,19 @@
+{
+  "baseAttack": 2,
+  "baseHp": 2,
+  "id": "minion_mana_wraith",
+  "cardCostModifier" : {
+	"class" : "CardCostModifier",
+	"cardType" : "MINION",
+	"value" : +1,
+	"targetPlayer" : "BOTH"
+  },
+  "name": "Mana Wraith",
+  "description": "ALL minions cost (1) more.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "RARE",
+  "baseManaCost": 2,
+  "collectible": true,
+  "fileFormatVersion": 1
+}
