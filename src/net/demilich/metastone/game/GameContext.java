@@ -142,6 +142,7 @@ public class GameContext implements Cloneable, IDisposable {
 	}
 
 	public void fireGameEvent(GameEvent gameEvent) {
+		fireGameEvent(gameEvent, TriggerLayer.SECRET);
 		fireGameEvent(gameEvent, TriggerLayer.DEFAULT);
 	}
 

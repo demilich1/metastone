@@ -226,7 +226,6 @@ public class GameLogic implements Cloneable {
 
 			if (spellCard != null && spellCard.getTargetRequirement() != TargetSelection.NONE) {
 				GameEvent spellTargetEvent = new TargetAcquisitionEvent(context, ActionType.SPELL, spellCard, targets.get(0));
-				context.fireGameEvent(spellTargetEvent, TriggerLayer.SECRET);
 				context.fireGameEvent(spellTargetEvent);
 				Entity targetOverride = (Entity) context.getEnvironment().get(Environment.TARGET_OVERRIDE);
 				if (targetOverride != null && targetOverride.getId() != IdFactory.UNASSIGNED) {
@@ -335,7 +334,7 @@ public class GameLogic implements Cloneable {
 		case HERO:
 			if (isFatalDamage(target, damage)) {
 				FatalDamageEvent fatalDamageEvent = new FatalDamageEvent(context, target);
-				context.fireGameEvent(fatalDamageEvent, TriggerLayer.SECRET);
+				context.fireGameEvent(fatalDamageEvent);
 			}
 			damageDealt = damageHero((Hero) target, damage);
 			break;
@@ -344,8 +343,8 @@ public class GameLogic implements Cloneable {
 		}
 
 		if (damageDealt > 0) {
+			target.setTag(GameTag.LAST_HIT, damageDealt);
 			DamageEvent damageEvent = new DamageEvent(context, target, source, damage);
-			context.fireGameEvent(damageEvent, TriggerLayer.SECRET);
 			context.fireGameEvent(damageEvent);
 			player.getStatistics().damageDealt(damage);
 		}
@@ -381,7 +380,8 @@ public class GameLogic implements Cloneable {
 			log("{} is IMMUNE and does not take damage", minion);
 			return 0;
 		}
-		if (damage >= minion.getHp() && player.getHero().hasStatus(GameTag.CANNOT_REDUCE_HP_BELOW_1)) {
+		Player owner = context.getPlayer(minion.getOwner());
+		if (damage >= minion.getHp() && owner.getHero().hasStatus(GameTag.CANNOT_REDUCE_HP_BELOW_1)) {
 			damage = minion.getHp() - 1;
 		}
 
@@ -419,7 +419,6 @@ public class GameLogic implements Cloneable {
 		Player owner = context.getPlayer(minion.getOwner());
 		context.getEnvironment().put(Environment.KILLED_MINION, minion);
 		KillEvent killEvent = new KillEvent(context, minion);
-		context.fireGameEvent(killEvent, TriggerLayer.SECRET);
 		context.fireGameEvent(killEvent);
 		context.getEnvironment().remove(Environment.KILLED_MINION);
 
@@ -533,7 +532,6 @@ public class GameLogic implements Cloneable {
 
 		context.getEnvironment().put(Environment.ATTACKER, attacker);
 		TargetAcquisitionEvent targetAcquisitionEvent = new TargetAcquisitionEvent(context, ActionType.PHYSICAL_ATTACK, attacker, defender);
-		context.fireGameEvent(targetAcquisitionEvent, TriggerLayer.SECRET);
 		context.fireGameEvent(targetAcquisitionEvent);
 		Actor target = defender;
 		if (context.getEnvironment().containsKey(Environment.TARGET_OVERRIDE)) {
@@ -921,7 +919,8 @@ public class GameLogic implements Cloneable {
 		player.getHand().remove(card);
 
 		player.getStatistics().cardPlayed(card);
-		context.fireGameEvent(new CardPlayedEvent(context, playerId, card));
+		CardPlayedEvent cardPlayedEvent = new CardPlayedEvent(context, playerId, card); 
+		context.fireGameEvent(cardPlayedEvent);
 
 		if (card.hasTag(GameTag.OVERLOAD)) {
 			context.fireGameEvent(new OverloadEvent(context, playerId));
@@ -1220,8 +1219,7 @@ public class GameLogic implements Cloneable {
 		}
 
 		SummonEvent summonEvent = new SummonEvent(context, minion, source);
-		context.fireGameEvent(summonEvent, TriggerLayer.SECRET);
-		context.fireGameEvent(summonEvent, TriggerLayer.DEFAULT);
+		context.fireGameEvent(summonEvent);
 
 		applyTag(minion, GameTag.SUMMONING_SICKNESS);
 		refreshAttacksPerRound(minion);

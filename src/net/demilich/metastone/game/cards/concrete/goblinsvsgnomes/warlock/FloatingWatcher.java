@@ -7,7 +7,7 @@ import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.BuffSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.spells.trigger.HeroDamagedTrigger;
+import net.demilich.metastone.game.spells.trigger.DamageReceivedTrigger;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 import net.demilich.metastone.game.targeting.EntityReference;
 
@@ -29,7 +29,7 @@ public class FloatingWatcher extends MinionCard {
 		Minion floatingWatcher = createMinion();
 		SpellDesc buffSpell = BuffSpell.create(EntityReference.SELF, +2, +2);
 		//set ownTurnOnly to TRUE
-		SpellTrigger trigger = new SpellTrigger(new HeroDamagedTrigger(null), buffSpell);
+		SpellTrigger trigger = new SpellTrigger(new DamageReceivedTrigger(null), buffSpell);
 		floatingWatcher.setSpellTrigger(trigger);
 		return floatingWatcher;
 	}

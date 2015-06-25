@@ -186,17 +186,10 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.naxxramas.Webspinner());
 		cards.add(new net.demilich.metastone.game.cards.concrete.naxxramas.ZombieChow());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.OldMurkEye());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.SeaGiant());
 		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.SouthseaDeckhand());
-		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.EyeForAnEye());
-		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.NobleSacrifice());
-		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.Redemption());
-		cards.add(new net.demilich.metastone.game.cards.concrete.paladin.Repentance());
-		cards.add(new net.demilich.metastone.game.cards.concrete.priest.Shadowform());
 		cards.add(new net.demilich.metastone.game.cards.concrete.priest.ShadowMadness());
 		cards.add(new net.demilich.metastone.game.cards.concrete.shaman.AncestralSpirit());
 		cards.add(new net.demilich.metastone.game.cards.concrete.shaman.FarSight());
-		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.paladin.Defender());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.shaman.HealingTotem());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.shaman.SearingTotem());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.shaman.StoneclawTotem());

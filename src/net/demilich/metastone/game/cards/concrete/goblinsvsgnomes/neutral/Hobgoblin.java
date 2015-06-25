@@ -2,14 +2,11 @@ package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.neutral;
 
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
-import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.events.GameEvent;
-import net.demilich.metastone.game.events.SummonEvent;
 import net.demilich.metastone.game.spells.BuffSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.spells.trigger.MinionCardPlayedTrigger;
+import net.demilich.metastone.game.spells.trigger.CardPlayedTrigger;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 import net.demilich.metastone.game.targeting.EntityReference;
 
@@ -30,7 +27,7 @@ public class Hobgoblin extends MinionCard {
 		Minion hobgoblin = createMinion();
 		SpellDesc buff = BuffSpell.create(EntityReference.EVENT_TARGET, +2, +2);
 		//SpellTrigger trigger = new SpellTrigger(new HobgoblinTrigger(), buff);
-		SpellTrigger trigger = new SpellTrigger(new MinionCardPlayedTrigger(null), buff);
+		SpellTrigger trigger = new SpellTrigger(new CardPlayedTrigger(null), buff);
 		hobgoblin.setSpellTrigger(trigger);
 		return hobgoblin;
 	}

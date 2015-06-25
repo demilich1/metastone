@@ -1,4 +1,7 @@
 package net.demilich.metastone.tests;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
@@ -6,15 +9,11 @@ import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.heroes.powers.ArmorUp;
 import net.demilich.metastone.game.heroes.powers.Fireblast;
-import net.demilich.metastone.game.heroes.powers.LesserHeal;
 import net.demilich.metastone.game.heroes.powers.LifeTap;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.spells.DamageSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
-
-import org.testng.Assert;
-import org.testng.annotations.Test;
 
 public class HeroPowerTest extends TestBase {
 
@@ -66,8 +65,9 @@ public class HeroPowerTest extends TestBase {
 		GameContext context = createContext(HeroClass.PRIEST, HeroClass.WARRIOR);
 		Hero priest = context.getPlayer1().getHero();
 
-		priest.setHp(GameLogic.MAX_HERO_HP - LesserHeal.HEALING);
-		Assert.assertEquals(priest.getHp(), GameLogic.MAX_HERO_HP - LesserHeal.HEALING);
+		int lesserHealing = 2;
+		priest.setHp(GameLogic.MAX_HERO_HP - lesserHealing);
+		Assert.assertEquals(priest.getHp(), GameLogic.MAX_HERO_HP - lesserHealing);
 
 		GameAction lesserHeal = priest.getHeroPower().play();
 		lesserHeal.setTarget(priest);

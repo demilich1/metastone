@@ -1,0 +1,16 @@
+{
+  "targetSelection": "ANY",
+  "id": "hero_power_mind_spike",
+  "name": "Mind Spike",
+  "description": "Deal 2 damage.",
+  "type": "HERO_POWER",
+  "heroClass": "PRIEST",
+  "rarity": "EPIC",
+  "spell" : {
+	"class" : "DamageSpell",
+	"value" : 2
+  },
+  "baseManaCost": 2,
+  "collectible": false,
+  "fileFormatVersion": 1
+}

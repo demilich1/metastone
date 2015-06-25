@@ -1,6 +1,7 @@
 package net.demilich.metastone.game.entities.heroes;
 
-import net.demilich.metastone.game.heroes.powers.LesserHeal;
+import net.demilich.metastone.game.cards.CardCatalogue;
+import net.demilich.metastone.game.heroes.powers.HeroPower;
 
 public class Anduin extends Hero {
 	
@@ -9,7 +10,7 @@ public class Anduin extends Hero {
 	}
 
 	public Anduin() {
-		super("Anduin Wrynn", HeroClass.PRIEST, new LesserHeal());
+		super("Anduin Wrynn", HeroClass.PRIEST, (HeroPower) CardCatalogue.getCardById("hero_power_lesser_heal"));
 	}
 
 	

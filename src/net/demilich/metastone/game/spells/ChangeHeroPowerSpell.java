@@ -4,6 +4,7 @@ import java.util.Map;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.heroes.powers.HeroPower;
@@ -25,7 +26,8 @@ public class ChangeHeroPowerSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		HeroPower heroPower = (HeroPower) desc.get(SpellArg.HERO_POWER);
+		String heroPowerName = (String) desc.get(SpellArg.CARD);
+		HeroPower heroPower = (HeroPower) CardCatalogue.getCardById(heroPowerName);
 		Hero targetHero = (Hero) target;
 		logger.debug("{}'s hero power was changed to {}", targetHero.getName(), heroPower);
 		targetHero.setHeroPower(heroPower);
