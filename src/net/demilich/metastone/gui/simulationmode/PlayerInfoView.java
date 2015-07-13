@@ -7,7 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import net.demilich.metastone.game.entities.heroes.HeroTemplate;
+import net.demilich.metastone.game.cards.HeroCard;
 import net.demilich.metastone.gui.IconFactory;
 import net.demilich.metastone.gui.gameconfig.PlayerConfig;
 
@@ -38,8 +38,8 @@ public class PlayerInfoView extends Pane {
 	}
 	
 	public void setInfo(PlayerConfig playerConfig) {
-		HeroTemplate heroTemplate = playerConfig.getHeroTemplate();
-		classIcon.setImage(IconFactory.getClassIcon(heroTemplate.getHeroClass()));
+		HeroCard heroCard = playerConfig.getHeroCard();
+		classIcon.setImage(IconFactory.getClassIcon(heroCard.getHeroClass()));
 		heroLabel.setText(playerConfig.getName());
 		deckLabel.setText(playerConfig.getDeck().getName());
 		behaviourLabel.setText(playerConfig.getBehaviour().getName());

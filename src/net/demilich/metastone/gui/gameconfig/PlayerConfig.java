@@ -1,15 +1,15 @@
 package net.demilich.metastone.gui.gameconfig;
 
 import net.demilich.metastone.game.behaviour.IBehaviour;
+import net.demilich.metastone.game.cards.HeroCard;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.MetaDeck;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
-import net.demilich.metastone.game.entities.heroes.HeroTemplate;
 
 public class PlayerConfig {
 
 	private String name;
-	private HeroTemplate heroTemplate;
+	private HeroCard HeroCard;
 	private Deck deck;
 	private IBehaviour behaviour;
 	private boolean hideCards;
@@ -42,12 +42,12 @@ public class PlayerConfig {
 		return deck.getHeroClass();
 	}
 
-	public HeroTemplate getHeroTemplate() {
-		return heroTemplate;
+	public HeroCard getHeroCard() {
+		return HeroCard;
 	}
 
 	public String getName() {
-		return name != null ? name : heroTemplate.getName();
+		return name != null ? name : HeroCard.getName();
 	}
 
 	public boolean hideCards() {
@@ -62,8 +62,8 @@ public class PlayerConfig {
 		this.deck = deck;
 	}
 
-	public void setHeroTemplate(HeroTemplate heroTemplate) {
-		this.heroTemplate = heroTemplate;
+	public void setHeroCard(HeroCard HeroCard) {
+		this.HeroCard = HeroCard;
 	}
 
 	public void setHideCards(boolean hideCards) {

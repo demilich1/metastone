@@ -1,0 +1,13 @@
+{
+	"name" : "Anduin Wrynn",
+	"id" : "hero_anduin",
+	"type": "HERO",
+	"heroClass" : "PRIEST",
+	"rarity" : "FREE",
+	"heroPower" : "hero_power_lesser_heal",
+	"collectible" : true,
+	"attributes" : {
+		"HP" : 30,
+		"MAX_HP" : 30
+	}
+}

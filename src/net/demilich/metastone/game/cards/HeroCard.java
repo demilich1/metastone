@@ -6,11 +6,14 @@ import java.util.Set;
 
 import org.apache.commons.lang3.NotImplementedException;
 
+import javafx.scene.image.Image;
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.cards.desc.HeroCardDesc;
 import net.demilich.metastone.game.entities.heroes.Hero;
+import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.heroes.powers.HeroPower;
+import net.demilich.metastone.gui.IconFactory;
 
 public class HeroCard extends Card {
 	
@@ -40,6 +43,14 @@ public class HeroCard extends Card {
 			}
 		}
 		return hero;
+	}
+
+	public HeroClass getHeroClass() {
+		return getClassRestriction();
+	}
+	
+	public Image getImage() {
+		return new Image(IconFactory.getHeroIconUrl(getHeroClass()));
 	}
 
 }

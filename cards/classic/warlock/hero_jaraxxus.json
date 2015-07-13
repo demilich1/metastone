@@ -6,6 +6,7 @@
 	"rarity" : "LEGENDARY",
 	"heroPower" : "hero_power_inferno",
 	"race" : "DEMON",
+	"collectible" : false,
 	"attributes" : {
 		"HP" : 15,
 		"MAX_HP" : 15

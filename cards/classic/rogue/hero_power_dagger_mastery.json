@@ -1,0 +1,16 @@
+{
+  "targetSelection": "NONE",
+  "id": "hero_power_dagger_mastery",
+  "name": "Dagger Mastery",
+  "description": "Equip a 1/2 Dagger.",
+  "type": "HERO_POWER",
+  "heroClass": "ROGUE",
+  "rarity": "FREE",
+  "spell" : {
+	"class" : "EquipWeaponSpell",
+	"card" : "weapon_wicked_knife"
+  },
+  "baseManaCost": 2,
+  "collectible": false,
+  "fileFormatVersion": 1
+}

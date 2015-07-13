@@ -9,7 +9,6 @@ import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.heroes.Hero;
-import net.demilich.metastone.game.entities.heroes.HeroFactory;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.logic.CustomCloneable;
 import net.demilich.metastone.game.statistics.GameStatistics;
@@ -62,7 +61,7 @@ public class Player extends CustomCloneable {
 		Deck selectedDeck = config.getDeckForPlay();
 		this.name = config.getName();
 		this.deck = selectedDeck.getCardsCopy();
-		this.setHero(HeroFactory.createHero(selectedDeck.getHeroClass()));
+		this.setHero(config.getHeroCard().createHero());
 		this.deckName = selectedDeck.getName();
 		setBehaviour(config.getBehaviour().clone());
 		setHideCards(config.hideCards());

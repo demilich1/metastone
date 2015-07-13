@@ -23,20 +23,14 @@ import net.demilich.metastone.game.behaviour.PlayRandomBehaviour;
 import net.demilich.metastone.game.behaviour.heuristic.WeightedHeuristic;
 import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
 import net.demilich.metastone.game.behaviour.threat.GameStateValueBehaviour;
+import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCatalogue;
+import net.demilich.metastone.game.cards.CardType;
+import net.demilich.metastone.game.cards.HeroCard;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.DeckFactory;
-import net.demilich.metastone.game.entities.heroes.Anduin;
-import net.demilich.metastone.game.entities.heroes.Garrosh;
-import net.demilich.metastone.game.entities.heroes.Guldan;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
-import net.demilich.metastone.game.entities.heroes.HeroTemplate;
-import net.demilich.metastone.game.entities.heroes.Jaina;
-import net.demilich.metastone.game.entities.heroes.Malfurion;
 import net.demilich.metastone.game.entities.heroes.MetaHero;
-import net.demilich.metastone.game.entities.heroes.Rexxar;
-import net.demilich.metastone.game.entities.heroes.Thrall;
-import net.demilich.metastone.game.entities.heroes.Uther;
-import net.demilich.metastone.game.entities.heroes.Valeera;
 import net.demilich.metastone.gui.common.BehaviourStringConverter;
 import net.demilich.metastone.gui.common.DeckStringConverter;
 import net.demilich.metastone.gui.common.HeroStringConverter;
@@ -54,7 +48,7 @@ public class PlayerConfigView extends VBox {
 	protected ComboBox<IBehaviour> behaviourBox;
 
 	@FXML
-	protected ComboBox<HeroTemplate> heroBox;
+	protected ComboBox<HeroCard> heroBox;
 
 	@FXML
 	protected ComboBox<Deck> deckBox;
@@ -93,7 +87,7 @@ public class PlayerConfigView extends VBox {
 	}
 
 	private void filterDecks() {
-		HeroClass heroClass = getPlayerConfig().getHeroTemplate().getHeroClass();
+		HeroClass heroClass = getPlayerConfig().getHeroCard().getHeroClass();
 		ObservableList<Deck> deckList = FXCollections.observableArrayList();
 
 		if (heroClass == HeroClass.DECK_COLLECTION) {
@@ -143,11 +137,11 @@ public class PlayerConfigView extends VBox {
 		playerConfig.setHideCards(newValue);
 	}
 
-	private void selectHero(HeroTemplate heroTemplate) {
-		Image heroPortrait = heroTemplate.getImage();
+	private void selectHero(HeroCard HeroCard) {
+		Image heroPortrait = HeroCard.getImage();
 		heroIcon.setImage(heroPortrait);
-		heroNameLabel.setText(heroTemplate.getName());
-		getPlayerConfig().setHeroTemplate(heroTemplate);
+		heroNameLabel.setText(HeroCard.getName());
+		getPlayerConfig().setHeroCard(HeroCard);
 		filterDecks();
 	}
 
@@ -173,21 +167,15 @@ public class PlayerConfigView extends VBox {
 	}
 
 	public void setupHeroes() {
-		ObservableList<HeroTemplate> heroList = FXCollections.observableArrayList();
-
-		heroList.add(Garrosh.getTemplate());
-		heroList.add(Jaina.getTemplate());
-		heroList.add(Valeera.getTemplate());
-		heroList.add(Guldan.getTemplate());
-		heroList.add(Rexxar.getTemplate());
-		heroList.add(Thrall.getTemplate());
-		heroList.add(Anduin.getTemplate());
-		heroList.add(Uther.getTemplate());
-		heroList.add(Malfurion.getTemplate());
+		ObservableList<HeroCard> heroList = FXCollections.observableArrayList();
+		for (Card card : CardCatalogue.query(CardType.HERO)) {
+			heroList.add((HeroCard) card);
+		}
+		
 		heroList.add(new MetaHero());
 
 		heroBox.setItems(heroList);
-		heroBox.valueProperty().addListener((ChangeListener<HeroTemplate>) (observableValue, oldHero, newHero) -> {
+		heroBox.valueProperty().addListener((ChangeListener<HeroCard>) (observableValue, oldHero, newHero) -> {
 			selectHero(newHero);
 		});
 	}
