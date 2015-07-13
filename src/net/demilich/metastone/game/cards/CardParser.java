@@ -13,6 +13,7 @@ import net.demilich.metastone.game.cards.desc.CardDesc;
 import net.demilich.metastone.game.cards.desc.ChooseBattlecryCardDesc;
 import net.demilich.metastone.game.cards.desc.ChooseOneCardDesc;
 import net.demilich.metastone.game.cards.desc.ConditionDeserializer;
+import net.demilich.metastone.game.cards.desc.HeroCardDesc;
 import net.demilich.metastone.game.cards.desc.HeroPowerCardDesc;
 import net.demilich.metastone.game.cards.desc.CardCostModifierDeserializer;
 import net.demilich.metastone.game.cards.desc.MinionCardDesc;
@@ -88,6 +89,8 @@ public class CardParser {
 			return gson.fromJson(jsonData, WeaponCardDesc.class);
 		case HERO_POWER:
 			return gson.fromJson(jsonData, HeroPowerCardDesc.class);
+		case HERO:
+			return gson.fromJson(jsonData, HeroCardDesc.class);
 		default:
 			logger.error("Unknown cardType: " + type);
 			break;

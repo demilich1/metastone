@@ -1,0 +1,13 @@
+{
+	"name" : "Lord Jaraxxus",
+	"id" : "hero_jaraxxus",
+	"type": "HERO",
+	"heroClass" : "WARLOCK",
+	"rarity" : "LEGENDARY",
+	"heroPower" : "hero_power_inferno",
+	"race" : "DEMON",
+	"attributes" : {
+		"HP" : 15,
+		"MAX_HP" : 15
+	}
+}

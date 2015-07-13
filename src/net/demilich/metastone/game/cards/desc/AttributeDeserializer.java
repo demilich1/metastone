@@ -33,6 +33,8 @@ public class AttributeDeserializer implements JsonDeserializer<Map<GameTag, Obje
 		parseAttribute(GameTag.SPELL_DAMAGE, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(GameTag.SPELL_AMPLIFY_MULTIPLIER, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(GameTag.INVERT_HEALING, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(GameTag.HP, jsonData, map, ParseValueType.INTEGER);
+		parseAttribute(GameTag.MAX_HP, jsonData, map, ParseValueType.INTEGER);
 		return map;
 	}
 

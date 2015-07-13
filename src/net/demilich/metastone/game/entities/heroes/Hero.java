@@ -9,7 +9,7 @@ import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.weapons.Weapon;
 import net.demilich.metastone.game.heroes.powers.HeroPower;
 
-public abstract class Hero extends Actor {
+public class Hero extends Actor {
 
 	private HeroClass heroClass;
 	private HeroPower heroPower;

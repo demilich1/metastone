@@ -1,0 +1,16 @@
+{
+  "targetSelection": "NONE",
+  "id": "hero_power_inferno",
+  "name": "INFERNO!",
+  "description": "Summon a 6/6 Infernal.",
+  "type": "HERO_POWER",
+  "heroClass": "WARLOCK",
+  "rarity": "FREE",
+  "spell" : {
+	"class" : "SummonSpell",
+	"card" : "token_infernal"
+  },
+  "baseManaCost": 2,
+  "collectible": false,
+  "fileFormatVersion": 1
+}

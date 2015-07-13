@@ -194,8 +194,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.shaman.SearingTotem());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.shaman.StoneclawTotem());
 		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.shaman.WrathOfAirTotem());
-		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.LordJaraxxus());
-		cards.add(new net.demilich.metastone.game.cards.concrete.warlock.SenseDemons());
 	}
 	
 	public static void add(Card card) {

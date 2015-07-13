@@ -1,0 +1,18 @@
+{
+  "targetSelection": "NONE",
+  "spell": {
+    "class": "FromDeckToHandSpell",
+	"value" : 2,
+	"race" : "DEMON",
+	"card" : "token_worthless_imp"
+  },
+  "id": "spell_sense_demons",
+  "name": "Sense Demons",
+  "description": "Put 2 random Demons from your deck into your hand.",
+  "type": "SPELL",
+  "heroClass": "WARLOCK",
+  "rarity": "COMMON",
+  "baseManaCost": 3,
+  "collectible": true,
+  "fileFormatVersion": 1
+}
