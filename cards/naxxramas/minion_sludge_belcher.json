@@ -1,0 +1,20 @@
+{
+  "baseAttack": 3,
+  "baseHp": 5,
+  "deathrattle": {
+    "class": "SummonSpell",
+	"card" : "token_slime"
+  },
+  "id": "minion_sludge_belcher",
+  "name": "Sludge Belcher",
+  "description": "Taunt. Deathrattle: Summon a 1/2 Slime with Taunt.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "RARE",
+  "baseManaCost": 5,
+  "collectible": true,
+  "attributes" : {
+	"TAUNT" : true
+  },
+  "fileFormatVersion": 1
+}

@@ -1,0 +1,18 @@
+{
+  "baseAttack": 5,
+  "baseHp": 5,
+  "deathrattle": {
+    "class": "ReturnMinionToHandSpell",
+	"target" : "FRIENDLY_MINIONS",
+	"randomTarget" : true
+  },
+  "id": "minion_anubar_ambusher",
+  "name": "Anub'ar Ambusher",
+  "description": "Deathrattle: Return a friendly minion to your hand.",
+  "type": "MINION",
+  "heroClass": "ROGUE",
+  "rarity": "COMMON",
+  "baseManaCost": 4,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

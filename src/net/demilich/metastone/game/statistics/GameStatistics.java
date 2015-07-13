@@ -40,9 +40,11 @@ public class GameStatistics implements Cloneable {
 			add(Statistic.MINIONS_PLAYED, 1);
 			break;
 		case SPELL:
+		case CHOOSE_ONE:
 			add(Statistic.SPELLS_CAST, 1);
 			break;
 		case WEAPON:
+		case HERO:
 			break;
 		}
 		increaseCardCount(card);

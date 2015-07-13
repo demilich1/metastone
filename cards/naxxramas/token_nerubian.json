@@ -1,0 +1,13 @@
+{
+  "baseAttack": 4,
+  "baseHp": 4,
+  "id": "token_nerubian",
+  "name": "Nerubian",
+  "description": "",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "FREE",
+  "baseManaCost": 2,
+  "collectible": false,
+  "fileFormatVersion": 1
+}

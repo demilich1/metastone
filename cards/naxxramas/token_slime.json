@@ -1,0 +1,16 @@
+{
+  "baseAttack": 1,
+  "baseHp": 2,
+  "id": "token_slime",
+  "name": "Slime",
+  "description": "Taunt",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "COMMON",
+  "baseManaCost": 1,
+  "collectible": false,
+  "attributes": {
+    "TAUNT": true
+  },
+  "fileFormatVersion": 1
+}

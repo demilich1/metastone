@@ -8,7 +8,7 @@ import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
 
 public interface IBehaviour extends Cloneable {
-
+	
 	IBehaviour clone();
 
 	String getName();

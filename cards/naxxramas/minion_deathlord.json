@@ -1,0 +1,21 @@
+{
+  "baseAttack": 2,
+  "baseHp": 8,
+  "deathrattle": {
+    "class": "PutRandomMinionOnBoardSpell",
+	"targetPlayer" : "OPPONENT",
+	"cardLocation" : "DECK"
+  },
+  "id": "minion_deathlord",
+  "name": "Deathlord",
+  "description": "Taunt. Deathrattle: Your opponent puts a minion from their deck into the battlefield.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "RARE",
+  "baseManaCost": 3,
+  "collectible": true,
+  "attributes" : {
+	"TAUNT" : true
+  },
+  "fileFormatVersion": 1
+}

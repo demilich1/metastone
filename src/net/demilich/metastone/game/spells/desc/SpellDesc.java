@@ -6,7 +6,6 @@ import java.util.Map;
 import net.demilich.metastone.game.logic.CustomCloneable;
 import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.TargetPlayer;
-import net.demilich.metastone.game.spells.desc.condition.Condition;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -62,10 +61,6 @@ public class SpellDesc extends CustomCloneable {
 		return (EntityFilter) get(SpellArg.FILTER);
 	}
 	
-	public Condition getCondition() {
-		return (Condition) get(SpellArg.CONDITION);
-	}
-
 	public int getInt(SpellArg spellArg) {
 		return arguments.containsKey(spellArg) ? (int) get(spellArg) : 0;
 	}
