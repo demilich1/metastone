@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.GameTag;
@@ -51,6 +54,7 @@ import net.demilich.metastone.game.events.TargetAcquisitionEvent;
 import net.demilich.metastone.game.events.TurnEndEvent;
 import net.demilich.metastone.game.events.TurnStartEvent;
 import net.demilich.metastone.game.events.WeaponDestroyedEvent;
+import net.demilich.metastone.game.events.WeaponEquippedEvent;
 import net.demilich.metastone.game.heroes.powers.HeroPower;
 import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.SpellUtils;
@@ -67,9 +71,6 @@ import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.IdFactory;
 import net.demilich.metastone.game.targeting.TargetSelection;
 import net.demilich.metastone.utils.MathUtils;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class GameLogic implements Cloneable {
 
@@ -524,6 +525,7 @@ public class GameLogic implements Cloneable {
 			SpellTrigger spellTrigger = weapon.getSpellTrigger();
 			addGameEventListener(player, spellTrigger, weapon);
 		}
+		context.fireGameEvent(new WeaponEquippedEvent(context, weapon));
 		context.fireGameEvent(new BoardChangedEvent(context));
 	}
 

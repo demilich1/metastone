@@ -4,7 +4,7 @@
   "race": "PIRATE",
   "battlecry": {
     "spell": {
-      "class": "ChangeDurabilitySpell",
+      "class": "ModifyDurabilitySpell",
 	  "value" : -1,
 	  "targetPlayer" : "OPPONENT"
     },

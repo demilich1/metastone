@@ -23,7 +23,7 @@
 				"target" : "EVENT_TARGET"
 			},
 			"spell2" : {
-				"class" : "ChangeDurabilitySpell",
+				"class" : "ModifyDurabilitySpell",
 				"targetPlayer" : "SELF",
 				"value" : -1
 			}

@@ -27,18 +27,18 @@ public class DrawCardAndDoSomethingSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		ICardProvider cardProvider = (ICardProvider) desc.get(SpellArg.CARD_PROVIDER);
+		
 		int amount = desc.getValue();
 		for (int i = 0; i < amount; i++) {
-			Card card = cardProvider.getCard(context, player);
+			Card card = context.getLogic().drawCard(player.getId());
 			// card may be null (i.e. try to draw from deck, but already in fatigue)
 			if (card == null) {
 				return;
 			}
-			ICardPostProcessor cardPostProcessor = (ICardPostProcessor) desc.get(SpellArg.CARD_PROCESSOR);
-			cardPostProcessor.processCard(context, player, card);	
+			SpellDesc cardEffectSpell = (SpellDesc) desc.get(SpellArg.SPELL_1);
+			EntityReference sourceReference = source != null ? source.getReference() : null; 
+			context.getLogic().castSpell(player.getId(), cardEffectSpell, sourceReference, card.getReference());
 		}
-		
 	}
 
 }

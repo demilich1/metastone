@@ -1,0 +1,36 @@
+{
+  "baseAttack": 2,
+  "baseHp": 1,
+  "race": "PIRATE",
+  "id": "minion_southsea_deckhand",
+  "name": "Southsea Deckhand",
+  "description": "Has Charge while you have a weapon equipped.",
+  "trigger" : {
+	"eventTrigger" : {
+		"class" : "BoardChangedTrigger"
+	},
+	"spell" : {
+		"class": "ConditionalEffectSpell",
+		"condition" : {
+			"class" : "HasWeaponCondition"
+		},
+		"spell1" : {
+			"class" : "RemoveAttributeSpell",
+			"attribute" : "CHARGE",
+			"target" : "SELF"
+		},
+		"spell2" : {
+			"class" : "AddAttributeSpell",
+			"attribute" : "CHARGE",
+			"target" : "SELF"
+		},
+		"exclusive" : true
+	}
+  },
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "COMMON",
+  "baseManaCost": 1,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

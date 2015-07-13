@@ -13,7 +13,8 @@ public abstract class Condition {
 	}
 	
 	public boolean isFulfilled(GameContext context, Player player, Entity target) {
-		return isFulfilled(context, player, desc, target);
+		boolean invert = desc.getBool(ConditionArg.INVERT);
+		return isFulfilled(context, player, desc, target) != invert;
 	}
 	
 	protected abstract boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity target);

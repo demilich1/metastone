@@ -10,7 +10,7 @@ import net.demilich.metastone.game.targeting.EntityReference;
 public class DestroyWeaponSpell extends Spell {
 	
 	public static SpellDesc create(EntityReference target) {
-		return ChangeDurabilitySpell.create(target, -99);
+		return ModifyDurabilitySpell.create(target, -99);
 	}
 	
 	@Override

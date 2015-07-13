@@ -9,10 +9,10 @@ import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
-public class ChangeDurabilitySpell extends Spell {
+public class ModifyDurabilitySpell extends Spell {
 	
 	public static SpellDesc create(EntityReference target, int durability) {
-		Map<SpellArg, Object> arguments = SpellDesc.build(ChangeDurabilitySpell.class);
+		Map<SpellArg, Object> arguments = SpellDesc.build(ModifyDurabilitySpell.class);
 		arguments.put(SpellArg.VALUE, durability);
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);

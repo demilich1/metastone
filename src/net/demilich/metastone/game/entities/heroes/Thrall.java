@@ -1,6 +1,7 @@
 package net.demilich.metastone.game.entities.heroes;
 
-import net.demilich.metastone.game.heroes.powers.TotemicCall;
+import net.demilich.metastone.game.cards.CardCatalogue;
+import net.demilich.metastone.game.heroes.powers.HeroPower;
 
 public class Thrall extends Hero {
 	
@@ -9,7 +10,7 @@ public class Thrall extends Hero {
 	}
 
 	public Thrall() {
-		super("Thrall", HeroClass.SHAMAN, new TotemicCall());
+		super("Thrall", HeroClass.SHAMAN, (HeroPower) CardCatalogue.getCardById("hero_power_totemic_call"));
 	}
 	
 }

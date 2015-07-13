@@ -185,15 +185,6 @@ public class CardCatalogue {
 		cards.add(new net.demilich.metastone.game.cards.concrete.naxxramas.WailingSoul());
 		cards.add(new net.demilich.metastone.game.cards.concrete.naxxramas.Webspinner());
 		cards.add(new net.demilich.metastone.game.cards.concrete.naxxramas.ZombieChow());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.OldMurkEye());
-		cards.add(new net.demilich.metastone.game.cards.concrete.neutral.SouthseaDeckhand());
-		cards.add(new net.demilich.metastone.game.cards.concrete.priest.ShadowMadness());
-		cards.add(new net.demilich.metastone.game.cards.concrete.shaman.AncestralSpirit());
-		cards.add(new net.demilich.metastone.game.cards.concrete.shaman.FarSight());
-		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.shaman.HealingTotem());
-		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.shaman.SearingTotem());
-		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.shaman.StoneclawTotem());
-		cards.add(new net.demilich.metastone.game.cards.concrete.tokens.shaman.WrathOfAirTotem());
 	}
 	
 	public static void add(Card card) {

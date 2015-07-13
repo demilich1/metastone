@@ -15,7 +15,7 @@
 			"targetPlayer" : "SELF"
 		},
 		"spell" : {
-			"class": "ChangeDurabilitySpell",
+			"class": "ModifyDurabilitySpell",
 			"targetPlayer" : "SELF",
 			"value" : 1
 		}

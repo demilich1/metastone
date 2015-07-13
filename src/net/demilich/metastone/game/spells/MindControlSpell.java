@@ -12,10 +12,11 @@ import net.demilich.metastone.game.targeting.EntityReference;
 
 public class MindControlSpell extends Spell {
 	
-	public static SpellDesc create(EntityReference target, boolean randomTarget) {
+	public static SpellDesc create(EntityReference target, TargetPlayer targetPlayer, boolean randomTarget) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(MindControlSpell.class);
 		arguments.put(SpellArg.TARGET, target);
 		arguments.put(SpellArg.RANDOM_TARGET, randomTarget);
+		arguments.put(SpellArg.TARGET_PLAYER, targetPlayer);
 		return new SpellDesc(arguments);
 	}
 	

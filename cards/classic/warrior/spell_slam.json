@@ -3,8 +3,7 @@
   "spell": {
     "class": "ConditionalEffectSpell",
 	"condition" : {
-		"class" : "IsDeadCondition",
-		"satisfied" : false
+		"class" : "IsDeadCondition"
 	},
 	"spell1" : {
 		"class" : "DamageSpell",
