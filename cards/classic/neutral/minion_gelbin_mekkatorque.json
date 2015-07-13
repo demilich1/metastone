@@ -4,7 +4,7 @@
   "battlecry": {
     "spell": {
       "class": "SummonRandomSpell",
-	  "cards" : ["token_emboldener3000", "token_homing_chicken", "token_poultryizer", "token_repair_bot"]
+	  "cards" : ["token_emboldener_3000", "token_homing_chicken", "token_poultryizer", "token_repair_bot"]
     },
     "resolvedLate": false
   },

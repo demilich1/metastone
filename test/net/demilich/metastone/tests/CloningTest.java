@@ -54,10 +54,12 @@ public class CloningTest extends TestBase {
 		for (int i = 0; i < 100; i++) {
 			PlayerConfig player1Config = new PlayerConfig(DeckFactory.getRandomDeck(HeroClass.MAGE), new PlayRandomBehaviour());
 			player1Config.setName("Player 1");
+			player1Config.setHeroCard(getHeroCardForClass(HeroClass.MAGE));
 			Player player1 = new Player(player1Config);
 			
 			PlayerConfig player2Config = new PlayerConfig(DeckFactory.getRandomDeck(HeroClass.WARRIOR), new PlayRandomBehaviour());
 			player2Config.setName("Player 2");
+			player2Config.setHeroCard(getHeroCardForClass(HeroClass.WARRIOR));
 			Player player2 = new Player(player2Config);
 			
 			GameContext original = new GameContext(player1, player2, new GameLogic());

@@ -125,7 +125,7 @@ public class CardInteractionTests extends TestBase {
 		warrior.setMana(10);
 
 		playCard(context, warrior, CardCatalogue.getCardById("weapon_arcanite_reaper"));
-		playCard(context, warrior, CardCatalogue.getCardById("minion_warsong_commaner"));
+		playCard(context, warrior, CardCatalogue.getCardById("minion_warsong_commander"));
 		playCard(context, warrior, new TestMinionCard(2, 1, 0));
 
 		Minion bloodsailRaider = playMinionCard(context, warrior, (MinionCard) CardCatalogue.getCardById("minion_bloodsail_raider"));

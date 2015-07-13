@@ -1,16 +1,15 @@
 package net.demilich.metastone.tests;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.SecretCard;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
-
-import org.testng.Assert;
-import org.testng.annotations.Test;
 
 
 public class SecretTest extends TestBase {
@@ -57,7 +56,7 @@ public class SecretTest extends TestBase {
 			playCard(context, mage, CardCatalogue.getCardById("secret_spellbender"));
 			Assert.assertEquals(mage.getSecrets().size(), 1);
 			
-			Card testSpellCard = CardCatalogue.getCardById("frostbolt");
+			Card testSpellCard = CardCatalogue.getCardById("spell_frostbolt");
 			context.getLogic().receiveCard(warrior.getId(), testSpellCard);
 			GameAction spellAttackAction = testSpellCard.play();
 			spellAttackAction.setTarget(minion);
@@ -90,7 +89,7 @@ public class SecretTest extends TestBase {
 		context.getLogic().receiveCard(mage.getId(), secretCard2);
 		Assert.assertFalse(context.getLogic().canPlaySecret(mage, secretCard2));
 		
-		SecretCard otherSecret = new SecretCard("AnotherSecret", Rarity.COMMON, HeroClass.ANY, 0);
+		SecretCard otherSecret = (SecretCard) CardCatalogue.getCardById("secret_explosive_trap");
 		context.getLogic().receiveCard(mage.getId(), otherSecret);
 		Assert.assertTrue(context.getLogic().canPlaySecret(mage, otherSecret));
 	}

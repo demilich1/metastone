@@ -113,7 +113,7 @@ public class AuraTests extends BasicTests {
 		Actor minion1 = playMinionCard(context, player, minionCard);
 		Assert.assertEquals(minion1.getAttack(), 1);
 
-		Card mindControlCard = CardCatalogue.getCardById("spell_mindcontrol");
+		Card mindControlCard = CardCatalogue.getCardById("spell_mind_control");
 		context.getLogic().receiveCard(player.getId(), mindControlCard);
 		GameAction mindControl = mindControlCard.play();
 		mindControl.setTarget(auraMinion);

@@ -98,6 +98,7 @@ public class GameLogic implements Cloneable {
 
 	// DEBUG
 	private SpellDesc lastSpell;
+	private Card lastCard;
 
 	public GameLogic() {
 		idFactory = new IdFactory();
@@ -241,11 +242,7 @@ public class GameLogic implements Cloneable {
 			Spell spell = spellFactory.getSpell(spellDesc);
 			spell.cast(context, player, spellDesc, source, targets);
 		} catch (Exception e) {
-			Card pendingCard = (Card) context.getEnvironment().get(Environment.PENDING_CARD);
-			if (pendingCard instanceof SpellCard) {
-				spellCard = (SpellCard) pendingCard;
-			}
-			logger.error("Error while playing card: " + spellCard);
+			logger.error("Error while playing card: " + lastCard);
 			logger.error("Error while casting spell: " + spellDesc);
 			logger.error("LastSpell: " + lastSpell);
 			logger.error("Exception while casting spell", e);
@@ -562,6 +559,10 @@ public class GameLogic implements Cloneable {
 		// secret may have killed attacker
 		if (attacker.isDead()) {
 			return;
+		}
+		
+		if (target.getOwner() == -1) {
+			logger.error("Target has no owner!! {}", target);
 		}
 
 		Player owningPlayer = context.getPlayer(target.getOwner());
@@ -916,8 +917,8 @@ public class GameLogic implements Cloneable {
 
 	public void playCard(int playerId, CardReference cardReference) {
 		Player player = context.getPlayer(playerId);
-		Card card = context.resolveCardReference(cardReference);
-
+		Card card = lastCard = context.resolveCardReference(cardReference);
+		
 		int modifiedManaCost = getModifiedManaCost(player, card);
 		modifyCurrentMana(playerId, -modifiedManaCost);
 		player.getStatistics().manaSpent(modifiedManaCost);

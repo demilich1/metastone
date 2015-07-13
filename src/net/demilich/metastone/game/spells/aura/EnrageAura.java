@@ -20,7 +20,7 @@ public class EnrageAura extends Aura {
 		this(desc.getApplyEffect(), desc.getRemoveEffect(), desc.getTarget());
 	}
 
-	public EnrageAura(SpellDesc applyAuraEffect, SpellDesc removeAuraEffect, EntityReference targetSelection) {
+	private EnrageAura(SpellDesc applyAuraEffect, SpellDesc removeAuraEffect, EntityReference targetSelection) {
 		super(new EnrageChangedTrigger(), applyAuraEffect, removeAuraEffect, targetSelection);
 	}
 

@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Predicate;
 
 public class CardCollection implements Iterable<Card>, Cloneable {
 
@@ -95,6 +96,10 @@ public class CardCollection implements Iterable<Card>, Cloneable {
 
 	public boolean remove(Card card) {
 		return cards.remove(card);
+	}
+
+	public void removeAll(Predicate<Card> filter) {
+		cards.removeIf(filter);
 	}
 
 	public void removeAll() {

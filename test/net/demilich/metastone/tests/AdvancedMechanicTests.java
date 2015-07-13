@@ -66,7 +66,7 @@ public class AdvancedMechanicTests extends BasicTests {
 
 		int cardsInHand = player.getHand().getCount();
 		int cardsInOpponentsDeck = opponent.getDeck().getCount();
-		Card thoughtsteal = CardCatalogue.getCardById("spell_thoughtspell");
+		Card thoughtsteal = CardCatalogue.getCardById("spell_thoughtsteal");
 		context.getLogic().receiveCard(player.getId(), thoughtsteal);
 		context.getLogic().performGameAction(player.getId(), thoughtsteal.play());
 		Assert.assertEquals(opponent.getDeck().getCount(), cardsInOpponentsDeck);

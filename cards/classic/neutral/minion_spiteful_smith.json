@@ -5,11 +5,11 @@
 	"class" : "EnrageAura",
 	"applyEffect" : {
 		"class" : "BuffWeaponSpell",
-		"value" : 2
+		"attackBonus" : 2
 	},
 	"removeEffect" : {
 		"class" : "BuffWeaponSpell",
-		"value" : -2
+		"attackBonus" : -2
 	},
 	"target" : "FRIENDLY_WEAPON"
   },

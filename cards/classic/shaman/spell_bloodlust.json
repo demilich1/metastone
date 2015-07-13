@@ -1,7 +1,7 @@
 {
-	"name" : "Savage Roar",
+	"name" : "Bloodlust",
 	"description" : "Give your minions +3 Attack this turn.",
-	"id" : "spell_savage_roar",
+	"id" : "spell_bloodlust",
 	"type" : "SPELL",
 	"rarity" : "FREE",
 	"heroClass" : "SHAMAN",
@@ -9,7 +9,7 @@
 	"targetSelection" : "NONE",
 	"spell" : {
 		"class" : "TemporaryAttackSpell",
-		"attackBonus" : 3,
+		"value" : 3,
 		"target" : "FRIENDLY_MINIONS"
 	},
 	"fileFormatVersion" : 1

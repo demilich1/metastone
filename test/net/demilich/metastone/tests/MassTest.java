@@ -37,12 +37,16 @@ public class MassTest extends TestBase {
 
 	@Test(threadPoolSize = 16, invocationCount = 10000)
 	public void testRandomMassPlay() {
-		PlayerConfig player1Config = new PlayerConfig(DeckFactory.getRandomDeck(getRandomClass()), new PlayRandomBehaviour());
+		HeroClass heroClass1 = getRandomClass();
+		PlayerConfig player1Config = new PlayerConfig(DeckFactory.getRandomDeck(heroClass1), new PlayRandomBehaviour());
 		player1Config.setName("Player 1");
+		player1Config.setHeroCard(getHeroCardForClass(heroClass1));
 		Player player1 = new Player(player1Config);
 
-		PlayerConfig player2Config = new PlayerConfig(DeckFactory.getRandomDeck(getRandomClass()), new PlayRandomBehaviour());
+		HeroClass heroClass2 = getRandomClass();
+		PlayerConfig player2Config = new PlayerConfig(DeckFactory.getRandomDeck(heroClass2), new PlayRandomBehaviour());
 		player2Config.setName("Player 2");
+		player2Config.setHeroCard(getHeroCardForClass(heroClass2));
 		Player player2 = new Player(player2Config);
 		GameContext context = new GameContext(player1, player2, new GameLogic());
 		try {

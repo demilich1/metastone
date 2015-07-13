@@ -1,7 +1,7 @@
 {
 	"name" : "Mark of Nature",
 	"description" : "Choose One - Give a minion +4 Attack; or +4 Health and Taunt.",
-	"id" : "choose_one_mark_of_nature",
+	"id" : "spell_mark_of_nature",
 	"type" : "CHOOSE_ONE",
 	"rarity" : "COMMON",
 	"heroClass" : "DRUID",

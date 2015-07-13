@@ -4,7 +4,8 @@
   "battlecry": {
     "spell": {
       "class": "HealingSpell",
-	  "value" : 6
+	  "value" : 6,
+	  "target" : "FRIENDLY_HERO"
     },
     "resolvedLate": false
   },

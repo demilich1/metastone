@@ -8,6 +8,7 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.targeting.CardLocation;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class DrawCardAndDoSomethingSpell extends Spell {
@@ -32,7 +33,7 @@ public class DrawCardAndDoSomethingSpell extends Spell {
 		for (int i = 0; i < amount; i++) {
 			Card card = context.getLogic().drawCard(player.getId());
 			// card may be null (i.e. try to draw from deck, but already in fatigue)
-			if (card == null) {
+			if (card == null || card.getLocation() == CardLocation.VOID) {
 				return;
 			}
 			SpellDesc cardEffectSpell = (SpellDesc) desc.get(SpellArg.SPELL_1);

@@ -9,7 +9,7 @@
 	"targetSelection" : "NONE",
 	"spell" : {
 		"class" : "SummonSpell",
-		"card" : "minion_force_of_nature_treant",
+		"card" : "token_treant_force_of_nature",
 		"value" : 3
 	},
 	"fileFormatVersion" : 1

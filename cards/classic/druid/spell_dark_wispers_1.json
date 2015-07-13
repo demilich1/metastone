@@ -10,8 +10,7 @@
 	"targetSelection" : "NONE",
 	"spell" : {
 		"class" : "SummonSpell",
-		"card" : "minion_wisp",
-		"value" : 5
+		"cards" : ["minion_wisp","minion_wisp","minion_wisp","minion_wisp","minion_wisp"]
 	},
 	"fileFormatVersion" : 1
 }

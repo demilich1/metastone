@@ -57,7 +57,7 @@ public class SpecialCardTests extends TestBase {
 		Assert.assertEquals(validTargets.size(), 3);
 		Assert.assertFalse(validTargets.contains(elusiveOne));
 
-		Card arcaneExplosionCard = CardCatalogue.getCardById("arcane_explosion");
+		Card arcaneExplosionCard = CardCatalogue.getCardById("spell_arcane_explosion");
 		context.getLogic().receiveCard(mage.getId(), arcaneExplosionCard);
 		int faerieDragonHp = elusiveOne.getHp();
 		context.getLogic().performGameAction(mage.getId(), arcaneExplosionCard.play());
@@ -124,7 +124,7 @@ public class SpecialCardTests extends TestBase {
 		Assert.assertEquals(druid.getAttack(), 1);
 		Assert.assertEquals(minion.getAttack(), 1);
 
-		Card savageRoar = CardCatalogue.getCardById("savage_roar");
+		Card savageRoar = CardCatalogue.getCardById("spell_savage_roar");
 		context.getLogic().receiveCard(player.getId(), savageRoar);
 		context.getLogic().performGameAction(player.getId(), savageRoar.play());
 		Assert.assertEquals(druid.getAttack(), 3);
@@ -168,7 +168,7 @@ public class SpecialCardTests extends TestBase {
 		Assert.assertEquals(player.getHero().getWeapon().getWeaponDamage(), 5);
 
 		// equip a new weapon; this one should get buffed too
-		fieryWarAxe = CardCatalogue.getCardByName("weapon_fiery_war_axe");
+		fieryWarAxe = CardCatalogue.getCardById("weapon_fiery_war_axe");
 		playCard(context, player, fieryWarAxe);
 		Assert.assertEquals(player.getHero().getWeapon().getWeaponDamage(), 5);
 

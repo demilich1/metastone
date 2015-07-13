@@ -9,7 +9,7 @@
 	"targetSelection" : "NONE",
 	"spell" : {
 		"class" : "TemporaryAttackSpell",
-		"attackBonus" : 2,
+		"value" : 2,
 		"target" : "FRIENDLY_CHARACTERS"
 	},
 	"fileFormatVersion" : 1

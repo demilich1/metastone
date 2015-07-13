@@ -1,5 +1,5 @@
 {
-  "targetSelection": "NONE",
+  "targetSelection": "ANY",
   "spell": {
     "class": "custom.HolyWrathSpell"
   },

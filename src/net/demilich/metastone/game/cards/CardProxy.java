@@ -32,7 +32,7 @@ public class CardProxy extends Proxy<GameNotification> {
 		}
 	}
 	
-	public void loadCards() throws FileNotFoundException {
+	private void loadCards() throws FileNotFoundException {
 		cardDesc.clear();
 		File folder = new File("./cards/");
 		if (!folder.exists()) {
