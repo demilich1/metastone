@@ -18,7 +18,7 @@ import net.demilich.metastone.gui.IconFactory;
 public class HeroCard extends Card {
 	
 	private static final Set<GameTag> inheritedAttributes = new HashSet<GameTag>(Arrays.asList(new GameTag[] { GameTag.HP,
-			GameTag.MAX_HP, GameTag.RACE, GameTag.ARMOR
+			GameTag.MAX_HP, GameTag.ARMOR
 	}));
 
 	
@@ -42,6 +42,7 @@ public class HeroCard extends Card {
 				hero.setTag(gameTag, getTag(gameTag));
 			}
 		}
+		hero.setRace(desc.race);
 		return hero;
 	}
 

@@ -3,16 +3,16 @@
   "spell": {
 	"class" : "MetaSpell",
 	"spell1" : {
-		"class": "DestroySpell",
-		"filter" : {
-			"class" : "RaceFilter",
-			"race" : "DEMON"
-		}
+		"class": "DestroySpell"
 	},
 	"spell2" : {
 		"class": "HealingSpell",
 		"value" : 5,
 		"target" : "FRIENDLY_HERO"
+	},
+	"filter" : {
+		"class" : "RaceFilter",
+		"race" : "DEMON"
 	}
   },
   "id": "spell_sacrificial_pact",

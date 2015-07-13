@@ -608,14 +608,18 @@ public class GameLogic implements Cloneable {
 	}
 
 	public MatchResult getMatchResult(Player player, Player opponent) {
-		int ownHp = player.getHero().getHp();
-		int opponentHp = opponent.getHero().getHp();
-		if (ownHp < 1 && opponentHp < 1) {
+		boolean playerLost = hasPlayerLost(player);
+		boolean opponentLost = hasPlayerLost(opponent);
+		if (playerLost && opponentLost) {
 			return MatchResult.DOUBLE_LOSS;
-		} else if (opponentHp < 1 || ownHp < 1) {
+		} else if (playerLost || opponentLost) {
 			return MatchResult.WON;
 		}
 		return MatchResult.RUNNING;
+	}
+
+	private static boolean hasPlayerLost(Player player) {
+		return player.getHero().getHp() < 1 || player.getHero().hasStatus(GameTag.DEAD);
 	}
 
 	public int getModifiedManaCost(Player player, Card card) {
@@ -676,13 +680,13 @@ public class GameLogic implements Cloneable {
 	}
 
 	public Player getWinner(Player player, Player opponent) {
-		int ownHp = player.getHero().getHp();
-		int opponentHp = opponent.getHero().getHp();
-		if (ownHp < 1 && opponentHp < 1) {
+		boolean playerLost = hasPlayerLost(player);
+		boolean opponentLost = hasPlayerLost(opponent);
+		if (playerLost && opponentLost) {
 			return null;
-		} else if (opponentHp < 1) {
+		} else if (opponentLost) {
 			return player;
-		} else if (ownHp < 1) {
+		} else if (playerLost) {
 			return opponent;
 		}
 		return null;
@@ -921,7 +925,7 @@ public class GameLogic implements Cloneable {
 		player.getHand().remove(card);
 
 		player.getStatistics().cardPlayed(card);
-		CardPlayedEvent cardPlayedEvent = new CardPlayedEvent(context, playerId, card); 
+		CardPlayedEvent cardPlayedEvent = new CardPlayedEvent(context, playerId, card);
 		context.fireGameEvent(cardPlayedEvent);
 
 		if (card.hasTag(GameTag.OVERLOAD)) {
