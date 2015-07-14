@@ -12,7 +12,7 @@
 					"token_whelp",
 					"token_whelp"
 				],
-				"relativeBoardPosition": "LEFT"
+				"boardPositionRelative": "LEFT"
 			},
 			"spell2": {
 				"class": "SummonSpell",
@@ -21,7 +21,7 @@
 					"token_whelp",
 					"token_whelp"
 				],
-				"relativeBoardPosition": "RIGHT"
+				"boardPositionRelative": "RIGHT"
 			}
 		},
 		"resolvedLate": true

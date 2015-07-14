@@ -4,7 +4,7 @@
 	"battlecry": {
 		"spell": {
 			"class": "SummonSpell",
-			"relativeBoardPosition": "RIGHT",
+			"boardPositionRelative": "RIGHT",
 			"card": "token_boar"
 		},
 		"resolvedLate": true

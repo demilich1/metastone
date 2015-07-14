@@ -5,7 +5,7 @@
 		"spell": {
 			"class": "SummonSpell",
 			"card": "token_defias_bandit",
-			"relativeBoardPosition": "RIGHT"
+			"boardPositionRelative": "RIGHT"
 		},
 		"resolvedLate": true,
 		"condition": {

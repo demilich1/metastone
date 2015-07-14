@@ -3,7 +3,8 @@
 	"baseHp": 7,
 	"deathrattle": {
 		"class": "SummonSpell",
-		"card": "token_finkle_einhorn"
+		"card": "token_finkle_einhorn",
+		"targetPlayer": "OPPONENT"
 	},
 	"id": "minion_the_beast",
 	"name": "The Beast",

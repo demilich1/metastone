@@ -1,0 +1,25 @@
+{
+	"baseAttack": 3,
+	"baseHp": 3,
+	"race": "MECH",
+	"battlecry": {
+		"spell": {
+			"class": "HealingSpell",
+			"value": 8,
+			"target": "FRIENDLY_HERO"
+		},
+		"resolvedLate": false
+	},
+	"id": "minion_antique_healbot",
+	"name": "Antique Healbot",
+	"description": "Battlecry: Restore 8 Health to your hero.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 5,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"fileFormatVersion": 1
+}

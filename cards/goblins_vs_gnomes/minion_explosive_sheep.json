@@ -1,0 +1,19 @@
+{
+	"baseAttack": 1,
+	"baseHp": 1,
+	"race": "MECH",
+	"deathrattle": {
+		"class": "DamageSpell",
+		"value": 2,
+		"target": "ALL_MINIONS"
+	},
+	"id": "minion_explosive_sheep",
+	"name": "Explosive Sheep",
+	"description": "Deathrattle: Deal 2 damage to all minions.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 2,
+	"collectible": true,
+	"fileFormatVersion": 1
+}
