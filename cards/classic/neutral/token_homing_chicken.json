@@ -1,34 +1,34 @@
 {
-  "baseAttack": 0,
-  "baseHp": 1,
-  "trigger": {
-   "eventTrigger" : {
-		"class" : "TurnStartTrigger",
-		"targetPlayer" : "SELF"
-	},
-	"spell" : {
-		"class" : "MetaSpell",
-		"spell1" : {
-			"class": "DrawCardSpell",
-			"value" : 3
+	"baseAttack": 0,
+	"baseHp": 1,
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnStartTrigger",
+			"targetPlayer": "SELF"
 		},
-		"spell2" : {
-			"class": "DestroySpell",
-			"target" : "SELF"
+		"spell": {
+			"class": "MetaSpell",
+			"spell1": {
+				"class": "DrawCardSpell",
+				"value": 3
+			},
+			"spell2": {
+				"class": "DestroySpell",
+				"target": "SELF"
+			}
 		}
-	}
-  },
-  "race": "MECH",
-  "id": "token_homing_chicken",
-  "name": "Homing Chicken",
-  "description": "At the start of your turn, destroy this minion and draw 3 cards.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "FREE",
-  "baseManaCost": 1,
-  "collectible": false,
-  "attributes": {
-    "TAUNT": true
-  },
-  "fileFormatVersion": 1
+	},
+	"race": "MECH",
+	"id": "token_homing_chicken",
+	"name": "Homing Chicken",
+	"description": "At the start of your turn, destroy this minion and draw 3 cards.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"baseManaCost": 1,
+	"collectible": false,
+	"attributes": {
+		"TAUNT": true
+	},
+	"fileFormatVersion": 1
 }

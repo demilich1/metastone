@@ -1,12 +1,12 @@
 package net.demilich.metastone.gui.common;
 
+import com.sun.javafx.scene.control.skin.ComboBoxListViewSkin;
+
 import javafx.event.EventHandler;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-
-import com.sun.javafx.scene.control.skin.ComboBoxListViewSkin;
 
 public class ComboBoxKeyHandler<T> implements EventHandler<KeyEvent> {
 	

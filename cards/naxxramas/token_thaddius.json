@@ -1,13 +1,13 @@
 {
-  "baseAttack": 11,
-  "baseHp": 11,
-  "id": "token_thaddius",
-  "name": "Thaddius",
-  "description": "",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "LEGENDARY",
-  "baseManaCost": 10,
-  "collectible": false,
-  "fileFormatVersion": 1
+	"baseAttack": 11,
+	"baseHp": 11,
+	"id": "token_thaddius",
+	"name": "Thaddius",
+	"description": "",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"baseManaCost": 10,
+	"collectible": false,
+	"fileFormatVersion": 1
 }

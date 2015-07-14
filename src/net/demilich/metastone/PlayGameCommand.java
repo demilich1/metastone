@@ -1,8 +1,8 @@
 package net.demilich.metastone;
 
-import net.demilich.metastone.game.GameContext;
 import de.pferdimanzug.nittygrittymvc.SimpleCommand;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
+import net.demilich.metastone.game.GameContext;
 
 public class PlayGameCommand extends SimpleCommand<GameNotification> {
 

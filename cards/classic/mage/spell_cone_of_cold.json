@@ -1,26 +1,26 @@
 {
-  "targetSelection": "MINIONS",
-  "id": "spell_cone_of_cold",
-  "name": "Cone of Cold",
-  "spell" : {
-	"class" : "AdjacentEffectSpell",
-	"spell1" : {
-		"class" : "MetaSpell",
-		"spell1" : {
-			"class" : "AddAttributeSpell",
-			"attribute" : "FROZEN"
-		},
-		"spell2" : {
-			"class" : "DamageSpell",
-			"value" : 1
+	"targetSelection": "MINIONS",
+	"id": "spell_cone_of_cold",
+	"name": "Cone of Cold",
+	"spell": {
+		"class": "AdjacentEffectSpell",
+		"spell1": {
+			"class": "MetaSpell",
+			"spell1": {
+				"class": "AddAttributeSpell",
+				"attribute": "FROZEN"
+			},
+			"spell2": {
+				"class": "DamageSpell",
+				"value": 1
+			}
 		}
-	}
-  },
-  "description": "Freeze a minion and the minions next to it, and deal 1 damage to them.",
-  "type": "SPELL",
-  "heroClass": "MAGE",
-  "rarity": "COMMON",
-  "baseManaCost": 4,
-  "collectible": true,
-  "fileFormatVersion": 1
+	},
+	"description": "Freeze a minion and the minions next to it, and deal 1 damage to them.",
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "COMMON",
+	"baseManaCost": 4,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

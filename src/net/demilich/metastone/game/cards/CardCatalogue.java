@@ -417,16 +417,6 @@ public class CardCatalogue {
 		return query(cardType, rarity, heroClass, null);
 	}
 	
-	public static CardCollection query(Predicate<Card> filter) {
-		CardCollection result = new CardCollection();
-		for (Card card : cards) {
-			if (filter.test(card)) {
-				result.add(card);
-			}
-		}
-		return result;
-	}
-
 	public static CardCollection query(CardType cardType, Rarity rarity, HeroClass heroClass, GameTag tag) {
 		CardCollection result = new CardCollection();
 		for (Card card : cards) {
@@ -453,5 +443,15 @@ public class CardCatalogue {
 
 	public static CardCollection query(GameTag tag) {
 		return query(null, null, null, tag);
+	}
+
+	public static CardCollection query(Predicate<Card> filter) {
+		CardCollection result = new CardCollection();
+		for (Card card : cards) {
+			if (filter.test(card)) {
+				result.add(card);
+			}
+		}
+		return result;
 	}
 }

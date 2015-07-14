@@ -1,16 +1,16 @@
 {
-  "baseAttack": 1,
-  "baseHp": 4,
-  "id": "minion_dalaran_mage",
-  "name": "Dalaran Mage",
-  "description": "Spell Damage +1",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "FREE",
-  "baseManaCost": 3,
-  "collectible": true,
-  "attributes": {
-    "SPELL_DAMAGE": 1
-  },
-  "fileFormatVersion": 1
+	"baseAttack": 1,
+	"baseHp": 4,
+	"id": "minion_dalaran_mage",
+	"name": "Dalaran Mage",
+	"description": "Spell Damage +1",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"baseManaCost": 3,
+	"collectible": true,
+	"attributes": {
+		"SPELL_DAMAGE": 1
+	},
+	"fileFormatVersion": 1
 }

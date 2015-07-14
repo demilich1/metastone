@@ -1,13 +1,13 @@
 {
-	"name" : "Heavy Axe",
-	"description" : "",
-	"collectible" : false,
-	"id" : "weapon_heavy_axe",
-	"type" : "WEAPON",
-	"rarity" : "FREE",
-	"heroClass" : "WARRIOR",
-	"baseManaCost" : 1,
-	"damage" : 1,
-	"durability" : 3,
-	"fileFormatVersion" : 1
+	"name": "Heavy Axe",
+	"description": "",
+	"collectible": false,
+	"id": "weapon_heavy_axe",
+	"type": "WEAPON",
+	"rarity": "FREE",
+	"heroClass": "WARRIOR",
+	"baseManaCost": 1,
+	"damage": 1,
+	"durability": 3,
+	"fileFormatVersion": 1
 }

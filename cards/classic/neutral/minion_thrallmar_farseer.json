@@ -1,15 +1,15 @@
 {
-	"name" : "Thrallmar Farseer",
-	"description" : "Windfury",
-	"id" : "minion_thrallmar_farseer",
-	"type" : "MINION",
-	"rarity" : "COMMON",
-	"heroClass" : "ANY",
-	"baseManaCost" : 3,
-	"baseAttack" : 2,
-	"baseHp" : 3,
-	"attributes" : {
-		"WINDFURY" : true
+	"name": "Thrallmar Farseer",
+	"description": "Windfury",
+	"id": "minion_thrallmar_farseer",
+	"type": "MINION",
+	"rarity": "COMMON",
+	"heroClass": "ANY",
+	"baseManaCost": 3,
+	"baseAttack": 2,
+	"baseHp": 3,
+	"attributes": {
+		"WINDFURY": true
 	},
-	"fileFormatVersion" : 1
+	"fileFormatVersion": 1
 }

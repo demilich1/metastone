@@ -2,6 +2,9 @@ package net.demilich.metastone.tests;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
@@ -12,9 +15,6 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.DamageSpell;
 import net.demilich.metastone.game.targeting.EntityReference;
-
-import org.testng.Assert;
-import org.testng.annotations.Test;
 
 
 public class TechnicalTests extends TestBase {

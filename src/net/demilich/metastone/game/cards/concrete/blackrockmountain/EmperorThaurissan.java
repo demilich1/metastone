@@ -16,17 +16,17 @@ public class EmperorThaurissan extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		Minion emperorThaurissan = createMinion();
-		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), ModifyCardCostSpell.create(-1));
-		emperorThaurissan.setSpellTrigger(trigger);
-		return emperorThaurissan;
+	public int getTypeId() {
+		return 632;
 	}
 
 
 
 	@Override
-	public int getTypeId() {
-		return 632;
+	public Minion summon() {
+		Minion emperorThaurissan = createMinion();
+		SpellTrigger trigger = new SpellTrigger(new TurnEndTrigger(), ModifyCardCostSpell.create(-1));
+		emperorThaurissan.setSpellTrigger(trigger);
+		return emperorThaurissan;
 	}
 }

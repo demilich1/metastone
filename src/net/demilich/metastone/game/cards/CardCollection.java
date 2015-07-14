@@ -98,12 +98,12 @@ public class CardCollection implements Iterable<Card>, Cloneable {
 		return cards.remove(card);
 	}
 
-	public void removeAll(Predicate<Card> filter) {
-		cards.removeIf(filter);
-	}
-
 	public void removeAll() {
 		cards.clear();
+	}
+
+	public void removeAll(Predicate<Card> filter) {
+		cards.removeIf(filter);
 	}
 
 	public Card removeFirst() {

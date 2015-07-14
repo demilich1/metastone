@@ -1,17 +1,17 @@
 {
-  "targetSelection": "NONE",
-  "id": "hero_power_steady_shot",
-  "name": "Steady Shot",
-  "description": "Deal 2 damage to the enemy hero.",
-  "type": "HERO_POWER",
-  "heroClass": "HUNTER",
-  "rarity": "FREE",
-  "spell" : {
-	"class" : "DamageSpell",
-	"value" : 2,
-	"target" : "ENEMY_HERO"
-  },
-  "baseManaCost": 2,
-  "collectible": false,
-  "fileFormatVersion": 1
+	"targetSelection": "NONE",
+	"id": "hero_power_steady_shot",
+	"name": "Steady Shot",
+	"description": "Deal 2 damage to the enemy hero.",
+	"type": "HERO_POWER",
+	"heroClass": "HUNTER",
+	"rarity": "FREE",
+	"spell": {
+		"class": "DamageSpell",
+		"value": 2,
+		"target": "ENEMY_HERO"
+	},
+	"baseManaCost": 2,
+	"collectible": false,
+	"fileFormatVersion": 1
 }

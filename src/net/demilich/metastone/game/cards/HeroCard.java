@@ -29,11 +29,6 @@ public class HeroCard extends Card {
 		this.desc = desc;
 	}
 
-	@Override
-	public PlayCardAction play() {
-		throw new NotImplementedException("Hero cards cannot be played");
-	}
-	
 	public Hero createHero() {
 		HeroPower heroPower = (HeroPower) CardCatalogue.getCardById(desc.heroPower);
 		Hero hero = new Hero(getName(), getClassRestriction(), heroPower);
@@ -45,13 +40,18 @@ public class HeroCard extends Card {
 		hero.setRace(desc.race);
 		return hero;
 	}
-
+	
 	public HeroClass getHeroClass() {
 		return getClassRestriction();
 	}
-	
+
 	public Image getImage() {
 		return new Image(IconFactory.getHeroIconUrl(getHeroClass()));
+	}
+	
+	@Override
+	public PlayCardAction play() {
+		throw new NotImplementedException("Hero cards cannot be played");
 	}
 
 }

@@ -23,6 +23,13 @@ public class Nefarian extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 640;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion nefarian = createMinion();
 		SpellDesc copyOpponentSpells = DrawCardAndDoSomethingSpell.create((context, player) -> {
@@ -35,12 +42,5 @@ public class Nefarian extends MinionCard {
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(copyOpponentSpells);
 		nefarian.setBattlecry(battlecry);
 		return nefarian;
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 640;
 	}
 }

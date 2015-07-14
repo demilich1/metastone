@@ -1,11 +1,11 @@
 {
-	"name" : "Magma Rager",
-	"id" : "minion_magma_rager",
-	"type" : "MINION",
-	"rarity" : "COMMON",
-	"heroClass" : "ANY",
-	"baseManaCost" : 3,
-	"baseAttack" : 5,
-	"baseHp" : 1,
-	"fileFormatVersion" : 1
+	"name": "Magma Rager",
+	"id": "minion_magma_rager",
+	"type": "MINION",
+	"rarity": "COMMON",
+	"heroClass": "ANY",
+	"baseManaCost": 3,
+	"baseAttack": 5,
+	"baseHp": 1,
+	"fileFormatVersion": 1
 }

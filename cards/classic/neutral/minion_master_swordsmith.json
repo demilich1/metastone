@@ -1,25 +1,25 @@
 {
-  "baseAttack": 1,
-  "baseHp": 3,
-  "trigger": {
-   "eventTrigger" : {
-		"class" : "TurnEndTrigger",
-		"targetPlayer" : "SELF"
+	"baseAttack": 1,
+	"baseHp": 3,
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"attackBonus": 1,
+			"target": "OTHER_FRIENDLY_MINIONS",
+			"randomTarget": true
+		}
 	},
-	"spell" : {
-		"class": "BuffSpell",
-		"attackBonus" : 1,
-		"target" : "OTHER_FRIENDLY_MINIONS",
-		"randomTarget" : true
-	}
-  },
-  "id": "minion_master_swordsmith",
-  "name": "Master Swordsmith",
-  "description": "At the end of your turn, give another random friendly minion +1 Attack.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "RARE",
-  "baseManaCost": 2,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"id": "minion_master_swordsmith",
+	"name": "Master Swordsmith",
+	"description": "At the end of your turn, give another random friendly minion +1 Attack.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"baseManaCost": 2,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

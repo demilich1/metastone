@@ -1,31 +1,31 @@
 {
-  "targetSelection": "NONE",
-  "spell": {
-    "class": "MetaSpell",
-	"spell1" : {
-		"class" : "DamageSpell",
-		"valueProvider" : {
-			"class" : "AttributeValueProvider",
-			"attribute" : "ATTACK",
-			"source" : "FRIENDLY_WEAPON"
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "MetaSpell",
+		"spell1": {
+			"class": "DamageSpell",
+			"valueProvider": {
+				"class": "AttributeValueProvider",
+				"attribute": "ATTACK",
+				"source": "FRIENDLY_WEAPON"
+			},
+			"target": "ENEMY_CHARACTERS"
 		},
-		"target" : "ENEMY_CHARACTERS"
+		"spell2": {
+			"class": "DestroyWeaponSpell",
+			"target": "FRIENDLY_HERO"
+		}
 	},
-	"spell2" : {
-		"class" : "DestroyWeaponSpell",
-		"target" : "FRIENDLY_HERO"
-	}
-  },
-  "condition" : {
-	"class" : "HasWeaponCondition"
-  },
-  "id": "spell_blade_flurry",
-  "name": "Blade Flurry",
-  "description": "Destroy your weapon and deal its damage to all enemies.",
-  "type": "SPELL",
-  "heroClass": "ROGUE",
-  "rarity": "RARE",
-  "baseManaCost": 2,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"condition": {
+		"class": "HasWeaponCondition"
+	},
+	"id": "spell_blade_flurry",
+	"name": "Blade Flurry",
+	"description": "Destroy your weapon and deal its damage to all enemies.",
+	"type": "SPELL",
+	"heroClass": "ROGUE",
+	"rarity": "RARE",
+	"baseManaCost": 2,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

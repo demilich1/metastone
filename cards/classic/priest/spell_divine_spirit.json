@@ -1,15 +1,15 @@
 {
-  "targetSelection": "MINIONS",
-  "spell": {
-    "class": "DoubleHpSpell"
-  },
-  "id": "spell_divine_spirit",
-  "name": "Divine Spirit",
-  "description": "Double a minion's Health.",
-  "type": "SPELL",
-  "heroClass": "PRIEST",
-  "rarity": "FREE",
-  "baseManaCost": 2,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "DoubleHpSpell"
+	},
+	"id": "spell_divine_spirit",
+	"name": "Divine Spirit",
+	"description": "Double a minion's Health.",
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "FREE",
+	"baseManaCost": 2,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

@@ -1,28 +1,28 @@
 {
-  "targetSelection": "ANY",
-  "id": "spell_ice_lance",
-  "spell": {
-    "class": "EitherOrSpell",
-	"spell1" : {
-		"class" : "DamageSpell",
-		"value" : 4
+	"targetSelection": "ANY",
+	"id": "spell_ice_lance",
+	"spell": {
+		"class": "EitherOrSpell",
+		"spell1": {
+			"class": "DamageSpell",
+			"value": 4
+		},
+		"spell2": {
+			"class": "AddAttributeSpell",
+			"attribute": "FROZEN"
+		},
+		"condition": {
+			"class": "AttributeCondition",
+			"operation": "HAS",
+			"attribute": "FROZEN"
+		}
 	},
-	"spell2" : {
-		"class" : "AddAttributeSpell",
-		"attribute" : "FROZEN"
-	},
-	"condition" : {
-		"class" : "AttributeCondition",
-		"operation" : "HAS",
-		"attribute" : "FROZEN"
-	}
-  },
-  "name": "Ice Lance",
-  "description": "Freeze a character. If it was already Frozen, deal 4 damage instead.",
-  "type": "SPELL",
-  "heroClass": "MAGE",
-  "rarity": "COMMON",
-  "baseManaCost": 1,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"name": "Ice Lance",
+	"description": "Freeze a character. If it was already Frozen, deal 4 damage instead.",
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "COMMON",
+	"baseManaCost": 1,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

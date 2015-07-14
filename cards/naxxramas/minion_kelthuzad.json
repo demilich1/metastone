@@ -1,22 +1,22 @@
 {
-  "baseAttack": 6,
-  "baseHp": 8,
-  "id": "minion_kelthuzad",
-  "name": "Kel'Thuzad",
-  "description": "At the end of the turn, summon all friendly minions that died this turn.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "LEGENDARY",
-  "trigger" : {
-	"eventTrigger" : {
-		"class" : "TurnEndTrigger",
-		"targetPlayer" : "BOTH"
+	"baseAttack": 6,
+	"baseHp": 8,
+	"id": "minion_kelthuzad",
+	"name": "Kel'Thuzad",
+	"description": "At the end of the turn, summon all friendly minions that died this turn.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger",
+			"targetPlayer": "BOTH"
+		},
+		"spell": {
+			"class": "custom.KelThuzadSpell"
+		}
 	},
-	"spell" : {
-		"class" : "custom.KelThuzadSpell"
-	}
-  },
-  "baseManaCost": 8,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"baseManaCost": 8,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

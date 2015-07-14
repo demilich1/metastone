@@ -1,27 +1,27 @@
 {
-  "targetSelection": "MINIONS",
-  "spell": {
-    "class": "ConditionalEffectSpell",
-	"condition" : {
-		"class" : "IsDeadCondition",
-		"invert" : true
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "ConditionalEffectSpell",
+		"condition": {
+			"class": "IsDeadCondition",
+			"invert": true
+		},
+		"spell1": {
+			"class": "DamageSpell",
+			"value": 1
+		},
+		"spell2": {
+			"class": "DrawCardSpell",
+			"value": 1
+		}
 	},
-	"spell1" : {
-		"class" : "DamageSpell",
-		"value" : 1
-	},
-	"spell2" : {
-		"class" : "DrawCardSpell",
-		"value" : 1
-	}
-  },
-  "id": "spell_mortal_coil",
-  "name": "Mortal Coil",
-  "description": "Deal 1 damage to a minion. If that kills it, draw a card.",
-  "type": "SPELL",
-  "heroClass": "WARLOCK",
-  "rarity": "FREE",
-  "baseManaCost": 1,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"id": "spell_mortal_coil",
+	"name": "Mortal Coil",
+	"description": "Deal 1 damage to a minion. If that kills it, draw a card.",
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "FREE",
+	"baseManaCost": 1,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

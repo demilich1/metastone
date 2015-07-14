@@ -16,17 +16,17 @@ public class MajordomoExecutus extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		Minion majordomoExecutus = createMinion();
-		SpellDesc summonRagnaros = ChangeHeroSpell.create(new RagnarosHero());
-		majordomoExecutus.addDeathrattle(summonRagnaros);
-		return majordomoExecutus;
+	public int getTypeId() {
+		return 639;
 	}
 
 
 
 	@Override
-	public int getTypeId() {
-		return 639;
+	public Minion summon() {
+		Minion majordomoExecutus = createMinion();
+		SpellDesc summonRagnaros = ChangeHeroSpell.create(new RagnarosHero());
+		majordomoExecutus.addDeathrattle(summonRagnaros);
+		return majordomoExecutus;
 	}
 }

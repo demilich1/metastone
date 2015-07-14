@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang3.time.DurationFormatUtils;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -23,8 +25,6 @@ import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.statistics.GameStatistics;
 import net.demilich.metastone.game.statistics.Statistic;
-
-import org.apache.commons.lang3.time.DurationFormatUtils;
 
 public class SimulationResultView extends BorderPane {
 

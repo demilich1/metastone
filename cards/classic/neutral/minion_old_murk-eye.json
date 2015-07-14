@@ -1,35 +1,35 @@
 {
-  "baseAttack": 2,
-  "baseHp": 4,
-  "trigger": {
-   "eventTrigger" : {
-		"class" : "BoardChangedTrigger"
-	},
-	"spell" : {
-		"class": "ConditionalAttackBonusSpell",
-		"valueProvider" : {
-			"class" : "EntityCounter",
-			"source" : "ALL_MINIONS",
-			"offset" : -1,
-			"filter" : {
-				"class" : "RaceFilter",
-				"race" : "MURLOC"
-			}
+	"baseAttack": 2,
+	"baseHp": 4,
+	"trigger": {
+		"eventTrigger": {
+			"class": "BoardChangedTrigger"
 		},
-		"target" : "SELF"
-	}
-  },
-  "race": "MURLOC",
-  "id": "minion_old_murk-eye",
-  "name": "Old Murk-Eye",
-  "description": "Charge. Has +1 Attack for each other Murloc on the battlefield.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "LEGENDARY",
-  "baseManaCost": 4,
-  "collectible": true,
-  "attributes": {
-    "CHARGE": true
-  },
-  "fileFormatVersion": 1
+		"spell": {
+			"class": "ConditionalAttackBonusSpell",
+			"valueProvider": {
+				"class": "EntityCounter",
+				"source": "ALL_MINIONS",
+				"offset": -1,
+				"filter": {
+					"class": "RaceFilter",
+					"race": "MURLOC"
+				}
+			},
+			"target": "SELF"
+		}
+	},
+	"race": "MURLOC",
+	"id": "minion_old_murk-eye",
+	"name": "Old Murk-Eye",
+	"description": "Charge. Has +1 Attack for each other Murloc on the battlefield.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"baseManaCost": 4,
+	"collectible": true,
+	"attributes": {
+		"CHARGE": true
+	},
+	"fileFormatVersion": 1
 }

@@ -7,8 +7,6 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.tokens.CobraForm;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.entities.minions.Race;
-import net.demilich.metastone.game.spells.SpellUtils;
 import net.demilich.metastone.game.spells.TransformMinionSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;

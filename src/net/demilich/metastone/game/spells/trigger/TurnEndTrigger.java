@@ -9,12 +9,12 @@ import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
 public class TurnEndTrigger extends GameEventTrigger {
 	
-	public TurnEndTrigger(EventTriggerDesc desc) {
-		super(desc);
-	}
-	
 	public TurnEndTrigger() {
 		this(EventTriggerDesc.createEmpty(TurnEndTrigger.class));
+	}
+	
+	public TurnEndTrigger(EventTriggerDesc desc) {
+		super(desc);
 	}
 
 	@Override

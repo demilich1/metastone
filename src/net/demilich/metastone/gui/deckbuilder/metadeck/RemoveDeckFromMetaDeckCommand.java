@@ -1,11 +1,11 @@
 package net.demilich.metastone.gui.deckbuilder.metadeck;
 
+import de.pferdimanzug.nittygrittymvc.SimpleCommand;
+import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.MetaDeck;
 import net.demilich.metastone.gui.deckbuilder.DeckProxy;
-import de.pferdimanzug.nittygrittymvc.SimpleCommand;
-import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
 public class RemoveDeckFromMetaDeckCommand extends SimpleCommand<GameNotification> {
 

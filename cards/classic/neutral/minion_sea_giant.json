@@ -1,17 +1,17 @@
 {
-  "baseAttack": 8,
-  "baseHp": 8,
-  "id": "minion_sea_giant",
-  "name": "Sea Giant",
-  "manaCostModifier" : {
-	"class" : "EntityCounter",
-	"source" : "ALL_MINIONS"
-  },
-  "description": "Costs (1) less for each other minion on the battlefield.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "EPIC",
-  "baseManaCost": 10,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"baseAttack": 8,
+	"baseHp": 8,
+	"id": "minion_sea_giant",
+	"name": "Sea Giant",
+	"manaCostModifier": {
+		"class": "EntityCounter",
+		"source": "ALL_MINIONS"
+	},
+	"description": "Costs (1) less for each other minion on the battlefield.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"baseManaCost": 10,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

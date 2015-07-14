@@ -29,6 +29,25 @@ import net.demilich.metastone.gui.gameconfig.PlayerConfig;
 
 public class TestBase {
 
+	private static class NullBehaviour extends Behaviour {
+
+		@Override
+		public String getName() {
+			return "Null Behaviour";
+		}
+
+		@Override
+		public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
+			return new ArrayList<Card>();
+		}
+
+		@Override
+		public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
+			return validActions.get(0);
+		}
+
+	}
+
 	static {
 		Logger root = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
 		root.setLevel(Level.DEBUG);
@@ -41,7 +60,7 @@ public class TestBase {
 		physicalAttackAction.setTarget(target);
 		context.getLogic().performGameAction(player.getId(), physicalAttackAction);
 	}
-
+	
 	protected static DebugContext createContext(HeroClass hero1, HeroClass hero2) {
 		PlayerConfig player1Config = new PlayerConfig(DeckFactory.getRandomDeck(hero1), new NullBehaviour());
 		player1Config.setName("Player 1");
@@ -69,7 +88,7 @@ public class TestBase {
 		}
 		return null;
 	}
-	
+
 	protected static Actor getSingleMinion(List<Minion> minions) {
 		for (Actor minion : minions) {
 			if (minion == null) {
@@ -95,25 +114,6 @@ public class TestBase {
 		context.getLogic().receiveCard(player.getId(), minionCard);
 		context.getLogic().performGameAction(player.getId(), minionCard.play());
 		return getSummonedMinion(player.getMinions());
-	}
-
-	private static class NullBehaviour extends Behaviour {
-
-		@Override
-		public String getName() {
-			return "Null Behaviour";
-		}
-
-		@Override
-		public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
-			return new ArrayList<Card>();
-		}
-
-		@Override
-		public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
-			return validActions.get(0);
-		}
-
 	}
 
 }

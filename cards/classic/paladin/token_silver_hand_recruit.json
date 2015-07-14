@@ -1,12 +1,12 @@
 {
-  "baseAttack": 1,
-  "baseHp": 1,
-  "id": "token_silver_hand_recruit",
-  "name": "Silver Hand Recruit",
-  "type": "MINION",
-  "heroClass": "PALADIN",
-  "rarity": "FREE",
-  "baseManaCost": 1,
-  "collectible": false,
-  "fileFormatVersion": 1
+	"baseAttack": 1,
+	"baseHp": 1,
+	"id": "token_silver_hand_recruit",
+	"name": "Silver Hand Recruit",
+	"type": "MINION",
+	"heroClass": "PALADIN",
+	"rarity": "FREE",
+	"baseManaCost": 1,
+	"collectible": false,
+	"fileFormatVersion": 1
 }

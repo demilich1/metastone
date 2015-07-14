@@ -89,15 +89,19 @@ public class GameLogic implements Cloneable {
 	private static final int WINDFURY_ATTACKS = 2;
 	private static final int MEGA_WINDFURY_ATTACKS = 4;
 
+	private static boolean hasPlayerLost(Player player) {
+		return player.getHero().getHp() < 1 || player.getHero().hasStatus(GameTag.DEAD);
+	}
 	private final TargetLogic targetLogic = new TargetLogic();
 	private final ActionLogic actionLogic = new ActionLogic();
 	private final SpellFactory spellFactory = new SpellFactory();
 	private final IdFactory idFactory;
 	private GameContext context;
-	private boolean loggingEnabled = true;
 
+	private boolean loggingEnabled = true;
 	// DEBUG
 	private SpellDesc lastSpell;
+
 	private Card lastCard;
 
 	public GameLogic() {
@@ -348,11 +352,6 @@ public class GameLogic implements Cloneable {
 		}
 
 		return damageDealt;
-	}
-
-	private boolean isFatalDamage(Entity entity, int damage) {
-		Hero hero = (Hero) entity;
-		return damage >= hero.getEffectiveHp();
 	}
 
 	private int damageHero(Hero hero, int damage) {
@@ -619,10 +618,6 @@ public class GameLogic implements Cloneable {
 		return MatchResult.RUNNING;
 	}
 
-	private static boolean hasPlayerLost(Player player) {
-		return player.getHero().getHp() < 1 || player.getHero().hasStatus(GameTag.DEAD);
-	}
-
 	public int getModifiedManaCost(Player player, Card card) {
 		int manaCost = card.getManaCost(context, player);
 		int minValue = 0;
@@ -790,6 +785,11 @@ public class GameLogic implements Cloneable {
 		player.getDeck().shuffle();
 
 		mulligan(player, begins);
+	}
+
+	private boolean isFatalDamage(Entity entity, int damage) {
+		Hero hero = (Hero) entity;
+		return damage >= hero.getEffectiveHp();
 	}
 
 	public boolean isLoggingEnabled() {

@@ -1,29 +1,29 @@
 {
-  "baseAttack": 2,
-  "baseHp": 3,
-  "battlecry": {
-    "spell": {
-      "class": "BuffSpell",
-	  "target" : "SELF",
-	  "attackValueProvider": {
-		"class": "AttributeValueProvider",
-		"source": "FRIENDLY_WEAPON",
-		"attribute" : "ATTACK"
-		}
-    },
-    "resolvedLate": true
-  },
-  "race": "PIRATE",
-  "id": "minion_bloodsail_raider",
-  "name": "Bloodsail Raider",
-  "description": "Battlecry: Gain Attack equal to the Attack of your weapon.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "COMMON",
-  "baseManaCost": 2,
-  "collectible": true,
-  "attributes": {
-    "BATTLECRY": true
-  },
-  "fileFormatVersion": 1
+	"baseAttack": 2,
+	"baseHp": 3,
+	"battlecry": {
+		"spell": {
+			"class": "BuffSpell",
+			"target": "SELF",
+			"attackValueProvider": {
+				"class": "AttributeValueProvider",
+				"source": "FRIENDLY_WEAPON",
+				"attribute": "ATTACK"
+			}
+		},
+		"resolvedLate": true
+	},
+	"race": "PIRATE",
+	"id": "minion_bloodsail_raider",
+	"name": "Bloodsail Raider",
+	"description": "Battlecry: Gain Attack equal to the Attack of your weapon.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 2,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"fileFormatVersion": 1
 }

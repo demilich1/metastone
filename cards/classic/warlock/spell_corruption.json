@@ -1,25 +1,25 @@
 {
-  "targetSelection": "ENEMY_MINIONS",
-  "spell": {
-    "class": "AddSpellTriggerSpell",
-	"trigger" : {
-		"eventTrigger" : {
-			"class" : "TurnStartTrigger",
-			"targetPlayer" : "SELF"
-		},
-		"spell" : {
-			"class" : "DestroySpell",
-			"target" : "SELF"
+	"targetSelection": "ENEMY_MINIONS",
+	"spell": {
+		"class": "AddSpellTriggerSpell",
+		"trigger": {
+			"eventTrigger": {
+				"class": "TurnStartTrigger",
+				"targetPlayer": "SELF"
+			},
+			"spell": {
+				"class": "DestroySpell",
+				"target": "SELF"
+			}
 		}
-	}
-  },
-  "id": "spell_corruption",
-  "name": "Corruption",
-  "description": "Choose an enemy minion. At the start of your turn, destroy it.",
-  "type": "SPELL",
-  "heroClass": "WARLOCK",
-  "rarity": "FREE",
-  "baseManaCost": 1,
-  "collectible": true,
-  "fileFormatVersion": 1
+	},
+	"id": "spell_corruption",
+	"name": "Corruption",
+	"description": "Choose an enemy minion. At the start of your turn, destroy it.",
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "FREE",
+	"baseManaCost": 1,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

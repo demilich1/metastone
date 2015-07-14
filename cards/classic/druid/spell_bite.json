@@ -1,17 +1,17 @@
 {
-	"name" : "Bite",
-	"description" : "Give your hero +4 Attack this turn and 4 Armor.",
-	"id" : "spell_bite",
-	"type" : "SPELL",
-	"rarity" : "RARE",
-	"heroClass" : "DRUID",
-	"baseManaCost" : 4,
-	"targetSelection" : "NONE",
-	"spell" : {
-		"class" : "BuffHeroSpell",
-		"attackBonus" : 4,
-		"armorBonus" : 4,
-		"target" : "FRIENDLY_HERO"
+	"name": "Bite",
+	"description": "Give your hero +4 Attack this turn and 4 Armor.",
+	"id": "spell_bite",
+	"type": "SPELL",
+	"rarity": "RARE",
+	"heroClass": "DRUID",
+	"baseManaCost": 4,
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "BuffHeroSpell",
+		"attackBonus": 4,
+		"armorBonus": 4,
+		"target": "FRIENDLY_HERO"
 	},
-	"fileFormatVersion" : 1
+	"fileFormatVersion": 1
 }

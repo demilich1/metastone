@@ -23,16 +23,75 @@ import net.demilich.metastone.utils.ICallback;
 
 public class EntityEditor extends SandboxEditor {
 
+	private class PairKeyFactory implements Callback<TableColumn.CellDataFeatures<GameTagEntry, String>, ObservableValue<String>> {
+		@Override
+		public ObservableValue<String> call(TableColumn.CellDataFeatures<GameTagEntry, String> data) {
+			return new ReadOnlyObjectWrapper<>(data.getValue().getName());
+		}
+	}
+	private class PairValueCell extends TableCell<GameTagEntry, Object> {
+		@Override
+		protected void updateItem(Object item, boolean empty) {
+			super.updateItem(item, empty);
+
+			if (item == null) {
+				return;
+			}
+			GameTagEntry entry = (GameTagEntry) item;
+			TagValueType tagValueType = entry.getValueType();
+			GameTag tag = entry.getTag();
+			if (tagValueType == TagValueType.INTEGER) {
+				IntegerTextField numericTextfield = getNumericTextField();
+				numericTextfield.setIntValue(entry.getValueInt());
+				numericTextfield.valueProperty().addListener(new ChangeListener<Number>() {
+					@Override
+					public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
+						workingCopy.put(tag, numericTextfield.getIntValue());
+					}
+				});
+				setGraphic(numericTextfield);
+				setText(null);
+			} else if (tagValueType == TagValueType.BOOLEAN) {
+				CheckBox checkBox = new CheckBox();
+				checkBox.setSelected(entry.getValueBool());
+				checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+					public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldValue, Boolean newValue) {
+						if (checkBox.isSelected()) {
+							workingCopy.put(tag, 1);
+						} else {
+							workingCopy.remove(tag);
+						}
+
+					}
+				});
+				setGraphic(checkBox);
+				setText(null);
+			} else {
+				setGraphic(null);
+				setText(entry.getValue().toString());
+			}
+
+		}
+	}
+
+	private class PairValueFactory implements Callback<TableColumn.CellDataFeatures<GameTagEntry, Object>, ObservableValue<Object>> {
+		@Override
+		public ObservableValue<Object> call(TableColumn.CellDataFeatures<GameTagEntry, Object> data) {
+			return new ReadOnlyObjectWrapper<>(data.getValue());
+		}
+	}
 	private final Map<GameTag, Object> workingCopy = new EnumMap<GameTag, Object>(GameTag.class);
 	private final Entity entity;
 
 	@FXML
 	private TableView<GameTagEntry> propertiesTable;
+
 	@FXML
 	private TableColumn<GameTagEntry, String> nameColumn;
+
 	@FXML
 	private TableColumn<GameTagEntry, Object> valueColumn;
-
+	
 	private final ICallback callback;
 
 	public EntityEditor(Entity entity, ICallback callback) {
@@ -64,7 +123,7 @@ public class EntityEditor extends SandboxEditor {
 		}
 		entity.setTag(tag, defaultValue);
 	}
-	
+
 	private void addTagsIfMissing(Entity entity) {
 		switch (entity.getEntityType()) {
 		case CARD:
@@ -125,65 +184,6 @@ public class EntityEditor extends SandboxEditor {
 
 		}
 		propertiesTable.getItems().setAll(data);
-	}
-
-	private class PairKeyFactory implements Callback<TableColumn.CellDataFeatures<GameTagEntry, String>, ObservableValue<String>> {
-		@Override
-		public ObservableValue<String> call(TableColumn.CellDataFeatures<GameTagEntry, String> data) {
-			return new ReadOnlyObjectWrapper<>(data.getValue().getName());
-		}
-	}
-
-	private class PairValueCell extends TableCell<GameTagEntry, Object> {
-		@Override
-		protected void updateItem(Object item, boolean empty) {
-			super.updateItem(item, empty);
-
-			if (item == null) {
-				return;
-			}
-			GameTagEntry entry = (GameTagEntry) item;
-			TagValueType tagValueType = entry.getValueType();
-			GameTag tag = entry.getTag();
-			if (tagValueType == TagValueType.INTEGER) {
-				IntegerTextField numericTextfield = getNumericTextField();
-				numericTextfield.setIntValue(entry.getValueInt());
-				numericTextfield.valueProperty().addListener(new ChangeListener<Number>() {
-					@Override
-					public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
-						workingCopy.put(tag, numericTextfield.getIntValue());
-					}
-				});
-				setGraphic(numericTextfield);
-				setText(null);
-			} else if (tagValueType == TagValueType.BOOLEAN) {
-				CheckBox checkBox = new CheckBox();
-				checkBox.setSelected(entry.getValueBool());
-				checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
-					public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldValue, Boolean newValue) {
-						if (checkBox.isSelected()) {
-							workingCopy.put(tag, 1);
-						} else {
-							workingCopy.remove(tag);
-						}
-
-					}
-				});
-				setGraphic(checkBox);
-				setText(null);
-			} else {
-				setGraphic(null);
-				setText(entry.getValue().toString());
-			}
-
-		}
-	}
-
-	private class PairValueFactory implements Callback<TableColumn.CellDataFeatures<GameTagEntry, Object>, ObservableValue<Object>> {
-		@Override
-		public ObservableValue<Object> call(TableColumn.CellDataFeatures<GameTagEntry, Object> data) {
-			return new ReadOnlyObjectWrapper<>(data.getValue());
-		}
 	}
 
 }

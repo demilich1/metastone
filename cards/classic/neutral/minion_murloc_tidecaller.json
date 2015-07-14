@@ -1,26 +1,26 @@
 {
-  "baseAttack": 1,
-  "baseHp": 1,
-  "trigger": {
-   "eventTrigger" : {
-		"class" : "MinionSummonedTrigger",
-		"targetPlayer" : "BOTH",
-		"race" : "MURLOC"
+	"baseAttack": 1,
+	"baseHp": 1,
+	"trigger": {
+		"eventTrigger": {
+			"class": "MinionSummonedTrigger",
+			"targetPlayer": "BOTH",
+			"race": "MURLOC"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"value": 1,
+			"target": "SELF"
+		}
 	},
-	"spell" : {
-		"class": "BuffSpell",
-		"value" : 1,
-		"target" : "SELF"
-	}
-  },
-  "race": "MURLOC",
-  "id": "minion_murloc_tidecaller",
-  "name": "Murloc Tidecaller",
-  "description": "Whenever a Murloc is summoned, gain +1 Attack.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "RARE",
-  "baseManaCost": 1,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"race": "MURLOC",
+	"id": "minion_murloc_tidecaller",
+	"name": "Murloc Tidecaller",
+	"description": "Whenever a Murloc is summoned, gain +1 Attack.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"baseManaCost": 1,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

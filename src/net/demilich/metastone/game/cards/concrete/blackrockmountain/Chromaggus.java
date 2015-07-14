@@ -19,16 +19,16 @@ public class Chromaggus extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 626;
+	}
+
+	@Override
 	public Minion summon() {
 		Minion chromaggus = createMinion();
 		//SpellTrigger trigger = new SpellTrigger(new CardDrawnTrigger(TargetPlayer.SELF), CopyPlayedCardSpell.create(TargetPlayer.SELF));
 		SpellTrigger trigger = new SpellTrigger(new CardDrawnTrigger(null), CopyPlayedCardSpell.create(TargetPlayer.SELF));
 		chromaggus.setSpellTrigger(trigger);
 		return chromaggus;
-	}
-
-	@Override
-	public int getTypeId() {
-		return 626;
 	}
 }

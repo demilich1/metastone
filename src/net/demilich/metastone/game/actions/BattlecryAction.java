@@ -68,10 +68,14 @@ public class BattlecryAction extends GameAction {
 		context.getLogic().castSpell(playerId, getSpell(), getSource(), target);
 	}
 
+	private Condition getCondition() {
+		return condition;
+	}
+	
 	public EntityFilter getEntityFilter() {
 		return spell.getEntityFilter();
 	}
-	
+
 	@Override
 	public String getPromptText() {
 		return "[Battlecry]";
@@ -90,20 +94,16 @@ public class BattlecryAction extends GameAction {
 		return anotherAction.getActionType() == getActionType();
 	}
 
+	public void setCondition(Condition condition) {
+		this.condition = condition;
+	}
+	
 	public void setEntityFilter(Predicate<Entity> entityFilter) {
 		//this.entityFilter = entityFilter;
 	}
-
+	
 	public void setResolvedLate(boolean resolvedLate) {
 		this.resolvedLate = resolvedLate;
-	}
-	
-	private Condition getCondition() {
-		return condition;
-	}
-	
-	public void setCondition(Condition condition) {
-		this.condition = condition;
 	}
 
 	@Override

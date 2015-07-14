@@ -19,6 +19,13 @@ public class ImpGangBoss extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 638;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion impGangBoss = createMinion();
 		//SpellDesc summonImp = SummonSpell.create(new Imp());
@@ -26,12 +33,5 @@ public class ImpGangBoss extends MinionCard {
 		SpellTrigger trigger = new SpellTrigger(new DamageReceivedTrigger(null), summonImp);
 		impGangBoss.setSpellTrigger(trigger);
 		return impGangBoss;
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 638;
 	}
 }

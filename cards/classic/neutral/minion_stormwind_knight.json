@@ -1,15 +1,15 @@
 {
-	"name" : "Stormwind Knight",
-	"description" : "Charge",
-	"id" : "minion_stormwind_knight",
-	"type" : "MINION",
-	"rarity" : "FREE",
-	"heroClass" : "ANY",
-	"baseManaCost" : 4,
-	"baseAttack" : 2,
-	"baseHp" : 5,
-	"attributes" : {
-		"CHARGE" : true
+	"name": "Stormwind Knight",
+	"description": "Charge",
+	"id": "minion_stormwind_knight",
+	"type": "MINION",
+	"rarity": "FREE",
+	"heroClass": "ANY",
+	"baseManaCost": 4,
+	"baseAttack": 2,
+	"baseHp": 5,
+	"attributes": {
+		"CHARGE": true
 	},
-	"fileFormatVersion" : 1
+	"fileFormatVersion": 1
 }

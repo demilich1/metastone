@@ -1,14 +1,14 @@
 {
-	"attributes" : {
-		"CHARGE" : true
+	"attributes": {
+		"CHARGE": true
 	},
 	"baseAttack": 4,
 	"baseHp": 2,
 	"battlecry": {
 		"spell": {
-		  "class": "ModifyMaxManaSpell",
-		  "value" : 1,
-		  "targetPlayer" : "OPPONENT"
+			"class": "ModifyMaxManaSpell",
+			"value": 1,
+			"targetPlayer": "OPPONENT"
 		},
 		"targetSelection": "NONE"
 	},
@@ -20,5 +20,5 @@
 	"rarity": "RARE",
 	"baseManaCost": 3,
 	"collectible": true,
-	"fileFormatVersion" : 1
+	"fileFormatVersion": 1
 }

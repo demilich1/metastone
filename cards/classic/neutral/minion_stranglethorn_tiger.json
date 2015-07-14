@@ -1,16 +1,16 @@
 {
-	"name" : "Stranglethorn Tiger",
-	"description" : "Stealth",
-	"id" : "minion_stranglethorn_tiger",
-	"type" : "MINION",
-	"rarity" : "COMMON",
-	"heroClass" : "ANY",
-	"baseManaCost" : 5,
-	"baseAttack" : 5,
-	"baseHp" : 5,
-	"race" : "BEAST",
-	"attributes" : {
-		"STEALTH" : true
+	"name": "Stranglethorn Tiger",
+	"description": "Stealth",
+	"id": "minion_stranglethorn_tiger",
+	"type": "MINION",
+	"rarity": "COMMON",
+	"heroClass": "ANY",
+	"baseManaCost": 5,
+	"baseAttack": 5,
+	"baseHp": 5,
+	"race": "BEAST",
+	"attributes": {
+		"STEALTH": true
 	},
-	"fileFormatVersion" : 1
+	"fileFormatVersion": 1
 }

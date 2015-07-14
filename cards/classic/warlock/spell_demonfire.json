@@ -1,35 +1,35 @@
 {
-  "targetSelection": "MINIONS",
-  "id": "spell_demonfire",
-  "spell": {
-    "class": "EitherOrSpell",
-	"spell1" : {
-		"class" : "BuffSpell",
-		"attackBonus" : 2,
-		"hpBonus" : 2
-	},
-	"spell2" : {
-		"class" : "DamageSpell",
-		"value" : 2
-	},
-	"condition" : {
-		"class" : "AndCondition",
-		"condition1" : {
-			"class" : "OwnedByPlayerCondition",
-			"targetPlayer" : "SELF"
+	"targetSelection": "MINIONS",
+	"id": "spell_demonfire",
+	"spell": {
+		"class": "EitherOrSpell",
+		"spell1": {
+			"class": "BuffSpell",
+			"attackBonus": 2,
+			"hpBonus": 2
 		},
-		"condition2" : {
-			"class" : "RaceCondition",
-			"race" : "DEMON"
+		"spell2": {
+			"class": "DamageSpell",
+			"value": 2
+		},
+		"condition": {
+			"class": "AndCondition",
+			"condition1": {
+				"class": "OwnedByPlayerCondition",
+				"targetPlayer": "SELF"
+			},
+			"condition2": {
+				"class": "RaceCondition",
+				"race": "DEMON"
+			}
 		}
-	}
-  },
-  "name": "Demonfire",
-  "description": "Deal 2 damage to a minion. If it's a friendly Demon, give it +2/+2 instead.",
-  "type": "SPELL",
-  "heroClass": "WARLOCK",
-  "rarity": "COMMON",
-  "baseManaCost": 2,
-  "collectible": true,
-  "fileFormatVersion": 1
+	},
+	"name": "Demonfire",
+	"description": "Deal 2 damage to a minion. If it's a friendly Demon, give it +2/+2 instead.",
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "COMMON",
+	"baseManaCost": 2,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

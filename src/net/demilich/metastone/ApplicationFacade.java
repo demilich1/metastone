@@ -1,5 +1,7 @@
 package net.demilich.metastone;
 
+import de.pferdimanzug.nittygrittymvc.Facade;
+import de.pferdimanzug.nittygrittymvc.interfaces.IFacade;
 import net.demilich.metastone.gui.battleofdecks.StartBattleOfDecksCommand;
 import net.demilich.metastone.gui.deckbuilder.AddCardToDeckCommand;
 import net.demilich.metastone.gui.deckbuilder.ChangeDeckNameCommand;
@@ -29,8 +31,6 @@ import net.demilich.metastone.gui.simulationmode.SimulateGamesCommand;
 import net.demilich.metastone.gui.trainingmode.PerformTrainingCommand;
 import net.demilich.metastone.gui.trainingmode.RequestTrainingDataCommand;
 import net.demilich.metastone.gui.trainingmode.SaveTrainingDataCommand;
-import de.pferdimanzug.nittygrittymvc.Facade;
-import de.pferdimanzug.nittygrittymvc.interfaces.IFacade;
 
 public class ApplicationFacade extends Facade<GameNotification> {
 

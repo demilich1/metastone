@@ -1,6 +1,5 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.neutral;
 
-import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;

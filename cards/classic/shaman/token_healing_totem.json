@@ -1,24 +1,24 @@
 {
-  "baseAttack": 0,
-  "baseHp": 2,
-  "race": "TOTEM",
-  "trigger" : {
-	"eventTrigger" : {
-		"class" : "TurnEndTrigger"
+	"baseAttack": 0,
+	"baseHp": 2,
+	"race": "TOTEM",
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger"
+		},
+		"spell": {
+			"class": "HealingSpell",
+			"value": 1,
+			"target": "FRIENDLY_MINIONS"
+		}
 	},
-	"spell" : {
-		"class" : "HealingSpell",
-		"value" : 1,
-		"target" : "FRIENDLY_MINIONS"
-	}
-  },
-  "id": "token_healing_totem",
-  "name": "Healing Totem",
-  "description": "At the end of your turn, restore 1 Health to all friendly minions.",
-  "type": "MINION",
-  "heroClass": "SHAMAN",
-  "rarity": "FREE",
-  "baseManaCost": 1,
-  "collectible": false,
-  "fileFormatVersion": 1
+	"id": "token_healing_totem",
+	"name": "Healing Totem",
+	"description": "At the end of your turn, restore 1 Health to all friendly minions.",
+	"type": "MINION",
+	"heroClass": "SHAMAN",
+	"rarity": "FREE",
+	"baseManaCost": 1,
+	"collectible": false,
+	"fileFormatVersion": 1
 }

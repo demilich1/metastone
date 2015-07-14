@@ -1,15 +1,15 @@
 {
-	"name" : "Silvermoon Guardian",
-	"description" : "Divine Shield",
-	"id" : "minion_silvermoon_guardian",
-	"type" : "MINION",
-	"rarity" : "COMMON",
-	"heroClass" : "ANY",
-	"baseManaCost" : 4,
-	"baseAttack" : 3,
-	"baseHp" : 3,
-	"attributes" : {
-		"DIVINE_SHIELD" : true
+	"name": "Silvermoon Guardian",
+	"description": "Divine Shield",
+	"id": "minion_silvermoon_guardian",
+	"type": "MINION",
+	"rarity": "COMMON",
+	"heroClass": "ANY",
+	"baseManaCost": 4,
+	"baseAttack": 3,
+	"baseHp": 3,
+	"attributes": {
+		"DIVINE_SHIELD": true
 	},
-	"fileFormatVersion" : 1
+	"fileFormatVersion": 1
 }

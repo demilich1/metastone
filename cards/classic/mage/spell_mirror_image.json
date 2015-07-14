@@ -1,15 +1,18 @@
 {
-	"name" : "Mirror Image",
-	"description" : "Summon two 0/2 minions with Taunt.",
-	"id" : "spell_mirror_image",
-	"type" : "SPELL",
-	"rarity" : "FREE",
-	"heroClass" : "MAGE",
-	"baseManaCost" : 1,
-	"targetSelection" : "NONE",
-	"spell" : {
-		"class" : "SummonSpell",
-		"cards" : ["token_mirror_image", "token_mirror_image"]
+	"name": "Mirror Image",
+	"description": "Summon two 0/2 minions with Taunt.",
+	"id": "spell_mirror_image",
+	"type": "SPELL",
+	"rarity": "FREE",
+	"heroClass": "MAGE",
+	"baseManaCost": 1,
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "SummonSpell",
+		"cards": [
+			"token_mirror_image",
+			"token_mirror_image"
+		]
 	},
-	"fileFormatVersion" : 1
+	"fileFormatVersion": 1
 }

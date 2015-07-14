@@ -28,19 +28,19 @@ public class Aura extends SpellTrigger {
 
 	private HashSet<Integer> affectedEntities = new HashSet<>();
 
+	public Aura(AuraDesc desc) {
+		this(desc.getApplyEffect(), desc.getRemoveEffect(), desc.getTarget());
+	}
+
 	public Aura(GameEventTrigger secondaryTrigger, SpellDesc applyAuraEffect, SpellDesc removeAuraEffect, EntityReference targetSelection) {
 		super(new BoardChangedTrigger(), secondaryTrigger, applyAuraEffect, false);
 		this.applyAuraEffect = applyAuraEffect;
 		this.removeAuraEffect = removeAuraEffect;
 		this.targets = targetSelection;
 	}
-
+	
 	public Aura(SpellDesc applyAuraEffect, SpellDesc removeAuraEffect, EntityReference targetSelection) {
 		this(null, applyAuraEffect, removeAuraEffect, targetSelection);
-	}
-	
-	public Aura(AuraDesc desc) {
-		this(desc.getApplyEffect(), desc.getRemoveEffect(), desc.getTarget());
 	}
 
 	protected boolean affects(GameContext context, Entity target, List<Entity> resolvedTargets) {

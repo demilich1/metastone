@@ -1,23 +1,23 @@
 {
-  "baseAttack": 3,
-  "baseHp": 3,
-  "battlecry": {
-    "spell": {
-      "class": "custom.FacelessSpell"
-    },
-    "targetSelection": "MINIONS",
-    "resolvedLate": false
-  },
-  "id": "minion_faceless_manipulator",
-  "name": "Faceless Manipulator",
-  "description": "Battlecry: Choose a minion and become a copy of it.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "EPIC",
-  "baseManaCost": 5,
-  "collectible": true,
-  "attributes": {
-    "BATTLECRY": true
-  },
-  "fileFormatVersion": 1
+	"baseAttack": 3,
+	"baseHp": 3,
+	"battlecry": {
+		"spell": {
+			"class": "custom.FacelessSpell"
+		},
+		"targetSelection": "MINIONS",
+		"resolvedLate": false
+	},
+	"id": "minion_faceless_manipulator",
+	"name": "Faceless Manipulator",
+	"description": "Battlecry: Choose a minion and become a copy of it.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"baseManaCost": 5,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"fileFormatVersion": 1
 }

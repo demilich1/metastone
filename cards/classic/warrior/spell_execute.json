@@ -1,19 +1,19 @@
 {
-  "targetSelection": "ENEMY_MINIONS",
-  "spell": {
-    "class": "DestroySpell",
-	"filter" : {
-		"class" : "DamagedFilter",
-		"damaged" : true
-	}
-  },
-  "id": "spell_execute",
-  "name": "Execute",
-  "description": "Destroy a damaged enemy minion.",
-  "type": "SPELL",
-  "heroClass": "WARRIOR",
-  "rarity": "FREE",
-  "baseManaCost": 1,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"targetSelection": "ENEMY_MINIONS",
+	"spell": {
+		"class": "DestroySpell",
+		"filter": {
+			"class": "DamagedFilter",
+			"damaged": true
+		}
+	},
+	"id": "spell_execute",
+	"name": "Execute",
+	"description": "Destroy a damaged enemy minion.",
+	"type": "SPELL",
+	"heroClass": "WARRIOR",
+	"rarity": "FREE",
+	"baseManaCost": 1,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

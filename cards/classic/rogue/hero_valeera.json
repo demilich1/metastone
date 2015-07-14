@@ -1,13 +1,13 @@
 {
-	"name" : "Valeera Sanguinar",
-	"id" : "hero_valeera",
+	"name": "Valeera Sanguinar",
+	"id": "hero_valeera",
 	"type": "HERO",
-	"heroClass" : "ROGUE",
-	"rarity" : "FREE",
-	"heroPower" : "hero_power_dagger_mastery",
-	"collectible" : true,
-	"attributes" : {
-		"HP" : 30,
-		"MAX_HP" : 30
+	"heroClass": "ROGUE",
+	"rarity": "FREE",
+	"heroPower": "hero_power_dagger_mastery",
+	"collectible": true,
+	"attributes": {
+		"HP": 30,
+		"MAX_HP": 30
 	}
 }

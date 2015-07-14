@@ -1,14 +1,14 @@
 {
-  "baseAttack": 6,
-  "baseHp": 6,
-  "race": "DEMON",
-  "id": "token_infernal",
-  "name": "Infernal",
-  "description": "",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "COMMON",
-  "baseManaCost": 6,
-  "collectible": false,
-  "fileFormatVersion": 1
+	"baseAttack": 6,
+	"baseHp": 6,
+	"race": "DEMON",
+	"id": "token_infernal",
+	"name": "Infernal",
+	"description": "",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 6,
+	"collectible": false,
+	"fileFormatVersion": 1
 }

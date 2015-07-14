@@ -1,21 +1,21 @@
 {
-	"name" : "Ancestral Healing",
-	"description" : "Restore a minion to full Health and give it Taunt.",
-	"id" : "spell_ancestral_healing",
-	"type" : "SPELL",
-	"rarity" : "FREE",
-	"heroClass" : "SHAMAN",
-	"baseManaCost" : 0,
-	"targetSelection" : "MINIONS",
-	"spell" : {
-		"class" : "MetaSpell",
-		"spell1" :  {
-			"class" : "HealToFullSpell"
+	"name": "Ancestral Healing",
+	"description": "Restore a minion to full Health and give it Taunt.",
+	"id": "spell_ancestral_healing",
+	"type": "SPELL",
+	"rarity": "FREE",
+	"heroClass": "SHAMAN",
+	"baseManaCost": 0,
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "MetaSpell",
+		"spell1": {
+			"class": "HealToFullSpell"
 		},
-		"spell2" :  {
-			"class" : "AddAttributeSpell",
-			"attribute" : "TAUNT"
+		"spell2": {
+			"class": "AddAttributeSpell",
+			"attribute": "TAUNT"
 		}
 	},
-	"fileFormatVersion" : 1
+	"fileFormatVersion": 1
 }

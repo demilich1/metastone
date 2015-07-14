@@ -1,7 +1,7 @@
 package net.demilich.metastone.gui.dialog;
 
-import net.demilich.metastone.GameNotification;
 import de.pferdimanzug.nittygrittymvc.Notification;
+import net.demilich.metastone.GameNotification;
 
 public class DialogNotification extends Notification<GameNotification> {
 

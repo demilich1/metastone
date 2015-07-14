@@ -22,14 +22,14 @@ public class VolcanicLumberer extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion(GameTag.TAUNT);
+	public int getTypeId() {
+		return 647;
 	}
 
 
 
 	@Override
-	public int getTypeId() {
-		return 647;
+	public Minion summon() {
+		return createMinion(GameTag.TAUNT);
 	}
 }

@@ -1,13 +1,13 @@
 {
-	"name" : "Snake",
-	"id" : "token_snake",
-	"type" : "MINION",
-	"rarity" : "EPIC",
-	"heroClass" : "HUNTER",
-	"baseManaCost" : 0,
-	"baseAttack" : 1,
-	"baseHp" : 1,
-	"race" : "BEAST",
-	"collectible" : false,
-	"fileFormatVersion" : 1
+	"name": "Snake",
+	"id": "token_snake",
+	"type": "MINION",
+	"rarity": "EPIC",
+	"heroClass": "HUNTER",
+	"baseManaCost": 0,
+	"baseAttack": 1,
+	"baseHp": 1,
+	"race": "BEAST",
+	"collectible": false,
+	"fileFormatVersion": 1
 }

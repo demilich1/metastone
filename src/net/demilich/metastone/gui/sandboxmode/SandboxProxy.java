@@ -1,9 +1,9 @@
 package net.demilich.metastone.gui.sandboxmode;
 
+import de.pferdimanzug.nittygrittymvc.Proxy;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
-import de.pferdimanzug.nittygrittymvc.Proxy;
 
 public class SandboxProxy extends Proxy<GameNotification> {
 

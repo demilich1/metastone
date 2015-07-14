@@ -6,9 +6,7 @@ import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.DestroySpell;
-import net.demilich.metastone.game.spells.desc.filter.RaceFilter;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class HemetNesingwary extends MinionCard {

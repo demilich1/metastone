@@ -1,15 +1,15 @@
 {
-	"name" : "Ancient Watcher",
-	"description" : "Can't Attack.",
-	"id" : "minion_ancient_watcher",
-	"type" : "MINION",
-	"rarity" : "RARE",
-	"heroClass" : "ANY",
-	"baseManaCost" : 2,
-	"baseAttack" : 4,
-	"baseHp" : 5,
-	"attributes" : {
-		"CANNOT_ATTACK" : true
+	"name": "Ancient Watcher",
+	"description": "Can't Attack.",
+	"id": "minion_ancient_watcher",
+	"type": "MINION",
+	"rarity": "RARE",
+	"heroClass": "ANY",
+	"baseManaCost": 2,
+	"baseAttack": 4,
+	"baseHp": 5,
+	"attributes": {
+		"CANNOT_ATTACK": true
 	},
-	"fileFormatVersion" : 1
+	"fileFormatVersion": 1
 }

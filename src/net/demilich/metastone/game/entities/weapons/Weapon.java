@@ -68,6 +68,14 @@ public class Weapon extends Actor {
 		this.active = active;
 	}
 
+	public void setOnEquip(SpellDesc onEquip) {
+		this.onEquip = onEquip;
+	}
+
+	public void setOnUnequip(SpellDesc onUnequip) {
+		this.onUnequip = onUnequip;
+	}
+
 	@Override
 	public String toString() {
 		String result = "[" + getEntityType() + " '" + getName() + "'id:" + getId() + " ";
@@ -82,13 +90,5 @@ public class Weapon extends Actor {
 		result += " hashCode: " + hashCode();
 		result += "]";
 		return result;
-	}
-
-	public void setOnUnequip(SpellDesc onUnequip) {
-		this.onUnequip = onUnequip;
-	}
-
-	public void setOnEquip(SpellDesc onEquip) {
-		this.onEquip = onEquip;
 	}
 }

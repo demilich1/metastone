@@ -12,16 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.demilich.metastone.GameNotification;
-import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.cards.CardCollection;
-import net.demilich.metastone.game.decks.Deck;
-import net.demilich.metastone.game.decks.MetaDeck;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
-import net.demilich.metastone.gui.deckbuilder.validation.DefaultDeckValidator;
-import net.demilich.metastone.gui.deckbuilder.validation.IDeckValidator;
-
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +21,15 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import de.pferdimanzug.nittygrittymvc.Proxy;
+import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCatalogue;
+import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.decks.Deck;
+import net.demilich.metastone.game.decks.MetaDeck;
+import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.gui.deckbuilder.validation.DefaultDeckValidator;
+import net.demilich.metastone.gui.deckbuilder.validation.IDeckValidator;
 
 public class DeckProxy extends Proxy<GameNotification> {
 

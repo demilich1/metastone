@@ -1,16 +1,16 @@
 {
-	"name" : "3 damage",
-	"description" : "Deal 3 damage to a minion",
-	"id" : "spell_wrath_1",
-	"type" : "SPELL",
-	"rarity" : "COMMON",
-	"heroClass" : "DRUID",
-	"baseManaCost" : 2,
-	"targetSelection" : "MINIONS",
-	"collectible" : false,
-	"spell" : {
-		"class" : "DamageSpell",
-		"value" : 3
+	"name": "3 damage",
+	"description": "Deal 3 damage to a minion",
+	"id": "spell_wrath_1",
+	"type": "SPELL",
+	"rarity": "COMMON",
+	"heroClass": "DRUID",
+	"baseManaCost": 2,
+	"targetSelection": "MINIONS",
+	"collectible": false,
+	"spell": {
+		"class": "DamageSpell",
+		"value": 3
 	},
-	"fileFormatVersion" : 1
+	"fileFormatVersion": 1
 }

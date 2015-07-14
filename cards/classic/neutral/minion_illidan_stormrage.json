@@ -1,25 +1,25 @@
 {
-  "baseAttack": 7,
-  "baseHp": 5,
-  "trigger": {
-   "eventTrigger" : {
-		"class" : "CardPlayedTrigger",
-		"targetPlayer" : "SELF"
+	"baseAttack": 7,
+	"baseHp": 5,
+	"trigger": {
+		"eventTrigger": {
+			"class": "CardPlayedTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "SummonSpell",
+			"card": "token_flame_of_azzinoth",
+			"boardPositionRelative": "RIGHT"
+		}
 	},
-	"spell" : {
-		"class": "SummonSpell",
-		"card" : "token_flame_of_azzinoth",
-		"boardPositionRelative" : "RIGHT"
-	}
-  },
-  "race": "DEMON",
-  "id": "minion_illidan_stormrage",
-  "name": "Illidan Stormrage",
-  "description": "Whenever you play a card, summon a 2/1 Flame of Azzinoth.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "LEGENDARY",
-  "baseManaCost": 6,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"race": "DEMON",
+	"id": "minion_illidan_stormrage",
+	"name": "Illidan Stormrage",
+	"description": "Whenever you play a card, summon a 2/1 Flame of Azzinoth.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"baseManaCost": 6,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

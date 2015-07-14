@@ -1,25 +1,25 @@
 {
-  "baseAttack": 3,
-  "baseHp": 2,
-  "trigger": {
-   "eventTrigger" : {
-		"class" : "AfterSpellCastedTrigger",
-		"targetPlayer" : "SELF",
-		"breaksStealth" : true
+	"baseAttack": 3,
+	"baseHp": 2,
+	"trigger": {
+		"eventTrigger": {
+			"class": "AfterSpellCastedTrigger",
+			"targetPlayer": "SELF",
+			"breaksStealth": true
+		},
+		"spell": {
+			"class": "DamageSpell",
+			"value": 1,
+			"target": "ALL_MINIONS"
+		}
 	},
-	"spell" : {
-		"class": "DamageSpell",
-		"value" : 1,
-		"target" : "ALL_MINIONS"
-	}
-  },
-  "id": "minion_wild_pyromancer",
-  "name": "Wild Pyromancer",
-  "description": "After you cast a spell, deal 1 damage to ALL minions.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "RARE",
-  "baseManaCost": 2,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"id": "minion_wild_pyromancer",
+	"name": "Wild Pyromancer",
+	"description": "After you cast a spell, deal 1 damage to ALL minions.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"baseManaCost": 2,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

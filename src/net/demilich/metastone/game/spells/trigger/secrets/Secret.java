@@ -23,18 +23,18 @@ public class Secret extends SpellTrigger {
 	}
 	
 	@Override
+	protected void onFire(int ownerId, SpellDesc spell, GameEvent event) {
+		super.onFire(ownerId, spell, event);
+		Player owner = event.getGameContext().getPlayer(ownerId);
+		event.getGameContext().getLogic().secretTriggered(owner, this);
+	}
+
+	@Override
 	public void onGameEvent(GameEvent event) {
 		if (event.getGameContext().getActivePlayerId() == getOwner()) {
 			return;
 		}
 		super.onGameEvent(event);
-	}
-
-	@Override
-	protected void onFire(int ownerId, SpellDesc spell, GameEvent event) {
-		super.onFire(ownerId, spell, event);
-		Player owner = event.getGameContext().getPlayer(ownerId);
-		event.getGameContext().getLogic().secretTriggered(owner, this);
 	}
 
 }

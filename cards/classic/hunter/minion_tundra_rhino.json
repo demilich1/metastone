@@ -1,23 +1,23 @@
 {
-  "baseAttack": 2,
-  "baseHp": 5,
-  "aura" : {
-	"class" : "AttributeAura",
-	"attribute" : "CHARGE",
-	"raceRestriction" : "BEAST",
-	"target" : "FRIENDLY_MINIONS"
-  },
-  "race": "BEAST",
-  "id": "minion_tundra_rhino",
-  "name": "Tundra Rhino",
-  "description": "Your Beasts have Charge.",
-  "type": "MINION",
-  "heroClass": "HUNTER",
-  "rarity": "FREE",
-  "baseManaCost": 5,
-  "collectible": true,
-  "attributes" : {
-	"CHARGE" : true
-  },
-  "fileFormatVersion": 1
+	"baseAttack": 2,
+	"baseHp": 5,
+	"aura": {
+		"class": "AttributeAura",
+		"attribute": "CHARGE",
+		"raceRestriction": "BEAST",
+		"target": "FRIENDLY_MINIONS"
+	},
+	"race": "BEAST",
+	"id": "minion_tundra_rhino",
+	"name": "Tundra Rhino",
+	"description": "Your Beasts have Charge.",
+	"type": "MINION",
+	"heroClass": "HUNTER",
+	"rarity": "FREE",
+	"baseManaCost": 5,
+	"collectible": true,
+	"attributes": {
+		"CHARGE": true
+	},
+	"fileFormatVersion": 1
 }

@@ -1,14 +1,14 @@
 {
-  "baseAttack": 5,
-  "baseHp": 5,
-  "race": "BEAST",
-  "id": "token_devilsaur",
-  "name": "Devilsaur",
-  "description": "",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "COMMON",
-  "baseManaCost": 5,
-  "collectible": false,
-  "fileFormatVersion": 1
+	"baseAttack": 5,
+	"baseHp": 5,
+	"race": "BEAST",
+	"id": "token_devilsaur",
+	"name": "Devilsaur",
+	"description": "",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 5,
+	"collectible": false,
+	"fileFormatVersion": 1
 }

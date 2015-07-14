@@ -1,15 +1,15 @@
 {
-	"name" : "Ogre Magi",
-	"description" : "Spell Damage +1",
-	"id" : "minion_ogre_magi",
-	"type" : "MINION",
-	"rarity" : "FREE",
-	"heroClass" : "ANY",
-	"baseManaCost" : 4,
-	"baseAttack" : 4,
-	"baseHp" : 4,
-	"attributes" : {
-		"SPELL_DAMAGE" : 1
+	"name": "Ogre Magi",
+	"description": "Spell Damage +1",
+	"id": "minion_ogre_magi",
+	"type": "MINION",
+	"rarity": "FREE",
+	"heroClass": "ANY",
+	"baseManaCost": 4,
+	"baseAttack": 4,
+	"baseHp": 4,
+	"attributes": {
+		"SPELL_DAMAGE": 1
 	},
-	"fileFormatVersion" : 1
+	"fileFormatVersion": 1
 }

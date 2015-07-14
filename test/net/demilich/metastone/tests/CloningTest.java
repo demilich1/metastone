@@ -1,4 +1,9 @@
 package net.demilich.metastone.tests;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.behaviour.PlayRandomBehaviour;
@@ -11,11 +16,6 @@ import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.gui.gameconfig.PlayerConfig;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.testng.Assert;
-import org.testng.annotations.Test;
 
 public class CloningTest extends TestBase {
 	

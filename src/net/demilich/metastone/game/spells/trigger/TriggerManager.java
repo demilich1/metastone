@@ -3,12 +3,12 @@ package net.demilich.metastone.game.spells.trigger;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.utils.IDisposable;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class TriggerManager implements Cloneable, IDisposable {
 	

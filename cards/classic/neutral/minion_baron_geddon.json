@@ -1,24 +1,24 @@
 {
-  "baseAttack": 7,
-  "baseHp": 5,
-  "trigger": {
-   "eventTrigger" : {
-		"class" : "TurnEndTrigger",
-		"targetPlayer" : "SELF"
+	"baseAttack": 7,
+	"baseHp": 5,
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "DamageSpell",
+			"value": 2,
+			"target": "ALL_OTHER_CHARACTERS"
+		}
 	},
-	"spell" : {
-		"class": "DamageSpell",
-		"value" : 2,
-		"target" : "ALL_OTHER_CHARACTERS"
-	}
-  },
-  "id": "minion_baron_geddon",
-  "name": "Baron Geddon",
-  "description": "At the end of your turn, deal 2 damage to ALL other characters.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "LEGENDARY",
-  "baseManaCost": 7,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"id": "minion_baron_geddon",
+	"name": "Baron Geddon",
+	"description": "At the end of your turn, deal 2 damage to ALL other characters.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"baseManaCost": 7,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

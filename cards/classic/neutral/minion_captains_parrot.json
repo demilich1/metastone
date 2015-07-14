@@ -1,25 +1,25 @@
 {
-  "baseAttack": 1,
-  "baseHp": 1,
-  "race": "BEAST",
-  "battlecry": {
-    "spell": {
-      "class": "FromDeckToHandSpell",
-	  "value" : 1,
-	  "race" : "PIRATE"
-    },
-    "resolvedLate": false
-  },
-  "id": "minion_captains_parrot",
-  "name": "Captain's Parrot",
-  "description": "Battlecry: Put a random Pirate from your deck into your hand.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "EPIC",
-  "baseManaCost": 2,
-  "collectible": true,
-  "attributes": {
-    "BATTLECRY": true
-  },
-  "fileFormatVersion": 1
+	"baseAttack": 1,
+	"baseHp": 1,
+	"race": "BEAST",
+	"battlecry": {
+		"spell": {
+			"class": "FromDeckToHandSpell",
+			"value": 1,
+			"race": "PIRATE"
+		},
+		"resolvedLate": false
+	},
+	"id": "minion_captains_parrot",
+	"name": "Captain's Parrot",
+	"description": "Battlecry: Put a random Pirate from your deck into your hand.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"baseManaCost": 2,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"fileFormatVersion": 1
 }

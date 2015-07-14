@@ -1,16 +1,16 @@
 {
-	"name" : "Voidwalker",
-	"description" : "Taunt",
-	"id" : "minion_voidwalker",
-	"type" : "MINION",
-	"rarity" : "FREE",
-	"heroClass" : "WARLOCK",
-	"baseManaCost" : 1,
-	"baseAttack" : 1,
-	"baseHp" : 3,
-	"attributes" : {
-		"TAUNT" : true
+	"name": "Voidwalker",
+	"description": "Taunt",
+	"id": "minion_voidwalker",
+	"type": "MINION",
+	"rarity": "FREE",
+	"heroClass": "WARLOCK",
+	"baseManaCost": 1,
+	"baseAttack": 1,
+	"baseHp": 3,
+	"attributes": {
+		"TAUNT": true
 	},
-	"race" : "DEMON",
-	"fileFormatVersion" : 1
+	"race": "DEMON",
+	"fileFormatVersion": 1
 }

@@ -8,6 +8,12 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,12 +37,6 @@ import net.demilich.metastone.game.cards.desc.ParseUtils;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.gui.common.ComboBoxKeyHandler;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 class EditorMainWindow extends BorderPane {
 

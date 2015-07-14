@@ -1,5 +1,7 @@
 package net.demilich.metastone.gui.sandboxmode.commands;
 
+import de.pferdimanzug.nittygrittymvc.SimpleCommand;
+import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -9,8 +11,6 @@ import net.demilich.metastone.gui.gameconfig.GameConfig;
 import net.demilich.metastone.gui.gameconfig.PlayerConfig;
 import net.demilich.metastone.gui.playmode.GameContextVisualizable;
 import net.demilich.metastone.gui.sandboxmode.SandboxProxy;
-import de.pferdimanzug.nittygrittymvc.SimpleCommand;
-import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
 public class CreateNewSandboxCommand extends SimpleCommand<GameNotification> {
 

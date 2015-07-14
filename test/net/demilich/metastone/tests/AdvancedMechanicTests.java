@@ -3,6 +3,9 @@ package net.demilich.metastone.tests;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
@@ -21,9 +24,6 @@ import net.demilich.metastone.game.spells.SetHpSpell;
 import net.demilich.metastone.game.spells.SilenceSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.TargetSelection;
-
-import org.testng.Assert;
-import org.testng.annotations.Test;
 
 public class AdvancedMechanicTests extends BasicTests {
 

@@ -1,14 +1,14 @@
 {
-  "baseAttack": 2,
-  "baseHp": 5,
-  "race": "BEAST",
-  "id": "token_flame_bird_form",
-  "name": "Druid of the Flame",
-  "description": "",
-  "type": "MINION",
-  "heroClass": "DRUID",
-  "rarity": "COMMON",
-  "baseManaCost": 3,
-  "collectible": false,
-  "fileFormatVersion": 1
+	"baseAttack": 2,
+	"baseHp": 5,
+	"race": "BEAST",
+	"id": "token_flame_bird_form",
+	"name": "Druid of the Flame",
+	"description": "",
+	"type": "MINION",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"baseManaCost": 3,
+	"collectible": false,
+	"fileFormatVersion": 1
 }

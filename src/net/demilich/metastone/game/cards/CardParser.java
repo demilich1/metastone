@@ -6,16 +6,24 @@ import java.io.FileReader;
 import java.lang.reflect.Type;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.reflect.TypeToken;
+
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.cards.desc.AttributeDeserializer;
 import net.demilich.metastone.game.cards.desc.AuraDeserializer;
+import net.demilich.metastone.game.cards.desc.CardCostModifierDeserializer;
 import net.demilich.metastone.game.cards.desc.CardDesc;
 import net.demilich.metastone.game.cards.desc.ChooseBattlecryCardDesc;
 import net.demilich.metastone.game.cards.desc.ChooseOneCardDesc;
 import net.demilich.metastone.game.cards.desc.ConditionDeserializer;
 import net.demilich.metastone.game.cards.desc.HeroCardDesc;
 import net.demilich.metastone.game.cards.desc.HeroPowerCardDesc;
-import net.demilich.metastone.game.cards.desc.CardCostModifierDeserializer;
 import net.demilich.metastone.game.cards.desc.MinionCardDesc;
 import net.demilich.metastone.game.cards.desc.SecretCardDesc;
 import net.demilich.metastone.game.cards.desc.SpellCardDesc;
@@ -29,14 +37,6 @@ import net.demilich.metastone.game.spells.desc.manamodifier.CardCostModifierDesc
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDeserializer;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderDesc;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.reflect.TypeToken;
 
 public class CardParser {
 

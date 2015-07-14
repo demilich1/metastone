@@ -15,13 +15,13 @@ public class HeroPower extends SpellCard {
 
 	private boolean used;
 
-	public HeroPower(String name, HeroClass heroClass) {
-		super(name, CardType.HERO_POWER, Rarity.FREE, heroClass, 2);
+	public HeroPower(HeroPowerCardDesc desc) {
+		super(desc);
 		setLocation(CardLocation.HERO_POWER);
 	}
 	
-	public HeroPower(HeroPowerCardDesc desc) {
-		super(desc);
+	public HeroPower(String name, HeroClass heroClass) {
+		super(name, CardType.HERO_POWER, Rarity.FREE, heroClass, 2);
 		setLocation(CardLocation.HERO_POWER);
 	}
 

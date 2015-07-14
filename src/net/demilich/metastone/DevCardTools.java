@@ -11,15 +11,20 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+
+import org.apache.commons.io.FileUtils;
 
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 
-import org.apache.commons.io.FileUtils;
-
-public class DevCheckCardCompleteness {
+public class DevCardTools {
 
 	public static void assignUniqueIdToEachCard() {
 		final String path = "./src/" + Card.class.getPackage().getName().replace(".", "/") + "/concrete/";
@@ -155,6 +160,22 @@ public class DevCheckCardCompleteness {
 		return Integer.parseInt(result);
 	}
 
+	public static void formatJsons() {
+		File folder = new File("./cards/");
+
+		Collection<File> files = FileUtils.listFiles(folder, new String[] { "json" }, true);
+		int i = 0;
+		for (File file : files) {
+			try {
+				prettyPrintFile(file);
+				System.out.println("Processing " + file.getName() +" (" + ++i + " of " + files.size() + " files)");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
 	private static List<String> getImplementedCardsAsLines() {
 		final String expression = "cards.add(new %s());";
 		final String path = "./src/" + Card.class.getPackage().getName().replace(".", "/") + "/concrete/";
@@ -167,6 +188,24 @@ public class DevCheckCardCompleteness {
 			lines.add(String.format(expression, cardClassName));
 		}
 		return lines;
+	}
+
+	private static void prettyPrintFile(File file) throws IOException {
+		Path path = Paths.get(file.getPath());
+		String content = new String(Files.readAllBytes(path));
+
+		ScriptEngineManager manager = new ScriptEngineManager();
+		ScriptEngine scriptEngine = manager.getEngineByName("JavaScript");
+
+		scriptEngine.put("jsonString", content);
+		try {
+			scriptEngine.eval("result = JSON.stringify(JSON.parse(jsonString), null, \"\t\")");
+		} catch (ScriptException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String prettyPrintedJson = (String) scriptEngine.get("result");
+		Files.write(path, prettyPrintedJson.getBytes());
 	}
 
 	private static String toCanonName(String name) {

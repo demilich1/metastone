@@ -1,23 +1,23 @@
 {
-  "baseAttack": 5,
-  "baseHp": 7,
-  "trigger": {
-   "eventTrigger" : {
-		"class" : "SpellCastedTrigger",
-		"targetPlayer" : "SELF"
+	"baseAttack": 5,
+	"baseHp": 7,
+	"trigger": {
+		"eventTrigger": {
+			"class": "SpellCastedTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "ReceiveCardSpell",
+			"card": "spell_fireball"
+		}
 	},
-	"spell" : {
-		"class": "ReceiveCardSpell",
-		"card" : "spell_fireball"
-	}
-  },
-  "id": "minion_archmage_antonidas",
-  "name": "Archmage Antonidas",
-  "description": "Whenever you cast a spell, put a 'Fireball' spell into your hand.",
-  "type": "MINION",
-  "heroClass": "MAGE",
-  "rarity": "LEGENDARY",
-  "baseManaCost": 7,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"id": "minion_archmage_antonidas",
+	"name": "Archmage Antonidas",
+	"description": "Whenever you cast a spell, put a 'Fireball' spell into your hand.",
+	"type": "MINION",
+	"heroClass": "MAGE",
+	"rarity": "LEGENDARY",
+	"baseManaCost": 7,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

@@ -1,24 +1,24 @@
 {
-  "baseAttack": 1,
-  "baseHp": 3,
-  "trigger": {
-   "eventTrigger" : {
-		"class" : "SpellCastedTrigger",
-		"targetPlayer" : "SELF"
+	"baseAttack": 1,
+	"baseHp": 3,
+	"trigger": {
+		"eventTrigger": {
+			"class": "SpellCastedTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"attackBonus": 1,
+			"target": "SELF"
+		}
 	},
-	"spell" : {
-		"class": "BuffSpell",
-		"attackBonus" : 1,
-		"target" : "SELF"
-	}
-  },
-  "id": "minion_mana_wyrm",
-  "name": "Mana Wyrm",
-  "description": "Whenever you cast a spell, gain +1 Attack.",
-  "type": "MINION",
-  "heroClass": "MAGE",
-  "rarity": "COMMON",
-  "baseManaCost": 1,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"id": "minion_mana_wyrm",
+	"name": "Mana Wyrm",
+	"description": "Whenever you cast a spell, gain +1 Attack.",
+	"type": "MINION",
+	"heroClass": "MAGE",
+	"rarity": "COMMON",
+	"baseManaCost": 1,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

@@ -1,15 +1,15 @@
 {
-	"name" : "Pyroblast",
-	"description" : "Deal 10 damage.",
-	"id" : "spell_pyroblast",
-	"type" : "SPELL",
-	"rarity" : "EPIC",
-	"heroClass" : "MAGE",
-	"baseManaCost" : 10,
-	"targetSelection" : "ANY",
-	"spell" : {
-		"class" : "DamageSpell",
-		"value" : 10
+	"name": "Pyroblast",
+	"description": "Deal 10 damage.",
+	"id": "spell_pyroblast",
+	"type": "SPELL",
+	"rarity": "EPIC",
+	"heroClass": "MAGE",
+	"baseManaCost": 10,
+	"targetSelection": "ANY",
+	"spell": {
+		"class": "DamageSpell",
+		"value": 10
 	},
-	"fileFormatVersion" : 1
+	"fileFormatVersion": 1
 }

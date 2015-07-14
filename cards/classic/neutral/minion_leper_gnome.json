@@ -1,17 +1,17 @@
 {
-	"name" : "Leper Gnome",
-	"description" : "Deathrattle: Deal 2 damage to the enemy hero.",
-	"id" : "minion_leper_gnome",
-	"type" : "MINION",
-	"rarity" : "COMMON",
-	"heroClass" : "ANY",
-	"baseManaCost" : 1,
-	"baseAttack" : 2,
-	"baseHp" : 1,
-	"deathrattle" : {
-		"class" : "DamageSpell",
-		"value" : 2,
-		"target" : "ENEMY_HERO"
+	"name": "Leper Gnome",
+	"description": "Deathrattle: Deal 2 damage to the enemy hero.",
+	"id": "minion_leper_gnome",
+	"type": "MINION",
+	"rarity": "COMMON",
+	"heroClass": "ANY",
+	"baseManaCost": 1,
+	"baseAttack": 2,
+	"baseHp": 1,
+	"deathrattle": {
+		"class": "DamageSpell",
+		"value": 2,
+		"target": "ENEMY_HERO"
 	},
-	"fileFormatVersion" : 1
+	"fileFormatVersion": 1
 }

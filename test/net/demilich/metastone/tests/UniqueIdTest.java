@@ -1,11 +1,11 @@
 package net.demilich.metastone.tests;
 import java.util.HashMap;
 
-import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardCatalogue;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCatalogue;
 
 
 public class UniqueIdTest {

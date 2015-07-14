@@ -12,11 +12,11 @@ public abstract class Condition {
 		this.desc = desc;
 	}
 	
+	protected abstract boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity target);
+	
 	public boolean isFulfilled(GameContext context, Player player, Entity target) {
 		boolean invert = desc.getBool(ConditionArg.INVERT);
 		return isFulfilled(context, player, desc, target) != invert;
 	}
-	
-	protected abstract boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity target);
 
 }

@@ -89,6 +89,10 @@ public class Hero extends Actor {
 		setTag(GameTag.ARMOR, newArmor);
 	}
 
+	public void setHeroClass(HeroClass heroClass) {
+		this.heroClass = heroClass;
+	}
+
 	public void setHeroPower(HeroPower heroPower) {
 		this.heroPower = heroPower;
 		heroPower.setOwner(getOwner());
@@ -105,10 +109,6 @@ public class Hero extends Actor {
 		if (weapon != null) {
 			weapon.setOwner(getOwner());
 		}
-	}
-
-	public void setHeroClass(HeroClass heroClass) {
-		this.heroClass = heroClass;
 	}
 
 }

@@ -1,23 +1,23 @@
 {
-  "targetSelection": "NONE",
-  "spell": {
-    "class": "DrawCardSpell",
-	"valueProvider" : {
-		"class" : "EntityCounter",
-		"source" : "FRIENDLY_CHARACTERS",
-		"filter" : {
-			"class" : "DamagedFilter",
-			"damaged" : true
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "DrawCardSpell",
+		"valueProvider": {
+			"class": "EntityCounter",
+			"source": "FRIENDLY_CHARACTERS",
+			"filter": {
+				"class": "DamagedFilter",
+				"damaged": true
+			}
 		}
-	}
-  },
-  "id": "spell_battle_rage",
-  "name": "Battle Rage",
-  "description": "Draw a card for each damaged friendly character.",
-  "type": "SPELL",
-  "heroClass": "WARRIOR",
-  "rarity": "COMMON",
-  "baseManaCost": 2,
-  "collectible": true,
-  "fileFormatVersion": 1
+	},
+	"id": "spell_battle_rage",
+	"name": "Battle Rage",
+	"description": "Draw a card for each damaged friendly character.",
+	"type": "SPELL",
+	"heroClass": "WARRIOR",
+	"rarity": "COMMON",
+	"baseManaCost": 2,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

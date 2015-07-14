@@ -1,5 +1,9 @@
 package net.demilich.metastone.game.cards.desc;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.cards.CardType;
@@ -19,10 +23,6 @@ import net.demilich.metastone.game.spells.desc.valueprovider.AlgebraicOperation;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderDesc;
 import net.demilich.metastone.game.targeting.CardLocation;
 import net.demilich.metastone.game.targeting.EntityReference;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 
 public class ParseUtils {
 

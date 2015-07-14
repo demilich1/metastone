@@ -1,13 +1,13 @@
 {
-	"name" : "Jaina Proudmoore",
-	"id" : "hero_jaina",
+	"name": "Jaina Proudmoore",
+	"id": "hero_jaina",
 	"type": "HERO",
-	"heroClass" : "MAGE",
-	"rarity" : "FREE",
-	"heroPower" : "hero_power_fireblast",
-	"collectible" : true,
-	"attributes" : {
-		"HP" : 30,
-		"MAX_HP" : 30
+	"heroClass": "MAGE",
+	"rarity": "FREE",
+	"heroPower": "hero_power_fireblast",
+	"collectible": true,
+	"attributes": {
+		"HP": 30,
+		"MAX_HP": 30
 	}
 }

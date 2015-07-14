@@ -1,16 +1,16 @@
 {
-	"name" : "+4 Attack",
-	"description" : "Give a minion +4 Attack",
-	"id" : "spell_mark_of_nature_1",
-	"type" : "SPELL",
-	"rarity" : "COMMON",
-	"heroClass" : "DRUID",
-	"collectible" : false,
-	"baseManaCost" : 3,
-	"targetSelection" : "MINIONS",
-	"spell" : {
-		"class" : "BuffSpell",
-		"attackBonus" : 2
+	"name": "+4 Attack",
+	"description": "Give a minion +4 Attack",
+	"id": "spell_mark_of_nature_1",
+	"type": "SPELL",
+	"rarity": "COMMON",
+	"heroClass": "DRUID",
+	"collectible": false,
+	"baseManaCost": 3,
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "BuffSpell",
+		"attackBonus": 2
 	},
-	"fileFormatVersion" : 1
+	"fileFormatVersion": 1
 }

@@ -23,6 +23,8 @@ public abstract class GameEventTrigger extends CustomCloneable {
 		return (GameEventTrigger) super.clone();
 	}
 
+	protected abstract boolean fire(GameEvent event, Entity host);
+
 	public final boolean fires(GameEvent event, Entity host) {
 		boolean ownTurnOnly = desc.getBool(EventTriggerArg.OWN_TURN_ONLY);
 		if (ownTurnOnly && event.getGameContext().getActivePlayerId() != getOwner()) {
@@ -38,8 +40,6 @@ public abstract class GameEventTrigger extends CustomCloneable {
 		}
 		return fire(event, host);
 	}
-
-	protected abstract boolean fire(GameEvent event, Entity host);
 
 	public int getOwner() {
 		return owner;

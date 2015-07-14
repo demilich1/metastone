@@ -4,13 +4,13 @@ import java.lang.reflect.Type;
 import java.util.EnumMap;
 import java.util.Map;
 
-import net.demilich.metastone.game.GameTag;
-
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+
+import net.demilich.metastone.game.GameTag;
 
 public class AttributeDeserializer implements JsonDeserializer<Map<GameTag, Object>> {
 

@@ -1,11 +1,11 @@
 {
-	"name" : "Chillwind Yeti",
-	"id" : "minion_chillwind_yeti",
-	"type" : "MINION",
-	"rarity" : "FREE",
-	"heroClass" : "ANY",
-	"baseManaCost" : 4,
-	"baseAttack" : 4,
-	"baseHp" : 5,
-	"fileFormatVersion" : 1
+	"name": "Chillwind Yeti",
+	"id": "minion_chillwind_yeti",
+	"type": "MINION",
+	"rarity": "FREE",
+	"heroClass": "ANY",
+	"baseManaCost": 4,
+	"baseAttack": 4,
+	"baseHp": 5,
+	"fileFormatVersion": 1
 }

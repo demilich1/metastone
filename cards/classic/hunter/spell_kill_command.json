@@ -1,24 +1,24 @@
 {
-  "targetSelection": "ANY",
-  "spell": {
-    "class": "DamageSpell",
-	"valueProvider" : {
-		"class" : "ConditionalValueProvider",
-		"condition" : {
-			"class" : "RaceOnBoardCondition",
-			"race" : "BEAST"
-		},
-		"ifTrue" : 5,
-		"ifFalse" : 3
-	}
-  },
-  "id": "spell_kill_command",
-  "name": "Kill Command",
-  "description": "Deal 3 damage. If you have a Beast, deal 5 damage instead.",
-  "type": "SPELL",
-  "heroClass": "HUNTER",
-  "rarity": "FREE",
-  "baseManaCost": 3,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"targetSelection": "ANY",
+	"spell": {
+		"class": "DamageSpell",
+		"valueProvider": {
+			"class": "ConditionalValueProvider",
+			"condition": {
+				"class": "RaceOnBoardCondition",
+				"race": "BEAST"
+			},
+			"ifTrue": 5,
+			"ifFalse": 3
+		}
+	},
+	"id": "spell_kill_command",
+	"name": "Kill Command",
+	"description": "Deal 3 damage. If you have a Beast, deal 5 damage instead.",
+	"type": "SPELL",
+	"heroClass": "HUNTER",
+	"rarity": "FREE",
+	"baseManaCost": 3,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

@@ -1,30 +1,30 @@
 {
-  "baseAttack": 4,
-  "baseHp": 4,
-  "option1": {
-    "spell": {
-      "class": "TransformMinionSpell",
-	  "card" : "token_cat_form",
-	  "target" : "SELF"
-    },
-    "description": "Charge"
-  },
-   "option2": {
-    "spell": {
-      "class": "TransformMinionSpell",
-	  "card" : "token_bear_form",
-	  "target" : "SELF"
-    },
-    "description": "Taunt"
-  },
-  "race": "BEAST",
-  "id": "minion_druid_of_the_claw",
-  "name": "Druid of the Claw",
-  "description": "Choose One - Charge; or +2 Health and Taunt.",
-  "type": "MINION",
-  "heroClass": "DRUID",
-  "rarity": "COMMON",
-  "baseManaCost": 5,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"baseAttack": 4,
+	"baseHp": 4,
+	"option1": {
+		"spell": {
+			"class": "TransformMinionSpell",
+			"card": "token_cat_form",
+			"target": "SELF"
+		},
+		"description": "Charge"
+	},
+	"option2": {
+		"spell": {
+			"class": "TransformMinionSpell",
+			"card": "token_bear_form",
+			"target": "SELF"
+		},
+		"description": "Taunt"
+	},
+	"race": "BEAST",
+	"id": "minion_druid_of_the_claw",
+	"name": "Druid of the Claw",
+	"description": "Choose One - Charge; or +2 Health and Taunt.",
+	"type": "MINION",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"baseManaCost": 5,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

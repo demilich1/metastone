@@ -1,23 +1,23 @@
 {
-  "baseAttack": 4,
-  "baseHp": 4,
-  "trigger": {
-   "eventTrigger" : {
-		"class" : "SpellCastedTrigger",
-		"targetPlayer" : "SELF"
+	"baseAttack": 4,
+	"baseHp": 4,
+	"trigger": {
+		"eventTrigger": {
+			"class": "SpellCastedTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "DrawCardSpell",
+			"value": 1
+		}
 	},
-	"spell" : {
-		"class": "DrawCardSpell",
-		"value" : 1
-	}
-  },
-  "id": "minion_gadgetzan_auctioneer",
-  "name": "Gadgetzan Auctioneer",
-  "description": "Whenever you cast a spell, draw a card.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "RARE",
-  "baseManaCost": 6,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"id": "minion_gadgetzan_auctioneer",
+	"name": "Gadgetzan Auctioneer",
+	"description": "Whenever you cast a spell, draw a card.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"baseManaCost": 6,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

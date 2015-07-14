@@ -1,15 +1,15 @@
 {
-	"name" : "Ravenholdt Assassin",
-	"description" : "Stealth",
-	"id" : "minion_ravenholdt_assassin",
-	"type" : "MINION",
-	"rarity" : "RARE",
-	"heroClass" : "ANY",
-	"baseManaCost" : 7,
-	"baseAttack" : 7,
-	"baseHp" : 5,
-	"attributes" : {
-		"STEALTH" : true
+	"name": "Ravenholdt Assassin",
+	"description": "Stealth",
+	"id": "minion_ravenholdt_assassin",
+	"type": "MINION",
+	"rarity": "RARE",
+	"heroClass": "ANY",
+	"baseManaCost": 7,
+	"baseAttack": 7,
+	"baseHp": 5,
+	"attributes": {
+		"STEALTH": true
 	},
-	"fileFormatVersion" : 1
+	"fileFormatVersion": 1
 }

@@ -3,6 +3,8 @@ package net.demilich.metastone.gui.mainmenu;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.pferdimanzug.nittygrittymvc.Mediator;
+import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.gui.battleofdecks.BattleOfDecksMediator;
 import net.demilich.metastone.gui.deckbuilder.DeckBuilderMediator;
@@ -10,8 +12,6 @@ import net.demilich.metastone.gui.playmode.config.PlayModeConfigMediator;
 import net.demilich.metastone.gui.sandboxmode.SandboxModeMediator;
 import net.demilich.metastone.gui.simulationmode.SimulationMediator;
 import net.demilich.metastone.gui.trainingmode.TrainingModeMediator;
-import de.pferdimanzug.nittygrittymvc.Mediator;
-import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
 public class MainMenuMediator extends Mediator<GameNotification> {
 

@@ -1,26 +1,26 @@
 {
-  "baseAttack": 2,
-  "baseHp": 2,
-  "battlecry": {
-    "spell": {
-      "class": "BuffSpell",
-	  "valueProvider": {
-                    "class": "AttributeValueProvider",
-                    "source": "FRIENDLY_HERO",
-                    "attribute": "COMBO",
-                    "multiplier": 2
-                },
-				"target" : "SELF"
-    },
-    "resolvedLate": false
-  },
-  "id": "minion_edwin_vancleef",
-  "name": "Edwin VanCleef",
-  "description": "Combo: Gain +2/+2 for each card played earlier this turn.",
-  "type": "MINION",
-  "heroClass": "ROGUE",
-  "rarity": "LEGENDARY",
-  "baseManaCost": 3,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"baseAttack": 2,
+	"baseHp": 2,
+	"battlecry": {
+		"spell": {
+			"class": "BuffSpell",
+			"valueProvider": {
+				"class": "AttributeValueProvider",
+				"source": "FRIENDLY_HERO",
+				"attribute": "COMBO",
+				"multiplier": 2
+			},
+			"target": "SELF"
+		},
+		"resolvedLate": false
+	},
+	"id": "minion_edwin_vancleef",
+	"name": "Edwin VanCleef",
+	"description": "Combo: Gain +2/+2 for each card played earlier this turn.",
+	"type": "MINION",
+	"heroClass": "ROGUE",
+	"rarity": "LEGENDARY",
+	"baseManaCost": 3,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

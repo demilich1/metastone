@@ -3,9 +3,6 @@ package net.demilich.metastone.tools;
 import java.io.File;
 import java.io.IOException;
 
-import net.demilich.metastone.game.spells.Spell;
-import net.demilich.metastone.gui.common.ComboBoxKeyHandler;
-
 import org.apache.commons.io.FileUtils;
 
 import javafx.collections.FXCollections;
@@ -14,6 +11,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
+import net.demilich.metastone.game.spells.Spell;
+import net.demilich.metastone.gui.common.ComboBoxKeyHandler;
 
 public abstract class CardEditor extends VBox implements ICardEditor {
 	

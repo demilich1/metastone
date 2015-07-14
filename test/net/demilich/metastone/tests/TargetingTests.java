@@ -1,6 +1,9 @@
 package net.demilich.metastone.tests;
 import java.util.List;
 
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
@@ -11,9 +14,6 @@ import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
-
-import org.testng.Assert;
-import org.testng.annotations.Test;
 
 
 public class TargetingTests extends TestBase {

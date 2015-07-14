@@ -13,15 +13,15 @@ import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class SecretCard extends SpellCard {
 
-	public SecretCard(String name, Rarity rarity, HeroClass classRestriction, int manaCost) {
-		super(name, rarity, classRestriction, manaCost);
-		setTag(GameTag.SECRET);
-	}
-	
 	public SecretCard(SecretCardDesc desc) {
 		super(desc);
 		GameEventTrigger trigger = desc.trigger.create();
 		setSecret(new Secret(trigger, desc.spell, this));
+		setTag(GameTag.SECRET);
+	}
+	
+	public SecretCard(String name, Rarity rarity, HeroClass classRestriction, int manaCost) {
+		super(name, rarity, classRestriction, manaCost);
 		setTag(GameTag.SECRET);
 	}
 

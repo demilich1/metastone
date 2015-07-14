@@ -3,10 +3,10 @@ package net.demilich.metastone.gui.deckbuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.demilich.metastone.GameNotification;
-import net.demilich.metastone.game.cards.Card;
 import de.pferdimanzug.nittygrittymvc.SimpleCommand;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
+import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.game.cards.Card;
 
 public class FilterCardsByTextCommand extends SimpleCommand<GameNotification> {
 

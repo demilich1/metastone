@@ -5,7 +5,6 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
-import net.demilich.metastone.game.spells.TargetPlayer;
 
 public class Mechwarper extends MinionCard {
 

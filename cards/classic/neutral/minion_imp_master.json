@@ -1,32 +1,32 @@
 {
-  "baseAttack": 1,
-  "baseHp": 5,
-  "trigger": {
-   "eventTrigger" : {
-		"class" : "TurnEndTrigger",
-		"targetPlayer" : "SELF"
-	},
-	"spell" : {
-		"class": "MetaSpell",
-		"spell1" : {
-			"class" : "DamageSpell",
-			"value" : 1,
-			"target" : "SELF"
+	"baseAttack": 1,
+	"baseHp": 5,
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger",
+			"targetPlayer": "SELF"
 		},
-		"spell2" : {
-			"class" : "SummonSpell",
-			"card" : "token_imp",
-			"boardPositionRelative" : "RIGHT"
+		"spell": {
+			"class": "MetaSpell",
+			"spell1": {
+				"class": "DamageSpell",
+				"value": 1,
+				"target": "SELF"
+			},
+			"spell2": {
+				"class": "SummonSpell",
+				"card": "token_imp",
+				"boardPositionRelative": "RIGHT"
+			}
 		}
-	}
-  },
-  "id": "minion_imp_master",
-  "name": "Imp Master",
-  "description": "At the end of your turn, deal 1 damage to this minion and summon a 1/1 Imp.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "RARE",
-  "baseManaCost": 3,
-  "collectible": true,
-  "fileFormatVersion": 1
+	},
+	"id": "minion_imp_master",
+	"name": "Imp Master",
+	"description": "At the end of your turn, deal 1 damage to this minion and summon a 1/1 Imp.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"baseManaCost": 3,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

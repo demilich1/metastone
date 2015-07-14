@@ -23,16 +23,30 @@ import net.demilich.metastone.gui.sandboxmode.actions.SetMaxManaAction;
 
 public class PlayerPanel extends VBox {
 
+	private class PlayerStringConverter extends StringConverter<Player> {
+
+		@Override
+		public Player fromString(String arg0) {
+			return null;
+		}
+
+		@Override
+		public String toString(Player player) {
+			return player.getName();
+		}
+
+	}
 	@FXML
 	private ComboBox<Player> playerComboBox;
-	@FXML
-	private Button editEntityButton;
 
 	@FXML
+	private Button editEntityButton;
+	@FXML
 	private ComboBox<Integer> currentManaBox;
+	
 	@FXML
 	private ComboBox<Integer> maxManaBox;
-	
+
 	private boolean ignoreManaChange;
 
 	private Player selectedPlayer;
@@ -110,20 +124,6 @@ public class PlayerPanel extends VBox {
 			playerComboBox.getSelectionModel().selectFirst();
 		}
 		populateManaBoxes();
-	}
-
-	private class PlayerStringConverter extends StringConverter<Player> {
-
-		@Override
-		public Player fromString(String arg0) {
-			return null;
-		}
-
-		@Override
-		public String toString(Player player) {
-			return player.getName();
-		}
-
 	}
 
 }

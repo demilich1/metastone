@@ -34,29 +34,29 @@ public class AuraDesc extends Desc<AuraArg> {
 		return null;
 	}
 
+	public SpellDesc getApplyEffect() {
+		return (SpellDesc) get(AuraArg.APPLY_EFFECT);
+	}
+	
+	public GameTag getAttribute() {
+		return (GameTag) get(AuraArg.ATTRIBUTE);
+	}
+	
 	@SuppressWarnings("unchecked")
 	public Class<? extends Aura> getAuraClass() {
 		return (Class<? extends Aura>) get(AuraArg.CLASS);
-	}
-	
-	public EntityReference getTarget() {
-		return (EntityReference) get(AuraArg.TARGET);
 	}
 	
 	public Race getRaceRestriction() {
 		return (Race) get(AuraArg.RACE_RESTRICTION);
 	}
 	
-	public SpellDesc getApplyEffect() {
-		return (SpellDesc) get(AuraArg.APPLY_EFFECT);
-	}
-	
 	public SpellDesc getRemoveEffect() {
 		return (SpellDesc) get(AuraArg.REMOVE_EFFECT);
 	}
 	
-	public GameTag getAttribute() {
-		return (GameTag) get(AuraArg.ATTRIBUTE);
+	public EntityReference getTarget() {
+		return (EntityReference) get(AuraArg.TARGET);
 	}
 
 }

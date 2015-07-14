@@ -1,15 +1,15 @@
 {
-	"name" : "Arcane Intellect",
-	"description" : "Draw 2 cards.",
-	"id" : "spell_arcane_intellect",
-	"type" : "SPELL",
-	"rarity" : "FREE",
-	"heroClass" : "MAGE",
-	"baseManaCost" : 3,
-	"targetSelection" : "NONE",
-	"spell" : {
-		"class" : "DrawCardSpell",
-		"value" : 2
+	"name": "Arcane Intellect",
+	"description": "Draw 2 cards.",
+	"id": "spell_arcane_intellect",
+	"type": "SPELL",
+	"rarity": "FREE",
+	"heroClass": "MAGE",
+	"baseManaCost": 3,
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "DrawCardSpell",
+		"value": 2
 	},
-	"fileFormatVersion" : 1
+	"fileFormatVersion": 1
 }

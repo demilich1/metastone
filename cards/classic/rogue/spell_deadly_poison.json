@@ -1,15 +1,15 @@
 {
-	"name" : "Deadly Poison",
-	"description" : "Give your weapon +2 Attack.",
-	"id" : "spell_deadly_poison",
-	"type" : "SPELL",
-	"rarity" : "FREE",
-	"heroClass" : "ROGUE",
-	"baseManaCost" : 1,
-	"targetSelection" : "NONE",
-	"spell" : {
-		"class" : "BuffWeaponSpell",
-		"attackBonus" : 2
+	"name": "Deadly Poison",
+	"description": "Give your weapon +2 Attack.",
+	"id": "spell_deadly_poison",
+	"type": "SPELL",
+	"rarity": "FREE",
+	"heroClass": "ROGUE",
+	"baseManaCost": 1,
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "BuffWeaponSpell",
+		"attackBonus": 2
 	},
-	"fileFormatVersion" : 1
+	"fileFormatVersion": 1
 }

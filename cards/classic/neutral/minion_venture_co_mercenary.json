@@ -1,19 +1,19 @@
 {
-  "baseAttack": 7,
-  "baseHp": 6,
-  "id": "minion_venture_co_mercenary",
-  "name": "Venture Co. Mercenary",
-  "cardCostModifier" : {
-	"class" : "CardCostModifier",
-	"cardType" : "MINION",
-	"targetPlayer" : "SELF",
-	"value" : +3
-  },
-  "description": "Your minions cost (3) more.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "COMMON",
-  "baseManaCost": 5,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"baseAttack": 7,
+	"baseHp": 6,
+	"id": "minion_venture_co_mercenary",
+	"name": "Venture Co. Mercenary",
+	"cardCostModifier": {
+		"class": "CardCostModifier",
+		"cardType": "MINION",
+		"targetPlayer": "SELF",
+		"value": 3
+	},
+	"description": "Your minions cost (3) more.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 5,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

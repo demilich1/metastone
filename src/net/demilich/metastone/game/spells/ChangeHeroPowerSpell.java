@@ -2,6 +2,9 @@ package net.demilich.metastone.game.spells;
 
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.CardCatalogue;
@@ -10,9 +13,6 @@ import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.heroes.powers.HeroPower;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class ChangeHeroPowerSpell extends Spell {
 

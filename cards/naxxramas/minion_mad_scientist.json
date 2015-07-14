@@ -1,17 +1,17 @@
 {
-  "baseAttack": 2,
-  "baseHp": 2,
-  "deathrattle": {
-    "class": "custom.PlayRandomSecretSpell",
-	"target" : "NONE"
-  },
-  "id": "minion_mad_scientist",
-  "name": "Mad Scientist",
-  "description": "Deathrattle: Put a Secret from your deck into the battlefield.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "COMMON",
-  "baseManaCost": 2,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"baseAttack": 2,
+	"baseHp": 2,
+	"deathrattle": {
+		"class": "custom.PlayRandomSecretSpell",
+		"target": "NONE"
+	},
+	"id": "minion_mad_scientist",
+	"name": "Mad Scientist",
+	"description": "Deathrattle: Put a Secret from your deck into the battlefield.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 2,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

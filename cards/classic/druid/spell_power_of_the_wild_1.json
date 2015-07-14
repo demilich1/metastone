@@ -1,18 +1,18 @@
 {
-	"name" : "+1/1",
-	"description" : "Give your minions +1/+1",
-	"id" : "spell_power_of_the_wild_1",
-	"type" : "SPELL",
-	"rarity" : "COMMON",
-	"heroClass" : "DRUID",
-	"baseManaCost" : 2,
-	"targetSelection" : "NONE",
-	"collectible" : false,
-	"spell" : {
-		"class" : "BuffSpell",
-		"attackBonus" : 1,
-		"hpBonus" : 1,
-		"target" : "FRIENDLY_MINIONS"
+	"name": "+1/1",
+	"description": "Give your minions +1/+1",
+	"id": "spell_power_of_the_wild_1",
+	"type": "SPELL",
+	"rarity": "COMMON",
+	"heroClass": "DRUID",
+	"baseManaCost": 2,
+	"targetSelection": "NONE",
+	"collectible": false,
+	"spell": {
+		"class": "BuffSpell",
+		"attackBonus": 1,
+		"hpBonus": 1,
+		"target": "FRIENDLY_MINIONS"
 	},
-	"fileFormatVersion" : 1
+	"fileFormatVersion": 1
 }

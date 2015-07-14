@@ -8,7 +8,6 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.BuffSpell;
-import net.demilich.metastone.game.spells.SpellUtils;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class TwilightWhelp extends MinionCard {
@@ -21,18 +20,18 @@ public class TwilightWhelp extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 645;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion twilightWhelp = createMinion();
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(BuffSpell.create(EntityReference.SELF, 0, 2));
 		//battlecry.setCondition((context, player) -> SpellUtils.holdsMinionOfRace(player, Race.DRAGON));
 		twilightWhelp.setBattlecry(battlecry);
 		return twilightWhelp;
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 645;
 	}
 }

@@ -6,14 +6,13 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.demilich.metastone.GameNotification;
-import net.demilich.metastone.game.cards.desc.CardDesc;
-
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.pferdimanzug.nittygrittymvc.Proxy;
+import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.game.cards.desc.CardDesc;
 
 public class CardProxy extends Proxy<GameNotification> {
 	

@@ -1,13 +1,13 @@
 {
-	"name" : "Battle Axe",
-	"description" : "",
-	"collectible" : false,
-	"id" : "weapon_battle_axe",
-	"type" : "WEAPON",
-	"rarity" : "FREE",
-	"heroClass" : "WARRIOR",
-	"baseManaCost" : 1,
-	"damage" : 2,
-	"durability" : 2,
-	"fileFormatVersion" : 1
+	"name": "Battle Axe",
+	"description": "",
+	"collectible": false,
+	"id": "weapon_battle_axe",
+	"type": "WEAPON",
+	"rarity": "FREE",
+	"heroClass": "WARRIOR",
+	"baseManaCost": 1,
+	"damage": 2,
+	"durability": 2,
+	"fileFormatVersion": 1
 }

@@ -1,9 +1,9 @@
 package net.demilich.metastone.gui.deckbuilder;
 
-import net.demilich.metastone.GameNotification;
-import net.demilich.metastone.game.decks.Deck;
 import de.pferdimanzug.nittygrittymvc.SimpleCommand;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
+import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.game.decks.Deck;
 
 public class SetActiveDeckCommand extends SimpleCommand<GameNotification> {
 

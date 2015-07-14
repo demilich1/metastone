@@ -1,29 +1,29 @@
 {
-  "baseAttack": 5,
-  "baseHp": 5,
-  "battlecry": {
-    "spell": {
-       "class": "CardCostModifierSpell",
-	  "cardCostModifier" : {
-		"class" : "OneTurnCostModifier",
-		"cardType" : "SPELL",
-		"targetPlayer" : "OPPONENT",
-		"value" : 5
-	  },
-	  "target" : "FRIENDLY_HERO"
-    },
-    "resolvedLate": false
-  },
-  "id": "minion_loatheb",
-  "name": "Loatheb",
-  "description": "Battlecry: Enemy spells cost (5) more next turn.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "LEGENDARY",
-  "baseManaCost": 5,
-  "collectible": true,
-  "attributes": {
-    "BATTLECRY": true
-  },
-  "fileFormatVersion": 1
+	"baseAttack": 5,
+	"baseHp": 5,
+	"battlecry": {
+		"spell": {
+			"class": "CardCostModifierSpell",
+			"cardCostModifier": {
+				"class": "OneTurnCostModifier",
+				"cardType": "SPELL",
+				"targetPlayer": "OPPONENT",
+				"value": 5
+			},
+			"target": "FRIENDLY_HERO"
+		},
+		"resolvedLate": false
+	},
+	"id": "minion_loatheb",
+	"name": "Loatheb",
+	"description": "Battlecry: Enemy spells cost (5) more next turn.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"baseManaCost": 5,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"fileFormatVersion": 1
 }

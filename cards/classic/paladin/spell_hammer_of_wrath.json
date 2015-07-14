@@ -1,22 +1,22 @@
 {
-	"name" : "Hammer of Wrath",
-	"description" : "Deal 3 damage. Draw a card.",
-	"id" : "spell_hammer_of_wrath",
-	"type" : "SPELL",
-	"rarity" : "FREE",
-	"heroClass" : "PALADIN",
-	"baseManaCost" : 4,
-	"targetSelection" : "ANY",
-	"spell" : {
-		"class" : "MetaSpell",
-		"spell1" : {
-			"class" : "DamageSpell",
-			"value" : 3
+	"name": "Hammer of Wrath",
+	"description": "Deal 3 damage. Draw a card.",
+	"id": "spell_hammer_of_wrath",
+	"type": "SPELL",
+	"rarity": "FREE",
+	"heroClass": "PALADIN",
+	"baseManaCost": 4,
+	"targetSelection": "ANY",
+	"spell": {
+		"class": "MetaSpell",
+		"spell1": {
+			"class": "DamageSpell",
+			"value": 3
 		},
-		"spell2" : {
-			"class" : "DrawCardSpell",
-			"value" : 1
+		"spell2": {
+			"class": "DrawCardSpell",
+			"value": 1
 		}
 	},
-	"fileFormatVersion" : 1
+	"fileFormatVersion": 1
 }

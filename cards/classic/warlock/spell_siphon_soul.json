@@ -1,23 +1,22 @@
 {
-	"name" : "Siphon Soul",
-	"description" : "Destroy a minion. Restore 3 Health to your hero.",
-	"id" : "spell_siphon_soul",
-	"type" : "SPELL",
-	"rarity" : "RARE",
-	"heroClass" : "WARLOCK",
-	"baseManaCost" : 6,
-	"targetSelection" : "MINIONS",
-	"spell" : {
-		"class" : "MetaSpell",
-		"spell1" : {
-			"class" : "DestroySpell"
+	"name": "Siphon Soul",
+	"description": "Destroy a minion. Restore 3 Health to your hero.",
+	"id": "spell_siphon_soul",
+	"type": "SPELL",
+	"rarity": "RARE",
+	"heroClass": "WARLOCK",
+	"baseManaCost": 6,
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "MetaSpell",
+		"spell1": {
+			"class": "DestroySpell"
 		},
-		"spell2" : {
-			"class" : "HealingSpell",
-			"value" : 3,
-			"target" : "FRIENDLY_HERO"
+		"spell2": {
+			"class": "HealingSpell",
+			"value": 3,
+			"target": "FRIENDLY_HERO"
 		}
-		
 	},
-	"fileFormatVersion" : 1
+	"fileFormatVersion": 1
 }

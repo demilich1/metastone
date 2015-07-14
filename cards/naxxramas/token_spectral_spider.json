@@ -1,13 +1,13 @@
 {
-  "baseAttack": 1,
-  "baseHp": 1,
-  "id": "token_spectral_spider",
-  "name": "Spectral Spider",
-  "description": "",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "COMMON",
-  "baseManaCost": 1,
-  "collectible": false,
-  "fileFormatVersion": 1
+	"baseAttack": 1,
+	"baseHp": 1,
+	"id": "token_spectral_spider",
+	"name": "Spectral Spider",
+	"description": "",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 1,
+	"collectible": false,
+	"fileFormatVersion": 1
 }

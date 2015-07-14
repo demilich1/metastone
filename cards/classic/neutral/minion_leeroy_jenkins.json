@@ -1,26 +1,29 @@
 {
-  "baseAttack": 6,
-  "baseHp": 2,
-  "race": "NONE",
-  "battlecry": {
-    "spell": {
-      "class": "SummonSpell",
-	  "targetPlayer" : "OPPONENT",
-	  "cards" : ["token_whelp", "token_whelp"]
-    },
-    "resolvedLate": false
-  },
-  "id": "minion_leeroy_jenkins",
-  "name": "Leeroy Jenkins",
-  "description": "Charge. Battlecry: Summon two 1/1 Whelps for your opponent.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "LEGENDARY",
-  "baseManaCost": 5,
-  "collectible": true,
-  "attributes": {
-    "BATTLECRY": true,
-	"CHARGE" : true
-  },
-  "fileFormatVersion": 1
+	"baseAttack": 6,
+	"baseHp": 2,
+	"race": "NONE",
+	"battlecry": {
+		"spell": {
+			"class": "SummonSpell",
+			"targetPlayer": "OPPONENT",
+			"cards": [
+				"token_whelp",
+				"token_whelp"
+			]
+		},
+		"resolvedLate": false
+	},
+	"id": "minion_leeroy_jenkins",
+	"name": "Leeroy Jenkins",
+	"description": "Charge. Battlecry: Summon two 1/1 Whelps for your opponent.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"baseManaCost": 5,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true,
+		"CHARGE": true
+	},
+	"fileFormatVersion": 1
 }

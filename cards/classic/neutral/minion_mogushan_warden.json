@@ -1,15 +1,15 @@
 {
-	"name" : "Mogushan Warden",
-	"description" : "Taunt",
-	"id" : "minion_mogushan_warden",
-	"type" : "MINION",
-	"rarity" : "COMMON",
-	"heroClass" : "ANY",
-	"baseManaCost" : 4,
-	"baseAttack" : 1,
-	"baseHp" : 7,
-	"attributes" : {
-		"TAUNT" : true
+	"name": "Mogushan Warden",
+	"description": "Taunt",
+	"id": "minion_mogushan_warden",
+	"type": "MINION",
+	"rarity": "COMMON",
+	"heroClass": "ANY",
+	"baseManaCost": 4,
+	"baseAttack": 1,
+	"baseHp": 7,
+	"attributes": {
+		"TAUNT": true
 	},
-	"fileFormatVersion" : 1
+	"fileFormatVersion": 1
 }

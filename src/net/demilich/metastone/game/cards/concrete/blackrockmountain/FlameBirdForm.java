@@ -15,14 +15,14 @@ public class FlameBirdForm extends MinionCard {
 	}
 
 	@Override
-	public Minion summon() {
-		return createMinion();
+	public int getTypeId() {
+		return 634;
 	}
 
 
 
 	@Override
-	public int getTypeId() {
-		return 634;
+	public Minion summon() {
+		return createMinion();
 	}
 }

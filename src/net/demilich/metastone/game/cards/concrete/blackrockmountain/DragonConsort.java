@@ -19,22 +19,6 @@ import net.demilich.metastone.game.targeting.EntityReference;
 
 public class DragonConsort extends MinionCard {
 
-	public DragonConsort() {
-		super("Dragon Consort", 5, 5, Rarity.RARE, HeroClass.PALADIN, 5);
-		setDescription("Battlecry: The next Dragon you play costs (2) less.");
-		setRace(Race.DRAGON);
-		setTag(GameTag.BATTLECRY);
-	}
-
-	@Override
-	public Minion summon() {
-		Minion dragonConsort = createMinion();
-		SpellDesc spellCostReduce = CardCostModifierSpell.create(EntityReference.FRIENDLY_HERO, new DragonCostModifier(-2));
-		BattlecryAction battlecry = BattlecryAction.createBattlecry(spellCostReduce);
-		dragonConsort.setBattlecry(battlecry);
-		return dragonConsort;
-	}
-
 	private class DragonCostModifier extends CardCostModifier {
 		
 		private final GameEventTrigger dragonPlayedTrigger = new CardPlayedTrigger(null); 
@@ -59,8 +43,24 @@ public class DragonConsort extends MinionCard {
 
 	}
 
+	public DragonConsort() {
+		super("Dragon Consort", 5, 5, Rarity.RARE, HeroClass.PALADIN, 5);
+		setDescription("Battlecry: The next Dragon you play costs (2) less.");
+		setRace(Race.DRAGON);
+		setTag(GameTag.BATTLECRY);
+	}
+
 	@Override
 	public int getTypeId() {
 		return 629;
+	}
+
+	@Override
+	public Minion summon() {
+		Minion dragonConsort = createMinion();
+		SpellDesc spellCostReduce = CardCostModifierSpell.create(EntityReference.FRIENDLY_HERO, new DragonCostModifier(-2));
+		BattlecryAction battlecry = BattlecryAction.createBattlecry(spellCostReduce);
+		dragonConsort.setBattlecry(battlecry);
+		return dragonConsort;
 	}
 }

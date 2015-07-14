@@ -1,23 +1,23 @@
 {
-  "targetSelection": "ENEMY_MINIONS",
-  "id": "spell_betrayal",
-  "spell" : {
-	"class" : "AdjacentEffectSpell",
-	"spell2" : {
-		"class" : "DamageSpell",
-		"valueProvider" : {
-			"class" : "AttributeValueProvider",
-			"attribute" : "ATTACK",
-			"source" : "TARGET"
+	"targetSelection": "ENEMY_MINIONS",
+	"id": "spell_betrayal",
+	"spell": {
+		"class": "AdjacentEffectSpell",
+		"spell2": {
+			"class": "DamageSpell",
+			"valueProvider": {
+				"class": "AttributeValueProvider",
+				"attribute": "ATTACK",
+				"source": "TARGET"
+			}
 		}
-	}
-  },
-  "name": "Betrayal",
-  "description": "An enemy minion deals its damage to the minions next to it.",
-  "type": "SPELL",
-  "heroClass": "ROGUE",
-  "rarity": "COMMON",
-  "baseManaCost": 2,
-  "collectible": true,
-  "fileFormatVersion": 1
+	},
+	"name": "Betrayal",
+	"description": "An enemy minion deals its damage to the minions next to it.",
+	"type": "SPELL",
+	"heroClass": "ROGUE",
+	"rarity": "COMMON",
+	"baseManaCost": 2,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

@@ -20,6 +20,13 @@ public class FireguardDestroyer extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 633;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion fireguardDestroyer = createMinion();
 		//IValueProvider valueProvider = (context, player, target) -> 1 + context.getLogic().random(4);
@@ -27,12 +34,5 @@ public class FireguardDestroyer extends MinionCard {
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(buffSpell);
 		fireguardDestroyer.setBattlecry(battlecry);
 		return fireguardDestroyer;
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 633;
 	}
 }

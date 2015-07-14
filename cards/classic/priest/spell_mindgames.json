@@ -1,15 +1,15 @@
 {
-  "targetSelection": "NONE",
-  "spell": {
-    "class": "custom.MindGamesSpell"
-  },
-  "id": "spell_mindgames",
-  "name": "Mindgames",
-  "description": "Put a copy of a random minion from your opponent's deck into the battlefield.",
-  "type": "SPELL",
-  "heroClass": "PRIEST",
-  "rarity": "EPIC",
-  "baseManaCost": 4,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "custom.MindGamesSpell"
+	},
+	"id": "spell_mindgames",
+	"name": "Mindgames",
+	"description": "Put a copy of a random minion from your opponent's deck into the battlefield.",
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "EPIC",
+	"baseManaCost": 4,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

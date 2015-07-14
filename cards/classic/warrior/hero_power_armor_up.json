@@ -1,17 +1,17 @@
 {
-  "targetSelection": "NONE",
-  "id": "hero_power_armor_up",
-  "name": "Armor Up!",
-  "description": "Gain 2 Armor.",
-  "type": "HERO_POWER",
-  "heroClass": "WARRIOR",
-  "rarity": "FREE",
-  "spell" : {
-	"class" : "BuffHeroSpell",
-	"armorBonus" : 2,
-	"target" : "FRIENDLY_HERO"
-  },
-  "baseManaCost": 2,
-  "collectible": false,
-  "fileFormatVersion": 1
+	"targetSelection": "NONE",
+	"id": "hero_power_armor_up",
+	"name": "Armor Up!",
+	"description": "Gain 2 Armor.",
+	"type": "HERO_POWER",
+	"heroClass": "WARRIOR",
+	"rarity": "FREE",
+	"spell": {
+		"class": "BuffHeroSpell",
+		"armorBonus": 2,
+		"target": "FRIENDLY_HERO"
+	},
+	"baseManaCost": 2,
+	"collectible": false,
+	"fileFormatVersion": 1
 }

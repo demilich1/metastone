@@ -3,6 +3,8 @@ package net.demilich.metastone.gui.sandboxmode;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.pferdimanzug.nittygrittymvc.Mediator;
+import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
@@ -13,8 +15,6 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.behaviour.human.HumanActionOptions;
 import net.demilich.metastone.game.behaviour.human.HumanTargetOptions;
 import net.demilich.metastone.game.decks.Deck;
-import de.pferdimanzug.nittygrittymvc.Mediator;
-import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
 public class SandboxModeMediator extends Mediator<GameNotification> implements EventHandler<KeyEvent> {
 

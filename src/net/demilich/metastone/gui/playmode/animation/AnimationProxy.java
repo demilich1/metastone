@@ -1,8 +1,8 @@
 package net.demilich.metastone.gui.playmode.animation;
 
+import de.pferdimanzug.nittygrittymvc.Proxy;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.gui.playmode.GameContextVisualizable;
-import de.pferdimanzug.nittygrittymvc.Proxy;
 
 public class AnimationProxy extends Proxy<GameNotification> {
 

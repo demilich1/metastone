@@ -1,24 +1,24 @@
 {
-  "targetSelection": "MINIONS",
-  "spell": {
-    "class": "AddSpellTriggerSpell",
-	"trigger" : {
-		"eventTrigger" : {
-			"class" : "HostAttacksTrigger"
-		},
-		"spell" : {
-			"class" : "DrawCardSpell",
-			"value" : 1
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "AddSpellTriggerSpell",
+		"trigger": {
+			"eventTrigger": {
+				"class": "HostAttacksTrigger"
+			},
+			"spell": {
+				"class": "DrawCardSpell",
+				"value": 1
+			}
 		}
-	}
-  },
-  "id": "spell_blessing_of_wisdom",
-  "name": "Blessing of Wisdom",
-  "description": "Choose a minion. Whenever it attacks, draw a card.",
-  "type": "SPELL",
-  "heroClass": "PALADIN",
-  "rarity": "COMMON",
-  "baseManaCost": 1,
-  "collectible": true,
-  "fileFormatVersion": 1
+	},
+	"id": "spell_blessing_of_wisdom",
+	"name": "Blessing of Wisdom",
+	"description": "Choose a minion. Whenever it attacks, draw a card.",
+	"type": "SPELL",
+	"heroClass": "PALADIN",
+	"rarity": "COMMON",
+	"baseManaCost": 1,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

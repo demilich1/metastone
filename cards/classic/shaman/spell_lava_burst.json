@@ -1,18 +1,18 @@
 {
-	"name" : "Lava Burst",
-	"description" : "Deal 5 damage. Overload: (2)",
-	"id" : "spell_lava_burst",
-	"type" : "SPELL",
-	"rarity" : "RARE",
-	"heroClass" : "SHAMAN",
-	"baseManaCost" : 3,
-	"targetSelection" : "ANY",
-	"spell" : {
-		"class" : "DamageSpell",
-		"value" : 5
+	"name": "Lava Burst",
+	"description": "Deal 5 damage. Overload: (2)",
+	"id": "spell_lava_burst",
+	"type": "SPELL",
+	"rarity": "RARE",
+	"heroClass": "SHAMAN",
+	"baseManaCost": 3,
+	"targetSelection": "ANY",
+	"spell": {
+		"class": "DamageSpell",
+		"value": 5
 	},
-	"attributes" : {
-		"OVERLOAD" : 2
+	"attributes": {
+		"OVERLOAD": 2
 	},
-	"fileFormatVersion" : 1
+	"fileFormatVersion": 1
 }

@@ -1,4 +1,7 @@
 package net.demilich.metastone.tests;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
@@ -15,9 +18,6 @@ import net.demilich.metastone.game.spells.TemporaryAttackSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
-
-import org.testng.Assert;
-import org.testng.annotations.Test;
 
 public class CardInteractionTests extends TestBase {
 

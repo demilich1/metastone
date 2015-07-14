@@ -1,25 +1,25 @@
 {
-  "baseAttack": 1,
-  "baseHp": 4,
-  "trigger": {
-   "eventTrigger" : {
-		"class" : "DamageReceivedTrigger",
-		"entityType" : "MINION",
-		"targetPlayer" : "SELF"
+	"baseAttack": 1,
+	"baseHp": 4,
+	"trigger": {
+		"eventTrigger": {
+			"class": "DamageReceivedTrigger",
+			"entityType": "MINION",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "BuffHeroSpell",
+			"armorBonus": 1,
+			"target": "FRIENDLY_HERO"
+		}
 	},
-	"spell" : {
-		"class": "BuffHeroSpell",
-		"armorBonus" : 1,
-		"target" : "FRIENDLY_HERO"
-	}
-  },
-  "id": "minion_armorsmith",
-  "name": "Armorsmith",
-  "description": "Whenever a friendly minion takes damage, gain 1 Armor.",
-  "type": "MINION",
-  "heroClass": "WARRIOR",
-  "rarity": "RARE",
-  "baseManaCost": 2,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"id": "minion_armorsmith",
+	"name": "Armorsmith",
+	"description": "Whenever a friendly minion takes damage, gain 1 Armor.",
+	"type": "MINION",
+	"heroClass": "WARRIOR",
+	"rarity": "RARE",
+	"baseManaCost": 2,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

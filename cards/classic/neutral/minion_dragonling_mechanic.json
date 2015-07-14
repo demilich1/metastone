@@ -1,24 +1,24 @@
 {
-  "baseAttack": 2,
-  "baseHp": 4,
-  "battlecry": {
-    "spell": {
-      "class": "SummonSpell",
-	  "boardPositionRelative" : "RIGHT",
-	  "card" : "token_mechanical_dragonling"
-    },
-    "resolvedLate": true
-  },
-  "id": "minion_dragonling_mechanic",
-  "name": "Dragonling Mechanic",
-  "description": "Battlecry: Summon a 2/1 Mechanical Dragonling.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "FREE",
-  "baseManaCost": 4,
-  "collectible": true,
-  "attributes": {
-    "BATTLECRY": true
-  },
-  "fileFormatVersion": 1
+	"baseAttack": 2,
+	"baseHp": 4,
+	"battlecry": {
+		"spell": {
+			"class": "SummonSpell",
+			"boardPositionRelative": "RIGHT",
+			"card": "token_mechanical_dragonling"
+		},
+		"resolvedLate": true
+	},
+	"id": "minion_dragonling_mechanic",
+	"name": "Dragonling Mechanic",
+	"description": "Battlecry: Summon a 2/1 Mechanical Dragonling.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"baseManaCost": 4,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"fileFormatVersion": 1
 }

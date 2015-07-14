@@ -75,6 +75,10 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 		return desc.get(arg);
 	}
 
+	protected CardType getCardType() {
+		return (CardType) desc.get(CardCostModifierArg.CARD_TYPE);
+	}
+
 	@Override
 	public EntityReference getHostReference() {
 		return hostReference;
@@ -97,20 +101,21 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 	protected GameTag getRequiredAttribute() {
 		return (GameTag) desc.get(CardCostModifierArg.REQUIRED_ATTRIBUTE);
 	}
-
+	
+	protected Race getRequiredRace() {
+		return (Race) get(CardCostModifierArg.RACE);
+	}
+	
 	protected TargetPlayer getTargetPlayer() {
 		if (!desc.contains(CardCostModifierArg.TARGET_PLAYER)) {
 			return TargetPlayer.SELF;
 		}
 		return (TargetPlayer) desc.get(CardCostModifierArg.TARGET_PLAYER);
 	}
-	
-	protected Race getRequiredRace() {
-		return (Race) get(CardCostModifierArg.RACE);
-	}
-	
-	protected CardType getCardType() {
-		return (CardType) desc.get(CardCostModifierArg.CARD_TYPE);
+
+	@Override
+	public boolean interestedIn(GameEventType eventType) {
+		return false;
 	}
 
 	@Override
@@ -123,9 +128,15 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 	}
 
 	@Override
+	public void onGameEvent(GameEvent event) {
+		
+	}
+
+	@Override
 	public void onRemove(GameContext context) {
 		expired = true;
 	}
+
 
 	public int process(Card card) {
 		return desc.getInt(CardCostModifierArg.VALUE);
@@ -136,20 +147,9 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 		hostReference = host.getReference();
 	}
 
-
 	@Override
 	public void setOwner(int playerIndex) {
 		this.owner = playerIndex;
-	}
-
-	@Override
-	public boolean interestedIn(GameEventType eventType) {
-		return false;
-	}
-
-	@Override
-	public void onGameEvent(GameEvent event) {
-		
 	}
 
 }

@@ -1,16 +1,16 @@
 {
-	"name" : "Bloodlust",
-	"description" : "Give your minions +3 Attack this turn.",
-	"id" : "spell_bloodlust",
-	"type" : "SPELL",
-	"rarity" : "FREE",
-	"heroClass" : "SHAMAN",
-	"baseManaCost" : 5,
-	"targetSelection" : "NONE",
-	"spell" : {
-		"class" : "TemporaryAttackSpell",
-		"value" : 3,
-		"target" : "FRIENDLY_MINIONS"
+	"name": "Bloodlust",
+	"description": "Give your minions +3 Attack this turn.",
+	"id": "spell_bloodlust",
+	"type": "SPELL",
+	"rarity": "FREE",
+	"heroClass": "SHAMAN",
+	"baseManaCost": 5,
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "TemporaryAttackSpell",
+		"value": 3,
+		"target": "FRIENDLY_MINIONS"
 	},
-	"fileFormatVersion" : 1
+	"fileFormatVersion": 1
 }

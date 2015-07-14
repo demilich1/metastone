@@ -3,11 +3,11 @@ package net.demilich.metastone.gui.trainingmode;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.pferdimanzug.nittygrittymvc.Mediator;
+import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 import javafx.application.Platform;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.decks.Deck;
-import de.pferdimanzug.nittygrittymvc.Mediator;
-import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
 public class TrainingModeMediator extends Mediator<GameNotification> {
 

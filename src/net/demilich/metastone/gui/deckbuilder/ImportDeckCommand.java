@@ -1,13 +1,13 @@
 package net.demilich.metastone.gui.deckbuilder;
 
+import de.pferdimanzug.nittygrittymvc.SimpleCommand;
+import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.gui.deckbuilder.importer.HearthPwnImporter;
 import net.demilich.metastone.gui.deckbuilder.importer.IDeckImporter;
 import net.demilich.metastone.gui.dialog.DialogNotification;
 import net.demilich.metastone.gui.dialog.DialogType;
-import de.pferdimanzug.nittygrittymvc.SimpleCommand;
-import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
 public class ImportDeckCommand extends SimpleCommand<GameNotification> {
 

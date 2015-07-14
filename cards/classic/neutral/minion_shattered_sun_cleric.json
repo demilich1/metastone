@@ -1,25 +1,25 @@
 {
-  "baseAttack": 3,
-  "baseHp": 2,
-  "battlecry": {
-    "spell": {
-      "class": "BuffSpell",
-	  "attackBonus" : 1,
-	  "hpBonus" : 1
-    },
-	"targetSelection" : "FRIENDLY_MINIONS",
-    "resolvedLate": false
-  },
-  "id": "minion_shattered_sun_cleric",
-  "name": "Shattered Sun Cleric",
-  "description": "Battlecry: Give a friendly minion +1/+1",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "FREE",
-  "baseManaCost": 3,
-  "collectible": true,
-  "attributes": {
-    "BATTLECRY": true
-  },
-  "fileFormatVersion": 1
+	"baseAttack": 3,
+	"baseHp": 2,
+	"battlecry": {
+		"spell": {
+			"class": "BuffSpell",
+			"attackBonus": 1,
+			"hpBonus": 1
+		},
+		"targetSelection": "FRIENDLY_MINIONS",
+		"resolvedLate": false
+	},
+	"id": "minion_shattered_sun_cleric",
+	"name": "Shattered Sun Cleric",
+	"description": "Battlecry: Give a friendly minion +1/+1",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"baseManaCost": 3,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"fileFormatVersion": 1
 }

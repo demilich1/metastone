@@ -3,15 +3,15 @@ package net.demilich.metastone.game.cards.desc;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-import net.demilich.metastone.game.spells.Spell;
-import net.demilich.metastone.game.spells.desc.SpellArg;
-import net.demilich.metastone.game.spells.desc.SpellDesc;
-
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+
+import net.demilich.metastone.game.spells.Spell;
+import net.demilich.metastone.game.spells.desc.SpellArg;
+import net.demilich.metastone.game.spells.desc.SpellDesc;
 
 public class SpellDeserializer implements JsonDeserializer<SpellDesc> {
 

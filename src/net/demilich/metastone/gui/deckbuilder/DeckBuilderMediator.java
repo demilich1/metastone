@@ -3,13 +3,13 @@ package net.demilich.metastone.gui.deckbuilder;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.pferdimanzug.nittygrittymvc.Mediator;
+import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.gui.dialog.DialogNotification;
 import net.demilich.metastone.gui.dialog.DialogType;
-import de.pferdimanzug.nittygrittymvc.Mediator;
-import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
 public class DeckBuilderMediator extends Mediator<GameNotification> {
 

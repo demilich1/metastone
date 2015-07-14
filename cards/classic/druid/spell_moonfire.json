@@ -1,15 +1,15 @@
 {
-	"name" : "Moonfire",
-	"description" : "Deal 1 damage.",
-	"id" : "spell_moonfire",
-	"type" : "SPELL",
-	"rarity" : "FREE",
-	"heroClass" : "DRUID",
-	"baseManaCost" : 0,
-	"targetSelection" : "ANY",
-	"spell" : {
-		"class" : "DamageSpell",
-		"value" : 1
+	"name": "Moonfire",
+	"description": "Deal 1 damage.",
+	"id": "spell_moonfire",
+	"type": "SPELL",
+	"rarity": "FREE",
+	"heroClass": "DRUID",
+	"baseManaCost": 0,
+	"targetSelection": "ANY",
+	"spell": {
+		"class": "DamageSpell",
+		"value": 1
 	},
-	"fileFormatVersion" : 1
+	"fileFormatVersion": 1
 }

@@ -8,6 +8,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import de.pferdimanzug.nittygrittymvc.Notification;
+import de.pferdimanzug.nittygrittymvc.SimpleCommand;
+import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -16,20 +23,39 @@ import net.demilich.metastone.gui.gameconfig.GameConfig;
 import net.demilich.metastone.gui.gameconfig.PlayerConfig;
 import net.demilich.metastone.utils.Tuple;
 
-import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import de.pferdimanzug.nittygrittymvc.Notification;
-import de.pferdimanzug.nittygrittymvc.SimpleCommand;
-import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
-
 public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 
-	private static Logger logger = LoggerFactory.getLogger(SimulateGamesCommand.class);
+	private class PlayGameTask implements Callable<Void> {
 
+		private final GameConfig gameConfig;
+
+		public PlayGameTask(GameConfig gameConfig) {
+			this.gameConfig = gameConfig;
+		}
+
+		@Override
+		public Void call() throws Exception {
+			PlayerConfig playerConfig1 = gameConfig.getPlayerConfig1();
+			PlayerConfig playerConfig2 = gameConfig.getPlayerConfig2();
+
+			Player player1 = new Player(playerConfig1);
+			Player player2 = new Player(playerConfig2);
+
+			GameContext newGame = new GameContext(player1, player2, new GameLogic());
+			newGame.play();
+
+			onGameComplete(gameConfig, newGame);
+			newGame.dispose();
+
+			return null;
+		}
+
+	}
+
+	private static Logger logger = LoggerFactory.getLogger(SimulateGamesCommand.class);
 	private int gamesCompleted;
 	private long lastUpdate;
+
 	private SimulationResult result;
 
 	@Override
@@ -110,33 +136,6 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 			result.getPlayer1Stats().merge(context.getPlayer1().getStatistics());
 			result.getPlayer2Stats().merge(context.getPlayer2().getStatistics());
 		}
-	}
-
-	private class PlayGameTask implements Callable<Void> {
-
-		private final GameConfig gameConfig;
-
-		public PlayGameTask(GameConfig gameConfig) {
-			this.gameConfig = gameConfig;
-		}
-
-		@Override
-		public Void call() throws Exception {
-			PlayerConfig playerConfig1 = gameConfig.getPlayerConfig1();
-			PlayerConfig playerConfig2 = gameConfig.getPlayerConfig2();
-
-			Player player1 = new Player(playerConfig1);
-			Player player2 = new Player(playerConfig2);
-
-			GameContext newGame = new GameContext(player1, player2, new GameLogic());
-			newGame.play();
-
-			onGameComplete(gameConfig, newGame);
-			newGame.dispose();
-
-			return null;
-		}
-
 	}
 
 }

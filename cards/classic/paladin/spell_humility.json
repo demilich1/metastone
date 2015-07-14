@@ -1,16 +1,16 @@
 {
-  "targetSelection": "MINIONS",
-  "spell": {
-    "class": "SetAttackSpell",
-	"value" : 1
-  },
-  "id": "spell_humility",
-  "name": "Humility",
-  "description": "Change a minion's Attack to 1.",
-  "type": "SPELL",
-  "heroClass": "PALADIN",
-  "rarity": "FREE",
-  "baseManaCost": 1,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "SetAttackSpell",
+		"value": 1
+	},
+	"id": "spell_humility",
+	"name": "Humility",
+	"description": "Change a minion's Attack to 1.",
+	"type": "SPELL",
+	"heroClass": "PALADIN",
+	"rarity": "FREE",
+	"baseManaCost": 1,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

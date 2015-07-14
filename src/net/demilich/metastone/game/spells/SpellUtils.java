@@ -25,8 +25,31 @@ import net.demilich.metastone.game.targeting.EntityReference;
 
 public class SpellUtils {
 
+	public static void castChildSpell(GameContext context, Player player, SpellDesc spell, Entity source, Entity target) {
+		EntityReference sourceReference = source != null ? source.getReference() : null;
+		EntityReference targetReference = spell.getTarget();
+		if (targetReference == null && target != null) {
+			targetReference = target.getReference();
+		}
+		context.getLogic().castSpell(player.getId(), spell, sourceReference, targetReference);
+	}
+
 	public static Card drawFromDeck(GameContext context, Player player) {
 		return context.getLogic().drawCard(player.getId());
+	}
+
+	public static boolean evaluateOperation(Operation operation, int actualValue, int targetValue) {
+		switch (operation) {
+		case EQUAL:
+			return actualValue == targetValue;
+		case GREATER:
+			return actualValue > targetValue;
+		case HAS:
+			return actualValue > 0;
+		case LESS:
+			return actualValue < targetValue;
+		}
+		return false;
 	}
 
 	public static CardCollection getCards(CardCollection source, Predicate<Card> filter) {
@@ -37,6 +60,21 @@ public class SpellUtils {
 			}
 		}
 		return result;
+	}
+
+	public static Card[] getCards(SpellDesc spell) {
+		String[] cardNames = null;
+		if (spell.contains(SpellArg.CARDS)) {
+			cardNames = (String[]) spell.get(SpellArg.CARDS);
+		} else {
+			cardNames = new String[1];
+			cardNames[0] = (String) spell.get(SpellArg.CARD);
+		}
+		Card[] cards = new Card[cardNames.length];
+		for (int i = 0; i < cards.length; i++) {
+			cards[i] = CardCatalogue.getCardById(cardNames[i]);
+		}
+		return cards;
 	}
 
 	public static Card getRandomCard(CardCollection source, Predicate<Card> filter) {
@@ -63,7 +101,7 @@ public class SpellUtils {
 		}
 		return validTargets;
 	}
-
+	
 	public static List<Entity> getValidTargets(List<Entity> allTargets, EntityFilter filter) {
 		if (filter == null) {
 			return allTargets;
@@ -86,7 +124,7 @@ public class SpellUtils {
 		}
 		return count;
 	}
-
+	
 	public static boolean hasMinionOfRace(Player player, Race race) {
 		for (Minion minion : player.getMinions()) {
 			if (minion.getRace() == race) {
@@ -104,7 +142,7 @@ public class SpellUtils {
 		}
 		return false;
 	}
-
+	
 	public static boolean holdsMinionOfRace(Player player, Race race) {
 		for (Card card : player.getHand()) {
 			if (card.getTag(GameTag.RACE) == race) {
@@ -112,44 +150,6 @@ public class SpellUtils {
 			}
 		}
 		return false;
-	}
-	
-	public static boolean evaluateOperation(Operation operation, int actualValue, int targetValue) {
-		switch (operation) {
-		case EQUAL:
-			return actualValue == targetValue;
-		case GREATER:
-			return actualValue > targetValue;
-		case HAS:
-			return actualValue > 0;
-		case LESS:
-			return actualValue < targetValue;
-		}
-		return false;
-	}
-	
-	public static void castChildSpell(GameContext context, Player player, SpellDesc spell, Entity source, Entity target) {
-		EntityReference sourceReference = source != null ? source.getReference() : null;
-		EntityReference targetReference = spell.getTarget();
-		if (targetReference == null && target != null) {
-			targetReference = target.getReference();
-		}
-		context.getLogic().castSpell(player.getId(), spell, sourceReference, targetReference);
-	}
-	
-	public static Card[] getCards(SpellDesc spell) {
-		String[] cardNames = null;
-		if (spell.contains(SpellArg.CARDS)) {
-			cardNames = (String[]) spell.get(SpellArg.CARDS);
-		} else {
-			cardNames = new String[1];
-			cardNames[0] = (String) spell.get(SpellArg.CARD);
-		}
-		Card[] cards = new Card[cardNames.length];
-		for (int i = 0; i < cards.length; i++) {
-			cards[i] = CardCatalogue.getCardById(cardNames[i]);
-		}
-		return cards;
 	}
 
 	public static int howManyMinionsDiedThisTurn(GameContext context) {

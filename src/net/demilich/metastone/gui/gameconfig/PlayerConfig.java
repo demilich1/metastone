@@ -38,12 +38,12 @@ public class PlayerConfig {
 		return deck;
 	}
 
-	public HeroClass getHeroClass() {
-		return deck.getHeroClass();
-	}
-
 	public HeroCard getHeroCard() {
 		return HeroCard;
+	}
+
+	public HeroClass getHeroClass() {
+		return deck.getHeroClass();
 	}
 
 	public String getName() {

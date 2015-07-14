@@ -9,6 +9,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import de.pferdimanzug.nittygrittymvc.SimpleCommand;
+import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -17,18 +23,44 @@ import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.gui.gameconfig.PlayerConfig;
 
-import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import de.pferdimanzug.nittygrittymvc.SimpleCommand;
-import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
-
 public class StartBattleOfDecksCommand extends SimpleCommand<GameNotification> {
 
-	private static Logger logger = LoggerFactory.getLogger(StartBattleOfDecksCommand.class);
+	private class PlayGameTask implements Callable<Void> {
 
+		private final PlayerConfig player1Config;
+		private final PlayerConfig player2Config;
+		private final BattleBatchResult batchResult;
+
+		public PlayGameTask(Deck deck1, Deck deck2, IBehaviour behaviour, BattleBatchResult batchResult) {
+			this.player1Config = new PlayerConfig(deck1, behaviour);
+			player1Config.setName("Player 1");
+			this.player2Config = new PlayerConfig(deck2, behaviour);
+			player2Config.setName("Player 2");
+			this.batchResult = batchResult;
+		}
+
+		@Override
+		public Void call() throws Exception {
+			Player player1 = new Player(player1Config);
+			Player player2 = new Player(player2Config);
+
+			GameContext newGame = new GameContext(player1, player2, new GameLogic());
+			newGame.play();
+
+			batchResult.onGameEnded(newGame);
+			result.onGameEnded(newGame);
+
+			periodicUpdate();
+			newGame.dispose();
+
+			return null;
+		}
+
+	}
+
+	private static Logger logger = LoggerFactory.getLogger(StartBattleOfDecksCommand.class);
 	private BattleResult result;
+
 	private long lastUpdate;
 
 	@Override
@@ -102,39 +134,6 @@ public class StartBattleOfDecksCommand extends SimpleCommand<GameNotification> {
 			sendNotification(GameNotification.BATTLE_OF_DECKS_PROGRESS_UPDATE, result);
 			lastUpdate = System.currentTimeMillis();
 		}
-	}
-
-	private class PlayGameTask implements Callable<Void> {
-
-		private final PlayerConfig player1Config;
-		private final PlayerConfig player2Config;
-		private final BattleBatchResult batchResult;
-
-		public PlayGameTask(Deck deck1, Deck deck2, IBehaviour behaviour, BattleBatchResult batchResult) {
-			this.player1Config = new PlayerConfig(deck1, behaviour);
-			player1Config.setName("Player 1");
-			this.player2Config = new PlayerConfig(deck2, behaviour);
-			player2Config.setName("Player 2");
-			this.batchResult = batchResult;
-		}
-
-		@Override
-		public Void call() throws Exception {
-			Player player1 = new Player(player1Config);
-			Player player2 = new Player(player2Config);
-
-			GameContext newGame = new GameContext(player1, player2, new GameLogic());
-			newGame.play();
-
-			batchResult.onGameEnded(newGame);
-			result.onGameEnded(newGame);
-
-			periodicUpdate();
-			newGame.dispose();
-
-			return null;
-		}
-
 	}
 
 }

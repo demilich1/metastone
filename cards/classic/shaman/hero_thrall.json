@@ -1,13 +1,13 @@
 {
-	"name" : "Thrall",
-	"id" : "hero_thrall",
+	"name": "Thrall",
+	"id": "hero_thrall",
 	"type": "HERO",
-	"heroClass" : "SHAMAN",
-	"rarity" : "FREE",
-	"heroPower" : "hero_power_totemic_call",
-	"collectible" : true,
-	"attributes" : {
-		"HP" : 30,
-		"MAX_HP" : 30
+	"heroClass": "SHAMAN",
+	"rarity": "FREE",
+	"heroPower": "hero_power_totemic_call",
+	"collectible": true,
+	"attributes": {
+		"HP": 30,
+		"MAX_HP": 30
 	}
 }

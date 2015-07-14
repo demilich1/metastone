@@ -1,16 +1,10 @@
 package net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.rogue;
 
-import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
-import net.demilich.metastone.game.cards.UniqueEntity;
-import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.events.GameEvent;
-import net.demilich.metastone.game.events.SpellCastedEvent;
 import net.demilich.metastone.game.spells.CopyPlayedCardSpell;
-import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.SpellCastedTrigger;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;

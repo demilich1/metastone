@@ -1,15 +1,15 @@
 {
-  "targetSelection": "ENEMY_MINIONS",
-  "spell": {
-    "class": "MindControlSpell"
-  },
-  "id": "spell_mind_control",
-  "name": "Mind Control",
-  "description": "Take control of an enemy minion.",
-  "type": "SPELL",
-  "heroClass": "PRIEST",
-  "rarity": "FREE",
-  "baseManaCost": 10,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"targetSelection": "ENEMY_MINIONS",
+	"spell": {
+		"class": "MindControlSpell"
+	},
+	"id": "spell_mind_control",
+	"name": "Mind Control",
+	"description": "Take control of an enemy minion.",
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "FREE",
+	"baseManaCost": 10,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

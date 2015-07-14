@@ -2,14 +2,6 @@ package net.demilich.metastone.tests;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.behaviour.PlayRandomBehaviour;
-import net.demilich.metastone.game.decks.DeckFactory;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
-import net.demilich.metastone.game.logic.GameLogic;
-import net.demilich.metastone.gui.gameconfig.PlayerConfig;
-
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
@@ -17,6 +9,13 @@ import org.testng.annotations.Test;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
+import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.behaviour.PlayRandomBehaviour;
+import net.demilich.metastone.game.decks.DeckFactory;
+import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.logic.GameLogic;
+import net.demilich.metastone.gui.gameconfig.PlayerConfig;
 
 public class MassTest extends TestBase {
 	

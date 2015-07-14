@@ -23,6 +23,16 @@ import net.demilich.metastone.gui.cards.CardTooltip;
 
 public class HumanMulliganView extends BorderPane implements EventHandler<MouseEvent> {
 
+	private class MulliganEntry {
+
+		public boolean mulligan;
+
+		public ImageView discardIcon;
+		public MulliganEntry(ImageView icon) {
+			this.discardIcon = icon;
+		}
+	}
+
 	@FXML
 	private HBox contentArea;
 
@@ -30,7 +40,7 @@ public class HumanMulliganView extends BorderPane implements EventHandler<MouseE
 	private Button doneButton;
 
 	private final HashMap<Card, MulliganEntry> mulliganState = new HashMap<Card, MulliganEntry>();
-
+	
 	public HumanMulliganView(HumanMulliganOptions options) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("HumanMulliganView.fxml"));
 		fxmlLoader.setRoot(this);
@@ -46,7 +56,7 @@ public class HumanMulliganView extends BorderPane implements EventHandler<MouseE
 
 		ApplicationFacade.getInstance().sendNotification(GameNotification.SHOW_MODAL_DIALOG, this);
 	}
-	
+
 	private void displayCards(final HumanMulliganOptions options) {
 		contentArea.getChildren().clear();
 		for (Card card : options.getOfferedCards()) {
@@ -87,15 +97,5 @@ public class HumanMulliganView extends BorderPane implements EventHandler<MouseE
 		MulliganEntry entry = mulliganState.get(card);
 		entry.mulligan = !entry.mulligan;
 		entry.discardIcon.setVisible(entry.mulligan);
-	}
-
-	private class MulliganEntry {
-
-		public boolean mulligan;
-
-		public ImageView discardIcon;
-		public MulliganEntry(ImageView icon) {
-			this.discardIcon = icon;
-		}
 	}
 }

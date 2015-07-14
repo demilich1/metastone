@@ -1,14 +1,14 @@
 {
-	"name" : "Lord Jaraxxus",
-	"id" : "hero_jaraxxus",
+	"name": "Lord Jaraxxus",
+	"id": "hero_jaraxxus",
 	"type": "HERO",
-	"heroClass" : "WARLOCK",
-	"rarity" : "LEGENDARY",
-	"heroPower" : "hero_power_inferno",
-	"race" : "DEMON",
-	"collectible" : false,
-	"attributes" : {
-		"HP" : 15,
-		"MAX_HP" : 15
+	"heroClass": "WARLOCK",
+	"rarity": "LEGENDARY",
+	"heroPower": "hero_power_inferno",
+	"race": "DEMON",
+	"collectible": false,
+	"attributes": {
+		"HP": 15,
+		"MAX_HP": 15
 	}
 }

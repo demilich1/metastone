@@ -1,17 +1,17 @@
 {
-	"name" : "+2 Mana Crystals",
-	"description" : "Gain 2 Mana Crystals",
-	"id" : "spell_nourish_1",
-	"type" : "SPELL",
-	"rarity" : "RARE",
-	"heroClass" : "DRUID",
-	"baseManaCost" : 5,
-	"targetSelection" : "NONE",
-	"collectible" : false,
-	"spell" : {
-		"class" : "ModifyMaxManaSpell",
-		"value" : 2,
-		"fullManaCrystals" : true
+	"name": "+2 Mana Crystals",
+	"description": "Gain 2 Mana Crystals",
+	"id": "spell_nourish_1",
+	"type": "SPELL",
+	"rarity": "RARE",
+	"heroClass": "DRUID",
+	"baseManaCost": 5,
+	"targetSelection": "NONE",
+	"collectible": false,
+	"spell": {
+		"class": "ModifyMaxManaSpell",
+		"value": 2,
+		"fullManaCrystals": true
 	},
-	"fileFormatVersion" : 1
+	"fileFormatVersion": 1
 }

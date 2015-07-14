@@ -1,13 +1,13 @@
 {
-	"name" : "Garrosh Hellscream",
-	"id" : "hero_garrosh",
+	"name": "Garrosh Hellscream",
+	"id": "hero_garrosh",
 	"type": "HERO",
-	"heroClass" : "WARRIOR",
-	"rarity" : "FREE",
-	"heroPower" : "hero_power_armor_up",
-	"collectible" : true,
-	"attributes" : {
-		"HP" : 30,
-		"MAX_HP" : 30
+	"heroClass": "WARRIOR",
+	"rarity": "FREE",
+	"heroPower": "hero_power_armor_up",
+	"collectible": true,
+	"attributes": {
+		"HP": 30,
+		"MAX_HP": 30
 	}
 }

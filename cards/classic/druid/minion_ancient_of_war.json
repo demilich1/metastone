@@ -1,37 +1,37 @@
 {
-  "baseAttack": 5,
-  "baseHp": 5,
-  "option1": {
-    "spell": {
-      "class": "BuffSpell",
-	  "attackBonus" : 5,
-	  "target" : "SELF"
-    },
-    "description": "+5 Attack"
-  },
-  "option2": {
-    "spell": {
-      "class": "MetaSpell",
-		"spell1": {
+	"baseAttack": 5,
+	"baseHp": 5,
+	"option1": {
+		"spell": {
 			"class": "BuffSpell",
-			"hpBonus" : 5,
-			"target" : "SELF"
+			"attackBonus": 5,
+			"target": "SELF"
 		},
-		"spell2": {
-			"class": "AddAttributeSpell",
-			"attribute" : "TAUNT",
-			"target" : "SELF"
-		}
-    },
-    "description": "+5 Health/Taunt"
-  },
-  "id": "minion_ancient_of_war",
-  "name": "Ancient of War",
-  "description": "Choose One - +5 Attack; or +5 Health and Taunt.",
-  "type": "MINION",
-  "heroClass": "DRUID",
-  "rarity": "EPIC",
-  "baseManaCost": 7,
-  "collectible": true,
-  "fileFormatVersion": 1
+		"description": "+5 Attack"
+	},
+	"option2": {
+		"spell": {
+			"class": "MetaSpell",
+			"spell1": {
+				"class": "BuffSpell",
+				"hpBonus": 5,
+				"target": "SELF"
+			},
+			"spell2": {
+				"class": "AddAttributeSpell",
+				"attribute": "TAUNT",
+				"target": "SELF"
+			}
+		},
+		"description": "+5 Health/Taunt"
+	},
+	"id": "minion_ancient_of_war",
+	"name": "Ancient of War",
+	"description": "Choose One - +5 Attack; or +5 Health and Taunt.",
+	"type": "MINION",
+	"heroClass": "DRUID",
+	"rarity": "EPIC",
+	"baseManaCost": 7,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

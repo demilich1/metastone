@@ -1,13 +1,13 @@
 {
-  "baseAttack": 1,
-  "baseHp": 1,
-  "race": "DRAGON",
-  "id": "token_whelp",
-  "name": "Whelp",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "FREE",
-  "baseManaCost": 1,
-  "collectible": false,
-  "fileFormatVersion": 1
+	"baseAttack": 1,
+	"baseHp": 1,
+	"race": "DRAGON",
+	"id": "token_whelp",
+	"name": "Whelp",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"baseManaCost": 1,
+	"collectible": false,
+	"fileFormatVersion": 1
 }

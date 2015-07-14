@@ -14,10 +14,6 @@ import net.demilich.metastone.game.targeting.EntityReference;
 
 public class ShuffleMinionToDeckSpell extends Spell {
 
-	public static SpellDesc create(MinionCard card) {
-		return create(EntityReference.NONE, card, 1);
-	}
-
 	public static SpellDesc create(EntityReference target, MinionCard card, int amount) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(ShuffleMinionToDeckSpell.class);
 		arguments.put(SpellArg.CARD, card);
@@ -27,6 +23,10 @@ public class ShuffleMinionToDeckSpell extends Spell {
 		arguments.put(SpellArg.VALUE, amount);
 		
 		return new SpellDesc(arguments);
+	}
+
+	public static SpellDesc create(MinionCard card) {
+		return create(EntityReference.NONE, card, 1);
 	}
 
 	@Override

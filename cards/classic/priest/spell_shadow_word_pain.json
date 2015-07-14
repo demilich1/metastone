@@ -1,21 +1,21 @@
 {
-  "targetSelection": "MINIONS",
-  "spell": {
-    "class": "DestroySpell",
-	"filter" : {
-		"class" : "AttributeFilter",
-		"attribute" : "ATTACK",
-		"value" : 4,
-		"operation" : "LESS"
-	  }
-  },
-  "id": "spell_shadow_word_pain",
-  "name": "Shadow Word: Pain",
-  "description": "Destroy a minion with 3 or less Attack.",
-  "type": "SPELL",
-  "heroClass": "PRIEST",
-  "rarity": "FREE",
-  "baseManaCost": 2,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "DestroySpell",
+		"filter": {
+			"class": "AttributeFilter",
+			"attribute": "ATTACK",
+			"value": 4,
+			"operation": "LESS"
+		}
+	},
+	"id": "spell_shadow_word_pain",
+	"name": "Shadow Word: Pain",
+	"description": "Destroy a minion with 3 or less Attack.",
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "FREE",
+	"baseManaCost": 2,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

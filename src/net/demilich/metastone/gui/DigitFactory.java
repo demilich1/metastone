@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
+import javax.imageio.ImageIO;
+
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -22,8 +24,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
-import javax.imageio.ImageIO;
 
 public class DigitFactory {
 

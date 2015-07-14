@@ -6,9 +6,7 @@ import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.DamageSpell;
-import net.demilich.metastone.game.spells.SpellUtils;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
@@ -21,6 +19,13 @@ public class BlackwindCorruptor extends MinionCard {
 	}
 
 	@Override
+	public int getTypeId() {
+		return 625;
+	}
+
+
+
+	@Override
 	public Minion summon() {
 		Minion blackwindCorruptor = createMinion();
 		SpellDesc damageSpell = DamageSpell.create(3);
@@ -28,12 +33,5 @@ public class BlackwindCorruptor extends MinionCard {
 		//battlecry.setCondition((context, player) -> SpellUtils.holdsMinionOfRace(player, Race.DRAGON));
 		blackwindCorruptor.setBattlecry(battlecry);
 		return blackwindCorruptor;
-	}
-
-
-
-	@Override
-	public int getTypeId() {
-		return 625;
 	}
 }

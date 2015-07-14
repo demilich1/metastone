@@ -3,6 +3,8 @@ package net.demilich.metastone.gui.playmode;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.pferdimanzug.nittygrittymvc.Mediator;
+import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
@@ -12,8 +14,6 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.behaviour.human.HumanActionOptions;
 import net.demilich.metastone.game.behaviour.human.HumanMulliganOptions;
 import net.demilich.metastone.game.behaviour.human.HumanTargetOptions;
-import de.pferdimanzug.nittygrittymvc.Mediator;
-import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
 public class PlayModeMediator extends Mediator<GameNotification> implements EventHandler<KeyEvent> {
 

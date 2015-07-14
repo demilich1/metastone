@@ -3,15 +3,15 @@ package net.demilich.metastone.game.cards.desc;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
-import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderArg;
-import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderDesc;
-
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+
+import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
+import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderArg;
+import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderDesc;
 
 public class ValueProviderDeserializer implements JsonDeserializer<ValueProviderDesc> {
 

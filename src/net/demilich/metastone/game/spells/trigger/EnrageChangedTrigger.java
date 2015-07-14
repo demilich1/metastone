@@ -7,12 +7,12 @@ import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
 public class EnrageChangedTrigger extends GameEventTrigger {
 
-	public EnrageChangedTrigger(EventTriggerDesc desc) {
-		super(desc);
-	}
-	
 	public EnrageChangedTrigger() {
 		this(EventTriggerDesc.createEmpty(EnrageChangedTrigger.class));
+	}
+	
+	public EnrageChangedTrigger(EventTriggerDesc desc) {
+		super(desc);
 	}
 
 	@Override

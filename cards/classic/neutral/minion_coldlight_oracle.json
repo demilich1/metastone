@@ -1,25 +1,25 @@
 {
-  "baseAttack": 2,
-  "baseHp": 2,
-  "race": "MURLOC",
-  "battlecry": {
-    "spell": {
-      "class": "DrawCardSpell",
-	  "targetPlayer" : "BOTH",
-	  "value" : 2
-    },
-    "resolvedLate": false
-  },
-  "id": "minion_coldlight_oracle",
-  "name": "Coldlight Oracle",
-  "description": "Battlecry: Each player draws 2 cards.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "RARE",
-  "baseManaCost": 3,
-  "collectible": true,
-  "attributes": {
-    "BATTLECRY": true
-  },
-  "fileFormatVersion": 1
+	"baseAttack": 2,
+	"baseHp": 2,
+	"race": "MURLOC",
+	"battlecry": {
+		"spell": {
+			"class": "DrawCardSpell",
+			"targetPlayer": "BOTH",
+			"value": 2
+		},
+		"resolvedLate": false
+	},
+	"id": "minion_coldlight_oracle",
+	"name": "Coldlight Oracle",
+	"description": "Battlecry: Each player draws 2 cards.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"baseManaCost": 3,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"fileFormatVersion": 1
 }

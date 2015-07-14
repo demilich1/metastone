@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
@@ -23,9 +26,6 @@ import net.demilich.metastone.game.spells.trigger.TriggerManager;
 import net.demilich.metastone.game.targeting.CardReference;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.utils.IDisposable;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class GameContext implements Cloneable, IDisposable {
 	public static final int PLAYER_1 = 0;
