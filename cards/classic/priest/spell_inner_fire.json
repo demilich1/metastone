@@ -5,7 +5,7 @@
   },
   "id": "spell_inner_fire",
   "name": "Inner Fire",
-  "description": "Change a minion\u0027s Attack to be equal to its Health.",
+  "description": "Change a minion's Attack to be equal to its Health.",
   "type": "SPELL",
   "heroClass": "PRIEST",
   "rarity": "COMMON",

@@ -25,7 +25,7 @@
 	}
   },
   "name": "Demonfire",
-  "description": "Deal 2 damage to a minion. If it\u0027s a friendly Demon, give it +2/+2 instead.",
+  "description": "Deal 2 damage to a minion. If it's a friendly Demon, give it +2/+2 instead.",
   "type": "SPELL",
   "heroClass": "WARLOCK",
   "rarity": "COMMON",

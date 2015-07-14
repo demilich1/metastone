@@ -16,7 +16,7 @@
   },
   "id": "minion_ragnaros_the_firelord",
   "name": "Ragnaros the Firelord",
-  "description": "Can\u0027t Attack.  At the end of your turn, deal 8 damage to a random enemy.",
+  "description": "Can't Attack.  At the end of your turn, deal 8 damage to a random enemy.",
   "type": "MINION",
   "heroClass": "ANY",
   "rarity": "LEGENDARY",

@@ -21,7 +21,7 @@
   },
   "id": "minion_harrison_jones",
   "name": "Harrison Jones",
-  "description": "Battlecry: Destroy your opponent\u0027s weapon and draw cards equal to its Durability.",
+  "description": "Battlecry: Destroy your opponent's weapon and draw cards equal to its Durability.",
   "type": "MINION",
   "heroClass": "ANY",
   "rarity": "LEGENDARY",

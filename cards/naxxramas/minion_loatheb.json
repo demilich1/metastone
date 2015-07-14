@@ -1,26 +1,26 @@
 {
-  "baseAttack": 4,
-  "baseHp": 4,
+  "baseAttack": 5,
+  "baseHp": 5,
   "battlecry": {
     "spell": {
-      "class": "CardCostModifierSpell",
+       "class": "CardCostModifierSpell",
 	  "cardCostModifier" : {
 		"class" : "OneTurnCostModifier",
 		"cardType" : "SPELL",
 		"targetPlayer" : "OPPONENT",
-		"value" : -99
+		"value" : 5
 	  },
 	  "target" : "FRIENDLY_HERO"
     },
     "resolvedLate": false
   },
-  "id": "minion_millhouse_manastorm",
-  "name": "Millhouse Manastorm",
-  "description": "Battlecry: Enemy spells cost (0) next turn.",
+  "id": "minion_loatheb",
+  "name": "Loatheb",
+  "description": "Battlecry: Enemy spells cost (5) more next turn.",
   "type": "MINION",
   "heroClass": "ANY",
   "rarity": "LEGENDARY",
-  "baseManaCost": 2,
+  "baseManaCost": 5,
   "collectible": true,
   "attributes": {
     "BATTLECRY": true

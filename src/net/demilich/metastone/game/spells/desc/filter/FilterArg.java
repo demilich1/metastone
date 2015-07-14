@@ -6,5 +6,6 @@ public enum FilterArg {
 	RACE,
 	OPERATION,
 	ATTRIBUTE,
-	DAMAGED
+	DAMAGED,
+	CARD_TYPE
 }

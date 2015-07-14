@@ -14,7 +14,7 @@
   },
   "id": "minion_lorewalker_cho",
   "name": "Lorewalker Cho",
-  "description": "Whenever a player casts a spell, put a copy into the other player\u0027s hand.",
+  "description": "Whenever a player casts a spell, put a copy into the other player's hand.",
   "type": "MINION",
   "heroClass": "ANY",
   "rarity": "LEGENDARY",

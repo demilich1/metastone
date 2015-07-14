@@ -9,7 +9,7 @@ import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.SpellCastedEvent;
-import net.demilich.metastone.game.spells.ReceiveRandomRaceCardSpell;
+import net.demilich.metastone.game.spells.ReceiveRandomCollectibleCardSpell;
 import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.SpellCastedTrigger;
@@ -30,7 +30,7 @@ public class Gazlowe extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion gazlowe = createMinion();
-		SpellDesc getRandomMech = ReceiveRandomRaceCardSpell.create(Race.MECH, 1);
+		SpellDesc getRandomMech = ReceiveRandomCollectibleCardSpell.create(Race.MECH, 1);
 		//SpellTrigger trigger = new SpellTrigger(new GazloweTrigger(), getRandomMech);
 		SpellTrigger trigger = new SpellTrigger(new SpellCastedTrigger(null), getRandomMech);
 		gazlowe.setSpellTrigger(trigger);

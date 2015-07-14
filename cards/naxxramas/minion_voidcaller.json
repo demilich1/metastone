@@ -1,0 +1,19 @@
+{
+  "baseAttack": 3,
+  "baseHp": 4,
+  "race": "DEMON",
+  "deathrattle": {
+    "class": "PutRandomMinionOnBoardSpell",
+	"race" : "DEMON",
+	"cardLocation" : "HAND"
+  },
+  "id": "minion_voidcaller",
+  "name": "Voidcaller",
+  "description": "Deathrattle: Put a random Demon from your hand into the battlefield.",
+  "type": "MINION",
+  "heroClass": "WARLOCK",
+  "rarity": "COMMON",
+  "baseManaCost": 4,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

@@ -16,7 +16,7 @@
 	"spell" : {
 		"class" : "MultiTargetDamageSpell",
 		"value" : 2,
-		"iterations" : 2
+		"howMany" : 2
 	},
 	"attributes" : {
 		"OVERLOAD" : 2

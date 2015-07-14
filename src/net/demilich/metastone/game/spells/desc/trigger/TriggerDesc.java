@@ -8,10 +8,11 @@ public class TriggerDesc {
 	public EventTriggerDesc eventTrigger;
 	//public EventTriggerDesc secondEventTrigger;
 	public SpellDesc spell;
+	public boolean oneTime;
 	
 	public SpellTrigger create() {
 		//GameEventTrigger secondaryTrigger = secondEventTrigger != null ? secondEventTrigger.create() : null;
-		return new SpellTrigger(eventTrigger.create(), spell);
+		return new SpellTrigger(eventTrigger.create(), spell, oneTime);
 	}
 
 }

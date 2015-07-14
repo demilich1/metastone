@@ -12,7 +12,7 @@
   },
   "id": "minion_bloodsail_corsair",
   "name": "Bloodsail Corsair",
-  "description": "Battlecry: Remove 1 Durability from your opponent\u0027s weapon.",
+  "description": "Battlecry: Remove 1 Durability from your opponent's weapon.",
   "type": "MINION",
   "heroClass": "ANY",
   "rarity": "RARE",

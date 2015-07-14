@@ -1,0 +1,23 @@
+{
+  "baseAttack": 1,
+  "baseHp": 4,
+  "trigger" : {
+	"eventTrigger" : {
+		"class" : "TurnStartTrigger",
+		"targetPlayer" : "SELF"
+	},
+	"spell" : {
+		"class" : "HealToFullSpell",
+		"target" : "SELF"
+	}
+  },
+  "id": "minion_stoneskin_gargoyle",
+  "name": "Stoneskin Gargoyle",
+  "description": "At the start of your turn, restore this minion to full Health.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "COMMON",
+  "baseManaCost": 3,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

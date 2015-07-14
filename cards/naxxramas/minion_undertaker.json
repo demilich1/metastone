@@ -1,0 +1,25 @@
+{
+  "baseAttack": 1,
+  "baseHp": 2,
+  "id": "minion_undertaker",
+  "name": "Undertaker",
+  "description": "Whenever you summon a minion with Deathrattle, gain +1 Attack",
+  "trigger" : {
+    "eventTrigger" : {
+		"class" : "MinionSummonedTrigger",
+		"targetPlayer" : "SELF",
+		"requiredAttribute" : "DEATHRATTLES"
+	},
+	"spell" : {
+		"class": "BuffSpell",
+		"attackBonus" : 1,
+		"target" : "SELF"
+		}
+  },
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "COMMON",
+  "baseManaCost": 1,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

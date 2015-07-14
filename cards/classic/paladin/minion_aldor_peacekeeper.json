@@ -11,7 +11,7 @@
   },
   "id": "minion_aldor_peacekeeper",
   "name": "Aldor Peacekeeper",
-  "description": "Battlecry: Change an enemy minion\u0027s Attack to 1.",
+  "description": "Battlecry: Change an enemy minion's Attack to 1.",
   "type": "MINION",
   "heroClass": "PALADIN",
   "rarity": "RARE",

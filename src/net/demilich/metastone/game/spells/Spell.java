@@ -46,6 +46,8 @@ public abstract class Spell {
 		case SELF:
 			onCast(context, player, desc, source, target);
 			break;
+		case OWNER:
+			onCast(context, context.getPlayer(target.getOwner()), desc, source, target);
 		default:
 			break;
 		}

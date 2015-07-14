@@ -7,7 +7,7 @@
   },
   "id": "spell_mind_vision",
   "name": "Mind Vision",
-  "description": "Put a copy of a random card in your opponent\u0027s hand into your hand.",
+  "description": "Put a copy of a random card in your opponent's hand into your hand.",
   "type": "SPELL",
   "heroClass": "PRIEST",
   "rarity": "FREE",

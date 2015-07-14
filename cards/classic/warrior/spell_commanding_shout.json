@@ -14,7 +14,7 @@
   },
   "id": "spell_commanding_shout",
   "name": "Commanding Shout",
-  "description": "Your minions can\u0027t be reduced below 1 Health this turn. Draw a card.",
+  "description": "Your minions can't be reduced below 1 Health this turn. Draw a card.",
   "type": "SPELL",
   "heroClass": "WARRIOR",
   "rarity": "RARE",

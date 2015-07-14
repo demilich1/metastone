@@ -8,11 +8,11 @@ import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.Spell;
+import net.demilich.metastone.game.spells.SpellUtils;
 import net.demilich.metastone.game.spells.TransformMinionSpell;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.IGameEventListener;
-import net.demilich.metastone.game.targeting.EntityReference;
 
 public class FacelessSpell extends Spell {
 	
@@ -30,8 +30,7 @@ public class FacelessSpell extends Spell {
 
 		Minion sourceActor = context.getSummonStack().peek();
 		SpellDesc transformSpell = TransformMinionSpell.create(clone);
-		EntityReference sourceReference = source != null ? source.getReference() : null;
-		context.getLogic().castSpell(player.getId(), transformSpell, sourceReference, sourceActor.getReference());
+		SpellUtils.castChildSpell(context, player, transformSpell, source, sourceActor);
 		
 		for (IGameEventListener trigger : context.getTriggersAssociatedWith(template.getReference())) {
 			IGameEventListener triggerClone = trigger.clone();

@@ -5,7 +5,7 @@
 	"type" : "SPELL",
 	"rarity" : "FREE",
 	"heroClass" : "WARLOCK",
-	"baseManaCost" : 1,
+	"baseManaCost" : 3,
 	"targetSelection" : "MINIONS",
 	"spell" : {
 		"class" : "DamageSpell",

@@ -1,0 +1,18 @@
+{
+  "baseAttack": 2,
+  "baseHp": 3,
+  "deathrattle": {
+    "class": "HealingSpell",
+	"value" : 5,
+	"target" : "ENEMY_HERO"
+  },
+  "id": "minion_zombie_chow",
+  "name": "Zombie Chow",
+  "description": "Deathrattle: Restore 5 Health to the enemy hero.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "COMMON",
+  "baseManaCost": 1,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

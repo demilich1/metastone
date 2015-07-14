@@ -1,0 +1,23 @@
+{
+  "baseAttack": 3,
+  "baseHp": 5,
+  "battlecry": {
+    "spell": {
+      "class": "SilenceSpell",
+	  "target" : "FRIENDLY_MINIONS"
+    },
+    "resolvedLate": false
+  },
+  "id": "minion_wailing_soul",
+  "name": "Wailing Soul",
+  "description": "Battlecry: Silence your other minions.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "RARE",
+  "baseManaCost": 4,
+  "collectible": true,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "fileFormatVersion": 1
+}

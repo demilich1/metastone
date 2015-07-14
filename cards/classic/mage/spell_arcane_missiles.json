@@ -10,7 +10,7 @@
 	"spell" : {
 		"class" : "MissilesSpell",
 		"value" : 1,
-		"iterations" : 3
+		"howMany" : 3
 	},
 	"fileFormatVersion" : 1
 }

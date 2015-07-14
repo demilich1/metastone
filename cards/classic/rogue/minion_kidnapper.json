@@ -13,7 +13,7 @@
   },
   "id": "minion_kidnapper",
   "name": "Kidnapper",
-  "description": "Combo: Return a minion to its owner\u0027s hand.",
+  "description": "Combo: Return a minion to its owner's hand.",
   "type": "MINION",
   "heroClass": "ROGUE",
   "rarity": "EPIC",

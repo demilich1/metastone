@@ -5,7 +5,7 @@
   },
   "id": "spell_divine_spirit",
   "name": "Divine Spirit",
-  "description": "Double a minion\u0027s Health.",
+  "description": "Double a minion's Health.",
   "type": "SPELL",
   "heroClass": "PRIEST",
   "rarity": "FREE",

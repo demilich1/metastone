@@ -87,6 +87,7 @@ public class ParseUtils {
 			TriggerDesc triggerDesc = new TriggerDesc();
 			triggerDesc.eventTrigger = triggerParser.deserialize(triggerObject.get("eventTrigger"), EventTriggerDesc.class, null);
 			triggerDesc.spell = spellParser.deserialize(triggerObject.get("spell"), SpellDesc.class, null);
+			triggerDesc.oneTime = triggerObject.has("oneTime") ? triggerObject.get("oneTime").getAsBoolean() : false;
 			return triggerDesc;
 		case EVENT_TRIGGER:
 			return triggerParser.deserialize(entry, EventTriggerDesc.class, null);

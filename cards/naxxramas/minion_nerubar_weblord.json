@@ -1,0 +1,20 @@
+{
+  "baseAttack": 1,
+  "baseHp": 4,
+  "cardCostModifier" : {
+	"class" : "CardCostModifier",
+	"cardType" : "MINION",
+	"value" : +2,
+	"requiredAttribute" : "BATTLECRY",
+	"targetPlayer" : "BOTH"
+  },
+  "id": "minion_nerubar_weblord",
+  "name": "Nerub'ar Weblord",
+  "description": "Minions with Battlecry cost (2) more.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "COMMON",
+  "baseManaCost": 2,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

@@ -7,7 +7,7 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
-import net.demilich.metastone.game.spells.ReceiveRandomRaceCardSpell;
+import net.demilich.metastone.game.spells.ReceiveRandomCollectibleCardSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
 public class Neptulon extends MinionCard {
@@ -29,7 +29,7 @@ public class Neptulon extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion neptulon = createMinion();
-		SpellDesc murlocs = ReceiveRandomRaceCardSpell.create(Race.MURLOC, 4);
+		SpellDesc murlocs = ReceiveRandomCollectibleCardSpell.create(Race.MURLOC, 4);
 		BattlecryAction battlecry = BattlecryAction.createBattlecry(murlocs);
 		neptulon.setBattlecry(battlecry);
 		return neptulon;
