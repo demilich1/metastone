@@ -36,6 +36,7 @@ public class MinionDeathTrigger extends GameEventTrigger {
 		case BOTH:
 			return true;
 		case SELF:
+		case OWNER:
 			return minion.getOwner() == host.getOwner();
 		case OPPONENT:
 			return minion.getOwner() != host.getOwner();

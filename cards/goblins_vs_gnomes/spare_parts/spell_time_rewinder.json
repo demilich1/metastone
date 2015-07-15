@@ -1,0 +1,15 @@
+{
+  "targetSelection": "FRIENDLY_MINIONS",
+  "spell": {
+    "class": "ReturnMinionToHandSpell"
+  },
+  "id": "spell_time_rewinder",
+  "name": "Time Rewinder",
+  "description": "Return a friendly minion to your hand.",
+  "type": "SPELL",
+  "heroClass": "ANY",
+  "rarity": "FREE",
+  "baseManaCost": 1,
+  "collectible": false,
+  "fileFormatVersion": 1
+}

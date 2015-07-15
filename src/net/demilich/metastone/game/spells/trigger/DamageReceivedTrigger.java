@@ -30,6 +30,7 @@ public class DamageReceivedTrigger extends GameEventTrigger {
 			return true;
 		case OPPONENT:
 			return damageEvent.getVictim().getOwner() != getOwner();
+		case OWNER:
 		case SELF:
 			return damageEvent.getVictim().getOwner() == getOwner();
 		}

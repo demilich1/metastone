@@ -39,6 +39,7 @@ public class TargetAcquisitionTrigger extends GameEventTrigger {
 		case BOTH:
 			return true;
 		case SELF:
+		case OWNER:
 			return playerId == host.getOwner();
 		case OPPONENT:
 			return playerId != host.getOwner();

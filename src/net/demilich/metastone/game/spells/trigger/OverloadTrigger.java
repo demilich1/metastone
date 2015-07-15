@@ -24,6 +24,7 @@ public class OverloadTrigger extends GameEventTrigger {
 		case OPPONENT:
 			return overloadEvent.getPlayer() != getOwner();
 		case SELF:
+		case OWNER:
 			return overloadEvent.getPlayer() == getOwner();
 		}
 		

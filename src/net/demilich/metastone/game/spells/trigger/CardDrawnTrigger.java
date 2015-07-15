@@ -21,6 +21,7 @@ public class CardDrawnTrigger extends GameEventTrigger {
 		case BOTH:
 			return true;
 		case SELF:
+		case OWNER:
 			return drawEvent.getPlayerId() == host.getOwner();
 		case OPPONENT:
 			return drawEvent.getPlayerId() != host.getOwner();

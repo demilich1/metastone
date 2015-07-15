@@ -1,0 +1,32 @@
+{
+  "baseAttack": 7,
+  "baseHp": 7,
+  "battlecry" : {
+	"spell": {
+			"class": "MetaSpell",
+			"spell1": {
+				"class": "SummonSpell",
+				"boardPositionRelative": "LEFT",
+				"card": "token_boom_bot"
+			},
+			"spell2": {
+				"class": "SummonSpell",
+				"boardPositionRelative": "RIGHT",
+				"card": "token_boom_bot"
+			}
+		},
+		"resolvedLate": true
+  },
+  "id": "minion_dr_boom",
+  "name": "Dr. Boom",
+  "description": "Battlecry: Summon two 1/1 Boom Bots. WARNING: Bots may explode.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "LEGENDARY",
+  "baseManaCost": 7,
+  "collectible": true,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "fileFormatVersion": 1
+}

@@ -21,6 +21,7 @@ public class SecretRevealedTrigger extends GameEventTrigger {
 		case BOTH:
 			return true;
 		case SELF:
+		case OWNER:
 			return secretRevealedEvent.getPlayerId() == host.getOwner();
 		case OPPONENT:
 			return secretRevealedEvent.getPlayerId() != host.getOwner();

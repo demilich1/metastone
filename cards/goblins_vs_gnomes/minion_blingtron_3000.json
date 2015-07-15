@@ -1,0 +1,24 @@
+{
+  "baseAttack": 3,
+  "baseHp": 4,
+  "race": "MECH",
+  "battlecry": {
+    "spell": {
+      "class": "EquipRandomWeaponSpell",
+	  "targetPlayer" : "BOTH"
+    },
+    "resolvedLate": false
+  },
+  "id": "minion_blingtron_3000",
+  "name": "Blingtron 3000",
+  "description": "Battlecry: Equip a random weapon for each player",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "LEGENDARY",
+  "baseManaCost": 5,
+  "collectible": true,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "fileFormatVersion": 1
+}

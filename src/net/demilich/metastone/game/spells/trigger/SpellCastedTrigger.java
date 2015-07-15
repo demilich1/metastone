@@ -21,6 +21,7 @@ public class SpellCastedTrigger extends GameEventTrigger {
 		case BOTH:
 			return true;
 		case SELF:
+		case OWNER:
 			return spellCastedEvent.getPlayerId() == host.getOwner();
 		case OPPONENT:
 			return spellCastedEvent.getPlayerId() != host.getOwner();

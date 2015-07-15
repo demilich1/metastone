@@ -1,0 +1,15 @@
+{
+  "targetSelection": "MINIONS",
+  "spell": {
+    "class": "SwapAttackAndHpSpell"
+  },
+  "id": "spell_reversing_switch",
+  "name": "Reversing Switch",
+  "description": "Swap a minion\u0027s Attack and Health",
+  "type": "SPELL",
+  "heroClass": "ANY",
+  "rarity": "FREE",
+  "baseManaCost": 1,
+  "collectible": false,
+  "fileFormatVersion": 1
+}

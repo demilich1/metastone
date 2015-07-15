@@ -1,0 +1,16 @@
+{
+  "targetSelection": "MINIONS",
+  "spell": {
+    "class": "BuffSpell",
+	"hpBonus" : 1
+  },
+  "id": "spell_armor_plating",
+  "name": "Armor Plating",
+  "description": "Give a minion +1 Health.",
+  "type": "SPELL",
+  "heroClass": "ANY",
+  "rarity": "FREE",
+  "baseManaCost": 1,
+  "collectible": false,
+  "fileFormatVersion": 1
+}

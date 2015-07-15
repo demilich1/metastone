@@ -1,0 +1,27 @@
+{
+  "baseAttack": 6,
+  "baseHp": 3,
+  "battlecry": {
+    "spell": {
+      "class": "DestroySpell",
+	  "filter": {
+		"class" : "RaceFilter",
+		"race" : "BEAST"
+	  }
+    },
+    "targetSelection": "MINIONS",
+    "resolvedLate": false
+  },
+  "id": "minion_hemet_nesingwary",
+  "name": "Hemet Nesingwary",
+  "description": "Battlecry: Destroy a Beast.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "LEGENDARY",
+  "baseManaCost": 5,
+  "collectible": true,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "fileFormatVersion": 1
+}
