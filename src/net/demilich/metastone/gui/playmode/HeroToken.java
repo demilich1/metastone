@@ -96,7 +96,7 @@ public class HeroToken extends GameToken {
 	}
 
 	private void updateStatus(Hero hero) {
-		frozen.setVisible(hero.hasStatus(GameTag.FROZEN));
+		frozen.setVisible(hero.hasTag(GameTag.FROZEN));
 	}
 
 	private void updateWeapon(Weapon weapon) {

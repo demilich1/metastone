@@ -27,7 +27,7 @@ public class PlayRandomSecretSpell extends Spell {
 	private CardCollection findSecretCards(CardCollection cardCollection) {
 		CardCollection secretCards = new CardCollection();
 		for (Card card : cardCollection) {
-			if (card.hasStatus(GameTag.SECRET)) {
+			if (card.hasTag(GameTag.SECRET)) {
 				secretCards.add(card);
 			}
 		}

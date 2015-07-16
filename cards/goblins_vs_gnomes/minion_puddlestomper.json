@@ -1,0 +1,14 @@
+{
+  "baseAttack": 3,
+  "baseHp": 2,
+  "race": "MURLOC",
+  "id": "minion_puddlestomper",
+  "name": "Puddlestomper",
+  "description": "",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "COMMON",
+  "baseManaCost": 2,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

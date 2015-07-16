@@ -34,12 +34,12 @@ public class AttributeCondition extends Condition {
 		GameTag attribute = (GameTag) desc.get(ConditionArg.ATTRIBUTE);
 		Operation operation = (Operation) desc.get(ConditionArg.OPERATION);
 		if (operation == Operation.HAS) {
-			return target.hasStatus(attribute);
+			return target.hasTag(attribute);
 		}
 		
 		int targetValue = desc.getInt(ConditionArg.VALUE);
 
-		int actualValue = -1;
+		int actualValue;
 		if (attribute == GameTag.ATTACK) {
 			actualValue = source.getAttack();
 		} else {

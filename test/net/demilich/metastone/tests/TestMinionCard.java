@@ -38,5 +38,10 @@ public class TestMinionCard extends MinionCard {
 	public Minion summon() {
 		return minion.clone();
 	}
+	
+	@Override
+	public String getCardId() {
+		return "minion_test";
+	}
 
 }

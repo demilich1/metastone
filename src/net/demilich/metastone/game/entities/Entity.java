@@ -96,16 +96,19 @@ public abstract class Entity extends CustomCloneable {
 		return getClass().getName().hashCode();
 	}
 
-	public boolean hasStatus(GameTag tag) {
-		return tags.get(tag) != null && getTagValue(tag) > 0;
-	}
-
 	public boolean hasTag(GameTag tag) {
-		return tags.get(tag) != null;
+		Object value = tags.get(tag);
+		if (value == null) {
+			return false;
+		}
+		if (value instanceof Integer) {
+			return ((int)value) > 0;
+		}
+		return true;
 	}
 	
 	public boolean isDead() {
-		return hasStatus(GameTag.DEAD);
+		return hasTag(GameTag.DEAD);
 	}
 
 	public void modifyTag(GameTag tag, int value) {

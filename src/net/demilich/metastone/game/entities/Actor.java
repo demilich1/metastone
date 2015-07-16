@@ -31,13 +31,13 @@ public abstract class Actor extends Entity {
 	}
 
 	public boolean canAttackThisTurn() {
-		if (hasStatus(GameTag.CANNOT_ATTACK)) {
+		if (hasTag(GameTag.CANNOT_ATTACK)) {
 			return false;
 		}
-		if (hasStatus(GameTag.FROZEN)) {
+		if (hasTag(GameTag.FROZEN)) {
 			return false;
 		}
-		if (hasStatus(GameTag.SUMMONING_SICKNESS) && !hasStatus(GameTag.CHARGE)) {
+		if (hasTag(GameTag.SUMMONING_SICKNESS) && !hasTag(GameTag.CHARGE)) {
 			return false;
 		}
 		return getAttack() > 0 && getTagValue(GameTag.NUMBER_OF_ATTACKS) > 0;

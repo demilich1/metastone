@@ -27,7 +27,7 @@ public class TransformMinionSpell extends Spell {
 		return new SpellDesc(arguments);
 	}
 
-	public static SpellDesc create(EntityReference target, MinionCard templateCard, boolean randomTarget) {
+	public static SpellDesc create(EntityReference target, String templateCard, boolean randomTarget) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(TransformMinionSpell.class);
 		arguments.put(SpellArg.CARD, templateCard);
 		arguments.put(SpellArg.TARGET, target);
@@ -39,7 +39,7 @@ public class TransformMinionSpell extends Spell {
 		return create(null, transformTarget, false);
 	}
 
-	public static SpellDesc create(MinionCard templateCard) {
+	public static SpellDesc create(String templateCard) {
 		return create(null, templateCard, false);
 	}
 

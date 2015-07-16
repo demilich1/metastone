@@ -37,7 +37,8 @@ public class TransformToMinionWithManaCostSpell extends TransformMinionSpell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Minion minion = (Minion) target;
 		int manaCost = minion.getSourceCard().getBaseManaCost();
-		SpellDesc transformMinionSpell = TransformMinionSpell.create(getRandomMinionWithCost(manaCost));
+		Card randomCard = getRandomMinionWithCost(manaCost);
+		SpellDesc transformMinionSpell = TransformMinionSpell.create(randomCard.getCardId());
 		super.onCast(context, player, transformMinionSpell, source, target);
 	}
 

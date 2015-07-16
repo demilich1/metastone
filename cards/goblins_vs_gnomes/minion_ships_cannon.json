@@ -1,0 +1,27 @@
+{
+  "baseAttack": 2,
+  "baseHp": 3,
+  "trigger": {
+		"eventTrigger": {
+			"class": "MinionSummonedTrigger",
+			"targetPlayer": "SELF",
+			"race" : "PIRATE",
+			"breaksStealth": true
+		},
+		"spell": {
+			"class": "DamageSpell",
+			"value": 2,
+			"target": "ENEMY_CHARACTERS",
+			"randomTarget": true
+		}
+	},
+  "id": "minion_ships_cannon",
+  "name": "Ship's Cannon",
+  "description": "Whenever you summon a Pirate, deal 2 damage to a random enemy.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "COMMON",
+  "baseManaCost": 2,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

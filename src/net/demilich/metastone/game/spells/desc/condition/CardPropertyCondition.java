@@ -3,12 +3,13 @@ package net.demilich.metastone.game.spells.desc.condition;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 
-public class MatchesCardCondition extends Condition {
+public class CardPropertyCondition extends Condition {
 
-	public MatchesCardCondition(ConditionDesc desc) {
+	public CardPropertyCondition(ConditionDesc desc) {
 		super(desc);
 	}
 
@@ -26,9 +27,17 @@ public class MatchesCardCondition extends Condition {
 			return false;
 		}
 		
-		String cardName = (String) desc.get(ConditionArg.CARD_NAME);
+		CardType cardType = (CardType) desc.get(ConditionArg.CARD_TYPE);
+		if (cardType != null && card.getCardType() != cardType) {
+			return false;
+		}
 		
-		return card.getCardId().contains(cardName);
+		String cardName = (String) desc.get(ConditionArg.CARD_NAME);
+		if (cardName != null && !card.getCardId().contains(cardName)) {
+			return false;
+		}
+		
+		return true;
 	}
 
 }

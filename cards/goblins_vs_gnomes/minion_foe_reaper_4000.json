@@ -3,7 +3,8 @@
   "baseHp": 9,
   "trigger" : {
 	"eventTrigger" : {
-		"class" : "HostAttacksTrigger"
+		"class" : "HostAttacksTrigger",
+		"targetEntityType" : "MINION"
 	},
 	"spell" : {
 		"class" : "AdjacentEffectSpell",

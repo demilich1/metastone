@@ -6,7 +6,7 @@ import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.events.PhysicalAttackEvent;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
-public class HostAttacksTrigger extends GameEventTrigger {
+public class HostAttacksTrigger extends PhysicalAttackTrigger {
 
 	public HostAttacksTrigger(EventTriggerDesc desc) {
 		super(desc);
@@ -15,7 +15,11 @@ public class HostAttacksTrigger extends GameEventTrigger {
 	@Override
 	protected boolean fire(GameEvent event, Entity host) {
 		PhysicalAttackEvent physicalAttackEvent = (PhysicalAttackEvent) event;
-		return physicalAttackEvent.getAttacker() == host;
+		if (physicalAttackEvent.getAttacker() != host) {
+			return false;
+		}
+		
+		return super.fire(physicalAttackEvent, host);
 	}
 
 	@Override

@@ -1,0 +1,21 @@
+{
+  "baseAttack": 5,
+  "baseHp": 7,
+  "race": "MECH",
+  "deathrattle": {
+    "class": "SummonRandomMinionFilteredSpell",
+	"cardFilter" : {
+		"class" : "CardFilter",
+		"rarity" : "LEGENDARY"
+	}
+  },
+  "id": "minion_sneeds_old_shredder",
+  "name": "Sneed's Old Shredder",
+  "description": "Deathrattle: Summon a random legendary minion.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "LEGENDARY",
+  "baseManaCost": 8,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

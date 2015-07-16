@@ -17,7 +17,7 @@ public class AttributeFilter extends EntityFilter {
 		GameTag attribute = (GameTag) desc.get(FilterArg.ATTRIBUTE);
 		Operation operation = (Operation) desc.get(FilterArg.OPERATION);
 		if (operation == Operation.HAS) {
-			return entity.hasStatus(attribute);
+			return entity.hasTag(attribute);
 		}
 		
 		int actualValue = -1;

@@ -6,7 +6,7 @@
 		"valueProvider": {
 			"class": "ConditionalValueProvider",
 			"condition": {
-				"class": "MatchesCardCondition",
+				"class": "CardPropertyCondition",
 				"cardName": "minion_ysera"
 			},
 			"ifTrue": 0,

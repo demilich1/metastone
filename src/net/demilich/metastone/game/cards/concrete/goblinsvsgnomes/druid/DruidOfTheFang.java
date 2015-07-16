@@ -4,7 +4,6 @@ import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
-import net.demilich.metastone.game.cards.concrete.goblinsvsgnomes.tokens.CobraForm;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.TransformMinionSpell;
@@ -27,7 +26,8 @@ public class DruidOfTheFang extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion druidOfTheFang = createMinion();
-		SpellDesc transformSpell = TransformMinionSpell.create(EntityReference.SELF, new CobraForm(), false);
+		SpellDesc transformSpell = TransformMinionSpell.create(EntityReference.SELF, "token_cobra_form", false);
+		//SpellDesc transformSpell = TransformMinionSpell.create(EntityReference.SELF, new CobraForm(), false);
 		BattlecryAction battleCry = BattlecryAction.createBattlecry(transformSpell);
 		//battleCry.setCondition((context, player) -> SpellUtils.hasMinionOfRace(player, Race.BEAST));
 		druidOfTheFang.setBattlecry(battleCry);

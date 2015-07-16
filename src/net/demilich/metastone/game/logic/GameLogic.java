@@ -90,7 +90,7 @@ public class GameLogic implements Cloneable {
 	private static final int MEGA_WINDFURY_ATTACKS = 4;
 
 	private static boolean hasPlayerLost(Player player) {
-		return player.getHero().getHp() < 1 || player.getHero().hasStatus(GameTag.DEAD);
+		return player.getHero().getHp() < 1 || player.getHero().hasTag(GameTag.DEAD);
 	}
 	private final TargetLogic targetLogic = new TargetLogic();
 	private final ActionLogic actionLogic = new ActionLogic();
@@ -130,7 +130,7 @@ public class GameLogic implements Cloneable {
 
 		player.getHero().modifyTag(GameTag.COMBO, +1);
 		Card card = context.resolveCardReference(cardReference);
-		if (card.getCardType() == CardType.SPELL && !card.hasStatus(GameTag.COUNTERED)) {
+		if (card.getCardType() == CardType.SPELL && !card.hasTag(GameTag.COUNTERED)) {
 			context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, card));
 		}
 		card.removeTag(GameTag.MANA_COST_MODIFIER);
@@ -149,9 +149,9 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void applyTag(Entity entity, GameTag tag) {
-		if (tag == GameTag.WINDFURY && !entity.hasStatus(GameTag.WINDFURY)) {
+		if (tag == GameTag.WINDFURY && !entity.hasTag(GameTag.WINDFURY)) {
 			entity.modifyTag(GameTag.NUMBER_OF_ATTACKS, WINDFURY_ATTACKS - 1);
-		} else if (tag == GameTag.MEGA_WINDFURY && !entity.hasStatus(GameTag.MEGA_WINDFURY)) {
+		} else if (tag == GameTag.MEGA_WINDFURY && !entity.hasTag(GameTag.MEGA_WINDFURY)) {
 			entity.modifyTag(GameTag.NUMBER_OF_ATTACKS, MEGA_WINDFURY_ATTACKS - 1);
 		}
 		entity.setTag(tag);
@@ -355,7 +355,7 @@ public class GameLogic implements Cloneable {
 	}
 
 	private int damageHero(Hero hero, int damage) {
-		if (hero.hasStatus(GameTag.IMMUNE)) {
+		if (hero.hasTag(GameTag.IMMUNE)) {
 			log("{} is IMMUNE and does not take damage", hero);
 			return 0;
 		}
@@ -368,17 +368,17 @@ public class GameLogic implements Cloneable {
 	}
 
 	private int damageMinion(Player player, Actor minion, int damage) {
-		if (minion.hasStatus(GameTag.DIVINE_SHIELD)) {
+		if (minion.hasTag(GameTag.DIVINE_SHIELD)) {
 			removeTag(minion, GameTag.DIVINE_SHIELD);
 			log("{}'s DIVINE SHIELD absorbs the damage", minion);
 			return 0;
 		}
-		if (minion.hasStatus(GameTag.IMMUNE)) {
+		if (minion.hasTag(GameTag.IMMUNE)) {
 			log("{} is IMMUNE and does not take damage", minion);
 			return 0;
 		}
 		Player owner = context.getPlayer(minion.getOwner());
-		if (damage >= minion.getHp() && owner.getHero().hasStatus(GameTag.CANNOT_REDUCE_HP_BELOW_1)) {
+		if (damage >= minion.getHp() && owner.getHero().hasTag(GameTag.CANNOT_REDUCE_HP_BELOW_1)) {
 			damage = minion.getHp() - 1;
 		}
 
@@ -452,7 +452,7 @@ public class GameLogic implements Cloneable {
 		CardCollection deck = player.getDeck();
 		if (deck.isEmpty()) {
 			Hero hero = player.getHero();
-			int fatigue = hero.hasStatus(GameTag.FATIGUE) ? hero.getTagValue(GameTag.FATIGUE) : 0;
+			int fatigue = hero.hasTag(GameTag.FATIGUE) ? hero.getTagValue(GameTag.FATIGUE) : 0;
 			fatigue++;
 			hero.setTag(GameTag.FATIGUE, fatigue);
 			damage(player, hero, fatigue, null);
@@ -475,13 +475,13 @@ public class GameLogic implements Cloneable {
 		Hero hero = player.getHero();
 		hero.removeTag(GameTag.TEMPORARY_ATTACK_BONUS);
 		hero.removeTag(GameTag.CANNOT_REDUCE_HP_BELOW_1);
-		if (hero.hasStatus(GameTag.FROZEN) && hero.getTagValue(GameTag.NUMBER_OF_ATTACKS) > 0) {
+		if (hero.hasTag(GameTag.FROZEN) && hero.getTagValue(GameTag.NUMBER_OF_ATTACKS) > 0) {
 			hero.removeTag(GameTag.FROZEN);
 		}
 		for (Minion minion : player.getMinions()) {
 			minion.removeTag(GameTag.TEMPORARY_ATTACK_BONUS);
 			minion.removeTag(GameTag.CANNOT_REDUCE_HP_BELOW_1);
-			if (minion.hasStatus(GameTag.FROZEN) && minion.getTagValue(GameTag.NUMBER_OF_ATTACKS) > 0) {
+			if (minion.hasTag(GameTag.FROZEN) && minion.getTagValue(GameTag.NUMBER_OF_ATTACKS) > 0) {
 				minion.removeTag(GameTag.FROZEN);
 			}
 		}
@@ -537,7 +537,7 @@ public class GameLogic implements Cloneable {
 		}
 		context.getEnvironment().remove(Environment.TARGET_OVERRIDE);
 
-		if (attacker.hasStatus(GameTag.FUMBLE) && randomBool()) {
+		if (attacker.hasTag(GameTag.FUMBLE) && randomBool()) {
 			log("{} fumbled and hits another target", attacker);
 			target = getAnotherRandomTarget(player, attacker, defender, EntityReference.ENEMY_CHARACTERS);
 		}
@@ -546,7 +546,7 @@ public class GameLogic implements Cloneable {
 			log("Target of attack was changed! New Target: {}", target);
 		}
 
-		if (attacker.hasStatus(GameTag.IMMUNE_WHILE_ATTACKING)) {
+		if (attacker.hasTag(GameTag.IMMUNE_WHILE_ATTACKING)) {
 			applyTag(attacker, GameTag.IMMUNE);
 		}
 
@@ -569,7 +569,7 @@ public class GameLogic implements Cloneable {
 		if (defenderDamage > 0) {
 			damage(player, attacker, defenderDamage, target);
 		}
-		if (attacker.hasStatus(GameTag.IMMUNE_WHILE_ATTACKING)) {
+		if (attacker.hasTag(GameTag.IMMUNE_WHILE_ATTACKING)) {
 			attacker.removeTag(GameTag.IMMUNE);
 		}
 
@@ -689,12 +689,12 @@ public class GameLogic implements Cloneable {
 	}
 
 	private void handleEnrage(Actor entity) {
-		if (!entity.hasStatus(GameTag.ENRAGABLE)) {
+		if (!entity.hasTag(GameTag.ENRAGABLE)) {
 			return;
 		}
 		boolean enraged = entity.getHp() < entity.getMaxHp();
 		// enrage state has not changed; do nothing
-		if (entity.hasStatus(GameTag.ENRAGED) == enraged) {
+		if (entity.hasTag(GameTag.ENRAGED) == enraged) {
 			return;
 		}
 
@@ -710,11 +710,11 @@ public class GameLogic implements Cloneable {
 	}
 
 	public boolean hasTag(Player player, GameTag tag) {
-		if (player.getHero().hasStatus(tag)) {
+		if (player.getHero().hasTag(tag)) {
 			return true;
 		}
 		for (Entity minion : player.getMinions()) {
-			if (minion.hasStatus(tag)) {
+			if (minion.hasTag(tag)) {
 				return true;
 			}
 		}
@@ -936,7 +936,7 @@ public class GameLogic implements Cloneable {
 		if (card.getCardType() == CardType.SPELL) {
 			GameEvent spellCastedEvent = new SpellCastedEvent(context, playerId, card);
 			context.fireGameEvent(spellCastedEvent, TriggerLayer.SECRET);
-			if (!card.hasStatus(GameTag.COUNTERED)) {
+			if (!card.hasTag(GameTag.COUNTERED)) {
 				context.fireGameEvent(spellCastedEvent);
 			} else {
 				log("{} was countered!", card.getName());
@@ -991,9 +991,9 @@ public class GameLogic implements Cloneable {
 
 	public void refreshAttacksPerRound(Entity entity) {
 		int attacks = 1;
-		if (entity.hasStatus(GameTag.WINDFURY)) {
+		if (entity.hasTag(GameTag.WINDFURY)) {
 			attacks = 2;
-		} else if (entity.hasStatus(GameTag.MEGA_WINDFURY)) {
+		} else if (entity.hasTag(GameTag.MEGA_WINDFURY)) {
 			attacks = 4;
 		}
 		entity.setTag(GameTag.NUMBER_OF_ATTACKS, attacks);
@@ -1230,7 +1230,7 @@ public class GameLogic implements Cloneable {
 
 		applyTag(minion, GameTag.SUMMONING_SICKNESS);
 		refreshAttacksPerRound(minion);
-		if (player.getHero().hasStatus(GameTag.CANNOT_REDUCE_HP_BELOW_1)) {
+		if (player.getHero().hasTag(GameTag.CANNOT_REDUCE_HP_BELOW_1)) {
 			minion.setTag(GameTag.CANNOT_REDUCE_HP_BELOW_1);
 		}
 

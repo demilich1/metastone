@@ -125,15 +125,6 @@ public class SpellUtils {
 		return count;
 	}
 	
-	public static boolean hasMinionOfRace(Player player, Race race) {
-		for (Minion minion : player.getMinions()) {
-			if (minion.getRace() == race) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
 	public static boolean holdsCardOfType(Player player, CardType cardType) {
 		for (Card card : player.getHand()) {
 			if (card.getCardType() == cardType) {

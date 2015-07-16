@@ -60,18 +60,18 @@ public class MinionToken extends GameToken {
 	}
 	
 	private void visualizeStatus(Minion minion) {
-		taunt.setVisible(minion.hasStatus(GameTag.TAUNT));
-		defaultToken.setVisible(!minion.hasStatus(GameTag.TAUNT));
-		divineShield.setVisible(minion.hasStatus(GameTag.DIVINE_SHIELD));
-		windfury.setVisible(minion.hasStatus(GameTag.WINDFURY));
+		taunt.setVisible(minion.hasTag(GameTag.TAUNT));
+		defaultToken.setVisible(!minion.hasTag(GameTag.TAUNT));
+		divineShield.setVisible(minion.hasTag(GameTag.DIVINE_SHIELD));
+		windfury.setVisible(minion.hasTag(GameTag.WINDFURY));
 		deathrattle.setVisible(minion.hasTag(GameTag.DEATHRATTLES));
-		frozen.setVisible(minion.hasStatus(GameTag.FROZEN));
+		frozen.setVisible(minion.hasTag(GameTag.FROZEN));
 		visualizeStealth(minion);
 	}
 	
 	private void visualizeStealth(Minion minion) {
-		Node token = minion.hasStatus(GameTag.TAUNT) ? taunt : defaultToken;
-		token.setOpacity(minion.hasStatus(GameTag.STEALTH) ? 0.5 : 1);
+		Node token = minion.hasTag(GameTag.TAUNT) ? taunt : defaultToken;
+		token.setOpacity(minion.hasTag(GameTag.STEALTH) ? 0.5 : 1);
 	}
 
 }

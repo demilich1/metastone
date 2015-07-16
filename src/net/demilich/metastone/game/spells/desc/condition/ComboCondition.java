@@ -13,7 +13,7 @@ public class ComboCondition extends Condition {
 
 	@Override
 	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity target) {
-		return player.getHero().hasStatus(GameTag.COMBO);
+		return player.getHero().hasTag(GameTag.COMBO);
 	}
 
 }

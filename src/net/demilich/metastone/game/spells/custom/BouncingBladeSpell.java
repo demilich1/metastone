@@ -26,7 +26,7 @@ public class BouncingBladeSpell extends DamageSpell {
 				return false;
 			}
 
-			if (actor.hasStatus(GameTag.CANNOT_REDUCE_HP_BELOW_1) && actor.getHp() == 1) {
+			if (actor.hasTag(GameTag.CANNOT_REDUCE_HP_BELOW_1) && actor.getHp() == 1) {
 				return false;
 			}
 
@@ -50,7 +50,7 @@ public class BouncingBladeSpell extends DamageSpell {
 
 		// player has commanding shout active; check if there are targets with
 		// >1 hp
-		if (player.getHero().hasStatus(GameTag.CANNOT_REDUCE_HP_BELOW_1)) {
+		if (player.getHero().hasTag(GameTag.CANNOT_REDUCE_HP_BELOW_1)) {
 			boolean validTargets = false;
 			for (Minion minion : player.getMinions()) {
 				if (minion.getHp() > 1) {

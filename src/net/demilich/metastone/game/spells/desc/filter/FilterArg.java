@@ -7,5 +7,7 @@ public enum FilterArg {
 	OPERATION,
 	ATTRIBUTE,
 	DAMAGED,
-	CARD_TYPE
+	CARD_TYPE,
+	RARITY,
+	MANA_COST
 }

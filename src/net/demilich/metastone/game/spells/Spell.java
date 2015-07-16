@@ -48,6 +48,8 @@ public abstract class Spell {
 			break;
 		case OWNER:
 			onCast(context, context.getPlayer(target.getOwner()), desc, source, target);
+		case ACTIVE:
+			onCast(context, context.getActivePlayer(), desc, source, target);
 		default:
 			break;
 		}

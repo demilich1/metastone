@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.cards.CardType;
+import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.entities.minions.RelativeToSource;
@@ -59,6 +60,8 @@ public class ParseUtils {
 			return spellParser.deserialize(entry, SpellDesc.class, null);
 		case ATTRIBUTE:
 			return Enum.valueOf(GameTag.class, entry.getAsString());
+		case RARITY:
+			return Enum.valueOf(Rarity.class, entry.getAsString());
 		case BOARD_POSITION_RELATIVE:
 			return Enum.valueOf(RelativeToSource.class, entry.getAsString());
 		case CARD_LOCATION:

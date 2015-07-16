@@ -41,7 +41,7 @@ public abstract class PlayCardAction extends GameAction {
 		try {
 			context.getLogic().playCard(playerId, getCardReference());
 			// card was countered, do not actually resolve its effects
-			if (!card.hasStatus(GameTag.COUNTERED)) {
+			if (!card.hasTag(GameTag.COUNTERED)) {
 				play(context, playerId);
 			}
 

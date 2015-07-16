@@ -1,0 +1,22 @@
+{
+  "baseAttack": 4,
+  "baseHp": 3,
+  "battlecry": {
+    "spell": {
+      "class": "StealRandomSecretSpell"
+    },
+    "resolvedLate": false
+  },
+  "id": "minion_kezan_mystic",
+  "name": "Kezan Mystic",
+  "description": "Battlecry: Take control of a random enemy Secret.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "RARE",
+  "baseManaCost": 4,
+  "collectible": true,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "fileFormatVersion": 1
+}

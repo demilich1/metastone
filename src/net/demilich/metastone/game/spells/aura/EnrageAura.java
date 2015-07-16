@@ -32,7 +32,7 @@ public class EnrageAura extends Aura {
 	@Override
 	public void onGameEvent(GameEvent event) {
 		if (event.getEventType() == GameEventType.ENRAGE_CHANGED) {
-			active = event.getEventTarget().hasStatus(GameTag.ENRAGED);
+			active = event.getEventTarget().hasTag(GameTag.ENRAGED);
 		}
 		super.onGameEvent(event);
 	}

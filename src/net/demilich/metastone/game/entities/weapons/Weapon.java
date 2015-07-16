@@ -44,12 +44,12 @@ public class Weapon extends Actor {
 	}
 
 	public boolean isBroken() {
-		return !hasStatus(GameTag.HP) || getTagValue(GameTag.ATTACK) <= 0;
+		return !hasTag(GameTag.HP) || getTagValue(GameTag.ATTACK) <= 0;
 	}
 
 	@Override
 	public boolean isDead() {
-		return hasStatus(GameTag.DEAD) || isBroken();
+		return hasTag(GameTag.DEAD) || isBroken();
 	}
 
 	public void onEquip(GameContext context, Player player) {

@@ -22,11 +22,11 @@ public class AttributeCounter extends ValueProvider {
 		int count = 0;
 		GameTag attribute = (GameTag) desc.get(ValueProviderArg.ATTRIBUTE);
 		for (Entity entity : relevantEntities) {
-			if (entity.hasStatus(attribute)) {
+			if (entity.hasTag(attribute)) {
 				count++;
 			}
 		}
-		int multiplier = desc.getInt(ValueProviderArg.MULTIPLIER);
+		int multiplier = desc.contains(ValueProviderArg.MULTIPLIER) ? desc.getInt(ValueProviderArg.MULTIPLIER) : 1;
 		return count * multiplier;
 	}
 

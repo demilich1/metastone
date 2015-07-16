@@ -38,6 +38,8 @@ public class MinionSummonedTrigger extends GameEventTrigger {
 		case SELF:
 		case OWNER:
 			return summonEvent.getMinion().getOwner() == getOwner();
+		case ACTIVE:
+			return summonEvent.getMinion().getOwner() == event.getGameContext().getActivePlayerId();
 		}
 		return false;
 	}
