@@ -1,0 +1,30 @@
+{
+  "baseAttack": 2,
+  "baseHp": 5,
+  "race": "MECH",
+  "battlecry": {
+    "spell": {
+      "class": "BuffSpell",
+	  "attackBonus" : 2,
+	  "hpBonus" : 2,
+	  "filter" : {
+		"class" : "RaceFilter",
+		"race" : "MECH"
+	  }
+    },
+    "targetSelection": "FRIENDLY_MINIONS",
+    "resolvedLate": false
+  },
+  "id": "minion_screwjank_clunker",
+  "name": "Screwjank Clunker",
+  "description": "Enrage: +1 Attack.Battlecry: Give a friendly Mech +2/+2.",
+  "type": "MINION",
+  "heroClass": "WARRIOR",
+  "rarity": "RARE",
+  "baseManaCost": 4,
+  "collectible": true,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "fileFormatVersion": 1
+}

@@ -1,0 +1,27 @@
+{
+	"name": "Ogre Warmaul",
+	"description": "50% chance to attack the wrong enemy.",
+	"trigger" : {
+	"eventTrigger" : {
+		"class" : "TargetAcquisitionTrigger",
+		"actionType" : "PHYSICAL_ATTACK",
+		"entityType" : "HERO",
+		"condition" : {
+			"class" : "RandomCondition"
+		}
+	},
+	"spell" : {
+		"class" : "FumbleSpell",
+		"target" : "EVENT_TARGET"
+	}
+  },
+	"collectible": true,
+	"id": "weapon_ogre_warmaul",
+	"type": "WEAPON",
+	"rarity": "COMMON",
+	"heroClass": "WARRIOR",
+	"baseManaCost": 3,
+	"damage": 4,
+	"durability": 2,
+	"fileFormatVersion": 1
+}

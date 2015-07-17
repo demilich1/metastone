@@ -5,6 +5,7 @@ import java.util.Map;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -22,8 +23,9 @@ public class ShuffleToDeckSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		Card targetCard = (Card) desc.get(SpellArg.CARD);
-		shuffleToDeck(player, targetCard);
+		String cardId = (String) desc.get(SpellArg.CARD);
+		Card card = CardCatalogue.getCardById(cardId);
+		shuffleToDeck(player, card);
 	}
 
 	private void shuffleToDeck(Player player, Card card) {

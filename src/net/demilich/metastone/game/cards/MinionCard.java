@@ -19,7 +19,7 @@ public class MinionCard extends Card {
 	private static final Set<GameTag> inheritedAttributes = new HashSet<GameTag>(Arrays.asList(new GameTag[] { GameTag.STEALTH,
 			GameTag.CANNOT_ATTACK, GameTag.TAUNT, GameTag.UNTARGETABLE_BY_SPELLS, GameTag.CHARGE, GameTag.DIVINE_SHIELD, GameTag.WINDFURY,
 			GameTag.MEGA_WINDFURY, GameTag.SPELL_DAMAGE, GameTag.ATTACK_EQUALS_HP, GameTag.INVERT_HEALING,
-			GameTag.SPELL_AMPLIFY_MULTIPLIER, GameTag.ENRAGABLE, GameTag.DOUBLE_DEATHRATTLES, GameTag.FUMBLE
+			GameTag.SPELL_AMPLIFY_MULTIPLIER, GameTag.ENRAGABLE, GameTag.DOUBLE_DEATHRATTLES
 
 	}));
 

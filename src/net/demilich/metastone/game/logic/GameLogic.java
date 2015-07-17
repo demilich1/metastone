@@ -61,6 +61,7 @@ import net.demilich.metastone.game.spells.SpellUtils;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.SpellFactory;
+import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
 import net.demilich.metastone.game.spells.trigger.IGameEventListener;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 import net.demilich.metastone.game.spells.trigger.TriggerLayer;
@@ -537,10 +538,10 @@ public class GameLogic implements Cloneable {
 		}
 		context.getEnvironment().remove(Environment.TARGET_OVERRIDE);
 
-		if (attacker.hasTag(GameTag.FUMBLE) && randomBool()) {
-			log("{} fumbled and hits another target", attacker);
-			target = getAnotherRandomTarget(player, attacker, defender, EntityReference.ENEMY_CHARACTERS);
-		}
+//		if (attacker.hasTag(GameTag.FUMBLE) && randomBool()) {
+//			log("{} fumbled and hits another target", attacker);
+//			target = getAnotherRandomTarget(player, attacker, defender, EntityReference.ENEMY_CHARACTERS);
+//		}
 
 		if (target != defender) {
 			log("Target of attack was changed! New Target: {}", target);
@@ -979,8 +980,9 @@ public class GameLogic implements Cloneable {
 			log("{} receives card {}", player.getName(), card);
 			hand.add(card);
 			card.setLocation(CardLocation.HAND);
-			if (card instanceof IGameEventListener) {
-				addGameEventListener(player, (IGameEventListener) card, card);
+			if (card.getTag(GameTag.PASSIVE_TRIGGER) != null) {
+				TriggerDesc triggerDesc = (TriggerDesc) card.getTag(GameTag.PASSIVE_TRIGGER);
+				addGameEventListener(player, triggerDesc.create(), card);
 			}
 			context.fireGameEvent(new ReceiveCardEvent(context, playerId, card));
 		} else {
@@ -1002,7 +1004,7 @@ public class GameLogic implements Cloneable {
 	public void removeCard(int playerId, Card card) {
 		Player player = context.getPlayer(playerId);
 		card.setLocation(CardLocation.VOID);
-		if (card instanceof IGameEventListener) {
+		if (card.getTag(GameTag.PASSIVE_TRIGGER) != null) {
 			removeSpelltriggers(card);
 		}
 		player.getHand().remove(card);

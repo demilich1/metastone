@@ -12,6 +12,7 @@ import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 public abstract class Spell {
 
 	public void cast(GameContext context, Player player, SpellDesc desc, Entity source, List<Entity> targets) {
+		// no target specified, cast the spell once with target NULL
 		if (targets == null) {
 			castForPlayer(context, player, desc, source, null);
 			return;
@@ -19,10 +20,12 @@ public abstract class Spell {
 		
 		EntityFilter targetFilter = desc.getEntityFilter();
 		List<Entity> validTargets = SpellUtils.getValidTargets(targets, targetFilter);
+		// there is at least one valid target and the RANDOM_TARGET flag is set, pick one randomly
 		if (validTargets.size() > 0 && desc.getBool(SpellArg.RANDOM_TARGET)) {
 			Entity target = SpellUtils.getRandomTarget(validTargets);
 			castForPlayer(context, player, desc, source, target);
 		} else {
+			// there is at least one target and RANDOM_TARGET flag is not set, cast in on all targets
 			for (Entity target : validTargets) {
 				castForPlayer(context, player, desc, source, target);
 			}

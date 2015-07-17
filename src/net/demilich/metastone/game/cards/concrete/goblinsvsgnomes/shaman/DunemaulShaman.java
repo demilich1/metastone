@@ -23,7 +23,8 @@ public class DunemaulShaman extends MinionCard {
 
 	@Override
 	public Minion summon() {
-		Minion dunemaulShaman = createMinion(GameTag.WINDFURY, GameTag.FUMBLE);
+		//Minion dunemaulShaman = createMinion(GameTag.WINDFURY, GameTag.FUMBLE);
+		Minion dunemaulShaman = createMinion(GameTag.WINDFURY);
 		return dunemaulShaman;
 	}
 }

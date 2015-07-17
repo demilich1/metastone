@@ -46,6 +46,10 @@ public abstract class Card extends Entity {
 		if (desc.manaCostModifier != null) {
 			manaCostModifier = desc.manaCostModifier.create();
 		}
+		
+		if (desc.passiveTrigger != null) {
+			tags.put(GameTag.PASSIVE_TRIGGER, desc.passiveTrigger);
+		}
 	}
 	
 	public Card(String name, CardType cardType, Rarity rarity, HeroClass classRestriction, int manaCost) {

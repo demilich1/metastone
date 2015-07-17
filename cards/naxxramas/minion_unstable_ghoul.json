@@ -3,6 +3,7 @@
 	"baseHp": 3,
 	"deathrattle": {
 		"class": "DamageSpell",
+		"value" : 1,
 		"target": "ALL_MINIONS"
 	},
 	"id": "minion_unstable_ghoul",
