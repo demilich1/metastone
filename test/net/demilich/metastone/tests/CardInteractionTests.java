@@ -5,6 +5,8 @@ import org.testng.annotations.Test;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.SpellCard;
@@ -158,6 +160,52 @@ public class CardInteractionTests extends TestBase {
 		// deathrattles
 		Assert.assertEquals(paladin.getMinions().size(), 0);
 		Assert.assertEquals(warrior.getMinions().size(), 0);
+	}
+	
+	@Test
+	public void testAttackBuffStacking() {
+		GameContext context = createContext(HeroClass.HUNTER, HeroClass.WARRIOR);
+		Player hunter = context.getPlayer1();
+		
+		// summon Ghaz'rilla
+		MinionCard gahzrillaCard = (MinionCard) CardCatalogue.getCardById("minion_gahzrilla");
+		Minion gahzrilla = playMinionCard(context, hunter, gahzrillaCard);
+		Assert.assertEquals(gahzrilla.getAttack(), 6);
+		Assert.assertEquals(gahzrilla.getHp(), 9);
+		
+		// buff it with 'Charge' spell
+		Card chargeCard = CardCatalogue.getCardById("spell_charge");
+		context.getLogic().receiveCard(hunter.getId(), chargeCard);
+		GameAction action = chargeCard.play();
+		action.setTarget(gahzrilla);
+		context.getLogic().performGameAction(hunter.getId(), action);
+		Assert.assertEquals(gahzrilla.getAttack(), 8);
+		Assert.assertEquals(gahzrilla.getHp(), 9);
+		
+		// buff it with 'Cruel Taskmaster' spell
+		Card cruelTaskmasterCard = CardCatalogue.getCardById("minion_cruel_taskmaster");
+		context.getLogic().receiveCard(hunter.getId(), cruelTaskmasterCard);
+		action = cruelTaskmasterCard.play();
+		action.setTarget(gahzrilla);
+		context.getLogic().performGameAction(hunter.getId(), action);
+		Assert.assertEquals(gahzrilla.getAttack(), 20);
+		Assert.assertEquals(gahzrilla.getHp(), 8);
+		
+		context.getLogic().destroy((Actor)find(context, "minion_cruel_taskmaster"));
+		
+		// buff it with 'Abusive Sergeant' spell
+		Card abusiveSergeant = CardCatalogue.getCardById("minion_abusive_sergeant");
+		context.getLogic().receiveCard(hunter.getId(), abusiveSergeant);
+		action = abusiveSergeant.play();
+		action.setTarget(gahzrilla);
+		context.getLogic().performGameAction(hunter.getId(), action);
+		Assert.assertEquals(gahzrilla.getAttack(), 22);
+		Assert.assertEquals(gahzrilla.getHp(), 8);
+		
+		context.endTurn();
+		context.endTurn();
+		Assert.assertEquals(gahzrilla.getAttack(), 20);
+		Assert.assertEquals(gahzrilla.getHp(), 8);
 	}
 
 }

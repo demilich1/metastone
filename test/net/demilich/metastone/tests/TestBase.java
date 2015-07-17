@@ -115,5 +115,16 @@ public class TestBase {
 		context.getLogic().performGameAction(player.getId(), minionCard.play());
 		return getSummonedMinion(player.getMinions());
 	}
+	
+	protected static Entity find(GameContext context, String cardId) {
+		for (Player player : context.getPlayers()) {
+			for(Minion minion : player.getMinions()) {
+				if (minion.getSourceCard().getCardId().equals(cardId)) {
+					return minion;
+				}
+			}
+		}
+		return null;
+	}
 
 }
