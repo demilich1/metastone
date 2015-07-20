@@ -1,0 +1,18 @@
+{
+  "baseAttack": 9,
+  "baseHp": 7,
+  "race": "BEAST",
+  "deathrattle": {
+    "class": "ShuffleMinionToDeckSpell",
+	"target" : "SELF"
+  },
+  "id": "minion_malorne",
+  "name": "Malorne",
+  "description": "Deathrattle: Shuffle this minion into your deck.",
+  "type": "MINION",
+  "heroClass": "DRUID",
+  "rarity": "LEGENDARY",
+  "baseManaCost": 7,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

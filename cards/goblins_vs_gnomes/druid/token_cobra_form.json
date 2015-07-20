@@ -1,0 +1,14 @@
+{
+  "baseAttack": 7,
+  "baseHp": 7,
+  "race": "BEAST",
+  "id": "token_cobra_form",
+  "name": "Druid Of The Fang (Cobra Form)",
+  "description": "",
+  "type": "MINION",
+  "heroClass": "DRUID",
+  "rarity": "COMMON",
+  "baseManaCost": 5,
+  "collectible": false,
+  "fileFormatVersion": 1
+}
