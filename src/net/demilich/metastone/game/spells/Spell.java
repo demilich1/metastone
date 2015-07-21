@@ -53,6 +53,8 @@ public abstract class Spell {
 			onCast(context, context.getPlayer(target.getOwner()), desc, source, target);
 		case ACTIVE:
 			onCast(context, context.getActivePlayer(), desc, source, target);
+		case INACTIVE:
+			onCast(context, context.getOpponent(context.getActivePlayer()), desc, source, target);
 		default:
 			break;
 		}

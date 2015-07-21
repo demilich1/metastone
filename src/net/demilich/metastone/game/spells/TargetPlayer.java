@@ -5,5 +5,6 @@ public enum TargetPlayer {
 	OPPONENT,
 	BOTH,
 	OWNER,
-	ACTIVE
+	ACTIVE,
+	INACTIVE
 }

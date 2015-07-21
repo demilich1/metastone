@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.spells.desc.valueprovider;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.demilich.metastone.game.GameContext;
@@ -10,7 +11,7 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class AttributeValueProvider extends ValueProvider {
-	
+
 	public AttributeValueProvider(ValueProviderDesc desc) {
 		super(desc);
 	}
@@ -19,13 +20,20 @@ public class AttributeValueProvider extends ValueProvider {
 	protected int provideValue(GameContext context, Player player, Entity target) {
 		EntityReference sourceReference = (EntityReference) desc.get(ValueProviderArg.SOURCE);
 		GameTag attribute = (GameTag) desc.get(ValueProviderArg.ATTRIBUTE);
-		List<Entity> entities = context.resolveTarget(player, (Actor)target, sourceReference);
+		List<Entity> entities = null;
+		if (sourceReference != null) {
+			entities = context.resolveTarget(player, (Actor) target, sourceReference);
+		} else {
+			entities = new ArrayList<>();
+			entities.add(target);
+		}
+
 		if (entities == null) {
 			return 0;
 		}
 		int value = 0;
 		for (Entity entity : entities) {
-			Actor source = (Actor) entity;	
+			Actor source = (Actor) entity;
 			if (attribute == GameTag.ATTACK) {
 				value += source.getAttack();
 			} else {

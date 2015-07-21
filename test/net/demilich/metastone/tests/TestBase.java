@@ -79,6 +79,17 @@ public class TestBase {
 		return context;
 	}
 	
+	protected static Entity find(GameContext context, String cardId) {
+		for (Player player : context.getPlayers()) {
+			for(Minion minion : player.getMinions()) {
+				if (minion.getSourceCard().getCardId().equals(cardId)) {
+					return minion;
+				}
+			}
+		}
+		return null;
+	}
+
 	protected static HeroCard getHeroCardForClass(HeroClass heroClass) {
 		for(Card card : CardCatalogue.query(CardType.HERO)) {
 			HeroCard heroCard = (HeroCard) card;
@@ -109,22 +120,11 @@ public class TestBase {
 		context.getLogic().receiveCard(player.getId(), card);
 		context.getLogic().performGameAction(player.getId(), card.play());
 	}
-
+	
 	protected static Minion playMinionCard(GameContext context, Player player, MinionCard minionCard) {
 		context.getLogic().receiveCard(player.getId(), minionCard);
 		context.getLogic().performGameAction(player.getId(), minionCard.play());
 		return getSummonedMinion(player.getMinions());
-	}
-	
-	protected static Entity find(GameContext context, String cardId) {
-		for (Player player : context.getPlayers()) {
-			for(Minion minion : player.getMinions()) {
-				if (minion.getSourceCard().getCardId().equals(cardId)) {
-					return minion;
-				}
-			}
-		}
-		return null;
 	}
 
 }

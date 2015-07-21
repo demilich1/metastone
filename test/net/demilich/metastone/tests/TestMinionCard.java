@@ -30,18 +30,18 @@ public class TestMinionCard extends MinionCard {
 		this.minion = createMinion();
 	}
 
-	public Actor getMinion() {
-		return minion;
-	}
-
-	@Override
-	public Minion summon() {
-		return minion.clone();
-	}
-	
 	@Override
 	public String getCardId() {
 		return "minion_test";
+	}
+
+	public Actor getMinion() {
+		return minion;
+	}
+	
+	@Override
+	public Minion summon() {
+		return minion.clone();
 	}
 
 }

@@ -8,7 +8,7 @@
 		},
 		"spell": {
 			"class": "CopyPlayedCardSpell",
-			"targetPlayer": "OPPONENT",
+			"targetPlayer": "INACTIVE",
 			"target": "EVENT_TARGET"
 		}
 	},

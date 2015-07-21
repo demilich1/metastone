@@ -23,7 +23,7 @@ public class CardPropertyCondition extends Condition {
 			card = actor.getSourceCard();
 		}
 		
-		if (card == null || card.getCardId() == null) {
+		if (card == null) {
 			return false;
 		}
 		
@@ -32,8 +32,8 @@ public class CardPropertyCondition extends Condition {
 			return false;
 		}
 		
-		String cardName = (String) desc.get(ConditionArg.CARD_ID);
-		if (cardName != null && !card.getCardId().contains(cardName)) {
+		String cardId = (String) desc.get(ConditionArg.CARD_ID);
+		if (cardId != null && !card.getCardId().contains(cardId)) {
 			return false;
 		}
 		

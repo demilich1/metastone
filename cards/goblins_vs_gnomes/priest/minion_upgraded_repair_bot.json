@@ -1,0 +1,29 @@
+{
+  "baseAttack": 5,
+  "baseHp": 5,
+  "race": "MECH",
+  "battlecry": {
+    "spell": {
+      "class": "BuffSpell",
+	  "hpBonus" : 4,
+	  "filter" : {
+		"class" : "RaceFilter",
+		"race" : "MECH"
+	  }
+    },
+    "targetSelection": "FRIENDLY_MINIONS",
+    "resolvedLate": false
+  },
+  "id": "minion_upgraded_repair_bot",
+  "name": "Upgraded Repair Bot",
+  "description": "Battlecry: Give a friendly Mech +4 Health",
+  "type": "MINION",
+  "heroClass": "PRIEST",
+  "rarity": "RARE",
+  "baseManaCost": 5,
+  "collectible": true,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "fileFormatVersion": 1
+}

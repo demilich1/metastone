@@ -1,0 +1,20 @@
+{
+  "targetSelection": "NONE",
+  "spell": {
+    "class": "DamageSpell",
+	"valueProvider" : {
+		"class" : "AttributeValueProvider",
+		"attribute" : "ATTACK"
+	},
+	"target" : "ALL_MINIONS"
+  },
+  "id": "spell_lightbomb",
+  "name": "Lightbomb",
+  "description": "Deal damage to each minion equal to its Attack.",
+  "type": "SPELL",
+  "heroClass": "PRIEST",
+  "rarity": "EPIC",
+  "baseManaCost": 6,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

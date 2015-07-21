@@ -1,0 +1,26 @@
+{
+  "baseAttack": 4,
+  "baseHp": 1,
+  "trigger": {
+		"eventTrigger": {
+			"class": "MinionSummonedTrigger",
+			"targetPlayer": "SELF",
+			"race" : "PIRATE"
+		},
+		"spell": {
+			"class": "AddAttributeSpell",
+			"attribute": "STEALTH",
+			"target": "SELF"
+		}
+	},
+  "race": "PIRATE",
+  "id": "minion_one-eyed_cheat",
+  "name": "One-eyed Cheat",
+  "description": "Whenever you summon a Pirate, gain Stealth.",
+  "type": "MINION",
+  "heroClass": "ROGUE",
+  "rarity": "RARE",
+  "baseManaCost": 2,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

@@ -8,14 +8,14 @@ import net.demilich.metastone.game.cards.desc.Desc;
 
 public class FilterDesc extends Desc<FilterArg> {
 
-	public FilterDesc(Map<FilterArg, Object> arguments) {
-		super(arguments);
-	}
-
 	public static Map<FilterArg, Object> build(Class<? extends EntityFilter> filterClass) {
 		final Map<FilterArg, Object> arguments = new EnumMap<>(FilterArg.class);
 		arguments.put(FilterArg.CLASS, filterClass);
 		return arguments;
+	}
+
+	public FilterDesc(Map<FilterArg, Object> arguments) {
+		super(arguments);
 	}
 
 	public EntityFilter create() {

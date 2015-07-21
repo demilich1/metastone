@@ -3,7 +3,8 @@
 	"baseHp": 5,
 	"battlecry": {
 		"spell": {
-			"class": "AddSpellPowerSpell",
+			"class": "ModifyAttributeSpell",
+			"attribute" : "SPELL_DAMAGE",
 			"value": 1,
 			"target": "ADJACENT_MINIONS"
 		},
