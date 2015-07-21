@@ -5,7 +5,7 @@
 		"class": "ConditionalSpell",
 		"condition": {
 			"class": "GraveyardContainsCondition",
-			"cardName": "minion_stalagg"
+			"cardId": "minion_stalagg"
 		},
 		"spell1": {
 			"class": "SummonSpell",

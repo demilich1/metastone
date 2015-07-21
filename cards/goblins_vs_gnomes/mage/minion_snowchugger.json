@@ -1,0 +1,25 @@
+{
+  "baseAttack": 2,
+  "baseHp": 3,
+  "trigger": {
+		"eventTrigger": {
+			"class": "DamageCausedTrigger",
+			"worksOnHero": true
+		},
+		"spell": {
+			"class": "AddAttributeSpell",
+			"attribute": "FROZEN",
+			"target": "EVENT_TARGET"
+		}
+	},
+  "race": "MECH",
+  "id": "minion_snowchugger",
+  "name": "Snowchugger",
+  "description": "Freeze any character damaged by this minion.",
+  "type": "MINION",
+  "heroClass": "MAGE",
+  "rarity": "COMMON",
+  "baseManaCost": 2,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

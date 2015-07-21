@@ -16,7 +16,7 @@ public class CastRepeatedlySpell extends Spell {
 		if (target == null) {
 			return;
 		}
-		int iterations = desc.getInt(SpellArg.HOW_MANY);
+		int iterations = desc.getInt(SpellArg.HOW_MANY, 0);
 		SpellDesc spell = (SpellDesc) desc.get(SpellArg.SPELL_1);
 		Condition condition = (Condition) desc.get(SpellArg.CONDITION);
 		for (int i = 0; i < iterations; i++) {

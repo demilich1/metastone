@@ -33,7 +33,7 @@ public class ReturnMinionToHandSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		int manaCostModifier = desc.getInt(SpellArg.MANA_MODIFIER);
+		int manaCostModifier = desc.getInt(SpellArg.MANA_MODIFIER, 0);
 		Minion minion = (Minion) target;
 		Player owner = context.getPlayer(minion.getOwner());
 		logger.debug("{} is returned to {}'s hand", minion, owner.getName());

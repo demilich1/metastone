@@ -61,8 +61,8 @@ public class SpellDesc extends CustomCloneable {
 		return (EntityFilter) get(SpellArg.FILTER);
 	}
 	
-	public int getInt(SpellArg spellArg) {
-		return arguments.containsKey(spellArg) ? (int) get(spellArg) : 0;
+	public int getInt(SpellArg spellArg, int defaultValue) {
+		return arguments.containsKey(spellArg) ? (int) get(spellArg) : defaultValue;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -79,9 +79,9 @@ public class SpellDesc extends CustomCloneable {
 	}
 
 	public int getValue() {
-		return getInt(SpellArg.VALUE);
+		return getInt(SpellArg.VALUE, 0);
 	}
-
+	
 	public ValueProvider getValueProvider() {
 		return (ValueProvider) get(SpellArg.VALUE_PROVIDER);
 	}

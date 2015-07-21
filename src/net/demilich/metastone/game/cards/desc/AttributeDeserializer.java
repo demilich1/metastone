@@ -37,6 +37,7 @@ public class AttributeDeserializer implements JsonDeserializer<Map<GameTag, Obje
 		parseAttribute(GameTag.MAX_HP, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(GameTag.BATTLECRY, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(GameTag.DOUBLE_DEATHRATTLES, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(GameTag.HERO_POWER_CAN_TARGET_MINIONS, jsonData, map, ParseValueType.BOOLEAN);
 		return map;
 	}
 

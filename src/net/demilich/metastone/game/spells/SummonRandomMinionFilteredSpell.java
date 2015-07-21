@@ -44,7 +44,7 @@ public class SummonRandomMinionFilteredSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		EntityFilter cardFilter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
-		int boardPosition = desc.contains(SpellArg.BOARD_POSITION_ABSOLUTE) ? desc.getInt(SpellArg.BOARD_POSITION_ABSOLUTE) : -1;
+		int boardPosition = desc.getInt(SpellArg.BOARD_POSITION_ABSOLUTE, -1);
 		MinionCard minionCard = getRandomMatchingMinionCard(cardFilter);
 		context.getLogic().summon(player.getId(), minionCard.summon(), null, boardPosition, false);
 	}

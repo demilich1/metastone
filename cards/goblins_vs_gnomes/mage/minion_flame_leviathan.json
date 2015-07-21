@@ -1,0 +1,24 @@
+{
+  "baseAttack": 7,
+  "baseHp": 7,
+  "passiveTrigger" : {
+	"eventTrigger" : {
+		"class" : "ThisCardDrawnTrigger"
+	},
+	"spell" : {
+		"class" : "DamageSpell",
+		"value" : 2,
+		"target" : "ALL_CHARACTERS"
+	}
+  },
+  "race": "MECH",
+  "id": "minion_flame_leviathan",
+  "name": "Flame Leviathan",
+  "description": "When you draw this, deal 2 damage to all characters.",
+  "type": "MINION",
+  "heroClass": "MAGE",
+  "rarity": "LEGENDARY",
+  "baseManaCost": 7,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

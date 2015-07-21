@@ -25,7 +25,7 @@ public class MultiTargetDamageSpell extends DamageSpell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int damage = desc.getValue();
-		int targets = desc.getInt(SpellArg.HOW_MANY);
+		int targets = desc.getInt(SpellArg.HOW_MANY, 2);
 		List<Minion> validTargets = new ArrayList<>(context.getOpponent(player).getMinions());
 		for (int i = 0; i < targets; i++) {
 			int randomIndex = ThreadLocalRandom.current().nextInt(validTargets.size());

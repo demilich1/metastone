@@ -24,8 +24,8 @@ public class ImplosionSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		int minDamage = desc.getInt(SpellArg.MIN_DAMAGE);
-		int maxDamage = desc.getInt(SpellArg.MAX_DAMAGE);
+		int minDamage = desc.getInt(SpellArg.MIN_DAMAGE, 0);
+		int maxDamage = desc.getInt(SpellArg.MAX_DAMAGE, 0);
 		int damageRange = maxDamage - minDamage;
 		int damageRoll = minDamage + ThreadLocalRandom.current().nextInt(damageRange + 1);
 

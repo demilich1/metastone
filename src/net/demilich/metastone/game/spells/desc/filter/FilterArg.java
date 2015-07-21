@@ -9,5 +9,6 @@ public enum FilterArg {
 	DAMAGED,
 	CARD_TYPE,
 	RARITY,
-	MANA_COST
+	MANA_COST,
+	CARD_ID
 }

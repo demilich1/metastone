@@ -1,0 +1,18 @@
+{
+  "baseAttack": 2,
+  "baseHp": 5,
+  "aura": {
+		"class": "AttributeAura",
+		"attribute": "UNTARGETABLE_BY_SPELLS",
+		"target": "ADJACENT_MINIONS"
+	},
+  "id": "minion_wee_spellstopper",
+  "name": "Wee Spellstopper",
+  "description": "Adjacent minions can't be targeted by spells or Hero Powers.",
+  "type": "MINION",
+  "heroClass": "MAGE",
+  "rarity": "EPIC",
+  "baseManaCost": 4,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

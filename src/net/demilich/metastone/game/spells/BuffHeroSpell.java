@@ -29,8 +29,8 @@ public class BuffHeroSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Hero hero = (Hero) target;
-		int attackBonus = desc.getInt(SpellArg.ATTACK_BONUS);
-		int armorBonus = desc.getInt(SpellArg.ARMOR_BONUS);
+		int attackBonus = desc.getInt(SpellArg.ATTACK_BONUS, 0);
+		int armorBonus = desc.getInt(SpellArg.ARMOR_BONUS, 0);
 
 		if (attackBonus != 0) {
 			logger.debug("{} gains {} attack", hero, attackBonus);

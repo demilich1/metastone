@@ -30,8 +30,8 @@ public class MissilesSpell extends DamageSpell {
 
 	@Override
 	public void cast(GameContext context, Player player, SpellDesc desc, Entity source, List<Entity> targets) {
-		int missiles = desc.getInt(SpellArg.HOW_MANY);
-		int damage = desc.getInt(SpellArg.VALUE);
+		int missiles = desc.getInt(SpellArg.HOW_MANY, 2);
+		int damage = desc.getInt(SpellArg.VALUE, 1);
 		
 		if (source.getEntityType() == EntityType.CARD && ((Card)source).getCardType() == CardType.SPELL) {
 			missiles = context.getLogic().applySpellpower(player, missiles);

@@ -32,15 +32,15 @@ public class Nefarian extends MinionCard {
 	@Override
 	public Minion summon() {
 		Minion nefarian = createMinion();
-		SpellDesc copyOpponentSpells = DrawCardAndDoSomethingSpell.create((context, player) -> {
-			Player opponent = context.getOpponent(player);
-			return CardCatalogue.query(CardType.SPELL, null, opponent.getHero().getHeroClass()).getRandom();
-		}, (context, player, card) -> {
-			context.getLogic().receiveCard(player.getId(), card);
-		},
-		2);
-		BattlecryAction battlecry = BattlecryAction.createBattlecry(copyOpponentSpells);
-		nefarian.setBattlecry(battlecry);
+//		SpellDesc copyOpponentSpells = DrawCardAndDoSomethingSpell.create((context, player) -> {
+//			Player opponent = context.getOpponent(player);
+//			return CardCatalogue.query(CardType.SPELL, null, opponent.getHero().getHeroClass()).getRandom();
+//		}, (context, player, card) -> {
+//			context.getLogic().receiveCard(player.getId(), card);
+//		},
+//		2);
+//		BattlecryAction battlecry = BattlecryAction.createBattlecry(copyOpponentSpells);
+//		nefarian.setBattlecry(battlecry);
 		return nefarian;
 	}
 }

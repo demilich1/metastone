@@ -28,7 +28,7 @@ public class ModifyDurabilitySpell extends Spell {
 		if (player.getHero().getWeapon() == null) {
 			return;
 		}
-		int durabilityChange = desc.getInt(SpellArg.VALUE); 
+		int durabilityChange = desc.getInt(SpellArg.VALUE, 0); 
 		context.getLogic().modifyDurability(player.getHero().getWeapon(), durabilityChange);
 	}
 

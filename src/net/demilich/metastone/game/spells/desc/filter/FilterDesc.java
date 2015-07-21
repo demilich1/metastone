@@ -4,22 +4,18 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.EnumMap;
 import java.util.Map;
 
-public class FilterDesc {
-	
+import net.demilich.metastone.game.cards.desc.Desc;
+
+public class FilterDesc extends Desc<FilterArg> {
+
+	public FilterDesc(Map<FilterArg, Object> arguments) {
+		super(arguments);
+	}
+
 	public static Map<FilterArg, Object> build(Class<? extends EntityFilter> filterClass) {
 		final Map<FilterArg, Object> arguments = new EnumMap<>(FilterArg.class);
 		arguments.put(FilterArg.CLASS, filterClass);
 		return arguments;
-	}
-
-	private final Map<FilterArg, Object> arguments;
-
-	public FilterDesc(Map<FilterArg, Object> arguments) {
-		this.arguments = arguments;
-	}
-
-	public boolean contains(FilterArg arg) {
-		return arguments.containsKey(arg);
 	}
 
 	public EntityFilter create() {
@@ -33,21 +29,9 @@ public class FilterDesc {
 		return null;
 	}
 
-	public Object get(FilterArg arg) {
-		return arguments.get(arg);
-	}
-
-	public boolean getBool(FilterArg arg) {
-		return arguments.containsKey(arg) ? (boolean) get(arg) : false;
-	}
-
 	@SuppressWarnings("unchecked")
 	public Class<? extends EntityFilter> getFilterClass() {
-		return (Class<? extends EntityFilter>) arguments.get(FilterArg.CLASS);
+		return (Class<? extends EntityFilter>) get(FilterArg.CLASS);
 	}
 
-
-	public int getInt(FilterArg arg) {
-		return arguments.containsKey(arg) ? (int) get(arg) : 0;
-	}
 }

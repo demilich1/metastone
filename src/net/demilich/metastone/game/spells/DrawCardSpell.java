@@ -46,7 +46,7 @@ public class DrawCardSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		int numberOfCards = desc.contains(SpellArg.VALUE) ? desc.getInt(SpellArg.VALUE) : 1;
+		int numberOfCards = desc.getInt(SpellArg.VALUE, 1);
 		ValueProvider drawModifier = desc.getValueProvider();
 		draw(context, player, numberOfCards, drawModifier);
 	}

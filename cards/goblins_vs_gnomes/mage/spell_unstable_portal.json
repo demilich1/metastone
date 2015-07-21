@@ -1,0 +1,20 @@
+{
+  "targetSelection": "NONE",
+  "spell": {
+    "class": "ReceiveRandomCollectibleCardSpell",
+	"cardFilter" : {
+		"class" : "CardFilter",
+		"cardType" : "MINION"
+	},
+	"manaModifier" : -3
+  },
+  "id": "spell_unstable_portal",
+  "name": "Unstable Portal",
+  "description": "Add a random minion to your hand. It costs (3) less.",
+  "type": "SPELL",
+  "heroClass": "MAGE",
+  "rarity": "RARE",
+  "baseManaCost": 2,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

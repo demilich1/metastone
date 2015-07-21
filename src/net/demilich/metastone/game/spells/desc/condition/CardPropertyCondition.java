@@ -32,7 +32,7 @@ public class CardPropertyCondition extends Condition {
 			return false;
 		}
 		
-		String cardName = (String) desc.get(ConditionArg.CARD_NAME);
+		String cardName = (String) desc.get(ConditionArg.CARD_ID);
 		if (cardName != null && !card.getCardId().contains(cardName)) {
 			return false;
 		}

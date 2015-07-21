@@ -1,0 +1,23 @@
+{
+  "targetSelection": "NONE",
+  "spell": {
+    "class": "MetaSpell",
+	"spell1" : {
+		"class" : "SummonSpell",
+		"cards" : ["token_silver_hand_recruit", "token_silver_hand_recruit", "token_silver_hand_recruit"]
+	},
+	"spell2" : {
+		"class" : "EquipWeaponSpell",
+		"card" : "weapon_lights_justice"
+	}
+  },
+  "id": "spell_muster_for_battle",
+  "name": "Muster for Battle",
+  "description": "Summon three 1/1 Silver Hand Recruits. Equip a 1/4 Weapon.",
+  "type": "SPELL",
+  "heroClass": "PALADIN",
+  "rarity": "RARE",
+  "baseManaCost": 3,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

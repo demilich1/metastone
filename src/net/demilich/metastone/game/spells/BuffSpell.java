@@ -62,8 +62,8 @@ public class BuffSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		int attackBonus = desc.getInt(SpellArg.ATTACK_BONUS);
-		int hpBonus = desc.getInt(SpellArg.HP_BONUS);
+		int attackBonus = desc.getInt(SpellArg.ATTACK_BONUS, 0);
+		int hpBonus = desc.getInt(SpellArg.HP_BONUS, 0);
 
 		ValueProvider valueProvider = (ValueProvider) desc.get(SpellArg.VALUE_PROVIDER);
 		ValueProvider attackValueProvider = (ValueProvider) desc.get(SpellArg.ATTACK_VALUE_PROVIDER);

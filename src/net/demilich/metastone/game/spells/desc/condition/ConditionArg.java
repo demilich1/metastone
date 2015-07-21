@@ -11,7 +11,7 @@ public enum ConditionArg {
 	CARD_TYPE,
 	CONDITION_1,
 	CONDITION_2,
-	CARD_NAME,
+	CARD_ID,
 	INVERT,
 	FILTER
 }

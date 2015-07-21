@@ -39,6 +39,7 @@ public class FilterDeserializer implements JsonDeserializer<FilterDesc> {
 		parseArgument(FilterArg.CARD_TYPE, jsonData, arguments, ParseValueType.CARD_TYPE);
 		parseArgument(FilterArg.RARITY, jsonData, arguments, ParseValueType.RARITY);
 		parseArgument(FilterArg.MANA_COST, jsonData, arguments, ParseValueType.INTEGER);
+		parseArgument(FilterArg.CARD_ID, jsonData, arguments, ParseValueType.STRING);
 
 		return new FilterDesc(arguments);
 	}

@@ -7,7 +7,7 @@
 			"class": "ConditionalValueProvider",
 			"condition": {
 				"class": "CardPropertyCondition",
-				"cardName": "minion_ysera"
+				"cardId": "minion_ysera"
 			},
 			"ifTrue": 0,
 			"ifFalse": 5

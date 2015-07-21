@@ -28,7 +28,7 @@ public class CopyCardSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		CardLocation cardLocation = (CardLocation) desc.get(SpellArg.CARD_LOCATION);
-		int numberOfCardsToCopy = desc.getInt(SpellArg.VALUE);
+		int numberOfCardsToCopy = desc.getInt(SpellArg.VALUE, 1);
 		
 		Player opponent = context.getOpponent(player);
 		CardCollection sourceCollection = null;

@@ -15,7 +15,7 @@
 		},
 		"condition": {
 			"class": "HasHeroPowerCondition",
-			"cardName": "hero_power_lesser_heal"
+			"cardId": "hero_power_lesser_heal"
 		},
 		"target": "FRIENDLY_HERO"
 	},
