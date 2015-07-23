@@ -8,6 +8,7 @@ public class AttributeAura extends Aura {
 
 	public AttributeAura(AuraDesc desc) {
 		super(AddAttributeSpell.create(desc.getAttribute()), RemoveAttributeSpell.create(desc.getAttribute()), desc.getTarget());
+		setRaceRestriction(desc.getRaceRestriction());
 	}
 
 }

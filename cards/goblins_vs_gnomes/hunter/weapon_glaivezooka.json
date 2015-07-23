@@ -5,7 +5,7 @@
 	"id": "weapon_glaivezooka",
 	"type": "WEAPON",
 	"rarity": "RARE",
-	"heroClass": "ROGUE",
+	"heroClass": "HUNTER",
 	"baseManaCost": 3,
 	"damage": 2,
 	"durability": 2,
@@ -19,7 +19,7 @@
 			"target" : "FRIENDLY_MINIONS",
 			"randomTarget" : "true"
 		},
-		"targetSelection": "ANY",
+		"targetSelection": "NONE",
 		"resolvedLate": false
 	},
 	"fileFormatVersion": 1

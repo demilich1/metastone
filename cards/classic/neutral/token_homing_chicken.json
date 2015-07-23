@@ -27,8 +27,5 @@
 	"rarity": "FREE",
 	"baseManaCost": 1,
 	"collectible": false,
-	"attributes": {
-		"TAUNT": true
-	},
 	"fileFormatVersion": 1
 }

@@ -30,6 +30,7 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 		hardRemoval.add("spell_equality");
 		hardRemoval.add("spell_deadly_shot");
 		hardRemoval.add("spell_sap");
+		hardRemoval.add("minion_doomsayer");
 	}
 
 	private static ThreatLevel calcuateThreatLevel(GameContext context, int playerId) {
@@ -100,9 +101,13 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 				break;
 			}
 		}
+		
 		if (minion.hasTag(GameTag.WINDFURY)) {
 			minionScore += weights.get(WeightedFeature.MINION_WINDFURY_MODIFIER);
+		} else if (minion.hasTag(GameTag.MEGA_WINDFURY)) {
+			minionScore += 2 * weights.get(WeightedFeature.MINION_WINDFURY_MODIFIER);
 		}
+		
 		if (minion.hasTag(GameTag.DIVINE_SHIELD)) {
 			minionScore += weights.get(WeightedFeature.MINION_DIVINE_SHIELD_MODIFIER);
 		}
