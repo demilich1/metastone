@@ -1,0 +1,17 @@
+{
+	"baseAttack": 4,
+	"baseHp": 1,
+	"id": "minion_mini-mage",
+	"name": "Mini-Mage",
+	"description": "Stealth. Spell Damage +1",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"baseManaCost": 4,
+	"collectible": true,
+	"attributes": {
+		"SPELL_DAMAGE": 1,
+		"STEALTH": true
+	},
+	"fileFormatVersion": 1
+}

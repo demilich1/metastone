@@ -1,0 +1,24 @@
+{
+	"baseAttack": 2,
+	"baseHp": 3,
+	"trigger": {
+		"eventTrigger": {
+			"class": "SpellCastedTrigger",
+			"targetPlayer": "OPPONENT"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"attackBonus": 1,
+			"target": "SELF"
+		}
+	},
+	"id": "minion_stonesplinter_trogg",
+	"name": "Stonesplinter Trogg",
+	"description": "Whenever your opponent casts a spell, gain +1 Attack.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 2,
+	"collectible": true,
+	"fileFormatVersion": 1
+}

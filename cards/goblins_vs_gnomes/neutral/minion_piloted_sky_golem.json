@@ -1,0 +1,21 @@
+{
+  "baseAttack": 6,
+  "baseHp": 4,
+  "race": "MECH",
+  "deathrattle": {
+    "class": "SummonRandomMinionFilteredSpell",
+	"cardFilter" : {
+		"class" : "CardFilter",
+		"manaCost" : 4
+	}
+  },
+  "id": "minion_piloted_sky_golem",
+  "name": "Piloted Sky Golem",
+  "description": "Deathrattle: Summon a random 4-Cost minion.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "EPIC",
+  "baseManaCost": 6,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

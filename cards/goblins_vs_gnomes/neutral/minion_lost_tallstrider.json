@@ -1,0 +1,14 @@
+{
+  "baseAttack": 5,
+  "baseHp": 4,
+  "race": "BEAST",
+  "id": "minion_lost_tallstrider",
+  "name": "Lost Tallstrider",
+  "description": "",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "COMMON",
+  "baseManaCost": 4,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

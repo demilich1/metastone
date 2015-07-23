@@ -1,0 +1,39 @@
+{
+  "baseAttack": 4,
+  "baseHp": 5,
+  "trigger" : {
+	"eventTrigger" : {
+		"class" : "TurnStartTrigger",
+		"condition" : {
+			"class" : "RaceOnBoardCondition",
+			"race" : "MECH",
+			"value" : 3
+		}
+	},
+	"spell" : {
+		"class" : "MetaSpell",
+		"spell1" : {
+			"class" : "DestroySpell",
+			"target" : "FRIENDLY_MINIONS",
+			"filter" : {
+				"class" : "RaceFilter",
+				"race" : "MECH"
+			}
+		},
+		"spell2" : {
+			"class" : "SummonSpell",
+			"card" : "token_v-07-tr-0n"
+		}
+	}
+  },
+  "race": "MECH",
+  "id": "minion_mimirons_head",
+  "name": "Mimiron's Head",
+  "description": "At the start of your turn, if you have at least 3 Mechs, destroy them all, and form V-07-TR-0N.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "LEGENDARY",
+  "baseManaCost": 5,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

@@ -1,0 +1,14 @@
+{
+	"baseAttack": 3,
+	"baseHp": 4,
+	"race": "MECH",
+	"id": "minion_spider_tank",
+	"name": "Spider Tank",
+	"description": "",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 3,
+	"collectible": true,
+	"fileFormatVersion": 1
+}
