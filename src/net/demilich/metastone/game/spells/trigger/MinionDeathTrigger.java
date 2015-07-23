@@ -40,6 +40,10 @@ public class MinionDeathTrigger extends GameEventTrigger {
 			return minion.getOwner() == host.getOwner();
 		case OPPONENT:
 			return minion.getOwner() != host.getOwner();
+		case ACTIVE:
+			return minion.getOwner() == event.getGameContext().getActivePlayerId();
+		case INACTIVE:
+			return minion.getOwner() != event.getGameContext().getActivePlayerId();
 		}
 		return false;
 	}

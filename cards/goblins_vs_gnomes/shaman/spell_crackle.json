@@ -1,0 +1,20 @@
+{
+  "targetSelection": "ANY",
+  "spell": {
+    "class": "MinMaxDamageSpell",
+	"minDamage" : 3,
+	"maxDamage" : 6
+  },
+  "id": "spell_crackle",
+  "name": "Crackle",
+  "description": "Deal 3-6 damage. Overload: (1)",
+  "type": "SPELL",
+  "heroClass": "SHAMAN",
+  "rarity": "COMMON",
+  "baseManaCost": 2,
+  "collectible": true,
+  "attributes" : {
+	"OVERLOAD" : 1
+  },
+  "fileFormatVersion": 1
+}

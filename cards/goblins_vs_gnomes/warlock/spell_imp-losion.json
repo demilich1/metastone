@@ -1,0 +1,28 @@
+{
+  "targetSelection": "MINIONS",
+  "spell": {
+    "class": "MetaSpell",
+	"spell1" : {
+		"class" : "MinMaxDamageSpell",
+		"minDamage" : 2,
+		"maxDamage" : 4
+	},
+	"spell2" : {
+		"class" : "SummonSpell",
+		"card" : "token_imp",
+		"valueProvider" : {
+			"class" : "AttributeValueProvider",
+			"attribute" : "LAST_HIT"
+		}
+	}
+  },
+  "id": "spell_imp-losion",
+  "name": "Imp-losion",
+  "description": "Deal 2-4 damage to a minion. Summon a 1/1 Imp for each damage dealt.",
+  "type": "SPELL",
+  "heroClass": "WARLOCK",
+  "rarity": "RARE",
+  "baseManaCost": 4,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

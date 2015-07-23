@@ -81,7 +81,7 @@ public class SummonSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int boardPosition = getBoardPosition(context, player, desc, source);
 		ValueProvider valueProvider = (ValueProvider) desc.get(SpellArg.VALUE_PROVIDER);
-		int count = valueProvider != null ? valueProvider.getValue(context, player, target) : 1;
+		int count = valueProvider != null ? valueProvider.getValue(context, player, target, source) : 1;
 		for (Card card : SpellUtils.getCards(desc)) {
 			for (int i = 0; i < count; i++) {
 				MinionCard minionCard = count == 1 ? (MinionCard) card : (MinionCard) card.clone();

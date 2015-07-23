@@ -26,6 +26,7 @@ public class MinionCountCondition extends Condition {
 			minionCount = context.getOpponent(player).getMinions().size();
 			break;
 		case SELF:
+		case OWNER:
 			minionCount = player.getMinions().size();
 			break;
 		default:

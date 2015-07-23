@@ -11,7 +11,7 @@ public class CardCounter extends ValueProvider {
 	}
 
 	@Override
-	protected int provideValue(GameContext context, Player player, Entity target) {
+	protected int provideValue(GameContext context, Player player, Entity target, Entity source) {
 		return player.getHand().getCount();
 	}
 

@@ -28,6 +28,12 @@ public class CardCountCondition extends Condition {
 		case SELF:
 			cardCount = player.getHand().getCount();
 			break;
+		case ACTIVE:
+			cardCount = context.getActivePlayer().getHand().getCount();
+			break;
+		case INACTIVE:
+			cardCount = context.getOpponent(context.getActivePlayer()).getHand().getCount();
+			break;
 		default:
 			break;
 		

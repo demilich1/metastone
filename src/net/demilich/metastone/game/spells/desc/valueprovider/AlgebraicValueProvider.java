@@ -24,11 +24,11 @@ public class AlgebraicValueProvider extends ValueProvider {
 	}
 	
 	@Override
-	protected int provideValue(GameContext context, Player player, Entity target) {
+	protected int provideValue(GameContext context, Player player, Entity target, Entity source) {
 		ValueProvider valueProvider1 = (ValueProvider) desc.get(ValueProviderArg.VALUE_PROVIDER_1);
 		ValueProvider valueProvider2 = (ValueProvider) desc.get(ValueProviderArg.VALUE_PROVIDER_2);
-		int value1 = valueProvider1.getValue(context, player, target);
-		int value2 = valueProvider2.getValue(context, player, target);
+		int value1 = valueProvider1.getValue(context, player, target, source);
+		int value2 = valueProvider2.getValue(context, player, target, source);
 		AlgebraicOperation operation = (AlgebraicOperation) desc.get(ValueProviderArg.OPERATION);
 		return evaluateOperation(value1, value2, operation);
 	}

@@ -37,17 +37,13 @@ public class DrawCardSpell extends Spell {
 		return create(drawModifier, 0, targetPlayer);
 	}
 
-	private void draw(GameContext context, Player player, int numberOfCards, ValueProvider drawModifier) {
-		int cardCount = drawModifier != null ? drawModifier.getValue(context, player, null) : numberOfCards;
-		for (int i = 0; i < cardCount; i++) {
-			context.getLogic().drawCard(player.getId());
-		}
-	}
-
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int numberOfCards = desc.getInt(SpellArg.VALUE, 1);
 		ValueProvider drawModifier = desc.getValueProvider();
-		draw(context, player, numberOfCards, drawModifier);
+		int cardCount = drawModifier != null ? drawModifier.getValue(context, player, null, source) : numberOfCards;
+		for (int i = 0; i < cardCount; i++) {
+			context.getLogic().drawCard(player.getId());
+		}
 	}
 }

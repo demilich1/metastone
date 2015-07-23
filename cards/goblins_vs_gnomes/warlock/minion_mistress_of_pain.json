@@ -1,0 +1,29 @@
+{
+  "baseAttack": 1,
+  "baseHp": 4,
+  "trigger": {
+		"eventTrigger": {
+			"class": "DamageCausedTrigger",
+			"worksOnHero": true
+		},
+		"spell": {
+			"class": "HealingSpell",
+			"valueProvider" : {
+				"class" : "AttributeValueProvider",
+				"source" : "SELF",
+				"attribute" : "ATTACK"
+			},
+			"target": "FRIENDLY_HERO"
+		}
+	},
+  "race": "DEMON",
+  "id": "minion_mistress_of_pain",
+  "name": "Mistress of Pain",
+  "description": "Whenever this minion deals damage, restore that much Health to your hero.",
+  "type": "MINION",
+  "heroClass": "WARLOCK",
+  "rarity": "RARE",
+  "baseManaCost": 2,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

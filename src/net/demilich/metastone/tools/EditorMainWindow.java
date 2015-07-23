@@ -3,12 +3,14 @@ package net.demilich.metastone.tools;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.gson.Gson;
@@ -242,11 +244,14 @@ class EditorMainWindow extends BorderPane {
 		}
 		System.out.println("Saving to: " + file.getName());
 		GsonBuilder builder = new GsonBuilder().setPrettyPrinting();
+		builder.disableHtmlEscaping();
 		builder.registerTypeAdapter(SpellDesc.class, new SpellDescSerializer());
 		Gson gson = builder.create();
 		String json = gson.toJson(card);
 		try {
-			FileUtils.writeStringToFile(file, json);
+			//FileUtils.writeStringToFile(file, json);
+			Path path = Paths.get(file.getPath());
+			Files.write(path, json.getBytes());
 			Desktop.getDesktop().open(file);
 		} catch (IOException e) {
 			e.printStackTrace();

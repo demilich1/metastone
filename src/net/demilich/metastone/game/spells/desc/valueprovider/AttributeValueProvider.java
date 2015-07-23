@@ -17,12 +17,12 @@ public class AttributeValueProvider extends ValueProvider {
 	}
 
 	@Override
-	protected int provideValue(GameContext context, Player player, Entity target) {
+	protected int provideValue(GameContext context, Player player, Entity target, Entity host) {
 		EntityReference sourceReference = (EntityReference) desc.get(ValueProviderArg.SOURCE);
 		GameTag attribute = (GameTag) desc.get(ValueProviderArg.ATTRIBUTE);
 		List<Entity> entities = null;
 		if (sourceReference != null) {
-			entities = context.resolveTarget(player, (Actor) target, sourceReference);
+			entities = context.resolveTarget(player, host, sourceReference);
 		} else {
 			entities = new ArrayList<>();
 			entities.add(target);

@@ -1,6 +1,7 @@
 package net.demilich.metastone.game.spells.aura;
 
 import net.demilich.metastone.game.entities.minions.Race;
+import net.demilich.metastone.game.spells.AuraBuffSpell;
 import net.demilich.metastone.game.spells.desc.aura.AuraArg;
 import net.demilich.metastone.game.spells.desc.aura.AuraDesc;
 import net.demilich.metastone.game.targeting.EntityReference;

@@ -1,0 +1,17 @@
+{
+  "baseAttack": 3,
+  "baseHp": 2,
+  "race": "MECH",
+  "id": "minion_whirling_zap-o-matic",
+  "name": "Whirling Zap-o-matic",
+  "description": "Windfury",
+  "type": "MINION",
+  "heroClass": "SHAMAN",
+  "rarity": "COMMON",
+  "baseManaCost": 2,
+  "collectible": true,
+  "attributes": {
+    "WINDFURY": true
+  },
+  "fileFormatVersion": 1
+}

@@ -53,7 +53,7 @@ public class DamageSpell extends Spell {
 		int damage = desc.getInt(SpellArg.VALUE, 0);
 		ValueProvider damageModifier = (ValueProvider) desc.get(SpellArg.VALUE_PROVIDER);
 		if (damageModifier != null) {
-			damage = damageModifier.getValue(context, player, target);
+			damage = damageModifier.getValue(context, player, target, source);
 		}
 		
 		context.getLogic().damage(player, (Actor)target, damage, source);

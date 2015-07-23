@@ -13,15 +13,15 @@ public abstract class ValueProvider {
 		this.desc = desc;
 	}
 
-	public int getValue(GameContext context, Player player, Entity target) {
+	public int getValue(GameContext context, Player player, Entity target, Entity host) {
 		TargetPlayer targetPlayer = (TargetPlayer) desc.get(ValueProviderArg.TARGET_PLAYER);
 		Player providingPlayer = targetPlayer == null || targetPlayer == TargetPlayer.SELF ? player : context.getOpponent(player);
 		int multiplier = desc.contains(ValueProviderArg.MULTIPLIER) ? desc.getInt(ValueProviderArg.MULTIPLIER) : 1;
 		int offset = desc.contains(ValueProviderArg.OFFSET) ? desc.getInt(ValueProviderArg.OFFSET) : 0;
-		int value = provideValue(context, providingPlayer, target) * multiplier + offset;
+		int value = provideValue(context, providingPlayer, target, host) * multiplier + offset;
 		return value;
 	}
 
-	protected abstract int provideValue(GameContext context, Player player, Entity target);
+	protected abstract int provideValue(GameContext context, Player player, Entity target, Entity host);
 
 }

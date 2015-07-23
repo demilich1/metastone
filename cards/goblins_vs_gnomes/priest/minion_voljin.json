@@ -5,6 +5,7 @@
     "spell": {
       "class": "custom.VoljinSpell"
     },
+	"targetSelection": "MINIONS",
     "resolvedLate": false
   },
   "id": "minion_voljin",

@@ -345,12 +345,12 @@ public class GameLogic implements Cloneable {
 			break;
 		}
 
+		target.setTag(GameTag.LAST_HIT, damageDealt);
 		if (damageDealt > 0) {
-			target.setTag(GameTag.LAST_HIT, damageDealt);
 			DamageEvent damageEvent = new DamageEvent(context, target, source, damage);
 			context.fireGameEvent(damageEvent);
 			player.getStatistics().damageDealt(damage);
-		}
+		} 
 
 		return damageDealt;
 	}
@@ -924,7 +924,6 @@ public class GameLogic implements Cloneable {
 		modifyCurrentMana(playerId, -modifiedManaCost);
 		player.getStatistics().manaSpent(modifiedManaCost);
 		log("{} plays {}", player.getName(), card);
-		player.getHand().remove(card);
 
 		player.getStatistics().cardPlayed(card);
 		CardPlayedEvent cardPlayedEvent = new CardPlayedEvent(context, playerId, card);
