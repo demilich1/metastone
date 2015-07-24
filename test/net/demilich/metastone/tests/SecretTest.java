@@ -34,7 +34,7 @@ public class SecretTest extends TestBase {
 		
 		playCard(context, mage, new TestSecretCard(SECRET_DAMAGE));
 		attack(context, warrior, minion, mage.getHero());
-		Assert.assertTrue(minion.isDead());
+		Assert.assertTrue(minion.isDestroyed());
 		Assert.assertEquals(mage.getHero().getHp(), mage.getHero().getMaxHp() - minion.getAttack());
 	}
 	

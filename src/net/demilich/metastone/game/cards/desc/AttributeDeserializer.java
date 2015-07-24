@@ -18,7 +18,6 @@ public class AttributeDeserializer implements JsonDeserializer<Map<GameTag, Obje
 	public Map<GameTag, Object> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 		Map<GameTag, Object> map = new EnumMap<GameTag, Object>(GameTag.class);
 		JsonObject jsonData = json.getAsJsonObject();
-		System.out.println("Parsing ATTRIBUTES");
 		parseAttribute(GameTag.OVERLOAD, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(GameTag.ATTACK_EQUALS_HP, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(GameTag.CANNOT_ATTACK, jsonData, map, ParseValueType.BOOLEAN);
@@ -38,6 +37,7 @@ public class AttributeDeserializer implements JsonDeserializer<Map<GameTag, Obje
 		parseAttribute(GameTag.BATTLECRY, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(GameTag.DOUBLE_DEATHRATTLES, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(GameTag.HERO_POWER_CAN_TARGET_MINIONS, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(GameTag.DESTROYED, jsonData, map, ParseValueType.BOOLEAN);
 		return map;
 	}
 

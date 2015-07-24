@@ -129,10 +129,10 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 	public double getScore(GameContext context, int playerId) {
 		Player player = context.getPlayer(playerId);
 		Player opponent = context.getOpponent(player);
-		if (player.getHero().isDead()) {
+		if (player.getHero().isDestroyed()) {
 			return Float.NEGATIVE_INFINITY;
 		}
-		if (opponent.getHero().isDead()) {
+		if (opponent.getHero().isDestroyed()) {
 			return Float.POSITIVE_INFINITY;
 		}
 		double score = 0;

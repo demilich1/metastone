@@ -1,0 +1,24 @@
+{
+  "baseAttack": 6,
+  "baseHp": 8,
+  "trigger" : {
+	"eventTrigger" : {
+		"class" : "CardDrawnTrigger",
+		"targetPlayer" : "SELF"
+	},
+	"spell" : {
+		"class" : "CopyCardSpell",
+		"target" : "EVENT_TARGET"
+	}
+  },
+  "race": "DRAGON",
+  "id": "minion_chromaggus",
+  "name": "Chromaggus",
+  "description": "Whenever you draw a card, put another copy into your hand.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "LEGENDARY",
+  "baseManaCost": 8,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

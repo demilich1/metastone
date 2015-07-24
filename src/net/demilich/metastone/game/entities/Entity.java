@@ -6,12 +6,13 @@ import java.util.Map;
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.logic.CustomCloneable;
 import net.demilich.metastone.game.targeting.EntityReference;
+import net.demilich.metastone.game.targeting.IdFactory;
 
 public abstract class Entity extends CustomCloneable {
 
 	private String name;
 	protected Map<GameTag, Object> tags = new EnumMap<GameTag, Object>(GameTag.class);
-	private int id;
+	private int id = IdFactory.UNASSIGNED;
 	private int ownerIndex = -1;
 	
 	public abstract EntityType getEntityType();
@@ -107,8 +108,8 @@ public abstract class Entity extends CustomCloneable {
 		return true;
 	}
 	
-	public boolean isDead() {
-		return hasTag(GameTag.DEAD);
+	public boolean isDestroyed() {
+		return hasTag(GameTag.DESTROYED);
 	}
 
 	public void modifyTag(GameTag tag, int value) {

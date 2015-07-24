@@ -83,9 +83,9 @@ public class TargetLogic {
 				}
 			}
 
-			for (Actor actor : player.getGraveyard()) {
-				if (actor.getId() == targetId) {
-					return actor;
+			for (Entity entity : player.getGraveyard()) {
+				if (entity.getId() == targetId) {
+					return entity;
 				}
 			}
 		}

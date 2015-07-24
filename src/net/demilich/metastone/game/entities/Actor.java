@@ -108,8 +108,8 @@ public abstract class Actor extends Entity {
 	}
 
 	@Override
-	public boolean isDead() {
-		return getHp() < 1 || super.isDead();
+	public boolean isDestroyed() {
+		return getHp() < 1 || super.isDestroyed();
 	}
 
 	public boolean isWounded() {

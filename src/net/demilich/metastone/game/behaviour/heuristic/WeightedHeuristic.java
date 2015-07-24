@@ -43,10 +43,10 @@ public class WeightedHeuristic implements IGameStateHeuristic {
 		float score = 0;
 		Player player = context.getPlayer(playerId);
 		Player opponent = context.getOpponent(player);
-		if (player.getHero().isDead()) {
+		if (player.getHero().isDestroyed()) {
 			return Float.NEGATIVE_INFINITY;
 		} 
-		if (opponent.getHero().isDead()) {
+		if (opponent.getHero().isDestroyed()) {
 			return Float.POSITIVE_INFINITY;
 		} 
 		int ownHp = player.getHero().getHp() + player.getHero().getArmor();

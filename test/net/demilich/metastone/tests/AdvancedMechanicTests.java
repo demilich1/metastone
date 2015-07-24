@@ -98,12 +98,12 @@ public class AdvancedMechanicTests extends BasicTests {
 		context.getLogic().performGameAction(mage.getId(), attackAction);
 		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp());
 		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - attacker.getAttack());
-		Assert.assertEquals(attacker.isDead(), false);
+		Assert.assertEquals(attacker.isDestroyed(), false);
 
 		context.getLogic().performGameAction(mage.getId(), attackAction);
 		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp() - defender.getAttack());
 		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - attacker.getAttack() * 2);
-		Assert.assertEquals(attacker.isDead(), true);
+		Assert.assertEquals(attacker.isDestroyed(), true);
 	}
 
 	@Test

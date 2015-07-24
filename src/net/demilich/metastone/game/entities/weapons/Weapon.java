@@ -48,8 +48,8 @@ public class Weapon extends Actor {
 	}
 
 	@Override
-	public boolean isDead() {
-		return hasTag(GameTag.DEAD) || isBroken();
+	public boolean isDestroyed() {
+		return hasTag(GameTag.DESTROYED) || isBroken();
 	}
 
 	public void onEquip(GameContext context, Player player) {

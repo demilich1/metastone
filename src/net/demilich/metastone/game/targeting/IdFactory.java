@@ -4,7 +4,7 @@ import net.demilich.metastone.game.logic.CustomCloneable;
 
 public class IdFactory extends CustomCloneable {
 	
-	public static final int UNASSIGNED = 0;
+	public static final int UNASSIGNED = -1;
 	
 	private int id;
 	

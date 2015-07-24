@@ -16,11 +16,11 @@
 		}
 	  }
     },
-    "resolvedLate": false
+    "resolvedLate": true
   },
   "id": "minion_gnomish_experimenter",
   "name": "Gnomish Experimenter",
-  "description": "Battlery: Draw a card, if it is a minion turn it into a chicken.",
+  "description": "Battlecry: Draw a card, if it is a minion turn it into a chicken.",
   "type": "MINION",
   "heroClass": "ANY",
   "rarity": "RARE",

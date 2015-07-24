@@ -5,8 +5,7 @@
 		"attackBonus": 3,
 		"hpBonus": 3,
 		"filter": {
-			"class": "DamagedFilter",
-			"damaged": true
+			"class": "DamagedFilter"
 		}
 	},
 	"id": "spell_rampage",

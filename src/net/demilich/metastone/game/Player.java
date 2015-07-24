@@ -8,6 +8,7 @@ import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.entities.Actor;
+import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.logic.CustomCloneable;
@@ -22,7 +23,7 @@ public class Player extends CustomCloneable {
 
 	private final CardCollection deck;
 	private final CardCollection hand = new CardCollection();
-	private final List<Actor> graveyard = new ArrayList<>();
+	private final List<Entity> graveyard = new ArrayList<>();
 	private final List<Minion> minions = new ArrayList<>();
 	private final List<String> secrets = new ArrayList<>();
 
@@ -91,7 +92,7 @@ public class Player extends CustomCloneable {
 		return deckName;
 	}
 
-	public List<Actor> getGraveyard() {
+	public List<Entity> getGraveyard() {
 		return graveyard;
 	}
 

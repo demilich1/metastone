@@ -11,7 +11,8 @@ public abstract class EntityFilter {
 	}
 
 	public boolean matches(Entity entity) {
-		return this.test(entity, desc);
+		boolean invert = desc.getBool(FilterArg.INVERT);
+		return this.test(entity, desc) != invert;
 	}
 
 	protected abstract boolean test(Entity entity, FilterDesc desc);

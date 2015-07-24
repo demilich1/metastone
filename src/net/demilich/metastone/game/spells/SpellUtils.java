@@ -94,7 +94,7 @@ public class SpellUtils {
 		List<Actor> validTargets = new ArrayList<Actor>();
 		for (Entity entity : targets) {
 			Actor actor = (Actor) entity;
-			if (!actor.isDead() || actor.getEntityType() == EntityType.HERO) {
+			if (!actor.isDestroyed() || actor.getEntityType() == EntityType.HERO) {
 				validTargets.add(actor);
 			}
 

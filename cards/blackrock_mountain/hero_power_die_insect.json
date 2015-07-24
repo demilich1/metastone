@@ -1,0 +1,18 @@
+{
+	"targetSelection": "NONE",
+	"id": "hero_power_die_insect",
+	"name": "DIE, INSECT!",
+	"description": "Deal 8 damage to a random enemy.",
+	"type": "HERO_POWER",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"spell": {
+		"class": "DamageSpell",
+		"value" : 8,
+		"target" : "ENEMY_CHARACTERS",
+		"randomTarget" : true
+	},
+	"baseManaCost": 2,
+	"collectible": false,
+	"fileFormatVersion": 1
+}

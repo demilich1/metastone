@@ -4,6 +4,7 @@ import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.Rarity;
+import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Race;
 
@@ -15,10 +16,16 @@ public class CardFilter extends EntityFilter {
 
 	@Override
 	protected boolean test(Entity entity, FilterDesc desc) {
-		if (!(entity instanceof Card)) {
+		Card card = null;
+		if (entity instanceof Card) {
+			card = (Card) entity;
+		} else if (entity instanceof Actor) {
+			Actor actor = (Actor) entity;
+			card = actor.getSourceCard();
+		} else {
 			return false;
 		}
-		Card card = (Card) entity;
+		
 		CardType cardType = (CardType) desc.get(FilterArg.CARD_TYPE);
 		if (cardType != null && cardType != card.getCardType()) {
 			return false;
@@ -37,6 +44,7 @@ public class CardFilter extends EntityFilter {
 		if (rarity != null && card.getRarity() != rarity) {
 			return false;
 		}
+		
 		return true;
 	}
 

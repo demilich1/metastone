@@ -49,7 +49,7 @@ public class Aura extends SpellTrigger {
 		}
 
 		Actor targetActor = (Actor) target;
-		if (targetActor.isDead()) {
+		if (targetActor.isDestroyed()) {
 			return false;
 		}
 		if (getRaceRestriction() != null && target.getTag(GameTag.RACE) != getRaceRestriction()) {

@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.targeting;
 
 public enum CardLocation {
-	VOID,
+	GRAVEYARD,
 	HAND,
 	DECK,
 	HERO_POWER,

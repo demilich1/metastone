@@ -22,11 +22,12 @@ public class TransformCardSpell extends Spell {
 		if (card.getLocation() == CardLocation.HAND) {
 			context.getLogic().removeCard(player.getId(), card);
 		} else {
-			logger.warn("Trying to transform card {} in invalid location {}", card, card.getLocation());			
+			//logger.warn("Trying to transform card {} in invalid location {}", card, card.getLocation());
+			return;
 		}
 		
-		String newCardName = (String) desc.get(SpellArg.CARD);
-		Card newCard = CardCatalogue.getCardById(newCardName);
+		String cardId = (String) desc.get(SpellArg.CARD);
+		Card newCard = CardCatalogue.getCardById(cardId);
 		context.getLogic().receiveCard(player.getId(), newCard);
 	}
 

@@ -12,6 +12,8 @@ import net.demilich.metastone.game.logic.CustomCloneable;
 import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.manamodifier.CardCostModifierArg;
 import net.demilich.metastone.game.spells.desc.manamodifier.CardCostModifierDesc;
+import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
+import net.demilich.metastone.game.spells.trigger.GameEventTrigger;
 import net.demilich.metastone.game.spells.trigger.IGameEventListener;
 import net.demilich.metastone.game.spells.trigger.TriggerLayer;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -21,26 +23,31 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 	private boolean expired;
 	private int owner;
 	private EntityReference hostReference;
-	
+	private GameEventTrigger expirationTrigger;
+
 	private CardCostModifierDesc desc;
 
 	public CardCostModifier(CardCostModifierDesc desc) {
 		this.desc = desc;
+		EventTriggerDesc triggerDesc = (EventTriggerDesc) desc.get(CardCostModifierArg.EXPIRATION_TRIGGER);
+		if (triggerDesc != null) {
+			this.expirationTrigger = triggerDesc.create();
+		}
 	}
 
 	public boolean appliesTo(Card card) {
 		if (expired) {
 			return false;
 		}
-		
+
 		if (getRequiredAttribute() != null && !card.hasTag(getRequiredAttribute())) {
 			return false;
 		}
-		
-		if (getRequiredRace() != null && !(card.getTag(GameTag.RACE) != getRequiredRace())) {
+
+		if (getRequiredRace() != null && card.getTag(GameTag.RACE) != getRequiredRace()) {
 			return false;
 		}
-		
+
 		switch (getTargetPlayer()) {
 		case BOTH:
 			break;
@@ -64,13 +71,14 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 	@Override
 	public CardCostModifier clone() {
 		CardCostModifier clone = (CardCostModifier) super.clone();
+		clone.expirationTrigger = expirationTrigger != null ? (GameEventTrigger) expirationTrigger.clone() : null;
 		return clone;
 	}
 
 	protected void expire() {
 		expired = true;
 	}
-	
+
 	protected Object get(CardCostModifierArg arg) {
 		return desc.get(arg);
 	}
@@ -101,11 +109,11 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 	protected GameTag getRequiredAttribute() {
 		return (GameTag) desc.get(CardCostModifierArg.REQUIRED_ATTRIBUTE);
 	}
-	
+
 	protected Race getRequiredRace() {
 		return (Race) get(CardCostModifierArg.RACE);
 	}
-	
+
 	protected TargetPlayer getTargetPlayer() {
 		if (!desc.contains(CardCostModifierArg.TARGET_PLAYER)) {
 			return TargetPlayer.SELF;
@@ -115,7 +123,10 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 
 	@Override
 	public boolean interestedIn(GameEventType eventType) {
-		return false;
+		if (expirationTrigger == null) {
+			return false;
+		}
+		return eventType == expirationTrigger.interestedIn() || expirationTrigger.interestedIn() == GameEventType.ALL;
 	}
 
 	@Override
@@ -129,14 +140,16 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 
 	@Override
 	public void onGameEvent(GameEvent event) {
-		
+		Entity host = event.getGameContext().resolveSingleTarget(getHostReference());
+		if (expirationTrigger != null && expirationTrigger.interestedIn() == event.getEventType() && expirationTrigger.fires(event, host)) {
+			expire();
+		}
 	}
 
 	@Override
 	public void onRemove(GameContext context) {
 		expired = true;
 	}
-
 
 	public int process(Card card) {
 		return desc.getInt(CardCostModifierArg.VALUE);
@@ -150,6 +163,9 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 	@Override
 	public void setOwner(int playerIndex) {
 		this.owner = playerIndex;
+		if (expirationTrigger != null) {
+			expirationTrigger.setOwner(playerIndex);
+		}
 	}
 
 }

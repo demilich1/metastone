@@ -11,9 +11,8 @@ public class DamagedFilter extends EntityFilter {
 
 	@Override
 	protected boolean test(Entity entity, FilterDesc desc) {
-		boolean targetValue = desc.getBool(FilterArg.DAMAGED);
 		if (entity instanceof Actor) {
-			return ((Actor)entity).isWounded() == targetValue;
+			return ((Actor)entity).isWounded();
 		}
 		return false;
 	}

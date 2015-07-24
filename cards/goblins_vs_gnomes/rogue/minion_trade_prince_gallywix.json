@@ -14,7 +14,7 @@
 		"spell": {
 			"class" : "MetaSpell",
 			"spell1" : {
-				"class": "CopyPlayedCardSpell",
+				"class": "CopyCardSpell",
 				"targetPlayer": "SELF",
 				"target": "EVENT_TARGET"
 			},

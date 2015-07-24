@@ -6,8 +6,7 @@
 			"class": "EntityCounter",
 			"source": "FRIENDLY_CHARACTERS",
 			"filter": {
-				"class": "DamagedFilter",
-				"damaged": true
+				"class": "DamagedFilter"
 			}
 		}
 	},

@@ -35,7 +35,7 @@ public class PutCopyInHandSpell extends Spell {
 		int amount = desc.getInt(SpellArg.HOW_MANY, 1);
 		Card sourceCard = minion.getSourceCard();
 		for (int i = 0; i < amount; i++) {
-			context.getLogic().receiveCard(player.getId(), sourceCard.clone());
+			context.getLogic().receiveCard(player.getId(), sourceCard.getCopy());
 		}
 	}
 

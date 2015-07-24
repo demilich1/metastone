@@ -5,7 +5,7 @@
 		"value": 2,
 		"filter": {
 			"class": "DamagedFilter",
-			"damaged": false
+			"invert": true
 		}
 	},
 	"id": "spell_backstab",

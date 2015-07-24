@@ -1,0 +1,28 @@
+{
+  "baseAttack": 8,
+  "baseHp": 8,
+  "race": "DRAGON",
+  "battlecry": {
+    "spell": {
+      "class": "ReceiveRandomCollectibleCardSpell",
+	  "howMany" : 2,
+	  "cardFilter" : {
+		"class" : "CardFilter",
+		"cardType" : "SPELL"
+	  }
+    },
+    "resolvedLate": false
+  },
+  "id": "minion_nefarian",
+  "name": "Nefarian",
+  "description": "Battlecry: Add 2 random spells to your hand (from your opponent's class).",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "LEGENDARY",
+  "baseManaCost": 9,
+  "collectible": true,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "fileFormatVersion": 1
+}

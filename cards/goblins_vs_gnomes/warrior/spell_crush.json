@@ -9,8 +9,7 @@
 			"class" : "HasEntityCondition",
 			"source" : "FRIENDLY_MINIONS",
 			"filter" : {
-				"class" : "DamagedFilter",
-				"damaged" : true
+				"class" : "DamagedFilter"
 			}
 		},
 		"ifTrue": 4,

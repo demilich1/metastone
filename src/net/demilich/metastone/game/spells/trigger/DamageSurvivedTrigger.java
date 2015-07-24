@@ -15,7 +15,7 @@ public class DamageSurvivedTrigger extends DamageReceivedTrigger {
 		if (!super.fire(event, host)) {
 			return false;
 		}
-		return !host.isDead();
+		return !host.isDestroyed();
 	}
 
 }

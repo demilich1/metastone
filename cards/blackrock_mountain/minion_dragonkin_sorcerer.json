@@ -1,0 +1,26 @@
+{
+  "baseAttack": 3,
+  "baseHp": 5,
+  "trigger": {
+		"eventTrigger": {
+			"class": "SelfTargetedTrigger",
+			"actionType": "SPELL"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"attackBonus": 1,
+			"hpBonus" : 1,
+			"target" : "SELF"
+		}
+	},
+  "race": "DRAGON",
+  "id": "minion_dragonkin_sorcerer",
+  "name": "Dragonkin Sorcerer",
+  "description": "Whenever you target this minion with a spell, gain +1/+1.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "RARE",
+  "baseManaCost": 4,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

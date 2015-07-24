@@ -113,7 +113,7 @@ public class BasicTests extends TestBase {
 
 		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp() - defender.getAttack());
 		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - attacker.getAttack());
-		Assert.assertEquals(defender.isDead(), true);
+		Assert.assertEquals(defender.isDestroyed(), true);
 
 		Assert.assertEquals(mage.getMinions().size(), 1);
 		Assert.assertEquals(warrior.getMinions().size(), 0);
@@ -133,7 +133,7 @@ public class BasicTests extends TestBase {
 		Assert.assertEquals(minion.getName(), devMonster.getName());
 		Assert.assertEquals(minion.getAttack(), 1);
 		Assert.assertEquals(minion.getHp(), 1);
-		Assert.assertEquals(minion.isDead(), false);
+		Assert.assertEquals(minion.isDestroyed(), false);
 
 		MinionCard devMonster2 = new TestMinionCard(2, 2);
 		context.getLogic().receiveCard(mage.getId(), devMonster2);

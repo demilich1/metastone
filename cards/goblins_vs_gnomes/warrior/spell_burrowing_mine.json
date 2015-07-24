@@ -15,8 +15,8 @@
 			"value" : 10
 		},
 		"spell2" : {
-			"class" : "DiscardSpell",
-			"target" : "SELF"
+			"class" : "RemoveCardSpell",
+			"target" : "EVENT_TARGET"
 		},
 		"spell3" : {
 			"class" : "DrawCardSpell"

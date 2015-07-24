@@ -7,7 +7,7 @@
 			"targetPlayer": "BOTH"
 		},
 		"spell": {
-			"class": "CopyPlayedCardSpell",
+			"class": "CopyCardSpell",
 			"targetPlayer": "INACTIVE",
 			"target": "EVENT_TARGET"
 		}

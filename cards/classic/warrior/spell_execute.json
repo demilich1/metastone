@@ -3,8 +3,7 @@
 	"spell": {
 		"class": "DestroySpell",
 		"filter": {
-			"class": "DamagedFilter",
-			"damaged": true
+			"class": "DamagedFilter"
 		}
 	},
 	"id": "spell_execute",
