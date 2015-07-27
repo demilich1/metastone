@@ -16,7 +16,6 @@ import net.demilich.metastone.game.behaviour.Behaviour;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardProxy;
-import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.HeroCard;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.decks.DeckFactory;
@@ -25,11 +24,14 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.logic.GameLogic;
+import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.gui.gameconfig.PlayerConfig;
 
 public class TestBase {
 
-	private static class NullBehaviour extends Behaviour {
+	protected static class TestBehaviour extends Behaviour {
+		
+		private EntityReference targetPreference;
 
 		@Override
 		public String getName() {
@@ -43,7 +45,23 @@ public class TestBase {
 
 		@Override
 		public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
+			if (targetPreference != null) {
+				for (GameAction action : validActions) {
+					if (action.getTargetKey().equals(targetPreference)) {
+						return action;
+					}
+				}	
+			}
+			
 			return validActions.get(0);
+		}
+
+		public EntityReference getTargetPreference() {
+			return targetPreference;
+		}
+
+		public void setTargetPreference(EntityReference targetPreference) {
+			this.targetPreference = targetPreference;
 		}
 
 	}
@@ -62,12 +80,12 @@ public class TestBase {
 	}
 	
 	protected static DebugContext createContext(HeroClass hero1, HeroClass hero2) {
-		PlayerConfig player1Config = new PlayerConfig(DeckFactory.getRandomDeck(hero1), new NullBehaviour());
+		PlayerConfig player1Config = new PlayerConfig(DeckFactory.getRandomDeck(hero1), new TestBehaviour());
 		player1Config.setName("Player 1");
 		player1Config.setHeroCard(getHeroCardForClass(hero1));
 		Player player1 = new Player(player1Config);
 
-		PlayerConfig player2Config = new PlayerConfig(DeckFactory.getRandomDeck(hero2), new NullBehaviour());
+		PlayerConfig player2Config = new PlayerConfig(DeckFactory.getRandomDeck(hero2), new TestBehaviour());
 		player2Config.setName("Player 2");
 		player2Config.setHeroCard(getHeroCardForClass(hero2));
 		Player player2 = new Player(player2Config);
@@ -91,7 +109,7 @@ public class TestBase {
 	}
 
 	protected static HeroCard getHeroCardForClass(HeroClass heroClass) {
-		for(Card card : CardCatalogue.query(CardType.HERO)) {
+		for(Card card : CardCatalogue.getHeroes()) {
 			HeroCard heroCard = (HeroCard) card;
 			if (heroCard.getHeroClass() == heroClass) {
 				return heroCard;

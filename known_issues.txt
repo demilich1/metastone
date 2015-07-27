@@ -21,6 +21,4 @@ Buffed weapons do not display their stats in green
 
 Check impact of mana cost modifiers on "Choose One" spell cards
 Check impact of spellpower on "Choose One" spell cards
-Check removal of UNIQUE_ENTITY, replacement is card_id
 Check if it is possible to remove CARD_LOCATION from SpellArg and introduce EntityReference.OPPONENT_HAND, etc (could also be used to target all cards in hand for example)
-Facelessing a Murloc Warleader does not resolve correctly

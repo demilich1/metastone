@@ -1,4 +1,5 @@
 package net.demilich.metastone.tests;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -122,6 +123,33 @@ public class AuraTests extends BasicTests {
 		Assert.assertEquals(auraMinion.getOwner(), player.getId());
 		Assert.assertEquals(minion1.getAttack(), 2);
 		Assert.assertEquals(opponentMinion.getAttack(), 1);
+	}
+
+	@Test
+	public void testAuraPlusFaceless() {
+		GameContext context = createContext(HeroClass.PRIEST, HeroClass.WARRIOR);
+		Player player = context.getPlayer1();
+
+		Minion murloc = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_bluegill_warrior"));
+		Assert.assertEquals(murloc.getAttack(), 2);
+		Assert.assertEquals(murloc.getHp(), 1);
+
+		Minion warleader = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_murloc_warleader"));
+		Assert.assertEquals(murloc.getAttack(), 4);
+		Assert.assertEquals(murloc.getHp(), 2);
+		Assert.assertEquals(warleader.getAttack(), 3);
+		Assert.assertEquals(warleader.getHp(), 3);
+		
+		TestBehaviour behaviour = (TestBehaviour) player.getBehaviour();
+		behaviour.setTargetPreference(warleader.getReference());
+		
+		Card facelessCard = CardCatalogue.getCardById("minion_faceless_manipulator");
+		context.getLogic().receiveCard(player.getId(), facelessCard);
+		GameAction action = facelessCard.play();
+		action.setTarget(warleader);
+		context.getLogic().performGameAction(player.getId(), action);
+		Assert.assertEquals(murloc.getAttack(), 6);
+		Assert.assertEquals(murloc.getHp(), 3);
 	}
 
 }

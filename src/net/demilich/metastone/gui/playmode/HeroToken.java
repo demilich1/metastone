@@ -3,16 +3,20 @@ package net.demilich.metastone.gui.playmode;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.weapons.Weapon;
 import net.demilich.metastone.gui.DigitFactory;
 import net.demilich.metastone.gui.IconFactory;
+import net.demilich.metastone.gui.cards.CardTooltip;
 
 public class HeroToken extends GameToken {
 
@@ -89,9 +93,16 @@ public class HeroToken extends GameToken {
 	
 	private void updateSecrets(Player player) {
 		secretsAnchor.getChildren().clear();
-		for (int i = 0; i < player.getSecrets().size(); i++) {
+		for (String secretId : player.getSecrets()) {
 			ImageView secretIcon = new ImageView(IconFactory.getImageUrl("common/secret.png"));
 			secretsAnchor.getChildren().add(secretIcon);
+			
+			Card card = CardCatalogue.getCardById(secretId);
+			Tooltip tooltip = new Tooltip();
+			CardTooltip tooltipContent = new CardTooltip();
+			tooltipContent.setCard(card);
+			tooltip.setGraphic(tooltipContent);
+			Tooltip.install(secretIcon, tooltip);
 		}
 	}
 

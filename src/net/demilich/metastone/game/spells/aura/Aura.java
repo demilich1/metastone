@@ -111,6 +111,14 @@ public class Aura extends SpellTrigger {
 		}
 		affectedEntities.clear();
 	}
+	
+	
+
+	@Override
+	public void onAdd(GameContext context) {
+		super.onAdd(context);
+		affectedEntities.clear();
+	}
 
 	public void setRaceRestriction(Race raceRestriction) {
 		this.raceRestriction = raceRestriction;
