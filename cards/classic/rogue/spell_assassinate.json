@@ -10,5 +10,6 @@
 	"spell": {
 		"class": "DestroySpell"
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

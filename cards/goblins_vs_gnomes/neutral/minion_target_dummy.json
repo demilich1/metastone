@@ -13,5 +13,6 @@
 	"attributes": {
 		"TAUNT": true
 	},
+	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

@@ -9,5 +9,6 @@
 	"targetSelection": "NONE",
 	"option1": "spell_power_of_the_wild_1",
 	"option2": "spell_power_of_the_wild_2",
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

@@ -10,5 +10,6 @@
 	"spell": {
 		"class": "custom.TrackingSpell"
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

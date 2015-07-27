@@ -14,5 +14,6 @@
 	},
 	"baseManaCost": 2,
 	"collectible": false,
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

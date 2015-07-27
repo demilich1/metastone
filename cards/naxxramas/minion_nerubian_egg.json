@@ -13,5 +13,6 @@
 	"rarity": "RARE",
 	"baseManaCost": 2,
 	"collectible": true,
+	"set": "NAXXRAMAS",
 	"fileFormatVersion": 1
 }

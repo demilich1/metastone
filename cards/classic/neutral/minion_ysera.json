@@ -26,5 +26,6 @@
 	"rarity": "LEGENDARY",
 	"baseManaCost": 9,
 	"collectible": true,
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

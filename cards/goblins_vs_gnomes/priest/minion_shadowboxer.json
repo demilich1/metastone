@@ -1,7 +1,7 @@
 {
-  "baseAttack": 2,
-  "baseHp": 3,
-  "trigger": {
+	"baseAttack": 2,
+	"baseHp": 3,
+	"trigger": {
 		"eventTrigger": {
 			"class": "HealingTrigger",
 			"breaksStealth": true
@@ -13,14 +13,15 @@
 			"randomTarget": true
 		}
 	},
-  "race": "MECH",
-  "id": "minion_shadowboxer",
-  "name": "Shadowboxer",
-  "description": "Whenever a character is healed, deal 1 damage to a random enemy.",
-  "type": "MINION",
-  "heroClass": "PRIEST",
-  "rarity": "COMMON",
-  "baseManaCost": 2,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"race": "MECH",
+	"id": "minion_shadowboxer",
+	"name": "Shadowboxer",
+	"description": "Whenever a character is healed, deal 1 damage to a random enemy.",
+	"type": "MINION",
+	"heroClass": "PRIEST",
+	"rarity": "COMMON",
+	"baseManaCost": 2,
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
 }

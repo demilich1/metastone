@@ -35,13 +35,6 @@ public class MinionCard extends Card {
 		this.desc = desc;
 	}
 
-	public MinionCard(String name, int baseAttack, int baseHp, Rarity rarity, HeroClass classRestriction, int manaCost) {
-		super(name, CardType.MINION, rarity, classRestriction, manaCost);
-		setTag(GameTag.BASE_ATTACK, baseAttack);
-		setTag(GameTag.BASE_HP, baseHp);
-		this.desc = new MinionCardDesc();
-	}
-
 	protected Minion createMinion(GameTag... tags) {
 		Minion minion = new Minion(this);
 		for (GameTag gameTag : getTags().keySet()) {

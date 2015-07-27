@@ -1,16 +1,17 @@
 {
-  "targetSelection": "NONE",
-  "spell": {
-    "class": "GainManaSpell",
-	"value" : 1
-  },
-  "id": "spell_gallywixs_coin",
-  "name": "Gallywix's Coin",
-  "description": "Gain 1 Mana Crystal this turn only. (Won't trigger Gallywix.)",
-  "type": "SPELL",
-  "heroClass": "ANY",
-  "rarity": "FREE",
-  "baseManaCost": 0,
-  "collectible": false,
-  "fileFormatVersion": 1
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "GainManaSpell",
+		"value": 1
+	},
+	"id": "spell_gallywixs_coin",
+	"name": "Gallywix's Coin",
+	"description": "Gain 1 Mana Crystal this turn only. (Won't trigger Gallywix.)",
+	"type": "SPELL",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"baseManaCost": 0,
+	"collectible": false,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
 }

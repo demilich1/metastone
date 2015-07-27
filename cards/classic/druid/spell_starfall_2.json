@@ -13,5 +13,6 @@
 		"value": 2,
 		"target": "ENEMY_MINIONS"
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

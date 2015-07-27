@@ -9,5 +9,6 @@
 	"targetSelection": "NONE",
 	"option1": "spell_wrath_1",
 	"option2": "spell_wrath_2",
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

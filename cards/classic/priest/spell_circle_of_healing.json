@@ -12,5 +12,6 @@
 		"value": 4,
 		"target": "ALL_MINIONS"
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

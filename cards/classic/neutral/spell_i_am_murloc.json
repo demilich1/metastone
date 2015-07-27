@@ -11,5 +11,6 @@
 	"baseManaCost": 4,
 	"collectible": false,
 	"targetSelection": "NONE",
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

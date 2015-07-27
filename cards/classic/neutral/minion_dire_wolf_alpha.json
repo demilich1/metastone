@@ -15,5 +15,6 @@
 	"rarity": "COMMON",
 	"baseManaCost": 2,
 	"collectible": true,
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

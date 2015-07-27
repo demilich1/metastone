@@ -28,5 +28,6 @@
 		"targetSelection": "ANY",
 		"resolvedLate": false
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

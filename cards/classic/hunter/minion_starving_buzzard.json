@@ -21,5 +21,6 @@
 	"rarity": "FREE",
 	"baseManaCost": 5,
 	"collectible": true,
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

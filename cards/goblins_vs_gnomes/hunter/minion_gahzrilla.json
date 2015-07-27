@@ -1,23 +1,24 @@
 {
-  "baseAttack": 6,
-  "baseHp": 9,
-  "trigger" : {
-	"eventTrigger" : {
-		"class" : "SelfDamagedTrigger"
+	"baseAttack": 6,
+	"baseHp": 9,
+	"trigger": {
+		"eventTrigger": {
+			"class": "SelfDamagedTrigger"
+		},
+		"spell": {
+			"class": "DoubleAttackSpell",
+			"target": "SELF"
+		}
 	},
-	"spell" : {
-		"class" : "DoubleAttackSpell",
-		"target" : "SELF"
-	}
-  },
-  "race": "BEAST",
-  "id": "minion_gahzrilla",
-  "name": "Gahz'rilla",
-  "description": "Whenever this minion takes damage, double its Attack.",
-  "type": "MINION",
-  "heroClass": "HUNTER",
-  "rarity": "LEGENDARY",
-  "baseManaCost": 7,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"race": "BEAST",
+	"id": "minion_gahzrilla",
+	"name": "Gahz'rilla",
+	"description": "Whenever this minion takes damage, double its Attack.",
+	"type": "MINION",
+	"heroClass": "HUNTER",
+	"rarity": "LEGENDARY",
+	"baseManaCost": 7,
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
 }

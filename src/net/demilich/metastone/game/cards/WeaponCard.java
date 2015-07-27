@@ -4,7 +4,6 @@ import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.actions.PlayWeaponCardAction;
 import net.demilich.metastone.game.cards.desc.WeaponCardDesc;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.weapons.Weapon;
 import net.demilich.metastone.game.spells.desc.BattlecryDesc;
 
@@ -12,11 +11,6 @@ public class WeaponCard extends Card {
 	
 	private final WeaponCardDesc desc;
 
-	public WeaponCard(String name, Rarity rarity, HeroClass classRestriction, int manaCost) {
-		super(name, CardType.WEAPON, rarity, classRestriction, manaCost);
-		this.desc = null;
-	}
-	
 	public WeaponCard(WeaponCardDesc desc) {
 		super(desc);
 		this.desc = desc;

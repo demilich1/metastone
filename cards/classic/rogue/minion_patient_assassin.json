@@ -22,5 +22,6 @@
 	"attributes": {
 		"STEALTH": true
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

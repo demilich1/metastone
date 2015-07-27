@@ -11,5 +11,6 @@
 	"attributes": {
 		"ATTACK_EQUALS_HP": true
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

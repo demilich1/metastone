@@ -19,5 +19,6 @@
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

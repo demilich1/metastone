@@ -9,5 +9,6 @@
 	"rarity": "LEGENDARY",
 	"baseManaCost": 10,
 	"collectible": false,
+	"set": "NAXXRAMAS",
 	"fileFormatVersion": 1
 }

@@ -12,5 +12,6 @@
 		"TAUNT": true
 	},
 	"race": "DEMON",
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

@@ -19,5 +19,6 @@
 		"target": "FRIENDLY_HERO",
 		"attribute": "IMMUNE_WHILE_ATTACKING"
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

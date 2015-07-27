@@ -14,5 +14,6 @@
 		"TAUNT": true,
 		"DIVINE_SHIELD": true
 	},
+	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

@@ -1,26 +1,27 @@
 {
-  "baseAttack": 4,
-  "baseHp": 4,
-  "trigger" : {
-	"eventTrigger" : {
-		"class" : "HostAcquiresTargetTrigger",
-		"actionType" : "PHYSICAL_ATTACK",
-		"condition" : {
-			"class" : "RandomCondition"
+	"baseAttack": 4,
+	"baseHp": 4,
+	"trigger": {
+		"eventTrigger": {
+			"class": "HostAcquiresTargetTrigger",
+			"actionType": "PHYSICAL_ATTACK",
+			"condition": {
+				"class": "RandomCondition"
+			}
+		},
+		"spell": {
+			"class": "FumbleSpell",
+			"target": "EVENT_TARGET"
 		}
 	},
-	"spell" : {
-		"class" : "FumbleSpell",
-		"target" : "EVENT_TARGET"
-	}
-  },
-  "id": "minion_ogre_brute",
-  "name": "Ogre Brute",
-  "description": "50% chance to attack the wrong enemy.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "COMMON",
-  "baseManaCost": 3,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"id": "minion_ogre_brute",
+	"name": "Ogre Brute",
+	"description": "50% chance to attack the wrong enemy.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 3,
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
 }

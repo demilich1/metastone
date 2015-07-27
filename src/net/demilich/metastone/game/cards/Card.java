@@ -20,6 +20,7 @@ public abstract class Card extends Entity {
 
 	private String description = "";
 	private final CardType cardType;
+	private final CardSet cardSet;
 	private final int manaCost;
 	private final Rarity rarity;
 	private final HeroClass classRestriction;
@@ -35,6 +36,7 @@ public abstract class Card extends Entity {
 		setDescription(desc.description);
 		setCollectible(desc.collectible);
 		cardType = desc.type;
+		cardSet = desc.set;
 		rarity = desc.rarity;
 		classRestriction = desc.heroClass;
 		manaCost = desc.baseManaCost;
@@ -52,15 +54,6 @@ public abstract class Card extends Entity {
 		}
 	}
 	
-	public Card(String name, CardType cardType, Rarity rarity, HeroClass classRestriction, int manaCost) {
-		setName(name);
-		this.cardType = cardType;
-		this.rarity = rarity;
-		this.classRestriction = classRestriction;
-		this.manaCost = manaCost;
-		this.cardId = null;
-	}
-
 	@Override
 	public Card clone() {
 		Card clone = (Card) super.clone();
@@ -185,6 +178,10 @@ public abstract class Card extends Entity {
 	@Override
 	public String toString() {
 		return String.format("[%s '%s' Manacost:%d]", getCardType(), getName(), manaCost);
+	}
+
+	public CardSet getCardSet() {
+		return cardSet;
 	}
 
 }

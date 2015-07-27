@@ -14,5 +14,6 @@
 		"hpBonus": 1,
 		"target": "FRIENDLY_MINIONS"
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

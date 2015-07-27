@@ -11,5 +11,6 @@
 		"class": "AddAttributeSpell",
 		"attribute": "DIVINE_SHIELD"
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

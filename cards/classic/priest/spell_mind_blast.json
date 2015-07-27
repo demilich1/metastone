@@ -12,5 +12,6 @@
 		"value": 5,
 		"target": "ENEMY_HERO"
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

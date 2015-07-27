@@ -22,5 +22,6 @@
 	"attributes": {
 		"CHARGE": true
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

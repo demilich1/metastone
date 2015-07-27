@@ -23,5 +23,6 @@
 		"target": "FRIENDLY_MINIONS",
 		"randomTarget": true
 	},
+	"set": "NAXXRAMAS",
 	"fileFormatVersion": 1
 }

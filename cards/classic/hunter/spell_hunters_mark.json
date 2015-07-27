@@ -11,5 +11,6 @@
 		"class": "SetHpSpell",
 		"value": 1
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

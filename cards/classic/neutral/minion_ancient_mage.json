@@ -4,7 +4,7 @@
 	"battlecry": {
 		"spell": {
 			"class": "ModifyAttributeSpell",
-			"attribute" : "SPELL_DAMAGE",
+			"attribute": "SPELL_DAMAGE",
 			"value": 1,
 			"target": "ADJACENT_MINIONS"
 		},
@@ -19,5 +19,6 @@
 	"rarity": "RARE",
 	"baseManaCost": 4,
 	"collectible": true,
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

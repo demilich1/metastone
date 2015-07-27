@@ -15,5 +15,6 @@
 	"baseManaCost": 6,
 	"collectible": true,
 	"race": "BEAST",
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

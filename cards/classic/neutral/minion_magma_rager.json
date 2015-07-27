@@ -7,5 +7,6 @@
 	"baseManaCost": 3,
 	"baseAttack": 5,
 	"baseHp": 1,
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

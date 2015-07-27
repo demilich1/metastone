@@ -13,5 +13,6 @@
 		"TAUNT": true,
 		"CHARGE": true
 	},
+	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

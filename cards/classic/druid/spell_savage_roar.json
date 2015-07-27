@@ -12,5 +12,6 @@
 		"value": 2,
 		"target": "FRIENDLY_CHARACTERS"
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

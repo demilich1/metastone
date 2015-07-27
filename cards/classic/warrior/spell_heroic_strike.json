@@ -12,5 +12,6 @@
 		"attackBonus": 4,
 		"target": "FRIENDLY_HERO"
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

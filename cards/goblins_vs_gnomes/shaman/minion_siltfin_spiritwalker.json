@@ -1,10 +1,10 @@
 {
-  "baseAttack": 2,
-  "baseHp": 5,
-  "trigger": {
+	"baseAttack": 2,
+	"baseHp": 5,
+	"trigger": {
 		"eventTrigger": {
 			"class": "MinionDeathTrigger",
-			"race" : "MURLOC",
+			"race": "MURLOC",
 			"targetPlayer": "SELF"
 		},
 		"spell": {
@@ -12,17 +12,18 @@
 			"value": 1
 		}
 	},
-  "race": "MURLOC",
-  "id": "minion_siltfin_spiritwalker",
-  "name": "Siltfin Spiritwalker",
-  "description": "Whenever another friendly Murloc dies, draw a card. Overload: (1)",
-  "type": "MINION",
-  "heroClass": "SHAMAN",
-  "rarity": "EPIC",
-  "baseManaCost": 4,
-  "collectible": true,
-  "attributes": {
-    "OVERLOAD": 1
-  },
-  "fileFormatVersion": 1
+	"race": "MURLOC",
+	"id": "minion_siltfin_spiritwalker",
+	"name": "Siltfin Spiritwalker",
+	"description": "Whenever another friendly Murloc dies, draw a card. Overload: (1)",
+	"type": "MINION",
+	"heroClass": "SHAMAN",
+	"rarity": "EPIC",
+	"baseManaCost": 4,
+	"collectible": true,
+	"attributes": {
+		"OVERLOAD": 1
+	},
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
 }

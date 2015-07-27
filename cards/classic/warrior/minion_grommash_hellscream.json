@@ -23,5 +23,6 @@
 		"CHARGE": true,
 		"ENRAGABLE": true
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

@@ -14,5 +14,6 @@
 		"TAUNT": true,
 		"UNTARGETABLE_BY_SPELLS": true
 	},
+	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

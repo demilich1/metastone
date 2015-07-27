@@ -20,5 +20,6 @@
 			"target": "FRIENDLY_CHARACTERS"
 		}
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

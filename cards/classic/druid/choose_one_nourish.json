@@ -9,5 +9,6 @@
 	"targetSelection": "NONE",
 	"option1": "spell_nourish_1",
 	"option2": "spell_nourish_2",
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

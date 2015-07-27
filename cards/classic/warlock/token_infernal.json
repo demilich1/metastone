@@ -10,5 +10,6 @@
 	"rarity": "COMMON",
 	"baseManaCost": 6,
 	"collectible": false,
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

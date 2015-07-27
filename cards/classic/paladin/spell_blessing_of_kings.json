@@ -12,5 +12,6 @@
 		"attackBonus": 4,
 		"hpBonus": 4
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

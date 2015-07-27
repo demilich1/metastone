@@ -1,22 +1,23 @@
 {
-  "targetSelection": "NONE",
-  "spell": {
-    "class": "DamageSpell",
-	"value" : 2,
-	"target" : "ALL_MINIONS",
-	"filter" : {
-		"class" : "RaceFilter",
-		"race" : "DEMON",
-		"invert" : true
-	}
-  },
-  "id": "spell_demonwrath",
-  "name": "Demonwrath",
-  "description": "Deal 2 damage to all non-Demon minions.",
-  "type": "SPELL",
-  "heroClass": "WARLOCK",
-  "rarity": "RARE",
-  "baseManaCost": 3,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "DamageSpell",
+		"value": 2,
+		"target": "ALL_MINIONS",
+		"filter": {
+			"class": "RaceFilter",
+			"race": "DEMON",
+			"invert": true
+		}
+	},
+	"id": "spell_demonwrath",
+	"name": "Demonwrath",
+	"description": "Deal 2 damage to all non-Demon minions.",
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "RARE",
+	"baseManaCost": 3,
+	"collectible": true,
+	"set": "BLACKROCK_MOUNTAIN",
+	"fileFormatVersion": 1
 }

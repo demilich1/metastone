@@ -14,5 +14,6 @@
 			"class": "ReturnMinionToHandSpell"
 		}
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

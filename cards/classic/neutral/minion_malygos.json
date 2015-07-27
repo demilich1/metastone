@@ -12,5 +12,6 @@
 		"SPELL_DAMAGE": 5
 	},
 	"race": "DRAGON",
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

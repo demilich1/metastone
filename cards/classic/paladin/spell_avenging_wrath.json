@@ -13,5 +13,6 @@
 		"howMany": 8,
 		"target": "ENEMY_CHARACTERS"
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

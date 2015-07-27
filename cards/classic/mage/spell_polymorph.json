@@ -11,5 +11,6 @@
 		"class": "TransformMinionSpell",
 		"card": "token_sheep"
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

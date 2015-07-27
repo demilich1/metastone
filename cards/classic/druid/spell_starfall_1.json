@@ -12,5 +12,6 @@
 		"class": "DamageSpell",
 		"value": 5
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

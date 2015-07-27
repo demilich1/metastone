@@ -12,5 +12,6 @@
 		"OVERLOAD": 3,
 		"TAUNT": true
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

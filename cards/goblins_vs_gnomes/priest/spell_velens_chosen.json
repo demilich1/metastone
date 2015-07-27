@@ -1,25 +1,26 @@
 {
-  "targetSelection": "MINIONS",
-  "spell": {
-    "class": "MetaSpell",
-	"spell1" : {
-		"class" : "BuffSpell",
-		"attackBonus" : 2,
-		"hpBonus" : 4
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "MetaSpell",
+		"spell1": {
+			"class": "BuffSpell",
+			"attackBonus": 2,
+			"hpBonus": 4
+		},
+		"spell2": {
+			"class": "ModifyAttributeSpell",
+			"attribute": "SPELL_DAMAGE",
+			"value": 1
+		}
 	},
-	"spell2" : {
-		"class" : "ModifyAttributeSpell",
-		"attribute" : "SPELL_DAMAGE",
-		"value" : 1
-	}
-  },
-  "id": "spell_velens_chosen",
-  "name": "Velen's Chosen",
-  "description": "Give a minion +2/+4 and Spell Damage +1",
-  "type": "SPELL",
-  "heroClass": "PRIEST",
-  "rarity": "COMMON",
-  "baseManaCost": 3,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"id": "spell_velens_chosen",
+	"name": "Velen's Chosen",
+	"description": "Give a minion +2/+4 and Spell Damage +1",
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "COMMON",
+	"baseManaCost": 3,
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
 }

@@ -1,7 +1,7 @@
 {
-  "baseAttack": 1,
-  "baseHp": 3,
-  "trigger": {
+	"baseAttack": 1,
+	"baseHp": 3,
+	"trigger": {
 		"eventTrigger": {
 			"class": "EnrageChangedTrigger"
 		},
@@ -11,17 +11,18 @@
 			"target": "SELF"
 		}
 	},
-  "race": "MECH",
-  "id": "minion_warbot",
-  "name": "Warbot",
-  "description": "Enrage: +1 Attack.",
-  "type": "MINION",
-  "heroClass": "WARRIOR",
-  "rarity": "COMMON",
-  "baseManaCost": 1,
-  "collectible": true,
-  "attributes": {
-    "ENRAGABLE": true
-  },
-  "fileFormatVersion": 1
+	"race": "MECH",
+	"id": "minion_warbot",
+	"name": "Warbot",
+	"description": "Enrage: +1 Attack.",
+	"type": "MINION",
+	"heroClass": "WARRIOR",
+	"rarity": "COMMON",
+	"baseManaCost": 1,
+	"collectible": true,
+	"attributes": {
+		"ENRAGABLE": true
+	},
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
 }

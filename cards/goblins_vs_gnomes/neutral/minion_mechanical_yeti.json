@@ -1,19 +1,28 @@
 {
-  "baseAttack": 4,
-  "baseHp": 5,
-  "race": "MECH",
-  "deathrattle": {
-    "class": "ReceiveRandomCardSpell",
-	"targetPlayer" : "BOTH",
-	"cards" : ["spell_armor_plating", "spell_emergency_coolant", "spell_finicky_cloakfield", "spell_reversing_switch", "spell_rusty_horn", "spell_time_rewinder", "spell_whirling_blades"]
-  },
-  "id": "minion_mechanical_yeti",
-  "name": "Mechanical Yeti",
-  "description": "Deathrattle: Give each player a Spare Part.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "COMMON",
-  "baseManaCost": 4,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"baseAttack": 4,
+	"baseHp": 5,
+	"race": "MECH",
+	"deathrattle": {
+		"class": "ReceiveRandomCardSpell",
+		"targetPlayer": "BOTH",
+		"cards": [
+			"spell_armor_plating",
+			"spell_emergency_coolant",
+			"spell_finicky_cloakfield",
+			"spell_reversing_switch",
+			"spell_rusty_horn",
+			"spell_time_rewinder",
+			"spell_whirling_blades"
+		]
+	},
+	"id": "minion_mechanical_yeti",
+	"name": "Mechanical Yeti",
+	"description": "Deathrattle: Give each player a Spare Part.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 4,
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
 }

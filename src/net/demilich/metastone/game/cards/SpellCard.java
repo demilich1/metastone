@@ -27,14 +27,6 @@ public class SpellCard extends Card {
 		}
 	}
 
-	protected SpellCard(String name, CardType cardType, Rarity rarity, HeroClass classRestriction, int manaCost) {
-		super(name, cardType, rarity, classRestriction, manaCost);
-	}
-	
-	public SpellCard(String name, Rarity rarity, HeroClass classRestriction, int manaCost) {
-		super(name, CardType.SPELL, rarity, classRestriction, manaCost);
-	}
-
 	public boolean canBeCast(GameContext context, Player player) {
 		Player opponent = context.getOpponent(player);
 		switch (targetRequirement) {

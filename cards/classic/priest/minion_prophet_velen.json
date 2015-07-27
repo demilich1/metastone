@@ -12,5 +12,6 @@
 	"attributes": {
 		"SPELL_AMPLIFY_MULTIPLIER": 1
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

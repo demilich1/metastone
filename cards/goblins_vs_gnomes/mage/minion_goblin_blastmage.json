@@ -1,28 +1,29 @@
 {
-  "baseAttack": 5,
-  "baseHp": 4,
-  "battlecry": {
-    "spell": {
-      "class": "MissilesSpell",
-	  "howMany" : 4,
-	  "target" : "ENEMY_CHARACTERS",
-	  "condition" : {
-		"class" : "RaceOnBoardCondition",
-		"race" : "MECH"
-	  }
-    },
-    "resolvedLate": false
-  },
-  "id": "minion_goblin_blastmage",
-  "name": "Goblin Blastmage",
-  "description": "Battlecry: If you control a Mech, deal 4 damage randomly split among enemy characters.",
-  "type": "MINION",
-  "heroClass": "MAGE",
-  "rarity": "RARE",
-  "baseManaCost": 4,
-  "collectible": true,
-  "attributes": {
-    "BATTLECRY": true
-  },
-  "fileFormatVersion": 1
+	"baseAttack": 5,
+	"baseHp": 4,
+	"battlecry": {
+		"spell": {
+			"class": "MissilesSpell",
+			"howMany": 4,
+			"target": "ENEMY_CHARACTERS",
+			"condition": {
+				"class": "RaceOnBoardCondition",
+				"race": "MECH"
+			}
+		},
+		"resolvedLate": false
+	},
+	"id": "minion_goblin_blastmage",
+	"name": "Goblin Blastmage",
+	"description": "Battlecry: If you control a Mech, deal 4 damage randomly split among enemy characters.",
+	"type": "MINION",
+	"heroClass": "MAGE",
+	"rarity": "RARE",
+	"baseManaCost": 4,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
 }

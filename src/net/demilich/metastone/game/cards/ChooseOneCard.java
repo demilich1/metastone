@@ -17,11 +17,6 @@ public class ChooseOneCard extends Card implements IChooseOneCard {
 		card2Id = desc.option2;
 	}
 	
-	public ChooseOneCard(String name, CardType cardType, Rarity rarity, HeroClass classRestriction, int manaCost) {
-		super(name, cardType, rarity, classRestriction, manaCost);
-		setTag(GameTag.CHOOSE_ONE);
-	}
-	
 	@Override
 	public Card clone() {
 		ChooseOneCard clone = (ChooseOneCard) super.clone();

@@ -1,16 +1,17 @@
 {
-  "targetSelection": "MINIONS",
-  "spell": {
-    "class": "AddAttributeSpell",
-	"attribute" : "FROZEN"
-  },
-  "id": "spell_emergency_coolant",
-  "name": "Emergency Coolant",
-  "description": "Freeze a minion.",
-  "type": "SPELL",
-  "heroClass": "ANY",
-  "rarity": "FREE",
-  "baseManaCost": 1,
-  "collectible": false,
-  "fileFormatVersion": 1
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "AddAttributeSpell",
+		"attribute": "FROZEN"
+	},
+	"id": "spell_emergency_coolant",
+	"name": "Emergency Coolant",
+	"description": "Freeze a minion.",
+	"type": "SPELL",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"baseManaCost": 1,
+	"collectible": false,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
 }

@@ -20,5 +20,6 @@
 	"rarity": "COMMON",
 	"baseManaCost": 4,
 	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

@@ -1,29 +1,30 @@
 {
-  "baseAttack": 2,
-  "baseHp": 1,
-  "race": "DRAGON",
-  "battlecry": {
-    "spell": {
-      "class": "BuffSpell",
-	  "hpBonus" : 2,
-	  "target" : "SELF",
-	   "condition" : {
-		"class" : "HoldsCardCondition",
-		"race" : "DRAGON"
-	  }
-    },
-    "resolvedLate": false
-  },
-  "id": "minion_twilight_whelp",
-  "name": "Twilight Whelp",
-  "description": "Battlecry: If you're holding a Dragon, gain +2 Health.",
-  "type": "MINION",
-  "heroClass": "PRIEST",
-  "rarity": "COMMON",
-  "baseManaCost": 1,
-  "collectible": true,
-  "attributes": {
-    "BATTLECRY": true
-  },
-  "fileFormatVersion": 1
+	"baseAttack": 2,
+	"baseHp": 1,
+	"race": "DRAGON",
+	"battlecry": {
+		"spell": {
+			"class": "BuffSpell",
+			"hpBonus": 2,
+			"target": "SELF",
+			"condition": {
+				"class": "HoldsCardCondition",
+				"race": "DRAGON"
+			}
+		},
+		"resolvedLate": false
+	},
+	"id": "minion_twilight_whelp",
+	"name": "Twilight Whelp",
+	"description": "Battlecry: If you're holding a Dragon, gain +2 Health.",
+	"type": "MINION",
+	"heroClass": "PRIEST",
+	"rarity": "COMMON",
+	"baseManaCost": 1,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"set": "BLACKROCK_MOUNTAIN",
+	"fileFormatVersion": 1
 }

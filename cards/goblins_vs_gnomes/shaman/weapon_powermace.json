@@ -11,14 +11,15 @@
 	"durability": 2,
 	"deathrattle": {
 		"class": "BuffSpell",
-		"attackBonus" : 2,
-		"hpBonus" : 2,
+		"attackBonus": 2,
+		"hpBonus": 2,
 		"target": "FRIENDLY_MINIONS",
-		"randomTarget" : true,
-		"filter" : {
-			"class" : "RaceFilter",
-			"race" : "MECH"
+		"randomTarget": true,
+		"filter": {
+			"class": "RaceFilter",
+			"race": "MECH"
 		}
 	},
+	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

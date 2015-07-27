@@ -15,17 +15,18 @@
 		},
 		"spell": {
 			"class": "ConditionalAttackBonusSpell",
-			"valueProvider" : {
-				"class" : "ConditionalValueProvider",
-				"condition" : {
-					"class" : "RaceOnBoardCondition",
-					"race" : "MECH"
+			"valueProvider": {
+				"class": "ConditionalValueProvider",
+				"condition": {
+					"class": "RaceOnBoardCondition",
+					"race": "MECH"
 				},
-				"ifTrue" : 2,
-				"ifFalse" : 0
+				"ifTrue": 2,
+				"ifFalse": 0
 			},
-			"target" : "SELF"
+			"target": "SELF"
 		}
 	},
+	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

@@ -1,29 +1,30 @@
 {
-  "baseAttack": 3,
-  "baseHp": 6,
-  "trigger" : {
-	"eventTrigger" : {
-		"class" : "SpellCastedTrigger",
-		"condition" : {
-			"class" : "ManaCostCondition",
-			"value" : 1
+	"baseAttack": 3,
+	"baseHp": 6,
+	"trigger": {
+		"eventTrigger": {
+			"class": "SpellCastedTrigger",
+			"condition": {
+				"class": "ManaCostCondition",
+				"value": 1
+			}
+		},
+		"spell": {
+			"class": "ReceiveRandomCollectibleCardSpell",
+			"cardFilter": {
+				"class": "RaceFilter",
+				"race": "MECH"
+			}
 		}
 	},
-	"spell" : {
-		"class" : "ReceiveRandomCollectibleCardSpell",
-		"cardFilter" : {
-			"class" : "RaceFilter",
-			"race" : "MECH"
-		}
-	}
-  },
-  "id": "minion_gazlowe",
-  "name": "Gazlowe",
-  "description": "Whenever you cast a 1-mana spell, add a random Mech to your hand.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "LEGENDARY",
-  "baseManaCost": 6,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"id": "minion_gazlowe",
+	"name": "Gazlowe",
+	"description": "Whenever you cast a 1-mana spell, add a random Mech to your hand.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"baseManaCost": 6,
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
 }

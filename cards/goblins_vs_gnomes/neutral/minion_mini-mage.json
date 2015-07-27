@@ -13,5 +13,6 @@
 		"SPELL_DAMAGE": 1,
 		"STEALTH": true
 	},
+	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

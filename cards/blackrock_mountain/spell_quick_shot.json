@@ -1,11 +1,11 @@
 {
-  "targetSelection": "ANY",
-  "spell": {
+	"targetSelection": "ANY",
+	"spell": {
 		"class": "ConditionalEffectSpell",
 		"condition": {
 			"class": "CardCountCondition",
-			"value" : 1,
-			"operation" : "LESS"
+			"value": 1,
+			"operation": "LESS"
 		},
 		"spell1": {
 			"class": "DamageSpell",
@@ -15,13 +15,14 @@
 			"class": "DrawCardSpell"
 		}
 	},
-  "id": "spell_quick_shot",
-  "name": "Quick Shot",
-  "description": "Deal 3 damage. If your hand is empty, draw a card.",
-  "type": "SPELL",
-  "heroClass": "HUNTER",
-  "rarity": "COMMON",
-  "baseManaCost": 2,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"id": "spell_quick_shot",
+	"name": "Quick Shot",
+	"description": "Deal 3 damage. If your hand is empty, draw a card.",
+	"type": "SPELL",
+	"heroClass": "HUNTER",
+	"rarity": "COMMON",
+	"baseManaCost": 2,
+	"collectible": true,
+	"set": "BLACKROCK_MOUNTAIN",
+	"fileFormatVersion": 1
 }

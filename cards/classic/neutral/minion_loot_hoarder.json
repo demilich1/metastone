@@ -12,5 +12,6 @@
 		"class": "DrawCardSpell",
 		"value": 1
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

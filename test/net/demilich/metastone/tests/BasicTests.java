@@ -8,14 +8,13 @@ import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.actions.PhysicalAttackAction;
 import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.cards.MinionCard;
-import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.WeaponCard;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
-import net.demilich.metastone.game.entities.weapons.Weapon;
 import net.demilich.metastone.game.spells.BuffHeroSpell;
 import net.demilich.metastone.game.spells.DamageSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -166,13 +165,7 @@ public class BasicTests extends TestBase {
 		Player player = context.getPlayer1();
 		Hero warrior = player.getHero();
 
-		WeaponCard weaponCard = new WeaponCard("Test Weapon", Rarity.FREE, HeroClass.ANY, 0) {
-
-			@Override
-			public Weapon getWeapon() {
-				return createWeapon(2, 2);
-			}
-		};
+		WeaponCard weaponCard = (WeaponCard) CardCatalogue.getCardById("weapon_battle_axe");
 
 		context.setActivePlayer(player.getId());
 		context.getLogic().startTurn(player.getId());

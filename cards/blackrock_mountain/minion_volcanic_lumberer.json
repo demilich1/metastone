@@ -1,19 +1,20 @@
 {
-  "baseAttack": 7,
-  "baseHp": 8,
-  "id": "minion_volcanic_lumberer",
-  "name": "Volcanic Lumberer",
-   "manaCostModifier": {
-	"class": "DeadMinionsThisTurn"
-  },
-  "description": "Taunt. Costs (1) less for each minion that died this turn.",
-  "type": "MINION",
-  "heroClass": "DRUID",
-  "rarity": "RARE",
-  "baseManaCost": 9,
-  "collectible": true,
-  "attributes": {
-    "TAUNT": true
-  },
-  "fileFormatVersion": 1
+	"baseAttack": 7,
+	"baseHp": 8,
+	"id": "minion_volcanic_lumberer",
+	"name": "Volcanic Lumberer",
+	"manaCostModifier": {
+		"class": "DeadMinionsThisTurn"
+	},
+	"description": "Taunt. Costs (1) less for each minion that died this turn.",
+	"type": "MINION",
+	"heroClass": "DRUID",
+	"rarity": "RARE",
+	"baseManaCost": 9,
+	"collectible": true,
+	"attributes": {
+		"TAUNT": true
+	},
+	"set": "BLACKROCK_MOUNTAIN",
+	"fileFormatVersion": 1
 }

@@ -9,5 +9,6 @@
 	"baseHp": 1,
 	"race": "MECH",
 	"collectible": false,
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

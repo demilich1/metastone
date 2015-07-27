@@ -12,5 +12,6 @@
 	"attributes": {
 		"TAUNT": true
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

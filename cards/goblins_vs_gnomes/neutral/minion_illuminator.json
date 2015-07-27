@@ -1,7 +1,7 @@
 {
-  "baseAttack": 2,
-  "baseHp": 4,
-  "trigger": {
+	"baseAttack": 2,
+	"baseHp": 4,
+	"trigger": {
 		"eventTrigger": {
 			"class": "TurnEndTrigger",
 			"targetPlayer": "SELF",
@@ -11,17 +11,18 @@
 		},
 		"spell": {
 			"class": "HealingSpell",
-			"value" : 4,
+			"value": 4,
 			"target": "FRIENDLY_HERO"
 		}
 	},
-  "id": "minion_illuminator",
-  "name": "Illuminator",
-  "description": "If you control a Secret at the end of your turn, restore 4 health to your hero.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "RARE",
-  "baseManaCost": 3,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"id": "minion_illuminator",
+	"name": "Illuminator",
+	"description": "If you control a Secret at the end of your turn, restore 4 health to your hero.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"baseManaCost": 3,
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
 }

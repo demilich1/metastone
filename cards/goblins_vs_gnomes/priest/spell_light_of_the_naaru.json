@@ -1,26 +1,27 @@
 {
-  "targetSelection": "ANY",
-  "spell": {
-    "class": "ConditionalEffectSpell",
-	"spell1" : {
-		"class" : "HealingSpell",
-		"value" : 3
+	"targetSelection": "ANY",
+	"spell": {
+		"class": "ConditionalEffectSpell",
+		"spell1": {
+			"class": "HealingSpell",
+			"value": 3
+		},
+		"spell2": {
+			"class": "SummonSpell",
+			"card": "minion_lightwarden"
+		},
+		"condition": {
+			"class": "IsDamagedCondition"
+		}
 	},
-	"spell2" : {
-		"class" : "SummonSpell",
-		"card" : "minion_lightwarden"
-	},
-	"condition" : {
-		"class" : "IsDamagedCondition"
-	}
-  },
-  "id": "spell_light_of_the_naaru",
-  "name": "Light of the Naaru",
-  "description": "Restore 3 Health. If the target is still damaged, summon a Lightwarden.",
-  "type": "SPELL",
-  "heroClass": "PRIEST",
-  "rarity": "RARE",
-  "baseManaCost": 1,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"id": "spell_light_of_the_naaru",
+	"name": "Light of the Naaru",
+	"description": "Restore 3 Health. If the target is still damaged, summon a Lightwarden.",
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "RARE",
+	"baseManaCost": 1,
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
 }

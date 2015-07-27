@@ -20,5 +20,6 @@
 			"attribute": "TAUNT"
 		}
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

@@ -14,5 +14,6 @@
 		"DIVINE_SHIELD": true,
 		"TAUNT": true
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

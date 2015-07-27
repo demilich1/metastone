@@ -12,5 +12,6 @@
 	"attributes": {
 		"INVERT_HEALING": true
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

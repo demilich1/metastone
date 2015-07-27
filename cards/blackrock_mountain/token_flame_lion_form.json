@@ -10,5 +10,6 @@
 	"rarity": "COMMON",
 	"baseManaCost": 3,
 	"collectible": false,
+	"set": "BLACKROCK_MOUNTAIN",
 	"fileFormatVersion": 1
 }

@@ -8,5 +8,6 @@
 	"rarity": "EPIC",
 	"baseManaCost": 0,
 	"collectible": false,
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

@@ -4,6 +4,7 @@ import java.util.Map;
 
 import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -18,6 +19,7 @@ public abstract class CardDesc {
 	public CardType type;
 	public HeroClass heroClass;
 	public Rarity rarity;
+	public CardSet set;
 	public int baseManaCost;
 	public boolean collectible = true;
 	public Map<GameTag, Object> attributes;

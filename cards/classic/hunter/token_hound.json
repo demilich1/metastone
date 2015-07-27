@@ -12,5 +12,6 @@
 		"CHARGE": true
 	},
 	"collectible": false,
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

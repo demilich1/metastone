@@ -17,5 +17,6 @@
 	"attributes": {
 		"TAUNT": true
 	},
+	"set": "NAXXRAMAS",
 	"fileFormatVersion": 1
 }

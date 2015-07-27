@@ -70,13 +70,10 @@ public class SpellDeserializer implements JsonDeserializer<SpellDesc> {
 
 	private void parseArgument(SpellArg spellArg, JsonObject jsonData, Map<SpellArg, Object> spellArgs, ParseValueType valueType) {
 		String argName = ParseUtils.toCamelCase(spellArg.toString());
-		System.out.println("ArgName: " + argName);
 		if (!jsonData.has(argName)) {
 			return;
 		}
 		Object value = ParseUtils.parse(argName, jsonData, valueType);
-		
-		System.out.println("Setting spellArg " + spellArg + " to "  +value);
 		spellArgs.put(spellArg, value);
 	}
 

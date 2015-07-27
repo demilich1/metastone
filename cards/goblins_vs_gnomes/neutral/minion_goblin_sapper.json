@@ -1,33 +1,34 @@
 {
-  "baseAttack": 2,
-  "baseHp": 4,
-  "trigger" : {
-	"eventTrigger" : {
-		"class" : "GameStateChangedTrigger"
-	},
-	"spell" : {
-		"class" : "ConditionalAttackBonusSpell",
-		"valueProvider": {
-			"class": "ConditionalValueProvider",
-			"condition" : {
-				"class" : "CardCountCondition",
-				"targetPlayer" : "OPPONENT",
-				"value" : 5,
-				"operation" : "GREATER"
-			},
-			"ifTrue" : 4,
-			"ifFalse" : 0
+	"baseAttack": 2,
+	"baseHp": 4,
+	"trigger": {
+		"eventTrigger": {
+			"class": "GameStateChangedTrigger"
 		},
-		"target": "SELF"
-	}
-  },
-  "id": "minion_goblin_sapper",
-  "name": "Goblin Sapper",
-  "description": "Has +4 Attack while your opponent has 6 or more cards in hand.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "RARE",
-  "baseManaCost": 3,
-  "collectible": true,
-  "fileFormatVersion": 1
+		"spell": {
+			"class": "ConditionalAttackBonusSpell",
+			"valueProvider": {
+				"class": "ConditionalValueProvider",
+				"condition": {
+					"class": "CardCountCondition",
+					"targetPlayer": "OPPONENT",
+					"value": 5,
+					"operation": "GREATER"
+				},
+				"ifTrue": 4,
+				"ifFalse": 0
+			},
+			"target": "SELF"
+		}
+	},
+	"id": "minion_goblin_sapper",
+	"name": "Goblin Sapper",
+	"description": "Has +4 Attack while your opponent has 6 or more cards in hand.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"baseManaCost": 3,
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
 }

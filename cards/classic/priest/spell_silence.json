@@ -10,5 +10,6 @@
 	"spell": {
 		"class": "SilenceSpell"
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

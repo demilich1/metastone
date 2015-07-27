@@ -18,5 +18,6 @@
 			"targetPlayer": "OPPONENT"
 		}
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

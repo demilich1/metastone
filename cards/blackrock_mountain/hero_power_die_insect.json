@@ -8,11 +8,12 @@
 	"rarity": "FREE",
 	"spell": {
 		"class": "DamageSpell",
-		"value" : 8,
-		"target" : "ENEMY_CHARACTERS",
-		"randomTarget" : true
+		"value": 8,
+		"target": "ENEMY_CHARACTERS",
+		"randomTarget": true
 	},
 	"baseManaCost": 2,
 	"collectible": false,
+	"set": "BLACKROCK_MOUNTAIN",
 	"fileFormatVersion": 1
 }

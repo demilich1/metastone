@@ -12,5 +12,6 @@
 	"attributes": {
 		"SPELL_DAMAGE": 1
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

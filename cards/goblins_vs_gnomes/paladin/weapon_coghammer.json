@@ -24,10 +24,11 @@
 				"attribute": "TAUNT"
 			},
 			"target": "FRIENDLY_MINIONS",
-			"randomTarget" : true
+			"randomTarget": true
 		},
 		"targetSelection": "NONE",
 		"resolvedLate": false
 	},
+	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

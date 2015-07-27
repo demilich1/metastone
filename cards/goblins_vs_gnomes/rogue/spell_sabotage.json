@@ -1,24 +1,25 @@
 {
-  "targetSelection": "NONE",
-  "spell": {
-    "class": "ComboSpell",
-	"spell1" : {
-		"class" : "DestroySpell",
-		"target" : "ENEMY_MINIONS",
-		"randomTarget" : true
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "ComboSpell",
+		"spell1": {
+			"class": "DestroySpell",
+			"target": "ENEMY_MINIONS",
+			"randomTarget": true
+		},
+		"spell2": {
+			"class": "DestroyWeaponSpell",
+			"target": "ENEMY_HERO"
+		}
 	},
-	"spell2" : {
-		"class" : "DestroyWeaponSpell",
-		"target" : "ENEMY_HERO"
-	}
-  },
-  "id": "spell_sabotage",
-  "name": "Sabotage",
-  "description": "Destroy a random enemy minion. Combo: And your opponent's weapon.",
-  "type": "SPELL",
-  "heroClass": "ROGUE",
-  "rarity": "EPIC",
-  "baseManaCost": 4,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"id": "spell_sabotage",
+	"name": "Sabotage",
+	"description": "Destroy a random enemy minion. Combo: And your opponent's weapon.",
+	"type": "SPELL",
+	"heroClass": "ROGUE",
+	"rarity": "EPIC",
+	"baseManaCost": 4,
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
 }

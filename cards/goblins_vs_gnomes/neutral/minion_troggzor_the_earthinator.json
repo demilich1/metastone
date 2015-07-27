@@ -19,5 +19,6 @@
 	"rarity": "LEGENDARY",
 	"baseManaCost": 7,
 	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

@@ -1,25 +1,26 @@
 {
-  "baseAttack": 5,
-  "baseHp": 5,
-  "trigger" : {
-	"eventTrigger" : {
-		"class" : "ArmorGainedTrigger",
-		"targetPlayer" : "SELF"
+	"baseAttack": 5,
+	"baseHp": 5,
+	"trigger": {
+		"eventTrigger": {
+			"class": "ArmorGainedTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"attackBonus": 1,
+			"target": "SELF"
+		}
 	},
-	"spell" : {
-		"class" : "BuffSpell",
-		"attackBonus" : 1,
-		"target" : "SELF"
-	}
-  },
-  "race": "MECH",
-  "id": "minion_siege_engine",
-  "name": "Siege Engine",
-  "description": "Whenever you gain Armor, give this minion +1 Attack.",
-  "type": "MINION",
-  "heroClass": "WARRIOR",
-  "rarity": "RARE",
-  "baseManaCost": 5,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"race": "MECH",
+	"id": "minion_siege_engine",
+	"name": "Siege Engine",
+	"description": "Whenever you gain Armor, give this minion +1 Attack.",
+	"type": "MINION",
+	"heroClass": "WARRIOR",
+	"rarity": "RARE",
+	"baseManaCost": 5,
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
 }

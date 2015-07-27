@@ -21,5 +21,6 @@
 	"rarity": "EPIC",
 	"baseManaCost": 0,
 	"collectible": true,
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

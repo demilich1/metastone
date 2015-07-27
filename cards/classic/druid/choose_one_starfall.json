@@ -9,5 +9,6 @@
 	"targetSelection": "NONE",
 	"option1": "spell_starfall_1",
 	"option2": "spell_starfall_2",
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

@@ -4,11 +4,8 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.HeroPowerAction;
 import net.demilich.metastone.game.actions.PlayCardAction;
-import net.demilich.metastone.game.cards.CardType;
-import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.cards.desc.HeroPowerCardDesc;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.targeting.CardLocation;
 
 public class HeroPower extends SpellCard {
@@ -20,11 +17,6 @@ public class HeroPower extends SpellCard {
 		setLocation(CardLocation.HERO_POWER);
 	}
 	
-	public HeroPower(String name, HeroClass heroClass) {
-		super(name, CardType.HERO_POWER, Rarity.FREE, heroClass, 2);
-		setLocation(CardLocation.HERO_POWER);
-	}
-
 	public boolean hasBeenUsed() {
 		return used;
 	}

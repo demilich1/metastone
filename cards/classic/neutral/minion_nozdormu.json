@@ -9,5 +9,6 @@
 	"baseAttack": 8,
 	"baseHp": 8,
 	"race": "DRAGON",
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

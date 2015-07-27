@@ -16,5 +16,6 @@
 		"value": 2,
 		"target": "ALL_CHARACTERS"
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

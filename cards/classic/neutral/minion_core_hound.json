@@ -8,5 +8,6 @@
 	"baseAttack": 9,
 	"baseHp": 5,
 	"race": "BEAST",
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

@@ -25,5 +25,6 @@
 		"BATTLECRY": true,
 		"CHARGE": true
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

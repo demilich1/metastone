@@ -11,5 +11,6 @@
 		"class": "HealingSpell",
 		"value": 6
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

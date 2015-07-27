@@ -8,5 +8,6 @@
 	"baseAttack": 4,
 	"baseHp": 5,
 	"collectible": false,
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

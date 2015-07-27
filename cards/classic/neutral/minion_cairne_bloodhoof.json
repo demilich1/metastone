@@ -12,5 +12,6 @@
 		"class": "SummonSpell",
 		"card": "token_baine_bloodhoof"
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

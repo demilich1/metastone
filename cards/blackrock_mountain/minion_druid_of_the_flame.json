@@ -25,5 +25,6 @@
 	"rarity": "COMMON",
 	"baseManaCost": 3,
 	"collectible": true,
+	"set": "BLACKROCK_MOUNTAIN",
 	"fileFormatVersion": 1
 }

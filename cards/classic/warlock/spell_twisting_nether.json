@@ -11,5 +11,6 @@
 		"class": "DestroySpell",
 		"target": "ALL_MINIONS"
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

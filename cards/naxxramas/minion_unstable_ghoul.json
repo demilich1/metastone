@@ -3,7 +3,7 @@
 	"baseHp": 3,
 	"deathrattle": {
 		"class": "DamageSpell",
-		"value" : 1,
+		"value": 1,
 		"target": "ALL_MINIONS"
 	},
 	"id": "minion_unstable_ghoul",
@@ -17,5 +17,6 @@
 	"attributes": {
 		"TAUNT": true
 	},
+	"set": "NAXXRAMAS",
 	"fileFormatVersion": 1
 }

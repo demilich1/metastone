@@ -12,5 +12,6 @@
 	"attributes": {
 		"UNTARGETABLE_BY_SPELLS": true
 	},
+	"set": "NAXXRAMAS",
 	"fileFormatVersion": 1
 }

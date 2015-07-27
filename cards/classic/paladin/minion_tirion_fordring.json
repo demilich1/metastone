@@ -16,5 +16,6 @@
 		"class": "EquipWeaponSpell",
 		"card": "weapon_ashbringer"
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

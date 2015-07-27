@@ -9,5 +9,6 @@
 	"baseManaCost": 2,
 	"damage": 3,
 	"durability": 2,
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

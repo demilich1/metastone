@@ -8,5 +8,6 @@
 	"rarity": "COMMON",
 	"baseManaCost": 1,
 	"collectible": false,
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

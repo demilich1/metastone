@@ -19,5 +19,6 @@
 		},
 		"exclusive": true
 	},
+	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

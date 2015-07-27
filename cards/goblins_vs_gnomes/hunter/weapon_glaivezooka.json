@@ -15,12 +15,13 @@
 	"battlecry": {
 		"spell": {
 			"class": "BuffSpell",
-			"attackBonus" : 1,
-			"target" : "FRIENDLY_MINIONS",
-			"randomTarget" : "true"
+			"attackBonus": 1,
+			"target": "FRIENDLY_MINIONS",
+			"randomTarget": "true"
 		},
 		"targetSelection": "NONE",
 		"resolvedLate": false
 	},
+	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }
