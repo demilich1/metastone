@@ -31,6 +31,7 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 		hardRemoval.add("spell_deadly_shot");
 		hardRemoval.add("spell_sap");
 		hardRemoval.add("minion_doomsayer");
+		hardRemoval.add("minion_big_game_hunter");
 	}
 
 	private static ThreatLevel calcuateThreatLevel(GameContext context, int playerId) {

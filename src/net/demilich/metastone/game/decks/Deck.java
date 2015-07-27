@@ -19,7 +19,7 @@ public class Deck {
 	public int containsHowMany(Card card) {
 		int count = 0;
 		for (Card cardInDeck : cards) {
-			if (card.getTypeId() == cardInDeck.getTypeId()) {
+			if (card.getCardId().equals(cardInDeck.getCardId())) {
 				count++;
 			}
 		}

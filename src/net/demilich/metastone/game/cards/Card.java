@@ -123,11 +123,6 @@ public abstract class Card extends Entity {
 		return rarity;
 	}
 
-	@Override
-	public int getTypeId() {
-		return getCardId() != null ? getCardId().hashCode() : super.getTypeId();
-	}
-
 	public boolean hasBattlecry() {
 		return this.battlecry != null;
 	}
@@ -143,6 +138,7 @@ public abstract class Card extends Entity {
 		if (getRarity().toString().toLowerCase().contains(filter)) {
 			return true;
 		}
+		/*
 		String className = getClass().getName();
 		if (filter.contains("gvg") && className.contains("goblins")) {
 			return true;
@@ -152,8 +148,20 @@ public abstract class Card extends Entity {
 				&& !className.contains("goblins")) {
 			return true;
 		}
+		*/
 		String lowerCaseName = getName().toLowerCase();
-		return lowerCaseName.contains(filter);
+		if (lowerCaseName.contains(filter)) {
+			return true;
+		}
+		
+		if (getDescription() != null) {
+			String lowerCaseDescription = getDescription().toLowerCase();
+			if (lowerCaseDescription.contains(filter)) {
+				return true;
+			}	
+		}
+		
+		return false;
 	}
 
 	public abstract PlayCardAction play();

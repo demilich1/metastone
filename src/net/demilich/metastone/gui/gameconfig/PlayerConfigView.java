@@ -25,7 +25,6 @@ import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
 import net.demilich.metastone.game.behaviour.threat.GameStateValueBehaviour;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.HeroCard;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.DeckFactory;
@@ -126,7 +125,7 @@ public class PlayerConfigView extends VBox {
 
 	private void onBehaviourChanged(ObservableValue<? extends IBehaviour> ov, IBehaviour oldBehaviour, IBehaviour newBehaviour) {
 		getPlayerConfig().setBehaviour(newBehaviour);
-		boolean humanBehaviourSelected = newBehaviour instanceof HumanBehaviour; 
+		boolean humanBehaviourSelected = newBehaviour instanceof HumanBehaviour;
 		hideCardsCheckBox.setDisable(humanBehaviourSelected);
 		if (humanBehaviourSelected) {
 			hideCardsCheckBox.setSelected(false);
@@ -152,7 +151,7 @@ public class PlayerConfigView extends VBox {
 		}
 
 		behaviourList.add(new GameStateValueBehaviour());
-		
+
 		if (selectionHint == PlayerConfigType.OPPONENT) {
 			behaviourList.add(new HumanBehaviour());
 		}
@@ -168,10 +167,10 @@ public class PlayerConfigView extends VBox {
 
 	public void setupHeroes() {
 		ObservableList<HeroCard> heroList = FXCollections.observableArrayList();
-		for (Card card : CardCatalogue.query(CardType.HERO)) {
+		for (Card card : CardCatalogue.getHeroes()) {
 			heroList.add((HeroCard) card);
 		}
-		
+
 		heroList.add(new MetaHero());
 
 		heroBox.setItems(heroList);

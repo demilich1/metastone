@@ -32,11 +32,6 @@ public class Minion extends Actor {
 		return EntityType.MINION;
 	}
 
-	@Override
-	public int getTypeId() {
-		return getName().hashCode();
-	}
-
 	protected void setBaseStats(int baseAttack, int baseHp) {
 		setBaseAttack(baseAttack);
 		setBaseHp(baseHp);

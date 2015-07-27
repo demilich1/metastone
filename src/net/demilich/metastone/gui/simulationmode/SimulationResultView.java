@@ -122,7 +122,7 @@ public class SimulationResultView extends BorderPane {
 
 	private String getFavouriteCardName(GameStatistics stats, CardType cardType) {
 		List<Card> cards = new ArrayList<Card>();
-		for (int cardId : stats.getCardsPlayed().keySet()) {
+		for (String cardId : stats.getCardsPlayed().keySet()) {
 			Card card = CardCatalogue.getCardById(cardId);
 			if (card == null) {
 				System.out.println("Invalid card with id: " + cardId);
@@ -137,8 +137,8 @@ public class SimulationResultView extends BorderPane {
 		}
 		
 		Collections.sort(cards, (c1, c2) ->  {
-			int c1Count = stats.getCardsPlayed().get(c1.getTypeId()); 
-			int c2Count = stats.getCardsPlayed().get(c2.getTypeId());
+			int c1Count = stats.getCardsPlayed().get(c1.getCardId()); 
+			int c2Count = stats.getCardsPlayed().get(c2.getCardId());
 			// sort descending
 			return Integer.compare(c2Count, c1Count);
 		});

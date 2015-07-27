@@ -163,9 +163,8 @@ public class DeckProxy extends Proxy<GameNotification> {
 	private Deck parseStandardDeck(HeroClass heroClass, Map<String, Object> map) {
 		Deck deck = new Deck(heroClass);
 		@SuppressWarnings("unchecked")
-		List<Double> cardIds = (List<Double>) map.get("cards");
-		for (Double doubleCardId : cardIds) {
-			int cardId = doubleCardId.intValue();
+		List<String> cardIds = (List<String>) map.get("cards");
+		for (String cardId : cardIds) {
 			Card card = CardCatalogue.getCardById(cardId);
 			deck.getCards().add(card);
 		}
@@ -196,9 +195,9 @@ public class DeckProxy extends Proxy<GameNotification> {
 			}
 			saveData.put("decks", referencedDecks);
 		} else {
-			List<Integer> cardIds = new ArrayList<Integer>();
+			List<String> cardIds = new ArrayList<String>();
 			for (Card card : deck.getCards()) {
-				cardIds.add(card.getTypeId());
+				cardIds.add(card.getCardId());
 			}
 			saveData.put("cards", cardIds);	
 		}
