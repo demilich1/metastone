@@ -1,6 +1,6 @@
 package net.demilich.metastone.game;
 
-public enum GameTag {
+public enum Attribute {
 	DEBUG,
 	HP,
 	ATTACK,

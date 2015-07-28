@@ -3,7 +3,7 @@ package net.demilich.metastone.game.spells;
 import java.util.Map;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
@@ -21,7 +21,7 @@ public class ComboSpell extends ConditionalEffectSpell {
 
 	@Override
 	protected boolean isConditionFulfilled(GameContext context, Player player, SpellDesc desc, Entity target) {
-		return player.getHero().hasTag(GameTag.COMBO);
+		return player.getHero().hasAttribute(Attribute.COMBO);
 	}
 
 }

@@ -3,7 +3,7 @@ package net.demilich.metastone.game.spells.aura;
 import java.util.List;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
@@ -32,7 +32,7 @@ public class EnrageAura extends Aura {
 	@Override
 	public void onGameEvent(GameEvent event) {
 		if (event.getEventType() == GameEventType.ENRAGE_CHANGED) {
-			active = event.getEventTarget().hasTag(GameTag.ENRAGED);
+			active = event.getEventTarget().hasAttribute(Attribute.ENRAGED);
 		}
 		super.onGameEvent(event);
 	}

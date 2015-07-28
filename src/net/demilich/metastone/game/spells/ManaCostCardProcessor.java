@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.spells;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 
@@ -15,7 +15,7 @@ public class ManaCostCardProcessor implements ICardPostProcessor {
 
 	@Override
 	public void processCard(GameContext context, Player player, Card card) {
-		card.setTag(GameTag.MANA_COST_MODIFIER, manaCostModifier);
+		card.setAttribute(Attribute.MANA_COST_MODIFIER, manaCostModifier);
 	}
 
 }

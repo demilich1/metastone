@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.GameAction;
@@ -31,7 +31,7 @@ public class TargetLogic {
 
 	private boolean containsTaunters(List<Minion> minions) {
 		for (Entity entity : minions) {
-			if (entity.hasTag(GameTag.TAUNT) && !entity.hasTag(GameTag.STEALTH)) {
+			if (entity.hasAttribute(Attribute.TAUNT) && !entity.hasAttribute(Attribute.STEALTH)) {
 				return true;
 			}
 		}
@@ -49,11 +49,11 @@ public class TargetLogic {
 				continue;
 			}
 			if ((action.getActionType() == ActionType.SPELL || action.getActionType() == ActionType.HERO_POWER)
-					&& entity.hasTag(GameTag.UNTARGETABLE_BY_SPELLS)) {
+					&& entity.hasAttribute(Attribute.UNTARGETABLE_BY_SPELLS)) {
 				continue;
 			}
 
-			if (entity.getOwner() != player.getId() && entity.hasTag(GameTag.STEALTH)) {
+			if (entity.getOwner() != player.getId() && entity.hasAttribute(Attribute.STEALTH)) {
 				continue;
 			}
 
@@ -167,7 +167,7 @@ public class TargetLogic {
 	private List<Entity> getTaunters(List<Minion> entities) {
 		List<Entity> taunters = new ArrayList<>();
 		for (Actor entity : entities) {
-			if (entity.hasTag(GameTag.TAUNT) && !entity.hasTag(GameTag.STEALTH)) {
+			if (entity.hasAttribute(Attribute.TAUNT) && !entity.hasAttribute(Attribute.STEALTH)) {
 				taunters.add(entity);
 			}
 		}

@@ -3,7 +3,7 @@ package net.demilich.metastone.game.behaviour;
 import java.util.HashMap;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.Entity;
@@ -12,12 +12,12 @@ public class TranspositionTable {
 	
 	private static int hash(Entity entity) {
 		int hash = entity.getName().hashCode();
-		for (GameTag tag : entity.getTags().keySet()) {
-			Object value = entity.getTags().get(tag);
+		for (Attribute tag : entity.getAttributes().keySet()) {
+			Object value = entity.getAttributes().get(tag);
 			if (!(value instanceof Integer)) {
 				continue;
 			}
-			hash = mergeHashes(hash, entity.getTag(tag).hashCode());
+			hash = mergeHashes(hash, entity.getAttribute(tag).hashCode());
 		}
 		return hash;
 	}

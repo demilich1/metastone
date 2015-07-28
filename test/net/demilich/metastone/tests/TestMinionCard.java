@@ -1,7 +1,7 @@
 package net.demilich.metastone.tests;
 import java.util.EnumMap;
 
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
@@ -17,7 +17,7 @@ public class TestMinionCard extends MinionCard {
 
 	private final Minion minion;
 	
-	private static MinionCardDesc getDesc(int attack, int hp, GameTag... attributes) {
+	private static MinionCardDesc getDesc(int attack, int hp, Attribute... attributes) {
 		MinionCardDesc desc = new MinionCardDesc();
 		desc.name = "Test monster " + ++id;
 		desc.rarity = Rarity.FREE;
@@ -25,20 +25,20 @@ public class TestMinionCard extends MinionCard {
 		desc.baseHp = hp;
 		desc.type = CardType.MINION;
 		desc.heroClass = HeroClass.ANY;
-		desc.attributes = new EnumMap<GameTag, Object>(GameTag.class);
-		for (GameTag gameTag : attributes) {
+		desc.attributes = new EnumMap<Attribute, Object>(Attribute.class);
+		for (Attribute gameTag : attributes) {
 			desc.attributes.put(gameTag, true);
 		}
 		return desc;
 	}
 
-	public TestMinionCard(int baseAttack, int baseHp, GameTag... tags) {
+	public TestMinionCard(int baseAttack, int baseHp, Attribute... tags) {
 		super(getDesc(baseAttack, baseHp, tags));
 		setCollectible(false);
 		
 		this.minion = createMinion();
-		for(GameTag attribute : tags) {
-			minion.setTag(attribute);
+		for(Attribute attribute : tags) {
+			minion.setAttribute(attribute);
 		}
 	}
 	

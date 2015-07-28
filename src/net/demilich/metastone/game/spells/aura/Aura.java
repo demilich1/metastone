@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
@@ -52,7 +52,7 @@ public class Aura extends SpellTrigger {
 		if (targetActor.isDestroyed()) {
 			return false;
 		}
-		if (getRaceRestriction() != null && target.getTag(GameTag.RACE) != getRaceRestriction()) {
+		if (getRaceRestriction() != null && target.getAttribute(Attribute.RACE) != getRaceRestriction()) {
 			return false;
 		}
 		return resolvedTargets.contains(target);

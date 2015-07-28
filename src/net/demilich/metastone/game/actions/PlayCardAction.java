@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.entities.Entity;
@@ -41,7 +41,7 @@ public abstract class PlayCardAction extends GameAction {
 		try {
 			context.getLogic().playCard(playerId, getCardReference());
 			// card was countered, do not actually resolve its effects
-			if (!card.hasTag(GameTag.COUNTERED)) {
+			if (!card.hasAttribute(Attribute.COUNTERED)) {
 				play(context, playerId);
 			}
 

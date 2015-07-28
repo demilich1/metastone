@@ -3,7 +3,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
@@ -77,10 +77,10 @@ public class CardInteractionTests extends TestBase {
 		Minion knifeJuggler = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_knife_juggler"));
 		playCard(context, player, CardCatalogue.getCardById("spell_conceal"));
 		// knife juggler should be stealthed
-		Assert.assertTrue(knifeJuggler.hasTag(GameTag.STEALTH));
+		Assert.assertTrue(knifeJuggler.hasAttribute(Attribute.STEALTH));
 		// knife juggler should be unstealthed as soon as another minion is played and his trigger fires
 		playCard(context, player, new TestMinionCard(1, 1));
-		Assert.assertFalse(knifeJuggler.hasTag(GameTag.STEALTH));
+		Assert.assertFalse(knifeJuggler.hasAttribute(Attribute.STEALTH));
 	}
 
 	@Test
@@ -177,7 +177,7 @@ public class CardInteractionTests extends TestBase {
 		playCard(context, warrior, new TestMinionCard(2, 1, 0));
 
 		Minion bloodsailRaider = playMinionCard(context, warrior, (MinionCard) CardCatalogue.getCardById("minion_bloodsail_raider"));
-		Assert.assertTrue(bloodsailRaider.hasTag(GameTag.CHARGE));
+		Assert.assertTrue(bloodsailRaider.hasAttribute(Attribute.CHARGE));
 		Assert.assertEquals(bloodsailRaider.getAttack(), 7);
 	}
 	

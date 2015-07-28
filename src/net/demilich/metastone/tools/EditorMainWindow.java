@@ -32,7 +32,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.desc.CardDesc;
 import net.demilich.metastone.game.cards.desc.ParseUtils;
@@ -111,7 +111,7 @@ class EditorMainWindow extends BorderPane {
 	private Button saveButton;
 
 	private final ToggleGroup cardTypeGroup = new ToggleGroup();
-	private List<ComboBox<GameTag>> attributeBoxes;
+	private List<ComboBox<Attribute>> attributeBoxes;
 
 	private List<TextField> attributeFields;
 	private ICardEditor cardEditor;
@@ -157,7 +157,7 @@ class EditorMainWindow extends BorderPane {
 		attributeFields = new ArrayList<>();
 		for (int i = 1; i < 99; i++) {
 			@SuppressWarnings("unchecked")
-			ComboBox<GameTag> box = (ComboBox<GameTag>) lookup("#attributeBox" + i);
+			ComboBox<Attribute> box = (ComboBox<Attribute>) lookup("#attributeBox" + i);
 			if (box == null) {
 				break;
 			}
@@ -181,9 +181,9 @@ class EditorMainWindow extends BorderPane {
 	}
 	
 	private void onAttributesChanged() {
-		card.attributes = new EnumMap<GameTag, Object>(GameTag.class);
+		card.attributes = new EnumMap<Attribute, Object>(Attribute.class);
 		for (int i = 0; i < attributeBoxes.size(); i++) {
-			ComboBox<GameTag> attributeBox = attributeBoxes.get(i);
+			ComboBox<Attribute> attributeBox = attributeBoxes.get(i);
 			TextField attributeField = attributeFields.get(i);
 			if (attributeBox.getSelectionModel().getSelectedItem() == null) {
 				continue;
@@ -193,7 +193,7 @@ class EditorMainWindow extends BorderPane {
 				attributeField.setText("true");
 			}
 
-			GameTag attribute = attributeBox.getSelectionModel().getSelectedItem();
+			Attribute attribute = attributeBox.getSelectionModel().getSelectedItem();
 			Object value = getAttributeValue(attributeField.getText());
 			card.attributes.put(attribute, value);
 		}
@@ -289,9 +289,9 @@ class EditorMainWindow extends BorderPane {
 	}
 
 	private void setupAttributeBoxes() {
-		for (ComboBox<GameTag> comboBox : attributeBoxes) {
-			ObservableList<GameTag> items = FXCollections.observableArrayList();
-			items.addAll(GameTag.values());
+		for (ComboBox<Attribute> comboBox : attributeBoxes) {
+			ObservableList<Attribute> items = FXCollections.observableArrayList();
+			items.addAll(Attribute.values());
 			Collections.sort(items, (obj1, obj2) -> { 
 				if (obj1 == obj2) {
 			        return 0;
@@ -306,7 +306,7 @@ class EditorMainWindow extends BorderPane {
 			});
 			comboBox.setItems(items);
 			comboBox.valueProperty().addListener((ov, oldValue, newValue) -> onAttributesChanged());
-			comboBox.setOnKeyReleased(new ComboBoxKeyHandler<GameTag>(comboBox));
+			comboBox.setOnKeyReleased(new ComboBoxKeyHandler<Attribute>(comboBox));
 		}
 		for (TextField attributeField : attributeFields) {
 			attributeField.textProperty().addListener((ov, oldValue, newValue) -> onAttributesChanged());

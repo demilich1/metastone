@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.TurnState;
 import net.demilich.metastone.game.actions.EndTurnAction;
@@ -72,7 +72,7 @@ public class ActionLogic {
 				continue;
 			}
 
-			if (card.hasTag(GameTag.CHOOSE_ONE)) {
+			if (card.hasAttribute(Attribute.CHOOSE_ONE)) {
 				IChooseOneCard chooseOneCard = (IChooseOneCard) card;
 				rollout(chooseOneCard.playOption1(), context, player, playCardActions);
 				rollout(chooseOneCard.playOption2(), context, player, playCardActions);

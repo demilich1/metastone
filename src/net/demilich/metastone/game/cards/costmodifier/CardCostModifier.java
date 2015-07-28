@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards.costmodifier;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.entities.Entity;
@@ -40,11 +40,11 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 			return false;
 		}
 
-		if (getRequiredAttribute() != null && !card.hasTag(getRequiredAttribute())) {
+		if (getRequiredAttribute() != null && !card.hasAttribute(getRequiredAttribute())) {
 			return false;
 		}
 
-		if (getRequiredRace() != null && card.getTag(GameTag.RACE) != getRequiredRace()) {
+		if (getRequiredRace() != null && card.getAttribute(Attribute.RACE) != getRequiredRace()) {
 			return false;
 		}
 
@@ -106,8 +106,8 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 		return owner;
 	}
 
-	protected GameTag getRequiredAttribute() {
-		return (GameTag) desc.get(CardCostModifierArg.REQUIRED_ATTRIBUTE);
+	protected Attribute getRequiredAttribute() {
+		return (Attribute) desc.get(CardCostModifierArg.REQUIRED_ATTRIBUTE);
 	}
 
 	protected Race getRequiredRace() {

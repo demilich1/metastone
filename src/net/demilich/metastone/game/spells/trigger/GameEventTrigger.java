@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.spells.trigger;
 
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.events.GameEvent;
@@ -33,7 +33,7 @@ public abstract class GameEventTrigger extends CustomCloneable {
 		}
 		boolean breaksStealth = desc.getBool(EventTriggerArg.BREAKS_STEALTH);
 		if (breaksStealth) {
-			event.getGameContext().getLogic().removeTag(host, GameTag.STEALTH);
+			event.getGameContext().getLogic().removeAttribute(host, Attribute.STEALTH);
 		}
 		Condition condition = (Condition) desc.get(EventTriggerArg.CONDITION);
 		Player owner = event.getGameContext().getPlayer(getOwner());

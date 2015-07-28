@@ -3,7 +3,7 @@ package net.demilich.metastone.game.spells;
 import java.util.Map;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Minion;
@@ -30,8 +30,8 @@ public class SwapAttackAndHpSpell extends Spell {
 		int hp = minion.getHp();
 		minion.setAttack(hp);
 		context.getLogic().modifyMaxHp(minion, attack);
-		minion.removeTag(GameTag.TEMPORARY_ATTACK_BONUS);
-		minion.removeTag(GameTag.ATTACK_BONUS);
+		minion.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
+		minion.removeAttribute(Attribute.ATTACK_BONUS);
 	}
 
 }

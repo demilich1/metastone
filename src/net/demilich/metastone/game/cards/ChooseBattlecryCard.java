@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.cards;
 
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.actions.PlayMinionCardAction;
@@ -17,7 +17,7 @@ public class ChooseBattlecryCard extends MinionCard implements IChooseOneCard {
 		super(desc);
 		this.battlecryOption1 = desc.option1;
 		this.battlecryOption2 = desc.option2;
-		setTag(GameTag.CHOOSE_ONE);
+		setAttribute(Attribute.CHOOSE_ONE);
 	}
 
 	private String getAction1Suffix() {

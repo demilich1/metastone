@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.behaviour.heuristic.IGameStateHeuristic;
 import net.demilich.metastone.game.cards.Card;
@@ -39,7 +39,7 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 		Player player = context.getPlayer(playerId);
 		Player opponent = context.getOpponent(player);
 		for (Minion minion : opponent.getMinions()) {
-			damageOnBoard += minion.getAttack() * minion.getTagValue(GameTag.NUMBER_OF_ATTACKS);
+			damageOnBoard += minion.getAttack() * minion.getAttributeValue(Attribute.NUMBER_OF_ATTACKS);
 		}
 		damageOnBoard += getHeroDamage(opponent.getHero());
 
@@ -81,15 +81,15 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 	}
 
 	private double calculateMinionScore(Minion minion, ThreatLevel threatLevel) {
-		if (minion.hasTag(GameTag.MARKED_FOR_DEATH)) {
+		if (minion.hasAttribute(Attribute.MARKED_FOR_DEATH)) {
 			return 0;
 		}
 		double minionScore = weights.get(WeightedFeature.MINION_INTRINSIC_VALUE);
 		minionScore += weights.get(WeightedFeature.MINION_ATTACK_FACTOR)
-				* (minion.getAttack() - minion.getTagValue(GameTag.TEMPORARY_ATTACK_BONUS));
+				* (minion.getAttack() - minion.getAttributeValue(Attribute.TEMPORARY_ATTACK_BONUS));
 		minionScore += weights.get(WeightedFeature.MINION_HP_FACTOR) * minion.getHp();
 
-		if (minion.hasTag(GameTag.TAUNT)) {
+		if (minion.hasAttribute(Attribute.TAUNT)) {
 			switch (threatLevel) {
 			case RED:
 				minionScore += weights.get(WeightedFeature.MINION_RED_TAUNT_MODIFIER);
@@ -103,23 +103,23 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 			}
 		}
 		
-		if (minion.hasTag(GameTag.WINDFURY)) {
+		if (minion.hasAttribute(Attribute.WINDFURY)) {
 			minionScore += weights.get(WeightedFeature.MINION_WINDFURY_MODIFIER);
-		} else if (minion.hasTag(GameTag.MEGA_WINDFURY)) {
+		} else if (minion.hasAttribute(Attribute.MEGA_WINDFURY)) {
 			minionScore += 2 * weights.get(WeightedFeature.MINION_WINDFURY_MODIFIER);
 		}
 		
-		if (minion.hasTag(GameTag.DIVINE_SHIELD)) {
+		if (minion.hasAttribute(Attribute.DIVINE_SHIELD)) {
 			minionScore += weights.get(WeightedFeature.MINION_DIVINE_SHIELD_MODIFIER);
 		}
-		if (minion.hasTag(GameTag.SPELL_DAMAGE)) {
-			minionScore += minion.getTagValue(GameTag.SPELL_DAMAGE) * weights.get(WeightedFeature.MINION_SPELL_POWER_MODIFIER);
+		if (minion.hasAttribute(Attribute.SPELL_DAMAGE)) {
+			minionScore += minion.getAttributeValue(Attribute.SPELL_DAMAGE) * weights.get(WeightedFeature.MINION_SPELL_POWER_MODIFIER);
 		}
 
-		if (minion.hasTag(GameTag.STEALTH)) {
+		if (minion.hasAttribute(Attribute.STEALTH)) {
 			minionScore += weights.get(WeightedFeature.MINION_STEALTHED_MODIFIER);
 		}
-		if (minion.hasTag(GameTag.UNTARGETABLE_BY_SPELLS)) {
+		if (minion.hasAttribute(Attribute.UNTARGETABLE_BY_SPELLS)) {
 			minionScore += weights.get(WeightedFeature.MINION_UNTARGETABLE_BY_SPELLS_MODIFIER);
 		}
 

@@ -14,7 +14,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.cards.desc.AttributeDeserializer;
 import net.demilich.metastone.game.cards.desc.AuraDeserializer;
 import net.demilich.metastone.game.cards.desc.CardCostModifierDeserializer;
@@ -47,7 +47,7 @@ public class CardParser {
 	public CardParser() {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.registerTypeAdapter(SpellDesc.class, new SpellDeserializer());
-		Type mapType = new TypeToken<Map<GameTag, Object>>() {
+		Type mapType = new TypeToken<Map<Attribute, Object>>() {
 		}.getType();
 		gsonBuilder.registerTypeAdapter(mapType, new AttributeDeserializer());
 		gsonBuilder.registerTypeAdapter(ConditionDesc.class, new ConditionDeserializer());

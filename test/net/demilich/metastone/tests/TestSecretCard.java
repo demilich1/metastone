@@ -1,7 +1,7 @@
 package net.demilich.metastone.tests;
 import java.util.EnumMap;
 
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.SecretCard;
@@ -24,7 +24,7 @@ public class TestSecretCard extends SecretCard {
 		desc.rarity = Rarity.FREE;
 		desc.type = CardType.SPELL;
 		desc.heroClass = HeroClass.ANY;
-		desc.attributes = new EnumMap<GameTag, Object>(GameTag.class);
+		desc.attributes = new EnumMap<Attribute, Object>(Attribute.class);
 		desc.trigger = EventTriggerDesc.createEmpty(TurnEndTrigger.class);
 		return desc;
 	}

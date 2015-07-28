@@ -3,7 +3,7 @@ package net.demilich.metastone.game.spells.custom;
 import java.util.Map;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.MindControlSpell;
@@ -34,7 +34,7 @@ public class ShadowMadnessSpell extends MindControlSpell {
 		super.onCast(context, player, desc, source, target);
 		
 		// minion should be able to attack this turn
-		target.removeTag(GameTag.SUMMONING_SICKNESS);
+		target.removeAttribute(Attribute.SUMMONING_SICKNESS);
 		context.getLogic().refreshAttacksPerRound(target);
 		
 		// mind control is terminated either when silenced or turn ends

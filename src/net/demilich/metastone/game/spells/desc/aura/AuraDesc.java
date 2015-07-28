@@ -4,7 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.EnumMap;
 import java.util.Map;
 
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.cards.desc.Desc;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.aura.Aura;
@@ -38,8 +38,8 @@ public class AuraDesc extends Desc<AuraArg> {
 		return (SpellDesc) get(AuraArg.APPLY_EFFECT);
 	}
 	
-	public GameTag getAttribute() {
-		return (GameTag) get(AuraArg.ATTRIBUTE);
+	public Attribute getAttribute() {
+		return (Attribute) get(AuraArg.ATTRIBUTE);
 	}
 	
 	@SuppressWarnings("unchecked")

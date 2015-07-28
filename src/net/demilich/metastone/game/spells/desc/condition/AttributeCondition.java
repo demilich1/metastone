@@ -3,7 +3,7 @@ package net.demilich.metastone.game.spells.desc.condition;
 import java.util.List;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
@@ -31,19 +31,19 @@ public class AttributeCondition extends Condition {
 			source = (Actor) entities.get(0);
 		}
 		
-		GameTag attribute = (GameTag) desc.get(ConditionArg.ATTRIBUTE);
+		Attribute attribute = (Attribute) desc.get(ConditionArg.ATTRIBUTE);
 		Operation operation = (Operation) desc.get(ConditionArg.OPERATION);
 		if (operation == Operation.HAS) {
-			return target.hasTag(attribute);
+			return target.hasAttribute(attribute);
 		}
 		
 		int targetValue = desc.getInt(ConditionArg.VALUE);
 
 		int actualValue;
-		if (attribute == GameTag.ATTACK) {
+		if (attribute == Attribute.ATTACK) {
 			actualValue = source.getAttack();
 		} else {
-			actualValue = source.getTagValue(attribute);
+			actualValue = source.getAttributeValue(attribute);
 		}
 
 		return SpellUtils.evaluateOperation(operation, actualValue, targetValue);

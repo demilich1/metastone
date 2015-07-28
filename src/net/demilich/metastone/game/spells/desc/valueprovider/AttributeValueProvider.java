@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
@@ -19,7 +19,7 @@ public class AttributeValueProvider extends ValueProvider {
 	@Override
 	protected int provideValue(GameContext context, Player player, Entity target, Entity host) {
 		EntityReference sourceReference = (EntityReference) desc.get(ValueProviderArg.SOURCE);
-		GameTag attribute = (GameTag) desc.get(ValueProviderArg.ATTRIBUTE);
+		Attribute attribute = (Attribute) desc.get(ValueProviderArg.ATTRIBUTE);
 		List<Entity> entities = null;
 		if (sourceReference != null) {
 			entities = context.resolveTarget(player, host, sourceReference);
@@ -34,10 +34,10 @@ public class AttributeValueProvider extends ValueProvider {
 		int value = 0;
 		for (Entity entity : entities) {
 			Actor source = (Actor) entity;
-			if (attribute == GameTag.ATTACK) {
+			if (attribute == Attribute.ATTACK) {
 				value += source.getAttack();
 			} else {
-				value += source.getTagValue(attribute);
+				value += source.getAttributeValue(attribute);
 			}
 		}
 

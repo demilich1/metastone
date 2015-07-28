@@ -7,7 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.actions.PhysicalAttackAction;
@@ -81,7 +81,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		Player warrior = context.getPlayer2();
 		warrior.setMana(10);
 
-		MinionCard minionCard1 = new TestMinionCard(2, 2, GameTag.DIVINE_SHIELD);
+		MinionCard minionCard1 = new TestMinionCard(2, 2, Attribute.DIVINE_SHIELD);
 		context.getLogic().receiveCard(mage.getId(), minionCard1);
 		context.getLogic().performGameAction(mage.getId(), minionCard1.play());
 
@@ -124,14 +124,14 @@ public class AdvancedMechanicTests extends BasicTests {
 		Actor defender = getSingleMinion(priest.getMinions());
 
 		Assert.assertEquals(defender.getAttack(), BASE_ATTACK);
-		Assert.assertEquals(defender.hasTag(GameTag.ENRAGED), false);
+		Assert.assertEquals(defender.hasAttribute(Attribute.ENRAGED), false);
 
 		// attack once, should apply the enrage attack bonus
 		GameAction attackAction = new PhysicalAttackAction(attacker.getReference());
 		attackAction.setTarget(defender);
 		context.getLogic().performGameAction(mage.getId(), attackAction);
 		Assert.assertEquals(defender.getAttack(), BASE_ATTACK + ENRAGE_ATTACK_BONUS);
-		Assert.assertEquals(defender.hasTag(GameTag.ENRAGED), true);
+		Assert.assertEquals(defender.hasAttribute(Attribute.ENRAGED), true);
 		// attack second time, enrage bonus should not increase
 		context.getLogic().performGameAction(mage.getId(), attackAction);
 		Assert.assertEquals(defender.getAttack(), BASE_ATTACK + ENRAGE_ATTACK_BONUS);
@@ -141,7 +141,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		healAction.setTarget(defender);
 		context.getLogic().performGameAction(priest.getId(), healAction);
 		Assert.assertEquals(defender.getAttack(), BASE_ATTACK);
-		Assert.assertEquals(defender.hasTag(GameTag.ENRAGED), false);
+		Assert.assertEquals(defender.hasAttribute(Attribute.ENRAGED), false);
 	}
 
 	@Test
@@ -157,7 +157,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		Assert.assertEquals(player.getMana(), 2);
 
 		Card overloadCard = new TestMinionCard(1, 1);
-		overloadCard.setTag(GameTag.OVERLOAD, 2);
+		overloadCard.setAttribute(Attribute.OVERLOAD, 2);
 		context.getLogic().receiveCard(playerId, overloadCard);
 		context.getLogic().performGameAction(playerId, overloadCard.play());
 		context.getLogic().endTurn(playerId);
@@ -264,7 +264,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		context.getLogic().performGameAction(priest.getId(), spellPowerMinionCard.play());
 		context.getLogic().receiveCard(priest.getId(), damageSpell);
 		context.getLogic().performGameAction(priest.getId(), damageSpell.play());
-		int spellPower = getSingleMinion(priest.getMinions()).getTagValue(GameTag.SPELL_DAMAGE);
+		int spellPower = getSingleMinion(priest.getMinions()).getAttributeValue(Attribute.SPELL_DAMAGE);
 		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - 2 * mindBlastDamage - spellPower);
 	}
 }

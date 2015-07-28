@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.spells.trigger;
 
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.events.GameEvent;
@@ -24,8 +24,8 @@ public class MinionSummonedTrigger extends GameEventTrigger {
 			return false;
 		}
 		
-		GameTag requiredAttribute = (GameTag) desc.get(EventTriggerArg.REQUIRED_ATTRIBUTE);
-		if (requiredAttribute != null && !summonEvent.getMinion().hasTag(requiredAttribute)) {
+		Attribute requiredAttribute = (Attribute) desc.get(EventTriggerArg.REQUIRED_ATTRIBUTE);
+		if (requiredAttribute != null && !summonEvent.getMinion().hasAttribute(requiredAttribute)) {
 			return false;
 		}
 		

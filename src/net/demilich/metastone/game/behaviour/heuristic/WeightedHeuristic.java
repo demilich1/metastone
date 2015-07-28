@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.behaviour.heuristic;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.minions.Minion;
 
@@ -10,28 +10,28 @@ public class WeightedHeuristic implements IGameStateHeuristic {
 	private float calculateMinionScore(Minion minion) {
 		float minionScore = minion.getAttack() + minion.getHp();
 		float baseScore = minionScore;
-		if (minion.hasTag(GameTag.FROZEN)) {
+		if (minion.hasAttribute(Attribute.FROZEN)) {
 			return minion.getHp();
 		}
-		if (minion.hasTag(GameTag.TAUNT)) {
+		if (minion.hasAttribute(Attribute.TAUNT)) {
 			minionScore += 2;
 		}
-		if (minion.hasTag(GameTag.WINDFURY)) {
+		if (minion.hasAttribute(Attribute.WINDFURY)) {
 			minionScore += minion.getAttack() * 0.5f;
 		}
-		if (minion.hasTag(GameTag.DIVINE_SHIELD)) {
+		if (minion.hasAttribute(Attribute.DIVINE_SHIELD)) {
 			minionScore += 1.5f * baseScore;
 		}
-		if (minion.hasTag(GameTag.SPELL_DAMAGE)) {
-			minionScore += minion.getTagValue(GameTag.SPELL_DAMAGE);
+		if (minion.hasAttribute(Attribute.SPELL_DAMAGE)) {
+			minionScore += minion.getAttributeValue(Attribute.SPELL_DAMAGE);
 		}
-		if (minion.hasTag(GameTag.ENRAGED)) {
+		if (minion.hasAttribute(Attribute.ENRAGED)) {
 			minionScore += 1;
 		}
-		if (minion.hasTag(GameTag.STEALTH)) {
+		if (minion.hasAttribute(Attribute.STEALTH)) {
 			minionScore += 1;
 		}
-		if (minion.hasTag(GameTag.UNTARGETABLE_BY_SPELLS)) {
+		if (minion.hasAttribute(Attribute.UNTARGETABLE_BY_SPELLS)) {
 			minionScore += 1.5f * baseScore;
 		}
 		

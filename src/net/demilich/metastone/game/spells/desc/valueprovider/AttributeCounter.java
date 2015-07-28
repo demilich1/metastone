@@ -3,7 +3,7 @@ package net.demilich.metastone.game.spells.desc.valueprovider;
 import java.util.List;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -20,9 +20,9 @@ public class AttributeCounter extends ValueProvider {
 		EntityReference source = desc.getSource();
 		List<Entity> relevantEntities = context.resolveTarget(player, host, source);
 		int count = 0;
-		GameTag attribute = (GameTag) desc.get(ValueProviderArg.ATTRIBUTE);
+		Attribute attribute = (Attribute) desc.get(ValueProviderArg.ATTRIBUTE);
 		for (Entity entity : relevantEntities) {
-			if (entity.hasTag(attribute)) {
+			if (entity.hasAttribute(attribute)) {
 				count++;
 			}
 		}

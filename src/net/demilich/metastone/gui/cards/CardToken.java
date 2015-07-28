@@ -11,7 +11,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardType;
@@ -87,7 +87,7 @@ public class CardToken extends BorderPane {
 		if (isMinionCard) {
 			MinionCard minionCard = (MinionCard) card;
 			setScoreValue(attackAnchor, minionCard.getAttack(), minionCard.getBaseAttack());
-			setScoreValue(hpAnchor, card.getTagValue(GameTag.BASE_HP));
+			setScoreValue(hpAnchor, card.getAttributeValue(Attribute.BASE_HP));
 		}
 	}
 

@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
@@ -44,7 +44,7 @@ public class AuraBuffSpell extends Spell {
 		Actor targetActor = (Actor) target;
 		logger.debug("{} gains ({} from aura effect)", targetActor, attackBonus + "/" + hpBonus);
 		if (attackBonus != 0) {
-			targetActor.modifyTag(GameTag.AURA_ATTACK_BONUS, +attackBonus);
+			targetActor.modifyAttribute(Attribute.AURA_ATTACK_BONUS, +attackBonus);
 		}
 		if (hpBonus != 0) {
 			targetActor.modifyAuraHpBonus(hpBonus);

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.entities.Entity;
@@ -31,7 +31,7 @@ public class KelThuzadSpell extends Spell {
 				continue;
 			}
 			Minion deadMinion = (Minion) deadEntity;
-			if (deadMinion.getTagValue(GameTag.DIED_ON_TURN) == currentTurn) {
+			if (deadMinion.getAttributeValue(Attribute.DIED_ON_TURN) == currentTurn) {
 				MinionCard minionCard = (MinionCard) deadMinion.getSourceCard();
 				context.getLogic().summon(player.getId(), minionCard.summon());
 			}

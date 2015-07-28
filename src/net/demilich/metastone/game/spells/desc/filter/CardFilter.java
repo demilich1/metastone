@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.spells.desc.filter;
 
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.Rarity;
@@ -31,7 +31,7 @@ public class CardFilter extends EntityFilter {
 			return false;
 		}
 		Race race = (Race) desc.get(FilterArg.RACE);
-		if (race != null && race != card.getTag(GameTag.RACE)) {
+		if (race != null && race != card.getAttribute(Attribute.RACE)) {
 			return false;
 		}
 		if (desc.contains(FilterArg.MANA_COST)) {

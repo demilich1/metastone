@@ -3,7 +3,7 @@ package net.demilich.metastone.game.spells;
 import java.util.Map;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
@@ -28,6 +28,6 @@ public class ConditionalAttackBonusSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		ValueProvider valueProvider = (ValueProvider) desc.get(SpellArg.VALUE_PROVIDER);
 		int attackBonus = valueProvider.getValue(context, player, target, source);
-		target.setTag(GameTag.CONDITIONAL_ATTACK_BONUS, attackBonus);
+		target.setAttribute(Attribute.CONDITIONAL_ATTACK_BONUS, attackBonus);
 	}
 }

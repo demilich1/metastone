@@ -3,7 +3,7 @@ package net.demilich.metastone.game.entities.heroes;
 import java.util.EnumMap;
 import java.util.Map;
 
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.weapons.Weapon;
@@ -39,7 +39,7 @@ public class Hero extends Actor {
 	}
 
 	public int getArmor() {
-		return getTagValue(GameTag.ARMOR);
+		return getAttributeValue(Attribute.ARMOR);
 	}
 
 	@Override
@@ -68,13 +68,13 @@ public class Hero extends Actor {
 		return heroPower;
 	}
 
-	public Map<GameTag, Object> getTagsCopy() {
-		Map<GameTag, Object> copy = new EnumMap<>(GameTag.class);
-		for (GameTag tag : tags.keySet()) {
-			if (tag != GameTag.COMBO) {
+	public Map<Attribute, Object> getAttributesCopy() {
+		Map<Attribute, Object> copy = new EnumMap<>(Attribute.class);
+		for (Attribute attribute : attributes.keySet()) {
+			if (attribute != Attribute.COMBO) {
 				continue;
 			}
-			copy.put(tag, tags.get(tag));
+			copy.put(attribute, attributes.get(attribute));
 		}
 		return copy;
 	}
@@ -86,7 +86,7 @@ public class Hero extends Actor {
 	public void modifyArmor(int armor) {
 		// armor cannot fall below zero
 		int newArmor = Math.max(getArmor() + armor, 0);
-		setTag(GameTag.ARMOR, newArmor);
+		setAttribute(Attribute.ARMOR, newArmor);
 	}
 
 	public void setHeroClass(HeroClass heroClass) {

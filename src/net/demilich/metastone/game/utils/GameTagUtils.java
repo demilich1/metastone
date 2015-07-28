@@ -1,14 +1,14 @@
 package net.demilich.metastone.game.utils;
 
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 
 public class GameTagUtils {
 	
-	public static String getTagName(GameTag tag) {
+	public static String getTagName(Attribute tag) {
 		return tag.toString();
 	}
 
-	public static TagValueType getTagValueType(GameTag tag) {
+	public static TagValueType getTagValueType(Attribute tag) {
 		switch (tag) {
 		case ARMOR:
 		case TEMPORARY_ATTACK_BONUS:

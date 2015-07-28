@@ -5,7 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.actions.PhysicalAttackAction;
@@ -35,7 +35,7 @@ public class TargetingTests extends TestBase {
 		
 		Entity attacker = getSingleMinion(mage.getMinions());
 		Entity defender = getSingleMinion(victim.getMinions());
-		Assert.assertEquals(defender.hasTag(GameTag.TAUNT), true);
+		Assert.assertEquals(defender.hasAttribute(Attribute.TAUNT), true);
 		
 		List<Entity> validTargets;
 		
@@ -47,7 +47,7 @@ public class TargetingTests extends TestBase {
 		validTargets = context.getLogic().getValidTargets(mage.getId(), fireblast);
 		Assert.assertEquals(validTargets.size(), 4);
 		
-		defender.removeTag(GameTag.TAUNT);
+		defender.removeAttribute(Attribute.TAUNT);
 		
 		validTargets = context.getLogic().getValidTargets(mage.getId(), attackAction);
 		Assert.assertEquals(validTargets.size(), 2);
@@ -56,8 +56,8 @@ public class TargetingTests extends TestBase {
 		Assert.assertEquals(validTargets.size(), 4);
 		
 		// taunt should be ignored when the minion is stealthed
-		defender.setTag(GameTag.TAUNT);
-		defender.setTag(GameTag.STEALTH);
+		defender.setAttribute(Attribute.TAUNT);
+		defender.setAttribute(Attribute.STEALTH);
 		validTargets = context.getLogic().getValidTargets(mage.getId(), attackAction);
 		Assert.assertEquals(validTargets.size(), 1);
 		Assert.assertEquals(validTargets.get(0).getEntityType(), EntityType.HERO);

@@ -3,7 +3,7 @@ package net.demilich.metastone.game.spells.custom;
 import java.util.Map;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCollection;
@@ -26,7 +26,7 @@ public class PlayRandomSecretSpell extends Spell {
 	private CardCollection findSecretCards(CardCollection cardCollection) {
 		CardCollection secretCards = new CardCollection();
 		for (Card card : cardCollection) {
-			if (card.hasTag(GameTag.SECRET)) {
+			if (card.hasAttribute(Attribute.SECRET)) {
 				secretCards.add(card);
 			}
 		}

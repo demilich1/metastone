@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.actions.PlayMinionCardAction;
@@ -16,10 +16,10 @@ import net.demilich.metastone.game.spells.desc.BattlecryDesc;
 
 public class MinionCard extends Card {
 
-	private static final Set<GameTag> inheritedAttributes = new HashSet<GameTag>(Arrays.asList(new GameTag[] { GameTag.STEALTH,
-			GameTag.CANNOT_ATTACK, GameTag.TAUNT, GameTag.UNTARGETABLE_BY_SPELLS, GameTag.CHARGE, GameTag.DIVINE_SHIELD, GameTag.WINDFURY,
-			GameTag.MEGA_WINDFURY, GameTag.SPELL_DAMAGE, GameTag.ATTACK_EQUALS_HP, GameTag.INVERT_HEALING, GameTag.SPELL_AMPLIFY_MULTIPLIER,
-			GameTag.ENRAGABLE, GameTag.DOUBLE_DEATHRATTLES, GameTag.HERO_POWER_CAN_TARGET_MINIONS, GameTag.ATTACK_BONUS
+	private static final Set<Attribute> inheritedAttributes = new HashSet<Attribute>(Arrays.asList(new Attribute[] { Attribute.STEALTH,
+			Attribute.CANNOT_ATTACK, Attribute.TAUNT, Attribute.UNTARGETABLE_BY_SPELLS, Attribute.CHARGE, Attribute.DIVINE_SHIELD, Attribute.WINDFURY,
+			Attribute.MEGA_WINDFURY, Attribute.SPELL_DAMAGE, Attribute.ATTACK_EQUALS_HP, Attribute.INVERT_HEALING, Attribute.SPELL_AMPLIFY_MULTIPLIER,
+			Attribute.ENRAGABLE, Attribute.DOUBLE_DEATHRATTLES, Attribute.HERO_POWER_CAN_TARGET_MINIONS, Attribute.ATTACK_BONUS
 
 	}));
 
@@ -27,19 +27,19 @@ public class MinionCard extends Card {
 
 	public MinionCard(MinionCardDesc desc) {
 		super(desc);
-		setTag(GameTag.BASE_ATTACK, desc.baseAttack);
-		setTag(GameTag.BASE_HP, desc.baseHp);
+		setAttribute(Attribute.BASE_ATTACK, desc.baseAttack);
+		setAttribute(Attribute.BASE_HP, desc.baseHp);
 		if (desc.race != null) {
 			setRace(desc.race);
 		}
 		this.desc = desc;
 	}
 
-	protected Minion createMinion(GameTag... tags) {
+	protected Minion createMinion(Attribute... tags) {
 		Minion minion = new Minion(this);
-		for (GameTag gameTag : getTags().keySet()) {
+		for (Attribute gameTag : getAttributes().keySet()) {
 			if (inheritedAttributes.contains(gameTag)) {
-				minion.setTag(gameTag, getTag(gameTag));
+				minion.setAttribute(gameTag, getAttribute(gameTag));
 			}
 		}
 		minion.setBaseAttack(getBaseAttack());
@@ -70,15 +70,15 @@ public class MinionCard extends Card {
 	}
 
 	public int getAttack() {
-		return getBaseAttack() + getTagValue(GameTag.ATTACK_BONUS);
+		return getBaseAttack() + getAttributeValue(Attribute.ATTACK_BONUS);
 	}
 
 	public int getBaseAttack() {
-		return getTagValue(GameTag.BASE_ATTACK);
+		return getAttributeValue(Attribute.BASE_ATTACK);
 	}
 
 	public int getBaseHp() {
-		return getTagValue(GameTag.BASE_HP);
+		return getAttributeValue(Attribute.BASE_HP);
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class MinionCard extends Card {
 	}
 
 	public void setRace(Race race) {
-		setTag(GameTag.RACE, race);
+		setAttribute(Attribute.RACE, race);
 	}
 
 	public Minion summon() {

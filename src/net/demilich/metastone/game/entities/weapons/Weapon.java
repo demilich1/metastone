@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.entities.weapons;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.Actor;
@@ -17,8 +17,8 @@ public class Weapon extends Actor {
 
 	public Weapon(Card sourceCard, int weaponDamage, int durability) {
 		super(sourceCard);
-		setTag(GameTag.ATTACK, weaponDamage);
-		setTag(GameTag.HP, durability);
+		setAttribute(Attribute.ATTACK, weaponDamage);
+		setAttribute(Attribute.HP, durability);
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class Weapon extends Actor {
 	}
 
 	public int getDurability() {
-		return getTagValue(GameTag.HP);
+		return getAttributeValue(Attribute.HP);
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class Weapon extends Actor {
 	}
 	
 	public int getWeaponDamage() {
-		return getTagValue(GameTag.ATTACK) + getTagValue(GameTag.CONDITIONAL_ATTACK_BONUS);
+		return getAttributeValue(Attribute.ATTACK) + getAttributeValue(Attribute.CONDITIONAL_ATTACK_BONUS);
 	}
 
 	public boolean isActive() {
@@ -44,12 +44,12 @@ public class Weapon extends Actor {
 	}
 
 	public boolean isBroken() {
-		return !hasTag(GameTag.HP) || getTagValue(GameTag.ATTACK) <= 0;
+		return !hasAttribute(Attribute.HP) || getAttributeValue(Attribute.ATTACK) <= 0;
 	}
 
 	@Override
 	public boolean isDestroyed() {
-		return hasTag(GameTag.DESTROYED) || isBroken();
+		return hasAttribute(Attribute.DESTROYED) || isBroken();
 	}
 
 	public void onEquip(GameContext context, Player player) {
@@ -81,7 +81,7 @@ public class Weapon extends Actor {
 		String result = "[" + getEntityType() + " '" + getName() + "'id:" + getId() + " ";
 		result += getWeaponDamage() + "/" + getDurability();
 		String prefix = " ";
-		for (GameTag tag : getTags().keySet()) {
+		for (Attribute tag : getAttributes().keySet()) {
 			if (displayGameTag(tag)) {
 				result += prefix + tag;
 				prefix = ", ";

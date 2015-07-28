@@ -7,7 +7,7 @@ import java.util.Set;
 import org.apache.commons.lang3.NotImplementedException;
 
 import javafx.scene.image.Image;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.cards.desc.HeroCardDesc;
 import net.demilich.metastone.game.entities.heroes.Hero;
@@ -17,8 +17,8 @@ import net.demilich.metastone.gui.IconFactory;
 
 public class HeroCard extends Card {
 	
-	private static final Set<GameTag> inheritedAttributes = new HashSet<GameTag>(Arrays.asList(new GameTag[] { GameTag.HP,
-			GameTag.MAX_HP, GameTag.ARMOR
+	private static final Set<Attribute> inheritedAttributes = new HashSet<Attribute>(Arrays.asList(new Attribute[] { Attribute.HP,
+			Attribute.MAX_HP, Attribute.ARMOR
 	}));
 
 	
@@ -32,9 +32,9 @@ public class HeroCard extends Card {
 	public Hero createHero() {
 		HeroPower heroPower = (HeroPower) CardCatalogue.getCardById(desc.heroPower);
 		Hero hero = new Hero(getName(), getClassRestriction(), heroPower);
-		for (GameTag gameTag : getTags().keySet()) {
+		for (Attribute gameTag : getAttributes().keySet()) {
 			if (inheritedAttributes.contains(gameTag)) {
-				hero.setTag(gameTag, getTag(gameTag));
+				hero.setAttribute(gameTag, getAttribute(gameTag));
 			}
 		}
 		hero.setRace(desc.race);

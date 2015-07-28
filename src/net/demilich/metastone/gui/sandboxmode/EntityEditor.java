@@ -15,7 +15,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.util.Callback;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.utils.TagValueType;
 import net.demilich.metastone.gui.common.IntegerTextField;
@@ -39,7 +39,7 @@ public class EntityEditor extends SandboxEditor {
 			}
 			GameTagEntry entry = (GameTagEntry) item;
 			TagValueType tagValueType = entry.getValueType();
-			GameTag tag = entry.getTag();
+			Attribute tag = entry.getTag();
 			if (tagValueType == TagValueType.INTEGER) {
 				IntegerTextField numericTextfield = getNumericTextField();
 				numericTextfield.setIntValue(entry.getValueInt());
@@ -80,7 +80,7 @@ public class EntityEditor extends SandboxEditor {
 			return new ReadOnlyObjectWrapper<>(data.getValue());
 		}
 	}
-	private final Map<GameTag, Object> workingCopy = new EnumMap<GameTag, Object>(GameTag.class);
+	private final Map<Attribute, Object> workingCopy = new EnumMap<Attribute, Object>(Attribute.class);
 	private final Entity entity;
 
 	@FXML
@@ -117,11 +117,11 @@ public class EntityEditor extends SandboxEditor {
 		populateTable(entity);
 	}
 
-	private void addTagIfMissing(Entity entity, GameTag tag, Object defaultValue) {
-		if (entity.hasTag(tag)) {
+	private void addTagIfMissing(Entity entity, Attribute tag, Object defaultValue) {
+		if (entity.hasAttribute(tag)) {
 			return;
 		}
-		entity.setTag(tag, defaultValue);
+		entity.setAttribute(tag, defaultValue);
 	}
 
 	private void addTagsIfMissing(Entity entity) {
@@ -129,18 +129,18 @@ public class EntityEditor extends SandboxEditor {
 		case CARD:
 			break;
 		case HERO:
-			addTagIfMissing(entity, GameTag.ARMOR, 0);
+			addTagIfMissing(entity, Attribute.ARMOR, 0);
 			break;
 		case MINION:
-			addTagIfMissing(entity, GameTag.DIVINE_SHIELD, 0);
-			addTagIfMissing(entity, GameTag.WINDFURY, 0);
-			addTagIfMissing(entity, GameTag.FROZEN, 0);
-			addTagIfMissing(entity, GameTag.TEMPORARY_ATTACK_BONUS, 0);
-			addTagIfMissing(entity, GameTag.HP_BONUS, 0);
-			addTagIfMissing(entity, GameTag.ATTACK_BONUS, 0);
-			addTagIfMissing(entity, GameTag.CHARGE, 0);
-			addTagIfMissing(entity, GameTag.STEALTH, 0);
-			addTagIfMissing(entity, GameTag.TAUNT, 0);
+			addTagIfMissing(entity, Attribute.DIVINE_SHIELD, 0);
+			addTagIfMissing(entity, Attribute.WINDFURY, 0);
+			addTagIfMissing(entity, Attribute.FROZEN, 0);
+			addTagIfMissing(entity, Attribute.TEMPORARY_ATTACK_BONUS, 0);
+			addTagIfMissing(entity, Attribute.HP_BONUS, 0);
+			addTagIfMissing(entity, Attribute.ATTACK_BONUS, 0);
+			addTagIfMissing(entity, Attribute.CHARGE, 0);
+			addTagIfMissing(entity, Attribute.STEALTH, 0);
+			addTagIfMissing(entity, Attribute.TAUNT, 0);
 			break;
 		case WEAPON:
 			break;
@@ -161,9 +161,9 @@ public class EntityEditor extends SandboxEditor {
 	}
 
 	private void handleOkButton(ActionEvent actionEvent) {
-		entity.getTags().clear();
-		for (GameTag tag : workingCopy.keySet()) {
-			entity.setTag(tag, workingCopy.get(tag));
+		entity.getAttributes().clear();
+		for (Attribute tag : workingCopy.keySet()) {
+			entity.setAttribute(tag, workingCopy.get(tag));
 		}
 		this.getScene().getWindow().hide();
 		if (callback != null) {
@@ -172,10 +172,10 @@ public class EntityEditor extends SandboxEditor {
 	}
 
 	private void populateTable(Entity entity) {
-		Map<GameTag, Object> tags = entity.getTags();
+		Map<Attribute, Object> tags = entity.getAttributes();
 		ObservableList<GameTagEntry> data = FXCollections.observableArrayList();
 
-		for (GameTag tag : tags.keySet()) {
+		for (Attribute tag : tags.keySet()) {
 			Object value = tags.get(tag);
 			workingCopy.put(tag, value);
 

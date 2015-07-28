@@ -3,7 +3,7 @@ package net.demilich.metastone.game.spells;
 import java.util.Map;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
@@ -26,7 +26,7 @@ public class DoubleAttackSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Actor targetActor = (Actor) target;
-		targetActor.modifyTag(GameTag.ATTACK_BONUS, targetActor.getAttack());
+		targetActor.modifyAttribute(Attribute.ATTACK_BONUS, targetActor.getAttack());
 	}
 
 }

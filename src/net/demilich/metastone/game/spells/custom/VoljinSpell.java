@@ -3,7 +3,7 @@ package net.demilich.metastone.game.spells.custom;
 import java.util.Map;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
@@ -26,9 +26,9 @@ public class VoljinSpell extends Spell {
 		int sourceHp = voljin.getHp();
 		int targetHp = targetActor.getHp();
 		context.getLogic().modifyMaxHp(voljin, targetHp);
-		voljin.setTag(GameTag.HP_BONUS, 0);
+		voljin.setAttribute(Attribute.HP_BONUS, 0);
 		context.getLogic().modifyMaxHp(targetActor, sourceHp);
-		targetActor.setTag(GameTag.HP_BONUS, 0);
+		targetActor.setAttribute(Attribute.HP_BONUS, 0);
 	}
 
 }

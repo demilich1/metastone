@@ -3,7 +3,7 @@ package net.demilich.metastone.game.cards;
 import java.util.EnumMap;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.cards.desc.CardDesc;
@@ -42,7 +42,7 @@ public abstract class Card extends Entity {
 		manaCost = desc.baseManaCost;
 		
 		if (desc.attributes != null) {
-			tags.putAll(desc.attributes);
+			attributes.putAll(desc.attributes);
 		}
 		
 		if (desc.manaCostModifier != null) {
@@ -50,14 +50,14 @@ public abstract class Card extends Entity {
 		}
 		
 		if (desc.passiveTrigger != null) {
-			tags.put(GameTag.PASSIVE_TRIGGER, desc.passiveTrigger);
+			attributes.put(Attribute.PASSIVE_TRIGGER, desc.passiveTrigger);
 		}
 	}
 	
 	@Override
 	public Card clone() {
 		Card clone = (Card) super.clone();
-		clone.tags = new EnumMap<>(getTags());
+		clone.attributes = new EnumMap<>(getAttributes());
 		return clone;
 	}
 
@@ -105,7 +105,7 @@ public abstract class Card extends Entity {
 	}
 
 	public int getManaCost(GameContext context, Player player) {
-		int actualManaCost = manaCost + getTagValue(GameTag.MANA_COST_MODIFIER);
+		int actualManaCost = manaCost + getAttributeValue(Attribute.MANA_COST_MODIFIER);
 		if (manaCostModifier != null) {
 			actualManaCost -= manaCostModifier.getValue(context, player, null, this);
 		}

@@ -3,7 +3,7 @@ package net.demilich.metastone.game.entities;
 import java.util.EnumMap;
 import java.util.Map;
 
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.logic.CustomCloneable;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.IdFactory;
@@ -11,7 +11,7 @@ import net.demilich.metastone.game.targeting.IdFactory;
 public abstract class Entity extends CustomCloneable {
 
 	private String name;
-	protected Map<GameTag, Object> tags = new EnumMap<GameTag, Object>(GameTag.class);
+	protected Map<Attribute, Object> attributes = new EnumMap<Attribute, Object>(Attribute.class);
 	private int id = IdFactory.UNASSIGNED;
 	private int ownerIndex = -1;
 	
@@ -70,20 +70,20 @@ public abstract class Entity extends CustomCloneable {
 		return EntityReference.pointTo(this);
 	}
 
-	public Object getTag(GameTag tag) {
-		return tags.get(tag);
+	public Object getAttribute(Attribute attribute) {
+		return attributes.get(attribute);
 	}
 
-	public Map<GameTag, Object> getTags() {
-		return tags;
+	public Map<Attribute, Object> getAttributes() {
+		return attributes;
 	}
 
-	public int getTagValue(GameTag tag) {
-		return tags.containsKey(tag) ? (int) tags.get(tag) : 0;
+	public int getAttributeValue(Attribute attribute) {
+		return attributes.containsKey(attribute) ? (int) attributes.get(attribute) : 0;
 	}
 	
-	public boolean hasTag(GameTag tag) {
-		Object value = tags.get(tag);
+	public boolean hasAttribute(Attribute attribute) {
+		Object value = attributes.get(attribute);
 		if (value == null) {
 			return false;
 		}
@@ -94,18 +94,18 @@ public abstract class Entity extends CustomCloneable {
 	}
 	
 	public boolean isDestroyed() {
-		return hasTag(GameTag.DESTROYED);
+		return hasAttribute(Attribute.DESTROYED);
 	}
 
-	public void modifyTag(GameTag tag, int value) {
-		if (!hasTag(tag)) {
-			setTag(tag, 0);
+	public void modifyAttribute(Attribute attribute, int value) {
+		if (!hasAttribute(attribute)) {
+			setAttribute(attribute, 0);
 		}
-		setTag(tag, getTagValue(tag) + value);
+		setAttribute(attribute, getAttributeValue(attribute) + value);
 	}
 
-	public void removeTag(GameTag tag) {
-		tags.remove(tag);
+	public void removeAttribute(Attribute attribute) {
+		attributes.remove(attribute);
 	}
 
 	public void setId(int id) {
@@ -120,16 +120,16 @@ public abstract class Entity extends CustomCloneable {
 		this.ownerIndex = ownerIndex;
 	}
 
-	public void setTag(GameTag tag) {
-		tags.put(tag, 1);
+	public void setAttribute(Attribute attribute) {
+		attributes.put(attribute, 1);
 	}
 
-	public void setTag(GameTag tag, int value) {
-		tags.put(tag, value);
+	public void setAttribute(Attribute attribute, int value) {
+		attributes.put(attribute, value);
 	}
 
-	public void setTag(GameTag tag, Object value) {
-		tags.put(tag, value);
+	public void setAttribute(Attribute attribute, Object value) {
+		attributes.put(attribute, value);
 	}
 
 }

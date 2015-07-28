@@ -4,7 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.Rarity;
@@ -59,7 +59,7 @@ public class ParseUtils {
 		case SPELL:
 			return spellParser.deserialize(entry, SpellDesc.class, null);
 		case ATTRIBUTE:
-			return Enum.valueOf(GameTag.class, entry.getAsString());
+			return Enum.valueOf(Attribute.class, entry.getAsString());
 		case RARITY:
 			return Enum.valueOf(Rarity.class, entry.getAsString());
 		case BOARD_POSITION_RELATIVE:

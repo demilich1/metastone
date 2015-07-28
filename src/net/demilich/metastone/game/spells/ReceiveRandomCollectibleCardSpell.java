@@ -3,7 +3,7 @@ package net.demilich.metastone.game.spells;
 import java.util.Map;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
@@ -42,7 +42,7 @@ public class ReceiveRandomCollectibleCardSpell extends Spell {
 		for (int i = 0; i < count; i++) {
 			Card card = result.getRandom();
 			if (manaCostModifier != 0) {
-				card.setTag(GameTag.MANA_COST_MODIFIER, manaCostModifier);
+				card.setAttribute(Attribute.MANA_COST_MODIFIER, manaCostModifier);
 			}
 			context.getLogic().receiveCard(player.getId(), card.clone());
 		}

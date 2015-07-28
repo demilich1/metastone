@@ -2,7 +2,7 @@ package net.demilich.metastone.game.cards.desc;
 
 import java.util.Map;
 
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.cards.CardType;
@@ -22,7 +22,7 @@ public abstract class CardDesc {
 	public CardSet set;
 	public int baseManaCost;
 	public boolean collectible = true;
-	public Map<GameTag, Object> attributes;
+	public Map<Attribute, Object> attributes;
 	public int fileFormatVersion = 1;
 	public ValueProviderDesc manaCostModifier;
 	public TriggerDesc passiveTrigger;

@@ -3,7 +3,7 @@ package net.demilich.metastone.game.spells;
 import java.util.Map;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
@@ -23,7 +23,7 @@ public class ClearOverloadSpell extends Spell {
 			context.getLogic().modifyCurrentMana(player.getId(), lockedMana);
 		}
 
-		player.getHero().removeTag(GameTag.OVERLOAD);
+		player.getHero().removeAttribute(Attribute.OVERLOAD);
 	}
 
 }

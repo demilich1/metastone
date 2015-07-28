@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.Entity;
@@ -40,7 +40,7 @@ public class ReturnMinionToHandSpell extends Spell {
 		context.getLogic().removeMinion(minion);
 		Card sourceCard = minion.getSourceCard().getCopy();
 		context.getLogic().receiveCard(minion.getOwner(), sourceCard);
-		sourceCard.setTag(GameTag.MANA_COST_MODIFIER, manaCostModifier);
+		sourceCard.setAttribute(Attribute.MANA_COST_MODIFIER, manaCostModifier);
 	}
 
 }

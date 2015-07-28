@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.cards;
 
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.cards.desc.ChooseOneCardDesc;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -12,7 +12,7 @@ public class ChooseOneCard extends Card implements IChooseOneCard {
 
 	public ChooseOneCard(ChooseOneCardDesc desc) {
 		super(desc);
-		setTag(GameTag.CHOOSE_ONE);
+		setAttribute(Attribute.CHOOSE_ONE);
 		card1Id = desc.option1;
 		card2Id = desc.option2;
 	}

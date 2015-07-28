@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.spells.trigger;
 
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Race;
@@ -25,7 +25,7 @@ public class CardPlayedTrigger extends GameEventTrigger {
 			return cardPlayedEvent.getCard().getCardType() == cardType;
 		}
 		Race race = (Race) desc.get(EventTriggerArg.RACE);
-		if (race != null && cardPlayedEvent.getCard().getTag(GameTag.RACE) != race) {
+		if (race != null && cardPlayedEvent.getCard().getAttribute(Attribute.RACE) != race) {
 			return false;
 		}
 		TargetPlayer targetPlayer = desc.getTargetPlayer();

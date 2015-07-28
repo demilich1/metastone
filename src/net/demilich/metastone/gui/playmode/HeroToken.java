@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
@@ -107,7 +107,7 @@ public class HeroToken extends GameToken {
 	}
 
 	private void updateStatus(Hero hero) {
-		frozen.setVisible(hero.hasTag(GameTag.FROZEN));
+		frozen.setVisible(hero.hasAttribute(Attribute.FROZEN));
 	}
 
 	private void updateWeapon(Weapon weapon) {

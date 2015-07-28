@@ -2,7 +2,7 @@ package net.demilich.metastone.game.cards;
 
 import java.util.function.Predicate;
 
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 
 public class CardCatalogue {
@@ -54,7 +54,7 @@ public class CardCatalogue {
 		return query(cardType, rarity, heroClass, null);
 	}
 	
-	public static CardCollection query(CardType cardType, Rarity rarity, HeroClass heroClass, GameTag tag) {
+	public static CardCollection query(CardType cardType, Rarity rarity, HeroClass heroClass, Attribute tag) {
 		CardCollection result = new CardCollection();
 		for (Card card : cards) {
 			if (!card.isCollectible()) {
@@ -73,7 +73,7 @@ public class CardCatalogue {
 			if (heroClass != null && card.getClassRestriction() != heroClass) {
 				continue;
 			}
-			if (tag != null && !card.hasTag(tag)) {
+			if (tag != null && !card.hasAttribute(tag)) {
 				continue;
 			}
 			result.add(card.clone());
@@ -82,7 +82,7 @@ public class CardCatalogue {
 		return result;
 	}
 
-	public static CardCollection query(GameTag tag) {
+	public static CardCollection query(Attribute tag) {
 		return query(null, null, null, tag);
 	}
 
