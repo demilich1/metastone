@@ -14,7 +14,7 @@ public class HasEntityCondition extends Condition {
 
 	@Override
 	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity target) {
-		EntityReference source = (EntityReference) desc.get(ConditionArg.SOURCE);
+		EntityReference source = (EntityReference) desc.get(ConditionArg.TARGET);
 		EntityFilter filter = (EntityFilter) desc.get(ConditionArg.FILTER);
 		for (Entity entity : context.resolveTarget(player, null, source)) {
 			if (filter.matches(entity)) {

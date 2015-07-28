@@ -9,7 +9,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="panel" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="panel" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
@@ -66,6 +66,15 @@
                <children>
                   <Label minWidth="84.0" text="Hero Class:" />
                   <ComboBox fx:id="heroClassBox" prefWidth="150.0" />
+               </children>
+               <padding>
+                  <Insets left="16.0" />
+               </padding>
+            </HBox>
+            <HBox spacing="8.0">
+               <children>
+                  <Label minWidth="84.0" text="Card Set:" />
+                  <ComboBox fx:id="cardSetBox" prefWidth="150.0" />
                </children>
                <padding>
                   <Insets left="16.0" />

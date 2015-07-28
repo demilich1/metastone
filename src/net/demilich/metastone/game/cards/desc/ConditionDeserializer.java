@@ -34,7 +34,7 @@ public class ConditionDeserializer implements JsonDeserializer<ConditionDesc> {
 		parseArgument(ConditionArg.RACE, jsonData, arguments, ParseValueType.RACE);
 		parseArgument(ConditionArg.VALUE, jsonData, arguments, ParseValueType.INTEGER);
 		parseArgument(ConditionArg.TARGET_PLAYER, jsonData, arguments, ParseValueType.TARGET_PLAYER);
-		parseArgument(ConditionArg.SOURCE, jsonData, arguments, ParseValueType.TARGET_REFERENCE);
+		parseArgument(ConditionArg.TARGET, jsonData, arguments, ParseValueType.TARGET_REFERENCE);
 		parseArgument(ConditionArg.OPERATION, jsonData, arguments, ParseValueType.OPERATION);
 		parseArgument(ConditionArg.INVERT, jsonData, arguments, ParseValueType.BOOLEAN);
 		parseArgument(ConditionArg.ATTRIBUTE, jsonData, arguments, ParseValueType.ATTRIBUTE);

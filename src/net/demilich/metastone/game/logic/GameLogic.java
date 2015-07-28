@@ -13,9 +13,9 @@ import java.util.concurrent.ThreadLocalRandom;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.BattlecryAction;
@@ -43,6 +43,7 @@ import net.demilich.metastone.game.events.EnrageChangedEvent;
 import net.demilich.metastone.game.events.FatalDamageEvent;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.HealEvent;
+import net.demilich.metastone.game.events.HeroPowerUsedEvent;
 import net.demilich.metastone.game.events.KillEvent;
 import net.demilich.metastone.game.events.OverloadEvent;
 import net.demilich.metastone.game.events.PhysicalAttackEvent;
@@ -963,7 +964,7 @@ public class GameLogic implements Cloneable {
 		if (card.hasAttribute(Attribute.OVERLOAD)) {
 			context.fireGameEvent(new OverloadEvent(context, playerId));
 		}
-		
+
 		removeCard(playerId, card);
 
 		if (card.getCardType() == CardType.SPELL) {
@@ -1305,7 +1306,9 @@ public class GameLogic implements Cloneable {
 		modifyCurrentMana(playerId, -power.getManaCost(context, player));
 		log("{} uses {}", player.getName(), power);
 		power.setUsed(true);
+		player.getHero().modifyAttribute(Attribute.HERO_POWER_USED, +1);
 		player.getStatistics().cardPlayed(power);
+		context.fireGameEvent(new HeroPowerUsedEvent(context, playerId, power));
 	}
 
 }

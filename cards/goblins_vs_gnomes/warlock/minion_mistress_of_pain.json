@@ -10,7 +10,7 @@
 			"class": "HealingSpell",
 			"valueProvider": {
 				"class": "AttributeValueProvider",
-				"source": "SELF",
+				"target": "SELF",
 				"attribute": "ATTACK"
 			},
 			"target": "FRIENDLY_HERO"

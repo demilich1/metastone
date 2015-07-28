@@ -5,7 +5,7 @@
 	"name": "Sea Giant",
 	"manaCostModifier": {
 		"class": "EntityCounter",
-		"source": "ALL_MINIONS"
+		"target": "ALL_MINIONS"
 	},
 	"description": "Costs (1) less for each other minion on the battlefield.",
 	"type": "MINION",

@@ -5,7 +5,7 @@
 	"id": "minion_dread_corsair",
 	"manaCostModifier": {
 		"class": "AttributeValueProvider",
-		"source": "FRIENDLY_WEAPON",
+		"target": "FRIENDLY_WEAPON",
 		"attribute": "ATTACK"
 	},
 	"name": "Dread Corsair",

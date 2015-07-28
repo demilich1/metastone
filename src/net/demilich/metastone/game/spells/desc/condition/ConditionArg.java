@@ -4,7 +4,7 @@ public enum ConditionArg {
 	CLASS,
 	RACE,
 	VALUE,
-	SOURCE,
+	TARGET,
 	TARGET_PLAYER,
 	OPERATION,
 	ATTRIBUTE,

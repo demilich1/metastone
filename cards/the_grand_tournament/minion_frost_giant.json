@@ -1,0 +1,19 @@
+{
+  "baseAttack": 8,
+  "baseHp": 8,
+  "id": "minion_frost_giant",
+  "name": "Frost Giant",
+  "manaCostModifier": {
+		"class": "AttributeValueProvider",
+		"target" : "FRIENDLY_HERO",
+		"attribute": "HERO_POWER_USED"
+	},
+  "description": "Costs (1) less for each time you used your Hero Power this game.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "EPIC",
+  "set": "THE_GRAND_TOURNAMENT",
+  "baseManaCost": 10,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

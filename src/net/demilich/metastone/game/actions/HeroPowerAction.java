@@ -14,8 +14,8 @@ public class HeroPowerAction extends PlaySpellCardAction {
 
 	@Override
 	public void execute(GameContext context, int playerId) {
-		context.getLogic().useHeroPower(playerId);
 		play(context, playerId);
+		context.getLogic().useHeroPower(playerId);
 	}
 
 	@Override

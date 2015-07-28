@@ -4,7 +4,7 @@
 		"class": "DrawCardSpell",
 		"valueProvider": {
 			"class": "EntityCounter",
-			"source": "FRIENDLY_CHARACTERS",
+			"target": "FRIENDLY_CHARACTERS",
 			"filter": {
 				"class": "DamagedFilter"
 			}

@@ -12,7 +12,7 @@
 				"class": "DamageSpell",
 				"valueProvider": {
 					"class": "AttributeValueProvider",
-					"source": "ATTACKER",
+					"target": "ATTACKER",
 					"attribute": "ATTACK"
 				}
 			},

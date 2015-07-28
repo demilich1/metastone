@@ -6,7 +6,7 @@
 			"class": "BuffSpell",
 			"valueProvider": {
 				"class": "AttributeValueProvider",
-				"source": "FRIENDLY_HERO",
+				"target": "FRIENDLY_HERO",
 				"attribute": "COMBO",
 				"multiplier": 2
 			},

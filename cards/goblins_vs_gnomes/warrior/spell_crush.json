@@ -7,7 +7,7 @@
 		"class": "ConditionalValueProvider",
 		"condition": {
 			"class": "HasEntityCondition",
-			"source": "FRIENDLY_MINIONS",
+			"target": "FRIENDLY_MINIONS",
 			"filter": {
 				"class": "DamagedFilter"
 			}

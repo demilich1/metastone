@@ -33,6 +33,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.desc.CardDesc;
 import net.demilich.metastone.game.cards.desc.ParseUtils;
@@ -94,6 +95,9 @@ class EditorMainWindow extends BorderPane {
 
 	@FXML
 	private ComboBox<HeroClass> heroClassBox;
+	
+	@FXML
+	private ComboBox<CardSet> cardSetBox;
 
 	@FXML
 	private TextField manaCostField;
@@ -143,6 +147,7 @@ class EditorMainWindow extends BorderPane {
 
 		rarityBox.setItems(FXCollections.observableArrayList(Rarity.values()));
 		heroClassBox.setItems(FXCollections.observableArrayList(HeroClass.values()));
+		cardSetBox.setItems(FXCollections.observableArrayList(CardSet.values()));
 
 		setCardEditor(new MinionCardPanel());
 
@@ -150,6 +155,7 @@ class EditorMainWindow extends BorderPane {
 		resetButton.setOnAction(this::reset);
 		saveButton.setOnAction(this::onSaveButton);
 		heroClassBox.valueProperty().addListener(this::onHeroClassChanged);
+		cardSetBox.valueProperty().addListener(this::onCardSetChanged);
 		collectibleBox.setOnAction(this::onCollectibleChanged);
 		manaCostField.textProperty().addListener(new IntegerListener(value -> card.baseManaCost = value));
 
@@ -209,6 +215,10 @@ class EditorMainWindow extends BorderPane {
 
 	private void onHeroClassChanged(ObservableValue<? extends HeroClass> ov, HeroClass oldHeroClass, HeroClass newHeroClass) {
 		card.heroClass = newHeroClass;
+	}
+	
+	private void onCardSetChanged(ObservableValue<? extends CardSet> ov, CardSet oldCardSet, CardSet newCardSet) {
+		card.set = newCardSet;
 	}
 
 	private void onNameChanged(ObservableValue<? extends String> ov, String oldValue, String newValue) {
@@ -271,6 +281,7 @@ class EditorMainWindow extends BorderPane {
 			newCard.name = "";
 			newCard.rarity = Rarity.FREE;
 			newCard.heroClass = HeroClass.ANY;
+			newCard.set = CardSet.CUSTOM;
 			newCard.baseManaCost = 0;
 			newCard.collectible = true;
 		}
@@ -284,6 +295,7 @@ class EditorMainWindow extends BorderPane {
 		descriptionField.setText(card.description);
 		rarityBox.getSelectionModel().select(card.rarity);
 		heroClassBox.getSelectionModel().select(card.heroClass);
+		cardSetBox.getSelectionModel().select(card.set);
 		manaCostField.setText(String.valueOf(card.baseManaCost));
 		collectibleBox.setSelected(card.collectible);
 	}

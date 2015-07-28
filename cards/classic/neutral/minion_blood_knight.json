@@ -8,7 +8,7 @@
 				"class": "BuffSpell",
 				"valueProvider": {
 					"class": "AttributeCounter",
-					"source": "ALL_MINIONS",
+					"target": "ALL_MINIONS",
 					"attribute": "DIVINE_SHIELD",
 					"multiplier": 3
 				},

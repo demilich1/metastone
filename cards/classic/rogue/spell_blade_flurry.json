@@ -7,7 +7,7 @@
 			"valueProvider": {
 				"class": "AttributeValueProvider",
 				"attribute": "ATTACK",
-				"source": "FRIENDLY_WEAPON"
+				"target": "FRIENDLY_WEAPON"
 			},
 			"target": "ENEMY_CHARACTERS"
 		},

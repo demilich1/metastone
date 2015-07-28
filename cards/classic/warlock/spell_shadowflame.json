@@ -10,7 +10,7 @@
 			"valueProvider": {
 				"class": "AttributeValueProvider",
 				"attribute": "ATTACK",
-				"source": "TARGET"
+				"target": "TARGET"
 			},
 			"target": "ENEMY_MINIONS"
 		}

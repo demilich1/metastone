@@ -5,7 +5,7 @@
 		"card": "token_hound",
 		"valueProvider": {
 			"class": "EntityCounter",
-			"source": "ENEMY_MINIONS"
+			"target": "ENEMY_MINIONS"
 		}
 	},
 	"id": "spell_unleash_the_hounds",

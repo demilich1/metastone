@@ -9,7 +9,7 @@
 			"class": "ConditionalAttackBonusSpell",
 			"valueProvider": {
 				"class": "EntityCounter",
-				"source": "ALL_MINIONS",
+				"target": "ALL_MINIONS",
 				"offset": -1,
 				"filter": {
 					"class": "RaceFilter",

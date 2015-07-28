@@ -7,7 +7,7 @@
 			"class": "ConditionalValueProvider",
 			"condition": {
 				"class": "AttributeCondition",
-				"source": "FRIENDLY_HERO",
+				"target": "FRIENDLY_HERO",
 				"attribute": "HP",
 				"value": 13,
 				"operation": "LESS"

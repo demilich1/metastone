@@ -6,7 +6,7 @@
 			"class": "BuffSpell",
 			"valueProvider": {
 				"class": "EntityCounter",
-				"source": "FRIENDLY_MINIONS"
+				"target": "FRIENDLY_MINIONS"
 			},
 			"target": "SELF"
 		},

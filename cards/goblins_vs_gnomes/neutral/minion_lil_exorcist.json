@@ -6,7 +6,7 @@
 			"class": "BuffSpell",
 			"valueProvider": {
 				"class": "AttributeCounter",
-				"source": "ENEMY_MINIONS",
+				"target": "ENEMY_MINIONS",
 				"attribute": "DEATHRATTLES"
 			},
 			"target": "SELF"

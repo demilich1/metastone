@@ -8,7 +8,7 @@
 				"class": "DrawCardSpell",
 				"valueProvider": {
 					"class": "AttributeValueProvider",
-					"source": "ENEMY_WEAPON",
+					"target": "ENEMY_WEAPON",
 					"attribute": "HP"
 				}
 			},

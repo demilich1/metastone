@@ -7,7 +7,7 @@
 			"target": "SELF",
 			"attackValueProvider": {
 				"class": "AttributeValueProvider",
-				"source": "FRIENDLY_WEAPON",
+				"target": "FRIENDLY_WEAPON",
 				"attribute": "ATTACK"
 			}
 		},

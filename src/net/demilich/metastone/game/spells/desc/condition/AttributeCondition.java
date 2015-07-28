@@ -19,7 +19,7 @@ public class AttributeCondition extends Condition {
 
 	@Override
 	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity target) {
-		EntityReference sourceReference = (EntityReference) desc.get(ConditionArg.SOURCE);
+		EntityReference sourceReference = (EntityReference) desc.get(ConditionArg.TARGET);
 		Actor source = null;
 		if (sourceReference == null) {
 			source = (Actor) target;

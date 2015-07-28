@@ -7,7 +7,7 @@
 			"class": "BuffSpell",
 			"attackValueProvider": {
 				"class": "EntityCounter",
-				"source": "FRIENDLY_MINIONS",
+				"target": "FRIENDLY_MINIONS",
 				"filter": {
 					"class": "RaceFilter",
 					"race": "BEAST"

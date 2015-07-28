@@ -4,7 +4,7 @@
 		"class": "DamageSpell",
 		"valueProvider": {
 			"class": "AttributeValueProvider",
-			"source": "FRIENDLY_HERO",
+			"target": "FRIENDLY_HERO",
 			"attribute": "ARMOR"
 		}
 	},

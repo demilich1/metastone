@@ -32,7 +32,7 @@ public class ValueProviderDesc extends Desc<ValueProviderArg> {
 	}
 
 	public EntityReference getSource() {
-		return (EntityReference) get(ValueProviderArg.SOURCE);
+		return (EntityReference) get(ValueProviderArg.TARGET);
 	}
 
 	@SuppressWarnings("unchecked")

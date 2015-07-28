@@ -9,12 +9,12 @@
 				"class": "BuffSpell",
 				"attackValueProvider": {
 					"class": "AttributeValueProvider",
-					"source": "ADJACENT_MINIONS",
+					"target": "ADJACENT_MINIONS",
 					"attribute": "ATTACK"
 				},
 				"hpValueProvider": {
 					"class": "AttributeValueProvider",
-					"source": "ADJACENT_MINIONS",
+					"target": "ADJACENT_MINIONS",
 					"attribute": "HP"
 				},
 				"target": "SELF"
