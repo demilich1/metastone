@@ -7,7 +7,7 @@ import net.demilich.metastone.gui.playmode.GameContextVisualizable;
 public class AnimationProxy extends Proxy<GameNotification> {
 
 	public static final String NAME = "AnimationProxy";
-	
+
 	private GameContextVisualizable context;
 	private int animationsRunning;
 
@@ -24,11 +24,11 @@ public class AnimationProxy extends Proxy<GameNotification> {
 	public void animationStarted() {
 		animationsRunning++;
 	}
-	
+
 	public GameContextVisualizable getContext() {
 		return context;
 	}
-	
+
 	public void setContext(GameContextVisualizable context) {
 		this.context = context;
 	}

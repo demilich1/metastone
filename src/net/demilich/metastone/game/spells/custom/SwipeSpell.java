@@ -9,7 +9,7 @@ import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
 public class SwipeSpell extends Spell {
-	
+
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int primaryDamage = desc.getInt(SpellArg.VALUE, 2);
 		int secondaryDamage = desc.getInt(SpellArg.SECONDARY_VALUE, 1);

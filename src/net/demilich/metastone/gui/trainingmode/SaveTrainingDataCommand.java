@@ -9,9 +9,10 @@ public class SaveTrainingDataCommand extends SimpleCommand<GameNotification> {
 	@Override
 	public void execute(INotification<GameNotification> notification) {
 		TrainingData trainingData = (TrainingData) notification.getBody();
-		
+
 		TrainingProxy trainingProxy = (TrainingProxy) getFacade().retrieveProxy(TrainingProxy.NAME);
-		trainingProxy.saveTrainingData(trainingData);;
+		trainingProxy.saveTrainingData(trainingData);
+		;
 	}
 
 }

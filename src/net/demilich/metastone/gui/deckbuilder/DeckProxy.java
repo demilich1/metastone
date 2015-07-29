@@ -199,9 +199,9 @@ public class DeckProxy extends Proxy<GameNotification> {
 			for (Card card : deck.getCards()) {
 				cardIds.add(card.getCardId());
 			}
-			saveData.put("cards", cardIds);	
+			saveData.put("cards", cardIds);
 		}
-		
+
 		String jsonData = gson.toJson(saveData);
 		try {
 			String filename = deck.getName().toLowerCase();

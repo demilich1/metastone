@@ -14,7 +14,7 @@ import javafx.scene.layout.BorderPane;
 import net.demilich.metastone.gui.IconFactory;
 
 public class BattleBatchResultToken extends BorderPane {
-	
+
 	@FXML
 	private Label deck1Label;
 	@FXML
@@ -23,7 +23,7 @@ public class BattleBatchResultToken extends BorderPane {
 	private Label deck2Label;
 	@FXML
 	private ImageView deck2Icon;
-	
+
 	@FXML
 	private ProgressBar winrate1Bar;
 	@FXML
@@ -36,7 +36,7 @@ public class BattleBatchResultToken extends BorderPane {
 	private Node contentPane;
 	@FXML
 	private ProgressIndicator progressIndicator;
-	
+
 	public BattleBatchResultToken() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BattleBatchResultToken.fxml"));
 		fxmlLoader.setRoot(this);
@@ -53,13 +53,12 @@ public class BattleBatchResultToken extends BorderPane {
 		winrate2Bar.setVisible(false);
 		winrate2Label.setVisible(false);
 	}
-	
+
 	public void displayBatchResult(BattleBatchResult result) {
 		if (!result.isCompleted()) {
 			progressIndicator.setProgress(result.getProgress());
 			Tooltip.install(this, new Tooltip("In progress\n\n" + result.getDeck1().getName() + "\nVS.\n" + result.getDeck2().getName()));
-		}
-		else if (contentPane.getOpacity() < 1) {
+		} else if (contentPane.getOpacity() < 1) {
 			contentPane.setOpacity(1);
 			progressIndicator.setVisible(false);
 			winrate1Bar.setVisible(true);
@@ -72,12 +71,12 @@ public class BattleBatchResultToken extends BorderPane {
 		deck1Icon.setImage(IconFactory.getClassIcon(result.getDeck1().getHeroClass()));
 		deck2Label.setText(result.getDeck2().getName());
 		deck2Icon.setImage(IconFactory.getClassIcon(result.getDeck2().getHeroClass()));
-		
+
 		winrate1Bar.setProgress(result.getDeck1Winrate());
 		winrate1Label.setText(String.format("%.2f", result.getDeck1Winrate() * 100) + "%");
 		winrate2Bar.setProgress(result.getDeck2Winrate());
 		winrate2Label.setText(String.format("%.2f", result.getDeck2Winrate() * 100) + "%");
-		
+
 	}
-	
+
 }

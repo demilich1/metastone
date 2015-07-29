@@ -22,21 +22,21 @@ public class CardPropertyCondition extends Condition {
 			Actor actor = (Actor) target;
 			card = actor.getSourceCard();
 		}
-		
+
 		if (card == null) {
 			return false;
 		}
-		
+
 		CardType cardType = (CardType) desc.get(ConditionArg.CARD_TYPE);
 		if (cardType != null && card.getCardType() != cardType) {
 			return false;
 		}
-		
+
 		String cardId = (String) desc.get(ConditionArg.CARD_ID);
 		if (cardId != null && !card.getCardId().contains(cardId)) {
 			return false;
 		}
-		
+
 		return true;
 	}
 

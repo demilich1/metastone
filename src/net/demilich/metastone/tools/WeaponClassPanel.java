@@ -5,7 +5,7 @@ import net.demilich.metastone.game.cards.desc.CardDesc;
 import net.demilich.metastone.game.cards.desc.WeaponCardDesc;
 
 public class WeaponClassPanel extends CardEditor {
-	
+
 	private final WeaponCardDesc card = new WeaponCardDesc();
 
 	public WeaponClassPanel() {

@@ -3,7 +3,7 @@ package net.demilich.metastone.game.behaviour.threat.cuckoo;
 import net.demilich.metastone.game.behaviour.threat.FeatureVector;
 
 public class CuckooAgent implements Comparable<CuckooAgent> {
-	
+
 	private FeatureVector data;
 	private double fitness = -1;
 
@@ -30,7 +30,7 @@ public class CuckooAgent implements Comparable<CuckooAgent> {
 
 	public void setFitness(double fitness) {
 		if (this.fitness < 0) {
-			this.fitness = fitness;	
+			this.fitness = fitness;
 		} else {
 			this.fitness = (this.fitness + fitness) * 0.5;
 		}

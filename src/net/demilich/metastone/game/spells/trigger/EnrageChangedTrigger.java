@@ -10,7 +10,7 @@ public class EnrageChangedTrigger extends GameEventTrigger {
 	public EnrageChangedTrigger() {
 		this(EventTriggerDesc.createEmpty(EnrageChangedTrigger.class));
 	}
-	
+
 	public EnrageChangedTrigger(EventTriggerDesc desc) {
 		super(desc);
 	}

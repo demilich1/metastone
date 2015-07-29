@@ -18,11 +18,10 @@ public class SaveDeckCommand extends SimpleCommand<GameNotification> {
 			return;
 		}
 		deckProxy.saveActiveDeck();
-		
+
 		getFacade().removeMediator(DeckBuilderMediator.NAME);
 		getFacade().sendNotification(GameNotification.MAIN_MENU);
 		getFacade().sendNotification(GameNotification.DECK_BUILDER_SELECTED);
 	}
-
 
 }

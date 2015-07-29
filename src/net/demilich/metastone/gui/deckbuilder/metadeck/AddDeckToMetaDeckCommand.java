@@ -13,12 +13,12 @@ public class AddDeckToMetaDeckCommand extends SimpleCommand<GameNotification> {
 	public void execute(INotification<GameNotification> notification) {
 		DeckProxy deckProxy = (DeckProxy) getFacade().retrieveProxy(DeckProxy.NAME);
 		MetaDeck metaDeck = (MetaDeck) deckProxy.getActiveDeck();
-		
+
 		Deck deck = (Deck) notification.getBody();
 		if (metaDeck.getDecks().contains(deck)) {
 			return;
 		}
-		
+
 		metaDeck.getDecks().add(deck);
 		getFacade().sendNotification(GameNotification.ACTIVE_DECK_CHANGED, deckProxy.getActiveDeck());
 	}

@@ -15,7 +15,7 @@ import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.gui.common.ComboBoxKeyHandler;
 
 public abstract class CardEditor extends VBox implements ICardEditor {
-	
+
 	public CardEditor(String fxmlFile) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
 		fxmlLoader.setRoot(this);
@@ -27,7 +27,7 @@ public abstract class CardEditor extends VBox implements ICardEditor {
 			throw new RuntimeException(exception);
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	protected void fillWithSpells(ComboBox<Class<? extends Spell>> comboBox) {
 		ObservableList<Class<? extends Spell>> items = FXCollections.observableArrayList();
@@ -41,12 +41,12 @@ public abstract class CardEditor extends VBox implements ICardEditor {
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
-	
+
 			items.add(spellClass);
 		}
 		comboBox.setItems(items);
 		comboBox.setOnKeyReleased(new ComboBoxKeyHandler<Class<? extends Spell>>(comboBox));
-	
+
 	}
 
 	@Override

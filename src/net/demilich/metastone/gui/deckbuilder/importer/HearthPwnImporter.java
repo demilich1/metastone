@@ -21,7 +21,7 @@ import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 
 public class HearthPwnImporter implements IDeckImporter {
-	
+
 	private static Logger logger = LoggerFactory.getLogger(HearthPwnImporter.class);
 
 	private String extractId(String url) {

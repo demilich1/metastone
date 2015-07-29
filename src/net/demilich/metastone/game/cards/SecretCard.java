@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards;
 
-import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.desc.SecretCardDesc;
 import net.demilich.metastone.game.spells.AddSecretSpell;
@@ -18,7 +18,7 @@ public class SecretCard extends SpellCard {
 		setSecret(new Secret(trigger, desc.spell, this));
 		setAttribute(Attribute.SECRET);
 	}
-	
+
 	public boolean canBeCast(GameContext context, Player player) {
 		return context.getLogic().canPlaySecret(player, this);
 	}

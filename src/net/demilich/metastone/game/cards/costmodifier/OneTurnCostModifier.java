@@ -27,7 +27,7 @@ public class OneTurnCostModifier extends CardCostModifier {
 		if (turnStartTrigger.interestedIn() == eventType) {
 			return true;
 		}
-		
+
 		return super.interestedIn(eventType);
 	}
 
@@ -37,7 +37,7 @@ public class OneTurnCostModifier extends CardCostModifier {
 		if (event.getEventType() == turnStartTrigger.interestedIn() && turnStartTrigger.fires(event, host)) {
 			expire();
 		}
-		
+
 		super.onGameEvent(event);
 	}
 

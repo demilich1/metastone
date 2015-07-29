@@ -10,7 +10,7 @@ public class HostAcquiresTargetTrigger extends TargetAcquisitionTrigger {
 	public HostAcquiresTargetTrigger(EventTriggerDesc desc) {
 		super(desc);
 	}
-	
+
 	@Override
 	protected boolean fire(GameEvent event, Entity host) {
 		TargetAcquisitionEvent targetAcquisitionEvent = (TargetAcquisitionEvent) event;

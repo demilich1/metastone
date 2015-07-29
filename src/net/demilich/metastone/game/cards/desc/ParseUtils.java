@@ -175,7 +175,7 @@ public class ParseUtils {
 			return false;
 		}
 	}
-	
+
 	public static boolean tryParseInt(String value) {
 		try {
 			Integer.parseInt(value);

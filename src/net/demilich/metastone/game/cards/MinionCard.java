@@ -9,17 +9,17 @@ import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.actions.PlayMinionCardAction;
 import net.demilich.metastone.game.cards.desc.MinionCardDesc;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.desc.BattlecryDesc;
 
 public class MinionCard extends Card {
 
-	private static final Set<Attribute> inheritedAttributes = new HashSet<Attribute>(Arrays.asList(new Attribute[] { Attribute.STEALTH,
-			Attribute.CANNOT_ATTACK, Attribute.TAUNT, Attribute.UNTARGETABLE_BY_SPELLS, Attribute.CHARGE, Attribute.DIVINE_SHIELD, Attribute.WINDFURY,
-			Attribute.MEGA_WINDFURY, Attribute.SPELL_DAMAGE, Attribute.ATTACK_EQUALS_HP, Attribute.INVERT_HEALING, Attribute.SPELL_AMPLIFY_MULTIPLIER,
-			Attribute.ENRAGABLE, Attribute.DOUBLE_DEATHRATTLES, Attribute.HERO_POWER_CAN_TARGET_MINIONS, Attribute.ATTACK_BONUS
+	private static final Set<Attribute> inheritedAttributes = new HashSet<Attribute>(
+			Arrays.asList(new Attribute[] { Attribute.STEALTH, Attribute.CANNOT_ATTACK, Attribute.TAUNT, Attribute.UNTARGETABLE_BY_SPELLS,
+					Attribute.CHARGE, Attribute.DIVINE_SHIELD, Attribute.WINDFURY, Attribute.MEGA_WINDFURY, Attribute.SPELL_DAMAGE,
+					Attribute.ATTACK_EQUALS_HP, Attribute.INVERT_HEALING, Attribute.SPELL_AMPLIFY_MULTIPLIER, Attribute.ENRAGABLE,
+					Attribute.DOUBLE_DEATHRATTLES, Attribute.HERO_POWER_CAN_TARGET_MINIONS, Attribute.ATTACK_BONUS
 
 	}));
 

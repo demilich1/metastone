@@ -36,6 +36,7 @@ public class PlayerPanel extends VBox {
 		}
 
 	}
+
 	@FXML
 	private ComboBox<Player> playerComboBox;
 
@@ -43,7 +44,7 @@ public class PlayerPanel extends VBox {
 	private Button editEntityButton;
 	@FXML
 	private ComboBox<Integer> currentManaBox;
-	
+
 	@FXML
 	private ComboBox<Integer> maxManaBox;
 
@@ -64,7 +65,7 @@ public class PlayerPanel extends VBox {
 
 		playerComboBox.setConverter(new PlayerStringConverter());
 		playerComboBox.getSelectionModel().selectedItemProperty().addListener(this::handlePlayerChanged);
-		
+
 		currentManaBox.getSelectionModel().selectedItemProperty().addListener(this::handleCurrentManaChanged);
 		maxManaBox.getSelectionModel().selectedItemProperty().addListener(this::handleMaxManaChanged);
 

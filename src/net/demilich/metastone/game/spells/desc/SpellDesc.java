@@ -29,7 +29,7 @@ public class SpellDesc extends CustomCloneable {
 		clone.arguments.put(spellArg, value);
 		return clone;
 	}
-	
+
 	@Override
 	public SpellDesc clone() {
 		SpellDesc clone = new SpellDesc(build(getSpellClass()));
@@ -60,7 +60,7 @@ public class SpellDesc extends CustomCloneable {
 	public EntityFilter getEntityFilter() {
 		return (EntityFilter) get(SpellArg.FILTER);
 	}
-	
+
 	public int getInt(SpellArg spellArg, int defaultValue) {
 		return arguments.containsKey(spellArg) ? (int) get(spellArg) : defaultValue;
 	}
@@ -81,11 +81,11 @@ public class SpellDesc extends CustomCloneable {
 	public int getValue() {
 		return getInt(SpellArg.VALUE, 0);
 	}
-	
+
 	public ValueProvider getValueProvider() {
 		return (ValueProvider) get(SpellArg.VALUE_PROVIDER);
 	}
-	
+
 	public boolean hasPredefinedTarget() {
 		return arguments.get(SpellArg.TARGET) != null;
 	}

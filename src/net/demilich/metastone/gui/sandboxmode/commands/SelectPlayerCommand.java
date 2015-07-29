@@ -12,7 +12,7 @@ public class SelectPlayerCommand extends SimpleCommand<GameNotification> {
 	public void execute(INotification<GameNotification> notification) {
 		Player player = (Player) notification.getBody();
 		SandboxProxy sandboxProxy = (SandboxProxy) getFacade().retrieveProxy(SandboxProxy.NAME);
-		
+
 		sandboxProxy.setSelectedPlayer(player);
 	}
 

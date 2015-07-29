@@ -15,7 +15,7 @@ public class DamageEventVisualizer implements IGameEventVisualizer {
 		if (targetToken == null) {
 			return;
 		}
-		new DamageNumber("-"  + damageEvent.getDamage(), targetToken);
+		new DamageNumber("-" + damageEvent.getDamage(), targetToken);
 	}
 
 }

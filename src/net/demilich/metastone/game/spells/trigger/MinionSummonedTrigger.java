@@ -23,12 +23,12 @@ public class MinionSummonedTrigger extends GameEventTrigger {
 		if (race != null && summonEvent.getMinion().getRace() != race) {
 			return false;
 		}
-		
+
 		Attribute requiredAttribute = (Attribute) desc.get(EventTriggerArg.REQUIRED_ATTRIBUTE);
 		if (requiredAttribute != null && !summonEvent.getMinion().hasAttribute(requiredAttribute)) {
 			return false;
 		}
-		
+
 		TargetPlayer targetPlayer = desc.getTargetPlayer();
 		switch (targetPlayer) {
 		case BOTH:

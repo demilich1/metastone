@@ -12,7 +12,7 @@ import net.demilich.metastone.gui.IconFactory;
 public class MetaStone extends Application {
 
 	public static void main(String[] args) {
-		//DevCardTools.formatJsons();
+		// DevCardTools.formatJsons();
 		launch(args);
 	}
 
@@ -26,7 +26,7 @@ public class MetaStone extends Application {
 		ApplicationFacade facade = (ApplicationFacade) ApplicationFacade.getInstance();
 		final MetaStone instance = new MetaStone();
 		facade.startUp(instance);
-		
+
 		StackPane root = new StackPane();
 		root.setAlignment(Pos.CENTER);
 		Scene scene = new Scene(root);

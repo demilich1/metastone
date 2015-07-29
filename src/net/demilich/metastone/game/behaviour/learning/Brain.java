@@ -131,7 +131,7 @@ public class Brain implements IBrain {
 		// } catch (IOException e) {
 		// logger.info("Brain data not found, using unlearned neural network");
 		// }
-		
+
 	}
 
 	private void printWeights() {
@@ -145,7 +145,7 @@ public class Brain implements IBrain {
 	}
 
 	public void save(String path) {
-		
+
 		// try {
 		// neuralNetwork.writeTo(path);
 		// logger.info("Brain data saved to: " + path);

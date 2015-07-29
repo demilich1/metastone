@@ -5,8 +5,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
@@ -16,7 +16,7 @@ import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class TemporaryAttackSpell extends Spell {
-	
+
 	private static Logger logger = LoggerFactory.getLogger(TemporaryAttackSpell.class);
 
 	public static SpellDesc create(EntityReference target, int attackBonus) {

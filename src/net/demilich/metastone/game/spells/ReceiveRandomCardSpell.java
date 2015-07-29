@@ -11,7 +11,7 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class ReceiveRandomCardSpell extends Spell {
-	
+
 	public static SpellDesc create(TargetPlayer targetPlayer, Card... cards) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(ReceiveRandomCardSpell.class);
 		arguments.put(SpellArg.CARD, cards);

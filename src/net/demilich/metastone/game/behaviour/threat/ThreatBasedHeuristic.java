@@ -3,8 +3,8 @@ package net.demilich.metastone.game.behaviour.threat;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.behaviour.heuristic.IGameStateHeuristic;
 import net.demilich.metastone.game.cards.Card;
@@ -102,13 +102,13 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 				break;
 			}
 		}
-		
+
 		if (minion.hasAttribute(Attribute.WINDFURY)) {
 			minionScore += weights.get(WeightedFeature.MINION_WINDFURY_MODIFIER);
 		} else if (minion.hasAttribute(Attribute.MEGA_WINDFURY)) {
 			minionScore += 2 * weights.get(WeightedFeature.MINION_WINDFURY_MODIFIER);
 		}
-		
+
 		if (minion.hasAttribute(Attribute.DIVINE_SHIELD)) {
 			minionScore += weights.get(WeightedFeature.MINION_DIVINE_SHIELD_MODIFIER);
 		}

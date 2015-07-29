@@ -2,8 +2,8 @@ package net.demilich.metastone.game.spells.aura;
 
 import java.util.List;
 
-import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
@@ -13,9 +13,9 @@ import net.demilich.metastone.game.spells.trigger.EnrageChangedTrigger;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class EnrageAura extends Aura {
-	
+
 	private boolean active;
-	
+
 	public EnrageAura(AuraDesc desc) {
 		this(desc.getApplyEffect(), desc.getRemoveEffect(), desc.getTarget());
 	}
@@ -36,10 +36,5 @@ public class EnrageAura extends Aura {
 		}
 		super.onGameEvent(event);
 	}
-	
-	
-	
-	
-	
 
 }

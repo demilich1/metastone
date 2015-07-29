@@ -43,7 +43,7 @@ public class DialogMediator extends Mediator<GameNotification> {
 			break;
 		}
 	}
-	
+
 	@Override
 	public List<GameNotification> listNotificationInterests() {
 		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();

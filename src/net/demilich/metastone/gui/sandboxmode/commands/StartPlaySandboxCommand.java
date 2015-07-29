@@ -11,7 +11,7 @@ public class StartPlaySandboxCommand extends SimpleCommand<GameNotification> {
 	@Override
 	public void execute(INotification<GameNotification> notification) {
 		SandboxProxy sandboxProxy = (SandboxProxy) getFacade().retrieveProxy(SandboxProxy.NAME);
-		
+
 		GameContext context = sandboxProxy.getSandbox();
 		context.setIgnoreEvents(false);
 	}

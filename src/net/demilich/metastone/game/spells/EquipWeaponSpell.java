@@ -13,27 +13,27 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class EquipWeaponSpell extends Spell {
-	
+
 	public static SpellDesc create(String weaponCardName) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(EquipWeaponSpell.class);
 		arguments.put(SpellArg.CARD, weaponCardName);
 		arguments.put(SpellArg.TARGET, EntityReference.NONE);
-//		if (targetPlayer != null) {
-//			arguments.put(SpellArg.TARGET_PLAYER, targetPlayer);	
-//		}
+		// if (targetPlayer != null) {
+		// arguments.put(SpellArg.TARGET_PLAYER, targetPlayer);
+		// }
 		return new SpellDesc(arguments);
 	}
-	
+
 	public static SpellDesc create(TargetPlayer targetPlayer, WeaponCard weaponCard) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(EquipWeaponSpell.class);
 		arguments.put(SpellArg.CARD, weaponCard);
 		arguments.put(SpellArg.TARGET, EntityReference.NONE);
 		if (targetPlayer != null) {
-			arguments.put(SpellArg.TARGET_PLAYER, targetPlayer);	
+			arguments.put(SpellArg.TARGET_PLAYER, targetPlayer);
 		}
 		return new SpellDesc(arguments);
 	}
-	
+
 	public static SpellDesc create(WeaponCard weaponCard) {
 		return create(TargetPlayer.SELF, weaponCard);
 	}

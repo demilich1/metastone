@@ -13,9 +13,10 @@ public class FumbleSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Actor attacker = (Actor) context.getEnvironment().get(Environment.ATTACKER);
-		Actor randomTarget = context.getLogic().getAnotherRandomTarget(context.getActivePlayer(), attacker, (Actor) target, EntityReference.ENEMY_CHARACTERS);
+		Actor randomTarget = context.getLogic().getAnotherRandomTarget(context.getActivePlayer(), attacker, (Actor) target,
+				EntityReference.ENEMY_CHARACTERS);
 		if (randomTarget != target) {
-			context.getEnvironment().put(Environment.TARGET_OVERRIDE, randomTarget);	
+			context.getEnvironment().put(Environment.TARGET_OVERRIDE, randomTarget);
 		}
 	}
 

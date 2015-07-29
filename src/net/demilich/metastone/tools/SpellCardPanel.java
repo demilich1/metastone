@@ -45,7 +45,8 @@ public class SpellCardPanel extends CardEditor {
 		card.spell = new SpellDesc(SpellDesc.build(newSpell));
 	}
 
-	private void onTargetSelectionChanged(ObservableValue<? extends TargetSelection> ov, TargetSelection oldValue, TargetSelection newValue) {
+	private void onTargetSelectionChanged(ObservableValue<? extends TargetSelection> ov, TargetSelection oldValue,
+			TargetSelection newValue) {
 		card.targetSelection = newValue;
 	}
 

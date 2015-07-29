@@ -8,7 +8,7 @@ import net.demilich.metastone.game.entities.weapons.Weapon;
 import net.demilich.metastone.game.spells.desc.BattlecryDesc;
 
 public class WeaponCard extends Card {
-	
+
 	private final WeaponCardDesc desc;
 
 	public WeaponCard(WeaponCardDesc desc) {

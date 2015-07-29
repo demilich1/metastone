@@ -10,7 +10,7 @@ public class BoardChangedTrigger extends GameEventTrigger {
 	public BoardChangedTrigger() {
 		this(EventTriggerDesc.createEmpty(BoardChangedTrigger.class));
 	}
-	
+
 	public BoardChangedTrigger(EventTriggerDesc desc) {
 		super(desc);
 	}

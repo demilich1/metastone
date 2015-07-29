@@ -32,7 +32,8 @@ public class ConditionalEffectSpell extends Spell {
 		SpellDesc secondarySpell = (SpellDesc) desc.get(SpellArg.SPELL_2);
 
 		if (exclusive) {
-			SpellUtils.castChildSpell(context, player, isConditionFulfilled(context, player, desc, target) ? secondarySpell : primarySpell, source, target);
+			SpellUtils.castChildSpell(context, player, isConditionFulfilled(context, player, desc, target) ? secondarySpell : primarySpell,
+					source, target);
 		} else {
 			SpellUtils.castChildSpell(context, player, primarySpell, source, target);
 			if (isConditionFulfilled(context, player, desc, target)) {

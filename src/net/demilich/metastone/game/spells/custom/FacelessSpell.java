@@ -15,7 +15,7 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.IGameEventListener;
 
 public class FacelessSpell extends Spell {
-	
+
 	public static SpellDesc create() {
 		Map<SpellArg, Object> arguments = SpellDesc.build(FacelessSpell.class);
 		return new SpellDesc(arguments);
@@ -31,15 +31,15 @@ public class FacelessSpell extends Spell {
 		Minion sourceActor = context.getSummonStack().peek();
 		SpellDesc transformSpell = TransformMinionSpell.create(clone);
 		SpellUtils.castChildSpell(context, player, transformSpell, source, sourceActor);
-		
+
 		for (IGameEventListener trigger : context.getTriggersAssociatedWith(template.getReference())) {
 			IGameEventListener triggerClone = trigger.clone();
 			if (triggerClone instanceof CardCostModifier) {
 				context.getLogic().addManaModifier(player, (CardCostModifier) triggerClone, clone);
 			} else {
-				context.getLogic().addGameEventListener(player, triggerClone, clone);	
+				context.getLogic().addGameEventListener(player, triggerClone, clone);
 			}
-			
+
 		}
 	}
 }

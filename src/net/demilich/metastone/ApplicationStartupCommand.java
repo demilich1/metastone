@@ -19,7 +19,7 @@ public class ApplicationStartupCommand extends SimpleCommand<GameNotification> {
 		getFacade().registerProxy(new TrainingProxy());
 		getFacade().registerProxy(new SandboxProxy());
 		getFacade().registerProxy(new AnimationProxy());
-		
+
 		getFacade().registerMediator(new ApplicationMediator());
 		getFacade().registerMediator(new DialogMediator());
 	}

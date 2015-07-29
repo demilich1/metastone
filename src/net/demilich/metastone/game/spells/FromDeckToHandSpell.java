@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.spells;
 
-import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
@@ -18,7 +18,7 @@ public class FromDeckToHandSpell extends Spell {
 		Race race = (Race) desc.get(SpellArg.RACE);
 		int value = desc.getValue();
 		String replacementCard = (String) desc.get(SpellArg.CARD);
-		
+
 		CardCollection relevantCards = SpellUtils.getCards(player.getDeck(), card -> card.getAttribute(Attribute.RACE) == race);
 		for (int i = 0; i < value; i++) {
 			Card card = null;
@@ -29,9 +29,9 @@ public class FromDeckToHandSpell extends Spell {
 			} else if (replacementCard != null) {
 				card = CardCatalogue.getCardById(replacementCard);
 			}
-			
+
 			if (card != null) {
-				context.getLogic().receiveCard(player.getId(), card);	
+				context.getLogic().receiveCard(player.getId(), card);
 			}
 		}
 	}

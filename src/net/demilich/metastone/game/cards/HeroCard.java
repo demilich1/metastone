@@ -16,12 +16,10 @@ import net.demilich.metastone.game.heroes.powers.HeroPower;
 import net.demilich.metastone.gui.IconFactory;
 
 public class HeroCard extends Card {
-	
-	private static final Set<Attribute> inheritedAttributes = new HashSet<Attribute>(Arrays.asList(new Attribute[] { Attribute.HP,
-			Attribute.MAX_HP, Attribute.ARMOR
-	}));
 
-	
+	private static final Set<Attribute> inheritedAttributes = new HashSet<Attribute>(
+			Arrays.asList(new Attribute[] { Attribute.HP, Attribute.MAX_HP, Attribute.ARMOR }));
+
 	private final HeroCardDesc desc;
 
 	public HeroCard(HeroCardDesc desc) {
@@ -40,7 +38,7 @@ public class HeroCard extends Card {
 		hero.setRace(desc.race);
 		return hero;
 	}
-	
+
 	public HeroClass getHeroClass() {
 		return getClassRestriction();
 	}
@@ -48,7 +46,7 @@ public class HeroCard extends Card {
 	public Image getImage() {
 		return new Image(IconFactory.getHeroIconUrl(getHeroClass()));
 	}
-	
+
 	@Override
 	public PlayCardAction play() {
 		throw new NotImplementedException("Hero cards cannot be played");

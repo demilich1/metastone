@@ -28,7 +28,7 @@ public class BattleBatchResult {
 	public double getDeck1Winrate() {
 		return getPlayer1Results().getDouble(Statistic.WIN_RATE);
 	}
-	
+
 	public Deck getDeck2() {
 		return deck2;
 	}
@@ -36,7 +36,7 @@ public class BattleBatchResult {
 	public double getDeck2Winrate() {
 		return getPlayer2Results().getDouble(Statistic.WIN_RATE);
 	}
-	
+
 	public int getNumberOfGames() {
 		return numberOfGames;
 	}
@@ -50,7 +50,7 @@ public class BattleBatchResult {
 	}
 
 	public double getProgress() {
-		return gamesCompleted / (double)numberOfGames;
+		return gamesCompleted / (double) numberOfGames;
 	}
 
 	public boolean isCompleted() {
@@ -60,7 +60,7 @@ public class BattleBatchResult {
 	public void onGameEnded(GameContext result) {
 		getPlayer1Results().merge(result.getPlayer1().getStatistics());
 		getPlayer2Results().merge(result.getPlayer2().getStatistics());
-		
+
 		if (++gamesCompleted == numberOfGames) {
 			setCompleted(true);
 		}

@@ -19,7 +19,7 @@ public class TargetAcquisitionTrigger extends GameEventTrigger {
 	@Override
 	protected boolean fire(GameEvent event, Entity host) {
 		TargetAcquisitionEvent targetAcquisitionEvent = (TargetAcquisitionEvent) event;
-		
+
 		ActionType actionType = (ActionType) desc.get(EventTriggerArg.ACTION_TYPE);
 		if (targetAcquisitionEvent.getActionType() != actionType) {
 			return false;
@@ -32,7 +32,7 @@ public class TargetAcquisitionTrigger extends GameEventTrigger {
 		if (targetEntityType != null && targetEntityType != targetAcquisitionEvent.getTarget().getEntityType()) {
 			return false;
 		}
-		
+
 		TargetPlayer targetPlayer = desc.getTargetPlayer();
 		int playerId = targetAcquisitionEvent.getSource().getOwner();
 		switch (targetPlayer) {

@@ -17,7 +17,7 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 public class ChangeHeroPowerSpell extends Spell {
 
 	private static Logger logger = LoggerFactory.getLogger(ChangeHeroPowerSpell.class);
-	
+
 	public static SpellDesc create(HeroPower heroPower) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(ChangeHeroPowerSpell.class);
 		arguments.put(SpellArg.HERO_POWER, heroPower);

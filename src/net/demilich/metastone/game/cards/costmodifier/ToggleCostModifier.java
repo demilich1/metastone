@@ -19,7 +19,7 @@ public class ToggleCostModifier extends CardCostModifier {
 		super(desc);
 		EventTriggerDesc triggerDesc = (EventTriggerDesc) desc.get(CardCostModifierArg.TOGGLE_ON_TRIGGER);
 		this.toggleOnTrigger = triggerDesc.create();
-		
+
 		triggerDesc = (EventTriggerDesc) desc.get(CardCostModifierArg.TOGGLE_OFF_TRIGGER);
 		this.toggleOffTrigger = triggerDesc.create();
 	}

@@ -12,7 +12,7 @@ import net.demilich.metastone.game.spells.desc.trigger.EventTriggerArg;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
 public class CardPlayedTrigger extends GameEventTrigger {
-	
+
 	public CardPlayedTrigger(EventTriggerDesc desc) {
 		super(desc);
 	}
@@ -38,7 +38,7 @@ public class CardPlayedTrigger extends GameEventTrigger {
 		case OPPONENT:
 			return cardPlayedEvent.getPlayerId() != host.getOwner();
 		}
-		
+
 		return false;
 	}
 

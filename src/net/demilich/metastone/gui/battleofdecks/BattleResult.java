@@ -36,7 +36,7 @@ public class BattleResult {
 			for (String deckName : deckResults.keySet()) {
 				BattleDeckResult deckResult = new BattleDeckResult(deckName, deckResults.get(deckName));
 				resultList.add(deckResult);
-			}	
+			}
 		}
 		return resultList;
 	}

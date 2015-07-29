@@ -299,7 +299,8 @@ public class GameContext implements Cloneable, IDisposable {
 		init();
 		while (!gameDecided()) {
 			startTurn(activePlayer);
-			while(playTurn());
+			while (playTurn())
+				;
 			if (getTurn() > GameLogic.TURN_LIMIT) {
 				break;
 			}
@@ -370,7 +371,7 @@ public class GameContext implements Cloneable, IDisposable {
 		new RuntimeException().printStackTrace();
 		return null;
 	}
-	
+
 	public Entity resolveSingleTarget(EntityReference targetKey) {
 		if (targetKey == null) {
 			return null;
@@ -381,7 +382,7 @@ public class GameContext implements Cloneable, IDisposable {
 	public List<Entity> resolveTarget(Player player, Entity source, EntityReference targetKey) {
 		return targetLogic.resolveTargetKey(this, player, source, targetKey);
 	}
-	
+
 	public void setIgnoreEvents(boolean ignoreEvents) {
 		this.ignoreEvents = ignoreEvents;
 	}

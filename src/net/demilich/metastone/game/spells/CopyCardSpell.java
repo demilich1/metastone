@@ -18,7 +18,7 @@ import net.demilich.metastone.game.targeting.CardLocation;
 public class CopyCardSpell extends Spell {
 
 	private static Logger logger = LoggerFactory.getLogger(CopyCardSpell.class);
-	
+
 	public static SpellDesc create(CardLocation cardLocation, int numberOfCardsToCopy) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(CopyCardSpell.class);
 		arguments.put(SpellArg.CARD_LOCATION, cardLocation);
@@ -33,10 +33,10 @@ public class CopyCardSpell extends Spell {
 			context.getLogic().receiveCard(player.getId(), targetCard.getCopy());
 			return;
 		}
-		
+
 		CardLocation cardLocation = (CardLocation) desc.get(SpellArg.CARD_LOCATION);
 		int numberOfCardsToCopy = desc.getInt(SpellArg.VALUE, 1);
-		
+
 		Player opponent = context.getOpponent(player);
 		CardCollection sourceCollection = null;
 		switch (cardLocation) {

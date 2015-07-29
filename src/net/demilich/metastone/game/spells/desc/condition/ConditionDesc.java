@@ -14,7 +14,6 @@ public class ConditionDesc extends Desc<ConditionArg> {
 		return arguments;
 	}
 
-
 	public ConditionDesc(Map<ConditionArg, Object> arguments) {
 		super(arguments);
 	}

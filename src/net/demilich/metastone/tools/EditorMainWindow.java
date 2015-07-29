@@ -95,7 +95,7 @@ class EditorMainWindow extends BorderPane {
 
 	@FXML
 	private ComboBox<HeroClass> heroClassBox;
-	
+
 	@FXML
 	private ComboBox<CardSet> cardSetBox;
 
@@ -107,7 +107,7 @@ class EditorMainWindow extends BorderPane {
 
 	@FXML
 	private Pane contentPanel;
-	
+
 	@FXML
 	private Button resetButton;
 
@@ -138,7 +138,7 @@ class EditorMainWindow extends BorderPane {
 		spellRadioButton.setToggleGroup(cardTypeGroup);
 		weaponRadioButton.setToggleGroup(cardTypeGroup);
 		minionRadioButton.setSelected(true);
-		
+
 		minionRadioButton.setOnAction(event -> setCardEditor(new MinionCardPanel()));
 		spellRadioButton.setOnAction(event -> setCardEditor(new SpellCardPanel()));
 
@@ -185,7 +185,7 @@ class EditorMainWindow extends BorderPane {
 		}
 		return value;
 	}
-	
+
 	private void onAttributesChanged() {
 		card.attributes = new EnumMap<Attribute, Object>(Attribute.class);
 		for (int i = 0; i < attributeBoxes.size(); i++) {
@@ -194,7 +194,7 @@ class EditorMainWindow extends BorderPane {
 			if (attributeBox.getSelectionModel().getSelectedItem() == null) {
 				continue;
 			}
-			
+
 			if (StringUtils.isEmpty(attributeField.getText())) {
 				attributeField.setText("true");
 			}
@@ -204,7 +204,11 @@ class EditorMainWindow extends BorderPane {
 			card.attributes.put(attribute, value);
 		}
 	}
-	
+
+	private void onCardSetChanged(ObservableValue<? extends CardSet> ov, CardSet oldCardSet, CardSet newCardSet) {
+		card.set = newCardSet;
+	}
+
 	private void onCollectibleChanged(ActionEvent event) {
 		card.collectible = collectibleBox.isSelected();
 	}
@@ -215,10 +219,6 @@ class EditorMainWindow extends BorderPane {
 
 	private void onHeroClassChanged(ObservableValue<? extends HeroClass> ov, HeroClass oldHeroClass, HeroClass newHeroClass) {
 		card.heroClass = newHeroClass;
-	}
-	
-	private void onCardSetChanged(ObservableValue<? extends CardSet> ov, CardSet oldCardSet, CardSet newCardSet) {
-		card.set = newCardSet;
 	}
 
 	private void onNameChanged(ObservableValue<? extends String> ov, String oldValue, String newValue) {
@@ -259,7 +259,7 @@ class EditorMainWindow extends BorderPane {
 		Gson gson = builder.create();
 		String json = gson.toJson(card);
 		try {
-			//FileUtils.writeStringToFile(file, json);
+			// FileUtils.writeStringToFile(file, json);
 			Path path = Paths.get(file.getPath());
 			Files.write(path, json.getBytes());
 			Desktop.getDesktop().open(file);
@@ -304,17 +304,17 @@ class EditorMainWindow extends BorderPane {
 		for (ComboBox<Attribute> comboBox : attributeBoxes) {
 			ObservableList<Attribute> items = FXCollections.observableArrayList();
 			items.addAll(Attribute.values());
-			Collections.sort(items, (obj1, obj2) -> { 
+			Collections.sort(items, (obj1, obj2) -> {
 				if (obj1 == obj2) {
-			        return 0;
-			    }
-			    if (obj1 == null) {
-			        return -1;
-			    }
-			    if (obj2 == null) {
-			        return 1;
-			    }
-			    return obj1.toString().compareTo(obj2.toString());
+					return 0;
+				}
+				if (obj1 == null) {
+					return -1;
+				}
+				if (obj2 == null) {
+					return 1;
+				}
+				return obj1.toString().compareTo(obj2.toString());
 			});
 			comboBox.setItems(items);
 			comboBox.valueProperty().addListener((ov, oldValue, newValue) -> onAttributesChanged());

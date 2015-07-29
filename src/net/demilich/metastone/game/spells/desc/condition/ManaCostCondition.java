@@ -16,7 +16,7 @@ public class ManaCostCondition extends Condition {
 		if (!(target instanceof Card)) {
 			return false;
 		}
-		
+
 		Card card = (Card) target;
 		int value = desc.getInt(ConditionArg.VALUE);
 		return context.getLogic().getModifiedManaCost(player, card) == value;

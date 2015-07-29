@@ -2,15 +2,14 @@ package net.demilich.metastone.gui.cards;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.minions.Race;
 
-
 public class CardTooltip extends CardToken {
-	
+
 	@FXML
 	private Label raceLabel;
 
@@ -29,7 +28,5 @@ public class CardTooltip extends CardToken {
 			raceLabel.setVisible(true);
 		}
 	}
-	
-	
 
 }

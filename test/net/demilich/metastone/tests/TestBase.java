@@ -30,12 +30,16 @@ import net.demilich.metastone.gui.gameconfig.PlayerConfig;
 public class TestBase {
 
 	protected static class TestBehaviour extends Behaviour {
-		
+
 		private EntityReference targetPreference;
 
 		@Override
 		public String getName() {
 			return "Null Behaviour";
+		}
+
+		public EntityReference getTargetPreference() {
+			return targetPreference;
 		}
 
 		@Override
@@ -50,14 +54,10 @@ public class TestBase {
 					if (action.getTargetKey().equals(targetPreference)) {
 						return action;
 					}
-				}	
+				}
 			}
-			
-			return validActions.get(0);
-		}
 
-		public EntityReference getTargetPreference() {
-			return targetPreference;
+			return validActions.get(0);
 		}
 
 		public void setTargetPreference(EntityReference targetPreference) {
@@ -69,7 +69,7 @@ public class TestBase {
 	static {
 		Logger root = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
 		root.setLevel(Level.DEBUG);
-		
+
 		new CardProxy();
 	}
 
@@ -78,7 +78,7 @@ public class TestBase {
 		physicalAttackAction.setTarget(target);
 		context.getLogic().performGameAction(player.getId(), physicalAttackAction);
 	}
-	
+
 	protected static DebugContext createContext(HeroClass hero1, HeroClass hero2) {
 		PlayerConfig player1Config = new PlayerConfig(DeckFactory.getRandomDeck(hero1), new TestBehaviour());
 		player1Config.setName("Player 1");
@@ -96,10 +96,10 @@ public class TestBase {
 		context.init();
 		return context;
 	}
-	
+
 	protected static Entity find(GameContext context, String cardId) {
 		for (Player player : context.getPlayers()) {
-			for(Minion minion : player.getMinions()) {
+			for (Minion minion : player.getMinions()) {
 				if (minion.getSourceCard().getCardId().equals(cardId)) {
 					return minion;
 				}
@@ -109,7 +109,7 @@ public class TestBase {
 	}
 
 	protected static HeroCard getHeroCardForClass(HeroClass heroClass) {
-		for(Card card : CardCatalogue.getHeroes()) {
+		for (Card card : CardCatalogue.getHeroes()) {
 			HeroCard heroCard = (HeroCard) card;
 			if (heroCard.getHeroClass() == heroClass) {
 				return heroCard;
@@ -138,11 +138,16 @@ public class TestBase {
 		context.getLogic().receiveCard(player.getId(), card);
 		context.getLogic().performGameAction(player.getId(), card.play());
 	}
-	
+
 	protected static Minion playMinionCard(GameContext context, Player player, MinionCard minionCard) {
 		context.getLogic().receiveCard(player.getId(), minionCard);
 		context.getLogic().performGameAction(player.getId(), minionCard.play());
 		return getSummonedMinion(player.getMinions());
+	}
+
+	protected static void target(Player player, Entity target) {
+		TestBehaviour testBehaviour = (TestBehaviour) player.getBehaviour();
+		testBehaviour.setTargetPreference(target != null ? target.getReference() : null);
 	}
 
 }

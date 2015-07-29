@@ -25,7 +25,7 @@ public class Desc<T> {
 	public int getInt(T arg) {
 		return arguments.containsKey(arg) ? (int) get(arg) : 0;
 	}
-	
+
 	public String getString(T arg) {
 		return arguments.containsKey(arg) ? (String) get(arg) : "";
 	}

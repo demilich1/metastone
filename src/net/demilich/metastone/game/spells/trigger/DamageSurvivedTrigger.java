@@ -5,7 +5,7 @@ import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
 public class DamageSurvivedTrigger extends DamageReceivedTrigger {
-	
+
 	public DamageSurvivedTrigger(EventTriggerDesc desc) {
 		super(desc);
 	}

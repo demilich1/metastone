@@ -11,7 +11,7 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class DiscardCardsFromDeckSpell extends Spell {
-	
+
 	public static SpellDesc create(int howMany) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(DiscardCardsFromDeckSpell.class);
 		arguments.put(SpellArg.VALUE, howMany);
@@ -23,7 +23,9 @@ public class DiscardCardsFromDeckSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int howMany = desc.getValue();
 		for (int i = 0; i < howMany; i++) {
-			// Question: If I have no cards left and my Fel Reaver discards 3, do I draw 3 Fatigues or do I only Fatigue more when I draw a card?
+			// Question: If I have no cards left and my Fel Reaver discards 3,
+			// do I draw 3 Fatigues or do I only Fatigue more when I draw a
+			// card?
 			// Answer: Fel Reaver won't trigger fatigue
 			// Source: Blue post
 			if (player.getDeck().isEmpty()) {

@@ -15,14 +15,14 @@ public class AlgebraicValueProvider extends ValueProvider {
 		default:
 			break;
 		}
-		
+
 		throw new RuntimeException("Invalid AlgebraicOperation: " + operation);
 	}
 
 	public AlgebraicValueProvider(ValueProviderDesc desc) {
 		super(desc);
 	}
-	
+
 	@Override
 	protected int provideValue(GameContext context, Player player, Entity target, Entity source) {
 		ValueProvider valueProvider1 = (ValueProvider) desc.get(ValueProviderArg.VALUE_PROVIDER_1);

@@ -17,7 +17,7 @@ import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class SummonRandomMinionFilteredSpell extends Spell {
-	
+
 	public static SpellDesc create(Predicate<Card> cardFilter) {
 		return create(TargetPlayer.SELF, cardFilter);
 	}

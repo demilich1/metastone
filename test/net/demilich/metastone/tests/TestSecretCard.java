@@ -1,4 +1,5 @@
 package net.demilich.metastone.tests;
+
 import java.util.EnumMap;
 
 import net.demilich.metastone.game.Attribute;
@@ -15,9 +16,8 @@ import net.demilich.metastone.game.spells.trigger.TurnEndTrigger;
 import net.demilich.metastone.game.spells.trigger.secrets.Secret;
 import net.demilich.metastone.game.targeting.EntityReference;
 
-
 public class TestSecretCard extends SecretCard {
-	
+
 	private static SecretCardDesc getDesc() {
 		SecretCardDesc desc = new SecretCardDesc();
 		desc.name = "Trap";
@@ -32,12 +32,12 @@ public class TestSecretCard extends SecretCard {
 	public TestSecretCard() {
 		this(1);
 	}
-	
+
 	public TestSecretCard(int damage) {
 		super(getDesc());
 		setDescription("Secret for unit testing. Deals " + damage + " damage to all enemies");
 		setCollectible(false);
-		
+
 		SpellDesc damageSpell = DamageSpell.create(EntityReference.ENEMY_CHARACTERS, damage);
 		setSecret(new Secret(new PhysicalAttackTrigger(EventTriggerDesc.createEmpty(PhysicalAttackTrigger.class)), damageSpell, this));
 	}

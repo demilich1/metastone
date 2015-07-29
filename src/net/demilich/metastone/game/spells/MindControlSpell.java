@@ -11,7 +11,7 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class MindControlSpell extends Spell {
-	
+
 	public static SpellDesc create(EntityReference target, TargetPlayer targetPlayer, boolean randomTarget) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(MindControlSpell.class);
 		arguments.put(SpellArg.TARGET, target);
@@ -19,7 +19,7 @@ public class MindControlSpell extends Spell {
 		arguments.put(SpellArg.TARGET_PLAYER, targetPlayer);
 		return new SpellDesc(arguments);
 	}
-	
+
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Minion minion = (Minion) target;

@@ -49,7 +49,7 @@ public class HeroToken extends GameToken {
 
 	@FXML
 	private Pane secretsAnchor;
-	
+
 	@FXML
 	private Shape frozen;
 
@@ -90,13 +90,13 @@ public class HeroToken extends GameToken {
 		armorIcon.setVisible(visible);
 		armorAnchor.setVisible(visible);
 	}
-	
+
 	private void updateSecrets(Player player) {
 		secretsAnchor.getChildren().clear();
 		for (String secretId : player.getSecrets()) {
 			ImageView secretIcon = new ImageView(IconFactory.getImageUrl("common/secret.png"));
 			secretsAnchor.getChildren().add(secretIcon);
-			
+
 			Card card = CardCatalogue.getCardById(secretId);
 			Tooltip tooltip = new Tooltip();
 			CardTooltip tooltipContent = new CardTooltip();

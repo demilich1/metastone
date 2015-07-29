@@ -15,7 +15,7 @@ import net.demilich.metastone.game.behaviour.human.HumanActionOptions;
 import net.demilich.metastone.game.behaviour.human.HumanMulliganOptions;
 import net.demilich.metastone.game.behaviour.human.HumanTargetOptions;
 
-public class PlayModeMediator extends Mediator<GameNotification> implements EventHandler<KeyEvent> {
+public class PlayModeMediator extends Mediator<GameNotification>implements EventHandler<KeyEvent> {
 
 	public static final String NAME = "PlayModeMediator";
 
@@ -33,8 +33,8 @@ public class PlayModeMediator extends Mediator<GameNotification> implements Even
 		if (keyEvent.getCode() != KeyCode.ESCAPE) {
 			return;
 		}
-		
-		view.disableTargetSelection();		
+
+		view.disableTargetSelection();
 	}
 
 	@Override

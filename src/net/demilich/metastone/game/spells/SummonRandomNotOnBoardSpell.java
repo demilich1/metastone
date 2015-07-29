@@ -13,7 +13,7 @@ import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
 public class SummonRandomNotOnBoardSpell extends Spell {
-	
+
 	private static boolean alreadyOnBoard(List<Minion> minions, String id) {
 		for (Minion minion : minions) {
 			if (minion.getSourceCard().getCardId().equals(id)) {
@@ -35,7 +35,7 @@ public class SummonRandomNotOnBoardSpell extends Spell {
 		if (eligibleMinions.isEmpty()) {
 			return;
 		}
-		
+
 		String randomMinionId = eligibleMinions.get(context.getLogic().random(eligibleMinions.size()));
 		MinionCard randomMinionCard = (MinionCard) CardCatalogue.getCardById(randomMinionId);
 		context.getLogic().summon(player.getId(), randomMinionCard.summon());

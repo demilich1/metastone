@@ -6,9 +6,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class CardCreator extends Application {
-	
+
 	public static void main(String[] args) {
-		launch(args);	
+		launch(args);
 	}
 
 	@Override
@@ -17,7 +17,7 @@ public class CardCreator extends Application {
 		primaryStage.initStyle(StageStyle.UNIFIED);
 
 		Scene scene = new Scene(new EditorMainWindow());
-		//scene.getStylesheets().add(IconFactory.class.getResource("main.css").toExternalForm());
+		// scene.getStylesheets().add(IconFactory.class.getResource("main.css").toExternalForm());
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}

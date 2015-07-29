@@ -1,4 +1,5 @@
 package net.demilich.metastone.tests;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -18,7 +19,7 @@ import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.gui.gameconfig.PlayerConfig;
 
 public class CloningTest extends TestBase {
-	
+
 	private static Logger logger = LoggerFactory.getLogger(CloningTest.class);
 
 	private void compareCardCollections(CardCollection collection1, CardCollection collection2) {
@@ -56,12 +57,12 @@ public class CloningTest extends TestBase {
 			player1Config.setName("Player 1");
 			player1Config.setHeroCard(getHeroCardForClass(HeroClass.MAGE));
 			Player player1 = new Player(player1Config);
-			
+
 			PlayerConfig player2Config = new PlayerConfig(DeckFactory.getRandomDeck(HeroClass.WARRIOR), new PlayRandomBehaviour());
 			player2Config.setName("Player 2");
 			player2Config.setHeroCard(getHeroCardForClass(HeroClass.WARRIOR));
 			Player player2 = new Player(player2Config);
-			
+
 			GameContext original = new GameContext(player1, player2, new GameLogic());
 			TestMinionCard minionCard = new TestMinionCard(3, 3);
 			original.getLogic().receiveCard(player1.getId(), minionCard);

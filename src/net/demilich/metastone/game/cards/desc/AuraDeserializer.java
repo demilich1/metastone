@@ -13,8 +13,8 @@ import net.demilich.metastone.game.spells.aura.Aura;
 import net.demilich.metastone.game.spells.desc.aura.AuraArg;
 import net.demilich.metastone.game.spells.desc.aura.AuraDesc;
 
-public class AuraDeserializer implements JsonDeserializer<AuraDesc>  {
-	
+public class AuraDeserializer implements JsonDeserializer<AuraDesc> {
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public AuraDesc deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException {

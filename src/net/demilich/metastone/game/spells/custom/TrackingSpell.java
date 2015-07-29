@@ -21,7 +21,7 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 // so for now, implemented as: draw 3, pick a random
 // TODO: offer AI choice of discarded cards
 public class TrackingSpell extends Spell {
-	
+
 	public static SpellDesc create() {
 		Map<SpellArg, Object> arguments = SpellDesc.build(TrackingSpell.class);
 		return new SpellDesc(arguments);

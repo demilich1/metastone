@@ -12,10 +12,10 @@ public class WaitForSimulationView extends BorderPane {
 
 	@FXML
 	private ProgressBar progressBar;
-	
+
 	@FXML
 	private Label gamesCompletedLabel;
-	
+
 	public WaitForSimulationView() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("WaitForSimulationView.fxml"));
 		fxmlLoader.setRoot(this);
@@ -28,10 +28,10 @@ public class WaitForSimulationView extends BorderPane {
 		}
 
 	}
-	
+
 	public void update(int gamesCompleted, int gamesTotal) {
 		gamesCompletedLabel.setText(gamesCompleted + "/" + gamesTotal + " games completed");
-		progressBar.setProgress(gamesCompleted / (double)gamesTotal);
+		progressBar.setProgress(gamesCompleted / (double) gamesTotal);
 	}
 
 }

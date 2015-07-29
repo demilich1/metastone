@@ -19,8 +19,7 @@ public class ImportDeckCommand extends SimpleCommand<GameNotification> {
 		IDeckImporter importer = new HearthPwnImporter();
 		Deck importedDeck = importer.importFrom(url);
 		if (importedDeck == null) {
-			DialogNotification dialogNotification = new DialogNotification(
-					"Error",
+			DialogNotification dialogNotification = new DialogNotification("Error",
 					"Import of deck failed. Please make sure to provide a valid URL. At the moment, only hearthpwn.com is supported for deck import.",
 					DialogType.ERROR);
 			notifyObservers(dialogNotification);

@@ -13,7 +13,7 @@ public class IsDamagedCondition extends Condition {
 
 	@Override
 	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity target) {
-		return ((Actor)target).isWounded();
+		return ((Actor) target).isWounded();
 	}
 
 }

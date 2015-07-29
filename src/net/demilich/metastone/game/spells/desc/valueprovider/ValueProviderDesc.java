@@ -15,7 +15,6 @@ public class ValueProviderDesc extends Desc<ValueProviderArg> {
 		return arguments;
 	}
 
-
 	public ValueProviderDesc(Map<ValueProviderArg, Object> arguments) {
 		super(arguments);
 	}

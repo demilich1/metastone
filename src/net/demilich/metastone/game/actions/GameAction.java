@@ -6,17 +6,17 @@ import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
 public abstract class GameAction implements Cloneable {
-	
+
 	private TargetSelection targetRequirement = TargetSelection.NONE;
 	private ActionType actionType = ActionType.SYSTEM;
 	private EntityReference source;
 	private EntityReference targetKey;
 	private String actionSuffix;
-	
+
 	public boolean canBeExecutedOn(GameContext gameContext, Entity entity) {
 		return true;
 	}
-	
+
 	@Override
 	public GameAction clone() {
 		try {
@@ -26,17 +26,17 @@ public abstract class GameAction implements Cloneable {
 		}
 		return null;
 	}
-	
+
 	public abstract void execute(GameContext context, int playerId);
-	
+
 	public String getActionSuffix() {
 		return actionSuffix;
 	}
-	
+
 	public ActionType getActionType() {
 		return actionType;
 	}
-	
+
 	public abstract String getPromptText();
 
 	public EntityReference getSource() {
@@ -60,7 +60,7 @@ public abstract class GameAction implements Cloneable {
 	protected void setActionType(ActionType actionType) {
 		this.actionType = actionType;
 	}
-	
+
 	public void setSource(EntityReference source) {
 		this.source = source;
 	}

@@ -6,12 +6,12 @@ import net.demilich.metastone.game.cards.CardSet;
 public class CardSetStringConverter extends StringConverter<CardSet> {
 
 	@Override
-	public String toString(CardSet object) {
-		return object.toString();
+	public CardSet fromString(String string) {
+		return null;
 	}
 
 	@Override
-	public CardSet fromString(String string) {
-		return null;
+	public String toString(CardSet object) {
+		return object.toString();
 	}
 }

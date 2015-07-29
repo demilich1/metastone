@@ -17,21 +17,23 @@ public abstract class Spell {
 			castForPlayer(context, player, desc, source, null);
 			return;
 		}
-		
+
 		EntityFilter targetFilter = desc.getEntityFilter();
 		List<Entity> validTargets = SpellUtils.getValidTargets(targets, targetFilter);
-		// there is at least one valid target and the RANDOM_TARGET flag is set, pick one randomly
+		// there is at least one valid target and the RANDOM_TARGET flag is set,
+		// pick one randomly
 		if (validTargets.size() > 0 && desc.getBool(SpellArg.RANDOM_TARGET)) {
 			Entity target = SpellUtils.getRandomTarget(validTargets);
 			castForPlayer(context, player, desc, source, target);
 		} else {
-			// there is at least one target and RANDOM_TARGET flag is not set, cast in on all targets
+			// there is at least one target and RANDOM_TARGET flag is not set,
+			// cast in on all targets
 			for (Entity target : validTargets) {
 				castForPlayer(context, player, desc, source, target);
 			}
 		}
 	}
-	
+
 	private void castForPlayer(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		TargetPlayer targetPlayer = desc.getTargetPlayer();
 		if (targetPlayer == null) {

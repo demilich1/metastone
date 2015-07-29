@@ -13,7 +13,7 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.decks.Deck;
 
 public class FillDeckWithRandomCardsCommand extends SimpleCommand<GameNotification> {
-	
+
 	private static Logger logger = LoggerFactory.getLogger(FillDeckWithRandomCardsCommand.class);
 
 	@Override

@@ -16,14 +16,14 @@ public class RaceOnBoardCondition extends Condition {
 	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity target) {
 		Race race = (Race) desc.get(ConditionArg.RACE);
 		int value = desc.contains(ConditionArg.VALUE) ? desc.getInt(ConditionArg.VALUE) : 1;
-		
+
 		int count = 0;
 		for (Minion minion : player.getMinions()) {
 			if (minion.getRace() == race) {
 				count++;
 			}
 		}
-		
+
 		return count >= value;
 	}
 

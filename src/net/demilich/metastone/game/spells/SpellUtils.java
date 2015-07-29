@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 
-import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
@@ -101,7 +101,7 @@ public class SpellUtils {
 		}
 		return validTargets;
 	}
-	
+
 	public static List<Entity> getValidTargets(List<Entity> allTargets, EntityFilter filter) {
 		if (filter == null) {
 			return allTargets;
@@ -124,7 +124,7 @@ public class SpellUtils {
 		}
 		return count;
 	}
-	
+
 	public static boolean holdsCardOfType(Player player, CardType cardType) {
 		for (Card card : player.getHand()) {
 			if (card.getCardType() == cardType) {
@@ -133,7 +133,7 @@ public class SpellUtils {
 		}
 		return false;
 	}
-	
+
 	public static boolean holdsMinionOfRace(Player player, Race race) {
 		for (Card card : player.getHand()) {
 			if (card.getAttribute(Attribute.RACE) == race) {

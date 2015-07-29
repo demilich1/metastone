@@ -1,12 +1,12 @@
 package net.demilich.metastone.game.spells;
 
-import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 
 public class ManaCostCardProcessor implements ICardPostProcessor {
-	
+
 	private final int manaCostModifier;
 
 	public ManaCostCardProcessor(int manaCostModifier) {

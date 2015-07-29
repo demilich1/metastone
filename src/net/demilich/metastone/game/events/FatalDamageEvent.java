@@ -4,7 +4,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.entities.Entity;
 
 public class FatalDamageEvent extends GameEvent {
-	
+
 	private final Entity victim;
 
 	public FatalDamageEvent(GameContext context, Entity victim) {

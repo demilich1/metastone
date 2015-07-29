@@ -17,7 +17,7 @@ public class SelfTargetedTrigger extends TargetAcquisitionTrigger {
 		if (targetAcquisitionEvent.getEventTarget() != host) {
 			return false;
 		}
-		
+
 		return super.fire(event, host);
 	}
 

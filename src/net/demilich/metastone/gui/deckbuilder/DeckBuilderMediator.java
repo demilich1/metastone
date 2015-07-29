@@ -47,8 +47,8 @@ public class DeckBuilderMediator extends Mediator<GameNotification> {
 			getFacade().notifyObservers(dialogNotification);
 			break;
 		case DUPLICATE_DECK_NAME:
-			getFacade().notifyObservers(new DialogNotification("Duplicate deck name", "This deck name was already used for another deck. Please choose another name",
-					DialogType.WARNING));
+			getFacade().notifyObservers(new DialogNotification("Duplicate deck name",
+					"This deck name was already used for another deck. Please choose another name", DialogType.WARNING));
 			break;
 		default:
 			break;

@@ -2,8 +2,8 @@ package net.demilich.metastone.game.cards;
 
 import java.util.EnumMap;
 
-import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.cards.desc.CardDesc;
@@ -40,20 +40,20 @@ public abstract class Card extends Entity {
 		rarity = desc.rarity;
 		classRestriction = desc.heroClass;
 		manaCost = desc.baseManaCost;
-		
+
 		if (desc.attributes != null) {
 			attributes.putAll(desc.attributes);
 		}
-		
+
 		if (desc.manaCostModifier != null) {
 			manaCostModifier = desc.manaCostModifier.create();
 		}
-		
+
 		if (desc.passiveTrigger != null) {
 			attributes.put(Attribute.PASSIVE_TRIGGER, desc.passiveTrigger);
 		}
 	}
-	
+
 	@Override
 	public Card clone() {
 		Card clone = (Card) super.clone();
@@ -72,9 +72,13 @@ public abstract class Card extends Entity {
 	public String getCardId() {
 		return cardId;
 	}
-	
+
 	public CardReference getCardReference() {
 		return new CardReference(getOwner(), getLocation(), getId(), getName());
+	}
+
+	public CardSet getCardSet() {
+		return cardSet;
 	}
 
 	public CardType getCardType() {
@@ -132,28 +136,25 @@ public abstract class Card extends Entity {
 			return true;
 		}
 		/*
-		String className = getClass().getName();
-		if (filter.contains("gvg") && className.contains("goblins")) {
-			return true;
-		} else if (filter.contains("naxx") && className.contains("naxx")) {
-			return true;
-		} else if ((filter.contains("classic") || filter.contains("vanilla")) && !className.contains("naxx")
-				&& !className.contains("goblins")) {
-			return true;
-		}
-		*/
+		 * String className = getClass().getName(); if (filter.contains("gvg")
+		 * && className.contains("goblins")) { return true; } else if
+		 * (filter.contains("naxx") && className.contains("naxx")) { return
+		 * true; } else if ((filter.contains("classic") ||
+		 * filter.contains("vanilla")) && !className.contains("naxx") &&
+		 * !className.contains("goblins")) { return true; }
+		 */
 		String lowerCaseName = getName().toLowerCase();
 		if (lowerCaseName.contains(filter)) {
 			return true;
 		}
-		
+
 		if (getDescription() != null) {
 			String lowerCaseDescription = getDescription().toLowerCase();
 			if (lowerCaseDescription.contains(filter)) {
 				return true;
-			}	
+			}
 		}
-		
+
 		return false;
 	}
 
@@ -170,7 +171,7 @@ public abstract class Card extends Entity {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public void setLocation(CardLocation location) {
 		this.location = location;
 	}
@@ -178,10 +179,6 @@ public abstract class Card extends Entity {
 	@Override
 	public String toString() {
 		return String.format("[%s '%s' Manacost:%d]", getCardType(), getName(), manaCost);
-	}
-
-	public CardSet getCardSet() {
-		return cardSet;
 	}
 
 }

@@ -77,7 +77,7 @@ public class ApplicationFacade extends Facade<GameNotification> {
 		registerCommand(GameNotification.GAME_STATE_UPDATE, new AnimationLockCommand());
 		registerCommand(GameNotification.ANIMATION_STARTED, new AnimationStartedCommand());
 		registerCommand(GameNotification.ANIMATION_COMPLETED, new AnimationCompletedCommand());
-		
+
 		registerCommand(GameNotification.SAVE_TRAINING_DATA, new SaveTrainingDataCommand());
 		registerCommand(GameNotification.REQUEST_TRAINING_DATA, new RequestTrainingDataCommand());
 	}

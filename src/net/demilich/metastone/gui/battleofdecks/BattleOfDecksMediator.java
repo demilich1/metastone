@@ -10,9 +10,9 @@ import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.decks.Deck;
 
 public class BattleOfDecksMediator extends Mediator<GameNotification> {
-	
+
 	public final static String NAME = "BattleOfDecksMediator";
-	
+
 	private final BattleOfDecksConfigView configView;
 	private final BattleOfDecksResultView resultView;
 
@@ -21,7 +21,7 @@ public class BattleOfDecksMediator extends Mediator<GameNotification> {
 		configView = new BattleOfDecksConfigView();
 		resultView = new BattleOfDecksResultView();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public void handleNotification(final INotification<GameNotification> notification) {
@@ -40,7 +40,7 @@ public class BattleOfDecksMediator extends Mediator<GameNotification> {
 			break;
 		}
 	}
-	
+
 	@Override
 	public List<GameNotification> listNotificationInterests() {
 		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
@@ -49,7 +49,7 @@ public class BattleOfDecksMediator extends Mediator<GameNotification> {
 		notificationInterests.add(GameNotification.COMMIT_BATTLE_OF_DECKS_CONFIG);
 		return notificationInterests;
 	}
-	
+
 	@Override
 	public void onRegister() {
 		sendNotification(GameNotification.SHOW_VIEW, configView);

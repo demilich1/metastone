@@ -1,4 +1,5 @@
 package net.demilich.metastone.tests;
+
 import java.util.EnumMap;
 
 import net.demilich.metastone.game.Attribute;
@@ -10,13 +11,10 @@ import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 
-
 public class TestMinionCard extends MinionCard {
-	
+
 	private static int id = 1;
 
-	private final Minion minion;
-	
 	private static MinionCardDesc getDesc(int attack, int hp, Attribute... attributes) {
 		MinionCardDesc desc = new MinionCardDesc();
 		desc.name = "Test monster " + ++id;
@@ -32,16 +30,18 @@ public class TestMinionCard extends MinionCard {
 		return desc;
 	}
 
+	private final Minion minion;
+
 	public TestMinionCard(int baseAttack, int baseHp, Attribute... tags) {
 		super(getDesc(baseAttack, baseHp, tags));
 		setCollectible(false);
-		
+
 		this.minion = createMinion();
-		for(Attribute attribute : tags) {
+		for (Attribute attribute : tags) {
 			minion.setAttribute(attribute);
 		}
 	}
-	
+
 	public TestMinionCard(int baseAttack, int baseHp, int manaCost) {
 		super(getDesc(baseAttack, baseHp));
 		setCollectible(false);
@@ -56,7 +56,7 @@ public class TestMinionCard extends MinionCard {
 	public Actor getMinion() {
 		return minion;
 	}
-	
+
 	@Override
 	public Minion summon() {
 		return minion.clone();

@@ -67,7 +67,7 @@ public class ChooseClassView extends BorderPane implements EventHandler<ActionEv
 		shamanButton.setOnAction(this);
 		mageButton.setOnAction(this);
 		priestButton.setOnAction(this);
-		
+
 		collectionButton.setOnAction(this);
 	}
 

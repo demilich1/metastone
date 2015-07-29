@@ -145,11 +145,6 @@ public class GameLogic implements Cloneable {
 		return baseValue * amplify;
 	}
 
-	public int applySpellpower(Player player, int baseValue) {
-		int spellpower = getTotalAttributeValue(player, Attribute.SPELL_DAMAGE);
-		return baseValue + spellpower;
-	}
-
 	public void applyAttribute(Entity entity, Attribute attr) {
 		if (attr == Attribute.WINDFURY && !entity.hasAttribute(Attribute.WINDFURY)) {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, WINDFURY_ATTACKS - 1);
@@ -158,6 +153,11 @@ public class GameLogic implements Cloneable {
 		}
 		entity.setAttribute(attr);
 		log("Applying attr {} to {}", attr, entity);
+	}
+
+	public int applySpellpower(Player player, int baseValue) {
+		int spellpower = getTotalAttributeValue(player, Attribute.SPELL_DAMAGE);
+		return baseValue + spellpower;
 	}
 
 	private void assignCardIds(CardCollection cardCollection) {
@@ -1033,6 +1033,19 @@ public class GameLogic implements Cloneable {
 		entity.setAttribute(Attribute.NUMBER_OF_ATTACKS, attacks);
 	}
 
+	public void removeAttribute(Entity entity, Attribute attr) {
+		if (!entity.hasAttribute(attr)) {
+			return;
+		}
+		if (attr == Attribute.WINDFURY) {
+			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, 1 - WINDFURY_ATTACKS);
+		} else if (attr == Attribute.MEGA_WINDFURY) {
+			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, 1 - MEGA_WINDFURY_ATTACKS);
+		}
+		entity.removeAttribute(attr);
+		log("Removing attribute {} from {}", attr, entity);
+	}
+
 	public void removeCard(int playerId, Card card) {
 		Player player = context.getPlayer(playerId);
 		log("Card {} has been moved to the GRAVEYARD", card);
@@ -1080,19 +1093,6 @@ public class GameLogic implements Cloneable {
 				iterator.remove();
 			}
 		}
-	}
-
-	public void removeAttribute(Entity entity, Attribute attr) {
-		if (!entity.hasAttribute(attr)) {
-			return;
-		}
-		if (attr == Attribute.WINDFURY) {
-			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, 1 - WINDFURY_ATTACKS);
-		} else if (attr == Attribute.MEGA_WINDFURY) {
-			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, 1 - MEGA_WINDFURY_ATTACKS);
-		}
-		entity.removeAttribute(attr);
-		log("Removing attribute {} from {}", attr, entity);
 	}
 
 	private void resolveBattlecry(int playerId, Actor actor) {

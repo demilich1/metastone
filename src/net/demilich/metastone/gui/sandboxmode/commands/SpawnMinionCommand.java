@@ -18,8 +18,8 @@ import net.demilich.metastone.game.logic.ActionLogic;
 import net.demilich.metastone.gui.sandboxmode.SandboxProxy;
 
 public class SpawnMinionCommand extends SimpleCommand<GameNotification> {
-	
-	private MinionCard minionCard; 
+
+	private MinionCard minionCard;
 
 	@Override
 	public void execute(INotification<GameNotification> notification) {
@@ -37,21 +37,21 @@ public class SpawnMinionCommand extends SimpleCommand<GameNotification> {
 		for (GameAction gameAction : rolledOutActions) {
 			actionGroup.add(gameAction);
 		}
-		
+
 		HumanTargetOptions targetOptions = new HumanTargetOptions(this::spawnMinion, context, selectedPlayer.getId(), actionGroup);
 		sendNotification(GameNotification.SELECT_TARGET, targetOptions);
 	}
-	
+
 	private void spawnMinion(GameAction action) {
 		SandboxProxy sandboxProxy = (SandboxProxy) getFacade().retrieveProxy(SandboxProxy.NAME);
 		GameContext context = sandboxProxy.getSandbox();
 		Player selectedPlayer = sandboxProxy.getSelectedPlayer();
-		
+
 		Minion minion = minionCard.summon();
 		Actor nextTo = (Actor) context.resolveSingleTarget(action.getTargetKey());
 		int index = selectedPlayer.getMinions().indexOf(nextTo);
 		context.getLogic().summon(selectedPlayer.getId(), minion, minionCard, index, false);
-		
+
 		sendNotification(GameNotification.UPDATE_SANDBOX_STATE, context);
 	}
 

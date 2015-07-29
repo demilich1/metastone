@@ -25,12 +25,12 @@ public class HeroPowerUsedEvent extends GameEvent {
 		return GameEventType.HERO_POWER_USED;
 	}
 
-	public int getPlayerId() {
-		return playerId;
-	}
-
 	public HeroPower getHeroPower() {
 		return heroPower;
+	}
+
+	public int getPlayerId() {
+		return playerId;
 	}
 
 }

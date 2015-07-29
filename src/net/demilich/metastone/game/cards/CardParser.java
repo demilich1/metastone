@@ -75,7 +75,7 @@ public class CardParser {
 			if (jsonData.getAsJsonObject().has("trigger")) {
 				return gson.fromJson(jsonData, SecretCardDesc.class);
 			} else {
-				return gson.fromJson(jsonData, SpellCardDesc.class);	
+				return gson.fromJson(jsonData, SpellCardDesc.class);
 			}
 		case CHOOSE_ONE:
 			return gson.fromJson(jsonData, ChooseOneCardDesc.class);

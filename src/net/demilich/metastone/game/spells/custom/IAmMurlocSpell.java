@@ -13,7 +13,7 @@ import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
 public class IAmMurlocSpell extends Spell {
-	
+
 	public static SpellDesc create() {
 		Map<SpellArg, Object> arguments = SpellDesc.build(IAmMurlocSpell.class);
 		return new SpellDesc(arguments);
@@ -22,7 +22,7 @@ public class IAmMurlocSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int numberOfMurlocs = ThreadLocalRandom.current().nextInt(3, 6);
-		//MinionCard murlocCard = new Murloc();
+		// MinionCard murlocCard = new Murloc();
 		MinionCard murlocCard = (MinionCard) CardCatalogue.getCardById("token_murloc");
 		for (int i = 0; i < numberOfMurlocs; i++) {
 			context.getLogic().summon(player.getId(), murlocCard.summon());

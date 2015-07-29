@@ -75,7 +75,7 @@ public class SpecialCardTests extends TestBase {
 
 		final int BASE_ATTACK = 2;
 		final int ATTACK_BONUS = 3;
-		
+
 		MinionCard gurubashiBerserkerCard = (MinionCard) CardCatalogue.getCardById("minion_gurubashi_berserker");
 		playCard(context, warrior, gurubashiBerserkerCard);
 

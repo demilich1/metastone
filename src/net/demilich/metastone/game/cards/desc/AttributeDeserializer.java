@@ -15,7 +15,8 @@ import net.demilich.metastone.game.Attribute;
 public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Object>> {
 
 	@Override
-	public Map<Attribute, Object> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+	public Map<Attribute, Object> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+			throws JsonParseException {
 		Map<Attribute, Object> map = new EnumMap<Attribute, Object>(Attribute.class);
 		JsonObject jsonData = json.getAsJsonObject();
 		parseAttribute(Attribute.OVERLOAD, jsonData, map, ParseValueType.INTEGER);

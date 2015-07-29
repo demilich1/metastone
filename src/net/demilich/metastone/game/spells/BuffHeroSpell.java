@@ -5,8 +5,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.Hero;
@@ -15,7 +15,7 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class BuffHeroSpell extends Spell {
-	
+
 	private static Logger logger = LoggerFactory.getLogger(BuffHeroSpell.class);
 
 	public static SpellDesc create(EntityReference target, int attackBonus, int armorBonus) {

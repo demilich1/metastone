@@ -13,7 +13,7 @@ import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
 public class MindGamesSpell extends Spell {
-	
+
 	public static SpellDesc create() {
 		Map<SpellArg, Object> arguments = SpellDesc.build(MindGamesSpell.class);
 		return new SpellDesc(arguments);
@@ -29,5 +29,5 @@ public class MindGamesSpell extends Spell {
 		context.getLogic().removeCard(player.getId(), minionCard);
 		context.getLogic().summon(player.getId(), minionCard.summon());
 	}
-	
+
 }

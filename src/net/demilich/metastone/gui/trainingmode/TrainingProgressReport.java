@@ -1,7 +1,7 @@
 package net.demilich.metastone.gui.trainingmode;
 
 public class TrainingProgressReport {
-	
+
 	private final int gamesCompleted;
 	private final int gamesTotal;
 	private final int gamesWon;

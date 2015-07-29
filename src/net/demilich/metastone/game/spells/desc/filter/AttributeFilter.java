@@ -19,14 +19,14 @@ public class AttributeFilter extends EntityFilter {
 		if (operation == Operation.HAS) {
 			return entity.hasAttribute(attribute);
 		}
-		
+
 		int actualValue = -1;
 		if (attribute == Attribute.ATTACK) {
-			actualValue = ((Actor)entity).getAttack();
+			actualValue = ((Actor) entity).getAttack();
 		} else {
 			actualValue = entity.getAttributeValue(attribute);
 		}
-		
+
 		return SpellUtils.evaluateOperation(operation, actualValue, targetValue);
 	}
 

@@ -13,13 +13,11 @@ public class RequestDecksCommand extends SimpleCommand<GameNotification> {
 	@Override
 	public void execute(INotification<GameNotification> notification) {
 		DeckProxy deckProxy = (DeckProxy) getFacade().retrieveProxy(DeckProxy.NAME);
-		
+
 		getFacade().sendNotification(GameNotification.LOAD_DECKS);
-		
+
 		List<Deck> decks = deckProxy.getDecks();
 		getFacade().sendNotification(GameNotification.REPLY_DECKS, decks);
 	}
-
-	
 
 }

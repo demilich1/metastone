@@ -14,7 +14,7 @@ public class StopPlaySandboxCommand extends SimpleCommand<GameNotification> {
 
 		GameContext context = sandboxProxy.getSandbox();
 		context.setIgnoreEvents(true);
-		
+
 		getFacade().sendNotification(GameNotification.UPDATE_SANDBOX_STATE, context);
 	}
 

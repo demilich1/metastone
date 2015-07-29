@@ -11,12 +11,10 @@ public class SpellCardDesc extends CardDesc {
 	public TargetSelection targetSelection;
 	public SpellDesc spell;
 	public ConditionDesc condition;
-	
-	
+
 	@Override
 	public Card createInstance() {
 		return new SpellCard(this);
 	}
-	
-	
+
 }

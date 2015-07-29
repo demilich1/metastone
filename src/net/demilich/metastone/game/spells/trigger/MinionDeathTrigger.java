@@ -12,7 +12,7 @@ import net.demilich.metastone.game.spells.desc.trigger.EventTriggerArg;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
 public class MinionDeathTrigger extends GameEventTrigger {
-	
+
 	public MinionDeathTrigger(EventTriggerDesc desc) {
 		super(desc);
 	}
@@ -23,14 +23,14 @@ public class MinionDeathTrigger extends GameEventTrigger {
 		if (killEvent.getVictim().getEntityType() != EntityType.MINION) {
 			return false;
 		}
-		
+
 		Minion minion = (Minion) killEvent.getVictim();
-		
+
 		Race race = (Race) desc.get(EventTriggerArg.RACE);
 		if (race != null && minion.getRace() != race) {
 			return false;
 		}
-		
+
 		TargetPlayer targetPlayer = desc.getTargetPlayer();
 		switch (targetPlayer) {
 		case BOTH:

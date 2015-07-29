@@ -65,8 +65,9 @@ public abstract class Actor extends Entity {
 	}
 
 	public int getAttack() {
-		int attack = getAttributeValue(Attribute.ATTACK) + getAttributeValue(Attribute.ATTACK_BONUS) + getAttributeValue(Attribute.AURA_ATTACK_BONUS)
-				+ getAttributeValue(Attribute.TEMPORARY_ATTACK_BONUS) + getAttributeValue(Attribute.CONDITIONAL_ATTACK_BONUS);
+		int attack = getAttributeValue(Attribute.ATTACK) + getAttributeValue(Attribute.ATTACK_BONUS)
+				+ getAttributeValue(Attribute.AURA_ATTACK_BONUS) + getAttributeValue(Attribute.TEMPORARY_ATTACK_BONUS)
+				+ getAttributeValue(Attribute.CONDITIONAL_ATTACK_BONUS);
 		return attack;
 	}
 

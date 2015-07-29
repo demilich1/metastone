@@ -15,10 +15,10 @@ import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.gui.IconFactory;
 
 public class DeckNameView extends HBox implements ChangeListener<String> {
-	
+
 	@FXML
 	private ImageView classIcon;
-	
+
 	@FXML
 	private TextField nameField;
 
@@ -32,10 +32,10 @@ public class DeckNameView extends HBox implements ChangeListener<String> {
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
-		
+
 		nameField.textProperty().addListener(this);
 	}
-	
+
 	@Override
 	public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 		ApplicationFacade.getInstance().sendNotification(GameNotification.CHANGE_DECK_NAME, newValue);

@@ -16,10 +16,10 @@ public class CardEntry extends HBox {
 
 	@FXML
 	private Text manaCostText;
-	
+
 	@FXML
 	private Text countText;
-	
+
 	private int stack;
 
 	private Card card;
@@ -34,7 +34,7 @@ public class CardEntry extends HBox {
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
-		
+
 		setCache(true);
 	}
 
@@ -46,7 +46,7 @@ public class CardEntry extends HBox {
 		countText.setText(String.valueOf(stack));
 		countText.setVisible(stack > 1);
 	}
-	
+
 	public Card getCard() {
 		return card;
 	}

@@ -17,7 +17,7 @@ public class HealingTrigger extends GameEventTrigger {
 	@Override
 	protected boolean fire(GameEvent event, Entity host) {
 		EntityType entityType = (EntityType) desc.get(EventTriggerArg.ENTITY_TYPE);
-		
+
 		if (entityType != null) {
 			HealEvent healEvent = (HealEvent) event;
 			if (healEvent.getTarget().getEntityType() != entityType) {

@@ -20,7 +20,7 @@ public class PlayModeConfigMediator extends Mediator<GameNotification> {
 		super(NAME);
 		view = new PlayModeConfigView();
 	}
-	
+
 	@Override
 	public void handleNotification(final INotification<GameNotification> notification) {
 		switch (notification.getId()) {
@@ -32,7 +32,7 @@ public class PlayModeConfigMediator extends Mediator<GameNotification> {
 		case COMMIT_PLAYMODE_CONFIG:
 			getFacade().registerMediator(new PlayModeMediator());
 			new Thread(new Runnable() {
-				
+
 				@Override
 				public void run() {
 					GameConfig gameConfig = (GameConfig) notification.getBody();

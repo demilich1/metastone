@@ -17,7 +17,7 @@ public class DamageCausedTrigger extends GameEventTrigger {
 	@Override
 	protected boolean fire(GameEvent event, Entity host) {
 		PhysicalAttackEvent physicalAttackEvent = (PhysicalAttackEvent) event;
-		
+
 		boolean worksOnHeroes = desc.getBool(EventTriggerArg.WORKS_ON_HERO);
 		if (!worksOnHeroes && physicalAttackEvent.getDefender().getEntityType() == EntityType.HERO) {
 			return false;

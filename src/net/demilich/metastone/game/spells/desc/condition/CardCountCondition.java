@@ -15,8 +15,9 @@ public class CardCountCondition extends Condition {
 
 	@Override
 	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity target) {
-		TargetPlayer targetPlayer = desc.contains(ConditionArg.TARGET_PLAYER) ? (TargetPlayer) desc.get(ConditionArg.TARGET_PLAYER) : TargetPlayer.SELF;
-		
+		TargetPlayer targetPlayer = desc.contains(ConditionArg.TARGET_PLAYER) ? (TargetPlayer) desc.get(ConditionArg.TARGET_PLAYER)
+				: TargetPlayer.SELF;
+
 		int cardCount = 0;
 		switch (targetPlayer) {
 		case BOTH:
@@ -36,7 +37,7 @@ public class CardCountCondition extends Condition {
 			break;
 		default:
 			break;
-		
+
 		}
 		int targetValue = desc.getInt(ConditionArg.VALUE);
 		Operation operation = (Operation) desc.get(ConditionArg.OPERATION);

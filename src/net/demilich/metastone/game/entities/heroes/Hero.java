@@ -51,6 +51,17 @@ public class Hero extends Actor {
 		return attack;
 	}
 
+	public Map<Attribute, Object> getAttributesCopy() {
+		Map<Attribute, Object> copy = new EnumMap<>(Attribute.class);
+		for (Attribute attribute : attributes.keySet()) {
+			if (attribute != Attribute.COMBO) {
+				continue;
+			}
+			copy.put(attribute, attributes.get(attribute));
+		}
+		return copy;
+	}
+
 	public int getEffectiveHp() {
 		return getHp() + getArmor();
 	}
@@ -66,17 +77,6 @@ public class Hero extends Actor {
 
 	public HeroPower getHeroPower() {
 		return heroPower;
-	}
-
-	public Map<Attribute, Object> getAttributesCopy() {
-		Map<Attribute, Object> copy = new EnumMap<>(Attribute.class);
-		for (Attribute attribute : attributes.keySet()) {
-			if (attribute != Attribute.COMBO) {
-				continue;
-			}
-			copy.put(attribute, attributes.get(attribute));
-		}
-		return copy;
 	}
 
 	public Weapon getWeapon() {

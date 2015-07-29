@@ -15,7 +15,7 @@ public class EventTriggerDesc extends Desc<EventTriggerArg> {
 		arguments.put(EventTriggerArg.CLASS, triggerClass);
 		return arguments;
 	}
-	
+
 	public static EventTriggerDesc createEmpty(Class<? extends GameEventTrigger> triggerClass) {
 		return new EventTriggerDesc(EventTriggerDesc.build(triggerClass));
 	}

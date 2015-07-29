@@ -22,14 +22,14 @@ import net.demilich.metastone.gui.playmode.HumanActionPromptView;
 import net.demilich.metastone.gui.playmode.LoadingBoardView;
 
 public class SandboxModeView extends BorderPane {
-	
+
 	@FXML
 	private Button backButton;
 	@FXML
 	private Button playButton;
 	@FXML
 	private VBox sidebar;
-	
+
 	@FXML
 	private Pane navigationPane;
 
@@ -49,9 +49,9 @@ public class SandboxModeView extends BorderPane {
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
-		
+
 		boardView = new GameBoardView();
-		
+
 		loadingBoardView = new LoadingBoardView();
 		loadingBoardView.setScaleX(0.9);
 		loadingBoardView.setScaleY(0.9);
@@ -60,10 +60,10 @@ public class SandboxModeView extends BorderPane {
 
 		toolboxView = new ToolboxView();
 		actionPromptView = new HumanActionPromptView();
-		
+
 		backButton.setOnAction(actionEvent -> ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU));
 		playButton.setOnAction(this::startPlayMode);
-		
+
 		sidebar.getChildren().setAll(toolboxView, navigationPane);
 	}
 
@@ -75,11 +75,11 @@ public class SandboxModeView extends BorderPane {
 	public void enableTargetSelection(HumanTargetOptions targetOptions) {
 		boardView.enableTargetSelection(targetOptions);
 	}
-	
+
 	public HumanActionPromptView getActionPromptView() {
 		return actionPromptView;
 	}
-	
+
 	public GameBoardView getBoardView() {
 		return boardView;
 	}
@@ -101,7 +101,7 @@ public class SandboxModeView extends BorderPane {
 		playButton.setOnAction(this::stopPlayMode);
 		ApplicationFacade.getInstance().sendNotification(GameNotification.START_PLAY_SANDBOX);
 	}
-	
+
 	private void stopPlayMode(ActionEvent actionEvent) {
 		sidebar.getChildren().setAll(toolboxView, navigationPane);
 		backButton.setVisible(true);
@@ -111,15 +111,15 @@ public class SandboxModeView extends BorderPane {
 		playButton.setOnAction(this::startPlayMode);
 		ApplicationFacade.getInstance().sendNotification(GameNotification.STOP_PLAY_SANDBOX);
 	}
-	
+
 	public void updateSandbox(GameContext context) {
 		if (firstUpdate) {
 			setCenter(getBoardView());
 			firstUpdate = false;
 		}
-		
+
 		getBoardView().updateGameState(context);
-		
+
 		if (toolboxView.getParent() != null) {
 			toolboxView.setContext(context);
 		}

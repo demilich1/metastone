@@ -12,7 +12,7 @@ import net.demilich.metastone.game.cards.desc.ParseUtils;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
-public class SpellDescSerializer implements JsonSerializer<SpellDesc>{
+public class SpellDescSerializer implements JsonSerializer<SpellDesc> {
 
 	@Override
 	public JsonElement serialize(SpellDesc spell, Type type, JsonSerializationContext context) {

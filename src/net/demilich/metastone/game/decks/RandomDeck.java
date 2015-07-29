@@ -27,9 +27,10 @@ public class RandomDeck extends Deck {
 		CardCollection neutralCards = CardCatalogue.query(card -> {
 			return card.isCollectible() && card.getCardType() != CardType.HERO && card.getClassRestriction() == HeroClass.ANY;
 		});
-		
+
 		while (!copyDeck.isComplete()) {
-			// random deck consists of roughly 50% class cards and 50% neutral cards
+			// random deck consists of roughly 50% class cards and 50% neutral
+			// cards
 			Card randomCard = ThreadLocalRandom.current().nextBoolean() ? classCards.getRandom() : neutralCards.getRandom();
 			if (deckValidator.canAddCardToDeck(randomCard, copyDeck)) {
 				copyDeck.getCards().add(randomCard);

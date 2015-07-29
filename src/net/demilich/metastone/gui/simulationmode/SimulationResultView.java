@@ -128,16 +128,16 @@ public class SimulationResultView extends BorderPane {
 				System.out.println("Invalid card with id: " + cardId);
 			}
 			if (card.getCardType() == cardType) {
-				cards.add(card);	
+				cards.add(card);
 			}
 		}
-		
+
 		if (cards.isEmpty()) {
 			return "-";
 		}
-		
-		Collections.sort(cards, (c1, c2) ->  {
-			int c1Count = stats.getCardsPlayed().get(c1.getCardId()); 
+
+		Collections.sort(cards, (c1, c2) -> {
+			int c1Count = stats.getCardsPlayed().get(c1.getCardId());
 			int c2Count = stats.getCardsPlayed().get(c2.getCardId());
 			// sort descending
 			return Integer.compare(c2Count, c1Count);
@@ -155,7 +155,7 @@ public class SimulationResultView extends BorderPane {
 		}
 		return "-";
 	}
-	
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void showSimulationResult(SimulationResult result) {
 		player1InfoView.setInfo(result.getConfig().getPlayerConfig1());
@@ -183,19 +183,19 @@ public class SimulationResultView extends BorderPane {
 		favouriteMinionCard.setPlayer1Value(getFavouriteCardName(result.getPlayer1Stats(), CardType.MINION));
 		favouriteMinionCard.setPlayer2Value(getFavouriteCardName(result.getPlayer2Stats(), CardType.MINION));
 		absoluteStatEntries.add(favouriteMinionCard);
-		
+
 		StatEntry favouriteSpellCard = new StatEntry();
 		favouriteSpellCard.setStatName("Favourite spell card");
 		favouriteSpellCard.setPlayer1Value(getFavouriteCardName(result.getPlayer1Stats(), CardType.SPELL));
 		favouriteSpellCard.setPlayer2Value(getFavouriteCardName(result.getPlayer2Stats(), CardType.SPELL));
 		absoluteStatEntries.add(favouriteSpellCard);
-		
+
 		StatEntry favouriteWeaponCard = new StatEntry();
 		favouriteWeaponCard.setStatName("Favourite weapon card");
 		favouriteWeaponCard.setPlayer1Value(getFavouriteCardName(result.getPlayer1Stats(), CardType.WEAPON));
 		favouriteWeaponCard.setPlayer2Value(getFavouriteCardName(result.getPlayer2Stats(), CardType.WEAPON));
 		absoluteStatEntries.add(favouriteWeaponCard);
-		
+
 		absoluteResultTable.setItems(absoluteStatEntries);
 
 		absoluteResultTable.getColumns().get(0).setCellValueFactory(new PropertyValueFactory("statName"));

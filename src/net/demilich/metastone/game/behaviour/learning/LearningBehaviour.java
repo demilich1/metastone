@@ -14,13 +14,13 @@ import net.demilich.metastone.game.behaviour.Behaviour;
 import net.demilich.metastone.game.cards.Card;
 
 public class LearningBehaviour extends Behaviour {
-	
+
 	private static Logger logger = LoggerFactory.getLogger(LearningBehaviour.class);
-	
-	private static final String SAVE_PATH = "brain.ser"; 
+
+	private static final String SAVE_PATH = "brain.ser";
 
 	private static final IBrain brain = new Brain();
-	
+
 	public LearningBehaviour(boolean learn) {
 		brain.load(SAVE_PATH);
 		brain.setLearning(learn);
@@ -76,12 +76,13 @@ public class LearningBehaviour extends Behaviour {
 			simulation.getLogic().performGameAction(player.getId(), gameAction);
 			double[] output = brain.getOutput(simulation, player.getId());
 			double utility = brain.getEstimatedUtility(output);
-			
+
 			if (utility > expectedUtility) {
 				bestAction = gameAction;
 				expectedUtility = utility;
 				nextOutput = output;
-				//logger.info("Action {} received utility of {}", gameAction, utility);
+				// logger.info("Action {} received utility of {}", gameAction,
+				// utility);
 			}
 		}
 
@@ -91,7 +92,7 @@ public class LearningBehaviour extends Behaviour {
 
 		return bestAction;
 	}
-	
+
 	public void save() {
 		brain.save(SAVE_PATH);
 	}

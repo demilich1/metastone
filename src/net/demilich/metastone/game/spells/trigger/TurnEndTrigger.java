@@ -8,11 +8,11 @@ import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
 public class TurnEndTrigger extends GameEventTrigger {
-	
+
 	public TurnEndTrigger() {
 		this(EventTriggerDesc.createEmpty(TurnEndTrigger.class));
 	}
-	
+
 	public TurnEndTrigger(EventTriggerDesc desc) {
 		super(desc);
 	}
@@ -20,7 +20,7 @@ public class TurnEndTrigger extends GameEventTrigger {
 	@Override
 	protected boolean fire(GameEvent event, Entity host) {
 		TurnEndEvent turnEndEvent = (TurnEndEvent) event;
-		
+
 		TargetPlayer targetPlayer = desc.getTargetPlayer();
 		switch (targetPlayer) {
 		case BOTH:
@@ -31,7 +31,7 @@ public class TurnEndTrigger extends GameEventTrigger {
 		case OWNER:
 			return turnEndEvent.getPlayer() == getOwner();
 		}
-		
+
 		return false;
 	}
 

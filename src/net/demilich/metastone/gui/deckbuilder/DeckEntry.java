@@ -11,7 +11,7 @@ import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.gui.IconFactory;
 
 public class DeckEntry extends HBox {
-	
+
 	@FXML
 	private Label deckNameLabel;
 
@@ -19,7 +19,7 @@ public class DeckEntry extends HBox {
 	private ImageView classIcon;
 
 	private Deck deck;
-	
+
 	public DeckEntry() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DeckEntry.fxml"));
 		fxmlLoader.setRoot(this);
@@ -31,11 +31,11 @@ public class DeckEntry extends HBox {
 			throw new RuntimeException(exception);
 		}
 	}
-	
+
 	public Deck getDeck() {
 		return deck;
 	}
-	
+
 	public void setDeck(Deck deck) {
 		this.deck = deck;
 		deckNameLabel.setText(deck.getName());

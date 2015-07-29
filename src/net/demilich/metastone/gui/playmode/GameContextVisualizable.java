@@ -13,9 +13,9 @@ import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.logic.GameLogic;
 
 public class GameContextVisualizable extends GameContext {
-	
+
 	private final List<GameEvent> gameEvents = new ArrayList<>();
-	
+
 	private boolean blockedByAnimation;
 
 	public GameContextVisualizable(Player player1, Player player2, GameLogic logic) {
@@ -34,7 +34,7 @@ public class GameContextVisualizable extends GameContext {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public void fireGameEvent(GameEvent gameEvent) {
 		if (ignoreEvents()) {
@@ -43,11 +43,10 @@ public class GameContextVisualizable extends GameContext {
 		super.fireGameEvent(gameEvent);
 		getGameEvents().add(gameEvent);
 	}
-	
+
 	public synchronized List<GameEvent> getGameEvents() {
 		return gameEvents;
 	}
-	
 
 	public boolean isBlockedByAnimation() {
 		return blockedByAnimation;
@@ -58,10 +57,10 @@ public class GameContextVisualizable extends GameContext {
 		if (ignoreEvents()) {
 			return;
 		}
-		
+
 		setBlockedByAnimation(true);
 		ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_STATE_UPDATE, this);
-		
+
 		while (blockedByAnimation) {
 			try {
 				Thread.sleep(AppConfig.DEFAULT_SLEEP_DELAY);

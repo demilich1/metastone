@@ -5,8 +5,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.Entity;
@@ -18,11 +18,11 @@ import net.demilich.metastone.game.targeting.EntityReference;
 public class ReturnMinionToHandSpell extends Spell {
 
 	private static Logger logger = LoggerFactory.getLogger(ReturnMinionToHandSpell.class);
-	
+
 	public static SpellDesc create() {
 		return create(null, 0, false);
 	}
-	
+
 	public static SpellDesc create(EntityReference target, int manaModifier, boolean randomTarget) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(ReturnMinionToHandSpell.class);
 		arguments.put(SpellArg.MANA_MODIFIER, manaModifier);

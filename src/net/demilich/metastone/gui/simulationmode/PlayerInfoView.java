@@ -12,19 +12,19 @@ import net.demilich.metastone.gui.IconFactory;
 import net.demilich.metastone.gui.gameconfig.PlayerConfig;
 
 public class PlayerInfoView extends Pane {
-	
+
 	@FXML
 	private ImageView classIcon;
-	
+
 	@FXML
 	private Label heroLabel;
-	
+
 	@FXML
 	private Label deckLabel;
-	
+
 	@FXML
 	private Label behaviourLabel;
-	
+
 	public PlayerInfoView() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PlayerInfoView.fxml"));
 		fxmlLoader.setRoot(this);
@@ -36,7 +36,7 @@ public class PlayerInfoView extends Pane {
 			throw new RuntimeException(exception);
 		}
 	}
-	
+
 	public void setInfo(PlayerConfig playerConfig) {
 		HeroCard heroCard = playerConfig.getHeroCard();
 		classIcon.setImage(IconFactory.getClassIcon(heroCard.getHeroClass()));

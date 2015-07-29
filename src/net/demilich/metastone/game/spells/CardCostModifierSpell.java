@@ -12,18 +12,18 @@ import net.demilich.metastone.game.spells.desc.manamodifier.CardCostModifierDesc
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class CardCostModifierSpell extends Spell {
-	
+
 	public static SpellDesc create(CardCostModifier cardCostModifier) {
 		return create(null, cardCostModifier);
 	}
-	
+
 	public static SpellDesc create(EntityReference target, CardCostModifier cardCostModifier) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(CardCostModifierSpell.class);
 		arguments.put(SpellArg.CARD_COST_MODIFIER, cardCostModifier);
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
 	}
-	
+
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		CardCostModifierDesc manaModifierDesc = (CardCostModifierDesc) desc.get(SpellArg.CARD_COST_MODIFIER);

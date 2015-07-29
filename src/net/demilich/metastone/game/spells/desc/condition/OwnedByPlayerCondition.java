@@ -23,7 +23,7 @@ public class OwnedByPlayerCondition extends Condition {
 			return target.getOwner() == player.getId();
 		default:
 			break;
-		
+
 		}
 		return false;
 	}

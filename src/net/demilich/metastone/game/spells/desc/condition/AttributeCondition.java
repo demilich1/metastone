@@ -2,8 +2,8 @@ package net.demilich.metastone.game.spells.desc.condition;
 
 import java.util.List;
 
-import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
@@ -27,16 +27,16 @@ public class AttributeCondition extends Condition {
 			List<Entity> entities = context.resolveTarget(player, null, sourceReference);
 			if (entities == null || entities.isEmpty()) {
 				return false;
-			}	
+			}
 			source = (Actor) entities.get(0);
 		}
-		
+
 		Attribute attribute = (Attribute) desc.get(ConditionArg.ATTRIBUTE);
 		Operation operation = (Operation) desc.get(ConditionArg.OPERATION);
 		if (operation == Operation.HAS) {
 			return target.hasAttribute(attribute);
 		}
-		
+
 		int targetValue = desc.getInt(ConditionArg.VALUE);
 
 		int actualValue;

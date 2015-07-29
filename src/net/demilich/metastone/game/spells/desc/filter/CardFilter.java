@@ -25,7 +25,7 @@ public class CardFilter extends EntityFilter {
 		} else {
 			return false;
 		}
-		
+
 		CardType cardType = (CardType) desc.get(FilterArg.CARD_TYPE);
 		if (cardType != null && cardType != card.getCardType()) {
 			return false;
@@ -44,7 +44,7 @@ public class CardFilter extends EntityFilter {
 		if (rarity != null && card.getRarity() != rarity) {
 			return false;
 		}
-		
+
 		return true;
 	}
 

@@ -8,7 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
 public class DigitTemplate extends HBox {
-	
+
 	@FXML
 	public Text digit;
 
@@ -22,6 +22,6 @@ public class DigitTemplate extends HBox {
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
-		
+
 	}
 }

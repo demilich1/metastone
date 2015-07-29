@@ -19,7 +19,8 @@ public class EditEntityAction extends GameAction {
 	@Override
 	public void execute(GameContext context, int playerId) {
 		Entity entity = context.resolveSingleTarget(getTargetKey());
-		EntityEditor editor = new EntityEditor(entity, result -> ApplicationFacade.getInstance().sendNotification(GameNotification.UPDATE_SANDBOX_STATE, context));
+		EntityEditor editor = new EntityEditor(entity,
+				result -> ApplicationFacade.getInstance().sendNotification(GameNotification.UPDATE_SANDBOX_STATE, context));
 		ApplicationFacade.getInstance().sendNotification(GameNotification.SHOW_MODAL_DIALOG, editor);
 	}
 

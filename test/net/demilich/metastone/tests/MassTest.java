@@ -18,7 +18,7 @@ import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.gui.gameconfig.PlayerConfig;
 
 public class MassTest extends TestBase {
-	
+
 	private static HeroClass getRandomClass() {
 		HeroClass randomClass = HeroClass.ANY;
 		HeroClass[] values = HeroClass.values();

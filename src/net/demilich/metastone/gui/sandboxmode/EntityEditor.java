@@ -29,6 +29,7 @@ public class EntityEditor extends SandboxEditor {
 			return new ReadOnlyObjectWrapper<>(data.getValue().getName());
 		}
 	}
+
 	private class PairValueCell extends TableCell<GameTagEntry, Object> {
 		@Override
 		protected void updateItem(Object item, boolean empty) {
@@ -80,6 +81,7 @@ public class EntityEditor extends SandboxEditor {
 			return new ReadOnlyObjectWrapper<>(data.getValue());
 		}
 	}
+
 	private final Map<Attribute, Object> workingCopy = new EnumMap<Attribute, Object>(Attribute.class);
 	private final Entity entity;
 
@@ -91,7 +93,7 @@ public class EntityEditor extends SandboxEditor {
 
 	@FXML
 	private TableColumn<GameTagEntry, Object> valueColumn;
-	
+
 	private final ICallback callback;
 
 	public EntityEditor(Entity entity, ICallback callback) {

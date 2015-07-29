@@ -48,11 +48,11 @@ public class GameToken extends BorderPane {
 		ColorAdjust monochrome = new ColorAdjust();
 		monochrome.setSaturation(-1.0);
 
-		Blend red = new Blend(BlendMode.MULTIPLY, monochrome, new ColorInput(0, 0, targetIcon.getImage().getWidth(), targetIcon.getImage()
-				.getHeight(), Color.RED));
+		Blend red = new Blend(BlendMode.MULTIPLY, monochrome,
+				new ColorInput(0, 0, targetIcon.getImage().getWidth(), targetIcon.getImage().getHeight(), Color.RED));
 
-		Blend green = new Blend(BlendMode.MULTIPLY, monochrome, new ColorInput(0, 0, targetIcon.getImage().getWidth(), targetIcon
-				.getImage().getHeight(), new Color(0, 1, 0, 0.5)));
+		Blend green = new Blend(BlendMode.MULTIPLY, monochrome,
+				new ColorInput(0, 0, targetIcon.getImage().getWidth(), targetIcon.getImage().getHeight(), new Color(0, 1, 0, 0.5)));
 
 		targetButton = targetIcon;
 
@@ -65,7 +65,7 @@ public class GameToken extends BorderPane {
 	public StackPane getAnchor() {
 		return target;
 	}
-	
+
 	public void hideTargetMarker() {
 		targetButton.setVisible(false);
 	}

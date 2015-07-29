@@ -13,7 +13,7 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class PoisonSeedsSpell extends Spell {
-	
+
 	public static SpellDesc create() {
 		Map<SpellArg, Object> arguments = SpellDesc.build(PoisonSeedsSpell.class);
 		arguments.put(SpellArg.TARGET, EntityReference.NONE);
@@ -23,12 +23,12 @@ public class PoisonSeedsSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Player opponent = context.getOpponent(player);
-		
+
 		EntityReference sourceReference = source != null ? source.getReference() : null;
 		poisonSeeds(context, opponent, sourceReference);
 		poisonSeeds(context, player, sourceReference);
 	}
-	
+
 	private void poisonSeeds(GameContext context, Player player, EntityReference source) {
 		int minionCount = player.getMinions().size();
 		if (minionCount == 0) {
@@ -36,15 +36,14 @@ public class PoisonSeedsSpell extends Spell {
 		}
 		SpellDesc destroy = InstantDestroySpell.create();
 		context.getLogic().castSpell(player.getId(), destroy, source, EntityReference.FRIENDLY_MINIONS);
-		
+
 		String[] treants = new String[minionCount];
 		for (int i = 0; i < minionCount; i++) {
 			treants[i] = "token_treant";
 		}
 		SpellDesc summonTreants = SummonSpell.create(treants);
 		context.getLogic().castSpell(player.getId(), summonTreants, source, EntityReference.NONE);
-		
-		
+
 	}
 
 }

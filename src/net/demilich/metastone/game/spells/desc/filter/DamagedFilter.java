@@ -12,7 +12,7 @@ public class DamagedFilter extends EntityFilter {
 	@Override
 	protected boolean test(Entity entity, FilterDesc desc) {
 		if (entity instanceof Actor) {
-			return ((Actor)entity).isWounded();
+			return ((Actor) entity).isWounded();
 		}
 		return false;
 	}

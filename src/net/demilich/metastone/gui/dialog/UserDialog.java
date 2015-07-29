@@ -13,24 +13,24 @@ import javafx.scene.layout.BorderPane;
 import net.demilich.metastone.gui.IconFactory;
 
 public class UserDialog extends BorderPane implements EventHandler<ActionEvent> {
-	
+
 	@FXML
 	private Label headerLabel;
-	
+
 	@FXML
 	private Label textLabel;
-	
+
 	@FXML
 	private ImageView icon;
-	
+
 	@FXML
 	private Button positiveButton;
-	
+
 	@FXML
 	private Button negativeButton;
-	
+
 	private IDialogListener dialogHandler;
-	
+
 	public UserDialog(String title, String message, DialogType dialogType) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UserDialog.fxml"));
 		fxmlLoader.setRoot(this);
@@ -41,15 +41,15 @@ public class UserDialog extends BorderPane implements EventHandler<ActionEvent> 
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
-		
+
 		icon.setImage(IconFactory.getDialogIcon(dialogType));
 		headerLabel.setText(title);
 		textLabel.setText(message);
-		
+
 		positiveButton.setOnAction(this);
 		negativeButton.setOnAction(this);
 	}
-	
+
 	@Override
 	public void handle(ActionEvent event) {
 		if (event.getSource() == positiveButton) {
@@ -58,17 +58,16 @@ public class UserDialog extends BorderPane implements EventHandler<ActionEvent> 
 			setDialogResult(DialogResult.CANCEL);
 		}
 	}
-	
+
 	public void setDialogHandler(IDialogListener dialogHandler) {
 		this.dialogHandler = dialogHandler;
 	}
 
 	private void setDialogResult(DialogResult result) {
-		if (dialogHandler != null) { 
+		if (dialogHandler != null) {
 			dialogHandler.onDialogClosed(result);
 		}
 		this.getScene().getWindow().hide();
 	}
-	
 
 }

@@ -21,6 +21,7 @@ public class CuckooLearner {
 		double value = base + sign * MathUtils.levy(1, 2);
 		return MathUtils.clamp(value, min, max);
 	}
+
 	private static FeatureVector levyFlight(FeatureVector base) {
 		FeatureVector variant = base.clone();
 		Map<WeightedFeature, Double> values = base.getValues();
@@ -61,6 +62,7 @@ public class CuckooLearner {
 		}
 		return variant;
 	}
+
 	private static CuckooAgent newRandomSolution() {
 		FeatureVector solution = levyFlight(FeatureVector.getDefault());
 		return new CuckooAgent(solution);
@@ -69,7 +71,7 @@ public class CuckooLearner {
 	private final List<CuckooAgent> nests;
 
 	private final IFitnessFunction fitnessFunction;
-	
+
 	private CuckooAgent fittest;
 
 	public CuckooLearner(Deck deckToTrain, List<Deck> decks) {

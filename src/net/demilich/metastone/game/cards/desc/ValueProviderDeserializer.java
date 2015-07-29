@@ -52,7 +52,8 @@ public class ValueProviderDeserializer implements JsonDeserializer<ValueProvider
 		return new ValueProviderDesc(arguments);
 	}
 
-	private void parseArgument(ValueProviderArg arg, JsonObject jsonData, Map<ValueProviderArg, Object> arguments, ParseValueType valueType) {
+	private void parseArgument(ValueProviderArg arg, JsonObject jsonData, Map<ValueProviderArg, Object> arguments,
+			ParseValueType valueType) {
 		String argName = ParseUtils.toCamelCase(arg.toString());
 		if (!jsonData.has(argName)) {
 			return;

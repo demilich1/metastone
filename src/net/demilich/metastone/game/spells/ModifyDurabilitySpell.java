@@ -10,14 +10,14 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class ModifyDurabilitySpell extends Spell {
-	
+
 	public static SpellDesc create(EntityReference target, int durability) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(ModifyDurabilitySpell.class);
 		arguments.put(SpellArg.VALUE, durability);
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
 	}
-	
+
 	public static SpellDesc create(int durability) {
 		return create(null, durability);
 	}
@@ -28,7 +28,7 @@ public class ModifyDurabilitySpell extends Spell {
 		if (player.getHero().getWeapon() == null) {
 			return;
 		}
-		int durabilityChange = desc.getInt(SpellArg.VALUE, 0); 
+		int durabilityChange = desc.getInt(SpellArg.VALUE, 0);
 		context.getLogic().modifyDurability(player.getHero().getWeapon(), durabilityChange);
 	}
 

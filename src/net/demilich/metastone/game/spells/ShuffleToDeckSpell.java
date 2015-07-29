@@ -15,12 +15,12 @@ public class ShuffleToDeckSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Card card = null;
 		if (target != null) {
-			card = ((Actor)target).getSourceCard().getCopy();
+			card = ((Actor) target).getSourceCard().getCopy();
 		} else {
 			String cardId = (String) desc.get(SpellArg.CARD);
 			card = CardCatalogue.getCardById(cardId);
 		}
-		
+
 		int howMany = desc.getInt(SpellArg.HOW_MANY, 1);
 		for (int i = 0; i < howMany; i++) {
 			context.getLogic().shuffleToDeck(player, card.clone());

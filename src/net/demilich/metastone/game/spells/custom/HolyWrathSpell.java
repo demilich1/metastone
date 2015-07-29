@@ -16,7 +16,7 @@ public class HolyWrathSpell extends Spell {
 		if (drawnCard == null) {
 			return;
 		}
-		context.getLogic().damage(player, (Actor)target, drawnCard.getBaseManaCost(), source);
+		context.getLogic().damage(player, (Actor) target, drawnCard.getBaseManaCost(), source);
 	}
 
 }

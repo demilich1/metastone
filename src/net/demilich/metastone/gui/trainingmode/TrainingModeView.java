@@ -18,10 +18,10 @@ public class TrainingModeView extends BorderPane implements EventHandler<ActionE
 
 	@FXML
 	private Button backButton;
-	
+
 	@FXML
 	private Label trainingLabel;
-	
+
 	@FXML
 	private Label progressLabel;
 
@@ -52,7 +52,7 @@ public class TrainingModeView extends BorderPane implements EventHandler<ActionE
 			ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU);
 		}
 	}
-	
+
 	public void setDeckName(String deckname) {
 		trainingLabel.setText("Training: " + deckname);
 	}

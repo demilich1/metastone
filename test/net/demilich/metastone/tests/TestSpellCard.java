@@ -1,4 +1,5 @@
 package net.demilich.metastone.tests;
+
 import java.util.EnumMap;
 
 import net.demilich.metastone.game.Attribute;
@@ -10,9 +11,8 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
-
 public class TestSpellCard extends SpellCard {
-	
+
 	private static SpellCardDesc getDesc() {
 		SpellCardDesc desc = new SpellCardDesc();
 		desc.name = "Unit Test Spell";
@@ -27,7 +27,7 @@ public class TestSpellCard extends SpellCard {
 		super(getDesc());
 		setDescription("This spell can have various effects and should only be used in the context of unit tests.");
 		setCollectible(false);
-		
+
 		setSpell(spell);
 		setTargetRequirement(TargetSelection.NONE);
 	}

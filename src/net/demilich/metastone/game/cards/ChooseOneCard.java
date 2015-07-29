@@ -3,7 +3,6 @@ package net.demilich.metastone.game.cards;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.cards.desc.ChooseOneCardDesc;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
 
 public class ChooseOneCard extends Card implements IChooseOneCard {
 
@@ -16,7 +15,7 @@ public class ChooseOneCard extends Card implements IChooseOneCard {
 		card1Id = desc.option1;
 		card2Id = desc.option2;
 	}
-	
+
 	@Override
 	public Card clone() {
 		ChooseOneCard clone = (ChooseOneCard) super.clone();
@@ -24,7 +23,7 @@ public class ChooseOneCard extends Card implements IChooseOneCard {
 		clone.card2Id = card2Id;
 		return clone;
 	}
-	
+
 	private Card getCard(String cardId) {
 		Card card = CardCatalogue.getCardById(cardId);
 		card.setLocation(getLocation());

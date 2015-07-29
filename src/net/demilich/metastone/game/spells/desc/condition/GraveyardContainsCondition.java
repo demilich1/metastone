@@ -23,11 +23,11 @@ public class GraveyardContainsCondition extends Condition {
 			} else if (deadEntity instanceof Card) {
 				card = (Card) deadEntity;
 			}
-			
+
 			if (card == null || card.getCardId() == null) {
 				System.out.println("Graveyard card check is NULL: " + card);
 			}
-			
+
 			if (card.getCardId().equals(cardId)) {
 				return true;
 			}

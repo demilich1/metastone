@@ -12,7 +12,7 @@ import net.demilich.metastone.game.spells.desc.condition.Condition;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class EitherOrSpell extends Spell {
-	
+
 	public static SpellDesc create(EntityReference target, SpellDesc either, SpellDesc or, ISpellConditionChecker condition) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(EitherOrSpell.class);
 		arguments.put(SpellArg.SPELL_1, either);
@@ -31,11 +31,9 @@ public class EitherOrSpell extends Spell {
 		Condition condition = (Condition) desc.get(SpellArg.CONDITION);
 		SpellDesc either = (SpellDesc) desc.get(SpellArg.SPELL_1);
 		SpellDesc or = (SpellDesc) desc.get(SpellArg.SPELL_2);
-		
+
 		SpellDesc spellToCast = condition.isFulfilled(context, player, target) ? either : or;
 		SpellUtils.castChildSpell(context, player, spellToCast, source, target);
 	}
-
-	
 
 }

@@ -8,7 +8,7 @@ import net.demilich.metastone.game.Player;
 public class SandboxProxy extends Proxy<GameNotification> {
 
 	public static final String NAME = "SandboxProxy";
-	
+
 	private GameContext sandbox;
 	private Player selectedPlayer;
 

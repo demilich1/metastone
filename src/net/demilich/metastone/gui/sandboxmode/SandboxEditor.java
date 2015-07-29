@@ -12,13 +12,13 @@ public class SandboxEditor extends BorderPane {
 
 	@FXML
 	protected Label headerLabel;
-	
+
 	@FXML
 	protected Button okButton;
 
 	@FXML
 	protected Button cancelButton;
-	
+
 	public SandboxEditor(String fxmlFile) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
 		fxmlLoader.setRoot(this);
@@ -30,7 +30,7 @@ public class SandboxEditor extends BorderPane {
 			throw new RuntimeException(exception);
 		}
 	}
-	
+
 	protected void setTitle(String title) {
 		headerLabel.setText(title);
 	}

@@ -38,7 +38,7 @@ public class GreedyOptimizeTurn extends Behaviour {
 		if (depth == 0 || simulation.getActivePlayerId() != playerId || simulation.gameDecided()) {
 			return heuristic.getScore(simulation, playerId);
 		}
-		
+
 		List<GameAction> validActions = simulation.getValidActions();
 
 		double score = Float.NEGATIVE_INFINITY;
@@ -87,7 +87,7 @@ public class GreedyOptimizeTurn extends Behaviour {
 		}
 		return discardedCards;
 	}
-	
+
 	@Override
 	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
 		if (validActions.size() == 1) {

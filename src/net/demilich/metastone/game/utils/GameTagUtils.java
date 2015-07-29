@@ -3,7 +3,7 @@ package net.demilich.metastone.game.utils;
 import net.demilich.metastone.game.Attribute;
 
 public class GameTagUtils {
-	
+
 	public static String getTagName(Attribute tag) {
 		return tag.toString();
 	}
@@ -61,9 +61,9 @@ public class GameTagUtils {
 		}
 		return TagValueType.OTHER;
 	}
-	
+
 	private GameTagUtils() {
-		
+
 	}
 
 }

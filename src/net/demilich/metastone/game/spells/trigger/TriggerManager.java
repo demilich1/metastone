@@ -11,9 +11,9 @@ import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.utils.IDisposable;
 
 public class TriggerManager implements Cloneable, IDisposable {
-	
+
 	public static Logger logger = LoggerFactory.getLogger(TriggerManager.class);
-	
+
 	private final List<IGameEventListener> triggers = new ArrayList<IGameEventListener>();;
 
 	public TriggerManager() {
@@ -31,7 +31,7 @@ public class TriggerManager implements Cloneable, IDisposable {
 			logger.warn("Warning, many triggers: " + triggers.size() + " adding one of type: " + trigger);
 		}
 	}
-	
+
 	@Override
 	public TriggerManager clone() {
 		return new TriggerManager(this);
@@ -91,7 +91,7 @@ public class TriggerManager implements Cloneable, IDisposable {
 			System.out.println("Failed to remove trigger " + trigger);
 		}
 	}
-	
+
 	public void removeTriggersAssociatedWith(EntityReference entityReference) {
 		for (IGameEventListener trigger : getListSnapshot(triggers)) {
 			if (trigger.getHostReference().equals(entityReference)) {

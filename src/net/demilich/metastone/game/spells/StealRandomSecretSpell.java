@@ -25,11 +25,11 @@ public class StealRandomSecretSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Player opponent = context.getOpponent(player);
 		List<IGameEventListener> secrets = context.getLogic().getSecrets(opponent);
-		
+
 		if (secrets.isEmpty()) {
 			return;
 		}
-		
+
 		// try to steal a secret which we do not own yet
 		List<Secret> validSecrets = new ArrayList<>();
 		for (IGameEventListener trigger : secrets) {
@@ -38,20 +38,21 @@ public class StealRandomSecretSpell extends Spell {
 				validSecrets.add(secret);
 			}
 		}
-		
+
 		if (!validSecrets.isEmpty()) {
 			Secret secret = validSecrets.get(context.getLogic().random(validSecrets.size()));
 			secret.setHost(player.getHero());
 			secret.setOwner(player.getId());
 			player.getSecrets().add(secret.getSource().getCardId());
-			opponent.getSecrets().remove(secret.getSource().getCardId());	
+			opponent.getSecrets().remove(secret.getSource().getCardId());
 		} else {
-			// no valid secret to steal; instead destroy one for the opponent at least
+			// no valid secret to steal; instead destroy one for the opponent at
+			// least
 			Secret secret = (Secret) secrets.get(context.getLogic().random(secrets.size()));
 			context.removeTrigger(secret);
 			opponent.getSecrets().remove(secret.getSource().getCardId());
 		}
-		
+
 	}
 
 }

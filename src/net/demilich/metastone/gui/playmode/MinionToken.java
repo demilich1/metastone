@@ -19,7 +19,7 @@ public class MinionToken extends GameToken {
 	private Group attackAnchor;
 	@FXML
 	private Group hpAnchor;
-	
+
 	@FXML
 	private Node defaultToken;
 	@FXML
@@ -30,12 +30,12 @@ public class MinionToken extends GameToken {
 	private Node windfury;
 	@FXML
 	private Node deathrattle;
-	
+
 	@FXML
 	private Shape frozen;
-	
+
 	private CardTooltip cardTooltip;
-	
+
 	public MinionToken() {
 		super("MinionToken.fxml");
 		Tooltip tooltip = new Tooltip();
@@ -58,7 +58,7 @@ public class MinionToken extends GameToken {
 		visualizeStatus(minion);
 		cardTooltip.setCard(minion.getSourceCard());
 	}
-	
+
 	private void visualizeStatus(Minion minion) {
 		taunt.setVisible(minion.hasAttribute(Attribute.TAUNT));
 		defaultToken.setVisible(!minion.hasAttribute(Attribute.TAUNT));
@@ -68,12 +68,10 @@ public class MinionToken extends GameToken {
 		frozen.setVisible(minion.hasAttribute(Attribute.FROZEN));
 		visualizeStealth(minion);
 	}
-	
+
 	private void visualizeStealth(Minion minion) {
 		Node token = minion.hasAttribute(Attribute.TAUNT) ? taunt : defaultToken;
 		token.setOpacity(minion.hasAttribute(Attribute.STEALTH) ? 0.5 : 1);
 	}
 
 }
-
-

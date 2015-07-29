@@ -10,7 +10,7 @@ import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
 public class DoubleHpSpell extends Spell {
-	
+
 	public static SpellDesc create() {
 		Map<SpellArg, Object> arguments = SpellDesc.build(DoubleHpSpell.class);
 		return new SpellDesc(arguments);
@@ -22,5 +22,5 @@ public class DoubleHpSpell extends Spell {
 		int hpBonus = targetActor.getHp();
 		targetActor.modifyHpBonus(hpBonus);
 	}
-	
+
 }

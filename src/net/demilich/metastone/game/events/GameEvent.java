@@ -14,15 +14,16 @@ public abstract class GameEvent {
 	}
 
 	/**
-	 * Spells may specify to be cast on the event target; this is dependent
-	 * on the actual event. For example, a SummonEvent may return the summoned minion,
-	 * a DamageEvent may return the damaged minion/hero, etc.
+	 * Spells may specify to be cast on the event target; this is dependent on
+	 * the actual event. For example, a SummonEvent may return the summoned
+	 * minion, a DamageEvent may return the damaged minion/hero, etc.
+	 * 
 	 * @return
 	 */
 	public abstract Entity getEventTarget();
 
 	public abstract GameEventType getEventType();
-	
+
 	public GameContext getGameContext() {
 		return context;
 	}
@@ -30,7 +31,7 @@ public abstract class GameEvent {
 	public TriggerLayer getTriggerLayer() {
 		return triggerLayer;
 	}
-	
+
 	public void setTriggerLayer(TriggerLayer triggerLayer) {
 		this.triggerLayer = triggerLayer;
 	}

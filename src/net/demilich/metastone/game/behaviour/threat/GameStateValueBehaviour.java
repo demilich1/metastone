@@ -65,7 +65,7 @@ public class GameStateValueBehaviour extends Behaviour {
 	@Override
 	public IBehaviour clone() {
 		if (featureVector != null) {
-			return new GameStateValueBehaviour(featureVector.clone(), nameSuffix);	
+			return new GameStateValueBehaviour(featureVector.clone(), nameSuffix);
 		}
 		return new GameStateValueBehaviour();
 	}
@@ -119,7 +119,7 @@ public class GameStateValueBehaviour extends Behaviour {
 		if (heuristic != null) {
 			return;
 		}
-		
+
 		RequestTrainingDataNotification request = new RequestTrainingDataNotification(player.getDeckName(), this::answerTrainingData);
 		ApplicationFacade.getInstance().notifyObservers(request);
 	}

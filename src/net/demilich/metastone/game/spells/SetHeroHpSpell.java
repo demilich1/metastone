@@ -10,9 +10,9 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
 public class SetHeroHpSpell extends Spell {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(SetHeroHpSpell.class);
-	
+
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Actor actor = (Actor) target;

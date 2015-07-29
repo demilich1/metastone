@@ -14,7 +14,7 @@ import net.demilich.metastone.game.spells.desc.manamodifier.CardCostModifierArg;
 import net.demilich.metastone.game.spells.desc.manamodifier.CardCostModifierDesc;
 
 public class CardCostModifierDeserializer implements JsonDeserializer<CardCostModifierDesc> {
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public CardCostModifierDesc deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException {
@@ -44,7 +44,8 @@ public class CardCostModifierDeserializer implements JsonDeserializer<CardCostMo
 		return new CardCostModifierDesc(arguments);
 	}
 
-	private void parseArgument(CardCostModifierArg arg, JsonObject jsonData, Map<CardCostModifierArg, Object> arguments, ParseValueType valueType) {
+	private void parseArgument(CardCostModifierArg arg, JsonObject jsonData, Map<CardCostModifierArg, Object> arguments,
+			ParseValueType valueType) {
 		String argName = ParseUtils.toCamelCase(arg.toString());
 		if (!jsonData.has(argName)) {
 			return;

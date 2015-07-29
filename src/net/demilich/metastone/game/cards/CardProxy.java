@@ -15,11 +15,11 @@ import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.cards.desc.CardDesc;
 
 public class CardProxy extends Proxy<GameNotification> {
-	
+
 	public final static String NAME = "CardProxy";
-	
+
 	private static Logger logger = LoggerFactory.getLogger(CardProxy.class);
-	
+
 	private final Map<String, CardDesc> cardDesc = new HashMap<String, CardDesc>();
 
 	public CardProxy() {
@@ -30,7 +30,7 @@ public class CardProxy extends Proxy<GameNotification> {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void loadCards() throws FileNotFoundException {
 		cardDesc.clear();
 		File folder = new File("./cards/");
@@ -38,14 +38,14 @@ public class CardProxy extends Proxy<GameNotification> {
 			logger.error("/cards directory not found");
 			return;
 		}
-		
+
 		Collection<File> files = FileUtils.listFiles(folder, new String[] { "json" }, true);
 		CardParser cardParser = new CardParser();
 		for (File file : files) {
 			CardDesc desc = cardParser.parseCard(file);
 			cardDesc.put(desc.id, desc);
 		}
-		
+
 		for (CardDesc desc : cardDesc.values()) {
 			Card instance = desc.createInstance();
 			CardCatalogue.add(instance);

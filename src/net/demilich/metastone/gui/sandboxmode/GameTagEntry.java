@@ -35,7 +35,7 @@ public class GameTagEntry {
 	public int getValueInt() {
 		return (int) value;
 	}
-	
+
 	public TagValueType getValueType() {
 		return valueType;
 	}

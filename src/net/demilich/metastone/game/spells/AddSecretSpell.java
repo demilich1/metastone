@@ -11,14 +11,13 @@ import net.demilich.metastone.game.spells.trigger.secrets.Secret;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class AddSecretSpell extends Spell {
-	
+
 	public static SpellDesc create(Secret secret) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(AddSecretSpell.class);
 		arguments.put(SpellArg.SECRET, secret);
 		arguments.put(SpellArg.TARGET, EntityReference.FRIENDLY_HERO);
 		return new SpellDesc(arguments);
 	}
-	
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {

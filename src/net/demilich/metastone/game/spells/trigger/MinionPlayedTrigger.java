@@ -13,8 +13,9 @@ public class MinionPlayedTrigger extends MinionSummonedTrigger {
 	@Override
 	protected boolean fire(GameEvent event, Entity host) {
 		SummonEvent summonEvent = (SummonEvent) event;
-		
-		// when source card is null, then this minion not played as a minion card
+
+		// when source card is null, then this minion not played as a minion
+		// card
 		if (summonEvent.getSource() == null) {
 			return false;
 		}

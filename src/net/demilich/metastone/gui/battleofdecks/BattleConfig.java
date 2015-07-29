@@ -6,7 +6,7 @@ import net.demilich.metastone.game.behaviour.IBehaviour;
 import net.demilich.metastone.game.decks.Deck;
 
 public class BattleConfig {
-	
+
 	private final int numberOfGames;
 	private final IBehaviour behaviour;
 	private final Collection<Deck> decks;

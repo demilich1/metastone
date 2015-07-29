@@ -40,10 +40,13 @@ public class CardCatalogue {
 
 		return null;
 	}
-	
+
 	public static CardCollection getHeroes() {
-		return query(
-				card -> card.isCollectible() && card.getCardType() == CardType.HERO);
+		return query(card -> card.isCollectible() && card.getCardType() == CardType.HERO);
+	}
+
+	public static CardCollection query(Attribute tag) {
+		return query(null, null, null, tag);
 	}
 
 	public static CardCollection query(CardType cardType) {
@@ -53,7 +56,7 @@ public class CardCatalogue {
 	public static CardCollection query(CardType cardType, Rarity rarity, HeroClass heroClass) {
 		return query(cardType, rarity, heroClass, null);
 	}
-	
+
 	public static CardCollection query(CardType cardType, Rarity rarity, HeroClass heroClass, Attribute tag) {
 		CardCollection result = new CardCollection();
 		for (Card card : cards) {
@@ -80,10 +83,6 @@ public class CardCatalogue {
 		}
 
 		return result;
-	}
-
-	public static CardCollection query(Attribute tag) {
-		return query(null, null, null, tag);
 	}
 
 	public static CardCollection query(Predicate<Card> filter) {

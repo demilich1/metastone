@@ -8,11 +8,11 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class DestroyWeaponSpell extends Spell {
-	
+
 	public static SpellDesc create(EntityReference target) {
 		return ModifyDurabilitySpell.create(target, -99);
 	}
-	
+
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Hero hero = (Hero) target;

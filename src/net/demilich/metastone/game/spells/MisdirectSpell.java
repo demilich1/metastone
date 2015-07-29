@@ -12,7 +12,7 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class MisdirectSpell extends Spell {
-	
+
 	public static SpellDesc create() {
 		Map<SpellArg, Object> arguments = SpellDesc.build(MisdirectSpell.class);
 		arguments.put(SpellArg.TARGET, EntityReference.EVENT_TARGET);

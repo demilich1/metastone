@@ -4,14 +4,15 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 
 public class TriggerDesc {
-	
+
 	public EventTriggerDesc eventTrigger;
-	//public EventTriggerDesc secondEventTrigger;
+	// public EventTriggerDesc secondEventTrigger;
 	public SpellDesc spell;
 	public boolean oneTime;
-	
+
 	public SpellTrigger create() {
-		//GameEventTrigger secondaryTrigger = secondEventTrigger != null ? secondEventTrigger.create() : null;
+		// GameEventTrigger secondaryTrigger = secondEventTrigger != null ?
+		// secondEventTrigger.create() : null;
 		return new SpellTrigger(eventTrigger.create(), spell, oneTime);
 	}
 

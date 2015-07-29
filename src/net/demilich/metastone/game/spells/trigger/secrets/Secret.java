@@ -21,7 +21,7 @@ public class Secret extends SpellTrigger {
 	public Card getSource() {
 		return source;
 	}
-	
+
 	@Override
 	protected void onFire(int ownerId, SpellDesc spell, GameEvent event) {
 		super.onFire(ownerId, spell, event);

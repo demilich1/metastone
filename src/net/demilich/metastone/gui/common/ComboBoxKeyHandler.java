@@ -9,7 +9,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 public class ComboBoxKeyHandler<T> implements EventHandler<KeyEvent> {
-	
+
 	private static final long WORD_DELAY = 2000;
 
 	private String s;
@@ -31,7 +31,7 @@ public class ComboBoxKeyHandler<T> implements EventHandler<KeyEvent> {
 			s = s.substring(0, s.length() - 1);
 		else
 			s += event.getText();
-		
+
 		lastKeyPress = System.currentTimeMillis();
 
 		if (s.length() == 0) {
@@ -40,7 +40,7 @@ public class ComboBoxKeyHandler<T> implements EventHandler<KeyEvent> {
 		}
 
 		for (T item : box.getItems()) {
-			
+
 			String name = box.getConverter().toString(item).toLowerCase();
 			if (name.startsWith(s)) {
 				select(item);
@@ -50,11 +50,11 @@ public class ComboBoxKeyHandler<T> implements EventHandler<KeyEvent> {
 		// nothing found, reset search string
 		s = "";
 	}
-	
+
 	private void select(int index) {
 		select(box.getItems().get(index));
 	}
-	
+
 	@SuppressWarnings("rawtypes")
 	private void select(T item) {
 		box.getSelectionModel().select(item);

@@ -16,7 +16,7 @@ import net.demilich.metastone.game.behaviour.human.HumanActionOptions;
 import net.demilich.metastone.game.behaviour.human.HumanTargetOptions;
 import net.demilich.metastone.game.decks.Deck;
 
-public class SandboxModeMediator extends Mediator<GameNotification> implements EventHandler<KeyEvent> {
+public class SandboxModeMediator extends Mediator<GameNotification>implements EventHandler<KeyEvent> {
 
 	public static final String NAME = "SandboxModeMediator";
 

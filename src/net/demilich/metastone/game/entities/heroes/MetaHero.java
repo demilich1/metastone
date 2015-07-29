@@ -5,7 +5,7 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.desc.HeroCardDesc;
 
 public class MetaHero extends HeroCard {
-	
+
 	private static HeroCardDesc createDesc() {
 		HeroCardDesc desc = new HeroCardDesc();
 		desc.collectible = false;

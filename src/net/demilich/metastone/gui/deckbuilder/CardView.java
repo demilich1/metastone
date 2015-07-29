@@ -49,15 +49,15 @@ public class CardView extends BorderPane implements EventHandler<MouseEvent> {
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
-		
+
 		setupCardWidgets();
-		
+
 		previousButton.setOnAction(actionEvent -> changeOffset(-cardDisplayCount));
 		nextButton.setOnAction(actionEvent -> changeOffset(+cardDisplayCount));
-		
+
 		setCache(true);
 	}
-	
+
 	private void changeOffset(int delta) {
 		int newOffset = offset + delta;
 		if (newOffset < 0 || newOffset >= cards.size()) {
@@ -94,24 +94,24 @@ public class CardView extends BorderPane implements EventHandler<MouseEvent> {
 		Card card = source.getCard();
 		ApplicationFacade.getInstance().sendNotification(GameNotification.ADD_CARD_TO_DECK, card);
 	}
-	
+
 	private void setupCardWidgets() {
 		for (int i = 0; i < cardDisplayCount; i++) {
 			CardTooltip cardWidget = new CardTooltip();
-			
+
 			cardWidget.addEventHandler(MouseEvent.MOUSE_CLICKED, this);
 			cardWidget.setScaleX(0.95);
 			cardWidget.setScaleY(0.95);
 			cardWidget.setScaleZ(0.95);
-			
+
 			contentPane.getChildren().add(cardWidget);
 			cardWidgets.add(cardWidget);
 		}
 	}
 
 	private void updatePageLabel() {
-		int totalPages = (int) Math.ceil(cards.size() / (double)cardDisplayCount);
-		int currentPage = (int) Math.ceil(offset / (double)cardDisplayCount) + 1;
+		int totalPages = (int) Math.ceil(cards.size() / (double) cardDisplayCount);
+		int currentPage = (int) Math.ceil(offset / (double) cardDisplayCount) + 1;
 		pageLabel.setText(currentPage + "/" + totalPages);
 	}
 

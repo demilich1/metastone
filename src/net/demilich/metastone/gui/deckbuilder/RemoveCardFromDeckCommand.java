@@ -12,7 +12,7 @@ public class RemoveCardFromDeckCommand extends SimpleCommand<GameNotification> {
 		DeckProxy deckProxy = (DeckProxy) getFacade().retrieveProxy(DeckProxy.NAME);
 		Card card = (Card) notification.getBody();
 		deckProxy.getActiveDeck().getCards().remove(card);
-		
+
 		getFacade().sendNotification(GameNotification.ACTIVE_DECK_CHANGED, deckProxy.getActiveDeck());
 	}
 

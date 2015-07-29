@@ -82,7 +82,8 @@ class MinionCardPanel extends CardEditor {
 		card.race = newRace != Race.NONE ? newRace : null;
 	}
 
-	private void onTargetSelectionChanged(ObservableValue<? extends TargetSelection> ov, TargetSelection oldValue, TargetSelection newValue) {
+	private void onTargetSelectionChanged(ObservableValue<? extends TargetSelection> ov, TargetSelection oldValue,
+			TargetSelection newValue) {
 		if (card.battlecry == null) {
 			card.battlecry = new BattlecryDesc();
 		}
@@ -97,7 +98,5 @@ class MinionCardPanel extends CardEditor {
 		deathrattleSpellBox.valueProperty().set(null);
 		card.deathrattle = null;
 	}
-
-	
 
 }

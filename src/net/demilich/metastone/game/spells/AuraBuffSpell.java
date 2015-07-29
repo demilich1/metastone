@@ -6,8 +6,8 @@ import java.util.function.Predicate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
@@ -17,23 +17,23 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 public class AuraBuffSpell extends Spell {
 
 	private static Logger logger = LoggerFactory.getLogger(AuraBuffSpell.class);
-	
+
 	public static SpellDesc create(int attackBonus) {
 		return create(attackBonus, 0);
 	}
-	
+
 	public static SpellDesc create(int attackBonus, int hpBonus) {
 		return create(attackBonus, hpBonus, null);
 	}
-	
+
 	public static SpellDesc create(int attackBonus, int hpBonus, Predicate<Entity> targetFilter) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(AuraBuffSpell.class);
 		arguments.put(SpellArg.ATTACK_BONUS, attackBonus);
 		arguments.put(SpellArg.HP_BONUS, hpBonus);
 		if (targetFilter != null) {
-			arguments.put(SpellArg.FILTER, targetFilter);	
+			arguments.put(SpellArg.FILTER, targetFilter);
 		}
-		
+
 		return new SpellDesc(arguments);
 	}
 

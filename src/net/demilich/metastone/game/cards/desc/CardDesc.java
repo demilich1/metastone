@@ -12,7 +12,7 @@ import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderDesc;
 
 public abstract class CardDesc {
-	
+
 	public String id;
 	public String name;
 	public String description;
@@ -26,7 +26,7 @@ public abstract class CardDesc {
 	public int fileFormatVersion = 1;
 	public ValueProviderDesc manaCostModifier;
 	public TriggerDesc passiveTrigger;
-	
+
 	public abstract Card createInstance();
 
 }

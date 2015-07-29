@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.entities.weapons;
 
-import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.Actor;
@@ -34,7 +34,7 @@ public class Weapon extends Actor {
 	public EntityType getEntityType() {
 		return EntityType.WEAPON;
 	}
-	
+
 	public int getWeaponDamage() {
 		return getAttributeValue(Attribute.ATTACK) + getAttributeValue(Attribute.CONDITIONAL_ATTACK_BONUS);
 	}
@@ -57,13 +57,13 @@ public class Weapon extends Actor {
 			context.getLogic().castSpell(player.getId(), onEquip, getReference(), EntityReference.NONE);
 		}
 	}
-	
+
 	public void onUnequip(GameContext context, Player player) {
 		if (onUnequip != null) {
 			context.getLogic().castSpell(player.getId(), onUnequip, getReference(), EntityReference.NONE);
 		}
 	}
-	
+
 	public void setActive(boolean active) {
 		this.active = active;
 	}

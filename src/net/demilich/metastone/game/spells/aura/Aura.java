@@ -5,8 +5,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
-import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
@@ -38,7 +38,7 @@ public class Aura extends SpellTrigger {
 		this.removeAuraEffect = removeAuraEffect;
 		this.targets = targetSelection;
 	}
-	
+
 	public Aura(SpellDesc applyAuraEffect, SpellDesc removeAuraEffect, EntityReference targetSelection) {
 		this(null, applyAuraEffect, removeAuraEffect, targetSelection);
 	}
@@ -72,6 +72,12 @@ public class Aura extends SpellTrigger {
 		return raceRestriction;
 	}
 
+	@Override
+	public void onAdd(GameContext context) {
+		super.onAdd(context);
+		affectedEntities.clear();
+	}
+
 	public void onGameEvent(GameEvent event) {
 		GameContext context = event.getGameContext();
 		Player owner = context.getPlayer(getOwner());
@@ -80,13 +86,13 @@ public class Aura extends SpellTrigger {
 		List<Entity> relevantTargets = new ArrayList<Entity>(resolvedTargets);
 		for (Iterator<Integer> iterator = affectedEntities.iterator(); iterator.hasNext();) {
 			int entityId = iterator.next();
-			
+
 			EntityReference entityReference = new EntityReference(entityId);
 			Entity affectedEntity = context.tryFind(entityReference);
 			if (affectedEntity == null) {
 				iterator.remove();
 			} else {
-				relevantTargets.add(affectedEntity);	
+				relevantTargets.add(affectedEntity);
 			}
 		}
 
@@ -109,14 +115,6 @@ public class Aura extends SpellTrigger {
 			Entity target = context.resolveSingleTarget(targetKey);
 			context.getLogic().castSpell(getOwner(), removeAuraEffect, getHostReference(), target.getReference());
 		}
-		affectedEntities.clear();
-	}
-	
-	
-
-	@Override
-	public void onAdd(GameContext context) {
-		super.onAdd(context);
 		affectedEntities.clear();
 	}
 

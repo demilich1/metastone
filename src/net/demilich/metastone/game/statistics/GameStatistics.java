@@ -107,7 +107,8 @@ public class GameStatistics implements Cloneable {
 		if (card.getCardType() == CardType.HERO_POWER) {
 			return;
 		}
-		String cardId = card.getCardId();;
+		String cardId = card.getCardId();
+		;
 		if (!getCardsPlayed().containsKey(cardId)) {
 			getCardsPlayed().put(cardId, 0);
 		}

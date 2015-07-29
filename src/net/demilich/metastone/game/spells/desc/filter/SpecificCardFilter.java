@@ -14,11 +14,11 @@ public class SpecificCardFilter extends EntityFilter {
 	protected boolean test(Entity entity, FilterDesc desc) {
 		String cardId = null;
 		if (entity instanceof Card) {
-			cardId = ((Card)entity).getCardId();
+			cardId = ((Card) entity).getCardId();
 		} else if (entity instanceof Actor) {
-			cardId = ((Actor)entity).getSourceCard().getCardId();
+			cardId = ((Actor) entity).getSourceCard().getCardId();
 		}
-		
+
 		String requiredCardId = desc.getString(FilterArg.CARD_ID);
 		return cardId.contains(requiredCardId);
 	}

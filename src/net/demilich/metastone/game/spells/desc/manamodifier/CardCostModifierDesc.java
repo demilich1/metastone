@@ -15,7 +15,6 @@ public class CardCostModifierDesc extends Desc<CardCostModifierArg> {
 		return arguments;
 	}
 
-
 	public CardCostModifierDesc(Map<CardCostModifierArg, Object> arguments) {
 		super(arguments);
 	}
@@ -35,6 +34,5 @@ public class CardCostModifierDesc extends Desc<CardCostModifierArg> {
 	public Class<? extends CardCostModifier> getManaModifierClass() {
 		return (Class<? extends CardCostModifier>) get(CardCostModifierArg.CLASS);
 	}
-	
 
 }

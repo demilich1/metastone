@@ -18,7 +18,7 @@ public class HostAttacksTrigger extends PhysicalAttackTrigger {
 		if (physicalAttackEvent.getAttacker() != host) {
 			return false;
 		}
-		
+
 		return super.fire(physicalAttackEvent, host);
 	}
 

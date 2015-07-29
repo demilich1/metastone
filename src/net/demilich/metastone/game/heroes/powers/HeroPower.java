@@ -16,7 +16,7 @@ public class HeroPower extends SpellCard {
 		super(desc);
 		setLocation(CardLocation.HERO_POWER);
 	}
-	
+
 	public boolean hasBeenUsed() {
 		return used;
 	}

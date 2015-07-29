@@ -18,12 +18,12 @@ public class DamageReceivedTrigger extends GameEventTrigger {
 	@Override
 	protected boolean fire(GameEvent event, Entity host) {
 		DamageEvent damageEvent = (DamageEvent) event;
-		
+
 		EntityType entityType = (EntityType) desc.get(EventTriggerArg.ENTITY_TYPE);
 		if (entityType != null && damageEvent.getVictim().getEntityType() != entityType) {
 			return false;
 		}
-		
+
 		TargetPlayer targetPlayer = desc.getTargetPlayer();
 		switch (targetPlayer) {
 		case BOTH:
@@ -34,7 +34,7 @@ public class DamageReceivedTrigger extends GameEventTrigger {
 		case SELF:
 			return damageEvent.getVictim().getOwner() == getOwner();
 		}
-		
+
 		return false;
 	}
 

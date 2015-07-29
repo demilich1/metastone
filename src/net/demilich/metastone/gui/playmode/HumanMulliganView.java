@@ -28,6 +28,7 @@ public class HumanMulliganView extends BorderPane implements EventHandler<MouseE
 		public boolean mulligan;
 
 		public ImageView discardIcon;
+
 		public MulliganEntry(ImageView icon) {
 			this.discardIcon = icon;
 		}
@@ -40,7 +41,7 @@ public class HumanMulliganView extends BorderPane implements EventHandler<MouseE
 	private Button doneButton;
 
 	private final HashMap<Card, MulliganEntry> mulliganState = new HashMap<Card, MulliganEntry>();
-	
+
 	public HumanMulliganView(HumanMulliganOptions options) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("HumanMulliganView.fxml"));
 		fxmlLoader.setRoot(this);
@@ -76,7 +77,7 @@ public class HumanMulliganView extends BorderPane implements EventHandler<MouseE
 
 			mulliganState.put(card, new MulliganEntry(mulliganIcon));
 		}
-		
+
 		doneButton.setOnAction(event -> {
 			List<Card> discardedCards = new ArrayList<>();
 			for (Card card : mulliganState.keySet()) {

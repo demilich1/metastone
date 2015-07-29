@@ -8,11 +8,10 @@ import net.demilich.metastone.game.cards.desc.ChooseBattlecryCardDesc;
 import net.demilich.metastone.game.spells.desc.BattlecryDesc;
 
 public class ChooseBattlecryCard extends MinionCard implements IChooseOneCard {
-	
+
 	private final BattlecryDesc battlecryOption1;
 	private final BattlecryDesc battlecryOption2;
 
-	
 	public ChooseBattlecryCard(ChooseBattlecryCardDesc desc) {
 		super(desc);
 		this.battlecryOption1 = desc.option1;

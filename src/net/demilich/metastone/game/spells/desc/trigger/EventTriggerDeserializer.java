@@ -42,7 +42,7 @@ public class EventTriggerDeserializer implements JsonDeserializer<EventTriggerDe
 		parseArgument(EventTriggerArg.BREAKS_STEALTH, jsonData, arguments, ParseValueType.BOOLEAN);
 		parseArgument(EventTriggerArg.REQUIRED_ATTRIBUTE, jsonData, arguments, ParseValueType.ATTRIBUTE);
 		parseArgument(EventTriggerArg.CONDITION, jsonData, arguments, ParseValueType.CONDITION);
-		
+
 		return new EventTriggerDesc(arguments);
 	}
 

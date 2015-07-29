@@ -5,7 +5,7 @@ import net.demilich.metastone.game.cards.SecretCard;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
 public class SecretCardDesc extends SpellCardDesc {
-	
+
 	public EventTriggerDesc trigger;
 
 	@Override
