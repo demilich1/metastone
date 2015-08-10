@@ -44,6 +44,7 @@ import net.demilich.metastone.game.events.FatalDamageEvent;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.HealEvent;
 import net.demilich.metastone.game.events.HeroPowerUsedEvent;
+import net.demilich.metastone.game.events.JoustEvent;
 import net.demilich.metastone.game.events.KillEvent;
 import net.demilich.metastone.game.events.OverloadEvent;
 import net.demilich.metastone.game.events.PhysicalAttackEvent;
@@ -825,6 +826,13 @@ public class GameLogic implements Cloneable {
 			logger.debug(message, param1, param2);
 		}
 	}
+	
+	private void log(String message, Object param1, Object param2, Object param3) {
+		logToDebugHistory(message, param1, param2, param3);
+		if (isLoggingEnabled() && logger.isDebugEnabled()) {
+			logger.debug(message, param1, param2, param3);
+		}
+	}
 
 	private void logToDebugHistory(String message, Object... params) {
 		if (debugHistory.size() == MAX_HISTORY_ENTRIES) {
@@ -1298,6 +1306,32 @@ public class GameLogic implements Cloneable {
 
 		context.getSummonStack().pop();
 		context.fireGameEvent(new BoardChangedEvent(context));
+	}
+	
+	public boolean joust(Player player) {
+		Card ownCard = player.getDeck().getRandomOfType(CardType.MINION);
+		boolean won = false;
+		// no minions left in deck - automatically loose joust
+		if (ownCard == null) {
+			won = false;
+			log("Jousting LOST - no minion card left");
+		} else {
+			Player opponent = context.getOpponent(player);
+			Card opponentCard = opponent.getDeck().getRandomOfType(CardType.MINION);
+			// opponent has no minions left in deck - automatically win joust
+			if (opponentCard == null) {
+				won = true;
+				log("Jousting WON - opponent has no minion card left");
+			} else {
+				// both players have minion cards left, the initiator needs to have the one with
+				// higher mana cost to win the joust
+				won = ownCard.getBaseManaCost() > opponentCard.getBaseManaCost();
+				
+				log("Jousting {} - {} vs. {}", won ? "WON" : "LOST", ownCard, opponentCard);
+			}
+		}
+		context.fireGameEvent(new JoustEvent(context, player.getId(), won));
+		return won;
 	}
 
 	public void useHeroPower(int playerId) {

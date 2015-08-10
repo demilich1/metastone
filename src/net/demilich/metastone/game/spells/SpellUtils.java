@@ -34,10 +34,6 @@ public class SpellUtils {
 		context.getLogic().castSpell(player.getId(), spell, sourceReference, targetReference);
 	}
 
-	public static Card drawFromDeck(GameContext context, Player player) {
-		return context.getLogic().drawCard(player.getId());
-	}
-
 	public static boolean evaluateOperation(Operation operation, int actualValue, int targetValue) {
 		switch (operation) {
 		case EQUAL:
