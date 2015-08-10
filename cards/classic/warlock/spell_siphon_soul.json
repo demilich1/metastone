@@ -13,7 +13,7 @@
 			"class": "DestroySpell"
 		},
 		"spell2": {
-			"class": "HealingSpell",
+			"class": "HealSpell",
 			"value": 3,
 			"target": "FRIENDLY_HERO"
 		}

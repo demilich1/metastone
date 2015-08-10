@@ -7,7 +7,7 @@
 			"targetPlayer": "SELF"
 		},
 		"spell": {
-			"class": "HealingSpell",
+			"class": "HealSpell",
 			"value": 6,
 			"target": "ALL_CHARACTERS",
 			"randomTarget": true,

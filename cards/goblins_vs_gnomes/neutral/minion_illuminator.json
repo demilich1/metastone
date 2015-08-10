@@ -10,7 +10,7 @@
 			}
 		},
 		"spell": {
-			"class": "HealingSpell",
+			"class": "HealSpell",
 			"value": 4,
 			"target": "FRIENDLY_HERO"
 		}

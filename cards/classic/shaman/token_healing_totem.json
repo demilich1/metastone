@@ -7,7 +7,7 @@
 			"class": "TurnEndTrigger"
 		},
 		"spell": {
-			"class": "HealingSpell",
+			"class": "HealSpell",
 			"value": 1,
 			"target": "FRIENDLY_MINIONS"
 		}

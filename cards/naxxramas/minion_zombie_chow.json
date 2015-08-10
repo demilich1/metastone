@@ -2,7 +2,7 @@
 	"baseAttack": 2,
 	"baseHp": 3,
 	"deathrattle": {
-		"class": "HealingSpell",
+		"class": "HealSpell",
 		"value": 5,
 		"target": "ENEMY_HERO"
 	},

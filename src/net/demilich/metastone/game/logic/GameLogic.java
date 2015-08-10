@@ -634,10 +634,7 @@ public class GameLogic implements Cloneable {
 			if (!costModifier.appliesTo(card)) {
 				continue;
 			}
-			manaCost += costModifier.process(card);
-			if (costModifier.getMinValue() > minValue) {
-				minValue = costModifier.getMinValue();
-			}
+			manaCost = costModifier.process(card, manaCost);
 		}
 		manaCost = MathUtils.clamp(manaCost, minValue, Integer.MAX_VALUE);
 		return manaCost;
@@ -1337,7 +1334,8 @@ public class GameLogic implements Cloneable {
 	public void useHeroPower(int playerId) {
 		Player player = context.getPlayer(playerId);
 		HeroPower power = player.getHero().getHeroPower();
-		modifyCurrentMana(playerId, -power.getManaCost(context, player));
+		int modifiedManaCost = getModifiedManaCost(player, power);
+		modifyCurrentMana(playerId, -modifiedManaCost);
 		log("{} uses {}", player.getName(), power);
 		power.setUsed(true);
 		player.getHero().modifyAttribute(Attribute.HERO_POWER_USED, +1);

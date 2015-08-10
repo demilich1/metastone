@@ -10,7 +10,7 @@
 	"spell": {
 		"class": "MetaSpell",
 		"spell1": {
-			"class": "HealingSpell",
+			"class": "HealSpell",
 			"value": 8
 		},
 		"spell2": {

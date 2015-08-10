@@ -3,7 +3,7 @@
 	"baseHp": 5,
 	"battlecry": {
 		"spell": {
-			"class": "HealingSpell",
+			"class": "HealSpell",
 			"value": 2,
 			"target": "FRIENDLY_CHARACTERS"
 		},

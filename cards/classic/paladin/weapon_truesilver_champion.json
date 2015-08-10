@@ -17,7 +17,7 @@
 			"actionType": "PHYSICAL_ATTACK"
 		},
 		"spell": {
-			"class": "HealingSpell",
+			"class": "HealSpell",
 			"target": "FRIENDLY_HERO",
 			"value": 2
 		}

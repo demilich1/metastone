@@ -151,8 +151,12 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 		expired = true;
 	}
 
-	public int process(Card card) {
-		return desc.getInt(CardCostModifierArg.VALUE);
+	public int process(Card card, int currentManaCost) {
+		if (desc.contains(CardCostModifierArg.FIXED_VALUE)) {
+			return desc.getInt(CardCostModifierArg.FIXED_VALUE);
+		}
+		int modifiedManaCost = currentManaCost - desc.getInt(CardCostModifierArg.VALUE);
+		return modifiedManaCost;
 	}
 
 	@Override

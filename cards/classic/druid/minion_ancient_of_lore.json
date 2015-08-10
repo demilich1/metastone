@@ -10,7 +10,7 @@
 	},
 	"option2": {
 		"spell": {
-			"class": "HealingSpell",
+			"class": "HealSpell",
 			"value": 5
 		},
 		"targetSelection": "ANY",

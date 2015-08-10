@@ -14,7 +14,7 @@
 			"value": 5
 		},
 		"spell2": {
-			"class": "HealingSpell",
+			"class": "HealSpell",
 			"value": 5,
 			"target": "FRIENDLY_HERO"
 		}

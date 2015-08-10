@@ -7,7 +7,7 @@
 			"worksOnHero": true
 		},
 		"spell": {
-			"class": "HealingSpell",
+			"class": "HealSpell",
 			"valueProvider": {
 				"class": "AttributeValueProvider",
 				"target": "SELF",

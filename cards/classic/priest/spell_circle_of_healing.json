@@ -8,7 +8,7 @@
 	"baseManaCost": 0,
 	"targetSelection": "NONE",
 	"spell": {
-		"class": "HealingSpell",
+		"class": "HealSpell",
 		"value": 4,
 		"target": "ALL_MINIONS"
 	},

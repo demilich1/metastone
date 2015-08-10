@@ -12,14 +12,14 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.targeting.EntityReference;
 
-public class HealingSpell extends Spell {
+public class HealSpell extends Spell {
 
 	public static SpellDesc create(EntityReference target, int healing) {
 		return create(target, healing, false);
 	}
 
 	public static SpellDesc create(EntityReference target, int healing, boolean randomTarget) {
-		Map<SpellArg, Object> arguments = SpellDesc.build(HealingSpell.class);
+		Map<SpellArg, Object> arguments = SpellDesc.build(HealSpell.class);
 		arguments.put(SpellArg.VALUE, healing);
 		arguments.put(SpellArg.TARGET, target);
 		if (randomTarget) {

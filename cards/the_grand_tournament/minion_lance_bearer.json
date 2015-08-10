@@ -1,0 +1,25 @@
+{
+  "baseAttack": 1,
+  "baseHp": 2,
+  "battlecry": {
+    "spell": {
+      "class": "BuffSpell",
+	  "attackBonus" : 2
+    },
+    "targetSelection": "FRIENDLY_MINIONS",
+    "resolvedLate": false
+  },
+  "id": "minion_lance_bearer",
+  "name": "Lance Bearer",
+  "description": "Battlecry: Give a friendly minion +2 Attack.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "COMMON",
+  "set": "THE_GRAND_TOURNAMENT",
+  "baseManaCost": 2,
+  "collectible": true,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "fileFormatVersion": 1
+}

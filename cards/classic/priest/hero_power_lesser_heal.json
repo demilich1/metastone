@@ -7,7 +7,7 @@
 	"heroClass": "PRIEST",
 	"rarity": "FREE",
 	"spell": {
-		"class": "HealingSpell",
+		"class": "HealSpell",
 		"value": 2
 	},
 	"baseManaCost": 2,

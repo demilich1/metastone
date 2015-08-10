@@ -4,7 +4,7 @@
 	"race": "MECH",
 	"battlecry": {
 		"spell": {
-			"class": "HealingSpell",
+			"class": "HealSpell",
 			"value": 8,
 			"target": "FRIENDLY_HERO"
 		},
