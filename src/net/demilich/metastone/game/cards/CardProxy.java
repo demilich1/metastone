@@ -49,7 +49,7 @@ public class CardProxy extends Proxy<GameNotification> {
 		for (CardDesc desc : cardDesc.values()) {
 			Card instance = desc.createInstance();
 			CardCatalogue.add(instance);
-			logger.info("Adding {} to CardCatalogue", instance);
+			logger.debug("Adding {} to CardCatalogue", instance);
 		}
 	}
 

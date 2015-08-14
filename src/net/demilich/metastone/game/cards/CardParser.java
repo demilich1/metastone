@@ -59,7 +59,6 @@ public class CardParser {
 	}
 
 	public CardDesc parseCard(File file) {
-		logger.info("Parsing " + file.getName() + "...");
 		FileReader reader = null;
 		try {
 			reader = new FileReader(file);
