@@ -1,0 +1,23 @@
+{
+	"baseAttack": 1,
+	"baseHp": 1,
+	"battlecry": {
+		"spell": {
+			"class": "DrawCardSpell"
+		},
+		"resolvedLate": false
+	},
+	"id": "minion_novice_engineer",
+	"name": "Novice Engineer",
+	"description": "Battlecry: Draw a card.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"baseManaCost": 2,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

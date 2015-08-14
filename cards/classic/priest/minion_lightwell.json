@@ -1,0 +1,26 @@
+{
+	"baseAttack": 0,
+	"baseHp": 5,
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnStartTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "HealSpell",
+			"value": 3,
+			"target": "FRIENDLY_CHARACTERS",
+			"randomTarget": true
+		}
+	},
+	"id": "minion_lightwell",
+	"name": "Lightwell",
+	"description": "At the start of your turn, restore 3 Health to a damaged friendly character.",
+	"type": "MINION",
+	"heroClass": "PRIEST",
+	"rarity": "RARE",
+	"baseManaCost": 2,
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

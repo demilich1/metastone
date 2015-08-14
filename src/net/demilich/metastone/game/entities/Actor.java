@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
@@ -24,32 +24,32 @@ public abstract class Actor extends Entity {
 	}
 
 	public void addDeathrattle(SpellDesc deathrattleSpell) {
-		if (!hasTag(GameTag.DEATHRATTLES)) {
-			setTag(GameTag.DEATHRATTLES, new ArrayList<SpellDesc>());
+		if (!hasAttribute(Attribute.DEATHRATTLES)) {
+			setAttribute(Attribute.DEATHRATTLES, new ArrayList<SpellDesc>());
 		}
 		getDeathrattles().add(deathrattleSpell);
 	}
 
 	public boolean canAttackThisTurn() {
-		if (hasStatus(GameTag.CANNOT_ATTACK)) {
+		if (hasAttribute(Attribute.CANNOT_ATTACK)) {
 			return false;
 		}
-		if (hasStatus(GameTag.FROZEN)) {
+		if (hasAttribute(Attribute.FROZEN)) {
 			return false;
 		}
-		if (hasStatus(GameTag.SUMMONING_SICKNESS) && !hasStatus(GameTag.CHARGE)) {
+		if (hasAttribute(Attribute.SUMMONING_SICKNESS) && !hasAttribute(Attribute.CHARGE)) {
 			return false;
 		}
-		return getAttack() > 0 && getTagValue(GameTag.NUMBER_OF_ATTACKS) > 0;
+		return getAttack() > 0 && getAttributeValue(Attribute.NUMBER_OF_ATTACKS) > 0;
 	}
 
 	@Override
 	public Actor clone() {
 		Actor clone = (Actor) super.clone();
-		clone.tags = new EnumMap<>(getTags());
+		clone.attributes = new EnumMap<>(getAttributes());
 		clone.spellTrigger = spellTrigger != null ? spellTrigger.clone() : null;
-		if (hasTag(GameTag.DEATHRATTLES)) {
-			clone.removeTag(GameTag.DEATHRATTLES);
+		if (hasAttribute(Attribute.DEATHRATTLES)) {
+			clone.removeAttribute(Attribute.DEATHRATTLES);
 			for (SpellDesc deathrattleSpell : getDeathrattles()) {
 				SpellDesc deathrattleClone = deathrattleSpell.clone();
 				clone.addDeathrattle(deathrattleClone);
@@ -58,20 +58,21 @@ public abstract class Actor extends Entity {
 		return clone;
 	}
 
-	protected boolean displayGameTag(GameTag tag) {
-		return tag == GameTag.CHARGE || tag == GameTag.ENRAGED || tag == GameTag.FROZEN || tag == GameTag.DIVINE_SHIELD
-				|| tag == GameTag.WINDFURY || tag == GameTag.SPELL_POWER || tag == GameTag.STEALTHED || tag == GameTag.TAUNT
-				|| tag == GameTag.CANNOT_ATTACK || tag == GameTag.UNTARGETABLE_BY_SPELLS || tag == GameTag.MEGA_WINDFURY;
+	protected boolean displayGameTag(Attribute tag) {
+		return tag == Attribute.CHARGE || tag == Attribute.ENRAGED || tag == Attribute.FROZEN || tag == Attribute.DIVINE_SHIELD
+				|| tag == Attribute.WINDFURY || tag == Attribute.SPELL_DAMAGE || tag == Attribute.STEALTH || tag == Attribute.TAUNT
+				|| tag == Attribute.CANNOT_ATTACK || tag == Attribute.UNTARGETABLE_BY_SPELLS || tag == Attribute.MEGA_WINDFURY;
 	}
 
 	public int getAttack() {
-		int attack = getTagValue(GameTag.ATTACK) + getTagValue(GameTag.ATTACK_BONUS) + getTagValue(GameTag.AURA_ATTACK_BONUS)
-				+ getTagValue(GameTag.TEMPORARY_ATTACK_BONUS) + getTagValue(GameTag.CONDITIONAL_ATTACK_BONUS);
+		int attack = getAttributeValue(Attribute.ATTACK) + getAttributeValue(Attribute.ATTACK_BONUS)
+				+ getAttributeValue(Attribute.AURA_ATTACK_BONUS) + getAttributeValue(Attribute.TEMPORARY_ATTACK_BONUS)
+				+ getAttributeValue(Attribute.CONDITIONAL_ATTACK_BONUS);
 		return attack;
 	}
 
 	public BattlecryAction getBattlecry() {
-		return (BattlecryAction) getTag(GameTag.BATTLECRY);
+		return (BattlecryAction) getAttribute(Attribute.BATTLECRY);
 	}
 
 	public CardCostModifier getCardCostModifier() {
@@ -80,19 +81,19 @@ public abstract class Actor extends Entity {
 
 	@SuppressWarnings("unchecked")
 	public List<SpellDesc> getDeathrattles() {
-		return (List<SpellDesc>) getTag(GameTag.DEATHRATTLES);
+		return (List<SpellDesc>) getAttribute(Attribute.DEATHRATTLES);
 	}
 
 	public int getHp() {
-		return getTagValue(GameTag.HP);
+		return getAttributeValue(Attribute.HP);
 	}
 
 	public int getMaxHp() {
-		return getTagValue(GameTag.MAX_HP) + getTagValue(GameTag.HP_BONUS);
+		return getAttributeValue(Attribute.MAX_HP) + getAttributeValue(Attribute.HP_BONUS);
 	}
 
 	public Race getRace() {
-		return (Race) getTag(GameTag.RACE);
+		return (Race) getAttribute(Attribute.RACE);
 	}
 
 	public Card getSourceCard() {
@@ -108,8 +109,8 @@ public abstract class Actor extends Entity {
 	}
 
 	@Override
-	public boolean isDead() {
-		return getHp() < 1 || super.isDead();
+	public boolean isDestroyed() {
+		return getHp() < 1 || super.isDestroyed();
 	}
 
 	public boolean isWounded() {
@@ -117,32 +118,32 @@ public abstract class Actor extends Entity {
 	}
 
 	public void modifyAuraHpBonus(int value) {
-		modifyTag(GameTag.AURA_HP_BONUS, value);
-		modifyTag(GameTag.HP, value);
+		modifyAttribute(Attribute.AURA_HP_BONUS, value);
+		modifyAttribute(Attribute.HP, value);
 	}
 
 	public void modifyHpBonus(int value) {
-		modifyTag(GameTag.HP_BONUS, value);
-		modifyTag(GameTag.HP, value);
+		modifyAttribute(Attribute.HP_BONUS, value);
+		modifyAttribute(Attribute.HP, value);
 	}
 
 	public void setAttack(int value) {
-		setTag(GameTag.ATTACK, value);
+		setAttribute(Attribute.ATTACK, value);
 	}
 
 	public void setBaseAttack(int value) {
-		setTag(GameTag.BASE_ATTACK, value);
+		setAttribute(Attribute.BASE_ATTACK, value);
 		setAttack(value);
 	}
 
 	public void setBaseHp(int value) {
-		setTag(GameTag.BASE_HP, value);
+		setAttribute(Attribute.BASE_HP, value);
 		setMaxHp(value);
 		setHp(value);
 	}
 
 	public void setBattlecry(BattlecryAction battlecry) {
-		setTag(GameTag.BATTLECRY, battlecry);
+		setAttribute(Attribute.BATTLECRY, battlecry);
 	}
 
 	public void setCardCostModifier(CardCostModifier cardCostModifier) {
@@ -150,11 +151,11 @@ public abstract class Actor extends Entity {
 	}
 
 	public void setHp(int value) {
-		setTag(GameTag.HP, value);
+		setAttribute(Attribute.HP, value);
 	}
 
 	public void setMaxHp(int value) {
-		setTag(GameTag.MAX_HP, value);
+		setAttribute(Attribute.MAX_HP, value);
 	}
 
 	@Override
@@ -166,7 +167,7 @@ public abstract class Actor extends Entity {
 	}
 
 	public void setRace(Race race) {
-		setTag(GameTag.RACE, race);
+		setAttribute(Attribute.RACE, race);
 	}
 
 	public void setSpellTrigger(SpellTrigger spellTrigger) {
@@ -178,7 +179,7 @@ public abstract class Actor extends Entity {
 		String result = "[" + getEntityType() + " '" + getName() + "'id:" + getId() + " ";
 		result += getAttack() + "/" + getHp();
 		String prefix = " ";
-		for (GameTag tag : getTags().keySet()) {
+		for (Attribute tag : getAttributes().keySet()) {
 			if (displayGameTag(tag)) {
 				result += prefix + tag;
 				prefix = ", ";

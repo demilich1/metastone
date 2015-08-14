@@ -1,0 +1,28 @@
+{
+	"baseAttack": 8,
+	"baseHp": 8,
+	"id": "minion_molten_giant",
+	"name": "Molten Giant",
+	"manaCostModifier": {
+		"class": "AlgebraicValueProvider",
+		"valueProvider1": {
+			"class": "AttributeValueProvider",
+			"target": "FRIENDLY_HERO",
+			"attribute": "MAX_HP"
+		},
+		"valueProvider2": {
+			"class": "AttributeValueProvider",
+			"target": "FRIENDLY_HERO",
+			"attribute": "HP"
+		},
+		"operation": "SUBTRACT"
+	},
+	"description": "Costs (1) less for each damage your hero has taken.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"baseManaCost": 20,
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

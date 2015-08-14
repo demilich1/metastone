@@ -10,7 +10,7 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class MetaSpell extends Spell {
-	
+
 	public static SpellDesc create(EntityReference target, SpellDesc spell1, SpellDesc spell2) {
 		return create(target, spell1, spell2, null, false);
 	}
@@ -18,7 +18,7 @@ public class MetaSpell extends Spell {
 	public static SpellDesc create(EntityReference target, SpellDesc spell1, SpellDesc spell2, boolean randomTarget) {
 		return create(target, spell1, spell2, null, randomTarget);
 	}
-	
+
 	public static SpellDesc create(EntityReference target, SpellDesc spell1, SpellDesc spell2, SpellDesc spell3, boolean randomTarget) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(MetaSpell.class);
 		arguments.put(SpellArg.TARGET, target);
@@ -59,13 +59,8 @@ public class MetaSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		EntityReference sourceReference = source != null ? source.getReference() : null;
 		for (SpellDesc spell : getSpells(desc)) {
-			EntityReference targetReference = spell.getTarget();
-			if (targetReference == null && target != null) {
-				targetReference = target.getReference();
-			}
-			context.getLogic().castSpell(player.getId(), spell, sourceReference, targetReference);
+			SpellUtils.castChildSpell(context, player, spell, source, target);
 		}
 	}
 

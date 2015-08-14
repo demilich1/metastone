@@ -1,0 +1,25 @@
+{
+	"baseAttack": 3,
+	"baseHp": 3,
+	"battlecry": {
+		"spell": {
+			"class": "DamageSpell",
+			"value": 2
+		},
+		"condition": {
+			"class": "ComboCondition"
+		},
+		"targetSelection": "ANY",
+		"resolvedLate": false
+	},
+	"id": "minion_si7_agent",
+	"name": "SI:7 Agent",
+	"description": "Combo: Deal 2 damage.",
+	"type": "MINION",
+	"heroClass": "ROGUE",
+	"rarity": "RARE",
+	"baseManaCost": 3,
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

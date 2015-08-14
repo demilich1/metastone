@@ -11,7 +11,7 @@ import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
 public class BetrayalSpell extends Spell {
-	
+
 	public static SpellDesc create() {
 		Map<SpellArg, Object> arguments = SpellDesc.build(BetrayalSpell.class);
 		return new SpellDesc(arguments);
@@ -24,5 +24,5 @@ public class BetrayalSpell extends Spell {
 			context.getLogic().damage(player, adjacentMinion, attacker.getAttack(), attacker);
 		}
 	}
-	
+
 }

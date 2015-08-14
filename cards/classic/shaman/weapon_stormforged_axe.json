@@ -1,0 +1,17 @@
+{
+	"name": "Stormforged Axe",
+	"description": "Overload: (1)",
+	"collectible": true,
+	"id": "weapon_stormforged_axe",
+	"type": "WEAPON",
+	"rarity": "COMMON",
+	"heroClass": "SHAMAN",
+	"baseManaCost": 2,
+	"damage": 2,
+	"durability": 3,
+	"attributes": {
+		"OVERLOAD": 1
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

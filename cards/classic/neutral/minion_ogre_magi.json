@@ -1,0 +1,16 @@
+{
+	"name": "Ogre Magi",
+	"description": "Spell Damage +1",
+	"id": "minion_ogre_magi",
+	"type": "MINION",
+	"rarity": "FREE",
+	"heroClass": "ANY",
+	"baseManaCost": 4,
+	"baseAttack": 4,
+	"baseHp": 4,
+	"attributes": {
+		"SPELL_DAMAGE": 1
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

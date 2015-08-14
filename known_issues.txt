@@ -7,14 +7,14 @@ Clicking "Stop" when selecting a Battlecry in Sandbox Mode crashes the program.
 Feature Request: There is currently no way to go back when in the Deck Creation screen without saving the current deck.
 
 Ice Block does not stop lethal damage
-Bot AI:
-Priest attempts to heal self with Auchenai on board
-Bot misses lethal with weapons in hand or equipped
-Bot Shivs self instead of enemy/enemy minion
+
 Suggestions:
 Cards in deck counter
-Secrets display when hovered over (Mad scientists?)
 Milled cards displayed somewhere
 Method of conceding or ending match
 
 Buffed weapons do not display their stats in green
+
+Check impact of mana cost modifiers on "Choose One" spell cards
+Check impact of spellpower on "Choose One" spell cards
+Check if it is possible to remove CARD_LOCATION from SpellArg and introduce EntityReference.OPPONENT_HAND, etc (could also be used to target all cards in hand for example)

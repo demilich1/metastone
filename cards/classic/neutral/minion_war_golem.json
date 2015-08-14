@@ -1,0 +1,12 @@
+{
+	"name": "War Golem",
+	"id": "minion_war_golem",
+	"type": "MINION",
+	"rarity": "FREE",
+	"heroClass": "ANY",
+	"baseManaCost": 7,
+	"baseAttack": 7,
+	"baseHp": 7,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

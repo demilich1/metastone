@@ -2,8 +2,8 @@ package net.demilich.metastone.game.spells;
 
 import java.util.Map;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.cards.CardType;
@@ -45,7 +45,7 @@ public class PutRandomMinionOnBoardSpell extends Spell {
 		if (race == null) {
 			minionCard = (MinionCard) collection.getRandomOfType(CardType.MINION);
 		} else {
-			minionCard = (MinionCard) SpellUtils.getRandomCard(collection, card -> card.getTag(GameTag.RACE) == race);
+			minionCard = (MinionCard) SpellUtils.getRandomCard(collection, card -> card.getAttribute(Attribute.RACE) == race);
 		}
 
 		if (minionCard == null) {

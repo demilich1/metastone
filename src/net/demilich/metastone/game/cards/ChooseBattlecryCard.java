@@ -1,25 +1,39 @@
 package net.demilich.metastone.game.cards;
 
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.actions.PlayMinionCardAction;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.cards.desc.ChooseBattlecryCardDesc;
+import net.demilich.metastone.game.spells.desc.BattlecryDesc;
 
-public abstract class ChooseBattlecryCard extends MinionCard implements IChooseOneCard {
+public class ChooseBattlecryCard extends MinionCard implements IChooseOneCard {
 
-	public ChooseBattlecryCard(String name, int baseAttack, int baseHp, Rarity rarity, HeroClass classRestriction, int manaCost) {
-		super(name, baseAttack, baseHp, rarity, classRestriction, manaCost);
-		setTag(GameTag.CHOOSE_ONE);
+	private final BattlecryDesc battlecryOption1;
+	private final BattlecryDesc battlecryOption2;
+
+	public ChooseBattlecryCard(ChooseBattlecryCardDesc desc) {
+		super(desc);
+		this.battlecryOption1 = desc.option1;
+		this.battlecryOption2 = desc.option2;
+		setAttribute(Attribute.CHOOSE_ONE);
 	}
 
-	protected abstract String getAction1Suffix();
+	private String getAction1Suffix() {
+		return battlecryOption1.description;
+	}
 
-	protected abstract String getAction2Suffix();
+	private String getAction2Suffix() {
+		return battlecryOption2.description;
+	}
 
-	protected abstract BattlecryAction getBattlecry1();
+	private BattlecryAction getBattlecry1() {
+		return BattlecryAction.createBattlecry(battlecryOption1.spell, battlecryOption1.getTargetSelection());
+	}
 
-	protected abstract BattlecryAction getBattlecry2();
+	private BattlecryAction getBattlecry2() {
+		return BattlecryAction.createBattlecry(battlecryOption2.spell, battlecryOption2.getTargetSelection());
+	}
 
 	@Override
 	public PlayCardAction playOption1() {

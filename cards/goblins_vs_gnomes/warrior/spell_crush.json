@@ -1,0 +1,28 @@
+{
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "DestroySpell"
+	},
+	"manaCostModifier": {
+		"class": "ConditionalValueProvider",
+		"condition": {
+			"class": "HasEntityCondition",
+			"target": "FRIENDLY_MINIONS",
+			"filter": {
+				"class": "DamagedFilter"
+			}
+		},
+		"ifTrue": 4,
+		"ifFalse": 0
+	},
+	"id": "spell_crush",
+	"name": "Crush",
+	"description": "Destroy a minion. If you have a damaged minion, this costs (4) less.",
+	"type": "SPELL",
+	"heroClass": "WARRIOR",
+	"rarity": "EPIC",
+	"baseManaCost": 7,
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,31 @@
+{
+	"baseAttack": 9,
+	"baseHp": 9,
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger",
+			"targetPlayer": "BOTH",
+			"condition": {
+				"class": "MinionCountCondition",
+				"targetPlayer": "OWNER",
+				"operation": "LESS",
+				"value": 2
+			}
+		},
+		"spell": {
+			"class": "DestroySpell",
+			"target": "SELF"
+		}
+	},
+	"race": "MECH",
+	"id": "minion_anima_golem",
+	"name": "Anima Golem",
+	"description": "At the end of each turn, destroy this minion if it's your only one.",
+	"type": "MINION",
+	"heroClass": "WARLOCK",
+	"rarity": "EPIC",
+	"baseManaCost": 6,
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

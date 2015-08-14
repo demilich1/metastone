@@ -1,33 +1,32 @@
 package net.demilich.metastone.tests;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.actions.PhysicalAttackAction;
 import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.cards.MinionCard;
-import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.WeaponCard;
-import net.demilich.metastone.game.cards.concrete.neutral.TheCoin;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
-import net.demilich.metastone.game.entities.weapons.Weapon;
 import net.demilich.metastone.game.spells.BuffHeroSpell;
 import net.demilich.metastone.game.spells.DamageSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
 public class BasicTests extends TestBase {
 
-	private TheCoin getTheCoin(CardCollection cards) {
+	private Card getTheCoin(CardCollection cards) {
 		for (Card card : cards) {
-			if (card instanceof TheCoin) {
-				return (TheCoin) card;
+			if (card.getCardId().equalsIgnoreCase("spell_the_coin")) {
+				return card;
 			}
 		}
 		return null;
@@ -114,7 +113,7 @@ public class BasicTests extends TestBase {
 
 		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp() - defender.getAttack());
 		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - attacker.getAttack());
-		Assert.assertEquals(defender.isDead(), true);
+		Assert.assertEquals(defender.isDestroyed(), true);
 
 		Assert.assertEquals(mage.getMinions().size(), 1);
 		Assert.assertEquals(warrior.getMinions().size(), 0);
@@ -134,7 +133,7 @@ public class BasicTests extends TestBase {
 		Assert.assertEquals(minion.getName(), devMonster.getName());
 		Assert.assertEquals(minion.getAttack(), 1);
 		Assert.assertEquals(minion.getHp(), 1);
-		Assert.assertEquals(minion.isDead(), false);
+		Assert.assertEquals(minion.isDestroyed(), false);
 
 		MinionCard devMonster2 = new TestMinionCard(2, 2);
 		context.getLogic().receiveCard(mage.getId(), devMonster2);
@@ -155,7 +154,7 @@ public class BasicTests extends TestBase {
 		Player mage = context.getPlayer1();
 		Player warrior = context.getPlayer2();
 
-		TheCoin theCoin = getTheCoin(mage.getHand());
+		Card theCoin = getTheCoin(mage.getHand());
 		Assert.assertEquals(theCoin, null);
 		theCoin = getTheCoin(warrior.getHand());
 		Assert.assertNotEquals(theCoin, null);
@@ -167,13 +166,7 @@ public class BasicTests extends TestBase {
 		Player player = context.getPlayer1();
 		Hero warrior = player.getHero();
 
-		WeaponCard weaponCard = new WeaponCard("Test Weapon", Rarity.FREE, HeroClass.ANY, 0) {
-
-			@Override
-			public Weapon getWeapon() {
-				return createWeapon(2, 2);
-			}
-		};
+		WeaponCard weaponCard = (WeaponCard) CardCatalogue.getCardById("weapon_battle_axe");
 
 		context.setActivePlayer(player.getId());
 		context.getLogic().startTurn(player.getId());

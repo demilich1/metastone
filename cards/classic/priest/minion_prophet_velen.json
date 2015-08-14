@@ -1,0 +1,17 @@
+{
+	"baseAttack": 7,
+	"baseHp": 7,
+	"id": "minion_prophet_velen",
+	"name": "Prophet Velen",
+	"description": "Double the damage and healing of your spells and Hero Power.",
+	"type": "MINION",
+	"heroClass": "PRIEST",
+	"rarity": "LEGENDARY",
+	"baseManaCost": 7,
+	"collectible": true,
+	"attributes": {
+		"SPELL_AMPLIFY_MULTIPLIER": 1
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

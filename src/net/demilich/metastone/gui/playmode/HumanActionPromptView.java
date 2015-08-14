@@ -100,8 +100,8 @@ public class HumanActionPromptView extends VBox {
 		button.setTextAlignment(TextAlignment.CENTER);
 		// only one action with no target selection or summon with no other
 		// minion on board
-		if (actionGroup.getActionsInGroup().size() == 1
-				&& (actionGroup.getPrototype().getTargetRequirement() == TargetSelection.NONE || actionGroup.getPrototype().getActionType() == ActionType.SUMMON)) {
+		if (actionGroup.getActionsInGroup().size() == 1 && (actionGroup.getPrototype().getTargetRequirement() == TargetSelection.NONE
+				|| actionGroup.getPrototype().getActionType() == ActionType.SUMMON)) {
 			button.setOnAction(event -> {
 				options.getBehaviour().onActionSelected(actionGroup.getPrototype());
 				setVisible(false);

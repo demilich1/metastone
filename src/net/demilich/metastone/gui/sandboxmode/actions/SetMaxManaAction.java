@@ -15,7 +15,7 @@ public class SetMaxManaAction extends GameAction {
 		this.mana = mana;
 		setTargetRequirement(TargetSelection.NONE);
 	}
-	
+
 	@Override
 	public void execute(GameContext context, int playerId) {
 		Player player = context.getPlayer(targetPlayerId);
@@ -31,6 +31,5 @@ public class SetMaxManaAction extends GameAction {
 	public boolean isSameActionGroup(GameAction anotherAction) {
 		return false;
 	}
-	
 
 }

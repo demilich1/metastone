@@ -1,0 +1,28 @@
+{
+	"baseAttack": 1,
+	"baseHp": 5,
+	"trigger": {
+		"eventTrigger": {
+			"class": "MinionDeathTrigger",
+			"targetPlayer": "SELF",
+			"race": "MECH"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"attackBonus": 2,
+			"hpBonus": 2,
+			"target": "SELF"
+		}
+	},
+	"race": "MECH",
+	"id": "minion_junkbot",
+	"name": "Junkbot",
+	"description": "Whenever a friendly Mech dies, gain +2/+2.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"baseManaCost": 5,
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

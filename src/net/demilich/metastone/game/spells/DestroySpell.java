@@ -16,21 +16,21 @@ public class DestroySpell extends Spell {
 	public static SpellDesc create() {
 		return create(null);
 	}
-	
+
 	public static SpellDesc create(EntityReference target) {
 		return create(target, false);
 	}
-	
+
 	public static SpellDesc create(EntityReference target, boolean randomTarget) {
 		return create(target, null, randomTarget);
 	}
-	
+
 	public static SpellDesc create(EntityReference target, Predicate<Entity> targetFilter, boolean randomTarget) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(DestroySpell.class);
 		arguments.put(SpellArg.TARGET, target);
 		arguments.put(SpellArg.RANDOM_TARGET, randomTarget);
 		if (targetFilter != null) {
-			arguments.put(SpellArg.ENTITY_FILTER, targetFilter);
+			arguments.put(SpellArg.FILTER, targetFilter);
 		}
 		return new SpellDesc(arguments);
 	}

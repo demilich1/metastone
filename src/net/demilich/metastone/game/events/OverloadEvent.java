@@ -22,7 +22,7 @@ public class OverloadEvent extends GameEvent {
 		return GameEventType.OVERLOAD;
 	}
 
-	public int getPlayerId() {
+	public int getPlayer() {
 		return playerId;
 	}
 

@@ -1,0 +1,34 @@
+{
+	"baseAttack": 1,
+	"baseHp": 2,
+	"battlecry": {
+		"spell": {
+			"class": "AddSpellTriggerSpell",
+			"trigger": {
+				"eventTrigger": {
+					"class": "TurnEndTrigger"
+				},
+				"spell": {
+					"class": "SummonCopySpell",
+					"target": "SELF"
+				},
+				"oneTime": true
+			},
+			"target": "SELF"
+		},
+		"resolvedLate": false
+	},
+	"id": "minion_echoing_ooze",
+	"name": "Echoing Ooze",
+	"description": "Battlecry: Summon an exact copy of this minion at the end of the turn.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"baseManaCost": 2,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"set": "NAXXRAMAS",
+	"fileFormatVersion": 1
+}

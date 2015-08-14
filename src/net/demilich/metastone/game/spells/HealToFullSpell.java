@@ -12,7 +12,7 @@ import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.utils.MathUtils;
 
 public class HealToFullSpell extends Spell {
-	
+
 	public static SpellDesc create() {
 		return create(null);
 	}

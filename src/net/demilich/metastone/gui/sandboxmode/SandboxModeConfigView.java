@@ -50,11 +50,11 @@ public class SandboxModeConfigView extends BorderPane {
 		startButton.setOnAction(this::handleStartButton);
 		backButton.setOnAction(this::handleBackButton);
 	}
-	
+
 	private void handleBackButton(ActionEvent event) {
 		ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU);
 	}
-	
+
 	private void handleStartButton(ActionEvent event) {
 		GameConfig gameConfig = new GameConfig();
 		gameConfig.setNumberOfGames(1);

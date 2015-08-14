@@ -1,0 +1,17 @@
+{
+	"targetSelection": "ANY",
+	"id": "hero_power_fireblast",
+	"name": "Fireblast",
+	"description": "Deal 1 damage.",
+	"type": "HERO_POWER",
+	"heroClass": "MAGE",
+	"rarity": "FREE",
+	"spell": {
+		"class": "DamageSpell",
+		"value": 1
+	},
+	"baseManaCost": 2,
+	"collectible": false,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

@@ -1,44 +1,87 @@
 package net.demilich.metastone.tests;
-import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
-import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.cards.SpellCard;
-import net.demilich.metastone.game.cards.concrete.neutral.BloodsailRaider;
-import net.demilich.metastone.game.cards.concrete.neutral.KnifeJuggler;
-import net.demilich.metastone.game.cards.concrete.neutral.MurlocRaider;
-import net.demilich.metastone.game.cards.concrete.neutral.WildPyromancer;
-import net.demilich.metastone.game.cards.concrete.paladin.Equality;
-import net.demilich.metastone.game.cards.concrete.rogue.Conceal;
-import net.demilich.metastone.game.cards.concrete.warrior.ArcaniteReaper;
-import net.demilich.metastone.game.cards.concrete.warrior.WarsongCommander;
-import net.demilich.metastone.game.entities.Actor;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
-import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.spells.BuffSpell;
-import net.demilich.metastone.game.spells.SilenceSpell;
-import net.demilich.metastone.game.spells.TemporaryAttackSpell;
-import net.demilich.metastone.game.spells.custom.SwapAttackAndHpSpell;
-import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.targeting.EntityReference;
-import net.demilich.metastone.game.targeting.TargetSelection;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCatalogue;
+import net.demilich.metastone.game.cards.MinionCard;
+import net.demilich.metastone.game.cards.SpellCard;
+import net.demilich.metastone.game.entities.Actor;
+import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.spells.SilenceSpell;
+import net.demilich.metastone.game.spells.SwapAttackAndHpSpell;
+import net.demilich.metastone.game.spells.TemporaryAttackSpell;
+import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.targeting.EntityReference;
+import net.demilich.metastone.game.targeting.TargetSelection;
+
 public class CardInteractionTests extends TestBase {
+
+	@Test
+	public void testAttackBuffStacking() {
+		GameContext context = createContext(HeroClass.HUNTER, HeroClass.WARRIOR);
+		Player hunter = context.getPlayer1();
+
+		// summon Ghaz'rilla
+		MinionCard gahzrillaCard = (MinionCard) CardCatalogue.getCardById("minion_gahzrilla");
+		Minion gahzrilla = playMinionCard(context, hunter, gahzrillaCard);
+		Assert.assertEquals(gahzrilla.getAttack(), 6);
+		Assert.assertEquals(gahzrilla.getHp(), 9);
+
+		// buff it with 'Charge' spell
+		Card chargeCard = CardCatalogue.getCardById("spell_charge");
+		context.getLogic().receiveCard(hunter.getId(), chargeCard);
+		GameAction action = chargeCard.play();
+		action.setTarget(gahzrilla);
+		context.getLogic().performGameAction(hunter.getId(), action);
+		Assert.assertEquals(gahzrilla.getAttack(), 8);
+		Assert.assertEquals(gahzrilla.getHp(), 9);
+
+		// buff it with 'Cruel Taskmaster' spell
+		Card cruelTaskmasterCard = CardCatalogue.getCardById("minion_cruel_taskmaster");
+		context.getLogic().receiveCard(hunter.getId(), cruelTaskmasterCard);
+		action = cruelTaskmasterCard.play();
+		action.setTarget(gahzrilla);
+		context.getLogic().performGameAction(hunter.getId(), action);
+		Assert.assertEquals(gahzrilla.getAttack(), 20);
+		Assert.assertEquals(gahzrilla.getHp(), 8);
+
+		context.getLogic().destroy((Actor) find(context, "minion_cruel_taskmaster"));
+
+		// buff it with 'Abusive Sergeant' spell
+		Card abusiveSergeant = CardCatalogue.getCardById("minion_abusive_sergeant");
+		context.getLogic().receiveCard(hunter.getId(), abusiveSergeant);
+		action = abusiveSergeant.play();
+		action.setTarget(gahzrilla);
+		context.getLogic().performGameAction(hunter.getId(), action);
+		Assert.assertEquals(gahzrilla.getAttack(), 22);
+		Assert.assertEquals(gahzrilla.getHp(), 8);
+
+		context.endTurn();
+		context.endTurn();
+		Assert.assertEquals(gahzrilla.getAttack(), 20);
+		Assert.assertEquals(gahzrilla.getHp(), 8);
+	}
 
 	@Test
 	public void testKnifeJugglerPlusStealth() {
 		GameContext context = createContext(HeroClass.ROGUE, HeroClass.WARRIOR);
 		Player player = context.getPlayer1();
-		
-		Minion knifeJuggler = playMinionCard(context, player, new KnifeJuggler());
-		playCard(context, player, new Conceal());
+
+		Minion knifeJuggler = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_knife_juggler"));
+		playCard(context, player, CardCatalogue.getCardById("spell_conceal"));
 		// knife juggler should be stealthed
-		Assert.assertTrue(knifeJuggler.hasStatus(GameTag.STEALTHED));
-		// knife juggler should be unstealthed as soon as another minion is played and his trigger fires
+		Assert.assertTrue(knifeJuggler.hasAttribute(Attribute.STEALTH));
+		// knife juggler should be unstealthed as soon as another minion is
+		// played and his trigger fires
 		playCard(context, player, new TestMinionCard(1, 1));
-		Assert.assertFalse(knifeJuggler.hasStatus(GameTag.STEALTHED));
+		Assert.assertFalse(knifeJuggler.hasAttribute(Attribute.STEALTH));
 	}
 
 	@Test
@@ -57,13 +100,15 @@ public class CardInteractionTests extends TestBase {
 		TestMinionCard minionCard = new TestMinionCard(6, 6, 0);
 		playCard(context, player, minionCard);
 
-		// buff test minion
-		SpellDesc buffSpell = BuffSpell.create(EntityReference.FRIENDLY_MINIONS, 1, 1);
-		SpellCard buffSpellCard = new TestSpellCard(buffSpell);
-		buffSpellCard.setTargetRequirement(TargetSelection.NONE);
-		playCard(context, player, buffSpellCard);
-
 		Actor minion = getSingleMinion(player.getMinions());
+
+		// buff test minion
+		SpellCard buffSpellCard = (SpellCard) CardCatalogue.getCardById("spell_bananas");
+		context.getLogic().receiveCard(player.getId(), buffSpellCard);
+		GameAction action = buffSpellCard.play();
+		action.setTarget(minion);
+		context.getLogic().performGameAction(player.getId(), action);
+
 		Assert.assertEquals(minion.getAttack(), 7);
 		Assert.assertEquals(minion.getHp(), 7);
 
@@ -130,15 +175,15 @@ public class CardInteractionTests extends TestBase {
 		Player warrior = context.getPlayer1();
 		warrior.setMana(10);
 
-		playCard(context, warrior, new ArcaniteReaper());
-		playCard(context, warrior, new WarsongCommander());
-		playCard(context, warrior, new MurlocRaider());
+		playCard(context, warrior, CardCatalogue.getCardById("weapon_arcanite_reaper"));
+		playCard(context, warrior, CardCatalogue.getCardById("minion_warsong_commander"));
+		playCard(context, warrior, new TestMinionCard(2, 1, 0));
 
-		Minion bloodsailRaider = playMinionCard(context, warrior, new BloodsailRaider());
-		Assert.assertTrue(bloodsailRaider.hasStatus(GameTag.CHARGE));
+		Minion bloodsailRaider = playMinionCard(context, warrior, (MinionCard) CardCatalogue.getCardById("minion_bloodsail_raider"));
+		Assert.assertTrue(bloodsailRaider.hasAttribute(Attribute.CHARGE));
 		Assert.assertEquals(bloodsailRaider.getAttack(), 7);
 	}
-	
+
 	@Test
 	public void testWildPyroPlusEquality() {
 		GameContext context = createContext(HeroClass.PALADIN, HeroClass.WARRIOR);
@@ -157,8 +202,8 @@ public class CardInteractionTests extends TestBase {
 		Assert.assertEquals(paladin.getMinions().size(), 2);
 		Assert.assertEquals(warrior.getMinions().size(), 4);
 
-		playCard(context, paladin, new WildPyromancer());
-		playCard(context, paladin, new Equality());
+		playCard(context, paladin, CardCatalogue.getCardById("minion_wild_pyromancer"));
+		playCard(context, paladin, CardCatalogue.getCardById("spell_equality"));
 
 		// wild pyromancer + equality should wipe the board if there no
 		// deathrattles

@@ -8,8 +8,8 @@ import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.entities.Actor;
+import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.Hero;
-import net.demilich.metastone.game.entities.heroes.HeroFactory;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.logic.CustomCloneable;
 import net.demilich.metastone.game.statistics.GameStatistics;
@@ -23,9 +23,9 @@ public class Player extends CustomCloneable {
 
 	private final CardCollection deck;
 	private final CardCollection hand = new CardCollection();
-	private final List<Actor> graveyard = new ArrayList<>();
+	private final List<Entity> graveyard = new ArrayList<>();
 	private final List<Minion> minions = new ArrayList<>();
-	private final List<Integer> secrets = new ArrayList<>();
+	private final List<String> secrets = new ArrayList<>();
 
 	private final GameStatistics statistics = new GameStatistics();
 
@@ -62,7 +62,7 @@ public class Player extends CustomCloneable {
 		Deck selectedDeck = config.getDeckForPlay();
 		this.name = config.getName();
 		this.deck = selectedDeck.getCardsCopy();
-		this.setHero(HeroFactory.createHero(selectedDeck.getHeroClass()));
+		this.setHero(config.getHeroCard().createHero());
 		this.deckName = selectedDeck.getName();
 		setBehaviour(config.getBehaviour().clone());
 		setHideCards(config.hideCards());
@@ -92,7 +92,7 @@ public class Player extends CustomCloneable {
 		return deckName;
 	}
 
-	public List<Actor> getGraveyard() {
+	public List<Entity> getGraveyard() {
 		return graveyard;
 	}
 
@@ -128,7 +128,7 @@ public class Player extends CustomCloneable {
 		return "'" + name + "' (" + getHero().getName() + ")";
 	}
 
-	public List<Integer> getSecrets() {
+	public List<String> getSecrets() {
 		return secrets;
 	}
 

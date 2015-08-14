@@ -1,0 +1,19 @@
+{
+	"name": "Acidic Swamp Ooze",
+	"description": "Battlecry: Destroy your opponent's weapon.",
+	"id": "minion_acidic_swamp_ooze",
+	"type": "MINION",
+	"rarity": "FREE",
+	"heroClass": "ANY",
+	"baseManaCost": 2,
+	"baseAttack": 3,
+	"baseHp": 2,
+	"battlecry": {
+		"spell": {
+			"class": "DestroyWeaponSpell",
+			"target": "ENEMY_HERO"
+		}
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

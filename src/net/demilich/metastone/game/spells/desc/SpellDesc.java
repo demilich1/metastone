@@ -4,16 +4,17 @@ import java.util.EnumMap;
 import java.util.Map;
 
 import net.demilich.metastone.game.logic.CustomCloneable;
-import net.demilich.metastone.game.spells.IValueProvider;
 import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.TargetPlayer;
+import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
+import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class SpellDesc extends CustomCloneable {
 
 	public static Map<SpellArg, Object> build(Class<? extends Spell> spellClass) {
 		final Map<SpellArg, Object> arguments = new EnumMap<>(SpellArg.class);
-		arguments.put(SpellArg.SPELL_CLASS, spellClass);
+		arguments.put(SpellArg.CLASS, spellClass);
 		return arguments;
 	}
 
@@ -28,7 +29,7 @@ public class SpellDesc extends CustomCloneable {
 		clone.arguments.put(spellArg, value);
 		return clone;
 	}
-	
+
 	@Override
 	public SpellDesc clone() {
 		SpellDesc clone = new SpellDesc(build(getSpellClass()));
@@ -56,13 +57,17 @@ public class SpellDesc extends CustomCloneable {
 		return arguments.containsKey(spellArg) ? (boolean) get(spellArg) : false;
 	}
 
-	public int getInt(SpellArg spellArg) {
-		return arguments.containsKey(spellArg) ? (int) get(spellArg) : 0;
+	public EntityFilter getEntityFilter() {
+		return (EntityFilter) get(SpellArg.FILTER);
+	}
+
+	public int getInt(SpellArg spellArg, int defaultValue) {
+		return arguments.containsKey(spellArg) ? (int) get(spellArg) : defaultValue;
 	}
 
 	@SuppressWarnings("unchecked")
 	public Class<? extends Spell> getSpellClass() {
-		return (Class<? extends Spell>) arguments.get(SpellArg.SPELL_CLASS);
+		return (Class<? extends Spell>) arguments.get(SpellArg.CLASS);
 	}
 
 	public EntityReference getTarget() {
@@ -74,11 +79,11 @@ public class SpellDesc extends CustomCloneable {
 	}
 
 	public int getValue() {
-		return getInt(SpellArg.VALUE);
+		return getInt(SpellArg.VALUE, 0);
 	}
 
-	public IValueProvider getValueProvider() {
-		return (IValueProvider) get(SpellArg.VALUE_PROVIDER);
+	public ValueProvider getValueProvider() {
+		return (ValueProvider) get(SpellArg.VALUE_PROVIDER);
 	}
 
 	public boolean hasPredefinedTarget() {

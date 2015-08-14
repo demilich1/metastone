@@ -1,0 +1,15 @@
+{
+	"name": "Tracking",
+	"description": "Look at the top three cards of your deck. Draw one and discard the others.",
+	"id": "spell_tracking",
+	"type": "SPELL",
+	"rarity": "FREE",
+	"heroClass": "HUNTER",
+	"baseManaCost": 1,
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "custom.TrackingSpell"
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

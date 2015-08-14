@@ -1,0 +1,25 @@
+{
+	"baseAttack": 2,
+	"baseHp": 8,
+	"trigger": {
+		"eventTrigger": {
+			"class": "DamageCausedTrigger",
+			"worksOnHero": false
+		},
+		"spell": {
+			"class": "DestroySpell",
+			"target": "EVENT_TARGET"
+		}
+	},
+	"race": "BEAST",
+	"id": "minion_maexxna",
+	"name": "Maexxna",
+	"description": "Destroy any minion damaged by this minion.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"baseManaCost": 6,
+	"collectible": true,
+	"set": "NAXXRAMAS",
+	"fileFormatVersion": 1
+}

@@ -6,11 +6,11 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 
 public class HumanMulliganOptions {
-	
+
 	private final Player player;
 	private final HumanBehaviour behaviour;
 	private final List<Card> offeredCards;
-	
+
 	public HumanMulliganOptions(Player player, HumanBehaviour behaviour, List<Card> offeredCards) {
 		this.player = player;
 		this.behaviour = behaviour;

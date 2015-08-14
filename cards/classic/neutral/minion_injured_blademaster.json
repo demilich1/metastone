@@ -1,0 +1,25 @@
+{
+	"baseAttack": 4,
+	"baseHp": 7,
+	"battlecry": {
+		"spell": {
+			"class": "DamageSpell",
+			"value": 4,
+			"target": "SELF"
+		},
+		"resolvedLate": false
+	},
+	"id": "minion_injured_blademaster",
+	"name": "Injured Blademaster",
+	"description": "Battlecry: Deal 4 damage to HIMSELF.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"baseManaCost": 3,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

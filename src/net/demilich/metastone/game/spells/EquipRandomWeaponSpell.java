@@ -29,7 +29,7 @@ public class EquipRandomWeaponSpell extends Spell {
 		WeaponCard weaponCard = (WeaponCard) allWeapons.getRandom();
 		Weapon weapon = weaponCard.getWeapon();
 		weapon.setBattlecry(null);
-		
+
 		context.getLogic().equipWeapon(player.getId(), weapon);
 	}
 

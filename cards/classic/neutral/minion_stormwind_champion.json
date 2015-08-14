@@ -1,0 +1,20 @@
+{
+	"baseAttack": 6,
+	"baseHp": 6,
+	"aura": {
+		"class": "BuffAura",
+		"attackBonus": 1,
+		"hpBonus": 1,
+		"target": "FRIENDLY_MINIONS"
+	},
+	"id": "minion_stormwind_champion",
+	"name": "Stormwind Champion",
+	"description": "Your other minions have +1/+1.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"baseManaCost": 7,
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

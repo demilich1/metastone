@@ -1,0 +1,24 @@
+{
+	"baseAttack": 1,
+	"baseHp": 2,
+	"trigger": {
+		"eventTrigger": {
+			"class": "HealingTrigger"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"attackBonus": 2,
+			"target": "SELF"
+		}
+	},
+	"id": "minion_lightwarden",
+	"name": "Lightwarden",
+	"description": "Whenever a character is healed, gain +2 Attack.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"baseManaCost": 1,
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

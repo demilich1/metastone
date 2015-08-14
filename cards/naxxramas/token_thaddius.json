@@ -1,0 +1,14 @@
+{
+	"baseAttack": 11,
+	"baseHp": 11,
+	"id": "token_thaddius",
+	"name": "Thaddius",
+	"description": "",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"baseManaCost": 10,
+	"collectible": false,
+	"set": "NAXXRAMAS",
+	"fileFormatVersion": 1
+}

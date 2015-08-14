@@ -3,7 +3,7 @@ package net.demilich.metastone.gui.trainingmode;
 import net.demilich.metastone.game.behaviour.threat.FeatureVector;
 
 public class TrainingData {
-	
+
 	private final String deckName;
 	private final FeatureVector featureVector;
 

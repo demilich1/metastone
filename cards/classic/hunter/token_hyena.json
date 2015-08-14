@@ -1,0 +1,14 @@
+{
+	"name": "Hyena",
+	"id": "token_hyena",
+	"type": "MINION",
+	"rarity": "RARE",
+	"heroClass": "HUNTER",
+	"baseManaCost": 2,
+	"baseAttack": 2,
+	"baseHp": 2,
+	"race": "BEAST",
+	"collectible": false,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

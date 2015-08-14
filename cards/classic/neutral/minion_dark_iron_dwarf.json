@@ -1,0 +1,25 @@
+{
+	"baseAttack": 4,
+	"baseHp": 4,
+	"battlecry": {
+		"spell": {
+			"class": "TemporaryAttackSpell",
+			"value": 2
+		},
+		"targetSelection": "MINIONS",
+		"resolvedLate": false
+	},
+	"id": "minion_dark_iron_dwarf",
+	"name": "Dark Iron Dwarf",
+	"description": "Battlecry: Give a minion +2 Attack this turn.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 4,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

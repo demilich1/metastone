@@ -1,0 +1,13 @@
+{
+	"name": "Uther, the Lightbringer",
+	"id": "hero_uther",
+	"type": "HERO",
+	"heroClass": "PALADIN",
+	"rarity": "FREE",
+	"heroPower": "hero_power_reinforce",
+	"collectible": true,
+	"attributes": {
+		"HP": 30,
+		"MAX_HP": 30
+	}
+}

@@ -1,0 +1,26 @@
+{
+	"baseAttack": 1,
+	"baseHp": 7,
+	"passiveTrigger": {
+		"eventTrigger": {
+			"class": "MinionDeathTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "ModifyAttributeSpell",
+			"attribute": "ATTACK_BONUS",
+			"value": 1,
+			"target": "SELF"
+		}
+	},
+	"id": "minion_bolvar_fordragon",
+	"name": "Bolvar Fordragon",
+	"description": "Whenever a friendly minion dies while this in your hand, gain +1 Attack.",
+	"type": "MINION",
+	"heroClass": "PALADIN",
+	"rarity": "LEGENDARY",
+	"baseManaCost": 5,
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

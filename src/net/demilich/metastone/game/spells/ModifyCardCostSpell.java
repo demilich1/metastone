@@ -2,8 +2,8 @@ package net.demilich.metastone.game.spells;
 
 import java.util.Map;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.Entity;
@@ -24,7 +24,7 @@ public class ModifyCardCostSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int value = desc.getValue();
 		for (Card card : player.getHand()) {
-			card.modifyTag(GameTag.MANA_COST_MODIFIER, value);
+			card.modifyAttribute(Attribute.MANA_COST_MODIFIER, value);
 		}
 	}
 

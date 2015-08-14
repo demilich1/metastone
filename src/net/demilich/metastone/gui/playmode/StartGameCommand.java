@@ -1,5 +1,7 @@
 package net.demilich.metastone.gui.playmode;
 
+import de.pferdimanzug.nittygrittymvc.SimpleCommand;
+import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.GameContext;
@@ -7,8 +9,6 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.gui.gameconfig.GameConfig;
 import net.demilich.metastone.gui.gameconfig.PlayerConfig;
-import de.pferdimanzug.nittygrittymvc.SimpleCommand;
-import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
 public class StartGameCommand extends SimpleCommand<GameNotification> {
 

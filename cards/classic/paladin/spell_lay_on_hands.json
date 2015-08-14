@@ -1,0 +1,23 @@
+{
+	"name": "Lay on Hands",
+	"description": "Restore 8 Health. Draw 3 cards.",
+	"id": "spell_lay_on_hands",
+	"type": "SPELL",
+	"rarity": "EPIC",
+	"heroClass": "PALADIN",
+	"baseManaCost": 8,
+	"targetSelection": "ANY",
+	"spell": {
+		"class": "MetaSpell",
+		"spell1": {
+			"class": "HealSpell",
+			"value": 8
+		},
+		"spell2": {
+			"class": "DrawCardSpell",
+			"value": 1
+		}
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

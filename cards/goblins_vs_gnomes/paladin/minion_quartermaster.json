@@ -1,0 +1,30 @@
+{
+	"baseAttack": 2,
+	"baseHp": 5,
+	"battlecry": {
+		"spell": {
+			"class": "BuffSpell",
+			"attackBonus": 2,
+			"hpBonus": 2,
+			"target": "FRIENDLY_MINIONS",
+			"filter": {
+				"class": "SpecificCardFilter",
+				"cardId": "token_silver_hand_recruit"
+			}
+		},
+		"resolvedLate": false
+	},
+	"id": "minion_quartermaster",
+	"name": "Quartermaster",
+	"description": "Battlecry: Give your Silver Hand Recruits +2/+2.",
+	"type": "MINION",
+	"heroClass": "PALADIN",
+	"rarity": "EPIC",
+	"baseManaCost": 5,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

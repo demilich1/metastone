@@ -1,0 +1,18 @@
+{
+	"baseAttack": 2,
+	"baseHp": 2,
+	"race": "MECH",
+	"id": "minion_shielded_minibot",
+	"name": "Shielded Minibot",
+	"description": "Divine Shield",
+	"type": "MINION",
+	"heroClass": "PALADIN",
+	"rarity": "COMMON",
+	"baseManaCost": 2,
+	"collectible": true,
+	"attributes": {
+		"DIVINE_SHIELD": true
+	},
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,17 @@
+{
+	"baseAttack": 3,
+	"baseHp": 5,
+	"id": "token_laughing_sister",
+	"name": "Laughing Sister",
+	"description": "Can't be targeted by spells or Hero Powers.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"baseManaCost": 3,
+	"collectible": false,
+	"attributes": {
+		"UNTARGETABLE_BY_SPELLS": true
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

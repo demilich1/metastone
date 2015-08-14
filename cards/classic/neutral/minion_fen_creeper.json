@@ -1,0 +1,16 @@
+{
+	"name": "Fen Creeper",
+	"description": "Taunt",
+	"id": "minion_fen_creeper",
+	"type": "MINION",
+	"rarity": "COMMON",
+	"heroClass": "ANY",
+	"baseManaCost": 5,
+	"baseAttack": 3,
+	"baseHp": 6,
+	"attributes": {
+		"TAUNT": true
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

@@ -26,6 +26,4 @@ public class KillEvent extends GameEvent {
 		return victim;
 	}
 
-	
-
 }

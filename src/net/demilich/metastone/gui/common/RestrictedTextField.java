@@ -43,7 +43,7 @@ public class RestrictedTextField extends TextField {
 					ignore = false;
 					return;
 				}
-				
+
 				validInput(getText());
 			}
 		});
@@ -74,9 +74,10 @@ public class RestrictedTextField extends TextField {
 	public void setMaxLength(int maxLength) {
 		this.maxLength.set(maxLength);
 	}
-	
+
 	/**
-	 * Sets a regular expression character class which restricts the user input.<br/>
+	 * Sets a regular expression character class which restricts the user input.
+	 * <br/>
 	 * E.g. [0-9] only allows numeric values.
 	 *
 	 * @param restrict
@@ -85,8 +86,8 @@ public class RestrictedTextField extends TextField {
 	public void setRestrict(String restrict) {
 		this.restrict.set(restrict);
 	}
-	
+
 	protected void validInput(String validInput) {
-		
+
 	}
 }

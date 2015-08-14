@@ -1,0 +1,25 @@
+{
+	"targetSelection": "NONE",
+	"id": "spell_poison_seeds",
+	"spell": {
+		"class": "MetaSpell",
+		"spell1": {
+			"class": "InstantDestroySpell"
+		},
+		"spell2": {
+			"class": "SummonSpell",
+			"card": "token_treant",
+			"targetPlayer": "OWNER"
+		},
+		"target": "ALL_MINIONS"
+	},
+	"name": "Poison Seeds",
+	"description": "Destroy all minions and summon 2/2 treants to replace them",
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"baseManaCost": 4,
+	"collectible": true,
+	"set": "NAXXRAMAS",
+	"fileFormatVersion": 1
+}

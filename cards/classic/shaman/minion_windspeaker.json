@@ -1,0 +1,25 @@
+{
+	"baseAttack": 3,
+	"baseHp": 3,
+	"battlecry": {
+		"spell": {
+			"class": "AddAttributeSpell",
+			"attribute": "WINDFURY"
+		},
+		"targetSelection": "FRIENDLY_MINIONS",
+		"resolvedLate": false
+	},
+	"id": "minion_windspeaker",
+	"name": "Windspeaker",
+	"description": "Battlecry: Give a friendly minion Windfury.",
+	"type": "MINION",
+	"heroClass": "SHAMAN",
+	"rarity": "FREE",
+	"baseManaCost": 4,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

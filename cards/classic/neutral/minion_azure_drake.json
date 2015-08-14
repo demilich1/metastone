@@ -1,0 +1,26 @@
+{
+	"baseAttack": 4,
+	"baseHp": 4,
+	"race": "DRAGON",
+	"battlecry": {
+		"spell": {
+			"class": "DrawCardSpell",
+			"value": 1
+		},
+		"targetSelection": "NONE",
+		"resolvedLate": false
+	},
+	"id": "minion_azure_drake",
+	"name": "Azure Drake",
+	"description": "Spell Damage +1. Battlecry: Draw a card.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"baseManaCost": 5,
+	"collectible": true,
+	"attributes": {
+		"SPELL_DAMAGE": 1
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

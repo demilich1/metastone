@@ -1,0 +1,14 @@
+{
+	"name": "Arcanite Reaper",
+	"description": "",
+	"collectible": true,
+	"id": "weapon_arcanite_reaper",
+	"type": "WEAPON",
+	"rarity": "FREE",
+	"heroClass": "WARRIOR",
+	"baseManaCost": 5,
+	"damage": 5,
+	"durability": 2,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

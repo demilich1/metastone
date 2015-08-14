@@ -41,7 +41,8 @@ public class CardReference {
 
 	@Override
 	public String toString() {
-		return String.format("[CardReference playerId:%d cardName:%s cardLocation:%s cardId:%d]", playerId, cardName, location.toString(), cardId);
+		return String.format("[CardReference playerId:%d cardName:%s cardLocation:%s cardId:%d]", playerId, cardName, location.toString(),
+				cardId);
 	}
 
 }

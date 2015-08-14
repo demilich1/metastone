@@ -1,0 +1,13 @@
+{
+	"name": "Malfurion Stormrage",
+	"id": "hero_malfurion",
+	"type": "HERO",
+	"heroClass": "DRUID",
+	"rarity": "FREE",
+	"heroPower": "hero_power_shapeshift",
+	"collectible": true,
+	"attributes": {
+		"HP": 30,
+		"MAX_HP": 30
+	}
+}

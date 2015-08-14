@@ -1,0 +1,16 @@
+{
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "custom.ResurrectSpell"
+	},
+	"id": "spell_resurrect",
+	"name": "Resurrect",
+	"description": "Summon a random friendly minion that died this game.",
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "RARE",
+	"baseManaCost": 2,
+	"collectible": true,
+	"set": "BLACKROCK_MOUNTAIN",
+	"fileFormatVersion": 1
+}

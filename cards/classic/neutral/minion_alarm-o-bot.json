@@ -1,0 +1,29 @@
+{
+	"baseAttack": 0,
+	"baseHp": 3,
+	"race": "MECH",
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnStartTrigger",
+			"targetPlayer": "SELF",
+			"condition": {
+				"class": "HoldsCardCondition",
+				"cardType": "MINION"
+			}
+		},
+		"spell": {
+			"class": "custom.AlarmOBotSpell",
+			"target": "SELF"
+		}
+	},
+	"id": "minion_alarm-o-bot",
+	"name": "Alarm-o-bot",
+	"description": "At the start of your turn, swap this minion with a random one in your hand.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"baseManaCost": 3,
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,29 @@
+{
+	"baseAttack": 5,
+	"baseHp": 5,
+	"option1": {
+		"spell": {
+			"class": "DrawCardSpell",
+			"value": 2
+		},
+		"description": "Draw 2 cards"
+	},
+	"option2": {
+		"spell": {
+			"class": "HealSpell",
+			"value": 5
+		},
+		"targetSelection": "ANY",
+		"description": "Heal for 5"
+	},
+	"id": "minion_ancient_of_lore",
+	"name": "Ancient of Lore",
+	"description": "Choose One - Draw 2 cards; or Restore 5 Health.",
+	"type": "MINION",
+	"heroClass": "DRUID",
+	"rarity": "EPIC",
+	"baseManaCost": 7,
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

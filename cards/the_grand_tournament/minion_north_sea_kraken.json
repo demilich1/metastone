@@ -1,0 +1,22 @@
+{
+  "baseAttack": 9,
+  "baseHp": 7,
+  "battlecry": {
+    "spell": {
+      "class": "DamageSpell",
+	  "value" : 4
+    },
+    "targetSelection": "ANY",
+    "resolvedLate": false
+  },
+  "id": "minion_north_sea_kraken",
+  "name": "North Sea Kraken",
+  "description": "Battlecry: Deal 4 damage.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "COMMON",
+  "set": "THE_GRAND_TOURNAMENT",
+  "baseManaCost": 9,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

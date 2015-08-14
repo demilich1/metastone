@@ -1,0 +1,26 @@
+{
+	"baseAttack": 2,
+	"baseHp": 2,
+	"trigger": {
+		"eventTrigger": {
+			"class": "CardPlayedTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"attackBonus": 1,
+			"hpBonus": 1,
+			"target": "SELF"
+		}
+	},
+	"id": "minion_questing_adventurer",
+	"name": "Questing Adventurer",
+	"description": "Whenever you play a card, gain +1/+1.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"baseManaCost": 3,
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

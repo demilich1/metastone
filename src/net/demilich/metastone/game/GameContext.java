@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
@@ -23,9 +26,6 @@ import net.demilich.metastone.game.spells.trigger.TriggerManager;
 import net.demilich.metastone.game.targeting.CardReference;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.utils.IDisposable;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class GameContext implements Cloneable, IDisposable {
 	public static final int PLAYER_1 = 0;
@@ -142,6 +142,7 @@ public class GameContext implements Cloneable, IDisposable {
 	}
 
 	public void fireGameEvent(GameEvent gameEvent) {
+		fireGameEvent(gameEvent, TriggerLayer.SECRET);
 		fireGameEvent(gameEvent, TriggerLayer.DEFAULT);
 	}
 
@@ -298,7 +299,8 @@ public class GameContext implements Cloneable, IDisposable {
 		init();
 		while (!gameDecided()) {
 			startTurn(activePlayer);
-			while(playTurn());
+			while (playTurn())
+				;
 			if (getTurn() > GameLogic.TURN_LIMIT) {
 				break;
 			}
@@ -369,7 +371,7 @@ public class GameContext implements Cloneable, IDisposable {
 		new RuntimeException().printStackTrace();
 		return null;
 	}
-	
+
 	public Entity resolveSingleTarget(EntityReference targetKey) {
 		if (targetKey == null) {
 			return null;
@@ -377,10 +379,10 @@ public class GameContext implements Cloneable, IDisposable {
 		return targetLogic.findEntity(this, targetKey);
 	}
 
-	public List<Entity> resolveTarget(Player player, Actor source, EntityReference targetKey) {
+	public List<Entity> resolveTarget(Player player, Entity source, EntityReference targetKey) {
 		return targetLogic.resolveTargetKey(this, player, source, targetKey);
 	}
-	
+
 	public void setIgnoreEvents(boolean ignoreEvents) {
 		this.ignoreEvents = ignoreEvents;
 	}
@@ -419,7 +421,7 @@ public class GameContext implements Cloneable, IDisposable {
 				builder.append('\n');
 			}
 			builder.append("Secrets:\n");
-			for (int secretId : player.getSecrets()) {
+			for (String secretId : player.getSecrets()) {
 				builder.append('\t');
 				builder.append(secretId);
 				builder.append('\n');

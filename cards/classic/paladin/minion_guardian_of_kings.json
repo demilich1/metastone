@@ -1,0 +1,25 @@
+{
+	"baseAttack": 5,
+	"baseHp": 6,
+	"battlecry": {
+		"spell": {
+			"class": "HealSpell",
+			"value": 6,
+			"target": "FRIENDLY_HERO"
+		},
+		"resolvedLate": false
+	},
+	"id": "minion_guardian_of_kings",
+	"name": "Guardian of Kings",
+	"description": "Battlecry: Restore 6 Health to your hero.",
+	"type": "MINION",
+	"heroClass": "PALADIN",
+	"rarity": "FREE",
+	"baseManaCost": 7,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

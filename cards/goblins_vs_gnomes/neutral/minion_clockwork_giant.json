@@ -1,0 +1,19 @@
+{
+	"baseAttack": 8,
+	"baseHp": 8,
+	"race": "MECH",
+	"id": "minion_clockwork_giant",
+	"name": "Clockwork Giant",
+	"manaCostModifier": {
+		"class": "CardCounter",
+		"targetPlayer": "OPPONENT"
+	},
+	"description": "Costs (1) less Mana for each card in your opponent's hand.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"baseManaCost": 12,
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

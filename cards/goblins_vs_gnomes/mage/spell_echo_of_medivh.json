@@ -1,0 +1,17 @@
+{
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "PutCopyInHandSpell",
+		"target": "FRIENDLY_MINIONS"
+	},
+	"id": "spell_echo_of_medivh",
+	"name": "Echo of Medivh",
+	"description": "Put a copy of each friendly minion into your hand.",
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "EPIC",
+	"baseManaCost": 4,
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

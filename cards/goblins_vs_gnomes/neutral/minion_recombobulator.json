@@ -1,0 +1,24 @@
+{
+	"baseAttack": 3,
+	"baseHp": 2,
+	"battlecry": {
+		"targetSelection": "FRIENDLY_MINIONS",
+		"spell": {
+			"class": "TransformToMinionWithManaCostSpell"
+		},
+		"resolvedLate": false
+	},
+	"id": "minion_recombobulator",
+	"name": "Recombobulator",
+	"description": "Battlecry: Transform a friendly minion into a random minion with the same Cost.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"baseManaCost": 2,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

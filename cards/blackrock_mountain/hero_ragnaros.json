@@ -1,0 +1,13 @@
+{
+	"name": "Ragnaros the Firelord",
+	"id": "hero_ragnaros",
+	"type": "HERO",
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"heroPower": "hero_power_die_insect",
+	"collectible": false,
+	"attributes": {
+		"HP": 8,
+		"MAX_HP": 8
+	}
+}

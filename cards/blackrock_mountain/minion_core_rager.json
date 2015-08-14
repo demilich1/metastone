@@ -1,0 +1,32 @@
+{
+	"baseAttack": 4,
+	"baseHp": 4,
+	"race": "BEAST",
+	"battlecry": {
+		"spell": {
+			"class": "BuffSpell",
+			"attackBonus": 3,
+			"hpBonus": 3,
+			"target": "SELF",
+			"condition": {
+				"class": "CardCountCondition",
+				"value": 1,
+				"operation": "LESS"
+			}
+		},
+		"resolvedLate": false
+	},
+	"id": "minion_core_rager",
+	"name": "Core Rager",
+	"description": "Battlecry: If your hand is empty, gain +3/+3.",
+	"type": "MINION",
+	"heroClass": "HUNTER",
+	"rarity": "RARE",
+	"baseManaCost": 4,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"set": "BLACKROCK_MOUNTAIN",
+	"fileFormatVersion": 1
+}

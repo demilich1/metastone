@@ -85,7 +85,7 @@ public class MinionPanel extends VBox {
 			MinionCard minionCard = (MinionCard) card;
 			data.add(minionCard);
 		}
-		
+
 		minionComboBox.setItems(data);
 		minionComboBox.getSelectionModel().selectFirst();
 

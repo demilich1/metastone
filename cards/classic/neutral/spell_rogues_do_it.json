@@ -1,0 +1,24 @@
+{
+	"spell": {
+		"class": "MetaSpell",
+		"spell1": {
+			"class": "DamageSpell",
+			"value": 4
+		},
+		"spell2": {
+			"class": "DrawCardSpell",
+			"value": 1
+		}
+	},
+	"id": "spell_rogues_do_it",
+	"name": "Rogues Do it...",
+	"description": "Deal 4 damage. Draw a card.",
+	"type": "SPELL",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"baseManaCost": 4,
+	"collectible": false,
+	"targetSelection": "ANY",
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

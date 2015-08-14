@@ -3,6 +3,8 @@ package net.demilich.metastone.gui.sandboxmode.commands;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.pferdimanzug.nittygrittymvc.SimpleCommand;
+import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -12,8 +14,6 @@ import net.demilich.metastone.game.behaviour.human.HumanTargetOptions;
 import net.demilich.metastone.game.logic.ActionLogic;
 import net.demilich.metastone.game.targeting.TargetSelection;
 import net.demilich.metastone.gui.sandboxmode.SandboxProxy;
-import de.pferdimanzug.nittygrittymvc.SimpleCommand;
-import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
 public class PerformActionCommand extends SimpleCommand<GameNotification> {
 

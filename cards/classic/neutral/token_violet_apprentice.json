@@ -1,0 +1,14 @@
+{
+	"baseAttack": 1,
+	"baseHp": 1,
+	"id": "token_violet_apprentice",
+	"name": "Violet Apprentice",
+	"description": "",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"baseManaCost": 0,
+	"collectible": false,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

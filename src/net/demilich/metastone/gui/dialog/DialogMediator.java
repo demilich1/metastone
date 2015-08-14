@@ -3,16 +3,15 @@ package net.demilich.metastone.gui.dialog;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.scene.Node;
-import javafx.scene.layout.Pane;
-import javafx.stage.Window;
-import net.demilich.metastone.GameNotification;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.pferdimanzug.nittygrittymvc.Mediator;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
+import javafx.scene.Node;
+import javafx.scene.layout.Pane;
+import javafx.stage.Window;
+import net.demilich.metastone.GameNotification;
 
 public class DialogMediator extends Mediator<GameNotification> {
 
@@ -44,7 +43,7 @@ public class DialogMediator extends Mediator<GameNotification> {
 			break;
 		}
 	}
-	
+
 	@Override
 	public List<GameNotification> listNotificationInterests() {
 		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();

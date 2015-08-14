@@ -1,0 +1,17 @@
+{
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "HealToFullSpell",
+		"target": "ALL_CHARACTERS"
+	},
+	"id": "spell_tree_of_life",
+	"name": "Tree of Life",
+	"description": "Restore all characters to full Health.",
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "EPIC",
+	"baseManaCost": 9,
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

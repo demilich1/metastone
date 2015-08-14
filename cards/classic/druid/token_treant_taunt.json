@@ -1,0 +1,17 @@
+{
+	"baseAttack": 2,
+	"baseHp": 2,
+	"id": "token_treant_taunt",
+	"name": "Treant",
+	"description": "Taunt",
+	"type": "MINION",
+	"heroClass": "DRUID",
+	"rarity": "FREE",
+	"baseManaCost": 1,
+	"collectible": false,
+	"attributes": {
+		"TAUNT": true
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

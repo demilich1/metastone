@@ -11,7 +11,7 @@ import net.demilich.metastone.game.spells.trigger.secrets.Secret;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class AddSecretSpell extends Spell {
-	
+
 	public static SpellDesc create(Secret secret) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(AddSecretSpell.class);
 		arguments.put(SpellArg.SECRET, secret);

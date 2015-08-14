@@ -1,0 +1,25 @@
+{
+	"baseAttack": 3,
+	"baseHp": 2,
+	"race": "MECH",
+	"battlecry": {
+		"spell": {
+			"class": "BuffWeaponSpell",
+			"attackBonus": 1
+		},
+		"resolvedLate": false
+	},
+	"id": "minion_goblin_auto-barber",
+	"name": "Goblin Auto-Barber",
+	"description": "Battlecry: Give your weapon +1 Attack.",
+	"type": "MINION",
+	"heroClass": "ROGUE",
+	"rarity": "COMMON",
+	"baseManaCost": 2,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

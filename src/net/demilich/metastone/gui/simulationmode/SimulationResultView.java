@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang3.time.DurationFormatUtils;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -23,8 +25,6 @@ import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.statistics.GameStatistics;
 import net.demilich.metastone.game.statistics.Statistic;
-
-import org.apache.commons.lang3.time.DurationFormatUtils;
 
 public class SimulationResultView extends BorderPane {
 
@@ -122,23 +122,23 @@ public class SimulationResultView extends BorderPane {
 
 	private String getFavouriteCardName(GameStatistics stats, CardType cardType) {
 		List<Card> cards = new ArrayList<Card>();
-		for (int cardId : stats.getCardsPlayed().keySet()) {
+		for (String cardId : stats.getCardsPlayed().keySet()) {
 			Card card = CardCatalogue.getCardById(cardId);
 			if (card == null) {
 				System.out.println("Invalid card with id: " + cardId);
 			}
 			if (card.getCardType() == cardType) {
-				cards.add(card);	
+				cards.add(card);
 			}
 		}
-		
+
 		if (cards.isEmpty()) {
 			return "-";
 		}
-		
-		Collections.sort(cards, (c1, c2) ->  {
-			int c1Count = stats.getCardsPlayed().get(c1.getTypeId()); 
-			int c2Count = stats.getCardsPlayed().get(c2.getTypeId());
+
+		Collections.sort(cards, (c1, c2) -> {
+			int c1Count = stats.getCardsPlayed().get(c1.getCardId());
+			int c2Count = stats.getCardsPlayed().get(c2.getCardId());
 			// sort descending
 			return Integer.compare(c2Count, c1Count);
 		});
@@ -155,7 +155,7 @@ public class SimulationResultView extends BorderPane {
 		}
 		return "-";
 	}
-	
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void showSimulationResult(SimulationResult result) {
 		player1InfoView.setInfo(result.getConfig().getPlayerConfig1());
@@ -183,19 +183,19 @@ public class SimulationResultView extends BorderPane {
 		favouriteMinionCard.setPlayer1Value(getFavouriteCardName(result.getPlayer1Stats(), CardType.MINION));
 		favouriteMinionCard.setPlayer2Value(getFavouriteCardName(result.getPlayer2Stats(), CardType.MINION));
 		absoluteStatEntries.add(favouriteMinionCard);
-		
+
 		StatEntry favouriteSpellCard = new StatEntry();
 		favouriteSpellCard.setStatName("Favourite spell card");
 		favouriteSpellCard.setPlayer1Value(getFavouriteCardName(result.getPlayer1Stats(), CardType.SPELL));
 		favouriteSpellCard.setPlayer2Value(getFavouriteCardName(result.getPlayer2Stats(), CardType.SPELL));
 		absoluteStatEntries.add(favouriteSpellCard);
-		
+
 		StatEntry favouriteWeaponCard = new StatEntry();
 		favouriteWeaponCard.setStatName("Favourite weapon card");
 		favouriteWeaponCard.setPlayer1Value(getFavouriteCardName(result.getPlayer1Stats(), CardType.WEAPON));
 		favouriteWeaponCard.setPlayer2Value(getFavouriteCardName(result.getPlayer2Stats(), CardType.WEAPON));
 		absoluteStatEntries.add(favouriteWeaponCard);
-		
+
 		absoluteResultTable.setItems(absoluteStatEntries);
 
 		absoluteResultTable.getColumns().get(0).setCellValueFactory(new PropertyValueFactory("statName"));

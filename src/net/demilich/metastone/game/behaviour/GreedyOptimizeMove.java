@@ -3,15 +3,15 @@ package net.demilich.metastone.game.behaviour;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.behaviour.heuristic.IGameStateHeuristic;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.logic.GameLogic;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class GreedyOptimizeMove extends Behaviour {
 

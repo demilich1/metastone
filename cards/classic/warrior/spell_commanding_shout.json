@@ -1,0 +1,25 @@
+{
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "MetaSpell",
+		"spell1": {
+			"class": "AddAttributeSpell",
+			"attribute": "CANNOT_REDUCE_HP_BELOW_1",
+			"target": "FRIENDLY_CHARACTERS"
+		},
+		"spell2": {
+			"class": "DrawCardSpell",
+			"value": 1
+		}
+	},
+	"id": "spell_commanding_shout",
+	"name": "Commanding Shout",
+	"description": "Your minions can't be reduced below 1 Health this turn. Draw a card.",
+	"type": "SPELL",
+	"heroClass": "WARRIOR",
+	"rarity": "RARE",
+	"baseManaCost": 2,
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

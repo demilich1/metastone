@@ -1,36 +1,39 @@
 package net.demilich.metastone.game.spells;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 
 public abstract class Spell {
 
 	public void cast(GameContext context, Player player, SpellDesc desc, Entity source, List<Entity> targets) {
+		// no target specified, cast the spell once with target NULL
 		if (targets == null) {
 			castForPlayer(context, player, desc, source, null);
 			return;
 		}
-		
-		@SuppressWarnings("unchecked")
-		Predicate<Entity> targetFilter = (Predicate<Entity>) desc.get(SpellArg.ENTITY_FILTER);
+
+		EntityFilter targetFilter = desc.getEntityFilter();
 		List<Entity> validTargets = SpellUtils.getValidTargets(targets, targetFilter);
+		// there is at least one valid target and the RANDOM_TARGET flag is set,
+		// pick one randomly
 		if (validTargets.size() > 0 && desc.getBool(SpellArg.RANDOM_TARGET)) {
 			Entity target = SpellUtils.getRandomTarget(validTargets);
 			castForPlayer(context, player, desc, source, target);
-			//onCast(context, player, desc, null, target);
 		} else {
+			// there is at least one target and RANDOM_TARGET flag is not set,
+			// cast in on all targets
 			for (Entity target : validTargets) {
 				castForPlayer(context, player, desc, source, target);
 			}
 		}
 	}
-	
+
 	private void castForPlayer(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		TargetPlayer targetPlayer = desc.getTargetPlayer();
 		if (targetPlayer == null) {
@@ -47,6 +50,15 @@ public abstract class Spell {
 			break;
 		case SELF:
 			onCast(context, player, desc, source, target);
+			break;
+		case OWNER:
+			onCast(context, context.getPlayer(target.getOwner()), desc, source, target);
+			break;
+		case ACTIVE:
+			onCast(context, context.getActivePlayer(), desc, source, target);
+			break;
+		case INACTIVE:
+			onCast(context, context.getOpponent(context.getActivePlayer()), desc, source, target);
 			break;
 		default:
 			break;

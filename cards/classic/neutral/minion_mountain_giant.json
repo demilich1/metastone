@@ -1,0 +1,19 @@
+{
+	"baseAttack": 8,
+	"baseHp": 8,
+	"id": "minion_mountain_giant",
+	"name": "Mountain Giant",
+	"manaCostModifier": {
+		"class": "CardCounter",
+		"targetPlayer": "SELF",
+		"offset": -1
+	},
+	"description": "Costs (1) less for each other card in your hand.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"baseManaCost": 12,
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

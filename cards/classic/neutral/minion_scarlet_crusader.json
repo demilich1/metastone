@@ -1,0 +1,16 @@
+{
+	"name": "Scarlet Crusader",
+	"description": "Divine Shield",
+	"id": "minion_scarlet_crusader",
+	"type": "MINION",
+	"rarity": "COMMON",
+	"heroClass": "ANY",
+	"baseManaCost": 3,
+	"baseAttack": 3,
+	"baseHp": 1,
+	"attributes": {
+		"DIVINE_SHIELD": true
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

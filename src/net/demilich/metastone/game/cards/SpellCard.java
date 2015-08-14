@@ -4,22 +4,26 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.actions.PlaySpellCardAction;
+import net.demilich.metastone.game.cards.desc.SpellCardDesc;
 import net.demilich.metastone.game.entities.Entity;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.condition.Condition;
+import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
-public abstract class SpellCard extends Card {
+public class SpellCard extends Card {
 
 	private SpellDesc spell;
 	private TargetSelection targetRequirement;
+	private Condition condition;
 
-	protected SpellCard(String name, CardType cardType, Rarity rarity, HeroClass classRestriction, int manaCost) {
-		super(name, cardType, rarity, classRestriction, manaCost);
-	}
-
-	public SpellCard(String name, Rarity rarity, HeroClass classRestriction, int manaCost) {
-		super(name, CardType.SPELL, rarity, classRestriction, manaCost);
+	public SpellCard(SpellCardDesc desc) {
+		super(desc);
+		setTargetRequirement(desc.targetSelection);
+		setSpell(desc.spell);
+		if (desc.condition != null) {
+			condition = desc.condition.create();
+		}
 	}
 
 	public boolean canBeCast(GameContext context, Player player) {
@@ -34,17 +38,28 @@ public abstract class SpellCard extends Card {
 		default:
 			break;
 		}
+		if (condition != null) {
+			return condition.isFulfilled(context, player, null);
+		}
 		return true;
 	}
 
 	public boolean canBeCastOn(Entity target) {
-		return true;
+		EntityFilter filter = spell.getEntityFilter();
+		if (filter == null) {
+			return true;
+		}
+		return filter.matches(target);
 	}
 
 	@Override
 	public SpellCard clone() {
 		SpellCard clone = (SpellCard) super.clone();
+		if (spell == null) {
+			throw new RuntimeException("Spell is NULL for SpellCard " + getName());
+		}
 		clone.spell = spell.clone();
+		clone.condition = condition;
 		return clone;
 	}
 

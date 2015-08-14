@@ -1,0 +1,20 @@
+{
+	"targetSelection": "FRIENDLY_MINIONS",
+	"spell": {
+		"class": "AddAttributeSpell",
+		"attribute": "STEALTH",
+		"revertTrigger": {
+			"class": "TurnStartTrigger"
+		}
+	},
+	"id": "spell_finicky_cloakfield",
+	"name": "Finicky Cloakfield",
+	"description": "Give a friendly minion Stealth until your next turn.",
+	"type": "SPELL",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"baseManaCost": 1,
+	"collectible": false,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

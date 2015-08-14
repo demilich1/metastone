@@ -1,0 +1,17 @@
+{
+	"name": "Draw 3 cards",
+	"description": "Draw 3 cards",
+	"id": "spell_nourish_2",
+	"type": "SPELL",
+	"rarity": "RARE",
+	"heroClass": "DRUID",
+	"baseManaCost": 5,
+	"targetSelection": "NONE",
+	"collectible": false,
+	"spell": {
+		"class": "DrawCardSpell",
+		"value": 3
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

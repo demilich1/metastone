@@ -1,0 +1,17 @@
+{
+	"targetSelection": "ENEMY_MINIONS",
+	"spell": {
+		"class": "ShuffleMinionToDeckSpell",
+		"targetPlayer": "OWNER"
+	},
+	"id": "spell_recycle",
+	"name": "Recycle",
+	"description": "Shuffle an enemy minion into your opponent's deck.",
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "RARE",
+	"baseManaCost": 6,
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,13 @@
+{
+	"baseAttack": 1,
+	"baseHp": 3,
+	"id": "token_spellbender",
+	"name": "Spellbender",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"baseManaCost": 0,
+	"collectible": false,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

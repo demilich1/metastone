@@ -1,0 +1,28 @@
+{
+	"baseAttack": 4,
+	"baseHp": 9,
+	"trigger": {
+		"eventTrigger": {
+			"class": "EnrageChangedTrigger"
+		},
+		"spell": {
+			"class": "EnrageSpell",
+			"attackBonus": 6,
+			"target": "SELF"
+		}
+	},
+	"id": "minion_grommash_hellscream",
+	"name": "Grommash Hellscream",
+	"description": "Charge. Enrage: +6 Attack",
+	"type": "MINION",
+	"heroClass": "WARRIOR",
+	"rarity": "LEGENDARY",
+	"baseManaCost": 8,
+	"collectible": true,
+	"attributes": {
+		"CHARGE": true,
+		"ENRAGABLE": true
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

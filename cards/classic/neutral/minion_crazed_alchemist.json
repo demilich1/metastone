@@ -1,0 +1,24 @@
+{
+	"baseAttack": 2,
+	"baseHp": 2,
+	"battlecry": {
+		"spell": {
+			"class": "SwapAttackAndHpSpell"
+		},
+		"targetSelection": "MINIONS",
+		"resolvedLate": false
+	},
+	"id": "minion_crazed_alchemist",
+	"name": "Crazed Alchemist",
+	"description": "Battlecry: Swap the Attack and Health of a minion.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"baseManaCost": 2,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

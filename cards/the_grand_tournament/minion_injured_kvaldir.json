@@ -1,0 +1,22 @@
+{
+  "baseAttack": 2,
+  "baseHp": 4,
+  "battlecry": {
+    "spell": {
+      "class": "DamageSpell",
+	  "value" : 3,
+	  "target" : "SELF"
+    },
+    "resolvedLate": false
+  },
+  "id": "minion_injured_kvaldir",
+  "name": "Injured Kvaldir",
+  "description": "Battlecry: Deal 3 damage to this minion",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "RARE",
+  "set": "THE_GRAND_TOURNAMENT",
+  "baseManaCost": 1,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

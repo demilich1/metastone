@@ -1,0 +1,24 @@
+{
+	"baseAttack": 0,
+	"baseHp": 3,
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "DrawCardSpell",
+			"value": 1
+		}
+	},
+	"id": "minion_mana_tide_totem",
+	"name": "Mana Tide Totem",
+	"description": "At the end of your turn, draw a card.",
+	"type": "MINION",
+	"heroClass": "SHAMAN",
+	"rarity": "RARE",
+	"baseManaCost": 3,
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

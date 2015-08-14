@@ -1,16 +1,16 @@
 package net.demilich.metastone.gui.sandboxmode;
 
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.utils.GameTagUtils;
 import net.demilich.metastone.game.utils.TagValueType;
 
 public class GameTagEntry {
 
-	private final GameTag tag;
+	private final Attribute tag;
 	private final TagValueType valueType;
 	private final Object value;
 
-	public GameTagEntry(GameTag tag, Object value) {
+	public GameTagEntry(Attribute tag, Object value) {
 		this.tag = tag;
 		this.value = value;
 		this.valueType = GameTagUtils.getTagValueType(tag);
@@ -20,7 +20,7 @@ public class GameTagEntry {
 		return GameTagUtils.getTagName(getTag());
 	}
 
-	public GameTag getTag() {
+	public Attribute getTag() {
 		return tag;
 	}
 
@@ -35,7 +35,7 @@ public class GameTagEntry {
 	public int getValueInt() {
 		return (int) value;
 	}
-	
+
 	public TagValueType getValueType() {
 		return valueType;
 	}

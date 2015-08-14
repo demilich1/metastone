@@ -5,9 +5,10 @@ import java.util.Map;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.spells.desc.ISpellConditionChecker;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.targeting.EntityReference;
+import net.demilich.metastone.game.spells.desc.condition.Condition;
 
 public class ConditionalEffectSpell extends Spell {
 
@@ -19,25 +20,25 @@ public class ConditionalEffectSpell extends Spell {
 		return new SpellDesc(arguments);
 	}
 
-	private void castSpell(GameContext context, int playerId, SpellDesc spell, Entity target, EntityReference sourceReference) {
-		EntityReference targetReference = spell.getTarget();
-		if (targetReference == null && target != null) {
-			targetReference = target.getReference();
-		}
-		context.getLogic().castSpell(playerId, spell, sourceReference, targetReference);
+	protected boolean isConditionFulfilled(GameContext context, Player player, SpellDesc desc, Entity target) {
+		Condition condition = (Condition) desc.get(SpellArg.CONDITION);
+		return condition.isFulfilled(context, player, target);
 	}
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		ISpellConditionChecker condition = (ISpellConditionChecker) desc.get(SpellArg.SPELL_CONDITION_CHECKER);
-		SpellDesc base = (SpellDesc) desc.get(SpellArg.SPELL_1);
-		SpellDesc additional = (SpellDesc) desc.get(SpellArg.SPELL_2);
+		boolean exclusive = desc.getBool(SpellArg.EXCLUSIVE);
+		SpellDesc primarySpell = (SpellDesc) desc.get(SpellArg.SPELL_1);
+		SpellDesc secondarySpell = (SpellDesc) desc.get(SpellArg.SPELL_2);
 
-		EntityReference sourceReference = source != null ? source.getReference() : null;
-
-		castSpell(context, player.getId(), base, target, sourceReference);
-		if (condition.isFulfilled(context, player, target)) {
-			castSpell(context, player.getId(), additional, target, sourceReference);
+		if (exclusive) {
+			SpellUtils.castChildSpell(context, player, isConditionFulfilled(context, player, desc, target) ? secondarySpell : primarySpell,
+					source, target);
+		} else {
+			SpellUtils.castChildSpell(context, player, primarySpell, source, target);
+			if (isConditionFulfilled(context, player, desc, target)) {
+				SpellUtils.castChildSpell(context, player, secondarySpell, source, target);
+			}
 		}
 
 	}

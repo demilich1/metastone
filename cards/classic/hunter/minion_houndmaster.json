@@ -1,0 +1,37 @@
+{
+	"baseAttack": 4,
+	"baseHp": 3,
+	"battlecry": {
+		"spell": {
+			"class": "MetaSpell",
+			"spell1": {
+				"class": "BuffSpell",
+				"attackBonus": 2,
+				"hpBonus": 2
+			},
+			"spell2": {
+				"class": "AddAttributeSpell",
+				"attribute": "TAUNT"
+			},
+			"filter": {
+				"class": "RaceFilter",
+				"race": "BEAST"
+			}
+		},
+		"targetSelection": "FRIENDLY_MINIONS",
+		"resolvedLate": false
+	},
+	"id": "minion_houndmaster",
+	"name": "Houndmaster",
+	"description": "Battlecry: Give a friendly Beast +2/+2 and Taunt.",
+	"type": "MINION",
+	"heroClass": "HUNTER",
+	"rarity": "FREE",
+	"baseManaCost": 4,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

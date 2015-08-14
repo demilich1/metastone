@@ -1,0 +1,33 @@
+{
+	"baseAttack": 2,
+	"baseHp": 1,
+	"battlecry": {
+		"spell": {
+			"class": "MetaSpell",
+			"spell1": {
+				"class": "DamageSpell",
+				"value": 3,
+				"target": "ENEMY_HERO"
+			},
+			"spell2": {
+				"class": "DamageSpell",
+				"value": 3,
+				"target": "FRIENDLY_HERO"
+			}
+		},
+		"resolvedLate": false
+	},
+	"id": "minion_shadowbomber",
+	"name": "Shadowbomber",
+	"description": "Battlecry: Deal 3 damage to each hero.",
+	"type": "MINION",
+	"heroClass": "PRIEST",
+	"rarity": "EPIC",
+	"baseManaCost": 1,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

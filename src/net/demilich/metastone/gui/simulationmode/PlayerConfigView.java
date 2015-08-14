@@ -6,7 +6,7 @@ public class PlayerConfigView extends net.demilich.metastone.gui.gameconfig.Play
 
 	public PlayerConfigView() {
 		super(PlayerConfigType.SIMULATION);
-		
+
 		setPrefHeight(400);
 	}
 

@@ -3,9 +3,12 @@ package net.demilich.metastone.game.logic;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.GameAction;
@@ -15,9 +18,6 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class TargetLogic {
 
@@ -31,7 +31,7 @@ public class TargetLogic {
 
 	private boolean containsTaunters(List<Minion> minions) {
 		for (Entity entity : minions) {
-			if (entity.hasStatus(GameTag.TAUNT) && !entity.hasStatus(GameTag.STEALTHED)) {
+			if (entity.hasAttribute(Attribute.TAUNT) && !entity.hasAttribute(Attribute.STEALTH)) {
 				return true;
 			}
 		}
@@ -49,11 +49,11 @@ public class TargetLogic {
 				continue;
 			}
 			if ((action.getActionType() == ActionType.SPELL || action.getActionType() == ActionType.HERO_POWER)
-					&& entity.hasStatus(GameTag.UNTARGETABLE_BY_SPELLS)) {
+					&& entity.hasAttribute(Attribute.UNTARGETABLE_BY_SPELLS)) {
 				continue;
 			}
 
-			if (entity.getOwner() != player.getId() && entity.hasStatus(GameTag.STEALTHED)) {
+			if (entity.getOwner() != player.getId() && entity.hasAttribute(Attribute.STEALTH)) {
 				continue;
 			}
 
@@ -83,9 +83,9 @@ public class TargetLogic {
 				}
 			}
 
-			for (Actor actor : player.getGraveyard()) {
-				if (actor.getId() == targetId) {
-					return actor;
+			for (Entity entity : player.getGraveyard()) {
+				if (entity.getId() == targetId) {
+					return entity;
 				}
 			}
 		}
@@ -167,7 +167,7 @@ public class TargetLogic {
 	private List<Entity> getTaunters(List<Minion> entities) {
 		List<Entity> taunters = new ArrayList<>();
 		for (Actor entity : entities) {
-			if (entity.hasStatus(GameTag.TAUNT) && !entity.hasStatus(GameTag.STEALTHED)) {
+			if (entity.hasAttribute(Attribute.TAUNT) && !entity.hasAttribute(Attribute.STEALTH)) {
 				taunters.add(entity);
 			}
 		}
@@ -233,6 +233,8 @@ public class TargetLogic {
 			return singleTargetAsList(source);
 		} else if (targetKey == EntityReference.EVENT_TARGET) {
 			return singleTargetAsList((Entity) context.getEnvironment().get(Environment.EVENT_TARGET));
+		} else if (targetKey == EntityReference.TARGET) {
+			return singleTargetAsList((Entity) context.getEnvironment().get(Environment.TARGET));
 		} else if (targetKey == EntityReference.KILLED_MINION) {
 			return singleTargetAsList((Entity) context.getEnvironment().get(Environment.KILLED_MINION));
 		} else if (targetKey == EntityReference.ATTACKER) {

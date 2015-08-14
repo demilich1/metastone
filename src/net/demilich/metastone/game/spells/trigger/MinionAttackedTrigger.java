@@ -5,11 +5,16 @@ import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.events.PhysicalAttackEvent;
+import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
 public class MinionAttackedTrigger extends GameEventTrigger {
 
+	public MinionAttackedTrigger(EventTriggerDesc desc) {
+		super(desc);
+	}
+
 	@Override
-	public boolean fire(GameEvent event, Entity host) {
+	protected boolean fire(GameEvent event, Entity host) {
 		PhysicalAttackEvent physicalAttackEvent = (PhysicalAttackEvent) event;
 		return physicalAttackEvent.getDefender().getEntityType() == EntityType.MINION;
 	}

@@ -26,7 +26,7 @@ public class DeckInfoView extends HBox implements EventHandler<ActionEvent>, IDi
 
 	@FXML
 	private Label typeLabel;
-	
+
 	@FXML
 	private Label countLabel;
 
@@ -49,10 +49,10 @@ public class DeckInfoView extends HBox implements EventHandler<ActionEvent>, IDi
 	public void handle(ActionEvent event) {
 		if (activeDeck.isMetaDeck() && !activeDeck.isComplete()) {
 			DialogNotification dialogNotification = new DialogNotification("Warning",
-					"Your deck collection is not complete yet. Each deck collection has to contain at least 2 (or more) decks. ", DialogType.WARNING);
+					"Your deck collection is not complete yet. Each deck collection has to contain at least 2 (or more) decks. ",
+					DialogType.WARNING);
 			ApplicationFacade.getInstance().notifyObservers(dialogNotification);
-		}
-		else if (!activeDeck.isMetaDeck() && !activeDeck.isComplete()) {
+		} else if (!activeDeck.isMetaDeck() && !activeDeck.isComplete()) {
 			DialogNotification dialogNotification = new DialogNotification("Add random cards",
 					"Your deck is not complete yet. If you proceed, all open slots will be filled with random cards.", DialogType.CONFIRM);
 			dialogNotification.setHandler(this);
@@ -79,9 +79,9 @@ public class DeckInfoView extends HBox implements EventHandler<ActionEvent>, IDi
 			countLabel.setText(metaDeck.getDecks().size() + "");
 		} else {
 			typeLabel.setText("Cards");
-			countLabel.setText(deck.getCards().getCount() + "/" + GameLogic.DECK_SIZE);	
+			countLabel.setText(deck.getCards().getCount() + "/" + GameLogic.DECK_SIZE);
 		}
-		
+
 	}
 
 }

@@ -1,0 +1,20 @@
+{
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "DrawCardSpell",
+		"value": 2
+	},
+	"manaCostModifier": {
+		"class": "DeadMinionsThisTurn"
+	},
+	"id": "spell_solemn_vigil",
+	"name": "Solemn Vigil",
+	"description": "Draw 2 cards. Costs (1) less for each minion that died this turn.",
+	"type": "SPELL",
+	"heroClass": "PALADIN",
+	"rarity": "COMMON",
+	"baseManaCost": 5,
+	"collectible": true,
+	"set": "BLACKROCK_MOUNTAIN",
+	"fileFormatVersion": 1
+}

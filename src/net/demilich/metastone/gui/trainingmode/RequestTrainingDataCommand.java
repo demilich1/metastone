@@ -1,12 +1,11 @@
 package net.demilich.metastone.gui.trainingmode;
 
-import net.demilich.metastone.GameNotification;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.pferdimanzug.nittygrittymvc.SimpleCommand;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
+import net.demilich.metastone.GameNotification;
 
 public class RequestTrainingDataCommand extends SimpleCommand<GameNotification> {
 

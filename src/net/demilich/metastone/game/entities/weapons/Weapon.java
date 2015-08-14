@@ -1,20 +1,24 @@
 package net.demilich.metastone.game.entities.weapons;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.EntityType;
+import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.targeting.EntityReference;
 
 public class Weapon extends Actor {
 
 	private boolean active;
+	private SpellDesc onEquip;
+	private SpellDesc onUnequip;
 
 	public Weapon(Card sourceCard, int weaponDamage, int durability) {
 		super(sourceCard);
-		setTag(GameTag.WEAPON_DAMAGE, weaponDamage);
-		setTag(GameTag.DURABILITY, durability);
+		setAttribute(Attribute.ATTACK, weaponDamage);
+		setAttribute(Attribute.HP, durability);
 	}
 
 	@Override
@@ -23,16 +27,16 @@ public class Weapon extends Actor {
 	}
 
 	public int getDurability() {
-		return getTagValue(GameTag.DURABILITY);
+		return getAttributeValue(Attribute.HP);
 	}
 
 	@Override
 	public EntityType getEntityType() {
 		return EntityType.WEAPON;
 	}
-	
+
 	public int getWeaponDamage() {
-		return getTagValue(GameTag.WEAPON_DAMAGE) + getTagValue(GameTag.CONDITIONAL_ATTACK_BONUS);
+		return getAttributeValue(Attribute.ATTACK) + getAttributeValue(Attribute.CONDITIONAL_ATTACK_BONUS);
 	}
 
 	public boolean isActive() {
@@ -40,24 +44,36 @@ public class Weapon extends Actor {
 	}
 
 	public boolean isBroken() {
-		return !hasStatus(GameTag.DURABILITY) || getTagValue(GameTag.WEAPON_DAMAGE) <= 0;
+		return !hasAttribute(Attribute.HP) || getAttributeValue(Attribute.ATTACK) <= 0;
 	}
 
 	@Override
-	public boolean isDead() {
-		return hasStatus(GameTag.DEAD) || isBroken();
+	public boolean isDestroyed() {
+		return hasAttribute(Attribute.DESTROYED) || isBroken();
 	}
 
 	public void onEquip(GameContext context, Player player) {
-		
+		if (onEquip != null) {
+			context.getLogic().castSpell(player.getId(), onEquip, getReference(), EntityReference.NONE);
+		}
 	}
-	
+
 	public void onUnequip(GameContext context, Player player) {
-		
+		if (onUnequip != null) {
+			context.getLogic().castSpell(player.getId(), onUnequip, getReference(), EntityReference.NONE);
+		}
 	}
-	
+
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public void setOnEquip(SpellDesc onEquip) {
+		this.onEquip = onEquip;
+	}
+
+	public void setOnUnequip(SpellDesc onUnequip) {
+		this.onUnequip = onUnequip;
 	}
 
 	@Override
@@ -65,7 +81,7 @@ public class Weapon extends Actor {
 		String result = "[" + getEntityType() + " '" + getName() + "'id:" + getId() + " ";
 		result += getWeaponDamage() + "/" + getDurability();
 		String prefix = " ";
-		for (GameTag tag : getTags().keySet()) {
+		for (Attribute tag : getAttributes().keySet()) {
 			if (displayGameTag(tag)) {
 				result += prefix + tag;
 				prefix = ", ";

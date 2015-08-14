@@ -15,11 +15,11 @@ public class IntegerTextField extends RestrictedTextField {
 	public int getIntValue() {
 		return valueProperty().get();
 	}
-	
+
 	public void setIntValue(int value) {
 		setText(String.valueOf(value));
 	}
-	
+
 	@Override
 	protected void validInput(String validInput) {
 		valueProperty().set(validInput.length() > 0 ? Integer.parseInt(validInput) : 0);

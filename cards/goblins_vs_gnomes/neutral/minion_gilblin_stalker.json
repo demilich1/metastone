@@ -1,0 +1,17 @@
+{
+	"baseAttack": 2,
+	"baseHp": 3,
+	"id": "minion_gilblin_stalker",
+	"name": "Gilblin Stalker",
+	"description": "Stealth",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 2,
+	"collectible": true,
+	"attributes": {
+		"STEALTH": true
+	},
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

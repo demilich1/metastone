@@ -1,0 +1,16 @@
+{
+	"name": "Fireball",
+	"description": "Deal 6 damage.",
+	"id": "spell_fireball",
+	"type": "SPELL",
+	"rarity": "FREE",
+	"heroClass": "MAGE",
+	"baseManaCost": 4,
+	"targetSelection": "ANY",
+	"spell": {
+		"class": "DamageSpell",
+		"value": 6
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

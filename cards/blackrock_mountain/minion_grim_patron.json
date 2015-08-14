@@ -1,0 +1,27 @@
+{
+	"baseAttack": 3,
+	"baseHp": 3,
+	"trigger": {
+		"eventTrigger": {
+			"class": "SelfDamagedTrigger",
+			"condition": {
+				"class": "IsDeadCondition",
+				"invert": true
+			}
+		},
+		"spell": {
+			"class": "SummonSpell",
+			"card": "minion_grim_patron"
+		}
+	},
+	"id": "minion_grim_patron",
+	"name": "Grim Patron",
+	"description": "Whenever this minion survives damage, summon another Grim Patron.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"baseManaCost": 5,
+	"collectible": true,
+	"set": "BLACKROCK_MOUNTAIN",
+	"fileFormatVersion": 1
+}

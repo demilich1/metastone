@@ -1,8 +1,8 @@
 package net.demilich.metastone.gui.deckbuilder;
 
-import net.demilich.metastone.GameNotification;
 import de.pferdimanzug.nittygrittymvc.SimpleCommand;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
+import net.demilich.metastone.GameNotification;
 
 public class SaveDeckCommand extends SimpleCommand<GameNotification> {
 
@@ -18,11 +18,10 @@ public class SaveDeckCommand extends SimpleCommand<GameNotification> {
 			return;
 		}
 		deckProxy.saveActiveDeck();
-		
+
 		getFacade().removeMediator(DeckBuilderMediator.NAME);
 		getFacade().sendNotification(GameNotification.MAIN_MENU);
 		getFacade().sendNotification(GameNotification.DECK_BUILDER_SELECTED);
 	}
-
 
 }

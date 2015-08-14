@@ -1,0 +1,31 @@
+{
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "MetaSpell",
+		"spell1": {
+			"class": "TemporaryAttackSpell",
+			"value": 2
+		},
+		"spell2": {
+			"class": "AddAttributeSpell",
+			"attribute": "IMMUNE",
+			"revertTrigger": {
+				"class": "TurnEndTrigger"
+			}
+		},
+		"filter": {
+			"class": "RaceFilter",
+			"race": "BEAST"
+		}
+	},
+	"id": "spell_bestial_wrath",
+	"name": "Bestial Wrath",
+	"description": "Give a Beast +2 Attack and Immune this turn.",
+	"type": "SPELL",
+	"heroClass": "HUNTER",
+	"rarity": "EPIC",
+	"baseManaCost": 1,
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

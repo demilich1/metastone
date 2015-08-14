@@ -1,0 +1,17 @@
+{
+	"name": "Misha",
+	"id": "token_misha",
+	"type": "MINION",
+	"rarity": "FREE",
+	"heroClass": "HUNTER",
+	"baseManaCost": 3,
+	"baseAttack": 4,
+	"baseHp": 4,
+	"race": "BEAST",
+	"attributes": {
+		"TAUNT": true
+	},
+	"collectible": false,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

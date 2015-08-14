@@ -1,0 +1,21 @@
+{
+	"baseAttack": 1,
+	"baseHp": 1,
+	"deathrattle": {
+		"class": "ReceiveRandomCollectibleCardSpell",
+		"cardFilter": {
+			"class": "RaceFilter",
+			"race": "BEAST"
+		}
+	},
+	"id": "minion_webspinner",
+	"name": "Webspinner",
+	"description": "Deathrattle: Add a random Beast card to your hand.",
+	"type": "MINION",
+	"heroClass": "HUNTER",
+	"rarity": "COMMON",
+	"baseManaCost": 1,
+	"collectible": true,
+	"set": "NAXXRAMAS",
+	"fileFormatVersion": 1
+}

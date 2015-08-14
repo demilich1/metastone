@@ -1,0 +1,31 @@
+{
+	"baseAttack": 2,
+	"baseHp": 4,
+	"option1": {
+		"spell": {
+			"class": "ModifyMaxManaSpell",
+			"value": 1,
+			"fullManaCrystals": true,
+			"targetPlayer": "BOTH"
+		},
+		"description": "Mana Crystal"
+	},
+	"option2": {
+		"spell": {
+			"class": "DrawCardSpell",
+			"value": 1,
+			"targetPlayer": "BOTH"
+		},
+		"description": "Draw"
+	},
+	"id": "minion_grove_tender",
+	"name": "Grove Tender",
+	"description": "Choose One - Give each player a Mana Crystal; or Each player draws a card.",
+	"type": "MINION",
+	"heroClass": "DRUID",
+	"rarity": "RARE",
+	"baseManaCost": 3,
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,18 @@
+{
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "PutRandomMinionOnBoardSpell",
+		"cardLocation": "HAND",
+		"targetPlayer": "BOTH"
+	},
+	"id": "spell_ancestors_call",
+	"name": "Ancestor's Call",
+	"description": "Put a random minion from each player's hand into the battlefield.",
+	"type": "SPELL",
+	"heroClass": "SHAMAN",
+	"rarity": "EPIC",
+	"baseManaCost": 4,
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

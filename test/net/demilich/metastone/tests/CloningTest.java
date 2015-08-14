@@ -1,24 +1,25 @@
 package net.demilich.metastone.tests;
-import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.behaviour.PlayRandomBehaviour;
-import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardCollection;
-import net.demilich.metastone.game.cards.SpellCard;
-import net.demilich.metastone.game.cards.concrete.mage.Polymorph;
-import net.demilich.metastone.game.decks.DeckFactory;
-import net.demilich.metastone.game.entities.Actor;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
-import net.demilich.metastone.game.logic.GameLogic;
-import net.demilich.metastone.gui.gameconfig.PlayerConfig;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.behaviour.PlayRandomBehaviour;
+import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCatalogue;
+import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.SpellCard;
+import net.demilich.metastone.game.decks.DeckFactory;
+import net.demilich.metastone.game.entities.Actor;
+import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.logic.GameLogic;
+import net.demilich.metastone.gui.gameconfig.PlayerConfig;
+
 public class CloningTest extends TestBase {
-	
+
 	private static Logger logger = LoggerFactory.getLogger(CloningTest.class);
 
 	private void compareCardCollections(CardCollection collection1, CardCollection collection2) {
@@ -41,7 +42,7 @@ public class CloningTest extends TestBase {
 
 	@Test
 	public void testCloneSpellCard() {
-		Card original = new Polymorph();
+		Card original = CardCatalogue.getCardById("spell_polymorph");
 		Card clone = original.clone();
 		Assert.assertNotSame(original, clone);
 		SpellCard originalSpellCard = (SpellCard) original;
@@ -54,12 +55,14 @@ public class CloningTest extends TestBase {
 		for (int i = 0; i < 100; i++) {
 			PlayerConfig player1Config = new PlayerConfig(DeckFactory.getRandomDeck(HeroClass.MAGE), new PlayRandomBehaviour());
 			player1Config.setName("Player 1");
+			player1Config.setHeroCard(getHeroCardForClass(HeroClass.MAGE));
 			Player player1 = new Player(player1Config);
-			
+
 			PlayerConfig player2Config = new PlayerConfig(DeckFactory.getRandomDeck(HeroClass.WARRIOR), new PlayRandomBehaviour());
 			player2Config.setName("Player 2");
+			player2Config.setHeroCard(getHeroCardForClass(HeroClass.WARRIOR));
 			Player player2 = new Player(player2Config);
-			
+
 			GameContext original = new GameContext(player1, player2, new GameLogic());
 			TestMinionCard minionCard = new TestMinionCard(3, 3);
 			original.getLogic().receiveCard(player1.getId(), minionCard);

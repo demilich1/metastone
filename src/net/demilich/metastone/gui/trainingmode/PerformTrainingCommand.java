@@ -1,5 +1,11 @@
 package net.demilich.metastone.gui.trainingmode;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import de.pferdimanzug.nittygrittymvc.Notification;
+import de.pferdimanzug.nittygrittymvc.SimpleCommand;
+import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -9,13 +15,6 @@ import net.demilich.metastone.game.behaviour.threat.cuckoo.CuckooLearner;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.statistics.Statistic;
 import net.demilich.metastone.gui.gameconfig.PlayerConfig;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import de.pferdimanzug.nittygrittymvc.Notification;
-import de.pferdimanzug.nittygrittymvc.SimpleCommand;
-import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
 public class PerformTrainingCommand extends SimpleCommand<GameNotification> {
 

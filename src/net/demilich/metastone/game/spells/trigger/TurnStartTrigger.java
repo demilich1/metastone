@@ -5,28 +5,29 @@ import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.events.TurnStartEvent;
 import net.demilich.metastone.game.spells.TargetPlayer;
+import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
 public class TurnStartTrigger extends GameEventTrigger {
-	
-	private final TargetPlayer targetPlayer;
-	
+
 	public TurnStartTrigger() {
-		this(TargetPlayer.SELF);
+		this(EventTriggerDesc.createEmpty(TurnStartTrigger.class));
 	}
-	
-	public TurnStartTrigger(TargetPlayer targetPlayer) {
-		this.targetPlayer = targetPlayer;
+
+	public TurnStartTrigger(EventTriggerDesc desc) {
+		super(desc);
 	}
-	
+
 	@Override
-	public boolean fire(GameEvent event, Entity host) {
+	protected boolean fire(GameEvent event, Entity host) {
 		TurnStartEvent turnStartEvent = (TurnStartEvent) event;
+		TargetPlayer targetPlayer = desc.getTargetPlayer();
 		switch (targetPlayer) {
 		case BOTH:
 			return true;
 		case OPPONENT:
 			return turnStartEvent.getPlayer() != getOwner();
 		case SELF:
+		case OWNER:
 			return turnStartEvent.getPlayer() == getOwner();
 		}
 		return false;

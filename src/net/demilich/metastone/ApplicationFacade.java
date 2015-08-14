@@ -1,10 +1,12 @@
 package net.demilich.metastone;
 
+import de.pferdimanzug.nittygrittymvc.Facade;
+import de.pferdimanzug.nittygrittymvc.interfaces.IFacade;
 import net.demilich.metastone.gui.battleofdecks.StartBattleOfDecksCommand;
 import net.demilich.metastone.gui.deckbuilder.AddCardToDeckCommand;
 import net.demilich.metastone.gui.deckbuilder.ChangeDeckNameCommand;
 import net.demilich.metastone.gui.deckbuilder.FillDeckWithRandomCardsCommand;
-import net.demilich.metastone.gui.deckbuilder.FilterCardsByTextCommand;
+import net.demilich.metastone.gui.deckbuilder.FilterCardsCommand;
 import net.demilich.metastone.gui.deckbuilder.ImportDeckCommand;
 import net.demilich.metastone.gui.deckbuilder.LoadDecksCommand;
 import net.demilich.metastone.gui.deckbuilder.RemoveCardFromDeckCommand;
@@ -29,8 +31,6 @@ import net.demilich.metastone.gui.simulationmode.SimulateGamesCommand;
 import net.demilich.metastone.gui.trainingmode.PerformTrainingCommand;
 import net.demilich.metastone.gui.trainingmode.RequestTrainingDataCommand;
 import net.demilich.metastone.gui.trainingmode.SaveTrainingDataCommand;
-import de.pferdimanzug.nittygrittymvc.Facade;
-import de.pferdimanzug.nittygrittymvc.interfaces.IFacade;
 
 public class ApplicationFacade extends Facade<GameNotification> {
 
@@ -56,7 +56,7 @@ public class ApplicationFacade extends Facade<GameNotification> {
 		registerCommand(GameNotification.REMOVE_CARD_FROM_DECK, new RemoveCardFromDeckCommand());
 		registerCommand(GameNotification.SAVE_ACTIVE_DECK, new SaveDeckCommand());
 		registerCommand(GameNotification.LOAD_DECKS, new LoadDecksCommand());
-		registerCommand(GameNotification.FILTER_CARDS_BY_TEXT, new FilterCardsByTextCommand());
+		registerCommand(GameNotification.FILTER_CARDS, new FilterCardsCommand());
 		registerCommand(GameNotification.FILL_DECK_WITH_RANDOM_CARDS, new FillDeckWithRandomCardsCommand());
 		registerCommand(GameNotification.IMPORT_DECK_FROM_URL, new ImportDeckCommand());
 		registerCommand(GameNotification.CHANGE_DECK_NAME, new ChangeDeckNameCommand());
@@ -77,7 +77,7 @@ public class ApplicationFacade extends Facade<GameNotification> {
 		registerCommand(GameNotification.GAME_STATE_UPDATE, new AnimationLockCommand());
 		registerCommand(GameNotification.ANIMATION_STARTED, new AnimationStartedCommand());
 		registerCommand(GameNotification.ANIMATION_COMPLETED, new AnimationCompletedCommand());
-		
+
 		registerCommand(GameNotification.SAVE_TRAINING_DATA, new SaveTrainingDataCommand());
 		registerCommand(GameNotification.REQUEST_TRAINING_DATA, new RequestTrainingDataCommand());
 	}

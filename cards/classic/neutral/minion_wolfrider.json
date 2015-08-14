@@ -1,0 +1,16 @@
+{
+	"name": "Wolfrider",
+	"description": "Charge",
+	"id": "minion_wolfrider",
+	"type": "MINION",
+	"rarity": "FREE",
+	"heroClass": "ANY",
+	"baseManaCost": 3,
+	"baseAttack": 3,
+	"baseHp": 1,
+	"attributes": {
+		"CHARGE": true
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

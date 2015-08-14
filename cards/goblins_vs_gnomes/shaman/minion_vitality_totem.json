@@ -1,0 +1,25 @@
+{
+	"baseAttack": 0,
+	"baseHp": 3,
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger"
+		},
+		"spell": {
+			"class": "HealSpell",
+			"value": 4,
+			"target": "FRIENDLY_HERO"
+		}
+	},
+	"race": "TOTEM",
+	"id": "minion_vitality_totem",
+	"name": "Vitality Totem",
+	"description": "At the end of your turn, restore 4 Health to your hero.",
+	"type": "MINION",
+	"heroClass": "SHAMAN",
+	"rarity": "RARE",
+	"baseManaCost": 2,
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

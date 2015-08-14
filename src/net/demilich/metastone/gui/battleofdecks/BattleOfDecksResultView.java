@@ -60,6 +60,7 @@ public class BattleOfDecksResultView extends BorderPane {
 					private final Label label = new Label();
 					private final ProgressBar progressBar = new ProgressBar();
 					private final StackPane stackPane = new StackPane();
+
 					{
 						label.getStyleClass().setAll("progress-text");
 						stackPane.setAlignment(Pos.CENTER);

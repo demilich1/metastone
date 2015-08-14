@@ -17,26 +17,28 @@ public class EntityReference {
 	public static final EntityReference ALL_OTHER_CHARACTERS = new EntityReference(-12);
 	public static final EntityReference FRIENDLY_WEAPON = new EntityReference(-13);
 	public static final EntityReference ENEMY_WEAPON = new EntityReference(-14);
+
+	public static final EntityReference TARGET = new EntityReference(-17);
+
 	public static final EntityReference EVENT_TARGET = new EntityReference(-20);
-	
 	public static final EntityReference SELF = new EntityReference(-21);
 	public static final EntityReference KILLED_MINION = new EntityReference(-22);
 	public static final EntityReference ATTACKER = new EntityReference(-23);
 	public static final EntityReference PENDING_CARD = new EntityReference(-24);
-	
+
 	public static EntityReference pointTo(Entity entity) {
 		if (entity == null) {
 			return null;
 		}
 		return new EntityReference(entity.getId());
 	}
-		
+
 	private final int key;
-	
+
 	public EntityReference(int key) {
 		this.key = key;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof EntityReference)) {
@@ -45,7 +47,7 @@ public class EntityReference {
 		EntityReference entityReference = (EntityReference) obj;
 		return entityReference.getId() == getId();
 	}
-	
+
 	public int getId() {
 		return key;
 	}
@@ -54,11 +56,11 @@ public class EntityReference {
 	public int hashCode() {
 		return new Integer(key).hashCode();
 	}
-	
+
 	public boolean isTargetGroup() {
 		return key < 0;
 	}
-	
+
 	@Override
 	public String toString() {
 		return String.format("[EntityReference id:%d]", key);

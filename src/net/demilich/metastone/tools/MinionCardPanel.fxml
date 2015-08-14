@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.web.*?>
+<?import javafx.scene.image.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root spacing="8.0" type="VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox spacing="8.0">
+         <children>
+            <Label minWidth="84.0" text="Attack:" />
+            <TextField fx:id="attackField" promptText="enter attack value" />
+         </children>
+         <padding>
+            <Insets left="16.0" />
+         </padding>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="10.0" spacing="8.0">
+         <children>
+            <Label minWidth="84.0" text="Hp:" />
+            <TextField fx:id="hpField" promptText="enter hp value" />
+         </children>
+         <padding>
+            <Insets left="16.0" />
+         </padding>
+      </HBox>
+      <HBox spacing="8.0">
+         <children>
+            <Label minWidth="84.0" text="Race:" />
+            <ComboBox fx:id="raceBox" prefWidth="150.0" />
+         </children>
+         <padding>
+            <Insets left="16.0" />
+         </padding>
+      </HBox>
+      <HBox fx:id="battlecryPanel" spacing="8.0">
+         <children>
+            <Label alignment="TOP_LEFT" minWidth="84.0" text="Battlecry" />
+            <VBox alignment="CENTER_LEFT" spacing="8.0">
+               <children>
+                  <HBox spacing="8.0">
+                     <children>
+                        <Label minWidth="84.0" text="TargetSelection" />
+                        <ComboBox fx:id="battlecryTargetSelectionBox" prefWidth="150.0" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" spacing="8.0">
+                     <children>
+                        <Label minWidth="84.0" text="Spell" />
+                        <ComboBox fx:id="battlecrySpellBox" prefWidth="150.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets left="16.0" />
+         </padding>
+      </HBox>
+      <HBox fx:id="deathrattlePanel" spacing="8.0">
+         <children>
+            <Label minWidth="84.0" text="Deathrattle" />
+            <HBox spacing="8.0">
+               <children>
+                  <Label minWidth="84.0" text="Spell" />
+                  <ComboBox fx:id="deathrattleSpellBox" prefWidth="150.0" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="16.0" />
+         </padding>
+      </HBox>
+   </children>
+</fx:root>

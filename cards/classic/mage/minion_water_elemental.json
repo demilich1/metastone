@@ -1,0 +1,25 @@
+{
+	"baseAttack": 3,
+	"baseHp": 6,
+	"trigger": {
+		"eventTrigger": {
+			"class": "DamageCausedTrigger",
+			"worksOnHero": true
+		},
+		"spell": {
+			"class": "AddAttributeSpell",
+			"attribute": "FROZEN",
+			"target": "EVENT_TARGET"
+		}
+	},
+	"id": "minion_water_elemental",
+	"name": "Water Elemental",
+	"description": "Freeze any character damaged by this minion.",
+	"type": "MINION",
+	"heroClass": "MAGE",
+	"rarity": "FREE",
+	"baseManaCost": 4,
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,13 @@
+{
+	"name": "Oasis Snapjaw",
+	"id": "minion_oasis_snapjaw",
+	"type": "MINION",
+	"rarity": "FREE",
+	"heroClass": "ANY",
+	"baseManaCost": 4,
+	"baseAttack": 2,
+	"baseHp": 7,
+	"race": "BEAST",
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

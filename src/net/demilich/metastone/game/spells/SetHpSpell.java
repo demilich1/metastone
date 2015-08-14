@@ -2,8 +2,8 @@ package net.demilich.metastone.game.spells;
 
 import java.util.Map;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
@@ -12,7 +12,7 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class SetHpSpell extends Spell {
-	
+
 	public static SpellDesc create(EntityReference target, int hp) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(SetHpSpell.class);
 		arguments.put(SpellArg.VALUE, hp);
@@ -28,7 +28,7 @@ public class SetHpSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int hp = desc.getValue();
 		Actor targetActor = (Actor) target;
-		targetActor.removeTag(GameTag.HP_BONUS);
+		targetActor.removeAttribute(Attribute.HP_BONUS);
 		context.getLogic().modifyMaxHp(targetActor, hp);
 	}
 

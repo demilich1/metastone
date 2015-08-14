@@ -1,0 +1,24 @@
+{
+	"baseAttack": 4,
+	"baseHp": 2,
+	"trigger": {
+		"eventTrigger": {
+			"class": "MinionDeathTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "DrawCardSpell",
+			"value": 1
+		}
+	},
+	"id": "minion_cult_master",
+	"name": "Cult Master",
+	"description": "Whenever one of your other minions dies, draw a card.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 4,
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

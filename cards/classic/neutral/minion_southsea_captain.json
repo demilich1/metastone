@@ -1,0 +1,22 @@
+{
+	"baseAttack": 3,
+	"baseHp": 3,
+	"aura": {
+		"class": "BuffAura",
+		"attackBonus": 1,
+		"hpBonus": 1,
+		"raceRestriction": "PIRATE",
+		"target": "FRIENDLY_MINIONS"
+	},
+	"race": "PIRATE",
+	"id": "minion_southsea_captain",
+	"name": "Southsea Captain",
+	"description": "Your other Pirates have +1/+1.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"baseManaCost": 3,
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

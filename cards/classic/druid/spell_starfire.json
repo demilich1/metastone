@@ -1,0 +1,16 @@
+{
+	"name": "Starfire",
+	"description": "Deal 5 damage. Draw a card.",
+	"id": "spell_starfire",
+	"type": "SPELL",
+	"rarity": "FREE",
+	"heroClass": "DRUID",
+	"baseManaCost": 6,
+	"targetSelection": "ANY",
+	"spell": {
+		"class": "DamageSpell",
+		"value": 5
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

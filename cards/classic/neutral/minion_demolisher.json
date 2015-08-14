@@ -1,0 +1,28 @@
+{
+	"baseAttack": 1,
+	"baseHp": 4,
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnStartTrigger",
+			"targetPlayer": "SELF",
+			"breaksStealth": true
+		},
+		"spell": {
+			"class": "DamageSpell",
+			"value": 2,
+			"target": "ENEMY_CHARACTERS",
+			"randomTarget": true
+		}
+	},
+	"race": "MECH",
+	"id": "minion_demolisher",
+	"name": "Demolisher",
+	"description": "At the start of your turn, deal 2 damage to a random enemy.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"baseManaCost": 3,
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,24 @@
+{
+	"baseAttack": 6,
+	"baseHp": 2,
+	"battlecry": {
+		"spell": {
+			"class": "custom.VoljinSpell"
+		},
+		"targetSelection": "MINIONS",
+		"resolvedLate": false
+	},
+	"id": "minion_voljin",
+	"name": "Vol'jin",
+	"description": "Battlecry: Swap Health with another minion.",
+	"type": "MINION",
+	"heroClass": "PRIEST",
+	"rarity": "LEGENDARY",
+	"baseManaCost": 5,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

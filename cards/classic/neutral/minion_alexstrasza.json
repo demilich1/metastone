@@ -1,0 +1,21 @@
+{
+	"name": "Alexstrasza",
+	"description": "Battlecry: Set a hero's remaining Health to 15.",
+	"id": "minion_alexstrasza",
+	"type": "MINION",
+	"rarity": "LEGENDARY",
+	"heroClass": "ANY",
+	"baseManaCost": 9,
+	"baseAttack": 8,
+	"baseHp": 8,
+	"race": "DRAGON",
+	"battlecry": {
+		"targetSelection": "HEROES",
+		"spell": {
+			"class": "SetHeroHpSpell",
+			"value": 15
+		}
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

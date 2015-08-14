@@ -1,0 +1,17 @@
+{
+	"name": "Harvest Golem",
+	"description": "Deathrattle: Summon a 2/1 Damaged Golem.",
+	"id": "minion_harvest_golem",
+	"type": "MINION",
+	"rarity": "COMMON",
+	"heroClass": "ANY",
+	"baseManaCost": 3,
+	"baseAttack": 2,
+	"baseHp": 3,
+	"deathrattle": {
+		"class": "SummonSpell",
+		"card": "token_damaged_golem"
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

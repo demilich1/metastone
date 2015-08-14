@@ -7,6 +7,7 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class DrawCardSpell extends Spell {
@@ -23,7 +24,7 @@ public class DrawCardSpell extends Spell {
 		return create(null, numberOfCards, targetPlayer);
 	}
 
-	private static SpellDesc create(IValueProvider drawModifier, int numberOfCards, TargetPlayer targetPlayer) {
+	private static SpellDesc create(ValueProvider drawModifier, int numberOfCards, TargetPlayer targetPlayer) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(DrawCardSpell.class);
 		arguments.put(SpellArg.VALUE_PROVIDER, drawModifier);
 		arguments.put(SpellArg.VALUE, numberOfCards);
@@ -32,21 +33,17 @@ public class DrawCardSpell extends Spell {
 		return new SpellDesc(arguments);
 	}
 
-	public static SpellDesc create(IValueProvider drawModifier, TargetPlayer targetPlayer) {
+	public static SpellDesc create(ValueProvider drawModifier, TargetPlayer targetPlayer) {
 		return create(drawModifier, 0, targetPlayer);
-	}
-
-	private void draw(GameContext context, Player player, int numberOfCards, IValueProvider drawModifier) {
-		int cardCount = drawModifier != null ? drawModifier.provideValue(context, player, null) : numberOfCards;
-		for (int i = 0; i < cardCount; i++) {
-			context.getLogic().drawCard(player.getId());
-		}
 	}
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		int numberOfCards = desc.getInt(SpellArg.VALUE);
-		IValueProvider drawModifier = desc.getValueProvider();
-		draw(context, player, numberOfCards, drawModifier);
+		int numberOfCards = desc.getInt(SpellArg.VALUE, 1);
+		ValueProvider drawModifier = desc.getValueProvider();
+		int cardCount = drawModifier != null ? drawModifier.getValue(context, player, null, source) : numberOfCards;
+		for (int i = 0; i < cardCount; i++) {
+			context.getLogic().drawCard(player.getId());
+		}
 	}
 }

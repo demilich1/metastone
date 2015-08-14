@@ -2,21 +2,17 @@ package net.demilich.metastone.tests;
 
 import java.util.List;
 
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.actions.PhysicalAttackAction;
 import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.SpellCard;
-import net.demilich.metastone.game.cards.concrete.druid.SavageRoar;
-import net.demilich.metastone.game.cards.concrete.mage.ArcaneExplosion;
-import net.demilich.metastone.game.cards.concrete.neutral.FaerieDragon;
-import net.demilich.metastone.game.cards.concrete.neutral.GurubashiBerserker;
-import net.demilich.metastone.game.cards.concrete.neutral.OasisSnapjaw;
-import net.demilich.metastone.game.cards.concrete.neutral.SpitefulSmith;
-import net.demilich.metastone.game.cards.concrete.warlock.SummoningPortal;
-import net.demilich.metastone.game.cards.concrete.warrior.FieryWarAxe;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.Hero;
@@ -28,9 +24,6 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
 public class SpecialCardTests extends TestBase {
 
 	@Test
@@ -41,7 +34,7 @@ public class SpecialCardTests extends TestBase {
 		Player warrior = context.getPlayer2();
 		warrior.setMana(10);
 
-		MinionCard faerieDragonCard = new FaerieDragon();
+		MinionCard faerieDragonCard = (MinionCard) CardCatalogue.getCardById("minion_faerie_dragon");
 		context.getLogic().receiveCard(warrior.getId(), faerieDragonCard);
 		context.getLogic().performGameAction(warrior.getId(), faerieDragonCard.play());
 
@@ -64,7 +57,7 @@ public class SpecialCardTests extends TestBase {
 		Assert.assertEquals(validTargets.size(), 3);
 		Assert.assertFalse(validTargets.contains(elusiveOne));
 
-		Card arcaneExplosionCard = new ArcaneExplosion();
+		Card arcaneExplosionCard = CardCatalogue.getCardById("spell_arcane_explosion");
 		context.getLogic().receiveCard(mage.getId(), arcaneExplosionCard);
 		int faerieDragonHp = elusiveOne.getHp();
 		context.getLogic().performGameAction(mage.getId(), arcaneExplosionCard.play());
@@ -80,32 +73,35 @@ public class SpecialCardTests extends TestBase {
 		Player warrior = context.getPlayer2();
 		warrior.setMana(10);
 
-		MinionCard gurubashiBerserkerCard = new GurubashiBerserker();
+		final int BASE_ATTACK = 2;
+		final int ATTACK_BONUS = 3;
+
+		MinionCard gurubashiBerserkerCard = (MinionCard) CardCatalogue.getCardById("minion_gurubashi_berserker");
 		playCard(context, warrior, gurubashiBerserkerCard);
 
-		MinionCard oasisSnapjawCard = new OasisSnapjaw();
+		MinionCard oasisSnapjawCard = (MinionCard) CardCatalogue.getCardById("minion_oasis_snapjaw");
 		playCard(context, mage, oasisSnapjawCard);
 
 		Actor attacker = getSingleMinion(mage.getMinions());
 		Actor defender = getSingleMinion(warrior.getMinions());
 
 		// Gurubashi Berserker should start with just his base attack
-		Assert.assertEquals(defender.getAttack(), GurubashiBerserker.BASE_ATTACK);
+		Assert.assertEquals(defender.getAttack(), BASE_ATTACK);
 
 		// first attack, Gurubashi Berserker should have increased attack
 		GameAction attackAction = new PhysicalAttackAction(attacker.getReference());
 		attackAction.setTarget(defender);
 		context.getLogic().performGameAction(mage.getId(), attackAction);
 
-		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp() - GurubashiBerserker.BASE_ATTACK);
+		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp() - BASE_ATTACK);
 		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - attacker.getAttack());
-		Assert.assertEquals(defender.getAttack(), GurubashiBerserker.BASE_ATTACK + GurubashiBerserker.ATTACK_BONUS);
+		Assert.assertEquals(defender.getAttack(), BASE_ATTACK + ATTACK_BONUS);
 
 		// second attack, Gurubashi Berserker should become even stronger
 		context.getLogic().performGameAction(mage.getId(), attackAction);
-		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp() - 2 * GurubashiBerserker.BASE_ATTACK - GurubashiBerserker.ATTACK_BONUS);
+		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp() - 2 * BASE_ATTACK - ATTACK_BONUS);
 		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - 2 * attacker.getAttack());
-		Assert.assertEquals(defender.getAttack(), GurubashiBerserker.BASE_ATTACK + 2 * GurubashiBerserker.ATTACK_BONUS);
+		Assert.assertEquals(defender.getAttack(), BASE_ATTACK + 2 * ATTACK_BONUS);
 	}
 
 	@Test
@@ -128,7 +124,7 @@ public class SpecialCardTests extends TestBase {
 		Assert.assertEquals(druid.getAttack(), 1);
 		Assert.assertEquals(minion.getAttack(), 1);
 
-		Card savageRoar = new SavageRoar();
+		Card savageRoar = CardCatalogue.getCardById("spell_savage_roar");
 		context.getLogic().receiveCard(player.getId(), savageRoar);
 		context.getLogic().performGameAction(player.getId(), savageRoar.play());
 		Assert.assertEquals(druid.getAttack(), 3);
@@ -149,13 +145,14 @@ public class SpecialCardTests extends TestBase {
 		Player player = context.getPlayer1();
 		player.setMana(10);
 
-		Card fieryWarAxe = new FieryWarAxe();
+		Card fieryWarAxe = CardCatalogue.getCardById("weapon_fiery_war_axe");
 		playCard(context, player, fieryWarAxe);
 
 		Assert.assertTrue(player.getHero().getWeapon() != null);
 		Assert.assertEquals(player.getHero().getWeapon().getWeaponDamage(), 3);
 
-		Minion spitefulSmith = playMinionCard(context, player, new SpitefulSmith());
+		MinionCard spitefulSmithCard = (MinionCard) CardCatalogue.getCardById("minion_spiteful_smith");
+		Minion spitefulSmith = playMinionCard(context, player, spitefulSmithCard);
 		// Smith has been played, but is not enraged yet, so weapon damage
 		// should still be unaltered
 		Assert.assertEquals(player.getHero().getWeapon().getWeaponDamage(), 3);
@@ -171,7 +168,7 @@ public class SpecialCardTests extends TestBase {
 		Assert.assertEquals(player.getHero().getWeapon().getWeaponDamage(), 5);
 
 		// equip a new weapon; this one should get buffed too
-		fieryWarAxe = new FieryWarAxe();
+		fieryWarAxe = CardCatalogue.getCardById("weapon_fiery_war_axe");
 		playCard(context, player, fieryWarAxe);
 		Assert.assertEquals(player.getHero().getWeapon().getWeaponDamage(), 5);
 
@@ -190,9 +187,9 @@ public class SpecialCardTests extends TestBase {
 		Player player = context.getPlayer1();
 		player.setMana(10);
 
-		Card summoningPortal1 = new SummoningPortal();
+		Card summoningPortal1 = CardCatalogue.getCardById("minion_summoning_portal");
 		context.getLogic().receiveCard(player.getId(), summoningPortal1);
-		Card summoningPortal2 = new SummoningPortal();
+		Card summoningPortal2 = CardCatalogue.getCardById("minion_summoning_portal");
 		context.getLogic().receiveCard(player.getId(), summoningPortal2);
 
 		MinionCard testMinionCard = new TestMinionCard(1, 1, 4);

@@ -1,0 +1,30 @@
+{
+	"baseAttack": 0,
+	"baseHp": 3,
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "HealSpell",
+			"value": 6,
+			"target": "ALL_CHARACTERS",
+			"randomTarget": true,
+			"filter": {
+				"class": "DamagedFilter"
+			}
+		}
+	},
+	"race": "MECH",
+	"id": "token_repair_bot",
+	"name": "Repair Bot",
+	"description": "At the end of your turn, restore 6 Health to a damaged character.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"baseManaCost": 1,
+	"collectible": false,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,17 @@
+{
+	"name": "Jungle Panther",
+	"description": "Stealth",
+	"id": "minion_jungle_panther",
+	"type": "MINION",
+	"rarity": "COMMON",
+	"heroClass": "ANY",
+	"baseManaCost": 3,
+	"baseAttack": 4,
+	"baseHp": 2,
+	"race": "BEAST",
+	"attributes": {
+		"STEALTH": true
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

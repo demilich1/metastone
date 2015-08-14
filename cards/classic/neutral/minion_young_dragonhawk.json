@@ -1,0 +1,17 @@
+{
+	"name": "Young Dragonhawk",
+	"description": "Windfury",
+	"id": "minion_young_dragonhawk",
+	"type": "MINION",
+	"rarity": "COMMON",
+	"heroClass": "ANY",
+	"baseManaCost": 1,
+	"baseAttack": 1,
+	"baseHp": 1,
+	"race": "BEAST",
+	"attributes": {
+		"WINDFURY": true
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

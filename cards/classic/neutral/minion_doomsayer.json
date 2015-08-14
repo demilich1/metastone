@@ -1,0 +1,24 @@
+{
+	"baseAttack": 0,
+	"baseHp": 7,
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnStartTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "DestroySpell",
+			"target": "ALL_MINIONS"
+		}
+	},
+	"id": "minion_doomsayer",
+	"name": "Doomsayer",
+	"description": "At the start of your turn, destroy ALL minions.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"baseManaCost": 2,
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

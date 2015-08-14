@@ -1,0 +1,22 @@
+{
+	"baseAttack": 1,
+	"baseHp": 2,
+	"race": "BEAST",
+	"deathrattle": {
+		"class": "SummonSpell",
+		"cards": [
+			"token_spectral_spider",
+			"token_spectral_spider"
+		]
+	},
+	"id": "minion_haunted_creeper",
+	"name": "Haunted Creeper",
+	"description": "Deathrattle: Summon two 1/1 Spectral Spiders.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 2,
+	"collectible": true,
+	"set": "NAXXRAMAS",
+	"fileFormatVersion": 1
+}

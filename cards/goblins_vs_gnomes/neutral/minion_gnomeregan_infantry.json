@@ -1,0 +1,18 @@
+{
+	"baseAttack": 1,
+	"baseHp": 4,
+	"id": "minion_gnomeregan_infantry",
+	"name": "Gnomeregan Infantry",
+	"description": "Charge. Taunt",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 3,
+	"collectible": true,
+	"attributes": {
+		"TAUNT": true,
+		"CHARGE": true
+	},
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

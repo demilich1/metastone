@@ -1,0 +1,13 @@
+{
+	"name": "Bloodfen Raptor",
+	"id": "minion_bloodfen_raptor",
+	"type": "MINION",
+	"rarity": "FREE",
+	"heroClass": "ANY",
+	"baseManaCost": 2,
+	"baseAttack": 3,
+	"baseHp": 2,
+	"race": "BEAST",
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

@@ -4,11 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.decks.Deck;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
-
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.config.RequestConfig;
@@ -20,8 +15,13 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCatalogue;
+import net.demilich.metastone.game.decks.Deck;
+import net.demilich.metastone.game.entities.heroes.HeroClass;
+
 public class HearthPwnImporter implements IDeckImporter {
-	
+
 	private static Logger logger = LoggerFactory.getLogger(HearthPwnImporter.class);
 
 	private String extractId(String url) {

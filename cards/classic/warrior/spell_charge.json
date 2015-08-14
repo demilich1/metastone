@@ -1,0 +1,23 @@
+{
+	"name": "Charge",
+	"description": "Give a friendly minion +2 Attack and Charge.",
+	"id": "spell_CHARGE",
+	"type": "SPELL",
+	"rarity": "FREE",
+	"heroClass": "WARRIOR",
+	"baseManaCost": 3,
+	"targetSelection": "FRIENDLY_MINIONS",
+	"spell": {
+		"class": "MetaSpell",
+		"spell1": {
+			"class": "BuffSpell",
+			"attackBonus": 2
+		},
+		"spell2": {
+			"class": "AddAttributeSpell",
+			"attribute": "CHARGE"
+		}
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

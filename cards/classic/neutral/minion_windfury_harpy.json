@@ -1,0 +1,15 @@
+{
+	"name": "Windfury Harpy",
+	"id": "minion_WINDFURY_harpy",
+	"type": "MINION",
+	"rarity": "COMMON",
+	"heroClass": "ANY",
+	"baseManaCost": 6,
+	"baseAttack": 4,
+	"baseHp": 5,
+	"attributes": {
+		"WINDFURY": true
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

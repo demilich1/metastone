@@ -1,0 +1,26 @@
+{
+	"baseAttack": 1,
+	"baseHp": 2,
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnStartTrigger",
+			"targetPlayer": "BOTH"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"attackBonus": 1,
+			"target": "SELF"
+		}
+	},
+	"race": "MECH",
+	"id": "minion_micro_machine",
+	"name": "Micro Machine",
+	"description": "At the start of each turn, gain +1 Attack.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 2,
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

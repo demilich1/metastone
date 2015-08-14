@@ -1,0 +1,19 @@
+{
+	"baseAttack": 1,
+	"baseHp": 2,
+	"race": "MECH",
+	"id": "minion_annoy-o-tron",
+	"name": "Annoy-o-Tron",
+	"description": "Taunt. Divine Shield",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 2,
+	"collectible": true,
+	"attributes": {
+		"TAUNT": true,
+		"DIVINE_SHIELD": true
+	},
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

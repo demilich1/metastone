@@ -14,7 +14,7 @@ import net.demilich.metastone.game.decks.Deck;
 
 public class CardListView extends VBox implements EventHandler<MouseEvent> {
 
-	private final HashMap<Integer, CardEntry> existingCardEntries = new HashMap<Integer, CardEntry>();
+	private final HashMap<String, CardEntry> existingCardEntries = new HashMap<String, CardEntry>();
 	private final CardEntryFactory cardEntryFactory = new CardEntryFactory();
 
 	public CardListView() {
@@ -34,16 +34,16 @@ public class CardListView extends VBox implements EventHandler<MouseEvent> {
 		existingCardEntries.clear();
 		clearChildren();
 		for (Card card : deck.getCards()) {
-			Integer cardTypeId = card.getTypeId();
+			String cardId = card.getCardId();
 			CardEntry cardEntry = null;
-			if (existingCardEntries.containsKey(cardTypeId)) {
-				cardEntry = existingCardEntries.get(cardTypeId);
+			if (existingCardEntries.containsKey(cardId)) {
+				cardEntry = existingCardEntries.get(cardId);
 				cardEntry.addCard(card);
 			} else {
 				cardEntry = cardEntryFactory.createCardEntry(card);
 				cardEntry.addEventHandler(MouseEvent.MOUSE_CLICKED, this);
 				getChildren().add(cardEntry);
-				existingCardEntries.put(cardTypeId, cardEntry);
+				existingCardEntries.put(cardId, cardEntry);
 			}
 
 		}

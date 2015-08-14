@@ -69,7 +69,7 @@ public class DeckBuilderView extends BorderPane implements EventHandler<ActionEv
 		deckInfoView = new DeckInfoView();
 		deckListView = new DeckListView();
 		deckNameView = new DeckNameView();
-		
+
 		metaDeckView = new MetaDeckView();
 		metaDeckListView = new MetaDeckListView();
 		showSidebar(deckListView);

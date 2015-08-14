@@ -1,0 +1,24 @@
+{
+	"name": "1 damage + draw card",
+	"description": "Deal 1 damage to a minion and draw a card.",
+	"id": "spell_wrath_2",
+	"type": "SPELL",
+	"rarity": "COMMON",
+	"heroClass": "DRUID",
+	"baseManaCost": 2,
+	"targetSelection": "MINIONS",
+	"collectible": false,
+	"spell": {
+		"class": "MetaSpell",
+		"spell1": {
+			"class": "DamageSpell",
+			"value": 1
+		},
+		"spell2": {
+			"class": "DrawCardSpell",
+			"value": "1"
+		}
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

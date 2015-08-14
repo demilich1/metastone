@@ -1,0 +1,14 @@
+{
+	"baseAttack": 2,
+	"baseHp": 2,
+	"id": "token_squire",
+	"name": "Squire",
+	"description": "",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 1,
+	"collectible": false,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

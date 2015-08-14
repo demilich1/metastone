@@ -13,20 +13,20 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.behaviour.human.HumanTargetOptions;
 
 public class PlayModeView extends BorderPane {
-	
+
 	@FXML
 	private Button backButton;
-	
+
 	@FXML
 	private VBox sidePane;
-	
+
 	private final GameBoardView boardView;
 	private final HumanActionPromptView actionPromptView;
-	
+
 	private final LoadingBoardView loadingView;
-	
+
 	private boolean firstUpdate = true;
-	
+
 	public PlayModeView() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PlayModeView.fxml"));
 		fxmlLoader.setRoot(this);
@@ -37,32 +37,32 @@ public class PlayModeView extends BorderPane {
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
-		
+
 		boardView = new GameBoardView();
-		//setCenter(boardView);
+		// setCenter(boardView);
 		loadingView = new LoadingBoardView();
 		setCenter(loadingView);
-		
+
 		actionPromptView = new HumanActionPromptView();
 		sidePane.getChildren().remove(backButton);
 		sidePane.getChildren().add(actionPromptView);
-		
+
 		backButton.setOnAction(actionEvent -> ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU));
 	}
-	
+
 	public void disableTargetSelection() {
 		boardView.disableTargetSelection();
 		actionPromptView.setVisible(true);
 	}
-	
+
 	public void enableTargetSelection(HumanTargetOptions targetOptions) {
 		boardView.enableTargetSelection(targetOptions);
 	}
-	
+
 	public HumanActionPromptView getActionPromptView() {
 		return actionPromptView;
 	}
-	
+
 	public void showAnimations(GameContext context) {
 		boardView.showAnimations(context);
 	}

@@ -1,0 +1,13 @@
+{
+	"name": "Gul'dan",
+	"id": "hero_guldan",
+	"type": "HERO",
+	"heroClass": "WARLOCK",
+	"rarity": "FREE",
+	"heroPower": "hero_power_life_tap",
+	"collectible": true,
+	"attributes": {
+		"HP": 30,
+		"MAX_HP": 30
+	}
+}

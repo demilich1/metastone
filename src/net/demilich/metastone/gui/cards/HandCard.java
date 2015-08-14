@@ -14,7 +14,7 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.gui.IconFactory;
 
 public class HandCard extends CardToken {
-	
+
 	@FXML
 	private Pane topPane;
 	@FXML
@@ -36,12 +36,13 @@ public class HandCard extends CardToken {
 		bottomPane.setVisible(!hide);
 		if (hide) {
 			BackgroundSize size = new BackgroundSize(getWidth(), getHeight(), false, false, true, false);
-			BackgroundImage image = new BackgroundImage(IconFactory.getDefaultCardBack(), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
+			BackgroundImage image = new BackgroundImage(IconFactory.getDefaultCardBack(), BackgroundRepeat.NO_REPEAT,
+					BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
 			Background background = new Background(image);
 			setBackground(background);
-		} 
+		}
 	}
-	
+
 	@Override
 	public void setCard(GameContext context, Card card, Player player) {
 		super.setCard(context, card, player);
@@ -54,14 +55,14 @@ public class HandCard extends CardToken {
 		} else {
 			tooltipContent.setCard(context, card, player);
 		}
-		
+
 		hideCard(player.hideCards());
-		
+
 		if (player.hideCards()) {
 			Tooltip.uninstall(this, tooltip);
 			tooltipContent = null;
 			tooltip = null;
-		} 
+		}
 	}
 
 }

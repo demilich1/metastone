@@ -14,11 +14,11 @@ public class ModifyMaxManaSpell extends Spell {
 	public static SpellDesc create() {
 		return create(1, false);
 	}
-	
+
 	public static SpellDesc create(int value, boolean fullManaCrystals) {
 		return create(TargetPlayer.SELF, value, fullManaCrystals);
 	}
-	
+
 	public static SpellDesc create(TargetPlayer targetPlayer, int value, boolean fullManaCrystals) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(ModifyMaxManaSpell.class);
 		arguments.put(SpellArg.VALUE, value);

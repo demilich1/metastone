@@ -1,0 +1,32 @@
+{
+	"baseAttack": 2,
+	"baseHp": 2,
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"attackBonus": 2,
+			"hpBonus": 2,
+			"target": "OTHER_FRIENDLY_MINIONS",
+			"filter": {
+				"class": "RaceFilter",
+				"race": "MECH"
+			},
+			"randomTarget": true
+		}
+	},
+	"race": "MECH",
+	"id": "minion_iron_sensai",
+	"name": "Iron Sensai",
+	"description": "At the end of your turn, give another friendly Mech +2/+2.",
+	"type": "MINION",
+	"heroClass": "ROGUE",
+	"rarity": "RARE",
+	"baseManaCost": 3,
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

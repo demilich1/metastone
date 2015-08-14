@@ -1,0 +1,30 @@
+{
+  "baseAttack": 5,
+  "baseHp": 3,
+  "race": "BEAST",
+  "battlecry": {
+    "spell": {
+      "class": "JoustSpell",
+	  "spell1" : {
+		  "class" : "AddAttributeSpell",
+		  "attribute" : "CHARGE",
+		  "target" : "SELF"
+	  },
+	  "target" : "NONE"
+    },
+    "resolvedLate": false
+  },
+  "id": "minion_armored_warhorse",
+  "name": "Armored Warhorse",
+  "description": "Battlecry: Reveal a minion in each deck.If yours costs more, gain Charge.",
+  "type": "MINION",
+  "heroClass": "ANY",
+  "rarity": "RARE",
+  "set": "THE_GRAND_TOURNAMENT",
+  "baseManaCost": 4,
+  "collectible": true,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "fileFormatVersion": 1
+}

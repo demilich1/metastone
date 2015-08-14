@@ -9,7 +9,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 
 public class ToolboxView extends ToolBar {
-	
+
 	private final PlayerPanel playerPanel;
 	private final CardPanel cardPanel;
 	private final MinionPanel minionPanel;
@@ -38,7 +38,7 @@ public class ToolboxView extends ToolBar {
 	public void onPlayerSelectionChanged(Player selectedPlayer) {
 		cardPanel.onPlayerSelectionChanged(selectedPlayer);
 	}
-	
+
 	public void setContext(GameContext context) {
 		playerPanel.setContext(context);
 		minionPanel.setContext(context);

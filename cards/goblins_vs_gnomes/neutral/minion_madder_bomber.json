@@ -1,0 +1,27 @@
+{
+	"baseAttack": 5,
+	"baseHp": 4,
+	"battlecry": {
+		"spell": {
+			"class": "MissilesSpell",
+			"value": 1,
+			"howMany": 6,
+			"target": "ALL_CHARACTERS",
+			"randomTarget": true
+		},
+		"resolvedLate": false
+	},
+	"id": "minion_madder_bomber",
+	"name": "Madder Bomber",
+	"description": "Battlecry: Deal 6 damage randomly split between all other characters.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"baseManaCost": 5,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

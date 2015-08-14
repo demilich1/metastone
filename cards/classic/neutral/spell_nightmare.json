@@ -1,0 +1,33 @@
+{
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "MetaSpell",
+		"spell1": {
+			"class": "BuffSpell",
+			"attackBonus": 5,
+			"hpBonus": 5
+		},
+		"spell2": {
+			"class": "AddSpellTriggerSpell",
+			"trigger": {
+				"eventTrigger": {
+					"class": "TurnStartTrigger"
+				},
+				"spell": {
+					"class": "DestroySpell",
+					"target": "SELF"
+				}
+			}
+		}
+	},
+	"id": "spell_nightmare",
+	"name": "Nightmare",
+	"description": "Give a minion +5/+5. At the start of your next turn, destroy it.",
+	"type": "SPELL",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"baseManaCost": 0,
+	"collectible": false,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

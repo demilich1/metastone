@@ -15,7 +15,7 @@ public class HealEventVisualizer implements IGameEventVisualizer {
 		if (targetToken == null) {
 			return;
 		}
-		new HealingNumber("+"  + healEvent.getHealing(), targetToken);
+		new HealingNumber("+" + healEvent.getHealing(), targetToken);
 	}
 
 }

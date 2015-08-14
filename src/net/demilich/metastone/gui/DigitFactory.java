@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
+import javax.imageio.ImageIO;
+
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -22,8 +24,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
-import javax.imageio.ImageIO;
 
 public class DigitFactory {
 
@@ -51,21 +51,21 @@ public class DigitFactory {
 		String numberString = String.valueOf(number);
 		if (numberString.length() == 1) {
 			char digitToChar = Character.forDigit(number, 10);
-			ImageView image =new ImageView(digits.get(digitToChar));
+			ImageView image = new ImageView(digits.get(digitToChar));
 			applyFontColor(image, color);
 			return image;
 		}
-		
+
 		HBox layoutPane = new HBox(-4);
 		for (int i = 0; i < numberString.length(); i++) {
 			char digitToChar = numberString.charAt(i);
-			ImageView image =new ImageView(digits.get(digitToChar));
+			ImageView image = new ImageView(digits.get(digitToChar));
 			applyFontColor(image, color);
 			layoutPane.getChildren().add(image);
 		}
 		return layoutPane;
 	}
-	
+
 	public static void saveAllDigits() {
 		Stage stage = new Stage(StageStyle.TRANSPARENT);
 		DigitTemplate root = new DigitTemplate();
@@ -91,11 +91,11 @@ public class DigitFactory {
 
 		stage.close();
 	}
-	
+
 	public static void showPreRenderedDigits(Group group, int number) {
 		showPreRenderedDigits(group, number, Color.WHITE);
 	}
-	
+
 	public static void showPreRenderedDigits(Group group, int number, Color color) {
 		group.getChildren().clear();
 		group.getChildren().add(DigitFactory.getCachedDigitImage(number, color));

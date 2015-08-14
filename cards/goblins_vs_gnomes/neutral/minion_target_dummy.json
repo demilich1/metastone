@@ -1,0 +1,18 @@
+{
+	"baseAttack": 0,
+	"baseHp": 2,
+	"race": "MECH",
+	"id": "minion_target_dummy",
+	"name": "Target Dummy",
+	"description": "Taunt",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"baseManaCost": 0,
+	"collectible": true,
+	"attributes": {
+		"TAUNT": true
+	},
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

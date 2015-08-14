@@ -2,22 +2,23 @@ package net.demilich.metastone.game.spells;
 
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.CardLocation;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class CopyCardSpell extends Spell {
 
 	private static Logger logger = LoggerFactory.getLogger(CopyCardSpell.class);
-	
+
 	public static SpellDesc create(CardLocation cardLocation, int numberOfCardsToCopy) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(CopyCardSpell.class);
 		arguments.put(SpellArg.CARD_LOCATION, cardLocation);
@@ -27,9 +28,15 @@ public class CopyCardSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
+		if (target != null && target.getEntityType() == EntityType.CARD) {
+			Card targetCard = (Card) target;
+			context.getLogic().receiveCard(player.getId(), targetCard.getCopy());
+			return;
+		}
+
 		CardLocation cardLocation = (CardLocation) desc.get(SpellArg.CARD_LOCATION);
-		int numberOfCardsToCopy = desc.getInt(SpellArg.VALUE);
-		
+		int numberOfCardsToCopy = desc.getInt(SpellArg.VALUE, 1);
+
 		Player opponent = context.getOpponent(player);
 		CardCollection sourceCollection = null;
 		switch (cardLocation) {
@@ -48,7 +55,7 @@ public class CopyCardSpell extends Spell {
 			if (sourceCollection.isEmpty()) {
 				return;
 			}
-			Card clone = sourceCollection.getRandom().clone();
+			Card clone = sourceCollection.getRandom().getCopy();
 			context.getLogic().receiveCard(player.getId(), clone);
 		}
 	}

@@ -1,0 +1,18 @@
+{
+	"baseAttack": 1,
+	"baseHp": 4,
+	"race": "MECH",
+	"id": "minion_flying_machine",
+	"name": "Flying Machine",
+	"description": "Windfury",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 3,
+	"collectible": true,
+	"attributes": {
+		"WINDFURY": true
+	},
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

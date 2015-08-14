@@ -1,0 +1,18 @@
+{
+	"name": "Avenging Wrath",
+	"description": "Deal 8 damage randomly split among enemy characters.",
+	"id": "spell_arcane_missiles",
+	"type": "SPELL",
+	"rarity": "EPIC",
+	"heroClass": "PALADIN",
+	"baseManaCost": 6,
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "MissilesSpell",
+		"value": 1,
+		"howMany": 8,
+		"target": "ENEMY_CHARACTERS"
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

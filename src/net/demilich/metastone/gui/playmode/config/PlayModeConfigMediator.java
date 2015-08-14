@@ -3,12 +3,12 @@ package net.demilich.metastone.gui.playmode.config;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.pferdimanzug.nittygrittymvc.Mediator;
+import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.gui.gameconfig.GameConfig;
 import net.demilich.metastone.gui.playmode.PlayModeMediator;
-import de.pferdimanzug.nittygrittymvc.Mediator;
-import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
 
 public class PlayModeConfigMediator extends Mediator<GameNotification> {
 
@@ -20,7 +20,7 @@ public class PlayModeConfigMediator extends Mediator<GameNotification> {
 		super(NAME);
 		view = new PlayModeConfigView();
 	}
-	
+
 	@Override
 	public void handleNotification(final INotification<GameNotification> notification) {
 		switch (notification.getId()) {
@@ -32,7 +32,7 @@ public class PlayModeConfigMediator extends Mediator<GameNotification> {
 		case COMMIT_PLAYMODE_CONFIG:
 			getFacade().registerMediator(new PlayModeMediator());
 			new Thread(new Runnable() {
-				
+
 				@Override
 				public void run() {
 					GameConfig gameConfig = (GameConfig) notification.getBody();

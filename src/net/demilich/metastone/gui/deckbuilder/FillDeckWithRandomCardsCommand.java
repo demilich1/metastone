@@ -3,18 +3,17 @@ package net.demilich.metastone.gui.deckbuilder;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-import net.demilich.metastone.GameNotification;
-import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.decks.Deck;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.pferdimanzug.nittygrittymvc.SimpleCommand;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
+import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.decks.Deck;
 
 public class FillDeckWithRandomCardsCommand extends SimpleCommand<GameNotification> {
-	
+
 	private static Logger logger = LoggerFactory.getLogger(FillDeckWithRandomCardsCommand.class);
 
 	@Override

@@ -1,0 +1,24 @@
+{
+	"baseAttack": 5,
+	"baseHp": 3,
+	"battlecry": {
+		"spell": {
+			"class": "ReturnMinionToHandSpell"
+		},
+		"condition": {
+			"class": "ComboCondition"
+		},
+		"targetSelection": "MINIONS",
+		"resolvedLate": false
+	},
+	"id": "minion_kidnapper",
+	"name": "Kidnapper",
+	"description": "Combo: Return a minion to its owner's hand.",
+	"type": "MINION",
+	"heroClass": "ROGUE",
+	"rarity": "EPIC",
+	"baseManaCost": 6,
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,53 @@
+{
+	"baseAttack": 9,
+	"baseHp": 7,
+	"aura": {
+		"class": "Aura",
+		"applyEffect": {
+			"class": "MetaSpell",
+			"spell1": {
+				"class": "AuraBuffSpell",
+				"attackBonus": 2,
+				"hpBonus": 2,
+				"filter": {
+					"class": "RaceFilter",
+					"race": "DEMON"
+				}
+			},
+			"spell2": {
+				"class": "AddAttributeSpell",
+				"attribute": "IMMUNE",
+				"target": "FRIENDLY_HERO"
+			}
+		},
+		"removeEffect": {
+			"class": "MetaSpell",
+			"spell1": {
+				"class": "AuraBuffSpell",
+				"attackBonus": -2,
+				"hpBonus": -2,
+				"filter": {
+					"class": "RaceFilter",
+					"race": "DEMON"
+				}
+			},
+			"spell2": {
+				"class": "RemoveAttributeSpell",
+				"attribute": "IMMUNE",
+				"target": "FRIENDLY_HERO"
+			}
+		},
+		"target": "FRIENDLY_MINIONS"
+	},
+	"race": "DEMON",
+	"id": "minion_malganis",
+	"name": "Mal'Ganis",
+	"description": "Your other Demons have +2/+2. Your hero is Immune.",
+	"type": "MINION",
+	"heroClass": "WARLOCK",
+	"rarity": "LEGENDARY",
+	"baseManaCost": 9,
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

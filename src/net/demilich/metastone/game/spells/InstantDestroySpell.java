@@ -18,7 +18,7 @@ public class InstantDestroySpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		if (target.isDead()) {
+		if (target.isDestroyed()) {
 			return;
 		}
 		context.getLogic().destroy((Actor) target);

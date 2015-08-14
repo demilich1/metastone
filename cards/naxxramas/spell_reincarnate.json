@@ -1,0 +1,23 @@
+{
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "MetaSpell",
+		"spell1": {
+			"class": "DestroySpell"
+		},
+		"spell2": {
+			"class": "ReviveMinionSpell",
+			"targetPlayer": "OWNER"
+		}
+	},
+	"id": "spell_reincarnate",
+	"name": "Reincarnate",
+	"description": "Destroy a minion, then return it to life with full Health.",
+	"type": "SPELL",
+	"heroClass": "SHAMAN",
+	"rarity": "COMMON",
+	"baseManaCost": 2,
+	"collectible": true,
+	"set": "NAXXRAMAS",
+	"fileFormatVersion": 1
+}

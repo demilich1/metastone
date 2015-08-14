@@ -1,0 +1,28 @@
+{
+	"targetSelection": "NONE",
+	"id": "spell_avenge",
+	"name": "Avenge",
+	"description": "Secret: When one of your minions dies, give a random friendly minion +3/+2",
+	"type": "SPELL",
+	"heroClass": "PALADIN",
+	"rarity": "COMMON",
+	"baseManaCost": 1,
+	"collectible": true,
+	"trigger": {
+		"class": "MinionDeathTrigger",
+		"condition": {
+			"class": "MinionCountCondition",
+			"value": 1,
+			"operation": "GREATER"
+		}
+	},
+	"spell": {
+		"class": "BuffSpell",
+		"attackBonus": 3,
+		"hpBonus": 2,
+		"target": "FRIENDLY_MINIONS",
+		"randomTarget": true
+	},
+	"set": "NAXXRAMAS",
+	"fileFormatVersion": 1
+}

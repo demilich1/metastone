@@ -1,0 +1,22 @@
+{
+	"targetSelection": "NONE",
+	"id": "spell_far_sight",
+	"name": "Far Sight",
+	"description": "Draw a card. That card costs (3) less.",
+	"spell": {
+		"class": "DrawCardAndDoSomethingSpell",
+		"value": 1,
+		"spell1": {
+			"class": "ModifyAttributeSpell",
+			"attribute": "MANA_COST_MODIFIER",
+			"value": -3
+		}
+	},
+	"type": "SPELL",
+	"heroClass": "SHAMAN",
+	"rarity": "EPIC",
+	"baseManaCost": 3,
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

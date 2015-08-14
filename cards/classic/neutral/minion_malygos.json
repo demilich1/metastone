@@ -1,0 +1,17 @@
+{
+	"name": "Malygos",
+	"description": "Spell Damage +5",
+	"id": "minion_malygos",
+	"type": "MINION",
+	"rarity": "LEGENDARY",
+	"heroClass": "ANY",
+	"baseManaCost": 9,
+	"baseAttack": 4,
+	"baseHp": 12,
+	"attributes": {
+		"SPELL_DAMAGE": 5
+	},
+	"race": "DRAGON",
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

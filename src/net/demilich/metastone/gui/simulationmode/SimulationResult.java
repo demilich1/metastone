@@ -27,11 +27,11 @@ public class SimulationResult {
 		double winRate = statistics.getLong(Statistic.GAMES_WON) / gamesPlayed * 100;
 		String winRateString = String.format("%.2f", winRate) + "%";
 		statistics.set(Statistic.WIN_RATE, winRateString);
-		
+
 		long endTimestamp = System.currentTimeMillis();
 		duration = endTimestamp - startTimestamp;
 	}
-	
+
 	public GameConfig getConfig() {
 		return config;
 	}
@@ -43,7 +43,7 @@ public class SimulationResult {
 	public int getNumberOfGames() {
 		return getConfig().getNumberOfGames();
 	}
-	
+
 	public GameStatistics getPlayer1Stats() {
 		return player1Stats;
 	}
@@ -51,6 +51,5 @@ public class SimulationResult {
 	public GameStatistics getPlayer2Stats() {
 		return player2Stats;
 	}
-	
 
 }

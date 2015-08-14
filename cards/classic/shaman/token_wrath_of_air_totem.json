@@ -1,0 +1,18 @@
+{
+	"baseAttack": 0,
+	"baseHp": 2,
+	"race": "TOTEM",
+	"id": "token_wrath_of_air_totem",
+	"name": "Wrath of Air Totem",
+	"description": "Spell Damage +1",
+	"type": "MINION",
+	"heroClass": "SHAMAN",
+	"rarity": "FREE",
+	"baseManaCost": 1,
+	"collectible": false,
+	"attributes": {
+		"SPELL_DAMAGE": 1
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

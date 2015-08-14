@@ -1,0 +1,22 @@
+{
+	"baseAttack": 1,
+	"baseHp": 3,
+	"deathrattle": {
+		"class": "DamageSpell",
+		"value": 1,
+		"target": "ALL_MINIONS"
+	},
+	"id": "minion_unstable_ghoul",
+	"name": "Unstable Ghoul",
+	"description": "Taunt. Deathrattle: Deal 1 damage to all minions.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 2,
+	"collectible": true,
+	"attributes": {
+		"TAUNT": true
+	},
+	"set": "NAXXRAMAS",
+	"fileFormatVersion": 1
+}

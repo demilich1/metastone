@@ -11,7 +11,7 @@ import net.demilich.metastone.game.entities.weapons.Weapon;
 public class GameStatistics implements Cloneable {
 
 	private final Map<Statistic, Object> stats = new EnumMap<Statistic, Object>(Statistic.class);
-	private final Map<Integer, Integer> cardsPlayed = new HashMap<Integer, Integer>();
+	private final Map<String, Integer> cardsPlayed = new HashMap<String, Integer>();
 
 	private void add(Statistic key, long value) {
 		if (!stats.containsKey(key)) {
@@ -40,9 +40,11 @@ public class GameStatistics implements Cloneable {
 			add(Statistic.MINIONS_PLAYED, 1);
 			break;
 		case SPELL:
+		case CHOOSE_ONE:
 			add(Statistic.SPELLS_CAST, 1);
 			break;
 		case WEAPON:
+		case HERO:
 			break;
 		}
 		increaseCardCount(card);
@@ -85,7 +87,7 @@ public class GameStatistics implements Cloneable {
 		return stats.get(key);
 	}
 
-	public Map<Integer, Integer> getCardsPlayed() {
+	public Map<String, Integer> getCardsPlayed() {
 		return cardsPlayed;
 	}
 
@@ -105,7 +107,8 @@ public class GameStatistics implements Cloneable {
 		if (card.getCardType() == CardType.HERO_POWER) {
 			return;
 		}
-		int cardId = card.getTypeId();
+		String cardId = card.getCardId();
+		;
 		if (!getCardsPlayed().containsKey(cardId)) {
 			getCardsPlayed().put(cardId, 0);
 		}
@@ -127,7 +130,7 @@ public class GameStatistics implements Cloneable {
 				stats.put(stat, otherStatistics.get(stat));
 			}
 		}
-		for (int cardId : otherStatistics.getCardsPlayed().keySet()) {
+		for (String cardId : otherStatistics.getCardsPlayed().keySet()) {
 			if (!getCardsPlayed().containsKey(cardId)) {
 				getCardsPlayed().put(cardId, 0);
 			}

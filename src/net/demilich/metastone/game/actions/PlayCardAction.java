@@ -1,15 +1,15 @@
 package net.demilich.metastone.game.actions;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.targeting.CardReference;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public abstract class PlayCardAction extends GameAction {
 
@@ -41,14 +41,13 @@ public abstract class PlayCardAction extends GameAction {
 		try {
 			context.getLogic().playCard(playerId, getCardReference());
 			// card was countered, do not actually resolve its effects
-			if (!card.hasStatus(GameTag.COUNTERED)) {
+			if (!card.hasAttribute(Attribute.COUNTERED)) {
 				play(context, playerId);
 			}
 
 		} catch (Exception e) {
 			logger.error("ERROR while playing card " + card + " reference: " + cardReference);
-			logger.error("Player1: " + context.getPlayer1().getName());
-			logger.error("Player2: " + context.getPlayer2().getName());
+			context.getLogic().panicDump();
 			e.printStackTrace();
 			System.exit(-1);
 			throw e;

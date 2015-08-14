@@ -1,0 +1,25 @@
+{
+	"name": "+5/5 and Taunt",
+	"description": "+5/5 and Taunt",
+	"id": "spell_dark_wispers_2",
+	"type": "SPELL",
+	"rarity": "EPIC",
+	"heroClass": "DRUID",
+	"collectible": false,
+	"baseManaCost": 6,
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "MetaSpell",
+		"spell1": {
+			"class": "BuffSpell",
+			"attackBonus": 5,
+			"hpBonus": 5
+		},
+		"spell2": {
+			"class": "AddAttributeSpell",
+			"attribute": "TAUNT"
+		}
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

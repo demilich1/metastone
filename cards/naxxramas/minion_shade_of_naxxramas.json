@@ -1,0 +1,29 @@
+{
+	"baseAttack": 2,
+	"baseHp": 2,
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnStartTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"attackBonus": 1,
+			"hpBonus": 1,
+			"target": "SELF"
+		}
+	},
+	"id": "minion_shade_of_naxxramas",
+	"name": "Shade of Naxxramas",
+	"description": "Stealth. At the start of your turn, gain +1/+1",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"baseManaCost": 3,
+	"collectible": true,
+	"attributes": {
+		"STEALTH": true
+	},
+	"set": "NAXXRAMAS",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,26 @@
+{
+	"baseAttack": 5,
+	"baseHp": 4,
+	"race": "PIRATE",
+	"battlecry": {
+		"spell": {
+			"class": "BuffWeaponSpell",
+			"attackBonus": 1,
+			"hpBonus": 1
+		},
+		"resolvedLate": false
+	},
+	"id": "minion_captain_greenskin",
+	"name": "Captain Greenskin",
+	"description": "Battlecry: Give your weapon +1/+1.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"baseManaCost": 5,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

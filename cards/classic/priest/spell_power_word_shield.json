@@ -1,0 +1,23 @@
+{
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "MetaSpell",
+		"spell1": {
+			"class": "BuffSpell",
+			"hpBonus": 2
+		},
+		"spell2": {
+			"class": "DrawCardSpell"
+		}
+	},
+	"id": "spell_power_word_shield",
+	"name": "Power Word: Shield",
+	"description": "Give a minion +2 Health. Draw a card.Give a minion +2 Health. Draw a card.",
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "COMMON",
+	"baseManaCost": 1,
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

@@ -18,21 +18,38 @@ import net.demilich.metastone.game.cards.CardCollection;
 
 public class CardCollectionEditor extends SandboxEditor {
 
+	private class CardStringConverter extends StringConverter<Card> {
+
+		@Override
+		public Card fromString(String arg0) {
+			return null;
+		}
+
+		@Override
+		public String toString(Card card) {
+			String result = card.getName();
+			result += " [" + card.getCardType() + "] ";
+			result += "Mana: " + card.getBaseManaCost();
+			return result;
+		}
+
+	}
+
 	@FXML
 	private Label cardCountLabel;
-
 	@FXML
 	private ListView<Card> editableListView;
+
 	@FXML
 	private ListView<Card> catalogueListView;
-
 	@FXML
 	private TextField filterTextfield;
-	@FXML
-	private Button clearFilterButton;
 
 	@FXML
+	private Button clearFilterButton;
+	@FXML
 	private Button addCardButton;
+
 	@FXML
 	private Button removeCardButton;
 
@@ -114,23 +131,6 @@ public class CardCollectionEditor extends SandboxEditor {
 		editableListView.setItems(data);
 		data.addListener(this::handleEditableCardListChanged);
 		handleEditableCardListChanged(null);
-	}
-
-	private class CardStringConverter extends StringConverter<Card> {
-
-		@Override
-		public Card fromString(String arg0) {
-			return null;
-		}
-
-		@Override
-		public String toString(Card card) {
-			String result = card.getName();
-			result += " [" + card.getCardType() + "] ";
-			result += "Mana: " + card.getBaseManaCost();
-			return result;
-		}
-
 	}
 
 }

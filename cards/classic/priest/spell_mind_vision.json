@@ -1,0 +1,18 @@
+{
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "CopyCardSpell",
+		"value": 1,
+		"cardLocation": "HAND"
+	},
+	"id": "spell_mind_vision",
+	"name": "Mind Vision",
+	"description": "Put a copy of a random card in your opponent's hand into your hand.",
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "FREE",
+	"baseManaCost": 1,
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

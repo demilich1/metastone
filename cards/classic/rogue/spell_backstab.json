@@ -1,0 +1,21 @@
+{
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "DamageSpell",
+		"value": 2,
+		"filter": {
+			"class": "DamagedFilter",
+			"invert": true
+		}
+	},
+	"id": "spell_backstab",
+	"name": "Backstab",
+	"description": "Deal 2 damage to an undamaged minion.",
+	"type": "SPELL",
+	"heroClass": "ROGUE",
+	"rarity": "FREE",
+	"baseManaCost": 0,
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,17 @@
+{
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "BuffSpell",
+		"attackBonus": 1
+	},
+	"id": "spell_whirling_blades",
+	"name": "Whirling Blades",
+	"description": "Give a minion +1 Attack.",
+	"type": "SPELL",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"baseManaCost": 1,
+	"collectible": false,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

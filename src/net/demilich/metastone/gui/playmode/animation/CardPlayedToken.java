@@ -19,7 +19,7 @@ public class CardPlayedToken {
 	public CardPlayedToken(GameBoardView boardView, Card card) {
 		Window parent = boardView.getScene().getWindow();
 		this.cardToken = new CardTooltip();
-		
+
 		popup = new Popup();
 		popup.getContent().setAll(cardToken);
 		popup.setX(parent.getX() + 40);

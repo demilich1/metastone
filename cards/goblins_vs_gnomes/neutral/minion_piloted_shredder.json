@@ -1,0 +1,22 @@
+{
+	"baseAttack": 4,
+	"baseHp": 3,
+	"race": "MECH",
+	"deathrattle": {
+		"class": "SummonRandomMinionFilteredSpell",
+		"cardFilter": {
+			"class": "CardFilter",
+			"manaCost": 2
+		}
+	},
+	"id": "minion_piloted_shredder",
+	"name": "Piloted Shredder",
+	"description": "Deathrattle: Summon a random 2-cost minion.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 4,
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

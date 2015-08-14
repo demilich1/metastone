@@ -1,0 +1,25 @@
+{
+	"baseAttack": 5,
+	"baseHp": 5,
+	"battlecry": {
+		"spell": {
+			"class": "AddAttributeSpell",
+			"attribute": "FROZEN"
+		},
+		"targetSelection": "ANY",
+		"resolvedLate": false
+	},
+	"id": "minion_frost_elemental",
+	"name": "Frost Elemental",
+	"description": "Battlecry: Freeze a character.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 6,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

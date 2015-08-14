@@ -21,9 +21,40 @@ import net.demilich.metastone.gui.gameconfig.PlayerConfig;
 
 public class WinRateFitness implements IFitnessFunction {
 
-	private static final int NUMBER_OF_GAMES = 50;
+	private class PlayGameTask implements Callable<Void> {
 
+		private final GameStatistics stats;
+		private final FeatureVector solution;
+
+		public PlayGameTask(GameStatistics stats, FeatureVector solution) {
+			this.stats = stats;
+			this.solution = solution;
+		}
+
+		@Override
+		public Void call() throws Exception {
+			PlayerConfig player1Config = new PlayerConfig(deckToTrain, new GameStateValueBehaviour(solution, "(current)"));
+			player1Config.setName("Player 1 (learning)");
+			Player player1 = new Player(player1Config);
+
+			PlayerConfig player2Config = new PlayerConfig(getRandomDeck(), new GameStateValueBehaviour());
+			player2Config.setName("Player 2 (static)");
+			Player player2 = new Player(player2Config);
+
+			GameContext newGame = new GameContext(player1, player2, new GameLogic());
+			newGame.play();
+			synchronized (stats) {
+				stats.merge(player1.getStatistics());
+			}
+
+			return null;
+		}
+
+	}
+
+	private static final int NUMBER_OF_GAMES = 50;
 	private final Deck deckToTrain;
+
 	private final List<Deck> decks;
 
 	public WinRateFitness(Deck deckToTrain, List<Deck> decks) {
@@ -81,37 +112,6 @@ public class WinRateFitness implements IFitnessFunction {
 		}
 
 		return stats.getDouble(Statistic.WIN_RATE) * 100;
-	}
-
-	private class PlayGameTask implements Callable<Void> {
-
-		private final GameStatistics stats;
-		private final FeatureVector solution;
-
-		public PlayGameTask(GameStatistics stats, FeatureVector solution) {
-			this.stats = stats;
-			this.solution = solution;
-		}
-
-		@Override
-		public Void call() throws Exception {
-			PlayerConfig player1Config = new PlayerConfig(deckToTrain, new GameStateValueBehaviour(solution, "(current)"));
-			player1Config.setName("Player 1 (learning)");
-			Player player1 = new Player(player1Config);
-
-			PlayerConfig player2Config = new PlayerConfig(getRandomDeck(), new GameStateValueBehaviour());
-			player2Config.setName("Player 2 (static)");
-			Player player2 = new Player(player2Config);
-
-			GameContext newGame = new GameContext(player1, player2, new GameLogic());
-			newGame.play();
-			synchronized (stats) {
-				stats.merge(player1.getStatistics());
-			}
-
-			return null;
-		}
-
 	}
 
 }

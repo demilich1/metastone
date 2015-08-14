@@ -1,0 +1,17 @@
+{
+	"name": "Hound",
+	"id": "token_hound",
+	"type": "MINION",
+	"rarity": "COMMON",
+	"heroClass": "HUNTER",
+	"baseManaCost": 1,
+	"baseAttack": 1,
+	"baseHp": 1,
+	"race": "BEAST",
+	"attributes": {
+		"CHARGE": true
+	},
+	"collectible": false,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

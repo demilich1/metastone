@@ -1,0 +1,32 @@
+{
+	"baseAttack": 1,
+	"baseHp": 2,
+	"trigger": {
+		"eventTrigger": {
+			"class": "BoardChangedTrigger"
+		},
+		"spell": {
+			"class": "ConditionalAttackBonusSpell",
+			"valueProvider": {
+				"class": "ConditionalValueProvider",
+				"condition": {
+					"class": "RaceOnBoardCondition",
+					"race": "MECH"
+				},
+				"ifTrue": 2,
+				"ifFalse": 0
+			},
+			"target": "SELF"
+		}
+	},
+	"id": "minion_cogmaster",
+	"name": "Cogmaster",
+	"description": "Has +2 Attack while you have a Mech.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 1,
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

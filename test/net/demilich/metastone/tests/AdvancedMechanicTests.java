@@ -3,22 +3,20 @@ package net.demilich.metastone.tests;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.actions.PhysicalAttackAction;
 import net.demilich.metastone.game.behaviour.Behaviour;
 import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.IChooseOneCard;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.SpellCard;
-import net.demilich.metastone.game.cards.concrete.druid.Wrath;
-import net.demilich.metastone.game.cards.concrete.neutral.AbusiveSergeant;
-import net.demilich.metastone.game.cards.concrete.neutral.AmaniBerserker;
-import net.demilich.metastone.game.cards.concrete.neutral.KoboldGeomancer;
-import net.demilich.metastone.game.cards.concrete.priest.MindBlast;
-import net.demilich.metastone.game.cards.concrete.priest.Thoughtsteal;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -26,9 +24,6 @@ import net.demilich.metastone.game.spells.SetHpSpell;
 import net.demilich.metastone.game.spells.SilenceSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.TargetSelection;
-
-import org.testng.Assert;
-import org.testng.annotations.Test;
 
 public class AdvancedMechanicTests extends BasicTests {
 
@@ -45,7 +40,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		context.endTurn();
 
 		player.getHero().getHeroPower().setUsed(true);
-		Card wrath = new Wrath();
+		Card wrath = CardCatalogue.getCardById("spell_wrath");
 		IChooseOneCard wrathChooseOne = (IChooseOneCard) wrath;
 		context.getLogic().receiveCard(player.getId(), wrath);
 		player.setMana(wrath.getBaseManaCost() + 1);
@@ -71,7 +66,7 @@ public class AdvancedMechanicTests extends BasicTests {
 
 		int cardsInHand = player.getHand().getCount();
 		int cardsInOpponentsDeck = opponent.getDeck().getCount();
-		Card thoughtsteal = new Thoughtsteal();
+		Card thoughtsteal = CardCatalogue.getCardById("spell_thoughtsteal");
 		context.getLogic().receiveCard(player.getId(), thoughtsteal);
 		context.getLogic().performGameAction(player.getId(), thoughtsteal.play());
 		Assert.assertEquals(opponent.getDeck().getCount(), cardsInOpponentsDeck);
@@ -86,7 +81,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		Player warrior = context.getPlayer2();
 		warrior.setMana(10);
 
-		MinionCard minionCard1 = new TestMinionCard(2, 2, GameTag.DIVINE_SHIELD);
+		MinionCard minionCard1 = new TestMinionCard(2, 2, Attribute.DIVINE_SHIELD);
 		context.getLogic().receiveCard(mage.getId(), minionCard1);
 		context.getLogic().performGameAction(mage.getId(), minionCard1.play());
 
@@ -103,12 +98,12 @@ public class AdvancedMechanicTests extends BasicTests {
 		context.getLogic().performGameAction(mage.getId(), attackAction);
 		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp());
 		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - attacker.getAttack());
-		Assert.assertEquals(attacker.isDead(), false);
+		Assert.assertEquals(attacker.isDestroyed(), false);
 
 		context.getLogic().performGameAction(mage.getId(), attackAction);
 		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp() - defender.getAttack());
 		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - attacker.getAttack() * 2);
-		Assert.assertEquals(attacker.isDead(), true);
+		Assert.assertEquals(attacker.isDestroyed(), true);
 	}
 
 	@Test
@@ -119,32 +114,34 @@ public class AdvancedMechanicTests extends BasicTests {
 		Player priest = context.getPlayer2();
 		priest.setMana(10);
 
-		playCard(context, priest, new AmaniBerserker());
+		final int BASE_ATTACK = 2;
+		final int ENRAGE_ATTACK_BONUS = 3;
+		playCard(context, priest, CardCatalogue.getCardById("minion_amani_berserker"));
 
 		playCard(context, mage, new TestMinionCard(1, 10));
 
 		Entity attacker = getSingleMinion(mage.getMinions());
 		Actor defender = getSingleMinion(priest.getMinions());
 
-		Assert.assertEquals(defender.getAttack(), AmaniBerserker.BASE_ATTACK);
-		Assert.assertEquals(defender.hasStatus(GameTag.ENRAGED), false);
+		Assert.assertEquals(defender.getAttack(), BASE_ATTACK);
+		Assert.assertEquals(defender.hasAttribute(Attribute.ENRAGED), false);
 
 		// attack once, should apply the enrage attack bonus
 		GameAction attackAction = new PhysicalAttackAction(attacker.getReference());
 		attackAction.setTarget(defender);
 		context.getLogic().performGameAction(mage.getId(), attackAction);
-		Assert.assertEquals(defender.getAttack(), AmaniBerserker.BASE_ATTACK + AmaniBerserker.ENRAGE_ATTACK_BONUS);
-		Assert.assertEquals(defender.hasStatus(GameTag.ENRAGED), true);
+		Assert.assertEquals(defender.getAttack(), BASE_ATTACK + ENRAGE_ATTACK_BONUS);
+		Assert.assertEquals(defender.hasAttribute(Attribute.ENRAGED), true);
 		// attack second time, enrage bonus should not increase
 		context.getLogic().performGameAction(mage.getId(), attackAction);
-		Assert.assertEquals(defender.getAttack(), AmaniBerserker.BASE_ATTACK + AmaniBerserker.ENRAGE_ATTACK_BONUS);
+		Assert.assertEquals(defender.getAttack(), BASE_ATTACK + ENRAGE_ATTACK_BONUS);
 
 		// heal - enrage attack bonus should be gone
 		GameAction healAction = priest.getHero().getHeroPower().play();
 		healAction.setTarget(defender);
 		context.getLogic().performGameAction(priest.getId(), healAction);
-		Assert.assertEquals(defender.getAttack(), AmaniBerserker.BASE_ATTACK);
-		Assert.assertEquals(defender.hasStatus(GameTag.ENRAGED), false);
+		Assert.assertEquals(defender.getAttack(), BASE_ATTACK);
+		Assert.assertEquals(defender.hasAttribute(Attribute.ENRAGED), false);
 	}
 
 	@Test
@@ -160,7 +157,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		Assert.assertEquals(player.getMana(), 2);
 
 		Card overloadCard = new TestMinionCard(1, 1);
-		overloadCard.setTag(GameTag.OVERLOAD, 2);
+		overloadCard.setAttribute(Attribute.OVERLOAD, 2);
 		context.getLogic().receiveCard(playerId, overloadCard);
 		context.getLogic().performGameAction(playerId, overloadCard.play());
 		context.getLogic().endTurn(playerId);
@@ -240,8 +237,8 @@ public class AdvancedMechanicTests extends BasicTests {
 		Actor testSubject = getSingleMinion(mage.getMinions());
 		Assert.assertEquals(testSubject.getAttack(), baseAttack);
 
-		playCard(context, mage, new AbusiveSergeant());
-		Assert.assertEquals(testSubject.getAttack(), baseAttack + AbusiveSergeant.ATTACK_BONUS);
+		playCard(context, mage, CardCatalogue.getCardById("minion_abusive_sergeant"));
+		Assert.assertEquals(testSubject.getAttack(), baseAttack + 2);
 		context.getLogic().endTurn(mage.getId());
 		Assert.assertEquals(testSubject.getAttack(), baseAttack);
 	}
@@ -255,18 +252,19 @@ public class AdvancedMechanicTests extends BasicTests {
 		warrior.setMana(10);
 
 		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp());
-		SpellCard damageSpell = new MindBlast();
+		Card damageSpell = CardCatalogue.getCardById("spell_mind_blast");
+		int mindBlastDamage = 5;
 		context.getLogic().receiveCard(priest.getId(), damageSpell);
 
 		context.getLogic().performGameAction(priest.getId(), damageSpell.play());
-		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - MindBlast.DAMAGE);
+		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - mindBlastDamage);
 
-		MinionCard spellPowerMinionCard = new KoboldGeomancer();
+		MinionCard spellPowerMinionCard = (MinionCard) CardCatalogue.getCardById("minion_kobold_geomancer");
 		context.getLogic().receiveCard(priest.getId(), spellPowerMinionCard);
 		context.getLogic().performGameAction(priest.getId(), spellPowerMinionCard.play());
 		context.getLogic().receiveCard(priest.getId(), damageSpell);
 		context.getLogic().performGameAction(priest.getId(), damageSpell.play());
-		int spellPower = getSingleMinion(priest.getMinions()).getTagValue(GameTag.SPELL_POWER);
-		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - 2 * MindBlast.DAMAGE - spellPower);
+		int spellPower = getSingleMinion(priest.getMinions()).getAttributeValue(Attribute.SPELL_DAMAGE);
+		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - 2 * mindBlastDamage - spellPower);
 	}
 }

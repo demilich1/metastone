@@ -1,0 +1,29 @@
+{
+	"baseAttack": 4,
+	"baseHp": 6,
+	"aura": {
+		"class": "EnrageAura",
+		"applyEffect": {
+			"class": "BuffWeaponSpell",
+			"attackBonus": 2
+		},
+		"removeEffect": {
+			"class": "BuffWeaponSpell",
+			"attackBonus": -2
+		},
+		"target": "FRIENDLY_WEAPON"
+	},
+	"id": "minion_spiteful_smith",
+	"name": "Spiteful Smith",
+	"description": "Enrage: Your weapon has +2 Attack.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 5,
+	"collectible": true,
+	"attributes": {
+		"ENRAGABLE": true
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

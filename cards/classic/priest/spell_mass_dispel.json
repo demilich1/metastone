@@ -1,0 +1,23 @@
+{
+	"name": "Mass Dispel",
+	"description": "Silence all enemy minions. Draw a card.",
+	"id": "spell_mass_dispel",
+	"type": "SPELL",
+	"rarity": "RARE",
+	"heroClass": "PRIEST",
+	"baseManaCost": 4,
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "MetaSpell",
+		"spell1": {
+			"class": "SilenceSpell",
+			"target": "ENEMY_MINIONS"
+		},
+		"spell2": {
+			"class": "DrawCardSpell",
+			"value": 1
+		}
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

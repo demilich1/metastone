@@ -1,26 +1,35 @@
 package net.demilich.metastone.game.cards;
 
-import net.demilich.metastone.game.GameTag;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.actions.PlayCardAction;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
-import net.demilich.metastone.game.targeting.CardLocation;
+import net.demilich.metastone.game.cards.desc.ChooseOneCardDesc;
 
-public abstract class ChooseOneCard extends Card implements IChooseOneCard {
+public class ChooseOneCard extends Card implements IChooseOneCard {
 
-	private Card card1;
-	private Card card2;
+	private String card1Id;
+	private String card2Id;
 
-	public ChooseOneCard(String name, CardType cardType, Rarity rarity, HeroClass classRestriction, int manaCost) {
-		super(name, cardType, rarity, classRestriction, manaCost);
-		setTag(GameTag.CHOOSE_ONE);
+	public ChooseOneCard(ChooseOneCardDesc desc) {
+		super(desc);
+		setAttribute(Attribute.CHOOSE_ONE);
+		card1Id = desc.option1;
+		card2Id = desc.option2;
 	}
 
 	@Override
 	public Card clone() {
 		ChooseOneCard clone = (ChooseOneCard) super.clone();
-		clone.card1 = card1.clone();
-		clone.card2 = card2.clone();
+		clone.card1Id = card1Id;
+		clone.card2Id = card2Id;
 		return clone;
+	}
+
+	private Card getCard(String cardId) {
+		Card card = CardCatalogue.getCardById(cardId);
+		card.setLocation(getLocation());
+		card.setOwner(getOwner());
+		card.setId(getId());
+		return card;
 	}
 
 	@Override
@@ -30,6 +39,7 @@ public abstract class ChooseOneCard extends Card implements IChooseOneCard {
 
 	@Override
 	public PlayCardAction playOption1() {
+		Card card1 = getCard(card1Id);
 		PlayCardAction card1Action = card1.play();
 		card1Action.setActionSuffix(card1.getName());
 		card1Action.setGroupIndex(0);
@@ -38,39 +48,11 @@ public abstract class ChooseOneCard extends Card implements IChooseOneCard {
 
 	@Override
 	public PlayCardAction playOption2() {
+		Card card2 = getCard(card2Id);
 		PlayCardAction card2Action = card2.play();
 		card2Action.setActionSuffix(card2.getName());
 		card2Action.setGroupIndex(1);
 		return card2Action;
-	}
-
-	public void setCard1(Card card1) {
-		this.card1 = card1;
-	}
-
-	public void setCard2(Card card2) {
-		this.card2 = card2;
-	}
-
-	@Override
-	public void setId(int id) {
-		super.setId(id);
-		card1.setId(id);
-		card2.setId(id);
-	}
-
-	@Override
-	public void setLocation(CardLocation cardLocation) {
-		super.setLocation(cardLocation);
-		card1.setLocation(cardLocation);
-		card2.setLocation(cardLocation);
-	}
-
-	@Override
-	public void setOwner(int ownerId) {
-		super.setOwner(ownerId);
-		card1.setOwner(ownerId);
-		card2.setOwner(ownerId);
 	}
 
 }

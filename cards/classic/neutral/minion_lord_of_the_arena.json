@@ -1,0 +1,16 @@
+{
+	"name": "Lord of the Arena",
+	"description": "Taunt",
+	"id": "minion_lord_of_the_arena",
+	"type": "MINION",
+	"rarity": "FREE",
+	"heroClass": "ANY",
+	"baseManaCost": 6,
+	"baseAttack": 6,
+	"baseHp": 5,
+	"attributes": {
+		"TAUNT": true
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

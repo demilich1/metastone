@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.TurnState;
 import net.demilich.metastone.game.actions.EndTurnAction;
@@ -40,7 +40,8 @@ public class ActionLogic {
 		List<GameAction> heroPowerActions = new ArrayList<GameAction>();
 		HeroPower heroPower = player.getHero().getHeroPower();
 		heroPower.onWillUse(context, player);
-		CardReference heroPowerReference = new CardReference(player.getId(), CardLocation.HERO_POWER, heroPower.getId(), heroPower.getName());
+		CardReference heroPowerReference = new CardReference(player.getId(), CardLocation.HERO_POWER, heroPower.getId(),
+				heroPower.getName());
 		if (!context.getLogic().canPlayCard(player.getId(), heroPowerReference)) {
 			return heroPowerActions;
 		}
@@ -72,7 +73,7 @@ public class ActionLogic {
 				continue;
 			}
 
-			if (card.hasStatus(GameTag.CHOOSE_ONE)) {
+			if (card.hasAttribute(Attribute.CHOOSE_ONE)) {
 				IChooseOneCard chooseOneCard = (IChooseOneCard) card;
 				rollout(chooseOneCard.playOption1(), context, player, playCardActions);
 				rollout(chooseOneCard.playOption2(), context, player, playCardActions);
@@ -89,9 +90,9 @@ public class ActionLogic {
 		validActions.addAll(getPhysicalAttackActions(context, player));
 		validActions.addAll(getPlayCardActions(context, player));
 		if (context.getTurnState() != TurnState.TURN_ENDED) {
-			validActions.add(new EndTurnAction());	
+			validActions.add(new EndTurnAction());
 		}
-		
+
 		return validActions;
 	}
 

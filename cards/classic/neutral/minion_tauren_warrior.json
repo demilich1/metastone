@@ -1,0 +1,28 @@
+{
+	"baseAttack": 2,
+	"baseHp": 3,
+	"trigger": {
+		"eventTrigger": {
+			"class": "EnrageChangedTrigger"
+		},
+		"spell": {
+			"class": "EnrageSpell",
+			"attackBonus": 3,
+			"target": "SELF"
+		}
+	},
+	"id": "minion_tauren_warrior",
+	"name": "Tauren Warrior",
+	"description": "Taunt. Enrage: +3 Attack",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 3,
+	"collectible": true,
+	"attributes": {
+		"TAUNT": true,
+		"ENRAGABLE": true
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,30 @@
+{
+	"baseAttack": 4,
+	"baseHp": 3,
+	"battlecry": {
+		"spell": {
+			"class": "DamageSpell",
+			"value": 2,
+			"target": "ALL_MINIONS",
+			"filter": {
+				"class": "AttributeFilter",
+				"attribute": "DEATHRATTLES",
+				"operation": "HAS"
+			}
+		},
+		"resolvedLate": false
+	},
+	"id": "minion_scarlet_purifier",
+	"name": "Scarlet Purifier",
+	"description": "Battlecry: Deal 2 damage to all minions with Deathrattle.",
+	"type": "MINION",
+	"heroClass": "PALADIN",
+	"rarity": "RARE",
+	"baseManaCost": 3,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

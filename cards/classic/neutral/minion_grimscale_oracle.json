@@ -1,0 +1,21 @@
+{
+	"baseAttack": 1,
+	"baseHp": 1,
+	"aura": {
+		"class": "BuffAura",
+		"attackBonus": 1,
+		"raceRestriction": "MURLOC",
+		"target": "ALL_MINIONS"
+	},
+	"race": "MURLOC",
+	"id": "minion_grimscale_oracle",
+	"name": "Grimscale Oracle",
+	"description": "ALL other Murlocs have +1 Attack.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"baseManaCost": 1,
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

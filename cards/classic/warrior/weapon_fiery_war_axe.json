@@ -1,0 +1,14 @@
+{
+	"name": "Fiery War Axe",
+	"description": "",
+	"collectible": true,
+	"id": "weapon_fiery_war_axe",
+	"type": "WEAPON",
+	"rarity": "FREE",
+	"heroClass": "WARRIOR",
+	"baseManaCost": 2,
+	"damage": 3,
+	"durability": 2,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

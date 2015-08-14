@@ -1,0 +1,24 @@
+{
+	"name": "Blizzard",
+	"description": "Deal 2 damage to all enemy minions and Freeze them.",
+	"id": "spell_blizzard",
+	"type": "SPELL",
+	"rarity": "RARE",
+	"heroClass": "MAGE",
+	"baseManaCost": 6,
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "MetaSpell",
+		"spell1": {
+			"class": "DamageSpell",
+			"value": 2
+		},
+		"spell2": {
+			"class": "AddAttributeSpell",
+			"attribute": "FROZEN"
+		},
+		"target": "ENEMY_MINIONS"
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

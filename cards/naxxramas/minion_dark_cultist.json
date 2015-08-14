@@ -1,0 +1,20 @@
+{
+	"baseAttack": 3,
+	"baseHp": 4,
+	"deathrattle": {
+		"class": "BuffSpell",
+		"hpBonus": 3,
+		"target": "FRIENDLY_MINIONS",
+		"randomTarget": true
+	},
+	"id": "minion_dark_cultist",
+	"name": "Dark Cultist",
+	"description": "Deathrattle: Give a random friendly minion +3 Health.",
+	"type": "MINION",
+	"heroClass": "PRIEST",
+	"rarity": "COMMON",
+	"baseManaCost": 3,
+	"collectible": true,
+	"set": "NAXXRAMAS",
+	"fileFormatVersion": 1
+}

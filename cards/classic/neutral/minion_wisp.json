@@ -1,0 +1,12 @@
+{
+	"name": "Wisp",
+	"id": "minion_wisp",
+	"type": "MINION",
+	"rarity": "COMMON",
+	"heroClass": "ANY",
+	"baseManaCost": 0,
+	"baseAttack": 1,
+	"baseHp": 1,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

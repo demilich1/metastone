@@ -63,7 +63,7 @@ public class HumanBehaviour extends Behaviour implements IActionSelectionListene
 		}
 		return selectedAction;
 	}
-	
+
 	public void setMulliganCards(List<Card> mulliganCards) {
 		this.mulliganCards = mulliganCards;
 		waitingForInput = false;

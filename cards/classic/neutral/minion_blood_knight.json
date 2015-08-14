@@ -1,0 +1,39 @@
+{
+	"baseAttack": 3,
+	"baseHp": 3,
+	"battlecry": {
+		"spell": {
+			"class": "MetaSpell",
+			"spell1": {
+				"class": "BuffSpell",
+				"valueProvider": {
+					"class": "AttributeCounter",
+					"target": "ALL_MINIONS",
+					"attribute": "DIVINE_SHIELD",
+					"multiplier": 3
+				},
+				"target": "SELF"
+			},
+			"spell2": {
+				"class": "RemoveAttributeSpell",
+				"attribute": "DIVINE_SHIELD",
+				"target": "ALL_MINIONS"
+			}
+		},
+		"targetSelection": "NONE",
+		"resolvedLate": false
+	},
+	"id": "minion_blood_knight",
+	"name": "Blood Knight",
+	"description": "Battlecry: All minions lose Divine Shield. Gain +3/+3 for each Shield lost.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"baseManaCost": 3,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

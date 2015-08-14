@@ -1,0 +1,26 @@
+{
+	"baseAttack": 3,
+	"baseHp": 3,
+	"battlecry": {
+		"spell": {
+			"class": "DamageSpell",
+			"value": 4,
+			"target": "ENEMY_MINIONS",
+			"randomTarget": true
+		},
+		"resolvedLate": false
+	},
+	"id": "minion_bomb_lobber",
+	"name": "Bomb Lobber",
+	"description": "Battlecry: Deal 4 damage to a random enemy minion.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"baseManaCost": 5,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

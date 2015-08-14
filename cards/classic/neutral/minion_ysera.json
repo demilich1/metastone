@@ -1,0 +1,31 @@
+{
+	"baseAttack": 4,
+	"baseHp": 12,
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "ReceiveRandomCardSpell",
+			"cards": [
+				"token_emerald_drake",
+				"token_laughing_sister",
+				"spell_nightmare",
+				"spell_ysera_awakens",
+				"spell_dream"
+			]
+		}
+	},
+	"race": "DRAGON",
+	"id": "minion_ysera",
+	"name": "Ysera",
+	"description": "At the end of your turn, draw a Dream Card.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"baseManaCost": 9,
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

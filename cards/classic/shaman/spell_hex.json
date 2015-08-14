@@ -1,0 +1,16 @@
+{
+	"name": "Hex",
+	"description": "Transform a minion into a 0/1 Frog with Taunt.",
+	"id": "spell_hex",
+	"type": "SPELL",
+	"rarity": "FREE",
+	"heroClass": "SHAMAN",
+	"baseManaCost": 3,
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "TransformMinionSpell",
+		"card": "token_frog"
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

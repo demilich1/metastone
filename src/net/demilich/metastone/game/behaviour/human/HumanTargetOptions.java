@@ -10,7 +10,8 @@ public class HumanTargetOptions {
 	private final int playerId;
 	private final ActionGroup actionGroup;
 
-	public HumanTargetOptions(IActionSelectionListener actionSelectionListener, GameContext context, int playerId, ActionGroup actionGroup) {
+	public HumanTargetOptions(IActionSelectionListener actionSelectionListener, GameContext context, int playerId,
+			ActionGroup actionGroup) {
 		this.actionSelectionListener = actionSelectionListener;
 		this.context = context;
 		this.playerId = playerId;

@@ -1,0 +1,36 @@
+{
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "NullSpell"
+	},
+	"passiveTrigger": {
+		"eventTrigger": {
+			"class": "ThisCardDrawnTrigger"
+		},
+		"spell": {
+			"class": "MetaSpell",
+			"spell1": {
+				"class": "DamageSpell",
+				"target": "FRIENDLY_HERO",
+				"value": 10
+			},
+			"spell2": {
+				"class": "RemoveCardSpell",
+				"target": "EVENT_TARGET"
+			},
+			"spell3": {
+				"class": "DrawCardSpell"
+			}
+		}
+	},
+	"id": "spell_burrowing_mine",
+	"name": "Burrowing Mine",
+	"description": "When you draw this, it explodes. You take 10 damage and draw a card.",
+	"type": "SPELL",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"baseManaCost": 0,
+	"collectible": false,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

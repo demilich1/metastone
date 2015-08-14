@@ -1,0 +1,24 @@
+{
+	"name": "Mark of the Wild",
+	"description": "Give a minion Taunt and +2/+2. (+2 Attack/+2 Health)",
+	"id": "spell_mark_of_the_wild",
+	"type": "SPELL",
+	"rarity": "FREE",
+	"heroClass": "DRUID",
+	"baseManaCost": 2,
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "MetaSpell",
+		"spell1": {
+			"class": "BuffSpell",
+			"attackBonus": 2,
+			"hpBonus": 2
+		},
+		"spell2": {
+			"class": "AddAttributeSpell",
+			"attribute": "TAUNT"
+		}
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

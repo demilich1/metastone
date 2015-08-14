@@ -1,0 +1,25 @@
+{
+	"baseAttack": 2,
+	"baseHp": 2,
+	"battlecry": {
+		"spell": {
+			"class": "SummonSpell",
+			"card": "token_defias_bandit",
+			"boardPositionRelative": "RIGHT"
+		},
+		"resolvedLate": true,
+		"condition": {
+			"class": "ComboCondition"
+		}
+	},
+	"id": "minion_defias_ringleader",
+	"name": "Defias Ringleader",
+	"description": "Combo: Summon a 2/1 Defias Bandit.",
+	"type": "MINION",
+	"heroClass": "ROGUE",
+	"rarity": "COMMON",
+	"baseManaCost": 2,
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

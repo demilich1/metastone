@@ -3,16 +3,15 @@ package net.demilich.metastone.gui.simulationmode;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.application.Platform;
-import net.demilich.metastone.GameNotification;
-import net.demilich.metastone.game.decks.Deck;
-import net.demilich.metastone.utils.Tuple;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.pferdimanzug.nittygrittymvc.Mediator;
 import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
+import javafx.application.Platform;
+import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.game.decks.Deck;
+import net.demilich.metastone.utils.Tuple;
 
 public class SimulationMediator extends Mediator<GameNotification> {
 

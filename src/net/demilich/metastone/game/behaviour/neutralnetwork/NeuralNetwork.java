@@ -29,6 +29,7 @@ public class NeuralNetwork implements Serializable {
 
 		return net;
 	}
+
 	// the layers of the network
 	public InputUnit[] input;
 
@@ -65,11 +66,11 @@ public class NeuralNetwork implements Serializable {
 				else
 					this.hidden[i][j] = new HiddenUnit(this.hidden[i - 1], random);
 
-//		for (int i = 0; i < hidden.length; i++) {
-//			for (int j = 0; j < hidden[i]; j++) {
-//				this.hidden[i][j].randomizeWeights(random);
-//			}
-//		}
+		// for (int i = 0; i < hidden.length; i++) {
+		// for (int j = 0; j < hidden[i]; j++) {
+		// this.hidden[i][j].randomizeWeights(random);
+		// }
+		// }
 
 	}
 

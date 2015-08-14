@@ -6,7 +6,7 @@ public abstract class Behaviour implements IBehaviour {
 
 	public IBehaviour clone() {
 		try {
-			return (IBehaviour)super.clone();
+			return (IBehaviour) super.clone();
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
 		}
@@ -16,5 +16,5 @@ public abstract class Behaviour implements IBehaviour {
 	@Override
 	public void onGameOver(GameContext context, int playerId, int winningPlayerId) {
 	}
-	
+
 }

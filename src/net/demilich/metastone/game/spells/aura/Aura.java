@@ -5,14 +5,15 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.GameTag;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.aura.AuraDesc;
 import net.demilich.metastone.game.spells.trigger.BoardChangedTrigger;
 import net.demilich.metastone.game.spells.trigger.GameEventTrigger;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
@@ -26,6 +27,10 @@ public class Aura extends SpellTrigger {
 	private Race raceRestriction;
 
 	private HashSet<Integer> affectedEntities = new HashSet<>();
+
+	public Aura(AuraDesc desc) {
+		this(desc.getApplyEffect(), desc.getRemoveEffect(), desc.getTarget());
+	}
 
 	public Aura(GameEventTrigger secondaryTrigger, SpellDesc applyAuraEffect, SpellDesc removeAuraEffect, EntityReference targetSelection) {
 		super(new BoardChangedTrigger(), secondaryTrigger, applyAuraEffect, false);
@@ -44,10 +49,10 @@ public class Aura extends SpellTrigger {
 		}
 
 		Actor targetActor = (Actor) target;
-		if (targetActor.isDead()) {
+		if (targetActor.isDestroyed()) {
 			return false;
 		}
-		if (getRaceRestriction() != null && target.getTag(GameTag.RACE) != getRaceRestriction()) {
+		if (getRaceRestriction() != null && target.getAttribute(Attribute.RACE) != getRaceRestriction()) {
 			return false;
 		}
 		return resolvedTargets.contains(target);
@@ -67,6 +72,12 @@ public class Aura extends SpellTrigger {
 		return raceRestriction;
 	}
 
+	@Override
+	public void onAdd(GameContext context) {
+		super.onAdd(context);
+		affectedEntities.clear();
+	}
+
 	public void onGameEvent(GameEvent event) {
 		GameContext context = event.getGameContext();
 		Player owner = context.getPlayer(getOwner());
@@ -75,13 +86,13 @@ public class Aura extends SpellTrigger {
 		List<Entity> relevantTargets = new ArrayList<Entity>(resolvedTargets);
 		for (Iterator<Integer> iterator = affectedEntities.iterator(); iterator.hasNext();) {
 			int entityId = iterator.next();
-			
+
 			EntityReference entityReference = new EntityReference(entityId);
 			Entity affectedEntity = context.tryFind(entityReference);
 			if (affectedEntity == null) {
 				iterator.remove();
 			} else {
-				relevantTargets.add(affectedEntity);	
+				relevantTargets.add(affectedEntity);
 			}
 		}
 

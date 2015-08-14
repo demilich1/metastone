@@ -1,0 +1,29 @@
+{
+	"baseAttack": 3,
+	"baseHp": 3,
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger",
+			"targetPlayer": "SELF",
+			"condition": {
+				"class": "ControlsSecretCondition"
+			}
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"attackBonus": 2,
+			"hpBonus": 2,
+			"target": "SELF"
+		}
+	},
+	"id": "minion_ethereal_arcanist",
+	"name": "Ethereal Arcanist",
+	"description": "If you control a Secret at the end of your turn, gain +2/+2.",
+	"type": "MINION",
+	"heroClass": "MAGE",
+	"rarity": "RARE",
+	"baseManaCost": 4,
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

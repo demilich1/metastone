@@ -22,7 +22,7 @@ public class ActionGroup {
 	public List<GameAction> getActionsInGroup() {
 		return actionsInGroup;
 	}
-	
+
 	public GameAction getPrototype() {
 		return prototype;
 	}

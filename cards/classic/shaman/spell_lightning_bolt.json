@@ -1,0 +1,19 @@
+{
+	"name": "Lightning Bolt",
+	"description": "Deal 3 damage. Overload: (1)",
+	"id": "spell_lightning_bolt",
+	"type": "SPELL",
+	"rarity": "COMMON",
+	"heroClass": "SHAMAN",
+	"baseManaCost": 1,
+	"targetSelection": "ANY",
+	"spell": {
+		"class": "DamageSpell",
+		"value": 3
+	},
+	"attributes": {
+		"OVERLOAD": 1
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

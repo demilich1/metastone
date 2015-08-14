@@ -6,6 +6,8 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.condition.Condition;
+import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
@@ -23,8 +25,7 @@ public class BattlecryAction extends GameAction {
 
 	private final SpellDesc spell;
 	private boolean resolvedLate = false;
-	private IBattlecryCondition condition;
-	private Predicate<Entity> entityFilter;
+	private Condition condition;
 
 	protected BattlecryAction(SpellDesc spell) {
 		this.spell = spell;
@@ -32,10 +33,10 @@ public class BattlecryAction extends GameAction {
 	}
 
 	public boolean canBeExecuted(GameContext context, Player player) {
-		if (condition == null) {
+		if (getCondition() == null) {
 			return true;
 		}
-		return condition.isFulfilled(context, player);
+		return getCondition().isFulfilled(context, player, null);
 	}
 
 	@Override
@@ -49,15 +50,13 @@ public class BattlecryAction extends GameAction {
 		if (getEntityFilter() == null) {
 			return true;
 		}
-		return getEntityFilter().test(entity);
+		return getEntityFilter().matches(entity);
 	}
 
 	@Override
 	public BattlecryAction clone() {
 		BattlecryAction clone = BattlecryAction.createBattlecry(getSpell(), getTargetRequirement());
 		clone.setActionSuffix(getActionSuffix());
-		clone.setCondition(getCondition());
-		clone.setEntityFilter(getEntityFilter());
 		clone.setResolvedLate(isResolvedLate());
 		clone.setSource(getSource());
 		return clone;
@@ -69,12 +68,12 @@ public class BattlecryAction extends GameAction {
 		context.getLogic().castSpell(playerId, getSpell(), getSource(), target);
 	}
 
-	public IBattlecryCondition getCondition() {
+	private Condition getCondition() {
 		return condition;
 	}
 
-	public Predicate<Entity> getEntityFilter() {
-		return entityFilter;
+	public EntityFilter getEntityFilter() {
+		return spell.getEntityFilter();
 	}
 
 	@Override
@@ -95,12 +94,12 @@ public class BattlecryAction extends GameAction {
 		return anotherAction.getActionType() == getActionType();
 	}
 
-	public void setCondition(IBattlecryCondition condition) {
+	public void setCondition(Condition condition) {
 		this.condition = condition;
 	}
 
 	public void setEntityFilter(Predicate<Entity> entityFilter) {
-		this.entityFilter = entityFilter;
+		// this.entityFilter = entityFilter;
 	}
 
 	public void setResolvedLate(boolean resolvedLate) {
@@ -109,6 +108,6 @@ public class BattlecryAction extends GameAction {
 
 	@Override
 	public String toString() {
-		return String.format("[%s '%s' resolvedLate:%s]", getActionType(), getSpell().getClass().getSimpleName(), resolvedLate);
+		return String.format("[%s '%s' resolvedLate:%s]", getActionType(), getSpell().getSpellClass().getSimpleName(), resolvedLate);
 	}
 }

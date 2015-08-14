@@ -1,0 +1,16 @@
+{
+	"name": "Argent Squire",
+	"description": "Divine Shield",
+	"id": "minion_argent_squire",
+	"type": "MINION",
+	"rarity": "COMMON",
+	"heroClass": "ANY",
+	"baseManaCost": 1,
+	"baseAttack": 1,
+	"baseHp": 1,
+	"attributes": {
+		"DIVINE_SHIELD": true
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}
