@@ -6,8 +6,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.pferdimanzug.nittygrittymvc.Mediator;
-import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
+import net.demilich.nittygrittymvc.Mediator;
+import net.demilich.nittygrittymvc.interfaces.INotification;
 import javafx.application.Platform;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.decks.Deck;

@@ -3,8 +3,8 @@ package net.demilich.metastone.gui.sandboxmode;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.pferdimanzug.nittygrittymvc.Mediator;
-import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
+import net.demilich.nittygrittymvc.Mediator;
+import net.demilich.nittygrittymvc.interfaces.INotification;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;

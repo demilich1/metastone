@@ -1,7 +1,7 @@
 package net.demilich.metastone;
 
-import de.pferdimanzug.nittygrittymvc.Facade;
-import de.pferdimanzug.nittygrittymvc.interfaces.IFacade;
+import net.demilich.nittygrittymvc.Facade;
+import net.demilich.nittygrittymvc.interfaces.IFacade;
 import net.demilich.metastone.gui.battleofdecks.StartBattleOfDecksCommand;
 import net.demilich.metastone.gui.deckbuilder.AddCardToDeckCommand;
 import net.demilich.metastone.gui.deckbuilder.ChangeDeckNameCommand;

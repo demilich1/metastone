@@ -3,8 +3,8 @@ package net.demilich.metastone.gui.main;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.pferdimanzug.nittygrittymvc.Mediator;
-import de.pferdimanzug.nittygrittymvc.interfaces.INotification;
+import net.demilich.nittygrittymvc.Mediator;
+import net.demilich.nittygrittymvc.interfaces.INotification;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import net.demilich.metastone.GameNotification;

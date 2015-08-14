@@ -1,6 +1,6 @@
 package net.demilich.metastone.gui.trainingmode;
 
-import de.pferdimanzug.nittygrittymvc.Notification;
+import net.demilich.nittygrittymvc.Notification;
 import net.demilich.metastone.GameNotification;
 
 public class RequestTrainingDataNotification extends Notification<GameNotification> {
