@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<fx:root id="" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <center>
+    <StackPane fx:id="targetAnchor" prefHeight="115.0" prefWidth="108.0">
+      <children>
+        <ImageView fx:id="portrait" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="/img/heroes/garrosh.png" />
+          </image>
+        </ImageView>
+        <ImageView fitHeight="100.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" translateX="2.0" translateY="2.0" StackPane.alignment="BOTTOM_RIGHT">
+          <image>
+            <Image url="/img/common/health_value_icon.png" />
+          </image>
+        </ImageView>
+            <Group fx:id="hpAnchor" translateX="-5.0" translateY="-2.0" StackPane.alignment="BOTTOM_RIGHT" />
+        <ImageView fitHeight="100.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateX="-2.0" translateY="5.0" StackPane.alignment="BOTTOM_LEFT">
+          <image>
+            <Image url="/img/common/attack_value_icon.png" />
+          </image>
+        </ImageView>
+            <Group fx:id="attackAnchor" translateX="7.0" translateY="-2.0" StackPane.alignment="BOTTOM_LEFT" />
+        <ImageView fx:id="armorIcon" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateX="4.0" translateY="8.0" StackPane.alignment="CENTER_RIGHT">
+          <image>
+            <Image url="/img/common/armor.png" />
+          </image>
+        </ImageView>
+            <Group fx:id="armorAnchor" translateX="-6.0" translateY="5.0" StackPane.alignment="CENTER_RIGHT" />
+        <FlowPane fx:id="secretsAnchor" prefHeight="-1.0" prefWidth="64.0" StackPane.alignment="TOP_CENTER" />
+        <Ellipse fx:id="frozen" fill="#ffffff00" radiusX="50.0" radiusY="30.0" smooth="false" stroke="#0e90e8" strokeDashOffset="10.0" strokeType="OUTSIDE" strokeWidth="5.0" visible="false" />
+      </children>
+      <padding>
+        <Insets left="8.0" />
+      </padding>
+    </StackPane>
+  </center>
+  <left>
+    <StackPane fx:id="weaponPane" prefHeight="-1.0" prefWidth="-1.0">
+      <children>
+        <Circle fill="#404040" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+        <Label fx:id="weaponNameLabel" maxWidth="70.0" styleClass="label-white" text="&lt;weapon name&gt;" textAlignment="CENTER" textFill="WHITE" wrapText="true" StackPane.alignment="CENTER">
+          <font>
+            <Font name="Arial Bold" size="10.0" />
+          </font>
+        </Label>
+            <Group fx:id="weaponAttackAnchor" translateY="-20.0" StackPane.alignment="BOTTOM_LEFT" />
+            <Group fx:id="weaponDurabilityAnchor" translateY="-20.0" StackPane.alignment="BOTTOM_RIGHT" />
+      </children>
+      <padding>
+        <Insets bottom="4.0" left="4.0" top="4.0" />
+      </padding>
+    </StackPane>
+  </left>
+  <padding>
+    <Insets bottom="8.0" top="8.0" />
+  </padding>
+  <right>
+    <VBox maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0">
+      <children>
+        <ImageView id="heropower" fx:id="heroPowerIcon" fitHeight="150.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" translateY="0.0" y="0.0">
+          <image>
+            <Image url="/img/powers/armor_up.png" />
+          </image>
+        </ImageView>
+        <Label id="mana" fx:id="manaLabel" alignment="CENTER" maxWidth="64.0" styleClass="mana-label" text="Mana: 10/10" textAlignment="LEFT" textFill="#0066ff" translateX="8.0" translateY="4.0" wrapText="true" VBox.vgrow="ALWAYS">
+          <font>
+            <Font name="Arial Bold" size="16.0" />
+          </font>
+          <VBox.margin>
+            <Insets left="4.0" />
+          </VBox.margin>
+        </Label>
+      </children>
+    </VBox>
+  </right>
+  <stylesheets>
+    <URL value="@/css/gameboard.css" />
+  </stylesheets>
+</fx:root>

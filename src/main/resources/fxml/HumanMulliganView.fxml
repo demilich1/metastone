@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="bordered-dialog" stylesheets="@../css/main.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <HBox fx:id="contentArea" alignment="CENTER" spacing="16.0" BorderPane.alignment="CENTER">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="260.0" stroke="BLACK" strokeType="INSIDE" width="174.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="260.0" layoutX="10.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" width="174.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="260.0" layoutX="184.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" width="174.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="260.0" layoutX="358.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" width="174.0" />
+         </children>
+         <padding>
+            <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+         </padding>
+      </HBox>
+   </center>
+   <bottom>
+      <Button fx:id="doneButton" alignment="CENTER" mnemonicParsing="false" text="Done" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </BorderPane.margin>
+      </Button>
+   </bottom>
+   <top>
+      <Label styleClass="header" text="Mulligan" BorderPane.alignment="CENTER" />
+   </top>
+</fx:root>

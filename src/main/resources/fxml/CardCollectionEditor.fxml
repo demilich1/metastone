@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import java.net.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="600.0" styleClass="bordered-dialog" stylesheets="@../css/main.css" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="4.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="TOP_CENTER" spacing="4.0">
+               <children>
+                  <Button fx:id="removeCardButton" mnemonicParsing="false" text="Remove">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="/img/ui/delete.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <ListView fx:id="editableListView" prefHeight="270.0" prefWidth="240.0" />
+                  <Label fx:id="cardCountLabel" text="&lt;card count&gt;">
+                     <font>
+                        <Font name="Arial" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="1.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" spacing="4.0">
+               <children>
+                  <Button fx:id="addCardButton" mnemonicParsing="false" text="Add">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="/img/ui/new.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <ListView fx:id="catalogueListView" layoutX="10.0" layoutY="10.0" prefHeight="270.0" prefWidth="240.0" />
+                  <HBox alignment="CENTER" spacing="4.0">
+                     <children>
+                        <TextField fx:id="filterTextfield" promptText="&lt;type to filter cards&gt;" />
+                        <Button fx:id="clearFilterButton" mnemonicParsing="false" text="clear" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER" spacing="128.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="okButton" mnemonicParsing="false" text="Ok" />
+            <Button fx:id="cancelButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Cancel" />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+         </padding>
+      </HBox>
+   </bottom>
+   <top>
+      <Label fx:id="headerLabel" styleClass="header" text="&lt;title&gt;" BorderPane.alignment="CENTER" />
+   </top>
+</fx:root>

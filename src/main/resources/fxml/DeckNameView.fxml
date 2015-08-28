@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root styleClass="panel" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="240.0" style="-fx-border-color: darkgrey; -fx-border-width: 1; -fx-border-radius: 10; -fx-background-radius: 10;" type="HBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <stylesheets>
+	<URL value="@/css/deckbuilder.css" />
+   </stylesheets>
+   <children>
+      <ImageView fx:id="classIcon" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="/img/classes/mage.png" />
+         </image>
+      </ImageView>
+      <TextField styleClass="name-small" fx:id="nameField" />
+   </children>
+</fx:root>

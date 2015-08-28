@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import java.net.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" styleClass="panel"  type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<top>
+		<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header" text="Battle of Decks" BorderPane.alignment="CENTER" />
+	</top>
+	<padding>
+		<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+	</padding>
+	<bottom>
+		<AnchorPane>
+			<children>
+				<Button fx:id="backButton" mnemonicParsing="false" text="Back" AnchorPane.leftAnchor="0.0" />
+			</children>
+		</AnchorPane>
+	</bottom>
+   <center>
+      <HBox>
+         <children>
+            <VBox alignment="TOP_CENTER">
+               <children>
+                  <Label styleClass="name-big" text="Result (batches)" />
+                  <ScrollPane prefViewportHeight="600.0" prefViewportWidth="720.0" prefWidth="720.0">
+                     <content>
+                        <FlowPane fx:id="batchResultPane" hgap="4.0" prefWidth="700.0" prefWrapLength="800.0" vgap="4.0" BorderPane.alignment="CENTER" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER">
+               <children>
+                  <Label styleClass="name-big" text="Overall result" />
+                  <TableView fx:id="rankingTable" prefHeight="602.0" prefWidth="400.0">
+                    <columns>
+                      <TableColumn prefWidth="111.0" text="Deck" />
+                      <TableColumn minWidth="0.0" prefWidth="134.0" text="Win rate" />
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </center>
+</fx:root>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root styleClass="bordered-panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="760.0" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0" spacing="128.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="previousButton" contentDisplay="CENTER" mnemonicParsing="false" text="&lt;&lt;" />
+            <Label styleClass="default-label" fx:id="pageLabel" alignment="CENTER" contentDisplay="CENTER" text="Label" />
+            <Button fx:id="nextButton" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" text="&gt;&gt;" />
+         </children>
+      </HBox>
+   </bottom>
+   <stylesheets>
+      <URL value="@/css/deckbuilder.css" />
+   </stylesheets>
+   <padding>
+      <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+   </padding>
+   <center>
+      <FlowPane fx:id="contentPane" alignment="CENTER" columnHalignment="CENTER" hgap="8.0" prefHeight="200.0" prefWidth="200.0" vgap="16.0" BorderPane.alignment="CENTER" />
+   </center>
+</fx:root>

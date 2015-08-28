@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.web.*?>
+<?import javafx.scene.image.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="panel" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox spacing="8.0">
+               <children>
+                  <RadioButton fx:id="minionRadioButton" mnemonicParsing="false" text="Minion" />
+                  <RadioButton fx:id="spellRadioButton" layoutX="181.0" layoutY="52.0" mnemonicParsing="false" text="Spell" />
+                  <RadioButton fx:id="weaponRadioButton" layoutX="216.0" layoutY="52.0" mnemonicParsing="false" text="Weapon" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets left="16.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox spacing="8.0">
+               <children>
+                  <Label minWidth="84.0" text="Name:" />
+                  <TextField fx:id="nameField" promptText="enter card name" />
+               </children>
+               <padding>
+                  <Insets left="16.0" />
+               </padding>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="37.0" spacing="8.0">
+               <children>
+                  <Label minWidth="84.0" text="Id:" />
+                  <Label fx:id="idLabel" layoutX="26.0" layoutY="10.0" minWidth="84.0" />
+               </children>
+               <padding>
+                  <Insets left="16.0" />
+               </padding>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="301.0" spacing="8.0">
+               <children>
+                  <Label minWidth="84.0" text="Description:" />
+                  <TextField fx:id="descriptionField" promptText="enter card description" />
+               </children>
+               <padding>
+                  <Insets left="16.0" />
+               </padding>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="319.0" spacing="8.0">
+               <children>
+                  <Label minWidth="84.0" text="Rarity:" />
+                  <ComboBox fx:id="rarityBox" prefWidth="150.0" />
+               </children>
+               <padding>
+                  <Insets left="16.0" />
+               </padding>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="336.0" spacing="8.0">
+               <children>
+                  <Label minWidth="84.0" text="Hero Class:" />
+                  <ComboBox fx:id="heroClassBox" prefWidth="150.0" />
+               </children>
+               <padding>
+                  <Insets left="16.0" />
+               </padding>
+            </HBox>
+            <HBox spacing="8.0">
+               <children>
+                  <Label minWidth="84.0" text="Card Set:" />
+                  <ComboBox fx:id="cardSetBox" prefWidth="150.0" />
+               </children>
+               <padding>
+                  <Insets left="16.0" />
+               </padding>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="37.0" spacing="8.0">
+               <children>
+                  <Label minWidth="84.0" text="Mana Cost:" />
+                  <TextField fx:id="manaCostField" promptText="enter mana cost" text="1" />
+               </children>
+               <padding>
+                  <Insets left="16.0" />
+               </padding>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="72.0" spacing="8.0">
+               <children>
+                  <Label minWidth="84.0" text="Collectible:" />
+                  <CheckBox fx:id="collectibleBox" mnemonicParsing="false" text="Usable in DeckBuilder" />
+               </children>
+               <padding>
+                  <Insets left="16.0" />
+               </padding>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="249.0" spacing="8.0">
+               <children>
+                  <VBox>
+                     <children>
+                        <Label minWidth="84.0" text="Attributes:" />
+                        <HBox>
+                           <children>
+                              <ComboBox fx:id="attributeBox1" prefWidth="150.0" />
+                              <TextField fx:id="attributeField1" promptText="enter value" />
+                           </children>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="27.0">
+                           <children>
+                              <ComboBox fx:id="attributeBox2" prefWidth="150.0" />
+                              <TextField fx:id="attributeField2" promptText="enter value" />
+                           </children>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="52.0">
+                           <children>
+                              <ComboBox fx:id="attributeBox3" prefWidth="150.0" />
+                              <TextField fx:id="attributeField3" promptText="enter value" />
+                           </children>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="77.0">
+                           <children>
+                              <ComboBox fx:id="attributeBox4" prefWidth="150.0" />
+                              <TextField fx:id="attributeField4" promptText="enter value" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets left="16.0" />
+               </padding>
+            </HBox>
+            <Pane fx:id="contentPanel" />
+            <HBox>
+               <children>
+                  <Button fx:id="resetButton" mnemonicParsing="false" text="Reset attributes" />
+               </children>
+            </HBox>
+         </children></VBox>
+   </center>
+   <padding>
+      <Insets bottom="8.0" left="24.0" right="24.0" top="24.0" />
+   </padding>
+   <bottom>
+      <HBox alignment="BOTTOM_CENTER" BorderPane.alignment="BOTTOM_CENTER">
+         <children>
+            <Button fx:id="saveButton" mnemonicParsing="false" text="Save as..." />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <BorderPane.margin>
+            <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+         </BorderPane.margin>
+      </HBox>
+   </bottom>
+</fx:root>

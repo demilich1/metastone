@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import java.net.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="140.0" prefWidth="200.0" styleClass="card-entry" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <StackPane>
+         <children>
+            <ProgressIndicator fx:id="progressIndicator" progress="0.0" />
+            <VBox fx:id="contentPane" alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+               <children>
+                  <Label fx:id="deck1Label" alignment="TOP_LEFT" minHeight="40.0" styleClass="info-small" text="&lt;Deckname deck1&gt;" wrapText="true">
+                     <graphic>
+                        <ImageView fx:id="deck1Icon" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="/img/classes/priest.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" styleClass="name-small" text="VS." />
+                  <Label fx:id="deck2Label" alignment="TOP_RIGHT" contentDisplay="RIGHT" minHeight="40.0" styleClass="info-small" text="&lt;Deckname deck2&gt;" textAlignment="RIGHT" wrapText="true">
+                     <graphic>
+                        <ImageView fx:id="deck2Icon" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="/img/classes/priest.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <StackPane>
+                           <children>
+                              <ProgressBar fx:id="winrate1Bar" nodeOrientation="RIGHT_TO_LEFT" prefWidth="100.0" progress="1.0" />
+                              <Label fx:id="winrate1Label" alignment="TOP_CENTER" styleClass="progress-text" text="Label" StackPane.alignment="CENTER" />
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="10.0" layoutY="10.0">
+                           <children>
+                              <ProgressBar fx:id="winrate2Bar" nodeOrientation="LEFT_TO_RIGHT" prefWidth="100.0" progress="1.0" />
+                              <Label fx:id="winrate2Label" alignment="TOP_CENTER" styleClass="progress-text" text="Label" StackPane.alignment="CENTER" />
+                           </children>
+                        </StackPane>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
+   </center>
+   <padding>
+      <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+   </padding>
+</fx:root>

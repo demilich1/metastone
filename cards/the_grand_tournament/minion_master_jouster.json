@@ -2,20 +2,23 @@
   "baseAttack": 5,
   "baseHp": 6,
   "battlecry": {
-   "class": "JoustSpell",
-	  "spell1" : {
-		  "class" : "MetaSpell",
-		  "spell1" : {
-			  "class" : "AddAttributeSpell",
-			  "attribute" : "TAUNT"
-		  },
-		  "spell2" : {
-			  "class" : "AddAttributeSpell",
-			  "attribute" : "DIVINE_SHIELD"
-		  },
-		  "target" : "SELF"
-	  },
-	  "target" : "NONE",
+	"spell" : {
+		"class": "JoustSpell",
+			"spell1" : {
+			  "class" : "MetaSpell",
+			  "spell1" : {
+				  "class" : "AddAttributeSpell",
+				  "attribute" : "TAUNT"
+			  },
+			  "spell2" : {
+				  "class" : "AddAttributeSpell",
+				  "attribute" : "DIVINE_SHIELD"
+			  },
+			  "target" : "SELF"
+		},
+		"target" : "NONE"
+	 },
+	"targetSelection": "NONE",
     "resolvedLate": false
   },
   "id": "minion_master_jouster",

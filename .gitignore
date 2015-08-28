@@ -4,4 +4,3 @@ test-output
 report.log
 /~$card_checklist.xlsx
 build/
-!build/build.xml

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root styleClass="bordered-panel" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" spacing="4.0"  type="VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label styleClass="name-big" fx:id="heroNameLabel" text="&lt;heroname&gt;" />
+      <ImageView fx:id="heroIcon" fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="/img/heroes/garrosh.png" />
+         </image>
+      </ImageView>
+      <Label styleClass="name-small" text="Choose hero:" />
+      <ComboBox  fx:id="heroBox" prefWidth="150.0" />
+      <Separator prefWidth="200.0" />
+      <Label styleClass="name-small" text="Behaviour:" />
+      <ComboBox  fx:id="behaviourBox" prefWidth="150.0" />
+      <Separator prefWidth="200.0" />
+      <Label styleClass="name-small" text="Deck:" />
+      <ComboBox  fx:id="deckBox" prefWidth="150.0" />
+      <Separator prefWidth="200.0" />
+      <CheckBox styleClass="name-small" fx:id="hideCardsCheckBox" mnemonicParsing="false" text="Hide cards" />
+   </children>
+   <opaqueInsets>
+      <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+   </opaqueInsets>
+   <padding>
+      <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+   </padding>
+</fx:root>

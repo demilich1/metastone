@@ -1,0 +1,36 @@
+<configuration>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
+			by default -->
+		<encoder>
+			<pattern>%d{HH:mm:ss} %-5level - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="LOGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>report.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+      		<fileNamePattern>report.%i.log</fileNamePattern>
+      		<minIndex>1</minIndex>
+      		<maxIndex>3</maxIndex>
+    	</rollingPolicy>
+
+    	<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+      		<maxFileSize>1000MB</maxFileSize>
+    	</triggeringPolicy>
+    	
+		<append>true</append>
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
+			by default -->
+		<encoder>
+			<pattern>%d{HH:mm:ss} %-5level - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<root level="INFO">
+		<appender-ref ref="STDOUT"/>
+		<appender-ref ref="LOGFILE" />
+	</root>
+
+</configuration>

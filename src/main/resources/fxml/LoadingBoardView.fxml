@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root id="board" prefHeight="768.0" prefWidth="1024.0" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <stylesheets>
+    <URL value="@/css/gameboard.css" />
+  </stylesheets>
+   <center>
+      <ProgressIndicator fx:id="loadingIndicator" maxHeight="128.0" maxWidth="128.0" prefHeight="128.0" prefWidth="128.0" progress="0.0" BorderPane.alignment="CENTER" />
+   </center>
+</fx:root>

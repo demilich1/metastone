@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<fx:root prefHeight="120.0" prefWidth="80.0" styleClass="card-border"  type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <bottom>
+    <StackPane fx:id="bottomPane" prefHeight="0.0" prefWidth="0.0" translateY="8.0">
+      <children>
+        <ImageView fx:id="attackIcon" fitHeight="150.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" translateX="-5.0" translateY="-2.0" StackPane.alignment="BOTTOM_LEFT">
+          <image>
+            <Image url="/img/common/attack_value_icon.png" />
+          </image>
+        </ImageView>
+        <ImageView fx:id="hpIcon" fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" translateX="4.0" translateY="-4.0" StackPane.alignment="BOTTOM_RIGHT">
+          <image>
+            <Image url="/img/common/health_value_icon.png" />
+          </image>
+        </ImageView>
+            <Group fx:id="attackAnchor" translateX="2.0" translateY="-4.0" StackPane.alignment="BOTTOM_LEFT" />
+            <Group fx:id="hpAnchor" translateX="-2.0" translateY="-4.0" StackPane.alignment="BOTTOM_RIGHT" />
+            <Circle fx:id="rarityGem" fill="#4989cd" radius="6.0" stroke="BLACK" strokeLineJoin="BEVEL" strokeType="INSIDE" strokeWidth="2.0" translateY="-20.0" />
+      </children>
+    </StackPane>
+  </bottom>
+  <center>
+      <VBox fx:id="centerPane" alignment="TOP_CENTER" spacing="32.0">
+         <children>
+          <Label fx:id="nameLabel" alignment="CENTER" maxWidth="78.0" text="&lt;card name&gt;" textAlignment="CENTER" wrapText="true" BorderPane.alignment="TOP_CENTER">
+            <font>
+              <Font name="Arial Bold" size="12.0" />
+            </font>
+          </Label>
+         </children>
+      </VBox>
+  </center>
+  <top>
+    <StackPane fx:id="topPane" prefHeight="-1.0" prefWidth="-1.0">
+      <children>
+        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" translateX="-8.0" translateY="-4.0" StackPane.alignment="TOP_LEFT">
+          <image>
+            <Image url="/img/common/mana_crystal.png" />
+          </image>
+        </ImageView>
+            <Group fx:id="manaCostAnchor" translateX="-4.0" translateY="-5.0" StackPane.alignment="TOP_LEFT" />
+      </children>
+    </StackPane>
+  </top>
+</fx:root>

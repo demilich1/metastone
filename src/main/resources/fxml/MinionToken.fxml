@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.paint.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<fx:root cache="true" prefHeight="-1.0" prefWidth="-1.0" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<center>
+		<StackPane fx:id="targetAnchor" prefHeight="-1.0" prefWidth="-1.0" BorderPane.alignment="CENTER">
+			<children>
+				<Circle fx:id="defaultToken" fill="#bfbfbf" radius="40.0" stroke="BLACK" strokeDashOffset="0.0" strokeLineCap="SQUARE" strokeType="INSIDE" strokeWidth="2.0" />
+				<Polygon fx:id="taunt" fill="#bfbfbf" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" translateY="5.0" visible="false">
+					<points>
+						<Double fx:value="-50.0" />
+						<Double fx:value="-20.0" />
+						<Double fx:value="50.0" />
+						<Double fx:value="-20.0" />
+						<Double fx:value="20.0" />
+						<Double fx:value="70.0" />
+						<Double fx:value="-20.0" />
+						<Double fx:value="70.0" />
+					</points>
+				</Polygon>
+				<Ellipse fx:id="frozen" fill="#ffffff00" radiusX="50.0" radiusY="30.0" smooth="false" stroke="#0e90e8" strokeDashOffset="10.0" strokeType="OUTSIDE" strokeWidth="5.0" visible="false" />
+				<Label fx:id="name" alignment="CENTER" labelFor="$name" maxWidth="80.0" text="&lt;minion name&gt;" textAlignment="CENTER" textOverrun="ELLIPSIS" wrapText="true" StackPane.alignment="CENTER">
+					<font>
+						<Font name="Arial Bold" size="12.0" />
+					</font>
+				</Label>
+				<StackPane prefHeight="-1.0" prefWidth="-1.0" translateY="0.0" StackPane.alignment="BOTTOM_CENTER">
+					<children>
+						<ImageView fx:id="deathrattle" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" translateY="8.0" visible="false" StackPane.alignment="BOTTOM_CENTER">
+							<image>
+								<Image url="/img/common/deathrattle.png" />
+							</image>
+						</ImageView>
+						<ImageView fitHeight="100.0" fitWidth="32.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" translateX="-2.0" translateY="3.0" y="0.0" StackPane.alignment="BOTTOM_LEFT">
+							<image>
+								<Image url="/img/common/attack_value_icon.png" />
+							</image>
+						</ImageView>
+						<Group fx:id="attackAnchor" translateX="8.0" translateY="-3.0" StackPane.alignment="BOTTOM_LEFT" />
+						<ImageView fitHeight="100.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" translateX="2.0" translateY="2.0" StackPane.alignment="BOTTOM_RIGHT">
+							<image>
+								<Image url="/img/common/health_value_icon.png" />
+							</image>
+						</ImageView>
+						<Group fx:id="hpAnchor" translateX="-6.0" translateY="-3.0" StackPane.alignment="BOTTOM_RIGHT" />
+					</children>
+				</StackPane>
+				<Ellipse fx:id="divineShield" radiusX="30.0" radiusY="50.0" stroke="BLACK" strokeType="INSIDE" visible="false">
+					<fill>
+						<LinearGradient endX="1.0" endY="1.0">
+							<stops>
+								<Stop color="#f0e80033" />
+								<Stop color="WHITE" offset="1.0" />
+							</stops>
+						</LinearGradient>
+					</fill>
+				</Ellipse>
+				<Text fx:id="windfury" fill="#e8964f" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="2.0" text="x2" translateX="-38.0" translateY="12.0" visible="false">
+					<font>
+						<Font name="Arial" size="22.0" />
+					</font>
+				</Text>
+			</children>
+		</StackPane>
+	</center>
+	<padding>
+		<Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+	</padding>
+	<stylesheets>
+		<URL value="@/css/gameboard.css" />
+	</stylesheets>
+</fx:root>

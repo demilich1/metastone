@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import java.net.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root styleClass="bordered-dialog" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/main.css" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <bottom>
+      <HBox alignment="CENTER" spacing="128.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button  fx:id="okButton" mnemonicParsing="false" text="Ok" />
+            <Button  fx:id="cancelButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Cancel" />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+         </BorderPane.margin>
+      </HBox>
+   </bottom>
+   <top>
+      <Label styleClass="header" fx:id="headerLabel" text="&lt;title&gt;" BorderPane.alignment="CENTER" />
+   </top>
+   <center>
+      <VBox prefHeight="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="propertiesTable" prefHeight="300.0" prefWidth="200.0">
+              <columns>
+                <TableColumn fx:id="nameColumn" maxWidth="1000.0" minWidth="20.0" prefWidth="240.0" text="Property" />
+                <TableColumn fx:id="valueColumn" maxWidth="1000.0" minWidth="20.0" prefWidth="240.0" text="Value" />
+              </columns>
+            </TableView>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets left="20.0" right="20.0" />
+         </padding></VBox>
+   </center>
+</fx:root>

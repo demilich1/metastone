@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="panel"  type="Pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox alignment="CENTER">
+         <children>
+            <ImageView fx:id="classIcon" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="/img/classes/mage.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="heroLabel" styleClass="name-small" text="&lt;heroname&gt;" textAlignment="CENTER" />
+            <GridPane alignment="CENTER">
+               <children>
+                  <Label styleClass="name-small" text="Deck:" />
+                  <Label styleClass="name-small" text="Behaviour:" GridPane.rowIndex="1" />
+                  <Label fx:id="deckLabel" styleClass="info-small" text="&lt;deckname&gt;" GridPane.columnIndex="1" />
+                  <Label fx:id="behaviourLabel" layoutX="110.0" layoutY="12.0" styleClass="info-small" text="&lt;behaviour&gt;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+         </children>
+         <padding>
+            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+         </padding>
+      </VBox>
+   </children>
+</fx:root>

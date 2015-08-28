@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.net.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root styleClass="card-entry" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="220.0" type="HBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <StackPane prefHeight="40.0" prefWidth="40.0">
+         <children>
+            <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="/img/common/mana_crystal.png" />
+               </image>
+            </ImageView>
+            <Text styleClass="outlined-score" fx:id="manaCostText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+         </children>
+      </StackPane>
+      <Label styleClass="card-entry-name" fx:id="cardNameLabel" maxWidth="160.0" minWidth="160.0" text="&lt;cardname&gt;" />
+      <Text styleClass="outlined-score-yellow" fx:id="countText" strokeType="OUTSIDE" strokeWidth="0.0" text="2" />
+   </children>
+   <stylesheets>
+      <URL value="@/css/deckbuilder.css" />
+   </stylesheets>
+</fx:root>

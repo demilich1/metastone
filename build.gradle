@@ -1,5 +1,6 @@
 apply plugin: 'application'
 apply plugin: 'eclipse'
+apply from: 'javafx.plugin'
 
 sourceCompatibility = 1.8
 version = '0.9.5'
@@ -9,18 +10,6 @@ jar {
     manifest {
         attributes 'Implementation-Title': 'MetaStone',
                    'Implementation-Version': version
-    }
-}
-
-sourceSets {
-    main {
-        java {
-            srcDirs = ["src"]
-        }
-		resources {
-            srcDirs = ["src"]
-            includes = ["**/*.fxml", "**/*.png", "**/*.css", "**/*.xml", "**/*.gif"]
-        }
     }
 }
 
@@ -36,7 +25,34 @@ dependencies {
 	compile group: 'commons-io', name: 'commons-io', version: '2.4'
 	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
 	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5'
-    testCompile group: 'org.testng', name: 'testgn', version: '6.+'
+    testCompile group: 'org.testng', name: 'testng', version: '6.+'
+}
+
+task copyCards << {
+	mkdir('src/deploy/resources/cards')
+	copy {
+   		from 'cards'
+   		into('src/deploy/resources/cards')
+   	}
+}
+
+task copyDecks << {
+	mkdir('src/deploy/resources/decks')
+	copy {
+   		from 'decks'
+   		into('src/deploy/resources/decks')
+   	}
+}
+
+assemble.dependsOn copyDecks
+assemble.dependsOn copyCards
+assemble.doLast {
+	println 'Cleaning up...'
+ 	delete('src/deploy/resources')
+}
+
+javafx {
+    mainClass = 'net.demilich.metastone.MetaStone'
 }
 
 test {

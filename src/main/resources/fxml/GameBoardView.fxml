@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root prefHeight="748.0" prefWidth="1024.0" styleClass="board" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<stylesheets>
+		<URL value="@/css/gameboard.css" />
+	</stylesheets>
+	<bottom>
+		<BorderPane prefHeight="-1.0" prefWidth="-1.0">
+			<bottom>
+				<HBox fx:id="p1CardPane" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="4.0">
+					<padding>
+						<Insets bottom="4.0" top="4.0" fx:id="x1" />
+					</padding>
+				</HBox>
+			</bottom>
+			<center>
+				<VBox fx:id="p1HeroAnchor" alignment="CENTER" fillWidth="false" prefHeight="-1.0" prefWidth="-1.0" />
+			</center>
+		</BorderPane>
+	</bottom>
+	<center>
+		<BorderPane prefHeight="200.0" prefWidth="200.0">
+			<bottom>
+				<HBox fx:id="p1MinionPane" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
+			</bottom>
+			<center>
+				<HBox alignment="CENTER" prefHeight="-1.0" prefWidth="-1.0" BorderPane.alignment="CENTER">
+					<children>
+						<Label fx:id="centerMessageLabel" styleClass="center-message" text="&lt;center message&gt;" visible="false">
+						</Label>
+					</children>
+				</HBox>
+			</center>
+			<top>
+				<HBox fx:id="p2MinionPane" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
+			</top>
+		</BorderPane>
+	</center>
+	<stylesheets>
+		<URL value="@/css/gameboard.css" />
+	</stylesheets>
+	<top>
+		<BorderPane prefHeight="-1.0" prefWidth="-1.0">
+			<center>
+				<VBox fx:id="p2HeroAnchor" alignment="CENTER" fillWidth="false" prefHeight="-1.0" prefWidth="-1.0" BorderPane.alignment="CENTER" />
+			</center>
+			<top>
+				<HBox fx:id="p2CardPane" alignment="CENTER" padding="$x1" prefHeight="100.0" prefWidth="200.0" spacing="4.0" />
+			</top>
+		</BorderPane>
+	</top>
+</fx:root>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.web.*?>
+<?import javafx.scene.image.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" styleClass="panel" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="playModeButton" layoutX="447.0" layoutY="339.0" mnemonicParsing="false" prefWidth="200.0" styleClass="main-button" text="Play Mode" textAlignment="CENTER" />
+            <Button fx:id="deckBuilderButton" mnemonicParsing="false" prefWidth="200.0" styleClass="main-button" text="Deck Builder" textAlignment="CENTER" />
+            <Button fx:id="simulationModeButton" layoutX="422.0" layoutY="313.0" mnemonicParsing="false" prefWidth="200.0" styleClass="main-button" text="Simulation Mode" textAlignment="CENTER" />
+            <Button fx:id="trainingModeButton" layoutX="422.0" layoutY="391.0" mnemonicParsing="false" prefWidth="200.0" styleClass="main-button" text="Training Mode" textAlignment="CENTER" />
+            <Button fx:id="sandboxModeButton" layoutX="422.0" layoutY="417.0" mnemonicParsing="false" prefWidth="200.0" styleClass="main-button" text="Sandbox Mode" textAlignment="CENTER" />
+            <Button fx:id="battleOfDecksButton" layoutX="422.0" layoutY="388.0" mnemonicParsing="false" prefWidth="200.0" styleClass="main-button" text="Battle of Decks" textAlignment="CENTER" />
+         </children></VBox>
+   </center>
+   <top>
+      <HBox alignment="CENTER">
+         <children>
+            <ImageView fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="/img/ui/logo.png" />
+               </image>
+            </ImageView>
+            <Text cache="true" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="MetaStone" BorderPane.alignment="CENTER" />
+         </children>
+      </HBox>
+   </top>
+   <stylesheets>
+      <URL value="@/css/mainmenu.css" />
+      <URL value="@/css/main.css" />
+   </stylesheets>
+   <bottom>
+      <AnchorPane>
+         <children>
+            <Label fx:id="versionLabel" styleClass="info-small" text="x.x.x" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </padding>
+            </Label>
+            <Button fx:id="donationButton" mnemonicParsing="false" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="433.0" AnchorPane.rightAnchor="433.0">
+               <graphic>
+                  <ImageView fitHeight="47.0" fitWidth="126.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="/img/ui/paypal_donate_button.gif" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
+   </bottom>
+   <padding>
+      <Insets top="20.0" />
+   </padding>
+</fx:root>

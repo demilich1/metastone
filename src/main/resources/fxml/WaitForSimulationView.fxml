@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<fx:root styleClass="bordered-dialog" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" stylesheets="@../css/main.css" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <Label styleClass="name-big" text="Simulating...." BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </padding>
+      </Label>
+   </top>
+   <center>
+      <VBox alignment="CENTER" spacing="8.0" BorderPane.alignment="CENTER">
+         <children>
+            <ProgressBar fx:id="progressBar" prefWidth="200.0" progress="0.0" />
+            <Label styleClass="dialog-text" fx:id="gamesCompletedLabel" text="&lt;games completed&gt;" />
+         </children>
+      </VBox>
+   </center>
+</fx:root>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root styleClass="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0"  type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <Text styleClass="header" strokeType="OUTSIDE" strokeWidth="0.0" text="Sandbox Mode" BorderPane.alignment="CENTER" />
+   </top>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+   <center>
+      <VBox alignment="CENTER" spacing="8.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox fx:id="playerArea" alignment="CENTER" maxHeight="400.0" BorderPane.alignment="CENTER" />
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <AnchorPane>
+         <children>
+            <Button  fx:id="backButton" mnemonicParsing="false" text="Back" AnchorPane.leftAnchor="0.0" />
+            <Button  fx:id="startButton" mnemonicParsing="false" text="Start" AnchorPane.leftAnchor="380.0" AnchorPane.rightAnchor="380.0" />
+         </children>
+      </AnchorPane>
+   </bottom>
+</fx:root>

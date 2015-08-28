@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root styleClass="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0"  type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox alignment="CENTER" fillWidth="false" spacing="16.0">
+         <children>
+            <BorderPane fx:id="infoArea">
+               <center>
+                  <Label styleClass="name-big" alignment="BASELINE_CENTER" text="vs." BorderPane.alignment="CENTER">
+                     <padding>
+                        <Insets left="64.0" right="64.0" />
+                     </padding></Label>
+               </center>
+               <padding>
+                  <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+               </padding>
+            </BorderPane>
+            <Label styleClass="name-small" fx:id="durationLabel" text="&lt;simulation duration&gt;" textAlignment="CENTER" />
+            <TabPane>
+               <tabs>
+                  <Tab closable="false" text="Absolute values (over all games)">
+                     <content>
+                        <ScrollPane prefViewportHeight="440.0" prefViewportWidth="620.0">
+                           <content>
+                              <TableView fx:id="absoluteResultTable" prefWidth="600.0">
+                                <columns>
+                                  <TableColumn minWidth="100.0" prefWidth="200.0" text="Statistic" />
+                                  <TableColumn minWidth="100.0" prefWidth="200.0" text="Player 1" />
+                                    <TableColumn minWidth="100.0" prefWidth="200.0" text="Player 2" />
+                                </columns>
+                              </TableView>
+                           </content>
+                        </ScrollPane>
+                     </content>
+                  </Tab>
+                  <Tab closable="false" text="Average values (per game)">
+                     <content>
+                        <ScrollPane prefViewportHeight="440.0" prefViewportWidth="620.0">
+                           <content>
+                              <TableView fx:id="averageResultTable" prefWidth="600.0">
+                                 <columns>
+                                    <TableColumn minWidth="100.0" prefWidth="200.0" text="Statistic" />
+                                    <TableColumn minWidth="100.0" prefWidth="200.0" text="Player 1" />
+                                    <TableColumn minWidth="100.0" prefWidth="200.0" text="Player 2" />
+                                 </columns>
+                              </TableView>
+                           </content>
+                        </ScrollPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+         </children>
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </padding>
+      </VBox>
+   </center>
+   <bottom>
+      <Button  fx:id="doneButton" mnemonicParsing="false" text="Close" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </padding>
+      </Button>
+   </bottom>
+   <top>
+      <Text styleClass="header" strokeType="OUTSIDE" strokeWidth="0.0" text="Simulation Results" BorderPane.alignment="CENTER" />
+   </top>
+   <padding>
+      <Insets bottom="8.0" top="20.0" />
+   </padding>
+</fx:root>

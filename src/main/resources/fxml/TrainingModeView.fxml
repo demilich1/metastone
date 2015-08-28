@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import java.net.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" styleClass="panel"  type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header" text="Training Mode" BorderPane.alignment="CENTER" />
+   </top>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+   <center>
+      <VBox alignment="CENTER" spacing="8.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="trainingLabel" text="Training: Special Tactics Deck">
+               <styleClass>
+                  <String fx:value="info-small" />
+                  <String fx:value="default-label" />
+               </styleClass>
+            </Label>
+            <Label fx:id="progressLabel" layoutX="488.0" layoutY="120.0" text="Label">
+               <styleClass>
+                  <String fx:value="info-small" />
+                  <String fx:value="name-small" />
+               </styleClass>
+            </Label>
+            <LineChart fx:id="resultChart" title="Training results">
+              <xAxis>
+                <NumberAxis label="Games played" side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis label="Win rate" side="LEFT" />
+              </yAxis>
+            </LineChart>
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <AnchorPane>
+         <children>
+            <Button fx:id="backButton" mnemonicParsing="false" text="Back" AnchorPane.leftAnchor="0.0" />
+         </children>
+      </AnchorPane>
+   </bottom>
+</fx:root>
