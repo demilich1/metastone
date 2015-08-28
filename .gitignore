@@ -1,5 +1,6 @@
 bin
 .project
+.gradle
 test-output
 report.log
 /~$card_checklist.xlsx

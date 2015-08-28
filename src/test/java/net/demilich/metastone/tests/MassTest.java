@@ -34,7 +34,7 @@ public class MassTest extends TestBase {
 		root.setLevel(Level.INFO);
 	}
 
-	//@Test(threadPoolSize = 16, invocationCount = 10000)
+	@Test(threadPoolSize = 16, invocationCount = 1000)
 	public void testRandomMassPlay() {
 		HeroClass heroClass1 = getRandomClass();
 		PlayerConfig player1Config = new PlayerConfig(DeckFactory.getRandomDeck(heroClass1), new PlayRandomBehaviour());
