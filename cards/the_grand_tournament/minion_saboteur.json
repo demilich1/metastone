@@ -1,0 +1,30 @@
+{
+	"baseAttack": 4,
+	"baseHp": 3,
+	"battlecry": {
+		"spell": {
+			"class": "CardCostModifierSpell",
+			"cardCostModifier": {
+				"class": "OneTurnCostModifier",
+				"cardType": "HERO_POWER",
+				"targetPlayer": "OPPONENT",
+				"value": 5
+			},
+			"target": "FRIENDLY_HERO"
+		},
+		"resolvedLate": false
+	},
+	"id": "minion_saboteur",
+	"name": "Saboteur",
+	"description": "Battlecry: Your opponent's Hero Power costs (5) more next turn.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 3,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"fileFormatVersion": 1
+}

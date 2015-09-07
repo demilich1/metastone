@@ -1,24 +1,24 @@
 {
-  "baseAttack": 1,
-  "baseHp": 8,
-   "trigger" : {
-	"eventTrigger" : {
-		"class" : "InspireTrigger"
+	"baseAttack": 1,
+	"baseHp": 8,
+	"trigger": {
+		"eventTrigger": {
+			"class": "InspireTrigger"
+		},
+		"spell": {
+			"class": "HealSpell",
+			"value": 2,
+			"target": "FRIENDLY_HERO"
+		}
 	},
-	"spell" : {
-		"class" : "HealSpell",
-		"value" : 2,
-		"target" : "FRIENDLY_HERO"
-	}
-  },
-  "id": "minion_tournament_medic",
-  "name": "Tournament Medic",
-  "description": "Inspire: Restore 2 Health to your Hero.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "COMMON",
-  "set": "THE_GRAND_TOURNAMENT",
-  "baseManaCost": 4,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"id": "minion_tournament_medic",
+	"name": "Tournament Medic",
+	"description": "Inspire: Restore 2 Health to your Hero.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 4,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

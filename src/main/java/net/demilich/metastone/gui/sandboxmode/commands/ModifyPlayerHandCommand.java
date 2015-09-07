@@ -19,7 +19,9 @@ public class ModifyPlayerHandCommand extends SimpleCommand<GameNotification> {
 		CardCollection modifiedHand = (CardCollection) notification.getBody();
 		GameContext context = sandboxProxy.getSandbox();
 
-		player.getHand().removeAll();
+		for (Card card : player.getHand().toList()) {
+			context.getLogic().removeCard(player.getId(), card);
+		}
 		for (Card card : modifiedHand) {
 			context.getLogic().receiveCard(player.getId(), card);
 		}

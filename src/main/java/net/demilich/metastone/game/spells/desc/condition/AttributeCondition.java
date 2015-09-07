@@ -20,15 +20,15 @@ public class AttributeCondition extends Condition {
 	@Override
 	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity target) {
 		EntityReference sourceReference = (EntityReference) desc.get(ConditionArg.TARGET);
-		Actor source = null;
+		Entity source = null;
 		if (sourceReference == null) {
-			source = (Actor) target;
+			source = target;
 		} else {
 			List<Entity> entities = context.resolveTarget(player, null, sourceReference);
 			if (entities == null || entities.isEmpty()) {
 				return false;
 			}
-			source = (Actor) entities.get(0);
+			source = entities.get(0);
 		}
 
 		Attribute attribute = (Attribute) desc.get(ConditionArg.ATTRIBUTE);
@@ -41,7 +41,12 @@ public class AttributeCondition extends Condition {
 
 		int actualValue;
 		if (attribute == Attribute.ATTACK) {
-			actualValue = source.getAttack();
+			if (source instanceof Actor) {
+				actualValue = ((Actor)source).getAttack();	
+			} else {
+				actualValue = source.getAttributeValue(attribute);
+			}
+			
 		} else {
 			actualValue = source.getAttributeValue(attribute);
 		}

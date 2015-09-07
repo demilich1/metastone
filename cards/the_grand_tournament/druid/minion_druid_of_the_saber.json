@@ -1,0 +1,30 @@
+{
+	"baseAttack": 2,
+	"baseHp": 1,
+	"option1": {
+		"spell": {
+			"class": "TransformMinionSpell",
+			"card": "token_sabertooth_lion",
+			"target": "SELF"
+		},
+		"description": "Charge"
+	},
+	"option2": {
+		"spell": {
+			"class": "TransformMinionSpell",
+			"card": "token_sabertooth_panther",
+			"target": "SELF"
+		},
+		"description": "Stealth +1/+1"
+	},
+	"id": "minion_druid_of_the_saber",
+	"name": "Druid of the Saber",
+	"description": "Choose One - Transform to gain Charge; or +1/+1 and Stealth.",
+	"type": "MINION",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 2,
+	"collectible": true,
+	"fileFormatVersion": 1
+}

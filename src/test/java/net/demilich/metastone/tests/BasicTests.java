@@ -64,7 +64,7 @@ public class BasicTests extends TestBase {
 		playCard(context, mage, devMonsterCard);
 
 		SpellDesc heroBuffSpell = BuffHeroSpell.create(EntityReference.FRIENDLY_HERO, damage, 0);
-		context.getLogic().castSpell(druid.getId(), heroBuffSpell, druid.getHero().getReference(), null);
+		context.getLogic().castSpell(druid.getId(), heroBuffSpell, druid.getHero().getReference(), null, false);
 		context.getLogic().endTurn(druid.getId());
 
 		Actor devMonster = getSingleMinion(mage.getMinions());
@@ -76,7 +76,7 @@ public class BasicTests extends TestBase {
 		Assert.assertEquals(devMonster.getHp(), devMonster.getMaxHp());
 		context.getLogic().endTurn(mage.getId());
 
-		context.getLogic().castSpell(druid.getId(), heroBuffSpell, druid.getHero().getReference(), null);
+		context.getLogic().castSpell(druid.getId(), heroBuffSpell, druid.getHero().getReference(), null, false);
 		GameAction heroAttackAction = new PhysicalAttackAction(druid.getHero().getReference());
 		heroAttackAction.setTarget(devMonster);
 		context.getLogic().performGameAction(mage.getId(), heroAttackAction);

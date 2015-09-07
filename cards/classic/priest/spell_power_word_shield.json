@@ -12,7 +12,7 @@
 	},
 	"id": "spell_power_word_shield",
 	"name": "Power Word: Shield",
-	"description": "Give a minion +2 Health. Draw a card.Give a minion +2 Health. Draw a card.",
+	"description": "Give a minion +2 Health. Draw a card.",
 	"type": "SPELL",
 	"heroClass": "PRIEST",
 	"rarity": "COMMON",

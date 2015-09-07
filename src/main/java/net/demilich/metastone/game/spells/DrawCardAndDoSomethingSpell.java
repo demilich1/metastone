@@ -7,7 +7,6 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.CardLocation;
-import net.demilich.metastone.game.targeting.EntityReference;
 
 public class DrawCardAndDoSomethingSpell extends Spell {
 
@@ -22,8 +21,7 @@ public class DrawCardAndDoSomethingSpell extends Spell {
 				return;
 			}
 			SpellDesc cardEffectSpell = (SpellDesc) desc.get(SpellArg.SPELL_1);
-			EntityReference sourceReference = source != null ? source.getReference() : null;
-			context.getLogic().castSpell(player.getId(), cardEffectSpell, sourceReference, card.getReference());
+			SpellUtils.castChildSpell(context, player, cardEffectSpell, source, card);
 		}
 	}
 

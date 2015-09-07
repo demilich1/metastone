@@ -109,7 +109,7 @@ public abstract class Card extends Entity {
 	}
 
 	public int getManaCost(GameContext context, Player player) {
-		int actualManaCost = manaCost + getAttributeValue(Attribute.MANA_COST_MODIFIER);
+		int actualManaCost = manaCost;
 		if (manaCostModifier != null) {
 			actualManaCost -= manaCostModifier.getValue(context, player, null, this);
 		}

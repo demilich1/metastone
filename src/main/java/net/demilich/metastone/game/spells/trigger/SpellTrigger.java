@@ -87,7 +87,7 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 	}
 
 	protected void onFire(int ownerId, SpellDesc spell, GameEvent event) {
-		event.getGameContext().getLogic().castSpell(ownerId, spell, hostReference, null);
+		event.getGameContext().getLogic().castSpell(ownerId, spell, hostReference, null, true);
 	}
 
 	@Override

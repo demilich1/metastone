@@ -4,11 +4,11 @@
 	"battlecry": {
 		"spell": {
 			"class": "DamageSpell",
-			"value": 3,
-			"condition": {
-				"class": "HoldsCardCondition",
-				"race": "DRAGON"
-			}
+			"value": 3
+		},
+		"condition": {
+			"class": "HoldsCardCondition",
+			"race": "DRAGON"
 		},
 		"targetSelection": "ANY",
 		"resolvedLate": false

@@ -1,23 +1,23 @@
 {
-  "baseAttack": 2,
-  "baseHp": 5,
-   "trigger" : {
-	"eventTrigger" : {
-		"class" : "InspireTrigger"
+	"baseAttack": 2,
+	"baseHp": 5,
+	"trigger": {
+		"eventTrigger": {
+			"class": "InspireTrigger"
+		},
+		"spell": {
+			"class": "ReturnMinionToHandSpell",
+			"target": "SELF"
+		}
 	},
-	"spell" : {
-		"class" : "ReturnMinionToHandSpell",
-		"target" : "SELF"
-	}
-  },
-  "id": "minion_coliseum_manager",
-  "name": "Coliseum Manager",
-  "description": "Inspire: Return this minion to your hand.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "RARE",
-  "set": "THE_GRAND_TOURNAMENT",
-  "baseManaCost": 3,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"id": "minion_coliseum_manager",
+	"name": "Coliseum Manager",
+	"description": "Inspire: Return this minion to your hand.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 3,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

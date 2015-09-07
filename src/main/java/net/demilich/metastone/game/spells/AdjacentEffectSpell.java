@@ -35,7 +35,7 @@ public class AdjacentEffectSpell extends Spell {
 
 		SpellDesc primary = (SpellDesc) desc.get(SpellArg.SPELL_1);
 		if (primary != null) {
-			context.getLogic().castSpell(player.getId(), primary, sourceReference, target.getReference());
+			context.getLogic().castSpell(player.getId(), primary, sourceReference, target.getReference(), true);
 		}
 
 		SpellDesc secondary = (SpellDesc) desc.get(SpellArg.SPELL_2);
@@ -43,7 +43,7 @@ public class AdjacentEffectSpell extends Spell {
 			secondary = primary;
 		}
 		for (Entity adjacent : context.getAdjacentMinions(player, target.getReference())) {
-			context.getLogic().castSpell(player.getId(), secondary, sourceReference, adjacent.getReference());
+			context.getLogic().castSpell(player.getId(), secondary, sourceReference, adjacent.getReference(), true);
 		}
 	}
 

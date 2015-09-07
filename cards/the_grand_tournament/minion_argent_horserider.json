@@ -1,18 +1,18 @@
 {
-  "baseAttack": 2,
-  "baseHp": 1,
-  "id": "minion_argent_horserider",
-  "name": "Argent Horserider",
-  "description": "Divine Shield. Charge.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "COMMON",
-  "set": "THE_GRAND_TOURNAMENT",
-  "baseManaCost": 3,
-  "collectible": true,
-  "attributes": {
-    "CHARGE": true,
-    "DIVINE_SHIELD": true
-  },
-  "fileFormatVersion": 1
+	"baseAttack": 2,
+	"baseHp": 1,
+	"id": "minion_argent_horserider",
+	"name": "Argent Horserider",
+	"description": "Divine Shield. Charge.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 3,
+	"collectible": true,
+	"attributes": {
+		"CHARGE": true,
+		"DIVINE_SHIELD": true
+	},
+	"fileFormatVersion": 1
 }

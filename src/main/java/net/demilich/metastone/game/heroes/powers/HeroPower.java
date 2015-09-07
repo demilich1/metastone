@@ -10,14 +10,14 @@ import net.demilich.metastone.game.targeting.CardLocation;
 
 public class HeroPower extends SpellCard {
 
-	private boolean used;
+	private int used;
 
 	public HeroPower(HeroPowerCardDesc desc) {
 		super(desc);
 		setLocation(CardLocation.HERO_POWER);
 	}
 
-	public boolean hasBeenUsed() {
+	public int hasBeenUsed() {
 		return used;
 	}
 
@@ -30,8 +30,12 @@ public class HeroPower extends SpellCard {
 		return new HeroPowerAction(getSpell(), this, getTargetRequirement());
 	}
 
-	public void setUsed(boolean used) {
+	public void setUsed(int used) {
 		this.used = used;
+	}
+	
+	public void markUsed() {
+		this.used++;
 	}
 
 }

@@ -6,6 +6,7 @@ import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Race;
 
 public class CardFilter extends EntityFilter {
@@ -34,6 +35,12 @@ public class CardFilter extends EntityFilter {
 		if (race != null && race != card.getAttribute(Attribute.RACE)) {
 			return false;
 		}
+		
+		HeroClass heroClass = (HeroClass) desc.get(FilterArg.HERO_CLASS);
+		if (heroClass != null && heroClass != card.getClassRestriction()) {
+			return false;
+		}
+		
 		if (desc.contains(FilterArg.MANA_COST)) {
 			int manaCost = desc.getInt(FilterArg.MANA_COST);
 			if (manaCost != card.getBaseManaCost()) {

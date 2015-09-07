@@ -1,0 +1,19 @@
+{
+	"baseAttack": 5,
+	"baseHp": 5,
+	"id": "minion_aviana",
+	"cardCostModifier": {
+		"class": "CardCostModifier",
+		"cardType": "MINION",
+		"fixedValue": 1
+	},
+	"name": "Aviana",
+	"description": "Your minions cost (1).",
+	"type": "MINION",
+	"heroClass": "DRUID",
+	"rarity": "LEGENDARY",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 9,
+	"collectible": true,
+	"fileFormatVersion": 1
+}

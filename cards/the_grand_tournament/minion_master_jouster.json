@@ -1,37 +1,37 @@
 {
-  "baseAttack": 5,
-  "baseHp": 6,
-  "battlecry": {
-	"spell" : {
-		"class": "JoustSpell",
-			"spell1" : {
-			  "class" : "MetaSpell",
-			  "spell1" : {
-				  "class" : "AddAttributeSpell",
-				  "attribute" : "TAUNT"
-			  },
-			  "spell2" : {
-				  "class" : "AddAttributeSpell",
-				  "attribute" : "DIVINE_SHIELD"
-			  },
-			  "target" : "SELF"
+	"baseAttack": 5,
+	"baseHp": 6,
+	"battlecry": {
+		"spell": {
+			"class": "JoustSpell",
+			"spell1": {
+				"class": "MetaSpell",
+				"spell1": {
+					"class": "AddAttributeSpell",
+					"attribute": "TAUNT"
+				},
+				"spell2": {
+					"class": "AddAttributeSpell",
+					"attribute": "DIVINE_SHIELD"
+				},
+				"target": "SELF"
+			},
+			"target": "NONE"
 		},
-		"target" : "NONE"
-	 },
-	"targetSelection": "NONE",
-    "resolvedLate": false
-  },
-  "id": "minion_master_jouster",
-  "name": "Master Jouster",
-  "description": "Battlecry : Reveal a minion in each deck. If yours costs more, gain Taunt and Divine Shield.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "RARE",
-  "set": "THE_GRAND_TOURNAMENT",
-  "baseManaCost": 6,
-  "collectible": true,
-  "attributes": {
-    "BATTLECRY": true
-  },
-  "fileFormatVersion": 1
+		"targetSelection": "NONE",
+		"resolvedLate": false
+	},
+	"id": "minion_master_jouster",
+	"name": "Master Jouster",
+	"description": "Battlecry : Reveal a minion in each deck. If yours costs more, gain Taunt and Divine Shield.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 6,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"fileFormatVersion": 1
 }

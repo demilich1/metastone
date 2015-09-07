@@ -17,7 +17,7 @@ import net.demilich.metastone.gui.common.ComboBoxKeyHandler;
 public abstract class CardEditor extends VBox implements ICardEditor {
 
 	public CardEditor(String fxmlFile) {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/" + fxmlFile));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
 
@@ -31,7 +31,7 @@ public abstract class CardEditor extends VBox implements ICardEditor {
 	@SuppressWarnings("unchecked")
 	protected void fillWithSpells(ComboBox<Class<? extends Spell>> comboBox) {
 		ObservableList<Class<? extends Spell>> items = FXCollections.observableArrayList();
-		String spellPath = "./src/" + Spell.class.getPackage().getName().replace(".", "/") + "/";
+		String spellPath = "./src/main/java/" + Spell.class.getPackage().getName().replace(".", "/") + "/";
 		for (File file : FileUtils.listFiles(new File(spellPath), new String[] { "java" }, false)) {
 			String fileName = file.getName().replace(".java", "");
 			String spellClassName = Spell.class.getPackage().getName() + "." + fileName;

@@ -54,13 +54,13 @@ public class Weapon extends Actor {
 
 	public void onEquip(GameContext context, Player player) {
 		if (onEquip != null) {
-			context.getLogic().castSpell(player.getId(), onEquip, getReference(), EntityReference.NONE);
+			context.getLogic().castSpell(player.getId(), onEquip, getReference(), EntityReference.NONE, false);
 		}
 	}
 
 	public void onUnequip(GameContext context, Player player) {
 		if (onUnequip != null) {
-			context.getLogic().castSpell(player.getId(), onUnequip, getReference(), EntityReference.NONE);
+			context.getLogic().castSpell(player.getId(), onUnequip, getReference(), EntityReference.NONE, false);
 		}
 	}
 

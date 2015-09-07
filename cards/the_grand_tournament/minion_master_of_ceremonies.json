@@ -1,0 +1,35 @@
+{
+	"baseAttack": 4,
+	"baseHp": 2,
+	"battlecry": {
+		"spell": {
+			"class": "BuffSpell",
+			"attackBonus": 2,
+			"hpBonus": 2,
+			"target": "SELF"
+		},
+		"condition": {
+			"class": "HasEntityCondition",
+			"filter": {
+				"class": "AttributeFilter",
+				"attribute": "SPELL_DAMAGE",
+				"operation": "HAS"
+			},
+			"target": "FRIENDLY_MINIONS"
+		},
+		"resolvedLate": false
+	},
+	"id": "minion_master_of_ceremonies",
+	"name": "Master of Ceremonies",
+	"description": "Battlecry: If you have a minion with Spell Damage, gain +2/+2.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"set": "THE_GRAND_TOURNAMENT",
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"baseManaCost": 3,
+	"collectible": true,
+	"fileFormatVersion": 1
+}

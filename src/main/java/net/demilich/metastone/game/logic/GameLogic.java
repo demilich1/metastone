@@ -122,7 +122,7 @@ public class GameLogic implements Cloneable {
 		gameEventListener.setOwner(player.getId());
 		gameEventListener.onAdd(context);
 		context.addTrigger(gameEventListener);
-		log("New spelltrigger was added for {} on {}", player.getName(), target);
+		log("New spelltrigger was added for {} on {}: {}", player.getName(), target, gameEventListener);
 	}
 
 	public void addManaModifier(Player player, CardCostModifier cardCostModifier, Entity target) {
@@ -177,7 +177,8 @@ public class GameLogic implements Cloneable {
 		}
 		if (card.getCardType() == CardType.HERO_POWER) {
 			HeroPower power = (HeroPower) card;
-			if (power.hasBeenUsed()) {
+			int heroPowerUsages = getAttributeValue(player, Attribute.HERO_POWER_USAGES, 1);
+			if (power.hasBeenUsed() >= heroPowerUsages) {
 				return false;
 			}
 		} else if (card.getCardType() == CardType.MINION) {
@@ -206,7 +207,7 @@ public class GameLogic implements Cloneable {
 		return minionsInPlay < MAX_MINIONS;
 	}
 
-	public void castSpell(int playerId, SpellDesc spellDesc, EntityReference sourceReference, EntityReference targetReference) {
+	public void castSpell(int playerId, SpellDesc spellDesc, EntityReference sourceReference, EntityReference targetReference, boolean childSpell) {
 		Player player = context.getPlayer(playerId);
 		Entity source = null;
 		if (sourceReference != null) {
@@ -232,7 +233,7 @@ public class GameLogic implements Cloneable {
 				spellCard = (SpellCard) sourceCard;
 			}
 
-			if (spellCard != null && spellCard.getTargetRequirement() != TargetSelection.NONE) {
+			if (spellCard != null && spellCard.getTargetRequirement() != TargetSelection.NONE && !childSpell) {
 				GameEvent spellTargetEvent = new TargetAcquisitionEvent(context, ActionType.SPELL, spellCard, targets.get(0));
 				context.fireGameEvent(spellTargetEvent);
 				Entity targetOverride = (Entity) context.getEnvironment().get(Environment.TARGET_OVERRIDE);
@@ -465,10 +466,6 @@ public class GameLogic implements Cloneable {
 
 		player.getStatistics().cardDrawn();
 		Card card = deck.getRandom();
-		if (card.getAttribute(Attribute.PASSIVE_TRIGGER) != null) {
-			TriggerDesc triggerDesc = (TriggerDesc) card.getAttribute(Attribute.PASSIVE_TRIGGER);
-			addGameEventListener(player, triggerDesc.create(), card);
-		}
 
 		deck.remove(card);
 		receiveCard(playerId, card);
@@ -639,6 +636,9 @@ public class GameLogic implements Cloneable {
 				minValue = costModifier.getMinValue();
 			}
 		}
+		if (card.hasAttribute(Attribute.MANA_COST_MODIFIER)) {
+			manaCost += card.getAttributeValue(Attribute.MANA_COST_MODIFIER);
+		}
 		manaCost = MathUtils.clamp(manaCost, minValue, Integer.MAX_VALUE);
 		return manaCost;
 	}
@@ -652,6 +652,24 @@ public class GameLogic implements Cloneable {
 			}
 		}
 		return secrets;
+	}
+	
+	/**
+	 * Returns the first value of the attribute encountered. This method should be used with caution,
+	 * as the result is random if there are different values of the same attribute in play.
+	 * @param player
+	 * @param attr Which attribute to find
+	 * @param defaultValue The value returned if no occurrence of the attribute is found
+	 * @return the first occurrence of the value of attribute or defaultValue
+	 */
+	public int getAttributeValue(Player player, Attribute attr, int defaultValue) {
+		for (Entity minion : player.getMinions()) {
+			if (minion.hasAttribute(attr)) {
+				return minion.getAttributeValue(attr);
+			}
+		}
+		
+		return defaultValue;
 	}
 
 	public int getTotalAttributeValue(Attribute attr) {
@@ -1020,6 +1038,11 @@ public class GameLogic implements Cloneable {
 
 		card.setOwner(playerId);
 		CardCollection hand = player.getHand();
+		
+		if (card.getAttribute(Attribute.PASSIVE_TRIGGER) != null) {
+			TriggerDesc triggerDesc = (TriggerDesc) card.getAttribute(Attribute.PASSIVE_TRIGGER);
+			addGameEventListener(player, triggerDesc.create(), card);
+		}
 
 		if (hand.getCount() < MAX_HAND_CARDS) {
 			log("{} receives card {}", player.getName(), card);
@@ -1147,9 +1170,9 @@ public class GameLogic implements Cloneable {
 		EntityReference sourceRefenrence = actor.getReference();
 		for (SpellDesc deathrattleTemplate : actor.getDeathrattles()) {
 			SpellDesc deathrattle = deathrattleTemplate.addArg(SpellArg.BOARD_POSITION_ABSOLUTE, boardPosition);
-			castSpell(player.getId(), deathrattle, sourceRefenrence, EntityReference.NONE);
+			castSpell(player.getId(), deathrattle, sourceRefenrence, EntityReference.NONE, false);
 			if (doubleDeathrattles) {
-				castSpell(player.getId(), deathrattle, sourceRefenrence, EntityReference.NONE);
+				castSpell(player.getId(), deathrattle, sourceRefenrence, EntityReference.NONE, false);
 			}
 		}
 	}
@@ -1242,7 +1265,7 @@ public class GameLogic implements Cloneable {
 			minion.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
 		}
 
-		player.getHero().getHeroPower().setUsed(false);
+		player.getHero().getHeroPower().setUsed(0);
 		player.getHero().activateWeapon(true);
 		refreshAttacksPerRound(player.getHero());
 		drawCard(playerId);
@@ -1340,7 +1363,7 @@ public class GameLogic implements Cloneable {
 		int modifiedManaCost = getModifiedManaCost(player, power);
 		modifyCurrentMana(playerId, -modifiedManaCost);
 		log("{} uses {}", player.getName(), power);
-		power.setUsed(true);
+		power.markUsed();
 		player.getHero().modifyAttribute(Attribute.HERO_POWER_USED, +1);
 		player.getStatistics().cardPlayed(power);
 		context.fireGameEvent(new HeroPowerUsedEvent(context, playerId, power));

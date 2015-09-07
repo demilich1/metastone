@@ -6,11 +6,11 @@
 			"class": "BuffSpell",
 			"attackBonus": 1,
 			"hpBonus": 1,
-			"target": "SELF",
-			"condition": {
-				"class": "HoldsCardCondition",
-				"race": "DRAGON"
-			}
+			"target": "SELF"
+		},
+		"condition": {
+			"class": "HoldsCardCondition",
+			"race": "DRAGON"
 		},
 		"targetSelection": "NONE",
 		"resolvedLate": false

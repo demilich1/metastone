@@ -1,0 +1,32 @@
+{
+	"baseAttack": 2,
+	"baseHp": 2,
+	"battlecry": {
+		"spell": {
+			"class": "CardCostModifierSpell",
+			"cardCostModifier": {
+				"class": "CardCostModifier",
+				"cardType": "HERO_POWER",
+				"expirationTrigger": {
+					"class": "InspireTrigger"
+				},
+				"value": "-2"
+			},
+			"target": "FRIENDLY_HERO"
+		},
+		"resolvedLate": false
+	},
+	"id": "minion_fencing_coach",
+	"name": "Fencing Coach",
+	"description": "Battlecry: The next time you use your Hero Power, it costs (2) less.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 3,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"fileFormatVersion": 1
+}

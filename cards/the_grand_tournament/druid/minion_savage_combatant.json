@@ -1,0 +1,25 @@
+{
+	"baseAttack": 5,
+	"baseHp": 4,
+	"race": "BEAST",
+	"id": "minion_savage_combatant",
+	"trigger": {
+		"eventTrigger": {
+			"class": "InspireTrigger"
+		},
+		"spell": {
+			"class": "BuffHeroSpell",
+			"attackBonus": 2,
+			"target": "FRIENDLY_HERO"
+		}
+	},
+	"name": "Savage Combatant",
+	"description": "Inspire: Give your hero +2 Attack this turn.",
+	"type": "MINION",
+	"heroClass": "DRUID",
+	"rarity": "RARE",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 4,
+	"collectible": true,
+	"fileFormatVersion": 1
+}

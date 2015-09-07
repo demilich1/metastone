@@ -88,7 +88,7 @@ public abstract class Entity extends CustomCloneable {
 			return false;
 		}
 		if (value instanceof Integer) {
-			return ((int) value) > 0;
+			return ((int) value) != 0;
 		}
 		return true;
 	}
@@ -98,7 +98,7 @@ public abstract class Entity extends CustomCloneable {
 	}
 
 	public void modifyAttribute(Attribute attribute, int value) {
-		if (!hasAttribute(attribute)) {
+		if (!attributes.containsKey(attribute)) {
 			setAttribute(attribute, 0);
 		}
 		setAttribute(attribute, getAttributeValue(attribute) + value);

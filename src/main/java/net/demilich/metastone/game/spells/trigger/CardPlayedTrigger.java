@@ -21,8 +21,8 @@ public class CardPlayedTrigger extends GameEventTrigger {
 	protected boolean fire(GameEvent event, Entity host) {
 		CardPlayedEvent cardPlayedEvent = (CardPlayedEvent) event;
 		CardType cardType = (CardType) desc.get(EventTriggerArg.CARD_TYPE);
-		if (cardType != null) {
-			return cardPlayedEvent.getCard().getCardType() == cardType;
+		if (cardType != null && cardPlayedEvent.getCard().getCardType() != cardType) {
+			return false;
 		}
 		Race race = (Race) desc.get(EventTriggerArg.RACE);
 		if (race != null && cardPlayedEvent.getCard().getAttribute(Attribute.RACE) != race) {

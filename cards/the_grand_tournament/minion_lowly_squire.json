@@ -1,24 +1,24 @@
 {
-  "baseAttack": 1,
-  "baseHp": 2,
-  "trigger" : {
-	"eventTrigger" : {
-		"class" : "InspireTrigger"
+	"baseAttack": 1,
+	"baseHp": 2,
+	"trigger": {
+		"eventTrigger": {
+			"class": "InspireTrigger"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"attackBonus": 1,
+			"target": "SELF"
+		}
 	},
-	"spell" : {
-		"class" : "BuffSpell",
-		"attackBonus" : 1,
-		"target" : "SELF"
-	}
-  },
-  "id": "minion_lowly_squire",
-  "name": "Lowly Squire",
-  "description": "Inspire: Gain +1 Attack.",
-  "type": "MINION",
-  "heroClass": "ANY",
-  "rarity": "COMMON",
-  "set": "THE_GRAND_TOURNAMENT",
-  "baseManaCost": 1,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"id": "minion_lowly_squire",
+	"name": "Lowly Squire",
+	"description": "Inspire: Gain +1 Attack.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 1,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

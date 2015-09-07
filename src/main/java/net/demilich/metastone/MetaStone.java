@@ -12,7 +12,7 @@ import net.demilich.metastone.gui.IconFactory;
 public class MetaStone extends Application {
 
 	public static void main(String[] args) {
-		// DevCardTools.formatJsons();
+		//DevCardTools.formatJsons();
 		launch(args);
 	}
 

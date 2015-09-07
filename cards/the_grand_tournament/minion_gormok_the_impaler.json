@@ -1,0 +1,28 @@
+{
+	"baseAttack": 4,
+	"baseHp": 4,
+	"battlecry": {
+		"spell": {
+			"class": "DamageSpell",
+			"value": 4
+		},
+		"targetSelection": "ANY",
+		"condition": {
+			"class": "MinionCountCondition",
+			"targetPlayer": "SELF",
+			"value": 3,
+			"operation": "GREATER"
+		},
+		"resolvedLate": false
+	},
+	"id": "minion_gormok_the_impaler",
+	"name": "Gormok the Impaler",
+	"description": "Battlecry: If you have at least 4 other minions, deal 4 damage.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 4,
+	"collectible": true,
+	"fileFormatVersion": 1
+}

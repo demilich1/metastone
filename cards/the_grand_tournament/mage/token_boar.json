@@ -1,0 +1,18 @@
+{
+	"baseAttack": 4,
+	"baseHp": 2,
+	"race": "BEAST",
+	"id": "token_boar",
+	"name": "Boar",
+	"description": "Charge",
+	"type": "MINION",
+	"heroClass": "MAGE",
+	"rarity": "FREE",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 3,
+	"collectible": false,
+	"attributes": {
+		"CHARGE": true
+	},
+	"fileFormatVersion": 1
+}

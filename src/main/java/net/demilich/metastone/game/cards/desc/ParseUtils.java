@@ -9,6 +9,7 @@ import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.EntityType;
+import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.entities.minions.RelativeToSource;
 import net.demilich.metastone.game.spells.TargetPlayer;
@@ -62,6 +63,8 @@ public class ParseUtils {
 			return Enum.valueOf(Attribute.class, entry.getAsString());
 		case RARITY:
 			return Enum.valueOf(Rarity.class, entry.getAsString());
+		case HERO_CLASS:
+			return Enum.valueOf(HeroClass.class, entry.getAsString());
 		case BOARD_POSITION_RELATIVE:
 			return Enum.valueOf(RelativeToSource.class, entry.getAsString());
 		case CARD_LOCATION:

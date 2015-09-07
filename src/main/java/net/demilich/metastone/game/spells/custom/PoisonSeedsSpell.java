@@ -35,14 +35,14 @@ public class PoisonSeedsSpell extends Spell {
 			return;
 		}
 		SpellDesc destroy = InstantDestroySpell.create();
-		context.getLogic().castSpell(player.getId(), destroy, source, EntityReference.FRIENDLY_MINIONS);
+		context.getLogic().castSpell(player.getId(), destroy, source, EntityReference.FRIENDLY_MINIONS, true);
 
 		String[] treants = new String[minionCount];
 		for (int i = 0; i < minionCount; i++) {
 			treants[i] = "token_treant";
 		}
 		SpellDesc summonTreants = SummonSpell.create(treants);
-		context.getLogic().castSpell(player.getId(), summonTreants, source, EntityReference.NONE);
+		context.getLogic().castSpell(player.getId(), summonTreants, source, EntityReference.NONE, true);
 
 	}
 

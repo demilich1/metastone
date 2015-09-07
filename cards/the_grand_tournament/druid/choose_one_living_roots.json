@@ -1,0 +1,14 @@
+{
+	"name": "Living Roots",
+	"description": "Choose One - Deal 2 damage; or Summon two 1/1 Saplings.",
+	"id": "spell_living_roots",
+	"type": "CHOOSE_ONE",
+	"rarity": "COMMON",
+	"heroClass": "DRUID",
+	"baseManaCost": 1,
+	"targetSelection": "NONE",
+	"option1": "spell_living_roots_1",
+	"option2": "spell_living_roots_2",
+	"set": "THE_GRAND_TOURNAMENT",
+	"fileFormatVersion": 1
+}

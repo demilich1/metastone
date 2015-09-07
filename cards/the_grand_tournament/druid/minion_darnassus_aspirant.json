@@ -1,0 +1,28 @@
+{
+	"baseAttack": 2,
+	"baseHp": 3,
+	"battlecry": {
+		"spell": {
+			"class": "ModifyMaxManaSpell",
+			"value": 1
+		},
+		"resolvedLate": false
+	},
+	"deathrattle": {
+		"class": "ModifyMaxManaSpell",
+		"value": -1
+	},
+	"id": "minion_darnassus_aspirant",
+	"name": "Darnassus Aspirant",
+	"description": "Battlecry: Gain an empty Mana Crystal.Deathrattle: Lose a Mana Crystal.",
+	"type": "MINION",
+	"heroClass": "DRUID",
+	"rarity": "RARE",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 2,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"fileFormatVersion": 1
+}

@@ -17,6 +17,7 @@ public class AttributeFilter extends EntityFilter {
 		Attribute attribute = (Attribute) desc.get(FilterArg.ATTRIBUTE);
 		Operation operation = (Operation) desc.get(FilterArg.OPERATION);
 		if (operation == Operation.HAS) {
+			System.out.println("Entity " + entity + " has attribute " + attribute);
 			return entity.hasAttribute(attribute);
 		}
 

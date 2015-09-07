@@ -31,7 +31,7 @@ public class SpellUtils {
 		if (targetReference == null && target != null) {
 			targetReference = target.getReference();
 		}
-		context.getLogic().castSpell(player.getId(), spell, sourceReference, targetReference);
+		context.getLogic().castSpell(player.getId(), spell, sourceReference, targetReference, true);
 	}
 
 	public static boolean evaluateOperation(Operation operation, int actualValue, int targetValue) {
