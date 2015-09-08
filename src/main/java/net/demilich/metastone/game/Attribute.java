@@ -55,6 +55,7 @@ public enum Attribute {
 	PASSIVE_TRIGGER,
 	HERO_POWER_USED,
 	HERO_POWER_USAGES,
+	MEATSHIELD,
 
 	// AI flags
 	MARKED_FOR_DEATH,

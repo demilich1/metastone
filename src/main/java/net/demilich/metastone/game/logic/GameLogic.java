@@ -207,7 +207,8 @@ public class GameLogic implements Cloneable {
 		return minionsInPlay < MAX_MINIONS;
 	}
 
-	public void castSpell(int playerId, SpellDesc spellDesc, EntityReference sourceReference, EntityReference targetReference, boolean childSpell) {
+	public void castSpell(int playerId, SpellDesc spellDesc, EntityReference sourceReference, EntityReference targetReference,
+			boolean childSpell) {
 		Player player = context.getPlayer(playerId);
 		Entity source = null;
 		if (sourceReference != null) {
@@ -337,7 +338,13 @@ public class GameLogic implements Cloneable {
 			damageDealt = damageMinion(player, (Actor) target, damage);
 			break;
 		case HERO:
-			if (isFatalDamage(target, damage)) {
+			Player owner = context.getPlayer(target.getOwner());
+			Minion meatshield = findMeatshield(owner);
+			if (meatshield != null) {
+				target = meatshield;
+				damageDealt = damageMinion(player, meatshield, damage);
+				break;
+			} else if (isFatalDamage(target, damage)) {
 				FatalDamageEvent fatalDamageEvent = new FatalDamageEvent(context, target);
 				context.fireGameEvent(fatalDamageEvent);
 			}
@@ -368,6 +375,15 @@ public class GameLogic implements Cloneable {
 		hero.setHp(newHp);
 		log(hero.getName() + " receives " + damage + " damage, hp now: " + hero.getHp() + "(" + hero.getArmor() + ")");
 		return damage;
+	}
+
+	private Minion findMeatshield(Player player) {
+		for (Minion minion : player.getMinions()) {
+			if (minion.hasAttribute(Attribute.MEATSHIELD)) {
+				return minion;
+			}
+		}
+		return null;
 	}
 
 	private int damageMinion(Player player, Actor minion, int damage) {
@@ -614,11 +630,15 @@ public class GameLogic implements Cloneable {
 	}
 
 	/**
-	 * Returns the first value of the attribute encountered. This method should be used with caution,
-	 * as the result is random if there are different values of the same attribute in play.
+	 * Returns the first value of the attribute encountered. This method should
+	 * be used with caution, as the result is random if there are different
+	 * values of the same attribute in play.
+	 * 
 	 * @param player
-	 * @param attr Which attribute to find
-	 * @param defaultValue The value returned if no occurrence of the attribute is found
+	 * @param attr
+	 *            Which attribute to find
+	 * @param defaultValue
+	 *            The value returned if no occurrence of the attribute is found
 	 * @return the first occurrence of the value of attribute or defaultValue
 	 */
 	public int getAttributeValue(Player player, Attribute attr, int defaultValue) {
@@ -627,7 +647,7 @@ public class GameLogic implements Cloneable {
 				return minion.getAttributeValue(attr);
 			}
 		}
-		
+
 		return defaultValue;
 	}
 
@@ -660,7 +680,7 @@ public class GameLogic implements Cloneable {
 		manaCost = MathUtils.clamp(manaCost, minValue, Integer.MAX_VALUE);
 		return manaCost;
 	}
-	
+
 	public List<IGameEventListener> getSecrets(Player player) {
 		List<IGameEventListener> secrets = context.getTriggersAssociatedWith(player.getHero().getReference());
 		for (Iterator<IGameEventListener> iterator = secrets.iterator(); iterator.hasNext();) {
@@ -839,10 +859,11 @@ public class GameLogic implements Cloneable {
 				won = true;
 				log("Jousting WON - opponent has no minion card left");
 			} else {
-				// both players have minion cards left, the initiator needs to have the one with
+				// both players have minion cards left, the initiator needs to
+				// have the one with
 				// higher mana cost to win the joust
 				won = ownCard.getBaseManaCost() > opponentCard.getBaseManaCost();
-				
+
 				log("Jousting {} - {} vs. {}", won ? "WON" : "LOST", ownCard, opponentCard);
 			}
 		}
@@ -863,7 +884,7 @@ public class GameLogic implements Cloneable {
 			logger.debug(message, param1);
 		}
 	}
-	
+
 	private void log(String message, Object param1, Object param2) {
 		logToDebugHistory(message, param1, param2);
 		if (isLoggingEnabled() && logger.isDebugEnabled()) {
@@ -1064,7 +1085,7 @@ public class GameLogic implements Cloneable {
 
 		card.setOwner(playerId);
 		CardCollection hand = player.getHand();
-		
+
 		if (card.getAttribute(Attribute.PASSIVE_TRIGGER) != null) {
 			TriggerDesc triggerDesc = (TriggerDesc) card.getAttribute(Attribute.PASSIVE_TRIGGER);
 			addGameEventListener(player, triggerDesc.create(), card);
@@ -1306,7 +1327,7 @@ public class GameLogic implements Cloneable {
 	public void summon(int playerId, Minion minion) {
 		summon(playerId, minion, null, -1, false);
 	}
-	
+
 	public void summon(int playerId, Minion minion, Card source, int index, boolean resolveBattlecry) {
 		Player player = context.getPlayer(playerId);
 		if (!canSummonMoreMinions(player)) {

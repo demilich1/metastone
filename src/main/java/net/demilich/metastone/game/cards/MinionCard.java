@@ -19,7 +19,7 @@ public class MinionCard extends Card {
 			Attribute.CANNOT_ATTACK, Attribute.TAUNT, Attribute.UNTARGETABLE_BY_SPELLS, Attribute.CHARGE, Attribute.DIVINE_SHIELD,
 			Attribute.WINDFURY, Attribute.MEGA_WINDFURY, Attribute.SPELL_DAMAGE, Attribute.ATTACK_EQUALS_HP, Attribute.INVERT_HEALING,
 			Attribute.SPELL_AMPLIFY_MULTIPLIER, Attribute.ENRAGABLE, Attribute.DOUBLE_DEATHRATTLES, Attribute.HERO_POWER_CAN_TARGET_MINIONS,
-			Attribute.ATTACK_BONUS, Attribute.HERO_POWER_USAGES, Attribute.CANNOT_ATTACK_HEROES
+			Attribute.ATTACK_BONUS, Attribute.HERO_POWER_USAGES, Attribute.CANNOT_ATTACK_HEROES, Attribute.MEATSHIELD
 
 	}));
 
