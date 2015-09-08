@@ -25,14 +25,6 @@ public class PlayerConfig {
 		this.behaviour = behaviour;
 	}
 
-	public IBehaviour getBehaviour() {
-		return behaviour;
-	}
-
-	public Deck getDeck() {
-		return deck;
-	}
-
 	public void build() {
 		if (deck instanceof MetaDeck) {
 			MetaDeck metaDeck = (MetaDeck) deck;
@@ -45,16 +37,24 @@ public class PlayerConfig {
 		}
 	}
 
+	public IBehaviour getBehaviour() {
+		return behaviour;
+	}
+
+	public Deck getDeck() {
+		return deck;
+	}
+
 	public Deck getDeckForPlay() {
 		return deckForPlay;
 	}
 
-	public HeroCard getHeroForPlay() {
-		return heroForPlay;
-	}
-
 	public HeroCard getHeroCard() {
 		return heroCard;
+	}
+
+	public HeroCard getHeroForPlay() {
+		return heroForPlay;
 	}
 
 	public String getName() {

@@ -4,7 +4,7 @@
 	"battlecry": {
 		"spell": {
 			"class": "JoustSpell",
-			"spell1": {
+			"spell": {
 				"class": "BuffSpell",
 				"target": "SELF",
 				"attackBonus": 1,

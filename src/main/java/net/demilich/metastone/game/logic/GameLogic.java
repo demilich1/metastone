@@ -613,6 +613,24 @@ public class GameLogic implements Cloneable {
 		return (Actor) SpellUtils.getRandomTarget(validTargets);
 	}
 
+	/**
+	 * Returns the first value of the attribute encountered. This method should be used with caution,
+	 * as the result is random if there are different values of the same attribute in play.
+	 * @param player
+	 * @param attr Which attribute to find
+	 * @param defaultValue The value returned if no occurrence of the attribute is found
+	 * @return the first occurrence of the value of attribute or defaultValue
+	 */
+	public int getAttributeValue(Player player, Attribute attr, int defaultValue) {
+		for (Entity minion : player.getMinions()) {
+			if (minion.hasAttribute(attr)) {
+				return minion.getAttributeValue(attr);
+			}
+		}
+		
+		return defaultValue;
+	}
+
 	public MatchResult getMatchResult(Player player, Player opponent) {
 		boolean playerLost = hasPlayerLost(player);
 		boolean opponentLost = hasPlayerLost(opponent);
@@ -642,7 +660,7 @@ public class GameLogic implements Cloneable {
 		manaCost = MathUtils.clamp(manaCost, minValue, Integer.MAX_VALUE);
 		return manaCost;
 	}
-
+	
 	public List<IGameEventListener> getSecrets(Player player) {
 		List<IGameEventListener> secrets = context.getTriggersAssociatedWith(player.getHero().getReference());
 		for (Iterator<IGameEventListener> iterator = secrets.iterator(); iterator.hasNext();) {
@@ -652,24 +670,6 @@ public class GameLogic implements Cloneable {
 			}
 		}
 		return secrets;
-	}
-	
-	/**
-	 * Returns the first value of the attribute encountered. This method should be used with caution,
-	 * as the result is random if there are different values of the same attribute in play.
-	 * @param player
-	 * @param attr Which attribute to find
-	 * @param defaultValue The value returned if no occurrence of the attribute is found
-	 * @return the first occurrence of the value of attribute or defaultValue
-	 */
-	public int getAttributeValue(Player player, Attribute attr, int defaultValue) {
-		for (Entity minion : player.getMinions()) {
-			if (minion.hasAttribute(attr)) {
-				return minion.getAttributeValue(attr);
-			}
-		}
-		
-		return defaultValue;
 	}
 
 	public int getTotalAttributeValue(Attribute attr) {
@@ -824,6 +824,32 @@ public class GameLogic implements Cloneable {
 		return loggingEnabled;
 	}
 
+	public boolean joust(Player player) {
+		Card ownCard = player.getDeck().getRandomOfType(CardType.MINION);
+		boolean won = false;
+		// no minions left in deck - automatically loose joust
+		if (ownCard == null) {
+			won = false;
+			log("Jousting LOST - no minion card left");
+		} else {
+			Player opponent = context.getOpponent(player);
+			Card opponentCard = opponent.getDeck().getRandomOfType(CardType.MINION);
+			// opponent has no minions left in deck - automatically win joust
+			if (opponentCard == null) {
+				won = true;
+				log("Jousting WON - opponent has no minion card left");
+			} else {
+				// both players have minion cards left, the initiator needs to have the one with
+				// higher mana cost to win the joust
+				won = ownCard.getBaseManaCost() > opponentCard.getBaseManaCost();
+				
+				log("Jousting {} - {} vs. {}", won ? "WON" : "LOST", ownCard, opponentCard);
+			}
+		}
+		context.fireGameEvent(new JoustEvent(context, player.getId(), won));
+		return won;
+	}
+
 	private void log(String message) {
 		logToDebugHistory(message);
 		if (isLoggingEnabled() && logger.isDebugEnabled()) {
@@ -837,14 +863,14 @@ public class GameLogic implements Cloneable {
 			logger.debug(message, param1);
 		}
 	}
-
+	
 	private void log(String message, Object param1, Object param2) {
 		logToDebugHistory(message, param1, param2);
 		if (isLoggingEnabled() && logger.isDebugEnabled()) {
 			logger.debug(message, param1, param2);
 		}
 	}
-	
+
 	private void log(String message, Object param1, Object param2, Object param3) {
 		logToDebugHistory(message, param1, param2, param3);
 		if (isLoggingEnabled() && logger.isDebugEnabled()) {
@@ -1280,7 +1306,7 @@ public class GameLogic implements Cloneable {
 	public void summon(int playerId, Minion minion) {
 		summon(playerId, minion, null, -1, false);
 	}
-
+	
 	public void summon(int playerId, Minion minion, Card source, int index, boolean resolveBattlecry) {
 		Player player = context.getPlayer(playerId);
 		if (!canSummonMoreMinions(player)) {
@@ -1329,32 +1355,6 @@ public class GameLogic implements Cloneable {
 
 		context.getSummonStack().pop();
 		context.fireGameEvent(new BoardChangedEvent(context));
-	}
-	
-	public boolean joust(Player player) {
-		Card ownCard = player.getDeck().getRandomOfType(CardType.MINION);
-		boolean won = false;
-		// no minions left in deck - automatically loose joust
-		if (ownCard == null) {
-			won = false;
-			log("Jousting LOST - no minion card left");
-		} else {
-			Player opponent = context.getOpponent(player);
-			Card opponentCard = opponent.getDeck().getRandomOfType(CardType.MINION);
-			// opponent has no minions left in deck - automatically win joust
-			if (opponentCard == null) {
-				won = true;
-				log("Jousting WON - opponent has no minion card left");
-			} else {
-				// both players have minion cards left, the initiator needs to have the one with
-				// higher mana cost to win the joust
-				won = ownCard.getBaseManaCost() > opponentCard.getBaseManaCost();
-				
-				log("Jousting {} - {} vs. {}", won ? "WON" : "LOST", ownCard, opponentCard);
-			}
-		}
-		context.fireGameEvent(new JoustEvent(context, player.getId(), won));
-		return won;
 	}
 
 	public void useHeroPower(int playerId) {

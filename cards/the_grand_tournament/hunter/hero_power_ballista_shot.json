@@ -1,0 +1,18 @@
+{
+	"targetSelection": "NONE",
+	"id": "hero_power_ballista_shot",
+	"name": "Ballista Shot",
+	"description": "Deal 3 damage to the enemy hero.",
+	"type": "HERO_POWER",
+	"heroClass": "HUNTER",
+	"rarity": "FREE",
+	"spell": {
+		"class": "DamageSpell",
+		"value": 3,
+		"target": "ENEMY_HERO"
+	},
+	"baseManaCost": 2,
+	"collectible": false,
+	"set": "THE_GRAND_TOURNAMENT",
+	"fileFormatVersion": 1
+}

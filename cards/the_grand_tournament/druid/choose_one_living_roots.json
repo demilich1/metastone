@@ -7,8 +7,10 @@
 	"heroClass": "DRUID",
 	"baseManaCost": 1,
 	"targetSelection": "NONE",
-	"option1": "spell_living_roots_1",
-	"option2": "spell_living_roots_2",
+	"options": [
+		"spell_living_roots_1",
+		"spell_living_roots_2"
+	],
 	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

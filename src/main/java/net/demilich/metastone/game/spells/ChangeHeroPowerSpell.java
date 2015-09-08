@@ -24,16 +24,16 @@ public class ChangeHeroPowerSpell extends Spell {
 		return new SpellDesc(arguments);
 	}
 
-	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		String heroPowerName = (String) desc.get(SpellArg.CARD);
-		changeHeroPower(heroPowerName, target);
-	}
-	
 	protected void changeHeroPower(String newHeroPower, Entity target) {
 		HeroPower heroPower = (HeroPower) CardCatalogue.getCardById(newHeroPower);
 		Hero targetHero = (Hero) target;
 		logger.debug("{}'s hero power was changed to {}", targetHero.getName(), heroPower);
 		targetHero.setHeroPower(heroPower);
+	}
+	
+	@Override
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
+		String heroPowerName = (String) desc.get(SpellArg.CARD);
+		changeHeroPower(heroPowerName, target);
 	}
 }

@@ -14,6 +14,7 @@ import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.entities.minions.RelativeToSource;
 import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.condition.Condition;
 import net.demilich.metastone.game.spells.desc.condition.ConditionDesc;
 import net.demilich.metastone.game.spells.desc.filter.FilterDesc;
 import net.demilich.metastone.game.spells.desc.filter.Operation;
@@ -44,13 +45,14 @@ public class ParseUtils {
 			return entry.getAsBoolean();
 		case STRING:
 			return entry.getAsString();
-		case STRING_ARRAY:
+		case STRING_ARRAY: {
 			JsonArray jsonArray = entry.getAsJsonArray();
 			String[] array = new String[jsonArray.size()];
 			for (int i = 0; i < array.length; i++) {
 				array[i] = jsonArray.get(i).getAsString();
 			}
 			return array;
+		}
 		case TARGET_REFERENCE:
 			return parseEntityReference(entry.getAsString());
 		case TARGET_PLAYER:
@@ -59,6 +61,14 @@ public class ParseUtils {
 			return Enum.valueOf(Race.class, entry.getAsString());
 		case SPELL:
 			return spellParser.deserialize(entry, SpellDesc.class, null);
+		case SPELL_ARRAY: {
+			JsonArray jsonArray = entry.getAsJsonArray();
+			SpellDesc[] array = new SpellDesc[jsonArray.size()];
+			for (int i = 0; i < array.length; i++) {
+				array[i] = spellParser.deserialize(jsonArray.get(i), SpellDesc.class, null);
+			}
+			return array;
+		}
 		case ATTRIBUTE:
 			return Enum.valueOf(Attribute.class, entry.getAsString());
 		case RARITY:
@@ -85,9 +95,19 @@ public class ParseUtils {
 		case ENTITY_FILTER:
 			FilterDesc filterDesc = filterParser.deserialize(entry, FilterDesc.class, null);
 			return filterDesc.create();
-		case CONDITION:
+		case CONDITION: {
 			ConditionDesc conditionDesc = conditionParser.deserialize(entry, ConditionDesc.class, null);
 			return conditionDesc.create();
+		}
+		case CONDITION_ARRAY: {
+			JsonArray jsonArray = entry.getAsJsonArray();
+			Condition[] array = new Condition[jsonArray.size()];
+			for (int i = 0; i < array.length; i++) {
+				ConditionDesc conditionDesc = conditionParser.deserialize(jsonArray.get(i), ConditionDesc.class, null);
+				array[i] = conditionDesc.create();
+			}
+			return array;
+		}
 		case TRIGGER:
 			JsonObject triggerObject = entry.getAsJsonObject();
 			TriggerDesc triggerDesc = new TriggerDesc();

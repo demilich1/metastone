@@ -29,6 +29,7 @@ public class GameTagUtils {
 			return TagValueType.INTEGER;
 		case ATTACK_EQUALS_HP:
 		case CANNOT_ATTACK:
+		case CANNOT_ATTACK_HEROES:
 		case CANNOT_REDUCE_HP_BELOW_1:
 		case CHARGE:
 		case COUNTERED:

@@ -45,7 +45,15 @@ public class ActionLogic {
 		if (!context.getLogic().canPlayCard(player.getId(), heroPowerReference)) {
 			return heroPowerActions;
 		}
-		rollout(heroPower.play(), context, player, heroPowerActions);
+		if (heroPower.hasAttribute(Attribute.CHOOSE_ONE)) {
+			IChooseOneCard chooseOneCard = (IChooseOneCard) heroPower;
+			for (GameAction chooseOneAction : chooseOneCard.playOptions()) {
+				rollout(chooseOneAction, context, player, heroPowerActions);
+			}
+		} else {
+			rollout(heroPower.play(), context, player, heroPowerActions);	
+		}
+		
 		return heroPowerActions;
 	}
 
@@ -75,11 +83,11 @@ public class ActionLogic {
 
 			if (card.hasAttribute(Attribute.CHOOSE_ONE)) {
 				IChooseOneCard chooseOneCard = (IChooseOneCard) card;
-				rollout(chooseOneCard.playOption1(), context, player, playCardActions);
-				rollout(chooseOneCard.playOption2(), context, player, playCardActions);
+				for (GameAction chooseOneAction : chooseOneCard.playOptions()) {
+					rollout(chooseOneAction, context, player, playCardActions);
+				}
 			} else {
 				rollout(card.play(), context, player, playCardActions);
-
 			}
 		}
 		return playCardActions;

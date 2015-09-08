@@ -1,0 +1,19 @@
+{
+	"targetSelection": "NONE",
+	"id": "hero_power_dire_shapeshift",
+	"name": "Dire Shapeshift",
+	"description": "Gain 2 Armor and +2 Attack this turn.",
+	"type": "HERO_POWER",
+	"heroClass": "DRUID",
+	"rarity": "FREE",
+	"spell": {
+		"class": "BuffHeroSpell",
+		"attackBonus": 2,
+		"armorBonus": 2,
+		"target": "FRIENDLY_HERO"
+	},
+	"baseManaCost": 2,
+	"collectible": false,
+	"set": "THE_GRAND_TOURNAMENT",
+	"fileFormatVersion": 1
+}

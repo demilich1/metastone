@@ -10,7 +10,7 @@
 					"class": "CardPropertyCondition",
 					"cardType": "MINION"
 				},
-				"spell1": {
+				"spell": {
 					"class": "TransformCardSpell",
 					"card": "token_chicken_gvg"
 				}

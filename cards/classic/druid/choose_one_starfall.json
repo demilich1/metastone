@@ -7,8 +7,10 @@
 	"heroClass": "DRUID",
 	"baseManaCost": 5,
 	"targetSelection": "NONE",
-	"option1": "spell_starfall_1",
-	"option2": "spell_starfall_2",
+	"options": [
+		"spell_starfall_1",
+		"spell_starfall_2"
+	],
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

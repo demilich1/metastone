@@ -6,21 +6,18 @@ import net.demilich.metastone.game.cards.desc.ChooseOneCardDesc;
 
 public class ChooseOneCard extends Card implements IChooseOneCard {
 
-	private String card1Id;
-	private String card2Id;
+	private String[] cardIds;
 
 	public ChooseOneCard(ChooseOneCardDesc desc) {
 		super(desc);
 		setAttribute(Attribute.CHOOSE_ONE);
-		card1Id = desc.option1;
-		card2Id = desc.option2;
+		cardIds = desc.options;
 	}
 
 	@Override
 	public Card clone() {
 		ChooseOneCard clone = (ChooseOneCard) super.clone();
-		clone.card1Id = card1Id;
-		clone.card2Id = card2Id;
+		clone.cardIds = cardIds;
 		return clone;
 	}
 
@@ -38,21 +35,17 @@ public class ChooseOneCard extends Card implements IChooseOneCard {
 	}
 
 	@Override
-	public PlayCardAction playOption1() {
-		Card card1 = getCard(card1Id);
-		PlayCardAction card1Action = card1.play();
-		card1Action.setActionSuffix(card1.getName());
-		card1Action.setGroupIndex(0);
-		return card1Action;
-	}
-
-	@Override
-	public PlayCardAction playOption2() {
-		Card card2 = getCard(card2Id);
-		PlayCardAction card2Action = card2.play();
-		card2Action.setActionSuffix(card2.getName());
-		card2Action.setGroupIndex(1);
-		return card2Action;
+	public PlayCardAction[] playOptions() {
+		PlayCardAction[] actions = new PlayCardAction[cardIds.length];
+		for (int i = 0; i < cardIds.length; i++) {
+			String cardId = cardIds[i];
+			Card card = getCard(cardId);
+			PlayCardAction cardAction = card.play();
+			cardAction.setActionSuffix(card.getName());
+			cardAction.setGroupIndex(i);
+			actions[i] = cardAction;
+		}
+		return actions;
 	}
 
 }

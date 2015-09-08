@@ -1,22 +1,24 @@
 {
 	"baseAttack": 2,
 	"baseHp": 2,
-	"option1": {
-		"spell": {
-			"class": "BuffSpell",
-			"attackBonus": 1,
-			"target": "SELF"
+	"options": [
+		{
+			"spell": {
+				"class": "BuffSpell",
+				"attackBonus": 1,
+				"target": "SELF"
+			},
+			"description": "+1 Attack"
 		},
-		"description": "+1 Attack"
-	},
-	"option2": {
-		"spell": {
-			"class": "BuffSpell",
-			"hpBonus": 1,
-			"target": "SELF"
-		},
-		"description": "+1 Health"
-	},
+		{
+			"spell": {
+				"class": "BuffSpell",
+				"hpBonus": 1,
+				"target": "SELF"
+			},
+			"description": "+1 Health"
+		}
+	],
 	"race": "MECH",
 	"id": "minion_anodized_robo_cub",
 	"name": "Anodized Robo Cub",

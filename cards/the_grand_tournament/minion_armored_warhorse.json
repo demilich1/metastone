@@ -5,7 +5,7 @@
 	"battlecry": {
 		"spell": {
 			"class": "JoustSpell",
-			"spell1": {
+			"spell": {
 				"class": "AddAttributeSpell",
 				"attribute": "CHARGE",
 				"target": "SELF"

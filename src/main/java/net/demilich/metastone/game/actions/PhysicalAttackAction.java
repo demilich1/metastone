@@ -1,7 +1,10 @@
 package net.demilich.metastone.game.actions;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.entities.Actor;
+import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
@@ -13,6 +16,18 @@ public class PhysicalAttackAction extends GameAction {
 		setTargetRequirement(TargetSelection.ENEMY_CHARACTERS);
 		setActionType(ActionType.PHYSICAL_ATTACK);
 		this.attackerReference = attackerReference;
+	}
+	
+	@Override
+	public boolean canBeExecutedOn(GameContext context, Entity entity) {
+		if (!super.canBeExecutedOn(context, entity)) {
+			return false;
+		}
+		if (entity.getEntityType() != EntityType.HERO) {
+			return true;
+		}
+		Actor attacker = (Actor) context.resolveSingleTarget(attackerReference);
+		return !attacker.hasAttribute(Attribute.CANNOT_ATTACK_HEROES);
 	}
 
 	@Override

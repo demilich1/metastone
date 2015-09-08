@@ -1,0 +1,17 @@
+{
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "SummonSpell",
+		"card": "token_searing_totem"
+	},
+	"id": "spell_summon_searing_totem",
+	"name": "Searing Totem",
+	"description": "Summon a Searing Totem.",
+	"type": "SPELL",
+	"heroClass": "SHAMAN",
+	"rarity": "FREE",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 2,
+	"collectible": false,
+	"fileFormatVersion": 1
+}

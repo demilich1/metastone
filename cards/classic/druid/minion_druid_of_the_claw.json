@@ -1,22 +1,24 @@
 {
 	"baseAttack": 4,
 	"baseHp": 4,
-	"option1": {
-		"spell": {
-			"class": "TransformMinionSpell",
-			"card": "token_cat_form",
-			"target": "SELF"
+	"options": [
+		{
+			"spell": {
+				"class": "TransformMinionSpell",
+				"card": "token_cat_form",
+				"target": "SELF"
+			},
+			"description": "Charge"
 		},
-		"description": "Charge"
-	},
-	"option2": {
-		"spell": {
-			"class": "TransformMinionSpell",
-			"card": "token_bear_form",
-			"target": "SELF"
-		},
-		"description": "Taunt"
-	},
+		{
+			"spell": {
+				"class": "TransformMinionSpell",
+				"card": "token_bear_form",
+				"target": "SELF"
+			},
+			"description": "Taunt"
+		}
+	],
 	"id": "minion_druid_of_the_claw",
 	"name": "Druid of the Claw",
 	"description": "Choose One - Charge; or +2 Health and Taunt.",

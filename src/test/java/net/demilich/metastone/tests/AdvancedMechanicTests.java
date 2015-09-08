@@ -48,7 +48,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		Assert.assertEquals(validActions.size(), 2);
 		Assert.assertEquals(player.getHand().getCount(), 1);
 
-		GameAction playWrath = wrathChooseOne.playOption1();
+		GameAction playWrath = wrathChooseOne.playOptions()[0];
 		playWrath.setTarget(getSingleMinion(opponent.getMinions()));
 		context.getLogic().performGameAction(player.getId(), playWrath);
 

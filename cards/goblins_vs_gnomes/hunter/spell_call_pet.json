@@ -9,7 +9,7 @@
 				"class": "RaceCondition",
 				"race": "BEAST"
 			},
-			"spell1": {
+			"spell": {
 				"class": "ModifyAttributeSpell",
 				"attribute": "MANA_COST_MODIFIER",
 				"value": -4

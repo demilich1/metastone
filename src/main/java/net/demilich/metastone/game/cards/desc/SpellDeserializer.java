@@ -45,6 +45,8 @@ public class SpellDeserializer implements JsonDeserializer<SpellDesc> {
 		parseArgument(SpellArg.SPELL_1, jsonData, spellArgs, ParseValueType.SPELL);
 		parseArgument(SpellArg.SPELL_2, jsonData, spellArgs, ParseValueType.SPELL);
 		parseArgument(SpellArg.SPELL_3, jsonData, spellArgs, ParseValueType.SPELL);
+		parseArgument(SpellArg.SPELL, jsonData, spellArgs, ParseValueType.SPELL);
+		parseArgument(SpellArg.SPELLS, jsonData, spellArgs, ParseValueType.SPELL_ARRAY);
 		parseArgument(SpellArg.CARD, jsonData, spellArgs, ParseValueType.STRING);
 		parseArgument(SpellArg.CARDS, jsonData, spellArgs, ParseValueType.STRING_ARRAY);
 		parseArgument(SpellArg.ATTRIBUTE, jsonData, spellArgs, ParseValueType.ATTRIBUTE);
@@ -59,12 +61,12 @@ public class SpellDeserializer implements JsonDeserializer<SpellDesc> {
 		parseArgument(SpellArg.BOARD_POSITION_RELATIVE, jsonData, spellArgs, ParseValueType.BOARD_POSITION_RELATIVE);
 		parseArgument(SpellArg.EXCLUSIVE, jsonData, spellArgs, ParseValueType.BOOLEAN);
 		parseArgument(SpellArg.CONDITION, jsonData, spellArgs, ParseValueType.CONDITION);
+		parseArgument(SpellArg.CONDITIONS, jsonData, spellArgs, ParseValueType.CONDITION_ARRAY);
 		parseArgument(SpellArg.CARD_COST_MODIFIER, jsonData, spellArgs, ParseValueType.CARD_COST_MODIFIER);
 		parseArgument(SpellArg.TRIGGER, jsonData, spellArgs, ParseValueType.TRIGGER);
 		parseArgument(SpellArg.REVERT_TRIGGER, jsonData, spellArgs, ParseValueType.EVENT_TRIGGER);
 		parseArgument(SpellArg.SECOND_REVERT_TRIGGER, jsonData, spellArgs, ParseValueType.EVENT_TRIGGER);
 		parseArgument(SpellArg.UNIQUE_MINION, jsonData, spellArgs, ParseValueType.STRING);
-
 		return new SpellDesc(spellArgs);
 	}
 

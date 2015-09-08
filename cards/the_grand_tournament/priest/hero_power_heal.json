@@ -1,0 +1,17 @@
+{
+	"targetSelection": "ANY",
+	"id": "hero_power_heal",
+	"name": "Heal",
+	"description": "Restore 4 Health.",
+	"type": "HERO_POWER",
+	"heroClass": "PRIEST",
+	"rarity": "FREE",
+	"spell": {
+		"class": "HealSpell",
+		"value": 4
+	},
+	"baseManaCost": 2,
+	"collectible": false,
+	"set": "THE_GRAND_TOURNAMENT",
+	"fileFormatVersion": 1
+}

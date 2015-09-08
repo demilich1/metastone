@@ -18,8 +18,6 @@ public class SelfTargetedTrigger extends TargetAcquisitionTrigger {
 			return false;
 		}
 		
-		System.out.println("Targeted: " + targetAcquisitionEvent.getEventTarget());
-
 		return super.fire(event, host);
 	}
 

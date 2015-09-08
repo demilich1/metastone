@@ -9,46 +9,26 @@ import net.demilich.metastone.game.spells.desc.BattlecryDesc;
 
 public class ChooseBattlecryCard extends MinionCard implements IChooseOneCard {
 
-	private final BattlecryDesc battlecryOption1;
-	private final BattlecryDesc battlecryOption2;
+	private final BattlecryDesc[] battlecryOptions;
 
 	public ChooseBattlecryCard(ChooseBattlecryCardDesc desc) {
 		super(desc);
-		this.battlecryOption1 = desc.option1;
-		this.battlecryOption2 = desc.option2;
+		this.battlecryOptions = desc.options;
 		setAttribute(Attribute.CHOOSE_ONE);
 	}
 
-	private String getAction1Suffix() {
-		return battlecryOption1.description;
-	}
-
-	private String getAction2Suffix() {
-		return battlecryOption2.description;
-	}
-
-	private BattlecryAction getBattlecry1() {
-		return BattlecryAction.createBattlecry(battlecryOption1.spell, battlecryOption1.getTargetSelection());
-	}
-
-	private BattlecryAction getBattlecry2() {
-		return BattlecryAction.createBattlecry(battlecryOption2.spell, battlecryOption2.getTargetSelection());
-	}
-
 	@Override
-	public PlayCardAction playOption1() {
-		PlayCardAction option1 = new PlayMinionCardAction(getCardReference(), getBattlecry1());
-		option1.setActionSuffix(getAction1Suffix());
-		option1.setGroupIndex(0);
-		return option1;
-	}
-
-	@Override
-	public PlayCardAction playOption2() {
-		PlayCardAction option2 = new PlayMinionCardAction(getCardReference(), getBattlecry2());
-		option2.setActionSuffix(getAction2Suffix());
-		option2.setGroupIndex(1);
-		return option2;
+	public PlayCardAction[] playOptions() {
+		PlayCardAction[] actions = new PlayCardAction[battlecryOptions.length];
+		for (int i = 0; i < battlecryOptions.length; i++) {
+			BattlecryDesc battlecryOption = battlecryOptions[i];
+			BattlecryAction battlecry = BattlecryAction.createBattlecry(battlecryOption.spell, battlecryOption.getTargetSelection());
+			PlayCardAction option = new PlayMinionCardAction(getCardReference(), battlecry);
+			option.setActionSuffix(battlecryOption.description);
+			option.setGroupIndex(i);
+			actions[i] = option;
+		}
+		return actions;
 	}
 
 }

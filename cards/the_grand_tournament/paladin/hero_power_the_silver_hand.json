@@ -1,0 +1,20 @@
+{
+	"targetSelection": "NONE",
+	"id": "hero_power_the_silver_hand",
+	"name": "The Silver Hand",
+	"description": "Summon two 1/1 Silver Hand Recruits.",
+	"type": "HERO_POWER",
+	"heroClass": "PALADIN",
+	"rarity": "FREE",
+	"spell": {
+		"class": "SummonSpell",
+		"cards": [
+			"token_silver_hand_recruit",
+			"token_silver_hand_recruit"
+		]
+	},
+	"baseManaCost": 2,
+	"collectible": false,
+	"set": "THE_GRAND_TOURNAMENT",
+	"fileFormatVersion": 1
+}

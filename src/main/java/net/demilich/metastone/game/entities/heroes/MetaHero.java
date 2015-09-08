@@ -17,10 +17,6 @@ public class MetaHero extends HeroCard {
 		return desc;
 	}
 
-	public MetaHero() {
-		super(createDesc());
-	}
-	
 	public static HeroCard getHeroCard(HeroClass heroClass) {
 		switch (heroClass) {
 		case DRUID:
@@ -45,6 +41,10 @@ public class MetaHero extends HeroCard {
 			break;
 		}
 		return null;
+	}
+	
+	public MetaHero() {
+		super(createDesc());
 	}
 
 }

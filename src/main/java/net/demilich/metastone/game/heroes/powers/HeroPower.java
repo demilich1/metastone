@@ -21,6 +21,10 @@ public class HeroPower extends SpellCard {
 		return used;
 	}
 
+	public void markUsed() {
+		this.used++;
+	}
+
 	public void onWillUse(GameContext context, Player player) {
 
 	}
@@ -29,13 +33,9 @@ public class HeroPower extends SpellCard {
 	public PlayCardAction play() {
 		return new HeroPowerAction(getSpell(), this, getTargetRequirement());
 	}
-
+	
 	public void setUsed(int used) {
 		this.used = used;
-	}
-	
-	public void markUsed() {
-		this.used++;
 	}
 
 }

@@ -79,7 +79,7 @@ public class CardParser {
 		case CHOOSE_ONE:
 			return gson.fromJson(jsonData, ChooseOneCardDesc.class);
 		case MINION:
-			if (jsonData.getAsJsonObject().has("option1")) {
+			if (jsonData.getAsJsonObject().has("options")) {
 				return gson.fromJson(jsonData, ChooseBattlecryCardDesc.class);
 			} else {
 				return gson.fromJson(jsonData, MinionCardDesc.class);
@@ -87,7 +87,7 @@ public class CardParser {
 		case WEAPON:
 			return gson.fromJson(jsonData, WeaponCardDesc.class);
 		case HERO_POWER:
-			return gson.fromJson(jsonData, HeroPowerCardDesc.class);
+			return gson.fromJson(jsonData, HeroPowerCardDesc.class);	
 		case HERO:
 			return gson.fromJson(jsonData, HeroCardDesc.class);
 		default:

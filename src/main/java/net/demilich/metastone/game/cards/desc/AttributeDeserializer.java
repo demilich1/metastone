@@ -22,6 +22,7 @@ public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Ob
 		parseAttribute(Attribute.OVERLOAD, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.ATTACK_EQUALS_HP, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.CANNOT_ATTACK, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(Attribute.CANNOT_ATTACK_HEROES, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.ENRAGABLE, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.CHARGE, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.DIVINE_SHIELD, jsonData, map, ParseValueType.BOOLEAN);

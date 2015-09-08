@@ -7,7 +7,7 @@
 			"class": "GraveyardContainsCondition",
 			"cardId": "minion_feugen"
 		},
-		"spell1": {
+		"spell": {
 			"class": "SummonSpell",
 			"card": "token_thaddius"
 		}

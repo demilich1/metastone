@@ -5,8 +5,7 @@ import net.demilich.metastone.game.cards.ChooseOneCard;
 
 public class ChooseOneCardDesc extends SpellCardDesc {
 
-	public String option1;
-	public String option2;
+	public String[] options;
 
 	@Override
 	public Card createInstance() {

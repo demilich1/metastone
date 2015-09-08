@@ -14,7 +14,7 @@ public class JoustSpell extends Spell {
 			return;
 		}
 		
-		SpellDesc spell = (SpellDesc) desc.get(SpellArg.SPELL_1);
+		SpellDesc spell = (SpellDesc) desc.get(SpellArg.SPELL);
 		SpellUtils.castChildSpell(context, player, spell, source, target);
 	}
 
