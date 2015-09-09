@@ -479,14 +479,17 @@ public class GameLogic implements Cloneable {
 			player.getStatistics().fatigueDamage(fatigue);
 			return null;
 		}
-
-		player.getStatistics().cardDrawn();
+		
 		Card card = deck.getRandom();
-
-		deck.remove(card);
+		return drawCard(playerId, card);
+	}
+	
+	public Card drawCard(int playerId, Card card) {
+		Player player = context.getPlayer(playerId);
+		player.getStatistics().cardDrawn();
+		player.getDeck().remove(card);
 		receiveCard(playerId, card);
 		context.fireGameEvent(new DrawCardEvent(context, playerId, card));
-
 		return card;
 	}
 
@@ -844,8 +847,9 @@ public class GameLogic implements Cloneable {
 		return loggingEnabled;
 	}
 
-	public boolean joust(Player player) {
+	public JoustEvent joust(Player player) {
 		Card ownCard = player.getDeck().getRandomOfType(CardType.MINION);
+		Card opponentCard = null;
 		boolean won = false;
 		// no minions left in deck - automatically loose joust
 		if (ownCard == null) {
@@ -853,7 +857,7 @@ public class GameLogic implements Cloneable {
 			log("Jousting LOST - no minion card left");
 		} else {
 			Player opponent = context.getOpponent(player);
-			Card opponentCard = opponent.getDeck().getRandomOfType(CardType.MINION);
+			opponentCard = opponent.getDeck().getRandomOfType(CardType.MINION);
 			// opponent has no minions left in deck - automatically win joust
 			if (opponentCard == null) {
 				won = true;
@@ -867,8 +871,9 @@ public class GameLogic implements Cloneable {
 				log("Jousting {} - {} vs. {}", won ? "WON" : "LOST", ownCard, opponentCard);
 			}
 		}
-		context.fireGameEvent(new JoustEvent(context, player.getId(), won));
-		return won;
+		JoustEvent joustEvent = new JoustEvent(context, player.getId(), won, ownCard, opponentCard); 
+		context.fireGameEvent(joustEvent);
+		return joustEvent;
 	}
 
 	private void log(String message) {

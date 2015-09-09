@@ -7,6 +7,7 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -15,6 +16,12 @@ public class FromDeckToHandSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
+		if (target != null && target.getEntityType() == EntityType.CARD) {
+			Card card = (Card) target;
+			context.getLogic().drawCard(player.getId(), card);
+			return;
+		}
+		
 		Race race = (Race) desc.get(SpellArg.RACE);
 		int value = desc.getValue();
 		String replacementCard = (String) desc.get(SpellArg.CARD);
