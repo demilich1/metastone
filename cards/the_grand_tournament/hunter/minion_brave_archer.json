@@ -1,14 +1,14 @@
 {
-  "baseAttack": 2,
-  "baseHp": 1,
-  "trigger": {
+	"baseAttack": 2,
+	"baseHp": 1,
+	"trigger": {
 		"eventTrigger": {
 			"class": "InspireTrigger",
-			"condition" : {
-				"class" : "CardCountCondition",
-				"targetPlayer" : "SELF",
-				"value" : 1,
-				"operation" : "LESS"
+			"condition": {
+				"class": "CardCountCondition",
+				"targetPlayer": "SELF",
+				"value": 1,
+				"operation": "LESS"
 			}
 		},
 		"spell": {
@@ -17,14 +17,14 @@
 			"target": "ENEMY_HERO"
 		}
 	},
-  "id": "minion_brave_archer",
-  "name": "Brave Archer",
-  "description": "Inspire: If your hand is empty, deal 2 damage to the enemy hero.",
-  "type": "MINION",
-  "heroClass": "HUNTER",
-  "rarity": "COMMON",
-  "set": "THE_GRAND_TOURNAMENT",
-  "baseManaCost": 1,
-  "collectible": true,
-  "fileFormatVersion": 1
+	"id": "minion_brave_archer",
+	"name": "Brave Archer",
+	"description": "Inspire: If your hand is empty, deal 2 damage to the enemy hero.",
+	"type": "MINION",
+	"heroClass": "HUNTER",
+	"rarity": "COMMON",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 1,
+	"collectible": true,
+	"fileFormatVersion": 1
 }

@@ -1,0 +1,24 @@
+{
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "AdjacentEffectSpell",
+		"spell1": {
+			"class": "DamageSpell",
+			"value": 2
+		},
+		"spell2": {
+			"class": "DamageSpell",
+			"value": 2
+		}
+	},
+	"id": "spell_powershot",
+	"name": "Powershot",
+	"description": "Deal 2 damage to a minion and the minions next to it.",
+	"type": "SPELL",
+	"heroClass": "HUNTER",
+	"rarity": "RARE",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 3,
+	"collectible": true,
+	"fileFormatVersion": 1
+}
