@@ -13,7 +13,7 @@ public class Secret extends SpellTrigger {
 	private Card source;
 
 	public Secret(GameEventTrigger trigger, SpellDesc spell, Card source) {
-		super(trigger, spell, true);
+		super(trigger, spell);
 		this.source = source;
 		setLayer(TriggerLayer.SECRET);
 	}
@@ -27,6 +27,7 @@ public class Secret extends SpellTrigger {
 		super.onFire(ownerId, spell, event);
 		Player owner = event.getGameContext().getPlayer(ownerId);
 		event.getGameContext().getLogic().secretTriggered(owner, this);
+		expire();
 	}
 
 	@Override

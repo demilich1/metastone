@@ -73,7 +73,7 @@ public abstract class GameAction implements Cloneable {
 		this.targetKey = targetKey;
 	}
 
-	protected void setTargetRequirement(TargetSelection targetRequirement) {
+	public void setTargetRequirement(TargetSelection targetRequirement) {
 		this.targetRequirement = targetRequirement;
 	}
 }

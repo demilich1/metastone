@@ -12,7 +12,7 @@
 					"class": "SummonCopySpell",
 					"target": "SELF"
 				},
-				"oneTime": true
+				"oneTurn": true
 			},
 			"target": "SELF"
 		},

@@ -1,0 +1,26 @@
+{
+	"baseAttack": 4,
+	"baseHp": 2,
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "DamageSpell",
+			"value": 1,
+			"target": "ALL_OTHER_MINIONS"
+		}
+	},
+	"race": "BEAST",
+	"id": "minion_dreadscale",
+	"name": "Dreadscale",
+	"description": "At the end of your turn, deal 1 damage to all other minions.",
+	"type": "MINION",
+	"heroClass": "HUNTER",
+	"rarity": "LEGENDARY",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 3,
+	"collectible": true,
+	"fileFormatVersion": 1
+}

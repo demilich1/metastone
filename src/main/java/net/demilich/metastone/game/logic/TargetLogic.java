@@ -227,6 +227,10 @@ public class TargetLogic {
 			List<Entity> targets = getEntities(context, player, TargetSelection.ANY);
 			targets.remove(source);
 			return targets;
+		} else if (targetKey == EntityReference.ALL_OTHER_MINIONS) {
+			List<Entity> targets = getEntities(context, player, TargetSelection.MINIONS);
+			targets.remove(source);
+			return targets;
 		} else if (targetKey == EntityReference.ADJACENT_MINIONS) {
 			return new ArrayList<>(context.getAdjacentMinions(player, source.getReference()));
 		} else if (targetKey == EntityReference.SELF) {

@@ -35,6 +35,12 @@ public abstract class GameEventTrigger extends CustomCloneable {
 		if (breaksStealth) {
 			event.getGameContext().getLogic().removeAttribute(host, Attribute.STEALTH);
 		}
+		
+		boolean ignoreHost = desc.getBool(EventTriggerArg.IGNORE_HOST);
+		if (ignoreHost && event.getEventTarget() == host) {
+			return false;
+		}
+		
 		Condition condition = (Condition) desc.get(EventTriggerArg.CONDITION);
 		Player owner = event.getGameContext().getPlayer(getOwner());
 		if (condition != null && !condition.isFulfilled(event.getGameContext(), owner, event.getEventTarget())) {

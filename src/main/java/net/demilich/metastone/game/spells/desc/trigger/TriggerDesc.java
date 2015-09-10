@@ -7,10 +7,10 @@ public class TriggerDesc {
 
 	public EventTriggerDesc eventTrigger;
 	public SpellDesc spell;
-	public boolean oneTime;
+	public boolean oneTurn;
 
 	public SpellTrigger create() {
-		return new SpellTrigger(eventTrigger.create(), spell, oneTime);
+		return new SpellTrigger(eventTrigger.create(), spell, oneTurn);
 	}
 
 }

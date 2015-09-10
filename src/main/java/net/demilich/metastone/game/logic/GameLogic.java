@@ -31,6 +31,7 @@ import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.heroes.Hero;
+import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.weapons.Weapon;
 import net.demilich.metastone.game.events.AfterSpellCastedEvent;
@@ -1066,6 +1067,16 @@ public class GameLogic implements Cloneable {
 		addGameEventListener(player, secret, player.getHero());
 		player.getSecrets().add(secret.getSource().getCardId());
 		context.fireGameEvent(new SecretPlayedEvent(context, (SecretCard) secret.getSource()));
+	}
+	
+	public void processTargetModifiers(Player player, GameAction action) {
+		HeroPower heroPower = player.getHero().getHeroPower();
+		if (heroPower.getClassRestriction() != HeroClass.HUNTER) {
+			return;
+		}
+		if (hasAttribute(player, Attribute.HERO_POWER_CAN_TARGET_MINIONS)) {
+			action.setTargetRequirement(TargetSelection.ANY);
+		}
 	}
 
 	/**

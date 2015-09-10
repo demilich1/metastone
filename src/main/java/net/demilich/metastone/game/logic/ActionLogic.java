@@ -105,6 +105,7 @@ public class ActionLogic {
 	}
 
 	public void rollout(GameAction action, GameContext context, Player player, Collection<GameAction> actions) {
+		context.getLogic().processTargetModifiers(player, action);
 		if (action.getTargetRequirement() == TargetSelection.NONE) {
 			actions.add(action);
 		} else {

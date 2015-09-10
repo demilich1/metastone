@@ -19,15 +19,15 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 	private GameEventTrigger secondaryTrigger;
 	private SpellDesc spell;
 	private EntityReference hostReference;
-	private final boolean oneTime;
+	private final boolean oneTurn;
 	private boolean expired;
 	private TriggerLayer layer = TriggerLayer.DEFAULT;
 
-	public SpellTrigger(GameEventTrigger primaryTrigger, GameEventTrigger secondaryTrigger, SpellDesc spell, boolean oneTime) {
+	public SpellTrigger(GameEventTrigger primaryTrigger, GameEventTrigger secondaryTrigger, SpellDesc spell, boolean oneTurn) {
 		this.primaryTrigger = primaryTrigger;
 		this.secondaryTrigger = secondaryTrigger;
 		this.spell = spell;
-		this.oneTime = oneTime;
+		this.oneTurn = oneTurn;
 	}
 
 	public SpellTrigger(GameEventTrigger trigger, SpellDesc spell) {
@@ -47,6 +47,10 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 		}
 		clone.spell = spell.clone();
 		return clone;
+	}
+	
+	protected void expire() {
+		expired = true;
 	}
 
 	@Override
@@ -70,6 +74,10 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 
 	@Override
 	public boolean interestedIn(GameEventType eventType) {
+		if (oneTurn && eventType == GameEventType.TURN_END) {
+			return true;
+		}
+		
 		boolean result = primaryTrigger.interestedIn() == eventType || primaryTrigger.interestedIn() == GameEventType.ALL;
 		if (secondaryTrigger != null) {
 			result |= secondaryTrigger.interestedIn() == eventType || secondaryTrigger.interestedIn() == GameEventType.ALL;
@@ -95,14 +103,11 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 		if (expired) {
 			return;
 		}
+		
 		int ownerId = primaryTrigger.getOwner();
 		try {
 			Entity host = event.getGameContext().resolveSingleTarget(hostReference);
 			if (triggerFires(primaryTrigger, event, host) || triggerFires(secondaryTrigger, event, host)) {
-				if (oneTime) {
-					expired = true;
-				}
-
 				event.getGameContext().getEnvironment().put(Environment.EVENT_TARGET, event.getEventTarget());
 				onFire(ownerId, spell, event);
 				event.getGameContext().getEnvironment().remove(Environment.EVENT_TARGET);
@@ -111,6 +116,10 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 			event.getGameContext().printCurrentTriggers();
 			logger.error("SpellTrigger cannot be executed; GameEventTrigger: {} Spell: {}", primaryTrigger, spell);
 			throw e;
+		}
+		
+		if (oneTurn && event.getEventType() == GameEventType.TURN_END) {
+			expire();
 		}
 	}
 
@@ -138,7 +147,7 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 	@Override
 	public String toString() {
 		return "[SpellTrigger primaryTrigger=" + primaryTrigger + ", secondaryTrigger=" + secondaryTrigger + ", spell=" + spell
-				+ ", hostReference=" + hostReference + ", oneTime=" + oneTime + ", expired=" + expired + ", layer=" + layer + "]";
+				+ ", hostReference=" + hostReference + ", oneTurn=" + oneTurn + ", expired=" + expired + ", layer=" + layer + "]";
 	}
 
 	private boolean triggerFires(GameEventTrigger trigger, GameEvent event, Entity host) {

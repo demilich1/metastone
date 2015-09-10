@@ -113,7 +113,7 @@ public class ParseUtils {
 			TriggerDesc triggerDesc = new TriggerDesc();
 			triggerDesc.eventTrigger = triggerParser.deserialize(triggerObject.get("eventTrigger"), EventTriggerDesc.class, null);
 			triggerDesc.spell = spellParser.deserialize(triggerObject.get("spell"), SpellDesc.class, null);
-			triggerDesc.oneTime = triggerObject.has("oneTime") ? triggerObject.get("oneTime").getAsBoolean() : false;
+			triggerDesc.oneTurn = triggerObject.has("oneTurn") ? triggerObject.get("oneTurn").getAsBoolean() : false;
 			return triggerDesc;
 		case EVENT_TRIGGER:
 			return triggerParser.deserialize(entry, EventTriggerDesc.class, null);
@@ -156,6 +156,8 @@ public class ParseUtils {
 			return EntityReference.ALL_CHARACTERS;
 		case "all_other_characters":
 			return EntityReference.ALL_OTHER_CHARACTERS;
+		case "all_other_minions":
+			return EntityReference.ALL_OTHER_MINIONS;
 		case "event_target":
 			return EntityReference.EVENT_TARGET;
 		case "target":

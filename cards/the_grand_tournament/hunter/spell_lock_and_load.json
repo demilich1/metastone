@@ -13,8 +13,10 @@
 					"class": "CardFilter",
 					"heroClass": "HUNTER"
 				}
-			}
-		}
+			},
+			"oneTurn": true
+		},
+		"target": "FRIENDLY_HERO"
 	},
 	"id": "spell_lock_and_load",
 	"name": "Lock and Load",
