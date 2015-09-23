@@ -20,8 +20,6 @@ public class CardProxy extends Proxy<GameNotification> {
 
 	private static Logger logger = LoggerFactory.getLogger(CardProxy.class);
 
-	private final Map<String, CardDesc> cardDesc = new HashMap<String, CardDesc>();
-
 	public CardProxy() {
 		super(NAME);
 		try {
@@ -32,7 +30,7 @@ public class CardProxy extends Proxy<GameNotification> {
 	}
 
 	private void loadCards() throws FileNotFoundException {
-		cardDesc.clear();
+		Map<String, CardDesc> cardDesc = new HashMap<String, CardDesc>();
 		File folder = new File("./cards");
 		if (!folder.exists()) {
 			logger.error("/cards directory not found");
