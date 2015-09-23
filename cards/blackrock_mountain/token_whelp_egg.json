@@ -1,14 +1,15 @@
 {
 	"baseAttack": 2,
-	"baseHp": 2,
-	"id": "token_squire",
-	"name": "Squire",
+	"baseHp": 1,
+	"race": "DRAGON",
+	"id": "token_whelp_egg",
+	"name": "Whelp",
 	"description": "",
 	"type": "MINION",
 	"heroClass": "ANY",
-	"rarity": "COMMON",
-	"set": "THE_GRAND_TOURNAMENT",
+	"rarity": "FREE",
 	"baseManaCost": 1,
 	"collectible": false,
+	"set": "BLACKROCK_MOUNTAIN",
 	"fileFormatVersion": 1
 }

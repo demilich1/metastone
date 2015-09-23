@@ -10,9 +10,9 @@ import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.demilich.nittygrittymvc.Proxy;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.cards.desc.CardDesc;
+import net.demilich.nittygrittymvc.Proxy;
 
 public class CardProxy extends Proxy<GameNotification> {
 
@@ -43,6 +43,9 @@ public class CardProxy extends Proxy<GameNotification> {
 		CardParser cardParser = new CardParser();
 		for (File file : files) {
 			CardDesc desc = cardParser.parseCard(file);
+			if (cardDesc.containsKey(desc.id)) {
+				logger.error("Card id {} is duplicated!", desc.id);
+			}
 			cardDesc.put(desc.id, desc);
 		}
 

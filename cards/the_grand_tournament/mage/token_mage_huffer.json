@@ -2,7 +2,7 @@
 	"baseAttack": 4,
 	"baseHp": 2,
 	"race": "BEAST",
-	"id": "token_boar",
+	"id": "token_mage_huffer",
 	"name": "Boar",
 	"description": "Charge",
 	"type": "MINION",

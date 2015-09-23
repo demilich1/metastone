@@ -2,7 +2,7 @@
   "targetSelection": "MINIONS",
   "spell": {
     "class": "TransformMinionSpell",
-	"card": "token_boar"
+	"card": "token_mage_huffer"
   },
   "id": "spell_polymorph_boar",
   "name": "Polymorph: Boar",

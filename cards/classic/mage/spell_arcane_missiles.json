@@ -10,7 +10,8 @@
 	"spell": {
 		"class": "MissilesSpell",
 		"value": 1,
-		"howMany": 3
+		"howMany": 3,
+		"target": "ENEMY_CHARACTERS"
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
