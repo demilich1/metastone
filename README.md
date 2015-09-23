@@ -26,7 +26,7 @@ This feature is in very early stages and there is no official support yet. There
 - any .json file in there will be parsed and treated like built-in cards
 - to learn the format it is advised to copy an existing card, change the filename and the 'id' attribute (important!) and make small changes
 - you have to restart MetaStone for new
-- 
+
 - there is no notification if you make an error, the card will just not work or the program may crash
 - ** the card format is subject to change; cards you create now may not work in future versions **
 
