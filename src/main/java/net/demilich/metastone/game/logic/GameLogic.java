@@ -13,6 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.demilich.metastone.AppConfig;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
@@ -107,7 +108,7 @@ public class GameLogic implements Cloneable {
 	private boolean loggingEnabled = true;
 
 	// DEBUG
-	private final int MAX_HISTORY_ENTRIES = 200;
+	private final int MAX_HISTORY_ENTRIES = 100;
 	private Queue<String> debugHistory = new LinkedList<>();
 
 	public GameLogic() {
@@ -906,6 +907,9 @@ public class GameLogic implements Cloneable {
 	}
 
 	private void logToDebugHistory(String message, Object... params) {
+		if (!AppConfig.DEV_BUILD) {
+			return;
+		}
 		if (debugHistory.size() == MAX_HISTORY_ENTRIES) {
 			debugHistory.poll();
 		}
@@ -1074,7 +1078,7 @@ public class GameLogic implements Cloneable {
 		if (heroPower.getClassRestriction() != HeroClass.HUNTER) {
 			return;
 		}
-		if (hasAttribute(player, Attribute.HERO_POWER_CAN_TARGET_MINIONS)) {
+		if (action.getActionType() == ActionType.HERO_POWER && hasAttribute(player, Attribute.HERO_POWER_CAN_TARGET_MINIONS)) {
 			action.setTargetRequirement(TargetSelection.ANY);
 		}
 	}
