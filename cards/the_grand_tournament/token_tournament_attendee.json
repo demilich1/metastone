@@ -3,7 +3,7 @@
 	"baseHp": 1,
 	"id": "token_tournament_attendee",
 	"name": "Tournament Attendee",
-	"description": "TAUNT",
+	"description": "Taunt",
 	"type": "MINION",
 	"heroClass": "ANY",
 	"rarity": "COMMON",
