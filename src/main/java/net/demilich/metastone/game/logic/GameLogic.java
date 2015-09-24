@@ -157,9 +157,17 @@ public class GameLogic implements Cloneable {
 		entity.setAttribute(attr);
 		log("Applying attr {} to {}", attr, entity);
 	}
+	
+	public int applyHeroPowerDamage(Player player, int baseValue) {
+		int spellpower = getTotalAttributeValue(player, Attribute.HERO_POWER_DAMAGE);
+		return baseValue + spellpower;
+	}
 
-	public int applySpellpower(Player player, int baseValue) {
+	public int applySpellpower(Player player, Entity source, int baseValue) {
 		int spellpower = getTotalAttributeValue(player, Attribute.SPELL_DAMAGE);
+		if (source.hasAttribute(Attribute.SPELL_DAMAGE_MULTIPLIER)) {
+			spellpower *= source.getAttributeValue(Attribute.SPELL_DAMAGE_MULTIPLIER);
+		}
 		return baseValue + spellpower;
 	}
 
@@ -179,7 +187,10 @@ public class GameLogic implements Cloneable {
 		}
 		if (card.getCardType() == CardType.HERO_POWER) {
 			HeroPower power = (HeroPower) card;
-			int heroPowerUsages = getAttributeValue(player, Attribute.HERO_POWER_USAGES, 1);
+			int heroPowerUsages = getTotalAttributeValue(player, Attribute.HERO_POWER_USAGES);
+			if (heroPowerUsages == 0) {
+				heroPowerUsages = 1;
+			}
 			if (power.hasBeenUsed() >= heroPowerUsages) {
 				return false;
 			}
@@ -264,7 +275,7 @@ public class GameLogic implements Cloneable {
 
 	public void changeHero(Player player, Hero hero) {
 		hero.setId(player.getHero().getId());
-		if (hero.getHeroClass() == null) {
+		if (hero.getHeroClass() == null || hero.getHeroClass() == HeroClass.ANY) {
 			hero.setHeroClass(player.getHero().getHeroClass());
 		}
 
@@ -328,8 +339,13 @@ public class GameLogic implements Cloneable {
 		int damage = baseDamage;
 		Card sourceCard = source != null && source.getEntityType() == EntityType.CARD ? (Card) source : null;
 		if (!ignoreSpellPower && sourceCard != null) {
-			damage = applySpellpower(player, baseDamage);
+			if (sourceCard.getCardType() == CardType.SPELL) {
+				damage = applySpellpower(player, source, baseDamage);	
+			} else if (sourceCard.getCardType() == CardType.HERO_POWER) {
+				damage = applyHeroPowerDamage(player, damage);	
+			}
 		}
+		
 		if (!ignoreSpellPower && sourceCard != null
 				&& (sourceCard.getCardType() == CardType.SPELL || sourceCard.getCardType() == CardType.HERO_POWER)) {
 			damage = applyAmplify(player, damage);
@@ -351,6 +367,10 @@ public class GameLogic implements Cloneable {
 				context.fireGameEvent(fatalDamageEvent);
 			}
 			damageDealt = damageHero((Hero) target, damage);
+			// if target is hero and is dead, do not fire any more damage events
+			if (target.isDestroyed()) {
+				return damageDealt;
+			}
 			break;
 		default:
 			break;

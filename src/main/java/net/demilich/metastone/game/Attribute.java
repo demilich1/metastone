@@ -2,6 +2,7 @@ package net.demilich.metastone.game;
 
 public enum Attribute {
 	DEBUG,
+	BASE_MANA_COST,
 	HP,
 	ATTACK,
 	ATTACK_BONUS,
@@ -40,6 +41,7 @@ public enum Attribute {
 	CHOOSE_ONE,
 	SUMMONING_SICKNESS,
 	UNTARGETABLE_BY_SPELLS,
+	SPELL_DAMAGE_MULTIPLIER,
 	SPELL_AMPLIFY_MULTIPLIER,
 	MANA_COST_MODIFIER,
 	ATTACK_EQUALS_HP,
@@ -55,6 +57,7 @@ public enum Attribute {
 	PASSIVE_TRIGGER,
 	HERO_POWER_USED,
 	HERO_POWER_USAGES,
+	HERO_POWER_DAMAGE,
 	MEATSHIELD,
 
 	// AI flags

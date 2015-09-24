@@ -21,7 +21,6 @@ public abstract class Card extends Entity {
 	private String description = "";
 	private final CardType cardType;
 	private final CardSet cardSet;
-	private final int manaCost;
 	private final Rarity rarity;
 	private final HeroClass classRestriction;
 	private boolean collectible = true;
@@ -39,8 +38,8 @@ public abstract class Card extends Entity {
 		cardSet = desc.set;
 		rarity = desc.rarity;
 		classRestriction = desc.heroClass;
-		manaCost = desc.baseManaCost;
 
+		setAttribute(Attribute.BASE_MANA_COST, desc.baseManaCost);
 		if (desc.attributes != null) {
 			attributes.putAll(desc.attributes);
 		}
@@ -62,7 +61,7 @@ public abstract class Card extends Entity {
 	}
 
 	public int getBaseManaCost() {
-		return manaCost;
+		return getAttributeValue(Attribute.BASE_MANA_COST);
 	}
 
 	public BattlecryDesc getBattlecry() {
@@ -109,7 +108,7 @@ public abstract class Card extends Entity {
 	}
 
 	public int getManaCost(GameContext context, Player player) {
-		int actualManaCost = manaCost;
+		int actualManaCost = getBaseManaCost();
 		if (manaCostModifier != null) {
 			actualManaCost -= manaCostModifier.getValue(context, player, null, this);
 		}
@@ -178,7 +177,7 @@ public abstract class Card extends Entity {
 
 	@Override
 	public String toString() {
-		return String.format("[%s '%s' Manacost:%d]", getCardType(), getName(), manaCost);
+		return String.format("[%s '%s' Manacost:%d]", getCardType(), getName(), getBaseManaCost());
 	}
 
 }

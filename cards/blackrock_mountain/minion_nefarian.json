@@ -8,7 +8,8 @@
 			"howMany": 2,
 			"cardFilter": {
 				"class": "CardFilter",
-				"cardType": "SPELL"
+				"cardType": "SPELL",
+				"heroClass": "OPPONENT"
 			}
 		},
 		"resolvedLate": false

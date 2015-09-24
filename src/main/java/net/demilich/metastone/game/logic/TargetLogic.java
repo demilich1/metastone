@@ -44,7 +44,7 @@ public class TargetLogic {
 			// special case for 'SYSTEM' action, which are used in Sandbox Mode
 			// we do not want to restrict those actions by STEALTH or
 			// UNTARGETABLE_BY_SPELLS
-			if (action.getActionType() == ActionType.SYSTEM && action.canBeExecutedOn(context, entity)) {
+			if (action.getActionType() == ActionType.SYSTEM && action.canBeExecutedOn(context, player, entity)) {
 				validTargets.add(entity);
 				continue;
 			}
@@ -57,7 +57,7 @@ public class TargetLogic {
 				continue;
 			}
 
-			if (action.canBeExecutedOn(context, entity)) {
+			if (action.canBeExecutedOn(context, player, entity)) {
 				validTargets.add(entity);
 			}
 		}

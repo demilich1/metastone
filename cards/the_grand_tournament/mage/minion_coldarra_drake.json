@@ -1,0 +1,17 @@
+{
+	"baseAttack": 6,
+	"baseHp": 6,
+	"race": "DRAGON",
+	"id": "minion_coldarra_drake",
+	"name": "Coldarra Drake",
+	"type": "MINION",
+	"heroClass": "MAGE",
+	"rarity": "EPIC",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 6,
+	"collectible": true,
+	"attributes": {
+		"HERO_POWER_USAGES": 99
+	},
+	"fileFormatVersion": 1
+}

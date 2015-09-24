@@ -19,7 +19,7 @@ public abstract class Spell {
 		}
 
 		EntityFilter targetFilter = desc.getEntityFilter();
-		List<Entity> validTargets = SpellUtils.getValidTargets(targets, targetFilter);
+		List<Entity> validTargets = SpellUtils.getValidTargets(context, player, targets, targetFilter);
 		// there is at least one valid target and the RANDOM_TARGET flag is set,
 		// pick one randomly
 		if (validTargets.size() > 0 && desc.getBool(SpellArg.RANDOM_TARGET)) {

@@ -98,13 +98,13 @@ public class SpellUtils {
 		return validTargets;
 	}
 
-	public static List<Entity> getValidTargets(List<Entity> allTargets, EntityFilter filter) {
+	public static List<Entity> getValidTargets(GameContext context, Player player, List<Entity> allTargets, EntityFilter filter) {
 		if (filter == null) {
 			return allTargets;
 		}
 		List<Entity> validTargets = new ArrayList<>();
 		for (Entity entity : allTargets) {
-			if (filter.matches(entity)) {
+			if (filter.matches(context, player, entity)) {
 				validTargets.add(entity);
 			}
 		}

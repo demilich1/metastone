@@ -245,26 +245,34 @@ public class AdvancedMechanicTests extends BasicTests {
 
 	@Test
 	public void testSpellpower() {
-		GameContext context = createContext(HeroClass.PRIEST, HeroClass.WARRIOR);
-		Player priest = context.getPlayer1();
-		priest.setMana(10);
+		GameContext context = createContext(HeroClass.MAGE, HeroClass.WARRIOR);
+		Player mage = context.getPlayer1();
+		mage.setMana(10);
 		Player warrior = context.getPlayer2();
 		warrior.setMana(10);
 
 		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp());
 		Card damageSpell = CardCatalogue.getCardById("spell_mind_blast");
 		int mindBlastDamage = 5;
-		context.getLogic().receiveCard(priest.getId(), damageSpell);
+		context.getLogic().receiveCard(mage.getId(), damageSpell);
 
-		context.getLogic().performGameAction(priest.getId(), damageSpell.play());
+		context.getLogic().performGameAction(mage.getId(), damageSpell.play());
 		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - mindBlastDamage);
 
 		MinionCard spellPowerMinionCard = (MinionCard) CardCatalogue.getCardById("minion_kobold_geomancer");
-		context.getLogic().receiveCard(priest.getId(), spellPowerMinionCard);
-		context.getLogic().performGameAction(priest.getId(), spellPowerMinionCard.play());
-		context.getLogic().receiveCard(priest.getId(), damageSpell);
-		context.getLogic().performGameAction(priest.getId(), damageSpell.play());
-		int spellPower = getSingleMinion(priest.getMinions()).getAttributeValue(Attribute.SPELL_DAMAGE);
+		context.getLogic().receiveCard(mage.getId(), spellPowerMinionCard);
+		context.getLogic().performGameAction(mage.getId(), spellPowerMinionCard.play());
+		context.getLogic().receiveCard(mage.getId(), damageSpell);
+		context.getLogic().performGameAction(mage.getId(), damageSpell.play());
+		int spellPower = getSingleMinion(mage.getMinions()).getAttributeValue(Attribute.SPELL_DAMAGE);
 		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - 2 * mindBlastDamage - spellPower);
+		
+		int opponentHp = warrior.getHero().getHp();
+		GameAction useHeroPower = mage.getHero().getHeroPower().play();
+		useHeroPower.setTarget(warrior.getHero());
+		context.getLogic().performGameAction(mage.getId(), useHeroPower);
+		
+		// mage hero power should not be affected by SPELL_DAMAGE, and thus deal 1 damage
+		Assert.assertEquals(warrior.getHero().getHp(), opponentHp - 1);
 	}
 }

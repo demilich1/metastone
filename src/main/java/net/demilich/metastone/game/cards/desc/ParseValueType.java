@@ -26,5 +26,6 @@ public enum ParseValueType {
 	EVENT_TRIGGER,
 	CARD_COST_MODIFIER,
 	RARITY,
-	HERO_CLASS
+	HERO_CLASS,
+	VALUE
 }

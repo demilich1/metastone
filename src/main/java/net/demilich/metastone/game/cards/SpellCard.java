@@ -44,12 +44,12 @@ public class SpellCard extends Card {
 		return true;
 	}
 
-	public boolean canBeCastOn(Entity target) {
+	public boolean canBeCastOn(GameContext context, Player player, Entity target) {
 		EntityFilter filter = spell.getEntityFilter();
 		if (filter == null) {
 			return true;
 		}
-		return filter.matches(target);
+		return filter.matches(context, player, target);
 	}
 
 	@Override

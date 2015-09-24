@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.entities.Entity;
@@ -23,11 +24,11 @@ public abstract class PlayCardAction extends GameAction {
 	}
 
 	@Override
-	public boolean canBeExecutedOn(GameContext context, Entity entity) {
+	public boolean canBeExecutedOn(GameContext context, Player player, Entity entity) {
 		Card card = context.resolveCardReference(getCardReference());
 		if (card instanceof SpellCard) {
 			SpellCard spellCard = (SpellCard) card;
-			return spellCard.canBeCastOn(entity);
+			return spellCard.canBeCastOn(context, player, entity);
 		}
 
 		return true;

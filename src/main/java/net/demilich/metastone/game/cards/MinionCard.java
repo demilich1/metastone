@@ -15,13 +15,9 @@ import net.demilich.metastone.game.spells.desc.BattlecryDesc;
 
 public class MinionCard extends Card {
 
-	private static final Set<Attribute> inheritedAttributes = new HashSet<Attribute>(Arrays.asList(new Attribute[] { Attribute.STEALTH,
-			Attribute.CANNOT_ATTACK, Attribute.TAUNT, Attribute.UNTARGETABLE_BY_SPELLS, Attribute.CHARGE, Attribute.DIVINE_SHIELD,
-			Attribute.WINDFURY, Attribute.MEGA_WINDFURY, Attribute.SPELL_DAMAGE, Attribute.ATTACK_EQUALS_HP, Attribute.INVERT_HEALING,
-			Attribute.SPELL_AMPLIFY_MULTIPLIER, Attribute.ENRAGABLE, Attribute.DOUBLE_DEATHRATTLES, Attribute.HERO_POWER_CAN_TARGET_MINIONS,
-			Attribute.ATTACK_BONUS, Attribute.HERO_POWER_USAGES, Attribute.CANNOT_ATTACK_HEROES, Attribute.MEATSHIELD
-
-	}));
+	private static final Set<Attribute> ignoredAttributes = new HashSet<Attribute>(
+			Arrays.asList(new Attribute[] { Attribute.PASSIVE_TRIGGER, Attribute.MANA_COST_MODIFIER, Attribute.BASE_ATTACK,
+					Attribute.BASE_HP, Attribute.SECRET, Attribute.CHOOSE_ONE, Attribute.BATTLECRY }));
 
 	private final MinionCardDesc desc;
 
@@ -38,7 +34,7 @@ public class MinionCard extends Card {
 	protected Minion createMinion(Attribute... tags) {
 		Minion minion = new Minion(this);
 		for (Attribute gameTag : getAttributes().keySet()) {
-			if (inheritedAttributes.contains(gameTag)) {
+			if (!ignoredAttributes.contains(gameTag)) {
 				minion.setAttribute(gameTag, getAttribute(gameTag));
 			}
 		}

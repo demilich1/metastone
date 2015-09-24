@@ -40,8 +40,8 @@ public class BattlecryAction extends GameAction {
 	}
 
 	@Override
-	public final boolean canBeExecutedOn(GameContext context, Entity entity) {
-		if (!super.canBeExecutedOn(context, entity)) {
+	public final boolean canBeExecutedOn(GameContext context, Player player, Entity entity) {
+		if (!super.canBeExecutedOn(context, player, entity)) {
 			return false;
 		}
 		if (getSource().getId() == entity.getId()) {
@@ -50,7 +50,7 @@ public class BattlecryAction extends GameAction {
 		if (getEntityFilter() == null) {
 			return true;
 		}
-		return getEntityFilter().matches(entity);
+		return getEntityFilter().matches(context, player, entity);
 	}
 
 	@Override

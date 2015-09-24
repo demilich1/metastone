@@ -20,7 +20,7 @@ public class ReceiveRandomCollectibleCardSpell extends Spell {
 		CardCollection cards = CardCatalogue.query((CardType) null);
 		CardCollection result = new CardCollection();
 		for (Card card : cards) {
-			if (cardFilter.matches(card)) {
+			if (cardFilter.matches(context, player, card)) {
 				result.add(card);
 			}
 		}

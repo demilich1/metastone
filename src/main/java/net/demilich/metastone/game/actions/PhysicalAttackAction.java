@@ -2,6 +2,7 @@ package net.demilich.metastone.game.actions;
 
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
@@ -19,8 +20,8 @@ public class PhysicalAttackAction extends GameAction {
 	}
 	
 	@Override
-	public boolean canBeExecutedOn(GameContext context, Entity entity) {
-		if (!super.canBeExecutedOn(context, entity)) {
+	public boolean canBeExecutedOn(GameContext context, Player player, Entity entity) {
+		if (!super.canBeExecutedOn(context, player, entity)) {
 			return false;
 		}
 		if (entity.getEntityType() != EntityType.HERO) {

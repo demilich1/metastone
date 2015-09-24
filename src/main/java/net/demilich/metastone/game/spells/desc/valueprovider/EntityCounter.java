@@ -21,7 +21,7 @@ public class EntityCounter extends ValueProvider {
 		int count = 0;
 		EntityFilter filter = (EntityFilter) desc.get(ValueProviderArg.FILTER);
 		for (Entity entity : relevantEntities) {
-			if (filter == null || filter.matches(entity)) {
+			if (filter == null || filter.matches(context, player, entity)) {
 				count++;
 			}
 		}

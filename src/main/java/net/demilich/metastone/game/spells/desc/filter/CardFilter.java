@@ -1,6 +1,8 @@
 package net.demilich.metastone.game.spells.desc.filter;
 
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.Rarity;
@@ -16,7 +18,7 @@ public class CardFilter extends EntityFilter {
 	}
 
 	@Override
-	protected boolean test(Entity entity, FilterDesc desc) {
+	protected boolean test(GameContext context, Player player, Entity entity) {
 		Card card = null;
 		if (entity instanceof Card) {
 			card = (Card) entity;
@@ -37,12 +39,15 @@ public class CardFilter extends EntityFilter {
 		}
 		
 		HeroClass heroClass = (HeroClass) desc.get(FilterArg.HERO_CLASS);
+		if (heroClass == HeroClass.OPPONENT) {
+			heroClass = context.getOpponent(player).getHero().getHeroClass();
+		}
 		if (heroClass != null && heroClass != card.getClassRestriction()) {
 			return false;
 		}
 		
 		if (desc.contains(FilterArg.MANA_COST)) {
-			int manaCost = desc.getInt(FilterArg.MANA_COST);
+			int manaCost = desc.getValue(FilterArg.MANA_COST, context, player, null, null, 0);
 			if (manaCost != card.getBaseManaCost()) {
 				return false;
 			}

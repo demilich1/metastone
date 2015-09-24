@@ -22,7 +22,7 @@ public class MassTest extends TestBase {
 	private static HeroClass getRandomClass() {
 		HeroClass randomClass = HeroClass.ANY;
 		HeroClass[] values = HeroClass.values();
-		while (randomClass == HeroClass.ANY || randomClass == HeroClass.DECK_COLLECTION) {
+		while (randomClass == HeroClass.ANY || randomClass == HeroClass.DECK_COLLECTION || randomClass == HeroClass.OPPONENT) {
 			randomClass = values[ThreadLocalRandom.current().nextInt(values.length)];
 		}
 		return randomClass;

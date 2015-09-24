@@ -89,6 +89,12 @@ public class ParseUtils {
 			return Enum.valueOf(ActionType.class, entry.getAsString());
 		case ALGEBRAIC_OPERATION:
 			return Enum.valueOf(AlgebraicOperation.class, entry.getAsString());
+		case VALUE:
+			// value is either an int or a ValueProvider
+			// if it is not an object, parse it as int, else fall-through to VALUE_PROVIDER case
+			if (!entry.isJsonObject()) {
+				return entry.getAsInt();
+			}
 		case VALUE_PROVIDER:
 			ValueProviderDesc valueProviderDesc = valueProviderParser.deserialize(entry, ValueProviderDesc.class, null);
 			return valueProviderDesc.create();

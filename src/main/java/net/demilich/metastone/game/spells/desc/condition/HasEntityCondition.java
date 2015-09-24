@@ -17,7 +17,7 @@ public class HasEntityCondition extends Condition {
 		EntityReference source = (EntityReference) desc.get(ConditionArg.TARGET);
 		EntityFilter filter = (EntityFilter) desc.get(ConditionArg.FILTER);
 		for (Entity entity : context.resolveTarget(player, null, source)) {
-			if (filter.matches(entity)) {
+			if (filter.matches(context, player, entity)) {
 				return true;
 			}
 		}

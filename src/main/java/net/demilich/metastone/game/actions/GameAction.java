@@ -1,6 +1,7 @@
 package net.demilich.metastone.game.actions;
 
 import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
@@ -13,7 +14,7 @@ public abstract class GameAction implements Cloneable {
 	private EntityReference targetKey;
 	private String actionSuffix;
 
-	public boolean canBeExecutedOn(GameContext gameContext, Entity entity) {
+	public boolean canBeExecutedOn(GameContext gameContext, Player player, Entity entity) {
 		return true;
 	}
 
