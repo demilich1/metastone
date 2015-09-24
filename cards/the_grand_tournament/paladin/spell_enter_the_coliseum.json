@@ -1,0 +1,34 @@
+{
+  "targetSelection": "NONE",
+  "spell": {
+    "class": "MetaSpell",
+	"spell1" : {
+		"class" : "DestroyAllExceptOneSpell",
+		"filter" : {
+			"class" : "HighestAttributeFilter",
+			"attribute" : "ATTACK",
+			"target" : "ENEMY_MINIONS"
+		},
+		"target" : "ENEMY_MINIONS"
+	},
+	"spell2" : {
+		"class" : "DestroyAllExceptOneSpell",
+		"filter" : {
+			"class" : "HighestAttributeFilter",
+			"attribute" : "ATTACK",
+			"target" : "FRIENDLY_MINIONS"
+		},
+		"target" : "FRIENDLY_MINIONS"
+	}
+  },
+  "id": "spell_enter_the_coliseum",
+  "name": "Enter the Coliseum",
+  "description": "Destroy all minions except each player's highest Attack minion.",
+  "type": "SPELL",
+  "heroClass": "PALADIN",
+  "rarity": "EPIC",
+  "set": "THE_GRAND_TOURNAMENT",
+  "baseManaCost": 6,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

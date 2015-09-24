@@ -157,7 +157,7 @@ public class GameLogic implements Cloneable {
 		entity.setAttribute(attr);
 		log("Applying attr {} to {}", attr, entity);
 	}
-	
+
 	public int applyHeroPowerDamage(Player player, int baseValue) {
 		int spellpower = getTotalAttributeValue(player, Attribute.HERO_POWER_DAMAGE);
 		return baseValue + spellpower;
@@ -340,12 +340,12 @@ public class GameLogic implements Cloneable {
 		Card sourceCard = source != null && source.getEntityType() == EntityType.CARD ? (Card) source : null;
 		if (!ignoreSpellPower && sourceCard != null) {
 			if (sourceCard.getCardType() == CardType.SPELL) {
-				damage = applySpellpower(player, source, baseDamage);	
+				damage = applySpellpower(player, source, baseDamage);
 			} else if (sourceCard.getCardType() == CardType.HERO_POWER) {
-				damage = applyHeroPowerDamage(player, damage);	
+				damage = applyHeroPowerDamage(player, damage);
 			}
 		}
-		
+
 		if (!ignoreSpellPower && sourceCard != null
 				&& (sourceCard.getCardType() == CardType.SPELL || sourceCard.getCardType() == CardType.HERO_POWER)) {
 			damage = applyAmplify(player, damage);
@@ -501,11 +501,11 @@ public class GameLogic implements Cloneable {
 			player.getStatistics().fatigueDamage(fatigue);
 			return null;
 		}
-		
+
 		Card card = deck.getRandom();
 		return drawCard(playerId, card);
 	}
-	
+
 	public Card drawCard(int playerId, Card card) {
 		Player player = context.getPlayer(playerId);
 		player.getStatistics().cardDrawn();
@@ -554,7 +554,7 @@ public class GameLogic implements Cloneable {
 			log("{} discards currently equipped weapon {}", player.getHero(), currentWeapon);
 			destroy(currentWeapon);
 		}
-		if (weapon.getBattlecry() != null) {
+		if (weapon.getBattlecry() != null && !weapon.getBattlecry().isResolvedLate()) {
 			resolveBattlecry(playerId, weapon);
 		}
 		context.getEnvironment().remove(Environment.SUMMONED_WEAPON);
@@ -563,6 +563,9 @@ public class GameLogic implements Cloneable {
 		player.getHero().setWeapon(weapon);
 		weapon.onEquip(context, player);
 		weapon.setActive(context.getActivePlayerId() == playerId);
+		if (weapon.getBattlecry() != null && weapon.getBattlecry().isResolvedLate()) {
+			resolveBattlecry(playerId, weapon);
+		}
 		if (weapon.hasSpellTrigger()) {
 			SpellTrigger spellTrigger = weapon.getSpellTrigger();
 			addGameEventListener(player, spellTrigger, weapon);
@@ -893,7 +896,7 @@ public class GameLogic implements Cloneable {
 				log("Jousting {} - {} vs. {}", won ? "WON" : "LOST", ownCard, opponentCard);
 			}
 		}
-		JoustEvent joustEvent = new JoustEvent(context, player.getId(), won, ownCard, opponentCard); 
+		JoustEvent joustEvent = new JoustEvent(context, player.getId(), won, ownCard, opponentCard);
 		context.fireGameEvent(joustEvent);
 		return joustEvent;
 	}
@@ -1092,7 +1095,7 @@ public class GameLogic implements Cloneable {
 		player.getSecrets().add(secret.getSource().getCardId());
 		context.fireGameEvent(new SecretPlayedEvent(context, (SecretCard) secret.getSource()));
 	}
-	
+
 	public void processTargetModifiers(Player player, GameAction action) {
 		HeroPower heroPower = player.getHero().getHeroPower();
 		if (heroPower.getClassRestriction() != HeroClass.HUNTER) {

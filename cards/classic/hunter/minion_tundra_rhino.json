@@ -4,7 +4,10 @@
 	"aura": {
 		"class": "AttributeAura",
 		"attribute": "CHARGE",
-		"raceRestriction": "BEAST",
+		"filter" : {
+			"class" : "RaceFilter",
+			"race" : "BEAST"
+		},
 		"target": "FRIENDLY_MINIONS"
 	},
 	"race": "BEAST",

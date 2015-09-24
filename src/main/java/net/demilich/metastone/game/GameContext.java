@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
 
-import javax.print.attribute.HashAttributeSet;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,10 +15,8 @@ import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.events.GameEvent;
-import net.demilich.metastone.game.heroes.powers.HeroPower;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.logic.MatchResult;
 import net.demilich.metastone.game.logic.TargetLogic;

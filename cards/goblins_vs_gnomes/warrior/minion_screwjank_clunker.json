@@ -17,7 +17,7 @@
 	},
 	"id": "minion_screwjank_clunker",
 	"name": "Screwjank Clunker",
-	"description": "Enrage: +1 Attack. Battlecry: Give a friendly Mech +2/+2.",
+	"description": "Battlecry: Give a friendly Mech +2/+2.",
 	"type": "MINION",
 	"heroClass": "WARRIOR",
 	"rarity": "RARE",

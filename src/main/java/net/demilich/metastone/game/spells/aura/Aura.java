@@ -5,15 +5,14 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
-import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
-import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.aura.AuraDesc;
+import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.spells.trigger.BoardChangedTrigger;
 import net.demilich.metastone.game.spells.trigger.GameEventTrigger;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
@@ -24,12 +23,13 @@ public class Aura extends SpellTrigger {
 	private EntityReference targets;
 	private SpellDesc applyAuraEffect;
 	private SpellDesc removeAuraEffect;
-	private Race raceRestriction;
+	private EntityFilter entityFilter;
 
 	private HashSet<Integer> affectedEntities = new HashSet<>();
 
 	public Aura(AuraDesc desc) {
 		this(desc.getApplyEffect(), desc.getRemoveEffect(), desc.getTarget());
+		setEntityFilter(desc.getFilter());
 	}
 
 	public Aura(GameEventTrigger secondaryTrigger, SpellDesc applyAuraEffect, SpellDesc removeAuraEffect, EntityReference targetSelection) {
@@ -43,7 +43,7 @@ public class Aura extends SpellTrigger {
 		this(null, applyAuraEffect, removeAuraEffect, targetSelection);
 	}
 
-	protected boolean affects(GameContext context, Entity target, List<Entity> resolvedTargets) {
+	protected boolean affects(GameContext context, Player player, Entity target, List<Entity> resolvedTargets) {
 		if (target.getReference().equals(getHostReference())) {
 			return false;
 		}
@@ -52,9 +52,11 @@ public class Aura extends SpellTrigger {
 		if (targetActor.isDestroyed()) {
 			return false;
 		}
-		if (getRaceRestriction() != null && target.getAttribute(Attribute.RACE) != getRaceRestriction()) {
+		
+		if (getEntityFilter() != null && !getEntityFilter().matches(context, player, target)) {
 			return false;
 		}
+		
 		return resolvedTargets.contains(target);
 	}
 
@@ -66,10 +68,6 @@ public class Aura extends SpellTrigger {
 		clone.removeAuraEffect = this.removeAuraEffect.clone();
 		clone.affectedEntities = new HashSet<>(this.affectedEntities);
 		return clone;
-	}
-
-	public Race getRaceRestriction() {
-		return raceRestriction;
 	}
 
 	@Override
@@ -97,11 +95,11 @@ public class Aura extends SpellTrigger {
 		}
 
 		for (Entity target : relevantTargets) {
-			if (affects(context, target, resolvedTargets) && !affectedEntities.contains(target.getId())) {
+			if (affects(context, owner, target, resolvedTargets) && !affectedEntities.contains(target.getId())) {
 				context.getLogic().castSpell(getOwner(), applyAuraEffect, getHostReference(), target.getReference(), true);
 				affectedEntities.add(target.getId());
 				// target is not affected anymore, remove effect
-			} else if (!affects(context, target, resolvedTargets) && affectedEntities.contains(target.getId())) {
+			} else if (!affects(context, owner, target, resolvedTargets) && affectedEntities.contains(target.getId())) {
 				context.getLogic().castSpell(getOwner(), removeAuraEffect, getHostReference(), target.getReference(), true);
 				affectedEntities.remove(target.getId());
 			}
@@ -118,8 +116,12 @@ public class Aura extends SpellTrigger {
 		affectedEntities.clear();
 	}
 
-	public void setRaceRestriction(Race raceRestriction) {
-		this.raceRestriction = raceRestriction;
+	public EntityFilter getEntityFilter() {
+		return entityFilter;
+	}
+
+	public void setEntityFilter(EntityFilter entityFilter) {
+		this.entityFilter = entityFilter;
 	}
 
 }

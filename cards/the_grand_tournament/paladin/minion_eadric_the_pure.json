@@ -1,0 +1,25 @@
+{
+  "baseAttack": 3,
+  "baseHp": 7,
+  "battlecry": {
+    "spell": {
+      "class": "SetAttackSpell",
+	  "value" : 1,
+	  "target" : "ENEMY_MINIONS"
+    },
+    "resolvedLate": false
+  },
+  "id": "minion_eadric_the_pure",
+  "name": "Eadric the Pure",
+  "description": "Battlecry: Change all enemy minions' Attack to 1.",
+  "type": "MINION",
+  "heroClass": "PALADIN",
+  "rarity": "LEGENDARY",
+  "set": "THE_GRAND_TOURNAMENT",
+  "baseManaCost": 7,
+  "collectible": true,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "fileFormatVersion": 1
+}

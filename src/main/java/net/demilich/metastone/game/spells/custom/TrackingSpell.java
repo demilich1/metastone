@@ -38,6 +38,7 @@ public class TrackingSpell extends Spell {
 		for (int i = 0; i < Math.min(3, player.getDeck().getCount()); i++) {
 			drawnCards.add(player.getDeck().removeFirst());
 		}
+		
 		context.getLogic().receiveCard(player.getId(), drawnCards.remove(0));
 	}
 

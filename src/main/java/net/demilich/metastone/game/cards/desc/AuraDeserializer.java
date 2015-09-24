@@ -31,7 +31,7 @@ public class AuraDeserializer implements JsonDeserializer<AuraDesc> {
 			throw new JsonParseException("Aura parser encountered an invalid class: " + auraClassName);
 		}
 		Map<AuraArg, Object> arguments = AuraDesc.build(auraClass);
-		parseArgument(AuraArg.RACE_RESTRICTION, jsonData, arguments, ParseValueType.RACE);
+		parseArgument(AuraArg.FILTER, jsonData, arguments, ParseValueType.ENTITY_FILTER);
 		parseArgument(AuraArg.TARGET, jsonData, arguments, ParseValueType.TARGET_REFERENCE);
 		parseArgument(AuraArg.ATTRIBUTE, jsonData, arguments, ParseValueType.ATTRIBUTE);
 		parseArgument(AuraArg.APPLY_EFFECT, jsonData, arguments, ParseValueType.SPELL);

@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
@@ -25,8 +26,8 @@ public class EnrageAura extends Aura {
 	}
 
 	@Override
-	protected boolean affects(GameContext context, Entity target, List<Entity> resolvedTargets) {
-		return active && super.affects(context, target, resolvedTargets);
+	protected boolean affects(GameContext context, Player player, Entity target, List<Entity> resolvedTargets) {
+		return active && super.affects(context, player, target, resolvedTargets);
 	}
 
 	@Override

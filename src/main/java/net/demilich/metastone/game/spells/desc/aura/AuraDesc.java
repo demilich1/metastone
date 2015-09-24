@@ -6,9 +6,9 @@ import java.util.Map;
 
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.cards.desc.Desc;
-import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.aura.Aura;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class AuraDesc extends Desc<AuraArg> {
@@ -47,8 +47,8 @@ public class AuraDesc extends Desc<AuraArg> {
 		return (Class<? extends Aura>) get(AuraArg.CLASS);
 	}
 
-	public Race getRaceRestriction() {
-		return (Race) get(AuraArg.RACE_RESTRICTION);
+	public EntityFilter getFilter() {
+		return (EntityFilter) get(AuraArg.FILTER);
 	}
 
 	public SpellDesc getRemoveEffect() {

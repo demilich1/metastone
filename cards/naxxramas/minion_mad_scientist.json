@@ -2,8 +2,7 @@
 	"baseAttack": 2,
 	"baseHp": 2,
 	"deathrattle": {
-		"class": "custom.PlayRandomSecretSpell",
-		"target": "NONE"
+		"class": "PutRandomSecretIntoPlaySpell"
 	},
 	"id": "minion_mad_scientist",
 	"name": "Mad Scientist",

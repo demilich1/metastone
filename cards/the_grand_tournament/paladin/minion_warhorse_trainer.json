@@ -1,0 +1,23 @@
+{
+  "baseAttack": 2,
+  "baseHp": 4,
+  "aura": {
+		"class": "BuffAura",
+		"attackBonus": 1,
+		"filter" : {
+			"class" : "SpecificCardFilter",
+			"cardId" : "token_silver_hand_recruit"
+		},
+		"target": "FRIENDLY_MINIONS"
+	},
+  "id": "minion_warhorse_trainer",
+  "name": "Warhorse Trainer",
+  "description": "Your Silver Hand Recruits have +1 Attack.",
+  "type": "MINION",
+  "heroClass": "PALADIN",
+  "rarity": "COMMON",
+  "set": "THE_GRAND_TOURNAMENT",
+  "baseManaCost": 3,
+  "collectible": true,
+  "fileFormatVersion": 1
+}

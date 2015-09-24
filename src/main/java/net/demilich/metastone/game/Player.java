@@ -1,6 +1,7 @@
 package net.demilich.metastone.game;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import net.demilich.metastone.game.behaviour.IBehaviour;
@@ -25,7 +26,7 @@ public class Player extends CustomCloneable {
 	private final CardCollection hand = new CardCollection();
 	private final List<Entity> graveyard = new ArrayList<>();
 	private final List<Minion> minions = new ArrayList<>();
-	private final List<String> secrets = new ArrayList<>();
+	private final HashSet<String> secrets = new HashSet<>();
 
 	private final GameStatistics statistics = new GameStatistics();
 
@@ -129,7 +130,7 @@ public class Player extends CustomCloneable {
 		return "'" + name + "' (" + getHero().getName() + ")";
 	}
 
-	public List<String> getSecrets() {
+	public HashSet<String> getSecrets() {
 		return secrets;
 	}
 

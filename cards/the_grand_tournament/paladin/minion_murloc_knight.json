@@ -1,0 +1,27 @@
+{
+  "baseAttack": 3,
+  "baseHp": 4,
+  "trigger": {
+		"eventTrigger": {
+			"class": "InspireTrigger"
+		},
+		"spell": {
+			"class": "SummonRandomMinionFilteredSpell",
+			"cardFilter": {
+				"class": "CardFilter",
+				"race": "MURLOC"
+			}
+		}
+	},
+  "race": "MURLOC",
+  "id": "minion_murloc_knight",
+  "name": "Murloc Knight",
+  "description": "Inspire: Summon a random Murloc.",
+  "type": "MINION",
+  "heroClass": "PALADIN",
+  "rarity": "COMMON",
+  "set": "THE_GRAND_TOURNAMENT",
+  "baseManaCost": 4,
+  "collectible": true,
+  "fileFormatVersion": 1
+}
