@@ -34,7 +34,7 @@ public class CardCatalogue {
 
 	public static Card getCardByName(String name) {
 		for (Card card : cards) {
-			if (card.getName().equals(name)) {
+			if (card.isCollectible() && card.getName().equals(name)) {
 				return card.clone();
 			}
 		}
