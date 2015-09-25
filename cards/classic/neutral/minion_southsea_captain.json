@@ -5,9 +5,9 @@
 		"class": "BuffAura",
 		"attackBonus": 1,
 		"hpBonus": 1,
-		"filter" : {
-			"class" : "RaceFilter",
-			"race" : "PIRATE"
+		"filter": {
+			"class": "RaceFilter",
+			"race": "PIRATE"
 		},
 		"target": "FRIENDLY_MINIONS"
 	},

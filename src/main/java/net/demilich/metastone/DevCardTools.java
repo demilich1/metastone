@@ -167,8 +167,8 @@ public class DevCardTools {
 		int i = 0;
 		for (File file : files) {
 			try {
-				prettyPrintFile(file);
 				System.out.println("Processing " + file.getName() + " (" + ++i + " of " + files.size() + " files)");
+				prettyPrintFile(file);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

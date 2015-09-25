@@ -1,5 +1,5 @@
 {
-	"baseAttack": 3,
+	"baseAttack": 5,
 	"baseHp": 4,
 	"trigger": {
 		"eventTrigger": {
@@ -9,19 +9,18 @@
 			"class": "SummonRandomMinionFilteredSpell",
 			"cardFilter": {
 				"class": "CardFilter",
-				"race": "MURLOC"
+				"rarity": "LEGENDARY"
 			}
 		}
 	},
-	"race": "MURLOC",
-	"id": "minion_murloc_knight",
-	"name": "Murloc Knight",
-	"description": "Inspire: Summon a random Murloc.",
+	"id": "minion_confessor_paletress",
+	"name": "Confessor Paletress",
+	"description": "Inspire: Summon a random Legendary minion.",
 	"type": "MINION",
-	"heroClass": "PALADIN",
-	"rarity": "COMMON",
+	"heroClass": "PRIEST",
+	"rarity": "LEGENDARY",
 	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 4,
+	"baseManaCost": 7,
 	"collectible": true,
 	"fileFormatVersion": 1
 }

@@ -4,9 +4,9 @@
 	"aura": {
 		"class": "BuffAura",
 		"attackBonus": 1,
-		"filter" : {
-			"class" : "RaceFilter",
-			"race" : "MURLOC"
+		"filter": {
+			"class": "RaceFilter",
+			"race": "MURLOC"
 		},
 		"target": "ALL_MINIONS"
 	},

@@ -1,24 +1,24 @@
 {
-  "baseAttack": 6,
-  "baseHp": 6,
-  "battlecry": {
-    "spell": {
-      "class": "PutRandomSecretIntoPlaySpell",
-	  "howMany" : 99
-    },
-    "resolvedLate": false
-  },
-  "id": "minion_mysterious_challenger",
-  "name": "Mysterious Challenger",
-  "description": "Battlecry: Put one of each Secret from your deck into the battlefield.",
-  "type": "MINION",
-  "heroClass": "PALADIN",
-  "rarity": "EPIC",
-  "set": "THE_GRAND_TOURNAMENT",
-  "baseManaCost": 6,
-  "collectible": true,
-  "attributes": {
-    "BATTLECRY": true
-  },
-  "fileFormatVersion": 1
+	"baseAttack": 6,
+	"baseHp": 6,
+	"battlecry": {
+		"spell": {
+			"class": "PutRandomSecretIntoPlaySpell",
+			"howMany": 99
+		},
+		"resolvedLate": false
+	},
+	"id": "minion_mysterious_challenger",
+	"name": "Mysterious Challenger",
+	"description": "Battlecry: Put one of each Secret from your deck into the battlefield.",
+	"type": "MINION",
+	"heroClass": "PALADIN",
+	"rarity": "EPIC",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 6,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"fileFormatVersion": 1
 }

@@ -1,0 +1,36 @@
+{
+	"baseAttack": 1,
+	"baseHp": 4,
+	"battlecry": {
+		"spell": {
+			"class": "MetaSpell",
+			"spell1": {
+				"class": "BuffSpell",
+				"attackBonus": 1
+			},
+			"spell2": {
+				"class": "AddAttributeSpell",
+				"attribute": "TAUNT"
+			},
+			"target": "SELF"
+		},
+		"condition": {
+			"class": "HoldsCardCondition",
+			"race": "DRAGON"
+		},
+		"resolvedLate": false
+	},
+	"id": "minion_wyrmrest_agent",
+	"name": "Wyrmrest Agent",
+	"description": "Battlecry: If you're holding a Dragon, gain +1 Attack and Taunt.",
+	"type": "MINION",
+	"heroClass": "PRIEST",
+	"rarity": "RARE",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 2,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"fileFormatVersion": 1
+}

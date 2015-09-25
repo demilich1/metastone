@@ -2,7 +2,7 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "DestroyAllExceptOneSpell",
-		"target" : "ALL_MINIONS"
+		"target": "ALL_MINIONS"
 	},
 	"id": "spell_brawl",
 	"name": "Brawl",

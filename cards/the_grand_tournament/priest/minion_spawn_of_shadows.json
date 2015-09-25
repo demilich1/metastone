@@ -1,0 +1,32 @@
+{
+	"baseAttack": 5,
+	"baseHp": 4,
+	"id": "minion_spawn_of_shadows",
+	"trigger": {
+		"eventTrigger": {
+			"class": "InspireTrigger"
+		},
+		"spell": {
+			"class": "MetaSpell",
+			"spell1": {
+				"class": "DamageSpell",
+				"value": 4,
+				"target": "ENEMY_HERO"
+			},
+			"spell2": {
+				"class": "DamageSpell",
+				"value": 4,
+				"target": "FRIENDLY_HERO"
+			}
+		}
+	},
+	"name": "Spawn of Shadows",
+	"description": "Inspire: Deal 4 damage to each hero.",
+	"type": "MINION",
+	"heroClass": "PRIEST",
+	"rarity": "RARE",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 4,
+	"collectible": true,
+	"fileFormatVersion": 1
+}

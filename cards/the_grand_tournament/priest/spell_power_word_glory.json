@@ -1,0 +1,26 @@
+{
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "AddSpellTriggerSpell",
+		"trigger": {
+			"eventTrigger": {
+				"class": "HostAttacksTrigger"
+			},
+			"spell": {
+				"class": "HealSpell",
+				"value": 4,
+				"target": "FRIENDLY_HERO"
+			}
+		}
+	},
+	"id": "spell_power_word_glory",
+	"name": "Power Word: Glory",
+	"description": "Choose a minion. Whenever it attacks, restore 4 Health to your hero.",
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "COMMON",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 1,
+	"collectible": true,
+	"fileFormatVersion": 1
+}

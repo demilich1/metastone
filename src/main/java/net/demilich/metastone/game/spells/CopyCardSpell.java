@@ -1,7 +1,5 @@
 package net.demilich.metastone.game.spells;
 
-import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,6 +9,7 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
+import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.CardLocation;
@@ -19,17 +18,16 @@ public class CopyCardSpell extends Spell {
 
 	private static Logger logger = LoggerFactory.getLogger(CopyCardSpell.class);
 
-	public static SpellDesc create(CardLocation cardLocation, int numberOfCardsToCopy) {
-		Map<SpellArg, Object> arguments = SpellDesc.build(CopyCardSpell.class);
-		arguments.put(SpellArg.CARD_LOCATION, cardLocation);
-		arguments.put(SpellArg.VALUE, numberOfCardsToCopy);
-		return new SpellDesc(arguments);
-	}
-
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		if (target != null && target.getEntityType() == EntityType.CARD) {
-			Card targetCard = (Card) target;
+		if (target != null) {
+			Card targetCard = null;
+			if (target.getEntityType() == EntityType.CARD) {
+				targetCard = (Card) target;
+			} else if (target.getEntityType() == EntityType.MINION) {
+				Minion minion = (Minion) target;
+				targetCard = minion.getSourceCard();
+			}
 			context.getLogic().receiveCard(player.getId(), targetCard.getCopy());
 			return;
 		}

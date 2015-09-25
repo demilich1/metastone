@@ -1,0 +1,17 @@
+{
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "SwapAttackAndHpSpell",
+		"target": "ALL_MINIONS"
+	},
+	"id": "spell_confuse",
+	"name": "Confuse",
+	"description": "Swap the Attack and Health of all minions.",
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "EPIC",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 2,
+	"collectible": true,
+	"fileFormatVersion": 1
+}

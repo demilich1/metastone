@@ -4,9 +4,9 @@
 	"aura": {
 		"class": "BuffAura",
 		"attackBonus": 1,
-		"filter" : {
-			"class" : "RaceFilter",
-			"race" : "BEAST"
+		"filter": {
+			"class": "RaceFilter",
+			"race": "BEAST"
 		},
 		"target": "FRIENDLY_MINIONS"
 	},
