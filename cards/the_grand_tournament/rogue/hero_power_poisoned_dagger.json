@@ -7,8 +7,16 @@
 	"heroClass": "ROGUE",
 	"rarity": "FREE",
 	"spell": {
-		"class": "EquipWeaponSpell",
-		"card": "weapon_wicked_knife"
+		"class": "ConditionalSpell",
+		"condition": {
+			"class": "HasWeaponCondition",
+			"cardId": "weapon_poisoned_blade",
+			"invert": "true"
+		},
+		"spell": {
+			"class": "EquipWeaponSpell",
+			"card": "weapon_poisoned_dagger"
+		}
 	},
 	"baseManaCost": 2,
 	"collectible": false,

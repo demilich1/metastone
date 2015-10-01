@@ -3,7 +3,7 @@ apply plugin: 'eclipse'
 apply from: 'javafx.plugin'
 
 sourceCompatibility = 1.8
-version = '0.9.5'
+version = '0.9.6'
 mainClassName = "net.demilich.metastone.MetaStone"
 
 jar {

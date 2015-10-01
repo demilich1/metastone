@@ -1,0 +1,24 @@
+{
+	"baseAttack": 2,
+	"baseHp": 1,
+	"trigger": {
+		"eventTrigger": {
+			"class": "WeaponEquippedTrigger"
+		},
+		"spell": {
+			"class": "BuffWeaponSpell",
+			"attackBonus": 1
+		}
+	},
+	"race": "PIRATE",
+	"id": "minion_buccaneer",
+	"name": "Buccaneer",
+	"description": "Whenever you equip a weapon, give it +1 Attack.",
+	"type": "MINION",
+	"heroClass": "ROGUE",
+	"rarity": "COMMON",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 1,
+	"collectible": true,
+	"fileFormatVersion": 1
+}

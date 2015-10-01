@@ -1,0 +1,25 @@
+{
+	"baseAttack": 3,
+	"baseHp": 2,
+	"battlecry": {
+		"spell": {
+			"class": "DamageSpell",
+			"value": 1
+		},
+		"condition": {
+			"class": "ComboCondition"
+		},
+		"targetSelection": "ANY",
+		"resolvedLate": false
+	},
+	"id": "minion_undercity_valiant",
+	"name": "Undercity Valiant",
+	"description": "Combo: Deal 1 damage.",
+	"type": "MINION",
+	"heroClass": "ROGUE",
+	"rarity": "COMMON",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 2,
+	"collectible": true,
+	"fileFormatVersion": 1
+}

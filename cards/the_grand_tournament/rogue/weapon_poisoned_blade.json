@@ -1,0 +1,26 @@
+{
+	"name": "Poisoned Blade",
+	"description": "Your Hero Power gives this weapon +1 Attack instead of replacing it.",
+	"collectible": true,
+	"id": "weapon_poisoned_blade",
+	"type": "WEAPON",
+	"rarity": "EPIC",
+	"heroClass": "ROGUE",
+	"baseManaCost": 4,
+	"damage": 1,
+	"durability": 3,
+	"trigger": {
+		"eventTrigger": {
+			"class": "InspireTrigger"
+		},
+		"spell": {
+			"class": "BuffWeaponSpell",
+			"attackBonus": 1
+		}
+	},
+	"attributes": {
+		"PERSISTENT_WEAPON": true
+	},
+	"set": "THE_GRAND_TOURNAMENT",
+	"fileFormatVersion": 1
+}

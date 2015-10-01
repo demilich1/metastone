@@ -1,0 +1,24 @@
+{
+	"baseAttack": 2,
+	"baseHp": 2,
+	"trigger": {
+		"eventTrigger": {
+			"class": "HostAttacksTrigger",
+			"targetEntityType": "HERO"
+		},
+		"spell": {
+			"class": "ReceiveCardSpell",
+			"card": "spell_the_coin"
+		}
+	},
+	"id": "minion_cutpurse",
+	"name": "Cutpurse",
+	"description": "Whenever this minion attacks a hero, add the Coin to your hand.",
+	"type": "MINION",
+	"heroClass": "ROGUE",
+	"rarity": "RARE",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 2,
+	"collectible": true,
+	"fileFormatVersion": 1
+}

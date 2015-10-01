@@ -1,0 +1,36 @@
+{
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "NullSpell"
+	},
+	"passiveTrigger": {
+		"eventTrigger": {
+			"class": "ThisCardDrawnTrigger"
+		},
+		"spell": {
+			"class": "MetaSpell",
+			"spell1": {
+				"class": "SummonSpell",
+				"targetPlayer": "OPPONENT",
+				"card": "token_nerubian"
+			},
+			"spell2": {
+				"class": "RemoveCardSpell",
+				"target": "EVENT_TARGET"
+			},
+			"spell3": {
+				"class": "DrawCardSpell"
+			}
+		}
+	},
+	"id": "spell_ambush",
+	"name": "Ambush!",
+	"description": "When you draw this, summon a 4/4 Nerubian for your opponent. Draw a card.",
+	"type": "SPELL",
+	"heroClass": "ROGUE",
+	"rarity": "FREE",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 0,
+	"collectible": false,
+	"fileFormatVersion": 1
+}

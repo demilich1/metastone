@@ -1,0 +1,21 @@
+{
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "ReceiveRandomCollectibleCardSpell",
+		"howMany": 2,
+		"cardFilter": {
+			"class": "CardFilter",
+			"heroClass": "OPPONENT"
+		}
+	},
+	"id": "spell_burgle",
+	"name": "Burgle",
+	"description": "Add 2 random class cards to your hand (from your opponent's class).",
+	"type": "SPELL",
+	"heroClass": "ROGUE",
+	"rarity": "RARE",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 3,
+	"collectible": true,
+	"fileFormatVersion": 1
+}
