@@ -200,7 +200,7 @@ public class TargetLogic {
 	}
 
 	public List<Entity> resolveTargetKey(GameContext context, Player player, Entity source, EntityReference targetKey) {
-		if (targetKey == null) {
+		if (targetKey == null || targetKey == EntityReference.NONE) {
 			return null;
 		}
 		if (targetKey == EntityReference.ALL_CHARACTERS) {
@@ -258,8 +258,10 @@ public class TargetLogic {
 			} else {
 				return new ArrayList<>();
 			}
-		} else if (targetKey == EntityReference.NONE) {
-			return null;
+		} else if (targetKey == EntityReference.FRIENDLY_HAND) {
+			return new ArrayList<>(player.getHand().toList());
+		} else if (targetKey == EntityReference.ENEMY_HAND) {
+			return new ArrayList<>(context.getOpponent(player).getHand().toList());
 		}
 
 		return singleTargetAsList(findEntity(context, targetKey));

@@ -66,6 +66,10 @@ public abstract class Entity extends CustomCloneable {
 		}
 		setAttribute(attribute, getAttributeValue(attribute) + value);
 	}
+	
+	public void modifyHpBonus(int value) {
+		modifyAttribute(Attribute.HP_BONUS, value);
+	}
 
 	public void removeAttribute(Attribute attribute) {
 		attributes.remove(attribute);

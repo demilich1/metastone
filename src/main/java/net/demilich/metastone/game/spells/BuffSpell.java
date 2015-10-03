@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -39,13 +38,11 @@ public class BuffSpell extends Spell {
 
 		logger.debug("{} gains ({})", target, attackBonus + "/" + hpBonus);
 
-		Actor targetActor = (Actor) target;
-
 		if (attackBonus != 0) {
-			targetActor.modifyAttribute(Attribute.ATTACK_BONUS, +attackBonus);
+			target.modifyAttribute(Attribute.ATTACK_BONUS, +attackBonus);
 		}
 		if (hpBonus != 0) {
-			targetActor.modifyHpBonus(+hpBonus);
+			target.modifyHpBonus(+hpBonus);
 		}
 	}
 

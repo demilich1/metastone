@@ -172,6 +172,10 @@ public class ParseUtils {
 			return EntityReference.SELF;
 		case "attacker":
 			return EntityReference.ATTACKER;
+		case "friendly_hand":
+			return EntityReference.FRIENDLY_HAND;
+		case "enemy_hand":
+			return EntityReference.ENEMY_HAND;
 		default:
 			return null;
 		}

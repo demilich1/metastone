@@ -1,0 +1,32 @@
+{
+	"baseAttack": 4,
+	"baseHp": 4,
+	"battlecry": {
+		"spell": {
+			"class": "BuffSpell",
+			"valueProvider": {
+				"class": "EntityCounter",
+				"target": "FRIENDLY_MINIONS",
+				"filter": {
+					"class": "RaceFilter",
+					"race": "TOTEM"
+				}
+			},
+			"target": "SELF"
+		},
+		"resolvedLate": false
+	},
+	"id": "minion_draenei_totemcarver",
+	"name": "Draenei Totemcarver",
+	"description": "Battlecry: Gain +1/+1 for each friendly Totem.",
+	"type": "MINION",
+	"heroClass": "SHAMAN",
+	"rarity": "RARE",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 4,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"fileFormatVersion": 1
+}

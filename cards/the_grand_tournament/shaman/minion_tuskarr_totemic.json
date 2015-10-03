@@ -1,0 +1,30 @@
+{
+	"baseAttack": 3,
+	"baseHp": 2,
+	"battlecry": {
+		"spell": {
+			"class": "SummonRandomMinionFilteredSpell",
+			"boardPositionRelative": "RIGHT",
+			"includeUncollectible": true,
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "MINION",
+				"race": "TOTEM"
+			}
+		},
+		"resolvedLate": true
+	},
+	"id": "minion_tuskarr_totemic",
+	"name": "Tuskarr Totemic",
+	"description": "Battlecry: Summon ANY random Totem.",
+	"type": "MINION",
+	"heroClass": "SHAMAN",
+	"rarity": "COMMON",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 3,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"fileFormatVersion": 1
+}

@@ -1,6 +1,7 @@
 {
 	"name": "Windfury Harpy",
-	"id": "minion_WINDFURY_harpy",
+	"description": "Windfury",
+	"id": "minion_windfury_harpy",
 	"type": "MINION",
 	"rarity": "COMMON",
 	"heroClass": "ANY",

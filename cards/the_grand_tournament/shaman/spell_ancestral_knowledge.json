@@ -1,0 +1,20 @@
+{
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "DrawCardSpell",
+		"value": 2
+	},
+	"id": "spell_ancestral_knowledge",
+	"name": "Ancestral Knowledge",
+	"description": "Draw 2 cards. Overload: (2)",
+	"type": "SPELL",
+	"heroClass": "SHAMAN",
+	"rarity": "COMMON",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 2,
+	"collectible": true,
+	"attributes": {
+		"OVERLOAD": 2
+	},
+	"fileFormatVersion": 1
+}

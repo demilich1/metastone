@@ -18,15 +18,17 @@ public class EntityReference {
 	public static final EntityReference ALL_OTHER_MINIONS = new EntityReference(-13);
 	public static final EntityReference FRIENDLY_WEAPON = new EntityReference(-14);
 	public static final EntityReference ENEMY_WEAPON = new EntityReference(-15);
+	public static final EntityReference FRIENDLY_HAND = new EntityReference(-16);
+	public static final EntityReference ENEMY_HAND = new EntityReference(-17);
 	
 
-	public static final EntityReference TARGET = new EntityReference(-17);
+	public static final EntityReference TARGET = new EntityReference(-30);
 
-	public static final EntityReference EVENT_TARGET = new EntityReference(-20);
-	public static final EntityReference SELF = new EntityReference(-21);
-	public static final EntityReference KILLED_MINION = new EntityReference(-22);
-	public static final EntityReference ATTACKER = new EntityReference(-23);
-	public static final EntityReference PENDING_CARD = new EntityReference(-24);
+	public static final EntityReference EVENT_TARGET = new EntityReference(-40);
+	public static final EntityReference SELF = new EntityReference(-41);
+	public static final EntityReference KILLED_MINION = new EntityReference(-42);
+	public static final EntityReference ATTACKER = new EntityReference(-43);
+	public static final EntityReference PENDING_CARD = new EntityReference(-44);
 
 	public static EntityReference pointTo(Entity entity) {
 		if (entity == null) {

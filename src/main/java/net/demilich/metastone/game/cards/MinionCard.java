@@ -62,11 +62,16 @@ public class MinionCard extends Card {
 		if (desc.cardCostModifier != null) {
 			minion.setCardCostModifier(desc.cardCostModifier.create());
 		}
+		minion.setHp(minion.getMaxHp());
 		return minion;
 	}
 
 	public int getAttack() {
 		return getBaseAttack() + getAttributeValue(Attribute.ATTACK_BONUS);
+	}
+
+	public int getHp() {
+		return getBaseHp() + getAttributeValue(Attribute.HP_BONUS);
 	}
 
 	public int getBaseAttack() {

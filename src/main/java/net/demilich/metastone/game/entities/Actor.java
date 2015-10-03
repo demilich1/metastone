@@ -122,6 +122,7 @@ public abstract class Actor extends Entity {
 		modifyAttribute(Attribute.HP, value);
 	}
 
+	@Override
 	public void modifyHpBonus(int value) {
 		modifyAttribute(Attribute.HP_BONUS, value);
 		modifyAttribute(Attribute.HP, value);

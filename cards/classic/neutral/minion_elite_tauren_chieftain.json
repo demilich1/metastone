@@ -8,7 +8,8 @@
 				"spell_i_am_murloc",
 				"spell_power_of_the_horde",
 				"spell_rogues_do_it"
-			]
+			],
+			"targetPlayer": "BOTH"
 		},
 		"resolvedLate": false
 	},
