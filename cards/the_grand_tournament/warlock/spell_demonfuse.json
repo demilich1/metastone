@@ -1,0 +1,30 @@
+{
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "MetaSpell",
+		"spell1": {
+			"class": "BuffSpell",
+			"attackBonus": 3,
+			"hpBonus": 3
+		},
+		"spell2": {
+			"class": "ModifyMaxManaSpell",
+			"value": 1,
+			"targetPlayer": "OPPONENT"
+		},
+		"filter": {
+			"class": "RaceFilter",
+			"race": "DEMON"
+		}
+	},
+	"id": "spell_demonfuse",
+	"name": "Demonfuse",
+	"description": "Give a Demon +3/+3. Give your opponent a Mana Crystal.",
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "COMMON",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 2,
+	"collectible": true,
+	"fileFormatVersion": 1
+}

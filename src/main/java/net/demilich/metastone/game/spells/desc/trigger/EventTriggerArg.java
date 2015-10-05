@@ -4,6 +4,7 @@ public enum EventTriggerArg {
 	CLASS,
 	TARGET_PLAYER,
 	CARD_TYPE,
+	SOURCE_TYPE,
 	WORKS_ON_HERO,
 	ENTITY_TYPE,
 	TARGET_ENTITY_TYPE,
@@ -14,4 +15,5 @@ public enum EventTriggerArg {
 	BREAKS_STEALTH,
 	REQUIRED_ATTRIBUTE,
 	CONDITION,
+	TARGET
 }

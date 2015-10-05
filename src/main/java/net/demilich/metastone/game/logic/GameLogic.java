@@ -40,6 +40,7 @@ import net.demilich.metastone.game.events.ArmorGainedEvent;
 import net.demilich.metastone.game.events.BoardChangedEvent;
 import net.demilich.metastone.game.events.CardPlayedEvent;
 import net.demilich.metastone.game.events.DamageEvent;
+import net.demilich.metastone.game.events.DiscardEvent;
 import net.demilich.metastone.game.events.DrawCardEvent;
 import net.demilich.metastone.game.events.EnrageChangedEvent;
 import net.demilich.metastone.game.events.FatalDamageEvent;
@@ -486,9 +487,10 @@ public class GameLogic implements Cloneable {
 	public void discardCard(Player player, Card card) {
 		logger.debug("{} discards {}", player.getName(), card);
 		removeCard(player.getId(), card);
+		context.fireGameEvent(new DiscardEvent(context, player.getId(), card));
 	}
 
-	public Card drawCard(int playerId) {
+	public Card drawCard(int playerId, Entity source) {
 		Player player = context.getPlayer(playerId);
 		CardCollection deck = player.getDeck();
 		if (deck.isEmpty()) {
@@ -503,15 +505,20 @@ public class GameLogic implements Cloneable {
 		}
 
 		Card card = deck.getRandom();
-		return drawCard(playerId, card);
+		return drawCard(playerId, card, source);
 	}
 
-	public Card drawCard(int playerId, Card card) {
+	public Card drawCard(int playerId, Card card, Entity source) {
 		Player player = context.getPlayer(playerId);
 		player.getStatistics().cardDrawn();
 		player.getDeck().remove(card);
 		receiveCard(playerId, card);
-		context.fireGameEvent(new DrawCardEvent(context, playerId, card));
+		CardType sourceType = null;
+		if (source instanceof Card) {
+			Card sourceCard = (Card) source;
+			sourceType = sourceCard.getCardType();
+		}
+		context.fireGameEvent(new DrawCardEvent(context, playerId, card, sourceType));
 		return card;
 	}
 
@@ -546,11 +553,11 @@ public class GameLogic implements Cloneable {
 
 	public void equipWeapon(int playerId, Weapon weapon) {
 		Player player = context.getPlayer(playerId);
-		
+
 		weapon.setId(idFactory.generateId());
 		context.getEnvironment().put(Environment.SUMMONED_WEAPON, weapon);
 		Weapon currentWeapon = player.getHero().getWeapon();
-		
+
 		if (currentWeapon != null) {
 			log("{} discards currently equipped weapon {}", player.getHero(), currentWeapon);
 			destroy(currentWeapon);
@@ -560,7 +567,7 @@ public class GameLogic implements Cloneable {
 		}
 		player.getStatistics().equipWeapon(weapon);
 		context.getEnvironment().remove(Environment.SUMMONED_WEAPON);
-		
+
 		log("{} equips weapon {}", player.getHero(), weapon);
 		player.getHero().setWeapon(weapon);
 		weapon.onEquip(context, player);
@@ -1360,7 +1367,7 @@ public class GameLogic implements Cloneable {
 		player.getHero().getHeroPower().setUsed(0);
 		player.getHero().activateWeapon(true);
 		refreshAttacksPerRound(player.getHero());
-		drawCard(playerId);
+		drawCard(playerId, null);
 		for (Entity minion : player.getMinions()) {
 			minion.removeAttribute(Attribute.SUMMONING_SICKNESS);
 			refreshAttacksPerRound(minion);

@@ -1,0 +1,29 @@
+{
+	"baseAttack": 4,
+	"baseHp": 3,
+	"trigger": {
+		"eventTrigger": {
+			"class": "SelfDamagedTrigger"
+		},
+		"spell": {
+			"class": "DamageSpell",
+			"valueProvider": {
+				"class": "AttributeValueProvider",
+				"target": "SELF",
+				"attribute": "LAST_HIT"
+			},
+			"target": "FRIENDLY_HERO"
+		}
+	},
+	"race": "DEMON",
+	"id": "minion_wrathguard",
+	"name": "Wrathguard",
+	"description": "Whenever this minion takes damage, also deal that amount to your hero.",
+	"type": "MINION",
+	"heroClass": "WARLOCK",
+	"rarity": "COMMON",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 2,
+	"collectible": true,
+	"fileFormatVersion": 1
+}

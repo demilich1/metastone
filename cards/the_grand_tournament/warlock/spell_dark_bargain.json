@@ -1,0 +1,45 @@
+{
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "MetaSpell",
+		"spell1": {
+			"class": "MetaSpell",
+			"spell1": {
+				"class": "DestroySpell",
+				"target": "ENEMY_MINIONS",
+				"randomTarget": true
+			},
+			"spell2": {
+				"class": "DestroySpell",
+				"target": "ENEMY_MINIONS",
+				"randomTarget": true,
+				"filter": {
+					"class": "AttributeFilter",
+					"attribute": "DESTROYED",
+					"operation": "HAS",
+					"invert": true
+				}
+			}
+		},
+		"spell2": {
+			"class": "DiscardSpell",
+			"value": 2
+		}
+	},
+	"condition": {
+		"class": "MinionCountCondition",
+		"targetPlayer": "OPPONENT",
+		"value": 1,
+		"operation": "GREATER"
+	},
+	"id": "spell_dark_bargain",
+	"name": "Dark Bargain",
+	"description": "Destroy 2 random enemy minions. Discard 2 random cards.",
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "EPIC",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 6,
+	"collectible": true,
+	"fileFormatVersion": 1
+}

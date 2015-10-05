@@ -1,0 +1,27 @@
+{
+	"baseAttack": 3,
+	"baseHp": 2,
+	"trigger": {
+		"eventTrigger": {
+			"class": "DiscardTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"attackBonus": 1,
+			"hpBonus": 1,
+			"target": "SELF"
+		}
+	},
+	"race": "DEMON",
+	"id": "minion_tiny_knight_of_evil",
+	"name": "Tiny Knight of Evil",
+	"description": "Whenever you discard a card, gain +1/+1.",
+	"type": "MINION",
+	"heroClass": "WARLOCK",
+	"rarity": "RARE",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 2,
+	"collectible": true,
+	"fileFormatVersion": 1
+}

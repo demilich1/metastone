@@ -25,5 +25,6 @@ public enum GameEventType {
 	ARMOR_GAINED,
 	ENRAGE_CHANGED,
 	FATAL_DAMAGE,
-	JOUST
+	JOUST,
+	DISCARD
 }

@@ -1,0 +1,19 @@
+{
+	"baseAttack": 1,
+	"baseHp": 1,
+	"race": "DEMON",
+	"deathrattle": {
+		"class": "SummonSpell",
+		"card": "minion_dreadsteed"
+	},
+	"id": "minion_dreadsteed",
+	"name": "Dreadsteed",
+	"description": "Deathrattle: Summon a Dreadsteed.",
+	"type": "MINION",
+	"heroClass": "WARLOCK",
+	"rarity": "EPIC",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 4,
+	"collectible": true,
+	"fileFormatVersion": 1
+}

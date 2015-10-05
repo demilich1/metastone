@@ -12,7 +12,7 @@ public class HolyWrathSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		Card drawnCard = context.getLogic().drawCard(player.getId());
+		Card drawnCard = context.getLogic().drawCard(player.getId(), source);
 		if (drawnCard == null) {
 			return;
 		}
