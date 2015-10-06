@@ -91,6 +91,7 @@ public abstract class Card extends Entity {
 	public Card getCopy() {
 		Card copy = clone();
 		copy.setId(IdFactory.UNASSIGNED);
+		copy.setLocation(CardLocation.PENDING);
 		return copy;
 	}
 

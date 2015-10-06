@@ -4,9 +4,9 @@
 	"collectible": true,
 	"id": "weapon_glaivezooka",
 	"type": "WEAPON",
-	"rarity": "RARE",
+	"rarity": "COMMON",
 	"heroClass": "HUNTER",
-	"baseManaCost": 3,
+	"baseManaCost": 2,
 	"damage": 2,
 	"durability": 2,
 	"attributes": {

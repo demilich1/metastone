@@ -4,7 +4,7 @@
 	"battlecry": {
 		"spell": {
 			"class": "DrawCardAndDoSomethingSpell",
-			"spell1": {
+			"spell": {
 				"class": "ConditionalSpell",
 				"condition": {
 					"class": "CardPropertyCondition",

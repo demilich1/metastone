@@ -15,13 +15,14 @@ public class AttributeFilter extends EntityFilter {
 
 	@Override
 	protected boolean test(GameContext context, Player player, Entity entity) {
-		int targetValue = desc.getInt(FilterArg.VALUE);
 		Attribute attribute = (Attribute) desc.get(FilterArg.ATTRIBUTE);
 		Operation operation = (Operation) desc.get(FilterArg.OPERATION);
 		if (operation == Operation.HAS) {
 			return entity.hasAttribute(attribute);
 		}
 
+		int targetValue = desc.getInt(FilterArg.VALUE);
+		
 		int actualValue = -1;
 		if (attribute == Attribute.ATTACK) {
 			actualValue = ((Actor) entity).getAttack();

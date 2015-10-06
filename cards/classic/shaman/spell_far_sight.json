@@ -6,7 +6,7 @@
 	"spell": {
 		"class": "DrawCardAndDoSomethingSpell",
 		"value": 1,
-		"spell1": {
+		"spell": {
 			"class": "ModifyAttributeSpell",
 			"attribute": "MANA_COST_MODIFIER",
 			"value": -3

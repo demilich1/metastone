@@ -1,0 +1,43 @@
+{
+	"baseAttack": 7,
+	"baseHp": 7,
+	"battlecry": {
+		"spell": {
+			"class": "DrawCardAndDoSomethingSpell",
+			"value" : 3,
+			"spell": {
+				"class": "ConditionalSpell",
+				"condition": {
+					"class": "AndCondition",
+					"condition1": {
+						"class": "CardPropertyCondition",
+						"cardType": "MINION"
+					},
+					"condition2": {
+						"class": "MinionCountCondition",
+						"targetPlayer": "SELF",
+						"value": 7,
+						"operation": "LESS"
+					}
+				},
+				"spell": {
+					"class": "PutMinionOnBoardSpell"
+				}
+			}
+		},
+		"resolvedLate": true
+	},
+	"id": "minion_varian_wrynn",
+	"name": "Varian Wrynn",
+	"description": "Battlecry: Draw 3 cards. Put any minions you drew directly into the battlefield.",
+	"type": "MINION",
+	"heroClass": "WARRIOR",
+	"rarity": "LEGENDARY",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 10,
+	"collectible": true,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"fileFormatVersion": 1
+}

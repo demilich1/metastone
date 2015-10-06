@@ -1,0 +1,35 @@
+{
+	"name": "King's Defender",
+	"description": "Battlecry: If you have a minion with Taunt, gain +1 Durability.",
+	"collectible": true,
+	"id": "weapon_kings_defender",
+	"type": "WEAPON",
+	"rarity": "RARE",
+	"heroClass": "HUNTER",
+	"baseManaCost": 3,
+	"damage": 3,
+	"durability": 2,
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"battlecry": {
+		"spell": {
+			"class": "ModifyDurabilitySpell",
+			"targetPlayer": "SELF",
+			"value": 1
+		},
+		"condition": {
+			"class": "HasEntityCondition",
+			"filter": {
+				"class": "AttributeFilter",
+				"attribute": "TAUNT",
+				"operation": "HAS"
+			},
+			"target": "FRIENDLY_MINIONS"
+		},
+		"targetSelection": "NONE",
+		"resolvedLate": true
+	},
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

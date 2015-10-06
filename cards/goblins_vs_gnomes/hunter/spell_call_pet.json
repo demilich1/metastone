@@ -3,7 +3,7 @@
 	"id": "spell_call_pet",
 	"spell": {
 		"class": "DrawCardAndDoSomethingSpell",
-		"spell1": {
+		"spell": {
 			"class": "ConditionalSpell",
 			"condition": {
 				"class": "RaceCondition",

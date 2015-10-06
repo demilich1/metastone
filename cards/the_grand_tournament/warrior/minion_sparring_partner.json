@@ -1,0 +1,26 @@
+{
+	"baseAttack": 3,
+	"baseHp": 2,
+	"battlecry": {
+		"spell": {
+			"class": "AddAttributeSpell",
+			"attribute": "TAUNT"
+		},
+		"targetSelection": "MINIONS",
+		"resolvedLate": false
+	},
+	"id": "minion_sparring_partner",
+	"name": "Sparring Partner",
+	"description": "Taunt. Battlecry: Give a minion Taunt.",
+	"type": "MINION",
+	"heroClass": "WARRIOR",
+	"rarity": "RARE",
+	"set": "THE_GRAND_TOURNAMENT",
+	"baseManaCost": 2,
+	"collectible": true,
+	"attributes": {
+		"TAUNT": true,
+		"BATTLECRY": true
+	},
+	"fileFormatVersion": 1
+}

@@ -20,7 +20,7 @@ public class DrawCardAndDoSomethingSpell extends Spell {
 			if (card == null || card.getLocation() == CardLocation.GRAVEYARD) {
 				return;
 			}
-			SpellDesc cardEffectSpell = (SpellDesc) desc.get(SpellArg.SPELL_1);
+			SpellDesc cardEffectSpell = (SpellDesc) desc.get(SpellArg.SPELL);
 			SpellUtils.castChildSpell(context, player, cardEffectSpell, source, card);
 		}
 	}

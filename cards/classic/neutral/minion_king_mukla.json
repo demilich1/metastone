@@ -9,7 +9,7 @@
 				"spell_bananas",
 				"spell_bananas"
 			],
-			"targetPlayer" : "OPPONENT"
+			"targetPlayer": "OPPONENT"
 		},
 		"resolvedLate": false
 	},

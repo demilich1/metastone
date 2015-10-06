@@ -486,7 +486,11 @@ public class GameLogic implements Cloneable {
 
 	public void discardCard(Player player, Card card) {
 		logger.debug("{} discards {}", player.getName(), card);
-		context.fireGameEvent(new DiscardEvent(context, player.getId(), card));
+		// only a 'real' discard should fire a DiscardEvent
+		if (card.getLocation() == CardLocation.HAND) {
+			context.fireGameEvent(new DiscardEvent(context, player.getId(), card));	
+		}
+		
 		removeCard(player.getId(), card);
 	}
 
