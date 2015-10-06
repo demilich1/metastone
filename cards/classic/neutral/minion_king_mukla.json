@@ -8,7 +8,8 @@
 			"cards": [
 				"spell_bananas",
 				"spell_bananas"
-			]
+			],
+			"targetPlayer" : "OPPONENT"
 		},
 		"resolvedLate": false
 	},

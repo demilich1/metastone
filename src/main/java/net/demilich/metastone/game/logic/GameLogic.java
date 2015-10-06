@@ -486,8 +486,8 @@ public class GameLogic implements Cloneable {
 
 	public void discardCard(Player player, Card card) {
 		logger.debug("{} discards {}", player.getName(), card);
-		removeCard(player.getId(), card);
 		context.fireGameEvent(new DiscardEvent(context, player.getId(), card));
+		removeCard(player.getId(), card);
 	}
 
 	public Card drawCard(int playerId, Entity source) {
