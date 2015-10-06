@@ -36,6 +36,8 @@ public class MetaStone extends Application {
 		facade.sendNotification(GameNotification.CANVAS_CREATED, root);
 		facade.sendNotification(GameNotification.MAIN_MENU);
 		primaryStage.show();
+		
+		facade.sendNotification(GameNotification.CHECK_FOR_UPDATE);
 	}
 
 }

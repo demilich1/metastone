@@ -2,6 +2,7 @@ package net.demilich.metastone;
 
 import net.demilich.nittygrittymvc.Facade;
 import net.demilich.nittygrittymvc.interfaces.IFacade;
+import net.demilich.metastone.gui.autoupdate.CheckForUpdateCommand;
 import net.demilich.metastone.gui.battleofdecks.StartBattleOfDecksCommand;
 import net.demilich.metastone.gui.deckbuilder.AddCardToDeckCommand;
 import net.demilich.metastone.gui.deckbuilder.ChangeDeckNameCommand;
@@ -50,6 +51,8 @@ public class ApplicationFacade extends Facade<GameNotification> {
 		registerCommand(GameNotification.SIMULATE_GAMES, new SimulateGamesCommand());
 		registerCommand(GameNotification.START_TRAINING, new PerformTrainingCommand());
 		registerCommand(GameNotification.COMMIT_BATTLE_OF_DECKS_CONFIG, new StartBattleOfDecksCommand());
+		
+		registerCommand(GameNotification.CHECK_FOR_UPDATE, new CheckForUpdateCommand());
 
 		registerCommand(GameNotification.SET_ACTIVE_DECK, new SetActiveDeckCommand());
 		registerCommand(GameNotification.ADD_CARD_TO_DECK, new AddCardToDeckCommand());
