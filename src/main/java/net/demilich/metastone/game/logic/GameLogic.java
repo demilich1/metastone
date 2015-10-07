@@ -836,7 +836,7 @@ public class GameLogic implements Cloneable {
 	}
 
 	private boolean healHero(Hero hero, int healing) {
-		int newHp = Math.min(MAX_HERO_HP, hero.getHp() + healing);
+		int newHp = Math.min(hero.getMaxHp(), hero.getHp() + healing);
 		int oldHp = hero.getHp();
 		if (logger.isDebugEnabled()) {
 			log(hero + " is healed for " + healing + ", hp now: " + hero.getHp());
