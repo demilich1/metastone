@@ -16,6 +16,10 @@ public class SetHeroHpSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Actor actor = (Actor) target;
+		if (actor.getMaxHp() > desc.getValue()) {
+			actor.setMaxHp(desc.getValue());
+			logger.debug("{}'s Max Hp have been set to {}", actor, actor.getMaxHp());
+		}
 		actor.setHp(desc.getValue());
 		logger.debug("{}'s Hp have been set to {}", actor, actor.getHp());
 	}
