@@ -4,8 +4,7 @@
 	"spell": {
 		"class": "ConditionalEffectSpell",
 		"condition": {
-			"class": "IsDeadCondition",
-			"invert": true
+			"class": "IsDeadCondition"
 		},
 		"spell1": {
 			"class": "DamageSpell",
