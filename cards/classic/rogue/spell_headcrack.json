@@ -15,9 +15,20 @@
 			"target": "ENEMY_HERO"
 		},
 		"spell2": {
-			"class": "ReceiveCardSpell",
-			"card": "spell_headcrack"
-		}
+			"class": "AddSpellTriggerSpell",
+			"trigger": {
+				"eventTrigger": {
+					"class": "TurnEndTrigger",
+					"targetPlayer": "SELF"
+				},
+				"spell": {
+					"class": "ReceiveCardSpell",
+					"card": "spell_headcrack"
+				},
+				"oneTurn": true
+			},
+			"target": "FRIENDLY_HERO"
+		},
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
