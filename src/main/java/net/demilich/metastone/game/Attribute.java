@@ -58,6 +58,7 @@ public enum Attribute {
 	HERO_POWER_USED,
 	HERO_POWER_USAGES,
 	HERO_POWER_DAMAGE,
+	SHADOWFORM,
 	MEATSHIELD,
 
 	// AI flags
