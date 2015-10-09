@@ -1334,11 +1334,11 @@ public class GameLogic implements Cloneable {
 		}
 		removeSpelltriggers(target);
 
-		int maxHpDiff = target.getAttributeValue(Attribute.BASE_HP) - target.getMaxHp();
+		int oldMaxHp = target.getMaxHp();
 		target.setMaxHp(target.getAttributeValue(Attribute.BASE_HP));
 		target.setAttack(target.getAttributeValue(Attribute.BASE_ATTACK));
-		if (maxHpDiff > 0) {
-			target.setHp(target.getHp() + maxHpDiff);
+		if (target.getHp() > target.getMaxHp() || target.getHp() == oldMaxHp) {
+			target.setHp(target.getMaxHp());
 		}
 		if (target.getHp() > target.getMaxHp()) {
 			target.setHp(target.getMaxHp());
