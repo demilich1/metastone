@@ -13,7 +13,7 @@
 			"class": "MetaSpell",
 			"spell1": {
 				"class": "AddAttributeSpell",
-				"attribute": "HERO_POWER_SHADOWFORM",
+				"attribute": "SHADOWFORM",
 				"target": "FRIENDLY_HERO"
 			},
 			"spell2": {
@@ -23,7 +23,7 @@
 		},
 		"condition": {
 			"class": "AttributeCondition",
-			"attribute": "HERO_POWER_SHADOWFORM"
+			"attribute": "SHADOWFORM"
 		},
 		"target": "FRIENDLY_HERO"
 	},
