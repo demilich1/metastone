@@ -836,10 +836,10 @@ public class GameLogic implements Cloneable {
 	}
 
 	private boolean healHero(Hero hero, int healing) {
-		int newHp = Math.min(MAX_HERO_HP, hero.getHp() + healing);
+		int newHp = Math.min(hero.getMaxHp(), hero.getHp() + healing);
 		int oldHp = hero.getHp();
 		if (logger.isDebugEnabled()) {
-			log(hero + " is healed for " + healing + ", hp now: " + hero.getHp());
+			log(hero + " is healed for " + healing + ", hp now: " + newHp / hero.getMaxHp();
 		}
 
 		hero.setHp(newHp);
@@ -1334,11 +1334,11 @@ public class GameLogic implements Cloneable {
 		}
 		removeSpelltriggers(target);
 
-		int maxHpDiff = target.getAttributeValue(Attribute.BASE_HP) - target.getMaxHp();
+		int oldMaxHp = target.getMaxHp();
 		target.setMaxHp(target.getAttributeValue(Attribute.BASE_HP));
 		target.setAttack(target.getAttributeValue(Attribute.BASE_ATTACK));
-		if (maxHpDiff > 0) {
-			target.setHp(target.getHp() + maxHpDiff);
+		if (target.getHp() > target.getMaxHp() || target.getHp() == oldMaxHp) {
+			target.setHp(target.getMaxHp());
 		}
 		if (target.getHp() > target.getMaxHp()) {
 			target.setHp(target.getMaxHp());
