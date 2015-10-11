@@ -9,7 +9,11 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "SummonSpell",
-		"cards": ["token_treant_force_of_nature", "token_treant_force_of_nature", "token_treant_force_of_nature"]
+		"cards": [
+			"token_treant_force_of_nature",
+			"token_treant_force_of_nature",
+			"token_treant_force_of_nature"
+		]
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

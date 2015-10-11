@@ -18,7 +18,6 @@ import net.demilich.metastone.game.targeting.EntityReference;
 public class ReturnMinionToHandSpell extends Spell {
 
 	private static Logger logger = LoggerFactory.getLogger(ReturnMinionToHandSpell.class);
-	public static int MAX_HAND_SIZE = 10;
 
 	public static SpellDesc create() {
 		return create(null, 0, false);
@@ -37,16 +36,12 @@ public class ReturnMinionToHandSpell extends Spell {
 		int manaCostModifier = desc.getInt(SpellArg.MANA_MODIFIER, 0);
 		Minion minion = (Minion) target;
 		Player owner = context.getPlayer(minion.getOwner());
-		if (owner.getHand().getCount() >= context.getLogic().MAX_HAND_CARDS) {
-			logger.debug("{} is destroyed because {}'s hand is full", minion, owner.getName());
-			context.getLogic().markAsDestroyed((Actor) target);
-		} else {
-			logger.debug("{} is returned to {}'s hand", minion, owner.getName());
-			context.getLogic().removeMinion(minion);
-			Card sourceCard = minion.getSourceCard().getCopy();
-			context.getLogic().receiveCard(minion.getOwner(), sourceCard);
-			sourceCard.setAttribute(Attribute.MANA_COST_MODIFIER, manaCostModifier);
-		}
+
+		logger.debug("{} is returned to {}'s hand", minion, owner.getName());
+		context.getLogic().removeMinion(minion);
+		Card sourceCard = minion.getSourceCard().getCopy();
+		sourceCard.setAttribute(Attribute.MANA_COST_MODIFIER, manaCostModifier);
+		context.getLogic().receiveCard(minion.getOwner(), sourceCard);
 	}
 
 }
