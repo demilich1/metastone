@@ -18,7 +18,6 @@ import net.demilich.metastone.game.targeting.EntityReference;
 public class ReturnMinionToHandSpell extends Spell {
 
 	private static Logger logger = LoggerFactory.getLogger(ReturnMinionToHandSpell.class);
-	public static int MAX_HAND_SIZE = 10;
 
 	public static SpellDesc create() {
 		return create(null, 0, false);
