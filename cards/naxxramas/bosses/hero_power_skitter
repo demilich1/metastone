@@ -1,0 +1,17 @@
+{
+	"targetSelection": "NONE",
+	"id": "hero_power_skitter",
+	"name": "Skitter",
+	"description": "Summon a 3/1 Nerubian.",
+	"type": "HERO_POWER",
+	"heroClass": "BOSS",
+	"rarity": "FREE",
+	"spell": {
+		"class": "SummonSpell",
+		"card": "token_nerubian"
+	},
+	"baseManaCost": 2,
+	"collectible": false,
+	"set": "NAXXRAMAS",
+	"fileFormatVersion": 1
+}
