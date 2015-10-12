@@ -12,12 +12,12 @@
 				"class": "AddAttributeSpell",
 				"attribute": "CHARGE"
 			},
-			"target": "SELF",
+			"target": "SELF"
 		},
 		"condition": {
 			"class": "HoldsCardCondition",
 			"race": "DRAGON"
-		}
+		},
 		"resolvedLate": false
 	},
 	"id": "minion_alexstraszas_champion",
