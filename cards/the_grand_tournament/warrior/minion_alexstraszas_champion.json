@@ -13,11 +13,11 @@
 				"attribute": "CHARGE"
 			},
 			"target": "SELF",
-			"condition": {
-				"class": "HoldsCardCondition",
-				"race": "DRAGON"
-			}
 		},
+		"condition": {
+			"class": "HoldsCardCondition",
+			"race": "DRAGON"
+		}
 		"resolvedLate": false
 	},
 	"id": "minion_alexstraszas_champion",
