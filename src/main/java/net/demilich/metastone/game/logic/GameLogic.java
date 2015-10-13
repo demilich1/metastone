@@ -532,13 +532,13 @@ public class GameLogic implements Cloneable {
 		Hero hero = player.getHero();
 		hero.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
 		hero.removeAttribute(Attribute.CANNOT_REDUCE_HP_BELOW_1);
-		if (hero.hasAttribute(Attribute.FROZEN) && hero.getAttributeValue(Attribute.NUMBER_OF_ATTACKS) > 0) {
+		if (hero.hasAttribute(Attribute.FROZEN) && hero.getAttributeValue(Attribute.NUMBER_OF_ATTACKS) > hero.hasAttribute(Attribute.WINDFURY) ? WINDFURY_ATTACKS - 1 : hero.hasAttribute(Attribute.MEGA_WINDFURY) ? MEGA_WINDFURY_ATTACKS - 1 : 0) {
 			hero.removeAttribute(Attribute.FROZEN);
 		}
 		for (Minion minion : player.getMinions()) {
 			minion.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
 			minion.removeAttribute(Attribute.CANNOT_REDUCE_HP_BELOW_1);
-			if (minion.hasAttribute(Attribute.FROZEN) && minion.getAttributeValue(Attribute.NUMBER_OF_ATTACKS) > 0) {
+			if (minion.hasAttribute(Attribute.FROZEN) && minion.getAttributeValue(Attribute.NUMBER_OF_ATTACKS) > minion.hasAttribute(Attribute.WINDFURY) ? WINDFURY_ATTACKS - 1 : minion.hasAttribute(Attribute.MEGA_WINDFURY) ? MEGA_WINDFURY_ATTACKS - 1 : 0) {
 				minion.removeAttribute(Attribute.FROZEN);
 			}
 		}
@@ -1160,9 +1160,9 @@ public class GameLogic implements Cloneable {
 	public void refreshAttacksPerRound(Entity entity) {
 		int attacks = 1;
 		if (entity.hasAttribute(Attribute.WINDFURY)) {
-			attacks = 2;
+			attacks = WINDFURY_ATTACKS;
 		} else if (entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
-			attacks = 4;
+			attacks = MEGA_WINDFURY_ATTACKS;
 		}
 		entity.setAttribute(Attribute.NUMBER_OF_ATTACKS, attacks);
 	}
