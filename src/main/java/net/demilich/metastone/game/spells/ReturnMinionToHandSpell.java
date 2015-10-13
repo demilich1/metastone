@@ -11,6 +11,7 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -36,7 +37,7 @@ public class ReturnMinionToHandSpell extends Spell {
 		int manaCostModifier = desc.getInt(SpellArg.MANA_MODIFIER, 0);
 		Minion minion = (Minion) target;
 		Player owner = context.getPlayer(minion.getOwner());
-		if (owner.getHand().getCount() >= context.getLogic().MAX_HAND_CARDS) {
+		if (owner.getHand().getCount() >= GameLogic.MAX_HAND_CARDS) {
 			logger.debug("{} is destroyed because {}'s hand is full", minion, owner.getName());
 			context.getLogic().markAsDestroyed((Actor) target);
 		} else {
