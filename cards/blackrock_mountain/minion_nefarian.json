@@ -8,10 +8,10 @@
 			"class": "EitherOrSpell",
 			"spell1": {
 				"class": "ReceiveCardSpell",
-				"cards": {
+				"cards": [
 					"spell_tail_swipe",
 					"spell_tail_swipe"
-				}
+				]
 			},
 			"spell2": {
 				"class": "ReceiveRandomCollectibleCardSpell",
