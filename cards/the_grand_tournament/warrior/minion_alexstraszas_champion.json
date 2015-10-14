@@ -12,11 +12,11 @@
 				"class": "AddAttributeSpell",
 				"attribute": "CHARGE"
 			},
-			"target": "SELF",
-			"condition": {
-				"class": "HoldsCardCondition",
-				"race": "DRAGON"
-			}
+			"target": "SELF"
+		},
+		"condition": {
+			"class": "HoldsCardCondition",
+			"race": "DRAGON"
 		},
 		"resolvedLate": false
 	},

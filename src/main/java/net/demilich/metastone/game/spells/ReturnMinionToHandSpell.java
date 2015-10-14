@@ -9,8 +9,10 @@ import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -36,12 +38,16 @@ public class ReturnMinionToHandSpell extends Spell {
 		int manaCostModifier = desc.getInt(SpellArg.MANA_MODIFIER, 0);
 		Minion minion = (Minion) target;
 		Player owner = context.getPlayer(minion.getOwner());
-
-		logger.debug("{} is returned to {}'s hand", minion, owner.getName());
-		context.getLogic().removeMinion(minion);
-		Card sourceCard = minion.getSourceCard().getCopy();
-		sourceCard.setAttribute(Attribute.MANA_COST_MODIFIER, manaCostModifier);
-		context.getLogic().receiveCard(minion.getOwner(), sourceCard);
+		if (owner.getHand().getCount() >= GameLogic.MAX_HAND_CARDS) {
+			logger.debug("{} is destroyed because {}'s hand is full", minion, owner.getName());
+			context.getLogic().markAsDestroyed((Actor) target);
+		} else {
+			logger.debug("{} is returned to {}'s hand", minion, owner.getName());
+			context.getLogic().removeMinion(minion);
+			Card sourceCard = minion.getSourceCard().getCopy();
+			context.getLogic().receiveCard(minion.getOwner(), sourceCard);
+			sourceCard.setAttribute(Attribute.MANA_COST_MODIFIER, manaCostModifier);
+		}
 	}
 
 }

@@ -5,7 +5,13 @@
 		"class": "JoustSpell",
 		"spell": {
 			"class": "ReturnMinionToHandSpell",
-			"target": "SELF"
+			"target": "SELF",
+			"condition": {
+				"class": "CardCountCondition",
+				"targetPlayer": "SELF",
+				"value": 10,
+				"operation": "LESS"
+			}
 		},
 		"target": "NONE"
 	},

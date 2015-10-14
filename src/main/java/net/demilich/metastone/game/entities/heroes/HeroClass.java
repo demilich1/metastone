@@ -1,7 +1,19 @@
 package net.demilich.metastone.game.entities.heroes;
 
 public enum HeroClass {
-	ANY, DECK_COLLECTION,
+	ANY,
+	DECK_COLLECTION,
 
-	MAGE, WARLOCK, WARRIOR, DRUID, ROGUE, HUNTER, PALADIN, PRIEST, SHAMAN, OPPONENT
+	DRUID,
+	HUNTER,
+	MAGE,
+	PALADIN,
+	PRIEST,
+	ROGUE,
+	SHAMAN,
+	WARLOCK,
+	WARRIOR,
+	OPPONENT,
+	
+	BOSS
 }

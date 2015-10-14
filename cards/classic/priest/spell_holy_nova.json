@@ -11,7 +11,7 @@
 		"class": "MetaSpell",
 		"spell1": {
 			"class": "DamageSpell",
-			"value": 1,
+			"value": 2,
 			"target": "ENEMY_CHARACTERS"
 		},
 		"spell2": {
