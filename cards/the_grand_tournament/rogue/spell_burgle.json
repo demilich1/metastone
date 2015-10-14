@@ -1,11 +1,26 @@
 {
 	"targetSelection": "NONE",
 	"spell": {
-		"class": "ReceiveRandomCollectibleCardSpell",
-		"howMany": 2,
-		"cardFilter": {
-			"class": "CardFilter",
-			"heroClass": "OPPONENT"
+		"class": "EitherOrSpell",
+			"spell1": {
+				"class": "ReceiveCardSpell",
+				"cards": {
+					"spell_the_coin",
+					"spell_the_coin"
+				}
+			},
+			"spell2": {
+				"class": "ReceiveRandomCollectibleCardSpell",
+				"howMany": 2,
+				"cardFilter": {
+					"class": "CardFilter",
+					"heroClass": "OPPONENT"
+				}
+			},
+			"condition": {
+				"class": "HasHeroClassCondition",
+				"heroClass": "BOSS"
+			}
 		}
 	},
 	"id": "spell_burgle",
