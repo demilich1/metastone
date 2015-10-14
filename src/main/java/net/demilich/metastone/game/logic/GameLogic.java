@@ -93,8 +93,8 @@ public class GameLogic implements Cloneable {
 	public static final int DECK_SIZE = 30;
 	public static final int TURN_LIMIT = 100;
 
-	private static final int WINDFURY_ATTACKS = 2;
-	private static final int MEGA_WINDFURY_ATTACKS = 4;
+	public static final int WINDFURY_ATTACKS = 2;
+	public static final int MEGA_WINDFURY_ATTACKS = 4;
 
 	private static boolean hasPlayerLost(Player player) {
 		return player.getHero().getHp() < 1 || player.getHero().hasAttribute(Attribute.DESTROYED);
@@ -488,9 +488,9 @@ public class GameLogic implements Cloneable {
 		logger.debug("{} discards {}", player.getName(), card);
 		// only a 'real' discard should fire a DiscardEvent
 		if (card.getLocation() == CardLocation.HAND) {
-			context.fireGameEvent(new DiscardEvent(context, player.getId(), card));	
+			context.fireGameEvent(new DiscardEvent(context, player.getId(), card));
 		}
-		
+
 		removeCard(player.getId(), card);
 	}
 
@@ -532,15 +532,11 @@ public class GameLogic implements Cloneable {
 		Hero hero = player.getHero();
 		hero.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
 		hero.removeAttribute(Attribute.CANNOT_REDUCE_HP_BELOW_1);
-		if (hero.hasAttribute(Attribute.FROZEN) && hero.getAttributeValue(Attribute.NUMBER_OF_ATTACKS) > 0) {
-			hero.removeAttribute(Attribute.FROZEN);
-		}
+		handleFrozen(hero);
 		for (Minion minion : player.getMinions()) {
 			minion.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
 			minion.removeAttribute(Attribute.CANNOT_REDUCE_HP_BELOW_1);
-			if (minion.hasAttribute(Attribute.FROZEN) && minion.getAttributeValue(Attribute.NUMBER_OF_ATTACKS) > 0) {
-				minion.removeAttribute(Attribute.FROZEN);
-			}
+			handleFrozen(minion);
 		}
 		hero.removeAttribute(Attribute.COMBO);
 		hero.activateWeapon(false);
@@ -553,6 +549,16 @@ public class GameLogic implements Cloneable {
 			}
 		}
 		checkForDeadEntities();
+	}
+
+	private void handleFrozen(Actor actor) {
+		if (actor.hasAttribute(Attribute.FROZEN)) {
+			return;
+		}
+		int maxAttacks = actor.getMaxNumberOfAttacks() - 1;
+		if (actor.getAttributeValue(Attribute.NUMBER_OF_ATTACKS) > maxAttacks) {
+			removeAttribute(actor, Attribute.FROZEN);
+		}
 	}
 
 	public void equipWeapon(int playerId, Weapon weapon) {
@@ -1160,9 +1166,9 @@ public class GameLogic implements Cloneable {
 	public void refreshAttacksPerRound(Entity entity) {
 		int attacks = 1;
 		if (entity.hasAttribute(Attribute.WINDFURY)) {
-			attacks = 2;
+			attacks = WINDFURY_ATTACKS;
 		} else if (entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
-			attacks = 4;
+			attacks = MEGA_WINDFURY_ATTACKS;
 		}
 		entity.setAttribute(Attribute.NUMBER_OF_ATTACKS, attacks);
 	}
