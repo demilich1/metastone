@@ -4,10 +4,10 @@
 		"class": "EitherOrSpell",
 			"spell1": {
 				"class": "ReceiveCardSpell",
-				"cards": {
+				"cards": [
 					"spell_the_coin",
 					"spell_the_coin"
-				}
+				]
 			},
 			"spell2": {
 				"class": "ReceiveRandomCollectibleCardSpell",
