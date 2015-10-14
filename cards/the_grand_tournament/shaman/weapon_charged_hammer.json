@@ -12,7 +12,7 @@
 	"deathrattle": {
 		"class": "ChangeHeroPowerSpell",
 		"card": "hero_power_lightning_jolt",
-		"target": "FRIENDLY_HERO"
+		"targetPlayer": "SELF"
 	},
 	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1

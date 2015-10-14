@@ -1,7 +1,5 @@
 package net.demilich.metastone.game.spells;
 
-import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,22 +16,15 @@ public class ChangeHeroPowerSpell extends Spell {
 
 	private static Logger logger = LoggerFactory.getLogger(ChangeHeroPowerSpell.class);
 
-	public static SpellDesc create(HeroPower heroPower) {
-		Map<SpellArg, Object> arguments = SpellDesc.build(ChangeHeroPowerSpell.class);
-		arguments.put(SpellArg.HERO_POWER, heroPower);
-		return new SpellDesc(arguments);
-	}
-
-	protected void changeHeroPower(String newHeroPower, Entity target) {
+	protected void changeHeroPower(String newHeroPower, Hero hero) {
 		HeroPower heroPower = (HeroPower) CardCatalogue.getCardById(newHeroPower);
-		Hero targetHero = (Hero) target;
-		logger.debug("{}'s hero power was changed to {}", targetHero.getName(), heroPower);
-		targetHero.setHeroPower(heroPower);
+		logger.debug("{}'s hero power was changed to {}", hero.getName(), heroPower);
+		hero.setHeroPower(heroPower);
 	}
 	
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		String heroPowerName = (String) desc.get(SpellArg.CARD);
-		changeHeroPower(heroPowerName, target);
+		changeHeroPower(heroPowerName, player.getHero());
 	}
 }

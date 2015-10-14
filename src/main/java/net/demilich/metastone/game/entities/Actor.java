@@ -9,6 +9,7 @@ import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
 import net.demilich.metastone.game.entities.minions.Race;
+import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 
@@ -107,6 +108,16 @@ public abstract class Actor extends Entity {
 	public boolean hasSpellTrigger() {
 		return spellTrigger != null;
 	}
+	
+	public int getMaxNumberOfAttacks() {
+		if (hasAttribute(Attribute.MEGA_WINDFURY)) {
+			return GameLogic.MEGA_WINDFURY_ATTACKS;
+		} else if (hasAttribute(Attribute.WINDFURY)) {
+			return GameLogic.WINDFURY_ATTACKS;
+		}
+		return 1;
+	}
+
 
 	@Override
 	public boolean isDestroyed() {

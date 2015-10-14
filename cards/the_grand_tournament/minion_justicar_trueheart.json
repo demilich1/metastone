@@ -80,7 +80,7 @@
 					"card": "hero_power_tank_up"
 				}
 			],
-			"target": "FRIENDLY_HERO"
+			"targetPlayer": "SELF"
 		},
 		"resolvedLate": false
 	},

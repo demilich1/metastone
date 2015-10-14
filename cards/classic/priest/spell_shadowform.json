@@ -23,9 +23,11 @@
 		},
 		"condition": {
 			"class": "AttributeCondition",
-			"attribute": "SHADOWFORM"
+			"target" : "FRIENDLY_HERO",
+			"attribute": "SHADOWFORM",
+			"operation" : "HAS"
 		},
-		"target": "FRIENDLY_HERO"
+		"targetPlayer": "SELF"
 	},
 	"type": "SPELL",
 	"heroClass": "PRIEST",

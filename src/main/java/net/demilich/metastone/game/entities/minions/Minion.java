@@ -36,5 +36,5 @@ public class Minion extends Actor {
 		setBaseAttack(baseAttack);
 		setBaseHp(baseHp);
 	}
-
+	
 }

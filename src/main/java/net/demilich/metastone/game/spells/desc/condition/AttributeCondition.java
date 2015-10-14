@@ -33,8 +33,8 @@ public class AttributeCondition extends Condition {
 
 		Attribute attribute = (Attribute) desc.get(ConditionArg.ATTRIBUTE);
 		Operation operation = (Operation) desc.get(ConditionArg.OPERATION);
-		if (operation == Operation.HAS) {
-			return target.hasAttribute(attribute);
+		if (operation == null || operation == Operation.HAS) {
+			return source.hasAttribute(attribute);
 		}
 
 		int targetValue = desc.getInt(ConditionArg.VALUE);
