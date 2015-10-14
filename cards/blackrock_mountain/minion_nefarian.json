@@ -3,13 +3,28 @@
 	"baseHp": 8,
 	"race": "DRAGON",
 	"battlecry": {
-		"spell": {
-			"class": "ReceiveRandomCollectibleCardSpell",
-			"howMany": 2,
-			"cardFilter": {
-				"class": "CardFilter",
-				"cardType": "SPELL",
-				"heroClass": "OPPONENT"
+		"spell": 
+		{
+			"class": "EitherOrSpell",
+			"spell1": {
+				"class": "ReceiveCardSpell",
+				"cards": {
+					"spell_tail_swipe",
+					"spell_tail_swipe"
+				}
+			},
+			"spell2": {
+				"class": "ReceiveRandomCollectibleCardSpell",
+				"howMany": 2,
+				"cardFilter": {
+					"class": "CardFilter",
+					"cardType": "SPELL",
+					"heroClass": "OPPONENT"
+				}
+			},
+			"condition": {
+				"class": "HasHeroClassCondition",
+				"heroClass": "BOSS"
 			}
 		},
 		"resolvedLate": false
