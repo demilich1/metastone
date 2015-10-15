@@ -1,26 +1,19 @@
 {
 	"baseAttack": 2,
 	"baseHp": 3,
-	"trigger": {
-		"eventTrigger": {
-			"class": "MinionSummonedTrigger",
-			"targetPlayer": "SELF",
-			"condition": {
-				"class": "AttributeCondition",
-				"attribute": "ATTACK",
-				"value": 4,
-				"operation": "LESS"
-			}
+	"aura": {
+		"class": "BuffAura",
+		"attackBonus": 1,
+		"filter": {
+			"class": "AttributeFilter",
+			"attribute" : "CHARGE",
+			"operation" : "HAS"
 		},
-		"spell": {
-			"class": "AddAttributeSpell",
-			"attribute": "CHARGE",
-			"target": "EVENT_TARGET"
-		}
+		"target": "FRIENDLY_MINIONS"
 	},
 	"id": "minion_warsong_commander",
 	"name": "Warsong Commander",
-	"description": "Whenever you summon a minion with 3 or less Attack, give it Charge.",
+	"description": "Your Charge minions have +1 Attack.",
 	"type": "MINION",
 	"heroClass": "WARRIOR",
 	"rarity": "FREE",
