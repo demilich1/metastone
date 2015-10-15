@@ -7,17 +7,14 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.HeroCard;
 import net.demilich.metastone.game.entities.Entity;
-import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.targeting.EntityReference;
 
 public class ChangeHeroSpell extends Spell {
 
-	public static SpellDesc create(Hero hero) {
+	public static SpellDesc create(String heroCardId) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(ChangeHeroSpell.class);
-		arguments.put(SpellArg.ENTITY, hero);
-		arguments.put(SpellArg.TARGET, EntityReference.NONE);
+		arguments.put(SpellArg.CARD, heroCardId);
 		return new SpellDesc(arguments);
 	}
 
