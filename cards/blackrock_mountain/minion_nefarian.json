@@ -5,27 +5,14 @@
 	"battlecry": {
 		"spell": 
 		{
-			"class": "EitherOrSpell",
-			"spell1": {
-				"class": "ReceiveCardSpell",
-				"cards": [
-					"spell_tail_swipe",
-					"spell_tail_swipe"
-				]
+			"class": "ReceiveRandomCollectibleCardSpell",
+			"howMany": 2,
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "SPELL",
+				"heroClass": "OPPONENT"
 			},
-			"spell2": {
-				"class": "ReceiveRandomCollectibleCardSpell",
-				"howMany": 2,
-				"cardFilter": {
-					"class": "CardFilter",
-					"cardType": "SPELL",
-					"heroClass": "OPPONENT"
-				}
-			},
-			"condition": {
-				"class": "HasHeroClassCondition",
-				"heroClass": "BOSS"
-			}
+			"card": "spell_tail_swipe"
 		},
 		"resolvedLate": false
 	},

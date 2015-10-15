@@ -19,6 +19,7 @@ public class ReceiveRandomCollectibleCardSpell extends Spell {
 		EntityFilter cardFilter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
 		CardCollection cards = CardCatalogue.query((CardType) null);
 		CardCollection result = new CardCollection();
+		String replacementCard = (String) desc.get(SpellArg.CARD);
 		for (Card card : cards) {
 			if (cardFilter.matches(context, player, card)) {
 				result.add(card);
@@ -28,11 +29,19 @@ public class ReceiveRandomCollectibleCardSpell extends Spell {
 		int count = desc.getInt(SpellArg.HOW_MANY, 1);
 		int manaCostModifier = desc.getInt(SpellArg.MANA_MODIFIER, 0);
 		for (int i = 0; i < count; i++) {
-			Card card = result.getRandom();
+			Card card = null;
+			if (!result.isEmpty()) {
+				card = result.getRandom();
+			} else if (replacementCard != null) {
+				card = CardCatalogue.getCardById(replacementCard);
+			}
+
 			if (manaCostModifier != 0) {
 				card.setAttribute(Attribute.MANA_COST_MODIFIER, manaCostModifier);
 			}
-			context.getLogic().receiveCard(player.getId(), card.clone());
+			if (card != null) {
+				context.getLogic().receiveCard(player.getId(), card.clone());
+			}
 		}
 	}
 
