@@ -14,6 +14,7 @@ import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.SilenceSpell;
 import net.demilich.metastone.game.spells.SwapAttackAndHpSpell;
 import net.demilich.metastone.game.spells.TemporaryAttackSpell;
@@ -209,6 +210,35 @@ public class CardInteractionTests extends TestBase {
 		// deathrattles
 		Assert.assertEquals(paladin.getMinions().size(), 0);
 		Assert.assertEquals(warrior.getMinions().size(), 0);
+	}
+	
+	@Test
+	public void testLordJaraxxus() {
+		GameContext context = createContext(HeroClass.WARLOCK, HeroClass.PALADIN);
+		Player warlock = context.getPlayer1();
+		Card jaraxxus = CardCatalogue.getCardById("minion_lord_jaraxxus");
+		// first, just play Jaraxxus on an empty board
+		playCard(context, warlock, jaraxxus);
+		Assert.assertEquals(warlock.getHero().getRace(), Race.DEMON);
+		Assert.assertEquals(warlock.getHero().getHp(), 15);
+		Assert.assertNotNull(warlock.getHero().getWeapon());
+		
+		// start a new game
+		context = createContext(HeroClass.WARLOCK, HeroClass.PALADIN);
+		// opponent plays Repentance, which triggers on Lord Jaraxxus play
+		Player paladin = context.getPlayer2();
+		Card repentance = CardCatalogue.getCardById("secret_repentance");
+		playCard(context, paladin, repentance);
+		
+		context.getLogic().endTurn(paladin.getId());
+		
+		warlock = context.getPlayer1();
+		jaraxxus = CardCatalogue.getCardById("minion_lord_jaraxxus");
+		playCard(context, warlock, jaraxxus);
+		Assert.assertEquals(warlock.getHero().getRace(), Race.DEMON);
+		// Jaraxxus should be affected by Repentance, bringing him down to 1 hp
+		Assert.assertEquals(warlock.getHero().getHp(), 1);
+		Assert.assertNotNull(warlock.getHero().getWeapon());
 	}
 
 }
