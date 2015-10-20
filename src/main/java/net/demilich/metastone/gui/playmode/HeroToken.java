@@ -25,6 +25,8 @@ public class HeroToken extends GameToken {
 	@FXML
 	private Group hpAnchor;
 	@FXML
+	private Label cardsLabel;
+	@FXML
 	private Label manaLabel;
 
 	@FXML
@@ -77,6 +79,7 @@ public class HeroToken extends GameToken {
 		Image heroPowerImage = new Image(IconFactory.getHeroPowerIconUrl(hero.getHeroPower()));
 		heroPowerIcon.setImage(heroPowerImage);
 		DigitFactory.showPreRenderedDigits(hpAnchor, hero.getHp());
+		cardsLabel.setText("Cards: " + player.getDeck().getCount());
 		manaLabel.setText("Mana: " + player.getMana() + "/" + player.getMaxMana());
 		updateArmor(hero.getArmor());
 		updateWeapon(hero.getWeapon());
