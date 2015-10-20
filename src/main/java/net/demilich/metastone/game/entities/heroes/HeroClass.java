@@ -13,7 +13,5 @@ public enum HeroClass {
 	SHAMAN,
 	WARLOCK,
 	WARRIOR,
-	OPPONENT,
-	
-	BOSS
+	OPPONENT
 }
