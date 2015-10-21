@@ -34,8 +34,9 @@ public class PutRandomMinionOnBoardSpell extends Spell {
 			return;
 		}
 
-		context.getLogic().summon(player.getId(), minionCard.summon());
-		context.getLogic().removeCard(player.getId(), minionCard);
+		if (context.getLogic().summon(player.getId(), minionCard.summon())) {
+			context.getLogic().removeCard(player.getId(), minionCard);	
+		}
 	}
 
 }
