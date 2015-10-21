@@ -10,15 +10,27 @@
 				"target": "SELF"
 			},
 			"spell2": {
-				"class": "ChangeHeroSpell",
-				"card": "hero_jaraxxus"
+				"class": "MetaSpell",
+				"spell1" : {
+					"class": "ChangeHeroSpell",
+					"card": "hero_jaraxxus"
+				},
+				"spell2" : {
+					"class": "SetHeroHpSpell",
+					"value" : {
+						"class" : "AttributeValueProvider",
+						"target":  "SELF",
+						"attribute" : "HP"
+					},
+					"target" : "FRIENDLY_HERO"
+				}
 			},
 			"spell3": {
 				"class": "EquipWeaponSpell",
 				"card": "weapon_blood_fury"
 			}
 		},
-		"resolvedLate": false
+		"resolvedLate": true
 	},
 	"id": "minion_lord_jaraxxus",
 	"name": "Lord Jaraxxus",

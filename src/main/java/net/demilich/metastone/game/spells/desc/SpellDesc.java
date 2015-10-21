@@ -3,6 +3,7 @@ package net.demilich.metastone.game.spells.desc;
 import java.util.EnumMap;
 import java.util.Map;
 
+import net.demilich.metastone.game.cards.desc.Desc;
 import net.demilich.metastone.game.logic.CustomCloneable;
 import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.TargetPlayer;
@@ -10,7 +11,11 @@ import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.targeting.EntityReference;
 
-public class SpellDesc extends CustomCloneable {
+public class SpellDesc extends Desc<SpellArg> {
+
+	public SpellDesc(Map<SpellArg, Object> arguments) {
+		super(arguments);
+	}
 
 	public static Map<SpellArg, Object> build(Class<? extends Spell> spellClass) {
 		final Map<SpellArg, Object> arguments = new EnumMap<>(SpellArg.class);
@@ -18,15 +23,9 @@ public class SpellDesc extends CustomCloneable {
 		return arguments;
 	}
 
-	private final Map<SpellArg, Object> arguments;
-
-	public SpellDesc(Map<SpellArg, Object> arguments) {
-		this.arguments = arguments;
-	}
-
 	public SpellDesc addArg(SpellArg spellArg, Object value) {
 		SpellDesc clone = clone();
-		clone.arguments.put(spellArg, value);
+		arguments.put(spellArg, value);
 		return clone;
 	}
 
@@ -43,18 +42,6 @@ public class SpellDesc extends CustomCloneable {
 			}
 		}
 		return clone;
-	}
-
-	public boolean contains(SpellArg spellArg) {
-		return arguments.containsKey(spellArg);
-	}
-
-	public Object get(SpellArg spellArg) {
-		return arguments.get(spellArg);
-	}
-
-	public boolean getBool(SpellArg spellArg) {
-		return arguments.containsKey(spellArg) ? (boolean) get(spellArg) : false;
 	}
 
 	public EntityFilter getEntityFilter() {

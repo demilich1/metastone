@@ -9,7 +9,7 @@ import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 
 public class Desc<T> {
 
-	private final Map<T, Object> arguments;
+	protected final Map<T, Object> arguments;
 
 	public Desc(Map<T, Object> arguments) {
 		this.arguments = arguments;
@@ -37,7 +37,7 @@ public class Desc<T> {
 	
 	public int getValue(T arg, GameContext context, Player player, Entity target, Entity host, int defaultValue) {
 		Object storedValue = arguments.get(arg);
-		if (arg == null) {
+		if (storedValue == null) {
 			return defaultValue;
 		}
 		if (storedValue instanceof ValueProvider) {

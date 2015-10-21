@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<fx:root id="" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root id="" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
   <center>
     <StackPane fx:id="targetAnchor" prefHeight="115.0" prefWidth="108.0">
       <children>
@@ -64,14 +64,6 @@
 	        <Insets bottom="4.0" left="4.0" top="4.0" />
 	      </padding>
 	    </StackPane>
-	    <Label id="cards" fx:id="cardsLabel" alignment="CENTER" maxWidth="80.0" styleClass="mana-label" text="Cards: 30" textAlignment="LEFT" textFill="#0066ff" wrapText="true" VBox.vgrow="ALWAYS">
-          <font>
-            <Font name="Arial Bold" size="16.0" />
-          </font>
-          <VBox.margin>
-            <Insets left="4.0" />
-          </VBox.margin>
-        </Label>
       </children>
 	</VBox>
   </left>
@@ -79,23 +71,41 @@
     <Insets bottom="8.0" top="8.0" />
   </padding>
   <right>
-    <VBox maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0">
-      <children>
-        <ImageView id="heropower" fx:id="heroPowerIcon" fitHeight="150.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" translateY="0.0" y="0.0">
-          <image>
-            <Image url="/img/powers/armor_up.png" />
-          </image>
-        </ImageView>
-        <Label id="mana" fx:id="manaLabel" alignment="CENTER" maxWidth="64.0" styleClass="mana-label" text="Mana: 10/10" textAlignment="LEFT" textFill="#0066ff" translateX="8.0" translateY="4.0" wrapText="true" VBox.vgrow="ALWAYS">
+      <HBox alignment="CENTER_LEFT">
+         <children>
+          <VBox maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0">
+            <children>
+              <ImageView id="heropower" fx:id="heroPowerIcon" fitHeight="150.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" translateY="0.0" y="0.0">
+                <image>
+                  <Image url="/img/powers/armor_up.png" />
+                </image>
+              </ImageView>
+              <Label id="mana" fx:id="manaLabel" alignment="CENTER" maxWidth="64.0" styleClass="mana-label" text="Mana: 10/10" textAlignment="LEFT" textFill="#0066ff" translateX="8.0" translateY="4.0" wrapText="true" VBox.vgrow="ALWAYS">
+                <font>
+                  <Font name="Arial Bold" size="16.0" />
+                </font>
+                <VBox.margin>
+                  <Insets left="4.0" />
+                </VBox.margin>
+              </Label>
+            </children>
+          </VBox>
+	    <Label id="cards" fx:id="cardsLabel" alignment="CENTER" maxWidth="60.0" text="Cards in deck: 30" textAlignment="LEFT" wrapText="true">
           <font>
-            <Font name="Arial Bold" size="16.0" />
+            <Font name="Arial Bold" size="12.0" />
           </font>
-          <VBox.margin>
-            <Insets left="4.0" />
-          </VBox.margin>
+               <HBox.margin>
+                  <Insets bottom="4.0" left="16.0" right="4.0" top="4.0" />
+               </HBox.margin>
         </Label>
-      </children>
-    </VBox>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <BorderPane.margin>
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+         </BorderPane.margin>
+      </HBox>
   </right>
   <stylesheets>
     <URL value="@/css/gameboard.css" />

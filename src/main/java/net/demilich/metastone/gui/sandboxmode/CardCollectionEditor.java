@@ -15,6 +15,7 @@ import javafx.util.StringConverter;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardType;
 
 public class CardCollectionEditor extends SandboxEditor {
 
@@ -116,6 +117,9 @@ public class CardCollectionEditor extends SandboxEditor {
 	private void populateCatalogueView(String filter) {
 		ObservableList<Card> data = FXCollections.observableArrayList();
 		for (Card card : CardCatalogue.getAll()) {
+			if (card.getCardType() == CardType.HERO) {
+				continue;
+			}
 			if (filter == null || card.matchesFilter(filter)) {
 				data.add(card);
 			}

@@ -27,7 +27,7 @@ public class AttributeValueProvider extends ValueProvider {
 			entities = new ArrayList<>();
 			entities.add(target);
 		}
-
+		
 		if (entities == null) {
 			return 0;
 		}

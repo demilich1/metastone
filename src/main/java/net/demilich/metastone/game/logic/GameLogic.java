@@ -1385,15 +1385,15 @@ public class GameLogic implements Cloneable {
 		checkForDeadEntities();
 	}
 
-	public void summon(int playerId, Minion minion) {
-		summon(playerId, minion, null, -1, false);
+	public boolean summon(int playerId, Minion minion) {
+		return summon(playerId, minion, null, -1, false);
 	}
 
-	public void summon(int playerId, Minion minion, Card source, int index, boolean resolveBattlecry) {
+	public boolean summon(int playerId, Minion minion, Card source, int index, boolean resolveBattlecry) {
 		Player player = context.getPlayer(playerId);
 		if (!canSummonMoreMinions(player)) {
 			log("{} cannot summon any more minions, {} is destroyed", player.getName(), minion);
-			return;
+			return false;
 		}
 		minion.setId(idFactory.generateId());
 
@@ -1437,6 +1437,7 @@ public class GameLogic implements Cloneable {
 
 		context.getSummonStack().pop();
 		context.fireGameEvent(new BoardChangedEvent(context));
+		return true;
 	}
 
 	public void useHeroPower(int playerId) {
