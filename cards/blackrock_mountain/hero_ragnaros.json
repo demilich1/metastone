@@ -2,7 +2,7 @@
 	"name": "Ragnaros the Firelord",
 	"id": "hero_ragnaros",
 	"type": "HERO",
-	"heroClass": "ANY",
+	"heroClass": "BOSS",
 	"rarity": "LEGENDARY",
 	"heroPower": "hero_power_die_insect",
 	"collectible": false,

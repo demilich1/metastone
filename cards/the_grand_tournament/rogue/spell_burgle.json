@@ -6,7 +6,8 @@
 		"cardFilter": {
 			"class": "CardFilter",
 			"heroClass": "OPPONENT"
-		}
+		},
+		"card": "spell_the_coin"
 	},
 	"id": "spell_burgle",
 	"name": "Burgle",

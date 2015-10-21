@@ -12,7 +12,8 @@
 				"filter": {
 					"class": "RaceFilter",
 					"race": "DEMON"
-				}
+				},
+				"target": "OTHER_FRIENDLY_MINIONS"
 			},
 			"spell2": {
 				"class": "AddAttributeSpell",
@@ -29,7 +30,8 @@
 				"filter": {
 					"class": "RaceFilter",
 					"race": "DEMON"
-				}
+				},
+				"target": "OTHER_FRIENDLY_MINIONS"
 			},
 			"spell2": {
 				"class": "RemoveAttributeSpell",
@@ -37,7 +39,7 @@
 				"target": "FRIENDLY_HERO"
 			}
 		},
-		"target": "FRIENDLY_MINIONS"
+		"target": "FRIENDLY_CHARACTERS"
 	},
 	"race": "DEMON",
 	"id": "minion_malganis",

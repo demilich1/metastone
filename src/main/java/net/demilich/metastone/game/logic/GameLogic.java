@@ -552,11 +552,10 @@ public class GameLogic implements Cloneable {
 	}
 
 	private void handleFrozen(Actor actor) {
-		if (actor.hasAttribute(Attribute.FROZEN)) {
+		if (!actor.hasAttribute(Attribute.FROZEN)) {
 			return;
 		}
-		int maxAttacks = actor.getMaxNumberOfAttacks() - 1;
-		if (actor.getAttributeValue(Attribute.NUMBER_OF_ATTACKS) > maxAttacks) {
+		if (actor.getAttributeValue(Attribute.NUMBER_OF_ATTACKS) >= actor.getMaxNumberOfAttacks()) {
 			removeAttribute(actor, Attribute.FROZEN);
 		}
 	}

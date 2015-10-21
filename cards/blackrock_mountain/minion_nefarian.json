@@ -3,14 +3,16 @@
 	"baseHp": 8,
 	"race": "DRAGON",
 	"battlecry": {
-		"spell": {
+		"spell": 
+		{
 			"class": "ReceiveRandomCollectibleCardSpell",
 			"howMany": 2,
 			"cardFilter": {
 				"class": "CardFilter",
 				"cardType": "SPELL",
 				"heroClass": "OPPONENT"
-			}
+			},
+			"card": "spell_tail_swipe"
 		},
 		"resolvedLate": false
 	},

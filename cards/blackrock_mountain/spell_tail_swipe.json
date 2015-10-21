@@ -1,0 +1,17 @@
+{
+	"name": "Tail Swipe",
+	"description": "Deal 4 damage.",
+	"id": "spell_tail_swipe",
+	"type": "SPELL",
+	"rarity": "FREE",
+	"heroClass": "BOSS",
+	"baseManaCost": 4,
+	"targetSelection": "ANY",
+	"spell": {
+		"class": "DamageSpell",
+		"value": 4
+	},
+	"collectible": false,
+	"set": "BLACKROCK_MOUNTAIN",
+	"fileFormatVersion": 1
+}

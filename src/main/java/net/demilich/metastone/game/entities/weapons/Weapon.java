@@ -36,7 +36,7 @@ public class Weapon extends Actor {
 	}
 
 	public int getWeaponDamage() {
-		return getAttributeValue(Attribute.ATTACK) + getAttributeValue(Attribute.CONDITIONAL_ATTACK_BONUS);
+		return Math.max(0, getAttributeValue(Attribute.ATTACK) + getAttributeValue(Attribute.CONDITIONAL_ATTACK_BONUS));
 	}
 
 	public boolean isActive() {
@@ -44,7 +44,7 @@ public class Weapon extends Actor {
 	}
 
 	public boolean isBroken() {
-		return !hasAttribute(Attribute.HP) || getAttributeValue(Attribute.ATTACK) <= 0;
+		return !hasAttribute(Attribute.HP);
 	}
 
 	@Override

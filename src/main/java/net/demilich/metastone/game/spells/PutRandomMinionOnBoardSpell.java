@@ -30,7 +30,7 @@ public class PutRandomMinionOnBoardSpell extends Spell {
 			minionCard = (MinionCard) SpellUtils.getRandomCard(collection, card -> card.getAttribute(Attribute.RACE) == race);
 		}
 
-		if (minionCard == null) {
+		if (minionCard == null || !context.getLogic().canSummonMoreMinions(player)) {
 			return;
 		}
 
