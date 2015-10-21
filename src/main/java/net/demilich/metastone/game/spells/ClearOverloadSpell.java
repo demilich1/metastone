@@ -21,6 +21,7 @@ public class ClearOverloadSpell extends Spell {
 		int lockedMana = player.getLockedMana();
 		if (lockedMana > 0) {
 			context.getLogic().modifyCurrentMana(player.getId(), lockedMana);
+			player.setLockedMana(0);
 		}
 
 		player.getHero().removeAttribute(Attribute.OVERLOAD);
