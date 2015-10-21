@@ -971,17 +971,22 @@ public class GameLogic implements Cloneable {
 		Player opponent = context.getOpponent(player);
 		if (!opponent.getMinions().contains(minion)) {
 			logger.warn("Minion {} cannot be mind-controlled, because opponent does not own it.", minion);
+			return;
 		}
-		context.getOpponent(player).getMinions().remove(minion);
-		player.getMinions().add(minion);
-		minion.setOwner(player.getId());
-		applyAttribute(minion, Attribute.SUMMONING_SICKNESS);
-		List<IGameEventListener> triggers = context.getTriggersAssociatedWith(minion.getReference());
-		removeSpelltriggers(minion);
-		for (IGameEventListener trigger : triggers) {
-			addGameEventListener(player, trigger, minion);
+		if (canSummonMoreMinions(player)) {
+			context.getOpponent(player).getMinions().remove(minion);
+			player.getMinions().add(minion);
+			minion.setOwner(player.getId());
+			applyAttribute(minion, Attribute.SUMMONING_SICKNESS);
+			List<IGameEventListener> triggers = context.getTriggersAssociatedWith(minion.getReference());
+			removeSpelltriggers(minion);
+			for (IGameEventListener trigger : triggers) {
+				addGameEventListener(player, trigger, minion);
+			}
+			context.fireGameEvent(new BoardChangedEvent(context));
+		} else {
+			destroyMinion(minion);
 		}
-		context.fireGameEvent(new BoardChangedEvent(context));
 	}
 
 	public void modifyCurrentMana(int playerId, int mana) {
