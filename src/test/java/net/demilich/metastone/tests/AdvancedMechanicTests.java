@@ -277,7 +277,7 @@ public class AdvancedMechanicTests extends BasicTests {
 	}
 	
 	@Test
-	public void testBuffWithBoardWipw() {
+	public void testBuffWithBoardWipe() {
 		GameContext context = createContext(HeroClass.MAGE, HeroClass.PRIEST);
 		Player mage = context.getPlayer1();
 		mage.setMana(10);
