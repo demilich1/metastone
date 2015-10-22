@@ -275,4 +275,30 @@ public class AdvancedMechanicTests extends BasicTests {
 		// mage hero power should not be affected by SPELL_DAMAGE, and thus deal 1 damage
 		Assert.assertEquals(warrior.getHero().getHp(), opponentHp - 1);
 	}
+	
+	@Test
+	public void testBuffWithBoardWipw() {
+		GameContext context = createContext(HeroClass.MAGE, HeroClass.PRIEST);
+		Player mage = context.getPlayer1();
+		mage.setMana(10);
+		Player priest = context.getPlayer2();
+		priest.setMana(10);
+		
+		Card darkCultist = CardCatalogue.getCardById("minion_dark_cultist");
+		playCard(context, priest, darkCultist);
+		Card darkIronDwarf = CardCatalogue.getCardById("minion_dark_iron_dwarf");
+		playCard(context, priest, darkIronDwarf);
+		
+		Assert.assertEquals(priest.getMinions().size(), 2);
+		
+		Card flamestrike = CardCatalogue.getCardById("spell_flamestrike");
+		playCard(context, mage, flamestrike);
+		
+		// there should be no minions left after the Flamestrike
+		// the Dark Cultist Deathrattle shouldn't have any effect, as both minions are removed simultaneously
+		Assert.assertEquals(priest.getMinions().size(), 0);
+
+	}
+	
+	
 }
