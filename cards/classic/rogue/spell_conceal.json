@@ -6,7 +6,8 @@
 		"attribute": "STEALTH",
 		"target": "FRIENDLY_MINIONS",
 		"revertTrigger": {
-			"class": "TurnStartTrigger"
+			"class": "TurnStartTrigger",
+			"targetPlayer": "SELF"
 		}
 	},
 	"name": "Conceal",
