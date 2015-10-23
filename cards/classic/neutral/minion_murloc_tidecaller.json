@@ -1,6 +1,6 @@
 {
 	"baseAttack": 1,
-	"baseHp": 1,
+	"baseHp": 2,
 	"trigger": {
 		"eventTrigger": {
 			"class": "MinionSummonedTrigger",
