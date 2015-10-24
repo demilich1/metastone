@@ -90,7 +90,8 @@ public abstract class Actor extends Entity {
 	}
 
 	public int getMaxHp() {
-		return getAttributeValue(Attribute.MAX_HP) + getAttributeValue(Attribute.HP_BONUS);
+		return getAttributeValue(Attribute.MAX_HP) + getAttributeValue(Attribute.HP_BONUS)
+				+ getAttributeValue(Attribute.AURA_HP_BONUS);
 	}
 
 	public Race getRace() {
