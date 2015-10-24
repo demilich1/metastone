@@ -1172,10 +1172,10 @@ public class GameLogic implements Cloneable {
 
 	public void refreshAttacksPerRound(Entity entity) {
 		int attacks = 1;
-		if (entity.hasAttribute(Attribute.WINDFURY)) {
-			attacks = WINDFURY_ATTACKS;
-		} else if (entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
+		if (entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
 			attacks = MEGA_WINDFURY_ATTACKS;
+		} else if (entity.hasAttribute(Attribute.WINDFURY)) {
+			attacks = WINDFURY_ATTACKS;
 		}
 		entity.setAttribute(Attribute.NUMBER_OF_ATTACKS, attacks);
 	}
