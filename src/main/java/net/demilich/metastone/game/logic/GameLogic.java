@@ -150,7 +150,10 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void applyAttribute(Entity entity, Attribute attr) {
-		if (attr == Attribute.WINDFURY && !entity.hasAttribute(Attribute.WINDFURY)) {
+		if (attr == Attribute.MEGA_WINDFURY && entity.hasAttribute(Attribute.WINDFURY)) {
+			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, MEGA_WINDFURY_ATTACKS - WINDFURY_ATTACKS);
+		} else if (attr == Attribute.WINDFURY && !entity.hasAttribute(Attribute.WINDFURY)
+				&& !entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, WINDFURY_ATTACKS - 1);
 		} else if (attr == Attribute.MEGA_WINDFURY && !entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, MEGA_WINDFURY_ATTACKS - 1);
@@ -1181,7 +1184,10 @@ public class GameLogic implements Cloneable {
 		if (!entity.hasAttribute(attr)) {
 			return;
 		}
-		if (attr == Attribute.WINDFURY) {
+		if (attr == Attribute.MEGA_WINDFURY && entity.hasAttribute(Attribute.WINDFURY)) {
+			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, WINDFURY_ATTACKS - MEGA_WINDFURY_ATTACKS);
+		}
+		if (attr == Attribute.WINDFURY && !entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, 1 - WINDFURY_ATTACKS);
 		} else if (attr == Attribute.MEGA_WINDFURY) {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, 1 - MEGA_WINDFURY_ATTACKS);
