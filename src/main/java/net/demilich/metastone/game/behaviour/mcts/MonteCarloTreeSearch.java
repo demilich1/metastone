@@ -14,6 +14,7 @@ import net.demilich.metastone.game.cards.Card;
 
 public class MonteCarloTreeSearch extends Behaviour {
 
+	@SuppressWarnings("unused")
 	private final static Logger logger = LoggerFactory.getLogger(MonteCarloTreeSearch.class);
 
 	private static final int ITERATIONS = 500;
