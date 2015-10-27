@@ -5,9 +5,14 @@
 		"class": "AddAttributeSpell",
 		"attribute": "STEALTH",
 		"target": "FRIENDLY_MINIONS",
+		"filter": {
+			"class": "AttributeFilter",
+			"attribute" : "STEALTH",
+			"operation" : "HAS",
+			"invert": true
+		},
 		"revertTrigger": {
-			"class": "TurnStartTrigger",
-			"targetPlayer": "SELF"
+			"class": "TurnStartTrigger"
 		}
 	},
 	"name": "Conceal",
