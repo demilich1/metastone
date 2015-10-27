@@ -152,7 +152,10 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void applyAttribute(Entity entity, Attribute attr) {
-		if (attr == Attribute.WINDFURY && !entity.hasAttribute(Attribute.WINDFURY)) {
+		if (attr == Attribute.MEGA_WINDFURY && entity.hasAttribute(Attribute.WINDFURY)) {
+			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, MEGA_WINDFURY_ATTACKS - WINDFURY_ATTACKS);
+		} else if (attr == Attribute.WINDFURY && !entity.hasAttribute(Attribute.WINDFURY)
+				&& !entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, WINDFURY_ATTACKS - 1);
 		} else if (attr == Attribute.MEGA_WINDFURY && !entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, MEGA_WINDFURY_ATTACKS - 1);
@@ -973,17 +976,22 @@ public class GameLogic implements Cloneable {
 		Player opponent = context.getOpponent(player);
 		if (!opponent.getMinions().contains(minion)) {
 			logger.warn("Minion {} cannot be mind-controlled, because opponent does not own it.", minion);
+			return;
 		}
-		context.getOpponent(player).getMinions().remove(minion);
-		player.getMinions().add(minion);
-		minion.setOwner(player.getId());
-		applyAttribute(minion, Attribute.SUMMONING_SICKNESS);
-		List<IGameEventListener> triggers = context.getTriggersAssociatedWith(minion.getReference());
-		removeSpelltriggers(minion);
-		for (IGameEventListener trigger : triggers) {
-			addGameEventListener(player, trigger, minion);
+		if (canSummonMoreMinions(player)) {
+			context.getOpponent(player).getMinions().remove(minion);
+			player.getMinions().add(minion);
+			minion.setOwner(player.getId());
+			applyAttribute(minion, Attribute.SUMMONING_SICKNESS);
+			List<IGameEventListener> triggers = context.getTriggersAssociatedWith(minion.getReference());
+			removeSpelltriggers(minion);
+			for (IGameEventListener trigger : triggers) {
+				addGameEventListener(player, trigger, minion);
+			}
+			context.fireGameEvent(new BoardChangedEvent(context));
+		} else {
+			destroyMinion(minion);
 		}
-		context.fireGameEvent(new BoardChangedEvent(context));
 	}
 
 	public void modifyCurrentMana(int playerId, int mana) {
@@ -1166,10 +1174,10 @@ public class GameLogic implements Cloneable {
 
 	public void refreshAttacksPerRound(Entity entity) {
 		int attacks = 1;
-		if (entity.hasAttribute(Attribute.WINDFURY)) {
-			attacks = WINDFURY_ATTACKS;
-		} else if (entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
+		if (entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
 			attacks = MEGA_WINDFURY_ATTACKS;
+		} else if (entity.hasAttribute(Attribute.WINDFURY)) {
+			attacks = WINDFURY_ATTACKS;
 		}
 		entity.setAttribute(Attribute.NUMBER_OF_ATTACKS, attacks);
 	}
@@ -1178,7 +1186,10 @@ public class GameLogic implements Cloneable {
 		if (!entity.hasAttribute(attr)) {
 			return;
 		}
-		if (attr == Attribute.WINDFURY) {
+		if (attr == Attribute.MEGA_WINDFURY && entity.hasAttribute(Attribute.WINDFURY)) {
+			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, WINDFURY_ATTACKS - MEGA_WINDFURY_ATTACKS);
+		}
+		if (attr == Attribute.WINDFURY && !entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, 1 - WINDFURY_ATTACKS);
 		} else if (attr == Attribute.MEGA_WINDFURY) {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, 1 - MEGA_WINDFURY_ATTACKS);

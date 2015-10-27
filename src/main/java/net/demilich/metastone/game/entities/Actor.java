@@ -90,7 +90,8 @@ public abstract class Actor extends Entity {
 	}
 
 	public int getMaxHp() {
-		return getAttributeValue(Attribute.MAX_HP) + getAttributeValue(Attribute.HP_BONUS);
+		return getAttributeValue(Attribute.MAX_HP) + getAttributeValue(Attribute.HP_BONUS)
+				+ getAttributeValue(Attribute.AURA_HP_BONUS);
 	}
 
 	public Race getRace() {
@@ -130,13 +131,24 @@ public abstract class Actor extends Entity {
 
 	public void modifyAuraHpBonus(int value) {
 		modifyAttribute(Attribute.AURA_HP_BONUS, value);
-		modifyAttribute(Attribute.HP, value);
+		if (value > 0) {
+			modifyAttribute(Attribute.HP, value);
+		}
+		if (getHp() > getMaxHp()) {
+			setHp(getMaxHp());
+		}
 	}
 
 	@Override
 	public void modifyHpBonus(int value) {
 		modifyAttribute(Attribute.HP_BONUS, value);
-		modifyAttribute(Attribute.HP, value);
+		if (value > 0) {
+			modifyAttribute(Attribute.HP, value);
+		}
+		if (getHp() > getMaxHp()) {
+			setHp(getMaxHp());
+		}
+			
 	}
 
 	public void setAttack(int value) {

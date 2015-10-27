@@ -30,6 +30,8 @@ public class TurnEndTrigger extends GameEventTrigger {
 		case SELF:
 		case OWNER:
 			return turnEndEvent.getPlayer() == getOwner();
+		default:
+			break;
 		}
 
 		return false;

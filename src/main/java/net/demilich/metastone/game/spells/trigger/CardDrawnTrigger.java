@@ -33,6 +33,8 @@ public class CardDrawnTrigger extends GameEventTrigger {
 			return drawEvent.getPlayerId() != host.getOwner();
 		case ACTIVE:
 			return drawEvent.getPlayerId() == event.getGameContext().getActivePlayerId();
+		default:
+			break;
 		}
 
 		return false;

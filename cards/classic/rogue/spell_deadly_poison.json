@@ -11,6 +11,9 @@
 		"class": "BuffWeaponSpell",
 		"attackBonus": 2
 	},
+	"condition": {
+		"class": "HasWeaponCondition"
+	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

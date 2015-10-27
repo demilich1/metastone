@@ -15,6 +15,7 @@ import net.demilich.metastone.utils.MathUtils;
 
 public class Brain implements IBrain {
 
+	@SuppressWarnings("unused")
 	private static Logger logger = LoggerFactory.getLogger(Brain.class);
 
 	private static final int INPUTS = 15;
@@ -134,6 +135,7 @@ public class Brain implements IBrain {
 
 	}
 
+	@SuppressWarnings("unused")
 	private void printWeights() {
 		for (int i = 0; i < neuralNetwork.hidden.length; i++) {
 			for (int j = 0; j < neuralNetwork.hidden[i].length; j++) {
