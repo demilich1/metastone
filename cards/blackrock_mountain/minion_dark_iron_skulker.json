@@ -8,7 +8,7 @@
 			"target": "ENEMY_MINIONS",
 			"filter": {
 				"class": "DamagedFilter",
-				"damaged": false
+				"invert": true
 			}
 		},
 		"resolvedLate": false
