@@ -626,8 +626,8 @@ public class GameLogic implements Cloneable {
 		int attackerDamage = attacker.getAttack();
 		int defenderDamage = target.getAttack();
 		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, target, attackerDamage), TriggerLayer.SECRET);
-		// secret may have killed attacker
-		if (attacker.isDestroyed()) {
+		// secret may have killed attacker ADDENDUM: or defender
+		if (attacker.isDestroyed() || defender.isDestroyed()) {
 			return;
 		}
 
