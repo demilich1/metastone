@@ -91,7 +91,6 @@ public class BattleOfDecksResultView extends BorderPane {
 		backButton.setOnAction(event -> ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU));
 	}
 
-	@SuppressWarnings("unchecked")
 	public void updateResults(BattleResult result) {
 
 		for (BattleBatchResult batchResult : result.getBatchResults()) {

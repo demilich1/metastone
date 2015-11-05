@@ -29,8 +29,6 @@ public class TurnStartTrigger extends GameEventTrigger {
 		case SELF:
 		case OWNER:
 			return turnStartEvent.getPlayer() == getOwner();
-		default:
-			break;
 		}
 		return false;
 	}

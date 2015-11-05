@@ -37,8 +37,6 @@ public class CardPlayedTrigger extends GameEventTrigger {
 			return cardPlayedEvent.getPlayerId() == host.getOwner();
 		case OPPONENT:
 			return cardPlayedEvent.getPlayerId() != host.getOwner();
-		default:
-			break;
 		}
 
 		return false;

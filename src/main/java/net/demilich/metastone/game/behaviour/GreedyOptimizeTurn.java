@@ -134,7 +134,6 @@ public class GreedyOptimizeTurn extends Behaviour {
 		return bestAction;
 	}
 
-	@SuppressWarnings("unused")
 	private double simulateAction(GameContext context, int playerId, GameAction action) {
 		GameContext simulation = context.clone();
 		simulation.getLogic().performGameAction(playerId, action);

@@ -25,8 +25,6 @@ public class SpellCastedTrigger extends GameEventTrigger {
 			return spellCastedEvent.getPlayerId() == host.getOwner();
 		case OPPONENT:
 			return spellCastedEvent.getPlayerId() != host.getOwner();
-		default:
-			break;
 		}
 		return false;
 	}

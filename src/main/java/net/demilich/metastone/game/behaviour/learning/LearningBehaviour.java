@@ -15,7 +15,6 @@ import net.demilich.metastone.game.cards.Card;
 
 public class LearningBehaviour extends Behaviour {
 
-	@SuppressWarnings("unused")
 	private static Logger logger = LoggerFactory.getLogger(LearningBehaviour.class);
 
 	private static final String SAVE_PATH = "brain.ser";

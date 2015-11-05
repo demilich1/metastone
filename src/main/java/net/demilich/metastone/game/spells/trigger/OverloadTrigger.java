@@ -26,9 +26,8 @@ public class OverloadTrigger extends GameEventTrigger {
 		case SELF:
 		case OWNER:
 			return overloadEvent.getPlayer() == getOwner();
-		default:
-			break;
 		}
+
 		return false;
 	}
 
