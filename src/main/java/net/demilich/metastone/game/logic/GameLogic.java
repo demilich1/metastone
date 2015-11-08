@@ -629,7 +629,7 @@ public class GameLogic implements Cloneable {
 		int defenderDamage = target.getAttack();
 		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, target, attackerDamage), TriggerLayer.SECRET);
 		// secret may have killed attacker ADDENDUM: or defender
-		if (attacker.isDestroyed() || defender.isDestroyed()) {
+		if (attacker.isDestroyed() || target.isDestroyed()) {
 			return;
 		}
 
@@ -1273,7 +1273,11 @@ public class GameLogic implements Cloneable {
 		} else {
 			battlecryAction = battlecry;
 		}
+		boolean doubleBattlecries = hasAttribute(player, Attribute.DOUBLE_BATTLECRIES);
 		performGameAction(playerId, battlecryAction);
+		if (doubleBattlecries) {
+			performGameAction(playerId, battlecryAction);
+		}
 	}
 
 	public void resolveDeathrattles(Player player, Actor actor) {
@@ -1288,12 +1292,12 @@ public class GameLogic implements Cloneable {
 			player.getMinions().indexOf(actor);
 		}
 		boolean doubleDeathrattles = hasAttribute(player, Attribute.DOUBLE_DEATHRATTLES);
-		EntityReference sourceRefenrence = actor.getReference();
+		EntityReference sourceReference = actor.getReference();
 		for (SpellDesc deathrattleTemplate : actor.getDeathrattles()) {
 			SpellDesc deathrattle = deathrattleTemplate.addArg(SpellArg.BOARD_POSITION_ABSOLUTE, boardPosition);
-			castSpell(player.getId(), deathrattle, sourceRefenrence, EntityReference.NONE, false);
+			castSpell(player.getId(), deathrattle, sourceReference, EntityReference.NONE, false);
 			if (doubleDeathrattles) {
-				castSpell(player.getId(), deathrattle, sourceRefenrence, EntityReference.NONE, false);
+				castSpell(player.getId(), deathrattle, sourceReference, EntityReference.NONE, false);
 			}
 		}
 	}
