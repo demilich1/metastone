@@ -9,7 +9,7 @@
 		},
 		"spell": {
 			"class": "BuffSpell",
-			"value": 1,
+			"attackBonus": 1,
 			"target": "SELF"
 		}
 	},
