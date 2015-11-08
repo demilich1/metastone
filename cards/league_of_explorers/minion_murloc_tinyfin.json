@@ -1,0 +1,15 @@
+{
+	"baseAttack": 1,
+	"baseHp": 1,
+	"id": "minion_murloc_tinyfin",
+	"name": "Murloc Tinyfin",
+	"description": "",
+	"race": "MURLOC",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost":0,
+	"collectible": true,
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}

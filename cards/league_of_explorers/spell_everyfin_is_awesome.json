@@ -1,0 +1,27 @@
+{
+	"name": "Everyfin is Awesome",
+	"description": "Give your minions +2/+2. Costs (1) less for each Murloc you control.",
+	"id": "spell_everyfin_is_awesome",
+	"type": "SPELL",
+	"rarity": "RARE",
+	"heroClass": "SHAMAN",
+	"baseManaCost": 7,
+	"collectible": true,
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "BuffSpell",
+		"attackBonus": 2, 
+		"hpBonus": 2,
+		"target": "FRIENDLY_MINIONS"
+	},
+	"manaCostModifier": {
+		"class": "EntityCounter",
+		"target": "FRIENDLY_MINIONS",
+		"filter": {
+			"class": "RaceFilter",
+			"race": "MURLOC"
+		}
+	},
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}
