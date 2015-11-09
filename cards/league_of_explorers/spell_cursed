@@ -1,0 +1,27 @@
+{
+	"name": "Cursed!",
+	"description": "While you hold this card, you take 2 damage on your turn.",
+	"id": "spell_cursed",
+	"type": "SPELL",
+	"rarity": "FREE",
+	"heroClass": "WARLOCK",
+	"baseManaCost": 2,
+	"collectible": false,
+	"targetSelection": "NONE",
+	"passiveTrigger": {
+		"eventTrigger": {
+			"class": "TurnStartTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "DamageSpell",
+			"value": 2,
+			"target": "FRIENDLY_HERO"
+		}
+	},
+	"spell": {
+		"class": "NullSpell"
+	},
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}
