@@ -1,0 +1,28 @@
+
+{
+	"baseAttack": 8,
+	"baseHp": 8,
+	"id": "minion_fossilized_devilsaur",
+	"name": "Fossilized Devilsaur",
+	"description": "Battlecry: If you control a Beast, gain Taunt.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 8,
+	"battlecry": {
+		"spell": {
+			"class": "AddAttributeSpell",
+			"attribute": "TAUNT",
+			"target": "SELF"
+		},
+		"condition": {
+			"class": "RaceOnBoardCondition",
+			"race": "BEAST"
+		},
+		"targetSelection": "NONE",
+		"resolvedLate": false
+	},
+	"collectible": true,
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}
