@@ -1,0 +1,29 @@
+{
+	"baseAttack": 1,
+	"baseHp": 1,
+	"id": "minion_reliquary_seeker",
+	"name": "Reliquary Seeker",
+	"description": "Battlecry: If you have 6 other minions, gain +4/+4.",
+	"type": "MINION",
+	"heroClass": "WARLOCK",
+	"rarity": "RARE",
+	"baseManaCost": 1,
+	"battlecry": {
+		"spell": {
+			"class": "BuffSpell",
+			"attackBonus": 4,
+			"hpBonus": 4
+		},
+		"condition": {
+			"class": "MinionCountCondition",
+			"targetPlayer": "SELF",
+			"value": 7,
+			"operation": "EQUALS"
+		},
+		"targetSelection": "NONE",
+		"resolvedLate": false
+	},
+	"collectible": true,
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}
