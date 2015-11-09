@@ -1,0 +1,22 @@
+{
+	"baseAttack": 3,
+	"baseHp": 2,
+	"baseManaCost": 3,
+	"id": "minion_mounted_raptor",
+	"name": "Mounted Raptor",
+	"description": "Deathrattle: Summon a random 1-Cost minion.",
+	"race": "BEAST",
+	"type": "MINION",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"deathrattle": {
+		"class": "SummonRandomMinionFilteredSpell",
+		"cardFilter": {
+			"class": "CardFilter",
+			"manaCost": 1
+		}
+	},
+	"collectible": true,
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}
