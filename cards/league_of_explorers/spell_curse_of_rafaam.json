@@ -1,0 +1,18 @@
+{
+	"name": "Curse of Rafaam",
+	"description": "Give your opponent a 'Cursed!' card. While they hold it, they take 2 damage on their turn.",
+	"id": "spell_curse_of_rafaam",
+	"type": "SPELL",
+	"rarity": "COMMON",
+	"heroClass": "WARLOCK",
+	"baseManaCost": 2,
+	"collectible": true,
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "ReceiveCardSpell",
+		"card": "spell_cursed"
+		"targetPlayer": "OPPONENT"
+	},
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}
