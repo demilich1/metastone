@@ -1210,7 +1210,7 @@ public class GameLogic implements Cloneable {
 	}
 	
 	public void removeCardFromDeck(int playerID, Card card) {
-		Player player = context.getPlayer(playerId);
+		Player player = context.getPlayer(playerID);
 		log("Card {} has been moved from the DECK to the GRAVEYARD", card);
 		card.setLocation(CardLocation.GRAVEYARD);
 		if (card.getAttribute(Attribute.PASSIVE_TRIGGER) != null) {

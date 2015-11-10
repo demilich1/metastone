@@ -65,6 +65,13 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 			break;
 
 		}
+		if (getCardType() == null && card.getCardType() != CardType.HERO_POWER) {
+			return true;
+		}
+		if (getCardType() == CardType.SPELL && card.getCardType() == CardType.CHOOSE_ONE) {
+			return true;
+		}
+		
 		return card.getCardType() == getCardType();
 	}
 
