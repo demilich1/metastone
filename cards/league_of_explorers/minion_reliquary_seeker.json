@@ -12,13 +12,14 @@
 		"spell": {
 			"class": "BuffSpell",
 			"attackBonus": 4,
-			"hpBonus": 4
+			"hpBonus": 4,
+			"target": "SELF"
 		},
 		"condition": {
 			"class": "MinionCountCondition",
 			"targetPlayer": "SELF",
-			"value": 7,
-			"operation": "EQUALS"
+			"value": 6,
+			"operation": "EQUAL"
 		},
 		"targetSelection": "NONE",
 		"resolvedLate": false

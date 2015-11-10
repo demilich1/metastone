@@ -23,11 +23,11 @@
 			  "attribute": "CANNOT_ATTACK"
 			},
 			"condition": {
-  			"class": "MinionCountCondition",
-  			"targetPlayer": "BOTH",
-  			"operation": "EQUALS",
-  			"value": 1
-  		},
+	  			"class": "MinionCountCondition",
+	  			"targetPlayer": "BOTH",
+	  			"operation": "EQUAL",
+	  			"value": 1
+	  		},
 			"target": "SELF"
 		}
 	},

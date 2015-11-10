@@ -10,7 +10,7 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "ReceiveCardSpell",
-		"card": "spell_cursed"
+		"card": "spell_cursed",
 		"targetPlayer": "OPPONENT"
 	},
 	"set": "LEAGUE_OF_EXPLORERS",

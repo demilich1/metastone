@@ -7,7 +7,7 @@
 	"heroClass": "PRIEST",
 	"baseManaCost": 6,
 	"collectible": true,
-	"targetSelection": "MINIONS",
+	"targetSelection": "ENEMY_MINIONS",
 	"spell": {
 		"class": "ShuffleMinionToDeckSpell",
 		"targetPlayer": "SELF"

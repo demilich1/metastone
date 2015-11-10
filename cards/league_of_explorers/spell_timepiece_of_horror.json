@@ -12,7 +12,7 @@
 		"class": "MissilesSpell",
 		"value": 1,
 		"howMany": 10,
-		"target" "ENEMY_CHARACTERS"
+		"target": "ENEMY_CHARACTERS"
 	},
 	"set": "LEAGUE_OF_EXPLORERS",
 	"fileFormatVersion": 1

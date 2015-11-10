@@ -16,7 +16,8 @@
   		"cardLocation": "DECK",
   		"cardFilter": {
   		  "class": "CardFilter",
-  		  "manaCost": 1
+  		  "manaCost": 1,
+  		  "cardType": "MINION"
   		}
   	},
 		"targetSelection": "NONE",
