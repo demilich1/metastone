@@ -11,7 +11,7 @@
 	"battlecry": {
 		"spell": {
 			"class": "ShuffleToDeckSpell",
-			"cardId": "spell_map_to_the_golden_monkey"
+			"card": "spell_map_to_the_golden_monkey"
 		},
 		"targetSelection": "NONE",
 		"resolvedLate": false
