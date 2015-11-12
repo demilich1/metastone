@@ -233,4 +233,132 @@ public class SpecialCardTests extends TestBase {
 		Assert.assertEquals(warrior.getMinions().size(), 0);
 	}
 
+	@Test
+	public void testBetrayal() {
+		GameContext context = createContext(HeroClass.PALADIN, HeroClass.ROGUE);
+		Player paladin = context.getPlayer1();
+
+		MinionCard adjacentMinionCard1 = new TestMinionCard(1, 5, 0);
+		Minion adjacentMinion1 = playMinionCard(context, paladin, adjacentMinionCard1);
+
+		MinionCard targetMinionCard = new TestMinionCard(3, 1, 0);
+		Minion targetMinion = playMinionCard(context, paladin, targetMinionCard);
+
+		MinionCard adjacentMinionCard2 = new TestMinionCard(1, 5, 0);
+		Minion adjacentMinion2 = playMinionCard(context, paladin, adjacentMinionCard2);
+
+		context.getLogic().endTurn(paladin.getId());
+
+		Assert.assertEquals(paladin.getMinions().size(), 3);
+
+		Player rogue = context.getPlayer2();
+		Card betrayal = CardCatalogue.getCardById("spell_betrayal");
+
+		context.getLogic().receiveCard(rogue.getId(), betrayal);
+		GameAction action = betrayal.play();
+		action.setTarget(targetMinion);
+		context.getLogic().performGameAction(rogue.getId(), action);
+		Assert.assertEquals(targetMinion.getAttack(), 3);
+		Assert.assertEquals(targetMinion.getHp(), 1);
+
+		Assert.assertEquals(adjacentMinion1.getHp(), 2);
+		Assert.assertEquals(adjacentMinion2.getHp(), 2);
+
+		Assert.assertEquals(paladin.getMinions().size(), 3);
+	}
+
+	@Test
+	public void testBetrayalNotAffectedBySpellDamage() {
+		GameContext context = createContext(HeroClass.PALADIN, HeroClass.ROGUE);
+		Player paladin = context.getPlayer1();
+
+		MinionCard adjacentMinionCard1 = new TestMinionCard(1, 5, 0);
+		Minion adjacentMinion1 = playMinionCard(context, paladin, adjacentMinionCard1);
+
+		MinionCard targetMinionCard = new TestMinionCard(3, 1, 0);
+		Minion targetMinion = playMinionCard(context, paladin, targetMinionCard);
+
+		MinionCard adjacentMinionCard2 = new TestMinionCard(1, 5, 0);
+		Minion adjacentMinion2 = playMinionCard(context, paladin, adjacentMinionCard2);
+
+		context.getLogic().endTurn(paladin.getId());
+
+		Player rogue = context.getPlayer2();
+
+		MinionCard azureDrakeCard = (MinionCard) CardCatalogue.getCardById("minion_azure_drake");
+		playMinionCard(context, rogue, azureDrakeCard);
+
+		Card betrayal = CardCatalogue.getCardById("spell_betrayal");
+
+		context.getLogic().receiveCard(rogue.getId(), betrayal);
+		GameAction action = betrayal.play();
+		action.setTarget(targetMinion);
+		context.getLogic().performGameAction(rogue.getId(), action);
+		Assert.assertEquals(targetMinion.getAttack(), 3);
+		Assert.assertEquals(targetMinion.getHp(), 1);
+
+		Assert.assertEquals(adjacentMinion1.getHp(), 2);
+		Assert.assertEquals(adjacentMinion2.getHp(), 2);
+	}
+
+	@Test
+	public void testBetrayalOnEmperorCobraDestroysAdjacentMinions() {
+		GameContext context = createContext(HeroClass.PALADIN, HeroClass.ROGUE);
+		Player paladin = context.getPlayer1();
+
+		MinionCard adjacentMinionCard1 = new TestMinionCard(1, 5, 0);
+		playMinionCard(context, paladin, adjacentMinionCard1);
+
+		MinionCard targetMinionCard = (MinionCard) CardCatalogue.getCardById("minion_emperor_cobra");
+		Minion targetMinion = playMinionCard(context, paladin, targetMinionCard);
+
+		MinionCard adjacentMinionCard2 = new TestMinionCard(1, 5, 0);
+		playMinionCard(context, paladin, adjacentMinionCard2);
+
+		context.getLogic().endTurn(paladin.getId());
+
+		Assert.assertEquals(paladin.getMinions().size(), 3);
+
+		Player rogue = context.getPlayer2();
+
+		Card betrayal = CardCatalogue.getCardById("spell_betrayal");
+
+		context.getLogic().receiveCard(rogue.getId(), betrayal);
+		GameAction action = betrayal.play();
+		action.setTarget(targetMinion);
+		context.getLogic().performGameAction(rogue.getId(), action);
+
+		Assert.assertEquals(paladin.getMinions().size(), 1);
+	}
+
+	@Test
+	public void testBetrayalOnBurlyRockjawTroggDeals5Damage() {
+		GameContext context = createContext(HeroClass.PALADIN, HeroClass.ROGUE);
+		Player paladin = context.getPlayer1();
+
+		MinionCard adjacentMinionCard1 = new TestMinionCard(1, 5, 0);
+		playMinionCard(context, paladin, adjacentMinionCard1);
+
+		MinionCard targetMinionCard = (MinionCard) CardCatalogue.getCardById("minion_burly_rockjaw_trogg");
+		Minion targetMinion = playMinionCard(context, paladin, targetMinionCard);
+
+		MinionCard adjacentMinionCard2 = new TestMinionCard(1, 5, 0);
+		playMinionCard(context, paladin, adjacentMinionCard2);
+
+		context.getLogic().endTurn(paladin.getId());
+
+		Assert.assertEquals(paladin.getMinions().size(), 3);
+
+		Player rogue = context.getPlayer2();
+
+		Card betrayal = CardCatalogue.getCardById("spell_betrayal");
+
+		context.getLogic().receiveCard(rogue.getId(), betrayal);
+		GameAction action = betrayal.play();
+		action.setTarget(targetMinion);
+		context.getLogic().performGameAction(rogue.getId(), action);
+
+		Assert.assertEquals(paladin.getMinions().size(), 1);
+	}
+
 }

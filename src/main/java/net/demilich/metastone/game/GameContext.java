@@ -151,7 +151,14 @@ public class GameContext implements Cloneable, IDisposable {
 			return;
 		}
 		gameEvent.setTriggerLayer(layer);
-		triggerManager.fireGameEvent(gameEvent);
+		try {
+			triggerManager.fireGameEvent(gameEvent);	
+		} catch(Exception e) {
+			logger.error("Error while processing gameEvent {}", gameEvent);
+			logic.panicDump();
+			throw e;
+		}
+		
 	}
 
 	public boolean gameDecided() {
@@ -299,8 +306,7 @@ public class GameContext implements Cloneable, IDisposable {
 		init();
 		while (!gameDecided()) {
 			startTurn(activePlayer);
-			while (playTurn())
-				;
+			while (playTurn()) {}
 			if (getTurn() > GameLogic.TURN_LIMIT) {
 				break;
 			}

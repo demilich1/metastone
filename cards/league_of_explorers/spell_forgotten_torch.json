@@ -16,7 +16,8 @@
 		},
 		"spell2": {
 			"class": "ShuffleToDeckSpell",
-			"cardId": "spell_roaring_torch"
+			"card": "spell_roaring_torch",
+			"target" : "NONE"
 		}
 	},
 	"set": "LEAGUE_OF_EXPLORERS",

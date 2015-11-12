@@ -990,7 +990,7 @@ public class GameLogic implements Cloneable {
 			}
 			context.fireGameEvent(new BoardChangedEvent(context));
 		} else {
-			destroyMinion(minion);
+			destroy(minion);
 		}
 	}
 
@@ -1257,8 +1257,12 @@ public class GameLogic implements Cloneable {
 			}
 		}
 	}
-
+	
 	private void resolveBattlecry(int playerId, Actor actor) {
+		resolveBattlecry(playerId, actor, 0);
+	}
+
+	private void resolveBattlecry(int playerId, Actor actor, int iteration) {
 		BattlecryAction battlecry = actor.getBattlecry();
 		Player player = context.getPlayer(playerId);
 		if (!battlecry.canBeExecuted(context, player)) {
@@ -1284,10 +1288,9 @@ public class GameLogic implements Cloneable {
 		} else {
 			battlecryAction = battlecry;
 		}
-		boolean doubleBattlecries = hasAttribute(player, Attribute.DOUBLE_BATTLECRIES);
 		performGameAction(playerId, battlecryAction);
-		if (doubleBattlecries) {
-			performGameAction(playerId, battlecryAction);
+		if (iteration < 1 && hasAttribute(player, Attribute.DOUBLE_BATTLECRIES)) {
+			resolveBattlecry(playerId, actor, iteration + 1);
 		}
 	}
 

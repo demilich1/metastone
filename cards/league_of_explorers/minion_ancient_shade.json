@@ -12,7 +12,7 @@
 	"battlecry": {
 		"spell": {
 			"class": "ShuffleToDeckSpell",
-			"cardId": "spell_ancient_curse"
+			"card": "spell_ancient_curse"
 		},
 		"targetSelection": "NONE",
 		"resolvedLate": false

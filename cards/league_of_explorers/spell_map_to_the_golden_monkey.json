@@ -12,7 +12,7 @@
 		"class": "MetaSpell",
 		"spell1": {
 			"class": "ShuffleToDeckSpell",
-			"cardId": "token_golden_monkey"
+			"card": "token_golden_monkey"
 		},
 		"spell2": {
 			"class": "DrawCardSpell",

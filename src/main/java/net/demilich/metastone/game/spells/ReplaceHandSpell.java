@@ -27,7 +27,10 @@ public class ReplaceHandSpell extends Spell {
 		}
 		
 		int count = player.getHand().getCount();
-		player.getHand().removeAll();
+		for (Card card : player.getHand().toList()) {
+			context.getLogic().removeCard(player.getId(), card);
+		}
+		
 		int manaCostModifier = desc.getInt(SpellArg.MANA_MODIFIER, 0);
 		for (int i = 0; i < count; i++) {
 			Card card = null;

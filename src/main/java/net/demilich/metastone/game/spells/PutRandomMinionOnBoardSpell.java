@@ -17,6 +17,9 @@ public class PutRandomMinionOnBoardSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		EntityFilter cardFilter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
 		CardLocation cardLocation = (CardLocation) desc.get(SpellArg.CARD_LOCATION);
+		if (cardLocation == null) {
+			cardLocation = CardLocation.DECK;
+		}
 		putRandomMinionFromDeckOnBoard(context, player, cardFilter, cardLocation);
 	}
 
@@ -32,11 +35,24 @@ public class PutRandomMinionOnBoardSpell extends Spell {
 		if (minionCard == null) {
 			return;
 		}
-
-		if (context.getLogic().summon(player.getId(), minionCard.summon())) {
+		
+		// we need to remove the card temporarily here, because there are card interactions like Starving Buzzard + Desert Camel
+		// which could result in the card being drawn while a minion is summoned
+		if (cardLocation == CardLocation.DECK) {
+			player.getDeck().remove(minionCard);	
+		}
+		
+		boolean summonSuccess = context.getLogic().summon(player.getId(), minionCard.summon());
+		
+		// re-add the card here if we removed it before
+		if (cardLocation == CardLocation.DECK) {
+			player.getDeck().add(minionCard);	
+		}
+		
+		if (summonSuccess) {
 			if (cardLocation == CardLocation.HAND) {
 				context.getLogic().removeCard(player.getId(), minionCard);
-			} else if (cardLocation == CardLocation.DECK) {
+			} else {
 				context.getLogic().removeCardFromDeck(player.getId(), minionCard);
 			}
 		}
