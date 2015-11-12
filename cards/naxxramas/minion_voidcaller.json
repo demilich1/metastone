@@ -4,7 +4,10 @@
 	"race": "DEMON",
 	"deathrattle": {
 		"class": "PutRandomMinionOnBoardSpell",
-		"race": "DEMON",
+		"cardFilter": {
+			"class": "RaceFilter",
+			"race": "DEMON"
+		},
 		"cardLocation": "HAND"
 	},
 	"id": "minion_voidcaller",

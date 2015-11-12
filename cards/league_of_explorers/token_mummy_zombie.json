@@ -1,0 +1,14 @@
+{
+	"baseAttack": 3,
+	"baseHp": 3,
+	"id": "token_mummy_zombie",
+	"name": "Mummy Zombie",
+	"description": "",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"baseManaCost":3,
+	"collectible": false,
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}

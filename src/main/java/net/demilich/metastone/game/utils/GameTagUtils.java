@@ -35,6 +35,7 @@ public class GameTagUtils {
 		case COUNTERED:
 		case DIVINE_SHIELD:
 		case DOUBLE_DEATHRATTLES:
+		case DOUBLE_BATTLECRIES:
 		case ENRAGED:
 		case FROZEN:
 		case IMMUNE:

@@ -1,0 +1,18 @@
+{
+	"baseAttack": 5,
+	"baseHp": 4,
+	"id": "minion_tomb_pillager",
+	"name": "Tomb Pillager",
+	"description": "Deathrattle: Add a Coin to your Hand.",
+	"type": "MINION",
+	"heroClass": "ROGUE",
+	"rarity": "COMMON",
+	"deathrattle": {
+		"class": "ReceiveCardSpell",
+		"card": "spell_the_coin"
+	},
+	"baseManaCost": 4,
+	"collectible": true,
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}

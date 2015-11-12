@@ -1,0 +1,17 @@
+{
+	"name": "Roaring Torch",
+	"description": "Deal 6 damage.",
+	"id": "spell_roaring_torch",
+	"type": "SPELL",
+	"rarity": "FREE",
+	"heroClass": "MAGE",
+	"baseManaCost": 3,
+	"collectible": false,
+	"targetSelection": "ANY",
+	"spell": {
+		"class": "DamageSpell",
+		"value": 6
+	},
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}

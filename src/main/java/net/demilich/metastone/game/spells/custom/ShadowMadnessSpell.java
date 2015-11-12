@@ -33,6 +33,10 @@ public class ShadowMadnessSpell extends MindControlSpell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		// mind control minion
 		super.onCast(context, player, desc, source, target);
+		
+		if (target.isDestroyed()) {
+			return;
+		}
 
 		// minion should be able to attack this turn
 		target.removeAttribute(Attribute.SUMMONING_SICKNESS);

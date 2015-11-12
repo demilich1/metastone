@@ -14,7 +14,7 @@
 			}
 		},
 		"targetSelection": "MINIONS",
-		"resolvedLate": false
+		"resolvedLate": true
 	},
 	"id": "minion_cruel_taskmaster",
 	"name": "Cruel Taskmaster",

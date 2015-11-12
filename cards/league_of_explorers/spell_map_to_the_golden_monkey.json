@@ -1,0 +1,24 @@
+{
+	"name": "Map to the Golden Monkey",
+	"description": "Shuffle the Golden Monkey into your Deck. Draw a card.",
+	"id": "spell_map_to_the_golden_monkey",
+	"type": "SPELL",
+	"rarity": "FREE",
+	"heroClass": "ANY",
+	"baseManaCost": 2,
+	"collectible": false,
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "MetaSpell",
+		"spell1": {
+			"class": "ShuffleToDeckSpell",
+			"card": "token_golden_monkey"
+		},
+		"spell2": {
+			"class": "DrawCardSpell",
+			"value": 1
+		}
+	},
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}

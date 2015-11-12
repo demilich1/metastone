@@ -1,0 +1,22 @@
+{
+	"baseAttack": 3,
+	"baseHp": 5,
+	"id": "minion_elise_starseeker",
+	"name": "Elise Starseeker",
+	"description": "Battlecry: Shuffle the 'Map to the Golden Monkey' into your deck.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"baseManaCost":4,
+	"battlecry": {
+		"spell": {
+			"class": "ShuffleToDeckSpell",
+			"card": "spell_map_to_the_golden_monkey"
+		},
+		"targetSelection": "NONE",
+		"resolvedLate": false
+	},
+	"collectible": true,
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}

@@ -152,7 +152,10 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void applyAttribute(Entity entity, Attribute attr) {
-		if (attr == Attribute.WINDFURY && !entity.hasAttribute(Attribute.WINDFURY)) {
+		if (attr == Attribute.MEGA_WINDFURY && entity.hasAttribute(Attribute.WINDFURY)) {
+			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, MEGA_WINDFURY_ATTACKS - WINDFURY_ATTACKS);
+		} else if (attr == Attribute.WINDFURY && !entity.hasAttribute(Attribute.WINDFURY)
+				&& !entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, WINDFURY_ATTACKS - 1);
 		} else if (attr == Attribute.MEGA_WINDFURY && !entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, MEGA_WINDFURY_ATTACKS - 1);
@@ -625,8 +628,8 @@ public class GameLogic implements Cloneable {
 		int attackerDamage = attacker.getAttack();
 		int defenderDamage = target.getAttack();
 		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, target, attackerDamage), TriggerLayer.SECRET);
-		// secret may have killed attacker
-		if (attacker.isDestroyed()) {
+		// secret may have killed attacker ADDENDUM: or defender
+		if (attacker.isDestroyed() || target.isDestroyed()) {
 			return;
 		}
 
@@ -973,17 +976,22 @@ public class GameLogic implements Cloneable {
 		Player opponent = context.getOpponent(player);
 		if (!opponent.getMinions().contains(minion)) {
 			logger.warn("Minion {} cannot be mind-controlled, because opponent does not own it.", minion);
+			return;
 		}
-		context.getOpponent(player).getMinions().remove(minion);
-		player.getMinions().add(minion);
-		minion.setOwner(player.getId());
-		applyAttribute(minion, Attribute.SUMMONING_SICKNESS);
-		List<IGameEventListener> triggers = context.getTriggersAssociatedWith(minion.getReference());
-		removeSpelltriggers(minion);
-		for (IGameEventListener trigger : triggers) {
-			addGameEventListener(player, trigger, minion);
+		if (canSummonMoreMinions(player)) {
+			context.getOpponent(player).getMinions().remove(minion);
+			player.getMinions().add(minion);
+			minion.setOwner(player.getId());
+			applyAttribute(minion, Attribute.SUMMONING_SICKNESS);
+			List<IGameEventListener> triggers = context.getTriggersAssociatedWith(minion.getReference());
+			removeSpelltriggers(minion);
+			for (IGameEventListener trigger : triggers) {
+				addGameEventListener(player, trigger, minion);
+			}
+			context.fireGameEvent(new BoardChangedEvent(context));
+		} else {
+			destroyMinion(minion);
 		}
-		context.fireGameEvent(new BoardChangedEvent(context));
 	}
 
 	public void modifyCurrentMana(int playerId, int mana) {
@@ -1166,10 +1174,10 @@ public class GameLogic implements Cloneable {
 
 	public void refreshAttacksPerRound(Entity entity) {
 		int attacks = 1;
-		if (entity.hasAttribute(Attribute.WINDFURY)) {
-			attacks = WINDFURY_ATTACKS;
-		} else if (entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
+		if (entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
 			attacks = MEGA_WINDFURY_ATTACKS;
+		} else if (entity.hasAttribute(Attribute.WINDFURY)) {
+			attacks = WINDFURY_ATTACKS;
 		}
 		entity.setAttribute(Attribute.NUMBER_OF_ATTACKS, attacks);
 	}
@@ -1178,7 +1186,10 @@ public class GameLogic implements Cloneable {
 		if (!entity.hasAttribute(attr)) {
 			return;
 		}
-		if (attr == Attribute.WINDFURY) {
+		if (attr == Attribute.MEGA_WINDFURY && entity.hasAttribute(Attribute.WINDFURY)) {
+			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, WINDFURY_ATTACKS - MEGA_WINDFURY_ATTACKS);
+		}
+		if (attr == Attribute.WINDFURY && !entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, 1 - WINDFURY_ATTACKS);
 		} else if (attr == Attribute.MEGA_WINDFURY) {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, 1 - MEGA_WINDFURY_ATTACKS);
@@ -1189,12 +1200,23 @@ public class GameLogic implements Cloneable {
 
 	public void removeCard(int playerId, Card card) {
 		Player player = context.getPlayer(playerId);
-		log("Card {} has been moved to the GRAVEYARD", card);
+		log("Card {} has been moved from the HAND to the GRAVEYARD", card);
 		card.setLocation(CardLocation.GRAVEYARD);
 		if (card.getAttribute(Attribute.PASSIVE_TRIGGER) != null) {
 			removeSpelltriggers(card);
 		}
 		player.getHand().remove(card);
+		player.getGraveyard().add(card);
+	}
+	
+	public void removeCardFromDeck(int playerID, Card card) {
+		Player player = context.getPlayer(playerID);
+		log("Card {} has been moved from the DECK to the GRAVEYARD", card);
+		card.setLocation(CardLocation.GRAVEYARD);
+		if (card.getAttribute(Attribute.PASSIVE_TRIGGER) != null) {
+			removeSpelltriggers(card);
+		}
+		player.getDeck().remove(card);
 		player.getGraveyard().add(card);
 	}
 
@@ -1262,7 +1284,11 @@ public class GameLogic implements Cloneable {
 		} else {
 			battlecryAction = battlecry;
 		}
+		boolean doubleBattlecries = hasAttribute(player, Attribute.DOUBLE_BATTLECRIES);
 		performGameAction(playerId, battlecryAction);
+		if (doubleBattlecries) {
+			performGameAction(playerId, battlecryAction);
+		}
 	}
 
 	public void resolveDeathrattles(Player player, Actor actor) {
@@ -1277,12 +1303,12 @@ public class GameLogic implements Cloneable {
 			player.getMinions().indexOf(actor);
 		}
 		boolean doubleDeathrattles = hasAttribute(player, Attribute.DOUBLE_DEATHRATTLES);
-		EntityReference sourceRefenrence = actor.getReference();
+		EntityReference sourceReference = actor.getReference();
 		for (SpellDesc deathrattleTemplate : actor.getDeathrattles()) {
 			SpellDesc deathrattle = deathrattleTemplate.addArg(SpellArg.BOARD_POSITION_ABSOLUTE, boardPosition);
-			castSpell(player.getId(), deathrattle, sourceRefenrence, EntityReference.NONE, false);
+			castSpell(player.getId(), deathrattle, sourceReference, EntityReference.NONE, false);
 			if (doubleDeathrattles) {
-				castSpell(player.getId(), deathrattle, sourceRefenrence, EntityReference.NONE, false);
+				castSpell(player.getId(), deathrattle, sourceReference, EntityReference.NONE, false);
 			}
 		}
 	}

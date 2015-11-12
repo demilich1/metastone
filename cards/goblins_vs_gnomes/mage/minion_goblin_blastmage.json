@@ -5,11 +5,11 @@
 		"spell": {
 			"class": "MissilesSpell",
 			"howMany": 4,
-			"target": "ENEMY_CHARACTERS",
-			"condition": {
-				"class": "RaceOnBoardCondition",
-				"race": "MECH"
-			}
+			"target": "ENEMY_CHARACTERS"
+		},
+		"condition": {
+			"class": "RaceOnBoardCondition",
+			"race": "MECH"
 		},
 		"resolvedLate": false
 	},

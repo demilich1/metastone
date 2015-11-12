@@ -1,0 +1,25 @@
+{
+	"baseAttack": 7,
+	"baseHp": 7,
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "SummonSpell",
+			"card": "token_scarab",
+			"boardPositionRelative": "RIGHT"
+		}
+	},
+	"id": "minion_obsidian_destroyer",
+	"name": "Obsidian Destroyer",
+	"description": "At the end of your turn, summon a 1/1 Scarab with Taunt.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 7,
+	"collectible": true,
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}

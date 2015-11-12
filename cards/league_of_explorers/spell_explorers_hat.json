@@ -1,0 +1,28 @@
+{
+	"name": "Explorer's Hat",
+	"description": "Give a minion +1/+1 and \"Deathrattle: Add an Explorer's Hat to your Hand.\"",
+	"id": "spell_explorers_hat",
+	"type": "SPELL",
+	"rarity": "RARE",
+	"heroClass": "HUNTER",
+	"baseManaCost": 2,
+	"collectible": true,
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "MetaSpell",
+		"spell1": {
+			"class": "BuffSpell",
+			"attackBonus": 1,
+			"hpBonus": 1
+		},
+		"spell2": {
+			"class": "AddDeathrattleSpell",
+			"spell1": {
+				"class": "ReceiveCardSpell",
+				"card": "spell_explorers_hat"
+			}
+		}
+	},
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}
