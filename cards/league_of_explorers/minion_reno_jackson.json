@@ -1,0 +1,25 @@
+{
+	"baseAttack": 4,
+	"baseHp": 6,
+	"id": "minion_reno_jackson",
+	"name": "Reno Jackson",
+	"description": "Battlecry: If your deck contains no more than 1 of any card, fully heal your Hero.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"baseManaCost": 6,
+	"battlecry": {
+		"spell": {
+			"class": "HealToFullSpell",
+			"target": "FRIENDLY_HERO"
+		},
+		"condition": {
+		  "class": "HighlanderDeckCondition"
+		},
+		"targetSelection": "NONE",
+		"resolvedLate": false
+	},
+	"collectible": true,
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}
