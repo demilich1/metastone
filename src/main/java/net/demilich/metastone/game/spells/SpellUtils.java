@@ -120,6 +120,17 @@ public class SpellUtils {
 		}
 		return count;
 	}
+	
+	public static boolean highlanderDeck(Player player) {
+		List<Card> cards = new ArrayList<Card>();
+		for (Card card : player.getDeck()) {
+			if (cards.contains(card)) {
+				return false;
+			}
+			cards.add(card);
+		}
+		return true;
+	}
 
 	public static boolean holdsCardOfType(Player player, CardType cardType) {
 		for (Card card : player.getHand()) {
