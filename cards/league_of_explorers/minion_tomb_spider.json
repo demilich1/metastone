@@ -1,0 +1,30 @@
+{
+	"baseAttack": 3,
+	"baseHp": 3,
+	"id": "minion_tomb_spider",
+	"name": "Tomb Spider",
+	"description": "Battlecry: Discover a Beast.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 4,
+	"battlecry": {
+		"spell": {
+			"class": "DiscoverRandomCardSpell",
+			"spell1": {
+				"class": "ReceiveCardSpell",
+				"target": "SELF"
+			},
+			"cardFilter": {
+				"class": "CardFilter",
+				"race": "BEAST"
+			}
+		},
+		"targetSelection": "NONE",
+		"resolvedLate": false
+	},
+	"race": "BEAST",
+	"collectible": true,
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}
