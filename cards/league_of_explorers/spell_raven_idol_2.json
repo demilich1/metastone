@@ -1,0 +1,23 @@
+{
+	"name": "Discover a spell",
+	"description": "Discover a spell.",
+	"id": "spell_raven_idol_2",
+	"type": "SPELL",
+	"rarity": "COMMON",
+	"heroClass": "DRUID",
+	"baseManaCost": 1,
+	"collectible": false,
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "DiscoverRandomCardSpell",
+		"spell1": {
+		  "class": "ReceiveCardSpell"
+		},
+		"cardFilter": {
+		  "class": "CardFilter",
+		  "cardType": "SPELL"
+		}
+	},
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}
