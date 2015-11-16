@@ -1,7 +1,7 @@
 {
 	"baseAttack": 1,
 	"baseHp": 1,
-	"id": "minion_jeweled_scard",
+	"id": "minion_jeweled_scarab",
 	"name": "Jeweled Scarab",
 	"description": "Battlecry: Discover a 3-Cost card.",
 	"type": "MINION",
