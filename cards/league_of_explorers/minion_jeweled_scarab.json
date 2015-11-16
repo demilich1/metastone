@@ -10,7 +10,7 @@
 	"baseManaCost": 2,
 	"battlecry": {
 		"spell": {
-			"class": "DiscoverCardSpell",
+			"class": "DiscoverRandomCardSpell",
 			"spell1": {
 				"class": "ReceiveCardSpell",
 				"target": "SELF"
