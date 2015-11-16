@@ -8,7 +8,10 @@
 	"baseManaCost": 1,
 	"targetSelection": "NONE",
 	"spell": {
-		"class": "custom.TrackingSpell"
+		"class": "DiscoverDrawSpell",
+		"spell1": {
+			"class": "ReceiveCardSpell"
+		}
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
