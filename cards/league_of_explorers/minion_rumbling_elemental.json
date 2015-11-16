@@ -19,7 +19,7 @@
 			"class": "DamageSpell",
 			"value": 2,
 			"target": "ENEMY_CHARACTERS",
-			"randomTarget": true,
+			"randomTarget": true
 		}
 	},
 	"collectible": true,

@@ -246,7 +246,10 @@ public class GameLogic implements Cloneable {
 		// note: this code block is basically exclusively for the SpellBender
 		// Secret, but it can easily be expanded if targets of area of effect
 		// spell should be changeable as well
-		Card sourceCard = source.getEntityType() == EntityType.CARD ? (Card) source : null;
+		Card sourceCard = null;
+		if (source != null) {
+			sourceCard = source.getEntityType() == EntityType.CARD ? (Card) source : null;
+		}
 		if (sourceCard != null && sourceCard.getCardType() == CardType.SPELL && !spellDesc.hasPredefinedTarget() && targets != null
 				&& targets.size() == 1) {
 			if (sourceCard instanceof SpellCard) {
@@ -1259,10 +1262,6 @@ public class GameLogic implements Cloneable {
 	}
 	
 	private void resolveBattlecry(int playerId, Actor actor) {
-		resolveBattlecry(playerId, actor, 0);
-	}
-
-	private void resolveBattlecry(int playerId, Actor actor, int iteration) {
 		BattlecryAction battlecry = actor.getBattlecry();
 		Player player = context.getPlayer(playerId);
 		if (!battlecry.canBeExecuted(context, player)) {
@@ -1289,8 +1288,8 @@ public class GameLogic implements Cloneable {
 			battlecryAction = battlecry;
 		}
 		performGameAction(playerId, battlecryAction);
-		if (iteration < 1 && hasAttribute(player, Attribute.DOUBLE_BATTLECRIES)) {
-			resolveBattlecry(playerId, actor, iteration + 1);
+		if (hasAttribute(player, Attribute.DOUBLE_BATTLECRIES)) {
+			performGameAction(playerId, battlecryAction);
 		}
 	}
 

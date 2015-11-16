@@ -122,12 +122,12 @@ public class SpellUtils {
 	}
 	
 	public static boolean highlanderDeck(Player player) {
-		List<Card> cards = new ArrayList<Card>();
+		List<String> cards = new ArrayList<String>();
 		for (Card card : player.getDeck()) {
-			if (cards.contains(card)) {
+			if (cards.contains(card.getCardId())) {
 				return false;
 			}
-			cards.add(card);
+			cards.add(card.getCardId());
 		}
 		return true;
 	}
