@@ -9,4 +9,5 @@ public enum ActionType {
 	HERO_POWER,
 	BATTLECRY,
 	EQUIP_WEAPON,
+	DISCOVER,
 }
