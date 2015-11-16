@@ -1,0 +1,30 @@
+{
+	"baseAttack": 1,
+	"baseHp": 2,
+	"id": "minion_museum_curator",
+	"name": "Museum Curator",
+	"description": "Battlecry: Discover a Deathrattle card.",
+	"type": "MINION",
+	"heroClass": "PRIEST",
+	"rarity": "COMMON",
+	"baseManaCost": 2,
+	"battlecry": {
+		"spell": {
+			"class": "DiscoverRandomCardSpell",
+			"spell1": {
+				"class": "ReceiveCardSpell",
+				"target": "SELF"
+			},
+			"cardFilter": {
+				"class": "AttributeFilter",
+				"attribute": "DEATHRATTLE",
+				"operation": "HAS"
+			}
+		},
+		"targetSelection": "NONE",
+		"resolvedLate": false
+	},
+	"collectible": true,
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}
