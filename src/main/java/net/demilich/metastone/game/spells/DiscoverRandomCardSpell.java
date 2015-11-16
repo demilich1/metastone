@@ -18,7 +18,7 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.targeting.EntityReference;
 
-public class DiscoverCardSpell extends Spell {
+public class DiscoverRandomCardSpell extends Spell {
 	
 	public static SpellDesc create(EntityReference target, SpellDesc spell1) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(MetaSpell.class);
@@ -41,7 +41,7 @@ public class DiscoverCardSpell extends Spell {
 		cards = new CardCollection();
 		Card card = null;
 		
-		int count = desc.getInt(SpellArg.HOW_MANY, 1);
+		int count = desc.getInt(SpellArg.HOW_MANY, 3);
 		for (int i = 0; i < count; i++) {
 			if (!result.isEmpty()) {
 				card = result.getRandom();
@@ -51,27 +51,20 @@ public class DiscoverCardSpell extends Spell {
 				card = CardCatalogue.getCardById(replacementCard);
 			}
 		}
+		
 		SpellDesc spell = (SpellDesc) desc.get(SpellArg.SPELL_1);
-		SpellDesc spell2 = spell.clone();
-		
-		spell.addArg(SpellArg.CARD, card.getCardId());
-		DiscoverAction discover = DiscoverAction.createDiscover(spell);
-		discover.setActionSuffix(card.getName());
-		
-		card = result.getRandom();
-		spell2.addArg(SpellArg.CARD, card.getCardId());
-		DiscoverAction discover2 = DiscoverAction.createDiscover(spell2);
-		discover2.setActionSuffix(card.getName());
-		
-		GameAction discoverAction = (GameAction) discover;
-		
 		List<GameAction> discoverActions = new ArrayList<>();
-		discoverActions.add(discover);
-		discoverActions.add(discover2);
-
+		List<SpellDesc> spells = New ArrayList<SpellDesc>();
+		for (Card card : cards) {
+			SpellDesc spellClone = spell.clone();
+			spellClone.addArg(SpellArg.CARD, card.getCardId());
+			DiscoverAction discover = DiscoverAction.createDiscover(spellClone);
+			discover.setActionSuffix(card.getName());
+			discoverActions.add(discover);
+		}
 		
-		discoverAction = player.getBehaviour().requestAction(context, player, discoverActions);
-		discover = (DiscoverAction) discoverAction;
+		GameAction discoverAction = player.getBehaviour().requestAction(context, player, discoverActions);
+		DiscoverAction discover = (DiscoverAction) discoverAction;
 		SpellUtils.castChildSpell(context, player, discover.getSpell(), source, target);
 	}
 
