@@ -62,6 +62,7 @@ public enum Attribute {
 	HERO_POWER_DAMAGE,
 	SHADOWFORM,
 	MEATSHIELD,
+	CURSED,
 
 	// AI flags
 	MARKED_FOR_DEATH, 

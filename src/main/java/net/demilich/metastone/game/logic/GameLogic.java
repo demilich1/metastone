@@ -384,9 +384,9 @@ public class GameLogic implements Cloneable {
 
 		target.setAttribute(Attribute.LAST_HIT, damageDealt);
 		if (damageDealt > 0) {
-			DamageEvent damageEvent = new DamageEvent(context, target, source, damage);
+			DamageEvent damageEvent = new DamageEvent(context, target, source, damageDealt);
 			context.fireGameEvent(damageEvent);
-			player.getStatistics().damageDealt(damage);
+			player.getStatistics().damageDealt(damageDealt);
 		}
 
 		return damageDealt;
@@ -396,6 +396,9 @@ public class GameLogic implements Cloneable {
 		if (hero.hasAttribute(Attribute.IMMUNE)) {
 			log("{} is IMMUNE and does not take damage", hero);
 			return 0;
+		}
+		if (hero.hasAttribute(Attribute.CURSED)) {
+			damage *= 2;
 		}
 		int effectiveHp = hero.getHp() + hero.getArmor();
 		hero.modifyArmor(-damage);

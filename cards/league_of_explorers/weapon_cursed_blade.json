@@ -1,0 +1,24 @@
+{
+	"name": "Cursed Blade",
+	"description": "Double all damage dealt to your hero.",
+	"collectible": true,
+	"id": "weapon_cursed_blade",
+	"type": "WEAPON",
+	"rarity": "RARE",
+	"heroClass": "WARRIOR",
+	"baseManaCost": 1,
+	"damage": 2,
+	"durability": 3,
+	"onEquip": {
+		"class": "AddAttributeSpell",
+		"target": "FRIENDLY_HERO",
+		"attribute": "CURSED"
+	},
+	"onUnequip": {
+		"class": "RemoveAttributeSpell",
+		"target": "FRIENDLY_HERO",
+		"attribute": "CURSED"
+	},
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}
