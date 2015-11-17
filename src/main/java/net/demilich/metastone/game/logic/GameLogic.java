@@ -170,7 +170,8 @@ public class GameLogic implements Cloneable {
 	}
 
 	public int applySpellpower(Player player, Entity source, int baseValue) {
-		int spellpower = getTotalAttributeValue(player, Attribute.SPELL_DAMAGE);
+		int spellpower = getTotalAttributeValue(player, Attribute.SPELL_DAMAGE)
+				+ getTotalAttributeValue(context.getOpponent(player), Attribute.OPPONENT_SPELL_DAMAGE);
 		if (source.hasAttribute(Attribute.SPELL_DAMAGE_MULTIPLIER)) {
 			spellpower *= source.getAttributeValue(Attribute.SPELL_DAMAGE_MULTIPLIER);
 		}
@@ -364,6 +365,9 @@ public class GameLogic implements Cloneable {
 			damage = applyAmplify(player, damage);
 		}
 		int damageDealt = 0;
+		if (target.hasAttribute(Attribute.TAKE_DOUBLE_DAMAGE)) {
+			damage *= 2;
+		}
 		switch (target.getEntityType()) {
 		case MINION:
 			damageDealt = damageMinion(player, (Actor) target, damage);
@@ -375,7 +379,11 @@ public class GameLogic implements Cloneable {
 				target = meatshield;
 				damageDealt = damageMinion(player, meatshield, damage);
 				break;
-			} else if (isFatalDamage(target, damage)) {
+			}
+			if (hasAttribute(context.getPlayer(target.getOwner()), Attribute.ARMOR_SUIT)) {
+				damage = Math.min(damage, 1);
+			}
+			if (isFatalDamage(target, damage)) {
 				FatalDamageEvent fatalDamageEvent = new FatalDamageEvent(context, target);
 				context.fireGameEvent(fatalDamageEvent);
 			}

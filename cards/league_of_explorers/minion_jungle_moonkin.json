@@ -1,0 +1,19 @@
+{
+	"baseAttack": 4,
+	"baseHp": 4,
+	"id": "minion_jungle_moonkin",
+	"name": "Jungle Moonkin",
+	"description": "Both players have Spell Damage +2",
+	"race": "BEAST",
+	"type": "MINION",
+	"heroClass": "DRUID",
+	"rarity": "RARE",
+	"baseManaCost": 4,
+	"attributes": {
+		"SPELL_DAMAGE": 2,
+		"OPPONENT_SPELL_DAMAGE": 2
+	},
+	"collectible": true,
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}

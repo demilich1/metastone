@@ -31,6 +31,7 @@ public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Ob
 		parseAttribute(Attribute.WINDFURY, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.MEGA_WINDFURY, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.TAUNT, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(Attribute.OPPONENT_SPELL_DAMAGE, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.SPELL_DAMAGE, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.SPELL_AMPLIFY_MULTIPLIER, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.SPELL_DAMAGE_MULTIPLIER, jsonData, map, ParseValueType.INTEGER);
@@ -44,6 +45,7 @@ public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Ob
 		parseAttribute(Attribute.DOUBLE_DEATHRATTLES, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.HERO_POWER_CAN_TARGET_MINIONS, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.MEATSHIELD, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(Attribute.ARMOR_SUIT, jsonData, map, ParseValueType.BOOLEAN);
 		return map;
 	}
 

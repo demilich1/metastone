@@ -1,0 +1,17 @@
+{
+	"baseAttack": 4,
+	"baseHp": 4,
+	"id": "minion_animated_armor",
+	"name": "Animated Armor",
+	"description": "Your hero can only take 1 damage at a time.",
+	"type": "MINION",
+	"heroClass": "MAGE",
+	"rarity": "RARE",
+	"attributes": {
+		"ARMOR_SUIT": true
+	},
+	"baseManaCost": 4,
+	"collectible": true,
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}
