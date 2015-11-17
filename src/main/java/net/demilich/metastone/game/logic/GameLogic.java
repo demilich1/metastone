@@ -1107,7 +1107,7 @@ public class GameLogic implements Cloneable {
 		context.fireGameEvent(cardPlayedEvent);
 
 		if (card.hasAttribute(Attribute.OVERLOAD)) {
-			context.fireGameEvent(new OverloadEvent(context, playerId));
+			context.fireGameEvent(new OverloadEvent(context, playerId, card));
 		}
 
 		removeCard(playerId, card);
