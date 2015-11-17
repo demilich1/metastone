@@ -9,13 +9,10 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.DiscoverAction;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
-import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class DiscoverCardSpell extends Spell {
@@ -47,7 +44,6 @@ public class DiscoverCardSpell extends Spell {
 		
 		SpellDesc spell = (SpellDesc) desc.get(SpellArg.SPELL_1);
 		List<GameAction> discoverActions = new ArrayList<>();
-		List<SpellDesc> spells = New ArrayList<SpellDesc>();
 		for (Card card : cards) {
 			SpellDesc spellClone = spell.clone();
 			spellClone.addArg(SpellArg.CARD, card.getCardId());

@@ -10,7 +10,7 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "SummonSpell",
-		"cards": {
+		"cards": [
 		  "token_mummy_zombie",
 		  "token_mummy_zombie",
 		  "token_mummy_zombie",
@@ -18,7 +18,7 @@
 		  "token_mummy_zombie",
 		  "token_mummy_zombie",
 		  "token_mummy_zombie"
-		}
+		]
 	},
 	"set": "LEAGUE_OF_EXPLORERS",
 	"fileFormatVersion": 1

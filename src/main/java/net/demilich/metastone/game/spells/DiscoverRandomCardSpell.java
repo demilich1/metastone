@@ -32,29 +32,24 @@ public class DiscoverRandomCardSpell extends Spell {
 		EntityFilter cardFilter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
 		CardCollection cards = CardCatalogue.query((CardType) null);
 		CardCollection result = new CardCollection();
-		String replacementCard = (String) desc.get(SpellArg.CARD);
 		for (Card card : cards) {
 			if (cardFilter.matches(context, player, card)) {
 				result.add(card);
 			}
 		}
 		cards = new CardCollection();
-		Card card = null;
 		
 		int count = desc.getInt(SpellArg.HOW_MANY, 3);
 		for (int i = 0; i < count; i++) {
 			if (!result.isEmpty()) {
-				card = result.getRandom();
+				Card card = result.getRandom();
 				cards.add(card);
 				result.remove(card);
-			} else if (replacementCard != null) {
-				card = CardCatalogue.getCardById(replacementCard);
 			}
 		}
 		
 		SpellDesc spell = (SpellDesc) desc.get(SpellArg.SPELL_1);
 		List<GameAction> discoverActions = new ArrayList<>();
-		List<SpellDesc> spells = New ArrayList<SpellDesc>();
 		for (Card card : cards) {
 			SpellDesc spellClone = spell.clone();
 			spellClone.addArg(SpellArg.CARD, card.getCardId());
