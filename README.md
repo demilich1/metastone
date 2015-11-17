@@ -10,7 +10,7 @@ This is no Hearthstone replacement or clone. Please do not request better graphi
 Sure! There is still a lot to do and anybody willing to contribute is welcome
 
 ### What needs to be done? ###
-- a deck counter in Play Mode is missing (indicating how many cards are left in your deck); also UI improvements in general are welcome
+- UI improvements in general are welcome
 - we always need more unit tests! If you don't know what to test, take a look at http://hearthstone.gamepedia.com/Advanced_rulebook and just pick an example of card interaction from that wiki page
 - code refactorings to make the code simpler and/or faster
 - there is a bug in the code and you know how to fix it? Great!
