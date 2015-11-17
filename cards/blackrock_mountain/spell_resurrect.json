@@ -1,7 +1,7 @@
 {
 	"targetSelection": "NONE",
 	"spell": {
-		"class": "custom.ResurrectSpell"
+		"class": "ResurrectSpell"
 	},
 	"id": "spell_resurrect",
 	"name": "Resurrect",

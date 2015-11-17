@@ -1,0 +1,21 @@
+{
+	"name": "Anyfin Can Happen",
+	"description": "Summon 7 Murlocs that died this game.",
+	"id": "spell_anyfin_can_happen",
+	"type": "SPELL",
+	"rarity": "RARE",
+	"heroClass": "PALADIN",
+	"baseManaCost": 10,
+	"collectible": true,
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "ResurrectFromBothSpell",
+		"cardFilter": {
+			"class": "CardFilter",
+			"race": "MURLOC"
+		},
+		"value": 7
+	},
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}

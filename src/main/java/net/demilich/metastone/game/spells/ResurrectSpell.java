@@ -1,4 +1,4 @@
-package net.demilich.metastone.game.spells.custom;
+package net.demilich.metastone.game.spells;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,6 @@ import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
 public class ResurrectSpell extends Spell {
