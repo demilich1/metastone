@@ -5,16 +5,16 @@ import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.TargetAcquisitionEvent;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
-public class OtherFriendlyTargetedTrigger extends TargetAcquisitionTrigger {
+public class FriendlyTargetedTrigger extends TargetAcquisitionTrigger {
 
-	public OtherFriendlyTargetedTrigger(EventTriggerDesc desc) {
+	public FriendlyTargetedTrigger(EventTriggerDesc desc) {
 		super(desc);
 	}
 
 	@Override
 	protected boolean fire(GameEvent event, Entity host) {
 		TargetAcquisitionEvent targetAcquisitionEvent = (TargetAcquisitionEvent) event;
-		if (targetAcquisitionEvent.getEventTarget() == host || host.getOwner() != targetAcquisitionEvent.getEventTarget().getOwner()) {
+		if (host.getOwner() != targetAcquisitionEvent.getEventTarget().getOwner()) {
 			return false;
 		}
 		
