@@ -1,0 +1,28 @@
+{
+	"baseAttack": 4,
+	"baseHp": 6,
+	"id": "minion_djinni_of_zephyrs",
+	"name": "Djinni of Zephyrs",
+	"description": "Whenever you target another friendly minion with a spell, cast it on this one.",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"baseManaCost": 5,
+	"trigger": {
+		"eventTrigger": {
+			"class": "FriendlyTargetedTrigger",
+			"actionType": "SPELL",
+			"targetPlayer": "SELF",
+			"targetEntityType": "MINION",
+			"ignoreHost": true
+		},
+		"spell": {
+			"class": "RecastSpell",
+			"card": "PENDING_CARD",
+			"target": "SELF"
+		}
+	},
+	"collectible": true,
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}
