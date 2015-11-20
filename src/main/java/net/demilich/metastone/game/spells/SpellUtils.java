@@ -6,6 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
@@ -56,6 +57,16 @@ public class SpellUtils {
 			}
 		}
 		return result;
+	}
+	
+	public static Card getCard(GameContext context, SpellDesc spell) {
+		Card card = null;
+		String cardName = (String) spell.get(SpellArg.CARD);
+		card = CardCatalogue.getCardById(cardName);
+		if (spell.get(SpellArg.CARD).toString().equals("PENDING_CARD")) {
+			card = (Card) context.getEnvironment().get(Environment.PENDING_CARD);
+		}
+		return card;
 	}
 
 	public static Card[] getCards(SpellDesc spell) {
