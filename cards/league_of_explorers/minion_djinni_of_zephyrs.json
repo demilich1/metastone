@@ -6,7 +6,7 @@
 	"description": "Whenever you target another friendly minion with a spell, cast it on this one.",
 	"type": "MINION",
 	"heroClass": "ANY",
-	"rarity": "COMMON",
+	"rarity": "EPIC",
 	"baseManaCost": 5,
 	"trigger": {
 		"eventTrigger": {
