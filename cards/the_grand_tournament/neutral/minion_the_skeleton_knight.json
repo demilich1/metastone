@@ -23,6 +23,9 @@
 	"rarity": "LEGENDARY",
 	"set": "THE_GRAND_TOURNAMENT",
 	"baseManaCost": 6,
+	"attribute": {
+		"DEATHRATTLES": true
+	},
 	"collectible": true,
 	"fileFormatVersion": 1
 }

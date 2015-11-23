@@ -26,6 +26,9 @@
 	"rarity": "EPIC",
 	"set": "THE_GRAND_TOURNAMENT",
 	"baseManaCost": 4,
+	"attribute": {
+		"BATTLECRY": true
+	},
 	"collectible": true,
 	"fileFormatVersion": 1
 }

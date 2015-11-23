@@ -30,7 +30,11 @@
 		"targetSelection": "NONE",
 		"resolvedLate": false
 	},
+	"race": "MURLOC",
 	"collectible": true,
+	"attribute": {
+		"BATTLECRY": true
+	},
 	"set": "LEAGUE_OF_EXPLORERS",
 	"fileFormatVersion": 1
 }

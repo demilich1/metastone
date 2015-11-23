@@ -24,7 +24,8 @@
 	"baseManaCost": 7,
 	"collectible": true,
 	"attributes": {
-		"TAUNT": true
+		"TAUNT": true,
+		"DEATHRATTLES": true
 	},
 	"fileFormatVersion": 1
 }

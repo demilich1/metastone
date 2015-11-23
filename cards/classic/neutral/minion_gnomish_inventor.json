@@ -16,6 +16,9 @@
 	"rarity": "FREE",
 	"baseManaCost": 4,
 	"collectible": true,
+	"attribute": {
+		"BATTLECRY": true
+	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

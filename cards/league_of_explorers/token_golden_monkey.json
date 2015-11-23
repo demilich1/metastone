@@ -32,7 +32,8 @@
 		"resolvedLate": false
 	},
 	"attributes": {
-		"TAUNT": true
+		"TAUNT": true,
+		"BATTLECRY": true
 	},
 	"collectible": false,
 	"set": "LEAGUE_OF_EXPLORERS",

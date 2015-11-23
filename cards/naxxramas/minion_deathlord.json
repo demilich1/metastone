@@ -15,7 +15,8 @@
 	"baseManaCost": 3,
 	"collectible": true,
 	"attributes": {
-		"TAUNT": true
+		"TAUNT": true,
+		"DEATHRATTLES": true
 	},
 	"set": "NAXXRAMAS",
 	"fileFormatVersion": 1

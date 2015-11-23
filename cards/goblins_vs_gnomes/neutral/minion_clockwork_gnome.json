@@ -22,6 +22,9 @@
 	"rarity": "COMMON",
 	"baseManaCost": 1,
 	"collectible": true,
+	"attribute": {
+		"DEATHRATTLES": true
+	},
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

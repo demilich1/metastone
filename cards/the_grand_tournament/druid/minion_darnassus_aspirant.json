@@ -22,7 +22,8 @@
 	"baseManaCost": 2,
 	"collectible": true,
 	"attributes": {
-		"BATTLECRY": true
+		"BATTLECRY": true,
+		"DEATHRATTLES": true
 	},
 	"fileFormatVersion": 1
 }

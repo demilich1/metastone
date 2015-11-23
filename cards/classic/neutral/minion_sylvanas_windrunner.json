@@ -13,6 +13,9 @@
 		"target": "ENEMY_MINIONS",
 		"randomTarget": true
 	},
+	"attribute": {
+		"DEATHRATTLES": true
+	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

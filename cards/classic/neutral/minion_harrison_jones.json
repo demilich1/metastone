@@ -27,6 +27,9 @@
 	"rarity": "LEGENDARY",
 	"baseManaCost": 5,
 	"collectible": true,
+	"attribute": {
+		"BATTLECRY": true
+	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

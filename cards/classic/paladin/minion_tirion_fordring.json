@@ -10,7 +10,8 @@
 	"baseHp": 6,
 	"attributes": {
 		"TAUNT": true,
-		"DIVINE_SHIELD": true
+		"DIVINE_SHIELD": true,
+		"DEATHRATTLES": true
 	},
 	"deathrattle": {
 		"class": "EquipWeaponSpell",

@@ -22,8 +22,5 @@
 	"set": "THE_GRAND_TOURNAMENT",
 	"baseManaCost": 5,
 	"collectible": true,
-	"attributes": {
-		"BATTLECRY": true
-	},
 	"fileFormatVersion": 1
 }

@@ -12,6 +12,9 @@
 		"class": "SummonSpell",
 		"card": "token_damaged_golem"
 	},
+	"attribute": {
+		"DEATHRATTLES": true
+	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

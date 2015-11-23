@@ -17,6 +17,9 @@
 	"rarity": "LEGENDARY",
 	"baseManaCost": 8,
 	"collectible": true,
+	"attribute": {
+		"DEATHRATTLES": true
+	},
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

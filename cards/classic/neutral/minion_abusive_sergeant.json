@@ -15,6 +15,9 @@
 			"value": 2
 		}
 	},
+	"attribute": {
+		"BATTLECRY": true
+	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

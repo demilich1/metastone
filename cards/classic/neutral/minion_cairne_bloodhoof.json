@@ -12,6 +12,9 @@
 		"class": "SummonSpell",
 		"card": "token_baine_bloodhoof"
 	},
+	"attribute": {
+		"DEATHRATTLES": true
+	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

@@ -17,6 +17,9 @@
 	"rarity": "COMMON",
 	"set": "THE_GRAND_TOURNAMENT",
 	"baseManaCost": 9,
+	"attribute": {
+		"BATTLECRY": true
+	},
 	"collectible": true,
 	"fileFormatVersion": 1
 }

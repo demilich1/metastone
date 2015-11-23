@@ -17,6 +17,9 @@
 	"rarity": "EPIC",
 	"baseManaCost": 6,
 	"collectible": true,
+	"attribute": {
+		"DEATHRATTLES": true
+	},
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

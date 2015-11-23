@@ -17,6 +17,9 @@
 	"rarity": "FREE",
 	"baseManaCost": 1,
 	"collectible": false,
+	"attribute": {
+		"DEATHRATTLES": true
+	},
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

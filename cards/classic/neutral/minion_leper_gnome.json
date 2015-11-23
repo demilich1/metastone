@@ -13,6 +13,9 @@
 		"value": 2,
 		"target": "ENEMY_HERO"
 	},
+	"attribute": {
+		"DEATHRATTLES": true
+	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

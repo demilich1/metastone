@@ -10,12 +10,20 @@
 	"baseManaCost": 3,
 	"battlecry": {
 		"spell": {
-			"class": "CopyDeathrattleSpell"
+			"class": "CopyDeathrattleSpell",
+			"filter": {
+				"class": "AttributeFilter",
+				"attribute": "DEATHRATTLES",
+				"operation": "HAS"
+			}
 		},
 		"targetSelection": "FRIENDLY_MINIONS",
 		"resolvedLate": false
 	},
 	"collectible": true,
+	"attribute": {
+		"BATTLECRY": true
+	},
 	"set": "LEAGUE_OF_EXPLORERS",
 	"fileFormatVersion": 1
 }

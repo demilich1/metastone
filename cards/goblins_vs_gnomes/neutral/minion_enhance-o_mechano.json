@@ -29,6 +29,9 @@
 	"rarity": "EPIC",
 	"baseManaCost": 4,
 	"collectible": true,
+	"attribute": {
+		"BATTLECRY": true
+	},
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

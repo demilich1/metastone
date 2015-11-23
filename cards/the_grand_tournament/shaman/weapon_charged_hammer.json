@@ -14,6 +14,9 @@
 		"card": "hero_power_lightning_jolt",
 		"targetPlayer": "SELF"
 	},
+	"attribute": {
+		"DEATHRATTLES": true
+	},
 	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

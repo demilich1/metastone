@@ -20,6 +20,9 @@
 			"race": "MECH"
 		}
 	},
+	"attribute": {
+		"DEATHRATTLES": true
+	},
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

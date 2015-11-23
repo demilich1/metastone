@@ -20,6 +20,9 @@
 	"rarity": "RARE",
 	"baseManaCost": 3,
 	"collectible": true,
+	"attribute": {
+		"BATTLECRY": true
+	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

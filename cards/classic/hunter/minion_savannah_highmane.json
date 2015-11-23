@@ -15,6 +15,9 @@
 			"token_hyena"
 		]
 	},
+	"attribute": {
+		"DEATHRATTLES": true
+	},
 	"race": "BEAST",
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

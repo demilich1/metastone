@@ -16,6 +16,9 @@
 			"manaCost": 1
 		}
 	},
+	"attribute": {
+		"DEATHRATTLES": true
+	},
 	"collectible": true,
 	"set": "LEAGUE_OF_EXPLORERS",
 	"fileFormatVersion": 1

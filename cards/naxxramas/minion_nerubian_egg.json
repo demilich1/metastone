@@ -13,6 +13,9 @@
 	"rarity": "RARE",
 	"baseManaCost": 2,
 	"collectible": true,
+	"attribute": {
+		"DEATHRATTLES": true
+	},
 	"set": "NAXXRAMAS",
 	"fileFormatVersion": 1
 }

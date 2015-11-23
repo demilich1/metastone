@@ -37,7 +37,8 @@
 	"baseManaCost": 6,
 	"collectible": true,
 	"attributes": {
-		"BATTLECRY": true
+		"BATTLECRY": true,
+		"DEATHRATTLES": true
 	},
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

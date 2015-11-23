@@ -12,6 +12,9 @@
 		"class": "DrawCardSpell",
 		"value": 1
 	},
+	"attribute": {
+		"DEATHRATTLES": true
+	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

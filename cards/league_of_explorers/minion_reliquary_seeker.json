@@ -25,6 +25,9 @@
 		"resolvedLate": false
 	},
 	"collectible": true,
+	"attribute": {
+		"BATTLECRY": true
+	},
 	"set": "LEAGUE_OF_EXPLORERS",
 	"fileFormatVersion": 1
 }

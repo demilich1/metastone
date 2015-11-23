@@ -19,7 +19,8 @@
 	"baseManaCost": 5,
 	"collectible": true,
 	"attributes": {
-		"SPELL_DAMAGE": 1
+		"SPELL_DAMAGE": 1,
+		"BATTLECRY": true
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

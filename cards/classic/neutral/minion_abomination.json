@@ -9,6 +9,7 @@
 	"baseAttack": 4,
 	"baseHp": 4,
 	"attributes": {
+		DEATHRATTLES: true,
 		"TAUNT": true
 	},
 	"deathrattle": {
