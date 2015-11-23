@@ -10,6 +10,7 @@ import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Race;
+import net.demilich.metastone.game.spells.SpellUtils;
 
 public class CardFilter extends EntityFilter {
 
@@ -55,6 +56,19 @@ public class CardFilter extends EntityFilter {
 		Rarity rarity = (Rarity) desc.get(FilterArg.RARITY);
 		if (rarity != null && card.getRarity() != rarity) {
 			return false;
+		}
+		
+		if (desc.contains(FilterArg.ATTRIBUTE) && desc.contains(FilterArg.OPERATION)) {
+			Attribute attribute = (Attribute) desc.get(FilterArg.ATTRIBUTE);
+			Operation operation = (Operation) desc.get(FilterArg.OPERATION);
+			if (operation == Operation.HAS) {
+				return card.hasAttribute(attribute);
+			}
+	
+			int targetValue = desc.getInt(FilterArg.VALUE);
+			int actualValue = card.getAttributeValue(attribute);
+	
+			return SpellUtils.evaluateOperation(operation, actualValue, targetValue);
 		}
 
 		return true;

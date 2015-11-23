@@ -22,6 +22,9 @@ public class CopyDeathrattleSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Actor copyTo = (Actor) source;
 		Actor copyFrom = (Actor) target;
+		if (copyFrom.getDeathrattles() == null) {
+			return;
+		}
 		for (SpellDesc deathrattle : copyFrom.getDeathrattles()) {
 		  copyTo.addDeathrattle(deathrattle);
 		}
