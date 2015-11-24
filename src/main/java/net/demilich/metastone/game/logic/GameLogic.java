@@ -986,7 +986,7 @@ public class GameLogic implements Cloneable {
 		log("{} mind controls {}", player.getName(), minion);
 		Player opponent = context.getOpponent(player);
 		if (!opponent.getMinions().contains(minion)) {
-			logger.warn("Minion {} cannot be mind-controlled, because opponent does not own it.", minion);
+			//logger.warn("Minion {} cannot be mind-controlled, because opponent does not own it.", minion);
 			return;
 		}
 		if (canSummonMoreMinions(player)) {
