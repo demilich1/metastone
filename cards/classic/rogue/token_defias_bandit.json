@@ -1,13 +1,13 @@
 {
-	"baseAttack": 2,
-	"baseHp": 1,
 	"id": "token_defias_bandit",
 	"name": "Defias Bandit",
-	"description": "",
+	"baseManaCost": 2,
 	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 1,
 	"heroClass": "ROGUE",
 	"rarity": "FREE",
-	"baseManaCost": 2,
+	"description": "",
 	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

@@ -1,27 +1,27 @@
 {
-	"name": "Doomhammer",
-	"description": "Windfury, Overload: (2)",
-	"collectible": true,
 	"id": "weapon_doomhammer",
-	"type": "WEAPON",
-	"rarity": "EPIC",
-	"heroClass": "SHAMAN",
+	"name": "Doomhammer",
 	"baseManaCost": 5,
+	"type": "WEAPON",
 	"damage": 2,
 	"durability": 8,
-	"onEquip": {
-		"class": "AddAttributeSpell",
-		"target": "FRIENDLY_HERO",
-		"attribute": "WINDFURY"
+	"heroClass": "SHAMAN",
+	"rarity": "EPIC",
+	"description": "Windfury, Overload: (2)",
+	"attributes": {
+		"OVERLOAD": 2
 	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1,
 	"onUnequip": {
 		"class": "RemoveAttributeSpell",
 		"target": "FRIENDLY_HERO",
 		"attribute": "WINDFURY"
 	},
-	"attributes": {
-		"OVERLOAD": 2
-	},
-	"set": "CLASSIC",
-	"fileFormatVersion": 1
+	"onEquip": {
+		"class": "AddAttributeSpell",
+		"target": "FRIENDLY_HERO",
+		"attribute": "WINDFURY"
+	}
 }

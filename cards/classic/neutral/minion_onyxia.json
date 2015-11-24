@@ -1,7 +1,13 @@
 {
+	"id": "minion_onyxia",
+	"name": "Onyxia",
+	"baseManaCost": 9,
+	"type": "MINION",
 	"baseAttack": 8,
 	"baseHp": 8,
-	"race": "DRAGON",
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Summon 1/1 Whelps until your side of the battlefield is full.",
 	"battlecry": {
 		"spell": {
 			"class": "MetaSpell",
@@ -26,17 +32,11 @@
 		},
 		"resolvedLate": true
 	},
-	"id": "minion_onyxia",
-	"name": "Onyxia",
-	"description": "Battlecry: Summon 1/1 Whelps until your side of the battlefield is full.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "LEGENDARY",
-	"baseManaCost": 9,
-	"collectible": true,
+	"race": "DRAGON",
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

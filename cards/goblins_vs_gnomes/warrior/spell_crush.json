@@ -1,4 +1,11 @@
 {
+	"id": "spell_crush",
+	"name": "Crush",
+	"baseManaCost": 7,
+	"type": "SPELL",
+	"heroClass": "WARRIOR",
+	"rarity": "EPIC",
+	"description": "Destroy a minion. If you have a damaged minion, this costs (4) less.",
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "DestroySpell"
@@ -12,16 +19,9 @@
 				"class": "DamagedFilter"
 			}
 		},
-		"ifTrue": 4,
-		"ifFalse": 0
+		"ifFalse": 0,
+		"ifTrue": 4
 	},
-	"id": "spell_crush",
-	"name": "Crush",
-	"description": "Destroy a minion. If you have a damaged minion, this costs (4) less.",
-	"type": "SPELL",
-	"heroClass": "WARRIOR",
-	"rarity": "EPIC",
-	"baseManaCost": 7,
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

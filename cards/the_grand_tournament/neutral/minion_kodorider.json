@@ -1,8 +1,13 @@
 {
-	"baseAttack": 3,
-	"baseHp": 5,
 	"id": "minion_kodorider",
 	"name": "Kodorider",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"description": "Inspire: Summon a 3/5 War Kodo.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "InspireTrigger"
@@ -12,12 +17,7 @@
 			"card": "token_war_kodo"
 		}
 	},
-	"description": "Inspire: Summon a 3/5 War Kodo.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "EPIC",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 6,
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

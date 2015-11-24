@@ -1,11 +1,14 @@
 {
-	"targetSelection": "ANY",
 	"id": "spell_bane_of_doom",
+	"name": "Bane of Doom",
+	"baseManaCost": 5,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "EPIC",
+	"description": "Deal 2 damage to a character.  If that kills it, summon a random Demon.",
+	"targetSelection": "ANY",
 	"spell": {
 		"class": "ConditionalEffectSpell",
-		"condition": {
-			"class": "IsDeadCondition"
-		},
 		"spell1": {
 			"class": "DamageSpell",
 			"value": 2
@@ -16,14 +19,11 @@
 				"class": "RaceFilter",
 				"race": "DEMON"
 			}
+		},
+		"condition": {
+			"class": "IsDeadCondition"
 		}
 	},
-	"name": "Bane of Doom",
-	"description": "Deal 2 damage to a character.  If that kills it, summon a random Demon.",
-	"type": "SPELL",
-	"heroClass": "WARLOCK",
-	"rarity": "EPIC",
-	"baseManaCost": 5,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

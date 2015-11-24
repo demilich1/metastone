@@ -1,18 +1,15 @@
 {
-	"name": "Argent Lance",
-	"description": "Battlecry : Reveal a minion in each deck. If yours costs more, gain +1 durability.",
-	"collectible": true,
 	"id": "weapon_argent_lance",
-	"type": "WEAPON",
-	"rarity": "RARE",
-	"heroClass": "PALADIN",
+	"name": "Argent Lance",
 	"baseManaCost": 2,
+	"type": "WEAPON",
 	"damage": 2,
 	"durability": 2,
-	"attributes": {
-		"BATTLECRY": true
-	},
+	"heroClass": "PALADIN",
+	"rarity": "RARE",
+	"description": "Battlecry : Reveal a minion in each deck. If yours costs more, gain +1 durability.",
 	"battlecry": {
+		"targetSelection": "NONE",
 		"spell": {
 			"class": "JoustSpell",
 			"spell": {
@@ -21,9 +18,12 @@
 				"value": 1
 			}
 		},
-		"targetSelection": "NONE",
 		"resolvedLate": true
 	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
 	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

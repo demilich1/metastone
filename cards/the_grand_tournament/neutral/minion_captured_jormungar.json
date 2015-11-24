@@ -1,15 +1,15 @@
 {
-	"baseAttack": 5,
-	"baseHp": 9,
-	"race": "BEAST",
 	"id": "minion_captured_jormungar",
 	"name": "Captured Jormungar",
-	"description": "",
+	"baseManaCost": 7,
 	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 9,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 7,
+	"description": "",
+	"race": "BEAST",
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

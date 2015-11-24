@@ -1,6 +1,13 @@
 {
+	"id": "minion_fel_reaver",
+	"name": "Fel Reaver",
+	"baseManaCost": 5,
+	"type": "MINION",
 	"baseAttack": 8,
 	"baseHp": 8,
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"description": "Whenever your opponent plays a card, discard the top 3 cards of your deck.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "CardPlayedTrigger",
@@ -12,13 +19,6 @@
 		}
 	},
 	"race": "MECH",
-	"id": "minion_fel_reaver",
-	"name": "Fel Reaver",
-	"description": "Whenever your opponent plays a card, discard the top 3 cards of your deck.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "EPIC",
-	"baseManaCost": 5,
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

@@ -1,9 +1,18 @@
 {
+	"id": "minion_master_jouster",
+	"name": "Master Jouster",
+	"baseManaCost": 6,
+	"type": "MINION",
 	"baseAttack": 5,
 	"baseHp": 6,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "Battlecry : Reveal a minion in each deck. If yours costs more, gain Taunt and Divine Shield.",
 	"battlecry": {
+		"targetSelection": "NONE",
 		"spell": {
 			"class": "JoustSpell",
+			"target": "NONE",
 			"spell": {
 				"class": "MetaSpell",
 				"spell1": {
@@ -15,23 +24,14 @@
 					"attribute": "DIVINE_SHIELD"
 				},
 				"target": "SELF"
-			},
-			"target": "NONE"
+			}
 		},
-		"targetSelection": "NONE",
 		"resolvedLate": false
 	},
-	"id": "minion_master_jouster",
-	"name": "Master Jouster",
-	"description": "Battlecry : Reveal a minion in each deck. If yours costs more, gain Taunt and Divine Shield.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "RARE",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 6,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

@@ -1,4 +1,11 @@
 {
+	"id": "spell_muster_for_battle",
+	"name": "Muster for Battle",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "PALADIN",
+	"rarity": "RARE",
+	"description": "Summon three 1/1 Silver Hand Recruits. Equip a 1/4 Weapon.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
@@ -15,13 +22,6 @@
 			"card": "weapon_lights_justice"
 		}
 	},
-	"id": "spell_muster_for_battle",
-	"name": "Muster for Battle",
-	"description": "Summon three 1/1 Silver Hand Recruits. Equip a 1/4 Weapon.",
-	"type": "SPELL",
-	"heroClass": "PALADIN",
-	"rarity": "RARE",
-	"baseManaCost": 3,
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

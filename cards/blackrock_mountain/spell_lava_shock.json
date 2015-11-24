@@ -1,4 +1,11 @@
 {
+	"id": "spell_lava_shock",
+	"name": "Lava Shock",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "SHAMAN",
+	"rarity": "RARE",
+	"description": "Deal 2 damage. Unlock your Overloaded Mana Crystals.",
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "MetaSpell",
@@ -10,13 +17,6 @@
 			"class": "ClearOverloadSpell"
 		}
 	},
-	"id": "spell_lava_shock",
-	"name": "Lava Shock",
-	"description": "Deal 2 damage. Unlock your Overloaded Mana Crystals.",
-	"type": "SPELL",
-	"heroClass": "SHAMAN",
-	"rarity": "RARE",
-	"baseManaCost": 2,
 	"collectible": true,
 	"set": "BLACKROCK_MOUNTAIN",
 	"fileFormatVersion": 1

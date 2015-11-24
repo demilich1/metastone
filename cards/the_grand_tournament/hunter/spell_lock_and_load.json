@@ -1,7 +1,13 @@
 {
+	"id": "spell_lock_and_load",
+	"name": "Lock and Load",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "HUNTER",
+	"rarity": "EPIC",
+	"description": "Each time you cast a spell this turn, add a random Hunter card to your hand.",
 	"targetSelection": "NONE",
 	"spell": {
-		"class": "AddSpellTriggerSpell",
 		"trigger": {
 			"eventTrigger": {
 				"class": "SpellCastedTrigger",
@@ -10,22 +16,16 @@
 			"spell": {
 				"class": "ReceiveRandomCollectibleCardSpell",
 				"cardFilter": {
-					"class": "CardFilter",
-					"heroClass": "HUNTER"
+					"heroClass": "HUNTER",
+					"class": "CardFilter"
 				}
 			},
 			"oneTurn": true
 		},
+		"class": "AddSpellTriggerSpell",
 		"target": "FRIENDLY_HERO"
 	},
-	"id": "spell_lock_and_load",
-	"name": "Lock and Load",
-	"description": "Each time you cast a spell this turn, add a random Hunter card to your hand.",
-	"type": "SPELL",
-	"heroClass": "HUNTER",
-	"rarity": "EPIC",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 2,
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

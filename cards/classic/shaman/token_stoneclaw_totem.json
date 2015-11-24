@@ -1,18 +1,18 @@
 {
-	"baseAttack": 0,
-	"baseHp": 2,
-	"race": "TOTEM",
 	"id": "token_stoneclaw_totem",
 	"name": "Stoneclaw Totem",
-	"description": "Taunt",
+	"baseManaCost": 1,
 	"type": "MINION",
+	"baseAttack": 0,
+	"baseHp": 2,
 	"heroClass": "SHAMAN",
 	"rarity": "FREE",
-	"baseManaCost": 1,
-	"collectible": false,
+	"description": "Taunt",
+	"race": "TOTEM",
 	"attributes": {
 		"TAUNT": true
 	},
+	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

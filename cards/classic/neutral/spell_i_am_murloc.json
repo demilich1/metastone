@@ -1,16 +1,16 @@
 {
-	"spell": {
-		"class": "custom.IAmMurlocSpell"
-	},
 	"id": "spell_i_am_murloc",
 	"name": "I Am Murloc",
-	"description": "Summon three, four, or five 1/1 Murlocs.",
+	"baseManaCost": 4,
 	"type": "SPELL",
 	"heroClass": "ANY",
 	"rarity": "FREE",
-	"baseManaCost": 4,
-	"collectible": false,
+	"description": "Summon three, four, or five 1/1 Murlocs.",
 	"targetSelection": "NONE",
+	"spell": {
+		"class": "custom.IAmMurlocSpell"
+	},
+	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

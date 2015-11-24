@@ -1,11 +1,11 @@
 {
-	"name": "Eviscerate",
-	"description": "Deal 2 damage. Combo: Deal 4 damage instead.",
 	"id": "spell_eviscerate",
-	"type": "SPELL",
-	"rarity": "COMMON",
-	"heroClass": "ROGUE",
+	"name": "Eviscerate",
 	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "ROGUE",
+	"rarity": "COMMON",
+	"description": "Deal 2 damage. Combo: Deal 4 damage instead.",
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "ComboSpell",

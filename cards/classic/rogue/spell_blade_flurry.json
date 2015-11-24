@@ -1,15 +1,22 @@
 {
+	"id": "spell_blade_flurry",
+	"name": "Blade Flurry",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "ROGUE",
+	"rarity": "RARE",
+	"description": "Destroy your weapon and deal its damage to all enemies.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
 		"spell1": {
 			"class": "DamageSpell",
+			"target": "ENEMY_CHARACTERS",
 			"valueProvider": {
 				"class": "AttributeValueProvider",
-				"attribute": "ATTACK",
-				"target": "FRIENDLY_WEAPON"
-			},
-			"target": "ENEMY_CHARACTERS"
+				"target": "FRIENDLY_WEAPON",
+				"attribute": "ATTACK"
+			}
 		},
 		"spell2": {
 			"class": "DestroyWeaponSpell",
@@ -19,13 +26,6 @@
 	"condition": {
 		"class": "HasWeaponCondition"
 	},
-	"id": "spell_blade_flurry",
-	"name": "Blade Flurry",
-	"description": "Destroy your weapon and deal its damage to all enemies.",
-	"type": "SPELL",
-	"heroClass": "ROGUE",
-	"rarity": "RARE",
-	"baseManaCost": 2,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

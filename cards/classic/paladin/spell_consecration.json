@@ -1,17 +1,17 @@
 {
-	"targetSelection": "NONE",
-	"spell": {
-		"class": "DamageSpell",
-		"value": 2,
-		"target": "ENEMY_CHARACTERS"
-	},
 	"id": "spell_consecration",
 	"name": "Consecration",
-	"description": "Deal 2 damage to all enemies.",
+	"baseManaCost": 4,
 	"type": "SPELL",
 	"heroClass": "PALADIN",
 	"rarity": "FREE",
-	"baseManaCost": 4,
+	"description": "Deal 2 damage to all enemies.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "DamageSpell",
+		"target": "ENEMY_CHARACTERS",
+		"value": 2
+	},
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

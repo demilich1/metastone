@@ -1,19 +1,19 @@
 {
-	"baseAttack": 2,
-	"baseHp": 2,
-	"aura": {
-		"class": "BuffAura",
-		"attackBonus": 1,
-		"target": "FRIENDLY_MINIONS"
-	},
 	"id": "minion_raid_leader",
 	"name": "Raid Leader",
-	"description": "Your other minions have +1 Attack.",
+	"baseManaCost": 3,
 	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
 	"heroClass": "ANY",
 	"rarity": "FREE",
-	"baseManaCost": 3,
+	"description": "Your other minions have +1 Attack.",
 	"collectible": true,
 	"set": "CLASSIC",
-	"fileFormatVersion": 1
+	"fileFormatVersion": 1,
+	"aura": {
+		"class": "BuffAura",
+		"target": "FRIENDLY_MINIONS",
+		"attackBonus": 1
+	}
 }

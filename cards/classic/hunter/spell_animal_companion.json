@@ -1,11 +1,11 @@
 {
-	"name": "Animal Companion",
-	"description": "Summon a random Beast Companion.",
 	"id": "spell_animal_companion",
-	"type": "SPELL",
-	"rarity": "FREE",
-	"heroClass": "HUNTER",
+	"name": "Animal Companion",
 	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "HUNTER",
+	"rarity": "FREE",
+	"description": "Summon a random Beast Companion.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "SummonRandomSpell",

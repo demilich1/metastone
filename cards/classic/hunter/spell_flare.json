@@ -1,11 +1,11 @@
 {
-	"name": "Flare",
-	"description": "All minions lose Stealth. Destroy all enemy Secrets. Draw a card.",
 	"id": "spell_flare",
-	"type": "SPELL",
-	"rarity": "RARE",
-	"heroClass": "HUNTER",
+	"name": "Flare",
 	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "HUNTER",
+	"rarity": "RARE",
+	"description": "All minions lose Stealth. Destroy all enemy Secrets. Draw a card.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",

@@ -1,11 +1,11 @@
 {
-	"name": "Naturalize",
-	"description": "Destroy a minion. Your opponent draws 2 cards.",
 	"id": "spell_naturalize",
-	"type": "SPELL",
-	"rarity": "COMMON",
-	"heroClass": "DRUID",
+	"name": "Naturalize",
 	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"description": "Destroy a minion. Your opponent draws 2 cards.",
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "MetaSpell",
@@ -14,8 +14,8 @@
 		},
 		"spell2": {
 			"class": "DrawCardSpell",
-			"value": 2,
-			"targetPlayer": "OPPONENT"
+			"targetPlayer": "OPPONENT",
+			"value": 2
 		}
 	},
 	"set": "CLASSIC",

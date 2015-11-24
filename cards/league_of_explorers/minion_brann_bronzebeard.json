@@ -1,16 +1,16 @@
 {
-	"baseAttack": 2,
-	"baseHp": 4,
 	"id": "minion_brann_bronzebeard",
 	"name": "Brann Bronzebeard",
-	"description": "Your Battlecries trigger twice.",
+	"baseManaCost": 3,
 	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 4,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
+	"description": "Your Battlecries trigger twice.",
 	"attributes": {
 		"DOUBLE_BATTLECRIES": true
 	},
-	"baseManaCost": 3,
 	"collectible": true,
 	"set": "LEAGUE_OF_EXPLORERS",
 	"fileFormatVersion": 1

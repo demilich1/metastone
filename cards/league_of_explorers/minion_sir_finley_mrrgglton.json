@@ -1,14 +1,15 @@
 {
-	"baseAttack": 1,
-	"baseHp": 3,
 	"id": "minion_sir_finley_mrrgglton",
 	"name": "Sir Finley Mrrgglton",
-	"description": "Battlecry: Discover a new basic Hero Power.",
+	"baseManaCost": 1,
 	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 3,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
-	"baseManaCost": 1,
+	"description": "Battlecry: Discover a new basic Hero Power.",
 	"battlecry": {
+		"targetSelection": "NONE",
 		"spell": {
 			"class": "DiscoverCardSpell",
 			"spell1": {
@@ -27,14 +28,13 @@
 				"hero_power_armor_up"
 			]
 		},
-		"targetSelection": "NONE",
 		"resolvedLate": false
 	},
 	"race": "MURLOC",
-	"collectible": true,
-	"attribute": {
+	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "LEAGUE_OF_EXPLORERS",
 	"fileFormatVersion": 1
 }

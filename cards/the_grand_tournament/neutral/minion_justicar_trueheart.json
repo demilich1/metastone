@@ -1,9 +1,17 @@
 {
+	"id": "minion_justicar_trueheart",
+	"name": "Justicar Trueheart",
+	"baseManaCost": 6,
+	"type": "MINION",
 	"baseAttack": 6,
 	"baseHp": 3,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Replace your starting Hero Power with a better one.",
 	"battlecry": {
 		"spell": {
 			"class": "ConditionalSpell",
+			"targetPlayer": "SELF",
 			"conditions": [
 				{
 					"class": "HasHeroPowerCondition",
@@ -79,22 +87,14 @@
 					"class": "ChangeHeroPowerSpell",
 					"card": "hero_power_tank_up"
 				}
-			],
-			"targetPlayer": "SELF"
+			]
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_justicar_trueheart",
-	"name": "Justicar Trueheart",
-	"description": "Battlecry: Replace your starting Hero Power with a better one.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "LEGENDARY",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 6,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

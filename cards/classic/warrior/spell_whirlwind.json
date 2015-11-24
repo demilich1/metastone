@@ -1,16 +1,16 @@
 {
-	"name": "Whirlwind",
-	"description": "Deal 1 damage to ALL minions.",
 	"id": "spell_whirlwind",
-	"type": "SPELL",
-	"rarity": "FREE",
-	"heroClass": "WARRIOR",
+	"name": "Whirlwind",
 	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "WARRIOR",
+	"rarity": "FREE",
+	"description": "Deal 1 damage to ALL minions.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "DamageSpell",
-		"value": 1,
-		"target": "ALL_MINIONS"
+		"target": "ALL_MINIONS",
+		"value": 1
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

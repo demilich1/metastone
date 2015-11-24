@@ -1,6 +1,13 @@
 {
+	"id": "minion_coliseum_manager",
+	"name": "Coliseum Manager",
+	"baseManaCost": 3,
+	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "Inspire: Return this minion to your hand.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "InspireTrigger"
@@ -10,14 +17,7 @@
 			"target": "SELF"
 		}
 	},
-	"id": "minion_coliseum_manager",
-	"name": "Coliseum Manager",
-	"description": "Inspire: Return this minion to your hand.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "RARE",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 3,
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

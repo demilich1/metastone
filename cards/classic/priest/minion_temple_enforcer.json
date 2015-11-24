@@ -1,25 +1,25 @@
 {
+	"id": "minion_temple_enforcer",
+	"name": "Temple Enforcer",
+	"baseManaCost": 6,
+	"type": "MINION",
 	"baseAttack": 6,
 	"baseHp": 6,
+	"heroClass": "PRIEST",
+	"rarity": "COMMON",
+	"description": "Battlecry: Give a friendly minion +3 Health.",
 	"battlecry": {
+		"targetSelection": "FRIENDLY_MINIONS",
 		"spell": {
 			"class": "BuffSpell",
 			"hpBonus": 3
 		},
-		"targetSelection": "FRIENDLY_MINIONS",
 		"resolvedLate": false
 	},
-	"id": "minion_temple_enforcer",
-	"name": "Temple Enforcer",
-	"description": "Battlecry: Give a friendly minion +3 Health.",
-	"type": "MINION",
-	"heroClass": "PRIEST",
-	"rarity": "COMMON",
-	"baseManaCost": 6,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

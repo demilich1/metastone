@@ -1,17 +1,17 @@
 {
-	"baseAttack": 0,
-	"baseHp": 2,
 	"id": "token_mirror_image",
 	"name": "Mirror Image",
-	"description": "Taunt",
+	"baseManaCost": 0,
 	"type": "MINION",
+	"baseAttack": 0,
+	"baseHp": 2,
 	"heroClass": "ANY",
 	"rarity": "FREE",
-	"baseManaCost": 0,
-	"collectible": false,
+	"description": "Taunt",
 	"attributes": {
 		"TAUNT": true
 	},
+	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

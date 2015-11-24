@@ -1,20 +1,19 @@
 {
-	"name": "Gorehowl",
-	"description": "Attacking a minion costs 1 Attack instead of 1 Durability.",
-	"collectible": true,
 	"id": "weapon_gorehowl",
-	"type": "WEAPON",
-	"rarity": "EPIC",
-	"heroClass": "WARRIOR",
+	"name": "Gorehowl",
 	"baseManaCost": 7,
+	"type": "WEAPON",
 	"damage": 7,
 	"durability": 1,
+	"heroClass": "WARRIOR",
+	"rarity": "EPIC",
+	"description": "Attacking a minion costs 1 Attack instead of 1 Durability.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "PhysicalAttackTrigger",
 			"targetPlayer": "SELF",
-			"entityType": "HERO",
-			"targetEntityType": "MINION"
+			"targetEntityType": "MINION",
+			"entityType": "HERO"
 		},
 		"spell": {
 			"class": "BuffWeaponSpell",
@@ -23,6 +22,7 @@
 			"hpBonus": 1
 		}
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

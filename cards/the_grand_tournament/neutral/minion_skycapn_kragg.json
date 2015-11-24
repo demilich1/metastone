@@ -1,9 +1,13 @@
 {
-	"baseAttack": 4,
-	"baseHp": 6,
-	"race": "PIRATE",
 	"id": "minion_skycapn_kragg",
 	"name": "Skycap'n Kragg",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 6,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Charrrrrge. Costs (1) less for each friendly Pirate.",
 	"manaCostModifier": {
 		"class": "EntityCounter",
 		"target": "FRIENDLY_MINIONS",
@@ -12,15 +16,11 @@
 			"race": "PIRATE"
 		}
 	},
-	"description": "Charrrrrge. Costs (1) less for each friendly Pirate.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "LEGENDARY",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 7,
-	"collectible": true,
+	"race": "PIRATE",
 	"attributes": {
 		"CHARGE": true
 	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

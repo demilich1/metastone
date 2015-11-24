@@ -1,17 +1,17 @@
 {
-	"baseAttack": 5,
-	"baseHp": 4,
 	"id": "minion_evil_heckler",
 	"name": "Evil Heckler",
-	"description": "Taunt",
+	"baseManaCost": 4,
 	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 4,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 4,
-	"collectible": true,
+	"description": "Taunt",
 	"attributes": {
 		"TAUNT": true
 	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

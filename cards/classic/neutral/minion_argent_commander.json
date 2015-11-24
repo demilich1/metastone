@@ -1,16 +1,16 @@
 {
-	"name": "Argent Commander",
-	"description": "Charge, Divine Shield",
 	"id": "minion_argent_commander",
-	"type": "MINION",
-	"rarity": "RARE",
-	"heroClass": "ANY",
+	"name": "Argent Commander",
 	"baseManaCost": 6,
+	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 2,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "Charge, Divine Shield",
 	"attributes": {
-		"CHARGE": true,
-		"DIVINE_SHIELD": true
+		"DIVINE_SHIELD": true,
+		"CHARGE": true
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

@@ -1,11 +1,11 @@
 {
-	"name": "Soul of the Forest",
-	"description": "Give your minions \"Deathrattle: Summon a 2/2 Treant.\"",
 	"id": "spell_soul_of_the_forest",
-	"type": "SPELL",
-	"rarity": "COMMON",
-	"heroClass": "DRUID",
+	"name": "Soul of the Forest",
 	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"description": "Give your minions \"Deathrattle: Summon a 2/2 Treant.\"",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "AddDeathrattleSpell",

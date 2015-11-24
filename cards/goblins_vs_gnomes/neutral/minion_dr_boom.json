@@ -1,33 +1,33 @@
 {
+	"id": "minion_dr_boom",
+	"name": "Dr. Boom",
+	"baseManaCost": 7,
+	"type": "MINION",
 	"baseAttack": 7,
 	"baseHp": 7,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Summon two 1/1 Boom Bots. WARNING: Bots may explode.",
 	"battlecry": {
 		"spell": {
 			"class": "MetaSpell",
 			"spell1": {
 				"class": "SummonSpell",
-				"boardPositionRelative": "LEFT",
-				"card": "token_boom_bot"
+				"card": "token_boom_bot",
+				"boardPositionRelative": "LEFT"
 			},
 			"spell2": {
 				"class": "SummonSpell",
-				"boardPositionRelative": "RIGHT",
-				"card": "token_boom_bot"
+				"card": "token_boom_bot",
+				"boardPositionRelative": "RIGHT"
 			}
 		},
 		"resolvedLate": true
 	},
-	"id": "minion_dr_boom",
-	"name": "Dr. Boom",
-	"description": "Battlecry: Summon two 1/1 Boom Bots. WARNING: Bots may explode.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "LEGENDARY",
-	"baseManaCost": 7,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

@@ -1,18 +1,18 @@
 {
-	"baseAttack": 4,
-	"baseHp": 6,
-	"race": "BEAST",
 	"id": "token_bear_form",
 	"name": "Druid of the Claw (Bear)",
-	"description": "Taunt",
+	"baseManaCost": 5,
 	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 6,
 	"heroClass": "DRUID",
 	"rarity": "COMMON",
-	"baseManaCost": 5,
-	"collectible": false,
+	"description": "Taunt",
+	"race": "BEAST",
 	"attributes": {
 		"TAUNT": true
 	},
+	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

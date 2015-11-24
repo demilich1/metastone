@@ -1,6 +1,13 @@
 {
+	"id": "minion_demolisher",
+	"name": "Demolisher",
+	"baseManaCost": 3,
+	"type": "MINION",
 	"baseAttack": 1,
 	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "At the start of your turn, deal 2 damage to a random enemy.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "TurnStartTrigger",
@@ -9,19 +16,12 @@
 		},
 		"spell": {
 			"class": "DamageSpell",
-			"value": 2,
 			"target": "ENEMY_CHARACTERS",
+			"value": 2,
 			"randomTarget": true
 		}
 	},
 	"race": "MECH",
-	"id": "minion_demolisher",
-	"name": "Demolisher",
-	"description": "At the start of your turn, deal 2 damage to a random enemy.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "RARE",
-	"baseManaCost": 3,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

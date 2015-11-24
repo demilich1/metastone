@@ -1,26 +1,26 @@
 {
-	"baseAttack": 4,
-	"baseHp": 5,
-	"battlecry": {
-		"spell": {
-			"class": "HealSpell",
-			"value": 2,
-			"target": "FRIENDLY_CHARACTERS"
-		},
-		"targetSelection": "NONE",
-		"resolvedLate": false
-	},
 	"id": "minion_darkscale_healer",
 	"name": "Darkscale Healer",
-	"description": "Battlecry: Restore 2 Health to all friendly characters.",
+	"baseManaCost": 5,
 	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 5,
 	"heroClass": "ANY",
 	"rarity": "FREE",
-	"baseManaCost": 5,
-	"collectible": true,
+	"description": "Battlecry: Restore 2 Health to all friendly characters.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "HealSpell",
+			"target": "FRIENDLY_CHARACTERS",
+			"value": 2
+		},
+		"resolvedLate": false
+	},
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

@@ -1,18 +1,18 @@
 {
-	"targetSelection": "NONE",
 	"id": "hero_power_totemic_slam",
 	"name": "Totemic Slam",
-	"description": "Summon a Totem of your choice.",
+	"baseManaCost": 2,
 	"type": "HERO_POWER",
 	"heroClass": "SHAMAN",
 	"rarity": "FREE",
+	"description": "Summon a Totem of your choice.",
+	"targetSelection": "NONE",
 	"options": [
 		"spell_summon_searing_totem",
 		"spell_summon_healing_totem",
 		"spell_summon_wrath_of_air_totem",
 		"spell_summon_stoneclaw_totem"
 	],
-	"baseManaCost": 2,
 	"collectible": false,
 	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1

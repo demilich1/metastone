@@ -1,6 +1,13 @@
 {
+	"id": "minion_cutpurse",
+	"name": "Cutpurse",
+	"baseManaCost": 2,
+	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 2,
+	"heroClass": "ROGUE",
+	"rarity": "RARE",
+	"description": "Whenever this minion attacks a hero, add the Coin to your hand.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "HostAttacksTrigger",
@@ -11,14 +18,7 @@
 			"card": "spell_the_coin"
 		}
 	},
-	"id": "minion_cutpurse",
-	"name": "Cutpurse",
-	"description": "Whenever this minion attacks a hero, add the Coin to your hand.",
-	"type": "MINION",
-	"heroClass": "ROGUE",
-	"rarity": "RARE",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 2,
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

@@ -1,15 +1,15 @@
 {
+	"id": "spell_dream",
+	"name": "Dream",
+	"baseManaCost": 0,
+	"type": "SPELL",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "Return a minion to its owner's hand.",
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "ReturnMinionToHandSpell"
 	},
-	"id": "spell_dream",
-	"name": "Dream",
-	"description": "Return a minion to its owner's hand.",
-	"type": "SPELL",
-	"heroClass": "ANY",
-	"rarity": "FREE",
-	"baseManaCost": 0,
 	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

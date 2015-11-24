@@ -1,18 +1,18 @@
 {
-	"name": "2 damage AoE",
-	"description": "Deal 2 damage to all enemy minions",
 	"id": "spell_starfall_2",
-	"type": "SPELL",
-	"rarity": "RARE",
-	"heroClass": "DRUID",
+	"name": "2 damage AoE",
 	"baseManaCost": 5,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "RARE",
+	"description": "Deal 2 damage to all enemy minions",
 	"targetSelection": "NONE",
-	"collectible": false,
 	"spell": {
 		"class": "DamageSpell",
-		"value": 2,
-		"target": "ENEMY_MINIONS"
+		"target": "ENEMY_MINIONS",
+		"value": 2
 	},
+	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

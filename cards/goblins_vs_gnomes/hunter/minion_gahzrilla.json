@@ -1,6 +1,13 @@
 {
+	"id": "minion_gahzrilla",
+	"name": "Gahz'rilla",
+	"baseManaCost": 7,
+	"type": "MINION",
 	"baseAttack": 6,
 	"baseHp": 9,
+	"heroClass": "HUNTER",
+	"rarity": "LEGENDARY",
+	"description": "Whenever this minion takes damage, double its Attack.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "SelfDamagedTrigger"
@@ -11,13 +18,6 @@
 		}
 	},
 	"race": "BEAST",
-	"id": "minion_gahzrilla",
-	"name": "Gahz'rilla",
-	"description": "Whenever this minion takes damage, double its Attack.",
-	"type": "MINION",
-	"heroClass": "HUNTER",
-	"rarity": "LEGENDARY",
-	"baseManaCost": 7,
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

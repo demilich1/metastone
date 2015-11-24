@@ -1,13 +1,13 @@
 {
-	"name": "Stonetusk Boar",
-	"description": "Charge",
 	"id": "minion_stonetusk_boar",
-	"type": "MINION",
-	"rarity": "FREE",
-	"heroClass": "ANY",
+	"name": "Stonetusk Boar",
 	"baseManaCost": 1,
+	"type": "MINION",
 	"baseAttack": 1,
 	"baseHp": 1,
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "Charge",
 	"race": "BEAST",
 	"attributes": {
 		"CHARGE": true

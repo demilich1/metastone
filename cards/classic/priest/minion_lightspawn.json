@@ -1,13 +1,13 @@
 {
-	"name": "Lightspawn",
-	"description": "This minion's Attack is always equal to its Health.",
 	"id": "minion_lightspawn",
-	"type": "MINION",
-	"rarity": "COMMON",
-	"heroClass": "PRIEST",
+	"name": "Lightspawn",
 	"baseManaCost": 4,
+	"type": "MINION",
 	"baseAttack": 0,
 	"baseHp": 5,
+	"heroClass": "PRIEST",
+	"rarity": "COMMON",
+	"description": "This minion's Attack is always equal to its Health.",
 	"attributes": {
 		"ATTACK_EQUALS_HP": true
 	},

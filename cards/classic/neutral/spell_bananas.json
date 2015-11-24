@@ -1,17 +1,17 @@
 {
+	"id": "spell_bananas",
+	"name": "Bananas",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "Give a minion +1/+1.",
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "BuffSpell",
 		"attackBonus": 1,
 		"hpBonus": 1
 	},
-	"id": "spell_bananas",
-	"name": "Bananas",
-	"description": "Give a minion +1/+1.",
-	"type": "SPELL",
-	"heroClass": "ANY",
-	"rarity": "FREE",
-	"baseManaCost": 1,
 	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

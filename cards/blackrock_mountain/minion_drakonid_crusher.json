@@ -1,34 +1,34 @@
 {
+	"id": "minion_drakonid_crusher",
+	"name": "Drakonid Crusher",
+	"baseManaCost": 6,
+	"type": "MINION",
 	"baseAttack": 6,
 	"baseHp": 6,
-	"race": "DRAGON",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Battlecry: If your opponent has 15 or less Health, gain +3/+3.",
 	"battlecry": {
 		"spell": {
 			"class": "BuffSpell",
+			"target": "SELF",
 			"attackBonus": 3,
-			"hpBonus": 3,
-			"target": "SELF"
+			"hpBonus": 3
 		},
 		"condition": {
 			"class": "AttributeCondition",
 			"target": "ENEMY_HERO",
-			"attribute": "HP",
 			"value": 16,
+			"attribute": "HP",
 			"operation": "LESS"
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_drakonid_crusher",
-	"name": "Drakonid Crusher",
-	"description": "Battlecry: If your opponent has 15 or less Health, gain +3/+3.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "COMMON",
-	"set": "BLACKROCK_MOUNTAIN",
-	"baseManaCost": 6,
-	"collectible": true,
+	"race": "DRAGON",
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
+	"set": "BLACKROCK_MOUNTAIN",
 	"fileFormatVersion": 1
 }

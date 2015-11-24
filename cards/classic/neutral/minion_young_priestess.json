@@ -1,6 +1,13 @@
 {
+	"id": "minion_young_priestess",
+	"name": "Young Priestess",
+	"baseManaCost": 1,
+	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 1,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "At the end of your turn, give another random friendly minion +1 Health.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "TurnEndTrigger",
@@ -8,18 +15,11 @@
 		},
 		"spell": {
 			"class": "BuffSpell",
-			"hpBonus": 1,
 			"target": "OTHER_FRIENDLY_MINIONS",
+			"hpBonus": 1,
 			"randomTarget": true
 		}
 	},
-	"id": "minion_young_priestess",
-	"name": "Young Priestess",
-	"description": "At the end of your turn, give another random friendly minion +1 Health.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "RARE",
-	"baseManaCost": 1,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

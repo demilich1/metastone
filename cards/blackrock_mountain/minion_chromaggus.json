@@ -1,6 +1,13 @@
 {
+	"id": "minion_chromaggus",
+	"name": "Chromaggus",
+	"baseManaCost": 8,
+	"type": "MINION",
 	"baseAttack": 6,
 	"baseHp": 8,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Whenever you draw a card, put another copy into your hand.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "CardDrawnTrigger",
@@ -12,13 +19,6 @@
 		}
 	},
 	"race": "DRAGON",
-	"id": "minion_chromaggus",
-	"name": "Chromaggus",
-	"description": "Whenever you draw a card, put another copy into your hand.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "LEGENDARY",
-	"baseManaCost": 8,
 	"collectible": true,
 	"set": "BLACKROCK_MOUNTAIN",
 	"fileFormatVersion": 1

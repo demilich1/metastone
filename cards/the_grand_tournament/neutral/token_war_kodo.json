@@ -1,14 +1,14 @@
 {
-	"baseAttack": 3,
-	"baseHp": 5,
 	"id": "token_war_kodo",
 	"name": "War Kodo",
-	"description": "",
+	"baseManaCost": 3,
 	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 5,
 	"heroClass": "ANY",
 	"rarity": "FREE",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 3,
+	"description": "",
 	"collectible": false,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

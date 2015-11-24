@@ -1,6 +1,13 @@
 {
+	"id": "minion_gelbin_mekkatorque",
+	"name": "Gelbin Mekkatorque",
+	"baseManaCost": 6,
+	"type": "MINION",
 	"baseAttack": 6,
 	"baseHp": 6,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Summon an AWESOME invention.",
 	"battlecry": {
 		"spell": {
 			"class": "SummonRandomSpell",
@@ -13,17 +20,10 @@
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_gelbin_mekkatorque",
-	"name": "Gelbin Mekkatorque",
-	"description": "Battlecry: Summon an AWESOME invention.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "LEGENDARY",
-	"baseManaCost": 6,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

@@ -1,12 +1,13 @@
 {
-	"baseAttack": 1,
-	"baseHp": 3,
 	"id": "minion_tunnel_trogg",
 	"name": "Tunnel Trogg",
-	"description": "Whenever you Overload, gain +1 Attack per locked Mana Crystal.",
+	"baseManaCost": 1,
 	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 3,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
+	"description": "Whenever you Overload, gain +1 Attack per locked Mana Crystal.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "OverloadTrigger",
@@ -22,7 +23,6 @@
 			}
 		}
 	},
-	"baseManaCost": 1,
 	"collectible": true,
 	"set": "LEAGUE_OF_EXPLORERS",
 	"fileFormatVersion": 1

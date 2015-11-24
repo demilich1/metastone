@@ -1,7 +1,13 @@
 {
+	"id": "minion_murloc_tidehunter",
+	"name": "Murloc Tidehunter",
+	"baseManaCost": 2,
+	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 1,
-	"race": "MURLOC",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "Battlecry: Summon a 1/1 Murloc Scout.",
 	"battlecry": {
 		"spell": {
 			"class": "SummonSpell",
@@ -10,17 +16,11 @@
 		},
 		"resolvedLate": true
 	},
-	"id": "minion_murloc_tidehunter",
-	"name": "Murloc Tidehunter",
-	"description": "Battlecry: Summon a 1/1 Murloc Scout.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "FREE",
-	"baseManaCost": 2,
-	"collectible": true,
+	"race": "MURLOC",
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

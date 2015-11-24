@@ -1,11 +1,11 @@
 {
-	"name": "Earth Shock",
-	"description": "Silence a minion, then deal 1 damage to it.",
 	"id": "spell_earth_shock",
-	"type": "SPELL",
-	"rarity": "COMMON",
-	"heroClass": "SHAMAN",
+	"name": "Earth Shock",
 	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "SHAMAN",
+	"rarity": "COMMON",
+	"description": "Silence a minion, then deal 1 damage to it.",
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "MetaSpell",

@@ -1,18 +1,18 @@
 {
-	"baseAttack": 7,
-	"baseHp": 7,
-	"race": "MECH",
 	"id": "minion_force-tank_max",
 	"name": "Force-Tank MAX",
-	"description": "Divine Shield",
+	"baseManaCost": 8,
 	"type": "MINION",
+	"baseAttack": 7,
+	"baseHp": 7,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"baseManaCost": 8,
-	"collectible": true,
+	"description": "Divine Shield",
+	"race": "MECH",
 	"attributes": {
 		"DIVINE_SHIELD": true
 	},
+	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

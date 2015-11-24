@@ -1,25 +1,25 @@
 {
+	"id": "minion_master_of_disguise",
+	"name": "Master of Disguise",
+	"baseManaCost": 4,
+	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 4,
+	"heroClass": "ROGUE",
+	"rarity": "RARE",
+	"description": "Battlecry: Give a friendly minion Stealth.",
 	"battlecry": {
+		"targetSelection": "FRIENDLY_MINIONS",
 		"spell": {
 			"class": "AddAttributeSpell",
 			"attribute": "STEALTH"
 		},
-		"targetSelection": "FRIENDLY_MINIONS",
 		"resolvedLate": false
 	},
-	"id": "minion_master_of_disguise",
-	"name": "Master of Disguise",
-	"description": "Battlecry: Give a friendly minion Stealth.",
-	"type": "MINION",
-	"heroClass": "ROGUE",
-	"rarity": "RARE",
-	"baseManaCost": 4,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

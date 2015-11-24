@@ -1,6 +1,13 @@
 {
+	"id": "minion_ram_wrangler",
+	"name": "Ram Wrangler",
+	"baseManaCost": 5,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 3,
+	"heroClass": "HUNTER",
+	"rarity": "RARE",
+	"description": "Battlecry: If you have a Beast, summon a random Beast.",
 	"battlecry": {
 		"spell": {
 			"class": "SummonRandomMinionFilteredSpell",
@@ -15,17 +22,10 @@
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_ram_wrangler",
-	"name": "Ram Wrangler",
-	"description": "Battlecry: If you have a Beast, summon a random Beast.",
-	"type": "MINION",
-	"heroClass": "HUNTER",
-	"rarity": "RARE",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 5,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

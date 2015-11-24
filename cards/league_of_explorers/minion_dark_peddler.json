@@ -1,14 +1,15 @@
 {
-	"baseAttack": 2,
-	"baseHp": 2,
 	"id": "minion_dark_peddler",
 	"name": "Dark Peddler",
-	"description": "Battlecry: Discover a 1-Cost card.",
+	"baseManaCost": 2,
 	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
 	"heroClass": "WARLOCK",
 	"rarity": "COMMON",
-	"baseManaCost": 2,
+	"description": "Battlecry: Discover a 1-Cost card.",
 	"battlecry": {
+		"targetSelection": "NONE",
 		"spell": {
 			"class": "DiscoverRandomCardSpell",
 			"spell1": {
@@ -20,13 +21,12 @@
 				"manaCost": 1
 			}
 		},
-		"targetSelection": "NONE",
 		"resolvedLate": false
 	},
-	"collectible": true,
-	"attribute": {
+	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "LEAGUE_OF_EXPLORERS",
 	"fileFormatVersion": 1
 }

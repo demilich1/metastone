@@ -1,16 +1,16 @@
 {
+	"id": "spell_convert",
+	"name": "Convert",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "RARE",
+	"description": "Put a copy of an enemy minion into your hand.",
 	"targetSelection": "ENEMY_MINIONS",
 	"spell": {
 		"class": "CopyCardSpell"
 	},
-	"id": "spell_convert",
-	"name": "Convert",
-	"description": "Put a copy of an enemy minion into your hand.",
-	"type": "SPELL",
-	"heroClass": "PRIEST",
-	"rarity": "RARE",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 2,
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

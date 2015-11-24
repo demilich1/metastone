@@ -1,7 +1,13 @@
 {
+	"id": "minion_hungry_dragon",
+	"name": "Hungry Dragon",
+	"baseManaCost": 4,
+	"type": "MINION",
 	"baseAttack": 5,
 	"baseHp": 6,
-	"race": "DRAGON",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Battlecry: Summon a random 1-Cost minion for your opponent.",
 	"battlecry": {
 		"spell": {
 			"class": "SummonRandomMinionFilteredSpell",
@@ -14,17 +20,11 @@
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_hungry_dragon",
-	"name": "Hungry Dragon",
-	"description": "Battlecry: Summon a random 1-Cost minion for your opponent.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "COMMON",
-	"baseManaCost": 4,
-	"collectible": true,
+	"race": "DRAGON",
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "BLACKROCK_MOUNTAIN",
 	"fileFormatVersion": 1
 }

@@ -1,11 +1,11 @@
 {
-	"name": "Drain Life",
-	"description": "Deal 2 damage. Restore 2 Health to your hero.",
 	"id": "spell_drain_life",
-	"type": "SPELL",
-	"rarity": "FREE",
-	"heroClass": "WARLOCK",
+	"name": "Drain Life",
 	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "FREE",
+	"description": "Deal 2 damage. Restore 2 Health to your hero.",
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "MetaSpell",
@@ -15,8 +15,8 @@
 		},
 		"spell2": {
 			"class": "HealSpell",
-			"value": 2,
-			"target": "FRIENDLY_HERO"
+			"target": "FRIENDLY_HERO",
+			"value": 2
 		}
 	},
 	"set": "CLASSIC",

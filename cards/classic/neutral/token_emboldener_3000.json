@@ -1,6 +1,13 @@
 {
+	"id": "token_emboldener_3000",
+	"name": "Emboldener 3000",
+	"baseManaCost": 1,
+	"type": "MINION",
 	"baseAttack": 0,
 	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "At the end of your turn, give a random minion +1/+1.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "TurnEndTrigger",
@@ -8,20 +15,13 @@
 		},
 		"spell": {
 			"class": "BuffSpell",
+			"target": "ALL_MINIONS",
 			"attackBonus": 1,
 			"hpBonus": 1,
-			"target": "ALL_MINIONS",
 			"randomTarget": true
 		}
 	},
 	"race": "MECH",
-	"id": "token_emboldener_3000",
-	"name": "Emboldener 3000",
-	"description": "At the end of your turn, give a random minion +1/+1.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "FREE",
-	"baseManaCost": 1,
 	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

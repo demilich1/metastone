@@ -1,25 +1,25 @@
 {
+	"id": "minion_priestess_of_elune",
+	"name": "Priestess of Elune",
+	"baseManaCost": 6,
+	"type": "MINION",
 	"baseAttack": 5,
 	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Battlecry: Restore 4 Health to your hero.",
 	"battlecry": {
 		"spell": {
 			"class": "HealSpell",
-			"value": 4,
-			"target": "FRIENDLY_HERO"
+			"target": "FRIENDLY_HERO",
+			"value": 4
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_priestess_of_elune",
-	"name": "Priestess of Elune",
-	"description": "Battlecry: Restore 4 Health to your hero.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "COMMON",
-	"baseManaCost": 6,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

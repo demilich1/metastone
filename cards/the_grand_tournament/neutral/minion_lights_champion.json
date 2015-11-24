@@ -1,7 +1,15 @@
 {
+	"id": "minion_lights_champion",
+	"name": "Light's Champion",
+	"baseManaCost": 3,
+	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 3,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "Battlecry: Silence a Demon.",
 	"battlecry": {
+		"targetSelection": "MINIONS",
 		"spell": {
 			"class": "SilenceSpell",
 			"filter": {
@@ -9,20 +17,12 @@
 				"race": "DEMON"
 			}
 		},
-		"targetSelection": "MINIONS",
 		"resolvedLate": false
 	},
-	"id": "minion_lights_champion",
-	"name": "Light's Champion",
-	"description": "Battlecry: Silence a Demon.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "RARE",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 3,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

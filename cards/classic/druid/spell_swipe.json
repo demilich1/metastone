@@ -1,11 +1,11 @@
 {
-	"name": "Swipe",
-	"description": "Deal 4 damage to an enemy and 1 damage to all other enemies.",
 	"id": "spell_swipe",
-	"type": "SPELL",
-	"rarity": "FREE",
-	"heroClass": "DRUID",
+	"name": "Swipe",
 	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "FREE",
+	"description": "Deal 4 damage to an enemy and 1 damage to all other enemies.",
 	"targetSelection": "ENEMY_CHARACTERS",
 	"spell": {
 		"class": "custom.SwipeSpell",

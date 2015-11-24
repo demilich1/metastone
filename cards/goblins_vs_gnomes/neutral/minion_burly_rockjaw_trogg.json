@@ -1,6 +1,13 @@
 {
+	"id": "minion_burly_rockjaw_trogg",
+	"name": "Burly Rockjaw Trogg",
+	"baseManaCost": 4,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Each time your opponent cast a spell, gain +2 Attack.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "SpellCastedTrigger",
@@ -8,17 +15,10 @@
 		},
 		"spell": {
 			"class": "BuffSpell",
-			"attackBonus": 2,
-			"target": "SELF"
+			"target": "SELF",
+			"attackBonus": 2
 		}
 	},
-	"id": "minion_burly_rockjaw_trogg",
-	"name": "Burly Rockjaw Trogg",
-	"description": "Each time your opponent cast a spell, gain +2 Attack.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "COMMON",
-	"baseManaCost": 4,
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

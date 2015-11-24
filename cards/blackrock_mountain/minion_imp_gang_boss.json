@@ -1,6 +1,13 @@
 {
+	"id": "minion_imp_gang_boss",
+	"name": "Imp Gang Boss",
+	"baseManaCost": 3,
+	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 4,
+	"heroClass": "WARLOCK",
+	"rarity": "COMMON",
+	"description": "Whenever this minion takes damage, summon a 1/1 Imp.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "SelfDamagedTrigger"
@@ -11,13 +18,6 @@
 		}
 	},
 	"race": "DEMON",
-	"id": "minion_imp_gang_boss",
-	"name": "Imp Gang Boss",
-	"description": "Whenever this minion takes damage, summon a 1/1 Imp.",
-	"type": "MINION",
-	"heroClass": "WARLOCK",
-	"rarity": "COMMON",
-	"baseManaCost": 3,
 	"collectible": true,
 	"set": "BLACKROCK_MOUNTAIN",
 	"fileFormatVersion": 1

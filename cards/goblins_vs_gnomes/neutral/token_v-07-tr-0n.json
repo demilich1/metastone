@@ -1,19 +1,19 @@
 {
-	"baseAttack": 4,
-	"baseHp": 8,
-	"race": "MECH",
 	"id": "token_v-07-tr-0n",
 	"name": "V-07-TR-0N",
-	"description": "Charge. Mega-Windfury (Can attack four times a turn.)",
+	"baseManaCost": 8,
 	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 8,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
-	"baseManaCost": 8,
-	"collectible": false,
+	"description": "Charge. Mega-Windfury (Can attack four times a turn.)",
+	"race": "MECH",
 	"attributes": {
 		"MEGA_WINDFURY": true,
 		"CHARGE": true
 	},
+	"collectible": false,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

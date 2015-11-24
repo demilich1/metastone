@@ -1,27 +1,27 @@
 {
-	"baseAttack": 8,
-	"baseHp": 5,
 	"id": "minion_mogors_champion",
 	"name": "Mogor's Champion",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"baseAttack": 8,
+	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "50% chance to attack the wrong enemy.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "HostAcquiresTargetTrigger",
-			"actionType": "PHYSICAL_ATTACK",
 			"condition": {
 				"class": "RandomCondition"
-			}
+			},
+			"actionType": "PHYSICAL_ATTACK"
 		},
 		"spell": {
 			"class": "FumbleSpell",
 			"target": "EVENT_TARGET"
 		}
 	},
-	"description": "50% chance to attack the wrong enemy.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "RARE",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 6,
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

@@ -1,27 +1,27 @@
 {
+	"id": "minion_mad_bomber",
+	"name": "Mad Bomber",
+	"baseManaCost": 2,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 2,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Battlecry: Deal 3 damage randomly split between all other characters.",
 	"battlecry": {
 		"spell": {
 			"class": "MissilesSpell",
-			"value": 1,
-			"howMany": 3,
 			"target": "ALL_CHARACTERS",
-			"randomTarget": true
+			"value": 1,
+			"randomTarget": true,
+			"howMany": 3
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_mad_bomber",
-	"name": "Mad Bomber",
-	"description": "Battlecry: Deal 3 damage randomly split between all other characters.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "COMMON",
-	"baseManaCost": 2,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

@@ -1,14 +1,13 @@
 {
-	"name": "Sword of Justice",
-	"description": "Whenever you summon a minion, give it +1/+1 and this loses 1 Durability.",
-	"collectible": true,
 	"id": "weapon_sword_of_justice",
-	"type": "WEAPON",
-	"rarity": "EPIC",
-	"heroClass": "PALADIN",
+	"name": "Sword of Justice",
 	"baseManaCost": 3,
+	"type": "WEAPON",
 	"damage": 1,
 	"durability": 5,
+	"heroClass": "PALADIN",
+	"rarity": "EPIC",
+	"description": "Whenever you summon a minion, give it +1/+1 and this loses 1 Durability.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "MinionSummonedTrigger",
@@ -18,9 +17,9 @@
 			"class": "MetaSpell",
 			"spell1": {
 				"class": "BuffSpell",
+				"target": "EVENT_TARGET",
 				"attackBonus": 1,
-				"hpBonus": 1,
-				"target": "EVENT_TARGET"
+				"hpBonus": 1
 			},
 			"spell2": {
 				"class": "ModifyDurabilitySpell",
@@ -29,6 +28,7 @@
 			}
 		}
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

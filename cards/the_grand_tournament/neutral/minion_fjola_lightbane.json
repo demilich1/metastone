@@ -1,6 +1,13 @@
 {
+	"id": "minion_fjola_lightbane",
+	"name": "Fjola Lightbane",
+	"baseManaCost": 3,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Whenever you target this minion with a spell, gain Divine Shield.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "SelfTargetedTrigger",
@@ -8,18 +15,11 @@
 		},
 		"spell": {
 			"class": "AddAttributeSpell",
-			"attribute": "DIVINE_SHIELD",
-			"target": "SELF"
+			"target": "SELF",
+			"attribute": "DIVINE_SHIELD"
 		}
 	},
-	"id": "minion_fjola_lightbane",
-	"name": "Fjola Lightbane",
-	"description": "Whenever you target this minion with a spell, gain Divine Shield.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "LEGENDARY",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 3,
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

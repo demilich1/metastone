@@ -1,7 +1,13 @@
 {
+	"id": "minion_twilight_guardian",
+	"name": "Twilight Guardian",
+	"baseManaCost": 4,
+	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 6,
-	"race": "DRAGON",
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"description": "Battlecry: If you're holding a Dragon, gain +1 Attack and Taunt.",
 	"battlecry": {
 		"spell": {
 			"class": "MetaSpell",
@@ -21,17 +27,11 @@
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_twilight_guardian",
-	"name": "Twilight Guardian",
-	"description": "Battlecry: If you're holding a Dragon, gain +1 Attack and Taunt.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "EPIC",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 4,
-	"collectible": true,
+	"race": "DRAGON",
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

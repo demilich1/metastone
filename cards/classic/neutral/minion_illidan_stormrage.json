@@ -1,6 +1,13 @@
 {
+	"id": "minion_illidan_stormrage",
+	"name": "Illidan Stormrage",
+	"baseManaCost": 6,
+	"type": "MINION",
 	"baseAttack": 7,
 	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Whenever you play a card, summon a 2/1 Flame of Azzinoth.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "CardPlayedTrigger",
@@ -13,13 +20,6 @@
 		}
 	},
 	"race": "DEMON",
-	"id": "minion_illidan_stormrage",
-	"name": "Illidan Stormrage",
-	"description": "Whenever you play a card, summon a 2/1 Flame of Azzinoth.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "LEGENDARY",
-	"baseManaCost": 6,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

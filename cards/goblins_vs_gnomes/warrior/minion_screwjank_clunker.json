@@ -1,8 +1,15 @@
 {
+	"id": "minion_screwjank_clunker",
+	"name": "Screwjank Clunker",
+	"baseManaCost": 4,
+	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 5,
-	"race": "MECH",
+	"heroClass": "WARRIOR",
+	"rarity": "RARE",
+	"description": "Battlecry: Give a friendly Mech +2/+2.",
 	"battlecry": {
+		"targetSelection": "FRIENDLY_MINIONS",
 		"spell": {
 			"class": "BuffSpell",
 			"attackBonus": 2,
@@ -12,20 +19,13 @@
 				"race": "MECH"
 			}
 		},
-		"targetSelection": "FRIENDLY_MINIONS",
 		"resolvedLate": false
 	},
-	"id": "minion_screwjank_clunker",
-	"name": "Screwjank Clunker",
-	"description": "Battlecry: Give a friendly Mech +2/+2.",
-	"type": "MINION",
-	"heroClass": "WARRIOR",
-	"rarity": "RARE",
-	"baseManaCost": 4,
-	"collectible": true,
+	"race": "MECH",
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

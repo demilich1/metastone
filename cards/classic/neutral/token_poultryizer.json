@@ -1,6 +1,13 @@
 {
+	"id": "token_poultryizer",
+	"name": "Poultryizer",
+	"baseManaCost": 1,
+	"type": "MINION",
 	"baseAttack": 0,
 	"baseHp": 3,
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "At the start of your turn, transform a random minion into a 1/1 Chicken.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "TurnStartTrigger",
@@ -8,19 +15,12 @@
 		},
 		"spell": {
 			"class": "TransformMinionSpell",
-			"card": "token_chicken",
 			"target": "ALL_MINIONS",
+			"card": "token_chicken",
 			"randomTarget": true
 		}
 	},
 	"race": "MECH",
-	"id": "token_poultryizer",
-	"name": "Poultryizer",
-	"description": "At the start of your turn, transform a random minion into a 1/1 Chicken.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "FREE",
-	"baseManaCost": 1,
 	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

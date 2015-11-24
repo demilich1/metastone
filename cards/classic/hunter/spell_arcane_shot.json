@@ -1,11 +1,11 @@
 {
-	"name": "Arcane Shot",
-	"description": "Deal 2 damage.",
 	"id": "spell_arcane_shot",
-	"type": "SPELL",
-	"rarity": "FREE",
-	"heroClass": "HUNTER",
+	"name": "Arcane Shot",
 	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "HUNTER",
+	"rarity": "FREE",
+	"description": "Deal 2 damage.",
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "DamageSpell",

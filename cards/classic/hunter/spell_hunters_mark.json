@@ -1,11 +1,11 @@
 {
-	"name": "Hunter's Mark",
-	"description": "Change a minion's Health to 1.",
 	"id": "spell_hunters_mark",
-	"type": "SPELL",
-	"rarity": "FREE",
-	"heroClass": "HUNTER",
+	"name": "Hunter's Mark",
 	"baseManaCost": 0,
+	"type": "SPELL",
+	"heroClass": "HUNTER",
+	"rarity": "FREE",
+	"description": "Change a minion's Health to 1.",
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "SetHpSpell",

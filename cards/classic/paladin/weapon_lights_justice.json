@@ -1,13 +1,13 @@
 {
-	"name": "Light's Justice",
-	"description": "",
 	"id": "weapon_lights_justice",
-	"type": "WEAPON",
-	"rarity": "FREE",
-	"heroClass": "PALADIN",
+	"name": "Light's Justice",
 	"baseManaCost": 1,
+	"type": "WEAPON",
 	"damage": 1,
 	"durability": 4,
+	"heroClass": "PALADIN",
+	"rarity": "FREE",
+	"description": "",
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

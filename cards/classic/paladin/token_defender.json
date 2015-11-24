@@ -1,12 +1,12 @@
 {
-	"baseAttack": 2,
-	"baseHp": 1,
 	"id": "token_defender",
 	"name": "Defender",
+	"baseManaCost": 1,
 	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 1,
 	"heroClass": "PALADIN",
 	"rarity": "COMMON",
-	"baseManaCost": 1,
 	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

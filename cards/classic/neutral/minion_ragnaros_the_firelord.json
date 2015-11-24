@@ -1,6 +1,13 @@
 {
+	"id": "minion_ragnaros_the_firelord",
+	"name": "Ragnaros the Firelord",
+	"baseManaCost": 8,
+	"type": "MINION",
 	"baseAttack": 8,
 	"baseHp": 8,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Can't Attack.  At the end of your turn, deal 8 damage to a random enemy.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "TurnEndTrigger",
@@ -9,22 +16,15 @@
 		},
 		"spell": {
 			"class": "DamageSpell",
-			"value": 8,
 			"target": "ENEMY_CHARACTERS",
+			"value": 8,
 			"randomTarget": true
 		}
 	},
-	"id": "minion_ragnaros_the_firelord",
-	"name": "Ragnaros the Firelord",
-	"description": "Can't Attack.  At the end of your turn, deal 8 damage to a random enemy.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "LEGENDARY",
-	"baseManaCost": 8,
-	"collectible": true,
 	"attributes": {
 		"CANNOT_ATTACK": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

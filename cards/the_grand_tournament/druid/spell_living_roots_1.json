@@ -1,17 +1,17 @@
 {
-	"name": "2 damage",
-	"description": "Deal 2 damage",
 	"id": "spell_living_roots_1",
-	"type": "SPELL",
-	"rarity": "COMMON",
-	"heroClass": "DRUID",
+	"name": "2 damage",
 	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"description": "Deal 2 damage",
 	"targetSelection": "ANY",
-	"collectible": false,
 	"spell": {
 		"class": "DamageSpell",
 		"value": 2
 	},
+	"collectible": false,
 	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

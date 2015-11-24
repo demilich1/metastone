@@ -1,18 +1,18 @@
 {
-	"baseAttack": 4,
-	"baseHp": 4,
-	"race": "BEAST",
 	"id": "token_cat_form",
 	"name": "Druid of the Claw (Cat)",
-	"description": "Charge",
+	"baseManaCost": 5,
 	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 4,
 	"heroClass": "DRUID",
 	"rarity": "COMMON",
-	"baseManaCost": 5,
-	"collectible": false,
+	"description": "Charge",
+	"race": "BEAST",
 	"attributes": {
 		"CHARGE": true
 	},
+	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

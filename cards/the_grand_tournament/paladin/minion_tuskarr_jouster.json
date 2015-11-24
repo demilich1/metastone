@@ -1,28 +1,28 @@
 {
+	"id": "minion_tuskarr_jouster",
+	"name": "Tuskarr Jouster",
+	"baseManaCost": 5,
+	"type": "MINION",
 	"baseAttack": 5,
 	"baseHp": 5,
+	"heroClass": "PALADIN",
+	"rarity": "RARE",
+	"description": "Battlecry: Reveal a minion in each deck. If yours costs more, restore 7 Health to your hero.",
 	"battlecry": {
 		"spell": {
 			"class": "JoustSpell",
 			"spell": {
 				"class": "HealSpell",
-				"value": 7,
-				"target": "FRIENDLY_HERO"
+				"target": "FRIENDLY_HERO",
+				"value": 7
 			}
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_tuskarr_jouster",
-	"name": "Tuskarr Jouster",
-	"description": "Battlecry: Reveal a minion in each deck. If yours costs more, restore 7 Health to your hero.",
-	"type": "MINION",
-	"heroClass": "PALADIN",
-	"rarity": "RARE",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 5,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

@@ -1,17 +1,17 @@
 {
+	"id": "spell_thoughtsteal",
+	"name": "Thoughtsteal",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "COMMON",
+	"description": "Copy 2 cards from your opponent's deck and put them into your hand.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "CopyCardSpell",
 		"value": 2,
 		"cardLocation": "DECK"
 	},
-	"id": "spell_thoughtsteal",
-	"name": "Thoughtsteal",
-	"description": "Copy 2 cards from your opponent's deck and put them into your hand.",
-	"type": "SPELL",
-	"heroClass": "PRIEST",
-	"rarity": "COMMON",
-	"baseManaCost": 3,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

@@ -1,6 +1,13 @@
 {
+	"id": "minion_snowchugger",
+	"name": "Snowchugger",
+	"baseManaCost": 2,
+	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 3,
+	"heroClass": "MAGE",
+	"rarity": "COMMON",
+	"description": "Freeze any character damaged by this minion.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "DamageCausedTrigger",
@@ -8,18 +15,11 @@
 		},
 		"spell": {
 			"class": "AddAttributeSpell",
-			"attribute": "FROZEN",
-			"target": "EVENT_TARGET"
+			"target": "EVENT_TARGET",
+			"attribute": "FROZEN"
 		}
 	},
 	"race": "MECH",
-	"id": "minion_snowchugger",
-	"name": "Snowchugger",
-	"description": "Freeze any character damaged by this minion.",
-	"type": "MINION",
-	"heroClass": "MAGE",
-	"rarity": "COMMON",
-	"baseManaCost": 2,
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

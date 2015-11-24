@@ -1,26 +1,26 @@
 {
+	"id": "minion_flame_imp",
+	"name": "Flame Imp",
+	"baseManaCost": 1,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 2,
-	"race": "DEMON",
+	"heroClass": "WARLOCK",
+	"rarity": "COMMON",
+	"description": "Battlecry: Deal 3 damage to your hero.",
 	"battlecry": {
 		"spell": {
 			"class": "DamageSpell",
-			"value": 3,
-			"target": "FRIENDLY_HERO"
+			"target": "FRIENDLY_HERO",
+			"value": 3
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_flame_imp",
-	"name": "Flame Imp",
-	"description": "Battlecry: Deal 3 damage to your hero.",
-	"type": "MINION",
-	"heroClass": "WARLOCK",
-	"rarity": "COMMON",
-	"baseManaCost": 1,
-	"collectible": true,
+	"race": "DEMON",
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

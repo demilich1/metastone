@@ -1,20 +1,20 @@
 {
+	"id": "spell_arcane_blast",
+	"name": "Arcane Blast",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "EPIC",
+	"description": "Deal 2 damage to a minion. This spell gets double bonus from Spell Damage.",
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "DamageSpell",
 		"value": 2
 	},
-	"id": "spell_arcane_blast",
-	"name": "Arcane Blast",
-	"description": "Deal 2 damage to a minion. This spell gets double bonus from Spell Damage.",
-	"type": "SPELL",
-	"heroClass": "MAGE",
-	"rarity": "EPIC",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 1,
-	"collectible": true,
 	"attributes": {
 		"SPELL_DAMAGE_MULTIPLIER": 2
 	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

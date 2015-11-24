@@ -1,11 +1,11 @@
 {
-	"name": "Starfire",
-	"description": "Deal 5 damage. Draw a card.",
 	"id": "spell_starfire",
-	"type": "SPELL",
-	"rarity": "FREE",
-	"heroClass": "DRUID",
+	"name": "Starfire",
 	"baseManaCost": 6,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "FREE",
+	"description": "Deal 5 damage. Draw a card.",
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "MetaSpell",

@@ -1,18 +1,18 @@
 {
-	"targetSelection": "NONE",
-	"spell": {
-		"class": "DamageSpell",
-		"value": 4,
-		"target": "ENEMY_MINIONS",
-		"randomTarget": true
-	},
 	"id": "spell_flamecannon",
 	"name": "Flamecannon",
-	"description": "Deal 4 damage to a random enemy minion.",
+	"baseManaCost": 2,
 	"type": "SPELL",
 	"heroClass": "MAGE",
 	"rarity": "COMMON",
-	"baseManaCost": 2,
+	"description": "Deal 4 damage to a random enemy minion.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "DamageSpell",
+		"target": "ENEMY_MINIONS",
+		"value": 4,
+		"randomTarget": true
+	},
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

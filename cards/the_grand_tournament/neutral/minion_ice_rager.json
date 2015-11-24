@@ -1,14 +1,14 @@
 {
-	"baseAttack": 5,
-	"baseHp": 2,
 	"id": "minion_ice_rager",
 	"name": "Ice Rager",
-	"description": "",
+	"baseManaCost": 3,
 	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 2,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 3,
+	"description": "",
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

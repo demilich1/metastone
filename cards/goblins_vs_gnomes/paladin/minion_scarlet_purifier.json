@@ -1,11 +1,18 @@
 {
+	"id": "minion_scarlet_purifier",
+	"name": "Scarlet Purifier",
+	"baseManaCost": 3,
+	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 3,
+	"heroClass": "PALADIN",
+	"rarity": "RARE",
+	"description": "Battlecry: Deal 2 damage to all minions with Deathrattle.",
 	"battlecry": {
 		"spell": {
 			"class": "DamageSpell",
-			"value": 2,
 			"target": "ALL_MINIONS",
+			"value": 2,
 			"filter": {
 				"class": "AttributeFilter",
 				"attribute": "DEATHRATTLES",
@@ -14,17 +21,10 @@
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_scarlet_purifier",
-	"name": "Scarlet Purifier",
-	"description": "Battlecry: Deal 2 damage to all minions with Deathrattle.",
-	"type": "MINION",
-	"heroClass": "PALADIN",
-	"rarity": "RARE",
-	"baseManaCost": 3,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

@@ -1,13 +1,13 @@
 {
-	"name": "Nozdormu",
-	"description": "Players only have 15 seconds to take their turns.",
 	"id": "minion_nozdormu",
-	"type": "MINION",
-	"rarity": "LEGENDARY",
-	"heroClass": "ANY",
+	"name": "Nozdormu",
 	"baseManaCost": 9,
+	"type": "MINION",
 	"baseAttack": 8,
 	"baseHp": 8,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Players only have 15 seconds to take their turns.",
 	"race": "DRAGON",
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

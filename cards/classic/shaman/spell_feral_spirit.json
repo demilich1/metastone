@@ -1,11 +1,11 @@
 {
-	"name": "Feral Spirit",
-	"description": "Summon two 2/3 Spirit Wolves with Taunt. Overload: (2)",
 	"id": "spell_feral_spirit",
-	"type": "SPELL",
-	"rarity": "RARE",
-	"heroClass": "SHAMAN",
+	"name": "Feral Spirit",
 	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "SHAMAN",
+	"rarity": "RARE",
+	"description": "Summon two 2/3 Spirit Wolves with Taunt. Overload: (2)",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "SummonSpell",

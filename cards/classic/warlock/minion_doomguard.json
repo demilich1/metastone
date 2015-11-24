@@ -1,27 +1,27 @@
 {
+	"id": "minion_doomguard",
+	"name": "Doomguard",
+	"baseManaCost": 5,
+	"type": "MINION",
 	"baseAttack": 5,
 	"baseHp": 7,
-	"race": "DEMON",
+	"heroClass": "WARLOCK",
+	"rarity": "RARE",
+	"description": "Charge. Battlecry: Discard two random cards.",
 	"battlecry": {
+		"targetSelection": "NONE",
 		"spell": {
 			"class": "DiscardSpell",
 			"value": 2
 		},
-		"targetSelection": "NONE",
 		"resolvedLate": false
 	},
-	"id": "minion_doomguard",
-	"name": "Doomguard",
-	"description": "Charge. Battlecry: Discard two random cards.",
-	"type": "MINION",
-	"heroClass": "WARLOCK",
-	"rarity": "RARE",
-	"baseManaCost": 5,
-	"collectible": true,
+	"race": "DEMON",
 	"attributes": {
-		"CHARGE": true,
-		"BATTLECRY": true
+		"BATTLECRY": true,
+		"CHARGE": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

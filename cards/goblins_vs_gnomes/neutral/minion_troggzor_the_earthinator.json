@@ -1,6 +1,13 @@
 {
+	"id": "minion_troggzor_the_earthinator",
+	"name": "Troggzor the Earthinator",
+	"baseManaCost": 7,
+	"type": "MINION",
 	"baseAttack": 6,
 	"baseHp": 6,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Whenever your opponent casts a spell, summon a Burly Rockjaw Trogg.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "SpellCastedTrigger",
@@ -11,13 +18,6 @@
 			"card": "minion_burly_rockjaw_trogg"
 		}
 	},
-	"id": "minion_troggzor_the_earthinator",
-	"name": "Troggzor the Earthinator",
-	"description": "Whenever your opponent casts a spell, summon a Burly Rockjaw Trogg.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "LEGENDARY",
-	"baseManaCost": 7,
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

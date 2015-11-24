@@ -1,25 +1,25 @@
 {
+	"id": "minion_dalaran_aspirant",
+	"name": "Dalaran Aspirant",
+	"baseManaCost": 4,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 5,
-	"id": "minion_dalaran_aspirant",
+	"heroClass": "MAGE",
+	"rarity": "COMMON",
+	"description": "Inspire: Gain Spell Damage +1.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "InspireTrigger"
 		},
 		"spell": {
 			"class": "ModifyAttributeSpell",
-			"attribute": "SPELL_DAMAGE",
+			"target": "SELF",
 			"value": 1,
-			"target": "SELF"
+			"attribute": "SPELL_DAMAGE"
 		}
 	},
-	"name": "Dalaran Aspirant",
-	"description": "Inspire: Gain Spell Damage +1.",
-	"type": "MINION",
-	"heroClass": "MAGE",
-	"rarity": "COMMON",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 4,
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

@@ -1,27 +1,27 @@
 {
-	"name": "Glaivezooka",
-	"description": "Battlecry: Give a random friendly minion +1 Attack.",
-	"collectible": true,
 	"id": "weapon_glaivezooka",
-	"type": "WEAPON",
-	"rarity": "COMMON",
-	"heroClass": "HUNTER",
+	"name": "Glaivezooka",
 	"baseManaCost": 2,
+	"type": "WEAPON",
 	"damage": 2,
 	"durability": 2,
+	"heroClass": "HUNTER",
+	"rarity": "COMMON",
+	"description": "Battlecry: Give a random friendly minion +1 Attack.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "BuffSpell",
+			"target": "FRIENDLY_MINIONS",
+			"attackBonus": 1,
+			"randomTarget": "true"
+		},
+		"resolvedLate": false
+	},
 	"attributes": {
 		"BATTLECRY": true
 	},
-	"battlecry": {
-		"spell": {
-			"class": "BuffSpell",
-			"attackBonus": 1,
-			"target": "FRIENDLY_MINIONS",
-			"randomTarget": "true"
-		},
-		"targetSelection": "NONE",
-		"resolvedLate": false
-	},
+	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

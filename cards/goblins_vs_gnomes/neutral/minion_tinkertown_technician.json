@@ -1,14 +1,21 @@
 {
+	"id": "minion_tinkertown_technician",
+	"name": "Tinkertown Technician",
+	"baseManaCost": 3,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 3,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Battlecry: If you control a Mech, gain +1/+1 and put a Spare Part in your hand.",
 	"battlecry": {
 		"spell": {
 			"class": "MetaSpell",
 			"spell1": {
 				"class": "BuffSpell",
+				"target": "SELF",
 				"attackBonus": 1,
-				"hpBonus": 1,
-				"target": "SELF"
+				"hpBonus": 1
 			},
 			"spell2": {
 				"class": "ReceiveRandomCardSpell",
@@ -29,17 +36,10 @@
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_tinkertown_technician",
-	"name": "Tinkertown Technician",
-	"description": "Battlecry: If you control a Mech, gain +1/+1 and put a Spare Part in your hand.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "COMMON",
-	"baseManaCost": 3,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

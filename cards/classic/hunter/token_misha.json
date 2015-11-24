@@ -1,12 +1,12 @@
 {
-	"name": "Misha",
 	"id": "token_misha",
-	"type": "MINION",
-	"rarity": "FREE",
-	"heroClass": "HUNTER",
+	"name": "Misha",
 	"baseManaCost": 3,
+	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 4,
+	"heroClass": "HUNTER",
+	"rarity": "FREE",
 	"race": "BEAST",
 	"attributes": {
 		"TAUNT": true

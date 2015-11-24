@@ -1,17 +1,17 @@
 {
-	"baseAttack": 2,
-	"baseHp": 6,
 	"id": "minion_frigid_snobold",
 	"name": "Frigid Snobold",
-	"description": "Spell Damage +1",
+	"baseManaCost": 4,
 	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 6,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 4,
-	"collectible": true,
+	"description": "Spell Damage +1",
 	"attributes": {
 		"SPELL_DAMAGE": 1
 	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

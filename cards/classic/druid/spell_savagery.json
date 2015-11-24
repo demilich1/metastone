@@ -1,11 +1,11 @@
 {
-	"name": "Savagery",
-	"description": "Deal damage equal to your hero's Attack to a minion.",
 	"id": "spell_savagery",
-	"type": "SPELL",
-	"rarity": "RARE",
-	"heroClass": "DRUID",
+	"name": "Savagery",
 	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "RARE",
+	"description": "Deal damage equal to your hero's Attack to a minion.",
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "DamageSpell",

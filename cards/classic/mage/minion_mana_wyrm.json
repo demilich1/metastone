@@ -1,6 +1,13 @@
 {
+	"id": "minion_mana_wyrm",
+	"name": "Mana Wyrm",
+	"baseManaCost": 1,
+	"type": "MINION",
 	"baseAttack": 1,
 	"baseHp": 3,
+	"heroClass": "MAGE",
+	"rarity": "COMMON",
+	"description": "Whenever you cast a spell, gain +1 Attack.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "SpellCastedTrigger",
@@ -8,17 +15,10 @@
 		},
 		"spell": {
 			"class": "BuffSpell",
-			"attackBonus": 1,
-			"target": "SELF"
+			"target": "SELF",
+			"attackBonus": 1
 		}
 	},
-	"id": "minion_mana_wyrm",
-	"name": "Mana Wyrm",
-	"description": "Whenever you cast a spell, gain +1 Attack.",
-	"type": "MINION",
-	"heroClass": "MAGE",
-	"rarity": "COMMON",
-	"baseManaCost": 1,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

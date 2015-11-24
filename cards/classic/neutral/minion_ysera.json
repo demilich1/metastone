@@ -1,6 +1,13 @@
 {
+	"id": "minion_ysera",
+	"name": "Ysera",
+	"baseManaCost": 9,
+	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 12,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "At the end of your turn, draw a Dream Card.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "TurnEndTrigger",
@@ -18,13 +25,6 @@
 		}
 	},
 	"race": "DRAGON",
-	"id": "minion_ysera",
-	"name": "Ysera",
-	"description": "At the end of your turn, draw a Dream Card.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "LEGENDARY",
-	"baseManaCost": 9,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

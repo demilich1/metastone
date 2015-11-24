@@ -1,4 +1,11 @@
 {
+	"id": "spell_shadowflame",
+	"name": "Shadowflame",
+	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "RARE",
+	"description": "Destroy a friendly minion and deal its Attack damage to all enemy minions.",
 	"targetSelection": "FRIENDLY_MINIONS",
 	"spell": {
 		"class": "MetaSpell",
@@ -7,21 +14,14 @@
 		},
 		"spell2": {
 			"class": "DamageSpell",
+			"target": "ENEMY_MINIONS",
 			"valueProvider": {
 				"class": "AttributeValueProvider",
-				"attribute": "ATTACK",
-				"target": "TARGET"
-			},
-			"target": "ENEMY_MINIONS"
+				"target": "TARGET",
+				"attribute": "ATTACK"
+			}
 		}
 	},
-	"id": "spell_shadowflame",
-	"name": "Shadowflame",
-	"description": "Destroy a friendly minion and deal its Attack damage to all enemy minions.",
-	"type": "SPELL",
-	"heroClass": "WARLOCK",
-	"rarity": "RARE",
-	"baseManaCost": 4,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

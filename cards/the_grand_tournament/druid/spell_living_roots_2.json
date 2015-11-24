@@ -1,13 +1,12 @@
 {
-	"name": "Summon two 1/1",
-	"description": "Summon two 1/1 Saplings",
 	"id": "spell_living_roots_2",
-	"type": "SPELL",
-	"rarity": "COMMON",
-	"heroClass": "DRUID",
+	"name": "Summon two 1/1",
 	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"description": "Summon two 1/1 Saplings",
 	"targetSelection": "NONE",
-	"collectible": false,
 	"spell": {
 		"class": "SummonSpell",
 		"cards": [
@@ -15,6 +14,7 @@
 			"token_sapling"
 		]
 	},
+	"collectible": false,
 	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

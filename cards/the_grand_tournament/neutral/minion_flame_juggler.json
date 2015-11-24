@@ -1,27 +1,27 @@
 {
-	"baseAttack": 2,
-	"baseHp": 3,
-	"battlecry": {
-		"spell": {
-			"class": "DamageSpell",
-			"value": 1,
-			"target": "ENEMY_CHARACTERS",
-			"randomTarget": true
-		},
-		"targetSelection": "NONE",
-		"resolvedLate": false
-	},
 	"id": "minion_flame_juggler",
 	"name": "Flame Juggler",
-	"description": "Battlecry: Deal 1 damage to a random enemy.",
+	"baseManaCost": 2,
 	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 3,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 2,
-	"collectible": true,
+	"description": "Battlecry: Deal 1 damage to a random enemy.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "DamageSpell",
+			"target": "ENEMY_CHARACTERS",
+			"value": 1,
+			"randomTarget": true
+		},
+		"resolvedLate": false
+	},
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

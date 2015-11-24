@@ -1,7 +1,15 @@
 {
+	"id": "minion_wildwalker",
+	"name": "Wildwalker",
+	"baseManaCost": 4,
+	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 4,
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"description": "Battlecry: Give a friendly Beast +3 Health.",
 	"battlecry": {
+		"targetSelection": "FRIENDLY_MINIONS",
 		"spell": {
 			"class": "BuffSpell",
 			"hpBonus": 3,
@@ -10,20 +18,12 @@
 				"race": "BEAST"
 			}
 		},
-		"targetSelection": "FRIENDLY_MINIONS",
 		"resolvedLate": false
 	},
-	"id": "minion_wildwalker",
-	"name": "Wildwalker",
-	"description": "Battlecry: Give a friendly Beast +3 Health.",
-	"type": "MINION",
-	"heroClass": "DRUID",
-	"rarity": "COMMON",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 4,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

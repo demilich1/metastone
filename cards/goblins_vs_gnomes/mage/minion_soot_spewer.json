@@ -1,18 +1,18 @@
 {
-	"baseAttack": 3,
-	"baseHp": 3,
-	"race": "MECH",
 	"id": "minion_soot_spewer",
 	"name": "Soot Spewer",
-	"description": "Spell Damage +1",
+	"baseManaCost": 3,
 	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 3,
 	"heroClass": "MAGE",
 	"rarity": "RARE",
-	"baseManaCost": 3,
-	"collectible": true,
+	"description": "Spell Damage +1",
+	"race": "MECH",
 	"attributes": {
 		"SPELL_DAMAGE": 1
 	},
+	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

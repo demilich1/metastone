@@ -1,11 +1,11 @@
 {
-	"name": "Healing Touch",
-	"description": "Restore 8 Health.",
 	"id": "spell_healing_touch",
-	"type": "SPELL",
-	"rarity": "FREE",
-	"heroClass": "DRUID",
+	"name": "Healing Touch",
 	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "FREE",
+	"description": "Restore 8 Health.",
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "HealSpell",

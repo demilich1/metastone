@@ -1,16 +1,16 @@
 {
+	"id": "spell_feign_death",
+	"name": "Feign Death",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "HUNTER",
+	"rarity": "EPIC",
+	"description": "Trigger all Deathrattles on your minions.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "TriggerDeathrattleSpell",
 		"target": "FRIENDLY_MINIONS"
 	},
-	"id": "spell_feign_death",
-	"name": "Feign Death",
-	"description": "Trigger all Deathrattles on your minions.",
-	"type": "SPELL",
-	"heroClass": "HUNTER",
-	"rarity": "EPIC",
-	"baseManaCost": 2,
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

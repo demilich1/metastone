@@ -1,11 +1,11 @@
 {
-	"name": "Lightning Bolt",
-	"description": "Deal 3 damage. Overload: (1)",
 	"id": "spell_lightning_bolt",
-	"type": "SPELL",
-	"rarity": "COMMON",
-	"heroClass": "SHAMAN",
+	"name": "Lightning Bolt",
 	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "SHAMAN",
+	"rarity": "COMMON",
+	"description": "Deal 3 damage. Overload: (1)",
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "DamageSpell",

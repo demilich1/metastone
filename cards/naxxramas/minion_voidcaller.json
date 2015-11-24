@@ -1,7 +1,13 @@
 {
+	"id": "minion_voidcaller",
+	"name": "Voidcaller",
+	"baseManaCost": 4,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 4,
-	"race": "DEMON",
+	"heroClass": "WARLOCK",
+	"rarity": "COMMON",
+	"description": "Deathrattle: Put a random Demon from your hand into the battlefield.",
 	"deathrattle": {
 		"class": "PutRandomMinionOnBoardSpell",
 		"cardFilter": {
@@ -10,17 +16,11 @@
 		},
 		"cardLocation": "HAND"
 	},
-	"id": "minion_voidcaller",
-	"name": "Voidcaller",
-	"description": "Deathrattle: Put a random Demon from your hand into the battlefield.",
-	"type": "MINION",
-	"heroClass": "WARLOCK",
-	"rarity": "COMMON",
-	"baseManaCost": 4,
-	"collectible": true,
-	"attribute": {
+	"race": "DEMON",
+	"attributes": {
 		"DEATHRATTLES": true
 	},
+	"collectible": true,
 	"set": "NAXXRAMAS",
 	"fileFormatVersion": 1
 }

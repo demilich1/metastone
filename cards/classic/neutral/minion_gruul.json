@@ -1,6 +1,13 @@
 {
+	"id": "minion_gruul",
+	"name": "Gruul",
+	"baseManaCost": 8,
+	"type": "MINION",
 	"baseAttack": 7,
 	"baseHp": 7,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "At the end of each turn, gain +1/+1.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "TurnEndTrigger",
@@ -8,18 +15,11 @@
 		},
 		"spell": {
 			"class": "BuffSpell",
+			"target": "SELF",
 			"attackBonus": 1,
-			"hpBonus": 1,
-			"target": "SELF"
+			"hpBonus": 1
 		}
 	},
-	"id": "minion_gruul",
-	"name": "Gruul",
-	"description": "At the end of each turn, gain +1/+1.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "LEGENDARY",
-	"baseManaCost": 8,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

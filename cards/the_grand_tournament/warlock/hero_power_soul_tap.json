@@ -1,16 +1,16 @@
 {
-	"targetSelection": "NONE",
 	"id": "hero_power_soul_tap",
 	"name": "Soul Tap",
-	"description": "Draw a card.",
+	"baseManaCost": 2,
 	"type": "HERO_POWER",
 	"heroClass": "WARLOCK",
 	"rarity": "FREE",
+	"description": "Draw a card.",
+	"targetSelection": "NONE",
 	"spell": {
 		"class": "DrawCardSpell",
 		"value": 1
 	},
-	"baseManaCost": 2,
 	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

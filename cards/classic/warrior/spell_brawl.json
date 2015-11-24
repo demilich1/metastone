@@ -1,16 +1,16 @@
 {
+	"id": "spell_brawl",
+	"name": "Brawl",
+	"baseManaCost": 5,
+	"type": "SPELL",
+	"heroClass": "WARRIOR",
+	"rarity": "EPIC",
+	"description": "Destroy all minions except one.  (chosen randomly)",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "DestroyAllExceptOneSpell",
 		"target": "ALL_MINIONS"
 	},
-	"id": "spell_brawl",
-	"name": "Brawl",
-	"description": "Destroy all minions except one.  (chosen randomly)",
-	"type": "SPELL",
-	"heroClass": "WARRIOR",
-	"rarity": "EPIC",
-	"baseManaCost": 5,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

@@ -1,25 +1,25 @@
 {
+	"id": "minion_fire_elemental",
+	"name": "Fire Elemental",
+	"baseManaCost": 6,
+	"type": "MINION",
 	"baseAttack": 6,
 	"baseHp": 5,
+	"heroClass": "SHAMAN",
+	"rarity": "FREE",
+	"description": "Battlecry: Deal 3 damage.",
 	"battlecry": {
+		"targetSelection": "ANY",
 		"spell": {
 			"class": "DamageSpell",
 			"value": 3
 		},
-		"targetSelection": "ANY",
 		"resolvedLate": false
 	},
-	"id": "minion_fire_elemental",
-	"name": "Fire Elemental",
-	"description": "Battlecry: Deal 3 damage.",
-	"type": "MINION",
-	"heroClass": "SHAMAN",
-	"rarity": "FREE",
-	"baseManaCost": 6,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

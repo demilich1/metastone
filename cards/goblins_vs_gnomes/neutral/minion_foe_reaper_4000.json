@@ -1,6 +1,13 @@
 {
+	"id": "minion_foe_reaper_4000",
+	"name": "Foe Reaper 4000",
+	"baseManaCost": 8,
+	"type": "MINION",
 	"baseAttack": 6,
 	"baseHp": 9,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Also damages the minions next to whomever he attacks.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "HostAttacksTrigger",
@@ -20,13 +27,6 @@
 		}
 	},
 	"race": "MECH",
-	"id": "minion_foe_reaper_4000",
-	"name": "Foe Reaper 4000",
-	"description": "Also damages the minions next to whomever he attacks.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "LEGENDARY",
-	"baseManaCost": 8,
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

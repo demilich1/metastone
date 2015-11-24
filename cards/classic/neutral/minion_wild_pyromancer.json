@@ -1,6 +1,13 @@
 {
+	"id": "minion_wild_pyromancer",
+	"name": "Wild Pyromancer",
+	"baseManaCost": 2,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 2,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "After you cast a spell, deal 1 damage to ALL minions.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "AfterSpellCastedTrigger",
@@ -9,17 +16,10 @@
 		},
 		"spell": {
 			"class": "DamageSpell",
-			"value": 1,
-			"target": "ALL_MINIONS"
+			"target": "ALL_MINIONS",
+			"value": 1
 		}
 	},
-	"id": "minion_wild_pyromancer",
-	"name": "Wild Pyromancer",
-	"description": "After you cast a spell, deal 1 damage to ALL minions.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "RARE",
-	"baseManaCost": 2,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

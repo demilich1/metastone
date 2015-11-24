@@ -1,6 +1,13 @@
 {
+	"id": "minion_doomsayer",
+	"name": "Doomsayer",
+	"baseManaCost": 2,
+	"type": "MINION",
 	"baseAttack": 0,
 	"baseHp": 7,
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"description": "At the start of your turn, destroy ALL minions.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "TurnStartTrigger",
@@ -11,13 +18,6 @@
 			"target": "ALL_MINIONS"
 		}
 	},
-	"id": "minion_doomsayer",
-	"name": "Doomsayer",
-	"description": "At the start of your turn, destroy ALL minions.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "EPIC",
-	"baseManaCost": 2,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

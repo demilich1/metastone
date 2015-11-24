@@ -1,26 +1,26 @@
 {
+	"id": "minion_muklas_champion",
+	"name": "Mukla's Champion",
+	"baseManaCost": 5,
+	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 3,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Inspire: Give your other minions +1/+1.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "InspireTrigger"
 		},
 		"spell": {
 			"class": "BuffSpell",
+			"target": "OTHER_FRIENDLY_MINIONS",
 			"attackBonus": 1,
-			"hpBonus": 1,
-			"target": "OTHER_FRIENDLY_MINIONS"
+			"hpBonus": 1
 		}
 	},
 	"race": "BEAST",
-	"id": "minion_muklas_champion",
-	"name": "Mukla's Champion",
-	"description": "Inspire: Give your other minions +1/+1.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "COMMON",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 5,
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

@@ -1,14 +1,15 @@
 {
-	"baseAttack": 6,
-	"baseHp": 3,
 	"id": "minion_ethereal_conjurer",
 	"name": "Ethereal Conjurer",
-	"description": "Battlecry: Discover a spell.",
+	"baseManaCost": 5,
 	"type": "MINION",
+	"baseAttack": 6,
+	"baseHp": 3,
 	"heroClass": "MAGE",
 	"rarity": "COMMON",
-	"baseManaCost": 5,
+	"description": "Battlecry: Discover a spell.",
 	"battlecry": {
+		"targetSelection": "NONE",
 		"spell": {
 			"class": "DiscoverRandomCardSpell",
 			"spell1": {
@@ -20,13 +21,12 @@
 				"cardType": "SPELL"
 			}
 		},
-		"targetSelection": "NONE",
 		"resolvedLate": false
 	},
-	"collectible": true,
-	"attribute": {
+	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "LEAGUE_OF_EXPLORERS",
 	"fileFormatVersion": 1
 }

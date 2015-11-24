@@ -1,11 +1,11 @@
 {
-	"name": "Holy Smite",
-	"description": "Deal 2 damage.",
 	"id": "spell_holy_smite",
-	"type": "SPELL",
-	"rarity": "FREE",
-	"heroClass": "PRIEST",
+	"name": "Holy Smite",
 	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "FREE",
+	"description": "Deal 2 damage.",
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "DamageSpell",

@@ -1,17 +1,17 @@
 {
+	"id": "spell_flash_heal",
+	"name": "Flash Heal",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "COMMON",
+	"description": "Restore 5 Health.",
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "HealSpell",
 		"value": 5
 	},
-	"id": "spell_flash_heal",
-	"name": "Flash Heal",
-	"description": "Restore 5 Health.",
-	"type": "SPELL",
-	"heroClass": "PRIEST",
-	"rarity": "COMMON",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 1,
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

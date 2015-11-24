@@ -1,22 +1,22 @@
 {
+	"id": "minion_sludge_belcher",
+	"name": "Sludge Belcher",
+	"baseManaCost": 5,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "Taunt. Deathrattle: Summon a 1/2 Slime with Taunt.",
 	"deathrattle": {
 		"class": "SummonSpell",
 		"card": "token_slime"
 	},
-	"id": "minion_sludge_belcher",
-	"name": "Sludge Belcher",
-	"description": "Taunt. Deathrattle: Summon a 1/2 Slime with Taunt.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "RARE",
-	"baseManaCost": 5,
-	"collectible": true,
 	"attributes": {
-		"TAUNT": true,
-		"DEATHRATTLES": true
+		"DEATHRATTLES": true,
+		"TAUNT": true
 	},
+	"collectible": true,
 	"set": "NAXXRAMAS",
 	"fileFormatVersion": 1
 }

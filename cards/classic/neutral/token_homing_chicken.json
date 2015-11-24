@@ -1,6 +1,13 @@
 {
+	"id": "token_homing_chicken",
+	"name": "Homing Chicken",
+	"baseManaCost": 1,
+	"type": "MINION",
 	"baseAttack": 0,
 	"baseHp": 1,
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "At the start of your turn, destroy this minion and draw 3 cards.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "TurnStartTrigger",
@@ -19,13 +26,6 @@
 		}
 	},
 	"race": "MECH",
-	"id": "token_homing_chicken",
-	"name": "Homing Chicken",
-	"description": "At the start of your turn, destroy this minion and draw 3 cards.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "FREE",
-	"baseManaCost": 1,
 	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

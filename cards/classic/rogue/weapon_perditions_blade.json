@@ -1,18 +1,15 @@
 {
-	"name": "Perdition's Blade",
-	"description": "Battlecry: Deal 1 damage. Combo: Deal 2 instead.",
-	"collectible": true,
 	"id": "weapon_perditions_blade",
-	"type": "WEAPON",
-	"rarity": "RARE",
-	"heroClass": "ROGUE",
+	"name": "Perdition's Blade",
 	"baseManaCost": 3,
+	"type": "WEAPON",
 	"damage": 2,
 	"durability": 2,
-	"attributes": {
-		"BATTLECRY": true
-	},
+	"heroClass": "ROGUE",
+	"rarity": "RARE",
+	"description": "Battlecry: Deal 1 damage. Combo: Deal 2 instead.",
 	"battlecry": {
+		"targetSelection": "ANY",
 		"spell": {
 			"class": "ComboSpell",
 			"spell1": {
@@ -25,9 +22,12 @@
 			},
 			"exclusive": true
 		},
-		"targetSelection": "ANY",
 		"resolvedLate": false
 	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

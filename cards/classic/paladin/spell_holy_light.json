@@ -1,11 +1,11 @@
 {
-	"name": "Holy Light",
-	"description": "Restore 6 Health.",
 	"id": "spell_holy_light",
-	"type": "SPELL",
-	"rarity": "FREE",
-	"heroClass": "PALADIN",
+	"name": "Holy Light",
 	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "PALADIN",
+	"rarity": "FREE",
+	"description": "Restore 6 Health.",
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "HealSpell",

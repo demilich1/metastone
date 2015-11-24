@@ -1,11 +1,11 @@
 {
-	"name": "Sprint",
-	"description": "Draw 4 cards.",
 	"id": "spell_sprint",
-	"type": "SPELL",
-	"rarity": "FREE",
-	"heroClass": "ROGUE",
+	"name": "Sprint",
 	"baseManaCost": 7,
+	"type": "SPELL",
+	"heroClass": "ROGUE",
+	"rarity": "FREE",
+	"description": "Draw 4 cards.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "DrawCardSpell",

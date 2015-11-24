@@ -1,6 +1,13 @@
 {
+	"id": "minion_axe_flinger",
+	"name": "Axe Flinger",
+	"baseManaCost": 4,
+	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 5,
+	"heroClass": "WARRIOR",
+	"rarity": "COMMON",
+	"description": "Whenever this minion takes damage, deal 2 damage to the enemy hero.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "SelfDamagedTrigger"
@@ -11,13 +18,6 @@
 			"value": 2
 		}
 	},
-	"id": "minion_axe_flinger",
-	"name": "Axe Flinger",
-	"description": "Whenever this minion takes damage, deal 2 damage to the enemy hero.",
-	"type": "MINION",
-	"heroClass": "WARRIOR",
-	"rarity": "COMMON",
-	"baseManaCost": 4,
 	"collectible": true,
 	"set": "BLACKROCK_MOUNTAIN",
 	"fileFormatVersion": 1

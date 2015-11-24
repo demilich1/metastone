@@ -1,25 +1,25 @@
 {
+	"id": "minion_elven_archer",
+	"name": "Elven Archer",
+	"baseManaCost": 1,
+	"type": "MINION",
 	"baseAttack": 1,
 	"baseHp": 1,
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "Battlecry: Deal 1 damage.",
 	"battlecry": {
+		"targetSelection": "ANY",
 		"spell": {
 			"class": "DamageSpell",
 			"value": 1
 		},
-		"targetSelection": "ANY",
 		"resolvedLate": false
 	},
-	"id": "minion_elven_archer",
-	"name": "Elven Archer",
-	"description": "Battlecry: Deal 1 damage.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "FREE",
-	"baseManaCost": 1,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

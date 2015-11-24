@@ -1,17 +1,17 @@
 {
-	"targetSelection": "NONE",
 	"id": "hero_power_tank_up",
 	"name": "Tank Up!",
-	"description": "Gain 4 Armor.",
+	"baseManaCost": 2,
 	"type": "HERO_POWER",
 	"heroClass": "WARRIOR",
 	"rarity": "FREE",
+	"description": "Gain 4 Armor.",
+	"targetSelection": "NONE",
 	"spell": {
 		"class": "BuffHeroSpell",
-		"armorBonus": 4,
-		"target": "FRIENDLY_HERO"
+		"target": "FRIENDLY_HERO",
+		"armorBonus": 4
 	},
-	"baseManaCost": 2,
 	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

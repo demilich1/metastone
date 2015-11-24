@@ -1,24 +1,24 @@
 {
-	"name": "Gladiator's Longbow",
-	"description": "Your hero is Immune while attacking.",
-	"collectible": true,
 	"id": "weapon_gladiators_longbow",
-	"type": "WEAPON",
-	"rarity": "EPIC",
-	"heroClass": "HUNTER",
+	"name": "Gladiator's Longbow",
 	"baseManaCost": 7,
+	"type": "WEAPON",
 	"damage": 5,
 	"durability": 2,
-	"onEquip": {
-		"class": "AddAttributeSpell",
-		"target": "FRIENDLY_HERO",
-		"attribute": "IMMUNE_WHILE_ATTACKING"
-	},
+	"heroClass": "HUNTER",
+	"rarity": "EPIC",
+	"description": "Your hero is Immune while attacking.",
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1,
 	"onUnequip": {
 		"class": "RemoveAttributeSpell",
 		"target": "FRIENDLY_HERO",
 		"attribute": "IMMUNE_WHILE_ATTACKING"
 	},
-	"set": "CLASSIC",
-	"fileFormatVersion": 1
+	"onEquip": {
+		"class": "AddAttributeSpell",
+		"target": "FRIENDLY_HERO",
+		"attribute": "IMMUNE_WHILE_ATTACKING"
+	}
 }

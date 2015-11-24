@@ -1,4 +1,11 @@
 {
+	"id": "spell_shield_slam",
+	"name": "Shield Slam",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "WARRIOR",
+	"rarity": "EPIC",
+	"description": "Deal 1 damage to a minion for each Armor you have.",
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "DamageSpell",
@@ -8,13 +15,6 @@
 			"attribute": "ARMOR"
 		}
 	},
-	"id": "spell_shield_slam",
-	"name": "Shield Slam",
-	"description": "Deal 1 damage to a minion for each Armor you have.",
-	"type": "SPELL",
-	"heroClass": "WARRIOR",
-	"rarity": "EPIC",
-	"baseManaCost": 1,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

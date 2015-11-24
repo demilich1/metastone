@@ -1,17 +1,17 @@
 {
-	"baseAttack": 4,
-	"baseHp": 6,
 	"id": "minion_spectral_knight",
 	"name": "Spectral Knight",
-	"description": "Can't be targeted by spells or Hero Powers.",
+	"baseManaCost": 5,
 	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 6,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"baseManaCost": 5,
-	"collectible": true,
+	"description": "Can't be targeted by spells or Hero Powers.",
 	"attributes": {
 		"UNTARGETABLE_BY_SPELLS": true
 	},
+	"collectible": true,
 	"set": "NAXXRAMAS",
 	"fileFormatVersion": 1
 }

@@ -1,8 +1,15 @@
 {
+	"id": "minion_upgraded_repair_bot",
+	"name": "Upgraded Repair Bot",
+	"baseManaCost": 5,
+	"type": "MINION",
 	"baseAttack": 5,
 	"baseHp": 5,
-	"race": "MECH",
+	"heroClass": "PRIEST",
+	"rarity": "RARE",
+	"description": "Battlecry: Give a friendly Mech +4 Health",
 	"battlecry": {
+		"targetSelection": "FRIENDLY_MINIONS",
 		"spell": {
 			"class": "BuffSpell",
 			"hpBonus": 4,
@@ -11,20 +18,13 @@
 				"race": "MECH"
 			}
 		},
-		"targetSelection": "FRIENDLY_MINIONS",
 		"resolvedLate": false
 	},
-	"id": "minion_upgraded_repair_bot",
-	"name": "Upgraded Repair Bot",
-	"description": "Battlecry: Give a friendly Mech +4 Health",
-	"type": "MINION",
-	"heroClass": "PRIEST",
-	"rarity": "RARE",
-	"baseManaCost": 5,
-	"collectible": true,
+	"race": "MECH",
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

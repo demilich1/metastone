@@ -1,31 +1,31 @@
 {
+	"id": "minion_dunemaul_shaman",
+	"name": "Dunemaul Shaman",
+	"baseManaCost": 4,
+	"type": "MINION",
 	"baseAttack": 5,
 	"baseHp": 4,
+	"heroClass": "SHAMAN",
+	"rarity": "RARE",
+	"description": "Windfury, Overload: (1) 50% chance to attack the wrong enemy.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "HostAcquiresTargetTrigger",
-			"actionType": "PHYSICAL_ATTACK",
 			"condition": {
 				"class": "RandomCondition"
-			}
+			},
+			"actionType": "PHYSICAL_ATTACK"
 		},
 		"spell": {
 			"class": "FumbleSpell",
 			"target": "EVENT_TARGET"
 		}
 	},
-	"id": "minion_dunemaul_shaman",
-	"name": "Dunemaul Shaman",
-	"description": "Windfury, Overload: (1) 50% chance to attack the wrong enemy.",
-	"type": "MINION",
-	"heroClass": "SHAMAN",
-	"rarity": "RARE",
-	"baseManaCost": 4,
-	"collectible": true,
 	"attributes": {
-		"WINDFURY": true,
-		"OVERLOAD": 1
+		"OVERLOAD": 1,
+		"WINDFURY": true
 	},
+	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

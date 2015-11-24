@@ -1,11 +1,11 @@
 {
-	"name": "Shadowstep",
-	"description": "Return a friendly minion to your hand. It costs (2) less.",
 	"id": "spell_shadowstep",
-	"type": "SPELL",
-	"rarity": "COMMON",
-	"heroClass": "ROGUE",
+	"name": "Shadowstep",
 	"baseManaCost": 0,
+	"type": "SPELL",
+	"heroClass": "ROGUE",
+	"rarity": "COMMON",
+	"description": "Return a friendly minion to your hand. It costs (2) less.",
 	"targetSelection": "FRIENDLY_MINIONS",
 	"spell": {
 		"class": "ReturnMinionToHandSpell",

@@ -1,6 +1,13 @@
 {
+	"id": "minion_dragon_egg",
+	"name": "Dragon Egg",
+	"baseManaCost": 1,
+	"type": "MINION",
 	"baseAttack": 0,
 	"baseHp": 2,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "Whenever this minion takes damage, summon a 2/1 Whelp.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "SelfDamagedTrigger"
@@ -10,13 +17,6 @@
 			"card": "token_whelp_egg"
 		}
 	},
-	"id": "minion_dragon_egg",
-	"name": "Dragon Egg",
-	"description": "Whenever this minion takes damage, summon a 2/1 Whelp.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "RARE",
-	"baseManaCost": 1,
 	"collectible": true,
 	"set": "BLACKROCK_MOUNTAIN",
 	"fileFormatVersion": 1

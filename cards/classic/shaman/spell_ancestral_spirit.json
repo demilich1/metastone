@@ -1,4 +1,11 @@
 {
+	"id": "spell_ancestral_spirit",
+	"name": "Ancestral Spirit",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "SHAMAN",
+	"rarity": "RARE",
+	"description": "Choose a minion. When that minion is destroyed, return it to the battlefield.",
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "AddDeathrattleSpell",
@@ -7,13 +14,6 @@
 			"target": "SELF"
 		}
 	},
-	"id": "spell_ancestral_spirit",
-	"name": "Ancestral Spirit",
-	"description": "Choose a minion. When that minion is destroyed, return it to the battlefield.",
-	"type": "SPELL",
-	"heroClass": "SHAMAN",
-	"rarity": "RARE",
-	"baseManaCost": 2,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

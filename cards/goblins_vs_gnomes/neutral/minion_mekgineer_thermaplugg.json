@@ -1,7 +1,13 @@
 {
+	"id": "minion_mekgineer_thermaplugg",
+	"name": "Mekgineer Thermaplugg",
+	"baseManaCost": 9,
+	"type": "MINION",
 	"baseAttack": 9,
 	"baseHp": 7,
-	"race": "MECH",
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Whenever an enemy minion dies, summon a Leper Gnome.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "MinionDeathTrigger",
@@ -12,13 +18,7 @@
 			"card": "minion_leper_gnome"
 		}
 	},
-	"id": "minion_mekgineer_thermaplugg",
-	"name": "Mekgineer Thermaplugg",
-	"description": "Whenever an enemy minion dies, summon a Leper Gnome.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "LEGENDARY",
-	"baseManaCost": 9,
+	"race": "MECH",
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

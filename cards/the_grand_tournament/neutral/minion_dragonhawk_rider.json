@@ -1,27 +1,27 @@
 {
+	"id": "minion_dragonhawk_rider",
+	"name": "Dragonhawk Rider",
+	"baseManaCost": 3,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 3,
-	"id": "minion_dragonhawk_rider",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Inspire: Gain Windfury this turn.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "InspireTrigger"
 		},
 		"spell": {
 			"class": "AddAttributeSpell",
+			"target": "SELF",
 			"attribute": "WINDFURY",
 			"revertTrigger": {
 				"class": "TurnEndTrigger"
-			},
-			"target": "SELF"
+			}
 		}
 	},
-	"name": "Dragonhawk Rider",
-	"description": "Inspire: Gain Windfury this turn.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "COMMON",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 3,
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

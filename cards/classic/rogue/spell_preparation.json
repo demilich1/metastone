@@ -1,7 +1,15 @@
 {
+	"id": "spell_preparation",
+	"name": "Preparation",
+	"baseManaCost": 0,
+	"type": "SPELL",
+	"heroClass": "ROGUE",
+	"rarity": "EPIC",
+	"description": "The next spell you cast this turn costs (3) less.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "CardCostModifierSpell",
+		"target": "FRIENDLY_HERO",
 		"cardCostModifier": {
 			"class": "OneTurnCostModifier",
 			"cardType": "SPELL",
@@ -10,16 +18,8 @@
 				"class": "CardPlayedTrigger",
 				"cardType": "SPELL"
 			}
-		},
-		"target": "FRIENDLY_HERO"
+		}
 	},
-	"id": "spell_preparation",
-	"name": "Preparation",
-	"description": "The next spell you cast this turn costs (3) less.",
-	"type": "SPELL",
-	"heroClass": "ROGUE",
-	"rarity": "EPIC",
-	"baseManaCost": 0,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

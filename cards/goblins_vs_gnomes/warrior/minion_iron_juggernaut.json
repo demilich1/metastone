@@ -1,7 +1,13 @@
 {
+	"id": "minion_iron_juggernaut",
+	"name": "Iron Juggernaut",
+	"baseManaCost": 6,
+	"type": "MINION",
 	"baseAttack": 6,
 	"baseHp": 5,
-	"race": "MECH",
+	"heroClass": "WARRIOR",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Shuffle a Mine into your opponent's deck. When drawn, it explodes for 10 damage.",
 	"battlecry": {
 		"spell": {
 			"class": "ShuffleToDeckSpell",
@@ -10,17 +16,11 @@
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_iron_juggernaut",
-	"name": "Iron Juggernaut",
-	"description": "Battlecry: Shuffle a Mine into your opponent's deck. When drawn, it explodes for 10 damage.",
-	"type": "MINION",
-	"heroClass": "WARRIOR",
-	"rarity": "LEGENDARY",
-	"baseManaCost": 6,
-	"collectible": true,
+	"race": "MECH",
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

@@ -1,11 +1,11 @@
 {
-	"name": "Holy Fire",
-	"description": "Deal 5 damage. Restore 5 Health to your hero.",
 	"id": "spell_holy_fire",
-	"type": "SPELL",
-	"rarity": "RARE",
-	"heroClass": "PRIEST",
+	"name": "Holy Fire",
 	"baseManaCost": 6,
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "RARE",
+	"description": "Deal 5 damage. Restore 5 Health to your hero.",
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "MetaSpell",
@@ -15,8 +15,8 @@
 		},
 		"spell2": {
 			"class": "HealSpell",
-			"value": 5,
-			"target": "FRIENDLY_HERO"
+			"target": "FRIENDLY_HERO",
+			"value": 5
 		}
 	},
 	"set": "CLASSIC",

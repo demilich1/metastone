@@ -1,24 +1,24 @@
 {
+	"id": "spell_bolster",
+	"name": "Bolster",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "WARRIOR",
+	"rarity": "COMMON",
+	"description": "Give your Taunt minions +2/+2.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "BuffSpell",
+		"target": "FRIENDLY_MINIONS",
 		"attackBonus": 2,
 		"hpBonus": 2,
-		"target": "FRIENDLY_MINIONS",
 		"filter": {
 			"class": "AttributeFilter",
 			"attribute": "TAUNT",
 			"operation": "HAS"
 		}
 	},
-	"id": "spell_bolster",
-	"name": "Bolster",
-	"description": "Give your Taunt minions +2/+2.",
-	"type": "SPELL",
-	"heroClass": "WARRIOR",
-	"rarity": "COMMON",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 2,
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

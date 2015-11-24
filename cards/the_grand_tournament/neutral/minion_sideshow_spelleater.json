@@ -1,6 +1,13 @@
 {
+	"id": "minion_sideshow_spelleater",
+	"name": "Sideshow Spelleater",
+	"baseManaCost": 6,
+	"type": "MINION",
 	"baseAttack": 6,
 	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"description": "Battlecry: Copy your opponent's Hero Power.",
 	"battlecry": {
 		"spell": {
 			"class": "CopyHeroPower",
@@ -8,17 +15,10 @@
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_sideshow_spelleater",
-	"name": "Sideshow Spelleater",
-	"description": "Battlecry: Copy your opponent's Hero Power.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "EPIC",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 6,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

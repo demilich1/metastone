@@ -1,17 +1,17 @@
 {
-	"baseAttack": 2,
-	"baseHp": 1,
 	"id": "token_tournament_attendee",
 	"name": "Tournament Attendee",
-	"description": "Taunt",
+	"baseManaCost": 1,
 	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 1,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 1,
-	"collectible": true,
+	"description": "Taunt",
 	"attributes": {
 		"TAUNT": true
 	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

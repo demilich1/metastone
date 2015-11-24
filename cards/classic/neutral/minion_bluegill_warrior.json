@@ -1,17 +1,17 @@
 {
-	"name": "Bluegill Warrior",
-	"description": "Charge",
 	"id": "minion_bluegill_warrior",
-	"type": "MINION",
-	"rarity": "FREE",
-	"heroClass": "ANY",
+	"name": "Bluegill Warrior",
 	"baseManaCost": 2,
+	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 1,
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "Charge",
+	"race": "MURLOC",
 	"attributes": {
 		"CHARGE": true
 	},
-	"race": "MURLOC",
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

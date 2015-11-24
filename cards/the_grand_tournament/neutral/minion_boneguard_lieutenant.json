@@ -1,24 +1,24 @@
 {
+	"id": "minion_boneguard_lieutenant",
+	"name": "Boneguard Lieutenant",
+	"baseManaCost": 2,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 2,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Inspire: Gain +1 Health.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "InspireTrigger"
 		},
 		"spell": {
 			"class": "BuffSpell",
-			"hpBonus": 1,
-			"target": "SELF"
+			"target": "SELF",
+			"hpBonus": 1
 		}
 	},
-	"id": "minion_boneguard_lieutenant",
-	"name": "Boneguard Lieutenant",
-	"description": "Inspire: Gain +1 Health.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "COMMON",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 2,
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

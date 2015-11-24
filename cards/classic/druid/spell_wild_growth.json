@@ -1,11 +1,18 @@
 {
+	"id": "spell_wild_growth",
+	"name": "Wild Growth",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "FREE",
+	"description": "Gain an empty Mana Crystal.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "EitherOrSpell",
 		"spell1": {
 			"class": "ReceiveCardSpell",
-			"card": "spell_excess_mana",
-			"targetPlayer": "SELF"
+			"targetPlayer": "SELF",
+			"card": "spell_excess_mana"
 		},
 		"spell2": {
 			"class": "ModifyMaxManaSpell",
@@ -15,13 +22,6 @@
 			"class": "ManaMaxedCondition"
 		}
 	},
-	"id": "spell_wild_growth",
-	"name": "Wild Growth",
-	"description": "Gain an empty Mana Crystal.",
-	"type": "SPELL",
-	"heroClass": "DRUID",
-	"rarity": "FREE",
-	"baseManaCost": 2,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

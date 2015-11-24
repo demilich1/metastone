@@ -1,28 +1,28 @@
 {
+	"id": "minion_thunder_bluff_valiant",
+	"name": "Thunder Bluff Valiant",
+	"baseManaCost": 5,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 6,
+	"heroClass": "SHAMAN",
+	"rarity": "RARE",
+	"description": "Inspire: Give your Totems +2 Attack.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "InspireTrigger"
 		},
 		"spell": {
 			"class": "BuffSpell",
-			"attackBonus": 2,
 			"target": "FRIENDLY_MINIONS",
+			"attackBonus": 2,
 			"filter": {
 				"class": "RaceFilter",
 				"race": "TOTEM"
 			}
 		}
 	},
-	"id": "minion_thunder_bluff_valiant",
-	"name": "Thunder Bluff Valiant",
-	"description": "Inspire: Give your Totems +2 Attack.",
-	"type": "MINION",
-	"heroClass": "SHAMAN",
-	"rarity": "RARE",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 5,
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

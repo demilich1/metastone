@@ -1,4 +1,11 @@
 {
+	"id": "spell_dark_bargain",
+	"name": "Dark Bargain",
+	"baseManaCost": 6,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "EPIC",
+	"description": "Destroy 2 random enemy minions. Discard 2 random cards.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
@@ -32,14 +39,7 @@
 		"value": 1,
 		"operation": "GREATER"
 	},
-	"id": "spell_dark_bargain",
-	"name": "Dark Bargain",
-	"description": "Destroy 2 random enemy minions. Discard 2 random cards.",
-	"type": "SPELL",
-	"heroClass": "WARLOCK",
-	"rarity": "EPIC",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 6,
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }
