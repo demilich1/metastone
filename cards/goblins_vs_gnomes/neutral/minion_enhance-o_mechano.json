@@ -1,7 +1,13 @@
 {
+	"id": "minion_enhance-o_mechano",
+	"name": "Enhance-o Mechano",
+	"baseManaCost": 4,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 2,
-	"race": "MECH",
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"description": "Battlecry: Give your other minions Windfury, Taunt, or Divine Shield. (at random)",
 	"battlecry": {
 		"spell": {
 			"class": "CastRandomSpellSpell",
@@ -21,17 +27,11 @@
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_enhance-o_mechano",
-	"name": "Enhance-o Mechano",
-	"description": "Battlecry: Give your other minions Windfury, Taunt, or Divine Shield. (at random)",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "EPIC",
-	"baseManaCost": 4,
-	"collectible": true,
-	"attribute": {
+	"race": "MECH",
+	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

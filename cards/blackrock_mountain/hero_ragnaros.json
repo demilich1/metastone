@@ -1,13 +1,13 @@
 {
-	"name": "Ragnaros the Firelord",
 	"id": "hero_ragnaros",
+	"name": "Ragnaros the Firelord",
+	"heroPower": "hero_power_die_insect",
 	"type": "HERO",
 	"heroClass": "BOSS",
 	"rarity": "LEGENDARY",
-	"heroPower": "hero_power_die_insect",
-	"collectible": false,
 	"attributes": {
-		"HP": 8,
-		"MAX_HP": 8
-	}
+		"MAX_HP": 8,
+		"HP": 8
+	},
+	"collectible": false
 }

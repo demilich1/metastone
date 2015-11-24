@@ -1,6 +1,13 @@
 {
+	"id": "minion_harrison_jones",
+	"name": "Harrison Jones",
+	"baseManaCost": 5,
+	"type": "MINION",
 	"baseAttack": 5,
 	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Destroy your opponent's weapon and draw cards equal to its Durability.",
 	"battlecry": {
 		"spell": {
 			"class": "MetaSpell",
@@ -19,17 +26,10 @@
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_harrison_jones",
-	"name": "Harrison Jones",
-	"description": "Battlecry: Destroy your opponent's weapon and draw cards equal to its Durability.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "LEGENDARY",
-	"baseManaCost": 5,
-	"collectible": true,
-	"attribute": {
+	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

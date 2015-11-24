@@ -1,25 +1,25 @@
 {
+	"id": "minion_injured_kvaldir",
+	"name": "Injured Kvaldir",
+	"baseManaCost": 1,
+	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "Battlecry: Deal 3 damage to this minion",
 	"battlecry": {
 		"spell": {
 			"class": "DamageSpell",
-			"value": 3,
-			"target": "SELF"
+			"target": "SELF",
+			"value": 3
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_injured_kvaldir",
-	"name": "Injured Kvaldir",
-	"description": "Battlecry: Deal 3 damage to this minion",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "RARE",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 1,
-	"attribute": {
+	"attributes": {
 		"BATTLECRY": true
 	},
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

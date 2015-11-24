@@ -1,6 +1,13 @@
 {
+	"id": "minion_rhonin",
+	"name": "Rhonin",
+	"baseManaCost": 8,
+	"type": "MINION",
 	"baseAttack": 7,
 	"baseHp": 7,
+	"heroClass": "MAGE",
+	"rarity": "LEGENDARY",
+	"description": "Deathrattle: Add 3 copies of Arcane Missiles to your hand.",
 	"deathrattle": {
 		"class": "ReceiveCardSpell",
 		"cards": [
@@ -9,17 +16,10 @@
 			"spell_arcane_missiles"
 		]
 	},
-	"id": "minion_rhonin",
-	"name": "Rhonin",
-	"description": "Deathrattle: Add 3 copies of Arcane Missiles to your hand.",
-	"type": "MINION",
-	"heroClass": "MAGE",
-	"rarity": "LEGENDARY",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 8,
-	"attribute": {
+	"attributes": {
 		"DEATHRATTLES": true
 	},
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

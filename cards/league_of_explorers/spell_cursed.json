@@ -1,13 +1,15 @@
 {
-	"name": "Cursed!",
-	"description": "While this is in your hand, take 2 damage at the start of your turn.",
 	"id": "spell_cursed",
-	"type": "SPELL",
-	"rarity": "FREE",
-	"heroClass": "WARLOCK",
+	"name": "Cursed!",
 	"baseManaCost": 2,
-	"collectible": false,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "FREE",
+	"description": "While this is in your hand, take 2 damage at the start of your turn.",
 	"targetSelection": "NONE",
+	"spell": {
+		"class": "NullSpell"
+	},
 	"passiveTrigger": {
 		"eventTrigger": {
 			"class": "TurnStartTrigger",
@@ -15,13 +17,11 @@
 		},
 		"spell": {
 			"class": "DamageSpell",
-			"value": 2,
-			"target": "FRIENDLY_HERO"
+			"target": "FRIENDLY_HERO",
+			"value": 2
 		}
 	},
-	"spell": {
-		"class": "NullSpell"
-	},
+	"collectible": false,
 	"set": "LEAGUE_OF_EXPLORERS",
 	"fileFormatVersion": 1
 }

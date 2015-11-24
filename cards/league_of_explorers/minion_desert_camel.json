@@ -1,32 +1,31 @@
-
 {
-	"baseAttack": 2,
-	"baseHp": 4,
 	"id": "minion_desert_camel",
 	"name": "Desert Camel",
-	"description": "Battlecry: Put a random 1-Cost minion from each deck into the battlefield.",
+	"baseManaCost": 3,
 	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 4,
 	"heroClass": "HUNTER",
 	"rarity": "COMMON",
-	"baseManaCost": 3,
+	"description": "Battlecry: Put a random 1-Cost minion from each deck into the battlefield.",
 	"battlecry": {
-		"spell": {
-  		"class": "PutRandomMinionOnBoardSpell",
-  		"targetPlayer": "BOTH",
-  		"cardLocation": "DECK",
-  		"cardFilter": {
-  		  "class": "CardFilter",
-  		  "manaCost": 1,
-  		  "cardType": "MINION"
-  		}
-  	},
 		"targetSelection": "NONE",
+		"spell": {
+			"class": "PutRandomMinionOnBoardSpell",
+			"targetPlayer": "BOTH",
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "MINION",
+				"manaCost": 1
+			},
+			"cardLocation": "DECK"
+		},
 		"resolvedLate": true
 	},
-	"collectible": true,
-	"attribute": {
+	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "LEAGUE_OF_EXPLORERS",
 	"fileFormatVersion": 1
 }

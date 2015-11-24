@@ -1,14 +1,14 @@
 {
-	"baseAttack": 4,
-	"baseHp": 4,
 	"id": "minion_jungle_moonkin",
 	"name": "Jungle Moonkin",
-	"description": "Both players have Spell Damage +2",
-	"race": "BEAST",
+	"baseManaCost": 4,
 	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 4,
 	"heroClass": "DRUID",
 	"rarity": "RARE",
-	"baseManaCost": 4,
+	"description": "Both players have Spell Damage +2",
+	"race": "BEAST",
 	"attributes": {
 		"SPELL_DAMAGE": 2,
 		"OPPONENT_SPELL_DAMAGE": 2

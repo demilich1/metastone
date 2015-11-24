@@ -1,11 +1,11 @@
 {
-	"name": "Raven Idol",
-	"description": "Choose One - Discover a minion; or Discover a spell.",
 	"id": "spell_raven_idol",
-	"type": "CHOOSE_ONE",
-	"rarity": "COMMON",
-	"heroClass": "DRUID",
+	"name": "Raven Idol",
 	"baseManaCost": 1,
+	"type": "CHOOSE_ONE",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"description": "Choose One - Discover a minion; or Discover a spell.",
 	"targetSelection": "NONE",
 	"options": [
 		"spell_raven_idol_1",

@@ -1,39 +1,39 @@
 {
-	"baseAttack": 6,
-	"baseHp": 6,
 	"id": "token_golden_monkey",
 	"name": "Golden Monkey",
-	"description": "Taunt. Battlecry: Replace your hand and deck with Legendary minions.",
+	"baseManaCost": 4,
 	"type": "MINION",
+	"baseAttack": 6,
+	"baseHp": 6,
 	"heroClass": "ANY",
 	"rarity": "FREE",
-	"baseManaCost":4,
+	"description": "Taunt. Battlecry: Replace your hand and deck with Legendary minions.",
 	"battlecry": {
+		"targetSelection": "NONE",
 		"spell": {
 			"class": "MetaSpell",
 			"spell1": {
 				"class": "ReplaceHandSpell",
 				"cardFilter": {
+					"rarity": "LEGENDARY",
 					"class": "CardFilter",
-					"cardType": "MINION",
-					"rarity": "LEGENDARY"
+					"cardType": "MINION"
 				}
 			},
 			"spell2": {
 				"class": "ReplaceDeckSpell",
 				"cardFilter": {
+					"rarity": "LEGENDARY",
 					"class": "CardFilter",
-					"cardType": "MINION",
-					"rarity": "LEGENDARY"
+					"cardType": "MINION"
 				}
 			}
 		},
-		"targetSelection": "NONE",
 		"resolvedLate": false
 	},
 	"attributes": {
-		"TAUNT": true,
-		"BATTLECRY": true
+		"BATTLECRY": true,
+		"TAUNT": true
 	},
 	"collectible": false,
 	"set": "LEAGUE_OF_EXPLORERS",

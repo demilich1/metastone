@@ -1,18 +1,18 @@
 {
-	"name": "Lantern of Power",
-	"description": "Give a minion +10/+10.",
 	"id": "spell_lantern_of_power",
-	"type": "SPELL",
-	"rarity": "FREE",
-	"heroClass": "ANY",
+	"name": "Lantern of Power",
 	"baseManaCost": 10,
-	"collectible": false,
+	"type": "SPELL",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "Give a minion +10/+10.",
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "BuffSpell",
 		"attackBonus": 10,
 		"hpBonus": 10
 	},
+	"collectible": false,
 	"set": "LEAGUE_OF_EXPLORERS",
 	"fileFormatVersion": 1
 }

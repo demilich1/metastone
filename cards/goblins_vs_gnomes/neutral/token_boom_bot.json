@@ -1,25 +1,25 @@
 {
-	"baseAttack": 1,
-	"baseHp": 1,
-	"race": "MECH",
-	"deathrattle": {
-		"class": "MinMaxDamageSpell",
-		"minDamage": 1,
-		"maxDamage": 4,
-		"target": "ENEMY_CHARACTERS",
-		"randomTarget": true
-	},
 	"id": "token_boom_bot",
 	"name": "Boom Bot",
-	"description": "Deathrattle: Deal 1-4 damage to a random enemy.",
+	"baseManaCost": 1,
 	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
 	"heroClass": "ANY",
 	"rarity": "FREE",
-	"baseManaCost": 1,
-	"collectible": false,
-	"attribute": {
+	"description": "Deathrattle: Deal 1-4 damage to a random enemy.",
+	"deathrattle": {
+		"class": "MinMaxDamageSpell",
+		"target": "ENEMY_CHARACTERS",
+		"randomTarget": true,
+		"maxDamage": 4,
+		"minDamage": 1
+	},
+	"race": "MECH",
+	"attributes": {
 		"DEATHRATTLES": true
 	},
+	"collectible": false,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

@@ -1,7 +1,13 @@
 {
+	"id": "minion_lord_jaraxxus",
+	"name": "Lord Jaraxxus",
+	"baseManaCost": 9,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 15,
-	"race": "DEMON",
+	"heroClass": "WARLOCK",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Destroy your hero and replace him with Lord Jaraxxus.",
 	"battlecry": {
 		"spell": {
 			"class": "MetaSpell",
@@ -11,18 +17,18 @@
 			},
 			"spell2": {
 				"class": "MetaSpell",
-				"spell1" : {
+				"spell1": {
 					"class": "ChangeHeroSpell",
 					"card": "hero_jaraxxus"
 				},
-				"spell2" : {
+				"spell2": {
 					"class": "SetHeroHpSpell",
-					"value" : {
-						"class" : "AttributeValueProvider",
-						"target":  "SELF",
-						"attribute" : "HP"
-					},
-					"target" : "FRIENDLY_HERO"
+					"target": "FRIENDLY_HERO",
+					"value": {
+						"class": "AttributeValueProvider",
+						"target": "SELF",
+						"attribute": "HP"
+					}
 				}
 			},
 			"spell3": {
@@ -32,17 +38,11 @@
 		},
 		"resolvedLate": true
 	},
-	"id": "minion_lord_jaraxxus",
-	"name": "Lord Jaraxxus",
-	"description": "Battlecry: Destroy your hero and replace him with Lord Jaraxxus.",
-	"type": "MINION",
-	"heroClass": "WARLOCK",
-	"rarity": "LEGENDARY",
-	"baseManaCost": 9,
-	"collectible": true,
+	"race": "DEMON",
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

@@ -1,27 +1,27 @@
 {
-	"baseAttack": 2,
-	"baseHp": 5,
-	"battlecry": {
-		"spell": {
-			"class": "ModifyAttributeSpell",
-			"attribute": "SPELL_DAMAGE",
-			"value": 1,
-			"target": "ADJACENT_MINIONS"
-		},
-		"targetSelection": "NONE",
-		"resolvedLate": true
-	},
 	"id": "minion_ancient_mage",
 	"name": "Ancient Mage",
-	"description": "Battlecry: Give adjacent minions Spell Damage +1.",
+	"baseManaCost": 4,
 	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 5,
 	"heroClass": "ANY",
 	"rarity": "RARE",
-	"baseManaCost": 4,
-	"collectible": true,
-	"attribute": {
+	"description": "Battlecry: Give adjacent minions Spell Damage +1.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "ModifyAttributeSpell",
+			"target": "ADJACENT_MINIONS",
+			"value": 1,
+			"attribute": "SPELL_DAMAGE"
+		},
+		"resolvedLate": true
+	},
+	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

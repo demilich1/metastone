@@ -1,19 +1,19 @@
 {
-	"name": "Sylvanas Windrunner",
-	"description": "Deathrattle: Take control of a random enemy minion.",
 	"id": "minion_sylvanas_windrunner",
-	"type": "MINION",
-	"rarity": "LEGENDARY",
-	"heroClass": "ANY",
+	"name": "Sylvanas Windrunner",
 	"baseManaCost": 6,
+	"type": "MINION",
 	"baseAttack": 5,
 	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Deathrattle: Take control of a random enemy minion.",
 	"deathrattle": {
 		"class": "MindControlSpell",
 		"target": "ENEMY_MINIONS",
 		"randomTarget": true
 	},
-	"attribute": {
+	"attributes": {
 		"DEATHRATTLES": true
 	},
 	"set": "CLASSIC",

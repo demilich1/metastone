@@ -1,4 +1,11 @@
 {
+	"id": "spell_bestial_wrath",
+	"name": "Bestial Wrath",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "HUNTER",
+	"rarity": "EPIC",
+	"description": "Give a Beast +2 Attack and Immune this turn.",
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "MetaSpell",
@@ -18,13 +25,6 @@
 			"race": "BEAST"
 		}
 	},
-	"id": "spell_bestial_wrath",
-	"name": "Bestial Wrath",
-	"description": "Give a Beast +2 Attack and Immune this turn.",
-	"type": "SPELL",
-	"heroClass": "HUNTER",
-	"rarity": "EPIC",
-	"baseManaCost": 1,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

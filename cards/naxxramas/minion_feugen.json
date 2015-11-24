@@ -1,28 +1,28 @@
 {
+	"id": "minion_feugen",
+	"name": "Feugen",
+	"baseManaCost": 5,
+	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 7,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Deathrattle: If Stalagg also died this game, summon Thaddius.",
 	"deathrattle": {
 		"class": "ConditionalSpell",
-		"condition": {
-			"class": "GraveyardContainsCondition",
-			"cardId": "minion_stalagg"
-		},
 		"spell": {
 			"class": "SummonSpell",
 			"card": "token_thaddius"
+		},
+		"condition": {
+			"class": "GraveyardContainsCondition",
+			"cardId": "minion_stalagg"
 		}
 	},
-	"id": "minion_feugen",
-	"name": "Feugen",
-	"description": "Deathrattle: If Stalagg also died this game, summon Thaddius.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "LEGENDARY",
-	"baseManaCost": 5,
-	"collectible": true,
-	"attribute": {
+	"attributes": {
 		"DEATHRATTLES": true
 	},
+	"collectible": true,
 	"set": "NAXXRAMAS",
 	"fileFormatVersion": 1
 }

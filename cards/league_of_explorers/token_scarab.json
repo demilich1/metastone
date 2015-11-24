@@ -1,14 +1,14 @@
 {
-	"baseAttack": 1,
-	"baseHp": 1,
 	"id": "token_scarab",
 	"name": "Scarab",
-	"description": "Taunt",
-	"race": "MURLOC",
+	"baseManaCost": 1,
 	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
 	"heroClass": "ANY",
 	"rarity": "FREE",
-	"baseManaCost":1,
+	"description": "Taunt",
+	"race": "MURLOC",
 	"attributes": {
 		"TAUNT": true
 	},

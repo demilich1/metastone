@@ -1,22 +1,22 @@
 {
+	"id": "minion_malorne",
+	"name": "Malorne",
+	"baseManaCost": 7,
+	"type": "MINION",
 	"baseAttack": 9,
 	"baseHp": 7,
-	"race": "BEAST",
+	"heroClass": "DRUID",
+	"rarity": "LEGENDARY",
+	"description": "Deathrattle: Shuffle this minion into your deck.",
 	"deathrattle": {
 		"class": "ShuffleMinionToDeckSpell",
 		"target": "SELF"
 	},
-	"id": "minion_malorne",
-	"name": "Malorne",
-	"description": "Deathrattle: Shuffle this minion into your deck.",
-	"type": "MINION",
-	"heroClass": "DRUID",
-	"rarity": "LEGENDARY",
-	"baseManaCost": 7,
-	"collectible": true,
-	"attribute": {
+	"race": "BEAST",
+	"attributes": {
 		"DEATHRATTLES": true
 	},
+	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

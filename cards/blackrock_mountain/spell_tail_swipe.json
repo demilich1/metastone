@@ -1,11 +1,11 @@
 {
-	"name": "Tail Swipe",
-	"description": "Deal 4 damage.",
 	"id": "spell_tail_swipe",
-	"type": "SPELL",
-	"rarity": "FREE",
-	"heroClass": "BOSS",
+	"name": "Tail Swipe",
 	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "BOSS",
+	"rarity": "FREE",
+	"description": "Deal 4 damage.",
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "DamageSpell",

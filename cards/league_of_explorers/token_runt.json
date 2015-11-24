@@ -1,13 +1,13 @@
 {
-	"baseAttack": 2,
-	"baseHp": 2,
 	"id": "token_runt",
 	"name": "Runt",
-	"description": "",
+	"baseManaCost": 2,
 	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
 	"heroClass": "ANY",
 	"rarity": "FREE",
-	"baseManaCost":2,
+	"description": "",
 	"collectible": false,
 	"set": "LEAGUE_OF_EXPLORERS",
 	"fileFormatVersion": 1

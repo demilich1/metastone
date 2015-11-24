@@ -1,28 +1,28 @@
 {
-	"name": "Powermace",
-	"description": "Deathrattle: Give a random friendly Mech +2/+2.",
-	"collectible": true,
 	"id": "weapon_powermace",
-	"type": "WEAPON",
-	"rarity": "COMMON",
-	"heroClass": "SHAMAN",
+	"name": "Powermace",
 	"baseManaCost": 3,
+	"type": "WEAPON",
 	"damage": 3,
 	"durability": 2,
+	"heroClass": "SHAMAN",
+	"rarity": "COMMON",
+	"description": "Deathrattle: Give a random friendly Mech +2/+2.",
 	"deathrattle": {
 		"class": "BuffSpell",
+		"target": "FRIENDLY_MINIONS",
 		"attackBonus": 2,
 		"hpBonus": 2,
-		"target": "FRIENDLY_MINIONS",
 		"randomTarget": true,
 		"filter": {
 			"class": "RaceFilter",
 			"race": "MECH"
 		}
 	},
-	"attribute": {
+	"attributes": {
 		"DEATHRATTLES": true
 	},
+	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

@@ -1,21 +1,21 @@
 {
-	"name": "Abomination",
-	"description": "Taunt. Deathrattle: Deal 2 damage to ALL characters.",
 	"id": "minion_abomination",
-	"type": "MINION",
-	"rarity": "RARE",
-	"heroClass": "ANY",
+	"name": "Abomination",
 	"baseManaCost": 5,
+	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 4,
-	"attributes": {
-		DEATHRATTLES: true,
-		"TAUNT": true
-	},
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "Taunt. Deathrattle: Deal 2 damage to ALL characters.",
 	"deathrattle": {
 		"class": "DamageSpell",
-		"value": 2,
-		"target": "ALL_CHARACTERS"
+		"target": "ALL_CHARACTERS",
+		"value": 2
+	},
+	"attributes": {
+		"DEATHRATTLES": true,
+		"TAUNT": true
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

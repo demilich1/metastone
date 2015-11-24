@@ -1,7 +1,13 @@
 {
+	"id": "minion_mechanical_yeti",
+	"name": "Mechanical Yeti",
+	"baseManaCost": 4,
+	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 5,
-	"race": "MECH",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Deathrattle: Give each player a Spare Part.",
 	"deathrattle": {
 		"class": "ReceiveRandomCardSpell",
 		"targetPlayer": "BOTH",
@@ -15,17 +21,11 @@
 			"spell_whirling_blades"
 		]
 	},
-	"id": "minion_mechanical_yeti",
-	"name": "Mechanical Yeti",
-	"description": "Deathrattle: Give each player a Spare Part.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "COMMON",
-	"baseManaCost": 4,
-	"collectible": true,
-	"attribute": {
+	"race": "MECH",
+	"attributes": {
 		"DEATHRATTLES": true
 	},
+	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

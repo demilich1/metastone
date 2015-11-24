@@ -1,12 +1,13 @@
 {
-	"baseAttack": 2,
-	"baseHp": 6,
 	"id": "minion_wobbling_runts",
 	"name": "Wobbling Runts",
-	"description": "Deathrattle: Summon three 2/2 Runts.",
+	"baseManaCost": 6,
 	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 6,
 	"heroClass": "ANY",
 	"rarity": "RARE",
+	"description": "Deathrattle: Summon three 2/2 Runts.",
 	"deathrattle": {
 		"class": "SummonSpell",
 		"cards": [
@@ -15,11 +16,10 @@
 			"token_runt"
 		]
 	},
-	"baseManaCost": 6,
-	"collectible": true,
-	"attribute": {
+	"attributes": {
 		"DEATHRATTLES": true
 	},
+	"collectible": true,
 	"set": "LEAGUE_OF_EXPLORERS",
 	"fileFormatVersion": 1
 }

@@ -1,19 +1,19 @@
 {
-	"name": "Leper Gnome",
-	"description": "Deathrattle: Deal 2 damage to the enemy hero.",
 	"id": "minion_leper_gnome",
-	"type": "MINION",
-	"rarity": "COMMON",
-	"heroClass": "ANY",
+	"name": "Leper Gnome",
 	"baseManaCost": 1,
+	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 1,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Deathrattle: Deal 2 damage to the enemy hero.",
 	"deathrattle": {
 		"class": "DamageSpell",
-		"value": 2,
-		"target": "ENEMY_HERO"
+		"target": "ENEMY_HERO",
+		"value": 2
 	},
-	"attribute": {
+	"attributes": {
 		"DEATHRATTLES": true
 	},
 	"set": "CLASSIC",

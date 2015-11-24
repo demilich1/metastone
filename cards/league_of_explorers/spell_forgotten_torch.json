@@ -1,12 +1,11 @@
 {
-	"name": "Forgotten Torch",
-	"description": "Deal 3 damage. Shuffle a 'Roaring Torch' into your deck that deals 6 damage.",
 	"id": "spell_forgotten_torch",
-	"type": "SPELL",
-	"rarity": "COMMON",
-	"heroClass": "MAGE",
+	"name": "Forgotten Torch",
 	"baseManaCost": 3,
-	"collectible": true,
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "COMMON",
+	"description": "Deal 3 damage. Shuffle a 'Roaring Torch' into your deck that deals 6 damage.",
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "MetaSpell",
@@ -16,10 +15,11 @@
 		},
 		"spell2": {
 			"class": "ShuffleToDeckSpell",
-			"card": "spell_roaring_torch",
-			"target" : "NONE"
+			"target": "NONE",
+			"card": "spell_roaring_torch"
 		}
 	},
+	"collectible": true,
 	"set": "LEAGUE_OF_EXPLORERS",
 	"fileFormatVersion": 1
 }
