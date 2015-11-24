@@ -1,4 +1,11 @@
 {
+	"id": "spell_beneath_the_ground",
+	"name": "Beneath the Ground",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "ROGUE",
+	"rarity": "EPIC",
+	"description": "Shuffle 3 Ambushes into your opponent's deck. When drawn, you summon a 4/4 Nerubian.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "ShuffleToDeckSpell",
@@ -6,14 +13,7 @@
 		"card": "spell_ambush",
 		"howMany": 3
 	},
-	"id": "spell_beneath_the_ground",
-	"name": "Beneath the Ground",
-	"description": "Shuffle 3 Ambushes into your opponent's deck. When drawn, you summon a 4/4 Nerubian.",
-	"type": "SPELL",
-	"heroClass": "ROGUE",
-	"rarity": "EPIC",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 3,
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

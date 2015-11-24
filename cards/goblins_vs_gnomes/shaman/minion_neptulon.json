@@ -1,29 +1,29 @@
 {
+	"id": "minion_neptulon",
+	"name": "Neptulon",
+	"baseManaCost": 7,
+	"type": "MINION",
 	"baseAttack": 7,
 	"baseHp": 7,
+	"heroClass": "SHAMAN",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Add 4 random Murlocs to your hand. Overload: (3)",
 	"battlecry": {
 		"spell": {
 			"class": "ReceiveRandomCollectibleCardSpell",
-			"howMany": 4,
 			"cardFilter": {
 				"class": "RaceFilter",
 				"race": "MURLOC"
-			}
+			},
+			"howMany": 4
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_neptulon",
-	"name": "Neptulon",
-	"description": "Battlecry: Add 4 random Murlocs to your hand. Overload: (3)",
-	"type": "MINION",
-	"heroClass": "SHAMAN",
-	"rarity": "LEGENDARY",
-	"baseManaCost": 7,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true,
 		"OVERLOAD": 3
 	},
+	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

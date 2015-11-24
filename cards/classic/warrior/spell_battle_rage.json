@@ -1,4 +1,11 @@
 {
+	"id": "spell_battle_rage",
+	"name": "Battle Rage",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "WARRIOR",
+	"rarity": "COMMON",
+	"description": "Draw a card for each damaged friendly character.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "DrawCardSpell",
@@ -10,13 +17,6 @@
 			}
 		}
 	},
-	"id": "spell_battle_rage",
-	"name": "Battle Rage",
-	"description": "Draw a card for each damaged friendly character.",
-	"type": "SPELL",
-	"heroClass": "WARRIOR",
-	"rarity": "COMMON",
-	"baseManaCost": 2,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

@@ -1,6 +1,13 @@
 {
+	"id": "minion_emperor_thaurissan",
+	"name": "Emperor Thaurissan",
+	"baseManaCost": 6,
+	"type": "MINION",
 	"baseAttack": 5,
 	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "At the end of your turn, reduce the Cost of cards in your hand by (1).",
 	"trigger": {
 		"eventTrigger": {
 			"class": "TurnEndTrigger",
@@ -11,13 +18,6 @@
 			"value": -1
 		}
 	},
-	"id": "minion_emperor_thaurissan",
-	"name": "Emperor Thaurissan",
-	"description": "At the end of your turn, reduce the Cost of cards in your hand by (1).",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "LEGENDARY",
-	"baseManaCost": 6,
 	"collectible": true,
 	"set": "BLACKROCK_MOUNTAIN",
 	"fileFormatVersion": 1

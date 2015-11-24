@@ -1,11 +1,11 @@
 {
-	"name": "Cold Blood",
-	"description": "Give a minion +2 Attack. Combo: +4 Attack instead.",
 	"id": "spell_cold_blood",
-	"type": "SPELL",
-	"rarity": "COMMON",
-	"heroClass": "ROGUE",
+	"name": "Cold Blood",
 	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "ROGUE",
+	"rarity": "COMMON",
+	"description": "Give a minion +2 Attack. Combo: +4 Attack instead.",
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "ComboSpell",

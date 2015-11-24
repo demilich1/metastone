@@ -1,28 +1,28 @@
 {
+	"id": "minion_raging_worgen",
+	"name": "Raging Worgen",
+	"baseManaCost": 3,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 3,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Enrage: Windfury and +1 Attack",
 	"trigger": {
 		"eventTrigger": {
 			"class": "EnrageChangedTrigger"
 		},
 		"spell": {
 			"class": "EnrageSpell",
+			"target": "SELF",
 			"attackBonus": 1,
-			"attribute": "WINDFURY",
-			"target": "SELF"
+			"attribute": "WINDFURY"
 		}
 	},
-	"id": "minion_raging_worgen",
-	"name": "Raging Worgen",
-	"description": "Enrage: Windfury and +1 Attack",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "COMMON",
-	"baseManaCost": 3,
-	"collectible": true,
 	"attributes": {
 		"ENRAGABLE": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

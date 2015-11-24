@@ -1,13 +1,13 @@
 {
-	"name": "Windfury Harpy",
-	"description": "Windfury",
 	"id": "minion_windfury_harpy",
-	"type": "MINION",
-	"rarity": "COMMON",
-	"heroClass": "ANY",
+	"name": "Windfury Harpy",
 	"baseManaCost": 6,
+	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Windfury",
 	"attributes": {
 		"WINDFURY": true
 	},

@@ -1,23 +1,23 @@
 {
+	"id": "minion_kezan_mystic",
+	"name": "Kezan Mystic",
+	"baseManaCost": 4,
+	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 3,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "Battlecry: Take control of a random enemy Secret.",
 	"battlecry": {
 		"spell": {
 			"class": "StealRandomSecretSpell"
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_kezan_mystic",
-	"name": "Kezan Mystic",
-	"description": "Battlecry: Take control of a random enemy Secret.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "RARE",
-	"baseManaCost": 4,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

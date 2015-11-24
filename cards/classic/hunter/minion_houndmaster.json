@@ -1,7 +1,15 @@
 {
+	"id": "minion_houndmaster",
+	"name": "Houndmaster",
+	"baseManaCost": 4,
+	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 3,
+	"heroClass": "HUNTER",
+	"rarity": "FREE",
+	"description": "Battlecry: Give a friendly Beast +2/+2 and Taunt.",
 	"battlecry": {
+		"targetSelection": "FRIENDLY_MINIONS",
 		"spell": {
 			"class": "MetaSpell",
 			"spell1": {
@@ -18,20 +26,12 @@
 				"race": "BEAST"
 			}
 		},
-		"targetSelection": "FRIENDLY_MINIONS",
 		"resolvedLate": false
 	},
-	"id": "minion_houndmaster",
-	"name": "Houndmaster",
-	"description": "Battlecry: Give a friendly Beast +2/+2 and Taunt.",
-	"type": "MINION",
-	"heroClass": "HUNTER",
-	"rarity": "FREE",
-	"baseManaCost": 4,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

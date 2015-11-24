@@ -1,6 +1,13 @@
 {
+	"id": "minion_hogger",
+	"name": "Hogger",
+	"baseManaCost": 6,
+	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "At the end of your turn, summon a 2/2 Gnoll with Taunt.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "TurnEndTrigger",
@@ -12,13 +19,6 @@
 			"boardPositionRelative": "RIGHT"
 		}
 	},
-	"id": "minion_hogger",
-	"name": "Hogger",
-	"description": "At the end of your turn, summon a 2/2 Gnoll with Taunt.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "LEGENDARY",
-	"baseManaCost": 6,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

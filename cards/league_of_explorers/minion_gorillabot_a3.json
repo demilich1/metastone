@@ -1,0 +1,37 @@
+{
+	"id": "minion_gorillabot_a3",
+	"name": "Gorillabot A-3",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Battlecry: If you control another Mech, Discover a Mech.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "DiscoverRandomCardSpell",
+			"spell1": {
+				"class": "ReceiveCardSpell",
+				"target": "SELF"
+			},
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "MINION",
+				"race": "MECH"
+			}
+		},
+		"condition": {
+			"class": "RaceOnBoardCondition",
+			"race": "MECH"
+		},
+		"resolvedLate": false
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}

@@ -1,4 +1,11 @@
 {
+	"id": "spell_power_word_shield",
+	"name": "Power Word: Shield",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "COMMON",
+	"description": "Give a minion +2 Health. Draw a card.",
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "MetaSpell",
@@ -10,13 +17,6 @@
 			"class": "DrawCardSpell"
 		}
 	},
-	"id": "spell_power_word_shield",
-	"name": "Power Word: Shield",
-	"description": "Give a minion +2 Health. Draw a card.",
-	"type": "SPELL",
-	"heroClass": "PRIEST",
-	"rarity": "COMMON",
-	"baseManaCost": 1,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

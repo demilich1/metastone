@@ -1,0 +1,23 @@
+{
+	"id": "minion_kodorider",
+	"name": "Kodorider",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"description": "Inspire: Summon a 3/5 War Kodo.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "InspireTrigger"
+		},
+		"spell": {
+			"class": "SummonSpell",
+			"card": "token_war_kodo"
+		}
+	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
+	"fileFormatVersion": 1
+}

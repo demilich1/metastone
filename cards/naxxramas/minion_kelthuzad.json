@@ -1,12 +1,13 @@
 {
-	"baseAttack": 6,
-	"baseHp": 8,
 	"id": "minion_kelthuzad",
 	"name": "Kel'Thuzad",
-	"description": "At the end of the turn, summon all friendly minions that died this turn.",
+	"baseManaCost": 8,
 	"type": "MINION",
+	"baseAttack": 6,
+	"baseHp": 8,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
+	"description": "At the end of the turn, summon all friendly minions that died this turn.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "TurnEndTrigger",
@@ -16,7 +17,6 @@
 			"class": "custom.KelThuzadSpell"
 		}
 	},
-	"baseManaCost": 8,
 	"collectible": true,
 	"set": "NAXXRAMAS",
 	"fileFormatVersion": 1

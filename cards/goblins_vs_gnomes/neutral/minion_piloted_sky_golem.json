@@ -1,7 +1,13 @@
 {
+	"id": "minion_piloted_sky_golem",
+	"name": "Piloted Sky Golem",
+	"baseManaCost": 6,
+	"type": "MINION",
 	"baseAttack": 6,
 	"baseHp": 4,
-	"race": "MECH",
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"description": "Deathrattle: Summon a random 4-Cost minion.",
 	"deathrattle": {
 		"class": "SummonRandomMinionFilteredSpell",
 		"cardFilter": {
@@ -9,13 +15,10 @@
 			"manaCost": 4
 		}
 	},
-	"id": "minion_piloted_sky_golem",
-	"name": "Piloted Sky Golem",
-	"description": "Deathrattle: Summon a random 4-Cost minion.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "EPIC",
-	"baseManaCost": 6,
+	"race": "MECH",
+	"attributes": {
+		"DEATHRATTLES": true
+	},
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

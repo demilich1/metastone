@@ -1,6 +1,13 @@
 {
+	"id": "minion_violet_teacher",
+	"name": "Violet Teacher",
+	"baseManaCost": 4,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "Whenever you cast a spell, summon a 1/1 Violet Apprentice.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "SpellCastedTrigger",
@@ -12,13 +19,6 @@
 			"boardPositionRelative": "RIGHT"
 		}
 	},
-	"id": "minion_violet_teacher",
-	"name": "Violet Teacher",
-	"description": "Whenever you cast a spell, summon a 1/1 Violet Apprentice.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "RARE",
-	"baseManaCost": 4,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

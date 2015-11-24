@@ -1,11 +1,11 @@
 {
-	"name": "Polymorph",
-	"description": "Transform a minion into a 1/1 Sheep.",
 	"id": "spell_polymorph",
-	"type": "SPELL",
-	"rarity": "FREE",
-	"heroClass": "MAGE",
+	"name": "Polymorph",
 	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "FREE",
+	"description": "Transform a minion into a 1/1 Sheep.",
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "TransformMinionSpell",

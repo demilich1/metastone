@@ -1,12 +1,12 @@
 {
-	"name": "Huffer",
 	"id": "token_huffer",
-	"type": "MINION",
-	"rarity": "FREE",
-	"heroClass": "HUNTER",
+	"name": "Huffer",
 	"baseManaCost": 3,
+	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 2,
+	"heroClass": "HUNTER",
+	"rarity": "FREE",
 	"race": "BEAST",
 	"attributes": {
 		"CHARGE": true

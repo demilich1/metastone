@@ -1,17 +1,17 @@
 {
-	"name": "5 damage single",
-	"description": "Deal 5 damage to a minion",
 	"id": "spell_starfall_1",
-	"type": "SPELL",
-	"rarity": "RARE",
-	"heroClass": "DRUID",
+	"name": "5 damage single",
 	"baseManaCost": 5,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "RARE",
+	"description": "Deal 5 damage to a minion",
 	"targetSelection": "MINIONS",
-	"collectible": false,
 	"spell": {
 		"class": "DamageSpell",
 		"value": 5
 	},
+	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

@@ -1,11 +1,11 @@
 {
-	"name": "Shadow Bolt",
-	"description": "Deal 4 damage to a minion.",
 	"id": "spell_shadow_bolt",
-	"type": "SPELL",
-	"rarity": "FREE",
-	"heroClass": "WARLOCK",
+	"name": "Shadow Bolt",
 	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "FREE",
+	"description": "Deal 4 damage to a minion.",
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "DamageSpell",

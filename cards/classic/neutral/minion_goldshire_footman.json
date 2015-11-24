@@ -1,13 +1,13 @@
 {
-	"name": "Goldshire Footman",
-	"description": "Taunt",
 	"id": "minion_goldshire_footman",
-	"type": "MINION",
-	"rarity": "FREE",
-	"heroClass": "ANY",
+	"name": "Goldshire Footman",
 	"baseManaCost": 1,
+	"type": "MINION",
 	"baseAttack": 1,
 	"baseHp": 2,
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "Taunt",
 	"attributes": {
 		"TAUNT": true
 	},

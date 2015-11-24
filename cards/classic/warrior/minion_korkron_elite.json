@@ -1,13 +1,13 @@
 {
-	"name": "Kor'kron Elite",
-	"description": "Charge",
 	"id": "minion_korkron_elite",
-	"type": "MINION",
-	"rarity": "FREE",
-	"heroClass": "WARRIOR",
+	"name": "Kor'kron Elite",
 	"baseManaCost": 4,
+	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 3,
+	"heroClass": "WARRIOR",
+	"rarity": "FREE",
+	"description": "Charge",
 	"attributes": {
 		"CHARGE": true
 	},

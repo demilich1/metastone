@@ -1,11 +1,11 @@
 {
-	"name": "Soulfire",
-	"description": "Deal 4 damage. Discard a random card.",
 	"id": "spell_soulfire",
-	"type": "SPELL",
-	"rarity": "FREE",
-	"heroClass": "WARLOCK",
+	"name": "Soulfire",
 	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "FREE",
+	"description": "Deal 4 damage. Discard a random card.",
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "MetaSpell",

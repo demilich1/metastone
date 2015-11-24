@@ -1,0 +1,26 @@
+{
+	"id": "minion_nexus-champion_saraad",
+	"name": "Nexus-Champion Saraad",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Inspire: Add a random spell to your hand.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "InspireTrigger"
+		},
+		"spell": {
+			"class": "ReceiveRandomCollectibleCardSpell",
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "SPELL"
+			}
+		}
+	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
+	"fileFormatVersion": 1
+}

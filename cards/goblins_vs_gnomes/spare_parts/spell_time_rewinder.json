@@ -1,15 +1,15 @@
 {
+	"id": "spell_time_rewinder",
+	"name": "Time Rewinder",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "Return a friendly minion to your hand.",
 	"targetSelection": "FRIENDLY_MINIONS",
 	"spell": {
 		"class": "ReturnMinionToHandSpell"
 	},
-	"id": "spell_time_rewinder",
-	"name": "Time Rewinder",
-	"description": "Return a friendly minion to your hand.",
-	"type": "SPELL",
-	"heroClass": "ANY",
-	"rarity": "FREE",
-	"baseManaCost": 1,
 	"collectible": false,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

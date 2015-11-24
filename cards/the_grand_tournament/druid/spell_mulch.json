@@ -1,4 +1,11 @@
 {
+	"id": "spell_mulch",
+	"name": "Mulch",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "EPIC",
+	"description": "Destroy a minion. Add a random minion to your opponent's hand.",
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "MetaSpell",
@@ -7,21 +14,14 @@
 		},
 		"spell2": {
 			"class": "ReceiveRandomCollectibleCardSpell",
+			"targetPlayer": "OPPONENT",
 			"cardFilter": {
 				"class": "CardFilter",
 				"cardType": "MINION"
-			},
-			"targetPlayer": "OPPONENT"
+			}
 		}
 	},
-	"id": "spell_mulch",
-	"name": "Mulch",
-	"description": "Destroy a minion. Add a random minion to your opponent's hand.",
-	"type": "SPELL",
-	"heroClass": "DRUID",
-	"rarity": "EPIC",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 3,
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

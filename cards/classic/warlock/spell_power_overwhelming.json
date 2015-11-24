@@ -1,7 +1,12 @@
 {
-	"targetSelection": "FRIENDLY_MINIONS",
 	"id": "spell_power_overwhelming",
 	"name": "Power Overwhelming",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "COMMON",
+	"description": "Give a friendly minion +4/+4 until end of turn. Then, it dies. Horribly.",
+	"targetSelection": "FRIENDLY_MINIONS",
 	"spell": {
 		"class": "MetaSpell",
 		"spell1": {
@@ -10,7 +15,6 @@
 			"hpBonus": 4
 		},
 		"spell2": {
-			"class": "AddSpellTriggerSpell",
 			"trigger": {
 				"eventTrigger": {
 					"class": "TurnEndTrigger",
@@ -20,14 +24,10 @@
 					"class": "DestroySpell",
 					"target": "SELF"
 				}
-			}
+			},
+			"class": "AddSpellTriggerSpell"
 		}
 	},
-	"description": "Give a friendly minion +4/+4 until end of turn. Then, it dies. Horribly.",
-	"type": "SPELL",
-	"heroClass": "WARLOCK",
-	"rarity": "COMMON",
-	"baseManaCost": 1,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

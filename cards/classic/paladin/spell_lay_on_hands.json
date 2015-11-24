@@ -1,11 +1,11 @@
 {
-	"name": "Lay on Hands",
-	"description": "Restore 8 Health. Draw 3 cards.",
 	"id": "spell_lay_on_hands",
-	"type": "SPELL",
-	"rarity": "EPIC",
-	"heroClass": "PALADIN",
+	"name": "Lay on Hands",
 	"baseManaCost": 8,
+	"type": "SPELL",
+	"heroClass": "PALADIN",
+	"rarity": "EPIC",
+	"description": "Restore 8 Health. Draw 3 cards.",
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "MetaSpell",

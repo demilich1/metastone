@@ -1,23 +1,23 @@
 {
+	"id": "minion_gurubashi_berserker",
+	"name": "Gurubashi Berserker",
+	"baseManaCost": 5,
+	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 7,
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "Whenever this minion takes damage, gain +3 Attack.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "SelfDamagedTrigger"
 		},
 		"spell": {
 			"class": "BuffSpell",
-			"attackBonus": 3,
-			"target": "SELF"
+			"target": "SELF",
+			"attackBonus": 3
 		}
 	},
-	"id": "minion_gurubashi_berserker",
-	"name": "Gurubashi Berserker",
-	"description": "Whenever this minion takes damage, gain +3 Attack.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "FREE",
-	"baseManaCost": 5,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

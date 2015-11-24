@@ -1,22 +1,22 @@
 {
-	"targetSelection": "NONE",
-	"spell": {
-		"class": "MinMaxDamageSpell",
-		"minDamage": 4,
-		"maxDamage": 5,
-		"target": "ALL_MINIONS"
-	},
 	"id": "spell_elemental_destruction",
 	"name": "Elemental Destruction",
-	"description": "Deal 4-5 damage to all minions. Overload: (5)",
+	"baseManaCost": 3,
 	"type": "SPELL",
 	"heroClass": "SHAMAN",
 	"rarity": "EPIC",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 3,
-	"collectible": true,
+	"description": "Deal 4-5 damage to all minions. Overload: (5)",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "MinMaxDamageSpell",
+		"target": "ALL_MINIONS",
+		"maxDamage": 5,
+		"minDamage": 4
+	},
 	"attributes": {
 		"OVERLOAD": 5
 	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

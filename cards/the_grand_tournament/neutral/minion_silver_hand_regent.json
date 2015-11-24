@@ -1,0 +1,23 @@
+{
+	"id": "minion_silver_hand_regent",
+	"name": "Silver Hand Regent",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 3,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Inspire: Summon a 1/1 Silver Hand Recruit.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "InspireTrigger"
+		},
+		"spell": {
+			"class": "SummonSpell",
+			"card": "token_silver_hand_recruit"
+		}
+	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
+	"fileFormatVersion": 1
+}

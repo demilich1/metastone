@@ -1,19 +1,22 @@
 {
-	"baseAttack": 3,
-	"baseHp": 2,
 	"id": "minion_huge_toad",
 	"name": "Huge Toad",
-	"description": "Deathrattle: Deal 1 damage to a random enemy.",
-	"race": "BEAST",
+	"baseManaCost": 2,
 	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 2,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
+	"description": "Deathrattle: Deal 1 damage to a random enemy.",
 	"deathrattle": {
 		"class": "DamageSpell",
 		"target": "ENEMY_CHARACTERS",
-		"value": 1 
+		"value": 1
 	},
-	"baseManaCost": 2,
+	"race": "BEAST",
+	"attributes": {
+		"DEATHRATTLES": true
+	},
 	"collectible": true,
 	"set": "LEAGUE_OF_EXPLORERS",
 	"fileFormatVersion": 1

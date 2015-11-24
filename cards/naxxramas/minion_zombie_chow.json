@@ -1,18 +1,21 @@
 {
-	"baseAttack": 2,
-	"baseHp": 3,
-	"deathrattle": {
-		"class": "HealSpell",
-		"value": 5,
-		"target": "ENEMY_HERO"
-	},
 	"id": "minion_zombie_chow",
 	"name": "Zombie Chow",
-	"description": "Deathrattle: Restore 5 Health to the enemy hero.",
+	"baseManaCost": 1,
 	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 3,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"baseManaCost": 1,
+	"description": "Deathrattle: Restore 5 Health to the enemy hero.",
+	"deathrattle": {
+		"class": "HealSpell",
+		"target": "ENEMY_HERO",
+		"value": 5
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
 	"collectible": true,
 	"set": "NAXXRAMAS",
 	"fileFormatVersion": 1

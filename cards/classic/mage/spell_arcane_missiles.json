@@ -1,17 +1,17 @@
 {
-	"name": "Arcane Missiles",
-	"description": "Deal 3 damage randomly split among enemy characters.",
 	"id": "spell_arcane_missiles",
-	"type": "SPELL",
-	"rarity": "FREE",
-	"heroClass": "MAGE",
+	"name": "Arcane Missiles",
 	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "FREE",
+	"description": "Deal 3 damage randomly split among enemy characters.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MissilesSpell",
+		"target": "ENEMY_CHARACTERS",
 		"value": 1,
-		"howMany": 3,
-		"target": "ENEMY_CHARACTERS"
+		"howMany": 3
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

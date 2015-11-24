@@ -1,8 +1,15 @@
 {
+	"id": "minion_deathwing",
+	"name": "Deathwing",
+	"baseManaCost": 10,
+	"type": "MINION",
 	"baseAttack": 12,
 	"baseHp": 12,
-	"race": "DRAGON",
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Destroy all other minions and discard your hand.",
 	"battlecry": {
+		"targetSelection": "NONE",
 		"spell": {
 			"class": "MetaSpell",
 			"spell1": {
@@ -14,20 +21,13 @@
 				"value": -1
 			}
 		},
-		"targetSelection": "NONE",
 		"resolvedLate": false
 	},
-	"id": "minion_deathwing",
-	"name": "Deathwing",
-	"description": "Battlecry: Destroy all other minions and discard your hand.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "LEGENDARY",
-	"baseManaCost": 10,
-	"collectible": true,
+	"race": "DRAGON",
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

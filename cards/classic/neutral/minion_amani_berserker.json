@@ -1,27 +1,27 @@
 {
+	"id": "minion_amani_berserker",
+	"name": "Amani Berserker",
+	"baseManaCost": 2,
+	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 3,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Enrage: +3 Attack",
 	"trigger": {
 		"eventTrigger": {
 			"class": "EnrageChangedTrigger"
 		},
 		"spell": {
 			"class": "EnrageSpell",
-			"attackBonus": 3,
-			"target": "SELF"
+			"target": "SELF",
+			"attackBonus": 3
 		}
 	},
-	"id": "minion_amani_berserker",
-	"name": "Amani Berserker",
-	"description": "Enrage: +3 Attack",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "COMMON",
-	"baseManaCost": 2,
-	"collectible": true,
 	"attributes": {
 		"ENRAGABLE": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

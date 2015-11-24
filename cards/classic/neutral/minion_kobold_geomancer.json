@@ -1,13 +1,13 @@
 {
-	"name": "Kobold Geomancer",
-	"description": "Spell Damage +1",
 	"id": "minion_kobold_geomancer",
-	"type": "MINION",
-	"rarity": "FREE",
-	"heroClass": "ANY",
+	"name": "Kobold Geomancer",
 	"baseManaCost": 2,
+	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 2,
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "Spell Damage +1",
 	"attributes": {
 		"SPELL_DAMAGE": 1
 	},

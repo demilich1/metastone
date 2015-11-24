@@ -1,17 +1,17 @@
 {
-	"baseAttack": 3,
-	"baseHp": 5,
 	"id": "minion_auchenai_soulpriest",
 	"name": "Auchenai Soulpriest",
-	"description": "Your cards and powers that restore Health now deal damage instead.",
+	"baseManaCost": 4,
 	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 5,
 	"heroClass": "PRIEST",
 	"rarity": "RARE",
-	"baseManaCost": 4,
-	"collectible": true,
+	"description": "Your cards and powers that restore Health now deal damage instead.",
 	"attributes": {
 		"INVERT_HEALING": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

@@ -1,8 +1,12 @@
 {
-	"targetSelection": "NONE",
 	"id": "spell_shadowform",
 	"name": "Shadowform",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "EPIC",
 	"description": "Your Hero Power becomes 'Deal 2 damage'. If already in Shadowform: 3 damage.",
+	"targetSelection": "NONE",
 	"spell": {
 		"class": "EitherOrSpell",
 		"spell1": {
@@ -13,34 +17,30 @@
 			},
 			"condition": {
 				"class": "HasHeroPowerCondition",
-				"cardId": "hero_power_mind_shatter",
-				"invert": true
+				"invert": true,
+				"cardId": "hero_power_mind_shatter"
 			}
 		},
 		"spell2": {
 			"class": "MetaSpell",
 			"spell1": {
 				"class": "AddAttributeSpell",
-				"attribute": "SHADOWFORM",
-				"target": "FRIENDLY_HERO"
+				"target": "FRIENDLY_HERO",
+				"attribute": "SHADOWFORM"
 			},
 			"spell2": {
 				"class": "ChangeHeroPowerSpell",
 				"card": "hero_power_mind_spike"
 			}
 		},
+		"targetPlayer": "SELF",
 		"condition": {
 			"class": "AttributeCondition",
-			"target" : "FRIENDLY_HERO",
+			"target": "FRIENDLY_HERO",
 			"attribute": "SHADOWFORM",
-			"operation" : "HAS"
-		},
-		"targetPlayer": "SELF"
+			"operation": "HAS"
+		}
 	},
-	"type": "SPELL",
-	"heroClass": "PRIEST",
-	"rarity": "EPIC",
-	"baseManaCost": 3,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

@@ -1,13 +1,13 @@
 {
-	"name": "Earth Elemental",
-	"description": "Taunt. Overload: (3)",
 	"id": "minion_earth_elemental",
-	"type": "MINION",
-	"rarity": "EPIC",
-	"heroClass": "SHAMAN",
+	"name": "Earth Elemental",
 	"baseManaCost": 5,
+	"type": "MINION",
 	"baseAttack": 7,
 	"baseHp": 8,
+	"heroClass": "SHAMAN",
+	"rarity": "EPIC",
+	"description": "Taunt. Overload: (3)",
 	"attributes": {
 		"OVERLOAD": 3,
 		"TAUNT": true

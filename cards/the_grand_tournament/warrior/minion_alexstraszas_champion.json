@@ -1,6 +1,13 @@
 {
+	"id": "minion_alexstraszas_champion",
+	"name": "Alexstrasza's Champion",
+	"baseManaCost": 2,
+	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 3,
+	"heroClass": "WARRIOR",
+	"rarity": "RARE",
+	"description": "Battlecry: If you're holding a Dragon, gain +1 Attack and Charge.",
 	"battlecry": {
 		"spell": {
 			"class": "MetaSpell",
@@ -20,17 +27,10 @@
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_alexstraszas_champion",
-	"name": "Alexstrasza's Champion",
-	"description": "Battlecry: If you're holding a Dragon, gain +1 Attack and Charge.",
-	"type": "MINION",
-	"heroClass": "WARRIOR",
-	"rarity": "RARE",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 2,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

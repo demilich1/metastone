@@ -1,11 +1,11 @@
 {
-	"name": "Force of Nature",
-	"description": "Summon three 2/2 Treants with Charge that die at the end of the turn.",
 	"id": "spell_force_of_nature",
-	"type": "SPELL",
-	"rarity": "EPIC",
-	"heroClass": "DRUID",
+	"name": "Force of Nature",
 	"baseManaCost": 6,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "EPIC",
+	"description": "Summon three 2/2 Treants with Charge that die at the end of the turn.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "SummonSpell",

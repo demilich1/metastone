@@ -1,18 +1,18 @@
 {
-	"baseAttack": 0,
-	"baseHp": 1,
-	"race": "BEAST",
 	"id": "token_frog",
 	"name": "Frog",
-	"description": "Taunt",
+	"baseManaCost": 0,
 	"type": "MINION",
+	"baseAttack": 0,
+	"baseHp": 1,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"baseManaCost": 0,
-	"collectible": false,
+	"description": "Taunt",
+	"race": "BEAST",
 	"attributes": {
 		"TAUNT": true
 	},
+	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

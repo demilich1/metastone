@@ -1,7 +1,15 @@
 {
+	"id": "minion_the_black_knight",
+	"name": "The Black Knight",
+	"baseManaCost": 6,
+	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Destroy an enemy minion with Taunt.",
 	"battlecry": {
+		"targetSelection": "ENEMY_MINIONS",
 		"spell": {
 			"class": "DestroySpell",
 			"filter": {
@@ -10,20 +18,12 @@
 				"operation": "HAS"
 			}
 		},
-		"targetSelection": "ENEMY_MINIONS",
 		"resolvedLate": false
 	},
-	"id": "minion_the_black_knight",
-	"name": "The Black Knight",
-	"description": "Battlecry: Destroy an enemy minion with Taunt.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "LEGENDARY",
-	"baseManaCost": 6,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

@@ -1,6 +1,13 @@
 {
+	"id": "minion_void_crusher",
+	"name": "Void Crusher",
+	"baseManaCost": 6,
+	"type": "MINION",
 	"baseAttack": 5,
 	"baseHp": 4,
+	"heroClass": "WARLOCK",
+	"rarity": "RARE",
+	"description": "Inspire: Destroy a random minion for each player.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "InspireTrigger"
@@ -20,14 +27,7 @@
 		}
 	},
 	"race": "DEMON",
-	"id": "minion_void_crusher",
-	"name": "Void Crusher",
-	"description": "Inspire: Destroy a random minion for each player.",
-	"type": "MINION",
-	"heroClass": "WARLOCK",
-	"rarity": "RARE",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 6,
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

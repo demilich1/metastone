@@ -1,13 +1,13 @@
 {
-	"name": "Silverback Patriarch",
-	"description": "Taunt",
 	"id": "minion_silverback_patriarch",
-	"type": "MINION",
-	"rarity": "FREE",
-	"heroClass": "ANY",
+	"name": "Silverback Patriarch",
 	"baseManaCost": 3,
+	"type": "MINION",
 	"baseAttack": 1,
 	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "Taunt",
 	"race": "BEAST",
 	"attributes": {
 		"TAUNT": true

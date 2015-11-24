@@ -1,0 +1,28 @@
+{
+	"id": "minion_rumbling_elemental",
+	"name": "Rumbling Elemental",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 6,
+	"heroClass": "SHAMAN",
+	"rarity": "COMMON",
+	"description": "After you play a Battlecry minion, deal 2 damage to a random enemy.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "MinionPlayedTrigger",
+			"targetPlayer": "SELF",
+			"breaksStealth": true,
+			"requiredAttribute": "BATTLECRY"
+		},
+		"spell": {
+			"class": "DamageSpell",
+			"target": "ENEMY_CHARACTERS",
+			"value": 2,
+			"randomTarget": true
+		}
+	},
+	"collectible": true,
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}

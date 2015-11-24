@@ -1,18 +1,18 @@
 {
-	"targetSelection": "NONE",
 	"id": "hero_power_shapeshift",
 	"name": "Shapeshift",
-	"description": "+1 Attack this turn. +1 Armor.",
+	"baseManaCost": 2,
 	"type": "HERO_POWER",
 	"heroClass": "DRUID",
 	"rarity": "FREE",
+	"description": "+1 Attack this turn. +1 Armor.",
+	"targetSelection": "NONE",
 	"spell": {
 		"class": "BuffHeroSpell",
+		"target": "FRIENDLY_HERO",
 		"attackBonus": 1,
-		"armorBonus": 1,
-		"target": "FRIENDLY_HERO"
+		"armorBonus": 1
 	},
-	"baseManaCost": 2,
 	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

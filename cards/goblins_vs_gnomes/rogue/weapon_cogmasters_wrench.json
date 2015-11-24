@@ -1,32 +1,32 @@
 {
-	"name": "Cogmaster's Wrench",
-	"description": "Has +2 Attack while you have a Mech.",
-	"collectible": true,
 	"id": "weapon_cogmasters_wrench",
-	"type": "WEAPON",
-	"rarity": "EPIC",
-	"heroClass": "ROGUE",
+	"name": "Cogmaster's Wrench",
 	"baseManaCost": 3,
+	"type": "WEAPON",
 	"damage": 1,
 	"durability": 3,
+	"heroClass": "ROGUE",
+	"rarity": "EPIC",
+	"description": "Has +2 Attack while you have a Mech.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "BoardChangedTrigger"
 		},
 		"spell": {
 			"class": "ConditionalAttackBonusSpell",
+			"target": "SELF",
 			"valueProvider": {
 				"class": "ConditionalValueProvider",
 				"condition": {
 					"class": "RaceOnBoardCondition",
 					"race": "MECH"
 				},
-				"ifTrue": 2,
-				"ifFalse": 0
-			},
-			"target": "SELF"
+				"ifFalse": 0,
+				"ifTrue": 2
+			}
 		}
 	},
+	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

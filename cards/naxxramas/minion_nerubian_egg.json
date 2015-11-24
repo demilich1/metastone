@@ -1,17 +1,20 @@
 {
+	"id": "minion_nerubian_egg",
+	"name": "Nerubian Egg",
+	"baseManaCost": 2,
+	"type": "MINION",
 	"baseAttack": 0,
 	"baseHp": 2,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "Deathrattle: Summon a 4/4 Nerubian.",
 	"deathrattle": {
 		"class": "SummonSpell",
 		"card": "token_nerubian"
 	},
-	"id": "minion_nerubian_egg",
-	"name": "Nerubian Egg",
-	"description": "Deathrattle: Summon a 4/4 Nerubian.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "RARE",
-	"baseManaCost": 2,
+	"attributes": {
+		"DEATHRATTLES": true
+	},
 	"collectible": true,
 	"set": "NAXXRAMAS",
 	"fileFormatVersion": 1

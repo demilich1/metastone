@@ -1,6 +1,13 @@
 {
+	"id": "minion_illuminator",
+	"name": "Illuminator",
+	"baseManaCost": 3,
+	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "If you control a Secret at the end of your turn, restore 4 health to your hero.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "TurnEndTrigger",
@@ -11,17 +18,10 @@
 		},
 		"spell": {
 			"class": "HealSpell",
-			"value": 4,
-			"target": "FRIENDLY_HERO"
+			"target": "FRIENDLY_HERO",
+			"value": 4
 		}
 	},
-	"id": "minion_illuminator",
-	"name": "Illuminator",
-	"description": "If you control a Secret at the end of your turn, restore 4 health to your hero.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "RARE",
-	"baseManaCost": 3,
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

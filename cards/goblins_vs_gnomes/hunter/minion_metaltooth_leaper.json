@@ -1,12 +1,18 @@
 {
+	"id": "minion_metaltooth_leaper",
+	"name": "Metaltooth Leaper",
+	"baseManaCost": 3,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 3,
-	"race": "MECH",
+	"heroClass": "HUNTER",
+	"rarity": "RARE",
+	"description": "Battlecry: Give your other Mechs +2 Attack.",
 	"battlecry": {
 		"spell": {
 			"class": "BuffSpell",
-			"attackBonus": 2,
 			"target": "OTHER_FRIENDLY_MINIONS",
+			"attackBonus": 2,
 			"filter": {
 				"class": "RaceFilter",
 				"race": "MECH"
@@ -14,17 +20,11 @@
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_metaltooth_leaper",
-	"name": "Metaltooth Leaper",
-	"description": "Battlecry: Give your other Mechs +2 Attack.",
-	"type": "MINION",
-	"heroClass": "HUNTER",
-	"rarity": "RARE",
-	"baseManaCost": 3,
-	"collectible": true,
+	"race": "MECH",
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

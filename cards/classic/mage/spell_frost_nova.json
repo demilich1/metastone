@@ -1,16 +1,16 @@
 {
-	"name": "Frost Nova",
-	"description": "Freeze all enemy minions.",
 	"id": "spell_frost_nova",
-	"type": "SPELL",
-	"rarity": "FREE",
-	"heroClass": "MAGE",
+	"name": "Frost Nova",
 	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "FREE",
+	"description": "Freeze all enemy minions.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "AddAttributeSpell",
-		"attribute": "FROZEN",
-		"target": "ENEMY_MINIONS"
+		"target": "ENEMY_MINIONS",
+		"attribute": "FROZEN"
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

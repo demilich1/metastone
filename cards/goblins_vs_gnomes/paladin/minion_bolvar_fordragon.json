@@ -1,6 +1,13 @@
 {
+	"id": "minion_bolvar_fordragon",
+	"name": "Bolvar Fordragon",
+	"baseManaCost": 5,
+	"type": "MINION",
 	"baseAttack": 1,
 	"baseHp": 7,
+	"heroClass": "PALADIN",
+	"rarity": "LEGENDARY",
+	"description": "Whenever a friendly minion dies while this in your hand, gain +1 Attack.",
 	"passiveTrigger": {
 		"eventTrigger": {
 			"class": "MinionDeathTrigger",
@@ -8,18 +15,11 @@
 		},
 		"spell": {
 			"class": "ModifyAttributeSpell",
-			"attribute": "ATTACK_BONUS",
+			"target": "SELF",
 			"value": 1,
-			"target": "SELF"
+			"attribute": "ATTACK_BONUS"
 		}
 	},
-	"id": "minion_bolvar_fordragon",
-	"name": "Bolvar Fordragon",
-	"description": "Whenever a friendly minion dies while this in your hand, gain +1 Attack.",
-	"type": "MINION",
-	"heroClass": "PALADIN",
-	"rarity": "LEGENDARY",
-	"baseManaCost": 5,
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

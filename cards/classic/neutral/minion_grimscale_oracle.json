@@ -1,24 +1,24 @@
 {
+	"id": "minion_grimscale_oracle",
+	"name": "Grimscale Oracle",
+	"baseManaCost": 1,
+	"type": "MINION",
 	"baseAttack": 1,
 	"baseHp": 1,
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "ALL other Murlocs have +1 Attack.",
+	"race": "MURLOC",
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1,
 	"aura": {
 		"class": "BuffAura",
+		"target": "ALL_MINIONS",
 		"attackBonus": 1,
 		"filter": {
 			"class": "RaceFilter",
 			"race": "MURLOC"
-		},
-		"target": "ALL_MINIONS"
-	},
-	"race": "MURLOC",
-	"id": "minion_grimscale_oracle",
-	"name": "Grimscale Oracle",
-	"description": "ALL other Murlocs have +1 Attack.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "FREE",
-	"baseManaCost": 1,
-	"collectible": true,
-	"set": "CLASSIC",
-	"fileFormatVersion": 1
+		}
+	}
 }

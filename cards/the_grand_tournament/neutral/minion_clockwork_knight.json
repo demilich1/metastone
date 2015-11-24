@@ -1,0 +1,31 @@
+{
+	"id": "minion_clockwork_knight",
+	"name": "Clockwork Knight",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Battlecry: Give a friendly Mech +1/+1.",
+	"battlecry": {
+		"targetSelection": "FRIENDLY_MINIONS",
+		"spell": {
+			"class": "BuffSpell",
+			"attackBonus": 1,
+			"hpBonus": 1,
+			"filter": {
+				"class": "RaceFilter",
+				"race": "MECH"
+			}
+		},
+		"resolvedLate": false
+	},
+	"race": "MECH",
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
+	"fileFormatVersion": 1
+}

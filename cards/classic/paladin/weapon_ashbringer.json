@@ -1,14 +1,14 @@
 {
-	"name": "Ashbringer",
-	"description": "",
-	"collectible": false,
 	"id": "weapon_ashbringer",
-	"type": "WEAPON",
-	"rarity": "LEGENDARY",
-	"heroClass": "PALADIN",
+	"name": "Ashbringer",
 	"baseManaCost": 5,
+	"type": "WEAPON",
 	"damage": 5,
 	"durability": 3,
+	"heroClass": "PALADIN",
+	"rarity": "LEGENDARY",
+	"description": "",
+	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

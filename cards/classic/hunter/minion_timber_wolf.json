@@ -1,24 +1,24 @@
 {
+	"id": "minion_timber_wolf",
+	"name": "Timber Wolf",
+	"baseManaCost": 1,
+	"type": "MINION",
 	"baseAttack": 1,
 	"baseHp": 1,
+	"heroClass": "HUNTER",
+	"rarity": "FREE",
+	"description": "Your other Beasts have +1 Attack.",
+	"race": "BEAST",
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1,
 	"aura": {
 		"class": "BuffAura",
+		"target": "FRIENDLY_MINIONS",
 		"attackBonus": 1,
 		"filter": {
 			"class": "RaceFilter",
 			"race": "BEAST"
-		},
-		"target": "FRIENDLY_MINIONS"
-	},
-	"race": "BEAST",
-	"id": "minion_timber_wolf",
-	"name": "Timber Wolf",
-	"description": "Your other Beasts have +1 Attack.",
-	"type": "MINION",
-	"heroClass": "HUNTER",
-	"rarity": "FREE",
-	"baseManaCost": 1,
-	"collectible": true,
-	"set": "CLASSIC",
-	"fileFormatVersion": 1
+		}
+	}
 }

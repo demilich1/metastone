@@ -1,21 +1,23 @@
-
 {
-	"baseAttack": 7,
-	"baseHp": 4,
 	"id": "minion_ancient_shade",
 	"name": "Ancient Shade",
-	"description": "Battlecry: Shuffle an 'Ancient Curse' into your deck that deals 7 damage to you when drawn.",
+	"baseManaCost": 4,
 	"type": "MINION",
+	"baseAttack": 7,
+	"baseHp": 4,
 	"heroClass": "ANY",
 	"rarity": "RARE",
-	"baseManaCost": 4,
+	"description": "Battlecry: Shuffle an 'Ancient Curse' into your deck that deals 7 damage to you when drawn.",
 	"battlecry": {
+		"targetSelection": "NONE",
 		"spell": {
 			"class": "ShuffleToDeckSpell",
 			"card": "spell_ancient_curse"
 		},
-		"targetSelection": "NONE",
 		"resolvedLate": false
+	},
+	"attributes": {
+		"BATTLECRY": true
 	},
 	"collectible": true,
 	"set": "LEAGUE_OF_EXPLORERS",

@@ -1,26 +1,26 @@
 {
+	"id": "minion_ogre_ninja",
+	"name": "Ogre Ninja",
+	"baseManaCost": 5,
+	"type": "MINION",
 	"baseAttack": 6,
 	"baseHp": 6,
+	"heroClass": "ROGUE",
+	"rarity": "RARE",
+	"description": "Stealth. 50% chance to attack the wrong enemy.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "HostAcquiresTargetTrigger",
-			"actionType": "PHYSICAL_ATTACK",
 			"condition": {
 				"class": "RandomCondition"
-			}
+			},
+			"actionType": "PHYSICAL_ATTACK"
 		},
 		"spell": {
 			"class": "FumbleSpell",
 			"target": "EVENT_TARGET"
 		}
 	},
-	"id": "minion_ogre_ninja",
-	"name": "Ogre Ninja",
-	"description": "Stealth. 50% chance to attack the wrong enemy.",
-	"type": "MINION",
-	"heroClass": "ROGUE",
-	"rarity": "RARE",
-	"baseManaCost": 5,
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

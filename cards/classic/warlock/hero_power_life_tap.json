@@ -1,24 +1,24 @@
 {
-	"targetSelection": "NONE",
 	"id": "hero_power_life_tap",
 	"name": "Life Tap",
-	"description": "Draw a card and take 2 damage.",
+	"baseManaCost": 2,
 	"type": "HERO_POWER",
 	"heroClass": "WARLOCK",
 	"rarity": "FREE",
+	"description": "Draw a card and take 2 damage.",
+	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
 		"spell1": {
 			"class": "DamageSpell",
-			"value": 2,
-			"target": "FRIENDLY_HERO"
+			"target": "FRIENDLY_HERO",
+			"value": 2
 		},
 		"spell2": {
 			"class": "DrawCardSpell",
 			"value": 1
 		}
 	},
-	"baseManaCost": 2,
 	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

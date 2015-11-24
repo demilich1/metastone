@@ -1,6 +1,13 @@
 {
+	"id": "minion_knife_juggler",
+	"name": "Knife Juggler",
+	"baseManaCost": 2,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 2,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "After you summon a minion, deal 1 damage to a random enemy.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "MinionSummonedTrigger",
@@ -9,18 +16,11 @@
 		},
 		"spell": {
 			"class": "DamageSpell",
-			"value": 1,
 			"target": "ENEMY_CHARACTERS",
+			"value": 1,
 			"randomTarget": true
 		}
 	},
-	"id": "minion_knife_juggler",
-	"name": "Knife Juggler",
-	"description": "After you summon a minion, deal 1 damage to a random enemy.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "RARE",
-	"baseManaCost": 2,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

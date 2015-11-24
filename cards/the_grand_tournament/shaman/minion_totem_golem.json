@@ -1,18 +1,18 @@
 {
-	"baseAttack": 3,
-	"baseHp": 4,
-	"race": "TOTEM",
 	"id": "minion_totem_golem",
 	"name": "Totem Golem",
-	"description": "Overload: (1)",
+	"baseManaCost": 2,
 	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 4,
 	"heroClass": "SHAMAN",
 	"rarity": "COMMON",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 2,
-	"collectible": true,
+	"description": "Overload: (1)",
+	"race": "TOTEM",
 	"attributes": {
 		"OVERLOAD": 1
 	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

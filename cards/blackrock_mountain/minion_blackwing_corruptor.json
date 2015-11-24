@@ -1,7 +1,15 @@
 {
+	"id": "minion_blackwing_corruptor",
+	"name": "Blackwing Corruptor",
+	"baseManaCost": 5,
+	"type": "MINION",
 	"baseAttack": 5,
 	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Battlecry: If you're holding a Dragon, deal 3 damage.",
 	"battlecry": {
+		"targetSelection": "ANY",
 		"spell": {
 			"class": "DamageSpell",
 			"value": 3
@@ -10,20 +18,12 @@
 			"class": "HoldsCardCondition",
 			"race": "DRAGON"
 		},
-		"targetSelection": "ANY",
 		"resolvedLate": false
 	},
-	"id": "minion_blackwing_corruptor",
-	"name": "Blackwing Corruptor",
-	"description": "Battlecry: If you're holding a Dragon, deal 3 damage.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "COMMON",
-	"baseManaCost": 5,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "BLACKROCK_MOUNTAIN",
 	"fileFormatVersion": 1
 }

@@ -1,18 +1,21 @@
 {
-	"name": "Youthful Brewmaster",
-	"description": "Battlecry: Return a friendly minion from the battlefield to your hand.",
 	"id": "minion_youthful_brewmaster",
-	"type": "MINION",
-	"rarity": "COMMON",
-	"heroClass": "ANY",
+	"name": "Youthful Brewmaster",
 	"baseManaCost": 2,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 2,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Battlecry: Return a friendly minion from the battlefield to your hand.",
 	"battlecry": {
 		"targetSelection": "FRIENDLY_MINIONS",
 		"spell": {
 			"class": "ReturnMinionToHandSpell"
 		}
+	},
+	"attributes": {
+		"BATTLECRY": true
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

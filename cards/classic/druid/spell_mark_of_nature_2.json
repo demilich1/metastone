@@ -1,12 +1,11 @@
 {
-	"name": "+4 Health, Taunt",
-	"description": "+4 Health and Taunt",
 	"id": "spell_mark_of_nature_2",
-	"type": "SPELL",
-	"rarity": "COMMON",
-	"heroClass": "DRUID",
-	"collectible": false,
+	"name": "+4 Health, Taunt",
 	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"description": "+4 Health and Taunt",
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "MetaSpell",
@@ -19,6 +18,7 @@
 			"attribute": "TAUNT"
 		}
 	},
+	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

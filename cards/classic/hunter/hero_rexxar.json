@@ -1,13 +1,13 @@
 {
-	"name": "Rexxar",
 	"id": "hero_rexxar",
+	"name": "Rexxar",
+	"heroPower": "hero_power_steady_shot",
 	"type": "HERO",
 	"heroClass": "HUNTER",
 	"rarity": "FREE",
-	"heroPower": "hero_power_steady_shot",
-	"collectible": true,
 	"attributes": {
-		"HP": 30,
-		"MAX_HP": 30
-	}
+		"MAX_HP": 30,
+		"HP": 30
+	},
+	"collectible": true
 }

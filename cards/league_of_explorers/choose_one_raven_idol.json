@@ -1,0 +1,17 @@
+{
+	"id": "spell_raven_idol",
+	"name": "Raven Idol",
+	"baseManaCost": 1,
+	"type": "CHOOSE_ONE",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"description": "Choose One - Discover a minion; or Discover a spell.",
+	"targetSelection": "NONE",
+	"options": [
+		"spell_raven_idol_1",
+		"spell_raven_idol_2"
+	],
+	"collectible": true,
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}

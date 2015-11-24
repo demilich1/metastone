@@ -1,20 +1,20 @@
 {
-	"baseAttack": 2,
-	"baseHp": 4,
-	"aura": {
-		"class": "BuffAura",
-		"attackBonus": 1,
-		"target": "FRIENDLY_MINIONS"
-	},
-	"race": "BEAST",
 	"id": "token_leokk",
 	"name": "Leokk",
-	"description": "Other friendly minions have +1 Attack.",
+	"baseManaCost": 3,
 	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 4,
 	"heroClass": "HUNTER",
 	"rarity": "FREE",
-	"baseManaCost": 3,
+	"description": "Other friendly minions have +1 Attack.",
+	"race": "BEAST",
 	"collectible": false,
 	"set": "CLASSIC",
-	"fileFormatVersion": 1
+	"fileFormatVersion": 1,
+	"aura": {
+		"class": "BuffAura",
+		"target": "FRIENDLY_MINIONS",
+		"attackBonus": 1
+	}
 }

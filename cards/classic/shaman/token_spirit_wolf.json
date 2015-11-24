@@ -1,17 +1,17 @@
 {
-	"baseAttack": 2,
-	"baseHp": 3,
 	"id": "token_spirit_wolf",
 	"name": "Spirit Wolf",
-	"description": "",
+	"baseManaCost": 2,
 	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 3,
 	"heroClass": "ANY",
 	"rarity": "RARE",
-	"baseManaCost": 2,
-	"collectible": false,
+	"description": "",
 	"attributes": {
 		"TAUNT": true
 	},
+	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

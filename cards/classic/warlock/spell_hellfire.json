@@ -1,16 +1,16 @@
 {
-	"name": "Hellfire",
-	"description": "Deal 3 damage to ALL characters.",
 	"id": "spell_hellfire",
-	"type": "SPELL",
-	"rarity": "FREE",
-	"heroClass": "WARLOCK",
+	"name": "Hellfire",
 	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "FREE",
+	"description": "Deal 3 damage to ALL characters.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "DamageSpell",
-		"value": 3,
-		"target": "ALL_CHARACTERS"
+		"target": "ALL_CHARACTERS",
+		"value": 3
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

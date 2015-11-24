@@ -1,4 +1,11 @@
 {
+	"id": "spell_upgrade",
+	"name": "Upgrade!",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "WARRIOR",
+	"rarity": "RARE",
+	"description": "If you have a weapon, give it +1/+1.  Otherwise equip a 1/3 weapon.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "EitherOrSpell",
@@ -9,20 +16,13 @@
 		},
 		"spell2": {
 			"class": "EquipWeaponSpell",
-			"card": "weapon_heavy_axe",
-			"targetPlayer": "SELF"
+			"targetPlayer": "SELF",
+			"card": "weapon_heavy_axe"
 		},
 		"condition": {
 			"class": "HasWeaponCondition"
 		}
 	},
-	"id": "spell_upgrade",
-	"name": "Upgrade!",
-	"description": "If you have a weapon, give it +1/+1.  Otherwise equip a 1/3 weapon.",
-	"type": "SPELL",
-	"heroClass": "WARRIOR",
-	"rarity": "RARE",
-	"baseManaCost": 1,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

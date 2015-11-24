@@ -1,11 +1,14 @@
 {
+	"id": "spell_slam",
+	"name": "Slam",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "WARRIOR",
+	"rarity": "COMMON",
+	"description": "Deal 2 damage to a minion. If it survives, draw a card.",
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "ConditionalEffectSpell",
-		"condition": {
-			"class": "IsDeadCondition",
-			"invert": true
-		},
 		"spell1": {
 			"class": "DamageSpell",
 			"value": 2
@@ -13,15 +16,12 @@
 		"spell2": {
 			"class": "DrawCardSpell",
 			"value": 1
+		},
+		"condition": {
+			"class": "IsDeadCondition",
+			"invert": true
 		}
 	},
-	"id": "spell_slam",
-	"name": "Slam",
-	"description": "Deal 2 damage to a minion. If it survives, draw a card.",
-	"type": "SPELL",
-	"heroClass": "WARRIOR",
-	"rarity": "COMMON",
-	"baseManaCost": 2,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

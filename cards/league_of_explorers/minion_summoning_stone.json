@@ -1,0 +1,23 @@
+{
+	"id": "minion_summoning_stone",
+	"name": "Summoning Stone",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 0,
+	"baseHp": 6,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "Whenever you cast a spell, summon a minion of the same Cost.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "SpellCastedTrigger"
+		},
+		"spell": {
+			"class": "SummonRandomMinionFromSpell",
+			"card": "PENDING_CARD"
+		}
+	},
+	"collectible": true,
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}

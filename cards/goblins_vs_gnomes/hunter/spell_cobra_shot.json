@@ -1,4 +1,11 @@
 {
+	"id": "spell_cobra_shot",
+	"name": "Cobra Shot",
+	"baseManaCost": 5,
+	"type": "SPELL",
+	"heroClass": "HUNTER",
+	"rarity": "COMMON",
+	"description": "Deal 3 damage to a minion and the enemy hero.",
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "MetaSpell",
@@ -8,17 +15,10 @@
 		},
 		"spell2": {
 			"class": "DamageSpell",
-			"value": 3,
-			"target": "ENEMY_HERO"
+			"target": "ENEMY_HERO",
+			"value": 3
 		}
 	},
-	"id": "spell_cobra_shot",
-	"name": "Cobra Shot",
-	"description": "Deal 3 damage to a minion and the enemy hero.",
-	"type": "SPELL",
-	"heroClass": "HUNTER",
-	"rarity": "COMMON",
-	"baseManaCost": 5,
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

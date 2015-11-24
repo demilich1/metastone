@@ -1,11 +1,11 @@
 {
-	"name": "Frostbolt",
-	"description": "Deal 3 damage to a character and Freeze it.",
 	"id": "spell_frostbolt",
-	"type": "SPELL",
-	"rarity": "FREE",
-	"heroClass": "MAGE",
+	"name": "Frostbolt",
 	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "FREE",
+	"description": "Deal 3 damage to a character and Freeze it.",
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "MetaSpell",

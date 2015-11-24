@@ -1,24 +1,24 @@
 {
+	"id": "minion_holy_champion",
+	"name": "Holy Champion",
+	"baseManaCost": 4,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 5,
+	"heroClass": "PRIEST",
+	"rarity": "COMMON",
+	"description": "Whenever a character is healed, gain +2 Attack.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "HealingTrigger"
 		},
 		"spell": {
 			"class": "BuffSpell",
-			"attackBonus": 2,
-			"target": "SELF"
+			"target": "SELF",
+			"attackBonus": 2
 		}
 	},
-	"id": "minion_holy_champion",
-	"name": "Holy Champion",
-	"description": "Whenever a character is healed, gain +2 Attack.",
-	"type": "MINION",
-	"heroClass": "PRIEST",
-	"rarity": "COMMON",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 4,
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

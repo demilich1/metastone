@@ -1,6 +1,13 @@
 {
+	"id": "minion_confessor_paletress",
+	"name": "Confessor Paletress",
+	"baseManaCost": 7,
+	"type": "MINION",
 	"baseAttack": 5,
 	"baseHp": 4,
+	"heroClass": "PRIEST",
+	"rarity": "LEGENDARY",
+	"description": "Inspire: Summon a random Legendary minion.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "InspireTrigger"
@@ -8,19 +15,12 @@
 		"spell": {
 			"class": "SummonRandomMinionFilteredSpell",
 			"cardFilter": {
-				"class": "CardFilter",
-				"rarity": "LEGENDARY"
+				"rarity": "LEGENDARY",
+				"class": "CardFilter"
 			}
 		}
 	},
-	"id": "minion_confessor_paletress",
-	"name": "Confessor Paletress",
-	"description": "Inspire: Summon a random Legendary minion.",
-	"type": "MINION",
-	"heroClass": "PRIEST",
-	"rarity": "LEGENDARY",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 7,
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

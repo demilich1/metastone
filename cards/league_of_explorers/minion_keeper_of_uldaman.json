@@ -1,27 +1,30 @@
 {
-	"baseAttack": 3,
-	"baseHp": 4,
 	"id": "minion_keeper_of_uldaman",
 	"name": "Keeper of Uldaman",
-	"description": "Battlecry: Set a minion's Attack and Health to 3.",
+	"baseManaCost": 4,
 	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 4,
 	"heroClass": "PALADIN",
 	"rarity": "COMMON",
-	"baseManaCost":4,
+	"description": "Battlecry: Set a minion's Attack and Health to 3.",
 	"battlecry": {
+		"targetSelection": "MINIONS",
 		"spell": {
 			"class": "MetaSpell",
 			"spell1": {
-			  "class": "SetAttackSpell",
-			  "value": 3
+				"class": "SetAttackSpell",
+				"value": 3
 			},
 			"spell2": {
-			  "class": "SetHpSpell",
-			  "value": 3
+				"class": "SetHpSpell",
+				"value": 3
 			}
 		},
-		"targetSelection": "MINIONS",
 		"resolvedLate": false
+	},
+	"attributes": {
+		"BATTLECRY": true
 	},
 	"collectible": true,
 	"set": "LEAGUE_OF_EXPLORERS",

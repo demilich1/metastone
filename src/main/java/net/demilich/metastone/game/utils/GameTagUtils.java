@@ -21,6 +21,7 @@ public class GameTagUtils {
 		case FATIGUE:
 		case MAX_HP:
 		case NUMBER_OF_ATTACKS:
+		case OPPONENT_SPELL_DAMAGE:
 		case OVERLOAD:
 		case SPELL_AMPLIFY_MULTIPLIER:
 		case SPELL_DAMAGE:

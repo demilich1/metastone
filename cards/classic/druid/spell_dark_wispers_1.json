@@ -1,12 +1,11 @@
 {
-	"name": "Summon 5 Wisps",
-	"description": "Summon 5 Wisps",
 	"id": "spell_dark_wispers_1",
-	"type": "SPELL",
-	"rarity": "EPIC",
-	"heroClass": "DRUID",
-	"collectible": false,
+	"name": "Summon 5 Wisps",
 	"baseManaCost": 6,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "EPIC",
+	"description": "Summon 5 Wisps",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "SummonSpell",
@@ -18,6 +17,7 @@
 			"minion_wisp"
 		]
 	},
+	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

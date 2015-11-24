@@ -1,7 +1,13 @@
 {
+	"id": "minion_alarm-o-bot",
+	"name": "Alarm-o-bot",
+	"baseManaCost": 3,
+	"type": "MINION",
 	"baseAttack": 0,
 	"baseHp": 3,
-	"race": "MECH",
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "At the start of your turn, swap this minion with a random one in your hand.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "TurnStartTrigger",
@@ -16,13 +22,7 @@
 			"target": "SELF"
 		}
 	},
-	"id": "minion_alarm-o-bot",
-	"name": "Alarm-o-bot",
-	"description": "At the start of your turn, swap this minion with a random one in your hand.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "RARE",
-	"baseManaCost": 3,
+	"race": "MECH",
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

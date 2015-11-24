@@ -1,4 +1,11 @@
 {
+	"id": "spell_sacrificial_pact",
+	"name": "Sacrificial Pact",
+	"baseManaCost": 0,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "FREE",
+	"description": "Destroy a Demon. Restore 5 Health to your hero.",
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "MetaSpell",
@@ -7,21 +14,14 @@
 		},
 		"spell2": {
 			"class": "HealSpell",
-			"value": 5,
-			"target": "FRIENDLY_HERO"
+			"target": "FRIENDLY_HERO",
+			"value": 5
 		},
 		"filter": {
 			"class": "RaceFilter",
 			"race": "DEMON"
 		}
 	},
-	"id": "spell_sacrificial_pact",
-	"name": "Sacrificial Pact",
-	"description": "Destroy a Demon. Restore 5 Health to your hero.",
-	"type": "SPELL",
-	"heroClass": "WARLOCK",
-	"rarity": "FREE",
-	"baseManaCost": 0,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

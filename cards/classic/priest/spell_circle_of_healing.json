@@ -1,16 +1,16 @@
 {
-	"name": "Circle of Healing",
-	"description": "Restore 4 Health to ALL minions.",
 	"id": "spell_circle_of_healing",
-	"type": "SPELL",
-	"rarity": "COMMON",
-	"heroClass": "PRIEST",
+	"name": "Circle of Healing",
 	"baseManaCost": 0,
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "COMMON",
+	"description": "Restore 4 Health to ALL minions.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "HealSpell",
-		"value": 4,
-		"target": "ALL_MINIONS"
+		"target": "ALL_MINIONS",
+		"value": 4
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

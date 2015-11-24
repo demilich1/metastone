@@ -1,14 +1,21 @@
 {
+	"id": "weapon_ogre_warmaul",
 	"name": "Ogre Warmaul",
+	"baseManaCost": 3,
+	"type": "WEAPON",
+	"damage": 4,
+	"durability": 2,
+	"heroClass": "WARRIOR",
+	"rarity": "COMMON",
 	"description": "50% chance to attack the wrong enemy.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "TargetAcquisitionTrigger",
-			"actionType": "PHYSICAL_ATTACK",
-			"entityType": "HERO",
 			"condition": {
 				"class": "RandomCondition"
-			}
+			},
+			"actionType": "PHYSICAL_ATTACK",
+			"entityType": "HERO"
 		},
 		"spell": {
 			"class": "FumbleSpell",
@@ -16,13 +23,6 @@
 		}
 	},
 	"collectible": true,
-	"id": "weapon_ogre_warmaul",
-	"type": "WEAPON",
-	"rarity": "COMMON",
-	"heroClass": "WARRIOR",
-	"baseManaCost": 3,
-	"damage": 4,
-	"durability": 2,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

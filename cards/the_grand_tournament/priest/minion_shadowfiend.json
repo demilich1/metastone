@@ -1,6 +1,13 @@
 {
+	"id": "minion_shadowfiend",
+	"name": "Shadowfiend",
+	"baseManaCost": 3,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 3,
+	"heroClass": "PRIEST",
+	"rarity": "EPIC",
+	"description": "Whenever you draw a card, reduce its Cost by (1).",
 	"trigger": {
 		"eventTrigger": {
 			"class": "CardDrawnTrigger",
@@ -8,19 +15,12 @@
 		},
 		"spell": {
 			"class": "ModifyAttributeSpell",
-			"attribute": "MANA_COST_MODIFIER",
+			"target": "EVENT_TARGET",
 			"value": -1,
-			"target": "EVENT_TARGET"
+			"attribute": "MANA_COST_MODIFIER"
 		}
 	},
-	"id": "minion_shadowfiend",
-	"name": "Shadowfiend",
-	"description": "Whenever you draw a card, reduce its Cost by (1).",
-	"type": "MINION",
-	"heroClass": "PRIEST",
-	"rarity": "EPIC",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 3,
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

@@ -1,19 +1,22 @@
 {
-	"name": "Death's Bite",
-	"description": "Deathrattle: Deal 1 damage to all minions.",
-	"collectible": true,
 	"id": "weapon_death_bite",
-	"type": "WEAPON",
-	"rarity": "COMMON",
-	"heroClass": "WARRIOR",
+	"name": "Death's Bite",
 	"baseManaCost": 4,
+	"type": "WEAPON",
 	"damage": 4,
 	"durability": 2,
+	"heroClass": "WARRIOR",
+	"rarity": "COMMON",
+	"description": "Deathrattle: Deal 1 damage to all minions.",
 	"deathrattle": {
 		"class": "DamageSpell",
 		"target": "ALL_MINIONS",
 		"value": 1
 	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
 	"set": "NAXXRAMAS",
 	"fileFormatVersion": 1
 }

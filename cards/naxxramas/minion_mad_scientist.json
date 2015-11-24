@@ -1,16 +1,19 @@
 {
+	"id": "minion_mad_scientist",
+	"name": "Mad Scientist",
+	"baseManaCost": 2,
+	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 2,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Deathrattle: Put a Secret from your deck into the battlefield.",
 	"deathrattle": {
 		"class": "PutRandomSecretIntoPlaySpell"
 	},
-	"id": "minion_mad_scientist",
-	"name": "Mad Scientist",
-	"description": "Deathrattle: Put a Secret from your deck into the battlefield.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "COMMON",
-	"baseManaCost": 2,
+	"attributes": {
+		"DEATHRATTLES": true
+	},
 	"collectible": true,
 	"set": "NAXXRAMAS",
 	"fileFormatVersion": 1

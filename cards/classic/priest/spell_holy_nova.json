@@ -1,23 +1,23 @@
 {
-	"name": "Holy Nova",
-	"description": "Deal 2 damage to all enemies. Restore 2 Health to all friendly characters.",
 	"id": "spell_holy_nova",
-	"type": "SPELL",
-	"rarity": "FREE",
-	"heroClass": "PRIEST",
+	"name": "Holy Nova",
 	"baseManaCost": 5,
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "FREE",
+	"description": "Deal 2 damage to all enemies. Restore 2 Health to all friendly characters.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
 		"spell1": {
 			"class": "DamageSpell",
-			"value": 2,
-			"target": "ENEMY_CHARACTERS"
+			"target": "ENEMY_CHARACTERS",
+			"value": 2
 		},
 		"spell2": {
 			"class": "HealSpell",
-			"value": 2,
-			"target": "FRIENDLY_CHARACTERS"
+			"target": "FRIENDLY_CHARACTERS",
+			"value": 2
 		}
 	},
 	"set": "CLASSIC",

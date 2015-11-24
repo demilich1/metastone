@@ -1,29 +1,29 @@
 {
+	"id": "minion_druid_of_the_fang",
+	"name": "Druid of the Fang",
+	"baseManaCost": 5,
+	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 4,
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"description": "Battlecry: If you have a Beast, transform this minion into a 7/7.",
 	"battlecry": {
 		"spell": {
 			"class": "TransformMinionSpell",
+			"target": "SELF",
 			"card": "token_cobra_form",
 			"condition": {
 				"class": "RaceOnBoardCondition",
 				"race": "BEAST"
-			},
-			"target": "SELF"
+			}
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_druid_of_the_fang",
-	"name": "Druid of the Fang",
-	"description": "Battlecry: If you have a Beast, transform this minion into a 7/7.",
-	"type": "MINION",
-	"heroClass": "DRUID",
-	"rarity": "COMMON",
-	"baseManaCost": 5,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

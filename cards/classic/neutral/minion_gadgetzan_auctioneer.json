@@ -1,6 +1,13 @@
 {
+	"id": "minion_gadgetzan_auctioneer",
+	"name": "Gadgetzan Auctioneer",
+	"baseManaCost": 6,
+	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "Whenever you cast a spell, draw a card.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "SpellCastedTrigger",
@@ -11,13 +18,6 @@
 			"value": 1
 		}
 	},
-	"id": "minion_gadgetzan_auctioneer",
-	"name": "Gadgetzan Auctioneer",
-	"description": "Whenever you cast a spell, draw a card.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "RARE",
-	"baseManaCost": 6,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

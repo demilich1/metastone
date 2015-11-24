@@ -1,6 +1,13 @@
 {
+	"id": "minion_stoneskin_gargoyle",
+	"name": "Stoneskin Gargoyle",
+	"baseManaCost": 3,
+	"type": "MINION",
 	"baseAttack": 1,
 	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "At the start of your turn, restore this minion to full Health.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "TurnStartTrigger",
@@ -11,13 +18,6 @@
 			"target": "SELF"
 		}
 	},
-	"id": "minion_stoneskin_gargoyle",
-	"name": "Stoneskin Gargoyle",
-	"description": "At the start of your turn, restore this minion to full Health.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "COMMON",
-	"baseManaCost": 3,
 	"collectible": true,
 	"set": "NAXXRAMAS",
 	"fileFormatVersion": 1

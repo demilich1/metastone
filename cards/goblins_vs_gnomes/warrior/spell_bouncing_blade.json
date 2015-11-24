@@ -1,25 +1,25 @@
 {
-	"targetSelection": "NONE",
 	"id": "spell_bouncing_blade",
+	"name": "Bouncing Blade",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "WARRIOR",
+	"rarity": "EPIC",
+	"description": "Deals 1 damage to a random minion. Repeat until a minion dies.",
+	"targetSelection": "NONE",
 	"spell": {
 		"class": "CastRepeatedlySpell",
-		"howMany": 80,
 		"spell1": {
 			"class": "DamageSpell",
 			"value": 1
 		},
+		"target": "ALL_MINIONS",
+		"randomTarget": true,
 		"condition": {
 			"class": "IsDeadCondition"
 		},
-		"target": "ALL_MINIONS",
-		"randomTarget": true
+		"howMany": 80
 	},
-	"name": "Bouncing Blade",
-	"description": "Deals 1 damage to a random minion. Repeat until a minion dies.",
-	"type": "SPELL",
-	"heroClass": "WARRIOR",
-	"rarity": "EPIC",
-	"baseManaCost": 3,
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

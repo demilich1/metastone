@@ -1,6 +1,13 @@
 {
+	"id": "minion_mech-bear-cat",
+	"name": "Mech-Bear-Cat",
+	"baseManaCost": 6,
+	"type": "MINION",
 	"baseAttack": 7,
 	"baseHp": 6,
+	"heroClass": "DRUID",
+	"rarity": "RARE",
+	"description": "Whenever this minion takes damage, add a Spare Part card to your hand.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "SelfDamagedTrigger"
@@ -19,13 +26,6 @@
 		}
 	},
 	"race": "MECH",
-	"id": "minion_mech-bear-cat",
-	"name": "Mech-Bear-Cat",
-	"description": "Whenever this minion takes damage, add a Spare Part card to your hand.",
-	"type": "MINION",
-	"heroClass": "DRUID",
-	"rarity": "RARE",
-	"baseManaCost": 6,
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

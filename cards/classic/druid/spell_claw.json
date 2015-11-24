@@ -1,17 +1,17 @@
 {
-	"name": "Claw",
-	"description": "Give your hero +2 Attack this turn and 2 Armor.",
 	"id": "spell_claw",
-	"type": "SPELL",
-	"rarity": "FREE",
-	"heroClass": "DRUID",
+	"name": "Claw",
 	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "FREE",
+	"description": "Give your hero +2 Attack this turn and 2 Armor.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "BuffHeroSpell",
+		"target": "FRIENDLY_HERO",
 		"attackBonus": 2,
-		"armorBonus": 2,
-		"target": "FRIENDLY_HERO"
+		"armorBonus": 2
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

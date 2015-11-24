@@ -1,4 +1,12 @@
 {
+	"id": "spell_power_of_the_horde",
+	"name": "Power of the Horde",
+	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "Summon a random Horde Warrior.",
+	"targetSelection": "NONE",
 	"spell": {
 		"class": "SummonRandomSpell",
 		"cards": [
@@ -10,15 +18,7 @@
 			"minion_cairne_bloodhoof"
 		]
 	},
-	"id": "spell_power_of_the_horde",
-	"name": "Power of the Horde",
-	"description": "Summon a random Horde Warrior.",
-	"type": "SPELL",
-	"heroClass": "ANY",
-	"rarity": "FREE",
-	"baseManaCost": 4,
 	"collectible": false,
-	"targetSelection": "NONE",
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

@@ -1,6 +1,13 @@
 {
+	"id": "minion_emperor_cobra",
+	"name": "Emperor Cobra",
+	"baseManaCost": 3,
+	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 3,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "Destroy any minion damaged by this minion.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "DamageCausedTrigger",
@@ -12,13 +19,6 @@
 		}
 	},
 	"race": "BEAST",
-	"id": "minion_emperor_cobra",
-	"name": "Emperor Cobra",
-	"description": "Destroy any minion damaged by this minion.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "RARE",
-	"baseManaCost": 3,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

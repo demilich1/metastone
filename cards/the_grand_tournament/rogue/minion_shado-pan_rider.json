@@ -1,29 +1,26 @@
 {
+	"id": "minion_shado-pan_rider",
+	"name": "Shado-Pan Rider",
+	"baseManaCost": 5,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 7,
+	"heroClass": "ROGUE",
+	"rarity": "COMMON",
+	"description": "Combo: Gain +3 Attack.",
 	"battlecry": {
+		"targetSelection": "NONE",
 		"spell": {
 			"class": "BuffSpell",
-			"attackBonus": 3,
-			"target": "SELF"
+			"target": "SELF",
+			"attackBonus": 3
 		},
 		"condition": {
 			"class": "ComboCondition"
 		},
-		"targetSelection": "NONE",
 		"resolvedLate": false
 	},
-	"id": "minion_shado-pan_rider",
-	"name": "Shado-Pan Rider",
-	"description": "Combo: Gain +3 Attack.",
-	"type": "MINION",
-	"heroClass": "ROGUE",
-	"rarity": "COMMON",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 5,
 	"collectible": true,
-	"attributes": {
-		"BATTLECRY": true
-	},
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

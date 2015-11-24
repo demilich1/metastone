@@ -1,18 +1,21 @@
 {
-	"baseAttack": 4,
-	"baseHp": 4,
-	"deathrattle": {
-		"class": "DrawCardSpell",
-		"value": 1,
-		"targetPlayer": "OPPONENT"
-	},
 	"id": "minion_dancing_swords",
 	"name": "Dancing Swords",
-	"description": "Deathrattle: Your opponent draws a card.",
+	"baseManaCost": 3,
 	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 4,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"baseManaCost": 3,
+	"description": "Deathrattle: Your opponent draws a card.",
+	"deathrattle": {
+		"class": "DrawCardSpell",
+		"targetPlayer": "OPPONENT",
+		"value": 1
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
 	"collectible": true,
 	"set": "NAXXRAMAS",
 	"fileFormatVersion": 1

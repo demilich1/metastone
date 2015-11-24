@@ -1,11 +1,11 @@
 {
-	"name": "Living Roots",
-	"description": "Choose One - Deal 2 damage; or Summon two 1/1 Saplings.",
 	"id": "spell_living_roots",
-	"type": "CHOOSE_ONE",
-	"rarity": "COMMON",
-	"heroClass": "DRUID",
+	"name": "Living Roots",
 	"baseManaCost": 1,
+	"type": "CHOOSE_ONE",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"description": "Choose One - Deal 2 damage; or Summon two 1/1 Saplings.",
 	"targetSelection": "NONE",
 	"options": [
 		"spell_living_roots_1",

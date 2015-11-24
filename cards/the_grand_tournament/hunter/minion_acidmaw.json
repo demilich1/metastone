@@ -1,11 +1,18 @@
 {
+	"id": "minion_acidmaw",
+	"name": "Acidmaw",
+	"baseManaCost": 7,
+	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 2,
+	"heroClass": "HUNTER",
+	"rarity": "LEGENDARY",
+	"description": "Whenever another minion takes damage, destroy it.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "DamageReceivedTrigger",
-			"entityType": "MINION",
 			"targetPlayer": "BOTH",
+			"entityType": "MINION",
 			"ignoreHost": true
 		},
 		"spell": {
@@ -14,14 +21,7 @@
 		}
 	},
 	"race": "BEAST",
-	"id": "minion_acidmaw",
-	"name": "Acidmaw",
-	"description": "Whenever another minion takes damage, destroy it.",
-	"type": "MINION",
-	"heroClass": "HUNTER",
-	"rarity": "LEGENDARY",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 7,
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

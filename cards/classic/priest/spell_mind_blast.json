@@ -1,16 +1,16 @@
 {
-	"name": "Mind Blast",
-	"description": "Deal 5 damage to the enemy hero.",
 	"id": "spell_mind_blast",
-	"type": "SPELL",
-	"rarity": "FREE",
-	"heroClass": "PRIEST",
+	"name": "Mind Blast",
 	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "FREE",
+	"description": "Deal 5 damage to the enemy hero.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "DamageSpell",
-		"value": 5,
-		"target": "ENEMY_HERO"
+		"target": "ENEMY_HERO",
+		"value": 5
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

@@ -1,15 +1,15 @@
 {
+	"id": "spell_holy_wrath",
+	"name": "Holy Wrath",
+	"baseManaCost": 5,
+	"type": "SPELL",
+	"heroClass": "PALADIN",
+	"rarity": "RARE",
+	"description": "Draw a card and deal damage equal to its cost.",
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "custom.HolyWrathSpell"
 	},
-	"id": "spell_holy_wrath",
-	"name": "Holy Wrath",
-	"description": "Draw a card and deal damage equal to its cost.",
-	"type": "SPELL",
-	"heroClass": "PALADIN",
-	"rarity": "RARE",
-	"baseManaCost": 5,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

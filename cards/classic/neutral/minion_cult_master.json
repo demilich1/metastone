@@ -1,6 +1,13 @@
 {
+	"id": "minion_cult_master",
+	"name": "Cult Master",
+	"baseManaCost": 4,
+	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 2,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Whenever one of your other minions dies, draw a card.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "MinionDeathTrigger",
@@ -11,13 +18,6 @@
 			"value": 1
 		}
 	},
-	"id": "minion_cult_master",
-	"name": "Cult Master",
-	"description": "Whenever one of your other minions dies, draw a card.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "COMMON",
-	"baseManaCost": 4,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

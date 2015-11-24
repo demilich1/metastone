@@ -1,25 +1,25 @@
 {
+	"id": "minion_shieldmaiden",
+	"name": "Shieldmaiden",
+	"baseManaCost": 6,
+	"type": "MINION",
 	"baseAttack": 5,
 	"baseHp": 5,
+	"heroClass": "WARRIOR",
+	"rarity": "RARE",
+	"description": "Battlecry: Gain 5 Armor.",
 	"battlecry": {
 		"spell": {
 			"class": "BuffHeroSpell",
-			"armorBonus": 5,
-			"target": "FRIENDLY_HERO"
+			"target": "FRIENDLY_HERO",
+			"armorBonus": 5
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_shieldmaiden",
-	"name": "Shieldmaiden",
-	"description": "Battlecry: Gain 5 Armor.",
-	"type": "MINION",
-	"heroClass": "WARRIOR",
-	"rarity": "RARE",
-	"baseManaCost": 6,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

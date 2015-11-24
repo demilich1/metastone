@@ -1,19 +1,19 @@
 {
-	"name": "Timepiece of Horror",
-	"description": "Deal 10 damage randomly split among all enemies.",
 	"id": "spell_timepiece_of_horror",
-	"type": "SPELL",
-	"rarity": "FREE",
-	"heroClass": "ANY",
+	"name": "Timepiece of Horror",
 	"baseManaCost": 10,
-	"collectible": false,
+	"type": "SPELL",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "Deal 10 damage randomly split among all enemies.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MissilesSpell",
+		"target": "ENEMY_CHARACTERS",
 		"value": 1,
-		"howMany": 10,
-		"target": "ENEMY_CHARACTERS"
+		"howMany": 10
 	},
+	"collectible": false,
 	"set": "LEAGUE_OF_EXPLORERS",
 	"fileFormatVersion": 1
 }

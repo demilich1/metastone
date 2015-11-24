@@ -1,27 +1,27 @@
 {
-	"targetSelection": "NONE",
 	"id": "spell_call_pet",
+	"name": "Call Pet",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "HUNTER",
+	"rarity": "RARE",
+	"description": "Draw a card, if it's a Beast it costs (4) less.",
+	"targetSelection": "NONE",
 	"spell": {
 		"class": "DrawCardAndDoSomethingSpell",
 		"spell": {
 			"class": "ConditionalSpell",
+			"spell": {
+				"class": "ModifyAttributeSpell",
+				"value": -4,
+				"attribute": "MANA_COST_MODIFIER"
+			},
 			"condition": {
 				"class": "RaceCondition",
 				"race": "BEAST"
-			},
-			"spell": {
-				"class": "ModifyAttributeSpell",
-				"attribute": "MANA_COST_MODIFIER",
-				"value": -4
 			}
 		}
 	},
-	"name": "Call Pet",
-	"description": "Draw a card, if it's a Beast it costs (4) less.",
-	"type": "SPELL",
-	"heroClass": "HUNTER",
-	"rarity": "RARE",
-	"baseManaCost": 2,
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

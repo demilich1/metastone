@@ -1,20 +1,20 @@
 {
-	"targetSelection": "NONE",
-	"spell": {
-		"class": "SummonSpell",
-		"card": "token_hound",
-		"valueProvider": {
-			"class": "EntityCounter",
-			"target": "ENEMY_MINIONS"
-		}
-	},
 	"id": "spell_unleash_the_hounds",
 	"name": "Unleash the Hounds",
-	"description": "For each enemy minion, summon a 1/1 Hound with Charge.",
+	"baseManaCost": 3,
 	"type": "SPELL",
 	"heroClass": "HUNTER",
 	"rarity": "COMMON",
-	"baseManaCost": 3,
+	"description": "For each enemy minion, summon a 1/1 Hound with Charge.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "SummonSpell",
+		"valueProvider": {
+			"class": "EntityCounter",
+			"target": "ENEMY_MINIONS"
+		},
+		"card": "token_hound"
+	},
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

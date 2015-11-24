@@ -1,31 +1,31 @@
 {
+	"id": "minion_blackwing_technician",
+	"name": "Blackwing Technician",
+	"baseManaCost": 3,
+	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Battlecry: If you're holding a Dragon, gain +1/+1.",
 	"battlecry": {
+		"targetSelection": "NONE",
 		"spell": {
 			"class": "BuffSpell",
+			"target": "SELF",
 			"attackBonus": 1,
-			"hpBonus": 1,
-			"target": "SELF"
+			"hpBonus": 1
 		},
 		"condition": {
 			"class": "HoldsCardCondition",
 			"race": "DRAGON"
 		},
-		"targetSelection": "NONE",
 		"resolvedLate": false
 	},
-	"id": "minion_blackwing_technician",
-	"name": "Blackwing Technician",
-	"description": "Battlecry: If you're holding a Dragon, gain +1/+1.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "COMMON",
-	"baseManaCost": 3,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "BLACKROCK_MOUNTAIN",
 	"fileFormatVersion": 1
 }

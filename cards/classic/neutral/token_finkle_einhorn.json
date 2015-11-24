@@ -1,13 +1,13 @@
 {
-	"baseAttack": 3,
-	"baseHp": 3,
 	"id": "token_finkle_einhorn",
 	"name": "Finkle Einhorn",
-	"description": "",
+	"baseManaCost": 2,
 	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 3,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
-	"baseManaCost": 2,
+	"description": "",
 	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

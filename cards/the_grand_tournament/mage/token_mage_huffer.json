@@ -1,18 +1,18 @@
 {
-	"baseAttack": 4,
-	"baseHp": 2,
-	"race": "BEAST",
 	"id": "token_mage_huffer",
 	"name": "Boar",
-	"description": "Charge",
+	"baseManaCost": 3,
 	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 2,
 	"heroClass": "MAGE",
 	"rarity": "FREE",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 3,
-	"collectible": false,
+	"description": "Charge",
+	"race": "BEAST",
 	"attributes": {
 		"CHARGE": true
 	},
+	"collectible": false,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

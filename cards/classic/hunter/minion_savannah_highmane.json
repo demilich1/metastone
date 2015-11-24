@@ -1,13 +1,13 @@
 {
-	"name": "Savannah Highmane",
-	"description": "Deathrattle: Summon two 2/2 Hyenas.",
 	"id": "minion_savannah_highmane",
-	"type": "MINION",
-	"rarity": "RARE",
-	"heroClass": "HUNTER",
+	"name": "Savannah Highmane",
 	"baseManaCost": 6,
+	"type": "MINION",
 	"baseAttack": 6,
 	"baseHp": 5,
+	"heroClass": "HUNTER",
+	"rarity": "RARE",
+	"description": "Deathrattle: Summon two 2/2 Hyenas.",
 	"deathrattle": {
 		"class": "SummonSpell",
 		"cards": [
@@ -16,6 +16,9 @@
 		]
 	},
 	"race": "BEAST",
+	"attributes": {
+		"DEATHRATTLES": true
+	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

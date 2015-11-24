@@ -1,13 +1,13 @@
 {
-	"baseAttack": 4,
-	"baseHp": 4,
 	"id": "token_nerubian",
 	"name": "Nerubian",
-	"description": "",
+	"baseManaCost": 2,
 	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 4,
 	"heroClass": "ANY",
 	"rarity": "FREE",
-	"baseManaCost": 2,
+	"description": "",
 	"collectible": false,
 	"set": "NAXXRAMAS",
 	"fileFormatVersion": 1

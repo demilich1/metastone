@@ -1,0 +1,32 @@
+{
+	"id": "minion_archthief_rafaam",
+	"name": "Arch-Thief Rafaam",
+	"baseManaCost": 9,
+	"type": "MINION",
+	"baseAttack": 7,
+	"baseHp": 8,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Discover a powerful Artifact.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "DiscoverCardSpell",
+			"spell1": {
+				"class": "ReceiveCardSpell"
+			},
+			"cards": [
+				"spell_lantern_of_power",
+				"spell_mirror_of_doom",
+				"spell_timepiece_of_horror"
+			]
+		},
+		"resolvedLate": false
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}

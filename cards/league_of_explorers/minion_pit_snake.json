@@ -1,13 +1,13 @@
 {
-	"baseAttack": 2,
-	"baseHp": 1,
 	"id": "minion_pit_snake",
 	"name": "Pit Snake",
-	"description": "Destroy any minion damaged by this minion.",
-	"race": "BEAST",
+	"baseManaCost": 1,
 	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 1,
 	"heroClass": "ROGUE",
 	"rarity": "COMMON",
+	"description": "Destroy any minion damaged by this minion.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "DamageCausedTrigger",
@@ -18,7 +18,7 @@
 			"target": "EVENT_TARGET"
 		}
 	},
-	"baseManaCost": 1,
+	"race": "BEAST",
 	"collectible": true,
 	"set": "LEAGUE_OF_EXPLORERS",
 	"fileFormatVersion": 1

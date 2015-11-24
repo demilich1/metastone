@@ -1,14 +1,14 @@
 {
-	"name": "Poisoned Dagger",
-	"description": "",
-	"collectible": false,
 	"id": "weapon_poisoned_dagger",
-	"type": "WEAPON",
-	"rarity": "FREE",
-	"heroClass": "ROGUE",
+	"name": "Poisoned Dagger",
 	"baseManaCost": 1,
+	"type": "WEAPON",
 	"damage": 2,
 	"durability": 2,
+	"heroClass": "ROGUE",
+	"rarity": "FREE",
+	"description": "",
+	"collectible": false,
 	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

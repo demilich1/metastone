@@ -1,6 +1,12 @@
 {
-	"targetSelection": "ANY",
 	"id": "spell_ice_lance",
+	"name": "Ice Lance",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "COMMON",
+	"description": "Freeze a character. If it was already Frozen, deal 4 damage instead.",
+	"targetSelection": "ANY",
 	"spell": {
 		"class": "EitherOrSpell",
 		"spell1": {
@@ -13,16 +19,10 @@
 		},
 		"condition": {
 			"class": "AttributeCondition",
-			"operation": "HAS",
-			"attribute": "FROZEN"
+			"attribute": "FROZEN",
+			"operation": "HAS"
 		}
 	},
-	"name": "Ice Lance",
-	"description": "Freeze a character. If it was already Frozen, deal 4 damage instead.",
-	"type": "SPELL",
-	"heroClass": "MAGE",
-	"rarity": "COMMON",
-	"baseManaCost": 1,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

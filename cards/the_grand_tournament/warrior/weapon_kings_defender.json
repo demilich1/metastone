@@ -1,18 +1,15 @@
 {
-	"name": "King's Defender",
-	"description": "Battlecry: If you have a minion with Taunt, gain +1 Durability.",
-	"collectible": true,
 	"id": "weapon_kings_defender",
-	"type": "WEAPON",
-	"rarity": "RARE",
-	"heroClass": "WARRIOR",
+	"name": "King's Defender",
 	"baseManaCost": 3,
+	"type": "WEAPON",
 	"damage": 3,
 	"durability": 2,
-	"attributes": {
-		"BATTLECRY": true
-	},
+	"heroClass": "WARRIOR",
+	"rarity": "RARE",
+	"description": "Battlecry: If you have a minion with Taunt, gain +1 Durability.",
 	"battlecry": {
+		"targetSelection": "NONE",
 		"spell": {
 			"class": "ModifyDurabilitySpell",
 			"targetPlayer": "SELF",
@@ -20,16 +17,19 @@
 		},
 		"condition": {
 			"class": "HasEntityCondition",
+			"target": "FRIENDLY_MINIONS",
 			"filter": {
 				"class": "AttributeFilter",
 				"attribute": "TAUNT",
 				"operation": "HAS"
-			},
-			"target": "FRIENDLY_MINIONS"
+			}
 		},
-		"targetSelection": "NONE",
 		"resolvedLate": true
 	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
 	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

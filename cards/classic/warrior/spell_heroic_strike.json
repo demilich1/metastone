@@ -1,16 +1,16 @@
 {
-	"name": "Heroic Strike",
-	"description": "Give your hero +4 Attack this turn.",
 	"id": "spell_heroic_strike",
-	"type": "SPELL",
-	"rarity": "FREE",
-	"heroClass": "WARRIOR",
+	"name": "Heroic Strike",
 	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "WARRIOR",
+	"rarity": "FREE",
+	"description": "Give your hero +4 Attack this turn.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "BuffHeroSpell",
-		"attackBonus": 4,
-		"target": "FRIENDLY_HERO"
+		"target": "FRIENDLY_HERO",
+		"attackBonus": 4
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

@@ -1,6 +1,13 @@
 {
+	"id": "minion_arathi_weaponsmith",
+	"name": "Arathi Weaponsmith",
+	"baseManaCost": 4,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 3,
+	"heroClass": "WARRIOR",
+	"rarity": "COMMON",
+	"description": "Battlecry: Equip a 2/2 weapon.",
 	"battlecry": {
 		"spell": {
 			"class": "EquipWeaponSpell",
@@ -8,17 +15,10 @@
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_arathi_weaponsmith",
-	"name": "Arathi Weaponsmith",
-	"description": "Battlecry: Equip a 2/2 weapon.",
-	"type": "MINION",
-	"heroClass": "WARRIOR",
-	"rarity": "COMMON",
-	"baseManaCost": 4,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

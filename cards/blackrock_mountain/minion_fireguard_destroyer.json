@@ -1,30 +1,30 @@
 {
+	"id": "minion_fireguard_destroyer",
+	"name": "Fireguard Destroyer",
+	"baseManaCost": 4,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 6,
+	"heroClass": "SHAMAN",
+	"rarity": "COMMON",
+	"description": "Battlecry: Gain 1-4 Attack. Overload: (1)",
 	"battlecry": {
 		"spell": {
 			"class": "BuffSpell",
+			"target": "SELF",
 			"attackValueProvider": {
 				"class": "RandomValueProvider",
 				"min": 1,
 				"max": 4
-			},
-			"target": "SELF"
+			}
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_fireguard_destroyer",
-	"name": "Fireguard Destroyer",
-	"description": "Battlecry: Gain 1-4 Attack. Overload: (1)",
-	"type": "MINION",
-	"heroClass": "SHAMAN",
-	"rarity": "COMMON",
-	"baseManaCost": 4,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true,
 		"OVERLOAD": 1
 	},
+	"collectible": true,
 	"set": "BLACKROCK_MOUNTAIN",
 	"fileFormatVersion": 1
 }

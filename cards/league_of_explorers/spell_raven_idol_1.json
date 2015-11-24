@@ -1,0 +1,23 @@
+{
+	"id": "spell_raven_idol_1",
+	"name": "Discover a minion",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"description": "Discover a minion.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "DiscoverRandomCardSpell",
+		"spell1": {
+			"class": "ReceiveCardSpell"
+		},
+		"cardFilter": {
+			"class": "CardFilter",
+			"cardType": "MINION"
+		}
+	},
+	"collectible": false,
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}

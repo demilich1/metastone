@@ -1,16 +1,16 @@
 {
-	"targetSelection": "NONE",
 	"id": "hero_power_reinforce",
 	"name": "Reinforce",
-	"description": "Summon a 1/1 Silver Hand Recruit.",
+	"baseManaCost": 2,
 	"type": "HERO_POWER",
 	"heroClass": "PALADIN",
 	"rarity": "FREE",
+	"description": "Summon a 1/1 Silver Hand Recruit.",
+	"targetSelection": "NONE",
 	"spell": {
 		"class": "SummonSpell",
 		"card": "token_silver_hand_recruit"
 	},
-	"baseManaCost": 2,
 	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

@@ -1,12 +1,19 @@
 {
+	"id": "minion_shady_dealer",
+	"name": "Shady Dealer",
+	"baseManaCost": 3,
+	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 3,
+	"heroClass": "ROGUE",
+	"rarity": "RARE",
+	"description": "Battlecry: If you have a Pirate, gain +1/+1.",
 	"battlecry": {
 		"spell": {
 			"class": "BuffSpell",
+			"target": "SELF",
 			"attackBonus": 1,
-			"hpBonus": 1,
-			"target": "SELF"
+			"hpBonus": 1
 		},
 		"condition": {
 			"class": "RaceOnBoardCondition",
@@ -14,17 +21,10 @@
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_shady_dealer",
-	"name": "Shady Dealer",
-	"description": "Battlecry: If you have a Pirate, gain +1/+1.",
-	"type": "MINION",
-	"heroClass": "ROGUE",
-	"rarity": "RARE",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 3,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

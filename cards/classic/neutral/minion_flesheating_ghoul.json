@@ -1,6 +1,13 @@
 {
+	"id": "minion_flesheating_ghoul",
+	"name": "Flesheating Ghoul",
+	"baseManaCost": 3,
+	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 3,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Whenever a minion dies, gain +1 Attack.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "MinionDeathTrigger",
@@ -8,17 +15,10 @@
 		},
 		"spell": {
 			"class": "BuffSpell",
-			"attackBonus": 1,
-			"target": "SELF"
+			"target": "SELF",
+			"attackBonus": 1
 		}
 	},
-	"id": "minion_flesheating_ghoul",
-	"name": "Flesheating Ghoul",
-	"description": "Whenever a minion dies, gain +1 Attack.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "COMMON",
-	"baseManaCost": 3,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

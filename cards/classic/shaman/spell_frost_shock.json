@@ -1,11 +1,11 @@
 {
-	"name": "Frost Shock",
-	"description": "Deal 1 damage to an enemy character and Freeze it.",
 	"id": "spell_frost_shock",
-	"type": "SPELL",
-	"rarity": "FREE",
-	"heroClass": "SHAMAN",
+	"name": "Frost Shock",
 	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "SHAMAN",
+	"rarity": "FREE",
+	"description": "Deal 1 damage to an enemy character and Freeze it.",
 	"targetSelection": "ENEMY_CHARACTERS",
 	"spell": {
 		"class": "MetaSpell",

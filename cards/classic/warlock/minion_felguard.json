@@ -1,7 +1,13 @@
 {
+	"id": "minion_felguard",
+	"name": "Felguard",
+	"baseManaCost": 3,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 5,
-	"race": "DEMON",
+	"heroClass": "WARLOCK",
+	"rarity": "FREE",
+	"description": "Taunt. Battlecry: Destroy one of your Mana Crystals.",
 	"battlecry": {
 		"spell": {
 			"class": "ModifyMaxManaSpell",
@@ -9,18 +15,12 @@
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_felguard",
-	"name": "Felguard",
-	"description": "Taunt. Battlecry: Destroy one of your Mana Crystals.",
-	"type": "MINION",
-	"heroClass": "WARLOCK",
-	"rarity": "FREE",
-	"baseManaCost": 3,
-	"collectible": true,
+	"race": "DEMON",
 	"attributes": {
 		"BATTLECRY": true,
 		"TAUNT": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

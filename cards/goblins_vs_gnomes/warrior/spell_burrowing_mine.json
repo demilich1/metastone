@@ -1,4 +1,11 @@
 {
+	"id": "spell_burrowing_mine",
+	"name": "Burrowing Mine",
+	"baseManaCost": 0,
+	"type": "SPELL",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "When you draw this, it explodes. You take 10 damage and draw a card.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "NullSpell"
@@ -23,13 +30,6 @@
 			}
 		}
 	},
-	"id": "spell_burrowing_mine",
-	"name": "Burrowing Mine",
-	"description": "When you draw this, it explodes. You take 10 damage and draw a card.",
-	"type": "SPELL",
-	"heroClass": "ANY",
-	"rarity": "FREE",
-	"baseManaCost": 0,
 	"collectible": false,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

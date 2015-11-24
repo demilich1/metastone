@@ -1,7 +1,13 @@
 {
+	"id": "minion_kings_elekk",
+	"name": "King's Elekk",
+	"baseManaCost": 2,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 2,
-	"race": "BEAST",
+	"heroClass": "HUNTER",
+	"rarity": "COMMON",
+	"description": "Battlecry: Reveal a minion in each deck. If yours costs more, draw it.",
 	"battlecry": {
 		"spell": {
 			"class": "JoustSpell",
@@ -11,17 +17,11 @@
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_kings_elekk",
-	"name": "King's Elekk",
-	"description": "Battlecry: Reveal a minion in each deck. If yours costs more, draw it.",
-	"type": "MINION",
-	"heroClass": "HUNTER",
-	"rarity": "COMMON",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 2,
-	"collectible": true,
+	"race": "BEAST",
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

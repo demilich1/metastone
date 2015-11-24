@@ -1,0 +1,25 @@
+{
+	"id": "spell_mirror_of_doom",
+	"name": "Mirror of Doom",
+	"baseManaCost": 10,
+	"type": "SPELL",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "Fill your board with 3/3 Mummy Zombies.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "SummonSpell",
+		"cards": [
+			"token_mummy_zombie",
+			"token_mummy_zombie",
+			"token_mummy_zombie",
+			"token_mummy_zombie",
+			"token_mummy_zombie",
+			"token_mummy_zombie",
+			"token_mummy_zombie"
+		]
+	},
+	"collectible": false,
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}

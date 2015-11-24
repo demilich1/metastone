@@ -170,7 +170,8 @@ public class GameLogic implements Cloneable {
 	}
 
 	public int applySpellpower(Player player, Entity source, int baseValue) {
-		int spellpower = getTotalAttributeValue(player, Attribute.SPELL_DAMAGE);
+		int spellpower = getTotalAttributeValue(player, Attribute.SPELL_DAMAGE)
+				+ getTotalAttributeValue(context.getOpponent(player), Attribute.OPPONENT_SPELL_DAMAGE);
 		if (source.hasAttribute(Attribute.SPELL_DAMAGE_MULTIPLIER)) {
 			spellpower *= source.getAttributeValue(Attribute.SPELL_DAMAGE_MULTIPLIER);
 		}
@@ -246,7 +247,10 @@ public class GameLogic implements Cloneable {
 		// note: this code block is basically exclusively for the SpellBender
 		// Secret, but it can easily be expanded if targets of area of effect
 		// spell should be changeable as well
-		Card sourceCard = source.getEntityType() == EntityType.CARD ? (Card) source : null;
+		Card sourceCard = null;
+		if (source != null) {
+			sourceCard = source.getEntityType() == EntityType.CARD ? (Card) source : null;
+		}
 		if (sourceCard != null && sourceCard.getCardType() == CardType.SPELL && !spellDesc.hasPredefinedTarget() && targets != null
 				&& targets.size() == 1) {
 			if (sourceCard instanceof SpellCard) {
@@ -361,6 +365,9 @@ public class GameLogic implements Cloneable {
 			damage = applyAmplify(player, damage);
 		}
 		int damageDealt = 0;
+		if (target.hasAttribute(Attribute.TAKE_DOUBLE_DAMAGE)) {
+			damage *= 2;
+		}
 		switch (target.getEntityType()) {
 		case MINION:
 			damageDealt = damageMinion(player, (Actor) target, damage);
@@ -372,7 +379,11 @@ public class GameLogic implements Cloneable {
 				target = meatshield;
 				damageDealt = damageMinion(player, meatshield, damage);
 				break;
-			} else if (isFatalDamage(target, damage)) {
+			}
+			if (hasAttribute(context.getPlayer(target.getOwner()), Attribute.ARMOR_SUIT)) {
+				damage = Math.min(damage, 1);
+			}
+			if (isFatalDamage(target, damage)) {
 				FatalDamageEvent fatalDamageEvent = new FatalDamageEvent(context, target);
 				context.fireGameEvent(fatalDamageEvent);
 			}
@@ -396,9 +407,6 @@ public class GameLogic implements Cloneable {
 		if (hero.hasAttribute(Attribute.IMMUNE)) {
 			log("{} is IMMUNE and does not take damage", hero);
 			return 0;
-		}
-		if (hero.hasAttribute(Attribute.CURSED)) {
-			damage *= 2;
 		}
 		int effectiveHp = hero.getHp() + hero.getArmor();
 		hero.modifyArmor(-damage);
@@ -1099,7 +1107,7 @@ public class GameLogic implements Cloneable {
 		context.fireGameEvent(cardPlayedEvent);
 
 		if (card.hasAttribute(Attribute.OVERLOAD)) {
-			context.fireGameEvent(new OverloadEvent(context, playerId));
+			context.fireGameEvent(new OverloadEvent(context, playerId, card));
 		}
 
 		removeCard(playerId, card);
@@ -1262,10 +1270,6 @@ public class GameLogic implements Cloneable {
 	}
 	
 	private void resolveBattlecry(int playerId, Actor actor) {
-		resolveBattlecry(playerId, actor, 0);
-	}
-
-	private void resolveBattlecry(int playerId, Actor actor, int iteration) {
 		BattlecryAction battlecry = actor.getBattlecry();
 		Player player = context.getPlayer(playerId);
 		if (!battlecry.canBeExecuted(context, player)) {
@@ -1292,8 +1296,8 @@ public class GameLogic implements Cloneable {
 			battlecryAction = battlecry;
 		}
 		performGameAction(playerId, battlecryAction);
-		if (iteration < 1 && hasAttribute(player, Attribute.DOUBLE_BATTLECRIES)) {
-			resolveBattlecry(playerId, actor, iteration + 1);
+		if (hasAttribute(player, Attribute.DOUBLE_BATTLECRIES)) {
+			performGameAction(playerId, battlecryAction);
 		}
 	}
 

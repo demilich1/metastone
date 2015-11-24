@@ -1,17 +1,17 @@
 {
-	"baseAttack": 2,
-	"baseHp": 2,
 	"id": "token_gnoll",
 	"name": "Gnoll",
-	"description": "Taunt",
+	"baseManaCost": 2,
 	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
 	"heroClass": "ANY",
 	"rarity": "FREE",
-	"baseManaCost": 2,
-	"collectible": false,
+	"description": "Taunt",
 	"attributes": {
 		"TAUNT": true
 	},
+	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

@@ -1,11 +1,11 @@
 {
-	"name": "Windfury",
-	"description": "Give a minion Windfury.",
 	"id": "spell_WINDFURY",
-	"type": "SPELL",
-	"rarity": "FREE",
-	"heroClass": "SHAMAN",
+	"name": "Windfury",
 	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "SHAMAN",
+	"rarity": "FREE",
+	"description": "Give a minion Windfury.",
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "AddAttributeSpell",

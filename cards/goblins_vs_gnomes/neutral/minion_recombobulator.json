@@ -1,6 +1,13 @@
 {
+	"id": "minion_recombobulator",
+	"name": "Recombobulator",
+	"baseManaCost": 2,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 2,
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"description": "Battlecry: Transform a friendly minion into a random minion with the same Cost.",
 	"battlecry": {
 		"targetSelection": "FRIENDLY_MINIONS",
 		"spell": {
@@ -8,17 +15,10 @@
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_recombobulator",
-	"name": "Recombobulator",
-	"description": "Battlecry: Transform a friendly minion into a random minion with the same Cost.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "EPIC",
-	"baseManaCost": 2,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

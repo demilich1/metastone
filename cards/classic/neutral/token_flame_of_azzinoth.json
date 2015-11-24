@@ -1,13 +1,13 @@
 {
-	"baseAttack": 2,
-	"baseHp": 1,
 	"id": "token_flame_of_azzinoth",
 	"name": "Flame of Azzinoth",
-	"description": "",
+	"baseManaCost": 1,
 	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 1,
 	"heroClass": "ANY",
 	"rarity": "FREE",
-	"baseManaCost": 1,
+	"description": "",
 	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

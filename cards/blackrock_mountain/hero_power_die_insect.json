@@ -1,18 +1,18 @@
 {
-	"targetSelection": "NONE",
 	"id": "hero_power_die_insect",
 	"name": "DIE, INSECT!",
-	"description": "Deal 8 damage to a random enemy.",
+	"baseManaCost": 2,
 	"type": "HERO_POWER",
 	"heroClass": "ANY",
 	"rarity": "FREE",
+	"description": "Deal 8 damage to a random enemy.",
+	"targetSelection": "NONE",
 	"spell": {
 		"class": "DamageSpell",
-		"value": 8,
 		"target": "ENEMY_CHARACTERS",
+		"value": 8,
 		"randomTarget": true
 	},
-	"baseManaCost": 2,
 	"collectible": false,
 	"set": "BLACKROCK_MOUNTAIN",
 	"fileFormatVersion": 1

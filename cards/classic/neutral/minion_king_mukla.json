@@ -1,29 +1,29 @@
 {
+	"id": "minion_king_mukla",
+	"name": "King Mukla",
+	"baseManaCost": 3,
+	"type": "MINION",
 	"baseAttack": 5,
 	"baseHp": 5,
-	"race": "BEAST",
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Give your opponent 2 Bananas.",
 	"battlecry": {
 		"spell": {
 			"class": "ReceiveCardSpell",
+			"targetPlayer": "OPPONENT",
 			"cards": [
 				"spell_bananas",
 				"spell_bananas"
-			],
-			"targetPlayer": "OPPONENT"
+			]
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_king_mukla",
-	"name": "King Mukla",
-	"description": "Battlecry: Give your opponent 2 Bananas.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "LEGENDARY",
-	"baseManaCost": 3,
-	"collectible": true,
+	"race": "BEAST",
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

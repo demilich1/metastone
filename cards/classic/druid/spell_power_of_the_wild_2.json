@@ -1,17 +1,17 @@
 {
-	"name": "Summon Panther",
-	"description": "Summon a 3/2 Panther.",
 	"id": "spell_power_of_the_wild_2",
-	"type": "SPELL",
-	"rarity": "COMMON",
-	"heroClass": "DRUID",
+	"name": "Summon Panther",
 	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"description": "Summon a 3/2 Panther.",
 	"targetSelection": "NONE",
-	"collectible": false,
 	"spell": {
 		"class": "SummonSpell",
 		"card": "token_panther"
 	},
+	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

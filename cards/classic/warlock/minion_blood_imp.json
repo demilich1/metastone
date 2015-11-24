@@ -1,6 +1,13 @@
 {
+	"id": "minion_blood_imp",
+	"name": "Blood Imp",
+	"baseManaCost": 1,
+	"type": "MINION",
 	"baseAttack": 0,
 	"baseHp": 1,
+	"heroClass": "WARLOCK",
+	"rarity": "COMMON",
+	"description": "Stealth. At the end of your turn, give another random friendly minion +1 Health.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "TurnEndTrigger",
@@ -8,23 +15,16 @@
 		},
 		"spell": {
 			"class": "BuffSpell",
-			"hpBonus": 1,
 			"target": "OTHER_FRIENDLY_MINIONS",
+			"hpBonus": 1,
 			"randomTarget": true
 		}
 	},
 	"race": "DEMON",
-	"id": "minion_blood_imp",
-	"name": "Blood Imp",
-	"description": "Stealth. At the end of your turn, give another random friendly minion +1 Health.",
-	"type": "MINION",
-	"heroClass": "WARLOCK",
-	"rarity": "COMMON",
-	"baseManaCost": 1,
-	"collectible": true,
 	"attributes": {
 		"STEALTH": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

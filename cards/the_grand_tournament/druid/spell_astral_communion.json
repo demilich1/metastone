@@ -1,4 +1,11 @@
 {
+	"id": "spell_astral_communion",
+	"name": "Astral Communion",
+	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "EPIC",
+	"description": "Gain 10 Mana Crystals. Discard your hand.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
@@ -10,8 +17,8 @@
 			"class": "EitherOrSpell",
 			"spell1": {
 				"class": "ReceiveCardSpell",
-				"card": "spell_excess_mana",
-				"targetPlayer": "SELF"
+				"targetPlayer": "SELF",
+				"card": "spell_excess_mana"
 			},
 			"spell2": {
 				"class": "ModifyMaxManaSpell",
@@ -22,14 +29,7 @@
 			}
 		}
 	},
-	"id": "spell_astral_communion",
-	"name": "Astral Communion",
-	"description": "Gain 10 Mana Crystals. Discard your hand.",
-	"type": "SPELL",
-	"heroClass": "DRUID",
-	"rarity": "EPIC",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 4,
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

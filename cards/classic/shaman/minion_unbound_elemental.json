@@ -1,6 +1,13 @@
 {
+	"id": "minion_unbound_elemental",
+	"name": "Unbound Elemental",
+	"baseManaCost": 3,
+	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 4,
+	"heroClass": "SHAMAN",
+	"rarity": "COMMON",
+	"description": "Whenever you play a card with Overload, gain +1/+1.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "OverloadTrigger",
@@ -8,18 +15,11 @@
 		},
 		"spell": {
 			"class": "BuffSpell",
+			"target": "SELF",
 			"attackBonus": 1,
-			"hpBonus": 1,
-			"target": "SELF"
+			"hpBonus": 1
 		}
 	},
-	"id": "minion_unbound_elemental",
-	"name": "Unbound Elemental",
-	"description": "Whenever you play a card with Overload, gain +1/+1.",
-	"type": "MINION",
-	"heroClass": "SHAMAN",
-	"rarity": "COMMON",
-	"baseManaCost": 3,
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

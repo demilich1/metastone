@@ -1,14 +1,14 @@
 {
-	"name": "Wicked Knife",
-	"description": "",
-	"collectible": false,
 	"id": "weapon_wicked_knife",
-	"type": "WEAPON",
-	"rarity": "FREE",
-	"heroClass": "ROGUE",
+	"name": "Wicked Knife",
 	"baseManaCost": 1,
+	"type": "WEAPON",
 	"damage": 1,
 	"durability": 2,
+	"heroClass": "ROGUE",
+	"rarity": "FREE",
+	"description": "",
+	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

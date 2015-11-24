@@ -1,17 +1,17 @@
 {
-	"name": "Entomb",
-	"description": "Choose an enemy minion. Shuffle it into your deck.",
 	"id": "spell_entomb",
-	"type": "SPELL",
-	"rarity": "COMMON",
-	"heroClass": "PRIEST",
+	"name": "Entomb",
 	"baseManaCost": 6,
-	"collectible": true,
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "COMMON",
+	"description": "Choose an enemy minion. Shuffle it into your deck.",
 	"targetSelection": "ENEMY_MINIONS",
 	"spell": {
 		"class": "ShuffleMinionToDeckSpell",
 		"targetPlayer": "SELF"
 	},
+	"collectible": true,
 	"set": "LEAGUE_OF_EXPLORERS",
 	"fileFormatVersion": 1
 }

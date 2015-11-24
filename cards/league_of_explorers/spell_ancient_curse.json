@@ -1,12 +1,11 @@
 {
-	"name": "Ancient Curse",
-	"description": "When you draw this, take 7 damage and draw a card.",
 	"id": "spell_ancient_curse",
-	"type": "SPELL",
-	"rarity": "COMMON",
-	"heroClass": "ANY",
+	"name": "Ancient Curse",
 	"baseManaCost": 0,
-	"collectible": false,
+	"type": "SPELL",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "When you draw this, take 7 damage and draw a card.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "NullSpell"
@@ -31,6 +30,7 @@
 			}
 		}
 	},
+	"collectible": false,
 	"set": "LEAGUE_OF_EXPLORERS",
 	"fileFormatVersion": 1
 }

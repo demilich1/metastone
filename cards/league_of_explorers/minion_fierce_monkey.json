@@ -1,14 +1,14 @@
 {
-	"baseAttack": 3,
-	"baseHp": 4,
 	"id": "minion_fierce_monkey",
 	"name": "Fierce Monkey",
-	"description": "Taunt",
-	"race": "BEAST",
+	"baseManaCost": 3,
 	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 4,
 	"heroClass": "WARRIOR",
 	"rarity": "COMMON",
-	"baseManaCost": 3,
+	"description": "Taunt",
+	"race": "BEAST",
 	"attributes": {
 		"TAUNT": true
 	},

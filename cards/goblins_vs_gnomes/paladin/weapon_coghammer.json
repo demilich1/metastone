@@ -1,18 +1,15 @@
 {
-	"name": "Coghammer",
-	"description": "Battlecry: Give a random friendly minion Divine Shield and Taunt.",
-	"collectible": true,
 	"id": "weapon_coghammer",
-	"type": "WEAPON",
-	"rarity": "EPIC",
-	"heroClass": "PALADIN",
+	"name": "Coghammer",
 	"baseManaCost": 3,
+	"type": "WEAPON",
 	"damage": 2,
 	"durability": 3,
-	"attributes": {
-		"BATTLECRY": true
-	},
+	"heroClass": "PALADIN",
+	"rarity": "EPIC",
+	"description": "Battlecry: Give a random friendly minion Divine Shield and Taunt.",
 	"battlecry": {
+		"targetSelection": "NONE",
 		"spell": {
 			"class": "MetaSpell",
 			"spell1": {
@@ -26,9 +23,12 @@
 			"target": "FRIENDLY_MINIONS",
 			"randomTarget": true
 		},
-		"targetSelection": "NONE",
 		"resolvedLate": false
 	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

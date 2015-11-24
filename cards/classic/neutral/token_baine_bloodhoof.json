@@ -1,12 +1,12 @@
 {
-	"name": "Baine Bloodhoof",
 	"id": "token_baine_bloodhoof",
-	"type": "MINION",
-	"rarity": "LEGENDARY",
-	"heroClass": "ANY",
+	"name": "Baine Bloodhoof",
 	"baseManaCost": 4,
+	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
 	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

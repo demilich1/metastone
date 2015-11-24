@@ -6,6 +6,7 @@ import java.util.List;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -33,11 +34,16 @@ public class AttributeValueProvider extends ValueProvider {
 		}
 		int value = 0;
 		for (Entity entity : entities) {
-			Actor source = (Actor) entity;
-			if (attribute == Attribute.ATTACK) {
-				value += source.getAttack();
+			if (entity instanceof Card) {
+				Card card = (Card) entity;
+				value += card.getAttributeValue(attribute);
 			} else {
-				value += source.getAttributeValue(attribute);
+				Actor source = (Actor) entity;
+				if (attribute == Attribute.ATTACK) {
+					value += source.getAttack();
+				} else {
+					value += source.getAttributeValue(attribute);
+				}
 			}
 		}
 

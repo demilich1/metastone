@@ -1,15 +1,15 @@
 {
-	"baseAttack": 6,
-	"baseHp": 8,
-	"race": "DEMON",
 	"id": "minion_fearsome_doomguard",
 	"name": "Fearsome Doomguard",
-	"description": "",
+	"baseManaCost": 7,
 	"type": "MINION",
+	"baseAttack": 6,
+	"baseHp": 8,
 	"heroClass": "WARLOCK",
 	"rarity": "COMMON",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 7,
+	"description": "",
+	"race": "DEMON",
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

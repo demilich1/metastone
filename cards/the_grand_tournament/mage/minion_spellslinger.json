@@ -1,7 +1,15 @@
 {
+	"id": "minion_spellslinger",
+	"name": "Spellslinger",
+	"baseManaCost": 3,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 4,
+	"heroClass": "MAGE",
+	"rarity": "COMMON",
+	"description": "Battlecry: Add a random spell to each player's hand.",
 	"battlecry": {
+		"targetSelection": "NONE",
 		"spell": {
 			"class": "ReceiveRandomCollectibleCardSpell",
 			"targetPlayer": "BOTH",
@@ -10,20 +18,12 @@
 				"cardType": "SPELL"
 			}
 		},
-		"targetSelection": "NONE",
 		"resolvedLate": false
 	},
-	"id": "minion_spellslinger",
-	"name": "Spellslinger",
-	"description": "Battlecry: Add a random spell to each player's hand.",
-	"type": "MINION",
-	"heroClass": "MAGE",
-	"rarity": "COMMON",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 3,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

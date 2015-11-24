@@ -1,0 +1,31 @@
+{
+	"id": "minion_chillmaw",
+	"name": "Chillmaw",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"baseAttack": 6,
+	"baseHp": 6,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Taunt. Deathrattle: If you're holding a Dragon, deal 3 damage to all minions.",
+	"deathrattle": {
+		"class": "ConditionalSpell",
+		"spell": {
+			"class": "DamageSpell",
+			"target": "ALL_MINIONS",
+			"value": 3
+		},
+		"condition": {
+			"class": "HoldsCardCondition",
+			"race": "DRAGON"
+		}
+	},
+	"race": "DRAGON",
+	"attributes": {
+		"DEATHRATTLES": true,
+		"TAUNT": true
+	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
+	"fileFormatVersion": 1
+}

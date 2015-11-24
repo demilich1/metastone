@@ -1,0 +1,30 @@
+{
+	"id": "minion_argent_watchman",
+	"name": "Argent Watchman",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "Can't attack. Inspire: Can attack as normal this turn.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "InspireTrigger"
+		},
+		"spell": {
+			"class": "RemoveAttributeSpell",
+			"target": "SELF",
+			"attribute": "CANNOT_ATTACK",
+			"revertTrigger": {
+				"class": "TurnEndTrigger"
+			}
+		}
+	},
+	"attributes": {
+		"CANNOT_ATTACK": true
+	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
+	"fileFormatVersion": 1
+}

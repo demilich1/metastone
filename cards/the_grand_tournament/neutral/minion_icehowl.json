@@ -1,0 +1,18 @@
+{
+	"id": "minion_icehowl",
+	"name": "Icehowl",
+	"baseManaCost": 9,
+	"type": "MINION",
+	"baseAttack": 10,
+	"baseHp": 10,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Charge. Can't attack heroes.",
+	"attributes": {
+		"CANNOT_ATTACK_HEROES": true,
+		"CHARGE": true
+	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
+	"fileFormatVersion": 1
+}

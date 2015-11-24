@@ -1,6 +1,13 @@
 {
+	"id": "minion_gnomish_inventor",
+	"name": "Gnomish Inventor",
+	"baseManaCost": 4,
+	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "Battlecry: Draw a card.",
 	"battlecry": {
 		"spell": {
 			"class": "DrawCardSpell",
@@ -8,13 +15,9 @@
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_gnomish_inventor",
-	"name": "Gnomish Inventor",
-	"description": "Battlecry: Draw a card.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "FREE",
-	"baseManaCost": 4,
+	"attributes": {
+		"BATTLECRY": true
+	},
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

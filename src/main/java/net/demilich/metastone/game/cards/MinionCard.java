@@ -52,6 +52,7 @@ public class MinionCard extends Card {
 		}
 
 		if (desc.deathrattle != null) {
+			minion.removeAttribute(Attribute.DEATHRATTLES);
 			minion.addDeathrattle(desc.deathrattle);
 		}
 		if (desc.trigger != null) {

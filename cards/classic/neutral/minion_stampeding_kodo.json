@@ -1,33 +1,33 @@
 {
+	"id": "minion_stampeding_kodo",
+	"name": "Stampeding Kodo",
+	"baseManaCost": 5,
+	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 5,
-	"race": "BEAST",
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "Battlecry: Destroy a random enemy minion with 2 or less Attack.",
 	"battlecry": {
+		"targetSelection": "NONE",
 		"spell": {
 			"class": "DestroySpell",
 			"target": "ENEMY_MINIONS",
 			"randomTarget": true,
 			"filter": {
 				"class": "AttributeFilter",
-				"attribute": "ATTACK",
 				"value": 3,
+				"attribute": "ATTACK",
 				"operation": "LESS"
 			}
 		},
-		"targetSelection": "NONE",
 		"resolvedLate": false
 	},
-	"id": "minion_stampeding_kodo",
-	"name": "Stampeding Kodo",
-	"description": "Battlecry: Destroy a random enemy minion with 2 or less Attack.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "RARE",
-	"baseManaCost": 5,
-	"collectible": true,
+	"race": "BEAST",
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

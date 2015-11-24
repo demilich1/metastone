@@ -1,0 +1,33 @@
+{
+	"id": "minion_refreshment_vendor",
+	"name": "Refreshment Vendor",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Battlecry: Restore 4 Health to each hero.",
+	"battlecry": {
+		"spell": {
+			"class": "MetaSpell",
+			"spell1": {
+				"class": "HealSpell",
+				"target": "FRIENDLY_HERO",
+				"value": 4
+			},
+			"spell2": {
+				"class": "HealSpell",
+				"target": "ENEMY_HERO",
+				"value": 4
+			}
+		},
+		"resolvedLate": false
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
+	"fileFormatVersion": 1
+}

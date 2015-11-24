@@ -6,8 +6,11 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.actions.DiscoverAction;
+import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
@@ -15,6 +18,7 @@ import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
+import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.desc.SpellArg;
@@ -57,6 +61,16 @@ public class SpellUtils {
 		}
 		return result;
 	}
+	
+	public static Card getCard(GameContext context, SpellDesc spell) {
+		Card card = null;
+		String cardName = (String) spell.get(SpellArg.CARD);
+		card = CardCatalogue.getCardById(cardName);
+		if (spell.get(SpellArg.CARD).toString().equals("PENDING_CARD")) {
+			card = (Card) context.getEnvironment().get(Environment.PENDING_CARD);
+		}
+		return card;
+	}
 
 	public static Card[] getCards(SpellDesc spell) {
 		String[] cardNames = null;
@@ -72,6 +86,20 @@ public class SpellUtils {
 		}
 		return cards;
 	}
+	
+	public static DiscoverAction getDiscover(GameContext context, Player player, SpellDesc desc, CardCollection cards) {
+		SpellDesc spell = (SpellDesc) desc.get(SpellArg.SPELL_1);
+		List<GameAction> discoverActions = new ArrayList<>();
+		for (Card card : cards) {
+			SpellDesc spellClone = spell.clone();
+			spellClone.addArg(SpellArg.CARD, card.getCardId());
+			DiscoverAction discover = DiscoverAction.createDiscover(spellClone);
+			discover.setActionSuffix(card.getName());
+			discoverActions.add(discover);
+		}
+		
+		return (DiscoverAction) player.getBehaviour().requestAction(context, player, discoverActions);
+	}
 
 	public static Card getRandomCard(CardCollection source, Predicate<Card> filter) {
 		CardCollection result = getCards(source, filter);
@@ -79,6 +107,15 @@ public class SpellUtils {
 			return null;
 		}
 		return result.getRandom();
+	}
+	
+	public static HeroClass getRandomHeroClass() {
+		HeroClass randomClass = HeroClass.ANY;
+		HeroClass[] values = HeroClass.values();
+		while (!isBaseClass(randomClass)) {
+			randomClass = values[ThreadLocalRandom.current().nextInt(values.length)];
+		}
+		return randomClass;
 	}
 
 	public static <T> T getRandomTarget(List<T> targets) {
@@ -120,6 +157,17 @@ public class SpellUtils {
 		}
 		return count;
 	}
+	
+	public static boolean highlanderDeck(Player player) {
+		List<String> cards = new ArrayList<String>();
+		for (Card card : player.getDeck()) {
+			if (cards.contains(card.getCardId())) {
+				return false;
+			}
+			cards.add(card.getCardId());
+		}
+		return true;
+	}
 
 	public static boolean holdsCardOfType(Player player, CardType cardType) {
 		for (Card card : player.getHand()) {
@@ -155,6 +203,13 @@ public class SpellUtils {
 			}
 		}
 		return count;
+	}
+	
+	public static boolean isBaseClass(HeroClass heroClass) {
+		if (heroClass == HeroClass.ANY || heroClass == HeroClass.DECK_COLLECTION || heroClass == HeroClass.OPPONENT || heroClass == HeroClass.BOSS) {
+			return false;
+		}
+		return true;
 	}
 
 	private SpellUtils() {

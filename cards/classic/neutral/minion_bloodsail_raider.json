@@ -1,6 +1,13 @@
 {
+	"id": "minion_bloodsail_raider",
+	"name": "Bloodsail Raider",
+	"baseManaCost": 2,
+	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 3,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Battlecry: Gain Attack equal to the Attack of your weapon.",
 	"battlecry": {
 		"spell": {
 			"class": "BuffSpell",
@@ -14,17 +21,10 @@
 		"resolvedLate": true
 	},
 	"race": "PIRATE",
-	"id": "minion_bloodsail_raider",
-	"name": "Bloodsail Raider",
-	"description": "Battlecry: Gain Attack equal to the Attack of your weapon.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "COMMON",
-	"baseManaCost": 2,
-	"collectible": true,
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

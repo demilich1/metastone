@@ -1,4 +1,11 @@
 {
+	"id": "spell_light_of_the_naaru",
+	"name": "Light of the Naaru",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "RARE",
+	"description": "Restore 3 Health. If the target is still damaged, summon a Lightwarden.",
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "ConditionalEffectSpell",
@@ -14,13 +21,6 @@
 			"class": "IsDamagedCondition"
 		}
 	},
-	"id": "spell_light_of_the_naaru",
-	"name": "Light of the Naaru",
-	"description": "Restore 3 Health. If the target is still damaged, summon a Lightwarden.",
-	"type": "SPELL",
-	"heroClass": "PRIEST",
-	"rarity": "RARE",
-	"baseManaCost": 1,
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

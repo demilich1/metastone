@@ -1,16 +1,16 @@
 {
+	"id": "spell_darkbomb",
+	"name": "Darkbomb",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "COMMON",
+	"description": "Deal 3 damage.",
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "DamageSpell",
 		"value": 3
 	},
-	"id": "spell_darkbomb",
-	"name": "Darkbomb",
-	"description": "Deal 3 damage.",
-	"type": "SPELL",
-	"heroClass": "WARLOCK",
-	"rarity": "COMMON",
-	"baseManaCost": 2,
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

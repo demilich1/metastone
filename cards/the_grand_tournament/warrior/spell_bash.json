@@ -1,4 +1,11 @@
 {
+	"id": "spell_bash",
+	"name": "Bash",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "WARRIOR",
+	"rarity": "COMMON",
+	"description": "Deal 3 damage. Gain 3 Armor.",
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "MetaSpell",
@@ -8,18 +15,11 @@
 		},
 		"spell2": {
 			"class": "BuffHeroSpell",
-			"armorBonus": 3,
-			"target": "FRIENDLY_HERO"
+			"target": "FRIENDLY_HERO",
+			"armorBonus": 3
 		}
 	},
-	"id": "spell_bash",
-	"name": "Bash",
-	"description": "Deal 3 damage. Gain 3 Armor.",
-	"type": "SPELL",
-	"heroClass": "WARRIOR",
-	"rarity": "COMMON",
-	"set": "THE_GRAND_TOURNAMENT",
-	"baseManaCost": 3,
 	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

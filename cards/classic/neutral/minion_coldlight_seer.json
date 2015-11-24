@@ -1,7 +1,13 @@
 {
+	"id": "minion_coldlight_seer",
+	"name": "Coldlight Seer",
+	"baseManaCost": 3,
+	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 3,
-	"race": "MURLOC",
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "Battlecry: Give ALL other Murlocs +2 Health.",
 	"battlecry": {
 		"spell": {
 			"class": "BuffSpell",
@@ -14,17 +20,11 @@
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_coldlight_seer",
-	"name": "Coldlight Seer",
-	"description": "Battlecry: Give ALL other Murlocs +2 Health.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "RARE",
-	"baseManaCost": 3,
-	"collectible": true,
+	"race": "MURLOC",
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

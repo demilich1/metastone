@@ -1,19 +1,22 @@
 {
-	"name": "Charged Hammer",
-	"description": "Deathrattle: Your Hero Power becomes 'Deal 2 damage.'",
-	"collectible": true,
 	"id": "weapon_charged_hammer",
-	"type": "WEAPON",
-	"rarity": "EPIC",
-	"heroClass": "SHAMAN",
+	"name": "Charged Hammer",
 	"baseManaCost": 4,
+	"type": "WEAPON",
 	"damage": 2,
 	"durability": 4,
+	"heroClass": "SHAMAN",
+	"rarity": "EPIC",
+	"description": "Deathrattle: Your Hero Power becomes 'Deal 2 damage.'",
 	"deathrattle": {
 		"class": "ChangeHeroPowerSpell",
-		"card": "hero_power_lightning_jolt",
-		"targetPlayer": "SELF"
+		"targetPlayer": "SELF",
+		"card": "hero_power_lightning_jolt"
 	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
 	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

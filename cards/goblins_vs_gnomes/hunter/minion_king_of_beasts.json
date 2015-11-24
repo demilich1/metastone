@@ -1,10 +1,17 @@
 {
+	"id": "minion_king_of_beasts",
+	"name": "King of Beasts",
+	"baseManaCost": 5,
+	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 6,
-	"race": "BEAST",
+	"heroClass": "HUNTER",
+	"rarity": "RARE",
+	"description": "Taunt. Battlecry: Gain +1 Attack for each other Beast you have.",
 	"battlecry": {
 		"spell": {
 			"class": "BuffSpell",
+			"target": "SELF",
 			"attackValueProvider": {
 				"class": "EntityCounter",
 				"target": "FRIENDLY_MINIONS",
@@ -12,23 +19,16 @@
 					"class": "RaceFilter",
 					"race": "BEAST"
 				}
-			},
-			"target": "SELF"
+			}
 		},
 		"resolvedLate": false
 	},
-	"id": "minion_king_of_beasts",
-	"name": "King of Beasts",
-	"description": "Taunt. Battlecry: Gain +1 Attack for each other Beast you have.",
-	"type": "MINION",
-	"heroClass": "HUNTER",
-	"rarity": "RARE",
-	"baseManaCost": 5,
-	"collectible": true,
+	"race": "BEAST",
 	"attributes": {
-		"TAUNT": true,
-		"BATTLECRY": true
+		"BATTLECRY": true,
+		"TAUNT": true
 	},
+	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

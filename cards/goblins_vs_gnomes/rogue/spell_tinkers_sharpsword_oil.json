@@ -1,4 +1,11 @@
 {
+	"id": "spell_tinkers_sharpsword_oil",
+	"name": "Tinker's Sharpsword Oil",
+	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "ROGUE",
+	"rarity": "COMMON",
+	"description": "Give your weapon +3 Attack. Combo: Give a random friendly minion +3 Attack.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "ComboSpell",
@@ -8,18 +15,11 @@
 		},
 		"spell2": {
 			"class": "BuffSpell",
-			"attackBonus": 3,
 			"target": "FRIENDLY_MINIONS",
+			"attackBonus": 3,
 			"randomTarget": true
 		}
 	},
-	"id": "spell_tinkers_sharpsword_oil",
-	"name": "Tinker's Sharpsword Oil",
-	"description": "Give your weapon +3 Attack. Combo: Give a random friendly minion +3 Attack.",
-	"type": "SPELL",
-	"heroClass": "ROGUE",
-	"rarity": "COMMON",
-	"baseManaCost": 4,
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

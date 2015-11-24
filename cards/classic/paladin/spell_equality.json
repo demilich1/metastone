@@ -1,17 +1,17 @@
 {
-	"targetSelection": "NONE",
-	"spell": {
-		"class": "SetHpSpell",
-		"value": 1,
-		"target": "ALL_MINIONS"
-	},
 	"id": "spell_equality",
 	"name": "Equality",
-	"description": "Change the Health of ALL minions to 1.",
+	"baseManaCost": 2,
 	"type": "SPELL",
 	"heroClass": "PALADIN",
 	"rarity": "RARE",
-	"baseManaCost": 2,
+	"description": "Change the Health of ALL minions to 1.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "SetHpSpell",
+		"target": "ALL_MINIONS",
+		"value": 1
+	},
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

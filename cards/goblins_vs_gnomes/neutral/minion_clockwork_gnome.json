@@ -1,7 +1,13 @@
 {
+	"id": "minion_clockwork_gnome",
+	"name": "Clockwork Gnome",
+	"baseManaCost": 1,
+	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 1,
-	"race": "MECH",
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Deathrattle: Put a Spare Part card in your hand.",
 	"deathrattle": {
 		"class": "ReceiveRandomCardSpell",
 		"cards": [
@@ -14,13 +20,10 @@
 			"spell_whirling_blades"
 		]
 	},
-	"id": "minion_clockwork_gnome",
-	"name": "Clockwork Gnome",
-	"description": "Deathrattle: Put a Spare Part card in your hand.",
-	"type": "MINION",
-	"heroClass": "ANY",
-	"rarity": "COMMON",
-	"baseManaCost": 1,
+	"race": "MECH",
+	"attributes": {
+		"DEATHRATTLES": true
+	},
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

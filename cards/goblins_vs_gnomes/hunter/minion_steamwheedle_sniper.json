@@ -1,17 +1,17 @@
 {
-	"baseAttack": 2,
-	"baseHp": 3,
 	"id": "minion_steamwheedle_sniper",
 	"name": "Steamwheedle Sniper",
-	"description": "Your Hero Power can target minions.",
+	"baseManaCost": 2,
 	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 3,
 	"heroClass": "HUNTER",
 	"rarity": "EPIC",
-	"baseManaCost": 2,
-	"collectible": true,
+	"description": "Your Hero Power can target minions.",
 	"attributes": {
 		"HERO_POWER_CAN_TARGET_MINIONS": true
 	},
+	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }
