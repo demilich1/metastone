@@ -10,8 +10,8 @@
 	"description": "Both players have Spell Damage +2",
 	"race": "BEAST",
 	"attributes": {
-		"SPELL_DAMAGE": 2,
-		"OPPONENT_SPELL_DAMAGE": 2
+		"OPPONENT_SPELL_DAMAGE": 2,
+		"SPELL_DAMAGE": 2
 	},
 	"collectible": true,
 	"set": "LEAGUE_OF_EXPLORERS",
