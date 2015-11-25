@@ -12,6 +12,7 @@
 		"targetSelection": "ANY",
 		"spell": {
 			"class": "ComboSpell",
+			"exclusive": true,
 			"spell1": {
 				"class": "DamageSpell",
 				"value": 1
@@ -19,8 +20,7 @@
 			"spell2": {
 				"class": "DamageSpell",
 				"value": 2
-			},
-			"exclusive": true
+			}
 		},
 		"resolvedLate": false
 	},

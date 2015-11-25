@@ -8,31 +8,9 @@
 	"heroClass": "WARLOCK",
 	"rarity": "LEGENDARY",
 	"description": "Your other Demons have +2/+2. Your hero is Immune.",
-	"race": "DEMON",
-	"collectible": true,
-	"set": "GOBLINS_VS_GNOMES",
-	"fileFormatVersion": 1,
 	"aura": {
 		"class": "Aura",
 		"target": "FRIENDLY_CHARACTERS",
-		"removeEffect": {
-			"class": "MetaSpell",
-			"spell1": {
-				"class": "AuraBuffSpell",
-				"target": "OTHER_FRIENDLY_MINIONS",
-				"attackBonus": -2,
-				"hpBonus": -2,
-				"filter": {
-					"class": "RaceFilter",
-					"race": "DEMON"
-				}
-			},
-			"spell2": {
-				"class": "RemoveAttributeSpell",
-				"target": "FRIENDLY_HERO",
-				"attribute": "IMMUNE"
-			}
-		},
 		"applyEffect": {
 			"class": "MetaSpell",
 			"spell1": {
@@ -50,6 +28,28 @@
 				"target": "FRIENDLY_HERO",
 				"attribute": "IMMUNE"
 			}
+		},
+		"removeEffect": {
+			"class": "MetaSpell",
+			"spell1": {
+				"class": "AuraBuffSpell",
+				"target": "OTHER_FRIENDLY_MINIONS",
+				"attackBonus": -2,
+				"hpBonus": -2,
+				"filter": {
+					"class": "RaceFilter",
+					"race": "DEMON"
+				}
+			},
+			"spell2": {
+				"class": "RemoveAttributeSpell",
+				"target": "FRIENDLY_HERO",
+				"attribute": "IMMUNE"
+			}
 		}
-	}
+	},
+	"race": "DEMON",
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
 }

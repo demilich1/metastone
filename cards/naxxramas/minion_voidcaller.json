@@ -10,11 +10,11 @@
 	"description": "Deathrattle: Put a random Demon from your hand into the battlefield.",
 	"deathrattle": {
 		"class": "PutRandomMinionOnBoardSpell",
+		"cardLocation": "HAND",
 		"cardFilter": {
 			"class": "RaceFilter",
 			"race": "DEMON"
-		},
-		"cardLocation": "HAND"
+		}
 	},
 	"race": "DEMON",
 	"attributes": {

@@ -8,9 +8,6 @@
 	"heroClass": "WARRIOR",
 	"rarity": "FREE",
 	"description": "Your Charge minions have +1 Attack.",
-	"collectible": true,
-	"set": "CLASSIC",
-	"fileFormatVersion": 1,
 	"aura": {
 		"class": "BuffAura",
 		"target": "FRIENDLY_MINIONS",
@@ -20,5 +17,8 @@
 			"attribute": "CHARGE",
 			"operation": "HAS"
 		}
-	}
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
 }

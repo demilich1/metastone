@@ -8,13 +8,13 @@
 	"heroClass": "ANY",
 	"rarity": "RARE",
 	"description": "ALL minions cost (1) more.",
-	"collectible": true,
-	"set": "CLASSIC",
-	"fileFormatVersion": 1,
 	"cardCostModifier": {
 		"class": "CardCostModifier",
 		"cardType": "MINION",
 		"targetPlayer": "BOTH",
 		"value": 1
-	}
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
 }

@@ -11,12 +11,12 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "TargetAcquisitionTrigger",
+			"actionType": "PHYSICAL_ATTACK",
 			"targetPlayer": "BOTH",
+			"entityType": "MINION",
 			"condition": {
 				"class": "RandomCondition"
-			},
-			"actionType": "PHYSICAL_ATTACK",
-			"entityType": "MINION"
+			}
 		},
 		"spell": {
 			"class": "FumbleSpell",

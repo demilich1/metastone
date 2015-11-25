@@ -15,8 +15,8 @@
 		},
 		"condition": {
 			"class": "HasWeaponCondition",
-			"invert": "true",
-			"cardId": "weapon_poisoned_blade"
+			"cardId": "weapon_poisoned_blade",
+			"invert": "true"
 		}
 	},
 	"collectible": false,

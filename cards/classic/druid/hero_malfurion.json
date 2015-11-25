@@ -6,8 +6,8 @@
 	"heroClass": "DRUID",
 	"rarity": "FREE",
 	"attributes": {
-		"MAX_HP": 30,
-		"HP": 30
+		"HP": 30,
+		"MAX_HP": 30
 	},
 	"collectible": true
 }

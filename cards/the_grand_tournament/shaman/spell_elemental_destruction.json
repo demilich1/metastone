@@ -10,8 +10,8 @@
 	"spell": {
 		"class": "MinMaxDamageSpell",
 		"target": "ALL_MINIONS",
-		"maxDamage": 5,
-		"minDamage": 4
+		"minDamage": 4,
+		"maxDamage": 5
 	},
 	"attributes": {
 		"OVERLOAD": 5

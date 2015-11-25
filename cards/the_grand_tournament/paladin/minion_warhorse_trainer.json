@@ -8,9 +8,6 @@
 	"heroClass": "PALADIN",
 	"rarity": "COMMON",
 	"description": "Your Silver Hand Recruits have +1 Attack.",
-	"collectible": true,
-	"set": "THE_GRAND_TOURNAMENT",
-	"fileFormatVersion": 1,
 	"aura": {
 		"class": "BuffAura",
 		"target": "FRIENDLY_MINIONS",
@@ -19,5 +16,8 @@
 			"class": "SpecificCardFilter",
 			"cardId": "token_silver_hand_recruit"
 		}
-	}
+	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
+	"fileFormatVersion": 1
 }

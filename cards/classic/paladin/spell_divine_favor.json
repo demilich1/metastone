@@ -12,13 +12,13 @@
 		"valueProvider": {
 			"class": "AlgebraicValueProvider",
 			"operation": "SUBTRACT",
-			"valueProvider2": {
-				"class": "CardCounter",
-				"targetPlayer": "SELF"
-			},
 			"valueProvider1": {
 				"class": "CardCounter",
 				"targetPlayer": "OPPONENT"
+			},
+			"valueProvider2": {
+				"class": "CardCounter",
+				"targetPlayer": "SELF"
 			}
 		}
 	},

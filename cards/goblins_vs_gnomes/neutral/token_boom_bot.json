@@ -11,9 +11,9 @@
 	"deathrattle": {
 		"class": "MinMaxDamageSpell",
 		"target": "ENEMY_CHARACTERS",
-		"randomTarget": true,
+		"minDamage": 1,
 		"maxDamage": 4,
-		"minDamage": 1
+		"randomTarget": true
 	},
 	"race": "MECH",
 	"attributes": {

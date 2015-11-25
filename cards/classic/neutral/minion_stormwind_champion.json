@@ -8,13 +8,13 @@
 	"heroClass": "ANY",
 	"rarity": "FREE",
 	"description": "Your other minions have +1/+1.",
-	"collectible": true,
-	"set": "CLASSIC",
-	"fileFormatVersion": 1,
 	"aura": {
 		"class": "BuffAura",
 		"target": "FRIENDLY_MINIONS",
 		"attackBonus": 1,
 		"hpBonus": 1
-	}
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
 }

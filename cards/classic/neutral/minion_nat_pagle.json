@@ -17,11 +17,11 @@
 			"class": "DrawCardSpell",
 			"valueProvider": {
 				"class": "ConditionalValueProvider",
+				"ifTrue": 1,
+				"ifFalse": 0,
 				"condition": {
 					"class": "RandomCondition"
-				},
-				"ifFalse": 0,
-				"ifTrue": 1
+				}
 			}
 		}
 	},

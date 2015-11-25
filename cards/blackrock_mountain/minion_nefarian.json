@@ -12,12 +12,12 @@
 		"spell": {
 			"class": "ReceiveRandomCollectibleCardSpell",
 			"card": "spell_tail_swipe",
+			"howMany": 2,
 			"cardFilter": {
 				"heroClass": "OPPONENT",
 				"class": "CardFilter",
 				"cardType": "SPELL"
-			},
-			"howMany": 2
+			}
 		},
 		"resolvedLate": false
 	},

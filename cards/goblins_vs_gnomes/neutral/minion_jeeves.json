@@ -19,12 +19,12 @@
 			"valueProvider": {
 				"class": "AlgebraicValueProvider",
 				"operation": "SUBTRACT",
-				"valueProvider2": {
-					"class": "CardCounter"
-				},
 				"valueProvider1": {
 					"class": "ConstantValueProvider",
 					"value": 3
+				},
+				"valueProvider2": {
+					"class": "CardCounter"
 				}
 			}
 		}

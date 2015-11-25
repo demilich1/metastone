@@ -17,14 +17,14 @@
 			"target": "SELF",
 			"valueProvider": {
 				"class": "ConditionalValueProvider",
+				"ifTrue": 4,
+				"ifFalse": 0,
 				"condition": {
 					"class": "CardCountCondition",
 					"targetPlayer": "OPPONENT",
 					"value": 5,
 					"operation": "GREATER"
-				},
-				"ifFalse": 0,
-				"ifTrue": 4
+				}
 			}
 		}
 	},

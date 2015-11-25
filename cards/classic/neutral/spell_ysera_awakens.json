@@ -12,12 +12,12 @@
 		"target": "ALL_CHARACTERS",
 		"valueProvider": {
 			"class": "ConditionalValueProvider",
+			"ifTrue": 0,
+			"ifFalse": 5,
 			"condition": {
 				"class": "CardPropertyCondition",
 				"cardId": "minion_ysera"
-			},
-			"ifFalse": 5,
-			"ifTrue": 0
+			}
 		}
 	},
 	"collectible": false,

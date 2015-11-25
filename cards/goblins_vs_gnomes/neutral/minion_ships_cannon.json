@@ -12,8 +12,8 @@
 		"eventTrigger": {
 			"class": "MinionSummonedTrigger",
 			"targetPlayer": "SELF",
-			"race": "PIRATE",
-			"breaksStealth": true
+			"breaksStealth": true,
+			"race": "PIRATE"
 		},
 		"spell": {
 			"class": "DamageSpell",

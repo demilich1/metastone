@@ -10,8 +10,8 @@
 	"description": "Charge. Mega-Windfury (Can attack four times a turn.)",
 	"race": "MECH",
 	"attributes": {
-		"MEGA_WINDFURY": true,
-		"CHARGE": true
+		"CHARGE": true,
+		"MEGA_WINDFURY": true
 	},
 	"collectible": false,
 	"set": "GOBLINS_VS_GNOMES",

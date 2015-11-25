@@ -18,11 +18,11 @@
 			"valueProvider": {
 				"class": "EntityCounter",
 				"target": "ALL_MINIONS",
+				"offset": -1,
 				"filter": {
 					"class": "RaceFilter",
 					"race": "MURLOC"
-				},
-				"offset": -1
+				}
 			}
 		}
 	},

@@ -11,10 +11,10 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "HostAcquiresTargetTrigger",
+			"actionType": "PHYSICAL_ATTACK",
 			"condition": {
 				"class": "RandomCondition"
-			},
-			"actionType": "PHYSICAL_ATTACK"
+			}
 		},
 		"spell": {
 			"class": "FumbleSpell",

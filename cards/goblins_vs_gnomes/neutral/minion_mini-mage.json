@@ -9,8 +9,8 @@
 	"rarity": "EPIC",
 	"description": "Stealth. Spell Damage +1",
 	"attributes": {
-		"STEALTH": true,
-		"SPELL_DAMAGE": 1
+		"SPELL_DAMAGE": 1,
+		"STEALTH": true
 	},
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",

@@ -8,10 +8,6 @@
 	"heroClass": "HUNTER",
 	"rarity": "FREE",
 	"description": "Your other Beasts have +1 Attack.",
-	"race": "BEAST",
-	"collectible": true,
-	"set": "CLASSIC",
-	"fileFormatVersion": 1,
 	"aura": {
 		"class": "BuffAura",
 		"target": "FRIENDLY_MINIONS",
@@ -20,5 +16,9 @@
 			"class": "RaceFilter",
 			"race": "BEAST"
 		}
-	}
+	},
+	"race": "BEAST",
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
 }

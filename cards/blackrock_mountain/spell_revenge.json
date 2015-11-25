@@ -12,15 +12,15 @@
 		"target": "ALL_MINIONS",
 		"valueProvider": {
 			"class": "ConditionalValueProvider",
+			"ifTrue": 3,
+			"ifFalse": 1,
 			"condition": {
 				"class": "AttributeCondition",
 				"target": "FRIENDLY_HERO",
 				"value": 13,
 				"attribute": "HP",
 				"operation": "LESS"
-			},
-			"ifFalse": 1,
-			"ifTrue": 3
+			}
 		}
 	},
 	"collectible": true,

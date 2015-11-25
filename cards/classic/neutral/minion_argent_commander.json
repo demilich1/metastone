@@ -9,8 +9,8 @@
 	"rarity": "RARE",
 	"description": "Charge, Divine Shield",
 	"attributes": {
-		"DIVINE_SHIELD": true,
-		"CHARGE": true
+		"CHARGE": true,
+		"DIVINE_SHIELD": true
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

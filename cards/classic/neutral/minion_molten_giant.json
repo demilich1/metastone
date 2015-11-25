@@ -11,15 +11,15 @@
 	"manaCostModifier": {
 		"class": "AlgebraicValueProvider",
 		"operation": "SUBTRACT",
-		"valueProvider2": {
-			"class": "AttributeValueProvider",
-			"target": "FRIENDLY_HERO",
-			"attribute": "HP"
-		},
 		"valueProvider1": {
 			"class": "AttributeValueProvider",
 			"target": "FRIENDLY_HERO",
 			"attribute": "MAX_HP"
+		},
+		"valueProvider2": {
+			"class": "AttributeValueProvider",
+			"target": "FRIENDLY_HERO",
+			"attribute": "HP"
 		}
 	},
 	"collectible": true,
