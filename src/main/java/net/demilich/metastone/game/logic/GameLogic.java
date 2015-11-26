@@ -21,6 +21,7 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.actions.PlaySpellCardAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
@@ -1143,7 +1144,10 @@ public class GameLogic implements Cloneable {
 			return;
 		}
 		if (action.getActionType() == ActionType.HERO_POWER && hasAttribute(player, Attribute.HERO_POWER_CAN_TARGET_MINIONS)) {
-			action.setTargetRequirement(TargetSelection.ANY);
+			PlaySpellCardAction spellCardAction = (PlaySpellCardAction) action;
+			SpellDesc targetChangedSpell = spellCardAction.getSpell().removeArg(SpellArg.TARGET);
+			spellCardAction.setSpell(targetChangedSpell);
+			spellCardAction.setTargetRequirement(TargetSelection.ANY);
 		}
 	}
 

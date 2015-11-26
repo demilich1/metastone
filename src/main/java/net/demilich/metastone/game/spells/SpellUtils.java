@@ -91,8 +91,7 @@ public class SpellUtils {
 		SpellDesc spell = (SpellDesc) desc.get(SpellArg.SPELL_1);
 		List<GameAction> discoverActions = new ArrayList<>();
 		for (Card card : cards) {
-			SpellDesc spellClone = spell.clone();
-			spellClone.addArg(SpellArg.CARD, card.getCardId());
+			SpellDesc spellClone = spell.addArg(SpellArg.CARD, card.getCardId());
 			DiscoverAction discover = DiscoverAction.createDiscover(spellClone);
 			discover.setActionSuffix(card.getName());
 			discoverActions.add(discover);

@@ -25,7 +25,13 @@ public class SpellDesc extends Desc<SpellArg> {
 
 	public SpellDesc addArg(SpellArg spellArg, Object value) {
 		SpellDesc clone = clone();
-		arguments.put(spellArg, value);
+		clone.arguments.put(spellArg, value);
+		return clone;
+	}
+	
+	public SpellDesc removeArg(SpellArg spellArg) {
+		SpellDesc clone = clone();
+		clone.arguments.remove(spellArg);
 		return clone;
 	}
 

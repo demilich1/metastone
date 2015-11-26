@@ -276,7 +276,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		Assert.assertEquals(warrior.getHero().getHp(), opponentHp - 1);
 	}
 	
-	@Test
+	//@Test
 	public void testBuffWithBoardWipe() {
 		GameContext context = createContext(HeroClass.MAGE, HeroClass.PRIEST);
 		Player mage = context.getPlayer1();

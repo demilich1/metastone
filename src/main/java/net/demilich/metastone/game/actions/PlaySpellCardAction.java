@@ -8,14 +8,14 @@ import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class PlaySpellCardAction extends PlayCardAction {
 
-	protected final SpellDesc spell;
+	private SpellDesc spell;
 	protected final EntityReference cardReference;
 
 	public PlaySpellCardAction(SpellDesc spell, Card card, TargetSelection targetSelection) {
 		super(card.getCardReference());
 		setActionType(ActionType.SPELL);
 		setTargetRequirement(targetSelection);
-		this.spell = spell;
+		this.setSpell(spell);
 		this.cardReference = card.getReference();
 	}
 
@@ -23,5 +23,14 @@ public class PlaySpellCardAction extends PlayCardAction {
 	public void play(GameContext context, int playerId) {
 		context.getLogic().castSpell(playerId, spell, cardReference, getTargetKey(), false);
 	}
+
+	public SpellDesc getSpell() {
+		return spell;
+	}
+
+	public void setSpell(SpellDesc spell) {
+		this.spell = spell;
+	}
+
 
 }
