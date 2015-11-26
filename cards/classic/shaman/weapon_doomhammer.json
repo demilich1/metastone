@@ -8,20 +8,20 @@
 	"heroClass": "SHAMAN",
 	"rarity": "EPIC",
 	"description": "Windfury, Overload: (2)",
-	"attributes": {
-		"OVERLOAD": 2
+	"onEquip": {
+		"class": "AddAttributeSpell",
+		"target": "FRIENDLY_HERO",
+		"attribute": "WINDFURY"
 	},
-	"collectible": true,
-	"set": "CLASSIC",
-	"fileFormatVersion": 1,
 	"onUnequip": {
 		"class": "RemoveAttributeSpell",
 		"target": "FRIENDLY_HERO",
 		"attribute": "WINDFURY"
 	},
-	"onEquip": {
-		"class": "AddAttributeSpell",
-		"target": "FRIENDLY_HERO",
-		"attribute": "WINDFURY"
-	}
+	"attributes": {
+		"OVERLOAD": 2
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
 }

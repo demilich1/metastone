@@ -14,11 +14,11 @@
 			"value": 1
 		},
 		"target": "ALL_MINIONS",
+		"howMany": 80,
 		"randomTarget": true,
 		"condition": {
 			"class": "IsDeadCondition"
-		},
-		"howMany": 80
+		}
 	},
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",

@@ -11,8 +11,8 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "FriendlyTargetedTrigger",
-			"targetPlayer": "SELF",
 			"actionType": "SPELL",
+			"targetPlayer": "SELF",
 			"targetEntityType": "MINION",
 			"ignoreHost": true
 		},

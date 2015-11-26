@@ -19,8 +19,8 @@
 		}
 	},
 	"attributes": {
-		"TAUNT": true,
-		"ENRAGABLE": true
+		"ENRAGABLE": true,
+		"TAUNT": true
 	},
 	"collectible": true,
 	"set": "CLASSIC",

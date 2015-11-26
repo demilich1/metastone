@@ -11,15 +11,15 @@
 		"class": "DamageSpell",
 		"valueProvider": {
 			"class": "ConditionalValueProvider",
+			"ifTrue": 6,
+			"ifFalse": 4,
 			"condition": {
 				"class": "AttributeCondition",
 				"target": "FRIENDLY_HERO",
 				"value": 13,
 				"attribute": "HP",
 				"operation": "LESS"
-			},
-			"ifFalse": 4,
-			"ifTrue": 6
+			}
 		}
 	},
 	"collectible": true,

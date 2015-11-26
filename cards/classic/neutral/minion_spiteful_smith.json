@@ -8,22 +8,22 @@
 	"heroClass": "ANY",
 	"rarity": "COMMON",
 	"description": "Enrage: Your weapon has +2 Attack.",
+	"aura": {
+		"class": "EnrageAura",
+		"target": "FRIENDLY_WEAPON",
+		"applyEffect": {
+			"class": "BuffWeaponSpell",
+			"attackBonus": 2
+		},
+		"removeEffect": {
+			"class": "BuffWeaponSpell",
+			"attackBonus": -2
+		}
+	},
 	"attributes": {
 		"ENRAGABLE": true
 	},
 	"collectible": true,
 	"set": "CLASSIC",
-	"fileFormatVersion": 1,
-	"aura": {
-		"class": "EnrageAura",
-		"target": "FRIENDLY_WEAPON",
-		"removeEffect": {
-			"class": "BuffWeaponSpell",
-			"attackBonus": -2
-		},
-		"applyEffect": {
-			"class": "BuffWeaponSpell",
-			"attackBonus": 2
-		}
-	}
+	"fileFormatVersion": 1
 }

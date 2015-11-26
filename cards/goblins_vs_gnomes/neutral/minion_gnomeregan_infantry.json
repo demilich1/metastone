@@ -9,8 +9,8 @@
 	"rarity": "COMMON",
 	"description": "Charge. Taunt",
 	"attributes": {
-		"TAUNT": true,
-		"CHARGE": true
+		"CHARGE": true,
+		"TAUNT": true
 	},
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",

@@ -1090,7 +1090,9 @@ public class GameLogic implements Cloneable {
 		action.execute(context, playerId);
 
 		context.getEnvironment().remove(Environment.TARGET);
-		checkForDeadEntities();
+		if (!(action instanceof BattlecryAction)) {
+			checkForDeadEntities();
+		}
 	}
 
 	public void playCard(int playerId, CardReference cardReference) {
@@ -1299,6 +1301,7 @@ public class GameLogic implements Cloneable {
 		if (hasAttribute(player, Attribute.DOUBLE_BATTLECRIES)) {
 			performGameAction(playerId, battlecryAction);
 		}
+		resolveDeathrattles(player, actor);
 	}
 
 	public void resolveDeathrattles(Player player, Actor actor) {

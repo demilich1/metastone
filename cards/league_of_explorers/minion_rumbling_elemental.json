@@ -12,8 +12,8 @@
 		"eventTrigger": {
 			"class": "MinionPlayedTrigger",
 			"targetPlayer": "SELF",
-			"breaksStealth": true,
-			"requiredAttribute": "BATTLECRY"
+			"requiredAttribute": "BATTLECRY",
+			"breaksStealth": true
 		},
 		"spell": {
 			"class": "DamageSpell",

@@ -11,12 +11,12 @@
 		"class": "DamageSpell",
 		"valueProvider": {
 			"class": "ConditionalValueProvider",
+			"ifTrue": 5,
+			"ifFalse": 3,
 			"condition": {
 				"class": "RaceOnBoardCondition",
 				"race": "BEAST"
-			},
-			"ifFalse": 3,
-			"ifTrue": 5
+			}
 		}
 	},
 	"collectible": true,

@@ -8,15 +8,15 @@
 	"heroClass": "ANY",
 	"rarity": "COMMON",
 	"description": "Your Mechs cost (1) less.",
-	"race": "MECH",
-	"collectible": true,
-	"set": "GOBLINS_VS_GNOMES",
-	"fileFormatVersion": 1,
 	"cardCostModifier": {
 		"class": "CardCostModifier",
 		"cardType": "MINION",
 		"targetPlayer": "SELF",
 		"value": -1,
 		"race": "MECH"
-	}
+	},
+	"race": "MECH",
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
 }

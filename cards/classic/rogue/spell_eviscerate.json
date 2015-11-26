@@ -9,6 +9,7 @@
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "ComboSpell",
+		"exclusive": true,
 		"spell1": {
 			"class": "DamageSpell",
 			"value": 2
@@ -16,8 +17,7 @@
 		"spell2": {
 			"class": "DamageSpell",
 			"value": 4
-		},
-		"exclusive": true
+		}
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

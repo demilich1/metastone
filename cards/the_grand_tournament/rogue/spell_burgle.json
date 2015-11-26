@@ -10,11 +10,11 @@
 	"spell": {
 		"class": "ReceiveRandomCollectibleCardSpell",
 		"card": "spell_the_coin",
+		"howMany": 2,
 		"cardFilter": {
 			"heroClass": "OPPONENT",
 			"class": "CardFilter"
-		},
-		"howMany": 2
+		}
 	},
 	"collectible": true,
 	"set": "THE_GRAND_TOURNAMENT",

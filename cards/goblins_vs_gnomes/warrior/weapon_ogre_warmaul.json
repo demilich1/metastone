@@ -11,11 +11,11 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "TargetAcquisitionTrigger",
+			"actionType": "PHYSICAL_ATTACK",
+			"entityType": "HERO",
 			"condition": {
 				"class": "RandomCondition"
-			},
-			"actionType": "PHYSICAL_ATTACK",
-			"entityType": "HERO"
+			}
 		},
 		"spell": {
 			"class": "FumbleSpell",

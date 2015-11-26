@@ -9,11 +9,11 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "ReceiveRandomCollectibleCardSpell",
+		"manaModifier": -3,
 		"cardFilter": {
 			"class": "CardFilter",
 			"cardType": "MINION"
-		},
-		"manaModifier": -3
+		}
 	},
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",

@@ -9,6 +9,7 @@
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "ComboSpell",
+		"exclusive": true,
 		"spell1": {
 			"class": "BuffSpell",
 			"attackBonus": 2
@@ -16,8 +17,7 @@
 		"spell2": {
 			"class": "BuffSpell",
 			"attackBonus": 4
-		},
-		"exclusive": true
+		}
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

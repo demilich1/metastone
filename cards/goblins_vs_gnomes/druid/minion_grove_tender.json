@@ -13,9 +13,9 @@
 			"description": "Mana Crystal",
 			"spell": {
 				"class": "ModifyMaxManaSpell",
+				"fullManaCrystals": true,
 				"targetPlayer": "BOTH",
-				"value": 1,
-				"fullManaCrystals": true
+				"value": 1
 			}
 		},
 		{

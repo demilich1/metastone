@@ -6,8 +6,8 @@
 	"heroClass": "BOSS",
 	"rarity": "LEGENDARY",
 	"attributes": {
-		"MAX_HP": 8,
-		"HP": 8
+		"HP": 8,
+		"MAX_HP": 8
 	},
 	"collectible": false
 }

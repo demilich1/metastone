@@ -12,15 +12,15 @@
 	},
 	"manaCostModifier": {
 		"class": "ConditionalValueProvider",
+		"ifTrue": 4,
+		"ifFalse": 0,
 		"condition": {
 			"class": "HasEntityCondition",
 			"target": "FRIENDLY_MINIONS",
 			"filter": {
 				"class": "DamagedFilter"
 			}
-		},
-		"ifFalse": 0,
-		"ifTrue": 4
+		}
 	},
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",

@@ -8,13 +8,6 @@
 	"heroClass": "HUNTER",
 	"rarity": "FREE",
 	"description": "Your Beasts have Charge.",
-	"race": "BEAST",
-	"attributes": {
-		"CHARGE": true
-	},
-	"collectible": true,
-	"set": "CLASSIC",
-	"fileFormatVersion": 1,
 	"aura": {
 		"class": "AttributeAura",
 		"target": "FRIENDLY_MINIONS",
@@ -23,5 +16,12 @@
 			"race": "BEAST"
 		},
 		"attribute": "CHARGE"
-	}
+	},
+	"race": "BEAST",
+	"attributes": {
+		"CHARGE": true
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
 }

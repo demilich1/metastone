@@ -11,11 +11,11 @@
 	"battlecry": {
 		"spell": {
 			"class": "ReceiveRandomCollectibleCardSpell",
+			"howMany": 4,
 			"cardFilter": {
 				"class": "RaceFilter",
 				"race": "MURLOC"
-			},
-			"howMany": 4
+			}
 		},
 		"resolvedLate": false
 	},

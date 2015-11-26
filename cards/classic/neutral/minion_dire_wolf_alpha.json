@@ -8,13 +8,13 @@
 	"heroClass": "ANY",
 	"rarity": "COMMON",
 	"description": "Adjacent minions have +1 Attack.",
-	"race": "BEAST",
-	"collectible": true,
-	"set": "CLASSIC",
-	"fileFormatVersion": 1,
 	"aura": {
 		"class": "BuffAura",
 		"target": "ADJACENT_MINIONS",
 		"attackBonus": 1
-	}
+	},
+	"race": "BEAST",
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
 }

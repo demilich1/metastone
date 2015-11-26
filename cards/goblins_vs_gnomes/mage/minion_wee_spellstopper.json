@@ -8,12 +8,12 @@
 	"heroClass": "MAGE",
 	"rarity": "EPIC",
 	"description": "Adjacent minions can't be targeted by spells or Hero Powers.",
-	"collectible": true,
-	"set": "GOBLINS_VS_GNOMES",
-	"fileFormatVersion": 1,
 	"aura": {
 		"class": "AttributeAura",
 		"target": "ADJACENT_MINIONS",
 		"attribute": "UNTARGETABLE_BY_SPELLS"
-	}
+	},
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
 }

@@ -8,13 +8,13 @@
 	"heroClass": "WARLOCK",
 	"rarity": "COMMON",
 	"description": "Your minions cost (2) less, but not less than (1).",
-	"collectible": true,
-	"set": "CLASSIC",
-	"fileFormatVersion": 1,
 	"cardCostModifier": {
 		"class": "CardCostModifier",
 		"cardType": "MINION",
 		"value": -2,
 		"minValue": 1
-	}
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
 }

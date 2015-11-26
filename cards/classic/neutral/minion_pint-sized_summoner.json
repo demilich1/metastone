@@ -8,21 +8,21 @@
 	"heroClass": "ANY",
 	"rarity": "RARE",
 	"description": "The first minion you play each turn costs (1) less.",
-	"collectible": true,
-	"set": "CLASSIC",
-	"fileFormatVersion": 1,
 	"cardCostModifier": {
 		"class": "ToggleCostModifier",
 		"cardType": "MINION",
 		"targetPlayer": "SELF",
 		"value": -1,
+		"toggleOnTrigger": {
+			"class": "TurnStartTrigger"
+		},
 		"toggleOffTrigger": {
 			"class": "CardPlayedTrigger",
 			"cardType": "MINION",
 			"targetPlayer": "SELF"
-		},
-		"toggleOnTrigger": {
-			"class": "TurnStartTrigger"
 		}
-	}
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
 }

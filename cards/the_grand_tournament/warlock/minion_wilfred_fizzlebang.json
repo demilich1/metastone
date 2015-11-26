@@ -11,8 +11,8 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "CardDrawnTrigger",
-			"targetPlayer": "SELF",
-			"sourceType": "HERO_POWER"
+			"sourceType": "HERO_POWER",
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "ModifyAttributeSpell",

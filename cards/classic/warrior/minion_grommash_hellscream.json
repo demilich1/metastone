@@ -19,8 +19,8 @@
 		}
 	},
 	"attributes": {
-		"ENRAGABLE": true,
-		"CHARGE": true
+		"CHARGE": true,
+		"ENRAGABLE": true
 	},
 	"collectible": true,
 	"set": "CLASSIC",

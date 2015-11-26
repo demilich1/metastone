@@ -8,17 +8,17 @@
 	"heroClass": "WARRIOR",
 	"rarity": "RARE",
 	"description": "Double all damage dealt to your hero.",
-	"collectible": true,
-	"set": "LEAGUE_OF_EXPLORERS",
-	"fileFormatVersion": 1,
+	"onEquip": {
+		"class": "AddAttributeSpell",
+		"target": "FRIENDLY_HERO",
+		"attribute": "TAKE_DOUBLE_DAMAGE"
+	},
 	"onUnequip": {
 		"class": "RemoveAttributeSpell",
 		"target": "FRIENDLY_HERO",
 		"attribute": "TAKE_DOUBLE_DAMAGE"
 	},
-	"onEquip": {
-		"class": "AddAttributeSpell",
-		"target": "FRIENDLY_HERO",
-		"attribute": "TAKE_DOUBLE_DAMAGE"
-	}
+	"collectible": true,
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
 }

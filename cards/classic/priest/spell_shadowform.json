@@ -17,8 +17,8 @@
 			},
 			"condition": {
 				"class": "HasHeroPowerCondition",
-				"invert": true,
-				"cardId": "hero_power_mind_shatter"
+				"cardId": "hero_power_mind_shatter",
+				"invert": true
 			}
 		},
 		"spell2": {

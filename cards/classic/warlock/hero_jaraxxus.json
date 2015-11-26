@@ -7,8 +7,8 @@
 	"rarity": "LEGENDARY",
 	"race": "DEMON",
 	"attributes": {
-		"MAX_HP": 15,
-		"HP": 15
+		"HP": 15,
+		"MAX_HP": 15
 	},
 	"collectible": false
 }

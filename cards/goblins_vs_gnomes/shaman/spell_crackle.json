@@ -9,8 +9,8 @@
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "MinMaxDamageSpell",
-		"maxDamage": 6,
-		"minDamage": 3
+		"minDamage": 3,
+		"maxDamage": 6
 	},
 	"attributes": {
 		"OVERLOAD": 1

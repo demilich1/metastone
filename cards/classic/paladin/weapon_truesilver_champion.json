@@ -11,8 +11,8 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "TargetAcquisitionTrigger",
-			"targetPlayer": "SELF",
 			"actionType": "PHYSICAL_ATTACK",
+			"targetPlayer": "SELF",
 			"entityType": "HERO"
 		},
 		"spell": {

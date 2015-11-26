@@ -11,8 +11,8 @@
 		"class": "MetaSpell",
 		"spell1": {
 			"class": "MinMaxDamageSpell",
-			"maxDamage": 4,
-			"minDamage": 2
+			"minDamage": 2,
+			"maxDamage": 4
 		},
 		"spell2": {
 			"class": "SummonSpell",

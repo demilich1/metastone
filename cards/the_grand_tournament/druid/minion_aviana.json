@@ -8,12 +8,12 @@
 	"heroClass": "DRUID",
 	"rarity": "LEGENDARY",
 	"description": "Your minions cost (1).",
-	"collectible": true,
-	"set": "THE_GRAND_TOURNAMENT",
-	"fileFormatVersion": 1,
 	"cardCostModifier": {
 		"class": "CardCostModifier",
 		"cardType": "MINION",
 		"fixedValue": 1
-	}
+	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
+	"fileFormatVersion": 1
 }

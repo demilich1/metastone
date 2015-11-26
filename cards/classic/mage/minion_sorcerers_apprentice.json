@@ -8,12 +8,12 @@
 	"heroClass": "MAGE",
 	"rarity": "COMMON",
 	"description": "Your spells cost (1) less.",
-	"collectible": true,
-	"set": "CLASSIC",
-	"fileFormatVersion": 1,
 	"cardCostModifier": {
 		"class": "CardCostModifier",
 		"cardType": "SPELL",
 		"value": -1
-	}
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
 }

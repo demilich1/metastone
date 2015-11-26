@@ -13,12 +13,12 @@
 		"spell": {
 			"class": "PutRandomMinionOnBoardSpell",
 			"targetPlayer": "BOTH",
+			"cardLocation": "DECK",
 			"cardFilter": {
 				"class": "CardFilter",
 				"cardType": "MINION",
 				"manaCost": 1
-			},
-			"cardLocation": "DECK"
+			}
 		},
 		"resolvedLate": true
 	},

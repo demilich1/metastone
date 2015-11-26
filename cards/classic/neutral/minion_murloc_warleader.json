@@ -8,10 +8,6 @@
 	"heroClass": "ANY",
 	"rarity": "EPIC",
 	"description": "ALL other Murlocs have +2/+1.",
-	"race": "MURLOC",
-	"collectible": true,
-	"set": "CLASSIC",
-	"fileFormatVersion": 1,
 	"aura": {
 		"class": "BuffAura",
 		"target": "ALL_MINIONS",
@@ -21,5 +17,9 @@
 			"class": "RaceFilter",
 			"race": "MURLOC"
 		}
-	}
+	},
+	"race": "MURLOC",
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
 }

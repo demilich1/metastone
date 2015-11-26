@@ -17,12 +17,12 @@
 			"target": "SELF",
 			"valueProvider": {
 				"class": "ConditionalValueProvider",
+				"ifTrue": 2,
+				"ifFalse": 0,
 				"condition": {
 					"class": "RaceOnBoardCondition",
 					"race": "MECH"
-				},
-				"ifFalse": 0,
-				"ifTrue": 2
+				}
 			}
 		}
 	},

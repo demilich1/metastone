@@ -12,12 +12,12 @@
 		"spell": {
 			"class": "SummonRandomMinionFilteredSpell",
 			"boardPositionRelative": "RIGHT",
+			"includeUncollectible": true,
 			"cardFilter": {
 				"class": "CardFilter",
 				"cardType": "MINION",
 				"race": "TOTEM"
-			},
-			"includeUncollectible": true
+			}
 		},
 		"resolvedLate": true
 	},

@@ -15,15 +15,15 @@
 			"spell1": {
 				"class": "BuffSpell",
 				"target": "SELF",
-				"hpValueProvider": {
-					"class": "AttributeValueProvider",
-					"target": "ADJACENT_MINIONS",
-					"attribute": "HP"
-				},
 				"attackValueProvider": {
 					"class": "AttributeValueProvider",
 					"target": "ADJACENT_MINIONS",
 					"attribute": "ATTACK"
+				},
+				"hpValueProvider": {
+					"class": "AttributeValueProvider",
+					"target": "ADJACENT_MINIONS",
+					"attribute": "HP"
 				}
 			},
 			"spell2": {

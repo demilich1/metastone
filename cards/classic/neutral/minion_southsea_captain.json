@@ -8,10 +8,6 @@
 	"heroClass": "ANY",
 	"rarity": "EPIC",
 	"description": "Your other Pirates have +1/+1.",
-	"race": "PIRATE",
-	"collectible": true,
-	"set": "CLASSIC",
-	"fileFormatVersion": 1,
 	"aura": {
 		"class": "BuffAura",
 		"target": "FRIENDLY_MINIONS",
@@ -21,5 +17,9 @@
 			"class": "RaceFilter",
 			"race": "PIRATE"
 		}
-	}
+	},
+	"race": "PIRATE",
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
 }

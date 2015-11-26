@@ -8,14 +8,14 @@
 	"heroClass": "ANY",
 	"rarity": "COMMON",
 	"description": "Minions with Battlecry cost (2) more.",
-	"collectible": true,
-	"set": "NAXXRAMAS",
-	"fileFormatVersion": 1,
 	"cardCostModifier": {
 		"class": "CardCostModifier",
 		"cardType": "MINION",
 		"targetPlayer": "BOTH",
 		"value": 2,
 		"requiredAttribute": "BATTLECRY"
-	}
+	},
+	"collectible": true,
+	"set": "NAXXRAMAS",
+	"fileFormatVersion": 1
 }

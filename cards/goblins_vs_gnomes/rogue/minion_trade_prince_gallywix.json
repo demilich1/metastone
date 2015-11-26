@@ -14,8 +14,8 @@
 			"targetPlayer": "OPPONENT",
 			"condition": {
 				"class": "CardPropertyCondition",
-				"invert": true,
-				"cardId": "spell_gallywixs_coin"
+				"cardId": "spell_gallywixs_coin",
+				"invert": true
 			}
 		},
 		"spell": {

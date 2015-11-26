@@ -9,10 +9,10 @@
 	"rarity": "LEGENDARY",
 	"description": "Windfury, Charge, Divine Shield, Taunt",
 	"attributes": {
+		"CHARGE": true,
 		"DIVINE_SHIELD": true,
 		"TAUNT": true,
-		"WINDFURY": true,
-		"CHARGE": true
+		"WINDFURY": true
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
