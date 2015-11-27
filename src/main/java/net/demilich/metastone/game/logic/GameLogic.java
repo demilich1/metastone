@@ -1305,7 +1305,7 @@ public class GameLogic implements Cloneable {
 		if (hasAttribute(player, Attribute.DOUBLE_BATTLECRIES)) {
 			performGameAction(playerId, battlecryAction);
 		}
-		resolveDeathrattles(player, actor);
+		checkForDeadEntities();
 	}
 
 	public void resolveDeathrattles(Player player, Actor actor) {
