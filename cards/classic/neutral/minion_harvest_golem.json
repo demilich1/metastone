@@ -7,6 +7,7 @@
 	"baseHp": 3,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
+	"race": "MECH",
 	"description": "Deathrattle: Summon a 2/1 Damaged Golem.",
 	"deathrattle": {
 		"class": "SummonSpell",
