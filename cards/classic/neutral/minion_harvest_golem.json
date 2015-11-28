@@ -13,7 +13,6 @@
 		"class": "SummonSpell",
 		"card": "token_damaged_golem"
 	},
-	"race": "MECH",
 	"attributes": {
 		"DEATHRATTLES": true
 	},
