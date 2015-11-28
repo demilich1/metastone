@@ -10,7 +10,7 @@
 	"description": "Whenever your hero takes damage on your turn, gain +2/+2.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "DamageReceivedTrigger",
+			"class": "DamageReceivedOnTurnTrigger",
 			"targetPlayer": "SELF",
 			"entityType": "HERO"
 		},
