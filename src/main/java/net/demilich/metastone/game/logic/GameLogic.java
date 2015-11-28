@@ -21,6 +21,7 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.actions.PlaySpellCardAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
@@ -395,9 +396,9 @@ public class GameLogic implements Cloneable {
 
 		target.setAttribute(Attribute.LAST_HIT, damageDealt);
 		if (damageDealt > 0) {
-			DamageEvent damageEvent = new DamageEvent(context, target, source, damage);
+			DamageEvent damageEvent = new DamageEvent(context, target, source, damageDealt);
 			context.fireGameEvent(damageEvent);
-			player.getStatistics().damageDealt(damage);
+			player.getStatistics().damageDealt(damageDealt);
 		}
 
 		return damageDealt;
@@ -986,7 +987,7 @@ public class GameLogic implements Cloneable {
 		log("{} mind controls {}", player.getName(), minion);
 		Player opponent = context.getOpponent(player);
 		if (!opponent.getMinions().contains(minion)) {
-			logger.warn("Minion {} cannot be mind-controlled, because opponent does not own it.", minion);
+			//logger.warn("Minion {} cannot be mind-controlled, because opponent does not own it.", minion);
 			return;
 		}
 		if (canSummonMoreMinions(player)) {
@@ -1143,7 +1144,10 @@ public class GameLogic implements Cloneable {
 			return;
 		}
 		if (action.getActionType() == ActionType.HERO_POWER && hasAttribute(player, Attribute.HERO_POWER_CAN_TARGET_MINIONS)) {
-			action.setTargetRequirement(TargetSelection.ANY);
+			PlaySpellCardAction spellCardAction = (PlaySpellCardAction) action;
+			SpellDesc targetChangedSpell = spellCardAction.getSpell().removeArg(SpellArg.TARGET);
+			spellCardAction.setSpell(targetChangedSpell);
+			spellCardAction.setTargetRequirement(TargetSelection.ANY);
 		}
 	}
 
