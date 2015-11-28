@@ -13,12 +13,12 @@
 			"class": "BuffSpell",
 			"target": "SELF",
 			"attackBonus": 3,
-			"hpBonus": 3,
-			"condition": {
-				"class": "CardCountCondition",
-				"value": 1,
-				"operation": "LESS"
-			}
+			"hpBonus": 3
+		},
+		"condition": {
+			"class": "CardCountCondition",
+			"value": 1,
+			"operation": "LESS"
 		},
 		"resolvedLate": false
 	},

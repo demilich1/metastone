@@ -58,7 +58,7 @@ public class DiscoverRandomCardSpell extends Spell {
 				do {
 					card = result.getRandom();
 					cards.remove(card);
-				} while (!result.contains(card));
+				} while (cards.contains(card));
 				cards.add(card);
 			}
 		}
