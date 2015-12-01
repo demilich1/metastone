@@ -74,7 +74,7 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 
 	@Override
 	public boolean interestedIn(GameEventType eventType) {
-		if (oneTurn && eventType == GameEventType.TURN_END) {
+		if (oneTurn && eventType == GameEventType.TURN_END && primaryTrigger.interestedIn() != GameEventType.TURN_START) {
 			return true;
 		}
 		
@@ -111,6 +111,9 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 				event.getGameContext().getEnvironment().put(Environment.EVENT_TARGET, event.getEventTarget());
 				onFire(ownerId, spell, event);
 				event.getGameContext().getEnvironment().remove(Environment.EVENT_TARGET);
+				if (event.getEventType() == GameEventType.TURN_START) {
+					expire();
+				}
 			}
 		} catch (Exception e) {
 			event.getGameContext().printCurrentTriggers();
@@ -118,7 +121,7 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 			throw e;
 		}
 		
-		if (oneTurn && event.getEventType() == GameEventType.TURN_END) {
+		if (oneTurn && event.getEventType() == GameEventType.TURN_END && primaryTrigger.interestedIn() != GameEventType.TURN_START) {
 			expire();
 		}
 	}

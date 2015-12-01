@@ -21,7 +21,8 @@
 			"randomTarget": true,
 			"filter": {
 				"class": "RaceFilter",
-				"race": "MECH"
+				"race": "MECH",
+				"invert": true
 			}
 		}
 	},

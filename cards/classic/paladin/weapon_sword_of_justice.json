@@ -11,7 +11,10 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "MinionSummonedTrigger",
-			"targetPlayer": "SELF"
+			"targetPlayer": "SELF",
+			"condition": {
+				class: "HasWeaponCondition"
+			}
 		},
 		"spell": {
 			"class": "MetaSpell",
