@@ -10,9 +10,10 @@
 	"description": "Whenever your hero takes damage on your turn, gain +2/+2.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "DamageReceivedOnTurnTrigger",
+			"class": "DamageReceivedTrigger",
 			"targetPlayer": "SELF",
-			"entityType": "HERO"
+			"entityType": "HERO",
+			"ownTurnOnly" : true
 		},
 		"spell": {
 			"class": "BuffSpell",
