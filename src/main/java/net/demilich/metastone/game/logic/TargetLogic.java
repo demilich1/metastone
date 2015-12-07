@@ -88,6 +88,11 @@ public class TargetLogic {
 					return entity;
 				}
 			}
+			for (Entity entity : player.getSetAsideZone()) {
+				if (entity.getId() == targetId) {
+					return entity;
+				}
+			}
 		}
 
 		Entity cardResult = findInCards(context.getPlayer1(), targetId);
@@ -100,6 +105,7 @@ public class TargetLogic {
 
 		logger.error("Id " + targetId + " not found!");
 		logger.error(context.toString());
+		logger.error(context.getEnvironment().toString());
 		throw new RuntimeException("Target not found exception: " + targetKey);
 	}
 
