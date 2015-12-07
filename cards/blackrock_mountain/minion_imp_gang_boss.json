@@ -14,7 +14,8 @@
 		},
 		"spell": {
 			"class": "SummonSpell",
-			"card": "token_imp"
+			"card": "token_imp",
+			"boardPositionRelative": "RIGHT"
 		}
 	},
 	"race": "DEMON",

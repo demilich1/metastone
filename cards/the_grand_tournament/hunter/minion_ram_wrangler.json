@@ -11,6 +11,7 @@
 	"battlecry": {
 		"spell": {
 			"class": "SummonRandomMinionFilteredSpell",
+			"boardPositionRelative": "RIGHT",
 			"cardFilter": {
 				"class": "RaceFilter",
 				"race": "BEAST"
