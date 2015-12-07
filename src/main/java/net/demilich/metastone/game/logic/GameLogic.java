@@ -831,6 +831,18 @@ public class GameLogic implements Cloneable {
 
 		return false;
 	}
+	
+	public boolean hasCard(Player player, Card card) {
+		for (Card heldCard : player.getHand()) {
+			if (card.getCardId().equals(heldCard.getCardId())) {
+				return true;
+			}
+		}
+		if (player.getHero().getHeroPower().getCardId().equals(card.getCardId())) {
+			return true;
+		}
+		return false;
+	}
 
 	public void heal(Player player, Actor target, int healing, Entity source) {
 		if (hasAttribute(player, Attribute.INVERT_HEALING)) {

@@ -23,9 +23,13 @@ public class DiscoverCardSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		CardCollection result = new CardCollection();
+		boolean cannotReceiveOwned = desc.getBool(SpellArg.CANNOT_RECEIVE_OWNED);
 		for (Card card : SpellUtils.getCards(desc)) {
-			result.add(card);
+			if (!cannotReceiveOwned || !context.getLogic().hasCard(player, card)) {
+				result.add(card);
+			}
 		}
+		
 		
 		CardCollection cards = new CardCollection();
 		
