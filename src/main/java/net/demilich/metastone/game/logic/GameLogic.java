@@ -1308,7 +1308,7 @@ public class GameLogic implements Cloneable {
 			battlecryAction = battlecry;
 		}
 		performGameAction(playerId, battlecryAction);
-		if (hasAttribute(player, Attribute.DOUBLE_BATTLECRIES)) {
+		if (hasAttribute(player, Attribute.DOUBLE_BATTLECRIES) && actor.getSourceCard().hasAttribute(Attribute.BATTLECRY)) {
 			performGameAction(playerId, battlecryAction);
 		}
 		checkForDeadEntities();
