@@ -23,6 +23,7 @@
 		},
 		"resolvedLate": false
 	},
+	"race" : "BEAST",
 	"attributes": {
 		"BATTLECRY": true
 	},
