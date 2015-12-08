@@ -64,6 +64,7 @@ public enum Attribute {
 	SHADOWFORM,
 	MEATSHIELD,
 	ARMOR_SUIT,
+	IMMUNE_HERO,
 	TAKE_DOUBLE_DAMAGE,
 
 	// AI flags
