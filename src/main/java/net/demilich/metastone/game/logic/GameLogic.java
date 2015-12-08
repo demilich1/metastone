@@ -405,7 +405,7 @@ public class GameLogic implements Cloneable {
 	}
 
 	private int damageHero(Hero hero, int damage) {
-		if (hero.hasAttribute(Attribute.IMMUNE)) {
+		if (hero.hasAttribute(Attribute.IMMUNE) || hasAttribute(context.getPlayer(hero.getOwner()), Attribute.IMMUNE_HERO)) {
 			log("{} is IMMUNE and does not take damage", hero);
 			return 0;
 		}
