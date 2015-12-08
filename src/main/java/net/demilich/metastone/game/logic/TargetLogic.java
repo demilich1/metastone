@@ -15,6 +15,7 @@ import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
@@ -54,6 +55,9 @@ public class TargetLogic {
 			}
 
 			if (entity.getOwner() != player.getId() && (entity.hasAttribute(Attribute.STEALTH) || entity.hasAttribute(Attribute.IMMUNE))) {
+				continue;
+			}
+			if (entity.getOwner() != player.getId() && entity instanceof Hero && context.getLogic().hasAttribute(context.getPlayer(entity.getOwner()), Attribute.IMMUNE_HERO)) {
 				continue;
 			}
 
