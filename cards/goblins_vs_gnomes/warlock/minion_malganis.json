@@ -15,7 +15,7 @@
 			"class": "MetaSpell",
 			"spell1": {
 				"class": "AuraBuffSpell",
-				"target": "OTHER_FRIENDLY_MINIONS",
+				"target": "OTHER_FRIENDLY_CHARACTERS",
 				"attackBonus": 2,
 				"hpBonus": 2,
 				"filter": {
@@ -33,7 +33,7 @@
 			"class": "MetaSpell",
 			"spell1": {
 				"class": "AuraBuffSpell",
-				"target": "OTHER_FRIENDLY_MINIONS",
+				"target": "OTHER_FRIENDLY_CHARACTERS",
 				"attackBonus": -2,
 				"hpBonus": -2,
 				"filter": {
