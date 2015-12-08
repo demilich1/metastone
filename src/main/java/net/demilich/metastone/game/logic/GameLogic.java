@@ -1512,10 +1512,6 @@ public class GameLogic implements Cloneable {
 	 * @param newMinion	The new minion to transform into
 	 */
 	public void transformMinion(Minion minion, Minion newMinion) {
-		if (minion == null) {
-			return;
-		}
-		
 		//Remove any spell triggers associated with the old minion.
 		removeSpelltriggers(minion);
 		minion.setAttribute(Attribute.DESTROYED);
@@ -1541,6 +1537,8 @@ public class GameLogic implements Cloneable {
 			} else {
 				owner.getMinions().add(index, newMinion);
 			}
+		} else {
+			owner.getSetAsideZone().add(newMinion);
 		}
 		owner.getSetAsideZone().add(minion);
 		
