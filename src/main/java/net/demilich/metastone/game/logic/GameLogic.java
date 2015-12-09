@@ -1539,6 +1539,10 @@ public class GameLogic implements Cloneable {
 			}
 		} else {
 			owner.getSetAsideZone().add(newMinion);
+			newMinion.setId(idFactory.generateId());
+			newMinion.setOwner(owner.getId());
+			context.fireGameEvent(new BoardChangedEvent(context));
+			return;
 		}
 		owner.getSetAsideZone().add(minion);
 		
