@@ -302,36 +302,37 @@ public class GameLogic implements Cloneable {
 		refreshAttacksPerRound(hero);
 	}
 	
+	/**
+	 * Checks all player minions and weapons for destroyed actors and runs
+	 * their deathrattle.
+	 */
 	public void checkForDeadEntities() {
+		// Get all entities added to a single list.
+		// We don't have to worry about Heroes, since that's
+		// checked elsewhere.
+		List<Actor> actorList = new ArrayList<Actor>();
 		for (Player player : context.getPlayers()) {
-			List<Minion> minionList = new ArrayList<Minion>(player.getMinions());
-			// sort by id, which has the effect of destroying minions in FIFO
-			// order
-			// which is relevant for deathrattles
-			Collections.sort(minionList, (m1, m2) -> Integer.compare(m1.getId(), m2.getId()));
-			for (Minion minion : minionList) {
-				// need to check if minion is still on the players minion
-				// list...
-				// it may have been removed by another minion dying before (i.e.
-				// Anub'ar Ambusher)
-				if (minion.isDestroyed() && player.getMinions().contains(minion)) {
-					destroy(minion);
-				}
-			}
-			if (player.getHero().getWeapon() != null && player.getHero().getWeapon().isBroken()) {
-				destroy(player.getHero().getWeapon());
+			actorList.addAll(player.getMinions());
+			actorList.add(player.getHero().getWeapon());
+		}
+		
+		// Add anything that's destroyed to the destroyed list.
+		List<Actor> destroyList = new ArrayList<Actor>();
+		for (Actor entity : actorList) {
+			if (entity != null && entity.isDestroyed()) {
+				destroyList.add(entity);
 			}
 		}
-
-		// a death of one minion may trigger the death of another one, so if
-		// there are still dead entities: run again
-		for (Player player : context.getPlayers()) {
-			for (Minion minion : player.getMinions()) {
-				if (minion.isDestroyed()) {
-					checkForDeadEntities();
-					break;
-				}
+		
+		// If nothing's destroyed, don't worry about it!
+		if (!destroyList.isEmpty()) {
+			Collections.sort(destroyList, (a1, a2) -> Integer.compare(a1.getId(), a2.getId()));
+			for (Actor actor : destroyList) {
+				destroy(actor);
 			}
+			
+			// Run additional checks until there are no more dead entities.
+			checkForDeadEntities();
 		}
 	}
 
