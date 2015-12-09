@@ -171,6 +171,13 @@ public class TargetLogic {
 				|| targetRequirement == TargetSelection.MINIONS || targetRequirement == TargetSelection.ANY) {
 			entities.addAll(player.getMinions());
 		}
+		List<Entity> destroyedEntities = new ArrayList<Entity>();
+		for (Entity entity : entities) {
+			if (entity != null && entity.hasAttribute(Attribute.PENDING_DESTROY)) {
+				destroyedEntities.add(entity);
+			}
+		}
+		entities.removeAll(destroyedEntities);
 		return entities;
 	}
 
