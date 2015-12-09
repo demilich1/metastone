@@ -24,6 +24,7 @@ public class Player extends CustomCloneable {
 
 	private final CardCollection deck;
 	private final CardCollection hand = new CardCollection();
+	private final List<Entity> setAsideZone = new ArrayList<>();
 	private final List<Entity> graveyard = new ArrayList<>();
 	private final List<Minion> minions = new ArrayList<>();
 	private final HashSet<String> secrets = new HashSet<>();
@@ -50,6 +51,7 @@ public class Player extends CustomCloneable {
 		}
 		this.hand.addAll(otherPlayer.hand);
 		this.graveyard.addAll(otherPlayer.graveyard);
+		this.setAsideZone.addAll(otherPlayer.setAsideZone);
 		this.secrets.addAll(otherPlayer.secrets);
 		this.id = otherPlayer.id;
 		this.mana = otherPlayer.mana;
@@ -132,6 +134,10 @@ public class Player extends CustomCloneable {
 
 	public HashSet<String> getSecrets() {
 		return secrets;
+	}
+	
+	public List<Entity> getSetAsideZone() {
+		return setAsideZone;
 	}
 
 	public GameStatistics getStatistics() {

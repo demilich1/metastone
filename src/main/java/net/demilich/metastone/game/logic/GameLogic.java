@@ -405,7 +405,7 @@ public class GameLogic implements Cloneable {
 	}
 
 	private int damageHero(Hero hero, int damage) {
-		if (hero.hasAttribute(Attribute.IMMUNE)) {
+		if (hero.hasAttribute(Attribute.IMMUNE) || hasAttribute(context.getPlayer(hero.getOwner()), Attribute.IMMUNE_HERO)) {
 			log("{} is IMMUNE and does not take damage", hero);
 			return 0;
 		}
@@ -831,6 +831,18 @@ public class GameLogic implements Cloneable {
 
 		return false;
 	}
+	
+	public boolean hasCard(Player player, Card card) {
+		for (Card heldCard : player.getHand()) {
+			if (card.getCardId().equals(heldCard.getCardId())) {
+				return true;
+			}
+		}
+		if (player.getHero().getHeroPower().getCardId().equals(card.getCardId())) {
+			return true;
+		}
+		return false;
+	}
 
 	public void heal(Player player, Actor target, int healing, Entity source) {
 		if (hasAttribute(player, Attribute.INVERT_HEALING)) {
@@ -1130,12 +1142,18 @@ public class GameLogic implements Cloneable {
 			player.getHero().modifyAttribute(Attribute.OVERLOAD, card.getAttributeValue(Attribute.OVERLOAD));
 		}
 	}
-
+	
 	public void playSecret(Player player, Secret secret) {
+		playSecret(player, secret, true);
+	}
+	
+	public void playSecret(Player player, Secret secret, boolean fromHand) {
 		log("{} has a new secret activated: {}", player.getName(), secret.getSource());
 		addGameEventListener(player, secret, player.getHero());
 		player.getSecrets().add(secret.getSource().getCardId());
-		context.fireGameEvent(new SecretPlayedEvent(context, (SecretCard) secret.getSource()));
+		if (fromHand) {
+			context.fireGameEvent(new SecretPlayedEvent(context, (SecretCard) secret.getSource()));
+		}
 	}
 
 	public void processTargetModifiers(Player player, GameAction action) {
@@ -1302,7 +1320,7 @@ public class GameLogic implements Cloneable {
 			battlecryAction = battlecry;
 		}
 		performGameAction(playerId, battlecryAction);
-		if (hasAttribute(player, Attribute.DOUBLE_BATTLECRIES)) {
+		if (hasAttribute(player, Attribute.DOUBLE_BATTLECRIES) && actor.getSourceCard().hasAttribute(Attribute.BATTLECRY)) {
 			performGameAction(playerId, battlecryAction);
 		}
 		checkForDeadEntities();
@@ -1449,6 +1467,7 @@ public class GameLogic implements Cloneable {
 
 		if (resolveBattlecry && minion.getBattlecry() != null && !minion.getBattlecry().isResolvedLate()) {
 			resolveBattlecry(player.getId(), minion);
+			minion = context.getSummonStack().peek();
 		}
 
 		if (index < 0 || index >= player.getMinions().size()) {
@@ -1483,6 +1502,70 @@ public class GameLogic implements Cloneable {
 		context.getSummonStack().pop();
 		context.fireGameEvent(new BoardChangedEvent(context));
 		return true;
+	}
+	
+	
+	/**
+	 * Transforms a Minion into a new Minion.
+	 * 
+	 * @param minion	The original minion in play
+	 * @param newMinion	The new minion to transform into
+	 */
+	public void transformMinion(Minion minion, Minion newMinion) {
+		//Remove any spell triggers associated with the old minion.
+		removeSpelltriggers(minion);
+		minion.setAttribute(Attribute.DESTROYED);
+
+		log("{} was transformed to {}", minion, newMinion);
+		Player owner = context.getPlayer(minion.getOwner());
+		owner.getMinions().remove(minion);
+		
+		//If the minion being transforms is being summoned, replace the old minion on the stack.
+		//Otherwise, summon the add the new minion.
+		//However, do not give a summon event.
+		if(!context.getSummonStack().isEmpty() && context.getSummonStack().peek().equals(minion)) {
+			context.getSummonStack().pop();
+			context.getSummonStack().push(newMinion);
+		//It's quite possible that this is actually supposed to add the minion to the zone it was originally in.
+		//This means minions in the SetAsideZone or the Graveyard that are targeted (through bizarre mechanics)
+		//add the minion to there. This will be tested eventually with Resurrect, Recombobulator, and Illidan.
+		//Since this is unknown, this is the patch for it.
+		} else if (!owner.getSetAsideZone().contains(minion)) {
+			int index = owner.getMinions().indexOf(minion);
+			if (index < 0 || index >= owner.getMinions().size()) {
+				owner.getMinions().add(newMinion);
+			} else {
+				owner.getMinions().add(index, newMinion);
+			}
+		} else {
+			owner.getSetAsideZone().add(newMinion);
+			newMinion.setId(idFactory.generateId());
+			newMinion.setOwner(owner.getId());
+			context.fireGameEvent(new BoardChangedEvent(context));
+			return;
+		}
+		owner.getSetAsideZone().add(minion);
+		
+		newMinion.setId(idFactory.generateId());
+		newMinion.setOwner(owner.getId());
+		
+		applyAttribute(newMinion, Attribute.SUMMONING_SICKNESS);
+		refreshAttacksPerRound(newMinion);
+		if (owner.getHero().hasAttribute(Attribute.CANNOT_REDUCE_HP_BELOW_1)) {
+			newMinion.setAttribute(Attribute.CANNOT_REDUCE_HP_BELOW_1);
+		}
+
+		if (newMinion.hasSpellTrigger()) {
+			addGameEventListener(owner, newMinion.getSpellTrigger(), newMinion);
+		}
+
+		if (newMinion.getCardCostModifier() != null) {
+			addManaModifier(owner, newMinion.getCardCostModifier(), newMinion);
+		}
+
+		handleEnrage(newMinion);
+
+		context.fireGameEvent(new BoardChangedEvent(context));
 	}
 
 	public void useHeroPower(int playerId) {

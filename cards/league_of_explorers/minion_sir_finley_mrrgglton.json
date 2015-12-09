@@ -26,7 +26,8 @@
 				"hero_power_totemic_call",
 				"hero_power_life_tap",
 				"hero_power_armor_up"
-			]
+			],
+			"cannotReceiveOwned": true
 		},
 		"resolvedLate": false
 	},

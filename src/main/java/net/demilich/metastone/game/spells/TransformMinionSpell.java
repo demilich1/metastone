@@ -51,10 +51,8 @@ public class TransformMinionSpell extends Spell {
 		MinionCard templateCard = cardName != null ? (MinionCard) CardCatalogue.getCardById(cardName) : null;
 
 		Minion newMinion = transformTarget != null ? transformTarget : templateCard.summon();
-		int boardPosition = context.getBoardPosition(minion);
 		logger.debug("{} is transformed into a {}", minion, newMinion);
-		context.getLogic().removeMinion(minion);
-		context.getLogic().summon(minion.getOwner(), newMinion, null, boardPosition, false);
+		context.getLogic().transformMinion(minion, newMinion);
 	}
 
 }
