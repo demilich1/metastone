@@ -21,7 +21,7 @@ public class InstantDestroySpell extends Spell {
 		if (target.isDestroyed()) {
 			return;
 		}
-		context.getLogic().destroy((Actor) target);
+		context.getLogic().markAsDestroyed((Actor) target);
 	}
 
 }
