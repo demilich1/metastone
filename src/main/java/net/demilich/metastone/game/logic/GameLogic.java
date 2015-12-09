@@ -318,9 +318,12 @@ public class GameLogic implements Cloneable {
 		
 		// Add anything that's destroyed to the destroyed list.
 		List<Actor> destroyList = new ArrayList<Actor>();
-		for (Actor entity : actorList) {
-			if (entity != null && entity.isDestroyed()) {
-				destroyList.add(entity);
+		for (Actor actor : actorList) {
+			if (actor != null && actor.isDestroyed()) {
+				actor.setAttribute(Attribute.PENDING_DESTROY);
+				removeSpelltriggers(actor);
+				context.getPlayer(actor.getOwner()).getGraveyard().add(actor);
+				destroyList.add(actor);
 			}
 		}
 		
@@ -484,7 +487,6 @@ public class GameLogic implements Cloneable {
 
 		int boardPosition = owner.getMinions().indexOf(minion);
 		owner.getMinions().remove(boardPosition);
-		owner.getGraveyard().add(minion);
 
 		resolveDeathrattles(owner, minion, boardPosition);
 	}
@@ -494,7 +496,6 @@ public class GameLogic implements Cloneable {
 		resolveDeathrattles(owner, weapon);
 		weapon.onUnequip(context, owner);
 		owner.getHero().setWeapon(null);
-		owner.getGraveyard().add(weapon);
 		context.fireGameEvent(new WeaponDestroyedEvent(context, weapon));
 	}
 
@@ -825,7 +826,7 @@ public class GameLogic implements Cloneable {
 			return true;
 		}
 		for (Entity minion : player.getMinions()) {
-			if (minion.hasAttribute(attr)) {
+			if (minion.hasAttribute(attr) && !minion.hasAttribute(Attribute.PENDING_DESTROY)) {
 				return true;
 			}
 		}
@@ -1407,9 +1408,6 @@ public class GameLogic implements Cloneable {
 		target.setMaxHp(target.getAttributeValue(Attribute.BASE_HP));
 		target.setAttack(target.getAttributeValue(Attribute.BASE_ATTACK));
 		if (target.getHp() > target.getMaxHp() || target.getHp() == oldMaxHp) {
-			target.setHp(target.getMaxHp());
-		}
-		if (target.getHp() > target.getMaxHp()) {
 			target.setHp(target.getMaxHp());
 		}
 
