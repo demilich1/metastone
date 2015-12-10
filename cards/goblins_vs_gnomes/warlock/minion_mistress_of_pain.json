@@ -18,8 +18,8 @@
 			"target": "FRIENDLY_HERO",
 			"valueProvider": {
 				"class": "AttributeValueProvider",
-				"target": "SELF",
-				"attribute": "ATTACK"
+				"target": "EVENT_TARGET",
+				"attribute": "LAST_HIT"
 			}
 		}
 	},
