@@ -147,8 +147,8 @@ public class GameLogic implements Cloneable {
 		card.removeAttribute(Attribute.MANA_COST_MODIFIER);
 	}
 
-	public int applyAmplify(Player player, int baseValue) {
-		int amplify = 1 + getTotalAttributeValue(player, Attribute.SPELL_AMPLIFY_MULTIPLIER);
+	public int applyAmplify(Player player, int baseValue, Attribute attribute) {
+		int amplify = getTotalAttributeMultiplier(player, attribute);
 		return baseValue * amplify;
 	}
 
@@ -367,7 +367,7 @@ public class GameLogic implements Cloneable {
 
 		if (!ignoreSpellPower && sourceCard != null
 				&& (sourceCard.getCardType() == CardType.SPELL || sourceCard.getCardType() == CardType.HERO_POWER)) {
-			damage = applyAmplify(player, damage);
+			damage = applyAmplify(player, damage, Attribute.SPELL_AMPLIFY_MULTIPLIER);
 		}
 		int damageDealt = 0;
 		if (target.hasAttribute(Attribute.TAKE_DOUBLE_DAMAGE)) {
@@ -776,6 +776,19 @@ public class GameLogic implements Cloneable {
 		}
 		return total;
 	}
+	
+	public int getTotalAttributeMultiplier(Player player, Attribute attribute) {
+		int total = 1;
+		if (player.getHero().hasAttribute(attribute)) {
+			player.getHero().getAttributeValue(attribute);
+		}
+		for (Entity minion : player.getMinions()) {
+			if (minion.hasAttribute(attribute)) {
+				total *= minion.getAttributeValue(attribute);
+			}
+		}
+		return total;
+	}
 
 	public List<GameAction> getValidActions(int playerId) {
 		Player player = context.getPlayer(playerId);
@@ -852,6 +865,7 @@ public class GameLogic implements Cloneable {
 			damage(player, target, healing, source);
 			return;
 		}
+		healing = applyAmplify(player, healing, Attribute.HEAL_AMPLIFY_MULTIPLIER);
 		boolean success = false;
 		switch (target.getEntityType()) {
 		case MINION:

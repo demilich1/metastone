@@ -24,6 +24,7 @@ public class GameTagUtils {
 		case OPPONENT_SPELL_DAMAGE:
 		case OVERLOAD:
 		case SPELL_AMPLIFY_MULTIPLIER:
+		case HEAL_AMPLIFY_MULTIPLIER:
 		case SPELL_DAMAGE:
 		case ATTACK:
 		case ATTACK_BONUS:

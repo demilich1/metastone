@@ -9,7 +9,8 @@
 	"rarity": "LEGENDARY",
 	"description": "Double the damage and healing of your spells and Hero Power.",
 	"attributes": {
-		"SPELL_AMPLIFY_MULTIPLIER": 1
+		"HEAL_AMPLIFY_MULTIPLIER": 2,
+		"SPELL_AMPLIFY_MULTIPLIER": 2
 	},
 	"collectible": true,
 	"set": "CLASSIC",
