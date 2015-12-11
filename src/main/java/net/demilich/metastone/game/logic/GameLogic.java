@@ -302,11 +302,15 @@ public class GameLogic implements Cloneable {
 		refreshAttacksPerRound(hero);
 	}
 	
+	public void checkForDeadEntities() {
+		checkForDeadEntities(0);
+	}
+	
 	/**
 	 * Checks all player minions and weapons for destroyed actors and runs
 	 * their deathrattle.
 	 */
-	public void checkForDeadEntities() {
+	public void checkForDeadEntities(int i) {
 		// Get all entities added to a single list.
 		// We don't have to worry about Heroes, since that's
 		// checked elsewhere.
@@ -330,12 +334,18 @@ public class GameLogic implements Cloneable {
 		// If nothing's destroyed, don't worry about it!
 		if (!destroyList.isEmpty()) {
 			Collections.sort(destroyList, (a1, a2) -> Integer.compare(a1.getId(), a2.getId()));
+			if (i > 20) {
+				for (Actor actor : destroyList) {
+					logger.error(actor.getName());
+				}
+				throw new RuntimeException("Infinite Dead Loop");
+			}
 			for (Actor actor : destroyList) {
 				destroy(actor);
 			}
 			
 			// Run additional checks until there are no more dead entities.
-			checkForDeadEntities();
+			checkForDeadEntities(i + 1);
 		}
 	}
 
@@ -486,7 +496,9 @@ public class GameLogic implements Cloneable {
 		minion.setAttribute(Attribute.DIED_ON_TURN, context.getTurn());
 
 		int boardPosition = owner.getMinions().indexOf(minion);
-		owner.getMinions().remove(boardPosition);
+		if (boardPosition != -1) {
+			owner.getMinions().remove(boardPosition);
+		}
 
 		resolveDeathrattles(owner, minion, boardPosition);
 	}
@@ -586,12 +598,14 @@ public class GameLogic implements Cloneable {
 		context.getEnvironment().put(Environment.SUMMONED_WEAPON, weapon);
 		Weapon currentWeapon = player.getHero().getWeapon();
 
-		if (currentWeapon != null) {
-			log("{} discards currently equipped weapon {}", player.getHero(), currentWeapon);
-			destroy(currentWeapon);
-		}
 		if (weapon.getBattlecry() != null && !weapon.getBattlecry().isResolvedLate()) {
 			resolveBattlecry(playerId, weapon);
+		}
+
+		if (currentWeapon != null) {
+			log("{} discards currently equipped weapon {}", player.getHero(), currentWeapon);
+			markAsDestroyed(currentWeapon);
+			checkForDeadEntities();
 		}
 		player.getStatistics().equipWeapon(weapon);
 		context.getEnvironment().remove(Environment.SUMMONED_WEAPON);
@@ -1030,7 +1044,7 @@ public class GameLogic implements Cloneable {
 			}
 			context.fireGameEvent(new BoardChangedEvent(context));
 		} else {
-			destroy(minion);
+			markAsDestroyed(minion);
 		}
 	}
 
@@ -1480,7 +1494,12 @@ public class GameLogic implements Cloneable {
 
 		if (resolveBattlecry && minion.getBattlecry() != null && !minion.getBattlecry().isResolvedLate()) {
 			resolveBattlecry(player.getId(), minion);
-			minion = context.getSummonStack().peek();
+		}
+		
+		if (context.getEnvironment().get(Environment.TRANSFORM) != null) {
+			minion = (Minion) context.getEnvironment().get(Environment.TRANSFORM);
+			minion.setBattlecry(null);
+			context.getEnvironment().remove(Environment.TRANSFORM);
 		}
 
 		if (index < 0 || index >= player.getMinions().size()) {
@@ -1527,7 +1546,6 @@ public class GameLogic implements Cloneable {
 	public void transformMinion(Minion minion, Minion newMinion) {
 		//Remove any spell triggers associated with the old minion.
 		removeSpelltriggers(minion);
-		minion.setAttribute(Attribute.DESTROYED);
 
 		log("{} was transformed to {}", minion, newMinion);
 		Player owner = context.getPlayer(minion.getOwner());
@@ -1536,9 +1554,9 @@ public class GameLogic implements Cloneable {
 		//If the minion being transforms is being summoned, replace the old minion on the stack.
 		//Otherwise, summon the add the new minion.
 		//However, do not give a summon event.
-		if(!context.getSummonStack().isEmpty() && context.getSummonStack().peek().equals(minion)) {
-			context.getSummonStack().pop();
-			context.getSummonStack().push(newMinion);
+		if(!context.getSummonStack().isEmpty() && context.getSummonStack().peek().equals(minion) && !context.getEnvironment().containsKey(Environment.TRANSFORM)) {
+			context.getEnvironment().put(Environment.TRANSFORM, newMinion);
+			
 		//It's quite possible that this is actually supposed to add the minion to the zone it was originally in.
 		//This means minions in the SetAsideZone or the Graveyard that are targeted (through bizarre mechanics)
 		//add the minion to there. This will be tested eventually with Resurrect, Recombobulator, and Illidan.
@@ -1554,7 +1572,7 @@ public class GameLogic implements Cloneable {
 			owner.getSetAsideZone().add(newMinion);
 			newMinion.setId(idFactory.generateId());
 			newMinion.setOwner(owner.getId());
-			context.fireGameEvent(new BoardChangedEvent(context));
+			removeSpelltriggers(newMinion);
 			return;
 		}
 		owner.getSetAsideZone().add(minion);
