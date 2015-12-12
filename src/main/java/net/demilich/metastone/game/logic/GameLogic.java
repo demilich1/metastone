@@ -140,7 +140,7 @@ public class GameLogic implements Cloneable {
 		player.getHero().modifyAttribute(Attribute.COMBO, +1);
 		Card card = context.resolveCardReference(cardReference);
 		
-		if (card.getCardType() == CardType.SPELL && !card.hasAttribute(Attribute.COUNTERED)) {
+		if (isSpellCard(card.getCardType()) && !card.hasAttribute(Attribute.COUNTERED)) {
 			checkForDeadEntities();
 			context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, card));
 		}
@@ -252,7 +252,7 @@ public class GameLogic implements Cloneable {
 		if (source != null) {
 			sourceCard = source.getEntityType() == EntityType.CARD ? (Card) source : null;
 		}
-		if (sourceCard != null && sourceCard.getCardType() == CardType.SPELL && !spellDesc.hasPredefinedTarget() && targets != null
+		if (sourceCard != null && isSpellCard(sourceCard.getCardType()) && !spellDesc.hasPredefinedTarget() && targets != null
 				&& targets.size() == 1) {
 			if (sourceCard instanceof SpellCard) {
 				spellCard = (SpellCard) sourceCard;
@@ -368,7 +368,7 @@ public class GameLogic implements Cloneable {
 		int damage = baseDamage;
 		Card sourceCard = source != null && source.getEntityType() == EntityType.CARD ? (Card) source : null;
 		if (!ignoreSpellPower && sourceCard != null) {
-			if (sourceCard.getCardType() == CardType.SPELL) {
+			if (isSpellCard(sourceCard.getCardType())) {
 				damage = applySpellpower(player, source, baseDamage);
 			} else if (sourceCard.getCardType() == CardType.HERO_POWER) {
 				damage = applyHeroPowerDamage(player, damage);
@@ -376,7 +376,7 @@ public class GameLogic implements Cloneable {
 		}
 
 		if (!ignoreSpellPower && sourceCard != null
-				&& (sourceCard.getCardType() == CardType.SPELL || sourceCard.getCardType() == CardType.HERO_POWER)) {
+				&& (isSpellCard(sourceCard.getCardType()) || sourceCard.getCardType() == CardType.HERO_POWER)) {
 			damage = applyAmplify(player, damage, Attribute.SPELL_AMPLIFY_MULTIPLIER);
 		}
 		int damageDealt = 0;
@@ -948,6 +948,13 @@ public class GameLogic implements Cloneable {
 	public boolean isLoggingEnabled() {
 		return loggingEnabled;
 	}
+	
+	public boolean isSpellCard(CardType type) {
+		if (type == CardType.CHOOSE_ONE || type == CardType.SPELL) {
+			return true;
+		}
+		return false;
+	}
 
 	public JoustEvent joust(Player player) {
 		Card ownCard = player.getDeck().getRandomOfType(CardType.MINION);
@@ -1157,7 +1164,7 @@ public class GameLogic implements Cloneable {
 
 		removeCard(playerId, card);
 
-		if (card.getCardType() == CardType.SPELL) {
+		if (isSpellCard(card.getCardType())) {
 			GameEvent spellCastedEvent = new SpellCastedEvent(context, playerId, card);
 			context.fireGameEvent(spellCastedEvent, TriggerLayer.SECRET);
 			if (!card.hasAttribute(Attribute.COUNTERED)) {
