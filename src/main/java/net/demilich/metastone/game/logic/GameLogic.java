@@ -92,6 +92,7 @@ public class GameLogic implements Cloneable {
 	public static final int MAX_MANA = 10;
 	public static final int MAX_SECRETS = 5;
 	public static final int DECK_SIZE = 30;
+	public static final int MAX_DECK_SIZE = 60;
 	public static final int TURN_LIMIT = 100;
 
 	public static final int WINDFURY_ATTACKS = 2;
@@ -1406,13 +1407,10 @@ public class GameLogic implements Cloneable {
 		}
 		card.setLocation(CardLocation.DECK);
 
-		Card randomCard = player.getDeck().getRandom();
-		if (randomCard == null) {
-			player.getDeck().add(card);
-		} else {
-			player.getDeck().addAfter(card, randomCard);
+		if (player.getDeck().getCount() < MAX_DECK_SIZE) {
+			player.getDeck().addRandomly(card);
+			log("Card {} has been shuffled to {}'s deck", card, player.getName());
 		}
-		log("Card {} has been shuffled to {}'s deck", card, player.getName());
 	}
 
 	public void silence(Minion target) {

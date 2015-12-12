@@ -20,15 +20,15 @@ public class CardCollection implements Iterable<Card>, Cloneable {
 		cards.add(card);
 	}
 
-	public void addAfter(Card card, Card after) {
-		int index = cards.indexOf(after);
-		cards.add(index + 1, card);
-	}
-
 	public void addAll(CardCollection cardCollection) {
 		for (Card card : cardCollection) {
 			cards.add(card.clone());
 		}
+	}
+	
+	public void addRandomly(Card card) {
+		int index = ThreadLocalRandom.current().nextInt(cards.size() + 1);
+		cards.add(index, card);
 	}
 
 	public CardCollection clone() {
