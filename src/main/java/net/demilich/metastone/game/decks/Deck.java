@@ -49,6 +49,10 @@ public class Deck {
 	public boolean isComplete() {
 		return cards.getCount() == GameLogic.DECK_SIZE;
 	}
+	
+	public boolean isFull() {
+		return cards.getCount() == GameLogic.MAX_DECK_SIZE;
+	}
 
 	public boolean isMetaDeck() {
 		return getHeroClass() == HeroClass.DECK_COLLECTION;
