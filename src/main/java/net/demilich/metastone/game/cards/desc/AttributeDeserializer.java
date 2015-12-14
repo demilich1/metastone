@@ -35,6 +35,7 @@ public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Ob
 		parseAttribute(Attribute.SPELL_DAMAGE, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.SPELL_AMPLIFY_MULTIPLIER, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.SPELL_DAMAGE_MULTIPLIER, jsonData, map, ParseValueType.INTEGER);
+		parseAttribute(Attribute.HEAL_AMPLIFY_MULTIPLIER, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.INVERT_HEALING, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.HP, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.MAX_HP, jsonData, map, ParseValueType.INTEGER);

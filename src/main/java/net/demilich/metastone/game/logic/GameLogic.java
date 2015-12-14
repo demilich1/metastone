@@ -92,6 +92,7 @@ public class GameLogic implements Cloneable {
 	public static final int MAX_MANA = 10;
 	public static final int MAX_SECRETS = 5;
 	public static final int DECK_SIZE = 30;
+	public static final int MAX_DECK_SIZE = 60;
 	public static final int TURN_LIMIT = 100;
 
 	public static final int WINDFURY_ATTACKS = 2;
@@ -140,15 +141,15 @@ public class GameLogic implements Cloneable {
 		player.getHero().modifyAttribute(Attribute.COMBO, +1);
 		Card card = context.resolveCardReference(cardReference);
 		
-		if (card.getCardType() == CardType.SPELL && !card.hasAttribute(Attribute.COUNTERED)) {
+		if (isSpellCard(card.getCardType()) && !card.hasAttribute(Attribute.COUNTERED)) {
 			checkForDeadEntities();
 			context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, card));
 		}
 		card.removeAttribute(Attribute.MANA_COST_MODIFIER);
 	}
 
-	public int applyAmplify(Player player, int baseValue) {
-		int amplify = 1 + getTotalAttributeValue(player, Attribute.SPELL_AMPLIFY_MULTIPLIER);
+	public int applyAmplify(Player player, int baseValue, Attribute attribute) {
+		int amplify = getTotalAttributeMultiplier(player, attribute);
 		return baseValue * amplify;
 	}
 
@@ -252,7 +253,7 @@ public class GameLogic implements Cloneable {
 		if (source != null) {
 			sourceCard = source.getEntityType() == EntityType.CARD ? (Card) source : null;
 		}
-		if (sourceCard != null && sourceCard.getCardType() == CardType.SPELL && !spellDesc.hasPredefinedTarget() && targets != null
+		if (sourceCard != null && isSpellCard(sourceCard.getCardType()) && !spellDesc.hasPredefinedTarget() && targets != null
 				&& targets.size() == 1) {
 			if (sourceCard instanceof SpellCard) {
 				spellCard = (SpellCard) sourceCard;
@@ -303,35 +304,49 @@ public class GameLogic implements Cloneable {
 	}
 	
 	public void checkForDeadEntities() {
+		checkForDeadEntities(0);
+	}
+	
+	/**
+	 * Checks all player minions and weapons for destroyed actors and runs
+	 * their deathrattle.
+	 */
+	public void checkForDeadEntities(int i) {
+		// Get all entities added to a single list.
+		// We don't have to worry about Heroes, since that's
+		// checked elsewhere.
+		List<Actor> actorList = new ArrayList<Actor>();
 		for (Player player : context.getPlayers()) {
-			List<Minion> minionList = new ArrayList<Minion>(player.getMinions());
-			// sort by id, which has the effect of destroying minions in FIFO
-			// order
-			// which is relevant for deathrattles
-			Collections.sort(minionList, (m1, m2) -> Integer.compare(m1.getId(), m2.getId()));
-			for (Minion minion : minionList) {
-				// need to check if minion is still on the players minion
-				// list...
-				// it may have been removed by another minion dying before (i.e.
-				// Anub'ar Ambusher)
-				if (minion.isDestroyed() && player.getMinions().contains(minion)) {
-					destroy(minion);
-				}
-			}
-			if (player.getHero().getWeapon() != null && player.getHero().getWeapon().isBroken()) {
-				destroy(player.getHero().getWeapon());
+			actorList.addAll(player.getMinions());
+			actorList.add(player.getHero().getWeapon());
+		}
+		
+		// Add anything that's destroyed to the destroyed list.
+		List<Actor> destroyList = new ArrayList<Actor>();
+		for (Actor actor : actorList) {
+			if (actor != null && actor.isDestroyed()) {
+				actor.setAttribute(Attribute.PENDING_DESTROY);
+				removeSpelltriggers(actor);
+				context.getPlayer(actor.getOwner()).getGraveyard().add(actor);
+				destroyList.add(actor);
 			}
 		}
-
-		// a death of one minion may trigger the death of another one, so if
-		// there are still dead entities: run again
-		for (Player player : context.getPlayers()) {
-			for (Minion minion : player.getMinions()) {
-				if (minion.isDestroyed()) {
-					checkForDeadEntities();
-					break;
+		
+		// If nothing's destroyed, don't worry about it!
+		if (!destroyList.isEmpty()) {
+			Collections.sort(destroyList, (a1, a2) -> Integer.compare(a1.getId(), a2.getId()));
+			if (i > 20) {
+				for (Actor actor : destroyList) {
+					logger.error(actor.getName());
 				}
+				throw new RuntimeException("Infinite Dead Loop");
 			}
+			for (Actor actor : destroyList) {
+				destroy(actor);
+			}
+			
+			// Run additional checks until there are no more dead entities.
+			checkForDeadEntities(i + 1);
 		}
 	}
 
@@ -354,7 +369,7 @@ public class GameLogic implements Cloneable {
 		int damage = baseDamage;
 		Card sourceCard = source != null && source.getEntityType() == EntityType.CARD ? (Card) source : null;
 		if (!ignoreSpellPower && sourceCard != null) {
-			if (sourceCard.getCardType() == CardType.SPELL) {
+			if (isSpellCard(sourceCard.getCardType())) {
 				damage = applySpellpower(player, source, baseDamage);
 			} else if (sourceCard.getCardType() == CardType.HERO_POWER) {
 				damage = applyHeroPowerDamage(player, damage);
@@ -362,8 +377,8 @@ public class GameLogic implements Cloneable {
 		}
 
 		if (!ignoreSpellPower && sourceCard != null
-				&& (sourceCard.getCardType() == CardType.SPELL || sourceCard.getCardType() == CardType.HERO_POWER)) {
-			damage = applyAmplify(player, damage);
+				&& (isSpellCard(sourceCard.getCardType()) || sourceCard.getCardType() == CardType.HERO_POWER)) {
+			damage = applyAmplify(player, damage, Attribute.SPELL_AMPLIFY_MULTIPLIER);
 		}
 		int damageDealt = 0;
 		if (target.hasAttribute(Attribute.TAKE_DOUBLE_DAMAGE)) {
@@ -482,8 +497,9 @@ public class GameLogic implements Cloneable {
 		minion.setAttribute(Attribute.DIED_ON_TURN, context.getTurn());
 
 		int boardPosition = owner.getMinions().indexOf(minion);
-		owner.getMinions().remove(boardPosition);
-		owner.getGraveyard().add(minion);
+		if (boardPosition != -1) {
+			owner.getMinions().remove(boardPosition);
+		}
 
 		resolveDeathrattles(owner, minion, boardPosition);
 	}
@@ -493,7 +509,6 @@ public class GameLogic implements Cloneable {
 		resolveDeathrattles(owner, weapon);
 		weapon.onUnequip(context, owner);
 		owner.getHero().setWeapon(null);
-		owner.getGraveyard().add(weapon);
 		context.fireGameEvent(new WeaponDestroyedEvent(context, weapon));
 	}
 
@@ -584,12 +599,14 @@ public class GameLogic implements Cloneable {
 		context.getEnvironment().put(Environment.SUMMONED_WEAPON, weapon);
 		Weapon currentWeapon = player.getHero().getWeapon();
 
-		if (currentWeapon != null) {
-			log("{} discards currently equipped weapon {}", player.getHero(), currentWeapon);
-			destroy(currentWeapon);
-		}
 		if (weapon.getBattlecry() != null && !weapon.getBattlecry().isResolvedLate()) {
 			resolveBattlecry(playerId, weapon);
+		}
+
+		if (currentWeapon != null) {
+			log("{} discards currently equipped weapon {}", player.getHero(), currentWeapon);
+			markAsDestroyed(currentWeapon);
+			checkForDeadEntities();
 		}
 		player.getStatistics().equipWeapon(weapon);
 		context.getEnvironment().remove(Environment.SUMMONED_WEAPON);
@@ -774,6 +791,19 @@ public class GameLogic implements Cloneable {
 		}
 		return total;
 	}
+	
+	public int getTotalAttributeMultiplier(Player player, Attribute attribute) {
+		int total = 1;
+		if (player.getHero().hasAttribute(attribute)) {
+			player.getHero().getAttributeValue(attribute);
+		}
+		for (Entity minion : player.getMinions()) {
+			if (minion.hasAttribute(attribute)) {
+				total *= minion.getAttributeValue(attribute);
+			}
+		}
+		return total;
+	}
 
 	public List<GameAction> getValidActions(int playerId) {
 		Player player = context.getPlayer(playerId);
@@ -824,7 +854,7 @@ public class GameLogic implements Cloneable {
 			return true;
 		}
 		for (Entity minion : player.getMinions()) {
-			if (minion.hasAttribute(attr)) {
+			if (minion.hasAttribute(attr) && !minion.hasAttribute(Attribute.PENDING_DESTROY)) {
 				return true;
 			}
 		}
@@ -850,6 +880,7 @@ public class GameLogic implements Cloneable {
 			damage(player, target, healing, source);
 			return;
 		}
+		healing = applyAmplify(player, healing, Attribute.HEAL_AMPLIFY_MULTIPLIER);
 		boolean success = false;
 		switch (target.getEntityType()) {
 		case MINION:
@@ -917,6 +948,13 @@ public class GameLogic implements Cloneable {
 
 	public boolean isLoggingEnabled() {
 		return loggingEnabled;
+	}
+	
+	public boolean isSpellCard(CardType type) {
+		if (type == CardType.CHOOSE_ONE || type == CardType.SPELL) {
+			return true;
+		}
+		return false;
 	}
 
 	public JoustEvent joust(Player player) {
@@ -1014,7 +1052,7 @@ public class GameLogic implements Cloneable {
 			}
 			context.fireGameEvent(new BoardChangedEvent(context));
 		} else {
-			destroy(minion);
+			markAsDestroyed(minion);
 		}
 	}
 
@@ -1127,7 +1165,7 @@ public class GameLogic implements Cloneable {
 
 		removeCard(playerId, card);
 
-		if (card.getCardType() == CardType.SPELL) {
+		if (isSpellCard(card.getCardType())) {
 			GameEvent spellCastedEvent = new SpellCastedEvent(context, playerId, card);
 			context.fireGameEvent(spellCastedEvent, TriggerLayer.SECRET);
 			if (!card.hasAttribute(Attribute.COUNTERED)) {
@@ -1369,13 +1407,10 @@ public class GameLogic implements Cloneable {
 		}
 		card.setLocation(CardLocation.DECK);
 
-		Card randomCard = player.getDeck().getRandom();
-		if (randomCard == null) {
-			player.getDeck().add(card);
-		} else {
-			player.getDeck().addAfter(card, randomCard);
+		if (player.getDeck().getCount() < MAX_DECK_SIZE) {
+			player.getDeck().addRandomly(card);
+			log("Card {} has been shuffled to {}'s deck", card, player.getName());
 		}
-		log("Card {} has been shuffled to {}'s deck", card, player.getName());
 	}
 
 	public void silence(Minion target) {
@@ -1406,9 +1441,6 @@ public class GameLogic implements Cloneable {
 		target.setMaxHp(target.getAttributeValue(Attribute.BASE_HP));
 		target.setAttack(target.getAttributeValue(Attribute.BASE_ATTACK));
 		if (target.getHp() > target.getMaxHp() || target.getHp() == oldMaxHp) {
-			target.setHp(target.getMaxHp());
-		}
-		if (target.getHp() > target.getMaxHp()) {
 			target.setHp(target.getMaxHp());
 		}
 
@@ -1467,7 +1499,12 @@ public class GameLogic implements Cloneable {
 
 		if (resolveBattlecry && minion.getBattlecry() != null && !minion.getBattlecry().isResolvedLate()) {
 			resolveBattlecry(player.getId(), minion);
-			minion = context.getSummonStack().peek();
+		}
+		
+		if (context.getEnvironment().get(Environment.TRANSFORM) != null) {
+			minion = (Minion) context.getEnvironment().get(Environment.TRANSFORM);
+			minion.setBattlecry(null);
+			context.getEnvironment().remove(Environment.TRANSFORM);
 		}
 
 		if (index < 0 || index >= player.getMinions().size()) {
@@ -1514,7 +1551,6 @@ public class GameLogic implements Cloneable {
 	public void transformMinion(Minion minion, Minion newMinion) {
 		//Remove any spell triggers associated with the old minion.
 		removeSpelltriggers(minion);
-		minion.setAttribute(Attribute.DESTROYED);
 
 		log("{} was transformed to {}", minion, newMinion);
 		Player owner = context.getPlayer(minion.getOwner());
@@ -1523,9 +1559,9 @@ public class GameLogic implements Cloneable {
 		//If the minion being transforms is being summoned, replace the old minion on the stack.
 		//Otherwise, summon the add the new minion.
 		//However, do not give a summon event.
-		if(!context.getSummonStack().isEmpty() && context.getSummonStack().peek().equals(minion)) {
-			context.getSummonStack().pop();
-			context.getSummonStack().push(newMinion);
+		if(!context.getSummonStack().isEmpty() && context.getSummonStack().peek().equals(minion) && !context.getEnvironment().containsKey(Environment.TRANSFORM)) {
+			context.getEnvironment().put(Environment.TRANSFORM, newMinion);
+			
 		//It's quite possible that this is actually supposed to add the minion to the zone it was originally in.
 		//This means minions in the SetAsideZone or the Graveyard that are targeted (through bizarre mechanics)
 		//add the minion to there. This will be tested eventually with Resurrect, Recombobulator, and Illidan.
@@ -1541,7 +1577,7 @@ public class GameLogic implements Cloneable {
 			owner.getSetAsideZone().add(newMinion);
 			newMinion.setId(idFactory.generateId());
 			newMinion.setOwner(owner.getId());
-			context.fireGameEvent(new BoardChangedEvent(context));
+			removeSpelltriggers(newMinion);
 			return;
 		}
 		owner.getSetAsideZone().add(minion);

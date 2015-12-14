@@ -19,7 +19,7 @@ public class DestroyWeaponSpell extends Spell {
 		if (hero.getWeapon() == null) {
 			return;
 		}
-		context.getLogic().destroy(hero.getWeapon());
+		context.getLogic().markAsDestroyed(hero.getWeapon());
 	}
 
 }

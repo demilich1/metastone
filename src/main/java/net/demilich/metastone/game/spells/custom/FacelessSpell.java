@@ -2,6 +2,7 @@ package net.demilich.metastone.game.spells.custom;
 
 import java.util.Map;
 
+import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
@@ -30,6 +31,10 @@ public class FacelessSpell extends Spell {
 
 		Minion sourceActor = context.getSummonStack().peek();
 		SpellDesc transformSpell = TransformMinionSpell.create(clone);
+		if (context.getEnvironment().get(Environment.TRANSFORM) != null) {
+			SpellUtils.castChildSpell(context, player, transformSpell, source, sourceActor);
+			return;
+		}
 		SpellUtils.castChildSpell(context, player, transformSpell, source, sourceActor);
 
 		for (IGameEventListener trigger : context.getTriggersAssociatedWith(template.getReference())) {

@@ -2,6 +2,7 @@ package net.demilich.metastone.game.spells;
 
 import java.util.List;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
@@ -21,7 +22,7 @@ public class MissilesSpell extends DamageSpell {
 
 		if (source.getEntityType() == EntityType.CARD && ((Card) source).getCardType() == CardType.SPELL) {
 			missiles = context.getLogic().applySpellpower(player, source,  missiles);
-			missiles = context.getLogic().applyAmplify(player, missiles);
+			missiles = context.getLogic().applyAmplify(player, missiles, Attribute.SPELL_AMPLIFY_MULTIPLIER);
 		}
 		for (int i = 0; i < missiles; i++) {
 			List<Actor> validTargets = SpellUtils.getValidRandomTargets(targets);

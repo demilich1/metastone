@@ -41,7 +41,7 @@ public class CardPanel extends VBox {
 	private void handleEditDeckButton(ActionEvent actionEvent) {
 		CardCollection deck = selectedPlayer.getDeck();
 		CardCollectionEditor cardCollectionEditor = new CardCollectionEditor("Edit deck", deck, this::onDeckFinishedEditing,
-				GameLogic.DECK_SIZE);
+				GameLogic.MAX_DECK_SIZE);
 		ApplicationFacade.getInstance().sendNotification(GameNotification.SHOW_MODAL_DIALOG, cardCollectionEditor);
 	}
 
