@@ -1,7 +1,7 @@
 {
 	"id": "spell_drain_life",
 	"name": "Drain Life",
-	"baseManaCost": 2,
+	"baseManaCost": 3,
 	"type": "SPELL",
 	"heroClass": "WARLOCK",
 	"rarity": "FREE",
