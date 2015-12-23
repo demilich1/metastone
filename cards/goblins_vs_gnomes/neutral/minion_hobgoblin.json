@@ -14,7 +14,7 @@
 			"condition": {
 				"class": "AttributeCondition",
 				"value": 1,
-				"attribute": "BASE_ATTACK",
+				"attribute": "ATTACK",
 				"operation": "EQUAL"
 			}
 		},
