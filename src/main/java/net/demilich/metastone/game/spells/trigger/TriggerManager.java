@@ -43,6 +43,7 @@ public class TriggerManager implements Cloneable, IDisposable {
 	}
 
 	public void fireGameEvent(GameEvent event) {
+		List<IGameEventListener> eventTriggers = new ArrayList<IGameEventListener>();
 		for (IGameEventListener trigger : getListSnapshot(triggers)) {
 			if (trigger.getLayer() != event.getTriggerLayer()) {
 				continue;
@@ -51,13 +52,17 @@ public class TriggerManager implements Cloneable, IDisposable {
 			if (!trigger.interestedIn(event.getEventType())) {
 				continue;
 			}
+			if (triggers.contains(trigger) && trigger.canFire(event)) {
+				eventTriggers.add(trigger);
+			}
+		}
+		
+		for (IGameEventListener trigger : eventTriggers) {
+			trigger.onGameEvent(event);
+			
 			// we need to double check here if the trigger still exists;
 			// after all, a previous trigger may have removed it (i.e. double
 			// corruption)
-			if (triggers.contains(trigger)) {
-				trigger.onGameEvent(event);
-			}
-
 			if (trigger.isExpired()) {
 				triggers.remove(trigger);
 			}

@@ -9,6 +9,8 @@ import net.demilich.metastone.game.targeting.EntityReference;
 public interface IGameEventListener {
 
 	public IGameEventListener clone();
+	
+	public abstract boolean canFire(GameEvent event);
 
 	public abstract EntityReference getHostReference();
 
