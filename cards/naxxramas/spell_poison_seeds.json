@@ -10,13 +10,17 @@
 	"spell": {
 		"class": "MetaSpell",
 		"spell1": {
-			"class": "InstantDestroySpell"
+			"class": "DestroySpell"
 		},
 		"spell2": {
+			"class": "CheckDeadSpell"
+		},
+		"spell3": {
 			"class": "SummonSpell",
 			"targetPlayer": "OWNER",
 			"card": "token_treant"
 		},
+		"resolveAllFirst": true,
 		"target": "ALL_MINIONS"
 	},
 	"collectible": true,

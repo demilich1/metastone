@@ -28,8 +28,22 @@ public abstract class Spell {
 		} else {
 			// there is at least one target and RANDOM_TARGET flag is not set,
 			// cast in on all targets
-			for (Entity target : validTargets) {
-				castForPlayer(context, player, desc, source, target);
+			if (desc.getBool(SpellArg.RESOLVE_ALL_FIRST) && desc.getSpellClass().equals(MetaSpell.class)) {
+				for (Entity target : validTargets) {
+					SpellUtils.castChildSpell(context, player, (SpellDesc) desc.get(SpellArg.SPELL_1), source, target);
+				}
+				for (Entity target : validTargets) {
+					SpellUtils.castChildSpell(context, player, (SpellDesc) desc.get(SpellArg.SPELL_2), source, target);
+				}
+				if (desc.get(SpellArg.SPELL_3) != null) {
+					for (Entity target : validTargets) {
+						SpellUtils.castChildSpell(context, player, (SpellDesc) desc.get(SpellArg.SPELL_3), source, target);
+					}
+				}
+			} else {
+				for (Entity target : validTargets) {
+					castForPlayer(context, player, desc, source, target);
+				}
 			}
 		}
 	}

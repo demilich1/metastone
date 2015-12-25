@@ -4,24 +4,20 @@ import java.util.Map;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
-public class InstantDestroySpell extends Spell {
+public class CheckDeadSpell extends Spell {
 
 	public static SpellDesc create() {
-		Map<SpellArg, Object> arguments = SpellDesc.build(InstantDestroySpell.class);
+		Map<SpellArg, Object> arguments = SpellDesc.build(CheckDeadSpell.class);
 		return new SpellDesc(arguments);
 	}
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		if (target.isDestroyed()) {
-			return;
-		}
-		context.getLogic().markAsDestroyed((Actor) target);
+		context.getLogic().checkForDeadEntities();
 	}
 
 }
