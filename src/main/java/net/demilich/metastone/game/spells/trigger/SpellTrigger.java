@@ -105,21 +105,20 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 		}
 		
 		int ownerId = primaryTrigger.getOwner();
+		
+		// Expire the trigger beforehand, in case of copying minion (Echoing Ooze). Since this method should only be called
+		// after being checked to be played, copying one-turn triggers should no longer matter.
+		if (oneTurn) {
+			expire();
+		}
 		try {
 			event.getGameContext().getEnvironment().put(Environment.EVENT_TARGET, event.getEventTarget());
 			onFire(ownerId, spell, event);
 			event.getGameContext().getEnvironment().remove(Environment.EVENT_TARGET);
-			if (event.getEventType() == GameEventType.TURN_START) {
-				expire();
-			}
 		} catch (Exception e) {
 			event.getGameContext().printCurrentTriggers();
 			logger.error("SpellTrigger cannot be executed; GameEventTrigger: {} Spell: {}", primaryTrigger, spell);
 			throw e;
-		}
-		
-		if (oneTurn && event.getEventType() == GameEventType.TURN_END && primaryTrigger.interestedIn() != GameEventType.TURN_START) {
-			expire();
 		}
 	}
 
