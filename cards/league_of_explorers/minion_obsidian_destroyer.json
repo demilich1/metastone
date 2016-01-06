@@ -5,7 +5,7 @@
 	"type": "MINION",
 	"baseAttack": 7,
 	"baseHp": 7,
-	"heroClass": "ANY",
+	"heroClass": "WARRIOR",
 	"rarity": "COMMON",
 	"description": "At the end of your turn, summon a 1/1 Scarab with Taunt.",
 	"trigger": {
