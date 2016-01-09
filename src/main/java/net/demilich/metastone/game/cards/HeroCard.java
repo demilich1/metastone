@@ -18,12 +18,13 @@ import net.demilich.metastone.gui.IconFactory;
 public class HeroCard extends Card {
 
 	private static final Set<Attribute> inheritedAttributes = new HashSet<Attribute>(
-			Arrays.asList(new Attribute[] { Attribute.HP, Attribute.MAX_HP, Attribute.ARMOR }));
+			Arrays.asList(new Attribute[] { Attribute.HP, Attribute.MAX_HP, Attribute.BASE_HP, Attribute.ARMOR }));
 
 	private final HeroCardDesc desc;
 
 	public HeroCard(HeroCardDesc desc) {
 		super(desc);
+		setAttribute(Attribute.BASE_HP, getAttributeValue(Attribute.MAX_HP));
 		this.desc = desc;
 	}
 

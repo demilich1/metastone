@@ -17,6 +17,9 @@ public class Weapon extends Actor {
 
 	public Weapon(Card sourceCard, int weaponDamage, int durability) {
 		super(sourceCard);
+		setAttribute(Attribute.BASE_ATTACK, weaponDamage);
+		setAttribute(Attribute.BASE_HP, durability);
+		setAttribute(Attribute.MAX_HP, durability);
 		setAttribute(Attribute.ATTACK, weaponDamage);
 		setAttribute(Attribute.HP, durability);
 	}

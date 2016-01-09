@@ -78,8 +78,16 @@ public class GameToken extends BorderPane {
 		Color color = Color.WHITE;
 		if (value > baseValue) {
 			color = Color.GREEN;
-		} else if (value < baseValue) {
+		}
+		DigitFactory.showPreRenderedDigits(group, value, color);
+	}
+	
+	protected void setScoreValue(Group group, int value, int baseValue, int maxValue) {
+		Color color = Color.WHITE;
+		if (value < maxValue) {
 			color = Color.RED;
+		} else if (value > baseValue) {
+			color = Color.GREEN;
 		}
 		DigitFactory.showPreRenderedDigits(group, value, color);
 	}
