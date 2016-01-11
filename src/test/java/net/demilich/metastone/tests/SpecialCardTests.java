@@ -18,7 +18,6 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.spells.DamageSpell;
 import net.demilich.metastone.game.spells.DestroySpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -362,63 +361,6 @@ public class SpecialCardTests extends TestBase {
 		context.getLogic().performGameAction(rogue.getId(), action);
 
 		Assert.assertEquals(paladin.getMinions().size(), 1);
-	}
-
-	@Test
-	public void testPoisonSeeds() {
-		GameContext context = createContext(HeroClass.DRUID, HeroClass.ROGUE);
-		Player druid = context.getPlayer1();
-		Player rogue = context.getPlayer2();
-		MinionCard chillwindYeti = (MinionCard) CardCatalogue.getCardById("minion_chillwind_yeti");
-
-		for (int i = 0; i < GameLogic.MAX_MINIONS; i++) {
-			playMinionCard(context, druid, chillwindYeti);
-		}
-
-		MinionCard nerubianEgg = (MinionCard) CardCatalogue.getCardById("minion_nerubian_egg");
-		for (int i = 0; i < 3; i++) {
-			playMinionCard(context, rogue, nerubianEgg);
-		}
-
-		Assert.assertEquals(druid.getMinions().size(), GameLogic.MAX_MINIONS);
-		Assert.assertEquals(rogue.getMinions().size(), 3);
-
-		SpellCard poisonSeeds = (SpellCard) CardCatalogue.getCardById("spell_poison_seeds");
-		playCard(context, druid, poisonSeeds);
-
-		Assert.assertEquals(druid.getMinions().size(), GameLogic.MAX_MINIONS);
-		Assert.assertEquals(rogue.getMinions().size(), 6);
-		for (Minion minion : druid.getMinions()) {
-			Assert.assertEquals(minion.getSourceCard().getCardId(), "token_treant");
-		}
-	}
-	
-	@Test
-	public void testPoisonSeedsAuchenai() {
-		GameContext context = createContext(HeroClass.DRUID, HeroClass.PRIEST);
-		Player druid = context.getPlayer1();
-		Player priest = context.getPlayer2();
-		
-		MinionCard zombieChow = (MinionCard) CardCatalogue.getCardById("minion_zombie_chow");
-		playMinionCard(context, priest, zombieChow);
-		playMinionCard(context, priest, zombieChow);
-		
-		MinionCard auchenaiSoulpriest = (MinionCard) CardCatalogue.getCardById("minion_auchenai_soulpriest");
-		playMinionCard(context, priest, auchenaiSoulpriest);
-
-		Card pyroblast = CardCatalogue.getCardById("spell_pyroblast");
-		context.getLogic().receiveCard(druid.getId(), pyroblast);
-		GameAction gameAction = pyroblast.play();
-		gameAction.setTarget(druid.getHero());
-		context.getLogic().performGameAction(druid.getId(), gameAction);
-		
-		Assert.assertEquals(druid.getHero().getHp(), GameLogic.MAX_HERO_HP - 10);
-
-		SpellCard poisonSeeds = (SpellCard) CardCatalogue.getCardById("spell_poison_seeds");
-		playCard(context, druid, poisonSeeds);
-		
-		Assert.assertEquals(druid.getHero().getHp(), GameLogic.MAX_HERO_HP);
-
 	}
 
 }

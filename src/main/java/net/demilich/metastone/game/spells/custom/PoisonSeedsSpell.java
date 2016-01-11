@@ -5,6 +5,7 @@ import java.util.Map;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.spells.DestroySpell;
 import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.SummonSpell;
 import net.demilich.metastone.game.spells.desc.SpellArg;
@@ -34,6 +35,8 @@ public class PoisonSeedsSpell extends Spell {
 			return;
 		}
 		
+		SpellDesc destroySpell = DestroySpell.create(EntityReference.FRIENDLY_MINIONS);
+		context.getLogic().castSpell(player.getId(), destroySpell, source, null, true);
 		context.getLogic().checkForDeadEntities();
 
 		String[] treants = new String[minionCount];
