@@ -1066,6 +1066,9 @@ public class GameLogic implements Cloneable {
 		log("Durability of weapon {} is changed by {}", weapon, durability);
 
 		weapon.modifyAttribute(Attribute.HP, durability);
+		if (durability > 0) {
+			weapon.modifyAttribute(Attribute.MAX_HP, durability);
+		}
 	}
 
 	public void modifyMaxHp(Actor actor, int value) {

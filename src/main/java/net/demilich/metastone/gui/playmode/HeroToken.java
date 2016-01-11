@@ -78,7 +78,7 @@ public class HeroToken extends GameToken {
 		portrait.setImage(portraitImage);
 		Image heroPowerImage = new Image(IconFactory.getHeroPowerIconUrl(hero.getHeroPower()));
 		heroPowerIcon.setImage(heroPowerImage);
-		DigitFactory.showPreRenderedDigits(hpAnchor, hero.getHp());
+		setScoreValue(hpAnchor, hero.getHp(), hero.getAttributeValue(Attribute.BASE_HP), hero.getMaxHp());
 		cardsLabel.setText("Cards in deck: " + player.getDeck().getCount());
 		manaLabel.setText("Mana: " + player.getMana() + "/" + player.getMaxMana());
 		updateArmor(hero.getArmor());
@@ -118,8 +118,8 @@ public class HeroToken extends GameToken {
 		weaponPane.setVisible(hasWeapon);
 		if (hasWeapon) {
 			weaponNameLabel.setText(weapon.getName());
-			DigitFactory.showPreRenderedDigits(weaponAttackAnchor, weapon.getWeaponDamage());
-			DigitFactory.showPreRenderedDigits(weaponDurabilityAnchor, weapon.getDurability());
+			setScoreValue(weaponAttackAnchor, weapon.getWeaponDamage(), weapon.getAttributeValue(Attribute.BASE_ATTACK));
+			setScoreValue(weaponDurabilityAnchor, weapon.getDurability(), weapon.getAttributeValue(Attribute.BASE_HP), weapon.getAttributeValue(Attribute.MAX_HP));
 		}
 	}
 

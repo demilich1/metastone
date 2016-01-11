@@ -1,6 +1,6 @@
 {
-	"id": "minion_iron_sensai",
-	"name": "Iron Sensai",
+	"id": "minion_iron_sensei",
+	"name": "Iron Sensei",
 	"baseManaCost": 3,
 	"type": "MINION",
 	"baseAttack": 2,

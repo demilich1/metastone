@@ -13,9 +13,9 @@
 			"class": "MinionPlayedTrigger",
 			"condition": {
 				"class": "AttributeCondition",
-				"value": 2,
+				"value": 1,
 				"attribute": "ATTACK",
-				"operation": "LESS"
+				"operation": "EQUAL"
 			}
 		},
 		"spell": {

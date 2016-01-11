@@ -105,24 +105,20 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 		}
 		
 		int ownerId = primaryTrigger.getOwner();
+		
+		// Expire the trigger beforehand, in case of copying minion (Echoing Ooze). Since this method should only be called
+		// after being checked to be played, copying one-turn triggers should no longer matter.
+		if (oneTurn) {
+			expire();
+		}
 		try {
-			Entity host = event.getGameContext().resolveSingleTarget(hostReference);
-			if (triggerFires(primaryTrigger, event, host) || triggerFires(secondaryTrigger, event, host)) {
-				event.getGameContext().getEnvironment().put(Environment.EVENT_TARGET, event.getEventTarget());
-				onFire(ownerId, spell, event);
-				event.getGameContext().getEnvironment().remove(Environment.EVENT_TARGET);
-				if (event.getEventType() == GameEventType.TURN_START) {
-					expire();
-				}
-			}
+			event.getGameContext().getEnvironment().put(Environment.EVENT_TARGET, event.getEventTarget());
+			onFire(ownerId, spell, event);
+			event.getGameContext().getEnvironment().remove(Environment.EVENT_TARGET);
 		} catch (Exception e) {
 			event.getGameContext().printCurrentTriggers();
 			logger.error("SpellTrigger cannot be executed; GameEventTrigger: {} Spell: {}", primaryTrigger, spell);
 			throw e;
-		}
-		
-		if (oneTurn && event.getEventType() == GameEventType.TURN_END && primaryTrigger.interestedIn() != GameEventType.TURN_START) {
-			expire();
 		}
 	}
 
@@ -151,6 +147,12 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 	public String toString() {
 		return "[SpellTrigger primaryTrigger=" + primaryTrigger + ", secondaryTrigger=" + secondaryTrigger + ", spell=" + spell
 				+ ", hostReference=" + hostReference + ", oneTurn=" + oneTurn + ", expired=" + expired + ", layer=" + layer + "]";
+	}
+	
+	@Override
+	public boolean canFire(GameEvent event) {
+		Entity host = event.getGameContext().resolveSingleTarget(hostReference);
+		return (triggerFires(primaryTrigger, event, host) || triggerFires(secondaryTrigger, event, host));
 	}
 
 	private boolean triggerFires(GameEventTrigger trigger, GameEvent event, Entity host) {

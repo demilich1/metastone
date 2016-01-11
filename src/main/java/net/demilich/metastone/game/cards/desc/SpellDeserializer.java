@@ -70,6 +70,7 @@ public class SpellDeserializer implements JsonDeserializer<SpellDesc> {
 		parseArgument(SpellArg.UNIQUE_MINION, jsonData, spellArgs, ParseValueType.STRING);
 		parseArgument(SpellArg.INCLUDE_UNCOLLECTIBLE, jsonData, spellArgs, ParseValueType.BOOLEAN);
 		parseArgument(SpellArg.CANNOT_RECEIVE_OWNED, jsonData, spellArgs, ParseValueType.BOOLEAN);
+		parseArgument(SpellArg.RESOLVE_ALL_FIRST, jsonData, spellArgs, ParseValueType.BOOLEAN);
 		return new SpellDesc(spellArgs);
 	}
 

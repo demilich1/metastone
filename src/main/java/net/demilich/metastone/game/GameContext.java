@@ -347,7 +347,7 @@ public class GameContext implements Cloneable, IDisposable {
 	}
 	
 	public void removeTrigger(IGameEventListener trigger) {
-		triggerManager.addTrigger(trigger);
+		triggerManager.removeTrigger(trigger);
 	}
 
 	public void removeTriggersAssociatedWith(EntityReference entityReference) {

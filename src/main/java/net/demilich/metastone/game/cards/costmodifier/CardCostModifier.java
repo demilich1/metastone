@@ -74,6 +74,11 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 		
 		return card.getCardType() == getCardType();
 	}
+	
+	@Override
+	public boolean canFire(GameEvent event) {
+		return true;
+	}
 
 	@Override
 	public CardCostModifier clone() {

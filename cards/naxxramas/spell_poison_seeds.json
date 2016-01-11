@@ -10,14 +10,18 @@
 	"spell": {
 		"class": "MetaSpell",
 		"spell1": {
-			"class": "InstantDestroySpell"
+			"class": "DestroySpell"
 		},
 		"spell2": {
+			"class": "CheckDeadSpell"
+		},
+		"spell3": {
 			"class": "SummonSpell",
 			"targetPlayer": "OWNER",
 			"card": "token_treant"
 		},
-		"target": "ALL_MINIONS"
+		"target": "ALL_MINIONS",
+		"resolveAllFirst": true
 	},
 	"collectible": true,
 	"set": "NAXXRAMAS",
