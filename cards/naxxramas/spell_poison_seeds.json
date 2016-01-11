@@ -20,8 +20,7 @@
 			"targetPlayer": "OWNER",
 			"card": "token_treant"
 		},
-		"target": "ALL_MINIONS",
-		"resolveAllFirst": true
+		"target": "ALL_MINIONS"
 	},
 	"collectible": true,
 	"set": "NAXXRAMAS",
