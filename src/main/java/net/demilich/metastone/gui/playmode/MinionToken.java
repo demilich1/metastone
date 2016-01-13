@@ -1,5 +1,8 @@
 package net.demilich.metastone.gui.playmode;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -7,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.gui.DigitFactory;
@@ -27,7 +31,7 @@ public class MinionToken extends GameToken {
 	@FXML
 	private Node taunt;
 	@FXML
-	private Node windfury;
+	private Text windfury;
 	@FXML
 	private Node deathrattle;
 
@@ -35,6 +39,8 @@ public class MinionToken extends GameToken {
 	private Shape frozen;
 
 	private CardTooltip cardTooltip;
+	
+	Logger logger = LoggerFactory.getLogger(MinionToken.class);
 
 	public MinionToken() {
 		super("MinionToken.fxml");
@@ -63,7 +69,12 @@ public class MinionToken extends GameToken {
 		taunt.setVisible(minion.hasAttribute(Attribute.TAUNT));
 		defaultToken.setVisible(!minion.hasAttribute(Attribute.TAUNT));
 		divineShield.setVisible(minion.hasAttribute(Attribute.DIVINE_SHIELD));
-		windfury.setVisible(minion.hasAttribute(Attribute.WINDFURY));
+		windfury.setVisible(minion.hasAttribute(Attribute.WINDFURY) || minion.hasAttribute(Attribute.MEGA_WINDFURY));
+		if(minion.hasAttribute(Attribute.MEGA_WINDFURY)) {
+			windfury.setText("x4");
+		} else {
+			windfury.setText("x2");
+		}
 		deathrattle.setVisible(minion.hasAttribute(Attribute.DEATHRATTLES));
 		frozen.setVisible(minion.hasAttribute(Attribute.FROZEN));
 		visualizeStealth(minion);
