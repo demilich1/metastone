@@ -15,7 +15,8 @@
 		},
 		"spell": {
 			"class": "SummonSpell",
-			"card": "minion_leper_gnome"
+			"card": "minion_leper_gnome",
+			"boardPositionRelative": "RIGHT"
 		}
 	},
 	"race": "MECH",

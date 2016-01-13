@@ -14,7 +14,8 @@
 		},
 		"spell": {
 			"class": "SummonSpell",
-			"card": "token_war_kodo"
+			"card": "token_war_kodo",
+			"boardPositionRelative": "RIGHT"
 		}
 	},
 	"collectible": true,

@@ -14,7 +14,8 @@
 		},
 		"spell": {
 			"class": "SummonSpell",
-			"card": "token_whelp_egg"
+			"card": "token_whelp_egg",
+			"boardPositionRelative": "RIGHT"
 		}
 	},
 	"collectible": true,

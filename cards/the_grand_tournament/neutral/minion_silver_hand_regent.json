@@ -14,7 +14,8 @@
 		},
 		"spell": {
 			"class": "SummonSpell",
-			"card": "token_silver_hand_recruit"
+			"card": "token_silver_hand_recruit",
+			"boardPositionRelative": "RIGHT"
 		}
 	},
 	"collectible": true,
