@@ -9,7 +9,7 @@ public class DefaultDeckValidator implements IDeckValidator {
 
 	@Override
 	public boolean canAddCardToDeck(Card card, Deck deck) {
-		if (deck.getCards().getCount() >= GameLogic.DECK_SIZE) {
+		if (deck.getCards().getCount() >= GameLogic.MAX_DECK_SIZE) {
 			return false;
 		}
 		int cardInDeckCount = deck.containsHowMany(card);

@@ -79,7 +79,7 @@ public class DeckInfoView extends HBox implements EventHandler<ActionEvent>, IDi
 			countLabel.setText(metaDeck.getDecks().size() + "");
 		} else {
 			typeLabel.setText("Cards");
-			countLabel.setText(deck.getCards().getCount() + "/" + GameLogic.MAX_DECK_SIZE);
+			countLabel.setText(deck.getCards().getCount() + "/" + GameLogic.DECK_SIZE);
 		}
 
 	}
