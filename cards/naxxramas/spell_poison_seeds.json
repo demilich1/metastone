@@ -8,20 +8,7 @@
 	"description": "Destroy all minions and summon 2/2 treants to replace them",
 	"targetSelection": "NONE",
 	"spell": {
-		"class": "MetaSpell",
-		"spell1": {
-			"class": "DestroySpell"
-		},
-		"spell2": {
-			"class": "CheckDeadSpell"
-		},
-		"spell3": {
-			"class": "SummonSpell",
-			"targetPlayer": "OWNER",
-			"card": "token_treant"
-		},
-		"target": "ALL_MINIONS",
-		"resolveAllFirst": true
+		"class": "custom.PoisonSeedsSpell"
 	},
 	"collectible": true,
 	"set": "NAXXRAMAS",

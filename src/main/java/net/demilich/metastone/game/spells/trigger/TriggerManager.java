@@ -44,7 +44,7 @@ public class TriggerManager implements Cloneable, IDisposable {
 
 	public void fireGameEvent(GameEvent event) {
 		List<IGameEventListener> eventTriggers = new ArrayList<IGameEventListener>();
-		for (IGameEventListener trigger : getListSnapshot(triggers)) {
+		for (IGameEventListener trigger : triggers) {
 			if (trigger.getLayer() != event.getTriggerLayer()) {
 				continue;
 			}

@@ -14,12 +14,12 @@
 			"spell1": {
 				"class": "SummonSpell",
 				"card": "token_boom_bot",
-				"boardPositionRelative": "LEFT"
+				"boardPositionRelative": "RIGHT"
 			},
 			"spell2": {
 				"class": "SummonSpell",
 				"card": "token_boom_bot",
-				"boardPositionRelative": "RIGHT"
+				"boardPositionRelative": "LEFT"
 			}
 		},
 		"resolvedLate": true

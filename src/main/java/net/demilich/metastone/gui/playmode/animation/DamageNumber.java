@@ -18,13 +18,18 @@ public class DamageNumber extends StackPane {
 
 	private final GameToken parent;
 
-	public DamageNumber(String text, GameToken parent) {
+	public DamageNumber(String text, GameToken parent, int successiveHits) {
 		this.parent = parent;
 		this.setAlignment(Pos.CENTER);
 
 		ImageView image = new ImageView(IconFactory.getImageUrl("common/splash.png"));
 		image.setFitWidth(96);
 		image.setFitHeight(96);
+		
+		if (successiveHits > 0) {
+			double xOffset = -48 * successiveHits;
+			setTranslateX(xOffset);
+		}
 
 		Text textShape = new Text(text);
 		textShape.setFill(Color.WHITE);

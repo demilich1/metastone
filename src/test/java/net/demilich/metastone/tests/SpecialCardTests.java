@@ -210,7 +210,7 @@ public class SpecialCardTests extends TestBase {
 		Assert.assertEquals(player.getMana(), 3);
 
 	}
-	
+
 	@Test
 	public void testWildPyromancer() {
 		GameContext context = createContext(HeroClass.PRIEST, HeroClass.WARRIOR);
@@ -221,14 +221,16 @@ public class SpecialCardTests extends TestBase {
 		Player priest = context.getPlayer1();
 		Card wildPyromancer = CardCatalogue.getCardById("minion_wild_pyromancer");
 		playCard(context, priest, wildPyromancer);
-		
+
 		Assert.assertEquals(warrior.getMinions().size(), 1);
-		
+
 		Card holyNova = CardCatalogue.getCardById("spell_holy_nova");
 		playCard(context, priest, holyNova);
-		
-		// the warriors board should be completely wiped, as the Holy Nova should kill the
-		// first body of Haunted Creeper, the Deathrattle resolves and then Wild Pyromancer
+
+		// the warriors board should be completely wiped, as the Holy Nova
+		// should kill the
+		// first body of Haunted Creeper, the Deathrattle resolves and then Wild
+		// Pyromancer
 		// triggers, clearing the two 1/1 Spectral Spiders
 		Assert.assertEquals(warrior.getMinions().size(), 0);
 	}
