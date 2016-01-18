@@ -22,10 +22,18 @@ public class FillDeckWithRandomCardsCommand extends SimpleCommand<GameNotificati
 
 		Deck activeDeck = deckProxy.getActiveDeck();
 		List<Card> cards = deckProxy.getCards(activeDeck.getHeroClass());
-		while (!activeDeck.isComplete()) {
-			Card randomCard = cards.get(ThreadLocalRandom.current().nextInt(cards.size()));
-			if (deckProxy.addCardToDeck(randomCard)) {
-				logger.debug("Adding card {} to deck.", randomCard);
+		if (activeDeck.isTooBig()) {
+			while (!activeDeck.isComplete()) {
+				Card randomCard = activeDeck.getCards().getRandom();
+				deckProxy.removeCardFromDeck(randomCard);
+				logger.debug("Removing card {} to deck.", randomCard);
+			}
+		} else {
+			while (!activeDeck.isComplete()) {
+				Card randomCard = cards.get(ThreadLocalRandom.current().nextInt(cards.size()));
+				if (deckProxy.addCardToDeck(randomCard)) {
+					logger.debug("Adding card {} to deck.", randomCard);
+				}
 			}
 		}
 		getFacade().sendNotification(GameNotification.ACTIVE_DECK_CHANGED, activeDeck);

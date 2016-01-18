@@ -52,9 +52,14 @@ public class DeckInfoView extends HBox implements EventHandler<ActionEvent>, IDi
 					"Your deck collection is not complete yet. Each deck collection has to contain at least 2 (or more) decks. ",
 					DialogType.WARNING);
 			ApplicationFacade.getInstance().notifyObservers(dialogNotification);
-		} else if (!activeDeck.isMetaDeck() && !activeDeck.isComplete()) {
+		} else if (!activeDeck.isMetaDeck() && !activeDeck.isComplete() && !activeDeck.isTooBig()) {
 			DialogNotification dialogNotification = new DialogNotification("Add random cards",
 					"Your deck is not complete yet. If you proceed, all open slots will be filled with random cards.", DialogType.CONFIRM);
+			dialogNotification.setHandler(this);
+			ApplicationFacade.getInstance().notifyObservers(dialogNotification);
+		} else if (!activeDeck.isMetaDeck() && !activeDeck.isComplete() && activeDeck.isTooBig()) { 
+			DialogNotification dialogNotification = new DialogNotification("Remove random cards",
+					"Your deck has too many cards. If you proceed, some cards will be removed at random.", DialogType.CONFIRM);
 			dialogNotification.setHandler(this);
 			ApplicationFacade.getInstance().notifyObservers(dialogNotification);
 		} else {
