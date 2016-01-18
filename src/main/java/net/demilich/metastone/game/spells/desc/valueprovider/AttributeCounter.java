@@ -25,8 +25,7 @@ public class AttributeCounter extends ValueProvider {
 				count++;
 			}
 		}
-		int multiplier = desc.contains(ValueProviderArg.MULTIPLIER) ? desc.getInt(ValueProviderArg.MULTIPLIER) : 1;
-		return count * multiplier;
+		return count;
 	}
 
 }
