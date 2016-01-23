@@ -8,8 +8,25 @@
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
 	"description": "Whenever your hero takes damage, this minion takes it instead.",
-	"attributes": {
-		"MEATSHIELD": true
+	"trigger": {
+		"eventTrigger": {
+			"class": "PreDamageTrigger",
+			"targetPlayer": "BOTH",
+			"targetedPlayer": "SELF",
+			"targetEntityType": "HERO"
+		},
+		"spell": {
+			"class": "MetaSpell",
+			"spell1": {
+				"class": "DamageSpell",
+				"target": "SELF"
+			},
+			"spell2": {
+				"class": "ModifyDamageSpell",
+				"value": 0,
+				"operation": "SET"
+			}
+		}
 	},
 	"collectible": true,
 	"set": "THE_GRAND_TOURNAMENT",

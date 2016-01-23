@@ -50,7 +50,14 @@ public class DamageSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		int damage = desc.getInt(SpellArg.VALUE, 0);
+		int damage = 0;
+		// TODO Rewrite to more accurate way to grab Damage Stack damage.
+		if (!desc.contains(SpellArg.VALUE) && !context.getDamageStack().isEmpty()) {
+			damage = context.getDamageStack().peek();
+		} else {
+			damage = desc.getInt(SpellArg.VALUE, 0);
+		}
+		
 		ValueProvider damageModifier = (ValueProvider) desc.get(SpellArg.VALUE_PROVIDER);
 		if (damageModifier != null) {
 			damage = damageModifier.getValue(context, player, target, source);

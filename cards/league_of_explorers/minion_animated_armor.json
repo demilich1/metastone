@@ -8,8 +8,18 @@
 	"heroClass": "MAGE",
 	"rarity": "RARE",
 	"description": "Your hero can only take 1 damage at a time.",
-	"attributes": {
-		"ARMOR_SUIT": true
+	"trigger": {
+		"eventTrigger": {
+			"class": "PreDamageTrigger",
+			"targetPlayer": "BOTH",
+			"targetedPlayer": "SELF",
+			"targetEntityType": "HERO"
+		},
+		"spell": {
+			"class": "ModifyDamageSpell",
+			"value": 1,
+			"operation": "SET"
+		}
 	},
 	"collectible": true,
 	"set": "LEAGUE_OF_EXPLORERS",
