@@ -209,6 +209,14 @@ public class GameContext implements Cloneable, IDisposable {
 	public List<CardCostModifier> getCardCostModifiers() {
 		return cardCostModifiers;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public Stack<Integer> getDamageStack() {
+		if (!environment.containsKey(Environment.DAMAGE_STACK)) {
+			environment.put(Environment.DAMAGE_STACK, new Stack<Integer>());
+		}
+		return (Stack<Integer>) environment.get(Environment.DAMAGE_STACK);
+	}
 
 	public HashMap<Environment, Object> getEnvironment() {
 		return environment;

@@ -10,5 +10,6 @@ public enum Environment {
 	EVENT_TARGET,
 	TARGET,
 	TRANSFORM,
+	DAMAGE_STACK,
 	DEBUG
 }
