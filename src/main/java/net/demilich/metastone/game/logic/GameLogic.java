@@ -521,7 +521,7 @@ public class GameLogic implements Cloneable {
 			int fatigue = hero.hasAttribute(Attribute.FATIGUE) ? hero.getAttributeValue(Attribute.FATIGUE) : 0;
 			fatigue++;
 			hero.setAttribute(Attribute.FATIGUE, fatigue);
-			damage(player, hero, fatigue, null);
+			damage(player, hero, fatigue, hero);
 			log("{}'s deck is empty, taking {} fatigue damage!", player.getName(), fatigue);
 			player.getStatistics().fatigueDamage(fatigue);
 			return null;
