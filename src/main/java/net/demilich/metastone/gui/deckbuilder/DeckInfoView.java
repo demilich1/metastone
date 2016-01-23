@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.decks.Deck;
@@ -84,7 +85,13 @@ public class DeckInfoView extends HBox implements EventHandler<ActionEvent>, IDi
 			countLabel.setText(metaDeck.getDecks().size() + "");
 		} else {
 			typeLabel.setText("Cards");
-			countLabel.setText(deck.getCards().getCount() + "/" + GameLogic.DECK_SIZE);
+			if (deck.isTooBig()) {
+				countLabel.setText(deck.getCards().getCount() + "!/" + GameLogic.DECK_SIZE);
+				countLabel.setTextFill(Color.RED);
+			} else {
+				countLabel.setText(deck.getCards().getCount() + "/" + GameLogic.DECK_SIZE);
+				countLabel.setTextFill(Color.BLACK);
+			}
 		}
 
 	}
