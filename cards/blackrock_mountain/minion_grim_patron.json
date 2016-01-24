@@ -18,7 +18,8 @@
 		},
 		"spell": {
 			"class": "SummonSpell",
-			"card": "minion_grim_patron"
+			"card": "minion_grim_patron",
+			"boardPositionRelative": "RIGHT"
 		}
 	},
 	"collectible": true,

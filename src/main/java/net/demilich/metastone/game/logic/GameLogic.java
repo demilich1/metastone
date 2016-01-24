@@ -44,7 +44,6 @@ import net.demilich.metastone.game.events.DamageEvent;
 import net.demilich.metastone.game.events.DiscardEvent;
 import net.demilich.metastone.game.events.DrawCardEvent;
 import net.demilich.metastone.game.events.EnrageChangedEvent;
-import net.demilich.metastone.game.events.FatalDamageEvent;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.HealEvent;
 import net.demilich.metastone.game.events.HeroPowerUsedEvent;
@@ -52,6 +51,7 @@ import net.demilich.metastone.game.events.JoustEvent;
 import net.demilich.metastone.game.events.KillEvent;
 import net.demilich.metastone.game.events.OverloadEvent;
 import net.demilich.metastone.game.events.PhysicalAttackEvent;
+import net.demilich.metastone.game.events.PreDamageEvent;
 import net.demilich.metastone.game.events.SecretPlayedEvent;
 import net.demilich.metastone.game.events.SecretRevealedEvent;
 import net.demilich.metastone.game.events.SilenceEvent;
@@ -374,35 +374,22 @@ public class GameLogic implements Cloneable {
 			} else if (sourceCard.getCardType() == CardType.HERO_POWER) {
 				damage = applyHeroPowerDamage(player, damage);
 			}
-		}
-
-		if (!ignoreSpellPower && sourceCard != null
-				&& (isSpellCard(sourceCard.getCardType()) || sourceCard.getCardType() == CardType.HERO_POWER)) {
-			damage = applyAmplify(player, damage, Attribute.SPELL_AMPLIFY_MULTIPLIER);
+			if (isSpellCard(sourceCard.getCardType()) || sourceCard.getCardType() == CardType.HERO_POWER) {
+				damage = applyAmplify(player, damage, Attribute.SPELL_AMPLIFY_MULTIPLIER);
+			}
 		}
 		int damageDealt = 0;
 		if (target.hasAttribute(Attribute.TAKE_DOUBLE_DAMAGE)) {
 			damage *= 2;
 		}
+		context.getDamageStack().push(damage);
+		context.fireGameEvent(new PreDamageEvent(context, target, source));
+		damage = context.getDamageStack().pop();
 		switch (target.getEntityType()) {
 		case MINION:
 			damageDealt = damageMinion(player, (Actor) target, damage);
 			break;
 		case HERO:
-			Player owner = context.getPlayer(target.getOwner());
-			Minion meatshield = findMeatshield(owner);
-			if (meatshield != null) {
-				target = meatshield;
-				damageDealt = damageMinion(player, meatshield, damage);
-				break;
-			}
-			if (hasAttribute(context.getPlayer(target.getOwner()), Attribute.ARMOR_SUIT)) {
-				damage = Math.min(damage, 1);
-			}
-			if (isFatalDamage(target, damage)) {
-				FatalDamageEvent fatalDamageEvent = new FatalDamageEvent(context, target);
-				context.fireGameEvent(fatalDamageEvent);
-			}
 			damageDealt = damageHero((Hero) target, damage);
 			break;
 		default:
@@ -534,7 +521,7 @@ public class GameLogic implements Cloneable {
 			int fatigue = hero.hasAttribute(Attribute.FATIGUE) ? hero.getAttributeValue(Attribute.FATIGUE) : 0;
 			fatigue++;
 			hero.setAttribute(Attribute.FATIGUE, fatigue);
-			damage(player, hero, fatigue, null);
+			damage(player, hero, fatigue, hero);
 			log("{}'s deck is empty, taking {} fatigue damage!", player.getName(), fatigue);
 			player.getStatistics().fatigueDamage(fatigue);
 			return null;
@@ -927,8 +914,8 @@ public class GameLogic implements Cloneable {
 		Player player = context.getPlayer(playerId);
 		player.getHero().setId(idFactory.generateId());
 		player.getHero().setOwner(player.getId());
-		player.getHero().setMaxHp(MAX_HERO_HP);
-		player.getHero().setHp(MAX_HERO_HP);
+		player.getHero().setMaxHp(player.getHero().getAttributeValue(Attribute.BASE_HP));
+		player.getHero().setHp(player.getHero().getAttributeValue(Attribute.BASE_HP));
 
 		player.getHero().getHeroPower().setId(idFactory.generateId());
 		assignCardIds(player.getDeck());
@@ -939,11 +926,6 @@ public class GameLogic implements Cloneable {
 		player.getDeck().shuffle();
 
 		mulligan(player, begins);
-	}
-
-	private boolean isFatalDamage(Entity entity, int damage) {
-		Hero hero = (Hero) entity;
-		return damage >= hero.getEffectiveHp();
 	}
 
 	public boolean isLoggingEnabled() {

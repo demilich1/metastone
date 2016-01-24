@@ -1,6 +1,6 @@
 {
 	"id": "hero_uther",
-	"name": "Uther, the Lightbringer",
+	"name": "Uther Lightbringer",
 	"heroPower": "hero_power_reinforce",
 	"type": "HERO",
 	"heroClass": "PALADIN",

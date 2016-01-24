@@ -44,10 +44,14 @@ public class SpellUtils {
 			return actualValue == targetValue;
 		case GREATER:
 			return actualValue > targetValue;
+		case GREATER_OR_EQUAL:
+			return actualValue >= targetValue;
 		case HAS:
 			return actualValue > 0;
 		case LESS:
 			return actualValue < targetValue;
+		case LESS_OR_EQUAL:
+			return actualValue <= targetValue;
 		}
 		return false;
 	}

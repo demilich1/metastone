@@ -79,7 +79,11 @@ public class HeroToken extends GameToken {
 		Image heroPowerImage = new Image(IconFactory.getHeroPowerIconUrl(hero.getHeroPower()));
 		heroPowerIcon.setImage(heroPowerImage);
 		setScoreValue(hpAnchor, hero.getHp(), hero.getAttributeValue(Attribute.BASE_HP), hero.getMaxHp());
-		cardsLabel.setText("Cards in deck: " + player.getDeck().getCount());
+		if (!player.getDeck().isEmpty()) {
+			cardsLabel.setText("Cards in deck: " + player.getDeck().getCount());
+		} else {
+			cardsLabel.setText("Fatigue: " + player.getHero().getAttributeValue(Attribute.FATIGUE));
+		}
 		manaLabel.setText("Mana: " + player.getMana() + "/" + player.getMaxMana());
 		updateArmor(hero.getArmor());
 		updateWeapon(hero.getWeapon());
