@@ -67,7 +67,6 @@ public class SpellDeserializer implements JsonDeserializer<SpellDesc> {
 		parseArgument(SpellArg.TRIGGER, jsonData, spellArgs, ParseValueType.TRIGGER);
 		parseArgument(SpellArg.REVERT_TRIGGER, jsonData, spellArgs, ParseValueType.EVENT_TRIGGER);
 		parseArgument(SpellArg.SECOND_REVERT_TRIGGER, jsonData, spellArgs, ParseValueType.EVENT_TRIGGER);
-		parseArgument(SpellArg.UNIQUE_MINION, jsonData, spellArgs, ParseValueType.STRING);
 		parseArgument(SpellArg.INCLUDE_UNCOLLECTIBLE, jsonData, spellArgs, ParseValueType.BOOLEAN);
 		parseArgument(SpellArg.OPERATION, jsonData, spellArgs, ParseValueType.ALGEBRAIC_OPERATION);
 		parseArgument(SpellArg.CANNOT_RECEIVE_OWNED, jsonData, spellArgs, ParseValueType.BOOLEAN);

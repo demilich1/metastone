@@ -35,7 +35,6 @@ public enum SpellArg {
 	SPELL_3,
 	SPELL,
 	SPELLS,
-	UNIQUE_MINION,
 	RACE,
 	CARD,
 	CARDS,
