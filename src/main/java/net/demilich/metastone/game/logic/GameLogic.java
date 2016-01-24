@@ -172,6 +172,9 @@ public class GameLogic implements Cloneable {
 	}
 
 	public int applySpellpower(Player player, Entity source, int baseValue) {
+		if (baseValue <= 0) {
+			return baseValue;
+		}
 		int spellpower = getTotalAttributeValue(player, Attribute.SPELL_DAMAGE)
 				+ getTotalAttributeValue(context.getOpponent(player), Attribute.OPPONENT_SPELL_DAMAGE);
 		if (source.hasAttribute(Attribute.SPELL_DAMAGE_MULTIPLIER)) {
@@ -387,7 +390,7 @@ public class GameLogic implements Cloneable {
 		damage = context.getDamageStack().pop();
 		switch (target.getEntityType()) {
 		case MINION:
-			damageDealt = damageMinion(player, (Actor) target, damage);
+			damageDealt = damageMinion((Actor) target, damage);
 			break;
 		case HERO:
 			damageDealt = damageHero((Hero) target, damage);
@@ -419,16 +422,7 @@ public class GameLogic implements Cloneable {
 		return damage;
 	}
 
-	private Minion findMeatshield(Player player) {
-		for (Minion minion : player.getMinions()) {
-			if (minion.hasAttribute(Attribute.MEATSHIELD)) {
-				return minion;
-			}
-		}
-		return null;
-	}
-
-	private int damageMinion(Player player, Actor minion, int damage) {
+	private int damageMinion(Actor minion, int damage) {
 		if (minion.hasAttribute(Attribute.DIVINE_SHIELD)) {
 			removeAttribute(minion, Attribute.DIVINE_SHIELD);
 			log("{}'s DIVINE SHIELD absorbs the damage", minion);
@@ -438,8 +432,7 @@ public class GameLogic implements Cloneable {
 			log("{} is IMMUNE and does not take damage", minion);
 			return 0;
 		}
-		Player owner = context.getPlayer(minion.getOwner());
-		if (damage >= minion.getHp() && owner.getHero().hasAttribute(Attribute.CANNOT_REDUCE_HP_BELOW_1)) {
+		if (damage >= minion.getHp() && minion.hasAttribute(Attribute.CANNOT_REDUCE_HP_BELOW_1)) {
 			damage = minion.getHp() - 1;
 		}
 
@@ -550,11 +543,9 @@ public class GameLogic implements Cloneable {
 
 		Hero hero = player.getHero();
 		hero.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
-		hero.removeAttribute(Attribute.CANNOT_REDUCE_HP_BELOW_1);
 		handleFrozen(hero);
 		for (Minion minion : player.getMinions()) {
 			minion.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
-			minion.removeAttribute(Attribute.CANNOT_REDUCE_HP_BELOW_1);
 			handleFrozen(minion);
 		}
 		hero.removeAttribute(Attribute.COMBO);
@@ -1410,7 +1401,6 @@ public class GameLogic implements Cloneable {
 		immuneToSilence.add(Attribute.AURA_HP_BONUS);
 		immuneToSilence.add(Attribute.RACE);
 		immuneToSilence.add(Attribute.NUMBER_OF_ATTACKS);
-		immuneToSilence.add(Attribute.UNIQUE_ENTITY);
 
 		List<Attribute> tags = new ArrayList<Attribute>();
 		tags.addAll(target.getAttributes().keySet());
@@ -1503,9 +1493,6 @@ public class GameLogic implements Cloneable {
 
 		applyAttribute(minion, Attribute.SUMMONING_SICKNESS);
 		refreshAttacksPerRound(minion);
-		if (player.getHero().hasAttribute(Attribute.CANNOT_REDUCE_HP_BELOW_1)) {
-			minion.setAttribute(Attribute.CANNOT_REDUCE_HP_BELOW_1);
-		}
 
 		if (minion.hasSpellTrigger()) {
 			addGameEventListener(player, minion.getSpellTrigger(), minion);
@@ -1572,9 +1559,6 @@ public class GameLogic implements Cloneable {
 		
 		applyAttribute(newMinion, Attribute.SUMMONING_SICKNESS);
 		refreshAttacksPerRound(newMinion);
-		if (owner.getHero().hasAttribute(Attribute.CANNOT_REDUCE_HP_BELOW_1)) {
-			newMinion.setAttribute(Attribute.CANNOT_REDUCE_HP_BELOW_1);
-		}
 
 		if (newMinion.hasSpellTrigger()) {
 			addGameEventListener(owner, newMinion.getSpellTrigger(), newMinion);
