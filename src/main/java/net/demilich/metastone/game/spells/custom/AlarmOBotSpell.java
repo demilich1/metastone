@@ -12,15 +12,18 @@ public class AlarmOBotSpell extends ReturnMinionToHandSpell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		// return Alarm-o-bot to hand
-		super.onCast(context, player, desc, source, target);
+		// Check to see if there is a minion before returning to hand!
+		// If there is no minion, do not activate!
 		if (!player.getHand().hasCardOfType(CardType.MINION)) {
 			return;
 		}
-		// summon a random minion and remove the corresponding card
+		// Summon a random minion and remove the corresponding card
+		// before adding Alarm-o-bot to your hand!
 		MinionCard randomMinionCard = (MinionCard) player.getHand().getRandomOfType(CardType.MINION);
 		context.getLogic().removeCard(player.getId(), randomMinionCard);
 		context.getLogic().summon(player.getId(), randomMinionCard.summon());
+		// return Alarm-o-bot to hand (Now it's safe!)
+		super.onCast(context, player, desc, source, target);
 	}
 
 }
