@@ -8,7 +8,13 @@
 	"description": "Summon three, four, or five 1/1 Murlocs.",
 	"targetSelection": "NONE",
 	"spell": {
-		"class": "custom.IAmMurlocSpell"
+		"class": "SummonSpell",
+		"valueProvider": {
+			"class": "RandomValueProvider",
+			"min": 3,
+			"max": 5
+		},
+		"card": "token_murloc"
 	},
 	"collectible": false,
 	"set": "CLASSIC",
