@@ -8,7 +8,11 @@
 	"description": "Double a minion's Health.",
 	"targetSelection": "MINIONS",
 	"spell": {
-		"class": "DoubleHpSpell"
+		"class": "BuffSpell",
+		"hpValueProvider": {
+			"class": "AttributeValueProvider",
+			"attribute": "HP"
+		}
 	},
 	"collectible": true,
 	"set": "CLASSIC",
