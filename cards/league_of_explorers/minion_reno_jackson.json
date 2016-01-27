@@ -11,7 +11,11 @@
 	"battlecry": {
 		"targetSelection": "NONE",
 		"spell": {
-			"class": "HealToFullSpell",
+			"class": "HealSpell",
+			"valueProvider": {
+				"class": "AttributeValueProvider",
+				"attribute": "MAX_HP"
+			},
 			"target": "FRIENDLY_HERO"
 		},
 		"condition": {

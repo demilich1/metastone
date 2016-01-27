@@ -8,7 +8,11 @@
 	"description": "Restore all characters to full Health.",
 	"targetSelection": "NONE",
 	"spell": {
-		"class": "HealToFullSpell",
+		"class": "HealSpell",
+		"valueProvider": {
+			"class": "AttributeValueProvider",
+			"attribute": "MAX_HP"
+		},
 		"target": "ALL_CHARACTERS"
 	},
 	"collectible": true,

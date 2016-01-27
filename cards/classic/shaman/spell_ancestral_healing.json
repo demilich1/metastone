@@ -10,7 +10,11 @@
 	"spell": {
 		"class": "MetaSpell",
 		"spell1": {
-			"class": "HealToFullSpell"
+			"class": "HealSpell",
+			"valueProvider": {
+				"class": "AttributeValueProvider",
+				"attribute": "MAX_HP"
+			}
 		},
 		"spell2": {
 			"class": "AddAttributeSpell",
