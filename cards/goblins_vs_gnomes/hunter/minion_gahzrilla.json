@@ -13,11 +13,7 @@
 			"class": "SelfDamagedTrigger"
 		},
 		"spell": {
-			"class": "BuffSpell",
-			"attackValueProvider": {
-				"class": "AttributeValueProvider",
-				"attribute": "ATTACK"
-			},
+			"class": "DoubleAttackSpell",
 			"target": "SELF"
 		}
 	},

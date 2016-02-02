@@ -8,11 +8,7 @@
 	"description": "Double a minion's Attack.",
 	"targetSelection": "MINIONS",
 	"spell": {
-		"class": "BuffSpell",
-		"attackValueProvider": {
-			"class": "AttributeValueProvider",
-			"attribute": "ATTACK"
-		}
+		"class": "DoubleAttackSpell"
 	},
 	"collectible": true,
 	"set": "CLASSIC",
