@@ -14,7 +14,7 @@
 			"card": "token_murloc_scout",
 			"boardPositionRelative": "RIGHT"
 		},
-		"resolvedLate": true
+		"resolvedLate": false
 	},
 	"race": "MURLOC",
 	"attributes": {

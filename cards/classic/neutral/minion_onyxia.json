@@ -48,7 +48,7 @@
 				}
 			}
 		},
-		"resolvedLate": true
+		"resolvedLate": false
 	},
 	"race": "DRAGON",
 	"attributes": {

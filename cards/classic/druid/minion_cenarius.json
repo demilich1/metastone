@@ -33,7 +33,7 @@
 					"boardPositionRelative": "RIGHT"
 				}
 			},
-			"resolvedLate": true
+			"resolvedLate": false
 		}
 	],
 	"collectible": true,

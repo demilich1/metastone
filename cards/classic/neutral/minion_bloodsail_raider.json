@@ -18,7 +18,7 @@
 				"attribute": "ATTACK"
 			}
 		},
-		"resolvedLate": true
+		"resolvedLate": false
 	},
 	"race": "PIRATE",
 	"attributes": {

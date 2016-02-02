@@ -20,7 +20,7 @@
 				"manaCost": 1
 			}
 		},
-		"resolvedLate": true
+		"resolvedLate": false
 	},
 	"race" : "BEAST",
 	"attributes": {
