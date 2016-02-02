@@ -15,7 +15,7 @@
 		},
 		"spell2": {
 			"class": "DrawCardSpell",
-			"value": 1
+			"value": 3
 		}
 	},
 	"set": "CLASSIC",

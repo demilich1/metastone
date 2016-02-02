@@ -12,7 +12,6 @@
 		"class": "ChangeHeroSpell",
 		"card": "hero_ragnaros"
 	},
-	"race": "DEMON",
 	"attributes": {
 		"DEATHRATTLES": true
 	},
