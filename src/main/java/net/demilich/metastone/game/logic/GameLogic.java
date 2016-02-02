@@ -1472,20 +1472,26 @@ public class GameLogic implements Cloneable {
 		log("{} summons {}", player.getName(), minion);
 		minion.setOwner(player.getId());
 
+		if (index < 0 || index >= player.getMinions().size()) {
+			player.getMinions().add(minion);
+		} else {
+			player.getMinions().add(index, minion);
+		}
+
 		if (resolveBattlecry && minion.getBattlecry() != null && !minion.getBattlecry().isResolvedLate()) {
 			resolveBattlecry(player.getId(), minion);
 		}
 		
 		if (context.getEnvironment().get(Environment.TRANSFORM) != null) {
+			player.getMinions().remove(minion);
 			minion = (Minion) context.getEnvironment().get(Environment.TRANSFORM);
+			if (index < 0 || index >= player.getMinions().size()) {
+				player.getMinions().add(minion);
+			} else {
+				player.getMinions().add(index, minion);
+			}
 			minion.setBattlecry(null);
 			context.getEnvironment().remove(Environment.TRANSFORM);
-		}
-
-		if (index < 0 || index >= player.getMinions().size()) {
-			player.getMinions().add(minion);
-		} else {
-			player.getMinions().add(index, minion);
 		}
 
 		SummonEvent summonEvent = new SummonEvent(context, minion, source);
@@ -1505,7 +1511,7 @@ public class GameLogic implements Cloneable {
 		if (resolveBattlecry && minion.getBattlecry() != null && minion.getBattlecry().isResolvedLate()) {
 			resolveBattlecry(player.getId(), minion);
 		}
-
+		
 		handleEnrage(minion);
 
 		context.getSummonStack().pop();
