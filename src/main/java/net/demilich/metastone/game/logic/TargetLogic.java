@@ -253,7 +253,7 @@ public class TargetLogic {
 		} else if (targetKey == EntityReference.SELF) {
 			return singleTargetAsList(source);
 		} else if (targetKey == EntityReference.EVENT_TARGET) {
-			return singleTargetAsList((Entity) context.getEnvironment().get(Environment.EVENT_TARGET));
+			return singleTargetAsList((Entity) context.getEventTargetStack().peek());
 		} else if (targetKey == EntityReference.TARGET) {
 			return singleTargetAsList((Entity) context.getEnvironment().get(Environment.TARGET));
 		} else if (targetKey == EntityReference.KILLED_MINION) {

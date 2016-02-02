@@ -3,7 +3,6 @@ package net.demilich.metastone.game.spells.trigger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.events.GameEvent;
@@ -112,9 +111,9 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 			expire();
 		}
 		try {
-			event.getGameContext().getEnvironment().put(Environment.EVENT_TARGET, event.getEventTarget());
+			event.getGameContext().getEventTargetStack().push(event.getEventTarget());
 			onFire(ownerId, spell, event);
-			event.getGameContext().getEnvironment().remove(Environment.EVENT_TARGET);
+			event.getGameContext().getEventTargetStack().pop();
 		} catch (Exception e) {
 			event.getGameContext().printCurrentTriggers();
 			logger.error("SpellTrigger cannot be executed; GameEventTrigger: {} Spell: {}", primaryTrigger, spell);
