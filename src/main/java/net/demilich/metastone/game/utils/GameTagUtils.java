@@ -58,7 +58,6 @@ public class GameTagUtils {
 		case DEBUG:
 		case MANA_COST_MODIFIER:
 		case RACE:
-		case UNIQUE_ENTITY:
 			return TagValueType.OTHER;
 		default:
 			break;

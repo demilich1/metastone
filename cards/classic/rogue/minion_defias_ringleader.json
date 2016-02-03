@@ -17,7 +17,7 @@
 		"condition": {
 			"class": "ComboCondition"
 		},
-		"resolvedLate": true
+		"resolvedLate": false
 	},
 	"collectible": true,
 	"set": "CLASSIC",

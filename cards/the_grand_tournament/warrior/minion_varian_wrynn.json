@@ -32,7 +32,7 @@
 				}
 			}
 		},
-		"resolvedLate": true
+		"resolvedLate": false
 	},
 	"attributes": {
 		"BATTLECRY": true

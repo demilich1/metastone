@@ -222,6 +222,14 @@ public class GameContext implements Cloneable, IDisposable {
 		return environment;
 	}
 
+	@SuppressWarnings("unchecked")
+	public Stack<Entity> getEventTargetStack() {
+		if (!environment.containsKey(Environment.EVENT_TARGET_STACK)) {
+			environment.put(Environment.EVENT_TARGET_STACK, new Stack<Entity>());
+		}
+		return (Stack<Entity>) environment.get(Environment.EVENT_TARGET_STACK);
+	}
+
 	public GameLogic getLogic() {
 		return logic;
 	}

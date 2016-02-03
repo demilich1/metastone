@@ -8,6 +8,8 @@ import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.entities.minions.RelativeToSource;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
@@ -31,12 +33,37 @@ public class SummonRandomMinionFilteredSpell extends Spell {
 		return (MinionCard) relevantMinions.getRandom();
 	}
 
+	private int getBoardPosition(GameContext context, Player player, SpellDesc desc, Entity source) {
+		final int UNDEFINED = -1;
+		int boardPosition = desc.getInt(SpellArg.BOARD_POSITION_ABSOLUTE, -1);
+		if (boardPosition != UNDEFINED) {
+			return boardPosition;
+		}
+		RelativeToSource relativeBoardPosition = (RelativeToSource) desc.get(SpellArg.BOARD_POSITION_RELATIVE);
+		if (relativeBoardPosition == null) {
+			return UNDEFINED;
+		}
+
+		int sourcePosition = context.getBoardPosition((Minion) source);
+		if (sourcePosition == UNDEFINED) {
+			return UNDEFINED;
+		}
+		switch (relativeBoardPosition) {
+		case LEFT:
+			return sourcePosition;
+		case RIGHT:
+			return sourcePosition + 1;
+		default:
+			return UNDEFINED;
+		}
+	}
+
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		EntityFilter cardFilter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
 		boolean includeUncollectible = desc.getBool(SpellArg.INCLUDE_UNCOLLECTIBLE);
 				
-		int boardPosition = desc.getInt(SpellArg.BOARD_POSITION_ABSOLUTE, -1);
+		int boardPosition = getBoardPosition(context, player, desc, source);
 		MinionCard minionCard = getRandomMatchingMinionCard(context, player, cardFilter, includeUncollectible);
 		context.getLogic().summon(player.getId(), minionCard.summon(), null, boardPosition, false);
 	}

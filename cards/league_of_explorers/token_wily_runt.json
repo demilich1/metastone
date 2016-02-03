@@ -1,0 +1,14 @@
+{
+	"id": "token_wily_runt",
+	"name": "Wily_Runt",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "",
+	"collectible": false,
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}

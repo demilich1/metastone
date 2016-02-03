@@ -41,6 +41,8 @@ public class AttributeValueProvider extends ValueProvider {
 				Actor source = (Actor) entity;
 				if (attribute == Attribute.ATTACK) {
 					value += source.getAttack();
+				} else if (attribute == Attribute.MAX_HP) {
+					value += source.getMaxHp();
 				} else {
 					value += source.getAttributeValue(attribute);
 				}

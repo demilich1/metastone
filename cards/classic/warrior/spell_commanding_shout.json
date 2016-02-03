@@ -11,10 +11,32 @@
 		"class": "MetaSpell",
 		"spell1": {
 			"class": "AddAttributeSpell",
-			"target": "FRIENDLY_CHARACTERS",
-			"attribute": "CANNOT_REDUCE_HP_BELOW_1"
+			"target": "FRIENDLY_MINIONS",
+			"attribute": "CANNOT_REDUCE_HP_BELOW_1",
+			"revertTrigger": {
+				"class": "TurnEndTrigger"
+			}
 		},
 		"spell2": {
+			"trigger": {
+				"eventTrigger": {
+					"class": "MinionSummonedTrigger",
+					"targetPlayer": "SELF"
+				},
+				"spell": {
+					"class": "AddAttributeSpell",
+					"target": "EVENT_TARGET",
+					"attribute": "CANNOT_REDUCE_HP_BELOW_1",
+					"revertTrigger": {
+						"class": "TurnEndTrigger"
+					}
+				},
+				"oneTurn": true
+			},
+			"class": "AddSpellTriggerSpell",
+			"target": "FRIENDLY_HERO"
+		},
+		"spell3": {
 			"class": "DrawCardSpell",
 			"value": 1
 		}

@@ -1,6 +1,6 @@
 {
-	"id": "token_runt",
-	"name": "Runt",
+	"id": "token_grumbly_runt",
+	"name": "Grumbly Runt",
 	"baseManaCost": 2,
 	"type": "MINION",
 	"baseAttack": 2,

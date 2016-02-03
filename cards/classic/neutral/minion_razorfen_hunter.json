@@ -14,7 +14,7 @@
 			"card": "token_boar",
 			"boardPositionRelative": "RIGHT"
 		},
-		"resolvedLate": true
+		"resolvedLate": false
 	},
 	"attributes": {
 		"BATTLECRY": true

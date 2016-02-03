@@ -43,6 +43,18 @@ public class CardCollection implements Iterable<Card>, Cloneable {
 	public boolean contains(Card card) {
 		return cards.contains(card);
 	}
+	
+	public boolean containsCard(Card card) {
+		if (card == null) {
+			return false;
+		}
+		for (Card c : cards) {
+			if (c.getName().equals(card.getName())) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	public Card get(int index) {
 		return cards.get(index);

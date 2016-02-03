@@ -22,7 +22,7 @@
 			},
 			"target": "ADJACENT_MINIONS"
 		},
-		"resolvedLate": true
+		"resolvedLate": false
 	},
 	"attributes": {
 		"BATTLECRY": true

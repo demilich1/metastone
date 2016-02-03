@@ -18,7 +18,7 @@
 				"value": 1
 			}
 		},
-		"resolvedLate": true
+		"resolvedLate": false
 	},
 	"attributes": {
 		"BATTLECRY": true

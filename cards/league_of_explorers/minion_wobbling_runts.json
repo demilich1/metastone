@@ -11,9 +11,9 @@
 	"deathrattle": {
 		"class": "SummonSpell",
 		"cards": [
-			"token_runt",
-			"token_runt",
-			"token_runt"
+			"token_grumbly_runt",
+			"token_rascally_runt",
+			"token_wily_runt"
 		]
 	},
 	"attributes": {
