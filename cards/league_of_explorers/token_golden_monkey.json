@@ -13,19 +13,21 @@
 		"spell": {
 			"class": "MetaSpell",
 			"spell1": {
-				"class": "ReplaceHandSpell",
+				"class": "ReplaceCardLocationSpell",
 				"cardFilter": {
 					"rarity": "LEGENDARY",
 					"class": "CardFilter",
-					"cardType": "MINION"
+					"cardType": "MINION",
+					"cardLocation": "HAND"
 				}
 			},
 			"spell2": {
-				"class": "ReplaceDeckSpell",
+				"class": "ReplaceCardLocationSpell",
 				"cardFilter": {
 					"rarity": "LEGENDARY",
 					"class": "CardFilter",
-					"cardType": "MINION"
+					"cardType": "MINION",
+					"cardLocation": "DECK"
 				}
 			}
 		},
