@@ -9,10 +9,13 @@
 	"rarity": "FREE",
 	"description": "Deathrattle: Deal 1-4 damage to a random enemy.",
 	"deathrattle": {
-		"class": "MinMaxDamageSpell",
+		"class": "DamageSpell",
 		"target": "ENEMY_CHARACTERS",
-		"minDamage": 1,
-		"maxDamage": 4,
+		"valueProvider": {
+			"class": "RandomValueProvider",
+			"min": 1,
+			"max": 4
+		}
 		"randomTarget": true
 	},
 	"race": "MECH",

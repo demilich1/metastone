@@ -8,10 +8,13 @@
 	"description": "Deal 4-5 damage to all minions. Overload: (5)",
 	"targetSelection": "NONE",
 	"spell": {
-		"class": "MinMaxDamageSpell",
+		"class": "DamageSpell",
 		"target": "ALL_MINIONS",
-		"minDamage": 4,
-		"maxDamage": 5
+		"valueProvider": {
+			"class": "RandomValueProvider",
+			"min": 4,
+			"max": 5
+		}
 	},
 	"attributes": {
 		"OVERLOAD": 5

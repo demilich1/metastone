@@ -8,10 +8,13 @@
 	"description": "Deal 2-3 damage to all enemy minions. Overload: (2)",
 	"targetSelection": "NONE",
 	"spell": {
-		"class": "MinMaxDamageSpell",
+		"class": "DamageSpell",
 		"target": "ENEMY_MINIONS",
-		"minDamage": 2,
-		"maxDamage": 3
+		"valueProvider": {
+			"class": "RandomValueProvider",
+			"min": 2,
+			"max": 3
+		}
 	},
 	"attributes": {
 		"OVERLOAD": 2
