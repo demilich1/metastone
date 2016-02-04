@@ -17,6 +17,7 @@ import net.demilich.metastone.game.spells.trigger.GameEventTrigger;
 import net.demilich.metastone.game.spells.trigger.IGameEventListener;
 import net.demilich.metastone.game.spells.trigger.TriggerLayer;
 import net.demilich.metastone.game.targeting.EntityReference;
+import net.demilich.metastone.game.targeting.IdFactory;
 
 public class CardCostModifier extends CustomCloneable implements IGameEventListener {
 
@@ -37,6 +38,10 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 
 	public boolean appliesTo(Card card) {
 		if (expired) {
+			return false;
+		}
+		
+		if (getRequiredCardId() != IdFactory.UNASSIGNED && card.getId() != getRequiredCardId()) {
 			return false;
 		}
 
@@ -120,6 +125,13 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 
 	protected Attribute getRequiredAttribute() {
 		return (Attribute) desc.get(CardCostModifierArg.REQUIRED_ATTRIBUTE);
+	}
+	
+	protected int getRequiredCardId() {
+		if (!desc.contains(CardCostModifierArg.ID)) {
+			return IdFactory.UNASSIGNED;
+		}
+		return desc.getInt(CardCostModifierArg.ID);
 	}
 
 	protected Race getRequiredRace() {

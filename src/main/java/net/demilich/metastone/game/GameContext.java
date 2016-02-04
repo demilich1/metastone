@@ -63,7 +63,7 @@ public class GameContext implements Cloneable, IDisposable {
 		return true;
 	}
 
-	public void addCardCostModfier(CardCostModifier cardCostModifier) {
+	public void addCardCostModifier(CardCostModifier cardCostModifier) {
 		getCardCostModifiers().add(cardCostModifier);
 	}
 

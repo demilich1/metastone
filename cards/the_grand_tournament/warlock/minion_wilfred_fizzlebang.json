@@ -15,10 +15,13 @@
 			"targetPlayer": "SELF"
 		},
 		"spell": {
-			"class": "ModifyAttributeSpell",
-			"target": "EVENT_TARGET",
-			"value": -99,
-			"attribute": "MANA_COST_MODIFIER"
+			"class": "AddCardCostModifierSpell",
+			"target": "FRIENDLY_HERO",
+			"cardCostModifier": {
+				"class": "CardCostModifier",
+				"target": "EVENT_TARGET",
+				"fixedValue": 0
+			}
 		}
 	},
 	"collectible": true,

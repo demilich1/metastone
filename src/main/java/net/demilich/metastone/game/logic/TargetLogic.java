@@ -149,6 +149,9 @@ public class TargetLogic {
 				return summonedWeapon;
 			}
 		}
+		if (!context.getEventTargetStack().isEmpty() && targetKey == EntityReference.EVENT_TARGET) {
+			return context.getEventTargetStack().peek();
+		}
 		return null;
 	}
 
