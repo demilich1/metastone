@@ -1003,7 +1003,9 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void markAsDestroyed(Actor target) {
-		target.setAttribute(Attribute.DESTROYED);
+		if (target != null) {
+			target.setAttribute(Attribute.DESTROYED);
+		}
 	}
 
 	public void mindControl(Player player, Minion minion) {
