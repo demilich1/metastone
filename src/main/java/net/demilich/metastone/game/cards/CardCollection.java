@@ -48,8 +48,8 @@ public class CardCollection implements Iterable<Card>, Cloneable {
 		if (card == null) {
 			return false;
 		}
-		for (Card c : cards) {
-			if (c.getName().equals(card.getName())) {
+		for (Card other : cards) {
+			if (other.getCardId().equals(card.getCardId())) {
 				return true;
 			}
 		}
