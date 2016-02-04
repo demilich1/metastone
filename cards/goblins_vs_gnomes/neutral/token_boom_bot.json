@@ -15,7 +15,7 @@
 			"class": "RandomValueProvider",
 			"min": 1,
 			"max": 4
-		}
+		},
 		"randomTarget": true
 	},
 	"race": "MECH",
