@@ -15,6 +15,7 @@
 			"hpBonus": 5
 		},
 		"spell2": {
+			"class": "AddSpellTriggerSpell",
 			"trigger": {
 				"eventTrigger": {
 					"class": "TurnStartTrigger"
@@ -23,8 +24,7 @@
 					"class": "DestroySpell",
 					"target": "SELF"
 				}
-			},
-			"class": "AddSpellTriggerSpell"
+			}
 		}
 	},
 	"collectible": false,

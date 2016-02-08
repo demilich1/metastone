@@ -7,6 +7,7 @@
 	"baseHp": 3,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
+	"race": "BEAST",
 	"description": "Inspire: Give your other minions +1/+1.",
 	"trigger": {
 		"eventTrigger": {
@@ -19,7 +20,6 @@
 			"hpBonus": 1
 		}
 	},
-	"race": "BEAST",
 	"collectible": true,
 	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1

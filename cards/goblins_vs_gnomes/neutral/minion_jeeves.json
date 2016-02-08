@@ -7,6 +7,7 @@
 	"baseHp": 4,
 	"heroClass": "ANY",
 	"rarity": "RARE",
+	"race": "MECH",
 	"description": "At the end of each player's turn, that player draws until they have 3 cards.",
 	"trigger": {
 		"eventTrigger": {
@@ -29,7 +30,6 @@
 			}
 		}
 	},
-	"race": "MECH",
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

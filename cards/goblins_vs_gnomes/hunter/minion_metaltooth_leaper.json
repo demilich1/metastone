@@ -7,6 +7,7 @@
 	"baseHp": 3,
 	"heroClass": "HUNTER",
 	"rarity": "RARE",
+	"race": "MECH",
 	"description": "Battlecry: Give your other Mechs +2 Attack.",
 	"battlecry": {
 		"spell": {
@@ -20,7 +21,6 @@
 		},
 		"resolvedLate": false
 	},
-	"race": "MECH",
 	"attributes": {
 		"BATTLECRY": true
 	},

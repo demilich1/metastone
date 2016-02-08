@@ -7,6 +7,7 @@
 	"baseHp": 1,
 	"heroClass": "ANY",
 	"rarity": "FREE",
+	"race": "MURLOC",
 	"description": "ALL other Murlocs have +1 Attack.",
 	"aura": {
 		"class": "BuffAura",
@@ -17,7 +18,6 @@
 			"race": "MURLOC"
 		}
 	},
-	"race": "MURLOC",
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

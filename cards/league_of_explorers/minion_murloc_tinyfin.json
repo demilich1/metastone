@@ -7,8 +7,8 @@
 	"baseHp": 1,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"description": "",
 	"race": "MURLOC",
+	"description": "",
 	"collectible": true,
 	"set": "LEAGUE_OF_EXPLORERS",
 	"fileFormatVersion": 1

@@ -7,6 +7,7 @@
 	"baseHp": 4,
 	"heroClass": "ANY",
 	"rarity": "RARE",
+	"race": "DRAGON",
 	"description": "Spell Damage +1. Battlecry: Draw a card.",
 	"battlecry": {
 		"targetSelection": "NONE",
@@ -16,7 +17,6 @@
 		},
 		"resolvedLate": false
 	},
-	"race": "DRAGON",
 	"attributes": {
 		"BATTLECRY": true,
 		"SPELL_DAMAGE": 1

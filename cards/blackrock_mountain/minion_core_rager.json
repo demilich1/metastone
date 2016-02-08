@@ -7,6 +7,7 @@
 	"baseHp": 4,
 	"heroClass": "HUNTER",
 	"rarity": "RARE",
+	"race": "BEAST",
 	"description": "Battlecry: If your hand is empty, gain +3/+3.",
 	"battlecry": {
 		"spell": {
@@ -22,7 +23,6 @@
 		},
 		"resolvedLate": false
 	},
-	"race": "BEAST",
 	"attributes": {
 		"BATTLECRY": true
 	},

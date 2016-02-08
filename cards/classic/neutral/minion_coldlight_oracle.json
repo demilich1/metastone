@@ -7,6 +7,7 @@
 	"baseHp": 2,
 	"heroClass": "ANY",
 	"rarity": "RARE",
+	"race": "MURLOC",
 	"description": "Battlecry: Each player draws 2 cards.",
 	"battlecry": {
 		"spell": {
@@ -16,7 +17,6 @@
 		},
 		"resolvedLate": false
 	},
-	"race": "MURLOC",
 	"attributes": {
 		"BATTLECRY": true
 	},

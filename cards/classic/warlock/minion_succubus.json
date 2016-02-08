@@ -7,6 +7,7 @@
 	"baseHp": 3,
 	"heroClass": "WARLOCK",
 	"rarity": "FREE",
+	"race": "DEMON",
 	"description": "Battlecry: Discard a random card.",
 	"battlecry": {
 		"spell": {
@@ -15,7 +16,6 @@
 		},
 		"resolvedLate": false
 	},
-	"race": "DEMON",
 	"attributes": {
 		"BATTLECRY": true
 	},

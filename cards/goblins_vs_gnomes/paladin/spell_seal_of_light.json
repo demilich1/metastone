@@ -9,6 +9,7 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
+		"target": "FRIENDLY_HERO",
 		"spell1": {
 			"class": "HealSpell",
 			"value": 4
@@ -16,8 +17,7 @@
 		"spell2": {
 			"class": "BuffHeroSpell",
 			"attackBonus": 2
-		},
-		"target": "FRIENDLY_HERO"
+		}
 	},
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",

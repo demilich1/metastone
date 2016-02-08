@@ -7,6 +7,7 @@
 	"baseHp": 2,
 	"heroClass": "ANY",
 	"rarity": "RARE",
+	"race": "PIRATE",
 	"description": "Battlecry: Remove 1 Durability from your opponent's weapon.",
 	"battlecry": {
 		"spell": {
@@ -16,7 +17,6 @@
 		},
 		"resolvedLate": false
 	},
-	"race": "PIRATE",
 	"attributes": {
 		"BATTLECRY": true
 	},

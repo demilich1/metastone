@@ -8,6 +8,7 @@
 	"description": "Choose a minion. Whenever it attacks, draw a card.",
 	"targetSelection": "MINIONS",
 	"spell": {
+		"class": "AddSpellTriggerSpell",
 		"trigger": {
 			"eventTrigger": {
 				"class": "HostAttacksTrigger"
@@ -16,8 +17,7 @@
 				"class": "DrawCardSpell",
 				"value": 1
 			}
-		},
-		"class": "AddSpellTriggerSpell"
+		}
 	},
 	"collectible": true,
 	"set": "CLASSIC",

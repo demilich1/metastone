@@ -7,6 +7,7 @@
 	"baseHp": 4,
 	"heroClass": "ANY",
 	"rarity": "FREE",
+	"race": "MECH",
 	"description": "At the end of your turn, give a random minion +1/+1.",
 	"trigger": {
 		"eventTrigger": {
@@ -21,7 +22,6 @@
 			"randomTarget": true
 		}
 	},
-	"race": "MECH",
 	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

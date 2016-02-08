@@ -7,6 +7,7 @@
 	"baseHp": 8,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
+	"race": "DRAGON",
 	"description": "Battlecry: Add 2 random spells to your hand (from your opponent's class).",
 	"battlecry": {
 		"spell": {
@@ -14,14 +15,13 @@
 			"card": "spell_tail_swipe",
 			"howMany": 2,
 			"cardFilter": {
-				"heroClass": "OPPONENT",
 				"class": "CardFilter",
-				"cardType": "SPELL"
+				"cardType": "SPELL",
+				"heroClass": "OPPONENT"
 			}
 		},
 		"resolvedLate": false
 	},
-	"race": "DRAGON",
 	"attributes": {
 		"BATTLECRY": true
 	},

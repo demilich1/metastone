@@ -7,6 +7,7 @@
 	"baseHp": 2,
 	"heroClass": "HUNTER",
 	"rarity": "LEGENDARY",
+	"race": "BEAST",
 	"description": "Whenever another minion takes damage, destroy it.",
 	"trigger": {
 		"eventTrigger": {
@@ -20,7 +21,6 @@
 			"target": "EVENT_TARGET"
 		}
 	},
-	"race": "BEAST",
 	"collectible": true,
 	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1

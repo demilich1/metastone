@@ -7,6 +7,7 @@
 	"baseHp": 7,
 	"heroClass": "WARLOCK",
 	"rarity": "LEGENDARY",
+	"race": "DEMON",
 	"description": "Your other Demons have +2/+2. Your hero is Immune.",
 	"aura": {
 		"class": "BuffAura",
@@ -18,7 +19,6 @@
 			"race": "DEMON"
 		}
 	},
-	"race": "DEMON",
 	"attributes": {
 		"IMMUNE_HERO": true
 	},

@@ -7,13 +7,14 @@
 	"baseHp": 4,
 	"heroClass": "WARLOCK",
 	"rarity": "COMMON",
+	"race": "DEMON",
 	"description": "Whenever your hero takes damage on your turn, gain +2/+2.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "DamageReceivedTrigger",
 			"targetPlayer": "SELF",
 			"entityType": "HERO",
-			"ownTurnOnly" : true
+			"ownTurnOnly": true
 		},
 		"spell": {
 			"class": "BuffSpell",
@@ -22,7 +23,6 @@
 			"hpBonus": 2
 		}
 	},
-	"race": "DEMON",
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

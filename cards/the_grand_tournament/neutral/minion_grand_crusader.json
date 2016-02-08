@@ -12,8 +12,8 @@
 		"spell": {
 			"class": "ReceiveRandomCollectibleCardSpell",
 			"cardFilter": {
-				"heroClass": "PALADIN",
-				"class": "CardFilter"
+				"class": "CardFilter",
+				"heroClass": "PALADIN"
 			}
 		},
 		"resolvedLate": false

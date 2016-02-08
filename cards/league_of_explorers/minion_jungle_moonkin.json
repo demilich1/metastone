@@ -7,8 +7,8 @@
 	"baseHp": 4,
 	"heroClass": "DRUID",
 	"rarity": "RARE",
-	"description": "Both players have Spell Damage +2",
 	"race": "BEAST",
+	"description": "Both players have Spell Damage +2",
 	"attributes": {
 		"OPPONENT_SPELL_DAMAGE": 2,
 		"SPELL_DAMAGE": 2

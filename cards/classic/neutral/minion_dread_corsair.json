@@ -7,13 +7,13 @@
 	"baseHp": 3,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
+	"race": "PIRATE",
 	"description": "Taunt. Costs (1) less per Attack of your weapon.",
 	"manaCostModifier": {
 		"class": "AttributeValueProvider",
 		"target": "FRIENDLY_WEAPON",
 		"attribute": "ATTACK"
 	},
-	"race": "PIRATE",
 	"attributes": {
 		"TAUNT": true
 	},

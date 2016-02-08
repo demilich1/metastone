@@ -7,6 +7,7 @@
 	"baseHp": 1,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
+	"race": "MECH",
 	"description": "Deathrattle: Put a Spare Part card in your hand.",
 	"deathrattle": {
 		"class": "ReceiveRandomCardSpell",
@@ -20,7 +21,6 @@
 			"spell_whirling_blades"
 		]
 	},
-	"race": "MECH",
 	"attributes": {
 		"DEATHRATTLES": true
 	},

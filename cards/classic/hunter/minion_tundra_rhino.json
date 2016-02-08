@@ -7,6 +7,7 @@
 	"baseHp": 5,
 	"heroClass": "HUNTER",
 	"rarity": "FREE",
+	"race": "BEAST",
 	"description": "Your Beasts have Charge.",
 	"aura": {
 		"class": "AttributeAura",
@@ -17,7 +18,6 @@
 		},
 		"attribute": "CHARGE"
 	},
-	"race": "BEAST",
 	"attributes": {
 		"CHARGE": true
 	},

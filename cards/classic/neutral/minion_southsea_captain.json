@@ -7,6 +7,7 @@
 	"baseHp": 3,
 	"heroClass": "ANY",
 	"rarity": "EPIC",
+	"race": "PIRATE",
 	"description": "Your other Pirates have +1/+1.",
 	"aura": {
 		"class": "BuffAura",
@@ -18,7 +19,6 @@
 			"race": "PIRATE"
 		}
 	},
-	"race": "PIRATE",
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

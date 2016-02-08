@@ -8,6 +8,7 @@
 	"description": "Choose a minion. Whenever it attacks, restore 4 Health to your hero.",
 	"targetSelection": "MINIONS",
 	"spell": {
+		"class": "AddSpellTriggerSpell",
 		"trigger": {
 			"eventTrigger": {
 				"class": "HostAttacksTrigger"
@@ -17,8 +18,7 @@
 				"target": "FRIENDLY_HERO",
 				"value": 4
 			}
-		},
-		"class": "AddSpellTriggerSpell"
+		}
 	},
 	"collectible": true,
 	"set": "THE_GRAND_TOURNAMENT",

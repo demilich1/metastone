@@ -11,8 +11,8 @@
 	"passiveTrigger": {
 		"eventTrigger": {
 			"class": "MinionSummonedTrigger",
-			"targetPlayer": "SELF",
-			"race": "BEAST"
+			"race": "BEAST",
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "ModifyAttributeSpell",

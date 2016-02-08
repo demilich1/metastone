@@ -7,6 +7,7 @@
 	"baseHp": 2,
 	"heroClass": "ROGUE",
 	"rarity": "COMMON",
+	"race": "MECH",
 	"description": "Battlecry: Give your weapon +1 Attack.",
 	"battlecry": {
 		"spell": {
@@ -15,7 +16,6 @@
 		},
 		"resolvedLate": false
 	},
-	"race": "MECH",
 	"attributes": {
 		"BATTLECRY": true
 	},

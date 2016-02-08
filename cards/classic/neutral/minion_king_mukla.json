@@ -7,6 +7,7 @@
 	"baseHp": 5,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
+	"race": "BEAST",
 	"description": "Battlecry: Give your opponent 2 Bananas.",
 	"battlecry": {
 		"spell": {
@@ -19,7 +20,6 @@
 		},
 		"resolvedLate": false
 	},
-	"race": "BEAST",
 	"attributes": {
 		"BATTLECRY": true
 	},

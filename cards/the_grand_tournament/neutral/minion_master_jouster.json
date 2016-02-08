@@ -15,6 +15,7 @@
 			"target": "NONE",
 			"spell": {
 				"class": "MetaSpell",
+				"target": "SELF",
 				"spell1": {
 					"class": "AddAttributeSpell",
 					"attribute": "TAUNT"
@@ -22,8 +23,7 @@
 				"spell2": {
 					"class": "AddAttributeSpell",
 					"attribute": "DIVINE_SHIELD"
-				},
-				"target": "SELF"
+				}
 			}
 		},
 		"resolvedLate": false

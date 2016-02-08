@@ -7,6 +7,7 @@
 	"baseHp": 2,
 	"heroClass": "SHAMAN",
 	"rarity": "FREE",
+	"race": "TOTEM",
 	"description": "At the end of your turn, restore 1 Health to all friendly minions.",
 	"trigger": {
 		"eventTrigger": {
@@ -18,7 +19,6 @@
 			"value": 1
 		}
 	},
-	"race": "TOTEM",
 	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

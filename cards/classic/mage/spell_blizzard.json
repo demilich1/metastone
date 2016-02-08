@@ -9,6 +9,7 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
+		"target": "ENEMY_MINIONS",
 		"spell1": {
 			"class": "DamageSpell",
 			"value": 2
@@ -16,8 +17,7 @@
 		"spell2": {
 			"class": "AddAttributeSpell",
 			"attribute": "FROZEN"
-		},
-		"target": "ENEMY_MINIONS"
+		}
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

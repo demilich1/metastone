@@ -18,6 +18,8 @@
 				"hpBonus": 1
 			},
 			"spell2": {
+				"class": "AddSpellTriggerSpell",
+				"target": "FRIENDLY_HERO",
 				"trigger": {
 					"eventTrigger": {
 						"class": "CardDrawnTrigger",
@@ -29,9 +31,7 @@
 						"attackBonus": 1,
 						"hpBonus": 1
 					}
-				},
-				"class": "AddSpellTriggerSpell",
-				"target": "FRIENDLY_HERO"
+				}
 			},
 			"resolvedLate": false
 		}

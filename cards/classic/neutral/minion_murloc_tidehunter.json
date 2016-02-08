@@ -7,6 +7,7 @@
 	"baseHp": 1,
 	"heroClass": "ANY",
 	"rarity": "FREE",
+	"race": "MURLOC",
 	"description": "Battlecry: Summon a 1/1 Murloc Scout.",
 	"battlecry": {
 		"spell": {
@@ -16,7 +17,6 @@
 		},
 		"resolvedLate": false
 	},
-	"race": "MURLOC",
 	"attributes": {
 		"BATTLECRY": true
 	},

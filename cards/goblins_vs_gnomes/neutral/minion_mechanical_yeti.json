@@ -7,6 +7,7 @@
 	"baseHp": 5,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
+	"race": "MECH",
 	"description": "Deathrattle: Give each player a Spare Part.",
 	"deathrattle": {
 		"class": "ReceiveRandomCardSpell",
@@ -21,7 +22,6 @@
 			"spell_whirling_blades"
 		]
 	},
-	"race": "MECH",
 	"attributes": {
 		"DEATHRATTLES": true
 	},

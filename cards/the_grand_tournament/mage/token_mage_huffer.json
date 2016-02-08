@@ -7,8 +7,8 @@
 	"baseHp": 2,
 	"heroClass": "MAGE",
 	"rarity": "FREE",
-	"description": "Charge",
 	"race": "BEAST",
+	"description": "Charge",
 	"attributes": {
 		"CHARGE": true
 	},

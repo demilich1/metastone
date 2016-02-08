@@ -7,10 +7,12 @@
 	"baseHp": 2,
 	"heroClass": "ANY",
 	"rarity": "EPIC",
+	"race": "MECH",
 	"description": "Battlecry: Give your other minions Windfury, Taunt, or Divine Shield. (at random)",
 	"battlecry": {
 		"spell": {
 			"class": "CastRandomSpellSpell",
+			"target": "FRIENDLY_MINIONS",
 			"spell1": {
 				"class": "AddAttributeSpell",
 				"attribute": "WINDFURY"
@@ -22,12 +24,10 @@
 			"spell3": {
 				"class": "AddAttributeSpell",
 				"attribute": "DIVINE_SHIELD"
-			},
-			"target": "FRIENDLY_MINIONS"
+			}
 		},
 		"resolvedLate": false
 	},
-	"race": "MECH",
 	"attributes": {
 		"BATTLECRY": true
 	},

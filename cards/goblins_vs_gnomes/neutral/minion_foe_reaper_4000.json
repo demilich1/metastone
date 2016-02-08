@@ -7,6 +7,7 @@
 	"baseHp": 9,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
+	"race": "MECH",
 	"description": "Also damages the minions next to whomever he attacks.",
 	"trigger": {
 		"eventTrigger": {
@@ -15,6 +16,7 @@
 		},
 		"spell": {
 			"class": "AdjacentEffectSpell",
+			"target": "EVENT_TARGET",
 			"spell2": {
 				"class": "DamageSpell",
 				"valueProvider": {
@@ -22,11 +24,9 @@
 					"target": "ATTACKER",
 					"attribute": "ATTACK"
 				}
-			},
-			"target": "EVENT_TARGET"
+			}
 		}
 	},
-	"race": "MECH",
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

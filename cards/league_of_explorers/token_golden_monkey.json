@@ -16,18 +16,18 @@
 				"class": "ReplaceCardLocationSpell",
 				"cardLocation": "HAND",
 				"cardFilter": {
-					"rarity": "LEGENDARY",
 					"class": "CardFilter",
-					"cardType": "MINION"
+					"cardType": "MINION",
+					"rarity": "LEGENDARY"
 				}
 			},
 			"spell2": {
 				"class": "ReplaceCardLocationSpell",
 				"cardLocation": "DECK",
 				"cardFilter": {
-					"rarity": "LEGENDARY",
 					"class": "CardFilter",
-					"cardType": "MINION"
+					"cardType": "MINION",
+					"rarity": "LEGENDARY"
 				}
 			}
 		},

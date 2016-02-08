@@ -7,8 +7,8 @@
 	"baseHp": 5,
 	"heroClass": "ANY",
 	"rarity": "RARE",
-	"description": "Taunt. Can't be targeted by spells or Hero Powers.",
 	"race": "MECH",
+	"description": "Taunt. Can't be targeted by spells or Hero Powers.",
 	"attributes": {
 		"TAUNT": true,
 		"UNTARGETABLE_BY_SPELLS": true

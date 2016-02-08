@@ -7,6 +7,7 @@
 	"baseHp": 1,
 	"heroClass": "ROGUE",
 	"rarity": "COMMON",
+	"race": "BEAST",
 	"description": "Destroy any minion damaged by this minion.",
 	"trigger": {
 		"eventTrigger": {
@@ -18,7 +19,6 @@
 			"target": "EVENT_TARGET"
 		}
 	},
-	"race": "BEAST",
 	"collectible": true,
 	"set": "LEAGUE_OF_EXPLORERS",
 	"fileFormatVersion": 1

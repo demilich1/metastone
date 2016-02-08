@@ -7,6 +7,7 @@
 	"baseHp": 6,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
+	"race": "PIRATE",
 	"description": "Charrrrrge. Costs (1) less for each friendly Pirate.",
 	"manaCostModifier": {
 		"class": "EntityCounter",
@@ -16,7 +17,6 @@
 			"race": "PIRATE"
 		}
 	},
-	"race": "PIRATE",
 	"attributes": {
 		"CHARGE": true
 	},

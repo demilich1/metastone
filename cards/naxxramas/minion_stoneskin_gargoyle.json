@@ -15,11 +15,11 @@
 		},
 		"spell": {
 			"class": "HealSpell",
+			"target": "SELF",
 			"valueProvider": {
 				"class": "AttributeValueProvider",
 				"attribute": "MAX_HP"
-			},
-			"target": "SELF"
+			}
 		}
 	},
 	"collectible": true,

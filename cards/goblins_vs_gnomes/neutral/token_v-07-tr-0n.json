@@ -7,8 +7,8 @@
 	"baseHp": 8,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
-	"description": "Charge. Mega-Windfury (Can attack four times a turn.)",
 	"race": "MECH",
+	"description": "Charge. Mega-Windfury (Can attack four times a turn.)",
 	"attributes": {
 		"CHARGE": true,
 		"MEGA_WINDFURY": true

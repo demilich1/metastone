@@ -15,6 +15,7 @@
 		},
 		"spell": {
 			"class": "AdjacentEffectSpell",
+			"target": "EVENT_TARGET",
 			"spell2": {
 				"class": "DamageSpell",
 				"valueProvider": {
@@ -22,8 +23,7 @@
 					"target": "ATTACKER",
 					"attribute": "ATTACK"
 				}
-			},
-			"target": "EVENT_TARGET"
+			}
 		}
 	},
 	"collectible": true,

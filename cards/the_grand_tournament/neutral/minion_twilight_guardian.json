@@ -7,10 +7,12 @@
 	"baseHp": 6,
 	"heroClass": "ANY",
 	"rarity": "EPIC",
+	"race": "DRAGON",
 	"description": "Battlecry: If you're holding a Dragon, gain +1 Attack and Taunt.",
 	"battlecry": {
 		"spell": {
 			"class": "MetaSpell",
+			"target": "SELF",
 			"spell1": {
 				"class": "BuffSpell",
 				"attackBonus": 1
@@ -18,8 +20,7 @@
 			"spell2": {
 				"class": "AddAttributeSpell",
 				"attribute": "TAUNT"
-			},
-			"target": "SELF"
+			}
 		},
 		"condition": {
 			"class": "HoldsCardCondition",
@@ -27,7 +28,6 @@
 		},
 		"resolvedLate": false
 	},
-	"race": "DRAGON",
 	"attributes": {
 		"BATTLECRY": true
 	},

@@ -13,8 +13,8 @@
 		"value": 2,
 		"filter": {
 			"class": "RaceFilter",
-			"invert": true,
-			"race": "DEMON"
+			"race": "DEMON",
+			"invert": true
 		}
 	},
 	"collectible": true,

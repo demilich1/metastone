@@ -7,6 +7,7 @@
 	"baseHp": 3,
 	"heroClass": "SHAMAN",
 	"rarity": "RARE",
+	"race": "TOTEM",
 	"description": "At the end of your turn, restore 4 Health to your hero.",
 	"trigger": {
 		"eventTrigger": {
@@ -18,7 +19,6 @@
 			"value": 4
 		}
 	},
-	"race": "TOTEM",
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

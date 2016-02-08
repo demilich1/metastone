@@ -7,6 +7,7 @@
 	"baseHp": 3,
 	"heroClass": "ANY",
 	"rarity": "RARE",
+	"race": "MURLOC",
 	"description": "Battlecry: Give ALL other Murlocs +2 Health.",
 	"battlecry": {
 		"spell": {
@@ -20,7 +21,6 @@
 		},
 		"resolvedLate": false
 	},
-	"race": "MURLOC",
 	"attributes": {
 		"BATTLECRY": true
 	},

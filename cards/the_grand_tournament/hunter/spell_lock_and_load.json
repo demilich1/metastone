@@ -8,6 +8,8 @@
 	"description": "Each time you cast a spell this turn, add a random Hunter card to your hand.",
 	"targetSelection": "NONE",
 	"spell": {
+		"class": "AddSpellTriggerSpell",
+		"target": "FRIENDLY_HERO",
 		"trigger": {
 			"eventTrigger": {
 				"class": "SpellCastedTrigger",
@@ -16,14 +18,12 @@
 			"spell": {
 				"class": "ReceiveRandomCollectibleCardSpell",
 				"cardFilter": {
-					"heroClass": "HUNTER",
-					"class": "CardFilter"
+					"class": "CardFilter",
+					"heroClass": "HUNTER"
 				}
 			},
 			"oneTurn": true
-		},
-		"class": "AddSpellTriggerSpell",
-		"target": "FRIENDLY_HERO"
+		}
 	},
 	"collectible": true,
 	"set": "THE_GRAND_TOURNAMENT",

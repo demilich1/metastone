@@ -18,6 +18,8 @@
 			}
 		},
 		"spell2": {
+			"class": "AddSpellTriggerSpell",
+			"target": "FRIENDLY_HERO",
 			"trigger": {
 				"eventTrigger": {
 					"class": "MinionSummonedTrigger",
@@ -32,9 +34,7 @@
 					}
 				},
 				"oneTurn": true
-			},
-			"class": "AddSpellTriggerSpell",
-			"target": "FRIENDLY_HERO"
+			}
 		},
 		"spell3": {
 			"class": "DrawCardSpell",

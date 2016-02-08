@@ -7,13 +7,13 @@
 	"baseHp": 4,
 	"heroClass": "HUNTER",
 	"rarity": "FREE",
+	"race": "BEAST",
 	"description": "Other friendly minions have +1 Attack.",
 	"aura": {
 		"class": "BuffAura",
 		"target": "FRIENDLY_MINIONS",
 		"attackBonus": 1
 	},
-	"race": "BEAST",
 	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

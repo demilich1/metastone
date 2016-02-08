@@ -7,12 +7,13 @@
 	"baseHp": 1,
 	"heroClass": "ROGUE",
 	"rarity": "RARE",
+	"race": "PIRATE",
 	"description": "Whenever you summon a Pirate, gain Stealth.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "MinionSummonedTrigger",
-			"targetPlayer": "SELF",
-			"race": "PIRATE"
+			"race": "PIRATE",
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "AddAttributeSpell",
@@ -20,7 +21,6 @@
 			"attribute": "STEALTH"
 		}
 	},
-	"race": "PIRATE",
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

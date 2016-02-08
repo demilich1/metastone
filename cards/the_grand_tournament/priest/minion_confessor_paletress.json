@@ -15,8 +15,8 @@
 		"spell": {
 			"class": "SummonRandomMinionFilteredSpell",
 			"cardFilter": {
-				"rarity": "LEGENDARY",
-				"class": "CardFilter"
+				"class": "CardFilter",
+				"rarity": "LEGENDARY"
 			}
 		}
 	},

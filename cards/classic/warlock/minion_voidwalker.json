@@ -7,8 +7,8 @@
 	"baseHp": 3,
 	"heroClass": "WARLOCK",
 	"rarity": "FREE",
-	"description": "Taunt",
 	"race": "DEMON",
+	"description": "Taunt",
 	"attributes": {
 		"TAUNT": true
 	},

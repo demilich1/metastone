@@ -7,14 +7,15 @@
 	"baseHp": 5,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
+	"race": "MECH",
 	"description": "At the start of your turn, if you have at least 3 Mechs, destroy them all, and form V-07-TR-0N.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "TurnStartTrigger",
 			"condition": {
 				"class": "RaceOnBoardCondition",
-				"value": 3,
-				"race": "MECH"
+				"race": "MECH",
+				"value": 3
 			}
 		},
 		"spell": {
@@ -33,7 +34,6 @@
 			}
 		}
 	},
-	"race": "MECH",
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
