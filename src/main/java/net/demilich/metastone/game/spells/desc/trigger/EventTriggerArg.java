@@ -3,11 +3,11 @@ package net.demilich.metastone.game.spells.desc.trigger;
 public enum EventTriggerArg {
 	CLASS,
 	TARGET_PLAYER,
-	TARGETED_PLAYER,
+	SOURCE_PLAYER,
 	CARD_TYPE,
 	SOURCE_TYPE,
 	WORKS_ON_HERO,
-	ENTITY_TYPE,
+	SOURCE_ENTITY_TYPE,
 	TARGET_ENTITY_TYPE,
 	RACE,
 	ACTION_TYPE,

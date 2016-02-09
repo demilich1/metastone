@@ -11,9 +11,10 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "PhysicalAttackTrigger",
-			"targetPlayer": "SELF",
-			"targetEntityType": "MINION",
-			"entityType": "HERO"
+			"sourcePlayer": "SELF",
+			"targetPlayer": "BOTH",
+			"sourceEntityType": "HERO",
+			"targetEntityType": "MINION"
 		},
 		"spell": {
 			"class": "BuffWeaponSpell",

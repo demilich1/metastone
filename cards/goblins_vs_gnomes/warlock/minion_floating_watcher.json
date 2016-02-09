@@ -13,7 +13,7 @@
 		"eventTrigger": {
 			"class": "DamageReceivedTrigger",
 			"targetPlayer": "SELF",
-			"entityType": "HERO",
+			"targetEntityType": "HERO",
 			"ownTurnOnly": true
 		},
 		"spell": {

@@ -17,7 +17,7 @@ public class PreDamageTrigger extends GameEventTrigger {
 
 	@Override
 	protected boolean fire(GameEvent event, Entity host) {
-		EntityType sourceEntityType = (EntityType) desc.get(EventTriggerArg.ENTITY_TYPE);
+		EntityType sourceEntityType = (EntityType) desc.get(EventTriggerArg.SOURCE_ENTITY_TYPE);
 		EntityType targetEntityType = (EntityType) desc.get(EventTriggerArg.TARGET_ENTITY_TYPE);
 		PreDamageEvent preDamageEvent = (PreDamageEvent) event;
 		if (sourceEntityType != null && preDamageEvent.getSource().getEntityType() != sourceEntityType) {
@@ -27,9 +27,9 @@ public class PreDamageTrigger extends GameEventTrigger {
 			return false;
 		}
 		
-		if (desc.contains(EventTriggerArg.TARGETED_PLAYER)) {
-			TargetPlayer targetedPlayer = (TargetPlayer) desc.get(EventTriggerArg.TARGETED_PLAYER);
-			switch (targetedPlayer) {
+		if (desc.contains(EventTriggerArg.TARGET_PLAYER)) {
+			TargetPlayer targetPlayer = (TargetPlayer) desc.get(EventTriggerArg.TARGET_PLAYER);
+			switch (targetPlayer) {
 			case OWNER:
 			case SELF:
 				if (getOwner() != preDamageEvent.getVictim().getOwner()) {
@@ -47,8 +47,8 @@ public class PreDamageTrigger extends GameEventTrigger {
 		}
 
 		int owner = preDamageEvent.getSource().getOwner();
-		TargetPlayer targetPlayer = desc.getTargetPlayer();
-		switch (targetPlayer) {
+		TargetPlayer sourcePlayer = desc.getSourcePlayer();
+		switch (sourcePlayer) {
 		case BOTH:
 			return true;
 		case OPPONENT:
@@ -58,9 +58,12 @@ public class PreDamageTrigger extends GameEventTrigger {
 			return owner == getOwner();
 		case ACTIVE:
 			return owner == event.getGameContext().getActivePlayerId();
+		case INACTIVE:
+			return owner != event.getGameContext().getActivePlayerId();
 		default:
-			return false;
+			break;
 		}
+		return false;
 	}
 
 	@Override

@@ -24,7 +24,7 @@ public class TargetAcquisitionTrigger extends GameEventTrigger {
 		if (targetAcquisitionEvent.getActionType() != actionType) {
 			return false;
 		}
-		EntityType sourceEntityType = (EntityType) desc.get(EventTriggerArg.ENTITY_TYPE);
+		EntityType sourceEntityType = (EntityType) desc.get(EventTriggerArg.SOURCE_ENTITY_TYPE);
 		if (sourceEntityType != null && sourceEntityType != targetAcquisitionEvent.getSource().getEntityType()) {
 			return false;
 		}
@@ -33,9 +33,9 @@ public class TargetAcquisitionTrigger extends GameEventTrigger {
 			return false;
 		}
 
-		TargetPlayer targetPlayer = desc.getTargetPlayer();
+		TargetPlayer sourcePlayer = desc.getSourcePlayer();
 		int playerId = targetAcquisitionEvent.getSource().getOwner();
-		switch (targetPlayer) {
+		switch (sourcePlayer) {
 		case BOTH:
 			return true;
 		case SELF:
@@ -43,6 +43,12 @@ public class TargetAcquisitionTrigger extends GameEventTrigger {
 			return playerId == host.getOwner();
 		case OPPONENT:
 			return playerId != host.getOwner();
+		case ACTIVE:
+			return playerId == targetAcquisitionEvent.getGameContext().getActivePlayerId();
+		case INACTIVE:
+			return playerId != targetAcquisitionEvent.getGameContext().getActivePlayerId();
+		default:
+			break;
 		}
 		return false;
 	}

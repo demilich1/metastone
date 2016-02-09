@@ -12,7 +12,7 @@
 		"eventTrigger": {
 			"class": "DamageReceivedTrigger",
 			"targetPlayer": "BOTH",
-			"entityType": "MINION"
+			"targetEntityType": "MINION"
 		},
 		"spell": {
 			"class": "BuffSpell",

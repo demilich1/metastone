@@ -12,8 +12,9 @@
 		"eventTrigger": {
 			"class": "TargetAcquisitionTrigger",
 			"actionType": "PHYSICAL_ATTACK",
-			"targetPlayer": "SELF",
-			"entityType": "HERO"
+			"sourcePlayer": "SELF",
+			"targetPlayer": "BOTH",
+			"sourceEntityType": "HERO"
 		},
 		"spell": {
 			"class": "HealSpell",

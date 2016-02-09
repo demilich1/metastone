@@ -19,8 +19,8 @@ public class DamageReceivedTrigger extends GameEventTrigger {
 	protected boolean fire(GameEvent event, Entity host) {
 		DamageEvent damageEvent = (DamageEvent) event;
 
-		EntityType entityType = (EntityType) desc.get(EventTriggerArg.ENTITY_TYPE);
-		if (entityType != null && damageEvent.getVictim().getEntityType() != entityType) {
+		EntityType targetEntityType = (EntityType) desc.get(EventTriggerArg.TARGET_ENTITY_TYPE);
+		if (targetEntityType != null && damageEvent.getVictim().getEntityType() != targetEntityType) {
 			return false;
 		}
 
@@ -33,6 +33,12 @@ public class DamageReceivedTrigger extends GameEventTrigger {
 		case OWNER:
 		case SELF:
 			return damageEvent.getVictim().getOwner() == getOwner();
+		case ACTIVE:
+			return damageEvent.getVictim().getOwner() == event.getGameContext().getActivePlayerId();
+		case INACTIVE:
+			return damageEvent.getVictim().getOwner() != event.getGameContext().getActivePlayerId();
+		default:
+			break;
 		}
 
 		return false;

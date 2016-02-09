@@ -11,7 +11,7 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "HealingTrigger",
-			"entityType": "MINION"
+			"targetEntityType": "MINION"
 		},
 		"spell": {
 			"class": "DrawCardSpell",

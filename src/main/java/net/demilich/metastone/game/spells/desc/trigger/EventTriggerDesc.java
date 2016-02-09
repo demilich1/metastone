@@ -39,6 +39,10 @@ public class EventTriggerDesc extends Desc<EventTriggerArg> {
 		return contains(EventTriggerArg.TARGET_PLAYER) ? (TargetPlayer) get(EventTriggerArg.TARGET_PLAYER) : TargetPlayer.SELF;
 	}
 
+	public TargetPlayer getSourcePlayer() {
+		return contains(EventTriggerArg.SOURCE_PLAYER) ? (TargetPlayer) get(EventTriggerArg.SOURCE_PLAYER) : TargetPlayer.SELF;
+	}
+
 	@SuppressWarnings("unchecked")
 	public Class<? extends GameEventTrigger> getTriggerClass() {
 		return (Class<? extends GameEventTrigger>) get(EventTriggerArg.CLASS);

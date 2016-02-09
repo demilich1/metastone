@@ -13,7 +13,7 @@
 		"eventTrigger": {
 			"class": "DamageReceivedTrigger",
 			"targetPlayer": "BOTH",
-			"entityType": "MINION",
+			"targetEntityType": "MINION",
 			"ignoreHost": true
 		},
 		"spell": {

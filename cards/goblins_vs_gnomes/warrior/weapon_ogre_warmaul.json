@@ -12,7 +12,8 @@
 		"eventTrigger": {
 			"class": "TargetAcquisitionTrigger",
 			"actionType": "PHYSICAL_ATTACK",
-			"entityType": "HERO",
+			"sourcePlayer": "SELF",
+			"sourceEntityType": "HERO",
 			"condition": {
 				"class": "RandomCondition"
 			}

@@ -17,7 +17,7 @@ public class PhysicalAttackTrigger extends GameEventTrigger {
 
 	@Override
 	protected boolean fire(GameEvent event, Entity host) {
-		EntityType sourceEntityType = (EntityType) desc.get(EventTriggerArg.ENTITY_TYPE);
+		EntityType sourceEntityType = (EntityType) desc.get(EventTriggerArg.SOURCE_ENTITY_TYPE);
 		EntityType targetEntityType = (EntityType) desc.get(EventTriggerArg.TARGET_ENTITY_TYPE);
 		PhysicalAttackEvent physicalAttackEvent = (PhysicalAttackEvent) event;
 		if (sourceEntityType != null && physicalAttackEvent.getAttacker().getEntityType() != sourceEntityType) {
@@ -27,8 +27,8 @@ public class PhysicalAttackTrigger extends GameEventTrigger {
 			return false;
 		}
 		
-		TargetPlayer targetPlayer = desc.getTargetPlayer();
-		switch (targetPlayer) {
+		TargetPlayer sourcePlayer = desc.getSourcePlayer();
+		switch (sourcePlayer) {
 		case BOTH:
 			return true;
 		case OPPONENT:
@@ -38,6 +38,10 @@ public class PhysicalAttackTrigger extends GameEventTrigger {
 			return physicalAttackEvent.getAttacker().getOwner() == getOwner();
 		case ACTIVE:
 			return physicalAttackEvent.getAttacker().getOwner() == event.getGameContext().getActivePlayerId();
+		case INACTIVE:
+			return physicalAttackEvent.getAttacker().getOwner() != event.getGameContext().getActivePlayerId();
+		default:
+			break;
 		}
 		return false;
 	}
