@@ -5,11 +5,11 @@ import net.demilich.metastone.game.entities.Entity;
 
 public class TurnStartEvent extends GameEvent {
 
-	private final int playerIndex;
+	private final int playerId;
 
-	public TurnStartEvent(GameContext context, int playerIndex) {
+	public TurnStartEvent(GameContext context, int playerId) {
 		super(context);
-		this.playerIndex = playerIndex;
+		this.playerId = playerId;
 	}
 
 	@Override
@@ -22,8 +22,8 @@ public class TurnStartEvent extends GameEvent {
 		return GameEventType.TURN_START;
 	}
 
-	public int getPlayer() {
-		return playerIndex;
+	public int getPlayerId() {
+		return playerId;
 	}
 
 }

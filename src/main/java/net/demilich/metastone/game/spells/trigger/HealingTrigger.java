@@ -16,14 +16,15 @@ public class HealingTrigger extends GameEventTrigger {
 
 	@Override
 	protected boolean fire(GameEvent event, Entity host) {
+		HealEvent healEvent = (HealEvent) event;
+		
 		EntityType targetEntityType = (EntityType) desc.get(EventTriggerArg.TARGET_ENTITY_TYPE);
-
 		if (targetEntityType != null) {
-			HealEvent healEvent = (HealEvent) event;
 			if (healEvent.getTarget().getEntityType() != targetEntityType) {
 				return false;
 			}
 		}
+		
 		return true;
 	}
 

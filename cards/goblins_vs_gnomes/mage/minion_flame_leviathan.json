@@ -11,7 +11,8 @@
 	"description": "When you draw this, deal 2 damage to all characters.",
 	"passiveTrigger": {
 		"eventTrigger": {
-			"class": "ThisCardDrawnTrigger"
+			"class": "CardDrawnTrigger",
+			"hostOnly": true
 		},
 		"spell": {
 			"class": "DamageSpell",

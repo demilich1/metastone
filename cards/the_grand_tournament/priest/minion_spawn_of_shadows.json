@@ -10,7 +10,8 @@
 	"description": "Inspire: Deal 4 damage to each hero.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "InspireTrigger"
+			"class": "InspireTrigger",
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "MetaSpell",

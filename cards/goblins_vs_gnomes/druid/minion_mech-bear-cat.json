@@ -11,7 +11,8 @@
 	"description": "Whenever this minion takes damage, add a Spare Part card to your hand.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "SelfDamagedTrigger"
+			"class": "DamageReceivedTrigger",
+			"hostOnly": true
 		},
 		"spell": {
 			"class": "ReceiveRandomCardSpell",

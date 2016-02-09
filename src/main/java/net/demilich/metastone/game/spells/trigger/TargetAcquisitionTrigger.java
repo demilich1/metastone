@@ -32,25 +32,16 @@ public class TargetAcquisitionTrigger extends GameEventTrigger {
 		if (targetEntityType != null && targetEntityType != targetAcquisitionEvent.getTarget().getEntityType()) {
 			return false;
 		}
+		
+		TargetPlayer targetPlayer = desc.getTargetPlayer();
+		int targetPlayerId = targetAcquisitionEvent.getTarget().getOwner();
+		if(!determineTargetPlayer(targetAcquisitionEvent, targetPlayer, host, targetPlayerId)) {
+			return false;
+		}
 
 		TargetPlayer sourcePlayer = desc.getSourcePlayer();
-		int playerId = targetAcquisitionEvent.getSource().getOwner();
-		switch (sourcePlayer) {
-		case BOTH:
-			return true;
-		case SELF:
-		case OWNER:
-			return playerId == host.getOwner();
-		case OPPONENT:
-			return playerId != host.getOwner();
-		case ACTIVE:
-			return playerId == targetAcquisitionEvent.getGameContext().getActivePlayerId();
-		case INACTIVE:
-			return playerId != targetAcquisitionEvent.getGameContext().getActivePlayerId();
-		default:
-			break;
-		}
-		return false;
+		int sourcePlayerId = targetAcquisitionEvent.getSource().getOwner();
+		return determineTargetPlayer(targetAcquisitionEvent, sourcePlayer, host, sourcePlayerId);
 	}
 
 	@Override

@@ -24,22 +24,19 @@ public class CardPlayedTrigger extends GameEventTrigger {
 		if (cardType != null && cardPlayedEvent.getCard().getCardType() != cardType) {
 			return false;
 		}
+		
 		Race race = (Race) desc.get(EventTriggerArg.RACE);
 		if (race != null && cardPlayedEvent.getCard().getAttribute(Attribute.RACE) != race) {
 			return false;
 		}
+		
 		TargetPlayer targetPlayer = desc.getTargetPlayer();
-		switch (targetPlayer) {
-		case BOTH:
-			return true;
-		case SELF:
-		case OWNER:
-			return cardPlayedEvent.getPlayerId() == host.getOwner();
-		case OPPONENT:
-			return cardPlayedEvent.getPlayerId() != host.getOwner();
+		int targetPlayerId = cardPlayedEvent.getPlayerId();
+		if (targetPlayer != null) {
+			return determineTargetPlayer(cardPlayedEvent, targetPlayer, host, targetPlayerId);
 		}
 
-		return false;
+		return true;
 	}
 
 	@Override

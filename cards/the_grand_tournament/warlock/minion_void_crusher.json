@@ -11,7 +11,8 @@
 	"description": "Inspire: Destroy a random minion for each player.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "InspireTrigger"
+			"class": "InspireTrigger",
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "MetaSpell",

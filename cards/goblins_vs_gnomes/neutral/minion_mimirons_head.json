@@ -12,6 +12,7 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "TurnStartTrigger",
+			"targetPlayer": "SELF",
 			"condition": {
 				"class": "RaceOnBoardCondition",
 				"race": "MECH",

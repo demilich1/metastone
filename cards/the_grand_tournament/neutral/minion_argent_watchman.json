@@ -10,7 +10,8 @@
 	"description": "Can't attack. Inspire: Can attack as normal this turn.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "InspireTrigger"
+			"class": "InspireTrigger",
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "RemoveAttributeSpell",

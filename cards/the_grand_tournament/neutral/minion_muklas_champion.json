@@ -11,7 +11,8 @@
 	"description": "Inspire: Give your other minions +1/+1.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "InspireTrigger"
+			"class": "InspireTrigger",
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "BuffSpell",

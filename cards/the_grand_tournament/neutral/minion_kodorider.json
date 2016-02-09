@@ -10,7 +10,8 @@
 	"description": "Inspire: Summon a 3/5 War Kodo.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "InspireTrigger"
+			"class": "InspireTrigger",
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "SummonSpell",

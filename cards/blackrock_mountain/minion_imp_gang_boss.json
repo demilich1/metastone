@@ -11,7 +11,8 @@
 	"description": "Whenever this minion takes damage, summon a 1/1 Imp.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "SelfDamagedTrigger"
+			"class": "DamageReceivedTrigger",
+			"hostOnly": true
 		},
 		"spell": {
 			"class": "SummonSpell",

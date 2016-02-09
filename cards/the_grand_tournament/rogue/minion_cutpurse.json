@@ -10,8 +10,9 @@
 	"description": "Whenever this minion attacks a hero, add the Coin to your hand.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "HostAttacksTrigger",
-			"targetEntityType": "HERO"
+			"class": "PhysicalAttackTrigger",
+			"targetEntityType": "HERO",
+			"hostOnly": true
 		},
 		"spell": {
 			"class": "ReceiveCardSpell",

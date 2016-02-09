@@ -11,7 +11,8 @@
 		"class": "AddSpellTriggerSpell",
 		"trigger": {
 			"eventTrigger": {
-				"class": "HostAttacksTrigger"
+				"class": "PhysicalAttackTrigger",
+				"hostOnly": true
 			},
 			"spell": {
 				"class": "DrawCardSpell",

@@ -10,7 +10,8 @@
 	"description": "Inspire: Add a 2/2 Squire to your hand.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "InspireTrigger"
+			"class": "InspireTrigger",
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "ReceiveCardSpell",

@@ -10,7 +10,8 @@
 	"description": "Inspire: Gain +2/+2.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "InspireTrigger"
+			"class": "InspireTrigger",
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "BuffSpell",

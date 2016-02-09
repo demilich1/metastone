@@ -10,7 +10,8 @@
 	"description": "After you cast a spell, deal 2 damage randomly split among all enemies.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "AfterSpellCastedTrigger"
+			"class": "AfterSpellCastedTrigger",
+			"sourcePlayer": "SELF"
 		},
 		"spell": {
 			"class": "MissilesSpell",

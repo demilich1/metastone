@@ -16,19 +16,14 @@ public class OverloadTrigger extends GameEventTrigger {
 	@Override
 	public boolean fire(GameEvent event, Entity host) {
 		OverloadEvent overloadEvent = (OverloadEvent) event;
-
+		
 		TargetPlayer targetPlayer = desc.getTargetPlayer();
-		switch (targetPlayer) {
-		case BOTH:
-			return true;
-		case OPPONENT:
-			return overloadEvent.getPlayer() != getOwner();
-		case SELF:
-		case OWNER:
-			return overloadEvent.getPlayer() == getOwner();
+		int targetPlayerId = overloadEvent.getPlayerId();
+		if (targetPlayer != null) {
+			return determineTargetPlayer(overloadEvent, targetPlayer, host, targetPlayerId);
 		}
 
-		return false;
+		return true;
 	}
 
 	@Override

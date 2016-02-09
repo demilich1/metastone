@@ -5,8 +5,8 @@
 	"type": "SPELL",
 	"heroClass": "HUNTER",
 	"rarity": "EPIC",
-	"description": "Give a Beast +2 Attack and Immune this turn.",
-	"targetSelection": "MINIONS",
+	"description": "Give a friendly Beast +2 Attack and Immune this turn.",
+	"targetSelection": "FRIENDLY_MINIONS",
 	"spell": {
 		"class": "MetaSpell",
 		"spell1": {

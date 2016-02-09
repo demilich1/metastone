@@ -10,7 +10,8 @@
 	"description": "Inspire: Gain Spell Damage +1.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "InspireTrigger"
+			"class": "InspireTrigger",
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "ModifyAttributeSpell",

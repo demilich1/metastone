@@ -11,6 +11,7 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "MinionPlayedTrigger",
+			"targetPlayer": "SELF",
 			"condition": {
 				"class": "AttributeCondition",
 				"value": 1,

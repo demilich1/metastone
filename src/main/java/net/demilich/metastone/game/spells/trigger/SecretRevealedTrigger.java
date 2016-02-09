@@ -16,17 +16,14 @@ public class SecretRevealedTrigger extends GameEventTrigger {
 	@Override
 	protected boolean fire(GameEvent event, Entity host) {
 		SecretRevealedEvent secretRevealedEvent = (SecretRevealedEvent) event;
+		
 		TargetPlayer targetPlayer = desc.getTargetPlayer();
-		switch (targetPlayer) {
-		case BOTH:
-			return true;
-		case SELF:
-		case OWNER:
-			return secretRevealedEvent.getPlayerId() == host.getOwner();
-		case OPPONENT:
-			return secretRevealedEvent.getPlayerId() != host.getOwner();
+		int targetPlayerId = secretRevealedEvent.getPlayerId();
+		if (targetPlayer != null) {
+			return determineTargetPlayer(secretRevealedEvent, targetPlayer, host, targetPlayerId);
 		}
-		return false;
+		
+		return true;
 	}
 
 	@Override

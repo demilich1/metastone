@@ -11,7 +11,8 @@
 	"description": "Whenever you equip a weapon, give it +1 Attack.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "WeaponEquippedTrigger"
+			"class": "WeaponEquippedTrigger",
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "BuffWeaponSpell",

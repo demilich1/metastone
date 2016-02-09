@@ -11,8 +11,9 @@
 	"description": "Also damages the minions next to whomever he attacks.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "HostAttacksTrigger",
-			"targetEntityType": "MINION"
+			"class": "PhysicalAttackTrigger",
+			"targetEntityType": "MINION",
+			"hostOnly": true
 		},
 		"spell": {
 			"class": "AdjacentEffectSpell",

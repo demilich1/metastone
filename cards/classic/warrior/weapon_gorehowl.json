@@ -12,7 +12,6 @@
 		"eventTrigger": {
 			"class": "PhysicalAttackTrigger",
 			"sourcePlayer": "SELF",
-			"targetPlayer": "BOTH",
 			"sourceEntityType": "HERO",
 			"targetEntityType": "MINION"
 		},

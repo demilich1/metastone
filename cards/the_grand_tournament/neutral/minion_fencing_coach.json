@@ -17,7 +17,8 @@
 				"cardType": "HERO_POWER",
 				"value": "-2",
 				"expirationTrigger": {
-					"class": "InspireTrigger"
+					"class": "InspireTrigger",
+					"targetPlayer": "SELF"
 				}
 			}
 		},

@@ -11,7 +11,8 @@
 	"description": "Whenever this minion takes damage, also deal that amount to your hero.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "SelfDamagedTrigger"
+			"class": "DamageReceivedTrigger",
+			"hostOnly": true
 		},
 		"spell": {
 			"class": "DamageSpell",

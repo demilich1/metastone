@@ -10,7 +10,8 @@
 	"description": "When you draw this, deal 1 damage to your minions.",
 	"passiveTrigger": {
 		"eventTrigger": {
-			"class": "ThisCardDrawnTrigger"
+			"class": "CardDrawnTrigger",
+			"hostOnly": true
 		},
 		"spell": {
 			"class": "DamageSpell",

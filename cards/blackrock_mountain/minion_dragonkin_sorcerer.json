@@ -11,8 +11,10 @@
 	"description": "Whenever you target this minion with a spell, gain +1/+1.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "SelfTargetedTrigger",
-			"actionType": "SPELL"
+			"class": "TargetAcquisitionTrigger",
+			"sourcePlayer": "SELF",
+			"actionType": "SPELL",
+			"hostOnly": true
 		},
 		"spell": {
 			"class": "BuffSpell",

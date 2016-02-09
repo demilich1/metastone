@@ -10,8 +10,9 @@
 	"description": "Whenever you target this minion with a spell, deal 3 damage to a random enemy.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "SelfTargetedTrigger",
-			"actionType": "SPELL"
+			"class": "TargetAcquisitionTrigger",
+			"actionType": "SPELL",
+			"hostOnly": true
 		},
 		"spell": {
 			"class": "DamageSpell",

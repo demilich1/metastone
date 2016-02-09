@@ -23,23 +23,13 @@ public class DiscardTrigger extends GameEventTrigger {
 		if (target == EntityReference.SELF && discardEvent.getCard() != host) {
 			return false;
 		}
-		switch (targetPlayer) {
-		case ACTIVE:
-			return discardEvent.getPlayerId() == event.getGameContext().getActivePlayerId();
-		case BOTH:
-			return true;
-		case INACTIVE:
-			return discardEvent.getPlayerId() != event.getGameContext().getActivePlayerId();
-		case OPPONENT:
-			return discardEvent.getPlayerId() != getOwner();
-		case OWNER:
-		case SELF:
-			return discardEvent.getPlayerId() == getOwner();
-		default:
-			break;
 		
+		int targetPlayerId = discardEvent.getPlayerId();
+		if (targetPlayer != null) {
+			return determineTargetPlayer(discardEvent, targetPlayer, host, targetPlayerId);
 		}
-		return false;
+		
+		return true;
 	}
 
 	@Override

@@ -11,7 +11,8 @@
 	"description": "At the end of your turn, restore 1 Health to all friendly minions.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "TurnEndTrigger"
+			"class": "TurnEndTrigger",
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "HealSpell",

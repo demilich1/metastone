@@ -20,17 +20,14 @@ public class TurnStartTrigger extends GameEventTrigger {
 	@Override
 	protected boolean fire(GameEvent event, Entity host) {
 		TurnStartEvent turnStartEvent = (TurnStartEvent) event;
+		
 		TargetPlayer targetPlayer = desc.getTargetPlayer();
-		switch (targetPlayer) {
-		case BOTH:
-			return true;
-		case OPPONENT:
-			return turnStartEvent.getPlayer() != getOwner();
-		case SELF:
-		case OWNER:
-			return turnStartEvent.getPlayer() == getOwner();
+		int targetPlayerId = turnStartEvent.getPlayerId();
+		if (targetPlayer != null) {
+			return determineTargetPlayer(turnStartEvent, targetPlayer, host, targetPlayerId);
 		}
-		return false;
+		
+		return true;
 	}
 
 	@Override

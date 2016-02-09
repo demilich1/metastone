@@ -20,19 +20,14 @@ public class TurnEndTrigger extends GameEventTrigger {
 	@Override
 	protected boolean fire(GameEvent event, Entity host) {
 		TurnEndEvent turnEndEvent = (TurnEndEvent) event;
-
+		
 		TargetPlayer targetPlayer = desc.getTargetPlayer();
-		switch (targetPlayer) {
-		case BOTH:
-			return true;
-		case OPPONENT:
-			return turnEndEvent.getPlayer() != getOwner();
-		case SELF:
-		case OWNER:
-			return turnEndEvent.getPlayer() == getOwner();
+		int targetPlayerId = turnEndEvent.getPlayerId();
+		if (targetPlayer != null) {
+			return determineTargetPlayer(turnEndEvent, targetPlayer, host, targetPlayerId);
 		}
 
-		return false;
+		return true;
 	}
 
 	@Override

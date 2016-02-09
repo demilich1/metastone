@@ -12,7 +12,8 @@
 	},
 	"passiveTrigger": {
 		"eventTrigger": {
-			"class": "ThisCardDrawnTrigger"
+			"class": "CardDrawnTrigger",
+			"hostOnly": true
 		},
 		"spell": {
 			"class": "MetaSpell",

@@ -10,7 +10,8 @@
 	"description": "Whenever you cast a spell, summon a minion of the same Cost.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "SpellCastedTrigger"
+			"class": "SpellCastedTrigger",
+			"sourcePlayer": "SELF"
 		},
 		"spell": {
 			"class": "SummonRandomMinionFromSpell",

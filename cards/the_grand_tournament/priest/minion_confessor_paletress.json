@@ -10,7 +10,8 @@
 	"description": "Inspire: Summon a random Legendary minion.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "InspireTrigger"
+			"class": "InspireTrigger",
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "SummonRandomMinionFilteredSpell",

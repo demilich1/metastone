@@ -20,6 +20,7 @@
 				"value": "-2",
 				"expirationTrigger": {
 					"class": "CardPlayedTrigger",
+					"targetPlayer": "SELF",
 					"race": "DRAGON"
 				}
 			}

@@ -10,7 +10,8 @@
 	"description": "Whenever this minion takes damage, draw a card.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "SelfDamagedTrigger"
+			"class": "DamageReceivedTrigger",
+			"hostOnly": true
 		},
 		"spell": {
 			"class": "DrawCardSpell",

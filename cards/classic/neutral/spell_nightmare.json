@@ -18,7 +18,8 @@
 			"class": "AddSpellTriggerSpell",
 			"trigger": {
 				"eventTrigger": {
-					"class": "TurnStartTrigger"
+					"class": "TurnStartTrigger",
+					"targetPlayer": "SELF"
 				},
 				"spell": {
 					"class": "DestroySpell",

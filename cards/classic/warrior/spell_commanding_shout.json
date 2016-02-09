@@ -14,7 +14,8 @@
 			"target": "FRIENDLY_MINIONS",
 			"attribute": "CANNOT_REDUCE_HP_BELOW_1",
 			"revertTrigger": {
-				"class": "TurnEndTrigger"
+				"class": "TurnEndTrigger",
+				"targetPlayer": "SELF"
 			}
 		},
 		"spell2": {
@@ -30,7 +31,8 @@
 					"target": "EVENT_TARGET",
 					"attribute": "CANNOT_REDUCE_HP_BELOW_1",
 					"revertTrigger": {
-						"class": "TurnEndTrigger"
+						"class": "TurnEndTrigger",
+						"targetPlayer": "SELF"
 					}
 				},
 				"oneTurn": true

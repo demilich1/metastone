@@ -29,7 +29,7 @@ public class OverloadEvent extends GameEvent {
 		return GameEventType.OVERLOAD;
 	}
 
-	public int getPlayer() {
+	public int getPlayerId() {
 		return playerId;
 	}
 

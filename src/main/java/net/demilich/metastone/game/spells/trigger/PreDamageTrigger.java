@@ -17,53 +17,31 @@ public class PreDamageTrigger extends GameEventTrigger {
 
 	@Override
 	protected boolean fire(GameEvent event, Entity host) {
-		EntityType sourceEntityType = (EntityType) desc.get(EventTriggerArg.SOURCE_ENTITY_TYPE);
-		EntityType targetEntityType = (EntityType) desc.get(EventTriggerArg.TARGET_ENTITY_TYPE);
 		PreDamageEvent preDamageEvent = (PreDamageEvent) event;
+		
+		EntityType sourceEntityType = (EntityType) desc.get(EventTriggerArg.SOURCE_ENTITY_TYPE);
 		if (sourceEntityType != null && preDamageEvent.getSource().getEntityType() != sourceEntityType) {
 			return false;
 		}
+		
+		EntityType targetEntityType = (EntityType) desc.get(EventTriggerArg.TARGET_ENTITY_TYPE);
 		if (targetEntityType != null && preDamageEvent.getVictim().getEntityType() != targetEntityType) {
 			return false;
 		}
 		
-		if (desc.contains(EventTriggerArg.TARGET_PLAYER)) {
-			TargetPlayer targetPlayer = (TargetPlayer) desc.get(EventTriggerArg.TARGET_PLAYER);
-			switch (targetPlayer) {
-			case OWNER:
-			case SELF:
-				if (getOwner() != preDamageEvent.getVictim().getOwner()) {
-					return false;
-				}
-				break;
-			case OPPONENT:
-				if (getOwner() == preDamageEvent.getVictim().getOwner()) {
-					return false;
-				}
-				break;
-			default:
-				break;
-			}
+		TargetPlayer targetPlayer = desc.getTargetPlayer();
+		int targetPlayerId = preDamageEvent.getVictim().getOwner();
+		if(targetPlayer != null && !determineTargetPlayer(preDamageEvent, targetPlayer, host, targetPlayerId)) {
+			return false;
 		}
 
-		int owner = preDamageEvent.getSource().getOwner();
 		TargetPlayer sourcePlayer = desc.getSourcePlayer();
-		switch (sourcePlayer) {
-		case BOTH:
-			return true;
-		case OPPONENT:
-			return owner != getOwner();
-		case SELF:
-		case OWNER:
-			return owner == getOwner();
-		case ACTIVE:
-			return owner == event.getGameContext().getActivePlayerId();
-		case INACTIVE:
-			return owner != event.getGameContext().getActivePlayerId();
-		default:
-			break;
+		int sourcePlayerId = preDamageEvent.getSource().getOwner();
+		if (targetPlayer != null) {
+			return determineTargetPlayer(preDamageEvent, sourcePlayer, host, sourcePlayerId);
 		}
-		return false;
+		
+		return true;
 	}
 
 	@Override

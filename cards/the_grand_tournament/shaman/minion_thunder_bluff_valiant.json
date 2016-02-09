@@ -10,7 +10,8 @@
 	"description": "Inspire: Give your Totems +2 Attack.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "InspireTrigger"
+			"class": "InspireTrigger",
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "BuffSpell",

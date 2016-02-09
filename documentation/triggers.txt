@@ -2,8 +2,6 @@ Triggers
 
 AfterSpellCastedTrigger
 
-AnyMinionAttacksTrigger
-
 ArmorGainedTrigger
 
 BoardChangedTrigger
@@ -16,8 +14,6 @@ DamageCausedTrigger
 
 DamageReceivedTrigger
 
-DamageSurvivedTrigger
-
 DiscardTrigger
 
 EnemyAttacksTrigger
@@ -26,23 +22,13 @@ EnrageChangedTrigger
 
 FatalDamageTrigger
 
-FriendlyTargetedTrigger
-
 GameEventTrigger
 
 GameStateChangedTrigger
 
 HealingTrigger
 
-HeroPowerUsedTrigger
-
-HostAcquiresTargetTrigger
-
-HostAttacksTrigger
-
 InspireTrigger
-
-MinionAttackedTrigger
 
 MinionDeathTrigger
 
@@ -60,17 +46,11 @@ SecretPlayedTrigger
 
 SecretRevealedTrigger
 
-SelfDamagedTrigger
-
-SelfTargetedTrigger
-
 SilenceTrigger
 
 SpellCastedTrigger
 
 TargetAcquisitionTrigger
-
-ThisCardDrawnTrigger
 
 TriggerLayer
 

@@ -10,7 +10,8 @@
 	"description": "Whenever this minion survives damage, summon another Grim Patron.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "SelfDamagedTrigger",
+			"class": "DamageReceivedTrigger",
+			"hostOnly": true,
 			"condition": {
 				"class": "IsDeadCondition",
 				"invert": true

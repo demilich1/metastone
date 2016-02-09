@@ -11,7 +11,8 @@
 	"description": "Inspire: Summon a random Murloc.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "InspireTrigger"
+			"class": "InspireTrigger",
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "SummonRandomMinionFilteredSpell",
