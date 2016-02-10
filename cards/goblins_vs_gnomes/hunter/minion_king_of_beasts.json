@@ -15,7 +15,7 @@
 			"target": "SELF",
 			"attackValueProvider": {
 				"class": "EntityCounter",
-				"target": "FRIENDLY_MINIONS",
+				"target": "OTHER_FRIENDLY_MINIONS",
 				"filter": {
 					"class": "RaceFilter",
 					"race": "BEAST"

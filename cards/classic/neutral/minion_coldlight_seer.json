@@ -12,7 +12,7 @@
 	"battlecry": {
 		"spell": {
 			"class": "BuffSpell",
-			"target": "ALL_MINIONS",
+			"target": "ALL_OTHER_MINIONS",
 			"hpBonus": 2,
 			"filter": {
 				"class": "RaceFilter",

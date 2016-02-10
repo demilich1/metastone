@@ -12,7 +12,7 @@
 	"battlecry": {
 		"spell": {
 			"class": "CastRandomSpellSpell",
-			"target": "FRIENDLY_MINIONS",
+			"target": "OTHER_FRIENDLY_MINIONS",
 			"spell1": {
 				"class": "AddAttributeSpell",
 				"attribute": "WINDFURY"

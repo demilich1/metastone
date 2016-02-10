@@ -12,7 +12,7 @@
 	"battlecry": {
 		"spell": {
 			"class": "DamageSpell",
-			"target": "ALL_CHARACTERS",
+			"target": "ALL_OTHER_CHARACTERS",
 			"value": 1
 		},
 		"resolvedLate": false

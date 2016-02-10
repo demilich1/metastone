@@ -10,7 +10,7 @@
 	"description": "Your other minions have +1/+1.",
 	"aura": {
 		"class": "BuffAura",
-		"target": "FRIENDLY_MINIONS",
+		"target": "OTHER_FRIENDLY_MINIONS",
 		"attackBonus": 1,
 		"hpBonus": 1
 	},

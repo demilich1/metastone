@@ -18,8 +18,7 @@
 			"target": "SELF",
 			"valueProvider": {
 				"class": "EntityCounter",
-				"target": "ALL_MINIONS",
-				"offset": -1,
+				"target": "ALL_OTHER_MINIONS",
 				"filter": {
 					"class": "RaceFilter",
 					"race": "MURLOC"

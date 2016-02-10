@@ -11,7 +11,7 @@
 	"description": "Your other Beasts have +1 Attack.",
 	"aura": {
 		"class": "BuffAura",
-		"target": "FRIENDLY_MINIONS",
+		"target": "OTHER_FRIENDLY_MINIONS",
 		"attackBonus": 1,
 		"filter": {
 			"class": "RaceFilter",

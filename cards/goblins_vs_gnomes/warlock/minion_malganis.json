@@ -11,7 +11,7 @@
 	"description": "Your other Demons have +2/+2. Your hero is Immune.",
 	"aura": {
 		"class": "BuffAura",
-		"target": "FRIENDLY_MINIONS",
+		"target": "OTHER_FRIENDLY_MINIONS",
 		"attackBonus": 2,
 		"hpBonus": 2,
 		"filter": {

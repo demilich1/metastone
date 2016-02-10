@@ -15,7 +15,7 @@
 			"class": "MetaSpell",
 			"spell1": {
 				"class": "DestroySpell",
-				"target": "ALL_MINIONS"
+				"target": "ALL_OTHER_MINIONS"
 			},
 			"spell2": {
 				"class": "DiscardSpell",
