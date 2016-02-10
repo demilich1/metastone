@@ -22,8 +22,6 @@ EnrageChangedTrigger
 
 FatalDamageTrigger
 
-GameEventTrigger
-
 GameStateChangedTrigger
 
 HealingTrigger
@@ -51,10 +49,6 @@ SilenceTrigger
 SpellCastedTrigger
 
 TargetAcquisitionTrigger
-
-TriggerLayer
-
-TriggerManager
 
 TurnEndTrigger
 

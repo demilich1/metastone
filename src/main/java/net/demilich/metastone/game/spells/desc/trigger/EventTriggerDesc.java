@@ -36,11 +36,11 @@ public class EventTriggerDesc extends Desc<EventTriggerArg> {
 	}
 
 	public TargetPlayer getSourcePlayer() {
-		return contains(EventTriggerArg.SOURCE_PLAYER) ? (TargetPlayer) get(EventTriggerArg.SOURCE_PLAYER) : TargetPlayer.SELF;
+		return (TargetPlayer) get(EventTriggerArg.SOURCE_PLAYER);
 	}
 
 	public TargetPlayer getTargetPlayer() {
-		return contains(EventTriggerArg.TARGET_PLAYER) ? (TargetPlayer) get(EventTriggerArg.TARGET_PLAYER) : TargetPlayer.SELF;
+		return (TargetPlayer) get(EventTriggerArg.TARGET_PLAYER);
 	}
 
 	@SuppressWarnings("unchecked")

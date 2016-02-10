@@ -37,7 +37,7 @@ public class PhysicalAttackTrigger extends GameEventTrigger {
 
 		TargetPlayer sourcePlayer = desc.getSourcePlayer();
 		int sourcePlayerId = physicalAttackEvent.getAttacker().getOwner();
-		if (targetPlayer != null) {
+		if (sourcePlayer != null) {
 			return determineTargetPlayer(physicalAttackEvent, sourcePlayer, host, sourcePlayerId);
 		}
 		
