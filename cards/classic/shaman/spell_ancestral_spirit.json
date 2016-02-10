@@ -5,7 +5,7 @@
 	"type": "SPELL",
 	"heroClass": "SHAMAN",
 	"rarity": "RARE",
-	"description": "Choose a minion. When that minion is destroyed, return it to the battlefield.",
+	"description": "Give a minion 'Deathrattle: Resummon this minion.'",
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "AddDeathrattleSpell",

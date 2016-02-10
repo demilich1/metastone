@@ -8,7 +8,7 @@
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
 	"race": "DRAGON",
-	"description": "At the end of your turn, draw a Dream Card.",
+	"description": "At the end of your turn, add a Dream Card to your hand.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "TurnEndTrigger",
