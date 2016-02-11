@@ -21,7 +21,7 @@ public class VoljinSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		Minion voljin = context.getSummonStack().peek();
+		Minion voljin = (Minion) context.resolveSingleTarget(context.getSummonReferenceStack().peek());
 		Actor targetActor = (Actor) target;
 		int sourceHp = voljin.getHp();
 		int targetHp = targetActor.getHp();

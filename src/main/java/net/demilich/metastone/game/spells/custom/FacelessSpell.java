@@ -29,9 +29,9 @@ public class FacelessSpell extends Spell {
 		clone.setSpellTrigger(null);
 		clone.setCardCostModifier(null);
 
-		Minion sourceActor = context.getSummonStack().peek();
+		Minion sourceActor = (Minion) context.resolveSingleTarget(context.getSummonReferenceStack().peek());
 		SpellDesc transformSpell = TransformMinionSpell.create(clone);
-		if (context.getEnvironment().get(Environment.TRANSFORM) != null) {
+		if (context.getEnvironment().get(Environment.TRANSFORM_REFERENCE) != null) {
 			SpellUtils.castChildSpell(context, player, transformSpell, source, sourceActor);
 			return;
 		}

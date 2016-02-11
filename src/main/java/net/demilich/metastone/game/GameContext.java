@@ -259,11 +259,11 @@ public class GameContext implements Cloneable, IDisposable {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Stack<Minion> getSummonStack() {
-		if (!environment.containsKey(Environment.SUMMON_STACK)) {
-			environment.put(Environment.SUMMON_STACK, new Stack<Minion>());
+	public Stack<EntityReference> getSummonReferenceStack() {
+		if (!environment.containsKey(Environment.SUMMON_REFERENCE_STACK)) {
+			environment.put(Environment.SUMMON_REFERENCE_STACK, new Stack<EntityReference>());
 		}
-		return (Stack<Minion>) environment.get(Environment.SUMMON_STACK);
+		return (Stack<EntityReference>) environment.get(Environment.SUMMON_REFERENCE_STACK);
 	}
 
 	public int getTotalMinionCount() {

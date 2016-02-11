@@ -339,8 +339,19 @@ public class GameLogic implements Cloneable {
 		if (!destroyList.isEmpty()) {
 			Collections.sort(destroyList, (a1, a2) -> Integer.compare(a1.getId(), a2.getId()));
 			if (i > 20) {
+				logger.error(context.toString());
+				logger.error(context.getEnvironment().toString());
+				String error = "";
 				for (Actor actor : destroyList) {
-					logger.error(actor.getName());
+					error += actor.toString() + " ";
+				}
+				logger.error("Minions Left Undestroyed: [ " + error + "]");
+				for (Player player : context.getPlayers()) {
+					error = "";
+					for (Entity e : player.getGraveyard()) {
+						error += e.getName() + " ID: " + e.getId() + " ";
+					}
+					logger.error(player.getName() + " Graveyard: [ " + error + "]");
 				}
 				throw new RuntimeException("Infinite Dead Loop");
 			}
@@ -477,9 +488,7 @@ public class GameLogic implements Cloneable {
 		minion.setAttribute(Attribute.DIED_ON_TURN, context.getTurn());
 
 		int boardPosition = owner.getMinions().indexOf(minion);
-		if (boardPosition != -1) {
-			owner.getMinions().remove(boardPosition);
-		}
+		owner.getMinions().remove(minion);
 
 		resolveDeathrattles(owner, minion, boardPosition);
 	}
@@ -1468,11 +1477,11 @@ public class GameLogic implements Cloneable {
 			return false;
 		}
 		minion.setId(idFactory.generateId());
+		minion.setOwner(player.getId());
 
-		context.getSummonStack().push(minion);
+		context.getSummonReferenceStack().push(minion.getReference());
 
 		log("{} summons {}", player.getName(), minion);
-		minion.setOwner(player.getId());
 
 		if (index < 0 || index >= player.getMinions().size()) {
 			player.getMinions().add(minion);
@@ -1484,16 +1493,10 @@ public class GameLogic implements Cloneable {
 			resolveBattlecry(player.getId(), minion);
 		}
 		
-		if (context.getEnvironment().get(Environment.TRANSFORM) != null) {
-			player.getMinions().remove(minion);
-			minion = (Minion) context.getEnvironment().get(Environment.TRANSFORM);
-			if (index < 0 || index >= player.getMinions().size()) {
-				player.getMinions().add(minion);
-			} else {
-				player.getMinions().add(index, minion);
-			}
+		if (context.getEnvironment().get(Environment.TRANSFORM_REFERENCE) != null) {
+			minion = (Minion) context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.TRANSFORM_REFERENCE));
 			minion.setBattlecry(null);
-			context.getEnvironment().remove(Environment.TRANSFORM);
+			context.getEnvironment().remove(Environment.TRANSFORM_REFERENCE);
 		}
 
 		SummonEvent summonEvent = new SummonEvent(context, minion, source);
@@ -1516,7 +1519,7 @@ public class GameLogic implements Cloneable {
 		
 		handleEnrage(minion);
 
-		context.getSummonStack().pop();
+		context.getSummonReferenceStack().pop();
 		context.fireGameEvent(new BoardChangedEvent(context));
 		return true;
 	}
@@ -1534,25 +1537,45 @@ public class GameLogic implements Cloneable {
 
 		log("{} was transformed to {}", minion, newMinion);
 		Player owner = context.getPlayer(minion.getOwner());
+		int index = owner.getMinions().indexOf(minion);
 		owner.getMinions().remove(minion);
+		
+		// Give the new minion an ID.
+		newMinion.setId(idFactory.generateId());
+		newMinion.setOwner(owner.getId());
 		
 		//If the minion being transforms is being summoned, replace the old minion on the stack.
 		//Otherwise, summon the add the new minion.
 		//However, do not give a summon event.
-		if(!context.getSummonStack().isEmpty() && context.getSummonStack().peek().equals(minion) && !context.getEnvironment().containsKey(Environment.TRANSFORM)) {
-			context.getEnvironment().put(Environment.TRANSFORM, newMinion);
+		if(!context.getSummonReferenceStack().isEmpty() && 
+				context.getSummonReferenceStack().peek().equals(minion.getReference()) && 
+				!context.getEnvironment().containsKey(Environment.TRANSFORM_REFERENCE)) {
+			context.getEnvironment().put(Environment.TRANSFORM_REFERENCE, newMinion.getReference());
+			owner.getMinions().add(index, newMinion);
 			
 		//It's quite possible that this is actually supposed to add the minion to the zone it was originally in.
 		//This means minions in the SetAsideZone or the Graveyard that are targeted (through bizarre mechanics)
 		//add the minion to there. This will be tested eventually with Resurrect, Recombobulator, and Illidan.
 		//Since this is unknown, this is the patch for it.
 		} else if (!owner.getSetAsideZone().contains(minion)) {
-			int index = owner.getMinions().indexOf(minion);
 			if (index < 0 || index >= owner.getMinions().size()) {
 				owner.getMinions().add(newMinion);
 			} else {
 				owner.getMinions().add(index, newMinion);
 			}
+			
+			applyAttribute(newMinion, Attribute.SUMMONING_SICKNESS);
+			refreshAttacksPerRound(newMinion);
+
+			if (newMinion.hasSpellTrigger()) {
+				addGameEventListener(owner, newMinion.getSpellTrigger(), newMinion);
+			}
+
+			if (newMinion.getCardCostModifier() != null) {
+				addManaModifier(owner, newMinion.getCardCostModifier(), newMinion);
+			}
+
+			handleEnrage(newMinion);
 		} else {
 			owner.getSetAsideZone().add(newMinion);
 			newMinion.setId(idFactory.generateId());
@@ -1560,23 +1583,9 @@ public class GameLogic implements Cloneable {
 			removeSpelltriggers(newMinion);
 			return;
 		}
+		
+		// Move the old minion to the Set Aside Zone
 		owner.getSetAsideZone().add(minion);
-		
-		newMinion.setId(idFactory.generateId());
-		newMinion.setOwner(owner.getId());
-		
-		applyAttribute(newMinion, Attribute.SUMMONING_SICKNESS);
-		refreshAttacksPerRound(newMinion);
-
-		if (newMinion.hasSpellTrigger()) {
-			addGameEventListener(owner, newMinion.getSpellTrigger(), newMinion);
-		}
-
-		if (newMinion.getCardCostModifier() != null) {
-			addManaModifier(owner, newMinion.getCardCostModifier(), newMinion);
-		}
-
-		handleEnrage(newMinion);
 
 		context.fireGameEvent(new BoardChangedEvent(context));
 	}

@@ -137,12 +137,6 @@ public class TargetLogic {
 		if (pendingCard != null && pendingCard.getReference().equals(targetKey)) {
 			return pendingCard;
 		}
-		if (!context.getSummonStack().isEmpty()) {
-			Minion summonedMinion = context.getSummonStack().peek();
-			if (summonedMinion.getId() == targetId) {
-				return summonedMinion;
-			}
-		}
 		if (context.getEnvironment().containsKey(Environment.SUMMONED_WEAPON)) {
 			Actor summonedWeapon = (Actor) context.getEnvironment().get(Environment.SUMMONED_WEAPON);
 			if (summonedWeapon.getId() == targetId) {

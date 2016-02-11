@@ -19,7 +19,7 @@ public class RaceOnBoardCondition extends Condition {
 
 		int count = 0;
 		for (Minion minion : player.getMinions()) {
-			if (minion.getRace() == race) {
+			if (minion.getRace() == race && !context.getSummonReferenceStack().contains(minion.getReference())) {
 				count++;
 			}
 		}

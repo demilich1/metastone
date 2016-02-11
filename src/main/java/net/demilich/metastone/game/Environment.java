@@ -1,7 +1,7 @@
 package net.demilich.metastone.game;
 
 public enum Environment {
-	SUMMON_STACK,
+	SUMMON_REFERENCE_STACK,
 	SUMMONED_WEAPON,
 	KILLED_MINION,
 	PENDING_CARD,
@@ -9,7 +9,7 @@ public enum Environment {
 	ATTACKER,
 	EVENT_TARGET_STACK,
 	TARGET,
-	TRANSFORM,
+	TRANSFORM_REFERENCE,
 	DAMAGE_STACK,
 	DEBUG
 }
