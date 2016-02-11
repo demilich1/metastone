@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,7 +22,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import net.demilich.nittygrittymvc.Proxy;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
@@ -30,12 +31,15 @@ import net.demilich.metastone.game.decks.MetaDeck;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.gui.deckbuilder.validation.DefaultDeckValidator;
 import net.demilich.metastone.gui.deckbuilder.validation.IDeckValidator;
+import net.demilich.nittygrittymvc.Proxy;
 
 public class DeckProxy extends Proxy<GameNotification> {
 
 	private static Logger logger = LoggerFactory.getLogger(DeckProxy.class);
 
 	public static final String NAME = "DeckProxy";
+	
+	private static final String DECKS_FOLDER = "./decks/";
 
 	private final List<Deck> decks = new ArrayList<Deck>();
 	private final IDeckValidator deckValidator = new DefaultDeckValidator();
@@ -78,9 +82,28 @@ public class DeckProxy extends Proxy<GameNotification> {
 		return decks;
 	}
 
+	public void deleteDeck(Deck deck) {
+		decks.remove(deck);
+		logger.debug("Trying to delete deck '{}' contained in file '{}'...", deck.getName(), deck.getFilename());
+		Path path = Paths.get(DECKS_FOLDER + deck.getFilename());
+		try {
+		    Files.delete(path);
+		} catch (NoSuchFileException x) {
+			logger.error("Could not delete deck '{}' as the filename '{}' is not a valid file", deck.getName(), deck.getFilename());
+			return;
+		} catch (IOException e) {
+			logger.error(e.getMessage());
+			logger.error("Could not delete file '{}'", path);
+			return;
+		}
+		
+		logger.info("Deck '{}' contained in file '{}' has been successfully deleted", deck.getName(), path.getFileName().toString());
+		getFacade().sendNotification(GameNotification.DECKS_LOADED, decks);
+	}
+
 	public void loadDecks() throws FileNotFoundException {
 		decks.clear();
-		File folder = new File("./decks/");
+		File folder = new File(DECKS_FOLDER);
 		if (!folder.exists()) {
 			logger.warn("/decks directory not found");
 			return;
@@ -108,6 +131,7 @@ public class DeckProxy extends Proxy<GameNotification> {
 				deck = parseMetaDeck(map);
 			}
 			deck.setName(deckName);
+			deck.setFilename(file.getName());
 			decks.add(deck);
 		}
 	}
@@ -132,6 +156,7 @@ public class DeckProxy extends Proxy<GameNotification> {
 				deck = parseStandardDeck(heroClass, map);
 			}
 			deck.setName(deckName);
+			deck.setFilename(file.getName());
 			decks.add(deck);
 		}
 	}
@@ -207,8 +232,10 @@ public class DeckProxy extends Proxy<GameNotification> {
 			String filename = deck.getName().toLowerCase();
 			filename = filename.replaceAll(" ", "_");
 			filename = filename.replaceAll("\\W+", "");
-			filename = "./decks/" + filename + ".json";
-			Files.write(Paths.get(filename), jsonData.getBytes());
+			filename = DECKS_FOLDER + filename + ".json";
+			Path path = Paths.get(filename);
+			Files.write(path, jsonData.getBytes());
+			deck.setFilename(path.getFileName().toString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

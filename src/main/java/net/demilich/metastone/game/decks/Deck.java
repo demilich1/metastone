@@ -11,6 +11,7 @@ public class Deck {
 	private final HeroClass heroClass;
 	private final CardCollection cards = new CardCollection();
 	private String description;
+	private String filename;
 
 	public Deck(HeroClass heroClass) {
 		this.heroClass = heroClass;
@@ -68,5 +69,13 @@ public class Deck {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
 	}
 }
