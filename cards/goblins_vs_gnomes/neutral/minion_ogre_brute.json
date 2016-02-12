@@ -12,7 +12,7 @@
 		"eventTrigger": {
 			"class": "TargetAcquisitionTrigger",
 			"actionType": "PHYSICAL_ATTACK",
-			"hostOnly": true,
+			"hostTargetType": "SOURCE",
 			"condition": {
 				"class": "RandomCondition"
 			}

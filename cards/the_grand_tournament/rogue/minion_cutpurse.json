@@ -12,7 +12,7 @@
 		"eventTrigger": {
 			"class": "PhysicalAttackTrigger",
 			"targetEntityType": "HERO",
-			"hostOnly": true
+			"hostTargetType": "SOURCE"
 		},
 		"spell": {
 			"class": "ReceiveCardSpell",

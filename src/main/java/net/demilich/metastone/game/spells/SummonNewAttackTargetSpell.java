@@ -27,7 +27,7 @@ public class SummonNewAttackTargetSpell extends Spell {
 		Minion targetMinion = minionCard.summon();
 		context.getLogic().summon(player.getId(), targetMinion);
 		if (targetMinion.getOwner() > -1) {
-			context.getEnvironment().put(Environment.TARGET_OVERRIDE, targetMinion);
+			context.getEnvironment().put(Environment.TARGET_OVERRIDE, targetMinion.getReference());
 		}
 
 	}

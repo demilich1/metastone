@@ -14,6 +14,11 @@ public class HeroPowerUsedEvent extends GameEvent {
 		this.playerId = playerId;
 		this.heroPower = heroPower;
 	}
+	
+	@Override
+	public Entity getEventSource() {
+		return null;
+	}
 
 	@Override
 	public Entity getEventTarget() {

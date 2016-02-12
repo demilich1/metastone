@@ -12,7 +12,7 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "DamageReceivedTrigger",
-			"hostOnly": true
+			"hostTargetType": "TARGET"
 		},
 		"spell": {
 			"class": "ReceiveRandomCardSpell",

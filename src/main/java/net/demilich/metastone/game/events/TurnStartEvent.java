@@ -11,6 +11,11 @@ public class TurnStartEvent extends GameEvent {
 		super(context);
 		this.playerId = playerId;
 	}
+	
+	@Override
+	public Entity getEventSource() {
+		return null;
+	}
 
 	@Override
 	public Entity getEventTarget() {

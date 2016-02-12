@@ -11,8 +11,9 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "PhysicalAttackTrigger",
+			"sourcePlayer": "SELF", 
 			"targetEntityType": "MINION",
-			"hostOnly": true
+			"hostTargetType": "SOURCE"
 		},
 		"spell": {
 			"class": "AdjacentEffectSpell",
@@ -21,7 +22,7 @@
 				"class": "DamageSpell",
 				"valueProvider": {
 					"class": "AttributeValueProvider",
-					"target": "ATTACKER",
+					"target": "SELF",
 					"attribute": "ATTACK"
 				}
 			}

@@ -49,6 +49,8 @@ public class GameContext implements Cloneable, IDisposable {
 	private int actionsThisTurn;
 
 	private boolean ignoreEvents;
+	
+	private Card pendingCard;
 
 	public GameContext(Player player1, Player player2, GameLogic logic) {
 		this.getPlayers()[PLAYER_1] = player1;
@@ -223,11 +225,11 @@ public class GameContext implements Cloneable, IDisposable {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Stack<Entity> getEventTargetStack() {
-		if (!environment.containsKey(Environment.EVENT_TARGET_STACK)) {
-			environment.put(Environment.EVENT_TARGET_STACK, new Stack<Entity>());
+	public Stack<EntityReference> getEventTargetStack() {
+		if (!environment.containsKey(Environment.EVENT_TARGET_REFERENCE_STACK)) {
+			environment.put(Environment.EVENT_TARGET_REFERENCE_STACK, new Stack<EntityReference>());
 		}
-		return (Stack<Entity>) environment.get(Environment.EVENT_TARGET_STACK);
+		return (Stack<EntityReference>) environment.get(Environment.EVENT_TARGET_REFERENCE_STACK);
 	}
 
 	public GameLogic getLogic() {
@@ -240,6 +242,10 @@ public class GameContext implements Cloneable, IDisposable {
 
 	public Player getOpponent(Player player) {
 		return player.getId() == PLAYER_1 ? getPlayer2() : getPlayer1();
+	}
+	
+	public Card getPendingCard() {
+		return pendingCard;
 	}
 
 	public Player getPlayer(int index) {
@@ -372,7 +378,6 @@ public class GameContext implements Cloneable, IDisposable {
 
 	public Card resolveCardReference(CardReference cardReference) {
 		Player player = getPlayer(cardReference.getPlayerId());
-		Card pendingCard = (Card) getEnvironment().get(Environment.PENDING_CARD);
 		if (pendingCard != null && pendingCard.getCardReference().equals(cardReference)) {
 			return pendingCard;
 		}
@@ -382,7 +387,7 @@ public class GameContext implements Cloneable, IDisposable {
 		case HAND:
 			return findCardinCollection(player.getHand(), cardReference.getCardId());
 		case PENDING:
-			return (Card) getEnvironment().get(Environment.PENDING_CARD);
+			return getPendingCard();
 		case HERO_POWER:
 			return player.getHero().getHeroPower();
 		default:
@@ -407,6 +412,10 @@ public class GameContext implements Cloneable, IDisposable {
 
 	public void setIgnoreEvents(boolean ignoreEvents) {
 		this.ignoreEvents = ignoreEvents;
+	}
+	
+	public void setPendingCard(Card pendingCard) {
+		this.pendingCard = pendingCard;
 	}
 
 	private void startTurn(int playerId) {

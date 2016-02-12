@@ -2,7 +2,6 @@ package net.demilich.metastone.game.spells;
 
 import java.util.Map;
 
-import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
@@ -32,7 +31,7 @@ public class DiscoverRandomCardSpell extends Spell {
 		CardCollection cards = CardCatalogue.query((CardType) null, (Rarity) null, HeroClass.ANY);
 		HeroClass heroClass = player.getHero().getHeroClass();
 		if (!SpellUtils.isBaseClass(heroClass)) {
-			Card card = (Card) context.getEnvironment().get(Environment.PENDING_CARD);
+			Card card = context.getPendingCard();
 			heroClass = card.getClassRestriction();
 			if (heroClass == HeroClass.ANY) {
 				heroClass = SpellUtils.getRandomHeroClass();

@@ -265,7 +265,7 @@ public class GameLogic implements Cloneable {
 			if (spellCard != null && spellCard.getTargetRequirement() != TargetSelection.NONE && !childSpell) {
 				GameEvent spellTargetEvent = new TargetAcquisitionEvent(context, ActionType.SPELL, spellCard, targets.get(0));
 				context.fireGameEvent(spellTargetEvent);
-				Entity targetOverride = (Entity) context.getEnvironment().get(Environment.TARGET_OVERRIDE);
+				Entity targetOverride = context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.TARGET_OVERRIDE));
 				if (targetOverride != null && targetOverride.getId() != IdFactory.UNASSIGNED) {
 					targets.remove(0);
 					targets.add(targetOverride);
@@ -322,6 +322,7 @@ public class GameLogic implements Cloneable {
 		for (Player player : context.getPlayers()) {
 			actorList.addAll(player.getMinions());
 			actorList.add(player.getHero().getWeapon());
+			actorList.add(player.getHero().getDestroyedWeapon());
 		}
 		
 		// Add anything that's destroyed to the destroyed list.
@@ -479,7 +480,7 @@ public class GameLogic implements Cloneable {
 	private void destroyMinion(Minion minion) {
 		log("{} is destroyed", minion);
 		Player owner = context.getPlayer(minion.getOwner());
-		context.getEnvironment().put(Environment.KILLED_MINION, minion);
+		context.getEnvironment().put(Environment.KILLED_MINION, minion.getReference());
 		KillEvent killEvent = new KillEvent(context, minion);
 		context.fireGameEvent(killEvent);
 		context.getEnvironment().remove(Environment.KILLED_MINION);
@@ -497,7 +498,11 @@ public class GameLogic implements Cloneable {
 		Player owner = context.getPlayer(weapon.getOwner());
 		resolveDeathrattles(owner, weapon);
 		weapon.onUnequip(context, owner);
-		owner.getHero().setWeapon(null);
+		if (owner.getHero().getWeapon().getId() == weapon.getId()) {
+			owner.getHero().setWeapon(null);
+		} else if (owner.getHero().getDestroyedWeapon().getId() == weapon.getId()) {
+			owner.getHero().setDestroyedWeapon(null);
+		}
 		context.fireGameEvent(new WeaponDestroyedEvent(context, weapon));
 	}
 
@@ -583,10 +588,14 @@ public class GameLogic implements Cloneable {
 		Player player = context.getPlayer(playerId);
 
 		weapon.setId(idFactory.generateId());
-		context.getEnvironment().put(Environment.SUMMONED_WEAPON, weapon);
+		context.getEnvironment().put(Environment.SUMMONED_WEAPON, weapon.getReference());
 		Weapon currentWeapon = player.getHero().getWeapon();
+		player.getHero().setDestroyedWeapon(currentWeapon);
 
-		if (weapon.getBattlecry() != null && !weapon.getBattlecry().isResolvedLate()) {
+		log("{} equips weapon {}", player.getHero(), weapon);
+		player.getHero().setWeapon(weapon);
+
+		if (weapon.getBattlecry() != null) {
 			resolveBattlecry(playerId, weapon);
 		}
 
@@ -597,14 +606,8 @@ public class GameLogic implements Cloneable {
 		}
 		player.getStatistics().equipWeapon(weapon);
 		context.getEnvironment().remove(Environment.SUMMONED_WEAPON);
-
-		log("{} equips weapon {}", player.getHero(), weapon);
-		player.getHero().setWeapon(weapon);
 		weapon.onEquip(context, player);
 		weapon.setActive(context.getActivePlayerId() == playerId);
-		if (weapon.getBattlecry() != null && weapon.getBattlecry().isResolvedLate()) {
-			resolveBattlecry(playerId, weapon);
-		}
 		if (weapon.hasSpellTrigger()) {
 			SpellTrigger spellTrigger = weapon.getSpellTrigger();
 			addGameEventListener(player, spellTrigger, weapon);
@@ -616,12 +619,13 @@ public class GameLogic implements Cloneable {
 	public void fight(Player player, Actor attacker, Actor defender) {
 		log("{} attacks {}", attacker, defender);
 
-		context.getEnvironment().put(Environment.ATTACKER, attacker);
+		context.getEnvironment().put(Environment.ATTACKER_REFERENCE, attacker.getReference());
+		
 		TargetAcquisitionEvent targetAcquisitionEvent = new TargetAcquisitionEvent(context, ActionType.PHYSICAL_ATTACK, attacker, defender);
 		context.fireGameEvent(targetAcquisitionEvent);
 		Actor target = defender;
 		if (context.getEnvironment().containsKey(Environment.TARGET_OVERRIDE)) {
-			target = (Actor) context.getEnvironment().get(Environment.TARGET_OVERRIDE);
+			target = (Actor) context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.TARGET_OVERRIDE));
 		}
 		context.getEnvironment().remove(Environment.TARGET_OVERRIDE);
 
@@ -646,6 +650,7 @@ public class GameLogic implements Cloneable {
 		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, target, attackerDamage), TriggerLayer.SECRET);
 		// secret may have killed attacker ADDENDUM: or defender
 		if (attacker.isDestroyed() || target.isDestroyed()) {
+			context.getEnvironment().remove(Environment.ATTACKER_REFERENCE);
 			return;
 		}
 
@@ -673,7 +678,7 @@ public class GameLogic implements Cloneable {
 
 		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, target, damaged ? attackerDamage : 0));
 
-		context.getEnvironment().remove(Environment.ATTACKER);
+		context.getEnvironment().remove(Environment.ATTACKER_REFERENCE);
 	}
 
 	public void gainArmor(Player player, int armor) {
@@ -1122,7 +1127,11 @@ public class GameLogic implements Cloneable {
 		}
 		if (action.getTargetRequirement() != TargetSelection.NONE) {
 			Entity target = context.resolveSingleTarget(action.getTargetKey());
-			context.getEnvironment().put(Environment.TARGET, target);
+			if (target != null) {
+				context.getEnvironment().put(Environment.TARGET, target.getReference());
+			} else {
+				context.getEnvironment().put(Environment.TARGET, null);
+			}
 		}
 
 		action.execute(context, playerId);

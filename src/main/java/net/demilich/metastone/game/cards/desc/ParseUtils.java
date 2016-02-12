@@ -26,6 +26,7 @@ import net.demilich.metastone.game.spells.desc.valueprovider.AlgebraicOperation;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderDesc;
 import net.demilich.metastone.game.targeting.CardLocation;
 import net.demilich.metastone.game.targeting.EntityReference;
+import net.demilich.metastone.game.targeting.TargetType;
 
 public class ParseUtils {
 
@@ -87,6 +88,8 @@ public class ParseUtils {
 			return Enum.valueOf(EntityType.class, entry.getAsString());
 		case ACTION_TYPE:
 			return Enum.valueOf(ActionType.class, entry.getAsString());
+		case TARGET_TYPE:
+			return Enum.valueOf(TargetType.class, entry.getAsString());
 		case ALGEBRAIC_OPERATION:
 			return Enum.valueOf(AlgebraicOperation.class, entry.getAsString());
 		case VALUE:
@@ -171,7 +174,7 @@ public class ParseUtils {
 		case "self":
 			return EntityReference.SELF;
 		case "attacker":
-			return EntityReference.ATTACKER;
+			return EntityReference.ATTACKER_REFERENCE;
 		case "friendly_hand":
 			return EntityReference.FRIENDLY_HAND;
 		case "enemy_hand":

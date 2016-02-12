@@ -14,6 +14,7 @@ public class Hero extends Actor {
 	private HeroClass heroClass;
 	private HeroPower heroPower;
 	private Weapon weapon;
+	private Weapon destroyedWeapon;
 
 	public Hero(String name, HeroClass heroClass, HeroPower heroPower) {
 		super(null);
@@ -62,6 +63,10 @@ public class Hero extends Actor {
 		return copy;
 	}
 
+	public Weapon getDestroyedWeapon() {
+		return destroyedWeapon;
+	}
+
 	public int getEffectiveHp() {
 		return getHp() + getArmor();
 	}
@@ -87,6 +92,13 @@ public class Hero extends Actor {
 		// armor cannot fall below zero
 		int newArmor = Math.max(getArmor() + armor, 0);
 		setAttribute(Attribute.ARMOR, newArmor);
+	}
+	
+	public void setDestroyedWeapon(Weapon weapon) {
+		this.destroyedWeapon = weapon;
+		if (weapon != null) {
+			weapon.setOwner(getOwner());
+		}
 	}
 
 	public void setHeroClass(HeroClass heroClass) {

@@ -14,6 +14,11 @@ public class ArmorGainedEvent extends GameEvent {
 		this.playerId = hero.getOwner();
 		this.hero = hero;
 	}
+	
+	@Override
+	public Entity getEventSource() {
+		return null;
+	}
 
 	@Override
 	public Entity getEventTarget() {

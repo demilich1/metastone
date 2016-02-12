@@ -20,6 +20,11 @@ public class TargetAcquisitionEvent extends GameEvent {
 	public ActionType getActionType() {
 		return actionType;
 	}
+	
+	@Override
+	public Entity getEventSource() {
+		return getSource();
+	}
 
 	@Override
 	public Entity getEventTarget() {

@@ -12,6 +12,11 @@ public class SecretPlayedEvent extends GameEvent {
 		super(context);
 		this.secretCard = secretCard;
 	}
+	
+	@Override
+	public Entity getEventSource() {
+		return null;
+	}
 
 	@Override
 	public Entity getEventTarget() {

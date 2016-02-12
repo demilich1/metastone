@@ -10,6 +10,7 @@ import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.condition.Condition;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerArg;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
+import net.demilich.metastone.game.targeting.TargetType;
 
 public abstract class GameEventTrigger extends CustomCloneable {
 
@@ -56,13 +57,14 @@ public abstract class GameEventTrigger extends CustomCloneable {
 			event.getGameContext().getLogic().removeAttribute(host, Attribute.STEALTH);
 		}
 		
-		boolean ignoreHost = desc.getBool(EventTriggerArg.IGNORE_HOST);
-		if (ignoreHost && event.getEventTarget() == host) {
+		TargetType hostTargetType = (TargetType) desc.get(EventTriggerArg.HOST_TARGET_TYPE);
+		if (hostTargetType == TargetType.IGNORE_TARGET && event.getEventTarget() == host) {
 			return false;
-		}
-		
-		boolean hostOnly = desc.getBool(EventTriggerArg.HOST_ONLY);
-		if (hostOnly && event.getEventTarget() != host) {
+		} else if (hostTargetType == TargetType.IGNORE_SOURCE && event.getEventSource() == host) {
+			return false;
+		} else if (hostTargetType == TargetType.TARGET && event.getEventTarget() != host) {
+			return false;
+		} else if (hostTargetType == TargetType.SOURCE && event.getEventSource() != host) {
 			return false;
 		}
 		

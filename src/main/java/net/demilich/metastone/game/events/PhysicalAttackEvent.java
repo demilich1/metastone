@@ -28,6 +28,11 @@ public class PhysicalAttackEvent extends GameEvent {
 	public Actor getDefender() {
 		return defender;
 	}
+	
+	@Override
+	public Entity getEventSource() {
+		return getAttacker();
+	}
 
 	@Override
 	public Entity getEventTarget() {

@@ -79,6 +79,8 @@ public class TargetLogic {
 				return player.getHero();
 			} else if (player.getHero().getWeapon() != null && player.getHero().getWeapon().getId() == targetId) {
 				return player.getHero().getWeapon();
+			} else if (player.getHero().getDestroyedWeapon() != null && player.getHero().getDestroyedWeapon().getId() == targetId) {
+				return player.getHero().getDestroyedWeapon();
 			}
 
 			for (Actor minion : player.getMinions()) {
@@ -133,18 +135,18 @@ public class TargetLogic {
 
 	private Entity findInEnvironment(GameContext context, EntityReference targetKey) {
 		int targetId = targetKey.getId();
-		Card pendingCard = (Card) context.getEnvironment().get(Environment.PENDING_CARD);
+		Card pendingCard = context.getPendingCard();
 		if (pendingCard != null && pendingCard.getReference().equals(targetKey)) {
 			return pendingCard;
 		}
-		if (context.getEnvironment().containsKey(Environment.SUMMONED_WEAPON)) {
-			Actor summonedWeapon = (Actor) context.getEnvironment().get(Environment.SUMMONED_WEAPON);
+		if (context.getEnvironment().containsKey(Environment.SUMMONED_WEAPON) && targetKey == context.getEnvironment().get(Environment.SUMMONED_WEAPON)) {
+			Actor summonedWeapon = (Actor) context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.SUMMONED_WEAPON));
 			if (summonedWeapon.getId() == targetId) {
 				return summonedWeapon;
 			}
 		}
 		if (!context.getEventTargetStack().isEmpty() && targetKey == EntityReference.EVENT_TARGET) {
-			return context.getEventTargetStack().peek();
+			return context.resolveSingleTarget(context.getEventTargetStack().peek());
 		}
 		return null;
 	}
@@ -250,15 +252,15 @@ public class TargetLogic {
 		} else if (targetKey == EntityReference.SELF) {
 			return singleTargetAsList(source);
 		} else if (targetKey == EntityReference.EVENT_TARGET) {
-			return singleTargetAsList((Entity) context.getEventTargetStack().peek());
+			return singleTargetAsList(context.resolveSingleTarget(context.getEventTargetStack().peek()));
 		} else if (targetKey == EntityReference.TARGET) {
-			return singleTargetAsList((Entity) context.getEnvironment().get(Environment.TARGET));
+			return singleTargetAsList(context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.TARGET)));
 		} else if (targetKey == EntityReference.KILLED_MINION) {
-			return singleTargetAsList((Entity) context.getEnvironment().get(Environment.KILLED_MINION));
-		} else if (targetKey == EntityReference.ATTACKER) {
-			return singleTargetAsList((Entity) context.getEnvironment().get(Environment.ATTACKER));
+			return singleTargetAsList(context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.KILLED_MINION)));
+		} else if (targetKey == EntityReference.ATTACKER_REFERENCE) {
+			return singleTargetAsList(context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.ATTACKER_REFERENCE)));
 		} else if (targetKey == EntityReference.PENDING_CARD) {
-			return singleTargetAsList((Entity) context.getEnvironment().get(Environment.PENDING_CARD));
+			return singleTargetAsList((Entity) context.getPendingCard());
 		} else if (targetKey == EntityReference.FRIENDLY_WEAPON) {
 			if (player.getHero().getWeapon() != null) {
 				return singleTargetAsList(player.getHero().getWeapon());

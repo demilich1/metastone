@@ -15,6 +15,11 @@ public class SummonEvent extends GameEvent {
 		this.minion = minion;
 		this.source = source;
 	}
+	
+	@Override
+	public Entity getEventSource() {
+		return null;
+	}
 
 	@Override
 	public Entity getEventTarget() {

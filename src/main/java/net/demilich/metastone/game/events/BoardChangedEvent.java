@@ -8,6 +8,11 @@ public class BoardChangedEvent extends GameEvent {
 	public BoardChangedEvent(GameContext context) {
 		super(context);
 	}
+	
+	@Override
+	public Entity getEventSource() {
+		return null;
+	}
 
 	@Override
 	public Entity getEventTarget() {
