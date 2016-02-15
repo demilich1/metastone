@@ -1,4 +1,6 @@
 {
+  "name": "Mech Shaman (100% win rate from Rank 3 to Legend)",
+  "heroClass": "SHAMAN",
   "cards": [
     "spell_earth_shock",
     "spell_earth_shock",
@@ -31,6 +33,4 @@
     "minion_fire_elemental",
     "minion_dr_boom"
   ],
-  "name": "Mech Shaman 100% win rate from Rank 3 to Legend",
-  "heroClass": "SHAMAN"
 }
