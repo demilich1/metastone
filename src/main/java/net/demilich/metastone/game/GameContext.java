@@ -87,7 +87,9 @@ public class GameContext implements Cloneable, IDisposable {
 		clone.actionsThisTurn = actionsThisTurn;
 		clone.result = result;
 		clone.turnState = turnState;
-		clone.pendingCard = pendingCard.clone();
+		if (pendingCard != null) {
+			clone.pendingCard = pendingCard.clone();
+		}
 		clone.winner = logicClone.getWinner(player1Clone, player2Clone);
 		clone.cardCostModifiers.clear();
 		for (CardCostModifier cardCostModifier : cardCostModifiers) {
