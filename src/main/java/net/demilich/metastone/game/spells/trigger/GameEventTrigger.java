@@ -58,13 +58,13 @@ public abstract class GameEventTrigger extends CustomCloneable {
 		}
 		
 		TargetType hostTargetType = (TargetType) desc.get(EventTriggerArg.HOST_TARGET_TYPE);
-		if (hostTargetType == TargetType.IGNORE_TARGET && event.getEventTarget() == host) {
+		if (hostTargetType == TargetType.IGNORE_AS_TARGET && event.getEventTarget() == host) {
 			return false;
-		} else if (hostTargetType == TargetType.IGNORE_SOURCE && event.getEventSource() == host) {
+		} else if (hostTargetType == TargetType.IGNORE_AS_SOURCE && event.getEventSource() == host) {
 			return false;
-		} else if (hostTargetType == TargetType.TARGET && event.getEventTarget() != host) {
+		} else if (hostTargetType == TargetType.IGNORE_OTHER_TARGETS && event.getEventTarget() != host) {
 			return false;
-		} else if (hostTargetType == TargetType.SOURCE && event.getEventSource() != host) {
+		} else if (hostTargetType == TargetType.IGNORE_OTHER_SOURCES && event.getEventSource() != host) {
 			return false;
 		}
 		

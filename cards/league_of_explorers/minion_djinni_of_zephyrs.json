@@ -15,7 +15,7 @@
 			"sourcePlayer": "SELF",
 			"targetPlayer": "SELF",
 			"targetEntityType": "MINION",
-			"hostTargetType": "IGNORE_TARGET"
+			"hostTargetType": "IGNORE_AS_TARGET"
 		},
 		"spell": {
 			"class": "RecastSpell",

@@ -13,7 +13,7 @@
 	"passiveTrigger": {
 		"eventTrigger": {
 			"class": "CardDrawnTrigger",
-			"hostTargetType": "TARGET"
+			"hostTargetType": "IGNORE_OTHER_TARGETS"
 		},
 		"spell": {
 			"class": "MetaSpell",

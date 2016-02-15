@@ -14,7 +14,7 @@
 			"class": "TargetAcquisitionTrigger",
 			"sourcePlayer": "SELF",
 			"actionType": "SPELL",
-			"hostTargetType": "TARGET"
+			"hostTargetType": "IGNORE_OTHER_TARGETS"
 		},
 		"spell": {
 			"class": "BuffSpell",

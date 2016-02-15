@@ -13,7 +13,7 @@
 		"eventTrigger": {
 			"class": "PhysicalAttackTrigger",
 			"targetEntityType": "MINION",
-			"hostTargetType": "SOURCE"
+			"hostTargetType": "IGNORE_OTHER_SOURCES"
 		},
 		"spell": {
 			"class": "AdjacentEffectSpell",

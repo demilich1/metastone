@@ -14,7 +14,7 @@
 			"class": "DamageReceivedTrigger",
 			"targetPlayer": "BOTH",
 			"targetEntityType": "MINION",
-			"hostTargetType": "IGNORE_TARGET"
+			"hostTargetType": "IGNORE_AS_TARGET"
 		},
 		"spell": {
 			"class": "DestroySpell",

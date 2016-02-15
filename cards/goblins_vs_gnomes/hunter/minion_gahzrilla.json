@@ -12,7 +12,7 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "DamageReceivedTrigger",
-			"hostTargetType": "TARGET"
+			"hostTargetType": "IGNORE_OTHER_TARGETS"
 		},
 		"spell": {
 			"class": "DoubleAttackSpell",

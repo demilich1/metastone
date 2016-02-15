@@ -12,7 +12,7 @@
 		"eventTrigger": {
 			"class": "TargetAcquisitionTrigger",
 			"actionType": "SPELL",
-			"hostTargetType": "TARGET"
+			"hostTargetType": "IGNORE_OTHER_TARGETS"
 		},
 		"spell": {
 			"class": "AddAttributeSpell",
