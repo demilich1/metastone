@@ -498,9 +498,9 @@ public class GameLogic implements Cloneable {
 		Player owner = context.getPlayer(weapon.getOwner());
 		resolveDeathrattles(owner, weapon);
 		weapon.onUnequip(context, owner);
-		if (owner.getHero().getWeapon().getId() == weapon.getId()) {
+		if (owner.getHero().getWeapon() != null && owner.getHero().getWeapon().getId() == weapon.getId()) {
 			owner.getHero().setWeapon(null);
-		} else if (owner.getHero().getDestroyedWeapon().getId() == weapon.getId()) {
+		} else if (owner.getHero().getDestroyedWeapon() != null && owner.getHero().getDestroyedWeapon().getId() == weapon.getId()) {
 			owner.getHero().setDestroyedWeapon(null);
 		}
 		context.fireGameEvent(new WeaponDestroyedEvent(context, weapon));
