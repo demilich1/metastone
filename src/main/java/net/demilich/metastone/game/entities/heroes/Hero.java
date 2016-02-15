@@ -35,6 +35,9 @@ public class Hero extends Actor {
 		if (weapon != null) {
 			clone.setWeapon(getWeapon().clone());
 		}
+		if (destroyedWeapon != null) {
+			clone.setDestroyedWeapon(getDestroyedWeapon().clone());
+		}
 		clone.setHeroPower((HeroPower) getHeroPower().clone());
 		return clone;
 	}
