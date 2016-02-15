@@ -1,6 +1,4 @@
 {
-  "name": "Inspire Warrior (70% Winrate)",
-  "heroClass": "WARRIOR",
   "cards": [
     "spell_shield_slam",
     "spell_shield_slam",
@@ -32,5 +30,7 @@
     "minion_baron_geddon",
     "minion_grommash_hellscream",
     "minion_ysera"
-  ]
+  ],
+  "name": "Inspire Warrior (70% Winrate)",
+  "heroClass": "WARRIOR"
 }
