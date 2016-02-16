@@ -135,10 +135,6 @@ public class TargetLogic {
 
 	private Entity findInEnvironment(GameContext context, EntityReference targetKey) {
 		int targetId = targetKey.getId();
-		Card pendingCard = context.getPendingCard();
-		if (pendingCard != null && pendingCard.getReference().equals(targetKey)) {
-			return pendingCard;
-		}
 		if (context.getEnvironment().containsKey(Environment.SUMMONED_WEAPON) && targetKey == context.getEnvironment().get(Environment.SUMMONED_WEAPON)) {
 			Actor summonedWeapon = (Actor) context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.SUMMONED_WEAPON));
 			if (summonedWeapon.getId() == targetId) {

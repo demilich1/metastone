@@ -49,8 +49,6 @@ public class GameContext implements Cloneable, IDisposable {
 	private int actionsThisTurn;
 
 	private boolean ignoreEvents;
-	
-	private Card pendingCard;
 
 	public GameContext(Player player1, Player player2, GameLogic logic) {
 		this.getPlayers()[PLAYER_1] = player1;
@@ -87,9 +85,6 @@ public class GameContext implements Cloneable, IDisposable {
 		clone.actionsThisTurn = actionsThisTurn;
 		clone.result = result;
 		clone.turnState = turnState;
-		if (pendingCard != null) {
-			clone.pendingCard = pendingCard.clone();
-		}
 		clone.winner = logicClone.getWinner(player1Clone, player2Clone);
 		clone.cardCostModifiers.clear();
 		for (CardCostModifier cardCostModifier : cardCostModifiers) {
@@ -248,7 +243,7 @@ public class GameContext implements Cloneable, IDisposable {
 	}
 	
 	public Card getPendingCard() {
-		return pendingCard;
+		return (Card) resolveSingleTarget((EntityReference) getEnvironment().get(Environment.PENDING_CARD));
 	}
 
 	public Player getPlayer(int index) {
@@ -381,8 +376,8 @@ public class GameContext implements Cloneable, IDisposable {
 
 	public Card resolveCardReference(CardReference cardReference) {
 		Player player = getPlayer(cardReference.getPlayerId());
-		if (pendingCard != null && pendingCard.getCardReference().equals(cardReference)) {
-			return pendingCard;
+		if (getPendingCard() != null && getPendingCard().getCardReference().equals(cardReference)) {
+			return getPendingCard();
 		}
 		switch (cardReference.getLocation()) {
 		case DECK:
@@ -418,7 +413,11 @@ public class GameContext implements Cloneable, IDisposable {
 	}
 	
 	public void setPendingCard(Card pendingCard) {
-		this.pendingCard = pendingCard;
+		if (pendingCard != null) {
+			getEnvironment().put(Environment.PENDING_CARD, pendingCard.getReference());
+		} else {
+			getEnvironment().put(Environment.PENDING_CARD, null);
+		}
 	}
 
 	private void startTurn(int playerId) {

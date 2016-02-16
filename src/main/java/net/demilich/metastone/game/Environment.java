@@ -10,5 +10,6 @@ public enum Environment {
 	TARGET,
 	TRANSFORM_REFERENCE,
 	DAMAGE_STACK,
-	DEBUG
+	DEBUG,
+	PENDING_CARD
 }
