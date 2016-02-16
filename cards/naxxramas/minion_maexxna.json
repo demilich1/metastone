@@ -7,6 +7,7 @@
 	"baseHp": 8,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
+	"race": "BEAST",
 	"description": "Destroy any minion damaged by this minion.",
 	"trigger": {
 		"eventTrigger": {
@@ -18,7 +19,6 @@
 			"target": "EVENT_TARGET"
 		}
 	},
-	"race": "BEAST",
 	"collectible": true,
 	"set": "NAXXRAMAS",
 	"fileFormatVersion": 1

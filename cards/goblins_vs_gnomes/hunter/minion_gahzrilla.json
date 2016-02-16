@@ -7,17 +7,18 @@
 	"baseHp": 9,
 	"heroClass": "HUNTER",
 	"rarity": "LEGENDARY",
+	"race": "BEAST",
 	"description": "Whenever this minion takes damage, double its Attack.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "SelfDamagedTrigger"
+			"class": "DamageReceivedTrigger",
+			"hostTargetType": "IGNORE_OTHER_TARGETS"
 		},
 		"spell": {
 			"class": "DoubleAttackSpell",
 			"target": "SELF"
 		}
 	},
-	"race": "BEAST",
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

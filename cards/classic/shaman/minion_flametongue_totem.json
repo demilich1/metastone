@@ -7,13 +7,13 @@
 	"baseHp": 3,
 	"heroClass": "SHAMAN",
 	"rarity": "FREE",
+	"race": "TOTEM",
 	"description": "Adjacent minions have +2 Attack.",
 	"aura": {
 		"class": "BuffAura",
 		"target": "ADJACENT_MINIONS",
 		"attackBonus": 2
 	},
-	"race": "TOTEM",
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

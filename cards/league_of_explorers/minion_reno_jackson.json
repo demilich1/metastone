@@ -12,11 +12,11 @@
 		"targetSelection": "NONE",
 		"spell": {
 			"class": "HealSpell",
+			"target": "FRIENDLY_HERO",
 			"valueProvider": {
 				"class": "AttributeValueProvider",
 				"attribute": "MAX_HP"
-			},
-			"target": "FRIENDLY_HERO"
+			}
 		},
 		"condition": {
 			"class": "HighlanderDeckCondition"

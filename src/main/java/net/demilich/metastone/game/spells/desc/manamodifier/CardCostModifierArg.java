@@ -12,5 +12,7 @@ public enum CardCostModifierArg {
 	TARGET_PLAYER,
 	TOGGLE_ON_TRIGGER,
 	TOGGLE_OFF_TRIGGER,
+	TARGET,
+	ID,
 
 }

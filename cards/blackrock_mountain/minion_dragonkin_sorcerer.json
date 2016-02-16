@@ -7,11 +7,14 @@
 	"baseHp": 5,
 	"heroClass": "ANY",
 	"rarity": "RARE",
+	"race": "DRAGON",
 	"description": "Whenever you target this minion with a spell, gain +1/+1.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "SelfTargetedTrigger",
-			"actionType": "SPELL"
+			"class": "TargetAcquisitionTrigger",
+			"sourcePlayer": "SELF",
+			"actionType": "SPELL",
+			"hostTargetType": "IGNORE_OTHER_TARGETS"
 		},
 		"spell": {
 			"class": "BuffSpell",
@@ -20,7 +23,6 @@
 			"hpBonus": 1
 		}
 	},
-	"race": "DRAGON",
 	"collectible": true,
 	"set": "BLACKROCK_MOUNTAIN",
 	"fileFormatVersion": 1

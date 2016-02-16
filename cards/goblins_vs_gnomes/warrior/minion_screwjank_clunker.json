@@ -7,6 +7,7 @@
 	"baseHp": 5,
 	"heroClass": "WARRIOR",
 	"rarity": "RARE",
+	"race": "MECH",
 	"description": "Battlecry: Give a friendly Mech +2/+2.",
 	"battlecry": {
 		"targetSelection": "FRIENDLY_MINIONS",
@@ -21,7 +22,6 @@
 		},
 		"resolvedLate": false
 	},
-	"race": "MECH",
 	"attributes": {
 		"BATTLECRY": true
 	},

@@ -9,11 +9,11 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "CastRepeatedlySpell",
+		"target": "ALL_MINIONS",
 		"spell1": {
 			"class": "DamageSpell",
 			"value": 1
 		},
-		"target": "ALL_MINIONS",
 		"howMany": 80,
 		"randomTarget": true,
 		"condition": {

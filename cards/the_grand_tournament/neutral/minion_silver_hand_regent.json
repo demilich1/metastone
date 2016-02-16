@@ -10,7 +10,8 @@
 	"description": "Inspire: Summon a 1/1 Silver Hand Recruit.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "InspireTrigger"
+			"class": "InspireTrigger",
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "SummonSpell",

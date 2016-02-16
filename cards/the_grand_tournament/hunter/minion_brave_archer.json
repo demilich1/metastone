@@ -11,6 +11,7 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "InspireTrigger",
+			"targetPlayer": "SELF",
 			"condition": {
 				"class": "CardCountCondition",
 				"targetPlayer": "SELF",

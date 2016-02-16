@@ -17,6 +17,11 @@ public class DiscardEvent extends GameEvent {
 	public Card getCard() {
 		return card;
 	}
+	
+	@Override
+	public Entity getEventSource() {
+		return null;
+	}
 
 	@Override
 	public Entity getEventTarget() {

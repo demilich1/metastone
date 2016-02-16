@@ -6,6 +6,7 @@ import java.util.Map;
 
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
 import net.demilich.metastone.game.cards.desc.Desc;
+import net.demilich.metastone.game.logic.CustomCloneable;
 
 public class CardCostModifierDesc extends Desc<CardCostModifierArg> {
 
@@ -17,6 +18,33 @@ public class CardCostModifierDesc extends Desc<CardCostModifierArg> {
 
 	public CardCostModifierDesc(Map<CardCostModifierArg, Object> arguments) {
 		super(arguments);
+	}
+	
+	public CardCostModifierDesc addArg(CardCostModifierArg cardCostModififerArg, Object value) {
+		CardCostModifierDesc clone = clone();
+		clone.arguments.put(cardCostModififerArg, value);
+		return clone;
+	}
+	
+	public CardCostModifierDesc removeArg(CardCostModifierArg cardCostModififerArg) {
+		CardCostModifierDesc clone = clone();
+		clone.arguments.remove(cardCostModififerArg);
+		return clone;
+	}
+	
+	@Override
+	public CardCostModifierDesc clone() {
+		CardCostModifierDesc clone = new CardCostModifierDesc(build(getManaModifierClass()));
+		for (CardCostModifierArg cardCostModififerArg : arguments.keySet()) {
+			Object value = arguments.get(cardCostModififerArg);
+			if (value instanceof CustomCloneable) {
+				CustomCloneable cloneable = (CustomCloneable) value;
+				clone.arguments.put(cardCostModififerArg, cloneable.clone());
+			} else {
+				clone.arguments.put(cardCostModififerArg, value);
+			}
+		}
+		return clone;
 	}
 
 	public CardCostModifier create() {
@@ -33,6 +61,16 @@ public class CardCostModifierDesc extends Desc<CardCostModifierArg> {
 	@SuppressWarnings("unchecked")
 	public Class<? extends CardCostModifier> getManaModifierClass() {
 		return (Class<? extends CardCostModifier>) get(CardCostModifierArg.CLASS);
+	}
+
+	@Override
+	public String toString() {
+		String result = "[CardCostModifierDesc arguments= {\n";
+		for (CardCostModifierArg cardCostModififerArg : arguments.keySet()) {
+			result += "\t" + cardCostModififerArg + ": " + arguments.get(cardCostModififerArg) + "\n";
+		}
+		result += "}";
+		return result;
 	}
 
 }

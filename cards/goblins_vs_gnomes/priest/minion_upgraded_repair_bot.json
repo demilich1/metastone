@@ -7,6 +7,7 @@
 	"baseHp": 5,
 	"heroClass": "PRIEST",
 	"rarity": "RARE",
+	"race": "MECH",
 	"description": "Battlecry: Give a friendly Mech +4 Health",
 	"battlecry": {
 		"targetSelection": "FRIENDLY_MINIONS",
@@ -20,7 +21,6 @@
 		},
 		"resolvedLate": false
 	},
-	"race": "MECH",
 	"attributes": {
 		"BATTLECRY": true
 	},

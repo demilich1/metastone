@@ -13,8 +13,8 @@
 			"description": "Mana Crystal",
 			"spell": {
 				"class": "ModifyMaxManaSpell",
-				"fullManaCrystals": true,
 				"targetPlayer": "BOTH",
+				"fullManaCrystals": true,
 				"value": 1
 			}
 		},

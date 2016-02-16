@@ -12,6 +12,11 @@ public class SilenceEvent extends GameEvent {
 		super(context);
 		this.target = target;
 	}
+	
+	@Override
+	public Entity getEventSource() {
+		return null;
+	}
 
 	@Override
 	public Entity getEventTarget() {

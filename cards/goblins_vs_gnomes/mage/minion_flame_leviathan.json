@@ -7,10 +7,12 @@
 	"baseHp": 7,
 	"heroClass": "MAGE",
 	"rarity": "LEGENDARY",
+	"race": "MECH",
 	"description": "When you draw this, deal 2 damage to all characters.",
 	"passiveTrigger": {
 		"eventTrigger": {
-			"class": "ThisCardDrawnTrigger"
+			"class": "CardDrawnTrigger",
+			"hostTargetType": "IGNORE_OTHER_TARGETS"
 		},
 		"spell": {
 			"class": "DamageSpell",
@@ -18,7 +20,6 @@
 			"value": 2
 		}
 	},
-	"race": "MECH",
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

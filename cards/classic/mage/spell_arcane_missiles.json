@@ -5,7 +5,7 @@
 	"type": "SPELL",
 	"heroClass": "MAGE",
 	"rarity": "FREE",
-	"description": "Deal 3 damage randomly split among enemy characters.",
+	"description": "Deal 3 damage randomly split among all enemies.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MissilesSpell",

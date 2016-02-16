@@ -7,6 +7,7 @@
 	"baseHp": 1,
 	"heroClass": "WARLOCK",
 	"rarity": "COMMON",
+	"race": "DEMON",
 	"description": "Stealth. At the end of your turn, give another random friendly minion +1 Health.",
 	"trigger": {
 		"eventTrigger": {
@@ -20,7 +21,6 @@
 			"randomTarget": true
 		}
 	},
-	"race": "DEMON",
 	"attributes": {
 		"STEALTH": true
 	},

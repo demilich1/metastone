@@ -10,6 +10,7 @@
 	"description": "Deathrattle: Return this to your hand and summon a 4/4 Nerubian.",
 	"deathrattle": {
 		"class": "MetaSpell",
+		"target": "NONE",
 		"spell1": {
 			"class": "ReturnMinionToHandSpell",
 			"target": "SELF"
@@ -17,8 +18,7 @@
 		"spell2": {
 			"class": "SummonSpell",
 			"card": "token_nerubian"
-		},
-		"target": "NONE"
+		}
 	},
 	"attributes": {
 		"DEATHRATTLES": true

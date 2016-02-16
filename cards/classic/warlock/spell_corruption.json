@@ -8,6 +8,7 @@
 	"description": "Choose an enemy minion. At the start of your turn, destroy it.",
 	"targetSelection": "ENEMY_MINIONS",
 	"spell": {
+		"class": "AddSpellTriggerSpell",
 		"trigger": {
 			"eventTrigger": {
 				"class": "TurnStartTrigger",
@@ -17,8 +18,7 @@
 				"class": "DestroySpell",
 				"target": "SELF"
 			}
-		},
-		"class": "AddSpellTriggerSpell"
+		}
 	},
 	"collectible": true,
 	"set": "CLASSIC",

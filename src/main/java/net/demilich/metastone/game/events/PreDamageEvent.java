@@ -13,6 +13,11 @@ public class PreDamageEvent extends GameEvent {
 		this.victim = victim;
 		this.source = source;
 	}
+	
+	@Override
+	public Entity getEventSource() {
+		return null;
+	}
 
 	@Override
 	public Entity getEventTarget() {

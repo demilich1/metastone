@@ -10,6 +10,8 @@
 	"description": "Battlecry: Summon an exact copy of this minion at the end of the turn.",
 	"battlecry": {
 		"spell": {
+			"class": "AddSpellTriggerSpell",
+			"target": "SELF",
 			"trigger": {
 				"eventTrigger": {
 					"class": "TurnEndTrigger"
@@ -19,9 +21,7 @@
 					"target": "SELF"
 				},
 				"oneTurn": true
-			},
-			"class": "AddSpellTriggerSpell",
-			"target": "SELF"
+			}
 		},
 		"resolvedLate": false
 	},

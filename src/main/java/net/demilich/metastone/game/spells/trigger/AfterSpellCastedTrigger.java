@@ -16,17 +16,13 @@ public class AfterSpellCastedTrigger extends GameEventTrigger {
 	@Override
 	protected boolean fire(GameEvent event, Entity host) {
 		AfterSpellCastedEvent spellCastedEvent = (AfterSpellCastedEvent) event;
-		TargetPlayer targetPlayer = desc.getTargetPlayer();
-		switch (targetPlayer) {
-		case BOTH:
-			return true;
-		case SELF:
-		case OWNER:
-			return spellCastedEvent.getPlayerId() == host.getOwner();
-		case OPPONENT:
-			return spellCastedEvent.getPlayerId() != host.getOwner();
+		TargetPlayer sourcePlayer = desc.getSourcePlayer();
+		int sourcePlayerId = spellCastedEvent.getPlayerId();
+		if (sourcePlayer != null) {
+			return determineTargetPlayer(spellCastedEvent, sourcePlayer, host, sourcePlayerId);
 		}
-		return false;
+		
+		return true;
 	}
 
 	@Override

@@ -11,8 +11,8 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "PreDamageTrigger",
-			"targetPlayer": "BOTH",
-			"targetedPlayer": "SELF",
+			"sourcePlayer": "BOTH",
+			"targetPlayer": "SELF",
 			"targetEntityType": "HERO"
 		},
 		"spell": {

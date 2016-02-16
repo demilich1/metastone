@@ -3,7 +3,6 @@ package net.demilich.metastone.game.spells;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -23,13 +22,13 @@ public class ModifyDamageSpell extends Spell {
 		int minDamage = desc.getInt(SpellArg.MIN_DAMAGE, 0);
 		switch(operation) {
 		case ADD:
-			if (((Actor) context.getEventTargetStack().peek()).hasAttribute(Attribute.TAKE_DOUBLE_DAMAGE)) {
+			if ((context.resolveSingleTarget(context.getEventTargetStack().peek())).hasAttribute(Attribute.TAKE_DOUBLE_DAMAGE)) {
 				value *= 2;
 			}
 			damage += value;
 			break;
 		case SUBTRACT:
-			if (((Actor) context.getEventTargetStack().peek()).hasAttribute(Attribute.TAKE_DOUBLE_DAMAGE)) {
+			if ((context.resolveSingleTarget(context.getEventTargetStack().peek())).hasAttribute(Attribute.TAKE_DOUBLE_DAMAGE)) {
 				value *= 2;
 			}
 			damage -= value;
@@ -43,7 +42,7 @@ public class ModifyDamageSpell extends Spell {
 			damage = Math.max(minDamage, damage);
 			break;
 		case SET:
-			if (((Actor) context.getEventTargetStack().peek()).hasAttribute(Attribute.TAKE_DOUBLE_DAMAGE)) {
+			if ((context.resolveSingleTarget(context.getEventTargetStack().peek())).hasAttribute(Attribute.TAKE_DOUBLE_DAMAGE)) {
 				value *= 2;
 			}
 			damage = value;

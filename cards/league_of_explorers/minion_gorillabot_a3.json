@@ -7,6 +7,7 @@
 	"baseHp": 4,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
+	"race": "MECH",
 	"description": "Battlecry: If you control another Mech, Discover a Mech.",
 	"battlecry": {
 		"targetSelection": "NONE",

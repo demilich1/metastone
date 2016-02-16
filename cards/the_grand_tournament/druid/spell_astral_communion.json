@@ -22,8 +22,8 @@
 			},
 			"spell2": {
 				"class": "ModifyMaxManaSpell",
-				"value": 10,
-				"fullManaCrystals": true
+				"fullManaCrystals": true,
+				"value": 10
 			},
 			"condition": {
 				"class": "ManaMaxedCondition"

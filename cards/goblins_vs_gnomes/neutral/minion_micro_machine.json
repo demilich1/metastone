@@ -7,6 +7,7 @@
 	"baseHp": 2,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
+	"race": "MECH",
 	"description": "At the start of each turn, gain +1 Attack.",
 	"trigger": {
 		"eventTrigger": {
@@ -19,7 +20,6 @@
 			"attackBonus": 1
 		}
 	},
-	"race": "MECH",
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

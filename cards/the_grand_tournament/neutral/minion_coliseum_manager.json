@@ -10,7 +10,8 @@
 	"description": "Inspire: Return this minion to your hand.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "InspireTrigger"
+			"class": "InspireTrigger",
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "ReturnMinionToHandSpell",

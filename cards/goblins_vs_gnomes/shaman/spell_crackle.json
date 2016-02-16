@@ -8,9 +8,12 @@
 	"description": "Deal 3-6 damage. Overload: (1)",
 	"targetSelection": "ANY",
 	"spell": {
-		"class": "MinMaxDamageSpell",
-		"minDamage": 3,
-		"maxDamage": 6
+		"class": "DamageSpell",
+		"valueProvider": {
+			"class": "RandomValueProvider",
+			"min": 3,
+			"max": 6
+		}
 	},
 	"attributes": {
 		"OVERLOAD": 1

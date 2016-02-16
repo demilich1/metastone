@@ -7,10 +7,12 @@
 	"baseHp": 4,
 	"heroClass": "WARLOCK",
 	"rarity": "COMMON",
+	"race": "DEMON",
 	"description": "Whenever this minion takes damage, summon a 1/1 Imp.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "SelfDamagedTrigger"
+			"class": "DamageReceivedTrigger",
+			"hostTargetType": "IGNORE_OTHER_TARGETS"
 		},
 		"spell": {
 			"class": "SummonSpell",
@@ -18,7 +20,6 @@
 			"boardPositionRelative": "RIGHT"
 		}
 	},
-	"race": "DEMON",
 	"collectible": true,
 	"set": "BLACKROCK_MOUNTAIN",
 	"fileFormatVersion": 1

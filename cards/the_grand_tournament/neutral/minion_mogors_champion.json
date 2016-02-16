@@ -10,8 +10,9 @@
 	"description": "50% chance to attack the wrong enemy.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "HostAcquiresTargetTrigger",
+			"class": "TargetAcquisitionTrigger",
 			"actionType": "PHYSICAL_ATTACK",
+			"hostTargetType": "IGNORE_OTHER_SOURCES",
 			"condition": {
 				"class": "RandomCondition"
 			}

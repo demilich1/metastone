@@ -7,17 +7,18 @@
 	"baseHp": 1,
 	"heroClass": "ROGUE",
 	"rarity": "COMMON",
+	"race": "PIRATE",
 	"description": "Whenever you equip a weapon, give it +1 Attack.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "WeaponEquippedTrigger"
+			"class": "WeaponEquippedTrigger",
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "BuffWeaponSpell",
 			"attackBonus": 1
 		}
 	},
-	"race": "PIRATE",
 	"collectible": true,
 	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1

@@ -10,7 +10,8 @@
 	"description": "Inspire: Restore 2 Health to your Hero.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "InspireTrigger"
+			"class": "InspireTrigger",
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "HealSpell",

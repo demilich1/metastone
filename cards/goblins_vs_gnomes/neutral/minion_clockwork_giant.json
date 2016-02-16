@@ -7,12 +7,12 @@
 	"baseHp": 8,
 	"heroClass": "ANY",
 	"rarity": "EPIC",
+	"race": "MECH",
 	"description": "Costs (1) less Mana for each card in your opponent's hand.",
 	"manaCostModifier": {
 		"class": "CardCounter",
 		"targetPlayer": "OPPONENT"
 	},
-	"race": "MECH",
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

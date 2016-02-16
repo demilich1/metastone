@@ -10,8 +10,9 @@
 	"description": "Whenever you target this minion with a spell, gain Divine Shield.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "SelfTargetedTrigger",
-			"actionType": "SPELL"
+			"class": "TargetAcquisitionTrigger",
+			"actionType": "SPELL",
+			"hostTargetType": "IGNORE_OTHER_TARGETS"
 		},
 		"spell": {
 			"class": "AddAttributeSpell",

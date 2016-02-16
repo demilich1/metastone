@@ -14,6 +14,11 @@ public class SpellCastedEvent extends GameEvent {
 		this.playerId = playerId;
 		this.sourceCard = sourceCard;
 	}
+	
+	@Override
+	public Entity getEventSource() {
+		return getSourceCard();
+	}
 
 	@Override
 	public Entity getEventTarget() {

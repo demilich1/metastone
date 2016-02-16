@@ -9,9 +9,9 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "FromDeckToHandSpell",
+		"race": "DEMON",
 		"value": 2,
-		"card": "token_worthless_imp",
-		"race": "DEMON"
+		"card": "token_worthless_imp"
 	},
 	"collectible": true,
 	"set": "CLASSIC",

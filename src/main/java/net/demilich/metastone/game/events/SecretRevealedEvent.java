@@ -14,6 +14,11 @@ public class SecretRevealedEvent extends GameEvent {
 		this.secret = secret;
 		this.playerId = playerId;
 	}
+	
+	@Override
+	public Entity getEventSource() {
+		return null;
+	}
 
 	@Override
 	public Entity getEventTarget() {

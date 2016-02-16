@@ -63,7 +63,7 @@ public class GameContext implements Cloneable, IDisposable {
 		return true;
 	}
 
-	public void addCardCostModfier(CardCostModifier cardCostModifier) {
+	public void addCardCostModifier(CardCostModifier cardCostModifier) {
 		getCardCostModifiers().add(cardCostModifier);
 	}
 
@@ -223,11 +223,11 @@ public class GameContext implements Cloneable, IDisposable {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Stack<Entity> getEventTargetStack() {
-		if (!environment.containsKey(Environment.EVENT_TARGET_STACK)) {
-			environment.put(Environment.EVENT_TARGET_STACK, new Stack<Entity>());
+	public Stack<EntityReference> getEventTargetStack() {
+		if (!environment.containsKey(Environment.EVENT_TARGET_REFERENCE_STACK)) {
+			environment.put(Environment.EVENT_TARGET_REFERENCE_STACK, new Stack<EntityReference>());
 		}
-		return (Stack<Entity>) environment.get(Environment.EVENT_TARGET_STACK);
+		return (Stack<EntityReference>) environment.get(Environment.EVENT_TARGET_REFERENCE_STACK);
 	}
 
 	public GameLogic getLogic() {
@@ -240,6 +240,10 @@ public class GameContext implements Cloneable, IDisposable {
 
 	public Player getOpponent(Player player) {
 		return player.getId() == PLAYER_1 ? getPlayer2() : getPlayer1();
+	}
+	
+	public Card getPendingCard() {
+		return (Card) resolveSingleTarget((EntityReference) getEnvironment().get(Environment.PENDING_CARD));
 	}
 
 	public Player getPlayer(int index) {
@@ -259,11 +263,11 @@ public class GameContext implements Cloneable, IDisposable {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Stack<Minion> getSummonStack() {
-		if (!environment.containsKey(Environment.SUMMON_STACK)) {
-			environment.put(Environment.SUMMON_STACK, new Stack<Minion>());
+	public Stack<EntityReference> getSummonReferenceStack() {
+		if (!environment.containsKey(Environment.SUMMON_REFERENCE_STACK)) {
+			environment.put(Environment.SUMMON_REFERENCE_STACK, new Stack<EntityReference>());
 		}
-		return (Stack<Minion>) environment.get(Environment.SUMMON_STACK);
+		return (Stack<EntityReference>) environment.get(Environment.SUMMON_REFERENCE_STACK);
 	}
 
 	public int getTotalMinionCount() {
@@ -372,9 +376,8 @@ public class GameContext implements Cloneable, IDisposable {
 
 	public Card resolveCardReference(CardReference cardReference) {
 		Player player = getPlayer(cardReference.getPlayerId());
-		Card pendingCard = (Card) getEnvironment().get(Environment.PENDING_CARD);
-		if (pendingCard != null && pendingCard.getCardReference().equals(cardReference)) {
-			return pendingCard;
+		if (getPendingCard() != null && getPendingCard().getCardReference().equals(cardReference)) {
+			return getPendingCard();
 		}
 		switch (cardReference.getLocation()) {
 		case DECK:
@@ -382,7 +385,7 @@ public class GameContext implements Cloneable, IDisposable {
 		case HAND:
 			return findCardinCollection(player.getHand(), cardReference.getCardId());
 		case PENDING:
-			return (Card) getEnvironment().get(Environment.PENDING_CARD);
+			return getPendingCard();
 		case HERO_POWER:
 			return player.getHero().getHeroPower();
 		default:
@@ -407,6 +410,14 @@ public class GameContext implements Cloneable, IDisposable {
 
 	public void setIgnoreEvents(boolean ignoreEvents) {
 		this.ignoreEvents = ignoreEvents;
+	}
+	
+	public void setPendingCard(Card pendingCard) {
+		if (pendingCard != null) {
+			getEnvironment().put(Environment.PENDING_CARD, pendingCard.getReference());
+		} else {
+			getEnvironment().put(Environment.PENDING_CARD, null);
+		}
 	}
 
 	private void startTurn(int playerId) {

@@ -28,20 +28,14 @@ public class MinionSummonedTrigger extends GameEventTrigger {
 		if (requiredAttribute != null && !summonEvent.getMinion().hasAttribute(requiredAttribute)) {
 			return false;
 		}
-
+		
 		TargetPlayer targetPlayer = desc.getTargetPlayer();
-		switch (targetPlayer) {
-		case BOTH:
-			return true;
-		case OPPONENT:
-			return summonEvent.getMinion().getOwner() != getOwner();
-		case SELF:
-		case OWNER:
-			return summonEvent.getMinion().getOwner() == getOwner();
-		case ACTIVE:
-			return summonEvent.getMinion().getOwner() == event.getGameContext().getActivePlayerId();
+		int targetPlayerId = summonEvent.getMinion().getOwner();
+		if (targetPlayer != null) {
+			return determineTargetPlayer(summonEvent, targetPlayer, host, targetPlayerId);
 		}
-		return false;
+		
+		return true;
 	}
 
 	@Override

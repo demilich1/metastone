@@ -11,7 +11,7 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "SpellCastedTrigger",
-			"targetPlayer": "BOTH"
+			"sourcePlayer": "BOTH"
 		},
 		"spell": {
 			"class": "CopyCardSpell",

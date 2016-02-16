@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.demilich.metastone.game.Attribute;
-import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
@@ -37,8 +36,7 @@ public abstract class PlayCardAction extends GameAction {
 	@Override
 	public void execute(GameContext context, int playerId) {
 		Card card = context.resolveCardReference(getCardReference());
-		context.getEnvironment().put(Environment.PENDING_CARD, card);
-
+		context.setPendingCard(card);
 		try {
 			context.getLogic().playCard(playerId, getCardReference());
 			// card was countered, do not actually resolve its effects
@@ -55,7 +53,7 @@ public abstract class PlayCardAction extends GameAction {
 		}
 
 		context.getLogic().afterCardPlayed(playerId, getCardReference());
-		context.getEnvironment().remove(Environment.PENDING_CARD);
+		context.setPendingCard(null);
 	}
 
 	public CardReference getCardReference() {

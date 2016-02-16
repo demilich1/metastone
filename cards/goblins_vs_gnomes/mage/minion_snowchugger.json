@@ -7,6 +7,7 @@
 	"baseHp": 3,
 	"heroClass": "MAGE",
 	"rarity": "COMMON",
+	"race": "MECH",
 	"description": "Freeze any character damaged by this minion.",
 	"trigger": {
 		"eventTrigger": {
@@ -19,7 +20,6 @@
 			"attribute": "FROZEN"
 		}
 	},
-	"race": "MECH",
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

@@ -1,0 +1,352 @@
+Spells
+“class”: The Spell name that you wish to cast.
+“target”: 
+
+AddAttributeSpell
+Adds an Attribute to the target. See Attributes.
+Examples: Ice Block, Frost Elemental, Conceal
+“attribute”: Attribute. The Attribute you want to add to the target.
+“revertTrigger”: Optional Trigger. The trigger to revert the added Attribute.
+
+AddDeathrattleSpell
+Adds a Deathrattle to the target.
+Examples: Explorer’s Hat, Ancestral Spirit, Soul of the Forest
+“spell1”: Spell. The Deathrattle you want to add to the target.
+
+AddSecretSpell
+DO NOT USE. Internal Spell for casting Secrets.
+
+AddSpellTriggerSpell
+Adds a Trigger to the target.
+Examples: Blessing of Wisdom, Corruption, Lock and Load
+“trigger”: Trigger. The Trigger you want to add to the target.
+
+AdjacentEffectSpell
+Casts a spell on the main target and the adjacent targets.
+Examples: Explosive Shot, Cone of Cold, Foe Reaper 4000
+“spell1”: Spell. The spell that affects the targeted minion.
+“spell2”: Optional Spell. The spell that affects the adjacent minions to the target. If this is blank, uses “spell1”
+
+AuraBuffSpell
+DO NOT USE. Internal Spell for applying and removing Auras. See AuraSpell.
+
+BuffHeroSpell
+Buffs the target Hero. This is used to modify a Hero’s Armor or Attack.
+Examples: Shapeshift (Hero Power), Ice Barrier, Armor Up (Hero Power)
+“attackBonus”: Optional Integer. The amount of Attack to modify the target Hero.
+“hpBonus”: Optional Integer. The amount of Armor to modify the target Hero.
+
+BuffSpell
+[]
+
+BuffWeaponSpell
+Buffs the target Weapon. This is used to modify a Weapon’s Attack or Durability.
+Examples: Captain Greenskin, Deadly Poison, Upgrade!
+“attackBonus”: Optional Integer. The amount of Attack to modify the target Weapon.
+“hpBonus”: Optional Integer. The amount of Durability to modify the target Weapon.
+
+CardCostModifierSpell
+[]
+
+CastRandomSpellSpell
+[]
+
+CastRepeatedlySpell
+[]
+
+ChangeHeroPowerSpell
+Changes the target Player’s Hero Power.
+Examples: Justicar Trueheart, Charged Hammer, Shadowform
+“card”: Card ID. The card ID of the Hero Power to change the target’s Hero Power to.
+
+ChangeHeroSpell
+[]
+
+ClearOverloadSpell
+Removes the Overloaded Mana Crystals of the target Player.
+Examples: Lava Shock
+
+CloneMinionSpell
+[]
+
+ComboSpell
+[]
+
+ConditionalAttackBonusSpell
+[]
+
+ConditionalEffectSpell
+[]
+
+ConditionalSpell
+[]
+
+CopyCardSpell
+[]
+
+CopyDeathrattleSpell
+Copies the target’s Deathrattles.
+Examples: Unearthed Raptor
+
+CopyHeroPower
+Copies the target Player’s Hero Power.
+Examples: Sideshow Spelleater
+
+DamageSpell
+Damages the target.
+Examples: Fireball, Frostbolt, Hellfire, Lightning Storm, Steady Shot (Hero Power)
+“value”: Integer. The amount of damage to deal.
+
+DestroyAllExceptOneSpell
+[]
+
+DestroySecretsSpell
+[]
+
+DestroySpell
+Destroys the target.
+Examples: Sacrificial Pact, Big Game Hunter, Execute
+
+DiscardCardsFromDeckSpell {}: Combine with DiscardSpell (Use DeckLocation)
+[]
+
+DiscardSpell
+Discards a number of target Player’s cards.
+Examples: Doomguard, Soulfire, Deathwing, Astral Communion
+“value”: Integer. The number of cards to discard.
+“targetPlayer”: Optional Player. Default is SELF. The player to discard cards.
+
+DiscoverCardSpell
+Discovers a card from a list.
+Examples: Sir Finley Mrrgglton, Arch-Thief Rafaam
+“cards”: Card ID Array. The list of cards to choose from.
+“spell1”: Spell. The Spell to use after Discovering the Card.
+“cannotReceiveOwned”: Optional Boolean. Set to true to disallow receiving a Card from the list that you own, including Hero Powers.
+“howMany”: Optional Integer. Default is 3. The number of Card options.
+
+DiscoverDrawSpell
+Discovers a Card from your Deck to draw and discards the other options.
+Examples: Tracking
+“howMany”: Optional Integer. Default is 3. The number of Card options.
+
+DiscoverRandomCardSpell {}: Consider merging with DiscoverCardSpell
+Discovers a random Card from a filter.
+Examples: Museum Curator, Raven Idol, Dark Peddler
+“spell1”: Spell. The Spell to use after Discovering the Card.
+“cardFilter”: Card Filter. Filters the Discoverable Cards.
+“howMany”: Optional Integer. Default is 3. The number of Card options.
+
+DoubleAttackSpell
+Doubles the Attack of the target. Also double temporary Attack.
+Examples: Blessed Champion, Gahz’rilla
+
+DrawCardAndDoSomethingSpell {}: Consider merging with DrawCardSpell?
+[] 
+
+DrawCardSpell
+Target player draws a Card from their Deck.
+Examples: Coldlight Oracle, Gnomish Inventor, Cult Master
+“value”: Integer. The number of Cards to draw.
+“targetPlayer”: Optional Player. Default is SELF. The player to draw Cards.
+
+EitherOrSpell
+[]
+
+EnrageSpell
+[]
+
+EquipRandomWeaponSpell
+[]
+Examples: Blingtron
+
+EquipWeaponSpell
+Target player equips a Weapon.
+Examples: Arathi Weaponsmith, Upgrade!, Dagger Mastery (Hero Power)
+“card”: Card ID. The card ID of the weapon to equip.
+
+FromDeckToHandSpell {}: Can this be merged with Draw Card?
+[]
+
+FumbleSpell
+[]
+
+GainManaSpell
+Gives target Player additional Mana this turn.
+Examples: Innervate, The Coin
+“value”: Integer. The amount of Mana to gain.
+
+HealSpell
+Heals the target.
+Examples: Lesser Heal (Hero Power), Flash Heal, Voodoo Doctor, Circle of Healing
+“value”: Integer. The amount to heal for.
+
+JoustSpell {}: Rewrite JoustSpell
+Creates a Joust Event.
+Examples: Tuskarr Jouster, Healing Wave
+“spell1”: Spell. Spell to cast if the Joust succeeds.
+“spell2”: Optional Spell. Spell to cast if the Joust fails.
+
+MetaSpell
+A Spell that casts 2 or 3 Spells in succession. These do not act as separate Spells.
+Examples: Frostbolt, Earth Shock, Lord Jaraxxus, Poison Seeds
+“spell1”: Spell. The first Spell to cast.
+“spell2”: Spell. The second Spell to cast.
+“spell3”: Optional Spell. The third Spell to cast.
+
+MindControlSpell
+[]
+
+MisdirectSpell
+[]
+
+MissilesSpell {}: Consider Rewriting
+Deals 1 damage missiles to randomly selected targets.
+Examples: Mad Bomber, Arcane Missiles, Flamewaker
+“howMany”: The number of missiles to fire.
+
+ModifyAttributeSpell
+[]
+
+ModifyCardCostSpell {}: Combine with Attribute Spell? (Only Thaurissen uses it, wtf?)
+[]
+
+ModifyDurabilitySpell {}: Combine with Attribute Spell? (Only applies to Weapons, so might as well…)
+[]
+
+ModifyMaxManaSpell {}: Is this possible to combine with GainManaSpell?
+[]
+
+MultiTargetDamageSpell {}: Works the same as MissilesSpell, currently.
+[]
+
+NullSpell
+A Spell that does nothing.
+Examples: Burrowing Mine, Ambushed!, Cursed!
+
+PutCopyInHandSpell
+[]
+
+PutMinionOnBoardSpell
+[]
+
+PutRandomMinionOnBoardSpell
+[]
+
+PutRandomSecretIntoPlaySpell
+[]
+
+RecastSpell
+Replays a specified Card.
+Examples: Djinni of Zephyrs
+“card”: Card ID. The card to be cast.
+
+ReceiveCardSpell {}: Combine with ShuffleToDeck? (DeckLocation)
+The target Player receives a specified Card.
+Examples: Archmage Antonidas, Rhonin, Curse of Rafaam
+“cards”: Card ID Array. The array of Card IDs to receive.
+
+ReceiveRandomCardSpell {}: Combine with Receive Card? (randomTarget)
+Examples: Mechanical Yeti, Tinkertown Technician, Ysera
+[]
+
+ReceiveRandomCollectibleCardSpell {}: Combine with Receive Card? (cardFilter)
+[]
+
+RemoveAttributeSpell
+[]
+
+RemoveCardSpell
+[]
+
+ReplaceCardLocationSpell
+[]
+
+ResurrectFromBothSpell {}: Mindgames-esque Combination (DeckLocation Array?)
+[]
+
+ResurrectSpell
+[]
+
+ReturnMinionToHandSpell {}: Combine with ShuffleMinionToDeck (DeckLocation)
+[]
+
+RevertableSpell
+[]
+
+ReviveMinionSpell
+[]
+
+SetAttackSpell
+[]
+
+SetHeroHpSpell
+[]
+
+SetHpSpell {}: Combine with SetHeroHpSpell?
+Set the Hp of an Entity.
+[]
+
+ShuffleMinionToDeckSpell
+[]
+
+ShuffleToDeckSpell {}: Rename to ShuffleCopyToDeck
+[]
+
+SilenceSpell
+Silences the target.
+Examples: Silence, Ironbeak Owl, Spellbreaker
+
+StealRandomSecretSpell
+[]
+
+SummonCopySpell
+[]
+
+SummonNewAttackTargetSpell {}: Separate into two different spells?
+Summons a new minion and redirects the current action to the new minion.
+Examples: Spellbender, Noble Sacrifice
+“card”: Card ID. The Card ID of the minion to summon.
+
+SummonRandomMinionFilteredSpell
+[]
+
+SummonRandomMinionFromSpell {}: Rename to SummonRandomMinionFromSourceSpell
+[]
+
+SummonRandomNotOnBoardSpell
+[]
+
+SummonRandomSpell
+[]
+
+SummonSpell
+Summon a minion.
+[]
+
+SwapAttackAndHpSpell
+Swaps the Attack and HP of the target.
+Examples: Crazed Alchemist, Confuse
+
+TemporaryAttackSpell {}: Combine with Modify Attribute?
+Modifies the Temporary Attack of an Actor. This Attack is removed at the end of the turn.
+Examples: Savage Roar, Abusive Sergeant, Shrinkmeister
+“value”: The amount of Attack to add to the target.
+
+TransformCardSpell
+Transforms a Card into another Card.
+Examples: Gnomish Experimenter
+“card”: Card ID. The 
+[]
+
+TransformMinionSpell
+Transforms a minion into another minion.
+Examples: Druid of the Claw, Faceless Manipulator, Recombobulator, Tinkmaster Overspark
+“card”: Optional Card ID. The Card ID to transform into.
+[]
+
+TransformToMinionWithManaCostSpell {}: Combine with Transform Minion (Filter)
+[]
+
+TriggerDeathrattleSpell
+Triggers all Deathrattles for the target Player.
+Examples: Feign Death

@@ -111,7 +111,11 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 			expire();
 		}
 		try {
-			event.getGameContext().getEventTargetStack().push(event.getEventTarget());
+			if (event.getEventTarget() != null) {
+				event.getGameContext().getEventTargetStack().push(event.getEventTarget().getReference());
+			} else {
+				event.getGameContext().getEventTargetStack().push(null);
+			}
 			onFire(ownerId, spell, event);
 			event.getGameContext().getEventTargetStack().pop();
 		} catch (Exception e) {

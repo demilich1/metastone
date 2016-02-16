@@ -10,7 +10,8 @@
 	"description": "Inspire: Add a random spell to your hand.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "InspireTrigger"
+			"class": "InspireTrigger",
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "ReceiveRandomCollectibleCardSpell",

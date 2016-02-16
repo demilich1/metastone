@@ -10,7 +10,8 @@
 	"description": "Whenever this minion takes damage, gain +3 Attack.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "SelfDamagedTrigger"
+			"class": "DamageReceivedTrigger",
+			"hostTargetType": "IGNORE_OTHER_TARGETS"
 		},
 		"spell": {
 			"class": "BuffSpell",

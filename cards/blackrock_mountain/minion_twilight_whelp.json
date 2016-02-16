@@ -7,6 +7,7 @@
 	"baseHp": 1,
 	"heroClass": "PRIEST",
 	"rarity": "COMMON",
+	"race": "DRAGON",
 	"description": "Battlecry: If you're holding a Dragon, gain +2 Health.",
 	"battlecry": {
 		"spell": {
@@ -20,7 +21,6 @@
 		},
 		"resolvedLate": false
 	},
-	"race": "DRAGON",
 	"attributes": {
 		"BATTLECRY": true
 	},

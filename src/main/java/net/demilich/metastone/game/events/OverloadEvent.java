@@ -18,6 +18,11 @@ public class OverloadEvent extends GameEvent {
 	public Card getCard() {
 		return card;
 	}
+	
+	@Override
+	public Entity getEventSource() {
+		return null;
+	}
 
 	@Override
 	public Entity getEventTarget() {
@@ -29,7 +34,7 @@ public class OverloadEvent extends GameEvent {
 		return GameEventType.OVERLOAD;
 	}
 
-	public int getPlayer() {
+	public int getPlayerId() {
 		return playerId;
 	}
 

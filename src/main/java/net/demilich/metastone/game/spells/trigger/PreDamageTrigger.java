@@ -17,50 +17,31 @@ public class PreDamageTrigger extends GameEventTrigger {
 
 	@Override
 	protected boolean fire(GameEvent event, Entity host) {
-		EntityType sourceEntityType = (EntityType) desc.get(EventTriggerArg.ENTITY_TYPE);
-		EntityType targetEntityType = (EntityType) desc.get(EventTriggerArg.TARGET_ENTITY_TYPE);
 		PreDamageEvent preDamageEvent = (PreDamageEvent) event;
+		
+		EntityType sourceEntityType = (EntityType) desc.get(EventTriggerArg.SOURCE_ENTITY_TYPE);
 		if (sourceEntityType != null && preDamageEvent.getSource().getEntityType() != sourceEntityType) {
 			return false;
 		}
+		
+		EntityType targetEntityType = (EntityType) desc.get(EventTriggerArg.TARGET_ENTITY_TYPE);
 		if (targetEntityType != null && preDamageEvent.getVictim().getEntityType() != targetEntityType) {
 			return false;
 		}
 		
-		if (desc.contains(EventTriggerArg.TARGETED_PLAYER)) {
-			TargetPlayer targetedPlayer = (TargetPlayer) desc.get(EventTriggerArg.TARGETED_PLAYER);
-			switch (targetedPlayer) {
-			case OWNER:
-			case SELF:
-				if (getOwner() != preDamageEvent.getVictim().getOwner()) {
-					return false;
-				}
-				break;
-			case OPPONENT:
-				if (getOwner() == preDamageEvent.getVictim().getOwner()) {
-					return false;
-				}
-				break;
-			default:
-				break;
-			}
-		}
-
-		int owner = preDamageEvent.getSource().getOwner();
 		TargetPlayer targetPlayer = desc.getTargetPlayer();
-		switch (targetPlayer) {
-		case BOTH:
-			return true;
-		case OPPONENT:
-			return owner != getOwner();
-		case SELF:
-		case OWNER:
-			return owner == getOwner();
-		case ACTIVE:
-			return owner == event.getGameContext().getActivePlayerId();
-		default:
+		int targetPlayerId = preDamageEvent.getVictim().getOwner();
+		if(targetPlayer != null && !determineTargetPlayer(preDamageEvent, targetPlayer, host, targetPlayerId)) {
 			return false;
 		}
+
+		TargetPlayer sourcePlayer = desc.getSourcePlayer();
+		int sourcePlayerId = preDamageEvent.getSource().getOwner();
+		if (sourcePlayer != null) {
+			return determineTargetPlayer(preDamageEvent, sourcePlayer, host, sourcePlayerId);
+		}
+		
+		return true;
 	}
 
 	@Override

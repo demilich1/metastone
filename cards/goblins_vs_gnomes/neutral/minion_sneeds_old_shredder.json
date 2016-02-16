@@ -7,15 +7,15 @@
 	"baseHp": 7,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
+	"race": "MECH",
 	"description": "Deathrattle: Summon a random legendary minion.",
 	"deathrattle": {
 		"class": "SummonRandomMinionFilteredSpell",
 		"cardFilter": {
-			"rarity": "LEGENDARY",
-			"class": "CardFilter"
+			"class": "CardFilter",
+			"rarity": "LEGENDARY"
 		}
 	},
-	"race": "MECH",
 	"attributes": {
 		"DEATHRATTLES": true
 	},

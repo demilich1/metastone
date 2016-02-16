@@ -7,12 +7,13 @@
 	"baseHp": 2,
 	"heroClass": "ANY",
 	"rarity": "RARE",
+	"race": "MURLOC",
 	"description": "Whenever a Murloc is summoned, gain +1 Attack.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "MinionSummonedTrigger",
-			"targetPlayer": "BOTH",
-			"race": "MURLOC"
+			"race": "MURLOC",
+			"targetPlayer": "BOTH"
 		},
 		"spell": {
 			"class": "BuffSpell",
@@ -20,7 +21,6 @@
 			"attackBonus": 1
 		}
 	},
-	"race": "MURLOC",
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

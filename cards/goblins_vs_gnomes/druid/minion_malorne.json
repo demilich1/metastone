@@ -7,12 +7,12 @@
 	"baseHp": 7,
 	"heroClass": "DRUID",
 	"rarity": "LEGENDARY",
+	"race": "BEAST",
 	"description": "Deathrattle: Shuffle this minion into your deck.",
 	"deathrattle": {
 		"class": "ShuffleMinionToDeckSpell",
 		"target": "SELF"
 	},
-	"race": "BEAST",
 	"attributes": {
 		"DEATHRATTLES": true
 	},

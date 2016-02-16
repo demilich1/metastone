@@ -10,15 +10,13 @@
 	"description": "Your Hero Power gives this weapon +1 Attack instead of replacing it.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "InspireTrigger"
+			"class": "InspireTrigger",
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "BuffWeaponSpell",
 			"attackBonus": 1
 		}
-	},
-	"attributes": {
-		"PERSISTENT_WEAPON": true
 	},
 	"collectible": true,
 	"set": "THE_GRAND_TOURNAMENT",

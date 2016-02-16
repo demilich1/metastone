@@ -11,6 +11,11 @@ public class KillEvent extends GameEvent {
 		super(context);
 		this.victim = victim;
 	}
+	
+	@Override
+	public Entity getEventSource() {
+		return null;
+	}
 
 	@Override
 	public Entity getEventTarget() {

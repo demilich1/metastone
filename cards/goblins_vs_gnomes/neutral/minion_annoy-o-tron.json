@@ -7,8 +7,8 @@
 	"baseHp": 2,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"description": "Taunt. Divine Shield",
 	"race": "MECH",
+	"description": "Taunt. Divine Shield",
 	"attributes": {
 		"DIVINE_SHIELD": true,
 		"TAUNT": true

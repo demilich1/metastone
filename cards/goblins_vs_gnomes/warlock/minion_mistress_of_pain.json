@@ -7,6 +7,7 @@
 	"baseHp": 4,
 	"heroClass": "WARLOCK",
 	"rarity": "RARE",
+	"race": "DEMON",
 	"description": "Whenever this minion deals damage, restore that much Health to your hero.",
 	"trigger": {
 		"eventTrigger": {
@@ -23,7 +24,6 @@
 			}
 		}
 	},
-	"race": "DEMON",
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

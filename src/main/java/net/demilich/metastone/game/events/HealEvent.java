@@ -13,6 +13,11 @@ public class HealEvent extends GameEvent {
 		this.target = target;
 		this.healing = healing;
 	}
+	
+	@Override
+	public Entity getEventSource() {
+		return null;
+	}
 
 	@Override
 	public Entity getEventTarget() {

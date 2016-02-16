@@ -7,13 +7,13 @@
 	"durability": 5,
 	"heroClass": "PALADIN",
 	"rarity": "EPIC",
-	"description": "Whenever you summon a minion, give it +1/+1 and this loses 1 Durability.",
+	"description": "After you summon a minion, give it +1/+1 and this loses 1 Durability.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "MinionSummonedTrigger",
 			"targetPlayer": "SELF",
 			"condition": {
-				class: "HasWeaponCondition"
+				"class": "HasWeaponCondition"
 			}
 		},
 		"spell": {

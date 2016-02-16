@@ -7,6 +7,7 @@
 	"baseHp": 8,
 	"heroClass": "ANY",
 	"rarity": "EPIC",
+	"race": "MECH",
 	"description": "Whenever your opponent plays a card, discard the top 3 cards of your deck.",
 	"trigger": {
 		"eventTrigger": {
@@ -18,7 +19,6 @@
 			"value": 3
 		}
 	},
-	"race": "MECH",
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

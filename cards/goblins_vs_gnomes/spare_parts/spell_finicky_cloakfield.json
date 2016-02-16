@@ -11,7 +11,8 @@
 		"class": "AddAttributeSpell",
 		"attribute": "STEALTH",
 		"revertTrigger": {
-			"class": "TurnStartTrigger"
+			"class": "TurnStartTrigger",
+			"targetPlayer": "SELF"
 		}
 	},
 	"collectible": false,

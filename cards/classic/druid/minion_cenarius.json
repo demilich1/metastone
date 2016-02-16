@@ -13,7 +13,7 @@
 			"description": "+2/2",
 			"spell": {
 				"class": "BuffSpell",
-				"target": "FRIENDLY_MINIONS",
+				"target": "OTHER_FRIENDLY_MINIONS",
 				"attackBonus": 2,
 				"hpBonus": 2
 			}

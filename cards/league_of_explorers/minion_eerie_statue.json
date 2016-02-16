@@ -14,6 +14,7 @@
 		},
 		"spell": {
 			"class": "EitherOrSpell",
+			"target": "SELF",
 			"spell1": {
 				"class": "RemoveAttributeSpell",
 				"attribute": "CANNOT_ATTACK"
@@ -22,7 +23,6 @@
 				"class": "AddAttributeSpell",
 				"attribute": "CANNOT_ATTACK"
 			},
-			"target": "SELF",
 			"condition": {
 				"class": "MinionCountCondition",
 				"targetPlayer": "BOTH",

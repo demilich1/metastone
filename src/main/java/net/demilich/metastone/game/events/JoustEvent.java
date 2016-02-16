@@ -18,6 +18,11 @@ public class JoustEvent extends GameEvent {
 		this.ownCard = ownCard;
 		this.opponentCard = opponentCard;
 	}
+	
+	@Override
+	public Entity getEventSource() {
+		return null;
+	}
 
 	@Override
 	public Entity getEventTarget() {

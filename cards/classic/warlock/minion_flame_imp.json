@@ -7,6 +7,7 @@
 	"baseHp": 2,
 	"heroClass": "WARLOCK",
 	"rarity": "COMMON",
+	"race": "DEMON",
 	"description": "Battlecry: Deal 3 damage to your hero.",
 	"battlecry": {
 		"spell": {
@@ -16,7 +17,6 @@
 		},
 		"resolvedLate": false
 	},
-	"race": "DEMON",
 	"attributes": {
 		"BATTLECRY": true
 	},

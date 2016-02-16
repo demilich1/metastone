@@ -7,8 +7,8 @@
 	"baseHp": 12,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
-	"description": "Spell Damage +5",
 	"race": "DRAGON",
+	"description": "Spell Damage +5",
 	"attributes": {
 		"SPELL_DAMAGE": 5
 	},

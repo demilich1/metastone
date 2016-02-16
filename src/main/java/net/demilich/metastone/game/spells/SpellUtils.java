@@ -6,7 +6,6 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 
 import net.demilich.metastone.game.Attribute;
-import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.DiscoverAction;
@@ -71,8 +70,8 @@ public class SpellUtils {
 		Card card = null;
 		String cardName = (String) spell.get(SpellArg.CARD);
 		card = CardCatalogue.getCardById(cardName);
-		if (spell.get(SpellArg.CARD).toString().equals("PENDING_CARD")) {
-			card = (Card) context.getEnvironment().get(Environment.PENDING_CARD);
+		if (spell.get(SpellArg.CARD).toString().toUpperCase().equals("PENDING_CARD")) {
+			card = (Card) context.getPendingCard();
 		}
 		return card;
 	}
@@ -218,7 +217,7 @@ public class SpellUtils {
 	
 	public static int getBoardPosition(GameContext context, Player player, SpellDesc desc, Entity source) {
 		final int UNDEFINED = -1;
-		int boardPosition = desc.getInt(SpellArg.BOARD_POSITION_ABSOLUTE, -1);
+		int boardPosition = desc.getInt(SpellArg.BOARD_POSITION_ABSOLUTE, UNDEFINED);
 		if (boardPosition != UNDEFINED) {
 			return boardPosition;
 		}

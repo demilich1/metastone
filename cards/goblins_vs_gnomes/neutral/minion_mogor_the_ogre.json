@@ -12,8 +12,9 @@
 		"eventTrigger": {
 			"class": "TargetAcquisitionTrigger",
 			"actionType": "PHYSICAL_ATTACK",
+			"sourcePlayer": "BOTH",
 			"targetPlayer": "BOTH",
-			"entityType": "MINION",
+			"sourceEntityType": "MINION",
 			"condition": {
 				"class": "RandomCondition"
 			}

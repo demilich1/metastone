@@ -7,10 +7,12 @@
 	"baseHp": 4,
 	"heroClass": "DRUID",
 	"rarity": "RARE",
+	"race": "BEAST",
 	"description": "Inspire: Give your hero +2 Attack this turn.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "InspireTrigger"
+			"class": "InspireTrigger",
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "BuffHeroSpell",
@@ -18,7 +20,6 @@
 			"attackBonus": 2
 		}
 	},
-	"race": "BEAST",
 	"collectible": true,
 	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1

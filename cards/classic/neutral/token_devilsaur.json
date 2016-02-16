@@ -7,8 +7,8 @@
 	"baseHp": 5,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"description": "",
 	"race": "BEAST",
+	"description": "",
 	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

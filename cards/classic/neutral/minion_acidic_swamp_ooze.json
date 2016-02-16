@@ -10,8 +10,8 @@
 	"description": "Battlecry: Destroy your opponent's weapon.",
 	"battlecry": {
 		"spell": {
-			"class": "DestroyWeaponSpell",
-			"target": "ENEMY_HERO"
+			"class": "DestroySpell",
+			"target": "ENEMY_WEAPON"
 		}
 	},
 	"attributes": {

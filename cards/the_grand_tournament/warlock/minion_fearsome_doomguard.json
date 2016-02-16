@@ -7,8 +7,8 @@
 	"baseHp": 8,
 	"heroClass": "WARLOCK",
 	"rarity": "COMMON",
-	"description": "",
 	"race": "DEMON",
+	"description": "",
 	"collectible": true,
 	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1

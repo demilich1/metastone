@@ -9,6 +9,7 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "EitherOrSpell",
+		"targetPlayer": "SELF",
 		"spell1": {
 			"class": "ConditionalSpell",
 			"spell": {
@@ -33,7 +34,6 @@
 				"card": "hero_power_mind_spike"
 			}
 		},
-		"targetPlayer": "SELF",
 		"condition": {
 			"class": "AttributeCondition",
 			"target": "FRIENDLY_HERO",

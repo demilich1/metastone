@@ -19,8 +19,8 @@
 			}
 		},
 		"spell2": {
-			"class": "DestroyWeaponSpell",
-			"target": "FRIENDLY_HERO"
+			"class": "DestroySpell",
+			"target": "FRIENDLY_WEAPON"
 		}
 	},
 	"condition": {

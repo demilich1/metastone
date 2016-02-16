@@ -7,8 +7,8 @@
 	"baseHp": 7,
 	"heroClass": "DRUID",
 	"rarity": "COMMON",
-	"description": "",
 	"race": "BEAST",
+	"description": "",
 	"collectible": false,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

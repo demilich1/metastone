@@ -10,7 +10,8 @@
 	"description": "Whenever this minion takes damage, summon a 2/1 Whelp.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "SelfDamagedTrigger"
+			"class": "DamageReceivedTrigger",
+			"hostTargetType": "IGNORE_OTHER_TARGETS"
 		},
 		"spell": {
 			"class": "SummonSpell",

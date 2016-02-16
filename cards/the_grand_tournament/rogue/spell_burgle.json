@@ -12,8 +12,8 @@
 		"card": "spell_the_coin",
 		"howMany": 2,
 		"cardFilter": {
-			"heroClass": "OPPONENT",
-			"class": "CardFilter"
+			"class": "CardFilter",
+			"heroClass": "OPPONENT"
 		}
 	},
 	"collectible": true,

@@ -7,6 +7,7 @@
 	"baseHp": 1,
 	"heroClass": "ANY",
 	"rarity": "RARE",
+	"race": "BEAST",
 	"description": "Enrage: +5 Attack",
 	"trigger": {
 		"eventTrigger": {
@@ -18,7 +19,6 @@
 			"attackBonus": 5
 		}
 	},
-	"race": "BEAST",
 	"attributes": {
 		"ENRAGABLE": true
 	},

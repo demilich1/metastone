@@ -40,11 +40,16 @@ public class CardProxy extends Proxy<GameNotification> {
 		Collection<File> files = FileUtils.listFiles(folder, new String[] { "json" }, true);
 		CardParser cardParser = new CardParser();
 		for (File file : files) {
-			CardDesc desc = cardParser.parseCard(file);
-			if (cardDesc.containsKey(desc.id)) {
-				logger.error("Card id {} is duplicated!", desc.id);
+			try {
+				CardDesc desc = cardParser.parseCard(file);
+				if (cardDesc.containsKey(desc.id)) {
+					logger.error("Card id {} is duplicated!", desc.id);
+				}
+				cardDesc.put(desc.id, desc);
+			} catch (Exception e) {
+				logger.error("Trouble reading " + file.getName());
+				throw e;
 			}
-			cardDesc.put(desc.id, desc);
 		}
 
 		for (CardDesc desc : cardDesc.values()) {

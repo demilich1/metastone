@@ -7,8 +7,8 @@
 	"baseHp": 2,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"description": "Can't be targeted by Spells or Hero Powers.",
 	"race": "DRAGON",
+	"description": "Can't be targeted by Spells or Hero Powers.",
 	"attributes": {
 		"UNTARGETABLE_BY_SPELLS": true
 	},

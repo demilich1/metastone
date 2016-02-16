@@ -7,6 +7,7 @@
 	"baseHp": 4,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
+	"race": "MURLOC",
 	"description": "Charge. Has +1 Attack for each other Murloc on the battlefield.",
 	"trigger": {
 		"eventTrigger": {
@@ -17,8 +18,7 @@
 			"target": "SELF",
 			"valueProvider": {
 				"class": "EntityCounter",
-				"target": "ALL_MINIONS",
-				"offset": -1,
+				"target": "ALL_OTHER_MINIONS",
 				"filter": {
 					"class": "RaceFilter",
 					"race": "MURLOC"
@@ -26,7 +26,6 @@
 			}
 		}
 	},
-	"race": "MURLOC",
 	"attributes": {
 		"CHARGE": true
 	},

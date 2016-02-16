@@ -7,13 +7,13 @@
 	"baseHp": 3,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"description": "Whenever you summon a Pirate, deal 2 damage to a random enemy.",
+	"description": "After you summon a Pirate, deal 2 damage to a random enemy.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "MinionSummonedTrigger",
+			"race": "PIRATE",
 			"targetPlayer": "SELF",
-			"breaksStealth": true,
-			"race": "PIRATE"
+			"breaksStealth": true
 		},
 		"spell": {
 			"class": "DamageSpell",

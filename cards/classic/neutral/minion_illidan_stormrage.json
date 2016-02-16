@@ -7,6 +7,7 @@
 	"baseHp": 5,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
+	"race": "DEMON",
 	"description": "Whenever you play a card, summon a 2/1 Flame of Azzinoth.",
 	"trigger": {
 		"eventTrigger": {
@@ -19,7 +20,6 @@
 			"boardPositionRelative": "RIGHT"
 		}
 	},
-	"race": "DEMON",
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

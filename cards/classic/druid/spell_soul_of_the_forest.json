@@ -9,11 +9,11 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "AddDeathrattleSpell",
+		"target": "FRIENDLY_MINIONS",
 		"spell1": {
 			"class": "SummonSpell",
 			"card": "token_treant"
-		},
-		"target": "FRIENDLY_MINIONS"
+		}
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

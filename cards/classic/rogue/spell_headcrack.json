@@ -15,6 +15,8 @@
 			"value": 2
 		},
 		"spell2": {
+			"class": "AddSpellTriggerSpell",
+			"target": "FRIENDLY_HERO",
 			"trigger": {
 				"eventTrigger": {
 					"class": "TurnEndTrigger",
@@ -25,9 +27,7 @@
 					"card": "spell_headcrack"
 				},
 				"oneTurn": true
-			},
-			"class": "AddSpellTriggerSpell",
-			"target": "FRIENDLY_HERO"
+			}
 		}
 	},
 	"set": "CLASSIC",

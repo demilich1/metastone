@@ -7,6 +7,7 @@
 	"baseHp": 3,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
+	"race": "MECH",
 	"description": "Deathrattle: Summon a random 2-cost minion.",
 	"deathrattle": {
 		"class": "SummonRandomMinionFilteredSpell",
@@ -15,7 +16,6 @@
 			"manaCost": 2
 		}
 	},
-	"race": "MECH",
 	"attributes": {
 		"DEATHRATTLES": true
 	},

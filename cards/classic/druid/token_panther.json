@@ -7,8 +7,8 @@
 	"baseHp": 2,
 	"heroClass": "DRUID",
 	"rarity": "COMMON",
-	"description": "",
 	"race": "BEAST",
+	"description": "",
 	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

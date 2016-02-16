@@ -7,12 +7,12 @@
 	"baseHp": 1,
 	"heroClass": "WARLOCK",
 	"rarity": "EPIC",
+	"race": "DEMON",
 	"description": "Deathrattle: Summon a Dreadsteed.",
 	"deathrattle": {
 		"class": "SummonSpell",
 		"card": "minion_dreadsteed"
 	},
-	"race": "DEMON",
 	"attributes": {
 		"DEATHRATTLES": true
 	},

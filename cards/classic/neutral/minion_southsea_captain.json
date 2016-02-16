@@ -7,10 +7,11 @@
 	"baseHp": 3,
 	"heroClass": "ANY",
 	"rarity": "EPIC",
+	"race": "PIRATE",
 	"description": "Your other Pirates have +1/+1.",
 	"aura": {
 		"class": "BuffAura",
-		"target": "FRIENDLY_MINIONS",
+		"target": "OTHER_FRIENDLY_MINIONS",
 		"attackBonus": 1,
 		"hpBonus": 1,
 		"filter": {
@@ -18,7 +19,6 @@
 			"race": "PIRATE"
 		}
 	},
-	"race": "PIRATE",
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

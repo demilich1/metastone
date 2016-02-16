@@ -7,10 +7,12 @@
 	"baseHp": 3,
 	"heroClass": "WARLOCK",
 	"rarity": "COMMON",
+	"race": "DEMON",
 	"description": "Whenever this minion takes damage, also deal that amount to your hero.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "SelfDamagedTrigger"
+			"class": "DamageReceivedTrigger",
+			"hostTargetType": "IGNORE_OTHER_TARGETS"
 		},
 		"spell": {
 			"class": "DamageSpell",
@@ -22,7 +24,6 @@
 			}
 		}
 	},
-	"race": "DEMON",
 	"collectible": true,
 	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1

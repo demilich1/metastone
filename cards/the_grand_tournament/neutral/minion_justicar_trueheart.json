@@ -11,6 +11,7 @@
 	"battlecry": {
 		"spell": {
 			"class": "ConditionalSpell",
+			"targetPlayer": "SELF",
 			"spells": [
 				{
 					"class": "ChangeHeroPowerSpell",
@@ -49,7 +50,6 @@
 					"card": "hero_power_tank_up"
 				}
 			],
-			"targetPlayer": "SELF",
 			"conditions": [
 				{
 					"class": "HasHeroPowerCondition",

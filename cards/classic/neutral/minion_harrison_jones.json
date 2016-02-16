@@ -20,8 +20,8 @@
 				}
 			},
 			"spell2": {
-				"class": "DestroyWeaponSpell",
-				"target": "ENEMY_HERO"
+				"class": "DestroySpell",
+				"target": "ENEMY_WEAPON"
 			}
 		},
 		"resolvedLate": false

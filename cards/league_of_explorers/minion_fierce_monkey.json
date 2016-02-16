@@ -7,8 +7,8 @@
 	"baseHp": 4,
 	"heroClass": "WARRIOR",
 	"rarity": "COMMON",
-	"description": "Taunt",
 	"race": "BEAST",
+	"description": "Taunt",
 	"attributes": {
 		"TAUNT": true
 	},

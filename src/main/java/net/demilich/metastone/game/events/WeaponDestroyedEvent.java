@@ -12,6 +12,11 @@ public class WeaponDestroyedEvent extends GameEvent {
 		super(context);
 		this.weapon = weapon;
 	}
+	
+	@Override
+	public Entity getEventSource() {
+		return null;
+	}
 
 	@Override
 	public Entity getEventTarget() {

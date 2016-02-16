@@ -7,6 +7,7 @@
 	"baseHp": 2,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
+	"race": "NONE",
 	"description": "Charge. Battlecry: Summon two 1/1 Whelps for your opponent.",
 	"battlecry": {
 		"spell": {
@@ -19,7 +20,6 @@
 		},
 		"resolvedLate": false
 	},
-	"race": "NONE",
 	"attributes": {
 		"BATTLECRY": true,
 		"CHARGE": true

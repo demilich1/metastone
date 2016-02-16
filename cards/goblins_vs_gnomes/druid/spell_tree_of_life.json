@@ -9,11 +9,11 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "HealSpell",
+		"target": "ALL_CHARACTERS",
 		"valueProvider": {
 			"class": "AttributeValueProvider",
 			"attribute": "MAX_HP"
-		},
-		"target": "ALL_CHARACTERS"
+		}
 	},
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",

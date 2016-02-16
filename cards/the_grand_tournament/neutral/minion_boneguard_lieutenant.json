@@ -10,7 +10,8 @@
 	"description": "Inspire: Gain +1 Health.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "InspireTrigger"
+			"class": "InspireTrigger",
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "BuffSpell",

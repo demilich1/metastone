@@ -10,7 +10,8 @@
 	"description": "Inspire: Give your weapon +1 Attack.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "InspireTrigger"
+			"class": "InspireTrigger",
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "BuffWeaponSpell",

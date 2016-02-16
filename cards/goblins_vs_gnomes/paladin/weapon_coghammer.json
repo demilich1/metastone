@@ -12,6 +12,7 @@
 		"targetSelection": "NONE",
 		"spell": {
 			"class": "MetaSpell",
+			"target": "FRIENDLY_MINIONS",
 			"spell1": {
 				"class": "AddAttributeSpell",
 				"attribute": "DIVINE_SHIELD"
@@ -20,7 +21,6 @@
 				"class": "AddAttributeSpell",
 				"attribute": "TAUNT"
 			},
-			"target": "FRIENDLY_MINIONS",
 			"randomTarget": true
 		},
 		"resolvedLate": false

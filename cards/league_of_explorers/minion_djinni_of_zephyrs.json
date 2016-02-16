@@ -7,14 +7,15 @@
 	"baseHp": 6,
 	"heroClass": "ANY",
 	"rarity": "EPIC",
-	"description": "Whenever you target another friendly minion with a spell, cast it on this one.",
+	"description": "After you target another friendly minion with a spell, cast it on this one.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "FriendlyTargetedTrigger",
+			"class": "TargetAcquisitionTrigger",
 			"actionType": "SPELL",
+			"sourcePlayer": "SELF",
 			"targetPlayer": "SELF",
 			"targetEntityType": "MINION",
-			"ignoreHost": true
+			"hostTargetType": "IGNORE_AS_TARGET"
 		},
 		"spell": {
 			"class": "RecastSpell",

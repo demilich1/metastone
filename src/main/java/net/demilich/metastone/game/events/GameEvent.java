@@ -21,6 +21,8 @@ public abstract class GameEvent {
 	 * @return
 	 */
 	public abstract Entity getEventTarget();
+	
+	public abstract Entity getEventSource();
 
 	public abstract GameEventType getEventType();
 

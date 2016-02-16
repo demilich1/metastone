@@ -13,13 +13,13 @@
 			"class": "EitherOrSpell",
 			"spell1": {
 				"class": "TransformMinionSpell",
-				"target": "ALL_MINIONS",
+				"target": "ALL_OTHER_MINIONS",
 				"card": "token_devilsaur",
 				"randomTarget": true
 			},
 			"spell2": {
 				"class": "TransformMinionSpell",
-				"target": "ALL_MINIONS",
+				"target": "ALL_OTHER_MINIONS",
 				"card": "token_squirrel",
 				"randomTarget": true
 			},

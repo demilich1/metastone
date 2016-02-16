@@ -7,6 +7,7 @@
 	"baseHp": 2,
 	"heroClass": "DRUID",
 	"rarity": "COMMON",
+	"race": "BEAST",
 	"description": "Deathrattle: Summon a random 1-Cost minion.",
 	"deathrattle": {
 		"class": "SummonRandomMinionFilteredSpell",
@@ -15,7 +16,6 @@
 			"manaCost": 1
 		}
 	},
-	"race": "BEAST",
 	"attributes": {
 		"DEATHRATTLES": true
 	},

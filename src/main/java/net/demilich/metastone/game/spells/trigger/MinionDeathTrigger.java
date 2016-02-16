@@ -30,22 +30,14 @@ public class MinionDeathTrigger extends GameEventTrigger {
 		if (race != null && minion.getRace() != race) {
 			return false;
 		}
-
+		
 		TargetPlayer targetPlayer = desc.getTargetPlayer();
-		switch (targetPlayer) {
-		case BOTH:
-			return true;
-		case SELF:
-		case OWNER:
-			return minion.getOwner() == host.getOwner();
-		case OPPONENT:
-			return minion.getOwner() != host.getOwner();
-		case ACTIVE:
-			return minion.getOwner() == event.getGameContext().getActivePlayerId();
-		case INACTIVE:
-			return minion.getOwner() != event.getGameContext().getActivePlayerId();
+		int targetPlayerId = minion.getOwner();
+		if (targetPlayer != null) {
+			return determineTargetPlayer(killEvent, targetPlayer, host, targetPlayerId);
 		}
-		return false;
+		
+		return true;
 	}
 
 	@Override

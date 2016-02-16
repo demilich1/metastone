@@ -7,6 +7,7 @@
 	"baseHp": 5,
 	"heroClass": "WARRIOR",
 	"rarity": "LEGENDARY",
+	"race": "MECH",
 	"description": "Battlecry: Shuffle a Mine into your opponent's deck. When drawn, it explodes for 10 damage.",
 	"battlecry": {
 		"spell": {
@@ -16,7 +17,6 @@
 		},
 		"resolvedLate": false
 	},
-	"race": "MECH",
 	"attributes": {
 		"BATTLECRY": true
 	},

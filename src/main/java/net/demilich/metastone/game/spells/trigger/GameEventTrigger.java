@@ -6,9 +6,11 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.logic.CustomCloneable;
+import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.condition.Condition;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerArg;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
+import net.demilich.metastone.game.targeting.TargetType;
 
 public abstract class GameEventTrigger extends CustomCloneable {
 
@@ -24,6 +26,25 @@ public abstract class GameEventTrigger extends CustomCloneable {
 		return (GameEventTrigger) super.clone();
 	}
 
+	public boolean determineTargetPlayer(GameEvent event, TargetPlayer targetPlayer, Entity host, int playerId) {
+		switch (targetPlayer) {
+		case ACTIVE:
+			return event.getGameContext().getActivePlayerId() == playerId;
+		case INACTIVE:
+			return event.getGameContext().getActivePlayerId() != playerId;
+		case BOTH:
+			return true;
+		case OPPONENT:
+			return host.getOwner() != playerId;
+		case OWNER:
+		case SELF:
+			return host.getOwner() == playerId;
+		default:
+			break;
+		}
+		return false;
+	}
+
 	protected abstract boolean fire(GameEvent event, Entity host);
 
 	public final boolean fires(GameEvent event, Entity host) {
@@ -36,8 +57,14 @@ public abstract class GameEventTrigger extends CustomCloneable {
 			event.getGameContext().getLogic().removeAttribute(host, Attribute.STEALTH);
 		}
 		
-		boolean ignoreHost = desc.getBool(EventTriggerArg.IGNORE_HOST);
-		if (ignoreHost && event.getEventTarget() == host) {
+		TargetType hostTargetType = (TargetType) desc.get(EventTriggerArg.HOST_TARGET_TYPE);
+		if (hostTargetType == TargetType.IGNORE_AS_TARGET && event.getEventTarget() == host) {
+			return false;
+		} else if (hostTargetType == TargetType.IGNORE_AS_SOURCE && event.getEventSource() == host) {
+			return false;
+		} else if (hostTargetType == TargetType.IGNORE_OTHER_TARGETS && event.getEventTarget() != host) {
+			return false;
+		} else if (hostTargetType == TargetType.IGNORE_OTHER_SOURCES && event.getEventSource() != host) {
 			return false;
 		}
 		

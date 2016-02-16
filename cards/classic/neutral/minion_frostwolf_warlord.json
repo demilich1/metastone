@@ -15,7 +15,7 @@
 			"target": "SELF",
 			"valueProvider": {
 				"class": "EntityCounter",
-				"target": "FRIENDLY_MINIONS"
+				"target": "OTHER_FRIENDLY_MINIONS"
 			}
 		},
 		"resolvedLate": false

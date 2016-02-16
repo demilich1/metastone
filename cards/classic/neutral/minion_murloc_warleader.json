@@ -7,10 +7,11 @@
 	"baseHp": 3,
 	"heroClass": "ANY",
 	"rarity": "EPIC",
+	"race": "MURLOC",
 	"description": "ALL other Murlocs have +2/+1.",
 	"aura": {
 		"class": "BuffAura",
-		"target": "ALL_MINIONS",
+		"target": "ALL_OTHER_MINIONS",
 		"attackBonus": 2,
 		"hpBonus": 1,
 		"filter": {
@@ -18,7 +19,6 @@
 			"race": "MURLOC"
 		}
 	},
-	"race": "MURLOC",
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

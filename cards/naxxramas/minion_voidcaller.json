@@ -7,6 +7,7 @@
 	"baseHp": 4,
 	"heroClass": "WARLOCK",
 	"rarity": "COMMON",
+	"race": "DEMON",
 	"description": "Deathrattle: Put a random Demon from your hand into the battlefield.",
 	"deathrattle": {
 		"class": "PutRandomMinionOnBoardSpell",
@@ -16,7 +17,6 @@
 			"race": "DEMON"
 		}
 	},
-	"race": "DEMON",
 	"attributes": {
 		"DEATHRATTLES": true
 	},
