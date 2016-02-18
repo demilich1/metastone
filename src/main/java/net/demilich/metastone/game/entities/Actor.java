@@ -72,6 +72,14 @@ public abstract class Actor extends Entity {
 		return Math.max(0, attack);
 	}
 
+	public int getBaseAttack() {
+		return getAttributeValue(Attribute.BASE_ATTACK);
+	}
+
+	public int getBaseHp() {
+		return getAttributeValue(Attribute.BASE_HP);
+	}
+
 	public BattlecryAction getBattlecry() {
 		return (BattlecryAction) getAttribute(Attribute.BATTLECRY);
 	}
