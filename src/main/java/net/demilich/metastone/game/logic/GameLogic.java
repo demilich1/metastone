@@ -80,6 +80,10 @@ import net.demilich.metastone.game.targeting.IdFactory;
 import net.demilich.metastone.game.targeting.TargetSelection;
 import net.demilich.metastone.utils.MathUtils;
 
+/**
+ * @author xx1266xg
+ *
+ */
 public class GameLogic implements Cloneable {
 
 	public static Logger logger = LoggerFactory.getLogger(GameLogic.class);
@@ -199,11 +203,11 @@ public class GameLogic implements Cloneable {
 		}
 		if (card.getCardType() == CardType.HERO_POWER) {
 			HeroPower power = (HeroPower) card;
-			int heroPowerUsages = getTotalAttributeValue(player, Attribute.HERO_POWER_USAGES);
+			int heroPowerUsages = getGreatestAttributeValue(player, Attribute.HERO_POWER_USAGES);
 			if (heroPowerUsages == 0) {
 				heroPowerUsages = 1;
 			}
-			if (power.hasBeenUsed() >= heroPowerUsages) {
+			if (heroPowerUsages != -1 && power.hasBeenUsed() >= heroPowerUsages) {
 				return false;
 			}
 		} else if (card.getCardType() == CardType.MINION) {
@@ -497,12 +501,12 @@ public class GameLogic implements Cloneable {
 	private void destroyWeapon(Weapon weapon) {
 		Player owner = context.getPlayer(weapon.getOwner());
 		resolveDeathrattles(owner, weapon);
-		weapon.onUnequip(context, owner);
 		if (owner.getHero().getWeapon() != null && owner.getHero().getWeapon().getId() == weapon.getId()) {
 			owner.getHero().setWeapon(null);
 		} else if (owner.getHero().getDestroyedWeapon() != null && owner.getHero().getDestroyedWeapon().getId() == weapon.getId()) {
 			owner.getHero().setDestroyedWeapon(null);
 		}
+		weapon.onUnequip(context, owner);
 		context.fireGameEvent(new WeaponDestroyedEvent(context, weapon));
 	}
 
@@ -602,7 +606,7 @@ public class GameLogic implements Cloneable {
 		if (currentWeapon != null) {
 			log("{} discards currently equipped weapon {}", player.getHero(), currentWeapon);
 			markAsDestroyed(currentWeapon);
-			checkForDeadEntities();
+			//checkForDeadEntities();
 		}
 		player.getStatistics().equipWeapon(weapon);
 		context.getEnvironment().remove(Environment.SUMMONED_WEAPON);
@@ -721,6 +725,36 @@ public class GameLogic implements Cloneable {
 		}
 
 		return defaultValue;
+	}
+
+	/**
+	 * Return the greatest value of the attribute from all Actors of a Player.
+	 * This method will return infinite if an Attribute value is negative, so
+	 * use this method with caution.
+	 * 
+	 * @param player
+	 * 			Which Player to check
+	 * @param attr
+	 * 			Which attribute to find
+	 * @return
+	 * 			The highest value from all sources. -1 is considered infinite.
+	 */
+	public int getGreatestAttributeValue(Player player, Attribute attr) {
+		int greatest = Math.max(-1, player.getHero().getAttributeValue(attr));
+		if (greatest == -1) {
+			return greatest;
+		}
+		for (Entity minion : player.getMinions()) {
+			if (minion.hasAttribute(attr)) {
+				if (minion.getAttributeValue(attr) > greatest) {
+					greatest = minion.getAttributeValue(attr);
+				}
+				if (minion.getAttributeValue(attr) == -1) {
+					return -1;
+				}
+			}
+		}
+		return greatest;
 	}
 
 	public MatchResult getMatchResult(Player player, Player opponent) {
