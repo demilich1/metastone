@@ -15,7 +15,8 @@
 			"cardCostModifier": {
 				"class": "CardCostModifier",
 				"cardType": "HERO_POWER",
-				"value": "-2",
+				"operation": "SUBTRACT",
+				"value": "2",
 				"expirationTrigger": {
 					"class": "InspireTrigger",
 					"targetPlayer": "SELF"

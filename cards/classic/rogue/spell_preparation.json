@@ -13,7 +13,8 @@
 		"cardCostModifier": {
 			"class": "OneTurnCostModifier",
 			"cardType": "SPELL",
-			"value": -3,
+			"operation": "SUBTRACT",
+			"value": 3,
 			"expirationTrigger": {
 				"class": "CardPlayedTrigger",
 				"targetPlayer": "SELF",

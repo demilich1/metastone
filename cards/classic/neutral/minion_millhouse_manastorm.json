@@ -16,7 +16,8 @@
 				"class": "OneTurnCostModifier",
 				"cardType": "SPELL",
 				"targetPlayer": "OPPONENT",
-				"value": -99
+				"operation": "SET",
+				"value": 0
 			}
 		},
 		"resolvedLate": false

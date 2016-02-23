@@ -8,6 +8,9 @@ Examples: Ice Block, Frost Elemental, Conceal
 “attribute”: Attribute. The Attribute you want to add to the target.
 “revertTrigger”: Optional Trigger. The trigger to revert the added Attribute.
 
+AddCardCostModifierSpell
+[]
+
 AddDeathrattleSpell
 Adds a Deathrattle to the target.
 Examples: Explorer’s Hat, Ancestral Spirit, Soul of the Forest
@@ -46,7 +49,11 @@ Examples: Captain Greenskin, Deadly Poison, Upgrade!
 “hpBonus”: Optional Integer. The amount of Durability to modify the target Weapon.
 
 CardCostModifierSpell
-[]
+Gives a card mana cost modifier to the target. This should target card types,
+as opposed to specific cards.
+See: AddCardCostModifierSpell
+Examples: Loatheb, Millhouse Manastorm, Dragon Consort
+"cardCostModifier": CardCostModifier. The CardCostModifier to add to the target.
 
 CastRandomSpellSpell
 []
@@ -205,9 +212,6 @@ Examples: Mad Bomber, Arcane Missiles, Flamewaker
 “howMany”: The number of missiles to fire.
 
 ModifyAttributeSpell
-[]
-
-ModifyCardCostSpell {}: Combine with Attribute Spell? (Only Thaurissen uses it, wtf?)
 []
 
 ModifyDurabilitySpell {}: Combine with Attribute Spell? (Only applies to Weapons, so might as well…)

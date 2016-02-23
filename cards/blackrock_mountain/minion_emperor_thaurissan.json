@@ -14,8 +14,14 @@
 			"targetPlayer": "SELF"
 		},
 		"spell": {
-			"class": "ModifyCardCostSpell",
-			"value": -1
+			"class": "AddCardCostModifierSpell",
+			"target": "FRIENDLY_HERO",
+			"cardCostModifier": {
+				"class": "CardCostModifier",
+				"target": "FRIENDLY_HAND",
+				"operation": "SUBTRACT",
+				"value": 1
+			}
 		}
 	},
 	"collectible": true,

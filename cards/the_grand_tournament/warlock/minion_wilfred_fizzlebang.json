@@ -20,7 +20,8 @@
 			"cardCostModifier": {
 				"class": "CardCostModifier",
 				"target": "EVENT_TARGET",
-				"fixedValue": 0
+				"operation": "SET",
+				"value": 0
 			}
 		}
 	},

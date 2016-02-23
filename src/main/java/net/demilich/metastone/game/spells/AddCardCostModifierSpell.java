@@ -1,10 +1,11 @@
 package net.demilich.metastone.game.spells;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
@@ -30,9 +31,18 @@ public class AddCardCostModifierSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		CardCostModifierDesc cardCostModifierDesc = (CardCostModifierDesc) desc.get(SpellArg.CARD_COST_MODIFIER);
 		if (cardCostModifierDesc.contains(CardCostModifierArg.TARGET)) {
-			Card card = (Card) context.resolveSingleTarget((EntityReference) cardCostModifierDesc.get(CardCostModifierArg.TARGET));
+			// First, resolve the targets, so that you can get the current cards this affects.
+			// This spell SPECIFICALLY targets cards, even if those cards would change. So,
+			// targeting FRIENDLY_HAND would pull cards in the hand NOW, as opposed to cards
+			// that will be added next turn. This is the difference between CardCostModifierSpell
+			// and AddCardCostModifierSpell
+			List<Entity> cards = context.resolveTarget(player, source, (EntityReference) cardCostModifierDesc.get(CardCostModifierArg.TARGET));
+			List<Integer> cardIds = new ArrayList<Integer>();
+			for (Entity card : cards) {
+				cardIds.add(card.getId());
+			}
 			cardCostModifierDesc = cardCostModifierDesc.removeArg(CardCostModifierArg.TARGET);
-			cardCostModifierDesc = cardCostModifierDesc.addArg(CardCostModifierArg.ID, card.getId());
+			cardCostModifierDesc = cardCostModifierDesc.addArg(CardCostModifierArg.CARD_IDS, cardIds);
 		}
 		CardCostModifier cardCostModifier = cardCostModifierDesc.create();
 		cardCostModifier.setHost(target);

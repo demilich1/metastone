@@ -17,7 +17,8 @@
 				"class": "CardCostModifier",
 				"cardType": "MINION",
 				"race": "DRAGON",
-				"value": "-2",
+				"operation": "SUBTRACT",
+				"value": "2",
 				"expirationTrigger": {
 					"class": "CardPlayedTrigger",
 					"targetPlayer": "SELF",

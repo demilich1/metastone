@@ -10,7 +10,8 @@
 	"description": "Your cards cost (5).",
 	"cardCostModifier": {
 		"class": "CardCostModifier",
-		"fixedValue": 5
+		"operation": "SET",
+		"value": 5
 	},
 	"collectible": true,
 	"set": "LEAGUE_OF_EXPLORERS",

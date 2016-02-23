@@ -15,7 +15,8 @@
 			"cardCostModifier": {
 				"class": "OneTurnCostModifier",
 				"cardType": "SPELL",
-				"value": "-99",
+				"operation": "SET",
+				"value": 0,
 				"expirationTrigger": {
 					"class": "SecretPlayedTrigger"
 				},
