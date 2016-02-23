@@ -80,10 +80,6 @@ import net.demilich.metastone.game.targeting.IdFactory;
 import net.demilich.metastone.game.targeting.TargetSelection;
 import net.demilich.metastone.utils.MathUtils;
 
-/**
- * @author xx1266xg
- *
- */
 public class GameLogic implements Cloneable {
 
 	public static Logger logger = LoggerFactory.getLogger(GameLogic.class);
