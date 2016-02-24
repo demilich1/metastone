@@ -565,7 +565,7 @@ public class GameLogic implements Cloneable {
 		hero.removeAttribute(Attribute.COMBO);
 		hero.activateWeapon(false);
 		log("{} ends his turn.", player.getName());
-		context.fireGameEvent(new TurnEndEvent(context, player.getId()));
+		context.fireGameEvent(new TurnEndEvent(context, playerId));
 		for (Iterator<CardCostModifier> iterator = context.getCardCostModifiers().iterator(); iterator.hasNext();) {
 			CardCostModifier cardCostModifier = iterator.next();
 			if (cardCostModifier.isExpired()) {

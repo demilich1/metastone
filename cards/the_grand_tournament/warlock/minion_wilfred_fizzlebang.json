@@ -15,7 +15,7 @@
 			"targetPlayer": "SELF"
 		},
 		"spell": {
-			"class": "AddCardCostModifierSpell",
+			"class": "CardCostModifierSpell",
 			"target": "FRIENDLY_HERO",
 			"cardCostModifier": {
 				"class": "CardCostModifier",

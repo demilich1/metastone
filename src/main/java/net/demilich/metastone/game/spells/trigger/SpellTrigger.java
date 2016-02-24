@@ -73,10 +73,6 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 
 	@Override
 	public boolean interestedIn(GameEventType eventType) {
-		if (oneTurn && eventType == GameEventType.TURN_END && primaryTrigger.interestedIn() != GameEventType.TURN_START) {
-			return true;
-		}
-		
 		boolean result = primaryTrigger.interestedIn() == eventType || primaryTrigger.interestedIn() == GameEventType.ALL;
 		if (secondaryTrigger != null) {
 			result |= secondaryTrigger.interestedIn() == eventType || secondaryTrigger.interestedIn() == GameEventType.ALL;

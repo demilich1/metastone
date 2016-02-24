@@ -169,7 +169,7 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 	@Override
 	public void onGameEvent(GameEvent event) {
 		Entity host = event.getGameContext().resolveSingleTarget(getHostReference());
-		if (expirationTrigger != null && expirationTrigger.interestedIn() == event.getEventType() && expirationTrigger.fires(event, host)) {
+		if (expirationTrigger != null && interestedIn(event.getEventType()) && expirationTrigger.fires(event, host)) {
 			expire();
 		}
 	}
@@ -189,7 +189,7 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 			if (value == 0) {
 				value = 1;
 			}
-			return currentManaCost / value; 
+			return currentManaCost / value;
 		case MULTIPLY:
 			return currentManaCost * value;
 		case NEGATE:

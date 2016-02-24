@@ -13,11 +13,15 @@
 			"class": "CardCostModifierSpell",
 			"target": "FRIENDLY_HERO",
 			"cardCostModifier": {
-				"class": "OneTurnCostModifier",
+				"class": "CardCostModifier",
 				"cardType": "HERO_POWER",
 				"targetPlayer": "OPPONENT",
 				"operation": "ADD",
-				"value": 5
+				"value": 5,
+				"expirationTrigger": {
+					"class": "TurnEndTrigger",
+					"targetPlayer": "OPPONENT"
+				}
 			}
 		},
 		"resolvedLate": false
