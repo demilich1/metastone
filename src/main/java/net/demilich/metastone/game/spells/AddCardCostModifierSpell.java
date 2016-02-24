@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
@@ -15,6 +18,8 @@ import net.demilich.metastone.game.spells.desc.manamodifier.CardCostModifierDesc
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class AddCardCostModifierSpell extends Spell {
+	
+	Logger logger = LoggerFactory.getLogger(AddCardCostModifierSpell.class);
 
 	public static SpellDesc create(EntityReference target, CardCostModifier cardCostModifier) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(AddCardCostModifierSpell.class);
@@ -39,6 +44,7 @@ public class AddCardCostModifierSpell extends Spell {
 			List<Entity> cards = context.resolveTarget(player, source, (EntityReference) cardCostModifierDesc.get(CardCostModifierArg.TARGET));
 			List<Integer> cardIds = new ArrayList<Integer>();
 			for (Entity card : cards) {
+				logger.error(card.getName());
 				cardIds.add(card.getId());
 			}
 			cardCostModifierDesc = cardCostModifierDesc.removeArg(CardCostModifierArg.TARGET);

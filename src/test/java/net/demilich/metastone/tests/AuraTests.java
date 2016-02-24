@@ -166,10 +166,10 @@ public class AuraTests extends BasicTests {
 		Minion dummy = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_target_dummy"));
 		Assert.assertEquals(dummy.getAttack(), 1);
 		Assert.assertEquals(dummy.getHp(), 2);
-		Assert.assertEquals(dummy.hasAttribute(Attribute.UNTARGETABLE_BY_SPELLS), false);
+		Assert.assertEquals(dummy.hasAttribute(Attribute.AURA_UNTARGETABLE_BY_SPELLS), false);
 		
 		playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_wee_spellstopper"));
-		Assert.assertEquals(dummy.hasAttribute(Attribute.UNTARGETABLE_BY_SPELLS), true);
+		Assert.assertEquals(dummy.hasAttribute(Attribute.AURA_UNTARGETABLE_BY_SPELLS), true);
 		
 		context.getLogic().endTurn(player.getId());
 
@@ -183,7 +183,7 @@ public class AuraTests extends BasicTests {
 		context.getLogic().performGameAction(opponent.getId(), action);
 		
 		Minion facelessCopy = getSummonedMinion(opponent.getMinions());
-		Assert.assertEquals(facelessCopy.hasAttribute(Attribute.UNTARGETABLE_BY_SPELLS), false);
+		Assert.assertEquals(facelessCopy.hasAttribute(Attribute.AURA_UNTARGETABLE_BY_SPELLS), false);
 		Assert.assertEquals(facelessCopy.getAttack(), 0);
 	}
 

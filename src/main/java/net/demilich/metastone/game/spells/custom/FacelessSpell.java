@@ -2,6 +2,7 @@ package net.demilich.metastone.game.spells.custom;
 
 import java.util.Map;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -26,6 +27,9 @@ public class FacelessSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Minion template = (Minion) target;
 		Minion clone = template.clone();
+		clone.removeAttribute(Attribute.AURA_ATTACK_BONUS);
+		clone.removeAttribute(Attribute.AURA_HP_BONUS);
+		clone.removeAttribute(Attribute.AURA_UNTARGETABLE_BY_SPELLS);
 		clone.setSpellTrigger(null);
 		clone.setCardCostModifier(null);
 

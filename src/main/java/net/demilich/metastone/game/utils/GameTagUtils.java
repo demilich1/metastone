@@ -49,6 +49,7 @@ public class GameTagUtils {
 		case SUMMONING_SICKNESS:
 		case TAUNT:
 		case UNTARGETABLE_BY_SPELLS:
+		case AURA_UNTARGETABLE_BY_SPELLS:
 		case WINDFURY:
 			return TagValueType.BOOLEAN;
 		case BASE_ATTACK:

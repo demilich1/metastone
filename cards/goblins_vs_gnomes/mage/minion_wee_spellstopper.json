@@ -11,7 +11,7 @@
 	"aura": {
 		"class": "AttributeAura",
 		"target": "ADJACENT_MINIONS",
-		"attribute": "UNTARGETABLE_BY_SPELLS"
+		"attribute": "AURA_UNTARGETABLE_BY_SPELLS"
 	},
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
