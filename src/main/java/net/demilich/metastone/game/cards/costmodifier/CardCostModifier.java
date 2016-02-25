@@ -169,7 +169,7 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 	@Override
 	public void onGameEvent(GameEvent event) {
 		Entity host = event.getGameContext().resolveSingleTarget(getHostReference());
-		if (expirationTrigger != null && interestedIn(event.getEventType()) && expirationTrigger.fires(event, host)) {
+		if (expirationTrigger != null && event.getEventType() == expirationTrigger.interestedIn() && expirationTrigger.fires(event, host)) {
 			expire();
 		}
 	}
@@ -182,24 +182,26 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 	public int process(Card card, int currentManaCost) {
 		AlgebraicOperation operation = (AlgebraicOperation) desc.get(CardCostModifierArg.OPERATION);
 		int value = desc.getInt(CardCostModifierArg.VALUE);
-		switch (operation) {
-		case ADD:
-			return currentManaCost + value;
-		case DIVIDE:
-			if (value == 0) {
-				value = 1;
+		if (operation != null) {
+			switch (operation) {
+			case ADD:
+				return currentManaCost + value;
+			case DIVIDE:
+				if (value == 0) {
+					value = 1;
+				}
+				return currentManaCost / value;
+			case MULTIPLY:
+				return currentManaCost * value;
+			case NEGATE:
+				return -currentManaCost;
+			case SET:
+				return value;
+			case SUBTRACT:
+				return currentManaCost - value;
+			default:
+				break;
 			}
-			return currentManaCost / value;
-		case MULTIPLY:
-			return currentManaCost * value;
-		case NEGATE:
-			return -currentManaCost;
-		case SET:
-			return value;
-		case SUBTRACT:
-			return currentManaCost - value;
-		default:
-			break;
 		}
 		int modifiedManaCost = currentManaCost + desc.getInt(CardCostModifierArg.VALUE);
 		return modifiedManaCost;

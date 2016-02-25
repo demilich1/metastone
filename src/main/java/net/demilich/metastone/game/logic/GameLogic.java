@@ -590,6 +590,9 @@ public class GameLogic implements Cloneable {
 		weapon.setId(idFactory.generateId());
 		context.getEnvironment().put(Environment.SUMMONED_WEAPON, weapon.getReference());
 		Weapon currentWeapon = player.getHero().getWeapon();
+		if (player.getHero().getDestroyedWeapon() != null) {
+			player.getSetAsideZone().add(player.getHero().getDestroyedWeapon());
+		}
 		player.getHero().setDestroyedWeapon(currentWeapon);
 
 		log("{} equips weapon {}", player.getHero(), weapon);
