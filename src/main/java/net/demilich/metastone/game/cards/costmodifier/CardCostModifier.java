@@ -1,5 +1,8 @@
 package net.demilich.metastone.game.cards.costmodifier;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.cards.Card;
@@ -13,11 +16,11 @@ import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.manamodifier.CardCostModifierArg;
 import net.demilich.metastone.game.spells.desc.manamodifier.CardCostModifierDesc;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
+import net.demilich.metastone.game.spells.desc.valueprovider.AlgebraicOperation;
 import net.demilich.metastone.game.spells.trigger.GameEventTrigger;
 import net.demilich.metastone.game.spells.trigger.IGameEventListener;
 import net.demilich.metastone.game.spells.trigger.TriggerLayer;
 import net.demilich.metastone.game.targeting.EntityReference;
-import net.demilich.metastone.game.targeting.IdFactory;
 
 public class CardCostModifier extends CustomCloneable implements IGameEventListener {
 
@@ -41,7 +44,7 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 			return false;
 		}
 		
-		if (getRequiredCardId() != IdFactory.UNASSIGNED && card.getId() != getRequiredCardId()) {
+		if (!getRequiredCardIds().isEmpty() && !getRequiredCardIds().contains(card.getId())) {
 			return false;
 		}
 
@@ -127,11 +130,12 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 		return (Attribute) desc.get(CardCostModifierArg.REQUIRED_ATTRIBUTE);
 	}
 	
-	protected int getRequiredCardId() {
-		if (!desc.contains(CardCostModifierArg.ID)) {
-			return IdFactory.UNASSIGNED;
+	@SuppressWarnings("unchecked")
+	protected List<Integer> getRequiredCardIds() {
+		if (!desc.contains(CardCostModifierArg.CARD_IDS)) {
+			return new ArrayList<Integer>();
 		}
-		return desc.getInt(CardCostModifierArg.ID);
+		return (List<Integer>) desc.get(CardCostModifierArg.CARD_IDS);
 	}
 
 	protected Race getRequiredRace() {
@@ -165,7 +169,7 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 	@Override
 	public void onGameEvent(GameEvent event) {
 		Entity host = event.getGameContext().resolveSingleTarget(getHostReference());
-		if (expirationTrigger != null && expirationTrigger.interestedIn() == event.getEventType() && expirationTrigger.fires(event, host)) {
+		if (expirationTrigger != null && event.getEventType() == expirationTrigger.interestedIn() && expirationTrigger.fires(event, host)) {
 			expire();
 		}
 	}
@@ -176,8 +180,28 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 	}
 
 	public int process(Card card, int currentManaCost) {
-		if (desc.contains(CardCostModifierArg.FIXED_VALUE)) {
-			return desc.getInt(CardCostModifierArg.FIXED_VALUE);
+		AlgebraicOperation operation = (AlgebraicOperation) desc.get(CardCostModifierArg.OPERATION);
+		int value = desc.getInt(CardCostModifierArg.VALUE);
+		if (operation != null) {
+			switch (operation) {
+			case ADD:
+				return currentManaCost + value;
+			case DIVIDE:
+				if (value == 0) {
+					value = 1;
+				}
+				return currentManaCost / value;
+			case MULTIPLY:
+				return currentManaCost * value;
+			case NEGATE:
+				return -currentManaCost;
+			case SET:
+				return value;
+			case SUBTRACT:
+				return currentManaCost - value;
+			default:
+				break;
+			}
 		}
 		int modifiedManaCost = currentManaCost + desc.getInt(CardCostModifierArg.VALUE);
 		return modifiedManaCost;

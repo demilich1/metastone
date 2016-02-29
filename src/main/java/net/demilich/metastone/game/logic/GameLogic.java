@@ -199,11 +199,11 @@ public class GameLogic implements Cloneable {
 		}
 		if (card.getCardType() == CardType.HERO_POWER) {
 			HeroPower power = (HeroPower) card;
-			int heroPowerUsages = getTotalAttributeValue(player, Attribute.HERO_POWER_USAGES);
+			int heroPowerUsages = getGreatestAttributeValue(player, Attribute.HERO_POWER_USAGES);
 			if (heroPowerUsages == 0) {
 				heroPowerUsages = 1;
 			}
-			if (power.hasBeenUsed() >= heroPowerUsages) {
+			if (heroPowerUsages != -1 && power.hasBeenUsed() >= heroPowerUsages) {
 				return false;
 			}
 		} else if (card.getCardType() == CardType.MINION) {
@@ -497,12 +497,12 @@ public class GameLogic implements Cloneable {
 	private void destroyWeapon(Weapon weapon) {
 		Player owner = context.getPlayer(weapon.getOwner());
 		resolveDeathrattles(owner, weapon);
-		weapon.onUnequip(context, owner);
 		if (owner.getHero().getWeapon() != null && owner.getHero().getWeapon().getId() == weapon.getId()) {
 			owner.getHero().setWeapon(null);
 		} else if (owner.getHero().getDestroyedWeapon() != null && owner.getHero().getDestroyedWeapon().getId() == weapon.getId()) {
 			owner.getHero().setDestroyedWeapon(null);
 		}
+		weapon.onUnequip(context, owner);
 		context.fireGameEvent(new WeaponDestroyedEvent(context, weapon));
 	}
 
@@ -565,7 +565,7 @@ public class GameLogic implements Cloneable {
 		hero.removeAttribute(Attribute.COMBO);
 		hero.activateWeapon(false);
 		log("{} ends his turn.", player.getName());
-		context.fireGameEvent(new TurnEndEvent(context, player.getId()));
+		context.fireGameEvent(new TurnEndEvent(context, playerId));
 		for (Iterator<CardCostModifier> iterator = context.getCardCostModifiers().iterator(); iterator.hasNext();) {
 			CardCostModifier cardCostModifier = iterator.next();
 			if (cardCostModifier.isExpired()) {
@@ -590,6 +590,9 @@ public class GameLogic implements Cloneable {
 		weapon.setId(idFactory.generateId());
 		context.getEnvironment().put(Environment.SUMMONED_WEAPON, weapon.getReference());
 		Weapon currentWeapon = player.getHero().getWeapon();
+		if (player.getHero().getDestroyedWeapon() != null) {
+			player.getSetAsideZone().add(player.getHero().getDestroyedWeapon());
+		}
 		player.getHero().setDestroyedWeapon(currentWeapon);
 
 		log("{} equips weapon {}", player.getHero(), weapon);
@@ -602,7 +605,7 @@ public class GameLogic implements Cloneable {
 		if (currentWeapon != null) {
 			log("{} discards currently equipped weapon {}", player.getHero(), currentWeapon);
 			markAsDestroyed(currentWeapon);
-			checkForDeadEntities();
+			//checkForDeadEntities();
 		}
 		player.getStatistics().equipWeapon(weapon);
 		context.getEnvironment().remove(Environment.SUMMONED_WEAPON);
@@ -721,6 +724,36 @@ public class GameLogic implements Cloneable {
 		}
 
 		return defaultValue;
+	}
+
+	/**
+	 * Return the greatest value of the attribute from all Actors of a Player.
+	 * This method will return infinite if an Attribute value is negative, so
+	 * use this method with caution.
+	 * 
+	 * @param player
+	 * 			Which Player to check
+	 * @param attr
+	 * 			Which attribute to find
+	 * @return
+	 * 			The highest value from all sources. -1 is considered infinite.
+	 */
+	public int getGreatestAttributeValue(Player player, Attribute attr) {
+		int greatest = Math.max(-1, player.getHero().getAttributeValue(attr));
+		if (greatest == -1) {
+			return greatest;
+		}
+		for (Entity minion : player.getMinions()) {
+			if (minion.hasAttribute(attr)) {
+				if (minion.getAttributeValue(attr) > greatest) {
+					greatest = minion.getAttributeValue(attr);
+				}
+				if (minion.getAttributeValue(attr) == -1) {
+					return -1;
+				}
+			}
+		}
+		return greatest;
 	}
 
 	public MatchResult getMatchResult(Player player, Player opponent) {
@@ -1419,6 +1452,7 @@ public class GameLogic implements Cloneable {
 		immuneToSilence.add(Attribute.SUMMONING_SICKNESS);
 		immuneToSilence.add(Attribute.AURA_ATTACK_BONUS);
 		immuneToSilence.add(Attribute.AURA_HP_BONUS);
+		immuneToSilence.add(Attribute.AURA_UNTARGETABLE_BY_SPELLS);
 		immuneToSilence.add(Attribute.RACE);
 		immuneToSilence.add(Attribute.NUMBER_OF_ATTACKS);
 

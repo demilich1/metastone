@@ -50,7 +50,7 @@ public class TargetLogic {
 				continue;
 			}
 			if ((action.getActionType() == ActionType.SPELL || action.getActionType() == ActionType.HERO_POWER)
-					&& entity.hasAttribute(Attribute.UNTARGETABLE_BY_SPELLS)) {
+					&& (entity.hasAttribute(Attribute.UNTARGETABLE_BY_SPELLS) || (entity.hasAttribute(Attribute.AURA_UNTARGETABLE_BY_SPELLS)))) {
 				continue;
 			}
 

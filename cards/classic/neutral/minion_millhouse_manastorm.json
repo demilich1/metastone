@@ -13,10 +13,15 @@
 			"class": "CardCostModifierSpell",
 			"target": "FRIENDLY_HERO",
 			"cardCostModifier": {
-				"class": "OneTurnCostModifier",
+				"class": "CardCostModifier",
 				"cardType": "SPELL",
 				"targetPlayer": "OPPONENT",
-				"value": -99
+				"operation": "SET",
+				"value": 0,
+				"expirationTrigger": {
+					"class": "TurnEndTrigger",
+					"targetPlayer": "OPPONENT"
+				}
 			}
 		},
 		"resolvedLate": false

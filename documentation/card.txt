@@ -1,0 +1,31 @@
+Generic Information
+
+"id": The internal identifier for the card. This must be unique, so that cards
+	can be distinguished from another card.
+"name": The name of the card. This is the displayed name on the card, and does
+	not have to be unique.
+"baseManaCost": This is the base mana cost for the card before any mana
+	modification.
+"type": The type of card the card is. There are several different types of
+	cards:
+		MINION
+		SPELL
+		CHOOSE_ONE
+		WEAPON
+		HERO_POWER
+		HERO
+"heroClass": The class that the card belongs to or ANY if the card is neutral.
+"rarity": What rarity the card is. These rarities are:
+		FREE
+		COMMON
+		RARE
+		EPIC
+		LEGENDARY
+"set": Which card set the card belongs to. Currently, these are:
+		CLASSIC
+		NAXXRAMAS
+		GOBLINS_VS_GNOMES
+		BLACKROCK_MOUNTAIN
+		THE_GRAND_TOURNAMENT
+		LEAGUE_OF_EXPLORERS
+

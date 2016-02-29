@@ -62,7 +62,8 @@ public abstract class Actor extends Entity {
 	protected boolean displayGameTag(Attribute tag) {
 		return tag == Attribute.CHARGE || tag == Attribute.ENRAGED || tag == Attribute.FROZEN || tag == Attribute.DIVINE_SHIELD
 				|| tag == Attribute.WINDFURY || tag == Attribute.SPELL_DAMAGE || tag == Attribute.STEALTH || tag == Attribute.TAUNT
-				|| tag == Attribute.CANNOT_ATTACK || tag == Attribute.UNTARGETABLE_BY_SPELLS || tag == Attribute.MEGA_WINDFURY;
+				|| tag == Attribute.CANNOT_ATTACK || tag == Attribute.UNTARGETABLE_BY_SPELLS || tag == Attribute.AURA_UNTARGETABLE_BY_SPELLS
+				|| tag == Attribute.MEGA_WINDFURY;
 	}
 
 	public int getAttack() {
@@ -70,6 +71,14 @@ public abstract class Actor extends Entity {
 				+ getAttributeValue(Attribute.AURA_ATTACK_BONUS) + getAttributeValue(Attribute.TEMPORARY_ATTACK_BONUS)
 				+ getAttributeValue(Attribute.CONDITIONAL_ATTACK_BONUS);
 		return Math.max(0, attack);
+	}
+
+	public int getBaseAttack() {
+		return getAttributeValue(Attribute.BASE_ATTACK);
+	}
+
+	public int getBaseHp() {
+		return getAttributeValue(Attribute.BASE_HP);
 	}
 
 	public BattlecryAction getBattlecry() {

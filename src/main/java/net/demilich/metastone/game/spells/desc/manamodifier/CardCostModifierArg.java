@@ -5,7 +5,6 @@ public enum CardCostModifierArg {
 	CARD_TYPE,
 	REQUIRED_ATTRIBUTE,
 	EXPIRATION_TRIGGER,
-	FIXED_VALUE,
 	MIN_VALUE,
 	VALUE,
 	RACE,
@@ -13,6 +12,9 @@ public enum CardCostModifierArg {
 	TOGGLE_ON_TRIGGER,
 	TOGGLE_OFF_TRIGGER,
 	TARGET,
-	ID,
+	OPERATION,
+	
+	// Internal use only
+	CARD_IDS,
 
 }

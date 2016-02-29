@@ -3,6 +3,7 @@ package net.demilich.metastone.tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
@@ -150,6 +151,40 @@ public class AuraTests extends BasicTests {
 		Assert.assertEquals(auraMinion.getOwner(), player.getId());
 		Assert.assertEquals(minion1.getAttack(), 2);
 		Assert.assertEquals(opponentMinion.getAttack(), 1);
+	}
+	
+	@Test
+	public void testOpponentAuraPlusFaceless() {
+		GameContext context = createContext(HeroClass.PRIEST, HeroClass.WARRIOR);
+		Player player = context.getPlayer1();
+		Player opponent = context.getPlayer2();
+
+		Minion wolf = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_dire_wolf_alpha"));
+		Assert.assertEquals(wolf.getAttack(), 2);
+		Assert.assertEquals(wolf.getHp(), 2);
+
+		Minion dummy = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_target_dummy"));
+		Assert.assertEquals(dummy.getAttack(), 1);
+		Assert.assertEquals(dummy.getHp(), 2);
+		Assert.assertEquals(dummy.hasAttribute(Attribute.AURA_UNTARGETABLE_BY_SPELLS), false);
+		
+		playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_wee_spellstopper"));
+		Assert.assertEquals(dummy.hasAttribute(Attribute.AURA_UNTARGETABLE_BY_SPELLS), true);
+		
+		context.getLogic().endTurn(player.getId());
+
+		TestBehaviour behaviour = (TestBehaviour) opponent.getBehaviour();
+		behaviour.setTargetPreference(dummy.getReference());
+
+		Card facelessCard = CardCatalogue.getCardById("minion_faceless_manipulator");
+		context.getLogic().receiveCard(opponent.getId(), facelessCard);
+		GameAction action = facelessCard.play();
+		action.setTarget(dummy);
+		context.getLogic().performGameAction(opponent.getId(), action);
+		
+		Minion facelessCopy = getSummonedMinion(opponent.getMinions());
+		Assert.assertEquals(facelessCopy.hasAttribute(Attribute.AURA_UNTARGETABLE_BY_SPELLS), false);
+		Assert.assertEquals(facelessCopy.getAttack(), 0);
 	}
 
 }

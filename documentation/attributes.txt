@@ -113,8 +113,8 @@ Determines if a card is a Secret.
 COMBO
 Determines if a card has Combo.
 
-OVERLOAD
-Determines how much Overload a card gives.
+OVERLOAD: X
+When the card is played, the player overloads for X.
 
 CHOOSE_ONE
 Determines if a Card has Choose One.

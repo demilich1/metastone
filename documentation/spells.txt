@@ -46,7 +46,9 @@ Examples: Captain Greenskin, Deadly Poison, Upgrade!
 “hpBonus”: Optional Integer. The amount of Durability to modify the target Weapon.
 
 CardCostModifierSpell
-[]
+Gives a mana cost modifier to the target card. This should target card types or specific cards.
+Examples: Loatheb, Millhouse Manastorm, Dragon Consort, Wilfred Fizzlebang
+"cardCostModifier": CardCostModifier. The CardCostModifier to add to the target.
 
 CastRandomSpellSpell
 []
@@ -137,7 +139,7 @@ Examples: Museum Curator, Raven Idol, Dark Peddler
 “howMany”: Optional Integer. Default is 3. The number of Card options.
 
 DoubleAttackSpell
-Doubles the Attack of the target. Also double temporary Attack.
+Doubles the Attack of the target. Also doubles temporary Attack.
 Examples: Blessed Champion, Gahz’rilla
 
 DrawCardAndDoSomethingSpell {}: Consider merging with DrawCardSpell?
@@ -207,9 +209,6 @@ Examples: Mad Bomber, Arcane Missiles, Flamewaker
 ModifyAttributeSpell
 []
 
-ModifyCardCostSpell {}: Combine with Attribute Spell? (Only Thaurissen uses it, wtf?)
-[]
-
 ModifyDurabilitySpell {}: Combine with Attribute Spell? (Only applies to Weapons, so might as well…)
 []
 
@@ -220,7 +219,7 @@ MultiTargetDamageSpell {}: Works the same as MissilesSpell, currently.
 []
 
 NullSpell
-A Spell that does nothing.
+A Spell that does nothing. Used on cards that passively activate.
 Examples: Burrowing Mine, Ambushed!, Cursed!
 
 PutCopyInHandSpell
