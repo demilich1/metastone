@@ -3,11 +3,11 @@
 [Setup]
 AppId={{fxApplication}}
 AppName=Metastone
-AppVersion=0.9.9
+AppVersion=1.0.0
 AppVerName=Metastone
 AppPublisher=demilich
 AppComments=MetaStone
-AppCopyright=Copyright (C) 2015
+AppCopyright=Copyright (C) 2016
 ;AppPublisherURL=http://java.com/
 ;AppSupportURL=http://java.com/
 ;AppUpdatesURL=http://java.com/

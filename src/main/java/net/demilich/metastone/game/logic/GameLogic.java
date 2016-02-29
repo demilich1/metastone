@@ -97,6 +97,8 @@ public class GameLogic implements Cloneable {
 
 	public static final int WINDFURY_ATTACKS = 2;
 	public static final int MEGA_WINDFURY_ATTACKS = 4;
+	
+	private static final int INFINITE = -1;
 
 	private static boolean hasPlayerLost(Player player) {
 		return player.getHero().getHp() < 1 || player.getHero().hasAttribute(Attribute.DESTROYED);
@@ -203,7 +205,7 @@ public class GameLogic implements Cloneable {
 			if (heroPowerUsages == 0) {
 				heroPowerUsages = 1;
 			}
-			if (heroPowerUsages != -1 && power.hasBeenUsed() >= heroPowerUsages) {
+			if (heroPowerUsages != INFINITE && power.hasBeenUsed() >= heroPowerUsages) {
 				return false;
 			}
 		} else if (card.getCardType() == CardType.MINION) {
@@ -739,8 +741,8 @@ public class GameLogic implements Cloneable {
 	 * 			The highest value from all sources. -1 is considered infinite.
 	 */
 	public int getGreatestAttributeValue(Player player, Attribute attr) {
-		int greatest = Math.max(-1, player.getHero().getAttributeValue(attr));
-		if (greatest == -1) {
+		int greatest = Math.max(INFINITE, player.getHero().getAttributeValue(attr));
+		if (greatest == INFINITE) {
 			return greatest;
 		}
 		for (Entity minion : player.getMinions()) {
@@ -748,8 +750,8 @@ public class GameLogic implements Cloneable {
 				if (minion.getAttributeValue(attr) > greatest) {
 					greatest = minion.getAttributeValue(attr);
 				}
-				if (minion.getAttributeValue(attr) == -1) {
-					return -1;
+				if (minion.getAttributeValue(attr) == INFINITE) {
+					return INFINITE;
 				}
 			}
 		}
