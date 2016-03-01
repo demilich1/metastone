@@ -1,6 +1,6 @@
 {
-	"id": "spell_beneath_the_ground",
-	"name": "Beneath the Ground",
+	"id": "spell_beneath_the_grounds",
+	"name": "Beneath the Grounds",
 	"baseManaCost": 3,
 	"type": "SPELL",
 	"heroClass": "ROGUE",
