@@ -1,4 +1,6 @@
-Generic Information
+General Information
+
+This information is used on all card types.
 
 "id": The internal identifier for the card. This must be unique, so that cards
 	can be distinguished from another card.
@@ -21,6 +23,10 @@ Generic Information
 		RARE
 		EPIC
 		LEGENDARY
+"description": The card text that is displayed on the card.
+"manaCostModifier": The mana cost modifier that changes how much the card costs
+	to play.
+"collectible": Whether the card is collectible or not.
 "set": Which card set the card belongs to. Currently, these are:
 		CLASSIC
 		NAXXRAMAS
@@ -29,3 +35,31 @@ Generic Information
 		THE_GRAND_TOURNAMENT
 		LEAGUE_OF_EXPLORERS
 
+
+
+Minion Information
+
+This information is used only on minion cards.
+
+"baseAttack": The base amount of attack the minion has.
+"baseHp": The base amount of health the minion has.
+"race": The race of the minion. Currently, these are:
+		BEAST
+		DEMON
+		DRAGON
+		MECH
+		MURLOC
+		NONE
+		PIRATE
+		TOTEM
+"battlecry": The spell that is cast when this minion is played.
+"deathrattle": The spell that is cast when this minion is destroyed.
+"aura": The aura spell that is granted by this minion.
+"trigger": The spell that is casted when the appropriate trigger occurs. See
+	triggers.txt for a list of triggers.
+"attributes": The list of attributes that a minion has. See attributes.txt for a
+	list of attributes.
+
+
+
+Spell Information
