@@ -5,7 +5,6 @@ import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.events.DamageEvent;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
-import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerArg;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
@@ -22,12 +21,6 @@ public class DamageReceivedTrigger extends GameEventTrigger {
 		EntityType targetEntityType = (EntityType) desc.get(EventTriggerArg.TARGET_ENTITY_TYPE);
 		if (targetEntityType != null && damageEvent.getVictim().getEntityType() != targetEntityType) {
 			return false;
-		}
-		
-		TargetPlayer targetPlayer = desc.getTargetPlayer();
-		int targetPlayerId = damageEvent.getVictim().getOwner();
-		if (targetPlayer != null) {
-			return determineTargetPlayer(damageEvent, targetPlayer, host, targetPlayerId);
 		}
 
 		return true;

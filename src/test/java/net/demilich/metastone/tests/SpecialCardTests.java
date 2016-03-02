@@ -332,6 +332,34 @@ public class SpecialCardTests extends TestBase {
 
 		Assert.assertEquals(paladin.getMinions().size(), 1);
 	}
+	
+	@Test
+	public void testEydisDarkbane() {
+		GameContext context = createContext(HeroClass.PRIEST, HeroClass.WARRIOR);
+		Player priest = context.getPlayer1();
+		Player warrior = context.getPlayer2();
+
+		MinionCard eydisDarkbaneCard = (MinionCard) CardCatalogue.getCardById("minion_eydis_darkbane");
+		Minion eydisDarkbane = playMinionCard(context, priest, eydisDarkbaneCard);
+
+		Card testSpellCard = CardCatalogue.getCardById("spell_power_word_shield");
+		context.getLogic().receiveCard(priest.getId(), testSpellCard);
+		GameAction spellAction = testSpellCard.play();
+		spellAction.setTarget(eydisDarkbane);
+		context.getLogic().performGameAction(priest.getId(), spellAction);
+
+		// priest casted a spell on Eydis - warrior should be wounded
+		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - 3);
+		
+		testSpellCard = CardCatalogue.getCardById("spell_shield_slam");
+		context.getLogic().receiveCard(warrior.getId(), testSpellCard);
+		spellAction = testSpellCard.play();
+		spellAction.setTarget(eydisDarkbane);
+		context.getLogic().performGameAction(warrior.getId(), spellAction);
+
+		// warrior casted a spell on Eydis - nothing should happen
+		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - 3);
+	}
 
 	@Test
 	public void testBetrayalOnBurlyRockjawTroggDeals5Damage() {

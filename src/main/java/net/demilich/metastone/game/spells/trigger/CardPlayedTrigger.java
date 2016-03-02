@@ -7,7 +7,6 @@ import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.events.CardPlayedEvent;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
-import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerArg;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
@@ -30,12 +29,6 @@ public class CardPlayedTrigger extends GameEventTrigger {
 			return false;
 		}
 		
-		TargetPlayer targetPlayer = desc.getTargetPlayer();
-		int targetPlayerId = cardPlayedEvent.getPlayerId();
-		if (targetPlayer != null) {
-			return determineTargetPlayer(cardPlayedEvent, targetPlayer, host, targetPlayerId);
-		}
-
 		return true;
 	}
 

@@ -10,8 +10,8 @@ public class TargetAcquisitionEvent extends GameEvent {
 	private final Entity source;
 	private final ActionType actionType;
 
-	public TargetAcquisitionEvent(GameContext context, ActionType actionType, Entity source, Entity target) {
-		super(context);
+	public TargetAcquisitionEvent(GameContext context, int playerId, ActionType actionType, Entity source, Entity target) {
+		super(context, playerId);
 		this.actionType = actionType;
 		this.source = source;
 		this.target = target;

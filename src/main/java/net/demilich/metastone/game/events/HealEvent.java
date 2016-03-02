@@ -8,15 +8,10 @@ public class HealEvent extends GameEvent {
 	private final Entity target;
 	private final int healing;
 
-	public HealEvent(GameContext context, Entity target, int healing) {
-		super(context);
+	public HealEvent(GameContext context, int playerId, Entity target, int healing) {
+		super(context, playerId);
 		this.target = target;
 		this.healing = healing;
-	}
-	
-	@Override
-	public Entity getEventSource() {
-		return null;
 	}
 
 	@Override

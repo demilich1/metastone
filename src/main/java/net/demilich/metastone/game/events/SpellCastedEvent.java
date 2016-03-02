@@ -6,12 +6,10 @@ import net.demilich.metastone.game.entities.Entity;
 
 public class SpellCastedEvent extends GameEvent {
 
-	private final int playerId;
 	private final Card sourceCard;
 
 	public SpellCastedEvent(GameContext context, int playerId, Card sourceCard) {
-		super(context);
-		this.playerId = playerId;
+		super(context, playerId);
 		this.sourceCard = sourceCard;
 	}
 	
@@ -28,10 +26,6 @@ public class SpellCastedEvent extends GameEvent {
 	@Override
 	public GameEventType getEventType() {
 		return GameEventType.SPELL_CASTED;
-	}
-
-	public int getPlayerId() {
-		return playerId;
 	}
 
 	public Card getSourceCard() {

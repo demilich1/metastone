@@ -11,16 +11,11 @@ public class SummonEvent extends GameEvent {
 	private final Card source;
 
 	public SummonEvent(GameContext context, Minion minion, Card source) {
-		super(context);
+		super(context, minion.getOwner());
 		this.minion = minion;
 		this.source = source;
 	}
 	
-	@Override
-	public Entity getEventSource() {
-		return null;
-	}
-
 	@Override
 	public Entity getEventTarget() {
 		return getMinion();

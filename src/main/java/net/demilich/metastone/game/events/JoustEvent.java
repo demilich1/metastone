@@ -6,24 +6,17 @@ import net.demilich.metastone.game.entities.Entity;
 
 public class JoustEvent extends GameEvent {
 
-	private final int playerId;
 	private final boolean won;
 	private final Card ownCard;
 	private final Card opponentCard;
 
 	public JoustEvent(GameContext context, int playerId, boolean won, Card ownCard, Card opponentCard) {
-		super(context);
-		this.playerId = playerId;
+		super(context, playerId);
 		this.won = won;
 		this.ownCard = ownCard;
 		this.opponentCard = opponentCard;
 	}
 	
-	@Override
-	public Entity getEventSource() {
-		return null;
-	}
-
 	@Override
 	public Entity getEventTarget() {
 		return ownCard;
@@ -32,10 +25,6 @@ public class JoustEvent extends GameEvent {
 	@Override
 	public GameEventType getEventType() {
 		return GameEventType.JOUST;
-	}
-
-	public int getPlayerId() {
-		return playerId;
 	}
 
 	public boolean isWon() {

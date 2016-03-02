@@ -5,18 +5,10 @@ import net.demilich.metastone.game.entities.Entity;
 
 public class TurnEndEvent extends GameEvent {
 
-	private final int playerId;
-
 	public TurnEndEvent(GameContext context, int playerId) {
-		super(context);
-		this.playerId = playerId;
+		super(context, playerId);
 	}
 	
-	@Override
-	public Entity getEventSource() {
-		return null;
-	}
-
 	@Override
 	public Entity getEventTarget() {
 		return null;
@@ -25,10 +17,6 @@ public class TurnEndEvent extends GameEvent {
 	@Override
 	public GameEventType getEventType() {
 		return GameEventType.TURN_END;
-	}
-
-	public int getPlayerId() {
-		return playerId;
 	}
 
 }

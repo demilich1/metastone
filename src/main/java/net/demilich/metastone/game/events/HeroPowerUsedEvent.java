@@ -6,20 +6,13 @@ import net.demilich.metastone.game.heroes.powers.HeroPower;
 
 public class HeroPowerUsedEvent extends GameEvent {
 
-	private final int playerId;
 	private final HeroPower heroPower;
 
 	public HeroPowerUsedEvent(GameContext context, int playerId, HeroPower heroPower) {
-		super(context);
-		this.playerId = playerId;
+		super(context, playerId);
 		this.heroPower = heroPower;
 	}
 	
-	@Override
-	public Entity getEventSource() {
-		return null;
-	}
-
 	@Override
 	public Entity getEventTarget() {
 		return getHeroPower();
@@ -32,10 +25,6 @@ public class HeroPowerUsedEvent extends GameEvent {
 
 	public HeroPower getHeroPower() {
 		return heroPower;
-	}
-
-	public int getPlayerId() {
-		return playerId;
 	}
 
 }

@@ -24,7 +24,7 @@ public class SilenceSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		context.getLogic().silence((Minion) target);
+		context.getLogic().silence(player.getId(), (Minion) target);
 	}
 
 }

@@ -5,12 +5,10 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.Entity;
 
 public class DiscardEvent extends GameEvent {
-	private final int playerId;
 	private final Card card;
 
 	public DiscardEvent(GameContext context, int playerId, Card card) {
-		super(context);
-		this.playerId = playerId;
+		super(context, playerId);
 		this.card = card;
 	}
 
@@ -18,11 +16,6 @@ public class DiscardEvent extends GameEvent {
 		return card;
 	}
 	
-	@Override
-	public Entity getEventSource() {
-		return null;
-	}
-
 	@Override
 	public Entity getEventTarget() {
 		return getCard();
@@ -32,8 +25,5 @@ public class DiscardEvent extends GameEvent {
 	public GameEventType getEventType() {
 		return GameEventType.DISCARD;
 	}
-
-	public int getPlayerId() {
-		return playerId;
-	}
+	
 }

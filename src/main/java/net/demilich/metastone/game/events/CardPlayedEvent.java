@@ -6,12 +6,10 @@ import net.demilich.metastone.game.entities.Entity;
 
 public class CardPlayedEvent extends GameEvent {
 
-	private final int playerId;
 	private final Card card;
 
 	public CardPlayedEvent(GameContext context, int playerId, Card card) {
-		super(context);
-		this.playerId = playerId;
+		super(context, playerId);
 		this.card = card;
 	}
 
@@ -19,11 +17,6 @@ public class CardPlayedEvent extends GameEvent {
 		return card;
 	}
 	
-	@Override
-	public Entity getEventSource() {
-		return null;
-	}
-
 	@Override
 	public Entity getEventTarget() {
 		return getCard();
@@ -33,9 +26,4 @@ public class CardPlayedEvent extends GameEvent {
 	public GameEventType getEventType() {
 		return GameEventType.PLAY_CARD;
 	}
-
-	public int getPlayerId() {
-		return playerId;
-	}
-
 }

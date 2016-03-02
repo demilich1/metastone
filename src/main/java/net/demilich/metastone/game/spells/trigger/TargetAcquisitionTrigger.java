@@ -33,16 +33,9 @@ public class TargetAcquisitionTrigger extends GameEventTrigger {
 			return false;
 		}
 		
-		TargetPlayer targetPlayer = desc.getTargetPlayer();
-		int targetPlayerId = targetAcquisitionEvent.getTarget().getOwner();
-		if(targetPlayer != null && !determineTargetPlayer(targetAcquisitionEvent, targetPlayer, host, targetPlayerId)) {
-			return false;
-		}
-
 		TargetPlayer sourcePlayer = desc.getSourcePlayer();
-		int sourcePlayerId = targetAcquisitionEvent.getSource().getOwner();
 		if (sourcePlayer != null) {
-			return determineTargetPlayer(targetAcquisitionEvent, sourcePlayer, host, sourcePlayerId);
+			return determineTargetPlayer(targetAcquisitionEvent, sourcePlayer, host, getOwner());
 		}
 		
 		return true;

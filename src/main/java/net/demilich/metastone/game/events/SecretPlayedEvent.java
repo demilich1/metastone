@@ -8,16 +8,11 @@ public class SecretPlayedEvent extends GameEvent {
 
 	private final SecretCard secretCard;
 
-	public SecretPlayedEvent(GameContext context, SecretCard secretCard) {
-		super(context);
+	public SecretPlayedEvent(GameContext context, int playerId, SecretCard secretCard) {
+		super(context, playerId);
 		this.secretCard = secretCard;
 	}
 	
-	@Override
-	public Entity getEventSource() {
-		return null;
-	}
-
 	@Override
 	public Entity getEventTarget() {
 		return getSecretCard();

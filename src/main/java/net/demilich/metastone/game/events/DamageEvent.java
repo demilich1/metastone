@@ -10,7 +10,7 @@ public class DamageEvent extends GameEvent {
 	private final Entity source;
 
 	public DamageEvent(GameContext context, Entity victim, Entity source, int damage) {
-		super(context);
+		super(context, victim.getOwner());
 		this.victim = victim;
 		this.source = source;
 		this.damage = damage;

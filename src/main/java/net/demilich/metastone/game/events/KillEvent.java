@@ -8,15 +8,10 @@ public class KillEvent extends GameEvent {
 	private final Entity victim;
 
 	public KillEvent(GameContext context, Entity victim) {
-		super(context);
+		super(context, victim.getOwner());
 		this.victim = victim;
 	}
 	
-	@Override
-	public Entity getEventSource() {
-		return null;
-	}
-
 	@Override
 	public Entity getEventTarget() {
 		return getVictim();

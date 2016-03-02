@@ -12,7 +12,8 @@
 		"eventTrigger": {
 			"class": "TargetAcquisitionTrigger",
 			"actionType": "SPELL",
-			"hostTargetType": "IGNORE_OTHER_TARGETS"
+			"hostTargetType": "IGNORE_OTHER_TARGETS",
+			"sourcePlayer" : "SELF"
 		},
 		"spell": {
 			"class": "DamageSpell",

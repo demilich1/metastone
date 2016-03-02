@@ -8,16 +8,11 @@ public class SilenceEvent extends GameEvent {
 
 	private final Minion target;
 
-	public SilenceEvent(GameContext context, Minion target) {
-		super(context);
+	public SilenceEvent(GameContext context, int playerId, Minion target) {
+		super(context, playerId);
 		this.target = target;
 	}
 	
-	@Override
-	public Entity getEventSource() {
-		return null;
-	}
-
 	@Override
 	public Entity getEventTarget() {
 		return getTarget();

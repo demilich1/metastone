@@ -8,15 +8,10 @@ public class EnrageChangedEvent extends GameEvent {
 	private final Entity target;
 
 	public EnrageChangedEvent(GameContext context, Entity target) {
-		super(context);
+		super(context, target.getOwner());
 		this.target = target;
 	}
 	
-	@Override
-	public Entity getEventSource() {
-		return null;
-	}
-
 	@Override
 	public Entity getEventTarget() {
 		return target;
