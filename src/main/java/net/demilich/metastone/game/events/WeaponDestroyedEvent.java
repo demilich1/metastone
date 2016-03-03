@@ -9,15 +9,10 @@ public class WeaponDestroyedEvent extends GameEvent {
 	private final Weapon weapon;
 
 	public WeaponDestroyedEvent(GameContext context, Weapon weapon) {
-		super(context);
+		super(context, weapon.getOwner());
 		this.weapon = weapon;
 	}
 	
-	@Override
-	public Entity getEventSource() {
-		return null;
-	}
-
 	@Override
 	public Entity getEventTarget() {
 		return getWeapon();

@@ -20,7 +20,7 @@ public class BuffWeaponSpell extends Spell {
 		int damageBonus = desc.getInt(SpellArg.ATTACK_BONUS, 0);
 		int durabilityBonus = desc.getInt(SpellArg.HP_BONUS, 0);
 
-		Weapon weapon = player.getHero().getWeapon();
+		Weapon weapon = (Weapon) target;
 		if (weapon == null) {
 			return;
 		}

@@ -6,12 +6,10 @@ import net.demilich.metastone.game.entities.Entity;
 
 public class OverloadEvent extends GameEvent {
 
-	private int playerId;
 	private Card card;
 
 	public OverloadEvent(GameContext context, int playerId, Card card) {
-		super(context);
-		this.playerId = playerId;
+		super(context, playerId);
 		this.card = card;
 	}
 	
@@ -20,11 +18,6 @@ public class OverloadEvent extends GameEvent {
 	}
 	
 	@Override
-	public Entity getEventSource() {
-		return null;
-	}
-
-	@Override
 	public Entity getEventTarget() {
 		return getCard();
 	}
@@ -32,10 +25,6 @@ public class OverloadEvent extends GameEvent {
 	@Override
 	public GameEventType getEventType() {
 		return GameEventType.OVERLOAD;
-	}
-
-	public int getPlayerId() {
-		return playerId;
 	}
 
 }

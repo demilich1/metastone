@@ -6,7 +6,7 @@ public enum GameNotification {
 	SHOW_VIEW,
 	CHECK_FOR_UPDATE,
 	NEW_VERSION_AVAILABLE,
-	
+
 	START_GAME,
 	PLAY_GAME,
 	GAME_STATE_UPDATE,
@@ -64,6 +64,7 @@ public enum GameNotification {
 	DUPLICATE_DECK_NAME,
 	ADD_DECK_TO_META_DECK,
 	REMOVE_DECK_FROM_META_DECK,
+	DELETE_DECK,
 
 	// sandbox notifications
 	SELECT_PLAYER,
@@ -81,5 +82,5 @@ public enum GameNotification {
 	ANIMATION_COMPLETED,
 
 	SAVE_TRAINING_DATA,
-	REQUEST_TRAINING_DATA,
+	REQUEST_TRAINING_DATA
 }

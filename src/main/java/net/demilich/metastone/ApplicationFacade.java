@@ -6,6 +6,7 @@ import net.demilich.metastone.gui.autoupdate.CheckForUpdateCommand;
 import net.demilich.metastone.gui.battleofdecks.StartBattleOfDecksCommand;
 import net.demilich.metastone.gui.deckbuilder.AddCardToDeckCommand;
 import net.demilich.metastone.gui.deckbuilder.ChangeDeckNameCommand;
+import net.demilich.metastone.gui.deckbuilder.DeleteDeckCommand;
 import net.demilich.metastone.gui.deckbuilder.FillDeckWithRandomCardsCommand;
 import net.demilich.metastone.gui.deckbuilder.FilterCardsCommand;
 import net.demilich.metastone.gui.deckbuilder.ImportDeckCommand;
@@ -65,6 +66,7 @@ public class ApplicationFacade extends Facade<GameNotification> {
 		registerCommand(GameNotification.CHANGE_DECK_NAME, new ChangeDeckNameCommand());
 		registerCommand(GameNotification.ADD_DECK_TO_META_DECK, new AddDeckToMetaDeckCommand());
 		registerCommand(GameNotification.REMOVE_DECK_FROM_META_DECK, new RemoveDeckFromMetaDeckCommand());
+		registerCommand(GameNotification.DELETE_DECK, new DeleteDeckCommand());
 
 		registerCommand(GameNotification.REQUEST_DECKS, new RequestDecksCommand());
 

@@ -17,9 +17,8 @@ public class AfterSpellCastedTrigger extends GameEventTrigger {
 	protected boolean fire(GameEvent event, Entity host) {
 		AfterSpellCastedEvent spellCastedEvent = (AfterSpellCastedEvent) event;
 		TargetPlayer sourcePlayer = desc.getSourcePlayer();
-		int sourcePlayerId = spellCastedEvent.getPlayerId();
 		if (sourcePlayer != null) {
-			return determineTargetPlayer(spellCastedEvent, sourcePlayer, host, sourcePlayerId);
+			return determineTargetPlayer(spellCastedEvent, sourcePlayer, host, getOwner());
 		}
 		
 		return true;

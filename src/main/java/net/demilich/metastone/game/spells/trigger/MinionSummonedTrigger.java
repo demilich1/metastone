@@ -6,7 +6,6 @@ import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.events.SummonEvent;
-import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerArg;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
@@ -27,12 +26,6 @@ public class MinionSummonedTrigger extends GameEventTrigger {
 		Attribute requiredAttribute = (Attribute) desc.get(EventTriggerArg.REQUIRED_ATTRIBUTE);
 		if (requiredAttribute != null && !summonEvent.getMinion().hasAttribute(requiredAttribute)) {
 			return false;
-		}
-		
-		TargetPlayer targetPlayer = desc.getTargetPlayer();
-		int targetPlayerId = summonEvent.getMinion().getOwner();
-		if (targetPlayer != null) {
-			return determineTargetPlayer(summonEvent, targetPlayer, host, targetPlayerId);
 		}
 		
 		return true;

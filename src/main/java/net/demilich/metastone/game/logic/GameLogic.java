@@ -97,6 +97,8 @@ public class GameLogic implements Cloneable {
 
 	public static final int WINDFURY_ATTACKS = 2;
 	public static final int MEGA_WINDFURY_ATTACKS = 4;
+	
+	private static final int INFINITE = -1;
 
 	private static boolean hasPlayerLost(Player player) {
 		return player.getHero().getHp() < 1 || player.getHero().hasAttribute(Attribute.DESTROYED);
@@ -203,7 +205,7 @@ public class GameLogic implements Cloneable {
 			if (heroPowerUsages == 0) {
 				heroPowerUsages = 1;
 			}
-			if (heroPowerUsages != -1 && power.hasBeenUsed() >= heroPowerUsages) {
+			if (heroPowerUsages != INFINITE && power.hasBeenUsed() >= heroPowerUsages) {
 				return false;
 			}
 		} else if (card.getCardType() == CardType.MINION) {
@@ -263,7 +265,7 @@ public class GameLogic implements Cloneable {
 			}
 
 			if (spellCard != null && spellCard.getTargetRequirement() != TargetSelection.NONE && !childSpell) {
-				GameEvent spellTargetEvent = new TargetAcquisitionEvent(context, ActionType.SPELL, spellCard, targets.get(0));
+				GameEvent spellTargetEvent = new TargetAcquisitionEvent(context, playerId, ActionType.SPELL, spellCard, targets.get(0));
 				context.fireGameEvent(spellTargetEvent);
 				Entity targetOverride = context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.TARGET_OVERRIDE));
 				if (targetOverride != null && targetOverride.getId() != IdFactory.UNASSIGNED) {
@@ -624,7 +626,7 @@ public class GameLogic implements Cloneable {
 
 		context.getEnvironment().put(Environment.ATTACKER_REFERENCE, attacker.getReference());
 		
-		TargetAcquisitionEvent targetAcquisitionEvent = new TargetAcquisitionEvent(context, ActionType.PHYSICAL_ATTACK, attacker, defender);
+		TargetAcquisitionEvent targetAcquisitionEvent = new TargetAcquisitionEvent(context, player.getId(), ActionType.PHYSICAL_ATTACK, attacker, defender);
 		context.fireGameEvent(targetAcquisitionEvent);
 		Actor target = defender;
 		if (context.getEnvironment().containsKey(Environment.TARGET_OVERRIDE)) {
@@ -739,8 +741,8 @@ public class GameLogic implements Cloneable {
 	 * 			The highest value from all sources. -1 is considered infinite.
 	 */
 	public int getGreatestAttributeValue(Player player, Attribute attr) {
-		int greatest = Math.max(-1, player.getHero().getAttributeValue(attr));
-		if (greatest == -1) {
+		int greatest = Math.max(INFINITE, player.getHero().getAttributeValue(attr));
+		if (greatest == INFINITE) {
 			return greatest;
 		}
 		for (Entity minion : player.getMinions()) {
@@ -748,8 +750,8 @@ public class GameLogic implements Cloneable {
 				if (minion.getAttributeValue(attr) > greatest) {
 					greatest = minion.getAttributeValue(attr);
 				}
-				if (minion.getAttributeValue(attr) == -1) {
-					return -1;
+				if (minion.getAttributeValue(attr) == INFINITE) {
+					return INFINITE;
 				}
 			}
 		}
@@ -919,7 +921,7 @@ public class GameLogic implements Cloneable {
 		}
 
 		if (success) {
-			HealEvent healEvent = new HealEvent(context, target, healing);
+			HealEvent healEvent = new HealEvent(context, player.getId(), target, healing);
 			context.fireGameEvent(healEvent);
 			player.getStatistics().heal(healing);
 		}
@@ -1219,7 +1221,7 @@ public class GameLogic implements Cloneable {
 		addGameEventListener(player, secret, player.getHero());
 		player.getSecrets().add(secret.getSource().getCardId());
 		if (fromHand) {
-			context.fireGameEvent(new SecretPlayedEvent(context, (SecretCard) secret.getSource()));
+			context.fireGameEvent(new SecretPlayedEvent(context, player.getId(), (SecretCard) secret.getSource()));
 		}
 	}
 
@@ -1442,8 +1444,8 @@ public class GameLogic implements Cloneable {
 		}
 	}
 
-	public void silence(Minion target) {
-		context.fireGameEvent(new SilenceEvent(context, target));
+	public void silence(int playerId, Minion target) {
+		context.fireGameEvent(new SilenceEvent(context, playerId, target));
 		final HashSet<Attribute> immuneToSilence = new HashSet<Attribute>();
 		immuneToSilence.add(Attribute.HP);
 		immuneToSilence.add(Attribute.MAX_HP);

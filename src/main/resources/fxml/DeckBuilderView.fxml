@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<fx:root styleClass="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" styleClass="panel" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <Text styleClass="header" strokeType="OUTSIDE" strokeWidth="0.0" text="Deck Builder" BorderPane.alignment="CENTER" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header" text="Deck Builder" BorderPane.alignment="CENTER" />
    </top>
    <right>
       <VBox spacing="2.0">
          <children>
             <Pane fx:id="upperInfoArea" prefHeight="50.0" prefWidth="240.0" />
-            <ScrollPane styleClass="sidebar" fx:id="scrollPane" fitToHeight="true" fitToWidth="true" prefHeight="580.0" prefViewportWidth="220.0" prefWidth="250.0">
+            <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="580.0" prefViewportWidth="220.0" prefWidth="250.0" styleClass="sidebar">
                <padding>
                   <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                </padding>
@@ -33,7 +38,7 @@
    <center>
       <VBox alignment="CENTER" spacing="16.0" BorderPane.alignment="CENTER">
          <children>
-            <Label styleClass="default-label" alignment="CENTER" contentDisplay="CENTER" text="Load an existing deck from the deck list to the right or create a new one" wrapText="true" VBox.vgrow="ALWAYS" />
+            <Label alignment="CENTER" contentDisplay="CENTER" styleClass="default-label" text="Load an existing deck from the deck list to the right or create a new one" wrapText="true" VBox.vgrow="ALWAYS" />
             <HBox alignment="CENTER" prefHeight="40.0" spacing="8.0" BorderPane.alignment="CENTER">
             <children>
                <Label id="#name-small" text="Or import from:" />
@@ -53,7 +58,7 @@
    <bottom>
       <AnchorPane BorderPane.alignment="TOP_LEFT">
          <children>
-            <Button  fx:id="backButton" mnemonicParsing="false" text="Back" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER" />
+            <Button fx:id="backButton" mnemonicParsing="false" text="Back" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER" />
          </children>
       </AnchorPane>
    </bottom>

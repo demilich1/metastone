@@ -8,6 +8,7 @@
     -fx-font-family: "System";
     -fx-fill: black;
     -fx-font-weight: bold;
+	-fx-wrap-text: true;
 }
 
 .card-entry {
@@ -22,4 +23,18 @@
 	-fx-border-color: yellow;
 	-fx-background-color: silver;
 	-fx-border-radius: 10;
+}
+
+.delete-button {
+	-fx-background-color: transparent;
+	-fx-background-radius: 0;
+    -fx-background-insets: 0;
+	-fx-padding: 4;
+}
+
+.delete-button:hover {
+	-fx-background-color: transparent;
+	-fx-scale-x: 1.2;
+	-fx-scale-y: 1.2;
+	-fx-scale-z: 1.2;
 }

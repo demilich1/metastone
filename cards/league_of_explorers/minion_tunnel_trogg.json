@@ -5,7 +5,7 @@
 	"type": "MINION",
 	"baseAttack": 1,
 	"baseHp": 3,
-	"heroClass": "ANY",
+	"heroClass": "SHAMAN",
 	"rarity": "COMMON",
 	"description": "Whenever you Overload, gain +1 Attack per locked Mana Crystal.",
 	"trigger": {

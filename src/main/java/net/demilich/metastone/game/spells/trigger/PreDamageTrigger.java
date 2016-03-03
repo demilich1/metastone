@@ -29,16 +29,10 @@ public class PreDamageTrigger extends GameEventTrigger {
 			return false;
 		}
 		
-		TargetPlayer targetPlayer = desc.getTargetPlayer();
-		int targetPlayerId = preDamageEvent.getVictim().getOwner();
-		if(targetPlayer != null && !determineTargetPlayer(preDamageEvent, targetPlayer, host, targetPlayerId)) {
-			return false;
-		}
-
 		TargetPlayer sourcePlayer = desc.getSourcePlayer();
 		int sourcePlayerId = preDamageEvent.getSource().getOwner();
 		if (sourcePlayer != null) {
-			return determineTargetPlayer(preDamageEvent, sourcePlayer, host, sourcePlayerId);
+			return determineTargetPlayer(preDamageEvent, sourcePlayer, host, getOwner());
 		}
 		
 		return true;

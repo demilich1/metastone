@@ -16,7 +16,7 @@ public class SilenceAction extends GameAction {
 	@Override
 	public void execute(GameContext context, int playerId) {
 		Minion target = (Minion) context.resolveSingleTarget(getTargetKey());
-		context.getLogic().silence(target);
+		context.getLogic().silence(playerId, target);
 	}
 
 	@Override

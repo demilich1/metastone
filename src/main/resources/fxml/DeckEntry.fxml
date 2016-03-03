@@ -1,21 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import java.net.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 
-<fx:root styleClass="card-entry" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="220.0" spacing="4.0" type="HBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="CENTER_LEFT" fillHeight="false" maxHeight="50.0" maxWidth="220.0" minHeight="50.0" minWidth="220.0" prefHeight="50.0" type="HBox" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fx:id="classIcon" fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="/img/classes/mage.png" />
-         </image>
-      </ImageView>
-      <Label styleClass="card-entry-name" fx:id="deckNameLabel" maxWidth="170.0" minWidth="170.0" text="&lt;deckname&gt;" />
+      <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="4.0" styleClass="card-entry">
+         <children>
+            <ImageView fx:id="classIcon" fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="/img/classes/mage.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="deckNameLabel" maxHeight="44.0" maxWidth="150.0" minWidth="150.0" prefHeight="44.0" styleClass="card-entry-name" text="&lt;deckname&gt;" wrapText="true" />
+         </children>
+         <stylesheets>
+            <URL value="@/css/deckbuilder.css" />
+         </stylesheets>
+      </HBox>
+      <Button fx:id="deleteDeckButton" mnemonicParsing="false" styleClass="delete-button">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/ui/delete.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
-   <stylesheets>
-      <URL value="@/css/deckbuilder.css" />
-   </stylesheets>
 </fx:root>

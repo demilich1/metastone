@@ -7,7 +7,6 @@ import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.events.KillEvent;
-import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerArg;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
@@ -29,12 +28,6 @@ public class MinionDeathTrigger extends GameEventTrigger {
 		Race race = (Race) desc.get(EventTriggerArg.RACE);
 		if (race != null && minion.getRace() != race) {
 			return false;
-		}
-		
-		TargetPlayer targetPlayer = desc.getTargetPlayer();
-		int targetPlayerId = minion.getOwner();
-		if (targetPlayer != null) {
-			return determineTargetPlayer(killEvent, targetPlayer, host, targetPlayerId);
 		}
 		
 		return true;
