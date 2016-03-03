@@ -13,6 +13,11 @@
 		"spell_summon_wrath_of_air_totem",
 		"spell_summon_stoneclaw_totem"
 	],
+	"condition": {
+		"class": "MinionCountCondition",
+		"value": 7,
+		"operation": "LESS"
+	},
 	"collectible": false,
 	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1

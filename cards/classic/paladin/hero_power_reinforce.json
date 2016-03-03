@@ -11,6 +11,11 @@
 		"class": "SummonSpell",
 		"card": "token_silver_hand_recruit"
 	},
+	"condition": {
+		"class": "MinionCountCondition",
+		"value": 7,
+		"operation": "LESS"
+	},
 	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

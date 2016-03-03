@@ -13,6 +13,12 @@
 		"value": 4,
 		"randomTarget": true
 	},
+	"condition": {
+		"class": "MinionCountCondition",
+		"targetPlayer": "OPPONENT",
+		"value": 0,
+		"operation": "GREATER"
+	},
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
