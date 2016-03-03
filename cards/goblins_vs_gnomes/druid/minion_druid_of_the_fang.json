@@ -12,11 +12,11 @@
 		"spell": {
 			"class": "TransformMinionSpell",
 			"target": "SELF",
-			"card": "token_cobra_form",
-			"condition": {
-				"class": "RaceOnBoardCondition",
-				"race": "BEAST"
-			}
+			"card": "token_cobra_form"
+		},
+		"condition": {
+			"class": "RaceOnBoardCondition",
+			"race": "BEAST"
 		},
 		"resolvedLate": false
 	},
