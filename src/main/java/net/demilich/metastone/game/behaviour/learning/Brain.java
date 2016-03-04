@@ -1,10 +1,7 @@
 package net.demilich.metastone.game.behaviour.learning;
 
-import java.util.Arrays;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -15,7 +12,7 @@ import net.demilich.metastone.utils.MathUtils;
 
 public class Brain implements IBrain {
 
-	private static Logger logger = LoggerFactory.getLogger(Brain.class);
+	//private static Logger logger = LoggerFactory.getLogger(Brain.class);
 
 	private static final int INPUTS = 15;
 	private static final int HIDDEN_NEURONS = 40;
@@ -134,7 +131,7 @@ public class Brain implements IBrain {
 
 	}
 
-	private void printWeights() {
+	/*private void printWeights() {
 		for (int i = 0; i < neuralNetwork.hidden.length; i++) {
 			for (int j = 0; j < neuralNetwork.hidden[i].length; j++) {
 				for (int k = 0; k < neuralNetwork.hidden[i][j].weights.length; k++) {
@@ -142,7 +139,7 @@ public class Brain implements IBrain {
 				}
 			}
 		}
-	}
+	}*/
 
 	public void save(String path) {
 
