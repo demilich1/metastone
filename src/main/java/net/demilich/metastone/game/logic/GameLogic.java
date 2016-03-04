@@ -174,9 +174,6 @@ public class GameLogic implements Cloneable {
 	}
 
 	public int applySpellpower(Player player, Entity source, int baseValue) {
-		if (baseValue <= 0) {
-			return baseValue;
-		}
 		int spellpower = getTotalAttributeValue(player, Attribute.SPELL_DAMAGE)
 				+ getTotalAttributeValue(context.getOpponent(player), Attribute.OPPONENT_SPELL_DAMAGE);
 		if (source.hasAttribute(Attribute.SPELL_DAMAGE_MULTIPLIER)) {
