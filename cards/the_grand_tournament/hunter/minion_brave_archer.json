@@ -15,8 +15,8 @@
 			"condition": {
 				"class": "CardCountCondition",
 				"targetPlayer": "SELF",
-				"value": 1,
-				"operation": "LESS"
+				"value": 0,
+				"operation": "LESS_OR_EQUAL"
 			}
 		},
 		"spell": {

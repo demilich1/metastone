@@ -17,9 +17,9 @@
 			"randomTarget": true,
 			"filter": {
 				"class": "AttributeFilter",
-				"value": 3,
+				"value": 2,
 				"attribute": "ATTACK",
-				"operation": "LESS"
+				"operation": "LESS_OR_EQUAL"
 			}
 		},
 		"resolvedLate": false

@@ -16,9 +16,9 @@
 			"condition": {
 				"class": "AttributeCondition",
 				"target": "FRIENDLY_HERO",
-				"value": 13,
+				"value": 12,
 				"attribute": "HP",
-				"operation": "LESS"
+				"operation": "LESS_OR_EQUAL"
 			}
 		}
 	},

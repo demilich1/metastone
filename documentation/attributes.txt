@@ -49,7 +49,7 @@ PENDING_DESTROY
 Internal tracker to determine death ordering.
 
 FATIGUE
-Keeps track of the amount of Fatigue a player has.
+Internal tracker for the amount of Fatigue a player has.
 
 FROZEN
 Freezes the target Actor. Frozen Actors cannot attack, and Unfreeze at the end of their controller’s turn, provided they have not attacked that turn.
@@ -74,12 +74,6 @@ Grants the target Spell Damage +X for the opposing player.
 
 CHARGE
 Grants the target Charge. Charge minions can attack the turn they are summoned and do not get Summoning Sickness. See Summoning Sickness.
-
-NUMBER_OF_ATTACKS: X
-Sets the number of attacks an Actor can perform each turn. 
-
-ENRAGED
-Internal flag for whether a minion is currently Enraged.
 
 BATTLECRY
 Determines if a card has a Battlecry.
@@ -126,7 +120,7 @@ UNTARGETABLE_BY_SPELLS
 Grants an Actor Untargetable by Spells. Actors with Untargetable by Spells cannot be directly targeted by Spells or Hero Powers.
 
 SPELL_DAMAGE_MULTIPLIER: X
-Grants a Spell Spell Damage Multiplier X. Spells casts with Spell Damage Multiplier have their Spell Damage multiplied by X. See Spell Damage.
+Grants a Spell Spell Damage Multiplier X. Spells casts with Spell Damage Multiplier have their additional Spell Damage multiplied by X. See Spell Damage.
 
 SPELL_AMPLIFY_MULTIPLIER: X
 Grants an Entity Spell Amplify Multiplier X. Damage dealt by Spells or Hero Powers played by the Entity’s owner are multiplied by X.
@@ -164,17 +158,28 @@ Determines the amount of damage this Actor received last.
 PASSIVE_TRIGGER
 Determines if an Entity has a Trigger effect.
 
-HERO_POWER_USED
-Holds the number of Hero Powers that have been used during the game.
-
-HERO_POWER_USAGES
-Holds the number of Hero Powers that have been used during this turn.
-
 HERO_POWER_DAMAGE: X
 Grants an Entity “Your Hero Power deals X additional damage.” Entities with this Attribute give your Hero Power X additional damage.
+
+TAKE_DOUBLE_DAMAGE
+Grants an Entity “This {Actor} takes double damage.” Entities with this Attribute take double damage.
+
+
+
+Internal Attributes
+
+HERO_POWER_USAGES
+Internal use. Holds the number of Hero Powers that have been used during this turn.
 
 SHADOWFORM
 Internal tracker for when your Hero enters Shadowform.
 
-TAKE_DOUBLE_DAMAGE
-Grants an Entity “This {Actor} takes double damage.” Entities with this Attribute take double damage.
+HERO_POWER_USED
+Internal tracker for the number of Hero Powers that have been used during the game.
+
+NUMBER_OF_ATTACKS: X
+Internal tracker for the number of attacks an Actor can perform each turn. 
+
+ENRAGED
+Internal flag for whether a minion is currently Enraged.
+

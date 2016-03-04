@@ -41,6 +41,9 @@ public class ModifyDamageSpell extends Spell {
 			damage /= value;
 			damage = Math.max(minDamage, damage);
 			break;
+		case NEGATE:
+			damage = -damage;
+			break;
 		case SET:
 			if ((context.resolveSingleTarget(context.getEventTargetStack().peek())).hasAttribute(Attribute.TAKE_DOUBLE_DAMAGE)) {
 				value *= 2;

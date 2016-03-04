@@ -2,38 +2,54 @@ General Information
 
 This information is used on all card types.
 
-"id": The internal identifier for the card. This must be unique, so that cards
-	can be distinguished from another card.
-"name": The name of the card. This is the displayed name on the card, and does
-	not have to be unique.
-"baseManaCost": This is the base mana cost for the card before any mana
+"id": String. The internal identifier for the card. This must be unique, so that
+	cards can be distinguished from another card.
+"name": String. The name of the card. This is the displayed name on the card,
+	and does not have to be unique.
+"baseManaCost": Integer. This is the base mana cost for the card before any mana
 	modification.
-"type": The type of card the card is. There are several different types of
-	cards:
-		MINION
-		SPELL
-		CHOOSE_ONE
-		WEAPON
-		HERO_POWER
-		HERO
-"heroClass": The class that the card belongs to or ANY if the card is neutral.
-"rarity": What rarity the card is. These rarities are:
-		FREE
-		COMMON
-		RARE
-		EPIC
-		LEGENDARY
-"description": The card text that is displayed on the card.
-"manaCostModifier": The mana cost modifier that changes how much the card costs
-	to play.
-"collectible": Whether the card is collectible or not.
-"set": Which card set the card belongs to. Currently, these are:
-		CLASSIC
-		NAXXRAMAS
-		GOBLINS_VS_GNOMES
-		BLACKROCK_MOUNTAIN
-		THE_GRAND_TOURNAMENT
-		LEAGUE_OF_EXPLORERS
+"type": CardType Enum. The type of card the card is. There are several different
+	types of cards:
+		"MINION"
+		"SPELL"
+		"CHOOSE_ONE"
+		"WEAPON"
+		"HERO_POWER"
+		"HERO"
+"heroClass": HeroClass Enum. The class that the card belongs to or ANY if the
+	card is neutral. The hero classes are:
+		"ANY"
+		"DRUID"
+		"HUNTER"
+		"MAGE"
+		"PALADIN"
+		"PRIEST"
+		"ROGUE"
+		"SHAMAN"
+		"WARLOCK"
+		"WARRIOR"
+	In addition, the following hero classes are used for cards:
+		"OPPONENT" - selects the opponent's class.
+		"BOSS" - the class of the Hero Ragnaros the Firelord.
+"rarity": Rarity Enum. What rarity the card is. These rarities are:
+		"FREE" - This is the same as Basic.
+		"COMMON"
+		"RARE"
+		"EPIC"
+		"LEGENDARY"
+"description": String. The card text that is displayed on the card.
+"manaCostModifier": Integer. The mana cost modifier that changes how much the
+	card costs to play.
+"collectible": Boolean. Whether the card is collectible or not.
+"set": CardSet Enum. Which card set the card belongs to. Currently, these are:
+		"CLASSIC"
+		"NAXXRAMAS"
+		"GOBLINS_VS_GNOMES"
+		"BLACKROCK_MOUNTAIN"
+		"THE_GRAND_TOURNAMENT"
+		"LEAGUE_OF_EXPLORERS"
+	In addition, the following card sets have been added:
+		"CUSTOM" - For use with formats to sort custom cards.
 
 
 
@@ -41,25 +57,74 @@ Minion Information
 
 This information is used only on minion cards.
 
-"baseAttack": The base amount of attack the minion has.
-"baseHp": The base amount of health the minion has.
-"race": The race of the minion. Currently, these are:
-		BEAST
-		DEMON
-		DRAGON
-		MECH
-		MURLOC
-		NONE
-		PIRATE
-		TOTEM
-"battlecry": The spell that is cast when this minion is played.
-"deathrattle": The spell that is cast when this minion is destroyed.
-"aura": The aura spell that is granted by this minion.
-"trigger": The spell that is casted when the appropriate trigger occurs. See
-	triggers.txt for a list of triggers.
-"attributes": The list of attributes that a minion has. See attributes.txt for a
-	list of attributes.
+"baseAttack": Integer. The base amount of attack the minion has.
+"baseHp": Integer. The base amount of health the minion has.
+"race": Race Enum. The race of the minion. Currently, these are:
+		"BEAST"
+		"DEMON"
+		"DRAGON"
+		"MECH"
+		"MURLOC"
+		"NONE" - This does not have to be set if the minion has no race.
+		"PIRATE"
+		"TOTEM"
+"battlecry": Battlecry. The battlecry that is cast when this minion is played.
+"deathrattle": Spell. The spell that is cast when this minion is destroyed.
+"aura": Aura. The aura spell that is granted by this minion.
+"trigger": Trigger. The spell that is casted when the appropriate trigger
+	occurs. See triggers.txt for a list of triggers.
+"options": Custom. The choose one options available for the minion when played.
+"attributes": Attribute Array. The list of attributes that a minion has. See
+	attributes.txt for a list of attributes.
 
 
 
 Spell Information
+
+This information is used only on spell cards.
+
+"targetSelection": TargetSelection Enum. The targets selectable for the spell
+	when played. The current selectable targets are:
+		"NONE" - No direct targeting occurs.
+		"ENEMY_CHARACTERS"
+		"ENEMY_MINIONS"
+		"FRIENDLY_CHARACTERS"
+		"FRIENDLY_MINIONS"
+		"MINIONS"
+		"HEROES"
+		"ADJACENT_MINIONS"
+		"ANY"
+"spell": Spell. The spell that is cast when the card is played.
+"condition": Condition. The condition that must be satisfied in order to play the card.
+
+Choose One Spell cards have the following keys instead of "spell".
+
+"options": Spell Array. The available options to choose from when the card is
+	played.
+
+Secret spell cards have the following keys instead of "spell".
+
+"trigger": Trigger. The spell that is casted when the appropriate trigger
+	occurs. See triggers.txt for a list of triggers.
+
+
+
+Weapon Information
+
+This information is used only on weapon cards.
+
+"damage": Integer. The base attack of the weapon.
+"durability": Integer. The base durability of the weapon.
+"battlecry": Battlecry. The battlecry that is cast when this weapon is played.
+"deathrattle": Spell. The spell that is cast when this weapon is destroyed.
+"aura": Aura. The aura spell that is granted by this weapon.
+"trigger": Trigger. The spell that is casted when the appropriate trigger
+	occurs. See triggers.txt for a list of triggers.
+"onEquip": Spell. The spell that is cast when you equip the weapon.
+"onUnequip": Spell. The spell that is cast when you unequip the weapon.
+
+
+
+Hero Power Information
+
+Hero Power cards follow the same format as Spells.

@@ -11,9 +11,9 @@
 		"class": "DestroySpell",
 		"filter": {
 			"class": "AttributeFilter",
-			"value": 4,
+			"value": 5,
 			"attribute": "ATTACK",
-			"operation": "GREATER"
+			"operation": "GREATER_OR_EQUAL"
 		}
 	},
 	"collectible": true,

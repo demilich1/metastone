@@ -10,14 +10,12 @@
 	"spell": {
 		"class": "DamageSpell",
 		"target": "ALL_CHARACTERS",
-		"valueProvider": {
-			"class": "ConditionalValueProvider",
-			"ifTrue": 0,
-			"ifFalse": 5,
-			"condition": {
-				"class": "CardPropertyCondition",
-				"cardId": "minion_ysera"
-			}
+		"value": 5,
+		"filter": {
+			"class": "SpecificCardFilter",
+			"cardId": "minion_ysera",
+			"invert": true
+			
 		}
 	},
 	"collectible": false,

@@ -92,6 +92,9 @@ public abstract class Card extends Entity {
 		Card copy = clone();
 		copy.setId(IdFactory.UNASSIGNED);
 		copy.setLocation(CardLocation.PENDING);
+		copy.removeAttribute(Attribute.ATTACK_BONUS);
+		copy.removeAttribute(Attribute.HP_BONUS);
+		copy.removeAttribute(Attribute.MANA_COST_MODIFIER);
 		return copy;
 	}
 

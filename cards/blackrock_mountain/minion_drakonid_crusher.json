@@ -19,9 +19,9 @@
 		"condition": {
 			"class": "AttributeCondition",
 			"target": "ENEMY_HERO",
-			"value": 16,
+			"value": 15,
 			"attribute": "HP",
-			"operation": "LESS"
+			"operation": "LESS_OR_EQUAL"
 		},
 		"resolvedLate": false
 	},
