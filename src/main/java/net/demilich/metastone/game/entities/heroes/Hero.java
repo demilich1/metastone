@@ -4,6 +4,7 @@ import java.util.EnumMap;
 import java.util.Map;
 
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.cards.HeroCard;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.weapons.Weapon;
@@ -16,10 +17,10 @@ public class Hero extends Actor {
 	private Weapon weapon;
 	private Weapon destroyedWeapon;
 
-	public Hero(String name, HeroClass heroClass, HeroPower heroPower) {
-		super(null);
-		setName(name);
-		this.setHeroClass(heroClass);
+	public Hero(HeroCard heroCard, HeroPower heroPower) {
+		super(heroCard);
+		setName(heroCard.getName());
+		this.setHeroClass(heroCard.getHeroClass());
 		this.setHeroPower(heroPower);
 	}
 

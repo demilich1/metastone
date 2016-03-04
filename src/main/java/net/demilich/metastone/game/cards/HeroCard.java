@@ -30,7 +30,7 @@ public class HeroCard extends Card {
 
 	public Hero createHero() {
 		HeroPower heroPower = (HeroPower) CardCatalogue.getCardById(desc.heroPower);
-		Hero hero = new Hero(getName(), getClassRestriction(), heroPower);
+		Hero hero = new Hero(this, heroPower);
 		for (Attribute gameTag : getAttributes().keySet()) {
 			if (inheritedAttributes.contains(gameTag)) {
 				hero.setAttribute(gameTag, getAttribute(gameTag));

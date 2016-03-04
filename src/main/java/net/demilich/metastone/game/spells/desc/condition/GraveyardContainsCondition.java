@@ -24,10 +24,6 @@ public class GraveyardContainsCondition extends Condition {
 				card = (Card) deadEntity;
 			}
 
-			if (card == null || card.getCardId() == null) {
-				System.out.println("Graveyard card check is NULL: " + card);
-			}
-
 			if (card.getCardId().equals(cardId)) {
 				return true;
 			}
