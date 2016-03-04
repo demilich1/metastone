@@ -15,5 +15,15 @@ public enum HeroClass {
 	WARRIOR,
 	OPPONENT,
 	
-	BOSS
+	BOSS;
+
+	public boolean isBaseClass() {
+		HeroClass[] nonBaseClasses = {ANY, DECK_COLLECTION, OPPONENT, BOSS};
+		for (int i=0; i<nonBaseClasses.length; i++) {
+			if (nonBaseClasses[i] == this) {
+				return false;
+			}
+		}
+		return true;
+	}
 }
