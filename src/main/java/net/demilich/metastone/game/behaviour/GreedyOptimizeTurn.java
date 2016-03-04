@@ -134,7 +134,7 @@ public class GreedyOptimizeTurn extends Behaviour {
 		return bestAction;
 	}
 
-	private double simulateAction(GameContext context, int playerId, GameAction action) {
+	/*private double simulateAction(GameContext context, int playerId, GameAction action) {
 		GameContext simulation = context.clone();
 		simulation.getLogic().performGameAction(playerId, action);
 		if (!evaluatedActions.containsKey(action.getActionType())) {
@@ -153,6 +153,6 @@ public class GreedyOptimizeTurn extends Behaviour {
 			bestScore = Math.max(bestScore, simulateAction(simulation, playerId, gameAction));
 		}
 		return bestScore;
-	}
+	}*/
 
 }

@@ -3,8 +3,7 @@ package net.demilich.metastone.game.behaviour.learning;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -15,7 +14,7 @@ import net.demilich.metastone.game.cards.Card;
 
 public class LearningBehaviour extends Behaviour {
 
-	private static Logger logger = LoggerFactory.getLogger(LearningBehaviour.class);
+	//private static Logger logger = LoggerFactory.getLogger(LearningBehaviour.class);
 
 	private static final String SAVE_PATH = "brain.ser";
 
