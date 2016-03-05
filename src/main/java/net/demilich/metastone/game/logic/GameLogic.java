@@ -614,6 +614,9 @@ public class GameLogic implements Cloneable {
 			SpellTrigger spellTrigger = weapon.getSpellTrigger();
 			addGameEventListener(player, spellTrigger, weapon);
 		}
+		if (weapon.getCardCostModifier() != null) {
+			addManaModifier(player, weapon.getCardCostModifier(), weapon);
+		}
 		context.fireGameEvent(new WeaponEquippedEvent(context, weapon));
 		context.fireGameEvent(new BoardChangedEvent(context));
 	}
