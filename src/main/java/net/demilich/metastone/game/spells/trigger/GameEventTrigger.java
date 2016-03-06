@@ -26,24 +26,24 @@ public abstract class GameEventTrigger extends CustomCloneable {
 		return (GameEventTrigger) super.clone();
 	}
 
-	protected boolean determineTargetPlayer(GameEvent event, TargetPlayer targetPlayer, Entity host, int triggerOwner) {
+	protected boolean determineTargetPlayer(GameEvent event, TargetPlayer targetPlayer, Entity host, int targetPlayerId) {
 		// -1 means the event should fire for all players
-		if (event.getPlayerId() == -1) {
+		if (event.getPlayerId() == -1 || targetPlayer == null) {
 			return true;
 		}
 		switch (targetPlayer) {
 		case ACTIVE:
-			return event.getGameContext().getActivePlayerId() == triggerOwner;
+			return event.getGameContext().getActivePlayerId() == targetPlayerId;
 		case INACTIVE:
-			return event.getGameContext().getActivePlayerId() != triggerOwner;
+			return event.getGameContext().getActivePlayerId() != targetPlayerId;
 		case BOTH:
 			return true;
 		case OPPONENT:
-			return event.getPlayerId() != triggerOwner;
+			return event.getPlayerId() != targetPlayerId;
 		case OWNER:
-			return host.getOwner() == triggerOwner;
+			return host.getOwner() == targetPlayerId;
 		case SELF:
-			return event.getPlayerId() == triggerOwner;
+			return event.getPlayerId() == targetPlayerId;
 		default:
 			break;
 		}
@@ -59,7 +59,12 @@ public abstract class GameEventTrigger extends CustomCloneable {
 		}
 
 		TargetPlayer targetPlayer = desc.getTargetPlayer();
-		if (targetPlayer != null && !determineTargetPlayer(event, targetPlayer, host, getOwner())) {
+		if (targetPlayer != null && event.getEventTarget() != null && !determineTargetPlayer(event, targetPlayer, host, event.getEventTarget().getOwner())) {
+			return false;
+		}
+		
+		TargetPlayer sourcePlayer = desc.getSourcePlayer();
+		if (sourcePlayer != null && event.getEventSource() != null && !determineTargetPlayer(event, targetPlayer, host, event.getEventSource().getOwner())) {
 			return false;
 		}
 

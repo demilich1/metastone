@@ -5,7 +5,6 @@ import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.events.PhysicalAttackEvent;
-import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerArg;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
@@ -27,11 +26,6 @@ public class PhysicalAttackTrigger extends GameEventTrigger {
 		EntityType targetEntityType = (EntityType) desc.get(EventTriggerArg.TARGET_ENTITY_TYPE);
 		if (targetEntityType != null && physicalAttackEvent.getDefender().getEntityType() != targetEntityType) {
 			return false;
-		}
-
-		TargetPlayer sourcePlayer = desc.getSourcePlayer();
-		if (sourcePlayer != null) {
-			return determineTargetPlayer(physicalAttackEvent, sourcePlayer, host, getOwner());
 		}
 
 		return true;
