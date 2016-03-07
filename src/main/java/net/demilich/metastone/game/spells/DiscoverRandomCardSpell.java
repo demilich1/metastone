@@ -34,6 +34,9 @@ public class DiscoverRandomCardSpell extends Spell {
 		if (heroClass == null) {
 			heroClass = player.getHero().getHeroClass();
 		}
+		if (heroClass == HeroClass.OPPONENT) {
+			heroClass = context.getOpponent(player).getHero().getHeroClass();
+		}
 		if (heroClass != HeroClass.ANY && !heroClass.isBaseClass()) {
 			Card card = context.getPendingCard();
 			heroClass = card.getClassRestriction();
