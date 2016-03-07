@@ -27,8 +27,7 @@ public abstract class GameEventTrigger extends CustomCloneable {
 	}
 
 	protected boolean determineTargetPlayer(GameEvent event, TargetPlayer targetPlayer, Entity host, int targetPlayerId) {
-		// -1 means the event should fire for all players
-		if (event.getPlayerId() == -1 || targetPlayer == null) {
+		if (targetPlayer == null) {
 			return true;
 		}
 		switch (targetPlayer) {
@@ -39,11 +38,10 @@ public abstract class GameEventTrigger extends CustomCloneable {
 		case BOTH:
 			return true;
 		case OPPONENT:
-			return event.getPlayerId() != targetPlayerId;
+			return host.getOwner() != targetPlayerId;
 		case OWNER:
-			return host.getOwner() == targetPlayerId;
 		case SELF:
-			return event.getPlayerId() == targetPlayerId;
+			return host.getOwner() == targetPlayerId;
 		default:
 			break;
 		}
@@ -59,7 +57,7 @@ public abstract class GameEventTrigger extends CustomCloneable {
 		}
 		
 		TargetPlayer sourcePlayer = desc.getSourcePlayer();
-		if (sourcePlayer != null && event.getEventSource() != null && !determineTargetPlayer(event, targetPlayer, host, event.getEventSource().getOwner())) {
+		if (sourcePlayer != null && event.getEventSource() != null && !determineTargetPlayer(event, sourcePlayer, host, event.getEventSource().getOwner())) {
 			return false;
 		}
 
