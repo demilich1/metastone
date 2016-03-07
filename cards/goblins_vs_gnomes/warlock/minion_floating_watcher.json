@@ -14,7 +14,10 @@
 			"class": "DamageReceivedTrigger",
 			"targetPlayer": "SELF",
 			"targetEntityType": "HERO",
-			"ownTurnOnly": true
+			"condition": {
+				"class": "OwnedByPlayerCondition",
+				"targetPlayer": "ACTIVE"
+			}
 		},
 		"spell": {
 			"class": "BuffSpell",
