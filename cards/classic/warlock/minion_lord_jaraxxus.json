@@ -12,17 +12,16 @@
 	"battlecry": {
 		"spell": {
 			"class": "MetaSpell",
-			"spell1": {
-				"class": "DestroySpell",
-				"target": "SELF"
-			},
-			"spell2": {
-				"class": "MetaSpell",
-				"spell1": {
+			"spells": [
+				{
+					"class": "DestroySpell",
+					"target": "SELF"
+				},
+				{
 					"class": "ChangeHeroSpell",
 					"card": "hero_jaraxxus"
 				},
-				"spell2": {
+				{
 					"class": "SetHeroHpSpell",
 					"target": "FRIENDLY_HERO",
 					"value": {
@@ -30,12 +29,12 @@
 						"target": "SELF",
 						"attribute": "HP"
 					}
+				},
+				{
+					"class": "EquipWeaponSpell",
+					"card": "weapon_blood_fury"
 				}
-			},
-			"spell3": {
-				"class": "EquipWeaponSpell",
-				"card": "weapon_blood_fury"
-			}
+			]
 		},
 		"resolvedLate": true
 	},

@@ -9,24 +9,26 @@
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "BuffSpell",
-			"attackBonus": 5,
-			"hpBonus": 5
-		},
-		"spell2": {
-			"class": "AddSpellTriggerSpell",
-			"trigger": {
-				"eventTrigger": {
-					"class": "TurnStartTrigger",
-					"targetPlayer": "SELF"
-				},
-				"spell": {
-					"class": "DestroySpell",
-					"target": "SELF"
+		"spells": [
+			{
+				"class": "BuffSpell",
+				"attackBonus": 5,
+				"hpBonus": 5
+			},
+			{
+				"class": "AddSpellTriggerSpell",
+				"trigger": {
+					"eventTrigger": {
+						"class": "TurnStartTrigger",
+						"targetPlayer": "SELF"
+					},
+					"spell": {
+						"class": "DestroySpell",
+						"target": "SELF"
+					}
 				}
 			}
-		}
+		]
 	},
 	"collectible": false,
 	"set": "CLASSIC",

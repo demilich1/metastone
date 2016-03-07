@@ -12,7 +12,7 @@
 		"targetSelection": "NONE",
 		"spell": {
 			"class": "DiscoverCardSpell",
-			"spell1": {
+			"spell": {
 				"class": "ReceiveCardSpell"
 			},
 			"cards": [

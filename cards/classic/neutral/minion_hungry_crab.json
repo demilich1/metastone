@@ -13,15 +13,17 @@
 		"targetSelection": "MINIONS",
 		"spell": {
 			"class": "MetaSpell",
-			"spell1": {
-				"class": "DestroySpell"
-			},
-			"spell2": {
-				"class": "BuffSpell",
-				"target": "SELF",
-				"attackBonus": 2,
-				"hpBonus": 2
-			},
+			"spells": [
+				{
+					"class": "DestroySpell"
+				},
+				{
+					"class": "BuffSpell",
+					"target": "SELF",
+					"attackBonus": 2,
+					"hpBonus": 2
+				}
+			],
 			"filter": {
 				"class": "RaceFilter",
 				"race": "MURLOC"

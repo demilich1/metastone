@@ -9,13 +9,15 @@
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "BuffSpell",
-			"hpBonus": 2
-		},
-		"spell2": {
-			"class": "DrawCardSpell"
-		}
+		"spells": [
+			{
+				"class": "BuffSpell",
+				"hpBonus": 2
+			},
+			{
+				"class": "DrawCardSpell"
+			}
+		]
 	},
 	"collectible": true,
 	"set": "CLASSIC",

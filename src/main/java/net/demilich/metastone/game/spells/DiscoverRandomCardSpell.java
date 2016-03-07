@@ -19,10 +19,10 @@ import net.demilich.metastone.game.targeting.EntityReference;
 
 public class DiscoverRandomCardSpell extends Spell {
 	
-	public static SpellDesc create(EntityReference target, SpellDesc spell1) {
-		Map<SpellArg, Object> arguments = SpellDesc.build(MetaSpell.class);
+	public static SpellDesc create(EntityReference target, SpellDesc spell) {
+		Map<SpellArg, Object> arguments = SpellDesc.build(DiscoverRandomCardSpell.class);
 		arguments.put(SpellArg.TARGET, target);
-		arguments.put(SpellArg.SPELL_1, spell1);
+		arguments.put(SpellArg.SPELL, spell);
 		return new SpellDesc(arguments);
 	}
 	

@@ -9,19 +9,21 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "RemoveAttributeSpell",
-			"target": "ALL_MINIONS",
-			"attribute": "STEALTH"
-		},
-		"spell2": {
-			"class": "DestroySecretsSpell",
-			"targetPlayer": "OPPONENT"
-		},
-		"spell3": {
-			"class": "DrawCardSpell",
-			"value": 1
-		}
+		"spells": [
+			{
+				"class": "RemoveAttributeSpell",
+				"target": "ALL_MINIONS",
+				"attribute": "STEALTH"
+			},
+			{
+				"class": "DestroySecretsSpell",
+				"targetPlayer": "OPPONENT"
+			},
+			{
+				"class": "DrawCardSpell",
+				"value": 1
+			}
+		]
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

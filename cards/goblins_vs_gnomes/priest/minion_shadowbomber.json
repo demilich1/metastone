@@ -11,16 +11,18 @@
 	"battlecry": {
 		"spell": {
 			"class": "MetaSpell",
-			"spell1": {
-				"class": "DamageSpell",
-				"target": "ENEMY_HERO",
-				"value": 3
-			},
-			"spell2": {
-				"class": "DamageSpell",
-				"target": "FRIENDLY_HERO",
-				"value": 3
-			}
+			"spells": [
+				{
+					"class": "DamageSpell",
+					"target": "ENEMY_HERO",
+					"value": 3
+				},
+				{
+					"class": "DamageSpell",
+					"target": "FRIENDLY_HERO",
+					"value": 3
+				}
+			]
 		},
 		"resolvedLate": false
 	},

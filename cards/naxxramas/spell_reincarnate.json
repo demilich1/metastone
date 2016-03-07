@@ -9,13 +9,15 @@
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "DestroySpell"
-		},
-		"spell2": {
-			"class": "ReviveMinionSpell",
-			"targetPlayer": "OWNER"
-		}
+		"spells": [
+			{
+				"class": "DestroySpell"
+			},
+			{
+				"class": "ReviveMinionSpell",
+				"targetPlayer": "OWNER"
+			}
+		]
 	},
 	"collectible": true,
 	"set": "NAXXRAMAS",

@@ -9,14 +9,16 @@
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "DestroySpell"
-		},
-		"spell2": {
-			"class": "DrawCardSpell",
-			"targetPlayer": "OPPONENT",
-			"value": 2
-		}
+		"spells": [
+			{
+				"class": "DestroySpell"
+			},
+			{
+				"class": "DrawCardSpell",
+				"targetPlayer": "OPPONENT",
+				"value": 2
+			}
+		]
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

@@ -15,16 +15,18 @@
 		},
 		"spell": {
 			"class": "MetaSpell",
-			"spell1": {
-				"class": "DamageSpell",
-				"target": "SELF",
-				"value": 1
-			},
-			"spell2": {
-				"class": "SummonSpell",
-				"card": "token_imp",
-				"boardPositionRelative": "RIGHT"
-			}
+			"spells": [
+				{
+					"class": "DamageSpell",
+					"target": "SELF",
+					"value": 1
+				},
+				{
+					"class": "SummonSpell",
+					"card": "token_imp",
+					"boardPositionRelative": "RIGHT"
+				}
+			]
 		}
 	},
 	"collectible": true,

@@ -9,15 +9,17 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "DamageSpell",
-			"target": "FRIENDLY_HERO",
-			"value": 2
-		},
-		"spell2": {
-			"class": "DrawCardSpell",
-			"value": 1
-		}
+		"spells": [
+			{
+				"class": "DamageSpell",
+				"target": "FRIENDLY_HERO",
+				"value": 2
+			},
+			{
+				"class": "DrawCardSpell",
+				"value": 1
+			}
+		]
 	},
 	"collectible": false,
 	"set": "CLASSIC",

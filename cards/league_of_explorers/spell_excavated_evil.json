@@ -9,16 +9,18 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "DamageSpell",
-			"target": "ALL_MINIONS",
-			"value": 3
-		},
-		"spell2": {
-			"class": "ShuffleToDeckSpell",
-			"targetPlayer": "OPPONENT",
-			"card": "spell_excavated_evil"
-		}
+		"spells": [
+			{
+				"class": "DamageSpell",
+				"target": "ALL_MINIONS",
+				"value": 3
+			},
+			{
+				"class": "ShuffleToDeckSpell",
+				"targetPlayer": "OPPONENT",
+				"card": "spell_excavated_evil"
+			}
+		]
 	},
 	"collectible": true,
 	"set": "LEAGUE_OF_EXPLORERS",

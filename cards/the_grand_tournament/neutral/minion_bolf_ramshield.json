@@ -17,15 +17,17 @@
 		},
 		"spell": {
 			"class": "MetaSpell",
-			"spell1": {
-				"class": "DamageSpell",
-				"target": "SELF"
-			},
-			"spell2": {
-				"class": "ModifyDamageSpell",
-				"value": 0,
-				"operation": "SET"
-			}
+			"spells": [
+				{
+					"class": "DamageSpell",
+					"target": "SELF"
+				},
+				{
+					"class": "ModifyDamageSpell",
+					"value": 0,
+					"operation": "SET"
+				}
+			]
 		}
 	},
 	"collectible": true,

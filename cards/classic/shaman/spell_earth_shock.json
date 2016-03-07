@@ -9,13 +9,15 @@
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "SilenceSpell"
-		},
-		"spell2": {
-			"class": "DamageSpell",
-			"value": 1
-		}
+		"spells": [
+			{
+				"class": "SilenceSpell"
+			},
+			{
+				"class": "DamageSpell",
+				"value": 1
+			}
+		]
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

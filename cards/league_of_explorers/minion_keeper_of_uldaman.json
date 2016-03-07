@@ -12,14 +12,16 @@
 		"targetSelection": "MINIONS",
 		"spell": {
 			"class": "MetaSpell",
-			"spell1": {
-				"class": "SetAttackSpell",
-				"value": 3
-			},
-			"spell2": {
-				"class": "SetHpSpell",
-				"value": 3
-			}
+			"spells": [
+				{
+					"class": "SetAttackSpell",
+					"value": 3
+				},
+				{
+					"class": "SetHpSpell",
+					"value": 3
+				}
+			]
 		},
 		"resolvedLate": false
 	},

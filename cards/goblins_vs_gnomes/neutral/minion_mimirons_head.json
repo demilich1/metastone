@@ -21,18 +21,20 @@
 		},
 		"spell": {
 			"class": "MetaSpell",
-			"spell1": {
-				"class": "DestroySpell",
-				"target": "FRIENDLY_MINIONS",
-				"filter": {
-					"class": "RaceFilter",
-					"race": "MECH"
+			"spells": [
+				{
+					"class": "DestroySpell",
+					"target": "FRIENDLY_MINIONS",
+					"filter": {
+						"class": "RaceFilter",
+						"race": "MECH"
+					}
+				},
+				{
+					"class": "SummonSpell",
+					"card": "token_v-07-tr-0n"
 				}
-			},
-			"spell2": {
-				"class": "SummonSpell",
-				"card": "token_v-07-tr-0n"
-			}
+			]
 		}
 	},
 	"collectible": true,

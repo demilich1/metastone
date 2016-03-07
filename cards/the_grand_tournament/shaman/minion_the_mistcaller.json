@@ -11,28 +11,30 @@
 	"battlecry": {
 		"spell": {
 			"class": "MetaSpell",
-			"spell1": {
-				"class": "BuffSpell",
-				"target": "FRIENDLY_HAND",
-				"attackBonus": 1,
-				"hpBonus": 1
-			},
-			"spell2": {
-				"class": "AddSpellTriggerSpell",
-				"target": "FRIENDLY_HERO",
-				"trigger": {
-					"eventTrigger": {
-						"class": "CardDrawnTrigger",
-						"targetPlayer": "SELF"
-					},
-					"spell": {
-						"class": "BuffSpell",
-						"target": "EVENT_TARGET",
-						"attackBonus": 1,
-						"hpBonus": 1
+			"spells": [
+				{
+					"class": "BuffSpell",
+					"target": "FRIENDLY_HAND",
+					"attackBonus": 1,
+					"hpBonus": 1
+				},
+				{
+					"class": "AddSpellTriggerSpell",
+					"target": "FRIENDLY_HERO",
+					"trigger": {
+						"eventTrigger": {
+							"class": "CardDrawnTrigger",
+							"targetPlayer": "SELF"
+						},
+						"spell": {
+							"class": "BuffSpell",
+							"target": "EVENT_TARGET",
+							"attackBonus": 1,
+							"hpBonus": 1
+						}
 					}
 				}
-			},
+			],
 			"resolvedLate": false
 		}
 	},

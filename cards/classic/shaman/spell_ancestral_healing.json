@@ -9,17 +9,19 @@
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "HealSpell",
-			"valueProvider": {
-				"class": "AttributeValueProvider",
-				"attribute": "MAX_HP"
+		"spells": [
+			{
+				"class": "HealSpell",
+				"valueProvider": {
+					"class": "AttributeValueProvider",
+					"attribute": "MAX_HP"
+				}
+			},
+			{
+				"class": "AddAttributeSpell",
+				"attribute": "TAUNT"
 			}
-		},
-		"spell2": {
-			"class": "AddAttributeSpell",
-			"attribute": "TAUNT"
-		}
+		]
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

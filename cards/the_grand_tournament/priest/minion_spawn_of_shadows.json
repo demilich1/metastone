@@ -15,16 +15,18 @@
 		},
 		"spell": {
 			"class": "MetaSpell",
-			"spell1": {
-				"class": "DamageSpell",
-				"target": "ENEMY_HERO",
-				"value": 4
-			},
-			"spell2": {
-				"class": "DamageSpell",
-				"target": "FRIENDLY_HERO",
-				"value": 4
-			}
+			"spells": [
+				{
+					"class": "DamageSpell",
+					"target": "ENEMY_HERO",
+					"value": 4
+				},
+				{
+					"class": "DamageSpell",
+					"target": "FRIENDLY_HERO",
+					"value": 4
+				}
+			]
 		}
 	},
 	"collectible": true,

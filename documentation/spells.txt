@@ -11,7 +11,7 @@ Examples: Ice Block, Frost Elemental, Conceal
 AddDeathrattleSpell
 Adds a Deathrattle to the target.
 Examples: Explorer’s Hat, Ancestral Spirit, Soul of the Forest
-“spell1”: Spell. The Deathrattle you want to add to the target.
+“spell”: Spell. The Deathrattle you want to add to the target.
 
 AddSecretSpell
 DO NOT USE. Internal Spell for casting Secrets.
@@ -122,7 +122,7 @@ DiscoverCardSpell
 Discovers a card from a list.
 Examples: Sir Finley Mrrgglton, Arch-Thief Rafaam
 “cards”: Card ID Array. The list of cards to choose from.
-“spell1”: Spell. The Spell to use after Discovering the Card.
+“spell”: Spell. The Spell to use after Discovering the Card.
 “cannotReceiveOwned”: Optional Boolean. Set to true to disallow receiving a Card from the list that you own, including Hero Powers.
 “howMany”: Optional Integer. Default is 3. The number of Card options.
 
@@ -134,7 +134,7 @@ Examples: Tracking
 DiscoverRandomCardSpell {}: Consider merging with DiscoverCardSpell
 Discovers a random Card from a filter.
 Examples: Museum Curator, Raven Idol, Dark Peddler
-“spell1”: Spell. The Spell to use after Discovering the Card.
+“spell”: Spell. The Spell to use after Discovering the Card.
 “cardFilter”: Card Filter. Filters the Discoverable Cards.
 “howMany”: Optional Integer. Default is 3. The number of Card options.
 
@@ -189,11 +189,9 @@ Examples: Tuskarr Jouster, Healing Wave
 “spell2”: Optional Spell. Spell to cast if the Joust fails.
 
 MetaSpell
-A Spell that casts 2 or 3 Spells in succession. These do not act as separate Spells.
-Examples: Frostbolt, Earth Shock, Lord Jaraxxus, Poison Seeds
-“spell1”: Spell. The first Spell to cast.
-“spell2”: Spell. The second Spell to cast.
-“spell3”: Optional Spell. The third Spell to cast.
+A Spell that casts multiple Spells in succession. These do not act as separate Spells.
+Examples: Frostbolt, Earth Shock, Lord Jaraxxus
+“spells”: Spell Array. Array of multiple spells you wish to cast.
 
 MindControlSpell
 []

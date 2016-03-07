@@ -22,16 +22,18 @@
 			"description": "2 Treants",
 			"spell": {
 				"class": "MetaSpell",
-				"spell1": {
-					"class": "SummonSpell",
-					"card": "token_treant_taunt",
-					"boardPositionRelative": "LEFT"
-				},
-				"spell2": {
-					"class": "SummonSpell",
-					"card": "token_treant_taunt",
-					"boardPositionRelative": "RIGHT"
-				}
+				"spells": [
+					{
+						"class": "SummonSpell",
+						"card": "token_treant_taunt",
+						"boardPositionRelative": "LEFT"
+					},
+					{
+						"class": "SummonSpell",
+						"card": "token_treant_taunt",
+						"boardPositionRelative": "RIGHT"
+					}
+				]
 			},
 			"resolvedLate": false
 		}

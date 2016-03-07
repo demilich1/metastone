@@ -12,15 +12,17 @@
 		"targetSelection": "FRIENDLY_MINIONS",
 		"spell": {
 			"class": "MetaSpell",
-			"spell1": {
-				"class": "BuffSpell",
-				"attackBonus": 2,
-				"hpBonus": 2
-			},
-			"spell2": {
-				"class": "AddAttributeSpell",
-				"attribute": "TAUNT"
-			},
+			"spells": [
+				{
+					"class": "BuffSpell",
+					"attackBonus": 2,
+					"hpBonus": 2
+				},
+				{
+					"class": "AddAttributeSpell",
+					"attribute": "TAUNT"
+				}
+			],
 			"filter": {
 				"class": "RaceFilter",
 				"race": "BEAST"

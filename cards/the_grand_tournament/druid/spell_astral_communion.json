@@ -9,26 +9,28 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "DiscardSpell",
-			"value": -1
-		},
-		"spell2": {
-			"class": "EitherOrSpell",
-			"spell1": {
-				"class": "ReceiveCardSpell",
-				"targetPlayer": "SELF",
-				"card": "spell_excess_mana"
+		"spells": [
+			{
+				"class": "DiscardSpell",
+				"value": -1
 			},
-			"spell2": {
-				"class": "ModifyMaxManaSpell",
-				"fullManaCrystals": true,
-				"value": 10
-			},
-			"condition": {
-				"class": "ManaMaxedCondition"
+			{
+				"class": "EitherOrSpell",
+				"spell1": {
+					"class": "ReceiveCardSpell",
+					"targetPlayer": "SELF",
+					"card": "spell_excess_mana"
+				},
+				"spell2": {
+					"class": "ModifyMaxManaSpell",
+					"fullManaCrystals": true,
+					"value": 10
+				},
+				"condition": {
+					"class": "ManaMaxedCondition"
+				}
 			}
-		}
+		]
 	},
 	"collectible": true,
 	"set": "THE_GRAND_TOURNAMENT",

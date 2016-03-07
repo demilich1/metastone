@@ -12,21 +12,23 @@
 		"targetSelection": "NONE",
 		"spell": {
 			"class": "MetaSpell",
-			"spell1": {
-				"class": "BuffSpell",
-				"target": "SELF",
-				"valueProvider": {
-					"class": "AttributeCounter",
+			"spells": [
+				{
+					"class": "BuffSpell",
+					"target": "SELF",
+					"valueProvider": {
+						"class": "AttributeCounter",
+						"target": "ALL_MINIONS",
+						"attribute": "DIVINE_SHIELD",
+						"multiplier": 3
+					}
+				},
+				{
+					"class": "RemoveAttributeSpell",
 					"target": "ALL_MINIONS",
-					"attribute": "DIVINE_SHIELD",
-					"multiplier": 3
+					"attribute": "DIVINE_SHIELD"
 				}
-			},
-			"spell2": {
-				"class": "RemoveAttributeSpell",
-				"target": "ALL_MINIONS",
-				"attribute": "DIVINE_SHIELD"
-			}
+			]
 		},
 		"resolvedLate": false
 	},

@@ -9,18 +9,20 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "SummonSpell",
-			"cards": [
-				"token_silver_hand_recruit",
-				"token_silver_hand_recruit",
-				"token_silver_hand_recruit"
-			]
-		},
-		"spell2": {
-			"class": "EquipWeaponSpell",
-			"card": "weapon_lights_justice"
-		}
+		"spells": [
+			{
+				"class": "SummonSpell",
+				"cards": [
+					"token_silver_hand_recruit",
+					"token_silver_hand_recruit",
+					"token_silver_hand_recruit"
+				]
+			},
+			{
+				"class": "EquipWeaponSpell",
+				"card": "weapon_lights_justice"
+			}
+		]
 	},
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",

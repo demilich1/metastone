@@ -9,7 +9,7 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "DiscoverDrawSpell",
-		"spell1": {
+		"spell": {
 			"class": "ReceiveCardSpell"
 		}
 	},

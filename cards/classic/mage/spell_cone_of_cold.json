@@ -11,14 +11,16 @@
 		"class": "AdjacentEffectSpell",
 		"spell1": {
 			"class": "MetaSpell",
-			"spell1": {
-				"class": "AddAttributeSpell",
-				"attribute": "FROZEN"
-			},
-			"spell2": {
-				"class": "DamageSpell",
-				"value": 1
-			}
+			"spells": [
+				{
+					"class": "AddAttributeSpell",
+					"attribute": "FROZEN"
+				},
+				{
+					"class": "DamageSpell",
+					"value": 1
+				}
+			]
 		}
 	},
 	"collectible": true,

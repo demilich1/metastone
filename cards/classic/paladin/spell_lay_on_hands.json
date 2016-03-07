@@ -9,14 +9,16 @@
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "HealSpell",
-			"value": 8
-		},
-		"spell2": {
-			"class": "DrawCardSpell",
-			"value": 3
-		}
+		"spells": [
+			{
+				"class": "HealSpell",
+				"value": 8
+			},
+			{
+				"class": "DrawCardSpell",
+				"value": 3
+			}
+		]
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

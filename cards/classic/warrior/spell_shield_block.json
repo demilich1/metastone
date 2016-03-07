@@ -9,15 +9,17 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "BuffHeroSpell",
-			"target": "FRIENDLY_HERO",
-			"armorBonus": 5
-		},
-		"spell2": {
-			"class": "DrawCardSpell",
-			"value": 1
-		}
+		"spells": [
+			{
+				"class": "BuffHeroSpell",
+				"target": "FRIENDLY_HERO",
+				"armorBonus": 5
+			},
+			{
+				"class": "DrawCardSpell",
+				"value": 1
+			}
+		]
 	},
 	"collectible": true,
 	"set": "CLASSIC",

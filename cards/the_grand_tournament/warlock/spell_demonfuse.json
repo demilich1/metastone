@@ -9,16 +9,18 @@
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "BuffSpell",
-			"attackBonus": 3,
-			"hpBonus": 3
-		},
-		"spell2": {
-			"class": "ModifyMaxManaSpell",
-			"targetPlayer": "OPPONENT",
-			"value": 1
-		},
+		"spells": [
+			{
+				"class": "BuffSpell",
+				"attackBonus": 3,
+				"hpBonus": 3
+			},
+			{
+				"class": "ModifyMaxManaSpell",
+				"targetPlayer": "OPPONENT",
+				"value": 1
+			}
+		],
 		"filter": {
 			"class": "RaceFilter",
 			"race": "DEMON"

@@ -16,14 +16,16 @@
 			"spell": {
 				"class": "MetaSpell",
 				"target": "SELF",
-				"spell1": {
-					"class": "AddAttributeSpell",
-					"attribute": "TAUNT"
-				},
-				"spell2": {
-					"class": "AddAttributeSpell",
-					"attribute": "DIVINE_SHIELD"
-				}
+				"spells": [
+					{
+						"class": "AddAttributeSpell",
+						"attribute": "TAUNT"
+					},
+					{
+						"class": "AddAttributeSpell",
+						"attribute": "DIVINE_SHIELD"
+					}
+				]
 			}
 		},
 		"resolvedLate": false

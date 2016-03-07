@@ -10,14 +10,16 @@
 	"spell": {
 		"class": "MetaSpell",
 		"target": "FRIENDLY_HERO",
-		"spell1": {
-			"class": "HealSpell",
-			"value": 4
-		},
-		"spell2": {
-			"class": "BuffHeroSpell",
-			"attackBonus": 2
-		}
+		"spells": [
+			{
+				"class": "HealSpell",
+				"value": 4
+			},
+			{
+				"class": "BuffHeroSpell",
+				"attackBonus": 2
+			}
+		]
 	},
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",

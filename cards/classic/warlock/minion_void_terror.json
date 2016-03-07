@@ -13,24 +13,26 @@
 		"targetSelection": "NONE",
 		"spell": {
 			"class": "MetaSpell",
-			"spell1": {
-				"class": "BuffSpell",
-				"target": "SELF",
-				"attackValueProvider": {
-					"class": "AttributeValueProvider",
-					"target": "ADJACENT_MINIONS",
-					"attribute": "ATTACK"
+			"spells": [
+				{
+					"class": "BuffSpell",
+					"target": "SELF",
+					"attackValueProvider": {
+						"class": "AttributeValueProvider",
+						"target": "ADJACENT_MINIONS",
+						"attribute": "ATTACK"
+					},
+					"hpValueProvider": {
+						"class": "AttributeValueProvider",
+						"target": "ADJACENT_MINIONS",
+						"attribute": "HP"
+					}
 				},
-				"hpValueProvider": {
-					"class": "AttributeValueProvider",
-					"target": "ADJACENT_MINIONS",
-					"attribute": "HP"
+				{
+					"class": "DestroySpell",
+					"target": "ADJACENT_MINIONS"
 				}
-			},
-			"spell2": {
-				"class": "DestroySpell",
-				"target": "ADJACENT_MINIONS"
-			}
+			]
 		},
 		"resolvedLate": false
 	},

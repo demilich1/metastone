@@ -9,18 +9,20 @@
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "BuffSpell",
-			"attackBonus": 1,
-			"hpBonus": 1
-		},
-		"spell2": {
-			"class": "AddDeathrattleSpell",
-			"spell1": {
-				"class": "ReceiveCardSpell",
-				"card": "spell_explorers_hat"
+		"spells": [
+			{
+				"class": "BuffSpell",
+				"attackBonus": 1,
+				"hpBonus": 1
+			},
+			{
+				"class": "AddDeathrattleSpell",
+				"spell": {
+					"class": "ReceiveCardSpell",
+					"card": "spell_explorers_hat"
+				}
 			}
-		}
+		]
 	},
 	"collectible": true,
 	"set": "LEAGUE_OF_EXPLORERS",

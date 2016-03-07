@@ -11,16 +11,18 @@
 	"battlecry": {
 		"spell": {
 			"class": "MetaSpell",
-			"spell1": {
-				"class": "SummonSpell",
-				"card": "token_boom_bot",
-				"boardPositionRelative": "RIGHT"
-			},
-			"spell2": {
-				"class": "SummonSpell",
-				"card": "token_boom_bot",
-				"boardPositionRelative": "LEFT"
-			}
+			"spells": [
+				{
+					"class": "SummonSpell",
+					"card": "token_boom_bot",
+					"boardPositionRelative": "RIGHT"
+				},
+				{
+					"class": "SummonSpell",
+					"card": "token_boom_bot",
+					"boardPositionRelative": "LEFT"
+				}
+			]
 		},
 		"resolvedLate": false
 	},

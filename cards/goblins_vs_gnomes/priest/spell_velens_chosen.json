@@ -9,16 +9,18 @@
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "BuffSpell",
-			"attackBonus": 2,
-			"hpBonus": 4
-		},
-		"spell2": {
-			"class": "ModifyAttributeSpell",
-			"value": 1,
-			"attribute": "SPELL_DAMAGE"
-		}
+		"spells": [
+			{
+				"class": "BuffSpell",
+				"attackBonus": 2,
+				"hpBonus": 4
+			},
+			{
+				"class": "ModifyAttributeSpell",
+				"value": 1,
+				"attribute": "SPELL_DAMAGE"
+			}
+		]
 	},
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",

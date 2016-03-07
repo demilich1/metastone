@@ -9,24 +9,26 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "DestroyAllExceptOneSpell",
-			"target": "ENEMY_MINIONS",
-			"filter": {
-				"class": "HighestAttributeFilter",
+		"spells": [
+			{
+				"class": "DestroyAllExceptOneSpell",
 				"target": "ENEMY_MINIONS",
-				"attribute": "ATTACK"
-			}
-		},
-		"spell2": {
-			"class": "DestroyAllExceptOneSpell",
-			"target": "FRIENDLY_MINIONS",
-			"filter": {
-				"class": "HighestAttributeFilter",
+				"filter": {
+					"class": "HighestAttributeFilter",
+					"target": "ENEMY_MINIONS",
+					"attribute": "ATTACK"
+				}
+			},
+			{
+				"class": "DestroyAllExceptOneSpell",
 				"target": "FRIENDLY_MINIONS",
-				"attribute": "ATTACK"
+				"filter": {
+					"class": "HighestAttributeFilter",
+					"target": "FRIENDLY_MINIONS",
+					"attribute": "ATTACK"
+				}
 			}
-		}
+		]
 	},
 	"collectible": true,
 	"set": "THE_GRAND_TOURNAMENT",

@@ -13,14 +13,16 @@
 		"spell": {
 			"class": "MetaSpell",
 			"target": "FRIENDLY_MINIONS",
-			"spell1": {
-				"class": "AddAttributeSpell",
-				"attribute": "DIVINE_SHIELD"
-			},
-			"spell2": {
-				"class": "AddAttributeSpell",
-				"attribute": "TAUNT"
-			},
+			"spells": [
+				{
+					"class": "AddAttributeSpell",
+					"attribute": "DIVINE_SHIELD"
+				},
+				{
+					"class": "AddAttributeSpell",
+					"attribute": "TAUNT"
+				}
+			],
 			"randomTarget": true
 		},
 		"resolvedLate": false

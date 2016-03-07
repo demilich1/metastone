@@ -9,14 +9,13 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "MetaSpell",
-			"spell1": {
+		"spells": [
+			{
 				"class": "DestroySpell",
 				"target": "ENEMY_MINIONS",
 				"randomTarget": true
 			},
-			"spell2": {
+			{
 				"class": "DestroySpell",
 				"target": "ENEMY_MINIONS",
 				"randomTarget": true,
@@ -26,12 +25,12 @@
 					"operation": "HAS",
 					"invert": true
 				}
+			},
+			{
+				"class": "DiscardSpell",
+				"value": 2
 			}
-		},
-		"spell2": {
-			"class": "DiscardSpell",
-			"value": 2
-		}
+		]
 	},
 	"condition": {
 		"class": "MinionCountCondition",

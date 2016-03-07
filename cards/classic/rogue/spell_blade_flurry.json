@@ -9,19 +9,21 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "DamageSpell",
-			"target": "ENEMY_CHARACTERS",
-			"valueProvider": {
-				"class": "AttributeValueProvider",
-				"target": "FRIENDLY_WEAPON",
-				"attribute": "ATTACK"
+		"spells": [
+			{
+				"class": "DamageSpell",
+				"target": "ENEMY_CHARACTERS",
+				"valueProvider": {
+					"class": "AttributeValueProvider",
+					"target": "FRIENDLY_WEAPON",
+					"attribute": "ATTACK"
+				}
+			},
+			{
+				"class": "DestroySpell",
+				"target": "FRIENDLY_WEAPON"
 			}
-		},
-		"spell2": {
-			"class": "DestroySpell",
-			"target": "FRIENDLY_WEAPON"
-		}
+		]
 	},
 	"condition": {
 		"class": "HasWeaponCondition"

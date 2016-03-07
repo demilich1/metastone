@@ -9,18 +9,20 @@
 	"targetSelection": "FRIENDLY_MINIONS",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "DestroySpell"
-		},
-		"spell2": {
-			"class": "DamageSpell",
-			"target": "ENEMY_MINIONS",
-			"valueProvider": {
-				"class": "AttributeValueProvider",
-				"target": "TARGET",
-				"attribute": "ATTACK"
+		"spells": [
+			{
+				"class": "DestroySpell"
+			},
+			{
+				"class": "DamageSpell",
+				"target": "ENEMY_MINIONS",
+				"valueProvider": {
+					"class": "AttributeValueProvider",
+					"target": "TARGET",
+					"attribute": "ATTACK"
+				}
 			}
-		}
+		]
 	},
 	"collectible": true,
 	"set": "CLASSIC",

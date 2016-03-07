@@ -9,14 +9,16 @@
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "DamageSpell",
-			"value": 4
-		},
-		"spell2": {
-			"class": "DiscardSpell",
-			"value": 1
-		}
+		"spells": [
+			{
+				"class": "DamageSpell",
+				"value": 4
+			},
+			{
+				"class": "DiscardSpell",
+				"value": 1
+			}
+		]
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

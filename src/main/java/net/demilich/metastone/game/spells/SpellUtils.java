@@ -92,7 +92,7 @@ public class SpellUtils {
 	}
 	
 	public static DiscoverAction getDiscover(GameContext context, Player player, SpellDesc desc, CardCollection cards) {
-		SpellDesc spell = (SpellDesc) desc.get(SpellArg.SPELL_1);
+		SpellDesc spell = (SpellDesc) desc.get(SpellArg.SPELL);
 		List<GameAction> discoverActions = new ArrayList<>();
 		for (Card card : cards) {
 			SpellDesc spellClone = spell.addArg(SpellArg.CARD, card.getCardId());
