@@ -1102,6 +1102,9 @@ public class GameLogic implements Cloneable {
 		log("Maximum mana was changed by {} for {}", delta, player.getName());
 		int maxMana = MathUtils.clamp(player.getMaxMana() + delta, 0, GameLogic.MAX_MANA);
 		player.setMaxMana(maxMana);
+		if (delta < 0 && player.getMana() > player.getMaxMana()) {
+			modifyCurrentMana(player.getId(), delta);
+		}
 	}
 
 	private void mulligan(Player player, boolean begins) {
