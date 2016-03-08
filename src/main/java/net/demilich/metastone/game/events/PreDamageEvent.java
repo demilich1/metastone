@@ -9,7 +9,7 @@ public class PreDamageEvent extends GameEvent {
 	private final Entity source;
 
 	public PreDamageEvent(GameContext context, Entity victim, Entity source) {
-		super(context, victim.getOwner());
+		super(context, victim.getOwner(), source.getOwner());
 		this.victim = victim;
 		this.source = source;
 	}
@@ -17,6 +17,11 @@ public class PreDamageEvent extends GameEvent {
 	@Override
 	public Entity getEventTarget() {
 		return getVictim();
+	}
+	
+	@Override
+	public Entity getEventSource() {
+		return getSource();
 	}
 
 	@Override

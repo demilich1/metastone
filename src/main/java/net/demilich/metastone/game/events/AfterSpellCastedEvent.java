@@ -9,7 +9,7 @@ public class AfterSpellCastedEvent extends GameEvent {
 	private final Card sourceCard;
 
 	public AfterSpellCastedEvent(GameContext context, int playerId, Card sourceCard) {
-		super(context, playerId);
+		super(context, playerId, playerId);
 		this.sourceCard = sourceCard;
 	}
 	

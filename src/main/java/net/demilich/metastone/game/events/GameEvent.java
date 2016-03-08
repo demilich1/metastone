@@ -8,11 +8,13 @@ public abstract class GameEvent {
 
 	private final GameContext context;
 	private TriggerLayer triggerLayer = TriggerLayer.DEFAULT;
-	private final int playerId;
+	private final int targetPlayerId;
+	private final int sourcePlayerId;
 
-	public GameEvent(GameContext context, int playerId) {
+	public GameEvent(GameContext context, int targetPlayerId, int sourcePlayerId) {
 		this.context = context;
-		this.playerId = playerId;
+		this.targetPlayerId = targetPlayerId;
+		this.sourcePlayerId = sourcePlayerId;
 	}
 
 	/**
@@ -42,8 +44,12 @@ public abstract class GameEvent {
 		this.triggerLayer = triggerLayer;
 	}
 
-	public int getPlayerId() {
-		return playerId;
+	public int getTargetPlayerId() {
+		return targetPlayerId;
+	}
+	
+	public int getSourcePlayerId() {
+		return sourcePlayerId;
 	}
 
 }

@@ -6,7 +6,7 @@ import net.demilich.metastone.game.entities.Entity;
 public class TurnEndEvent extends GameEvent {
 
 	public TurnEndEvent(GameContext context, int playerId) {
-		super(context, playerId);
+		super(context, playerId, -1);
 	}
 	
 	@Override

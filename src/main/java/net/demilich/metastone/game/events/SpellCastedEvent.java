@@ -9,7 +9,7 @@ public class SpellCastedEvent extends GameEvent {
 	private final Card sourceCard;
 
 	public SpellCastedEvent(GameContext context, int playerId, Card sourceCard) {
-		super(context, playerId);
+		super(context, playerId, playerId);
 		this.sourceCard = sourceCard;
 	}
 	

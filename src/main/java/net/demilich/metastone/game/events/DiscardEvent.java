@@ -8,7 +8,7 @@ public class DiscardEvent extends GameEvent {
 	private final Card card;
 
 	public DiscardEvent(GameContext context, int playerId, Card card) {
-		super(context, playerId);
+		super(context, playerId, -1);
 		this.card = card;
 	}
 

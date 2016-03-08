@@ -27,7 +27,7 @@ public abstract class GameEventTrigger extends CustomCloneable {
 	}
 
 	protected boolean determineTargetPlayer(GameEvent event, TargetPlayer targetPlayer, Entity host, int targetPlayerId) {
-		if (targetPlayer == null) {
+		if (targetPlayerId == -1 || targetPlayer == null) {
 			return true;
 		}
 		switch (targetPlayer) {
@@ -38,10 +38,11 @@ public abstract class GameEventTrigger extends CustomCloneable {
 		case BOTH:
 			return true;
 		case OPPONENT:
-			return host.getOwner() != targetPlayerId;
+			return getOwner() != targetPlayerId;
 		case OWNER:
-		case SELF:
 			return host.getOwner() == targetPlayerId;
+		case SELF:
+			return getOwner() == targetPlayerId;
 		default:
 			break;
 		}
@@ -52,15 +53,13 @@ public abstract class GameEventTrigger extends CustomCloneable {
 
 	public final boolean fires(GameEvent event, Entity host) {
 		TargetPlayer targetPlayer = desc.getTargetPlayer();
-		if (targetPlayer != null && event.getEventTarget() != null && !determineTargetPlayer(event, targetPlayer, host, event.getEventTarget().getOwner())) {
+		if (targetPlayer != null && !determineTargetPlayer(event, targetPlayer, host, event.getTargetPlayerId())) {
 			return false;
 		}
-		
 		TargetPlayer sourcePlayer = desc.getSourcePlayer();
-		if (sourcePlayer != null && event.getEventSource() != null && !determineTargetPlayer(event, sourcePlayer, host, event.getEventSource().getOwner())) {
+		if (sourcePlayer != null && !determineTargetPlayer(event, sourcePlayer, host, event.getSourcePlayerId())) {
 			return false;
 		}
-
 		boolean breaksStealth = desc.getBool(EventTriggerArg.BREAKS_STEALTH);
 		if (breaksStealth) {
 			event.getGameContext().getLogic().removeAttribute(host, Attribute.STEALTH);
@@ -76,7 +75,6 @@ public abstract class GameEventTrigger extends CustomCloneable {
 		} else if (hostTargetType == TargetType.IGNORE_OTHER_SOURCES && event.getEventSource() != host) {
 			return false;
 		}
-
 		Condition condition = (Condition) desc.get(EventTriggerArg.CONDITION);
 		Player owner = event.getGameContext().getPlayer(getOwner());
 		if (condition != null && !condition.isFulfilled(event.getGameContext(), owner, event.getEventTarget())) {

@@ -11,7 +11,7 @@ public class DrawCardEvent extends GameEvent {
 	private final CardType sourceType;
 
 	public DrawCardEvent(GameContext context, int playerId, Card card, CardType sourceType) {
-		super(context, playerId);
+		super(context, playerId, -1);
 		this.card = card;
 		this.sourceType = sourceType;
 	}

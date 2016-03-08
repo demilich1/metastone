@@ -9,7 +9,7 @@ public class HealEvent extends GameEvent {
 	private final int healing;
 
 	public HealEvent(GameContext context, int playerId, Entity target, int healing) {
-		super(context, playerId);
+		super(context, playerId, -1);
 		this.target = target;
 		this.healing = healing;
 	}

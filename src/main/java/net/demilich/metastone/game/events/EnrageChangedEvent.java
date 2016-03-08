@@ -8,7 +8,7 @@ public class EnrageChangedEvent extends GameEvent {
 	private final Entity target;
 
 	public EnrageChangedEvent(GameContext context, Entity target) {
-		super(context, target.getOwner());
+		super(context, target.getOwner(), -1);
 		this.target = target;
 	}
 	

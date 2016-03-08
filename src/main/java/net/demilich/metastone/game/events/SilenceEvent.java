@@ -9,7 +9,7 @@ public class SilenceEvent extends GameEvent {
 	private final Minion target;
 
 	public SilenceEvent(GameContext context, int playerId, Minion target) {
-		super(context, playerId);
+		super(context, playerId, -1);
 		this.target = target;
 	}
 	

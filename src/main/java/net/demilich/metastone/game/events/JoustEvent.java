@@ -11,7 +11,7 @@ public class JoustEvent extends GameEvent {
 	private final Card opponentCard;
 
 	public JoustEvent(GameContext context, int playerId, boolean won, Card ownCard, Card opponentCard) {
-		super(context, playerId);
+		super(context, playerId, -1);
 		this.won = won;
 		this.ownCard = ownCard;
 		this.opponentCard = opponentCard;
@@ -19,7 +19,7 @@ public class JoustEvent extends GameEvent {
 	
 	@Override
 	public Entity getEventTarget() {
-		return ownCard;
+		return getOwnCard();
 	}
 
 	@Override

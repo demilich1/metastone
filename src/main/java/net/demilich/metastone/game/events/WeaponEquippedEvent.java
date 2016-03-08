@@ -8,7 +8,7 @@ public class WeaponEquippedEvent extends GameEvent {
 	private final Weapon weapon;
 
 	public WeaponEquippedEvent(GameContext context, Weapon weapon) {
-		super(context, weapon.getOwner());
+		super(context, weapon.getOwner(), -1);
 		this.weapon = weapon;
 	}
 	

@@ -11,7 +11,7 @@ public class TargetAcquisitionEvent extends GameEvent {
 	private final ActionType actionType;
 
 	public TargetAcquisitionEvent(GameContext context, int playerId, ActionType actionType, Entity source, Entity target) {
-		super(context, playerId);
+		super(context, playerId, source.getOwner());
 		this.actionType = actionType;
 		this.source = source;
 		this.target = target;
