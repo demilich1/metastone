@@ -268,6 +268,7 @@ public class GameLogic implements Cloneable {
 				if (targetOverride != null && targetOverride.getId() != IdFactory.UNASSIGNED) {
 					targets.remove(0);
 					targets.add(targetOverride);
+					spellDesc.remove(SpellArg.FILTER);
 					log("Target for spell {} has been changed! New target {}", spellCard, targets.get(0));
 				}
 			}
