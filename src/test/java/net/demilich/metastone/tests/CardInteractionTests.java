@@ -171,7 +171,7 @@ public class CardInteractionTests extends TestBase {
 	}
 
 	@Test
-	public void testWarriorCards() {
+	public void testBloodsailRaider() {
 		GameContext context = createContext(HeroClass.WARRIOR, HeroClass.MAGE);
 		Player warrior = context.getPlayer1();
 		warrior.setMana(10);
@@ -237,6 +237,27 @@ public class CardInteractionTests extends TestBase {
 		// Jaraxxus should be affected by Repentance, bringing him down to 1 hp
 		Assert.assertEquals(warlock.getHero().getHp(), 1);
 		Assert.assertNotNull(warlock.getHero().getWeapon());
+	}
+	
+	@Test
+	public void testBlessingOfWisdomMindControl() {
+		GameContext context = createContext(HeroClass.PALADIN, HeroClass.WARRIOR);
+		Player player = context.getPlayer1();
+		Player opponent = context.getPlayer2();
+		
+		int cardCount = player.getHand().getCount();
+		
+		Minion minion = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_chillwind_yeti"));
+		playCardWithTarget(context, player, CardCatalogue.getCardById("spell_blessing_of_wisdom"), minion);
+		Assert.assertEquals(cardCount, player.getHand().getCount());
+		
+		attack(context, opponent, minion, opponent.getHero());
+		Assert.assertEquals(player.getHand().getCount(), cardCount + 1);
+		
+		context.getLogic().mindControl(opponent, minion);
+		attack(context, opponent, minion, player.getHero());
+		Assert.assertEquals(player.getHand().getCount(), cardCount + 2);
+		
 	}
 
 }

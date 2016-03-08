@@ -18,7 +18,8 @@
 				"class": "HealSpell",
 				"target": "FRIENDLY_HERO",
 				"value": 4
-			}
+			},
+			"persistentOwner" : true
 		}
 	},
 	"collectible": true,

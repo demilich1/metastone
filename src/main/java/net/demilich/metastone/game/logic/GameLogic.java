@@ -126,7 +126,10 @@ public class GameLogic implements Cloneable {
 
 	public void addGameEventListener(Player player, IGameEventListener gameEventListener, Entity target) {
 		gameEventListener.setHost(target);
-		gameEventListener.setOwner(player.getId());
+		if (!gameEventListener.hasPersistentOwner() || gameEventListener.getOwner() == -1) {
+			gameEventListener.setOwner(player.getId());	
+		}
+		
 		gameEventListener.onAdd(context);
 		context.addTrigger(gameEventListener);
 		log("New spelltrigger was added for {} on {}: {}", player.getName(), target, gameEventListener);
@@ -268,7 +271,6 @@ public class GameLogic implements Cloneable {
 				if (targetOverride != null && targetOverride.getId() != IdFactory.UNASSIGNED) {
 					targets.remove(0);
 					targets.add(targetOverride);
-					spellDesc.remove(SpellArg.FILTER);
 					log("Target for spell {} has been changed! New target {}", spellCard, targets.get(0));
 				}
 			}
@@ -1070,6 +1072,9 @@ public class GameLogic implements Cloneable {
 			player.getMinions().add(minion);
 			minion.setOwner(player.getId());
 			applyAttribute(minion, Attribute.SUMMONING_SICKNESS);
+			if (minion.hasAttribute(Attribute.CHARGE)) {
+				refreshAttacksPerRound(minion);
+			}
 			List<IGameEventListener> triggers = context.getTriggersAssociatedWith(minion.getReference());
 			removeSpelltriggers(minion);
 			for (IGameEventListener trigger : triggers) {

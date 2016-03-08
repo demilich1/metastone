@@ -138,6 +138,13 @@ public class TestBase {
 		context.getLogic().receiveCard(player.getId(), card);
 		context.getLogic().performGameAction(player.getId(), card.play());
 	}
+	
+	protected static void playCardWithTarget(GameContext context, Player player, Card card, Entity target) {
+		context.getLogic().receiveCard(player.getId(), card);
+		GameAction action = card.play();
+		action.setTarget(target);
+		context.getLogic().performGameAction(player.getId(), action);
+	}
 
 	protected static Minion playMinionCard(GameContext context, Player player, MinionCard minionCard) {
 		context.getLogic().receiveCard(player.getId(), minionCard);

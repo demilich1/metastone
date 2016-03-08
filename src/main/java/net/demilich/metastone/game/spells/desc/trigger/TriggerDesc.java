@@ -8,9 +8,12 @@ public class TriggerDesc {
 	public EventTriggerDesc eventTrigger;
 	public SpellDesc spell;
 	public boolean oneTurn;
+	public boolean persistentOwner;
 
 	public SpellTrigger create() {
-		return new SpellTrigger(eventTrigger.create(), spell, oneTurn);
+		SpellTrigger trigger = new SpellTrigger(eventTrigger.create(), spell, oneTurn);
+		trigger.setPersistentOwner(persistentOwner);
+		return trigger;
 	}
 
 }

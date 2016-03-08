@@ -20,6 +20,7 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 	private EntityReference hostReference;
 	private final boolean oneTurn;
 	private boolean expired;
+	private boolean persistentOwner;
 	private TriggerLayer layer = TriggerLayer.DEFAULT;
 
 	public SpellTrigger(GameEventTrigger primaryTrigger, GameEventTrigger secondaryTrigger, SpellDesc spell, boolean oneTurn) {
@@ -47,7 +48,7 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 		clone.spell = spell.clone();
 		return clone;
 	}
-	
+
 	protected void expire() {
 		expired = true;
 	}
@@ -98,11 +99,13 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 		if (expired) {
 			return;
 		}
-		
+
 		int ownerId = primaryTrigger.getOwner();
-		
-		// Expire the trigger beforehand, in case of copying minion (Echoing Ooze). Since this method should only be called
-		// after being checked to be played, copying one-turn triggers should no longer matter.
+
+		// Expire the trigger beforehand, in case of copying minion (Echoing
+		// Ooze). Since this method should only be called
+		// after being checked to be played, copying one-turn triggers should no
+		// longer matter.
 		if (oneTurn) {
 			expire();
 		}
@@ -145,9 +148,10 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 	@Override
 	public String toString() {
 		return "[SpellTrigger primaryTrigger=" + primaryTrigger + ", secondaryTrigger=" + secondaryTrigger + ", spell=" + spell
-				+ ", hostReference=" + hostReference + ", oneTurn=" + oneTurn + ", expired=" + expired + ", layer=" + layer + "]";
+				+ ", hostReference=" + hostReference + ", oneTurn=" + oneTurn + ", expired=" + expired + ", persistentOwner="
+				+ persistentOwner + ", layer=" + layer + "]";
 	}
-	
+
 	@Override
 	public boolean canFire(GameEvent event) {
 		Entity host = event.getGameContext().resolveSingleTarget(hostReference);
@@ -162,6 +166,14 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 			return false;
 		}
 		return trigger.fires(event, host);
+	}
+
+	public boolean hasPersistentOwner() {
+		return persistentOwner;
+	}
+
+	public void setPersistentOwner(boolean persistentOwner) {
+		this.persistentOwner = persistentOwner;
 	}
 
 }

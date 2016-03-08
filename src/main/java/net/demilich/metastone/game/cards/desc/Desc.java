@@ -15,10 +15,6 @@ public class Desc<T> {
 		this.arguments = arguments;
 	}
 
-	public Object add(T arg, Object object) {
-		return arguments.put(arg, object);
-	}
-
 	public boolean contains(T arg) {
 		return arguments.containsKey(arg);
 	}
@@ -49,9 +45,5 @@ public class Desc<T> {
 			return valueProvider.getValue(context, player, target, host);
 		}
 		return (int)storedValue;
-	}
-
-	public Object remove(T arg) {
-		return arguments.remove(arg);
 	}
 }

@@ -220,4 +220,9 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 		}
 	}
 
+	@Override
+	public boolean hasPersistentOwner() {
+		return false;
+	}
+
 }
