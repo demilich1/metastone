@@ -12,14 +12,16 @@
 		"spell": {
 			"class": "MetaSpell",
 			"target": "SELF",
-			"spell1": {
-				"class": "BuffSpell",
-				"attackBonus": 1
-			},
-			"spell2": {
-				"class": "AddAttributeSpell",
-				"attribute": "TAUNT"
-			}
+			"spells": [
+				{
+					"class": "BuffSpell",
+					"attackBonus": 1
+				},
+				{
+					"class": "AddAttributeSpell",
+					"attribute": "TAUNT"
+				}
+			]
 		},
 		"condition": {
 			"class": "HoldsCardCondition",

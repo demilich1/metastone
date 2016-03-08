@@ -9,14 +9,16 @@
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "DamageSpell",
-			"value": 1
-		},
-		"spell2": {
-			"class": "BuffSpell",
-			"attackBonus": 2
-		}
+		"spells": [
+			{
+				"class": "DamageSpell",
+				"value": 1
+			},
+			{
+				"class": "BuffSpell",
+				"attackBonus": 2
+			}
+		]
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

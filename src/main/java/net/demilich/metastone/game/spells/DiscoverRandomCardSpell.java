@@ -14,14 +14,15 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
+import net.demilich.metastone.game.spells.desc.filter.FilterArg;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class DiscoverRandomCardSpell extends Spell {
 	
-	public static SpellDesc create(EntityReference target, SpellDesc spell1) {
-		Map<SpellArg, Object> arguments = SpellDesc.build(MetaSpell.class);
+	public static SpellDesc create(EntityReference target, SpellDesc spell) {
+		Map<SpellArg, Object> arguments = SpellDesc.build(DiscoverRandomCardSpell.class);
 		arguments.put(SpellArg.TARGET, target);
-		arguments.put(SpellArg.SPELL_1, spell1);
+		arguments.put(SpellArg.SPELL, spell);
 		return new SpellDesc(arguments);
 	}
 	
@@ -29,17 +30,28 @@ public class DiscoverRandomCardSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		EntityFilter cardFilter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
 		CardCollection cards = CardCatalogue.query((CardType) null, (Rarity) null, HeroClass.ANY);
-		HeroClass heroClass = player.getHero().getHeroClass();
-		if (!SpellUtils.isBaseClass(heroClass)) {
+		HeroClass heroClass = (HeroClass) cardFilter.getArg(FilterArg.HERO_CLASS);
+		if (heroClass == null) {
+			heroClass = player.getHero().getHeroClass();
+		}
+		if (heroClass == HeroClass.OPPONENT) {
+			heroClass = context.getOpponent(player).getHero().getHeroClass();
+		}
+		if (heroClass != HeroClass.ANY && !heroClass.isBaseClass()) {
 			Card card = context.getPendingCard();
 			heroClass = card.getClassRestriction();
 			if (heroClass == HeroClass.ANY) {
 				heroClass = SpellUtils.getRandomHeroClass();
 			}
 		}
-		CardCollection classCards = CardCatalogue.query((CardType) null, (Rarity) null, heroClass);
-		for (int i = 0; i < 4; i++) {
+		if (heroClass == HeroClass.ANY) {
+			CardCollection classCards = CardCatalogue.query((CardType) null, (Rarity) null, (HeroClass) null);
 			cards.addAll(classCards);
+		} else {
+			CardCollection classCards = CardCatalogue.query((CardType) null, (Rarity) null, heroClass);
+			for (int i = 0; i < 4; i++) {
+				cards.addAll(classCards);
+			}
 		}
 		
 		CardCollection result = new CardCollection();
@@ -64,7 +76,9 @@ public class DiscoverRandomCardSpell extends Spell {
 			}
 		}
 		
-		SpellUtils.castChildSpell(context, player, SpellUtils.getDiscover(context, player, desc, cards).getSpell(), source, target);
+		if (!cards.isEmpty()) {
+			SpellUtils.castChildSpell(context, player, SpellUtils.getDiscover(context, player, desc, cards).getSpell(), source, target);
+		}
 	}
 
 }

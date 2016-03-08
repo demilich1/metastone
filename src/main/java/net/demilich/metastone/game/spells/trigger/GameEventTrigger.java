@@ -26,24 +26,23 @@ public abstract class GameEventTrigger extends CustomCloneable {
 		return (GameEventTrigger) super.clone();
 	}
 
-	protected boolean determineTargetPlayer(GameEvent event, TargetPlayer targetPlayer, Entity host, int triggerOwner) {
-		// -1 means the event should fire for all players
-		if (event.getPlayerId() == -1) {
+	protected boolean determineTargetPlayer(GameEvent event, TargetPlayer targetPlayer, Entity host, int targetPlayerId) {
+		if (targetPlayerId == -1 || targetPlayer == null) {
 			return true;
 		}
 		switch (targetPlayer) {
 		case ACTIVE:
-			return event.getGameContext().getActivePlayerId() == triggerOwner;
+			return event.getGameContext().getActivePlayerId() == targetPlayerId;
 		case INACTIVE:
-			return event.getGameContext().getActivePlayerId() != triggerOwner;
+			return event.getGameContext().getActivePlayerId() != targetPlayerId;
 		case BOTH:
 			return true;
 		case OPPONENT:
-			return event.getPlayerId() != triggerOwner;
+			return getOwner() != targetPlayerId;
 		case OWNER:
-			return host.getOwner() == triggerOwner;
+			return host.getOwner() == targetPlayerId;
 		case SELF:
-			return event.getPlayerId() == triggerOwner;
+			return getOwner() == targetPlayerId;
 		default:
 			break;
 		}
@@ -53,16 +52,14 @@ public abstract class GameEventTrigger extends CustomCloneable {
 	protected abstract boolean fire(GameEvent event, Entity host);
 
 	public final boolean fires(GameEvent event, Entity host) {
-		boolean ownTurnOnly = desc.getBool(EventTriggerArg.OWN_TURN_ONLY);
-		if (ownTurnOnly && event.getGameContext().getActivePlayerId() != getOwner()) {
-			return false;
-		}
-
 		TargetPlayer targetPlayer = desc.getTargetPlayer();
-		if (targetPlayer != null && !determineTargetPlayer(event, targetPlayer, host, getOwner())) {
+		if (targetPlayer != null && !determineTargetPlayer(event, targetPlayer, host, event.getTargetPlayerId())) {
 			return false;
 		}
-
+		TargetPlayer sourcePlayer = desc.getSourcePlayer();
+		if (sourcePlayer != null && !determineTargetPlayer(event, sourcePlayer, host, event.getSourcePlayerId())) {
+			return false;
+		}
 		boolean breaksStealth = desc.getBool(EventTriggerArg.BREAKS_STEALTH);
 		if (breaksStealth) {
 			event.getGameContext().getLogic().removeAttribute(host, Attribute.STEALTH);
@@ -78,7 +75,6 @@ public abstract class GameEventTrigger extends CustomCloneable {
 		} else if (hostTargetType == TargetType.IGNORE_OTHER_SOURCES && event.getEventSource() != host) {
 			return false;
 		}
-
 		Condition condition = (Condition) desc.get(EventTriggerArg.CONDITION);
 		Player owner = event.getGameContext().getPlayer(getOwner());
 		if (condition != null && !condition.isFulfilled(event.getGameContext(), owner, event.getEventTarget())) {

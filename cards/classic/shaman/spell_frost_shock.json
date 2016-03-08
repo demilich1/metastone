@@ -9,14 +9,16 @@
 	"targetSelection": "ENEMY_CHARACTERS",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "DamageSpell",
-			"value": 1
-		},
-		"spell2": {
-			"class": "AddAttributeSpell",
-			"attribute": "FROZEN"
-		}
+		"spells": [
+			{
+				"class": "DamageSpell",
+				"value": 1
+			},
+			{
+				"class": "AddAttributeSpell",
+				"attribute": "FROZEN"
+			}
+		]
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

@@ -9,14 +9,16 @@
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "DestroySpell"
-		},
-		"spell2": {
-			"class": "HealSpell",
-			"target": "FRIENDLY_HERO",
-			"value": 5
-		},
+		"spells": [
+			{
+				"class": "DestroySpell"
+			},
+			{
+				"class": "HealSpell",
+				"target": "FRIENDLY_HERO",
+				"value": 5
+			}
+		],
 		"filter": {
 			"class": "RaceFilter",
 			"race": "DEMON"

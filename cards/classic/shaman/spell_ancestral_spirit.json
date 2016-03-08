@@ -9,7 +9,7 @@
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "AddDeathrattleSpell",
-		"spell1": {
+		"spell": {
 			"class": "ReviveMinionSpell",
 			"target": "SELF"
 		}

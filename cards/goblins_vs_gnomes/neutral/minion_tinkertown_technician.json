@@ -11,24 +11,26 @@
 	"battlecry": {
 		"spell": {
 			"class": "MetaSpell",
-			"spell1": {
-				"class": "BuffSpell",
-				"target": "SELF",
-				"attackBonus": 1,
-				"hpBonus": 1
-			},
-			"spell2": {
-				"class": "ReceiveRandomCardSpell",
-				"cards": [
-					"spell_armor_plating",
-					"spell_emergency_coolant",
-					"spell_finicky_cloakfield",
-					"spell_reversing_switch",
-					"spell_rusty_horn",
-					"spell_time_rewinder",
-					"spell_whirling_blades"
-				]
-			}
+			"spells": [
+				{
+					"class": "BuffSpell",
+					"target": "SELF",
+					"attackBonus": 1,
+					"hpBonus": 1
+				},
+				{
+					"class": "ReceiveRandomCardSpell",
+					"cards": [
+						"spell_armor_plating",
+						"spell_emergency_coolant",
+						"spell_finicky_cloakfield",
+						"spell_reversing_switch",
+						"spell_rusty_horn",
+						"spell_time_rewinder",
+						"spell_whirling_blades"
+					]
+				}
+			]
 		},
 		"condition": {
 			"class": "RaceOnBoardCondition",

@@ -9,39 +9,41 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "AddAttributeSpell",
-			"target": "FRIENDLY_MINIONS",
-			"attribute": "CANNOT_REDUCE_HP_BELOW_1",
-			"revertTrigger": {
-				"class": "TurnEndTrigger",
-				"targetPlayer": "SELF"
-			}
-		},
-		"spell2": {
-			"class": "AddSpellTriggerSpell",
-			"target": "FRIENDLY_HERO",
-			"trigger": {
-				"eventTrigger": {
-					"class": "MinionSummonedTrigger",
+		"spells": [
+			{
+				"class": "AddAttributeSpell",
+				"target": "FRIENDLY_MINIONS",
+				"attribute": "CANNOT_REDUCE_HP_BELOW_1",
+				"revertTrigger": {
+					"class": "TurnEndTrigger",
 					"targetPlayer": "SELF"
-				},
-				"spell": {
-					"class": "AddAttributeSpell",
-					"target": "EVENT_TARGET",
-					"attribute": "CANNOT_REDUCE_HP_BELOW_1",
-					"revertTrigger": {
-						"class": "TurnEndTrigger",
+				}
+			},
+			{
+				"class": "AddSpellTriggerSpell",
+				"target": "FRIENDLY_HERO",
+				"trigger": {
+					"eventTrigger": {
+						"class": "MinionSummonedTrigger",
 						"targetPlayer": "SELF"
-					}
-				},
-				"oneTurn": true
+					},
+					"spell": {
+						"class": "AddAttributeSpell",
+						"target": "EVENT_TARGET",
+						"attribute": "CANNOT_REDUCE_HP_BELOW_1",
+						"revertTrigger": {
+							"class": "TurnEndTrigger",
+							"targetPlayer": "SELF"
+						}
+					},
+					"oneTurn": true
+				}
+			},
+			{
+				"class": "DrawCardSpell",
+				"value": 1
 			}
-		},
-		"spell3": {
-			"class": "DrawCardSpell",
-			"value": 1
-		}
+		]
 	},
 	"collectible": true,
 	"set": "CLASSIC",

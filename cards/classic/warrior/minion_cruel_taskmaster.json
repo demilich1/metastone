@@ -12,14 +12,16 @@
 		"targetSelection": "MINIONS",
 		"spell": {
 			"class": "MetaSpell",
-			"spell1": {
-				"class": "BuffSpell",
-				"attackBonus": 2
-			},
-			"spell2": {
-				"class": "DamageSpell",
-				"value": 1
-			}
+			"spells": [
+				{
+					"class": "BuffSpell",
+					"attackBonus": 2
+				},
+				{
+					"class": "DamageSpell",
+					"value": 1
+				}
+			]
 		},
 		"resolvedLate": false
 	},

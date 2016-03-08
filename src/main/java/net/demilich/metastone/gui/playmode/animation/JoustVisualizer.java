@@ -15,7 +15,7 @@ public class JoustVisualizer implements IGameEventVisualizer {
 		Card downCard = null;
 		Card upCard = null;
 		boolean upWon = false;
-		if (joustEvent.getPlayerId() == GameContext.PLAYER_1) {
+		if (joustEvent.getTargetPlayerId() == GameContext.PLAYER_1) {
 			downCard = joustEvent.getOwnCard();
 			upCard = joustEvent.getOpponentCard();
 			upWon = !joustEvent.isWon();

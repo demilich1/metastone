@@ -8,7 +8,7 @@ public class KillEvent extends GameEvent {
 	private final Entity victim;
 
 	public KillEvent(GameContext context, Entity victim) {
-		super(context, victim.getOwner());
+		super(context, victim.getOwner(), -1);
 		this.victim = victim;
 	}
 	

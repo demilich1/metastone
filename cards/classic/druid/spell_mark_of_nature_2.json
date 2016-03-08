@@ -9,14 +9,16 @@
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "BuffSpell",
-			"hpBonus": 4
-		},
-		"spell2": {
-			"class": "AddAttributeSpell",
-			"attribute": "TAUNT"
-		}
+		"spells": [
+			{
+				"class": "BuffSpell",
+				"hpBonus": 4
+			},
+			{
+				"class": "AddAttributeSpell",
+				"attribute": "TAUNT"
+			}
+		]
 	},
 	"collectible": false,
 	"set": "CLASSIC",

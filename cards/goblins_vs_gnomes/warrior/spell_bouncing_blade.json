@@ -10,7 +10,7 @@
 	"spell": {
 		"class": "CastRepeatedlySpell",
 		"target": "ALL_MINIONS",
-		"spell1": {
+		"spell": {
 			"class": "DamageSpell",
 			"value": 1
 		},

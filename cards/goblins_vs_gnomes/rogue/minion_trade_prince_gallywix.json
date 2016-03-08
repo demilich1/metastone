@@ -20,16 +20,18 @@
 		},
 		"spell": {
 			"class": "MetaSpell",
-			"spell1": {
-				"class": "CopyCardSpell",
-				"target": "EVENT_TARGET",
-				"targetPlayer": "SELF"
-			},
-			"spell2": {
-				"class": "ReceiveCardSpell",
-				"targetPlayer": "OPPONENT",
-				"card": "spell_gallywixs_coin"
-			}
+			"spells": [
+				{
+					"class": "CopyCardSpell",
+					"target": "EVENT_TARGET",
+					"targetPlayer": "SELF"
+				},
+				{
+					"class": "ReceiveCardSpell",
+					"targetPlayer": "OPPONENT",
+					"card": "spell_gallywixs_coin"
+				}
+			]
 		}
 	},
 	"collectible": true,

@@ -11,32 +11,19 @@ import net.demilich.metastone.game.targeting.EntityReference;
 
 public class CastRandomSpellSpell extends Spell {
 
-	public static SpellDesc create(EntityReference target, SpellDesc spell1, SpellDesc spell2, SpellDesc spell3) {
+	public static SpellDesc create(EntityReference target, SpellDesc... spells) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(CastRandomSpellSpell.class);
-		arguments.put(SpellArg.SPELL_1, spell1);
-		arguments.put(SpellArg.SPELL_2, spell2);
-		arguments.put(SpellArg.SPELL_3, spell3);
+		arguments.put(SpellArg.SPELLS, spells);
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
 	}
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		SpellDesc spell = null;
-		switch (context.getLogic().random(3)) {
-		case 0:
-			spell = (SpellDesc) desc.get(SpellArg.SPELL_1);
-			break;
-		case 1:
-			spell = (SpellDesc) desc.get(SpellArg.SPELL_2);
-			break;
-		case 2:
-			spell = (SpellDesc) desc.get(SpellArg.SPELL_3);
-			break;
-		default:
-			break;
-		}
-		SpellUtils.castChildSpell(context, player, spell, source, target);
+		SpellDesc[] spells = (SpellDesc[]) desc.get(SpellArg.SPELLS);
+		
+		int i = context.getLogic().random(spells.length);
+		SpellUtils.castChildSpell(context, player, spells[i], source, target);
 	}
 
 }

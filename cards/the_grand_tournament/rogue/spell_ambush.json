@@ -17,18 +17,20 @@
 		},
 		"spell": {
 			"class": "MetaSpell",
-			"spell1": {
-				"class": "SummonSpell",
-				"targetPlayer": "OPPONENT",
-				"card": "token_nerubian"
-			},
-			"spell2": {
-				"class": "RemoveCardSpell",
-				"target": "EVENT_TARGET"
-			},
-			"spell3": {
-				"class": "DrawCardSpell"
-			}
+			"spells": [
+				{
+					"class": "SummonSpell",
+					"targetPlayer": "OPPONENT",
+					"card": "token_nerubian"
+				},
+				{
+					"class": "RemoveCardSpell",
+					"target": "EVENT_TARGET"
+				},
+				{
+					"class": "DrawCardSpell"
+				}
+			]
 		}
 	},
 	"collectible": false,

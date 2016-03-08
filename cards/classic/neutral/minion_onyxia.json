@@ -12,42 +12,38 @@
 	"battlecry": {
 		"spell": {
 			"class": "MetaSpell",
-			"spell1": {
-				"class": "MetaSpell",
-				"spell1": {
+			"spells": [
+				{
 					"class": "SummonSpell",
 					"card": "token_whelp",
 					"boardPositionRelative": "RIGHT"
 				},
-				"spell2": {
+				{
 					"class": "SummonSpell",
 					"card": "token_whelp",
 					"boardPositionRelative": "LEFT"
 				},
-				"spell3": {
+				{
 					"class": "SummonSpell",
 					"card": "token_whelp",
 					"boardPositionRelative": "RIGHT"
-				}
-			},
-			"spell2": {
-				"class": "MetaSpell",
-				"spell1": {
+				},
+				{
 					"class": "SummonSpell",
 					"card": "token_whelp",
 					"boardPositionRelative": "LEFT"
 				},
-				"spell2": {
+				{
 					"class": "SummonSpell",
 					"card": "token_whelp",
 					"boardPositionRelative": "RIGHT"
 				},
-				"spell3": {
+				{
 					"class": "SummonSpell",
 					"card": "token_whelp",
 					"boardPositionRelative": "LEFT"
 				}
-			}
+			]
 		},
 		"resolvedLate": false
 	},

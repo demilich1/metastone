@@ -17,18 +17,20 @@
 		},
 		"spell": {
 			"class": "MetaSpell",
-			"spell1": {
-				"class": "DamageSpell",
-				"target": "FRIENDLY_HERO",
-				"value": 10
-			},
-			"spell2": {
-				"class": "RemoveCardSpell",
-				"target": "EVENT_TARGET"
-			},
-			"spell3": {
-				"class": "DrawCardSpell"
-			}
+			"spells": [
+				{
+					"class": "DamageSpell",
+					"target": "FRIENDLY_HERO",
+					"value": 10
+				},
+				{
+					"class": "RemoveCardSpell",
+					"target": "EVENT_TARGET"
+				},
+				{
+					"class": "DrawCardSpell"
+				}
+			]
 		}
 	},
 	"collectible": false,

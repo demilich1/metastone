@@ -10,7 +10,7 @@
 	"spell": {
 		"class": "AddDeathrattleSpell",
 		"target": "FRIENDLY_MINIONS",
-		"spell1": {
+		"spell": {
 			"class": "SummonSpell",
 			"card": "token_treant"
 		}

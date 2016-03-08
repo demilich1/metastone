@@ -9,13 +9,15 @@
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "DamageSpell",
-			"value": 2
-		},
-		"spell2": {
-			"class": "ClearOverloadSpell"
-		}
+		"spells": [
+			{
+				"class": "DamageSpell",
+				"value": 2
+			},
+			{
+				"class": "ClearOverloadSpell"
+			}
+		]
 	},
 	"collectible": true,
 	"set": "BLACKROCK_MOUNTAIN",

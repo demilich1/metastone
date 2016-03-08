@@ -9,15 +9,17 @@
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "DamageSpell",
-			"value": 2
-		},
-		"spell2": {
-			"class": "HealSpell",
-			"target": "FRIENDLY_HERO",
-			"value": 2
-		}
+		"spells": [
+			{
+				"class": "DamageSpell",
+				"value": 2
+			},
+			{
+				"class": "HealSpell",
+				"target": "FRIENDLY_HERO",
+				"value": 2
+			}
+		]
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

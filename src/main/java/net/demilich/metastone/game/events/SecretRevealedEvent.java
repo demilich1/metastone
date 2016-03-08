@@ -9,7 +9,7 @@ public class SecretRevealedEvent extends GameEvent {
 	private final SecretCard secret;
 
 	public SecretRevealedEvent(GameContext context, SecretCard secret, int playerId) {
-		super(context, playerId);
+		super(context, playerId, -1);
 		this.secret = secret;
 	}
 	

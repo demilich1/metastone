@@ -11,14 +11,16 @@
 	"deathrattle": {
 		"class": "MetaSpell",
 		"target": "NONE",
-		"spell1": {
-			"class": "ReturnMinionToHandSpell",
-			"target": "SELF"
-		},
-		"spell2": {
-			"class": "SummonSpell",
-			"card": "token_nerubian"
-		}
+		"spells": [
+			{
+				"class": "ReturnMinionToHandSpell",
+				"target": "SELF"
+			},
+			{
+				"class": "SummonSpell",
+				"card": "token_nerubian"
+			}
+		]
 	},
 	"attributes": {
 		"DEATHRATTLES": true

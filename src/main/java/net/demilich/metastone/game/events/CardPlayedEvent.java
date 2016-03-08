@@ -9,7 +9,7 @@ public class CardPlayedEvent extends GameEvent {
 	private final Card card;
 
 	public CardPlayedEvent(GameContext context, int playerId, Card card) {
-		super(context, playerId);
+		super(context, playerId, -1);
 		this.card = card;
 	}
 

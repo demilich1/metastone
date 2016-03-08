@@ -13,14 +13,16 @@
 		"targetSelection": "NONE",
 		"spell": {
 			"class": "MetaSpell",
-			"spell1": {
-				"class": "DestroySpell",
-				"target": "ALL_OTHER_MINIONS"
-			},
-			"spell2": {
-				"class": "DiscardSpell",
-				"value": -1
-			}
+			"spells": [
+				{
+					"class": "DestroySpell",
+					"target": "ALL_OTHER_MINIONS"
+				},
+				{
+					"class": "DiscardSpell",
+					"value": -1
+				}
+			]
 		},
 		"resolvedLate": false
 	},

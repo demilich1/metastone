@@ -43,7 +43,7 @@ public class CardFilter extends EntityFilter {
 		if (heroClass == HeroClass.OPPONENT) {
 			heroClass = context.getOpponent(player).getHero().getHeroClass();
 		}
-		if (heroClass != null && heroClass != card.getClassRestriction()) {
+		if (heroClass != null && heroClass != HeroClass.ANY && heroClass != card.getClassRestriction()) {
 			return false;
 		}
 		

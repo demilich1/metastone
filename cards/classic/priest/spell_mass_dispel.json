@@ -9,14 +9,16 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "SilenceSpell",
-			"target": "ENEMY_MINIONS"
-		},
-		"spell2": {
-			"class": "DrawCardSpell",
-			"value": 1
-		}
+		"spells": [
+			{
+				"class": "SilenceSpell",
+				"target": "ENEMY_MINIONS"
+			},
+			{
+				"class": "DrawCardSpell",
+				"value": 1
+			}
+		]
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

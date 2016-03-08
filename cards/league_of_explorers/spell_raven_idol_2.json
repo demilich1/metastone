@@ -9,8 +9,9 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "DiscoverRandomCardSpell",
-		"spell1": {
-			"class": "ReceiveCardSpell"
+		"spell": {
+			"class": "ReceiveCardSpell",
+			"targetPlayer": "SELF"
 		},
 		"cardFilter": {
 			"class": "CardFilter",

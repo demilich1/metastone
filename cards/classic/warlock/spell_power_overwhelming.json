@@ -9,24 +9,26 @@
 	"targetSelection": "FRIENDLY_MINIONS",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "BuffSpell",
-			"attackBonus": 4,
-			"hpBonus": 4
-		},
-		"spell2": {
-			"class": "AddSpellTriggerSpell",
-			"trigger": {
-				"eventTrigger": {
-					"class": "TurnEndTrigger",
-					"targetPlayer": "SELF"
-				},
-				"spell": {
-					"class": "DestroySpell",
-					"target": "SELF"
+		"spells": [
+			{
+				"class": "BuffSpell",
+				"attackBonus": 4,
+				"hpBonus": 4
+			},
+			{
+				"class": "AddSpellTriggerSpell",
+				"trigger": {
+					"eventTrigger": {
+						"class": "TurnEndTrigger",
+						"targetPlayer": "SELF"
+					},
+					"spell": {
+						"class": "DestroySpell",
+						"target": "SELF"
+					}
 				}
 			}
-		}
+		]
 	},
 	"collectible": true,
 	"set": "CLASSIC",

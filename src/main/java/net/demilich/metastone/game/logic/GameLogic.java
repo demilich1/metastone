@@ -268,6 +268,7 @@ public class GameLogic implements Cloneable {
 				if (targetOverride != null && targetOverride.getId() != IdFactory.UNASSIGNED) {
 					targets.remove(0);
 					targets.add(targetOverride);
+					spellDesc.remove(SpellArg.FILTER);
 					log("Target for spell {} has been changed! New target {}", spellCard, targets.get(0));
 				}
 			}
@@ -613,6 +614,9 @@ public class GameLogic implements Cloneable {
 		if (weapon.hasSpellTrigger()) {
 			SpellTrigger spellTrigger = weapon.getSpellTrigger();
 			addGameEventListener(player, spellTrigger, weapon);
+		}
+		if (weapon.getCardCostModifier() != null) {
+			addManaModifier(player, weapon.getCardCostModifier(), weapon);
 		}
 		context.fireGameEvent(new WeaponEquippedEvent(context, weapon));
 		context.fireGameEvent(new BoardChangedEvent(context));
@@ -1471,8 +1475,10 @@ public class GameLogic implements Cloneable {
 		int oldMaxHp = target.getMaxHp();
 		target.setMaxHp(target.getAttributeValue(Attribute.BASE_HP));
 		target.setAttack(target.getAttributeValue(Attribute.BASE_ATTACK));
-		if (target.getHp() > target.getMaxHp() || target.getHp() == oldMaxHp) {
+		if (target.getHp() > target.getMaxHp()) {
 			target.setHp(target.getMaxHp());
+		} else if (oldMaxHp < target.getMaxHp()){
+			target.setHp(target.getHp() + target.getMaxHp() - oldMaxHp);
 		}
 
 		log("{} was silenced", target);

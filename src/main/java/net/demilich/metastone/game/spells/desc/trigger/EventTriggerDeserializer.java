@@ -40,7 +40,6 @@ public class EventTriggerDeserializer implements JsonDeserializer<EventTriggerDe
 		parseArgument(EventTriggerArg.TARGET_ENTITY_TYPE, jsonData, arguments, ParseValueType.ENTITY_TYPE);
 		parseArgument(EventTriggerArg.SOURCE_TYPE, jsonData, arguments, ParseValueType.CARD_TYPE);
 		parseArgument(EventTriggerArg.ACTION_TYPE, jsonData, arguments, ParseValueType.ACTION_TYPE);
-		parseArgument(EventTriggerArg.OWN_TURN_ONLY, jsonData, arguments, ParseValueType.BOOLEAN);
 		parseArgument(EventTriggerArg.BREAKS_STEALTH, jsonData, arguments, ParseValueType.BOOLEAN);
 		parseArgument(EventTriggerArg.HOST_TARGET_TYPE, jsonData, arguments, ParseValueType.TARGET_TYPE);
 		parseArgument(EventTriggerArg.REQUIRED_ATTRIBUTE, jsonData, arguments, ParseValueType.ATTRIBUTE);

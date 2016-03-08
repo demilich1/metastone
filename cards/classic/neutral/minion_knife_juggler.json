@@ -15,9 +15,10 @@
 			"breaksStealth": true
 		},
 		"spell": {
-			"class": "DamageSpell",
+			"class": "MissilesSpell",
 			"target": "ENEMY_CHARACTERS",
 			"value": 1,
+			"howMany": 1,
 			"randomTarget": true
 		}
 	},

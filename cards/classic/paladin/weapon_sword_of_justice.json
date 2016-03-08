@@ -18,17 +18,19 @@
 		},
 		"spell": {
 			"class": "MetaSpell",
-			"spell1": {
-				"class": "BuffSpell",
-				"target": "EVENT_TARGET",
-				"attackBonus": 1,
-				"hpBonus": 1
-			},
-			"spell2": {
-				"class": "ModifyDurabilitySpell",
-				"targetPlayer": "SELF",
-				"value": -1
-			}
+			"spells": [
+				{
+					"class": "BuffSpell",
+					"target": "EVENT_TARGET",
+					"attackBonus": 1,
+					"hpBonus": 1
+				},
+				{
+					"class": "ModifyDurabilitySpell",
+					"targetPlayer": "SELF",
+					"value": -1
+				}
+			]
 		}
 	},
 	"collectible": true,

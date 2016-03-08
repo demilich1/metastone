@@ -9,15 +9,17 @@
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "DamageSpell",
-			"value": 3
-		},
-		"spell2": {
-			"class": "BuffHeroSpell",
-			"target": "FRIENDLY_HERO",
-			"armorBonus": 3
-		}
+		"spells": [
+			{
+				"class": "DamageSpell",
+				"value": 3
+			},
+			{
+				"class": "BuffHeroSpell",
+				"target": "FRIENDLY_HERO",
+				"armorBonus": 3
+			}
+		]
 	},
 	"collectible": true,
 	"set": "THE_GRAND_TOURNAMENT",

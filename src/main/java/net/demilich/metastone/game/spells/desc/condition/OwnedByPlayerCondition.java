@@ -15,6 +15,10 @@ public class OwnedByPlayerCondition extends Condition {
 	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity target) {
 		TargetPlayer targetPlayer = (TargetPlayer) desc.get(ConditionArg.TARGET_PLAYER);
 		switch (targetPlayer) {
+		case ACTIVE:
+			return context.getActivePlayer().getId() == player.getId();
+		case INACTIVE:
+			return context.getActivePlayer().getId() != player.getId();
 		case BOTH:
 			return true;
 		case OPPONENT:

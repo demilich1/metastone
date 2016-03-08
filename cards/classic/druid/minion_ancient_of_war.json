@@ -21,16 +21,18 @@
 			"description": "+5 Health/Taunt",
 			"spell": {
 				"class": "MetaSpell",
-				"spell1": {
-					"class": "BuffSpell",
-					"target": "SELF",
-					"hpBonus": 5
-				},
-				"spell2": {
-					"class": "AddAttributeSpell",
-					"target": "SELF",
-					"attribute": "TAUNT"
-				}
+				"spells": [
+					{
+						"class": "BuffSpell",
+						"target": "SELF",
+						"hpBonus": 5
+					},
+					{
+						"class": "AddAttributeSpell",
+						"target": "SELF",
+						"attribute": "TAUNT"
+					}
+				]
 			}
 		}
 	],

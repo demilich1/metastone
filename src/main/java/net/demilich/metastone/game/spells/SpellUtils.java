@@ -92,7 +92,7 @@ public class SpellUtils {
 	}
 	
 	public static DiscoverAction getDiscover(GameContext context, Player player, SpellDesc desc, CardCollection cards) {
-		SpellDesc spell = (SpellDesc) desc.get(SpellArg.SPELL_1);
+		SpellDesc spell = (SpellDesc) desc.get(SpellArg.SPELL);
 		List<GameAction> discoverActions = new ArrayList<>();
 		for (Card card : cards) {
 			SpellDesc spellClone = spell.addArg(SpellArg.CARD, card.getCardId());
@@ -113,12 +113,14 @@ public class SpellUtils {
 	}
 	
 	public static HeroClass getRandomHeroClass() {
-		HeroClass randomClass = HeroClass.ANY;
 		HeroClass[] values = HeroClass.values();
-		while (!isBaseClass(randomClass)) {
-			randomClass = values[ThreadLocalRandom.current().nextInt(values.length)];
+		List<HeroClass> heroClasses = new ArrayList<HeroClass>();
+		for (HeroClass heroClass : values) {
+			if (heroClass.isBaseClass()) {
+				heroClasses.add(heroClass);
+			}
 		}
-		return randomClass;
+		return heroClasses.get(ThreadLocalRandom.current().nextInt(heroClasses.size()));
 	}
 
 	public static <T> T getRandomTarget(List<T> targets) {
@@ -206,13 +208,6 @@ public class SpellUtils {
 			}
 		}
 		return count;
-	}
-	
-	public static boolean isBaseClass(HeroClass heroClass) {
-		if (heroClass == HeroClass.ANY || heroClass == HeroClass.DECK_COLLECTION || heroClass == HeroClass.OPPONENT || heroClass == HeroClass.BOSS) {
-			return false;
-		}
-		return true;
 	}
 	
 	public static int getBoardPosition(GameContext context, Player player, SpellDesc desc, Entity source) {

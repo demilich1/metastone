@@ -9,7 +9,7 @@ public class WeaponDestroyedEvent extends GameEvent {
 	private final Weapon weapon;
 
 	public WeaponDestroyedEvent(GameContext context, Weapon weapon) {
-		super(context, weapon.getOwner());
+		super(context, weapon.getOwner(), -1);
 		this.weapon = weapon;
 	}
 	

@@ -13,18 +13,20 @@
 		"spell": {
 			"class": "CastRandomSpellSpell",
 			"target": "OTHER_FRIENDLY_MINIONS",
-			"spell1": {
-				"class": "AddAttributeSpell",
-				"attribute": "WINDFURY"
-			},
-			"spell2": {
-				"class": "AddAttributeSpell",
-				"attribute": "TAUNT"
-			},
-			"spell3": {
-				"class": "AddAttributeSpell",
-				"attribute": "DIVINE_SHIELD"
-			}
+			"spells": [
+				{
+					"class": "AddAttributeSpell",
+					"attribute": "WINDFURY"
+				},
+				{
+					"class": "AddAttributeSpell",
+					"attribute": "TAUNT"
+				},
+				{
+					"class": "AddAttributeSpell",
+					"attribute": "DIVINE_SHIELD"
+				}
+			]
 		},
 		"resolvedLate": false
 	},

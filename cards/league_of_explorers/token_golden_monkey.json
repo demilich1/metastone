@@ -12,24 +12,26 @@
 		"targetSelection": "NONE",
 		"spell": {
 			"class": "MetaSpell",
-			"spell1": {
-				"class": "ReplaceCardLocationSpell",
-				"cardLocation": "HAND",
-				"cardFilter": {
-					"class": "CardFilter",
-					"cardType": "MINION",
-					"rarity": "LEGENDARY"
+			"spells": [
+				{
+					"class": "ReplaceCardLocationSpell",
+					"cardLocation": "HAND",
+					"cardFilter": {
+						"class": "CardFilter",
+						"cardType": "MINION",
+						"rarity": "LEGENDARY"
+					}
+				},
+				{
+					"class": "ReplaceCardLocationSpell",
+					"cardLocation": "DECK",
+					"cardFilter": {
+						"class": "CardFilter",
+						"cardType": "MINION",
+						"rarity": "LEGENDARY"
+					}
 				}
-			},
-			"spell2": {
-				"class": "ReplaceCardLocationSpell",
-				"cardLocation": "DECK",
-				"cardFilter": {
-					"class": "CardFilter",
-					"cardType": "MINION",
-					"rarity": "LEGENDARY"
-				}
-			}
+			]
 		},
 		"resolvedLate": false
 	},

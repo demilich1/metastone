@@ -12,15 +12,17 @@
 		"spell": {
 			"class": "MetaSpell",
 			"target": "ADJACENT_MINIONS",
-			"spell1": {
-				"class": "BuffSpell",
-				"attackBonus": 1,
-				"hpBonus": 1
-			},
-			"spell2": {
-				"class": "AddAttributeSpell",
-				"attribute": "TAUNT"
-			}
+			"spells": [
+				{
+					"class": "BuffSpell",
+					"attackBonus": 1,
+					"hpBonus": 1
+				},
+				{
+					"class": "AddAttributeSpell",
+					"attribute": "TAUNT"
+				}
+			]
 		},
 		"resolvedLate": false
 	},

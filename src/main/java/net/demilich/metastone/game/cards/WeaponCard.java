@@ -40,6 +40,9 @@ public class WeaponCard extends Card {
 		if (desc.trigger != null) {
 			weapon.setSpellTrigger(desc.trigger.create());
 		}
+		if (desc.cardCostModifier != null) {
+			weapon.setCardCostModifier(desc.cardCostModifier.create());
+		}
 		weapon.setOnEquip(desc.onEquip);
 		weapon.setOnUnequip(desc.onUnequip);
 		return weapon;

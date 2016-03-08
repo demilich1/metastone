@@ -9,7 +9,7 @@ public class HeroPowerUsedEvent extends GameEvent {
 	private final HeroPower heroPower;
 
 	public HeroPowerUsedEvent(GameContext context, int playerId, HeroPower heroPower) {
-		super(context, playerId);
+		super(context, playerId, -1);
 		this.heroPower = heroPower;
 	}
 	

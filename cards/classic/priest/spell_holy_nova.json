@@ -9,16 +9,18 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
-		"spell1": {
-			"class": "DamageSpell",
-			"target": "ENEMY_CHARACTERS",
-			"value": 2
-		},
-		"spell2": {
-			"class": "HealSpell",
-			"target": "FRIENDLY_CHARACTERS",
-			"value": 2
-		}
+		"spells": [
+			{
+				"class": "DamageSpell",
+				"target": "ENEMY_CHARACTERS",
+				"value": 2
+			},
+			{
+				"class": "HealSpell",
+				"target": "FRIENDLY_CHARACTERS",
+				"value": 2
+			}
+		]
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

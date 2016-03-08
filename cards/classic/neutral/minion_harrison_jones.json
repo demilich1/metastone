@@ -11,18 +11,20 @@
 	"battlecry": {
 		"spell": {
 			"class": "MetaSpell",
-			"spell1": {
-				"class": "DrawCardSpell",
-				"valueProvider": {
-					"class": "AttributeValueProvider",
-					"target": "ENEMY_WEAPON",
-					"attribute": "HP"
+			"spells": [
+				{
+					"class": "DrawCardSpell",
+					"valueProvider": {
+						"class": "AttributeValueProvider",
+						"target": "ENEMY_WEAPON",
+						"attribute": "HP"
+					}
+				},
+				{
+					"class": "DestroySpell",
+					"target": "ENEMY_WEAPON"
 				}
-			},
-			"spell2": {
-				"class": "DestroySpell",
-				"target": "ENEMY_WEAPON"
-			}
+			]
 		},
 		"resolvedLate": false
 	},
