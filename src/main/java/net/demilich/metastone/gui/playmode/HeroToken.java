@@ -84,7 +84,11 @@ public class HeroToken extends GameToken {
 		} else {
 			cardsLabel.setText("Fatigue: " + player.getHero().getAttributeValue(Attribute.FATIGUE));
 		}
-		manaLabel.setText("Mana: " + player.getMana() + "/" + player.getMaxMana());
+		if (player.getHero().hasAttribute(Attribute.OVERLOAD)) {
+			manaLabel.setText("Mana: " + player.getMana() + "/" + player.getMaxMana() + "\nOver: " + player.getHero().getAttributeValue(Attribute.OVERLOAD));
+		} else {
+			manaLabel.setText("Mana: " + player.getMana() + "/" + player.getMaxMana());
+		}
 		updateArmor(hero.getArmor());
 		updateWeapon(hero.getWeapon());
 		updateSecrets(player);
