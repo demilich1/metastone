@@ -196,7 +196,7 @@ public class GameLogic implements Cloneable {
 		Player player = context.getPlayer(playerId);
 		Card card = context.resolveCardReference(cardReference);
 		int manaCost = getModifiedManaCost(player, card);
-		if (player.getMana() < manaCost) {
+		if (player.getMana() < manaCost && manaCost != 0) {
 			return false;
 		}
 		if (card.getCardType() == CardType.HERO_POWER) {
@@ -1495,7 +1495,7 @@ public class GameLogic implements Cloneable {
 		player.getStatistics().startTurn();
 
 		player.setLockedMana(player.getHero().getAttributeValue(Attribute.OVERLOAD));
-		int mana = MathUtils.clamp(player.getMaxMana() - player.getLockedMana(), 0, MAX_MANA);
+		int mana = Math.min(player.getMaxMana() - player.getLockedMana(), MAX_MANA);
 		player.setMana(mana);
 		String manaString = player.getMana() + "/" + player.getMaxMana();
 		if (player.getLockedMana() > 0) {
