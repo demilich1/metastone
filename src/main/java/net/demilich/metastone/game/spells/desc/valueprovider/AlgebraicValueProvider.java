@@ -12,6 +12,19 @@ public class AlgebraicValueProvider extends ValueProvider {
 			return value1 + value2;
 		case SUBTRACT:
 			return value1 - value2;
+		case MULTIPLY:
+			return value1 * value2;
+		case DIVIDE:
+			if (value2 != 0) {
+				return value1 / value2;
+			}
+			return value1;
+		case SET:
+			return value1 == value2 ? 1 : 0;
+		case NEGATE:
+			return -value1;
+		case MODULO:
+			return value1 % value2;
 		default:
 			break;
 		}

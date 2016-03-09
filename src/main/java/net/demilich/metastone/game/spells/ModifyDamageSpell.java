@@ -34,6 +34,15 @@ public class ModifyDamageSpell extends Spell {
 			damage -= value;
 			damage = Math.max(minDamage, damage);
 			break;
+		case MODULO:
+			if ((context.resolveSingleTarget(context.getEventTargetStack().peek())).hasAttribute(Attribute.TAKE_DOUBLE_DAMAGE)) {
+				damage /= 2;
+			}
+			damage %= value;
+			if ((context.resolveSingleTarget(context.getEventTargetStack().peek())).hasAttribute(Attribute.TAKE_DOUBLE_DAMAGE)) {
+				damage *= 2;
+			}
+			break;
 		case MULTIPLY:
 			damage *= value;
 			break;
