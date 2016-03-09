@@ -18,37 +18,35 @@
 	},
 	"condition": {
 		"class": "AndCondition",
-		"condition1": {
-			"class": "AndCondition",
-			"condition1": {
+		"conditions": [
+			{
 				"class": "AndCondition",
-				"condition1": {
-					"class": "HasSpecificMinionOnBoardCondition",
-					"cardId": "token_searing_totem"
-				},
-				"condition2": {
-					"class": "HasSpecificMinionOnBoardCondition",
-					"cardId": "token_healing_totem"
-				}
+				"conditions": [
+					{
+						"class": "HasSpecificMinionOnBoardCondition",
+						"cardId": "token_searing_totem"
+					},
+					{
+						"class": "HasSpecificMinionOnBoardCondition",
+						"cardId": "token_healing_totem"
+					},
+					{
+						"class": "HasSpecificMinionOnBoardCondition",
+						"cardId": "token_wrath_of_air_totem"
+					},
+					{
+						"class": "HasSpecificMinionOnBoardCondition",
+						"cardId": "token_stoneclaw_totem"
+					}
+				],
+				"invert": true
 			},
-			"condition2": {
-				"class": "AndCondition",
-				"condition1": {
-					"class": "HasSpecificMinionOnBoardCondition",
-					"cardId": "token_wrath_of_air_totem"
-				},
-				"condition2": {
-					"class": "HasSpecificMinionOnBoardCondition",
-					"cardId": "token_stoneclaw_totem"
-				}
-			},
-			"invert": true
-		},
-		"condition2": {
-			"class": "MinionCountCondition",
-			"value": 7,
-			"operation": "LESS"
-		}
+			{
+				"class": "MinionCountCondition",
+				"value": 7,
+				"operation": "LESS"
+			}
+		]
 	},
 	"collectible": false,
 	"set": "CLASSIC",
