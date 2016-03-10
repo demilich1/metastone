@@ -11,7 +11,7 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "DamageCausedTrigger",
-			"worksOnHero": false
+			"targetEntityType": "MINION"
 		},
 		"spell": {
 			"class": "DestroySpell",
