@@ -25,7 +25,9 @@
 					"value": 3
 				},
 				"valueProvider2": {
-					"class": "CardCounter"
+					"class": "PlayerAttributeValueProvider",
+					"playerAttribute": "HAND_COUNT",
+					"targetPlayer": "SELF"
 				}
 			}
 		}

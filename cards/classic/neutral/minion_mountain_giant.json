@@ -9,7 +9,8 @@
 	"rarity": "EPIC",
 	"description": "Costs (1) less for each other card in your hand.",
 	"manaCostModifier": {
-		"class": "CardCounter",
+		"class": "PlayerAttributeValueProvider",
+		"playerAttribute": "HAND_COUNT",
 		"targetPlayer": "SELF",
 		"offset": -1
 	},

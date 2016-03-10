@@ -13,11 +13,13 @@
 			"class": "AlgebraicValueProvider",
 			"operation": "SUBTRACT",
 			"valueProvider1": {
-				"class": "CardCounter",
+				"class": "PlayerAttributeValueProvider",
+				"playerAttribute": "HAND_COUNT",
 				"targetPlayer": "OPPONENT"
 			},
 			"valueProvider2": {
-				"class": "CardCounter",
+				"class": "PlayerAttributeValueProvider",
+				"playerAttribute": "HAND_COUNT",
 				"targetPlayer": "SELF"
 			}
 		}

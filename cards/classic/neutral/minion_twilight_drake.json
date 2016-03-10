@@ -14,7 +14,8 @@
 			"class": "BuffSpell",
 			"target": "SELF",
 			"hpValueProvider": {
-				"class": "CardCounter",
+				"class": "PlayerAttributeValueProvider",
+				"playerAttribute": "HAND_COUNT",
 				"targetPlayer": "SELF"
 			}
 		},
