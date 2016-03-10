@@ -15,7 +15,37 @@ public abstract class ValueProvider {
 
 	public int getValue(GameContext context, Player player, Entity target, Entity host) {
 		TargetPlayer targetPlayer = (TargetPlayer) desc.get(ValueProviderArg.TARGET_PLAYER);
-		Player providingPlayer = targetPlayer == null || targetPlayer == TargetPlayer.SELF ? player : context.getOpponent(player);
+		if (targetPlayer == null) {
+			targetPlayer = TargetPlayer.SELF;
+		}
+		Player providingPlayer = null;
+		switch (targetPlayer) {
+		case ACTIVE:
+			providingPlayer = context.getActivePlayer();
+			break;
+		case BOTH:
+			int multiplier = desc.contains(ValueProviderArg.MULTIPLIER) ? desc.getInt(ValueProviderArg.MULTIPLIER) : 1;
+			int offset = desc.contains(ValueProviderArg.OFFSET) ? desc.getInt(ValueProviderArg.OFFSET) : 0;
+			int value = 0;
+			for (Player selectedPlayer : context.getPlayers()) {
+				value += provideValue(context, selectedPlayer, target, host);
+			}
+			value = value * multiplier + offset;
+			return value;
+		case INACTIVE:
+			providingPlayer = context.getOpponent(context.getActivePlayer());
+			break;
+		case OPPONENT:
+			providingPlayer = context.getOpponent(player);
+			break;
+		case OWNER:
+			providingPlayer = context.getPlayer(host.getOwner());
+			break;
+		case SELF:
+		default:
+			providingPlayer = player;
+			break;
+		}
 		int multiplier = desc.contains(ValueProviderArg.MULTIPLIER) ? desc.getInt(ValueProviderArg.MULTIPLIER) : 1;
 		int offset = desc.contains(ValueProviderArg.OFFSET) ? desc.getInt(ValueProviderArg.OFFSET) : 0;
 		int value = provideValue(context, providingPlayer, target, host) * multiplier + offset;
