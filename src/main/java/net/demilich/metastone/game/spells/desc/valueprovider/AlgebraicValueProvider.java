@@ -24,7 +24,10 @@ public class AlgebraicValueProvider extends ValueProvider {
 		case NEGATE:
 			return -value1;
 		case MODULO:
-			return value1 % value2;
+			if (value2 != 0) {
+				return value1 % value2;
+			}
+			return value1;
 		default:
 			break;
 		}
