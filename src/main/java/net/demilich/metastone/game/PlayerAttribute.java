@@ -5,5 +5,6 @@ public enum PlayerAttribute {
 	MAX_MANA,
 	HAND_COUNT,
 	DECK_COUNT,
+	SECRET_COUNT,
 	
 }

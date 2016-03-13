@@ -23,6 +23,8 @@ public class PlayerAttributeValueProvider extends ValueProvider {
 			return player.getMana();
 		case MAX_MANA:
 			return player.getMaxMana();
+		case SECRET_COUNT:
+			return player.getSecrets().size();
 		default:
 			break;
 		}
