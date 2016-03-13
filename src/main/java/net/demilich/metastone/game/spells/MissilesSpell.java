@@ -26,7 +26,7 @@ public class MissilesSpell extends DamageSpell {
 		for (int i = 0; i < missiles; i++) {
 			List<Actor> validTargets = SpellUtils.getValidRandomTargets(targets);
 			Actor randomTarget = SpellUtils.getRandomTarget(validTargets);
-			int damage = desc.getValue(SpellArg.VALUE, context, player, randomTarget, source, 0);
+			int damage = desc.getValue(SpellArg.VALUE, context, player, randomTarget, source, 1);
 			context.getLogic().damage(player, randomTarget, damage, source, true);
 		}
 	}
