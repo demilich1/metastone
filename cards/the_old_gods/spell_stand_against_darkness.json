@@ -1,0 +1,23 @@
+{
+	"id": "spell_stand_against_darkness",
+	"name": "Stand Against Darkness",
+	"baseManaCost": 5,
+	"type": "SPELL",
+	"heroClass": "PALADIN",
+	"rarity": "COMMON",
+	"description": "Summon five 1/1 Silver Hand Recruits.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "SummonSpell",
+		"cards": [
+			"token_silver_hand_recruit",
+			"token_silver_hand_recruit",
+			"token_silver_hand_recruit",
+			"token_silver_hand_recruit",
+			"token_silver_hand_recruit"
+		]
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

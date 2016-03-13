@@ -1,0 +1,25 @@
+{
+	"id": "minion_twilight_elder",
+	"name": "Twilight Elder",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"description": "At the end of your turn, give your C'Thun +1/+1 (wherever it is).",
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "BuffAnywhereSpell",
+			"card": "minion_cthun",
+			"value": 1
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}
