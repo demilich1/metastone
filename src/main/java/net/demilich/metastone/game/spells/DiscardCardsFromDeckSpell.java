@@ -21,7 +21,7 @@ public class DiscardCardsFromDeckSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		int howMany = desc.getValue();
+		int howMany = desc.getValue(SpellArg.VALUE, context, player, target, source, 0);
 		for (int i = 0; i < howMany; i++) {
 			// Question: If I have no cards left and my Fel Reaver discards 3,
 			// do I draw 3 Fatigues or do I only Fatigue more when I draw a

@@ -13,7 +13,7 @@
 		"spell": {
 			"class": "BuffSpell",
 			"target": "SELF",
-			"hpValueProvider": {
+			"hpBonus": {
 				"class": "PlayerAttributeValueProvider",
 				"playerAttribute": "HAND_COUNT",
 				"targetPlayer": "SELF"

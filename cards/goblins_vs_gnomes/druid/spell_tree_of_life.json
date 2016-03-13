@@ -10,7 +10,7 @@
 	"spell": {
 		"class": "HealSpell",
 		"target": "ALL_CHARACTERS",
-		"valueProvider": {
+		"value": {
 			"class": "AttributeValueProvider",
 			"attribute": "MAX_HP"
 		}

@@ -8,7 +8,6 @@ import net.demilich.metastone.game.logic.CustomCloneable;
 import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
-import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class SpellDesc extends Desc<SpellArg> {
@@ -69,14 +68,6 @@ public class SpellDesc extends Desc<SpellArg> {
 
 	public TargetPlayer getTargetPlayer() {
 		return (TargetPlayer) get(SpellArg.TARGET_PLAYER);
-	}
-
-	public int getValue() {
-		return getInt(SpellArg.VALUE, 0);
-	}
-
-	public ValueProvider getValueProvider() {
-		return (ValueProvider) get(SpellArg.VALUE_PROVIDER);
 	}
 
 	public boolean hasPredefinedTarget() {

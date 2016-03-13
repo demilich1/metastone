@@ -10,7 +10,7 @@ public class ModifyMaxManaSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		int value = desc.getValue();
+		int value = desc.getValue(SpellArg.VALUE, context, player, target, source, 0);
 		boolean fullManaCrystals = desc.getBool(SpellArg.FULL_MANA_CRYSTALS);
 		
 		context.getLogic().modifyMaxMana(player, value);

@@ -35,7 +35,7 @@ public class DamageSpell extends Spell {
 
 	public static SpellDesc create(EntityReference target, ValueProvider damageModfier) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(DamageSpell.class);
-		arguments.put(SpellArg.VALUE_PROVIDER, damageModfier);
+		arguments.put(SpellArg.VALUE, damageModfier);
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
 	}
@@ -55,12 +55,7 @@ public class DamageSpell extends Spell {
 		if (!desc.contains(SpellArg.VALUE) && !context.getDamageStack().isEmpty()) {
 			damage = context.getDamageStack().peek();
 		} else {
-			damage = desc.getInt(SpellArg.VALUE, 0);
-		}
-		
-		ValueProvider damageModifier = (ValueProvider) desc.get(SpellArg.VALUE_PROVIDER);
-		if (damageModifier != null) {
-			damage = damageModifier.getValue(context, player, target, source);
+			damage = desc.getValue(SpellArg.VALUE, context, player, target, source, 0);
 		}
 
 		context.getLogic().damage(player, (Actor) target, damage, source);

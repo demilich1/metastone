@@ -17,7 +17,7 @@
 		"spell": {
 			"class": "DrawCardSpell",
 			"targetPlayer": "ACTIVE",
-			"valueProvider": {
+			"value": {
 				"class": "AlgebraicValueProvider",
 				"operation": "SUBTRACT",
 				"valueProvider1": {

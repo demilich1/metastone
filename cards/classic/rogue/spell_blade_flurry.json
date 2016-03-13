@@ -13,7 +13,7 @@
 			{
 				"class": "DamageSpell",
 				"target": "ENEMY_CHARACTERS",
-				"valueProvider": {
+				"value": {
 					"class": "AttributeValueProvider",
 					"target": "FRIENDLY_WEAPON",
 					"attribute": "ATTACK"

@@ -9,7 +9,7 @@
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "DamageSpell",
-		"valueProvider": {
+		"value": {
 			"class": "ConditionalValueProvider",
 			"ifTrue": 5,
 			"ifFalse": 3,

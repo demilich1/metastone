@@ -52,7 +52,7 @@ public class ReplaceCardLocationSpell extends Spell {
 				context.getLogic().removeCard(player.getId(), card);
 			}
 			
-			int manaCostModifier = desc.getInt(SpellArg.MANA_MODIFIER, 0);
+			int manaCostModifier = desc.getValue(SpellArg.MANA_MODIFIER, context, player, target, source, 0);
 			for (int i = 0; i < count; i++) {
 				Card card = null;
 				if (!result.isEmpty()) {

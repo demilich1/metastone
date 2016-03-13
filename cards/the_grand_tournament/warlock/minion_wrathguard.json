@@ -17,7 +17,7 @@
 		"spell": {
 			"class": "DamageSpell",
 			"target": "FRIENDLY_HERO",
-			"valueProvider": {
+			"value": {
 				"class": "AttributeValueProvider",
 				"target": "SELF",
 				"attribute": "LAST_HIT"

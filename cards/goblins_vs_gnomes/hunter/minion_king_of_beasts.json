@@ -13,7 +13,7 @@
 		"spell": {
 			"class": "BuffSpell",
 			"target": "SELF",
-			"attackValueProvider": {
+			"attackBonus": {
 				"class": "EntityCounter",
 				"target": "OTHER_FRIENDLY_MINIONS",
 				"filter": {

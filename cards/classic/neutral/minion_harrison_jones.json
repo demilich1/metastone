@@ -14,7 +14,7 @@
 			"spells": [
 				{
 					"class": "DrawCardSpell",
-					"valueProvider": {
+					"value": {
 						"class": "AttributeValueProvider",
 						"target": "ENEMY_WEAPON",
 						"attribute": "HP"

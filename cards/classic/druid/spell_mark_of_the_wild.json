@@ -12,8 +12,7 @@
 		"spells": [
 			{
 				"class": "BuffSpell",
-				"attackBonus": 2,
-				"hpBonus": 2
+				"value": 2
 			},
 			{
 				"class": "AddAttributeSpell",

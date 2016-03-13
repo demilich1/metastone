@@ -17,8 +17,8 @@ public class BuffWeaponSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		int damageBonus = desc.getInt(SpellArg.ATTACK_BONUS, 0);
-		int durabilityBonus = desc.getInt(SpellArg.HP_BONUS, 0);
+		int damageBonus = desc.getValue(SpellArg.ATTACK_BONUS, context, player, target, source, 0);
+		int durabilityBonus = desc.getValue(SpellArg.HP_BONUS, context, player, target, source, 0);
 
 		Weapon weapon = (Weapon) target;
 		if (weapon == null) {

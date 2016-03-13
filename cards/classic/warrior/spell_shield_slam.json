@@ -9,7 +9,7 @@
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "DamageSpell",
-		"valueProvider": {
+		"value": {
 			"class": "AttributeValueProvider",
 			"target": "FRIENDLY_HERO",
 			"attribute": "ARMOR"

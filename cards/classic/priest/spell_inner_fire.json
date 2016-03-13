@@ -9,7 +9,7 @@
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "SetAttackSpell",
-		"valueProvider": {
+		"value": {
 			"class": "AttributeValueProvider",
 			"attribute": "HP"
 		}

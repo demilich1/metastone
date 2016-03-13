@@ -10,7 +10,7 @@
 	"spell": {
 		"class": "DamageSpell",
 		"target": "ALL_MINIONS",
-		"valueProvider": {
+		"value": {
 			"class": "ConditionalValueProvider",
 			"ifTrue": 3,
 			"ifFalse": 1,

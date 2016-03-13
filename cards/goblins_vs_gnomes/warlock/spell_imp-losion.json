@@ -12,7 +12,7 @@
 		"spells": [
 			{
 				"class": "DamageSpell",
-				"valueProvider": {
+				"value": {
 					"class": "RandomValueProvider",
 					"min": 2,
 					"max": 4
@@ -20,7 +20,7 @@
 			},
 			{
 				"class": "SummonSpell",
-				"valueProvider": {
+				"value": {
 					"class": "AttributeValueProvider",
 					"attribute": "LAST_HIT"
 				},

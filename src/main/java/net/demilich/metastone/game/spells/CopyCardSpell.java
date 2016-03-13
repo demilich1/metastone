@@ -33,7 +33,7 @@ public class CopyCardSpell extends Spell {
 		}
 
 		CardLocation cardLocation = (CardLocation) desc.get(SpellArg.CARD_LOCATION);
-		int numberOfCardsToCopy = desc.getInt(SpellArg.VALUE, 1);
+		int numberOfCardsToCopy = desc.getValue(SpellArg.VALUE, context, player, target, source, 1);
 
 		Player opponent = context.getOpponent(player);
 		CardCollection sourceCollection = null;

@@ -20,7 +20,7 @@
 			"target": "EVENT_TARGET",
 			"spell2": {
 				"class": "DamageSpell",
-				"valueProvider": {
+				"value": {
 					"class": "AttributeValueProvider",
 					"target": "SELF",
 					"attribute": "ATTACK"

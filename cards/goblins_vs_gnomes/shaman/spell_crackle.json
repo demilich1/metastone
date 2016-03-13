@@ -9,7 +9,7 @@
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "DamageSpell",
-		"valueProvider": {
+		"value": {
 			"class": "RandomValueProvider",
 			"min": 3,
 			"max": 6

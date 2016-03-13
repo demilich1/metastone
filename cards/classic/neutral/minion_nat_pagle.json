@@ -15,7 +15,7 @@
 		},
 		"spell": {
 			"class": "DrawCardSpell",
-			"valueProvider": {
+			"value": {
 				"class": "ConditionalValueProvider",
 				"ifTrue": 1,
 				"ifFalse": 0,

@@ -280,6 +280,9 @@ public class GameLogic implements Cloneable {
 			Spell spell = spellFactory.getSpell(spellDesc);
 			spell.cast(context, player, spellDesc, source, targets);
 		} catch (Exception e) {
+			if (source != null) {
+				logger.error("Error while playing card: " + source.getName());
+			}
 			logger.error("Error while casting spell: " + spellDesc);
 			panicDump();
 			e.printStackTrace();

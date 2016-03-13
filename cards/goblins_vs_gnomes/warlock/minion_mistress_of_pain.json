@@ -16,7 +16,7 @@
 		"spell": {
 			"class": "HealSpell",
 			"target": "FRIENDLY_HERO",
-			"valueProvider": {
+			"value": {
 				"class": "AttributeValueProvider",
 				"target": "EVENT_TARGET",
 				"attribute": "LAST_HIT"

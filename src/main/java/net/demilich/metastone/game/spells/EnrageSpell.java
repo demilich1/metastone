@@ -26,7 +26,7 @@ public class EnrageSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		int attackBonus = desc.getInt(SpellArg.ATTACK_BONUS, 0);
+		int attackBonus = desc.getValue(SpellArg.ATTACK_BONUS, context, player, target, source, 0);
 		boolean enraged = target.hasAttribute(Attribute.ENRAGED);
 		target.setAttribute(Attribute.CONDITIONAL_ATTACK_BONUS, enraged ? attackBonus : 0);
 		Attribute tag = (Attribute) desc.get(SpellArg.ATTRIBUTE);

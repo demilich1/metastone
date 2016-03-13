@@ -12,7 +12,7 @@
 		"spell": {
 			"class": "BuffSpell",
 			"target": "SELF",
-			"attackValueProvider": {
+			"attackBonus": {
 				"class": "RandomValueProvider",
 				"min": 1,
 				"max": 4

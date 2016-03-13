@@ -15,7 +15,7 @@
 		"spell": {
 			"class": "ConditionalAttackBonusSpell",
 			"target": "SELF",
-			"valueProvider": {
+			"value": {
 				"class": "ConditionalValueProvider",
 				"ifTrue": 4,
 				"ifFalse": 0,
