@@ -22,6 +22,10 @@ public class CardDrawnTrigger extends GameEventTrigger {
 		if (sourceType != null && drawEvent.getSourceType() != sourceType) {
 			return false;
 		}
+		
+		if (!drawEvent.isDrawn()) {
+			return false;
+		}
 
 		return true;
 	}

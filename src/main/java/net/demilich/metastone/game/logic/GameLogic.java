@@ -547,13 +547,7 @@ public class GameLogic implements Cloneable {
 		Player player = context.getPlayer(playerId);
 		player.getStatistics().cardDrawn();
 		player.getDeck().remove(card);
-		receiveCard(playerId, card);
-		CardType sourceType = null;
-		if (source instanceof Card) {
-			Card sourceCard = (Card) source;
-			sourceType = sourceCard.getCardType();
-		}
-		context.fireGameEvent(new DrawCardEvent(context, playerId, card, sourceType));
+		receiveCard(playerId, card, source, true);
 		return card;
 	}
 
@@ -1261,8 +1255,12 @@ public class GameLogic implements Cloneable {
 	public boolean randomBool() {
 		return ThreadLocalRandom.current().nextBoolean();
 	}
-
+	
 	public void receiveCard(int playerId, Card card) {
+		receiveCard(playerId, card, null, false);
+	}
+
+	public void receiveCard(int playerId, Card card, Entity source, boolean drawn) {
 		Player player = context.getPlayer(playerId);
 		if (card.getId() == IdFactory.UNASSIGNED) {
 			card.setId(idFactory.generateId());
@@ -1280,6 +1278,12 @@ public class GameLogic implements Cloneable {
 			log("{} receives card {}", player.getName(), card);
 			hand.add(card);
 			card.setLocation(CardLocation.HAND);
+			CardType sourceType = null;
+			if (source instanceof Card) {
+				Card sourceCard = (Card) source;
+				sourceType = sourceCard.getCardType();
+			}
+			context.fireGameEvent(new DrawCardEvent(context, playerId, card, sourceType, drawn));
 		} else {
 			log("{} has too many cards on his hand, card destroyed: {}", player.getName(), card);
 			discardCard(player, card);
