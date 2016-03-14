@@ -11,8 +11,7 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "AfterSpellCastedTrigger",
-			"sourcePlayer": "SELF",
-			"breaksStealth": true
+			"sourcePlayer": "SELF"
 		},
 		"spell": {
 			"class": "MissilesSpell",

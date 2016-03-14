@@ -405,6 +405,9 @@ public class GameLogic implements Cloneable {
 		context.getDamageStack().push(damage);
 		context.fireGameEvent(new PreDamageEvent(context, target, source));
 		damage = context.getDamageStack().pop();
+		if (damage > 0) {
+			source.removeAttribute(Attribute.STEALTH);
+		}
 		switch (target.getEntityType()) {
 		case MINION:
 			damageDealt = damageMinion((Actor) target, damage);
