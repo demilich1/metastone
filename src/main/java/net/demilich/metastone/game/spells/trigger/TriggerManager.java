@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.demilich.metastone.game.events.GameEvent;
+import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.utils.IDisposable;
 
@@ -44,7 +45,22 @@ public class TriggerManager implements Cloneable, IDisposable {
 
 	public void fireGameEvent(GameEvent event) {
 		List<IGameEventListener> eventTriggers = new ArrayList<IGameEventListener>();
+		List<IGameEventListener> removeTriggers = new ArrayList<IGameEventListener>();
 		for (IGameEventListener trigger : triggers) {
+			// In order to stop premature expiration, check
+			// for a oneTurnOnly tag and that it isn't delayed.
+			if (event.getEventType() == GameEventType.TURN_END &&
+					trigger instanceof SpellTrigger) {
+				SpellTrigger spellTrigger = (SpellTrigger) trigger;
+				if(spellTrigger.oneTurnOnly() && !spellTrigger.isDelayed() &&
+						!spellTrigger.interestedIn(event.getEventType())) {
+					spellTrigger.expire();
+				}
+				spellTrigger.delayTimeDown();
+			}
+			if (trigger.isExpired()) {
+				removeTriggers.add(trigger);
+			}
 			if (trigger.getLayer() != event.getTriggerLayer()) {
 				continue;
 			}
@@ -64,8 +80,12 @@ public class TriggerManager implements Cloneable, IDisposable {
 			// after all, a previous trigger may have removed it (i.e. double
 			// corruption)
 			if (trigger.isExpired()) {
-				triggers.remove(trigger);
+				removeTriggers.add(trigger);
 			}
+		}
+		
+		for (IGameEventListener trigger : removeTriggers) {
+			triggers.remove(trigger);
 		}
 	}
 

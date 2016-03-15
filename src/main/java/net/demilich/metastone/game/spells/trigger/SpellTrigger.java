@@ -21,21 +21,27 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 	private final boolean oneTurn;
 	private boolean expired;
 	private boolean persistentOwner;
+	private int turnDelay;
 	private TriggerLayer layer = TriggerLayer.DEFAULT;
 
-	public SpellTrigger(GameEventTrigger primaryTrigger, GameEventTrigger secondaryTrigger, SpellDesc spell, boolean oneTurn) {
+	public SpellTrigger(GameEventTrigger primaryTrigger, GameEventTrigger secondaryTrigger, SpellDesc spell, boolean oneTurn, int turnDelay) {
 		this.primaryTrigger = primaryTrigger;
 		this.secondaryTrigger = secondaryTrigger;
 		this.spell = spell;
 		this.oneTurn = oneTurn;
+		this.turnDelay = turnDelay;
+	}
+	
+	public SpellTrigger(GameEventTrigger primaryTrigger, GameEventTrigger secondaryTrigger, SpellDesc spell, boolean oneTurn) {
+		this(primaryTrigger, secondaryTrigger, spell, oneTurn, 0);
 	}
 
 	public SpellTrigger(GameEventTrigger trigger, SpellDesc spell) {
-		this(trigger, spell, false);
+		this(trigger, spell, false, 0);
 	}
 
-	public SpellTrigger(GameEventTrigger trigger, SpellDesc spell, boolean oneTime) {
-		this(trigger, null, spell, oneTime);
+	public SpellTrigger(GameEventTrigger trigger, SpellDesc spell, boolean oneTime, int turnDelay) {
+		this(trigger, null, spell, oneTime, turnDelay);
 	}
 
 	@Override
@@ -106,7 +112,9 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 		// Ooze). Since this method should only be called
 		// after being checked to be played, copying one-turn triggers should no
 		// longer matter.
-		if (oneTurn) {
+		// But let's check to make sure we don't accidentally expire something
+		// that's still using it.
+		if (oneTurn && event.getEventType() == GameEventType.TURN_END) {
 			expire();
 		}
 		try {
@@ -149,11 +157,15 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 	public String toString() {
 		return "[SpellTrigger primaryTrigger=" + primaryTrigger + ", secondaryTrigger=" + secondaryTrigger + ", spell=" + spell
 				+ ", hostReference=" + hostReference + ", oneTurn=" + oneTurn + ", expired=" + expired + ", persistentOwner="
-				+ persistentOwner + ", layer=" + layer + "]";
+				+ persistentOwner + ", layer=" + layer + ", turnDelay=" + turnDelay + "]";
 	}
 
 	@Override
 	public boolean canFire(GameEvent event) {
+		if (turnDelay > 0) {
+			return false;
+		}
+		
 		Entity host = event.getGameContext().resolveSingleTarget(hostReference);
 		return (triggerFires(primaryTrigger, event, host) || triggerFires(secondaryTrigger, event, host));
 	}
@@ -174,6 +186,20 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 
 	public void setPersistentOwner(boolean persistentOwner) {
 		this.persistentOwner = persistentOwner;
+	}
+	
+	public void delayTimeDown() {
+		if (turnDelay > 0) {
+			turnDelay--;
+		}
+	}
+	
+	public boolean isDelayed() {
+		return turnDelay > 0 ? true : false;
+	}
+	
+	public boolean oneTurnOnly() {
+		return oneTurn;
 	}
 
 }

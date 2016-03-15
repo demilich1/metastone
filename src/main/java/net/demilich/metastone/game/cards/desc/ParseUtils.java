@@ -127,6 +127,7 @@ public class ParseUtils {
 			triggerDesc.spell = spellParser.deserialize(triggerObject.get("spell"), SpellDesc.class, null);
 			triggerDesc.oneTurn = triggerObject.has("oneTurn") ? triggerObject.get("oneTurn").getAsBoolean() : false;
 			triggerDesc.persistentOwner = triggerObject.has("persistentOwner") ? triggerObject.get("persistentOwner").getAsBoolean() : false;
+			triggerDesc.turnDelay = triggerObject.has("turnDelay") ? triggerObject.get("turnDelay").getAsInt() : 0;
 			return triggerDesc;
 		case EVENT_TRIGGER:
 			return triggerParser.deserialize(entry, EventTriggerDesc.class, null);
