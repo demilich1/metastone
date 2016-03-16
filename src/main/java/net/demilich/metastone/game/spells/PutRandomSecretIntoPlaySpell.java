@@ -25,7 +25,7 @@ public class PutRandomSecretIntoPlaySpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		int howMany = desc.getInt(SpellArg.HOW_MANY, 1);
+		int howMany = desc.getValue(SpellArg.HOW_MANY, context, player, target, source, 1);
 		for (int i = 0; i < howMany; i++) {
 			CardCollection secretCards = findSecretCards(player.getDeck());
 

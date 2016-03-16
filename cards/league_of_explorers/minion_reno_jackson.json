@@ -13,7 +13,7 @@
 		"spell": {
 			"class": "HealSpell",
 			"target": "FRIENDLY_HERO",
-			"valueProvider": {
+			"value": {
 				"class": "AttributeValueProvider",
 				"attribute": "MAX_HP"
 			}

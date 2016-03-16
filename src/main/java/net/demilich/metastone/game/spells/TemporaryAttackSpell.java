@@ -12,7 +12,6 @@ import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class TemporaryAttackSpell extends Spell {
@@ -32,13 +31,7 @@ public class TemporaryAttackSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		int attackBonus = desc.getValue();
-
-		ValueProvider attackValueProvider = (ValueProvider) desc.get(SpellArg.VALUE_PROVIDER);
-
-		if (attackValueProvider != null) {
-			attackBonus = attackValueProvider.getValue(context, player, target, source);
-		}
+		int attackBonus = desc.getValue(SpellArg.VALUE, context, player, target, source, 0);
 
 		logger.debug("{} gains {} attack", target, attackBonus);
 

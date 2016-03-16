@@ -10,7 +10,7 @@
 	"spell": {
 		"class": "DamageSpell",
 		"target": "ENEMY_MINIONS",
-		"valueProvider": {
+		"value": {
 			"class": "RandomValueProvider",
 			"min": 2,
 			"max": 3

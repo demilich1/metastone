@@ -10,8 +10,7 @@
 	"description": "Freeze any character damaged by this minion.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "DamageCausedTrigger",
-			"worksOnHero": true
+			"class": "DamageCausedTrigger"
 		},
 		"spell": {
 			"class": "AddAttributeSpell",

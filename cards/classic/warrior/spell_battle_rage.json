@@ -9,7 +9,7 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "DrawCardSpell",
-		"valueProvider": {
+		"value": {
 			"class": "EntityCounter",
 			"target": "FRIENDLY_CHARACTERS",
 			"filter": {

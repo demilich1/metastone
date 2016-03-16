@@ -35,7 +35,7 @@ public class ReturnMinionToHandSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		int manaCostModifier = desc.getInt(SpellArg.MANA_MODIFIER, 0);
+		int manaCostModifier = desc.getValue(SpellArg.MANA_MODIFIER, context, player, target, source, 0);
 		Minion minion = (Minion) target;
 		Player owner = context.getPlayer(minion.getOwner());
 		if (owner.getHand().getCount() >= GameLogic.MAX_HAND_CARDS) {

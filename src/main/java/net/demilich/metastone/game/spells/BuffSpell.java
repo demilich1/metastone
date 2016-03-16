@@ -9,7 +9,6 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 
 public class BuffSpell extends Spell {
 
@@ -17,25 +16,13 @@ public class BuffSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		int attackBonus = desc.getInt(SpellArg.ATTACK_BONUS, 0);
-		int hpBonus = desc.getInt(SpellArg.HP_BONUS, 0);
-
-		ValueProvider valueProvider = (ValueProvider) desc.get(SpellArg.VALUE_PROVIDER);
-		ValueProvider attackValueProvider = (ValueProvider) desc.get(SpellArg.ATTACK_VALUE_PROVIDER);
-		ValueProvider hpValueProvider = (ValueProvider) desc.get(SpellArg.HP_VALUE_PROVIDER);
-
-		if (attackValueProvider != null) {
-			attackBonus = attackValueProvider.getValue(context, player, target, source);
-		} else if (valueProvider != null) {
-			attackBonus = valueProvider.getValue(context, player, target, source);
+		int attackBonus = desc.getValue(SpellArg.ATTACK_BONUS, context, player, target, source, 0);
+		int hpBonus = desc.getValue(SpellArg.HP_BONUS, context, player, target, source, 0);
+		int value = desc.getValue(SpellArg.VALUE, context, player, target, source, 0);
+		
+		if (value != 0) {
+			attackBonus = hpBonus = value;
 		}
-
-		if (hpValueProvider != null) {
-			hpBonus = hpValueProvider.getValue(context, player, target, source);
-		} else if (valueProvider != null) {
-			hpBonus = valueProvider.getValue(context, player, target, source);
-		}
-
 		logger.debug("{} gains ({})", target, attackBonus + "/" + hpBonus);
 
 		if (attackBonus != 0) {

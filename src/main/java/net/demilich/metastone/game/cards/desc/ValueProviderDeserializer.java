@@ -33,6 +33,7 @@ public class ValueProviderDeserializer implements JsonDeserializer<ValueProvider
 		Map<ValueProviderArg, Object> arguments = ValueProviderDesc.build(valueProviderClass);
 
 		parseArgument(ValueProviderArg.TARGET, jsonData, arguments, ParseValueType.TARGET_REFERENCE);
+		parseArgument(ValueProviderArg.PLAYER_ATTRIBUTE, jsonData, arguments, ParseValueType.PLAYER_ATTRIBUTE);
 		parseArgument(ValueProviderArg.ATTRIBUTE, jsonData, arguments, ParseValueType.ATTRIBUTE);
 		parseArgument(ValueProviderArg.MULTIPLIER, jsonData, arguments, ParseValueType.INTEGER);
 		parseArgument(ValueProviderArg.VALUE, jsonData, arguments, ParseValueType.INTEGER);

@@ -196,7 +196,7 @@ public class GameLogic implements Cloneable {
 		Player player = context.getPlayer(playerId);
 		Card card = context.resolveCardReference(cardReference);
 		int manaCost = getModifiedManaCost(player, card);
-		if (player.getMana() < manaCost) {
+		if (player.getMana() < manaCost && manaCost != 0) {
 			return false;
 		}
 		if (card.getCardType() == CardType.HERO_POWER) {
@@ -280,6 +280,9 @@ public class GameLogic implements Cloneable {
 			Spell spell = spellFactory.getSpell(spellDesc);
 			spell.cast(context, player, spellDesc, source, targets);
 		} catch (Exception e) {
+			if (source != null) {
+				logger.error("Error while playing card: " + source.getName());
+			}
 			logger.error("Error while casting spell: " + spellDesc);
 			panicDump();
 			e.printStackTrace();
@@ -402,6 +405,9 @@ public class GameLogic implements Cloneable {
 		context.getDamageStack().push(damage);
 		context.fireGameEvent(new PreDamageEvent(context, target, source));
 		damage = context.getDamageStack().pop();
+		if (damage > 0) {
+			source.removeAttribute(Attribute.STEALTH);
+		}
 		switch (target.getEntityType()) {
 		case MINION:
 			damageDealt = damageMinion((Actor) target, damage);
@@ -544,13 +550,7 @@ public class GameLogic implements Cloneable {
 		Player player = context.getPlayer(playerId);
 		player.getStatistics().cardDrawn();
 		player.getDeck().remove(card);
-		receiveCard(playerId, card);
-		CardType sourceType = null;
-		if (source instanceof Card) {
-			Card sourceCard = (Card) source;
-			sourceType = sourceCard.getCardType();
-		}
-		context.fireGameEvent(new DrawCardEvent(context, playerId, card, sourceType));
+		receiveCard(playerId, card, source, true);
 		return card;
 	}
 
@@ -1072,9 +1072,7 @@ public class GameLogic implements Cloneable {
 			player.getMinions().add(minion);
 			minion.setOwner(player.getId());
 			applyAttribute(minion, Attribute.SUMMONING_SICKNESS);
-			if (minion.hasAttribute(Attribute.CHARGE)) {
-				refreshAttacksPerRound(minion);
-			}
+			refreshAttacksPerRound(minion);
 			List<IGameEventListener> triggers = context.getTriggersAssociatedWith(minion.getReference());
 			removeSpelltriggers(minion);
 			for (IGameEventListener trigger : triggers) {
@@ -1260,8 +1258,12 @@ public class GameLogic implements Cloneable {
 	public boolean randomBool() {
 		return ThreadLocalRandom.current().nextBoolean();
 	}
-
+	
 	public void receiveCard(int playerId, Card card) {
+		receiveCard(playerId, card, null, false);
+	}
+
+	public void receiveCard(int playerId, Card card, Entity source, boolean drawn) {
 		Player player = context.getPlayer(playerId);
 		if (card.getId() == IdFactory.UNASSIGNED) {
 			card.setId(idFactory.generateId());
@@ -1279,6 +1281,12 @@ public class GameLogic implements Cloneable {
 			log("{} receives card {}", player.getName(), card);
 			hand.add(card);
 			card.setLocation(CardLocation.HAND);
+			CardType sourceType = null;
+			if (source instanceof Card) {
+				Card sourceCard = (Card) source;
+				sourceType = sourceCard.getCardType();
+			}
+			context.fireGameEvent(new DrawCardEvent(context, playerId, card, sourceType, drawn));
 		} else {
 			log("{} has too many cards on his hand, card destroyed: {}", player.getName(), card);
 			discardCard(player, card);
@@ -1497,7 +1505,7 @@ public class GameLogic implements Cloneable {
 		player.getStatistics().startTurn();
 
 		player.setLockedMana(player.getHero().getAttributeValue(Attribute.OVERLOAD));
-		int mana = MathUtils.clamp(player.getMaxMana() - player.getLockedMana(), 0, MAX_MANA);
+		int mana = Math.min(player.getMaxMana() - player.getLockedMana(), MAX_MANA);
 		player.setMana(mana);
 		String manaString = player.getMana() + "/" + player.getMaxMana();
 		if (player.getLockedMana() > 0) {

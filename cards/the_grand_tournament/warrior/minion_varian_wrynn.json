@@ -19,16 +19,18 @@
 				},
 				"condition": {
 					"class": "AndCondition",
-					"condition1": {
-						"class": "CardPropertyCondition",
-						"cardType": "MINION"
-					},
-					"condition2": {
-						"class": "MinionCountCondition",
-						"targetPlayer": "SELF",
-						"value": 7,
-						"operation": "LESS"
-					}
+					"conditions": [
+						{
+							"class": "CardPropertyCondition",
+							"cardType": "MINION"
+						},
+						{
+							"class": "MinionCountCondition",
+							"targetPlayer": "SELF",
+							"value": 7,
+							"operation": "LESS"
+						}
+					]
 				}
 			}
 		},

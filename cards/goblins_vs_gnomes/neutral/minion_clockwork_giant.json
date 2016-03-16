@@ -10,7 +10,8 @@
 	"race": "MECH",
 	"description": "Costs (1) less Mana for each card in your opponent's hand.",
 	"manaCostModifier": {
-		"class": "CardCounter",
+		"class": "PlayerAttributeValueProvider",
+		"playerAttribute": "HAND_COUNT",
 		"targetPlayer": "OPPONENT"
 	},
 	"collectible": true,

@@ -9,9 +9,10 @@ public class TriggerDesc {
 	public SpellDesc spell;
 	public boolean oneTurn;
 	public boolean persistentOwner;
+	public int turnDelay;
 
 	public SpellTrigger create() {
-		SpellTrigger trigger = new SpellTrigger(eventTrigger.create(), spell, oneTurn);
+		SpellTrigger trigger = new SpellTrigger(eventTrigger.create(), spell, oneTurn, turnDelay);
 		trigger.setPersistentOwner(persistentOwner);
 		return trigger;
 	}

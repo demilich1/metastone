@@ -17,7 +17,7 @@
 		"spell": {
 			"class": "DrawCardSpell",
 			"targetPlayer": "ACTIVE",
-			"valueProvider": {
+			"value": {
 				"class": "AlgebraicValueProvider",
 				"operation": "SUBTRACT",
 				"valueProvider1": {
@@ -25,7 +25,9 @@
 					"value": 3
 				},
 				"valueProvider2": {
-					"class": "CardCounter"
+					"class": "PlayerAttributeValueProvider",
+					"playerAttribute": "HAND_COUNT",
+					"targetPlayer": "SELF"
 				}
 			}
 		}

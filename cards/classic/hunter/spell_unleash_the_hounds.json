@@ -9,7 +9,7 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "SummonSpell",
-		"valueProvider": {
+		"value": {
 			"class": "EntityCounter",
 			"target": "ENEMY_MINIONS"
 		},

@@ -12,7 +12,7 @@
 		"spell": {
 			"class": "BuffSpell",
 			"target": "SELF",
-			"valueProvider": {
+			"value": {
 				"class": "AttributeValueProvider",
 				"target": "FRIENDLY_HERO",
 				"attribute": "COMBO",

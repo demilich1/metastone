@@ -11,8 +11,7 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "MinionSummonedTrigger",
-			"targetPlayer": "SELF",
-			"breaksStealth": true
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "MissilesSpell",

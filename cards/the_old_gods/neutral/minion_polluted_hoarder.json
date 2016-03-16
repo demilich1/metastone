@@ -1,0 +1,20 @@
+{
+	"id": "minion_polluted_hoarder",
+	"name": "Polluted Hoarder",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 2,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Deathrattle: Draw a card.",
+	"deathrattle": {
+		"class": "DrawCardSpell",
+		"value": 1
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

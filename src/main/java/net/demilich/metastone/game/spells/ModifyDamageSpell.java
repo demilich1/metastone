@@ -18,7 +18,7 @@ public class ModifyDamageSpell extends Spell {
 		
 		int damage = context.getDamageStack().pop();
 		AlgebraicOperation operation = (AlgebraicOperation) desc.get(SpellArg.OPERATION);
-		int value = desc.getValue();
+		int value = desc.getValue(SpellArg.VALUE, context, player, target, source, 0);
 		int minDamage = desc.getInt(SpellArg.MIN_DAMAGE, 0);
 		switch(operation) {
 		case ADD:
@@ -33,6 +33,15 @@ public class ModifyDamageSpell extends Spell {
 			}
 			damage -= value;
 			damage = Math.max(minDamage, damage);
+			break;
+		case MODULO:
+			if ((context.resolveSingleTarget(context.getEventTargetStack().peek())).hasAttribute(Attribute.TAKE_DOUBLE_DAMAGE)) {
+				damage /= 2;
+			}
+			damage %= value;
+			if ((context.resolveSingleTarget(context.getEventTargetStack().peek())).hasAttribute(Attribute.TAKE_DOUBLE_DAMAGE)) {
+				damage *= 2;
+			}
 			break;
 		case MULTIPLY:
 			damage *= value;

@@ -27,7 +27,7 @@ public class DiscardSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		int numberOfCards = desc.getInt(SpellArg.VALUE, 1);
+		int numberOfCards = desc.getValue(SpellArg.VALUE, context, player, target, source, 1);
 		int cardCount = numberOfCards == ALL_CARDS ? player.getHand().getCount() : numberOfCards;
 
 		for (int i = 0; i < cardCount; i++) {

@@ -11,13 +11,12 @@
 	"description": "Whenever this minion deals damage, restore that much Health to your hero.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "DamageCausedTrigger",
-			"worksOnHero": true
+			"class": "DamageCausedTrigger"
 		},
 		"spell": {
 			"class": "HealSpell",
 			"target": "FRIENDLY_HERO",
-			"valueProvider": {
+			"value": {
 				"class": "AttributeValueProvider",
 				"target": "EVENT_TARGET",
 				"attribute": "LAST_HIT"

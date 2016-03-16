@@ -15,7 +15,7 @@ public class ConditionalAttackBonusSpell extends Spell {
 
 	public static SpellDesc create(EntityReference target, ValueProvider valueProvider) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(ConditionalAttackBonusSpell.class);
-		arguments.put(SpellArg.VALUE_PROVIDER, valueProvider);
+		arguments.put(SpellArg.VALUE, valueProvider);
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
 	}
@@ -26,8 +26,7 @@ public class ConditionalAttackBonusSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		ValueProvider valueProvider = (ValueProvider) desc.get(SpellArg.VALUE_PROVIDER);
-		int attackBonus = valueProvider.getValue(context, player, target, source);
+		int attackBonus = desc.getValue(SpellArg.VALUE, context, player, target, source, 0);
 		target.setAttribute(Attribute.CONDITIONAL_ATTACK_BONUS, attackBonus);
 	}
 }

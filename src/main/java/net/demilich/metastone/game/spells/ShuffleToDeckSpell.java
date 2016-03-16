@@ -21,7 +21,7 @@ public class ShuffleToDeckSpell extends Spell {
 			card = CardCatalogue.getCardById(cardId);
 		}
 
-		int howMany = desc.getInt(SpellArg.HOW_MANY, 1);
+		int howMany = desc.getValue(SpellArg.HOW_MANY, context, player, target, source, 1);
 		for (int i = 0; i < howMany; i++) {
 			context.getLogic().shuffleToDeck(player, card.clone());
 		}

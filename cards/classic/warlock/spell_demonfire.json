@@ -20,14 +20,16 @@
 		},
 		"condition": {
 			"class": "AndCondition",
-			"condition1": {
-				"class": "OwnedByPlayerCondition",
-				"targetPlayer": "SELF"
-			},
-			"condition2": {
-				"class": "RaceCondition",
-				"race": "DEMON"
-			}
+			"conditions": [
+				{
+					"class": "OwnedByPlayerCondition",
+					"targetPlayer": "SELF"
+				},
+				{
+					"class": "RaceCondition",
+					"race": "DEMON"
+				}
+			]
 		}
 	},
 	"collectible": true,

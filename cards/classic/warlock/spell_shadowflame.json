@@ -16,7 +16,7 @@
 			{
 				"class": "DamageSpell",
 				"target": "ENEMY_MINIONS",
-				"valueProvider": {
+				"value": {
 					"class": "AttributeValueProvider",
 					"target": "TARGET",
 					"attribute": "ATTACK"

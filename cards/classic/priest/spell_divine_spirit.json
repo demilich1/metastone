@@ -9,7 +9,7 @@
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "BuffSpell",
-		"hpValueProvider": {
+		"hpBonus": {
 			"class": "AttributeValueProvider",
 			"attribute": "HP"
 		}

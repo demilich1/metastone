@@ -23,7 +23,7 @@ public class FromDeckToHandSpell extends Spell {
 		}
 		
 		Race race = (Race) desc.get(SpellArg.RACE);
-		int value = desc.getValue();
+		int value = desc.getValue(SpellArg.VALUE, context, player, target, source, 0);
 		String replacementCard = (String) desc.get(SpellArg.CARD);
 
 		CardCollection relevantCards = SpellUtils.getCards(player.getDeck(), card -> card.getAttribute(Attribute.RACE) == race);

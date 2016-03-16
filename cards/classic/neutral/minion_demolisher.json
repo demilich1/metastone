@@ -12,8 +12,7 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "TurnStartTrigger",
-			"targetPlayer": "SELF",
-			"breaksStealth": true
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "DamageSpell",

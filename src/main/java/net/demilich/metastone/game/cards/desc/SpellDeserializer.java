@@ -31,17 +31,17 @@ public class SpellDeserializer implements JsonDeserializer<SpellDesc> {
 			throw new JsonParseException("SpellDesc parser encountered an invalid spell class: " + spellClassName);
 		}
 		Map<SpellArg, Object> spellArgs = SpellDesc.build(spellClass);
-		parseArgument(SpellArg.ATTACK_BONUS, jsonData, spellArgs, ParseValueType.INTEGER);
-		parseArgument(SpellArg.ARMOR_BONUS, jsonData, spellArgs, ParseValueType.INTEGER);
-		parseArgument(SpellArg.HP_BONUS, jsonData, spellArgs, ParseValueType.INTEGER);
+		parseArgument(SpellArg.ATTACK_BONUS, jsonData, spellArgs, ParseValueType.VALUE);
+		parseArgument(SpellArg.ARMOR_BONUS, jsonData, spellArgs, ParseValueType.VALUE);
+		parseArgument(SpellArg.HP_BONUS, jsonData, spellArgs, ParseValueType.VALUE);
 		parseArgument(SpellArg.MIN_DAMAGE, jsonData, spellArgs, ParseValueType.INTEGER);
 		parseArgument(SpellArg.MAX_DAMAGE, jsonData, spellArgs, ParseValueType.INTEGER);
-		parseArgument(SpellArg.MANA_MODIFIER, jsonData, spellArgs, ParseValueType.INTEGER);
+		parseArgument(SpellArg.MANA_MODIFIER, jsonData, spellArgs, ParseValueType.VALUE);
 		parseArgument(SpellArg.TARGET, jsonData, spellArgs, ParseValueType.TARGET_REFERENCE);
 		parseArgument(SpellArg.TARGET_PLAYER, jsonData, spellArgs, ParseValueType.TARGET_PLAYER);
 		parseArgument(SpellArg.VALUE, jsonData, spellArgs, ParseValueType.VALUE);
-		parseArgument(SpellArg.HOW_MANY, jsonData, spellArgs, ParseValueType.INTEGER);
-		parseArgument(SpellArg.SECONDARY_VALUE, jsonData, spellArgs, ParseValueType.INTEGER);
+		parseArgument(SpellArg.HOW_MANY, jsonData, spellArgs, ParseValueType.VALUE);
+		parseArgument(SpellArg.SECONDARY_VALUE, jsonData, spellArgs, ParseValueType.VALUE);
 		parseArgument(SpellArg.SPELL_1, jsonData, spellArgs, ParseValueType.SPELL);
 		parseArgument(SpellArg.SPELL_2, jsonData, spellArgs, ParseValueType.SPELL);
 		parseArgument(SpellArg.SPELL, jsonData, spellArgs, ParseValueType.SPELL);
@@ -51,9 +51,6 @@ public class SpellDeserializer implements JsonDeserializer<SpellDesc> {
 		parseArgument(SpellArg.ATTRIBUTE, jsonData, spellArgs, ParseValueType.ATTRIBUTE);
 		parseArgument(SpellArg.RANDOM_TARGET, jsonData, spellArgs, ParseValueType.BOOLEAN);
 		parseArgument(SpellArg.FULL_MANA_CRYSTALS, jsonData, spellArgs, ParseValueType.BOOLEAN);
-		parseArgument(SpellArg.VALUE_PROVIDER, jsonData, spellArgs, ParseValueType.VALUE_PROVIDER);
-		parseArgument(SpellArg.ATTACK_VALUE_PROVIDER, jsonData, spellArgs, ParseValueType.VALUE_PROVIDER);
-		parseArgument(SpellArg.HP_VALUE_PROVIDER, jsonData, spellArgs, ParseValueType.VALUE_PROVIDER);
 		parseArgument(SpellArg.FILTER, jsonData, spellArgs, ParseValueType.ENTITY_FILTER);
 		parseArgument(SpellArg.CARD_FILTER, jsonData, spellArgs, ParseValueType.ENTITY_FILTER);
 		parseArgument(SpellArg.RACE, jsonData, spellArgs, ParseValueType.RACE);

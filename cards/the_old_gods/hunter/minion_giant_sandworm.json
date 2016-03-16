@@ -1,0 +1,31 @@
+{
+	"id": "minion_giant_sandworm",
+	"name": "Giant Sandworm",
+	"baseManaCost": 8,
+	"type": "MINION",
+	"baseAttack": 8,
+	"baseHp": 8,
+	"heroClass": "HUNTER",
+	"rarity": "EPIC",
+	"race": "BEAST",
+	"description": "If this minion attacks another minion and kills it, it can attack again.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "DamageCausedTrigger",
+			"targetEntityType": "MINION",
+			"condition": {
+				"class": "IsDeadCondition",
+				"target": "EVENT_TARGET"
+			}
+		},
+		"spell": {
+			"class": "ModifyAttributeSpell",
+			"target": "SELF",
+			"attribute": "NUMBER_OF_ATTACKS",
+			"value": 1
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

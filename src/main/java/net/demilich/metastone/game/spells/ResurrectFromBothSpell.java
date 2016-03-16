@@ -29,7 +29,7 @@ public class ResurrectFromBothSpell extends Spell {
 				}
 			}
 		}
-		int count = desc.getInt(SpellArg.VALUE, 1);
+		int count = desc.getValue(SpellArg.VALUE, context, player, target, source, 1);
 		for (int i=0; i < count; i++) {
 			if (deadMinions.isEmpty()) {
 				return;

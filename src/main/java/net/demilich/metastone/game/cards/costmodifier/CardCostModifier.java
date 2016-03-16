@@ -191,6 +191,11 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 					value = 1;
 				}
 				return currentManaCost / value;
+			case MODULO:
+				if (value == 0) {
+					value = 1;
+				}
+				return currentManaCost % value;
 			case MULTIPLY:
 				return currentManaCost * value;
 			case NEGATE:

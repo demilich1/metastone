@@ -16,7 +16,7 @@
 				{
 					"class": "BuffSpell",
 					"target": "SELF",
-					"valueProvider": {
+					"value": {
 						"class": "AttributeCounter",
 						"target": "ALL_MINIONS",
 						"attribute": "DIVINE_SHIELD",

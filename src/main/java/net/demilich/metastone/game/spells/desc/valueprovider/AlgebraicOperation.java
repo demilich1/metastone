@@ -8,5 +8,6 @@ public enum AlgebraicOperation {
 	DIVIDE,
 	SET,
 	NEGATE,
+	MODULO,
 
 }

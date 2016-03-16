@@ -11,8 +11,7 @@
 	"description": "Whenever a character is healed, deal 1 damage to a random enemy.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "HealingTrigger",
-			"breaksStealth": true
+			"class": "HealingTrigger"
 		},
 		"spell": {
 			"class": "DamageSpell",

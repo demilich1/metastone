@@ -18,7 +18,7 @@ public class DiscoverDrawSpell extends Spell {
 		  return;
 		}
 		
-		int count = desc.getInt(SpellArg.HOW_MANY, 3);
+		int count = desc.getValue(SpellArg.HOW_MANY, context, player, target, source, 3);
 		for (int i = 0; i < count; i++) {
 			if (!player.getDeck().isEmpty()) {
 				Card card = player.getDeck().removeFirst();

@@ -11,8 +11,8 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 public class SwipeSpell extends Spell {
 
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		int primaryDamage = desc.getInt(SpellArg.VALUE, 2);
-		int secondaryDamage = desc.getInt(SpellArg.SECONDARY_VALUE, 1);
+		int primaryDamage = desc.getValue(SpellArg.VALUE, context, player, target, source, 2);
+		int secondaryDamage = desc.getValue(SpellArg.VALUE, context, player, target, source, 1);
 		for (Actor character : context.getOpponent(player).getCharacters()) {
 			int damage = character == target ? primaryDamage : secondaryDamage;
 			context.getLogic().damage(player, character, damage, source);

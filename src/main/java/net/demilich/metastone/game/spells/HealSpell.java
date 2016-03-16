@@ -9,7 +9,6 @@ import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class HealSpell extends Spell {
@@ -43,11 +42,7 @@ public class HealSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		int healing = desc.getInt(SpellArg.VALUE, 0);
-		ValueProvider valueProvider = (ValueProvider) desc.get(SpellArg.VALUE_PROVIDER);
-		if (valueProvider != null) {
-			healing = valueProvider.getValue(context, player, target, source);
-		}
+		int healing = desc.getValue(SpellArg.VALUE, context, player, target, source, 0);
 		context.getLogic().heal(player, (Actor) target, healing, source);
 	}
 
