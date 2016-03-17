@@ -10,10 +10,10 @@
 	"description": "Battlecry: Deal 4 damage to a random enemy minion.",
 	"battlecry": {
 		"spell": {
-			"class": "DamageSpell",
+			"class": "MissilesSpell",
 			"target": "ENEMY_MINIONS",
 			"value": 4,
-			"randomTarget": true
+			"howMany": 1
 		},
 		"resolvedLate": false
 	},

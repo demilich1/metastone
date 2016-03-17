@@ -15,10 +15,10 @@
 			"targetPlayer": "SELF"
 		},
 		"spell": {
-			"class": "DamageSpell",
+			"class": "MissilesSpell",
 			"target": "ENEMY_CHARACTERS",
 			"value": 2,
-			"randomTarget": true
+			"howMany": 1
 		}
 	},
 	"collectible": true,

@@ -15,10 +15,10 @@
 			"targetPlayer": "SELF"
 		},
 		"spell": {
-			"class": "DamageSpell",
+			"class": "MissilesSpell",
 			"target": "ALL_MINIONS",
 			"value": 2,
-			"randomTarget": true,
+			"howMany": 1,
 			"filter": {
 				"class": "RaceFilter",
 				"race": "MECH",

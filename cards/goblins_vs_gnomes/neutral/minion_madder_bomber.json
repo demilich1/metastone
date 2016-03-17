@@ -13,8 +13,7 @@
 			"class": "MissilesSpell",
 			"target": "ALL_OTHER_CHARACTERS",
 			"value": 1,
-			"howMany": 6,
-			"randomTarget": true
+			"howMany": 6
 		},
 		"resolvedLate": false
 	},

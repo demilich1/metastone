@@ -10,10 +10,10 @@
 	"race": "BEAST",
 	"description": "Deathrattle: Deal 1 damage to a random enemy.",
 	"deathrattle": {
-		"class": "DamageSpell",
+		"class": "MissilesSpell",
 		"target": "ENEMY_CHARACTERS",
 		"value": 1,
-		"randomTarget": true
+		"howMany": 1
 	},
 	"attributes": {
 		"DEATHRATTLES": true
