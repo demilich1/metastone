@@ -15,6 +15,7 @@ import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
+import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.spells.SilenceSpell;
 import net.demilich.metastone.game.spells.SwapAttackAndHpSpell;
 import net.demilich.metastone.game.spells.TemporaryAttackSpell;
@@ -257,6 +258,24 @@ public class CardInteractionTests extends TestBase {
 		context.getLogic().mindControl(opponent, minion);
 		attack(context, opponent, minion, player.getHero());
 		Assert.assertEquals(player.getHand().getCount(), cardCount + 2);
+	}
+	
+	@Test
+	public void testImpFlamestrike() {
+		GameContext context = createContext(HeroClass.MAGE, HeroClass.WARLOCK);
+		Player player = context.getPlayer1();
+		Player opponent = context.getPlayer2();
+		
+		context.endTurn();
+		for (int i = 0; i < GameLogic.MAX_MINIONS; i++) {
+			playMinionCard(context, opponent, (MinionCard) CardCatalogue.getCardById("minion_imp_gang_boss"));	
+		}
+		
+		Assert.assertEquals(opponent.getMinions().size(), GameLogic.MAX_MINIONS);
+		context.endTurn();
+		
+		playCard(context, player, CardCatalogue.getCardById("spell_flamestrike"));
+		Assert.assertEquals(opponent.getMinions().size(), 0);
 		
 	}
 

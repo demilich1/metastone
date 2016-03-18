@@ -8,9 +8,11 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
+import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.SecretCard;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.entities.minions.Minion;
 
 public class SecretTest extends TestBase {
 
@@ -92,6 +94,30 @@ public class SecretTest extends TestBase {
 		SecretCard otherSecret = (SecretCard) CardCatalogue.getCardById("secret_explosive_trap");
 		context.getLogic().receiveCard(mage.getId(), otherSecret);
 		Assert.assertTrue(context.getLogic().canPlaySecret(mage, otherSecret));
+	}
+	
+	@Test
+	public void testExplosivePlusFreezingTrap() {
+		GameContext context = createContext(HeroClass.WARRIOR, HeroClass.HUNTER);
+		Player player = context.getPlayer1();
+		Player opponent = context.getPlayer2();
+		
+		MinionCard minionCard = (MinionCard) CardCatalogue.getCardById("minion_wisp");
+		Minion minion = playMinionCard(context, player, minionCard);
+		context.endTurn();
+
+		Card explosiveTrap = CardCatalogue.getCardById("secret_explosive_trap");
+		playCard(context, opponent, explosiveTrap);
+		Card freezingTrap = CardCatalogue.getCardById("secret_freezing_trap");
+		playCard(context, opponent, freezingTrap);
+		context.endTurn();
+		
+		Assert.assertEquals(player.getMinions().size(), 1);
+		Assert.assertEquals(opponent.getSecrets().size(), 2);
+		
+		attack(context, player, minion, opponent.getHero());
+		Assert.assertEquals(player.getMinions().size(), 0);
+		Assert.assertEquals(opponent.getSecrets().size(), 1);
 	}
 
 }

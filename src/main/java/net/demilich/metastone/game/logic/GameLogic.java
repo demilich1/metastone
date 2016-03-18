@@ -1179,7 +1179,7 @@ public class GameLogic implements Cloneable {
 		action.execute(context, playerId);
 
 		context.getEnvironment().remove(Environment.TARGET);
-		if (!(action instanceof BattlecryAction)) {
+		if (action.getActionType() != ActionType.BATTLECRY) {
 			checkForDeadEntities();
 		}
 	}
