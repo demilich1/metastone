@@ -338,5 +338,33 @@ public class CardInteractionTests extends TestBase {
 		Assert.assertEquals(opponent.getMinions().size(), 3);
 		
 	}
+	
+	@Test
+	public void testHauntedCreeperHarvestGolem() {
+		GameContext context = createContext(HeroClass.MAGE, HeroClass.WARRIOR);
+		Player player = context.getPlayer1();
+		Player opponent = context.getPlayer2();
+		
+		context.endTurn();
+		playMinionCard(context, opponent, (MinionCard) CardCatalogue.getCardById("minion_haunted_creeper"));
+		playMinionCard(context, opponent, (MinionCard) CardCatalogue.getCardById("minion_harvest_golem"));
+		Assert.assertEquals(opponent.getMinions().size(), 2);
+		context.endTurn();
+		
+		playCard(context, player, CardCatalogue.getCardById("spell_flamestrike"));
+		Assert.assertEquals(opponent.getMinions().size(), 3);
+		final int HARVEST_GOLEM = 1;
+		for (int i = 0; i < opponent.getMinions().size(); i++) {
+			Minion minion = opponent.getMinions().get(i);
+			if (i == HARVEST_GOLEM) {
+				Assert.assertEquals(minion.getAttack(), 2);
+				Assert.assertEquals(minion.getHp(), 1);
+				Assert.assertEquals(minion.getRace(), Race.MECH);
+			} else {
+				Assert.assertEquals(minion.getAttack(), 1);
+				Assert.assertEquals(minion.getHp(), 1);
+			}
+		}
+	}
 
 }
