@@ -276,6 +276,66 @@ public class CardInteractionTests extends TestBase {
 		
 		playCard(context, player, CardCatalogue.getCardById("spell_flamestrike"));
 		Assert.assertEquals(opponent.getMinions().size(), 0);
+	}
+	
+	@Test
+	public void testHarvestGolemFlamestrike() {
+		GameContext context = createContext(HeroClass.MAGE, HeroClass.WARLOCK);
+		Player player = context.getPlayer1();
+		Player opponent = context.getPlayer2();
+		
+		context.endTurn();
+		for (int i = 0; i < GameLogic.MAX_MINIONS; i++) {
+			playMinionCard(context, opponent, (MinionCard) CardCatalogue.getCardById("minion_harvest_golem"));	
+		}
+		
+		Assert.assertEquals(opponent.getMinions().size(), GameLogic.MAX_MINIONS);
+		context.endTurn();
+		
+		playCard(context, player, CardCatalogue.getCardById("spell_flamestrike"));
+		Assert.assertEquals(opponent.getMinions().size(), 7);
+		
+	}
+	
+	@Test
+	public void testGrimPatrons() {
+		GameContext context = createContext(HeroClass.PALADIN, HeroClass.WARRIOR);
+		Player player = context.getPlayer1();
+		Player opponent = context.getPlayer2();
+		
+		context.endTurn();
+		for (int i = 0; i < 4; i++) {
+			playMinionCard(context, opponent, (MinionCard) CardCatalogue.getCardById("minion_grim_patron"));	
+		}
+		
+		Assert.assertEquals(opponent.getMinions().size(), 4);
+		playCard(context, opponent, CardCatalogue.getCardById("spell_whirlwind"));
+		Assert.assertEquals(opponent.getMinions().size(), 7);
+		context.endTurn();
+		
+		playCard(context, player, CardCatalogue.getCardById("spell_consecration"));
+		Assert.assertEquals(opponent.getMinions().size(), 3);
+		
+	}
+	
+	@Test
+	public void testWobblingRunts() {
+		GameContext context = createContext(HeroClass.MAGE, HeroClass.WARRIOR);
+		Player player = context.getPlayer1();
+		Player opponent = context.getPlayer2();
+		
+		context.endTurn();
+		playMinionCard(context, opponent, (MinionCard) CardCatalogue.getCardById("minion_wobbling_runts"));
+		for (int i = 0; i < GameLogic.MAX_MINIONS - 1; i++) {
+			playMinionCard(context, opponent, (MinionCard) CardCatalogue.getCardById("minion_wisp"));	
+		}
+		
+		Assert.assertEquals(opponent.getMinions().size(), GameLogic.MAX_MINIONS);
+		context.endTurn();
+		
+		playCard(context, player, CardCatalogue.getCardById("minion_malygos"));
+		playCard(context, player, CardCatalogue.getCardById("spell_flamestrike"));
+		Assert.assertEquals(opponent.getMinions().size(), 3);
 		
 	}
 

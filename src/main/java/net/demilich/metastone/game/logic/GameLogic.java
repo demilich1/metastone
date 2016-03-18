@@ -224,14 +224,7 @@ public class GameLogic implements Cloneable {
 	}
 
 	public boolean canSummonMoreMinions(Player player) {
-		int minionsInPlay = 0;
-		for (Minion minion : player.getMinions()) {
-			if (minion.isDestroyed()) {
-				continue;
-			}
-			minionsInPlay++;
-		}
-		return minionsInPlay < MAX_MINIONS;
+		return player.getMinions().size() < MAX_MINIONS;
 	}
 
 	public void castSpell(int playerId, SpellDesc spellDesc, EntityReference sourceReference, EntityReference targetReference,
