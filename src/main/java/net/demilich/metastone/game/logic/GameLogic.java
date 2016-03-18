@@ -331,9 +331,6 @@ public class GameLogic implements Cloneable {
 			if (player.getHero().getWeapon() != null && player.getHero().getWeapon().isDestroyed()) {
 				destroyList.add(player.getHero().getWeapon());
 			}
-			if (player.getHero().getDestroyedWeapon() != null) {
-				destroyList.add(player.getHero().getDestroyedWeapon());
-			}
 		}
 
 		if (destroyList.isEmpty()) {
@@ -502,9 +499,7 @@ public class GameLogic implements Cloneable {
 		// resolveDeathrattles(owner, weapon);
 		if (owner.getHero().getWeapon() != null && owner.getHero().getWeapon().getId() == weapon.getId()) {
 			owner.getHero().setWeapon(null);
-		} else if (owner.getHero().getDestroyedWeapon() != null && owner.getHero().getDestroyedWeapon().getId() == weapon.getId()) {
-			owner.getHero().setDestroyedWeapon(null);
-		}
+		} 
 		weapon.onUnequip(context, owner);
 		context.fireGameEvent(new WeaponDestroyedEvent(context, weapon));
 	}
@@ -585,12 +580,11 @@ public class GameLogic implements Cloneable {
 		Player player = context.getPlayer(playerId);
 
 		weapon.setId(idFactory.generateId());
-		context.getEnvironment().put(Environment.SUMMONED_WEAPON, weapon.getReference());
 		Weapon currentWeapon = player.getHero().getWeapon();
-		if (player.getHero().getDestroyedWeapon() != null) {
-			player.getSetAsideZone().add(player.getHero().getDestroyedWeapon());
+		if (currentWeapon != null) {
+			log("{} discards currently equipped weapon {}", player.getHero(), currentWeapon);
+			destroy(currentWeapon);
 		}
-		player.getHero().setDestroyedWeapon(currentWeapon);
 
 		log("{} equips weapon {}", player.getHero(), weapon);
 		player.getHero().setWeapon(weapon);
@@ -598,14 +592,8 @@ public class GameLogic implements Cloneable {
 		if (weapon.getBattlecry() != null) {
 			resolveBattlecry(playerId, weapon);
 		}
-
-		if (currentWeapon != null) {
-			log("{} discards currently equipped weapon {}", player.getHero(), currentWeapon);
-			markAsDestroyed(currentWeapon);
-			// checkForDeadEntities();
-		}
+		
 		player.getStatistics().equipWeapon(weapon);
-		context.getEnvironment().remove(Environment.SUMMONED_WEAPON);
 		weapon.onEquip(context, player);
 		weapon.setActive(context.getActivePlayerId() == playerId);
 		if (weapon.hasSpellTrigger()) {

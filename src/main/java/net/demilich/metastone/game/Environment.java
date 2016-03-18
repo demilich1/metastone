@@ -2,7 +2,6 @@ package net.demilich.metastone.game;
 
 public enum Environment {
 	SUMMON_REFERENCE_STACK,
-	SUMMONED_WEAPON,
 	KILLED_MINION,
 	TARGET_OVERRIDE,
 	ATTACKER_REFERENCE,

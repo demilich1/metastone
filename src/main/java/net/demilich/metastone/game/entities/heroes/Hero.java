@@ -15,7 +15,6 @@ public class Hero extends Actor {
 	private HeroClass heroClass;
 	private HeroPower heroPower;
 	private Weapon weapon;
-	private Weapon destroyedWeapon;
 
 	public Hero(HeroCard heroCard, HeroPower heroPower) {
 		super(heroCard);
@@ -36,9 +35,7 @@ public class Hero extends Actor {
 		if (weapon != null) {
 			clone.setWeapon(getWeapon().clone());
 		}
-		if (destroyedWeapon != null) {
-			clone.setDestroyedWeapon(getDestroyedWeapon().clone());
-		}
+		
 		clone.setHeroPower((HeroPower) getHeroPower().clone());
 		return clone;
 	}
@@ -65,10 +62,6 @@ public class Hero extends Actor {
 			copy.put(attribute, attributes.get(attribute));
 		}
 		return copy;
-	}
-
-	public Weapon getDestroyedWeapon() {
-		return destroyedWeapon;
 	}
 
 	public int getEffectiveHp() {
@@ -98,13 +91,6 @@ public class Hero extends Actor {
 		setAttribute(Attribute.ARMOR, newArmor);
 	}
 	
-	public void setDestroyedWeapon(Weapon weapon) {
-		this.destroyedWeapon = weapon;
-		if (weapon != null) {
-			weapon.setOwner(getOwner());
-		}
-	}
-
 	public void setHeroClass(HeroClass heroClass) {
 		this.heroClass = heroClass;
 	}

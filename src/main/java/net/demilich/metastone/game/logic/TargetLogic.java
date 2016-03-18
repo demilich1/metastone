@@ -79,9 +79,7 @@ public class TargetLogic {
 				return player.getHero();
 			} else if (player.getHero().getWeapon() != null && player.getHero().getWeapon().getId() == targetId) {
 				return player.getHero().getWeapon();
-			} else if (player.getHero().getDestroyedWeapon() != null && player.getHero().getDestroyedWeapon().getId() == targetId) {
-				return player.getHero().getDestroyedWeapon();
-			}
+			} 
 
 			for (Actor minion : player.getMinions()) {
 				if (minion.getId() == targetId) {
@@ -134,13 +132,6 @@ public class TargetLogic {
 	}
 
 	private Entity findInEnvironment(GameContext context, EntityReference targetKey) {
-		int targetId = targetKey.getId();
-		if (context.getEnvironment().containsKey(Environment.SUMMONED_WEAPON) && targetKey == context.getEnvironment().get(Environment.SUMMONED_WEAPON)) {
-			Actor summonedWeapon = (Actor) context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.SUMMONED_WEAPON));
-			if (summonedWeapon.getId() == targetId) {
-				return summonedWeapon;
-			}
-		}
 		if (!context.getEventTargetStack().isEmpty() && targetKey == EntityReference.EVENT_TARGET) {
 			return context.resolveSingleTarget(context.getEventTargetStack().peek());
 		}

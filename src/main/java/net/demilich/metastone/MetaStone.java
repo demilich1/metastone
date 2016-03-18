@@ -30,7 +30,6 @@ public class MetaStone extends Application {
 		StackPane root = new StackPane();
 		root.setAlignment(Pos.CENTER);
 		Scene scene = new Scene(root);
-		//scene.getStylesheets().add();
 		scene.getStylesheets().add(getClass().getResource("/css/main.css").toExternalForm());
 		primaryStage.setScene(scene);
 		facade.sendNotification(GameNotification.CANVAS_CREATED, root);
