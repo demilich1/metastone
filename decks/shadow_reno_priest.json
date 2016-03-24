@@ -2,7 +2,8 @@
   "cards": [
     "minion_zombie_chow",
     "spell_shadow_word_pain",
-    "minion_novice_engineer",
+    "minion_loot_hoarder",
+    "minion_loot_hoarder",
     "minion_doomsayer",
     "minion_ironbeak_owl",
     "minion_unstable_ghoul",
@@ -14,7 +15,6 @@
     "minion_earthen_ring_farseer",
     "minion_deathlord",
     "minion_brann_bronzebeard",
-    "minion_gnomish_inventor",
     "minion_senjin_shieldmasta",
     "spell_shadow_madness",
     "minion_refreshment_vendor",
