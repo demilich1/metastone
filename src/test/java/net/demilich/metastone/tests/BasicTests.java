@@ -9,12 +9,9 @@ import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.actions.PhysicalAttackAction;
 import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.cards.MinionCard;
-import net.demilich.metastone.game.cards.WeaponCard;
 import net.demilich.metastone.game.entities.Actor;
-import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.BuffHeroSpell;
 import net.demilich.metastone.game.spells.DamageSpell;
@@ -158,28 +155,6 @@ public class BasicTests extends TestBase {
 		Assert.assertEquals(theCoin, null);
 		theCoin = getTheCoin(warrior.getHand());
 		Assert.assertNotEquals(theCoin, null);
-	}
-
-	@Test
-	public void testWeapon() {
-		DebugContext context = createContext(HeroClass.WARRIOR, HeroClass.WARRIOR);
-		Player player = context.getPlayer1();
-		Hero warrior = player.getHero();
-
-		WeaponCard weaponCard = (WeaponCard) CardCatalogue.getCardById("weapon_battle_axe");
-
-		context.setActivePlayer(player.getId());
-		context.getLogic().startTurn(player.getId());
-		Assert.assertEquals(warrior.getAttack(), 0);
-		context.getLogic().receiveCard(player.getId(), weaponCard);
-		context.getLogic().performGameAction(player.getId(), weaponCard.play());
-		Assert.assertEquals(warrior.getAttack(), 2);
-		Assert.assertEquals(warrior.getWeapon().getDurability(), 2);
-
-		PhysicalAttackAction attack = new PhysicalAttackAction(warrior.getReference());
-		attack.setTarget(context.getPlayer2().getHero());
-		context.getLogic().performGameAction(player.getId(), attack);
-		Assert.assertEquals(warrior.getWeapon().getDurability(), 1);
 	}
 
 }

@@ -1,5 +1,5 @@
 {
-	"id": "token_tournament_attendee",
+	"id": "minion_tournament_attendee",
 	"name": "Tournament Attendee",
 	"baseManaCost": 1,
 	"type": "MINION",
