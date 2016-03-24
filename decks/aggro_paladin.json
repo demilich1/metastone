@@ -1,7 +1,5 @@
 {
   "cards": [
-    "minion_southsea_deckhand",
-    "minion_southsea_deckhand",
     "spell_blessing_of_might",
     "spell_blessing_of_might",
     "minion_abusive_sergeant",
@@ -27,6 +25,8 @@
     "spell_blessing_of_kings",
     "spell_consecration",
     "spell_consecration",
+    "minion_piloted_shredder",
+    "minion_piloted_shredder"
     "weapon_truesilver_champion",
     "weapon_truesilver_champion",
     "minion_leeroy_jenkins"
