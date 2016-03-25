@@ -1,0 +1,30 @@
+{
+	"id": "minion_the_boogeyman",
+	"name": "The Boogeyman",
+	"baseManaCost": 8,
+	"baseAttack": 6,
+	"baseHp": 7,
+	"rarity": "LEGENDARY",
+	"type": "MINION",
+	"heroClass": "ANY",
+	"description": "Whenever this minion kills a minion, give it +2/+2",
+	"trigger": {
+		"eventTrigger": {
+			"class": "DamageCausedTrigger",
+			"targetEntityType": "MINION",
+			"condition": {
+				"class": "IsDeadCondition",
+				"target": "EVENT_TARGET"
+			}
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"target": "SELF",
+			"attackBonus": 2,
+			"hpBonus": 2
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}
