@@ -33,8 +33,8 @@ DO NOT USE. Internal Spell for applying and removing Auras. See AuraSpell.
 BuffHeroSpell
 Buffs the target Hero. This is used to modify a Hero’s Armor or Attack.
 Examples: Shapeshift (Hero Power), Ice Barrier, Armor Up (Hero Power)
-“attackBonus”: Optional Integer. The amount of Attack to modify the target Hero.
-“hpBonus”: Optional Integer. The amount of Armor to modify the target Hero.
+“attackBonus”: Optional Integer. The amount of Attack to give the target Hero.
+“hpBonus”: Optional Integer. The amount of Armor to give the target Hero.
 
 BuffSpell
 Buffs a minion or group of minions.
@@ -45,8 +45,8 @@ Examples: Shattered Sun Cleric, Everyfin is Awesome
 BuffWeaponSpell
 Buffs the target Weapon. This is used to modify a Weapon’s Attack or Durability.
 Examples: Captain Greenskin, Deadly Poison, Upgrade!
-“attackBonus”: Optional Integer. The amount of Attack to modify the target Weapon.
-“hpBonus”: Optional Integer. The amount of Durability to modify the target Weapon.
+“attackBonus”: Optional Integer. The amount of Attack to give the target Weapon.
+“hpBonus”: Optional Integer. The amount of Durability to give the target Weapon.
 
 CardCostModifierSpell
 Gives a mana cost modifier to the target card. This should target card types or specific cards.
@@ -75,7 +75,7 @@ CloneMinionSpell
 []
 
 ComboSpell
-Used for spells with a combo effect. The first effect is the normal action, and the second is activated only as a combo.
+Used for spells with a combo effect. The first effect is the normal action, and the second activates only as a combo.
 Examples: Sabotage, Eviscerate, SI:7 Agent
 "spell1": Normal spell.
 "spell2": Combo effect.
@@ -177,7 +177,7 @@ Examples: Coldlight Oracle, Gnomish Inventor, Cult Master
 “targetPlayer”: Optional Player. Default is SELF. The player to draw Cards.
 
 EitherOrSpell
-Similar to ConditionalEffectSpell, has 1 effect if a condition is met and another if it is not.
+Similar to ConditionalEffectSpell, has 1 effect if the spell meets a condition and another if it does not.
 Examples: Wild Growth(Excess Mana),Ice Lance, Upgrade!
 "spell1": Spell to cast if condition is met.
 "spell2": Spell to cast if condition is not met.
@@ -234,7 +234,7 @@ MindControlSpell
 MisdirectSpell
 Target attacks a random character from a list instead of its intended target.
 Examples: Misdirection
-"target": The target to be misdirected.
+"target": The target to misdirect.
 
 MissilesSpell {}: Consider Rewriting
 Deals 1 damage missiles to randomly selected targets.
@@ -245,7 +245,7 @@ ModifyAttributeSpell
 Add or remove attributes from a target.
 Examples: Bolvar Fordragon, Ancient Mage, Shadowfiend.
 "target": The target of the spell.
-"attribute": The attribute to modify.
+"attribute": The attribute to change.
 "value": The amount to modify the attribute by. Only used for health and attack.
 
 ModifyDurabilitySpell {}: Combine with Attribute Spell? (Only applies to Weapons, so might as well…)
