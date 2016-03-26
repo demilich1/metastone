@@ -11,6 +11,7 @@
 		"class": "ReturnMinionToHandSpell",
 		"manaModifier": -2
 	},
+	"collectible": false,
 	"set": "THE_OLD_GODS",
 	"fileFormatVersion": 1
 }
