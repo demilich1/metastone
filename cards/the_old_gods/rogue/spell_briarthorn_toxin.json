@@ -1,0 +1,17 @@
+{
+	"id": "spell_briarthorn_toxin",
+	"name": "Briarthorn Toxin",
+	"type": "SPELL",
+	"heroClass": "ROGUE",
+	"baseManaCost": 1,
+	"rarity": "FREE",
+	"description": "Give a minion +3 Attack.",
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "BuffSpell",
+		"attackBonus": 3
+	},
+	"collectible": false,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}
