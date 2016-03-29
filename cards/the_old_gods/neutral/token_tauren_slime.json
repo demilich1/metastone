@@ -1,0 +1,14 @@
+{
+    "id": "token_tauren_slime",
+    "name": "Slime",
+    "baseManaCost": 0,
+    "baseAttack": 2,
+    "baseHp": 2,
+    "type": "MINION",
+    "rarity": "COMMON",
+    "heroClass": "ANY",
+    "description": "",
+    "collectible": false,
+    "set": "THE_OLD_GODS",
+    "fileFormatVersion": 1
+}

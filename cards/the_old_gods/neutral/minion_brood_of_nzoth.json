@@ -1,0 +1,24 @@
+{
+	"id": "minion_brood_of_nzoth",
+	"name": "Brood of N'Zoth",
+	"baseManaCost": 3,
+	"baseHp": 2,
+	"baseAttack": 2,
+	"type": "MINION",
+	"rarity": "COMMON",
+	"description": "Deathrattle: Give your minions +1/+1",
+	"heroClass": "ANY",
+	"deathrattle": {
+		"class": "BuffSpell",
+		"target": "OTHER_FRIENDLY_MINIONS",
+		"attackBonus": 1,
+		"hpBonus": 1
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}
+	

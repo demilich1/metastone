@@ -1,0 +1,17 @@
+{
+	"id": "spell_bloodthistle_toxin",
+	"name": "Bloodthistle Toxin",
+	"type": "SPELL",
+	"heroClass": "ROGUE",
+	"rarity": "FREE",
+	"baseManaCost": 1,
+	"description": "Return a friendly minion to your hand. It costs (2) less.",
+	"targetSelection": "FRIENDLY_MINIONS",
+	"spell": {
+		"class": "ReturnMinionToHandSpell",
+		"manaModifier": -2
+	},
+	"collectible": false,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

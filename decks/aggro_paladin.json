@@ -1,14 +1,11 @@
 {
   "cards": [
-    "minion_southsea_deckhand",
-    "minion_southsea_deckhand",
     "spell_blessing_of_might",
     "spell_blessing_of_might",
     "minion_abusive_sergeant",
     "minion_abusive_sergeant",
     "minion_leper_gnome",
     "minion_leper_gnome",
-    "minion_sir_finley_mrrgglton",
     "minion_knife_juggler",
     "minion_knife_juggler",
     "minion_ironbeak_owl",
@@ -27,6 +24,9 @@
     "spell_blessing_of_kings",
     "spell_consecration",
     "spell_consecration",
+    "minion_keeper_of_uldaman",
+    "minion_piloted_shredder",
+    "minion_piloted_shredder"
     "weapon_truesilver_champion",
     "weapon_truesilver_champion",
     "minion_leeroy_jenkins"

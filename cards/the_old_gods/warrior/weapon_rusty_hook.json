@@ -1,0 +1,14 @@
+{
+	"id": "weapon_rusty_hook",
+	"name": "Rusty Hook",
+	"baseManaCost": 1,
+	"type": "WEAPON",
+	"damage": 1,
+	"durability": 3,
+	"heroClass": "WARRIOR",
+	"rarity": "FREE",
+	"description": "",
+	"collectible": false,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

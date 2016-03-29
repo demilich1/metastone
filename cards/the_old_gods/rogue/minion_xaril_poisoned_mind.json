@@ -1,0 +1,44 @@
+{
+	"id": "minion_xaril_poisoned_mind",
+	"name": "Xaril, Poisoned Mind",
+	"type": "MINION",
+	"rarity": "LEGENDARY",
+	"baseManaCost": 4,
+	"baseAttack": 3,
+	"baseHp": 2,
+	"heroClass": "ROGUE",
+	"description": "Battlecry and Deathrattle: Add a random Toxin to your hand.",
+	"battlecry": {
+		"spell": {
+			"class": "ReceiveRandomCardSpell",
+			"cards": [
+				"spell_bloodthistle_toxin",
+				"spell_briarthorn_toxin",
+				"spell_fadeleaf_toxin",
+				"spell_firebloom_toxin",
+				"spell_kingsblood_toxin"
+			]
+		}
+	},
+	"deathrattle": {
+		"class": "ReceiveRandomCardSpell",
+		"cards": [
+			"spell_bloodthistle_toxin",
+			"spell_briarthorn_toxin",
+			"spell_fadeleaf_toxin",
+			"spell_firebloom_toxin",
+			"spell_kingsblood_toxin"
+		]
+	},
+	"attributes": {
+		"BATTLECRY": true,
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}
+	
+	
+	
+	
