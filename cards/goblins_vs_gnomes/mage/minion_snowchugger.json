@@ -11,7 +11,8 @@
 	"description": "Freeze any character damaged by this minion.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "DamageCausedTrigger"
+			"class": "DamageCausedTrigger",
+			"hostTargetType": "IGNORE_OTHER_SOURCES"
 		},
 		"spell": {
 			"class": "AddAttributeSpell",

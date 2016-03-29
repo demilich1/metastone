@@ -1,0 +1,31 @@
+{
+	"id": "minion_hallazeal_the_ascended",
+	"name": "Hallazeal the Ascended",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 6,
+	"heroClass": "SHAMAN",
+	"rarity": "LEGENDARY",
+	"description": "When your spells deal damage, restore that much Health to your hero.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "DamageCausedTrigger",
+			"sourcePlayer": "SELF",
+			"targetPlayer": "BOTH",
+			"cardType": "SPELL"
+		},
+		"spell": {
+			"class": "HealSpell",
+			"target": "FRIENDLY_HERO",
+			"value": {
+				"class": "AttributeValueProvider",
+				"target": "EVENT_TARGET",
+				"attribute": "LAST_HIT"
+			}
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}
