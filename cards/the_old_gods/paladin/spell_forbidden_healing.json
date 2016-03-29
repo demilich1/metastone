@@ -1,0 +1,41 @@
+{
+	"id": "spell_forbidden_healing",
+	"name": "Forbidden Healing",
+	"baseManaCost": 0,
+	"type": "SPELL",
+	"heroClass": "PALADIN",
+	"rarity": "EPIC",
+	"description": "Spend all your mana. Heal for double the mana spent.",
+	"targetSelection": "ANY",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "HealSpell",
+				"value": {
+					"class": "AlgebraicValueProvider",
+					"value1": {
+						"class": "PlayerAttributeValueProvider",
+						"playerAttribute": "MANA"
+					},
+					"value2": 2,
+					"operation": "MULTIPLY"
+				}
+			},
+			{
+				"class": "GainManaSpell",
+				"value": {
+					"class": "AlgebraicValueProvider",
+					"value1": {
+						"class": "PlayerAttributeValueProvider",
+						"playerAttribute": "MANA"
+					},
+					"operation": "NEGATE"
+				}
+			}
+		]
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

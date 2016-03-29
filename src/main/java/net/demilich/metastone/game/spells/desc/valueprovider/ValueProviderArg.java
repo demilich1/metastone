@@ -15,8 +15,8 @@ public enum ValueProviderArg {
 	CONDITION,
 	FILTER,
 	OPERATION,
-	VALUE_PROVIDER_1,
-	VALUE_PROVIDER_2,
+	VALUE_1,
+	VALUE_2,
 	MIN,
 	MAX
 
