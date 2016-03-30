@@ -28,11 +28,11 @@ public class SwapAttackAndHpSpell extends Spell {
 		Minion minion = (Minion) target;
 		int attack = minion.getAttack();
 		int hp = minion.getHp();
-		minion.setAttack(hp);
-		minion.setMaxHp(attack);
-		minion.setHp(attack);
 		minion.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
 		minion.removeAttribute(Attribute.ATTACK_BONUS);
+		minion.removeAttribute(Attribute.HP_BONUS);
+		minion.setAttack(hp);
+		context.getLogic().modifyMaxHp(minion, attack);
 	}
 
 }
