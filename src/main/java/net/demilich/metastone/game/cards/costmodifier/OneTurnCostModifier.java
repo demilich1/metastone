@@ -40,6 +40,11 @@ public class OneTurnCostModifier extends CardCostModifier {
 
 		super.onGameEvent(event);
 	}
+	
+	@Override
+	public boolean oneTurnOnly() {
+		return true;
+	}
 
 	@Override
 	public void setOwner(int playerIndex) {

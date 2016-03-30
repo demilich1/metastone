@@ -55,7 +55,7 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 		return clone;
 	}
 
-	protected void expire() {
+	public void expire() {
 		expired = true;
 	}
 

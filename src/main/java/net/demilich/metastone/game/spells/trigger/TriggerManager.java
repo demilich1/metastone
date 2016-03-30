@@ -49,14 +49,12 @@ public class TriggerManager implements Cloneable, IDisposable {
 		for (IGameEventListener trigger : triggers) {
 			// In order to stop premature expiration, check
 			// for a oneTurnOnly tag and that it isn't delayed.
-			if (event.getEventType() == GameEventType.TURN_END &&
-					trigger instanceof SpellTrigger) {
-				SpellTrigger spellTrigger = (SpellTrigger) trigger;
-				if(spellTrigger.oneTurnOnly() && !spellTrigger.isDelayed() &&
-						!spellTrigger.interestedIn(event.getEventType())) {
-					spellTrigger.expire();
+			if (event.getEventType() == GameEventType.TURN_END) {
+				if(trigger.oneTurnOnly() && !trigger.isDelayed() &&
+						!trigger.interestedIn(event.getEventType())) {
+					trigger.expire();
 				}
-				spellTrigger.delayTimeDown();
+				trigger.delayTimeDown();
 			}
 			if (trigger.isExpired()) {
 				removeTriggers.add(trigger);
