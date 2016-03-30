@@ -3,6 +3,7 @@ package net.demilich.metastone.gui.simulationmode;
 import java.io.IOException;
 import java.util.List;
 
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,9 +17,14 @@ import javafx.scene.layout.HBox;
 import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.decks.Deck;
+import net.demilich.metastone.game.decks.DeckFormat;
+import net.demilich.metastone.gui.common.DeckFormatStringConverter;
 import net.demilich.metastone.gui.gameconfig.GameConfig;
 
 public class SimulationModeConfigView extends BorderPane implements EventHandler<ActionEvent> {
+
+	@FXML
+	protected ComboBox<DeckFormat> formatBox;
 
 	@FXML
 	protected HBox playerArea;
@@ -35,6 +41,8 @@ public class SimulationModeConfigView extends BorderPane implements EventHandler
 	protected PlayerConfigView player1Config;
 	protected PlayerConfigView player2Config;
 
+	private List<DeckFormat> deckFormats;
+
 	public SimulationModeConfigView() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/SimulationModeConfigView.fxml"));
 		fxmlLoader.setRoot(this);
@@ -46,6 +54,8 @@ public class SimulationModeConfigView extends BorderPane implements EventHandler
 			throw new RuntimeException(exception);
 		}
 
+		formatBox.setConverter(new DeckFormatStringConverter());
+
 		player1Config = new PlayerConfigView();
 		player2Config = new PlayerConfigView();
 
@@ -55,6 +65,26 @@ public class SimulationModeConfigView extends BorderPane implements EventHandler
 		startButton.setOnAction(this);
 		backButton.setOnAction(this);
 		setupNumberOfGamesBox();
+
+		formatBox.valueProperty().addListener((ChangeListener<DeckFormat>) (observableProperty, oldDeckFormat, newDeckFormat) -> {
+			setDeckFormats(newDeckFormat);
+		});
+	}
+
+	private void setupDeckFormats() {
+		ObservableList<DeckFormat> deckFormatList = FXCollections.observableArrayList();
+
+		for (DeckFormat deckFormat : deckFormats) {
+			deckFormatList.add(deckFormat);
+		}
+
+		formatBox.setItems(deckFormatList);
+		formatBox.getSelectionModel().selectFirst();
+	}
+
+	private void setDeckFormats(DeckFormat newDeckFormat) {
+		player1Config.setDeckFormat(newDeckFormat);
+		player2Config.setDeckFormat(newDeckFormat);
 	}
 
 	@Override
@@ -73,6 +103,13 @@ public class SimulationModeConfigView extends BorderPane implements EventHandler
 	public void injectDecks(List<Deck> decks) {
 		player1Config.injectDecks(decks);
 		player2Config.injectDecks(decks);
+	}
+
+	public void injectDeckFormats(List<DeckFormat> deckFormats) {
+		this.deckFormats = deckFormats;
+		setupDeckFormats();
+		player1Config.setDeckFormat(formatBox.getValue());
+		player2Config.setDeckFormat(formatBox.getValue());
 	}
 
 	private void setupNumberOfGamesBox() {

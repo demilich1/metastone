@@ -21,6 +21,7 @@ import net.demilich.metastone.game.behaviour.IBehaviour;
 import net.demilich.metastone.game.behaviour.PlayRandomBehaviour;
 import net.demilich.metastone.game.behaviour.threat.GameStateValueBehaviour;
 import net.demilich.metastone.game.decks.Deck;
+import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.gui.common.BehaviourStringConverter;
 import net.demilich.metastone.gui.common.DeckStringConverter;
@@ -117,6 +118,12 @@ public class BattleOfDecksConfigView extends BorderPane {
 		numberOfGamesEntries.add(1000);
 		numberOfGamesBox.setItems(numberOfGamesEntries);
 		numberOfGamesBox.getSelectionModel().select(2);
+	}
+
+	public void injectDeckFormats(List<DeckFormat> deckFormats) {
+//		selectedDeckFormatsListView.getItems().clear();
+//		ObservableList<DeckFormat> validDeckFormats = FXCollections.observableArrayList();
+//		availableDeckFormatsListView.getItems().setAll(validDeckFormats);
 	}
 
 }

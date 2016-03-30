@@ -138,26 +138,30 @@ public class DeckProxy extends Proxy<GameNotification> {
 
 	private void loadStandardDecks(Collection<File> files, Gson gson) throws FileNotFoundException {
 		for (File file : files) {
-			FileReader reader = new FileReader(file);
-			HashMap<String, Object> map = gson.fromJson(reader, new TypeToken<HashMap<String, Object>>() {
-			}.getType());
-			if (!map.containsKey("heroClass")) {
-				logger.error("Deck {} does not speficy a value for 'heroClass' and is therefor not valid", file.getName());
-				continue;
+			try {
+				FileReader reader = new FileReader(file);
+				HashMap<String, Object> map = gson.fromJson(reader, new TypeToken<HashMap<String, Object>>() {
+				}.getType());
+				if (!map.containsKey("heroClass")) {
+					logger.error("Deck {} does not speficy a value for 'heroClass' and is therefor not valid", file.getName());
+					continue;
+				}
+				HeroClass heroClass = HeroClass.valueOf((String) map.get("heroClass"));
+				String deckName = (String) map.get("name");
+				Deck deck = null;
+				// this one is a meta deck; we need to parse those after all other
+				// decks are done
+				if (map.containsKey("decks")) {
+					continue;
+				} else {
+					deck = parseStandardDeck(heroClass, map);
+				}
+				deck.setName(deckName);
+				deck.setFilename(file.getName());
+				decks.add(deck);
+			} catch (Exception e) {
+				logger.error("Error reading file {}", file.getName());
 			}
-			HeroClass heroClass = HeroClass.valueOf((String) map.get("heroClass"));
-			String deckName = (String) map.get("name");
-			Deck deck = null;
-			// this one is a meta deck; we need to parse those after all other
-			// decks are done
-			if (map.containsKey("decks")) {
-				continue;
-			} else {
-				deck = parseStandardDeck(heroClass, map);
-			}
-			deck.setName(deckName);
-			deck.setFilename(file.getName());
-			decks.add(deck);
 		}
 	}
 

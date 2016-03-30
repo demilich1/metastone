@@ -28,6 +28,7 @@ import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.HeroCard;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.DeckFactory;
+import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.heroes.MetaHero;
 import net.demilich.metastone.gui.common.BehaviourStringConverter;
@@ -60,6 +61,8 @@ public class PlayerConfigView extends VBox {
 	private List<Deck> decks = new ArrayList<Deck>();
 
 	private PlayerConfigType selectionHint;
+
+	private DeckFormat deckFormat;
 
 	public PlayerConfigView(PlayerConfigType selectionHint) {
 		this.selectionHint = selectionHint;
@@ -94,7 +97,9 @@ public class PlayerConfigView extends VBox {
 				if (deck.getHeroClass() != HeroClass.DECK_COLLECTION) {
 					continue;
 				}
-				deckList.add(deck);
+				if (deckFormat != null && deckFormat.inSet(deck)) {
+					deckList.add(deck);
+				}
 			}
 		} else {
 			Deck randomDeck = DeckFactory.getRandomDeck(heroClass);
@@ -104,7 +109,9 @@ public class PlayerConfigView extends VBox {
 					continue;
 				}
 				if (deck.getHeroClass() == heroClass || deck.getHeroClass() == HeroClass.ANY) {
-					deckList.add(deck);
+					if (deckFormat != null && deckFormat.inSet(deck)) {
+						deckList.add(deck);
+					}
 				}
 			}
 		}
@@ -185,6 +192,11 @@ public class PlayerConfigView extends VBox {
 		if (configType == PlayerConfigType.SIMULATION || configType == PlayerConfigType.SANDBOX) {
 			hideCardsCheckBox.setVisible(false);
 		}
+	}
+
+	public void setDeckFormat(DeckFormat newDeckFormat) {
+		deckFormat = newDeckFormat;
+		filterDecks();
 	}
 
 }

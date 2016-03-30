@@ -10,6 +10,7 @@ import net.demilich.metastone.gui.deckbuilder.DeleteDeckCommand;
 import net.demilich.metastone.gui.deckbuilder.FillDeckWithRandomCardsCommand;
 import net.demilich.metastone.gui.deckbuilder.FilterCardsCommand;
 import net.demilich.metastone.gui.deckbuilder.ImportDeckCommand;
+import net.demilich.metastone.gui.deckbuilder.LoadDeckFormatsCommand;
 import net.demilich.metastone.gui.deckbuilder.LoadDecksCommand;
 import net.demilich.metastone.gui.deckbuilder.RemoveCardFromDeckCommand;
 import net.demilich.metastone.gui.deckbuilder.SaveDeckCommand;
@@ -20,6 +21,7 @@ import net.demilich.metastone.gui.playmode.StartGameCommand;
 import net.demilich.metastone.gui.playmode.animation.AnimationCompletedCommand;
 import net.demilich.metastone.gui.playmode.animation.AnimationLockCommand;
 import net.demilich.metastone.gui.playmode.animation.AnimationStartedCommand;
+import net.demilich.metastone.gui.playmode.config.RequestDeckFormatsCommand;
 import net.demilich.metastone.gui.playmode.config.RequestDecksCommand;
 import net.demilich.metastone.gui.sandboxmode.commands.CreateNewSandboxCommand;
 import net.demilich.metastone.gui.sandboxmode.commands.ModifyPlayerDeckCommand;
@@ -60,6 +62,7 @@ public class ApplicationFacade extends Facade<GameNotification> {
 		registerCommand(GameNotification.REMOVE_CARD_FROM_DECK, new RemoveCardFromDeckCommand());
 		registerCommand(GameNotification.SAVE_ACTIVE_DECK, new SaveDeckCommand());
 		registerCommand(GameNotification.LOAD_DECKS, new LoadDecksCommand());
+		registerCommand(GameNotification.LOAD_DECK_FORMATS, new LoadDeckFormatsCommand());
 		registerCommand(GameNotification.FILTER_CARDS, new FilterCardsCommand());
 		registerCommand(GameNotification.FILL_DECK_WITH_RANDOM_CARDS, new FillDeckWithRandomCardsCommand());
 		registerCommand(GameNotification.IMPORT_DECK_FROM_URL, new ImportDeckCommand());
@@ -69,6 +72,7 @@ public class ApplicationFacade extends Facade<GameNotification> {
 		registerCommand(GameNotification.DELETE_DECK, new DeleteDeckCommand());
 
 		registerCommand(GameNotification.REQUEST_DECKS, new RequestDecksCommand());
+		registerCommand(GameNotification.REQUEST_DECK_FORMATS, new RequestDeckFormatsCommand());
 
 		registerCommand(GameNotification.CREATE_NEW_SANDBOX, new CreateNewSandboxCommand());
 		registerCommand(GameNotification.MODIFY_PLAYER_DECK, new ModifyPlayerDeckCommand());

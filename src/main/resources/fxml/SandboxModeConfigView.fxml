@@ -18,6 +18,8 @@
    <center>
       <VBox alignment="CENTER" spacing="8.0" BorderPane.alignment="CENTER">
          <children>
+            <Label styleClass="name-small" text="Deck Format:" />
+            <ComboBox fx:id="formatBox" prefWidth="150.0" />
             <HBox fx:id="playerArea" alignment="CENTER" maxHeight="400.0" BorderPane.alignment="CENTER" />
          </children>
       </VBox>

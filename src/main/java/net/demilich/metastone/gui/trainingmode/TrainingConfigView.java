@@ -18,6 +18,7 @@ import javafx.scene.layout.BorderPane;
 import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.decks.Deck;
+import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.gui.common.DeckStringConverter;
 
@@ -117,6 +118,12 @@ public class TrainingConfigView extends BorderPane {
 		numberOfGamesEntries.add(10000);
 		numberOfGamesBox.setItems(numberOfGamesEntries);
 		numberOfGamesBox.getSelectionModel().select(2);
+	}
+
+	public void injectDeckFormats(List<DeckFormat> body) {
+//		this.deckFormats = deckFormats;
+//		player1Config.setDeckFormat(deckFormats.get(0));
+//		player2Config.setDeckFormat(deckFormats.get(0));
 	}
 
 }

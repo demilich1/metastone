@@ -11,6 +11,7 @@ import net.demilich.nittygrittymvc.interfaces.INotification;
 import javafx.application.Platform;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.decks.Deck;
+import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.utils.Tuple;
 
 public class SimulationMediator extends Mediator<GameNotification> {
@@ -37,6 +38,10 @@ public class SimulationMediator extends Mediator<GameNotification> {
 		case REPLY_DECKS:
 			List<Deck> decks = (List<Deck>) notification.getBody();
 			view.injectDecks(decks);
+			break;
+		case REPLY_DECK_FORMATS:
+			List<DeckFormat> deckFormats = (List<DeckFormat>) notification.getBody();
+			view.injectDeckFormats(deckFormats);
 			break;
 		case COMMIT_SIMULATIONMODE_CONFIG:
 			getFacade().sendNotification(GameNotification.SHOW_MODAL_DIALOG, waitView);
@@ -73,6 +78,7 @@ public class SimulationMediator extends Mediator<GameNotification> {
 	public List<GameNotification> listNotificationInterests() {
 		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
 		notificationInterests.add(GameNotification.REPLY_DECKS);
+		notificationInterests.add(GameNotification.REPLY_DECK_FORMATS);
 		notificationInterests.add(GameNotification.COMMIT_SIMULATIONMODE_CONFIG);
 		notificationInterests.add(GameNotification.SIMULATION_PROGRESS_UPDATE);
 		notificationInterests.add(GameNotification.SIMULATION_RESULT);
@@ -83,6 +89,7 @@ public class SimulationMediator extends Mediator<GameNotification> {
 	public void onRegister() {
 		getFacade().sendNotification(GameNotification.SHOW_VIEW, view);
 		getFacade().sendNotification(GameNotification.REQUEST_DECKS);
+		getFacade().sendNotification(GameNotification.REQUEST_DECK_FORMATS);
 	}
 
 }
