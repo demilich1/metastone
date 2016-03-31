@@ -93,6 +93,7 @@ public class SandboxModeConfigView extends BorderPane {
 		gameConfig.setNumberOfGames(1);
 		gameConfig.setPlayerConfig1(player1Config.getPlayerConfig());
 		gameConfig.setPlayerConfig2(player2Config.getPlayerConfig());
+		gameConfig.setDeckFormat(formatBox.getValue());
 		ApplicationFacade.getInstance().sendNotification(GameNotification.COMMIT_SANDBOXMODE_CONFIG, gameConfig);
 	}
 

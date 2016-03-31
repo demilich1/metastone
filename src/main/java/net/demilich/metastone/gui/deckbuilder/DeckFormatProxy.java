@@ -18,12 +18,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import net.demilich.metastone.GameNotification;
-import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.decks.DeckFormat;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.nittygrittymvc.Proxy;
 
 public class DeckFormatProxy extends Proxy<GameNotification> {
@@ -40,15 +36,7 @@ public class DeckFormatProxy extends Proxy<GameNotification> {
 		super(NAME);
 	}
 
-	public List<Card> getCards(HeroClass heroClass) {
-		CardCollection cardCollection = CardCatalogue.query(null, null, heroClass);
-		// add neutral cards
-		cardCollection.addAll(CardCatalogue.query(null, null, HeroClass.ANY));
-		cardCollection.sortByManaCost();
-		return cardCollection.toList();
-	}
-
-	public DeckFormat getDeckByName(String deckName) {
+	public DeckFormat getDeckFormatByName(String deckName) {
 		for (DeckFormat deckFormat : deckFormats) {
 			if (deckFormat.getName().equals(deckName)) {
 				return deckFormat;

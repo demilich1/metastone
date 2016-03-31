@@ -26,7 +26,9 @@ import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.decks.Deck;
+import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.decks.MetaDeck;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.gui.deckbuilder.validation.DefaultDeckValidator;
@@ -62,9 +64,14 @@ public class DeckProxy extends Proxy<GameNotification> {
 	}
 
 	public List<Card> getCards(HeroClass heroClass) {
-		CardCollection cardCollection = CardCatalogue.query(null, null, heroClass);
+		DeckFormat deckFormat = new DeckFormat();
+		for (CardSet set : CardSet.values()) {
+			deckFormat.addSet(set);
+		}
+		CardCollection cardCollection = CardCatalogue.query(deckFormat, heroClass);
 		// add neutral cards
-		cardCollection.addAll(CardCatalogue.query(null, null, HeroClass.ANY));
+		cardCollection.addAll(CardCatalogue.query(deckFormat, HeroClass.ANY));
+		cardCollection.sortByName();
 		cardCollection.sortByManaCost();
 		return cardCollection.toList();
 	}

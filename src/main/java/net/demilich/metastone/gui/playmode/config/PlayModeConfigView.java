@@ -91,6 +91,7 @@ public class PlayModeConfigView extends BorderPane implements EventHandler<Actio
 			gameConfig.setNumberOfGames(1);
 			gameConfig.setPlayerConfig1(player1Config.getPlayerConfig());
 			gameConfig.setPlayerConfig2(player2Config.getPlayerConfig());
+			gameConfig.setDeckFormat(formatBox.getValue());
 			ApplicationFacade.getInstance().sendNotification(GameNotification.COMMIT_PLAYMODE_CONFIG, gameConfig);
 		} else if (actionEvent.getSource() == backButton) {
 			ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU);

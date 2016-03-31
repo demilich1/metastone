@@ -13,6 +13,7 @@ import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
+import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Minion;
@@ -35,6 +36,7 @@ public class GameContext implements Cloneable, IDisposable {
 
 	private final Player[] players = new Player[2];
 	private final GameLogic logic;
+	private final DeckFormat deckFormat;
 	private final TargetLogic targetLogic = new TargetLogic();
 	private TriggerManager triggerManager = new TriggerManager();
 	private final HashMap<Environment, Object> environment = new HashMap<>();
@@ -50,12 +52,13 @@ public class GameContext implements Cloneable, IDisposable {
 
 	private boolean ignoreEvents;
 
-	public GameContext(Player player1, Player player2, GameLogic logic) {
+	public GameContext(Player player1, Player player2, GameLogic logic, DeckFormat deckFormat) {
 		this.getPlayers()[PLAYER_1] = player1;
 		player1.setId(PLAYER_1);
 		this.getPlayers()[PLAYER_2] = player2;
 		player2.setId(PLAYER_2);
 		this.logic = logic;
+		this.deckFormat = deckFormat;
 		this.logic.setContext(this);
 	}
 
@@ -78,7 +81,7 @@ public class GameContext implements Cloneable, IDisposable {
 		// player1Clone.getDeck().shuffle();
 		Player player2Clone = getPlayer2().clone();
 		// player2Clone.getDeck().shuffle();
-		GameContext clone = new GameContext(player1Clone, player2Clone, logicClone);
+		GameContext clone = new GameContext(player1Clone, player2Clone, logicClone, deckFormat);
 		clone.triggerManager = triggerManager.clone();
 		clone.activePlayer = activePlayer;
 		clone.turn = turn;
@@ -216,6 +219,10 @@ public class GameContext implements Cloneable, IDisposable {
 			environment.put(Environment.DAMAGE_STACK, new Stack<Integer>());
 		}
 		return (Stack<Integer>) environment.get(Environment.DAMAGE_STACK);
+	}
+
+	public DeckFormat getDeckFormat() {
+		return deckFormat;
 	}
 
 	public HashMap<Environment, Object> getEnvironment() {

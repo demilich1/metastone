@@ -12,7 +12,9 @@ import ch.qos.logback.classic.Logger;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.behaviour.PlayRandomBehaviour;
+import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.decks.DeckFactory;
+import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.gui.gameconfig.PlayerConfig;
@@ -47,7 +49,11 @@ public class MassTest extends TestBase {
 		player2Config.setName("Player 2");
 		player2Config.setHeroCard(getHeroCardForClass(heroClass2));
 		Player player2 = new Player(player2Config);
-		GameContext context = new GameContext(player1, player2, new GameLogic());
+		DeckFormat deckFormat = new DeckFormat();
+		for (CardSet set : CardSet.values()) {
+			deckFormat.addSet(set);
+		}
+		GameContext context = new GameContext(player1, player2, new GameLogic(), deckFormat);
 		try {
 			context.play();
 			context.dispose();

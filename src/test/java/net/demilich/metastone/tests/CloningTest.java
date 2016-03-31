@@ -11,8 +11,10 @@ import net.demilich.metastone.game.behaviour.PlayRandomBehaviour;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.decks.DeckFactory;
+import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.logic.GameLogic;
@@ -63,7 +65,12 @@ public class CloningTest extends TestBase {
 			player2Config.setHeroCard(getHeroCardForClass(HeroClass.WARRIOR));
 			Player player2 = new Player(player2Config);
 
-			GameContext original = new GameContext(player1, player2, new GameLogic());
+			DeckFormat deckFormat = new DeckFormat();
+			for (CardSet set : CardSet.values()) {
+				deckFormat.addSet(set);
+			}
+
+			GameContext original = new GameContext(player1, player2, new GameLogic(), deckFormat);
 			TestMinionCard minionCard = new TestMinionCard(3, 3);
 			original.getLogic().receiveCard(player1.getId(), minionCard);
 			original.getLogic().performGameAction(player1.getId(), minionCard.play());

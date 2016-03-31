@@ -3,6 +3,7 @@ package net.demilich.metastone.game.cards;
 import java.util.function.Predicate;
 
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 
 public class CardCatalogue {
@@ -45,22 +46,29 @@ public class CardCatalogue {
 	public static CardCollection getHeroes() {
 		return query(card -> card.isCollectible() && card.getCardType() == CardType.HERO);
 	}
-
-	public static CardCollection query(Attribute tag) {
-		return query(null, null, null, tag);
+	
+	public static CardCollection query(DeckFormat deckFormat) {
+		return query(deckFormat, (CardType) null, (Rarity) null, (HeroClass) null, (Attribute) null);
 	}
 
-	public static CardCollection query(CardType cardType) {
-		return query(cardType, null, null);
+	public static CardCollection query(DeckFormat deckFormat, CardType cardType) {
+		return query(deckFormat, cardType, (Rarity) null, (HeroClass) null, (Attribute) null);
 	}
 
-	public static CardCollection query(CardType cardType, Rarity rarity, HeroClass heroClass) {
-		return query(cardType, rarity, heroClass, null);
+	public static CardCollection query(DeckFormat deckFormat, HeroClass heroClass) {
+		return query(deckFormat, (CardType) null, (Rarity) null, heroClass, (Attribute) null);
 	}
 
-	public static CardCollection query(CardType cardType, Rarity rarity, HeroClass heroClass, Attribute tag) {
+	public static CardCollection query(DeckFormat deckFormat, CardType cardType, Rarity rarity, HeroClass heroClass) {
+		return query(deckFormat, cardType, rarity, heroClass, (Attribute) null);
+	}
+
+	public static CardCollection query(DeckFormat deckFormat, CardType cardType, Rarity rarity, HeroClass heroClass, Attribute tag) {
 		CardCollection result = new CardCollection();
 		for (Card card : cards) {
+			if (!deckFormat.inSet(card)) {
+				continue;
+			}
 			if (!card.isCollectible()) {
 				continue;
 			}

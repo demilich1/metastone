@@ -19,7 +19,9 @@ import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.behaviour.IBehaviour;
+import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.decks.Deck;
+import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.gui.gameconfig.PlayerConfig;
 
@@ -43,8 +45,13 @@ public class StartBattleOfDecksCommand extends SimpleCommand<GameNotification> {
 		public Void call() throws Exception {
 			Player player1 = new Player(player1Config);
 			Player player2 = new Player(player2Config);
+	
+			DeckFormat deckFormat = new DeckFormat();
+			for (CardSet set : CardSet.values()) {
+				deckFormat.addSet(set);
+			}
 
-			GameContext newGame = new GameContext(player1, player2, new GameLogic());
+			GameContext newGame = new GameContext(player1, player2, new GameLogic(), deckFormat);
 			newGame.play();
 
 			batchResult.onGameEnded(newGame);

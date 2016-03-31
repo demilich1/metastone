@@ -29,6 +29,13 @@ public class DeckFormat {
 		return true;
 	}
 
+	public boolean inSet(Card card) {
+		if (sets.contains(card.getCardSet())) {
+			return true;
+		}
+		return false;
+	}
+
 	public String getName() {
 		return name;
 	}

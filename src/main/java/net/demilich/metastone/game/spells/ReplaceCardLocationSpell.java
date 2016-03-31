@@ -6,7 +6,6 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
-import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -18,7 +17,7 @@ public class ReplaceCardLocationSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		EntityFilter cardFilter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
-		CardCollection cards = CardCatalogue.query((CardType) null);
+		CardCollection cards = CardCatalogue.query(context.getDeckFormat());
 		CardCollection result = new CardCollection();
 		String replacementCard = (String) desc.get(SpellArg.CARD);
 		for (Card card : cards) {

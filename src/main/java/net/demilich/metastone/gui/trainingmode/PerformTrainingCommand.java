@@ -12,6 +12,8 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.behaviour.threat.FeatureVector;
 import net.demilich.metastone.game.behaviour.threat.GameStateValueBehaviour;
 import net.demilich.metastone.game.behaviour.threat.cuckoo.CuckooLearner;
+import net.demilich.metastone.game.cards.CardSet;
+import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.statistics.Statistic;
 import net.demilich.metastone.gui.gameconfig.PlayerConfig;
@@ -55,8 +57,13 @@ public class PerformTrainingCommand extends SimpleCommand<GameNotification> {
 					PlayerConfig opponentConfig = new PlayerConfig(config.getRandomDeck(), new GameStateValueBehaviour());
 					opponentConfig.setName("Opponent");
 					Player player2 = new Player(opponentConfig);
+					
+					DeckFormat deckFormat = new DeckFormat();
+					for (CardSet set : CardSet.values()) {
+						deckFormat.addSet(set);
+					}
 
-					GameContext newGame = new GameContext(player1, player2, new GameLogic());
+					GameContext newGame = new GameContext(player1, player2, new GameLogic(), deckFormat);
 					newGame.play();
 
 					onGameComplete(config, newGame);

@@ -94,6 +94,7 @@ public class SimulationModeConfigView extends BorderPane implements EventHandler
 			gameConfig.setNumberOfGames(numberOfGamesBox.getSelectionModel().getSelectedItem());
 			gameConfig.setPlayerConfig1(player1Config.getPlayerConfig());
 			gameConfig.setPlayerConfig2(player2Config.getPlayerConfig());
+			gameConfig.setDeckFormat(formatBox.getValue());
 			ApplicationFacade.getInstance().sendNotification(GameNotification.COMMIT_SIMULATIONMODE_CONFIG, gameConfig);
 		} else if (actionEvent.getSource() == backButton) {
 			ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU);

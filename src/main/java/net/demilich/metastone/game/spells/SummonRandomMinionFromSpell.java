@@ -15,7 +15,7 @@ public class SummonRandomMinionFromSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Card fromCard = SpellUtils.getCard(context, desc);
-		CardCollection allMinions = CardCatalogue.query(CardType.MINION);
+		CardCollection allMinions = CardCatalogue.query(context.getDeckFormat(), CardType.MINION);
 		CardCollection relevantMinions = new CardCollection();
 		for (Card card : allMinions) {
 			if (context.getLogic().getModifiedManaCost(player, fromCard) == card.getBaseManaCost()) {
