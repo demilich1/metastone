@@ -5,7 +5,7 @@
 	"type": "SPELL",
 	"heroClass": "ANY",
 	"rarity": "FREE",
-	"description": "Give a friendly minion Stealth until your next turn",
+	"description": "Give a friendly minion Stealth until your next turn.",
 	"targetSelection": "FRIENDLY_MINIONS",
 	"spell": {
 		"class": "AddAttributeSpell",

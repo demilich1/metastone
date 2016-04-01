@@ -2,7 +2,9 @@ package net.demilich.metastone.game.cards;
 
 public enum CardSet {
 	ANY,
+	BASIC,
 	CLASSIC,
+	REWARD,
 	NAXXRAMAS,
 	GOBLINS_VS_GNOMES,
 	BLACKROCK_MOUNTAIN,

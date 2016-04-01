@@ -8,7 +8,7 @@
 	"heroClass": "HUNTER",
 	"rarity": "EPIC",
 	"race": "BEAST",
-	"description": "If this minion attacks another minion and kills it, it can attack again.",
+	"description": "Whenever this minion kills another minion, it may attack again.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "DamageCausedTrigger",

@@ -1,6 +1,7 @@
 {
 	"name": "Standard",
 	"sets": [
+		"BASIC",
 		"CLASSIC",
 		"BLACKROCK_MOUNTAIN",
 		"THE_GRAND_TOURNAMENT",
