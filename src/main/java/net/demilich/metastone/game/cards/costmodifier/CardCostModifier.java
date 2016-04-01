@@ -95,7 +95,7 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 		return clone;
 	}
 
-	protected void expire() {
+	public void expire() {
 		expired = true;
 	}
 
@@ -228,6 +228,21 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 	@Override
 	public boolean hasPersistentOwner() {
 		return false;
+	}
+
+	@Override
+	public boolean oneTurnOnly() {
+		return false;
+	}
+
+	@Override
+	public boolean isDelayed() {
+		return false;
+	}
+
+	@Override
+	public void delayTimeDown() {
+		
 	}
 
 }

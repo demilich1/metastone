@@ -1,10 +1,17 @@
 package net.demilich.metastone.gui.gameconfig;
 
+import net.demilich.metastone.game.decks.DeckFormat;
+
 public class GameConfig {
 
 	private int numberOfGames;
 	private PlayerConfig playerConfig1;
 	private PlayerConfig playerConfig2;
+	private DeckFormat deckFormat;
+
+	public DeckFormat getDeckFormat() {
+		return deckFormat;
+	}
 
 	public int getNumberOfGames() {
 		return numberOfGames;
@@ -16,6 +23,10 @@ public class GameConfig {
 
 	public PlayerConfig getPlayerConfig2() {
 		return playerConfig2;
+	}
+
+	public void setDeckFormat(DeckFormat deckFormat) {
+		this.deckFormat = deckFormat;
 	}
 
 	public void setNumberOfGames(int numberOfGames) {

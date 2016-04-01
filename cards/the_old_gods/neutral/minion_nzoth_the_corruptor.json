@@ -1,0 +1,28 @@
+{
+	"id": "minion_nzoth_the_corruptor",
+	"name": "N'Zoth, the Corruptor",
+	"baseManaCost": 10,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 7,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Summon your friendly Deathrattle minions that died this game.",
+	"targetSelection": "NONE",
+	"battlecry": {
+		"spell": {
+			"class": "ResurrectSpell",
+			"value": 7,
+			"cardFilter": {
+				"class": "CardFilter",
+				"attribute": "DEATHRATTLES"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "BLACKROCK_MOUNTAIN",
+	"fileFormatVersion": 1
+}

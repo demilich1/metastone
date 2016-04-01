@@ -16,7 +16,13 @@
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
    <center>
-      <HBox fx:id="playerArea" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="0.0" BorderPane.alignment="CENTER" />
+      <VBox alignment="CENTER" spacing="8.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label styleClass="name-small" text="Deck Format:" />
+            <ComboBox fx:id="formatBox" prefWidth="150.0" />
+            <HBox fx:id="playerArea" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="0.0" BorderPane.alignment="CENTER" />
+         </children>
+      </VBox>
    </center>
    <bottom>
       <AnchorPane>

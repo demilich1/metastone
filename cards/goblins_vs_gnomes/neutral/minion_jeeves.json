@@ -20,11 +20,11 @@
 			"value": {
 				"class": "AlgebraicValueProvider",
 				"operation": "SUBTRACT",
-				"valueProvider1": {
+				"value1": {
 					"class": "ConstantValueProvider",
 					"value": 3
 				},
-				"valueProvider2": {
+				"value2": {
 					"class": "PlayerAttributeValueProvider",
 					"playerAttribute": "HAND_COUNT",
 					"targetPlayer": "SELF"

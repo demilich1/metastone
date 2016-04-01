@@ -8,10 +8,10 @@
 	"description": "When you play or discard this, deal 4 damage to a random enemy.",
 	"targetSelection": "NONE",
 	"spell": {
-		"class": "DamageSpell",
+		"class": "MissilesSpell",
 		"target": "ENEMY_CHARACTERS",
 		"value": 4,
-		"randomTarget": "true"
+		"howMany": 1
 	},
 	"passiveTrigger": {
 		"eventTrigger": {
@@ -19,10 +19,10 @@
 			"target": "SELF"
 		},
 		"spell": {
-			"class": "DamageSpell",
+			"class": "MissilesSpell",
 			"target": "ENEMY_CHARACTERS",
 			"value": 4,
-			"randomTarget": "true"
+			"howMany": 1
 		}
 	},
 	"collectible": true,

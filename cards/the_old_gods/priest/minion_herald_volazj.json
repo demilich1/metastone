@@ -1,0 +1,22 @@
+{
+	"id": "minion_herald_volazj",
+	"name": "Herald Volazj",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Summon a 1/1 copy of each of your other minions.",
+	"battlecry": {
+		"spell": {
+			"class": "custom.HeraldVolajzSpell"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

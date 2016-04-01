@@ -16,9 +16,11 @@ import net.demilich.metastone.game.behaviour.Behaviour;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardProxy;
+import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.cards.HeroCard;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.decks.DeckFactory;
+import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -90,8 +92,13 @@ public class TestBase {
 		player2Config.setHeroCard(getHeroCardForClass(hero2));
 		Player player2 = new Player(player2Config);
 
+		DeckFormat deckFormat = new DeckFormat();
+		for (CardSet set : CardSet.values()) {
+			deckFormat.addSet(set);
+		}
+
 		GameLogic logic = new GameLogic();
-		DebugContext context = new DebugContext(player1, player2, logic);
+		DebugContext context = new DebugContext(player1, player2, logic, deckFormat);
 		logic.setContext(context);
 		context.init();
 		return context;

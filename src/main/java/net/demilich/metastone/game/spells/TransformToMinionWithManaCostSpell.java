@@ -21,8 +21,12 @@ public class TransformToMinionWithManaCostSpell extends TransformMinionSpell {
 		return new SpellDesc(arguments);
 	}
 
-	private static MinionCard getRandomMinionWithCost(int manaCost) {
-		CardCollection allMinions = CardCatalogue.query(CardType.MINION);
+	@Override
+	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
+		Minion minion = (Minion) target;
+		int manaCost = minion.getSourceCard().getBaseManaCost();
+		
+		CardCollection allMinions = CardCatalogue.query(context.getDeckFormat(), CardType.MINION);
 		CardCollection minionsWithSameCost = new CardCollection();
 		for (Card card : allMinions) {
 			MinionCard minionCard = (MinionCard) card;
@@ -30,14 +34,8 @@ public class TransformToMinionWithManaCostSpell extends TransformMinionSpell {
 				minionsWithSameCost.add(minionCard);
 			}
 		}
-		return (MinionCard) minionsWithSameCost.getRandom();
-	}
-
-	@Override
-	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		Minion minion = (Minion) target;
-		int manaCost = minion.getSourceCard().getBaseManaCost();
-		Card randomCard = getRandomMinionWithCost(manaCost);
+		MinionCard randomCard = (MinionCard) minionsWithSameCost.getRandom();
+		
 		SpellDesc transformMinionSpell = TransformMinionSpell.create(randomCard.getCardId());
 		super.onCast(context, player, transformMinionSpell, source, target);
 	}

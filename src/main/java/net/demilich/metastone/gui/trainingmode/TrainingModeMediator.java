@@ -8,6 +8,7 @@ import net.demilich.nittygrittymvc.interfaces.INotification;
 import javafx.application.Platform;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.decks.Deck;
+import net.demilich.metastone.game.decks.DeckFormat;
 
 public class TrainingModeMediator extends Mediator<GameNotification> {
 
@@ -45,6 +46,9 @@ public class TrainingModeMediator extends Mediator<GameNotification> {
 		case REPLY_DECKS:
 			configView.injectDecks((List<Deck>) notification.getBody());
 			break;
+		case REPLY_DECK_FORMATS:
+			configView.injectDeckFormats((List<DeckFormat>) notification.getBody());
+			break;
 		default:
 			break;
 		}
@@ -56,6 +60,7 @@ public class TrainingModeMediator extends Mediator<GameNotification> {
 		notificationInterests.add(GameNotification.TRAINING_PROGRESS_UPDATE);
 		notificationInterests.add(GameNotification.COMMIT_TRAININGMODE_CONFIG);
 		notificationInterests.add(GameNotification.REPLY_DECKS);
+		notificationInterests.add(GameNotification.REPLY_DECK_FORMATS);
 		return notificationInterests;
 	}
 
@@ -63,6 +68,7 @@ public class TrainingModeMediator extends Mediator<GameNotification> {
 	public void onRegister() {
 		getFacade().sendNotification(GameNotification.SHOW_VIEW, configView);
 		getFacade().sendNotification(GameNotification.REQUEST_DECKS);
+		getFacade().sendNotification(GameNotification.REQUEST_DECK_FORMATS);
 	}
 
 }

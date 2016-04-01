@@ -13,6 +13,7 @@
 		"eventTrigger": {
 			"class": "DamageCausedTrigger",
 			"targetEntityType": "MINION",
+			"hostTargetType": "IGNORE_OTHER_SOURCES",
 			"condition": {
 				"class": "IsDeadCondition",
 				"target": "EVENT_TARGET"

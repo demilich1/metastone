@@ -25,7 +25,7 @@ public class EquipRandomWeaponSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		CardCollection allWeapons = CardCatalogue.query(CardType.WEAPON);
+		CardCollection allWeapons = CardCatalogue.query(context.getDeckFormat(), CardType.WEAPON);
 		WeaponCard weaponCard = (WeaponCard) allWeapons.getRandom();
 		Weapon weapon = weaponCard.getWeapon();
 		weapon.setBattlecry(null);

@@ -6,6 +6,7 @@ import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.behaviour.DoNothingBehaviour;
+import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.gui.gameconfig.GameConfig;
 import net.demilich.metastone.gui.gameconfig.PlayerConfig;
@@ -32,8 +33,10 @@ public class CreateNewSandboxCommand extends SimpleCommand<GameNotification> {
 				player2Config.setName("Player 2");
 				Player player2 = new Player(player2Config);
 				player2.setBehaviour(new DoNothingBehaviour());
+				
+				DeckFormat deckFormat = gameConfig.getDeckFormat();
 
-				GameContext sandbox = new GameContextVisualizable(player1, player2, new GameLogic());
+				GameContext sandbox = new GameContextVisualizable(player1, player2, new GameLogic(), deckFormat);
 				sandboxProxy.setSandbox(sandbox);
 				sendNotification(GameNotification.UPDATE_SANDBOX_STATE, sandbox);
 

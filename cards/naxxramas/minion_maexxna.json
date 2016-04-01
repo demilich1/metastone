@@ -12,7 +12,8 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "DamageCausedTrigger",
-			"targetEntityType": "MINION"
+			"targetEntityType": "MINION",
+			"hostTargetType": "IGNORE_OTHER_SOURCES"
 		},
 		"spell": {
 			"class": "DestroySpell",

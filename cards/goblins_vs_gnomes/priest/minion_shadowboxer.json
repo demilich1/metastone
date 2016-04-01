@@ -14,10 +14,10 @@
 			"class": "HealingTrigger"
 		},
 		"spell": {
-			"class": "DamageSpell",
+			"class": "MissilesSpell",
 			"target": "ENEMY_CHARACTERS",
 			"value": 1,
-			"randomTarget": true
+			"howMany": 1
 		}
 	},
 	"collectible": true,

@@ -18,6 +18,7 @@ import net.demilich.nittygrittymvc.interfaces.INotification;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.gui.gameconfig.GameConfig;
 import net.demilich.metastone.gui.gameconfig.PlayerConfig;
@@ -40,8 +41,10 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 
 			Player player1 = new Player(playerConfig1);
 			Player player2 = new Player(playerConfig2);
+			
+			DeckFormat deckFormat = gameConfig.getDeckFormat();
 
-			GameContext newGame = new GameContext(player1, player2, new GameLogic());
+			GameContext newGame = new GameContext(player1, player2, new GameLogic(), deckFormat);
 			newGame.play();
 
 			onGameComplete(gameConfig, newGame);

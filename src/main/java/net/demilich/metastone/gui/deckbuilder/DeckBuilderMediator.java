@@ -63,6 +63,7 @@ public class DeckBuilderMediator extends Mediator<GameNotification> {
 		notificationInterests.add(GameNotification.FILTERED_CARDS);
 		notificationInterests.add(GameNotification.ACTIVE_DECK_CHANGED);
 		notificationInterests.add(GameNotification.DECKS_LOADED);
+		notificationInterests.add(GameNotification.DECK_FORMATS_LOADED);
 		notificationInterests.add(GameNotification.INVALID_DECK_NAME);
 		notificationInterests.add(GameNotification.DUPLICATE_DECK_NAME);
 		return notificationInterests;

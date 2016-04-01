@@ -15,6 +15,7 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.behaviour.human.HumanActionOptions;
 import net.demilich.metastone.game.behaviour.human.HumanTargetOptions;
 import net.demilich.metastone.game.decks.Deck;
+import net.demilich.metastone.game.decks.DeckFormat;
 
 public class SandboxModeMediator extends Mediator<GameNotification>implements EventHandler<KeyEvent> {
 
@@ -75,6 +76,9 @@ public class SandboxModeMediator extends Mediator<GameNotification>implements Ev
 		case REPLY_DECKS:
 			configView.injectDecks((List<Deck>) notification.getBody());
 			break;
+		case REPLY_DECK_FORMATS:
+			configView.injectDeckFormats((List<DeckFormat>) notification.getBody());
+			break;
 		default:
 			break;
 		}
@@ -91,6 +95,7 @@ public class SandboxModeMediator extends Mediator<GameNotification>implements Ev
 		notificationInterests.add(GameNotification.GAME_STATE_LATE_UPDATE);
 		notificationInterests.add(GameNotification.SELECT_PLAYER);
 		notificationInterests.add(GameNotification.COMMIT_SANDBOXMODE_CONFIG);
+		notificationInterests.add(GameNotification.REPLY_DECK_FORMATS);
 		notificationInterests.add(GameNotification.REPLY_DECKS);
 		return notificationInterests;
 	}
@@ -99,6 +104,7 @@ public class SandboxModeMediator extends Mediator<GameNotification>implements Ev
 	public void onRegister() {
 		getFacade().sendNotification(GameNotification.SHOW_VIEW, configView);
 		getFacade().sendNotification(GameNotification.REQUEST_DECKS);
+		getFacade().sendNotification(GameNotification.REQUEST_DECK_FORMATS);
 	}
 
 }

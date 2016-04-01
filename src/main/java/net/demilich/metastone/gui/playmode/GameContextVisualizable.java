@@ -9,6 +9,7 @@ import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.logic.GameLogic;
 
@@ -18,8 +19,8 @@ public class GameContextVisualizable extends GameContext {
 
 	private boolean blockedByAnimation;
 
-	public GameContextVisualizable(Player player1, Player player2, GameLogic logic) {
-		super(player1, player2, logic);
+	public GameContextVisualizable(Player player1, Player player2, GameLogic logic, DeckFormat deckFormat) {
+		super(player1, player2, logic, deckFormat);
 	}
 
 	protected boolean acceptAction(GameAction nextAction) {
