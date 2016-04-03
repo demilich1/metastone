@@ -1,0 +1,24 @@
+{
+	"id": "minion_vilefin_inquisitor",
+	"name": "Vilefin Inquisitor",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 3,
+	"heroClass": "PALADIN",
+	"rarity": "EPIC",
+	"race": "MURLOC",
+	"description": "Battlecry: Your Hero Power becomes 'Summon a 1/1 Murloc.'",
+	"battlecry": {
+		"spell": {
+			"class": "ChangeHeroPowerSpell",
+			"card": "hero_power_reinforrggle"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

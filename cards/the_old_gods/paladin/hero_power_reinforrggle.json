@@ -1,0 +1,22 @@
+{
+	"id": "hero_power_reinforrggle",
+	"name": "Reinforrggle",
+	"baseManaCost": 2,
+	"type": "HERO_POWER",
+	"heroClass": "PALADIN",
+	"rarity": "FREE",
+	"description": "Summon a 1/1 Murloc.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "SummonSpell",
+		"card": "token_murloc"
+	},
+	"condition": {
+		"class": "MinionCountCondition",
+		"value": 7,
+		"operation": "LESS"
+	},
+	"collectible": false,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

@@ -36,8 +36,10 @@ public class TransformToMinionWithManaCostSpell extends TransformMinionSpell {
 		}
 		MinionCard randomCard = (MinionCard) minionsWithSameCost.getRandom();
 		
-		SpellDesc transformMinionSpell = TransformMinionSpell.create(randomCard.getCardId());
-		super.onCast(context, player, transformMinionSpell, source, target);
+		if (randomCard != null) {
+			SpellDesc transformMinionSpell = TransformMinionSpell.create(randomCard.getCardId());
+			super.onCast(context, player, transformMinionSpell, source, target);
+		}
 	}
 
 }
