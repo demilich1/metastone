@@ -2,6 +2,7 @@
     "id": "minion_infested_tauren",
     "name": "Infested Tauren",
     "baseManaCost": 4,
+    "type": "MINION",
     "baseAttack": 2,
     "baseHp": 3,
     "heroClass": "ANY",
