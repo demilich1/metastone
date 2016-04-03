@@ -27,15 +27,16 @@ Sure! There is still a lot to do and anybody willing to contribute is welcome
 - Anything else you would like to improve
 
 ### How do I compile the code on my machine? ###
-- Clone the repo from GitHub
-- Download and install Gradle (most recent version 2.7 is recommended, but older version should also work)
-- You need to add the /bin folder of Gradle to your PATH environment variable if you are on Windows
-- Now navigate to the folder with your local git repo, open Command Prompt/Terminal and type 'gradle eclipse'
-- This will download all required dependencies and create appropriate .project files
-- Now you can open up Eclipse and choose 'Import -> Existing projects into workspace'
-- After the import is done, be sure to check the Build Path settings in Eclipse. you may have to change the path to your JDK installation there (JDK 1.8u60 is required)
-- That's it, you should now be able to launch the project from Eclipse ('gradle run' on the command line should also work, but it is much slower than the launch from within Eclipse)
-(This guides assumes you are using Eclipse, other IDEs should work too. I think IntelliJ can even directly import Gradle projects) 
+* NOTE **JDK 1.8 is required!**
+* Clone the repo.  See [https://help.github.com/articles/cloning-a-repository/](https://help.github.com/articles/cloning-a-repository/) for help.
+* Open a terminal / command prompt and nagivate to your to your git repo location
+* Download dependecies and compile: `./gradlew compile`
+* Run the application from the command line: `./gradlew run`
+* Get a list of all gradle tasks: `./gradlew tasks`
+* If you want to build from Eclipse, you will need to create the eclipse settings files: `./gradlew eclipse`
+   * Open Eclipse and choose `Import -> Existing projects into workspace`
+   * Check the Build Path settings in Eclipse and ensure JDK location is correct.
+* If you want to build from IntelliJ, open a new project `File > Project From Existing Sources`.  It will import the project from the build.gradle file.
 
 ### How do I build my own cards? ###
 This feature is in very early stages and there is no official support yet. There is no documentation at all. If you really want to start right now:
