@@ -12,7 +12,7 @@
 		"card": "spell_the_coin",
 		"howMany": 1,
 		"cardFilter": {
-			"class": "cardFilter",
+			"class": "CardFilter",
 			"heroClass": "OPPONENT"
 		}
 	},
