@@ -27,15 +27,16 @@ Sure! There is still a lot to do and anybody willing to contribute is welcome
 - Anything else you would like to improve
 
 ### How do I compile the code on my machine? ###
-- Clone the repo from GitHub
-- Download and install Gradle (most recent version 2.7 is recommended, but older version should also work)
-- You need to add the /bin folder of Gradle to your PATH environment variable if you are on Windows
-- Now navigate to the folder with your local git repo, open Command Prompt/Terminal and type 'gradle eclipse'
-- This will download all required dependencies and create appropriate .project files
-- Now you can open up Eclipse and choose 'Import -> Existing projects into workspace'
-- After the import is done, be sure to check the Build Path settings in Eclipse. you may have to change the path to your JDK installation there (JDK 1.8u60 is required)
-- That's it, you should now be able to launch the project from Eclipse ('gradle run' on the command line should also work, but it is much slower than the launch from within Eclipse)
-(This guides assumes you are using Eclipse, other IDEs should work too. I think IntelliJ can even directly import Gradle projects) 
+* NOTE **JDK 1.8 is required!**
+* Clone the repo.  See [https://help.github.com/articles/cloning-a-repository/](https://help.github.com/articles/cloning-a-repository/) for help.
+* Open a terminal / command prompt and nagivate to your to your git repo location
+* Download dependecies and compile: `./gradlew compile`
+* Run the application from the command line: `./gradlew run`
+* Get a list of all gradle tasks: `./gradlew tasks`
+* If you want to build from Eclipse, you will need to create the eclipse settings files: `./gradlew eclipse`
+   * Open Eclipse and choose `Import -> Existing projects into workspace`
+   * Check the Build Path settings in Eclipse and ensure JDK location is correct.
+* If you want to build from IntelliJ, open a new project `File > Project From Existing Sources`.  It will import the project from the build.gradle file.
 
 ### How do I build my own cards? ###
 This feature is in very early stages and there is no official support yet. There is no documentation at all. If you really want to start right now:
@@ -44,7 +45,16 @@ This feature is in very early stages and there is no official support yet. There
 - Create a new folder named 'custom'
 - Any .json file in there will be parsed and treated like built-in cards
 - To learn the format it is advised to copy an existing card, change the filename and the 'id' attribute (important!) and make small changes
+- To validate that the cards you added are well formed and can be parsed, run the following command: `./gradlew test -Dtest.single=ValidateCards` 
 - You have to restart MetaStone for new cards to be detected
-- There is no notification if you make an error, the card will just not work or the program may crash
 - **The card format is subject to change; cards you create now may not work in future versions**
 
+### Running tests
+* The easiest way to run tests is from the command line.  `./gradlew test`
+* You can also run tests from your favorite IDE. 
+   * For example, in IntelliJ right click on `src/test` folder and select `Run All Tests`
+* You can also run individual tests:
+   * From the command line `./gradlew test -Dtest.single=ValidateCards`  This will run the ValidateCards test to ensure that all cards are parseable.
+   * From your IDE, right click on the individual test file and select `Run Test`
+* If you encounter test failures open the test report file `build/reports/tests/index.html` for details on the failures
+* Look [**here**](/src/test/java/net/demilich/metastone/tests) for list of existing tests
