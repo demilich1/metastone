@@ -10,7 +10,7 @@
 	"deathrattle": {
 		"class": "ReceiveRandomCollectibleCardSpell",
 		"card": "spell_the_coin",
-		"howMany": 1,
+		"value": 1,
 		"cardFilter": {
 			"class": "CardFilter",
 			"heroClass": "OPPONENT"

@@ -37,7 +37,6 @@ public class HighestAttributeValueProvider extends ValueProvider {
 		int value = 0;
 		for (Entity entity : entities) {
 			if (filter != null && !filter.matches(context, player, entity)) {
-				System.out.println(entity.getName());
 				continue;
 			}
 			if (entity instanceof Card) {

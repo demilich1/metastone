@@ -1,0 +1,19 @@
+{
+	"id": "minion_thing_from_below",
+	"name": "Thing From Below",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 5,
+	"heroClass": "SHAMAN",
+	"rarity": "RARE",
+	"description": "Costs (1) less for each Totem you've summoned this game.",
+	"manaCostModifier": {
+		"class": "AttributeValueProvider",
+		"target": "FRIENDLY_HERO",
+		"attribute": "TOTEMS_SUMMONED"
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

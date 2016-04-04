@@ -1,6 +1,5 @@
 package net.demilich.metastone.game.spells;
 
-import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
@@ -8,9 +7,9 @@ import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
-import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 
 public class FromDeckToHandSpell extends Spell {
 
@@ -21,12 +20,17 @@ public class FromDeckToHandSpell extends Spell {
 			context.getLogic().drawCard(player.getId(), card, source);
 			return;
 		}
-		
-		Race race = (Race) desc.get(SpellArg.RACE);
+
 		int value = desc.getValue(SpellArg.VALUE, context, player, target, source, 0);
 		String replacementCard = (String) desc.get(SpellArg.CARD);
 
-		CardCollection relevantCards = SpellUtils.getCards(player.getDeck(), card -> card.getAttribute(Attribute.RACE) == race);
+		EntityFilter cardFilter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
+		CardCollection relevantCards = null;
+		if (cardFilter != null) {
+			relevantCards = SpellUtils.getCards(player.getDeck(), card -> cardFilter.matches(context, player, card));
+		} else {
+			relevantCards = SpellUtils.getCards(player.getDeck(), null);
+		}
 		for (int i = 0; i < value; i++) {
 			Card card = null;
 			if (!relevantCards.isEmpty()) {

@@ -13,24 +13,17 @@
 			{
 				"class": "HealSpell",
 				"value": {
-					"class": "AlgebraicValueProvider",
-					"value1": {
-						"class": "PlayerAttributeValueProvider",
-						"playerAttribute": "MANA"
-					},
-					"value2": 2,
-					"operation": "MULTIPLY"
+					"class": "PlayerAttributeValueProvider",
+					"playerAttribute": "MANA",
+					"multiplier": 2
 				}
 			},
 			{
 				"class": "GainManaSpell",
 				"value": {
-					"class": "AlgebraicValueProvider",
-					"value1": {
-						"class": "PlayerAttributeValueProvider",
-						"playerAttribute": "MANA"
-					},
-					"operation": "NEGATE"
+					"class": "PlayerAttributeValueProvider",
+					"playerAttribute": "MANA",
+					"multiplier": -1
 				}
 			}
 		]

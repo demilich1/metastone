@@ -35,6 +35,7 @@ import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.entities.weapons.Weapon;
 import net.demilich.metastone.game.events.AfterSpellCastedEvent;
 import net.demilich.metastone.game.events.ArmorGainedEvent;
@@ -1551,6 +1552,9 @@ public class GameLogic implements Cloneable {
 		}
 
 		SummonEvent summonEvent = new SummonEvent(context, minion, source);
+		if (minion.getRace() == Race.TOTEM) {
+			player.getHero().modifyAttribute(Attribute.TOTEMS_SUMMONED, 1);
+		}
 		context.fireGameEvent(summonEvent);
 
 		applyAttribute(minion, Attribute.SUMMONING_SICKNESS);
