@@ -58,15 +58,13 @@ public class CardParser {
 		gson = gsonBuilder.create();
 	}
 
-	public CardDesc parseCard(File file) {
-		FileReader reader = null;
-		try {
-			reader = new FileReader(file);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-
+	public CardDesc parseCard(File file) throws FileNotFoundException {
+		FileReader reader = new FileReader(file);
 		JsonElement jsonData = gson.fromJson(reader, JsonElement.class);
+
+		if (!jsonData.getAsJsonObject().has("type")) {
+			throw new RuntimeException(file.getName() + " is missing 'type' attribute!");
+		}
 
 		CardType type = CardType.valueOf((String) jsonData.getAsJsonObject().get("type").getAsString());
 		switch (type) {

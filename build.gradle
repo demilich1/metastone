@@ -58,4 +58,7 @@ javafx {
 test {
 	// enable TestNG support (default is JUnit)
 	useTestNG()
+	testLogging {
+		events "standardOut"
+	}
 }
