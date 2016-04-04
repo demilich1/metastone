@@ -6,7 +6,7 @@
 	"heroClass": "MAGE",
 	"rarity": "EPIC",
 	"description": "Spend all your mana. Deal that much damage to a minion.",
-	"targetSelection": "ANY",
+	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "MetaSpell",
 		"spells": [

@@ -6,9 +6,10 @@
 	"heroClass": "PRIEST",
 	"rarity": "FREE",
 	"description": "Destroy all minions with 2 or less Attack.",
-	"targetSelection": "ALL_MINIONS",
+	"targetSelection": "NONE",
 	"spell": {
 		"class": "DestroySpell",
+		"target": "ALL_MINIONS",
 		"filter": {
 			"class": "AttributeFilter",
 			"value": 2,

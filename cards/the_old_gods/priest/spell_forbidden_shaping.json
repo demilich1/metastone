@@ -6,7 +6,7 @@
 	"heroClass": "PRIEST",
 	"rarity": "EPIC",
 	"description": "Spend all your mana. Summon a random minion that costs that much.",
-	"targetSelection": "ANY",
+	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
 		"spells": [
