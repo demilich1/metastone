@@ -45,7 +45,16 @@ This feature is in very early stages and there is no official support yet. There
 - Create a new folder named 'custom'
 - Any .json file in there will be parsed and treated like built-in cards
 - To learn the format it is advised to copy an existing card, change the filename and the 'id' attribute (important!) and make small changes
+- To validate that the cards you added are well formed and can be parsed, run the following command: `./gradlew test -Dtest.single=ValidateCards` 
 - You have to restart MetaStone for new cards to be detected
-- There is no notification if you make an error, the card will just not work or the program may crash
 - **The card format is subject to change; cards you create now may not work in future versions**
 
+### Running tests
+* The easiest way to run tests is from the command line.  `./gradlew test`
+* You can also run tests from your favorite IDE. 
+   * For example, in IntelliJ right click on `src/test` folder and select `Run All Tests`
+* You can also run individual tests:
+   * From the command line `./gradlew test -Dtest.single=ValidateCards`  This will run the ValidateCards test to ensure that all cards are parseable.
+   * From your IDE, right click on the individual test file and select `Run Test`
+* If you encounter test failures open the test report file `build/reports/tests/index.html` for details on the failures
+* Look [**here**](/src/test/java/net/demilich/metastone/tests) for list of existing tests
