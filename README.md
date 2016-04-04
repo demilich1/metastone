@@ -30,7 +30,7 @@ Sure! There is still a lot to do and anybody willing to contribute is welcome
 * NOTE **JDK 1.8 is required!**
 * Clone the repo.  See [https://help.github.com/articles/cloning-a-repository/](https://help.github.com/articles/cloning-a-repository/) for help.
 * Open a terminal / command prompt and nagivate to your to your git repo location
-* Download dependecies and compile: `./gradlew compile`
+* Download dependecies and compile: `./gradlew compileJava`
 * Run the application from the command line: `./gradlew run`
 * Get a list of all gradle tasks: `./gradlew tasks`
 * If you want to build from Eclipse, you will need to create the eclipse settings files: `./gradlew eclipse`
