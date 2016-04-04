@@ -51,7 +51,7 @@ public class ValidateCards {
         try {
             CARD_PARSER.parseCard(cardFile);
         } catch (Exception ex) {
-            System.out.println(ex);
+            System.err.println(ex);
             Assert.fail(cardFile.getName(), ex);
         }
     }
