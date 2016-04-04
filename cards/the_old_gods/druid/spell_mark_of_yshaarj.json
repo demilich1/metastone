@@ -11,12 +11,18 @@
 		"class": "ConditionalEffectSpell",
 		"spell1": {
 			"class": "BuffSpell",
+			"target": "TARGET",
 			"attackBonus": 2,
 			"hpBonus": 2
 		},
 		"spell2": {
 			"class": "DrawCardSpell",
+			"target": "SELF",
 			"value": 1
+		},
+		"condition": {
+			"class": "RaceCondition",
+			"race": "BEAST"
 		}
 	},
 	"collectible": true,
