@@ -78,7 +78,7 @@ public class CardToken extends BorderPane {
 			setScoreValue(manaCostAnchor, card.getBaseManaCost());
 		}
 
-		boolean isMinionCard = card.getCardType() == CardType.MINION;
+		boolean isMinionCard = card.getCardType().isCardType(CardType.MINION);
 		attackAnchor.setVisible(isMinionCard);
 		hpAnchor.setVisible(isMinionCard);
 		attackIcon.setVisible(isMinionCard);

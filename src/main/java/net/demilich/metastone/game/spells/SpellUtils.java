@@ -176,7 +176,7 @@ public class SpellUtils {
 
 	public static boolean holdsCardOfType(Player player, CardType cardType) {
 		for (Card card : player.getHand()) {
-			if (card.getCardType() == cardType) {
+			if (card.getCardType().isCardType(cardType)) {
 				return true;
 			}
 		}

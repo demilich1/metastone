@@ -147,7 +147,7 @@ public class GameLogic implements Cloneable {
 		player.getHero().modifyAttribute(Attribute.COMBO, +1);
 		Card card = context.resolveCardReference(cardReference);
 
-		if (isSpellCard(card.getCardType()) && !card.hasAttribute(Attribute.COUNTERED)) {
+		if (card.getCardType().isCardType(CardType.SPELL) && !card.hasAttribute(Attribute.COUNTERED)) {
 			checkForDeadEntities();
 			context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, card));
 		}
@@ -200,7 +200,7 @@ public class GameLogic implements Cloneable {
 		if (player.getMana() < manaCost && manaCost != 0) {
 			return false;
 		}
-		if (card.getCardType() == CardType.HERO_POWER) {
+		if (card.getCardType().isCardType(CardType.HERO_POWER)) {
 			HeroPower power = (HeroPower) card;
 			int heroPowerUsages = getGreatestAttributeValue(player, Attribute.HERO_POWER_USAGES);
 			if (heroPowerUsages == 0) {
@@ -209,7 +209,7 @@ public class GameLogic implements Cloneable {
 			if (heroPowerUsages != INFINITE && power.hasBeenUsed() >= heroPowerUsages) {
 				return false;
 			}
-		} else if (card.getCardType() == CardType.MINION) {
+		} else if (card.getCardType().isCardType(CardType.MINION)) {
 			return canSummonMoreMinions(player);
 		}
 
@@ -252,7 +252,7 @@ public class GameLogic implements Cloneable {
 		if (source != null) {
 			sourceCard = source.getEntityType() == EntityType.CARD ? (Card) source : null;
 		}
-		if (sourceCard != null && isSpellCard(sourceCard.getCardType()) && !spellDesc.hasPredefinedTarget() && targets != null
+		if (sourceCard != null && sourceCard.getCardType().isCardType(CardType.SPELL) && !spellDesc.hasPredefinedTarget() && targets != null
 				&& targets.size() == 1) {
 			if (sourceCard instanceof SpellCard) {
 				spellCard = (SpellCard) sourceCard;
@@ -366,12 +366,12 @@ public class GameLogic implements Cloneable {
 		int damage = baseDamage;
 		Card sourceCard = source != null && source.getEntityType() == EntityType.CARD ? (Card) source : null;
 		if (!ignoreSpellPower && sourceCard != null) {
-			if (isSpellCard(sourceCard.getCardType())) {
+			if (sourceCard.getCardType().isCardType(CardType.SPELL)) {
 				damage = applySpellpower(player, source, baseDamage);
-			} else if (sourceCard.getCardType() == CardType.HERO_POWER) {
+			} else if (sourceCard.getCardType().isCardType(CardType.HERO_POWER)) {
 				damage = applyHeroPowerDamage(player, damage);
 			}
-			if (isSpellCard(sourceCard.getCardType()) || sourceCard.getCardType() == CardType.HERO_POWER) {
+			if (sourceCard.getCardType().isCardType(CardType.SPELL) || sourceCard.getCardType().isCardType(CardType.HERO_POWER)) {
 				damage = applyAmplify(player, damage, Attribute.SPELL_AMPLIFY_MULTIPLIER);
 			}
 		}
@@ -962,13 +962,6 @@ public class GameLogic implements Cloneable {
 		return loggingEnabled;
 	}
 
-	public boolean isSpellCard(CardType type) {
-		if (type == CardType.CHOOSE_ONE || type == CardType.SPELL) {
-			return true;
-		}
-		return false;
-	}
-
 	public JoustEvent joust(Player player) {
 		Card ownCard = player.getDeck().getRandomOfType(CardType.MINION);
 		Card opponentCard = null;
@@ -1191,7 +1184,7 @@ public class GameLogic implements Cloneable {
 
 		removeCard(playerId, card);
 
-		if (isSpellCard(card.getCardType())) {
+		if ((card.getCardType().isCardType(CardType.SPELL))) {
 			GameEvent spellCastedEvent = new SpellCastedEvent(context, playerId, card);
 			context.fireGameEvent(spellCastedEvent, TriggerLayer.SECRET);
 			if (!card.hasAttribute(Attribute.COUNTERED)) {
@@ -1591,56 +1584,62 @@ public class GameLogic implements Cloneable {
 		// Remove any spell triggers associated with the old minion.
 		removeSpelltriggers(minion);
 
-		log("{} was transformed to {}", minion, newMinion);
 		Player owner = context.getPlayer(minion.getOwner());
 		int index = owner.getMinions().indexOf(minion);
 		owner.getMinions().remove(minion);
+		
+		// If we want to straight up remove a minion from existence without
+		// killing it, this would be the best way.
+		if (newMinion != null) {
+			log("{} was transformed to {}", minion, newMinion);
 
-		// Give the new minion an ID.
-		newMinion.setId(idFactory.generateId());
-		newMinion.setOwner(owner.getId());
-
-		// If the minion being transforms is being summoned, replace the old
-		// minion on the stack.
-		// Otherwise, summon the add the new minion.
-		// However, do not give a summon event.
-		if (!context.getSummonReferenceStack().isEmpty() && context.getSummonReferenceStack().peek().equals(minion.getReference())
-				&& !context.getEnvironment().containsKey(Environment.TRANSFORM_REFERENCE)) {
-			context.getEnvironment().put(Environment.TRANSFORM_REFERENCE, newMinion.getReference());
-			owner.getMinions().add(index, newMinion);
-
-			// It's quite possible that this is actually supposed to add the
-			// minion to the zone it was originally in.
-			// This means minions in the SetAsideZone or the Graveyard that are
-			// targeted (through bizarre mechanics)
-			// add the minion to there. This will be tested eventually with
-			// Resurrect, Recombobulator, and Illidan.
-			// Since this is unknown, this is the patch for it.
-		} else if (!owner.getSetAsideZone().contains(minion)) {
-			if (index < 0 || index >= owner.getMinions().size()) {
-				owner.getMinions().add(newMinion);
-			} else {
-				owner.getMinions().add(index, newMinion);
-			}
-
-			applyAttribute(newMinion, Attribute.SUMMONING_SICKNESS);
-			refreshAttacksPerRound(newMinion);
-
-			if (newMinion.hasSpellTrigger()) {
-				addGameEventListener(owner, newMinion.getSpellTrigger(), newMinion);
-			}
-
-			if (newMinion.getCardCostModifier() != null) {
-				addManaModifier(owner, newMinion.getCardCostModifier(), newMinion);
-			}
-
-			handleEnrage(newMinion);
-		} else {
-			owner.getSetAsideZone().add(newMinion);
+			// Give the new minion an ID.
 			newMinion.setId(idFactory.generateId());
 			newMinion.setOwner(owner.getId());
-			removeSpelltriggers(newMinion);
-			return;
+	
+			// If the minion being transforms is being summoned, replace the old
+			// minion on the stack.
+			// Otherwise, summon the add the new minion.
+			// However, do not give a summon event.
+			if (!context.getSummonReferenceStack().isEmpty() && context.getSummonReferenceStack().peek().equals(minion.getReference())
+					&& !context.getEnvironment().containsKey(Environment.TRANSFORM_REFERENCE)) {
+				context.getEnvironment().put(Environment.TRANSFORM_REFERENCE, newMinion.getReference());
+				owner.getMinions().add(index, newMinion);
+	
+				// It's quite possible that this is actually supposed to add the
+				// minion to the zone it was originally in.
+				// This means minions in the SetAsideZone or the Graveyard that are
+				// targeted (through bizarre mechanics)
+				// add the minion to there. This will be tested eventually with
+				// Resurrect, Recombobulator, and Illidan.
+				// Since this is unknown, this is the patch for it.
+			} else if (!owner.getSetAsideZone().contains(minion)) {
+				if (index < 0 || index >= owner.getMinions().size()) {
+					owner.getMinions().add(newMinion);
+				} else {
+					owner.getMinions().add(index, newMinion);
+				}
+	
+				applyAttribute(newMinion, Attribute.SUMMONING_SICKNESS);
+				refreshAttacksPerRound(newMinion);
+	
+				if (newMinion.hasSpellTrigger()) {
+					addGameEventListener(owner, newMinion.getSpellTrigger(), newMinion);
+				}
+	
+				if (newMinion.getCardCostModifier() != null) {
+					addManaModifier(owner, newMinion.getCardCostModifier(), newMinion);
+				}
+	
+				handleEnrage(newMinion);
+			} else {
+				owner.getSetAsideZone().add(newMinion);
+				newMinion.setId(idFactory.generateId());
+				newMinion.setOwner(owner.getId());
+				removeSpelltriggers(newMinion);
+				return;
+			}
+		
 		}
 
 		// Move the old minion to the Set Aside Zone
