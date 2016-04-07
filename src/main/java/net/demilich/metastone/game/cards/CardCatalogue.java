@@ -72,7 +72,7 @@ public class CardCatalogue {
 			if (!card.isCollectible()) {
 				continue;
 			}
-			if (cardType != null && card.getCardType().isCardType(cardType)) {
+			if (cardType != null && !card.getCardType().isCardType(cardType)) {
 				continue;
 			}
 			// per default, do not include heroes or hero powers
