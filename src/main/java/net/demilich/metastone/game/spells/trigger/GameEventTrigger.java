@@ -70,7 +70,7 @@ public abstract class GameEventTrigger extends CustomCloneable {
 		} else if (hostTargetType == TargetType.IGNORE_OTHER_SOURCES && event.getEventSource() != host) {
 			return false;
 		}
-		Condition condition = (Condition) desc.get(EventTriggerArg.CONDITION);
+		Condition condition = (Condition) desc.get(EventTriggerArg.QUEUE_CONDITION);
 		Player owner = event.getGameContext().getPlayer(getOwner());
 		if (condition != null && !condition.isFulfilled(event.getGameContext(), owner, event.getEventTarget())) {
 			return false;
@@ -91,6 +91,15 @@ public abstract class GameEventTrigger extends CustomCloneable {
 	@Override
 	public String toString() {
 		return "[" + getClass().getSimpleName() + " owner:" + owner + "]";
+	}
+	
+	public boolean canFireCondition(GameEvent event) {
+		Condition condition = (Condition) desc.get(EventTriggerArg.FIRE_CONDITION);
+		Player owner = event.getGameContext().getPlayer(getOwner());
+		if (condition != null && !condition.isFulfilled(event.getGameContext(), owner, event.getEventTarget())) {
+			return false;
+		}
+		return true;
 	}
 
 }
