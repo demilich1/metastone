@@ -14,7 +14,8 @@
 			"spell": {
 				"class": "SummonSpell",
 				"targetPlayer": "SELF",
-				"card": "token_tauren_slime"
+				"card": "token_tauren_slime",
+				"boardPositionRelative": "RIGHT"
 			}
 		},
 		{
