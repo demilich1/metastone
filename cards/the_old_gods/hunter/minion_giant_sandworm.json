@@ -15,8 +15,7 @@
 			"targetEntityType": "MINION",
 			"hostTargetType": "IGNORE_OTHER_SOURCES",
 			"fireCondition": {
-				"class": "IsDeadCondition",
-				"target": "EVENT_TARGET"
+				"class": "IsDeadCondition"
 			}
 		},
 		"spell": {

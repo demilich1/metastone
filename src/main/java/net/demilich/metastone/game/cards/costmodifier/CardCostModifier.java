@@ -244,7 +244,10 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 
 	@Override
 	public boolean canFireCondition(GameEvent event) {
-		return expirationTrigger.canFireCondition(event);
+		if (expirationTrigger != null) {
+			return expirationTrigger.canFireCondition(event);
+		}
+		return true;
 	}
 
 }
