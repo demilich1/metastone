@@ -9,7 +9,7 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "BuffSpell",
-		"target": "ALL_FRIENDLY_MINIONS",
+		"target": "FRIENDLY_MINIONS",
 		"attackBonus": 2,
 		"hpBonus": 2
 	},
