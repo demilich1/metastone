@@ -18,7 +18,7 @@ import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.logic.GameLogic;
-import net.demilich.metastone.gui.gameconfig.PlayerConfig;
+import net.demilich.metastone.game.gameconfig.PlayerConfig;
 
 public class CloningTest extends TestBase {
 

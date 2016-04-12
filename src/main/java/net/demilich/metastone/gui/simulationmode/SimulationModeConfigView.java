@@ -19,7 +19,7 @@ import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.gui.common.DeckFormatStringConverter;
-import net.demilich.metastone.gui.gameconfig.GameConfig;
+import net.demilich.metastone.game.gameconfig.GameConfig;
 
 public class SimulationModeConfigView extends BorderPane implements EventHandler<ActionEvent> {
 

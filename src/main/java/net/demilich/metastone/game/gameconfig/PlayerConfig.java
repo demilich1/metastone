@@ -1,4 +1,4 @@
-package net.demilich.metastone.gui.gameconfig;
+package net.demilich.metastone.game.gameconfig;
 
 import net.demilich.metastone.game.behaviour.IBehaviour;
 import net.demilich.metastone.game.cards.HeroCard;
