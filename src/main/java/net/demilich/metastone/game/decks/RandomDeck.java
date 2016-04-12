@@ -7,8 +7,8 @@ import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
-import net.demilich.metastone.gui.deckbuilder.validation.DefaultDeckValidator;
-import net.demilich.metastone.gui.deckbuilder.validation.IDeckValidator;
+import net.demilich.metastone.game.decks.validation.DefaultDeckValidator;
+import net.demilich.metastone.game.decks.validation.IDeckValidator;
 
 public class RandomDeck extends Deck {
 
