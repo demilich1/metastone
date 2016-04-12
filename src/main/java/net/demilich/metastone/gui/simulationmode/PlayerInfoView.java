@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import net.demilich.metastone.game.cards.HeroCard;
 import net.demilich.metastone.gui.IconFactory;
-import net.demilich.metastone.gui.gameconfig.PlayerConfig;
+import net.demilich.metastone.game.gameconfig.PlayerConfig;
 
 public class PlayerInfoView extends Pane {
 

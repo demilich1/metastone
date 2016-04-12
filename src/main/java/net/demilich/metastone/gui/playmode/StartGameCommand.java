@@ -8,8 +8,8 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.logic.GameLogic;
-import net.demilich.metastone.gui.gameconfig.GameConfig;
-import net.demilich.metastone.gui.gameconfig.PlayerConfig;
+import net.demilich.metastone.game.gameconfig.GameConfig;
+import net.demilich.metastone.game.gameconfig.PlayerConfig;
 
 public class StartGameCommand extends SimpleCommand<GameNotification> {
 

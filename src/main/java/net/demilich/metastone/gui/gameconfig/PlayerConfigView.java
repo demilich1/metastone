@@ -31,6 +31,7 @@ import net.demilich.metastone.game.decks.DeckFactory;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.heroes.MetaHero;
+import net.demilich.metastone.game.gameconfig.PlayerConfig;
 import net.demilich.metastone.gui.IconFactory;
 import net.demilich.metastone.gui.common.BehaviourStringConverter;
 import net.demilich.metastone.gui.common.DeckStringConverter;
