@@ -14,6 +14,7 @@ import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.logic.CustomCloneable;
 import net.demilich.metastone.game.statistics.GameStatistics;
+import net.demilich.metastone.game.statistics.ThisGameStatistics;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
 
 public class Player extends CustomCloneable {
@@ -30,6 +31,7 @@ public class Player extends CustomCloneable {
 	private final HashSet<String> secrets = new HashSet<>();
 
 	private final GameStatistics statistics = new GameStatistics();
+	private final ThisGameStatistics gameStatistics = new ThisGameStatistics();
 
 	private int id = -1;
 
@@ -59,6 +61,7 @@ public class Player extends CustomCloneable {
 		this.lockedMana = otherPlayer.lockedMana;
 		this.behaviour = otherPlayer.behaviour;
 		this.getStatistics().merge(otherPlayer.getStatistics());
+		this.getGameStatistics().merge(otherPlayer.getGameStatistics().clone());
 	}
 
 	public Player(PlayerConfig config) {
@@ -142,6 +145,10 @@ public class Player extends CustomCloneable {
 
 	public GameStatistics getStatistics() {
 		return statistics;
+	}
+	
+	public ThisGameStatistics getGameStatistics() {
+		return gameStatistics;
 	}
 
 	public boolean hideCards() {
