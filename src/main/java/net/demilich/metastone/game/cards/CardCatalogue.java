@@ -72,14 +72,14 @@ public class CardCatalogue {
 			if (!card.isCollectible()) {
 				continue;
 			}
-			if (cardType != null && card.getCardType() != cardType) {
+			if (cardType != null && !card.getCardType().isCardType(cardType)) {
 				continue;
 			}
 			// per default, do not include heroes or hero powers
-			if (card.getCardType() == CardType.HERO_POWER || card.getCardType() == CardType.HERO) {
+			if (card.getCardType().isCardType(CardType.HERO_POWER) || card.getCardType().isCardType(CardType.HERO)) {
 				continue;
 			}
-			if (rarity != null && card.getRarity() != rarity) {
+			if (rarity != null && !card.getRarity().isRarity(rarity)) {
 				continue;
 			}
 			if (heroClass != null && card.getClassRestriction() != heroClass) {

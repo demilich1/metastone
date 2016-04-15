@@ -22,10 +22,10 @@ public class RandomDeck extends Deck {
 		Deck copyDeck = new Deck(getHeroClass());
 		IDeckValidator deckValidator = new DefaultDeckValidator();
 		CardCollection classCards = CardCatalogue.query(card -> {
-			return card.isCollectible() && card.getCardType() != CardType.HERO && card.getClassRestriction() == getHeroClass();
+			return card.isCollectible() && !card.getCardType().isCardType(CardType.HERO) && card.getClassRestriction() == getHeroClass();
 		});
 		CardCollection neutralCards = CardCatalogue.query(card -> {
-			return card.isCollectible() && card.getCardType() != CardType.HERO && card.getClassRestriction() == HeroClass.ANY;
+			return card.isCollectible() && !card.getCardType().isCardType(CardType.HERO) && card.getClassRestriction() == HeroClass.ANY;
 		});
 
 		while (!copyDeck.isComplete()) {

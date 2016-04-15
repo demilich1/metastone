@@ -74,7 +74,7 @@ public class CardCollection implements Iterable<Card>, Cloneable {
 	public Card getRandomOfType(CardType cardType) {
 		List<Card> relevantCards = new ArrayList<>();
 		for (Card card : cards) {
-			if (card.getCardType() == cardType) {
+			if (card.getCardType().isCardType(cardType)) {
 				relevantCards.add(card);
 			}
 		}
@@ -86,7 +86,7 @@ public class CardCollection implements Iterable<Card>, Cloneable {
 
 	public boolean hasCardOfType(CardType cardType) {
 		for (Card card : cards) {
-			if (card.getCardType() == cardType) {
+			if (card.getCardType().isCardType(cardType)) {
 				return true;
 			}
 		}
