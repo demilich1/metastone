@@ -31,9 +31,9 @@ public class DamageCausedTrigger extends GameEventTrigger {
 		}
 		CardType cardType = (CardType) desc.get(EventTriggerArg.CARD_TYPE);
 		if (cardType != null) {
-			if (damageEvent.getSource() instanceof Card && ((Card) damageEvent.getSource()).getCardType() != cardType) {
+			if (damageEvent.getSource() instanceof Card && !((Card) damageEvent.getSource()).getCardType().isCardType(cardType)) {
 				return false;
-			} else if (damageEvent.getSource() instanceof Actor && ((Actor) damageEvent.getSource()).getSourceCard().getCardType() != cardType) {
+			} else if (damageEvent.getSource() instanceof Actor && !((Actor) damageEvent.getSource()).getSourceCard().getCardType().isCardType(cardType)) {
 				return false;
 			}
 		}

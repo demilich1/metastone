@@ -117,7 +117,7 @@ public class CardCollectionEditor extends SandboxEditor {
 	private void populateCatalogueView(String filter) {
 		ObservableList<Card> data = FXCollections.observableArrayList();
 		for (Card card : CardCatalogue.getAll()) {
-			if (card.getCardType() == CardType.HERO) {
+			if (card.getCardType().isCardType(CardType.HERO)) {
 				continue;
 			}
 			if (filter == null || card.matchesFilter(filter)) {

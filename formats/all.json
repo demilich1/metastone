@@ -1,7 +1,10 @@
 {
 	"name": "All",
 	"sets": [
+		"BASIC",
 		"CLASSIC",
+		"REWARD",
+		"PROMO",
 		"NAXXRAMAS",
 		"GOBLINS_VS_GNOMES",
 		"BLACKROCK_MOUNTAIN",
