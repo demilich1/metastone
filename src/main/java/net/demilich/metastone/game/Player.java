@@ -61,6 +61,7 @@ public class Player extends CustomCloneable {
 		this.lockedMana = otherPlayer.lockedMana;
 		this.behaviour = otherPlayer.behaviour;
 		this.getStatistics().merge(otherPlayer.getStatistics());
+		this.getGameStatistics().merge(otherPlayer.getGameStatistics().clone());
 	}
 
 	public Player(PlayerConfig config) {

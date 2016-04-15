@@ -120,6 +120,25 @@ public class ThisGameStatistics implements Cloneable {
 		add(Statistic.MANA_SPENT, mana);
 	}
 
+	public void merge(ThisGameStatistics thisGameStatistics) {
+		for (Statistic stat : thisGameStatistics.stats.keySet()) {
+			Object value = get(stat);
+			if (value != null) {
+				if (value instanceof Long) {
+					add(stat, thisGameStatistics.getLong(stat));
+				}
+			} else {
+				stats.put(stat, thisGameStatistics.get(stat));
+			}
+		}
+		for (String cardId : thisGameStatistics.getCardsPlayed().keySet()) {
+			if (!getCardsPlayed().containsKey(cardId)) {
+				getCardsPlayed().put(cardId, 0);
+			}
+			getCardsPlayed().put(cardId, getCardsPlayed().get(cardId) + thisGameStatistics.getCardsPlayed().get(cardId));
+		}
+	}
+
 	public void minionSummoned(Minion minion) {
 		add(Statistic.CARDS_PLAYED, 1);
 		increaseMinionCount(minion);
