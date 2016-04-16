@@ -9,9 +9,8 @@
 	"rarity": "EPIC",
 	"description": "Costs (1) less for each time you used your Hero Power this game.",
 	"manaCostModifier": {
-		"class": "AttributeValueProvider",
-		"target": "FRIENDLY_HERO",
-		"attribute": "HERO_POWER_USED"
+		"class": "PlayerAttributeValueProvider",
+		"playerAttribute": "HERO_POWER_USED"
 	},
 	"collectible": true,
 	"set": "THE_GRAND_TOURNAMENT",
