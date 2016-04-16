@@ -19,7 +19,7 @@ import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.statistics.GameStatistics;
 import net.demilich.metastone.game.statistics.Statistic;
-import net.demilich.metastone.gui.gameconfig.PlayerConfig;
+import net.demilich.metastone.game.gameconfig.PlayerConfig;
 
 public class WinRateFitness implements IFitnessFunction {
 

@@ -2,7 +2,7 @@ package net.demilich.metastone.gui.simulationmode;
 
 import net.demilich.metastone.game.statistics.GameStatistics;
 import net.demilich.metastone.game.statistics.Statistic;
-import net.demilich.metastone.gui.gameconfig.GameConfig;
+import net.demilich.metastone.game.gameconfig.GameConfig;
 
 public class SimulationResult {
 

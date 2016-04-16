@@ -7,8 +7,8 @@ import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
-import net.demilich.metastone.gui.deckbuilder.validation.DefaultDeckValidator;
-import net.demilich.metastone.gui.deckbuilder.validation.IDeckValidator;
+import net.demilich.metastone.game.decks.validation.DefaultDeckValidator;
+import net.demilich.metastone.game.decks.validation.IDeckValidator;
 
 public class RandomDeck extends Deck {
 
@@ -22,10 +22,10 @@ public class RandomDeck extends Deck {
 		Deck copyDeck = new Deck(getHeroClass());
 		IDeckValidator deckValidator = new DefaultDeckValidator();
 		CardCollection classCards = CardCatalogue.query(card -> {
-			return card.isCollectible() && card.getCardType() != CardType.HERO && card.getClassRestriction() == getHeroClass();
+			return card.isCollectible() && !card.getCardType().isCardType(CardType.HERO) && card.getClassRestriction() == getHeroClass();
 		});
 		CardCollection neutralCards = CardCatalogue.query(card -> {
-			return card.isCollectible() && card.getCardType() != CardType.HERO && card.getClassRestriction() == HeroClass.ANY;
+			return card.isCollectible() && !card.getCardType().isCardType(CardType.HERO) && card.getClassRestriction() == HeroClass.ANY;
 		});
 
 		while (!copyDeck.isComplete()) {

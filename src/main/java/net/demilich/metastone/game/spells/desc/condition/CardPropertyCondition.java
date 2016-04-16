@@ -28,7 +28,7 @@ public class CardPropertyCondition extends Condition {
 		}
 
 		CardType cardType = (CardType) desc.get(ConditionArg.CARD_TYPE);
-		if (cardType != null && card.getCardType() != cardType) {
+		if (cardType != null && !card.getCardType().isCardType(cardType)) {
 			return false;
 		}
 

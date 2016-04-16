@@ -14,6 +14,7 @@ import net.demilich.metastone.game.behaviour.human.HumanTargetOptions;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.events.BoardChangedEvent;
 import net.demilich.metastone.game.logic.ActionLogic;
 import net.demilich.metastone.gui.sandboxmode.SandboxProxy;
 
@@ -51,6 +52,12 @@ public class SpawnMinionCommand extends SimpleCommand<GameNotification> {
 		Actor nextTo = (Actor) context.resolveSingleTarget(action.getTargetKey());
 		int index = selectedPlayer.getMinions().indexOf(nextTo);
 		context.getLogic().summon(selectedPlayer.getId(), minion, minionCard, index, false);
+		
+		if (context.ignoreEvents()) {
+			context.setIgnoreEvents(false);
+			context.fireGameEvent(new BoardChangedEvent(context));
+			context.setIgnoreEvents(true);
+		}
 
 		sendNotification(GameNotification.UPDATE_SANDBOX_STATE, context);
 	}

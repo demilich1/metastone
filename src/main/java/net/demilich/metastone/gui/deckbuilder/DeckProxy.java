@@ -31,8 +31,8 @@ import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.decks.MetaDeck;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
-import net.demilich.metastone.gui.deckbuilder.validation.DefaultDeckValidator;
-import net.demilich.metastone.gui.deckbuilder.validation.IDeckValidator;
+import net.demilich.metastone.game.decks.validation.DefaultDeckValidator;
+import net.demilich.metastone.game.decks.validation.IDeckValidator;
 import net.demilich.nittygrittymvc.Proxy;
 
 public class DeckProxy extends Proxy<GameNotification> {

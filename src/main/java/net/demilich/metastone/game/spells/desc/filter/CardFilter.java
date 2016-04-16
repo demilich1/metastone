@@ -31,7 +31,7 @@ public class CardFilter extends EntityFilter {
 		}
 
 		CardType cardType = (CardType) desc.get(FilterArg.CARD_TYPE);
-		if (cardType != null && cardType != card.getCardType()) {
+		if (cardType != null && !card.getCardType().isCardType(cardType)) {
 			return false;
 		}
 		Race race = (Race) desc.get(FilterArg.RACE);
@@ -54,7 +54,7 @@ public class CardFilter extends EntityFilter {
 			}
 		}
 		Rarity rarity = (Rarity) desc.get(FilterArg.RARITY);
-		if (rarity != null && card.getRarity() != rarity) {
+		if (rarity != null && card.getRarity().isRarity(rarity)) {
 			return false;
 		}
 		

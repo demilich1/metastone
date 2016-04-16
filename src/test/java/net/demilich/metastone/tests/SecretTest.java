@@ -13,6 +13,7 @@ import net.demilich.metastone.game.cards.SecretCard;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.logic.GameLogic;
 
 public class SecretTest extends TestBase {
 
@@ -94,6 +95,27 @@ public class SecretTest extends TestBase {
 		SecretCard otherSecret = (SecretCard) CardCatalogue.getCardById("secret_explosive_trap");
 		context.getLogic().receiveCard(mage.getId(), otherSecret);
 		Assert.assertTrue(context.getLogic().canPlaySecret(mage, otherSecret));
+	}
+	
+	@Test
+	public void testDuplicate() {
+		GameContext context = createContext(HeroClass.MAGE, HeroClass.WARRIOR);
+		Player player = context.getPlayer1();
+		Player opponent = context.getPlayer2();
+		
+		playCard(context, player, CardCatalogue.getCardById("secret_duplicate"));
+		
+		Minion novice = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_novice_engineer"));
+		while (player.getHand().getCount() < GameLogic.MAX_HAND_CARDS) {
+			playCard(context, player, CardCatalogue.getCardById("minion_novice_engineer"));	
+		}
+		Assert.assertEquals(player.getHand().getCount(), GameLogic.MAX_HAND_CARDS);
+		context.endTurn();
+		playCard(context, opponent, CardCatalogue.getCardById("weapon_fiery_war_axe"));
+		
+		attack(context, opponent, opponent.getHero(), novice);
+		// player has full hand, therefor Duplicate should not have triggered 
+		Assert.assertEquals(player.getSecrets().size(), 1);
 	}
 	
 	@Test

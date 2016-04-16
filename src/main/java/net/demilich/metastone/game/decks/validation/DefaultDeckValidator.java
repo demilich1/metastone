@@ -1,4 +1,4 @@
-package net.demilich.metastone.gui.deckbuilder.validation;
+package net.demilich.metastone.game.decks.validation;
 
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.Rarity;
