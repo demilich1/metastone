@@ -7,8 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.behaviour.human.HumanTargetOptions;
 
@@ -47,7 +47,7 @@ public class PlayModeView extends BorderPane {
 		sidePane.getChildren().remove(backButton);
 		sidePane.getChildren().add(actionPromptView);
 
-		backButton.setOnAction(actionEvent -> ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU));
+		backButton.setOnAction(actionEvent -> NotificationProxy.sendNotification(GameNotification.MAIN_MENU));
 	}
 
 	public void disableTargetSelection() {

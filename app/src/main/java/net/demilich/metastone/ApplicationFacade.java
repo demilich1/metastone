@@ -48,6 +48,8 @@ public class ApplicationFacade extends Facade<GameNotification> {
 	}
 
 	public ApplicationFacade() {
+		NotificationProxy.init(this);
+
 		registerCommand(GameNotification.APPLICATION_STARTUP, new ApplicationStartupCommand());
 		registerCommand(GameNotification.START_GAME, new StartGameCommand());
 		registerCommand(GameNotification.PLAY_GAME, new PlayGameCommand());
@@ -91,7 +93,7 @@ public class ApplicationFacade extends Facade<GameNotification> {
 		registerCommand(GameNotification.REQUEST_TRAINING_DATA, new RequestTrainingDataCommand());
 	}
 
-	public void startUp(MetaStone main) {
+	public void startUp() {
 		sendNotification(GameNotification.APPLICATION_STARTUP);
 	}
 

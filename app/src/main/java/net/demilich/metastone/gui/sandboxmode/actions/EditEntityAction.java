@@ -1,7 +1,7 @@
 package net.demilich.metastone.gui.sandboxmode.actions;
 
-import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.GameAction;
@@ -20,8 +20,8 @@ public class EditEntityAction extends GameAction {
 	public void execute(GameContext context, int playerId) {
 		Entity entity = context.resolveSingleTarget(getTargetKey());
 		EntityEditor editor = new EntityEditor(entity,
-				result -> ApplicationFacade.getInstance().sendNotification(GameNotification.UPDATE_SANDBOX_STATE, context));
-		ApplicationFacade.getInstance().sendNotification(GameNotification.SHOW_MODAL_DIALOG, editor);
+				result -> NotificationProxy.sendNotification(GameNotification.UPDATE_SANDBOX_STATE, context));
+		NotificationProxy.sendNotification(GameNotification.SHOW_MODAL_DIALOG, editor);
 	}
 
 	@Override

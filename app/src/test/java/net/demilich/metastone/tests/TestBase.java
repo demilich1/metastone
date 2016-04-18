@@ -1,5 +1,7 @@
 package net.demilich.metastone.tests;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,7 +17,6 @@ import net.demilich.metastone.game.actions.PhysicalAttackAction;
 import net.demilich.metastone.game.behaviour.Behaviour;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.cards.CardProxy;
 import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.cards.HeroCard;
 import net.demilich.metastone.game.cards.MinionCard;
@@ -72,7 +73,13 @@ public class TestBase {
 		Logger root = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
 		root.setLevel(Level.DEBUG);
 
-		new CardProxy();
+		try {
+			CardCatalogue.loadCards();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
 	}
 
 	protected static void attack(GameContext context, Player player, Entity attacker, Entity target) {

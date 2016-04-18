@@ -1,1 +1,6 @@
-apply plugin: 'java'
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'MetaStone Data Files',
+                'Description': 'Cards, Decks and DeckFormat data files.'
+    }
+}

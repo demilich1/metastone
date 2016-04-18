@@ -14,8 +14,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.behaviour.human.HumanMulliganOptions;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.gui.IconFactory;
@@ -55,7 +55,7 @@ public class HumanMulliganView extends BorderPane implements EventHandler<MouseE
 
 		displayCards(options);
 
-		ApplicationFacade.getInstance().sendNotification(GameNotification.SHOW_MODAL_DIALOG, this);
+		NotificationProxy.sendNotification(GameNotification.SHOW_MODAL_DIALOG, this);
 	}
 
 	private void displayCards(final HumanMulliganOptions options) {

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.demilich.metastone.AppConfig;
-import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
@@ -60,7 +60,7 @@ public class GameContextVisualizable extends GameContext {
 		}
 
 		setBlockedByAnimation(true);
-		ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_STATE_UPDATE, this);
+		NotificationProxy.sendNotification(GameNotification.GAME_STATE_UPDATE, this);
 
 		while (blockedByAnimation) {
 			try {
@@ -68,7 +68,7 @@ public class GameContextVisualizable extends GameContext {
 			} catch (InterruptedException e) {
 			}
 		}
-		ApplicationFacade.getInstance().sendNotification(GameNotification.GAME_STATE_LATE_UPDATE, this);
+		NotificationProxy.sendNotification(GameNotification.GAME_STATE_LATE_UPDATE, this);
 	}
 
 	public void setBlockedByAnimation(boolean blockedByAnimation) {

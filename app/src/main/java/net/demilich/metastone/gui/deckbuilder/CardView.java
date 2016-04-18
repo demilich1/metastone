@@ -14,6 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.gui.cards.CardTooltip;
 
@@ -92,7 +93,7 @@ public class CardView extends BorderPane implements EventHandler<MouseEvent> {
 	public void handle(MouseEvent event) {
 		CardTooltip source = (CardTooltip) event.getSource();
 		Card card = source.getCard();
-		ApplicationFacade.getInstance().sendNotification(GameNotification.ADD_CARD_TO_DECK, card);
+		NotificationProxy.sendNotification(GameNotification.ADD_CARD_TO_DECK, card);
 	}
 
 	private void setupCardWidgets() {

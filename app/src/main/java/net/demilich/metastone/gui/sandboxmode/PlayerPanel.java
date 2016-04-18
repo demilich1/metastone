@@ -12,8 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
-import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.logic.GameLogic;
@@ -78,12 +78,12 @@ public class PlayerPanel extends VBox {
 		}
 		Integer newValue = currentManaBox.getSelectionModel().getSelectedItem();
 		SetManaAction setManaAction = new SetManaAction(selectedPlayer.getId(), newValue);
-		ApplicationFacade.getInstance().sendNotification(GameNotification.PERFORM_ACTION, setManaAction);
+		NotificationProxy.sendNotification(GameNotification.PERFORM_ACTION, setManaAction);
 	}
 
 	private void handleEditEntityButton(ActionEvent actionEvent) {
 		EditEntityAction editAction = new EditEntityAction();
-		ApplicationFacade.getInstance().sendNotification(GameNotification.PERFORM_ACTION, editAction);
+		NotificationProxy.sendNotification(GameNotification.PERFORM_ACTION, editAction);
 	}
 
 	private void handleMaxManaChanged(ObservableValue<? extends Number> ov, Number oldIndex, Number newIndex) {
@@ -92,12 +92,12 @@ public class PlayerPanel extends VBox {
 		}
 		Integer newValue = maxManaBox.getSelectionModel().getSelectedItem();
 		SetMaxManaAction setMaxManaAction = new SetMaxManaAction(selectedPlayer.getId(), newValue);
-		ApplicationFacade.getInstance().sendNotification(GameNotification.PERFORM_ACTION, setMaxManaAction);
+		NotificationProxy.sendNotification(GameNotification.PERFORM_ACTION, setMaxManaAction);
 	}
 
 	private void handlePlayerChanged(ObservableValue<? extends Player> ov, Player oldSelected, Player newSelected) {
 		selectedPlayer = newSelected;
-		ApplicationFacade.getInstance().sendNotification(GameNotification.SELECT_PLAYER, selectedPlayer);
+		NotificationProxy.sendNotification(GameNotification.SELECT_PLAYER, selectedPlayer);
 		populateManaBoxes();
 	}
 

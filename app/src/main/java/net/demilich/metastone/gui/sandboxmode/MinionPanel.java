@@ -12,8 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
@@ -56,17 +56,17 @@ public class MinionPanel extends VBox {
 
 	private void handleKillMinionButton(ActionEvent actionEvent) {
 		KillAction killAction = new KillAction();
-		ApplicationFacade.getInstance().sendNotification(GameNotification.PERFORM_ACTION, killAction);
+		NotificationProxy.sendNotification(GameNotification.PERFORM_ACTION, killAction);
 	}
 
 	private void handleSilenceButton(ActionEvent actionEvent) {
 		SilenceAction silenceAction = new SilenceAction();
-		ApplicationFacade.getInstance().sendNotification(GameNotification.PERFORM_ACTION, silenceAction);
+		NotificationProxy.sendNotification(GameNotification.PERFORM_ACTION, silenceAction);
 	}
 
 	private void handleSpawnMinionButton(ActionEvent actionEvent) {
 		MinionCard selectedMinion = minionComboBox.getSelectionModel().getSelectedItem();
-		ApplicationFacade.getInstance().sendNotification(GameNotification.SPAWN_MINION, selectedMinion);
+		NotificationProxy.sendNotification(GameNotification.SPAWN_MINION, selectedMinion);
 	}
 
 	private void onMinionFilterChanged(ObservableValue<? extends String> observable, String oldValue, String newValue) {

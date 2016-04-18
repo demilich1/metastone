@@ -24,8 +24,7 @@ public class MetaStone extends Application {
 		primaryStage.getIcons().add(new Image(IconFactory.getImageUrl("ui/app_icon.png")));
 
 		ApplicationFacade facade = (ApplicationFacade) ApplicationFacade.getInstance();
-		final MetaStone instance = new MetaStone();
-		facade.startUp(instance);
+		facade.startUp();
 
 		StackPane root = new StackPane();
 		root.setAlignment(Pos.CENTER);

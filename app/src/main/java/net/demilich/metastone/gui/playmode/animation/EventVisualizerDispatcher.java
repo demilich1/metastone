@@ -2,8 +2,8 @@ package net.demilich.metastone.gui.playmode.animation;
 
 import java.util.HashMap;
 
-import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.gui.playmode.GameBoardView;
@@ -21,7 +21,7 @@ public class EventVisualizerDispatcher {
 	}
 
 	public void visualize(GameContextVisualizable gameContext, GameBoardView boardView) {
-		ApplicationFacade.getInstance().sendNotification(GameNotification.ANIMATION_STARTED);
+		NotificationProxy.sendNotification(GameNotification.ANIMATION_STARTED);
 		for (GameEvent event : gameContext.getGameEvents()) {
 			IGameEventVisualizer gameEventVisualizer = visualizers.get(event.getEventType());
 			if (gameEventVisualizer == null) {
@@ -30,7 +30,7 @@ public class EventVisualizerDispatcher {
 			gameEventVisualizer.visualizeEvent(gameContext, event, boardView);
 		}
 		gameContext.getGameEvents().clear();
-		ApplicationFacade.getInstance().sendNotification(GameNotification.ANIMATION_COMPLETED);
+		NotificationProxy.sendNotification(GameNotification.ANIMATION_COMPLETED);
 	}
 
 }

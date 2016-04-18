@@ -12,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.MetaDeck;
 import net.demilich.metastone.game.logic.GameLogic;
@@ -64,7 +65,7 @@ public class DeckInfoView extends HBox implements EventHandler<ActionEvent>, IDi
 			dialogNotification.setHandler(this);
 			ApplicationFacade.getInstance().notifyObservers(dialogNotification);
 		} else {
-			ApplicationFacade.getInstance().sendNotification(GameNotification.SAVE_ACTIVE_DECK);
+			NotificationProxy.sendNotification(GameNotification.SAVE_ACTIVE_DECK);
 		}
 
 	}
@@ -72,8 +73,8 @@ public class DeckInfoView extends HBox implements EventHandler<ActionEvent>, IDi
 	@Override
 	public void onDialogClosed(DialogResult result) {
 		if (result == DialogResult.OK) {
-			ApplicationFacade.getInstance().sendNotification(GameNotification.FILL_DECK_WITH_RANDOM_CARDS);
-			ApplicationFacade.getInstance().sendNotification(GameNotification.SAVE_ACTIVE_DECK);
+			NotificationProxy.sendNotification(GameNotification.FILL_DECK_WITH_RANDOM_CARDS);
+			NotificationProxy.sendNotification(GameNotification.SAVE_ACTIVE_DECK);
 		}
 	}
 

@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.gui.common.CardSetStringConverter;
 
@@ -42,7 +43,7 @@ public class CardFilterView extends HBox {
 	}
 
 	private void filterChanged() {
-		ApplicationFacade.getInstance().sendNotification(GameNotification.FILTER_CARDS,
+		NotificationProxy.sendNotification(GameNotification.FILTER_CARDS,
 				new CardFilter(searchField.getText(), cardSetBox.getSelectionModel().getSelectedItem()));
 	}
 

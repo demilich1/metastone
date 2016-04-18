@@ -1,6 +1,5 @@
 package net.demilich.metastone.utils;
 
-import net.demilich.metastone.game.cards.CardProxy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,7 +47,12 @@ public class ResourceLoader {
         Path cardsPath;
         boolean cardsInJar = uri.getScheme().equals("jar");
         if (cardsInJar) {
-            FileSystem fileSystem = FileSystems.newFileSystem(uri, Collections.<String, Object>emptyMap());
+            FileSystem fileSystem;
+            try {
+                fileSystem = FileSystems.getFileSystem(uri);
+            } catch (FileSystemNotFoundException ex) {
+                fileSystem = FileSystems.newFileSystem(uri, Collections.<String, Object>emptyMap());
+            }
             cardsPath = fileSystem.getPath(rootPath);
         } else {
             cardsPath = Paths.get(uri);

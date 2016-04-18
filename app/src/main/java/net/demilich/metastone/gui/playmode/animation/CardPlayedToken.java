@@ -5,8 +5,8 @@ import javafx.event.ActionEvent;
 import javafx.stage.Popup;
 import javafx.stage.Window;
 import javafx.util.Duration;
-import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.gui.cards.CardTooltip;
 import net.demilich.metastone.gui.playmode.GameBoardView;
@@ -28,7 +28,7 @@ public class CardPlayedToken {
 
 		cardToken.setCard(card);
 
-		ApplicationFacade.getInstance().sendNotification(GameNotification.ANIMATION_STARTED);
+		NotificationProxy.sendNotification(GameNotification.ANIMATION_STARTED);
 		FadeTransition animation = new FadeTransition(Duration.seconds(1.2), cardToken);
 		animation.setDelay(Duration.seconds(0.6f));
 		animation.setOnFinished(this::onComplete);
@@ -39,6 +39,6 @@ public class CardPlayedToken {
 
 	private void onComplete(ActionEvent event) {
 		popup.hide();
-		ApplicationFacade.getInstance().sendNotification(GameNotification.ANIMATION_COMPLETED);
+		NotificationProxy.sendNotification(GameNotification.ANIMATION_COMPLETED);
 	}
 }

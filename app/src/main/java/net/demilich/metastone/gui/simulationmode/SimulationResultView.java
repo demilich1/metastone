@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import net.demilich.metastone.NotificationProxy;
 import org.apache.commons.lang3.time.DurationFormatUtils;
 
 import javafx.collections.FXCollections;
@@ -18,7 +19,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
-import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
@@ -97,7 +97,7 @@ public class SimulationResultView extends BorderPane {
 			throw new RuntimeException(exception);
 		}
 
-		doneButton.setOnAction(event -> ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU));
+		doneButton.setOnAction(event -> NotificationProxy.sendNotification(GameNotification.MAIN_MENU));
 
 		player1InfoView = new PlayerInfoView();
 		infoArea.setLeft(player1InfoView);

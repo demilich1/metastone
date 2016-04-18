@@ -9,6 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.decks.Deck;
 
@@ -60,7 +61,7 @@ public class CardListView extends VBox implements EventHandler<MouseEvent> {
 
 		}
 		if (card != null) {
-			ApplicationFacade.getInstance().sendNotification(GameNotification.REMOVE_CARD_FROM_DECK, card);
+			NotificationProxy.sendNotification(GameNotification.REMOVE_CARD_FROM_DECK, card);
 		}
 	}
 

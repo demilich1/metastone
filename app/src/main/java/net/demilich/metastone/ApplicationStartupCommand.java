@@ -2,7 +2,7 @@ package net.demilich.metastone;
 
 import net.demilich.nittygrittymvc.SimpleCommand;
 import net.demilich.nittygrittymvc.interfaces.INotification;
-import net.demilich.metastone.game.cards.CardProxy;
+import net.demilich.metastone.gui.cards.CardProxy;
 import net.demilich.metastone.gui.autoupdate.AutoUpdateMediator;
 import net.demilich.metastone.gui.deckbuilder.DeckFormatProxy;
 import net.demilich.metastone.gui.deckbuilder.DeckProxy;

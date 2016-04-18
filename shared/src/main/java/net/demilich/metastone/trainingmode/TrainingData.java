@@ -1,4 +1,4 @@
-package net.demilich.metastone.gui.trainingmode;
+package net.demilich.metastone.trainingmode;
 
 import net.demilich.metastone.game.behaviour.threat.FeatureVector;
 
