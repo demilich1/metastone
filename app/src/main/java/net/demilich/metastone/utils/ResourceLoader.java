@@ -48,7 +48,12 @@ public class ResourceLoader {
         Path cardsPath;
         boolean cardsInJar = uri.getScheme().equals("jar");
         if (cardsInJar) {
-            FileSystem fileSystem = FileSystems.newFileSystem(uri, Collections.<String, Object>emptyMap());
+            FileSystem fileSystem;
+            try {
+                fileSystem = FileSystems.getFileSystem(uri);
+            } catch (FileSystemNotFoundException ex) {
+                fileSystem = FileSystems.newFileSystem(uri, Collections.<String, Object>emptyMap());
+            }
             cardsPath = fileSystem.getPath(rootPath);
         } else {
             cardsPath = Paths.get(uri);
