@@ -2,14 +2,30 @@ package net.demilich.metastone.game.cards;
 
 import java.util.function.Predicate;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.cards.desc.CardDesc;
+import net.demilich.metastone.utils.ResourceLoader;
+import net.demilich.metastone.utils.ResourceInputStream;
 
 public class CardCatalogue {
 
 	private final static CardCollection cards = new CardCollection();
-
+	private static final String CARDS_FOLDER = File.separator + "cards";
+	private static Logger logger = LoggerFactory.getLogger(CardCatalogue.class);
 
 	public static void add(Card card) {
 		cards.add(card);
@@ -102,5 +118,34 @@ public class CardCatalogue {
 			}
 		}
 		return result;
+	}
+
+	public static void loadCards() throws IOException, URISyntaxException {
+
+		// load cards from cards.jar on the classpath
+		Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(CARDS_FOLDER, false);
+
+		// TODO: read cards from ~/metastone/cards
+
+		Map<String, CardDesc> cardDesc = new HashMap<String, CardDesc>();
+		CardParser cardParser = new CardParser();
+		for (ResourceInputStream resourceInputStream : inputStreams) {
+			try {
+				CardDesc desc = cardParser.parseCard(resourceInputStream);
+				if (cardDesc.containsKey(desc.id)) {
+					logger.error("Card id {} is duplicated!", desc.id);
+				}
+				cardDesc.put(desc.id, desc);
+			} catch (Exception e) {
+				logger.error("Trouble reading " + resourceInputStream.fileName);
+				throw e;
+			}
+		}
+
+		for (CardDesc desc : cardDesc.values()) {
+			Card instance = desc.createInstance();
+			CardCatalogue.add(instance);
+			logger.debug("Adding {} to CardCatalogue", instance);
+		}
 	}
 }
