@@ -1,6 +1,7 @@
 {
 	"id": "minion_princess_huhuran",
 	"name": "Princess Huhuran",
+	"type": "MINION",
 	"baseManaCost": 5,
 	"baseAttack": 6,
 	"baseHp": 5,
