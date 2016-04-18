@@ -201,5 +201,12 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 	public boolean oneTurnOnly() {
 		return oneTurn;
 	}
+	
+	public boolean canFireCondition(GameEvent event) {
+		if (primaryTrigger.canFireCondition(event) || (secondaryTrigger != null && secondaryTrigger.canFireCondition(event))) {
+			return true;
+		}
+		return false;
+	}
 
 }
