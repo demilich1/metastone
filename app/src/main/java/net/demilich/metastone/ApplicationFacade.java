@@ -48,6 +48,8 @@ public class ApplicationFacade extends Facade<GameNotification> {
 	}
 
 	public ApplicationFacade() {
+		NotificationProxy.init(this);
+
 		registerCommand(GameNotification.APPLICATION_STARTUP, new ApplicationStartupCommand());
 		registerCommand(GameNotification.START_GAME, new StartGameCommand());
 		registerCommand(GameNotification.PLAY_GAME, new PlayGameCommand());
