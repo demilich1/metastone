@@ -1,0 +1,22 @@
+{
+	"id": "minion_mad_frost_magician",
+	"name": "Mad Frost Magician",
+	"type": "MINION",
+	"baseManaCost": 4,
+	"baseAttack": 2,
+	"baseHp": 4,
+	"heroClass": "MAGE",
+	"rarity": "RARE",
+	"description": "After you cast a spell, Freeze a random enemy.",
+	"battlecry": {
+		"spell": {
+			"class": "AddAttributeSpell",
+			"attribute": "FROZEN",
+			"target": "ENEMY_CHARACTERS",
+			"randomTarget": true
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}
