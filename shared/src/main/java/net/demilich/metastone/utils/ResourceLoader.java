@@ -1,6 +1,5 @@
 package net.demilich.metastone.utils;
 
-import net.demilich.metastone.game.cards.CardProxy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

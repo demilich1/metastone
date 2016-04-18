@@ -2,7 +2,6 @@ package net.demilich.metastone.tests;
 
 import net.demilich.metastone.game.cards.CardParser;
 import net.demilich.metastone.utils.ResourceInputStream;
-import net.demilich.metastone.utils.ResourceLoader;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.DirectoryFileFilter;
 import org.apache.commons.io.filefilter.RegexFileFilter;

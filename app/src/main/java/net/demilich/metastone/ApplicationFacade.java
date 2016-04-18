@@ -91,7 +91,7 @@ public class ApplicationFacade extends Facade<GameNotification> {
 		registerCommand(GameNotification.REQUEST_TRAINING_DATA, new RequestTrainingDataCommand());
 	}
 
-	public void startUp(MetaStone main) {
+	public void startUp() {
 		sendNotification(GameNotification.APPLICATION_STARTUP);
 	}
 
