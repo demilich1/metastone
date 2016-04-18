@@ -1,4 +1,4 @@
-package net.demilich.metastone.gui.trainingmode;
+package net.demilich.metastone.trainingmode;
 
 import net.demilich.nittygrittymvc.Notification;
 import net.demilich.metastone.GameNotification;
