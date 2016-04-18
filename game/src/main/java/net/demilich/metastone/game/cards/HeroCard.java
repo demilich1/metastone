@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.commons.lang3.NotImplementedException;
-
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.cards.desc.HeroCardDesc;
@@ -44,7 +42,7 @@ public class HeroCard extends Card {
 
 	@Override
 	public PlayCardAction play() {
-		throw new NotImplementedException("Hero cards cannot be played");
+		throw new UnsupportedOperationException("Hero cards cannot be played");
 	}
 
 }
