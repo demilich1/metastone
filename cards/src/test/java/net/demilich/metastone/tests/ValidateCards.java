@@ -16,7 +16,7 @@ import java.lang.reflect.Array;
 import java.util.List;
 
 /**
- * This test will iterate through all the cards in the "{project_root}/cards" dir
+ * This test will iterate through all the cards in the cards resources dir
  * and invoke the CardParser.parseCard(cardFile) method to ensure that
  * each card is well formed and can be parsed.
  */
