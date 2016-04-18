@@ -25,7 +25,7 @@ public class TestSpellCard extends SpellCard {
 
 	public TestSpellCard(SpellDesc spell) {
 		super(getDesc());
-		setDescription("This spell can have various effects and should only be used in the context of unit tests.");
+		setDescription("This spell can have various effects and should only be used in the context of unit net.demilich.metastone.tests.");
 		setCollectible(false);
 
 		setSpell(spell);

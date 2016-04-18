@@ -73,7 +73,7 @@ public class TechnicalTests extends TestBase {
 		// after playing a spell:
 		// all three pyromancers should have triggered, even though all are dead
 		// after the first two
-		// this tests that minions are only removed from board after all effects
+		// this net.demilich.metastone.tests that minions are only removed from board after all effects
 		// are resolved
 		for (Minion minion : copyOfMinionList) {
 			Assert.assertEquals(minion.getHp(), -1);
