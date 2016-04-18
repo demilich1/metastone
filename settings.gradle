@@ -1,1 +1,1 @@
-include 'game', 'cards', 'app'
+include 'shared', 'game', 'cards', 'app'
