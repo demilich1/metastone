@@ -59,7 +59,7 @@ public class SpellUtils {
 	public static CardCollection getCards(CardCollection source, Predicate<Card> filter) {
 		CardCollection result = new CardCollection();
 		for (Card card : source) {
-			if (filter.test(card)) {
+			if (filter == null || filter.test(card)) {
 				result.add(card);
 			}
 		}
@@ -176,7 +176,7 @@ public class SpellUtils {
 
 	public static boolean holdsCardOfType(Player player, CardType cardType) {
 		for (Card card : player.getHand()) {
-			if (card.getCardType() == cardType) {
+			if (card.getCardType().isCardType(cardType)) {
 				return true;
 			}
 		}
