@@ -13,6 +13,7 @@ jar {
 }
 
 dependencies {
+	compile project(':game')
 	compile project(':cards')
 	compile files('lib/nitty-gritty-mvc.jar', 'lib/controlsfx-8.40.10-20151003.010657-492.jar')
 	compile group: 'com.google.code.gson', name: 'gson', version: '2.3.1'
