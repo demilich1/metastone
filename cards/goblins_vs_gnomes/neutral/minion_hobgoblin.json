@@ -12,7 +12,7 @@
 		"eventTrigger": {
 			"class": "MinionPlayedTrigger",
 			"targetPlayer": "SELF",
-			"condition": {
+			"queueCondition": {
 				"class": "AttributeCondition",
 				"value": 1,
 				"attribute": "ATTACK",

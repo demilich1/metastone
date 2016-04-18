@@ -12,7 +12,7 @@
 		"eventTrigger": {
 			"class": "SpellCastedTrigger",
 			"sourcePlayer": "SELF",
-			"condition": {
+			"queueCondition": {
 				"class": "ManaCostCondition",
 				"value": 1
 			}

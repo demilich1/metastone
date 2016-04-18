@@ -12,7 +12,7 @@
 		"eventTrigger": {
 			"class": "CardPlayedTrigger",
 			"targetPlayer": "SELF",
-			"condition": {
+			"queueCondition": {
 				"class": "AttributeCondition",
 				"attribute": "BATTLECRY",
 				"operation": "HAS"

@@ -12,7 +12,7 @@
 		"eventTrigger": {
 			"class": "DamageReceivedTrigger",
 			"hostTargetType": "IGNORE_OTHER_TARGETS",
-			"condition": {
+			"fireCondition": {
 				"class": "IsDeadCondition",
 				"invert": true
 			}
