@@ -1,6 +1,8 @@
 package net.demilich.metastone.tests;
 
 import net.demilich.metastone.game.cards.CardParser;
+import net.demilich.metastone.utils.ResourceInputStream;
+import net.demilich.metastone.utils.ResourceLoader;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.DirectoryFileFilter;
 import org.apache.commons.io.filefilter.RegexFileFilter;
@@ -9,6 +11,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.List;
@@ -20,7 +23,7 @@ import java.util.List;
  */
 public class ValidateCards {
 
-    private static final String CARDS_DIR = "cards"; // relative path from project root
+    private static final String CARDS_DIR = "../cards/src/main/resources/cards/"; // relative path from project root
     private static final CardParser CARD_PARSER = new CardParser();
     private static final List<File> ALL_CARD_FILES;
 
@@ -49,7 +52,7 @@ public class ValidateCards {
     @Test(dataProvider = "CardProvider")
     public void validateCard(File cardFile) throws FileNotFoundException {
         try {
-            CARD_PARSER.parseCard(cardFile);
+            CARD_PARSER.parseCard(new ResourceInputStream(cardFile.getName(), new FileInputStream(cardFile), true));
         } catch (Exception ex) {
             System.err.println(ex);
             Assert.fail(cardFile.getName(), ex);

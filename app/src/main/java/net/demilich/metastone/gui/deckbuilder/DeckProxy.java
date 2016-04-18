@@ -2,8 +2,10 @@ package net.demilich.metastone.gui.deckbuilder;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
@@ -14,7 +16,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.io.FileUtils;
+import net.demilich.metastone.utils.ResourceInputStream;
+import net.demilich.metastone.utils.ResourceLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,7 +44,8 @@ public class DeckProxy extends Proxy<GameNotification> {
 
 	public static final String NAME = "DeckProxy";
 	
-	private static final String DECKS_FOLDER = "./decks/";
+	private static final String USER_HOME_METASTONE = System.getProperty("user.home") + File.separator + "metastone";
+	private static final String DECKS_FOLDER = File.separator + "decks";
 
 	private final List<Deck> decks = new ArrayList<Deck>();
 	private final IDeckValidator deckValidator = new DefaultDeckValidator();
@@ -108,26 +112,33 @@ public class DeckProxy extends Proxy<GameNotification> {
 		getFacade().sendNotification(GameNotification.DECKS_LOADED, decks);
 	}
 
-	public void loadDecks() throws FileNotFoundException {
+	public void loadDecks() throws IOException, URISyntaxException {
 		decks.clear();
-		File folder = new File(DECKS_FOLDER);
-		if (!folder.exists()) {
-			logger.warn("/decks directory not found");
-			return;
+
+
+		// load deck from cards.jar on the classpath
+		loadStandardDecks(ResourceLoader.loadJsonInputStreams(DECKS_FOLDER, false),
+				new GsonBuilder().setPrettyPrinting().create());
+
+		loadMetaDecks(ResourceLoader.loadJsonInputStreams(DECKS_FOLDER, false),
+				new GsonBuilder().setPrettyPrinting().create());
+
+		// load decks from ~/metastone/decks on the filesystem
+		if (Paths.get(USER_HOME_METASTONE + DECKS_FOLDER).toFile().exists()) {
+			loadStandardDecks(ResourceLoader.loadJsonInputStreams(USER_HOME_METASTONE + DECKS_FOLDER, true),
+					new GsonBuilder().setPrettyPrinting().create());
+
+			loadMetaDecks(ResourceLoader.loadJsonInputStreams(USER_HOME_METASTONE + DECKS_FOLDER, true),
+					new GsonBuilder().setPrettyPrinting().create());
 		}
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		Collection<File> files = FileUtils.listFiles(folder, new String[] { "json" }, true);
-		loadStandardDecks(files, gson);
-		loadMetaDecks(files, gson);
 	}
 
-	private void loadMetaDecks(Collection<File> files, Gson gson) throws FileNotFoundException {
-		for (File file : files) {
-			FileReader reader = new FileReader(file);
-			HashMap<String, Object> map = gson.fromJson(reader, new TypeToken<HashMap<String, Object>>() {
-			}.getType());
+	private void loadMetaDecks(Collection<ResourceInputStream> inputStreams, Gson gson) throws IOException {
+		for (ResourceInputStream resourceInputStream : inputStreams) {
+			Reader reader = new InputStreamReader(resourceInputStream.inputStream);
+			HashMap<String, Object> map = gson.fromJson(reader, new TypeToken<HashMap<String, Object>>() {}.getType());
 			if (!map.containsKey("heroClass")) {
-				logger.error("Deck {} does not specify a value for 'heroClass' and is therefor not valid", file.getName());
+				logger.error("Deck {} does not specify a value for 'heroClass' and is therefor not valid", resourceInputStream.fileName);
 				continue;
 			}
 			String deckName = (String) map.get("name");
@@ -138,37 +149,33 @@ public class DeckProxy extends Proxy<GameNotification> {
 				deck = parseMetaDeck(map);
 			}
 			deck.setName(deckName);
-			deck.setFilename(file.getName());
+			deck.setFilename(resourceInputStream.fileName);
 			decks.add(deck);
 		}
 	}
 
-	private void loadStandardDecks(Collection<File> files, Gson gson) throws FileNotFoundException {
-		for (File file : files) {
-			try {
-				FileReader reader = new FileReader(file);
-				HashMap<String, Object> map = gson.fromJson(reader, new TypeToken<HashMap<String, Object>>() {
-				}.getType());
-				if (!map.containsKey("heroClass")) {
-					logger.error("Deck {} does not speficy a value for 'heroClass' and is therefor not valid", file.getName());
-					continue;
-				}
-				HeroClass heroClass = HeroClass.valueOf((String) map.get("heroClass"));
-				String deckName = (String) map.get("name");
-				Deck deck = null;
-				// this one is a meta deck; we need to parse those after all other
-				// decks are done
-				if (map.containsKey("decks")) {
-					continue;
-				} else {
-					deck = parseStandardDeck(heroClass, map);
-				}
-				deck.setName(deckName);
-				deck.setFilename(file.getName());
-				decks.add(deck);
-			} catch (Exception e) {
-				logger.error("Error reading file {}", file.getName());
+	private void loadStandardDecks(Collection<ResourceInputStream> inputStreams, Gson gson) throws FileNotFoundException {
+		for (ResourceInputStream resourceInputStream : inputStreams) {
+
+			Reader reader = new InputStreamReader(resourceInputStream.inputStream);
+			HashMap<String, Object> map = gson.fromJson(reader, new TypeToken<HashMap<String, Object>>() {}.getType());
+			if (!map.containsKey("heroClass")) {
+				logger.error("Deck {} does not speficy a value for 'heroClass' and is therefor not valid", resourceInputStream.fileName);
+				continue;
 			}
+			HeroClass heroClass = HeroClass.valueOf((String) map.get("heroClass"));
+			String deckName = (String) map.get("name");
+			Deck deck = null;
+			// this one is a meta deck; we need to parse those after all other
+			// decks are done
+			if (map.containsKey("decks")) {
+				continue;
+			} else {
+				deck = parseStandardDeck(heroClass, map);
+			}
+			deck.setName(deckName);
+			deck.setFilename(resourceInputStream.fileName);
+			decks.add(deck);
 		}
 	}
 
@@ -240,10 +247,13 @@ public class DeckProxy extends Proxy<GameNotification> {
 
 		String jsonData = gson.toJson(saveData);
 		try {
+			// ensure user's personal deck dir exists
+			Files.createDirectories(Paths.get(USER_HOME_METASTONE + DECKS_FOLDER));
+
 			String filename = deck.getName().toLowerCase();
 			filename = filename.replaceAll(" ", "_");
 			filename = filename.replaceAll("\\W+", "");
-			filename = DECKS_FOLDER + filename + ".json";
+			filename = USER_HOME_METASTONE + DECKS_FOLDER + File.separator + filename + ".json";
 			Path path = Paths.get(filename);
 			Files.write(path, jsonData.getBytes());
 			deck.setFilename(path.getFileName().toString());

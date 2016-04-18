@@ -24,6 +24,10 @@ import org.apache.commons.io.FileUtils;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 
+/**
+ * TODO:  not sure how this is used.
+ * Paths in this file are no longer valid since cards, decks and deckformat are loaded from jar resources
+ */
 public class DevCardTools {
 
 	public static void assignUniqueIdToEachCard() {

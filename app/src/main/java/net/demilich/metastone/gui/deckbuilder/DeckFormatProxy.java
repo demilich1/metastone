@@ -2,14 +2,18 @@ package net.demilich.metastone.gui.deckbuilder;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.io.FileUtils;
+import net.demilich.metastone.utils.ResourceInputStream;
+import net.demilich.metastone.utils.ResourceLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +32,7 @@ public class DeckFormatProxy extends Proxy<GameNotification> {
 
 	public static final String NAME = "DeckFormatProxy";
 	
-	private static final String DECK_FORMATS_FOLDER = "./formats/";
+	private static final String DECK_FORMATS_FOLDER = File.separator + "formats";
 
 	private final List<DeckFormat> deckFormats = new ArrayList<DeckFormat>();
 
@@ -49,34 +53,33 @@ public class DeckFormatProxy extends Proxy<GameNotification> {
 		return deckFormats;
 	}
 
-	public void loadDeckFormats() throws FileNotFoundException {
+	public void loadDeckFormats() throws IOException, URISyntaxException {
 		deckFormats.clear();
-		File folder = new File(DECK_FORMATS_FOLDER);
-		if (!folder.exists()) {
-			logger.warn("/decks/formats directory not found");
-			return;
-		}
+
+		// load the deck formats from the resources in cards.jar file on the classpath
+		Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(DECK_FORMATS_FOLDER, false);
+
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		Collection<File> files = FileUtils.listFiles(folder, new String[] { "json" }, true);
-		loadDeckFormats(files, gson);
+		loadDeckFormats(inputStreams, gson);
 	}
 
-	private void loadDeckFormats(Collection<File> files, Gson gson) throws FileNotFoundException {
-		for (File file : files) {
-			FileReader reader = new FileReader(file);
-			HashMap<String, Object> map = gson.fromJson(reader, new TypeToken<HashMap<String, Object>>() {
-			}.getType());
+	private void loadDeckFormats(Collection<ResourceInputStream> inputStreams, Gson gson) throws FileNotFoundException {
+		for (ResourceInputStream resourceInputStream : inputStreams) {
+			Reader reader = new InputStreamReader(resourceInputStream.inputStream);
+			HashMap<String, Object> map = gson.fromJson(reader, new TypeToken<HashMap<String, Object>>() {}.getType());
+
 			if (!map.containsKey("sets")) {
-				logger.error("Deck {} does not specify a value for 'sets' and is therefore not valid", file.getName());
+				logger.error("Deck {} does not specify a value for 'sets' and is therefore not valid", resourceInputStream.fileName);
 				continue;
 			}
+
 			String deckName = (String) map.get("name");
 			DeckFormat deckFormat = null;
 			// this one is a meta deck; we need to parse those after all other
 			// decks are done
 			deckFormat = parseStandardDeckFormat(map);
 			deckFormat.setName(deckName);
-			deckFormat.setFilename(file.getName());
+			deckFormat.setFilename(resourceInputStream.fileName);
 			deckFormats.add(deckFormat);
 		}
 	}

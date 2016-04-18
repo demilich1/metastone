@@ -1,11 +1,11 @@
 package net.demilich.metastone.game.cards;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.Map;
 
+import net.demilich.metastone.utils.ResourceInputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,12 +58,11 @@ public class CardParser {
 		gson = gsonBuilder.create();
 	}
 
-	public CardDesc parseCard(File file) throws FileNotFoundException {
-		FileReader reader = new FileReader(file);
-		JsonElement jsonData = gson.fromJson(reader, JsonElement.class);
+	public CardDesc parseCard(ResourceInputStream resourceInputStream) throws FileNotFoundException {
+		JsonElement jsonData = gson.fromJson(new InputStreamReader(resourceInputStream.inputStream), JsonElement.class);
 
 		if (!jsonData.getAsJsonObject().has("type")) {
-			throw new RuntimeException(file.getName() + " is missing 'type' attribute!");
+			throw new RuntimeException(resourceInputStream.fileName + " is missing 'type' attribute!");
 		}
 
 		CardType type = CardType.valueOf((String) jsonData.getAsJsonObject().get("type").getAsString());

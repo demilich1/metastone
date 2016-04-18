@@ -1,6 +1,8 @@
 package net.demilich.metastone.gui.deckbuilder;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 import net.demilich.nittygrittymvc.SimpleCommand;
 import net.demilich.nittygrittymvc.interfaces.INotification;
@@ -15,6 +17,10 @@ public class LoadDecksCommand extends SimpleCommand<GameNotification> {
 		try {
 			deckProxy.loadDecks();
 		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 

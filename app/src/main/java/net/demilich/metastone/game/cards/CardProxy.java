@@ -1,12 +1,14 @@
 package net.demilich.metastone.game.cards;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.io.FileUtils;
+import net.demilich.metastone.utils.ResourceInputStream;
+import net.demilich.metastone.utils.ResourceLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +19,7 @@ import net.demilich.nittygrittymvc.Proxy;
 public class CardProxy extends Proxy<GameNotification> {
 
 	public final static String NAME = "CardProxy";
+	private static final String CARDS_FOLDER = File.separator + "cards";
 
 	private static Logger logger = LoggerFactory.getLogger(CardProxy.class);
 
@@ -24,30 +27,29 @@ public class CardProxy extends Proxy<GameNotification> {
 		super(NAME);
 		try {
 			loadCards();
-		} catch (FileNotFoundException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void loadCards() throws FileNotFoundException {
-		Map<String, CardDesc> cardDesc = new HashMap<String, CardDesc>();
-		File folder = new File("./cards");
-		if (!folder.exists()) {
-			logger.error("/cards directory not found");
-			return;
-		}
+	private void loadCards() throws IOException, URISyntaxException {
 
-		Collection<File> files = FileUtils.listFiles(folder, new String[] { "json" }, true);
+		// load cards from cards.jar on the classpath
+		Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(CARDS_FOLDER, false);
+
+		// TODO: read cards from ~/metastone/cards
+
+		Map<String, CardDesc> cardDesc = new HashMap<String, CardDesc>();
 		CardParser cardParser = new CardParser();
-		for (File file : files) {
+		for (ResourceInputStream resourceInputStream : inputStreams) {
 			try {
-				CardDesc desc = cardParser.parseCard(file);
+				CardDesc desc = cardParser.parseCard(resourceInputStream);
 				if (cardDesc.containsKey(desc.id)) {
 					logger.error("Card id {} is duplicated!", desc.id);
 				}
 				cardDesc.put(desc.id, desc);
 			} catch (Exception e) {
-				logger.error("Trouble reading " + file.getName());
+				logger.error("Trouble reading " + resourceInputStream.fileName);
 				throw e;
 			}
 		}
