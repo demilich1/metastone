@@ -4,7 +4,7 @@
 	"baseManaCost": 5,
 	"baseAttack": 6,
 	"baseHp": 5,
-	"heroClass": "DRUID",
+	"heroClass": "HUNTER",
 	"rarity": "LEGENDARY",
 	"description": "Battlecry: Trigger a friendly minion's Deathrattle effect immediately.",
 	"battlecry": {
