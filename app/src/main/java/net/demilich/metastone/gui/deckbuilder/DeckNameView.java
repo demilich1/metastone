@@ -9,8 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.gui.IconFactory;
 
@@ -38,7 +38,7 @@ public class DeckNameView extends HBox implements ChangeListener<String> {
 
 	@Override
 	public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-		ApplicationFacade.getInstance().sendNotification(GameNotification.CHANGE_DECK_NAME, newValue);
+		NotificationProxy.sendNotification(GameNotification.CHANGE_DECK_NAME, newValue);
 	}
 
 	public void updateDeck(Deck deck) {

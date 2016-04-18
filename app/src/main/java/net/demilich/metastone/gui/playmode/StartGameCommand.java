@@ -1,8 +1,8 @@
 package net.demilich.metastone.gui.playmode;
 
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.nittygrittymvc.SimpleCommand;
 import net.demilich.nittygrittymvc.interfaces.INotification;
-import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -30,7 +30,7 @@ public class StartGameCommand extends SimpleCommand<GameNotification> {
 
 			@Override
 			public void run() {
-				ApplicationFacade.getInstance().sendNotification(GameNotification.PLAY_GAME, newGame);
+				NotificationProxy.sendNotification(GameNotification.PLAY_GAME, newGame);
 			}
 		});
 		t.setDaemon(true);

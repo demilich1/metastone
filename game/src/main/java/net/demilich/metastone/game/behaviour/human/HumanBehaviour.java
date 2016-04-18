@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.demilich.metastone.AppConfig;
-import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
@@ -31,7 +31,7 @@ public class HumanBehaviour extends Behaviour implements IActionSelectionListene
 		}
 		waitingForInput = true;
 		HumanMulliganOptions options = new HumanMulliganOptions(player, this, cards);
-		ApplicationFacade.getInstance().sendNotification(GameNotification.HUMAN_PROMPT_FOR_MULLIGAN, options);
+		NotificationProxy.sendNotification(GameNotification.HUMAN_PROMPT_FOR_MULLIGAN, options);
 		while (waitingForInput) {
 			try {
 				Thread.sleep(AppConfig.DEFAULT_SLEEP_DELAY);
@@ -51,7 +51,7 @@ public class HumanBehaviour extends Behaviour implements IActionSelectionListene
 	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
 		waitingForInput = true;
 		HumanActionOptions options = new HumanActionOptions(this, context, player, validActions);
-		ApplicationFacade.getInstance().sendNotification(GameNotification.HUMAN_PROMPT_FOR_ACTION, options);
+		NotificationProxy.sendNotification(GameNotification.HUMAN_PROMPT_FOR_ACTION, options);
 		while (waitingForInput) {
 			try {
 				Thread.sleep(AppConfig.DEFAULT_SLEEP_DELAY);

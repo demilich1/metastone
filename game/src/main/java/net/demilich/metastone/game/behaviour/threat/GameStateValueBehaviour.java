@@ -3,10 +3,12 @@ package net.demilich.metastone.game.behaviour.threat;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.demilich.metastone.NotificationProxy;
+import net.demilich.metastone.trainingmode.RequestTrainingDataNotification;
+import net.demilich.metastone.trainingmode.TrainingData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.ActionType;
@@ -15,8 +17,6 @@ import net.demilich.metastone.game.behaviour.Behaviour;
 import net.demilich.metastone.game.behaviour.IBehaviour;
 import net.demilich.metastone.game.behaviour.heuristic.IGameStateHeuristic;
 import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.gui.trainingmode.RequestTrainingDataNotification;
-import net.demilich.metastone.gui.trainingmode.TrainingData;
 
 public class GameStateValueBehaviour extends Behaviour {
 
@@ -121,7 +121,7 @@ public class GameStateValueBehaviour extends Behaviour {
 		}
 
 		RequestTrainingDataNotification request = new RequestTrainingDataNotification(player.getDeckName(), this::answerTrainingData);
-		ApplicationFacade.getInstance().notifyObservers(request);
+		NotificationProxy.notifyObservers(request);
 	}
 
 }

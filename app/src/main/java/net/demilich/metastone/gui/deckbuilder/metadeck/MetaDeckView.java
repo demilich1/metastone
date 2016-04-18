@@ -11,8 +11,8 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.MetaDeck;
 import net.demilich.metastone.gui.IconFactory;
@@ -59,7 +59,7 @@ public class MetaDeckView extends BorderPane {
 			deckButton.setMinHeight(120);
 			deckButton.setWrapText(true);
 			deckButton.setContentDisplay(ContentDisplay.LEFT);
-			deckButton.setOnAction(event -> ApplicationFacade.getInstance().sendNotification(GameNotification.ADD_DECK_TO_META_DECK, deck));
+			deckButton.setOnAction(event -> NotificationProxy.sendNotification(GameNotification.ADD_DECK_TO_META_DECK, deck));
 			deckButton.setUserData(deck);
 			contentPane.getChildren().add(deckButton);
 		}

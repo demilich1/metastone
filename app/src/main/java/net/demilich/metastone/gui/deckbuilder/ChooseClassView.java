@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.MetaDeck;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -95,6 +96,6 @@ public class ChooseClassView extends BorderPane implements EventHandler<ActionEv
 		} else if (event.getSource() == collectionButton) {
 			newDeck = new MetaDeck();
 		}
-		ApplicationFacade.getInstance().sendNotification(GameNotification.SET_ACTIVE_DECK, newDeck);
+		NotificationProxy.sendNotification(GameNotification.SET_ACTIVE_DECK, newDeck);
 	}
 }

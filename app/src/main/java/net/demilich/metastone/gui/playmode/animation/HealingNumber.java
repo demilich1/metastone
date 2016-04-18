@@ -6,8 +6,8 @@ import javafx.scene.CacheHint;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.gui.playmode.GameToken;
 
 public class HealingNumber extends Text {
@@ -26,7 +26,7 @@ public class HealingNumber extends Text {
 
 		parent.getAnchor().getChildren().add(this);
 
-		ApplicationFacade.getInstance().sendNotification(GameNotification.ANIMATION_STARTED);
+		NotificationProxy.sendNotification(GameNotification.ANIMATION_STARTED);
 		TranslateTransition animation = new TranslateTransition(Duration.seconds(0.5), this);
 		animation.setToY(-30);
 		animation.setOnFinished(this::onComplete);
@@ -35,6 +35,6 @@ public class HealingNumber extends Text {
 
 	private void onComplete(ActionEvent event) {
 		parent.getAnchor().getChildren().remove(this);
-		ApplicationFacade.getInstance().sendNotification(GameNotification.ANIMATION_COMPLETED);
+		NotificationProxy.sendNotification(GameNotification.ANIMATION_COMPLETED);
 	}
 }

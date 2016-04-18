@@ -10,8 +10,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.decks.Deck;
 
 public class DeckListView extends VBox implements EventHandler<MouseEvent> {
@@ -30,7 +30,7 @@ public class DeckListView extends VBox implements EventHandler<MouseEvent> {
 			throw new RuntimeException(exception);
 		}
 
-		newDeckButton.setOnAction(actionEvent -> ApplicationFacade.getInstance().sendNotification(GameNotification.CREATE_NEW_DECK));
+		newDeckButton.setOnAction(actionEvent -> NotificationProxy.sendNotification(GameNotification.CREATE_NEW_DECK));
 		setCache(true);
 	}
 
@@ -55,7 +55,7 @@ public class DeckListView extends VBox implements EventHandler<MouseEvent> {
 	@Override
 	public void handle(MouseEvent event) {
 		DeckEntry deckEntry = (DeckEntry) event.getSource();
-		ApplicationFacade.getInstance().sendNotification(GameNotification.SET_ACTIVE_DECK, deckEntry.getDeck());
+		NotificationProxy.sendNotification(GameNotification.SET_ACTIVE_DECK, deckEntry.getDeck());
 	}
 
 }

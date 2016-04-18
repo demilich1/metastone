@@ -20,6 +20,7 @@ import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
 import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 
 public class BattleOfDecksResultView extends BorderPane {
 
@@ -88,7 +89,7 @@ public class BattleOfDecksResultView extends BorderPane {
 		rankingTable.getColumns().setAll(nameColumn, winRateColumn);
 		rankingTable.getColumns().get(1).setSortType(SortType.DESCENDING);
 
-		backButton.setOnAction(event -> ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU));
+		backButton.setOnAction(event -> NotificationProxy.sendNotification(GameNotification.MAIN_MENU));
 	}
 
 	@SuppressWarnings("unchecked")

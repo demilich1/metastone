@@ -11,8 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import net.demilich.metastone.AppConfig;
-import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 
 public class MainMenuView extends BorderPane {
 
@@ -52,19 +52,19 @@ public class MainMenuView extends BorderPane {
 			throw new RuntimeException(exception);
 		}
 
-		deckBuilderButton.setOnAction(event -> ApplicationFacade.getInstance().sendNotification(GameNotification.DECK_BUILDER_SELECTED));
+		deckBuilderButton.setOnAction(event -> NotificationProxy.sendNotification(GameNotification.DECK_BUILDER_SELECTED));
 
-		playModeButton.setOnAction(event -> ApplicationFacade.getInstance().sendNotification(GameNotification.PLAY_MODE_SELECTED));
+		playModeButton.setOnAction(event -> NotificationProxy.sendNotification(GameNotification.PLAY_MODE_SELECTED));
 
 		simulationModeButton
-				.setOnAction(event -> ApplicationFacade.getInstance().sendNotification(GameNotification.SIMULATION_MODE_SELECTED));
+				.setOnAction(event -> NotificationProxy.sendNotification(GameNotification.SIMULATION_MODE_SELECTED));
 
-		sandboxModeButton.setOnAction(event -> ApplicationFacade.getInstance().sendNotification(GameNotification.SANDBOX_MODE_SELECTED));
+		sandboxModeButton.setOnAction(event -> NotificationProxy.sendNotification(GameNotification.SANDBOX_MODE_SELECTED));
 
-		trainingModeButton.setOnAction(event -> ApplicationFacade.getInstance().sendNotification(GameNotification.TRAINING_MODE_SELECTED));
+		trainingModeButton.setOnAction(event -> NotificationProxy.sendNotification(GameNotification.TRAINING_MODE_SELECTED));
 
 		battleOfDecksButton
-				.setOnAction(event -> ApplicationFacade.getInstance().sendNotification(GameNotification.BATTLE_OF_DECKS_SELECTED));
+				.setOnAction(event -> NotificationProxy.sendNotification(GameNotification.BATTLE_OF_DECKS_SELECTED));
 
 		if (!AppConfig.DEV_BUILD) {
 			trainingModeButton.setVisible(false);

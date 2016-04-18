@@ -15,8 +15,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.layout.BorderPane;
-import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -65,7 +65,7 @@ public class TrainingConfigView extends BorderPane {
 		addButton.setOnAction(this::handleAddButton);
 		removeButton.setOnAction(this::handleRemoveButton);
 
-		backButton.setOnAction(event -> ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU));
+		backButton.setOnAction(event -> NotificationProxy.sendNotification(GameNotification.MAIN_MENU));
 		startButton.setOnAction(this::handleStartButton);
 	}
 
@@ -89,7 +89,7 @@ public class TrainingConfigView extends BorderPane {
 		TrainingConfig trainingConfig = new TrainingConfig(deckToTrain);
 		trainingConfig.setNumberOfGames(numberOfGames);
 		trainingConfig.getDecks().addAll(decks);
-		ApplicationFacade.getInstance().sendNotification(GameNotification.COMMIT_TRAININGMODE_CONFIG, trainingConfig);
+		NotificationProxy.sendNotification(GameNotification.COMMIT_TRAININGMODE_CONFIG, trainingConfig);
 	}
 
 	public void injectDecks(List<Deck> decks) {

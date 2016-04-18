@@ -13,8 +13,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.gui.common.DeckFormatStringConverter;
@@ -85,7 +85,7 @@ public class SandboxModeConfigView extends BorderPane {
 	}
 
 	private void handleBackButton(ActionEvent event) {
-		ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU);
+		NotificationProxy.sendNotification(GameNotification.MAIN_MENU);
 	}
 
 	private void handleStartButton(ActionEvent event) {
@@ -94,7 +94,7 @@ public class SandboxModeConfigView extends BorderPane {
 		gameConfig.setPlayerConfig1(player1Config.getPlayerConfig());
 		gameConfig.setPlayerConfig2(player2Config.getPlayerConfig());
 		gameConfig.setDeckFormat(formatBox.getValue());
-		ApplicationFacade.getInstance().sendNotification(GameNotification.COMMIT_SANDBOXMODE_CONFIG, gameConfig);
+		NotificationProxy.sendNotification(GameNotification.COMMIT_SANDBOXMODE_CONFIG, gameConfig);
 	}
 
 	public void injectDecks(List<Deck> decks) {

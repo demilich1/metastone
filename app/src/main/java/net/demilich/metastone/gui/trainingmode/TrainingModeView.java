@@ -11,8 +11,8 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 
 public class TrainingModeView extends BorderPane implements EventHandler<ActionEvent> {
 
@@ -49,7 +49,7 @@ public class TrainingModeView extends BorderPane implements EventHandler<ActionE
 	@Override
 	public void handle(ActionEvent actionEvent) {
 		if (actionEvent.getSource() == backButton) {
-			ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU);
+			NotificationProxy.sendNotification(GameNotification.MAIN_MENU);
 		}
 	}
 

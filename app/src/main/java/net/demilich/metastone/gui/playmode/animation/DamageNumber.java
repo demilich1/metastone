@@ -9,8 +9,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.gui.IconFactory;
 import net.demilich.metastone.gui.playmode.GameToken;
 
@@ -42,7 +42,7 @@ public class DamageNumber extends StackPane {
 		getChildren().add(textShape);
 		parent.getAnchor().getChildren().add(this);
 
-		ApplicationFacade.getInstance().sendNotification(GameNotification.ANIMATION_STARTED);
+		NotificationProxy.sendNotification(GameNotification.ANIMATION_STARTED);
 
 		PauseTransition animation = new PauseTransition(Duration.seconds(1.2));
 		animation.setOnFinished(this::onComplete);
@@ -51,6 +51,6 @@ public class DamageNumber extends StackPane {
 
 	private void onComplete(ActionEvent event) {
 		parent.getAnchor().getChildren().remove(this);
-		ApplicationFacade.getInstance().sendNotification(GameNotification.ANIMATION_COMPLETED);
+		NotificationProxy.sendNotification(GameNotification.ANIMATION_COMPLETED);
 	}
 }

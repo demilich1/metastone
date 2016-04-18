@@ -9,8 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.gui.deckbuilder.DeckEntry;
 
@@ -46,7 +46,7 @@ public class MetaDeckListView extends VBox implements EventHandler<MouseEvent> {
 	@Override
 	public void handle(MouseEvent event) {
 		DeckEntry deckEntry = (DeckEntry) event.getSource();
-		ApplicationFacade.getInstance().sendNotification(GameNotification.REMOVE_DECK_FROM_META_DECK, deckEntry.getDeck());
+		NotificationProxy.sendNotification(GameNotification.REMOVE_DECK_FROM_META_DECK, deckEntry.getDeck());
 	}
 
 }

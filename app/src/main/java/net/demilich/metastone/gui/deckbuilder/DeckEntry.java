@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.gui.IconFactory;
 import net.demilich.metastone.gui.dialog.DialogNotification;
@@ -63,7 +64,7 @@ public class DeckEntry extends HBox {
 
 	private void onDeleteDeckDialog(DialogResult result) {
 		if (result == DialogResult.OK) {
-			ApplicationFacade.getInstance().sendNotification(GameNotification.DELETE_DECK, deck);
+			NotificationProxy.sendNotification(GameNotification.DELETE_DECK, deck);
 		}
 	}
 

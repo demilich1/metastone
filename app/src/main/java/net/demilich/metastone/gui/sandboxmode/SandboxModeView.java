@@ -11,8 +11,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.behaviour.human.HumanTargetOptions;
@@ -61,7 +61,7 @@ public class SandboxModeView extends BorderPane {
 		toolboxView = new ToolboxView();
 		actionPromptView = new HumanActionPromptView();
 
-		backButton.setOnAction(actionEvent -> ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU));
+		backButton.setOnAction(actionEvent -> NotificationProxy.sendNotification(GameNotification.MAIN_MENU));
 		playButton.setOnAction(this::startPlayMode);
 
 		sidebar.getChildren().setAll(toolboxView, navigationPane);
@@ -99,7 +99,7 @@ public class SandboxModeView extends BorderPane {
 		ImageView buttonGraphic = (ImageView) playButton.getGraphic();
 		buttonGraphic.setImage(new Image(IconFactory.getImageUrl("ui/pause_icon.png")));
 		playButton.setOnAction(this::stopPlayMode);
-		ApplicationFacade.getInstance().sendNotification(GameNotification.START_PLAY_SANDBOX);
+		NotificationProxy.sendNotification(GameNotification.START_PLAY_SANDBOX);
 	}
 
 	private void stopPlayMode(ActionEvent actionEvent) {
@@ -109,7 +109,7 @@ public class SandboxModeView extends BorderPane {
 		ImageView buttonGraphic = (ImageView) playButton.getGraphic();
 		buttonGraphic.setImage(new Image(IconFactory.getImageUrl("ui/play_icon.png")));
 		playButton.setOnAction(this::startPlayMode);
-		ApplicationFacade.getInstance().sendNotification(GameNotification.STOP_PLAY_SANDBOX);
+		NotificationProxy.sendNotification(GameNotification.STOP_PLAY_SANDBOX);
 	}
 
 	public void updateSandbox(GameContext context) {

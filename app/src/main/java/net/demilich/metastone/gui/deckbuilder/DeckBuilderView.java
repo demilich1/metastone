@@ -1,8 +1,5 @@
 package net.demilich.metastone.gui.deckbuilder;
 
-import java.io.IOException;
-import java.util.List;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,13 +11,16 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.MetaDeck;
 import net.demilich.metastone.gui.deckbuilder.metadeck.MetaDeckListView;
 import net.demilich.metastone.gui.deckbuilder.metadeck.MetaDeckView;
+
+import java.io.IOException;
+import java.util.List;
 
 public class DeckBuilderView extends BorderPane implements EventHandler<ActionEvent> {
 
@@ -121,9 +121,9 @@ public class DeckBuilderView extends BorderPane implements EventHandler<ActionEv
 	@Override
 	public void handle(ActionEvent event) {
 		if (event.getSource() == importButton) {
-			ApplicationFacade.getInstance().sendNotification(GameNotification.IMPORT_DECK_FROM_URL, importField.getText());
+			NotificationProxy.sendNotification(GameNotification.IMPORT_DECK_FROM_URL, importField.getText());
 		} else if (event.getSource() == backButton) {
-			ApplicationFacade.getInstance().sendNotification(GameNotification.MAIN_MENU);
+			NotificationProxy.sendNotification(GameNotification.MAIN_MENU);
 		}
 	}
 
