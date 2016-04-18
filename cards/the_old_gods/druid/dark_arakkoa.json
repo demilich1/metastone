@@ -1,6 +1,7 @@
 {
 	"id": "minion_dark_arakkoa",
 	"name": "Dark Arakkoa",
+	"type": "MINION",
 	"baseManaCost": 6,
 	"baseAttack": 5,
 	"baseHp": 7,
