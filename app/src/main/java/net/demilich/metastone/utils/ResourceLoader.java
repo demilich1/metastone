@@ -22,7 +22,7 @@ public class ResourceLoader {
     // the number of dirs levels to traverse on the given path
     private static final int DIR_LEVELS = 3;
 
-    private static Logger logger = LoggerFactory.getLogger(CardProxy.class);
+    private static Logger logger = LoggerFactory.getLogger(ResourceLoader.class);
 
     /**
      * Loads all the json files from the given rootPath into a collection of ResourceInputStreams
