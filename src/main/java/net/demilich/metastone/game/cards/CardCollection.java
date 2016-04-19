@@ -122,6 +122,15 @@ public class CardCollection implements Iterable<Card>, Cloneable {
 		return cards.remove(0);
 	}
 
+	public boolean replace(Card oldCard, Card newCard) {
+		int index = cards.indexOf(oldCard);
+		if (index != -1) {
+			cards.set(index, newCard);
+			return true;
+		}
+		return false;
+	}
+
 	public void shuffle() {
 		Collections.shuffle(cards);
 	}
