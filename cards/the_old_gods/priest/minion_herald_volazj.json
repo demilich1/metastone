@@ -5,7 +5,7 @@
 	"type": "MINION",
 	"baseAttack": 5,
 	"baseHp": 5,
-	"heroClass": "ANY",
+	"heroClass": "PRIEST",
 	"rarity": "LEGENDARY",
 	"description": "Battlecry: Summon a 1/1 copy of each of your other minions.",
 	"battlecry": {
