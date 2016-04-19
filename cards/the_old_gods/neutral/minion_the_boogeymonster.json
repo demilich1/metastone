@@ -1,20 +1,20 @@
 {
-	"id": "minion_the_boogeyman",
-	"name": "The Boogeyman",
+	"id": "minion_the_boogeymonster",
+	"name": "The Boogeymonster",
 	"baseManaCost": 8,
 	"baseAttack": 6,
 	"baseHp": 7,
 	"rarity": "LEGENDARY",
 	"type": "MINION",
 	"heroClass": "ANY",
-	"description": "Whenever this minion kills a minion, give it +2/+2",
+	"description": "When this attacks and kills a minion, give it +2/+2.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "DamageCausedTrigger",
+			"hostTargetType": "IGNORE_OTHER_SOURCES",
 			"targetEntityType": "MINION",
-			"condition": {
-				"class": "IsDeadCondition",
-				"target": "EVENT_TARGET"
+			"fireCondition": {
+				"class": "IsDeadCondition"
 			}
 		},
 		"spell": {

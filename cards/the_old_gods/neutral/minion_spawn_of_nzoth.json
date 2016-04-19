@@ -1,12 +1,12 @@
 {
-	"id": "minion_brood_of_nzoth",
-	"name": "Brood of N'Zoth",
+	"id": "minion_spawn_of_nzoth",
+	"name": "Spawn of N'Zoth",
 	"baseManaCost": 3,
 	"baseHp": 2,
 	"baseAttack": 2,
 	"type": "MINION",
 	"rarity": "COMMON",
-	"description": "Deathrattle: Give your minions +1/+1",
+	"description": "Deathrattle: Give your minions +1/+1.",
 	"heroClass": "ANY",
 	"deathrattle": {
 		"class": "BuffSpell",
