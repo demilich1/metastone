@@ -28,6 +28,14 @@ public class ChooseOneCard extends Card implements IChooseOneCard {
 		card.setId(getId());
 		return card;
 	}
+	
+	public Card[] getChoiceCards() {
+		Card[] cards = new Card[cardIds.length];
+		for (int i = 0; i < cardIds.length; i++) {
+			cards[i] = getCard(cardIds[i]);
+		}
+		return cards;
+	}
 
 	@Override
 	public PlayCardAction play() {
