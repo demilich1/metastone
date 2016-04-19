@@ -1,0 +1,19 @@
+{
+	"id": "spell_spreading_madness",
+	"name": "Spreading Madness",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "RARE",
+	"description": "Deal 9 damage randomly split among all characters.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "MissilesSpell",
+		"target": "ALL_CHARACTERS",
+		"value": 1,
+		"howMany": 9
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

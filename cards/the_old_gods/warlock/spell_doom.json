@@ -1,0 +1,28 @@
+{
+	"id": "spell_doom",
+	"name": "DOOM!",
+	"baseManaCost": 10,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "EPIC",
+	"description": "Destroy all minions. Draw a card for each.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "DestroySpell",
+				"target": "ALL_MINIONS"
+			},
+			{
+				"class": "DrawCardSpell",
+				"value": {
+					"class": "EntityCounter",
+					"target": "ALL_MINIONS"
+				}
+			}
+		]
+	},
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}
