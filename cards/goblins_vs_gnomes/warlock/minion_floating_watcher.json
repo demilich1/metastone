@@ -14,7 +14,7 @@
 			"class": "DamageReceivedTrigger",
 			"targetPlayer": "SELF",
 			"targetEntityType": "HERO",
-			"condition": {
+			"fireCondition": {
 				"class": "OwnedByPlayerCondition",
 				"targetPlayer": "ACTIVE"
 			}

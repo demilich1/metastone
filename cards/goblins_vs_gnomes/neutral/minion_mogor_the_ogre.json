@@ -15,7 +15,7 @@
 			"sourcePlayer": "BOTH",
 			"targetPlayer": "BOTH",
 			"sourceEntityType": "MINION",
-			"condition": {
+			"queueCondition": {
 				"class": "RandomCondition"
 			}
 		},

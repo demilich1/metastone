@@ -13,7 +13,7 @@
 			"class": "TargetAcquisitionTrigger",
 			"actionType": "PHYSICAL_ATTACK",
 			"hostTargetType": "IGNORE_OTHER_SOURCES",
-			"condition": {
+			"queueCondition": {
 				"class": "RandomCondition"
 			}
 		},

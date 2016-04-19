@@ -15,7 +15,7 @@ public class TriggerManager implements Cloneable, IDisposable {
 
 	public static Logger logger = LoggerFactory.getLogger(TriggerManager.class);
 
-	private final List<IGameEventListener> triggers = new ArrayList<IGameEventListener>();;
+	private final List<IGameEventListener> triggers = new ArrayList<IGameEventListener>();
 
 	public TriggerManager() {
 	}
@@ -72,7 +72,10 @@ public class TriggerManager implements Cloneable, IDisposable {
 		}
 		
 		for (IGameEventListener trigger : eventTriggers) {
-			trigger.onGameEvent(event);
+			if (trigger.canFireCondition(event) &&
+					hostNotOnSideBoard(event, trigger.getHostReference())) {
+				trigger.onGameEvent(event);
+			}
 			
 			// we need to double check here if the trigger still exists;
 			// after all, a previous trigger may have removed it (i.e. double
@@ -121,6 +124,14 @@ public class TriggerManager implements Cloneable, IDisposable {
 				triggers.remove(trigger);
 			}
 		}
+	}
+	
+	public boolean hostNotOnSideBoard(GameEvent event, EntityReference entityReference) {
+		if(event.getGameContext().getPlayer1().getSetAsideZone().contains(event.getGameContext().resolveSingleTarget(entityReference)) ||
+				event.getGameContext().getPlayer2().getSetAsideZone().contains(event.getGameContext().resolveSingleTarget(entityReference))) {
+			return false;
+		}
+		return true;
 	}
 
 }

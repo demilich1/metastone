@@ -17,7 +17,10 @@
 			"class": "HealSpell",
 			"target": "FRIENDLY_CHARACTERS",
 			"value": 3,
-			"randomTarget": true
+			"randomTarget": true,
+			"filter": {
+				"class": "DamagedFilter"
+			}
 		}
 	},
 	"collectible": true,

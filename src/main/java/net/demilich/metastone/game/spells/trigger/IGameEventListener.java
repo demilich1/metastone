@@ -41,5 +41,7 @@ public interface IGameEventListener {
 	public abstract void delayTimeDown();
 
 	public abstract void expire();
+	
+	public abstract boolean canFireCondition(GameEvent event);
 
 }
