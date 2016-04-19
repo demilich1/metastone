@@ -1,0 +1,23 @@
+{
+	"id": "minion_shadowcaster",
+	"name": "Shadowcaster",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 4,
+	"heroClass": "ROGUE",
+	"rarity": "EPIC",
+	"description": "Battlecry: Choose a friendly minion. Add a 1/1 copy to your hand that costs (1).",
+	"battlecry": {
+		"targetSelection": "FRIENDLY_MINIONS",
+		"spell": {
+			"class": "custom.PutMiniCopyInHandSpell"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

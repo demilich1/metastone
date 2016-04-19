@@ -19,6 +19,21 @@
 			}
 		}
 	},
+	"trigger": {
+		"eventTrigger": {
+			"class": "CardReceivedTrigger",
+			"target": "SELF"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"target": "EVENT_TARGET",
+			"value": {
+				"class": "AttributeValueProvider",
+				"target": "FRIENDLY_HERO",
+				"attribute": "CTHUN_BUFF"
+			}
+		}
+	},
 	"attributes": {
 		"BATTLECRY": true
 	},

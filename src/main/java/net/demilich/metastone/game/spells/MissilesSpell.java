@@ -19,7 +19,7 @@ public class MissilesSpell extends DamageSpell {
 	public void cast(GameContext context, Player player, SpellDesc desc, Entity source, List<Entity> targets) {
 		int missiles = desc.getValue(SpellArg.HOW_MANY, context, player, null, source, 2);
 
-		if (source.getEntityType() == EntityType.CARD && ((Card) source).getCardType() == CardType.SPELL) {
+		if (source.getEntityType() == EntityType.CARD && ((Card) source).getCardType().isCardType(CardType.SPELL)) {
 			missiles = context.getLogic().applySpellpower(player, source,  missiles);
 			missiles = context.getLogic().applyAmplify(player, missiles, Attribute.SPELL_AMPLIFY_MULTIPLIER);
 		}

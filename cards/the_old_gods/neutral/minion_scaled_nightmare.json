@@ -1,0 +1,25 @@
+{
+	"id": "minion_scaled_nightmare",
+	"name": "Scaled Nightmare",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 8,
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"race": "DRAGON",
+	"description": "At the start of your turn, double this minion's Attack.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnStartTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "DoubleAttackSpell",
+			"target": "SELF"
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

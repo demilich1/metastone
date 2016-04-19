@@ -1,0 +1,22 @@
+{
+	"id": "spell_cabalists_tome",
+	"name": "Cabalist's Tome",
+	"baseManaCost": 5,
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "EPIC",
+	"description": "Add 3 random Mage spells to your hand.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "ReceiveRandomCollectibleCardSpell",
+		"value": 3,
+		"cardFilter": {
+			"class": "CardFilter",
+			"cardType": "SPELL",
+			"heroClass": "MAGE"
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}
