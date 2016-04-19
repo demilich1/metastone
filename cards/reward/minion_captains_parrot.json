@@ -12,8 +12,11 @@
 	"battlecry": {
 		"spell": {
 			"class": "FromDeckToHandSpell",
-			"race": "PIRATE",
-			"value": 1
+			"value": 1,
+			"cardFilter": {
+				"class": "CardFilter",
+				"race": "PIRATE"
+			}
 		},
 		"resolvedLate": false
 	},
@@ -21,6 +24,6 @@
 		"BATTLECRY": true
 	},
 	"collectible": true,
-	"set": "CLASSIC",
+	"set": "REWARD",
 	"fileFormatVersion": 1
 }
