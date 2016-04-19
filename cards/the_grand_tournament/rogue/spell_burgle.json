@@ -10,7 +10,7 @@
 	"spell": {
 		"class": "ReceiveRandomCollectibleCardSpell",
 		"card": "spell_the_coin",
-		"howMany": 2,
+		"value": 2,
 		"cardFilter": {
 			"class": "CardFilter",
 			"heroClass": "OPPONENT"

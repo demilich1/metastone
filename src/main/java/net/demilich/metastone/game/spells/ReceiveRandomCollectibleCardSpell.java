@@ -25,7 +25,7 @@ public class ReceiveRandomCollectibleCardSpell extends Spell {
 			}
 		}
 
-		int count = desc.getValue(SpellArg.HOW_MANY, context, player, target, source, 1);
+		int count = desc.getValue(SpellArg.VALUE, context, player, target, source, 1);
 		int manaCostModifier = desc.getValue(SpellArg.MANA_MODIFIER, context, player, target, source, 0);
 		for (int i = 0; i < count; i++) {
 			Card card = null;
