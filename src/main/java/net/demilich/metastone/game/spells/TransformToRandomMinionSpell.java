@@ -10,34 +10,35 @@ import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.entities.Entity;
-import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 
-public class TransformToMinionWithManaCostSpell extends TransformMinionSpell {
+public class TransformToRandomMinionSpell extends TransformMinionSpell {
 
 	public static SpellDesc create() {
-		Map<SpellArg, Object> arguments = SpellDesc.build(TransformToMinionWithManaCostSpell.class);
+		Map<SpellArg, Object> arguments = SpellDesc.build(TransformToRandomMinionSpell.class);
 		return new SpellDesc(arguments);
 	}
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		Minion minion = (Minion) target;
-		int manaCost = minion.getSourceCard().getBaseManaCost();
-		
+		EntityFilter filter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
+
 		CardCollection allMinions = CardCatalogue.query(context.getDeckFormat(), CardType.MINION);
-		CardCollection minionsWithSameCost = new CardCollection();
+		CardCollection filteredMinions = new CardCollection();
 		for (Card card : allMinions) {
 			MinionCard minionCard = (MinionCard) card;
-			if (minionCard.getBaseManaCost() == manaCost) {
-				minionsWithSameCost.add(minionCard);
+			if (filter == null || filter.matches(context, player, card)) {
+				filteredMinions.add(minionCard);
 			}
 		}
-		MinionCard randomCard = (MinionCard) minionsWithSameCost.getRandom();
-		
-		SpellDesc transformMinionSpell = TransformMinionSpell.create(randomCard.getCardId());
-		super.onCast(context, player, transformMinionSpell, source, target);
+		MinionCard randomCard = (MinionCard) filteredMinions.getRandom();
+
+		if (randomCard != null) {
+			SpellDesc transformMinionSpell = TransformMinionSpell.create(randomCard.getCardId());
+			super.onCast(context, player, transformMinionSpell, source, target);
+		}
 	}
 
 }
