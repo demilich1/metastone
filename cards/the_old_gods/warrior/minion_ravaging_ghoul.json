@@ -1,0 +1,24 @@
+{
+    "id": "minion_ravaging_ghoul",
+    "name": "Ravaging Ghoul",
+    "baseManaCost": 3,
+    "baseHp": 3,
+    "baseAttack": 3,
+    "type": "MINION",
+    "rarity": "COMMON",
+    "heroClass": "WARRIOR",
+    "description": "Battlecry: Deal 1 damage to all other minions.",
+    "battlecry": {
+        "spell": {
+            "class": "DamageSpell",
+            "value": 1,
+            "target": "ALL_OTHER_MINIONS"
+        }
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "THE_OLD_GODS",
+    "fileFormatVersion": 1
+}

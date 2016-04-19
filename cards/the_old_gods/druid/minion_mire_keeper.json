@@ -1,0 +1,33 @@
+{
+	"id": "minion_mire_keeper",
+	"name": "Mire Keeper",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 3,
+	"heroClass": "DRUID",
+	"rarity": "RARE",
+	"description": "Choose One - Summon a 2/2 Slime; or Gain an empty Mana Crystal.",
+	"options": [
+		{
+			"description": "Summon 2/2 Slime",
+			"spell": {
+				"class": "SummonSpell",
+				"targetPlayer": "SELF",
+				"card": "token_tauren_slime",
+				"boardPositionRelative": "RIGHT"
+			}
+		},
+		{
+			"description": "Mana Crystal",
+			"spell": {
+				"class": "ModifyMaxManaSpell",
+				"targetPlayer": "SELF",
+				"value": 1
+			}
+		}
+	],
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

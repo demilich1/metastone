@@ -1,0 +1,20 @@
+{
+	"id": "spell_call_of_the_wild",
+	"name": "Call of the Wild",
+	"baseManaCost": 8,
+	"type": "SPELL",
+	"heroClass": "HUNTER",
+	"rarity": "EPIC",
+	"description": "Summon all 3 Animal Companions.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "SummonSpell",
+		"cards": [
+			"token_huffer",
+			"token_misha",
+			"token_leokk"
+		]
+	},
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

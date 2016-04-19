@@ -1,0 +1,21 @@
+{
+	"id": "spell_embrace_the_shadow",
+	"name": "Embrace the Shadow",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "EPIC",
+	"description": "Your healing effects deal damage instead this turn.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "AddAttributeSpell",
+		"target": "FRIENDLY_HERO",
+		"attribute": "INVERT_HEALING",
+		"revertTrigger": {
+			"class": "TurnEndTrigger"
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

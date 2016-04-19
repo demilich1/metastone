@@ -1,0 +1,39 @@
+{
+	"id": "spell_forbidden_shaping",
+	"name": "Forbidden Shaping",
+	"baseManaCost": 0,
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "EPIC",
+	"description": "Spend all your mana. Summon a random minion that costs that much.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "SummonRandomMinionFilteredSpell",
+				"cardFilter": {
+					"class": "CardFilter",
+					"manaCost": {
+						"class": "PlayerAttributeValueProvider",
+						"playerAttribute": "MANA"
+					}
+				}
+			},
+			{
+				"class": "GainManaSpell",
+				"value": {
+					"class": "AlgebraicValueProvider",
+					"value1": {
+						"class": "PlayerAttributeValueProvider",
+						"playerAttribute": "MANA"
+					},
+					"operation": "NEGATE"
+				}
+			}
+		]
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}
