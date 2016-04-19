@@ -1,0 +1,22 @@
+{
+	"id": "weapon_hammer_of_twilight",
+	"name": "Hammer of Twilight",
+	"baseManaCost": 5,
+	"type": "WEAPON",
+	"damage": 4,
+	"durability": 2,
+	"heroClass": "SHAMAN",
+	"rarity": "EPIC",
+	"description": "Deathrattle: Summon a 4/2 Elemental.",
+	"deathrattle": {
+		"class": "SummonSpell",
+		"targetPlayer": "SELF",
+		"card": "token_twilight_elemental"
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
+	"fileFormatVersion": 1
+}
