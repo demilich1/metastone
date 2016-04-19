@@ -1,0 +1,29 @@
+{
+	"id": "minion_ragnaros_lightlord",
+	"name": "Ragnaros, Lightlord",
+	"baseManaCost": 8,
+	"type": "MINION",
+	"baseAttack": 8,
+	"baseHp": 8,
+	"heroClass": "PALADIN",
+	"rarity": "LEGENDARY",
+	"description": "At the end of your turn, restore 8 Health to a damaged friendly character.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "HealSpell",
+			"target": "FRIENDLY_CHARACTERS",
+			"value": 8,
+			"randomTarget": true,
+			"filter": {
+				"class": "DamagedFilter"
+			}
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,31 @@
+{
+	"id": "minion_steward_of_darkshire",
+	"name": "Steward of Darkshire",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 3,
+	"heroClass": "PALADIN",
+	"rarity": "RARE",
+	"description": "Whenever you summon a minion with 1 health, give it Divine Shield.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "MinionSummonedTrigger",
+			"targetPlayer": "SELF",
+			"queueCondition": {
+				"class": "AttributeCondition",
+				"value": 1,
+				"attribute": "HP",
+				"operation": "EQUAL"
+			}
+		},
+		"spell": {
+			"class": "AddAttributeSpell",
+			"target": "EVENT_TARGET",
+			"attribute": "DIVINE_SHIELD"
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}
