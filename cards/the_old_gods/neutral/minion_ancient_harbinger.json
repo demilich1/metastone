@@ -1,0 +1,30 @@
+{
+	"id": "minion_ancient_harbinger",
+	"name": "Ancient Harbinger",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 6,
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"description": "At the start of your turn, put a 10-Cost minion from your deck into your hand.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnStartTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "FromDeckToHandSpell",
+			"targetPlayer": "SELF",
+			"value": 1,
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "MINION",
+				"manaCost": 10
+			}
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}
