@@ -1,0 +1,20 @@
+{
+	"id": "spell_blood_warriors",
+	"name": "Blood Warriors",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "WARRIOR",
+	"rarity": "EPIC",
+	"description": "Add a copy of each damaged friendly minion to your hand.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "PutCopyInHandSpell",
+		"target": "FRIENDLY_MINIONS",
+		"filter": {
+			"class": "DamagedFilter"
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}
