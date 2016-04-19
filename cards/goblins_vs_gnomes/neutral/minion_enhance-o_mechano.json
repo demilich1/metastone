@@ -11,7 +11,7 @@
 	"description": "Battlecry: Give your other minions Windfury, Taunt, or Divine Shield. (at random)",
 	"battlecry": {
 		"spell": {
-			"class": "CastRandomSpellSpell",
+			"class": "RandomlyCastSpell",
 			"target": "OTHER_FRIENDLY_MINIONS",
 			"spells": [
 				{
