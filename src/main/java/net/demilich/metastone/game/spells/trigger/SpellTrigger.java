@@ -114,7 +114,7 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 		// longer matter.
 		// But let's check to make sure we don't accidentally expire something
 		// that's still using it.
-		if (oneTurn && event.getEventType() == GameEventType.TURN_END) {
+		if (oneTurn && (event.getEventType() == GameEventType.TURN_END || event.getEventType() == GameEventType.TURN_START)) {
 			expire();
 		}
 		try {

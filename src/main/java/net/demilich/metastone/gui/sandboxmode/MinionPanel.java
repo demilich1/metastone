@@ -76,7 +76,7 @@ public class MinionPanel extends VBox {
 	private void populateMinions(String filter) {
 		ObservableList<MinionCard> data = FXCollections.observableArrayList();
 		for (Card card : CardCatalogue.getAll()) {
-			if (card.getCardType() != CardType.MINION) {
+			if (!card.getCardType().isCardType(CardType.MINION)) {
 				continue;
 			}
 			if (!card.matchesFilter(filter)) {

@@ -20,6 +20,7 @@ public class CopyCardSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
+		int numberOfCardsToCopy = desc.getValue(SpellArg.VALUE, context, player, target, source, 1);
 		if (target != null) {
 			Card targetCard = null;
 			if (target.getEntityType() == EntityType.CARD) {
@@ -28,12 +29,13 @@ public class CopyCardSpell extends Spell {
 				Minion minion = (Minion) target;
 				targetCard = minion.getSourceCard();
 			}
-			context.getLogic().receiveCard(player.getId(), targetCard.getCopy());
+			for (int i = 0; i < numberOfCardsToCopy; i++) {
+				context.getLogic().receiveCard(player.getId(), targetCard.getCopy());
+			}
 			return;
 		}
 
 		CardLocation cardLocation = (CardLocation) desc.get(SpellArg.CARD_LOCATION);
-		int numberOfCardsToCopy = desc.getValue(SpellArg.VALUE, context, player, target, source, 1);
 
 		Player opponent = context.getOpponent(player);
 		CardCollection sourceCollection = null;

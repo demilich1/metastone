@@ -1306,9 +1306,7 @@ public class GameLogic implements Cloneable {
 		Player player = context.getPlayer(playerId);
 		log("Card {} has been moved from the HAND to the GRAVEYARD", card);
 		card.setLocation(CardLocation.GRAVEYARD);
-		if (card.getAttribute(Attribute.PASSIVE_TRIGGER) != null) {
-			removeSpelltriggers(card);
-		}
+		removeSpelltriggers(card);
 		player.getHand().remove(card);
 		player.getGraveyard().add(card);
 	}
@@ -1504,12 +1502,12 @@ public class GameLogic implements Cloneable {
 		player.getHero().getHeroPower().setUsed(0);
 		player.getHero().activateWeapon(true);
 		refreshAttacksPerRound(player.getHero());
-		drawCard(playerId, null);
 		for (Entity minion : player.getMinions()) {
 			minion.removeAttribute(Attribute.SUMMONING_SICKNESS);
 			refreshAttacksPerRound(minion);
 		}
 		context.fireGameEvent(new TurnStartEvent(context, player.getId()));
+		drawCard(playerId, null);
 		checkForDeadEntities();
 	}
 
