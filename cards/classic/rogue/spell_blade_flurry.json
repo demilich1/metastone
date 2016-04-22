@@ -1,18 +1,18 @@
 {
 	"id": "spell_blade_flurry",
 	"name": "Blade Flurry",
-	"baseManaCost": 2,
+	"baseManaCost": 4,
 	"type": "SPELL",
 	"heroClass": "ROGUE",
 	"rarity": "RARE",
-	"description": "Destroy your weapon and deal its damage to all enemies.",
+	"description": "Destroy your weapon and deal its damage to all enemy minions.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
 		"spells": [
 			{
 				"class": "DamageSpell",
-				"target": "ENEMY_CHARACTERS",
+				"target": "ENEMY_MINIONS",
 				"value": {
 					"class": "AttributeValueProvider",
 					"target": "FRIENDLY_WEAPON",

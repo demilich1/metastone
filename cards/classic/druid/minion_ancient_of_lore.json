@@ -7,13 +7,13 @@
 	"baseHp": 5,
 	"heroClass": "DRUID",
 	"rarity": "EPIC",
-	"description": "Choose One - Draw 2 cards; or Restore 5 Health.",
+	"description": "Choose One - Draw a card; or Restore 5 Health.",
 	"options": [
 		{
-			"description": "Draw 2 cards",
+			"description": "Draw a card",
 			"spell": {
 				"class": "DrawCardSpell",
-				"value": 2
+				"value": 1
 			}
 		},
 		{

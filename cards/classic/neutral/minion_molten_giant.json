@@ -1,7 +1,7 @@
 {
 	"id": "minion_molten_giant",
 	"name": "Molten Giant",
-	"baseManaCost": 20,
+	"baseManaCost": 25,
 	"type": "MINION",
 	"baseAttack": 8,
 	"baseHp": 8,
