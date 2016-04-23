@@ -1,0 +1,21 @@
+{
+	"id": "minion_possessed_villager",
+	"name": "Possessed Villager",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"heroClass": "WARLOCK",
+	"rarity": "COMMON",
+	"description": "Deathrattle: Summon a 1/1 Shadowbeast.",
+	"deathrattle": {
+		"class": "SummonSpell",
+		"card": "token_shadowbeast"
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

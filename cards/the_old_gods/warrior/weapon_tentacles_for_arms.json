@@ -6,7 +6,7 @@
 	"damage": 2,
 	"durability": 2,
 	"heroClass": "WARRIOR",
-	"rarity": "FREE",
+	"rarity": "EPIC",
 	"description": "Deathrattle: Return this to your hand.",
 	"deathrattle": {
 		"class": "ReceiveCardSpell",

@@ -1,0 +1,25 @@
+{
+	"id": "spell_wisps_of_the_old_gods_1",
+	"name": "Summon 7 Wisps",
+	"baseManaCost": 7,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "EPIC",
+	"description": "Summon 5 Wisps",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "SummonSpell",
+		"cards": [
+			"minion_wisp",
+			"minion_wisp",
+			"minion_wisp",
+			"minion_wisp",
+			"minion_wisp",
+			"minion_wisp",
+			"minion_wisp"
+		]
+	},
+	"collectible": false,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

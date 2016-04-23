@@ -3,7 +3,7 @@
 	"name": "Knife Juggler",
 	"baseManaCost": 2,
 	"type": "MINION",
-	"baseAttack": 3,
+	"baseAttack": 2,
 	"baseHp": 2,
 	"heroClass": "ANY",
 	"rarity": "RARE",

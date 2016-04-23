@@ -1,0 +1,27 @@
+{
+	"id": "minion_faceless_summoner",
+	"name": "Faceless Summoner",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 5,
+	"heroClass": "MAGE",
+	"rarity": "COMMON",
+	"description": "Battlecry: Summon a random 3-Cost minion.",
+	"battlecry": {
+		"spell": {
+			"class": "SummonRandomMinionFilteredSpell",
+			"cardFilter": {
+				"class": "CardFilter",
+				"manaCost": 3
+			},
+			"boardRelativePosition": "RIGHT"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

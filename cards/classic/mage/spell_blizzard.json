@@ -9,15 +9,16 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
-		"target": "ENEMY_MINIONS",
 		"spells": [
 			{
 				"class": "DamageSpell",
-				"value": 2
+				"value": 2,
+				"target": "ENEMY_MINIONS"
 			},
 			{
 				"class": "AddAttributeSpell",
-				"attribute": "FROZEN"
+				"attribute": "FROZEN",
+				"target": "ENEMY_MINIONS"
 			}
 		]
 	},

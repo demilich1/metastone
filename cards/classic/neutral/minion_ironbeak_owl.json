@@ -1,7 +1,7 @@
 {
 	"id": "minion_ironbeak_owl",
 	"name": "Ironbeak Owl",
-	"baseManaCost": 2,
+	"baseManaCost": 3,
 	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 1,

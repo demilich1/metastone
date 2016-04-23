@@ -1,0 +1,14 @@
+{
+    "id": "token_twilight_elemental",
+    "name": "Twilight Elemental",
+    "baseManaCost": 3,
+    "type": "MINION",
+    "baseAttack": 4,
+    "baseHp": 2,
+    "rarity": "EPIC",
+    "heroClass": "SHAMAN",
+    "description": "",
+    "collectible": false,
+    "set": "THE_OLD_GODS",
+    "fileFormatVersion": 1
+}

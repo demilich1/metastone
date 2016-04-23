@@ -20,7 +20,10 @@ public class PutRandomMinionOnBoardSpell extends Spell {
 		if (cardLocation == null) {
 			cardLocation = CardLocation.DECK;
 		}
-		putRandomMinionFromDeckOnBoard(context, player, cardFilter, cardLocation);
+		int numberToSummon = desc.getValue(SpellArg.VALUE, context, player, target, source, 1);
+		for (int i = 0; i < numberToSummon; i++) {
+			putRandomMinionFromDeckOnBoard(context, player, cardFilter, cardLocation);
+		}
 	}
 
 	private void putRandomMinionFromDeckOnBoard(GameContext context, Player player, EntityFilter cardFilter, CardLocation cardLocation) {

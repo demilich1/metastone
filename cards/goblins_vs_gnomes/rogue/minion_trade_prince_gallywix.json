@@ -12,7 +12,7 @@
 		"eventTrigger": {
 			"class": "SpellCastedTrigger",
 			"sourcePlayer": "OPPONENT",
-			"condition": {
+			"queueCondition": {
 				"class": "CardPropertyCondition",
 				"cardId": "spell_gallywixs_coin",
 				"invert": true

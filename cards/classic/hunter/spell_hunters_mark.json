@@ -1,7 +1,7 @@
 {
 	"id": "spell_hunters_mark",
 	"name": "Hunter's Mark",
-	"baseManaCost": 0,
+	"baseManaCost": 1,
 	"type": "SPELL",
 	"heroClass": "HUNTER",
 	"rarity": "FREE",

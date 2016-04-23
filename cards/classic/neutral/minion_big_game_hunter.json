@@ -1,7 +1,7 @@
 {
 	"id": "minion_big_game_hunter",
 	"name": "Big Game Hunter",
-	"baseManaCost": 3,
+	"baseManaCost": 5,
 	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 2,
