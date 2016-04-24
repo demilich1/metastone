@@ -69,7 +69,7 @@ metastone
 
 ### How do I build my own cards? ###
 **This feature is in very early stages and there is no official support yet.** There is no documentation at all. If you really want to start right now, here's how you can start:
-- Cards that are bundled with MetaStone are in `cards` module `resources` folder.  Use these as reference!
+- Cards that are bundled with MetaStone are in the `cards` module `resources` folder.  Use these as reference!
 ```
 metastone
  └── cards
@@ -105,5 +105,5 @@ metastone
    * From your IDE
       * Right click on the individual test file and select `Run Test`
 * If you encounter test failures open the test report file `build/reports/tests/index.html` for details on the failures
-* Look [**here**](/src/test/java/net/demilich/metastone/tests) for list of existing game tests.
+* Look [**here**](/game/src/test/java/net/demilich/metastone/tests) for list of existing game tests.
 
