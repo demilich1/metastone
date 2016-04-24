@@ -6,21 +6,30 @@ import net.demilich.nittygrittymvc.interfaces.INotifier;
 
 public class NotificationProxy {
 
-    public static INotifier SUBJECT;
+    private static INotifier<GameNotification> SUBJECT;
 
     public static void init(INotifier<GameNotification> subject) {
         SUBJECT = subject;
     }
 
-    public static void notifyObservers(INotification<GameNotification> var1) {
-        SUBJECT.notifyObservers(var1);
+    public static void notifyObservers(INotification<GameNotification> notification) {
+        if (SUBJECT == null) {
+            throw new RuntimeException("NotificationProxy must first be initialized!");
+        }
+        SUBJECT.notifyObservers(notification);
     }
 
-    public static void sendNotification(GameNotification var1) {
-        SUBJECT.sendNotification(var1);
+    public static void sendNotification(GameNotification notification) {
+        if (SUBJECT == null) {
+            throw new RuntimeException("NotificationProxy must first be initialized!");
+        }
+        SUBJECT.sendNotification(notification);
     }
 
-    public static void sendNotification(GameNotification var1, Object var2) {
-        SUBJECT.sendNotification(var1, var2);
+    public static void sendNotification(GameNotification notification, Object data) {
+        if (SUBJECT == null) {
+            throw new RuntimeException("NotificationProxy must first be initialized!");
+        }
+        SUBJECT.sendNotification(notification, data);
     }
 }
