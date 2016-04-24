@@ -30,31 +30,74 @@ Sure! There is still a lot to do and anybody willing to contribute is welcome
 * NOTE **JDK 1.8 is required!**
 * Clone the repo.  See [https://help.github.com/articles/cloning-a-repository/](https://help.github.com/articles/cloning-a-repository/) for help.
 * Open a terminal / command prompt and nagivate to your to your git repo location
-* Download dependecies and compile: `./gradlew compileJava`
-* Run the application from the command line: `./gradlew run`
-* Get a list of all gradle tasks: `./gradlew tasks`
-* If you want to build from Eclipse, you will need to create the eclipse settings files: `./gradlew eclipse`
+* Download dependecies and compile: 
+   * Linux/Mac OSX `./gradlew compileJava`
+   * Windows `gradlew.bat compileJava`
+* Run the application from the command line: 
+   * Linux/Mac OSX `./gradlew run`
+   * Windows `gradlew.bat run`
+* Get a list of all gradle tasks: 
+   * Linux/Mac OSX `./gradlew tasks --all`
+   * Windows `gradlew.bat tasks --all`
+* If you want to build from Eclipse, you will need to create the eclipse settings files: 
+   * Linux/Mac OSX `./gradlew eclipse`
+   * Windows `gradlew.bat eclipse`
    * Open Eclipse and choose `Import -> Existing projects into workspace`
    * Check the Build Path settings in Eclipse and ensure JDK location is correct.
-* If you want to build from IntelliJ, open a new project `File > Project From Existing Sources`.  It will import the project from the build.gradle file.
+* If you want to build from IntelliJ:
+   * Open a new project `File > Project From Existing Sources`.  Project will be imported from the `build.gradle` files.
+
+### Project structure
+* MetaStone is made up of a hanfull of modules.  Here's what it looks like:
+```
+metastone
+ ├── app    // Application UI code and resources. Depends on 'game' and 'cards' modules.
+ ├── game   // Game source code. Depends on 'shared' module.
+ ├── shared // Shared code between 'app' and 'game' modules.
+ └── cards  // Cards, decks and deckFormat data files.
+```
+* Each module can be built separately.  Their respective dependencies will get compiled and pulled in at build time. For example:
+* To produce a `cards.jar` file which contains all the cards, decks and deckFormat data files:
+   * Linux/Mac OSX `./gradlew cards:assemble`
+   * Windows `gradlew.bat cards:assemble`
+* To build the game module and produce a `game.jar` file:
+   * Linux/Mac OSX `./gradlew game:assemble`
+   * Windows `gradlew.bat game:assemble`
 
 ### How do I build my own cards? ###
-This feature is in very early stages and there is no official support yet. There is no documentation at all. If you really want to start right now:
-- Navigate to your MetaStone install folder
-- Look for a folder named 'cards'
-- Create a new folder named 'custom'
-- Any .json file in there will be parsed and treated like built-in cards
-- To learn the format it is advised to copy an existing card, change the filename and the 'id' attribute (important!) and make small changes
-- To validate that the cards you added are well formed and can be parsed, run the following command: `./gradlew test -Dtest.single=ValidateCards` 
+**This feature is in very early stages and there is no official support yet.** There is no documentation at all. If you really want to start right now:
+- Navigate to the cards module resource folder:
+```
+metastone
+ └── cards
+    └── src
+       └── main
+          └── resources
+              ├── cards
+              ├── decks
+              └── formats
+```
+- Create a new folder under `resources/cards` named `custom`
+- Any `.json` files you place in your `custom` folder will be parsed and treated like built-in cards
+- To learn the format it is advised to copy an existing card, change the filename and the 'id' attribute (**important!**) and make small changes
+- To validate that the cards you added are well formed and can be parsed, run the following command: 
+   - Linux/Mac OSX `./gradlew cards:test -Dtest.single=ValidateCards` 
+   - Windows `gradlew.bat cards:test -Dtest.single=ValidateCards`
 - You have to restart MetaStone for new cards to be detected
 - **The card format is subject to change; cards you create now may not work in future versions**
 
 ### Running tests
-* The easiest way to run tests is from the command line.  `./gradlew test`
-* You can also run tests from your favorite IDE. 
-   * For example, in IntelliJ right click on `src/test` folder and select `Run All Tests`
-* You can also run individual tests:
-   * From the command line `./gradlew test -Dtest.single=ValidateCards`  This will run the ValidateCards test to ensure that all cards are parseable.
-   * From your IDE, right click on the individual test file and select `Run Test`
+* The easiest way to run tests is from the command line.
+   * Linux/Mac OSX `./gradlew game:test`
+   * Windows `gradlew.bat game:test`
+* You can also run tests from your favorite IDE. For example:
+   * In IntelliJ right click on `src/test` folder in a given module and select `Run All Tests`
+* You can also run individual tests using the `-Dtest.single=[TEST NAME]` command line option.
+   * From the command line
+      * Linux/Mac OSX `./gradlew game:test -Dtest.single=SecretTest`
+      * Windows `gradlew.bat game:test -Dtest.single=SecretTest`
+   * From your IDE
+      * Right click on the individual test file and select `Run Test`
 * If you encounter test failures open the test report file `build/reports/tests/index.html` for details on the failures
-* Look [**here**](/src/test/java/net/demilich/metastone/tests) for list of existing tests
+* Look [**here**](/src/test/java/net/demilich/metastone/tests) for list of existing game tests.
+
