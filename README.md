@@ -48,7 +48,7 @@ Sure! There is still a lot to do and anybody willing to contribute is welcome
    * Open a new project `File > Project From Existing Sources`.  Project will be imported from the `build.gradle` files.
 
 ### Project structure
-* MetaStone is made up of a hanfull of modules.  Here's what it looks like:
+* MetaStone is made up of a handfull of source modules.  Here's what the top level project dir structure looks like:
 ```
 metastone
  ├── app    // Application UI code and resources. Depends on 'game' and 'cards' modules.
@@ -63,10 +63,13 @@ metastone
 * To build the game module and produce a `game.jar` file:
    * Linux/Mac OSX `./gradlew game:assemble`
    * Windows `gradlew.bat game:assemble`
+* To produce a standalone distributable app binary:
+   * Linux/Mac OSX `./gradlew app:assemble`
+   * Windows `gradlew.bat app:assemble`
 
 ### How do I build my own cards? ###
 **This feature is in very early stages and there is no official support yet.** There is no documentation at all. If you really want to start right now:
-- Navigate to the cards module resource folder:
+- Navigate to the `cards` module `resources` folder:
 ```
 metastone
  └── cards
