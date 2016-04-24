@@ -1,0 +1,19 @@
+{
+	"id": "spell_wisps_of_the_old_gods_2",
+	"name": "Give your minions +2/2",
+	"baseManaCost": 7,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "EPIC",
+	"description": "Your minions get +2/2",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "BuffSpell",
+		"target": "FRIENDLY_MINIONS",
+		"attackBonus": 2,
+		"hpBonus": 2
+	},
+	"collectible": false,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

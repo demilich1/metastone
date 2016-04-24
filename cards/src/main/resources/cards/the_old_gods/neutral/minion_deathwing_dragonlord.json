@@ -1,0 +1,29 @@
+{
+	"id": "minion_deathwing_dragonlord",
+	"name": "Deathwing, Dragonlord",
+	"baseManaCost": 10,
+	"type": "MINION",
+	"baseAttack": 12,
+	"baseHp": 12,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"race": "DRAGON",
+	"description": "Deathrattle: Put all Dragons in your hand into the battlefield.",
+	"deathrattle": {
+		"class": "PutRandomMinionOnBoardSpell",
+		"value": 7,
+		"targetPlayer": "SELF",
+		"cardLocation": "HAND",
+		"cardFilter": {
+			"class": "CardFilter",
+			"cardType": "MINION",
+			"race": "DRAGON"
+		}
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

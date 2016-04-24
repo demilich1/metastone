@@ -1,0 +1,33 @@
+{
+	"id": "minion_master_of_evolution",
+	"name": "Master of Evolution",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 5,
+	"heroClass": "SHAMAN",
+	"rarity": "RARE",
+	"description": "Battlecry: Transform a friendly minion into a random one that costs (1) more.",
+	"battlecry": {
+		"targetSelection": "FRIENDLY_MINIONS",
+		"spell": {
+			"class": "TransformToRandomMinionSpell",
+			"cardFilter": {
+				"class": "CardFilter",
+				"manaCost": {
+					"class": "AttributeValueProvider",
+					"target": "TARGET",
+					"attribute": "BASE_MANA_COST",
+					"offset": 1
+				}
+			}
+		},
+		"resolvedLate": false
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

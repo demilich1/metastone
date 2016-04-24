@@ -22,7 +22,7 @@ public class SpecificCardFilter extends EntityFilter {
 		}
 
 		String requiredCardId = desc.getString(FilterArg.CARD_ID);
-		return cardId.contains(requiredCardId);
+		return cardId.equalsIgnoreCase(requiredCardId);
 	}
 
 }

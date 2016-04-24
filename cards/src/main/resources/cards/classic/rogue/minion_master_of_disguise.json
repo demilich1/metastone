@@ -7,12 +7,16 @@
 	"baseHp": 4,
 	"heroClass": "ROGUE",
 	"rarity": "RARE",
-	"description": "Battlecry: Give a friendly minion Stealth.",
+	"description": "Battlecry: Give a friendly minion Stealth until your next turn.",
 	"battlecry": {
 		"targetSelection": "FRIENDLY_MINIONS",
 		"spell": {
 			"class": "AddAttributeSpell",
-			"attribute": "STEALTH"
+			"attribute": "STEALTH",
+			"revertTrigger": {
+				"class": "TurnStartTrigger",
+				"targetPlayer": "SELF"
+			}
 		},
 		"resolvedLate": false
 	},

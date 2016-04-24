@@ -4,7 +4,7 @@
 	"baseManaCost": 4,
 	"type": "MINION",
 	"baseAttack": 2,
-	"baseHp": 4,
+	"baseHp": 2,
 	"heroClass": "DRUID",
 	"rarity": "RARE",
 	"description": "Choose One - Deal 2 damage; or Silence a minion.",

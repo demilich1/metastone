@@ -1,0 +1,16 @@
+{
+	"id": "spell_wisps_of_the_old_gods",
+	"name": "Wisps of the Old Gods",
+	"baseManaCost": 7,
+	"type": "CHOOSE_ONE",
+	"heroClass": "DRUID",
+	"rarity": "EPIC",
+	"description": "Choose One - Summon 7 Wisps; or Give your minions +2/+2.",
+	"targetSelection": "NONE",
+	"options": [
+		"spell_wisps_of_the_old_gods_1",
+		"spell_wisps_of_the_old_gods_2"
+	],
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

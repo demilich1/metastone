@@ -6,6 +6,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -15,7 +17,7 @@ public class TriggerManager implements Cloneable, IDisposable {
 
 	public static Logger logger = LoggerFactory.getLogger(TriggerManager.class);
 
-	private final List<IGameEventListener> triggers = new ArrayList<IGameEventListener>();;
+	private final List<IGameEventListener> triggers = new ArrayList<IGameEventListener>();
 
 	public TriggerManager() {
 	}
@@ -51,7 +53,8 @@ public class TriggerManager implements Cloneable, IDisposable {
 			// for a oneTurnOnly tag and that it isn't delayed.
 			if (event.getEventType() == GameEventType.TURN_END) {
 				if(trigger.oneTurnOnly() && !trigger.isDelayed() &&
-						!trigger.interestedIn(event.getEventType())) {
+						!trigger.interestedIn(GameEventType.TURN_START) &&
+						!trigger.interestedIn(GameEventType.TURN_END)) {
 					trigger.expire();
 				}
 				trigger.delayTimeDown();
@@ -70,10 +73,12 @@ public class TriggerManager implements Cloneable, IDisposable {
 				eventTriggers.add(trigger);
 			}
 		}
-		
+
 		for (IGameEventListener trigger : eventTriggers) {
-			trigger.onGameEvent(event);
-			
+			if (trigger.canFireCondition(event) && hostNotOnSideBoard(event, trigger.getHostReference())) {
+				trigger.onGameEvent(event);
+			}
+
 			// we need to double check here if the trigger still exists;
 			// after all, a previous trigger may have removed it (i.e. double
 			// corruption)
@@ -81,7 +86,7 @@ public class TriggerManager implements Cloneable, IDisposable {
 				removeTriggers.add(trigger);
 			}
 		}
-		
+
 		for (IGameEventListener trigger : removeTriggers) {
 			triggers.remove(trigger);
 		}
@@ -121,6 +126,15 @@ public class TriggerManager implements Cloneable, IDisposable {
 				triggers.remove(trigger);
 			}
 		}
+	}
+
+	public boolean hostNotOnSideBoard(GameEvent event, EntityReference entityReference) {
+		GameContext context = event.getGameContext();
+		Entity entity = context.resolveSingleTarget(entityReference);
+		if (context.getPlayer1().getSetAsideZone().contains(entity) || context.getPlayer2().getSetAsideZone().contains(entity)) {
+			return false;
+		}
+		return true;
 	}
 
 }

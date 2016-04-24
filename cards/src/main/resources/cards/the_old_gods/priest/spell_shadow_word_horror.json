@@ -1,0 +1,23 @@
+{
+	"id": "spell_shadow_word_horror",
+	"name": "Shadow Word: Horror",
+	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "RARE",
+	"description": "Destroy all minions with 2 or less Attack.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "DestroySpell",
+		"target": "ALL_MINIONS",
+		"filter": {
+			"class": "AttributeFilter",
+			"value": 2,
+			"attribute": "ATTACK",
+			"operation": "LESS_OR_EQUAL"
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

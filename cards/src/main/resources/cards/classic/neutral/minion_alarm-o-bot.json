@@ -13,7 +13,7 @@
 		"eventTrigger": {
 			"class": "TurnStartTrigger",
 			"targetPlayer": "SELF",
-			"condition": {
+			"queueCondition": {
 				"class": "HoldsCardCondition",
 				"cardType": "MINION"
 			}

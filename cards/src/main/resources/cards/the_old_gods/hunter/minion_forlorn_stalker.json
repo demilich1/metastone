@@ -1,0 +1,31 @@
+{
+	"id": "minion_forlorn_stalker",
+	"name": "Forlorn Stalker",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 2,
+	"heroClass": "HUNTER",
+	"rarity": "RARE",
+	"description": "Battlecry: Give all minions with Deathrattle in your hand +1/+1.",
+	"battlecry": {
+		"spell": {
+			"class": "BuffSpell",
+			"target": "FRIENDLY_HAND",
+			"attackBonus": 1,
+			"hpBonus": 1,
+			"filter": {
+				"class": "CardFilter",
+				"cardType": "MINION",
+				"attribute": "DEATHRATTLES",
+				"operation": "HAS"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

@@ -1,18 +1,18 @@
 {
 	"id": "spell_force_of_nature",
 	"name": "Force of Nature",
-	"baseManaCost": 6,
+	"baseManaCost": 5,
 	"type": "SPELL",
 	"heroClass": "DRUID",
 	"rarity": "EPIC",
-	"description": "Summon three 2/2 Treants with Charge that die at the end of the turn.",
+	"description": "Summon three 2/2 Treants.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "SummonSpell",
 		"cards": [
-			"token_treant_force_of_nature",
-			"token_treant_force_of_nature",
-			"token_treant_force_of_nature"
+			"token_treant",
+			"token_treant",
+			"token_treant"
 		]
 	},
 	"set": "CLASSIC",

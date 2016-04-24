@@ -4,10 +4,10 @@
 	"baseManaCost": 3,
 	"type": "MINION",
 	"baseAttack": 4,
-	"baseHp": 2,
+	"baseHp": 4,
 	"heroClass": "ANY",
 	"rarity": "RARE",
-	"description": "Charge. Battlecry: Give your opponent a Mana Crystal.",
+	"description": "Battlecry: Give your opponent a Mana Crystal.",
 	"battlecry": {
 		"targetSelection": "NONE",
 		"spell": {
@@ -17,8 +17,7 @@
 		}
 	},
 	"attributes": {
-		"BATTLECRY": true,
-		"CHARGE": true
+		"BATTLECRY": true
 	},
 	"collectible": true,
 	"set": "CLASSIC",

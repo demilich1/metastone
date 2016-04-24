@@ -12,7 +12,7 @@
 		"eventTrigger": {
 			"class": "MinionSummonedTrigger",
 			"targetPlayer": "SELF",
-			"condition": {
+			"fireCondition": {
 				"class": "HasWeaponCondition"
 			}
 		},

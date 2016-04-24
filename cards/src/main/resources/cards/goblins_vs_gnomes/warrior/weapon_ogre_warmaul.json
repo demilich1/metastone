@@ -14,7 +14,7 @@
 			"actionType": "PHYSICAL_ATTACK",
 			"sourcePlayer": "SELF",
 			"sourceEntityType": "HERO",
-			"condition": {
+			"queueCondition": {
 				"class": "RandomCondition"
 			}
 		},

@@ -12,7 +12,7 @@
 		"eventTrigger": {
 			"class": "InspireTrigger",
 			"targetPlayer": "SELF",
-			"condition": {
+			"fireCondition": {
 				"class": "CardCountCondition",
 				"targetPlayer": "SELF",
 				"value": 0,
