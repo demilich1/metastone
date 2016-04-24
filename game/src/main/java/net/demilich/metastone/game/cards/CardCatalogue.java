@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.cards;
 
+import java.nio.file.Paths;
 import java.util.function.Predicate;
 
 import java.io.File;
@@ -25,6 +26,7 @@ public class CardCatalogue {
 
 	private final static CardCollection cards = new CardCollection();
 	private static final String CARDS_FOLDER = File.separator + "cards";
+	private static final String USER_HOME_METASTONE = System.getProperty("user.home") + File.separator + "metastone";
 	private static Logger logger = LoggerFactory.getLogger(CardCatalogue.class);
 
 	public static void add(Card card) {
@@ -125,7 +127,10 @@ public class CardCatalogue {
 		// load cards from cards.jar on the classpath
 		Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(CARDS_FOLDER, false);
 
-		// TODO: read cards from ~/metastone/cards
+		// load cards from ~/metastone/cards on the filesystem
+		if (Paths.get(USER_HOME_METASTONE + CARDS_FOLDER).toFile().exists()) {
+			inputStreams.addAll((ResourceLoader.loadJsonInputStreams(USER_HOME_METASTONE + CARDS_FOLDER, true)));
+		}
 
 		Map<String, CardDesc> cardDesc = new HashMap<String, CardDesc>();
 		CardParser cardParser = new CardParser();

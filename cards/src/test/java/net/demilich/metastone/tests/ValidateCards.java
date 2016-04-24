@@ -22,6 +22,7 @@ import java.util.List;
  */
 public class ValidateCards {
 
+    private static final String USER_CARDS_DIR = System.getProperty("user.home") + File.separator + "metastone" + File.separator  + "cards";
     private static final String CARDS_DIR = "../cards/src/main/resources/cards/"; // relative path from project root
     private static final CardParser CARD_PARSER = new CardParser();
     private static final List<File> ALL_CARD_FILES;
@@ -32,6 +33,15 @@ public class ValidateCards {
                 new File(CARDS_DIR),
                 new RegexFileFilter("^(.*json)"),
                 DirectoryFileFilter.DIRECTORY);
+        // also pull in the user's custom cards dir
+        if (new File(USER_CARDS_DIR).exists()) {
+            ALL_CARD_FILES.addAll(
+                    FileUtils.listFiles(
+                        new File(USER_CARDS_DIR),
+                        new RegexFileFilter("^(.*json)"),
+                        DirectoryFileFilter.DIRECTORY)
+            );
+        }
     }
 
     @DataProvider(name = "CardProvider")
