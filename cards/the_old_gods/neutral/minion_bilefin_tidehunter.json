@@ -1,0 +1,25 @@
+{
+	"id": "minion_bilefin_tidehunter",
+	"name": "Bilefin Tidehunter",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 1,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"race": "MURLOC",
+	"description": "Battlecry: Summon a 1/1 Ooze with Taunt.",
+	"battlecry": {
+		"spell": {
+			"class": "SummonSpell",
+			"targetPlayer": "SELF",
+			"card": "token_ooze"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}
