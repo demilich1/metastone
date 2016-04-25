@@ -1,4 +1,4 @@
-package net.demilich.metastone.game.spells.custom;
+package net.demilich.metastone.game.spells;
 
 import java.util.Map;
 
@@ -12,23 +12,25 @@ import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
-public class VoljinSpell extends Spell {
+public class SwapAttackSpell extends Spell {
 
 	public static SpellDesc create() {
-		Map<SpellArg, Object> arguments = SpellDesc.build(VoljinSpell.class);
+		Map<SpellArg, Object> arguments = SpellDesc.build(SwapAttackSpell.class);
 		return new SpellDesc(arguments);
 	}
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		Minion voljin = (Minion) context.resolveSingleTarget(context.getSummonReferenceStack().peek());
+		Minion sourceMinion = (Minion) context.resolveSingleTarget(context.getSummonReferenceStack().peek());
 		Actor targetActor = (Actor) target;
-		int sourceHp = voljin.getHp();
-		int targetHp = targetActor.getHp();
-		context.getLogic().modifyMaxHp(voljin, targetHp);
-		voljin.setAttribute(Attribute.HP_BONUS, 0);
-		context.getLogic().modifyMaxHp(targetActor, sourceHp);
-		targetActor.setAttribute(Attribute.HP_BONUS, 0);
+		int sourceAttack = sourceMinion.getAttack();
+		int targetAttack = targetActor.getAttack();
+		source.setAttribute(Attribute.ATTACK, targetAttack);
+		sourceMinion.setAttribute(Attribute.ATTACK_BONUS, 0);
+		sourceMinion.setAttribute(Attribute.TEMPORARY_ATTACK_BONUS, 0);
+		targetActor.setAttribute(Attribute.ATTACK, sourceAttack);
+		targetActor.setAttribute(Attribute.ATTACK_BONUS, 0);
+		targetActor.setAttribute(Attribute.TEMPORARY_ATTACK_BONUS, 0);
 	}
 
 }
