@@ -1,0 +1,31 @@
+{
+	"id": "minion_bloodsail_cultist",
+	"name": "Bloodsail Cultist",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 4,
+	"heroClass": "WARRIOR",
+	"rarity": "RARE",
+	"race": "PIRATE",
+	"description": "Battlecry: If you control a Pirate, give your weapon +1/+1.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "BuffWeaponSpell",
+			"targetPlayer": "SELF",
+			"damage": 1,
+			"durability": 1
+		},
+		"condition": {
+			"class": "RaceOnBoardCondition",
+			"race": "PIRATE"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}
