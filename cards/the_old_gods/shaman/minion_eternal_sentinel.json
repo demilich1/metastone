@@ -1,0 +1,22 @@
+{
+	"id": "minion_eternal_sentinel",
+	"name": "Eternal Sentinel",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 2,
+	"heroClass": "SHAMAN",
+	"rarity": "EPIC",
+	"description": "Battlecry: Unlock your Overloaded Mana Crystals.",
+	"battlecry": {
+		"spell": {
+			"class": "ClearOverloadSpell"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}
