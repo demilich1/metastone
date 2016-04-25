@@ -1,0 +1,18 @@
+{
+	"id": "minion_grotesque_dragonhawk",
+	"name": "Grotesque Dragonhawk",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"race": "BEAST",
+	"description": "Windfury",
+	"attributes": {
+		"WINDFURY": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

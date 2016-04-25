@@ -1,0 +1,28 @@
+{
+	"id": "minion_cult_apothecary",
+	"name": "Cult Apothecary",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Battlecry: For each enemy minion, restore 2 Health to your Hero.",
+	"battlecry": {
+		"spell": {
+			"class": "HealSpell",
+			"target": "FRIENDLY_HERO",
+			"value": {
+				"class": "EntityCounter",
+				"target": "ENEMY_MINIONS",
+				"multiplier": 2
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

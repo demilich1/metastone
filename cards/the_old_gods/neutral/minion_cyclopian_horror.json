@@ -1,0 +1,29 @@
+{
+	"id": "minion_cyclopian_horror",
+	"name": "Cyclopian Horror",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 3,
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"description": "Taunt. Battlecry: Gain +1 Health for each enemy minion.",
+	"battlecry": {
+		"spell": {
+			"class": "BuffSpell",
+			"target": "SELF",
+			"hpBonus": {
+				"class": "AttributeCounter",
+				"target": "ENEMY_MINIONS",
+				"attribute": "DEATHRATTLES"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true,
+		"TAUNT": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

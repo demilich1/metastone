@@ -1,0 +1,14 @@
+{
+	"id": "minion_eldritch_horror",
+	"name": "Eldritch Horror",
+	"baseManaCost": 8,
+	"type": "MINION",
+	"baseAttack": 6,
+	"baseHp": 10,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "",
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

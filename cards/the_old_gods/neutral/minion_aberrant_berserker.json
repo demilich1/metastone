@@ -1,0 +1,27 @@
+{
+	"id": "minion_aberrant_berserker",
+	"name": "Aberrant Berserker",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Enrage: +2 Attack",
+	"trigger": {
+		"eventTrigger": {
+			"class": "EnrageChangedTrigger"
+		},
+		"spell": {
+			"class": "EnrageSpell",
+			"target": "SELF",
+			"attackBonus": 2
+		}
+	},
+	"attributes": {
+		"ENRAGABLE": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

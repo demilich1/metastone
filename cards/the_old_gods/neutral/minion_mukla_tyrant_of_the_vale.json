@@ -1,0 +1,28 @@
+{
+	"id": "minion_mukla_tyrant_of_the_vale",
+	"name": "Mukla, Tyrant of the Vale",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"race": "BEAST",
+	"description": "Battlecry: Add 2 Bananas to your hand.",
+	"battlecry": {
+		"spell": {
+			"class": "ReceiveCardSpell",
+			"targetPlayer": "SELF",
+			"cards": [
+				"spell_bananas",
+				"spell_bananas"
+			]
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}
