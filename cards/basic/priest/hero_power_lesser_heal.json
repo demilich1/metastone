@@ -11,7 +11,7 @@
 		"class": "HealSpell",
 		"value": 2
 	},
-	"collectible": false,
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

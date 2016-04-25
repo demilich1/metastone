@@ -48,7 +48,7 @@
 			}
 		]
 	},
-	"collectible": false,
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

@@ -1,28 +1,27 @@
 {
-	"id": "token_emboldener_3000",
-	"name": "Emboldener 3000",
+	"id": "token_poultryizer",
+	"name": "Poultryizer",
 	"baseManaCost": 1,
 	"type": "MINION",
 	"baseAttack": 0,
-	"baseHp": 4,
+	"baseHp": 3,
 	"heroClass": "ANY",
 	"rarity": "FREE",
 	"race": "MECH",
-	"description": "At the end of your turn, give a random minion +1/+1.",
+	"description": "At the start of your turn, transform a random minion into a 1/1 Chicken.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "TurnEndTrigger",
+			"class": "TurnStartTrigger",
 			"targetPlayer": "SELF"
 		},
 		"spell": {
-			"class": "BuffSpell",
+			"class": "TransformMinionSpell",
 			"target": "ALL_MINIONS",
-			"attackBonus": 1,
-			"hpBonus": 1,
+			"card": "token_chicken",
 			"randomTarget": true
 		}
 	},
 	"collectible": false,
-	"set": "CLASSIC",
+	"set": "PROMO",
 	"fileFormatVersion": 1
 }

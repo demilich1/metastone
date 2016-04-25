@@ -16,7 +16,7 @@
 		"value": 7,
 		"operation": "LESS"
 	},
-	"collectible": false,
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }
