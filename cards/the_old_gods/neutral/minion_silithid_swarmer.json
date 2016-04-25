@@ -1,0 +1,35 @@
+{
+	"id": "minion_silithid_swarmer",
+	"name": "Silithid Swarmer",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "Can only attack if your Hero attacked this turn.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "BoardChangedTrigger"
+		},
+		"spell": {
+			"class": "EitherOrSpell",
+			"target": "SELF",
+			"spell1": {
+				"class": "RemoveAttributeSpell",
+				"attribute": "CANNOT_ATTACK"
+			},
+			"spell2": {
+				"class": "AddAttributeSpell",
+				"attribute": "CANNOT_ATTACK"
+			},
+			"condition": {
+				"class": "HasAttackedCondition",
+				"target": "FRIENDLY_HERO"
+			}
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}
