@@ -1,17 +1,17 @@
 {
-	"id": "minion_twilight_elder",
-	"name": "Twilight Elder",
-	"baseManaCost": 3,
+	"id": "minion_cult_sorceror",
+	"name": "Cult Sorceror",
+	"baseManaCost": 2,
 	"type": "MINION",
 	"baseAttack": 3,
-	"baseHp": 4,
-	"heroClass": "ANY",
-	"rarity": "EPIC",
-	"description": "At the end of your turn, give your C'Thun +1/+1 (wherever it is).",
+	"baseHp": 2,
+	"heroClass": "MAGE",
+	"rarity": "RARE",
+	"description": "Spell Damage +1. After you cast a spell, give your C'Thun +1/+1 (wherever it is).",
 	"trigger": {
 		"eventTrigger": {
-			"class": "TurnEndTrigger",
-			"targetPlayer": "SELF"
+			"class": "AfterSpellCastedTrigger",
+			"sourcePlayer": "SELF"
 		},
 		"spell": {
 			"class": "MetaSpell",

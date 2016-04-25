@@ -1,17 +1,17 @@
 {
-	"id": "minion_twilight_elder",
-	"name": "Twilight Elder",
-	"baseManaCost": 3,
+	"id": "minion_usher_of_souls",
+	"name": "Usher of Souls",
+	"baseManaCost": 5,
 	"type": "MINION",
-	"baseAttack": 3,
-	"baseHp": 4,
-	"heroClass": "ANY",
-	"rarity": "EPIC",
-	"description": "At the end of your turn, give your C'Thun +1/+1 (wherever it is).",
+	"baseAttack": 5,
+	"baseHp": 6,
+	"heroClass": "WARLOCK",
+	"rarity": "COMMON",
+	"description": "Whenever a friendly minion dies, give your C'Thun +1/+1 (wherever it is).",
 	"trigger": {
 		"eventTrigger": {
-			"class": "TurnEndTrigger",
-			"targetPlayer": "SELF"
+			"class": "MinionDeathTrigger",
+			"sourcePlayer": "SELF"
 		},
 		"spell": {
 			"class": "MetaSpell",

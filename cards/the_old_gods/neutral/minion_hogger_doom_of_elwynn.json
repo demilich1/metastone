@@ -15,7 +15,8 @@
 		},
 		"spell": {
 			"class": "SummonSpell",
-			"card": "token_gnoll"
+			"card": "token_gnoll",
+			"boardPositionRelative": "RIGHT"
 		}
 	},
 	"collectible": true,

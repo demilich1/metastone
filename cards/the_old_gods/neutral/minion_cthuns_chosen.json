@@ -1,13 +1,13 @@
 {
     "id": "minion_cthuns_chosen",
-    "name": "C'thun's Chosen",
+    "name": "C'Thun's Chosen",
     "baseManaCost": 4,
     "type": "MINION",
     "baseAttack": 4,
     "baseHp": 2,
     "heroClass": "ANY",
     "rarity": "COMMON",
-    "description": "Divine Shield. Battlecry: Give your C'Thun +2/+2(wherever it is).",
+    "description": "Divine Shield. Battlecry: Give your C'Thun +2/+2 (wherever it is).",
     "battlecry": {
 		 "spell": {
 			"class": "MetaSpell",
@@ -31,24 +31,10 @@
 					}
 				},
 				{
-					"class": "AddSpellTriggerSpell",
+					"class": "ModifyAttributeSpell",
 					"target": "FRIENDLY_HERO",
-					"trigger": {
-						"eventTrigger": {
-							"class": "CardReceivedTrigger",
-							"targetPlayer": "SELF",
-							"condition": {
-								"class": "CardPropertyCondition",
-								"target": "EVENT_TARGET",
-								"cardId": "minion_cthun"
-							}
-						},
-						"spell": {
-							"class": "BuffSpell",
-							"target": "EVENT_TARGET",
-							"value": 2
-						}
-					}
+					"attribute": "CTHUN_BUFF",
+					"value": 2
 				}
 			]
 		}

@@ -1,0 +1,76 @@
+{
+	"id": "minion_klaxxi_amber-weaver",
+	"name": "Klaxxi Amber-Weaver",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 5,
+	"heroClass": "DRUID",
+	"rarity": "RARE",
+	"description": "Battlecry: If your C'Thun has 10 or more Attack, gain +5 Health.",
+	"battlecry": {
+		"spell": {
+			"class": "BuffSpell",
+			"target": "SELF",
+			"hpBonus": 5
+		},
+		"condition": {
+			"class": "OrCondition",
+			"conditions": [
+				{
+					"class": "ComparisonCondition",
+					"value1": {
+						"class": "HighestAttributeValueProvider",
+						"target": "FRIENDLY_MINIONS",
+						"attribute": "ATTACK",
+						"filter": {
+							"class": "SpecificCardFilter",
+							"cardId": "minion_cthun"
+						}
+					},
+					"value2": 10,
+					"operation": "GREATER_OR_EQUAL"
+				},
+				{
+					"class": "ComparisonCondition",
+					"value1": {
+						"class": "HighestAttributeValueProvider",
+						"target": "FRIENDLY_HAND",
+						"attribute": "ATTACK",
+						"filter": {
+							"class": "SpecificCardFilter",
+							"cardId": "minion_cthun"
+						}
+					},
+					"value2": 10,
+					"operation": "GREATER_OR_EQUAL"
+				},
+				{
+					"class": "AndCondition",
+					"conditions": [
+						{
+							"class": "DeckContainsCondition",
+							"cardId": "minion_cthun"
+						},
+						{
+							"class": "ComparisonCondition",
+							"value1": {
+								"class": "AttributeValueProvider",
+								"target": "FRIENDLY_HERO",
+								"attribute": "CTHUN_BUFF"
+							},
+							"value2": 4,
+							"operation": "GREATER_OR_EQUAL"
+						}
+					]
+				}
+			]
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

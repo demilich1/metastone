@@ -1,17 +1,17 @@
 {
-	"id": "minion_twilight_elder",
-	"name": "Twilight Elder",
-	"baseManaCost": 3,
+	"id": "minion_crazed_worshipper",
+	"name": "Crazed Worshipper",
+	"baseManaCost": 5,
 	"type": "MINION",
 	"baseAttack": 3,
-	"baseHp": 4,
+	"baseHp": 6,
 	"heroClass": "ANY",
 	"rarity": "EPIC",
-	"description": "At the end of your turn, give your C'Thun +1/+1 (wherever it is).",
+	"description": "Whenever this minion takes damage, give your C'Thun +1/+1 (wherever it is).",
 	"trigger": {
 		"eventTrigger": {
-			"class": "TurnEndTrigger",
-			"targetPlayer": "SELF"
+			"class": "DamageReceivedTrigger",
+			"hostTargetType": "IGNORE_OTHER_TARGETS"
 		},
 		"spell": {
 			"class": "MetaSpell",

@@ -1,17 +1,16 @@
 {
-	"id": "minion_twilight_elder",
-	"name": "Twilight Elder",
-	"baseManaCost": 3,
+	"id": "minion_hooded_acolyte",
+	"name": "Hooded Acolyte",
+	"baseManaCost": 4,
 	"type": "MINION",
-	"baseAttack": 3,
-	"baseHp": 4,
-	"heroClass": "ANY",
-	"rarity": "EPIC",
-	"description": "At the end of your turn, give your C'Thun +1/+1 (wherever it is).",
+	"baseAttack": 2,
+	"baseHp": 6,
+	"heroClass": "PRIEST",
+	"rarity": "COMMON",
+	"description": "Whenever a character is healed, give your C'Thun +1/+1 (wherever it is).",
 	"trigger": {
 		"eventTrigger": {
-			"class": "TurnEndTrigger",
-			"targetPlayer": "SELF"
+			"class": "HealingTrigger"
 		},
 		"spell": {
 			"class": "MetaSpell",

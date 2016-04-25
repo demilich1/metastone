@@ -1,0 +1,77 @@
+{
+	"id": "minion_twin_emperor_veklor",
+	"name": "Twin Emperor Veklor",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 6,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Taunt. Battlecry: If your C'Thun has 10 or more Attack, summon another Emperor.",
+	"battlecry": {
+		"spell": {
+			"class": "SummonSpell",
+			"target": "token_twin_emperor_veknilash",
+			"armorBonus": 10
+		},
+		"condition": {
+			"class": "OrCondition",
+			"conditions": [
+				{
+					"class": "ComparisonCondition",
+					"value1": {
+						"class": "HighestAttributeValueProvider",
+						"target": "FRIENDLY_MINIONS",
+						"attribute": "ATTACK",
+						"filter": {
+							"class": "SpecificCardFilter",
+							"cardId": "minion_cthun"
+						}
+					},
+					"value2": 10,
+					"operation": "GREATER_OR_EQUAL"
+				},
+				{
+					"class": "ComparisonCondition",
+					"value1": {
+						"class": "HighestAttributeValueProvider",
+						"target": "FRIENDLY_HAND",
+						"attribute": "ATTACK",
+						"filter": {
+							"class": "SpecificCardFilter",
+							"cardId": "minion_cthun"
+						}
+					},
+					"value2": 10,
+					"operation": "GREATER_OR_EQUAL"
+				},
+				{
+					"class": "AndCondition",
+					"conditions": [
+						{
+							"class": "DeckContainsCondition",
+							"cardId": "minion_cthun"
+						},
+						{
+							"class": "ComparisonCondition",
+							"value1": {
+								"class": "AttributeValueProvider",
+								"target": "FRIENDLY_HERO",
+								"attribute": "CTHUN_BUFF"
+							},
+							"value2": 4,
+							"operation": "GREATER_OR_EQUAL"
+						}
+					]
+				}
+			]
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true,
+		"TAUNT": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}
