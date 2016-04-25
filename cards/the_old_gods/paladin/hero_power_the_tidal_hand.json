@@ -1,15 +1,15 @@
 {
-	"id": "hero_power_reinforrggle",
-	"name": "Reinforrggle",
+	"id": "hero_power_the_tidal_hand",
+	"name": "The Tidal Hand",
 	"baseManaCost": 2,
 	"type": "HERO_POWER",
 	"heroClass": "PALADIN",
 	"rarity": "FREE",
-	"description": "Summon a 1/1 Murloc.",
+	"description": "Summon a 1/1 Silver Hand Murloc.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "SummonSpell",
-		"card": "token_murloc"
+		"card": "token_silver_hand_murloc"
 	},
 	"condition": {
 		"class": "MinionCountCondition",
