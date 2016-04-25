@@ -1,0 +1,21 @@
+{
+	"id": "spell_shadow_strike",
+	"name": "Shadow Strike",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "ROGUE",
+	"rarity": "COMMON",
+	"description": "Deal 5 damage to an undamaged minion.",
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "DamageSpell",
+		"value": 5,
+		"filter": {
+			"class": "DamagedFilter",
+			"invert": true
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}
