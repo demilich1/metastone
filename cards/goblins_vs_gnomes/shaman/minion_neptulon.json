@@ -11,7 +11,7 @@
 	"battlecry": {
 		"spell": {
 			"class": "ReceiveRandomCollectibleCardSpell",
-			"howMany": 4,
+			"value": 4,
 			"cardFilter": {
 				"class": "RaceFilter",
 				"race": "MURLOC"
