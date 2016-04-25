@@ -1,0 +1,22 @@
+{
+	"id": "minion_anomalus",
+	"name": "Anomalus",
+	"baseManaCost": 8,
+	"type": "MINION",
+	"baseAttack": 8,
+	"baseHp": 6,
+	"heroClass": "MAGE",
+	"rarity": "LEGENDARY",
+	"description": "Deathrattle: Deal 8 damage to all minions.",
+	"deathrattle": {
+		"class": "DamageSpell",
+		"target": "ALL_MINIONS",
+		"value": 8
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}
