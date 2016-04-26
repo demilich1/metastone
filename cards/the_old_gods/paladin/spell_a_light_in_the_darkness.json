@@ -1,0 +1,28 @@
+{
+	"id": "spell_a_light_in_the_darkness",
+	"name": "A Light in the Darkness",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "PALADIN",
+	"rarity": "COMMON",
+	"description": "Discover a minion. Give it +1/+1.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "DiscoverRandomCardSpell",
+		"spell": {
+			"class": "ReceiveCardAndDoSomethingSpell",
+			"targetPlayer": "SELF",
+			"spell": {
+				"class": "BuffSpell",
+				"value": 1
+			}
+		},
+		"cardFilter": {
+			"class": "CardFilter",
+			"cardType": "MINION"
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}
