@@ -11,8 +11,7 @@
 	"battlecry": {
 		"spell": {
 			"class": "SummonSpell",
-			"target": "token_twin_emperor_veknilash",
-			"armorBonus": 10
+			"card": "token_twin_emperor_veknilash"
 		},
 		"condition": {
 			"class": "OrCondition",
