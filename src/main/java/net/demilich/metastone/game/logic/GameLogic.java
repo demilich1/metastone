@@ -1275,12 +1275,12 @@ public class GameLogic implements Cloneable {
 		card.setOwner(playerId);
 		CardCollection hand = player.getHand();
 
-		if (card.getAttribute(Attribute.PASSIVE_TRIGGER) != null) {
-			TriggerDesc triggerDesc = (TriggerDesc) card.getAttribute(Attribute.PASSIVE_TRIGGER);
-			addGameEventListener(player, triggerDesc.create(), card);
-		}
-
 		if (hand.getCount() < MAX_HAND_CARDS) {
+			if (card.getAttribute(Attribute.PASSIVE_TRIGGER) != null) {
+				TriggerDesc triggerDesc = (TriggerDesc) card.getAttribute(Attribute.PASSIVE_TRIGGER);
+				addGameEventListener(player, triggerDesc.create(), card);
+			}
+			
 			log("{} receives card {}", player.getName(), card);
 			hand.add(card);
 			card.setLocation(CardLocation.HAND);
