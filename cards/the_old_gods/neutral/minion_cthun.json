@@ -19,19 +19,37 @@
 			}
 		}
 	},
-	"trigger": {
+	"passiveTrigger": {
 		"eventTrigger": {
 			"class": "CardReceivedTrigger",
-			"target": "SELF"
+			"hostTargetType": "IGNORE_OTHER_TARGETS"
 		},
 		"spell": {
-			"class": "BuffSpell",
-			"target": "EVENT_TARGET",
-			"value": {
-				"class": "AttributeValueProvider",
-				"target": "FRIENDLY_HERO",
-				"attribute": "CTHUN_BUFF"
-			}
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "BuffSpell",
+					"target": "SELF",
+					"value": {
+						"class": "AttributeValueProvider",
+						"target": "FRIENDLY_HERO",
+						"attribute": "CTHUN_BUFF"
+					}
+				},
+				{
+					"class": "ConditionalSpell",
+					"spell": {
+						"class": "AddAttributeSpell",
+						"target": "SELF",
+						"attribute": "TAUNT"
+					},
+					"condition": {
+						"class": "AttributeCondition",
+						"target": "FRIENDLY_HERO",
+						"attribute": "CTHUN_TAUNT"
+					}
+				}
+			]
 		}
 	},
 	"attributes": {
