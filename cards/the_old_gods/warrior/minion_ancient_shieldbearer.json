@@ -57,7 +57,7 @@
 							"value1": {
 								"class": "AttributeValueProvider",
 								"target": "FRIENDLY_HERO",
-								"attribute": "CTHUN_BUFF"
+								"attribute": "CTHUN_ATTACK_BUFF"
 							},
 							"value2": 4,
 							"operation": "GREATER_OR_EQUAL"

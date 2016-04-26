@@ -30,10 +30,15 @@
 				{
 					"class": "BuffSpell",
 					"target": "SELF",
-					"value": {
+					"attackBonus": {
 						"class": "AttributeValueProvider",
 						"target": "FRIENDLY_HERO",
-						"attribute": "CTHUN_BUFF"
+						"attribute": "CTHUN_ATTACK_BUFF"
+					},
+					"hpBonus": {
+						"class": "AttributeValueProvider",
+						"target": "FRIENDLY_HERO",
+						"attribute": "CTHUN_HEALTH_BUFF"
 					}
 				},
 				{
