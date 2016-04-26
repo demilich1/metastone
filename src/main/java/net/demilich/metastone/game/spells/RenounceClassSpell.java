@@ -40,24 +40,27 @@ public class RenounceClassSpell extends Spell {
 				player.getHero().setHeroPower(heroPower);
 			}
 		}
-		
+
+		CardCollection replacedCards = new CardCollection();
 		for (Card card : player.getDeck()) {
 			if (card.getClassRestriction() == renouncedClass) {
-				Card replacement = result.getRandom();
-				replacement.setAttribute(Attribute.MANA_COST_MODIFIER, manaCostModifier);
-				player.getDeck().replace(card, replacement);
+				replacedCards.add(card);
 				
 			}
 		}
+		for (Card card : replacedCards) {
+			Card replacement = result.getRandom().getCopy();
+			replacement.setAttribute(Attribute.MANA_COST_MODIFIER, manaCostModifier);
+			context.getLogic().replaceCardInDeck(player.getId(), card, replacement);
+		}
 		
-		CardCollection replacedCards = new CardCollection();
 		for (Card card : player.getHand()) {
 			if (card.getClassRestriction() == renouncedClass) {
 				replacedCards.add(card);
 			}
 		}
 		for (Card card : replacedCards) {
-			Card replacement = result.getRandom();
+			Card replacement = result.getRandom().getCopy();
 			replacement.setAttribute(Attribute.MANA_COST_MODIFIER, manaCostModifier);
 			context.getLogic().replaceCard(player.getId(), card, replacement);
 		}

@@ -1404,6 +1404,25 @@ public class GameLogic implements Cloneable {
 		newCard.setLocation(CardLocation.HAND);
 		context.fireGameEvent(new DrawCardEvent(context, playerId, newCard, null, false));
 	}
+	
+	public void replaceCardInDeck(int playerId, Card oldCard, Card newCard) {
+		Player player = context.getPlayer(playerId);
+		if (newCard.getId() == IdFactory.UNASSIGNED) {
+			newCard.setId(idFactory.generateId());
+		}
+		
+		if (!player.getDeck().contains(oldCard)) {
+			return;
+		}
+
+		newCard.setOwner(playerId);
+		CardCollection deck = player.getDeck();
+
+		log("{} replaces card {} with card {}", player.getName(), oldCard, newCard);
+		deck.replace(oldCard, newCard);
+		removeCardFromDeck(playerId, oldCard);
+		newCard.setLocation(CardLocation.DECK);
+	}
 
 	private void resolveBattlecry(int playerId, Actor actor) {
 		BattlecryAction battlecry = actor.getBattlecry();
@@ -1431,8 +1450,11 @@ public class GameLogic implements Cloneable {
 		} else {
 			battlecryAction = battlecry;
 		}
-		performGameAction(playerId, battlecryAction);
 		if (hasAttribute(player, Attribute.DOUBLE_BATTLECRIES) && actor.getSourceCard().hasAttribute(Attribute.BATTLECRY)) {
+			// You need DOUBLE_BATTLECRIES before your battlecry action, not after.
+			performGameAction(playerId, battlecryAction);
+			performGameAction(playerId, battlecryAction);
+		} else {
 			performGameAction(playerId, battlecryAction);
 		}
 		checkForDeadEntities();
