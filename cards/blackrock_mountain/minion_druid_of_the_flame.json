@@ -26,6 +26,14 @@
 			}
 		}
 	],
+	"bothOptions": {
+		"description": "5/5",
+		"spell": {
+			"class": "TransformMinionSpell",
+			"target": "SELF",
+			"card": "token_flame_lionbird_form"
+		}
+	},
 	"collectible": true,
 	"set": "BLACKROCK_MOUNTAIN",
 	"fileFormatVersion": 1

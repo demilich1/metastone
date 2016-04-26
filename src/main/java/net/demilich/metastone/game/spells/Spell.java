@@ -2,6 +2,7 @@ package net.demilich.metastone.game.spells;
 
 import java.util.List;
 
+import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
@@ -30,7 +31,9 @@ public abstract class Spell {
 			// cast in on all targets
 
 			for (Entity target : validTargets) {
+				context.getEnvironment().put(Environment.SPELL_TARGET, target.getReference());
 				castForPlayer(context, player, desc, source, target);
+				context.getEnvironment().remove(Environment.SPELL_TARGET);
 			}
 		}
 	}

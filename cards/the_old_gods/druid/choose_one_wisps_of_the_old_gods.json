@@ -11,6 +11,7 @@
 		"spell_wisps_of_the_old_gods_1",
 		"spell_wisps_of_the_old_gods_2"
 	],
+	"bothOptions": "spell_wisps_of_the_old_gods_3",
 	"set": "THE_OLD_GODS",
 	"fileFormatVersion": 1
 }

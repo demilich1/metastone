@@ -1,0 +1,27 @@
+{
+	"id": "spell_nourish_3",
+	"name": "+2 Mana Crystals and draw 3 cards",
+	"baseManaCost": 5,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "RARE",
+	"description": "Gain 2 Mana Crystals and Draw 3 cards",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "ModifyMaxManaSpell",
+				"fullManaCrystals": true,
+				"value": 2
+			},
+			{
+				"class": "DrawCardSpell",
+				"value": 3
+			}
+		]
+	},
+	"collectible": false,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

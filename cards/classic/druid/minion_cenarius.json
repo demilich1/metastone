@@ -26,18 +26,41 @@
 					{
 						"class": "SummonSpell",
 						"card": "token_treant_taunt",
-						"boardPositionRelative": "LEFT"
+						"boardPositionRelative": "RIGHT"
 					},
 					{
 						"class": "SummonSpell",
 						"card": "token_treant_taunt",
-						"boardPositionRelative": "RIGHT"
+						"boardPositionRelative": "LEFT"
 					}
 				]
-			},
-			"resolvedLate": false
+			}
 		}
 	],
+	"bothOptions": {
+		"description": "2 Treants and +2/+2",
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "SummonSpell",
+					"card": "token_treant_taunt",
+					"boardPositionRelative": "RIGHT"
+				},
+				{
+					"class": "SummonSpell",
+					"card": "token_treant_taunt",
+					"boardPositionRelative": "LEFT"
+				},
+				{
+					"class": "BuffSpell",
+					"target": "OTHER_FRIENDLY_MINIONS",
+					"attackBonus": 2,
+					"hpBonus": 2
+				}
+			]
+		}
+	},
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

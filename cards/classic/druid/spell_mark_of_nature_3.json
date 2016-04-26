@@ -1,0 +1,26 @@
+{
+	"id": "spell_mark_of_nature_3",
+	"name": "+4/+4, Taunt",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"description": "Give a minion +4/+4 and Taunt",
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "BuffSpell",
+				"value": 4
+			},
+			{
+				"class": "AddAttributeSpell",
+				"attribute": "TAUNT"
+			}
+		]
+	},
+	"collectible": false,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

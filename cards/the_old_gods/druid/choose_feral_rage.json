@@ -11,6 +11,7 @@
 		"spell_feral_rage_1",
 		"spell_feral_rage_2"
 	],
+	"bothOptions": "spell_feral_rage_3",
 	"set": "THE_OLD_GODS",
 	"fileFormatVersion": 1
 }

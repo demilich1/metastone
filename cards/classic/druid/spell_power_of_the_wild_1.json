@@ -1,6 +1,6 @@
 {
 	"id": "spell_power_of_the_wild_1",
-	"name": "+1/1",
+	"name": "+1/+1",
 	"baseManaCost": 2,
 	"type": "SPELL",
 	"heroClass": "DRUID",

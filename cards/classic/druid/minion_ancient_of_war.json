@@ -36,6 +36,24 @@
 			}
 		}
 	],
+	"bothOptions": {
+		"description": "+5/+5 and Taunt",
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "BuffSpell",
+					"target": "SELF",
+					"value": 5
+				},
+				{
+					"class": "AddAttributeSpell",
+					"target": "SELF",
+					"attribute": "TAUNT"
+				}
+			]
+		}
+	},
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

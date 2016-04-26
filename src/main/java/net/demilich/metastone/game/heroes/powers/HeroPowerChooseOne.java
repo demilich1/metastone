@@ -12,11 +12,13 @@ import net.demilich.metastone.game.spells.NullSpell;
 public class HeroPowerChooseOne extends HeroPower implements IChooseOneCard {
 
 	private String[] cardIds;
+	private String cardId;
 
 	public HeroPowerChooseOne(HeroPowerCardDesc desc) {
 		super(desc);
 		setAttribute(Attribute.CHOOSE_ONE);
 		this.cardIds = desc.options;
+		this.cardId = desc.bothOptions;
 		setSpell(NullSpell.create());
 	}
 
@@ -46,6 +48,17 @@ public class HeroPowerChooseOne extends HeroPower implements IChooseOneCard {
 			actions[i] = cardAction;
 		}
 		return actions;
+	}
+	
+
+
+	@Override
+	public PlayCardAction playBothOptions() {
+		SpellCard card = getCard(cardId);
+
+		PlayCardAction cardAction = new HeroPowerAction(card.getSpell(), this, getTargetRequirement());
+		cardAction.setActionSuffix(card.getName());
+		return cardAction;
 	}
 
 }
