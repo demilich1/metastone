@@ -9,6 +9,7 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "BuffHeroSpell",
+		"target": "FRIENDLY_HERO",
 		"armorBonus": 8
 	},
 	"collectible": false,

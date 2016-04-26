@@ -5,7 +5,7 @@
 	"type": "SPELL",
 	"heroClass": "DRUID",
 	"rarity": "EPIC",
-	"description": "+5/5 and Taunt",
+	"description": "Summon 5 Wisps and give a minion +5/5 and Taunt",
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "MetaSpell",

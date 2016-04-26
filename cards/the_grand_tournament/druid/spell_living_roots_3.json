@@ -6,7 +6,7 @@
 	"heroClass": "DRUID",
 	"rarity": "COMMON",
 	"description": "Deal 2 damage. Summon two 1/1 Saplings.",
-	"targetSelection": "NONE",
+	"targetSelection": "ANY",
 	"spell": {
 		"class": "MetaSpell",
 		"spells": [

@@ -16,7 +16,7 @@
 			},
 			{
 				"class": "SummonSpell",
-				"cardId": "token_mastiff"
+				"card": "token_mastiff"
 			}
 		]
 	},

@@ -9,25 +9,27 @@
 	"rarity": "EPIC",
 	"description": "Battlecry: Spend all your Mana. Gain +1/+1 for each Mana spent.",
 	"battlecry": {
-		"class": "MetaSpell",
-		"spells": [
-			{
-				"class": "BuffSpell",
-				"target": "SELF",
-				"value": {
-					"class": "PlayerAttributeValueProvider",
-					"playerAttribute": "MANA"
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "BuffSpell",
+					"target": "SELF",
+					"value": {
+						"class": "PlayerAttributeValueProvider",
+						"playerAttribute": "MANA"
+					}
+				},
+				{
+					"class": "GainManaSpell",
+					"value": {
+						"class": "PlayerAttributeValueProvider",
+						"playerAttribute": "MANA",
+						"multiplier": -1
+					}
 				}
-			},
-			{
-				"class": "GainManaSpell",
-				"value": {
-					"class": "PlayerAttributeValueProvider",
-					"playerAttribute": "MANA",
-					"multiplier": -1
-				}
-			}
-		]
+			]
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

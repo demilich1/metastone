@@ -9,7 +9,7 @@
 	"rarity": "RARE",
 	"description": "Battlecry: Deal 2 damage. Give your C'Thun +2/+2 (wherever it is).",
 	"battlecry": {
-		"targeteSlection": "ANY",
+		"targetSelection": "ANY",
 		"spell": {
 			"class": "MetaSpell",
 			"spells": [

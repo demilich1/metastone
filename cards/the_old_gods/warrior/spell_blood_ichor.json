@@ -15,7 +15,7 @@
 		},
 		"spell2": {
 			"class": "SummonSpell",
-			"cardId": "token_tauren_slime"
+			"card": "token_tauren_slime"
 		},
 		"condition": {
 			"class": "IsDeadCondition",

@@ -6,7 +6,7 @@
 	"heroClass": "WARLOCK",
 	"rarity": "EPIC",
 	"description": "Spend all your mana. Summon that many 1/1 Tentacles.",
-	"targetSelection": "ANY",
+	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
 		"spells": [
