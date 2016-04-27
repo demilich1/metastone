@@ -7,11 +7,13 @@ import net.demilich.metastone.game.cards.desc.ChooseOneCardDesc;
 public class ChooseOneCard extends Card implements IChooseOneCard {
 
 	private String[] cardIds;
+	private String cardId;
 
 	public ChooseOneCard(ChooseOneCardDesc desc) {
 		super(desc);
 		setAttribute(Attribute.CHOOSE_ONE);
 		cardIds = desc.options;
+		cardId = desc.bothOptions;
 	}
 
 	@Override
@@ -27,6 +29,14 @@ public class ChooseOneCard extends Card implements IChooseOneCard {
 		card.setOwner(getOwner());
 		card.setId(getId());
 		return card;
+	}
+	
+	public Card[] getChoiceCards() {
+		Card[] cards = new Card[cardIds.length];
+		for (int i = 0; i < cardIds.length; i++) {
+			cards[i] = getCard(cardIds[i]);
+		}
+		return cards;
 	}
 
 	@Override
@@ -46,6 +56,14 @@ public class ChooseOneCard extends Card implements IChooseOneCard {
 			actions[i] = cardAction;
 		}
 		return actions;
+	}
+
+	@Override
+	public PlayCardAction playBothOptions() {
+		Card card = getCard(cardId);
+		PlayCardAction cardAction = card.play();
+		cardAction.setActionSuffix(card.getName());
+		return cardAction;
 	}
 
 }

@@ -196,7 +196,13 @@ public class GameLogic implements Cloneable {
 		Player player = context.getPlayer(playerId);
 		Card card = context.resolveCardReference(cardReference);
 		int manaCost = getModifiedManaCost(player, card);
-		if (player.getMana() < manaCost && manaCost != 0) {
+		if (card.getCardType().isCardType(CardType.SPELL)
+				&& player.getHero().hasAttribute(Attribute.SPELLS_COST_HEALTH)
+				&& player.getHero().getEffectiveHp() < manaCost) {
+			return false;
+		} else if (player.getMana() < manaCost && manaCost != 0
+				&& !(card.getCardType().isCardType(CardType.SPELL)
+				&& player.getHero().hasAttribute(Attribute.SPELLS_COST_HEALTH))) {
 			return false;
 		}
 		if (card.getCardType().isCardType(CardType.HERO_POWER)) {
@@ -542,6 +548,15 @@ public class GameLogic implements Cloneable {
 		player.getDeck().remove(card);
 		receiveCard(playerId, card, source, true);
 		return card;
+	}
+
+	public void drawSetAsideCard(int playerId, Card card) {
+		if (card.getId() == IdFactory.UNASSIGNED) {
+			card.setId(idFactory.generateId());
+		}
+		card.setOwner(playerId);
+		Player player = context.getPlayer(playerId);
+		player.getSetAsideZone().add(card);
 	}
 
 	public void endTurn(int playerId) {
@@ -1172,8 +1187,13 @@ public class GameLogic implements Cloneable {
 		Card card = context.resolveCardReference(cardReference);
 
 		int modifiedManaCost = getModifiedManaCost(player, card);
-		modifyCurrentMana(playerId, -modifiedManaCost);
-		player.getStatistics().manaSpent(modifiedManaCost);
+		if (card.getCardType().isCardType(CardType.SPELL)
+				&& player.getHero().hasAttribute(Attribute.SPELLS_COST_HEALTH)) {
+			damage(player, player.getHero(), modifiedManaCost, card, true);
+		} else {
+			modifyCurrentMana(playerId, -modifiedManaCost);
+			player.getStatistics().manaSpent(modifiedManaCost);
+		}
 		log("{} plays {}", player.getName(), card);
 
 		player.getStatistics().cardPlayed(card);
@@ -1255,12 +1275,12 @@ public class GameLogic implements Cloneable {
 		card.setOwner(playerId);
 		CardCollection hand = player.getHand();
 
-		if (card.getAttribute(Attribute.PASSIVE_TRIGGER) != null) {
-			TriggerDesc triggerDesc = (TriggerDesc) card.getAttribute(Attribute.PASSIVE_TRIGGER);
-			addGameEventListener(player, triggerDesc.create(), card);
-		}
-
 		if (hand.getCount() < MAX_HAND_CARDS) {
+			if (card.getAttribute(Attribute.PASSIVE_TRIGGER) != null) {
+				TriggerDesc triggerDesc = (TriggerDesc) card.getAttribute(Attribute.PASSIVE_TRIGGER);
+				addGameEventListener(player, triggerDesc.create(), card);
+			}
+			
 			log("{} receives card {}", player.getName(), card);
 			hand.add(card);
 			card.setLocation(CardLocation.HAND);
@@ -1360,6 +1380,50 @@ public class GameLogic implements Cloneable {
 		}
 	}
 
+	public void replaceCard(int playerId, Card oldCard, Card newCard) {
+		Player player = context.getPlayer(playerId);
+		if (newCard.getId() == IdFactory.UNASSIGNED) {
+			newCard.setId(idFactory.generateId());
+		}
+		
+		if (!player.getHand().contains(oldCard)) {
+			return;
+		}
+
+		newCard.setOwner(playerId);
+		CardCollection hand = player.getHand();
+
+		if (newCard.getAttribute(Attribute.PASSIVE_TRIGGER) != null) {
+			TriggerDesc triggerDesc = (TriggerDesc) newCard.getAttribute(Attribute.PASSIVE_TRIGGER);
+			addGameEventListener(player, triggerDesc.create(), newCard);
+		}
+
+		log("{} replaces card {} with card {}", player.getName(), oldCard, newCard);
+		hand.replace(oldCard, newCard);
+		removeCard(playerId, oldCard);
+		newCard.setLocation(CardLocation.HAND);
+		context.fireGameEvent(new DrawCardEvent(context, playerId, newCard, null, false));
+	}
+	
+	public void replaceCardInDeck(int playerId, Card oldCard, Card newCard) {
+		Player player = context.getPlayer(playerId);
+		if (newCard.getId() == IdFactory.UNASSIGNED) {
+			newCard.setId(idFactory.generateId());
+		}
+		
+		if (!player.getDeck().contains(oldCard)) {
+			return;
+		}
+
+		newCard.setOwner(playerId);
+		CardCollection deck = player.getDeck();
+
+		log("{} replaces card {} with card {}", player.getName(), oldCard, newCard);
+		deck.replace(oldCard, newCard);
+		removeCardFromDeck(playerId, oldCard);
+		newCard.setLocation(CardLocation.DECK);
+	}
+
 	private void resolveBattlecry(int playerId, Actor actor) {
 		BattlecryAction battlecry = actor.getBattlecry();
 		Player player = context.getPlayer(playerId);
@@ -1386,8 +1450,11 @@ public class GameLogic implements Cloneable {
 		} else {
 			battlecryAction = battlecry;
 		}
-		performGameAction(playerId, battlecryAction);
 		if (hasAttribute(player, Attribute.DOUBLE_BATTLECRIES) && actor.getSourceCard().hasAttribute(Attribute.BATTLECRY)) {
+			// You need DOUBLE_BATTLECRIES before your battlecry action, not after.
+			performGameAction(playerId, battlecryAction);
+			performGameAction(playerId, battlecryAction);
+		} else {
 			performGameAction(playerId, battlecryAction);
 		}
 		checkForDeadEntities();

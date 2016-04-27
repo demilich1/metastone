@@ -1,0 +1,16 @@
+{
+	"id": "minion_flamewreathed_faceless",
+	"name": "Flamewreathed Faceless",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 7,
+	"baseHp": 7,
+	"heroClass": "SHAMAN",
+	"rarity": "COMMON",
+	"description": "Overload: (2)",
+	"attributes": {
+		"OVERLOAD": 2
+	},
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,40 @@
+{
+	"id": "spell_raven_idol_3",
+	"name": "Discover a minion and a spell",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"description": "Discover a minion. Discover a spell.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "DiscoverRandomCardSpell",
+				"spell": {
+					"class": "ReceiveCardSpell",
+					"targetPlayer": "SELF"
+				},
+				"cardFilter": {
+					"class": "CardFilter",
+					"cardType": "MINION"
+				}
+			},
+			{
+				"class": "DiscoverRandomCardSpell",
+				"spell": {
+					"class": "ReceiveCardSpell",
+					"targetPlayer": "SELF"
+				},
+				"cardFilter": {
+					"class": "CardFilter",
+					"cardType": "SPELL"
+				}
+			}
+		]
+	},
+	"collectible": false,
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}

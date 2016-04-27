@@ -1,0 +1,76 @@
+{
+	"id": "minion_twilight_darkmender",
+	"name": "Twilight Darkmender",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 6,
+	"baseHp": 5,
+	"heroClass": "PRIEST",
+	"rarity": "RARE",
+	"description": "Battlecry: If your C'Thun has at least 10 Attack, restore 10 Health to your Hero.",
+	"battlecry": {
+		"spell": {
+			"class": "HealSpell",
+			"target": "FRIENDLY_HERO",
+			"value": 10
+		},
+		"condition": {
+			"class": "OrCondition",
+			"conditions": [
+				{
+					"class": "ComparisonCondition",
+					"value1": {
+						"class": "HighestAttributeValueProvider",
+						"target": "FRIENDLY_MINIONS",
+						"attribute": "ATTACK",
+						"filter": {
+							"class": "SpecificCardFilter",
+							"cardId": "minion_cthun"
+						}
+					},
+					"value2": 10,
+					"operation": "GREATER_OR_EQUAL"
+				},
+				{
+					"class": "ComparisonCondition",
+					"value1": {
+						"class": "HighestAttributeValueProvider",
+						"target": "FRIENDLY_HAND",
+						"attribute": "ATTACK",
+						"filter": {
+							"class": "SpecificCardFilter",
+							"cardId": "minion_cthun"
+						}
+					},
+					"value2": 10,
+					"operation": "GREATER_OR_EQUAL"
+				},
+				{
+					"class": "AndCondition",
+					"conditions": [
+						{
+							"class": "DeckContainsCondition",
+							"cardId": "minion_cthun"
+						},
+						{
+							"class": "ComparisonCondition",
+							"value1": {
+								"class": "AttributeValueProvider",
+								"target": "FRIENDLY_HERO",
+								"attribute": "CTHUN_ATTACK_BUFF"
+							},
+							"value2": 4,
+							"operation": "GREATER_OR_EQUAL"
+						}
+					]
+				}
+			]
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

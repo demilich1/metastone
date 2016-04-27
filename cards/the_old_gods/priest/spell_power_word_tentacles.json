@@ -1,0 +1,18 @@
+{
+	"id": "spell_power_word_tentacles",
+	"name": "Power Word: Tentacles",
+	"baseManaCost": 5,
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "COMMON",
+	"description": "Give a minion +2/+6.",
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "BuffSpell",
+		"attackBonus": 2,
+		"hpBonus": 6
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

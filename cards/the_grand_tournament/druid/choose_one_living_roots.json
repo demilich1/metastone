@@ -11,6 +11,7 @@
 		"spell_living_roots_1",
 		"spell_living_roots_2"
 	],
+	"bothOptions": "spell_living_roots_3",
 	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

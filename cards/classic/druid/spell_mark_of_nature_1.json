@@ -9,7 +9,7 @@
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "BuffSpell",
-		"attackBonus": 2
+		"attackBonus": 4
 	},
 	"collectible": false,
 	"set": "CLASSIC",

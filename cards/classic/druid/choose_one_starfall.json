@@ -11,6 +11,7 @@
 		"spell_starfall_1",
 		"spell_starfall_2"
 	],
+	"bothOptions": "spell_starfall_3",
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

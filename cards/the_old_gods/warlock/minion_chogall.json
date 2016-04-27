@@ -1,0 +1,31 @@
+{
+	"id": "minion_chogall",
+	"name": "Cho'Gall",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"baseAttack": 7,
+	"baseHp": 7,
+	"heroClass": "WARLOCK",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Your next spell this turn costs Health instead.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "AddAttributeSpell",
+			"target": "FRIENDLY_HERO",
+			"attribute": "SPELLS_COST_HEALTH",
+			"revertTrigger": {
+				"class": "TurnEndTrigger"
+			},
+			"secondRevertTrigger": {
+				"class": "SpellCastedTrigger"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

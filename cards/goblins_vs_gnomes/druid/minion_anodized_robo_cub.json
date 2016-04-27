@@ -27,6 +27,14 @@
 			}
 		}
 	],
+	"bothOptions": {
+		"description": "+1/+1",
+		"spell": {
+			"class": "BuffSpell",
+			"target": "SELF",
+			"value": 1
+		}
+	},
 	"attributes": {
 		"TAUNT": true
 	},

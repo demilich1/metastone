@@ -1,0 +1,25 @@
+{
+	"id": "minion_yshaarj_rage_unbound",
+	"name": "Y'Shaarj, Rage Unbound",
+	"baseManaCost": 10,
+	"type": "MINION",
+	"baseAttack": 10,
+	"baseHp": 10,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "At the end of your turn, put a minion from your deck into the battlefield.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "PutRandomMinionOnBoardSpell",
+			"targetPlayer": "SELF",
+			"cardLocation": "DECK"
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

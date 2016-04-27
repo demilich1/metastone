@@ -1,0 +1,31 @@
+{
+	"id": "spell_wrath_3",
+	"name": "3 damage, 1 damage and draw a card",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"description": "Deal 3 damage to a minion",
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "DamageSpell",
+				"value": 3
+			},
+			{
+				"class": "DamageSpell",
+				"value": 1
+			},
+			{
+				"class": "DrawCardSpell",
+				"targetPlayer": "SELF",
+				"value": "1"
+			}
+		]
+	},
+	"collectible": false,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

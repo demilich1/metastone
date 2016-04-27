@@ -18,7 +18,7 @@
 			}
 		},
 		{
-			"description": "Taunt",
+			"description": "+2 Health and Taunt",
 			"spell": {
 				"class": "TransformMinionSpell",
 				"target": "SELF",
@@ -26,6 +26,14 @@
 			}
 		}
 	],
+	"bothOptions": {
+		"description": "Charge, +2 Health, and Taunt",
+		"spell": {
+			"class": "TransformMinionSpell",
+			"target": "SELF",
+			"card": "token_catbear_form"
+		}
+	},
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

@@ -25,6 +25,23 @@
 			}
 		}
 	],
+	"bothOptions": {
+		"description": "Draw a card and heal for 5",
+		"targetSelection": "ANY",
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "DrawCardSpell",
+					"value": 1
+				},
+				{
+					"class": "HealSpell",
+					"value": 5
+				}
+			]
+		}
+	},
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

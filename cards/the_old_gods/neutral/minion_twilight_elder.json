@@ -19,7 +19,7 @@
 				{
 					"class": "BuffSpell",
 					"target": "FRIENDLY_MINIONS",
-					"value": 2,
+					"value": 1,
 					"filter": {
 						"class": "SpecificCardFilter",
 						"cardId": "minion_cthun"
@@ -28,31 +28,23 @@
 				{
 					"class": "BuffSpell",
 					"target": "FRIENDLY_HAND",
-					"value": 2,
+					"value": 1,
 					"filter": {
 						"class": "SpecificCardFilter",
 						"cardId": "minion_cthun"
 					}
 				},
 				{
-					"class": "AddSpellTriggerSpell",
+					"class": "ModifyAttributeSpell",
 					"target": "FRIENDLY_HERO",
-					"trigger": {
-						"eventTrigger": {
-							"class": "CardReceivedTrigger",
-							"targetPlayer": "SELF",
-							"condition": {
-								"class": "CardPropertyCondition",
-								"target": "EVENT_TARGET",
-								"cardId": "minion_cthun"
-							}
-						},
-						"spell": {
-							"class": "BuffSpell",
-							"target": "EVENT_TARGET",
-							"value": 2
-						}
-					}
+					"attribute": "CTHUN_ATTACK_BUFF",
+					"value": 1
+				},
+				{
+					"class": "ModifyAttributeSpell",
+					"target": "FRIENDLY_HERO",
+					"attribute": "CTHUN_HEALTH_BUFF",
+					"value": 1
 				}
 			]
 		}

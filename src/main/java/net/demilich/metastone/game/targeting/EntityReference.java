@@ -23,6 +23,7 @@ public class EntityReference {
 	
 
 	public static final EntityReference TARGET = new EntityReference(-30);
+	public static final EntityReference SPELL_TARGET = new EntityReference(-31);
 
 	public static final EntityReference EVENT_TARGET = new EntityReference(-40);
 	public static final EntityReference SELF = new EntityReference(-41);

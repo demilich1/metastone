@@ -47,6 +47,10 @@ public class CardCatalogue {
 		return query(card -> card.isCollectible() && card.getCardType() == CardType.HERO);
 	}
 	
+	public static CardCollection getHeroPowers() {
+		return query(card -> card.isCollectible() && card.getCardType() == CardType.HERO_POWER);
+	}
+	
 	public static CardCollection query(DeckFormat deckFormat) {
 		return query(deckFormat, (CardType) null, (Rarity) null, (HeroClass) null, (Attribute) null);
 	}

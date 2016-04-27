@@ -13,7 +13,7 @@
 		"spell": {
 			"class": "ReceiveRandomCollectibleCardSpell",
 			"card": "spell_tail_swipe",
-			"howMany": 2,
+			"value": 2,
 			"cardFilter": {
 				"class": "CardFilter",
 				"cardType": "SPELL",

@@ -1,0 +1,25 @@
+{
+	"id": "minion_infested_wolf",
+	"name": "Infested Wolf",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 3,
+	"heroClass": "HUNTER",
+	"rarity": "RARE",
+	"race": "BEAST",
+	"description": "Deathrattle: Summon two 1/1 Spiders.",
+	"deathrattle": {
+		"class": "SummonSpell",
+		"cards": [
+			"token_spider",
+			"token_spider"
+		]
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}
