@@ -1,15 +1,15 @@
 {
-    "id": "minion_cthuns_chosen",
-    "name": "C'Thun's Chosen",
-    "baseManaCost": 4,
-    "type": "MINION",
-    "baseAttack": 4,
-    "baseHp": 2,
-    "heroClass": "ANY",
-    "rarity": "COMMON",
-    "description": "Divine Shield. Battlecry: Give your C'Thun +2/+2 (wherever it is).",
-    "battlecry": {
-		 "spell": {
+	"id": "minion_cthuns_chosen",
+	"name": "C'Thun's Chosen",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 2,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Divine Shield. Battlecry: Give your C'Thun +2/+2 (wherever it is).",
+	"battlecry": {
+		"spell": {
 			"class": "MetaSpell",
 			"spells": [
 				{
@@ -45,11 +45,11 @@
 			]
 		}
 	},
-    "attributes": {
-      "BATTLECRY": true,
-      "DIVINE_SHIELD": true
-    },
-    "collectible": true,
-    "set": "THE_OLD_GODS",
-    "fileFormatVersion": 1
+	"attributes": {
+		"BATTLECRY": true,
+		"DIVINE_SHIELD": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
 }

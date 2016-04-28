@@ -16,12 +16,11 @@
 		},
 		"spell": {
 			"class": "SummonRandomMinionFilteredSpell",
+			"boardPositionRelative": "RIGHT",
 			"cardFilter": {
 				"class": "CardFilter",
 				"race": "MURLOC"
-			},
-			"boardPositionRelative": "RIGHT"
-			
+			}
 		}
 	},
 	"collectible": true,

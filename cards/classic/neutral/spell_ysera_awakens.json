@@ -15,7 +15,6 @@
 			"class": "SpecificCardFilter",
 			"cardId": "minion_ysera",
 			"invert": true
-			
 		}
 	},
 	"collectible": false,

@@ -13,8 +13,8 @@
 	},
 	"condition": {
 		"class": "MinionCountCondition",
-		"value": 7,
-		"operation": "LESS"
+		"operation": "LESS",
+		"value": 7
 	},
 	"collectible": false,
 	"set": "THE_OLD_GODS",

@@ -16,8 +16,8 @@
 		"spell": {
 			"class": "ModifyAttributeSpell",
 			"target": "EVENT_TARGET",
-			"value": -1,
-			"attribute": "MANA_COST_MODIFIER"
+			"attribute": "MANA_COST_MODIFIER",
+			"value": -1
 		}
 	},
 	"collectible": true,

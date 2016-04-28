@@ -11,11 +11,11 @@
 	"battlecry": {
 		"spell": {
 			"class": "SummonRandomMinionFilteredSpell",
+			"boardPositionRelative": "RIGHT",
 			"cardFilter": {
 				"class": "CardFilter",
 				"manaCost": 3
-			},
-			"boardRelativePosition": "RIGHT"
+			}
 		}
 	},
 	"attributes": {

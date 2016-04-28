@@ -13,8 +13,8 @@
 		"spell": {
 			"class": "ModifyAttributeSpell",
 			"target": "ADJACENT_MINIONS",
-			"value": 1,
-			"attribute": "SPELL_DAMAGE"
+			"attribute": "SPELL_DAMAGE",
+			"value": 1
 		},
 		"resolvedLate": false
 	},

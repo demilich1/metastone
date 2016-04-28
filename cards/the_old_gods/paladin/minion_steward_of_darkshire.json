@@ -14,9 +14,9 @@
 			"targetPlayer": "SELF",
 			"queueCondition": {
 				"class": "AttributeCondition",
-				"value": 1,
 				"attribute": "HP",
-				"operation": "EQUAL"
+				"operation": "EQUAL",
+				"value": 1
 			}
 		},
 		"spell": {

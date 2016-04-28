@@ -12,9 +12,9 @@
 		"target": "ALL_MINIONS",
 		"filter": {
 			"class": "AttributeFilter",
-			"value": 2,
 			"attribute": "ATTACK",
-			"operation": "LESS_OR_EQUAL"
+			"operation": "LESS_OR_EQUAL",
+			"value": 2
 		}
 	},
 	"collectible": true,

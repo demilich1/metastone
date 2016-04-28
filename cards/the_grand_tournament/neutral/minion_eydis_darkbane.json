@@ -12,8 +12,8 @@
 		"eventTrigger": {
 			"class": "TargetAcquisitionTrigger",
 			"actionType": "SPELL",
-			"hostTargetType": "IGNORE_OTHER_TARGETS",
-			"sourcePlayer" : "SELF"
+			"sourcePlayer": "SELF",
+			"hostTargetType": "IGNORE_OTHER_TARGETS"
 		},
 		"spell": {
 			"class": "MissilesSpell",

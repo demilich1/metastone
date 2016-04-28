@@ -43,8 +43,8 @@
 			},
 			{
 				"class": "MinionCountCondition",
-				"value": 7,
-				"operation": "LESS"
+				"operation": "LESS",
+				"value": 7
 			}
 		]
 	},
