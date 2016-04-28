@@ -44,8 +44,8 @@ public class DeckProxy extends Proxy<GameNotification> {
 
 	public static final String NAME = "DeckProxy";
 	
-	private static final String USER_HOME_METASTONE = System.getProperty("user.home") + File.separator + "metastone" + File.separator;
-	private static final String DECKS_FOLDER = "decks";
+	private static final String USER_HOME_METASTONE = System.getProperty("user.home") + "/metastone";
+	private static final String DECKS_FOLDER = "/decks";
 
 	private final List<Deck> decks = new ArrayList<Deck>();
 	private final IDeckValidator deckValidator = new DefaultDeckValidator();

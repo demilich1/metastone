@@ -25,8 +25,8 @@ import net.demilich.metastone.utils.ResourceInputStream;
 public class CardCatalogue {
 
 	private final static CardCollection cards = new CardCollection();
-	private static final String CARDS_FOLDER = "cards";
-	private static final String USER_HOME_METASTONE = System.getProperty("user.home") + File.separator + "metastone" + File.separator;
+	private static final String CARDS_FOLDER = "/cards";
+	private static final String USER_HOME_METASTONE = System.getProperty("user.home") + "/metastone";
 	private static Logger logger = LoggerFactory.getLogger(CardCatalogue.class);
 
 	public static void add(Card card) {
