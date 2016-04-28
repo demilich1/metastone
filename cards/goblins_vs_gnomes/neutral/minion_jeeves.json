@@ -26,8 +26,8 @@
 				},
 				"value2": {
 					"class": "PlayerAttributeValueProvider",
-					"playerAttribute": "HAND_COUNT",
-					"targetPlayer": "SELF"
+					"targetPlayer": "SELF",
+					"playerAttribute": "HAND_COUNT"
 				}
 			}
 		}

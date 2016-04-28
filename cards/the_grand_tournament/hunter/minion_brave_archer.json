@@ -15,8 +15,8 @@
 			"fireCondition": {
 				"class": "CardCountCondition",
 				"targetPlayer": "SELF",
-				"value": 0,
-				"operation": "LESS_OR_EQUAL"
+				"operation": "LESS_OR_EQUAL",
+				"value": 0
 			}
 		},
 		"spell": {

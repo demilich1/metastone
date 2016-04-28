@@ -22,8 +22,8 @@
 				"condition": {
 					"class": "CardCountCondition",
 					"targetPlayer": "OPPONENT",
-					"value": 6,
-					"operation": "GREATER_OR_EQUAL"
+					"operation": "GREATER_OR_EQUAL",
+					"value": 6
 				}
 			}
 		}

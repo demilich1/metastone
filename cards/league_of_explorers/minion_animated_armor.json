@@ -17,8 +17,8 @@
 		},
 		"spell": {
 			"class": "ModifyDamageSpell",
-			"value": 1,
-			"operation": "SET"
+			"operation": "SET",
+			"value": 1
 		}
 	},
 	"collectible": true,

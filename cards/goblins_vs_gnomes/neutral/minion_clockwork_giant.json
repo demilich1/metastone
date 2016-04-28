@@ -11,8 +11,8 @@
 	"description": "Costs (1) less Mana for each card in your opponent's hand.",
 	"manaCostModifier": {
 		"class": "PlayerAttributeValueProvider",
-		"playerAttribute": "HAND_COUNT",
-		"targetPlayer": "OPPONENT"
+		"targetPlayer": "OPPONENT",
+		"playerAttribute": "HAND_COUNT"
 	},
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",

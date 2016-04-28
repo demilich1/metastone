@@ -24,8 +24,8 @@
 				},
 				{
 					"class": "ModifyDamageSpell",
-					"value": 0,
-					"operation": "SET"
+					"operation": "SET",
+					"value": 0
 				}
 			]
 		}

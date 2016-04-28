@@ -19,8 +19,8 @@
 		"condition": {
 			"class": "MinionCountCondition",
 			"targetPlayer": "SELF",
-			"value": 7,
-			"operation": "EQUAL"
+			"operation": "EQUAL",
+			"value": 7
 		},
 		"resolvedLate": false
 	},

@@ -9,8 +9,8 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "ReceiveRandomCollectibleCardSpell",
-		"card": "spell_the_coin",
 		"value": 2,
+		"card": "spell_the_coin",
 		"cardFilter": {
 			"class": "CardFilter",
 			"heroClass": "OPPONENT"
