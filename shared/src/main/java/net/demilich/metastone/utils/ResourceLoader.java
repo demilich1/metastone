@@ -83,7 +83,7 @@ public class ResourceLoader {
 
             inputStreams.add(new ResourceInputStream(filePath.getFileName().toString(), inputStream, fromFileSystem));
         }
-
+        walk.close();
         return inputStreams;
     }
 }
