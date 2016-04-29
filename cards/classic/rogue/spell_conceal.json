@@ -10,13 +10,13 @@
 	"spell": {
 		"class": "AddAttributeSpell",
 		"target": "FRIENDLY_MINIONS",
+		"attribute": "STEALTH",
 		"filter": {
 			"class": "AttributeFilter",
 			"attribute": "STEALTH",
 			"operation": "HAS",
 			"invert": true
 		},
-		"attribute": "STEALTH",
 		"revertTrigger": {
 			"class": "TurnStartTrigger",
 			"targetPlayer": "SELF"

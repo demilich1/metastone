@@ -1,9 +1,9 @@
 {
 	"id": "spell_briarthorn_toxin",
 	"name": "Briarthorn Toxin",
+	"baseManaCost": 1,
 	"type": "SPELL",
 	"heroClass": "ROGUE",
-	"baseManaCost": 1,
 	"rarity": "FREE",
 	"description": "Give a minion +3 Attack.",
 	"targetSelection": "MINIONS",

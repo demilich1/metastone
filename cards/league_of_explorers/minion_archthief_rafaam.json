@@ -12,14 +12,14 @@
 		"targetSelection": "NONE",
 		"spell": {
 			"class": "DiscoverCardSpell",
-			"spell": {
-				"class": "ReceiveCardSpell"
-			},
 			"cards": [
 				"spell_lantern_of_power",
 				"spell_mirror_of_doom",
 				"spell_timepiece_of_horror"
-			]
+			],
+			"spell": {
+				"class": "ReceiveCardSpell"
+			}
 		},
 		"resolvedLate": false
 	},

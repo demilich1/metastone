@@ -18,8 +18,8 @@
 		},
 		"condition": {
 			"class": "CardCountCondition",
-			"value": 0,
-			"operation": "LESS_OR_EQUAL"
+			"operation": "LESS_OR_EQUAL",
+			"value": 0
 		},
 		"resolvedLate": false
 	},

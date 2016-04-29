@@ -12,13 +12,13 @@
 		"spells": [
 			{
 				"class": "DamageSpell",
-				"value": 2,
-				"target": "ENEMY_MINIONS"
+				"target": "ENEMY_MINIONS",
+				"value": 2
 			},
 			{
 				"class": "AddAttributeSpell",
-				"attribute": "FROZEN",
-				"target": "ENEMY_MINIONS"
+				"target": "ENEMY_MINIONS",
+				"attribute": "FROZEN"
 			}
 		]
 	},

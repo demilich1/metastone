@@ -16,8 +16,8 @@
 	"condition": {
 		"class": "MinionCountCondition",
 		"targetPlayer": "OPPONENT",
-		"value": 0,
-		"operation": "GREATER"
+		"operation": "GREATER",
+		"value": 0
 	},
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",

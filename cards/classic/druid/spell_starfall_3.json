@@ -1,23 +1,19 @@
 {
 	"id": "spell_starfall_3",
-	"name": "5 damage single and 2 damage AoE",
+	"name": "7 damage single and 2 damage AoE",
 	"baseManaCost": 5,
 	"type": "SPELL",
 	"heroClass": "DRUID",
 	"rarity": "RARE",
-	"description": "Deal 5 damage to a minion. Deal 2 damage to all enemy minions.",
-	"targetSelection": "MINIONS",
+	"description": "Deal 7 damage to a minion. Deal 2 damage to all other enemy minions.",
+	"targetSelection": "ENEMY_MINIONS",
 	"spell": {
 		"class": "MetaSpell",
 		"spells": [
 			{
-				"class": "DamageSpell",
-				"value": 5
-			},
-			{
-				"class": "DamageSpell",
-				"target": "ENEMY_MINIONS",
-				"value": 2
+				"class": "custom.SwipeSpell",
+				"value": 7,
+				"secondaryValue": 2
 			}
 		]
 	},

@@ -17,8 +17,8 @@
 		"condition": {
 			"class": "MinionCountCondition",
 			"targetPlayer": "OPPONENT",
-			"value": 4,
-			"operation": "GREATER_OR_EQUAL"
+			"operation": "GREATER_OR_EQUAL",
+			"value": 4
 		},
 		"resolvedLate": false
 	},

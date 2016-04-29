@@ -10,11 +10,11 @@
 	"spell": {
 		"class": "CastRepeatedlySpell",
 		"target": "ALL_MINIONS",
+		"howMany": 80,
 		"spell": {
 			"class": "DamageSpell",
 			"value": 1
 		},
-		"howMany": 80,
 		"randomTarget": true,
 		"condition": {
 			"class": "IsDeadCondition"

@@ -17,8 +17,8 @@
 			"value": 3,
 			"expirationTrigger": {
 				"class": "CardPlayedTrigger",
-				"targetPlayer": "SELF",
-				"cardType": "SPELL"
+				"cardType": "SPELL",
+				"targetPlayer": "SELF"
 			}
 		}
 	},

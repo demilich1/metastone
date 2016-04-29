@@ -18,7 +18,7 @@
 				"class": "DrawCardSpell",
 				"value": 1
 			},
-			"persistentOwner" : true
+			"persistentOwner": true
 		}
 	},
 	"collectible": true,

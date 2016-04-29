@@ -1,15 +1,15 @@
 {
-    "id": "token_mastiff",
-    "name": "Mastiff",
-    "baseManaCost": 1,
-    "type": "MINION",
-    "baseAttack": 1,
-    "baseHp": 1,
-    "rarity": "COMMON",
+	"id": "token_mastiff",
+	"name": "Mastiff",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"heroClass": "HUNTER",
+	"rarity": "COMMON",
 	"race": "BEAST",
-    "heroClass": "HUNTER",
-    "description": "",
-    "collectible": false,
-    "set": "THE_OLD_GODS",
-    "fileFormatVersion": 1
+	"description": "",
+	"collectible": false,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
 }

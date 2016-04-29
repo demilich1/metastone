@@ -12,8 +12,8 @@
 		"value": 1,
 		"spell": {
 			"class": "ModifyAttributeSpell",
-			"value": -3,
-			"attribute": "MANA_COST_MODIFIER"
+			"attribute": "MANA_COST_MODIFIER",
+			"value": -3
 		}
 	},
 	"collectible": true,

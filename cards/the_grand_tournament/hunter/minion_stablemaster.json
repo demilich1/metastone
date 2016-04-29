@@ -12,11 +12,11 @@
 		"targetSelection": "FRIENDLY_MINIONS",
 		"spell": {
 			"class": "AddAttributeSpell",
+			"attribute": "IMMUNE",
 			"filter": {
 				"class": "RaceFilter",
 				"race": "BEAST"
 			},
-			"attribute": "IMMUNE",
 			"revertTrigger": {
 				"class": "TurnEndTrigger"
 			}

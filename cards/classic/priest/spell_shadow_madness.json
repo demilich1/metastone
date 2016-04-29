@@ -11,9 +11,9 @@
 		"class": "custom.ShadowMadnessSpell",
 		"filter": {
 			"class": "AttributeFilter",
-			"value": 3,
 			"attribute": "ATTACK",
-			"operation": "LESS_OR_EQUAL"
+			"operation": "LESS_OR_EQUAL",
+			"value": 3
 		}
 	},
 	"collectible": true,

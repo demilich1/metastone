@@ -11,14 +11,14 @@
 	"passiveTrigger": {
 		"eventTrigger": {
 			"class": "MinionSummonedTrigger",
-			"race": "BEAST",
-			"targetPlayer": "SELF"
+			"targetPlayer": "SELF",
+			"race": "BEAST"
 		},
 		"spell": {
 			"class": "ModifyAttributeSpell",
 			"target": "SELF",
-			"value": -1,
-			"attribute": "MANA_COST_MODIFIER"
+			"attribute": "MANA_COST_MODIFIER",
+			"value": -1
 		}
 	},
 	"collectible": true,

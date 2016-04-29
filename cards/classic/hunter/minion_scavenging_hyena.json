@@ -12,8 +12,8 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "MinionDeathTrigger",
-			"race": "BEAST",
-			"targetPlayer": "SELF"
+			"targetPlayer": "SELF",
+			"race": "BEAST"
 		},
 		"spell": {
 			"class": "BuffSpell",

@@ -17,8 +17,8 @@
 			},
 			{
 				"class": "ModifyAttributeSpell",
-				"value": 1,
-				"attribute": "SPELL_DAMAGE"
+				"attribute": "SPELL_DAMAGE",
+				"value": 1
 			}
 		]
 	},

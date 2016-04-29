@@ -11,9 +11,9 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "DamageCausedTrigger",
+			"cardType": "SPELL",
 			"sourcePlayer": "SELF",
-			"targetPlayer": "BOTH",
-			"cardType": "SPELL"
+			"targetPlayer": "BOTH"
 		},
 		"spell": {
 			"class": "HealSpell",

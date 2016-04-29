@@ -15,8 +15,8 @@
 			"cardFilter": {
 				"class": "CardFilter",
 				"attribute": "BASE_MANA_COST",
-				"value": 5,
-				"operation": "LESS_OR_EQUAL"
+				"operation": "LESS_OR_EQUAL",
+				"value": 5
 			}
 		}
 	},
