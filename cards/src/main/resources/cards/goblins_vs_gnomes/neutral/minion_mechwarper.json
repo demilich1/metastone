@@ -12,8 +12,8 @@
 	"cardCostModifier": {
 		"class": "CardCostModifier",
 		"cardType": "MINION",
-		"race": "MECH",
 		"targetPlayer": "SELF",
+		"race": "MECH",
 		"value": -1
 	},
 	"collectible": true,

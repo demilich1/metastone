@@ -12,11 +12,11 @@
 	"aura": {
 		"class": "AttributeAura",
 		"target": "FRIENDLY_MINIONS",
+		"attribute": "CHARGE",
 		"filter": {
 			"class": "RaceFilter",
 			"race": "BEAST"
-		},
-		"attribute": "CHARGE"
+		}
 	},
 	"attributes": {
 		"CHARGE": true

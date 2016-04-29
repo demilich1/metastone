@@ -26,8 +26,8 @@
 			"condition": {
 				"class": "MinionCountCondition",
 				"targetPlayer": "BOTH",
-				"value": 1,
-				"operation": "EQUAL"
+				"operation": "EQUAL",
+				"value": 1
 			}
 		}
 	},

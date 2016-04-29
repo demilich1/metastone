@@ -12,8 +12,8 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "TargetAcquisitionTrigger",
-			"sourcePlayer": "SELF",
 			"actionType": "SPELL",
+			"sourcePlayer": "SELF",
 			"hostTargetType": "IGNORE_OTHER_TARGETS"
 		},
 		"spell": {

@@ -24,11 +24,11 @@
 				"class": "GainManaSpell",
 				"value": {
 					"class": "AlgebraicValueProvider",
+					"operation": "NEGATE",
 					"value1": {
 						"class": "PlayerAttributeValueProvider",
 						"playerAttribute": "MANA"
-					},
-					"operation": "NEGATE"
+					}
 				}
 			}
 		]

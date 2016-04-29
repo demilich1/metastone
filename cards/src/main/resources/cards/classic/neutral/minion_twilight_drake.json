@@ -15,8 +15,8 @@
 			"target": "SELF",
 			"hpBonus": {
 				"class": "PlayerAttributeValueProvider",
-				"playerAttribute": "HAND_COUNT",
-				"targetPlayer": "SELF"
+				"targetPlayer": "SELF",
+				"playerAttribute": "HAND_COUNT"
 			}
 		},
 		"resolvedLate": false

@@ -14,13 +14,13 @@
 			"operation": "SUBTRACT",
 			"value1": {
 				"class": "PlayerAttributeValueProvider",
-				"playerAttribute": "HAND_COUNT",
-				"targetPlayer": "OPPONENT"
+				"targetPlayer": "OPPONENT",
+				"playerAttribute": "HAND_COUNT"
 			},
 			"value2": {
 				"class": "PlayerAttributeValueProvider",
-				"playerAttribute": "HAND_COUNT",
-				"targetPlayer": "SELF"
+				"targetPlayer": "SELF",
+				"playerAttribute": "HAND_COUNT"
 			}
 		}
 	},

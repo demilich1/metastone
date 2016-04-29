@@ -13,8 +13,8 @@
 			"class": "ConditionalSpell",
 			"spell": {
 				"class": "ModifyAttributeSpell",
-				"value": -4,
-				"attribute": "MANA_COST_MODIFIER"
+				"attribute": "MANA_COST_MODIFIER",
+				"value": -4
 			},
 			"condition": {
 				"class": "RaceCondition",

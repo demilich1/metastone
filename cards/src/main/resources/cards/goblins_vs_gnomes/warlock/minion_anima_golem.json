@@ -16,8 +16,8 @@
 			"queueCondition": {
 				"class": "MinionCountCondition",
 				"targetPlayer": "OWNER",
-				"value": 1,
-				"operation": "LESS_OR_EQUAL"
+				"operation": "LESS_OR_EQUAL",
+				"value": 1
 			}
 		},
 		"spell": {

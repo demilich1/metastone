@@ -10,8 +10,8 @@
 	"description": "Costs (1) less for each other card in your hand.",
 	"manaCostModifier": {
 		"class": "PlayerAttributeValueProvider",
-		"playerAttribute": "HAND_COUNT",
 		"targetPlayer": "SELF",
+		"playerAttribute": "HAND_COUNT",
 		"offset": -1
 	},
 	"collectible": true,

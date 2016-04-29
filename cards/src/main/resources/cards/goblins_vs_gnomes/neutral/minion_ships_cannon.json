@@ -11,8 +11,8 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "MinionSummonedTrigger",
-			"race": "PIRATE",
-			"targetPlayer": "SELF"
+			"targetPlayer": "SELF",
+			"race": "PIRATE"
 		},
 		"spell": {
 			"class": "MissilesSpell",

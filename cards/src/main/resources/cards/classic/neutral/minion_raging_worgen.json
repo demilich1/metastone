@@ -15,8 +15,8 @@
 		"spell": {
 			"class": "EnrageSpell",
 			"target": "SELF",
-			"attackBonus": 1,
-			"attribute": "WINDFURY"
+			"attribute": "WINDFURY",
+			"attackBonus": 1
 		}
 	},
 	"attributes": {

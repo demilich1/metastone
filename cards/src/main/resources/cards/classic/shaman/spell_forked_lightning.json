@@ -15,8 +15,8 @@
 	"condition": {
 		"class": "MinionCountCondition",
 		"targetPlayer": "OPPONENT",
-		"value": 1,
-		"operation": "GREATER"
+		"operation": "GREATER",
+		"value": 1
 	},
 	"attributes": {
 		"OVERLOAD": 2

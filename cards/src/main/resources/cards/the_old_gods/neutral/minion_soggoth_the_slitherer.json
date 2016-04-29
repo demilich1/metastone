@@ -9,8 +9,8 @@
 	"rarity": "LEGENDARY",
 	"description": "Taunt. Can't be targeted by Spells or Hero Powers.",
 	"attributes": {
-		"UNTARGETABLE_BY_SPELLS": true,
-		"TAUNT": true
+		"TAUNT": true,
+		"UNTARGETABLE_BY_SPELLS": true
 	},
 	"collectible": true,
 	"set": "CLASSIC",

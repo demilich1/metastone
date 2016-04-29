@@ -12,8 +12,8 @@
 	"battlecry": {
 		"spell": {
 			"class": "ReceiveRandomCollectibleCardSpell",
-			"card": "spell_tail_swipe",
 			"value": 2,
+			"card": "spell_tail_swipe",
 			"cardFilter": {
 				"class": "CardFilter",
 				"cardType": "SPELL",

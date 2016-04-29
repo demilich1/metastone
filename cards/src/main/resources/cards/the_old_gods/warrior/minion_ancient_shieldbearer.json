@@ -19,6 +19,7 @@
 			"conditions": [
 				{
 					"class": "ComparisonCondition",
+					"operation": "GREATER_OR_EQUAL",
 					"value1": {
 						"class": "HighestAttributeValueProvider",
 						"target": "FRIENDLY_MINIONS",
@@ -28,11 +29,11 @@
 							"cardId": "minion_cthun"
 						}
 					},
-					"value2": 10,
-					"operation": "GREATER_OR_EQUAL"
+					"value2": 10
 				},
 				{
 					"class": "ComparisonCondition",
+					"operation": "GREATER_OR_EQUAL",
 					"value1": {
 						"class": "HighestAttributeValueProvider",
 						"target": "FRIENDLY_HAND",
@@ -42,8 +43,7 @@
 							"cardId": "minion_cthun"
 						}
 					},
-					"value2": 10,
-					"operation": "GREATER_OR_EQUAL"
+					"value2": 10
 				},
 				{
 					"class": "AndCondition",
@@ -54,13 +54,13 @@
 						},
 						{
 							"class": "ComparisonCondition",
+							"operation": "GREATER_OR_EQUAL",
 							"value1": {
 								"class": "AttributeValueProvider",
 								"target": "FRIENDLY_HERO",
 								"attribute": "CTHUN_ATTACK_BUFF"
 							},
-							"value2": 4,
-							"operation": "GREATER_OR_EQUAL"
+							"value2": 4
 						}
 					]
 				}

@@ -12,8 +12,8 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "MinionDeathTrigger",
-			"race": "MURLOC",
-			"targetPlayer": "SELF"
+			"targetPlayer": "SELF",
+			"race": "MURLOC"
 		},
 		"spell": {
 			"class": "DrawCardSpell",

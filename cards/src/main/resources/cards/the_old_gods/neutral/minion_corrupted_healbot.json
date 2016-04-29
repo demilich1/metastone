@@ -15,7 +15,7 @@
 		"value": 8
 	},
 	"attributes": {
-		"DEATHRATTLE": true
+		"DEATHRATTLES": true
 	},
 	"collectible": true,
 	"set": "THE_OLD_GODS",

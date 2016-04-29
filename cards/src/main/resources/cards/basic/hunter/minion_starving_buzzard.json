@@ -12,8 +12,8 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "MinionSummonedTrigger",
-			"race": "BEAST",
-			"targetPlayer": "SELF"
+			"targetPlayer": "SELF",
+			"race": "BEAST"
 		},
 		"spell": {
 			"class": "DrawCardSpell",

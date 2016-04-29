@@ -13,10 +13,6 @@
 		"targetSelection": "NONE",
 		"spell": {
 			"class": "DiscoverCardSpell",
-			"spell": {
-				"class": "ChangeHeroPowerSpell",
-				"targetPlayer": "SELF"
-			},
 			"cards": [
 				"hero_power_shapeshift",
 				"hero_power_steady_shot",
@@ -28,6 +24,10 @@
 				"hero_power_life_tap",
 				"hero_power_armor_up"
 			],
+			"spell": {
+				"class": "ChangeHeroPowerSpell",
+				"targetPlayer": "SELF"
+			},
 			"cannotReceiveOwned": true
 		},
 		"resolvedLate": false

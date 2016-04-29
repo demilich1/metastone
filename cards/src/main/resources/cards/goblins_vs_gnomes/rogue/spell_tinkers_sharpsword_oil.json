@@ -11,7 +11,7 @@
 		"class": "ComboSpell",
 		"spell1": {
 			"class": "BuffWeaponSpell",
-			"target" : "FRIENDLY_WEAPON",
+			"target": "FRIENDLY_WEAPON",
 			"attackBonus": 3
 		},
 		"spell2": {
