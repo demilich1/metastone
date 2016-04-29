@@ -1,0 +1,23 @@
+{
+	"id": "minion_malkorok",
+	"name": "Malkorok",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"baseAttack": 6,
+	"baseHp": 5,
+	"heroClass": "WARRIOR",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Equip a random weapon.",
+	"battlecry": {
+		"spell": {
+			"class": "EquipRandomWeaponSpell",
+			"targetPlayer": "SELF"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,18 @@
+{
+	"id": "spell_feral_rage_2",
+	"name": "Evolve Scales",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"description": "Gain 8 Armor.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "BuffHeroSpell",
+		"target": "FRIENDLY_HERO",
+		"armorBonus": 8
+	},
+	"collectible": false,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

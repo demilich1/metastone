@@ -26,6 +26,14 @@
 			}
 		}
 	],
+	"bothOptions": {
+		"description": "Charge, Stealth, +1/+1",
+		"spell": {
+			"class": "TransformMinionSpell",
+			"target": "SELF",
+			"card": "token_sabertooth_tiger"
+		}
+	},
 	"collectible": true,
 	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1

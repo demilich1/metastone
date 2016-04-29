@@ -27,6 +27,25 @@
 			}
 		}
 	],
+	"bothOptions": {
+		"description": "Mana Crystal and Draw",
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "ModifyMaxManaSpell",
+					"targetPlayer": "BOTH",
+					"fullManaCrystals": true,
+					"value": 1
+				},
+				{
+					"class": "DrawCardSpell",
+					"targetPlayer": "BOTH",
+					"value": 1
+				}
+			]
+		}
+	},
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

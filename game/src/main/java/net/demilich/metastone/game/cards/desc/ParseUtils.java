@@ -176,6 +176,8 @@ public class ParseUtils {
 			return EntityReference.EVENT_TARGET;
 		case "target":
 			return EntityReference.TARGET;
+		case "spell_target":
+			return EntityReference.SPELL_TARGET;
 		case "self":
 			return EntityReference.SELF;
 		case "attacker":

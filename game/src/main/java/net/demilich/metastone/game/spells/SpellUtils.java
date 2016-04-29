@@ -122,6 +122,22 @@ public class SpellUtils {
 		}
 		return heroClasses.get(ThreadLocalRandom.current().nextInt(heroClasses.size()));
 	}
+	
+	public static HeroClass getRandomHeroClassExcept(HeroClass... heroClassesExcluded) {
+		HeroClass[] values = HeroClass.values();
+		List<HeroClass> heroClasses = new ArrayList<HeroClass>();
+		for (HeroClass heroClass : values) {
+			if (heroClass.isBaseClass()) {
+				heroClasses.add(heroClass);
+				for (HeroClass heroClassExcluded : heroClassesExcluded) {
+					if (heroClassExcluded == heroClass) {
+						heroClasses.remove(heroClass);
+					}
+				}
+			}
+		}
+		return heroClasses.get(ThreadLocalRandom.current().nextInt(heroClasses.size()));
+	}
 
 	public static <T> T getRandomTarget(List<T> targets) {
 		int randomIndex = ThreadLocalRandom.current().nextInt(targets.size());

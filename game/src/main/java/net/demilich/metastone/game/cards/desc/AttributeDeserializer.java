@@ -46,6 +46,7 @@ public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Ob
 		parseAttribute(Attribute.DEATHRATTLES, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.DOUBLE_BATTLECRIES, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.DOUBLE_DEATHRATTLES, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(Attribute.BOTH_CHOOSE_ONE_OPTIONS, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.HERO_POWER_CAN_TARGET_MINIONS, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.IMMUNE_HERO, jsonData, map, ParseValueType.BOOLEAN);
 		return map;

@@ -1,0 +1,17 @@
+{
+	"id": "minion_bog_creeper",
+	"name": "Bog Creeper",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"baseAttack": 6,
+	"baseHp": 8,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Taunt",
+	"attributes": {
+		"TAUNT": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

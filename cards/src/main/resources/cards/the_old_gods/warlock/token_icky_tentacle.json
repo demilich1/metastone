@@ -1,0 +1,14 @@
+{
+	"id": "token_icky_tentacle",
+	"name": "Icky Tentacle",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"heroClass": "WARLOCK",
+	"rarity": "EPIC",
+	"description": "",
+	"collectible": false,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

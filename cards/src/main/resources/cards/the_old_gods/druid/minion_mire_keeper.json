@@ -27,6 +27,25 @@
 			}
 		}
 	],
+	"bothOptions": {
+		"description": "Summon 2/2 Slime and Mana Crystal.",
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "SummonSpell",
+					"targetPlayer": "SELF",
+					"card": "token_tauren_slime",
+					"boardPositionRelative": "RIGHT"
+				},
+				{
+					"class": "ModifyMaxManaSpell",
+					"targetPlayer": "SELF",
+					"value": 1
+				}
+			]
+		}
+	},
 	"collectible": true,
 	"set": "THE_OLD_GODS",
 	"fileFormatVersion": 1

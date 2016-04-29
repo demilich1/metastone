@@ -1,0 +1,14 @@
+{
+	"id": "minion_faceless_behemoth",
+	"name": "Faceless Behemoth",
+	"baseManaCost": 10,
+	"type": "MINION",
+	"baseAttack": 10,
+	"baseHp": 10,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "",
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

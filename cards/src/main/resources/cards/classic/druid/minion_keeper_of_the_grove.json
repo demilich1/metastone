@@ -25,6 +25,29 @@
 			}
 		}
 	],
+	"bothOptions": {
+		"description": "Silence and deal 2 damage",
+		"targetSelection": "ANY",
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "ConditionalSpell",
+					"spell": {
+						"class": "SilenceSpell"
+					},
+					"condition": {
+						"class": "CardPropertyCondition",
+						"cardType": "MINION"
+					}
+				},
+				{
+					"class": "DamageSpell",
+					"value": 2
+				}
+			]
+		}
+	},
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

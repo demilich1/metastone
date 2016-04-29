@@ -11,9 +11,8 @@
 	"battlecry": {
 		"targetSelection": "MINIONS",
 		"spell": {
-			"class": "custom.VoljinSpell"
-		},
-		"resolvedLate": false
+			"class": "SwapHpSpell"
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

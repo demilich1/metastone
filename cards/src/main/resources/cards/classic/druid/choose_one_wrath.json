@@ -11,6 +11,7 @@
 		"spell_wrath_1",
 		"spell_wrath_2"
 	],
+	"bothOptions": "spell_wrath_3",
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

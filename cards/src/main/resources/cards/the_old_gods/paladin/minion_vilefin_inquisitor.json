@@ -12,7 +12,7 @@
 	"battlecry": {
 		"spell": {
 			"class": "ChangeHeroPowerSpell",
-			"card": "hero_power_reinforrggle"
+			"card": "hero_power_the_tidal_hand"
 		}
 	},
 	"attributes": {

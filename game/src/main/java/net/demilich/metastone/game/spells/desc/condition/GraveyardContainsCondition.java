@@ -21,7 +21,7 @@ public class GraveyardContainsCondition extends Condition {
 				Actor actor = (Actor) deadEntity;
 				card = actor.getSourceCard();
 			} else if (deadEntity instanceof Card) {
-				card = (Card) deadEntity;
+				continue;
 			}
 
 			if (card.getCardId().equals(cardId)) {

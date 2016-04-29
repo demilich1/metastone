@@ -11,6 +11,7 @@
 		"spell_raven_idol_1",
 		"spell_raven_idol_2"
 	],
+	"bothOptions": "spell_raven_idol_3",
 	"collectible": true,
 	"set": "LEAGUE_OF_EXPLORERS",
 	"fileFormatVersion": 1

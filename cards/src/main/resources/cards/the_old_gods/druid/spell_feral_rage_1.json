@@ -1,0 +1,18 @@
+{
+	"id": "spell_feral_rage_1",
+	"name": "Evolve Spines",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"description": "Gain +4 Attack this turn.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "BuffHeroSpell",
+		"target": "FRIENDLY_HERO",
+		"attackBonus": 4
+	},
+	"collectible": false,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

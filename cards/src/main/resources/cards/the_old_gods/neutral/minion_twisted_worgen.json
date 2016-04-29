@@ -1,0 +1,16 @@
+{
+	"id": "minion_twisted_worgen",
+	"name": "Twisted Worgen",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 1,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Stealth",
+	"attributes": {
+		"STEALTH": true
+	},
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

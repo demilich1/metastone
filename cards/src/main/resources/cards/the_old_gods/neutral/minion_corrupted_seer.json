@@ -1,0 +1,30 @@
+{
+    "id": "minion_corrupted_seer",
+    "name": "Corrupted Seer",
+    "baseManaCost": 6,
+    "baseHp": 2,
+    "baseAttack": 3,
+    "type": "MINION",
+    "heroClass": "ANY",
+    "rarity": "COMMON",
+    "race": "MURLOC",
+    "description": "Battlecry: Deal 2 damage to all non-Murloc minions.",
+    "battlecry": {
+        "spell": {
+            "class": "DamageSpell",
+            "value": 2,
+            "target": "ENEMY_MINIONS",
+            "filter": {
+            	"class": "RaceFilter",
+            	"race": "MURLOC",
+            	"invert": true
+            }
+        }
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "THE_OLD_GODS",
+    "fileFormatVersion": 1
+}

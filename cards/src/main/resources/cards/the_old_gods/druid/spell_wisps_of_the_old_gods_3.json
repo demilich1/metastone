@@ -1,0 +1,36 @@
+{
+	"id": "spell_wisps_of_the_old_gods_3",
+	"name": "Summon 7 Wisps and give your minions +2/+2",
+	"baseManaCost": 7,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "EPIC",
+	"description": "Summon 7 Wisps. Give your minions +2/+2.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "SummonSpell",
+				"cards": [
+					"minion_wisp",
+					"minion_wisp",
+					"minion_wisp",
+					"minion_wisp",
+					"minion_wisp",
+					"minion_wisp",
+					"minion_wisp"
+				]
+			},
+			{
+				"class": "BuffSpell",
+				"target": "FRIENDLY_MINIONS",
+				"attackBonus": 2,
+				"hpBonus": 2
+			}
+		]
+	},
+	"collectible": false,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

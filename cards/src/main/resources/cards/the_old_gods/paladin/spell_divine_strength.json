@@ -1,0 +1,18 @@
+{
+	"id": "spell_divine_strength",
+	"name": "Divine Strength",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "PALADIN",
+	"rarity": "COMMON",
+	"description": "Give a minion +1/+2.",
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "BuffSpell",
+		"attackBonus": 1,
+		"hpBonus": 2
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

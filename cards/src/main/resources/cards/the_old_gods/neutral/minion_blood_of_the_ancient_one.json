@@ -1,0 +1,42 @@
+{
+	"id": "minion_blood_of_the_ancient_one",
+	"name": "Blood of The Ancient One",
+	"baseManaCost": 9,
+	"type": "MINION",
+	"baseAttack": 9,
+	"baseHp": 9,
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"description": "If you control two of these at the end of your turn, merge them into 'The Ancient One'.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger",
+			"targetPlayer": "SELF",
+			"fireCondition": {
+				"class": "HasEntitiesOnBoardCondition",
+				"cardIds": [
+					"minion_blood_of_the_ancient_one",
+					"minion_blood_of_the_ancient_one"
+				]
+			}
+		},
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "custom.MergeSpell",
+					"target": "SELF",
+					"card": "minion_blood_of_the_ancient_one"
+				},
+				{
+					"class": "TransformMinionSpell",
+					"target": "SELF",
+					"card": "token_the_ancient_one"
+				}
+			]
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

@@ -11,6 +11,7 @@
 		"spell_power_of_the_wild_1",
 		"spell_power_of_the_wild_2"
 	],
+	"bothOptions": "spell_power_of_the_wild_3",
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

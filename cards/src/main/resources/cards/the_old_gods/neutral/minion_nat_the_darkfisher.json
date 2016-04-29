@@ -1,0 +1,32 @@
+{
+	"id": "minion_nat_the_darkfisher",
+	"name": "Nat, the Darkfisher",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "At the start of your opponent's turn, they have a 50% chance to draw an extra card.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnStartTrigger",
+			"targetPlayer": "OPPONENT"
+		},
+		"spell": {
+			"class": "DrawCardSpell",
+			"targetPlayer": "OPPONENT",
+			"value": {
+				"class": "ConditionalValueProvider",
+				"ifTrue": 1,
+				"ifFalse": 0,
+				"condition": {
+					"class": "RandomCondition"
+				}
+			}
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

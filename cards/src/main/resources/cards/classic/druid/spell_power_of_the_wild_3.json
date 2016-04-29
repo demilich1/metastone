@@ -1,0 +1,28 @@
+{
+	"id": "spell_power_of_the_wild_3",
+	"name": "Summon Panther and +1/+1",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"description": "Summon a 3/2 Panther. Give your minions +1/+1.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "SummonSpell",
+				"card": "token_panther"
+			},
+			{
+				"class": "BuffSpell",
+				"target": "FRIENDLY_MINIONS",
+				"attackBonus": 1,
+				"hpBonus": 1
+			}
+		]
+	},
+	"collectible": false,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

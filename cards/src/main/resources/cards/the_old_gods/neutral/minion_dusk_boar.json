@@ -1,0 +1,15 @@
+{
+	"id": "minion_dusk_boar",
+	"name": "Dusk Boar",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 1,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"race": "BEAST",
+	"description": "",
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

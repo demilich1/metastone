@@ -1,10 +1,10 @@
 {
     "id": "token_tauren_slime",
     "name": "Slime",
-    "baseManaCost": 0,
+    "baseManaCost": 1,
+    "type": "MINION",
     "baseAttack": 2,
     "baseHp": 2,
-    "type": "MINION",
     "rarity": "COMMON",
     "heroClass": "ANY",
     "description": "",
