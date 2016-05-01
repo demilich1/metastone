@@ -3,7 +3,7 @@ package net.demilich.metastone.gui.playmode;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.demilich.metastone.AppConfig;
+import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.GameContext;
@@ -29,7 +29,7 @@ public class GameContextVisualizable extends GameContext {
 		}
 		while (ignoreEvents()) {
 			try {
-				Thread.sleep(AppConfig.DEFAULT_SLEEP_DELAY);
+				Thread.sleep(BuildConfig.DEFAULT_SLEEP_DELAY);
 			} catch (InterruptedException e) {
 			}
 		}
@@ -64,7 +64,7 @@ public class GameContextVisualizable extends GameContext {
 
 		while (blockedByAnimation) {
 			try {
-				Thread.sleep(AppConfig.DEFAULT_SLEEP_DELAY);
+				Thread.sleep(BuildConfig.DEFAULT_SLEEP_DELAY);
 			} catch (InterruptedException e) {
 			}
 		}

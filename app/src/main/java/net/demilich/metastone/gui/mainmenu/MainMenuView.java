@@ -10,7 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import net.demilich.metastone.AppConfig;
+import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.NotificationProxy;
 
@@ -66,14 +66,14 @@ public class MainMenuView extends BorderPane {
 		battleOfDecksButton
 				.setOnAction(event -> NotificationProxy.sendNotification(GameNotification.BATTLE_OF_DECKS_SELECTED));
 
-		if (!AppConfig.DEV_BUILD) {
+		if (!BuildConfig.DEV_BUILD) {
 			trainingModeButton.setVisible(false);
 			trainingModeButton.setManaged(false);
 			battleOfDecksButton.setVisible(false);
 			battleOfDecksButton.setManaged(false);
 		}
 
-		versionLabel.setText(AppConfig.VERSION + (AppConfig.DEV_BUILD ? " (Dev build)" : ""));
+		versionLabel.setText(BuildConfig.VERSION + (BuildConfig.DEV_BUILD ? " (Dev build)" : ""));
 
 		donationButton.setOnAction(this::openDonation);
 	}
