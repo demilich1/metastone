@@ -2,7 +2,6 @@ package net.demilich.metastone.gui.trainingmode;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -15,7 +14,6 @@ import java.util.HashMap;
 import net.demilich.metastone.trainingmode.TrainingData;
 import net.demilich.metastone.utils.ResourceInputStream;
 import net.demilich.metastone.utils.ResourceLoader;
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
