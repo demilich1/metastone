@@ -9,17 +9,29 @@ buildscript {
 	}
 }
 
-apply plugin: 'de.fuerstenau.buildconfig'
 import javax.swing.filechooser.FileSystemView;
 
 // will generate an BuildConfig.java file in 'build/gen/buildconfig/src/main'
-buildConfig {
+task generateBuildConfig (type: de.fuerstenau.gradle.buildconfig.GenerateBuildConfigTask) {
 	packageName = 'net.demilich.metastone'
 	version = project.version
 	appName = rootProject.name
 	buildConfigField 'boolean', 'DEV_BUILD', project.hasProperty('DEV_BUILD').toString()
 	buildConfigField 'int', 'DEFAULT_SLEEP_DELAY', '100'
 	buildConfigField 'String', 'USER_HOME_METASTONE', (FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + File.separator + rootProject.name).replace("\\", "\\\\")
+	outputDir = new File ("${buildDir}/gen/buildconfig/src/main/" + packageName.replace('.', '/'))
+}
+
+task compileBuildConfig(type:JavaCompile, dependsOn: generateBuildConfig) {
+    classpath = files () /* empty files suffices */
+    destinationDir = new File ("${buildDir}/gen/buildconfig/classes/main/")
+    source = generateBuildConfig.outputDir
+}
+
+afterEvaluate {
+    dependencies {
+        compile compileBuildConfig.outputs.files
+    }
 }
 
 sourceSets.main.java {
