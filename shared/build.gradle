@@ -17,7 +17,7 @@ buildConfig {
 	clsName = 'AppConfig'
 	version = project.version
 	appName = rootProject.name
-	buildConfigField 'boolean', 'DEV_BUILD', 'false'
+	buildConfigField 'boolean', 'DEV_BUILD', project.hasProperty('DEV_BUILD').toString()
 	buildConfigField 'int', 'DEFAULT_SLEEP_DELAY', '100'
 }
 
