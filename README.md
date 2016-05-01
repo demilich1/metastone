@@ -50,6 +50,9 @@ Sure! There is still a lot to do and anybody willing to contribute is welcome
    * Change `Eclipse > Preferences > Java > Compiler > Building > Circular dependencies` from `Error` to `Warning`.  There is a [known bug](https://issues.gradle.org/browse/GRADLE-2200) with importing multi-module gradle projects into Eclipse. The IDE of choice for working with gradle projects is [IntelliJ IDEA](https://www.jetbrains.com/idea/).
 * If you want to build from IntelliJ IDEA:
    * Open a new project `File > Project From Existing Sources`.  Project will be imported from the `build.gradle` files.
+* **NOTE:** When building from an IDE you will need to manually generate the `BuildConfig.java` file, prefereably before you import the project.  Otherwise your IDE will complain about unresolved references to `BuildConfig`.
+   * Linux/Mac OSX `./gradlew compileBuildConfig`
+   * Windows `gradlew.bat compileBuildConfig`
 
 ### Project structure
 * MetaStone is made up of a handfull of source modules.  Here's what the top level structure looks like:
