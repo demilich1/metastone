@@ -1,6 +1,7 @@
 jar {
     manifest {
-        attributes 'Implementation-Title': 'MetaStone Data Files',
+        attributes 'Implementation-Title': rootProject.name.capitalize() + ' Data Files',
+                'Implementation-Version': project.version,
                 'Description': 'Cards, Decks and DeckFormat data files.'
     }
 }

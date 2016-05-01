@@ -1,3 +1,26 @@
+buildscript {
+	repositories {
+		maven {
+			url 'https://plugins.gradle.org/m2/'
+		}
+	}
+	dependencies {
+		classpath 'gradle.plugin.de.fuerstenau:BuildConfigPlugin:1.1.1'
+	}
+}
+
+apply plugin: 'de.fuerstenau.buildconfig'
+
+// will generate an AppConfig.java file in "build/gen/buildconfig/classes/main/"
+buildConfig {
+	packageName = 'net.demilich.metastone'
+	clsName = 'AppConfig'
+	version = project.version
+	appName = rootProject.name
+	buildConfigField 'boolean', 'DEV_BUILD', 'false'
+	buildConfigField 'int', 'DEFAULT_SLEEP_DELAY', '100'
+}
+
 dependencies {
 	compile files('lib/nitty-gritty-mvc.jar')
 	compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.1.3'

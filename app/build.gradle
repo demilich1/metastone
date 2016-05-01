@@ -2,13 +2,10 @@ apply plugin: 'java'
 apply plugin: 'application'
 apply from: 'javafx.plugin'
 
-version = '1.0.1'
-mainClassName = "net.demilich.metastone.MetaStone"
-
 jar {
 	manifest {
-		attributes 'Implementation-Title': 'MetaStone',
-			'Implementation-Version': version
+		attributes 'Implementation-Title': rootProject.name.capitalize(),
+			'Implementation-Version': project.version
 	}
 }
 
