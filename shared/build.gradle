@@ -10,6 +10,7 @@ buildscript {
 }
 
 apply plugin: 'de.fuerstenau.buildconfig'
+import javax.swing.filechooser.FileSystemView;
 
 // will generate an AppConfig.java file in "build/gen/buildconfig/classes/main/"
 buildConfig {
@@ -19,6 +20,7 @@ buildConfig {
 	appName = rootProject.name
 	buildConfigField 'boolean', 'DEV_BUILD', project.hasProperty('DEV_BUILD').toString()
 	buildConfigField 'int', 'DEFAULT_SLEEP_DELAY', '100'
+	buildConfigField 'String', 'USER_HOME_METASTONE', FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + File.separator + rootProject.name
 }
 
 dependencies {

@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.demilich.metastone.AppConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +24,6 @@ public class CardCatalogue {
 
 	private final static CardCollection cards = new CardCollection();
 	private static final String CARDS_FOLDER = "/cards";
-	private static final String USER_HOME_METASTONE = System.getProperty("user.home") + "/metastone";
 	private static Logger logger = LoggerFactory.getLogger(CardCatalogue.class);
 
 	public static void add(Card card) {
@@ -129,8 +129,8 @@ public class CardCatalogue {
 		Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(CARDS_FOLDER, false);
 
 		// load cards from ~/metastone/cards on the filesystem
-		if (Paths.get(USER_HOME_METASTONE + CARDS_FOLDER).toFile().exists()) {
-			inputStreams.addAll((ResourceLoader.loadJsonInputStreams(USER_HOME_METASTONE + CARDS_FOLDER, true)));
+		if (Paths.get(AppConfig.USER_HOME_METASTONE + CARDS_FOLDER).toFile().exists()) {
+			inputStreams.addAll((ResourceLoader.loadJsonInputStreams(AppConfig.USER_HOME_METASTONE + CARDS_FOLDER, true)));
 		}
 
 		Map<String, CardDesc> cardDesc = new HashMap<String, CardDesc>();
