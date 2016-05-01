@@ -20,7 +20,7 @@ buildConfig {
 	appName = rootProject.name
 	buildConfigField 'boolean', 'DEV_BUILD', project.hasProperty('DEV_BUILD').toString()
 	buildConfigField 'int', 'DEFAULT_SLEEP_DELAY', '100'
-	buildConfigField 'String', 'USER_HOME_METASTONE', FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + File.separator + rootProject.name
+	buildConfigField 'String', 'USER_HOME_METASTONE', (FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + File.separator + rootProject.name).replace("\\", "\\\\")
 }
 
 dependencies {
