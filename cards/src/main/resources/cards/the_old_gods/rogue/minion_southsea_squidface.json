@@ -5,6 +5,7 @@
 	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 4,
+	"heroClass": "ROGUE",
 	"rarity": "COMMON",
 	"description": "Deathrattle: Give your weapon +2 Attack.",
 	"deathrattle": {

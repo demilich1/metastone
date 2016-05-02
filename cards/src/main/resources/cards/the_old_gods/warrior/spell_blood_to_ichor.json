@@ -1,6 +1,6 @@
 {
-	"id": "spell_blood_ichor",
-	"name": "Blood Ichor",
+	"id": "spell_blood_to_ichor",
+	"name": "Blood To Ichor",
 	"baseManaCost": 1,
 	"type": "SPELL",
 	"heroClass": "WARRIOR",

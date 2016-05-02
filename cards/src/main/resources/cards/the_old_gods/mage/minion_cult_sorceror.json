@@ -49,6 +49,9 @@
 			]
 		}
 	},
+	"attributes": {
+		"SPELL_DAMAGE": 1
+	},
 	"collectible": true,
 	"set": "THE_OLD_GODS",
 	"fileFormatVersion": 1
