@@ -166,13 +166,10 @@ public abstract class Actor extends Entity {
 
 	public void setBaseAttack(int value) {
 		setAttribute(Attribute.BASE_ATTACK, value);
-		setAttack(value);
 	}
 
 	public void setBaseHp(int value) {
 		setAttribute(Attribute.BASE_HP, value);
-		setMaxHp(value);
-		setHp(value);
 	}
 
 	public void setBattlecry(BattlecryAction battlecry) {
