@@ -89,7 +89,7 @@ metastone
 ```
 - Create a new `metastone/cards` folder under your user home directory:
    * Linux/Mac OSX `mkdir -p ~/metastone/cards`
-   * Windows `use Windows File Explorer to create the ~/Documents/metastone/cards dir`
+   * Windows `use Windows File Explorer to create the C:\Users\[username]\Documents\metastone folder`
 - Any `.json` files you place in your `metastone/cards` folder will be parsed and treated like built-in cards.
 - To learn the cards format it is highly recommended that you copy an existing card, change the `filename` and the `id` attribute (**<-- important!**) and make small changes.
 - Make sure to validate that the cards you added are well formed and can be parsed! Run the following command: 
