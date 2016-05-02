@@ -15,7 +15,8 @@
 			"value": 7,
 			"cardFilter": {
 				"class": "CardFilter",
-				"attribute": "DEATHRATTLES"
+				"attribute": "DEATHRATTLES",
+				"operation": "HAS"
 			}
 		}
 	},
