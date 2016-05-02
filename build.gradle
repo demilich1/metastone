@@ -1,64 +1,14 @@
-apply plugin: 'application'
-apply plugin: 'eclipse'
-apply from: 'javafx.plugin'
-
-sourceCompatibility = 1.8
-version = '1.0.1'
-mainClassName = "net.demilich.metastone.MetaStone"
-
-jar {
-    manifest {
-        attributes 'Implementation-Title': 'MetaStone',
-                   'Implementation-Version': version
+subprojects {
+    repositories {
+        mavenCentral()
     }
-}
 
-repositories {
-    mavenCentral()
-}
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    sourceCompatibility = 1.8
 
-dependencies {
-	compile files('lib/nitty-gritty-mvc.jar', 'lib/controlsfx-8.40.10-20151003.010657-492.jar')
-    compile group: 'com.google.code.gson', name: 'gson', version: '2.3.1'
-	compile group: 'ch.qos.logback', name: 'logback-core', version: '1.1.3'
-	compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.1.3'
-	compile group: 'commons-io', name: 'commons-io', version: '2.4'
-	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
-	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5'
-    testCompile group: 'org.testng', name: 'testng', version: '6.+'
-}
-
-task copyCards << {
-	mkdir('src/deploy/resources/cards')
-	copy {
-   		from 'cards'
-   		into('src/deploy/resources/cards')
-   	}
-}
-
-task copyDecks << {
-	mkdir('src/deploy/resources/decks')
-	copy {
-   		from 'decks'
-   		into('src/deploy/resources/decks')
-   	}
-}
-
-assemble.dependsOn copyDecks
-assemble.dependsOn copyCards
-assemble.doLast {
-	println 'Cleaning up...'
- 	delete('src/deploy/resources')
-}
-
-javafx {
-    mainClass = 'net.demilich.metastone.MetaStone'
-}
-
-test {
-	// enable TestNG support (default is JUnit)
-	useTestNG()
-	testLogging {
-		events "standardError"
-	}
+    compileJava {
+        options.encoding = 'UTF-8'
+        options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+    }
 }
