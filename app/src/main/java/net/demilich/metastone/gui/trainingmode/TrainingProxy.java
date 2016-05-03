@@ -2,14 +2,18 @@ package net.demilich.metastone.gui.trainingmode;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Collection;
 import java.util.HashMap;
 
 import net.demilich.metastone.trainingmode.TrainingData;
-import org.apache.commons.io.FileUtils;
+import net.demilich.metastone.utils.ResourceInputStream;
+import net.demilich.metastone.utils.ResourceLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,6 +29,8 @@ import net.demilich.metastone.game.behaviour.threat.WeightedFeature;
 public class TrainingProxy extends Proxy<GameNotification> {
 
 	public static final String NAME = "TrainingProxy";
+	private static final String USER_HOME_METASTONE = System.getProperty("user.home") + "/metastone";
+	private static final String TRAINING_FOLDER = "/training";
 
 	private static Logger logger = LoggerFactory.getLogger(TrainingProxy.class);
 
@@ -32,12 +38,16 @@ public class TrainingProxy extends Proxy<GameNotification> {
 
 	public TrainingProxy() {
 		super(NAME);
-		if (new File("./training/").mkdir()) {
-			logger.info("./training folder created");
+		if (new File(USER_HOME_METASTONE + TRAINING_FOLDER).mkdir()) {
+			logger.info(USER_HOME_METASTONE + TRAINING_FOLDER + " folder created");
 		}
 		try {
 			loadTrainingData();
 		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -46,22 +56,27 @@ public class TrainingProxy extends Proxy<GameNotification> {
 		return trainingData.containsKey(deckName) ? new TrainingData(deckName, trainingData.get(deckName)) : null;
 	}
 
-	public void loadTrainingData() throws FileNotFoundException {
+	public void loadTrainingData() throws IOException, URISyntaxException {
 		trainingData.clear();
-		File folder = new File("./training/");
-		if (!folder.exists()) {
-			logger.warn("/training directory not found");
-			return;
+
+		// load training from resources jar on the classpath
+		Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(TRAINING_FOLDER, false);
+
+		// load cards from ~/metastone/training folder on the filesystem
+		if (Paths.get(USER_HOME_METASTONE + TRAINING_FOLDER).toFile().exists()) {
+			inputStreams.addAll((ResourceLoader.loadJsonInputStreams(USER_HOME_METASTONE + TRAINING_FOLDER, true)));
 		}
+
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		for (File file : FileUtils.listFiles(folder, new String[] { "json" }, true)) {
-			FileReader reader = new FileReader(file);
-			HashMap<String, Object> map = gson.fromJson(reader, new TypeToken<HashMap<String, Object>>() {
-			}.getType());
+		HashMap<String, Object>  map;
+		Reader reader;
+		for (ResourceInputStream resourceInputStream : inputStreams) {
+			reader = new InputStreamReader(resourceInputStream.inputStream);
+			map = gson.fromJson(reader, new TypeToken<HashMap<String, Object>>() {}.getType());
 
 			final String DECK_NAME = "deck";
 			if (!map.containsKey(DECK_NAME)) {
-				logger.error("Training data {} does not speficy a value for '{}' and is therefor not valid", file.getName(), DECK_NAME);
+				logger.error("Training data {} does not specify a value for '{}' and is therefor not valid", resourceInputStream.fileName, DECK_NAME);
 				continue;
 			}
 
@@ -100,7 +115,7 @@ public class TrainingProxy extends Proxy<GameNotification> {
 			String filename = deckName.toLowerCase();
 			filename = filename.replaceAll(" ", "_");
 			filename = filename.replaceAll("\\W+", "");
-			filename = "./training/" + filename + ".json";
+			filename = USER_HOME_METASTONE + TRAINING_FOLDER + "/" + filename + ".json";
 			Files.write(Paths.get(filename), jsonData.getBytes());
 		} catch (IOException e) {
 			e.printStackTrace();
