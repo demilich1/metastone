@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
 
-import net.demilich.metastone.AppConfig;
+import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.GameNotification;
 import net.demilich.nittygrittymvc.SimpleCommand;
 import net.demilich.nittygrittymvc.interfaces.INotification;
@@ -45,7 +45,7 @@ public class CheckForUpdateCommand extends SimpleCommand<GameNotification> {
 				EntityUtils.consume(entity);
 				Gson gson = new Gson();
 				VersionInfo versionInfo = gson.fromJson(htmlContent, VersionInfo.class);
-				if (versionInfo.isNewerVersionAvailable(AppConfig.VERSION)) {
+				if (versionInfo.isNewerVersionAvailable(BuildConfig.VERSION)) {
 					logger.debug("Newer version available: {}" + versionInfo.version);
 					getFacade().sendNotification(GameNotification.NEW_VERSION_AVAILABLE, versionInfo);
 				} else {

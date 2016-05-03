@@ -3,7 +3,7 @@ package net.demilich.metastone.game.behaviour.human;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.demilich.metastone.AppConfig;
+import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.GameContext;
@@ -34,7 +34,7 @@ public class HumanBehaviour extends Behaviour implements IActionSelectionListene
 		NotificationProxy.sendNotification(GameNotification.HUMAN_PROMPT_FOR_MULLIGAN, options);
 		while (waitingForInput) {
 			try {
-				Thread.sleep(AppConfig.DEFAULT_SLEEP_DELAY);
+				Thread.sleep(BuildConfig.DEFAULT_SLEEP_DELAY);
 			} catch (InterruptedException e) {
 			}
 		}
@@ -54,7 +54,7 @@ public class HumanBehaviour extends Behaviour implements IActionSelectionListene
 		NotificationProxy.sendNotification(GameNotification.HUMAN_PROMPT_FOR_ACTION, options);
 		while (waitingForInput) {
 			try {
-				Thread.sleep(AppConfig.DEFAULT_SLEEP_DELAY);
+				Thread.sleep(BuildConfig.DEFAULT_SLEEP_DELAY);
 				if (context.ignoreEvents()) {
 					return null;
 				}

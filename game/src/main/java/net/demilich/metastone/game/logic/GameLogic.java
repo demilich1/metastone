@@ -13,7 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.demilich.metastone.AppConfig;
+import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
@@ -1037,7 +1037,7 @@ public class GameLogic implements Cloneable {
 	}
 
 	private void logToDebugHistory(String message, Object... params) {
-		if (!AppConfig.DEV_BUILD) {
+		if (!BuildConfig.DEV_BUILD) {
 			return;
 		}
 		if (debugHistory.size() == MAX_HISTORY_ENTRIES) {

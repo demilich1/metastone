@@ -50,6 +50,9 @@ Sure! There is still a lot to do and anybody willing to contribute is welcome
    * Change `Eclipse > Preferences > Java > Compiler > Building > Circular dependencies` from `Error` to `Warning`.  There is a [known bug](https://issues.gradle.org/browse/GRADLE-2200) with importing multi-module gradle projects into Eclipse. The IDE of choice for working with gradle projects is [IntelliJ IDEA](https://www.jetbrains.com/idea/).
 * If you want to build from IntelliJ IDEA:
    * Open a new project `File > Project From Existing Sources`.  Project will be imported from the `build.gradle` files.
+* **NOTE:** When building from an IDE you will need to manually generate the `BuildConfig.java` file, prefereably before you import the project.  Otherwise your IDE will complain about unresolved references to `BuildConfig`.
+   * Linux/Mac OSX `./gradlew compileBuildConfig`
+   * Windows `gradlew.bat compileBuildConfig`
 
 ### Project structure
 * MetaStone is made up of a handfull of source modules.  Here's what the top level structure looks like:
@@ -86,8 +89,8 @@ metastone
 ```
 - Create a new `metastone/cards` folder under your user home directory:
    * Linux/Mac OSX `mkdir -p ~/metastone/cards`
-   * Windows `use Windows File Explorer to create the metastone/cards dir`
-- Any `.json` files you place in your `~/metastone/cards` folder will be parsed and treated like built-in cards.
+   * Windows `use Windows File Explorer to create the C:\Users\[username]\Documents\metastone folder`
+- Any `.json` files you place in your `metastone/cards` folder will be parsed and treated like built-in cards.
 - To learn the cards format it is highly recommended that you copy an existing card, change the `filename` and the `id` attribute (**<-- important!**) and make small changes.
 - Make sure to validate that the cards you added are well formed and can be parsed! Run the following command: 
    - Linux/Mac OSX `./gradlew cards:test` 

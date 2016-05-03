@@ -43,7 +43,7 @@ public class ResourceLoader {
         } else { // from resources
             URI uri;
             try {
-                uri = Object.class.getResource(rootDir).toURI();
+                uri = Object.class.getResource("/" + rootDir).toURI();
             } catch (NullPointerException ex) {
                 logger.error(rootDir + " directory not found in resources");
                 throw new RuntimeException(rootDir + " directory not found in resources");

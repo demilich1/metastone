@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.HashMap;
 
+import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.trainingmode.TrainingData;
 import net.demilich.metastone.utils.ResourceInputStream;
 import net.demilich.metastone.utils.ResourceLoader;
@@ -29,8 +30,7 @@ import net.demilich.metastone.game.behaviour.threat.WeightedFeature;
 public class TrainingProxy extends Proxy<GameNotification> {
 
 	public static final String NAME = "TrainingProxy";
-	private static final String USER_HOME_METASTONE = System.getProperty("user.home") + "/metastone";
-	private static final String TRAINING_FOLDER = "/training";
+	private static final String TRAINING_FOLDER = "training";
 
 	private static Logger logger = LoggerFactory.getLogger(TrainingProxy.class);
 
@@ -38,8 +38,8 @@ public class TrainingProxy extends Proxy<GameNotification> {
 
 	public TrainingProxy() {
 		super(NAME);
-		if (new File(USER_HOME_METASTONE + TRAINING_FOLDER).mkdir()) {
-			logger.info(USER_HOME_METASTONE + TRAINING_FOLDER + " folder created");
+		if (new File(BuildConfig.USER_HOME_METASTONE + File.separator + TRAINING_FOLDER).mkdir()) {
+			logger.info(BuildConfig.USER_HOME_METASTONE + File.separator + TRAINING_FOLDER + " folder created");
 		}
 		try {
 			loadTrainingData();
@@ -63,8 +63,8 @@ public class TrainingProxy extends Proxy<GameNotification> {
 		Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(TRAINING_FOLDER, false);
 
 		// load cards from ~/metastone/training folder on the filesystem
-		if (Paths.get(USER_HOME_METASTONE + TRAINING_FOLDER).toFile().exists()) {
-			inputStreams.addAll((ResourceLoader.loadJsonInputStreams(USER_HOME_METASTONE + TRAINING_FOLDER, true)));
+		if (Paths.get(BuildConfig.USER_HOME_METASTONE + File.separator + TRAINING_FOLDER).toFile().exists()) {
+			inputStreams.addAll((ResourceLoader.loadJsonInputStreams(BuildConfig.USER_HOME_METASTONE + File.separator + TRAINING_FOLDER, true)));
 		}
 
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -115,7 +115,7 @@ public class TrainingProxy extends Proxy<GameNotification> {
 			String filename = deckName.toLowerCase();
 			filename = filename.replaceAll(" ", "_");
 			filename = filename.replaceAll("\\W+", "");
-			filename = USER_HOME_METASTONE + TRAINING_FOLDER + "/" + filename + ".json";
+			filename = BuildConfig.USER_HOME_METASTONE + File.separator + TRAINING_FOLDER + File.separator + filename + ".json";
 			Files.write(Paths.get(filename), jsonData.getBytes());
 		} catch (IOException e) {
 			e.printStackTrace();

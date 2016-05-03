@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.utils.ResourceInputStream;
 import net.demilich.metastone.utils.ResourceLoader;
 import org.slf4j.Logger;
@@ -43,9 +44,7 @@ public class DeckProxy extends Proxy<GameNotification> {
 	private static Logger logger = LoggerFactory.getLogger(DeckProxy.class);
 
 	public static final String NAME = "DeckProxy";
-	
-	private static final String USER_HOME_METASTONE = System.getProperty("user.home") + "/metastone";
-	private static final String DECKS_FOLDER = "/decks";
+	private static final String DECKS_FOLDER = "decks";
 
 	private final List<Deck> decks = new ArrayList<Deck>();
 	private final IDeckValidator deckValidator = new DefaultDeckValidator();
@@ -124,11 +123,11 @@ public class DeckProxy extends Proxy<GameNotification> {
 				new GsonBuilder().setPrettyPrinting().create());
 
 		// load decks from ~/metastone/decks on the filesystem
-		if (Paths.get(USER_HOME_METASTONE + DECKS_FOLDER).toFile().exists()) {
-			loadStandardDecks(ResourceLoader.loadJsonInputStreams(USER_HOME_METASTONE + DECKS_FOLDER, true),
+		if (Paths.get(BuildConfig.USER_HOME_METASTONE + File.separator + DECKS_FOLDER).toFile().exists()) {
+			loadStandardDecks(ResourceLoader.loadJsonInputStreams(BuildConfig.USER_HOME_METASTONE + File.separator + DECKS_FOLDER, true),
 					new GsonBuilder().setPrettyPrinting().create());
 
-			loadMetaDecks(ResourceLoader.loadJsonInputStreams(USER_HOME_METASTONE + DECKS_FOLDER, true),
+			loadMetaDecks(ResourceLoader.loadJsonInputStreams(BuildConfig.USER_HOME_METASTONE + File.separator + DECKS_FOLDER, true),
 					new GsonBuilder().setPrettyPrinting().create());
 		}
 	}
@@ -248,12 +247,12 @@ public class DeckProxy extends Proxy<GameNotification> {
 		String jsonData = gson.toJson(saveData);
 		try {
 			// ensure user's personal deck dir exists
-			Files.createDirectories(Paths.get(USER_HOME_METASTONE + DECKS_FOLDER));
+			Files.createDirectories(Paths.get(BuildConfig.USER_HOME_METASTONE + File.separator + DECKS_FOLDER));
 
 			String filename = deck.getName().toLowerCase();
 			filename = filename.replaceAll(" ", "_");
 			filename = filename.replaceAll("\\W+", "");
-			filename = USER_HOME_METASTONE + DECKS_FOLDER + File.separator + filename + ".json";
+			filename = BuildConfig.USER_HOME_METASTONE + File.separator + DECKS_FOLDER + File.separator + filename + ".json";
 			Path path = Paths.get(filename);
 			Files.write(path, jsonData.getBytes());
 			deck.setFilename(path.getFileName().toString());
