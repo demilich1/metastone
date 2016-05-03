@@ -1,5 +1,6 @@
 package net.demilich.metastone.tests;
 
+import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.game.cards.CardParser;
 import net.demilich.metastone.utils.ResourceInputStream;
 import org.apache.commons.io.FileUtils;
@@ -22,7 +23,6 @@ import java.util.List;
  */
 public class ValidateCards {
 
-    private static final String USER_CARDS_DIR = System.getProperty("user.home") + "/metastone/cards";
     private static final String CARDS_DIR = "src/main/resources/cards/"; // relative path from module root
     private static final CardParser CARD_PARSER = new CardParser();
     private static final List<File> ALL_CARD_FILES;
@@ -34,10 +34,10 @@ public class ValidateCards {
                 new RegexFileFilter("^(.*json)"),
                 DirectoryFileFilter.DIRECTORY);
         // also pull in the user's custom cards dir
-        if (new File(USER_CARDS_DIR).exists()) {
+        if (new File(BuildConfig.USER_HOME_METASTONE + File.separator + "cards").exists()) {
             ALL_CARD_FILES.addAll(
                     FileUtils.listFiles(
-                        new File(USER_CARDS_DIR),
+                        new File(BuildConfig.USER_HOME_METASTONE + File.separator + "cards"),
                         new RegexFileFilter("^(.*json)"),
                         DirectoryFileFilter.DIRECTORY)
             );
