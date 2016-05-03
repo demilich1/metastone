@@ -2,6 +2,8 @@ apply plugin: 'java'
 apply plugin: 'application'
 apply from: 'javafx.plugin'
 
+mainClassName = 'net.demilich.metastone.MetaStone'
+
 jar {
 	manifest {
 		attributes 'Implementation-Title': rootProject.name.capitalize(),
@@ -19,7 +21,8 @@ dependencies {
 }
 
 javafx {
-	mainClass = 'net.demilich.metastone.MetaStone'
+	appName rootProject.name
+	mainClass = mainClassName
 }
 
 test {
