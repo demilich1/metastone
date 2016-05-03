@@ -90,8 +90,4 @@ public class Weapon extends Actor {
 		return result;
 	}
 
-	public void setDurability(int durability) {
-		// TODO Auto-generated method stub
-		
-	}
 }
