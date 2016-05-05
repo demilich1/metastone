@@ -24,7 +24,10 @@ public class MinionCard extends Card {
 	public MinionCard(MinionCardDesc desc) {
 		super(desc);
 		setAttribute(Attribute.BASE_ATTACK, desc.baseAttack);
+		setAttribute(Attribute.ATTACK, desc.baseAttack);
 		setAttribute(Attribute.BASE_HP, desc.baseHp);
+		setAttribute(Attribute.HP, desc.baseHp);
+		setAttribute(Attribute.MAX_HP, desc.baseHp);
 		if (desc.race != null) {
 			setRace(desc.race);
 		}
@@ -39,6 +42,9 @@ public class MinionCard extends Card {
 			}
 		}
 		minion.setBaseAttack(getBaseAttack());
+		minion.setAttack(getAttack());
+		minion.setHp(getHp());
+		minion.setMaxHp(getHp());
 		minion.setBaseHp(getBaseHp());
 		BattlecryDesc battlecry = desc.battlecry;
 		if (battlecry != null) {
@@ -68,11 +74,19 @@ public class MinionCard extends Card {
 	}
 
 	public int getAttack() {
-		return getBaseAttack() + getAttributeValue(Attribute.ATTACK_BONUS);
+		return getAttributeValue(Attribute.ATTACK);
+	}
+	
+	public int getBonusAttack() {
+		return getAttributeValue(Attribute.ATTACK_BONUS);
 	}
 
 	public int getHp() {
-		return getBaseHp() + getAttributeValue(Attribute.HP_BONUS);
+		return getAttributeValue(Attribute.HP);
+	}
+	
+	public int getBonusHp() {
+		return getAttributeValue(Attribute.HP_BONUS);
 	}
 
 	public int getBaseAttack() {

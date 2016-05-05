@@ -16,6 +16,7 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
+import net.demilich.metastone.game.cards.WeaponCard;
 import net.demilich.metastone.gui.DigitFactory;
 import net.demilich.metastone.gui.IconFactory;
 
@@ -78,15 +79,19 @@ public class CardToken extends BorderPane {
 			setScoreValue(manaCostAnchor, card.getBaseManaCost());
 		}
 
-		boolean isMinionCard = card.getCardType() == CardType.MINION;
-		attackAnchor.setVisible(isMinionCard);
-		hpAnchor.setVisible(isMinionCard);
-		attackIcon.setVisible(isMinionCard);
-		hpIcon.setVisible(isMinionCard);
-		if (isMinionCard) {
+		boolean isMinionOrWeaponCard = card.getCardType().isCardType(CardType.MINION) || card.getCardType().isCardType(CardType.WEAPON);
+		attackAnchor.setVisible(isMinionOrWeaponCard);
+		hpAnchor.setVisible(isMinionOrWeaponCard);
+		attackIcon.setVisible(isMinionOrWeaponCard);
+		hpIcon.setVisible(isMinionOrWeaponCard);
+		if (card.getCardType().isCardType(CardType.MINION)) {
 			MinionCard minionCard = (MinionCard) card;
-			setScoreValue(attackAnchor, minionCard.getAttack(), minionCard.getBaseAttack());
-			setScoreValue(hpAnchor, minionCard.getHp(), minionCard.getBaseHp());
+			setScoreValue(attackAnchor, minionCard.getAttack() + minionCard.getBonusAttack(), minionCard.getBaseAttack());
+			setScoreValue(hpAnchor, minionCard.getHp() + minionCard.getBonusHp(), minionCard.getBaseHp());
+		} else if (card.getCardType().isCardType(CardType.WEAPON)) {
+			WeaponCard weaponCard = (WeaponCard) card;
+			setScoreValue(attackAnchor, weaponCard.getDamage() + weaponCard.getBonusDamage(), weaponCard.getBaseDamage());
+			setScoreValue(hpAnchor, weaponCard.getDurability() + weaponCard.getBonusDurability(), weaponCard.getBaseDurability());
 		}
 	}
 
@@ -96,16 +101,24 @@ public class CardToken extends BorderPane {
 		rarityGem.setRadius(rarity == Rarity.LEGENDARY ? baseRarityGemSize * 1.5 : baseRarityGemSize);
 	}
 
-	private void setScoreValue(Group group, int value) {
+	protected void setScoreValue(Group group, int value) {
 		setScoreValue(group, value, value);
 	}
 
-	private void setScoreValue(Group group, int value, int baseValue) {
+	protected void setScoreValue(Group group, int value, int baseValue) {
 		Color color = Color.WHITE;
 		if (value > baseValue) {
 			color = Color.GREEN;
-		} else if (value < baseValue) {
+		}
+		DigitFactory.showPreRenderedDigits(group, value, color);
+	}
+	
+	protected void setScoreValue(Group group, int value, int baseValue, int maxValue) {
+		Color color = Color.WHITE;
+		if (value < maxValue) {
 			color = Color.RED;
+		} else if (value > baseValue) {
+			color = Color.GREEN;
 		}
 		DigitFactory.showPreRenderedDigits(group, value, color);
 	}

@@ -4,7 +4,7 @@
 	"baseManaCost": 0,
 	"type": "SPELL",
 	"heroClass": "WARLOCK",
-	"rarity": "EPIC",
+	"rarity": "RARE",
 	"description": "Spend all your mana. Summon that many 1/1 Tentacles.",
 	"targetSelection": "NONE",
 	"spell": {

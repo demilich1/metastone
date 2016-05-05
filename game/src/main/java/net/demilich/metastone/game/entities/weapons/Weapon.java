@@ -15,13 +15,8 @@ public class Weapon extends Actor {
 	private SpellDesc onEquip;
 	private SpellDesc onUnequip;
 
-	public Weapon(Card sourceCard, int weaponDamage, int durability) {
+	public Weapon(Card sourceCard) {
 		super(sourceCard);
-		setAttribute(Attribute.BASE_ATTACK, weaponDamage);
-		setAttribute(Attribute.BASE_HP, durability);
-		setAttribute(Attribute.MAX_HP, durability);
-		setAttribute(Attribute.ATTACK, weaponDamage);
-		setAttribute(Attribute.HP, durability);
 	}
 
 	@Override
@@ -94,4 +89,5 @@ public class Weapon extends Actor {
 		result += "]";
 		return result;
 	}
+
 }
