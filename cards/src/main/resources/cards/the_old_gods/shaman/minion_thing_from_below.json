@@ -1,6 +1,6 @@
 {
 	"id": "minion_thing_from_below",
-	"name": "Thing From Below",
+	"name": "Thing from Below",
 	"baseManaCost": 6,
 	"type": "MINION",
 	"baseAttack": 5,
