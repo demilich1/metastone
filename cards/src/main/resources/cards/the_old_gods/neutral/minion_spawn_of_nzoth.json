@@ -1,0 +1,23 @@
+{
+	"id": "minion_spawn_of_nzoth",
+	"name": "Spawn of N'Zoth",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Deathrattle: Give your minions +1/+1.",
+	"deathrattle": {
+		"class": "BuffSpell",
+		"target": "OTHER_FRIENDLY_MINIONS",
+		"attackBonus": 1,
+		"hpBonus": 1
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

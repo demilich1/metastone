@@ -1,0 +1,28 @@
+{
+	"id": "minion_darkshire_librarian",
+	"name": "Darkshire Librarian",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 2,
+	"heroClass": "WARLOCK",
+	"rarity": "RARE",
+	"description": "Battlecry: Discard a random card. Deathrattle: Draw a card.",
+	"battlecry": {
+		"spell": {
+			"class": "DiscardSpell",
+			"value": 1
+		}
+	},
+	"deathrattle": {
+		"class": "DrawCardSpell",
+		"value": 1
+	},
+	"attributes": {
+		"BATTLECRY": true,
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

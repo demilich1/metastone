@@ -1,0 +1,29 @@
+{
+	"id": "minion_siltfin_spiritwalker",
+	"name": "Siltfin Spiritwalker",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 5,
+	"heroClass": "SHAMAN",
+	"rarity": "EPIC",
+	"race": "MURLOC",
+	"description": "Whenever another friendly Murloc dies, draw a card. Overload: (1)",
+	"trigger": {
+		"eventTrigger": {
+			"class": "MinionDeathTrigger",
+			"targetPlayer": "SELF",
+			"race": "MURLOC"
+		},
+		"spell": {
+			"class": "DrawCardSpell",
+			"value": 1
+		}
+	},
+	"attributes": {
+		"OVERLOAD": 1
+	},
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

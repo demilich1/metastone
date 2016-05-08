@@ -1,0 +1,26 @@
+{
+	"id": "spell_on_the_hunt",
+	"name": "On the Hunt",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "HUNTER",
+	"rarity": "COMMON",
+	"description": "Deal 1 damage. Summon a 1/1 Mastiff.",
+	"targetSelection": "ANY",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "DamageSpell",
+				"value": 1
+			},
+			{
+				"class": "SummonSpell",
+				"card": "token_mastiff"
+			}
+		]
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

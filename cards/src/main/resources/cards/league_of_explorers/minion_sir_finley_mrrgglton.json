@@ -1,0 +1,41 @@
+{
+	"id": "minion_sir_finley_mrrgglton",
+	"name": "Sir Finley Mrrgglton",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 3,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"race": "MURLOC",
+	"description": "Battlecry: Discover a new basic Hero Power.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "DiscoverCardSpell",
+			"cards": [
+				"hero_power_shapeshift",
+				"hero_power_steady_shot",
+				"hero_power_fireblast",
+				"hero_power_reinforce",
+				"hero_power_lesser_heal",
+				"hero_power_dagger_mastery",
+				"hero_power_totemic_call",
+				"hero_power_life_tap",
+				"hero_power_armor_up"
+			],
+			"spell": {
+				"class": "ChangeHeroPowerSpell",
+				"targetPlayer": "SELF"
+			},
+			"cannotReceiveOwned": true
+		},
+		"resolvedLate": false
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}

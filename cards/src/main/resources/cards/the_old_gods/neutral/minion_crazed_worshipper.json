@@ -1,0 +1,58 @@
+{
+	"id": "minion_crazed_worshipper",
+	"name": "Crazed Worshipper",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 6,
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"description": "Taunt. Whenever this minion takes damage, give your C'Thun +1/+1 (wherever it is).",
+	"trigger": {
+		"eventTrigger": {
+			"class": "DamageReceivedTrigger",
+			"hostTargetType": "IGNORE_OTHER_TARGETS"
+		},
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "BuffSpell",
+					"target": "FRIENDLY_MINIONS",
+					"value": 1,
+					"filter": {
+						"class": "SpecificCardFilter",
+						"cardId": "minion_cthun"
+					}
+				},
+				{
+					"class": "BuffSpell",
+					"target": "FRIENDLY_HAND",
+					"value": 1,
+					"filter": {
+						"class": "SpecificCardFilter",
+						"cardId": "minion_cthun"
+					}
+				},
+				{
+					"class": "ModifyAttributeSpell",
+					"target": "FRIENDLY_HERO",
+					"attribute": "CTHUN_ATTACK_BUFF",
+					"value": 1
+				},
+				{
+					"class": "ModifyAttributeSpell",
+					"target": "FRIENDLY_HERO",
+					"attribute": "CTHUN_HEALTH_BUFF",
+					"value": 1
+				}
+			]
+		}
+	},
+	"attributes": {
+		"TAUNT": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,34 @@
+{
+	"id": "minion_magnataur_alpha",
+	"name": "Magnataur Alpha",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 3,
+	"heroClass": "WARRIOR",
+	"rarity": "EPIC",
+	"description": "Also damages the minions next to whomever he attacks.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "PhysicalAttackTrigger",
+			"sourcePlayer": "SELF",
+			"targetEntityType": "MINION",
+			"hostTargetType": "IGNORE_OTHER_SOURCES"
+		},
+		"spell": {
+			"class": "AdjacentEffectSpell",
+			"target": "EVENT_TARGET",
+			"spell2": {
+				"class": "DamageSpell",
+				"value": {
+					"class": "AttributeValueProvider",
+					"target": "SELF",
+					"attribute": "ATTACK"
+				}
+			}
+		}
+	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,54 @@
+{
+	"id": "minion_beckoner_of_evil",
+	"name": "Beckoner of Evil",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 3,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Battlecry: Give your C'Thun +2/+2 (wherever it is).",
+	"battlecry": {
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "BuffSpell",
+					"target": "FRIENDLY_MINIONS",
+					"value": 2,
+					"filter": {
+						"class": "SpecificCardFilter",
+						"cardId": "minion_cthun"
+					}
+				},
+				{
+					"class": "BuffSpell",
+					"target": "FRIENDLY_HAND",
+					"value": 2,
+					"filter": {
+						"class": "SpecificCardFilter",
+						"cardId": "minion_cthun"
+					}
+				},
+				{
+					"class": "ModifyAttributeSpell",
+					"target": "FRIENDLY_HERO",
+					"attribute": "CTHUN_ATTACK_BUFF",
+					"value": 2
+				},
+				{
+					"class": "ModifyAttributeSpell",
+					"target": "FRIENDLY_HERO",
+					"attribute": "CTHUN_HEALTH_BUFF",
+					"value": 2
+				}
+			]
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

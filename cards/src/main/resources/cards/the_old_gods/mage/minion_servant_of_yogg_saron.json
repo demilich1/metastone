@@ -1,0 +1,29 @@
+{
+	"id": "minion_servant_of_yogg_saron",
+	"name": "Servant of Yogg-Saron",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 4,
+	"heroClass": "MAGE",
+	"rarity": "RARE",
+	"description": "Battlecry: Cast a random spell that costs (5) or less (targets chosen randomly).",
+	"targetSelection": "NONE",
+	"battlecry": {
+		"spell": {
+			"class": "CastRandomSpellSpell",
+			"cardFilter": {
+				"class": "CardFilter",
+				"attribute": "BASE_MANA_COST",
+				"operation": "LESS_OR_EQUAL",
+				"value": 5
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

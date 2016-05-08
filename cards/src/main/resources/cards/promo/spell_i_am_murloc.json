@@ -1,0 +1,22 @@
+{
+	"id": "spell_i_am_murloc",
+	"name": "I Am Murloc",
+	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "Summon three, four, or five 1/1 Murlocs.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "SummonSpell",
+		"value": {
+			"class": "RandomValueProvider",
+			"min": 3,
+			"max": 5
+		},
+		"card": "token_murloc"
+	},
+	"collectible": false,
+	"set": "PROMO",
+	"fileFormatVersion": 1
+}

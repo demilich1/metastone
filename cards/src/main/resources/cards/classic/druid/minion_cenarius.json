@@ -1,0 +1,67 @@
+{
+	"id": "minion_cenarius",
+	"name": "Cenarius",
+	"baseManaCost": 9,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 8,
+	"heroClass": "DRUID",
+	"rarity": "LEGENDARY",
+	"description": "Choose One - Give your other minions +2/+2; or Summon two 2/2 Treants with Taunt.",
+	"options": [
+		{
+			"description": "+2/2",
+			"spell": {
+				"class": "BuffSpell",
+				"target": "OTHER_FRIENDLY_MINIONS",
+				"attackBonus": 2,
+				"hpBonus": 2
+			}
+		},
+		{
+			"description": "2 Treants",
+			"spell": {
+				"class": "MetaSpell",
+				"spells": [
+					{
+						"class": "SummonSpell",
+						"card": "token_treant_taunt",
+						"boardPositionRelative": "RIGHT"
+					},
+					{
+						"class": "SummonSpell",
+						"card": "token_treant_taunt",
+						"boardPositionRelative": "LEFT"
+					}
+				]
+			}
+		}
+	],
+	"bothOptions": {
+		"description": "2 Treants and +2/+2",
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "SummonSpell",
+					"card": "token_treant_taunt",
+					"boardPositionRelative": "RIGHT"
+				},
+				{
+					"class": "SummonSpell",
+					"card": "token_treant_taunt",
+					"boardPositionRelative": "LEFT"
+				},
+				{
+					"class": "BuffSpell",
+					"target": "OTHER_FRIENDLY_MINIONS",
+					"attackBonus": 2,
+					"hpBonus": 2
+				}
+			]
+		}
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

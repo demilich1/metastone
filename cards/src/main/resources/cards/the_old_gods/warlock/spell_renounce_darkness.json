@@ -1,0 +1,21 @@
+{
+	"id": "spell_renounce_darkness",
+	"name": "Renounce Darkness",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "EPIC",
+	"description": "Replace your Hero Power and Warlock Cards with another class's. The cards cost (1) less.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "RenounceClassSpell",
+		"manaModifier": -1,
+		"cardFilter": {
+			"class": "CardFilter",
+			"heroClass": "WARLOCK"
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

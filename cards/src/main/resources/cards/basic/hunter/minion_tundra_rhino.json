@@ -1,0 +1,27 @@
+{
+	"id": "minion_tundra_rhino",
+	"name": "Tundra Rhino",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 5,
+	"heroClass": "HUNTER",
+	"rarity": "FREE",
+	"race": "BEAST",
+	"description": "Your Beasts have Charge.",
+	"aura": {
+		"class": "AttributeAura",
+		"target": "FRIENDLY_MINIONS",
+		"attribute": "CHARGE",
+		"filter": {
+			"class": "RaceFilter",
+			"race": "BEAST"
+		}
+	},
+	"attributes": {
+		"CHARGE": true
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,40 @@
+{
+	"id": "minion_forbidden_ancient",
+	"name": "Forbidden Ancient",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"heroClass": "DRUID",
+	"rarity": "EPIC",
+	"description": "Battlecry: Spend all your Mana. Gain +1/+1 for each Mana spent.",
+	"battlecry": {
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "BuffSpell",
+					"target": "SELF",
+					"value": {
+						"class": "PlayerAttributeValueProvider",
+						"playerAttribute": "MANA"
+					}
+				},
+				{
+					"class": "GainManaSpell",
+					"value": {
+						"class": "PlayerAttributeValueProvider",
+						"playerAttribute": "MANA",
+						"multiplier": -1
+					}
+				}
+			]
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

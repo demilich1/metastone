@@ -1,0 +1,22 @@
+{
+	"id": "hero_power_inferno",
+	"name": "INFERNO!",
+	"baseManaCost": 2,
+	"type": "HERO_POWER",
+	"heroClass": "WARLOCK",
+	"rarity": "FREE",
+	"description": "Summon a 6/6 Infernal.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "SummonSpell",
+		"card": "token_infernal"
+	},
+	"condition": {
+		"class": "MinionCountCondition",
+		"operation": "LESS",
+		"value": 7
+	},
+	"collectible": false,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

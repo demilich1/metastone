@@ -1,0 +1,32 @@
+{
+	"id": "minion_stablemaster",
+	"name": "Stablemaster",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 2,
+	"heroClass": "HUNTER",
+	"rarity": "EPIC",
+	"description": "Battlecry: Give a friendly Beast Immune this turn.",
+	"battlecry": {
+		"targetSelection": "FRIENDLY_MINIONS",
+		"spell": {
+			"class": "AddAttributeSpell",
+			"attribute": "IMMUNE",
+			"filter": {
+				"class": "RaceFilter",
+				"race": "BEAST"
+			},
+			"revertTrigger": {
+				"class": "TurnEndTrigger"
+			}
+		},
+		"resolvedLate": false
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,54 @@
+{
+	"id": "hero_power_totemic_call",
+	"name": "Totemic Call",
+	"baseManaCost": 2,
+	"type": "HERO_POWER",
+	"heroClass": "SHAMAN",
+	"rarity": "FREE",
+	"description": "Summon a random Totem.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "SummonRandomNotOnBoardSpell",
+		"cards": [
+			"token_searing_totem",
+			"token_healing_totem",
+			"token_wrath_of_air_totem",
+			"token_stoneclaw_totem"
+		]
+	},
+	"condition": {
+		"class": "AndCondition",
+		"conditions": [
+			{
+				"class": "AndCondition",
+				"conditions": [
+					{
+						"class": "HasSpecificMinionOnBoardCondition",
+						"cardId": "token_searing_totem"
+					},
+					{
+						"class": "HasSpecificMinionOnBoardCondition",
+						"cardId": "token_healing_totem"
+					},
+					{
+						"class": "HasSpecificMinionOnBoardCondition",
+						"cardId": "token_wrath_of_air_totem"
+					},
+					{
+						"class": "HasSpecificMinionOnBoardCondition",
+						"cardId": "token_stoneclaw_totem"
+					}
+				],
+				"invert": true
+			},
+			{
+				"class": "MinionCountCondition",
+				"operation": "LESS",
+				"value": 7
+			}
+		]
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

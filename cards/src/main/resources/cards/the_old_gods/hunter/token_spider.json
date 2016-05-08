@@ -1,0 +1,15 @@
+{
+	"id": "token_spider",
+	"name": "Spider",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"heroClass": "HUNTER",
+	"rarity": "RARE",
+	"race": "BEAST",
+	"description": "",
+	"collectible": false,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

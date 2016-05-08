@@ -1,0 +1,19 @@
+{
+	"id": "token_sabertooth_tiger",
+	"name": "Tiger Form",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 2,
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"race": "BEAST",
+	"description": "Charge, Stealth",
+	"attributes": {
+		"CHARGE": true,
+		"STEALTH": true
+	},
+	"collectible": false,
+	"set": "THE_GRAND_TOURNAMENT",
+	"fileFormatVersion": 1
+}

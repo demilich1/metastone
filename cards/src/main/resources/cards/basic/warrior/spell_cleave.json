@@ -1,0 +1,24 @@
+{
+	"id": "spell_cleave",
+	"name": "Cleave",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "WARRIOR",
+	"rarity": "FREE",
+	"description": "Deal 2 damage to two random enemy minions.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "MultiTargetDamageSpell",
+		"value": 2,
+		"howMany": 2
+	},
+	"condition": {
+		"class": "MinionCountCondition",
+		"targetPlayer": "OPPONENT",
+		"operation": "GREATER",
+		"value": 1
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

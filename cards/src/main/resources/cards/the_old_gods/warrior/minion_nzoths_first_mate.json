@@ -1,0 +1,24 @@
+{
+	"id": "minion_nzoths_first_mate",
+	"name": "N'Zoth's First Mate",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"heroClass": "WARRIOR",
+	"rarity": "COMMON",
+	"description": "Battlecry: Equip a 1/3 Rusty Hook.",
+	"battlecry": {
+		"spell": {
+			"class": "EquipWeaponSpell",
+			"card": "weapon_rusty_hook"
+		},
+		"resolvedLate": false
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,22 @@
+{
+	"id": "spell_shadow_word_pain",
+	"name": "Shadow Word: Pain",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "FREE",
+	"description": "Destroy a minion with 3 or less Attack.",
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "DestroySpell",
+		"filter": {
+			"class": "AttributeFilter",
+			"attribute": "ATTACK",
+			"operation": "LESS_OR_EQUAL",
+			"value": 3
+		}
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

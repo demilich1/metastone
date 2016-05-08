@@ -1,0 +1,26 @@
+{
+	"id": "spell_evolve",
+	"name": "Evolve",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "SHAMAN",
+	"rarity": "RARE",
+	"description": "Transform your minions into random minions that cost (1) more.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "TransformToRandomMinionSpell",
+		"target": "FRIENDLY_MINIONS",
+		"cardFilter": {
+			"class": "CardFilter",
+			"manaCost": {
+				"class": "AttributeValueProvider",
+				"target": "SPELL_TARGET",
+				"attribute": "BASE_MANA_COST",
+				"offset": 1
+			}
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

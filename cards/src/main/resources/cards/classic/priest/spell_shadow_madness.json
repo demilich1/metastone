@@ -1,0 +1,22 @@
+{
+	"id": "spell_shadow_madness",
+	"name": "Shadow Madness",
+	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "RARE",
+	"description": "Gain control of an enemy minion with 3 or less Attack until end of turn.",
+	"targetSelection": "ENEMY_MINIONS",
+	"spell": {
+		"class": "custom.ShadowMadnessSpell",
+		"filter": {
+			"class": "AttributeFilter",
+			"attribute": "ATTACK",
+			"operation": "LESS_OR_EQUAL",
+			"value": 3
+		}
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

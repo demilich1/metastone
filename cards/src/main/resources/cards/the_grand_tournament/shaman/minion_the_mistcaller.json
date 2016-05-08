@@ -1,0 +1,51 @@
+{
+	"id": "minion_the_mistcaller",
+	"name": "The Mistcaller",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 4,
+	"heroClass": "SHAMAN",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Give all minions in your hand and deck +1/+1.",
+	"battlecry": {
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "BuffSpell",
+					"target": "FRIENDLY_HAND",
+					"attackBonus": 1,
+					"hpBonus": 1,
+					"filter": {
+						"class": "CardFilter",
+						"cardType": "MINION"
+					}
+				},
+				{
+					"class": "AddSpellTriggerSpell",
+					"target": "FRIENDLY_HERO",
+					"trigger": {
+						"eventTrigger": {
+							"class": "CardDrawnTrigger",
+							"targetPlayer": "SELF"
+						},
+						"spell": {
+							"class": "BuffSpell",
+							"target": "EVENT_TARGET",
+							"attackBonus": 1,
+							"hpBonus": 1
+						}
+					}
+				}
+			],
+			"resolvedLate": false
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
+	"fileFormatVersion": 1
+}

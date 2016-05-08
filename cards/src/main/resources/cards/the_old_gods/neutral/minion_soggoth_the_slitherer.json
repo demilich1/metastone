@@ -1,0 +1,18 @@
+{
+	"id": "minion_soggoth_the_slitherer",
+	"name": "Soggoth the Slitherer",
+	"baseManaCost": 9,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 9,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Taunt. Can't be targeted by Spells or Hero Powers.",
+	"attributes": {
+		"TAUNT": true,
+		"UNTARGETABLE_BY_SPELLS": true
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

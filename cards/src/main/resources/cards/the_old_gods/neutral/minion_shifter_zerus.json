@@ -1,0 +1,28 @@
+{
+	"id": "minion_shifter_zerus",
+	"name": "Shifter Zerus",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Each turn this is in your hand, transform it into a random minion.",
+	"passiveTrigger": {
+		"eventTrigger": {
+			"class": "TurnStartTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "custom.ShifterZerusSpell",
+			"target": "SELF",
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "MINION"
+			}
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

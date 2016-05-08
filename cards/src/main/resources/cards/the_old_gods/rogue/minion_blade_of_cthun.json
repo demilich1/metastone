@@ -1,0 +1,84 @@
+{
+	"id": "minion_blade_of_cthun",
+	"name": "Blade of C'Thun",
+	"baseManaCost": 9,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 4,
+	"heroClass": "ROGUE",
+	"rarity": "EPIC",
+	"description": "Battlecry: Destroy a minion. Add its Attack and Health to C'Thun's (wherever it is).",
+	"battlecry": {
+		"targetSelection": "MINIONS",
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "DestroySpell"
+				},
+				{
+					"class": "BuffSpell",
+					"target": "FRIENDLY_MINIONS",
+					"attackBonus": {
+						"class": "AttributeValueProvider",
+						"target": "TARGET",
+						"attribute": "ATTACK"
+					},
+					"hpBonus": {
+						"class": "AttributeValueProvider",
+						"target": "TARGET",
+						"attribute": "HP"
+					},
+					"filter": {
+						"class": "SpecificCardFilter",
+						"cardId": "minion_cthun"
+					}
+				},
+				{
+					"class": "BuffSpell",
+					"target": "FRIENDLY_HAND",
+					"attackBonus": {
+						"class": "AttributeValueProvider",
+						"target": "TARGET",
+						"attribute": "ATTACK"
+					},
+					"hpBonus": {
+						"class": "AttributeValueProvider",
+						"target": "TARGET",
+						"attribute": "HP"
+					},
+					"filter": {
+						"class": "SpecificCardFilter",
+						"cardId": "minion_cthun"
+					}
+				},
+				{
+					"class": "ModifyAttributeSpell",
+					"target": "FRIENDLY_HERO",
+					"attribute": "CTHUN_ATTACK_BUFF",
+					"value": {
+						"class": "AttributeValueProvider",
+						"target": "TARGET",
+						"attribute": "ATTACK"
+					}
+				},
+				{
+					"class": "ModifyAttributeSpell",
+					"target": "FRIENDLY_HERO",
+					"attribute": "CTHUN_HEALTH_BUFF",
+					"value": {
+						"class": "AttributeValueProvider",
+						"target": "TARGET",
+						"attribute": "HP"
+					}
+				}
+			]
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

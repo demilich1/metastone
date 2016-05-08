@@ -1,0 +1,14 @@
+{
+	"id": "token_the_ancient_one",
+	"name": "The Ancient One",
+	"baseManaCost": 9,
+	"type": "MINION",
+	"baseAttack": 30,
+	"baseHp": 30,
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"description": "",
+	"collectible": false,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

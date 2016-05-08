@@ -1,0 +1,31 @@
+{
+	"id": "minion_mind_control_tech",
+	"name": "Mind Control Tech",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 3,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "Battlecry: If your opponent has 4 or more minions, take control of one at random.",
+	"battlecry": {
+		"spell": {
+			"class": "MindControlSpell",
+			"target": "ENEMY_MINIONS",
+			"randomTarget": true
+		},
+		"condition": {
+			"class": "MinionCountCondition",
+			"targetPlayer": "OPPONENT",
+			"operation": "GREATER_OR_EQUAL",
+			"value": 4
+		},
+		"resolvedLate": false
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

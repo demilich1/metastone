@@ -1,0 +1,21 @@
+{
+	"id": "weapon_tentacles_for_arms",
+	"name": "Tentacles for Arms",
+	"baseManaCost": 5,
+	"type": "WEAPON",
+	"damage": 2,
+	"durability": 2,
+	"heroClass": "WARRIOR",
+	"rarity": "EPIC",
+	"description": "Deathrattle: Return this to your hand.",
+	"deathrattle": {
+		"class": "ReceiveCardSpell",
+		"card": "weapon_tentacles_for_arms"
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,28 @@
+{
+	"id": "minion_scavenging_hyena",
+	"name": "Scavenging Hyena",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"heroClass": "HUNTER",
+	"rarity": "COMMON",
+	"race": "BEAST",
+	"description": "Whenever a friendly Beast dies, gain +2/+1.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "MinionDeathTrigger",
+			"targetPlayer": "SELF",
+			"race": "BEAST"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"target": "SELF",
+			"attackBonus": 2,
+			"hpBonus": 1
+		}
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

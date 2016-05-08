@@ -1,0 +1,38 @@
+{
+	"id": "minion_jeeves",
+	"name": "Jeeves",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"race": "MECH",
+	"description": "At the end of each player's turn, that player draws until they have 3 cards.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger",
+			"targetPlayer": "BOTH"
+		},
+		"spell": {
+			"class": "DrawCardSpell",
+			"targetPlayer": "ACTIVE",
+			"value": {
+				"class": "AlgebraicValueProvider",
+				"operation": "SUBTRACT",
+				"value1": {
+					"class": "ConstantValueProvider",
+					"value": 3
+				},
+				"value2": {
+					"class": "PlayerAttributeValueProvider",
+					"targetPlayer": "SELF",
+					"playerAttribute": "HAND_COUNT"
+				}
+			}
+		}
+	},
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

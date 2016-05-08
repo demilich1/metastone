@@ -1,0 +1,26 @@
+{
+	"id": "minion_undercity_huckster",
+	"name": "Undercity Huckster",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"heroClass": "ROGUE",
+	"rarity": "RARE",
+	"description": "Deathrattle: Add a random class card to your hand (from your opponent's class).",
+	"deathrattle": {
+		"class": "ReceiveRandomCollectibleCardSpell",
+		"value": 1,
+		"card": "spell_the_coin",
+		"cardFilter": {
+			"class": "CardFilter",
+			"heroClass": "OPPONENT"
+		}
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

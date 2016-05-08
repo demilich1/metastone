@@ -1,0 +1,17 @@
+{
+	"id": "spell_starfall",
+	"name": "Starfall",
+	"baseManaCost": 5,
+	"type": "CHOOSE_ONE",
+	"heroClass": "DRUID",
+	"rarity": "RARE",
+	"description": "Choose One - Deal 5 damage to a minion; or 2 damage to all enemy minions.",
+	"targetSelection": "NONE",
+	"options": [
+		"spell_starfall_1",
+		"spell_starfall_2"
+	],
+	"bothOptions": "spell_starfall_3",
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

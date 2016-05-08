@@ -1,0 +1,19 @@
+{
+	"id": "spell_feral_rage_3",
+	"name": "Evolve Spines and Scales",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"description": "Gain 4 Attack and 8 Armor.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "BuffHeroSpell",
+		"target": "FRIENDLY_HERO",
+		"attackBonus": 4,
+		"armorBonus": 8
+	},
+	"collectible": false,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,17 @@
+{
+	"id": "spell_wrath",
+	"name": "Wrath",
+	"baseManaCost": 2,
+	"type": "CHOOSE_ONE",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"description": "Choose One - Deal 3 damage to a minion; or 1 damage and draw a card.",
+	"targetSelection": "NONE",
+	"options": [
+		"spell_wrath_1",
+		"spell_wrath_2"
+	],
+	"bothOptions": "spell_wrath_3",
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

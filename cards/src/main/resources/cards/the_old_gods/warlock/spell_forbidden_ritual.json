@@ -1,0 +1,34 @@
+{
+	"id": "spell_forbidden_ritual",
+	"name": "Forbidden Ritual",
+	"baseManaCost": 0,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "RARE",
+	"description": "Spend all your mana. Summon that many 1/1 Tentacles.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "SummonSpell",
+				"value": {
+					"class": "PlayerAttributeValueProvider",
+					"playerAttribute": "MANA"
+				},
+				"card": "token_icky_tentacle"
+			},
+			{
+				"class": "GainManaSpell",
+				"value": {
+					"class": "PlayerAttributeValueProvider",
+					"playerAttribute": "MANA",
+					"multiplier": -1
+				}
+			}
+		]
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

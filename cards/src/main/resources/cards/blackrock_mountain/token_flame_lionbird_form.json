@@ -1,0 +1,15 @@
+{
+	"id": "token_flame_lionbird_form",
+	"name": "Druid of the Flame",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 5,
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"race": "BEAST",
+	"description": "",
+	"collectible": false,
+	"set": "BLACKROCK_MOUNTAIN",
+	"fileFormatVersion": 1
+}

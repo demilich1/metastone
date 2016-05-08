@@ -1,0 +1,14 @@
+{
+	"id": "minion_amgam_rager",
+	"name": "Am'gam Rager",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "",
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

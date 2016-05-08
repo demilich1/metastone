@@ -1,0 +1,22 @@
+{
+	"id": "spell_shadow_word_death",
+	"name": "Shadow Word: Death",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "FREE",
+	"description": "Destroy a minion with an Attack of 5 or more.",
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "DestroySpell",
+		"filter": {
+			"class": "AttributeFilter",
+			"attribute": "ATTACK",
+			"operation": "GREATER_OR_EQUAL",
+			"value": 5
+		}
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

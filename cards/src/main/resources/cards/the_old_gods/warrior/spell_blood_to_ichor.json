@@ -1,0 +1,28 @@
+{
+	"id": "spell_blood_to_ichor",
+	"name": "Blood To Ichor",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "WARRIOR",
+	"rarity": "RARE",
+	"description": "Deal 1 damage to a minion. If it survives, summon a 2/2 Slime.",
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "ConditionalEffectSpell",
+		"spell1": {
+			"class": "DamageSpell",
+			"value": 1
+		},
+		"spell2": {
+			"class": "SummonSpell",
+			"card": "token_tauren_slime"
+		},
+		"condition": {
+			"class": "IsDeadCondition",
+			"invert": true
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

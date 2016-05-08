@@ -1,0 +1,28 @@
+{
+	"id": "spell_mortal_strike",
+	"name": "Mortal Strike",
+	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "WARRIOR",
+	"rarity": "RARE",
+	"description": "Deal 4 damage. If you have 12 or less Health, deal 6 instead.",
+	"targetSelection": "ANY",
+	"spell": {
+		"class": "DamageSpell",
+		"value": {
+			"class": "ConditionalValueProvider",
+			"ifTrue": 6,
+			"ifFalse": 4,
+			"condition": {
+				"class": "AttributeCondition",
+				"target": "FRIENDLY_HERO",
+				"attribute": "HP",
+				"operation": "LESS_OR_EQUAL",
+				"value": 12
+			}
+		}
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,30 @@
+{
+	"id": "minion_the_boogeymonster",
+	"name": "The Boogeymonster",
+	"baseManaCost": 8,
+	"type": "MINION",
+	"baseAttack": 6,
+	"baseHp": 7,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "When this attacks and kills a minion, give it +2/+2.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "DamageCausedTrigger",
+			"targetEntityType": "MINION",
+			"hostTargetType": "IGNORE_OTHER_SOURCES",
+			"fireCondition": {
+				"class": "IsDeadCondition"
+			}
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"target": "SELF",
+			"attackBonus": 2,
+			"hpBonus": 2
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

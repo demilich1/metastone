@@ -1,0 +1,31 @@
+{
+	"id": "minion_the_skeleton_knight",
+	"name": "The Skeleton Knight",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"baseAttack": 7,
+	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Deathrattle: Reveal a minion in each deck. If yours costs more, return this to your hand.",
+	"deathrattle": {
+		"class": "JoustSpell",
+		"target": "NONE",
+		"spell": {
+			"class": "ReturnMinionToHandSpell",
+			"target": "SELF",
+			"condition": {
+				"class": "CardCountCondition",
+				"targetPlayer": "SELF",
+				"operation": "LESS",
+				"value": 10
+			}
+		}
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
+	"fileFormatVersion": 1
+}

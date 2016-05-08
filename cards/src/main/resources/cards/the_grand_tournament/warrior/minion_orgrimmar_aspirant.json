@@ -1,0 +1,25 @@
+{
+	"id": "minion_orgrimmar_aspirant",
+	"name": "Orgrimmar Aspirant",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 3,
+	"heroClass": "WARRIOR",
+	"rarity": "COMMON",
+	"description": "Inspire: Give your weapon +1 Attack.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "InspireTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "BuffWeaponSpell",
+			"target": "FRIENDLY_WEAPON",
+			"attackBonus": 1
+		}
+	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
+	"fileFormatVersion": 1
+}

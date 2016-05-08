@@ -1,0 +1,27 @@
+{
+	"id": "spell_blessing_of_wisdom",
+	"name": "Blessing of Wisdom",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "PALADIN",
+	"rarity": "COMMON",
+	"description": "Choose a minion. Whenever it attacks, draw a card.",
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "AddSpellTriggerSpell",
+		"trigger": {
+			"eventTrigger": {
+				"class": "PhysicalAttackTrigger",
+				"hostTargetType": "IGNORE_OTHER_SOURCES"
+			},
+			"spell": {
+				"class": "DrawCardSpell",
+				"value": 1
+			},
+			"persistentOwner": true
+		}
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

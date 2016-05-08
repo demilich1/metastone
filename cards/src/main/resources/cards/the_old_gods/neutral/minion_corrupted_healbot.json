@@ -1,0 +1,23 @@
+{
+	"id": "minion_corrupted_healbot",
+	"name": "Corrupted Healbot",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 6,
+	"baseHp": 6,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"race": "MECH",
+	"description": "Deathrattle: Restore 8 Health to the enemy hero.",
+	"deathrattle": {
+		"class": "HealSpell",
+		"target": "ENEMY_HERO",
+		"value": 8
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

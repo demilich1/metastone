@@ -1,0 +1,76 @@
+{
+	"id": "minion_ancient_shieldbearer",
+	"name": "Ancient Shieldbearer",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"baseAttack": 6,
+	"baseHp": 6,
+	"heroClass": "WARRIOR",
+	"rarity": "RARE",
+	"description": "Battlecry: If your C'Thun has 10 or more Attack, gain 10 Armor.",
+	"battlecry": {
+		"spell": {
+			"class": "BuffHeroSpell",
+			"target": "FRIENDLY_HERO",
+			"armorBonus": 10
+		},
+		"condition": {
+			"class": "OrCondition",
+			"conditions": [
+				{
+					"class": "ComparisonCondition",
+					"operation": "GREATER_OR_EQUAL",
+					"value1": {
+						"class": "HighestAttributeValueProvider",
+						"target": "FRIENDLY_MINIONS",
+						"attribute": "ATTACK",
+						"filter": {
+							"class": "SpecificCardFilter",
+							"cardId": "minion_cthun"
+						}
+					},
+					"value2": 10
+				},
+				{
+					"class": "ComparisonCondition",
+					"operation": "GREATER_OR_EQUAL",
+					"value1": {
+						"class": "HighestAttributeValueProvider",
+						"target": "FRIENDLY_HAND",
+						"attribute": "ATTACK",
+						"filter": {
+							"class": "SpecificCardFilter",
+							"cardId": "minion_cthun"
+						}
+					},
+					"value2": 10
+				},
+				{
+					"class": "AndCondition",
+					"conditions": [
+						{
+							"class": "DeckContainsCondition",
+							"cardId": "minion_cthun"
+						},
+						{
+							"class": "ComparisonCondition",
+							"operation": "GREATER_OR_EQUAL",
+							"value1": {
+								"class": "AttributeValueProvider",
+								"target": "FRIENDLY_HERO",
+								"attribute": "CTHUN_ATTACK_BUFF"
+							},
+							"value2": 4
+						}
+					]
+				}
+			]
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

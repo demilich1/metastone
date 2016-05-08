@@ -1,0 +1,66 @@
+{
+	"id": "minion_cthun",
+	"name": "C'Thun",
+	"baseManaCost": 10,
+	"type": "MINION",
+	"baseAttack": 6,
+	"baseHp": 6,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Deal damage equal to this minion's Attack randomly split among all enemies.",
+	"battlecry": {
+		"spell": {
+			"class": "MissilesSpell",
+			"target": "ENEMY_CHARACTERS",
+			"howMany": {
+				"class": "AttributeValueProvider",
+				"target": "SELF",
+				"attribute": "ATTACK"
+			}
+		}
+	},
+	"passiveTrigger": {
+		"eventTrigger": {
+			"class": "CardReceivedTrigger",
+			"hostTargetType": "IGNORE_OTHER_TARGETS"
+		},
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "BuffSpell",
+					"target": "SELF",
+					"attackBonus": {
+						"class": "AttributeValueProvider",
+						"target": "FRIENDLY_HERO",
+						"attribute": "CTHUN_ATTACK_BUFF"
+					},
+					"hpBonus": {
+						"class": "AttributeValueProvider",
+						"target": "FRIENDLY_HERO",
+						"attribute": "CTHUN_HEALTH_BUFF"
+					}
+				},
+				{
+					"class": "ConditionalSpell",
+					"spell": {
+						"class": "AddAttributeSpell",
+						"target": "SELF",
+						"attribute": "TAUNT"
+					},
+					"condition": {
+						"class": "AttributeCondition",
+						"target": "FRIENDLY_HERO",
+						"attribute": "CTHUN_TAUNT"
+					}
+				}
+			]
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,26 @@
+{
+	"id": "spell_forked_lightning",
+	"name": "Forked Lightning",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "SHAMAN",
+	"rarity": "COMMON",
+	"description": "Deal 2 damage to 2 random enemy minions. Overload: (2)",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "MultiTargetDamageSpell",
+		"value": 2,
+		"howMany": 2
+	},
+	"condition": {
+		"class": "MinionCountCondition",
+		"targetPlayer": "OPPONENT",
+		"operation": "GREATER",
+		"value": 1
+	},
+	"attributes": {
+		"OVERLOAD": 2
+	},
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

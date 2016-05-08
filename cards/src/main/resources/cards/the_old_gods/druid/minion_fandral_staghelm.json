@@ -1,0 +1,17 @@
+{
+	"id": "minion_fandral_staghelm",
+	"name": "Fandral Staghelm",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 5,
+	"heroClass": "DRUID",
+	"rarity": "LEGENDARY",
+	"description": "Your Choose One cards have both effects combined.",
+	"attributes": {
+		"BOTH_CHOOSE_ONE_OPTIONS": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

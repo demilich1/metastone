@@ -1,0 +1,30 @@
+{
+	"id": "minion_big_game_hunter",
+	"name": "Big Game Hunter",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 2,
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"description": "Battlecry: Destroy a minion with an Attack of 7 or more.",
+	"battlecry": {
+		"targetSelection": "MINIONS",
+		"spell": {
+			"class": "DestroySpell",
+			"filter": {
+				"class": "AttributeFilter",
+				"attribute": "ATTACK",
+				"operation": "GREATER",
+				"value": 6
+			}
+		},
+		"resolvedLate": false
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

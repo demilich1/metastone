@@ -1,0 +1,29 @@
+{
+	"id": "minion_midnight_drake",
+	"name": "Midnight Drake",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"race": "DRAGON",
+	"description": "Battlecry: Gain +1 Attack for each other card in your hand.",
+	"battlecry": {
+		"spell": {
+			"class": "BuffSpell",
+			"target": "SELF",
+			"attackBonus": {
+				"class": "PlayerAttributeValueProvider",
+				"targetPlayer": "SELF",
+				"playerAttribute": "HAND_COUNT"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

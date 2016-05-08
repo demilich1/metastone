@@ -1,0 +1,29 @@
+{
+	"id": "spell_revenge",
+	"name": "Revenge",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "WARRIOR",
+	"rarity": "RARE",
+	"description": "Deal 1 damage to all minions. If you have 12 or less Health, deal 3 damage instead.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "DamageSpell",
+		"target": "ALL_MINIONS",
+		"value": {
+			"class": "ConditionalValueProvider",
+			"ifTrue": 3,
+			"ifFalse": 1,
+			"condition": {
+				"class": "AttributeCondition",
+				"target": "FRIENDLY_HERO",
+				"attribute": "HP",
+				"operation": "LESS_OR_EQUAL",
+				"value": 12
+			}
+		}
+	},
+	"collectible": true,
+	"set": "BLACKROCK_MOUNTAIN",
+	"fileFormatVersion": 1
+}

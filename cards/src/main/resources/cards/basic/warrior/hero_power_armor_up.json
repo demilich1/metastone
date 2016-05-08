@@ -1,0 +1,18 @@
+{
+	"id": "hero_power_armor_up",
+	"name": "Armor Up!",
+	"baseManaCost": 2,
+	"type": "HERO_POWER",
+	"heroClass": "WARRIOR",
+	"rarity": "FREE",
+	"description": "Gain 2 Armor.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "BuffHeroSpell",
+		"target": "FRIENDLY_HERO",
+		"armorBonus": 2
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

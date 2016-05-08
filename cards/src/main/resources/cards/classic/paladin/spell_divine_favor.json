@@ -1,0 +1,30 @@
+{
+	"id": "spell_divine_favor",
+	"name": "Divine Favor",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "PALADIN",
+	"rarity": "RARE",
+	"description": "Draw cards until you have as many in hand as your opponent.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "DrawCardSpell",
+		"value": {
+			"class": "AlgebraicValueProvider",
+			"operation": "SUBTRACT",
+			"value1": {
+				"class": "PlayerAttributeValueProvider",
+				"targetPlayer": "OPPONENT",
+				"playerAttribute": "HAND_COUNT"
+			},
+			"value2": {
+				"class": "PlayerAttributeValueProvider",
+				"targetPlayer": "SELF",
+				"playerAttribute": "HAND_COUNT"
+			}
+		}
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

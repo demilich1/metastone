@@ -1,0 +1,17 @@
+{
+	"id": "token_twin_emperor_veknilash",
+	"name": "Twin Emperor Vek'nilash",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 6,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Taunt.",
+	"attributes": {
+		"TAUNT": true
+	},
+	"collectible": false,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

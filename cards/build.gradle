@@ -1,0 +1,20 @@
+jar {
+    manifest {
+        attributes 'Implementation-Title': rootProject.name.capitalize() + ' Data Files',
+                'Implementation-Version': project.version,
+                'Description': 'Cards, Decks and DeckFormat data files.'
+    }
+}
+
+dependencies {
+    testCompile project(":game")
+    testCompile group: 'org.testng', name: 'testng', version: '6.+'
+}
+
+test {
+    // enable TestNG support (default is JUnit)
+    useTestNG()
+    testLogging {
+        events "standardError"
+    }
+}

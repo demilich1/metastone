@@ -1,0 +1,11 @@
+{
+	"name": "Standard",
+	"sets": [
+		"BASIC",
+		"CLASSIC",
+		"BLACKROCK_MOUNTAIN",
+		"THE_GRAND_TOURNAMENT",
+		"LEAGUE_OF_EXPLORERS",
+		"THE_OLD_GODS"
+	]
+}

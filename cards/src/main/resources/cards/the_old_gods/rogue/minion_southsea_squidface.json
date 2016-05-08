@@ -1,0 +1,22 @@
+{
+	"id": "minion_southsea_squidface",
+	"name": "Southsea Squidface",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 4,
+	"heroClass": "ROGUE",
+	"rarity": "COMMON",
+	"description": "Deathrattle: Give your weapon +2 Attack.",
+	"deathrattle": {
+		"class": "BuffWeaponSpell",
+		"target": "FRIENDLY_WEAPON",
+		"attackBonus": 2
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

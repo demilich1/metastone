@@ -1,0 +1,37 @@
+{
+	"id": "minion_eerie_statue",
+	"name": "Eerie Statue",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 7,
+	"baseHp": 7,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Can't attack unless it's the only minion on the battlefield.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "BoardChangedTrigger"
+		},
+		"spell": {
+			"class": "EitherOrSpell",
+			"target": "SELF",
+			"spell1": {
+				"class": "RemoveAttributeSpell",
+				"attribute": "CANNOT_ATTACK"
+			},
+			"spell2": {
+				"class": "AddAttributeSpell",
+				"attribute": "CANNOT_ATTACK"
+			},
+			"condition": {
+				"class": "MinionCountCondition",
+				"targetPlayer": "BOTH",
+				"operation": "EQUAL",
+				"value": 1
+			}
+		}
+	},
+	"collectible": true,
+	"set": "LEAGUE_OF_EXPLORERS",
+	"fileFormatVersion": 1
+}

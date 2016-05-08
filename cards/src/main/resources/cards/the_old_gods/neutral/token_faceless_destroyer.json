@@ -1,0 +1,14 @@
+{
+	"id": "token_faceless_destroyer",
+	"name": "Faceless Destroyer",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"description": "",
+	"collectible": false,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

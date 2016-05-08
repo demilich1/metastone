@@ -1,0 +1,21 @@
+{
+	"id": "minion_twilight_summoner",
+	"name": "Twilight Summoner",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"description": "Deathrattle: Summon a 5/5 Faceless Destroyer.",
+	"deathrattle": {
+		"class": "SummonSpell",
+		"card": "token_faceless_destroyer"
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

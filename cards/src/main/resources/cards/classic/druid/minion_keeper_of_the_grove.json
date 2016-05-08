@@ -1,0 +1,54 @@
+{
+	"id": "minion_keeper_of_the_grove",
+	"name": "Keeper of the Grove",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"heroClass": "DRUID",
+	"rarity": "RARE",
+	"description": "Choose One - Deal 2 damage; or Silence a minion.",
+	"options": [
+		{
+			"description": "2 damage",
+			"targetSelection": "ANY",
+			"spell": {
+				"class": "DamageSpell",
+				"value": 2
+			}
+		},
+		{
+			"description": "Silence",
+			"targetSelection": "MINIONS",
+			"spell": {
+				"class": "SilenceSpell"
+			}
+		}
+	],
+	"bothOptions": {
+		"description": "Silence and deal 2 damage",
+		"targetSelection": "ANY",
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "ConditionalSpell",
+					"spell": {
+						"class": "SilenceSpell"
+					},
+					"condition": {
+						"class": "CardPropertyCondition",
+						"cardType": "MINION"
+					}
+				},
+				{
+					"class": "DamageSpell",
+					"value": 2
+				}
+			]
+		}
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

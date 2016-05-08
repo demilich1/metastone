@@ -1,0 +1,15 @@
+{
+	"id": "token_silver_hand_murloc",
+	"name": "Silver Hand Murloc",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"heroClass": "PALADIN",
+	"rarity": "COMMON",
+	"race": "MURLOC",
+	"description": "",
+	"collectible": false,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

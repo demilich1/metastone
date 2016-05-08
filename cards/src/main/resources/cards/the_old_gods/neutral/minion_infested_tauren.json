@@ -1,0 +1,22 @@
+{
+	"id": "minion_infested_tauren",
+	"name": "Infested Tauren",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 3,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Taunt. Deathrattle: Summon a 2/2 Slime.",
+	"deathrattle": {
+		"class": "SummonSpell",
+		"card": "token_tauren_slime"
+	},
+	"attributes": {
+		"DEATHRATTLES": true,
+		"TAUNT": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

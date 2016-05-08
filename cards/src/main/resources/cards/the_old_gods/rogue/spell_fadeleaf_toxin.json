@@ -1,0 +1,21 @@
+{
+	"id": "spell_fadeleaf_toxin",
+	"name": "Fadeleaf Toxin",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "Give a friendly minion Stealth until your next turn.",
+	"targetSelection": "FRIENDLY_MINIONS",
+	"spell": {
+		"class": "AddAttributeSpell",
+		"attribute": "STEALTH",
+		"revertTrigger": {
+			"class": "TurnStartTrigger",
+			"targetPlayer": "SELF"
+		}
+	},
+	"collectible": false,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

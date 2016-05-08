@@ -1,0 +1,34 @@
+apply plugin: 'java'
+apply plugin: 'application'
+apply from: 'javafx.plugin'
+
+mainClassName = 'net.demilich.metastone.MetaStone'
+
+jar {
+	manifest {
+		attributes 'Implementation-Title': rootProject.name.capitalize(),
+			'Implementation-Version': project.version
+	}
+}
+
+dependencies {
+	compile project(':game')
+	compile project(':cards')
+	compile files('lib/controlsfx-8.40.10-20151003.010657-492.jar')
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
+	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5'
+	testCompile group: 'org.testng', name: 'testng', version: '6.+'
+}
+
+javafx {
+	appName rootProject.name
+	mainClass = mainClassName
+}
+
+test {
+	// enable TestNG support (default is JUnit)
+	useTestNG()
+	testLogging {
+		events "standardError"
+	}
+}

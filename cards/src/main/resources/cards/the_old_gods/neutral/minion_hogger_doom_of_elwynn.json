@@ -1,0 +1,25 @@
+{
+	"id": "minion_hogger_doom_of_elwynn",
+	"name": "Hogger, Doom of Elwynn",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"baseAttack": 6,
+	"baseHp": 6,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Whenever this minion takes damage, summon a 2/2 Gnoll with Taunt.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "DamageReceivedTrigger",
+			"hostTargetType": "IGNORE_OTHER_TARGETS"
+		},
+		"spell": {
+			"class": "SummonSpell",
+			"card": "token_gnoll",
+			"boardPositionRelative": "RIGHT"
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

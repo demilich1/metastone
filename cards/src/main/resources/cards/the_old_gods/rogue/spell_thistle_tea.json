@@ -1,0 +1,21 @@
+{
+	"id": "spell_thistle_tea",
+	"name": "Thistle Tea",
+	"baseManaCost": 6,
+	"type": "SPELL",
+	"heroClass": "ROGUE",
+	"rarity": "RARE",
+	"description": "Draw a card. Add two extra copies of it to your hand.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "DrawCardAndDoSomethingSpell",
+		"value": 1,
+		"spell": {
+			"class": "CopyCardSpell",
+			"value": 2
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

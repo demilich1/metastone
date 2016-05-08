@@ -1,0 +1,25 @@
+{
+	"id": "minion_addled_grizzly",
+	"name": "Addled Grizzly",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"heroClass": "DRUID",
+	"rarity": "RARE",
+	"description": "Whenever you summon a minion, give it +1/+1.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "MinionSummonedTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"target": "EVENT_TARGET",
+			"value": 1
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

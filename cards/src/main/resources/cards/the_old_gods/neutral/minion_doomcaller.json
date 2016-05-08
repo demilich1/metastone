@@ -1,0 +1,65 @@
+{
+	"id": "minion_doomcaller",
+	"name": "Doomcaller",
+	"baseManaCost": 8,
+	"type": "MINION",
+	"baseAttack": 7,
+	"baseHp": 9,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "Battlecry: Give your C'Thun +2/+2 (wherever it is). If it's dead, shuffle it into your deck.",
+	"battlecry": {
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "BuffSpell",
+					"target": "FRIENDLY_MINIONS",
+					"value": 2,
+					"filter": {
+						"class": "SpecificCardFilter",
+						"cardId": "minion_cthun"
+					}
+				},
+				{
+					"class": "BuffSpell",
+					"target": "FRIENDLY_HAND",
+					"value": 2,
+					"filter": {
+						"class": "SpecificCardFilter",
+						"cardId": "minion_cthun"
+					}
+				},
+				{
+					"class": "ModifyAttributeSpell",
+					"target": "FRIENDLY_HERO",
+					"attribute": "CTHUN_ATTACK_BUFF",
+					"value": 2
+				},
+				{
+					"class": "ModifyAttributeSpell",
+					"target": "FRIENDLY_HERO",
+					"attribute": "CTHUN_HEALTH_BUFF",
+					"value": 2
+				},
+				{
+					"class": "ConditionalSpell",
+					"spell": {
+						"class": "ShuffleToDeckSpell",
+						"card": "minion_cthun"
+					},
+					"condition": {
+						"class": "GraveyardContainsCondition",
+						"cardId": "minion_cthun"
+					}
+				}
+			]
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}
