@@ -1,0 +1,19 @@
+{
+	"id": "spell_shatter",
+	"name": "Shatter",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "COMMON",
+	"description": "Destroy a Frozen minion.",
+	"spell": {
+		"class": "DestroySpell",
+		"filter": {
+			"class": "AttributeFilter",
+			"attribute": "FROZEN",
+			"operation": "HAS"
+		}
+	},
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}
