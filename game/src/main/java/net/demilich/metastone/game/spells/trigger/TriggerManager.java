@@ -6,8 +6,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -75,7 +73,7 @@ public class TriggerManager implements Cloneable, IDisposable {
 		}
 
 		for (IGameEventListener trigger : eventTriggers) {
-			if (trigger.canFireCondition(event) && hostNotOnSideBoard(event, trigger.getHostReference())) {
+			if (trigger.canFireCondition(event) && triggers.contains(trigger)) {
 				trigger.onGameEvent(event);
 			}
 
@@ -126,15 +124,6 @@ public class TriggerManager implements Cloneable, IDisposable {
 				triggers.remove(trigger);
 			}
 		}
-	}
-
-	public boolean hostNotOnSideBoard(GameEvent event, EntityReference entityReference) {
-		GameContext context = event.getGameContext();
-		Entity entity = context.resolveSingleTarget(entityReference);
-		if (context.getPlayer1().getSetAsideZone().contains(entity) || context.getPlayer2().getSetAsideZone().contains(entity)) {
-			return false;
-		}
-		return true;
 	}
 
 }
