@@ -95,11 +95,11 @@ public class DeckProxy extends Proxy<GameNotification> {
 	public void deleteDeck(Deck deck) {
 		decks.remove(deck);
 		logger.debug("Trying to delete deck '{}' contained in file '{}'...", deck.getName(), deck.getFilename());
-		Path path = Paths.get(DECKS_FOLDER + deck.getFilename());
+		Path path = Paths.get(BuildConfig.USER_HOME_METASTONE + File.separator + DECKS_FOLDER + File.separator + deck.getFilename());
 		try {
 		    Files.delete(path);
 		} catch (NoSuchFileException x) {
-			logger.error("Could not delete deck '{}' as the filename '{}' is not a valid file", deck.getName(), deck.getFilename());
+			logger.error("Could not delete deck '{}' as the filename '{}' does not exist", deck.getName(), path);
 			return;
 		} catch (IOException e) {
 			logger.error(e.getMessage());
