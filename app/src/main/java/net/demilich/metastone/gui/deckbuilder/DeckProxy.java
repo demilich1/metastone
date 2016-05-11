@@ -1,8 +1,11 @@
 package net.demilich.metastone.gui.deckbuilder;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URISyntaxException;
@@ -15,6 +18,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.utils.ResourceInputStream;
@@ -45,6 +49,7 @@ public class DeckProxy extends Proxy<GameNotification> {
 
 	public static final String NAME = "DeckProxy";
 	private static final String DECKS_FOLDER = "decks";
+	private static final String DECKS_COPIED_PROPERTY = "decks.copied";
 
 	private final List<Deck> decks = new ArrayList<Deck>();
 	private final IDeckValidator deckValidator = new DefaultDeckValidator();
@@ -114,13 +119,8 @@ public class DeckProxy extends Proxy<GameNotification> {
 	public void loadDecks() throws IOException, URISyntaxException {
 		decks.clear();
 
-
-		// load deck from cards.jar on the classpath
-		loadStandardDecks(ResourceLoader.loadJsonInputStreams(DECKS_FOLDER, false),
-				new GsonBuilder().setPrettyPrinting().create());
-
-		loadMetaDecks(ResourceLoader.loadJsonInputStreams(DECKS_FOLDER, false),
-				new GsonBuilder().setPrettyPrinting().create());
+		// ensure that decks have been copied into the USER_HOME_METASTONE/decks folder
+		copyDecksFromJar();
 
 		// load decks from ~/metastone/decks on the filesystem
 		if (Paths.get(BuildConfig.USER_HOME_METASTONE + File.separator + DECKS_FOLDER).toFile().exists()) {
@@ -131,6 +131,53 @@ public class DeckProxy extends Proxy<GameNotification> {
 					new GsonBuilder().setPrettyPrinting().create());
 		}
 	}
+
+	private void copyDecksFromJar() throws IOException, URISyntaxException {
+		Properties prop = new Properties();
+		InputStream input = null;
+		FileOutputStream output = null;
+		String propertiesFilePath = BuildConfig.USER_HOME_METASTONE + File.separator + "metastone.properties";
+		try {
+			File propertiesFile = new File(propertiesFilePath);
+			if (!propertiesFile.exists()) {
+				propertiesFile.createNewFile();
+			}
+
+			input = new FileInputStream(propertiesFile);
+			// load a properties file
+			prop.load(input);
+
+			// if we have not copied decks to the USER_HOME_METASTONE decks folder, then do so now
+			if (!Boolean.parseBoolean(prop.getProperty(DECKS_COPIED_PROPERTY))) {
+				ResourceLoader.copyFromResources(DECKS_FOLDER, BuildConfig.USER_HOME_METASTONE + File.separator + DECKS_FOLDER);
+
+				output = new FileOutputStream(propertiesFile);
+				// set a property to indicate that we have copied decks
+				prop.setProperty(DECKS_COPIED_PROPERTY, Boolean.TRUE.toString());
+				// write properties file
+				prop.store(output, null);
+			}
+
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (output != null) {
+				try {
+					output.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+
+		}
+	}
+
 
 	private void loadMetaDecks(Collection<ResourceInputStream> inputStreams, Gson gson) throws IOException {
 		for (ResourceInputStream resourceInputStream : inputStreams) {
