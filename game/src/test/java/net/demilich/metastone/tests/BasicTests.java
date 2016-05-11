@@ -120,7 +120,9 @@ public class BasicTests extends TestBase {
 	public void testSummon() {
 		GameContext context = createContext(HeroClass.MAGE, HeroClass.WARRIOR);
 		Player mage = context.getPlayer1();
-		mage.getHand().removeAll();
+		for (Card card : mage.getHand().toList()) {
+			context.getLogic().removeCard(mage.getId(), card);
+		}
 		MinionCard devMonster = new TestMinionCard(1, 1);
 		context.getLogic().receiveCard(mage.getId(), devMonster);
 		Assert.assertEquals(mage.getHand().getCount(), 1);
