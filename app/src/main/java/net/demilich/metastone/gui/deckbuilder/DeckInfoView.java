@@ -49,7 +49,7 @@ public class DeckInfoView extends HBox implements EventHandler<ActionEvent>, IDi
 
 	@Override
 	public void handle(ActionEvent event) {
-		if (activeDeck.isMetaDeck() && !activeDeck.isComplete() && !activeDeck.isArbitrary()) {
+		if (activeDeck.isMetaDeck() && !activeDeck.isComplete()) {
 			DialogNotification dialogNotification = new DialogNotification("Warning",
 					"Your deck collection is not complete yet. Each deck collection has to contain at least 2 (or more) decks. ",
 					DialogType.WARNING);
