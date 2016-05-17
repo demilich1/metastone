@@ -13,12 +13,19 @@
    <padding>
       <Insets top="20.0" />
    </padding>
+   <right>
+      <VBox spacing="2.0">
+         <children>
+            <CheckBox styleClass="name-small" fx:id="arbitraryCheckBox" mnemonicParsing="false" text="Arbitrary Deck?" />
+         </children>
+      </VBox>
+   </right>
    <center>
       <GridPane alignment="TOP_CENTER" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="80.0" />
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="80.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="80.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="80.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

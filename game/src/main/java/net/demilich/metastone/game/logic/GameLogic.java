@@ -1117,9 +1117,11 @@ public class GameLogic implements Cloneable {
 		List<Card> starterCards = new ArrayList<>();
 		for (int j = 0; j < numberOfStarterCards; j++) {
 			Card randomCard = player.getDeck().getRandom();
-			player.getDeck().remove(randomCard);
-			log("Player {} been offered card {} for mulligan", player.getName(), randomCard);
-			starterCards.add(randomCard);
+			if (randomCard != null) {
+				player.getDeck().remove(randomCard);
+				log("Player {} been offered card {} for mulligan", player.getName(), randomCard);
+				starterCards.add(randomCard);
+			}
 		}
 
 		List<Card> discardedCards = player.getBehaviour().mulligan(context, player, starterCards);
@@ -1144,7 +1146,9 @@ public class GameLogic implements Cloneable {
 		}
 
 		for (Card starterCard : starterCards) {
-			receiveCard(player.getId(), starterCard);
+			if (starterCard != null) {
+				receiveCard(player.getId(), starterCard);
+			}
 		}
 
 		// second player gets the coin additionally

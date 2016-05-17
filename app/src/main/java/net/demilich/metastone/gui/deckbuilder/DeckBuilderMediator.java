@@ -8,6 +8,7 @@ import net.demilich.nittygrittymvc.interfaces.INotification;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.decks.Deck;
+import net.demilich.metastone.game.decks.validation.DefaultDeckValidator;
 import net.demilich.metastone.gui.dialog.DialogNotification;
 import net.demilich.metastone.gui.dialog.DialogType;
 
@@ -27,6 +28,8 @@ public class DeckBuilderMediator extends Mediator<GameNotification> {
 	public void handleNotification(final INotification<GameNotification> notification) {
 		switch (notification.getId()) {
 		case CREATE_NEW_DECK:
+			DeckProxy deckProxy = (DeckProxy) getFacade().retrieveProxy(DeckProxy.NAME);
+			deckProxy.setActiveDeckValidator(new DefaultDeckValidator());
 			view.createNewDeck();
 			break;
 		case EDIT_DECK:
