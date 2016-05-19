@@ -19,6 +19,9 @@
 			"value": 4
 		}
 	},
+	"attributes": {
+		"COMBO": true
+	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

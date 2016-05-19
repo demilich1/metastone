@@ -21,6 +21,9 @@
 			"randomTarget": true
 		}
 	},
+	"attributes": {
+		"COMBO": true
+	},
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1

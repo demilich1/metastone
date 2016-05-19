@@ -20,6 +20,9 @@
 			"class": "ComboCondition"
 		}
 	},
+	"attributes": {
+		"COMBO": true
+	},
 	"collectible": true,
 	"set": "THE_OLD_GODS",
 	"fileFormatVersion": 1

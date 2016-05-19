@@ -25,7 +25,8 @@
 		"resolvedLate": false
 	},
 	"attributes": {
-		"BATTLECRY": true
+		"BATTLECRY": true,
+		"COMBO": true
 	},
 	"collectible": true,
 	"set": "CLASSIC",
