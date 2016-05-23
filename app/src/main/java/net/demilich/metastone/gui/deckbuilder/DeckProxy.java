@@ -143,6 +143,11 @@ public class DeckProxy extends Proxy<GameNotification> {
 		FileOutputStream output = null;
 		String propertiesFilePath = BuildConfig.USER_HOME_METASTONE + File.separator + "metastone.properties";
 		try {
+            // create directories and property file if they do not exist
+            if (!Paths.get(BuildConfig.USER_HOME_METASTONE).toFile().exists()){
+                Paths.get(BuildConfig.USER_HOME_METASTONE).toFile().mkdirs();
+            }
+
 			File propertiesFile = new File(propertiesFilePath);
 			if (!propertiesFile.exists()) {
 				propertiesFile.createNewFile();
