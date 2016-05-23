@@ -12,9 +12,15 @@ public class Deck {
 	private final CardCollection cards = new CardCollection();
 	private String description;
 	private String filename;
+	private boolean arbitrary;
 
 	public Deck(HeroClass heroClass) {
 		this.heroClass = heroClass;
+	}
+
+	public Deck(HeroClass heroClass, boolean arbitrary) {
+		this.heroClass = heroClass;
+		this.arbitrary = arbitrary;
 	}
 
 	public int containsHowMany(Card card) {
@@ -45,6 +51,10 @@ public class Deck {
 
 	public String getName() {
 		return name;
+	}
+	
+	public boolean isArbitrary() {
+		return arbitrary;
 	}
 
 	public boolean isComplete() {

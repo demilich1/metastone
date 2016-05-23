@@ -52,7 +52,7 @@ public class DeckProxy extends Proxy<GameNotification> {
 	private static final String DECKS_COPIED_PROPERTY = "decks.copied";
 
 	private final List<Deck> decks = new ArrayList<Deck>();
-	private final IDeckValidator deckValidator = new DefaultDeckValidator();
+	private IDeckValidator activeDeckValidator = new DefaultDeckValidator();
 	private Deck activeDeck;
 
 	public DeckProxy() {
@@ -60,7 +60,7 @@ public class DeckProxy extends Proxy<GameNotification> {
 	}
 
 	public boolean addCardToDeck(Card card) {
-		boolean result = deckValidator.canAddCardToDeck(card, activeDeck);
+		boolean result = activeDeckValidator.canAddCardToDeck(card, activeDeck);
 		if (result) {
 			activeDeck.getCards().add(card);
 		}
@@ -73,12 +73,17 @@ public class DeckProxy extends Proxy<GameNotification> {
 
 	public List<Card> getCards(HeroClass heroClass) {
 		DeckFormat deckFormat = new DeckFormat();
-		for (CardSet set : CardSet.values()) {
-			deckFormat.addSet(set);
+		for (CardSet cardSet : CardSet.values()) {
+			deckFormat.addSet(cardSet);
 		}
-		CardCollection cardCollection = CardCatalogue.query(deckFormat, heroClass);
-		// add neutral cards
-		cardCollection.addAll(CardCatalogue.query(deckFormat, HeroClass.ANY));
+		CardCollection cardCollection;
+		if (activeDeck.isArbitrary()) {
+			cardCollection = CardCatalogue.query(deckFormat);
+		} else {
+			cardCollection = CardCatalogue.query(deckFormat, heroClass);
+			// add neutral cards
+			cardCollection.addAll(CardCatalogue.query(deckFormat, HeroClass.ANY));
+		}
 		cardCollection.sortByName();
 		cardCollection.sortByManaCost();
 		return cardCollection.toList();
@@ -250,7 +255,11 @@ public class DeckProxy extends Proxy<GameNotification> {
 	}
 
 	private Deck parseStandardDeck(HeroClass heroClass, Map<String, Object> map) {
-		Deck deck = new Deck(heroClass);
+		boolean arbitrary = false;
+		if (map.containsKey("arbitrary")) {
+			arbitrary = (boolean) map.get("arbitrary");
+		}
+		Deck deck = new Deck(heroClass, arbitrary);
 		@SuppressWarnings("unchecked")
 		List<String> cardIds = (List<String>) map.get("cards");
 		for (String cardId : cardIds) {
@@ -275,6 +284,7 @@ public class DeckProxy extends Proxy<GameNotification> {
 		HashMap<String, Object> saveData = new HashMap<String, Object>();
 		saveData.put("name", deck.getName());
 		saveData.put("description", deck.getDescription());
+		saveData.put("arbitrary", deck.isArbitrary());
 		saveData.put("heroClass", deck.getHeroClass());
 		if (deck.isMetaDeck()) {
 			MetaDeck metaDeck = (MetaDeck) deck;
@@ -310,6 +320,10 @@ public class DeckProxy extends Proxy<GameNotification> {
 
 	public void setActiveDeck(Deck activeDeck) {
 		this.activeDeck = activeDeck;
+	}
+	
+	public void setActiveDeckValidator(IDeckValidator deckValidator) {
+		this.activeDeckValidator = deckValidator;
 	}
 
 }
