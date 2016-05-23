@@ -7,32 +7,7 @@ import net.demilich.metastone.game.entities.Entity;
 public class AlgebraicValueProvider extends ValueProvider {
 
 	private static int evaluateOperation(int value1, int value2, AlgebraicOperation operation) {
-		switch (operation) {
-		case ADD:
-			return value1 + value2;
-		case SUBTRACT:
-			return value1 - value2;
-		case MULTIPLY:
-			return value1 * value2;
-		case DIVIDE:
-			if (value2 != 0) {
-				return value1 / value2;
-			}
-			return value1;
-		case SET:
-			return value1 == value2 ? 1 : 0;
-		case NEGATE:
-			return -value1;
-		case MODULO:
-			if (value2 != 0) {
-				return value1 % value2;
-			}
-			return value1;
-		default:
-			break;
-		}
-
-		throw new RuntimeException("Invalid AlgebraicOperation: " + operation);
+		return operation.performOperation(value1, value2);
 	}
 
 	public AlgebraicValueProvider(ValueProviderDesc desc) {

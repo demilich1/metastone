@@ -61,7 +61,7 @@ public class CardFilter extends EntityFilter {
 		if (desc.contains(FilterArg.ATTRIBUTE) && desc.contains(FilterArg.OPERATION)) {
 			Attribute attribute = (Attribute) desc.get(FilterArg.ATTRIBUTE);
 			Operation operation = (Operation) desc.get(FilterArg.OPERATION);
-			if (operation == Operation.HAS) {
+			if (operation == Operation.HAS || operation == null) {
 				return card.hasAttribute(attribute);
 			}
 	
