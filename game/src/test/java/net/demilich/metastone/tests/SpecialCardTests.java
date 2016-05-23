@@ -390,5 +390,20 @@ public class SpecialCardTests extends TestBase {
 
 		Assert.assertEquals(paladin.getMinions().size(), 1);
 	}
+	
+	@Test
+	public void testRallyingBlade() {
+		GameContext context = createContext(HeroClass.PALADIN, HeroClass.ROGUE);
+		Player player = context.getPlayer1();
+		MinionCard argentSquireCard = (MinionCard) CardCatalogue.getCardById("minion_argent_squire");
+		Minion argentSquire = playMinionCard(context, player, argentSquireCard);
+		Assert.assertEquals(argentSquire.getAttack(), 1);
+		Assert.assertEquals(argentSquire.getHp(), 1);
+		
+		Card rallyingBladeCard = CardCatalogue.getCardById("weapon_rallying_blade");
+		playCard(context, player, rallyingBladeCard);
+		Assert.assertEquals(argentSquire.getAttack(), 2);
+		Assert.assertEquals(argentSquire.getHp(), 2);
+	}
 
 }
