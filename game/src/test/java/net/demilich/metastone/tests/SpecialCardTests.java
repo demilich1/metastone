@@ -405,5 +405,25 @@ public class SpecialCardTests extends TestBase {
 		Assert.assertEquals(argentSquire.getAttack(), 2);
 		Assert.assertEquals(argentSquire.getHp(), 2);
 	}
+	
+	@Test
+	public void testCurseOfRafaam() {
+		GameContext context = createContext(HeroClass.WARRIOR, HeroClass.WARLOCK);
+		
+		Player player = context.getPlayer1();
+		Card koboldGeomancerCard = CardCatalogue.getCardById("minion_kobold_geomancer");
+		playCard(context, player, koboldGeomancerCard);
+		context.endTurn();
+		
+		Player opponent = context.getPlayer2();
+		Card curseOfRafaamCard = CardCatalogue.getCardById("spell_curse_of_rafaam");
+		playCard(context, opponent, curseOfRafaamCard);
+		context.endTurn();
+		
+		final int CURSE_OF_RAFAAM_DAMAGE = 2;
+		// first player should take exactly 2 damage (NOT 3, because the spell damage should not be applied)
+		Assert.assertEquals(player.getHero().getHp(), player.getHero().getMaxHp() - CURSE_OF_RAFAAM_DAMAGE);
+		
+	}
 
 }

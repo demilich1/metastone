@@ -15,6 +15,9 @@
 			"race": "TOTEM"
 		}
 	},
+	"attributes": {
+		"TAUNT": true
+	},
 	"collectible": true,
 	"set": "THE_OLD_GODS",
 	"fileFormatVersion": 1

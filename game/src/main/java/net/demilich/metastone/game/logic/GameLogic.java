@@ -362,7 +362,7 @@ public class GameLogic implements Cloneable {
 		return damage(player, target, baseDamage, source, false);
 	}
 
-	public int damage(Player player, Actor target, int baseDamage, Entity source, boolean ignoreSpellPower) {
+	public int damage(Player player, Actor target, int baseDamage, Entity source, boolean ignoreSpellDamage) {
 		// sanity check to prevent StackOverFlowError with Mistress of Pain +
 		// Auchenai Soulpriest
 		if (target.getHp() < -100) {
@@ -370,7 +370,7 @@ public class GameLogic implements Cloneable {
 		}
 		int damage = baseDamage;
 		Card sourceCard = source != null && source.getEntityType() == EntityType.CARD ? (Card) source : null;
-		if (!ignoreSpellPower && sourceCard != null) {
+		if (!ignoreSpellDamage && sourceCard != null) {
 			if (sourceCard.getCardType().isCardType(CardType.SPELL)) {
 				damage = applySpellpower(player, source, baseDamage);
 			} else if (sourceCard.getCardType().isCardType(CardType.HERO_POWER)) {

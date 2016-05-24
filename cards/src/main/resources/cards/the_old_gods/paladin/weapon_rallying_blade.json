@@ -15,7 +15,7 @@
 			"target": "FRIENDLY_MINIONS",
 			"value": 1,
 			"filter": {
-				"class": "CardFilter",
+				"class": "AttributeFilter",
 				"attribute": "DIVINE_SHIELD",
 				"operation": "HAS"
 			}

@@ -51,9 +51,9 @@ public class ActionLogic {
 				rollout(chooseOneAction, context, player, heroPowerActions);
 			}
 		} else {
-			rollout(heroPower.play(), context, player, heroPowerActions);	
+			rollout(heroPower.play(), context, player, heroPowerActions);
 		}
-		
+
 		return heroPowerActions;
 	}
 
@@ -81,18 +81,20 @@ public class ActionLogic {
 				continue;
 			}
 
-			if (card.hasAttribute(Attribute.CHOOSE_ONE) && !context.getLogic().hasAttribute(player, Attribute.BOTH_CHOOSE_ONE_OPTIONS)) {
+			if (card.hasAttribute(Attribute.CHOOSE_ONE)) {
 				IChooseOneCard chooseOneCard = (IChooseOneCard) card;
-				for (GameAction chooseOneAction : chooseOneCard.playOptions()) {
+				if (context.getLogic().hasAttribute(player, Attribute.BOTH_CHOOSE_ONE_OPTIONS)) {
+					GameAction chooseOneAction = chooseOneCard.playBothOptions();
 					rollout(chooseOneAction, context, player, playCardActions);
+				} else {
+					for (GameAction chooseOneAction : chooseOneCard.playOptions()) {
+						rollout(chooseOneAction, context, player, playCardActions);
+					}
 				}
-			} else if (card.hasAttribute(Attribute.CHOOSE_ONE) && context.getLogic().hasAttribute(player, Attribute.BOTH_CHOOSE_ONE_OPTIONS)) {
-				IChooseOneCard chooseOneCard = (IChooseOneCard) card;
-				GameAction chooseOneAction = chooseOneCard.playBothOptions();
-				rollout(chooseOneAction, context, player, playCardActions);
 			} else {
 				rollout(card.play(), context, player, playCardActions);
 			}
+
 		}
 		return playCardActions;
 	}
