@@ -57,6 +57,12 @@ public class DeckProxy extends Proxy<GameNotification> {
 
 	public DeckProxy() {
 		super(NAME);
+		// ensure user's personal deck dir exists
+		try {
+			Files.createDirectories(Paths.get(BuildConfig.USER_HOME_METASTONE + File.separator + DECKS_FOLDER));
+		} catch (IOException e) {
+			logger.error("Trouble creating", Paths.get(BuildConfig.USER_HOME_METASTONE + File.separator + DECKS_FOLDER));
+		}
 	}
 
 	public boolean addCardToDeck(Card card) {
@@ -303,9 +309,6 @@ public class DeckProxy extends Proxy<GameNotification> {
 
 		String jsonData = gson.toJson(saveData);
 		try {
-			// ensure user's personal deck dir exists
-			Files.createDirectories(Paths.get(BuildConfig.USER_HOME_METASTONE + File.separator + DECKS_FOLDER));
-
 			String filename = deck.getName().toLowerCase();
 			filename = filename.replaceAll(" ", "_");
 			filename = filename.replaceAll("\\W+", "");
