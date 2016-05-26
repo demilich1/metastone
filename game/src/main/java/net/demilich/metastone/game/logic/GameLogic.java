@@ -36,6 +36,7 @@ import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.weapons.Weapon;
+import net.demilich.metastone.game.events.AfterPhysicalAttackEvent;
 import net.demilich.metastone.game.events.AfterSpellCastedEvent;
 import net.demilich.metastone.game.events.ArmorGainedEvent;
 import net.demilich.metastone.game.events.BoardChangedEvent;
@@ -660,7 +661,7 @@ public class GameLogic implements Cloneable {
 
 		int attackerDamage = attacker.getAttack();
 		int defenderDamage = target.getAttack();
-		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, target, attackerDamage), TriggerLayer.SECRET);
+		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, target, attackerDamage));
 		// secret may have killed attacker ADDENDUM: or defender
 		if (attacker.isDestroyed() || target.isDestroyed()) {
 			context.getEnvironment().remove(Environment.ATTACKER_REFERENCE);
@@ -689,7 +690,7 @@ public class GameLogic implements Cloneable {
 		}
 		attacker.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, -1);
 
-		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, target, damaged ? attackerDamage : 0));
+		context.fireGameEvent(new AfterPhysicalAttackEvent(context, attacker, target, damaged ? attackerDamage : 0));
 
 		context.getEnvironment().remove(Environment.ATTACKER_REFERENCE);
 	}
@@ -1346,7 +1347,7 @@ public class GameLogic implements Cloneable {
 		player.getGraveyard().add(card);
 	}
 
-	public void removeMinion(Minion minion) {
+	public void removeMinion(Minion minion, boolean peacefully) {
 		removeSpelltriggers(minion);
 
 		log("{} was removed", minion);
@@ -1355,7 +1356,11 @@ public class GameLogic implements Cloneable {
 
 		Player owner = context.getPlayer(minion.getOwner());
 		owner.getMinions().remove(minion);
-		owner.getGraveyard().add(minion);
+		if (peacefully) {
+			owner.getSetAsideZone().add(minion);
+		} else {
+			owner.getGraveyard().add(minion);
+		}
 		context.fireGameEvent(new BoardChangedEvent(context));
 	}
 

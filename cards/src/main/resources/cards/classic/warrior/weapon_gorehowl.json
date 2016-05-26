@@ -10,7 +10,7 @@
 	"description": "Attacking a minion costs 1 Attack instead of 1 Durability.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "PhysicalAttackTrigger",
+			"class": "AfterPhysicalAttackTrigger",
 			"sourcePlayer": "SELF",
 			"sourceEntityType": "HERO",
 			"targetEntityType": "MINION"
