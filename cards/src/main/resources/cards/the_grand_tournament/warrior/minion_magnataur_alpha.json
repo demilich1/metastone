@@ -10,7 +10,7 @@
 	"description": "Also damages the minions next to whomever he attacks.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "PhysicalAttackTrigger",
+			"class": "AfterPhysicalAttackTrigger",
 			"sourcePlayer": "SELF",
 			"targetEntityType": "MINION",
 			"hostTargetType": "IGNORE_OTHER_SOURCES"
