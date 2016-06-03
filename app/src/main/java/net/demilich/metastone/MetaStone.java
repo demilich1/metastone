@@ -21,8 +21,10 @@ public class MetaStone extends Application {
 		primaryStage.setTitle("MetaStone");
 		primaryStage.initStyle(StageStyle.UNIFIED);
 		primaryStage.setResizable(true);
-		primaryStage.setMinWidth(800);
-		primaryStage.setMinHeight(600);
+		primaryStage.setWidth(1280);
+		primaryStage.setHeight(900);
+		primaryStage.setMinWidth(1280);
+		primaryStage.setMinHeight(768);
 		primaryStage.getIcons().add(new Image(IconFactory.getImageUrl("ui/app_icon.png")));
 
 		ApplicationFacade facade = (ApplicationFacade) ApplicationFacade.getInstance();
