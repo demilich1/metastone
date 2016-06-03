@@ -36,6 +36,7 @@ import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.weapons.Weapon;
+import net.demilich.metastone.game.events.AfterPhysicalAttackEvent;
 import net.demilich.metastone.game.events.AfterSpellCastedEvent;
 import net.demilich.metastone.game.events.ArmorGainedEvent;
 import net.demilich.metastone.game.events.BoardChangedEvent;
@@ -362,7 +363,7 @@ public class GameLogic implements Cloneable {
 		return damage(player, target, baseDamage, source, false);
 	}
 
-	public int damage(Player player, Actor target, int baseDamage, Entity source, boolean ignoreSpellPower) {
+	public int damage(Player player, Actor target, int baseDamage, Entity source, boolean ignoreSpellDamage) {
 		// sanity check to prevent StackOverFlowError with Mistress of Pain +
 		// Auchenai Soulpriest
 		if (target.getHp() < -100) {
@@ -370,7 +371,7 @@ public class GameLogic implements Cloneable {
 		}
 		int damage = baseDamage;
 		Card sourceCard = source != null && source.getEntityType() == EntityType.CARD ? (Card) source : null;
-		if (!ignoreSpellPower && sourceCard != null) {
+		if (!ignoreSpellDamage && sourceCard != null) {
 			if (sourceCard.getCardType().isCardType(CardType.SPELL)) {
 				damage = applySpellpower(player, source, baseDamage);
 			} else if (sourceCard.getCardType().isCardType(CardType.HERO_POWER)) {
@@ -660,7 +661,7 @@ public class GameLogic implements Cloneable {
 
 		int attackerDamage = attacker.getAttack();
 		int defenderDamage = target.getAttack();
-		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, target, attackerDamage), TriggerLayer.SECRET);
+		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, target, attackerDamage));
 		// secret may have killed attacker ADDENDUM: or defender
 		if (attacker.isDestroyed() || target.isDestroyed()) {
 			context.getEnvironment().remove(Environment.ATTACKER_REFERENCE);
@@ -689,7 +690,7 @@ public class GameLogic implements Cloneable {
 		}
 		attacker.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, -1);
 
-		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, target, damaged ? attackerDamage : 0));
+		context.fireGameEvent(new AfterPhysicalAttackEvent(context, attacker, target, damaged ? attackerDamage : 0));
 
 		context.getEnvironment().remove(Environment.ATTACKER_REFERENCE);
 	}
@@ -1117,9 +1118,11 @@ public class GameLogic implements Cloneable {
 		List<Card> starterCards = new ArrayList<>();
 		for (int j = 0; j < numberOfStarterCards; j++) {
 			Card randomCard = player.getDeck().getRandom();
-			player.getDeck().remove(randomCard);
-			log("Player {} been offered card {} for mulligan", player.getName(), randomCard);
-			starterCards.add(randomCard);
+			if (randomCard != null) {
+				player.getDeck().remove(randomCard);
+				log("Player {} been offered card {} for mulligan", player.getName(), randomCard);
+				starterCards.add(randomCard);
+			}
 		}
 
 		List<Card> discardedCards = player.getBehaviour().mulligan(context, player, starterCards);
@@ -1144,7 +1147,9 @@ public class GameLogic implements Cloneable {
 		}
 
 		for (Card starterCard : starterCards) {
-			receiveCard(player.getId(), starterCard);
+			if (starterCard != null) {
+				receiveCard(player.getId(), starterCard);
+			}
 		}
 
 		// second player gets the coin additionally
@@ -1342,7 +1347,7 @@ public class GameLogic implements Cloneable {
 		player.getGraveyard().add(card);
 	}
 
-	public void removeMinion(Minion minion) {
+	public void removeMinion(Minion minion, boolean peacefully) {
 		removeSpelltriggers(minion);
 
 		log("{} was removed", minion);
@@ -1351,7 +1356,11 @@ public class GameLogic implements Cloneable {
 
 		Player owner = context.getPlayer(minion.getOwner());
 		owner.getMinions().remove(minion);
-		owner.getGraveyard().add(minion);
+		if (peacefully) {
+			owner.getSetAsideZone().add(minion);
+		} else {
+			owner.getGraveyard().add(minion);
+		}
 		context.fireGameEvent(new BoardChangedEvent(context));
 	}
 

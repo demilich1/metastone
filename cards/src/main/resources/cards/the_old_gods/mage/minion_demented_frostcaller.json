@@ -17,7 +17,13 @@
 			"class": "AddAttributeSpell",
 			"target": "ENEMY_CHARACTERS",
 			"attribute": "FROZEN",
-			"randomTarget": true
+			"randomTarget": true,
+			"filter": {
+				"class": "AttributeFilter",
+				"attribute": "FROZEN",
+				"operation": "HAS",
+				"invert": true
+			}
 		}
 	},
 	"collectible": true,

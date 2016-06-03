@@ -141,5 +141,30 @@ public class SecretTest extends TestBase {
 		Assert.assertEquals(player.getMinions().size(), 0);
 		Assert.assertEquals(opponent.getSecrets().size(), 1);
 	}
+	
+	@Test
+	public void testFreezingPlusBearTrap() {
+		GameContext context = createContext(HeroClass.WARRIOR, HeroClass.HUNTER);
+		Player player = context.getPlayer1();
+		Player opponent = context.getPlayer2();
+		
+		MinionCard minionCard = (MinionCard) CardCatalogue.getCardById("minion_wisp");
+		Minion minion = playMinionCard(context, player, minionCard);
+		context.endTurn();
+
+		Card freezingTrap = CardCatalogue.getCardById("secret_freezing_trap");
+		playCard(context, opponent, freezingTrap);
+		Card explosiveTrap = CardCatalogue.getCardById("secret_bear_trap");
+		playCard(context, opponent, explosiveTrap);
+		
+		context.endTurn();
+		
+		Assert.assertEquals(player.getMinions().size(), 1);
+		Assert.assertEquals(opponent.getSecrets().size(), 2);
+		
+		attack(context, player, minion, opponent.getHero());
+		Assert.assertEquals(player.getMinions().size(), 0);
+		Assert.assertEquals(opponent.getSecrets().size(), 1);
+	}
 
 }

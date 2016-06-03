@@ -21,5 +21,10 @@ public class DebugContext extends GameContext {
 	public void setActivePlayer(int playerId) {
 		this.activePlayer = playerId;
 	}
+	
+	public void endTurn() {
+		super.endTurn();
+		startTurn(activePlayer);
+	}
 
 }

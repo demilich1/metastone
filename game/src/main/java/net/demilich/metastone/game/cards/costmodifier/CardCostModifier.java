@@ -180,30 +180,7 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 		AlgebraicOperation operation = (AlgebraicOperation) desc.get(CardCostModifierArg.OPERATION);
 		int value = desc.getInt(CardCostModifierArg.VALUE);
 		if (operation != null) {
-			switch (operation) {
-			case ADD:
-				return currentManaCost + value;
-			case DIVIDE:
-				if (value == 0) {
-					value = 1;
-				}
-				return currentManaCost / value;
-			case MODULO:
-				if (value == 0) {
-					value = 1;
-				}
-				return currentManaCost % value;
-			case MULTIPLY:
-				return currentManaCost * value;
-			case NEGATE:
-				return -currentManaCost;
-			case SET:
-				return value;
-			case SUBTRACT:
-				return currentManaCost - value;
-			default:
-				break;
-			}
+			return operation.performOperation(currentManaCost, value);
 		}
 		int modifiedManaCost = currentManaCost + desc.getInt(CardCostModifierArg.VALUE);
 		return modifiedManaCost;

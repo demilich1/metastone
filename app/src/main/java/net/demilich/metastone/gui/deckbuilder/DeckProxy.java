@@ -1,8 +1,11 @@
 package net.demilich.metastone.gui.deckbuilder;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URISyntaxException;
@@ -15,6 +18,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.utils.ResourceInputStream;
@@ -45,17 +49,24 @@ public class DeckProxy extends Proxy<GameNotification> {
 
 	public static final String NAME = "DeckProxy";
 	private static final String DECKS_FOLDER = "decks";
+	private static final String DECKS_COPIED_PROPERTY = "decks.copied";
 
 	private final List<Deck> decks = new ArrayList<Deck>();
-	private final IDeckValidator deckValidator = new DefaultDeckValidator();
+	private IDeckValidator activeDeckValidator = new DefaultDeckValidator();
 	private Deck activeDeck;
 
 	public DeckProxy() {
 		super(NAME);
+		// ensure user's personal deck dir exists
+		try {
+			Files.createDirectories(Paths.get(BuildConfig.USER_HOME_METASTONE + File.separator + DECKS_FOLDER));
+		} catch (IOException e) {
+			logger.error("Trouble creating", Paths.get(BuildConfig.USER_HOME_METASTONE + File.separator + DECKS_FOLDER));
+		}
 	}
 
 	public boolean addCardToDeck(Card card) {
-		boolean result = deckValidator.canAddCardToDeck(card, activeDeck);
+		boolean result = activeDeckValidator.canAddCardToDeck(card, activeDeck);
 		if (result) {
 			activeDeck.getCards().add(card);
 		}
@@ -68,12 +79,17 @@ public class DeckProxy extends Proxy<GameNotification> {
 
 	public List<Card> getCards(HeroClass heroClass) {
 		DeckFormat deckFormat = new DeckFormat();
-		for (CardSet set : CardSet.values()) {
-			deckFormat.addSet(set);
+		for (CardSet cardSet : CardSet.values()) {
+			deckFormat.addSet(cardSet);
 		}
-		CardCollection cardCollection = CardCatalogue.query(deckFormat, heroClass);
-		// add neutral cards
-		cardCollection.addAll(CardCatalogue.query(deckFormat, HeroClass.ANY));
+		CardCollection cardCollection;
+		if (activeDeck.isArbitrary()) {
+			cardCollection = CardCatalogue.query(deckFormat);
+		} else {
+			cardCollection = CardCatalogue.query(deckFormat, heroClass);
+			// add neutral cards
+			cardCollection.addAll(CardCatalogue.query(deckFormat, HeroClass.ANY));
+		}
 		cardCollection.sortByName();
 		cardCollection.sortByManaCost();
 		return cardCollection.toList();
@@ -95,11 +111,11 @@ public class DeckProxy extends Proxy<GameNotification> {
 	public void deleteDeck(Deck deck) {
 		decks.remove(deck);
 		logger.debug("Trying to delete deck '{}' contained in file '{}'...", deck.getName(), deck.getFilename());
-		Path path = Paths.get(DECKS_FOLDER + deck.getFilename());
+		Path path = Paths.get(BuildConfig.USER_HOME_METASTONE + File.separator + DECKS_FOLDER + File.separator + deck.getFilename());
 		try {
 		    Files.delete(path);
 		} catch (NoSuchFileException x) {
-			logger.error("Could not delete deck '{}' as the filename '{}' is not a valid file", deck.getName(), deck.getFilename());
+			logger.error("Could not delete deck '{}' as the filename '{}' does not exist", deck.getName(), path);
 			return;
 		} catch (IOException e) {
 			logger.error(e.getMessage());
@@ -114,13 +130,8 @@ public class DeckProxy extends Proxy<GameNotification> {
 	public void loadDecks() throws IOException, URISyntaxException {
 		decks.clear();
 
-
-		// load deck from cards.jar on the classpath
-		loadStandardDecks(ResourceLoader.loadJsonInputStreams(DECKS_FOLDER, false),
-				new GsonBuilder().setPrettyPrinting().create());
-
-		loadMetaDecks(ResourceLoader.loadJsonInputStreams(DECKS_FOLDER, false),
-				new GsonBuilder().setPrettyPrinting().create());
+		// ensure that decks have been copied into the USER_HOME_METASTONE/decks folder
+		copyDecksFromJar();
 
 		// load decks from ~/metastone/decks on the filesystem
 		if (Paths.get(BuildConfig.USER_HOME_METASTONE + File.separator + DECKS_FOLDER).toFile().exists()) {
@@ -131,6 +142,53 @@ public class DeckProxy extends Proxy<GameNotification> {
 					new GsonBuilder().setPrettyPrinting().create());
 		}
 	}
+
+	private void copyDecksFromJar() throws IOException, URISyntaxException {
+		Properties prop = new Properties();
+		InputStream input = null;
+		FileOutputStream output = null;
+		String propertiesFilePath = BuildConfig.USER_HOME_METASTONE + File.separator + "metastone.properties";
+		try {
+			File propertiesFile = new File(propertiesFilePath);
+			if (!propertiesFile.exists()) {
+				propertiesFile.createNewFile();
+			}
+
+			input = new FileInputStream(propertiesFile);
+			// load a properties file
+			prop.load(input);
+
+			// if we have not copied decks to the USER_HOME_METASTONE decks folder, then do so now
+			if (!Boolean.parseBoolean(prop.getProperty(DECKS_COPIED_PROPERTY))) {
+				ResourceLoader.copyFromResources(DECKS_FOLDER, BuildConfig.USER_HOME_METASTONE + File.separator + DECKS_FOLDER);
+
+				output = new FileOutputStream(propertiesFile);
+				// set a property to indicate that we have copied decks
+				prop.setProperty(DECKS_COPIED_PROPERTY, Boolean.TRUE.toString());
+				// write properties file
+				prop.store(output, null);
+			}
+
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (output != null) {
+				try {
+					output.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+
+		}
+	}
+
 
 	private void loadMetaDecks(Collection<ResourceInputStream> inputStreams, Gson gson) throws IOException {
 		for (ResourceInputStream resourceInputStream : inputStreams) {
@@ -203,7 +261,11 @@ public class DeckProxy extends Proxy<GameNotification> {
 	}
 
 	private Deck parseStandardDeck(HeroClass heroClass, Map<String, Object> map) {
-		Deck deck = new Deck(heroClass);
+		boolean arbitrary = false;
+		if (map.containsKey("arbitrary")) {
+			arbitrary = (boolean) map.get("arbitrary");
+		}
+		Deck deck = new Deck(heroClass, arbitrary);
 		@SuppressWarnings("unchecked")
 		List<String> cardIds = (List<String>) map.get("cards");
 		for (String cardId : cardIds) {
@@ -228,6 +290,7 @@ public class DeckProxy extends Proxy<GameNotification> {
 		HashMap<String, Object> saveData = new HashMap<String, Object>();
 		saveData.put("name", deck.getName());
 		saveData.put("description", deck.getDescription());
+		saveData.put("arbitrary", deck.isArbitrary());
 		saveData.put("heroClass", deck.getHeroClass());
 		if (deck.isMetaDeck()) {
 			MetaDeck metaDeck = (MetaDeck) deck;
@@ -246,9 +309,6 @@ public class DeckProxy extends Proxy<GameNotification> {
 
 		String jsonData = gson.toJson(saveData);
 		try {
-			// ensure user's personal deck dir exists
-			Files.createDirectories(Paths.get(BuildConfig.USER_HOME_METASTONE + File.separator + DECKS_FOLDER));
-
 			String filename = deck.getName().toLowerCase();
 			filename = filename.replaceAll(" ", "_");
 			filename = filename.replaceAll("\\W+", "");
@@ -263,6 +323,10 @@ public class DeckProxy extends Proxy<GameNotification> {
 
 	public void setActiveDeck(Deck activeDeck) {
 		this.activeDeck = activeDeck;
+	}
+	
+	public void setActiveDeckValidator(IDeckValidator deckValidator) {
+		this.activeDeckValidator = deckValidator;
 	}
 
 }

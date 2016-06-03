@@ -57,8 +57,9 @@ public class DamageSpell extends Spell {
 		} else {
 			damage = desc.getValue(SpellArg.VALUE, context, player, target, source, 0);
 		}
-
-		context.getLogic().damage(player, (Actor) target, damage, source);
+		
+		boolean ignoreSpellDamage = desc.getBool(SpellArg.IGNORE_SPELL_DAMAGE);
+		context.getLogic().damage(player, (Actor) target, damage, source, ignoreSpellDamage);
 	}
 
 }

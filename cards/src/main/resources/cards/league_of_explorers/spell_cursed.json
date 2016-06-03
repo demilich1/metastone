@@ -18,7 +18,8 @@
 		"spell": {
 			"class": "DamageSpell",
 			"target": "FRIENDLY_HERO",
-			"value": 2
+			"value": 2,
+			"ignoreSpellDamage": true
 		}
 	},
 	"collectible": false,

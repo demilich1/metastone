@@ -21,7 +21,8 @@
 				{
 					"class": "DamageSpell",
 					"target": "FRIENDLY_HERO",
-					"value": 10
+					"value": 10,
+					"ignoreSpellDamage": true
 				},
 				{
 					"class": "RemoveCardSpell",
