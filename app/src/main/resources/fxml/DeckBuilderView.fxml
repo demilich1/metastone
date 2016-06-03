@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -13,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" styleClass="panel" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="768.0" prefWidth="1024.0" styleClass="panel" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header" text="Deck Builder" BorderPane.alignment="CENTER" />
    </top>
@@ -33,7 +39,7 @@
       </VBox>
    </right>
    <padding>
-      <Insets top="20.0" />
+      <Insets bottom="20.0" top="20.0" />
    </padding>
    <center>
       <VBox alignment="CENTER" spacing="16.0" BorderPane.alignment="CENTER">
@@ -56,10 +62,19 @@
       <URL value="@/css/deckbuilder.css" />
    </stylesheets>
    <bottom>
-      <AnchorPane BorderPane.alignment="TOP_LEFT">
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
-            <Button fx:id="backButton" mnemonicParsing="false" text="Back" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER" />
-         </children>
-      </AnchorPane>
+           <Button fx:id="backButton" mnemonicParsing="false" text="Back" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER" />
+             </children>
+     
+      </GridPane>
+            
    </bottom>
 </fx:root>
