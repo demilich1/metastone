@@ -22,7 +22,7 @@
          </children></VBox>
    </center>
    <top>
-      <HBox alignment="CENTER">
+      <HBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -70,6 +70,6 @@
                 
    </bottom>
    <padding>
-      <Insets top="20.0" />
+      <Insets bottom="20.0" top="20.0" />
    </padding>
 </fx:root>
