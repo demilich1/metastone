@@ -6,11 +6,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root styleClass="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0"  type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="768.0" prefWidth="1024.0" styleClass="panel" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <right>
-      <VBox styleClass="bordered-panel" fx:id="sidePane" alignment="CENTER" BorderPane.alignment="CENTER">
+      <VBox fx:id="sidePane" alignment="CENTER" styleClass="bordered-panel" BorderPane.alignment="CENTER">
          <children>
-            <Button  fx:id="backButton" alignment="BOTTOM_CENTER" maxWidth="160.0" mnemonicParsing="false" text="Back to main menu" wrapText="true" />
+            <Button fx:id="backButton" alignment="BOTTOM_CENTER" maxWidth="160.0" mnemonicParsing="false" text="Back to main menu" wrapText="true" />
          </children>
       </VBox>
    </right>
