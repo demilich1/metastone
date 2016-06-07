@@ -366,5 +366,25 @@ public class CardInteractionTests extends TestBase {
 			}
 		}
 	}
-
+	
+	@Test
+	public void testImpGangBossConeOfCold() {
+		GameContext context = createContext(HeroClass.MAGE, HeroClass.WARRIOR);
+		Player player = context.getPlayer1();
+		Player opponent = context.getPlayer2();
+		
+		context.endTurn();
+		Minion firstYeti = playMinionCard(context, opponent, (MinionCard) CardCatalogue.getCardById("minion_chillwind_yeti"));
+		Minion impGangBoss = playMinionCard(context, opponent, (MinionCard) CardCatalogue.getCardById("minion_imp_gang_boss"));
+		Minion secondYeti = playMinionCard(context, opponent, (MinionCard) CardCatalogue.getCardById("minion_chillwind_yeti"));
+		Assert.assertEquals(opponent.getMinions().size(), 3);
+		context.endTurn();
+		
+		playCardWithTarget(context, player, CardCatalogue.getCardById("spell_cone_of_cold"), impGangBoss);
+		Assert.assertEquals(opponent.getMinions().size(), 4);
+		Assert.assertTrue(firstYeti.hasAttribute(Attribute.FROZEN));
+		Assert.assertTrue(impGangBoss.hasAttribute(Attribute.FROZEN));
+		Assert.assertFalse(secondYeti.hasAttribute(Attribute.FROZEN));
+	}
 }
+
