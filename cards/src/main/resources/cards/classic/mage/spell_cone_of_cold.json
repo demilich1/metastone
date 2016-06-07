@@ -8,20 +8,23 @@
 	"description": "Freeze a minion and the minions next to it, and deal 1 damage to them.",
 	"targetSelection": "MINIONS",
 	"spell": {
-		"class": "AdjacentEffectSpell",
-		"spell1": {
-			"class": "MetaSpell",
-			"spells": [
-				{
-					"class": "AddAttributeSpell",
-					"attribute": "FROZEN"
-				},
-				{
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "AdjacentEffectSpell",
+				"spell1": {
 					"class": "DamageSpell",
 					"value": 1
 				}
-			]
-		}
+			},
+			{
+				"class": "AdjacentEffectSpell",
+				"spell1": {
+					"class": "AddAttributeSpell",
+					"attribute": "FROZEN"
+				}
+			}
+		]
 	},
 	"collectible": true,
 	"set": "CLASSIC",
