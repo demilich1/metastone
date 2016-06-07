@@ -32,16 +32,18 @@ public class MetaStone extends Application {
 		scene.getStylesheets().add(getClass().getResource("/css/main.css").toExternalForm());
 		primaryStage.setScene(scene);
 		
-		//Implementing potential visual fix for JavaFX
-		//Setting the visual opacity to zero, and then
-		//once the stage is shown, setting the opacity to one.
+		// implementing potential visual fix for JavaFX
+		// setting the visual opacity to zero, and then
+		// once the stage is shown, setting the opacity to one.
+		// this fixes an issue where some users would only see a blank
+		// screen on application startup
 		primaryStage.setOpacity(0.0);
 		
 		facade.sendNotification(GameNotification.CANVAS_CREATED, root);
 		facade.sendNotification(GameNotification.MAIN_MENU);
 		primaryStage.show();
 		
-		//Setting opacity to one for JavaFX hotfix
+		// setting opacity to one for JavaFX hotfix
 		primaryStage.setOpacity(1.0);
 		
 		facade.sendNotification(GameNotification.CHECK_FOR_UPDATE);

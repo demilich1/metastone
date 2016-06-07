@@ -18,13 +18,12 @@ public class SwipeSpell extends Spell {
 			targetKey = EntityReference.ENEMY_CHARACTERS;
 		}
 		for (Entity entity : context.resolveTarget(player, target, targetKey)) {
-			if (entity != target && entity instanceof Actor) {
+			if (entity != target) {
 				context.getLogic().damage(player, (Actor) entity, secondaryDamage, source);
 			}
 		}
-		if (target instanceof Actor) {
-			context.getLogic().damage(player, (Actor) target, primaryDamage, source);
-		}
+
+		context.getLogic().damage(player, (Actor) target, primaryDamage, source);
 	}
 
 }
