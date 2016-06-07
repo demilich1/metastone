@@ -8,7 +8,8 @@
 	"description": "Deal 4 damage to an enemy and 1 damage to all other enemies.",
 	"targetSelection": "ENEMY_CHARACTERS",
 	"spell": {
-		"class": "custom.SwipeSpell",
+		"class": "SwipeSpell",
+		"secondaryTarget": "ENEMY_CHARACTERS",
 		"value": 4,
 		"secondaryValue": 1
 	},

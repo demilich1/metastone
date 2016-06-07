@@ -6,16 +6,12 @@
 	"heroClass": "DRUID",
 	"rarity": "RARE",
 	"description": "Deal 7 damage to a minion. Deal 2 damage to all other enemy minions.",
-	"targetSelection": "ENEMY_MINIONS",
+	"targetSelection": "MINIONS",
 	"spell": {
-		"class": "MetaSpell",
-		"spells": [
-			{
-				"class": "custom.SwipeSpell",
-				"value": 7,
-				"secondaryValue": 2
-			}
-		]
+		"class": "SwipeSpell",
+		"secondaryTarget": "ENEMY_MINIONS",
+		"value": 7,
+		"secondaryValue": 2
 	},
 	"collectible": false,
 	"set": "CLASSIC",
