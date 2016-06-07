@@ -10,9 +10,10 @@
 	"description": "Deathrattle: Give a random friendly minion +3/+3.",
 	"deathrattle": {
 		"class": "BuffSpell",
-		"target": "FRIENDLY_MINIONS",
 		"attackBonus": 3,
-		"hpBonus": 3
+		"hpBonus": 3,
+		"target": "FRIENDLY_MINIONS",
+		"randomTarget": true
 	},
 	"attributes": {
 		"DEATHRATTLES": true
