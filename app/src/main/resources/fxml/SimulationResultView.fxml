@@ -7,13 +7,13 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root styleClass="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0"  type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="768.0" prefWidth="1024.0" styleClass="panel" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox alignment="CENTER" fillWidth="false" spacing="16.0">
          <children>
             <BorderPane fx:id="infoArea">
                <center>
-                  <Label styleClass="name-big" alignment="BASELINE_CENTER" text="vs." BorderPane.alignment="CENTER">
+                  <Label alignment="BASELINE_CENTER" styleClass="name-big" text="vs." BorderPane.alignment="CENTER">
                      <padding>
                         <Insets left="64.0" right="64.0" />
                      </padding></Label>
@@ -22,7 +22,7 @@
                   <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
                </padding>
             </BorderPane>
-            <Label styleClass="name-small" fx:id="durationLabel" text="&lt;simulation duration&gt;" textAlignment="CENTER" />
+            <Label fx:id="durationLabel" styleClass="name-small" text="&lt;simulation duration&gt;" textAlignment="CENTER" />
             <TabPane>
                <tabs>
                   <Tab closable="false" text="Absolute values (over all games)">
@@ -64,14 +64,14 @@
       </VBox>
    </center>
    <bottom>
-      <Button  fx:id="doneButton" mnemonicParsing="false" text="Close" BorderPane.alignment="CENTER">
+      <Button fx:id="doneButton" mnemonicParsing="false" text="Close" BorderPane.alignment="CENTER">
          <padding>
             <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
          </padding>
       </Button>
    </bottom>
    <top>
-      <Text styleClass="header" strokeType="OUTSIDE" strokeWidth="0.0" text="Simulation Results" BorderPane.alignment="CENTER" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header" text="Simulation Results" BorderPane.alignment="CENTER" />
    </top>
    <padding>
       <Insets bottom="8.0" top="20.0" />

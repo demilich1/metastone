@@ -9,7 +9,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" styleClass="panel"  type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="768.0" prefWidth="1024.0" styleClass="panel" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 	<top>
 		<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header" text="Battle of Decks" BorderPane.alignment="CENTER" />
 	</top>
@@ -17,11 +17,19 @@
 		<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
 	</padding>
 	<bottom>
-		<AnchorPane>
+		<GridPane BorderPane.alignment="CENTER">
+			<columnConstraints>
+				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+				<ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+			</columnConstraints>
+			<rowConstraints>
+				<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+			</rowConstraints>
 			<children>
-				<Button fx:id="backButton" mnemonicParsing="false" text="Back" AnchorPane.leftAnchor="0.0" />
-			</children>
-		</AnchorPane>
+				<Button fx:id="backButton" mnemonicParsing="false" text="Back" />
+				</children>
+
+		</GridPane>
 	</bottom>
    <center>
       <HBox>

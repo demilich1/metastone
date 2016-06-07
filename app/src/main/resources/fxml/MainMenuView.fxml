@@ -9,7 +9,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" styleClass="panel" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="768.0" prefWidth="1024.0" styleClass="panel" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
@@ -22,7 +22,7 @@
          </children></VBox>
    </center>
    <top>
-      <HBox alignment="CENTER">
+      <HBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -38,9 +38,16 @@
       <URL value="@/css/main.css" />
    </stylesheets>
    <bottom>
-      <AnchorPane>
+     <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
-            <Label fx:id="versionLabel" styleClass="info-small" text="x.x.x" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0">
+           <Label fx:id="versionLabel" styleClass="info-small" text="x.x.x">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -48,7 +55,7 @@
                   <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                </padding>
             </Label>
-            <Button fx:id="donationButton" mnemonicParsing="false" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="433.0" AnchorPane.rightAnchor="433.0">
+            <Button fx:id="donationButton" mnemonicParsing="false" GridPane.columnIndex="1">
                <graphic>
                   <ImageView fitHeight="47.0" fitWidth="126.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -56,11 +63,13 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-         </children>
-      </AnchorPane>
+            </Button> 
+             </children>
+     
+      </GridPane>
+                
    </bottom>
    <padding>
-      <Insets top="20.0" />
+      <Insets bottom="20.0" top="20.0" />
    </padding>
 </fx:root>
