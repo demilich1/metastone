@@ -76,28 +76,29 @@ metastone
 
 ### How do I build my own cards? ###
 **This feature is in very early stages and there is no official support yet.** There is no documentation at all. If you really want to start right now, here's how you can start:
-- Cards that are bundled with MetaStone are in the `cards` module `resources` folder.  Use these as reference!
-```
-metastone
- └── cards
-    └── src
-       └── main
-          └── resources
-              ├── cards
-              ├── decks
-              └── formats
-```
-- Create a new `metastone/cards` folder under your user home directory:
-   * Linux/Mac OSX `mkdir -p ~/metastone/cards`
-   * Windows `use Windows File Explorer to create the C:\Users\[username]\Documents\metastone folder`
+- You can build your own cards or modify existing cards without having to fork the project!
+- Card files are located in the `metastone/cards` directory.  **Use these as reference!**
+   * Linux/Mac OSX `~/metastone/cards`
+   * Windows `C:\Users\[username]\Documents\metastone\cards`
+   * Note: you must launch the app at least once for card data files to be copied.
 - Any `.json` files you place in your `metastone/cards` folder will be parsed and treated like built-in cards.
 - To learn the cards format it is highly recommended that you copy an existing card, change the `filename` and the `id` attribute (**<-- important!**) and make small changes.
+- Restart MetaStone for new cards to be detected.
+- If you are building out official cards or fixing existing cards, you will need to fork the project then make your changes in your repo's `metastone/cards/src/main/resources/cards` dir.  Then open a [Pull Request](https://help.github.com/articles/using-pull-requests/) into the project [master](https://github.com/demilich1/metastone/tree/master) branch with your changes.
 - Make sure to validate that the cards you added are well formed and can be parsed! Run the following command: 
    - Linux/Mac OSX `./gradlew cards:test` 
    - Windows `gradlew.bat cards:test`
-- Restart MetaStone for new cards to be detected.
-- If you are building out official cards or fixing existing cards, make your changes in `metastone/cards/src/main/resources/cards`.  Then create a [Pull Request](https://help.github.com/articles/using-pull-requests/) into the project master branch.
 - **The card format is subject to change; cards you create now MAY NOT work in future versions**
+- In the rare chance that your card files get messed up beyond repair,  you can always force the app to overwrite your local card files with the versions distributed with the app in `cards.jar`.
+   * _Option 1_: Delete the `~/metastone` dir.  
+      * You **WILL LOOSE** all your changes, including **ALL new files** you may have added. DANGEROUS! MAKE A BACKUP!!
+      * Linux/Mac OSX `rm -rf ~/metastone`
+      * Windows `rmdir /s C:\Users\[username]\Documents\metastone`
+      * Card data files will be copied in their prestine state after you restart the app.
+   * _Option 2_: Edit the `~/metastone/metastone.properties` file and update the `cards.copied` property.
+      * change `cards.copied=true` to `cards.copied=false`
+      * New files you may have added will NOT be affected.
+      * All card files that are distributed with the app will be overritten after you restart the app.
 
 ### Running tests
 * The easiest way to run tests is from the command line.
