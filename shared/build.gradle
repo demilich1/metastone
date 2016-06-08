@@ -22,8 +22,12 @@ buildConfig {
 	buildConfigField 'String', 'USER_HOME_METASTONE', (FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + File.separator + rootProject.name).replace("\\", "\\\\")
 }
 
+ext {
+	buildConfigSrcDir = file("$buildDir/gen/buildconfig/src/main")
+}
+
 sourceSets.main.java {
-	srcDir 'build/gen/buildconfig/src/main'
+	srcDir buildConfigSrcDir
 }
 
 dependencies {
@@ -35,3 +39,6 @@ task compileBuildConfigFirst (dependsOn: ['compileBuildConfig'])
 eclipseProject.dependsOn(compileBuildConfigFirst)
 ideaModule.dependsOn(compileBuildConfigFirst)
 
+idea.module {
+	generatedSourceDirs += file(buildConfigSrcDir)
+}
