@@ -1,7 +1,10 @@
 package net.demilich.metastone.game.cards;
 
 import java.io.File;
-import java.nio.file.Paths;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.util.Properties;
 import java.util.function.Predicate;
 
 import java.io.IOException;
@@ -24,7 +27,8 @@ import net.demilich.metastone.utils.ResourceInputStream;
 public class CardCatalogue {
 
 	private final static CardCollection cards = new CardCollection();
-	private static final String CARDS_FOLDER = "cards";
+	public static final String CARDS_FOLDER = "cards";
+	private static final String CARDS_COPIED_PROPERTY = "cards.copied";
 	private static Logger logger = LoggerFactory.getLogger(CardCatalogue.class);
 
 	public static void add(Card card) {
@@ -126,13 +130,8 @@ public class CardCatalogue {
 
 	public static void loadCards() throws IOException, URISyntaxException {
 
-		// load cards from cards.jar on the classpath
-		Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(CARDS_FOLDER, false);
-
 		// load cards from ~/metastone/cards on the filesystem
-		if (Paths.get(BuildConfig.USER_HOME_METASTONE + CARDS_FOLDER).toFile().exists()) {
-			inputStreams.addAll((ResourceLoader.loadJsonInputStreams(BuildConfig.USER_HOME_METASTONE + File.separator + CARDS_FOLDER, true)));
-		}
+		Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(BuildConfig.USER_HOME_METASTONE + File.separator + CARDS_FOLDER, true);
 
 		Map<String, CardDesc> cardDesc = new HashMap<String, CardDesc>();
 		CardParser cardParser = new CardParser();
@@ -153,6 +152,52 @@ public class CardCatalogue {
 			Card instance = desc.createInstance();
 			CardCatalogue.add(instance);
 			logger.debug("Adding {} to CardCatalogue", instance);
+		}
+	}
+
+	public static void copyCardsFromJar() throws IOException, URISyntaxException {
+		Properties prop = new Properties();
+		InputStream input = null;
+		FileOutputStream output = null;
+		String propertiesFilePath = BuildConfig.USER_HOME_METASTONE + File.separator + "metastone.properties";
+		try {
+			File propertiesFile = new File(propertiesFilePath);
+			if (!propertiesFile.exists()) {
+				propertiesFile.createNewFile();
+			}
+
+			input = new FileInputStream(propertiesFile);
+			// load properties file
+			prop.load(input);
+
+			// if we have not copied cards to the USER_HOME_METASTONE cards folder, then do so now
+			if (!Boolean.parseBoolean(prop.getProperty(CARDS_COPIED_PROPERTY))) {
+				ResourceLoader.copyFromResources(CARDS_FOLDER, BuildConfig.USER_HOME_METASTONE + File.separator + CARDS_FOLDER);
+
+				output = new FileOutputStream(propertiesFile);
+				// set a property to indicate that we have copied the cards
+				prop.setProperty(CARDS_COPIED_PROPERTY, Boolean.TRUE.toString());
+				// write properties file
+				prop.store(output, null);
+			}
+
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (output != null) {
+				try {
+					output.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+
 		}
 	}
 }

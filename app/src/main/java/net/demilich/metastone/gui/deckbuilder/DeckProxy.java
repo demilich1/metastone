@@ -57,11 +57,16 @@ public class DeckProxy extends Proxy<GameNotification> {
 
 	public DeckProxy() {
 		super(NAME);
-		// ensure user's personal deck dir exists
 		try {
+			// ensure user's personal deck dir exists
 			Files.createDirectories(Paths.get(BuildConfig.USER_HOME_METASTONE + File.separator + DECKS_FOLDER));
+			// ensure decks have been copied to ~/metastone/decks
+			copyDecksFromJar();
 		} catch (IOException e) {
-			logger.error("Trouble creating", Paths.get(BuildConfig.USER_HOME_METASTONE + File.separator + DECKS_FOLDER));
+			logger.error("Trouble creating " + Paths.get(BuildConfig.USER_HOME_METASTONE + File.separator + DECKS_FOLDER));
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -130,17 +135,12 @@ public class DeckProxy extends Proxy<GameNotification> {
 	public void loadDecks() throws IOException, URISyntaxException {
 		decks.clear();
 
-		// ensure that decks have been copied into the USER_HOME_METASTONE/decks folder
-		copyDecksFromJar();
-
 		// load decks from ~/metastone/decks on the filesystem
-		if (Paths.get(BuildConfig.USER_HOME_METASTONE + File.separator + DECKS_FOLDER).toFile().exists()) {
-			loadStandardDecks(ResourceLoader.loadJsonInputStreams(BuildConfig.USER_HOME_METASTONE + File.separator + DECKS_FOLDER, true),
-					new GsonBuilder().setPrettyPrinting().create());
+		loadStandardDecks(ResourceLoader.loadJsonInputStreams(BuildConfig.USER_HOME_METASTONE + File.separator + DECKS_FOLDER, true),
+				new GsonBuilder().setPrettyPrinting().create());
 
-			loadMetaDecks(ResourceLoader.loadJsonInputStreams(BuildConfig.USER_HOME_METASTONE + File.separator + DECKS_FOLDER, true),
-					new GsonBuilder().setPrettyPrinting().create());
-		}
+		loadMetaDecks(ResourceLoader.loadJsonInputStreams(BuildConfig.USER_HOME_METASTONE + File.separator + DECKS_FOLDER, true),
+				new GsonBuilder().setPrettyPrinting().create());
 	}
 
 	private void copyDecksFromJar() throws IOException, URISyntaxException {

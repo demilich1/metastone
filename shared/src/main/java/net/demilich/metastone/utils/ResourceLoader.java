@@ -128,7 +128,7 @@ public class ResourceLoader {
         final PathReference sourcePathReference = getPathFromResources(sourceDir);
         final Path targetDirPath = Paths.get(targetdir);
 
-        logger.info("Copying Decks from " + cardsUrl +  " to " + targetDirPath);
+        logger.info("Copying resources from " + cardsUrl +  " to " + targetDirPath);
 
         Files.walkFileTree(sourcePathReference.path, new SimpleFileVisitor<Path>() {
 
@@ -137,7 +137,7 @@ public class ResourceLoader {
 
             @Override
             public FileVisitResult preVisitDirectory(final Path dir, final BasicFileAttributes attrs) throws IOException {
-                currentTargetDir = targetDirPath.resolve(sourcePathReference.path.relativize(dir).toString());
+                currentTargetDir = Paths.get(targetDirPath.toString() + File.separator + dir.getFileName());
                 Files.createDirectories(currentTargetDir);
                 return FileVisitResult.CONTINUE;
             }
