@@ -41,16 +41,22 @@ Sure! There is still a lot to do and anybody willing to contribute is welcome
 * Get a list of all gradle tasks: 
    * Linux/Mac OSX `./gradlew tasks --all`
    * Windows `gradlew.bat tasks --all`
-* If you want to build from Eclipse, you will need to create the Eclipse settings files: 
+
+#### Building with an IDE
+* If you want to build from Eclipse, create the Eclipse project files: 
    * Linux/Mac OSX `./gradlew eclipse`
    * Windows `gradlew.bat eclipse`
+   * _The above gradle task will automatically generate the `BuildConfig.java` file._
    * Open Eclipse and choose `File > Import > General > Existing projects into workspace`
    * Select the `Search for nested project` checkbox on the `Import Projects` screen.
-   * Change `Eclipse > Preferences > Java > Compiler > Compiler Complience Level` is set to 1.8
+   * Change `Eclipse > Preferences > Java > Compiler > Compiler Complience Level` to 1.8
    * Change `Eclipse > Preferences > Java > Compiler > Building > Circular dependencies` from `Error` to `Warning`.  There is a [known bug](https://issues.gradle.org/browse/GRADLE-2200) with importing multi-module gradle projects into Eclipse. The IDE of choice for working with gradle projects is [IntelliJ IDEA](https://www.jetbrains.com/idea/).
-* If you want to build from IntelliJ IDEA:
-   * Open a new project `File > Project From Existing Sources`.  Project will be imported from the `build.gradle` files.
-* **NOTE:** When building from an IDE you will need to manually generate the `BuildConfig.java` file, prefereably before you import the project.  Otherwise your IDE will complain about unresolved references to `BuildConfig`.
+* If you want to build from IntelliJ IDEA, create the IntelliJ project files:
+   * Linux/Mac OSX `./gradlew idea`
+   * Windows `gradlew.bat idea`
+   * _The above gradle task will automatically generate the `BuildConfig.java` file._
+   * Open IntelliJ and select `File > Open` then navigate to the project root dir.
+* ***Optionally*** (advanced option), you can choose to import the project into your respective IDE from the `build.gradle` files. When doing so, you **must** manually generate the `BuildConfig.java` file.  Otherwise your IDE will complain about unresolved references to `BuildConfig.java`.
    * Linux/Mac OSX `./gradlew compileBuildConfig`
    * Windows `gradlew.bat compileBuildConfig`
 
