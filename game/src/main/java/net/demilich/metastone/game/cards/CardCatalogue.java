@@ -130,7 +130,7 @@ public class CardCatalogue {
 
 	public static void loadCards() throws IOException, URISyntaxException {
 
-		// load cards from ~/metastone/cards on the filesystem
+		// load cards from ~/metastone/cards on the file system
 		Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(BuildConfig.USER_HOME_METASTONE + File.separator + CARDS_FOLDER, true);
 
 		Map<String, CardDesc> cardDesc = new HashMap<String, CardDesc>();
