@@ -31,6 +31,9 @@
 					}
 				},
 				{
+					"class": "ForceDeathPhaseSpell"
+				},
+				{
 					"class": "SummonSpell",
 					"card": "token_v-07-tr-0n"
 				}

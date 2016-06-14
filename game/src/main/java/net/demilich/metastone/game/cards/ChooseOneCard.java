@@ -38,6 +38,10 @@ public class ChooseOneCard extends Card implements IChooseOneCard {
 		}
 		return cards;
 	}
+	
+	public Card getBothChoicesCard() {
+		return getCard(cardId);
+	}
 
 	@Override
 	public PlayCardAction play() {
