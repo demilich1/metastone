@@ -31,6 +31,7 @@
     "minion_doomcaller",
     "minion_cthun"
   ],
-  "name": "C\u0027thun Priest",
-  "heroClass": "PRIEST"
+  "name": "C\u0027Thun Priest",
+  "heroClass": "PRIEST",
+  "arbitrary": false
 }
