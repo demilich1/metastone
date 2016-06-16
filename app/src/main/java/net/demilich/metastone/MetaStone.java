@@ -8,19 +8,12 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import net.demilich.metastone.gui.IconFactory;
-import net.demilich.metastone.utils.UserHomeMetastone;
-
-import javax.swing.filechooser.FileSystemView;
-import java.io.File;
 
 public class MetaStone extends Application {
 
 	public static void main(String[] args) {
 		//DevCardTools.formatJsons();
 
-		// initialize the user home metastone dir path with the platform specific path for the user starting up the app
-		UserHomeMetastone.init((FileSystemView.getFileSystemView().getDefaultDirectory().getPath()
-				+ File.separator + BuildConfig.NAME).replace("\\", "\\\\"));
 		launch(args);
 	}
 

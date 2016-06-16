@@ -1,9 +1,11 @@
 package net.demilich.metastone.tests;
 
-import net.demilich.metastone.BuildConfig;
-import net.demilich.metastone.game.cards.CardParser;
-import net.demilich.metastone.utils.ResourceInputStream;
-import net.demilich.metastone.utils.UserHomeMetastone;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
+import java.util.List;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.DirectoryFileFilter;
 import org.apache.commons.io.filefilter.RegexFileFilter;
@@ -11,12 +13,9 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import javax.swing.filechooser.FileSystemView;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
-import java.util.List;
+import net.demilich.metastone.game.cards.CardParser;
+import net.demilich.metastone.utils.ResourceInputStream;
+import net.demilich.metastone.utils.UserHomeMetastone;
 
 /**
  * This test will iterate through all the cards in the cards resources dir
@@ -30,9 +29,6 @@ public class ValidateCards {
     private static final List<File> ALL_CARD_FILES;
 
     static {
-        // initialize the user home metastone dir path with the platform specific path for the user starting up the app
-        UserHomeMetastone.init((FileSystemView.getFileSystemView().getDefaultDirectory().getPath()
-                + File.separator + BuildConfig.NAME).replace("\\", "\\\\"));
 
         // recursively crawl the cards dir and pull out all the files
         ALL_CARD_FILES = (List<File>)FileUtils.listFiles(
