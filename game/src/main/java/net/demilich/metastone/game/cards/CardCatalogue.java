@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.demilich.metastone.BuildConfig;
+import net.demilich.metastone.utils.UserHomeMetastone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,6 +29,7 @@ public class CardCatalogue {
 
 	private final static CardCollection cards = new CardCollection();
 	public static final String CARDS_FOLDER = "cards";
+	public static final String CARDS_FOLDER_PATH = UserHomeMetastone.getPath() + File.separator + CARDS_FOLDER;
 	private static final String CARDS_COPIED_PROPERTY = "cards.copied";
 	private static Logger logger = LoggerFactory.getLogger(CardCatalogue.class);
 
@@ -131,7 +133,7 @@ public class CardCatalogue {
 	public static void loadCards() throws IOException, URISyntaxException {
 
 		// load cards from ~/metastone/cards on the file system
-		Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(BuildConfig.USER_HOME_METASTONE + File.separator + CARDS_FOLDER, true);
+		Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(CARDS_FOLDER_PATH, true);
 
 		Map<String, CardDesc> cardDesc = new HashMap<String, CardDesc>();
 		CardParser cardParser = new CardParser();
@@ -159,7 +161,7 @@ public class CardCatalogue {
 		Properties prop = new Properties();
 		InputStream input = null;
 		FileOutputStream output = null;
-		String propertiesFilePath = BuildConfig.USER_HOME_METASTONE + File.separator + "metastone.properties";
+		String propertiesFilePath = UserHomeMetastone.getPath() + File.separator + "metastone.properties";
 		try {
 			File propertiesFile = new File(propertiesFilePath);
 			if (!propertiesFile.exists()) {
@@ -172,7 +174,7 @@ public class CardCatalogue {
 
 			// if we have not copied cards to the USER_HOME_METASTONE cards folder, then do so now
 			if (!Boolean.parseBoolean(prop.getProperty(CARDS_COPIED_PROPERTY))) {
-				ResourceLoader.copyFromResources(CARDS_FOLDER, BuildConfig.USER_HOME_METASTONE + File.separator + CARDS_FOLDER);
+				ResourceLoader.copyFromResources(CARDS_FOLDER, CARDS_FOLDER_PATH);
 
 				output = new FileOutputStream(propertiesFile);
 				// set a property to indicate that we have copied the cards
