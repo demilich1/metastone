@@ -31,5 +31,6 @@
 		"minion_yogg_saron_hopes_end"
 	],
 	"name": "Yogg and Load",
-	"heroClass": "HUNTER"
+	"heroClass": "HUNTER",
+	"arbitrary": false
 }
