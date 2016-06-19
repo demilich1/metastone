@@ -40,14 +40,14 @@ public class MetaStone extends Application {
 		try {
 			// if we have a userId property
 			if (MetastoneProperties.hasProperty(ANALYTICS_CLIENT_ID_PROPERTY)) {
-                // read it from the metastone.properties file
+				// read it from the metastone.properties file
 				clientId = UUID.fromString(MetastoneProperties.getProperty(ANALYTICS_CLIENT_ID_PROPERTY));
-            } else {
-                // otherwise create a new random user id
+			} else {
+				// otherwise create a new random user id
 				clientId = UUID.randomUUID();
-                // and save it to metastone.properties
-                MetastoneProperties.setProperty(ANALYTICS_CLIENT_ID_PROPERTY, clientId.toString());
-            }
+				// and save it to metastone.properties
+				MetastoneProperties.setProperty(ANALYTICS_CLIENT_ID_PROPERTY, clientId.toString());
+			}
 		} catch (IOException e) {
 			logger.error("Could not read or write to " + UserHomeMetastone.getPath() + " metastone.properties.");
 			e.printStackTrace();
