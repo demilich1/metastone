@@ -51,6 +51,22 @@ public class MetastoneProperties {
     }
 
     /**
+     * Utility method to check if the given key exists in the Metastone properties file.
+     * @param key the property key
+     * @return True if the property exists, False otherwise.
+     * @throws IOException if the Metastone properties file cannot be loaded.
+     */
+    public static boolean hasProperty(String key) throws IOException {
+        if (INSTANCE == null) {
+            INSTANCE = new MetastoneProperties(METASTONE_PROPERTIES_FILE);
+        }
+        // ensure we have the latest properties values loaded
+        INSTANCE.load();
+
+        return INSTANCE.prop.containsKey(key);
+    }
+
+    /**
      * Convenience method to parse the value at the given key to a boolean value
      * by calling Boolean.parseBoolean(getProperty(key))
      *

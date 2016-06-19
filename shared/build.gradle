@@ -18,6 +18,7 @@ buildConfig {
 	appName = rootProject.name
 	buildConfigField 'boolean', 'DEV_BUILD', project.hasProperty('DEV_BUILD').toString()
 	buildConfigField 'int', 'DEFAULT_SLEEP_DELAY', '100'
+	buildConfigField 'String', 'ANALYTICS_TRACKING_ID', 'UA-79381414-1'
 }
 
 ext {
@@ -30,6 +31,7 @@ sourceSets.main.java {
 
 dependencies {
 	compile files('lib/nitty-gritty-mvc.jar')
+	compile files('lib/com.akoscz.googleanalytics-1.0-SNAPSHOT.jar')
 	compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.1.3'
 }
 
