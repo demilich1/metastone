@@ -1,6 +1,6 @@
 {
-	"id": "minion_giant_sandworm",
-	"name": "Giant Sandworm",
+	"id": "minion_giant_sand_worm",
+	"name": "Giant Sand Worm",
 	"baseManaCost": 8,
 	"type": "MINION",
 	"baseAttack": 8,
