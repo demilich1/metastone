@@ -8,11 +8,28 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import net.demilich.metastone.gui.IconFactory;
+import net.demilich.metastone.utils.UserHomeMetastone;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class MetaStone extends Application {
 
+	private static Logger logger = LoggerFactory.getLogger(MetaStone.class);
+
 	public static void main(String[] args) {
 		//DevCardTools.formatJsons();
+
+		try {
+			// ensure that the user home metastone dir exists
+			Files.createDirectories(Paths.get(UserHomeMetastone.getPath()));
+		} catch (IOException e) {
+			logger.error("Trouble creating " +  Paths.get(UserHomeMetastone.getPath()));
+			e.printStackTrace();
+		}
 
 		launch(args);
 	}

@@ -1,10 +1,6 @@
 package net.demilich.metastone.game.cards;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.util.Properties;
 import java.util.function.Predicate;
 
 import java.io.IOException;
@@ -13,7 +9,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.demilich.metastone.BuildConfig;
+import net.demilich.metastone.utils.MetastoneProperties;
 import net.demilich.metastone.utils.UserHomeMetastone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -157,49 +153,13 @@ public class CardCatalogue {
 		}
 	}
 
-	public static void copyCardsFromJar() throws IOException, URISyntaxException {
-		Properties prop = new Properties();
-		InputStream input = null;
-		FileOutputStream output = null;
-		String propertiesFilePath = UserHomeMetastone.getPath() + File.separator + "metastone.properties";
-		try {
-			File propertiesFile = new File(propertiesFilePath);
-			if (!propertiesFile.exists()) {
-				propertiesFile.createNewFile();
-			}
+	public static void copyCardsFromResources() throws IOException, URISyntaxException {
+		// if we have not copied cards to the USER_HOME_METASTONE cards folder, then do so now
+		if (!MetastoneProperties.getBoolean(CARDS_COPIED_PROPERTY)) {
+			ResourceLoader.copyFromResources(CARDS_FOLDER, CARDS_FOLDER_PATH);
 
-			input = new FileInputStream(propertiesFile);
-			// load properties file
-			prop.load(input);
-
-			// if we have not copied cards to the USER_HOME_METASTONE cards folder, then do so now
-			if (!Boolean.parseBoolean(prop.getProperty(CARDS_COPIED_PROPERTY))) {
-				ResourceLoader.copyFromResources(CARDS_FOLDER, CARDS_FOLDER_PATH);
-
-				output = new FileOutputStream(propertiesFile);
-				// set a property to indicate that we have copied the cards
-				prop.setProperty(CARDS_COPIED_PROPERTY, Boolean.TRUE.toString());
-				// write properties file
-				prop.store(output, null);
-			}
-
-		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-
-			if (output != null) {
-				try {
-					output.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-
+			// set a property to indicate that we have copied the cards
+			MetastoneProperties.setBoolean(CARDS_COPIED_PROPERTY, true);
 		}
 	}
 }
