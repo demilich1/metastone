@@ -332,7 +332,7 @@ public class SpecialCardTests extends TestBase {
 
 		Assert.assertEquals(paladin.getMinions().size(), 1);
 	}
-	
+
 	@Test
 	public void testEydisDarkbane() {
 		GameContext context = createContext(HeroClass.PRIEST, HeroClass.WARRIOR);
@@ -350,7 +350,7 @@ public class SpecialCardTests extends TestBase {
 
 		// priest casted a spell on Eydis - warrior should be wounded
 		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - 3);
-		
+
 		testSpellCard = CardCatalogue.getCardById("spell_shield_slam");
 		context.getLogic().receiveCard(warrior.getId(), testSpellCard);
 		spellAction = testSpellCard.play();
@@ -390,7 +390,7 @@ public class SpecialCardTests extends TestBase {
 
 		Assert.assertEquals(paladin.getMinions().size(), 1);
 	}
-	
+
 	@Test
 	public void testRallyingBlade() {
 		GameContext context = createContext(HeroClass.PALADIN, HeroClass.ROGUE);
@@ -399,31 +399,60 @@ public class SpecialCardTests extends TestBase {
 		Minion argentSquire = playMinionCard(context, player, argentSquireCard);
 		Assert.assertEquals(argentSquire.getAttack(), 1);
 		Assert.assertEquals(argentSquire.getHp(), 1);
-		
+
 		Card rallyingBladeCard = CardCatalogue.getCardById("weapon_rallying_blade");
 		playCard(context, player, rallyingBladeCard);
 		Assert.assertEquals(argentSquire.getAttack(), 2);
 		Assert.assertEquals(argentSquire.getHp(), 2);
 	}
-	
+
 	@Test
 	public void testCurseOfRafaam() {
 		GameContext context = createContext(HeroClass.WARRIOR, HeroClass.WARLOCK);
-		
+
 		Player player = context.getPlayer1();
 		Card koboldGeomancerCard = CardCatalogue.getCardById("minion_kobold_geomancer");
 		playCard(context, player, koboldGeomancerCard);
 		context.endTurn();
-		
+
 		Player opponent = context.getPlayer2();
 		Card curseOfRafaamCard = CardCatalogue.getCardById("spell_curse_of_rafaam");
 		playCard(context, opponent, curseOfRafaamCard);
 		context.endTurn();
-		
+
 		final int CURSE_OF_RAFAAM_DAMAGE = 2;
-		// first player should take exactly 2 damage (NOT 3, because the spell damage should not be applied)
+		// first player should take exactly 2 damage (NOT 3, because the spell
+		// damage should not be applied)
 		Assert.assertEquals(player.getHero().getHp(), player.getHero().getMaxHp() - CURSE_OF_RAFAAM_DAMAGE);
-		
+
+	}
+
+	@Test
+	public void testEmperorThaurissanEmptyHand() {
+		GameContext context = createContext(HeroClass.WARRIOR, HeroClass.WARLOCK);
+
+		Player player = context.getPlayer1();
+		MinionCard emperorThaurissanCard = (MinionCard) CardCatalogue.getCardById("minion_emperor_thaurissan");
+		Minion emperorThaurissan = playMinionCard(context, player, emperorThaurissanCard);
+		for (Card card : player.getHand().toList()) {
+			context.getLogic().removeCard(player.getId(), card);
+
+		}
+		Assert.assertTrue(player.getHand().isEmpty());
+		context.endTurn();
+
+		Player opponent = context.getPlayer2();
+		Card assassinateCard = CardCatalogue.getCardById("spell_assassinate");
+		playCardWithTarget(context, opponent, assassinateCard, emperorThaurissan);
+		context.getLogic().receiveCard(player.getId(), CardCatalogue.getCardById("minion_chillwind_yeti"));
+		context.endTurn();
+
+		Card card = player.getHand().peekFirst();
+		int modifiedCost = context.getLogic().getModifiedManaCost(player, card);
+		System.out.println("Card [" + card.getName() + "] has baseManaCost of " + card.getBaseManaCost()
+				+ " and current actual manacost of " + modifiedCost);
+		Assert.assertEquals(card.getBaseManaCost(), modifiedCost);
+
 	}
 
 }

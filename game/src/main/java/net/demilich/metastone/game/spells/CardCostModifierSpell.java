@@ -43,6 +43,10 @@ public class CardCostModifierSpell extends Spell {
 					cardIds.add(card.getId());
 				}
 			}
+			
+			if (cardIds.isEmpty()) {
+				return;
+			}
 			manaModifierDesc = manaModifierDesc.removeArg(CardCostModifierArg.TARGET);
 			manaModifierDesc = manaModifierDesc.addArg(CardCostModifierArg.CARD_IDS, cardIds);
 		}
