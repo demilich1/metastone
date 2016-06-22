@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.UUID;
+import java.util.logging.Level;
 
 public class MetaStone extends Application {
 
@@ -55,13 +56,15 @@ public class MetaStone extends Application {
 
 		// create a GoogleAnalytics tracker instance to be used throughout the app
 		analytics = GoogleAnalytics.buildTracker(BuildConfig.ANALYTICS_TRACKING_ID, clientId, BuildConfig.NAME);
+		// turn verbose logging on for dev builds
+		GoogleAnalytics.setLogLevel(BuildConfig.DEV_BUILD ? Level.ALL : null);
 
-		// register a shutdown hook for analytics
-		Runtime.getRuntime().addShutdownHook(new Thread() {
+		// register a shutdown hook for reporting analytics on shutdown
+		Runtime.getRuntime().addShutdownHook(new Thread () {
 
 			@Override
 			public void run() {
-				System.out.println("Shutting down!");
+				logger.info("Shutting down!");
 				// report the application shutdown event
 				analytics.type(GoogleAnalytics.HitType.event)
 						.applicationVersion(BuildConfig.VERSION)
@@ -70,7 +73,6 @@ public class MetaStone extends Application {
 						.build()
 						.send(false);
 			}
-
 		});
 
 		launch(args);
