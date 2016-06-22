@@ -17,7 +17,7 @@ public class SummonRandomMinionFilteredSpell extends Spell {
 	protected static MinionCard getRandomMatchingMinionCard(GameContext context, Player player, EntityFilter cardFilter, boolean includeUncollictible) {
 		CardCollection relevantMinions = null;
 		if (includeUncollictible) {
-			relevantMinions = CardCatalogue.query(card -> cardFilter.matches(context, player, card));
+			relevantMinions = CardCatalogue.query(context.getDeckFormat(), card -> cardFilter.matches(context, player, card));
 		} else {
 			CardCollection allMinions = CardCatalogue.query(context.getDeckFormat(), CardType.MINION);
 			relevantMinions = new CardCollection();
