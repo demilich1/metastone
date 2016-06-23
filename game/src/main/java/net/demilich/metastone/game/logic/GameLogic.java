@@ -626,6 +626,7 @@ public class GameLogic implements Cloneable {
 		if (weapon.getCardCostModifier() != null) {
 			addManaModifier(player, weapon.getCardCostModifier(), weapon);
 		}
+		checkForDeadEntities();
 		context.fireGameEvent(new WeaponEquippedEvent(context, weapon));
 		context.fireGameEvent(new BoardChangedEvent(context));
 	}
@@ -1467,7 +1468,6 @@ public class GameLogic implements Cloneable {
 		} else {
 			performGameAction(playerId, battlecryAction);
 		}
-		checkForDeadEntities();
 	}
 
 	public void resolveDeathrattles(Player player, Actor actor) {
@@ -1613,6 +1613,7 @@ public class GameLogic implements Cloneable {
 
 		if (resolveBattlecry && minion.getBattlecry() != null && !minion.getBattlecry().isResolvedLate()) {
 			resolveBattlecry(player.getId(), minion);
+			checkForDeadEntities();
 		}
 
 		if (context.getEnvironment().get(Environment.TRANSFORM_REFERENCE) != null) {
@@ -1640,6 +1641,7 @@ public class GameLogic implements Cloneable {
 
 		if (resolveBattlecry && minion.getBattlecry() != null && minion.getBattlecry().isResolvedLate()) {
 			resolveBattlecry(player.getId(), minion);
+			checkForDeadEntities();
 		}
 
 		handleEnrage(minion);
