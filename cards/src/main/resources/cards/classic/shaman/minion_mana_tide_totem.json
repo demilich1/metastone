@@ -7,6 +7,7 @@
 	"baseHp": 3,
 	"heroClass": "SHAMAN",
 	"rarity": "RARE",
+	"race": "TOTEM",
 	"description": "At the end of your turn, draw a card.",
 	"trigger": {
 		"eventTrigger": {
