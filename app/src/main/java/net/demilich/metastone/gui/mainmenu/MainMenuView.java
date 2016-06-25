@@ -40,6 +40,9 @@ public class MainMenuView extends BorderPane {
 	@FXML
 	private Button donationButton;
 
+	@FXML
+	private Button analyticsDisclaimerButton;
+
 	public MainMenuView() {
 
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/MainMenuView.fxml"));
@@ -65,6 +68,8 @@ public class MainMenuView extends BorderPane {
 
 		battleOfDecksButton
 				.setOnAction(event -> NotificationProxy.sendNotification(GameNotification.BATTLE_OF_DECKS_SELECTED));
+
+		analyticsDisclaimerButton.setOnAction(event -> NotificationProxy.sendNotification(GameNotification.ANALYTICS_DISCLAIMER_SELECTED));
 
 		if (!BuildConfig.DEV_BUILD) {
 			trainingModeButton.setVisible(false);

@@ -1,0 +1,14 @@
+MetaStone uses Google Analytics to help analyze usage of the application. We collect analytics events in anonymous form to help us improve the application. No personally identifiable information is collected about you.
+
+Here is what we collect:
+
+- Application startup and shutdown events
+- Entered Play Mode, Sandbox Mode, Simulator Mode, DeckBuilder events
+- New deck created in Deck Builder
+- Game start event
+- Player Deck Format, Hero, Behavior, Deck
+- Opponent Deck Format, Hero, Behavior, Deck
+
+The anonymous information collected is transmitted to Google Analytics and is processed into statistical reports to evaluate aggregate application usage so that we can optimize the application to better meet your needs.
+
+If you wish to opt-out of having your usage data gathered and transmitted to Google Analytics, you may do so by checking the "Opt-out of analytics tracking" checkbox below.
