@@ -1,6 +1,5 @@
 package net.demilich.metastone;
 
-import com.akoscz.googleanalytics.GoogleAnalytics;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -8,8 +7,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import net.demilich.metastone.analytics.MetastoneAnalytics;
 import net.demilich.metastone.gui.IconFactory;
-import net.demilich.metastone.utils.MetastoneProperties;
 import net.demilich.metastone.utils.UserHomeMetastone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,14 +16,10 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.UUID;
-import java.util.logging.Level;
 
 public class MetaStone extends Application {
 
 	private static Logger logger = LoggerFactory.getLogger(MetaStone.class);
-	private static final String ANALYTICS_CLIENT_ID_PROPERTY = "client.id";
-	public static GoogleAnalytics.Tracker analytics;
 
 	public static void main(String[] args) {
 		//DevCardTools.formatJsons();
@@ -37,41 +32,13 @@ public class MetaStone extends Application {
 			e.printStackTrace();
 		}
 
-		UUID clientId = null;
-		try {
-			// if we have a userId property
-			if (MetastoneProperties.hasProperty(ANALYTICS_CLIENT_ID_PROPERTY)) {
-				// read it from the metastone.properties file
-				clientId = UUID.fromString(MetastoneProperties.getProperty(ANALYTICS_CLIENT_ID_PROPERTY));
-			} else {
-				// otherwise create a new random user id
-				clientId = UUID.randomUUID();
-				// and save it to metastone.properties
-				MetastoneProperties.setProperty(ANALYTICS_CLIENT_ID_PROPERTY, clientId.toString());
-			}
-		} catch (IOException e) {
-			logger.error("Could not read or write to " + UserHomeMetastone.getPath() + " metastone.properties.");
-			e.printStackTrace();
-		}
-
-		// create a GoogleAnalytics tracker instance to be used throughout the app
-		analytics = GoogleAnalytics.buildTracker(BuildConfig.ANALYTICS_TRACKING_ID, clientId, BuildConfig.NAME);
-		// turn verbose logging on for dev builds
-		GoogleAnalytics.setLogLevel(BuildConfig.DEV_BUILD ? Level.ALL : null);
-
 		// register a shutdown hook for reporting analytics on shutdown
 		Runtime.getRuntime().addShutdownHook(new Thread () {
 
 			@Override
 			public void run() {
 				logger.info("Shutting down!");
-				// report the application shutdown event
-				analytics.type(GoogleAnalytics.HitType.event)
-						.applicationVersion(BuildConfig.VERSION)
-						.category("application")
-						.action("shutdown")
-						.build()
-						.send(false);
+				MetastoneAnalytics.registerAppShutdownEvent();
 			}
 		});
 
@@ -80,13 +47,7 @@ public class MetaStone extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		// report the application startup event
-		analytics.type(GoogleAnalytics.HitType.event)
-				.applicationVersion(BuildConfig.VERSION)
-				.category("application")
-				.action("startup")
-				.build()
-				.send();
+		MetastoneAnalytics.registerAppStartupEvent();
 
 		primaryStage.setTitle("MetaStone");
 		primaryStage.initStyle(StageStyle.UNIFIED);
