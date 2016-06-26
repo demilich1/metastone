@@ -19,7 +19,9 @@ public class MetastoneAnalytics {
 
     private static final MetastoneAnalytics INSTANCE;
     private static final String ANALYTICS_CLIENT_ID_PROPERTY = "client.id";
+    public  static final String ANALYTICS_OPT_OUT_PROPERTY = "analytics.optout";
     private static Logger logger = LoggerFactory.getLogger(MetastoneAnalytics.class);
+    private static boolean DISABLED = false; // analytics tracking is ON by default
 
     private final GoogleAnalytics.Tracker analyticsTracker;
 
@@ -40,6 +42,10 @@ public class MetastoneAnalytics {
                 // and save it to metastone.properties
                 MetastoneProperties.setProperty(ANALYTICS_CLIENT_ID_PROPERTY, clientId.toString());
             }
+
+            // if user has opted out of analytics tracking, set the DISABLED flag
+            DISABLED = MetastoneProperties.getBoolean(ANALYTICS_OPT_OUT_PROPERTY);
+
         } catch (IOException e) {
             logger.error("Could not read or write to " + UserHomeMetastone.getPath() + " metastone.properties.");
             e.printStackTrace();
@@ -53,12 +59,29 @@ public class MetastoneAnalytics {
     }
 
     /**
+     * Disable analytics tracking.
+     */
+    public static void disable() {
+        DISABLED = true;
+        logger.info("Disabling Analytics");
+    }
+
+    /**
+     * Enable analytics tracking.
+     */
+    public static void enable() {
+        DISABLED = false;
+        logger.info("Enabling Analytics");
+    }
+
+    /**
      * Register the application startup event.
      *  type     :   event
      *  category :   application
      *  action   :   startup
      */
     public static void registerAppStartupEvent() {
+        if (DISABLED) return;
         if (BuildConfig.DEV_BUILD) logger.info("registerAppStartupEvent");
 
         // report the application startup event
@@ -83,6 +106,7 @@ public class MetastoneAnalytics {
      *  See Runtime.getRuntime().addShutdownHook(Thread hook)
      */
     public static void registerAppShutdownEvent() {
+        if (DISABLED) return;
         if (BuildConfig.DEV_BUILD) logger.info("registerAppShutdownEvent");
 
         // report the application shutdown event

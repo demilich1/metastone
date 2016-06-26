@@ -9,6 +9,7 @@ import javafx.scene.layout.BorderPane;
 import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.NotificationProxy;
+import net.demilich.metastone.analytics.MetastoneAnalytics;
 import net.demilich.metastone.utils.MetastoneProperties;
 
 import java.io.IOException;
@@ -18,7 +19,6 @@ import java.nio.file.Paths;
 
 public class AnalyticsDisclaimerView extends BorderPane {
 
-    private static final String ANALYTICS_OPT_OUT_PROPERTY = "analytics.optout";
     private final String ANALYTICS_DISCLAIMER_TEXT = "analytics_disclaimer.txt";
     @FXML
     protected TextArea disclaimerTextArea;
@@ -44,25 +44,17 @@ public class AnalyticsDisclaimerView extends BorderPane {
             String content = new String(Files.readAllBytes(Paths.get(ClassLoader.getSystemResource(ANALYTICS_DISCLAIMER_TEXT).toURI())));
             disclaimerTextArea.setText(content);
 
-            if (MetastoneProperties.hasProperty(ANALYTICS_OPT_OUT_PROPERTY)) {
-                optOutCheckbox.setSelected(MetastoneProperties.getBoolean(ANALYTICS_OPT_OUT_PROPERTY));
+            if (MetastoneProperties.hasProperty(MetastoneAnalytics.ANALYTICS_OPT_OUT_PROPERTY)) {
+                optOutCheckbox.setSelected(MetastoneProperties.getBoolean(MetastoneAnalytics.ANALYTICS_OPT_OUT_PROPERTY));
             }
         } catch (URISyntaxException | IOException e) {
             e.printStackTrace();
         }
 
-//        optOutCheckbox.selectedProperty().addListener((observable, oldValue, newValue) -> {
-//            try {
-//                MetastoneProperties.setBoolean(ANALYTICS_OPT_OUT_PROPERTY, newValue);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        });
-
         optOutCheckbox.setOnAction(event -> {
             if (event.getSource() == optOutCheckbox) {
                 try {
-                    MetastoneProperties.setBoolean(ANALYTICS_OPT_OUT_PROPERTY, optOutCheckbox.isSelected());
+                    MetastoneProperties.setBoolean(MetastoneAnalytics.ANALYTICS_OPT_OUT_PROPERTY, optOutCheckbox.isSelected());
                     ApplicationFacade.getInstance().sendNotification(GameNotification.ANALYTICS_OPT_OUT_TOGGLED, optOutCheckbox.isSelected());
                 } catch (IOException e) {
                     e.printStackTrace();
