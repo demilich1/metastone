@@ -3,11 +3,13 @@ MetaStone uses Google Analytics to help analyze usage of the application. We col
 Here is what we collect:
 
 - Application startup and shutdown events
-- Entered Play Mode, Sandbox Mode, Simulator Mode, DeckBuilder events
-- New deck created in Deck Builder
-- Game start event
+- Entered Play Mode, Sandbox Mode, Simulator Mode, Deck Builder events
+- New deck created or deck deleted in Deck Builder
+- Game start and end events
 - Player Deck Format, Hero, Behavior, Deck
 - Opponent Deck Format, Hero, Behavior, Deck
+- Dialog displayed and dismissed events
+- Opt out/in of analytics tracking
 
 The anonymous information collected is transmitted to Google Analytics and is processed into statistical reports to evaluate aggregate application usage so that we can optimize the application to better meet your needs.
 
