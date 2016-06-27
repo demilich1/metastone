@@ -139,7 +139,7 @@ public class MetastoneAnalytics {
                 .action("show")
                 .screenName(screenName)
                 .build()
-                .send(false);
+                .send();
     }
 
     /**
@@ -165,7 +165,7 @@ public class MetastoneAnalytics {
                 .screenName(title)
                 .label(type)
                 .build()
-                .send(false);
+                .send();
     }
 
     /**
@@ -195,6 +195,6 @@ public class MetastoneAnalytics {
                 .label(type)
                 .value(dialogResult)
                 .build()
-                .send(false);
+                .send();
     }
 }
