@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import net.demilich.metastone.analytics.MetastoneAnalytics;
 import net.demilich.metastone.gui.IconFactory;
 
 public class UserDialog extends BorderPane implements EventHandler<ActionEvent> {
@@ -30,6 +31,7 @@ public class UserDialog extends BorderPane implements EventHandler<ActionEvent> 
 	private Button negativeButton;
 
 	private IDialogListener dialogHandler;
+	private DialogType type;
 
 	public UserDialog(String title, String message, DialogType dialogType) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/UserDialog.fxml"));
@@ -42,6 +44,7 @@ public class UserDialog extends BorderPane implements EventHandler<ActionEvent> 
 			throw new RuntimeException(exception);
 		}
 
+		type = dialogType;
 		icon.setImage(IconFactory.getDialogIcon(dialogType));
 		headerLabel.setText(title);
 		textLabel.setText(message);
@@ -67,6 +70,7 @@ public class UserDialog extends BorderPane implements EventHandler<ActionEvent> 
 		if (dialogHandler != null) {
 			dialogHandler.onDialogClosed(result);
 		}
+		MetastoneAnalytics.registerDismissDialog(headerLabel.toString(), type.name(), result.ordinal());
 		this.getScene().getWindow().hide();
 	}
 

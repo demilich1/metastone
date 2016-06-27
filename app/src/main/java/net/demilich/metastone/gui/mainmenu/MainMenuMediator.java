@@ -3,6 +3,7 @@ package net.demilich.metastone.gui.mainmenu;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.demilich.metastone.analytics.MetastoneAnalytics;
 import net.demilich.metastone.gui.termsofuse.AnalyticsDisclaimerMediator;
 import net.demilich.nittygrittymvc.Mediator;
 import net.demilich.nittygrittymvc.interfaces.INotification;
@@ -71,6 +72,7 @@ public class MainMenuMediator extends Mediator<GameNotification> {
 	@Override
 	public void onRegister() {
 		getFacade().sendNotification(GameNotification.SHOW_VIEW, view);
+		MetastoneAnalytics.registerShowScreen("MainMenu");
 	}
 
 }

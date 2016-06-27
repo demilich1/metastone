@@ -3,6 +3,7 @@ package net.demilich.metastone.gui.dialog;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.demilich.metastone.analytics.MetastoneAnalytics;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -60,6 +61,8 @@ public class DialogMediator extends Mediator<GameNotification> {
 	private void showUserDialog(DialogNotification notification) {
 		UserDialog userDialog = new UserDialog(notification.getTitle(), notification.getMessage(), notification.getDialogType());
 		userDialog.setDialogHandler(notification.getHandler());
+		MetastoneAnalytics.registerShowDialog(notification.getTitle(), notification.getDialogType().name());
+
 		showModalDialog(userDialog);
 	}
 

@@ -3,6 +3,7 @@ package net.demilich.metastone.gui.simulationmode;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.demilich.metastone.analytics.MetastoneAnalytics;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -88,6 +89,7 @@ public class SimulationMediator extends Mediator<GameNotification> {
 	@Override
 	public void onRegister() {
 		getFacade().sendNotification(GameNotification.SHOW_VIEW, view);
+		MetastoneAnalytics.registerShowScreen("Simulation");
 		getFacade().sendNotification(GameNotification.REQUEST_DECKS);
 		getFacade().sendNotification(GameNotification.REQUEST_DECK_FORMATS);
 	}

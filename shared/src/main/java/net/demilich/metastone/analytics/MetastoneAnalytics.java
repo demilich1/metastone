@@ -85,7 +85,8 @@ public class MetastoneAnalytics {
         if (BuildConfig.DEV_BUILD) logger.info("registerAppStartupEvent");
 
         // report the application startup event
-        INSTANCE.analyticsTracker.type(GoogleAnalytics.HitType.event)
+        INSTANCE.analyticsTracker
+                .type(GoogleAnalytics.HitType.event)
                 .applicationVersion(BuildConfig.VERSION)
                 .category("application")
                 .action("startup")
@@ -101,8 +102,8 @@ public class MetastoneAnalytics {
      *
      * NOTE:
      *  This method will perform the network operation on the same thread it was invoked from.
-     *  This is to ensure that the shutdown even is fired off before the application process is terminated.
-     *  It is highly recommended to invoke this method from a Shutdown Hook.
+     *  This is to ensure that the shutdown event is fired off before the application process is terminated.
+     *  It is highly recommended to invoke this method from a Shutdown Hook thread.
      *  See Runtime.getRuntime().addShutdownHook(Thread hook)
      */
     public static void registerAppShutdownEvent() {
@@ -114,6 +115,85 @@ public class MetastoneAnalytics {
                 .applicationVersion(BuildConfig.VERSION)
                 .category("application")
                 .action("shutdown")
+                .build()
+                .send(false);
+    }
+
+    /**
+     * Register navigation to a given screen.
+     *  type        :   screenview
+     *  category    :   navigation
+     *  action      :   show
+     *  screenName  :   [parameter]
+     *
+     * @param screenName The screen name that was shown.
+     */
+    public static void registerShowScreen(String screenName) {
+        if (DISABLED) return;
+        if (BuildConfig.DEV_BUILD) logger.info("registerShowScreen: " + screenName);
+
+        INSTANCE.analyticsTracker
+                .type(GoogleAnalytics.HitType.screenview)
+                .applicationVersion(BuildConfig.VERSION)
+                .category("navigation")
+                .action("show")
+                .screenName(screenName)
+                .build()
+                .send(false);
+    }
+
+    /**
+     * Register a dialog being shown to the user.
+     *  type        :   screenview
+     *  category    :   dialog
+     *  action      :   show
+     *  screenName  :   [parameter]
+     *  label       :   [parameter]
+     *
+     * @param title The title of the dialog that was shown
+     * @param type  The type of dialog that was shown. [CONFIRM, INFO, WARNING, ERROR]
+     */
+    public static void registerShowDialog(String title, String type) {
+        if (DISABLED) return;
+        if (BuildConfig.DEV_BUILD) logger.info("registerShowDialog: " + title + ", type: " + type);
+
+        INSTANCE.analyticsTracker
+                .type(GoogleAnalytics.HitType.screenview)
+                .applicationVersion(BuildConfig.VERSION)
+                .category("dialog")
+                .action("show")
+                .screenName(title)
+                .label(type)
+                .build()
+                .send(false);
+    }
+
+    /**
+     * Register a dialog being dismissed by the user.
+     *  type        :   screenview
+     *  category    :   dialog
+     *  action      :   dismiss
+     *  screenName  :   [parameter]
+     *  label       :   [parameter]
+     *  value       :   [parameter]
+     *
+     * @param title        The title of the dialog that was dismissed
+     * @param type         The type of dialog that was dismissed. [CONFIRM, INFO, WARNING, ERROR]
+     * @param dialogResult The result the dialog was dismissed with. [OK = 0, CANCEL = 1]
+     */
+    public static void registerDismissDialog(String title, String type, int dialogResult) {
+        if (DISABLED) return;
+        if (BuildConfig.DEV_BUILD)
+            logger.info("registerShowDialog: " + title + ", type: " + type + ", result: " + dialogResult);
+
+        INSTANCE.analyticsTracker
+                .type(GoogleAnalytics.HitType.screenview)
+                .applicationVersion(BuildConfig.VERSION)
+                .category("dialog")
+                .action("dismiss")
+                .screenName(title)
+                .label(type)
+                .value(dialogResult)
                 .build()
                 .send(false);
     }
