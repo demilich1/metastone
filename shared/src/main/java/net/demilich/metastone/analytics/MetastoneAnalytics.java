@@ -197,4 +197,25 @@ public class MetastoneAnalytics {
                 .build()
                 .send();
     }
+
+    /**
+     * Register when the analytics tracking opt-out has been toggled.
+     *  type        :   event
+     *  category    :   tracking
+     *  action      :   [parameter] TRUE = "opt-out", FALSE = "opt-in"
+     *
+     * @param optout True when a user opts out of tracking.  Falase when a user opts back in to tracking.
+     */
+    public static void registerAnalyticsTrackingOptOut(boolean optout) {
+        if (DISABLED) return;
+        if (BuildConfig.DEV_BUILD) logger.info("registerAnalyticsTrackingOptOut: opt-out = " + optout);
+
+        INSTANCE.analyticsTracker
+                .type(GoogleAnalytics.HitType.event)
+                .applicationVersion(BuildConfig.VERSION)
+                .category("tracking")
+                .action((optout ? "opt-out" : "opt-in"))
+                .build()
+                .send();
+    }
 }

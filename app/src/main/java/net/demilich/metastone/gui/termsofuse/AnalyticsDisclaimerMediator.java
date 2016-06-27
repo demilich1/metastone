@@ -24,11 +24,13 @@ public class AnalyticsDisclaimerMediator extends Mediator<GameNotification> {
         switch (notification.getId()) {
             case ANALYTICS_OPT_OUT_TOGGLED:
                 if ((boolean)notification.getBody()) {
+                    MetastoneAnalytics.registerAnalyticsTrackingOptOut(true);
                     // user is opting out. Turn off Analytics
                     MetastoneAnalytics.disable();
                 } else {
                     // user is opting in. Turn on Analytics
                     MetastoneAnalytics.enable();
+                    MetastoneAnalytics.registerAnalyticsTrackingOptOut(false);
                 }
                 break;
             default:
@@ -46,6 +48,7 @@ public class AnalyticsDisclaimerMediator extends Mediator<GameNotification> {
     @Override
     public void onRegister() {
         getFacade().sendNotification(GameNotification.SHOW_VIEW, view);
+        MetastoneAnalytics.registerShowScreen("Disclaimer");
     }
 
 }
