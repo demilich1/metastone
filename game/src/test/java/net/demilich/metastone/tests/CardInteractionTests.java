@@ -386,5 +386,24 @@ public class CardInteractionTests extends TestBase {
 		Assert.assertTrue(impGangBoss.hasAttribute(Attribute.FROZEN));
 		Assert.assertFalse(secondYeti.hasAttribute(Attribute.FROZEN));
 	}
+	
+	@Test
+	public void testSummoningStonePrep() {
+		GameContext context = createContext(HeroClass.ROGUE, HeroClass.WARRIOR);
+		Player player = context.getPlayer1();
+		
+		playCard(context, player, CardCatalogue.getCardById("minion_summoning_stone"));
+		playCard(context, player, CardCatalogue.getCardById("spell_preparation"));
+		playCard(context, player, CardCatalogue.getCardById("secret_ice_block"));
+		
+		Assert.assertEquals(player.getMinions().size(), 3);
+		for (Minion minion : player.getMinions()) {
+			if (minion.getSourceCard().getCardId().equalsIgnoreCase("minion_summoning_stone")) {
+				continue;
+			}
+			
+			Assert.assertEquals(minion.getSourceCard().getBaseManaCost(), 0);
+		}
+	}
 }
 
