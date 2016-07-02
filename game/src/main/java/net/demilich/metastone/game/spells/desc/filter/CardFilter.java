@@ -54,7 +54,7 @@ public class CardFilter extends EntityFilter {
 			}
 		}
 		Rarity rarity = (Rarity) desc.get(FilterArg.RARITY);
-		if (rarity != null && card.getRarity().isRarity(rarity)) {
+		if (rarity != null && !card.getRarity().isRarity(rarity)) {
 			return false;
 		}
 		
