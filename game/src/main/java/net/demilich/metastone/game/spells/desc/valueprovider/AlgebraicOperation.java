@@ -9,6 +9,8 @@ public enum AlgebraicOperation {
 	SET,
 	NEGATE,
 	MODULO,
+	MINIMUM,
+	MAXIMUM,
 	;
 
 	public int performOperation(int num1, int num2) {
@@ -20,6 +22,10 @@ public enum AlgebraicOperation {
 				num2 = 1;
 			}
 			return num1 / num2;
+		case MAXIMUM:
+			return num2 < num1 ? num2 : num1;
+		case MINIMUM:
+			return num2 > num1 ? num2 : num1;
 		case MODULO:
 			if (num2 == 0) {
 				num2 = 1;
