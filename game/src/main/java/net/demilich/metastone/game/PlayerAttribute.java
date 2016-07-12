@@ -6,6 +6,7 @@ public enum PlayerAttribute {
 	HAND_COUNT,
 	HERO_POWER_USED,
 	DECK_COUNT,
+	LAST_MANA_COST,
 	SECRET_COUNT,
 	SPELLS_CAST,
 	

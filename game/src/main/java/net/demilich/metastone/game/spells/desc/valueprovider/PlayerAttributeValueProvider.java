@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.spells.desc.valueprovider;
 
+import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.PlayerAttribute;
@@ -22,6 +23,8 @@ public class PlayerAttributeValueProvider extends ValueProvider {
 			return player.getHand().getCount();
 		case HERO_POWER_USED:
 			return (int) player.getStatistics().getLong(Statistic.HERO_POWER_USED);
+		case LAST_MANA_COST:
+			return (int) context.getEnvironment().get(Environment.LAST_MANA_COST);
 		case MANA:
 			return player.getMana();
 		case MAX_MANA:

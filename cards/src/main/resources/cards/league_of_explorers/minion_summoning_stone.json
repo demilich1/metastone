@@ -14,8 +14,14 @@
 			"sourcePlayer": "SELF"
 		},
 		"spell": {
-			"class": "SummonRandomMinionFromSpell",
-			"card": "PENDING_CARD"
+			"class": "SummonRandomMinionFilteredSpell",
+			"cardFilter": {
+				"class": "CardFilter",
+				"manaCost": {
+					"class": "PlayerAttributeValueProvider",
+					"playerAttribute": "LAST_MANA_COST"
+				}
+			}
 		}
 	},
 	"collectible": true,
