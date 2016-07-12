@@ -7,6 +7,7 @@
 	"baseHp": 5,
 	"heroClass": "HUNTER",
 	"rarity": "LEGENDARY",
+	"race": "BEAST",
 	"description": "Battlecry: Trigger a friendly minion's Deathrattle effect immediately.",
 	"battlecry": {
 		"targetSelection": "FRIENDLY_MINIONS",

@@ -7,7 +7,7 @@
 	"baseHp": 1,
 	"heroClass": "ANY",
 	"rarity": "EPIC",
-	"description": "Battlecry: Copy a friendly minion's Attack and Health.",
+	"description": "Taunt. Battlecry: Copy a friendly minion's Attack and Health.",
 	"battlecry": {
 		"targetSelection": "FRIENDLY_MINIONS",
 		"spell": {
@@ -35,7 +35,8 @@
 		}
 	},
 	"attributes": {
-		"BATTLECRY": true
+		"BATTLECRY": true,
+		"TAUNT": true
 	},
 	"collectible": true,
 	"set": "THE_OLD_GODS",
