@@ -13,8 +13,13 @@
 			"class": "SpellCastedTrigger",
 			"sourcePlayer": "SELF",
 			"queueCondition": {
-				"class": "ManaCostCondition",
-				"value": 1
+				"class": "ComparisonCondition",
+				"value1": {
+					"class": "PlayerAttributeValueProvider",
+					"playerAttribute": "LAST_MANA_COST"
+				},
+				"value2": 1,
+				"operation": "EQUAL"
 			}
 		},
 		"spell": {

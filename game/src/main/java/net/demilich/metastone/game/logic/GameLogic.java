@@ -1196,8 +1196,10 @@ public class GameLogic implements Cloneable {
 		int modifiedManaCost = getModifiedManaCost(player, card);
 		if (card.getCardType().isCardType(CardType.SPELL)
 				&& player.getHero().hasAttribute(Attribute.SPELLS_COST_HEALTH)) {
+			context.getEnvironment().put(Environment.LAST_MANA_COST, 0);
 			damage(player, player.getHero(), modifiedManaCost, card, true);
 		} else {
+			context.getEnvironment().put(Environment.LAST_MANA_COST, modifiedManaCost);
 			modifyCurrentMana(playerId, -modifiedManaCost);
 			player.getStatistics().manaSpent(modifiedManaCost);
 		}
