@@ -1,4 +1,4 @@
-package net.demilich.metastone.gui.autoupdate;
+package net.demilich.metastone.utils;
 
 public class VersionInfo {
 
@@ -10,8 +10,14 @@ public class VersionInfo {
 	public String[] whatsNew;
 
 	public boolean isNewerVersionAvailable(String localVersionStr) {
-		Integer[] localVersion = parseVersionString(localVersionStr);
-		Integer[] remoteVersion = parseVersionString(version);
+		return updateRequired(localVersionStr, version);
+		
+	}
+	
+	public static boolean updateRequired(String version1, String version2) {
+		Integer[] localVersion = parseVersionString(version1);
+		Integer[] remoteVersion = parseVersionString(version2);
+		
 		if (remoteVersion[MAJOR_INDEX] > localVersion[MAJOR_INDEX]) {
 			return true;
 		}

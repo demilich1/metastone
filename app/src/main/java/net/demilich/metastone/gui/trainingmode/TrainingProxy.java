@@ -11,11 +11,6 @@ import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.HashMap;
 
-import net.demilich.metastone.BuildConfig;
-import net.demilich.metastone.trainingmode.TrainingData;
-import net.demilich.metastone.utils.ResourceInputStream;
-import net.demilich.metastone.utils.ResourceLoader;
-import net.demilich.metastone.utils.UserHomeMetastone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,10 +18,14 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import net.demilich.nittygrittymvc.Proxy;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.behaviour.threat.FeatureVector;
 import net.demilich.metastone.game.behaviour.threat.WeightedFeature;
+import net.demilich.metastone.trainingmode.TrainingData;
+import net.demilich.metastone.utils.ResourceInputStream;
+import net.demilich.metastone.utils.ResourceLoader;
+import net.demilich.metastone.utils.UserHomeMetastone;
+import net.demilich.nittygrittymvc.Proxy;
 
 public class TrainingProxy extends Proxy<GameNotification> {
 

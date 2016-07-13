@@ -26,7 +26,7 @@ public class MetastoneProperties {
             try {
                 propertiesFile.createNewFile();
             } catch (IOException e) {
-                logger.error("Trouble creating " +  propertiesFilePath);
+                logger.error("Could not create property file: " +  propertiesFilePath);
                 e.printStackTrace();
                 throw e;
             }
@@ -61,7 +61,7 @@ public class MetastoneProperties {
     public static boolean getBoolean(String key) throws IOException {
         return Boolean.parseBoolean(getProperty(key));
     }
-
+    
     /**
      * Set the value for the given property key.
      *

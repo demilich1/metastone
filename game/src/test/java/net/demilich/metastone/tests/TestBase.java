@@ -26,9 +26,9 @@ import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.gameconfig.PlayerConfig;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.targeting.EntityReference;
-import net.demilich.metastone.game.gameconfig.PlayerConfig;
 
 public class TestBase {
 
@@ -74,7 +74,7 @@ public class TestBase {
 		root.setLevel(Level.DEBUG);
 
 		try {
-			CardCatalogue.loadCards();
+			CardCatalogue.loadLocalCards();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (URISyntaxException e) {
@@ -152,7 +152,7 @@ public class TestBase {
 		context.getLogic().receiveCard(player.getId(), card);
 		context.getLogic().performGameAction(player.getId(), card.play());
 	}
-	
+
 	protected static void playCardWithTarget(GameContext context, Player player, Card card, Entity target) {
 		context.getLogic().receiveCard(player.getId(), card);
 		GameAction action = card.play();

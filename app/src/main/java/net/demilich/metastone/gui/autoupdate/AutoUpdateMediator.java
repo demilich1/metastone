@@ -18,6 +18,7 @@ import javafx.util.Duration;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.gui.IconFactory;
 import net.demilich.metastone.gui.dialog.DialogType;
+import net.demilich.metastone.utils.VersionInfo;
 import net.demilich.nittygrittymvc.Mediator;
 import net.demilich.nittygrittymvc.interfaces.INotification;
 

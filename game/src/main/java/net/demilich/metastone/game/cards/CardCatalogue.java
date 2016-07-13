@@ -11,6 +11,7 @@ import java.util.function.Predicate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.cards.desc.CardDesc;
 import net.demilich.metastone.game.decks.DeckFormat;
@@ -19,14 +20,18 @@ import net.demilich.metastone.utils.MetastoneProperties;
 import net.demilich.metastone.utils.ResourceInputStream;
 import net.demilich.metastone.utils.ResourceLoader;
 import net.demilich.metastone.utils.UserHomeMetastone;
+import net.demilich.metastone.utils.VersionInfo;
 
 public class CardCatalogue {
 
-	private final static CardCollection cards = new CardCollection();
 	public static final String CARDS_FOLDER = "cards";
+	public static final String LOCAL_CARDS_FOLDER = "../cards/src/main/resources/cards/";
 	public static final String CARDS_FOLDER_PATH = UserHomeMetastone.getPath() + File.separator + CARDS_FOLDER;
-	private static final String CARDS_COPIED_PROPERTY = "cards.copied";
+	public static final String CARDS_COPIED_PROPERTY = "cards.copied";
+
 	private static Logger logger = LoggerFactory.getLogger(CardCatalogue.class);
+
+	private final static CardCollection cards = new CardCollection();
 
 	public static void add(Card card) {
 		cards.add(card);
@@ -127,12 +132,21 @@ public class CardCatalogue {
 		}
 		return result;
 	}
-
+	
+	public static void loadLocalCards() throws IOException, URISyntaxException {
+		// load cards from ~/metastone/cards on the file system
+		Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(CARDS_FOLDER, false);
+		loadCards(inputStreams);
+	}
+	
 	public static void loadCards() throws IOException, URISyntaxException {
-
 		// load cards from ~/metastone/cards on the file system
 		Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(CARDS_FOLDER_PATH, true);
+		loadCards(inputStreams);
+	}
 
+	
+	private static void loadCards(Collection<ResourceInputStream> inputStreams) throws IOException, URISyntaxException {
 		Map<String, CardDesc> cardDesc = new HashMap<String, CardDesc>();
 		CardParser cardParser = new CardParser();
 		for (ResourceInputStream resourceInputStream : inputStreams) {
@@ -158,11 +172,23 @@ public class CardCatalogue {
 	public static void copyCardsFromResources() throws IOException, URISyntaxException {
 		// if we have not copied cards to the USER_HOME_METASTONE cards folder,
 		// then do so now
-		if (!MetastoneProperties.getBoolean(CARDS_COPIED_PROPERTY)) {
+		String cardsCopiedWithVersion = MetastoneProperties.getProperty(CARDS_COPIED_PROPERTY);
+		boolean updateRequired;
+		try {
+			updateRequired = VersionInfo.updateRequired(BuildConfig.VERSION, cardsCopiedWithVersion);
+		} catch(Exception e) {
+			// an exception will be thrown when stored 'cardsCopiedWithVersion' is null or invalid input,
+			// this is okay, just do an update in that case
+			updateRequired = true;
+		}
+		if (updateRequired) {
+			logger.info("Card update required: MetaStone version is: {}, last card update was with version {}", BuildConfig.VERSION, cardsCopiedWithVersion);
 			ResourceLoader.copyFromResources(CARDS_FOLDER, CARDS_FOLDER_PATH);
 
-			// set a property to indicate that we have copied the cards
-			MetastoneProperties.setBoolean(CARDS_COPIED_PROPERTY, true);
+			// set a property to indicate that we have copied the cards with current version
+			MetastoneProperties.setProperty(CARDS_COPIED_PROPERTY, BuildConfig.VERSION);
+		} else {
+			logger.info("Cards in user home folder are up-to-date: {}", cardsCopiedWithVersion);
 		}
 	}
 }
