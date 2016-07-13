@@ -14,8 +14,7 @@
 			"target": "SELF",
 			"hpBonus": {
 				"class": "AttributeCounter",
-				"target": "ENEMY_MINIONS",
-				"attribute": "DEATHRATTLES"
+				"target": "ENEMY_MINIONS"
 			}
 		}
 	},

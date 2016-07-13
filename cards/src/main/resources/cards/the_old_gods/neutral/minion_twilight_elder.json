@@ -6,7 +6,7 @@
 	"baseAttack": 3,
 	"baseHp": 4,
 	"heroClass": "ANY",
-	"rarity": "EPIC",
+	"rarity": "COMMON",
 	"description": "At the end of your turn, give your C'Thun +1/+1 (wherever it is).",
 	"trigger": {
 		"eventTrigger": {
