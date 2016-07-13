@@ -102,7 +102,7 @@ metastone
       * Windows `rmdir /s C:\Users\[username]\Documents\metastone`
       * Card data files will be copied in their prestine state after you restart the app.
    * _Option 2_: Edit the `~/metastone/metastone.properties` file and update the `cards.copied` property.
-      * change `cards.copied=true` to `cards.copied=false`
+      * delete the `cards.copied` property and save the file
       * New files you may have added will NOT be affected.
       * All card files that are distributed with the app will be overritten after you restart the app.
 
