@@ -15,6 +15,7 @@
 		},
 		"spell": {
 			"class": "SummonRandomMinionFilteredSpell",
+			"boardPositionRelative": "RIGHT",
 			"cardFilter": {
 				"class": "CardFilter",
 				"manaCost": {
