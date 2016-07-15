@@ -1,6 +1,8 @@
 package net.demilich.metastone.analytics;
 
 import com.akoscz.googleanalytics.GoogleAnalytics;
+import com.akoscz.googleanalytics.GoogleAnalyticsConfig;
+import com.akoscz.googleanalytics.util.UserAgent;
 import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.utils.MetastoneProperties;
 import net.demilich.metastone.utils.UserHomeMetastone;
@@ -51,11 +53,15 @@ public class MetastoneAnalytics {
             e.printStackTrace();
         }
 
-        // create a GoogleAnalytics tracker instance to be used throughout the app
-        analyticsTracker = GoogleAnalytics.buildTracker(BuildConfig.ANALYTICS_TRACKING_ID, clientId, BuildConfig.NAME);
+        GoogleAnalyticsConfig config = new GoogleAnalyticsConfig();
+        config.setUserAgent(String.valueOf(new UserAgent(BuildConfig.NAME, BuildConfig.VERSION)));
 
+        // create a GoogleAnalytics tracker instance to be used throughout the app
+        analyticsTracker = GoogleAnalytics.buildTracker(BuildConfig.ANALYTICS_TRACKING_ID, clientId, BuildConfig.NAME, config);
         // turn verbose logging on for dev builds
-        GoogleAnalytics.setLogLevel(BuildConfig.DEV_BUILD ? Level.ALL : null);
+        analyticsTracker.build().setLogLevel(BuildConfig.DEV_BUILD ? Level.ALL : null);
+        // use the debug endpoint on dev builds
+        analyticsTracker.build().setDebug(BuildConfig.DEV_BUILD);
     }
 
     /**
@@ -204,7 +210,7 @@ public class MetastoneAnalytics {
      *  category    :   tracking
      *  action      :   [parameter] TRUE = "opt-out", FALSE = "opt-in"
      *
-     * @param optout True when a user opts out of tracking.  Falase when a user opts back in to tracking.
+     * @param optout True when a user opts out of tracking.  False when a user opts back in to tracking.
      */
     public static void registerAnalyticsTrackingOptOut(boolean optout) {
         if (DISABLED) return;
