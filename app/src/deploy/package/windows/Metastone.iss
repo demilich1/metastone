@@ -3,7 +3,7 @@
 [Setup]
 AppId={{fxApplication}}
 AppName=Metastone
-AppVersion=1.1.0
+AppVersion=1.1.1
 AppVerName=Metastone
 AppPublisher=demilich
 AppComments=MetaStone
