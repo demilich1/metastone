@@ -1,6 +1,7 @@
 package net.demilich.metastone.utils;
 
 import java.io.File;
+import java.util.logging.Logger;
 
 import javax.swing.filechooser.FileSystemView;
 
@@ -12,10 +13,18 @@ import net.demilich.metastone.BuildConfig;
 public class UserHomeMetastone {
 
     private static UserHomeMetastone INSTANCE;
-    
+    private static String ENV_VAR_NAME = "USER_HOME_METASTONE";
+
     static {
-    	UserHomeMetastone.init((FileSystemView.getFileSystemView().getDefaultDirectory().getPath()
-                + File.separator + BuildConfig.NAME).replace("\\", "\\\\"));
+        String metastoneHomeDirPath = System.getenv(ENV_VAR_NAME);
+        
+        // if we dont have an ENV variable set for USER_HOME_METASTONE, then use the default user directory
+        if ((metastoneHomeDirPath == null || metastoneHomeDirPath.isEmpty())) {
+            metastoneHomeDirPath = (FileSystemView.getFileSystemView().getDefaultDirectory().getPath()
+                    + File.separator + BuildConfig.NAME).replace("\\", "\\\\");
+        }
+
+    	UserHomeMetastone.init(metastoneHomeDirPath);
     }
     
     
@@ -23,6 +32,7 @@ public class UserHomeMetastone {
 
     private UserHomeMetastone(String path) {
         dirPath = path;
+        Logger.getGlobal().info("UserHomeMetastone='" + dirPath + "'");
     }
 
     private static void init(String path) {
