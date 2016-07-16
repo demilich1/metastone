@@ -86,7 +86,8 @@ metastone
 - Card files are located in the `metastone/cards` directory.  **Use these as reference!**
    * Linux/Mac OSX `~/metastone/cards`
    * Windows `C:\Users\[username]\Documents\metastone\cards`
-   * Note: you must launch the app at least once for card data files to be copied.
+   * You can override the default metastone home dir by setting an environment varialble `USER_HOME_METASTONE` and specifying a new path.
+   * You must launch the app at least once for card data files to be copied.
 - Any `.json` files you place in your `metastone/cards` folder will be parsed and treated like built-in cards.
 - To learn the cards format it is highly recommended that you copy an existing card, change the `filename` and the `id` attribute (**<-- important!**) and make small changes.
 - Restart MetaStone for new cards to be detected.
