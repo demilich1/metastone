@@ -6,13 +6,13 @@
 	"baseAttack": 2,
 	"baseHp": 3,
 	"heroClass": "ANY",
-	"rarity": "COMMON",
+	"rarity": "RARE",
 	"race": "MURLOC",
 	"description": "Battlecry: Deal 2 damage to all non-Murloc minions.",
 	"battlecry": {
 		"spell": {
 			"class": "DamageSpell",
-			"target": "ENEMY_MINIONS",
+			"target": "ALL_MINIONS",
 			"value": 2,
 			"filter": {
 				"class": "RaceFilter",

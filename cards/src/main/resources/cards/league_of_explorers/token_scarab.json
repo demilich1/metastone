@@ -7,7 +7,7 @@
 	"baseHp": 1,
 	"heroClass": "ANY",
 	"rarity": "FREE",
-	"race": "MURLOC",
+	"race": "BEAST",
 	"description": "Taunt",
 	"attributes": {
 		"TAUNT": true
