@@ -29,5 +29,6 @@ public enum ParseValueType {
 	CARD_COST_MODIFIER,
 	RARITY,
 	HERO_CLASS,
+	HERO_CLASS_ARRAY,
 	VALUE
 }

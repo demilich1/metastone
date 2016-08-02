@@ -1,0 +1,38 @@
+{
+	"id": "minion_ethereal_peddler",
+	"name": "Ethereal Peddler",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 6,
+	"heroClass": "ROGUE",
+	"rarity": "RARE",
+	"description": "Battlecry: Reduce the Cost of cards from other classes by (2).",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "CardCostModifierSpell",
+			"target": "FRIENDLY_HERO",
+			"cardFilter": {
+				"class": "CardFilter",
+				"heroClasses": [
+					"SELF",
+					"ANY"
+				],
+				"invert": true
+			},
+			"cardCostModifier": {
+				"class": "CardCostModifier",
+				"target": "FRIENDLY_HAND",
+				"operation": "SUBTRACT",
+				"value": 2
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}
