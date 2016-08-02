@@ -72,6 +72,8 @@ public class SpellUtils {
 		card = CardCatalogue.getCardById(cardName);
 		if (spell.get(SpellArg.CARD).toString().toUpperCase().equals("PENDING_CARD")) {
 			card = (Card) context.getPendingCard();
+		} else if (spell.get(SpellArg.CARD).toString().toUpperCase().equals("EVENT_CARD")) {
+			card = (Card) context.getEventCard();
 		}
 		return card;
 	}
