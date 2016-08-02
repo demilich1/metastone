@@ -10,3 +10,5 @@ report.log
 build/
 classes/
 *.iml
+
+cards/src/main/resources/metastone.properties
