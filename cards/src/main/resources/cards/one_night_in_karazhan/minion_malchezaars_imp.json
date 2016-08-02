@@ -1,0 +1,25 @@
+{
+	"id": "minion_malchezaars_imp",
+	"name": "Malchezaar's Imp",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 3,
+	"heroClass": "WARLOCK",
+	"rarity": "COMMON",
+	"description": "Whenever you discard a card, draw a card.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "DiscardTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "DrawCardSpell",
+			"target": "SELF",
+			"value": 1
+		}
+	},
+	"collectible": true,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

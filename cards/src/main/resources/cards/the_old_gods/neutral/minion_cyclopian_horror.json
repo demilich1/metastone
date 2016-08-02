@@ -13,7 +13,7 @@
 			"class": "BuffSpell",
 			"target": "SELF",
 			"hpBonus": {
-				"class": "AttributeCounter",
+				"class": "EntityCounter",
 				"target": "ENEMY_MINIONS"
 			}
 		}

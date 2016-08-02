@@ -1,18 +1,17 @@
 {
-	"id": "token_scarab",
-	"name": "Scarab",
+	"id": "token_pawn",
+	"name": "Pawn",
 	"baseManaCost": 1,
 	"type": "MINION",
 	"baseAttack": 1,
 	"baseHp": 1,
 	"heroClass": "ANY",
-	"rarity": "FREE",
-	"race": "BEAST",
+	"rarity": "RARE",
 	"description": "Taunt",
 	"attributes": {
 		"TAUNT": true
 	},
 	"collectible": false,
-	"set": "LEAGUE_OF_EXPLORERS",
+	"set": "ONE_NIGHT_IN_KARAZHAN",
 	"fileFormatVersion": 1
 }

@@ -1,0 +1,14 @@
+{
+	"id": "token_candle",
+	"name": "Candle",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"heroClass": "WARLOCK",
+	"rarity": "COMMON",
+	"description": "",
+	"collectible": false,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

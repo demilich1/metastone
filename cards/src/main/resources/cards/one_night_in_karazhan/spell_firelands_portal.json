@@ -1,0 +1,29 @@
+{
+	"id": "spell_firelands_portal",
+	"name": "Firelands Portal",
+	"baseManaCost": 7,
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "COMMON",
+	"description": "Deal 5 damage. Summon a random 5-Cost minion.",
+	"targetSelection": "ANY",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "DamageSpell",
+				"value": 5
+			},
+			{
+				"class": "SummonRandomMinionFilteredSpell",
+				"cardFilter": {
+					"class": "CardFilter",
+					"manaCost": 5
+				}
+			}
+		]
+	},
+	"collectible": true,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

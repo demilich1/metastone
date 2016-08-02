@@ -10,6 +10,7 @@ public enum FilterArg {
 	RARITY,
 	MANA_COST,
 	HERO_CLASS,
+	HERO_CLASSES,
 	CARD_ID,
 	INVERT,
 	TARGET

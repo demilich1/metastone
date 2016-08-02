@@ -1,0 +1,34 @@
+{
+	"id": "minion_book_wyrm",
+	"name": "Book Wyrm",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 6,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"race": "DRAGON",
+	"description": "Battlecry: If you're holding a Dragon, destroy an enemy minion with 3 or less Attack.",
+	"battlecry": {
+		"targetSelection": "ENEMY_MINIONS",
+		"spell": {
+			"class": "DestroySpell",
+			"filter": {
+				"class": "AttributeFilter",
+				"attribute": "ATTACK",
+				"operation": "LESS_OR_EQUAL",
+				"value": 3
+			}
+		},
+		"condition": {
+			"class": "HoldsCardCondition",
+			"race": "DRAGON"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

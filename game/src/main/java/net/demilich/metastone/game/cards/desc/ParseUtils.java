@@ -79,6 +79,14 @@ public class ParseUtils {
 			return Enum.valueOf(Rarity.class, entry.getAsString());
 		case HERO_CLASS:
 			return Enum.valueOf(HeroClass.class, entry.getAsString());
+		case HERO_CLASS_ARRAY: {
+			JsonArray jsonArray = entry.getAsJsonArray();
+			HeroClass[] array = new HeroClass[jsonArray.size()];
+			for (int i = 0; i < array.length; i++) {
+				array[i] = Enum.valueOf(HeroClass.class, jsonArray.get(i).getAsString());
+			}
+			return array;
+		}
 		case BOARD_POSITION_RELATIVE:
 			return Enum.valueOf(RelativeToSource.class, entry.getAsString());
 		case CARD_LOCATION:
