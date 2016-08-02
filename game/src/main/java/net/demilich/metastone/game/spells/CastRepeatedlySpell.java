@@ -13,21 +13,27 @@ public class CastRepeatedlySpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		if (target == null) {
-			return;
-		}
+		
 		int iterations = desc.getValue(SpellArg.HOW_MANY, context, player, target, source, 1);
 		SpellDesc spell = (SpellDesc) desc.get(SpellArg.SPELL);
 		Condition condition = (Condition) desc.get(SpellArg.CONDITION);
+		
 		for (int i = 0; i < iterations; i++) {
-			List<Entity> targets = context.resolveTarget(player, null, desc.getTarget());
-			if (targets.isEmpty()) {
-				return;
-			}
-			Entity randomTarget = SpellUtils.getRandomTarget(targets);
-			SpellUtils.castChildSpell(context, player, spell, source, randomTarget);
-			if (condition.isFulfilled(context, player, randomTarget)) {
-				return;
+			if (target == null) {
+				SpellUtils.castChildSpell(context, player, spell, source, null);
+				if (condition != null && condition.isFulfilled(context, player, null)) {
+					return;
+				}
+			} else {
+				List<Entity> targets = context.resolveTarget(player, null, desc.getTarget());
+				if (targets.isEmpty()) {
+					return;
+				}
+				Entity randomTarget = SpellUtils.getRandomTarget(targets);
+				SpellUtils.castChildSpell(context, player, spell, source, randomTarget);
+				if (condition != null && condition.isFulfilled(context, player, randomTarget)) {
+					return;
+				}
 			}
 
 		}
