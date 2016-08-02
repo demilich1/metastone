@@ -89,20 +89,19 @@ public class TestBase {
 	}
 
 	protected static DebugContext createContext(HeroClass hero1, HeroClass hero2) {
-		PlayerConfig player1Config = new PlayerConfig(DeckFactory.getRandomDeck(hero1), new TestBehaviour());
-		player1Config.setName("Player 1");
-		player1Config.setHeroCard(getHeroCardForClass(hero1));
-		Player player1 = new Player(player1Config);
-
-		PlayerConfig player2Config = new PlayerConfig(DeckFactory.getRandomDeck(hero2), new TestBehaviour());
-		player2Config.setName("Player 2");
-		player2Config.setHeroCard(getHeroCardForClass(hero2));
-		Player player2 = new Player(player2Config);
-
 		DeckFormat deckFormat = new DeckFormat();
 		for (CardSet set : CardSet.values()) {
 			deckFormat.addSet(set);
 		}
+		PlayerConfig player1Config = new PlayerConfig(DeckFactory.getRandomDeck(hero1, deckFormat), new TestBehaviour());
+		player1Config.setName("Player 1");
+		player1Config.setHeroCard(getHeroCardForClass(hero1));
+		Player player1 = new Player(player1Config);
+
+		PlayerConfig player2Config = new PlayerConfig(DeckFactory.getRandomDeck(hero2, deckFormat), new TestBehaviour());
+		player2Config.setName("Player 2");
+		player2Config.setHeroCard(getHeroCardForClass(hero2));
+		Player player2 = new Player(player2Config);
 
 		GameLogic logic = new GameLogic();
 		DebugContext context = new DebugContext(player1, player2, logic, deckFormat);
