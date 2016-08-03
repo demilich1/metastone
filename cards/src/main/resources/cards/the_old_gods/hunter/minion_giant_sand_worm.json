@@ -12,6 +12,7 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "DamageCausedTrigger",
+			"sourcePlayer": "ACTIVE",
 			"targetEntityType": "MINION",
 			"hostTargetType": "IGNORE_OTHER_SOURCES",
 			"fireCondition": {
