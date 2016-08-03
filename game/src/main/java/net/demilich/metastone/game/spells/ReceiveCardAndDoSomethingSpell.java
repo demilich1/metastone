@@ -20,7 +20,9 @@ public class ReceiveCardAndDoSomethingSpell extends Spell {
 				return;
 			}
 			SpellDesc cardEffectSpell = (SpellDesc) desc.get(SpellArg.SPELL);
+			context.setEventCard(card);
 			SpellUtils.castChildSpell(context, player, cardEffectSpell, source, card);
+			context.setEventCard(null);
 		}
 	}
 

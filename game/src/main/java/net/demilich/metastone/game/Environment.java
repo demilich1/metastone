@@ -12,5 +12,6 @@ public enum Environment {
 	DAMAGE_STACK,
 	DEBUG,
 	PENDING_CARD,
+	EVENT_CARD,
 	LAST_MANA_COST
 }

@@ -2,6 +2,7 @@ package net.demilich.metastone.game.spells.desc.filter;
 
 public enum FilterArg {
 	CLASS,
+	TARGET_PLAYER,
 	VALUE,
 	RACE,
 	OPERATION,

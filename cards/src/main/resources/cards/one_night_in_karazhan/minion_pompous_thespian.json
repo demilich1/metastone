@@ -1,0 +1,16 @@
+{
+	"id": "minion_pompous_thespian",
+	"name": "Pompous Thespian",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 2,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Taunt",
+	"attributes": {
+		"TAUNT": true
+	},
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

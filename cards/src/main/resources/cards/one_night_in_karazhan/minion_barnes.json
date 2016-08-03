@@ -1,0 +1,27 @@
+{
+	"id": "minion_barnes",
+	"name": "Barnes",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Summon a 1/1 copy of a random minion in your deck.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "SummonOneOneCopySpell",
+			"cardFilter": {
+				"class": "InDeckFilter"
+			},
+			"boardPositionRelative": "RIGHT"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

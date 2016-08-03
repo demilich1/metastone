@@ -250,6 +250,8 @@ public class TargetLogic {
 			return singleTargetAsList(context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.ATTACKER_REFERENCE)));
 		} else if (targetKey == EntityReference.PENDING_CARD) {
 			return singleTargetAsList((Entity) context.getPendingCard());
+		} else if (targetKey == EntityReference.EVENT_CARD) {
+			return singleTargetAsList((Entity) context.getEventCard());
 		} else if (targetKey == EntityReference.FRIENDLY_WEAPON) {
 			if (player.getHero().getWeapon() != null) {
 				return singleTargetAsList(player.getHero().getWeapon());

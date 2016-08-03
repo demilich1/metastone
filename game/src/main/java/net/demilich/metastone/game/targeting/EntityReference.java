@@ -30,6 +30,7 @@ public class EntityReference {
 	public static final EntityReference KILLED_MINION = new EntityReference(-42);
 	public static final EntityReference ATTACKER_REFERENCE = new EntityReference(-43);
 	public static final EntityReference PENDING_CARD = new EntityReference(-44);
+	public static final EntityReference EVENT_CARD = new EntityReference(-45);
 
 	public static EntityReference pointTo(Entity entity) {
 		if (entity == null) {
