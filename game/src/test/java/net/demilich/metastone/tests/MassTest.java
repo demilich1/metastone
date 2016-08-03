@@ -38,21 +38,21 @@ public class MassTest extends TestBase {
 
 	@Test(threadPoolSize = 16, invocationCount = 1000)
 	public void testRandomMassPlay() {
+		DeckFormat deckFormat = new DeckFormat();
+		for (CardSet set : CardSet.values()) {
+			deckFormat.addSet(set);
+		}
 		HeroClass heroClass1 = getRandomClass();
-		PlayerConfig player1Config = new PlayerConfig(DeckFactory.getRandomDeck(heroClass1), new PlayRandomBehaviour());
+		PlayerConfig player1Config = new PlayerConfig(DeckFactory.getRandomDeck(heroClass1, deckFormat), new PlayRandomBehaviour());
 		player1Config.setName("Player 1");
 		player1Config.setHeroCard(getHeroCardForClass(heroClass1));
 		Player player1 = new Player(player1Config);
 
 		HeroClass heroClass2 = getRandomClass();
-		PlayerConfig player2Config = new PlayerConfig(DeckFactory.getRandomDeck(heroClass2), new PlayRandomBehaviour());
+		PlayerConfig player2Config = new PlayerConfig(DeckFactory.getRandomDeck(heroClass2, deckFormat), new PlayRandomBehaviour());
 		player2Config.setName("Player 2");
 		player2Config.setHeroCard(getHeroCardForClass(heroClass2));
 		Player player2 = new Player(player2Config);
-		DeckFormat deckFormat = new DeckFormat();
-		for (CardSet set : CardSet.values()) {
-			deckFormat.addSet(set);
-		}
 		GameContext context = new GameContext(player1, player2, new GameLogic(), deckFormat);
 		try {
 			context.play();
