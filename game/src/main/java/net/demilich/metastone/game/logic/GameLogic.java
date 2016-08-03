@@ -46,6 +46,7 @@ import net.demilich.metastone.game.events.DiscardEvent;
 import net.demilich.metastone.game.events.DrawCardEvent;
 import net.demilich.metastone.game.events.EnrageChangedEvent;
 import net.demilich.metastone.game.events.GameEvent;
+import net.demilich.metastone.game.events.GameStartEvent;
 import net.demilich.metastone.game.events.HealEvent;
 import net.demilich.metastone.game.events.HeroPowerUsedEvent;
 import net.demilich.metastone.game.events.JoustEvent;
@@ -976,6 +977,22 @@ public class GameLogic implements Cloneable {
 		player.getDeck().shuffle();
 
 		mulligan(player, begins);
+
+		for (Card card : player.getDeck()) {
+			if (card.getAttribute(Attribute.DECK_TRIGGER) != null) {
+				TriggerDesc triggerDesc = (TriggerDesc) card.getAttribute(Attribute.DECK_TRIGGER);
+				addGameEventListener(player, triggerDesc.create(), card);
+			}
+		}
+		for (Card card : player.getHand()) {
+			if (card.getAttribute(Attribute.DECK_TRIGGER) != null) {
+				TriggerDesc triggerDesc = (TriggerDesc) card.getAttribute(Attribute.DECK_TRIGGER);
+				addGameEventListener(player, triggerDesc.create(), card);
+			}
+		}
+
+		GameStartEvent gameStartEvent = new GameStartEvent(context, player.getId());
+		context.fireGameEvent(gameStartEvent);
 	}
 
 	public boolean isLoggingEnabled() {

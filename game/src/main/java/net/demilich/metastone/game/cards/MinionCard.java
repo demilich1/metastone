@@ -16,7 +16,7 @@ import net.demilich.metastone.game.spells.desc.BattlecryDesc;
 public class MinionCard extends Card {
 
 	private static final Set<Attribute> ignoredAttributes = new HashSet<Attribute>(
-			Arrays.asList(new Attribute[] { Attribute.PASSIVE_TRIGGER, Attribute.MANA_COST_MODIFIER, Attribute.BASE_ATTACK,
+			Arrays.asList(new Attribute[] { Attribute.PASSIVE_TRIGGER, Attribute.DECK_TRIGGER, Attribute.MANA_COST_MODIFIER, Attribute.BASE_ATTACK,
 					Attribute.BASE_HP, Attribute.SECRET, Attribute.CHOOSE_ONE, Attribute.BATTLECRY, Attribute.COMBO }));
 
 	private final MinionCardDesc desc;

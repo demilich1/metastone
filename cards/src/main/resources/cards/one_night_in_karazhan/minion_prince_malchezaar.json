@@ -8,10 +8,10 @@
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
 	"race": "DEMON",
-	"description": "At the start of your turn, shuffle 5 random Legendary minions into your deck.",
-	"trigger": {
+	"description": "When the game starts, add 5 extra Legendary minions to your deck.",
+	"deckTrigger": {
 		"eventTrigger": {
-			"class": "TurnStartTrigger",
+			"class": "GameStartTrigger",
 			"targetPlayer": "SELF"
 		},
 		"spell": {
