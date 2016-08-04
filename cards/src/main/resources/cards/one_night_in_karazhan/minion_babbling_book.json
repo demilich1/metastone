@@ -1,6 +1,6 @@
 {
-	"id": "minion_raving_grimoire",
-	"name": "Raving Grimoire",
+	"id": "minion_babbling_book",
+	"name": "Babbling Book",
 	"baseManaCost": 1,
 	"type": "MINION",
 	"baseAttack": 1,
