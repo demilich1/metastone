@@ -22,6 +22,11 @@ public class DeckFormat {
 
 	public boolean inSet(Deck deck) {
 		for (Card card : deck.getCards()) {
+			if(card == null) {
+				// TODO may want to print a warning message here, or somewhere else, that a deck probably contains a misspelled card?
+				return false;
+			}
+			
 			if (!sets.contains(card.getCardSet())) {
 				return false;
 			}
