@@ -1,0 +1,17 @@
+{
+	"id": "token_arcane_armor",
+	"name": "Arcane Armor",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 0,
+	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Taunt",
+	"attributes": {
+		"TAUNT": true
+	},
+	"collectible": false,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

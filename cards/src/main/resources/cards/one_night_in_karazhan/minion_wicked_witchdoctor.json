@@ -1,0 +1,27 @@
+{
+	"id": "minion_wicked_witchdoctor",
+	"name": "Wicked Witchdoctor",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 4,
+	"heroClass": "SHAMAN",
+	"rarity": "COMMON",
+	"description": "Whenever you cast a spell, summon a random basic Totem.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "SpellCastedTrigger",
+			"sourcePlayer": "SELF"
+		},
+		"class": "SummonRandomSpell",
+		"cards": [
+			"token_searing_totem",
+			"token_healing_totem",
+			"token_wrath_of_air_totem",
+			"token_stoneclaw_totem"
+		]
+	},
+	"collectible": true,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

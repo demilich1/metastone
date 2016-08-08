@@ -1,0 +1,37 @@
+{
+	"id": "weapon_fools_bane",
+	"name": "Fool's Bane",
+	"baseManaCost": 5,
+	"type": "WEAPON",
+	"damage": 3,
+	"durability": 4,
+	"heroClass": "WARRIOR",
+	"rarity": "COMMON",
+	"description": "Unlimited attacks each turn. Can't attack heroes.",
+	"onEquip": {
+		"class": "AddAttributeSpell",
+		"target": "FRIENDLY_HERO",
+		"attribute": "CANNOT_ATTACK_HEROES"
+	},
+	"onUnequip": {
+		"class": "RemoveAttributeSpell",
+		"target": "FRIENDLY_HERO",
+		"attribute": "CANNOT_ATTACK_HEROES"
+	},
+	"trigger": {
+		"eventTrigger": {
+			"class": "AfterPhysicalAttackTrigger",
+			"sourcePlayer": "SELF",
+			"sourceEntityType": "HERO"
+		},
+		"spell": {
+			"class": "ModifyAttributeSpell",
+			"target": "FRIENDLY_HERO",
+			"attribute": "NUMBER_OF_ATTACKS",
+			"value": 1
+		}
+	},
+	"collectible": true,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

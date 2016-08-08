@@ -1,0 +1,14 @@
+{
+	"id": "weapon_sharp_fork",
+	"name": "Sharp Fork",
+	"baseManaCost": 3,
+	"type": "WEAPON",
+	"damage": 3,
+	"durability": 2,
+	"heroClass": "ROGUE",
+	"rarity": "COMMON",
+	"description": "",
+	"collectible": false,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

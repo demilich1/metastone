@@ -1,0 +1,29 @@
+{
+	"id": "minion_nightbane_templar",
+	"name": "Nightbane Templar",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 3,
+	"heroClass": "PALADIN",
+	"rarity": "COMMON",
+	"description": "Battlecry: If you're holding a Dragon, summon two 1/1 Whelps.",
+	"battlecry": {
+		"targetSelection": "ENEMY_MINIONS",
+		"spell": {
+			"class": "SummonSpell",
+			"value": 2,
+			"card": "token_whelp"
+		},
+		"condition": {
+			"class": "HoldsCardCondition",
+			"race": "DRAGON"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

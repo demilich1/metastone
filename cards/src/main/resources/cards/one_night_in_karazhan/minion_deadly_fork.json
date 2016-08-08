@@ -1,0 +1,21 @@
+{
+	"id": "minion_deadly_fork",
+	"name": "Deadly Fork",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 2,
+	"heroClass": "ROGUE",
+	"rarity": "COMMON",
+	"description": "Deathrattle: Add a 3/2 weapon to your hand.",
+	"deathrattle": {
+		"class": "ReceiveCardSpell",
+		"card": "weapon_sharp_fork"
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}
