@@ -1,5 +1,5 @@
 {
-	"id": "worst_card_in_the_game",
+	"id": "spell_purify",
 	"name": "Purify",
 	"baseManaCost": 2,
 	"type": "SPELL",

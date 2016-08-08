@@ -22,7 +22,7 @@
 		"spell": {
 			"class": "ModifyAttributeSpell",
 			"target": "SELF",
-			"attribute": "NUMBER_OF_ATTACKS",
+			"attribute": "EXTRA_ATTACKS",
 			"value": 1
 		}
 	},

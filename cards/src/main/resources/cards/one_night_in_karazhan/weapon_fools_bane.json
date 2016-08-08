@@ -9,27 +9,34 @@
 	"rarity": "COMMON",
 	"description": "Unlimited attacks each turn. Can't attack heroes.",
 	"onEquip": {
-		"class": "AddAttributeSpell",
-		"target": "FRIENDLY_HERO",
-		"attribute": "CANNOT_ATTACK_HEROES"
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "AddAttributeSpell",
+				"target": "FRIENDLY_HERO",
+				"attribute": "CANNOT_ATTACK_HEROES"
+			},
+			{
+				"class": "AddAttributeSpell",
+				"target": "FRIENDLY_HERO",
+				"attribute": "UNLIMITED_ATTACKS"
+			}
+		]
 	},
 	"onUnequip": {
-		"class": "RemoveAttributeSpell",
-		"target": "FRIENDLY_HERO",
-		"attribute": "CANNOT_ATTACK_HEROES"
-	},
-	"trigger": {
-		"eventTrigger": {
-			"class": "AfterPhysicalAttackTrigger",
-			"sourcePlayer": "SELF",
-			"sourceEntityType": "HERO"
-		},
-		"spell": {
-			"class": "ModifyAttributeSpell",
-			"target": "FRIENDLY_HERO",
-			"attribute": "NUMBER_OF_ATTACKS",
-			"value": 1
-		}
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "RemoveAttributeSpell",
+				"target": "FRIENDLY_HERO",
+				"attribute": "CANNOT_ATTACK_HEROES"
+			},
+			{
+				"class": "RemoveAttributeSpell",
+				"target": "FRIENDLY_HERO",
+				"attribute": "UNLIMITED_ATTACKS"
+			}
+		]
 	},
 	"collectible": true,
 	"set": "ONE_NIGHT_IN_KARAZHAN",
