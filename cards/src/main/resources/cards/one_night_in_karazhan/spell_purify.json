@@ -1,0 +1,24 @@
+{
+	"id": "worst_card_in_the_game",
+	"name": "Purify",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "COMMON",
+	"description": "Silence a friendly minion. Draw a card.",
+	"targetSelection": "FRIENDLY_MINIONS",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "SilenceSpell"
+			},
+			{
+				"class": "DrawCardSpell"
+			}
+		]
+	},
+	"collectible": true,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,30 @@
+{
+	"id": "spell_maelstrom_portal",
+	"name": "Maelstrom Portal",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "SHAMAN",
+	"rarity": "RARE",
+	"description": "Deal 1 damage to all enemy minions. Summon a random 1-Cost minion.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "DamageSpell",
+				"target": "ENEMY_MINIONS",
+				"value": 1
+			},
+			{
+				"class": "SummonRandomMinionFilteredSpell",
+				"cardFilter": {
+					"class": "CardFilter",
+					"manaCost": 1
+				}
+			}
+		]
+	},
+	"collectible": true,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

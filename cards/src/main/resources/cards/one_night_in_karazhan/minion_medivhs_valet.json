@@ -1,0 +1,27 @@
+{
+	"id": "minion_medivhs_valet",
+	"name": "Medivh's Valet",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 3,
+	"heroClass": "MAGE",
+	"rarity": "COMMON",
+	"description": "Battlecry: If you control a Secret, deal 3 damage.",
+	"battlecry": {
+		"targetSelection": "ANY",
+		"spell": {
+			"class": "DamageSpell",
+			"value": 3
+		},
+		"condition": {
+			"class": "ControlsSecretCondition"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

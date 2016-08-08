@@ -1,0 +1,38 @@
+{
+	"id": "weapon_spirit_claws",
+	"name": "Spirit Claws",
+	"baseManaCost": 3,
+	"type": "WEAPON",
+	"damage": 1,
+	"durability": 3,
+	"heroClass": "SHAMAN",
+	"rarity": "COMMON",
+	"description": "Has +2 Attack while you have Spell Damage.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "BoardChangedTrigger"
+		},
+		"spell": {
+			"class": "ConditionalAttackBonusSpell",
+			"target": "SELF",
+			"value": {
+				"class": "ConditionalValueProvider",
+				"ifTrue": 2,
+				"ifFalse": 0,
+				"condition": {
+					"class": "ComparisonCondition",
+					"value1": {
+						"class": "AttributeCounter",
+						"target": "FRIENDLY_CHARACTERS",
+						"attribute": "SPELL_DAMAGE"
+					},
+					"value2": 1,
+					"operation": "GREATER_OR_EQUAL"
+				}
+			}
+		}
+	},
+	"collectible": true,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}
