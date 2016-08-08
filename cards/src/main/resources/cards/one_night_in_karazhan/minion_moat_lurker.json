@@ -11,16 +11,11 @@
 	"battlecry": {
 		"targetSelection": "MINIONS",
 		"spell": {
-			"class": "MetaSpell",
-			"spells": [
-				{
-					"class": "DestroySpell"
-				},
-				{
-					"class": "ResummonSpell"
-				}
-			]
+			"class": "custom.MoatLurkerSpell"
 		}
+	},
+	"deathrattle": {
+		"class": "NullSpell"
 	},
 	"attributes": {
 		"BATTLECRY": true,
