@@ -9,7 +9,6 @@
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "BuffSpell",
-		"target": "SELF",
 		"value": {
 			"class": "EntityCounter",
 			"target": "FRIENDLY_MINIONS",
