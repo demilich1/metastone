@@ -116,7 +116,7 @@ public class DeckProxy extends Proxy<GameNotification> {
 		logger.debug("Trying to delete deck '{}' contained in file '{}'...", deck.getName(), deck.getFilename());
 		Path path = Paths.get(DECKS_FOLDER_PATH + File.separator + deck.getFilename());
 		try {
-		    Files.delete(path);
+			Files.delete(path);
 		} catch (NoSuchFileException x) {
 			logger.error("Could not delete deck '{}' as the filename '{}' does not exist", deck.getName(), path);
 			return;
@@ -125,7 +125,7 @@ public class DeckProxy extends Proxy<GameNotification> {
 			logger.error("Could not delete file '{}'", path);
 			return;
 		}
-		
+
 		logger.info("Deck '{}' contained in file '{}' has been successfully deleted", deck.getName(), path.getFileName().toString());
 		getFacade().sendNotification(GameNotification.DECKS_LOADED, decks);
 	}
@@ -134,15 +134,14 @@ public class DeckProxy extends Proxy<GameNotification> {
 		decks.clear();
 
 		// load decks from ~/metastone/decks on the filesystem
-		loadStandardDecks(ResourceLoader.loadJsonInputStreams(DECKS_FOLDER_PATH, true),
-				new GsonBuilder().setPrettyPrinting().create());
+		loadStandardDecks(ResourceLoader.loadJsonInputStreams(DECKS_FOLDER_PATH, true), new GsonBuilder().setPrettyPrinting().create());
 
-		loadMetaDecks(ResourceLoader.loadJsonInputStreams(DECKS_FOLDER_PATH, true),
-				new GsonBuilder().setPrettyPrinting().create());
+		loadMetaDecks(ResourceLoader.loadJsonInputStreams(DECKS_FOLDER_PATH, true), new GsonBuilder().setPrettyPrinting().create());
 	}
 
 	private void copyDecksFromResources() throws IOException, URISyntaxException {
-		// if we have not copied decks to the USER_HOME_METASTONE decks folder, then do so now
+		// if we have not copied decks to the USER_HOME_METASTONE decks folder,
+		// then do so now
 		if (!MetastoneProperties.getBoolean(DECKS_COPIED_PROPERTY)) {
 			ResourceLoader.copyFromResources(DECKS_FOLDER, DECKS_FOLDER_PATH);
 
@@ -154,7 +153,8 @@ public class DeckProxy extends Proxy<GameNotification> {
 	private void loadMetaDecks(Collection<ResourceInputStream> inputStreams, Gson gson) throws IOException {
 		for (ResourceInputStream resourceInputStream : inputStreams) {
 			Reader reader = new InputStreamReader(resourceInputStream.inputStream);
-			HashMap<String, Object> map = gson.fromJson(reader, new TypeToken<HashMap<String, Object>>() {}.getType());
+			HashMap<String, Object> map = gson.fromJson(reader, new TypeToken<HashMap<String, Object>>() {
+			}.getType());
 			if (!map.containsKey("heroClass")) {
 				logger.error("Deck {} does not specify a value for 'heroClass' and is therefor not valid", resourceInputStream.fileName);
 				continue;
@@ -176,7 +176,8 @@ public class DeckProxy extends Proxy<GameNotification> {
 		for (ResourceInputStream resourceInputStream : inputStreams) {
 
 			Reader reader = new InputStreamReader(resourceInputStream.inputStream);
-			HashMap<String, Object> map = gson.fromJson(reader, new TypeToken<HashMap<String, Object>>() {}.getType());
+			HashMap<String, Object> map = gson.fromJson(reader, new TypeToken<HashMap<String, Object>>() {
+			}.getType());
 			if (!map.containsKey("heroClass")) {
 				logger.error("Deck {} does not speficy a value for 'heroClass' and is therefor not valid", resourceInputStream.fileName);
 				continue;
@@ -189,7 +190,7 @@ public class DeckProxy extends Proxy<GameNotification> {
 			if (map.containsKey("decks")) {
 				continue;
 			} else {
-				deck = parseStandardDeck(heroClass, map);
+				deck = parseStandardDeck(deckName, heroClass, map);
 			}
 			deck.setName(deckName);
 			deck.setFilename(resourceInputStream.fileName);
@@ -221,7 +222,7 @@ public class DeckProxy extends Proxy<GameNotification> {
 		return new MetaDeck(decksInMetaDeck);
 	}
 
-	private Deck parseStandardDeck(HeroClass heroClass, Map<String, Object> map) {
+	private Deck parseStandardDeck(String deckName, HeroClass heroClass, Map<String, Object> map) {
 		boolean arbitrary = false;
 		if (map.containsKey("arbitrary")) {
 			arbitrary = (boolean) map.get("arbitrary");
@@ -231,6 +232,10 @@ public class DeckProxy extends Proxy<GameNotification> {
 		List<String> cardIds = (List<String>) map.get("cards");
 		for (String cardId : cardIds) {
 			Card card = CardCatalogue.getCardById(cardId);
+			if (card == null) {
+				logger.error("Deck {} contains invalid cardId '{}'", deckName, cardId);
+				continue;
+			}
 			deck.getCards().add(card);
 		}
 		return deck;
@@ -285,7 +290,7 @@ public class DeckProxy extends Proxy<GameNotification> {
 	public void setActiveDeck(Deck activeDeck) {
 		this.activeDeck = activeDeck;
 	}
-	
+
 	public void setActiveDeckValidator(IDeckValidator deckValidator) {
 		this.activeDeckValidator = deckValidator;
 	}

@@ -15,18 +15,13 @@ public class DeckFormat {
 	public DeckFormat() {
 		sets = new ArrayList<CardSet>();
 	}
-	
+
 	public void addSet(CardSet cardSet) {
 		sets.add(cardSet);
 	}
 
 	public boolean inSet(Deck deck) {
 		for (Card card : deck.getCards()) {
-			if(card == null) {
-				// TODO may want to print a warning message here, or somewhere else, that a deck probably contains a misspelled card?
-				return false;
-			}
-			
 			if (!sets.contains(card.getCardSet())) {
 				return false;
 			}
