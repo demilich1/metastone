@@ -13,13 +13,15 @@
 			"class": "SpellCastedTrigger",
 			"sourcePlayer": "SELF"
 		},
-		"class": "SummonRandomSpell",
-		"cards": [
-			"token_searing_totem",
-			"token_healing_totem",
-			"token_wrath_of_air_totem",
-			"token_stoneclaw_totem"
-		]
+		"spell": {
+			"class": "SummonRandomSpell",
+			"cards": [
+				"token_searing_totem",
+				"token_healing_totem",
+				"token_wrath_of_air_totem",
+				"token_stoneclaw_totem"
+			]
+		}
 	},
 	"collectible": true,
 	"set": "ONE_NIGHT_IN_KARAZHAN",

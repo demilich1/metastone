@@ -6,7 +6,7 @@
 	"heroClass": "WARLOCK",
 	"rarity": "COMMON",
 	"description": "Summon a 1/1 Candle, 2/2 Broom, and 3/3 Teapot.",
-	"targetSelection": "ANY",
+	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
 		"spells": [

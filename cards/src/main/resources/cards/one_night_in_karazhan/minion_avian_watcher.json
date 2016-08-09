@@ -15,11 +15,13 @@
 			"spells": [
 				{
 					"class": "BuffSpell",
-					"attackBonus": 2,
-					"hpBonus": 2
+					"target": "SELF",
+					"attackBonus": 1,
+					"hpBonus": 1
 				},
 				{
 					"class": "AddAttributeSpell",
+					"target": "SELF",
 					"attribute": "TAUNT"
 				}
 			]

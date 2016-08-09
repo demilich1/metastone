@@ -9,6 +9,7 @@
 	"rarity": "RARE",
 	"description": "Battlecry: Summon a friendly minion that died this game.",
 	"battlecry": {
+		"targetSelection": "NONE",
 		"spell": {
 			"class": "ResurrectSpell"
 		}

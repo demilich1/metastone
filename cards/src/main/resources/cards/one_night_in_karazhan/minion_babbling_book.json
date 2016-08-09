@@ -9,6 +9,7 @@
 	"rarity": "RARE",
 	"description": "Battlecry: Add a random Mage spell to your hand.",
 	"battlecry": {
+		"targetSelection": "NONE",
 		"spell": {
 			"class": "ReceiveRandomCollectibleCardSpell",
 			"cardFilter": {

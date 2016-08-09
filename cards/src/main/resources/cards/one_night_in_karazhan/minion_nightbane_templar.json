@@ -9,7 +9,7 @@
 	"rarity": "COMMON",
 	"description": "Battlecry: If you're holding a Dragon, summon two 1/1 Whelps.",
 	"battlecry": {
-		"targetSelection": "ENEMY_MINIONS",
+		"targetSelection": "NONE",
 		"spell": {
 			"class": "SummonSpell",
 			"value": 2,
