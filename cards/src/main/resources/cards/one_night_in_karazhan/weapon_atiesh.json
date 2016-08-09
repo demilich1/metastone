@@ -1,0 +1,40 @@
+{
+	"id": "weapon_atiesh",
+	"name": "Atiesh",
+	"baseManaCost": 3,
+	"type": "WEAPON",
+	"damage": 1,
+	"durability": 3,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "After you cast a spell, summon a random minion of the same Cost. Lose 1 Durability.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "AfterSpellCastedTrigger",
+			"sourcePlayer": "SELF"
+		},
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "SummonRandomMinionFilteredSpell",
+					"cardFilter": {
+						"class": "CardFilter",
+						"manaCost": {
+							"class": "PlayerAttributeValueProvider",
+							"playerAttribute": "LAST_MANA_COST"
+						}
+					}
+				},
+				{
+					"class": "BuffWeaponSpell",
+					"target": "FRIENDLY_WEAPON",
+					"hpBonus": -1
+				}
+			]
+		}
+	},
+	"collectible": false,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}
