@@ -1,7 +1,7 @@
 {
-	"id": "token_arcane_armor",
-	"name": "Arcane Armor",
-	"baseManaCost": 3,
+	"id": "token_animated_shield",
+	"name": "Animated Shield",
+	"baseManaCost": 2,
 	"type": "MINION",
 	"baseAttack": 0,
 	"baseHp": 5,
