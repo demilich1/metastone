@@ -11,6 +11,8 @@ public class GameTagUtils {
 	public static TagValueType getTagValueType(Attribute tag) {
 		switch (tag) {
 		case ARMOR:
+		case ATTACK:
+		case ATTACK_BONUS:
 		case TEMPORARY_ATTACK_BONUS:
 		case AURA_ATTACK_BONUS:
 		case AURA_HP_BONUS:
@@ -18,6 +20,7 @@ public class GameTagUtils {
 		case HP_BONUS:
 		case COMBO:
 		case DIED_ON_TURN:
+		case EXTRA_ATTACKS:
 		case FATIGUE:
 		case MAX_HP:
 		case NUMBER_OF_ATTACKS:
@@ -26,8 +29,6 @@ public class GameTagUtils {
 		case SPELL_AMPLIFY_MULTIPLIER:
 		case HEAL_AMPLIFY_MULTIPLIER:
 		case SPELL_DAMAGE:
-		case ATTACK:
-		case ATTACK_BONUS:
 			return TagValueType.INTEGER;
 		case ATTACK_EQUALS_HP:
 		case CANNOT_ATTACK:
@@ -48,6 +49,7 @@ public class GameTagUtils {
 		case STEALTH:
 		case SUMMONING_SICKNESS:
 		case TAUNT:
+		case UNLIMITED_ATTACKS:
 		case UNTARGETABLE_BY_SPELLS:
 		case AURA_UNTARGETABLE_BY_SPELLS:
 		case WINDFURY:

@@ -9,6 +9,7 @@
 	"rarity": "LEGENDARY",
 	"description": "Taunt. Battlecry: Draw a Beast, Dragon, and Murloc from your deck.",
 	"battlecry": {
+		"targetSelection": "NONE",
 		"spell": {
 			"class": "MetaSpell",
 			"spells": [

@@ -1,0 +1,18 @@
+{
+	"id": "minion_arcane_giant",
+	"name": "Arcane Giant",
+	"baseManaCost": 12,
+	"type": "MINION",
+	"baseAttack": 8,
+	"baseHp": 8,
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"description": "Costs (1) less for each spell you've cast this game.",
+	"manaCostModifier": {
+		"class": "PlayerAttributeValueProvider",
+		"playerAttribute": "SPELLS_CAST"
+	},
+	"collectible": true,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}
