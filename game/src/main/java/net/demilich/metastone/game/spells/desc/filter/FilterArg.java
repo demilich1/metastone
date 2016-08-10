@@ -13,6 +13,7 @@ public enum FilterArg {
 	HERO_CLASS,
 	HERO_CLASSES,
 	CARD_ID,
+	FILTERS,
 	INVERT,
 	TARGET
 }
