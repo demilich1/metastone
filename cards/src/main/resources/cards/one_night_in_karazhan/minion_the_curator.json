@@ -7,6 +7,7 @@
 	"baseHp": 6,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
+	"race": "MECH",
 	"description": "Taunt. Battlecry: Draw a Beast, Dragon, and Murloc from your deck.",
 	"battlecry": {
 		"targetSelection": "NONE",
