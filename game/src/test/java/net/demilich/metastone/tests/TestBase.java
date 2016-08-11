@@ -17,6 +17,7 @@ import net.demilich.metastone.game.actions.PhysicalAttackAction;
 import net.demilich.metastone.game.behaviour.Behaviour;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
+import net.demilich.metastone.game.cards.CardParseException;
 import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.cards.HeroCard;
 import net.demilich.metastone.game.cards.MinionCard;
@@ -79,6 +80,8 @@ public class TestBase {
 			e.printStackTrace();
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
+		} catch (CardParseException e) {
+			System.err.println(e.getMessage());
 		}
 	}
 

@@ -16,6 +16,8 @@ public class ApplicationStartupCommand extends SimpleCommand<GameNotification> {
 
 	@Override
 	public void execute(INotification<GameNotification> notification) {
+		getFacade().registerMediator(new DialogMediator());
+		
 		getFacade().registerProxy(new CardProxy());
 		getFacade().registerProxy(new DeckProxy());
 		getFacade().registerProxy(new DeckFormatProxy());
@@ -24,7 +26,6 @@ public class ApplicationStartupCommand extends SimpleCommand<GameNotification> {
 		getFacade().registerProxy(new AnimationProxy());
 
 		getFacade().registerMediator(new ApplicationMediator());
-		getFacade().registerMediator(new DialogMediator());
 		getFacade().registerMediator(new AutoUpdateMediator());
 	}
 

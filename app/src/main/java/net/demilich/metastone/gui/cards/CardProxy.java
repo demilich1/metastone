@@ -2,6 +2,7 @@ package net.demilich.metastone.gui.cards;
 
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.cards.CardCatalogue;
+import net.demilich.metastone.game.cards.CardParseException;
 import net.demilich.nittygrittymvc.Proxy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +30,8 @@ public class CardProxy extends Proxy<GameNotification> {
 		} catch (IOException e) {
 			logger.error("Trouble creating " +  Paths.get(CardCatalogue.CARDS_FOLDER_PATH));
 			e.printStackTrace();
+		} catch (CardParseException cpe) {
+			getFacade().sendNotification(GameNotification.CARD_PARSE_ERROR, cpe.getMessage());
 		}
 	}
 }

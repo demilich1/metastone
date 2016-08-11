@@ -3,6 +3,7 @@ package net.demilich.metastone.game.cards;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -133,21 +134,22 @@ public class CardCatalogue {
 		return result;
 	}
 	
-	public static void loadLocalCards() throws IOException, URISyntaxException {
+	public static void loadLocalCards() throws IOException, URISyntaxException, CardParseException {
 		// load cards from ~/metastone/cards on the file system
 		Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(CARDS_FOLDER, false);
 		loadCards(inputStreams);
 	}
 	
-	public static void loadCards() throws IOException, URISyntaxException {
+	public static void loadCards() throws IOException, URISyntaxException, CardParseException {
 		// load cards from ~/metastone/cards on the file system
 		Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(CARDS_FOLDER_PATH, true);
 		loadCards(inputStreams);
 	}
 
 	
-	private static void loadCards(Collection<ResourceInputStream> inputStreams) throws IOException, URISyntaxException {
+	private static void loadCards(Collection<ResourceInputStream> inputStreams) throws IOException, URISyntaxException, CardParseException {
 		Map<String, CardDesc> cardDesc = new HashMap<String, CardDesc>();
+		ArrayList<String> badCards = new ArrayList<>();
 		CardParser cardParser = new CardParser();
 		for (ResourceInputStream resourceInputStream : inputStreams) {
 			try {
@@ -157,8 +159,8 @@ public class CardCatalogue {
 				}
 				cardDesc.put(desc.id, desc);
 			} catch (Exception e) {
-				logger.error("Trouble reading " + resourceInputStream.fileName);
-				throw e;
+				logger.error("Error parsing card '{}'", resourceInputStream.fileName);
+				badCards.add(resourceInputStream.fileName);
 			}
 		}
 
@@ -166,6 +168,10 @@ public class CardCatalogue {
 			Card instance = desc.createInstance();
 			CardCatalogue.add(instance);
 			logger.debug("Adding {} to CardCatalogue", instance);
+		}
+		
+		if (!badCards.isEmpty()) {
+			throw new CardParseException(badCards);
 		}
 	}
 

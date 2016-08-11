@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import net.demilich.nittygrittymvc.Mediator;
 import net.demilich.nittygrittymvc.interfaces.INotification;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
 import javafx.stage.Window;
 import net.demilich.metastone.GameNotification;
@@ -38,6 +40,9 @@ public class DialogMediator extends Mediator<GameNotification> {
 		case SHOW_MODAL_DIALOG:
 			showModalDialog((Node) notification.getBody());
 			break;
+		case CARD_PARSE_ERROR:
+			displayErrorMessage("Something is wrong with your card files", (String) notification.getBody());
+			break;
 		default:
 			logger.warn("Unhandled notification {} in {}", notification, getClass().getSimpleName());
 			break;
@@ -50,7 +55,16 @@ public class DialogMediator extends Mediator<GameNotification> {
 		notificationInterests.add(GameNotification.CANVAS_CREATED);
 		notificationInterests.add(GameNotification.SHOW_MODAL_DIALOG);
 		notificationInterests.add(GameNotification.SHOW_USER_DIALOG);
+		notificationInterests.add(GameNotification.CARD_PARSE_ERROR);
 		return notificationInterests;
+	}
+	
+	private void displayErrorMessage(String header, String message) {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Error");
+		alert.setHeaderText(header);
+		alert.setContentText(message);
+		alert.showAndWait();
 	}
 
 	private void showModalDialog(Node content) {
