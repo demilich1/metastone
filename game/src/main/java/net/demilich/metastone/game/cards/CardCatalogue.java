@@ -181,7 +181,7 @@ public class CardCatalogue {
 		String cardsCopiedWithVersion = MetastoneProperties.getProperty(CARDS_COPIED_PROPERTY);
 		boolean updateRequired;
 		try {
-			updateRequired = VersionInfo.updateRequired(BuildConfig.VERSION, cardsCopiedWithVersion);
+			updateRequired = VersionInfo.updateRequired(cardsCopiedWithVersion, BuildConfig.VERSION);
 		} catch(Exception e) {
 			// an exception will be thrown when stored 'cardsCopiedWithVersion' is null or invalid input,
 			// this is okay, just do an update in that case
