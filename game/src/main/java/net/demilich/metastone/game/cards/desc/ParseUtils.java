@@ -17,6 +17,7 @@ import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.condition.Condition;
 import net.demilich.metastone.game.spells.desc.condition.ConditionDesc;
+import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.spells.desc.filter.FilterDesc;
 import net.demilich.metastone.game.spells.desc.filter.Operation;
 import net.demilich.metastone.game.spells.desc.manamodifier.CardCostModifierDesc;
@@ -79,6 +80,14 @@ public class ParseUtils {
 			return Enum.valueOf(Rarity.class, entry.getAsString());
 		case HERO_CLASS:
 			return Enum.valueOf(HeroClass.class, entry.getAsString());
+		case HERO_CLASS_ARRAY: {
+			JsonArray jsonArray = entry.getAsJsonArray();
+			HeroClass[] array = new HeroClass[jsonArray.size()];
+			for (int i = 0; i < array.length; i++) {
+				array[i] = Enum.valueOf(HeroClass.class, jsonArray.get(i).getAsString());
+			}
+			return array;
+		}
 		case BOARD_POSITION_RELATIVE:
 			return Enum.valueOf(RelativeToSource.class, entry.getAsString());
 		case CARD_LOCATION:
@@ -104,9 +113,19 @@ public class ParseUtils {
 		case VALUE_PROVIDER:
 			ValueProviderDesc valueProviderDesc = valueProviderParser.deserialize(entry, ValueProviderDesc.class, null);
 			return valueProviderDesc.create();
-		case ENTITY_FILTER:
+		case ENTITY_FILTER: {
 			FilterDesc filterDesc = filterParser.deserialize(entry, FilterDesc.class, null);
 			return filterDesc.create();
+		}
+		case ENTITY_FILTER_ARRAY: {
+			JsonArray jsonArray = entry.getAsJsonArray();
+			EntityFilter[] array = new EntityFilter[jsonArray.size()];
+			for (int i = 0; i < array.length; i++) {
+				FilterDesc filterDesc = filterParser.deserialize(jsonArray.get(i), FilterDesc.class, null);
+				array[i] = filterDesc.create();
+			}
+			return array;
+		}
 		case CONDITION: {
 			ConditionDesc conditionDesc = conditionParser.deserialize(entry, ConditionDesc.class, null);
 			return conditionDesc.create();
@@ -178,6 +197,10 @@ public class ParseUtils {
 			return EntityReference.TARGET;
 		case "spell_target":
 			return EntityReference.SPELL_TARGET;
+		case "pending_card":
+			return EntityReference.PENDING_CARD;
+		case "event_card":
+			return EntityReference.EVENT_CARD;
 		case "self":
 			return EntityReference.SELF;
 		case "attacker":

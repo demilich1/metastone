@@ -146,6 +146,16 @@ public class AdvancedMechanicTests extends BasicTests {
 		context.getLogic().performGameAction(priest.getId(), healAction);
 		Assert.assertEquals(defender.getAttack(), BASE_ATTACK);
 		Assert.assertEquals(defender.hasAttribute(Attribute.ENRAGED), false);
+		
+		// attack once more - should enrage again
+		context.getLogic().performGameAction(mage.getId(), attackAction);
+		Assert.assertEquals(defender.getAttack(), BASE_ATTACK + ENRAGE_ATTACK_BONUS);
+		Assert.assertEquals(defender.hasAttribute(Attribute.ENRAGED), true);
+		
+		// attack should be set to 1
+		playCardWithTarget(context, mage, CardCatalogue.getCardById("spell_humility"), defender);
+		Assert.assertEquals(defender.getAttack(), 1);
+		Assert.assertEquals(defender.hasAttribute(Attribute.ENRAGED), true);
 	}
 
 	@Test

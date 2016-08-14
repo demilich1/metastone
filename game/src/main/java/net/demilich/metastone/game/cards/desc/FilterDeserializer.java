@@ -32,15 +32,18 @@ public class FilterDeserializer implements JsonDeserializer<FilterDesc> {
 		Map<FilterArg, Object> arguments = FilterDesc.build(filterClass);
 
 		parseArgument(FilterArg.VALUE, jsonData, arguments, ParseValueType.INTEGER);
+		parseArgument(FilterArg.TARGET_PLAYER, jsonData, arguments, ParseValueType.TARGET_PLAYER);
 		parseArgument(FilterArg.ATTRIBUTE, jsonData, arguments, ParseValueType.ATTRIBUTE);
 		parseArgument(FilterArg.RACE, jsonData, arguments, ParseValueType.RACE);
 		parseArgument(FilterArg.OPERATION, jsonData, arguments, ParseValueType.OPERATION);
 		parseArgument(FilterArg.INVERT, jsonData, arguments, ParseValueType.BOOLEAN);
 		parseArgument(FilterArg.CARD_TYPE, jsonData, arguments, ParseValueType.CARD_TYPE);
 		parseArgument(FilterArg.HERO_CLASS, jsonData, arguments, ParseValueType.HERO_CLASS);
+		parseArgument(FilterArg.HERO_CLASSES, jsonData, arguments, ParseValueType.HERO_CLASS_ARRAY);
 		parseArgument(FilterArg.RARITY, jsonData, arguments, ParseValueType.RARITY);
 		parseArgument(FilterArg.MANA_COST, jsonData, arguments, ParseValueType.VALUE);
 		parseArgument(FilterArg.CARD_ID, jsonData, arguments, ParseValueType.STRING);
+		parseArgument(FilterArg.FILTERS, jsonData, arguments, ParseValueType.ENTITY_FILTER_ARRAY);
 		parseArgument(FilterArg.TARGET, jsonData, arguments, ParseValueType.TARGET_REFERENCE);
 
 		return new FilterDesc(arguments);

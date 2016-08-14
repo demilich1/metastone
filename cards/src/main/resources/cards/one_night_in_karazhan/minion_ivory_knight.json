@@ -1,0 +1,41 @@
+{
+	"id": "minion_ivory_knight",
+	"name": "Ivory Knight",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 4,
+	"heroClass": "PALADIN",
+	"rarity": "RARE",
+	"description": "Battlecry: Discover a spell. Restore health equal to its Cost.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "DiscoverRandomCardSpell",
+			"spell": {
+				"class": "ReceiveCardAndDoSomethingSpell",
+				"targetPlayer": "SELF",
+				"spell": {
+					"class": "HealSpell",
+					"targetPlayer": "SELF",
+					"target": "FRIENDLY_HERO",
+					"value": {
+						"class": "AttributeValueProvider",
+						"target": "EVENT_CARD",
+						"attribute": "BASE_MANA_COST"
+					}
+				}
+			},
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "SPELL"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

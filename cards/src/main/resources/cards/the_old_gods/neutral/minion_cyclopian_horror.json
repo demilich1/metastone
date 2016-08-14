@@ -13,9 +13,8 @@
 			"class": "BuffSpell",
 			"target": "SELF",
 			"hpBonus": {
-				"class": "AttributeCounter",
-				"target": "ENEMY_MINIONS",
-				"attribute": "DEATHRATTLES"
+				"class": "EntityCounter",
+				"target": "ENEMY_MINIONS"
 			}
 		}
 	},

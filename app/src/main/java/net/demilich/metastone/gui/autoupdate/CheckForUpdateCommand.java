@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 
 import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.utils.VersionInfo;
 import net.demilich.nittygrittymvc.SimpleCommand;
 import net.demilich.nittygrittymvc.interfaces.INotification;
 

@@ -1,6 +1,6 @@
 {
-	"id": "minion_giant_sandworm",
-	"name": "Giant Sandworm",
+	"id": "minion_giant_sand_worm",
+	"name": "Giant Sand Worm",
 	"baseManaCost": 8,
 	"type": "MINION",
 	"baseAttack": 8,
@@ -12,6 +12,7 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "DamageCausedTrigger",
+			"sourcePlayer": "ACTIVE",
 			"targetEntityType": "MINION",
 			"hostTargetType": "IGNORE_OTHER_SOURCES",
 			"fireCondition": {
@@ -21,7 +22,7 @@
 		"spell": {
 			"class": "ModifyAttributeSpell",
 			"target": "SELF",
-			"attribute": "NUMBER_OF_ATTACKS",
+			"attribute": "EXTRA_ATTACKS",
 			"value": 1
 		}
 	},

@@ -6,6 +6,8 @@ public enum GameNotification {
 	SHOW_VIEW,
 	CHECK_FOR_UPDATE,
 	NEW_VERSION_AVAILABLE,
+	
+	CARD_PARSE_ERROR,
 
 	START_GAME,
 	PLAY_GAME,

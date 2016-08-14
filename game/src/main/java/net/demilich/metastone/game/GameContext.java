@@ -228,6 +228,10 @@ public class GameContext implements Cloneable, IDisposable {
 	public HashMap<Environment, Object> getEnvironment() {
 		return environment;
 	}
+	
+	public Card getEventCard() {
+		return (Card) resolveSingleTarget((EntityReference) getEnvironment().get(Environment.EVENT_CARD));
+	}
 
 	@SuppressWarnings("unchecked")
 	public Stack<EntityReference> getEventTargetStack() {
@@ -413,6 +417,14 @@ public class GameContext implements Cloneable, IDisposable {
 
 	public List<Entity> resolveTarget(Player player, Entity source, EntityReference targetKey) {
 		return targetLogic.resolveTargetKey(this, player, source, targetKey);
+	}
+	
+	public void setEventCard(Card eventCard) {
+		if (eventCard != null) {
+			getEnvironment().put(Environment.EVENT_CARD, eventCard.getReference());
+		} else {
+			getEnvironment().put(Environment.EVENT_CARD, null);
+		}
 	}
 
 	public void setIgnoreEvents(boolean ignoreEvents) {

@@ -1,8 +1,11 @@
 package net.demilich.metastone.tests;
 
-import net.demilich.metastone.BuildConfig;
-import net.demilich.metastone.game.cards.CardParser;
-import net.demilich.metastone.utils.ResourceInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
+import java.util.List;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.DirectoryFileFilter;
 import org.apache.commons.io.filefilter.RegexFileFilter;
@@ -10,11 +13,9 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
-import java.util.List;
+import net.demilich.metastone.game.cards.CardParser;
+import net.demilich.metastone.utils.ResourceInputStream;
+import net.demilich.metastone.utils.UserHomeMetastone;
 
 /**
  * This test will iterate through all the cards in the cards resources dir
@@ -28,16 +29,17 @@ public class ValidateCards {
     private static final List<File> ALL_CARD_FILES;
 
     static {
+
         // recursively crawl the cards dir and pull out all the files
         ALL_CARD_FILES = (List<File>)FileUtils.listFiles(
                 new File(CARDS_DIR),
                 new RegexFileFilter("^(.*json)"),
                 DirectoryFileFilter.DIRECTORY);
         // also pull in the user's custom cards dir
-        if (new File(BuildConfig.USER_HOME_METASTONE + File.separator + "cards").exists()) {
+        if (new File(UserHomeMetastone.getPath() + File.separator + "cards").exists()) {
             ALL_CARD_FILES.addAll(
                     FileUtils.listFiles(
-                        new File(BuildConfig.USER_HOME_METASTONE + File.separator + "cards"),
+                        new File(UserHomeMetastone.getPath() + File.separator + "cards"),
                         new RegexFileFilter("^(.*json)"),
                         DirectoryFileFilter.DIRECTORY)
             );

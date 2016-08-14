@@ -46,23 +46,14 @@
 					"value2": 10
 				},
 				{
-					"class": "AndCondition",
-					"conditions": [
-						{
-							"class": "DeckContainsCondition",
-							"cardId": "minion_cthun"
-						},
-						{
-							"class": "ComparisonCondition",
-							"operation": "GREATER_OR_EQUAL",
-							"value1": {
-								"class": "AttributeValueProvider",
-								"target": "FRIENDLY_HERO",
-								"attribute": "CTHUN_ATTACK_BUFF"
-							},
-							"value2": 4
-						}
-					]
+					"class": "ComparisonCondition",
+					"operation": "GREATER_OR_EQUAL",
+					"value1": {
+						"class": "AttributeValueProvider",
+						"target": "FRIENDLY_HERO",
+						"attribute": "CTHUN_ATTACK_BUFF"
+					},
+					"value2": 4
 				}
 			]
 		}

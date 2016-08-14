@@ -4,6 +4,8 @@ public enum HeroClass {
 	ANY,
 	DECK_COLLECTION,
 
+	NEUTRAL,
+
 	DRUID,
 	HUNTER,
 	MAGE,
@@ -13,12 +15,13 @@ public enum HeroClass {
 	SHAMAN,
 	WARLOCK,
 	WARRIOR,
+
+	SELF,
 	OPPONENT,
-	
 	BOSS;
 
 	public boolean isBaseClass() {
-		HeroClass[] nonBaseClasses = {ANY, DECK_COLLECTION, OPPONENT, BOSS};
+		HeroClass[] nonBaseClasses = {ANY, NEUTRAL, SELF, DECK_COLLECTION, OPPONENT, BOSS};
 		for (int i=0; i<nonBaseClasses.length; i++) {
 			if (nonBaseClasses[i] == this) {
 				return false;

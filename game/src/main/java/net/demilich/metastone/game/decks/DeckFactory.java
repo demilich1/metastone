@@ -20,8 +20,8 @@ public class DeckFactory {
 		return deck;
 	}
 
-	public static Deck getRandomDeck(HeroClass heroClass) {
-		return new RandomDeck(heroClass);
+	public static Deck getRandomDeck(HeroClass heroClass, DeckFormat deckFormat) {
+		return new RandomDeck(heroClass, deckFormat);
 	}
 
 }

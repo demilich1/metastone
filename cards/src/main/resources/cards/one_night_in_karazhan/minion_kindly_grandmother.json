@@ -1,0 +1,22 @@
+{
+	"id": "minion_kindly_grandmother",
+	"name": "Kindly Grandmother",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"heroClass": "HUNTER",
+	"rarity": "COMMON",
+	"race": "BEAST",
+	"description": "Deathrattle: Summon a 3/2 Big Bad Wolf.",
+	"deathrattle": {
+		"class": "SummonSpell",
+		"card": "token_big_bad_wolf"
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

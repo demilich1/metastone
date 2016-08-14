@@ -41,7 +41,7 @@ public abstract class Actor extends Entity {
 		if (hasAttribute(Attribute.SUMMONING_SICKNESS) && !hasAttribute(Attribute.CHARGE)) {
 			return false;
 		}
-		return getAttack() > 0 && getAttributeValue(Attribute.NUMBER_OF_ATTACKS) > 0;
+		return getAttack() > 0 && ((getAttributeValue(Attribute.NUMBER_OF_ATTACKS) + getAttributeValue(Attribute.EXTRA_ATTACKS)) > 0 || hasAttribute(Attribute.UNLIMITED_ATTACKS));
 	}
 
 	@Override

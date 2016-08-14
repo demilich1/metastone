@@ -7,7 +7,6 @@
 	"baseHp": 4,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
-	"race": "DRAGON",
 	"description": "Battlecry: If you're holding a Dragon, destroy a Legendary minion.",
 	"battlecry": {
 		"targetSelection": "MINIONS",

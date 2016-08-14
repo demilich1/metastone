@@ -32,5 +32,6 @@
     "minion_sea_giant"
   ],
   "name": "Zoolock",
-  "heroClass": "WARLOCK"
+  "heroClass": "WARLOCK",
+  "arbitrary": false
 }

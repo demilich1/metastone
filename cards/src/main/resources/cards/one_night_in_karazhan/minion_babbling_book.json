@@ -1,0 +1,28 @@
+{
+	"id": "minion_babbling_book",
+	"name": "Babbling Book",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"heroClass": "MAGE",
+	"rarity": "RARE",
+	"description": "Battlecry: Add a random Mage spell to your hand.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "ReceiveRandomCollectibleCardSpell",
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "SPELL",
+				"heroClass": "MAGE"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

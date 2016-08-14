@@ -7,6 +7,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.BattlecryAction;
@@ -54,13 +55,21 @@ public class CastRandomSpellSpell extends Spell {
 		// HAHAHAHAHAHAHAHAHAHA!
 		
 		int numberOfSpellsToCast = desc.getValue(SpellArg.VALUE, context, player, target, source, 1);
+		Player originalPlayer = player;
 		for (int i = 0; i < numberOfSpellsToCast; i++) {
+			// In case Yogg changes sides, this should case who the spells are being cast for.
+			player = context.getPlayer(source.getOwner());
 			Card randomCard = filteredSpells.getRandom();
 			logger.debug("Yogg-Saron chooses to play " + randomCard.getName());
-			if (randomCard instanceof ChooseOneCard) {
+			if (randomCard instanceof ChooseOneCard && !context.getLogic().hasAttribute(player, Attribute.BOTH_CHOOSE_ONE_OPTIONS)) {
+				// While it might seem odd to do this, Choose One spells are still chosen
+				// randomly, even if the choice isn't available.
 				ChooseOneCard chooseOneCard = (ChooseOneCard) randomCard;
 				Card[] cards = chooseOneCard.getChoiceCards();
 				randomCard = cards[context.getLogic().random(cards.length)];
+			} else if (randomCard instanceof ChooseOneCard && context.getLogic().hasAttribute(player, Attribute.BOTH_CHOOSE_ONE_OPTIONS)) {
+				ChooseOneCard chooseOneCard = (ChooseOneCard) randomCard;
+				randomCard = chooseOneCard.getBothChoicesCard();
 			}
 			SpellCard spellCard = (SpellCard) randomCard;
 			if (spellCard.canBeCast(context, player)) {
@@ -89,9 +98,12 @@ public class CastRandomSpellSpell extends Spell {
 				}
 				context.getLogic().performGameAction(player.getId(), battlecryAction);
 			}
+			// Technically, this is only half correct. Yogg-Saron should not stop if
+			// your opponent has died, but should if you do. But, it works for now.
+			context.getLogic().checkForDeadEntities();
 		}
 		
-		player.setBehaviour(currentBehaviour);
+		originalPlayer.setBehaviour(currentBehaviour);
 		// *ahem* Back to normal.
 	}
 

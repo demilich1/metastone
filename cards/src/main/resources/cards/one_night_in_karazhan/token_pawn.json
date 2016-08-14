@@ -1,0 +1,17 @@
+{
+	"id": "token_pawn",
+	"name": "Pawn",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "Taunt",
+	"attributes": {
+		"TAUNT": true
+	},
+	"collectible": false,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

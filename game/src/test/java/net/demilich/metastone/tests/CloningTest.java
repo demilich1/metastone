@@ -54,21 +54,22 @@ public class CloningTest extends TestBase {
 
 	@Test
 	public void testCloning() {
+		DeckFormat deckFormat = new DeckFormat();
+		for (CardSet set : CardSet.values()) {
+			deckFormat.addSet(set);
+		}
 		for (int i = 0; i < 100; i++) {
-			PlayerConfig player1Config = new PlayerConfig(DeckFactory.getRandomDeck(HeroClass.MAGE), new PlayRandomBehaviour());
+			PlayerConfig player1Config = new PlayerConfig(DeckFactory.getRandomDeck(HeroClass.MAGE, deckFormat), new PlayRandomBehaviour());
 			player1Config.setName("Player 1");
 			player1Config.setHeroCard(getHeroCardForClass(HeroClass.MAGE));
 			Player player1 = new Player(player1Config);
 
-			PlayerConfig player2Config = new PlayerConfig(DeckFactory.getRandomDeck(HeroClass.WARRIOR), new PlayRandomBehaviour());
+			PlayerConfig player2Config = new PlayerConfig(DeckFactory.getRandomDeck(HeroClass.WARRIOR, deckFormat), new PlayRandomBehaviour());
 			player2Config.setName("Player 2");
 			player2Config.setHeroCard(getHeroCardForClass(HeroClass.WARRIOR));
 			Player player2 = new Player(player2Config);
 
-			DeckFormat deckFormat = new DeckFormat();
-			for (CardSet set : CardSet.values()) {
-				deckFormat.addSet(set);
-			}
+			
 
 			GameContext original = new GameContext(player1, player2, new GameLogic(), deckFormat);
 			TestMinionCard minionCard = new TestMinionCard(3, 3);

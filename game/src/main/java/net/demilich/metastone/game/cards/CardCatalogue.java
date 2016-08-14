@@ -1,30 +1,38 @@
 package net.demilich.metastone.game.cards;
 
-import java.nio.file.Paths;
-import java.util.function.Predicate;
-
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Predicate;
 
-import net.demilich.metastone.BuildConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.cards.desc.CardDesc;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
-import net.demilich.metastone.game.cards.desc.CardDesc;
-import net.demilich.metastone.utils.ResourceLoader;
+import net.demilich.metastone.utils.MetastoneProperties;
 import net.demilich.metastone.utils.ResourceInputStream;
+import net.demilich.metastone.utils.ResourceLoader;
+import net.demilich.metastone.utils.UserHomeMetastone;
+import net.demilich.metastone.utils.VersionInfo;
 
 public class CardCatalogue {
 
-	private final static CardCollection cards = new CardCollection();
-	private static final String CARDS_FOLDER = "cards";
+	public static final String CARDS_FOLDER = "cards";
+	public static final String LOCAL_CARDS_FOLDER = "../cards/src/main/resources/cards/";
+	public static final String CARDS_FOLDER_PATH = UserHomeMetastone.getPath() + File.separator + CARDS_FOLDER;
+	public static final String CARDS_COPIED_PROPERTY = "cards.copied";
+
 	private static Logger logger = LoggerFactory.getLogger(CardCatalogue.class);
+
+	private final static CardCollection cards = new CardCollection();
 
 	public static void add(Card card) {
 		cards.add(card);
@@ -59,13 +67,13 @@ public class CardCatalogue {
 	}
 
 	public static CardCollection getHeroes() {
-		return query(card -> card.isCollectible() && card.getCardType() == CardType.HERO);
+		return query(null, card -> card.isCollectible() && card.getCardType() == CardType.HERO);
 	}
-	
-	public static CardCollection getHeroPowers() {
-		return query(card -> card.isCollectible() && card.getCardType() == CardType.HERO_POWER);
+
+	public static CardCollection getHeroPowers(DeckFormat deckFormat) {
+		return query(deckFormat, card -> card.isCollectible() && card.getCardType() == CardType.HERO_POWER);
 	}
-	
+
 	public static CardCollection query(DeckFormat deckFormat) {
 		return query(deckFormat, (CardType) null, (Rarity) null, (HeroClass) null, (Attribute) null);
 	}
@@ -113,27 +121,35 @@ public class CardCatalogue {
 		return result;
 	}
 
-	public static CardCollection query(Predicate<Card> filter) {
+	public static CardCollection query(DeckFormat deckFormat, Predicate<Card> filter) {
 		CardCollection result = new CardCollection();
 		for (Card card : cards) {
+			if (deckFormat != null && !deckFormat.inSet(card)) {
+				continue;
+			}
 			if (filter.test(card)) {
 				result.add(card);
 			}
 		}
 		return result;
 	}
-
-	public static void loadCards() throws IOException, URISyntaxException {
-
-		// load cards from cards.jar on the classpath
+	
+	public static void loadLocalCards() throws IOException, URISyntaxException, CardParseException {
+		// load cards from ~/metastone/cards on the file system
 		Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(CARDS_FOLDER, false);
+		loadCards(inputStreams);
+	}
+	
+	public static void loadCards() throws IOException, URISyntaxException, CardParseException {
+		// load cards from ~/metastone/cards on the file system
+		Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(CARDS_FOLDER_PATH, true);
+		loadCards(inputStreams);
+	}
 
-		// load cards from ~/metastone/cards on the filesystem
-		if (Paths.get(BuildConfig.USER_HOME_METASTONE + CARDS_FOLDER).toFile().exists()) {
-			inputStreams.addAll((ResourceLoader.loadJsonInputStreams(BuildConfig.USER_HOME_METASTONE + CARDS_FOLDER, true)));
-		}
-
+	
+	private static void loadCards(Collection<ResourceInputStream> inputStreams) throws IOException, URISyntaxException, CardParseException {
 		Map<String, CardDesc> cardDesc = new HashMap<String, CardDesc>();
+		ArrayList<String> badCards = new ArrayList<>();
 		CardParser cardParser = new CardParser();
 		for (ResourceInputStream resourceInputStream : inputStreams) {
 			try {
@@ -143,8 +159,8 @@ public class CardCatalogue {
 				}
 				cardDesc.put(desc.id, desc);
 			} catch (Exception e) {
-				logger.error("Trouble reading " + resourceInputStream.fileName);
-				throw e;
+				logger.error("Error parsing card '{}'", resourceInputStream.fileName);
+				badCards.add(resourceInputStream.fileName);
 			}
 		}
 
@@ -152,6 +168,33 @@ public class CardCatalogue {
 			Card instance = desc.createInstance();
 			CardCatalogue.add(instance);
 			logger.debug("Adding {} to CardCatalogue", instance);
+		}
+		
+		if (!badCards.isEmpty()) {
+			throw new CardParseException(badCards);
+		}
+	}
+
+	public static void copyCardsFromResources() throws IOException, URISyntaxException {
+		// if we have not copied cards to the USER_HOME_METASTONE cards folder,
+		// then do so now
+		String cardsCopiedWithVersion = MetastoneProperties.getProperty(CARDS_COPIED_PROPERTY);
+		boolean updateRequired;
+		try {
+			updateRequired = VersionInfo.updateRequired(BuildConfig.VERSION, cardsCopiedWithVersion);
+		} catch(Exception e) {
+			// an exception will be thrown when stored 'cardsCopiedWithVersion' is null or invalid input,
+			// this is okay, just do an update in that case
+			updateRequired = true;
+		}
+		if (updateRequired) {
+			logger.info("Card update required: MetaStone version is: {}, last card update was with version {}", BuildConfig.VERSION, cardsCopiedWithVersion);
+			ResourceLoader.copyFromResources(CARDS_FOLDER, CARDS_FOLDER_PATH);
+
+			// set a property to indicate that we have copied the cards with current version
+			MetastoneProperties.setProperty(CARDS_COPIED_PROPERTY, BuildConfig.VERSION);
+		} else {
+			logger.info("Cards in user home folder are up-to-date: {}", cardsCopiedWithVersion);
 		}
 	}
 }

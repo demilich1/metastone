@@ -1,0 +1,35 @@
+{
+	"id": "minion_netherspite_historian",
+	"name": "Netherspite Historian",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 3,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Battlecry: If you're holding a Dragon, Discover a Dragon.",
+	"battlecry": {
+		"targetSelection": "ENEMY_MINIONS",
+		"spell": {
+			"class": "DiscoverRandomCardSpell",
+			"spell": {
+				"class": "ReceiveCardSpell",
+				"targetPlayer": "SELF"
+			},
+			"cardFilter": {
+				"class": "CardFilter",
+				"race": "DRAGON"
+			}
+		},
+		"condition": {
+			"class": "HoldsCardCondition",
+			"race": "DRAGON"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

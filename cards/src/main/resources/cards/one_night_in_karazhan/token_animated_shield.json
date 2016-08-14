@@ -1,0 +1,17 @@
+{
+	"id": "token_animated_shield",
+	"name": "Animated Shield",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 0,
+	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Taunt",
+	"attributes": {
+		"TAUNT": true
+	},
+	"collectible": false,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

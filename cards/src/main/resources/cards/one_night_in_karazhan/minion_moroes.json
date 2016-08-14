@@ -1,0 +1,28 @@
+{
+	"id": "minion_moroes",
+	"name": "Moroes",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Stealth. At the end of your turn, summon a 1/1 Steward.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "SummonSpell",
+			"card": "token_steward",
+			"boardPositionRelative": "RIGHT"
+		}
+	},
+	"attributes": {
+		"STEALTH": true
+	},
+	"collectible": true,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

@@ -15,7 +15,7 @@ public class DeckFormat {
 	public DeckFormat() {
 		sets = new ArrayList<CardSet>();
 	}
-	
+
 	public void addSet(CardSet cardSet) {
 		sets.add(cardSet);
 	}

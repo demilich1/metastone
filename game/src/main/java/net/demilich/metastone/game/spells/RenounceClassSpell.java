@@ -32,7 +32,7 @@ public class RenounceClassSpell extends Spell {
 		
 		int manaCostModifier = desc.getValue(SpellArg.MANA_MODIFIER, context, player, target, source, 0);
 		
-		CardCollection heroPowers = CardCatalogue.getHeroPowers();
+		CardCollection heroPowers = CardCatalogue.getHeroPowers(context.getDeckFormat());
 		
 		for (Card heroPowerCard : heroPowers) {
 			if (heroPowerCard.getClassRestriction() == rebornClass) {

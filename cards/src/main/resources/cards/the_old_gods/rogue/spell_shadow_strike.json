@@ -5,8 +5,8 @@
 	"type": "SPELL",
 	"heroClass": "ROGUE",
 	"rarity": "COMMON",
-	"description": "Deal 5 damage to an undamaged minion.",
-	"targetSelection": "MINIONS",
+	"description": "Deal 5 damage to an undamaged character.",
+	"targetSelection": "ANY",
 	"spell": {
 		"class": "DamageSpell",
 		"value": 5,

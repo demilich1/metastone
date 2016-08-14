@@ -46,6 +46,7 @@ import net.demilich.metastone.game.events.DiscardEvent;
 import net.demilich.metastone.game.events.DrawCardEvent;
 import net.demilich.metastone.game.events.EnrageChangedEvent;
 import net.demilich.metastone.game.events.GameEvent;
+import net.demilich.metastone.game.events.GameStartEvent;
 import net.demilich.metastone.game.events.HealEvent;
 import net.demilich.metastone.game.events.HeroPowerUsedEvent;
 import net.demilich.metastone.game.events.JoustEvent;
@@ -272,6 +273,7 @@ public class GameLogic implements Cloneable {
 				if (targetOverride != null && targetOverride.getId() != IdFactory.UNASSIGNED) {
 					targets.remove(0);
 					targets.add(targetOverride);
+					spellDesc = spellDesc.addArg(SpellArg.FILTER, null);
 					log("Target for spell {} has been changed! New target {}", spellCard, targets.get(0));
 				}
 			}
@@ -625,6 +627,7 @@ public class GameLogic implements Cloneable {
 		if (weapon.getCardCostModifier() != null) {
 			addManaModifier(player, weapon.getCardCostModifier(), weapon);
 		}
+		checkForDeadEntities();
 		context.fireGameEvent(new WeaponEquippedEvent(context, weapon));
 		context.fireGameEvent(new BoardChangedEvent(context));
 	}
@@ -974,6 +977,22 @@ public class GameLogic implements Cloneable {
 		player.getDeck().shuffle();
 
 		mulligan(player, begins);
+
+		for (Card card : player.getDeck()) {
+			if (card.getAttribute(Attribute.DECK_TRIGGER) != null) {
+				TriggerDesc triggerDesc = (TriggerDesc) card.getAttribute(Attribute.DECK_TRIGGER);
+				addGameEventListener(player, triggerDesc.create(), card);
+			}
+		}
+		for (Card card : player.getHand()) {
+			if (card.getAttribute(Attribute.DECK_TRIGGER) != null) {
+				TriggerDesc triggerDesc = (TriggerDesc) card.getAttribute(Attribute.DECK_TRIGGER);
+				addGameEventListener(player, triggerDesc.create(), card);
+			}
+		}
+
+		GameStartEvent gameStartEvent = new GameStartEvent(context, player.getId());
+		context.fireGameEvent(gameStartEvent);
 	}
 
 	public boolean isLoggingEnabled() {
@@ -1194,8 +1213,10 @@ public class GameLogic implements Cloneable {
 		int modifiedManaCost = getModifiedManaCost(player, card);
 		if (card.getCardType().isCardType(CardType.SPELL)
 				&& player.getHero().hasAttribute(Attribute.SPELLS_COST_HEALTH)) {
+			context.getEnvironment().put(Environment.LAST_MANA_COST, 0);
 			damage(player, player.getHero(), modifiedManaCost, card, true);
 		} else {
+			context.getEnvironment().put(Environment.LAST_MANA_COST, modifiedManaCost);
 			modifyCurrentMana(playerId, -modifiedManaCost);
 			player.getStatistics().manaSpent(modifiedManaCost);
 		}
@@ -1466,7 +1487,6 @@ public class GameLogic implements Cloneable {
 		} else {
 			performGameAction(playerId, battlecryAction);
 		}
-		checkForDeadEntities();
 	}
 
 	public void resolveDeathrattles(Player player, Actor actor) {
@@ -1612,6 +1632,7 @@ public class GameLogic implements Cloneable {
 
 		if (resolveBattlecry && minion.getBattlecry() != null && !minion.getBattlecry().isResolvedLate()) {
 			resolveBattlecry(player.getId(), minion);
+			checkForDeadEntities();
 		}
 
 		if (context.getEnvironment().get(Environment.TRANSFORM_REFERENCE) != null) {
@@ -1619,6 +1640,8 @@ public class GameLogic implements Cloneable {
 			minion.setBattlecry(null);
 			context.getEnvironment().remove(Environment.TRANSFORM_REFERENCE);
 		}
+
+		context.fireGameEvent(new BoardChangedEvent(context));
 
 		player.getStatistics().minionSummoned(minion);
 		SummonEvent summonEvent = new SummonEvent(context, minion, source);
@@ -1637,6 +1660,7 @@ public class GameLogic implements Cloneable {
 
 		if (resolveBattlecry && minion.getBattlecry() != null && minion.getBattlecry().isResolvedLate()) {
 			resolveBattlecry(player.getId(), minion);
+			checkForDeadEntities();
 		}
 
 		handleEnrage(minion);

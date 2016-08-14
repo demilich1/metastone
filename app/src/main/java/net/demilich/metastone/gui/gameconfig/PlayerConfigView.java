@@ -104,7 +104,7 @@ public class PlayerConfigView extends VBox {
 				}
 			}
 		} else {
-			Deck randomDeck = DeckFactory.getRandomDeck(heroClass);
+			Deck randomDeck = DeckFactory.getRandomDeck(heroClass, deckFormat);
 			deckList.add(randomDeck);
 			for (Deck deck : decks) {
 				if (deck.getHeroClass() == HeroClass.DECK_COLLECTION) {

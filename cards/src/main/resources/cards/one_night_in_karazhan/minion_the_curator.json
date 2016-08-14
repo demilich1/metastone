@@ -1,0 +1,51 @@
+{
+	"id": "minion_the_curator",
+	"name": "The Curator",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 6,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"race": "MECH",
+	"description": "Taunt. Battlecry: Draw a Beast, Dragon, and Murloc from your deck.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "FromDeckToHandSpell",
+					"value": 1,
+					"cardFilter": {
+						"class": "CardFilter",
+						"race": "BEAST"
+					}
+				},
+				{
+					"class": "FromDeckToHandSpell",
+					"value": 1,
+					"cardFilter": {
+						"class": "CardFilter",
+						"race": "DRAGON"
+					}
+				},
+				{
+					"class": "FromDeckToHandSpell",
+					"value": 1,
+					"cardFilter": {
+						"class": "CardFilter",
+						"race": "MURLOC"
+					}
+				}
+			]
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true,
+		"TAUNT": true
+	},
+	"collectible": true,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

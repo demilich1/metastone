@@ -42,7 +42,11 @@ public class SummonSpell extends Spell {
 
 	public static SpellDesc create(TargetPlayer targetPlayer, RelativeToSource relativeBoardPosition, MinionCard... minionCards) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(SummonSpell.class);
-		arguments.put(SpellArg.CARD, minionCards);
+		String[] cardNames = new String[minionCards.length];
+		for (int i = 0; i < minionCards.length; i++) {
+			cardNames[i] = minionCards[i].getCardId();
+		}
+		arguments.put(SpellArg.CARDS, cardNames);
 		arguments.put(SpellArg.TARGET, EntityReference.NONE);
 		arguments.put(SpellArg.TARGET_PLAYER, targetPlayer);
 		if (relativeBoardPosition != null) {

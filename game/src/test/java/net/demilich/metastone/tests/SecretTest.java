@@ -3,6 +3,7 @@ package net.demilich.metastone.tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
@@ -165,6 +166,23 @@ public class SecretTest extends TestBase {
 		attack(context, player, minion, opponent.getHero());
 		Assert.assertEquals(player.getMinions().size(), 0);
 		Assert.assertEquals(opponent.getSecrets().size(), 1);
+	}
+	
+	@Test
+	public void testIceBlockWithArmor() {
+		GameContext context = createContext(HeroClass.MAGE, HeroClass.WARRIOR);
+		Player player = context.getPlayer1();
+		Player opponent = context.getPlayer2();
+		
+		player.getHero().setHp(3);
+		player.getHero().setAttribute(Attribute.ARMOR, 10);
+		playCard(context, player, CardCatalogue.getCardById("secret_ice_block"));
+		context.endTurn();
+		
+		playCardWithTarget(context, opponent, CardCatalogue.getCardById("spell_bash"), player.getHero());
+		// Ice block should not have triggered, as the Mage had enough armor to prevent fatal damage
+		Assert.assertEquals(player.getSecrets().size(), 1);
+		Assert.assertFalse(player.getHero().hasAttribute(Attribute.IMMUNE));
 	}
 
 }

@@ -7,6 +7,7 @@
 	"baseHp": 5,
 	"heroClass": "ANY",
 	"rarity": "RARE",
+	"race": "BEAST",
 	"description": "Can only attack if your Hero attacked this turn.",
 	"trigger": {
 		"eventTrigger": {

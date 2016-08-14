@@ -1,0 +1,15 @@
+{
+	"id": "token_cellar_spider",
+	"name": "Cellar Spider",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 3,
+	"heroClass": "BEAST",
+	"rarity": "COMMON",
+	"race": "BEAST",
+	"description": "",
+	"collectible": false,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

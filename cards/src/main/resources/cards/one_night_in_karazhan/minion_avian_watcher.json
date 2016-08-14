@@ -1,0 +1,39 @@
+{
+	"id": "minion_avian_watcher",
+	"name": "Avian Watcher",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 6,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Battlecry: If you control a Secret, gain +1/+1 and Taunt.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "BuffSpell",
+					"target": "SELF",
+					"attackBonus": 1,
+					"hpBonus": 1
+				},
+				{
+					"class": "AddAttributeSpell",
+					"target": "SELF",
+					"attribute": "TAUNT"
+				}
+			]
+		},
+		"condition": {
+			"class": "ControlsSecretCondition"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

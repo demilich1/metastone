@@ -59,6 +59,22 @@ public class ModifyDamageSpell extends Spell {
 			}
 			damage = value;
 			break;
+		case MINIMUM:
+			if ((context.resolveSingleTarget(context.getEventTargetStack().peek())).hasAttribute(Attribute.TAKE_DOUBLE_DAMAGE)) {
+				value *= 2;
+			}
+			if (damage < value) {
+				damage = value;
+			}
+			break;
+		case MAXIMUM:
+			if ((context.resolveSingleTarget(context.getEventTargetStack().peek())).hasAttribute(Attribute.TAKE_DOUBLE_DAMAGE)) {
+				value *= 2;
+			}
+			if (damage > value) {
+				damage = value;
+			}
+			break;
 		default:
 			break;
 		}

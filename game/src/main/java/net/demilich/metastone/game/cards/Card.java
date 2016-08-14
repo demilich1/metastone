@@ -51,6 +51,10 @@ public abstract class Card extends Entity {
 		if (desc.passiveTrigger != null) {
 			attributes.put(Attribute.PASSIVE_TRIGGER, desc.passiveTrigger);
 		}
+
+		if (desc.deckTrigger != null) {
+			attributes.put(Attribute.DECK_TRIGGER, desc.deckTrigger);
+		}
 	}
 
 	@Override

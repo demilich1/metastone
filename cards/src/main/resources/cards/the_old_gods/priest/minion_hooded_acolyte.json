@@ -3,7 +3,7 @@
 	"name": "Hooded Acolyte",
 	"baseManaCost": 4,
 	"type": "MINION",
-	"baseAttack": 2,
+	"baseAttack": 3,
 	"baseHp": 6,
 	"heroClass": "PRIEST",
 	"rarity": "COMMON",

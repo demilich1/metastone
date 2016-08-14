@@ -1,0 +1,25 @@
+{
+	"id": "minion_arcane_anomaly",
+	"name": "Arcane Anomaly",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 1,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Whenever you cast a spell, give this minion +1 Health.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "SpellCastedTrigger",
+			"sourcePlayer": "SELF"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"target": "SELF",
+			"hpBonus": 1
+		}
+	},
+	"collectible": true,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

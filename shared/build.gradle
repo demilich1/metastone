@@ -5,28 +5,38 @@ buildscript {
 		}
 	}
 	dependencies {
-		classpath 'gradle.plugin.de.fuerstenau:BuildConfigPlugin:1.1.2'
+		classpath 'gradle.plugin.de.fuerstenau:BuildConfigPlugin:1.1.4'
 	}
 }
 
 apply plugin: 'de.fuerstenau.buildconfig'
-import javax.swing.filechooser.FileSystemView;
 
-// will generate an BuildConfig.java file in 'build/gen/buildconfig/src/main'
+// will generate a BuildConfig.java file in 'build/gen/buildconfig/src/main'
 buildConfig {
 	packageName = 'net.demilich.metastone'
 	version = project.version
 	appName = rootProject.name
 	buildConfigField 'boolean', 'DEV_BUILD', project.hasProperty('DEV_BUILD').toString()
 	buildConfigField 'int', 'DEFAULT_SLEEP_DELAY', '100'
-	buildConfigField 'String', 'USER_HOME_METASTONE', (FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + File.separator + rootProject.name).replace("\\", "\\\\")
+}
+
+ext {
+	buildConfigSrcDir = file("$buildDir/gen/buildconfig/src/main")
 }
 
 sourceSets.main.java {
-	srcDir 'build/gen/buildconfig/src/main'
+	srcDir buildConfigSrcDir
 }
 
 dependencies {
 	compile files('lib/nitty-gritty-mvc.jar')
 	compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.1.3'
+}
+
+task compileBuildConfigFirst (dependsOn: ['compileBuildConfig'])
+eclipseProject.dependsOn(compileBuildConfigFirst)
+ideaModule.dependsOn(compileBuildConfigFirst)
+
+idea.module {
+	generatedSourceDirs += file(buildConfigSrcDir)
 }

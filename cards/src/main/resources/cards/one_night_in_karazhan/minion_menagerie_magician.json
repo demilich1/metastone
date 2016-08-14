@@ -1,0 +1,58 @@
+{
+	"id": "minion_menagerie_magician",
+	"name": "Menagerie Magician",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Battlecry: Give a random friendly Beast, Dragon, and Murloc +2/+2.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "BuffSpell",
+					"attackBonus": 2,
+					"hpBonus": 2,
+					"target": "FRIENDLY_MINIONS",
+					"randomTarget": true,
+					"filter": {
+						"class": "CardFilter",
+						"race": "BEAST"
+					}
+				},
+				{
+					"class": "BuffSpell",
+					"attackBonus": 2,
+					"hpBonus": 2,
+					"target": "FRIENDLY_MINIONS",
+					"randomTarget": true,
+					"filter": {
+						"class": "CardFilter",
+						"race": "DRAGON"
+					}
+				},
+				{
+					"class": "BuffSpell",
+					"attackBonus": 2,
+					"hpBonus": 2,
+					"target": "FRIENDLY_MINIONS",
+					"randomTarget": true,
+					"filter": {
+						"class": "CardFilter",
+						"race": "MURLOC"
+					}
+				}
+			]
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+},
+	"collectible": true,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

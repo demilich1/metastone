@@ -1,0 +1,22 @@
+{
+	"id": "minion_cloaked_huntress",
+	"name": "Cloaked Huntress",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 4,
+	"heroClass": "HUNTER",
+	"rarity": "COMMON",
+	"description": "Your Secrets cost (0).",
+	"cardCostModifier": {
+		"class": "CardCostModifier",
+		"cardType": "SPELL",
+		"targetPlayer": "SELF",
+		"operation": "SET",
+		"value": 0,
+		"requiredAttribute": "SECRET"
+	},
+	"collectible": true,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}
