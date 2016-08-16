@@ -1,59 +1,88 @@
 Triggers
 
 AfterSpellCastedTrigger
+Triggers immediately after a spell is cast.
 
 ArmorGainedTrigger
+Triggers whenever target player gains Armor.
 
 BoardChangedTrigger
+Triggers whenever there is a change in the minions/weapons in play. Used for things like checking if Southsea Deckhand should have charge
 
 CardDrawnTrigger
+Triggers whenever target player draws a card.
 
 CardPlayedTrigger
+Triggers whenever target player plays a card.
+
+CardReceivedTrigger
+Triggers whenever target player receives a copy of target card.
 
 DamageCausedTrigger
+Triggers whenever target causes damage.
 
 DamageReceivedTrigger
+Triggers whenever target receives damage.
 
 DiscardTrigger
-
-EnemyAttacksTrigger
+Triggers whenever target player discards a card.
 
 EnrageChangedTrigger
+Triggers whenever the internal ENRAGED attribute of a target is changed.
 
 FatalDamageTrigger
+Triggers whenever target takes fatal damage.
 
-GameStateChangedTrigger
+GameStartTrigger
+Triggers at the beginning of the game.
 
 HealingTrigger
+Triggers whenever target is healed.
 
 InspireTrigger
+Triggers your hero power is used.
 
 MinionDeathTrigger
+Triggers whenever a minion dies.
 
 MinionPlayedTrigger
+Triggers whenever a minion is played.
 
 MinionSummonedTrigger
+Triggers whenever a minion is summoned.
 
 OverloadTrigger
+Triggers whenever target player overloads.
 
 PhysicalAttackTrigger
+Triggers whenever target is attacked by a minion or hero.
 
 PreDamageTrigger
+Triggers before target is damaged.
 
 SecretPlayedTrigger
+Triggers whenever a Secret for target player is played.
 
 SecretRevealedTrigger
+Triggers whenever a Secret for target player is revealed.
 
 SilenceTrigger
+Triggers whenever target is silenced.
 
 SpellCastedTrigger
+Triggers whenever target player casts a Spell.
 
 TargetAcquisitionTrigger
+Triggers whenever target acquires a target. This can be a spell as well as a minion or hero.
 
 TurnEndTrigger
+Triggers whenever target player's turn ends.
 
 TurnStartTrigger
+Triggers whenever target player's turn begins.
 
 WeaponDestroyedTrigger
+Triggers whenever target player's weapon is destroyed.
 
 WeaponEquippedTrigger
+Triggers whenever target player equips a weapon.

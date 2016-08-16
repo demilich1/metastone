@@ -31,10 +31,10 @@ AURA_HP_BONUS
 The bonus maximum HP gained through auras.
 
 BASE_HP
-The base HP or Durability of an entityís source card.
+The base HP or Durability of an entity‚Äôs source card.
 
 BASE_ATTACK
-The base Attack of an entityís source card.
+The base Attack of an entity‚Äôs source card.
 
 CONDITIONAL_ATTACK_BONUS
 The bonus Attack gained through conditional effects, such as Enrage.
@@ -52,7 +52,7 @@ FATIGUE
 Internal tracker for the amount of Fatigue a player has.
 
 FROZEN
-Freezes the target Actor. Frozen Actors cannot attack, and Unfreeze at the end of their controllerís turn, provided they have not attacked that turn.
+Freezes the target Actor. Frozen Actors cannot attack, and Unfreeze at the end of their controller‚Äôs turn, provided they have not attacked that turn.
 
 ENRAGABLE
 Determines if the Minion has an Enrage effect.
@@ -62,6 +62,9 @@ Grants the Actor Windfury. Windfuried Actors have two attacks per turn.
 
 MEGA_WINDFURY
 Grants the Actor Mega Windfury. Mega Windfuried Actors have four attacks per turn.
+
+UNLIMITED_ATTACKS
+Grants the Actor Unlimited Attacks. Actors with Unlimited Attacks may attack an infinite number of times per turn, limited only by the turn timer.
 
 TAUNT
 Grants the Actor Taunt. Taunted Actors must be attacked before any non-Taunted Actor.
@@ -80,14 +83,14 @@ Determines if a card has a Battlecry.
 Additionally, holds the Battlecry of the source card in an Entity after play.
 
 DOUBLE_BATTLECRIES
-Entities with this Attribute have ìBattlecries happen twice.î
+Entities with this Attribute have ‚ÄúBattlecries happen twice.‚Äù
 
 DEATHRATTLES
 Determines if a card has a Deathrattle.
 Additionally, holds the Deathrattle(s) of the source card in an Entity after play.
 
 DOUBLE_DEATHRATTLES
-Entities with this Attribute have ìDeathrattles happen twice.î
+Entities with this Attribute have ‚ÄúDeathrattles happen twice.‚Äù
 
 IMMUNE
 Grants the Entity Immune. Immune Entities cannot be damaged or targeted directly by the opposing player.
@@ -113,8 +116,11 @@ When the card is played, the player overloads for X.
 CHOOSE_ONE
 Determines if a Card has Choose One.
 
+BOTH_CHOOSE_ONE_OPTIONS
+Entities with this attribute have "Your Choose One cards have both effects combined."
+
 SUMMONING_SICKNESS
-Grants a minion Summoning Sickness. Minions with Summoning Sickness cannot attack. Minions automatically get Summoning Sickness the turn they are summoned. Summoning Sickness is removed at the end of each playerís turn.
+Grants a minion Summoning Sickness. Minions with Summoning Sickness cannot attack. Minions automatically get Summoning Sickness the turn they are summoned. Summoning Sickness is removed at the end of each player‚Äôs turn.
 
 UNTARGETABLE_BY_SPELLS
 Grants an Actor Untargetable by Spells. Actors with Untargetable by Spells cannot be directly targeted by Spells or Hero Powers.
@@ -123,34 +129,34 @@ SPELL_DAMAGE_MULTIPLIER: X
 Grants a Spell Spell Damage Multiplier X. Spells casts with Spell Damage Multiplier have their additional Spell Damage multiplied by X. See Spell Damage.
 
 SPELL_AMPLIFY_MULTIPLIER: X
-Grants an Entity Spell Amplify Multiplier X. Damage dealt by Spells or Hero Powers played by the Entityís owner are multiplied by X.
+Grants an Entity Spell Amplify Multiplier X. Damage dealt by Spells or Hero Powers played by the Entity‚Äôs owner are multiplied by X.
 
 HEAL_AMPLIFY_MULTIPLIER: X
-Grants an Entity Heal Amplify Multiplier X. Healing dealt by Spells or Hero Powers played by the Entityís owner are multiplied by X.
+Grants an Entity Heal Amplify Multiplier X. Healing dealt by Spells or Hero Powers played by the Entity‚Äôs owner are multiplied by X.
 
 MANA_COST_MODIFIER
 Grants a card a modified Mana Cost.
 
 ATTACK_EQUALS_HP
-Grants a minion ìThis minion has Attack equal to its health.î
+Grants a minion ‚ÄúThis minion has Attack equal to its health.‚Äù
 
 CANNOT_ATTACK
-Grants an Actor ìCannot Attack.î Actors with ìCannot Attackî cannot attack, regardless of the number of attacks the Actor has.
+Grants an Actor ‚ÄúCannot Attack.‚Äù Actors with ‚ÄúCannot Attack‚Äù cannot attack, regardless of the number of attacks the Actor has.
 
 CANNOT_ATTACK_HEROES
-Grants an Actor ìCannot attack Heroes.î Actors with this Attribute cannot attack Heroes, regardless of the minions the opposing player owns.
+Grants an Actor ‚ÄúCannot attack Heroes.‚Äù Actors with this Attribute cannot attack Heroes, regardless of the minions the opposing player owns.
 
 INVERT_HEALING
-Grants an Actor ìAny healing by cards you own deals damage instead.î Actors with this Attribute cause all cards or Entities you own or play to deal damage instead of healing.
+Grants an Actor ‚ÄúAny healing by cards you own deals damage instead.‚Äù Actors with this Attribute cause all cards or Entities you own or play to deal damage instead of healing.
 
 CANNOT_REDUCE_HP_BELOW_1
-Grants an Actor ìCannot reduce HP below 1.î Actors with this Attribute cannot have their HP reduced below 1 through damage effects, and any damage received past that is negated.
+Grants an Actor ‚ÄúCannot reduce HP below 1.‚Äù Actors with this Attribute cannot have their HP reduced below 1 through damage effects, and any damage received past that is negated.
 
 COUNTERED
-Determines if a card has been Countered. Countered cards are removed from play before the cardís effect or minion enters play.
+Determines if a card has been Countered. Countered cards are removed from play before the card‚Äôs effect or minion enters play.
 
 HERO_POWER_CAN_TARGET_MINIONS
-Grants an Actor ìYour Hero Power can target minions.î This only effects the Hunterís Hero Power.
+Grants an Actor ‚ÄúYour Hero Power can target minions.‚Äù This only affects the Hunter‚Äôs Hero Power.
 
 LAST_HIT
 Determines the amount of damage this Actor received last.
@@ -159,14 +165,32 @@ PASSIVE_TRIGGER
 Determines if an Entity has a Trigger effect.
 
 HERO_POWER_DAMAGE: X
-Grants an Entity ìYour Hero Power deals X additional damage.î Entities with this Attribute give your Hero Power X additional damage.
+Grants an Entity ‚ÄúYour Hero Power deals X additional damage.‚Äù Entities with this Attribute give your Hero Power X additional damage.
+
+CTHUN_ATTACK_BUFF: X
+Adds X to the Attack of owner's C'Thun
+
+CTHUN_HEALTH_BUFF: X
+Adds X to the Health of owner's C'Thun
+
+CTHUN_TAUNT
+Gives owner's C'thun Taunt
+
+SPELLS_COST_HEALTH
+Grants an Entity "Your spells cost Health instead of Mana." Whenever the owner of an entity with this attribute plays a spell, their hero will lose Health equal to the cost of the spell instead of mana.
+
+IMMUNE_HERO
+Grants an Entity "Your hero has Immune." Immune heroes cannot take damage.
 
 TAKE_DOUBLE_DAMAGE
-Grants an Entity ìThis {Actor} takes double damage.î Entities with this Attribute take double damage.
+Grants an Entity ‚ÄúThis {Actor} takes double damage.‚Äù Entities with this Attribute take double damage.
 
 
 
 Internal Attributes
+
+DIED_ON_TURN
+Internal use. Holds the turn a minion died on.
 
 HERO_POWER_USAGES
 Internal use. Holds the number of Hero Powers that have been used during this turn.
@@ -179,6 +203,9 @@ Internal tracker for the number of Hero Powers that have been used during the ga
 
 NUMBER_OF_ATTACKS: X
 Internal tracker for the number of attacks an Actor can perform each turn. 
+
+EXTRA_ATTACKS: X
+Internal tracker for the number of extra attacks an Actor can perform each turn.
 
 ENRAGED
 Internal flag for whether a minion is currently Enraged.

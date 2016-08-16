@@ -54,7 +54,9 @@ Examples: Loatheb, Millhouse Manastorm, Dragon Consort, Wilfred Fizzlebang
 "cardCostModifier": CardCostModifier. The CardCostModifier to add to the target.
 
 CastRandomSpellSpell
-[]
+Casts a random spell
+Examples: Yogg-Saron, Servant of Yogg-Saron
+"value": Number of random spells to cast.
 
 CastRepeatedlySpell
 []
@@ -65,6 +67,11 @@ Examples: Justicar Trueheart, Charged Hammer, Shadowform
 “card”: Card ID. The card ID of the Hero Power to change the target’s Hero Power to.
 
 ChangeHeroSpell
+Replaces the target Player's hero with a different hero.
+Examples: Majordomo Executus, Jaraxxus
+"card": Card ID to change hero to. Must be a hero card.
+
+CheckDeadSpell
 []
 
 ClearOverloadSpell
@@ -248,6 +255,12 @@ Examples: Bolvar Fordragon, Ancient Mage, Shadowfiend.
 "attribute": The attribute to change.
 "value": The amount to modify the attribute by. Only used for health and attack.
 
+ModifyDamageSpell
+Performs an operation on damage being processed by the game.
+Examples: Ice Block, Animated Armor
+"operation": The operation to perform on target damage. Can be ADD, SUBTRACT, MODULO, MULTIPLY, DIVIDE, NEGATE, or SET.
+"value": The value to operate by.
+
 ModifyDurabilitySpell {}: Combine with Attribute Spell? (Only applies to Weapons, so might as well…)
 []
 
@@ -284,6 +297,12 @@ PutRandomSecretIntoPlaySpell
 Puts the specified number of secrets directly from your deck into the battlefield.
 Examples: Mysterious Challenger, Mad Scientist
 "howMany": Number of secrets to put into play.
+
+RandomlyCastSpell
+Casts a random spell from a set of spells on a specific target.
+Examples: Enhance-O-Mechano
+"target": Target to cast spell on.
+"spells": Array of spells to choose from.
 
 RecastSpell
 Replays a specified Card.
@@ -410,6 +429,14 @@ SwapAttackAndHpSpell
 Swaps the Attack and HP of the target.
 Examples: Crazed Alchemist, Confuse
 
+SwapAttackSpell
+Swaps the calling Actor's attack with that of another Actor(only minions?)
+Examples: Darkspeaker
+
+SwapHpSpell
+Swaps the calling Actor's health with that of another Actor(only minions?)
+Examples: Darkspeaker
+
 TemporaryAttackSpell {}: Combine with Modify Attribute?
 Modifies the Temporary Attack of an Actor. This Attack is removed at the end of the turn.
 Examples: Savage Roar, Abusive Sergeant, Shrinkmeister
@@ -429,6 +456,10 @@ Examples: Druid of the Claw, Faceless Manipulator, Recombobulator, Tinkmaster Ov
 
 TransformToMinionWithManaCostSpell {}: Combine with Transform Minion (Filter)
 []
+
+TransformToRandomMinionSpell
+Transforms a minion into another random minion.
+Examples: Recombobulator, Evolve, Master of Evolution
 
 TriggerDeathrattleSpell
 Triggers all Deathrattles for the target Player.
