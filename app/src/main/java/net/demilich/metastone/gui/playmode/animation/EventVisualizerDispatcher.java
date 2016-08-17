@@ -18,6 +18,7 @@ public class EventVisualizerDispatcher {
 		visualizers.put(GameEventType.HEAL, new HealEventVisualizer());
 		visualizers.put(GameEventType.PLAY_CARD, new PlayCardVisualizer());
 		visualizers.put(GameEventType.JOUST, new JoustVisualizer());
+		visualizers.put(GameEventType.REVEAL_CARD, new RevealCardVisualizer());
 	}
 
 	public void visualize(GameContextVisualizable gameContext, GameBoardView boardView) {

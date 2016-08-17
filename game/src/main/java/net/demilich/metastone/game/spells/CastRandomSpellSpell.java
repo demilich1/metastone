@@ -21,6 +21,7 @@ import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.ChooseOneCard;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.events.CardRevealedEvent;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.CardFilter;
@@ -61,6 +62,8 @@ public class CastRandomSpellSpell extends Spell {
 			player = context.getPlayer(source.getOwner());
 			Card randomCard = filteredSpells.getRandom();
 			logger.debug("Yogg-Saron chooses to play " + randomCard.getName());
+			CardRevealedEvent revealEvent = new CardRevealedEvent(context, player.getId(), randomCard, 1.2 * (i + 1));
+			context.fireGameEvent(revealEvent);
 			if (randomCard instanceof ChooseOneCard && !context.getLogic().hasAttribute(player, Attribute.BOTH_CHOOSE_ONE_OPTIONS)) {
 				// While it might seem odd to do this, Choose One spells are still chosen
 				// randomly, even if the choice isn't available.
