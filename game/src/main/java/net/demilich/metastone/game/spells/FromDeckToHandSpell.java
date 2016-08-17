@@ -17,7 +17,9 @@ public class FromDeckToHandSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		if (target != null && target.getEntityType() == EntityType.CARD) {
 			Card card = (Card) target;
-			context.getLogic().drawCard(player.getId(), card, source);
+			if (player.getDeck().containsCard(card)) {
+				context.getLogic().drawCard(player.getId(), card, source);
+			}
 			return;
 		}
 
