@@ -1644,8 +1644,15 @@ public class GameLogic implements Cloneable {
 		context.fireGameEvent(new BoardChangedEvent(context));
 
 		player.getStatistics().minionSummoned(minion);
-		SummonEvent summonEvent = new SummonEvent(context, minion, source);
-		context.fireGameEvent(summonEvent);
+		if (context.getEnvironment().get(Environment.TARGET_OVERRIDE) != null) {
+			Actor actor = (Actor) context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.TARGET_OVERRIDE));
+			context.getEnvironment().remove(Environment.TARGET_OVERRIDE);
+			SummonEvent summonEvent = new SummonEvent(context, actor, source);
+			context.fireGameEvent(summonEvent);
+		} else {
+			SummonEvent summonEvent = new SummonEvent(context, minion, source);
+			context.fireGameEvent(summonEvent);
+		}
 
 		applyAttribute(minion, Attribute.SUMMONING_SICKNESS);
 		refreshAttacksPerRound(minion);
