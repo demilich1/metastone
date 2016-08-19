@@ -13,8 +13,7 @@
 		"spell": {
 			"class": "DamageSpell",
 			"value": 3
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

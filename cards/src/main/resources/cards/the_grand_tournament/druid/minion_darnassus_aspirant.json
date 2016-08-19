@@ -12,8 +12,7 @@
 		"spell": {
 			"class": "ModifyMaxManaSpell",
 			"value": 1
-		},
-		"resolvedLate": false
+		}
 	},
 	"deathrattle": {
 		"class": "ModifyMaxManaSpell",

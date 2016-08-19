@@ -23,8 +23,7 @@
 					"boardPositionRelative": "LEFT"
 				}
 			]
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

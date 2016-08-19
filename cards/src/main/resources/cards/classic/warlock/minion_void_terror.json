@@ -33,8 +33,7 @@
 					"target": "ADJACENT_MINIONS"
 				}
 			]
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

@@ -11,8 +11,7 @@
 	"battlecry": {
 		"spell": {
 			"class": "StealRandomSecretSpell"
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

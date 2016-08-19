@@ -18,8 +18,7 @@
 				"operation": "LESS_OR_EQUAL",
 				"value": 2
 			}
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

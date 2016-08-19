@@ -23,8 +23,7 @@
 				"attribute": "SPELL_DAMAGE",
 				"operation": "HAS"
 			}
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

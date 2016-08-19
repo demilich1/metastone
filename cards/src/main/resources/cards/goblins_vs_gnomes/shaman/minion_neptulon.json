@@ -16,8 +16,7 @@
 				"class": "RaceFilter",
 				"race": "MURLOC"
 			}
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true,

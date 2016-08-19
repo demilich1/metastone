@@ -18,8 +18,7 @@
 		"condition": {
 			"class": "RaceOnBoardCondition",
 			"race": "BEAST"
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

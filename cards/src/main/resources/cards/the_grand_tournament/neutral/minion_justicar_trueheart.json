@@ -88,8 +88,7 @@
 					"cardId": "hero_power_armor_up"
 				}
 			]
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

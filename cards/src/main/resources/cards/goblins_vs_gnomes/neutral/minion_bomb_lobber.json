@@ -14,8 +14,7 @@
 			"target": "ENEMY_MINIONS",
 			"value": 4,
 			"howMany": 1
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

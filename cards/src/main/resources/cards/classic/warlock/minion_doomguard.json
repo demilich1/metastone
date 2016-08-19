@@ -14,8 +14,7 @@
 		"spell": {
 			"class": "DiscardSpell",
 			"value": 2
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true,

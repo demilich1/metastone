@@ -14,8 +14,7 @@
 			"class": "BuffWeaponSpell",
 			"target": "FRIENDLY_WEAPON",
 			"attackBonus": 1
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

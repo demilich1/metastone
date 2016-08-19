@@ -12,8 +12,7 @@
 		"spell": {
 			"class": "EquipWeaponSpell",
 			"card": "weapon_rusty_hook"
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

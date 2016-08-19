@@ -13,8 +13,7 @@
 			"class": "DamageSpell",
 			"target": "ENEMY_HERO",
 			"value": 3
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

@@ -15,8 +15,7 @@
 			"target": "FRIENDLY_MINIONS",
 			"attackBonus": 1,
 			"randomTarget": "true"
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

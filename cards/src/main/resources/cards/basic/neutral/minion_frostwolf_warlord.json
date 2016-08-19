@@ -17,8 +17,7 @@
 				"class": "EntityCounter",
 				"target": "OTHER_FRIENDLY_MINIONS"
 			}
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

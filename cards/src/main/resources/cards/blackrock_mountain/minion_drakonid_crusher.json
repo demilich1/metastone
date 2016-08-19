@@ -22,8 +22,7 @@
 			"attribute": "HP",
 			"operation": "LESS_OR_EQUAL",
 			"value": 15
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

@@ -15,8 +15,7 @@
 				"class": "CardFilter",
 				"heroClass": "PALADIN"
 			}
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

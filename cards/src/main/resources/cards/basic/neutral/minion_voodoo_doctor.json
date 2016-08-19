@@ -13,8 +13,7 @@
 		"spell": {
 			"class": "HealSpell",
 			"value": 2
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

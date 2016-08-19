@@ -14,8 +14,7 @@
 			"class": "SummonSpell",
 			"card": "token_murloc_scout",
 			"boardPositionRelative": "RIGHT"
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

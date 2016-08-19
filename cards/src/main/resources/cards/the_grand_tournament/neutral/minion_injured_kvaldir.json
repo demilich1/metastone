@@ -13,8 +13,7 @@
 			"class": "DamageSpell",
 			"target": "SELF",
 			"value": 3
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

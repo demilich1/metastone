@@ -23,8 +23,7 @@
 				"attribute": "TAUNT",
 				"operation": "HAS"
 			}
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

@@ -13,8 +13,7 @@
 		"spell": {
 			"class": "ShuffleToDeckSpell",
 			"card": "spell_ancient_curse"
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

@@ -19,8 +19,7 @@
 				"cardType": "SPELL",
 				"heroClass": "OPPONENT"
 			}
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

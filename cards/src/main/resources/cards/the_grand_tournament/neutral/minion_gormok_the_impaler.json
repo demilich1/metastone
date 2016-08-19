@@ -19,8 +19,7 @@
 			"targetPlayer": "SELF",
 			"operation": "GREATER",
 			"value": 4
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

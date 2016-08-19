@@ -13,8 +13,7 @@
 		"spell": {
 			"class": "AddAttributeSpell",
 			"attribute": "TAUNT"
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true,

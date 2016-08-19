@@ -46,7 +46,6 @@ public class WeaponCard extends Card {
 		BattlecryDesc battlecry = desc.battlecry;
 		if (battlecry != null) {
 			BattlecryAction battlecryAction = BattlecryAction.createBattlecry(battlecry.spell, battlecry.getTargetSelection());
-			battlecryAction.setResolvedLate(battlecry.resolvedLate);
 			if (battlecry.condition != null) {
 				battlecryAction.setCondition(battlecry.condition.create());
 			}

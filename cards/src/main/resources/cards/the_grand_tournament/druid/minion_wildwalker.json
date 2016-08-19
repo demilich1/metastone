@@ -17,8 +17,7 @@
 				"class": "RaceFilter",
 				"race": "BEAST"
 			}
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

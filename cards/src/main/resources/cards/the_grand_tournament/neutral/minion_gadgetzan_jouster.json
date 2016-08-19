@@ -18,8 +18,7 @@
 				"attackBonus": 1,
 				"hpBonus": 1
 			}
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

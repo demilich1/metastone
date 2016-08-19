@@ -16,8 +16,7 @@
 		},
 		"condition": {
 			"class": "ComboCondition"
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"COMBO": true

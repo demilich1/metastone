@@ -18,8 +18,7 @@
 				"target": "SELF",
 				"attribute": "CHARGE"
 			}
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

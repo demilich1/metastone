@@ -13,8 +13,7 @@
 			"class": "BuffHeroSpell",
 			"target": "FRIENDLY_HERO",
 			"armorBonus": 5
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

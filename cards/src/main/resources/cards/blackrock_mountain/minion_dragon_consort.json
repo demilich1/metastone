@@ -25,8 +25,7 @@
 					"race": "DRAGON"
 				}
 			}
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

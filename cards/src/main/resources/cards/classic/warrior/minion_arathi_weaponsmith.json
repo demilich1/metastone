@@ -12,8 +12,7 @@
 		"spell": {
 			"class": "EquipWeaponSpell",
 			"card": "weapon_battle_axe"
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

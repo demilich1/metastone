@@ -17,8 +17,7 @@
 				"class": "TurnStartTrigger",
 				"targetPlayer": "SELF"
 			}
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

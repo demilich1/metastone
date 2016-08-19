@@ -1630,7 +1630,7 @@ public class GameLogic implements Cloneable {
 			player.getMinions().add(index, minion);
 		}
 
-		if (resolveBattlecry && minion.getBattlecry() != null && !minion.getBattlecry().isResolvedLate()) {
+		if (resolveBattlecry && minion.getBattlecry() != null) {
 			resolveBattlecry(player.getId(), minion);
 			checkForDeadEntities();
 		}
@@ -1663,11 +1663,6 @@ public class GameLogic implements Cloneable {
 
 		if (minion.getCardCostModifier() != null) {
 			addManaModifier(player, minion.getCardCostModifier(), minion);
-		}
-
-		if (resolveBattlecry && minion.getBattlecry() != null && minion.getBattlecry().isResolvedLate()) {
-			resolveBattlecry(player.getId(), minion);
-			checkForDeadEntities();
 		}
 
 		handleEnrage(minion);

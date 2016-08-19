@@ -22,8 +22,7 @@
 				},
 				"oneTurn": true
 			}
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

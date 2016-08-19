@@ -14,8 +14,7 @@
 			"class": "HealSpell",
 			"target": "FRIENDLY_CHARACTERS",
 			"value": 2
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

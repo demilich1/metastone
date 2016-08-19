@@ -18,8 +18,7 @@
 				"targetPlayer": "SELF",
 				"playerAttribute": "HAND_COUNT"
 			}
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

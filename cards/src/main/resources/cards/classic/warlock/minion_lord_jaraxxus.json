@@ -30,8 +30,7 @@
 					"target": "FRIENDLY_HERO" 
 				}
 			]
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

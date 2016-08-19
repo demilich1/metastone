@@ -12,8 +12,7 @@
 		"spell": {
 			"class": "PutRandomSecretIntoPlaySpell",
 			"howMany": 99
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

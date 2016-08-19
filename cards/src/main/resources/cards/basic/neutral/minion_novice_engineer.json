@@ -11,8 +11,7 @@
 	"battlecry": {
 		"spell": {
 			"class": "DrawCardSpell"
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

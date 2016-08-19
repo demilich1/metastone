@@ -15,8 +15,7 @@
 			"target": "ADJACENT_MINIONS",
 			"attribute": "SPELL_DAMAGE",
 			"value": 1
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

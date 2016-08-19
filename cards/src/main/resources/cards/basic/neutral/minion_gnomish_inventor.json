@@ -12,8 +12,7 @@
 		"spell": {
 			"class": "DrawCardSpell",
 			"value": 1
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true
