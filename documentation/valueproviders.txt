@@ -1,0 +1,35 @@
+Value Providers
+Value Providers are values that are not static, modifying themselves based on the state of the game.
+
+AlgebraicValueProvider
+Provides a value following an algebraic expressions i.e. Molten Giant (25 SUBTRACT (MaxHP SUBTRACT HP))
+
+AttributeCounter
+Provides a value equal to the number of specified Entities with a specific Attribute.
+
+AttributeValueProvider
+Provides a value equal to the Attribute value of the target Entity.
+
+CardCounter
+Provides a value equal to the number of cards being held by the target Player.
+
+ConditionalValueProvider
+Provides a value based on a conditional statement.
+
+DeadMinionsThisTurn
+Provides a value equal to the number of minions that were killed this turn.
+
+EntityCounter
+Provides a value equal to the number of entities in play that meet the CardFilter criteria.
+
+HighestAttributeValueProvider
+Provides a value based on the highest value of the attribute found among the target entities.
+
+MinionSummonValueProvider
+Provides a value based on the number of minions summoned that meet the CardFilter criteria.
+
+PlayerAttributeValueProvider
+Provides a value equal to the player attribute given.
+
+RandomValueProvider
+Provides a random value between the min and max given, inclusively.
