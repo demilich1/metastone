@@ -1,7 +1,7 @@
 {
 	"id": "token_treant_taunt",
 	"name": "Treant",
-	"baseManaCost": 1,
+	"baseManaCost": 2,
 	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 2,

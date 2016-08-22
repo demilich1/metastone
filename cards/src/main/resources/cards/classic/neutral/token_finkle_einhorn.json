@@ -1,7 +1,7 @@
 {
 	"id": "token_finkle_einhorn",
 	"name": "Finkle Einhorn",
-	"baseManaCost": 2,
+	"baseManaCost": 3,
 	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 3,
