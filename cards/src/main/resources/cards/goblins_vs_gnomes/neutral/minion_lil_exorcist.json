@@ -17,8 +17,7 @@
 				"target": "ENEMY_MINIONS",
 				"attribute": "DEATHRATTLES"
 			}
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true,

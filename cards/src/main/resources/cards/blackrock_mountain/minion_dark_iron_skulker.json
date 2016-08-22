@@ -17,8 +17,7 @@
 				"class": "DamagedFilter",
 				"invert": true
 			}
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

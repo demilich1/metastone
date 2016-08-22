@@ -2,15 +2,15 @@ package net.demilich.metastone.game.events;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
-import net.demilich.metastone.game.entities.minions.Minion;
 
 public class SummonEvent extends GameEvent {
 
-	private final Minion minion;
+	private final Actor minion;
 	private final Card source;
 
-	public SummonEvent(GameContext context, Minion minion, Card source) {
+	public SummonEvent(GameContext context, Actor minion, Card source) {
 		super(context, minion.getOwner(), -1);
 		this.minion = minion;
 		this.source = source;
@@ -26,7 +26,7 @@ public class SummonEvent extends GameEvent {
 		return GameEventType.SUMMON;
 	}
 
-	public Minion getMinion() {
+	public Actor getMinion() {
 		return minion;
 	}
 

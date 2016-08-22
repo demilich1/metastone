@@ -17,8 +17,7 @@
 				"class": "CardFilter",
 				"cardType": "SPELL"
 			}
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

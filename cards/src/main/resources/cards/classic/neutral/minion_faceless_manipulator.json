@@ -12,8 +12,7 @@
 		"targetSelection": "MINIONS",
 		"spell": {
 			"class": "custom.FacelessSpell"
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

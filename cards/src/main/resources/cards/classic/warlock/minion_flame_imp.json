@@ -14,8 +14,7 @@
 			"class": "DamageSpell",
 			"target": "FRIENDLY_HERO",
 			"value": 3
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

@@ -17,8 +17,7 @@
 				"spell_power_of_the_horde",
 				"spell_rogues_do_it"
 			]
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

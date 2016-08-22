@@ -15,8 +15,7 @@
 			"spell": {
 				"class": "FromDeckToHandSpell"
 			}
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

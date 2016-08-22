@@ -22,21 +22,15 @@
 					"card": "hero_jaraxxus"
 				},
 				{
-					"class": "SetHeroHpSpell",
-					"target": "FRIENDLY_HERO",
-					"value": {
-						"class": "AttributeValueProvider",
-						"target": "SELF",
-						"attribute": "HP"
-					}
-				},
-				{
 					"class": "EquipWeaponSpell",
 					"card": "weapon_blood_fury"
+				},
+				{
+					"class": "OverrideTargetSpell",
+					"target": "FRIENDLY_HERO" 
 				}
 			]
-		},
-		"resolvedLate": true
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

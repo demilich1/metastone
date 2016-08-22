@@ -14,8 +14,7 @@
 			"class": "DrawCardSpell",
 			"targetPlayer": "BOTH",
 			"value": 2
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

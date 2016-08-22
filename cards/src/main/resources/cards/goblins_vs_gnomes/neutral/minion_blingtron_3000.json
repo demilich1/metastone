@@ -13,8 +13,7 @@
 		"spell": {
 			"class": "EquipRandomWeaponSpell",
 			"targetPlayer": "BOTH"
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

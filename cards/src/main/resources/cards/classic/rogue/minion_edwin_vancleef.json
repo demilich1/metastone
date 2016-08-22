@@ -18,8 +18,7 @@
 				"attribute": "COMBO",
 				"multiplier": 2
 			}
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"COMBO": true

@@ -18,8 +18,7 @@
 				"target": "FRIENDLY_WEAPON",
 				"attribute": "ATTACK"
 			}
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

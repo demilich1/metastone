@@ -13,8 +13,7 @@
 		"targetSelection": "MINIONS",
 		"spell": {
 			"class": "SilenceSpell"
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

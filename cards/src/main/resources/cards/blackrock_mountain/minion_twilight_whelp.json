@@ -18,8 +18,7 @@
 		"condition": {
 			"class": "HoldsCardCondition",
 			"race": "DRAGON"
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

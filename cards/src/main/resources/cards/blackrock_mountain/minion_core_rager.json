@@ -20,8 +20,7 @@
 			"class": "CardCountCondition",
 			"operation": "LESS_OR_EQUAL",
 			"value": 0
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

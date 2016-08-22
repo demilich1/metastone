@@ -13,8 +13,7 @@
 			"class": "SetAttackSpell",
 			"target": "ENEMY_MINIONS",
 			"value": 1
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

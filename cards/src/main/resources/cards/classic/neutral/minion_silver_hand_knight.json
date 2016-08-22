@@ -13,8 +13,7 @@
 			"class": "SummonSpell",
 			"card": "token_squire",
 			"boardPositionRelative": "RIGHT"
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

@@ -20,8 +20,7 @@
 			"spell": {
 				"class": "ReceiveCardSpell"
 			}
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

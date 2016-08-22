@@ -13,8 +13,7 @@
 		"spell": {
 			"class": "BuffSpell",
 			"hpBonus": 3
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

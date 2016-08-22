@@ -1630,7 +1630,7 @@ public class GameLogic implements Cloneable {
 			player.getMinions().add(index, minion);
 		}
 
-		if (resolveBattlecry && minion.getBattlecry() != null && !minion.getBattlecry().isResolvedLate()) {
+		if (resolveBattlecry && minion.getBattlecry() != null) {
 			resolveBattlecry(player.getId(), minion);
 			checkForDeadEntities();
 		}
@@ -1644,8 +1644,15 @@ public class GameLogic implements Cloneable {
 		context.fireGameEvent(new BoardChangedEvent(context));
 
 		player.getStatistics().minionSummoned(minion);
-		SummonEvent summonEvent = new SummonEvent(context, minion, source);
-		context.fireGameEvent(summonEvent);
+		if (context.getEnvironment().get(Environment.TARGET_OVERRIDE) != null) {
+			Actor actor = (Actor) context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.TARGET_OVERRIDE));
+			context.getEnvironment().remove(Environment.TARGET_OVERRIDE);
+			SummonEvent summonEvent = new SummonEvent(context, actor, source);
+			context.fireGameEvent(summonEvent);
+		} else {
+			SummonEvent summonEvent = new SummonEvent(context, minion, source);
+			context.fireGameEvent(summonEvent);
+		}
 
 		applyAttribute(minion, Attribute.SUMMONING_SICKNESS);
 		refreshAttacksPerRound(minion);
@@ -1656,11 +1663,6 @@ public class GameLogic implements Cloneable {
 
 		if (minion.getCardCostModifier() != null) {
 			addManaModifier(player, minion.getCardCostModifier(), minion);
-		}
-
-		if (resolveBattlecry && minion.getBattlecry() != null && minion.getBattlecry().isResolvedLate()) {
-			resolveBattlecry(player.getId(), minion);
-			checkForDeadEntities();
 		}
 
 		handleEnrage(minion);

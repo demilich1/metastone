@@ -13,8 +13,7 @@
 		"spell": {
 			"class": "ShuffleToDeckSpell",
 			"card": "spell_map_to_the_golden_monkey"
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

@@ -16,8 +16,7 @@
 				"class": "RaceFilter",
 				"race": "DEMON"
 			}
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

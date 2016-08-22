@@ -18,8 +18,7 @@
 				"class": "SpecificCardFilter",
 				"cardId": "token_silver_hand_recruit"
 			}
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

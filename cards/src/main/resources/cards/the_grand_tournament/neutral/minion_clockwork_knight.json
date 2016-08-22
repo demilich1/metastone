@@ -19,8 +19,7 @@
 				"class": "RaceFilter",
 				"race": "MECH"
 			}
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

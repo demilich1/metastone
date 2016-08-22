@@ -13,8 +13,7 @@
 		"spell": {
 			"class": "TemporaryAttackSpell",
 			"value": 2
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

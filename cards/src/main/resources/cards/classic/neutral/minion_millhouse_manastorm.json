@@ -23,8 +23,7 @@
 					"targetPlayer": "OPPONENT"
 				}
 			}
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

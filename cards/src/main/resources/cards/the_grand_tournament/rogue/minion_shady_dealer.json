@@ -18,8 +18,7 @@
 		"condition": {
 			"class": "RaceOnBoardCondition",
 			"race": "PIRATE"
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

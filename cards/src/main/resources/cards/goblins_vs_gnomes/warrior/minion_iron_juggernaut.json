@@ -14,8 +14,7 @@
 			"class": "ShuffleToDeckSpell",
 			"targetPlayer": "OPPONENT",
 			"card": "spell_burrowing_mine"
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

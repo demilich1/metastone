@@ -21,8 +21,7 @@
 				"attribute": "DEATHRATTLES",
 				"operation": "HAS"
 			}
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

@@ -27,8 +27,7 @@
 					"attribute": "DIVINE_SHIELD"
 				}
 			]
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

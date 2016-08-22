@@ -17,8 +17,7 @@
 				"token_poultryizer",
 				"token_repair_bot"
 			]
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true

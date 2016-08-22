@@ -13,8 +13,7 @@
 		"spell": {
 			"class": "AddAttributeSpell",
 			"attribute": "FROZEN"
-		},
-		"resolvedLate": false
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true
