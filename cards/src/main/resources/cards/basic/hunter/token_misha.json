@@ -8,6 +8,7 @@
 	"heroClass": "HUNTER",
 	"rarity": "FREE",
 	"race": "BEAST",
+	"description": "Taunt",
 	"attributes": {
 		"TAUNT": true
 	},

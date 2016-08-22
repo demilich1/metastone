@@ -1,6 +1,7 @@
 {
 	"id": "hero_jaraxxus",
 	"name": "Lord Jaraxxus",
+	"baseManaCost": 9,
 	"heroPower": "hero_power_inferno",
 	"type": "HERO",
 	"heroClass": "WARLOCK",
@@ -10,5 +11,7 @@
 		"HP": 15,
 		"MAX_HP": 15
 	},
-	"collectible": false
+	"collectible": false,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
 }

@@ -61,29 +61,98 @@ public class CardParser {
 	public CardDesc parseCard(ResourceInputStream resourceInputStream) throws FileNotFoundException {
 		JsonElement jsonData = gson.fromJson(new InputStreamReader(resourceInputStream.inputStream), JsonElement.class);
 
+		if (!jsonData.getAsJsonObject().has("id")) {
+			throw new RuntimeException(resourceInputStream.fileName + " is missing 'id' attribute!");
+		}
+		if (!jsonData.getAsJsonObject().has("name")) {
+			throw new RuntimeException(resourceInputStream.fileName + " is missing 'name' attribute!");
+		}
+		if (!jsonData.getAsJsonObject().has("baseManaCost")) {
+			throw new RuntimeException(resourceInputStream.fileName + " is missing 'baseManaCost' attribute!");
+		}
 		if (!jsonData.getAsJsonObject().has("type")) {
 			throw new RuntimeException(resourceInputStream.fileName + " is missing 'type' attribute!");
 		}
-
+		if (!jsonData.getAsJsonObject().has("heroClass")) {
+			throw new RuntimeException(resourceInputStream.fileName + " is missing 'heroClass' attribute!");
+		}
+		if (!jsonData.getAsJsonObject().has("rarity")) {
+			throw new RuntimeException(resourceInputStream.fileName + " is missing 'rarity' attribute!");
+		}
+		if (!jsonData.getAsJsonObject().has("set")) {
+			throw new RuntimeException(resourceInputStream.fileName + " is missing 'set' attribute!");
+		}
 		CardType type = CardType.valueOf((String) jsonData.getAsJsonObject().get("type").getAsString());
 		switch (type) {
 		case SPELL:
+			if (!jsonData.getAsJsonObject().has("description")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'description' attribute!");
+			}
+			if (!jsonData.getAsJsonObject().has("spell")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'spell' attribute!");
+			}
 			if (jsonData.getAsJsonObject().has("trigger")) {
 				return gson.fromJson(jsonData, SecretCardDesc.class);
 			} else {
+				if (!jsonData.getAsJsonObject().has("targetSelection")) {
+					throw new RuntimeException(resourceInputStream.fileName + " is missing 'targetSelection' attribute!");
+				}
 				return gson.fromJson(jsonData, SpellCardDesc.class);
 			}
 		case CHOOSE_ONE:
+			if (!jsonData.getAsJsonObject().has("description")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'description' attribute!");
+			}
+			if (!jsonData.getAsJsonObject().has("options")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'options' attribute!");
+			}
+			if (!jsonData.getAsJsonObject().has("bothOptions")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'bothOptions' attribute!");
+			}
 			return gson.fromJson(jsonData, ChooseOneCardDesc.class);
 		case MINION:
+			if (!jsonData.getAsJsonObject().has("baseAttack")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'baseAttack' attribute!");
+			}
+			if (!jsonData.getAsJsonObject().has("baseHp")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'baseHp' attribute!");
+			}
+			if (!jsonData.getAsJsonObject().has("description") && (jsonData.getAsJsonObject().has("battlecry") || 
+					jsonData.getAsJsonObject().has("deathrattle") ||jsonData.getAsJsonObject().has("attributes") || 
+					jsonData.getAsJsonObject().has("trigger") || jsonData.getAsJsonObject().has("passiveTrigger") || 
+					jsonData.getAsJsonObject().has("deckTrigger") || jsonData.getAsJsonObject().has("options"))) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'description' attribute!");
+			}
 			if (jsonData.getAsJsonObject().has("options")) {
 				return gson.fromJson(jsonData, ChooseBattlecryCardDesc.class);
 			} else {
 				return gson.fromJson(jsonData, MinionCardDesc.class);
 			}
 		case WEAPON:
+			if (!jsonData.getAsJsonObject().has("damage")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'damage' attribute!");
+			}
+			if (!jsonData.getAsJsonObject().has("durability")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'durability' attribute!");
+			}
+			if (!jsonData.getAsJsonObject().has("description") && (jsonData.getAsJsonObject().has("battlecry") || 
+					jsonData.getAsJsonObject().has("deathrattle") ||jsonData.getAsJsonObject().has("attributes") || 
+					jsonData.getAsJsonObject().has("trigger") || jsonData.getAsJsonObject().has("passiveTrigger") || 
+					jsonData.getAsJsonObject().has("deckTrigger") || jsonData.getAsJsonObject().has("onEquip") || 
+					jsonData.getAsJsonObject().has("onUnequip"))) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'description' attribute!");
+			}
 			return gson.fromJson(jsonData, WeaponCardDesc.class);
 		case HERO_POWER:
+			if (!jsonData.getAsJsonObject().has("description")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'description' attribute!");
+			}
+			if (!jsonData.getAsJsonObject().has("spell") && !jsonData.getAsJsonObject().has("options")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'spell' or 'options' attribute!");
+			}
+			if (!jsonData.getAsJsonObject().has("targetSelection")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'targetSelection' attribute!");
+			}
 			return gson.fromJson(jsonData, HeroPowerCardDesc.class);	
 		case HERO:
 			return gson.fromJson(jsonData, HeroCardDesc.class);

@@ -1,6 +1,7 @@
 {
 	"id": "hero_jaina",
 	"name": "Jaina Proudmoore",
+	"baseManaCost": 0,
 	"heroPower": "hero_power_fireblast",
 	"type": "HERO",
 	"heroClass": "MAGE",
@@ -9,5 +10,7 @@
 		"HP": 30,
 		"MAX_HP": 30
 	},
-	"collectible": true
+	"collectible": true,
+	"set": "BASIC",
+	"fileFormatVersion": 1
 }

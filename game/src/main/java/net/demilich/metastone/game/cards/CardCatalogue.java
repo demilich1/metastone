@@ -159,7 +159,8 @@ public class CardCatalogue {
 				}
 				cardDesc.put(desc.id, desc);
 			} catch (Exception e) {
-				logger.error("Error parsing card '{}'", resourceInputStream.fileName);
+				//logger.error("Error parsing card '{}'", resourceInputStream.fileName);
+				logger.error(e.toString());
 				badCards.add(resourceInputStream.fileName);
 			}
 		}
