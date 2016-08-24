@@ -236,6 +236,8 @@ public class TargetLogic {
 			return targets;
 		} else if (targetKey == EntityReference.ADJACENT_MINIONS) {
 			return new ArrayList<>(context.getAdjacentMinions(player, source.getReference()));
+		} else if (targetKey == EntityReference.OPPOSITE_MINIONS) {
+			return new ArrayList<>(context.getOppositeMinions(player, source.getReference()));
 		} else if (targetKey == EntityReference.SELF) {
 			return singleTargetAsList(source);
 		} else if (targetKey == EntityReference.EVENT_TARGET) {
@@ -269,6 +271,19 @@ public class TargetLogic {
 			return new ArrayList<>(player.getHand().toList());
 		} else if (targetKey == EntityReference.ENEMY_HAND) {
 			return new ArrayList<>(context.getOpponent(player).getHand().toList());
+		} else if (targetKey == EntityReference.LEFTMOST_FRIENDLY_MINION) {
+			if (player.getMinions().size() > 0) {
+				return singleTargetAsList(player.getMinions().get(0));
+			} else {
+				return new ArrayList<>();
+			}
+		} else if (targetKey == EntityReference.LEFTMOST_ENEMY_MINION) {
+			Player opponent = context.getOpponent(player);
+			if (opponent.getMinions().size() > 0) {
+				return singleTargetAsList(opponent.getMinions().get(0));
+			} else {
+				return new ArrayList<>();
+			}
 		}
 
 		return singleTargetAsList(findEntity(context, targetKey));
