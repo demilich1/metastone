@@ -308,6 +308,13 @@ public class GameContext implements Cloneable, IDisposable {
 		return logic.getValidActions(activePlayer);
 	}
 
+	public List<GameAction> getValidAutoActions() {
+		if (gameDecided()) {
+			return new ArrayList<>();
+		}
+		return logic.getAutoActions(activePlayer);
+	}
+
 	public int getWinningPlayerId() {
 		return winner == null ? -1 : winner.getId();
 	}
@@ -353,6 +360,11 @@ public class GameContext implements Cloneable, IDisposable {
 			return false;
 		}
 
+		List<GameAction> autoActions = getValidAutoActions();
+		if (!autoActions.isEmpty()) {
+			performAction(activePlayer, autoActions.get(0));
+			return true;
+		}
 		List<GameAction> validActions = getValidActions();
 		if (validActions.size() == 0) {
 			endTurn();

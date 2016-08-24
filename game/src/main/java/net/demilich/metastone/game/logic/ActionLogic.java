@@ -13,6 +13,7 @@ import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.actions.PhysicalAttackAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.IChooseOneCard;
+import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.minions.Minion;
@@ -36,13 +37,16 @@ public class ActionLogic {
 		return heroAttackActions;
 	}
 
-	private List<GameAction> getHeroPowerActions(GameContext context, Player player) {
+	private List<GameAction> getHeroPowerActions(GameContext context, Player player, TargetSelection targetSelection) {
 		List<GameAction> heroPowerActions = new ArrayList<GameAction>();
 		HeroPower heroPower = player.getHero().getHeroPower();
 		heroPower.onWillUse(context, player);
 		CardReference heroPowerReference = new CardReference(player.getId(), CardLocation.HERO_POWER, heroPower.getId(),
 				heroPower.getName());
 		if (!context.getLogic().canPlayCard(player.getId(), heroPowerReference)) {
+			return heroPowerActions;
+		}
+		if (targetSelection != null && heroPower.getTargetRequirement() != targetSelection) {
 			return heroPowerActions;
 		}
 		if (heroPower.hasAttribute(Attribute.CHOOSE_ONE)) {
@@ -72,12 +76,19 @@ public class ActionLogic {
 	}
 
 	private List<GameAction> getPlayCardActions(GameContext context, Player player) {
+		return getPlayCardActions(context, player, null);
+	}
+
+	private List<GameAction> getPlayCardActions(GameContext context, Player player, TargetSelection targetSelection) {
 		List<GameAction> playCardActions = new ArrayList<GameAction>();
-		playCardActions.addAll(getHeroPowerActions(context, player));
+		playCardActions.addAll(getHeroPowerActions(context, player, targetSelection));
 
 		for (Card card : player.getHand()) {
 			CardReference cardReference = new CardReference(player.getId(), CardLocation.HAND, card.getId(), card.getName());
 			if (!context.getLogic().canPlayCard(player.getId(), cardReference)) {
+				continue;
+			}
+			if (targetSelection != null && (!(card instanceof SpellCard) || ((SpellCard) card).getTargetRequirement() != targetSelection)) {
 				continue;
 			}
 
@@ -99,6 +110,12 @@ public class ActionLogic {
 		return playCardActions;
 	}
 
+	public List<GameAction> getAutoActions(GameContext context, Player player) {
+		List<GameAction> validActions = new ArrayList<GameAction>();
+		validActions.addAll(getPlayCardActions(context, player, TargetSelection.AUTO));
+		return validActions;
+	}
+
 	public List<GameAction> getValidActions(GameContext context, Player player) {
 		List<GameAction> validActions = new ArrayList<GameAction>();
 		validActions.addAll(getPhysicalAttackActions(context, player));
@@ -112,7 +129,7 @@ public class ActionLogic {
 
 	public void rollout(GameAction action, GameContext context, Player player, Collection<GameAction> actions) {
 		context.getLogic().processTargetModifiers(player, action);
-		if (action.getTargetRequirement() == TargetSelection.NONE) {
+		if (action.getTargetRequirement() == TargetSelection.NONE || action.getTargetRequirement() == TargetSelection.AUTO) {
 			actions.add(action);
 		} else {
 			for (Entity validTarget : targetLogic.getValidTargets(context, player, action)) {

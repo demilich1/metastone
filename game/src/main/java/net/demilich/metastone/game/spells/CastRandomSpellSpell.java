@@ -82,7 +82,7 @@ public class CastRandomSpellSpell extends Spell {
 				BattlecryAction battlecry = BattlecryAction.createBattlecry(copyCard.getSpell(), copyCard.getTargetRequirement());
 				GameAction battlecryAction = null;
 				battlecry.setSource(copyCard.getReference());
-				if (battlecry.getTargetRequirement() != TargetSelection.NONE) {
+				if (battlecry.getTargetRequirement() != TargetSelection.NONE && battlecry.getTargetRequirement() != TargetSelection.AUTO) {
 					List<Entity> validTargets = context.getLogic().getValidTargets(player.getId(), battlecry);
 					if (validTargets.isEmpty()) {
 						continue;

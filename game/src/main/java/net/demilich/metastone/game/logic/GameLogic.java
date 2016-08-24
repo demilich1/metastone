@@ -265,7 +265,7 @@ public class GameLogic implements Cloneable {
 				spellCard = (SpellCard) sourceCard;
 			}
 
-			if (spellCard != null && spellCard.getTargetRequirement() != TargetSelection.NONE && !childSpell) {
+			if (spellCard != null && (spellCard.getTargetRequirement() != TargetSelection.NONE && spellCard.getTargetRequirement() != TargetSelection.AUTO) && !childSpell) {
 				GameEvent spellTargetEvent = new TargetAcquisitionEvent(context, playerId, ActionType.SPELL, spellCard, targets.get(0));
 				context.fireGameEvent(spellTargetEvent);
 				Entity targetOverride = context
@@ -843,6 +843,11 @@ public class GameLogic implements Cloneable {
 		return total;
 	}
 
+	public List<GameAction> getAutoActions(int playerId) {
+		Player player = context.getPlayer(playerId);
+		return actionLogic.getAutoActions(context, player);
+	}
+
 	public List<GameAction> getValidActions(int playerId) {
 		Player player = context.getPlayer(playerId);
 		return actionLogic.getValidActions(context, player);
@@ -1189,7 +1194,7 @@ public class GameLogic implements Cloneable {
 		if (playerId != context.getActivePlayerId()) {
 			logger.warn("Player {} tries to perform an action, but it is not his turn!", context.getPlayer(playerId).getName());
 		}
-		if (action.getTargetRequirement() != TargetSelection.NONE) {
+		if (action.getTargetRequirement() != TargetSelection.NONE && action.getTargetRequirement() != TargetSelection.AUTO) {
 			Entity target = context.resolveSingleTarget(action.getTargetKey());
 			if (target != null) {
 				context.getEnvironment().put(Environment.TARGET, target.getReference());
@@ -1463,7 +1468,7 @@ public class GameLogic implements Cloneable {
 
 		GameAction battlecryAction = null;
 		battlecry.setSource(actor.getReference());
-		if (battlecry.getTargetRequirement() != TargetSelection.NONE) {
+		if (battlecry.getTargetRequirement() != TargetSelection.NONE && battlecry.getTargetRequirement() != TargetSelection.AUTO) {
 			List<Entity> validTargets = targetLogic.getValidTargets(context, player, battlecry);
 			if (validTargets.isEmpty()) {
 				return;
