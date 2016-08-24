@@ -252,6 +252,36 @@ public class GameContext implements Cloneable, IDisposable {
 	public Player getOpponent(Player player) {
 		return player.getId() == PLAYER_1 ? getPlayer2() : getPlayer1();
 	}
+
+	public List<Actor> getOppositeMinions(Player player, EntityReference minionReference) {
+		List<Actor> oppositeMinions = new ArrayList<>();
+		Actor minion = (Actor) resolveSingleTarget(minionReference);
+		Player owner = getPlayer(minion.getOwner());
+		Player opposingPlayer = getOpponent(owner);
+		int index = owner.getMinions().indexOf(minion);
+		if (opposingPlayer.getMinions().size() == 0 || owner.getMinions().size() == 0 || index == -1) {
+			return oppositeMinions;
+		}
+		List<Minion> opposingMinions = opposingPlayer.getMinions();
+		int delta = opposingPlayer.getMinions().size() - owner.getMinions().size();
+		if (delta % 2 == 0) {
+			delta /= 2;
+			int epsilon = delta + index;
+			if (epsilon > -1 && epsilon < opposingMinions.size()) {
+				oppositeMinions.add(opposingMinions.get(epsilon));
+			}
+		} else {
+			delta = (delta - 1) / 2;
+			int epsilon = delta + index;
+			if (epsilon > -1 && epsilon < opposingMinions.size()) {
+				oppositeMinions.add(opposingMinions.get(epsilon));
+			}
+			if (epsilon + 1 > -1 && epsilon + 1 < opposingMinions.size()) {
+				oppositeMinions.add(opposingMinions.get(epsilon + 1));
+			}
+		}
+		return oppositeMinions;
+	}
 	
 	public Card getPendingCard() {
 		return (Card) resolveSingleTarget((EntityReference) getEnvironment().get(Environment.PENDING_CARD));
