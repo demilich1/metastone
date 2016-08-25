@@ -9,7 +9,7 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "AddSpellTriggerSpell",
-		"target": "FRIENDLY_HERO",
+		"target": "FRIENDLY_PLAYER",
 		"trigger": {
 			"eventTrigger": {
 				"class": "SpellCastedTrigger",

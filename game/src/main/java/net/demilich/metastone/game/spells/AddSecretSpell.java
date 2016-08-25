@@ -15,7 +15,7 @@ public class AddSecretSpell extends Spell {
 	public static SpellDesc create(Secret secret) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(AddSecretSpell.class);
 		arguments.put(SpellArg.SECRET, secret);
-		arguments.put(SpellArg.TARGET, EntityReference.FRIENDLY_HERO);
+		arguments.put(SpellArg.TARGET, EntityReference.FRIENDLY_PLAYER);
 		return new SpellDesc(arguments);
 	}
 

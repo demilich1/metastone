@@ -11,7 +11,7 @@
 	"battlecry": {
 		"spell": {
 			"class": "CardCostModifierSpell",
-			"target": "FRIENDLY_HERO",
+			"target": "FRIENDLY_PLAYER",
 			"cardCostModifier": {
 				"class": "CardCostModifier",
 				"cardType": "SPELL",

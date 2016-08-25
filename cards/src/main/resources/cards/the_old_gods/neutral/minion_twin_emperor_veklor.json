@@ -49,7 +49,7 @@
 					"operation": "GREATER_OR_EQUAL",
 					"value1": {
 						"class": "AttributeValueProvider",
-						"target": "FRIENDLY_HERO",
+						"target": "FRIENDLY_PLAYER",
 						"attribute": "CTHUN_ATTACK_BUFF"
 					},
 					"value2": 4

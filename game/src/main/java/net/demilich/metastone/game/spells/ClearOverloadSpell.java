@@ -24,7 +24,7 @@ public class ClearOverloadSpell extends Spell {
 			player.setLockedMana(0);
 		}
 
-		player.getHero().removeAttribute(Attribute.OVERLOAD);
+		player.removeAttribute(Attribute.OVERLOAD);
 	}
 
 }

@@ -10,15 +10,14 @@ import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.logic.CustomCloneable;
 import net.demilich.metastone.game.statistics.GameStatistics;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
 
-public class Player extends CustomCloneable {
+public class Player extends Entity {
 
-	private final String name;
 	private Hero hero;
 	private final String deckName;
 
@@ -31,8 +30,6 @@ public class Player extends CustomCloneable {
 
 	private final GameStatistics statistics = new GameStatistics();
 
-	private int id = -1;
-
 	private int mana;
 	private int maxMana;
 	private int lockedMana;
@@ -42,7 +39,7 @@ public class Player extends CustomCloneable {
 	private IBehaviour behaviour;
 
 	private Player(Player otherPlayer) {
-		this.name = otherPlayer.name;
+		this.setName(otherPlayer.getName());
 		this.deckName = otherPlayer.getDeckName();
 		this.setHero(otherPlayer.getHero().clone());
 		this.deck = otherPlayer.getDeck().clone();
@@ -53,7 +50,7 @@ public class Player extends CustomCloneable {
 		this.graveyard.addAll(otherPlayer.graveyard);
 		this.setAsideZone.addAll(otherPlayer.setAsideZone);
 		this.secrets.addAll(otherPlayer.secrets);
-		this.id = otherPlayer.id;
+		this.setId(otherPlayer.getId());
 		this.mana = otherPlayer.mana;
 		this.maxMana = otherPlayer.maxMana;
 		this.lockedMana = otherPlayer.lockedMana;
@@ -64,9 +61,9 @@ public class Player extends CustomCloneable {
 	public Player(PlayerConfig config) {
 		config.build();
 		Deck selectedDeck = config.getDeckForPlay();
-		this.name = config.getName();
 		this.deck = selectedDeck.getCardsCopy();
 		this.setHero(config.getHeroForPlay().createHero());
+		this.setName(config.getName() + " - " + hero.getName());
 		this.deckName = selectedDeck.getName();
 		setBehaviour(config.getBehaviour().clone());
 		setHideCards(config.hideCards());
@@ -96,6 +93,11 @@ public class Player extends CustomCloneable {
 		return deckName;
 	}
 
+	@Override
+	public EntityType getEntityType() {
+		return EntityType.PLAYER;
+	}
+
 	public List<Entity> getGraveyard() {
 		return graveyard;
 	}
@@ -106,10 +108,6 @@ public class Player extends CustomCloneable {
 
 	public Hero getHero() {
 		return hero;
-	}
-
-	public int getId() {
-		return id;
 	}
 
 	public int getLockedMana() {
@@ -126,10 +124,6 @@ public class Player extends CustomCloneable {
 
 	public List<Minion> getMinions() {
 		return minions;
-	}
-
-	public String getName() {
-		return "'" + name + "' (" + getHero().getName() + ")";
 	}
 
 	public HashSet<String> getSecrets() {
@@ -158,10 +152,6 @@ public class Player extends CustomCloneable {
 
 	public void setHideCards(boolean hideCards) {
 		this.hideCards = hideCards;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public void setLockedMana(int lockedMana) {

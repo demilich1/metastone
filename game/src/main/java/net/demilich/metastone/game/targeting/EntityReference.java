@@ -20,7 +20,9 @@ public class EntityReference {
 	public static final EntityReference ENEMY_WEAPON = new EntityReference(-15);
 	public static final EntityReference FRIENDLY_HAND = new EntityReference(-16);
 	public static final EntityReference ENEMY_HAND = new EntityReference(-17);
-	
+
+	public static final EntityReference FRIENDLY_PLAYER = new EntityReference(-21);
+	public static final EntityReference ENEMY_PLAYER = new EntityReference(-22);
 
 	public static final EntityReference TARGET = new EntityReference(-30);
 	public static final EntityReference SPELL_TARGET = new EntityReference(-31);

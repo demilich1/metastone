@@ -38,13 +38,17 @@ public class AttributeValueProvider extends ValueProvider {
 				Card card = (Card) entity;
 				value += card.getAttributeValue(attribute);
 			} else {
-				Actor source = (Actor) entity;
-				if (attribute == Attribute.ATTACK) {
-					value += source.getAttack();
-				} else if (attribute == Attribute.MAX_HP) {
-					value += source.getMaxHp();
+				if (entity instanceof Actor) {
+					Actor source = (Actor) entity;
+					if (attribute == Attribute.ATTACK) {
+						value += source.getAttack();
+					} else if (attribute == Attribute.MAX_HP) {
+						value += source.getMaxHp();
+					} else {
+						value += source.getAttributeValue(attribute);
+					}
 				} else {
-					value += source.getAttributeValue(attribute);
+					value += entity.getAttributeValue(attribute);
 				}
 			}
 		}

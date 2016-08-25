@@ -75,6 +75,9 @@ public class TargetLogic {
 			return environmentResult;
 		}
 		for (Player player : context.getPlayers()) {
+			if (player.getId() == targetId) {
+				return player;
+			}
 			if (player.getHero().getId() == targetId) {
 				return player.getHero();
 			} else if (player.getHero().getWeapon() != null && player.getHero().getWeapon().getId() == targetId) {
@@ -269,6 +272,10 @@ public class TargetLogic {
 			return new ArrayList<>(player.getHand().toList());
 		} else if (targetKey == EntityReference.ENEMY_HAND) {
 			return new ArrayList<>(context.getOpponent(player).getHand().toList());
+		} else if (targetKey == EntityReference.FRIENDLY_PLAYER) {
+			return singleTargetAsList(player);
+		} else if (targetKey == EntityReference.ENEMY_PLAYER) {
+			return singleTargetAsList(context.getOpponent(player));
 		}
 
 		return singleTargetAsList(findEntity(context, targetKey));

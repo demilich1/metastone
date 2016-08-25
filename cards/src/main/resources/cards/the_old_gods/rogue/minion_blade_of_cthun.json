@@ -54,7 +54,7 @@
 				},
 				{
 					"class": "ModifyAttributeSpell",
-					"target": "FRIENDLY_HERO",
+					"target": "FRIENDLY_PLAYER",
 					"attribute": "CTHUN_ATTACK_BUFF",
 					"value": {
 						"class": "AttributeValueProvider",
@@ -64,7 +64,7 @@
 				},
 				{
 					"class": "ModifyAttributeSpell",
-					"target": "FRIENDLY_HERO",
+					"target": "FRIENDLY_PLAYER",
 					"attribute": "CTHUN_HEALTH_BUFF",
 					"value": {
 						"class": "AttributeValueProvider",

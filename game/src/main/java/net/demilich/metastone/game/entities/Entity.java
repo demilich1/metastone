@@ -15,6 +15,12 @@ public abstract class Entity extends CustomCloneable {
 	private int id = IdFactory.UNASSIGNED;
 	private int ownerIndex = -1;
 
+	@Override
+	public Entity clone() {
+		Entity clone = (Entity) super.clone();
+		return clone;
+	}
+
 	public Object getAttribute(Attribute attribute) {
 		return attributes.get(attribute);
 	}
