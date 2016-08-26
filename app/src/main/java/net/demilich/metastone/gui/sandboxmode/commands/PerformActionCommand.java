@@ -30,7 +30,7 @@ public class PerformActionCommand extends SimpleCommand<GameNotification> {
 		if (rolledOutActions.isEmpty()) {
 			return;
 		}
-		if (gameAction.getTargetRequirement() != TargetSelection.NONE) {
+		if (gameAction.getTargetRequirement() != TargetSelection.NONE && gameAction.getTargetRequirement() != TargetSelection.AUTO) {
 			ActionGroup actionGroup = new ActionGroup(rolledOutActions.get(0));
 			for (GameAction rolledAction : rolledOutActions) {
 				actionGroup.add(rolledAction);

@@ -734,6 +734,10 @@ public class GameLogic implements Cloneable {
 		return defaultValue;
 	}
 
+	public GameAction getAutoHeroPowerAction(int playerId) {
+		return actionLogic.getAutoHeroPower(context, context.getPlayer(playerId));
+	}
+
 	/**
 	 * Return the greatest value of the attribute from all Actors of a Player.
 	 * This method will return infinite if an Attribute value is negative, so
@@ -892,6 +896,10 @@ public class GameLogic implements Cloneable {
 		}
 
 		return false;
+	}
+
+	public boolean hasAutoHeroPower(int player) {
+		return actionLogic.hasAutoHeroPower(context, context.getPlayer(player));
 	}
 
 	public boolean hasCard(Player player, Card card) {

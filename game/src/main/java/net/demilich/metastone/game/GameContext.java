@@ -197,6 +197,10 @@ public class GameContext implements Cloneable, IDisposable {
 		return adjacentMinions;
 	}
 
+	public GameAction getAutoHeroPowerAction() {
+		return logic.getAutoHeroPowerAction(activePlayer);
+	}
+
 	public int getBoardPosition(Minion minion) {
 		for (Player player : getPlayers()) {
 			List<Minion> minions = player.getMinions();
@@ -251,6 +255,36 @@ public class GameContext implements Cloneable, IDisposable {
 
 	public Player getOpponent(Player player) {
 		return player.getId() == PLAYER_1 ? getPlayer2() : getPlayer1();
+	}
+
+	public List<Actor> getOppositeMinions(Player player, EntityReference minionReference) {
+		List<Actor> oppositeMinions = new ArrayList<>();
+		Actor minion = (Actor) resolveSingleTarget(minionReference);
+		Player owner = getPlayer(minion.getOwner());
+		Player opposingPlayer = getOpponent(owner);
+		int index = owner.getMinions().indexOf(minion);
+		if (opposingPlayer.getMinions().size() == 0 || owner.getMinions().size() == 0 || index == -1) {
+			return oppositeMinions;
+		}
+		List<Minion> opposingMinions = opposingPlayer.getMinions();
+		int delta = opposingPlayer.getMinions().size() - owner.getMinions().size();
+		if (delta % 2 == 0) {
+			delta /= 2;
+			int epsilon = delta + index;
+			if (epsilon > -1 && epsilon < opposingMinions.size()) {
+				oppositeMinions.add(opposingMinions.get(epsilon));
+			}
+		} else {
+			delta = (delta - 1) / 2;
+			int epsilon = delta + index;
+			if (epsilon > -1 && epsilon < opposingMinions.size()) {
+				oppositeMinions.add(opposingMinions.get(epsilon));
+			}
+			if (epsilon + 1 > -1 && epsilon + 1 < opposingMinions.size()) {
+				oppositeMinions.add(opposingMinions.get(epsilon + 1));
+			}
+		}
+		return oppositeMinions;
 	}
 	
 	public Card getPendingCard() {
@@ -312,6 +346,13 @@ public class GameContext implements Cloneable, IDisposable {
 		return winner == null ? -1 : winner.getId();
 	}
 
+	public boolean hasAutoHeroPower() {
+		if (gameDecided()) {
+			return false;
+		}
+		return logic.hasAutoHeroPower(activePlayer);
+	}
+
 	public boolean ignoreEvents() {
 		return ignoreEvents;
 	}
@@ -351,6 +392,10 @@ public class GameContext implements Cloneable, IDisposable {
 			logger.warn("Turn has been forcefully ended after {} actions", actionsThisTurn);
 			endTurn();
 			return false;
+		}
+		if (logic.hasAutoHeroPower(activePlayer)) {
+			performAction(activePlayer, getAutoHeroPowerAction());
+			return true;
 		}
 
 		List<GameAction> validActions = getValidActions();

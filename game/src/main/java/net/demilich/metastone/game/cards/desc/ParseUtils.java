@@ -179,6 +179,8 @@ public class ParseUtils {
 			return EntityReference.OTHER_FRIENDLY_MINIONS;
 		case "adjacent_minions":
 			return EntityReference.ADJACENT_MINIONS;
+		case "opposite_minions":
+			return EntityReference.OPPOSITE_MINIONS;
 		case "friendly_hero":
 			return EntityReference.FRIENDLY_HERO;
 		case "friendly_weapon":
@@ -209,6 +211,10 @@ public class ParseUtils {
 			return EntityReference.FRIENDLY_HAND;
 		case "enemy_hand":
 			return EntityReference.ENEMY_HAND;
+		case "leftmost_friendly_minion":
+			return EntityReference.LEFTMOST_FRIENDLY_MINION;
+		case "leftmost_enemy_minion":
+			return EntityReference.LEFTMOST_ENEMY_MINION;
 		case "friendly_player":
 			return EntityReference.FRIENDLY_PLAYER;
 		case "enemy_player":
