@@ -21,7 +21,7 @@ public class ComboSpell extends ConditionalEffectSpell {
 
 	@Override
 	protected boolean isConditionFulfilled(GameContext context, Player player, SpellDesc desc, Entity target) {
-		return player.getHero().hasAttribute(Attribute.COMBO);
+		return player.hasAttribute(Attribute.COMBO);
 	}
 
 }

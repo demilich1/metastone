@@ -32,7 +32,7 @@
 				},
 				{
 					"class": "AddAttributeSpell",
-					"target": "FRIENDLY_HERO",
+					"target": "FRIENDLY_PLAYER",
 					"attribute": "CTHUN_TAUNT"
 				}
 			]

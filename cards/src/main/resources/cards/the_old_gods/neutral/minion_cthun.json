@@ -32,12 +32,12 @@
 					"target": "SELF",
 					"attackBonus": {
 						"class": "AttributeValueProvider",
-						"target": "FRIENDLY_HERO",
+						"target": "FRIENDLY_PLAYER",
 						"attribute": "CTHUN_ATTACK_BUFF"
 					},
 					"hpBonus": {
 						"class": "AttributeValueProvider",
-						"target": "FRIENDLY_HERO",
+						"target": "FRIENDLY_PLAYER",
 						"attribute": "CTHUN_HEALTH_BUFF"
 					}
 				},
@@ -50,7 +50,7 @@
 					},
 					"condition": {
 						"class": "AttributeCondition",
-						"target": "FRIENDLY_HERO",
+						"target": "FRIENDLY_PLAYER",
 						"attribute": "CTHUN_TAUNT"
 					}
 				}

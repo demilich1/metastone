@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -145,7 +144,7 @@ public class GameLogic implements Cloneable {
 	public void afterCardPlayed(int playerId, CardReference cardReference) {
 		Player player = context.getPlayer(playerId);
 
-		player.getHero().modifyAttribute(Attribute.COMBO, +1);
+		player.modifyAttribute(Attribute.COMBO, +1);
 		Card card = context.resolveCardReference(cardReference);
 
 		if (card.getCardType().isCardType(CardType.SPELL) && !card.hasAttribute(Attribute.COUNTERED)) {
@@ -300,11 +299,6 @@ public class GameLogic implements Cloneable {
 		hero.setId(player.getHero().getId());
 		if (hero.getHeroClass() == null || hero.getHeroClass() == HeroClass.ANY) {
 			hero.setHeroClass(player.getHero().getHeroClass());
-		}
-
-		Map<Attribute, Object> attributesToCopy = player.getHero().getAttributesCopy();
-		for (Map.Entry<Attribute, Object> entry : attributesToCopy.entrySet()) {
-			hero.setAttribute(entry.getKey(), entry.getValue());
 		}
 
 		log("{}'s hero has been changed to {}", player.getName(), hero);
@@ -532,9 +526,9 @@ public class GameLogic implements Cloneable {
 		CardCollection deck = player.getDeck();
 		if (deck.isEmpty()) {
 			Hero hero = player.getHero();
-			int fatigue = hero.hasAttribute(Attribute.FATIGUE) ? hero.getAttributeValue(Attribute.FATIGUE) : 0;
+			int fatigue = player.hasAttribute(Attribute.FATIGUE) ? player.getAttributeValue(Attribute.FATIGUE) : 0;
 			fatigue++;
-			hero.setAttribute(Attribute.FATIGUE, fatigue);
+			player.setAttribute(Attribute.FATIGUE, fatigue);
 			damage(player, hero, fatigue, hero);
 			log("{}'s deck is empty, taking {} fatigue damage!", player.getName(), fatigue);
 			player.getStatistics().fatigueDamage(fatigue);
@@ -572,7 +566,7 @@ public class GameLogic implements Cloneable {
 			minion.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
 			handleFrozen(minion);
 		}
-		hero.removeAttribute(Attribute.COMBO);
+		player.removeAttribute(Attribute.COMBO);
 		hero.activateWeapon(false);
 		log("{} ends his turn.", player.getName());
 		context.fireGameEvent(new TurnEndEvent(context, playerId));
@@ -1244,7 +1238,7 @@ public class GameLogic implements Cloneable {
 		}
 
 		if (card.hasAttribute(Attribute.OVERLOAD)) {
-			player.getHero().modifyAttribute(Attribute.OVERLOAD, card.getAttributeValue(Attribute.OVERLOAD));
+			player.modifyAttribute(Attribute.OVERLOAD, card.getAttributeValue(Attribute.OVERLOAD));
 		}
 	}
 
@@ -1581,7 +1575,7 @@ public class GameLogic implements Cloneable {
 		}
 		player.getStatistics().startTurn();
 
-		player.setLockedMana(player.getHero().getAttributeValue(Attribute.OVERLOAD));
+		player.setLockedMana(player.getAttributeValue(Attribute.OVERLOAD));
 		int mana = Math.min(player.getMaxMana() - player.getLockedMana(), MAX_MANA);
 		player.setMana(mana);
 		String manaString = player.getMana() + "/" + player.getMaxMana();
@@ -1590,7 +1584,7 @@ public class GameLogic implements Cloneable {
 		}
 		log("{} starts his turn with {} mana", player.getName(), manaString);
 
-		player.getHero().removeAttribute(Attribute.OVERLOAD);
+		player.removeAttribute(Attribute.OVERLOAD);
 		for (Minion minion : player.getMinions()) {
 			minion.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
 		}

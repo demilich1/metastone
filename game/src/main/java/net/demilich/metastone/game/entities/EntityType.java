@@ -6,4 +6,5 @@ public enum EntityType {
 	MINION,
 	WEAPON,
 	CARD,
+	PLAYER,
 }

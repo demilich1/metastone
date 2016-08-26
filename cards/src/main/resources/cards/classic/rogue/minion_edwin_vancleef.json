@@ -14,7 +14,7 @@
 			"target": "SELF",
 			"value": {
 				"class": "AttributeValueProvider",
-				"target": "FRIENDLY_HERO",
+				"target": "FRIENDLY_PLAYER",
 				"attribute": "COMBO",
 				"multiplier": 2
 			}

@@ -209,6 +209,10 @@ public class ParseUtils {
 			return EntityReference.FRIENDLY_HAND;
 		case "enemy_hand":
 			return EntityReference.ENEMY_HAND;
+		case "friendly_player":
+			return EntityReference.FRIENDLY_PLAYER;
+		case "enemy_player":
+			return EntityReference.ENEMY_PLAYER;
 		default:
 			return null;
 		}
