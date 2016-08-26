@@ -1,0 +1,25 @@
+Filters
+
+AndFilter
+Combines multiple filters.
+
+AttributeFilter
+Filters based on the specific attribute given.
+
+CardFilter
+Filters based on a multitude of card attributes.
+
+DamagedFilter
+Filters entities if they are damaged or not.
+
+HighestAttributeFilter
+Filters entities based on which entity has the highest value of the attribute given.
+
+InDeckFilter
+Filters based on whether it belongs to the player's deck.
+
+RaceFilter
+Filters based on the Race given.
+
+SpecificCardFilter
+Filters based on the specific card name provided.

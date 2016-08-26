@@ -1659,6 +1659,13 @@ public class GameLogic implements Cloneable {
 			addManaModifier(player, minion.getCardCostModifier(), minion);
 		}
 
+		if (source != null) {
+			source.setAttribute(Attribute.ATTACK, source.getAttributeValue(Attribute.BASE_ATTACK));
+			source.setAttribute(Attribute.ATTACK_BONUS, 0);
+			source.setAttribute(Attribute.MAX_HP, source.getAttributeValue(Attribute.BASE_HP));
+			source.setAttribute(Attribute.HP, source.getAttributeValue(Attribute.BASE_HP));
+			source.setAttribute(Attribute.HP_BONUS, 0);
+		}
 		handleEnrage(minion);
 
 		context.getSummonReferenceStack().pop();
