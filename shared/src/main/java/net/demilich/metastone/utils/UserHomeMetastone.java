@@ -32,7 +32,6 @@ public class UserHomeMetastone {
 
     private UserHomeMetastone(String path) {
         dirPath = path;
-        Logger.getGlobal().info("UserHomeMetastone='" + dirPath + "'");
     }
 
     private static void init(String path) {

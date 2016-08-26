@@ -63,6 +63,23 @@ public class MetastoneProperties {
     }
     
     /**
+     * Convenience method to parse the value at the given key to a int value
+     * by calling Integer.parseInt(getProperty(key))
+     *
+     * @param key the property key
+     * @param defaultValue the value which is returned when the key is not present
+     * @return the int value in the Metastone properties file with the specified key.
+     * @throws IOException if the Metastone properties file cannot be loaded.
+     */
+    public static int getInt(String key, int defaultValue) throws IOException {
+    	String propertyValue = getProperty(key);
+    	if (propertyValue == null) {
+    		return defaultValue;
+    	}
+    	return Integer.parseInt(propertyValue);
+    }
+    
+    /**
      * Set the value for the given property key.
      *
      * @param key the key to be placed into this property list.

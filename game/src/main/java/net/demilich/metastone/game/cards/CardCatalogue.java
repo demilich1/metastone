@@ -28,7 +28,7 @@ public class CardCatalogue {
 	public static final String CARDS_FOLDER = "cards";
 	public static final String LOCAL_CARDS_FOLDER = "../cards/src/main/resources/cards/";
 	public static final String CARDS_FOLDER_PATH = UserHomeMetastone.getPath() + File.separator + CARDS_FOLDER;
-	public static final String CARDS_COPIED_PROPERTY = "cards.copied";
+	public static final String CARDS_COPIED_PROPERTY = "cardRevision";
 
 	private static Logger logger = LoggerFactory.getLogger(CardCatalogue.class);
 
@@ -179,23 +179,16 @@ public class CardCatalogue {
 	public static void copyCardsFromResources() throws IOException, URISyntaxException {
 		// if we have not copied cards to the USER_HOME_METASTONE cards folder,
 		// then do so now
-		String cardsCopiedWithVersion = MetastoneProperties.getProperty(CARDS_COPIED_PROPERTY);
-		boolean updateRequired;
-		try {
-			updateRequired = VersionInfo.updateRequired(cardsCopiedWithVersion, BuildConfig.VERSION);
-		} catch(Exception e) {
-			// an exception will be thrown when stored 'cardsCopiedWithVersion' is null or invalid input,
-			// this is okay, just do an update in that case
-			updateRequired = true;
-		}
-		if (updateRequired) {
-			logger.info("Card update required: MetaStone version is: {}, last card update was with version {}", BuildConfig.VERSION, cardsCopiedWithVersion);
+		int cardRevision = MetastoneProperties.getInt(CARDS_COPIED_PROPERTY, 0);
+		System.out.println("Existing card revision = " + cardRevision);
+		if (BuildConfig.CARD_REVISION > cardRevision) {
+			logger.info("Card update required: MetaStone card revision is: {}, last card update was with revision {}", BuildConfig.CARD_REVISION, cardRevision);
 			ResourceLoader.copyFromResources(CARDS_FOLDER, CARDS_FOLDER_PATH);
 
 			// set a property to indicate that we have copied the cards with current version
-			MetastoneProperties.setProperty(CARDS_COPIED_PROPERTY, BuildConfig.VERSION);
+			MetastoneProperties.setProperty(CARDS_COPIED_PROPERTY, String.valueOf(BuildConfig.CARD_REVISION));
 		} else {
-			logger.info("Cards in user home folder are up-to-date: {}", cardsCopiedWithVersion);
+			logger.info("Cards in user home folder are up-to-date: rev {}", cardRevision);
 		}
 	}
 }
