@@ -25,6 +25,10 @@ public class ActionLogic {
 
 	private final TargetLogic targetLogic = new TargetLogic();
 
+	public GameAction getAutoHeroPower(GameContext context, Player player) {
+		return getHeroPowerActions(context, player).get(0);
+	}
+
 	private List<GameAction> getHeroAttackActions(GameContext context, Player player) {
 		List<GameAction> heroAttackActions = new ArrayList<GameAction>();
 		Hero hero = player.getHero();
@@ -110,9 +114,17 @@ public class ActionLogic {
 		return validActions;
 	}
 
+	public boolean hasAutoHeroPower(GameContext context, Player player) {
+		HeroPower heroPower = player.getHero().getHeroPower();
+		heroPower.onWillUse(context, player);
+		CardReference heroPowerReference = new CardReference(player.getId(), CardLocation.HERO_POWER, heroPower.getId(),
+				heroPower.getName());
+		return (context.getLogic().canPlayCard(player.getId(), heroPowerReference) && heroPower.getTargetRequirement() == TargetSelection.AUTO);
+	}
+
 	public void rollout(GameAction action, GameContext context, Player player, Collection<GameAction> actions) {
 		context.getLogic().processTargetModifiers(player, action);
-		if (action.getTargetRequirement() == TargetSelection.NONE) {
+		if (action.getTargetRequirement() == TargetSelection.NONE || action.getTargetRequirement() == TargetSelection.AUTO) {
 			actions.add(action);
 		} else {
 			for (Entity validTarget : targetLogic.getValidTargets(context, player, action)) {
