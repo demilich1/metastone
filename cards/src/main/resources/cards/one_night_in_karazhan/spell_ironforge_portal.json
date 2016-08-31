@@ -1,9 +1,9 @@
 {
 	"id": "spell_ironforge_portal",
 	"name": "Ironforge Portal",
-	"baseManaCost": 4,
+	"baseManaCost": 5,
 	"type": "SPELL",
-	"heroClass": "PALADIN",
+	"heroClass": "WARRIOR",
 	"rarity": "COMMON",
 	"description": "Gain +4 Armor. Summon a random 4-Cost minion.",
 	"targetSelection": "NONE",
