@@ -25,6 +25,8 @@ public class EntityReference {
 	public static final EntityReference LEFTMOST_ENEMY_MINION = new EntityReference(-20);
 	public static final EntityReference FRIENDLY_PLAYER = new EntityReference(-21);
 	public static final EntityReference ENEMY_PLAYER = new EntityReference(-22);
+	public static final EntityReference MINIONS_TO_LEFT = new EntityReference(-23);
+	public static final EntityReference MINIONS_TO_RIGHT = new EntityReference(-24);
 
 	public static final EntityReference TARGET = new EntityReference(-30);
 	public static final EntityReference SPELL_TARGET = new EntityReference(-31);

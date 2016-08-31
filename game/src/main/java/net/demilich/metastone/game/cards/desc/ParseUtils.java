@@ -219,6 +219,10 @@ public class ParseUtils {
 			return EntityReference.FRIENDLY_PLAYER;
 		case "enemy_player":
 			return EntityReference.ENEMY_PLAYER;
+		case "minions_to_left":
+			return EntityReference.MINIONS_TO_LEFT;
+		case "minions_to_right":
+			return EntityReference.MINIONS_TO_RIGHT;
 		default:
 			return null;
 		}

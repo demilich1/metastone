@@ -245,6 +245,20 @@ public class GameContext implements Cloneable, IDisposable {
 		return (Stack<EntityReference>) environment.get(Environment.EVENT_TARGET_REFERENCE_STACK);
 	}
 
+	public List<Actor> getLeftMinions(Player player, EntityReference minionReference) {
+		List<Actor> leftMinions = new ArrayList<>();
+		Actor minion = (Actor) resolveSingleTarget(minionReference);
+		List<Minion> minions = getPlayer(minion.getOwner()).getMinions();
+		int index = minions.indexOf(minion);
+		if (index == -1) {
+			return null;
+		}
+		for (int i = 0; i < index; i++) {
+			leftMinions.add(minions.get(i));
+		}
+		return leftMinions;
+	}
+
 	public GameLogic getLogic() {
 		return logic;
 	}
@@ -305,6 +319,20 @@ public class GameContext implements Cloneable, IDisposable {
 
 	public Player[] getPlayers() {
 		return players;
+	}
+
+	public List<Actor> getRightMinions(Player player, EntityReference minionReference) {
+		List<Actor> rightMinions = new ArrayList<>();
+		Actor minion = (Actor) resolveSingleTarget(minionReference);
+		List<Minion> minions = getPlayer(minion.getOwner()).getMinions();
+		int index = minions.indexOf(minion);
+		if (index == -1) {
+			return null;
+		}
+		for (int i = index + 1; i < player.getMinions().size(); i++) {
+			rightMinions.add(minions.get(i));
+		}
+		return rightMinions;
 	}
 
 	@SuppressWarnings("unchecked")
