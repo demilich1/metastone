@@ -5,7 +5,7 @@
 	"type": "MINION",
 	"baseAttack": 6,
 	"baseHp": 6,
-	"heroClass": "ANY",
+	"heroClass": "WARLOCK",
 	"rarity": "COMMON",
 	"race": "DEMON",
 	"description": "",

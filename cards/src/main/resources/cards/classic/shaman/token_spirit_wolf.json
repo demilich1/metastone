@@ -5,7 +5,7 @@
 	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 3,
-	"heroClass": "ANY",
+	"heroClass": "SHAMAN",
 	"rarity": "RARE",
 	"description": "",
 	"attributes": {
