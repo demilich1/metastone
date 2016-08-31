@@ -20,9 +20,39 @@
 			"spell": {
 				"class": "ShuffleToDeckSpell",
 				"cardFilter": {
-					"class": "CardFilter",	
-					"cardType": "MINION",
-					"rarity": "LEGENDARY"
+					"class": "AndFilter",
+					"filters": [
+						{
+							"class": "CardFilter",	
+							"cardType": "MINION",
+							"rarity": "LEGENDARY"
+						},
+						{
+							"class": "OrFilter",
+							"invert": true,
+							"filters": [
+								{
+									"class": "InDeckFilter"
+								},
+								{
+									"class": "InHandFilter"
+								}
+							]
+						},
+						{
+							"class": "OrFilter",
+							"filters": [
+								{
+									"class": "CardFilter",
+									"heroClass": "ANY"
+								},
+								{
+									"class": "CardFilter",
+									"heroClass": "SELF"
+								}
+							]
+						}
+					]
 				}
 			}
 		}

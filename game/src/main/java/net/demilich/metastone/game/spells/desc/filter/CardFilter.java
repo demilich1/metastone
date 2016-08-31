@@ -65,7 +65,7 @@ public class CardFilter extends EntityFilter {
 		}
 		
 		HeroClass heroClass = (HeroClass) desc.get(FilterArg.HERO_CLASS);
-		if (heroClass != null && heroClass != HeroClass.ANY && !heroClassTest(context, player, card, heroClass)) {
+		if (heroClass != null && !heroClassTest(context, player, card, heroClass)) {
 			return false;
 		}
 		
