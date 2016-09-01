@@ -5,7 +5,7 @@
 	"type": "MINION",
 	"baseAttack": 1,
 	"baseHp": 1,
-	"heroClass": "ANY",
+	"heroClass": "WARLOCK",
 	"rarity": "COMMON",
 	"race": "DEMON",
 	"description": "You are out of demons! At least there are always imps...",

@@ -3,7 +3,7 @@
 	"name": "Burrowing Mine",
 	"baseManaCost": 0,
 	"type": "SPELL",
-	"heroClass": "ANY",
+	"heroClass": "WARRIOR",
 	"rarity": "FREE",
 	"description": "When you draw this, it explodes. You take 10 damage and draw a card.",
 	"targetSelection": "NONE",

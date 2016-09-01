@@ -4,9 +4,9 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 
-public class AndFilter extends EntityFilter {
+public class OrFilter extends EntityFilter {
 
-	public AndFilter(FilterDesc desc) {
+	public OrFilter(FilterDesc desc) {
 		super(desc);
 	}
 
@@ -14,11 +14,11 @@ public class AndFilter extends EntityFilter {
 	protected boolean test(GameContext context, Player player, Entity entity) {
 		EntityFilter[] filters = (EntityFilter[]) desc.get(FilterArg.FILTERS);
 		for (EntityFilter filter : filters) {
-			if (!filter.matches(context, player, entity)) {
-				return false;
+			if (filter.matches(context, player, entity)) {
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 
 }

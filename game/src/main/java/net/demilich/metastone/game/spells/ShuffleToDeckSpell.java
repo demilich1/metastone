@@ -35,7 +35,9 @@ public class ShuffleToDeckSpell extends Spell {
 
 		int howMany = desc.getValue(SpellArg.HOW_MANY, context, player, target, source, 1);
 		for (int i = 0; i < howMany; i++) {
-			context.getLogic().shuffleToDeck(player, card.clone());
+			if (card != null) {
+				context.getLogic().shuffleToDeck(player, card.clone());
+			}
 		}
 	}
 
