@@ -239,6 +239,12 @@ public class TargetLogic {
 			return targets;
 		} else if (targetKey == EntityReference.ADJACENT_MINIONS) {
 			return new ArrayList<>(context.getAdjacentMinions(player, source.getReference()));
+		} else if (targetKey == EntityReference.OPPOSITE_MINIONS) {
+			return new ArrayList<>(context.getOppositeMinions(player, source.getReference()));
+		} else if (targetKey == EntityReference.MINIONS_TO_LEFT) {
+			return new ArrayList<>(context.getLeftMinions(player, source.getReference()));
+		} else if (targetKey == EntityReference.MINIONS_TO_RIGHT) {
+			return new ArrayList<>(context.getRightMinions(player, source.getReference()));
 		} else if (targetKey == EntityReference.SELF) {
 			return singleTargetAsList(source);
 		} else if (targetKey == EntityReference.EVENT_TARGET) {
