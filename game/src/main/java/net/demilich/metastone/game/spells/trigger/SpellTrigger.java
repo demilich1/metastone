@@ -22,7 +22,6 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 	private boolean expired;
 	private boolean persistentOwner;
 	private int turnDelay;
-	private TriggerLayer layer = TriggerLayer.DEFAULT;
 
 	public SpellTrigger(GameEventTrigger primaryTrigger, GameEventTrigger secondaryTrigger, SpellDesc spell, boolean oneTurn, int turnDelay) {
 		this.primaryTrigger = primaryTrigger;
@@ -62,11 +61,6 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 	@Override
 	public EntityReference getHostReference() {
 		return hostReference;
-	}
-
-	@Override
-	public TriggerLayer getLayer() {
-		return layer;
 	}
 
 	@Override
@@ -141,10 +135,6 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 		this.hostReference = host.getReference();
 	}
 
-	protected void setLayer(TriggerLayer layer) {
-		this.layer = layer;
-	}
-
 	@Override
 	public void setOwner(int playerIndex) {
 		primaryTrigger.setOwner(playerIndex);
@@ -157,7 +147,7 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 	public String toString() {
 		return "[SpellTrigger primaryTrigger=" + primaryTrigger + ", secondaryTrigger=" + secondaryTrigger + ", spell=" + spell
 				+ ", hostReference=" + hostReference + ", oneTurn=" + oneTurn + ", expired=" + expired + ", persistentOwner="
-				+ persistentOwner + ", layer=" + layer + ", turnDelay=" + turnDelay + "]";
+				+ persistentOwner + ", turnDelay=" + turnDelay + "]";
 	}
 
 	@Override

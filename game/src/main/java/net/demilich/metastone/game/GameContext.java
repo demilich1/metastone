@@ -18,11 +18,11 @@ import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.events.GameEvent;
+import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.logic.MatchResult;
 import net.demilich.metastone.game.logic.TargetLogic;
 import net.demilich.metastone.game.spells.trigger.IGameEventListener;
-import net.demilich.metastone.game.spells.trigger.TriggerLayer;
 import net.demilich.metastone.game.spells.trigger.TriggerManager;
 import net.demilich.metastone.game.targeting.CardReference;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -145,15 +145,9 @@ public class GameContext implements Cloneable, IDisposable {
 	}
 
 	public void fireGameEvent(GameEvent gameEvent) {
-		fireGameEvent(gameEvent, TriggerLayer.SECRET);
-		fireGameEvent(gameEvent, TriggerLayer.DEFAULT);
-	}
-
-	public void fireGameEvent(GameEvent gameEvent, TriggerLayer layer) {
-		if (ignoreEvents()) {
+		if (ignoreEvents() && gameEvent.getEventType() != GameEventType.GAME_START) {
 			return;
 		}
-		gameEvent.setTriggerLayer(layer);
 		try {
 			triggerManager.fireGameEvent(gameEvent);	
 		} catch(Exception e) {

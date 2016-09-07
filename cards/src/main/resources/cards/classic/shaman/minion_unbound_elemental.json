@@ -10,8 +10,9 @@
 	"description": "Whenever you play a card with Overload, gain +1/+1.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "OverloadTrigger",
-			"targetPlayer": "SELF"
+			"class": "CardPlayedTrigger",
+			"targetPlayer": "SELF",
+			"requiredAttribute": "OVERLOAD"
 		},
 		"spell": {
 			"class": "BuffSpell",

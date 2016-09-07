@@ -14,8 +14,6 @@ public interface IGameEventListener {
 
 	public abstract EntityReference getHostReference();
 
-	public abstract TriggerLayer getLayer();
-
 	public abstract int getOwner();
 
 	public abstract boolean interestedIn(GameEventType eventType);
