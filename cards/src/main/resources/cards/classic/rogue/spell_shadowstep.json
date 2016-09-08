@@ -9,7 +9,16 @@
 	"targetSelection": "FRIENDLY_MINIONS",
 	"spell": {
 		"class": "ReturnMinionToHandSpell",
-		"manaModifier": -2
+		"spell": {
+			"class": "CardCostModifierSpell",
+			"target": "FRIENDLY_PLAYER",
+			"cardCostModifier": {
+				"class": "CardCostModifier",
+				"target": "EVENT_CARD",
+				"operation": "SUBTRACT",
+				"value": 2
+			}
+		}
 	},
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

@@ -11,9 +11,19 @@
 	"battlecry": {
 		"targetSelection": "NONE",
 		"spell": {
-			"class": "SummonSpell",
-			"value": 2,
-			"card": "token_whelp"
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "SummonSpell",
+					"card": "token_whelp",
+					"boardPositionRelative": "RIGHT"
+				},
+				{
+					"class": "SummonSpell",
+					"card": "token_whelp",
+					"boardPositionRelative": "LEFT"
+				}
+			]
 		},
 		"condition": {
 			"class": "HoldsCardCondition",

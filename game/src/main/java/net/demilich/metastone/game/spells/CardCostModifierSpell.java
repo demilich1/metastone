@@ -6,6 +6,7 @@ import java.util.Map;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -48,6 +49,10 @@ public class CardCostModifierSpell extends Spell {
 				return;
 			}
 			manaModifierDesc = manaModifierDesc.removeArg(CardCostModifierArg.TARGET);
+			manaModifierDesc = manaModifierDesc.addArg(CardCostModifierArg.CARD_IDS, cardIds);
+		} else if (target != null && target instanceof Card) {
+			List<Integer> cardIds = new ArrayList<Integer>();
+			cardIds.add(target.getId());
 			manaModifierDesc = manaModifierDesc.addArg(CardCostModifierArg.CARD_IDS, cardIds);
 		}
 		context.getLogic().addManaModifier(player, manaModifierDesc.create(), target);
