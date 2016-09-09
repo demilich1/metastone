@@ -5,7 +5,6 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
@@ -22,12 +21,12 @@ public class ReturnMinionToHandSpell extends Spell {
 	private static Logger logger = LoggerFactory.getLogger(ReturnMinionToHandSpell.class);
 
 	public static SpellDesc create() {
-		return create(null, 0, false);
+		return create(null, null, false);
 	}
 
-	public static SpellDesc create(EntityReference target, int manaModifier, boolean randomTarget) {
+	public static SpellDesc create(EntityReference target, SpellDesc spell, boolean randomTarget) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(ReturnMinionToHandSpell.class);
-		arguments.put(SpellArg.MANA_MODIFIER, manaModifier);
+		arguments.put(SpellArg.SPELL, spell);
 		arguments.put(SpellArg.TARGET, target);
 		arguments.put(SpellArg.RANDOM_TARGET, randomTarget);
 		return new SpellDesc(arguments);
@@ -35,7 +34,7 @@ public class ReturnMinionToHandSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		int manaCostModifier = desc.getValue(SpellArg.MANA_MODIFIER, context, player, target, source, 0);
+		SpellDesc cardSpell = (SpellDesc) desc.get(SpellArg.SPELL);
 		Minion minion = (Minion) target;
 		Player owner = context.getPlayer(minion.getOwner());
 		if (owner.getHand().getCount() >= GameLogic.MAX_HAND_CARDS) {
@@ -46,7 +45,11 @@ public class ReturnMinionToHandSpell extends Spell {
 			context.getLogic().removeMinion(minion, true);
 			Card sourceCard = minion.getSourceCard().getCopy();
 			context.getLogic().receiveCard(minion.getOwner(), sourceCard);
-			sourceCard.setAttribute(Attribute.MANA_COST_MODIFIER, manaCostModifier);
+			if (cardSpell != null) {
+				context.setEventCard(sourceCard);
+				SpellUtils.castChildSpell(context, player, cardSpell, source, sourceCard);
+				context.setEventCard(null);
+			}
 		}
 	}
 
