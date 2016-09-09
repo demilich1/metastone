@@ -60,9 +60,6 @@ public class TriggerManager implements Cloneable, IDisposable {
 			if (trigger.isExpired()) {
 				removeTriggers.add(trigger);
 			}
-			if (trigger.getLayer() != event.getTriggerLayer()) {
-				continue;
-			}
 
 			if (!trigger.interestedIn(event.getEventType())) {
 				continue;

@@ -72,7 +72,6 @@ import net.demilich.metastone.game.spells.desc.SpellFactory;
 import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
 import net.demilich.metastone.game.spells.trigger.IGameEventListener;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
-import net.demilich.metastone.game.spells.trigger.TriggerLayer;
 import net.demilich.metastone.game.spells.trigger.secrets.Secret;
 import net.demilich.metastone.game.targeting.CardLocation;
 import net.demilich.metastone.game.targeting.CardReference;
@@ -1236,10 +1235,8 @@ public class GameLogic implements Cloneable {
 
 		if ((card.getCardType().isCardType(CardType.SPELL))) {
 			GameEvent spellCastedEvent = new SpellCastedEvent(context, playerId, card);
-			context.fireGameEvent(spellCastedEvent, TriggerLayer.SECRET);
-			if (!card.hasAttribute(Attribute.COUNTERED)) {
-				context.fireGameEvent(spellCastedEvent);
-			} else {
+			context.fireGameEvent(spellCastedEvent);
+			if (card.hasAttribute(Attribute.COUNTERED)) {
 				log("{} was countered!", card.getName());
 				return;
 			}

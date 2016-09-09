@@ -19,7 +19,6 @@ import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 import net.demilich.metastone.game.spells.desc.valueprovider.AlgebraicOperation;
 import net.demilich.metastone.game.spells.trigger.GameEventTrigger;
 import net.demilich.metastone.game.spells.trigger.IGameEventListener;
-import net.demilich.metastone.game.spells.trigger.TriggerLayer;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class CardCostModifier extends CustomCloneable implements IGameEventListener {
@@ -107,11 +106,6 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 	@Override
 	public EntityReference getHostReference() {
 		return hostReference;
-	}
-
-	@Override
-	public TriggerLayer getLayer() {
-		return TriggerLayer.DEFAULT;
 	}
 
 	public int getMinValue() {
