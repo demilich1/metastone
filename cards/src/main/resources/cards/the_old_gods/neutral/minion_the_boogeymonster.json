@@ -10,8 +10,7 @@
 	"description": "When this attacks and kills a minion, give it +2/+2.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "DamageCausedTrigger",
-			"sourcePlayer": "ACTIVE",
+			"class": "AfterPhysicalAttackTrigger",
 			"targetEntityType": "MINION",
 			"hostTargetType": "IGNORE_OTHER_SOURCES",
 			"fireCondition": {

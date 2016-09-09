@@ -11,8 +11,7 @@
 	"description": "Whenever this minion kills another minion, it may attack again.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "DamageCausedTrigger",
-			"sourcePlayer": "ACTIVE",
+			"class": "AfterPhysicalAttackTrigger",
 			"targetEntityType": "MINION",
 			"hostTargetType": "IGNORE_OTHER_SOURCES",
 			"fireCondition": {
