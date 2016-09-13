@@ -7,6 +7,7 @@
 	"baseHp": 1,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
+	"description": "",
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

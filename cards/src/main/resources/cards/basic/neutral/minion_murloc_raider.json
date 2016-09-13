@@ -8,6 +8,7 @@
 	"heroClass": "ANY",
 	"rarity": "FREE",
 	"race": "MURLOC",
+	"description": "",
 	"collectible": true,
 	"set": "BASIC",
 	"fileFormatVersion": 1

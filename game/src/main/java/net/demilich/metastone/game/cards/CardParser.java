@@ -79,6 +79,9 @@ public class CardParser {
 		if (!jsonData.getAsJsonObject().has("rarity")) {
 			throw new RuntimeException(resourceInputStream.fileName + " is missing 'rarity' attribute!");
 		}
+		if (!jsonData.getAsJsonObject().has("collectible")) {
+			throw new RuntimeException(resourceInputStream.fileName + " is missing 'collectible' attribute!");
+		}
 		if (!jsonData.getAsJsonObject().has("set")) {
 			throw new RuntimeException(resourceInputStream.fileName + " is missing 'set' attribute!");
 		}

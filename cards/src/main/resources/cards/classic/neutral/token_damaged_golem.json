@@ -8,6 +8,7 @@
 	"heroClass": "ANY",
 	"rarity": "COMMON",
 	"race": "MECH",
+	"description": "",
 	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
