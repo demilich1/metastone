@@ -15,6 +15,6 @@
 		"attackBonus": 1
 	},
 	"collectible": false,
-	"set": "CLASSIC",
+	"set": "BASIC",
 	"fileFormatVersion": 1
 }
