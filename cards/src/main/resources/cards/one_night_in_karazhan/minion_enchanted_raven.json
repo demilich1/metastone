@@ -8,6 +8,7 @@
 	"heroClass": "DRUID",
 	"rarity": "COMMON",
 	"race": "BEAST",
+	"collectible": true,
 	"set": "ONE_NIGHT_IN_KARAZHAN",
 	"fileFormatVersion": 1
 }

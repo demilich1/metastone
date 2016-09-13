@@ -12,6 +12,7 @@
 		"target": "ENEMY_MINIONS",
 		"attribute": "FROZEN"
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

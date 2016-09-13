@@ -11,6 +11,7 @@
 		"class": "ReturnMinionToHandSpell",
 		"manaModifier": -2
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

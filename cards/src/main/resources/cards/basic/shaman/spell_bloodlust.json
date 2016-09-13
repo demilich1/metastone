@@ -12,6 +12,7 @@
 		"target": "FRIENDLY_MINIONS",
 		"value": 3
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

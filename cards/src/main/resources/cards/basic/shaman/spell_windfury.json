@@ -11,6 +11,7 @@
 		"class": "AddAttributeSpell",
 		"attribute": "WINDFURY"
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

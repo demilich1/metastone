@@ -12,6 +12,7 @@
 		"target": "ALL_CHARACTERS",
 		"value": 3
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

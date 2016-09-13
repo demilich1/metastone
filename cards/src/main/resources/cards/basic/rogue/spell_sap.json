@@ -10,6 +10,7 @@
 	"spell": {
 		"class": "ReturnMinionToHandSpell"
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

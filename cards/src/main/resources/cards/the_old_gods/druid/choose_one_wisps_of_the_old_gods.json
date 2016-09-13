@@ -12,6 +12,7 @@
 		"spell_wisps_of_the_old_gods_2"
 	],
 	"bothOptions": "spell_wisps_of_the_old_gods_3",
+	"collectible": true,
 	"set": "THE_OLD_GODS",
 	"fileFormatVersion": 1
 }

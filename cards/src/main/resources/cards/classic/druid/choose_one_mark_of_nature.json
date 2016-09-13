@@ -12,6 +12,7 @@
 		"spell_mark_of_nature_2"
 	],
 	"bothOptions": "spell_mark_of_nature_3",
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

@@ -8,6 +8,7 @@
 	"heroClass": "PALADIN",
 	"rarity": "FREE",
 	"description": "",
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }
