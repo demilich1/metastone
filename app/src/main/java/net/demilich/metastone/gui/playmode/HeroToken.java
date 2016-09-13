@@ -108,12 +108,14 @@ public class HeroToken extends GameToken {
 			ImageView secretIcon = new ImageView(IconFactory.getImageUrl("common/secret.png"));
 			secretsAnchor.getChildren().add(secretIcon);
 
-			Card card = CardCatalogue.getCardById(secretId);
-			Tooltip tooltip = new Tooltip();
-			CardTooltip tooltipContent = new CardTooltip();
-			tooltipContent.setCard(card);
-			tooltip.setGraphic(tooltipContent);
-			Tooltip.install(secretIcon, tooltip);
+			if (!player.hideCards()) {
+				Card card = CardCatalogue.getCardById(secretId);
+				Tooltip tooltip = new Tooltip();
+				CardTooltip tooltipContent = new CardTooltip();
+				tooltipContent.setCard(card);
+				tooltip.setGraphic(tooltipContent);
+				Tooltip.install(secretIcon, tooltip);
+			}
 		}
 	}
 
