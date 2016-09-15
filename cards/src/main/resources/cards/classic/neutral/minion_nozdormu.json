@@ -9,6 +9,7 @@
 	"rarity": "LEGENDARY",
 	"race": "DRAGON",
 	"description": "Players only have 15 seconds to take their turns.",
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

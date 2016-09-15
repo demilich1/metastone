@@ -8,6 +8,8 @@
 	"heroClass": "ANY",
 	"rarity": "FREE",
 	"race": "BEAST",
-	"set": "CLASSIC",
+	"description": "",
+	"collectible": true,
+	"set": "BASIC",
 	"fileFormatVersion": 1
 }

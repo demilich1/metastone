@@ -12,6 +12,7 @@
 		"target": "FRIENDLY_HERO",
 		"attackBonus": 4
 	},
-	"set": "CLASSIC",
+	"collectible": true,
+	"set": "BASIC",
 	"fileFormatVersion": 1
 }

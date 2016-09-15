@@ -7,7 +7,8 @@
 	"baseHp": 1,
 	"heroClass": "PALADIN",
 	"rarity": "FREE",
+	"description": "",
 	"collectible": false,
-	"set": "CLASSIC",
+	"set": "BASIC",
 	"fileFormatVersion": 1
 }

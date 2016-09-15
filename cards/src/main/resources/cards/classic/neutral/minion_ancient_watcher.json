@@ -11,6 +11,7 @@
 	"attributes": {
 		"CANNOT_ATTACK": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

@@ -12,6 +12,7 @@
 		"CHARGE": true,
 		"DIVINE_SHIELD": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

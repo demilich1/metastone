@@ -12,6 +12,7 @@
 		"spell_dark_wispers_2"
 	],
 	"bothOptions": "spell_dark_wispers_3",
+	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
 }

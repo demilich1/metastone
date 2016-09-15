@@ -16,6 +16,7 @@
 	"attributes": {
 		"DEATHRATTLES": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

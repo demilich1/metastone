@@ -12,6 +12,7 @@
 	"attributes": {
 		"UNTARGETABLE_BY_SPELLS": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

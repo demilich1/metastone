@@ -8,6 +8,7 @@
 	"heroClass": "HUNTER",
 	"rarity": "RARE",
 	"race": "BEAST",
+	"description": "",
 	"collectible": false,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

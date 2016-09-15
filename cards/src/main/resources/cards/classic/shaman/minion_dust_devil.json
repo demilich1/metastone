@@ -12,6 +12,7 @@
 		"OVERLOAD": 2,
 		"WINDFURY": true
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

@@ -12,6 +12,7 @@
 		"target": "ALL_MINIONS",
 		"value": 4
 	},
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

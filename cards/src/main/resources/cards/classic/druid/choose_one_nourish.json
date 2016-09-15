@@ -12,6 +12,7 @@
 		"spell_nourish_2"
 	],
 	"bothOptions": "spell_nourish_3",
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

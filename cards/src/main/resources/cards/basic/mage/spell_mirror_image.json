@@ -14,6 +14,7 @@
 			"token_mirror_image"
 		]
 	},
-	"set": "CLASSIC",
+	"collectible": true,
+	"set": "BASIC",
 	"fileFormatVersion": 1
 }

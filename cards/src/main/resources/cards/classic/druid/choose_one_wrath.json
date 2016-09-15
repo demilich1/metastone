@@ -12,6 +12,7 @@
 		"spell_wrath_2"
 	],
 	"bothOptions": "spell_wrath_3",
+	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1
 }

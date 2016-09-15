@@ -13,6 +13,7 @@
 		"attackBonus": 2,
 		"armorBonus": 2
 	},
-	"set": "CLASSIC",
+	"collectible": true,
+	"set": "BASIC",
 	"fileFormatVersion": 1
 }
