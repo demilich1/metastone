@@ -33,6 +33,7 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </padding>
             </VBox>
-         </children></VBox>
+         </children>
+      </VBox>
    </right>
 </fx:root>
