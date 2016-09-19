@@ -97,34 +97,34 @@ public class SecretTest extends TestBase {
 		context.getLogic().receiveCard(mage.getId(), otherSecret);
 		Assert.assertTrue(context.getLogic().canPlaySecret(mage, otherSecret));
 	}
-	
+
 	@Test
 	public void testDuplicate() {
 		GameContext context = createContext(HeroClass.MAGE, HeroClass.WARRIOR);
 		Player player = context.getPlayer1();
 		Player opponent = context.getPlayer2();
-		
+
 		playCard(context, player, CardCatalogue.getCardById("secret_duplicate"));
-		
+
 		Minion novice = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_novice_engineer"));
 		while (player.getHand().getCount() < GameLogic.MAX_HAND_CARDS) {
-			playCard(context, player, CardCatalogue.getCardById("minion_novice_engineer"));	
+			playCard(context, player, CardCatalogue.getCardById("minion_novice_engineer"));
 		}
 		Assert.assertEquals(player.getHand().getCount(), GameLogic.MAX_HAND_CARDS);
 		context.endTurn();
 		playCard(context, opponent, CardCatalogue.getCardById("weapon_fiery_war_axe"));
-		
+
 		attack(context, opponent, opponent.getHero(), novice);
-		// player has full hand, therefor Duplicate should not have triggered 
+		// player has full hand, therefor Duplicate should not have triggered
 		Assert.assertEquals(player.getSecrets().size(), 1);
 	}
-	
+
 	@Test
 	public void testExplosivePlusFreezingTrap() {
 		GameContext context = createContext(HeroClass.WARRIOR, HeroClass.HUNTER);
 		Player player = context.getPlayer1();
 		Player opponent = context.getPlayer2();
-		
+
 		MinionCard minionCard = (MinionCard) CardCatalogue.getCardById("minion_wisp");
 		Minion minion = playMinionCard(context, player, minionCard);
 		context.endTurn();
@@ -134,21 +134,21 @@ public class SecretTest extends TestBase {
 		Card freezingTrap = CardCatalogue.getCardById("secret_freezing_trap");
 		playCard(context, opponent, freezingTrap);
 		context.endTurn();
-		
+
 		Assert.assertEquals(player.getMinions().size(), 1);
 		Assert.assertEquals(opponent.getSecrets().size(), 2);
-		
+
 		attack(context, player, minion, opponent.getHero());
 		Assert.assertEquals(player.getMinions().size(), 0);
 		Assert.assertEquals(opponent.getSecrets().size(), 1);
 	}
-	
+
 	@Test
 	public void testFreezingPlusBearTrap() {
 		GameContext context = createContext(HeroClass.WARRIOR, HeroClass.HUNTER);
 		Player player = context.getPlayer1();
 		Player opponent = context.getPlayer2();
-		
+
 		MinionCard minionCard = (MinionCard) CardCatalogue.getCardById("minion_wisp");
 		Minion minion = playMinionCard(context, player, minionCard);
 		context.endTurn();
@@ -157,32 +157,49 @@ public class SecretTest extends TestBase {
 		playCard(context, opponent, freezingTrap);
 		Card explosiveTrap = CardCatalogue.getCardById("secret_bear_trap");
 		playCard(context, opponent, explosiveTrap);
-		
+
 		context.endTurn();
-		
+
 		Assert.assertEquals(player.getMinions().size(), 1);
 		Assert.assertEquals(opponent.getSecrets().size(), 2);
-		
+
 		attack(context, player, minion, opponent.getHero());
 		Assert.assertEquals(player.getMinions().size(), 0);
 		Assert.assertEquals(opponent.getSecrets().size(), 1);
 	}
-	
+
 	@Test
 	public void testIceBlockWithArmor() {
 		GameContext context = createContext(HeroClass.MAGE, HeroClass.WARRIOR);
 		Player player = context.getPlayer1();
 		Player opponent = context.getPlayer2();
-		
+
 		player.getHero().setHp(3);
 		player.getHero().setAttribute(Attribute.ARMOR, 10);
 		playCard(context, player, CardCatalogue.getCardById("secret_ice_block"));
 		context.endTurn();
-		
+
 		playCardWithTarget(context, opponent, CardCatalogue.getCardById("spell_bash"), player.getHero());
-		// Ice block should not have triggered, as the Mage had enough armor to prevent fatal damage
+		// Ice block should not have triggered, as the Mage had enough armor to
+		// prevent fatal damage
 		Assert.assertEquals(player.getSecrets().size(), 1);
 		Assert.assertFalse(player.getHero().hasAttribute(Attribute.IMMUNE));
+	}
+
+	@Test
+	public void testAvenge() {
+		GameContext context = createContext(HeroClass.PALADIN, HeroClass.WARRIOR);
+		Player player = context.getPlayer1();
+		Player opponent = context.getPlayer2();
+
+		playCard(context, player, CardCatalogue.getCardById("secret_avenge"));
+		playCard(context, player, CardCatalogue.getCardById("minion_murloc_raider"));
+		Minion minion = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_murloc_raider"));
+		Assert.assertEquals(player.getSecrets().size(), 1);
+		context.endTurn();
+		playCardWithTarget(context, opponent, CardCatalogue.getCardById("spell_bash"), minion);
+
+		Assert.assertEquals(player.getSecrets().size(), 0);
 	}
 
 }

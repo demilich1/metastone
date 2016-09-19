@@ -25,9 +25,6 @@
 			"hpBonus": 1
 		}
 	},
-	"attributes": {
-		"BATTLECRY": true
-	},
 	"collectible": true,
 	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
