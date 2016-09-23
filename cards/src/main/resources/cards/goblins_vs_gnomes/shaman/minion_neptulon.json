@@ -9,8 +9,9 @@
 	"rarity": "LEGENDARY",
 	"description": "Battlecry: Add 4 random Murlocs to your hand. Overload: (3)",
 	"battlecry": {
+		"targetSelection": "NONE",
 		"spell": {
-			"class": "ReceiveRandomCollectibleCardSpell",
+			"class": "ReceiveCardSpell",
 			"value": 4,
 			"cardFilter": {
 				"class": "RaceFilter",
