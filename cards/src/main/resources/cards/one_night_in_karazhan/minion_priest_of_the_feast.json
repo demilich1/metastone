@@ -16,7 +16,7 @@
 		"spell": {
 			"class": "HealSpell",
 			"target": "FRIENDLY_HERO",
-			"howMany": 3
+			"value": 3
 		}
 	},
 	"collectible": true,
