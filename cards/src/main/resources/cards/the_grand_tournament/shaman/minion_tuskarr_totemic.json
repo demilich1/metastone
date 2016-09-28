@@ -7,17 +7,17 @@
 	"baseHp": 2,
 	"heroClass": "SHAMAN",
 	"rarity": "COMMON",
-	"description": "Battlecry: Summon ANY random Totem.",
+	"description": "Battlecry: Summon a random basic Totem.",
 	"battlecry": {
 		"spell": {
-			"class": "SummonRandomMinionFilteredSpell",
+			"class": "SummonRandomSpell",
 			"boardPositionRelative": "RIGHT",
-			"includeUncollectible": true,
-			"cardFilter": {
-				"class": "CardFilter",
-				"cardType": "MINION",
-				"race": "TOTEM"
-			}
+			"cards": [
+				"token_searing_totem",
+				"token_healing_totem",
+				"token_wrath_of_air_totem",
+				"token_stoneclaw_totem"
+			]
 		}
 	},
 	"attributes": {
