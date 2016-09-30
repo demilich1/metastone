@@ -185,7 +185,7 @@ public abstract class Card extends Entity {
 
 	@Override
 	public String toString() {
-		return String.format("[%s '%s' Manacost:%d]", getCardType(), getName(), getBaseManaCost());
+		return String.format("[%s '%s' %s Manacost:%d]", getCardType(), getName(), getReference(), getBaseManaCost());
 	}
 
 }

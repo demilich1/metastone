@@ -32,11 +32,16 @@ public class Aura extends SpellTrigger {
 		setEntityFilter(desc.getFilter());
 	}
 
-	public Aura(GameEventTrigger secondaryTrigger, SpellDesc applyAuraEffect, SpellDesc removeAuraEffect, EntityReference targetSelection) {
+	public Aura(GameEventTrigger secondaryTrigger, SpellDesc applyAuraEffect, SpellDesc removeAuraEffect, EntityReference targetSelection, EntityFilter entityFilter) {
 		super(new BoardChangedTrigger(), secondaryTrigger, applyAuraEffect, false);
 		this.applyAuraEffect = applyAuraEffect;
 		this.removeAuraEffect = removeAuraEffect;
 		this.targets = targetSelection;
+		this.entityFilter = entityFilter;
+	}
+
+	public Aura(GameEventTrigger secondaryTrigger, SpellDesc applyAuraEffect, SpellDesc removeAuraEffect, EntityReference targetSelection) {
+		this(null, applyAuraEffect, removeAuraEffect, targetSelection, null);
 	}
 
 	public Aura(SpellDesc applyAuraEffect, SpellDesc removeAuraEffect, EntityReference targetSelection) {
