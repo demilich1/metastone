@@ -41,7 +41,7 @@ public class Aura extends SpellTrigger {
 	}
 
 	public Aura(GameEventTrigger secondaryTrigger, SpellDesc applyAuraEffect, SpellDesc removeAuraEffect, EntityReference targetSelection) {
-		this(null, applyAuraEffect, removeAuraEffect, targetSelection, null);
+		this(secondaryTrigger, applyAuraEffect, removeAuraEffect, targetSelection, null);
 	}
 
 	public Aura(SpellDesc applyAuraEffect, SpellDesc removeAuraEffect, EntityReference targetSelection) {
