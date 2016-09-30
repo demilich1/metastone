@@ -75,11 +75,16 @@
          <children>
           <VBox maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0">
             <children>
+            <StackPane fx:id="heroPowerPane" prefHeight="-1.0" prefWidth="-1.0">
+	      	 <children>
               <ImageView id="heropower" fx:id="heroPowerIcon" fitHeight="150.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" translateY="0.0" y="0.0">
                 <image>
                   <Image url="/img/powers/armor_up.png" />
                 </image>
-              </ImageView>
+               </ImageView>
+              <Group fx:id="heroPowerAnchor" translateX="0.0" translateY="-5.0" StackPane.alignment="TOP_CENTER" />
+             </children>
+            </StackPane>
               <Label id="mana" fx:id="manaLabel" alignment="CENTER" maxWidth="64.0" styleClass="mana-label" text="Mana: 10/10" textAlignment="LEFT" textFill="#0066ff" translateX="8.0" translateY="4.0" wrapText="true" VBox.vgrow="ALWAYS">
                 <font>
                   <Font name="Arial Bold" size="16.0" />
