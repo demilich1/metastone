@@ -151,6 +151,8 @@ public class CardCatalogue {
 		Map<String, CardDesc> cardDesc = new HashMap<String, CardDesc>();
 		ArrayList<String> badCards = new ArrayList<>();
 		CardParser cardParser = new CardParser();
+		System.out.println("loading cards");
+
 		for (ResourceInputStream resourceInputStream : inputStreams) {
 			try {
 				CardDesc desc = cardParser.parseCard(resourceInputStream);
@@ -158,8 +160,12 @@ public class CardCatalogue {
 					logger.error("Card id {} is duplicated!", desc.id);
 				}
 				cardDesc.put(desc.id, desc);
+				if (desc.id.equals("minion_the_curator_p")){
+					System.out.println("parsing new card");
+				}
 			} catch (Exception e) {
 				//logger.error("Error parsing card '{}'", resourceInputStream.fileName);
+				System.out.println(e.toString());
 				logger.error(e.toString());
 				badCards.add(resourceInputStream.fileName);
 			}

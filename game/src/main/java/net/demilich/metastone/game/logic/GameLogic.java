@@ -107,8 +107,8 @@ public class GameLogic implements Cloneable {
 	private final TargetLogic targetLogic = new TargetLogic();
 	private final ActionLogic actionLogic = new ActionLogic();
 	private final SpellFactory spellFactory = new SpellFactory();
-	private final IdFactory idFactory;
-	private GameContext context;
+	protected final IdFactory idFactory;
+	protected GameContext context;
 
 	private boolean loggingEnabled = true;
 
@@ -185,7 +185,7 @@ public class GameLogic implements Cloneable {
 		return baseValue + spellpower;
 	}
 
-	private void assignCardIds(CardCollection cardCollection) {
+	protected void assignCardIds(CardCollection cardCollection) {
 		for (Card card : cardCollection) {
 			card.setId(idFactory.generateId());
 			card.setLocation(CardLocation.DECK);
@@ -1043,7 +1043,7 @@ public class GameLogic implements Cloneable {
 		}
 	}
 
-	private void log(String message, Object param1, Object param2) {
+	protected void log(String message, Object param1, Object param2) {
 		logToDebugHistory(message, param1, param2);
 		if (isLoggingEnabled() && logger.isDebugEnabled()) {
 			logger.debug(message, param1, param2);
@@ -1133,7 +1133,7 @@ public class GameLogic implements Cloneable {
 		}
 	}
 
-	private void mulligan(Player player, boolean begins) {
+	protected void mulligan(Player player, boolean begins) {
 		int numberOfStarterCards = begins ? STARTER_CARDS : STARTER_CARDS + 1;
 		List<Card> starterCards = new ArrayList<>();
 		for (int j = 0; j < numberOfStarterCards; j++) {
