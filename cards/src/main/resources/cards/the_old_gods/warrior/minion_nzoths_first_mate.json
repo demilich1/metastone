@@ -7,6 +7,7 @@
 	"baseHp": 1,
 	"heroClass": "WARRIOR",
 	"rarity": "COMMON",
+	"race": "PIRATE",
 	"description": "Battlecry: Equip a 1/3 Rusty Hook.",
 	"battlecry": {
 		"spell": {
