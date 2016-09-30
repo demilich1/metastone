@@ -9,8 +9,9 @@
 	"rarity": "EPIC",
 	"description": "Battlecry: Add a random Paladin card to your hand.",
 	"battlecry": {
+		"targetSelection": "NONE",
 		"spell": {
-			"class": "ReceiveRandomCollectibleCardSpell",
+			"class": "ReceiveCardSpell",
 			"cardFilter": {
 				"class": "CardFilter",
 				"heroClass": "PALADIN"

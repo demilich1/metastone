@@ -9,7 +9,7 @@
 	"rarity": "RARE",
 	"description": "Deathrattle: Add a random class card to your hand (from your opponent's class).",
 	"deathrattle": {
-		"class": "ReceiveRandomCollectibleCardSpell",
+		"class": "ReceiveCardSpell",
 		"value": 1,
 		"card": "spell_the_coin",
 		"cardFilter": {

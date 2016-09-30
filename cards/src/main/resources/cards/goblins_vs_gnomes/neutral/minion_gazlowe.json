@@ -23,7 +23,7 @@
 			}
 		},
 		"spell": {
-			"class": "ReceiveRandomCollectibleCardSpell",
+			"class": "ReceiveCardSpell",
 			"cardFilter": {
 				"class": "RaceFilter",
 				"race": "MECH"

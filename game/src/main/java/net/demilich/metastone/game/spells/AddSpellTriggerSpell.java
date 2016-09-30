@@ -13,14 +13,14 @@ import net.demilich.metastone.game.targeting.EntityReference;
 
 public class AddSpellTriggerSpell extends Spell {
 
-	public static SpellDesc create(EntityReference target, SpellTrigger trigger) {
+	public static SpellDesc create(EntityReference target, TriggerDesc trigger) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(AddSpellTriggerSpell.class);
 		arguments.put(SpellArg.TRIGGER, trigger);
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
 	}
 
-	public static SpellDesc create(SpellTrigger trigger) {
+	public static SpellDesc create(TriggerDesc trigger) {
 		return create(null, trigger);
 	}
 

@@ -8,7 +8,7 @@
 	"description": "Add 3 random Mage spells to your hand.",
 	"targetSelection": "NONE",
 	"spell": {
-		"class": "ReceiveRandomCollectibleCardSpell",
+		"class": "ReceiveCardSpell",
 		"value": 3,
 		"cardFilter": {
 			"class": "CardFilter",
