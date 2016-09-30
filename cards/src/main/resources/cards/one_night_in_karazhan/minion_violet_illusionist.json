@@ -1,10 +1,10 @@
 {
 	"id": "minion_violet_illusionist",
 	"name": "Violet Illusionist",
-	"baseManaCost": 4,
+	"baseManaCost": 3,
 	"type": "MINION",
-	"baseAttack": 3,
-	"baseHp": 4,
+	"baseAttack": 4,
+	"baseHp": 3,
 	"heroClass": "ANY",
 	"rarity": "RARE",
 	"description": "During your turn, your Hero is immune.",
