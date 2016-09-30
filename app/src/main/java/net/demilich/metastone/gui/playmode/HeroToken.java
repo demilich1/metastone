@@ -1,5 +1,7 @@
 package net.demilich.metastone.gui.playmode;
 
+import java.util.HashSet;
+
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
@@ -114,7 +116,8 @@ public class HeroToken extends GameToken {
 
 	private void updateSecrets(Player player) {
 		secretsAnchor.getChildren().clear();
-		for (String secretId : player.getSecrets()) {
+		HashSet<String> secretsCopy = player.getSecrets();
+		for (String secretId : secretsCopy) {
 			ImageView secretIcon = new ImageView(IconFactory.getImageUrl("common/secret.png"));
 			secretsAnchor.getChildren().add(secretIcon);
 
