@@ -16,7 +16,7 @@ buildConfig {
 	packageName = 'net.demilich.metastone'
 	version = project.version
 	appName = rootProject.name
-	buildConfigField 'int', 'CARD_REVISION', '6'
+	buildConfigField 'int', 'CARD_REVISION', '7'
 	buildConfigField 'boolean', 'DEV_BUILD', project.hasProperty('DEV_BUILD').toString()
 	buildConfigField 'int', 'DEFAULT_SLEEP_DELAY', '100'
 }
