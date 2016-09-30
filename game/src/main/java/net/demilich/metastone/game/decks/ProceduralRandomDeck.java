@@ -39,8 +39,6 @@ public class ProceduralRandomDeck extends Deck {
 			return card.isCollectible() && !card.getCardType().isCardType(CardType.HERO) && !card.getCardType().isCardType(CardType.HERO_POWER) && card.getClassRestriction() == HeroClass.ANY;
 		});
 		
-		System.out.println(classCards.getCount() + ", " + neutralCards.getCount());
-
 		while (!copyDeck.isComplete()) {
 			// random deck consists of roughly 50% class cards and 50% neutral
 			// cards
