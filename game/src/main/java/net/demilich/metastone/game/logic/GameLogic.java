@@ -695,7 +695,9 @@ public class GameLogic implements Cloneable {
 		logger.debug("{} gains {} armor", player.getHero(), armor);
 		player.getHero().modifyArmor(armor);
 		player.getStatistics().armorGained(armor);
-		context.fireGameEvent(new ArmorGainedEvent(context, player.getHero()));
+		if (armor > 0) {
+			context.fireGameEvent(new ArmorGainedEvent(context, player.getHero()));
+		}
 	}
 
 	public Actor getAnotherRandomTarget(Player player, Actor attacker, Actor originalTarget, EntityReference potentialTargets) {

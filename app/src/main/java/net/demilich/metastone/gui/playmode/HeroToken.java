@@ -1,5 +1,7 @@
 package net.demilich.metastone.gui.playmode;
 
+import java.util.HashSet;
+
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
@@ -9,12 +11,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.weapons.Weapon;
-import net.demilich.metastone.gui.DigitFactory;
 import net.demilich.metastone.gui.IconFactory;
 import net.demilich.metastone.gui.cards.CardTooltip;
 
@@ -47,6 +49,8 @@ public class HeroToken extends GameToken {
 	private ImageView portrait;
 
 	@FXML
+	private Group heroPowerAnchor;
+	@FXML
 	private ImageView heroPowerIcon;
 
 	@FXML
@@ -73,11 +77,9 @@ public class HeroToken extends GameToken {
 
 	public void setHero(Player player) {
 		Hero hero = player.getHero();
-		DigitFactory.showPreRenderedDigits(attackAnchor, hero.getAttack());
+		setScoreValue(attackAnchor, hero.getAttack());
 		Image portraitImage = new Image(IconFactory.getHeroIconUrl(hero.getHeroClass()));
 		portrait.setImage(portraitImage);
-		Image heroPowerImage = new Image(IconFactory.getHeroPowerIconUrl(hero.getHeroPower()));
-		heroPowerIcon.setImage(heroPowerImage);
 		setScoreValue(hpAnchor, hero.getHp(), hero.getAttributeValue(Attribute.BASE_HP), hero.getMaxHp());
 		if (!player.getDeck().isEmpty()) {
 			cardsLabel.setText("Cards in deck: " + player.getDeck().getCount());
@@ -90,21 +92,32 @@ public class HeroToken extends GameToken {
 			manaLabel.setText("Mana: " + player.getMana() + "/" + player.getMaxMana());
 		}
 		updateArmor(hero.getArmor());
+		updateHeroPower(hero);
 		updateWeapon(hero.getWeapon());
 		updateSecrets(player);
 		updateStatus(hero);
 	}
 
 	private void updateArmor(int armor) {
-		DigitFactory.showPreRenderedDigits(armorAnchor, armor);
+		setScoreValue(armorAnchor, armor);
 		boolean visible = armor > 0;
 		armorIcon.setVisible(visible);
 		armorAnchor.setVisible(visible);
 	}
 
+	private void updateHeroPower(Hero hero) {
+		Image heroPowerImage = new Image(IconFactory.getHeroPowerIconUrl(hero.getHeroPower()));
+		heroPowerIcon.setImage(heroPowerImage);
+	}
+
+	public void updateHeroPowerCost(GameContext context, Player player) {
+		setScoreValueLowerIsBetter(heroPowerAnchor, context.getLogic().getModifiedManaCost(player, player.getHero().getHeroPower()), player.getHero().getHeroPower().getBaseManaCost());
+	}
+
 	private void updateSecrets(Player player) {
 		secretsAnchor.getChildren().clear();
-		for (String secretId : player.getSecrets()) {
+		HashSet<String> secretsCopy = player.getSecrets();
+		for (String secretId : secretsCopy) {
 			ImageView secretIcon = new ImageView(IconFactory.getImageUrl("common/secret.png"));
 			secretsAnchor.getChildren().add(secretIcon);
 

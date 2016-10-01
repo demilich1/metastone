@@ -1,6 +1,7 @@
 package net.demilich.metastone.game.spells;
 
-import net.demilich.metastone.game.Attribute;
+import java.util.Map;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
@@ -11,8 +12,16 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.heroes.powers.HeroPower;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.filter.CardFilter;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.spells.desc.filter.FilterArg;
+import net.demilich.metastone.game.spells.desc.filter.FilterDesc;
+import net.demilich.metastone.game.spells.desc.trigger.EventTriggerArg;
+import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
+import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
+import net.demilich.metastone.game.spells.desc.valueprovider.AlgebraicOperation;
+import net.demilich.metastone.game.spells.trigger.CardDrawnTrigger;
+import net.demilich.metastone.game.targeting.EntityReference;
 
 public class RenounceClassSpell extends Spell {
 
@@ -33,7 +42,6 @@ public class RenounceClassSpell extends Spell {
 		int manaCostModifier = desc.getValue(SpellArg.MANA_MODIFIER, context, player, target, source, 0);
 		
 		CardCollection heroPowers = CardCatalogue.getHeroPowers(context.getDeckFormat());
-		
 		for (Card heroPowerCard : heroPowers) {
 			if (heroPowerCard.getClassRestriction() == rebornClass) {
 				HeroPower heroPower = (HeroPower) heroPowerCard;
@@ -45,15 +53,24 @@ public class RenounceClassSpell extends Spell {
 		for (Card card : player.getDeck()) {
 			if (card.getClassRestriction() == renouncedClass) {
 				replacedCards.add(card);
-				
 			}
 		}
 		for (Card card : replacedCards) {
 			Card replacement = result.getRandom().getCopy();
-			replacement.setAttribute(Attribute.MANA_COST_MODIFIER, manaCostModifier);
 			context.getLogic().replaceCardInDeck(player.getId(), card, replacement);
 		}
+		Map<EventTriggerArg, Object> eventTriggerMap = EventTriggerDesc.build(CardDrawnTrigger.class);
+		eventTriggerMap.put(EventTriggerArg.TARGET_PLAYER, TargetPlayer.SELF);
+		Map<FilterArg, Object> filterMap = FilterDesc.build(CardFilter.class);
+		filterMap.put(FilterArg.HERO_CLASS, rebornClass);
+		CardFilter newCardFilter = new CardFilter(new FilterDesc(filterMap));
+		TriggerDesc triggerDesc = new TriggerDesc();
+		triggerDesc.eventTrigger = new EventTriggerDesc(eventTriggerMap);
+		triggerDesc.spell = CardCostModifierSpell.create(EntityReference.EVENT_TARGET, AlgebraicOperation.ADD, manaCostModifier, newCardFilter);
+		SpellDesc spellTriggerSpell = AddSpellTriggerSpell.create(triggerDesc);
+		SpellUtils.castChildSpell(context, player, spellTriggerSpell, source, player);
 		
+		replacedCards = new CardCollection();
 		for (Card card : player.getHand()) {
 			if (card.getClassRestriction() == renouncedClass) {
 				replacedCards.add(card);
@@ -61,8 +78,8 @@ public class RenounceClassSpell extends Spell {
 		}
 		for (Card card : replacedCards) {
 			Card replacement = result.getRandom().getCopy();
-			replacement.setAttribute(Attribute.MANA_COST_MODIFIER, manaCostModifier);
 			context.getLogic().replaceCard(player.getId(), card, replacement);
+			SpellUtils.castChildSpell(context, player, CardCostModifierSpell.create(replacement.getReference(), AlgebraicOperation.ADD, manaCostModifier), source, null);
 		}
 	}
 

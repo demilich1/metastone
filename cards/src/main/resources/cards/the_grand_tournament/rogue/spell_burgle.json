@@ -8,7 +8,7 @@
 	"description": "Add 2 random class cards to your hand (from your opponent's class).",
 	"targetSelection": "NONE",
 	"spell": {
-		"class": "ReceiveRandomCollectibleCardSpell",
+		"class": "ReceiveCardSpell",
 		"value": 2,
 		"card": "spell_the_coin",
 		"cardFilter": {

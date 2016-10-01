@@ -10,8 +10,9 @@
 	"race": "DRAGON",
 	"description": "Battlecry: Add 2 random spells to your hand (from your opponent's class).",
 	"battlecry": {
+		"targetSelection": "NONE",
 		"spell": {
-			"class": "ReceiveRandomCollectibleCardSpell",
+			"class": "ReceiveCardSpell",
 			"value": 2,
 			"card": "spell_tail_swipe",
 			"cardFilter": {

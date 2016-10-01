@@ -1,7 +1,7 @@
 {
 	"id": "weapon_spirit_claws",
 	"name": "Spirit Claws",
-	"baseManaCost": 3,
+	"baseManaCost": 1,
 	"type": "WEAPON",
 	"damage": 1,
 	"durability": 3,

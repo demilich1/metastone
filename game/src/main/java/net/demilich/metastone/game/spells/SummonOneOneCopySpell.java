@@ -25,6 +25,7 @@ public class SummonOneOneCopySpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		EntityFilter cardFilter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
+		int boardPosition = SpellUtils.getBoardPosition(context, player, desc, source);
 		MinionCard minionCard = null;
 		if (cardFilter != null) {
 			CardCollection relevantMinions = null;
@@ -42,7 +43,7 @@ public class SummonOneOneCopySpell extends Spell {
 
 		if (minionCard != null) {
 			Minion minion = minionCard.summon();
-			if (context.getLogic().summon(player.getId(), minion)) {
+			if (context.getLogic().summon(player.getId(), minion, null, boardPosition, false)) {
 				minion.setAttack(1);
 				minion.setHp(1);
 				minion.setMaxHp(1);

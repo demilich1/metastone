@@ -8,12 +8,10 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.gui.DigitFactory;
 import net.demilich.metastone.gui.cards.CardTooltip;
 
 public class MinionToken extends GameToken {
@@ -54,13 +52,7 @@ public class MinionToken extends GameToken {
 	public void setMinion(Minion minion) {
 		name.setText(minion.getName());
 		setScoreValue(attackAnchor, minion.getAttack(), minion.getAttributeValue(Attribute.BASE_ATTACK));
-		Color color = Color.WHITE;
-		if (minion.getHp() < minion.getMaxHp()) {
-			color = Color.RED;
-		} else if (minion.getHp() > minion.getAttributeValue(Attribute.BASE_HP)) {
-			color = Color.GREEN;
-		}
-		DigitFactory.showPreRenderedDigits(hpAnchor, minion.getHp(), color);
+		setScoreValue(hpAnchor, minion.getHp(), minion.getBaseHp(), minion.getMaxHp());
 		visualizeStatus(minion);
 		cardTooltip.setCard(minion.getSourceCard());
 	}

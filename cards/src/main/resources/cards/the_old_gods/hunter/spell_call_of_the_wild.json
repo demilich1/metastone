@@ -1,7 +1,7 @@
 {
 	"id": "spell_call_of_the_wild",
 	"name": "Call of the Wild",
-	"baseManaCost": 8,
+	"baseManaCost": 9,
 	"type": "SPELL",
 	"heroClass": "HUNTER",
 	"rarity": "EPIC",
