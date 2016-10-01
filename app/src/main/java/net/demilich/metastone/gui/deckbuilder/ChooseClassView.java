@@ -48,10 +48,10 @@ public class ChooseClassView extends BorderPane implements EventHandler<ActionEv
 
 	@FXML
 	private Button collectionButton;
-	
+
 	@FXML
 	private CheckBox arbitraryCheckBox;
-	
+
 	private boolean arbitrary;
 
 	public ChooseClassView() {
@@ -65,7 +65,7 @@ public class ChooseClassView extends BorderPane implements EventHandler<ActionEv
 			throw new RuntimeException(exception);
 		}
 		arbitrary = false;
-		
+
 		setupArbitraryBox();
 
 		warriorButton.setOnAction(this);
@@ -87,7 +87,7 @@ public class ChooseClassView extends BorderPane implements EventHandler<ActionEv
 	public void handle(ActionEvent event) {
 		Deck newDeck = null;
 
-		if (MetaStone.procedural){
+		if (MetaStone.procedural) {
 			if (event.getSource() == warriorButton) {
 				newDeck = new Bench(HeroClass.WARRIOR, arbitrary);
 			} else if (event.getSource() == paladinButton) {
@@ -131,7 +131,7 @@ public class ChooseClassView extends BorderPane implements EventHandler<ActionEv
 			} else if (event.getSource() == collectionButton) {
 				newDeck = new MetaDeck();
 			}
-			
+
 		}
 		NotificationProxy.sendNotification(GameNotification.SET_ACTIVE_DECK, newDeck);
 	}

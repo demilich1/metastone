@@ -36,7 +36,7 @@ public class StartBattleOfDecksCommand extends SimpleCommand<GameNotification> {
 		private final PlayerConfig player1Config;
 		private final PlayerConfig player2Config;
 		private final BattleBatchResult batchResult;
-		
+
 
 		public PlayGameTask(Deck deck1, Deck deck2, IBehaviour behaviour, BattleBatchResult batchResult) {
 			this.player1Config = new PlayerConfig(deck1, behaviour);
@@ -50,22 +50,20 @@ public class StartBattleOfDecksCommand extends SimpleCommand<GameNotification> {
 		public Void call() throws Exception {
 			Player player1 = new Player(player1Config);
 			Player player2 = new Player(player2Config);
-			
-			if (MetaStone.procedural){
-				player1 = new ProceduralPlayer (player1Config);
-				player2 = new ProceduralPlayer (player2Config);
+
+			if (MetaStone.procedural) {
+				player1 = new ProceduralPlayer(player1Config);
+				player2 = new ProceduralPlayer(player2Config);
 			}
-	
+
 			DeckFormat deckFormat = new DeckFormat();
 			for (CardSet set : CardSet.values()) {
 				deckFormat.addSet(set);
 			}
-			System.out.println("starting battle");
-
 
 			GameContext newGame = new GameContext(player1, player2, new GameLogic(), deckFormat);
-			if (MetaStone.procedural){
-				newGame = new GameContext(player1 , player2, new ProceduralGameLogic(), deckFormat);
+			if (MetaStone.procedural) {
+				newGame = new GameContext(player1, player2, new ProceduralGameLogic(), deckFormat);
 			}
 			newGame.play();
 
