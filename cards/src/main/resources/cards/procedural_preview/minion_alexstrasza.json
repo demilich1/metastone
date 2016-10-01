@@ -1,0 +1,25 @@
+{
+	"id": "minion_alexstrasza_p",
+	"name": "Alexstrasza",
+	"baseManaCost": 9,
+	"type": "MINION",
+	"baseAttack": 8,
+	"baseHp": 8,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"race": "DRAGON",
+	"description": "Battlecry: Set a hero's remaining Health to 15.",
+	"battlecry": {
+		"targetSelection": "HEROES",
+		"spell": {
+			"class": "SetHeroHpSpell",
+			"value": 15
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "PROCEDURAL_PREVIEW",
+	"fileFormatVersion": 1
+}

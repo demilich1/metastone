@@ -12,6 +12,7 @@ import javafx.scene.layout.HBox;
 import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.NotificationProxy;
+import net.demilich.metastone.game.decks.Bench;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.gui.IconFactory;
 import net.demilich.metastone.gui.dialog.DialogNotification;
