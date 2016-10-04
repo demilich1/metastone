@@ -108,6 +108,12 @@ public class HeroToken extends GameToken {
 	private void updateHeroPower(Hero hero) {
 		Image heroPowerImage = new Image(IconFactory.getHeroPowerIconUrl(hero.getHeroPower()));
 		heroPowerIcon.setImage(heroPowerImage);
+		Card card = CardCatalogue.getCardById(hero.getHeroPower().getCardId());
+		Tooltip tooltip = new Tooltip();
+		CardTooltip tooltipContent = new CardTooltip();
+		tooltipContent.setCard(card);
+		tooltip.setGraphic(tooltipContent);
+		Tooltip.install(heroPowerIcon, tooltip);
 	}
 
 	public void updateHeroPowerCost(GameContext context, Player player) {
@@ -143,6 +149,12 @@ public class HeroToken extends GameToken {
 			weaponNameLabel.setText(weapon.getName());
 			setScoreValue(weaponAttackAnchor, weapon.getWeaponDamage(), weapon.getAttributeValue(Attribute.BASE_ATTACK));
 			setScoreValue(weaponDurabilityAnchor, weapon.getDurability(), weapon.getAttributeValue(Attribute.BASE_HP), weapon.getAttributeValue(Attribute.MAX_HP));
+			Card card = CardCatalogue.getCardById(weapon.getSourceCard().getCardId());
+			Tooltip tooltip = new Tooltip();
+			CardTooltip tooltipContent = new CardTooltip();
+			tooltipContent.setCard(card);
+			tooltip.setGraphic(tooltipContent);
+			Tooltip.install(weaponPane, tooltip);
 		}
 	}
 
