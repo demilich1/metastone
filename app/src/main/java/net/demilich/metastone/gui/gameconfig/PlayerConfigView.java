@@ -99,7 +99,7 @@ public class PlayerConfigView extends VBox {
 				if (deck.getHeroClass() != HeroClass.DECK_COLLECTION) {
 					continue;
 				}
-				if (deckFormat != null && deckFormat.inSet(deck)) {
+				if (deckFormat != null && deckFormat.isInFormat(deck)) {
 					deckList.add(deck);
 				}
 			}
@@ -111,7 +111,7 @@ public class PlayerConfigView extends VBox {
 					continue;
 				}
 				if (deck.getHeroClass() == heroClass || deck.getHeroClass() == HeroClass.ANY) {
-					if (deckFormat != null && deckFormat.inSet(deck)) {
+					if (deckFormat != null && deckFormat.isInFormat(deck)) {
 						deckList.add(deck);
 					}
 				}

@@ -15,11 +15,13 @@ import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.decks.Deck;
+import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.decks.MetaDeck;
 import net.demilich.metastone.gui.deckbuilder.metadeck.MetaDeckListView;
 import net.demilich.metastone.gui.deckbuilder.metadeck.MetaDeckView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DeckBuilderView extends BorderPane implements EventHandler<ActionEvent> {
@@ -49,6 +51,8 @@ public class DeckBuilderView extends BorderPane implements EventHandler<ActionEv
 	private final DeckNameView deckNameView;
 	private final MetaDeckView metaDeckView;
 	private final MetaDeckListView metaDeckListView;
+
+	private List<DeckFormat> deckFormats = new ArrayList<DeckFormat>();
 
 	public DeckBuilderView() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/DeckBuilderView.fxml"));
@@ -107,7 +111,7 @@ public class DeckBuilderView extends BorderPane implements EventHandler<ActionEv
 		} else {
 			showMainArea(cardView);
 			showSidebar(cardListView);
-			showBottomBar(new CardFilterView());
+			showBottomBar(new CardFilterView(deckFormats));
 		}
 		showLowerInfoArea(deckInfoView);
 		showUpperInfoArea(deckNameView);
@@ -125,6 +129,10 @@ public class DeckBuilderView extends BorderPane implements EventHandler<ActionEv
 		} else if (event.getSource() == backButton) {
 			NotificationProxy.sendNotification(GameNotification.MAIN_MENU);
 		}
+	}
+
+	public void injectDeckFormats(List<DeckFormat> deckFormats) {
+		this.deckFormats.addAll(deckFormats);
 	}
 
 	private void showBottomBar(Node content) {

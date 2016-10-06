@@ -29,6 +29,9 @@
             <Insets />
          </opaqueInsets>
       </HBox>
-      <ComboBox fx:id="cardSetBox" prefWidth="150.0" />
+      <VBox>
+        <ComboBox fx:id="cardSetBox" prefWidth="150.0" />
+        <ComboBox fx:id="deckFormatBox" prefWidth="150.0" />
+      </VBox>
    </children>
 </fx:root>
