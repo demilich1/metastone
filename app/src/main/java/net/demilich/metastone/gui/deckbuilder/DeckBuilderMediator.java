@@ -8,6 +8,7 @@ import net.demilich.nittygrittymvc.interfaces.INotification;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.decks.Deck;
+import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.decks.validation.DefaultDeckValidator;
 import net.demilich.metastone.gui.dialog.DialogNotification;
 import net.demilich.metastone.gui.dialog.DialogType;
@@ -49,6 +50,10 @@ public class DeckBuilderMediator extends Mediator<GameNotification> {
 					DialogType.WARNING);
 			getFacade().notifyObservers(dialogNotification);
 			break;
+		case DECK_FORMATS_LOADED:
+			List<DeckFormat> deckFormats = (List<DeckFormat>) notification.getBody();
+			view.injectDeckFormats(deckFormats);
+			break;
 		case DUPLICATE_DECK_NAME:
 			getFacade().notifyObservers(new DialogNotification("Duplicate deck name",
 					"This deck name was already used for another deck. Please choose another name", DialogType.WARNING));
@@ -76,6 +81,7 @@ public class DeckBuilderMediator extends Mediator<GameNotification> {
 	public void onRegister() {
 		getFacade().sendNotification(GameNotification.SHOW_VIEW, view);
 		getFacade().sendNotification(GameNotification.LOAD_DECKS);
+		getFacade().sendNotification(GameNotification.LOAD_DECK_FORMATS);
 	}
 
 }

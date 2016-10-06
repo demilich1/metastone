@@ -9,8 +9,18 @@ import net.demilich.nittygrittymvc.interfaces.INotification;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardSet;
+import net.demilich.metastone.game.decks.DeckFormat;
 
 public class FilterCardsCommand extends SimpleCommand<GameNotification> {
+
+	private static List<Card> filterByFormat(List<Card> collection, DeckFormat format) {
+		if (format == null) {
+			return collection;
+		}
+
+		collection.removeIf(card -> !format.isInFormat(card));
+		return collection;
+	}
 
 	private static List<Card> filterBySet(List<Card> collection, CardSet set) {
 		if (set == CardSet.ANY) {
@@ -37,6 +47,7 @@ public class FilterCardsCommand extends SimpleCommand<GameNotification> {
 		DeckProxy deckProxy = (DeckProxy) getFacade().retrieveProxy(DeckProxy.NAME);
 
 		List<Card> cards = deckProxy.getCards(deckProxy.getActiveDeck().getHeroClass());
+		cards = filterByFormat(cards, filter.getFormat());
 		cards = filterBySet(cards, filter.getSet());
 		cards = filterByText(cards, filter.getText());
 
