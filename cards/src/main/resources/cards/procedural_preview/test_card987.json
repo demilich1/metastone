@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "987O", "heroClass": "ANY", "description": "<b>Divine Shield</b>", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 4.0, "baseManaCost": 4.0, "attributes": {"DIVINE_SHIELD": true}, "type": "MINION", "id": "987O", "baseAttack": 5.0}

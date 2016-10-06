@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "699D", "heroClass": "ANY", "description": "<b>Deathrattle:</b> Draw a card.", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 3.0, "deathrattle": {"class": "DrawCardSpell", "value": 1}, "baseManaCost": 2.0, "attributes": {"STEALTH": true, "DEATHRATTLES": true}, "type": "MINION", "id": "699D", "baseAttack": 2.0}

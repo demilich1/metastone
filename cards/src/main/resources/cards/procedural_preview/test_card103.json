@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "103V", "heroClass": "SHAMAN", "description": "<b>Taunt</b>", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 3.0, "race": "TOTEM", "baseManaCost": 3.0, "attributes": {"STEALTH": true, "OVERLOAD": 1}, "type": "MINION", "id": "103V", "baseAttack": 4.0}

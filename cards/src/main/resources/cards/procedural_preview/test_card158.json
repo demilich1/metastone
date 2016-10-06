@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "158S", "heroClass": "WARRIOR", "description": "<b>Charge</b>", "fileFormatVersion": 1, "rarity": "FREE", "baseHp": 1.0, "baseManaCost": 1.0, "attributes": {"CHARGE": true, "WINDFURY": true}, "type": "MINION", "id": "158S", "baseAttack": 2.0}

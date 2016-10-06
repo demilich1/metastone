@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "180G", "heroClass": "ANY", "description": "<b>Stealth</b>\n<b>Spell Damage +1</b>", "fileFormatVersion": 1, "rarity": "EPIC", "baseHp": 1.0, "baseManaCost": 2.0, "attributes": {"STEALTH": true, "OVERLOAD": 2.0, "SPELL_DAMAGE": 1}, "type": "MINION", "id": "180G", "baseAttack": 5.0}

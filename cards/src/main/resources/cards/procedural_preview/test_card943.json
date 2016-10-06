@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "943S", "heroClass": "ANY", "description": "<b>Spell Damage +2</b>", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 4.0, "baseManaCost": 3.0, "attributes": {"SPELL_DAMAGE": 2}, "type": "MINION", "id": "943S", "baseAttack": 3.0}

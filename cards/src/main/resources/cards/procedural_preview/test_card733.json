@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "733D", "heroClass": "ANY", "description": "<b>Windfury</b>", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 3.0, "race": "BEAST", "baseManaCost": 3.0, "attributes": {"DIVINE_SHIELD": true, "WINDFURY": true}, "type": "MINION", "id": "733D", "baseAttack": 4.0}

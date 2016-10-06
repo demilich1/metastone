@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "77N", "heroClass": "MAGE", "description": "<b>Spell Damage +1</b>", "fileFormatVersion": 1, "rarity": "RARE", "baseHp": 3.0, "race": "MECH", "baseManaCost": 2.0, "attributes": {"SPELL_DAMAGE": 1}, "type": "MINION", "id": "77N", "baseAttack": 2.0}

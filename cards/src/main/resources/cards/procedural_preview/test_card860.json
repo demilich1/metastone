@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "860F", "heroClass": "ANY", "description": "<b>Charge</b>\n<b>Divine Shield</b>", "fileFormatVersion": 1, "rarity": "RARE", "baseHp": 3.0, "baseManaCost": 1.0, "attributes": {"CHARGE": true, "DIVINE_SHIELD": true}, "type": "MINION", "id": "860F", "baseAttack": 0.0}

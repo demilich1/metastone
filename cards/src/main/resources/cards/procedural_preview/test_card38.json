@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "38G", "heroClass": "ANY", "description": "<b>Stealth</b>\n<b>Spell Damage +1</b>", "fileFormatVersion": 1, "rarity": "EPIC", "baseHp": 2.0, "baseManaCost": 1.0, "attributes": {"STEALTH": true, "SPELL_DAMAGE": 1}, "type": "MINION", "id": "38G", "baseAttack": 1.0}

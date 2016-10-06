@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "460C", "heroClass": "ANY", "description": "<b>Spell Damage +1</b>", "fileFormatVersion": 1, "rarity": "FREE", "baseHp": 4.0, "baseManaCost": 2.0, "attributes": {"SPELL_DAMAGE": 1}, "type": "MINION", "id": "460C", "baseAttack": 1.0}

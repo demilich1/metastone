@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "872V", "heroClass": "ANY", "description": "You can use your Hero Power twice a turn.", "fileFormatVersion": 1, "rarity": "EPIC", "baseHp": 4.0, "baseManaCost": 4.0, "attributes": {"HERO_POWER_USAGES": 2}, "type": "MINION", "id": "872V", "baseAttack": 5.0}

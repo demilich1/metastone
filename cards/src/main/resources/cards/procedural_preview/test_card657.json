@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "657F", "heroClass": "WARRIOR", "description": "<b>Charge</b>", "fileFormatVersion": 1, "rarity": "FREE", "baseHp": 2.0, "baseManaCost": 1.0, "attributes": {"CHARGE": true}, "type": "MINION", "id": "657F", "baseAttack": 2.0}

@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "838Y", "heroClass": "ANY", "description": "<b>Spell Damage +1</b>", "fileFormatVersion": 1, "rarity": "FREE", "baseHp": 2.0, "baseManaCost": 1.0, "attributes": {"TAUNT": true, "SPELL_DAMAGE": 1}, "type": "MINION", "id": "838Y", "baseAttack": 2.0}

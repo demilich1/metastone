@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "742A", "heroClass": "ANY", "description": "<b>Deathrattle:</b> Draw a card.", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 3.0, "deathrattle": {"class": "DrawCardSpell", "value": 1}, "baseManaCost": 1.0, "attributes": {"DEATHRATTLES": true}, "type": "MINION", "id": "742A", "baseAttack": 1.0}

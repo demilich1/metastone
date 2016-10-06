@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "106C", "heroClass": "ANY", "description": "<b>Spell Damage +2</b>", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 4.0, "baseManaCost": 3.0, "attributes": {"TAUNT": true, "SPELL_DAMAGE": 2}, "type": "MINION", "id": "106C", "baseAttack": 3.0}

@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "102A", "heroClass": "SHAMAN", "description": "<b>Overload:</b> (1).", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 2.0, "race": "TOTEM", "baseManaCost": 4.0, "attributes": {"OVERLOAD": 1}, "type": "MINION", "id": "102A", "baseAttack": 7.0}

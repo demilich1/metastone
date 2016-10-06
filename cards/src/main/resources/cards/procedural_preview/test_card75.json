@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "75Z", "heroClass": "ANY", "description": "<b>Charge</b>", "fileFormatVersion": 1, "rarity": "FREE", "baseHp": 6.0, "race": "BEAST", "baseManaCost": 5.0, "attributes": {"CHARGE": true}, "type": "MINION", "id": "75Z", "baseAttack": 5.0}

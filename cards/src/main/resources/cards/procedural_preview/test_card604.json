@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "604W", "heroClass": "ANY", "description": "<b>Spell Damage +2</b>", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 3.0, "baseManaCost": 2.0, "attributes": {"SPELL_DAMAGE": 2}, "type": "MINION", "id": "604W", "baseAttack": 2.0}

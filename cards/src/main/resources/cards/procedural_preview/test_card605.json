@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "605M", "heroClass": "ANY", "description": "Whenever ANY player plays a card, gain +1/+1.", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 3.0, "baseManaCost": 1.0, "attributes": {"SPELL_DAMAGE": 2}, "type": "MINION", "id": "605M", "baseAttack": 1.0}

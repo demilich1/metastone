@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "11T", "heroClass": "HUNTER", "description": "<b>Charge</b>", "fileFormatVersion": 1, "rarity": "LEGENDARY", "baseHp": 1.0, "race": "BEAST", "baseManaCost": 1.0, "attributes": {"CHARGE": true}, "type": "MINION", "id": "11T", "baseAttack": 2.0}

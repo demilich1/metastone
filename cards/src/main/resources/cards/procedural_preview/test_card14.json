@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "14L", "heroClass": "ANY", "description": "<b>Spell Damage +5</b>", "fileFormatVersion": 1, "rarity": "LEGENDARY", "baseHp": 5.0, "race": "DRAGON", "baseManaCost": 4.0, "attributes": {"SPELL_DAMAGE": 5}, "type": "MINION", "id": "14L", "baseAttack": 4.0}

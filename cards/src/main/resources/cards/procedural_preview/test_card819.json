@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "819Y", "heroClass": "ANY", "description": "<b>Spell Damage +5</b>", "fileFormatVersion": 1, "rarity": "LEGENDARY", "baseHp": 2.0, "race": "DRAGON", "baseManaCost": 1.0, "attributes": {"SPELL_DAMAGE": 5}, "type": "MINION", "id": "819Y", "baseAttack": 2.0}

@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "26U", "heroClass": "ANY", "description": "<b>Taunt</b>", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 4.0, "baseManaCost": 5.0, "attributes": {"TAUNT": true}, "type": "MINION", "id": "26U", "baseAttack": 7.0}

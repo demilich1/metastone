@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "414O", "heroClass": "ANY", "description": "<b>Stealth</b>\n<b>Divine Shield</b>", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 5.0, "baseManaCost": 4.0, "attributes": {"TAUNT": true, "STEALTH": true, "DIVINE_SHIELD": true}, "type": "MINION", "id": "414O", "baseAttack": 4.0}

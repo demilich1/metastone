@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "962D", "heroClass": "ANY", "description": "<b>Spell Damage +1</b>", "fileFormatVersion": 1, "rarity": "FREE", "baseHp": 7.0, "baseManaCost": 5.0, "attributes": {"SPELL_DAMAGE": 1}, "type": "MINION", "id": "962D", "baseAttack": 4.0}

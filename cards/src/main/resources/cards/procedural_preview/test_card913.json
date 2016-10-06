@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "913H", "heroClass": "ANY", "description": "<b>Charge</b>\nCan't attack heroes.", "fileFormatVersion": 1, "rarity": "LEGENDARY", "baseHp": 2.0, "baseManaCost": 1.0, "attributes": {"CHARGE": true, "CANNOT_ATTACK_HEROES": true}, "type": "MINION", "id": "913H", "baseAttack": 1.0}

@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "862C", "heroClass": "ANY", "description": "Your minions trigger their <b>Deathrattles</b> twice.", "fileFormatVersion": 1, "rarity": "LEGENDARY", "baseHp": 5.0, "baseManaCost": 3.0, "attributes": {"CHARGE": true, "OVERLOAD": 3.0, "DOUBLE_DEATHRATTLES": true}, "type": "MINION", "id": "862C", "baseAttack": 2.0}

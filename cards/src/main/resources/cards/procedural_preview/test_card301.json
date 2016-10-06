@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "301W", "heroClass": "ANY", "description": "<b>Windfury</b>", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 3.0, "baseManaCost": 2.0, "attributes": {"TAUNT": true, "WINDFURY": true}, "type": "MINION", "id": "301W", "baseAttack": 2.0}

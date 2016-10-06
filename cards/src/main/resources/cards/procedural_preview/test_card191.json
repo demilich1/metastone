@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "191G", "heroClass": "ANY", "description": "<b>Charge</b>", "fileFormatVersion": 1, "rarity": "FREE", "baseHp": 2.0, "baseManaCost": 2.0, "attributes": {"CHARGE": true, "STEALTH": true}, "type": "MINION", "id": "191G", "baseAttack": 3.0}
