@@ -63,6 +63,7 @@ public class HandCard extends CardToken {
 			tooltipContent = null;
 			tooltip = null;
 		}
+		descriptionLabel.setText(card.getDescription());
 	}
 
 }

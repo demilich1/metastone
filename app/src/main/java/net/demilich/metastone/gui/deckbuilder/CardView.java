@@ -32,7 +32,7 @@ public class CardView extends BorderPane implements EventHandler<MouseEvent> {
 	private Label pageLabel;
 
 	private int offset;
-	private final int rows = 4;
+	private final int rows = 5;
 	private final int columns = 2;
 	private final int cardDisplayCount = rows * columns;
 
