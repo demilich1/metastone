@@ -228,3 +228,6 @@
 	-fx-background-radius: 10;
 }
 
+.hidden {
+    visibility: hidden;
+}

@@ -21,7 +21,7 @@
 .main-button-large {
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
     -fx-background-radius: 40,40,40,40;
-    
+
     -fx-font-family: "System";
     -fx-text-fill: linear-gradient(white, #d0d0d0);
     -fx-font-size: 40px;
