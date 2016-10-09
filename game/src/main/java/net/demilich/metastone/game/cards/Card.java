@@ -108,7 +108,7 @@ public abstract class Card extends Entity {
 		if (description == null || description.isEmpty()) {
 			return description;
 		}
-		String descriptionCleaned = description.replaceAll("</?[bi]>", "");
+		String descriptionCleaned = description.replaceAll("(</?[bi]>)|\\[x\\]", "");
 		return descriptionCleaned;
 	}
 
