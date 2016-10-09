@@ -1,0 +1,40 @@
+version '1.0.0'
+
+apply plugin: 'java'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:0.5.4.RELEASE"
+        classpath "jp.classmethod.aws:gradle-aws-plugin:0.21"
+    }
+}
+
+apply plugin: "io.spring.dependency-management"
+apply plugin: 'jp.classmethod.aws'
+
+aws {
+    profileName = 'default'
+    region = 'us-east-1'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'com.amazonaws:aws-java-sdk-bom:1.10.47'
+    }
+}
+
+dependencies {
+    compile 'com.amazonaws:aws-java-sdk-lambda'
+    compile 'com.amazonaws:aws-java-sdk-dynamodb'
+    compile project(':shared')
+    testCompile project(':cards')
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
