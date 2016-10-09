@@ -13,9 +13,11 @@ import javafx.scene.paint.Color;
 import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.NotificationProxy;
+import net.demilich.metastone.game.decks.Bench;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.MetaDeck;
 import net.demilich.metastone.game.logic.GameLogic;
+import net.demilich.metastone.game.logic.ProceduralGameLogic;
 import net.demilich.metastone.gui.dialog.DialogNotification;
 import net.demilich.metastone.gui.dialog.DialogResult;
 import net.demilich.metastone.gui.dialog.DialogType;
@@ -86,11 +88,15 @@ public class DeckInfoView extends HBox implements EventHandler<ActionEvent>, IDi
 			countLabel.setText(metaDeck.getDecks().size() + "");
 		} else {
 			typeLabel.setText("Cards");
+			int deckSize = GameLogic.DECK_SIZE;
+			if (deck instanceof Bench){
+				deckSize = ProceduralGameLogic.BENCH_SIZE;
+			}
 			if (deck.isTooBig()) {
-				countLabel.setText(deck.getCards().getCount() + "!/" + GameLogic.DECK_SIZE);
+				countLabel.setText(deck.getCards().getCount() + "!/" + deckSize);
 				countLabel.setTextFill(Color.RED);
 			} else {
-				countLabel.setText(deck.getCards().getCount() + "/" + GameLogic.DECK_SIZE);
+				countLabel.setText(deck.getCards().getCount() + "/" + deckSize);
 				countLabel.setTextFill(Color.BLACK);
 			}
 		}

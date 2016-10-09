@@ -16,7 +16,7 @@ import net.demilich.metastone.gui.cards.CardTooltip;
 
 public class MinionToken extends GameToken {
 	@FXML
-	private Label name;
+	private Label description;
 	@FXML
 	private Group attackAnchor;
 	@FXML
@@ -50,7 +50,7 @@ public class MinionToken extends GameToken {
 	}
 
 	public void setMinion(Minion minion) {
-		name.setText(minion.getName());
+		description.setText(minion.getSourceCard().getDescription());
 		setScoreValue(attackAnchor, minion.getAttack(), minion.getAttributeValue(Attribute.BASE_ATTACK));
 		setScoreValue(hpAnchor, minion.getHp(), minion.getBaseHp(), minion.getMaxHp());
 		visualizeStatus(minion);
