@@ -1,0 +1,1 @@
+{"collectible": true, "cardCostModifier": {"value": 1, "cardType": "MINION", "class": "CardCostModifier", "operation": "SET"}, "set": "PROCEDURAL_PREVIEW", "name": "494A", "heroClass": "DRUID", "description": "Your minions cost (1).", "fileFormatVersion": 1, "rarity": "LEGENDARY", "baseHp": 2.0, "baseManaCost": 1.0, "type": "MINION", "id": "494A", "baseAttack": 2.0}

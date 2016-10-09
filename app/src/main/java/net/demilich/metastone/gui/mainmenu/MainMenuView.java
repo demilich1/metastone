@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.MetaStone;
 import net.demilich.metastone.NotificationProxy;
 
 public class MainMenuView extends BorderPane {
@@ -71,6 +72,14 @@ public class MainMenuView extends BorderPane {
 			trainingModeButton.setManaged(false);
 			battleOfDecksButton.setVisible(false);
 			battleOfDecksButton.setManaged(false);
+			
+		}
+		
+		if (MetaStone.procedural){
+			simulationModeButton.setVisible(false);
+			simulationModeButton.setManaged(false);
+			sandboxModeButton.setVisible(false);
+			sandboxModeButton.setVisible(false);
 		}
 
 		versionLabel.setText(BuildConfig.VERSION + (BuildConfig.DEV_BUILD ? " (Dev build)" : ""));

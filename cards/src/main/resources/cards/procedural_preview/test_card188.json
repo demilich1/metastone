@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "188X", "heroClass": "ANY", "description": "\n", "fileFormatVersion": 1, "rarity": "RARE", "baseHp": 2.0, "baseManaCost": 3.0, "attributes": {"TAUNT": true, "DIVINE_SHIELD": true}, "type": "MINION", "id": "188X", "baseAttack": 5.0}

@@ -8,9 +8,12 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.spells.CardCostModifierSpell;
 import net.demilich.metastone.game.spells.Spell;
+import net.demilich.metastone.game.spells.SpellUtils;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.valueprovider.AlgebraicOperation;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class PutMiniCopyInHandSpell extends Spell {
@@ -21,7 +24,7 @@ public class PutMiniCopyInHandSpell extends Spell {
 
 	public static SpellDesc create(EntityReference target, int amount) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(PutMiniCopyInHandSpell.class);
-		arguments.put(SpellArg.VALUE, amount);
+		arguments.put(SpellArg.HOW_MANY, amount);
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
 	}
@@ -42,7 +45,8 @@ public class PutMiniCopyInHandSpell extends Spell {
 			copyCard.setAttribute(Attribute.ATTACK, 1);
 			copyCard.setAttribute(Attribute.HP, 1);
 			copyCard.setAttribute(Attribute.MAX_HP, 1);
-			copyCard.setAttribute(Attribute.MANA_COST_MODIFIER, 1 - copyCard.getBaseManaCost());
+			SpellDesc spell = CardCostModifierSpell.create(copyCard.getReference(), AlgebraicOperation.SET, 1);
+			SpellUtils.castChildSpell(context, player, spell, source, copyCard);
 		}
 	}
 

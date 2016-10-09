@@ -14,7 +14,7 @@
 			"targetPlayer": "SELF"
 		},
 		"spell": {
-			"class": "ReceiveRandomCollectibleCardSpell",
+			"class": "ReceiveCardSpell",
 			"cardFilter": {
 				"class": "CardFilter",
 				"cardType": "SPELL"

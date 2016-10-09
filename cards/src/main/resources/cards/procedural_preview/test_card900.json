@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "900S", "heroClass": "ANY", "description": "\n", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 4.0, "race": "MECH", "baseManaCost": 4.0, "attributes": {"TAUNT": true, "DIVINE_SHIELD": true}, "type": "MINION", "id": "900S", "baseAttack": 5.0}

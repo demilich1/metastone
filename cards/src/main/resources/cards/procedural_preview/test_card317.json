@@ -1,0 +1,1 @@
+{"collectible": true, "aura": {"attackBonus": 1, "class": "BuffAura", "hpBonus": 1, "target": "OTHER_FRIENDLY_MINIONS"}, "name": "317Y", "heroClass": "ANY", "description": "", "fileFormatVersion": 1, "rarity": "FREE", "baseHp": 5.0, "set": "PROCEDURAL_PREVIEW", "baseManaCost": 5.0, "type": "MINION", "id": "317Y", "baseAttack": 6.0}

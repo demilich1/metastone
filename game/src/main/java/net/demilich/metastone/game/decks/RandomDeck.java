@@ -34,6 +34,7 @@ public class RandomDeck extends Deck {
 		while (!copyDeck.isComplete()) {
 			// random deck consists of roughly 50% class cards and 50% neutral
 			// cards
+
 			Card randomCard = ThreadLocalRandom.current().nextBoolean() ? classCards.getRandom() : neutralCards.getRandom();
 			if (deckValidator.canAddCardToDeck(randomCard, copyDeck)) {
 				copyDeck.getCards().add(randomCard);

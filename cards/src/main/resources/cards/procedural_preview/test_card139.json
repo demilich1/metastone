@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "139G", "heroClass": "ANY", "description": "Deathrattle: Draw a card.", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 1.0, "deathrattle": {"class": "DrawCardSpell", "value": 1}, "baseManaCost": 1.0, "attributes": {"TAUNT": true, "DEATHRATTLES": true}, "type": "MINION", "id": "139G", "baseAttack": 2.0}

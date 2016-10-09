@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "225E", "heroClass": "ANY", "description": "\nCan't be targeted by spells or Hero Powers.", "fileFormatVersion": 1, "rarity": "RARE", "baseHp": 7.0, "race": "MECH", "baseManaCost": 5.0, "attributes": {"TAUNT": true, "UNTARGETABLE_BY_SPELLS": true}, "type": "MINION", "id": "225E", "baseAttack": 4.0}

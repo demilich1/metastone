@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "491F", "heroClass": "PRIEST", "description": "Double the damage and healing of your spells and Hero Power.", "fileFormatVersion": 1, "rarity": "LEGENDARY", "baseHp": 7.0, "baseManaCost": 5.0, "attributes": {"HEAL_AMPLIFY_MULTIPLIER": 2, "SPELL_AMPLIFY_MULTIPLIER": 2}, "type": "MINION", "id": "491F", "baseAttack": 4.0}

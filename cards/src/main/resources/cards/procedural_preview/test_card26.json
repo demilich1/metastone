@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "26N", "heroClass": "ANY", "description": "Your Battlecries trigger twice.", "fileFormatVersion": 1, "rarity": "LEGENDARY", "baseHp": 4.0, "baseManaCost": 5.0, "attributes": {"DOUBLE_BATTLECRIES": true}, "type": "MINION", "id": "26N", "baseAttack": 7.0}

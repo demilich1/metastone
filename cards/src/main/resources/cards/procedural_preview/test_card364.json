@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "364U", "heroClass": "DRUID", "manaCostModifier": {"class": "DeadMinionsThisTurn"}, "description": "\nCosts (1) less for each minion that died this turn.", "fileFormatVersion": 1, "rarity": "RARE", "baseHp": 4.0, "baseManaCost": 1.0, "attributes": {"TAUNT": true}, "type": "MINION", "id": "364U", "baseAttack": 0.0}

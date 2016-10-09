@@ -1,22 +1,36 @@
 {
 	"id": "spell_CHARGE",
 	"name": "Charge",
-	"baseManaCost": 3,
+	"baseManaCost": 1,
 	"type": "SPELL",
 	"heroClass": "WARRIOR",
 	"rarity": "FREE",
-	"description": "Give a friendly minion +2 Attack and Charge.",
+	"description": "Give a friendly minion Charge. It can't attack heroes this turn.",
 	"targetSelection": "FRIENDLY_MINIONS",
 	"spell": {
 		"class": "MetaSpell",
 		"spells": [
 			{
-				"class": "BuffSpell",
-				"attackBonus": 2
-			},
-			{
 				"class": "AddAttributeSpell",
 				"attribute": "CHARGE"
+			},
+			{
+				"class": "ConditionalSpell",
+				"condition": {
+					"class": "AttributeCondition",
+					"target": "TARGET",
+					"attribute": "CANNOT_ATTACK_HEROES",
+					"operation": "HAS",
+					"invert": true
+				},
+				"spell": {
+					"class": "AddAttributeSpell",
+					"attribute": "CANNOT_ATTACK_HEROES",
+					"revertTrigger": {
+						"class": "TurnEndTrigger",
+						"targetPlayer": "SELF"
+					}
+				}
 			}
 		]
 	},

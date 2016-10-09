@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "74C", "heroClass": "ANY", "description": "Your minions trigger their Deathrattles twice.", "fileFormatVersion": 1, "rarity": "LEGENDARY", "baseHp": 6.0, "baseManaCost": 5.0, "attributes": {"DOUBLE_DEATHRATTLES": true}, "type": "MINION", "id": "74C", "baseAttack": 5.0}

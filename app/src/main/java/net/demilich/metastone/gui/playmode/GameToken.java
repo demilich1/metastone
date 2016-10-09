@@ -92,6 +92,16 @@ public class GameToken extends BorderPane {
 		DigitFactory.showPreRenderedDigits(group, value, color);
 	}
 
+	protected void setScoreValueLowerIsBetter(Group group, int value, int baseValue) {
+		Color color = Color.WHITE;
+		if (value < baseValue) {
+			color = Color.GREEN;
+		} else if (value > baseValue) {
+			color = Color.RED;
+		}
+		DigitFactory.showPreRenderedDigits(group, value, color);
+	}
+
 	public void showTargetMarker(EventHandler<MouseEvent> clickedHander) {
 		if (existingEventHandler != null) {
 			targetButton.removeEventHandler(MouseEvent.MOUSE_CLICKED, existingEventHandler);

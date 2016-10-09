@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "804U", "heroClass": "MAGE", "description": "Spell Damage +1", "fileFormatVersion": 1, "rarity": "RARE", "baseHp": 6.0, "race": "MECH", "baseManaCost": 3.0, "attributes": {"TAUNT": true, "SPELL_DAMAGE": 1}, "type": "MINION", "id": "804U", "baseAttack": 1.0}

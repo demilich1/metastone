@@ -151,6 +151,13 @@
     -fx-font-style : italic;
 }
 
+.name-extra-big {
+	-fx-font-size: 18pt;
+    -fx-font-family: "System";
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+}
+
 .name-big {
 	-fx-font-size: 14pt;
     -fx-font-family: "System";
@@ -221,3 +228,6 @@
 	-fx-background-radius: 10;
 }
 
+.hidden {
+    visibility: hidden;
+}

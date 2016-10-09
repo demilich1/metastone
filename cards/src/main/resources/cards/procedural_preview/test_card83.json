@@ -1,0 +1,1 @@
+{"collectible": true, "cardCostModifier": {"operation": "SET", "class": "CardCostModifier", "value": 5}, "set": "PROCEDURAL_PREVIEW", "name": "83A", "heroClass": "ANY", "description": "Your cards cost (5).", "fileFormatVersion": 1, "rarity": "EPIC", "baseHp": 4.0, "baseManaCost": 4.0, "type": "MINION", "id": "83A", "baseAttack": 5.0}

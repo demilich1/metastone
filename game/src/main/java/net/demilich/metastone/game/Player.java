@@ -18,10 +18,10 @@ import net.demilich.metastone.game.gameconfig.PlayerConfig;
 
 public class Player extends Entity {
 
-	private Hero hero;
-	private final String deckName;
+	protected Hero hero;
+	protected final String deckName;
 
-	private final CardCollection deck;
+	protected CardCollection deck;
 	private final CardCollection hand = new CardCollection();
 	private final List<Entity> setAsideZone = new ArrayList<>();
 	private final List<Entity> graveyard = new ArrayList<>();
@@ -61,7 +61,10 @@ public class Player extends Entity {
 	public Player(PlayerConfig config) {
 		config.build();
 		Deck selectedDeck = config.getDeckForPlay();
+		
+		//gets overwritten by procedural player with a random deck.
 		this.deck = selectedDeck.getCardsCopy();
+		
 		this.setHero(config.getHeroForPlay().createHero());
 		this.setName(config.getName() + " - " + hero.getName());
 		this.deckName = selectedDeck.getName();

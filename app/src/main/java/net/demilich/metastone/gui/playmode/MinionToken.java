@@ -8,17 +8,17 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.gui.DigitFactory;
 import net.demilich.metastone.gui.cards.CardTooltip;
 
 public class MinionToken extends GameToken {
 	@FXML
 	private Label name;
+	@FXML
+	private Label description;
 	@FXML
 	private Group attackAnchor;
 	@FXML
@@ -39,7 +39,7 @@ public class MinionToken extends GameToken {
 	private Shape frozen;
 
 	private CardTooltip cardTooltip;
-	
+
 	Logger logger = LoggerFactory.getLogger(MinionToken.class);
 
 	public MinionToken() {
@@ -53,14 +53,9 @@ public class MinionToken extends GameToken {
 
 	public void setMinion(Minion minion) {
 		name.setText(minion.getName());
+		description.setText(minion.getSourceCard().getDescription());
 		setScoreValue(attackAnchor, minion.getAttack(), minion.getAttributeValue(Attribute.BASE_ATTACK));
-		Color color = Color.WHITE;
-		if (minion.getHp() < minion.getMaxHp()) {
-			color = Color.RED;
-		} else if (minion.getHp() > minion.getAttributeValue(Attribute.BASE_HP)) {
-			color = Color.GREEN;
-		}
-		DigitFactory.showPreRenderedDigits(hpAnchor, minion.getHp(), color);
+		setScoreValue(hpAnchor, minion.getHp(), minion.getBaseHp(), minion.getMaxHp());
 		visualizeStatus(minion);
 		cardTooltip.setCard(minion.getSourceCard());
 	}
@@ -70,7 +65,7 @@ public class MinionToken extends GameToken {
 		defaultToken.setVisible(!minion.hasAttribute(Attribute.TAUNT));
 		divineShield.setVisible(minion.hasAttribute(Attribute.DIVINE_SHIELD));
 		windfury.setVisible(minion.hasAttribute(Attribute.WINDFURY) || minion.hasAttribute(Attribute.MEGA_WINDFURY));
-		if(minion.hasAttribute(Attribute.MEGA_WINDFURY)) {
+		if (minion.hasAttribute(Attribute.MEGA_WINDFURY)) {
 			windfury.setText("x4");
 		} else {
 			windfury.setText("x2");
