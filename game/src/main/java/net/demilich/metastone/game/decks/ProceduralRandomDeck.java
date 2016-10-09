@@ -12,16 +12,20 @@ import net.demilich.metastone.game.decks.validation.IDeckValidator;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 
 public class ProceduralRandomDeck extends Deck {
-	
+	protected CardCollection randomCards;
 
 	public ProceduralRandomDeck(HeroClass heroClass) {
 		super(heroClass);
 		setName("[Procedural Random deck]");
+		randomCards = createRandomCards();
 	}
 
 	@Override
-	public CardCollection getCardsCopy() {
-		//Includes class specific cards in the random process
+	public CardCollection getCards() {
+		return randomCards;
+	}
+
+	private CardCollection createRandomCards() {
 		DeckFormat classDecks = new DeckFormat();
 		classDecks.addSet(CardSet.BASIC);
 		classDecks.addSet(CardSet.CLASSIC);
@@ -29,7 +33,7 @@ public class ProceduralRandomDeck extends Deck {
 
 		DeckFormat proceduralDeck = new DeckFormat();
 		proceduralDeck.addSet(CardSet.PROCEDURAL_PREVIEW);
-		
+
 		Deck copyDeck = new Deck(getHeroClass());
 		IDeckValidator deckValidator = new DefaultDeckValidator();
 		CardCollection classCards = CardCatalogue.query(classDecks, card -> {
@@ -38,7 +42,7 @@ public class ProceduralRandomDeck extends Deck {
 		CardCollection neutralCards = CardCatalogue.query(proceduralDeck, card -> {
 			return card.isCollectible() && !card.getCardType().isCardType(CardType.HERO) && !card.getCardType().isCardType(CardType.HERO_POWER) && card.getClassRestriction() == HeroClass.ANY;
 		});
-		
+
 		while (!copyDeck.isComplete()) {
 			// random deck consists of roughly 50% class cards and 50% neutral
 			// cards
