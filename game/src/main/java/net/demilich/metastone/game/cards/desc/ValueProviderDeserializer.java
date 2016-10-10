@@ -3,17 +3,13 @@ package net.demilich.metastone.game.cards.desc;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
+import com.google.gson.*;
 
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderArg;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderDesc;
 
-public class ValueProviderDeserializer implements JsonDeserializer<ValueProviderDesc> {
+public class ValueProviderDeserializer implements JsonDeserializer<ValueProviderDesc>, JsonSerializer<ValueProviderDesc> {
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -63,4 +59,20 @@ public class ValueProviderDeserializer implements JsonDeserializer<ValueProvider
 		arguments.put(arg, value);
 	}
 
+	@Override
+	public JsonElement serialize(ValueProviderDesc src, Type typeOfSrc, JsonSerializationContext context) {
+		JsonObject result = new JsonObject();
+		result.add("class", new JsonPrimitive(src.getValueProviderClass().getSimpleName()));
+		for (ValueProviderArg spellArg : ValueProviderArg.values()) {
+			if (spellArg == ValueProviderArg.CLASS) {
+				continue;
+			}
+			if (!src.contains(spellArg)) {
+				continue;
+			}
+			String argName = ParseUtils.toCamelCase(spellArg.toString());
+			result.add(argName, new JsonPrimitive(src.get(spellArg).toString()));
+		}
+		return result;
+	}
 }
