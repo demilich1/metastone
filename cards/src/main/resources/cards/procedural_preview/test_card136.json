@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "136T", "heroClass": "ANY", "description": "\nSpell Damage +1", "fileFormatVersion": 1, "rarity": "EPIC", "baseHp": 3.0, "baseManaCost": 1.0, "attributes": {"STEALTH": true, "SPELL_DAMAGE": 1}, "type": "MINION", "id": "136T", "baseAttack": 1.0}

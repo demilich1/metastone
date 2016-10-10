@@ -14,7 +14,7 @@
 				"class": "DestroySpell"
 			},
 			{
-				"class": "ReceiveRandomCollectibleCardSpell",
+				"class": "ReceiveCardSpell",
 				"targetPlayer": "OPPONENT",
 				"cardFilter": {
 					"class": "CardFilter",

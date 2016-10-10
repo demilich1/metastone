@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "552X", "heroClass": "ANY", "description": "Can't be targeted by spells or Hero Powers.", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 4.0, "baseManaCost": 4.0, "attributes": {"UNTARGETABLE_BY_SPELLS": true}, "type": "MINION", "id": "552X", "baseAttack": 5.0}

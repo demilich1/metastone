@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import javafx.scene.paint.*?>
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import java.lang.Double?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Ellipse?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<fx:root cache="true" prefHeight="-1.0" prefWidth="-1.0" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root cache="true" prefHeight="-1.0" prefWidth="-1.0" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1">
 	<center>
 		<StackPane fx:id="targetAnchor" prefHeight="-1.0" prefWidth="-1.0" BorderPane.alignment="CENTER">
 			<children>
-				<Circle fx:id="defaultToken" fill="#bfbfbf" radius="40.0" stroke="BLACK" strokeDashOffset="0.0" strokeLineCap="SQUARE" strokeType="INSIDE" strokeWidth="2.0" />
+				<Rectangle fx:id="defaultToken" fill="#bfbfbf" height="100" stroke="BLACK" strokeDashOffset="0.0" strokeLineCap="SQUARE" strokeType="INSIDE" strokeWidth="2.0" width="100.0" />
 				<Polygon fx:id="taunt" fill="#bfbfbf" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" translateY="5.0" visible="false">
 					<points>
 						<Double fx:value="-50.0" />
@@ -30,11 +36,20 @@
 					</points>
 				</Polygon>
 				<Ellipse fx:id="frozen" fill="#ffffff00" radiusX="50.0" radiusY="30.0" smooth="false" stroke="#0e90e8" strokeDashOffset="10.0" strokeType="OUTSIDE" strokeWidth="5.0" visible="false" />
-				<Label fx:id="name" alignment="CENTER" labelFor="$name" maxWidth="80.0" text="&lt;minion name&gt;" textAlignment="CENTER" textOverrun="ELLIPSIS" wrapText="true" StackPane.alignment="CENTER">
-					<font>
-						<Font name="Arial Bold" size="12.0" />
-					</font>
-				</Label>
+				<VBox alignment="CENTER" StackPane.alignment="CENTER">
+					<children>
+						<Label fx:id="name" alignment="CENTER" maxWidth="90.0" text="&lt;minion name&gt;" textAlignment="CENTER" textOverrun="ELLIPSIS" wrapText="true">
+							<font>
+								<Font name="Arial Bold" size="10.0" />
+							</font>
+						</Label>
+						<Label fx:id="description" alignment="CENTER" maxWidth="90.0" text="&lt;minion description&gt;" textAlignment="CENTER" textOverrun="ELLIPSIS" wrapText="true">
+							<font>
+								<Font name="Arial Bold" size="8.0" />
+							</font>
+						</Label>
+					</children>
+				</VBox>
 				<StackPane prefHeight="-1.0" prefWidth="-1.0" translateY="0.0" StackPane.alignment="BOTTOM_CENTER">
 					<children>
 						<ImageView fx:id="deathrattle" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" translateY="8.0" visible="false" StackPane.alignment="BOTTOM_CENTER">

@@ -11,7 +11,7 @@
 	"battlecry": {
 		"targetSelection": "NONE",
 		"spell": {
-			"class": "ReceiveRandomCollectibleCardSpell",
+			"class": "ReceiveCardSpell",
 			"cardFilter": {
 				"class": "CardFilter",
 				"cardType": "SPELL",

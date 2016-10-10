@@ -21,7 +21,6 @@ import net.demilich.metastone.utils.MetastoneProperties;
 import net.demilich.metastone.utils.ResourceInputStream;
 import net.demilich.metastone.utils.ResourceLoader;
 import net.demilich.metastone.utils.UserHomeMetastone;
-import net.demilich.metastone.utils.VersionInfo;
 
 public class CardCatalogue {
 
@@ -93,7 +92,7 @@ public class CardCatalogue {
 	public static CardCollection query(DeckFormat deckFormat, CardType cardType, Rarity rarity, HeroClass heroClass, Attribute tag) {
 		CardCollection result = new CardCollection();
 		for (Card card : cards) {
-			if (!deckFormat.inSet(card)) {
+			if (!deckFormat.isInFormat(card)) {
 				continue;
 			}
 			if (!card.isCollectible()) {
@@ -124,7 +123,7 @@ public class CardCatalogue {
 	public static CardCollection query(DeckFormat deckFormat, Predicate<Card> filter) {
 		CardCollection result = new CardCollection();
 		for (Card card : cards) {
-			if (deckFormat != null && !deckFormat.inSet(card)) {
+			if (deckFormat != null && !deckFormat.isInFormat(card)) {
 				continue;
 			}
 			if (filter.test(card)) {
@@ -151,6 +150,7 @@ public class CardCatalogue {
 		Map<String, CardDesc> cardDesc = new HashMap<String, CardDesc>();
 		ArrayList<String> badCards = new ArrayList<>();
 		CardParser cardParser = new CardParser();
+
 		for (ResourceInputStream resourceInputStream : inputStreams) {
 			try {
 				CardDesc desc = cardParser.parseCard(resourceInputStream);
@@ -160,6 +160,7 @@ public class CardCatalogue {
 				cardDesc.put(desc.id, desc);
 			} catch (Exception e) {
 				//logger.error("Error parsing card '{}'", resourceInputStream.fileName);
+				System.out.println(e.toString());
 				logger.error(e.toString());
 				badCards.add(resourceInputStream.fileName);
 			}

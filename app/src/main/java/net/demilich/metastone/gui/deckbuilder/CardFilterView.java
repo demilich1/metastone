@@ -1,6 +1,8 @@
 package net.demilich.metastone.gui.deckbuilder;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -12,7 +14,9 @@ import javafx.scene.layout.HBox;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.cards.CardSet;
+import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.gui.common.CardSetStringConverter;
+import net.demilich.metastone.gui.common.DeckFormatStringConverter;
 
 public class CardFilterView extends HBox {
 
@@ -22,7 +26,12 @@ public class CardFilterView extends HBox {
 	@FXML
 	private ComboBox<CardSet> cardSetBox;
 
-	public CardFilterView() {
+	@FXML
+	private ComboBox<DeckFormat> deckFormatBox;
+
+	private List<DeckFormat> deckFormats = new ArrayList<DeckFormat>();
+
+	public CardFilterView(List<DeckFormat> deckFormats) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/CardFilterView.fxml"));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
@@ -35,6 +44,14 @@ public class CardFilterView extends HBox {
 
 		searchField.textProperty().addListener(this::textChanged);
 
+		deckFormatBox.setConverter(new DeckFormatStringConverter());
+		DeckFormat deckFormat = new DeckFormat();
+		deckFormat.setName("DECK FORMAT");
+		deckFormats.add(0, deckFormat);
+		deckFormatBox.setItems(FXCollections.observableArrayList(deckFormats));
+		deckFormatBox.getSelectionModel().selectFirst();
+		deckFormatBox.valueProperty().addListener(this::formatChanged);
+
 		cardSetBox.setConverter(new CardSetStringConverter());
 		cardSetBox.setItems(FXCollections.observableArrayList(CardSet.values()));
 		cardSetBox.getSelectionModel().selectFirst();
@@ -42,8 +59,33 @@ public class CardFilterView extends HBox {
 	}
 
 	private void filterChanged() {
+		DeckFormat deckFormat = null;
+		if (!deckFormatBox.getSelectionModel().isSelected(0)) {
+			deckFormat = deckFormatBox.getSelectionModel().getSelectedItem();
+		}
 		NotificationProxy.sendNotification(GameNotification.FILTER_CARDS,
-				new CardFilter(searchField.getText(), cardSetBox.getSelectionModel().getSelectedItem()));
+				new CardFilter(searchField.getText(), cardSetBox.getSelectionModel().getSelectedItem(), deckFormat));
+	}
+
+	private void formatChanged(ObservableValue<? extends DeckFormat> observable, DeckFormat oldValue, DeckFormat newValue) {
+		CardSet set = cardSetBox.getSelectionModel().getSelectedItem();
+		if (deckFormatBox.getSelectionModel().isSelected(0)) {
+			cardSetBox.setItems(FXCollections.observableArrayList(CardSet.values()));
+		} else {
+			List<CardSet> sets = newValue.getCardSets();
+			sets.add(0, CardSet.ANY);
+			cardSetBox.setItems(FXCollections.observableArrayList(sets));
+		}
+		if (!deckFormatBox.getSelectionModel().isSelected(0) && !set.equals(CardSet.ANY) && !newValue.isInFormat(set)) {
+			cardSetBox.getSelectionModel().selectFirst();
+		} else {
+			cardSetBox.getSelectionModel().select(set);
+		}
+		filterChanged();
+	}
+
+	public void injectDeckFormats(List<DeckFormat> deckFormats) {
+		this.deckFormats.addAll(deckFormats);
 	}
 
 	private void setChanged(ObservableValue<? extends CardSet> observable, CardSet oldValue, CardSet newValue) {

@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "625E", "heroClass": "ANY", "description": "Your minions trigger their Deathrattles twice.", "fileFormatVersion": 1, "rarity": "LEGENDARY", "baseHp": 1.0, "baseManaCost": 2.0, "attributes": {"TAUNT": true, "DOUBLE_DEATHRATTLES": true}, "type": "MINION", "id": "625E", "baseAttack": 4.0}

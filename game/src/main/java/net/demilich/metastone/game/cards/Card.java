@@ -103,7 +103,13 @@ public abstract class Card extends Entity {
 	}
 
 	public String getDescription() {
-		return description;
+		// Cleanup the html tags that appear in the description
+		// TODO: Show effects on card behaviour like increased spell damage
+		if (description == null || description.isEmpty()) {
+			return description;
+		}
+		String descriptionCleaned = description.replaceAll("(</?[bi]>)|\\[x\\]", "");
+		return descriptionCleaned;
 	}
 
 	@Override
@@ -185,7 +191,7 @@ public abstract class Card extends Entity {
 
 	@Override
 	public String toString() {
-		return String.format("[%s '%s' Manacost:%d]", getCardType(), getName(), getBaseManaCost());
+		return String.format("[%s '%s' %s Manacost:%d]", getCardType(), getName(), getReference(), getBaseManaCost());
 	}
 
 }

@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "564R", "heroClass": "ANY", "description": "Your Battlecries trigger twice.", "fileFormatVersion": 1, "rarity": "LEGENDARY", "baseHp": 6.0, "baseManaCost": 5.0, "attributes": {"DOUBLE_BATTLECRIES": true}, "type": "MINION", "id": "564R", "baseAttack": 5.0}

@@ -10,7 +10,7 @@
 	"race": "BEAST",
 	"description": "Deathrattle: Add a random Beast card to your hand.",
 	"deathrattle": {
-		"class": "ReceiveRandomCollectibleCardSpell",
+		"class": "ReceiveCardSpell",
 		"cardFilter": {
 			"class": "RaceFilter",
 			"race": "BEAST"

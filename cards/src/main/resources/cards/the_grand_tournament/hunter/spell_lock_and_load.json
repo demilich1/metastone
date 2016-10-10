@@ -16,7 +16,7 @@
 				"sourcePlayer": "SELF"
 			},
 			"spell": {
-				"class": "ReceiveRandomCollectibleCardSpell",
+				"class": "ReceiveCardSpell",
 				"cardFilter": {
 					"class": "CardFilter",
 					"heroClass": "HUNTER"

@@ -9,7 +9,7 @@ public class Deck {
 
 	private String name = "";
 	private final HeroClass heroClass;
-	private final CardCollection cards = new CardCollection();
+	protected final CardCollection cards = new CardCollection();
 	private String description;
 	private String filename;
 	private boolean arbitrary;

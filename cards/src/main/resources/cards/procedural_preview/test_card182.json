@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "182F", "heroClass": "ANY", "description": "\n", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 6.0, "baseManaCost": 5.0, "attributes": {"TAUNT": true, "CHARGE": true}, "type": "MINION", "id": "182F", "baseAttack": 5.0}

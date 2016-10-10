@@ -7,6 +7,7 @@ import java.util.Map;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.IGameEventListener;
@@ -34,7 +35,7 @@ public class StealRandomSecretSpell extends Spell {
 		List<Secret> validSecrets = new ArrayList<>();
 		for (IGameEventListener trigger : secrets) {
 			Secret secret = (Secret) trigger;
-			if (!player.getSecrets().contains(secret.getSource().getCardId())) {
+			if (!player.getSecrets().contains(secret.getSource().getCardId()) && player.getSecrets().size() < GameLogic.MAX_SECRETS) {
 				validSecrets.add(secret);
 			}
 		}

@@ -11,7 +11,7 @@
 		"class": "AddDeathrattleSpell",
 		"target": "FRIENDLY_MINIONS",
 		"spell": {
-			"class": "ReceiveRandomCollectibleCardSpell",
+			"class": "ReceiveCardSpell",
 			"cardFilter": {
 				"class": "RaceFilter",
 				"race": "BEAST"

@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "184Q", "heroClass": "ANY", "description": "\nCan't attack heroes.", "fileFormatVersion": 1, "rarity": "LEGENDARY", "baseHp": 4.0, "baseManaCost": 3.0, "attributes": {"CHARGE": true, "CANNOT_ATTACK_HEROES": true}, "type": "MINION", "id": "184Q", "baseAttack": 3.0}

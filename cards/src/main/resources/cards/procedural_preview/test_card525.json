@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "525K", "heroClass": "ANY", "description": "Can't attack.", "fileFormatVersion": 1, "rarity": "RARE", "baseHp": 4.0, "baseManaCost": 4.0, "attributes": {"CANNOT_ATTACK": true, "CHARGE": true, "OVERLOAD": 3.0}, "type": "MINION", "id": "525K", "baseAttack": 5.0}

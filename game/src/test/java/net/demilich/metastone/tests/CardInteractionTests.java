@@ -36,14 +36,17 @@ public class CardInteractionTests extends TestBase {
 		Assert.assertEquals(gahzrilla.getAttack(), 6);
 		Assert.assertEquals(gahzrilla.getHp(), 9);
 
-		// buff it with 'Charge' spell
-		Card chargeCard = CardCatalogue.getCardById("spell_charge");
-		context.getLogic().receiveCard(hunter.getId(), chargeCard);
-		GameAction action = chargeCard.play();
+		// buff it with 'Abusive Sergeant' spell
+		// This temporary Attack boost should be doubled and removed after the turn
+		Card abusiveSergeant = CardCatalogue.getCardById("minion_abusive_sergeant");
+		context.getLogic().receiveCard(hunter.getId(), abusiveSergeant);
+		GameAction action = abusiveSergeant.play();
 		action.setTarget(gahzrilla);
 		context.getLogic().performGameAction(hunter.getId(), action);
 		Assert.assertEquals(gahzrilla.getAttack(), 8);
 		Assert.assertEquals(gahzrilla.getHp(), 9);
+
+		context.getLogic().destroy((Actor) find(context, "minion_abusive_sergeant"));
 
 		// buff it with 'Cruel Taskmaster' spell
 		Card cruelTaskmasterCard = CardCatalogue.getCardById("minion_cruel_taskmaster");
@@ -56,8 +59,8 @@ public class CardInteractionTests extends TestBase {
 
 		context.getLogic().destroy((Actor) find(context, "minion_cruel_taskmaster"));
 
-		// buff it with 'Abusive Sergeant' spell
-		Card abusiveSergeant = CardCatalogue.getCardById("minion_abusive_sergeant");
+		// buff it again with 'Abusive Sergeant' spell
+		abusiveSergeant = CardCatalogue.getCardById("minion_abusive_sergeant");
 		context.getLogic().receiveCard(hunter.getId(), abusiveSergeant);
 		action = abusiveSergeant.play();
 		action.setTarget(gahzrilla);
@@ -67,7 +70,7 @@ public class CardInteractionTests extends TestBase {
 
 		context.endTurn();
 		context.endTurn();
-		Assert.assertEquals(gahzrilla.getAttack(), 20);
+		Assert.assertEquals(gahzrilla.getAttack(), 16);
 		Assert.assertEquals(gahzrilla.getHp(), 8);
 	}
 

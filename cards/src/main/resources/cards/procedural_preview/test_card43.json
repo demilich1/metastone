@@ -1,0 +1,1 @@
+{"collectible": true, "cardCostModifier": {"cardType": "SPELL", "class": "CardCostModifier", "value": -1}, "set": "PROCEDURAL_PREVIEW", "name": "43D", "heroClass": "MAGE", "description": "Your spells cost (1) less.", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 7.0, "baseManaCost": 5.0, "type": "MINION", "id": "43D", "baseAttack": 4.0}
