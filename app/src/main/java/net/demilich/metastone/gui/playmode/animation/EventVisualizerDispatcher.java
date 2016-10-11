@@ -8,6 +8,7 @@ import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.gui.playmode.GameBoardView;
 import net.demilich.metastone.gui.playmode.GameContextVisualizable;
+import net.demilich.metastone.gui.playmode.GameContextVisuals;
 
 public class EventVisualizerDispatcher {
 
@@ -21,7 +22,7 @@ public class EventVisualizerDispatcher {
 		visualizers.put(GameEventType.REVEAL_CARD, new RevealCardVisualizer());
 	}
 
-	public void visualize(GameContextVisualizable gameContext, GameBoardView boardView) {
+	public void visualize(GameContextVisuals gameContext, GameBoardView boardView) {
 		NotificationProxy.sendNotification(GameNotification.ANIMATION_STARTED);
 		for (GameEvent event : gameContext.getGameEvents()) {
 			IGameEventVisualizer gameEventVisualizer = visualizers.get(event.getEventType());

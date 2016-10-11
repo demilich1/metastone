@@ -31,10 +31,10 @@ public class GameContext implements Cloneable, IDisposable {
 	public static final int PLAYER_1 = 0;
 	public static final int PLAYER_2 = 1;
 
-	private static final Logger logger = LoggerFactory.getLogger(GameContext.class);
+	protected static final Logger logger = LoggerFactory.getLogger(GameContext.class);
 
-	private final Player[] players = new Player[2];
-	private final GameLogic logic;
+	protected final Player[] players = new Player[2];
+	protected final GameLogic logic;
 	private final DeckFormat deckFormat;
 	private final TargetLogic targetLogic = new TargetLogic();
 	private TriggerManager triggerManager = new TriggerManager();
@@ -42,12 +42,12 @@ public class GameContext implements Cloneable, IDisposable {
 	private final List<CardCostModifier> cardCostModifiers = new ArrayList<>();
 
 	protected int activePlayer = -1;
-	private Player winner;
+	protected Player winner;
 	private MatchResult result;
 	private TurnState turnState = TurnState.TURN_ENDED;
 
 	private int turn;
-	private int actionsThisTurn;
+	protected int actionsThisTurn;
 
 	private boolean ignoreEvents;
 
@@ -58,8 +58,11 @@ public class GameContext implements Cloneable, IDisposable {
 		player2.setId(PLAYER_2);
 		this.logic = logic;
 		this.deckFormat = deckFormat;
-		this.logic.setContext(this);
+		if (this.logic != null){
+			this.logic.setContext(this);
+		}
 	}
+	
 
 	protected boolean acceptAction(GameAction nextAction) {
 		return true;
@@ -109,7 +112,7 @@ public class GameContext implements Cloneable, IDisposable {
 		environment.clear();
 	}
 
-	private void endGame() {
+	protected void endGame() {
 		winner = logic.getWinner(getActivePlayer(), getOpponent(getActivePlayer()));
 		for (Player player : getPlayers()) {
 			player.getBehaviour().onGameOver(this, player.getId(), winner != null ? winner.getId() : -1);
@@ -154,7 +157,6 @@ public class GameContext implements Cloneable, IDisposable {
 			logic.panicDump();
 			throw e;
 		}
-		
 	}
 
 	public boolean gameDecided() {
@@ -389,7 +391,7 @@ public class GameContext implements Cloneable, IDisposable {
 	protected void onGameStateChanged() {
 	}
 
-	private void performAction(int playerId, GameAction gameAction) {
+	protected void performAction(int playerId, GameAction gameAction) {
 		logic.performGameAction(playerId, gameAction);
 		onGameStateChanged();
 	}
@@ -405,7 +407,6 @@ public class GameContext implements Cloneable, IDisposable {
 			}
 		}
 		endGame();
-
 	}
 
 	public boolean playTurn() {
@@ -471,6 +472,7 @@ public class GameContext implements Cloneable, IDisposable {
 		}
 		logger.error("Could not resolve cardReference {}", cardReference);
 		new RuntimeException().printStackTrace();
+		System.err.println("Could not resolve cardReference" + cardReference.toString());
 		return null;
 	}
 

@@ -109,7 +109,7 @@ public class ProceduralGameLogic extends GameLogic {
 		// second player gets the coin additionally
 		if (!begins) {
 			Card theCoin = CardCatalogue.getCardById("spell_the_coin");
-			receiveCard(player.getId(), theCoin);
+			//receiveCard(player.getId(), theCoin);
 		}
 	}
 

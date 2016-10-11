@@ -221,7 +221,7 @@ public class GameBoardView extends BorderPane {
 	}
 
 	public void showAnimations(GameContext context) {
-		gameEventVisualizer.visualize((GameContextVisualizable) context, this);
+		gameEventVisualizer.visualize((GameContextVisuals) context, this);
 	}
 
 	public void updateGameState(GameContext context) {

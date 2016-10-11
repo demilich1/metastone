@@ -4,6 +4,7 @@ import net.demilich.nittygrittymvc.SimpleCommand;
 import net.demilich.nittygrittymvc.interfaces.INotification;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.gui.playmode.GameContextVisualizable;
+import net.demilich.metastone.gui.playmode.GameContextVisuals;
 
 public class AnimationLockCommand extends SimpleCommand<GameNotification> {
 
@@ -11,7 +12,7 @@ public class AnimationLockCommand extends SimpleCommand<GameNotification> {
 	public void execute(INotification<GameNotification> notification) {
 		AnimationProxy animationProxy = (AnimationProxy) getFacade().retrieveProxy(AnimationProxy.NAME);
 
-		GameContextVisualizable contextVisualizable = (GameContextVisualizable) notification.getBody();
+		GameContextVisuals contextVisualizable = (GameContextVisuals) notification.getBody();
 		animationProxy.setContext(contextVisualizable);
 	}
 

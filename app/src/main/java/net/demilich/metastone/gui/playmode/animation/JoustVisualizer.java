@@ -5,11 +5,12 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.JoustEvent;
 import net.demilich.metastone.gui.playmode.GameBoardView;
+import net.demilich.metastone.gui.playmode.GameContextVisuals;
 
 public class JoustVisualizer implements IGameEventVisualizer {
 
 	@Override
-	public void visualizeEvent(GameContext gameContext, GameEvent event, GameBoardView boardView) {
+	public void visualizeEvent(GameContextVisuals gameContext, GameEvent event, GameBoardView boardView) {
 		JoustEvent joustEvent = (JoustEvent) event;
 
 		Card downCard = null;

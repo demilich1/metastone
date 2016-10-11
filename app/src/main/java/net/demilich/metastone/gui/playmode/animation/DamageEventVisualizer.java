@@ -6,6 +6,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.events.DamageEvent;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.gui.playmode.GameBoardView;
+import net.demilich.metastone.gui.playmode.GameContextVisuals;
 import net.demilich.metastone.gui.playmode.GameToken;
 
 public class DamageEventVisualizer implements IGameEventVisualizer {
@@ -13,7 +14,7 @@ public class DamageEventVisualizer implements IGameEventVisualizer {
 	private HashMap<Integer, HitInfo> recentHits = new HashMap<>();
 
 	@Override
-	public void visualizeEvent(GameContext gameContext, GameEvent event, GameBoardView boardView) {
+	public void visualizeEvent(GameContextVisuals gameContext, GameEvent event, GameBoardView boardView) {
 		DamageEvent damageEvent = (DamageEvent) event;
 		GameToken targetToken = boardView.getToken(damageEvent.getVictim());
 		if (targetToken == null) {

@@ -13,7 +13,7 @@ import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.logic.GameLogic;
 
-public class GameContextVisualizable extends GameContext {
+public class GameContextVisualizable extends GameContext implements GameContextVisuals{
 
 	private final List<GameEvent> gameEvents = new ArrayList<>();
 
