@@ -4,10 +4,14 @@ import java.io.Serializable;
 
 public class CardReference implements Serializable{
 
-	private final int playerId;
-	private final CardLocation location;
-	private final int cardId;
-	private final String cardName;
+	private int playerId;
+	private CardLocation location;
+	private int cardId;
+	private String cardName;
+
+	protected CardReference() {
+		location = CardLocation.NONE;
+	}
 
 	public CardReference(int playerId, CardLocation location, int cardId, String cardName) {
 		this.playerId = playerId;

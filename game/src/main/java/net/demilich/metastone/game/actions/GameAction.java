@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.actions;
 
 import java.io.Serializable;
-
+import com.google.gson.annotations.SerializedName;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;

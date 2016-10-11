@@ -3,8 +3,13 @@ package net.demilich.metastone.game.actions;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.cards.WeaponCard;
 import net.demilich.metastone.game.targeting.CardReference;
+import net.demilich.metastone.game.targeting.EntityReference;
 
 public class PlayWeaponCardAction extends PlayCardAction {
+	private PlayWeaponCardAction() {
+		setTargetKey(EntityReference.NONE);
+		setActionType(ActionType.EQUIP_WEAPON);
+	}
 
 	public PlayWeaponCardAction(CardReference cardReference) {
 		super(cardReference);

@@ -10,7 +10,13 @@ import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class PlayMinionCardAction extends PlayCardAction {
 
-	private final BattlecryAction battlecry;
+	private BattlecryAction battlecry;
+
+	private PlayMinionCardAction() {
+		super(null);
+		setTargetRequirement(TargetSelection.FRIENDLY_MINIONS);
+		setActionType(ActionType.SUMMON);
+	}
 
 	public PlayMinionCardAction(CardReference cardReference) {
 		this(cardReference, null);

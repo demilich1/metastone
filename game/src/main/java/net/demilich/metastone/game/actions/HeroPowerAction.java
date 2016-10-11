@@ -6,6 +6,9 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class HeroPowerAction extends PlaySpellCardAction {
+	private HeroPowerAction() {
+		setActionType(ActionType.HERO_POWER);
+	}
 
 	public HeroPowerAction(SpellDesc spell, Card card, TargetSelection targetSelection) {
 		super(spell, card, targetSelection);

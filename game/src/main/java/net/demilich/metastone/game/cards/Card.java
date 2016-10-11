@@ -25,7 +25,6 @@ public abstract class Card extends Entity {
 	private final HeroClass classRestriction;
 	private boolean collectible = true;
 	private CardLocation location;
-	private BattlecryDesc battlecry;
 	private ValueProvider manaCostModifier;
 	private final String cardId;
 
@@ -66,10 +65,6 @@ public abstract class Card extends Entity {
 
 	public int getBaseManaCost() {
 		return getAttributeValue(Attribute.BASE_MANA_COST);
-	}
-
-	public BattlecryDesc getBattlecry() {
-		return battlecry;
 	}
 
 	public String getCardId() {
@@ -133,10 +128,6 @@ public abstract class Card extends Entity {
 		return rarity;
 	}
 
-	public boolean hasBattlecry() {
-		return this.battlecry != null;
-	}
-
 	public boolean isCollectible() {
 		return collectible;
 	}
@@ -172,10 +163,6 @@ public abstract class Card extends Entity {
 	}
 
 	public abstract PlayCardAction play();
-
-	public void setBattlecry(BattlecryDesc battlecry) {
-		this.battlecry = battlecry;
-	}
 
 	public void setCollectible(boolean collectible) {
 		this.collectible = collectible;
