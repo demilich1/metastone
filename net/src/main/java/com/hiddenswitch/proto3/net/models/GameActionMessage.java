@@ -2,14 +2,24 @@ package com.hiddenswitch.proto3.net.models;
 
 import net.demilich.metastone.game.actions.GameAction;
 
-public class GameActionMessage {
+public class GameActionMessage extends NetworkMessage {
 	private GameAction gameAction;
 
-	public GameActionMessage(GameAction fromAction) {
-		gameAction = fromAction.clone();
+	private GameActionMessage() {
+		setMessageType(MessageType.GAME_ACTION);
 	}
 
-	public GameAction getAction() {
+	public GameActionMessage(GameAction fromAction, int order) {
+		this();
+		setGameAction(fromAction);
+		setOrder(order);
+	}
+
+	public GameAction getGameAction() {
 		return gameAction;
+	}
+
+	private void setGameAction(GameAction gameAction) {
+		this.gameAction = gameAction;
 	}
 }

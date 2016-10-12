@@ -5,7 +5,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
+import com.hiddenswitch.proto3.net.models.*;
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.actions.*;
 import net.demilich.metastone.game.cards.desc.*;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -34,9 +36,17 @@ public class Serialization {
 		gameActions.registerSubtype(PlayWeaponCardAction.class, ActionType.EQUIP_WEAPON.toString());
 		gameActions.registerSubtype(DiscoverAction.class, ActionType.DISCOVER.toString());
 
+		RuntimeTypeAdapterFactory<NetworkMessage> networkMessages = RuntimeTypeAdapterFactory.of(NetworkMessage.class, "messageType");
+		networkMessages.registerSubtype(GameActionMessage.class, MessageType.GAME_ACTION.toString());
+		networkMessages.registerSubtype(ConfigureGameMessage.class, MessageType.CONFIGURE_GAME.toString());
+		networkMessages.registerSubtype(EndGameMessage.class, MessageType.END_GAME.toString());
+		networkMessages.registerSubtype(PregameMessage.class, MessageType.PREGAME.toString());
+		networkMessages.registerSubtype(GameContextMessage.class, MessageType.GAME_CONTEXT.toString());
+
 		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.registerTypeAdapter(SpellDesc.class, new SpellDeserializer());
+		gsonBuilder.registerTypeAdapterFactory(networkMessages);
 		gsonBuilder.registerTypeAdapterFactory(gameActions);
+		gsonBuilder.registerTypeAdapter(SpellDesc.class, new SpellDeserializer());
 		gsonBuilder.registerTypeAdapter(EntityReference.class, new EntityReferenceSerializer());
 		gsonBuilder.registerTypeAdapter(SpellDesc.class, new SpellDeserializer());
 		Type mapType = new TypeToken<Map<Attribute, Object>>() {

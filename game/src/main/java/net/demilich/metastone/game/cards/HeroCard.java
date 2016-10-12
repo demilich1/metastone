@@ -13,8 +13,8 @@ import net.demilich.metastone.game.heroes.powers.HeroPower;
 
 public class HeroCard extends Card {
 
-	private static final Set<Attribute> inheritedAttributes = new HashSet<Attribute>(
-			Arrays.asList(new Attribute[] { Attribute.HP, Attribute.MAX_HP, Attribute.BASE_HP, Attribute.ARMOR }));
+	protected static final Set<Attribute> inheritedAttributes = new HashSet<Attribute>(
+			Arrays.asList(new Attribute[]{Attribute.HP, Attribute.MAX_HP, Attribute.BASE_HP, Attribute.ARMOR}));
 
 	private final HeroCardDesc desc;
 

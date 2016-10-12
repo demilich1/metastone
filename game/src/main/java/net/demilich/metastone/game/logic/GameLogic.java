@@ -976,7 +976,6 @@ public class GameLogic implements Cloneable {
 		assignCardIds(player.getHand());
 
 		log("Setting hero hp to {} for {}", player.getHero().getHp(), player.getName());
-
 		player.getDeck().shuffle();
 
 		mulligan(player, begins);

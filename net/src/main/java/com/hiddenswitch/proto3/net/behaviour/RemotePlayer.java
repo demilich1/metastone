@@ -11,6 +11,7 @@ import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
 import com.amazonaws.services.sqs.model.ReceiveMessageResult;
 import com.hiddenswitch.proto3.net.models.GameActionMessage;
+import com.hiddenswitch.proto3.net.util.Serialization;
 import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -19,7 +20,9 @@ import net.demilich.metastone.game.behaviour.IBehaviour;
 import net.demilich.metastone.game.cards.Card;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.SortedSet;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -59,7 +62,7 @@ public class RemotePlayer implements IBehaviour {
 
 	/**
 	 * In our game, there is no mulligan, so remote players do not mulligan.
-	 *
+	 * To support default play, we could add mulligan to the queue of game action messages.
 	 * @param context
 	 * @param player
 	 * @param cards
@@ -115,15 +118,19 @@ public class RemotePlayer implements IBehaviour {
 		// Process the message.
 		List<Message> messages = result.getMessages();
 
-		if (messages == null) {
-			// TODO: What do we do if there are no messages, retry?
+		if (messages == null
+				|| messages.size() == 0) {
+			// Check our queue if there are still messages with the correct order.
 		}
 
 		List<GameActionMessage> gameActionMessages = new ArrayList<>();
 
 		for (Message message : messages) {
-
+			gameActionMessages.add(Serialization.deserialize(message.getBody(), GameActionMessage.class));
 		}
+
+		gameActionMessages.sort((o1, o2) -> (o1.getOrder() < o2.getOrder()) ? -1 : ((o1.getOrder() == o2.getOrder()) ? 0 : 1));
+
 		return null;
 	}
 }
