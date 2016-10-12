@@ -21,21 +21,9 @@ repositories {
     mavenCentral()
 }
 
-dependencyManagement {
-    imports {
-        mavenBom 'com.amazonaws:aws-java-sdk-bom:1.10.47'
-    }
-}
-
 dependencies {
-    compile 'com.lambdaworks:scrypt:1.4.0'
-    compile 'com.amazonaws:aws-java-sdk-dynamodb'
-    compile 'com.amazonaws:aws-java-sdk-sqs'
-    compile group: 'com.google.code.gson', name: 'gson', version: '2.3.1'
-    compile project(':shared')
     compile project(':game')
     testCompile project(':cards')
-    testCompile project(':game')
     testCompile group: 'org.testng', name: 'testng', version: '6.+'
 }
 

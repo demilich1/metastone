@@ -1,4 +1,8 @@
 rootProject.name = 'metastone'
-include 'shared', 'game', 'cards', 'app'
+include 'shared'
+include 'game'
+include 'cards'
+include 'app'
 include 'net'
+include 'server'
 

@@ -125,14 +125,14 @@ Examples: Fireball, Frostbolt, Hellfire, Lightning Storm, Steady Shot (Hero Powe
 
 DestroyAllExceptOneSpell
 Destroys all minions except one. 
-Examples: Enter the Coliseum(leaves one minion for each player), Brawl
+Examples: Enter the Coliseum(leaves one minion for each gamePlayer), Brawl
 "target": The pool of minions to destroy.
 "filter": The condition to choose which minion survives.
 
 DestroySecretsSpell
-Destroys all secrets of target player.
+Destroys all secrets of target gamePlayer.
 Examples: Flare, Eater of Secrets
-"targetPlayer": The player whose secrets are destroyed.
+"targetPlayer": The gamePlayer whose secrets are destroyed.
 
 DestroySpell
 Destroys the target.
@@ -148,7 +148,7 @@ DiscardSpell
 Discards a number of target Player’s cards.
 Examples: Doomguard, Soulfire, Deathwing, Astral Communion
 “value”: Integer. The number of cards to discard.
-“targetPlayer”: Optional Player. Default is SELF. The player to discard cards.
+“targetPlayer”: Optional Player. Default is SELF. The gamePlayer to discard cards.
 
 DiscoverCardSpell
 Discovers a card from a list.
@@ -178,10 +178,10 @@ DrawCardAndDoSomethingSpell {}: Consider merging with DrawCardSpell?
 [] 
 
 DrawCardSpell
-Target player draws a Card from their Deck.
+Target gamePlayer draws a Card from their Deck.
 Examples: Coldlight Oracle, Gnomish Inventor, Cult Master
 “value”: Integer. The number of Cards to draw.
-“targetPlayer”: Optional Player. Default is SELF. The player to draw Cards.
+“targetPlayer”: Optional Player. Default is SELF. The gamePlayer to draw Cards.
 
 EitherOrSpell
 Similar to ConditionalEffectSpell, has 1 effect if the spell meets a condition and another if it does not.
@@ -198,12 +198,12 @@ Examples: Amani Berserker, Raging Worgen, Angry Chicken
 "attribute": Attribute to gain when enraged.
 
 EquipRandomWeaponSpell
-Equips a random weapon for each target player.
+Equips a random weapon for each target gamePlayer.
 Examples: Blingtron
 "targetPlayer": Player to equip the random weapon for.
 
 EquipWeaponSpell
-Target player equips a Weapon.
+Target gamePlayer equips a Weapon.
 Examples: Arathi Weaponsmith, Upgrade!, Dagger Mastery (Hero Power)
 “card”: Card ID. The card ID of the weapon to equip.
 

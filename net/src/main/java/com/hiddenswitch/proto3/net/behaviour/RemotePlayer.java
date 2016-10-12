@@ -57,7 +57,7 @@ public class RemotePlayer implements IBehaviour {
 
 	@Override
 	public String getName() {
-		return "Remote Player";
+		return "Remote GamePlayer";
 	}
 
 	/**

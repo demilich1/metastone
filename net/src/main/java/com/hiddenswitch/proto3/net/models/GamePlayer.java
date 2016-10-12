@@ -4,7 +4,7 @@ import net.demilich.metastone.game.cards.NullHeroCard;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
 
-public class Player {
+public class GamePlayer {
 	public String userId;
 	public PlayerProfile profile;
 	public String channelId;

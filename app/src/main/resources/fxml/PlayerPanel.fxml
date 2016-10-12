@@ -12,7 +12,7 @@
 <fx:root spacing="4.0" styleClass="panel"  type="VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label styleClass="info-small" text="Player" />
-      <Label layoutX="10.0" layoutY="41.0" styleClass="info-small" text="Select player:" />
+      <Label layoutX="10.0" layoutY="41.0" styleClass="info-small" text="Select gamePlayer:" />
       <ComboBox fx:id="playerComboBox" prefWidth="200.0" />
       <HBox alignment="CENTER_LEFT" spacing="8.0">
          <children>

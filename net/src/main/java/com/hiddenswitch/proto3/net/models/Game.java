@@ -1,78 +1,78 @@
 package com.hiddenswitch.proto3.net.models;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
 import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.ProceduralPlayer;
-import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.decks.DeckFormat;
-import net.demilich.metastone.game.gameconfig.GameConfig;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.logic.ProceduralGameLogic;
 
 import java.util.HashMap;
 
+@DynamoDBDocument
 public class Game {
-	public String id;
 	public GameType type = GameType.PROCEDURAL;
 	private GameContext context = null;
-	private Player player1 = null;
-	private Player player2 = null;
+	private GamePlayer gamePlayer1 = null;
+	private GamePlayer gamePlayer2 = null;
 
-	private transient HashMap<String, Player> idToPlayer = new HashMap<>(2);
+	private transient HashMap<String, GamePlayer> idToPlayer = new HashMap<>(2);
 
 	public int getPlayerCount() {
 		int count = 0;
-		if (player1 != null) {
+		if (gamePlayer1 != null) {
 			count++;
 		}
-		if (player2 != null) {
+		if (gamePlayer2 != null) {
 			count++;
 		}
 		return count;
 	}
 
-	public Player getPlayerForId(String id) {
+	public GamePlayer getPlayerForId(String id) {
 		return idToPlayer.getOrDefault(id, null);
 	}
 
-	private void idToPlayerPut(Player player) {
-		if (player == null) {
+	private void idToPlayerPut(GamePlayer gamePlayer) {
+		if (gamePlayer == null) {
 			return;
 		}
 
-		idToPlayer.put(player.userId, player);
+		idToPlayer.put(gamePlayer.userId, gamePlayer);
 	}
 
-	public void setPlayer1(Player player1) {
-		this.player1 = player1;
-		idToPlayerPut(player1);
+	public void setGamePlayer1(GamePlayer gamePlayer1) {
+		this.gamePlayer1 = gamePlayer1;
+		idToPlayerPut(gamePlayer1);
 	}
 
-	public void setPlayer2(Player player2) {
-		this.player2 = player2;
-		idToPlayerPut(player2);
+	public void setGamePlayer2(GamePlayer gamePlayer2) {
+		this.gamePlayer2 = gamePlayer2;
+		idToPlayerPut(gamePlayer2);
 	}
 
-	public Player getPlayer1() {
-		return player1;
+	public GamePlayer getGamePlayer1() {
+		return gamePlayer1;
 	}
 
-	public Player getPlayer2() {
-		return player2;
+	public GamePlayer getGamePlayer2() {
+		return gamePlayer2;
 	}
 
 	/**
-	 * Sets the next null player to the provided player. If the game is ready after
-	 * setting the player, the initial game context is set.
-	 * @param player
+	 * Sets the next null gamePlayer to the provided gamePlayer. If the game is ready after
+	 * setting the gamePlayer, the initial game context is set.
+	 * @param gamePlayer
 	 * @throws UnsupportedOperationException
 	 */
-	public void setNullPlayer(Player player) throws UnsupportedOperationException {
-		if (this.player1 == null) {
-			setPlayer1(player);
-		} else if (this.player2 == null) {
-			setPlayer2(player);
+	public void setNullPlayer(GamePlayer gamePlayer) throws UnsupportedOperationException {
+		if (this.gamePlayer1 == null) {
+			setGamePlayer1(gamePlayer);
+		} else if (this.gamePlayer2 == null) {
+			setGamePlayer2(gamePlayer);
 			if (getContext() == null) {
 				setInitialGameContext();
 			}
@@ -86,17 +86,17 @@ public class Game {
 			throw new UnsupportedOperationException();
 		}
 
-		PlayerConfig playerConfig1 = getPlayer1().getPlayerConfig();
-		PlayerConfig playerConfig2 = getPlayer2().getPlayerConfig();
+		PlayerConfig playerConfig1 = getGamePlayer1().getPlayerConfig();
+		PlayerConfig playerConfig2 = getGamePlayer2().getPlayerConfig();
 
-		net.demilich.metastone.game.Player player1 = null;
-		net.demilich.metastone.game.Player player2 = null;
+		Player player1 = null;
+		Player player2 = null;
 		GameLogic logic = null;
 		DeckFormat deckFormat = new DeckFormat();
 		switch (type) {
 			case CONVENTIONAL:
-				player1 = new net.demilich.metastone.game.Player(playerConfig1);
-				player2 = new net.demilich.metastone.game.Player(playerConfig2);
+				player1 = new Player(playerConfig1);
+				player2 = new Player(playerConfig2);
 				logic = new GameLogic();
 				// TODO: Add all of the conventional cards to this format.
 				deckFormat.addSet(CardSet.BASIC);
