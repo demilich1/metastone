@@ -100,6 +100,7 @@ public class Games {
 
 	public Game create() {
 		Game game = new Game();
+		return game;
 	}
 
 	public void save(Game game) {
