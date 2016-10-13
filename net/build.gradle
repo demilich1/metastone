@@ -2,6 +2,7 @@ buildscript {
     repositories {
         mavenCentral()
         maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "http://dynamodb-local.s3-website-us-west-2.amazonaws.com/release" }
     }
     dependencies {
         classpath "io.spring.gradle:dependency-management-plugin:0.5.4.RELEASE"
@@ -9,7 +10,12 @@ buildscript {
     }
 }
 
-apply plugin: "io.spring.dependency-management"
+
+configurations {
+    dynamodb { transitive = false }
+}
+
+apply plugin: 'io.spring.dependency-management'
 apply plugin: 'jp.classmethod.aws'
 
 aws {
@@ -31,11 +37,19 @@ dependencies {
     compile 'com.lambdaworks:scrypt:1.4.0'
     compile 'com.amazonaws:aws-java-sdk-dynamodb'
     compile 'com.amazonaws:aws-java-sdk-sqs'
+    compile 'commons-validator:commons-validator:1.4.1'
     compile group: 'com.google.code.gson', name: 'gson', version: '2.3.1'
     compile project(':shared')
     compile project(':game')
     testCompile project(':cards')
     testCompile project(':game')
+    testCompile group: 'com.amazonaws', name: 'DynamoDBLocal', version: '1.11.0.1'
+    testCompile group: 'com.almworks.sqlite4java', name: 'sqlite4java', version: '1.0.392'
+    testCompile group: 'com.almworks.sqlite4java', name: 'sqlite4java-win32-x86', version: '1.0.392'
+    testCompile group: 'com.almworks.sqlite4java', name: 'sqlite4java-win32-x64', version: '1.0.392'
+    testCompile group: 'com.almworks.sqlite4java', name: 'libsqlite4java-osx', version: '1.0.392'
+    testCompile group: 'com.almworks.sqlite4java', name: 'libsqlite4java-linux-i386', version: '1.0.392'
+    testCompile group: 'com.almworks.sqlite4java', name: 'libsqlite4java-linux-amd64', version: '1.0.392'
     testCompile group: 'org.testng', name: 'testng', version: '6.+'
 }
 

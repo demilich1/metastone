@@ -8,10 +8,8 @@ import com.hiddenswitch.proto3.net.models.LoginToken;
 
 @DynamoDBTable(tableName = "authorizations")
 public class AuthorizationRecord {
-	@DynamoDBHashKey
 	private String userId;
-	@DynamoDBAttribute
-	private LoginToken[] loginTokens;
+	private HashedLoginToken[] loginTokens = new HashedLoginToken[] {};
 	private String scrypt;
 
 	@DynamoDBAttribute
@@ -23,7 +21,7 @@ public class AuthorizationRecord {
 		this.scrypt = scrypt;
 	}
 
-
+	@DynamoDBHashKey
 	public String getUserId() {
 		return userId;
 	}
@@ -32,11 +30,12 @@ public class AuthorizationRecord {
 		this.userId = userId;
 	}
 
-	public LoginToken[] getLoginTokens() {
+	@DynamoDBAttribute
+	public HashedLoginToken[] getLoginTokens() {
 		return loginTokens;
 	}
 
-	public void setLoginTokens(LoginToken[] loginTokens) {
+	public void setLoginTokens(HashedLoginToken[] loginTokens) {
 		this.loginTokens = loginTokens;
 	}
 }

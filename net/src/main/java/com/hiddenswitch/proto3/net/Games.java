@@ -1,7 +1,5 @@
 package com.hiddenswitch.proto3.net;
 
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.ReceiveMessageResult;
 import com.amazonaws.services.sqs.model.SendMessageResult;
@@ -13,9 +11,6 @@ import net.demilich.metastone.game.decks.Deck;
 
 import java.util.UUID;
 
-/**
- * Created by bberman on 10/9/16.
- */
 public class Games extends Service {
 	private Accounts accounts;
 	private String matchmakingQueueUrl;

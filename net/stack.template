@@ -26,6 +26,7 @@
     "IAMP1J29X": {
       "Type": "AWS::IAM::Policy",
       "Properties": {
+        "PolicyName": "ServicePolicy",
         "Roles": [
           {
             "Ref": "IAMR4GSB1"
@@ -41,6 +42,15 @@
               ],
               "Resource": [
                 "arn:aws:logs:*:*:*"
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "sqs:*"
+              ],
+              "Resource": [
+                "*"
               ]
             },
             {
@@ -84,7 +94,9 @@
     },
     "CardsDynamoTable": {
       "Type": "AWS::DynamoDB::Table",
-      "Properties": {}
+      "Properties": {
+        "TableName": "cards"
+      }
     },
     "CardDefinitionsDynamoTable": {
       "Type": "AWS::DynamoDB::Table",
