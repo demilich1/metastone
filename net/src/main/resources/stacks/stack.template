@@ -92,6 +92,15 @@
         }
       }
     },
+    "UsersDynamoTable": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "TableName": "users",
+        "AttributeDefinitions": [
+
+        ]
+      }
+    },
     "CardsDynamoTable": {
       "Type": "AWS::DynamoDB::Table",
       "Properties": {

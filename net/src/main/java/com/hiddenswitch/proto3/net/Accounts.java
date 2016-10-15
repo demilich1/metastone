@@ -7,12 +7,13 @@ import com.hiddenswitch.proto3.net.models.*;
 import com.lambdaworks.crypto.SCryptUtil;
 import org.apache.commons.validator.routines.EmailValidator;
 
-import java.time.Instant;
-import java.util.Date;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.regex.Pattern;
 
 public class Accounts extends Service {
 	private Pattern usernamePattern = Pattern.compile("[A-Za-z0-9_]+");
+	private String userId;
 
 	public Accounts() {
 		super();
@@ -37,8 +38,8 @@ public class Accounts extends Service {
 		}
 
 		User user = create();
-		user.emailAddress = request.emailAddress;
-		user.name = request.name;
+		user.setEmailAddress(request.emailAddress);
+		user.setName(request.name);
 		String userId = save(user);
 
 		LoginToken loginToken = setPassword(userId, request.password);
@@ -51,36 +52,72 @@ public class Accounts extends Service {
 
 	public LoginResponse login(LoginRequest request) {
 		LoginResponse response = new LoginResponse();
+		boolean valid = true;
+		if (request == null) {
+			valid = false;
+		}
+		if (request.userId == null) {
+			valid = false;
+			response.badUsername = true;
+		}
+		if (request.password == null) {
+			valid = false;
+			response.badPassword = true;
+		}
 		AuthorizationRecord record = getAuthorizationRecord(request.userId);
 		if (record == null) {
+			valid = false;
 			response.badUsername = true;
-			return response;
 		}
-		if (!SCryptUtil.check(request.password, record.getScrypt())) {
+
+		if (request.password != null
+				&& record != null
+				&& !SCryptUtil.check(request.password, record.getScrypt())) {
+			valid = false;
 			response.badPassword = true;
-			return response;
 		}
 
-		LoginToken token = LoginToken.createSecure();
-		HashedLoginToken[] tokens = new HashedLoginToken[Math.max(record.getLoginTokens().length + 1, 5)];
-		tokens[0] = new HashedLoginToken(token);
-
-		for (int i = 1; i < record.getLoginTokens().length; i++) {
-			tokens[i] = record.getLoginTokens()[i];
+		LoginToken token = null;
+		if (valid) {
+			token = loginInternal(request, record);
 		}
 
-		record.setLoginTokens(tokens);
-		save(record);
+		if (token == null) {
+			setUserId(null);
+		} else {
+			setUserId(request.userId);
+		}
 
 		response.token = token;
 		return response;
 	}
 
-	public boolean isAuthorizedWithToken(String userId, String token) {
-		AuthorizationRecord record = getAuthorizationRecord(userId);
+	private LoginToken loginInternal(LoginRequest request, AuthorizationRecord record) {
+		LoginToken token = LoginToken.createSecure();
+		HashedLoginToken[] tokens = new HashedLoginToken[Math.max(record.getLoginTokens().size() + 1, 5)];
+		tokens[0] = new HashedLoginToken(token);
 
+		for (int i = 1; i < record.getLoginTokens().size(); i++) {
+			tokens[i] = record.getLoginTokens().get(i);
+		}
+
+		record.setLoginTokens(Arrays.asList(tokens));
+		record.setUserId(request.userId);
+		save(record);
+		return token;
+	}
+
+	public boolean isAuthorizedWithToken(String userId, String token) {
+		if (token == null
+				|| userId == null) {
+			return false;
+		}
+		AuthorizationRecord record = getAuthorizationRecord(userId);
+		if (record == null) {
+			return false;
+		}
 		for (HashedLoginToken loginToken : record.getLoginTokens()) {
-			if (SCryptUtil.check(token, loginToken.hashedLoginToken)) {
+			if (SCryptUtil.check(token, loginToken.getHashedLoginToken())) {
 				return true;
 			}
 		}
@@ -90,7 +127,7 @@ public class Accounts extends Service {
 
 	private String save(User user) {
 		UserRecord record = new UserRecord();
-		record.id = user.name;
+		record.id = user.getName();
 		record.user = user;
 		getDatabase().save(record);
 		return record.id;
@@ -124,13 +161,16 @@ public class Accounts extends Service {
 			record = new AuthorizationRecord();
 		}
 
+		record.setUserId(userId);
 		record.setScrypt(SCryptUtil.scrypt(password, 16384, 8, 1));
 
 		LoginToken token = LoginToken.createSecure();
 
 		// Invalidates all existing login tokens
-		record.setLoginTokens(new HashedLoginToken[]{new HashedLoginToken(token)});
+		record.setLoginTokens(Collections.singletonList(new HashedLoginToken(token)));
 		save(record);
+
+		setUserId(userId);
 
 		return token;
 	}
@@ -154,18 +194,24 @@ public class Accounts extends Service {
 	}
 
 	public String getUserId() {
-		// TODO: Gets the context and recovers the user ID and other authorization information from there
-		return "";
+		return this.userId;
 	}
 
 	public PlayerProfile getProfileForId(String userId) {
 		User user = get(userId);
+		if (user == null) {
+			return null;
+		}
 		PlayerProfile profile = new PlayerProfile();
-		profile.name = user.name;
+		profile.name = user.getName();
 		return profile;
 	}
 
 	private Pattern getUsernamePattern() {
 		return usernamePattern;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 }

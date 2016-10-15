@@ -6,11 +6,18 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.hiddenswitch.proto3.net.models.LoginToken;
 
+import java.util.List;
+
 @DynamoDBTable(tableName = "authorizations")
 public class AuthorizationRecord {
 	private String userId;
-	private HashedLoginToken[] loginTokens = new HashedLoginToken[] {};
+	private List<HashedLoginToken> loginTokens;
 	private String scrypt;
+
+	@DynamoDBHashKey
+	public String getUserId() {
+		return userId;
+	}
 
 	@DynamoDBAttribute
 	public String getScrypt() {
@@ -21,21 +28,16 @@ public class AuthorizationRecord {
 		this.scrypt = scrypt;
 	}
 
-	@DynamoDBHashKey
-	public String getUserId() {
-		return userId;
-	}
-
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
 	@DynamoDBAttribute
-	public HashedLoginToken[] getLoginTokens() {
+	public List<HashedLoginToken> getLoginTokens() {
 		return loginTokens;
 	}
 
-	public void setLoginTokens(HashedLoginToken[] loginTokens) {
+	public void setLoginTokens(List<HashedLoginToken> loginTokens) {
 		this.loginTokens = loginTokens;
 	}
 }

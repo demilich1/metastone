@@ -12,13 +12,17 @@ import net.demilich.metastone.game.decks.Deck;
 import java.util.UUID;
 
 public class Games extends Service {
+	public static final String MATCHMAKING_QUEUE = "matchmakingQueue";
 	private Accounts accounts;
 	private String matchmakingQueueUrl;
 
 	public Games() {
 		super();
 		setAccounts(new Accounts());
-		setMatchmakingQueueUrl(getQueue().getQueueUrl("matchmakingQueue").getQueueUrl());
+		getAccounts().setCredentials(getCredentials());
+		getAccounts().setDatabase(getDatabase());
+		getAccounts().setQueue(getQueue());
+		setMatchmakingQueueUrl(getQueue().getQueueUrl(MATCHMAKING_QUEUE).getQueueUrl());
 	}
 
 	public MatchmakingResponse matchmakeAndJoin(MatchmakingRequest matchmakingRequest) {
@@ -54,7 +58,7 @@ public class Games extends Service {
 		if (game.isReadyToPlay()) {
 			// The game is ready to play
 			response.game = getGameCensored(userId, game);
-			response.myChannelId = game.getPlayerForId(userId).channelId;
+			response.myChannelId = game.getPlayerForId(userId).queueUrl;
 			response.retry = null;
 		} else {
 			// We're still waiting for a player
@@ -71,9 +75,19 @@ public class Games extends Service {
 		return response;
 	}
 
-	private MatchmakingRequestRetry createRetry(String gameId) {
-		// TODO: Create the queue
+	/**
+	 * Disposes a game's realtime resources, if any.
+	 * @param gameId {String} The ID of the game to dispose.
+	 */
+	public void dispose(String gameId) {
+		Game game = get(gameId);
 
+		for (String queueUrl : new String[] {game.getGamePlayer1().queueUrl, game.getGamePlayer2().queueUrl}) {
+			getQueue().deleteQueue(queueUrl);
+		}
+	}
+
+	private MatchmakingRequestRetry createRetry(String gameId) {
 		MatchmakingRequestMessage matchmakingRequestMessage = new MatchmakingRequestMessage(gameId);
 		SendMessageResult result = getQueue().sendMessage(getMatchmakingQueueUrl(), Serialization.serialize(matchmakingRequestMessage));
 		MatchmakingRequestRetry retry = new MatchmakingRequestRetry(gameId, result.getMessageId());
@@ -86,14 +100,14 @@ public class Games extends Service {
 		thisGamePlayer.userId = userId;
 		thisGamePlayer.deck = deck;
 		thisGamePlayer.profile = getAccounts().getProfileForId(userId);
-		thisGamePlayer.channelId = createChannel(userId, ChannelType.SQS);
+		thisGamePlayer.queueUrl = getQueueUrl(userId, ChannelType.SQS);
 		return thisGamePlayer;
 	}
 
-	private String createChannel(String userId, ChannelType type) {
-		String queueName = userId.concat(":").concat(UUID.randomUUID().toString());
-		getQueue().createQueue(queueName);
-		return queueName;
+	private String getQueueUrl(String userId, ChannelType type) {
+		String queueUrl = userId.concat(":").concat(UUID.randomUUID().toString());
+		getQueue().createQueue(queueUrl).getQueueUrl();
+		return queueUrl;
 	}
 
 	private Game getGameCensored(String forUserId, Game game) {

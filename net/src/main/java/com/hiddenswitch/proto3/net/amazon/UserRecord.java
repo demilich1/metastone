@@ -8,7 +8,23 @@ import com.hiddenswitch.proto3.net.models.User;
 @DynamoDBTable(tableName = "users")
 public class UserRecord {
 	@DynamoDBHashKey
-	public String id;
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	@DynamoDBAttribute
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public String id;
 	public User user;
 }

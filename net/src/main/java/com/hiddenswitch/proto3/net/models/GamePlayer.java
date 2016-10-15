@@ -7,7 +7,7 @@ import net.demilich.metastone.game.gameconfig.PlayerConfig;
 public class GamePlayer {
 	public String userId;
 	public PlayerProfile profile;
-	public String channelId;
+	public String queueUrl;
 	public ChannelType channelType = ChannelType.SQS;
 	public Deck deck;
 

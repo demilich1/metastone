@@ -4,7 +4,6 @@ import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.amazonaws.services.s3.model.LambdaConfiguration;
 import com.amazonaws.services.sqs.AmazonSQSClient;
 
 public class Service {
@@ -13,6 +12,9 @@ public class Service {
 	private AmazonSQSClient queue;
 
 	public Service() {
+	}
+
+	private void initializeProductionDependencies() {
 		setCredentials(getAWSCredentials());
 		setDatabase(new DynamoDBMapper(new AmazonDynamoDBClient(getCredentials())));
 		setQueue(new AmazonSQSClient(getCredentials()));
@@ -24,6 +26,9 @@ public class Service {
 	}
 
 	public AWSCredentials getCredentials() {
+		if (credentials == null) {
+			initializeProductionDependencies();
+		}
 		return credentials;
 	}
 
@@ -32,6 +37,9 @@ public class Service {
 	}
 
 	public AmazonSQSClient getQueue() {
+		if (queue == null) {
+			initializeProductionDependencies();
+		}
 		return queue;
 	}
 
@@ -40,6 +48,9 @@ public class Service {
 	}
 
 	public DynamoDBMapper getDatabase() {
+		if (database == null) {
+			initializeProductionDependencies();
+		}
 		return database;
 	}
 
