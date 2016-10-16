@@ -4,15 +4,11 @@ import java.lang.reflect.Type;
 import java.util.EnumMap;
 import java.util.Map;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
+import com.google.gson.*;
 
 import net.demilich.metastone.game.Attribute;
 
-public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Object>> {
+public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Object>>, JsonSerializer<Map<Attribute, Object>> {
 
 	@Override
 	public Map<Attribute, Object> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
@@ -66,4 +62,16 @@ public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Ob
 		map.put(attribute, value);
 	}
 
+	@Override
+	public JsonElement serialize(Map<Attribute, Object> src, Type typeOfSrc, JsonSerializationContext context) {
+		JsonObject result = new JsonObject();
+		for (Attribute attribute : Attribute.values()) {
+			if (!src.containsKey(attribute)) {
+				continue;
+			}
+			String argName = ParseUtils.toCamelCase(attribute.toString());
+			result.add(argName, new JsonPrimitive(src.get(attribute).toString()));
+		}
+		return result;
+	}
 }

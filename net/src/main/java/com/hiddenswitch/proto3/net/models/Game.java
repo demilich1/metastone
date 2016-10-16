@@ -1,6 +1,10 @@
 package com.hiddenswitch.proto3.net.models;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMarshalling;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted;
+import com.hiddenswitch.proto3.net.amazon.GameContextConverter;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.ProceduralPlayer;
@@ -36,6 +40,11 @@ public class Game {
 		return idToPlayer.getOrDefault(id, null);
 	}
 
+	@DynamoDBAttribute
+	public GameType getType() {
+		return type;
+	}
+
 	private void idToPlayerPut(GamePlayer gamePlayer) {
 		if (gamePlayer == null) {
 			return;
@@ -54,10 +63,12 @@ public class Game {
 		idToPlayerPut(gamePlayer2);
 	}
 
+	@DynamoDBAttribute
 	public GamePlayer getGamePlayer1() {
 		return gamePlayer1;
 	}
 
+	@DynamoDBAttribute
 	public GamePlayer getGamePlayer2() {
 		return gamePlayer2;
 	}
@@ -121,6 +132,7 @@ public class Game {
 		return getPlayerCount() == 2;
 	}
 
+	@DynamoDBTypeConverted(converter = GameContextConverter.class)
 	public GameContext getContext() {
 		return context;
 	}

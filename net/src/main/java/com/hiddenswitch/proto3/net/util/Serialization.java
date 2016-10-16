@@ -7,7 +7,6 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 import com.hiddenswitch.proto3.net.models.*;
 import net.demilich.metastone.game.Attribute;
-import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.actions.*;
 import net.demilich.metastone.game.cards.desc.*;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -46,12 +45,11 @@ public class Serialization {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.registerTypeAdapterFactory(networkMessages);
 		gsonBuilder.registerTypeAdapterFactory(gameActions);
-		gsonBuilder.registerTypeAdapter(SpellDesc.class, new SpellDeserializer());
-		gsonBuilder.registerTypeAdapter(EntityReference.class, new EntityReferenceSerializer());
-		gsonBuilder.registerTypeAdapter(SpellDesc.class, new SpellDeserializer());
 		Type mapType = new TypeToken<Map<Attribute, Object>>() {
 		}.getType();
 		gsonBuilder.registerTypeAdapter(mapType, new AttributeDeserializer());
+		gsonBuilder.registerTypeAdapter(EntityReference.class, new EntityReferenceSerializer());
+		gsonBuilder.registerTypeAdapter(SpellDesc.class, new SpellDeserializer());
 		gsonBuilder.registerTypeAdapter(ConditionDesc.class, new ConditionDeserializer());
 		gsonBuilder.registerTypeAdapter(EventTriggerDesc.class, new EventTriggerDeserializer());
 		gsonBuilder.registerTypeAdapter(AuraDesc.class, new AuraDeserializer());

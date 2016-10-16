@@ -3,17 +3,13 @@ package net.demilich.metastone.game.spells.desc.trigger;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
+import com.google.gson.*;
 
 import net.demilich.metastone.game.cards.desc.ParseUtils;
 import net.demilich.metastone.game.cards.desc.ParseValueType;
 import net.demilich.metastone.game.spells.trigger.GameEventTrigger;
 
-public class EventTriggerDeserializer implements JsonDeserializer<EventTriggerDesc> {
+public class EventTriggerDeserializer implements JsonDeserializer<EventTriggerDesc>, JsonSerializer<EventTriggerDesc> {
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -57,4 +53,20 @@ public class EventTriggerDeserializer implements JsonDeserializer<EventTriggerDe
 		arguments.put(arg, value);
 	}
 
+	@Override
+	public JsonElement serialize(EventTriggerDesc src, Type typeOfSrc, JsonSerializationContext context) {
+		JsonObject result = new JsonObject();
+		result.add("class", new JsonPrimitive(src.getTriggerClass().getSimpleName()));
+		for (EventTriggerArg conditionArg : EventTriggerArg.values()) {
+			if (conditionArg == EventTriggerArg.CLASS) {
+				continue;
+			}
+			if (!src.contains(conditionArg)) {
+				continue;
+			}
+			String argName = ParseUtils.toCamelCase(conditionArg.toString());
+			result.add(argName, new JsonPrimitive(src.get(conditionArg).toString()));
+		}
+		return result;
+	}
 }

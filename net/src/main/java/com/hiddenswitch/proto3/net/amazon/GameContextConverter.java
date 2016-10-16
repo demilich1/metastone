@@ -1,0 +1,18 @@
+package com.hiddenswitch.proto3.net.amazon;
+
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverter;
+import com.hiddenswitch.proto3.net.util.Serialization;
+import net.demilich.metastone.game.GameContext;
+
+public class GameContextConverter implements DynamoDBTypeConverter {
+	@Override
+	public Object convert(Object object) {
+		GameContext gameContext = (GameContext) object;
+		return Serialization.serialize(object);
+	}
+
+	@Override
+	public Object unconvert(Object object) {
+		return Serialization.deserialize((String) object, GameContext.class);
+	}
+}

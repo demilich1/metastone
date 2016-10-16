@@ -19,6 +19,21 @@ public class Accounts extends Service {
 		super();
 	}
 
+	public CreateAccountResponse createAccount(String emailAddress, String password, String username) {
+		CreateAccountRequest request = new CreateAccountRequest();
+		request.emailAddress = emailAddress;
+		request.password = password;
+		request.name = username;
+		return this.createAccount(request);
+	}
+
+	public LoginResponse login(String username, String password) {
+		LoginRequest request = new LoginRequest();
+		request.password = password;
+		request.userId = username;
+		return this.login(request);
+	}
+
 	public CreateAccountResponse createAccount(CreateAccountRequest request) {
 		CreateAccountResponse response = new CreateAccountResponse();
 

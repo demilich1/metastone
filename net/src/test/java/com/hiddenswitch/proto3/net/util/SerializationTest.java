@@ -1,23 +1,81 @@
 package com.hiddenswitch.proto3.net.util;
 
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
 import com.google.gson.reflect.TypeToken;
+import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.*;
+import net.demilich.metastone.game.behaviour.PlayRandomBehaviour;
 import net.demilich.metastone.game.cards.*;
+import net.demilich.metastone.game.decks.DeckFactory;
+import net.demilich.metastone.game.decks.DeckFormat;
+import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.gameconfig.PlayerConfig;
 import net.demilich.metastone.game.heroes.powers.HeroPower;
+import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.spells.SpellUtils;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 import net.demilich.metastone.tests.TestBase;
+import org.slf4j.LoggerFactory;
+import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import org.unitils.reflectionassert.ReflectionAssert;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static org.testng.Assert.*;
 
 public class SerializationTest extends TestBase {
+
+	private static HeroClass getRandomClass() {
+		HeroClass randomClass = HeroClass.ANY;
+		HeroClass[] values = HeroClass.values();
+		while (!randomClass.isBaseClass()) {
+			randomClass = values[ThreadLocalRandom.current().nextInt(values.length)];
+		}
+		return randomClass;
+	}
+
+	@BeforeTest
+	private void loggerSetup() {
+		Logger root = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+		root.setLevel(Level.INFO);
+	}
+
+	@Test(threadPoolSize = 16, invocationCount = 1)
+	public void testGameContextSerialization() {
+		DeckFormat deckFormat = new DeckFormat();
+		for (CardSet set : CardSet.values()) {
+			deckFormat.addSet(set);
+		}
+		HeroClass heroClass1 = getRandomClass();
+		PlayerConfig player1Config = new PlayerConfig(DeckFactory.getRandomDeck(heroClass1, deckFormat), new PlayRandomBehaviour());
+		player1Config.setName("Player 1");
+		player1Config.setHeroCard(getHeroCardForClass(heroClass1));
+		Player player1 = new Player(player1Config);
+
+		HeroClass heroClass2 = getRandomClass();
+		PlayerConfig player2Config = new PlayerConfig(DeckFactory.getRandomDeck(heroClass2, deckFormat), new PlayRandomBehaviour());
+		player2Config.setName("Player 2");
+		player2Config.setHeroCard(getHeroCardForClass(heroClass2));
+		Player player2 = new Player(player2Config);
+		GameContext context = new SerializationTestContext(player1, player2, new GameLogic(), deckFormat);
+		try {
+			context.play();
+			context.dispose();
+		} catch (Exception e) {
+			Assert.fail("Exception occured", e);
+		}
+
+	}
+
 	@Test
 	public void testTypedSerialization() {
 		PhysicalAttackAction action = new PhysicalAttackAction(EntityReference.ALL_MINIONS);

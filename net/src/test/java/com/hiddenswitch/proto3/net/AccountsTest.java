@@ -11,7 +11,7 @@ import static org.testng.Assert.*;
 public class AccountsTest extends ServiceTestBase<Accounts> {
 	@Test
 	public void testCreateAccount() throws Exception {
-		CreateAccountResponse response = createAccount("benjamin.s.berman@gmail.com", "destructoid", "doctorpangloss");
+		CreateAccountResponse response = service.createAccount("benjamin.s.berman@gmail.com", "destructoid", "doctorpangloss");
 		assertNotNull(response.loginToken);
 		assertFalse(response.invalidEmailAddress);
 		assertFalse(response.invalidName);
@@ -20,18 +20,10 @@ public class AccountsTest extends ServiceTestBase<Accounts> {
 		assertTrue(response.loginToken.expiresAt.after(Date.from(Instant.now())));
 	}
 
-	public CreateAccountResponse createAccount(String emailAddress, String password, String username) {
-		CreateAccountRequest request = new CreateAccountRequest();
-		request.emailAddress = emailAddress;
-		request.password = password;
-		request.name = username;
-		return service.createAccount(request);
-	}
-
 	@Test
 	public void testLogin() throws Exception {
-		CreateAccountResponse response = createAccount("test@test.com", "password", "username");
-		LoginResponse loginResponse = login("username", "password");
+		CreateAccountResponse response = service.createAccount("test@test.com", "password", "username");
+		LoginResponse loginResponse = service.login("username", "password");
 		assertNotNull(loginResponse.token);
 		assertNotNull(loginResponse.token.token);
 		assertFalse(loginResponse.badPassword);
@@ -52,16 +44,9 @@ public class AccountsTest extends ServiceTestBase<Accounts> {
 		assertNull(basPasswordResponse.token);
 	}
 
-	public LoginResponse login(String username, String password) {
-		LoginRequest request = new LoginRequest();
-		request.password = password;
-		request.userId = username;
-		return service.login(request);
-	}
-
 	@Test
 	public void testIsAuthorizedWithToken() throws Exception {
-		CreateAccountResponse response = createAccount("test@test.com", "password", "username");
+		CreateAccountResponse response = service.createAccount("test@test.com", "password", "username");
 		assertTrue(service.isAuthorizedWithToken(response.userId, response.loginToken.token));
 		assertFalse(service.isAuthorizedWithToken(response.userId, null));
 		assertFalse(service.isAuthorizedWithToken(response.userId, ""));
@@ -73,7 +58,7 @@ public class AccountsTest extends ServiceTestBase<Accounts> {
 
 	@Test
 	public void testGet() throws Exception {
-		CreateAccountResponse response = createAccount("test@test.com", "password", "username");
+		CreateAccountResponse response = service.createAccount("test@test.com", "password", "username");
 		User user = service.get(response.userId);
 		assertNotNull(user);
 		assertEquals(user.getEmailAddress(), "test@test.com");
@@ -85,17 +70,17 @@ public class AccountsTest extends ServiceTestBase<Accounts> {
 
 	@Test
 	public void testGetUserId() throws Exception {
-		CreateAccountResponse response = createAccount("test@test.com", "password", "username");
+		CreateAccountResponse response = service.createAccount("test@test.com", "password", "username");
 		assertEquals(service.getUserId(), "username");
-		login("A", "");
+		service.login("A", "");
 		assertNull(service.getUserId());
-		login("username", "password");
+		service.login("username", "password");
 		assertEquals(service.getUserId(), "username");
 	}
 
 	@Test
 	public void testGetProfileForId() throws Exception {
-		createAccount("test@test.com", "password", "username");
+		service.createAccount("test@test.com", "password", "username");
 		assertEquals(service.getProfileForId("username").name, "username");
 		assertNull(service.getProfileForId("a"));
 		assertThrows(() -> {

@@ -8,6 +8,7 @@ import com.hiddenswitch.proto3.net.amazon.MatchmakingRequestMessage;
 import com.hiddenswitch.proto3.net.models.*;
 import com.hiddenswitch.proto3.net.util.Serialization;
 import net.demilich.metastone.game.decks.Deck;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.UUID;
 
@@ -17,12 +18,13 @@ public class Games extends Service {
 	private String matchmakingQueueUrl;
 
 	public Games() {
-		super();
-		setAccounts(new Accounts());
-		getAccounts().setCredentials(getCredentials());
-		getAccounts().setDatabase(getDatabase());
-		getAccounts().setQueue(getQueue());
-		setMatchmakingQueueUrl(getQueue().getQueueUrl(MATCHMAKING_QUEUE).getQueueUrl());
+	}
+
+	public String getMatchmakingQueueUrl() {
+		if (matchmakingQueueUrl == null) {
+			setMatchmakingQueueUrl(getQueue().getQueueUrl(MATCHMAKING_QUEUE).getQueueUrl());
+		}
+		return matchmakingQueueUrl;
 	}
 
 	public MatchmakingResponse matchmakeAndJoin(MatchmakingRequest matchmakingRequest) {
@@ -77,12 +79,13 @@ public class Games extends Service {
 
 	/**
 	 * Disposes a game's realtime resources, if any.
+	 *
 	 * @param gameId {String} The ID of the game to dispose.
 	 */
 	public void dispose(String gameId) {
 		Game game = get(gameId);
 
-		for (String queueUrl : new String[] {game.getGamePlayer1().queueUrl, game.getGamePlayer2().queueUrl}) {
+		for (String queueUrl : new String[]{game.getGamePlayer1().queueUrl, game.getGamePlayer2().queueUrl}) {
 			getQueue().deleteQueue(queueUrl);
 		}
 	}
@@ -100,13 +103,13 @@ public class Games extends Service {
 		thisGamePlayer.userId = userId;
 		thisGamePlayer.deck = deck;
 		thisGamePlayer.profile = getAccounts().getProfileForId(userId);
-		thisGamePlayer.queueUrl = getQueueUrl(userId, ChannelType.SQS);
+		thisGamePlayer.queueUrl = getQueueUrlForPlayer(userId, ChannelType.SQS);
 		return thisGamePlayer;
 	}
 
-	private String getQueueUrl(String userId, ChannelType type) {
-		String queueUrl = userId.concat(":").concat(UUID.randomUUID().toString());
-		getQueue().createQueue(queueUrl).getQueueUrl();
+	private String getQueueUrlForPlayer(String userId, ChannelType type) {
+		String queueName = userId.concat("_").concat(RandomStringUtils.randomAlphanumeric(36));
+		String queueUrl = getQueue().createQueue(queueName).getQueueUrl();
 		return queueUrl;
 	}
 
@@ -154,10 +157,6 @@ public class Games extends Service {
 
 	public void setAccounts(Accounts accounts) {
 		this.accounts = accounts;
-	}
-
-	public String getMatchmakingQueueUrl() {
-		return matchmakingQueueUrl;
 	}
 
 	public void setMatchmakingQueueUrl(String matchmakingQueueUrl) {

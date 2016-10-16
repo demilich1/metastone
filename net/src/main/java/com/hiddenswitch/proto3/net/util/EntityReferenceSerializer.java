@@ -16,6 +16,6 @@ public class EntityReferenceSerializer implements JsonSerializer<EntityReference
 
 	@Override
 	public JsonElement serialize(EntityReference src, Type typeOfSrc, JsonSerializationContext context) {
-		return new JsonPrimitive(new Integer(src.getId()));
+		return new JsonPrimitive(src.getId());
 	}
 }

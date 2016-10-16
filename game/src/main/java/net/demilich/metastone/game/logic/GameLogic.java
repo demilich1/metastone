@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.google.gson.annotations.Expose;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -108,12 +109,16 @@ public class GameLogic implements Cloneable {
 	private final ActionLogic actionLogic = new ActionLogic();
 	private final SpellFactory spellFactory = new SpellFactory();
 	protected final IdFactory idFactory;
+
+	@Expose(serialize = false, deserialize = false)
 	protected GameContext context;
 
 	private boolean loggingEnabled = true;
 
 	// DEBUG
 	private final int MAX_HISTORY_ENTRIES = 100;
+
+	@Expose(serialize = false, deserialize = false)
 	private Queue<String> debugHistory = new LinkedList<>();
 
 	public GameLogic() {

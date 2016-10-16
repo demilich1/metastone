@@ -77,18 +77,18 @@ public class SpellDeserializer implements JsonDeserializer<SpellDesc>, JsonSeria
 	}
 
 	@Override
-	public JsonElement serialize(SpellDesc spell, Type type, JsonSerializationContext context) {
+	public JsonElement serialize(SpellDesc src, Type type, JsonSerializationContext context) {
 		JsonObject result = new JsonObject();
-		result.add("class", new JsonPrimitive(spell.getSpellClass().getSimpleName()));
+		result.add("class", new JsonPrimitive(src.getSpellClass().getSimpleName()));
 		for (SpellArg spellArg : SpellArg.values()) {
 			if (spellArg == SpellArg.CLASS) {
 				continue;
 			}
-			if (!spell.contains(spellArg)) {
+			if (!src.contains(spellArg)) {
 				continue;
 			}
 			String argName = ParseUtils.toCamelCase(spellArg.toString());
-			result.add(argName, new JsonPrimitive(spell.get(spellArg).toString()));
+			result.add(argName, new JsonPrimitive(src.get(spellArg).toString()));
 		}
 		return result;
 	}
