@@ -25,6 +25,7 @@ import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.logic.GameLogic;
+import net.demilich.metastone.game.visuals.GameContextVisuals;
 import net.demilich.metastone.gui.IconFactory;
 import net.demilich.metastone.gui.cards.HandCard;
 import net.demilich.metastone.gui.playmode.animation.EventVisualizerDispatcher;

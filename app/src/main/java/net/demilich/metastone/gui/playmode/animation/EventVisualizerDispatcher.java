@@ -7,8 +7,7 @@ import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.gui.playmode.GameBoardView;
-import net.demilich.metastone.gui.playmode.GameContextVisualizable;
-import net.demilich.metastone.gui.playmode.GameContextVisuals;
+import net.demilich.metastone.game.visuals.GameContextVisuals;
 
 public class EventVisualizerDispatcher {
 

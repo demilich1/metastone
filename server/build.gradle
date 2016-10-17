@@ -1,3 +1,8 @@
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'jp.classmethod.aws'
+apply plugin: 'java'
+apply plugin: 'application'
+
 buildscript {
     repositories {
         mavenCentral()
@@ -9,8 +14,7 @@ buildscript {
     }
 }
 
-apply plugin: "io.spring.dependency-management"
-apply plugin: 'jp.classmethod.aws'
+mainClassName = 'com.hiddenswitch.proto3.MetaStoneSimpleServer'
 
 aws {
     profileName = 'metastone_net'
@@ -23,7 +27,7 @@ repositories {
 
 dependencies {
     compile project(':game')
-    testCompile project(':cards')
+    compile project(':cards')
     testCompile group: 'org.testng', name: 'testng', version: '6.+'
 }
 

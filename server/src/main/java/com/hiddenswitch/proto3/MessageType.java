@@ -1,4 +1,4 @@
-package com.hiddenstone.network;
+package com.hiddenswitch.proto3;
 
 public enum MessageType {
 	registerPlayer,

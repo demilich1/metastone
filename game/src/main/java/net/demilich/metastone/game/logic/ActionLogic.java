@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -21,8 +22,7 @@ import net.demilich.metastone.game.targeting.CardLocation;
 import net.demilich.metastone.game.targeting.CardReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
-public class ActionLogic {
-
+public class ActionLogic implements Serializable {
 	private final TargetLogic targetLogic = new TargetLogic();
 
 	public GameAction getAutoHeroPower(GameContext context, Player player) {

@@ -17,16 +17,19 @@ import net.demilich.metastone.game.targeting.CardReference;
 import net.demilich.metastone.game.targeting.IdFactory;
 
 public abstract class Card extends Entity {
-
 	private String description = "";
-	private final CardType cardType;
-	private final CardSet cardSet;
-	private final Rarity rarity;
-	private final HeroClass classRestriction;
+	private CardType cardType;
+	private CardSet cardSet;
+	private Rarity rarity;
+	private HeroClass classRestriction;
 	private boolean collectible = true;
 	private CardLocation location;
 	private ValueProvider manaCostModifier;
-	private final String cardId;
+	private String cardId;
+
+	public Card() {
+		super();
+	}
 
 	public Card(CardDesc desc) {
 		cardId = desc.id;

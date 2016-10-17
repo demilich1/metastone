@@ -5,7 +5,7 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.JoustEvent;
 import net.demilich.metastone.gui.playmode.GameBoardView;
-import net.demilich.metastone.gui.playmode.GameContextVisuals;
+import net.demilich.metastone.game.visuals.GameContextVisuals;
 
 public class JoustVisualizer implements IGameEventVisualizer {
 

@@ -1,5 +1,6 @@
 package net.demilich.metastone.game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +29,7 @@ import net.demilich.metastone.game.targeting.CardReference;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.utils.IDisposable;
 
-public class GameContext implements Cloneable, IDisposable {
+public class GameContext implements Cloneable, IDisposable, Serializable {
 	public static final int PLAYER_1 = 0;
 	public static final int PLAYER_2 = 1;
 
@@ -49,7 +50,7 @@ public class GameContext implements Cloneable, IDisposable {
 	private TurnState turnState = TurnState.TURN_ENDED;
 
 	private int turn;
-	protected int actionsThisTurn;
+	private int actionsThisTurn;
 
 	private boolean ignoreEvents;
 
@@ -64,7 +65,7 @@ public class GameContext implements Cloneable, IDisposable {
 		this.setLogic(logic);
 		this.setDeckFormat(deckFormat);
 	}
-	
+
 
 	protected boolean acceptAction(GameAction nextAction) {
 		return true;
@@ -89,7 +90,7 @@ public class GameContext implements Cloneable, IDisposable {
 		clone.triggerManager = triggerManager.clone();
 		clone.activePlayer = activePlayer;
 		clone.setTurn(getTurn());
-		clone.actionsThisTurn = actionsThisTurn;
+		clone.setActionsThisTurn(getActionsThisTurn());
 		clone.setResult(getResult());
 		clone.setTurnState(getTurnState());
 		clone.setWinner(logicClone.getWinner(player1Clone, player2Clone));
@@ -413,9 +414,9 @@ public class GameContext implements Cloneable, IDisposable {
 	}
 
 	public boolean playTurn() {
-		actionsThisTurn += 1;
-		if (actionsThisTurn > 99) {
-			logger.warn("Turn has been forcefully ended after {} actions", actionsThisTurn);
+		setActionsThisTurn(getActionsThisTurn() + 1);
+		if (getActionsThisTurn() > 99) {
+			logger.warn("Turn has been forcefully ended after {} actions", getActionsThisTurn());
 			endTurn();
 			return false;
 		}
@@ -515,7 +516,7 @@ public class GameContext implements Cloneable, IDisposable {
 		setTurn(getTurn() + 1);
 		getLogic().startTurn(playerId);
 		onGameStateChanged();
-		actionsThisTurn = 0;
+		setActionsThisTurn(0);
 		setTurnState(TurnState.TURN_IN_PROGRESS);
 	}
 
@@ -609,5 +610,13 @@ public class GameContext implements Cloneable, IDisposable {
 
 	public void setPlayers(Player[] players) {
 		this.players = players;
+	}
+
+	public int getActionsThisTurn() {
+		return actionsThisTurn;
+	}
+
+	public void setActionsThisTurn(int actionsThisTurn) {
+		this.actionsThisTurn = actionsThisTurn;
 	}
 }

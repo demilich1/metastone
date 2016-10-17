@@ -1,12 +1,13 @@
 package net.demilich.metastone.game.decks;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardSet;
 
-public class DeckFormat {
+public class DeckFormat implements Serializable {
 
 	private String name = "";
 	private String filename;

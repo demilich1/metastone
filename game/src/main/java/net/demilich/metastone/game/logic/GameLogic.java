@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -81,7 +82,7 @@ import net.demilich.metastone.game.targeting.IdFactory;
 import net.demilich.metastone.game.targeting.TargetSelection;
 import net.demilich.metastone.utils.MathUtils;
 
-public class GameLogic implements Cloneable {
+public class GameLogic implements Cloneable, Serializable {
 
 	public static Logger logger = LoggerFactory.getLogger(GameLogic.class);
 
@@ -166,8 +167,7 @@ public class GameLogic implements Cloneable {
 	public void applyAttribute(Entity entity, Attribute attr) {
 		if (attr == Attribute.MEGA_WINDFURY && entity.hasAttribute(Attribute.WINDFURY)) {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, MEGA_WINDFURY_ATTACKS - WINDFURY_ATTACKS);
-		} else
-			if (attr == Attribute.WINDFURY && !entity.hasAttribute(Attribute.WINDFURY) && !entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
+		} else if (attr == Attribute.WINDFURY && !entity.hasAttribute(Attribute.WINDFURY) && !entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, WINDFURY_ATTACKS - 1);
 		} else if (attr == Attribute.MEGA_WINDFURY && !entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, MEGA_WINDFURY_ATTACKS - 1);
@@ -239,7 +239,7 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void castSpell(int playerId, SpellDesc spellDesc, EntityReference sourceReference, EntityReference targetReference,
-			boolean childSpell) {
+						  boolean childSpell) {
 		Player player = context.getPlayer(playerId);
 		Entity source = null;
 		if (sourceReference != null) {
@@ -392,14 +392,14 @@ public class GameLogic implements Cloneable {
 			source.removeAttribute(Attribute.STEALTH);
 		}
 		switch (target.getEntityType()) {
-		case MINION:
-			damageDealt = damageMinion((Actor) target, damage);
-			break;
-		case HERO:
-			damageDealt = damageHero((Hero) target, damage);
-			break;
-		default:
-			break;
+			case MINION:
+				damageDealt = damageMinion((Actor) target, damage);
+				break;
+			case HERO:
+				damageDealt = damageHero((Hero) target, damage);
+				break;
+			default:
+				break;
 		}
 
 		target.setAttribute(Attribute.LAST_HIT, damageDealt);
@@ -469,20 +469,20 @@ public class GameLogic implements Cloneable {
 			Actor target = targets[i];
 			Player owner = context.getPlayer(target.getOwner());
 			switch (target.getEntityType()) {
-			case HERO:
-				log("Hero {} has been destroyed.", target.getName());
-				applyAttribute(target, Attribute.DESTROYED);
-				break;
-			case MINION:
-				destroyMinion((Minion) target);
-				break;
-			case WEAPON:
-				destroyWeapon((Weapon) target);
-				break;
-			case ANY:
-			default:
-				logger.error("Trying to destroy unknown entity type {}", target.getEntityType());
-				break;
+				case HERO:
+					log("Hero {} has been destroyed.", target.getName());
+					applyAttribute(target, Attribute.DESTROYED);
+					break;
+				case MINION:
+					destroyMinion((Minion) target);
+					break;
+				case WEAPON:
+					destroyWeapon((Weapon) target);
+					break;
+				case ANY:
+				default:
+					logger.error("Trying to destroy unknown entity type {}", target.getEntityType());
+					break;
 			}
 
 			resolveDeathrattles(owner, target, boardPositions[i]);
@@ -506,7 +506,7 @@ public class GameLogic implements Cloneable {
 		// resolveDeathrattles(owner, weapon);
 		if (owner.getHero().getWeapon() != null && owner.getHero().getWeapon().getId() == weapon.getId()) {
 			owner.getHero().setWeapon(null);
-		} 
+		}
 		weapon.onUnequip(context, owner);
 		context.fireGameEvent(new WeaponDestroyedEvent(context, weapon));
 	}
@@ -574,7 +574,7 @@ public class GameLogic implements Cloneable {
 		hero.activateWeapon(false);
 		log("{} ends his turn.", player.getName());
 		context.fireGameEvent(new TurnEndEvent(context, playerId));
-		for (Iterator<CardCostModifier> iterator = context.getCardCostModifiers().iterator(); iterator.hasNext();) {
+		for (Iterator<CardCostModifier> iterator = context.getCardCostModifiers().iterator(); iterator.hasNext(); ) {
 			CardCostModifier cardCostModifier = iterator.next();
 			if (cardCostModifier.isExpired()) {
 				iterator.remove();
@@ -597,7 +597,7 @@ public class GameLogic implements Cloneable {
 
 		weapon.setId(idFactory.generateId());
 		Weapon currentWeapon = player.getHero().getWeapon();
-		
+
 		if (currentWeapon != null) {
 			player.getSetAsideZone().add(currentWeapon);
 		}
@@ -608,13 +608,13 @@ public class GameLogic implements Cloneable {
 		if (weapon.getBattlecry() != null) {
 			resolveBattlecry(playerId, weapon);
 		}
-		
+
 		if (currentWeapon != null) {
 			log("{} discards currently equipped weapon {}", player.getHero(), currentWeapon);
 			destroy(currentWeapon);
 			player.getSetAsideZone().remove(currentWeapon);
 		}
-		
+
 		player.getStatistics().equipWeapon(weapon);
 		weapon.onEquip(context, player);
 		weapon.setActive(context.getActivePlayerId() == playerId);
@@ -722,12 +722,10 @@ public class GameLogic implements Cloneable {
 	 * Returns the first value of the attribute encountered. This method should
 	 * be used with caution, as the result is random if there are different
 	 * values of the same attribute in play.
-	 * 
+	 *
 	 * @param player
-	 * @param attr
-	 *            Which attribute to find
-	 * @param defaultValue
-	 *            The value returned if no occurrence of the attribute is found
+	 * @param attr         Which attribute to find
+	 * @param defaultValue The value returned if no occurrence of the attribute is found
 	 * @return the first occurrence of the value of attribute or defaultValue
 	 */
 	public int getAttributeValue(Player player, Attribute attr, int defaultValue) {
@@ -748,11 +746,9 @@ public class GameLogic implements Cloneable {
 	 * Return the greatest value of the attribute from all Actors of a Player.
 	 * This method will return infinite if an Attribute value is negative, so
 	 * use this method with caution.
-	 * 
-	 * @param player
-	 *            Which Player to check
-	 * @param attr
-	 *            Which attribute to find
+	 *
+	 * @param player Which Player to check
+	 * @param attr   Which attribute to find
 	 * @return The highest value from all sources. -1 is considered infinite.
 	 */
 	public int getGreatestAttributeValue(Player player, Attribute attr) {
@@ -805,7 +801,7 @@ public class GameLogic implements Cloneable {
 
 	public List<IGameEventListener> getSecrets(Player player) {
 		List<IGameEventListener> secrets = context.getTriggersAssociatedWith(player.getHero().getReference());
-		for (Iterator<IGameEventListener> iterator = secrets.iterator(); iterator.hasNext();) {
+		for (Iterator<IGameEventListener> iterator = secrets.iterator(); iterator.hasNext(); ) {
 			IGameEventListener trigger = iterator.next();
 			if (!(trigger instanceof Secret)) {
 				iterator.remove();
@@ -929,14 +925,14 @@ public class GameLogic implements Cloneable {
 		healing = applyAmplify(player, healing, Attribute.HEAL_AMPLIFY_MULTIPLIER);
 		boolean success = false;
 		switch (target.getEntityType()) {
-		case MINION:
-			success = healMinion((Actor) target, healing);
-			break;
-		case HERO:
-			success = healHero((Hero) target, healing);
-			break;
-		default:
-			break;
+			case MINION:
+				success = healMinion((Actor) target, healing);
+				break;
+			case HERO:
+				success = healHero((Hero) target, healing);
+				break;
+			default:
+				break;
 		}
 
 		if (success) {
@@ -1280,9 +1276,7 @@ public class GameLogic implements Cloneable {
 	}
 
 	/**
-	 * 
-	 * @param max
-	 *            Upper bound of random number (exclusive)
+	 * @param max Upper bound of random number (exclusive)
 	 * @return Random number between 0 and max (exclusive)
 	 */
 	public int random(int max) {
@@ -1311,7 +1305,7 @@ public class GameLogic implements Cloneable {
 				TriggerDesc triggerDesc = (TriggerDesc) card.getAttribute(Attribute.PASSIVE_TRIGGER);
 				addGameEventListener(player, triggerDesc.create(), card);
 			}
-			
+
 			log("{} receives card {}", player.getName(), card);
 			hand.add(card);
 			card.setLocation(CardLocation.HAND);
@@ -1407,7 +1401,7 @@ public class GameLogic implements Cloneable {
 			trigger.onRemove(context);
 		}
 		context.removeTriggersAssociatedWith(entityReference);
-		for (Iterator<CardCostModifier> iterator = context.getCardCostModifiers().iterator(); iterator.hasNext();) {
+		for (Iterator<CardCostModifier> iterator = context.getCardCostModifiers().iterator(); iterator.hasNext(); ) {
 			CardCostModifier cardCostModifier = iterator.next();
 			if (cardCostModifier.getHostReference().equals(entityReference)) {
 				iterator.remove();
@@ -1420,7 +1414,7 @@ public class GameLogic implements Cloneable {
 		if (newCard.getId() == IdFactory.UNASSIGNED) {
 			newCard.setId(idFactory.generateId());
 		}
-		
+
 		if (!player.getHand().contains(oldCard)) {
 			return;
 		}
@@ -1439,13 +1433,13 @@ public class GameLogic implements Cloneable {
 		newCard.setLocation(CardLocation.HAND);
 		context.fireGameEvent(new DrawCardEvent(context, playerId, newCard, null, false));
 	}
-	
+
 	public void replaceCardInDeck(int playerId, Card oldCard, Card newCard) {
 		Player player = context.getPlayer(playerId);
 		if (newCard.getId() == IdFactory.UNASSIGNED) {
 			newCard.setId(idFactory.generateId());
 		}
-		
+
 		if (!player.getDeck().contains(oldCard)) {
 			return;
 		}
@@ -1686,11 +1680,9 @@ public class GameLogic implements Cloneable {
 
 	/**
 	 * Transforms a Minion into a new Minion.
-	 * 
-	 * @param minion
-	 *            The original minion in play
-	 * @param newMinion
-	 *            The new minion to transform into
+	 *
+	 * @param minion    The original minion in play
+	 * @param newMinion The new minion to transform into
 	 */
 	public void transformMinion(Minion minion, Minion newMinion) {
 		// Remove any spell triggers associated with the old minion.
@@ -1699,7 +1691,7 @@ public class GameLogic implements Cloneable {
 		Player owner = context.getPlayer(minion.getOwner());
 		int index = owner.getMinions().indexOf(minion);
 		owner.getMinions().remove(minion);
-		
+
 		// If we want to straight up remove a minion from existence without
 		// killing it, this would be the best way.
 		if (newMinion != null) {
@@ -1708,7 +1700,7 @@ public class GameLogic implements Cloneable {
 			// Give the new minion an ID.
 			newMinion.setId(idFactory.generateId());
 			newMinion.setOwner(owner.getId());
-	
+
 			// If the minion being transforms is being summoned, replace the old
 			// minion on the stack.
 			// Otherwise, summon the add the new minion.
@@ -1717,7 +1709,7 @@ public class GameLogic implements Cloneable {
 					&& !context.getEnvironment().containsKey(Environment.TRANSFORM_REFERENCE)) {
 				context.getEnvironment().put(Environment.TRANSFORM_REFERENCE, newMinion.getReference());
 				owner.getMinions().add(index, newMinion);
-	
+
 				// It's quite possible that this is actually supposed to add the
 				// minion to the zone it was originally in.
 				// This means minions in the SetAsideZone or the Graveyard that are
@@ -1731,18 +1723,18 @@ public class GameLogic implements Cloneable {
 				} else {
 					owner.getMinions().add(index, newMinion);
 				}
-	
+
 				applyAttribute(newMinion, Attribute.SUMMONING_SICKNESS);
 				refreshAttacksPerRound(newMinion);
-	
+
 				if (newMinion.hasSpellTrigger()) {
 					addGameEventListener(owner, newMinion.getSpellTrigger(), newMinion);
 				}
-	
+
 				if (newMinion.getCardCostModifier() != null) {
 					addManaModifier(owner, newMinion.getCardCostModifier(), newMinion);
 				}
-	
+
 				handleEnrage(newMinion);
 			} else {
 				owner.getSetAsideZone().add(newMinion);
@@ -1751,7 +1743,7 @@ public class GameLogic implements Cloneable {
 				removeSpelltriggers(newMinion);
 				return;
 			}
-		
+
 		}
 
 		// Move the old minion to the Set Aside Zone

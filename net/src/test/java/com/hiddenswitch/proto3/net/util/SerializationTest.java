@@ -73,7 +73,6 @@ public class SerializationTest extends TestBase {
 		} catch (Exception e) {
 			Assert.fail("Exception occured", e);
 		}
-
 	}
 
 	@Test

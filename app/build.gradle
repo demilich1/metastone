@@ -13,6 +13,7 @@ jar {
 
 dependencies {
 	compile project(':game')
+	compile project(':server')
 	compile project(':cards')
 	compile files('lib/controlsfx-8.40.10-20151003.010657-492.jar')
 	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'

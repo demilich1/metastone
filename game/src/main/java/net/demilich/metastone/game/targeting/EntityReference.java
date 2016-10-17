@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import net.demilich.metastone.game.entities.Entity;
 
-public class EntityReference implements Serializable{
+public class EntityReference implements Serializable {
 	public static final EntityReference NONE = new EntityReference(-1);
 	public static final EntityReference ENEMY_CHARACTERS = new EntityReference(-2);
 	public static final EntityReference ENEMY_MINIONS = new EntityReference(-3);
@@ -49,7 +49,9 @@ public class EntityReference implements Serializable{
 
 	private int id;
 
-	public EntityReference() {}
+	public EntityReference() {
+	}
+
 	public EntityReference(int key) {
 		this.id = key;
 	}
@@ -66,6 +68,7 @@ public class EntityReference implements Serializable{
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int key) {
 		this.id = key;
 	}

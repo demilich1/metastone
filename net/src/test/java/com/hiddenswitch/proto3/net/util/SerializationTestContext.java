@@ -22,9 +22,10 @@ public class SerializationTestContext extends GameContext {
 			startTurn(activePlayer);
 			while (playTurn()) {
 				// Serialize and deserialize the game, testing that the game contexts are still equal (!)
-				String s = Serialization.serialize(this);
-				SerializationTestContext deserialized = Serialization.deserialize(s, SerializationTestContext.class);
-				ReflectionAssert.assertReflectionEquals(this, deserialized);
+				GameContext toSerialize = (GameContext) this;
+				String s = Serialization.serialize(toSerialize);
+				GameContext deserialized = Serialization.deserialize(s, GameContext.class);
+				ReflectionAssert.assertReflectionEquals(toSerialize, deserialized);
 			}
 			if (getTurn() > GameLogic.TURN_LIMIT) {
 				break;

@@ -5,8 +5,7 @@ import java.io.Serializable;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.entities.Entity;
 
-public abstract class GameEvent implements Serializable{
-
+public abstract class GameEvent implements Serializable {
 	private transient final GameContext context;
 	private final int targetPlayerId;
 	private final int sourcePlayerId;
@@ -21,15 +20,15 @@ public abstract class GameEvent implements Serializable{
 	 * Spells may specify to be cast on the event target; this is dependent on
 	 * the actual event. For example, a SummonEvent may return the summoned
 	 * minion, a DamageEvent may return the damaged minion/hero, etc.
-	 * 
+	 *
 	 * @return
 	 */
 	public abstract Entity getEventTarget();
-	
+
 	public Entity getEventSource() {
 		return null;
 	}
-	
+
 	public abstract GameEventType getEventType();
 
 	public GameContext getGameContext() {
@@ -39,7 +38,7 @@ public abstract class GameEvent implements Serializable{
 	public int getTargetPlayerId() {
 		return targetPlayerId;
 	}
-	
+
 	public int getSourcePlayerId() {
 		return sourcePlayerId;
 	}

@@ -9,12 +9,15 @@ import net.demilich.metastone.game.logic.CustomCloneable;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.IdFactory;
 
-public abstract class Entity extends CustomCloneable implements Serializable{
+public abstract class Entity extends CustomCloneable implements Serializable {
 
 	private String name;
 	protected Map<Attribute, Object> attributes = new EnumMap<Attribute, Object>(Attribute.class);
 	private int id = IdFactory.UNASSIGNED;
 	private int ownerIndex = -1;
+
+	protected Entity() {
+	}
 
 	@Override
 	public Entity clone() {
@@ -73,7 +76,7 @@ public abstract class Entity extends CustomCloneable implements Serializable{
 		}
 		setAttribute(attribute, getAttributeValue(attribute) + value);
 	}
-	
+
 	public void modifyHpBonus(int value) {
 		modifyAttribute(Attribute.HP_BONUS, value);
 	}

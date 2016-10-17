@@ -7,8 +7,11 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 import com.hiddenswitch.proto3.net.models.*;
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.actions.*;
+import net.demilich.metastone.game.cards.*;
 import net.demilich.metastone.game.cards.desc.*;
+import net.demilich.metastone.game.heroes.powers.HeroPower;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.aura.AuraDesc;
 import net.demilich.metastone.game.spells.desc.condition.ConditionDesc;
@@ -42,11 +45,21 @@ public class Serialization {
 		networkMessages.registerSubtype(PregameMessage.class, MessageType.PREGAME.toString());
 		networkMessages.registerSubtype(GameContextMessage.class, MessageType.GAME_CONTEXT.toString());
 
+		RuntimeTypeAdapterFactory<Card> cards = RuntimeTypeAdapterFactory.of(Card.class, "cardType");
+		cards.registerSubtype(ChooseOneCard.class, CardType.CHOOSE_ONE.toString());
+		cards.registerSubtype(HeroCard.class, CardType.HERO.toString());
+		cards.registerSubtype(MinionCard.class, CardType.MINION.toString());
+		cards.registerSubtype(SpellCard.class, CardType.SPELL.toString());
+		cards.registerSubtype(WeaponCard.class, CardType.WEAPON.toString());
+		cards.registerSubtype(HeroPower.class, CardType.HERO_POWER.toString());
+
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.registerTypeAdapterFactory(networkMessages);
 		gsonBuilder.registerTypeAdapterFactory(gameActions);
+		gsonBuilder.registerTypeAdapterFactory(cards);
 		Type mapType = new TypeToken<Map<Attribute, Object>>() {
 		}.getType();
+		gsonBuilder.registerTypeHierarchyAdapter(GameContext.class, new GameContextSerializer<GameContext>());
 		gsonBuilder.registerTypeAdapter(mapType, new AttributeDeserializer());
 		gsonBuilder.registerTypeAdapter(EntityReference.class, new EntityReferenceSerializer());
 		gsonBuilder.registerTypeAdapter(SpellDesc.class, new SpellDeserializer());
