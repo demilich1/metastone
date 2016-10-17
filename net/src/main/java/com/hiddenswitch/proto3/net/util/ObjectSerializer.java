@@ -10,7 +10,7 @@ import org.apache.commons.codec.binary.Base64OutputStream;
 import java.io.*;
 import java.lang.reflect.Type;
 
-public class GameContextSerializer<T extends GameContext> implements JsonSerializer<T>, JsonDeserializer<T> {
+public class ObjectSerializer<T extends Serializable> implements JsonSerializer<T>, JsonDeserializer<T> {
 
 	@Override
 	@SuppressWarnings("unchecked")

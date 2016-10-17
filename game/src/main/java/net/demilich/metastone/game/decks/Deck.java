@@ -5,7 +5,9 @@ import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.logic.GameLogic;
 
-public class Deck {
+import java.io.Serializable;
+
+public class Deck implements Serializable {
 
 	private String name = "";
 	private HeroClass heroClass;
@@ -55,7 +57,7 @@ public class Deck {
 	public String getName() {
 		return name;
 	}
-	
+
 	public boolean isArbitrary() {
 		return arbitrary;
 	}
@@ -63,7 +65,7 @@ public class Deck {
 	public boolean isComplete() {
 		return cards.getCount() == GameLogic.DECK_SIZE;
 	}
-	
+
 	public boolean isFull() {
 		return cards.getCount() == GameLogic.MAX_DECK_SIZE;
 	}
@@ -71,7 +73,7 @@ public class Deck {
 	public boolean isMetaDeck() {
 		return getHeroClass() == HeroClass.DECK_COLLECTION;
 	}
-	
+
 	public boolean isTooBig() {
 		return cards.getCount() > GameLogic.DECK_SIZE;
 	}

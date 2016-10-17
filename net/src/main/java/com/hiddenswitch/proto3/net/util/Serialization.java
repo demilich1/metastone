@@ -11,6 +11,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.actions.*;
 import net.demilich.metastone.game.cards.*;
 import net.demilich.metastone.game.cards.desc.*;
+import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.heroes.powers.HeroPower;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.aura.AuraDesc;
@@ -59,7 +60,8 @@ public class Serialization {
 		gsonBuilder.registerTypeAdapterFactory(cards);
 		Type mapType = new TypeToken<Map<Attribute, Object>>() {
 		}.getType();
-		gsonBuilder.registerTypeHierarchyAdapter(GameContext.class, new GameContextSerializer<GameContext>());
+		gsonBuilder.registerTypeHierarchyAdapter(GameContext.class, new ObjectSerializer<GameContext>());
+		gsonBuilder.registerTypeHierarchyAdapter(Deck.class, new ObjectSerializer<Deck>());
 		gsonBuilder.registerTypeAdapter(mapType, new AttributeDeserializer());
 		gsonBuilder.registerTypeAdapter(EntityReference.class, new EntityReferenceSerializer());
 		gsonBuilder.registerTypeAdapter(SpellDesc.class, new SpellDeserializer());
