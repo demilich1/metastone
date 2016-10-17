@@ -2,8 +2,8 @@ package com.hiddenswitch.proto3.net.models;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMarshalling;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConvertedEnum;
 import com.hiddenswitch.proto3.net.amazon.GameContextConverter;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -18,7 +18,7 @@ import java.util.HashMap;
 
 @DynamoDBDocument
 public class Game {
-	public GameType type = GameType.PROCEDURAL;
+	private GameType type = GameType.PROCEDURAL;
 	private GameContext context = null;
 	private GamePlayer gamePlayer1 = null;
 	private GamePlayer gamePlayer2 = null;
@@ -40,7 +40,7 @@ public class Game {
 		return idToPlayer.getOrDefault(id, null);
 	}
 
-	@DynamoDBAttribute
+	@DynamoDBTypeConvertedEnum
 	public GameType getType() {
 		return type;
 	}
@@ -50,7 +50,7 @@ public class Game {
 			return;
 		}
 
-		idToPlayer.put(gamePlayer.userId, gamePlayer);
+		idToPlayer.put(gamePlayer.getUserId(), gamePlayer);
 	}
 
 	public void setGamePlayer1(GamePlayer gamePlayer1) {
@@ -104,7 +104,7 @@ public class Game {
 		Player player2 = null;
 		GameLogic logic = null;
 		DeckFormat deckFormat = new DeckFormat();
-		switch (type) {
+		switch (getType()) {
 			case CONVENTIONAL:
 				player1 = new Player(playerConfig1);
 				player2 = new Player(playerConfig2);
@@ -139,6 +139,10 @@ public class Game {
 
 	public void setContext(GameContext context) {
 		this.context = context;
+	}
+
+	public void setType(GameType type) {
+		this.type = type;
 	}
 }
 

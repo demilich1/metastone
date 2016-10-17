@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import java.sql.Date;
 import java.time.Instant;
+import java.util.function.Function;
 
 import static org.testng.Assert.*;
 
@@ -66,6 +67,48 @@ public class AccountsTest extends ServiceTestBase<Accounts> {
 		User user1 = service.get("a");
 		assertNull(user1);
 		assertThrows(() -> service.get(null));
+	}
+
+	public static void assertThrows(ThrowingRunnable runnable) {
+		assertThrows(Throwable.class, runnable);
+	}
+
+	/**
+	 * Asserts that {@code runnable} throws an exception of type {@code throwableClass} when
+	 * executed. If it does not throw an exception, an {@link AssertionError} is thrown. If it
+	 * throws the wrong type of exception, an {@code AssertionError} is thrown describing the
+	 * mismatch; the exception that was actually thrown can be obtained by calling {@link
+	 * AssertionError#getCause}.
+	 *
+	 * @param throwableClass the expected type of the exception
+	 * @param runnable       A function that is expected to throw an exception when invoked
+	 * @since 6.9.5
+	 */
+	@SuppressWarnings("ThrowableResultOfMethodCallIgnored")
+	public static <T extends Throwable> void assertThrows(Class<T> throwableClass, ThrowingRunnable runnable) {
+		expectThrows(throwableClass, runnable);
+	}
+
+	public static <T extends Throwable> T expectThrows(Class<T> throwableClass, ThrowingRunnable runnable) {
+		try {
+			runnable.run();
+		} catch (Throwable t) {
+			if (throwableClass.isInstance(t)) {
+				return throwableClass.cast(t);
+			} else {
+				String mismatchMessage = String.format("Expected %s to be thrown, but %s was thrown",
+						throwableClass.getSimpleName(), t.getClass().getSimpleName());
+
+				throw new AssertionError(mismatchMessage, t);
+			}
+		}
+		String message = String.format("Expected %s to be thrown, but nothing was thrown",
+				throwableClass.getSimpleName());
+		throw new AssertionError(message);
+	}
+
+	public interface ThrowingRunnable {
+		void run() throws Throwable;
 	}
 
 	@Test

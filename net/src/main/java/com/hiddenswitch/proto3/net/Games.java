@@ -10,8 +10,6 @@ import com.hiddenswitch.proto3.net.util.Serialization;
 import net.demilich.metastone.game.decks.Deck;
 import org.apache.commons.lang3.RandomStringUtils;
 
-import java.util.UUID;
-
 public class Games extends Service {
 	public static final String MATCHMAKING_QUEUE = "matchmakingQueue";
 	private Accounts accounts;
@@ -60,7 +58,7 @@ public class Games extends Service {
 		if (game.isReadyToPlay()) {
 			// The game is ready to play
 			response.game = getGameCensored(userId, game);
-			response.myChannelId = game.getPlayerForId(userId).queueUrl;
+			response.myChannelId = game.getPlayerForId(userId).getQueueUrl();
 			response.retry = null;
 		} else {
 			// We're still waiting for a player
@@ -85,7 +83,7 @@ public class Games extends Service {
 	public void dispose(String gameId) {
 		Game game = get(gameId);
 
-		for (String queueUrl : new String[]{game.getGamePlayer1().queueUrl, game.getGamePlayer2().queueUrl}) {
+		for (String queueUrl : new String[]{game.getGamePlayer1().getQueueUrl(), game.getGamePlayer2().getQueueUrl()}) {
 			getQueue().deleteQueue(queueUrl);
 		}
 	}
@@ -100,10 +98,10 @@ public class Games extends Service {
 
 	private GamePlayer createPlayer(String userId, Deck deck) {
 		GamePlayer thisGamePlayer = new GamePlayer();
-		thisGamePlayer.userId = userId;
-		thisGamePlayer.deck = deck;
-		thisGamePlayer.profile = getAccounts().getProfileForId(userId);
-		thisGamePlayer.queueUrl = getQueueUrlForPlayer(userId, ChannelType.SQS);
+		thisGamePlayer.setUserId(userId);
+		thisGamePlayer.setDeck(deck);
+		thisGamePlayer.setProfile(getAccounts().getProfileForId(userId));
+		thisGamePlayer.setQueueUrl(getQueueUrlForPlayer(userId, ChannelType.SQS));
 		return thisGamePlayer;
 	}
 

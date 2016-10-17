@@ -4,15 +4,15 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverter;
 import com.hiddenswitch.proto3.net.util.Serialization;
 import net.demilich.metastone.game.GameContext;
 
-public class GameContextConverter implements DynamoDBTypeConverter {
+public class GameContextConverter implements DynamoDBTypeConverter<String, GameContext> {
 	@Override
-	public Object convert(Object object) {
+	public String convert(GameContext object) {
 		GameContext gameContext = (GameContext) object;
 		return Serialization.serialize(object);
 	}
 
 	@Override
-	public Object unconvert(Object object) {
+	public GameContext unconvert(String object) {
 		return Serialization.deserialize((String) object, GameContext.class);
 	}
 }

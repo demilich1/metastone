@@ -13,6 +13,7 @@ import java.lang.reflect.Type;
 public class GameContextSerializer<T extends GameContext> implements JsonSerializer<T>, JsonDeserializer<T> {
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public T deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 		if (json.isJsonNull()) {
 			return null;

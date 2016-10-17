@@ -8,11 +8,14 @@ import net.demilich.metastone.game.logic.GameLogic;
 public class Deck {
 
 	private String name = "";
-	private final HeroClass heroClass;
-	protected final CardCollection cards = new CardCollection();
+	private HeroClass heroClass;
+	protected CardCollection cards = new CardCollection();
 	private String description;
 	private String filename;
 	private boolean arbitrary;
+
+	protected Deck() {
+	}
 
 	public Deck(HeroClass heroClass) {
 		this.heroClass = heroClass;

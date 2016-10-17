@@ -51,7 +51,7 @@ dependencies {
     compile project(':game')
     testCompile project(':cards')
     testCompile project(':game')
-    testCompile group: 'org.testng', name: 'testng', version: '6.+'
+//    testCompile group: 'org.testng', name: 'testng', version: '6.9.13.6'
     testCompile 'org.unitils:unitils:3.4.3'
     testCompile 'org.unitils:unitils-core:3.4.3'
     testCompile 'org.unitils:unitils-testng:3.4.3'
