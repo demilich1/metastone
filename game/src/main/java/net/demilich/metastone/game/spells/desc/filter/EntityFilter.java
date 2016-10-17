@@ -1,11 +1,13 @@
 package net.demilich.metastone.game.spells.desc.filter;
 
+import java.io.Serializable;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.TargetPlayer;
 
-public abstract class EntityFilter {
+public abstract class EntityFilter implements Serializable {
 
 	protected final FilterDesc desc;
 

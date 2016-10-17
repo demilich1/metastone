@@ -1,5 +1,6 @@
 package net.demilich.metastone.game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -16,7 +17,7 @@ import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.statistics.GameStatistics;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
 
-public class Player extends Entity {
+public class Player extends Entity implements Serializable{
 
 	protected Hero hero;
 	protected final String deckName;

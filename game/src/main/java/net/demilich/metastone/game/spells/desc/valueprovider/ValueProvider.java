@@ -1,11 +1,13 @@
 package net.demilich.metastone.game.spells.desc.valueprovider;
 
+import java.io.Serializable;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.TargetPlayer;
 
-public abstract class ValueProvider {
+public abstract class ValueProvider implements Serializable {
 
 	protected final ValueProviderDesc desc;
 

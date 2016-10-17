@@ -32,7 +32,7 @@ public class GameContext implements Cloneable, IDisposable {
 	public static final int PLAYER_1 = 0;
 	public static final int PLAYER_2 = 1;
 
-	private static final Logger logger = LoggerFactory.getLogger(GameContext.class);
+	protected static final Logger logger = LoggerFactory.getLogger(GameContext.class);
 
 	private Player[] players = new Player[2];
 	@Expose(serialize = false, deserialize = false)
@@ -44,12 +44,12 @@ public class GameContext implements Cloneable, IDisposable {
 	private List<CardCostModifier> cardCostModifiers = new ArrayList<>();
 
 	protected int activePlayer = -1;
-	private Player winner;
+	protected Player winner;
 	private MatchResult result;
 	private TurnState turnState = TurnState.TURN_ENDED;
 
 	private int turn;
-	private int actionsThisTurn;
+	protected int actionsThisTurn;
 
 	private boolean ignoreEvents;
 
@@ -64,6 +64,7 @@ public class GameContext implements Cloneable, IDisposable {
 		this.setLogic(logic);
 		this.setDeckFormat(deckFormat);
 	}
+	
 
 	protected boolean acceptAction(GameAction nextAction) {
 		return true;
@@ -158,7 +159,6 @@ public class GameContext implements Cloneable, IDisposable {
 			getLogic().panicDump();
 			throw e;
 		}
-
 	}
 
 	public boolean gameDecided() {
@@ -393,7 +393,7 @@ public class GameContext implements Cloneable, IDisposable {
 	protected void onGameStateChanged() {
 	}
 
-	private void performAction(int playerId, GameAction gameAction) {
+	protected void performAction(int playerId, GameAction gameAction) {
 		getLogic().performGameAction(playerId, gameAction);
 		onGameStateChanged();
 	}
@@ -410,7 +410,6 @@ public class GameContext implements Cloneable, IDisposable {
 			}
 		}
 		endGame();
-
 	}
 
 	public boolean playTurn() {
@@ -477,6 +476,7 @@ public class GameContext implements Cloneable, IDisposable {
 		}
 		logger.error("Could not resolve cardReference {}", cardReference);
 		new RuntimeException().printStackTrace();
+		System.err.println("Could not resolve cardReference" + cardReference.toString());
 		return null;
 	}
 

@@ -3,12 +3,13 @@ package net.demilich.metastone.gui.playmode.animation;
 import net.demilich.nittygrittymvc.Proxy;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.gui.playmode.GameContextVisualizable;
+import net.demilich.metastone.gui.playmode.GameContextVisuals;
 
 public class AnimationProxy extends Proxy<GameNotification> {
 
 	public static final String NAME = "AnimationProxy";
 
-	private GameContextVisualizable context;
+	private GameContextVisuals context;
 	private int animationsRunning;
 
 	public AnimationProxy() {
@@ -25,11 +26,11 @@ public class AnimationProxy extends Proxy<GameNotification> {
 		animationsRunning++;
 	}
 
-	public GameContextVisualizable getContext() {
+	public GameContextVisuals getContext() {
 		return context;
 	}
 
-	public void setContext(GameContextVisualizable context) {
+	public void setContext(GameContextVisuals context) {
 		this.context = context;
 	}
 

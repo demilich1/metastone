@@ -25,6 +25,7 @@ javafx {
 	mainClass = mainClassName
 }
 
+
 test {
 	// enable TestNG support (default is JUnit)
 	useTestNG()

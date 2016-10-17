@@ -1,11 +1,13 @@
 package net.demilich.metastone.game.events;
 
+import java.io.Serializable;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.entities.Entity;
 
-public abstract class GameEvent {
+public abstract class GameEvent implements Serializable{
 
-	private final GameContext context;
+	private transient final GameContext context;
 	private final int targetPlayerId;
 	private final int sourcePlayerId;
 

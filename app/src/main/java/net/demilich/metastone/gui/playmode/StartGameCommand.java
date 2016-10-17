@@ -3,6 +3,9 @@ package net.demilich.metastone.gui.playmode;
 import net.demilich.metastone.NotificationProxy;
 import net.demilich.nittygrittymvc.SimpleCommand;
 import net.demilich.nittygrittymvc.interfaces.INotification;
+
+import com.hiddenstone.network.GameContextRemoteLogic;
+
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.MetaStone;
 import net.demilich.metastone.game.GameContext;
@@ -35,7 +38,7 @@ public class StartGameCommand extends SimpleCommand<GameNotification> {
 
 		GameContext newGame;
 		if (MetaStone.procedural) {
-			newGame = new GameContextVisualizable(player1, player2, new ProceduralGameLogic(), deckFormat);
+			newGame = new GameContextRemoteLogic(player1, player2, deckFormat);
 		} else {
 			newGame = new GameContextVisualizable(player1, player2, new GameLogic(), deckFormat);
 
