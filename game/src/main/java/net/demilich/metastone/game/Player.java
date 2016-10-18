@@ -17,8 +17,7 @@ import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.statistics.GameStatistics;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
 
-public class Player extends Entity implements Serializable{
-
+public class Player extends Entity implements Serializable {
 	protected Hero hero;
 	protected final String deckName;
 
@@ -62,10 +61,10 @@ public class Player extends Entity implements Serializable{
 	public Player(PlayerConfig config) {
 		config.build();
 		Deck selectedDeck = config.getDeckForPlay();
-		
+
 		//gets overwritten by procedural player with a random deck.
 		this.deck = selectedDeck.getCardsCopy();
-		
+
 		this.setHero(config.getHeroForPlay().createHero());
 		this.setName(config.getName() + " - " + hero.getName());
 		this.deckName = selectedDeck.getName();
@@ -133,7 +132,7 @@ public class Player extends Entity implements Serializable{
 	public HashSet<String> getSecrets() {
 		return secrets;
 	}
-	
+
 	public List<Entity> getSetAsideZone() {
 		return setAsideZone;
 	}
