@@ -24,7 +24,6 @@ import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 
 import java.util.ArrayList;
 import java.util.List;
