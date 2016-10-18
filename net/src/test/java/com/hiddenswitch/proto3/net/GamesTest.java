@@ -33,6 +33,23 @@ public class GamesTest extends ServiceTestBase<Games> {
 
 		// Assume player 2's identity
 		service.getAccounts().setUserId(player2.userId);
+		MatchmakingRequest request2 = new MatchmakingRequest();
+		request2.deck = new Deck(HeroClass.WARRIOR);
+		request2.retry = null;
+		MatchmakingResponse response2 = service.matchmakeAndJoin(request2);
+		assertNull(response2.retry);
+		assertNotNull(response2.game);
+		assertNotNull(response2.myChannelId);
+
+		// Assume player 1's identity, poll for matchmaking again and receive the new game information
+		service.getAccounts().setUserId(player1.userId);
+		request1 = new MatchmakingRequest();
+		request1.deck = new Deck(HeroClass.MAGE);
+		request1.retry = response1.retry;
+		response1 = service.matchmakeAndJoin(request1);
+		assertNull(response1.retry);
+		assertNotNull(response1.game);
+		assertNotNull(response1.myChannelId);
 	}
 
 	@Test

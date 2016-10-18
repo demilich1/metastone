@@ -1,6 +1,8 @@
 package com.hiddenswitch.proto3.net.models;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
+import com.hiddenswitch.proto3.net.behaviour.NullBehaviour;
+import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
 import net.demilich.metastone.game.cards.NullHeroCard;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
@@ -13,7 +15,8 @@ public class GamePlayer {
 	private ChannelType channelType = ChannelType.SQS;
 	private Deck deck;
 
-	public GamePlayer() {}
+	public GamePlayer() {
+	}
 
 	@DynamoDBIgnore
 	public PlayerConfig getPlayerConfig() {
@@ -24,6 +27,7 @@ public class GamePlayer {
 		playerConfig.setHeroCard(nullHeroCard);
 		playerConfig.setHideCards(true);
 		playerConfig.setName(getProfile().name);
+		playerConfig.setBehaviour(new NullBehaviour());
 		return playerConfig;
 	}
 

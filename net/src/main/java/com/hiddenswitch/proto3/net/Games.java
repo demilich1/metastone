@@ -91,7 +91,7 @@ public class Games extends Service {
 	private MatchmakingRequestRetry createRetry(String gameId) {
 		MatchmakingRequestMessage matchmakingRequestMessage = new MatchmakingRequestMessage(gameId);
 		SendMessageResult result = getQueue().sendMessage(getMatchmakingQueueUrl(), Serialization.serialize(matchmakingRequestMessage));
-		MatchmakingRequestRetry retry = new MatchmakingRequestRetry(gameId, result.getMessageId());
+		MatchmakingRequestRetry retry = new MatchmakingRequestRetry(result.getMessageId(), gameId);
 		retry.delayMilliseconds = 3000;
 		return retry;
 	}
@@ -132,6 +132,9 @@ public class Games extends Service {
 	}
 
 	private String save(String id, Game game) {
+		if (id == null) {
+			id = RandomStringUtils.randomAlphanumeric(36);
+		}
 		GameRecord record = new GameRecord(game);
 		record.setId(id);
 		getDatabase().save(record);

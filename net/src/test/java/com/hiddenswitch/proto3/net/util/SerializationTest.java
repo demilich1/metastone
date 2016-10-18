@@ -8,6 +8,7 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.*;
 import net.demilich.metastone.game.behaviour.PlayRandomBehaviour;
 import net.demilich.metastone.game.cards.*;
+import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.DeckFactory;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
@@ -20,8 +21,10 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 import net.demilich.metastone.tests.TestBase;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
+import static com.hiddenswitch.proto3.Assert.*;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -72,6 +75,18 @@ public class SerializationTest extends TestBase {
 		} catch (Exception e) {
 			Assert.fail("Exception occured", e);
 		}
+	}
+
+	@Test
+	public void testDeckSerialization() {
+		DeckFormat deckFormat = new DeckFormat();
+		for (CardSet set : CardSet.values()) {
+			deckFormat.addSet(set);
+		}
+		Deck deck = DeckFactory.getRandomDeck(HeroClass.MAGE, deckFormat);
+		String s = Serialization.serialize(deck);
+		Deck deck2 = Serialization.deserialize(s, Deck.class);
+		assertReflectionEquals(deck, deck2);
 	}
 
 	@Test

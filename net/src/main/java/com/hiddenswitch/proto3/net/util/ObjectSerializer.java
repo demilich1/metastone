@@ -9,6 +9,7 @@ import org.apache.commons.codec.binary.Base64OutputStream;
 
 import java.io.*;
 import java.lang.reflect.Type;
+import java.util.Base64;
 
 public class ObjectSerializer<T extends Serializable> implements JsonSerializer<T>, JsonDeserializer<T> {
 
@@ -18,15 +19,10 @@ public class ObjectSerializer<T extends Serializable> implements JsonSerializer<
 		if (json.isJsonNull()) {
 			return null;
 		}
+		JsonObject object = json.getAsJsonObject();
+		byte bytes[] = Base64.getDecoder().decode(object.get("javaSerialized").getAsString());
 
-		String s = json.getAsString();
-		StringInputStream stringInputStream = null;
-		try {
-			stringInputStream = new StringInputStream(s);
-		} catch (UnsupportedEncodingException e) {
-			return null;
-		}
-		Base64InputStream inputStream = new Base64InputStream(stringInputStream);
+		ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
 		ObjectInputStream objectInputStream = null;
 		T returnContext = null;
 		try {
@@ -46,16 +42,17 @@ public class ObjectSerializer<T extends Serializable> implements JsonSerializer<
 			return JsonNull.INSTANCE;
 		}
 		String s = null;
-		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		Base64OutputStream output = new Base64OutputStream(outputStream);
+		ByteArrayOutputStream output = new ByteArrayOutputStream();
 		try {
 			ObjectOutputStream o = new ObjectOutputStream(output);
 			o.writeObject(src);
 			o.flush();
-			s = outputStream.toString();
+			s = Base64.getEncoder().encodeToString(output.toByteArray());
 		} catch (IOException e) {
 			return JsonNull.INSTANCE;
 		}
-		return new JsonPrimitive(s);
+		JsonObject object = new JsonObject();
+		object.addProperty("javaSerialized", s);
+		return object;
 	}
 }

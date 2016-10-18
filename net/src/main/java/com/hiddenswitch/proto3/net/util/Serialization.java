@@ -60,8 +60,8 @@ public class Serialization {
 		gsonBuilder.registerTypeAdapterFactory(cards);
 		Type mapType = new TypeToken<Map<Attribute, Object>>() {
 		}.getType();
-		gsonBuilder.registerTypeHierarchyAdapter(GameContext.class, new ObjectSerializer<GameContext>());
-		gsonBuilder.registerTypeHierarchyAdapter(Deck.class, new ObjectSerializer<Deck>());
+		gsonBuilder.registerTypeHierarchyAdapter(GameContext.class, new GameContextSerializer());
+		gsonBuilder.registerTypeHierarchyAdapter(Deck.class, new DeckSerializer());
 		gsonBuilder.registerTypeAdapter(mapType, new AttributeDeserializer());
 		gsonBuilder.registerTypeAdapter(EntityReference.class, new EntityReferenceSerializer());
 		gsonBuilder.registerTypeAdapter(SpellDesc.class, new SpellDeserializer());

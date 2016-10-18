@@ -88,7 +88,6 @@ public class SocketServerCommunication implements ServerCommunicationReceive, Se
 								listener.onPlayerConnected(message.getPlayer1(), message.getPlayer2());
 							} else {
 								listener.onActionRegistered(message.getCallingPlayer(), message.getAction());
-								;
 							}
 						}
 						clientInputStream.close();

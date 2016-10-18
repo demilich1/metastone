@@ -49,8 +49,9 @@ dependencies {
     compile group: 'com.google.code.gson', name: 'gson', version: '2.3.1'
     compile project(':shared')
     compile project(':game')
-    testCompile project(':cards')
+    compile project(':cards')
     testCompile project(':game')
+    testCompile 'org.unitils:unitils-core:3.4.3'
     testCompile group: 'org.testng', name: 'testng', version: '6.+'
     testCompile 'org.elasticmq:elasticmq-rest-sqs_2.11:0.10.0'
     testCompile group: 'com.almworks.sqlite4java', name: 'sqlite4java', version: '1.0.392'

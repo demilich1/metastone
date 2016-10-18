@@ -4,7 +4,8 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.logic.GameLogic;
-import org.apache.commons.lang3.builder.EqualsBuilder;
+
+import static com.hiddenswitch.proto3.Assert.*;
 
 public class SerializationTestContext extends GameContext {
 	public SerializationTestContext() {
@@ -25,7 +26,7 @@ public class SerializationTestContext extends GameContext {
 				GameContext toSerialize = (GameContext) this;
 				String s = Serialization.serialize(toSerialize);
 				GameContext deserialized = Serialization.deserialize(s, GameContext.class);
-				EqualsBuilder.reflectionEquals(toSerialize, deserialized);
+				assertReflectionEquals(toSerialize, deserialized);
 			}
 			if (getTurn() > GameLogic.TURN_LIMIT) {
 				break;
@@ -33,4 +34,5 @@ public class SerializationTestContext extends GameContext {
 		}
 		endGame();
 	}
+
 }

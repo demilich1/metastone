@@ -1,15 +1,6 @@
 package net.demilich.metastone.game;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Stack;
-
 import com.google.gson.annotations.Expose;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
@@ -28,6 +19,14 @@ import net.demilich.metastone.game.spells.trigger.TriggerManager;
 import net.demilich.metastone.game.targeting.CardReference;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.utils.IDisposable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Stack;
 
 public class GameContext implements Cloneable, IDisposable, Serializable {
 	public static final int PLAYER_1 = 0;
