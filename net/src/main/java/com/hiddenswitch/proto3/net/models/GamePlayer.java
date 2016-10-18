@@ -15,6 +15,7 @@ public class GamePlayer {
 
 	public GamePlayer() {}
 
+	@DynamoDBIgnore
 	public PlayerConfig getPlayerConfig() {
 		PlayerConfig playerConfig = new PlayerConfig();
 		playerConfig.setDeck(getDeck());

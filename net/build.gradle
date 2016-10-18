@@ -10,7 +10,7 @@ buildscript {
 }
 
 task copyNativeDeps(type: Copy) {
-    from (configurations.testCompile) {
+    from(configurations.testCompile) {
         include "*.dylib"
         include "*.so"
         include "*.dll"
