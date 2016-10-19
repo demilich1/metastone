@@ -8,10 +8,8 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class MetaStoneSimpleServer {
-	public static Lock simpleLock = new ReentrantLock();
 
 	public static void main(String[] args) {
-
 		SocketServerSession ssc = new SocketServerSession();
 		ServerCommunicationReceive scr = ssc;
 		new Thread(ssc).start();

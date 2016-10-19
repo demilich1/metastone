@@ -25,7 +25,7 @@ public class SocketServerListener implements ServerListener {
 			setPlayer2(p2);
 			DeckFormat simpleFormat = new DeckFormat();
 			simpleFormat.addSet(CardSet.PROCEDURAL_PREVIEW);
-			setGameContext(new ServerGameContext(getPlayer1(), getPlayer2(), new ProceduralGameLogic(), simpleFormat));
+			setGameContext(new ServerGameContext(getPlayer1(), getPlayer2(), new ProceduralGameLogic(), simpleFormat, ssc.getLock()));
 			getGameContext().setUpdateListener(getPlayer1(), getSsc().getPlayerListener(0));
 			getGameContext().setUpdateListener(getPlayer2(), getSsc().getPlayerListener(1));
 			new Thread(() -> getGameContext().play()).start();

@@ -3,8 +3,8 @@ package com.hiddenswitch.proto3.server;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.locks.Lock;
 
-import com.hiddenswitch.proto3.MetaStoneSimpleServer;
 import com.hiddenswitch.proto3.common.*;
 import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.GameContext;
@@ -21,12 +21,14 @@ public class ServerGameContext extends GameContext {
 	public Map<Player, RemoteUpdateListener> listenerMap = new HashMap<>();
 	private volatile Player player1;
 	private volatile Player player2;
+	private final Lock lock;
 
-	public ServerGameContext(Player player1, Player player2, GameLogic logic, DeckFormat deckFormat) {
+	public ServerGameContext(Player player1, Player player2, GameLogic logic, DeckFormat deckFormat, Lock lock) {
 		super(player1, player2, logic, deckFormat);
 		NotificationProxy.init(new NullNotifier());
 		this.player1 = player1;
 		this.player2 = player2;
+		this.lock = lock;
 	}
 
 	public void setUpdateListener(Player player, RemoteUpdateListener listener) {
@@ -92,21 +94,21 @@ public class ServerGameContext extends GameContext {
 		logger.debug("Game starts: " + getPlayer1().getName() + " VS. " + getPlayer2().getName());
 		init();
 		while (!gameDecided()) {
-			MetaStoneSimpleServer.simpleLock.lock();
+			getLock().lock();
 			startTurn(activePlayer);
 			while (playTurn()) {
-				MetaStoneSimpleServer.simpleLock.unlock();
-				MetaStoneSimpleServer.simpleLock.lock();
+				getLock().unlock();
+				getLock().lock();
 			}
-			MetaStoneSimpleServer.simpleLock.unlock();
+			getLock().unlock();
 			if (getTurn() > GameLogic.TURN_LIMIT) {
 				break;
 			}
 		}
-		MetaStoneSimpleServer.simpleLock.unlock();
-		MetaStoneSimpleServer.simpleLock.lock();
+		getLock().unlock();
+		getLock().lock();
 		endGame();
-		MetaStoneSimpleServer.simpleLock.unlock();
+		getLock().unlock();
 	}
 
 	@Override
@@ -175,5 +177,9 @@ public class ServerGameContext extends GameContext {
 		listenerMap.get(getPlayer1()).onGameEvent(gameEvent);
 		listenerMap.get(getPlayer2()).onGameEvent(gameEvent);
 
+	}
+
+	private Lock getLock() {
+		return lock;
 	}
 }

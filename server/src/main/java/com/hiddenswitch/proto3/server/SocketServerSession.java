@@ -5,9 +5,12 @@ import com.hiddenswitch.proto3.common.*;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class SocketServerSession implements ServerCommunicationReceive, ServerCommunicationSend, Runnable {
 	public static final int PORT = 11111;
+	private static Lock simpleLock = new ReentrantLock();
 	SocketClientSession c1;
 	SocketClientSession c2;
 	ServerListener listener;
@@ -15,6 +18,10 @@ public class SocketServerSession implements ServerCommunicationReceive, ServerCo
 	boolean shouldRun = true;
 
 	public SocketServerSession() {
+	}
+
+	public Lock getLock() {
+		return simpleLock;
 	}
 
 	@Override

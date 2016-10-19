@@ -1,6 +1,5 @@
 package com.hiddenswitch.proto3.server;
 
-import com.hiddenswitch.proto3.MetaStoneSimpleServer;
 import com.hiddenswitch.proto3.common.ServerToClientMessage;
 import com.hiddenswitch.proto3.common.ClientToServerMessage;
 import com.hiddenswitch.proto3.common.MessageType;
@@ -17,6 +16,7 @@ import java.net.Socket;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.locks.Lock;
 
 class SocketClientSession implements Runnable, RemoteUpdateListener {
 	private SocketServerSession socketServerSession;
@@ -59,10 +59,10 @@ class SocketClientSession implements Runnable, RemoteUpdateListener {
 				ObjectOutputStream clientOutputStream = new ObjectOutputStream(getPrivateSocket().getOutputStream());
 				while (getSocketServerSession().shouldRun) {
 					ServerToClientMessage message = getQueue().take();
-					MetaStoneSimpleServer.simpleLock.lock();
+					getServerLock().lock();
 					System.out.println("Sending message: " + message.mt);
 					clientOutputStream.writeObject(message);
-					MetaStoneSimpleServer.simpleLock.unlock();
+					getServerLock().unlock();
 					clientOutputStream.flush();
 					//super important magic line below:
 					clientOutputStream.reset();
@@ -70,11 +70,15 @@ class SocketClientSession implements Runnable, RemoteUpdateListener {
 				clientOutputStream.close();
 			} catch (IOException | InterruptedException e) {
 				e.printStackTrace();
-				MetaStoneSimpleServer.simpleLock.unlock();
+				getServerLock().unlock();
 
 			}
 
 		}).start();
+	}
+
+	protected Lock getServerLock() {
+		return socketServerSession.getLock();
 	}
 
 	public BlockingQueue<ServerToClientMessage> getQueue() {
