@@ -57,17 +57,19 @@ public class Games extends Service {
 
 		if (game.isReadyToPlay()) {
 			// The game is ready to play
-			response.game = getGameCensored(userId, game);
-			response.myChannelId = game.getPlayerForId(userId).getQueueUrl();
-			response.retry = null;
+			response.setGame(getGameCensored(userId, game));
+			response.setGameId(gameId);
+			response.setMyChannelId(game.getPlayerForId(userId).getQueueUrl());
+			response.setRetry(null);
 		} else {
 			// We're still waiting for a player
-			response.game = null;
-			response.myChannelId = null;
+			response.setGame(null);
+			response.setGameId(null);
+			response.setMyChannelId(null);
 			if (matchmakingRequest.retry == null) {
-				response.retry = createRetry(gameId);
+				response.setRetry(createRetry(gameId));
 			} else {
-				response.retry = matchmakingRequest.retry;
+				response.setRetry(matchmakingRequest.retry);
 			}
 		}
 
@@ -116,7 +118,7 @@ public class Games extends Service {
 		return game;
 	}
 
-	private Game get(String gameId) {
+	public Game get(String gameId) {
 		GameRecord record = getDatabase().load(GameRecord.class, gameId);
 
 		if (record == null) {
