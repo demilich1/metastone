@@ -44,7 +44,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 	private List<CardCostModifier> cardCostModifiers = new ArrayList<>();
 
 	protected int activePlayer = -1;
-	protected Player winner;
+	private Player winner;
 	private MatchResult result;
 	private TurnState turnState = TurnState.TURN_ENDED;
 

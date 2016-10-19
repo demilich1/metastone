@@ -1,4 +1,4 @@
-package com.hiddenswitch.proto3;
+package com.hiddenswitch.proto3.server;
 
 import net.demilich.metastone.GameNotification;
 import net.demilich.nittygrittymvc.interfaces.INotification;

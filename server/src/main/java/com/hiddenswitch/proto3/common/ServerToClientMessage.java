@@ -1,8 +1,9 @@
-package com.hiddenswitch.proto3;
+package com.hiddenswitch.proto3.common;
 
 import java.io.Serializable;
 import java.util.List;
 
+import com.hiddenswitch.proto3.common.MessageType;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.TurnState;
 import net.demilich.metastone.game.actions.GameAction;
@@ -21,17 +22,17 @@ public class ServerToClientMessage implements Serializable {
 
 
 	public ServerToClientMessage(GameEvent event) {
-		this.mt = MessageType.onGameEvent;
+		this.mt = MessageType.ON_GAME_EVENT;
 		this.event = event;
 	}
 
 	public ServerToClientMessage(Player player, boolean isGameEnd) {
 		if (isGameEnd) {
 			this.winner = player;
-			this.mt = MessageType.onGameEnd;
+			this.mt = MessageType.ON_GAME_END;
 		} else {
 			this.activePlayer = player;
-			this.mt = MessageType.onActivePlayer;
+			this.mt = MessageType.ON_ACTIVE_PLAYER;
 		}
 
 	}
@@ -39,26 +40,26 @@ public class ServerToClientMessage implements Serializable {
 	public ServerToClientMessage(Player localPlayer, Player remotePlayer) {
 		this.localPlayer = localPlayer;
 		this.remotePlayer = remotePlayer;
-		this.mt = MessageType.setPlayers;
+		this.mt = MessageType.SET_PLAYERS;
 	}
 
 	public ServerToClientMessage(Player player, int turn, TurnState newState) {
 		this.activePlayer = player;
 		this.turnNumber = turn;
 		this.turnState = newState;
-		this.mt = MessageType.onTurnEnd;
+		this.mt = MessageType.ON_TURN_END;
 	}
 
 	public ServerToClientMessage(Player player, Player player2, TurnState newState) {
 		this.player1 = player;
 		this.player2 = player2;
 		this.turnState = newState;
-		this.mt = MessageType.onUpdate;
+		this.mt = MessageType.ON_UPDATE;
 	}
 
 	public ServerToClientMessage(List<GameAction> actions) {
 		this.actions = actions;
-		this.mt = MessageType.onRequestAction;
+		this.mt = MessageType.ON_REQUEST_ACTION;
 	}
 
 

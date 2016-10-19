@@ -1,6 +1,6 @@
 package net.demilich.metastone.gui.playmode;
 
-import com.hiddenswitch.proto3.GameContextRemoteLogic;
+import com.hiddenswitch.proto3.client.GameContextRemoteLogic;
 import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.visuals.GameContextVisualizable;
 import net.demilich.nittygrittymvc.SimpleCommand;

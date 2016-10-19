@@ -1,7 +1,8 @@
-package com.hiddenswitch.proto3;
+package com.hiddenswitch.proto3.common;
 
 import java.io.Serializable;
 
+import com.hiddenswitch.proto3.common.MessageType;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 
@@ -15,13 +16,13 @@ public class ClientToServerMessage implements Serializable {
 	public ClientToServerMessage(Player player, GameAction action) {
 		this.setCallingPlayer(player);
 		this.setAction(action);
-		setMt(MessageType.updateAction);
+		setMt(MessageType.UPDATE_ACTION);
 	}
 
 	public ClientToServerMessage(Player p1, Player p2) {
 		this.setPlayer1(p1);
 		this.setPlayer2(p2);
-		setMt(MessageType.registerPlayer);
+		setMt(MessageType.REGISTER_PLAYER);
 	}
 
 	public MessageType getMt() {

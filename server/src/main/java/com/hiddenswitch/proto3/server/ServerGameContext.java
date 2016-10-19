@@ -1,9 +1,11 @@
-package com.hiddenswitch.proto3;
+package com.hiddenswitch.proto3.server;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.hiddenswitch.proto3.MetaStoneSimpleServer;
+import com.hiddenswitch.proto3.common.*;
 import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -75,8 +77,8 @@ public class ServerGameContext extends GameContext {
 	public boolean gameDecided() {
 		boolean gameDecided = super.gameDecided();
 		if (gameDecided) {
-			listenerMap.get(getPlayer1()).onGameEnd(winner);
-			listenerMap.get(getPlayer2()).onGameEnd(winner);
+			listenerMap.get(getPlayer1()).onGameEnd(getWinner());
+			listenerMap.get(getPlayer2()).onGameEnd(getWinner());
 		}
 		return gameDecided;
 	}
