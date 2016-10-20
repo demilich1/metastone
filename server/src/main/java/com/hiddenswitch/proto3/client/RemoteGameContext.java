@@ -23,7 +23,7 @@ import net.demilich.metastone.game.spells.trigger.IGameEventListener;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.visuals.GameContextVisuals;
 
-public class GameContextRemoteLogic extends GameContext implements GameContextVisuals, RemoteUpdateListener {
+public class RemoteGameContext extends GameContext implements GameContextVisuals, RemoteUpdateListener {
 	private final List<GameEvent> gameEvents = new ArrayList<>();
 	private boolean blockedByAnimation;
 	private Player localPlayer;
@@ -36,8 +36,8 @@ public class GameContextRemoteLogic extends GameContext implements GameContextVi
 	ClientCommunicationSend ccs;
 	ClientCommunicationReceive ccr;
 
-	public GameContextRemoteLogic(Player player1, Player player2, DeckFormat df) {
-		super(player1, player2, new ProceduralGameLogic(), df);
+	public RemoteGameContext(Player player1, Player player2, GameLogic gameLogic, DeckFormat df) {
+		super(player1, player2, gameLogic, df);
 		SocketClientConnection scc = new SocketClientConnection();
 		this.ccs = scc;
 		this.ccr = scc;
@@ -79,7 +79,7 @@ public class GameContextRemoteLogic extends GameContext implements GameContextVi
 		// player1Clone.getDeck().shuffle();
 		Player player2Clone = getPlayer2().clone();
 		// player2Clone.getDeck().shuffle();
-		GameContext clone = new GameContextRemoteLogic(player1Clone, player2Clone, getDeckFormat());
+		GameContext clone = new RemoteGameContext(player1Clone, player2Clone, getLogic().clone(), getDeckFormat());
 		return clone;
 	}
 
@@ -94,16 +94,7 @@ public class GameContextRemoteLogic extends GameContext implements GameContextVi
 			player.getBehaviour().onGameOver(this, player.getId(), getWinner() != null ? getWinner().getId() : -1);
 		}
 
-		if (getWinner() != null) {
-			logger.debug("Game finished after " + getTurn() + " turns, the winner is: " + getWinner().getName());
-			getWinner().getStatistics().gameWon();
-			Player looser = getOpponent(getWinner());
-			looser.getStatistics().gameLost();
-		} else {
-			logger.debug("Game finished after " + getTurn() + " turns, DRAW");
-			getPlayer1().getStatistics().gameLost();
-			getPlayer2().getStatistics().gameLost();
-		}
+		calculateStatistics();
 	}
 
 	@Override

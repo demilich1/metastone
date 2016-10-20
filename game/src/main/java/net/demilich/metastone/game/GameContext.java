@@ -120,6 +120,10 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 			player.getBehaviour().onGameOver(this, player.getId(), getWinner() != null ? getWinner().getId() : -1);
 		}
 
+		calculateStatistics();
+	}
+
+	protected void calculateStatistics() {
 		if (getWinner() != null) {
 			logger.debug("Game finished after " + getTurn() + " turns, the winner is: " + getWinner().getName());
 			getWinner().getStatistics().gameWon();
