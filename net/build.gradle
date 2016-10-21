@@ -49,6 +49,7 @@ dependencies {
     compile group: 'com.google.code.gson', name: 'gson', version: '2.3.1'
     compile project(':shared')
     compile project(':game')
+    compile project(':server')
     compile project(':cards')
     testCompile project(':game')
     testCompile 'org.unitils:unitils-core:3.4.3'
