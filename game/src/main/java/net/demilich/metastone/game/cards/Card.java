@@ -105,7 +105,10 @@ public abstract class Card extends Entity {
 	public String getDescription() {
 		// Cleanup the html tags that appear in the description
 		// TODO: Show effects on card behaviour like increased spell damage
-		String descriptionCleaned = description.replaceAll("</?[bi]>", "");
+		if (description == null || description.isEmpty()) {
+			return description;
+		}
+		String descriptionCleaned = description.replaceAll("(</?[bi]>)|\\[x\\]", "");
 		return descriptionCleaned;
 	}
 
