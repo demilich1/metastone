@@ -9,9 +9,9 @@ import net.demilich.metastone.game.actions.GameAction;
 public class ClientToServerMessage implements Serializable {
 	private MessageType mt;
 	private Player player1;
-	private Player player2;
 	private Player callingPlayer;
 	private GameAction action;
+	private String gameId;
 
 	public ClientToServerMessage(Player player, GameAction action) {
 		this.setCallingPlayer(player);
@@ -19,10 +19,15 @@ public class ClientToServerMessage implements Serializable {
 		setMt(MessageType.UPDATE_ACTION);
 	}
 
-	public ClientToServerMessage(Player p1, Player p2) {
+	public ClientToServerMessage(Player p1) {
 		this.setPlayer1(p1);
-		this.setPlayer2(p2);
 		setMt(MessageType.REGISTER_PLAYER);
+	}
+	
+	public ClientToServerMessage(Player player, String gameId){
+		this.setPlayer1(player);
+		this.setGameId(gameId);
+		setMt(MessageType.FIRST_MESSAGE);
 	}
 
 	public MessageType getMt() {
@@ -31,6 +36,14 @@ public class ClientToServerMessage implements Serializable {
 
 	public void setMt(MessageType mt) {
 		this.mt = mt;
+	}
+	
+	public void setGameId(String id){
+		this.gameId = id;
+	}
+	
+	public String getGameId(){
+		return gameId;
 	}
 
 	public Player getPlayer1() {
@@ -41,13 +54,6 @@ public class ClientToServerMessage implements Serializable {
 		this.player1 = player1;
 	}
 
-	public Player getPlayer2() {
-		return player2;
-	}
-
-	public void setPlayer2(Player player2) {
-		this.player2 = player2;
-	}
 
 	public Player getCallingPlayer() {
 		return callingPlayer;
@@ -64,4 +70,6 @@ public class ClientToServerMessage implements Serializable {
 	public void setAction(GameAction action) {
 		this.action = action;
 	}
+	
+	
 }

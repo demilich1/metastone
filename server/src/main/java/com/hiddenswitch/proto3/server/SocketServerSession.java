@@ -1,65 +1,57 @@
 package com.hiddenswitch.proto3.server;
 
+import com.hiddenswitch.proto3.client.SocketClientConnection;
 import com.hiddenswitch.proto3.common.*;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class SocketServerSession implements ServerCommunicationReceive, ServerCommunicationSend, Runnable {
+public class SocketServerSession implements Runnable {
 	public static final int PORT = 11111;
-	private static Lock simpleLock = new ReentrantLock();
-	SocketClientSession c1;
-	SocketClientSession c2;
-	ServerListener listener;
-	Socket socketConnection;
+	private Lock serverSessionLock = new ReentrantLock();
+	private Map<String, ServerGameSession> games = new HashMap<>();
 	boolean shouldRun = true;
 
 	public SocketServerSession() {
 	}
 
 	public Lock getLock() {
-		return simpleLock;
-	}
-
-	@Override
-	public RemoteUpdateListener getPlayerListener(int player) {
-		//TODO: FIX player checking
-		if (player == 0) {
-			return c1;
-		} else {
-			return c2;
-		}
-	}
-
-	@Override
-	public void registerListener(ServerListener listener) {
-		this.listener = listener;
+		return serverSessionLock;
 	}
 
 	public void run() {
 		try {
 			ServerSocket s = new ServerSocket(PORT);
-			Socket socket = s.accept();
-			c1 = new SocketClientSession(this, socket);
-			new Thread(c1).start();
-
-			Socket socket2 = s.accept();
-			c2 = new SocketClientSession(this, socket2);
-			new Thread(c2).start();
-
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			while(true){
+				Socket socket = s.accept();
+				SocketClientSession connection = new SocketClientSession(this, socket);
+				new Thread(connection).start();
+			}
+		} catch (IOException e){
 			e.printStackTrace();
 		}
-
 	}
 
 	public void kill() {
 		shouldRun = false;
+		for (ServerGameSession sgs: games.values()){
+			sgs.kill();
+		}
 	}
-
+	
+	public void onFirstMessage(SocketClientSession clientSession, ClientToServerMessage message){
+		//TODO: check authenticity here;
+		if (games.containsKey(message.getGameId())){
+			games.get(message.getGameId()).registerClient(clientSession, message);
+		} else {
+			ServerGameSession newGame = new ServerGameSession();
+			newGame.registerClient(clientSession, message);
+			games.put(message.getGameId(), newGame);
+		}
+	}
 }

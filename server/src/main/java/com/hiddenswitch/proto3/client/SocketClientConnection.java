@@ -22,13 +22,19 @@ public class SocketClientConnection implements ClientCommunicationReceive, Clien
 	public SendToServer getSendToServer() {
 		return new SendToServer() {
 			@Override
-			public void registerPlayer(Player player1, Player player2) {
-				queue.add(new ClientToServerMessage(player1, player2));
+			public void registerPlayer(Player player) {
+				queue.add(new ClientToServerMessage(player));
 			}
 
 			@Override
 			public void registerAction(Player callingPlayer, GameAction action) {
 				queue.add(new ClientToServerMessage(callingPlayer, action));
+			}
+
+			@Override
+			public void sendFirstMessage(Player player, String gameId) {
+				queue.add(new ClientToServerMessage(player, gameId));
+				
 			}
 		};
 	}
