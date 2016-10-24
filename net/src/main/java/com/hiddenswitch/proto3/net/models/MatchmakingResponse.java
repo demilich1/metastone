@@ -1,12 +1,10 @@
 package com.hiddenswitch.proto3.net.models;
 
-import net.demilich.metastone.game.GameContext;
+import com.hiddenswitch.proto3.common.ClientConnectionConfiguration;
 
 public class MatchmakingResponse {
 	private MatchmakingRequestRetry retry;
-	private String myChannelId;
-	private Game game;
-	private String gameId;
+	private ClientConnectionConfiguration connection;
 
 	public MatchmakingRequestRetry getRetry() {
 		return retry;
@@ -16,27 +14,11 @@ public class MatchmakingResponse {
 		this.retry = retry;
 	}
 
-	public String getMyChannelId() {
-		return myChannelId;
+	public ClientConnectionConfiguration getConnection() {
+		return connection;
 	}
 
-	public void setMyChannelId(String myChannelId) {
-		this.myChannelId = myChannelId;
-	}
-
-	public Game getGame() {
-		return game;
-	}
-
-	public void setGame(Game game) {
-		this.game = game;
-	}
-
-	public String getGameId() {
-		return gameId;
-	}
-
-	public void setGameId(String gameId) {
-		this.gameId = gameId;
+	public void setConnection(ClientConnectionConfiguration connection) {
+		this.connection = connection;
 	}
 }

@@ -9,6 +9,7 @@ import com.hiddenswitch.proto3.net.models.Game;
 public class GameRecord {
 	private String id;
 	private Game game;
+	private String gameSessionId;
 
 	public GameRecord() {
 	}
@@ -35,5 +36,13 @@ public class GameRecord {
 		this.game = game;
 	}
 
+	@DynamoDBAttribute
+	public String getGameSessionId() {
+		return gameSessionId;
+	}
+
+	public void setGameSessionId(String gameSessionId) {
+		this.gameSessionId = gameSessionId;
+	}
 }
 

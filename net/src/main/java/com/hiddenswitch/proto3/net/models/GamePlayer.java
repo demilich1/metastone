@@ -1,7 +1,9 @@
 package com.hiddenswitch.proto3.net.models;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
+import com.hiddenswitch.proto3.common.ClientConnectionConfiguration;
 import com.hiddenswitch.proto3.net.behaviour.NullBehaviour;
+import com.hiddenswitch.proto3.server.PregamePlayerConfiguration;
 import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
 import net.demilich.metastone.game.cards.NullHeroCard;
 import net.demilich.metastone.game.decks.Deck;
@@ -11,7 +13,6 @@ import net.demilich.metastone.game.gameconfig.PlayerConfig;
 public class GamePlayer {
 	private String userId;
 	private PlayerProfile profile;
-	private String queueUrl;
 	private ChannelType channelType = ChannelType.SQS;
 	private Deck deck;
 
@@ -31,6 +32,12 @@ public class GamePlayer {
 		return playerConfig;
 	}
 
+	@DynamoDBIgnore
+	public PregamePlayerConfiguration getPregamePlayerConfig() {
+		PregamePlayerConfiguration config = new PregamePlayerConfiguration(getDeck(), getProfile().name);
+		return config;
+	}
+
 	@DynamoDBAttribute
 	public String getUserId() {
 		return userId;
@@ -47,15 +54,6 @@ public class GamePlayer {
 
 	public void setProfile(PlayerProfile profile) {
 		this.profile = profile;
-	}
-
-	@DynamoDBAttribute
-	public String getQueueUrl() {
-		return queueUrl;
-	}
-
-	public void setQueueUrl(String queueUrl) {
-		this.queueUrl = queueUrl;
 	}
 
 	@DynamoDBTypeConvertedEnum

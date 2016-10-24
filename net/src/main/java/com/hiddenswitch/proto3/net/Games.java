@@ -3,10 +3,12 @@ package com.hiddenswitch.proto3.net;
 import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.ReceiveMessageResult;
 import com.amazonaws.services.sqs.model.SendMessageResult;
+import com.hiddenswitch.proto3.common.ClientConnectionConfiguration;
 import com.hiddenswitch.proto3.net.amazon.GameRecord;
 import com.hiddenswitch.proto3.net.amazon.MatchmakingRequestMessage;
 import com.hiddenswitch.proto3.net.models.*;
 import com.hiddenswitch.proto3.net.util.Serialization;
+import com.hiddenswitch.proto3.server.GameSession;
 import net.demilich.metastone.game.decks.Deck;
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -57,15 +59,11 @@ public class Games extends Service {
 
 		if (game.isReadyToPlay()) {
 			// The game is ready to play
-			response.setGame(getGameCensored(userId, game));
-			response.setGameId(gameId);
-			response.setMyChannelId(game.getPlayerForId(userId).getQueueUrl());
+			response.setConnection(getConnection(gameId, userId));
 			response.setRetry(null);
 		} else {
 			// We're still waiting for a player
-			response.setGame(null);
-			response.setGameId(null);
-			response.setMyChannelId(null);
+			response.setConnection(null);
 			if (matchmakingRequest.retry == null) {
 				response.setRetry(createRetry(gameId));
 			} else {
@@ -77,6 +75,45 @@ public class Games extends Service {
 		return response;
 	}
 
+	public ClientConnectionConfiguration getConnection(String forGameId, String forUserId) {
+		// Check if there is an existing session for this player
+		GameRecord record = getDatabase().load(GameRecord.class, forGameId);
+		if (record == null) {
+			throw new IllegalArgumentException("Must specify a valid game ID.");
+		}
+		String gameSessionId = record.getGameSessionId();
+		GameSession session = null;
+		if (gameSessionId == null) {
+			// Create a session for this game ID.
+			session = createGameSession(record.getGame());
+		} else {
+			session = getGameSession(gameSessionId);
+		}
+		if (record.getGame().getGamePlayer1().getUserId().equals(forUserId)) {
+			return session.getConfigurationForPlayer1();
+		} else {
+			return session.getConfigurationForPlayer2();
+		}
+	}
+
+	private GameSession createGameSession(Game game) {
+		return new GameSession(game.getGamePlayer1().getPregamePlayerConfig(), game.getGamePlayer2().getPregamePlayerConfig()) {
+			@Override
+			public ClientConnectionConfiguration getConfigurationForPlayer1() {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public ClientConnectionConfiguration getConfigurationForPlayer2() {
+				throw new UnsupportedOperationException();
+			}
+		};
+	}
+
+	private GameSession getGameSession(String gameSessionId) {
+		return null;
+	}
+
 	/**
 	 * Disposes a game's realtime resources, if any.
 	 *
@@ -84,10 +121,6 @@ public class Games extends Service {
 	 */
 	public void dispose(String gameId) {
 		Game game = get(gameId);
-
-		for (String queueUrl : new String[]{game.getGamePlayer1().getQueueUrl(), game.getGamePlayer2().getQueueUrl()}) {
-			getQueue().deleteQueue(queueUrl);
-		}
 	}
 
 	private MatchmakingRequestRetry createRetry(String gameId) {
@@ -103,14 +136,7 @@ public class Games extends Service {
 		thisGamePlayer.setUserId(userId);
 		thisGamePlayer.setDeck(deck);
 		thisGamePlayer.setProfile(getAccounts().getProfileForId(userId));
-		thisGamePlayer.setQueueUrl(getQueueUrlForPlayer(userId, ChannelType.SQS));
 		return thisGamePlayer;
-	}
-
-	private String getQueueUrlForPlayer(String userId, ChannelType type) {
-		String queueName = userId.concat("_").concat(RandomStringUtils.randomAlphanumeric(36));
-		String queueUrl = getQueue().createQueue(queueName).getQueueUrl();
-		return queueUrl;
 	}
 
 	private Game getGameCensored(String forUserId, Game game) {

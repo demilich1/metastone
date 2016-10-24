@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
+import com.hiddenswitch.proto3.common.ClientConnectionConfiguration;
 import com.hiddenswitch.proto3.net.models.*;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
@@ -62,6 +63,7 @@ public class Serialization {
 		}.getType();
 		gsonBuilder.registerTypeHierarchyAdapter(GameContext.class, new GameContextSerializer());
 		gsonBuilder.registerTypeHierarchyAdapter(Deck.class, new DeckSerializer());
+		gsonBuilder.registerTypeAdapter(ClientConnectionConfiguration.class, new ClientConnectionConfigurationSerializer());
 		gsonBuilder.registerTypeAdapter(mapType, new AttributeDeserializer());
 		gsonBuilder.registerTypeAdapter(EntityReference.class, new EntityReferenceSerializer());
 		gsonBuilder.registerTypeAdapter(SpellDesc.class, new SpellDeserializer());
