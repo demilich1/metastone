@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
 
-import com.hiddenswitch.proto3.common.*;
+import com.hiddenswitch.proto3.net.common.RemoteUpdateListener;
 import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;

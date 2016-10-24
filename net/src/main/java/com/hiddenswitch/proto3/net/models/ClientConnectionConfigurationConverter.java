@@ -1,7 +1,7 @@
 package com.hiddenswitch.proto3.net.models;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverter;
-import com.hiddenswitch.proto3.common.ClientConnectionConfiguration;
+import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
 import com.hiddenswitch.proto3.net.util.Serialization;
 
 public class ClientConnectionConfigurationConverter implements DynamoDBTypeConverter {

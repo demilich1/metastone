@@ -1,4 +1,4 @@
-package com.hiddenswitch.proto3.client;
+package com.hiddenswitch.proto3.net.client;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -7,9 +7,9 @@ import java.net.Socket;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import com.hiddenswitch.proto3.common.*;
-import com.hiddenswitch.proto3.common.ServerToClientMessage;
-import com.hiddenswitch.proto3.server.SocketServerSession;
+import com.hiddenswitch.proto3.net.common.ClientToServerMessage;
+import com.hiddenswitch.proto3.net.common.RemoteUpdateListener;
+import com.hiddenswitch.proto3.net.common.ServerToClientMessage;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 
@@ -47,7 +47,7 @@ public class SocketClientConnection implements ClientCommunicationReceive, Clien
 	@Override
 	public void run() {
 		try {
-			Socket socket = new Socket("127.0.0.1", SocketServerSession.PORT);
+			Socket socket = new Socket("127.0.0.1", 11111);
 			//ReadThread
 			new Thread(() -> {
 				try {

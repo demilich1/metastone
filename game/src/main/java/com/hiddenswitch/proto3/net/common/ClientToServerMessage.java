@@ -1,8 +1,7 @@
-package com.hiddenswitch.proto3.common;
+package com.hiddenswitch.proto3.net.common;
 
 import java.io.Serializable;
 
-import com.hiddenswitch.proto3.common.MessageType;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 

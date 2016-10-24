@@ -1,4 +1,4 @@
-package com.hiddenswitch.proto3.client;
+package com.hiddenswitch.proto3.net.client;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.Stack;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.hiddenswitch.proto3.common.*;
+import com.hiddenswitch.proto3.net.common.RemoteUpdateListener;
 import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.NotificationProxy;
@@ -18,7 +18,6 @@ import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.logic.GameLogic;
-import net.demilich.metastone.game.logic.ProceduralGameLogic;
 import net.demilich.metastone.game.spells.trigger.IGameEventListener;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.visuals.GameContextVisuals;

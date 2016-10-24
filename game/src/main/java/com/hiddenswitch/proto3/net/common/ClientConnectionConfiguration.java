@@ -1,6 +1,4 @@
-package com.hiddenswitch.proto3.common;
-
-import com.hiddenswitch.proto3.common.ClientToServerMessage;
+package com.hiddenswitch.proto3.net.common;
 
 import java.io.Serializable;
 

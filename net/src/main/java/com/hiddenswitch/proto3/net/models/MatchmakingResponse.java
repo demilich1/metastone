@@ -1,6 +1,6 @@
 package com.hiddenswitch.proto3.net.models;
 
-import com.hiddenswitch.proto3.common.ClientConnectionConfiguration;
+import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
 
 public class MatchmakingResponse {
 	private MatchmakingRequestRetry retry;

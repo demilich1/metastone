@@ -1,6 +1,6 @@
 package com.hiddenswitch.proto3.server;
 
-import com.hiddenswitch.proto3.common.ClientConnectionConfiguration;
+import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
 import org.apache.commons.lang3.RandomStringUtils;
 
 public abstract class GameSession {

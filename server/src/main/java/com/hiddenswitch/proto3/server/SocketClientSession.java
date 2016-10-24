@@ -1,13 +1,13 @@
 package com.hiddenswitch.proto3.server;
 
-import com.hiddenswitch.proto3.common.ServerToClientMessage;
-import com.hiddenswitch.proto3.common.ClientToServerMessage;
-import com.hiddenswitch.proto3.common.MessageType;
+import com.hiddenswitch.proto3.net.common.RemoteUpdateListener;
+import com.hiddenswitch.proto3.net.common.ServerToClientMessage;
+import com.hiddenswitch.proto3.net.common.ClientToServerMessage;
+import com.hiddenswitch.proto3.net.common.MessageType;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.TurnState;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.events.GameEvent;
-import com.hiddenswitch.proto3.common.*;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

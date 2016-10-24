@@ -30,9 +30,7 @@ public class GamesTest extends ServiceTestBase<Games> {
 		request1.retry = null;
 		MatchmakingResponse response1 = service.matchmakeAndJoin(request1);
 		assertNotNull(response1.getRetry());
-		assertNull(response1.getGame());
-		assertNull(response1.getGameId());
-		assertNull(response1.getMyChannelId());
+		assertNull(response1.getConnection());
 		assertNotNull(response1.getRetry().getGameId());
 		assertNotNull(response1.getRetry().getReceipt());
 
@@ -43,9 +41,7 @@ public class GamesTest extends ServiceTestBase<Games> {
 		request2.retry = null;
 		MatchmakingResponse response2 = service.matchmakeAndJoin(request2);
 		assertNull(response2.getRetry());
-		assertNotNull(response2.getGame());
-		assertNotNull(response2.getGameId());
-		assertNotNull(response2.getMyChannelId());
+		assertNotNull(response2.getConnection());
 
 		// Assume player 1's identity, poll for matchmaking again and receive the new game information
 		service.getAccounts().setUserId(player1.userId);
@@ -54,11 +50,9 @@ public class GamesTest extends ServiceTestBase<Games> {
 		request1.retry = response1.getRetry();
 		response1 = service.matchmakeAndJoin(request1);
 		assertNull(response1.getRetry());
-		assertNotNull(response1.getGame());
-		assertNotNull(response1.getGameId());
-		assertNotNull(response1.getMyChannelId());
+		assertNotNull(response1.getConnection());
 
-		return response1.getGameId();
+		return response1.getConnection().getFirstMessage().getGameId();
 	}
 
 	@Test
@@ -67,8 +61,6 @@ public class GamesTest extends ServiceTestBase<Games> {
 		// Find the game
 		Game game = service.get(gameId);
 		service.dispose(gameId);
-		assertThrows(() -> service.getQueue().sendMessage(game.getGamePlayer1().getQueueUrl(), "test"));
-		assertThrows(() -> service.getQueue().sendMessage(game.getGamePlayer2().getQueueUrl(), "test"));
 	}
 
 	@Test

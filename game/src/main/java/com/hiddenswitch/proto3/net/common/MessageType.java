@@ -1,4 +1,4 @@
-package com.hiddenswitch.proto3.common;
+package com.hiddenswitch.proto3.net.common;
 
 public enum MessageType {
 	REGISTER_PLAYER,

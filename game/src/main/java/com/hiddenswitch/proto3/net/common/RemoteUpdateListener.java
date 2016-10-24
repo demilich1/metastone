@@ -1,4 +1,4 @@
-package com.hiddenswitch.proto3.common;
+package com.hiddenswitch.proto3.net.common;
 
 import java.util.List;
 

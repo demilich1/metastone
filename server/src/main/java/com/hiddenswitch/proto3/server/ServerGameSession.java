@@ -1,16 +1,11 @@
 package com.hiddenswitch.proto3.server;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.hiddenswitch.proto3.common.ClientConnectionConfiguration;
-import com.hiddenswitch.proto3.common.ClientToServerMessage;
-import com.hiddenswitch.proto3.common.RemoteUpdateListener;
+import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
+import com.hiddenswitch.proto3.net.common.ClientToServerMessage;
+import com.hiddenswitch.proto3.net.common.RemoteUpdateListener;
 
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
 

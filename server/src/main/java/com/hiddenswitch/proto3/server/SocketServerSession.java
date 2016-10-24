@@ -1,7 +1,6 @@
 package com.hiddenswitch.proto3.server;
 
-import com.hiddenswitch.proto3.client.SocketClientConnection;
-import com.hiddenswitch.proto3.common.*;
+import com.hiddenswitch.proto3.net.common.ClientToServerMessage;
 
 import java.io.IOException;
 import java.net.ServerSocket;

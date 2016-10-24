@@ -3,7 +3,7 @@ package com.hiddenswitch.proto3.net;
 import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.ReceiveMessageResult;
 import com.amazonaws.services.sqs.model.SendMessageResult;
-import com.hiddenswitch.proto3.common.ClientConnectionConfiguration;
+import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
 import com.hiddenswitch.proto3.net.amazon.GameRecord;
 import com.hiddenswitch.proto3.net.amazon.MatchmakingRequestMessage;
 import com.hiddenswitch.proto3.net.models.*;

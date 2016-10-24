@@ -1,10 +1,8 @@
 package com.hiddenswitch.proto3.net.models;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
-import com.hiddenswitch.proto3.common.ClientConnectionConfiguration;
 import com.hiddenswitch.proto3.net.behaviour.NullBehaviour;
 import com.hiddenswitch.proto3.server.PregamePlayerConfiguration;
-import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
 import net.demilich.metastone.game.cards.NullHeroCard;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;

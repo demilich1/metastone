@@ -1,4 +1,4 @@
-package com.hiddenswitch.proto3.client;
+package com.hiddenswitch.proto3.net.client;
 
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;

@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
-import com.hiddenswitch.proto3.common.ClientConnectionConfiguration;
+import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
 import com.hiddenswitch.proto3.net.models.*;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
@@ -72,7 +72,13 @@ public class Serialization {
 		gsonBuilder.registerTypeAdapter(AuraDesc.class, new AuraDeserializer());
 		gsonBuilder.registerTypeAdapter(ValueProviderDesc.class, new ValueProviderDeserializer());
 		gsonBuilder.registerTypeAdapter(CardCostModifierDesc.class, new CardCostModifierDeserializer());
+		gsonBuilder.serializeNulls();
+		gsonBuilder.enableComplexMapKeySerialization();
 		gson = gsonBuilder.create();
+	}
+
+	public static Gson getGson() {
+		return gson;
 	}
 
 	public static String serialize(Object object) {
