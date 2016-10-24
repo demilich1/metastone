@@ -27,26 +27,26 @@ public class SocketServerSession implements Runnable {
 	public void run() {
 		try {
 			ServerSocket s = new ServerSocket(PORT);
-			while(true){
+			while (true) {
 				Socket socket = s.accept();
 				SocketClientSession connection = new SocketClientSession(this, socket);
 				new Thread(connection).start();
 			}
-		} catch (IOException e){
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void kill() {
 		shouldRun = false;
-		for (ServerGameSession sgs: games.values()){
+		for (ServerGameSession sgs : games.values()) {
 			sgs.kill();
 		}
 	}
-	
-	public void onFirstMessage(SocketClientSession clientSession, ClientToServerMessage message){
+
+	public void onFirstMessage(SocketClientSession clientSession, ClientToServerMessage message) {
 		//TODO: check authenticity here;
-		if (games.containsKey(message.getGameId())){
+		if (games.containsKey(message.getGameId())) {
 			games.get(message.getGameId()).registerClient(clientSession, message);
 		} else {
 			ServerGameSession newGame = new ServerGameSession();

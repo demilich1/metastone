@@ -38,13 +38,13 @@ class SocketClientSession implements Runnable, RemoteUpdateListener {
 				ObjectInputStream clientInputStream = new ObjectInputStream(getPrivateSocket().getInputStream());
 				while (getSocketServerSession().shouldRun || getServerGameSession().shouldRun) {
 					ClientToServerMessage message = (ClientToServerMessage) clientInputStream.readObject();
-					
-					if (message.getMt() == MessageType.FIRST_MESSAGE){
+
+					if (message.getMt() == MessageType.FIRST_MESSAGE) {
 						getSocketServerSession().onFirstMessage(this, message);
 					} else {
 						getServerGameSession().listener.onActionRegistered(message.getCallingPlayer(), message.getAction());
 					}
-					
+
 				}
 				clientInputStream.close();
 			} catch (ClassNotFoundException | IOException e) {
@@ -142,12 +142,12 @@ class SocketClientSession implements Runnable, RemoteUpdateListener {
 	private void setPrivateSocket(Socket privateSocket) {
 		this.privateSocket = privateSocket;
 	}
-	
-	private ServerGameSession getServerGameSession(){
+
+	private ServerGameSession getServerGameSession() {
 		return serverGameSession;
 	}
-	
-	public void setServerGameSession(ServerGameSession serverGameSession){
+
+	public void setServerGameSession(ServerGameSession serverGameSession) {
 		this.serverGameSession = serverGameSession;
 	}
 }
