@@ -4,7 +4,7 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 
 public interface ServerListener {
-	void onPlayerConnected(Player player1, Player player2);
+	void onPlayerConnected(Player player);
 
 	void onActionRegistered(Player callingPlayer, GameAction action);
 }

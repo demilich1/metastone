@@ -168,8 +168,8 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 
 	@Override
 	public void init() {
-
-		ccs.getSendToServer().registerPlayer(getPlayer1(), getPlayer2());
+		//TODO: Update game Id on client-side.
+		ccs.getSendToServer().sendFirstMessage(getPlayer1(), "123");
 	}
 
 	@Override

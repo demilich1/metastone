@@ -1,5 +1,7 @@
 package com.hiddenswitch.proto3.server;
 
+import java.util.concurrent.locks.Lock;
+
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.CardSet;
@@ -7,31 +9,32 @@ import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.logic.ProceduralGameLogic;
 
 public class SocketServerListener implements ServerListener {
-	private final SocketServerSession ssc;
+	private final ServerCommunicationSend serverCommunicationSend;
 	private ServerGameContext gameContext;
 	private Player player1;
 	private Player player2;
+	private Lock gameLock;
 
-	public SocketServerListener(SocketServerSession ssc) {
-		this.ssc = ssc;
+	public SocketServerListener(ServerCommunicationSend serverCommunicationSend, Lock gameLock) {
+		this.serverCommunicationSend = serverCommunicationSend;
+		this.gameLock = gameLock;
 	}
 
 	@Override
-	public void onPlayerConnected(Player p1, Player p2) {
+	public void onPlayerConnected(Player player) {
 		if (getPlayer1() == null) {
-			setPlayer1(p1);
+			setPlayer1(player);
 			return;
 		} else if (getPlayer2() == null) {
-			setPlayer2(p2);
+			setPlayer2(player);
 			DeckFormat simpleFormat = new DeckFormat();
 			simpleFormat.addSet(CardSet.PROCEDURAL_PREVIEW);
-			setGameContext(new ServerGameContext(getPlayer1(), getPlayer2(), new ProceduralGameLogic(), simpleFormat, ssc.getLock()));
-			getGameContext().setUpdateListener(getPlayer1(), getSsc().getPlayerListener(0));
-			getGameContext().setUpdateListener(getPlayer2(), getSsc().getPlayerListener(1));
+			setGameContext(new ServerGameContext(getPlayer1(), getPlayer2(), new ProceduralGameLogic(), simpleFormat, gameLock));
+			getGameContext().setUpdateListener(getPlayer1(), getSender().getPlayerListener(0));
+			getGameContext().setUpdateListener(getPlayer2(), getSender().getPlayerListener(1));
 			new Thread(() -> getGameContext().play()).start();
 		} else {
-			//TODO : Add support for many, many players
-			throw new RuntimeException("not yet supported");
+			throw new RuntimeException("too many players connected!");
 		}
 	}
 
@@ -42,8 +45,8 @@ public class SocketServerListener implements ServerListener {
 		}
 	}
 
-	public SocketServerSession getSsc() {
-		return ssc;
+	public ServerCommunicationSend getSender() {
+		return serverCommunicationSend;
 	}
 
 	public ServerGameContext getGameContext() {

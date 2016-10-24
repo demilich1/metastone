@@ -20,6 +20,7 @@ import java.util.concurrent.locks.Lock;
 
 class SocketClientSession implements Runnable, RemoteUpdateListener {
 	private SocketServerSession socketServerSession;
+	private ServerGameSession serverGameSession;
 	private Socket privateSocket;
 	private BlockingQueue<ServerToClientMessage> queue = new LinkedBlockingQueue<>();
 
@@ -35,19 +36,17 @@ class SocketClientSession implements Runnable, RemoteUpdateListener {
 		new Thread(() -> {
 			try {
 				ObjectInputStream clientInputStream = new ObjectInputStream(getPrivateSocket().getInputStream());
-				while (getSocketServerSession().shouldRun) {
-
+				while (getSocketServerSession().shouldRun || getServerGameSession().shouldRun) {
 					ClientToServerMessage message = (ClientToServerMessage) clientInputStream.readObject();
-					System.out.println("message received");
-					System.out.println(message.getMt().toString());
-					if (message.getMt() == MessageType.REGISTER_PLAYER) {
-						getSocketServerSession().listener.onPlayerConnected(message.getPlayer1(), message.getPlayer2());
+					
+					if (message.getMt() == MessageType.FIRST_MESSAGE){
+						getSocketServerSession().onFirstMessage(this, message);
 					} else {
-						getSocketServerSession().listener.onActionRegistered(message.getCallingPlayer(), message.getAction());
+						getServerGameSession().listener.onActionRegistered(message.getCallingPlayer(), message.getAction());
 					}
+					
 				}
 				clientInputStream.close();
-				getSocketServerSession().socketConnection.close();
 			} catch (ClassNotFoundException | IOException e) {
 				e.printStackTrace();
 			}
@@ -59,10 +58,10 @@ class SocketClientSession implements Runnable, RemoteUpdateListener {
 				ObjectOutputStream clientOutputStream = new ObjectOutputStream(getPrivateSocket().getOutputStream());
 				while (getSocketServerSession().shouldRun) {
 					ServerToClientMessage message = getQueue().take();
-					getServerLock().lock();
+					getGameLock().lock();
 					System.out.println("Sending message: " + message.mt);
 					clientOutputStream.writeObject(message);
-					getServerLock().unlock();
+					getGameLock().unlock();
 					clientOutputStream.flush();
 					//super important magic line below:
 					clientOutputStream.reset();
@@ -70,15 +69,15 @@ class SocketClientSession implements Runnable, RemoteUpdateListener {
 				clientOutputStream.close();
 			} catch (IOException | InterruptedException e) {
 				e.printStackTrace();
-				getServerLock().unlock();
+				getGameLock().unlock();
 
 			}
 
 		}).start();
 	}
 
-	protected Lock getServerLock() {
-		return socketServerSession.getLock();
+	protected Lock getGameLock() {
+		return serverGameSession.getLock();
 	}
 
 	public BlockingQueue<ServerToClientMessage> getQueue() {
@@ -142,5 +141,13 @@ class SocketClientSession implements Runnable, RemoteUpdateListener {
 
 	private void setPrivateSocket(Socket privateSocket) {
 		this.privateSocket = privateSocket;
+	}
+	
+	private ServerGameSession getServerGameSession(){
+		return serverGameSession;
+	}
+	
+	public void setServerGameSession(ServerGameSession serverGameSession){
+		this.serverGameSession = serverGameSession;
 	}
 }
