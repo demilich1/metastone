@@ -32,12 +32,14 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	private int remoteTurn;
 	private TurnState remoteTurnState;
 	private volatile List<GameAction> remoteValidActions;
+	private String host;
+	private int port;
 	ClientCommunicationSend ccs;
 	ClientCommunicationReceive ccr;
 
-	public RemoteGameContext(Player player1, Player player2, GameLogic gameLogic, DeckFormat df) {
+	public RemoteGameContext(Player player1, Player player2, GameLogic gameLogic, DeckFormat df, String host, int port) {
 		super(player1, player2, gameLogic, df);
-		SocketClientConnection scc = new SocketClientConnection();
+		SocketClientConnection scc = new SocketClientConnection(host, port);
 		this.ccs = scc;
 		this.ccr = scc;
 		new Thread(scc).start();
@@ -78,7 +80,7 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 		// player1Clone.getDeck().shuffle();
 		Player player2Clone = getPlayer2().clone();
 		// player2Clone.getDeck().shuffle();
-		GameContext clone = new RemoteGameContext(player1Clone, player2Clone, getLogic().clone(), getDeckFormat());
+		GameContext clone = new RemoteGameContext(player1Clone, player2Clone, getLogic().clone(), getDeckFormat(), getHost(), getPort());
 		return clone;
 	}
 
@@ -324,5 +326,13 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 		this.setRemoteTurn(turnNumber);
 		this.setRemoteTurnState(turnState);
 		this.onGameStateChanged();
+	}
+
+	public String getHost() {
+		return host;
+	}
+
+	public int getPort() {
+		return port;
 	}
 }

@@ -14,9 +14,20 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 
 public class SocketClientConnection implements ClientCommunicationReceive, ClientCommunicationSend, Runnable {
+	private final String host;
+	private final int port;
 	private BlockingQueue<ClientToServerMessage> queue = new LinkedBlockingQueue<>();
 	private RemoteUpdateListener remoteUpdateListener;
 	private boolean shouldRun = true;
+
+	public SocketClientConnection() {
+		this("127.0.0.1", 11111);
+	}
+
+	public SocketClientConnection(String host, int port) {
+		this.host = host;
+		this.port = port;
+	}
 
 	@Override
 	public SendToServer getSendToServer() {
@@ -34,7 +45,7 @@ public class SocketClientConnection implements ClientCommunicationReceive, Clien
 			@Override
 			public void sendFirstMessage(Player player, String gameId) {
 				queue.add(new ClientToServerMessage(player, gameId));
-				
+
 			}
 		};
 	}
@@ -47,7 +58,7 @@ public class SocketClientConnection implements ClientCommunicationReceive, Clien
 	@Override
 	public void run() {
 		try {
-			Socket socket = new Socket("127.0.0.1", 11111);
+			Socket socket = new Socket(getHost(), getPort());
 			//ReadThread
 			new Thread(() -> {
 				try {
@@ -116,4 +127,11 @@ public class SocketClientConnection implements ClientCommunicationReceive, Clien
 	}
 
 
+	public String getHost() {
+		return host;
+	}
+
+	public int getPort() {
+		return port;
+	}
 }

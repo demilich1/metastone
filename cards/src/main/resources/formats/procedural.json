@@ -1,6 +1,8 @@
 {
   "name": "Procedural",
   "sets": [
+    "BASIC",
+    "CLASSIC",
     "PROCEDURAL_PREVIEW"
   ]
 }

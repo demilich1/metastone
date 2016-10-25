@@ -38,7 +38,7 @@ public class StartGameCommand extends SimpleCommand<GameNotification> {
 		GameContext newGame;
 
 		if (MetaStone.procedural) {
-			newGame = new RemoteGameContext(player1, player2, new ProceduralGameLogic(), deckFormat);
+			newGame = new RemoteGameContext(player1, player2, new ProceduralGameLogic(), deckFormat, gameConfig.getHost(), gameConfig.getPort());
 		} else {
 			newGame = new GameContextVisualizable(player1, player2, new GameLogic(), deckFormat);
 		}

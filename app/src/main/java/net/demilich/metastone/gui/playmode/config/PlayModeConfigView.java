@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import net.demilich.metastone.GameNotification;
@@ -35,6 +36,12 @@ public class PlayModeConfigView extends BorderPane implements EventHandler<Actio
 
 	@FXML
 	protected Button backButton;
+
+	@FXML
+	protected TextField hostBox;
+
+	@FXML
+	protected TextField portBox;
 
 	protected PlayerConfigView player1Config;
 	protected PlayerConfigView player2Config;
@@ -92,6 +99,8 @@ public class PlayModeConfigView extends BorderPane implements EventHandler<Actio
 			gameConfig.setPlayerConfig1(player1Config.getPlayerConfig());
 			gameConfig.setPlayerConfig2(player2Config.getPlayerConfig());
 			gameConfig.setDeckFormat(formatBox.getValue());
+			gameConfig.setHost(hostBox.getText());
+			gameConfig.setPort(Integer.parseInt(portBox.getText()));
 			NotificationProxy.sendNotification(GameNotification.COMMIT_PLAYMODE_CONFIG, gameConfig);
 		} else if (actionEvent.getSource() == backButton) {
 			NotificationProxy.sendNotification(GameNotification.MAIN_MENU);
