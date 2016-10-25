@@ -19,7 +19,8 @@ import java.nio.file.Paths;
 public class MetaStone extends Application {
 
 	private static Logger logger = LoggerFactory.getLogger(MetaStone.class);
-
+	public static final boolean procedural = true;
+	
 	public static void main(String[] args) {
 		//DevCardTools.formatJsons();
 

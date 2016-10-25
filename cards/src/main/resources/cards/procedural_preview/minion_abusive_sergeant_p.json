@@ -1,0 +1,24 @@
+{
+	"id": "minion_abusive_sergeant_p",
+	"name": "Abusive Sergeant",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 1,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Battlecry: Give a minion +2 Attack this turn.",
+	"battlecry": {
+		"targetSelection": "MINIONS",
+		"spell": {
+			"class": "TemporaryAttackSpell",
+			"value": 2
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "PROCEDURAL_PREVIEW",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,24 @@
+{
+	"id": "minion_acolyte_of_pain_p",
+	"name": "Acolyte of Pain",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 3,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Whenever this minion takes damage, draw a card.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "DamageReceivedTrigger",
+			"hostTargetType": "IGNORE_OTHER_TARGETS"
+		},
+		"spell": {
+			"class": "DrawCardSpell",
+			"value": 1
+		}
+	},
+	"collectible": true,
+	"set": "PROCEDURAL_PREVIEW",
+	"fileFormatVersion": 1
+}

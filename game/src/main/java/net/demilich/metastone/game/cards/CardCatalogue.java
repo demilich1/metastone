@@ -150,6 +150,7 @@ public class CardCatalogue {
 		Map<String, CardDesc> cardDesc = new HashMap<String, CardDesc>();
 		ArrayList<String> badCards = new ArrayList<>();
 		CardParser cardParser = new CardParser();
+
 		for (ResourceInputStream resourceInputStream : inputStreams) {
 			try {
 				CardDesc desc = cardParser.parseCard(resourceInputStream);
@@ -159,6 +160,7 @@ public class CardCatalogue {
 				cardDesc.put(desc.id, desc);
 			} catch (Exception e) {
 				//logger.error("Error parsing card '{}'", resourceInputStream.fileName);
+				System.out.println(e.toString());
 				logger.error(e.toString());
 				badCards.add(resourceInputStream.fileName);
 			}
