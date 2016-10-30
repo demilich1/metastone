@@ -12,6 +12,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class SocketServerSession implements Runnable {
 	public static final int PORT = 11111;
+	public static final String HOST = "127.0.0.1";
 	private Lock serverSessionLock = new ReentrantLock();
 	private Map<String, ServerGameSession> games = new HashMap<>();
 	boolean shouldRun = true;
@@ -52,5 +53,11 @@ public class SocketServerSession implements Runnable {
 			newGame.registerClient(clientSession, message);
 			games.put(message.getGameId(), newGame);
 		}
+	}
+	
+	public GameSession createGameSession(PregamePlayerConfiguration player1, PregamePlayerConfiguration player2){
+		ServerGameSession newSession = new ServerGameSession(player1, player2);
+		games.put(newSession.getId(), newSession);
+		return newSession;
 	}
 }
