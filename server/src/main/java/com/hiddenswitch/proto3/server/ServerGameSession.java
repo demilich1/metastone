@@ -7,6 +7,9 @@ import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
 import com.hiddenswitch.proto3.net.common.ClientToServerMessage;
 import com.hiddenswitch.proto3.net.common.RemoteUpdateListener;
 
+import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.ProceduralPlayer;
+import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
 
 public class ServerGameSession extends GameSession implements ServerCommunicationSend {
@@ -16,25 +19,26 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	SocketClientSession c2;
 	ServerListener listener;
 	boolean shouldRun = true;
+	private Player player1;
+	private Player player2;
 
 	@Override
 	public ClientConnectionConfiguration getConfigurationForPlayer1() {
-		// TODO 
-		throw new RuntimeException("to be implemented");
+		return new ClientConnectionConfiguration(SocketServerSession.HOST, SocketServerSession.PORT, 
+				new ClientToServerMessage(player1, getId()));
 	}
 
 	@Override
 	public ClientConnectionConfiguration getConfigurationForPlayer2() {
-		// TODO 
-		throw new RuntimeException("to be implemented");
+		return new ClientConnectionConfiguration(SocketServerSession.HOST, SocketServerSession.PORT, 
+				new ClientToServerMessage(player2, getId()));
 	}
-
-	public ServerGameSession(PlayerConfig player1, PlayerConfig player2) {
-		super(new PregamePlayerConfiguration(player1.getDeckForPlay(), player1.getName()),
-				new PregamePlayerConfiguration(player2.getDeckForPlay(), player2.getName()));
-		this.gameSessionLock = new ReentrantLock();
-		this.listener = new SocketServerListener(this, gameSessionLock);
-
+	
+	public ServerGameSession(PregamePlayerConfiguration p1, PregamePlayerConfiguration p2){
+		super(p1, p2);
+		//TODO: in PregamePlayerConfiguration should really contain a playerConfig object.
+		this.player1 = new ProceduralPlayer(new PlayerConfig(p1.getDeck(), new HumanBehaviour()));
+		this.player2 = new ProceduralPlayer(new PlayerConfig(p2.getDeck(), new HumanBehaviour()));
 	}
 
 	//Temporary constructor since we don't have a matchmaker yet. 
