@@ -121,9 +121,9 @@ public class Game {
 				deckFormat.addSet(CardSet.CLASSIC);
 				break;
 			case PROCEDURAL:
-				player1 = new ProceduralPlayer(playerConfig1);
-				player2 = new ProceduralPlayer(playerConfig2);
-				logic = new ProceduralGameLogic();
+				player1 = new Player(playerConfig1);
+				player2 = new Player(playerConfig2);
+				logic = new GameLogic();
 				deckFormat.addSet(CardSet.BASIC);
 				deckFormat.addSet(CardSet.CLASSIC);
 				deckFormat.addSet(CardSet.PROCEDURAL_PREVIEW);

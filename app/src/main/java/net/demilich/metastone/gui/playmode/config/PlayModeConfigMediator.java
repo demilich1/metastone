@@ -17,9 +17,9 @@ public class PlayModeConfigMediator extends Mediator<GameNotification> {
 
 	private final PlayModeConfigView view;
 
-	public PlayModeConfigMediator() {
+	public PlayModeConfigMediator(boolean isMultiplayer) {
 		super(NAME);
-		view = new PlayModeConfigView();
+		view = new PlayModeConfigView(isMultiplayer);
 	}
 
 	@Override

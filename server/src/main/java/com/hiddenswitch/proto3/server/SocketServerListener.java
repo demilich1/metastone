@@ -6,6 +6,7 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.decks.DeckFormat;
+import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.logic.ProceduralGameLogic;
 
 public class SocketServerListener implements ServerListener {
@@ -29,7 +30,7 @@ public class SocketServerListener implements ServerListener {
 			setPlayer2(player);
 			DeckFormat simpleFormat = new DeckFormat();
 			simpleFormat.addSet(CardSet.PROCEDURAL_PREVIEW);
-			setGameContext(new ServerGameContext(getPlayer1(), getPlayer2(), new ProceduralGameLogic(), simpleFormat, gameLock));
+			setGameContext(new ServerGameContext(getPlayer1(), getPlayer2(), new GameLogic(), simpleFormat, gameLock));
 			getGameContext().setUpdateListener(getPlayer1(), getSender().getPlayerListener(0));
 			getGameContext().setUpdateListener(getPlayer2(), getSender().getPlayerListener(1));
 			new Thread(() -> getGameContext().play()).start();
