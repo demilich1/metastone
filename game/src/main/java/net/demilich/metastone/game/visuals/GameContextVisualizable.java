@@ -1,6 +1,8 @@
 package net.demilich.metastone.game.visuals;
 
 import net.demilich.metastone.BuildConfig;
+import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
@@ -33,6 +35,24 @@ public class GameContextVisualizable extends GameContext implements GameContextV
 		}
 		return false;
 	}
+
+	protected void onGameStateChanged() {
+		if (ignoreEvents()) {
+			return;
+		}
+
+		setBlockedByAnimation(true);
+		NotificationProxy.sendNotification(GameNotification.GAME_STATE_UPDATE, this);
+
+		while (blockedByAnimation) {
+			try {
+				Thread.sleep(BuildConfig.DEFAULT_SLEEP_DELAY);
+			} catch (InterruptedException e) {
+			}
+		}
+		NotificationProxy.sendNotification(GameNotification.GAME_STATE_LATE_UPDATE, this);
+	}
+
 
 	@Override
 	public void fireGameEvent(GameEvent gameEvent) {
