@@ -18,12 +18,13 @@
    <center>
       <VBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-         	<HBox alignment="CENTER" spacing = "125.0">
+         	<Group>
          		<children>
-         		 	<Button fx:id="playModeButton" layoutX="447.0" layoutY="339.0" mnemonicParsing="false" prefWidth="300.0" prefHeight="350.0" styleClass = "main-button-large" text="Play Mode" textAlignment="CENTER" />
-            		<Button fx:id="deckBuilderButton" mnemonicParsing="false" prefWidth="300.0" prefHeight="350.0" styleClass = "main-button-large" text="Deck Builder" textAlignment="CENTER"  wrapText="true" />
+                   <Button fx:id="playModeButton" mnemonicParsing="false" prefWidth="300.0" layoutY="300" styleClass = "main-button" text="Play" textAlignment="CENTER" />
+                   <Button fx:id="multiplayerButton" mnemonicParsing="false" prefWidth="300.0" layoutY="378" styleClass = "main-button" text="Multiplayer" textAlignment="CENTER" />
+                   <Button fx:id="deckBuilderButton" mnemonicParsing="false" prefWidth="300.0" layoutY="456" styleClass = "main-button" text="Deck Builder" textAlignment="CENTER"  wrapText="true" />
          		</children>
-         	</HBox>
+         	</Group>
             <Group styleClass="hidden">
                <children>
                   <Button fx:id="simulationModeButton" layoutX="422.0" layoutY="313.0" mnemonicParsing="false" prefWidth="200.0" styleClass="main-button" text="Simulation Mode" textAlignment="CENTER" />

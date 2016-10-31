@@ -16,7 +16,7 @@ HighestAttributeFilter
 Filters entities based on which entity has the highest value of the attribute given.
 
 InDeckFilter
-Filters based on whether it belongs to the player's deck.
+Filters based on whether it belongs to the gamePlayer's deck.
 
 RaceFilter
 Filters based on the Race given.

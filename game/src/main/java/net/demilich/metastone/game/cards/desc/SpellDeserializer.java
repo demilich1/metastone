@@ -3,17 +3,13 @@ package net.demilich.metastone.game.cards.desc;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
+import com.google.gson.*;
 
 import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
-public class SpellDeserializer implements JsonDeserializer<SpellDesc> {
+public class SpellDeserializer implements JsonDeserializer<SpellDesc>, JsonSerializer<SpellDesc> {
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -80,4 +76,20 @@ public class SpellDeserializer implements JsonDeserializer<SpellDesc> {
 		spellArgs.put(spellArg, value);
 	}
 
+	@Override
+	public JsonElement serialize(SpellDesc src, Type type, JsonSerializationContext context) {
+		JsonObject result = new JsonObject();
+		result.add("class", new JsonPrimitive(src.getSpellClass().getSimpleName()));
+		for (SpellArg spellArg : SpellArg.values()) {
+			if (spellArg == SpellArg.CLASS) {
+				continue;
+			}
+			if (!src.contains(spellArg)) {
+				continue;
+			}
+			String argName = ParseUtils.toCamelCase(spellArg.toString());
+			result.add(argName, new JsonPrimitive(src.get(spellArg).toString()));
+		}
+		return result;
+	}
 }

@@ -1,9 +1,11 @@
 package net.demilich.metastone.game.spells.desc.trigger;
 
+import java.io.Serializable;
+
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 
-public class TriggerDesc {
+public class TriggerDesc implements Serializable {
 
 	public EventTriggerDesc eventTrigger;
 	public SpellDesc spell;

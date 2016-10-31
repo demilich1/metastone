@@ -3,17 +3,13 @@ package net.demilich.metastone.game.cards.desc;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
+import com.google.gson.*;
 
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
 import net.demilich.metastone.game.spells.desc.manamodifier.CardCostModifierArg;
 import net.demilich.metastone.game.spells.desc.manamodifier.CardCostModifierDesc;
 
-public class CardCostModifierDeserializer implements JsonDeserializer<CardCostModifierDesc> {
+public class CardCostModifierDeserializer implements JsonDeserializer<CardCostModifierDesc>, JsonSerializer<CardCostModifierDesc> {
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -56,4 +52,20 @@ public class CardCostModifierDeserializer implements JsonDeserializer<CardCostMo
 		arguments.put(arg, value);
 	}
 
+	@Override
+	public JsonElement serialize(CardCostModifierDesc src, Type typeOfSrc, JsonSerializationContext context) {
+		JsonObject result = new JsonObject();
+		result.add("class", new JsonPrimitive(src.getManaModifierClass().getSimpleName()));
+		for (CardCostModifierArg spellArg : CardCostModifierArg.values()) {
+			if (spellArg == CardCostModifierArg.CLASS) {
+				continue;
+			}
+			if (!src.contains(spellArg)) {
+				continue;
+			}
+			String argName = ParseUtils.toCamelCase(spellArg.toString());
+			result.add(argName, new JsonPrimitive(src.get(spellArg).toString()));
+		}
+		return result;
+	}
 }

@@ -20,8 +20,12 @@ public class DiscoverAction extends GameAction {
 		return discover;
 	}
 
-	private final SpellDesc spell;
+	private SpellDesc spell;
 	private Condition condition;
+
+	private DiscoverAction() {
+		setActionType(ActionType.DISCOVER);
+	}
 
 	protected DiscoverAction(SpellDesc spell) {
 		this.spell = spell;

@@ -1,12 +1,14 @@
 package net.demilich.metastone.game.spells.trigger;
 
+import java.io.Serializable;
+
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.targeting.EntityReference;
 
-public interface IGameEventListener {
+public interface IGameEventListener extends Serializable{
 
 	public IGameEventListener clone();
 	

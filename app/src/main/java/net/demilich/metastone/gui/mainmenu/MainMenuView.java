@@ -24,6 +24,9 @@ public class MainMenuView extends BorderPane {
 	private Button playModeButton;
 
 	@FXML
+	private Button multiplayerButton;
+
+	@FXML
 	private Button simulationModeButton;
 
 	@FXML
@@ -57,6 +60,8 @@ public class MainMenuView extends BorderPane {
 
 		playModeButton.setOnAction(event -> NotificationProxy.sendNotification(GameNotification.PLAY_MODE_SELECTED));
 
+		multiplayerButton.setOnAction(event -> NotificationProxy.sendNotification(GameNotification.MULTIPLAYER_MODE_SELECTED));
+
 		simulationModeButton
 				.setOnAction(event -> NotificationProxy.sendNotification(GameNotification.SIMULATION_MODE_SELECTED));
 
@@ -72,14 +77,7 @@ public class MainMenuView extends BorderPane {
 			trainingModeButton.setManaged(false);
 			battleOfDecksButton.setVisible(false);
 			battleOfDecksButton.setManaged(false);
-			
-		}
-		
-		if (MetaStone.procedural){
-			simulationModeButton.setVisible(false);
-			simulationModeButton.setManaged(false);
-			sandboxModeButton.setVisible(false);
-			sandboxModeButton.setVisible(false);
+
 		}
 
 		versionLabel.setText(BuildConfig.VERSION + (BuildConfig.DEV_BUILD ? " (Dev build)" : ""));

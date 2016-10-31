@@ -2,7 +2,9 @@ package net.demilich.metastone.game.spells.desc;
 
 import net.demilich.metastone.game.spells.Spell;
 
-public class SpellFactory {
+import java.io.Serializable;
+
+public class SpellFactory implements Serializable {
 
 	public Spell getSpell(SpellDesc spellDesc) {
 		Class<? extends Spell> spellClass = spellDesc.getSpellClass();

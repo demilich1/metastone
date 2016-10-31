@@ -31,7 +31,10 @@ public class MainMenuMediator extends Mediator<GameNotification> {
 			getFacade().registerMediator(new DeckBuilderMediator());
 			break;
 		case PLAY_MODE_SELECTED:
-			getFacade().registerMediator(new PlayModeConfigMediator());
+			getFacade().registerMediator(new PlayModeConfigMediator(false));
+			break;
+		case MULTIPLAYER_MODE_SELECTED:
+			getFacade().registerMediator(new PlayModeConfigMediator(true));
 			break;
 		case SIMULATION_MODE_SELECTED:
 			getFacade().registerMediator(new SimulationMediator());
@@ -56,6 +59,7 @@ public class MainMenuMediator extends Mediator<GameNotification> {
 		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
 		notificationInterests.add(GameNotification.DECK_BUILDER_SELECTED);
 		notificationInterests.add(GameNotification.PLAY_MODE_SELECTED);
+		notificationInterests.add(GameNotification.MULTIPLAYER_MODE_SELECTED);
 		notificationInterests.add(GameNotification.SIMULATION_MODE_SELECTED);
 		notificationInterests.add(GameNotification.SANDBOX_MODE_SELECTED);
 		notificationInterests.add(GameNotification.TRAINING_MODE_SELECTED);

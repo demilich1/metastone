@@ -8,6 +8,9 @@ public class GameConfig {
 	private PlayerConfig playerConfig1;
 	private PlayerConfig playerConfig2;
 	private DeckFormat deckFormat;
+	private boolean isMultiplayer;
+	private String host;
+	private int port;
 
 	public DeckFormat getDeckFormat() {
 		return deckFormat;
@@ -41,4 +44,27 @@ public class GameConfig {
 		this.playerConfig2 = playerConfig2;
 	}
 
+	public String getHost() {
+		return host;
+	}
+
+	public void setHost(String host) {
+		this.host = host;
+	}
+
+	public int getPort() {
+		return port;
+	}
+
+	public void setPort(int port) {
+		this.port = port;
+	}
+
+	public boolean isMultiplayer() {
+		return isMultiplayer;
+	}
+
+	public void setMultiplayer(boolean multiplayer) {
+		isMultiplayer = multiplayer;
+	}
 }

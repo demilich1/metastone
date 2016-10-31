@@ -138,7 +138,7 @@ public class ChooseClassView extends BorderPane implements EventHandler<ActionEv
 
 	private void onArbitraryBoxChanged(ObservableValue<? extends Boolean> ov, Boolean oldValue, Boolean newValue) {
 		arbitrary = newValue;
-//		deckProxy = (DeckProxy) getFacade().retrieveProxy(DeckProxy.NAME);
+//		deckProxy = (DeckProxy) getFacade().retrieveProxy(DeckProxy.SINGLE_PLAYER_NAME);
 //		deckProxy.setActiveDeckValidator(new ArbitraryDeckValidator());
 	}
 

@@ -1,8 +1,10 @@
 package net.demilich.metastone.game.targeting;
 
+import java.io.Serializable;
+
 import net.demilich.metastone.game.entities.Entity;
 
-public class EntityReference {
+public class EntityReference implements Serializable {
 	public static final EntityReference NONE = new EntityReference(-1);
 	public static final EntityReference ENEMY_CHARACTERS = new EntityReference(-2);
 	public static final EntityReference ENEMY_MINIONS = new EntityReference(-3);
@@ -45,10 +47,13 @@ public class EntityReference {
 		return new EntityReference(entity.getId());
 	}
 
-	private final int key;
+	private int id;
+
+	public EntityReference() {
+	}
 
 	public EntityReference(int key) {
-		this.key = key;
+		this.id = key;
 	}
 
 	@Override
@@ -61,20 +66,24 @@ public class EntityReference {
 	}
 
 	public int getId() {
-		return key;
+		return id;
+	}
+
+	public void setId(int key) {
+		this.id = key;
 	}
 
 	@Override
 	public int hashCode() {
-		return new Integer(key).hashCode();
+		return new Integer(id).hashCode();
 	}
 
 	public boolean isTargetGroup() {
-		return key < 0;
+		return id < 0;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("[EntityReference id:%d]", key);
+		return String.format("[EntityReference id:%d]", id);
 	}
 }

@@ -94,6 +94,12 @@ public class SpellUtils {
 	}
 	
 	public static DiscoverAction getDiscover(GameContext context, Player player, SpellDesc desc, CardCollection cards) {
+		List<GameAction> discoverActions = getDiscoverActionsForDiscoverSpell(desc, cards);
+		
+		return (DiscoverAction) player.getBehaviour().requestAction(context, player, discoverActions);
+	}
+
+	public static List<GameAction> getDiscoverActionsForDiscoverSpell(SpellDesc desc, CardCollection cards) {
 		SpellDesc spell = (SpellDesc) desc.get(SpellArg.SPELL);
 		List<GameAction> discoverActions = new ArrayList<>();
 		for (Card card : cards) {
@@ -102,8 +108,7 @@ public class SpellUtils {
 			discover.setActionSuffix(card.getName());
 			discoverActions.add(discover);
 		}
-		
-		return (DiscoverAction) player.getBehaviour().requestAction(context, player, discoverActions);
+		return discoverActions;
 	}
 
 	public static Card getRandomCard(CardCollection source, Predicate<Card> filter) {

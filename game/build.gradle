@@ -2,7 +2,6 @@ dependencies {
     compile project(':shared')
     compile group: 'com.google.code.gson', name: 'gson', version: '2.3.1'
     compile group: 'commons-io', name: 'commons-io', version: '2.4'
-
     testCompile project(':cards')
     testCompile group: 'org.testng', name: 'testng', version: '6.+'
 }

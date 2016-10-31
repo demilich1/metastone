@@ -59,7 +59,8 @@ public class ApplicationMediator extends Mediator<GameNotification> {
 	
 	private void removeOtherViews() {
 		getFacade().removeMediator(PlayModeMediator.NAME);
-		getFacade().removeMediator(PlayModeConfigMediator.NAME);
+		getFacade().removeMediator(PlayModeConfigMediator.SINGLE_PLAYER_NAME);
+		getFacade().removeMediator(PlayModeConfigMediator.MULTIPLAYER_NAME);
 		getFacade().removeMediator(DeckBuilderMediator.NAME);
 		getFacade().removeMediator(SimulationMediator.NAME);
 		getFacade().removeMediator(TrainingModeMediator.NAME);
