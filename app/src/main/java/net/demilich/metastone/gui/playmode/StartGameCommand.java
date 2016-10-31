@@ -5,6 +5,7 @@ import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.ProceduralPlayer;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.gameconfig.GameConfig;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
@@ -23,16 +24,20 @@ public class StartGameCommand extends SimpleCommand<GameNotification> {
 		PlayerConfig playerConfig1 = gameConfig.getPlayerConfig1();
 		PlayerConfig playerConfig2 = gameConfig.getPlayerConfig2();
 
-		Player player1 = new Player(playerConfig1);
-		Player player2 = new Player(playerConfig2);
+		Player player1 = null;
+		Player player2 = null;
 
 		DeckFormat deckFormat = gameConfig.getDeckFormat();
 
 		GameContext newGame;
 
 		if (gameConfig.isMultiplayer()) {
-			newGame = new RemoteGameContext(player1, player2, new GameLogic(), deckFormat, gameConfig.getHost(), gameConfig.getPort());
+			player1 = new ProceduralPlayer(playerConfig1);
+			player2 = new ProceduralPlayer(playerConfig1);
+			newGame = new RemoteGameContext(player1, player2, new ProceduralGameLogic(), deckFormat, gameConfig.getHost(), gameConfig.getPort());
 		} else {
+			player1 = new Player(playerConfig1);
+			player2 = new Player(playerConfig2);
 			newGame = new GameContextVisualizable(player1, player2, new GameLogic(), deckFormat);
 		}
 
