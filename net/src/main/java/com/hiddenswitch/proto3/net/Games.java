@@ -9,6 +9,7 @@ import com.hiddenswitch.proto3.net.amazon.MatchmakingRequestMessage;
 import com.hiddenswitch.proto3.net.models.*;
 import com.hiddenswitch.proto3.net.util.Serialization;
 import com.hiddenswitch.proto3.server.GameSession;
+import net.demilich.metastone.game.decks.Bench;
 import net.demilich.metastone.game.decks.Deck;
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -51,7 +52,7 @@ public class Games extends Service {
 			}
 
 			// Create a player record
-			Deck deck = matchmakingRequest.deck;
+			Bench deck = matchmakingRequest.deck;
 			GamePlayer thisGamePlayer = createPlayer(userId, deck);
 			game.setNullPlayer(thisGamePlayer);
 			gameId = save(gameId, game);
@@ -131,7 +132,7 @@ public class Games extends Service {
 		return retry;
 	}
 
-	private GamePlayer createPlayer(String userId, Deck deck) {
+	private GamePlayer createPlayer(String userId, Bench deck) {
 		GamePlayer thisGamePlayer = new GamePlayer();
 		thisGamePlayer.setUserId(userId);
 		thisGamePlayer.setDeck(deck);

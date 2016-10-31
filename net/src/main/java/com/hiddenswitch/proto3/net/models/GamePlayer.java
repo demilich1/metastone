@@ -4,6 +4,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import com.hiddenswitch.proto3.net.behaviour.NullBehaviour;
 import com.hiddenswitch.proto3.server.PregamePlayerConfiguration;
 import net.demilich.metastone.game.cards.NullHeroCard;
+import net.demilich.metastone.game.decks.Bench;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
 
@@ -12,7 +13,7 @@ public class GamePlayer {
 	private String userId;
 	private PlayerProfile profile;
 	private ChannelType channelType = ChannelType.SQS;
-	private Deck deck;
+	private Bench deck;
 
 	public GamePlayer() {
 	}
@@ -63,12 +64,12 @@ public class GamePlayer {
 		this.channelType = channelType;
 	}
 
-	@DynamoDBTypeConverted(converter = DeckConverter.class)
-	public Deck getDeck() {
+	@DynamoDBTypeConverted(converter = BenchConverter.class)
+	public Bench getDeck() {
 		return deck;
 	}
 
-	public void setDeck(Deck deck) {
+	public void setDeck(Bench deck) {
 		this.deck = deck;
 	}
 }

@@ -7,6 +7,7 @@ import com.hiddenswitch.proto3.net.models.CreateAccountResponse;
 import com.hiddenswitch.proto3.net.models.Game;
 import com.hiddenswitch.proto3.net.models.MatchmakingRequest;
 import com.hiddenswitch.proto3.net.models.MatchmakingResponse;
+import net.demilich.metastone.game.decks.Bench;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import org.testng.annotations.Test;
@@ -26,7 +27,7 @@ public class GamesTest extends ServiceTestBase<Games> {
 		// Assume player 1's identity
 		service.getAccounts().setUserId(player1.userId);
 		MatchmakingRequest request1 = new MatchmakingRequest();
-		request1.deck = new Deck(HeroClass.MAGE);
+		request1.deck = new Bench(HeroClass.MAGE);
 		request1.retry = null;
 		MatchmakingResponse response1 = service.matchmakeAndJoin(request1);
 		assertNotNull(response1.getRetry());
@@ -37,7 +38,7 @@ public class GamesTest extends ServiceTestBase<Games> {
 		// Assume player 2's identity
 		service.getAccounts().setUserId(player2.userId);
 		MatchmakingRequest request2 = new MatchmakingRequest();
-		request2.deck = new Deck(HeroClass.WARRIOR);
+		request2.deck = new Bench(HeroClass.WARRIOR);
 		request2.retry = null;
 		MatchmakingResponse response2 = service.matchmakeAndJoin(request2);
 		assertNull(response2.getRetry());
@@ -46,7 +47,7 @@ public class GamesTest extends ServiceTestBase<Games> {
 		// Assume player 1's identity, poll for matchmaking again and receive the new game information
 		service.getAccounts().setUserId(player1.userId);
 		request1 = new MatchmakingRequest();
-		request1.deck = new Deck(HeroClass.MAGE);
+		request1.deck = new Bench(HeroClass.MAGE);
 		request1.retry = response1.getRetry();
 		response1 = service.matchmakeAndJoin(request1);
 		assertNull(response1.getRetry());
