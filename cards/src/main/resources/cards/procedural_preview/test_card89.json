@@ -1,1 +1,17 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "89M", "heroClass": "ANY", "description": " Battlecry: Summon two 1/1 Whelps for your opponent.", "fileFormatVersion": 1, "rarity": "LEGENDARY", "baseHp": 2.0, "race": "NONE", "baseManaCost": 2.0, "attributes": {"CHARGE": true, "BATTLECRY": true}, "battlecry": {"spell": {"targetPlayer": "OPPONENT", "cards": ["token_whelp", "token_whelp"], "class": "SummonSpell"}}, "type": "MINION", "id": "89M", "baseAttack": 3.0}
+{
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Walking Deathsnake",
+  "description": "Taunt. ",
+  "baseHp": 7.0,
+  "baseManaCost": 9.0,
+  "type": "MINION",
+  "heroClass": "ANY",
+  "fileFormatVersion": 1,
+  "collectible": true,
+  "rarity": "LEGENDARY",
+  "attributes": {
+    "TAUNT": true
+  },
+  "id": "Walkingit Snake",
+  "baseAttack": 8.0
+}

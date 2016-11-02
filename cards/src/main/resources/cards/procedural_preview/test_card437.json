@@ -1,1 +1,0 @@
-{"collectible": true, "cardCostModifier": {"targetPlayer": "BOTH", "cardType": "MINION", "class": "CardCostModifier", "value": 1}, "set": "PROCEDURAL_PREVIEW", "name": "437U", "heroClass": "ANY", "description": "ALL minions cost (1) more.", "fileFormatVersion": 1, "rarity": "RARE", "baseHp": 6.0, "baseManaCost": 5.0, "type": "MINION", "id": "437U", "baseAttack": 5.0}

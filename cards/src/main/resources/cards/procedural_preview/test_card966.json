@@ -1,1 +1,0 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "966P", "heroClass": "ANY", "description": "Battlecry: Draw a card.", "fileFormatVersion": 1, "rarity": "FREE", "baseHp": 2.0, "baseManaCost": 1.0, "attributes": {"BATTLECRY": true}, "battlecry": {"spell": {"class": "DrawCardSpell", "value": 1}}, "type": "MINION", "id": "966P", "baseAttack": 1.0}

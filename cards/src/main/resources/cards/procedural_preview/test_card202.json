@@ -1,1 +1,17 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "202B", "heroClass": "ANY", "description": "Deathrattle: Draw a card.", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 2.0, "deathrattle": {"class": "DrawCardSpell", "value": 1}, "baseManaCost": 4.0, "attributes": {"CHARGE": true, "DEATHRATTLES": true}, "type": "MINION", "id": "202B", "baseAttack": 7.0}
+{
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Eletter",
+  "description": "Overload (5)",
+  "baseHp": 8.0,
+  "type": "MINION",
+  "rarity": "LEGENDARY",
+  "baseManaCost": 7.0,
+  "heroClass": "ANY",
+  "fileFormatVersion": 1,
+  "collectible": true,
+  "attributes": {
+    "OVERLOAD": 5.0
+  },
+  "id": "Eletter",
+  "baseAttack": 12.0
+}

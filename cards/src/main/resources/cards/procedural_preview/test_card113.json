@@ -1,1 +1,0 @@
-{"collectible": true, "aura": {"attackBonus": 1, "class": "BuffAura", "target": "OTHER_FRIENDLY_MINIONS"}, "name": "113C", "heroClass": "ANY", "description": "Your other minions have +1 Attack.", "fileFormatVersion": 1, "rarity": "FREE", "baseHp": 4.0, "set": "PROCEDURAL_PREVIEW", "baseManaCost": 2.0, "type": "MINION", "id": "113C", "baseAttack": 1.0}

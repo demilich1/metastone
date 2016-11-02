@@ -1,1 +1,32 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "90A", "heroClass": "DRUID", "description": "Choose One - Draw a card; or Restore 5 Health.", "fileFormatVersion": 1, "rarity": "EPIC", "baseHp": 3.0, "bothOptions": {"spell": {"class": "MetaSpell", "spells": [{"class": "DrawCardSpell", "value": 1}, {"class": "HealSpell", "value": 5}]}, "targetSelection": "ANY", "description": "Draw a card and heal for 5"}, "options": [{"spell": {"class": "DrawCardSpell", "value": 1}, "description": "Draw a card"}, {"spell": {"class": "HealSpell", "value": 5}, "targetSelection": "ANY", "description": "Heal for 5"}], "baseManaCost": 1.0, "attributes": {"WINDFURY": true}, "type": "MINION", "id": "90A", "baseAttack": 0.0}
+{
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Trath",
+  "heroClass": "ANY",
+  "fileFormatVersion": 1,
+  "collectible": true,
+  "description": "(1) Overload. At the end of your turn, restore 5 Health to a damaged friendly character.",
+  "rarity": "LEGENDARY",
+  "baseHp": 3.0,
+  "trigger": {
+    "eventTrigger": {
+      "targetPlayer": "SELF",
+      "class": "TurnEndTrigger"
+    },
+    "spell": {
+      "filter": {
+        "class": "DamagedFilter"
+      },
+      "randomTarget": true,
+      "class": "HealSpell",
+      "value": 5,
+      "target": "FRIENDLY_CHARACTERS"
+    }
+  },
+  "baseManaCost": 4.0,
+  "attributes": {
+    "OVERLOAD": 1.0
+  },
+  "type": "MINION",
+  "id": "Trath",
+  "baseAttack": 6.0
+}

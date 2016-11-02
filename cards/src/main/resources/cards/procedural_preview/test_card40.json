@@ -1,1 +1,28 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "40P", "heroClass": "ROGUE", "trigger": {"eventTrigger": {"targetPlayer": "SELF", "class": "WeaponEquippedTrigger"}, "spell": {"attackBonus": 1, "class": "BuffWeaponSpell", "target": "FRIENDLY_WEAPON"}}, "description": "Whenever you equip a weapon, give it +1 Attack.", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 1.0, "race": "PIRATE", "baseManaCost": 3.0, "attributes": {"OVERLOAD": 1.0}, "type": "MINION", "id": "40P", "baseAttack": 6.0}
+{
+  "collectible": true,
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Happyfeeter",
+  "heroClass": "ANY",
+  "trigger": {
+    "eventTrigger": {
+      "targetPlayer": "OPPONENT",
+      "class": "CardPlayedTrigger"
+    },
+    "spell": {
+      "class": "DiscardCardsFromDeckSpell",
+      "value": 1
+    }
+  },
+  "description": "Whenever your opponent plays a card, remove one card from the top of your deck.",
+  "fileFormatVersion": 1,
+  "rarity": "EPIC",
+  "baseHp": 2.0,
+  "race": "MECH",
+  "baseManaCost": 3.0,
+  "attributes": {
+    "OVERLOAD": 1.0
+  },
+  "type": "MINION",
+  "id": "Happy",
+  "baseAttack": 6.0
+}

@@ -1,1 +1,0 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "756U", "heroClass": "ANY", "description": "Spell Damage +2", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 4.0, "baseManaCost": 4.0, "attributes": {"SPELL_DAMAGE": 2}, "type": "MINION", "id": "756U", "baseAttack": 5.0}

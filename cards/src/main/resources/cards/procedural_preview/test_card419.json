@@ -1,1 +1,0 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "419L", "heroClass": "ANY", "description": "Your minions trigger their Deathrattles twice.", "fileFormatVersion": 1, "rarity": "LEGENDARY", "baseHp": 2.0, "baseManaCost": 2.0, "attributes": {"DOUBLE_DEATHRATTLES": true}, "type": "MINION", "id": "419L", "baseAttack": 3.0}

@@ -1,1 +1,28 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "176A", "heroClass": "ANY", "description": "Battlecry: Summon 1/1 Whelps until your side of the battlefield is full.", "fileFormatVersion": 1, "rarity": "LEGENDARY", "baseHp": 4.0, "race": "DRAGON", "baseManaCost": 3.0, "attributes": {"BATTLECRY": true}, "battlecry": {"spell": {"class": "MetaSpell", "spells": [{"boardPositionRelative": "RIGHT", "class": "SummonSpell", "card": "token_whelp"}, {"boardPositionRelative": "LEFT", "class": "SummonSpell", "card": "token_whelp"}, {"boardPositionRelative": "RIGHT", "class": "SummonSpell", "card": "token_whelp"}, {"boardPositionRelative": "LEFT", "class": "SummonSpell", "card": "token_whelp"}, {"boardPositionRelative": "RIGHT", "class": "SummonSpell", "card": "token_whelp"}, {"boardPositionRelative": "LEFT", "class": "SummonSpell", "card": "token_whelp"}]}}, "type": "MINION", "id": "176A", "baseAttack": 3.0}
+{
+  "deathrattle": {
+    "attackBonus": 2,
+    "class": "BuffWeaponSpell",
+    "target": "FRIENDLY_WEAPON"
+  },
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Flurry",
+  "heroClass": "ROGUE",
+  "description": "(2) Overload. Divine Shield. Windfury. Charge. Taunt. Deathrattle: Give your weapon +2 Attack.",
+  "fileFormatVersion": 1,
+  "collectible": true,
+  "rarity": "LEGENDARY",
+  "baseHp": 6.0,
+  "race": "PIRATE",
+  "baseManaCost": 8.0,
+  "attributes": {
+    "TAUNT": true,
+    "WINDFURY": true,
+    "CHARGE": true,
+    "OVERLOAD": 2.0,
+    "DIVINE_SHIELD": true,
+    "DEATHRATTLES": true
+  },
+  "type": "MINION",
+  "id": "Flurry",
+  "baseAttack": 3.0
+}

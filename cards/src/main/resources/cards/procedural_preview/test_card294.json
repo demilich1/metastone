@@ -1,1 +1,0 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "294N", "heroClass": "ANY", "description": "Battlecry: Deal 1 damage.", "fileFormatVersion": 1, "rarity": "FREE", "baseHp": 4.0, "baseManaCost": 4.0, "attributes": {"BATTLECRY": true}, "battlecry": {"spell": {"class": "DamageSpell", "value": 1}, "targetSelection": "ANY"}, "type": "MINION", "id": "294N", "baseAttack": 5.0}

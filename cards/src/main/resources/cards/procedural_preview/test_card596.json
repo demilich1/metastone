@@ -1,1 +1,0 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "596T", "heroClass": "ANY", "description": "Battlecry: Deal 1 damage.", "fileFormatVersion": 1, "rarity": "FREE", "baseHp": 3.0, "baseManaCost": 3.0, "attributes": {"BATTLECRY": true}, "battlecry": {"spell": {"class": "DamageSpell", "value": 1}, "targetSelection": "ANY"}, "type": "MINION", "id": "596T", "baseAttack": 4.0}

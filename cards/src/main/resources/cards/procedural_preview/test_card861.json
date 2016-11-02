@@ -1,1 +1,0 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "861K", "heroClass": "ANY", "description": "Deathrattle: Draw a card.", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 4.0, "deathrattle": {"class": "DrawCardSpell", "value": 1}, "baseManaCost": 4.0, "attributes": {"DEATHRATTLES": true}, "type": "MINION", "id": "861K", "baseAttack": 5.0}

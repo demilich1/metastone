@@ -1,1 +1,19 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "115B", "heroClass": "ANY", "description": "Battlecry: Destroy a Beast.", "fileFormatVersion": 1, "rarity": "LEGENDARY", "baseHp": 3.0, "baseManaCost": 1.0, "attributes": {"BATTLECRY": true}, "battlecry": {"spell": {"filter": {"race": "BEAST", "class": "RaceFilter"}, "class": "DestroySpell"}, "targetSelection": "MINIONS"}, "type": "MINION", "id": "115B", "baseAttack": 1.0}
+{
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "King Garnos",
+  "description": "Charge. Stealth. Taunt.",
+  "baseHp": 2.0,
+  "type": "MINION",
+  "rarity": "LEGENDARY",
+  "heroClass": "ANY",
+  "fileFormatVersion": 1,
+  "collectible": true,
+  "baseManaCost": 9.0,
+  "attributes": {
+    "TAUNT": true,
+    "CHARGE": true,
+    "STEALTH": true
+  },
+  "id": "King Garnos",
+  "baseAttack": 12.0
+}
