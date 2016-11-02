@@ -1,1 +1,30 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "Mink", "heroClass": "ANY", "description": "Battlecry: If you have at least 4 other minions, deal 4 damage.", "fileFormatVersion": 1, "rarity": "LEGENDARY", "baseHp": 4.0, "baseManaCost": 5.0, "attributes": {"BATTLECRY": true}, "battlecry": {"spell": {"class": "DamageSpell", "value": 4}, "targetSelection": "ANY", "condition": {"targetPlayer": "SELF", "operation": "GREATER", "class": "MinionCountCondition", "value": 4}}, "type": "MINION", "id": "Mink", "baseAttack": 5.0}
+{
+  "collectible": true,
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Cherry Mink Coat",
+  "heroClass": "ANY",
+  "description": "Battlecry: If you have at least 4 other minions, deal 4 damage.",
+  "fileFormatVersion": 1,
+  "rarity": "LEGENDARY",
+  "baseHp": 4.0,
+  "baseManaCost": 5.0,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "battlecry": {
+    "spell": {
+      "class": "DamageSpell",
+      "value": 4
+    },
+    "targetSelection": "ANY",
+    "condition": {
+      "targetPlayer": "SELF",
+      "operation": "GREATER",
+      "class": "MinionCountCondition",
+      "value": 4
+    }
+  },
+  "type": "MINION",
+  "id": "Cherry Mink Coat",
+  "baseAttack": 5.0
+}

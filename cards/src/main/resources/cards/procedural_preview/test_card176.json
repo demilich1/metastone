@@ -5,7 +5,7 @@
     "target": "FRIENDLY_WEAPON"
   },
   "set": "PROCEDURAL_PREVIEW",
-  "name": "Flurry",
+  "name": "Sad Flurry",
   "heroClass": "ROGUE",
   "description": "(2) Overload. Divine Shield. Windfury. Charge. Taunt. Deathrattle: Give your weapon +2 Attack.",
   "fileFormatVersion": 1,
@@ -23,6 +23,6 @@
     "DEATHRATTLES": true
   },
   "type": "MINION",
-  "id": "Flurry",
+  "id": "Sad Flurry",
   "baseAttack": 3.0
 }

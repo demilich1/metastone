@@ -1,1 +1,23 @@
-{"deathrattle": {"class": "HealSpell", "value": 8, "target": "ENEMY_HERO"}, "set": "PROCEDURAL_PREVIEW", "name": "Raver", "heroClass": "ANY", "description": "Deathrattle: Restore 8 Health to the enemy hero.", "fileFormatVersion": 1, "collectible": true, "rarity": "RARE", "baseHp": 6.0, "race": "MECH", "baseManaCost": 6.0, "attributes": {"DEATHRATTLES": true}, "type": "MINION", "id": "Raver", "baseAttack": 6.0}
+{
+  "deathrattle": {
+    "class": "HealSpell",
+    "value": 8,
+    "target": "ENEMY_HERO"
+  },
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Raver Reaver",
+  "heroClass": "ANY",
+  "description": "Deathrattle: Restore 8 Health to the enemy hero.",
+  "fileFormatVersion": 1,
+  "collectible": true,
+  "rarity": "RARE",
+  "baseHp": 6.0,
+  "race": "MECH",
+  "baseManaCost": 6.0,
+  "attributes": {
+    "DEATHRATTLES": true
+  },
+  "type": "MINION",
+  "id": "Raver3",
+  "baseAttack": 6.0
+}

@@ -1,1 +1,26 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "Gartor", "heroClass": "ANY", "description": "Battlecry: Summon a 1/1 Ooze with Taunt.", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 4.0, "race": "MURLOC", "baseManaCost": 4.0, "attributes": {"BATTLECRY": true}, "battlecry": {"spell": {"targetPlayer": "SELF", "boardPositionRelative": "RIGHT", "class": "SummonSpell", "card": "token_ooze"}}, "type": "MINION", "id": "Gartor", "baseAttack": 4.0}
+{
+  "collectible": true,
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Gartorcrafter",
+  "heroClass": "ANY",
+  "description": "Battlecry: Summon a 1/1 Ooze with Taunt.",
+  "fileFormatVersion": 1,
+  "rarity": "COMMON",
+  "baseHp": 4.0,
+  "race": "MURLOC",
+  "baseManaCost": 4.0,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "battlecry": {
+    "spell": {
+      "targetPlayer": "SELF",
+      "boardPositionRelative": "RIGHT",
+      "class": "SummonSpell",
+      "card": "token_ooze"
+    }
+  },
+  "type": "MINION",
+  "id": "Gartorcrafter",
+  "baseAttack": 4.0
+}

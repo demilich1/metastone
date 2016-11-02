@@ -1,1 +1,27 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "Mink", "heroClass": "MAGE", "description": "Your hero can only take 1 damage at a time.", "fileFormatVersion": 1, "rarity": "RARE", "baseHp": 2.0, "trigger": {"eventTrigger": {"targetPlayer": "SELF", "targetEntityType": "HERO", "sourcePlayer": "BOTH", "class": "PreDamageTrigger"}, "spell": {"operation": "SET", "class": "ModifyDamageSpell", "value": 1}}, "baseManaCost": 5.0, "type": "MINION", "id": "Mink", "baseAttack": 6.0}
+{
+  "collectible": true,
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Slightly Protective Mink",
+  "heroClass": "ANY",
+  "description": "All attacks deal 2 damage to your hero.",
+  "fileFormatVersion": 1,
+  "rarity": "RARE",
+  "baseHp": 4.0,
+  "trigger": {
+    "eventTrigger": {
+      "targetPlayer": "SELF",
+      "targetEntityType": "HERO",
+      "sourcePlayer": "BOTH",
+      "class": "PreDamageTrigger"
+    },
+    "spell": {
+      "operation": "SET",
+      "class": "ModifyDamageSpell",
+      "value": 2
+    }
+  },
+  "baseManaCost": 3.0,
+  "type": "MINION",
+  "id": "Highly Protective Mink",
+  "baseAttack": 2.0
+}

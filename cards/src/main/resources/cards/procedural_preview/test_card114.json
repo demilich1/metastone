@@ -1,1 +1,32 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "Volett", "heroClass": "ANY", "description": "At the start of your opponent's turn, they have a 50% chance to draw an extra card.", "fileFormatVersion": 1, "rarity": "LEGENDARY", "baseHp": 2.0, "trigger": {"eventTrigger": {"targetPlayer": "OPPONENT", "class": "TurnStartTrigger"}, "spell": {"targetPlayer": "OPPONENT", "class": "DrawCardSpell", "value": {"ifFalse": 0, "class": "ConditionalValueProvider", "condition": {"class": "RandomCondition"}, "ifTrue": 1}}}, "baseManaCost": 3.0, "type": "MINION", "id": "Volett", "baseAttack": 3.0}
+{
+  "collectible": true,
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Volettile",
+  "heroClass": "ANY",
+  "description": "At the start of your opponent's turn, they have a 50% chance to draw an extra card.",
+  "fileFormatVersion": 1,
+  "rarity": "LEGENDARY",
+  "baseHp": 2.0,
+  "trigger": {
+    "eventTrigger": {
+      "targetPlayer": "OPPONENT",
+      "class": "TurnStartTrigger"
+    },
+    "spell": {
+      "targetPlayer": "OPPONENT",
+      "class": "DrawCardSpell",
+      "value": {
+        "ifFalse": 0,
+        "class": "ConditionalValueProvider",
+        "condition": {
+          "class": "RandomCondition"
+        },
+        "ifTrue": 1
+      }
+    }
+  },
+  "baseManaCost": 3.0,
+  "type": "MINION",
+  "id": "Volettile",
+  "baseAttack": 3.0
+}

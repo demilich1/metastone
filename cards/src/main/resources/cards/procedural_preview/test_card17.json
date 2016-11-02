@@ -1,1 +1,25 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "Raven", "heroClass": "WARRIOR", "description": "When you draw this, deal 1 damage to your minions.", "fileFormatVersion": 1, "rarity": "EPIC", "baseHp": 6.0, "baseManaCost": 4.0, "passiveTrigger": {"eventTrigger": {"class": "CardDrawnTrigger", "hostTargetType": "IGNORE_OTHER_TARGETS"}, "spell": {"class": "DamageSpell", "value": 1, "target": "FRIENDLY_MINIONS"}}, "type": "MINION", "id": "Raven", "baseAttack": 5.0}
+{
+  "collectible": true,
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Ravenclaw Harmer",
+  "heroClass": "WARRIOR",
+  "description": "When you draw this, deal 2 damage to your minions.",
+  "fileFormatVersion": 1,
+  "rarity": "EPIC",
+  "baseHp": 6.0,
+  "baseManaCost": 4.0,
+  "passiveTrigger": {
+    "eventTrigger": {
+      "class": "CardDrawnTrigger",
+      "hostTargetType": "IGNORE_OTHER_TARGETS"
+    },
+    "spell": {
+      "class": "DamageSpell",
+      "value": 2,
+      "target": "FRIENDLY_MINIONS"
+    }
+  },
+  "type": "MINION",
+  "id": "Ravenclaw Harmer",
+  "baseAttack": 6.0
+}

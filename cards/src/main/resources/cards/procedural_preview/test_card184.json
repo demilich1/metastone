@@ -1,1 +1,29 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "Flurry", "heroClass": "PALADIN", "trigger": {"eventTrigger": {"targetPlayer": "SELF", "class": "InspireTrigger"}, "spell": {"cardFilter": {"race": "MURLOC", "class": "CardFilter"}, "boardPositionRelative": "RIGHT", "class": "SummonRandomMinionFilteredSpell"}}, "description": "Inspire: Summon a random Murloc.", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 5.0, "race": "MURLOC", "baseManaCost": 4.0, "type": "MINION", "id": "Flurry", "baseAttack": 3.0}
+{
+  "collectible": true,
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Happy Flurry",
+  "heroClass": "PALADIN",
+  "trigger": {
+    "eventTrigger": {
+      "targetPlayer": "SELF",
+      "class": "InspireTrigger"
+    },
+    "spell": {
+      "cardFilter": {
+        "race": "MURLOC",
+        "class": "CardFilter"
+      },
+      "boardPositionRelative": "RIGHT",
+      "class": "SummonRandomMinionFilteredSpell"
+    }
+  },
+  "description": "Inspire: Summon a random Murloc.",
+  "fileFormatVersion": 1,
+  "rarity": "COMMON",
+  "baseHp": 5.0,
+  "race": "MURLOC",
+  "baseManaCost": 4.0,
+  "type": "MINION",
+  "id": "Happy Flurry",
+  "baseAttack": 3.0
+}

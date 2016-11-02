@@ -1,1 +1,45 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "Raven", "heroClass": "PALADIN", "description": "Taunt. Battlecry: If you're holding a Dragon, summon two 1/1 Whelps.", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 2.0, "baseManaCost": 2.0, "attributes": {"TAUNT": true, "BATTLECRY": true}, "battlecry": {"spell": {"class": "MetaSpell", "spells": [{"boardPositionRelative": "RIGHT", "class": "SummonSpell", "card": "token_whelp"}, {"boardPositionRelative": "LEFT", "class": "SummonSpell", "card": "token_whelp"}]}, "targetSelection": "NONE", "condition": {"race": "DRAGON", "class": "HoldsCardCondition"}}, "type": "MINION", "id": "Raven", "baseAttack": 2.0}
+{
+  "collectible": true,
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Dragonholder Plusser",
+  "heroClass": "PALADIN",
+  "description": "Taunt. Battlecry: If you're holding a Dragon, summon three 1/1 Whelps.",
+  "fileFormatVersion": 1,
+  "rarity": "COMMON",
+  "baseHp": 2.0,
+  "baseManaCost": 2.0,
+  "attributes": {
+    "TAUNT": true,
+    "BATTLECRY": true
+  },
+  "battlecry": {
+    "spell": {
+      "class": "MetaSpell",
+      "spells": [
+        {
+          "boardPositionRelative": "RIGHT",
+          "class": "SummonSpell",
+          "card": "token_whelp"
+        },
+        {
+          "boardPositionRelative": "LEFT",
+          "class": "SummonSpell",
+          "card": "token_whelp"
+        },
+        {
+          "boardPositionRelative": "LEFT",
+          "class": "SummonSpell",
+          "card": "token_whelp"
+        }
+      ]
+    },
+    "targetSelection": "NONE",
+    "condition": {
+      "race": "DRAGON",
+      "class": "HoldsCardCondition"
+    }
+  },
+  "type": "MINION",
+  "id": "Dragonholder Plusser",
+  "baseAttack": 2.0
+}

@@ -1,1 +1,28 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "Battor", "heroClass": "ANY", "description": "Enrage: Windfury and +1 Attack", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 5.0, "trigger": {"eventTrigger": {"class": "EnrageChangedTrigger"}, "spell": {"attribute": "WINDFURY", "attackBonus": 1, "class": "EnrageSpell", "target": "SELF"}}, "baseManaCost": 4.0, "attributes": {"ENRAGABLE": true}, "type": "MINION", "id": "Battor", "baseAttack": 3.0}
+{
+  "collectible": true,
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Violent Baton Wielder",
+  "heroClass": "ANY",
+  "description": "Enrage: Windfury and +1 Attack",
+  "fileFormatVersion": 1,
+  "rarity": "COMMON",
+  "baseHp": 5.0,
+  "trigger": {
+    "eventTrigger": {
+      "class": "EnrageChangedTrigger"
+    },
+    "spell": {
+      "attribute": "WINDFURY",
+      "attackBonus": 1,
+      "class": "EnrageSpell",
+      "target": "SELF"
+    }
+  },
+  "baseManaCost": 4.0,
+  "attributes": {
+    "ENRAGABLE": true
+  },
+  "type": "MINION",
+  "id": "Battor4",
+  "baseAttack": 3.0
+}

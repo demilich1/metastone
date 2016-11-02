@@ -1,1 +1,27 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "Hander", "heroClass": "ANY", "description": "Whenever you target this minion with a spell, gain Divine Shield.", "fileFormatVersion": 1, "rarity": "LEGENDARY", "baseHp": 5.0, "trigger": {"eventTrigger": {"sourcePlayer": "SELF", "actionType": "SPELL", "class": "TargetAcquisitionTrigger", "hostTargetType": "IGNORE_OTHER_TARGETS"}, "spell": {"attribute": "DIVINE_SHIELD", "class": "AddAttributeSpell", "target": "SELF"}}, "baseManaCost": 5.0, "type": "MINION", "id": "Hander", "baseAttack": 4.0}
+{
+  "collectible": true,
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Handerschmidt",
+  "heroClass": "ANY",
+  "description": "Whenever you target this minion with a spell, gain Divine Shield.",
+  "fileFormatVersion": 1,
+  "rarity": "LEGENDARY",
+  "baseHp": 5.0,
+  "trigger": {
+    "eventTrigger": {
+      "sourcePlayer": "SELF",
+      "actionType": "SPELL",
+      "class": "TargetAcquisitionTrigger",
+      "hostTargetType": "IGNORE_OTHER_TARGETS"
+    },
+    "spell": {
+      "attribute": "DIVINE_SHIELD",
+      "class": "AddAttributeSpell",
+      "target": "SELF"
+    }
+  },
+  "baseManaCost": 5.0,
+  "type": "MINION",
+  "id": "Hander3",
+  "baseAttack": 4.0
+}
