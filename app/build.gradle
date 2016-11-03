@@ -43,7 +43,7 @@ dependencies {
 }
 
 javafx {
-    appName rootProject.name
+    appName 'Minionate'
     mainClass = mainClassName
 }
 
