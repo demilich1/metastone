@@ -1,0 +1,18 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile project(':game')
+    compile group: 'org.apache.spark', name: 'spark-core_2.11', version: '2.0.1'
+    testCompile group: 'org.testng', name: 'testng', version: '6.+'
+}
+
+test {
+    useTestNG()
+    testLogging {
+        events "standardError"
+    }
+}
