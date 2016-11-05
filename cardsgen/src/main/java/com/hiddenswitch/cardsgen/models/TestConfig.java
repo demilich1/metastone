@@ -10,6 +10,10 @@ public class TestConfig implements Serializable {
 	private String deckIdTest;
 	private String deckIdOpponent;
 
+	public boolean isControl() {
+		return cardId == null || cardId.isEmpty();
+	}
+
 	public String getCardId() {
 		return cardId;
 	}

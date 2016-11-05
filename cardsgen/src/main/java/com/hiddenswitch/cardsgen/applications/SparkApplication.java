@@ -1,9 +1,7 @@
 package com.hiddenswitch.cardsgen.applications;
 
 import com.hiddenswitch.cardsgen.functions.CardGenerator;
-import com.hiddenswitch.cardsgen.functions.MergeSimulationResults;
-import com.hiddenswitch.cardsgen.functions.Simulator;
-import com.hiddenswitch.cardsgen.functions.TestGameConfigGenerator;
+import com.hiddenswitch.cardsgen.functions.ConfigGeneratorForCard;
 import com.hiddenswitch.cardsgen.models.TestConfig;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardParseException;
@@ -23,13 +21,13 @@ public class SparkApplication {
 	public static void main(String[] args) throws CardParseException, IOException, URISyntaxException {
 		SparkConf conf = new SparkConf().setMaster("local[8]").setAppName("Test");
 		JavaSparkContext sc = new JavaSparkContext(conf);
-		sc.setLogLevel("ERROR");
 		// TODO: Read the templates to compute from a file or argument.
 		JavaRDD<String> templates = sc.parallelize(Arrays.asList("Deal N Damage"));
 		JavaRDD<Card> cards = templates.flatMap(new CardGenerator());
-		JavaPairRDD<TestConfig, GameConfig> configs = cards.flatMapToPair(new TestGameConfigGenerator(10, 10));
-		JavaPairRDD<TestConfig, SimulationResult> simulations = configs.repartition(8 * 16).mapValues(new Simulator());
-		JavaPairRDD<TestConfig, SimulationResult> results = simulations.reduceByKey(new MergeSimulationResults());
+		JavaPairRDD<TestConfig, GameConfig> configs = cards.flatMapToPair(new ConfigGeneratorForCard(50, 50));
+		JavaPairRDD<TestConfig, SimulationResult> results = Common.simulate(configs);
+
 		results.saveAsTextFile("build/" + RandomStringUtils.randomAlphanumeric(20));
 	}
+
 }

@@ -31,7 +31,7 @@ public class DeckCatalogue {
 
 	public static Deck getDeckByName(String deckName) {
 		for (Deck deck : decks) {
-			if (deck.getName().equals(deckName)) {
+			if (deck.getName().trim().equals(deckName.trim())) {
 				return deck;
 			}
 		}
