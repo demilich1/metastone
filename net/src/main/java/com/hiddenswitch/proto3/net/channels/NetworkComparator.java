@@ -1,6 +1,6 @@
 package com.hiddenswitch.proto3.net.channels;
 
-import com.hiddenswitch.proto3.net.models.NetworkMessage;
+import com.hiddenswitch.proto3.net.messages.NetworkMessage;
 
 public class NetworkComparator implements java.util.Comparator<NetworkMessage> {
 	public NetworkComparator() {

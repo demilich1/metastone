@@ -2,7 +2,9 @@ package net.demilich.metastone.game.gameconfig;
 
 import net.demilich.metastone.game.decks.DeckFormat;
 
-public class GameConfig {
+import java.io.Serializable;
+
+public class GameConfig implements Cloneable, Serializable {
 
 	private int numberOfGames;
 	private PlayerConfig playerConfig1;
@@ -11,6 +13,9 @@ public class GameConfig {
 	private boolean isMultiplayer;
 	private String host;
 	private int port;
+
+	public GameConfig() {
+	}
 
 	public DeckFormat getDeckFormat() {
 		return deckFormat;
@@ -66,5 +71,28 @@ public class GameConfig {
 
 	public void setMultiplayer(boolean multiplayer) {
 		isMultiplayer = multiplayer;
+	}
+
+	public GameConfig clone() {
+		GameConfig config = new GameConfig();
+		config.setNumberOfGames(getNumberOfGames());
+		config.setPlayerConfig1(getPlayerConfig1());
+		config.setPlayerConfig2(getPlayerConfig2());
+		config.setDeckFormat(getDeckFormat());
+		config.setMultiplayer(isMultiplayer());
+		config.setHost(getHost());
+		config.setPort(getPort());
+		return config;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("[GameConfig]\n");
+		builder.append("playerConfig1:\n");
+		builder.append(getPlayerConfig1().toString());
+		builder.append("\nplayerConfig2:\n");
+		builder.append(getPlayerConfig2().toString());
+		return builder.toString();
 	}
 }

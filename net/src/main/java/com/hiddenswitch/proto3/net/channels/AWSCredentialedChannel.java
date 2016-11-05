@@ -8,7 +8,7 @@ import com.amazonaws.regions.Regions;
 import com.amazonaws.services.sqs.AmazonSQSAsyncClient;
 import com.amazonaws.services.sqs.buffered.AmazonSQSBufferedAsyncClient;
 import com.amazonaws.services.sqs.model.*;
-import com.hiddenswitch.proto3.net.models.NetworkMessage;
+import com.hiddenswitch.proto3.net.messages.NetworkMessage;
 import com.hiddenswitch.proto3.net.util.Serialization;
 
 import java.util.ArrayList;

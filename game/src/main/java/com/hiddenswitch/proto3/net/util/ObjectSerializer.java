@@ -1,11 +1,6 @@
 package com.hiddenswitch.proto3.net.util;
 
-import com.amazonaws.util.StringInputStream;
 import com.google.gson.*;
-import com.hiddenswitch.proto3.net.models.Game;
-import net.demilich.metastone.game.GameContext;
-import org.apache.commons.codec.binary.Base64InputStream;
-import org.apache.commons.codec.binary.Base64OutputStream;
 
 import java.io.*;
 import java.lang.reflect.Type;
