@@ -1,1 +1,0 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "785A", "heroClass": "ANY", "description": "Battlecry: Draw a card.", "fileFormatVersion": 1, "rarity": "FREE", "baseHp": 3.0, "baseManaCost": 2.0, "attributes": {"BATTLECRY": true}, "battlecry": {"spell": {"class": "DrawCardSpell"}}, "type": "MINION", "id": "785A", "baseAttack": 2.0}

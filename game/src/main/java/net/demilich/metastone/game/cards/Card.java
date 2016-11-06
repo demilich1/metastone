@@ -17,17 +17,19 @@ import net.demilich.metastone.game.targeting.CardReference;
 import net.demilich.metastone.game.targeting.IdFactory;
 
 public abstract class Card extends Entity {
-
 	private String description = "";
-	private final CardType cardType;
-	private final CardSet cardSet;
-	private final Rarity rarity;
-	private final HeroClass classRestriction;
+	private CardType cardType;
+	private CardSet cardSet;
+	private Rarity rarity;
+	private HeroClass classRestriction;
 	private boolean collectible = true;
 	private CardLocation location;
-	private BattlecryDesc battlecry;
 	private ValueProvider manaCostModifier;
-	private final String cardId;
+	private String cardId;
+
+	public Card() {
+		super();
+	}
 
 	public Card(CardDesc desc) {
 		cardId = desc.id;
@@ -66,10 +68,6 @@ public abstract class Card extends Entity {
 
 	public int getBaseManaCost() {
 		return getAttributeValue(Attribute.BASE_MANA_COST);
-	}
-
-	public BattlecryDesc getBattlecry() {
-		return battlecry;
 	}
 
 	public String getCardId() {
@@ -133,10 +131,6 @@ public abstract class Card extends Entity {
 		return rarity;
 	}
 
-	public boolean hasBattlecry() {
-		return this.battlecry != null;
-	}
-
 	public boolean isCollectible() {
 		return collectible;
 	}
@@ -172,10 +166,6 @@ public abstract class Card extends Entity {
 	}
 
 	public abstract PlayCardAction play();
-
-	public void setBattlecry(BattlecryDesc battlecry) {
-		this.battlecry = battlecry;
-	}
 
 	public void setCollectible(boolean collectible) {
 		this.collectible = collectible;

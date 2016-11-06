@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +21,7 @@ import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
-public class TargetLogic {
-
+public class TargetLogic implements Serializable {
 	private static Logger logger = LoggerFactory.getLogger(TargetLogic.class);
 
 	private static List<Entity> singleTargetAsList(Entity target) {
@@ -135,7 +135,7 @@ public class TargetLogic {
 	}
 
 	private Entity findInEnvironment(GameContext context, EntityReference targetKey) {
-		if (!context.getEventTargetStack().isEmpty() && targetKey == EntityReference.EVENT_TARGET) {
+		if (!context.getEventTargetStack().isEmpty() && targetKey.equals(EntityReference.EVENT_TARGET)) {
 			return context.resolveSingleTarget(context.getEventTargetStack().peek());
 		}
 		return null;
@@ -206,81 +206,81 @@ public class TargetLogic {
 	}
 
 	public List<Entity> resolveTargetKey(GameContext context, Player player, Entity source, EntityReference targetKey) {
-		if (targetKey == null || targetKey == EntityReference.NONE) {
+		if (targetKey == null || targetKey.equals(EntityReference.NONE)) {
 			return null;
 		}
-		if (targetKey == EntityReference.ALL_CHARACTERS) {
+		if (targetKey.equals(EntityReference.ALL_CHARACTERS)) {
 			return getEntities(context, player, TargetSelection.ANY);
-		} else if (targetKey == EntityReference.ALL_MINIONS) {
+		} else if (targetKey.equals(EntityReference.ALL_MINIONS)) {
 			return getEntities(context, player, TargetSelection.MINIONS);
-		} else if (targetKey == EntityReference.ENEMY_CHARACTERS) {
+		} else if (targetKey.equals(EntityReference.ENEMY_CHARACTERS)) {
 			return getEntities(context, player, TargetSelection.ENEMY_CHARACTERS);
-		} else if (targetKey == EntityReference.ENEMY_HERO) {
+		} else if (targetKey.equals(EntityReference.ENEMY_HERO)) {
 			return getEntities(context, player, TargetSelection.ENEMY_HERO);
-		} else if (targetKey == EntityReference.ENEMY_MINIONS) {
+		} else if (targetKey.equals(EntityReference.ENEMY_MINIONS)) {
 			return getEntities(context, player, TargetSelection.ENEMY_MINIONS);
-		} else if (targetKey == EntityReference.FRIENDLY_CHARACTERS) {
+		} else if (targetKey.equals(EntityReference.FRIENDLY_CHARACTERS)) {
 			return getEntities(context, player, TargetSelection.FRIENDLY_CHARACTERS);
-		} else if (targetKey == EntityReference.FRIENDLY_HERO) {
+		} else if (targetKey.equals(EntityReference.FRIENDLY_HERO)) {
 			return getEntities(context, player, TargetSelection.FRIENDLY_HERO);
-		} else if (targetKey == EntityReference.FRIENDLY_MINIONS) {
+		} else if (targetKey.equals(EntityReference.FRIENDLY_MINIONS)) {
 			return getEntities(context, player, TargetSelection.FRIENDLY_MINIONS);
-		} else if (targetKey == EntityReference.OTHER_FRIENDLY_MINIONS) {
+		} else if (targetKey.equals(EntityReference.OTHER_FRIENDLY_MINIONS)) {
 			List<Entity> targets = getEntities(context, player, TargetSelection.FRIENDLY_MINIONS);
 			targets.remove(source);
 			return targets;
-		} else if (targetKey == EntityReference.ALL_OTHER_CHARACTERS) {
+		} else if (targetKey.equals(EntityReference.ALL_OTHER_CHARACTERS)) {
 			List<Entity> targets = getEntities(context, player, TargetSelection.ANY);
 			targets.remove(source);
 			return targets;
-		} else if (targetKey == EntityReference.ALL_OTHER_MINIONS) {
+		} else if (targetKey.equals(EntityReference.ALL_OTHER_MINIONS)) {
 			List<Entity> targets = getEntities(context, player, TargetSelection.MINIONS);
 			targets.remove(source);
 			return targets;
-		} else if (targetKey == EntityReference.ADJACENT_MINIONS) {
+		} else if (targetKey.equals(EntityReference.ADJACENT_MINIONS)) {
 			return new ArrayList<>(context.getAdjacentMinions(player, source.getReference()));
-		} else if (targetKey == EntityReference.OPPOSITE_MINIONS) {
+		} else if (targetKey.equals(EntityReference.OPPOSITE_MINIONS)) {
 			return new ArrayList<>(context.getOppositeMinions(player, source.getReference()));
-		} else if (targetKey == EntityReference.MINIONS_TO_LEFT) {
+		} else if (targetKey.equals(EntityReference.MINIONS_TO_LEFT)) {
 			return new ArrayList<>(context.getLeftMinions(player, source.getReference()));
-		} else if (targetKey == EntityReference.MINIONS_TO_RIGHT) {
+		} else if (targetKey.equals(EntityReference.MINIONS_TO_RIGHT)) {
 			return new ArrayList<>(context.getRightMinions(player, source.getReference()));
-		} else if (targetKey == EntityReference.SELF) {
+		} else if (targetKey.equals(EntityReference.SELF)) {
 			return singleTargetAsList(source);
-		} else if (targetKey == EntityReference.EVENT_TARGET) {
+		} else if (targetKey.equals(EntityReference.EVENT_TARGET)) {
 			return singleTargetAsList(context.resolveSingleTarget(context.getEventTargetStack().peek()));
-		} else if (targetKey == EntityReference.TARGET) {
+		} else if (targetKey.equals(EntityReference.TARGET)) {
 			return singleTargetAsList(context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.TARGET)));
-		} else if (targetKey == EntityReference.SPELL_TARGET) {
+		} else if (targetKey.equals(EntityReference.SPELL_TARGET)) {
 			return singleTargetAsList(context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.SPELL_TARGET)));
-		} else if (targetKey == EntityReference.KILLED_MINION) {
+		} else if (targetKey.equals(EntityReference.KILLED_MINION)) {
 			return singleTargetAsList(context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.KILLED_MINION)));
-		} else if (targetKey == EntityReference.ATTACKER_REFERENCE) {
+		} else if (targetKey.equals(EntityReference.ATTACKER_REFERENCE)) {
 			return singleTargetAsList(context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.ATTACKER_REFERENCE)));
-		} else if (targetKey == EntityReference.PENDING_CARD) {
+		} else if (targetKey.equals(EntityReference.PENDING_CARD)) {
 			return singleTargetAsList((Entity) context.getPendingCard());
-		} else if (targetKey == EntityReference.EVENT_CARD) {
+		} else if (targetKey.equals(EntityReference.EVENT_CARD)) {
 			return singleTargetAsList((Entity) context.getEventCard());
-		} else if (targetKey == EntityReference.FRIENDLY_WEAPON) {
+		} else if (targetKey.equals(EntityReference.FRIENDLY_WEAPON)) {
 			if (player.getHero().getWeapon() != null) {
 				return singleTargetAsList(player.getHero().getWeapon());
 			} else {
 				return new ArrayList<>();
 			}
-		} else if (targetKey == EntityReference.ENEMY_WEAPON) {
+		} else if (targetKey.equals(EntityReference.ENEMY_WEAPON)) {
 			Player opponent = context.getOpponent(player);
 			if (opponent.getHero().getWeapon() != null) {
 				return singleTargetAsList(opponent.getHero().getWeapon());
 			} else {
 				return new ArrayList<>();
 			}
-		} else if (targetKey == EntityReference.FRIENDLY_HAND) {
+		} else if (targetKey.equals(EntityReference.FRIENDLY_HAND)) {
 			return new ArrayList<>(player.getHand().toList());
-		} else if (targetKey == EntityReference.ENEMY_HAND) {
+		} else if (targetKey.equals(EntityReference.ENEMY_HAND)) {
 			return new ArrayList<>(context.getOpponent(player).getHand().toList());
-		} else if (targetKey == EntityReference.FRIENDLY_PLAYER) {
+		} else if (targetKey.equals(EntityReference.FRIENDLY_PLAYER)) {
 			return singleTargetAsList(player);
-		} else if (targetKey == EntityReference.ENEMY_PLAYER) {
+		} else if (targetKey.equals(EntityReference.ENEMY_PLAYER)) {
 			return singleTargetAsList(context.getOpponent(player));
 		}
 

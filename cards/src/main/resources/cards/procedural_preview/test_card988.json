@@ -1,1 +1,0 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "988L", "heroClass": "ANY", "description": "Spell Damage +1", "fileFormatVersion": 1, "rarity": "FREE", "baseHp": 2.0, "baseManaCost": 2.0, "attributes": {"SPELL_DAMAGE": 1}, "type": "MINION", "id": "988L", "baseAttack": 3.0}

@@ -4,19 +4,19 @@ AfterSpellCastedTrigger
 Triggers immediately after a spell is cast.
 
 ArmorGainedTrigger
-Triggers whenever target player gains Armor.
+Triggers whenever target gamePlayer gains Armor.
 
 BoardChangedTrigger
 Triggers whenever there is a change in the minions/weapons in play. Used for things like checking if Southsea Deckhand should have charge
 
 CardDrawnTrigger
-Triggers whenever target player draws a card.
+Triggers whenever target gamePlayer draws a card.
 
 CardPlayedTrigger
-Triggers whenever target player plays a card.
+Triggers whenever target gamePlayer plays a card.
 
 CardReceivedTrigger
-Triggers whenever target player receives a copy of target card.
+Triggers whenever target gamePlayer receives a copy of target card.
 
 DamageCausedTrigger
 Triggers whenever target causes damage.
@@ -25,7 +25,7 @@ DamageReceivedTrigger
 Triggers whenever target receives damage.
 
 DiscardTrigger
-Triggers whenever target player discards a card.
+Triggers whenever target gamePlayer discards a card.
 
 EnrageChangedTrigger
 Triggers whenever the internal ENRAGED attribute of a target is changed.
@@ -52,7 +52,7 @@ MinionSummonedTrigger
 Triggers whenever a minion is summoned.
 
 OverloadTrigger
-Triggers whenever target player overloads.
+Triggers whenever target gamePlayer overloads.
 
 PhysicalAttackTrigger
 Triggers whenever target is attacked by a minion or hero.
@@ -61,28 +61,28 @@ PreDamageTrigger
 Triggers before target is damaged.
 
 SecretPlayedTrigger
-Triggers whenever a Secret for target player is played.
+Triggers whenever a Secret for target gamePlayer is played.
 
 SecretRevealedTrigger
-Triggers whenever a Secret for target player is revealed.
+Triggers whenever a Secret for target gamePlayer is revealed.
 
 SilenceTrigger
 Triggers whenever target is silenced.
 
 SpellCastedTrigger
-Triggers whenever target player casts a Spell.
+Triggers whenever target gamePlayer casts a Spell.
 
 TargetAcquisitionTrigger
 Triggers whenever target acquires a target. This can be a spell as well as a minion or hero.
 
 TurnEndTrigger
-Triggers whenever target player's turn ends.
+Triggers whenever target gamePlayer's turn ends.
 
 TurnStartTrigger
-Triggers whenever target player's turn begins.
+Triggers whenever target gamePlayer's turn begins.
 
 WeaponDestroyedTrigger
-Triggers whenever target player's weapon is destroyed.
+Triggers whenever target gamePlayer's weapon is destroyed.
 
 WeaponEquippedTrigger
-Triggers whenever target player equips a weapon.
+Triggers whenever target gamePlayer equips a weapon.

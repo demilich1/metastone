@@ -12,14 +12,12 @@ import net.demilich.metastone.game.gameconfig.GameConfig;
 import net.demilich.metastone.gui.playmode.PlayModeMediator;
 
 public class PlayModeConfigMediator extends Mediator<GameNotification> {
-
-	public static final String NAME = "PlayModeConfigMediator";
-
+	public static final String SINGLE_PLAYER_NAME = "PlayModeConfigMediator";
+	public static final String MULTIPLAYER_NAME = "PlayModeConfigMediatorMultiplayer";
 	private final PlayModeConfigView view;
-
-	public PlayModeConfigMediator() {
-		super(NAME);
-		view = new PlayModeConfigView();
+	public PlayModeConfigMediator(boolean isMultiplayer) {
+		super(isMultiplayer ? MULTIPLAYER_NAME : SINGLE_PLAYER_NAME);
+		view = new PlayModeConfigView(isMultiplayer);
 	}
 
 	@Override

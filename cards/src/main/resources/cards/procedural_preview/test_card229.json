@@ -1,1 +1,17 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "229X", "heroClass": "ANY", "description": "At the end of each turn, summon all friendly minions that died this turn.", "fileFormatVersion": 1, "rarity": "LEGENDARY", "baseHp": 2.0, "trigger": {"eventTrigger": {"targetPlayer": "BOTH", "class": "TurnEndTrigger"}, "spell": {"class": "custom.KelThuzadSpell"}}, "baseManaCost": 2.0, "attributes": {"TAUNT": true}, "type": "MINION", "id": "229X", "baseAttack": 3.0}
+{
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Porsonid Champion",
+  "description": "Stealth. ",
+  "baseHp": 10.0,
+  "baseManaCost": 10.0,
+  "type": "MINION",
+  "rarity": "LEGENDARY",
+  "heroClass": "ANY",
+  "fileFormatVersion": 1,
+  "collectible": true,
+  "attributes": {
+    "STEALTH": true
+  },
+  "id": "Porsonid Champion",
+  "baseAttack": 8.0
+}

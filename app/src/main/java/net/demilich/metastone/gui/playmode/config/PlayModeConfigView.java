@@ -10,8 +10,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import net.demilich.metastone.GameNotification;
@@ -36,12 +38,23 @@ public class PlayModeConfigView extends BorderPane implements EventHandler<Actio
 	@FXML
 	protected Button backButton;
 
+	@FXML
+	protected TextField hostBox;
+
+	@FXML
+	protected TextField portBox;
+
 	protected PlayerConfigView player1Config;
 	protected PlayerConfigView player2Config;
 
+	@FXML
+	protected Group multiplayerGroup;
+
+	private boolean isMultiplayer;
+
 	private List<DeckFormat> deckFormats;
 
-	public PlayModeConfigView() {
+	public PlayModeConfigView(boolean isMultiplayer) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/PlayModeConfigView.fxml"));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
@@ -52,13 +65,22 @@ public class PlayModeConfigView extends BorderPane implements EventHandler<Actio
 			throw new RuntimeException(exception);
 		}
 
+		this.isMultiplayer = isMultiplayer;
+
+		if (!isMultiplayer) {
+			multiplayerGroup.getStyleClass().add("hidden");
+		}
+
 		formatBox.setConverter(new DeckFormatStringConverter());
 
 		player1Config = new PlayerConfigView(PlayerConfigType.HUMAN);
 		player2Config = new PlayerConfigView(PlayerConfigType.OPPONENT);
 
 		playerArea.getChildren().add(player1Config);
-		playerArea.getChildren().add(player2Config);
+
+		if (!isMultiplayer) {
+			playerArea.getChildren().add(player2Config);
+		}
 
 		startButton.setOnAction(this);
 		backButton.setOnAction(this);
@@ -92,6 +114,9 @@ public class PlayModeConfigView extends BorderPane implements EventHandler<Actio
 			gameConfig.setPlayerConfig1(player1Config.getPlayerConfig());
 			gameConfig.setPlayerConfig2(player2Config.getPlayerConfig());
 			gameConfig.setDeckFormat(formatBox.getValue());
+			gameConfig.setHost(hostBox.getText());
+			gameConfig.setPort(Integer.parseInt(portBox.getText()));
+			gameConfig.setMultiplayer(this.isMultiplayer);
 			NotificationProxy.sendNotification(GameNotification.COMMIT_PLAYMODE_CONFIG, gameConfig);
 		} else if (actionEvent.getSource() == backButton) {
 			NotificationProxy.sendNotification(GameNotification.MAIN_MENU);

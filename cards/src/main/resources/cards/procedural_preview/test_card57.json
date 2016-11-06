@@ -1,1 +1,14 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "57H", "heroClass": "ANY", "description": "At the start of your turn, set this minion's Attack to 7.", "fileFormatVersion": 1, "rarity": "EPIC", "baseHp": 4.0, "trigger": {"eventTrigger": {"targetPlayer": "SELF", "class": "TurnStartTrigger"}, "spell": {"class": "SetAttackSpell", "value": 7, "target": "SELF"}}, "baseManaCost": 3.0, "type": "MINION", "id": "57H", "baseAttack": 3.0}
+{
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Passion Flights",
+  "description": "",
+  "baseHp": 10.0,
+  "type": "MINION",
+  "rarity": "LEGENDARY",
+  "heroClass": "ANY",
+  "fileFormatVersion": 1,
+  "collectible": true,
+  "baseManaCost": 9.0,
+  "id": "Passionmjsers",
+  "baseAttack": 12.0
+}

@@ -1,0 +1,40 @@
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'jp.classmethod.aws'
+apply plugin: 'java'
+apply plugin: 'application'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:0.5.4.RELEASE"
+        classpath "jp.classmethod.aws:gradle-aws-plugin:0.21"
+    }
+}
+
+mainClassName = 'com.hiddenswitch.proto3.MetaStoneSimpleServer'
+
+aws {
+    profileName = 'metastone_net'
+    region = 'us-east-1'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
+    compile project(':game')
+    compile project(':cards')
+    testCompile group: 'org.testng', name: 'testng', version: '6.+'
+}
+
+test {
+    useTestNG()
+    testLogging {
+        events "standardError"
+    }
+}

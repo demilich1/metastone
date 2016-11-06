@@ -1,34 +1,57 @@
+buildscript {
+    repositories {
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
+    }
+    dependencies {
+        classpath 'gradle.plugin.edu.sc.seis.gradle:launch4j:1.6.2'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
 apply plugin: 'java'
 apply plugin: 'application'
 apply from: 'javafx.plugin'
+apply plugin: 'edu.sc.seis.launch4j'
 
 mainClassName = 'net.demilich.metastone.MetaStone'
 
+
+launch4j {
+    mainClassName = 'net.demilich.metastone.MetaStone'
+}
+
 jar {
-	manifest {
-		attributes 'Implementation-Title': rootProject.name.capitalize(),
-			'Implementation-Version': project.version
-	}
+    manifest {
+        attributes 'Implementation-Title': rootProject.name.capitalize(),
+                'Implementation-Version': project.version
+    }
 }
 
 dependencies {
-	compile project(':game')
-	compile project(':cards')
-	compile files('lib/controlsfx-8.40.10-20151003.010657-492.jar')
-	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
-	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5'
-	testCompile group: 'org.testng', name: 'testng', version: '6.+'
+    compile project(':game')
+    compile project(':server')
+    compile project(':cards')
+    compile files('lib/controlsfx-8.40.10-20151003.010657-492.jar')
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5'
+    testCompile group: 'org.testng', name: 'testng', version: '6.+'
 }
 
 javafx {
-	appName rootProject.name
-	mainClass = mainClassName
+    appName 'Minionate'
+    mainClass = mainClassName
 }
 
+
 test {
-	// enable TestNG support (default is JUnit)
-	useTestNG()
-	testLogging {
-		events "standardError"
-	}
+    // enable TestNG support (default is JUnit)
+    useTestNG()
+    testLogging {
+        events "standardError"
+    }
 }

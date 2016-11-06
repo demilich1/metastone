@@ -1,5 +1,7 @@
 package net.demilich.metastone.game;
 
+import java.io.Serializable;
+
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.decks.Deck;
@@ -8,7 +10,7 @@ import net.demilich.metastone.game.decks.ProceduralRandomDeck;
 import net.demilich.metastone.game.decks.RandomDeck;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
 
-public class ProceduralPlayer extends Player {
+public class ProceduralPlayer extends Player implements Serializable {
 	private final CardCollection bench;
 	
 	public ProceduralPlayer(PlayerConfig config) {

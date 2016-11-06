@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.actions;
 
+import com.google.gson.annotations.SerializedName;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -9,7 +10,13 @@ import net.demilich.metastone.game.targeting.TargetSelection;
 public class PlaySpellCardAction extends PlayCardAction {
 
 	private SpellDesc spell;
-	protected final EntityReference cardReference;
+	@SerializedName("cardReference2")
+	protected EntityReference cardReference;
+
+	protected PlaySpellCardAction() {
+		super();
+		setActionType(ActionType.SPELL);
+	}
 
 	public PlaySpellCardAction(SpellDesc spell, Card card, TargetSelection targetSelection) {
 		super(card.getCardReference());

@@ -1,1 +1,29 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "225E", "heroClass": "ANY", "description": "\nCan't be targeted by spells or Hero Powers.", "fileFormatVersion": 1, "rarity": "RARE", "baseHp": 7.0, "race": "MECH", "baseManaCost": 5.0, "attributes": {"TAUNT": true, "UNTARGETABLE_BY_SPELLS": true}, "type": "MINION", "id": "225E", "baseAttack": 4.0}
+{
+  "collectible": true,
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Fat Snekin",
+  "heroClass": "SHAMAN",
+  "description": "Inspire: Give your Totems +2 Attack.",
+  "fileFormatVersion": 1,
+  "rarity": "RARE",
+  "baseHp": 2.0,
+  "trigger": {
+    "eventTrigger": {
+      "targetPlayer": "SELF",
+      "class": "InspireTrigger"
+    },
+    "spell": {
+      "filter": {
+        "race": "TOTEM",
+        "class": "RaceFilter"
+      },
+      "attackBonus": 2,
+      "class": "BuffSpell",
+      "target": "FRIENDLY_MINIONS"
+    }
+  },
+  "baseManaCost": 3.0,
+  "type": "MINION",
+  "id": "Fat Snekin",
+  "baseAttack": 4.0
+}

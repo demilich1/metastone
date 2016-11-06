@@ -1,1 +1,33 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "32P", "heroClass": "ANY", "description": "Deathrattle: Give a random friendly minion +3/+3.", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 2.0, "deathrattle": {"randomTarget": true, "attackBonus": 3, "class": "BuffSpell", "hpBonus": 3, "target": "FRIENDLY_MINIONS"}, "baseManaCost": 1.0, "attributes": {"DEATHRATTLES": true}, "type": "MINION", "id": "32P", "baseAttack": 1.0}
+{
+  "collectible": true,
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Shiel Raver",
+  "heroClass": "ANY",
+  "description": "(2) Overload. At the start of your turn, reduce this card's\nCost by (1).",
+  "fileFormatVersion": 1,
+  "rarity": "COMMON",
+  "baseHp": 1.0,
+  "baseManaCost": 2.0,
+  "attributes": {
+    "OVERLOAD": 2.0
+  },
+  "passiveTrigger": {
+    "eventTrigger": {
+      "targetPlayer": "SELF",
+      "class": "TurnStartTrigger"
+    },
+    "spell": {
+      "cardCostModifier": {
+        "operation": "SUBTRACT",
+        "class": "CardCostModifier",
+        "value": 1,
+        "target": "SELF"
+      },
+      "class": "CardCostModifierSpell",
+      "target": "FRIENDLY_PLAYER"
+    }
+  },
+  "type": "MINION",
+  "id": "Shiel Raver",
+  "baseAttack": 4.0
+}

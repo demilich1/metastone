@@ -29,7 +29,7 @@ MinionSummonValueProvider
 Provides a value based on the number of minions summoned that meet the CardFilter criteria.
 
 PlayerAttributeValueProvider
-Provides a value equal to the player attribute given.
+Provides a value equal to the gamePlayer attribute given.
 
 RandomValueProvider
 Provides a random value between the min and max given, inclusively.

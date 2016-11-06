@@ -1,12 +1,14 @@
 package net.demilich.metastone.game.actions;
 
+import java.io.Serializable;
+import com.google.gson.annotations.SerializedName;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
-public abstract class GameAction implements Cloneable {
+public abstract class GameAction implements Cloneable, Serializable {
 
 	private TargetSelection targetRequirement = TargetSelection.NONE;
 	private ActionType actionType = ActionType.SYSTEM;
@@ -76,5 +78,24 @@ public abstract class GameAction implements Cloneable {
 
 	public void setTargetRequirement(TargetSelection targetRequirement) {
 		this.targetRequirement = targetRequirement;
+	}
+	
+	@Override
+	public boolean equals(Object other){
+		if (other instanceof GameAction){
+			GameAction otherAction = (GameAction) other;
+			return (this.actionType == otherAction.actionType) 
+					&& (this.targetRequirement == otherAction.targetRequirement)
+					&& (this.getSource().equals(otherAction.getSource()))
+					&& (this.getTargetKey().equals(otherAction.getTargetKey()));
+		} else {
+			return false;
+		}
+	}
+	
+	@Override
+	public int hashCode(){
+		//TODO: Fix
+		return this.getSource().hashCode() + this.getTargetKey().hashCode();
 	}
 }

@@ -1,1 +1,0 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "940Q", "heroClass": "ANY", "description": "Battlecry: Silence a minion.", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 3.0, "baseManaCost": 2.0, "attributes": {"BATTLECRY": true}, "battlecry": {"spell": {"class": "SilenceSpell"}, "targetSelection": "MINIONS"}, "type": "MINION", "id": "940Q", "baseAttack": 2.0}

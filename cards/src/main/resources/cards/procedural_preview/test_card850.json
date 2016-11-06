@@ -1,1 +1,0 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "850P", "heroClass": "ANY", "description": "Your Battlecries trigger twice.", "fileFormatVersion": 1, "rarity": "LEGENDARY", "baseHp": 3.0, "baseManaCost": 3.0, "attributes": {"DOUBLE_BATTLECRIES": true}, "type": "MINION", "id": "850P", "baseAttack": 4.0}

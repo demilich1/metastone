@@ -3,17 +3,13 @@ package net.demilich.metastone.game.cards.desc;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
+import com.google.gson.*;
 
 import net.demilich.metastone.game.spells.desc.condition.Condition;
 import net.demilich.metastone.game.spells.desc.condition.ConditionArg;
 import net.demilich.metastone.game.spells.desc.condition.ConditionDesc;
 
-public class ConditionDeserializer implements JsonDeserializer<ConditionDesc> {
+public class ConditionDeserializer implements JsonDeserializer<ConditionDesc>, JsonSerializer<ConditionDesc> {
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -59,4 +55,20 @@ public class ConditionDeserializer implements JsonDeserializer<ConditionDesc> {
 		arguments.put(arg, value);
 	}
 
+	@Override
+	public JsonElement serialize(ConditionDesc src, Type typeOfSrc, JsonSerializationContext context) {
+		JsonObject result = new JsonObject();
+		result.add("class", new JsonPrimitive(src.getConditionClass().getSimpleName()));
+		for (ConditionArg conditionArg : ConditionArg.values()) {
+			if (conditionArg == ConditionArg.CLASS) {
+				continue;
+			}
+			if (!src.contains(conditionArg)) {
+				continue;
+			}
+			String argName = ParseUtils.toCamelCase(conditionArg.toString());
+			result.add(argName, new JsonPrimitive(src.get(conditionArg).toString()));
+		}
+		return result;
+	}
 }

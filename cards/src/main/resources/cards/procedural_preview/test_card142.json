@@ -1,1 +1,40 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "142M", "heroClass": "ANY", "description": "50% chance to attack the wrong enemy.", "fileFormatVersion": 1, "rarity": "RARE", "baseHp": 3.0, "trigger": {"eventTrigger": {"actionType": "PHYSICAL_ATTACK", "class": "TargetAcquisitionTrigger", "queueCondition": {"class": "RandomCondition"}, "hostTargetType": "IGNORE_OTHER_SOURCES"}, "spell": {"class": "FumbleSpell", "target": "EVENT_TARGET"}}, "baseManaCost": 1.0, "attributes": {"STEALTH": true}, "type": "MINION", "id": "142M", "baseAttack": 1.0}
+{
+  "collectible": true,
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Tiny Snekin",
+  "heroClass": "DRUID",
+  "description": "Choose One - Transform to gain Charge; or +1/+1 and Stealth.",
+  "fileFormatVersion": 1,
+  "rarity": "COMMON",
+  "baseHp": 2.0,
+  "bothOptions": {
+    "spell": {
+      "class": "TransformMinionSpell",
+      "card": "token_sabertooth_tiger",
+      "target": "SELF"
+    },
+    "description": "Charge, Stealth, +1/+1"
+  },
+  "options": [
+    {
+      "spell": {
+        "class": "TransformMinionSpell",
+        "card": "token_sabertooth_lion",
+        "target": "SELF"
+      },
+      "description": "Charge"
+    },
+    {
+      "spell": {
+        "class": "TransformMinionSpell",
+        "card": "token_sabertooth_panther",
+        "target": "SELF"
+      },
+      "description": "Stealth +1/+1"
+    }
+  ],
+  "baseManaCost": 2.0,
+  "type": "MINION",
+  "id": "Tiny Snekin",
+  "baseAttack": 2.0
+}

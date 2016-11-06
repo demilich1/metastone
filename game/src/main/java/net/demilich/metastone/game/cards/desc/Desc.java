@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.cards.desc;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import net.demilich.metastone.game.GameContext;
@@ -7,7 +8,7 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 
-public class Desc<T> {
+public class Desc<T> implements Serializable{
 
 	protected final Map<T, Object> arguments;
 

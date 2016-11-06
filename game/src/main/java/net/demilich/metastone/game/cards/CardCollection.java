@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.cards;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -8,7 +9,7 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 
-public class CardCollection implements Iterable<Card>, Cloneable {
+public class CardCollection implements Iterable<Card>, Cloneable, Serializable {
 
 	private List<Card> cards = new ArrayList<Card>();
 

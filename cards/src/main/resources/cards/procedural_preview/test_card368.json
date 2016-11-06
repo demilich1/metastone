@@ -1,1 +1,0 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "368C", "heroClass": "ANY", "description": "\nCan't attack heroes.", "fileFormatVersion": 1, "rarity": "LEGENDARY", "baseHp": 5.0, "baseManaCost": 4.0, "attributes": {"CHARGE": true, "CANNOT_ATTACK_HEROES": true}, "type": "MINION", "id": "368C", "baseAttack": 4.0}

@@ -1,1 +1,0 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "307R", "heroClass": "ANY", "description": "\n", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 3.0, "race": "MECH", "baseManaCost": 1.0, "attributes": {"TAUNT": true, "DIVINE_SHIELD": true}, "type": "MINION", "id": "307R", "baseAttack": 0.0}

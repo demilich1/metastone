@@ -1,1 +1,27 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "31B", "heroClass": "ANY", "description": "Spell Damage +1. Battlecry: Draw a card.", "fileFormatVersion": 1, "rarity": "RARE", "baseHp": 6.0, "race": "DRAGON", "baseManaCost": 4.0, "attributes": {"CHARGE": true, "BATTLECRY": true, "SPELL_DAMAGE": 1}, "battlecry": {"spell": {"class": "DrawCardSpell", "value": 1}, "targetSelection": "NONE"}, "type": "MINION", "id": "31B", "baseAttack": 3.0}
+{
+  "collectible": true,
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Slightly Protective Mink",
+  "heroClass": "ANY",
+  "description": "All attacks deal 2 damage to your hero.",
+  "fileFormatVersion": 1,
+  "rarity": "RARE",
+  "baseHp": 4.0,
+  "trigger": {
+    "eventTrigger": {
+      "targetPlayer": "SELF",
+      "targetEntityType": "HERO",
+      "sourcePlayer": "BOTH",
+      "class": "PreDamageTrigger"
+    },
+    "spell": {
+      "operation": "SET",
+      "class": "ModifyDamageSpell",
+      "value": 2
+    }
+  },
+  "baseManaCost": 3.0,
+  "type": "MINION",
+  "id": "Highly Protective Mink",
+  "baseAttack": 2.0
+}

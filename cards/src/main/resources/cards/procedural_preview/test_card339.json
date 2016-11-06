@@ -1,1 +1,0 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "339X", "heroClass": "ANY", "description": "Spell Damage +1", "fileFormatVersion": 1, "rarity": "FREE", "baseHp": 2.0, "baseManaCost": 3.0, "attributes": {"TAUNT": true, "SPELL_DAMAGE": 1}, "type": "MINION", "id": "339X", "baseAttack": 5.0}

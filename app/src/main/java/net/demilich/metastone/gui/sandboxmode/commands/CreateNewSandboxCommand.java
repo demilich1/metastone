@@ -10,7 +10,7 @@ import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.gameconfig.GameConfig;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
-import net.demilich.metastone.gui.playmode.GameContextVisualizable;
+import net.demilich.metastone.game.visuals.GameContextVisualizable;
 import net.demilich.metastone.gui.sandboxmode.SandboxProxy;
 
 public class CreateNewSandboxCommand extends SimpleCommand<GameNotification> {

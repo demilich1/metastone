@@ -1,1 +1,23 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "84V", "heroClass": "ANY", "description": "At the start of your turn, restore this minion to full Health.", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 4.0, "trigger": {"eventTrigger": {"targetPlayer": "SELF", "class": "TurnStartTrigger"}, "spell": {"class": "HealSpell", "value": {"attribute": "MAX_HP", "class": "AttributeValueProvider"}, "target": "SELF"}}, "baseManaCost": 4.0, "type": "MINION", "id": "84V", "baseAttack": 5.0}
+{
+  "collectible": true,
+  "cardCostModifier": {
+    "value": 1,
+    "cardType": "HERO_POWER",
+    "class": "CardCostModifier",
+    "operation": "SET"
+  },
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Nuttyalt Warden Champion",
+  "heroClass": "ANY",
+  "description": "Charge. Your Hero Power costs (1).",
+  "fileFormatVersion": 1,
+  "rarity": "COMMON",
+  "baseHp": 3.0,
+  "baseManaCost": 4.0,
+  "attributes": {
+    "CHARGE": true
+  },
+  "type": "MINION",
+  "id": "Nuttyalt Warden Champion",
+  "baseAttack": 4.0
+}

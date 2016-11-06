@@ -19,11 +19,9 @@ import java.nio.file.Paths;
 public class MetaStone extends Application {
 
 	private static Logger logger = LoggerFactory.getLogger(MetaStone.class);
-	public static final boolean procedural = true;
+	public static final boolean procedural = false;
 
 	public static void main(String[] args) {
-		//DevCardTools.formatJsons();
-
 		try {
 			// ensure that the user home metastone dir exists
 			Files.createDirectories(Paths.get(UserHomeMetastone.getPath()));
@@ -37,7 +35,7 @@ public class MetaStone extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		primaryStage.setTitle("MetaStone");
+		primaryStage.setTitle("Minionate");
 		primaryStage.initStyle(StageStyle.UNIFIED);
 		primaryStage.setResizable(false);
 		primaryStage.getIcons().add(new Image(IconFactory.getImageUrl("ui/app_icon.png")));
