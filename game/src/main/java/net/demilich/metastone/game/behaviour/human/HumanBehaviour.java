@@ -26,6 +26,7 @@ public class HumanBehaviour extends Behaviour implements IActionSelectionListene
 
 	@Override
 	public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
+		System.out.println("mulligan");
 		if (context.ignoreEvents()) {
 			return new ArrayList<Card>();
 		}

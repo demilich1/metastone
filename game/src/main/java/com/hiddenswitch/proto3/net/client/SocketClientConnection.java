@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -12,6 +13,7 @@ import com.hiddenswitch.proto3.net.common.RemoteUpdateListener;
 import com.hiddenswitch.proto3.net.common.ServerToClientMessage;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.cards.Card;
 
 public class SocketClientConnection implements ClientCommunicationReceive, ClientCommunicationSend, Runnable {
 	private final String host;
@@ -46,6 +48,12 @@ public class SocketClientConnection implements ClientCommunicationReceive, Clien
 			public void sendFirstMessage(Player player, String gameId) {
 				queue.add(new ClientToServerMessage(player, gameId));
 
+			}
+
+			@Override
+			public void sendMulligan(Player player, List<Card> discardedCards) {
+				queue.add(new ClientToServerMessage(player, discardedCards));
+				
 			}
 		};
 	}
@@ -86,6 +94,9 @@ public class SocketClientConnection implements ClientCommunicationReceive, Clien
 								break;
 							case ON_REQUEST_ACTION:
 								remoteUpdateListener.onRequestAction(message.actions);
+								break;
+							case ON_MULLIGAN:
+								remoteUpdateListener.onMulligan(message.player1, message.startingCards);
 								break;
 							default:
 								System.err.println("Unexpected message from server received");

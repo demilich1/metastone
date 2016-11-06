@@ -6,6 +6,7 @@ import java.util.List;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.TurnState;
 import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.events.GameEvent;
 
 public class ServerToClientMessage implements Serializable {
@@ -18,6 +19,7 @@ public class ServerToClientMessage implements Serializable {
 	public TurnState turnState;
 	public Player player1, player2;
 	public List<GameAction> actions;
+	public List<Card> startingCards;
 
 
 	public ServerToClientMessage(GameEvent event) {
@@ -59,6 +61,12 @@ public class ServerToClientMessage implements Serializable {
 	public ServerToClientMessage(List<GameAction> actions) {
 		this.actions = actions;
 		this.mt = MessageType.ON_REQUEST_ACTION;
+	}
+
+	public ServerToClientMessage(Player player, List<Card> cards) {
+		this.player1 = player;
+		this.startingCards = cards;
+		this.mt = MessageType.ON_MULLIGAN;
 	}
 
 

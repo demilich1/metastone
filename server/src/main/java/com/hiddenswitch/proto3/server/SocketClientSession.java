@@ -7,6 +7,7 @@ import com.hiddenswitch.proto3.net.common.MessageType;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.TurnState;
 import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.events.GameEvent;
 
 import java.io.IOException;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.locks.Lock;
+import java.util.function.Consumer;
 
 class SocketClientSession implements Runnable, RemoteUpdateListener {
 	private SocketServerSession socketServerSession;
@@ -41,8 +43,12 @@ class SocketClientSession implements Runnable, RemoteUpdateListener {
 
 					if (message.getMt() == MessageType.FIRST_MESSAGE) {
 						getSocketServerSession().onFirstMessage(this, message);
-					} else {
+					} else if (message.getMt() == MessageType.UPDATE_ACTION){
 						getServerGameSession().listener.onActionRegistered(message.getCallingPlayer(), message.getAction());
+					} else if (message.getMt() == MessageType.UPDATE_MULLIGAN){
+						getServerGameSession().listener.onMulliganReceived(message.getPlayer1(), message.getDiscardedCards());
+					} else {
+						System.err.println("Unexpected message type received by server");
 					}
 
 				}
@@ -149,5 +155,10 @@ class SocketClientSession implements Runnable, RemoteUpdateListener {
 
 	public void setServerGameSession(ServerGameSession serverGameSession) {
 		this.serverGameSession = serverGameSession;
+	}
+
+	@Override
+	public void onMulligan(Player player, List<Card> cards) {
+		this.getQueue().add(new ServerToClientMessage(player, cards));
 	}
 }

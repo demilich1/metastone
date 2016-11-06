@@ -106,7 +106,7 @@ public class GameLogic implements Cloneable, Serializable {
 		return player.getHero().getHp() < 1 || player.getHero().hasAttribute(Attribute.DESTROYED);
 	}
 
-	private final TargetLogic targetLogic = new TargetLogic();
+	protected final TargetLogic targetLogic = new TargetLogic();
 	private final ActionLogic actionLogic = new ActionLogic();
 	private final SpellFactory spellFactory = new SpellFactory();
 	protected final IdFactory idFactory;
@@ -1453,7 +1453,7 @@ public class GameLogic implements Cloneable, Serializable {
 		newCard.setLocation(CardLocation.DECK);
 	}
 
-	private void resolveBattlecry(int playerId, Actor actor) {
+	protected void resolveBattlecry(int playerId, Actor actor) {
 		BattlecryAction battlecry = actor.getBattlecry();
 		Player player = context.getPlayer(playerId);
 		if (!battlecry.canBeExecuted(context, player)) {

@@ -3,7 +3,9 @@ package com.hiddenswitch.proto3.server;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
+import java.util.function.Consumer;
 
 import com.hiddenswitch.proto3.net.common.RemoteUpdateListener;
 import net.demilich.metastone.NotificationProxy;
@@ -12,6 +14,7 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.TurnState;
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.logic.GameLogic;
@@ -19,9 +22,14 @@ import net.demilich.metastone.game.logic.GameLogic;
 public class ServerGameContext extends GameContext {
 
 	public Map<Player, RemoteUpdateListener> listenerMap = new HashMap<>();
+	private Map<Integer, Consumer<List<Card>>> mulliganCallbacks = new ConcurrentHashMap<>();
 	private volatile Player player1;
 	private volatile Player player2;
 	private final Lock lock;
+	private volatile boolean initReady;
+	private volatile int mulliganCompleted;
+	public volatile GameAction battlecryAction;
+	private boolean battlecryRequested;
 
 	public ServerGameContext(Player player1, Player player2, GameLogic logic, DeckFormat deckFormat, Lock lock) {
 		super(player1, player2, logic, deckFormat);
@@ -36,6 +44,12 @@ public class ServerGameContext extends GameContext {
 	}
 
 	public void updateAction(Player player, GameAction action) {
+		if (battlecryRequested){
+			this.battlecryAction = action;
+			battlecryRequested = false;
+			return;
+		}
+		
 		if (actionRequested && player.getId() == getActivePlayer().getId()) {
 			pendingAction = action;
 			actionRequested = false;
@@ -50,11 +64,25 @@ public class ServerGameContext extends GameContext {
 
 	@Override
 	public void init() {
-		super.init();
+		initReady = false;
+		mulliganCompleted = 0;
+
+		int startingPlayerId = getLogic().determineBeginner(PLAYER_1, PLAYER_2);
+		activePlayer = getPlayer(startingPlayerId).getId();
+		logger.debug(getActivePlayer().getName() + " begins");
+		
+		getLock().lock();
 		listenerMap.get(getPlayer1()).setPlayers(getPlayer1(), getPlayer2());
 		listenerMap.get(getPlayer2()).setPlayers(getPlayer2(), getPlayer1());
 		listenerMap.get(getActivePlayer()).onActivePlayer(getActivePlayer());
 		listenerMap.get(getNonActivePlayer()).onActivePlayer(getActivePlayer());
+		getLogic().init(activePlayer, true);
+		getLogic().init(getOpponent(getActivePlayer()).getId(), false);
+		getLock().unlock();
+		while(!initReady){
+			//waiting for mulligan inputs
+		}
+
 	}
 
 	@Override
@@ -178,8 +206,35 @@ public class ServerGameContext extends GameContext {
 		listenerMap.get(getPlayer2()).onGameEvent(gameEvent);
 
 	}
+	
+	public void requestBattlecry(Player player, List<GameAction> actions){
+		this.battlecryAction = null;
+		battlecryRequested = true;
+		listenerMap.get(player).onRequestAction(actions);
+	}
 
 	private Lock getLock() {
 		return lock;
+	}
+	
+	public void mulligan(Player player, List<Card> starterCards, Consumer<List<Card>> callBack){
+		this.mulliganCallbacks.put(player.getId(),  callBack);
+		listenerMap.get(player).onMulligan(player, starterCards);
+	}
+	
+	public void cycleLock(){
+		getLock().unlock();
+		getLock().lock();
+	}
+
+	public void updateMulligan(Player player, List<Card> discardedCards) {
+		System.out.println("mulligan received");
+		this.mulliganCallbacks.get(player.getId()).accept(discardedCards);
+		this.mulliganCallbacks.remove(player.getId());
+		mulliganCompleted += 1;
+		if (mulliganCompleted == 2){
+			initReady = true;
+		}
+		
 	}
 }

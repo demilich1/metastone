@@ -1,9 +1,11 @@
 package com.hiddenswitch.proto3.net.common;
 
 import java.io.Serializable;
+import java.util.List;
 
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.cards.Card;
 
 public class ClientToServerMessage implements Serializable {
 	private MessageType mt;
@@ -11,6 +13,7 @@ public class ClientToServerMessage implements Serializable {
 	private Player callingPlayer;
 	private GameAction action;
 	private String gameId;
+	private List<Card> discardedCards;
 
 	public ClientToServerMessage(Player player, GameAction action) {
 		this.setCallingPlayer(player);
@@ -27,6 +30,12 @@ public class ClientToServerMessage implements Serializable {
 		this.setPlayer1(player);
 		this.setGameId(gameId);
 		setMt(MessageType.FIRST_MESSAGE);
+	}
+
+	public ClientToServerMessage(Player player, List<Card> discardedCards) {
+		this.setPlayer1(player);
+		this.discardedCards = discardedCards;
+		setMt(MessageType.UPDATE_MULLIGAN);
 	}
 
 	public MessageType getMt() {
@@ -68,6 +77,11 @@ public class ClientToServerMessage implements Serializable {
 
 	public void setAction(GameAction action) {
 		this.action = action;
+	}
+
+	public List<Card> getDiscardedCards() {
+		// TODO Auto-generated method stub
+		return discardedCards;
 	}
 	
 	

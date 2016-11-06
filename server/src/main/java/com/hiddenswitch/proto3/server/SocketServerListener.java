@@ -1,9 +1,11 @@
 package com.hiddenswitch.proto3.server;
 
+import java.util.List;
 import java.util.concurrent.locks.Lock;
 
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.logic.GameLogic;
@@ -30,7 +32,9 @@ public class SocketServerListener implements ServerListener {
 			setPlayer2(player);
 			DeckFormat simpleFormat = new DeckFormat();
 			simpleFormat.addSet(CardSet.PROCEDURAL_PREVIEW);
-			setGameContext(new ServerGameContext(getPlayer1(), getPlayer2(), new GameLogic(), simpleFormat, gameLock));
+			simpleFormat.addSet(CardSet.CLASSIC);
+			simpleFormat.addSet(CardSet.BASIC);
+			setGameContext(new ServerGameContext(getPlayer1(), getPlayer2(), new ServerGameLogic(), simpleFormat, gameLock));
 			getGameContext().setUpdateListener(getPlayer1(), getSender().getPlayerListener(0));
 			getGameContext().setUpdateListener(getPlayer2(), getSender().getPlayerListener(1));
 			new Thread(() -> getGameContext().play()).start();
@@ -44,6 +48,11 @@ public class SocketServerListener implements ServerListener {
 		if (getGameContext() != null) {
 			getGameContext().updateAction(callingPlayer, action);
 		}
+	}
+	
+	@Override
+	public void onMulliganReceived(Player player, List<Card>ReceivedCards){
+		getGameContext().updateMulligan(player, ReceivedCards);
 	}
 
 	public ServerCommunicationSend getSender() {

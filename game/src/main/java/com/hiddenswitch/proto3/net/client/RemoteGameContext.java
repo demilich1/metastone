@@ -14,6 +14,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.TurnState;
 import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.events.GameEvent;
@@ -34,6 +35,7 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	private volatile List<GameAction> remoteValidActions;
 	private String host;
 	private int port;
+	private boolean mulligan;
 	ClientCommunicationSend ccs;
 	ClientCommunicationReceive ccr;
 
@@ -164,7 +166,7 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 
 	@Override
 	public boolean ignoreEvents() {
-		return (getActivePlayerId() == -1);
+		return (!mulligan && getActivePlayerId() == -1);
 	}
 
 	@Override
@@ -334,5 +336,13 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 
 	public int getPort() {
 		return port;
+	}
+
+	@Override
+	public void onMulligan(Player player, List<Card> cards) {
+		mulligan = false;
+		List<Card> discardedCards = player.getBehaviour().mulligan(this, player, cards);
+		mulligan = true;
+		ccs.getSendToServer().sendMulligan(player, discardedCards);
 	}
 }
