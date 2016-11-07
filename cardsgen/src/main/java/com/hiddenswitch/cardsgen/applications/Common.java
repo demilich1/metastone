@@ -1,18 +1,17 @@
 package com.hiddenswitch.cardsgen.applications;
 
+import com.amazonaws.auth.*;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.hiddenswitch.cardsgen.functions.GenerateConfigsForDecks;
 import com.hiddenswitch.cardsgen.functions.MergeSimulationResults;
 import com.hiddenswitch.cardsgen.functions.Simulator;
 import com.hiddenswitch.cardsgen.models.TestConfig;
 import net.demilich.metastone.game.cards.CardParseException;
-import net.demilich.metastone.game.decks.Deck;
-import net.demilich.metastone.game.decks.DeckCatalogue;
 import net.demilich.metastone.game.gameconfig.GameConfig;
 import net.demilich.metastone.game.statistics.SimulationResult;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.math3.util.Combinations;
-import org.apache.log4j.Logger;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -49,10 +48,21 @@ public class Common {
 	}
 
 	public static List<String> getDefaultDecks() throws IOException {
-		return IOUtils.readLines(ClassLoader.getSystemClassLoader().getResourceAsStream("defaults/decks.txt"));
+		return IOUtils.readLines(Common.class.getClassLoader().getResourceAsStream("defaults/decks.txt"));
 	}
 
 	public static String getTemporaryOutput() {
 		return "build/" + RandomStringUtils.randomAlphabetic(20);
+	}
+
+	public static AWSCredentials getAwsCredentials() {
+		return getAwsCredentials("default");
+	}
+
+	public static AWSCredentials getAwsCredentials(String profile) {
+		return new AWSCredentialsProviderChain(new ProfileCredentialsProvider(profile),
+				new EnvironmentVariableCredentialsProvider(),
+				new SystemPropertiesCredentialsProvider(),
+				new InstanceProfileCredentialsProvider()).getCredentials();
 	}
 }

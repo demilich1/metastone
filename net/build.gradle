@@ -48,7 +48,7 @@ dependencies {
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
     compile 'commons-validator:commons-validator:1.4.1'
     compile group: 'com.google.code.gson', name: 'gson', version: '2.3.1'
-    compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.32.2'
+    compile group: 'org.glassfish.jersey.containers', name: 'jersey-container-servlet', version: '2.+'
     compile project(':server')
     compile project(':cards')
     testCompile project(':game')
