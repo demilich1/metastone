@@ -49,7 +49,7 @@ public class HumanBehaviour extends Behaviour implements IActionSelectionListene
 	}
 
 	@Override
-	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
+	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {		
 		waitingForInput = true;
 		HumanActionOptions options = new HumanActionOptions(this, context, player, validActions);
 		NotificationProxy.sendNotification(GameNotification.HUMAN_PROMPT_FOR_ACTION, options);

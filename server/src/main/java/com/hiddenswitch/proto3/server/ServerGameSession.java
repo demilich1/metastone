@@ -37,8 +37,8 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	public ServerGameSession(PregamePlayerConfiguration p1, PregamePlayerConfiguration p2){
 		super(p1, p2);
 		//TODO: in PregamePlayerConfiguration should really contain a playerConfig object.
-		this.player1 = new Player(new PlayerConfig(p1.getDeck(), new HumanBehaviour()));
-		this.player2 = new Player(new PlayerConfig(p2.getDeck(), new HumanBehaviour()));
+		this.player1 = new Player(new PlayerConfig(p1.getDeck(), new NetworkHumanBehaviour()));
+		this.player2 = new Player(new PlayerConfig(p2.getDeck(), new NetworkHumanBehaviour()));
 	}
 
 	//Temporary constructor since we don't have a matchmaker yet. 
@@ -66,10 +66,12 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 		if (c1 == null) {
 			c1 = client;
 			c1.setServerGameSession(this);
+			firstMessage.getPlayer1().setBehaviour(new NetworkHumanBehaviour());
 			listener.onPlayerConnected(firstMessage.getPlayer1());
 		} else {
 			c2 = client;
 			c2.setServerGameSession(this);
+			firstMessage.getPlayer1().setBehaviour(new NetworkHumanBehaviour());
 			listener.onPlayerConnected(firstMessage.getPlayer1());
 		}
 	}

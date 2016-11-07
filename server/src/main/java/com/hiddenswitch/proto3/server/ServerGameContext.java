@@ -28,8 +28,7 @@ public class ServerGameContext extends GameContext {
 	private final Lock lock;
 	private volatile boolean initReady;
 	private volatile int mulliganCompleted;
-	public volatile GameAction battlecryAction;
-	private boolean battlecryRequested;
+
 
 	public ServerGameContext(Player player1, Player player2, GameLogic logic, DeckFormat deckFormat, Lock lock) {
 		super(player1, player2, logic, deckFormat);
@@ -44,12 +43,6 @@ public class ServerGameContext extends GameContext {
 	}
 
 	public void updateAction(Player player, GameAction action) {
-		if (battlecryRequested){
-			this.battlecryAction = action;
-			battlecryRequested = false;
-			return;
-		}
-		
 		if (actionRequested && player.getId() == getActivePlayer().getId()) {
 			pendingAction = action;
 			actionRequested = false;
@@ -59,7 +52,7 @@ public class ServerGameContext extends GameContext {
 	}
 
 
-	GameAction pendingAction = null;
+	public volatile GameAction pendingAction = null;
 	volatile boolean actionRequested = false;
 
 	@Override
@@ -139,6 +132,7 @@ public class ServerGameContext extends GameContext {
 		getLock().unlock();
 	}
 
+	/**
 	@Override
 	public boolean playTurn() {
 		if (actionRequested == true && pendingAction == null) {
@@ -183,6 +177,9 @@ public class ServerGameContext extends GameContext {
 		return !endTurn;
 	}
 
+	 **/
+	
+	
 	@Override
 	protected void onGameStateChanged() {
 		listenerMap.get(getPlayer1()).onUpdate(getPlayer(0), getPlayer(1), getTurnState());
@@ -207,9 +204,9 @@ public class ServerGameContext extends GameContext {
 
 	}
 	
-	public void requestBattlecry(Player player, List<GameAction> actions){
-		this.battlecryAction = null;
-		battlecryRequested = true;
+	public void requestAction(Player player, List<GameAction> actions){
+		this.pendingAction = null;
+		actionRequested = true;
 		listenerMap.get(player).onRequestAction(actions);
 	}
 

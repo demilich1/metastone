@@ -70,7 +70,7 @@ public class ServerGameLogic extends GameLogic {
 			}
 		});
 	}
-	
+	/**
 	@Override
 	protected void resolveBattlecry(int playerId, Actor actor) {
 		BattlecryAction battlecry = actor.getBattlecry();
@@ -94,7 +94,7 @@ public class ServerGameLogic extends GameLogic {
 				battlecryActions.add(targetedBattlecry);
 			}
 			ServerGameContext serverContext = (ServerGameContext) context;
-			serverContext.requestBattlecry(player, battlecryActions);
+			serverContext.requestAction(player, battlecryActions);
 			while (serverContext.battlecryAction == null){
 				serverContext.cycleLock();
 			}
@@ -110,6 +110,6 @@ public class ServerGameLogic extends GameLogic {
 			performGameAction(playerId, battlecryAction);
 		}
 	}
-
+	 */
 
 }
