@@ -14,8 +14,8 @@
 		"spell": {
 			"class": "BuffWeaponSpell",
 			"targetPlayer": "SELF",
-			"damage": 1,
-			"durability": 1
+			"attackBonus": 1,
+			"hpBonus": 1
 		},
 		"condition": {
 			"class": "RaceOnBoardCondition",
