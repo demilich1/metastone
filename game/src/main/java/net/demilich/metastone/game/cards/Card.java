@@ -22,7 +22,8 @@ public abstract class Card extends Entity {
 	private final CardType cardType;
 	private final CardSet cardSet;
 	private final Rarity rarity;
-	private final HeroClass classRestriction;
+	private HeroClass heroClass;
+	private HeroClass[] heroClasses;
 	private boolean collectible = true;
 	private CardLocation location;
 	private BattlecryDesc battlecry;
@@ -37,7 +38,10 @@ public abstract class Card extends Entity {
 		cardType = desc.type;
 		cardSet = desc.set;
 		rarity = desc.rarity;
-		classRestriction = desc.heroClass;
+		heroClass = desc.heroClass;
+		if (desc.heroClasses != null) {
+			heroClasses = desc.heroClasses;
+		}
 
 		setAttribute(Attribute.BASE_MANA_COST, desc.baseManaCost);
 		if (desc.attributes != null) {
@@ -88,8 +92,12 @@ public abstract class Card extends Entity {
 		return cardType;
 	}
 
-	public HeroClass getClassRestriction() {
-		return classRestriction;
+	public HeroClass getHeroClass() {
+		return heroClass;
+	}
+
+	public HeroClass[] getHeroClasses() {
+		return heroClasses;
 	}
 
 	public Card getCopy() {
@@ -129,6 +137,19 @@ public abstract class Card extends Entity {
 
 	public boolean hasBattlecry() {
 		return this.battlecry != null;
+	}
+
+	public boolean hasHeroClass(HeroClass heroClass) {
+		if (getHeroClasses() != null) {
+			for (HeroClass h : getHeroClasses()) {
+				if (heroClass.equals(h)) {
+					return true;
+				}
+			}
+		} else if (heroClass == getHeroClass()) {
+			return true;
+		}
+		return false;
 	}
 
 	public boolean isCollectible() {

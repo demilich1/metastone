@@ -1264,7 +1264,7 @@ public class GameLogic implements Cloneable {
 
 	public void processTargetModifiers(Player player, GameAction action) {
 		HeroPower heroPower = player.getHero().getHeroPower();
-		if (heroPower.getClassRestriction() != HeroClass.HUNTER) {
+		if (heroPower.getHeroClass() != HeroClass.HUNTER) {
 			return;
 		}
 		if (action.getActionType() == ActionType.HERO_POWER && hasAttribute(player, Attribute.HERO_POWER_CAN_TARGET_MINIONS)) {
