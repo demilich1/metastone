@@ -8,10 +8,10 @@
 	"heroClass": "ANY",
 	"rarity": "EPIC",
 	"race": "MURLOC",
-	"description": "ALL other Murlocs have +2/+1.",
+	"description": "Your other Murlocs have +2/+1.",
 	"aura": {
 		"class": "BuffAura",
-		"target": "ALL_OTHER_MINIONS",
+		"target": "OTHER_FRIENDLY_MINIONS",
 		"attackBonus": 2,
 		"hpBonus": 1,
 		"filter": {

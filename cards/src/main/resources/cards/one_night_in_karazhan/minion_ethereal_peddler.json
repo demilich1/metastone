@@ -7,7 +7,7 @@
 	"baseHp": 6,
 	"heroClass": "ROGUE",
 	"rarity": "RARE",
-	"description": "Battlecry: Reduce the Cost of cards from other classes by (2).",
+	"description": "Battlecry: If you're holding any non-Rogue class cards, reduce their cost by (2).",
 	"battlecry": {
 		"targetSelection": "NONE",
 		"spell": {
@@ -16,7 +16,7 @@
 			"cardFilter": {
 				"class": "CardFilter",
 				"heroClasses": [
-					"SELF",
+					"ROGUE",
 					"ANY"
 				],
 				"invert": true
