@@ -21,7 +21,7 @@ public class TransformMinionSpell extends Spell {
 
 	public static SpellDesc create(EntityReference target, Minion transformTarget, boolean randomTarget) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(TransformMinionSpell.class);
-		arguments.put(SpellArg.ENTITY, transformTarget);
+		arguments.put(SpellArg.SECONDARY_TARGET, transformTarget);
 		arguments.put(SpellArg.TARGET, target);
 		arguments.put(SpellArg.RANDOM_TARGET, randomTarget);
 		return new SpellDesc(arguments);
@@ -46,7 +46,7 @@ public class TransformMinionSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Minion minion = (Minion) target;
-		Minion transformTarget = (Minion) desc.get(SpellArg.ENTITY);
+		Minion transformTarget = (Minion) desc.get(SpellArg.SECONDARY_TARGET);
 		String cardName = (String) desc.get(SpellArg.CARD);
 		MinionCard templateCard = cardName != null ? (MinionCard) CardCatalogue.getCardById(cardName) : null;
 

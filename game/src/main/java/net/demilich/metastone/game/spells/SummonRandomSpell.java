@@ -14,7 +14,7 @@ public class SummonRandomSpell extends Spell {
 
 	public static SpellDesc create(MinionCard... minionCards) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(SummonRandomSpell.class);
-		arguments.put(SpellArg.CARD, minionCards);
+		arguments.put(SpellArg.CARDS, minionCards);
 		return new SpellDesc(arguments);
 	}
 

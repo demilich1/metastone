@@ -20,7 +20,7 @@ public class ReviveMinionSpell extends Spell {
 
 	public static SpellDesc create(EntityReference target, int hpAdjustment) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(ReviveMinionSpell.class);
-		arguments.put(SpellArg.VALUE, hpAdjustment);
+		arguments.put(SpellArg.HP_BONUS, hpAdjustment);
 		arguments.put(SpellArg.TARGET, target);
 
 		return new SpellDesc(arguments);

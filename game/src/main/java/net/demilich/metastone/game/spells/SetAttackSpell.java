@@ -11,8 +11,9 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 
 public class SetAttackSpell extends Spell {
 
-	public static SpellDesc create() {
+	public static SpellDesc create(int value) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(SetAttackSpell.class);
+		arguments.put(SpellArg.VALUE, value);
 		return new SpellDesc(arguments);
 	}
 

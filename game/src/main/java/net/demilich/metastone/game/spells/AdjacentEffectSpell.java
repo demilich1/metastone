@@ -15,8 +15,9 @@ public class AdjacentEffectSpell extends Spell {
 
 	public static SpellDesc create(EntityReference target, SpellDesc primarySpell, SpellDesc secondarySpell) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(AdjacentEffectSpell.class);
-		arguments.put(SpellArg.SPELL_1, primarySpell);
-
+		if (primarySpell != null) {
+			arguments.put(SpellArg.SPELL_1, primarySpell);
+		}
 		if (secondarySpell != null) {
 			arguments.put(SpellArg.SPELL_2, secondarySpell);
 		}

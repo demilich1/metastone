@@ -17,7 +17,7 @@ public class EitherOrSpell extends Spell {
 		Map<SpellArg, Object> arguments = SpellDesc.build(EitherOrSpell.class);
 		arguments.put(SpellArg.SPELL_1, either);
 		arguments.put(SpellArg.SPELL_2, or);
-		arguments.put(SpellArg.SPELL_CONDITION_CHECKER, condition);
+		arguments.put(SpellArg.CONDITION, condition);
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
 	}
