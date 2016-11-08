@@ -560,6 +560,7 @@ public class GameLogic implements Cloneable {
 
 		Hero hero = player.getHero();
 		hero.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
+		hero.removeAttribute(Attribute.HERO_POWER_USAGES);
 		handleFrozen(hero);
 		for (Minion minion : player.getMinions()) {
 			minion.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);

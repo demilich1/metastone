@@ -1,0 +1,39 @@
+{
+	"name": "Grimestreet Informant",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"heroClass": "ANY",
+	"heroClasses": [
+		"HUNTER",
+		"PALADIN",
+		"WARRIOR"
+	],
+	"rarity": "RARE",
+	"description": "Battlecry: Discover a Hunter, Paladin, or Warrior card.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "DiscoverFilteredCardSpell",
+			"spell": {
+				"class": "ReceiveCardSpell",
+				"targetPlayer": "SELF"
+			},
+			"cardFilter": {
+				"class": "CardFilter",
+				"heroClasses": [
+					"HUNTER",
+					"PALADIN",
+					"WARRIOR"
+				]
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZHAN",
+	"fileFormatVersion": 1
+}
