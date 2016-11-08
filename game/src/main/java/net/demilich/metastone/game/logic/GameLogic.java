@@ -1362,7 +1362,7 @@ public class GameLogic implements Cloneable {
 		Player player = context.getPlayer(playerID);
 		log("Card {} has been moved from the DECK to the GRAVEYARD", card);
 		card.setLocation(CardLocation.GRAVEYARD);
-		if (card.getAttribute(Attribute.PASSIVE_TRIGGER) != null) {
+		if (card.getAttribute(Attribute.PASSIVE_TRIGGER) != null || card.getAttribute(Attribute.DECK_TRIGGER) != null) {
 			removeSpelltriggers(card);
 		}
 		player.getDeck().remove(card);
@@ -1448,6 +1448,11 @@ public class GameLogic implements Cloneable {
 
 		newCard.setOwner(playerId);
 		CardCollection deck = player.getDeck();
+
+		if (newCard.getAttribute(Attribute.DECK_TRIGGER) != null) {
+			TriggerDesc triggerDesc = (TriggerDesc) newCard.getAttribute(Attribute.DECK_TRIGGER);
+			addGameEventListener(player, triggerDesc.create(), newCard);
+		}
 
 		log("{} replaces card {} with card {}", player.getName(), oldCard, newCard);
 		deck.replace(oldCard, newCard);
@@ -1535,6 +1540,11 @@ public class GameLogic implements Cloneable {
 
 		if (player.getDeck().getCount() < MAX_DECK_SIZE) {
 			player.getDeck().addRandomly(card);
+			
+			if (card.getAttribute(Attribute.DECK_TRIGGER) != null) {
+				TriggerDesc triggerDesc = (TriggerDesc) card.getAttribute(Attribute.DECK_TRIGGER);
+				addGameEventListener(player, triggerDesc.create(), card);
+			}
 			log("Card {} has been shuffled to {}'s deck", card, player.getName());
 		}
 	}
