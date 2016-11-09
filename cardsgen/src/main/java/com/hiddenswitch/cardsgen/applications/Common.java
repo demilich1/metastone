@@ -2,6 +2,7 @@ package com.hiddenswitch.cardsgen.applications;
 
 import com.amazonaws.auth.*;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.util.EC2MetadataUtils;
 import com.hiddenswitch.cardsgen.functions.GenerateConfigsForDecks;
 import com.hiddenswitch.cardsgen.functions.MergeSimulationResults;
 import com.hiddenswitch.cardsgen.functions.Simulator;
@@ -12,14 +13,17 @@ import net.demilich.metastone.game.statistics.SimulationResult;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.math3.util.Combinations;
+import org.apache.hadoop.conf.Configuration;
+import org.apache.log4j.Logger;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
+import static com.amazonaws.util.EC2MetadataUtils.getIAMSecurityCredentials;
 
 public class Common {
 	public static JavaPairRDD<TestConfig, SimulationResult> simulate(JavaPairRDD<TestConfig, GameConfig> configs) {
@@ -52,7 +56,7 @@ public class Common {
 	}
 
 	public static String getTemporaryOutput() {
-		return "build/" + RandomStringUtils.randomAlphabetic(20);
+		return "s3n://clusterresults/build/" + RandomStringUtils.randomAlphabetic(20);
 	}
 
 	public static AWSCredentials getAwsCredentials() {
@@ -60,9 +64,68 @@ public class Common {
 	}
 
 	public static AWSCredentials getAwsCredentials(String profile) {
-		return new AWSCredentialsProviderChain(new ProfileCredentialsProvider(profile),
-				new EnvironmentVariableCredentialsProvider(),
-				new SystemPropertiesCredentialsProvider(),
-				new InstanceProfileCredentialsProvider()).getCredentials();
+		try {
+			Map<String, EC2MetadataUtils.IAMSecurityCredential> credentials = getIAMSecurityCredentials();
+			// Get the first credentials here
+
+			for (Map.Entry<String, EC2MetadataUtils.IAMSecurityCredential> entry : credentials.entrySet()) {
+				return new BasicAWSCredentials(entry.getValue().accessKeyId, entry.getValue().secretAccessKey);
+			}
+		} catch (Exception ignored) {
+		}
+
+		if (profile == null || profile.isEmpty()) {
+			return new AWSCredentialsProviderChain(
+					new InstanceProfileCredentialsProvider(),
+					new EnvironmentVariableCredentialsProvider(),
+					new SystemPropertiesCredentialsProvider()
+			).getCredentials();
+		} else {
+			return new AWSCredentialsProviderChain(
+					new InstanceProfileCredentialsProvider(),
+					new EnvironmentVariableCredentialsProvider(),
+					new ProfileCredentialsProvider(profile),
+					new SystemPropertiesCredentialsProvider()
+			).getCredentials();
+		}
+	}
+
+	public static void configureS3Credentials(JavaSparkContext sc, String sentinelKeyPrefix) {
+		Logger logger = Logger.getLogger(Common.class);
+		try {
+			// Try accessing saving a file on s3
+			sc.parallelize(Collections.singletonList("sentinel")).saveAsObjectFile(sentinelKeyPrefix + RandomStringUtils.randomAlphanumeric(5) + ".txt");
+		} catch (Exception e) {
+			if (e instanceof org.apache.hadoop.security.AccessControlException) {
+				logger.error("Failed to save sentinel file.", e);
+				AWSCredentials credentials = getAwsCredentials();
+				logger.error(String.format("The credentials retrieved from Common.getAwsCredentials are: %s %s", credentials.getAWSAccessKeyId(), credentials.getAWSSecretKey()));
+				Configuration configuration = sc.hadoopConfiguration();
+				logger.error("Hadoop configuration before setting values:");
+				for (Map.Entry<String, String> entry : configuration) {
+					logger.error(String.format("%s: %s", entry.getKey(), entry.getValue()));
+				}
+
+				if (configuration.get("fs.s3n.impl", "").isEmpty()) {
+					configuration.set("fs.s3n.impl", "org.apache.hadoop.fs.s3native.NativeS3FileSystem");
+				}
+
+				configuration.set("fs.s3n.awsAccessKeyId", credentials.getAWSAccessKeyId());
+				configuration.set("fs.s3n.awsSecretAccessKey", credentials.getAWSSecretKey());
+
+				logger.error("Hadoop configuration after setting values:");
+				for (Map.Entry<String, String> entry : configuration) {
+					logger.error(String.format("%s: %s", entry.getKey(), entry.getValue()));
+				}
+				// Try to save the sentinel file now.
+				sc.parallelize(Arrays.asList("sentinel")).saveAsObjectFile(sentinelKeyPrefix + RandomStringUtils.randomAlphanumeric(5) + ".txt");
+			} else {
+				throw e;
+			}
+		}
+	}
+
+	static String defaultsTo(String msg, String value) {
+		return String.format("%s Defaults to %s.", msg, value);
 	}
 }

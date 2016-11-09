@@ -92,10 +92,8 @@ public class DeckProxy extends Proxy<GameNotification> {
 	}
 
 	public void loadDecks() throws IOException, URISyntaxException {
-
 		// load decks from ~/metastone/decks on the filesystem
-
-		deckCatalogue.loadDecks();
+		deckCatalogue.loadDecksFromFilesystem();
 	}
 
 	public boolean nameAvailable(Deck deck) {

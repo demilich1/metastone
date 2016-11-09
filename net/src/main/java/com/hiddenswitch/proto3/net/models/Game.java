@@ -5,13 +5,11 @@ import com.amazonaws.services.kms.model.UnsupportedOperationException;
 import com.hiddenswitch.proto3.net.amazon.GameContextConverter;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.ProceduralPlayer;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
 import net.demilich.metastone.game.logic.GameLogic;
-import net.demilich.metastone.game.logic.ProceduralGameLogic;
 
 import java.util.HashMap;
 
@@ -96,7 +94,7 @@ public class Game {
 
 	public void setInitialGameContext() {
 		try {
-			CardCatalogue.loadCards();
+			CardCatalogue.loadCardsFromFilesystem();
 		} catch (Exception e) {
 			throw new UnsupportedOperationException("Cannot load cards!");
 		}

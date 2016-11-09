@@ -36,25 +36,25 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'com.amazonaws:aws-java-sdk-bom:1.11.41'
+        mavenBom 'com.amazonaws:aws-java-sdk-bom:1.11.52'
     }
 }
 
 dependencies {
     compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.0.1'
-    compile 'com.lambdaworks:scrypt:1.4.0'
-    compile group: 'com.amazonaws', name: 'aws-java-sdk-dynamodb', version: '1.11.41'
-    compile 'com.amazonaws:aws-java-sdk-sqs'
+    compile group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.+'
+    compile group: 'com.lambdaworks', name: 'scrypt', version: '1.4.0'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
-    compile 'commons-validator:commons-validator:1.4.1'
+    compile group: 'commons-validator', name: 'commons-validator', version: '1.4.1'
     compile group: 'com.google.code.gson', name: 'gson', version: '2.3.1'
     compile group: 'org.glassfish.jersey.containers', name: 'jersey-container-servlet', version: '2.+'
     compile project(':server')
     compile project(':cards')
+
     testCompile project(':game')
-    testCompile 'org.unitils:unitils-core:3.4.3'
+    testCompile group: 'org.unitils', name: 'unitils-core', version: '3.4.3'
     testCompile group: 'org.testng', name: 'testng', version: '6.+'
-    testCompile 'org.elasticmq:elasticmq-rest-sqs_2.11:0.10.0'
+    testCompile group: 'org.elasticmq', name: 'elasticmq-rest-sqs_2.11', version: '0.10.0'
     testCompile group: 'com.almworks.sqlite4java', name: 'sqlite4java', version: '1.0.392'
     testCompile group: 'com.almworks.sqlite4java', name: 'sqlite4java-win32-x86', version: '1.0.392'
     testCompile group: 'com.almworks.sqlite4java', name: 'sqlite4java-win32-x64', version: '1.0.392'

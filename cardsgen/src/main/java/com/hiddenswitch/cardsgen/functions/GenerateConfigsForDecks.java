@@ -12,7 +12,6 @@ import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.entities.heroes.MetaHero;
 import net.demilich.metastone.game.gameconfig.GameConfig;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
-import org.apache.spark.api.java.function.FlatMapFunction;
 import org.apache.spark.api.java.function.PairFlatMapFunction;
 import scala.Tuple2;
 
@@ -28,8 +27,8 @@ public class GenerateConfigsForDecks implements PairFlatMapFunction<String[], Te
 	public GenerateConfigsForDecks(int batches, int gamesPerBatch) throws IOException, URISyntaxException, CardParseException {
 		this.batches = batches;
 		this.gamesPerBatch = gamesPerBatch;
-		CardCatalogue.loadCards();
-		DeckCatalogue.loadDecks();
+		CardCatalogue.loadCardsFromPackage();
+		DeckCatalogue.loadDecksFromPackage();
 	}
 
 	@Override

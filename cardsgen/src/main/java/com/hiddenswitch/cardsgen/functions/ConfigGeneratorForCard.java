@@ -28,8 +28,8 @@ public class ConfigGeneratorForCard implements PairFlatMapFunction<Card, TestCon
 	public ConfigGeneratorForCard(int batches, int gamesPerBatch) throws IOException, URISyntaxException, CardParseException {
 		this.batches = batches;
 		this.gamesPerBatch = gamesPerBatch;
-		CardCatalogue.loadCards();
-		DeckCatalogue.loadDecks();
+		CardCatalogue.loadCardsFromPackage();
+		DeckCatalogue.loadDecksFromPackage();
 	}
 
 	@Override

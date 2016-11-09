@@ -13,7 +13,7 @@ import java.util.Iterator;
 public class CardGenerator implements FlatMapFunction<String, Card> {
 	public CardGenerator() throws CardParseException, IOException, URISyntaxException {
 		try {
-			CardCatalogue.loadCards();
+			CardCatalogue.loadCardsFromFilesystem();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (URISyntaxException e) {

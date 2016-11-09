@@ -8,7 +8,7 @@ import java.net.URISyntaxException;
 
 public class PrintDecks {
 	public static void main(String[] args) throws IOException, URISyntaxException {
-		DeckCatalogue.loadDecks();
+		DeckCatalogue.loadDecksFromPackage();
 
 		for (Deck deck : DeckCatalogue.getDecks()) {
 			System.out.println(deck.getName());

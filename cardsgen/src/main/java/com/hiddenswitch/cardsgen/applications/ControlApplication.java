@@ -1,24 +1,21 @@
 package com.hiddenswitch.cardsgen.applications;
 
-import com.amazonaws.auth.AWSCredentials;
 import com.hiddenswitch.cardsgen.functions.MergeSimulationResults;
 import com.hiddenswitch.cardsgen.models.TestConfig;
 import net.demilich.metastone.game.cards.CardParseException;
 import net.demilich.metastone.game.gameconfig.GameConfig;
 import net.demilich.metastone.game.statistics.SimulationResult;
 import org.apache.commons.cli.*;
-import org.apache.commons.io.IOUtils;
-import org.apache.hadoop.conf.Configuration;
 import org.apache.log4j.Logger;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
+
+import static com.hiddenswitch.cardsgen.applications.Common.defaultsTo;
 
 /**
  * Calculates control statistics for all the decks.
@@ -29,31 +26,31 @@ public class ControlApplication {
 	private static final String BATCHES = "batches";
 	private static final String OUTPUT = "output";
 	private static final String INPUT = "input";
-	private static final String PROFILE = "profile";
+	private static final String SENTINEL_KEY_PREFIX = "sentinelkeyprefix";
 
 	public static void main(String[] args) throws ParseException, CardParseException, IOException, URISyntaxException {
 		Logger logger = Logger.getLogger(ControlApplication.class);
-
-		// Parse all the options
-		Options options = new Options()
-				.addOption(INPUT, true, "An existing input datastore.")
-				.addOption(DECKS_FILE, true, "A path to a list of decks to evaluate")
-				.addOption(GAMES_PER_BATCH, true, "The number of games per simulation batch to run. This is a " +
-						"non-parallelized chunk of game simulations")
-				.addOption(BATCHES, true, "The number of batches of games to simulate. This is a parallelizable " +
-						"chunk of games to execute.")
-				.addOption(OUTPUT, true, "The output file to save the training data to.")
-				.addOption(PROFILE, true, "The AWS profile to use for s3n URLs.");
-
-		CommandLineParser parser = new GnuParser();
-		CommandLine cmd = parser.parse(options, args);
 
 		String decksFile = null;
 		int gamesPerBatch = 3;
 		int batches = 2;
 		String output = Common.getTemporaryOutput();
 		String input = null;
-		String profile = "default";
+		String sentinelKeyPrefix = "s3n://clusterresults/sentinel/";
+
+		// Parse all the options
+		Options options = new Options()
+				.addOption(INPUT, true, "An existing input datastore.")
+				.addOption(DECKS_FILE, true, defaultsTo("A path to a list of decks to evaluate.", "the 46 decks in the package"))
+				.addOption(GAMES_PER_BATCH, true, defaultsTo("The number of games per simulation batch to run. This is a " +
+						"non-parallelized chunk of game simulations", Integer.toString(gamesPerBatch)))
+				.addOption(BATCHES, true, defaultsTo("The number of batches of games to simulate. This is a parallelizable " +
+						"chunk of games to execute.", Integer.toString(batches)))
+				.addOption(OUTPUT, true, defaultsTo("The output file to save the training data to.", output))
+				.addOption(SENTINEL_KEY_PREFIX, true, defaultsTo("A path to try writing to to verify that we have AWS permissions (when applicable).", sentinelKeyPrefix));
+
+		CommandLineParser parser = new GnuParser();
+		CommandLine cmd = parser.parse(options, args);
 
 		if (cmd.hasOption(DECKS_FILE)) {
 			decksFile = cmd.getOptionValue(DECKS_FILE);
@@ -75,18 +72,19 @@ public class ControlApplication {
 			input = cmd.getOptionValue(INPUT);
 		}
 
-		if (cmd.hasOption(PROFILE)) {
-			profile = cmd.getOptionValue(PROFILE);
+		if (cmd.hasOption(SENTINEL_KEY_PREFIX)) {
+			sentinelKeyPrefix = cmd.getOptionValue(SENTINEL_KEY_PREFIX);
 		}
 
 		// Start Spark
 		SparkConf conf = new SparkConf().setAppName("Compute control statistics");
 		JavaSparkContext sc = new JavaSparkContext(conf);
-		AWSCredentials credentials = Common.getAwsCredentials(profile);
-		Configuration configuration = sc.hadoopConfiguration();
-		configuration.set("fs.s3n.impl", "org.apache.hadoop.fs.s3native.NativeS3FileSystem");
-		configuration.set("fs.s3n.awsAccessKeyId", credentials.getAWSAccessKeyId());
-		configuration.set("fs.s3n.awsSecretAccessKey", credentials.getAWSSecretKey());
+
+		if ((input != null && (input.contains("s3n://") || input.contains("s3://") || input.contains("s3a://")))
+				|| output.contains("s3n://") || output.contains("s3://") || output.contains("s3a://")) {
+			Common.configureS3Credentials(sc, sentinelKeyPrefix);
+		}
+
 
 		// Load the decks
 		List<String> decks = null;
@@ -128,6 +126,4 @@ public class ControlApplication {
 		results.saveAsObjectFile(output);
 		results.saveAsTextFile(output + "_text");
 	}
-
-
 }

@@ -27,16 +27,18 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'com.amazonaws:aws-java-sdk-bom:1.11.41'
+        mavenBom 'com.amazonaws:aws-java-sdk-bom:1.11.52'
     }
 }
 
 dependencies {
     compile project(':game')
-    compile group: 'com.amazonaws', name: 'aws-java-sdk-core', version: '1.11.+'
+    compile project(':cards')
+    compile group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.+'
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-ec2', version: '1.11.+'
     compile group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.11.+'
     compile group: 'com.amazonaws', name: 'aws-java-sdk-emr', version: '1.11.+'
-    compile group: 'org.apache.hadoop', name: 'hadoop-aws', version: '2.7.+'
+    compile group: 'org.apache.hadoop', name: 'hadoop-aws', version: '2.7.3'
     compile group: 'org.apache.spark', name: 'spark-core_2.11', version: '2.0.1'
     testCompile group: 'org.testng', name: 'testng', version: '6.+'
 }

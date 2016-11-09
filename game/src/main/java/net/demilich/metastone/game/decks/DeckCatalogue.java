@@ -60,12 +60,16 @@ public class DeckCatalogue {
 		logger.info("Deck '{}' contained in file '{}' has been successfully deleted", deck.getName(), path.getFileName().toString());
 	}
 
-	public static void loadDecks() throws IOException, URISyntaxException {
+	public static void loadDecksFromPackage() throws IOException, URISyntaxException {
 		decks.clear();
+		loadStandardDecks(ResourceLoader.loadJsonInputStreams(DECKS_FOLDER, false), new GsonBuilder().setPrettyPrinting().create());
+		loadMetaDecks(ResourceLoader.loadJsonInputStreams(DECKS_FOLDER, false), new GsonBuilder().setPrettyPrinting().create());
+	}
 
+	public static void loadDecksFromFilesystem() throws IOException, URISyntaxException {
+		decks.clear();
 		// load decks from ~/metastone/decks on the filesystem
 		loadStandardDecks(ResourceLoader.loadJsonInputStreams(DECKS_FOLDER_PATH, true), new GsonBuilder().setPrettyPrinting().create());
-
 		loadMetaDecks(ResourceLoader.loadJsonInputStreams(DECKS_FOLDER_PATH, true), new GsonBuilder().setPrettyPrinting().create());
 	}
 
