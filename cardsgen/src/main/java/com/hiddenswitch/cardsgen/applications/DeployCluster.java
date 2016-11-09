@@ -9,6 +9,7 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import org.apache.commons.cli.*;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.SimpleLayout;
 
@@ -31,13 +32,16 @@ public class DeployCluster {
 	private static final String JOB_FLOW_ROLE = "jobrole";
 	private static final String BID_PRICE = "bidprice";
 	private static final String INSTANCE_COUNT = "instancecount";
+	private static final String KEY_PAIR = "keypair";
 
 	public static void main(String[] args) throws ParseException, SdkClientException {
 		ConsoleAppender console = new ConsoleAppender();
 		console.setLayout(new SimpleLayout());
 		console.setTarget("System.out");
+		console.activateOptions();
 
 		Logger.getRootLogger().addAppender(console);
+		Logger.getRootLogger().setLevel(Level.INFO);
 		Logger logger = Logger.getLogger(DeployCluster.class);
 
 		String appArgs = "";
@@ -50,7 +54,8 @@ public class DeployCluster {
 		String serviceRole = "cluster";
 		String jobFlowRole = "clustermachines";
 		String bidPrice = "0.05";
-		int spotInstanceCount = 3;
+		String ec2KeyName = "clusterpair";
+		int spotInstanceCount = 0;
 
 		// Parse all the options
 		Options options = new Options()
@@ -64,7 +69,8 @@ public class DeployCluster {
 				.addOption(SERVICE_ROLE, true, defaultsTo("The name of the role to use to execute the EMR cluster creation commands.", serviceRole))
 				.addOption(JOB_FLOW_ROLE, true, defaultsTo("The name of the role to use to execute the actual jobs on the job machines.", jobFlowRole))
 				.addOption(BID_PRICE, true, defaultsTo("The bid price for c4.xlarge instances used for the tasks.", bidPrice))
-				.addOption(INSTANCE_COUNT, true, defaultsTo("The number of c4.xlarge instances, in addition to the 1 reserved instance, to execute the job on.", Integer.toString(spotInstanceCount)));
+				.addOption(INSTANCE_COUNT, true, defaultsTo("The number of c4.xlarge instances, in addition to the 1 reserved instance, to execute the job on.", Integer.toString(spotInstanceCount)))
+				.addOption(KEY_PAIR, true, defaultsTo("The name of the keypair to use for the master node.", "clusterpair"));
 
 		CommandLineParser parser = new GnuParser();
 		CommandLine cmd = parser.parse(options, args, false);
@@ -113,6 +119,10 @@ public class DeployCluster {
 			spotInstanceCount = Integer.parseInt(cmd.getOptionValue(INSTANCE_COUNT));
 		}
 
+		if (cmd.hasOption(KEY_PAIR)) {
+			ec2KeyName = cmd.getOptionValue(KEY_PAIR);
+		}
+
 		// Strip appArgs of trailing punctuation
 		appArgs = appArgs.replaceAll("^[\"\']", "").replaceAll("[\"\']$", "");
 		List<String> appArgsList = Arrays.asList(appArgs.split(" "));
@@ -144,7 +154,7 @@ public class DeployCluster {
 		List<StepConfig> stepConfigs = new ArrayList<>();
 
 		StepConfig debugEnabled = new StepConfig()
-				.withName("Enable Debugging")
+				.withName("Enable bebugging")
 				.withActionOnFailure("TERMINATE_JOB_FLOW")
 				.withHadoopJarStep(new HadoopJarStepConfig()
 						.withJar("command-runner.jar")
@@ -154,7 +164,7 @@ public class DeployCluster {
 		// Add the application arguments here
 		List<String> hadoopJarStepArgs = new ArrayList<>();
 		for (String arg : new String[]{
-				"spark-submit", "--deploy-mode", "cluster", "--class", mainClass, jarS3Path}) {
+				"spark-submit", "--master", "yarn", "--deploy-mode", "cluster", "--class", mainClass, jarS3Path}) {
 			hadoopJarStepArgs.add(arg);
 		}
 
@@ -169,38 +179,48 @@ public class DeployCluster {
 						.withJar("command-runner.jar")
 						.withArgs(hadoopJarStepArgs)));
 
+
+		ArrayList<InstanceGroupConfig> instanceGroupConfigs = new ArrayList<>(Arrays.asList(
+				new InstanceGroupConfig()
+						.withInstanceRole(InstanceRoleType.MASTER)
+						.withInstanceCount(1)
+						.withMarket(MarketType.ON_DEMAND)
+						.withInstanceType("m1.medium"),
+				new InstanceGroupConfig()
+						.withInstanceCount(1)
+						.withInstanceRole(InstanceRoleType.CORE)
+						.withMarket(MarketType.ON_DEMAND)
+						.withInstanceType("m1.medium")));
+
+		if (spotInstanceCount > 0) {
+			instanceGroupConfigs.add(new InstanceGroupConfig()
+					.withInstanceCount(spotInstanceCount)
+					.withInstanceRole(InstanceRoleType.TASK)
+					.withMarket(MarketType.SPOT)
+					.withInstanceType("c4.xlarge")
+					.withBidPrice(bidPrice));
+		}
+
 		RunJobFlowRequest request = new RunJobFlowRequest()
 				.withName(jobId)
 				.withLogUri(logUri)
-				.withConfigurations(new Configuration()
-						.withClassification("spark-log4j")
-						.addPropertiesEntry("log4j.rootCategory", "ERROR, console"))
+				.withConfigurations(
+						new Configuration()
+								.withClassification("spark")
+								.addPropertiesEntry("maximizeResourceAllocation", "true"),
+						new Configuration()
+								.withClassification("spark-log4j")
+								.addPropertiesEntry("log4j.rootCategory", "WARN, console"))
 				.withServiceRole(serviceRole)
 				.withApplications(sparkApp)
 				.withReleaseLabel("emr-5.1.0")
 				.withSteps(stepConfigs)
 				.withJobFlowRole(jobFlowRole)
 				.withInstances(new JobFlowInstancesConfig()
+						.withEc2KeyName(ec2KeyName)
 						.withKeepJobFlowAliveWhenNoSteps(false)
 						.withEc2SubnetId(subnetId)
-						.withInstanceGroups(
-								new InstanceGroupConfig()
-										.withInstanceRole(InstanceRoleType.MASTER)
-										.withInstanceCount(1)
-										.withMarket(MarketType.ON_DEMAND)
-										.withInstanceType("m1.medium"),
-								new InstanceGroupConfig()
-										.withInstanceCount(1)
-										.withInstanceRole(InstanceRoleType.CORE)
-										.withMarket(MarketType.ON_DEMAND)
-										.withInstanceType("c4.xlarge"),
-								new InstanceGroupConfig()
-										.withInstanceCount(spotInstanceCount)
-										.withInstanceRole(InstanceRoleType.TASK)
-										.withMarket(MarketType.SPOT)
-										.withInstanceType("c4.xlarge")
-										.withBidPrice(bidPrice)
-						)
+						.withInstanceGroups(instanceGroupConfigs)
 				);
 
 		try {

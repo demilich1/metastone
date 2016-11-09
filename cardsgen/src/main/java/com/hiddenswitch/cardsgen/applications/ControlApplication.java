@@ -125,5 +125,7 @@ public class ControlApplication {
 		// Save results
 		results.saveAsObjectFile(output);
 		results.saveAsTextFile(output + "_text");
+
+		sc.stop();
 	}
 }

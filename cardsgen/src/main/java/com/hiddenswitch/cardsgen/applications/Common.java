@@ -82,9 +82,8 @@ public class Common {
 			).getCredentials();
 		} else {
 			return new AWSCredentialsProviderChain(
-					new InstanceProfileCredentialsProvider(),
-					new EnvironmentVariableCredentialsProvider(),
 					new ProfileCredentialsProvider(profile),
+					new EnvironmentVariableCredentialsProvider(),
 					new SystemPropertiesCredentialsProvider()
 			).getCredentials();
 		}
@@ -96,14 +95,15 @@ public class Common {
 			// Try accessing saving a file on s3
 			sc.parallelize(Collections.singletonList("sentinel")).saveAsObjectFile(sentinelKeyPrefix + RandomStringUtils.randomAlphanumeric(5) + ".txt");
 		} catch (Exception e) {
-			if (e instanceof org.apache.hadoop.security.AccessControlException) {
-				logger.error("Failed to save sentinel file.", e);
+			if (e instanceof org.apache.hadoop.security.AccessControlException
+					|| e instanceof java.lang.IllegalArgumentException) {
+				logger.info("Failed to save sentinel file.", e);
 				AWSCredentials credentials = getAwsCredentials();
-				logger.error(String.format("The credentials retrieved from Common.getAwsCredentials are: %s %s", credentials.getAWSAccessKeyId(), credentials.getAWSSecretKey()));
+				logger.info(String.format("The credentials retrieved from Common.getAwsCredentials are: %s %s", credentials.getAWSAccessKeyId(), credentials.getAWSSecretKey()));
 				Configuration configuration = sc.hadoopConfiguration();
-				logger.error("Hadoop configuration before setting values:");
+				logger.info("Hadoop configuration before setting values:");
 				for (Map.Entry<String, String> entry : configuration) {
-					logger.error(String.format("%s: %s", entry.getKey(), entry.getValue()));
+					logger.info(String.format("%s: %s", entry.getKey(), entry.getValue()));
 				}
 
 				if (configuration.get("fs.s3n.impl", "").isEmpty()) {
@@ -113,9 +113,9 @@ public class Common {
 				configuration.set("fs.s3n.awsAccessKeyId", credentials.getAWSAccessKeyId());
 				configuration.set("fs.s3n.awsSecretAccessKey", credentials.getAWSSecretKey());
 
-				logger.error("Hadoop configuration after setting values:");
+				logger.info("Hadoop configuration after setting values:");
 				for (Map.Entry<String, String> entry : configuration) {
-					logger.error(String.format("%s: %s", entry.getKey(), entry.getValue()));
+					logger.info(String.format("%s: %s", entry.getKey(), entry.getValue()));
 				}
 				// Try to save the sentinel file now.
 				sc.parallelize(Arrays.asList("sentinel")).saveAsObjectFile(sentinelKeyPrefix + RandomStringUtils.randomAlphanumeric(5) + ".txt");

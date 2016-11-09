@@ -22,23 +22,24 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class ConfigGeneratorForCard implements PairFlatMapFunction<Card, TestConfig, GameConfig> {
-	private final int batches;
-	private final int gamesPerBatch;
+	private int batches;
+	private int gamesPerBatch;
+
+	public ConfigGeneratorForCard() {
+	}
 
 	public ConfigGeneratorForCard(int batches, int gamesPerBatch) throws IOException, URISyntaxException, CardParseException {
 		this.batches = batches;
 		this.gamesPerBatch = gamesPerBatch;
-		CardCatalogue.loadCardsFromPackage();
-		DeckCatalogue.loadDecksFromPackage();
 	}
 
 	@Override
 	public Iterator<Tuple2<TestConfig, GameConfig>> call(Card card) throws Exception {
+		CardCatalogue.loadCardsFromPackage();
+		DeckCatalogue.loadDecksFromPackage();
 		// TODO: For now, return one game config for each card.
 		Deck testDeck = DeckCatalogue.getDeckByName("Elise Mage");
 		Deck opponentDeck = DeckCatalogue.getDeckByName("Midrange Hunter");
-		assert testDeck != null;
-		assert opponentDeck != null;
 
 		// Add two copies of the card under test to the test deck
 		if (card != null) {

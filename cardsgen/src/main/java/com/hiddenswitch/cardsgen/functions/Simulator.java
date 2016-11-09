@@ -3,6 +3,8 @@ package com.hiddenswitch.cardsgen.functions;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.cards.CardCatalogue;
+import net.demilich.metastone.game.decks.DeckCatalogue;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.gameconfig.GameConfig;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
@@ -16,12 +18,12 @@ import org.apache.spark.api.java.function.Function;
 public class Simulator implements Function<GameConfig, SimulationResult> {
 	@Override
 	public SimulationResult call(GameConfig gameConfig) throws Exception {
+		CardCatalogue.loadCardsFromPackage();
+
 		SimulationResult result = new SimulationResult(gameConfig);
 
 		PlayerConfig playerConfig1 = gameConfig.getPlayerConfig1();
 		PlayerConfig playerConfig2 = gameConfig.getPlayerConfig2();
-
-
 
 		DeckFormat deckFormat = gameConfig.getDeckFormat();
 

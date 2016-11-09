@@ -76,6 +76,9 @@ public class ResourceLoader {
 					inputStream = ResourceLoader.class.getClassLoader().getResourceAsStream(filePath.toString().substring(1));
 				}
 				if (inputStream == null) {
+					inputStream = ResourceLoader.class.getClassLoader().getResourceAsStream("/" + filePath.toString());
+				}
+				if (inputStream == null) {
 					throw new NullPointerException("The path to the resources are still wrong!");
 				}
 			} else {

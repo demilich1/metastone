@@ -21,18 +21,23 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class GenerateConfigsForDecks implements PairFlatMapFunction<String[], TestConfig, GameConfig> {
-	private final int batches;
-	private final int gamesPerBatch;
+	private int batches;
+	private int gamesPerBatch;
+
+	public GenerateConfigsForDecks() throws CardParseException, IOException, URISyntaxException {
+	}
 
 	public GenerateConfigsForDecks(int batches, int gamesPerBatch) throws IOException, URISyntaxException, CardParseException {
+		this();
 		this.batches = batches;
 		this.gamesPerBatch = gamesPerBatch;
-		CardCatalogue.loadCardsFromPackage();
-		DeckCatalogue.loadDecksFromPackage();
 	}
 
 	@Override
 	public Iterator<Tuple2<TestConfig, GameConfig>> call(String[] decks) throws Exception {
+		CardCatalogue.loadCardsFromPackage();
+		DeckCatalogue.loadDecksFromPackage();
+
 		Deck testDeck = DeckCatalogue.getDeckByName(decks[0]);
 		Deck opponentDeck = DeckCatalogue.getDeckByName(decks[1]);
 
