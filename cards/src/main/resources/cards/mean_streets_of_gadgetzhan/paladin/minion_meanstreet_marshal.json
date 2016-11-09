@@ -15,6 +15,7 @@
 		},
 		"condition": {
 			"class": "AttributeCondition",
+			"target": "SELF",
 			"attribute": "ATTACK",
 			"operation": "GREATER_OR_EQUAL",
 			"value": 2
