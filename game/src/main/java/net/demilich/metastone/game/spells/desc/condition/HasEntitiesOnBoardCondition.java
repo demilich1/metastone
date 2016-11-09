@@ -16,17 +16,17 @@ public class HasEntitiesOnBoardCondition extends Condition {
 	}
 
 	@Override
-	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity target) {
-		EntityReference sourceReference = (EntityReference) desc.get(ConditionArg.TARGET);
-		Entity source = null;
-		if (sourceReference == null) {
-			source = target;
+	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity source, Entity target) {
+		EntityReference entityReference = (EntityReference) desc.get(ConditionArg.TARGET);
+		Entity entity = null;
+		if (entityReference == null) {
+			entity = target;
 		} else {
-			List<Entity> entities = context.resolveTarget(player, source, sourceReference);
+			List<Entity> entities = context.resolveTarget(player, entity, entityReference);
 			if (entities == null || entities.isEmpty()) {
 				return false;
 			}
-			source = entities.get(0);
+			entity = entities.get(0);
 		}
 		String[] cardNames = (String[]) desc.get(ConditionArg.CARD_IDS);
 		

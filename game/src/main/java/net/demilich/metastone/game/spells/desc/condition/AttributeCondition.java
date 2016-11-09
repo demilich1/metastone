@@ -18,37 +18,37 @@ public class AttributeCondition extends Condition {
 	}
 
 	@Override
-	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity target) {
-		EntityReference sourceReference = (EntityReference) desc.get(ConditionArg.TARGET);
-		Entity source = null;
-		if (sourceReference == null) {
-			source = target;
+	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity source, Entity target) {
+		EntityReference entityReference = (EntityReference) desc.get(ConditionArg.TARGET);
+		Entity entity = null;
+		if (entityReference == null) {
+			entity = target;
 		} else {
-			List<Entity> entities = context.resolveTarget(player, null, sourceReference);
+			List<Entity> entities = context.resolveTarget(player, source, entityReference);
 			if (entities == null || entities.isEmpty()) {
 				return false;
 			}
-			source = entities.get(0);
+			entity = entities.get(0);
 		}
 
 		Attribute attribute = (Attribute) desc.get(ConditionArg.ATTRIBUTE);
 		Operation operation = (Operation) desc.get(ConditionArg.OPERATION);
 		if (operation == null || operation == Operation.HAS) {
-			return source.hasAttribute(attribute);
+			return entity.hasAttribute(attribute);
 		}
 
 		int targetValue = desc.getInt(ConditionArg.VALUE);
 
 		int actualValue;
 		if (attribute == Attribute.ATTACK) {
-			if (source instanceof Actor) {
-				actualValue = ((Actor)source).getAttack();	
+			if (entity instanceof Actor) {
+				actualValue = ((Actor)entity).getAttack();	
 			} else {
-				actualValue = source.getAttributeValue(attribute);
+				actualValue = entity.getAttributeValue(attribute);
 			}
 			
 		} else {
-			actualValue = source.getAttributeValue(attribute);
+			actualValue = entity.getAttributeValue(attribute);
 		}
 
 		return SpellUtils.evaluateOperation(operation, actualValue, targetValue);

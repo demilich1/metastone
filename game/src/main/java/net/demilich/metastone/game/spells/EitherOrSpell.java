@@ -32,7 +32,7 @@ public class EitherOrSpell extends Spell {
 		SpellDesc either = (SpellDesc) desc.get(SpellArg.SPELL_1);
 		SpellDesc or = (SpellDesc) desc.get(SpellArg.SPELL_2);
 
-		SpellDesc spellToCast = condition.isFulfilled(context, player, target) ? either : or;
+		SpellDesc spellToCast = condition.isFulfilled(context, player, source, target) ? either : or;
 		SpellUtils.castChildSpell(context, player, spellToCast, source, target);
 	}
 

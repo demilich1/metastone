@@ -29,17 +29,17 @@ public class CastRepeatedlySpell extends Spell {
 		for (int i = 0; i < iterations; i++) {
 			if (target == null) {
 				SpellUtils.castChildSpell(context, player, spell, source, null);
-				if (condition != null && condition.isFulfilled(context, player, null)) {
+				if (condition != null && condition.isFulfilled(context, player, source, null)) {
 					return;
 				}
 			} else {
-				List<Entity> targets = context.resolveTarget(player, null, desc.getTarget());
+				List<Entity> targets = context.resolveTarget(player, source, desc.getTarget());
 				if (targets.isEmpty()) {
 					return;
 				}
 				Entity randomTarget = SpellUtils.getRandomTarget(targets);
 				SpellUtils.castChildSpell(context, player, spell, source, randomTarget);
-				if (condition != null && condition.isFulfilled(context, player, randomTarget)) {
+				if (condition != null && condition.isFulfilled(context, player, source, randomTarget)) {
 					return;
 				}
 			}
