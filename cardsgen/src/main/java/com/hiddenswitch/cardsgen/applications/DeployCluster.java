@@ -14,9 +14,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.SimpleLayout;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static com.hiddenswitch.cardsgen.applications.Common.defaultsTo;
 
@@ -179,6 +177,8 @@ public class DeployCluster {
 						.withJar("command-runner.jar")
 						.withArgs(hadoopJarStepArgs)));
 
+		Map<String, String> javaHome = new HashMap<>();
+		javaHome.put("JAVA_HOME", "/usr/lib/jvm/java-1.8.0");
 
 		ArrayList<InstanceGroupConfig> instanceGroupConfigs = new ArrayList<>(Arrays.asList(
 				new InstanceGroupConfig()
@@ -210,7 +210,18 @@ public class DeployCluster {
 								.addPropertiesEntry("maximizeResourceAllocation", "true"),
 						new Configuration()
 								.withClassification("spark-log4j")
-								.addPropertiesEntry("log4j.rootCategory", "WARN, console"))
+								.addPropertiesEntry("log4j.rootCategory", "WARN, console"),
+						new Configuration()
+								.withClassification("hadoop-env")
+								.withConfigurations(new Configuration()
+										.withClassification("export")
+										.withProperties(javaHome)),
+						new Configuration()
+								.withClassification("spark-env")
+								.withConfigurations(new Configuration()
+										.withClassification("export")
+										.withProperties(javaHome))
+				)
 				.withServiceRole(serviceRole)
 				.withApplications(sparkApp)
 				.withReleaseLabel("emr-5.1.0")
