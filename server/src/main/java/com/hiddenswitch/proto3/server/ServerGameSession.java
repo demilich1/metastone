@@ -5,11 +5,10 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
 import com.hiddenswitch.proto3.net.common.ClientToServerMessage;
+import com.hiddenswitch.proto3.net.common.NetworkHumanBehaviour;
 import com.hiddenswitch.proto3.net.common.RemoteUpdateListener;
 
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.ProceduralPlayer;
-import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
 
 public class ServerGameSession extends GameSession implements ServerCommunicationSend {

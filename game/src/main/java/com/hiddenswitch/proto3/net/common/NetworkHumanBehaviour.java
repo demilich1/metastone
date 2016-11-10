@@ -1,18 +1,13 @@
-package com.hiddenswitch.proto3.server;
+package com.hiddenswitch.proto3.net.common;
 
 import java.util.List;
 
-import net.demilich.metastone.BuildConfig;
-import net.demilich.metastone.GameNotification;
-import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
-import net.demilich.metastone.game.behaviour.human.HumanActionOptions;
 import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
 
 public class NetworkHumanBehaviour extends HumanBehaviour {
-
 	@Override
 	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {		
 		if (context instanceof ServerGameContext){

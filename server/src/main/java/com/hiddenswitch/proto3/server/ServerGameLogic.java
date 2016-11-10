@@ -4,18 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-import net.demilich.metastone.game.Attribute;
+import com.hiddenswitch.proto3.net.common.ServerGameContext;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.ProceduralPlayer;
-import net.demilich.metastone.game.actions.BattlecryAction;
-import net.demilich.metastone.game.actions.GameAction;
-import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.entities.Actor;
-import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.logic.GameLogic;
-import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class ServerGameLogic extends GameLogic {
 	

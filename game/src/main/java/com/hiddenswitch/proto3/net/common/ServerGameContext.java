@@ -1,4 +1,4 @@
-package com.hiddenswitch.proto3.server;
+package com.hiddenswitch.proto3.net.common;
 
 import java.util.HashMap;
 import java.util.List;
@@ -7,12 +7,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.function.Consumer;
 
-import com.hiddenswitch.proto3.net.common.RemoteUpdateListener;
 import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.TurnState;
-import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.decks.DeckFormat;

@@ -3,13 +3,12 @@ package com.hiddenswitch.proto3.server;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 
+import com.hiddenswitch.proto3.net.common.ServerGameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.decks.DeckFormat;
-import net.demilich.metastone.game.logic.GameLogic;
-import net.demilich.metastone.game.logic.ProceduralGameLogic;
 
 public class SocketServerListener implements ServerListener {
 	private final ServerCommunicationSend serverCommunicationSend;
