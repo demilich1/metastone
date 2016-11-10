@@ -13,7 +13,8 @@ public class MetaStoneSimpleServer {
 	public static void main(String[] args) {
 		SocketServerSession ssc = new SocketServerSession();
 		try {
-			CardCatalogue.loadCards();
+			CardCatalogue.copyCardsFromResources();
+			CardCatalogue.loadCardsFromFilesystem();
 		} catch (IOException | URISyntaxException | CardParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
