@@ -8,7 +8,6 @@ import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.cards.desc.HeroCardDesc;
 import net.demilich.metastone.game.entities.heroes.Hero;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.heroes.powers.HeroPower;
 
 public class HeroCard extends Card {
@@ -34,10 +33,6 @@ public class HeroCard extends Card {
 		}
 		hero.setRace(desc.race);
 		return hero;
-	}
-
-	public HeroClass getHeroClass() {
-		return getClassRestriction();
 	}
 
 	@Override

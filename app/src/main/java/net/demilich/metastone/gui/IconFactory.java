@@ -87,7 +87,7 @@ public class IconFactory {
 
 	public static String getHeroPowerIconUrl(HeroPower heroPower) {
 		String iconPath = RESOURCE_PATH + "/img/powers/";
-		switch (heroPower.getClassRestriction()) {
+		switch (heroPower.getHeroClass()) {
 		case DRUID:
 			iconPath += "shapeshift";
 			break;

@@ -1,0 +1,25 @@
+{
+	"name": "Pirahna Launcher",
+	"baseManaCost": 5,
+	"type": "WEAPON",
+	"damage": 2,
+	"durability": 4,
+	"heroClass": "HUNTER",
+	"rarity": "EPIC",
+	"description": "After your Hero attacks, summon a 1/1 Pirahna.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "AfterPhysicalAttackTrigger",
+			"sourcePlayer": "SELF",
+			"targetPlayer": "BOTH",
+			"sourceEntityType": "HERO"
+		},
+		"spell": {
+			"class": "SummonSpell",
+			"card": "token_pirahna"
+		}
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZHAN",
+	"fileFormatVersion": 1
+}

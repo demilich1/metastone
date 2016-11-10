@@ -14,7 +14,7 @@ public class HoldsCardCondition extends Condition {
 	}
 
 	@Override
-	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity target) {
+	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity source, Entity target) {
 		CardType cardType = (CardType) desc.get(ConditionArg.CARD_TYPE);
 		if (cardType != null && !SpellUtils.holdsCardOfType(player, cardType)) {
 			return false;

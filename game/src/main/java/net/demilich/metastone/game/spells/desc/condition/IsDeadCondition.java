@@ -14,19 +14,19 @@ public class IsDeadCondition extends Condition {
 	}
 
 	@Override
-	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity target) {
-		EntityReference sourceReference = (EntityReference) desc.get(ConditionArg.TARGET);
-		Entity source = null;
-		if (sourceReference == null) {
-			source = target;
+	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity source, Entity target) {
+		EntityReference entityReference = (EntityReference) desc.get(ConditionArg.TARGET);
+		Entity entity = null;
+		if (entityReference == null) {
+			entity = target;
 		} else {
-			List<Entity> entities = context.resolveTarget(player, null, sourceReference);
+			List<Entity> entities = context.resolveTarget(player, source, entityReference);
 			if (entities == null || entities.isEmpty()) {
 				return false;
 			}
-			source = entities.get(0);
+			entity = entities.get(0);
 		}
-		return source.isDestroyed();
+		return entity.isDestroyed();
 	}
 
 }

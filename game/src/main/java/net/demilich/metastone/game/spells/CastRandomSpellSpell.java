@@ -31,8 +31,9 @@ public class CastRandomSpellSpell extends Spell {
 	
 	Logger logger = LoggerFactory.getLogger(CastRandomSpellSpell.class);
 
-	public static SpellDesc create() {
+	public static SpellDesc create(int value) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(CastRandomSpellSpell.class);
+		arguments.put(SpellArg.VALUE, value);
 		return new SpellDesc(arguments);
 	}
 

@@ -14,7 +14,7 @@ public class ReceiveRandomCardSpell extends Spell {
 
 	public static SpellDesc create(TargetPlayer targetPlayer, Card... cards) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(ReceiveRandomCardSpell.class);
-		arguments.put(SpellArg.CARD, cards);
+		arguments.put(SpellArg.CARDS, cards);
 		arguments.put(SpellArg.TARGET_PLAYER, targetPlayer);
 		arguments.put(SpellArg.TARGET, EntityReference.NONE);
 		return new SpellDesc(arguments);

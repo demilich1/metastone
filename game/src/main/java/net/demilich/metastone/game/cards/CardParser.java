@@ -61,9 +61,8 @@ public class CardParser {
 	public CardDesc parseCard(ResourceInputStream resourceInputStream) throws FileNotFoundException {
 		JsonElement jsonData = gson.fromJson(new InputStreamReader(resourceInputStream.inputStream), JsonElement.class);
 
-		if (!jsonData.getAsJsonObject().has("id")) {
-			throw new RuntimeException(resourceInputStream.fileName + " is missing 'id' attribute!");
-		}
+		String id = resourceInputStream.fileName.split("(\\.json)")[0];
+		jsonData.getAsJsonObject().addProperty("id", id);
 		if (!jsonData.getAsJsonObject().has("name")) {
 			throw new RuntimeException(resourceInputStream.fileName + " is missing 'name' attribute!");
 		}

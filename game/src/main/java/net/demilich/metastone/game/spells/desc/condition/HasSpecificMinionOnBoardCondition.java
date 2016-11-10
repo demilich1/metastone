@@ -12,7 +12,7 @@ public class HasSpecificMinionOnBoardCondition extends Condition {
 	}
 
 	@Override
-	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity target) {
+	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity source, Entity target) {
 		String cardName = (String) desc.get(ConditionArg.CARD_ID);
 		for (Minion minion : player.getMinions()) {
 			if (minion.getSourceCard().getCardId().equals(cardName)) {
