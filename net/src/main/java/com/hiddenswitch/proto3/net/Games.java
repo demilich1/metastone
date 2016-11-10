@@ -13,6 +13,10 @@ import net.demilich.metastone.game.decks.Bench;
 import net.demilich.metastone.game.decks.Deck;
 import org.apache.commons.lang3.RandomStringUtils;
 
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+
+@Path("/v1/games")
 public class Games extends Service {
 	public static final String MATCHMAKING_QUEUE = "matchmakingQueue";
 	private Accounts accounts;
@@ -28,6 +32,7 @@ public class Games extends Service {
 		return matchmakingQueueUrl;
 	}
 
+	@PUT
 	public MatchmakingResponse matchmakeAndJoin(MatchmakingRequest matchmakingRequest) {
 		String userId = getAccounts().getUserId();
 		MatchmakingResponse response = new MatchmakingResponse();
@@ -138,11 +143,6 @@ public class Games extends Service {
 		thisGamePlayer.setDeck(deck);
 		thisGamePlayer.setProfile(getAccounts().getProfileForId(userId));
 		return thisGamePlayer;
-	}
-
-	private Game getGameCensored(String forUserId, Game game) {
-		// TODO: For now, just return the game as is.
-		return game;
 	}
 
 	public Game get(String gameId) {

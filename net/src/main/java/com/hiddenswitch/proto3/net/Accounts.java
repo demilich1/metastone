@@ -7,10 +7,13 @@ import com.hiddenswitch.proto3.net.models.*;
 import com.lambdaworks.crypto.SCryptUtil;
 import org.apache.commons.validator.routines.EmailValidator;
 
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.regex.Pattern;
 
+@Path("/v1/accounts")
 public class Accounts extends Service {
 	private Pattern usernamePattern = Pattern.compile("[A-Za-z0-9_]+");
 	private String userId;
@@ -19,6 +22,7 @@ public class Accounts extends Service {
 		super();
 	}
 
+	@POST()
 	public CreateAccountResponse createAccount(String emailAddress, String password, String username) {
 		CreateAccountRequest request = new CreateAccountRequest();
 		request.emailAddress = emailAddress;
@@ -27,6 +31,7 @@ public class Accounts extends Service {
 		return this.createAccount(request);
 	}
 
+	@POST()
 	public LoginResponse login(String username, String password) {
 		LoginRequest request = new LoginRequest();
 		request.password = password;
@@ -34,6 +39,7 @@ public class Accounts extends Service {
 		return this.login(request);
 	}
 
+	@POST()
 	public CreateAccountResponse createAccount(CreateAccountRequest request) {
 		CreateAccountResponse response = new CreateAccountResponse();
 
@@ -65,6 +71,7 @@ public class Accounts extends Service {
 		return response;
 	}
 
+	@POST
 	public LoginResponse login(LoginRequest request) {
 		LoginResponse response = new LoginResponse();
 		boolean valid = true;
@@ -122,6 +129,7 @@ public class Accounts extends Service {
 		return token;
 	}
 
+	@POST
 	public boolean isAuthorizedWithToken(String userId, String token) {
 		if (token == null
 				|| userId == null) {

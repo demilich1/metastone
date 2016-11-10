@@ -5,7 +5,6 @@ import com.hiddenswitch.proto3.net.behaviour.NullBehaviour;
 import com.hiddenswitch.proto3.server.PregamePlayerConfiguration;
 import net.demilich.metastone.game.cards.NullHeroCard;
 import net.demilich.metastone.game.decks.Bench;
-import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
 
 @DynamoDBDocument

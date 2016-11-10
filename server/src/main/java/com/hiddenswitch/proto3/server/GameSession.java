@@ -4,7 +4,7 @@ import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
 import org.apache.commons.lang3.RandomStringUtils;
 
 public abstract class GameSession {
-	private final String id;
+	private String id;
 
 	/**
 	 * Returns the information the client needs to know whom to connect to and what message to send.
@@ -19,6 +19,12 @@ public abstract class GameSession {
 	 * @return {ClientConnectionConfiguration} Data for player 2.
 	 */
 	public abstract ClientConnectionConfiguration getConfigurationForPlayer2();
+
+	/**
+	 * A default constructor for serialization purposes.
+	 */
+	public GameSession() {
+	}
 
 	/**
 	 * Creates a new game session for the given two players. Once constructed, the session should

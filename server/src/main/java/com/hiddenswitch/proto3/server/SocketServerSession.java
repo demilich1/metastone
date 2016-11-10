@@ -54,8 +54,9 @@ public class SocketServerSession implements Runnable {
 			games.put(message.getGameId(), newGame);
 		}
 	}
-	
-	public GameSession createGameSession(PregamePlayerConfiguration player1, PregamePlayerConfiguration player2){
+
+	public ServerGameSession createGameSession(PregamePlayerConfiguration player1, PregamePlayerConfiguration player2) {
+		// Check if a session already exists for these two players
 		ServerGameSession newSession = new ServerGameSession(player1, player2);
 		games.put(newSession.getId(), newSession);
 		return newSession;

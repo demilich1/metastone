@@ -20,6 +20,8 @@ task copyNativeDeps(type: Copy) {
 
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'jp.classmethod.aws'
+apply plugin: 'war'
+apply plugin: 'jetty'
 
 aws {
     profileName = 'metastone_net'

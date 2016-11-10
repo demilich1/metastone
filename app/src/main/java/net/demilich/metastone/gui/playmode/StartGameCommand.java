@@ -34,7 +34,7 @@ public class StartGameCommand extends SimpleCommand<GameNotification> {
 		if (gameConfig.isMultiplayer()) {
 			player1 = new Player(playerConfig1);
 			player2 = new Player(playerConfig1);
-			newGame = new RemoteGameContext(player1, player2, new ProceduralGameLogic(), deckFormat, gameConfig.getHost(), gameConfig.getPort());
+			newGame = new RemoteGameContext(player1, player2, new GameLogic(), deckFormat, gameConfig.getHost(), gameConfig.getPort());
 		} else {
 			player1 = new Player(playerConfig1);
 			player2 = new Player(playerConfig2);
