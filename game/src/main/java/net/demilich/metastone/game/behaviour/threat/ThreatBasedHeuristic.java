@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.behaviour.threat;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 
-public class ThreatBasedHeuristic implements IGameStateHeuristic {
+public class ThreatBasedHeuristic implements IGameStateHeuristic, Serializable {
 
 	private static List<String> hardRemoval;
 

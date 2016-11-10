@@ -1,15 +1,15 @@
 package net.demilich.metastone.game.behaviour.threat.cuckoo;
 
+import net.demilich.metastone.game.behaviour.threat.FeatureVector;
+import net.demilich.metastone.game.behaviour.threat.WeightedFeature;
+import net.demilich.metastone.game.decks.Deck;
+import net.demilich.metastone.utils.MathUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
-
-import net.demilich.metastone.game.behaviour.threat.FeatureVector;
-import net.demilich.metastone.game.behaviour.threat.WeightedFeature;
-import net.demilich.metastone.game.decks.Deck;
-import net.demilich.metastone.utils.MathUtils;
 
 public class CuckooLearner {
 

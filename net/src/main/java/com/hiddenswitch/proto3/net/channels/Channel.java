@@ -1,8 +1,6 @@
 package com.hiddenswitch.proto3.net.channels;
 
-import com.hiddenswitch.proto3.net.models.NetworkMessage;
-
-import java.util.concurrent.Future;
+import com.hiddenswitch.proto3.net.messages.NetworkMessage;
 
 public abstract class Channel implements Runnable {
 	private String channelId;

@@ -6,11 +6,10 @@ import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.sqs.AmazonSQSAsyncClient;
-import com.amazonaws.services.sqs.AmazonSQSClient;
 import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
 import com.amazonaws.services.sqs.model.ReceiveMessageResult;
-import com.hiddenswitch.proto3.net.models.GameActionMessage;
+import com.hiddenswitch.proto3.net.messages.GameActionMessage;
 import com.hiddenswitch.proto3.net.util.Serialization;
 import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.game.GameContext;
@@ -20,9 +19,7 @@ import net.demilich.metastone.game.behaviour.IBehaviour;
 import net.demilich.metastone.game.cards.Card;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.SortedSet;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 

@@ -6,7 +6,9 @@ import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.MetaDeck;
 import net.demilich.metastone.game.entities.heroes.MetaHero;
 
-public class PlayerConfig {
+import java.io.Serializable;
+
+public class PlayerConfig implements Cloneable, Serializable {
 
 	private String name;
 	private HeroCard heroCard;
@@ -83,6 +85,17 @@ public class PlayerConfig {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("[PlayerConfig]\n");
+		builder.append("name: " + getName() + "\n");
+		builder.append("deck: ");
+		builder.append(getDeck().toString());
+		builder.append("\n");
+		return builder.toString();
 	}
 
 }

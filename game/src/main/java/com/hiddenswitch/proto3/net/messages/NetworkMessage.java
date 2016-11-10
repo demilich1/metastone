@@ -1,4 +1,4 @@
-package com.hiddenswitch.proto3.net.models;
+package com.hiddenswitch.proto3.net.messages;
 
 public abstract class NetworkMessage {
 	private MessageType messageType;

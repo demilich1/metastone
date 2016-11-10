@@ -1,11 +1,12 @@
-package net.demilich.metastone.gui.simulationmode;
+package net.demilich.metastone.game.statistics;
 
 import net.demilich.metastone.game.statistics.GameStatistics;
 import net.demilich.metastone.game.statistics.Statistic;
 import net.demilich.metastone.game.gameconfig.GameConfig;
 
-public class SimulationResult {
+import java.io.Serializable;
 
+public class SimulationResult implements Cloneable, Serializable {
 	private final GameStatistics player1Stats = new GameStatistics();
 	private final GameStatistics player2Stats = new GameStatistics();
 	private final long startTimestamp;
@@ -15,6 +16,14 @@ public class SimulationResult {
 	public SimulationResult(GameConfig config) {
 		this.config = config;
 		this.startTimestamp = System.currentTimeMillis();
+	}
+
+	public SimulationResult merge(SimulationResult other) {
+		getPlayer1Stats().merge(other.getPlayer1Stats());
+		getPlayer2Stats().merge(other.getPlayer2Stats());
+		duration += other.getDuration();
+		config.setNumberOfGames(other.getConfig().getNumberOfGames() + getConfig().getNumberOfGames());
+		return this;
 	}
 
 	public void calculateMetaStatistics() {
@@ -52,4 +61,16 @@ public class SimulationResult {
 		return player2Stats;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("[SimulationResult]\n");
+		builder.append("config:\n");
+		builder.append(config.toString());
+		builder.append("\nplayer1Stats:\n");
+		builder.append(getPlayer1Stats().toString());
+		builder.append("\nplayer2Stats:\n");
+		builder.append(getPlayer2Stats().toString());
+		return builder.toString();
+	}
 }

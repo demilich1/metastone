@@ -93,4 +93,18 @@ public class Deck implements Serializable {
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("[Deck]\n");
+		builder.append("name:\n");
+		builder.append(name);
+		builder.append("\ncards: ");
+		for (Card card : cards) {
+			builder.append(card.getCardId());
+			builder.append(", ");
+		}
+		return builder.toString();
+	}
 }

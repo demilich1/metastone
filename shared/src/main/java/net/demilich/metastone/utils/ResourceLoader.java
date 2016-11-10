@@ -1,5 +1,8 @@
 package net.demilich.metastone.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -8,24 +11,13 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystemNotFoundException;
-import java.nio.file.FileSystems;
-import java.nio.file.FileVisitResult;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.SimpleFileVisitor;
-import java.nio.file.StandardCopyOption;
+import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.stream.Stream;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class ResourceLoader {
 
@@ -75,6 +67,20 @@ public class ResourceLoader {
 			InputStream inputStream;
 			if (pathReference.fromJar) {
 				inputStream = Object.class.getResourceAsStream(filePath.toString());
+				// Try a variety of ways to access the resource. The way that works depends on whether or not this is
+				// a shadow JAR or running inside a special environment.
+				if (inputStream == null) {
+					inputStream = ResourceLoader.class.getClassLoader().getResourceAsStream(filePath.toString());
+				}
+				if (inputStream == null) {
+					inputStream = ResourceLoader.class.getClassLoader().getResourceAsStream(filePath.toString().substring(1));
+				}
+				if (inputStream == null) {
+					inputStream = ResourceLoader.class.getClassLoader().getResourceAsStream("/" + filePath.toString());
+				}
+				if (inputStream == null) {
+					throw new NullPointerException("The path to the resources are still wrong!");
+				}
 			} else {
 				inputStream = new FileInputStream(new File(filePath.toString()));
 			}
@@ -99,10 +105,23 @@ public class ResourceLoader {
 	private static PathReference getPathFromResources(String sourceDir) throws URISyntaxException, IOException {
 		URI uri;
 		try {
-			uri = Object.class.getResource("/" + sourceDir).toURI();
-		} catch (NullPointerException ex) {
-			logger.error(sourceDir + " directory not found in resources");
-			throw new RuntimeException(sourceDir + " directory not found in resources");
+			uri = ClassLoader.getSystemClassLoader().getResource("/" + sourceDir).toURI();
+		} catch (NullPointerException ex1) {
+			try {
+				uri = ClassLoader.getSystemClassLoader().getResource(sourceDir).toURI();
+			} catch (NullPointerException ex2) {
+				try {
+					uri = ResourceLoader.class.getClassLoader().getResource("/" + sourceDir).toURI();
+				} catch (NullPointerException ex3) {
+					try {
+						uri = ResourceLoader.class.getClassLoader().getResource(sourceDir).toURI();
+					} catch (NullPointerException ex4) {
+						logger.error(sourceDir + " directory not found in resources");
+						throw new RuntimeException(sourceDir + " directory not found in resources");
+					}
+				}
+			}
+
 		}
 
 		// handle case where resources are on the filesystem instead of jar. ie:

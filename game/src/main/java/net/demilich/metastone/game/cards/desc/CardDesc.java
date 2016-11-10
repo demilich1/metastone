@@ -12,7 +12,7 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderDesc;
 
-public abstract class CardDesc implements Serializable{
+public abstract class CardDesc implements Serializable {
 
 	public String id;
 	public String name;
