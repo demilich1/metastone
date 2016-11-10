@@ -1,8 +1,5 @@
 package net.demilich.metastone.gui.playmode.config;
 
-import java.io.IOException;
-import java.util.List;
-
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,19 +7,22 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.DeckFormat;
-import net.demilich.metastone.gui.common.DeckFormatStringConverter;
 import net.demilich.metastone.game.gameconfig.GameConfig;
+import net.demilich.metastone.gui.common.DeckFormatStringConverter;
 import net.demilich.metastone.gui.gameconfig.PlayerConfigView;
+
+import java.io.IOException;
+import java.util.List;
 
 public class PlayModeConfigView extends BorderPane implements EventHandler<ActionEvent> {
 
@@ -48,7 +48,7 @@ public class PlayModeConfigView extends BorderPane implements EventHandler<Actio
 	protected PlayerConfigView player2Config;
 
 	@FXML
-	protected Group multiplayerGroup;
+	protected VBox multiplayerGroup;
 
 	private boolean isMultiplayer;
 
