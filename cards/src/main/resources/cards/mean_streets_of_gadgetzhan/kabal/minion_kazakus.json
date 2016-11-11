@@ -166,16 +166,6 @@
 							"card": "token_superior_demon"
 						},
 						{
-							"class": "TransformMinionSpell",
-							"name": "Mystic Wool",
-							"description": "Transform a random minion into a 1/1 Sheep.",
-							"targetSelection": "NONE",
-							"cardDescType": "SPELL",
-							"target": "MINIONS",
-							"card": "token_sheep",
-							"randomTarget": true
-						},
-						{
 							"class": "ResurrectSpell",
 							"name": "Ichor of Undeath",
 							"description": "Summon 3 friendly minions that died this game.",
@@ -196,6 +186,9 @@
 					"exclusive": true
 				}
 			]
+		},
+		"condition": {
+			"class": "HighlanderDeckCondition"
 		}
 	},
 	"attributes": {

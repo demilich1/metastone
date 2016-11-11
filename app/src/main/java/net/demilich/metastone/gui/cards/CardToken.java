@@ -95,6 +95,17 @@ public class CardToken extends BorderPane {
 		}
 	}
 
+	public void setNonCard(String name, String description) {
+		nameLabel.setText(name);
+		descriptionLabel.setText(description);
+		setRarity(Rarity.FREE);
+		manaCostAnchor.setVisible(false);
+		attackAnchor.setVisible(false);
+		hpAnchor.setVisible(false);
+		attackIcon.setVisible(false);
+		hpIcon.setVisible(false);
+	}
+
 	private void setRarity(Rarity rarity) {
 		rarityGem.setFill(IconFactory.getRarityColor(rarity));
 		rarityGem.setVisible(rarity != Rarity.FREE);
