@@ -1,0 +1,207 @@
+{
+	"name": "Kazakus",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 3,
+	"heroClass": "ANY",
+	"heroClasses": [
+		"MAGE",
+		"PRIEST",
+		"WARLOCK"
+	],
+	"rarity": "RARE",
+	"description": "Battlecry: If your deck has no duplicates, create a custom spell.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "DiscoverOptionSpell",
+			"spells": [
+				{
+					"class": "CreateCardSpell",
+					"name": "Lesser Potion",
+					"secondaryName": "Kazakus Potion",
+					"description": "Create a 1-Cost Spell.",
+					"cardType": "SPELL",
+					"mana": 1,
+					"spells": [
+						{
+							"class": "BuffSpell",
+							"name": "Goldthorn",
+							"description": "Give your minions +2 Health.",
+							"targetSelection": "NONE",
+							"cardDescType": "SPELL",
+							"target": "FRIENDLY_MINIONS",
+							"hpBonus": 2
+						},
+						{
+							"class": "DamageSpell",
+							"name": "Heart of Fire",
+							"description": "Deal 3 damage.",
+							"targetSelection": "ANY",
+							"cardDescType": "SPELL",
+							"value": 3
+						},
+						{
+							"class": "BuffHeroSpell",
+							"name": "Stonescale Oil",
+							"description": "Gain 4 Armor.",
+							"targetSelection": "NONE",
+							"cardDescType": "SPELL",
+							"target": "FRIENDLY_HERO",
+							"armorBonus": 4
+						},
+						{
+							"class": "ReceiveCardSpell",
+							"name": "Shadow Oil",
+							"description": "Add a random Demon to your hand.",
+							"targetSelection": "NONE",
+							"cardDescType": "SPELL",
+							"cardFilter": {
+								"class": "RaceFilter",
+								"race": "DEMON"
+							}
+						}
+					],
+					"exclusive": true
+				},
+				{
+					"class": "CreateCardSpell",
+					"name": "Greater Potion",
+					"secondaryName": "Kazakus Potion",
+					"description": "Create a 5-Cost Spell.",
+					"cardType": "SPELL",
+					"mana": 5,
+					"spells": [
+						{
+							"class": "DrawCardSpell",
+							"name": "Kingsblood",
+							"description": "Draw 2 cards.",
+							"targetSelection": "NONE",
+							"cardDescType": "SPELL",
+							"value": 2
+						},
+						{
+							"class": "TransformMinionSpell",
+							"name": "Mystic Wool",
+							"description": "Transform a random minion into a 1/1 Sheep.",
+							"targetSelection": "NONE",
+							"cardDescType": "SPELL",
+							"target": "ALL_MINIONS",
+							"card": "token_sheep",
+							"randomTarget": true
+						},
+						{
+							"class": "ResurrectSpell",
+							"name": "Ichor of Undeath",
+							"description": "Summon 2 friendly minions that died this game.",
+							"targetSelection": "NONE",
+							"cardDescType": "SPELL",
+							"value": 2
+						}
+					],
+					"exclusive": true
+				},
+				{
+					"class": "CreateCardSpell",
+					"name": "Superior Potion",
+					"secondaryName": "Kazakus Potion",
+					"description": "Create a 10-Cost Spell.",
+					"cardType": "SPELL",
+					"mana": 10,
+					"spells": [
+						{
+							"class": "TransformMinionSpell",
+							"name": "Mystic Wool",
+							"description": "Transform all minions into 1/1 Sheep.",
+							"targetSelection": "NONE",
+							"cardDescType": "SPELL",
+							"target": "ALL_MINIONS",
+							"card": "token_sheep"
+						},
+						{
+							"class": "ReceiveCardSpell",
+							"name": "Shadow Oil",
+							"description": "Add 3 random Demons to your hand.",
+							"targetSelection": "NONE",
+							"cardDescType": "SPELL",
+							"value": 3,
+							"cardFilter": {
+								"class": "RaceFilter",
+								"race": "DEMON"
+							}
+						},
+						{
+							"class": "BuffHeroSpell",
+							"name": "Stonescale Oil",
+							"description": "Gain 10 Armor.",
+							"targetSelection": "NONE",
+							"cardDescType": "SPELL",
+							"target": "FRIENDLY_HERO",
+							"armorBonus": 10
+						},
+						{
+							"class": "DamageSpell",
+							"name": "Felbloom",
+							"description": "Deal 6 damage to all minions.",
+							"targetSelection": "NONE",
+							"cardDescType": "SPELL",
+							"target": "ALL_MINIONS",
+							"value": 6
+						},
+						{
+							"class": "DrawCardSpell",
+							"name": "Kingsblood",
+							"description": "Draw 3 cards.",
+							"targetSelection": "NONE",
+							"cardDescType": "SPELL",
+							"value": 3
+						},
+						{
+							"class": "SummonSpell",
+							"name": "Netherbloom",
+							"description": "Summon an 8/8 Demon.",
+							"targetSelection": "NONE",
+							"cardDescType": "SPELL",
+							"card": "token_superior_demon"
+						},
+						{
+							"class": "TransformMinionSpell",
+							"name": "Mystic Wool",
+							"description": "Transform a random minion into a 1/1 Sheep.",
+							"targetSelection": "NONE",
+							"cardDescType": "SPELL",
+							"target": "MINIONS",
+							"card": "token_sheep",
+							"randomTarget": true
+						},
+						{
+							"class": "ResurrectSpell",
+							"name": "Ichor of Undeath",
+							"description": "Summon 3 friendly minions that died this game.",
+							"targetSelection": "NONE",
+							"cardDescType": "SPELL",
+							"value": 3
+						},
+						{
+							"class": "CopyCardSpell",
+							"name": "Powerful Mojo",
+							"description": "Copy 3 cards from your opponent's deck and put them into your hand.",
+							"targetSelection": "NONE",
+							"cardDescType": "SPELL",
+							"value": 3,
+							"cardLocation": "DECK"
+						}
+					],
+					"exclusive": true
+				}
+			]
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZHAN",
+	"fileFormatVersion": 1
+}
