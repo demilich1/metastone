@@ -22,13 +22,16 @@ public class SummonCopySpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Minion template = (Minion) target;
-		Minion clone = template.clone();
-		clone.setSpellTrigger(null);
-
-		context.getLogic().summon(player.getId(), clone);
-		for (IGameEventListener trigger : context.getTriggersAssociatedWith(template.getReference())) {
-			IGameEventListener triggerClone = trigger.clone();
-			context.getLogic().addGameEventListener(player, triggerClone, clone);
+		int value = desc.getValue(SpellArg.VALUE, context, player, target, source, 1);
+			for (int i = 0; i < value; i++) {
+			Minion clone = template.clone();
+			clone.setSpellTrigger(null);
+	
+			context.getLogic().summon(player.getId(), clone);
+			for (IGameEventListener trigger : context.getTriggersAssociatedWith(template.getReference())) {
+				IGameEventListener triggerClone = trigger.clone();
+				context.getLogic().addGameEventListener(player, triggerClone, clone);
+			}
 		}
 	}
 
