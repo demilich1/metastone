@@ -8,10 +8,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import org.apache.commons.cli.*;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.apache.log4j.SimpleLayout;
 
 import java.io.File;
 import java.util.*;
@@ -31,16 +28,10 @@ public class DeployCluster {
 	private static final String BID_PRICE = "bidprice";
 	private static final String INSTANCE_COUNT = "instancecount";
 	private static final String KEY_PAIR = "keypair";
+	private static final String INSTANCE_TYPE = "instancetype";
 
 	public static void main(String[] args) throws ParseException, SdkClientException {
-		ConsoleAppender console = new ConsoleAppender();
-		console.setLayout(new SimpleLayout());
-		console.setTarget("System.out");
-		console.activateOptions();
-
-		Logger.getRootLogger().addAppender(console);
-		Logger.getRootLogger().setLevel(Level.INFO);
-		Logger logger = Logger.getLogger(DeployCluster.class);
+		Logger logger = Common.getLogger(DeployCluster.class);
 
 		String appArgs = "";
 		String jar = "cardsgen/build/libs/cardsgen-1.2.0-all.jar";
@@ -54,6 +45,7 @@ public class DeployCluster {
 		String bidPrice = "0.05";
 		String ec2KeyName = "clusterpair";
 		int spotInstanceCount = 0;
+		String instanceType = "c4.xlarge";
 
 		// Parse all the options
 		Options options = new Options()
@@ -68,7 +60,8 @@ public class DeployCluster {
 				.addOption(JOB_FLOW_ROLE, true, defaultsTo("The name of the role to use to execute the actual jobs on the job machines.", jobFlowRole))
 				.addOption(BID_PRICE, true, defaultsTo("The bid price for c4.xlarge instances used for the tasks.", bidPrice))
 				.addOption(INSTANCE_COUNT, true, defaultsTo("The number of c4.xlarge instances, in addition to the 1 reserved instance, to execute the job on.", Integer.toString(spotInstanceCount)))
-				.addOption(KEY_PAIR, true, defaultsTo("The name of the keypair to use for the master node.", "clusterpair"));
+				.addOption(KEY_PAIR, true, defaultsTo("The name of the keypair to use for the master node.", "clusterpair"))
+				.addOption(INSTANCE_TYPE, true, defaultsTo("The type of the instance to use for spot pricing.", instanceType));
 
 		CommandLineParser parser = new GnuParser();
 		CommandLine cmd = parser.parse(options, args, false);
@@ -119,6 +112,10 @@ public class DeployCluster {
 
 		if (cmd.hasOption(KEY_PAIR)) {
 			ec2KeyName = cmd.getOptionValue(KEY_PAIR);
+		}
+
+		if (cmd.hasOption(INSTANCE_TYPE)) {
+			instanceType = cmd.getOptionValue(INSTANCE_TYPE);
 		}
 
 		// Strip appArgs of trailing punctuation
@@ -197,7 +194,7 @@ public class DeployCluster {
 					.withInstanceCount(spotInstanceCount)
 					.withInstanceRole(InstanceRoleType.TASK)
 					.withMarket(MarketType.SPOT)
-					.withInstanceType("c4.xlarge")
+					.withInstanceType(instanceType)
 					.withBidPrice(bidPrice));
 		}
 

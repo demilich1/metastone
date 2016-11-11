@@ -14,7 +14,10 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.math3.util.Combinations;
 import org.apache.hadoop.conf.Configuration;
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.apache.log4j.SimpleLayout;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -37,6 +40,10 @@ public class Common {
 		List<String[]> deckPairs = new ArrayList<>();
 		for (int[] combination : combinations) {
 			deckPairs.add(new String[]{decks.get(combination[0]), decks.get(combination[1])});
+		}
+		// Include same deck matchups
+		for (String deck : decks) {
+			deckPairs.add(new String[]{deck, deck});
 		}
 		return deckPairs;
 	}
@@ -90,42 +97,55 @@ public class Common {
 	}
 
 	public static void configureS3Credentials(JavaSparkContext sc, String sentinelKeyPrefix) {
+		configureS3Credentials(sc, sentinelKeyPrefix, "default");
+	}
+
+	public static void configureS3Credentials(JavaSparkContext sc, String sentinelKeyPrefix, String profile) {
 		Logger logger = Logger.getLogger(Common.class);
 		try {
 			// Try accessing saving a file on s3
 			sc.parallelize(Collections.singletonList("sentinel")).saveAsObjectFile(sentinelKeyPrefix + RandomStringUtils.randomAlphanumeric(5) + ".txt");
 		} catch (Exception e) {
-			if (e instanceof org.apache.hadoop.security.AccessControlException
-					|| e instanceof java.lang.IllegalArgumentException) {
-				logger.info("Failed to save sentinel file.", e);
-				AWSCredentials credentials = getAwsCredentials();
-				logger.info(String.format("The credentials retrieved from Common.getAwsCredentials are: %s %s", credentials.getAWSAccessKeyId(), credentials.getAWSSecretKey()));
-				Configuration configuration = sc.hadoopConfiguration();
-				logger.info("Hadoop configuration before setting values:");
-				for (Map.Entry<String, String> entry : configuration) {
-					logger.info(String.format("%s: %s", entry.getKey(), entry.getValue()));
-				}
 
-				if (configuration.get("fs.s3n.impl", "").isEmpty()) {
-					configuration.set("fs.s3n.impl", "org.apache.hadoop.fs.s3native.NativeS3FileSystem");
-				}
+			configureS3(sc, profile);
+		}
+	}
 
-				configuration.set("fs.s3n.awsAccessKeyId", credentials.getAWSAccessKeyId());
-				configuration.set("fs.s3n.awsSecretAccessKey", credentials.getAWSSecretKey());
+	public static void configureS3(JavaSparkContext sc, String profile) {
+		Logger logger = Logger.getLogger(Common.class);
+		AWSCredentials credentials = getAwsCredentials(profile);
+		logger.info(String.format("The credentials retrieved from Common.getAwsCredentials are: %s %s", credentials.getAWSAccessKeyId(), credentials.getAWSSecretKey()));
+		Configuration configuration = sc.hadoopConfiguration();
+		logger.info("Hadoop configuration before setting values:");
+		for (Map.Entry<String, String> entry : configuration) {
+			logger.info(String.format("%s: %s", entry.getKey(), entry.getValue()));
+		}
 
-				logger.info("Hadoop configuration after setting values:");
-				for (Map.Entry<String, String> entry : configuration) {
-					logger.info(String.format("%s: %s", entry.getKey(), entry.getValue()));
-				}
-				// Try to save the sentinel file now.
-				sc.parallelize(Arrays.asList("sentinel")).saveAsObjectFile(sentinelKeyPrefix + RandomStringUtils.randomAlphanumeric(5) + ".txt");
-			} else {
-				throw e;
-			}
+		if (configuration.get("fs.s3n.impl", "").isEmpty()) {
+			configuration.set("fs.s3n.impl", "org.apache.hadoop.fs.s3native.NativeS3FileSystem");
+		}
+
+		configuration.set("fs.s3n.awsAccessKeyId", credentials.getAWSAccessKeyId());
+		configuration.set("fs.s3n.awsSecretAccessKey", credentials.getAWSSecretKey());
+
+		logger.info("Hadoop configuration after setting values:");
+		for (Map.Entry<String, String> entry : configuration) {
+			logger.info(String.format("%s: %s", entry.getKey(), entry.getValue()));
 		}
 	}
 
 	static String defaultsTo(String msg, String value) {
 		return String.format("%s Defaults to %s.", msg, value);
+	}
+
+	public static Logger getLogger(Class clazz) {
+		ConsoleAppender console = new ConsoleAppender();
+		console.setLayout(new SimpleLayout());
+		console.setTarget("System.out");
+		console.activateOptions();
+
+		Logger.getRootLogger().addAppender(console);
+		Logger.getRootLogger().setLevel(Level.INFO);
+		return Logger.getLogger(clazz);
 	}
 }
