@@ -132,19 +132,23 @@ public class CardCatalogue {
 		}
 		return result;
 	}
-	
+
 	public static void loadCardsFromPackage() throws IOException, URISyntaxException, CardParseException {
-		Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(CARDS_FOLDER, false);
-		loadCards(inputStreams);
+		synchronized (cards) {
+			if (cards.getCount() == 0) {
+				Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(CARDS_FOLDER, false);
+				loadCards(inputStreams);
+			}
+		}
 	}
-	
+
 	public static void loadCardsFromFilesystem() throws IOException, URISyntaxException, CardParseException {
 		// load cards from ~/metastone/cards on the file system
 		Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(CARDS_FOLDER_PATH, true);
 		loadCards(inputStreams);
 	}
 
-	
+
 	private static void loadCards(Collection<ResourceInputStream> inputStreams) throws IOException, URISyntaxException, CardParseException {
 		Map<String, CardDesc> cardDesc = new HashMap<String, CardDesc>();
 		ArrayList<String> badCards = new ArrayList<>();
@@ -170,7 +174,7 @@ public class CardCatalogue {
 			CardCatalogue.add(instance);
 			logger.debug("Adding {} to CardCatalogue", instance);
 		}
-		
+
 		if (!badCards.isEmpty()) {
 			throw new CardParseException(badCards);
 		}
