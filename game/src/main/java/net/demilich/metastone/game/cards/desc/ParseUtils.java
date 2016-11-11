@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.PlayerAttribute;
 import net.demilich.metastone.game.actions.ActionType;
+import net.demilich.metastone.game.cards.CardDescType;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.EntityType;
@@ -28,6 +29,7 @@ import net.demilich.metastone.game.spells.desc.valueprovider.AlgebraicOperation;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderDesc;
 import net.demilich.metastone.game.targeting.CardLocation;
 import net.demilich.metastone.game.targeting.EntityReference;
+import net.demilich.metastone.game.targeting.TargetSelection;
 import net.demilich.metastone.game.targeting.TargetType;
 
 public class ParseUtils {
@@ -56,6 +58,8 @@ public class ParseUtils {
 			}
 			return array;
 		}
+		case TARGET_SELECTION:
+			return Enum.valueOf(TargetSelection.class, entry.getAsString());
 		case TARGET_REFERENCE:
 			return parseEntityReference(entry.getAsString());
 		case TARGET_PLAYER:
@@ -102,6 +106,8 @@ public class ParseUtils {
 			return Enum.valueOf(ActionType.class, entry.getAsString());
 		case TARGET_TYPE:
 			return Enum.valueOf(TargetType.class, entry.getAsString());
+		case CARD_DESC_TYPE:
+			return Enum.valueOf(CardDescType.class, entry.getAsString());
 		case ALGEBRAIC_OPERATION:
 			return Enum.valueOf(AlgebraicOperation.class, entry.getAsString());
 		case VALUE:

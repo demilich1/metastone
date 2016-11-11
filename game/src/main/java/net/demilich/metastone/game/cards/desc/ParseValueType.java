@@ -3,6 +3,7 @@ package net.demilich.metastone.game.cards.desc;
 public enum ParseValueType {
 	BOOLEAN,
 	INTEGER,
+	TARGET_SELECTION,
 	TARGET_REFERENCE,
 	TARGET_PLAYER,
 	RACE,
@@ -31,5 +32,6 @@ public enum ParseValueType {
 	RARITY,
 	HERO_CLASS,
 	HERO_CLASS_ARRAY,
-	VALUE
+	VALUE,
+	CARD_DESC_TYPE,
 }

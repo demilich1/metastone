@@ -701,6 +701,10 @@ public class GameLogic implements Cloneable {
 		}
 	}
 
+	public String generateCardID() {
+		return "temp_card_name_" + idFactory.generateId();
+	}
+
 	public Actor getAnotherRandomTarget(Player player, Actor attacker, Actor originalTarget, EntityReference potentialTargets) {
 		List<Entity> validTargets = context.resolveTarget(player, null, potentialTargets);
 		// cannot redirect to attacker

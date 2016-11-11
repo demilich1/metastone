@@ -106,6 +106,17 @@ public class SpellUtils {
 		return (DiscoverAction) player.getBehaviour().requestAction(context, player, discoverActions);
 	}
 
+	public static DiscoverAction getSpellDiscover(GameContext context, Player player, SpellDesc desc, List<SpellDesc> spells) {
+		List<GameAction> discoverActions = new ArrayList<>();
+		for (SpellDesc spell : spells) {
+			DiscoverAction discover = DiscoverAction.createDiscover(spell);
+			discover.setActionSuffix((String) spell.get(SpellArg.NAME));
+			discoverActions.add(discover);
+		}
+		
+		return (DiscoverAction) player.getBehaviour().requestAction(context, player, discoverActions);
+	}
+
 	public static Card getRandomCard(CardCollection source, Predicate<Card> filter) {
 		CardCollection result = getCards(source, filter);
 		if (result.isEmpty()) {
