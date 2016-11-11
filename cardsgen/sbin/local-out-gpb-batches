@@ -1,3 +1,3 @@
 #!/bin/bash
 ./gradlew cardsgen:shadowJar
-spark-submit --master local[8] --class com.hiddenswitch.cardsgen.applications.ControlApplication cardsgen/build/libs/cardsgen-1.2.0-all.jar -output s3n://clusterresults/$1 -gamesperbatch $2 -batches $3 -profile default" -bucketname clustercode
+spark-submit --master "local[8]" --class com.hiddenswitch.cardsgen.applications.ControlApplication cardsgen/build/libs/cardsgen-1.2.0-all.jar -output s3n://clusterresults/$1 -gamesperbatch $2 -batches $3 -profile default
