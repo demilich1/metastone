@@ -25,9 +25,9 @@
 		</BorderPane>
 	</bottom>
 	<center>
-		<BorderPane prefHeight="200.0" prefWidth="200.0">
+		<BorderPane prefHeight="180.0" prefWidth="200.0">
 			<bottom>
-				<HBox fx:id="p1MinionPane" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
+				<HBox fx:id="p1MinionPane" alignment="CENTER" prefHeight="90.0" prefWidth="200.0" />
 			</bottom>
 			<center>
 				<HBox alignment="CENTER" prefHeight="-1.0" prefWidth="-1.0" BorderPane.alignment="CENTER">
@@ -38,7 +38,7 @@
 				</HBox>
 			</center>
 			<top>
-				<HBox fx:id="p2MinionPane" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
+				<HBox fx:id="p2MinionPane" alignment="CENTER" prefHeight="90.0" prefWidth="200.0" />
 			</top>
 		</BorderPane>
 	</center>
