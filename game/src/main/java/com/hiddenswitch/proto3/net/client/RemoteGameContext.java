@@ -56,7 +56,11 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 
 
 	protected void setActivePlayer(int id) {
-		this.getActivePlayerAtomic().set(id);
+		if (localPlayer.getId() == PLAYER_1){
+			this.getActivePlayerAtomic().set(id);
+		} else {
+			this.getActivePlayerAtomic().set(1 - id);
+		}
 	}
 
 
@@ -293,7 +297,7 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 
 	@Override
 	public void onActivePlayer(Player ap) {
-		System.out.println("ON_ACTIVE_PLAYER" + ap.getId());
+		System.out.println("ON_ACTIVE_PLAYER " + ap.getId());
 		this.setActivePlayer(ap.getId());
 		this.onGameStateChanged();
 	}
@@ -301,14 +305,35 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	@Override
 	public void setPlayers(Player lp, Player rp) {
 		this.setLocalPlayer(lp);
-		this.getPlayers()[lp.getId()] = lp;
-		this.getPlayers()[rp.getId()] = rp;
+		rp.setHideCards(true);
+		this.getPlayers()[PLAYER_1] = lp;
+		this.getPlayers()[PLAYER_2] = rp;
 	}
+	
+	@Override
+	public Player getPlayer(int index){
+		if (this.localPlayer.getId() == PLAYER_2){
+			return super.getPlayer(1 - index);
+		} else {
+			return super.getPlayer(index);
+		}
+	}
+		
 
 	@Override
 	public void onUpdate(Player player1, Player player2, TurnState newState) {
-		this.getPlayers()[GameContext.PLAYER_1] = player1;
-		this.getPlayers()[GameContext.PLAYER_2] = player2;
+		System.out.println("update received");
+		if (this.localPlayer.getId() == player1.getId()){ //Player 1 is local
+			player2.setHideCards(true);
+			this.setPlayers(new Player[] {player1, player2});
+
+		} else { //Player 2 is local
+			player2.setId(0);
+			player1.setId(1);
+			player1.setHideCards(true);
+			this.setPlayers(new Player[] {player2, player1});
+		}
+		
 		this.setRemoteTurnState(newState);
 		this.onGameStateChanged();
 

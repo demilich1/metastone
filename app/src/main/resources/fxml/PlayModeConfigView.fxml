@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.Group?>
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="968.0" prefWidth="1280.0" styleClass="panel" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" styleClass="panel" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header" text="Play Mode" BorderPane.alignment="CENTER" />
    </top>
@@ -19,8 +19,10 @@
    <center>
       <VBox alignment="CENTER" spacing="8.0" BorderPane.alignment="CENTER">
          <children>
-            <Label styleClass="name-small" text="Deck Format:" />
-            <ComboBox fx:id="formatBox" prefWidth="150.0" />
+         	<HBox alignment = "CENTER" prefHeight = "75.0" spacing="15.0">
+         	    <Label styleClass="name-small" text="Deck Format:   " />
+            	<ComboBox fx:id="formatBox" prefWidth="150.0" />
+         	</HBox>
             <Group fx:id="multiplayerGroup">
                <Label styleClass="name-small" text="Host:" />
                <TextField fx:id="hostBox" prefWidth="150.0" text="127.0.0.1" />

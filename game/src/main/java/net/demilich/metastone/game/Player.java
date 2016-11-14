@@ -142,7 +142,7 @@ public class Player extends Entity implements Serializable {
 	}
 
 	public boolean hideCards() {
-		return hideCards && !(behaviour instanceof HumanBehaviour);
+		return hideCards;
 	}
 
 	public void setBehaviour(IBehaviour behaviour) {

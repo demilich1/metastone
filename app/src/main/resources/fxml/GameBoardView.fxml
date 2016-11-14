@@ -6,16 +6,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root prefHeight="948.0" prefWidth="1024.0" styleClass="board" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="748.0" prefWidth="1024.0" styleClass="board" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 	<stylesheets>
 		<URL value="@/css/gameboard.css" />
 	</stylesheets>
 	<bottom>
 		<BorderPane prefHeight="-1.0" prefWidth="-1.0">
 			<bottom>
-				<HBox fx:id="p1CardPane" alignment="CENTER" prefHeight="250.0" prefWidth="200.0" spacing="4.0">
+				<HBox fx:id="p1CardPane" alignment="CENTER" prefHeight="150.0" prefWidth="200.0" spacing="5">
 					<padding>
-						<Insets bottom="4.0" top="4.0" fx:id="x1" />
+						<Insets bottom="0" top="4.0" fx:id="x1" />
 					</padding>
 				</HBox>
 			</bottom>
@@ -51,7 +51,7 @@
 				<VBox fx:id="p2HeroAnchor" alignment="CENTER" fillWidth="false" prefHeight="-1.0" prefWidth="-1.0" BorderPane.alignment="CENTER" />
 			</center>
 			<top>
-				<HBox fx:id="p2CardPane" alignment="CENTER" padding="$x1" prefHeight="200.0" prefWidth="200.0" spacing="4.0" />
+				<HBox fx:id="p2CardPane" alignment="CENTER" padding="$x1" prefHeight="100.0" prefWidth="200.0" spacing="4.0" />
 			</top>
 		</BorderPane>
 	</top>
