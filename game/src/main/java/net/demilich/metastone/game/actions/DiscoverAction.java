@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.condition.Condition;
@@ -22,6 +23,9 @@ public class DiscoverAction extends GameAction {
 
 	private final SpellDesc spell;
 	private Condition condition;
+	private Card card;
+	private String name = "";
+	private String description = "";
 
 	protected DiscoverAction(SpellDesc spell) {
 		this.spell = spell;
@@ -63,8 +67,16 @@ public class DiscoverAction extends GameAction {
 		context.getLogic().castSpell(playerId, getSpell(), getSource(), target, false);
 	}
 
+	public Card getCard() {
+		return card;
+	}
+
 	private Condition getCondition() {
 		return condition;
+	}
+
+	public String getDescription() {
+		return description;
 	}
 
 	public EntityFilter getEntityFilter() {
@@ -73,6 +85,10 @@ public class DiscoverAction extends GameAction {
 
 	public int getGroupIndex() {
 		return groupIndex;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	@Override
@@ -89,12 +105,24 @@ public class DiscoverAction extends GameAction {
 		return false;
 	}
 
+	public void setCard(Card card) {
+		this.card = card;
+	}
+
 	public void setCondition(Condition condition) {
 		this.condition = condition;
 	}
 
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public void setEntityFilter(Predicate<Entity> entityFilter) {
 		// this.entityFilter = entityFilter;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
