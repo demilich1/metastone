@@ -40,8 +40,8 @@ public class WeaponCard extends Card {
 		}
 		weapon.setAttack(getDamage());
 		weapon.setBaseAttack(getBaseDamage());
-		weapon.setHp(getDurability());
 		weapon.setMaxHp(getDurability());
+		weapon.setHp(weapon.getMaxDurability());
 		weapon.setBaseHp(getBaseDurability());
 		BattlecryDesc battlecry = desc.battlecry;
 		if (battlecry != null) {
