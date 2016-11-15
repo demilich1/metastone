@@ -34,10 +34,6 @@ public class SocketClientConnection implements ClientCommunicationReceive, Clien
 	@Override
 	public SendToServer getSendToServer() {
 		return new SendToServer() {
-			@Override
-			public void registerPlayer(Player player) {
-				queue.add(new ClientToServerMessage(player));
-			}
 
 			@Override
 			public void registerAction(Player callingPlayer, GameAction action) {
@@ -45,15 +41,14 @@ public class SocketClientConnection implements ClientCommunicationReceive, Clien
 			}
 
 			@Override
-			public void sendFirstMessage(Player player, String gameId) {
-				queue.add(new ClientToServerMessage(player, gameId));
+			public void sendMulligan(Player player, List<Card> discardedCards) {
+				queue.add(new ClientToServerMessage(player, discardedCards));
 
 			}
 
 			@Override
-			public void sendMulligan(Player player, List<Card> discardedCards) {
-				queue.add(new ClientToServerMessage(player, discardedCards));
-				
+			public void sendGenericMessage(ClientToServerMessage message) {
+				queue.add(message);
 			}
 		};
 	}

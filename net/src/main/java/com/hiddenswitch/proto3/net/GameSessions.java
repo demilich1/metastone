@@ -6,6 +6,7 @@ import com.hiddenswitch.proto3.server.ServerGameSession;
 import com.hiddenswitch.proto3.server.SocketServerSession;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardParseException;
+import org.apache.commons.lang3.RandomUtils;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -18,10 +19,12 @@ public class GameSessions extends Service {
 	private static Thread serverThread;
 
 	public GameSessions() throws IOException, URISyntaxException, CardParseException {
+		super();
 		if (server == null) {
 			CardCatalogue.copyCardsFromResources();
 			CardCatalogue.loadCardsFromFilesystem();
-			server = new SocketServerSession();
+			int port = RandomUtils.nextInt(6200, 16200);
+			server = new SocketServerSession(port);
 			serverThread = new Thread(server);
 			serverThread.start();
 		}
@@ -29,7 +32,7 @@ public class GameSessions extends Service {
 
 	@POST
 	public CreateGameSessionResponse createGameSession(CreateGameSessionRequest request) {
-		ServerGameSession newSession = server.createGameSession(request.getPlayer1(), request.getPlayer2());
+		ServerGameSession newSession = server.createGameSession(request.getPregame1(), request.getPregame2());
 		return new CreateGameSessionResponse(newSession.getConfigurationForPlayer1(), newSession.getConfigurationForPlayer2());
 	}
 }

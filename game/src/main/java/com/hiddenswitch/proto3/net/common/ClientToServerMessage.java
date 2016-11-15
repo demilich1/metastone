@@ -25,8 +25,8 @@ public class ClientToServerMessage implements Serializable {
 		this.setPlayer1(p1);
 		setMt(MessageType.REGISTER_PLAYER);
 	}
-	
-	public ClientToServerMessage(Player player, String gameId){
+
+	public ClientToServerMessage(Player player, String gameId) {
 		this.setPlayer1(player);
 		this.setGameId(gameId);
 		setMt(MessageType.FIRST_MESSAGE);
@@ -45,12 +45,12 @@ public class ClientToServerMessage implements Serializable {
 	public void setMt(MessageType mt) {
 		this.mt = mt;
 	}
-	
-	public void setGameId(String id){
+
+	public void setGameId(String id) {
 		this.gameId = id;
 	}
-	
-	public String getGameId(){
+
+	public String getGameId() {
 		return gameId;
 	}
 
@@ -83,6 +83,6 @@ public class ClientToServerMessage implements Serializable {
 		// TODO Auto-generated method stub
 		return discardedCards;
 	}
-	
-	
+
+
 }

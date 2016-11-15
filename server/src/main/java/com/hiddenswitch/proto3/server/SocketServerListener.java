@@ -36,7 +36,9 @@ public class SocketServerListener implements ServerListener {
 			setGameContext(new ServerGameContext(getPlayer1(), getPlayer2(), new ServerGameLogic(), simpleFormat, gameLock));
 			getGameContext().setUpdateListener(getPlayer1(), getSender().getPlayerListener(0));
 			getGameContext().setUpdateListener(getPlayer2(), getSender().getPlayerListener(1));
-			new Thread(() -> getGameContext().play()).start();
+			new Thread(() -> {
+				getGameContext().play();
+			}).start();
 		} else {
 			throw new RuntimeException("too many players connected!");
 		}
@@ -48,9 +50,9 @@ public class SocketServerListener implements ServerListener {
 			getGameContext().updateAction(callingPlayer, action);
 		}
 	}
-	
+
 	@Override
-	public void onMulliganReceived(Player player, List<Card>ReceivedCards){
+	public void onMulliganReceived(Player player, List<Card> ReceivedCards) {
 		getGameContext().updateMulligan(player, ReceivedCards);
 	}
 

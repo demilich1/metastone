@@ -59,8 +59,10 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 	public GameContext(Player player1, Player player2, GameLogic logic, DeckFormat deckFormat) {
 		this.getPlayers()[PLAYER_1] = player1;
 		player1.setId(PLAYER_1);
-		this.getPlayers()[PLAYER_2] = player2;
-		player2.setId(PLAYER_2);
+		if (player2 != null) {
+			this.getPlayers()[PLAYER_2] = player2;
+			player2.setId(PLAYER_2);
+		}
 		this.setLogic(logic);
 		this.setDeckFormat(deckFormat);
 	}

@@ -19,7 +19,7 @@ import net.demilich.metastone.game.gameconfig.PlayerConfig;
 
 public class Player extends Entity implements Serializable {
 	protected Hero hero;
-	protected final String deckName;
+	protected String deckName;
 
 	protected CardCollection deck;
 	private final CardCollection hand = new CardCollection();
@@ -58,7 +58,17 @@ public class Player extends Entity implements Serializable {
 		this.getStatistics().merge(otherPlayer.getStatistics());
 	}
 
+	/**
+	 * Use build from config to actually build the class.
+	 */
+	protected Player() {
+	}
+
 	public Player(PlayerConfig config) {
+		buildFromConfig(config);
+	}
+
+	protected void buildFromConfig(PlayerConfig config) {
 		config.build();
 		Deck selectedDeck = config.getDeckForPlay();
 

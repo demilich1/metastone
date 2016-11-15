@@ -9,6 +9,8 @@ import net.demilich.metastone.game.TurnState;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.events.GameEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -21,6 +23,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.function.Consumer;
 
 class SocketClientSession implements Runnable, RemoteUpdateListener {
+	Logger logger = LoggerFactory.getLogger(SocketClientSession.class);
 	private SocketServerSession socketServerSession;
 	private ServerGameSession serverGameSession;
 	private Socket privateSocket;
@@ -33,7 +36,7 @@ class SocketClientSession implements Runnable, RemoteUpdateListener {
 
 	@Override
 	public void run() {
-		System.out.println("waiting for response from clients");
+		logger.debug("Waiting for response from clients.");
 		//Read thread
 		new Thread(() -> {
 			try {
@@ -43,12 +46,12 @@ class SocketClientSession implements Runnable, RemoteUpdateListener {
 
 					if (message.getMt() == MessageType.FIRST_MESSAGE) {
 						getSocketServerSession().onFirstMessage(this, message);
-					} else if (message.getMt() == MessageType.UPDATE_ACTION){
+					} else if (message.getMt() == MessageType.UPDATE_ACTION) {
 						getServerGameSession().listener.onActionRegistered(message.getCallingPlayer(), message.getAction());
-					} else if (message.getMt() == MessageType.UPDATE_MULLIGAN){
+					} else if (message.getMt() == MessageType.UPDATE_MULLIGAN) {
 						getServerGameSession().listener.onMulliganReceived(message.getPlayer1(), message.getDiscardedCards());
 					} else {
-						System.err.println("Unexpected message type received by server");
+						logger.error("Unexpected message type received by server.", message);
 					}
 
 				}
@@ -65,7 +68,7 @@ class SocketClientSession implements Runnable, RemoteUpdateListener {
 				while (getSocketServerSession().shouldRun) {
 					ServerToClientMessage message = getQueue().take();
 					getGameLock().lock();
-					System.out.println("Sending message: " + message.mt);
+					logger.debug("Sending message: " + message.mt);
 					clientOutputStream.writeObject(message);
 					getGameLock().unlock();
 					clientOutputStream.flush();

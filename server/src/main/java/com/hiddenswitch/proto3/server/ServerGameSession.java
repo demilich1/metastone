@@ -2,7 +2,7 @@ package com.hiddenswitch.proto3.server;
 
 import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
 import com.hiddenswitch.proto3.net.common.ClientToServerMessage;
-import com.hiddenswitch.proto3.net.common.NetworkHumanBehaviour;
+import com.hiddenswitch.proto3.net.common.NetworkBehaviour;
 import com.hiddenswitch.proto3.net.common.RemoteUpdateListener;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
@@ -11,19 +11,20 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class ServerGameSession extends GameSession implements ServerCommunicationSend {
-
+	private String host;
+	private int port;
 	private Lock gameSessionLock;
 	SocketClientSession c1;
 	SocketClientSession c2;
 	ServerListener listener;
 	boolean shouldRun = true;
-	private Player player1;
-	private Player player2;
+	private PregamePlayerConfiguration player1;
+	private PregamePlayerConfiguration player2;
 
-	private ClientConnectionConfiguration getConfigurationFor(Player player) {
+	private ClientConnectionConfiguration getConfigurationFor(PregamePlayerConfiguration player) {
 		// TODO: It's obviously insecure to allow the client to specify things like their player object
-		return new ClientConnectionConfiguration(SocketServerSession.HOST, SocketServerSession.PORT,
-				new ClientToServerMessage(player, getId()));
+		return new ClientConnectionConfiguration(getHost(), getPort(),
+				new ClientToServerMessage(player.getPlayer(), getId()));
 	}
 
 	@Override
@@ -36,11 +37,13 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 		return getConfigurationFor(player2);
 	}
 	
-	public ServerGameSession(PregamePlayerConfiguration p1, PregamePlayerConfiguration p2){
-		super(p1, p2);
+	public ServerGameSession(String host, int port, PregamePlayerConfiguration p1, PregamePlayerConfiguration p2){
+		this();
+		setHost(host);
+		setPort(port);
 		//TODO: in PregamePlayerConfiguration should really contain a playerConfig object.
-		this.player1 = new Player(new PlayerConfig(p1.getDeck(), new NetworkHumanBehaviour()));
-		this.player2 = new Player(new PlayerConfig(p2.getDeck(), new NetworkHumanBehaviour()));
+		this.player1 = p1;
+		this.player2 = p2;
 	}
 
 	//Temporary constructor since we don't have a matchmaker yet. 
@@ -68,17 +71,32 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 		if (c1 == null) {
 			c1 = client;
 			c1.setServerGameSession(this);
-			firstMessage.getPlayer1().setBehaviour(new NetworkHumanBehaviour());
-			listener.onPlayerConnected(firstMessage.getPlayer1());
 		} else {
 			c2 = client;
 			c2.setServerGameSession(this);
-			firstMessage.getPlayer1().setBehaviour(new NetworkHumanBehaviour());
-			listener.onPlayerConnected(firstMessage.getPlayer1());
 		}
+		NetworkBehaviour networkBehaviour = new NetworkBehaviour(firstMessage.getPlayer1().getBehaviour());
+		firstMessage.getPlayer1().setBehaviour(networkBehaviour);
+		listener.onPlayerConnected(firstMessage.getPlayer1());
 	}
 
 	public void kill() {
 		shouldRun = false;
+	}
+
+	public String getHost() {
+		return host;
+	}
+
+	public void setHost(String host) {
+		this.host = host;
+	}
+
+	public int getPort() {
+		return port;
+	}
+
+	public void setPort(int port) {
+		this.port = port;
 	}
 }

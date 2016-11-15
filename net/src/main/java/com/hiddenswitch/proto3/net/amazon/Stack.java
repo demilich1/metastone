@@ -7,6 +7,10 @@ import com.hiddenswitch.proto3.net.Games;
 public class Stack {
 
 	public static void initializeStack(StackConfiguration configuration) {
+		if (configuration.database == null) {
+			return;
+		}
+
 		for (Class t : new Class[]{UserRecord.class, AuthorizationRecord.class, GameRecord.class}) {
 			CreateTableRequest request = configuration.database.generateCreateTableRequest(t);
 			request.setProvisionedThroughput(new ProvisionedThroughput(1L, 1L));

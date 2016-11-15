@@ -3,21 +3,28 @@ package com.hiddenswitch.proto3.server;
 import com.hiddenswitch.proto3.net.common.ClientToServerMessage;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class SocketServerSession implements Runnable {
-	public static final int PORT = 11111;
-	public static final String HOST = "127.0.0.1";
+	private static final int DEFAULT_PORT = 11111;
+	private final int port;
 	private Lock serverSessionLock = new ReentrantLock();
 	private Map<String, ServerGameSession> games = new HashMap<>();
 	boolean shouldRun = true;
 
 	public SocketServerSession() {
+		this.port = DEFAULT_PORT;
+	}
+
+	public SocketServerSession(int port) {
+		this.port = port;
 	}
 
 	public Lock getLock() {
@@ -26,7 +33,7 @@ public class SocketServerSession implements Runnable {
 
 	public void run() {
 		try {
-			ServerSocket s = new ServerSocket(PORT);
+			ServerSocket s = new ServerSocket(port);
 			while (true) {
 				Socket socket = s.accept();
 				SocketClientSession connection = new SocketClientSession(this, socket);
@@ -34,6 +41,8 @@ public class SocketServerSession implements Runnable {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			kill();
 		}
 	}
 
@@ -57,8 +66,21 @@ public class SocketServerSession implements Runnable {
 
 	public ServerGameSession createGameSession(PregamePlayerConfiguration player1, PregamePlayerConfiguration player2) {
 		// Check if a session already exists for these two players
-		ServerGameSession newSession = new ServerGameSession(player1, player2);
+		ServerGameSession newSession = new ServerGameSession(getHost(), getPort(), player1, player2);
 		games.put(newSession.getId(), newSession);
 		return newSession;
+	}
+
+	public int getPort() {
+		return port;
+	}
+
+	public String getHost() {
+		try {
+			return InetAddress.getLocalHost().getHostAddress();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+			return "127.0.0.1";
+		}
 	}
 }

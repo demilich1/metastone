@@ -61,7 +61,7 @@ public class ServerGameContext extends GameContext {
 		int startingPlayerId = getLogic().determineBeginner(PLAYER_1, PLAYER_2);
 		activePlayer = getPlayer(startingPlayerId).getId();
 		logger.debug(getActivePlayer().getName() + " begins");
-		
+
 		getLock().lock();
 		listenerMap.get(getPlayer1()).setPlayers(getPlayer1(), getPlayer2());
 		listenerMap.get(getPlayer2()).setPlayers(getPlayer2(), getPlayer1());
@@ -70,7 +70,7 @@ public class ServerGameContext extends GameContext {
 		getLogic().init(activePlayer, true);
 		getLogic().init(getOpponent(getActivePlayer()).getId(), false);
 		getLock().unlock();
-		while(!initReady){
+		while (!initReady) {
 			//waiting for mulligan inputs
 		}
 
@@ -130,54 +130,7 @@ public class ServerGameContext extends GameContext {
 		getLock().unlock();
 	}
 
-	/**
-	@Override
-	public boolean playTurn() {
-		if (actionRequested == true && pendingAction == null) {
-			//busy wait
-			return true;
-		}
-		setActionsThisTurn(getActionsThisTurn() + 1);
-		if (getActionsThisTurn() > 99) {
-			logger.warn("Turn has been forcefully ended after {} actions", getActionsThisTurn());
-			endTurn();
-			return false;
-		}
-		if (getLogic().hasAutoHeroPower(activePlayer)) {
-			performAction(activePlayer, getAutoHeroPowerAction());
-			return true;
-		}
 
-		List<GameAction> validActions = getValidActions();
-		if (validActions.size() == 0) {
-			endTurn();
-			return false;
-		}
-		if (pendingAction == null && actionRequested == false) {
-			listenerMap.get(getActivePlayer()).onRequestAction(validActions);
-			System.out.println("requesting actions from: " + getActivePlayer().getId());
-			actionRequested = true;
-			return true;
-		} else if (pendingAction == null) {
-			//Wait for action from player;
-			return true;
-		}   // else if (!validActions.contains(pendingAction)){
-		//TODO: Handle cheating players;
-		//(Currently this is broken due to comparison is broken)
-		//throw new RuntimeException("invalid action provided by player");
-		//}
-		boolean endTurn = pendingAction.getActionType() == ActionType.END_TURN;
-		performAction(activePlayer, pendingAction);
-		if (!endTurn) {
-			pendingAction = null;
-			actionRequested = false;
-		}
-		return !endTurn;
-	}
-
-	 **/
-	
-	
 	@Override
 	protected void onGameStateChanged() {
 		listenerMap.get(getPlayer1()).onUpdate(getPlayer(0), getPlayer(1), getTurnState());
@@ -201,8 +154,8 @@ public class ServerGameContext extends GameContext {
 		listenerMap.get(getPlayer2()).onGameEvent(gameEvent);
 
 	}
-	
-	public void requestAction(Player player, List<GameAction> actions){
+
+	public void requestAction(Player player, List<GameAction> actions) {
 		this.pendingAction = null;
 		actionRequested = true;
 		listenerMap.get(player).onRequestAction(actions);
@@ -211,25 +164,25 @@ public class ServerGameContext extends GameContext {
 	private Lock getLock() {
 		return lock;
 	}
-	
-	public void mulligan(Player player, List<Card> starterCards, Consumer<List<Card>> callBack){
-		this.mulliganCallbacks.put(player.getId(),  callBack);
+
+	public void mulligan(Player player, List<Card> starterCards, Consumer<List<Card>> callBack) {
+		this.mulliganCallbacks.put(player.getId(), callBack);
 		listenerMap.get(player).onMulligan(player, starterCards);
 	}
-	
-	public void cycleLock(){
+
+	public void cycleLock() {
 		getLock().unlock();
 		getLock().lock();
 	}
 
 	public void updateMulligan(Player player, List<Card> discardedCards) {
-		System.out.println("mulligan received");
+		logger.debug(String.format("Mulligan received from %s", player.getName()));
 		this.mulliganCallbacks.get(player.getId()).accept(discardedCards);
 		this.mulliganCallbacks.remove(player.getId());
 		mulliganCompleted += 1;
-		if (mulliganCompleted == 2){
+		if (mulliganCompleted == 2) {
 			initReady = true;
 		}
-		
+
 	}
 }

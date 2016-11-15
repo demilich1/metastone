@@ -15,9 +15,15 @@ public class Service {
 	}
 
 	private void initializeProductionDependencies() {
-		setCredentials(getAWSCredentials());
-		setDatabase(new DynamoDBMapper(new AmazonDynamoDBClient(getCredentials())));
-		setQueue(new AmazonSQSClient(getCredentials()));
+		if (credentials == null) {
+			setCredentials(getAWSCredentials());
+		}
+		if (database == null) {
+			setDatabase(new DynamoDBMapper(new AmazonDynamoDBClient(getCredentials())));
+		}
+		if (queue == null) {
+			setQueue(new AmazonSQSClient(getCredentials()));
+		}
 	}
 
 	private AWSCredentials getAWSCredentials() {
