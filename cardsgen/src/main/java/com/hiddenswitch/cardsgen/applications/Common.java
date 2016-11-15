@@ -21,6 +21,7 @@ import org.apache.log4j.SimpleLayout;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -147,5 +148,16 @@ public class Common {
 		Logger.getRootLogger().addAppender(console);
 		Logger.getRootLogger().setLevel(Level.INFO);
 		return Logger.getLogger(clazz);
+	}
+
+	public static void setLogLevelToError() {
+		Object rootObject = LoggerFactory.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME);
+		if (rootObject instanceof ch.qos.logback.classic.Logger) {
+			ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) rootObject;
+			root.setLevel(ch.qos.logback.classic.Level.ERROR);
+		} else if (rootObject instanceof  Logger) {
+			Logger root= (Logger)rootObject;
+			root.setLevel(Level.ERROR);
+		}
 	}
 }
