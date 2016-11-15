@@ -18,8 +18,11 @@
 			}
 		},
 		"condition": {
-			"class": "RaceOnBoardCondition",
-			"race": "BEAST"
+			"class": "MinionOnBoardCondition",
+			"cardfilter": {
+				"class": "RaceFilter",
+				"race": "BEAST"
+			}
 		}
 	},
 	"attributes": {

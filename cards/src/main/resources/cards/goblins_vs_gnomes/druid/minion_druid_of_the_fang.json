@@ -15,8 +15,11 @@
 			"card": "token_cobra_form"
 		},
 		"condition": {
-			"class": "RaceOnBoardCondition",
-			"race": "BEAST"
+			"class": "MinionOnBoardCondition",
+			"cardfilter": {
+				"class": "RaceFilter",
+				"race": "BEAST"
+			}
 		}
 	},
 	"attributes": {

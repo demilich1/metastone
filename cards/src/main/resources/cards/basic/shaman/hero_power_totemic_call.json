@@ -23,20 +23,32 @@
 				"class": "AndCondition",
 				"conditions": [
 					{
-						"class": "HasSpecificMinionOnBoardCondition",
-						"cardId": "token_searing_totem"
+						"class": "MinionOnBoardCondition",
+						"cardfilter": {
+							"class": "SpecificCardFilter",
+							"cardId": "token_searing_totem"
+						}
 					},
 					{
-						"class": "HasSpecificMinionOnBoardCondition",
-						"cardId": "token_healing_totem"
+						"class": "MinionOnBoardCondition",
+						"cardfilter": {
+							"class": "SpecificCardFilter",
+							"cardId": "token_healing_totem"
+						}
 					},
 					{
-						"class": "HasSpecificMinionOnBoardCondition",
-						"cardId": "token_wrath_of_air_totem"
+						"class": "MinionOnBoardCondition",
+						"cardfilter": {
+							"class": "SpecificCardFilter",
+							"cardId": "token_wrath_of_air_totem"
+						}
 					},
 					{
-						"class": "HasSpecificMinionOnBoardCondition",
-						"cardId": "token_stoneclaw_totem"
+						"class": "MinionOnBoardCondition",
+						"cardfilter": {
+							"class": "SpecificCardFilter",
+							"cardId": "token_stoneclaw_totem"
+						}
 					}
 				],
 				"invert": true

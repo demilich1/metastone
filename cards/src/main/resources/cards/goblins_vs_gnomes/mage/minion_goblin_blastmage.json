@@ -15,8 +15,11 @@
 			"howMany": 4
 		},
 		"condition": {
-			"class": "RaceOnBoardCondition",
-			"race": "MECH"
+			"class": "MinionOnBoardCondition",
+			"cardfilter": {
+				"class": "RaceFilter",
+				"race": "MECH"
+			}
 		}
 	},
 	"attributes": {

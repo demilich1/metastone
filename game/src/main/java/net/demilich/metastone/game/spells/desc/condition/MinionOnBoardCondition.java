@@ -4,22 +4,22 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.entities.minions.Race;
+import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 
-public class RaceOnBoardCondition extends Condition {
+public class MinionOnBoardCondition extends Condition {
 
-	public RaceOnBoardCondition(ConditionDesc desc) {
+	public MinionOnBoardCondition(ConditionDesc desc) {
 		super(desc);
 	}
 
 	@Override
 	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity source, Entity target) {
-		Race race = (Race) desc.get(ConditionArg.RACE);
+		EntityFilter filter = (EntityFilter) desc.get(ConditionArg.CARD_FILTER);
 		int value = desc.contains(ConditionArg.VALUE) ? desc.getInt(ConditionArg.VALUE) : 1;
 
 		int count = 0;
 		for (Minion minion : player.getMinions()) {
-			if (minion.getRace() == race && !context.getSummonReferenceStack().contains(minion.getReference())) {
+			if ((filter == null || filter.matches(context, player, minion)) && context.getSummonReferenceStack().contains(minion.getReference())) {
 				count++;
 			}
 		}
