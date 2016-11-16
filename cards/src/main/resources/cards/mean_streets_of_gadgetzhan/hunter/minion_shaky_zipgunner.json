@@ -10,8 +10,8 @@
 	"deathrattle": {
 		"class": "BuffSpell",
 		"target": "FRIENDLY_HAND",
-		"attackBonus": 1,
-		"hpBonus": 1,
+		"attackBonus": 2,
+		"hpBonus": 2,
 		"filter": {
 			"class": "CardFilter",
 			"cardType": "MINION"

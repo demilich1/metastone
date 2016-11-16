@@ -14,9 +14,12 @@
 			"class": "TurnStartTrigger",
 			"targetPlayer": "SELF",
 			"fireCondition": {
-				"class": "RaceOnBoardCondition",
-				"race": "MECH",
-				"value": 3
+				"class": "MinionOnBoardCondition",
+				"value": 3,
+				"cardfilter": {
+					"class": "RaceFilter",
+					"race": "MECH"
+				}
 			}
 		},
 		"spell": {

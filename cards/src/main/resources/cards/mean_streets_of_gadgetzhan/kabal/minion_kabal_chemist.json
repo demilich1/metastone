@@ -1,0 +1,33 @@
+{
+	"name": "Kabal Chemist",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 3,
+	"heroClass": "ANY",
+	"heroClasses": [
+		"MAGE",
+		"PRIEST",
+		"WARLOCK"
+	],
+	"rarity": "COMMON",
+	"description": "Battlecry: Add a random Potion to your hand.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "ReceiveRandomCardSpell",
+			"cards": [
+				"spell_volcanic_potion",
+				"spell_dragonfire_potion",
+				"spell_potion_of_madness",
+				"spell_pint-size_potion"
+			]
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZHAN",
+	"fileFormatVersion": 1
+}

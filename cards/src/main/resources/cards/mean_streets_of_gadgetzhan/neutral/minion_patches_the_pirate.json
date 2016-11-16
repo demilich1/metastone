@@ -7,7 +7,7 @@
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
 	"race": "PIRATE",
-	"description": "After you play a pirate, summon this minion from your deck.",
+	"description": "Charge. After you play a pirate, summon this minion from your deck.",
 	"deckTrigger": {
 		"eventTrigger": {
 			"class": "MinionPlayedTrigger",
@@ -21,6 +21,9 @@
 			"class": "PutMinionOnBoardFromDeckSpell",
 			"target": "SELF"
 		}
+	},
+	"attributes": {
+		"CHARGE": true
 	},
 	"collectible": true,
 	"set": "ONE_NIGHT_IN_KARAZHAN",

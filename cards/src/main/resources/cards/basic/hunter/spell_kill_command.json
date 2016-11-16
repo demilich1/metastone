@@ -14,8 +14,11 @@
 			"ifTrue": 5,
 			"ifFalse": 3,
 			"condition": {
-				"class": "RaceOnBoardCondition",
-				"race": "BEAST"
+				"class": "MinionOnBoardCondition",
+				"cardfilter": {
+					"class": "RaceFilter",
+					"race": "BEAST"
+				}
 			}
 		}
 	},

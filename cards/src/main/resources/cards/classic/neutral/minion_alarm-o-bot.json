@@ -15,7 +15,10 @@
 			"targetPlayer": "SELF",
 			"queueCondition": {
 				"class": "HoldsCardCondition",
-				"cardType": "MINION"
+				"cardFilter": {
+					"class": "CardFilter",
+					"cardType": "MINION"
+				}
 			}
 		},
 		"spell": {

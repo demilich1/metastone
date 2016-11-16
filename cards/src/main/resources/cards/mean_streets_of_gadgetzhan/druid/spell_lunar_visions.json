@@ -8,6 +8,7 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "DrawCardAndDoSomethingSpell",
+		"value": 2,
 		"spell": {
 			"class": "ConditionalSpell",
 			"spell": {

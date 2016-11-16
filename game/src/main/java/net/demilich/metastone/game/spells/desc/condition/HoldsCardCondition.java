@@ -2,10 +2,9 @@ package net.demilich.metastone.game.spells.desc.condition;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.cards.CardType;
+import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.Entity;
-import net.demilich.metastone.game.entities.minions.Race;
-import net.demilich.metastone.game.spells.SpellUtils;
+import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 
 public class HoldsCardCondition extends Condition {
 
@@ -15,15 +14,13 @@ public class HoldsCardCondition extends Condition {
 
 	@Override
 	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity source, Entity target) {
-		CardType cardType = (CardType) desc.get(ConditionArg.CARD_TYPE);
-		if (cardType != null && !SpellUtils.holdsCardOfType(player, cardType)) {
-			return false;
+		EntityFilter cardFilter = (EntityFilter) desc.get(ConditionArg.CARD_FILTER);
+		for (Card card : player.getHand()) {
+			if (cardFilter == null || cardFilter.matches(context, player, card)) {
+				return true;
+			}
 		}
-		Race race = (Race) desc.get(ConditionArg.RACE);
-		if (race != null && !SpellUtils.holdsMinionOfRace(player, race)) {
-			return false;
-		}
-		return true;
+		return false;
 	}
 
 }

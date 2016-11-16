@@ -2,7 +2,7 @@
 	"name": "Counterfeit Coin",
 	"baseManaCost": 0,
 	"type": "SPELL",
-	"heroClass": "PRIEST",
+	"heroClass": "ROGUE",
 	"rarity": "RARE",
 	"description": "Gain 1 Mana this turn only.",
 	"targetSelection": "NONE",
