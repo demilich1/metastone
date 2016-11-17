@@ -14,7 +14,7 @@ public class MadamGoyaSpell extends ShuffleMinionToDeckSpell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		// Check to see if there is a minion before returning to deck!
 		// If there is no minion, do not activate!
-		if (!player.getDeck().hasCardOfType(CardType.MINION)) {
+		if (!player.getDeck().hasCardOfType(CardType.MINION) || player.getMinions().contains(target)) {
 			return;
 		}
 		// Summon a random minion and remove the corresponding card
