@@ -20,7 +20,9 @@
 				"spell_volcanic_potion",
 				"spell_dragonfire_potion",
 				"spell_potion_of_madness",
-				"spell_pint-size_potion"
+				"spell_pint-size_potion",
+				"spell_felfire_potion",
+				"secret_potion_of_polymorph"
 			]
 		}
 	},
