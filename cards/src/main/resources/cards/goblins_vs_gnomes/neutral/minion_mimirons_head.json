@@ -16,7 +16,7 @@
 			"fireCondition": {
 				"class": "MinionOnBoardCondition",
 				"value": 3,
-				"cardfilter": {
+				"cardFilter": {
 					"class": "RaceFilter",
 					"race": "MECH"
 				}

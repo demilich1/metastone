@@ -24,28 +24,28 @@
 				"conditions": [
 					{
 						"class": "MinionOnBoardCondition",
-						"cardfilter": {
+						"cardFilter": {
 							"class": "SpecificCardFilter",
 							"cardId": "token_searing_totem"
 						}
 					},
 					{
 						"class": "MinionOnBoardCondition",
-						"cardfilter": {
+						"cardFilter": {
 							"class": "SpecificCardFilter",
 							"cardId": "token_healing_totem"
 						}
 					},
 					{
 						"class": "MinionOnBoardCondition",
-						"cardfilter": {
+						"cardFilter": {
 							"class": "SpecificCardFilter",
 							"cardId": "token_wrath_of_air_totem"
 						}
 					},
 					{
 						"class": "MinionOnBoardCondition",
-						"cardfilter": {
+						"cardFilter": {
 							"class": "SpecificCardFilter",
 							"cardId": "token_stoneclaw_totem"
 						}

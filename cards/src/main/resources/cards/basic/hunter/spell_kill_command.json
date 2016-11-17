@@ -15,7 +15,7 @@
 			"ifFalse": 3,
 			"condition": {
 				"class": "MinionOnBoardCondition",
-				"cardfilter": {
+				"cardFilter": {
 					"class": "RaceFilter",
 					"race": "BEAST"
 				}
