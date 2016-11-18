@@ -21,8 +21,7 @@ public class GameSessions extends Service {
 	public GameSessions() throws IOException, URISyntaxException, CardParseException {
 		super();
 		if (server == null) {
-			CardCatalogue.copyCardsFromResources();
-			CardCatalogue.loadCardsFromFilesystem();
+			CardCatalogue.loadCardsFromPackage();
 			int port = RandomUtils.nextInt(6200, 16200);
 			server = new SocketServerSession(port);
 			serverThread = new Thread(server);

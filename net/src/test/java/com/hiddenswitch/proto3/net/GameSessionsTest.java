@@ -35,14 +35,12 @@ import ch.qos.logback.classic.Level;
 public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 	@Test
 	public void testCreateGameSession() throws Exception {
-//		NotificationProxy.init(new NullNotifier());
 		Logger root = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
 		root.setLevel(Level.DEBUG);
 		// TODO: Test reconnects
 		CardCatalogue.loadCardsFromPackage();
 
 		CreateGameSessionRequest request = new CreateGameSessionRequest();
-		AtomicInteger atomicInteger = new AtomicInteger(0);
 		AIPlayer player1 = new AIPlayer();
 		AIPlayer player2 = new AIPlayer();
 		PregamePlayerConfiguration pregame1 = new PregamePlayerConfiguration(player1.getConfiguredDeck(), "Player 1");
@@ -62,7 +60,6 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 		playerContext2.ignoreEventOverride = true;
 		Thread thread1 = new Thread(playerContext1::play);
 		Thread thread2 = new Thread(playerContext2::play);
-		System.out.println(atomicInteger.get());
 
 		try {
 			thread1.start();
@@ -81,13 +78,13 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 			Assert.assertTrue(playerContext2.gameDecided());
 			
 			Assert.assertTrue(playerContext1.getWinningPlayerId() == playerContext2.getWinningPlayerId());
-			
-			
 		} catch (Exception e) {
 			Assert.fail("Exception in execution", e);
 		} finally {
 			thread1.interrupt();
 			thread2.interrupt();
+			playerContext1.dispose();
+			playerContext2.dispose();
 		}
 	}
 

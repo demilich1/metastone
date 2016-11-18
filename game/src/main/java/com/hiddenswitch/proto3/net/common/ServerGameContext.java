@@ -80,7 +80,7 @@ public class ServerGameContext extends GameContext {
 		actionRequested = false;
 		super.endTurn();
 		this.onGameStateChanged();
-		System.out.println("now the active player is: " + getActivePlayer().getId());
+		logger.debug("Active player changed to: " + getActivePlayer().getId());
 		listenerMap.get(getPlayer1()).onTurnEnd(getActivePlayer(), getTurn(), getTurnState());
 		listenerMap.get(getPlayer2()).onTurnEnd(getActivePlayer(), getTurn(), getTurnState());
 	}
@@ -147,7 +147,7 @@ public class ServerGameContext extends GameContext {
 
 	public void mulligan(Player player, List<Card> starterCards, Consumer<List<Card>> callBack) {
 		if (mulliganCallback != null){
-			System.err.print("many mulligans at once is unsupported.");
+			logger.debug("Many mulligans at once is unsupported.");
 		}
 		mulliganCallback = callBack;
 		listenerMap.get(player).onMulligan(player, starterCards);
