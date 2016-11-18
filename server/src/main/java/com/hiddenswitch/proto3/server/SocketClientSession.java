@@ -107,7 +107,6 @@ class SocketClientSession implements Runnable, RemoteUpdateListener {
 
 	@Override
 	public void onGameEnd(Player winner) {
-		System.out.println("Socket Client Session: game ended");
 		this.getQueue().add(new ServerToClientMessage(winner, true));
 
 	}

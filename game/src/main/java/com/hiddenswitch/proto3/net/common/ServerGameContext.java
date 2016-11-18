@@ -75,7 +75,7 @@ public class ServerGameContext extends GameContext {
 	}
 
 	public void endTurn() {
-		System.out.println("Ending turn: " + getActivePlayer().getId());
+		logger.debug("Ending turn: " + getActivePlayer().getId());
 		pendingAction = null;
 		actionRequested = false;
 		super.endTurn();

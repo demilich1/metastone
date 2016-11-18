@@ -341,7 +341,7 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 
 	@Override
 	public void onTurnEnd(Player ap, int turnNumber, TurnState turnState) {
-		System.out.println("new active player: " + ap.getId());
+		logger.debug("new active player: " + ap.getId());
 		this.setActivePlayer(ap.getId());
 		this.setRemoteTurn(turnNumber);
 		this.setRemoteTurnState(turnState);

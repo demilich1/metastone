@@ -9,15 +9,12 @@ import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class AI extends PlayRandomBehaviour implements Serializable {
-	private transient final AtomicInteger atomicInteger;
 
-	public AI(AtomicInteger atomicInteger) {
+	public AI() {
 		super();
-		this.atomicInteger = atomicInteger;
 	}
 
 	@Override
 	public void onGameOver(GameContext context, int playerId, int winningPlayerId) {
-		atomicInteger.incrementAndGet();
 	}
 }

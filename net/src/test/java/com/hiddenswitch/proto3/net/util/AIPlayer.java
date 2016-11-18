@@ -13,11 +13,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class AIPlayer extends Player {
 	private transient Deck configuredDeck;
 
-	public AIPlayer(AtomicInteger integer) {
+	public AIPlayer() {
 		super();
 		Deck randomDeck = DeckFactory.getRandomDeck(HeroClass.MAGE, new DeckFormat().withCardSets(CardSet.PROCEDURAL_PREVIEW));
 		setConfiguredDeck(randomDeck);
-		buildFromConfig(new PlayerConfig(randomDeck, new AI(integer)));
+		buildFromConfig(new PlayerConfig(randomDeck, new AI()));
 	}
 
 	protected AIPlayer(PlayerConfig config) {

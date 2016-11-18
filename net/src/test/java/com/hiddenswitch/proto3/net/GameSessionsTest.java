@@ -43,8 +43,8 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 
 		CreateGameSessionRequest request = new CreateGameSessionRequest();
 		AtomicInteger atomicInteger = new AtomicInteger(0);
-		AIPlayer player1 = new AIPlayer(atomicInteger);
-		AIPlayer player2 = new AIPlayer(atomicInteger);
+		AIPlayer player1 = new AIPlayer();
+		AIPlayer player2 = new AIPlayer();
 		PregamePlayerConfiguration pregame1 = new PregamePlayerConfiguration(player1.getConfiguredDeck(), "Player 1");
 		pregame1.setPlayer(player1);
 		PregamePlayerConfiguration pregame2 = new PregamePlayerConfiguration(player2.getConfiguredDeck(), "Player 2");
@@ -69,16 +69,20 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 			thread2.start();
 
 			float seconds = 0.0f;
-			while (seconds <= 20.0f && atomicInteger.get() < 2) {
+			while (seconds <= 20.0f && (!playerContext1.gameDecided() || !playerContext2.gameDecided())) {
 				if (thread1.isInterrupted() || thread2.isInterrupted()) {
 					break;
 				}
 				Thread.sleep(100);
 				seconds += 0.1f;
 			}
-			System.out.println(atomicInteger.get());
 
-			Assert.assertEquals(atomicInteger.get(), 2);
+			Assert.assertTrue(playerContext1.gameDecided());
+			Assert.assertTrue(playerContext2.gameDecided());
+			
+			Assert.assertTrue(playerContext1.getWinningPlayerId() == playerContext2.getWinningPlayerId());
+			
+			
 		} catch (Exception e) {
 			Assert.fail("Exception in execution", e);
 		} finally {
