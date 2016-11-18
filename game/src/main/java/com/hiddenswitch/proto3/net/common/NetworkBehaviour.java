@@ -38,14 +38,13 @@ public class NetworkBehaviour extends Behaviour {
 				}
 				atomicBoolean.set(true);
 			});
-			System.out.println("Waiting for mulligan response");
+			logger.debug("Waiting for mulligan response");
 			while (!atomicBoolean.get()) {
 				serverContext.cycleLock();
 			}
 			return discardedCards;
 		} else {
 			logger.debug("Requesting mulligan from wrapped behaviour.");
-			System.out.println("Requesting mulligan from wrapped behaviour.");
 
 			return getWrapBehaviour().mulligan(context, player, cards);
 		}
