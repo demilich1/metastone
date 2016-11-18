@@ -24,6 +24,7 @@ public abstract class GameSession {
 	 * A default constructor for serialization purposes.
 	 */
 	public GameSession() {
+		this.id = RandomStringUtils.randomAlphanumeric(30);
 	}
 
 	/**

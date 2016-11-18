@@ -481,8 +481,6 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 
 		}
 		logger.error("Could not resolve cardReference {}", cardReference);
-		new RuntimeException().printStackTrace();
-		System.err.println("Could not resolve cardReference" + cardReference.toString());
 		return null;
 	}
 
@@ -529,6 +527,10 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 	public String toString() {
 		StringBuilder builder = new StringBuilder("GameContext hashCode: " + hashCode() + "\nPlayer: ");
 		for (Player player : getPlayers()) {
+			if (player == null) {
+				builder.append("(null player)\n");
+				continue;
+			}
 			builder.append(player.getName());
 			builder.append(" Mana: ");
 			builder.append(player.getMana());
