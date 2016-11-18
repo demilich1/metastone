@@ -2,12 +2,14 @@ package com.hiddenswitch.proto3.net;
 
 import com.hiddenswitch.proto3.net.models.CreateGameSessionRequest;
 import com.hiddenswitch.proto3.net.models.CreateGameSessionResponse;
+import com.hiddenswitch.proto3.net.models.DescribeGameSessionRequest;
 import com.hiddenswitch.proto3.server.ServerGameSession;
 import com.hiddenswitch.proto3.server.SocketServerSession;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardParseException;
 import org.apache.commons.lang3.RandomUtils;
 
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import java.io.IOException;
@@ -29,9 +31,18 @@ public class GameSessions extends Service {
 		}
 	}
 
+	public static SocketServerSession getServer() {
+		return server;
+	}
+
 	@POST
 	public CreateGameSessionResponse createGameSession(CreateGameSessionRequest request) {
 		ServerGameSession newSession = server.createGameSession(request.getPregame1(), request.getPregame2());
 		return new CreateGameSessionResponse(newSession.getConfigurationForPlayer1(), newSession.getConfigurationForPlayer2());
+	}
+
+	@GET
+	public DescribeGameSessionResponse describeGameSession(DescribeGameSessionRequest request) {
+		return null;
 	}
 }

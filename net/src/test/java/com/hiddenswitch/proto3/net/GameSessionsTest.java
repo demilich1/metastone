@@ -29,6 +29,10 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
     @Test
     public void testCreateGameSession() throws Exception {
         // TODO: Test reconnects
+        TwoClients twoClients = getAndTestTwoClients();
+    }
+
+    private TwoClients getAndTestTwoClients() throws IOException, URISyntaxException, CardParseException {
         TwoClients twoClients = new TwoClients().invoke(getServiceInstance());
         try {
             twoClients.play();
@@ -47,6 +51,22 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
         } finally {
             twoClients.dispose();
         }
+        return twoClients;
+    }
+
+    @Test
+    public void testTwoGameSessionsOneAfterAnother() throws Exception {
+        getAndTestTwoClients();
+        getAndTestTwoClients();
+    }
+
+    @Test
+    public void testOldSessionDisposed() throws Exception {
+        getAndTestTwoClients();
+        getAndTestTwoClients();
+        // The game server should have cleaned up the games by now.
+        Thread.sleep(4000);
+        Assert.assertEquals(GameSessions.getServer().getGames().size(), 0, "After four seconds, the server should have cleaned up any lingering games.");
     }
 
     @Test

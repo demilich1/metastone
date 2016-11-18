@@ -83,4 +83,8 @@ public class SocketServerSession implements Runnable {
 			return "127.0.0.1";
 		}
 	}
+
+	public Map<String, ServerGameSession> getGames() {
+		return games;
+	}
 }
