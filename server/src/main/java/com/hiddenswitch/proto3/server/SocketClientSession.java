@@ -42,10 +42,13 @@ class SocketClientSession implements Runnable, RemoteUpdateListener {
 			try {
 				ObjectInputStream clientInputStream = new ObjectInputStream(getPrivateSocket().getInputStream());
 				while (getSocketServerSession().shouldRun || getServerGameSession().shouldRun) {
+					
 					ClientToServerMessage message = (ClientToServerMessage) clientInputStream.readObject();
 
 					if (message.getMt() == MessageType.FIRST_MESSAGE) {
+						getSocketServerSession().getLock().lock();
 						getSocketServerSession().onFirstMessage(this, message);
+						getSocketServerSession().getLock().unlock();
 					} else if (message.getMt() == MessageType.UPDATE_ACTION) {
 						getServerGameSession().listener.onActionRegistered(message.getCallingPlayer(), message.getAction());
 					} else if (message.getMt() == MessageType.UPDATE_MULLIGAN) {
@@ -53,7 +56,6 @@ class SocketClientSession implements Runnable, RemoteUpdateListener {
 					} else {
 						logger.error("Unexpected message type received by server.", message);
 					}
-
 				}
 				clientInputStream.close();
 			} catch (ClassNotFoundException | IOException e) {
@@ -105,6 +107,7 @@ class SocketClientSession implements Runnable, RemoteUpdateListener {
 
 	@Override
 	public void onGameEnd(Player winner) {
+		System.out.println("Socket Client Session: game ended");
 		this.getQueue().add(new ServerToClientMessage(winner, true));
 
 	}

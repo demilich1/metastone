@@ -20,12 +20,10 @@ import net.demilich.metastone.game.logic.GameLogic;
 public class ServerGameContext extends GameContext {
 
 	public Map<Player, RemoteUpdateListener> listenerMap = new HashMap<>();
-	private Map<Integer, Consumer<List<Card>>> mulliganCallbacks = new ConcurrentHashMap<>();
+	private Consumer<List<Card>> mulliganCallback = null;
 	private volatile Player player1;
 	private volatile Player player2;
 	private final Lock lock;
-	private volatile boolean initReady;
-	private volatile int mulliganCompleted;
 
 
 	public ServerGameContext(Player player1, Player player2, GameLogic logic, DeckFormat deckFormat, Lock lock) {
@@ -55,9 +53,6 @@ public class ServerGameContext extends GameContext {
 
 	@Override
 	public void init() {
-		initReady = false;
-		mulliganCompleted = 0;
-
 		int startingPlayerId = getLogic().determineBeginner(PLAYER_1, PLAYER_2);
 		activePlayer = getPlayer(startingPlayerId).getId();
 		logger.debug(getActivePlayer().getName() + " begins");
@@ -70,10 +65,6 @@ public class ServerGameContext extends GameContext {
 		getLogic().init(activePlayer, true);
 		getLogic().init(getOpponent(getActivePlayer()).getId(), false);
 		getLock().unlock();
-		while (!initReady) {
-			//waiting for mulligan inputs
-		}
-
 	}
 
 	@Override
@@ -92,16 +83,6 @@ public class ServerGameContext extends GameContext {
 		System.out.println("now the active player is: " + getActivePlayer().getId());
 		listenerMap.get(getPlayer1()).onTurnEnd(getActivePlayer(), getTurn(), getTurnState());
 		listenerMap.get(getPlayer2()).onTurnEnd(getActivePlayer(), getTurn(), getTurnState());
-	}
-
-	@Override
-	public boolean gameDecided() {
-		boolean gameDecided = super.gameDecided();
-		if (gameDecided) {
-			listenerMap.get(getPlayer1()).onGameEnd(getWinner());
-			listenerMap.get(getPlayer2()).onGameEnd(getWinner());
-		}
-		return gameDecided;
 	}
 
 	public Player getNonActivePlayer() {
@@ -124,7 +105,6 @@ public class ServerGameContext extends GameContext {
 				break;
 			}
 		}
-		getLock().unlock();
 		getLock().lock();
 		endGame();
 		getLock().unlock();
@@ -166,8 +146,15 @@ public class ServerGameContext extends GameContext {
 	}
 
 	public void mulligan(Player player, List<Card> starterCards, Consumer<List<Card>> callBack) {
-		this.mulliganCallbacks.put(player.getId(), callBack);
+		if (mulliganCallback != null){
+			System.err.print("many mulligans at once is unsupported.");
+		}
+		mulliganCallback = callBack;
 		listenerMap.get(player).onMulligan(player, starterCards);
+	}
+	
+	public void sendGameOver(Player sender, Player winner){
+		listenerMap.get(sender).onGameEnd(winner);
 	}
 
 	public void cycleLock() {
@@ -177,12 +164,7 @@ public class ServerGameContext extends GameContext {
 
 	public void updateMulligan(Player player, List<Card> discardedCards) {
 		logger.debug(String.format("Mulligan received from %s", player.getName()));
-		this.mulliganCallbacks.get(player.getId()).accept(discardedCards);
-		this.mulliganCallbacks.remove(player.getId());
-		mulliganCompleted += 1;
-		if (mulliganCompleted == 2) {
-			initReady = true;
-		}
-
+		mulliganCallback.accept(discardedCards);
+		mulliganCallback = null;
 	}
 }

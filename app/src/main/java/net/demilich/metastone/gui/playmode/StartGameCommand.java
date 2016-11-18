@@ -1,6 +1,9 @@
 package net.demilich.metastone.gui.playmode;
 
 import com.hiddenswitch.proto3.net.client.RemoteGameContext;
+import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
+import com.hiddenswitch.proto3.net.common.ClientToServerMessage;
+
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.GameContext;
@@ -34,7 +37,10 @@ public class StartGameCommand extends SimpleCommand<GameNotification> {
 		if (gameConfig.isMultiplayer()) {
 			player1 = new Player(playerConfig1);
 			player2 = new Player(playerConfig1);
-			newGame = new RemoteGameContext(player1, player2, new GameLogic(), deckFormat, gameConfig.getHost(), gameConfig.getPort());
+			//TODO: get first message correctly from places.
+			ClientConnectionConfiguration config = new ClientConnectionConfiguration(gameConfig.getHost(),gameConfig.getPort(),
+					new ClientToServerMessage(player1, "123"));
+			newGame = new RemoteGameContext(config);
 		} else {
 			player1 = new Player(playerConfig1);
 			player2 = new Player(playerConfig2);

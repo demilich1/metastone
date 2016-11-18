@@ -68,6 +68,7 @@ dependencies {
 
 test {
     useTestNG()
+    testLogging.showStandardStreams = true
     testLogging {
         events "standardError"
     }

@@ -58,21 +58,25 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 		// Manually override the player in the configurations
 		RemoteGameContext playerContext1 = createRemoteGameContext(response.getConfigurationForPlayer1());
 		RemoteGameContext playerContext2 = createRemoteGameContext(response.getConfigurationForPlayer2());
-
+		playerContext1.ignoreEventOverride = true;
+		playerContext2.ignoreEventOverride = true;
 		Thread thread1 = new Thread(playerContext1::play);
 		Thread thread2 = new Thread(playerContext2::play);
+		System.out.println(atomicInteger.get());
+
 		try {
 			thread1.start();
 			thread2.start();
 
 			float seconds = 0.0f;
-			while (seconds <= 12.0f && atomicInteger.get() < 2) {
+			while (seconds <= 20.0f && atomicInteger.get() < 2) {
 				if (thread1.isInterrupted() || thread2.isInterrupted()) {
 					break;
 				}
 				Thread.sleep(100);
 				seconds += 0.1f;
 			}
+			System.out.println(atomicInteger.get());
 
 			Assert.assertEquals(atomicInteger.get(), 2);
 		} catch (Exception e) {

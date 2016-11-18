@@ -36,15 +36,17 @@ public class NetworkBehaviour extends Behaviour {
 				for (Card card : c) {
 					discardedCards.add(card);
 				}
-
 				atomicBoolean.set(true);
 			});
+			System.out.println("Waiting for mulligan response");
 			while (!atomicBoolean.get()) {
 				serverContext.cycleLock();
 			}
 			return discardedCards;
 		} else {
 			logger.debug("Requesting mulligan from wrapped behaviour.");
+			System.out.println("Requesting mulligan from wrapped behaviour.");
+
 			return getWrapBehaviour().mulligan(context, player, cards);
 		}
 	}
@@ -67,6 +69,15 @@ public class NetworkBehaviour extends Behaviour {
 		} else {
 			logger.debug("Requesting action from wrapped behaviour.");
 			return getWrapBehaviour().requestAction(context, player, validActions);
+		}
+	}
+	
+	@Override
+	public void onGameOver(GameContext context, int playerId, int winningPlayerId) {
+		if (context instanceof ServerGameContext){
+			((ServerGameContext) context).sendGameOver(context.getPlayer(playerId), context.getPlayer(winningPlayerId));
+		} else {
+			getWrapBehaviour().onGameOver(context, playerId, winningPlayerId);
 		}
 	}
 

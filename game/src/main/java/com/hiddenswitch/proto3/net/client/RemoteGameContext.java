@@ -32,7 +32,7 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	private Player localPlayer;
 	private final AtomicInteger activePlayer;
 	private final AtomicBoolean actionRequested;
-	private boolean gameDecided = false;
+	private volatile boolean gameDecided = false;
 	private int remoteTurn;
 	private TurnState remoteTurnState;
 	private volatile List<GameAction> remoteValidActions;
@@ -42,6 +42,7 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	private ClientConnectionConfiguration connectionConfiguration;
 	private ClientCommunicationSend ccs;
 	private ClientCommunicationReceive ccr;
+	public boolean ignoreEventOverride = false;
 
 	public RemoteGameContext(ClientConnectionConfiguration connectionConfiguration) {
 		super(connectionConfiguration.getFirstMessage().getPlayer1(), null, new GameLogic(), new DeckFormat().withCardSets(CardSet.BASIC, CardSet.CLASSIC, CardSet.PROCEDURAL_PREVIEW));
@@ -170,6 +171,11 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 
 	@Override
 	public boolean ignoreEvents() {
+		//Patch around lack of good notification when testing
+		//TODO: refactor this patch
+		if (ignoreEventOverride){
+			return true;
+		}
 		return (!mulligan && getActivePlayerId() == -1);
 	}
 
@@ -297,8 +303,9 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	@Override
 	public void onGameEnd(Player w) {
 		this.setWinner(w);
+		this.gameDecided = true;
 		this.onGameStateChanged();
-		this.endGame();
+		//this.endGame();
 	}
 
 	@Override
@@ -306,6 +313,7 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 		logger.debug("ON_ACTIVE_PLAYER " + ap.getId());
 		this.setActivePlayer(ap.getId());
 		this.onGameStateChanged();
+		System.out.println("End active player");
 	}
 
 	@Override
