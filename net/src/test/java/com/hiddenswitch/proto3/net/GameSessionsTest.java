@@ -70,9 +70,9 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
     }
 
     @Test
-    public void testMultipleSimultaneousSessions() throws Exception {
+    public void testTwoSimultaneousSessions() throws Exception {
         List<TwoClients> clients = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 2; i++) {
             clients.add(new TwoClients().invoke(getServiceInstance()));
         }
 
