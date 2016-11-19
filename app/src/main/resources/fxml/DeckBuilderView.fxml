@@ -20,7 +20,7 @@
    <right>
       <VBox spacing="2.0">
          <children>
-            <Pane fx:id="upperInfoArea" prefHeight="50.0" prefWidth="240.0" />
+            <Pane fx:id="upperInfoArea" prefHeight="160.0" prefWidth="240.0" />
             <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="780.0" prefViewportWidth="220.0" prefWidth="250.0" styleClass="sidebar">
                <padding>
                   <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
