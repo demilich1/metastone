@@ -55,14 +55,14 @@ public class NetworkBehaviour extends Behaviour {
         if (context instanceof ServerGameContext) {
             ServerGameContext serverContext = (ServerGameContext) context;
             serverContext.requestAction(player, validActions);
-            logger.debug("{}: Action requested from {}.", serverContext, player);
+            logger.debug("{}: Action requested from {}. {}", serverContext, player, validActions);
 
             while (serverContext.getPendingAction() == null) {
                 serverContext.cycleLock();
             }
             logger.debug("{}: Action received from {}.", serverContext, player);
 
-            GameAction action = serverContext.getPendingAction().clone();
+            GameAction action = serverContext.getPendingAction();
             serverContext.setPendingAction(null);
             return action;
         } else {
@@ -74,7 +74,11 @@ public class NetworkBehaviour extends Behaviour {
     @Override
     public void onGameOver(GameContext context, int playerId, int winningPlayerId) {
         if (context instanceof ServerGameContext) {
-            ((ServerGameContext) context).sendGameOver(context.getPlayer(playerId), context.getPlayer(winningPlayerId));
+        	if (winningPlayerId != -1){
+                ((ServerGameContext) context).sendGameOver(context.getPlayer(playerId), context.getPlayer(winningPlayerId));
+        	} else {
+                ((ServerGameContext) context).sendGameOver(context.getPlayer(playerId), null);
+        	}
         } else {
             getWrapBehaviour().onGameOver(context, playerId, winningPlayerId);
         }

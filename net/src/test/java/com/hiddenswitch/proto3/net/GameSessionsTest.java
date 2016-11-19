@@ -25,7 +25,7 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 		root.setLevel(Level.WARN);
 	}
 
-	@Test
+	//@Test
 	public void testCreateGameSession() throws CardParseException, IOException, URISyntaxException {
 		getAndTestTwoClients();
 	}
@@ -52,13 +52,13 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 		return twoClients;
 	}
 
-	@Test
+	//@Test
 	public void testTwoGameSessionsOneAfterAnother() throws CardParseException, IOException, URISyntaxException {
 		getAndTestTwoClients();
 		getAndTestTwoClients();
 	}
 
-	@Test
+	//@Test
 	public void testOldSessionDisposed() throws CardParseException, IOException, URISyntaxException {
 		getAndTestTwoClients();
 		getAndTestTwoClients();
@@ -73,15 +73,28 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 
 	@Test
 	public void testTwoSimultaneousSessions() throws Exception {
+		testMultipleSessions(2);
+	}
+	
+	@Test
+	public void testTenSessionsTenTimes() throws Exception {
+		for(int i = 0; i < 10; i++){
+			testMultipleSessions(10);
+			System.out.println("Iteration completed : " + (i+1));
+		}
+	}
+	
+	
+	public void testMultipleSessions(int sessions) throws Exception {
 		List<TwoClients> clients = new ArrayList<>();
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < sessions; i++) {
 			clients.add(new TwoClients().invoke(this.service));
 		}
 
 		try {
 			clients.forEach(TwoClients::play);
 			float seconds = 0.0f;
-			while (seconds <= 20.0f && !clients.stream().allMatch(TwoClients::gameDecided)) {
+			while (seconds <= 40.0f && !clients.stream().allMatch(TwoClients::gameDecided)) {
 				if (clients.stream().anyMatch(TwoClients::isInterrupted)) {
 					break;
 				}

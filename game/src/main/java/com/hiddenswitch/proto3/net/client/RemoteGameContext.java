@@ -204,12 +204,15 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
         }
         logger.debug("Players connected, waiting for action.");
         while (!gameDecided()) {
-            if (getActionRequested().get()) {
-                logger.debug("Action was requested from player.");
-                GameAction action = getLocalPlayer().getBehaviour().requestAction(this, getActivePlayer(), getValidActions());
-                ccs.getSendToServer().registerAction(getLocalPlayer(), action);
-                getActionRequested().set(false);
-            }
+        	synchronized(this){
+                if (getActionRequested().get()) {
+                    logger.debug("Action was requested from player.");
+                    GameAction action = getLocalPlayer().getBehaviour().requestAction(this, getActivePlayer(), getValidActions());
+                    ccs.getSendToServer().registerAction(getLocalPlayer(), action);
+                    getActionRequested().set(false);
+                }
+        	}
+
         }
         endGame();
     }
@@ -334,9 +337,11 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 
     @Override
     public void onRequestAction(List<GameAction> availableActions) {
-        this.getActionRequested().set(true);
-        this.setRemoteValidActions(availableActions);
-        this.onGameStateChanged();
+    	synchronized(this){
+            this.getActionRequested().set(true);
+            this.setRemoteValidActions(availableActions);
+            this.onGameStateChanged();
+    	}
     }
 
     @Override
