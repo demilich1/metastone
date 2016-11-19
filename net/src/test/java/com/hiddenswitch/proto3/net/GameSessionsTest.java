@@ -29,7 +29,7 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
     @Test
     public void testCreateGameSession() throws Exception {
         // TODO: Test reconnects
-        TwoClients twoClients = getAndTestTwoClients();
+        getAndTestTwoClients();
     }
 
     private TwoClients getAndTestTwoClients() throws IOException, URISyntaxException, CardParseException {
