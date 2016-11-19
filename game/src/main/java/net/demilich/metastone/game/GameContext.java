@@ -522,45 +522,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder("GameContext hashCode: " + hashCode() + "\nPlayer: ");
-		for (Player player : getPlayers()) {
-			if (player == null) {
-				builder.append("(null player)\n");
-				continue;
-			}
-			builder.append(player.getName());
-			builder.append(" Mana: ");
-			builder.append(player.getMana());
-			builder.append('/');
-			builder.append(player.getMaxMana());
-			builder.append(" HP: ");
-			builder.append(player.getHero().getHp() + "(" + player.getHero().getArmor() + ")");
-			builder.append('\n');
-			builder.append("Behaviour: " + player.getBehaviour().getName() + "\n");
-			builder.append("Minions:\n");
-			for (Actor minion : player.getMinions()) {
-				builder.append('\t');
-				builder.append(minion);
-				builder.append('\n');
-			}
-			builder.append("Cards (hand):\n");
-			for (Card card : player.getHand()) {
-				builder.append('\t');
-				builder.append(card);
-				builder.append('\n');
-			}
-			builder.append("Secrets:\n");
-			for (String secretId : player.getSecrets()) {
-				builder.append('\t');
-				builder.append(secretId);
-				builder.append('\n');
-			}
-		}
-		builder.append("Turn: " + getTurn() + "\n");
-		builder.append("Result: " + getResult() + "\n");
-		builder.append("Winner: " + (getWinner() == null ? "tbd" : getWinner().getName()));
-
-		return builder.toString();
+		return toLongString();
 	}
 
 	public Entity tryFind(EntityReference targetKey) {
@@ -630,5 +592,47 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 
 	public List<Throwable> getExceptions() {
 		return Collections.unmodifiableList(exceptions);
+	}
+
+	public String toLongString() {
+		StringBuilder builder = new StringBuilder("GameContext hashCode: " + hashCode() + "\nPlayer: ");
+		for (Player player : getPlayers()) {
+			if (player == null) {
+				builder.append("(null player)\n");
+				continue;
+			}
+			builder.append(player.getName());
+			builder.append(" Mana: ");
+			builder.append(player.getMana());
+			builder.append('/');
+			builder.append(player.getMaxMana());
+			builder.append(" HP: ");
+			builder.append(player.getHero().getHp() + "(" + player.getHero().getArmor() + ")");
+			builder.append('\n');
+			builder.append("Behaviour: " + player.getBehaviour().getName() + "\n");
+			builder.append("Minions:\n");
+			for (Actor minion : player.getMinions()) {
+				builder.append('\t');
+				builder.append(minion);
+				builder.append('\n');
+			}
+			builder.append("Cards (hand):\n");
+			for (Card card : player.getHand()) {
+				builder.append('\t');
+				builder.append(card);
+				builder.append('\n');
+			}
+			builder.append("Secrets:\n");
+			for (String secretId : player.getSecrets()) {
+				builder.append('\t');
+				builder.append(secretId);
+				builder.append('\n');
+			}
+		}
+		builder.append("Turn: " + getTurn() + "\n");
+		builder.append("Result: " + getResult() + "\n");
+		builder.append("Winner: " + (getWinner() == null ? "tbd" : getWinner().getName()));
+
+		return builder.toString();
 	}
 }
