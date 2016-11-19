@@ -46,13 +46,14 @@ public abstract class PlayCardAction extends GameAction {
 			if (!card.hasAttribute(Attribute.COUNTERED)) {
 				play(context, playerId);
 			}
-
 		} catch (Exception e) {
-			logger.error("ERROR while playing card " + card + " reference: " + cardReference);
-			context.getLogic().panicDump();
-			e.printStackTrace();
-			System.exit(-1);
-			throw e;
+			logger.error("ERROR while playing card " + card.toString() + " reference: " + cardReference.toString(), e);
+			context.addException(e);
+			if (e instanceof PlayCardException) {
+				throw e;
+			} else {
+				throw new PlayCardException(e);
+			}
 		}
 
 		context.getLogic().afterCardPlayed(playerId, getCardReference());

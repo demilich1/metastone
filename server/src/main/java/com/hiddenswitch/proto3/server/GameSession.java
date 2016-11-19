@@ -4,7 +4,7 @@ import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
 import org.apache.commons.lang3.RandomStringUtils;
 
 public abstract class GameSession {
-	private String id;
+	private final String gameId;
 
 	/**
 	 * Returns the information the client needs to know whom to connect to and what message to send.
@@ -24,7 +24,7 @@ public abstract class GameSession {
 	 * A default constructor for serialization purposes.
 	 */
 	public GameSession() {
-		this.id = RandomStringUtils.randomAlphanumeric(30);
+		this.gameId = RandomStringUtils.randomAlphanumeric(30);
 	}
 
 	/**
@@ -35,7 +35,7 @@ public abstract class GameSession {
 	 * @param player2 The second player
 	 */
 	public GameSession(PregamePlayerConfiguration player1, PregamePlayerConfiguration player2) {
-		this.id = RandomStringUtils.randomAlphanumeric(30);
+		this.gameId = RandomStringUtils.randomAlphanumeric(30);
 	}
 
 	/**
@@ -44,7 +44,7 @@ public abstract class GameSession {
 	 *
 	 * @return The ID
 	 */
-	public String getId() {
-		return id;
+	public String getGameId() {
+		return gameId;
 	}
 }

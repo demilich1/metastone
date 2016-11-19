@@ -3,7 +3,6 @@ package com.hiddenswitch.proto3.net.common;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.function.Consumer;
 
@@ -18,20 +17,23 @@ import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.logic.GameLogic;
 
 public class ServerGameContext extends GameContext {
-
-    public Map<Player, RemoteUpdateListener> listenerMap = new HashMap<>();
+    private final String gameId;
+    private Map<Player, RemoteUpdateListener> listenerMap = new HashMap<>();
     private Consumer<List<Card>> mulliganCallback = null;
     private volatile Player player1;
     private volatile Player player2;
     private final Lock lock;
+    private volatile GameAction pendingAction = null;
+    private volatile boolean actionRequested = false;
 
 
-    public ServerGameContext(Player player1, Player player2, GameLogic logic, DeckFormat deckFormat, Lock lock) {
+    public ServerGameContext(Player player1, Player player2, GameLogic logic, DeckFormat deckFormat, Lock lock, String gameId) {
         super(player1, player2, logic, deckFormat);
         NotificationProxy.init(new NullNotifier());
         this.player1 = player1;
         this.player2 = player2;
         this.lock = lock;
+        this.gameId = gameId;
     }
 
     public void setUpdateListener(Player player, RemoteUpdateListener listener) {
@@ -40,16 +42,12 @@ public class ServerGameContext extends GameContext {
 
     public void updateAction(Player player, GameAction action) {
         if (actionRequested && player.getId() == getActivePlayer().getId()) {
-            pendingAction = action;
+            setPendingAction(action);
             actionRequested = false;
         } else {
-            System.err.println("unexpected action received");
+            logger.error("Unexpected action received {} from player {}", action, player);
         }
     }
-
-
-    public volatile GameAction pendingAction = null;
-    volatile boolean actionRequested = false;
 
     @Override
     public void init() {
@@ -76,7 +74,7 @@ public class ServerGameContext extends GameContext {
 
     public void endTurn() {
         logger.debug("Ending turn: " + getActivePlayer().getId());
-        pendingAction = null;
+        setPendingAction(null);
         actionRequested = false;
         super.endTurn();
         this.onGameStateChanged();
@@ -136,7 +134,7 @@ public class ServerGameContext extends GameContext {
     }
 
     public void requestAction(Player player, List<GameAction> actions) {
-        this.pendingAction = null;
+        this.setPendingAction(null);
         actionRequested = true;
         listenerMap.get(player).onRequestAction(actions);
     }
@@ -147,7 +145,7 @@ public class ServerGameContext extends GameContext {
 
     public void mulligan(Player player, List<Card> starterCards, Consumer<List<Card>> callBack) {
         if (mulliganCallback != null) {
-            logger.debug("Many mulligans at once is unsupported.");
+            logger.debug("Many mulligans at once is unsupported. Called by {}", player);
         }
         mulliganCallback = callBack;
         listenerMap.get(player).onMulligan(player, starterCards);
@@ -166,5 +164,22 @@ public class ServerGameContext extends GameContext {
         logger.debug(String.format("Mulligan received from %s", player.getName()));
         mulliganCallback.accept(discardedCards);
         mulliganCallback = null;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[ServerGameContext gameId=%s turn=%d]", getGameId(), getTurn());
+    }
+
+    public String getGameId() {
+        return gameId;
+    }
+
+    public GameAction getPendingAction() {
+        return pendingAction;
+    }
+
+    public void setPendingAction(GameAction pendingAction) {
+        this.pendingAction = pendingAction;
     }
 }

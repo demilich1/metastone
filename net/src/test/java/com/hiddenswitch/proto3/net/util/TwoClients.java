@@ -4,6 +4,7 @@ import com.hiddenswitch.proto3.net.GameSessions;
 import com.hiddenswitch.proto3.net.GameSessionsTest;
 import com.hiddenswitch.proto3.net.client.RemoteGameContext;
 import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
+import com.hiddenswitch.proto3.net.common.ServerGameContext;
 import com.hiddenswitch.proto3.net.models.CreateGameSessionRequest;
 import com.hiddenswitch.proto3.net.models.CreateGameSessionResponse;
 import com.hiddenswitch.proto3.server.PregamePlayerConfiguration;
@@ -14,6 +15,7 @@ import org.testng.Assert;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 
 /**
  * Created by bberman on 11/18/16.
@@ -23,6 +25,12 @@ public class TwoClients {
     private RemoteGameContext playerContext2;
     private Thread thread1;
     private Thread thread2;
+    private String gameId;
+    private GameSessions service;
+
+    public ServerGameContext getServerGameContext() {
+        return service.getGameContext(gameId);
+    }
 
     public RemoteGameContext getPlayerContext1() {
         return playerContext1;
@@ -41,6 +49,7 @@ public class TwoClients {
     }
 
     public TwoClients invoke(GameSessions service) throws IOException, URISyntaxException, CardParseException {
+        this.service = service;
         CardCatalogue.loadCardsFromPackage();
 
         CreateGameSessionRequest request = new CreateGameSessionRequest();
@@ -55,7 +64,7 @@ public class TwoClients {
         request.setPregame2(pregame2);
 
         CreateGameSessionResponse response = service.createGameSession(request);
-
+        this.gameId = response.getGameId();
         // Manually override the player in the configurations
         playerContext1 = createRemoteGameContext(response.getConfigurationForPlayer1());
         playerContext2 = createRemoteGameContext(response.getConfigurationForPlayer2());
@@ -94,6 +103,12 @@ public class TwoClients {
     }
 
     public void assertGameOver() {
+        List<Throwable> exceptions = getServerGameContext().getExceptions();
+        if (exceptions.size() > 0) {
+            for (Throwable t : exceptions) {
+                Assert.fail(t.getMessage(), t.getCause());
+            }
+        }
         Assert.assertTrue(gameDecided());
         Assert.assertTrue(playerContext1.getWinningPlayerId() == playerContext2.getWinningPlayerId());
     }

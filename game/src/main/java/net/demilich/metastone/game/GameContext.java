@@ -23,10 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class GameContext implements Cloneable, IDisposable, Serializable {
 	public static final int PLAYER_1 = 0;
@@ -42,7 +39,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 	private TriggerManager triggerManager = new TriggerManager();
 	private HashMap<Environment, Object> environment = new HashMap<>();
 	private List<CardCostModifier> cardCostModifiers = new ArrayList<>();
-
+	private transient final List<Throwable> exceptions = new ArrayList<>();
 	protected int activePlayer = -1;
 	private Player winner;
 	private MatchResult result;
@@ -625,5 +622,13 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 
 	public void setActionsThisTurn(int actionsThisTurn) {
 		this.actionsThisTurn = actionsThisTurn;
+	}
+
+	public void addException(Throwable e) {
+		exceptions.add(e);
+	}
+
+	public List<Throwable> getExceptions() {
+		return Collections.unmodifiableList(exceptions);
 	}
 }

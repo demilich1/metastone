@@ -11,6 +11,7 @@ import java.util.Queue;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.google.gson.annotations.Expose;
+import net.demilich.metastone.game.actions.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,10 +20,6 @@ import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.actions.ActionType;
-import net.demilich.metastone.game.actions.BattlecryAction;
-import net.demilich.metastone.game.actions.GameAction;
-import net.demilich.metastone.game.actions.PlaySpellCardAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
@@ -239,7 +236,7 @@ public class GameLogic implements Cloneable, Serializable {
 	}
 
 	public void castSpell(int playerId, SpellDesc spellDesc, EntityReference sourceReference, EntityReference targetReference,
-						  boolean childSpell) {
+	                      boolean childSpell) {
 		Player player = context.getPlayer(playerId);
 		Entity source = null;
 		if (sourceReference != null) {
@@ -282,17 +279,9 @@ public class GameLogic implements Cloneable, Serializable {
 			}
 
 		}
-		try {
-			Spell spell = spellFactory.getSpell(spellDesc);
-			spell.cast(context, player, spellDesc, source, targets);
-		} catch (Exception e) {
-			if (source != null) {
-				logger.error("Error while playing card: " + source.getName());
-			}
-			logger.error("Error while casting spell: " + spellDesc);
-			panicDump();
-			e.printStackTrace();
-		}
+
+		Spell spell = spellFactory.getSpell(spellDesc);
+		spell.cast(context, player, spellDesc, source, targets);
 
 		if (spellCard != null) {
 			context.getEnvironment().remove(Environment.TARGET_OVERRIDE);
@@ -1182,7 +1171,6 @@ public class GameLogic implements Cloneable, Serializable {
 	}
 
 	public void panicDump() {
-		logger.error("=========PANIC DUMP=========");
 		for (String entry : debugHistory) {
 			logger.error(entry);
 		}
