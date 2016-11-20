@@ -7,7 +7,9 @@ import net.demilich.metastone.game.decks.DeckFactory;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
+import org.apache.commons.lang3.RandomUtils;
 
+import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class AIPlayer extends Player {
@@ -15,7 +17,8 @@ public class AIPlayer extends Player {
 
 	public AIPlayer() {
 		super();
-		Deck randomDeck = DeckFactory.getRandomDeck(HeroClass.MAGE, new DeckFormat().withCardSets(CardSet.PROCEDURAL_PREVIEW));
+		HeroClass[] heroClasses = HeroClass.values();
+		Deck randomDeck = DeckFactory.getRandomDeck(heroClasses[RandomUtils.nextInt(0, heroClasses.length)], new DeckFormat().withCardSets(CardSet.PROCEDURAL_PREVIEW));
 		setConfiguredDeck(randomDeck);
 		buildFromConfig(new PlayerConfig(randomDeck, new AI()));
 	}
