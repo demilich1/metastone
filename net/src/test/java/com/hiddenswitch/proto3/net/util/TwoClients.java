@@ -11,6 +11,8 @@ import com.hiddenswitch.proto3.server.PregamePlayerConfiguration;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardParseException;
 import net.demilich.metastone.game.decks.DeckCatalogue;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
 import java.io.IOException;
@@ -27,6 +29,7 @@ public class TwoClients {
     private Thread thread2;
     private String gameId;
     private GameSessions service;
+    private Logger logger = LoggerFactory.getLogger(TwoClients.class);
 
     public ServerGameContext getServerGameContext() {
         return service.getGameContext(gameId);
@@ -108,6 +111,11 @@ public class TwoClients {
             for (Throwable t : exceptions) {
                 Assert.fail(t.getMessage(), t.getCause());
             }
+        }
+        if (!gameDecided()) {
+            // Print some diagnostic information
+            logger.error("A match was not decided in this test by the deadline. Game information:");
+            logger.error(getServerGameContext().toLongString());
         }
         Assert.assertTrue(gameDecided());
         Assert.assertTrue(playerContext1.getWinningPlayerId() == playerContext2.getWinningPlayerId());
