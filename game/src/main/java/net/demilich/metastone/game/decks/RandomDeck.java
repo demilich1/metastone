@@ -11,7 +11,6 @@ import net.demilich.metastone.game.decks.validation.DefaultDeckValidator;
 import net.demilich.metastone.game.decks.validation.IDeckValidator;
 
 public class RandomDeck extends Deck {
-	
 	private DeckFormat deckFormat;
 
 	public RandomDeck(HeroClass heroClass, DeckFormat deckFormat) {
@@ -25,10 +24,16 @@ public class RandomDeck extends Deck {
 		Deck copyDeck = new Deck(getHeroClass());
 		IDeckValidator deckValidator = new DefaultDeckValidator();
 		CardCollection classCards = CardCatalogue.query(deckFormat, card -> {
-			return card.isCollectible() && !card.getCardType().isCardType(CardType.HERO) && !card.getCardType().isCardType(CardType.HERO_POWER) && card.getClassRestriction() == getHeroClass();
+			return card.isCollectible()
+					&& !card.getCardType().isCardType(CardType.HERO)
+					&& !card.getCardType().isCardType(CardType.HERO_POWER)
+					&& card.getClassRestriction() == getHeroClass();
 		});
 		CardCollection neutralCards = CardCatalogue.query(deckFormat, card -> {
-			return card.isCollectible() && !card.getCardType().isCardType(CardType.HERO) && !card.getCardType().isCardType(CardType.HERO_POWER) && card.getClassRestriction() == HeroClass.ANY;
+			return card.isCollectible()
+					&& !card.getCardType().isCardType(CardType.HERO)
+					&& !card.getCardType().isCardType(CardType.HERO_POWER)
+					&& (card.getClassRestriction() == HeroClass.ANY || card.getClassRestriction() == HeroClass.NEUTRAL);
 		});
 
 		while (!copyDeck.isComplete()) {

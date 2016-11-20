@@ -3,6 +3,7 @@ package com.hiddenswitch.proto3.net;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import com.hiddenswitch.proto3.net.util.TwoClients;
+import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardParseException;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -22,10 +23,11 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 	public void setUp() throws Exception {
 		super.setUp();
 		Logger root = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
-		root.setLevel(Level.DEBUG);
+		root.setLevel(Level.ERROR);
+		CardCatalogue.loadCardsFromPackage();
 	}
 
-	//@Test
+	@Test
 	public void testCreateGameSession() throws CardParseException, IOException, URISyntaxException {
 		getAndTestTwoClients();
 	}
@@ -52,13 +54,13 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 		return twoClients;
 	}
 
-	//@Test
+	@Test
 	public void testTwoGameSessionsOneAfterAnother() throws CardParseException, IOException, URISyntaxException {
 		getAndTestTwoClients();
 		getAndTestTwoClients();
 	}
 
-	//@Test
+	@Test
 	public void testOldSessionDisposed() throws CardParseException, IOException, URISyntaxException {
 		getAndTestTwoClients();
 		getAndTestTwoClients();
@@ -73,19 +75,19 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 
 	@Test
 	public void testTwoSimultaneousSessions() throws Exception {
-		testMultipleSessions(2);
+		simultaneousSessions(2);
 	}
 	
 	@Test
 	public void testTenSessionsTenTimes() throws Exception {
 		for(int i = 0; i < 10; i++){
-			testMultipleSessions(10);
-			System.out.println("Iteration completed : " + (i+1));
+			simultaneousSessions(10);
+			logger.info("Iteration completed : " + (i+1));
 		}
 	}
 	
 	
-	public void testMultipleSessions(int sessions) throws Exception {
+	private void simultaneousSessions(int sessions) throws Exception {
 		List<TwoClients> clients = new ArrayList<>();
 		for (int i = 0; i < sessions; i++) {
 			clients.add(new TwoClients().invoke(this.service));

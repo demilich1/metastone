@@ -17,8 +17,13 @@ public class AIPlayer extends Player {
 
 	public AIPlayer() {
 		super();
-		HeroClass[] heroClasses = HeroClass.values();
-		Deck randomDeck = DeckFactory.getRandomDeck(heroClasses[RandomUtils.nextInt(0, heroClasses.length)], new DeckFormat().withCardSets(CardSet.PROCEDURAL_PREVIEW));
+		HeroClass[] heroClasses = {HeroClass.DRUID, HeroClass.HUNTER, HeroClass.MAGE, HeroClass.PALADIN, HeroClass.PRIEST, HeroClass.ROGUE, HeroClass.SHAMAN, HeroClass.WARLOCK, HeroClass.WARRIOR};
+		Deck randomDeck = DeckFactory.getRandomDeck(
+				heroClasses[RandomUtils.nextInt(0, heroClasses.length)],
+				new DeckFormat().withCardSets(
+						CardSet.PROCEDURAL_PREVIEW,
+						CardSet.BASIC,
+						CardSet.CLASSIC));
 		setConfiguredDeck(randomDeck);
 		buildFromConfig(new PlayerConfig(randomDeck, new AI()));
 	}
