@@ -1,0 +1,21 @@
+{
+	"name": "Backstreet Leper",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 1,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Deathrattle: Deal 2 damage to the enemy hero.",
+	"deathrattle": {
+		"class": "DamageSpell",
+		"target": "ENEMY_HERO",
+		"value": 2
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

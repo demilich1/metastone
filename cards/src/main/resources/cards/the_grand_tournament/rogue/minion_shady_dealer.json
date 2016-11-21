@@ -17,7 +17,7 @@
 		},
 		"condition": {
 			"class": "MinionOnBoardCondition",
-			"cardfilter": {
+			"cardFilter": {
 				"class": "RaceFilter",
 				"race": "PIRATE"
 			}

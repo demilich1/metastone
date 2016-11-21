@@ -15,22 +15,8 @@
 				"attribute": "CHARGE"
 			},
 			{
-				"class": "ConditionalSpell",
-				"condition": {
-					"class": "AttributeCondition",
-					"target": "TARGET",
-					"attribute": "CANNOT_ATTACK_HEROES",
-					"operation": "HAS",
-					"invert": true
-				},
-				"spell": {
-					"class": "AddAttributeSpell",
-					"attribute": "CANNOT_ATTACK_HEROES",
-					"revertTrigger": {
-						"class": "TurnEndTrigger",
-						"targetPlayer": "SELF"
-					}
-				}
+				"class": "AddAttributeSpell",
+				"attribute": "CANNOT_ATTACK_HERO_ON_SUMMON"
 			}
 		]
 	},
