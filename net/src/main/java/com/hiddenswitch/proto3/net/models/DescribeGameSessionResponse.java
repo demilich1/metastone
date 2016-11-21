@@ -1,4 +1,4 @@
-package com.hiddenswitch.proto3.net;
+package com.hiddenswitch.proto3.net.models;
 
 /**
  * Created by bberman on 11/18/16.

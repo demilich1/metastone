@@ -81,15 +81,11 @@ public class TwoClients {
     private RemoteGameContext createRemoteGameContext(ClientConnectionConfiguration configuration) {
         try {
             DeckCatalogue.loadDecksFromPackage();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (URISyntaxException e) {
+        } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
         }
 
-        RemoteGameContext context = new RemoteGameContext(configuration);
-
-        return context;
+        return new RemoteGameContext(configuration);
     }
 
     public void play() {

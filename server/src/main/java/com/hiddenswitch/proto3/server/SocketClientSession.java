@@ -15,17 +15,17 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.lang.ref.WeakReference;
 import java.net.Socket;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.locks.Lock;
-import java.util.function.Consumer;
 
 class SocketClientSession implements Runnable, RemoteUpdateListener {
-	Logger logger = LoggerFactory.getLogger(SocketClientSession.class);
-	private SocketServerSession socketServerSession;
-	private ServerGameSession serverGameSession;
+	private Logger logger = LoggerFactory.getLogger(SocketClientSession.class);
+	private WeakReference<SocketServerSession> socketServerSession;
+	private WeakReference<ServerGameSession> serverGameSession;
 	private Socket privateSocket;
 	private BlockingQueue<ServerToClientMessage> queue = new LinkedBlockingQueue<>();
 
@@ -37,11 +37,11 @@ class SocketClientSession implements Runnable, RemoteUpdateListener {
 	@Override
 	public void run() {
 		logger.debug("Waiting for response from clients.");
-		//Read thread
+		// Read thread
 		new Thread(() -> {
 			try {
 				ObjectInputStream clientInputStream = new ObjectInputStream(getPrivateSocket().getInputStream());
-				while (getSocketServerSession().shouldRun || getServerGameSession().shouldRun) {
+				while (getSocketServerSession().isRunning() || getServerGameSession().isRunning()) {
 					
 					ClientToServerMessage message = (ClientToServerMessage) clientInputStream.readObject();
 
@@ -50,11 +50,11 @@ class SocketClientSession implements Runnable, RemoteUpdateListener {
 						getSocketServerSession().onFirstMessage(this, message);
 						getSocketServerSession().getLock().unlock();
 					} else if (message.getMt() == MessageType.UPDATE_ACTION) {
-						getServerGameSession().listener.onActionRegistered(message.getCallingPlayer(), message.getAction());
+						getServerGameSession().getListener().onActionRegistered(message.getCallingPlayer(), message.getAction());
 					} else if (message.getMt() == MessageType.UPDATE_MULLIGAN) {
-						getServerGameSession().listener.onMulliganReceived(message.getPlayer1(), message.getDiscardedCards());
+						getServerGameSession().getListener().onMulliganReceived(message.getPlayer1(), message.getDiscardedCards());
 					} else {
-						logger.error("Unexpected message type received by server.", message);
+						logger.error("Unexpected message type received from client. Message: {}", message);
 					}
 				}
 				clientInputStream.close();
@@ -63,11 +63,11 @@ class SocketClientSession implements Runnable, RemoteUpdateListener {
 			}
 		}).start();
 
-		//Write thread
+		// Write thread
 		new Thread(() -> {
 			try {
 				ObjectOutputStream clientOutputStream = new ObjectOutputStream(getPrivateSocket().getOutputStream());
-				while (getSocketServerSession().shouldRun) {
+				while (getSocketServerSession().isRunning()) {
 					ServerToClientMessage message = getQueue().take();
 					getGameLock().lock();
 					logger.debug("Sending message: " + message.mt);
@@ -87,11 +87,11 @@ class SocketClientSession implements Runnable, RemoteUpdateListener {
 		}).start();
 	}
 
-	protected Lock getGameLock() {
-		return serverGameSession.getLock();
+	private Lock getGameLock() {
+		return getServerGameSession().getLock();
 	}
 
-	public BlockingQueue<ServerToClientMessage> getQueue() {
+	private BlockingQueue<ServerToClientMessage> getQueue() {
 		return queue;
 	}
 
@@ -139,11 +139,11 @@ class SocketClientSession implements Runnable, RemoteUpdateListener {
 	}
 
 	private SocketServerSession getSocketServerSession() {
-		return socketServerSession;
+		return socketServerSession.get();
 	}
 
 	private void setSocketServerSession(SocketServerSession socketServerSession) {
-		this.socketServerSession = socketServerSession;
+		this.socketServerSession = new WeakReference<SocketServerSession>(socketServerSession);
 	}
 
 	private Socket getPrivateSocket() {
@@ -155,11 +155,11 @@ class SocketClientSession implements Runnable, RemoteUpdateListener {
 	}
 
 	private ServerGameSession getServerGameSession() {
-		return serverGameSession;
+		return serverGameSession.get();
 	}
 
-	public void setServerGameSession(ServerGameSession serverGameSession) {
-		this.serverGameSession = serverGameSession;
+	void setServerGameSession(ServerGameSession serverGameSession) {
+		this.serverGameSession = new WeakReference<>(serverGameSession);
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import com.hiddenswitch.proto3.net.common.ServerGameContext;
 import com.hiddenswitch.proto3.net.models.CreateGameSessionRequest;
 import com.hiddenswitch.proto3.net.models.CreateGameSessionResponse;
 import com.hiddenswitch.proto3.net.models.DescribeGameSessionRequest;
+import com.hiddenswitch.proto3.net.models.DescribeGameSessionResponse;
 import com.hiddenswitch.proto3.server.ServerGameSession;
 import com.hiddenswitch.proto3.server.SocketServerSession;
 import net.demilich.metastone.game.cards.CardCatalogue;

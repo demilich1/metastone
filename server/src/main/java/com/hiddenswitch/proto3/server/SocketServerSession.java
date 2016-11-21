@@ -7,6 +7,7 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
@@ -17,7 +18,7 @@ public class SocketServerSession implements Runnable {
 	private final int port;
 	private Lock serverSessionLock = new ReentrantLock();
 	private Map<String, ServerGameSession> games = new HashMap<>();
-	boolean shouldRun = true;
+	private boolean running = true;
 
 	public SocketServerSession() {
 		this.port = DEFAULT_PORT;
@@ -27,7 +28,7 @@ public class SocketServerSession implements Runnable {
 		this.port = port;
 	}
 
-	public Lock getLock() {
+	Lock getLock() {
 		return serverSessionLock;
 	}
 
@@ -47,14 +48,13 @@ public class SocketServerSession implements Runnable {
 	}
 
 	public void kill() {
-		shouldRun = false;
-		for (ServerGameSession sgs : games.values()) {
-			sgs.kill();
-		}
+		setRunning(false);
+		getGames().values().forEach(ServerGameSession::kill);
 	}
 
-	public void onFirstMessage(SocketClientSession clientSession, ClientToServerMessage message) {
+	void onFirstMessage(SocketClientSession clientSession, ClientToServerMessage message) {
 		//TODO: check authenticity here;
+		Map<String, ServerGameSession> games = getGames();
 		if (games.containsKey(message.getGameId())) {
 			games.get(message.getGameId()).registerClient(clientSession, message);
 		} else {
@@ -85,6 +85,16 @@ public class SocketServerSession implements Runnable {
 	}
 
 	public Map<String, ServerGameSession> getGames() {
-		return games;
+		return Collections.unmodifiableMap(games);
+	}
+
+	public boolean isRunning() {
+		return running;
+	}
+
+	public void setRunning(boolean running) {
+		if (!running) {
+			kill();
+		}
 	}
 }

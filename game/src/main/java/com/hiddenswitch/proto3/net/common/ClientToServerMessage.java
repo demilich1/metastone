@@ -6,6 +6,7 @@ import java.util.List;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class ClientToServerMessage implements Serializable {
 	private MessageType mt;
@@ -84,5 +85,13 @@ public class ClientToServerMessage implements Serializable {
 		return discardedCards;
 	}
 
-
+	@Override
+	public String toString() {
+		int playerId = getCallingPlayer() == null ? (getPlayer1() == null ? getPlayer1().getId() : 0) : getCallingPlayer().getId();
+		return new ToStringBuilder(this)
+				.append("type", getMt())
+				.append("gameId", getGameId())
+				.append("playerId", playerId)
+				.toString();
+	}
 }

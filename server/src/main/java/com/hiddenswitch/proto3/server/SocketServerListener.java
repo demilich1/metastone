@@ -1,5 +1,6 @@
 package com.hiddenswitch.proto3.server;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 
@@ -16,13 +17,16 @@ public class SocketServerListener implements ServerListener {
     private ServerGameContext gameContext;
     private Player player1;
     private Player player2;
-    private Lock gameLock;
-    private final Thread thread = new Thread(() -> getGameContext().play());
+    private WeakReference<Lock> gameLock;
+    private final Thread thread = new Thread(() -> {
+        getGameContext().play();
+    });
+
     private final String gameId;
 
     public SocketServerListener(ServerCommunicationSend serverCommunicationSend, Lock gameLock, String gameId) {
         this.serverCommunicationSend = serverCommunicationSend;
-        this.gameLock = gameLock;
+        this.gameLock = new WeakReference<>(gameLock);
         this.gameId = gameId;
     }
 
@@ -36,7 +40,7 @@ public class SocketServerListener implements ServerListener {
             simpleFormat.addSet(CardSet.PROCEDURAL_PREVIEW);
             simpleFormat.addSet(CardSet.CLASSIC);
             simpleFormat.addSet(CardSet.BASIC);
-            this.gameContext = new ServerGameContext(getPlayer1(), getPlayer2(), new GameLogic(), simpleFormat, gameLock, getGameId());
+            this.gameContext = new ServerGameContext(getPlayer1(), getPlayer2(), new GameLogic(), simpleFormat, gameLock.get(), getGameId());
             getGameContext().setUpdateListener(getPlayer1(), getSender().getPlayerListener(0));
             getGameContext().setUpdateListener(getPlayer2(), getSender().getPlayerListener(1));
             thread.setName(getGameContext().toString());

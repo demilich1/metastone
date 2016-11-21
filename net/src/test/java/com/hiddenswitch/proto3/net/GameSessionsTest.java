@@ -96,7 +96,7 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 		try {
 			clients.forEach(TwoClients::play);
 			float seconds = 0.0f;
-			while (seconds <= 40.0f && !clients.stream().allMatch(TwoClients::gameDecided)) {
+			while (seconds <= 120.0f && !clients.stream().allMatch(TwoClients::gameDecided)) {
 				if (clients.stream().anyMatch(TwoClients::isInterrupted)) {
 					break;
 				}
