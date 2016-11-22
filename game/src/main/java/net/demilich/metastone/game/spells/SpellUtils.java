@@ -78,7 +78,7 @@ public class SpellUtils {
 		return card;
 	}
 
-	public static Card[] getCards(SpellDesc spell) {
+	public static Card[] getCards(GameContext context, SpellDesc spell) {
 		String[] cardNames = null;
 		if (spell.contains(SpellArg.CARDS)) {
 			cardNames = (String[]) spell.get(SpellArg.CARDS);
@@ -88,7 +88,7 @@ public class SpellUtils {
 		}
 		Card[] cards = new Card[cardNames.length];
 		for (int i = 0; i < cards.length; i++) {
-			cards[i] = CardCatalogue.getCardById(cardNames[i]);
+			cards[i] = context.getCardById(cardNames[i]);
 		}
 		return cards;
 	}

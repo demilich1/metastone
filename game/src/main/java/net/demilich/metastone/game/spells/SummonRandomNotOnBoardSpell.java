@@ -5,7 +5,6 @@ import java.util.List;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Minion;
@@ -37,7 +36,7 @@ public class SummonRandomNotOnBoardSpell extends Spell {
 		}
 
 		String randomMinionId = eligibleMinions.get(context.getLogic().random(eligibleMinions.size()));
-		MinionCard randomMinionCard = (MinionCard) CardCatalogue.getCardById(randomMinionId);
+		MinionCard randomMinionCard = (MinionCard) context.getCardById(randomMinionId);
 		context.getLogic().summon(player.getId(), randomMinionCard.summon());
 	}
 

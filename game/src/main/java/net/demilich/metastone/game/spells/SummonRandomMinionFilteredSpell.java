@@ -41,7 +41,7 @@ public class SummonRandomMinionFilteredSpell extends Spell {
 		int boardPosition = SpellUtils.getBoardPosition(context, player, desc, source);
 		MinionCard minionCard = getRandomMatchingMinionCard(context, player, cardFilter, includeUncollectible);
 		if (minionCard == null && replacementCard != null) {
-			minionCard = (MinionCard) CardCatalogue.getCardById(replacementCard);
+			minionCard = (MinionCard) context.getCardById(replacementCard);
 		}
 		if (minionCard != null) {
 			context.getLogic().summon(player.getId(), minionCard.summon(), null, boardPosition, false);

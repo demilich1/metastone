@@ -11,7 +11,7 @@ public class CopyHeroPower extends ChangeHeroPowerSpell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Player opponent = context.getOpponent(player);
 		String opponentHeroPowerId = opponent.getHero().getHeroPower().getCardId();
-		changeHeroPower(opponentHeroPowerId, player.getHero());
+		changeHeroPower(context, opponentHeroPowerId, player.getHero());
 	}
 
 }
