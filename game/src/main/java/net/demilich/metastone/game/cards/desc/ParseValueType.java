@@ -34,4 +34,5 @@ public enum ParseValueType {
 	HERO_CLASS_ARRAY,
 	VALUE,
 	CARD_DESC_TYPE,
+	CARD_SOURCE,
 }
