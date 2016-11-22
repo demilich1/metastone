@@ -149,10 +149,9 @@ public class HeroToken extends GameToken {
 			weaponNameLabel.setText(weapon.getName());
 			setScoreValue(weaponAttackAnchor, weapon.getWeaponDamage(), weapon.getBaseAttack());
 			setScoreValue(weaponDurabilityAnchor, weapon.getDurability(), weapon.getBaseDurability(), weapon.getMaxDurability());
-			Card card = CardCatalogue.getCardById(weapon.getSourceCard().getCardId());
 			Tooltip tooltip = new Tooltip();
 			CardTooltip tooltipContent = new CardTooltip();
-			tooltipContent.setCard(card);
+			tooltipContent.setCard(weapon.getSourceCard());
 			tooltip.setGraphic(tooltipContent);
 			Tooltip.install(weaponPane, tooltip);
 		}

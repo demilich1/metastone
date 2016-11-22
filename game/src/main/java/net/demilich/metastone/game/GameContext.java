@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
 import net.demilich.metastone.game.decks.DeckFormat;
@@ -51,6 +52,8 @@ public class GameContext implements Cloneable, IDisposable {
 
 	private boolean ignoreEvents;
 
+	private CardCollection tempCards = new CardCollection();
+
 	public GameContext(Player player1, Player player2, GameLogic logic, DeckFormat deckFormat) {
 		this.getPlayers()[PLAYER_1] = player1;
 		player1.setId(PLAYER_1);
@@ -59,6 +62,7 @@ public class GameContext implements Cloneable, IDisposable {
 		this.logic = logic;
 		this.deckFormat = deckFormat;
 		this.logic.setContext(this);
+		tempCards.removeAll();
 	}
 
 	protected boolean acceptAction(GameAction nextAction) {
@@ -67,6 +71,10 @@ public class GameContext implements Cloneable, IDisposable {
 
 	public void addCardCostModifier(CardCostModifier cardCostModifier) {
 		getCardCostModifiers().add(cardCostModifier);
+	}
+
+	public void addTempCard(Card card) {
+		tempCards.add(card);
 	}
 
 	public void addTrigger(IGameEventListener trigger) {
@@ -81,6 +89,7 @@ public class GameContext implements Cloneable, IDisposable {
 		Player player2Clone = getPlayer2().clone();
 		// player2Clone.getDeck().shuffle();
 		GameContext clone = new GameContext(player1Clone, player2Clone, logicClone, deckFormat);
+		clone.tempCards = tempCards.clone();
 		clone.triggerManager = triggerManager.clone();
 		clone.activePlayer = activePlayer;
 		clone.turn = turn;
@@ -204,6 +213,18 @@ public class GameContext implements Cloneable, IDisposable {
 			}
 		}
 		return -1;
+	}
+
+	public Card getCardById(String cardId) {
+		Card card = CardCatalogue.getCardById(cardId);
+		if (card == null) {
+			for (Card tempCard : tempCards) {
+				if (tempCard.getCardId().equalsIgnoreCase(cardId)) {
+					return tempCard.clone();
+				}
+			}
+		}
+		return card;
 	}
 
 	public List<CardCostModifier> getCardCostModifiers() {
