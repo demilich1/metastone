@@ -8,7 +8,6 @@
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
 	"description": "Battlecry: Cast a random spell for each spell you've cast this game (targets chosen randomly).",
-	"targetSelection": "NONE",
 	"battlecry": {
 		"spell": {
 			"class": "CastRandomSpellSpell",
