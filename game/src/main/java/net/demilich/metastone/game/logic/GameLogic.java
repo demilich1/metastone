@@ -125,6 +125,7 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void addGameEventListener(Player player, IGameEventListener gameEventListener, Entity target) {
+		debugHistory.add("Player " + player.getId() + " has set event listener " + gameEventListener.getClass().getName() + " from entity " + target.getName() + "[Reference ID: " + target.getId() + "]");
 		gameEventListener.setHost(target);
 		if (!gameEventListener.hasPersistentOwner() || gameEventListener.getOwner() == -1) {
 			gameEventListener.setOwner(player.getId());
@@ -1194,6 +1195,7 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void performGameAction(int playerId, GameAction action) {
+		debugHistory.add(action.toString());
 		if (playerId != context.getActivePlayerId()) {
 			logger.warn("Player {} tries to perform an action, but it is not his turn!", context.getPlayer(playerId).getName());
 		}

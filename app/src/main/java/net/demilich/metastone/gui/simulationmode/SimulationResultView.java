@@ -123,6 +123,9 @@ public class SimulationResultView extends BorderPane {
 	private String getFavouriteCardName(GameStatistics stats, CardType cardType) {
 		List<Card> cards = new ArrayList<Card>();
 		for (String cardId : stats.getCardsPlayed().keySet()) {
+			if (cardId.startsWith("temp_card_name_")) {
+				continue;
+			}
 			Card card = CardCatalogue.getCardById(cardId);
 			if (card == null) {
 				System.out.println("Invalid card with id: " + cardId);

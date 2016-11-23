@@ -77,4 +77,9 @@ public abstract class GameAction implements Cloneable {
 	public void setTargetRequirement(TargetSelection targetRequirement) {
 		this.targetRequirement = targetRequirement;
 	}
+
+	@Override
+	public String toString() {
+		return "Action " + actionType.toString() + " " + actionSuffix + " from " + source.toString();
+	}
 }

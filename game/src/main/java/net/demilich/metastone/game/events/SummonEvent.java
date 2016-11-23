@@ -34,4 +34,9 @@ public class SummonEvent extends GameEvent {
 		return source;
 	}
 
+	@Override
+	public String toString() {
+		return "[Summon Event MINION " + minion + " from SOURCE " + source + "]";
+	}
+
 }
