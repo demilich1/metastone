@@ -10,8 +10,8 @@
 	"spell": {
 		"class": "SummonRandomMinionFilteredSpell",
 		"card": "token_shadow_of_nothing",
-		"cardFilter": {
-			"class": "InDeckFilter",
+		"cardSource": {
+			"class": "DeckSource",
 			"targetPlayer": "OPPONENT"
 		}
 	},

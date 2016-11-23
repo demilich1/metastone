@@ -22,7 +22,6 @@ public abstract class CardSource {
 	}
 
 	public CardCollection getCards(GameContext context, Player player) {
-		//boolean invert = desc.getBool(SourceArg.INVERT);
 		TargetPlayer targetPlayer = (TargetPlayer) desc.get(SourceArg.TARGET_PLAYER);
 		if (targetPlayer == null) {
 			targetPlayer = TargetPlayer.SELF;
