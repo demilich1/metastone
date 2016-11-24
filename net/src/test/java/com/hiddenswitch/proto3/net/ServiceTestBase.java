@@ -21,22 +21,18 @@ public abstract class ServiceTestBase<T extends Service> {
 
 	public abstract T getServiceInstance();
 
-
 	@BeforeMethod
 	public void setUp() throws Exception {
 		StackConfiguration configuration = new StackConfiguration();
+		BasicAWSCredentials credentials = new BasicAWSCredentials("x", "y");
 		try {
 			elasticMQ = SQSRestServerBuilder.start();
 			elasticMQ.waitUntilStarted();
 			dynamoDBEmbedded = DynamoDBEmbedded.create().amazonDynamoDB();
-			BasicAWSCredentials credentials = new BasicAWSCredentials("x", "y");
 			configuration.credentials = credentials;
-			service.setCredentials(credentials);
 			database = new DynamoDBMapper(dynamoDBEmbedded);
-			service.setDatabase(database);
 			queue = new AmazonSQSClient(credentials);
-			service.setQueue(queue);
-			service.getQueue().setEndpoint("http://localhost:9324");
+			queue.setEndpoint("http://localhost:9324");
 		} catch (Exception ignored) {
 		} finally {
 			configuration.dynamoDBClient = dynamoDBEmbedded;
@@ -44,6 +40,9 @@ public abstract class ServiceTestBase<T extends Service> {
 			configuration.queue = queue;
 			Stack.initializeStack(configuration);
 			service = getServiceInstance();
+			service.setCredentials(credentials);
+			service.setDatabase(database);
+			service.setQueue(queue);
 		}
 	}
 

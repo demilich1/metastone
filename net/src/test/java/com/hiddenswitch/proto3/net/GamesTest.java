@@ -7,10 +7,15 @@ import com.hiddenswitch.proto3.net.models.CreateAccountResponse;
 import com.hiddenswitch.proto3.net.models.Game;
 import com.hiddenswitch.proto3.net.models.MatchmakingRequest;
 import com.hiddenswitch.proto3.net.models.MatchmakingResponse;
+import com.hiddenswitch.proto3.net.util.TwoClients;
+import net.demilich.metastone.game.cards.CardParseException;
 import net.demilich.metastone.game.decks.Bench;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import org.testng.annotations.Test;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 import static org.testng.Assert.*;
 
@@ -20,7 +25,7 @@ public class GamesTest extends ServiceTestBase<Games> {
 		createTwoPlayersAndMatchmake();
 	}
 
-	private String createTwoPlayersAndMatchmake() {
+	private String createTwoPlayersAndMatchmake() throws InterruptedException {
 		CreateAccountResponse player1 = service.getAccounts().createAccount("aa@bb.com", "player1", "password");
 		CreateAccountResponse player2 = service.getAccounts().createAccount("aa@bb.com", "player2", "password");
 
@@ -53,15 +58,16 @@ public class GamesTest extends ServiceTestBase<Games> {
 		assertNull(response1.getRetry());
 		assertNotNull(response1.getConnection());
 
+		// Now try connecting
+		TwoClients twoClients = new TwoClients().invoke(response1, response2, response1.getConnection().getFirstMessage().getGameId(), service.getGameSessions());
+		twoClients.play();
+		float time = 0f;
+		while (time < 40f && !twoClients.gameDecided()) {
+			Thread.sleep(100);
+			time += 0.1f;
+		}
+		twoClients.assertGameOver();
 		return response1.getConnection().getFirstMessage().getGameId();
-	}
-
-	@Test
-	public void testDispose() throws Exception {
-		String gameId = createTwoPlayersAndMatchmake();
-		// Find the game
-		Game game = service.get(gameId);
-		service.dispose(gameId);
 	}
 
 	@Test
@@ -71,7 +77,21 @@ public class GamesTest extends ServiceTestBase<Games> {
 
 	@Override
 	public Games getServiceInstance() {
+		if (this.service != null) {
+			return this.service;
+		}
+
 		Accounts accounts = new Accounts();
+		GameSessions gameSessions = null;
+		try {
+			gameSessions = new GameSessions();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		} catch (CardParseException e) {
+			e.printStackTrace();
+		}
 		Games games = new Games() {
 			@Override
 			public void setCredentials(AWSCredentials credentials) {
@@ -92,6 +112,7 @@ public class GamesTest extends ServiceTestBase<Games> {
 			}
 		};
 		games.setAccounts(accounts);
+		games.setGameSessions(gameSessions);
 		return games;
 	}
 }

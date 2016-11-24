@@ -34,4 +34,24 @@ public class CreateGameSessionResponse {
 	public String getGameId() {
 		return gameId;
 	}
+
+	public GameSession toSession() {
+		String gameId = getGameId();
+		return new GameSession() {
+			@Override
+			public ClientConnectionConfiguration getConfigurationForPlayer1() {
+				return player1;
+			}
+
+			@Override
+			public ClientConnectionConfiguration getConfigurationForPlayer2() {
+				return player2;
+			}
+
+			@Override
+			public String getGameId() {
+				return gameId;
+			}
+		};
+	}
 }

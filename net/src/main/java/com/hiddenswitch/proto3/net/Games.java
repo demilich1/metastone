@@ -16,10 +16,10 @@ import org.apache.commons.lang3.RandomStringUtils;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 
-@Path("/v1/games")
 public class Games extends Service {
 	public static final String MATCHMAKING_QUEUE = "matchmakingQueue";
 	private Accounts accounts;
+	private GameSessions gameSessions;
 	private String matchmakingQueueUrl;
 
 	public Games() {
@@ -36,14 +36,13 @@ public class Games extends Service {
 	public MatchmakingResponse matchmakeAndJoin(MatchmakingRequest matchmakingRequest) {
 		String userId = getAccounts().getUserId();
 		MatchmakingResponse response = new MatchmakingResponse();
-		MatchmakingRequestRetry retry = null;
-		Game game = null;
-		String gameId = null;
+		GameRecord record;
+		String gameId;
 		// Is this a pending matchmaking request?
 		if (matchmakingRequest.retry != null) {
 			// Check if the game already has an opposing player.
 			String retryGameId = matchmakingRequest.retry.getGameId();
-			game = get(retryGameId);
+			record = get(retryGameId);
 			gameId = retryGameId;
 		} else {
 			// Try to find a game to join
@@ -51,21 +50,53 @@ public class Games extends Service {
 
 			// If there is no game to join, create a new one and set a retry request.
 			if (gameId == null) {
-				game = create();
+				record = new GameRecord(new Game());
+				gameId = RandomStringUtils.randomAlphanumeric(40);
+				record.setId(gameId);
 			} else {
-				game = get(gameId);
+				record = get(gameId);
 			}
 
 			// Create a player record
-			Bench deck = matchmakingRequest.deck;
+			Deck deck = matchmakingRequest.deck;
 			GamePlayer thisGamePlayer = createPlayer(userId, deck);
-			game.setNullPlayer(thisGamePlayer);
-			gameId = save(gameId, game);
+			record.getGame().setNullPlayer(thisGamePlayer);
+			record.setId(gameId);
+			gameId = save(record);
 		}
 
-		if (game.isReadyToPlay()) {
-			// The game is ready to play
-			response.setConnection(getConnection(gameId, userId));
+		if (record.getGame().isReadyToPlay()) {
+			// The game is ready to play, so create a game if it doesn't exist.
+			ClientConnectionConfiguration result;
+			String gameSessionId = record.getGameSessionId();
+			boolean isPlayer1 = record.getGame().getGamePlayer1().getUserId().equals(userId);
+			GameSession session = null;
+
+			if (gameSessionId == null) {
+				// Create a session for this game ID.
+				Game game1 = record.getGame();
+				// Create a game session.
+				CreateGameSessionResponse createGameSessionResponse = gameSessions.createGameSession(new CreateGameSessionRequest()
+						.withPregame1(game1.getGamePlayer1().getPregamePlayerConfig())
+						.withPregame2(game1.getGamePlayer2().getPregamePlayerConfig()));
+				// Save the information the record needs
+				session = createGameSessionResponse.toSession();
+				record.getGame().getGamePlayer1().setConnectionConfiguration(session.getConfigurationForPlayer1());
+				record.getGame().getGamePlayer2().setConnectionConfiguration(session.getConfigurationForPlayer2());
+				record.setGameSessionId(session.getGameId());
+				save(record);
+			} else {
+				session = getGameSessions().getGameSession(gameSessionId);
+			}
+
+			if (isPlayer1) {
+				result = session.getConfigurationForPlayer1();
+			} else {
+				result = session.getConfigurationForPlayer2();
+			}
+
+			ClientConnectionConfiguration connection = result;
+			response.setConnection(connection);
 			response.setRetry(null);
 		} else {
 			// We're still waiting for a player
@@ -81,54 +112,6 @@ public class Games extends Service {
 		return response;
 	}
 
-	public ClientConnectionConfiguration getConnection(String forGameId, String forUserId) {
-		// Check if there is an existing session for this player
-		GameRecord record = getDatabase().load(GameRecord.class, forGameId);
-		if (record == null) {
-			throw new IllegalArgumentException("Must specify a valid game ID.");
-		}
-		String gameSessionId = record.getGameSessionId();
-		GameSession session = null;
-		if (gameSessionId == null) {
-			// Create a session for this game ID.
-			session = createGameSession(record.getGame());
-		} else {
-			session = getGameSession(gameSessionId);
-		}
-		if (record.getGame().getGamePlayer1().getUserId().equals(forUserId)) {
-			return session.getConfigurationForPlayer1();
-		} else {
-			return session.getConfigurationForPlayer2();
-		}
-	}
-
-	private GameSession createGameSession(Game game) {
-		return new GameSession(game.getGamePlayer1().getPregamePlayerConfig(), game.getGamePlayer2().getPregamePlayerConfig()) {
-			@Override
-			public ClientConnectionConfiguration getConfigurationForPlayer1() {
-				throw new UnsupportedOperationException();
-			}
-
-			@Override
-			public ClientConnectionConfiguration getConfigurationForPlayer2() {
-				throw new UnsupportedOperationException();
-			}
-		};
-	}
-
-	private GameSession getGameSession(String gameSessionId) {
-		return null;
-	}
-
-	/**
-	 * Disposes a game's realtime resources, if any.
-	 *
-	 * @param gameId {String} The ID of the game to dispose.
-	 */
-	public void dispose(String gameId) {
-		Game game = get(gameId);
-	}
-
 	private MatchmakingRequestRetry createRetry(String gameId) {
 		MatchmakingRequestMessage matchmakingRequestMessage = new MatchmakingRequestMessage(gameId);
 		SendMessageResult result = getQueue().sendMessage(getMatchmakingQueueUrl(), Serialization.serialize(matchmakingRequestMessage));
@@ -137,7 +120,7 @@ public class Games extends Service {
 		return retry;
 	}
 
-	private GamePlayer createPlayer(String userId, Bench deck) {
+	private GamePlayer createPlayer(String userId, Deck deck) {
 		GamePlayer thisGamePlayer = new GamePlayer();
 		thisGamePlayer.setUserId(userId);
 		thisGamePlayer.setDeck(deck);
@@ -145,19 +128,12 @@ public class Games extends Service {
 		return thisGamePlayer;
 	}
 
-	public Game get(String gameId) {
-		GameRecord record = getDatabase().load(GameRecord.class, gameId);
-
-		if (record == null) {
-			return null;
-		}
-
-		return record.getGame();
+	public GameRecord get(String gameId) {
+		return getDatabase().load(GameRecord.class, gameId);
 	}
 
 	private Game create() {
-		Game game = new Game();
-		return game;
+		return new Game();
 	}
 
 	private String save(String id, Game game) {
@@ -166,6 +142,11 @@ public class Games extends Service {
 		}
 		GameRecord record = new GameRecord(game);
 		record.setId(id);
+		getDatabase().save(record);
+		return record.getId();
+	}
+
+	private String save(GameRecord record) {
 		getDatabase().save(record);
 		return record.getId();
 	}
@@ -187,6 +168,14 @@ public class Games extends Service {
 
 	public void setAccounts(Accounts accounts) {
 		this.accounts = accounts;
+	}
+
+	public GameSessions getGameSessions() {
+		return gameSessions;
+	}
+
+	public void setGameSessions(GameSessions gameSessions) {
+		this.gameSessions = gameSessions;
 	}
 
 	public void setMatchmakingQueueUrl(String matchmakingQueueUrl) {

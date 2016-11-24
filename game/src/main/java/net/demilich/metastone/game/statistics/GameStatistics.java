@@ -1,6 +1,7 @@
 package net.demilich.metastone.game.statistics;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
@@ -135,7 +136,7 @@ public class GameStatistics implements Cloneable, Serializable {
 		add(Statistic.MANA_SPENT, mana);
 	}
 
-	public void merge(GameStatistics otherStatistics) {
+	public GameStatistics merge(GameStatistics otherStatistics) {
 		for (Statistic stat : otherStatistics.stats.keySet()) {
 			Object value = get(stat);
 			if (value != null) {
@@ -153,6 +154,7 @@ public class GameStatistics implements Cloneable, Serializable {
 			getCardsPlayed().put(cardId, getCardsPlayed().get(cardId) + otherStatistics.getCardsPlayed().get(cardId));
 		}
 		updateWinRate();
+		return this;
 	}
 	
 	public void minionSummoned(Minion minion) {
@@ -186,4 +188,7 @@ public class GameStatistics implements Cloneable, Serializable {
 		set(Statistic.WIN_RATE, winRate);
 	}
 
+	public Map<Statistic, Object> getStats() {
+		return Collections.unmodifiableMap(stats);
+	}
 }

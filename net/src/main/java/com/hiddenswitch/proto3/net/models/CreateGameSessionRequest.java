@@ -21,4 +21,14 @@ public class CreateGameSessionRequest {
 	public void setPregame2(PregamePlayerConfiguration pregame2) {
 		this.pregame2 = pregame2;
 	}
+
+	public CreateGameSessionRequest withPregame1(PregamePlayerConfiguration pregame1) {
+		setPregame1(pregame1);
+		return this;
+	}
+
+	public CreateGameSessionRequest withPregame2(PregamePlayerConfiguration pregame2) {
+		setPregame2(pregame2);
+		return this;
+	}
 }

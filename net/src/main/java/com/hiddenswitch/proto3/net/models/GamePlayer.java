@@ -2,32 +2,21 @@ package com.hiddenswitch.proto3.net.models;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import com.hiddenswitch.proto3.net.behaviour.NullBehaviour;
+import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
 import com.hiddenswitch.proto3.server.PregamePlayerConfiguration;
 import net.demilich.metastone.game.cards.NullHeroCard;
 import net.demilich.metastone.game.decks.Bench;
+import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
 
 @DynamoDBDocument
 public class GamePlayer {
 	private String userId;
 	private PlayerProfile profile;
-	private ChannelType channelType = ChannelType.SQS;
-	private Bench deck;
+	private Deck deck;
+	private ClientConnectionConfiguration connectionConfiguration;
 
 	public GamePlayer() {
-	}
-
-	@DynamoDBIgnore
-	public PlayerConfig getPlayerConfig() {
-		PlayerConfig playerConfig = new PlayerConfig();
-		playerConfig.setDeck(getDeck());
-		// TODO: Use actual hero cards
-		NullHeroCard nullHeroCard = new NullHeroCard(getDeck().getHeroClass());
-		playerConfig.setHeroCard(nullHeroCard);
-		playerConfig.setHideCards(true);
-		playerConfig.setName(getProfile().name);
-		playerConfig.setBehaviour(new NullBehaviour());
-		return playerConfig;
 	}
 
 	@DynamoDBIgnore
@@ -54,22 +43,23 @@ public class GamePlayer {
 		this.profile = profile;
 	}
 
-	@DynamoDBTypeConvertedEnum
-	public ChannelType getChannelType() {
-		return channelType;
-	}
-
-	public void setChannelType(ChannelType channelType) {
-		this.channelType = channelType;
-	}
-
-	@DynamoDBTypeConverted(converter = BenchConverter.class)
-	public Bench getDeck() {
+	@DynamoDBTypeConverted(converter = DeckConverter.class)
+	public Deck getDeck() {
 		return deck;
 	}
 
-	public void setDeck(Bench deck) {
+	public void setDeck(Deck deck) {
 		this.deck = deck;
 	}
+
+	@DynamoDBTypeConverted(converter = ClientConnectionConfigurationConverter.class)
+	public ClientConnectionConfiguration getConnectionConfiguration() {
+		return connectionConfiguration;
+	}
+
+	public void setConnectionConfiguration(ClientConnectionConfiguration connectionConfiguration) {
+		this.connectionConfiguration = connectionConfiguration;
+	}
+
 }
 
