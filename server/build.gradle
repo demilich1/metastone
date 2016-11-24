@@ -26,6 +26,7 @@ repositories {
 }
 
 dependencies {
+    compile group: 'io.vertx', name: 'vertx-core', version: '3.3.3'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
     compile project(':game')
     compile project(':cards')
