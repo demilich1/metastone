@@ -7,7 +7,7 @@
 	"baseHp": 5,
 	"heroClass": "SHAMAN",
 	"rarity": "RARE",
-	"description": "Costs (1) less for each Totem you've summoned this game.",
+	"description": "Taunt. Costs (1) less for each Totem you've summoned this game.",
 	"manaCostModifier": {
 		"class": "MinionSummonValueProvider",
 		"filter": {

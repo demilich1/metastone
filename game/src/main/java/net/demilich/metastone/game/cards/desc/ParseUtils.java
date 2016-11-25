@@ -22,6 +22,7 @@ import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.spells.desc.filter.FilterDesc;
 import net.demilich.metastone.game.spells.desc.filter.Operation;
 import net.demilich.metastone.game.spells.desc.manamodifier.CardCostModifierDesc;
+import net.demilich.metastone.game.spells.desc.source.SourceDesc;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDeserializer;
 import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
@@ -37,6 +38,7 @@ public class ParseUtils {
 	private static SpellDeserializer spellParser = new SpellDeserializer();
 	private static ValueProviderDeserializer valueProviderParser = new ValueProviderDeserializer();
 	private static FilterDeserializer filterParser = new FilterDeserializer();
+	private static SourceDeserializer sourceParser = new SourceDeserializer();
 	private static ConditionDeserializer conditionParser = new ConditionDeserializer();
 	private static EventTriggerDeserializer triggerParser = new EventTriggerDeserializer();
 	private static CardCostModifierDeserializer manaModifierParser = new CardCostModifierDeserializer();
@@ -122,6 +124,10 @@ public class ParseUtils {
 		case ENTITY_FILTER: {
 			FilterDesc filterDesc = filterParser.deserialize(entry, FilterDesc.class, null);
 			return filterDesc.create();
+		}
+		case CARD_SOURCE: {
+			SourceDesc sourceDesc = sourceParser.deserialize(entry, SourceDesc.class, null);
+			return sourceDesc.create();
 		}
 		case ENTITY_FILTER_ARRAY: {
 			JsonArray jsonArray = entry.getAsJsonArray();

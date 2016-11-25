@@ -3,7 +3,6 @@ package net.demilich.metastone.game.spells;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
@@ -40,7 +39,7 @@ public class FromDeckToHandSpell extends Spell {
 				relevantCards.remove(card);
 				player.getDeck().remove(card);
 			} else if (replacementCard != null) {
-				card = CardCatalogue.getCardById(replacementCard);
+				card = context.getCardById(replacementCard);
 			}
 
 			if (card != null) {

@@ -42,4 +42,8 @@ public abstract class GameEvent {
 		return sourcePlayerId;
 	}
 
+	@Override
+	public String toString() {
+		return "[EVENT " + getClass().getSimpleName() + "]";
+	}
 }

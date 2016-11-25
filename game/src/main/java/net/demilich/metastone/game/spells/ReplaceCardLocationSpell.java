@@ -38,7 +38,7 @@ public class ReplaceCardLocationSpell extends Spell {
 				if (!result.isEmpty()) {
 					card = result.getRandom();
 				} else if (replacementCard != null) {
-					card = CardCatalogue.getCardById(replacementCard);
+					card = context.getCardById(replacementCard);
 				}
 				if (card != null) {
 					context.getLogic().shuffleToDeck(player, card.clone());
@@ -57,7 +57,7 @@ public class ReplaceCardLocationSpell extends Spell {
 				if (!result.isEmpty()) {
 					card = result.getRandom();
 				} else if (replacementCard != null) {
-					card = CardCatalogue.getCardById(replacementCard);
+					card = context.getCardById(replacementCard);
 				}
 
 				if (manaCostModifier != 0) {

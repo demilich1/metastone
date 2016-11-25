@@ -11,6 +11,7 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
+import net.demilich.metastone.game.spells.desc.source.CardSource;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class DiscoverFilteredCardSpell extends Spell {
@@ -26,9 +27,13 @@ public class DiscoverFilteredCardSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		EntityFilter cardFilter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
 		CardCollection cards = CardCatalogue.query(context.getDeckFormat());
+		CardSource cardSource = (CardSource) desc.get(SpellArg.CARD_SOURCE);
+		if (cardSource != null) {
+			cards = cardSource.getCards(context, player);
+		}
 		CardCollection result = new CardCollection();
 		for (Card card : cards) {
-			if (cardFilter.matches(context, player, card)) {
+			if (cardFilter == null || cardFilter.matches(context, player, card)) {
 				result.add(card);
 			}
 		}

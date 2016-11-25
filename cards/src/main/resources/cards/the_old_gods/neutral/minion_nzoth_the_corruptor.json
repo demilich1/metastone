@@ -8,7 +8,6 @@
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
 	"description": "Battlecry: Summon your friendly Deathrattle minions that died this game.",
-	"targetSelection": "NONE",
 	"battlecry": {
 		"spell": {
 			"class": "ResurrectSpell",

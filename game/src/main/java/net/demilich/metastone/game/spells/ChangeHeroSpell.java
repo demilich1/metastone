@@ -4,7 +4,6 @@ import java.util.Map;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.HeroCard;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
@@ -21,7 +20,7 @@ public class ChangeHeroSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		String heroCardId = (String) desc.get(SpellArg.CARD);
-		HeroCard heroCard = (HeroCard) CardCatalogue.getCardById(heroCardId);
+		HeroCard heroCard = (HeroCard) context.getCardById(heroCardId);
 		context.getLogic().changeHero(player, heroCard.createHero());
 	}
 

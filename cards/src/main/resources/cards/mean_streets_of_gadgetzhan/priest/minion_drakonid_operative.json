@@ -12,13 +12,13 @@
 		"targetSelection": "NONE",
 		"spell": {
 			"class": "DiscoverFilteredCardSpell",
+			"cardSource": {
+				"class": "DeckSource",
+				"targetPlayer": "OPPONENT"
+			},
 			"spell": {
 				"class": "ReceiveCardSpell",
 				"targetPlayer": "SELF"
-			},
-			"cardFilter": {
-				"class": "InDeckFilter",
-				"targetPlayer": "OPPONENT"
 			}
 		},
 		"condition": {

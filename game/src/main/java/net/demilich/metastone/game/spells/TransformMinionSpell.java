@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.Hero;
@@ -54,7 +53,7 @@ public class TransformMinionSpell extends Spell {
 			String cardName = (String) desc.get(SpellArg.CARD);
 			Minion minion = (Minion) target;
 			Minion transformTarget = (Minion) desc.get(SpellArg.SECONDARY_TARGET);
-			MinionCard templateCard = cardName != null ? (MinionCard) CardCatalogue.getCardById(cardName) : null;
+			MinionCard templateCard = cardName != null ? (MinionCard) context.getCardById(cardName) : null;
 
 			Minion newMinion = transformTarget != null ? transformTarget : templateCard.summon();
 			logger.debug("{} is transformed into a {}", minion, newMinion);
