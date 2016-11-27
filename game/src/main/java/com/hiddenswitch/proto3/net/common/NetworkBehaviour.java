@@ -56,7 +56,7 @@ public class NetworkBehaviour extends Behaviour implements Serializable {
 		getWrapBehaviour().onGameOver(context, playerId, winningPlayerId);
 	}
 
-	public void onGameOver(ServerGameContext context, int playerId, int winningPlayerId) {
+	public void onGameOverAsync(ServerGameContext context, int playerId, int winningPlayerId) {
 		if (winningPlayerId != -1) {
 			context.sendGameOver(context.getPlayer(playerId), context.getPlayer(winningPlayerId));
 		} else {

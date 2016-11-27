@@ -8,9 +8,9 @@ import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
 
 public interface SendToServer {
-	void registerAction(Player callingPlayer, GameAction action);
+	void sendAction(String id, Player callingPlayer, GameAction action);
 
-	void sendMulligan(Player player, List<Card> discardedCards);
+	void sendMulligan(String id, Player player, List<Card> discardedCards);
 
 	void sendGenericMessage(ClientToServerMessage message);
 }

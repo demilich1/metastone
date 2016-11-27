@@ -9,7 +9,7 @@ import net.demilich.metastone.game.cards.Card;
 public interface ServerListener {
 	void onPlayerConnected(Player player);
 
-	void onActionReceived(Player callingPlayer, GameAction action);
+	void onActionReceived(String id, Player callingPlayer, GameAction action);
 	
-	void onMulliganReceived(Player player, List<Card> discardedCards);
+	void onMulliganReceived(String id, Player player, List<Card> discardedCards);
 }

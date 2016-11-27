@@ -50,15 +50,15 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	}
 
 	@Override
-	public void onActionReceived(Player callingPlayer, GameAction action) {
+	public void onActionReceived(String id, Player callingPlayer, GameAction action) {
 		checkContext();
-		getGameContext().onActionReceived(callingPlayer, action);
+		getGameContext().onActionReceived(id, callingPlayer, action);
 	}
 
 	@Override
-	public void onMulliganReceived(Player player, List<Card> ReceivedCards) {
+	public void onMulliganReceived(String id, Player player, List<Card> ReceivedCards) {
 		checkContext();
-		getGameContext().onMulliganReceived(player, ReceivedCards);
+		getGameContext().onMulliganReceived(id, player, ReceivedCards);
 	}
 
 	@Override

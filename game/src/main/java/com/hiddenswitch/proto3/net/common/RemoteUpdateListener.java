@@ -22,7 +22,7 @@ public interface RemoteUpdateListener {
 
 	void onUpdate(Player player1, Player player2, TurnState newState);
 
-	void onRequestAction(List<GameAction> availableActions);
+	void onRequestAction(String messageId, List<GameAction> availableActions);
 	
-	void onMulligan(Player player, List<Card> cards);
+	void onMulligan(String messageId, Player player, List<Card> cards);
 }

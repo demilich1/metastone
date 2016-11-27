@@ -14,17 +14,17 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.TurnState;
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.behaviour.IBehaviour;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.logic.GameLogic;
+import org.apache.commons.lang3.RandomStringUtils;
 
 public class ServerGameContext extends GameContext {
 	private final String gameId;
 	private Map<Player, RemoteUpdateListener> listenerMap = new HashMap<>();
-	private final Map<Player, Consumer<List<Card>>> mulliganCallbacks = new HashMap<>();
-	private final Map<Player, Consumer<GameAction>> actionCallbacks = new HashMap<>();
-	private volatile GameAction pendingAction = null;
+	private final Map<String, Consumer> requestCallbacks = new HashMap<>();
 
 
 	public ServerGameContext(Player player1, Player player2, DeckFormat deckFormat, String gameId) {
@@ -41,13 +41,6 @@ public class ServerGameContext extends GameContext {
 
 	public void setUpdateListener(Player player, RemoteUpdateListener listener) {
 		listenerMap.put(player, listener);
-	}
-
-	public void onActionReceived(Player player, GameAction action) {
-		logger.debug("Requesting acton for playerId {} hashCode {}", player.getId(), player.hashCode());
-		logger.debug("Current player hashCodes: {}", String.join(", ", listenerMap.keySet().stream().map(p -> Integer.toString(p.hashCode())).collect(Collectors.toList())));
-		actionCallbacks.get(player).accept(action);
-		actionCallbacks.remove(player);
 	}
 
 	@Override
@@ -181,23 +174,42 @@ public class ServerGameContext extends GameContext {
 
 	public void networkRequestAction(Player player, List<GameAction> actions, Consumer<GameAction> callback) {
 		logger.debug("Requesting acton for playerId {} hashCode {}", player.getId(), player.hashCode());
-		actionCallbacks.put(player, callback);
-		getListenerMap().get(player).onRequestAction(actions);
+		String id = RandomStringUtils.randomAscii(8);
+		requestCallbacks.put(id, callback);
+		getListenerMap().get(player).onRequestAction(id, actions);
 	}
 
 	public void networkRequestMulligan(Player player, List<Card> starterCards, Consumer<List<Card>> callback) {
-		mulliganCallbacks.put(player, callback);
-		getListenerMap().get(player).onMulligan(player, starterCards);
+		logger.debug("Requesting mulligan for playerId {} hashCode {}", player.getId(), player.hashCode());
+		String id = RandomStringUtils.randomAscii(8);
+		requestCallbacks.put(id, callback);
+		getListenerMap().get(player).onMulligan(id, player, starterCards);
+	}
+
+	@SuppressWarnings("unchecked")
+	public void onActionReceived(String messageId, Player player, GameAction action) {
+		logger.debug("Accepting acton for playerId {} hashCode {}", player.getId(), player.hashCode());
+		((Consumer<GameAction>) requestCallbacks.get(messageId)).accept(action);
+		requestCallbacks.remove(messageId);
+	}
+
+	@SuppressWarnings("unchecked")
+	public void onMulliganReceived(String messageId, Player player, List<Card> discardedCards) {
+		logger.debug("Mulligan received from {}", player.getName());
+		((Consumer<List<Card>>) requestCallbacks.get(messageId)).accept(discardedCards);
+		requestCallbacks.remove(messageId);
 	}
 
 	public void sendGameOver(Player sender, Player winner) {
 		getListenerMap().get(sender).onGameEnd(winner);
 	}
 
-	public void onMulliganReceived(Player player, List<Card> discardedCards) {
-		logger.debug("Mulligan received from {}", player.getName());
-		mulliganCallbacks.get(player).accept(discardedCards);
-		mulliganCallbacks.remove(player);
+	@Override
+	protected void notifyPlayersGameOver() {
+		for (Player player : getPlayers()) {
+			NetworkBehaviour networkBehaviour = (NetworkBehaviour) player.getBehaviour();
+			networkBehaviour.onGameOverAsync(this, player.getId(), getWinner() != null ? getWinner().getId() : -1);
+		}
 	}
 
 	@Override

@@ -109,11 +109,11 @@ public class SocketServer extends AbstractVerticle {
 				break;
 
 			case UPDATE_ACTION:
-				session.onActionReceived(message.getCallingPlayer(), message.getAction());
+				session.onActionReceived(message.getId(), message.getCallingPlayer(), message.getAction());
 				break;
 
 			case UPDATE_MULLIGAN:
-				session.onMulliganReceived(message.getPlayer1(), message.getDiscardedCards());
+				session.onMulliganReceived(message.getId(), message.getPlayer1(), message.getDiscardedCards());
 				break;
 		}
 

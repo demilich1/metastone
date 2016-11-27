@@ -42,13 +42,13 @@ public class SocketClientConnection implements ClientCommunicationReceive, Clien
 		return new SendToServer() {
 
 			@Override
-			public void registerAction(Player callingPlayer, GameAction action) {
-				queue.add(new ClientToServerMessage(callingPlayer, action));
+			public void sendAction(String id, Player callingPlayer, GameAction action) {
+				queue.add(new ClientToServerMessage(id, callingPlayer, action));
 			}
 
 			@Override
-			public void sendMulligan(Player player, List<Card> discardedCards) {
-				queue.add(new ClientToServerMessage(player, discardedCards));
+			public void sendMulligan(String id, Player player, List<Card> discardedCards) {
+				queue.add(new ClientToServerMessage(id, player, discardedCards));
 
 			}
 
@@ -128,10 +128,10 @@ public class SocketClientConnection implements ClientCommunicationReceive, Clien
 								remoteUpdateListener.onTurnEnd(message.activePlayer, message.turnNumber, message.turnState);
 								break;
 							case ON_REQUEST_ACTION:
-								remoteUpdateListener.onRequestAction(message.actions);
+								remoteUpdateListener.onRequestAction(message.id, message.actions);
 								break;
 							case ON_MULLIGAN:
-								remoteUpdateListener.onMulligan(message.player1, message.startingCards);
+								remoteUpdateListener.onMulligan(message.id, message.player1, message.startingCards);
 								break;
 							default:
 								System.err.println("Unexpected message from server received");

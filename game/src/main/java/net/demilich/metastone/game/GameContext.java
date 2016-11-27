@@ -111,11 +111,16 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 
 	protected void endGame() {
 		setWinner(getLogic().getWinner(getActivePlayer(), getOpponent(getActivePlayer())));
+
+		notifyPlayersGameOver();
+
+		calculateStatistics();
+	}
+
+	protected void notifyPlayersGameOver() {
 		for (Player player : getPlayers()) {
 			player.getBehaviour().onGameOver(this, player.getId(), getWinner() != null ? getWinner().getId() : -1);
 		}
-
-		calculateStatistics();
 	}
 
 	protected void calculateStatistics() {

@@ -39,6 +39,25 @@ class SocketClientReceiver implements RemoteUpdateListener {
 		}
 	}
 
+	private void sendMessage(NetSocket socket, ServerToClientMessage message) throws IOException {
+		// Serialize message
+		VertxBufferOutputStream out = new VertxBufferOutputStream();
+		// Write the magic header
+		out.getBuffer().appendBytes(IncomingMessage.MAGIC_BYTES);
+		// Write an integer's worth of space
+		out.getBuffer().appendInt(0);
+		// Serialize the message
+		int before = out.size();
+
+		synchronized (this) {
+			Serialization.serialize(message, out);
+		}
+
+		int messageSize = out.size() - before;
+		// Set the second set of four bytes to the message length.
+		socket.write(out.getBuffer().setInt(4, messageSize));
+	}
+
 	@Override
 	public void onGameEvent(GameEvent event) {
 		sendMessage(new ServerToClientMessage(event));
@@ -73,33 +92,13 @@ class SocketClientReceiver implements RemoteUpdateListener {
 	}
 
 	@Override
-	public void onRequestAction(List<GameAction> availableActions) {
-		sendMessage(new ServerToClientMessage(availableActions));
+	public void onRequestAction(String id, List<GameAction> availableActions) {
+		sendMessage(new ServerToClientMessage(id, availableActions));
 	}
-
-	private void sendMessage(NetSocket socket, ServerToClientMessage message) throws IOException {
-		// Serialize message
-		VertxBufferOutputStream out = new VertxBufferOutputStream();
-		// Write the magic header
-		out.getBuffer().appendBytes(IncomingMessage.MAGIC_BYTES);
-		// Write an integer's worth of space
-		out.getBuffer().appendInt(0);
-		// Serialize the message
-		int before = out.size();
-
-		synchronized (this) {
-			Serialization.serialize(message, out);
-		}
-
-		int messageSize = out.size() - before;
-		// Set the second set of four bytes to the message length.
-		socket.write(out.getBuffer().setInt(4, messageSize));
-	}
-
 
 	@Override
-	public void onMulligan(Player player, List<Card> cards) {
-		sendMessage(new ServerToClientMessage(player, cards));
+	public void onMulligan(String id, Player player, List<Card> cards) {
+		sendMessage(new ServerToClientMessage(id, player, cards));
 	}
 
 	private NetSocket getPrivateSocket() {

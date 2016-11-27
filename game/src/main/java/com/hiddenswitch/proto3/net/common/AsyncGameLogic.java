@@ -49,10 +49,10 @@ public class AsyncGameLogic extends GameLogic {
 		});
 	}
 
-	@Override
-	protected void resolveBattlecry(int playerId, Actor actor) throws UnsupportedOperationException {
-		throw new UnsupportedOperationException("AsyncGameLogic::resolveBattlecry is unsupported. Use AsyncGameLogic::resolveBattlecryAsync instead.");
-	}
+//	@Override
+//	protected void resolveBattlecry(int playerId, Actor actor) throws UnsupportedOperationException {
+//		throw new UnsupportedOperationException("AsyncGameLogic::resolveBattlecry is unsupported. Use AsyncGameLogic::resolveBattlecryAsync instead.");
+//	}
 
 	@Override
 	protected void resolveBattlecryAsync(int playerId, Actor actor, Handler<GameAction> result) {
@@ -84,10 +84,10 @@ public class AsyncGameLogic extends GameLogic {
 		}
 	}
 
-	@Override
-	public void equipWeapon(int playerId, Weapon weapon) throws UnsupportedOperationException {
-		throw new UnsupportedOperationException("AsyncGameLogic::equipWeapon is unsupported. Use AsyncGameLogic::equipWeaponAsync instead.");
-	}
+//	@Override
+//	public void equipWeapon(int playerId, Weapon weapon) throws UnsupportedOperationException {
+//		throw new UnsupportedOperationException("AsyncGameLogic::equipWeapon is unsupported. Use AsyncGameLogic::equipWeaponAsync instead.");
+//	}
 
 	@Override
 	public void equipWeaponAsync(int playerId, Weapon weapon, Handler<Weapon> result) {
@@ -107,10 +107,10 @@ public class AsyncGameLogic extends GameLogic {
 		}
 	}
 
-	@Override
-	public boolean summon(int playerId, Minion minion, Card source, int index, boolean resolveBattlecry) throws UnsupportedOperationException {
-		throw new UnsupportedOperationException("AsyncGameLogic::summon is unsupported. Use AsyncGameLogic::summonAsync instead.");
-	}
+//	@Override
+//	public boolean summon(int playerId, Minion minion, Card source, int index, boolean resolveBattlecry) throws UnsupportedOperationException {
+//		throw new UnsupportedOperationException("AsyncGameLogic::summon is unsupported. Use AsyncGameLogic::summonAsync instead.");
+//	}
 
 	@Override
 	protected void summonAsync(int playerId, Minion minion, Card source, int index, boolean resolveBattlecry, Handler<Boolean> summoned) {

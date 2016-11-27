@@ -7,7 +7,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
-import com.hiddenswitch.proto3.net.common.ClientToServerMessage;
 import com.hiddenswitch.proto3.net.common.RemoteUpdateListener;
 import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.GameNotification;
@@ -39,6 +38,7 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	private String host;
 	private int port;
 	private boolean mulligan;
+	private String lastRequestId;
 	private ClientConnectionConfiguration connectionConfiguration;
 	private ClientCommunicationSend ccs;
 	private ClientCommunicationReceive ccr;
@@ -208,7 +208,7 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 				if (getActionRequested().get()) {
 					logger.debug("Action was requested from player.");
 					GameAction action = getLocalPlayer().getBehaviour().requestAction(this, getActivePlayer(), getValidActions());
-					ccs.getSendToServer().registerAction(getLocalPlayer(), action);
+					ccs.getSendToServer().sendAction(this.lastRequestId, getLocalPlayer(), action);
 					getActionRequested().set(false);
 				}
 			}
@@ -308,7 +308,7 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 		this.setWinner(w);
 		this.gameDecided = true;
 		this.onGameStateChanged();
-		//this.endGame();
+		this.endGame();
 	}
 
 	@Override
@@ -336,8 +336,9 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	}
 
 	@Override
-	public void onRequestAction(List<GameAction> availableActions) {
+	public void onRequestAction(String id, List<GameAction> availableActions) {
 		synchronized (this) {
+			this.lastRequestId = id;
 			this.getActionRequested().set(true);
 			this.setRemoteValidActions(availableActions);
 			this.onGameStateChanged();
@@ -362,10 +363,10 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	}
 
 	@Override
-	public void onMulligan(Player player, List<Card> cards) {
+	public void onMulligan(String id, Player player, List<Card> cards) {
 		mulligan = false;
 		List<Card> discardedCards = player.getBehaviour().mulligan(this, player, cards);
 		mulligan = true;
-		ccs.getSendToServer().sendMulligan(player, discardedCards);
+		ccs.getSendToServer().sendMulligan(id, player, discardedCards);
 	}
 }
