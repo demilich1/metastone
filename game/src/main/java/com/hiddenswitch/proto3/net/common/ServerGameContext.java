@@ -1,42 +1,42 @@
 package com.hiddenswitch.proto3.net.common;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
-
 import io.vertx.core.Handler;
+import io.vertx.core.WorkerExecutor;
 import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.TurnState;
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.GameAction;
-import net.demilich.metastone.game.behaviour.IBehaviour;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.logic.GameLogic;
 import org.apache.commons.lang3.RandomStringUtils;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Consumer;
+
 public class ServerGameContext extends GameContext {
 	private final String gameId;
 	private Map<Player, RemoteUpdateListener> listenerMap = new HashMap<>();
 	private final Map<String, Consumer> requestCallbacks = new HashMap<>();
 
-
 	public ServerGameContext(Player player1, Player player2, DeckFormat deckFormat, String gameId) {
 		// The player's IDs are set here
-		super(player1, player2, new AsyncGameLogic(), deckFormat);
-		assert player1.getId() != player2.getId();
+		super(player1, player2, new GameLogicAsync(), deckFormat);
+		if (player1.getId() == player2.getId()) {
+			throw new RuntimeException("The player IDs in this ServerGameContext are equal, which is not allowed.");
+		}
 		NotificationProxy.init(new NullNotifier());
 		this.gameId = gameId;
 	}
 
-	public AsyncGameLogic getNetworkGameLogic() {
-		return (AsyncGameLogic) getLogic();
+	public GameLogicAsync getNetworkGameLogic() {
+		return (GameLogicAsync) getLogic();
 	}
 
 	public void setUpdateListener(Player player, RemoteUpdateListener listener) {

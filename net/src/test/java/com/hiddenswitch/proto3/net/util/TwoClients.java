@@ -1,7 +1,6 @@
 package com.hiddenswitch.proto3.net.util;
 
 import com.hiddenswitch.proto3.net.GameSessions;
-import com.hiddenswitch.proto3.net.GameSessionsTest;
 import com.hiddenswitch.proto3.net.client.RemoteGameContext;
 import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
 import com.hiddenswitch.proto3.net.common.ServerGameContext;

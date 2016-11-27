@@ -4,12 +4,13 @@ import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
 import com.hiddenswitch.proto3.net.common.ClientToServerMessage;
 import com.hiddenswitch.proto3.net.common.RemoteUpdateListener;
 import com.hiddenswitch.proto3.net.common.ServerGameContext;
+import io.vertx.core.Vertx;
+import io.vertx.core.WorkerExecutor;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.decks.DeckFormat;
-import net.demilich.metastone.game.logic.GameLogic;
 
 import java.util.List;
 
@@ -23,6 +24,8 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	private ServerGameContext gameContext;
 	private Player player1;
 	private Player player2;
+	private WorkerExecutor executor;
+	private Vertx vertx;
 
 	private ClientConnectionConfiguration getConfigurationFor(PregamePlayerConfiguration player) {
 		// TODO: It's obviously insecure to allow the client to specify things like their player object
@@ -71,8 +74,9 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 		return getConfigurationFor(pregamePlayerConfiguration2);
 	}
 
-	public ServerGameSession(String host, int port, PregamePlayerConfiguration p1, PregamePlayerConfiguration p2) {
+	public ServerGameSession(Vertx vertx, String host, int port, PregamePlayerConfiguration p1, PregamePlayerConfiguration p2) {
 		super();
+		this.vertx = vertx;
 		setHost(host);
 		setPort(port);
 		// TODO: in PregamePlayerConfiguration should really contain a playerConfig object.

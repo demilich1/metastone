@@ -16,10 +16,10 @@ import java.util.List;
 /**
  * Created by bberman on 11/23/16.
  */
-public class AsyncGameLogic extends GameLogic {
+public class GameLogicAsync extends GameLogic {
 	@Override
 	protected void mulligan(Player player, boolean begins) throws UnsupportedOperationException {
-		throw new UnsupportedOperationException("AsyncGameLogic::mulligan is unsupported. Use AsyncGameLogic::mulliganAsync instead.");
+		throw new UnsupportedOperationException("GameLogicAsync::mulligan is unsupported. Use GameLogicAsync::mulliganAsync instead.");
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class AsyncGameLogic extends GameLogic {
 
 	@Override
 	public void init(int playerId, boolean begins) throws UnsupportedOperationException {
-		throw new UnsupportedOperationException("AsyncGameLogic::init is unsupported. Use AsyncGameLogic::initAsync instead.");
+		throw new UnsupportedOperationException("GameLogicAsync::init is unsupported. Use GameLogicAsync::initAsync instead.");
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class AsyncGameLogic extends GameLogic {
 
 //	@Override
 //	protected void resolveBattlecry(int playerId, Actor actor) throws UnsupportedOperationException {
-//		throw new UnsupportedOperationException("AsyncGameLogic::resolveBattlecry is unsupported. Use AsyncGameLogic::resolveBattlecryAsync instead.");
+//		throw new UnsupportedOperationException("GameLogicAsync::resolveBattlecry is unsupported. Use GameLogicAsync::resolveBattlecryAsync instead.");
 //	}
 
 	@Override
@@ -86,7 +86,7 @@ public class AsyncGameLogic extends GameLogic {
 
 //	@Override
 //	public void equipWeapon(int playerId, Weapon weapon) throws UnsupportedOperationException {
-//		throw new UnsupportedOperationException("AsyncGameLogic::equipWeapon is unsupported. Use AsyncGameLogic::equipWeaponAsync instead.");
+//		throw new UnsupportedOperationException("GameLogicAsync::equipWeapon is unsupported. Use GameLogicAsync::equipWeaponAsync instead.");
 //	}
 
 	@Override
@@ -109,7 +109,7 @@ public class AsyncGameLogic extends GameLogic {
 
 //	@Override
 //	public boolean summon(int playerId, Minion minion, Card source, int index, boolean resolveBattlecry) throws UnsupportedOperationException {
-//		throw new UnsupportedOperationException("AsyncGameLogic::summon is unsupported. Use AsyncGameLogic::summonAsync instead.");
+//		throw new UnsupportedOperationException("GameLogicAsync::summon is unsupported. Use GameLogicAsync::summonAsync instead.");
 //	}
 
 	@Override
