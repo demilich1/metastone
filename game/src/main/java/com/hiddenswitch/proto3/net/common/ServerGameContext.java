@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import io.vertx.core.Handler;
 import net.demilich.metastone.NotificationProxy;
@@ -43,6 +44,8 @@ public class ServerGameContext extends GameContext {
 	}
 
 	public void onActionReceived(Player player, GameAction action) {
+		logger.debug("Requesting acton for playerId {} hashCode {}", player.getId(), player.hashCode());
+		logger.debug("Current player hashCodes: {}", String.join(", ", listenerMap.keySet().stream().map(p -> Integer.toString(p.hashCode())).collect(Collectors.toList())));
 		actionCallbacks.get(player).accept(action);
 		actionCallbacks.remove(player);
 	}
@@ -177,6 +180,7 @@ public class ServerGameContext extends GameContext {
 	}
 
 	public void networkRequestAction(Player player, List<GameAction> actions, Consumer<GameAction> callback) {
+		logger.debug("Requesting acton for playerId {} hashCode {}", player.getId(), player.hashCode());
 		actionCallbacks.put(player, callback);
 		getListenerMap().get(player).onRequestAction(actions);
 	}

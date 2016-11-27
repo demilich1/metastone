@@ -49,19 +49,13 @@ public class SocketServer extends AbstractVerticle {
 			try {
 				IncomingMessage firstMessage = new IncomingMessage(messageBuffer);
 				messages.put(socket, firstMessage);
-				// Did we get a whole message in this buffer? If so, receive data again on the remainder.
-				if (firstMessage.isComplete()) {
-					Buffer twoMessages = firstMessage.getBufferWithoutHeader();
-					logger.debug("Some remainder of a message was found.");
-					remainder = twoMessages.getBuffer(firstMessage.getExpectedLength(), twoMessages.length());
-				}
+				bytesRead = firstMessage.getBufferWithoutHeader().length() + IncomingMessage.HEADER_SIZE;
 			} catch (IOException e) {
 				e.printStackTrace();
 				return;
 			}
 		} else {
-			IncomingMessage incomingMessage = messages.get(socket);
-			bytesRead = incomingMessage.append(messageBuffer);
+			bytesRead = messages.get(socket).append(messageBuffer);
 		}
 
 		IncomingMessage incomingMessage = messages.get(socket);
@@ -72,7 +66,7 @@ public class SocketServer extends AbstractVerticle {
 
 		// If there appears to be data left over after finishing the message, hold onto the remainder of the buffer.
 		if (bytesRead < messageBuffer.length()) {
-			logger.debug("Some remainder of a message was found.");
+			logger.debug("Some remainder of a message was found. Bytes read: {}, remainder: {}", bytesRead, messageBuffer.length() - bytesRead);
 			remainder = messageBuffer.getBuffer(bytesRead, messageBuffer.length());
 		}
 
