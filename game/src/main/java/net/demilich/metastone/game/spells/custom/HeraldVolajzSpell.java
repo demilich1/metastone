@@ -27,7 +27,7 @@ public class HeraldVolajzSpell extends Spell {
 			Minion minion = (Minion) entity;
 			MinionCard minionCard = (MinionCard) minion.getSourceCard();
 			minion = minionCard.summon();
-			if (context.getLogic().summon(player.getId(), minion)) {
+			if (context.getLogic().summon(player.getId(), minion, null, -1, false)) {
 				minion.setAttack(1);
 				minion.setHp(1);
 				minion.setMaxHp(1);

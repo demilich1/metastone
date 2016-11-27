@@ -11,8 +11,8 @@ public class PutMinionOnBoardSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		MinionCard minionCard = (MinionCard) target;
-		
-		context.getLogic().summon(player.getId(), minionCard.summon());
+
+		context.getLogic().summon(player.getId(), minionCard.summon(), null, -1, false);
 		context.getLogic().removeCard(player.getId(), minionCard);
 	}
 

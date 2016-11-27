@@ -1,5 +1,6 @@
 package com.hiddenswitch.proto3.net.common;
 
+import io.vertx.core.Handler;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
@@ -9,82 +10,61 @@ import net.demilich.metastone.game.cards.Card;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
-public class NetworkBehaviour extends Behaviour {
-    private Logger logger = LoggerFactory.getLogger(NetworkBehaviour.class);
-    private IBehaviour wrapBehaviour;
+public class NetworkBehaviour extends Behaviour implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-    public NetworkBehaviour(IBehaviour wrapBehaviour) {
-        this.wrapBehaviour = wrapBehaviour;
-    }
+	private Logger logger = LoggerFactory.getLogger(NetworkBehaviour.class);
+	private IBehaviour wrapBehaviour;
 
-    @Override
-    public String getName() {
-        return getWrapBehaviour().getName();
-    }
+	public NetworkBehaviour(IBehaviour wrapBehaviour) {
+		this.wrapBehaviour = wrapBehaviour;
+	}
 
-    @Override
-    public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
-        if (context instanceof ServerGameContext) {
-            ServerGameContext serverContext = (ServerGameContext) context;
-            AtomicBoolean atomicBoolean = new AtomicBoolean(false);
-            List<Card> discardedCards = new ArrayList<>();
-            serverContext.mulligan(player, cards, (List<Card> c) -> {
-                for (Card card : c) {
-                    discardedCards.add(card);
-                }
-                atomicBoolean.set(true);
-            });
-            logger.debug("Waiting for mulligan response");
-            while (!atomicBoolean.get()) {
-                serverContext.cycleLock();
-            }
-            return discardedCards;
-        } else {
-            logger.debug("Requesting mulligan from wrapped behaviour.");
+	@Override
+	public String getName() {
+		return getWrapBehaviour().getName();
+	}
 
-            return getWrapBehaviour().mulligan(context, player, cards);
-        }
-    }
+	@Override
+	public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
+		logger.debug("Requesting mulligan from wrapped behaviour. Player: {}, cards: {}", player, cards);
+		return getWrapBehaviour().mulligan(context, player, cards);
+	}
 
-    @Override
-    public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
-        if (context instanceof ServerGameContext) {
-            ServerGameContext serverContext = (ServerGameContext) context;
-            serverContext.requestAction(player, validActions);
-            logger.debug("{}: Action requested from {}. {}", serverContext, player, validActions);
+	public void mulligan(ServerGameContext context, Player player, List<Card> cards, Handler<List<Card>> handler) {
+		logger.debug("Requesting mulligan from network. Player: {}, cards: {}", player, cards);
+		context.networkRequestMulligan(player, cards, handler::handle);
+	}
 
-            while (serverContext.getPendingAction() == null) {
-                serverContext.cycleLock();
-            }
-            logger.debug("{}: Action received from {}.", serverContext, player);
+	@Override
+	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
+		logger.debug("Requesting action from wrapped behaviour. Player: {}, validActions: {}", player, validActions);
+		return getWrapBehaviour().requestAction(context, player, validActions);
+	}
 
-            GameAction action = serverContext.getPendingAction();
-            serverContext.setPendingAction(null);
-            return action;
-        } else {
-            logger.debug("Requesting action from wrapped behaviour. Player: {}, validActions: {}", player, validActions);
-            return getWrapBehaviour().requestAction(context, player, validActions);
-        }
-    }
+	public void requestActionAsync(ServerGameContext context, Player player, List<GameAction> validActions, Handler<GameAction> handler) {
+		logger.debug("Requesting action from network. Player: {}, validActions: {}", player, validActions);
+		context.networkRequestAction(player, validActions, handler::handle);
+	}
 
-    @Override
-    public void onGameOver(GameContext context, int playerId, int winningPlayerId) {
-        if (context instanceof ServerGameContext) {
-        	if (winningPlayerId != -1){
-                ((ServerGameContext) context).sendGameOver(context.getPlayer(playerId), context.getPlayer(winningPlayerId));
-        	} else {
-                ((ServerGameContext) context).sendGameOver(context.getPlayer(playerId), null);
-        	}
-        } else {
-            getWrapBehaviour().onGameOver(context, playerId, winningPlayerId);
-        }
-    }
 
-    public IBehaviour getWrapBehaviour() {
-        return wrapBehaviour;
-    }
+	@Override
+	public void onGameOver(GameContext context, int playerId, int winningPlayerId) {
+		getWrapBehaviour().onGameOver(context, playerId, winningPlayerId);
+	}
+
+	public void onGameOver(ServerGameContext context, int playerId, int winningPlayerId) {
+		if (winningPlayerId != -1) {
+			context.sendGameOver(context.getPlayer(playerId), context.getPlayer(winningPlayerId));
+		} else {
+			context.sendGameOver(context.getPlayer(playerId), null);
+		}
+	}
+
+	public IBehaviour getWrapBehaviour() {
+		return wrapBehaviour;
+	}
 }

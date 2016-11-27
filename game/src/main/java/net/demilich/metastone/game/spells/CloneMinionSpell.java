@@ -18,7 +18,7 @@ public class CloneMinionSpell extends Spell {
 		Minion template = (Minion) target;
 		Minion clone = template.clone();
 
-		context.getLogic().summon(player.getId(), clone);
+		context.getLogic().summon(player.getId(), clone, null, -1, false);
 	}
 
 }

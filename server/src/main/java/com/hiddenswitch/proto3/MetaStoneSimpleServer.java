@@ -3,24 +3,30 @@ package com.hiddenswitch.proto3;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import com.hiddenswitch.proto3.server.SocketServerSession;
+import com.hiddenswitch.proto3.server.SocketServer;
 
+import io.netty.channel.DefaultChannelId;
+import io.vertx.core.Vertx;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardParseException;
+import net.demilich.metastone.game.decks.DeckCatalogue;
 
 public class MetaStoneSimpleServer {
 
 	public static void main(String[] args) {
-		SocketServerSession ssc = new SocketServerSession();
+		DefaultChannelId.newInstance();
+		Vertx vertx = Vertx.vertx();
+		SocketServer ssc = new SocketServer();
 		try {
-			CardCatalogue.copyCardsFromResources();
-			CardCatalogue.loadCardsFromFilesystem();
-		} catch (IOException | URISyntaxException | CardParseException e) {
+			CardCatalogue.loadCardsFromPackage();
+			DeckCatalogue.loadDecksFromPackage();
+		} catch (IOException | URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (CardParseException e) {
+			e.printStackTrace();
 		}
-		new Thread(ssc).start();
-		System.out.println("working");
+		vertx.deployVerticle(ssc);
 	}
 
 }

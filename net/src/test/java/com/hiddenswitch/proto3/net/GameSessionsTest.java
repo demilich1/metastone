@@ -23,7 +23,7 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 	public void setUp() throws Exception {
 		super.setUp();
 		Logger root = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
-		root.setLevel(Level.ERROR);
+		root.setLevel(Level.DEBUG);
 		CardCatalogue.loadCardsFromPackage();
 	}
 

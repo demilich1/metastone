@@ -44,8 +44,8 @@ public class PutRandomMinionOnBoardSpell extends Spell {
 		if (cardLocation == CardLocation.DECK) {
 			player.getDeck().remove(minionCard);	
 		}
-		
-		boolean summonSuccess = context.getLogic().summon(player.getId(), minionCard.summon());
+
+		boolean summonSuccess = context.getLogic().summon(player.getId(), minionCard.summon(), null, -1, false);
 		
 		// re-add the card here if we removed it before
 		if (cardLocation == CardLocation.DECK) {

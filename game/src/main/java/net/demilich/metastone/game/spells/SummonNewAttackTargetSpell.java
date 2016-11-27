@@ -25,7 +25,7 @@ public class SummonNewAttackTargetSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		MinionCard minionCard = (MinionCard) SpellUtils.getCards(desc)[0];
 		Minion targetMinion = minionCard.summon();
-		context.getLogic().summon(player.getId(), targetMinion);
+		context.getLogic().summon(player.getId(), targetMinion, null, -1, false);
 		if (targetMinion.getOwner() > -1) {
 			context.getEnvironment().put(Environment.TARGET_OVERRIDE, targetMinion.getReference());
 		}

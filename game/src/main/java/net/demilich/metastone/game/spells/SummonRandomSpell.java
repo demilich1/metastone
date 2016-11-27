@@ -23,7 +23,7 @@ public class SummonRandomSpell extends Spell {
 		String[] minionCardsId = (String[]) desc.get(SpellArg.CARDS);
 		String randomMinionId = minionCardsId[context.getLogic().random(minionCardsId.length)];
 		MinionCard randomMinionCard = (MinionCard) CardCatalogue.getCardById(randomMinionId);
-		context.getLogic().summon(player.getId(), randomMinionCard.summon());
+		context.getLogic().summon(player.getId(), randomMinionCard.summon(), null, -1, false);
 	}
 
 }

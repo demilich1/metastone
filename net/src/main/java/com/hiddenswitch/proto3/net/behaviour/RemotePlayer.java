@@ -58,7 +58,7 @@ public class RemotePlayer implements IBehaviour {
 	}
 
 	/**
-	 * In our game, there is no mulligan, so remote players do not mulligan.
+	 * In our game, there is no networkRequestMulligan, so remote players do not networkRequestMulligan.
 	 * To support default play, we could add mulligan to the queue of game action messages.
 	 * @param context
 	 * @param player

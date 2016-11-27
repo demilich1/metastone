@@ -23,6 +23,7 @@ import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDeserializer;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
+import java.io.*;
 import java.lang.reflect.Type;
 import java.util.Map;
 
@@ -91,5 +92,20 @@ public class Serialization {
 
 	public static <T> T deserialize(String json, Type typeOfT) throws JsonSyntaxException {
 		return gson.fromJson(json, typeOfT);
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <T> T deserialize(byte[] buffer) throws IOException, ClassNotFoundException {
+		ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(buffer));
+		T result = (T) ois.readObject();
+		ois.close();
+		return result;
+	}
+
+	public static void serialize(Object obj, OutputStream output) throws IOException {
+		ObjectOutputStream oos = new ObjectOutputStream(output);
+		oos.writeObject(obj);
+		oos.flush();
+		oos.close();
 	}
 }

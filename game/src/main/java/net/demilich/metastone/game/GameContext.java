@@ -54,11 +54,9 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 	}
 
 	public GameContext(Player player1, Player player2, GameLogic logic, DeckFormat deckFormat) {
-		this.getPlayers()[PLAYER_1] = player1;
-		player1.setId(PLAYER_1);
+		this.setPlayer1(player1);
 		if (player2 != null) {
-			this.getPlayers()[PLAYER_2] = player2;
-			player2.setId(PLAYER_2);
+			this.setPlayer2(player2);
 		}
 		this.setLogic(logic);
 		this.setDeckFormat(deckFormat);
@@ -105,9 +103,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 
 	@Override
 	public void dispose() {
-		for (int i = 0; i < getPlayers().length; i++) {
-			getPlayers()[i] = null;
-		}
+		this.players = null;
 		getCardCostModifiers().clear();
 		triggerManager.dispose();
 		getEnvironment().clear();
@@ -306,19 +302,19 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 	}
 
 	public Player getPlayer(int index) {
-		return getPlayers()[index];
+		return getPlayers().get(index);
 	}
 
 	public Player getPlayer1() {
-		return getPlayers()[PLAYER_1];
+		return getPlayers().get(PLAYER_1);
 	}
 
 	public Player getPlayer2() {
-		return getPlayers()[PLAYER_2];
+		return getPlayers().get(PLAYER_2);
 	}
 
-	public Player[] getPlayers() {
-		return players;
+	public List<Player> getPlayers() {
+		return Collections.unmodifiableList(Arrays.asList(players));
 	}
 
 	public List<Actor> getRightMinions(Player player, EntityReference minionReference) {
@@ -345,8 +341,8 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 
 	public int getTotalMinionCount() {
 		int totalMinionCount = 0;
-		for (int i = 0; i < getPlayers().length; i++) {
-			totalMinionCount += getMinionCount(getPlayers()[i]);
+		for (Player player : getPlayers()) {
+			totalMinionCount += getMinionCount(player);
 		}
 		return totalMinionCount;
 	}
@@ -576,6 +572,9 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 
 	public void setPlayers(Player[] players) {
 		this.players = players;
+		for (int i = 0; i < players.length; i++) {
+			this.players[i].setId(i);
+		}
 	}
 
 	public int getActionsThisTurn() {
@@ -634,5 +633,20 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		builder.append("Winner: " + (getWinner() == null ? "tbd" : getWinner().getName()));
 
 		return builder.toString();
+	}
+
+	public void setPlayer1(Player player1) {
+		this.players[PLAYER_1] = player1;
+		player1.setId(PLAYER_1);
+	}
+
+	public void setPlayer2(Player player2) {
+		this.players[PLAYER_2] = player2;
+		player2.setId(PLAYER_2);
+	}
+
+	public void setPlayer(int id, Player player) {
+		this.players[id] = player;
+		player.setId(id);
 	}
 }

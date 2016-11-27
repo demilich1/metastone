@@ -38,7 +38,7 @@ public class SummonRandomNotOnBoardSpell extends Spell {
 
 		String randomMinionId = eligibleMinions.get(context.getLogic().random(eligibleMinions.size()));
 		MinionCard randomMinionCard = (MinionCard) CardCatalogue.getCardById(randomMinionId);
-		context.getLogic().summon(player.getId(), randomMinionCard.summon());
+		context.getLogic().summon(player.getId(), randomMinionCard.summon(), null, -1, false);
 	}
 
 }

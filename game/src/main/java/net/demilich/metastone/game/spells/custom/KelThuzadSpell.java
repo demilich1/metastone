@@ -33,7 +33,7 @@ public class KelThuzadSpell extends Spell {
 			Minion deadMinion = (Minion) deadEntity;
 			if (deadMinion.getAttributeValue(Attribute.DIED_ON_TURN) == currentTurn) {
 				MinionCard minionCard = (MinionCard) deadMinion.getSourceCard();
-				context.getLogic().summon(player.getId(), minionCard.summon());
+				context.getLogic().summon(player.getId(), minionCard.summon(), null, -1, false);
 			}
 		}
 	}

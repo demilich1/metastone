@@ -4,7 +4,7 @@ import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
 import org.apache.commons.lang3.RandomStringUtils;
 
 public abstract class GameSession {
-	private final String gameId;
+	protected final String gameId;
 
 	/**
 	 * Returns the information the client needs to know whom to connect to and what message to send.
@@ -27,15 +27,8 @@ public abstract class GameSession {
 		this.gameId = RandomStringUtils.randomAlphanumeric(30);
 	}
 
-	/**
-	 * Creates a new game session for the given two players. Once constructed, the session should
-	 * be connectible from the clients given the ClientConnectionConfiguration provided by the API.
-	 *
-	 * @param player1 The first player
-	 * @param player2 The second player
-	 */
-	public GameSession(PregamePlayerConfiguration player1, PregamePlayerConfiguration player2) {
-		this.gameId = RandomStringUtils.randomAlphanumeric(30);
+	public GameSession(String gameId) {
+		this.gameId = gameId;
 	}
 
 	/**

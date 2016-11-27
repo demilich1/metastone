@@ -16,6 +16,8 @@ import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.statistics.GameStatistics;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class Player extends Entity implements Serializable {
 	protected Hero hero;
@@ -184,4 +186,25 @@ public class Player extends Entity implements Serializable {
 		return "[PLAYER " + "id: " + getId() + ", name: " + getName() + ", hero: " + getHero() + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder()
+				.append(getId())
+				.append(getName())
+				.toHashCode();
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		if (other == null
+				|| !(other instanceof Player)) {
+			return false;
+		}
+
+		Player rhd = (Player) other;
+		return new EqualsBuilder()
+				.append(getId(), rhd.getId())
+				.append(getName(), rhd.getName())
+				.isEquals();
+	}
 }

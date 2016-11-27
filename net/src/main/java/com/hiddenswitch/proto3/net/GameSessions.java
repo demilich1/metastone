@@ -7,7 +7,9 @@ import com.hiddenswitch.proto3.net.models.DescribeGameSessionRequest;
 import com.hiddenswitch.proto3.net.models.DescribeGameSessionResponse;
 import com.hiddenswitch.proto3.server.GameSession;
 import com.hiddenswitch.proto3.server.ServerGameSession;
-import com.hiddenswitch.proto3.server.SocketServerSession;
+import com.hiddenswitch.proto3.server.SocketServer;
+import io.netty.channel.DefaultChannelId;
+import io.vertx.core.Vertx;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardParseException;
 import org.apache.commons.lang3.RandomUtils;
@@ -16,22 +18,23 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class GameSessions extends Service {
-	private SocketServerSession server;
+	private SocketServer server;
 	private Thread serverThread;
+	private Vertx vertx;
 
 	public GameSessions() throws IOException, URISyntaxException, CardParseException {
 		CardCatalogue.loadCardsFromPackage();
+		DefaultChannelId.newInstance();
 		int port = RandomUtils.nextInt(6200, 16200);
-		server = new SocketServerSession(port);
-		serverThread = new Thread(server);
-		serverThread.start();
+		vertx = Vertx.vertx();
+		server = new SocketServer(port);
+		vertx.deployVerticle(server);
 	}
 
 	public ServerGameContext getGameContext(String gameId) {
 		return getServer()
 				.getGames()
 				.get(gameId)
-				.getListener()
 				.getGameContext();
 	}
 
@@ -41,7 +44,7 @@ public class GameSessions extends Service {
 				.getOrDefault(gameId, null);
 	}
 
-	public SocketServerSession getServer() {
+	public SocketServer getServer() {
 		return server;
 	}
 

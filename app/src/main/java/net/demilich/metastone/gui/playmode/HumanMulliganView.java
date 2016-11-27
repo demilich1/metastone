@@ -68,7 +68,7 @@ public class HumanMulliganView extends BorderPane implements EventHandler<MouseE
 			cardWidget.addEventHandler(MouseEvent.MOUSE_CLICKED, this);
 			stackPane.getChildren().add(cardWidget);
 
-			ImageView mulliganIcon = new ImageView(IconFactory.getImageUrl("common/mulligan.png"));
+			ImageView mulliganIcon = new ImageView(IconFactory.getImageUrl("common/networkRequestMulligan.png"));
 			mulliganIcon.setMouseTransparent(true);
 			mulliganIcon.setVisible(false);
 			stackPane.getChildren().add(mulliganIcon);

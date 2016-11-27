@@ -21,7 +21,7 @@ public class AlarmOBotSpell extends ReturnMinionToHandSpell {
 		// before adding Alarm-o-bot to your hand!
 		MinionCard randomMinionCard = (MinionCard) player.getHand().getRandomOfType(CardType.MINION);
 		context.getLogic().removeCard(player.getId(), randomMinionCard);
-		context.getLogic().summon(player.getId(), randomMinionCard.summon());
+		context.getLogic().summon(player.getId(), randomMinionCard.summon(), null, -1, false);
 		// return Alarm-o-bot to hand (Now it's safe!)
 		super.onCast(context, player, desc, source, target);
 	}
