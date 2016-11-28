@@ -4,7 +4,6 @@ import java.util.Map;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 
@@ -20,7 +19,7 @@ public class MinionSummonValueProvider extends ValueProvider {
 		int count = 0;
 		EntityFilter filter = (EntityFilter) desc.get(ValueProviderArg.FILTER);
 		for (String minionId : minionIds.keySet()) {
-			Entity entity = CardCatalogue.getCardById(minionId);
+			Entity entity = context.getCardById(minionId);
 			if (filter == null || filter.matches(context, player, entity)) {
 				count += minionIds.get(minionId);
 			}

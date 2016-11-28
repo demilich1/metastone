@@ -25,14 +25,16 @@ import net.demilich.metastone.game.events.CardRevealedEvent;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.CardFilter;
+import net.demilich.metastone.game.spells.desc.source.CardSource;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class CastRandomSpellSpell extends Spell {
 	
 	Logger logger = LoggerFactory.getLogger(CastRandomSpellSpell.class);
 
-	public static SpellDesc create() {
+	public static SpellDesc create(int value) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(CastRandomSpellSpell.class);
+		arguments.put(SpellArg.VALUE, value);
 		return new SpellDesc(arguments);
 	}
 
@@ -41,6 +43,10 @@ public class CastRandomSpellSpell extends Spell {
 		// This spell is crazy.
 		CardFilter filter = (CardFilter) desc.get(SpellArg.CARD_FILTER);
 		CardCollection spells = CardCatalogue.query(context.getDeckFormat(), CardType.SPELL);
+		CardSource cardSource = (CardSource) desc.get(SpellArg.CARD_SOURCE);
+		if (cardSource != null) {
+			spells = cardSource.getCards(context, player);
+		}
 		CardCollection filteredSpells = new CardCollection();
 		for (Card spell : spells) {
 			if (filter == null || filter.matches(context, player, spell)) {

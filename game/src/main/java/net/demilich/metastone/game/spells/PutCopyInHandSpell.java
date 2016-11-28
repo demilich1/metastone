@@ -19,7 +19,7 @@ public class PutCopyInHandSpell extends Spell {
 
 	public static SpellDesc create(EntityReference target, int amount) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(PutCopyInHandSpell.class);
-		arguments.put(SpellArg.VALUE, amount);
+		arguments.put(SpellArg.HOW_MANY, amount);
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
 	}

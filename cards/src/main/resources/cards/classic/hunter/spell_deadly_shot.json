@@ -12,6 +12,12 @@
 		"target": "ENEMY_MINIONS",
 		"randomTarget": true
 	},
+	"condition": {
+		"class": "MinionCountCondition",
+		"targetPlayer": "OPPONENT",
+		"operation": "GREATER",
+		"value": 0
+	},
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

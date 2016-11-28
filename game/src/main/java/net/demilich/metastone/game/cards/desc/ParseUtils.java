@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.PlayerAttribute;
 import net.demilich.metastone.game.actions.ActionType;
+import net.demilich.metastone.game.cards.CardDescType;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.EntityType;
@@ -21,6 +22,7 @@ import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.spells.desc.filter.FilterDesc;
 import net.demilich.metastone.game.spells.desc.filter.Operation;
 import net.demilich.metastone.game.spells.desc.manamodifier.CardCostModifierDesc;
+import net.demilich.metastone.game.spells.desc.source.SourceDesc;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDeserializer;
 import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
@@ -28,6 +30,7 @@ import net.demilich.metastone.game.spells.desc.valueprovider.AlgebraicOperation;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderDesc;
 import net.demilich.metastone.game.targeting.CardLocation;
 import net.demilich.metastone.game.targeting.EntityReference;
+import net.demilich.metastone.game.targeting.TargetSelection;
 import net.demilich.metastone.game.targeting.TargetType;
 
 public class ParseUtils {
@@ -35,6 +38,7 @@ public class ParseUtils {
 	private static SpellDeserializer spellParser = new SpellDeserializer();
 	private static ValueProviderDeserializer valueProviderParser = new ValueProviderDeserializer();
 	private static FilterDeserializer filterParser = new FilterDeserializer();
+	private static SourceDeserializer sourceParser = new SourceDeserializer();
 	private static ConditionDeserializer conditionParser = new ConditionDeserializer();
 	private static EventTriggerDeserializer triggerParser = new EventTriggerDeserializer();
 	private static CardCostModifierDeserializer manaModifierParser = new CardCostModifierDeserializer();
@@ -56,6 +60,8 @@ public class ParseUtils {
 			}
 			return array;
 		}
+		case TARGET_SELECTION:
+			return Enum.valueOf(TargetSelection.class, entry.getAsString());
 		case TARGET_REFERENCE:
 			return parseEntityReference(entry.getAsString());
 		case TARGET_PLAYER:
@@ -102,6 +108,8 @@ public class ParseUtils {
 			return Enum.valueOf(ActionType.class, entry.getAsString());
 		case TARGET_TYPE:
 			return Enum.valueOf(TargetType.class, entry.getAsString());
+		case CARD_DESC_TYPE:
+			return Enum.valueOf(CardDescType.class, entry.getAsString());
 		case ALGEBRAIC_OPERATION:
 			return Enum.valueOf(AlgebraicOperation.class, entry.getAsString());
 		case VALUE:
@@ -116,6 +124,10 @@ public class ParseUtils {
 		case ENTITY_FILTER: {
 			FilterDesc filterDesc = filterParser.deserialize(entry, FilterDesc.class, null);
 			return filterDesc.create();
+		}
+		case CARD_SOURCE: {
+			SourceDesc sourceDesc = sourceParser.deserialize(entry, SourceDesc.class, null);
+			return sourceDesc.create();
 		}
 		case ENTITY_FILTER_ARRAY: {
 			JsonArray jsonArray = entry.getAsJsonArray();

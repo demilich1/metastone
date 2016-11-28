@@ -98,8 +98,8 @@ public class HearthPwnImporter implements IDeckImporter {
 				Card card = CardCatalogue.getCardByName(cardName);
 				if (card != null) {
 					cards.add(card);
-					if (card.getClassRestriction() != HeroClass.ANY) {
-						heroClass = card.getClassRestriction();
+					if (card.getHeroClass() != HeroClass.ANY) {
+						heroClass = card.getHeroClass();
 					}
 				} else {
 					logger.error("Card with name {} could not be found", cardName);

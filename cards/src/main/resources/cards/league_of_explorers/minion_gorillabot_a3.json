@@ -24,8 +24,11 @@
 			}
 		},
 		"condition": {
-			"class": "RaceOnBoardCondition",
-			"race": "MECH"
+			"class": "MinionOnBoardCondition",
+			"cardFilter": {
+				"class": "RaceFilter",
+				"race": "MECH"
+			}
 		}
 	},
 	"attributes": {

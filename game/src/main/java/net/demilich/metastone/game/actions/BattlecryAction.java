@@ -36,7 +36,7 @@ public class BattlecryAction extends GameAction {
 		if (getCondition() == null) {
 			return true;
 		}
-		return getCondition().isFulfilled(context, player, null);
+		return getCondition().isFulfilled(context, player, null, null);
 	}
 
 	@Override

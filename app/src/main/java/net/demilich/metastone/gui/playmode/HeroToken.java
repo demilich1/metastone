@@ -123,7 +123,7 @@ public class HeroToken extends GameToken {
 
 	private void updateSecrets(Player player) {
 		secretsAnchor.getChildren().clear();
-		HashSet<String> secretsCopy = player.getSecrets();
+		HashSet<String> secretsCopy = new HashSet<String>(player.getSecrets());
 		for (String secretId : secretsCopy) {
 			ImageView secretIcon = new ImageView(IconFactory.getImageUrl("common/secret.png"));
 			secretsAnchor.getChildren().add(secretIcon);
@@ -148,12 +148,11 @@ public class HeroToken extends GameToken {
 		weaponPane.setVisible(hasWeapon);
 		if (hasWeapon) {
 			weaponNameLabel.setText(weapon.getName());
-			setScoreValue(weaponAttackAnchor, weapon.getWeaponDamage(), weapon.getAttributeValue(Attribute.BASE_ATTACK));
-			setScoreValue(weaponDurabilityAnchor, weapon.getDurability(), weapon.getAttributeValue(Attribute.BASE_HP), weapon.getAttributeValue(Attribute.MAX_HP));
-			Card card = CardCatalogue.getCardById(weapon.getSourceCard().getCardId());
+			setScoreValue(weaponAttackAnchor, weapon.getWeaponDamage(), weapon.getBaseAttack());
+			setScoreValue(weaponDurabilityAnchor, weapon.getDurability(), weapon.getBaseDurability(), weapon.getMaxDurability());
 			Tooltip tooltip = new Tooltip();
 			CardTooltip tooltipContent = new CardTooltip();
-			tooltipContent.setCard(card);
+			tooltipContent.setCard(weapon.getSourceCard());
 			tooltip.setGraphic(tooltipContent);
 			Tooltip.install(weaponPane, tooltip);
 		}

@@ -1,1 +1,31 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "Snoker", "heroClass": "MAGE", "description": "Battlecry: If you have a Mech, deal 4 damage randomly split among all enemies.", "fileFormatVersion": 1, "rarity": "RARE", "baseHp": 4.0, "baseManaCost": 5.0, "attributes": {"BATTLECRY": true}, "battlecry": {"spell": {"howMany": 4, "class": "MissilesSpell", "target": "ENEMY_CHARACTERS"}, "condition": {"race": "MECH", "class": "RaceOnBoardCondition"}}, "type": "MINION", "id": "Snoker", "baseAttack": 4.0}
+{
+  "collectible": true,
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Snoker",
+  "heroClass": "MAGE",
+  "description": "Battlecry: If you have a Mech, deal 4 damage randomly split among all enemies.",
+  "fileFormatVersion": 1,
+  "rarity": "RARE",
+  "baseHp": 4.0,
+  "baseManaCost": 5.0,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "battlecry": {
+    "spell": {
+      "howMany": 4,
+      "class": "MissilesSpell",
+      "target": "ENEMY_CHARACTERS"
+    },
+    "condition": {
+      "class": "MinionOnBoardCondition",
+      "cardfilter": {
+        "class": "RaceFilter",
+        "race": "MECH"
+      }
+    }
+  },
+  "type": "MINION",
+  "id": "Snoker",
+  "baseAttack": 4.0
+}

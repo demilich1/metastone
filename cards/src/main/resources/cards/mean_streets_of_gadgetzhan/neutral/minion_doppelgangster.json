@@ -1,0 +1,23 @@
+{
+	"name": "Doppelgangster",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "Battlecry: Summon 2 copies of this minion.",
+	"battlecry": {
+		"spell": {
+			"class": "SummonCopySpell",
+			"target": "SELF",
+			"value": 2
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZHAN",
+	"fileFormatVersion": 1
+}

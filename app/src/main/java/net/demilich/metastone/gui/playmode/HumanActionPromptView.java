@@ -9,6 +9,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
@@ -28,6 +29,7 @@ import net.demilich.metastone.game.behaviour.human.HumanTargetOptions;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.targeting.TargetSelection;
+import net.demilich.metastone.gui.cards.CardTooltip;
 
 public class HumanActionPromptView extends VBox {
 
@@ -103,6 +105,43 @@ public class HumanActionPromptView extends VBox {
 		button.setWrapText(true);
 		button.setPrefWidth(200);
 		button.setTextAlignment(TextAlignment.CENTER);
+		switch (actionGroup.getPrototype().getActionType()) {
+		case BATTLECRY:
+			break;
+		case DISCOVER:
+			CardTooltip tooltipContent = new CardTooltip();
+			DiscoverAction discover = (DiscoverAction) actionGroup.getPrototype();
+			Card card = discover.getCard();
+			if (card != null) {
+				tooltipContent.setCard(card);
+				Tooltip tooltip = new Tooltip();
+				tooltip.setGraphic(tooltipContent);
+				Tooltip.install(button, tooltip);
+			} else {
+				tooltipContent.setNonCard(discover.getName(), discover.getDescription());
+				Tooltip tooltip = new Tooltip();
+				tooltip.setGraphic(tooltipContent);
+				Tooltip.install(button, tooltip);
+			}
+			break;
+		case END_TURN:
+			break;
+		case EQUIP_WEAPON:
+			break;
+		case HERO_POWER:
+			break;
+		case PHYSICAL_ATTACK:
+			break;
+		case SPELL:
+			break;
+		case SUMMON:
+			break;
+		case SYSTEM:
+			break;
+		default:
+			break;
+		
+		}
 		// only one action with no target selection or summon with no other
 		// minion on board
 		if (actionGroup.getActionsInGroup().size() == 1 && (actionGroup.getPrototype().getTargetRequirement() == TargetSelection.NONE

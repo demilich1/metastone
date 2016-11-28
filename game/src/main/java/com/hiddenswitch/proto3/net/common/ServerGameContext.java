@@ -75,6 +75,7 @@ public class ServerGameContext extends GameContext {
 		throw new UnsupportedOperationException("ServerGameContext::play should not be called. Use ::networkPlay instead.");
 	}
 
+	@Suspendable
 	public void networkPlay() {
 		logger.debug("Game starts: " + getPlayer1().getName() + " VS. " + getPlayer2().getName());
 		int startingPlayerId = getLogic().determineBeginner(PLAYER_1, PLAYER_2);

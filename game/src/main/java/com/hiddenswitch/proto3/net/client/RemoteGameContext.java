@@ -17,7 +17,6 @@ import net.demilich.metastone.game.TurnState;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardSet;
-import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.logic.GameLogic;
@@ -70,11 +69,6 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 
 	@Override
 	protected boolean acceptAction(GameAction nextAction) {
-		throw new RuntimeException("should not be called");
-	}
-
-	@Override
-	public void addCardCostModifier(CardCostModifier cardCostModifier) {
 		throw new RuntimeException("should not be called");
 	}
 

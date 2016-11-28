@@ -12,7 +12,7 @@ public class HeroStringConverter extends StringConverter<HeroCard> {
 
 	@Override
 	public String toString(HeroCard hero) {
-		return hero.getClassRestriction().toString();
+		return hero.getHeroClass().toString();
 	}
 
 }

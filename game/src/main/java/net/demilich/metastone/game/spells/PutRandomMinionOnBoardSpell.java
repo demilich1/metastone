@@ -45,14 +45,16 @@ public class PutRandomMinionOnBoardSpell extends Spell {
 		// we need to remove the card temporarily here, because there are card interactions like Starving Buzzard + Desert Camel
 		// which could result in the card being drawn while a minion is summoned
 		if (cardLocation == CardLocation.DECK) {
-			player.getDeck().remove(minionCard);	
+			player.getDeck().remove(minionCard);
+			player.getSetAsideZone().add(minionCard);
 		}
 
 		boolean summonSuccess = context.getLogic().summon(player.getId(), minionCard.summon(), null, -1, false);
 		
 		// re-add the card here if we removed it before
 		if (cardLocation == CardLocation.DECK) {
-			player.getDeck().add(minionCard);	
+			player.getSetAsideZone().remove(minionCard);
+			player.getDeck().add(minionCard);
 		}
 		
 		if (summonSuccess) {

@@ -72,7 +72,7 @@ public abstract class GameEventTrigger extends CustomCloneable {
 		}
 		Condition condition = (Condition) desc.get(EventTriggerArg.QUEUE_CONDITION);
 		Player owner = event.getGameContext().getPlayer(getOwner());
-		if (condition != null && !condition.isFulfilled(event.getGameContext(), owner, event.getEventTarget())) {
+		if (condition != null && !condition.isFulfilled(event.getGameContext(), owner, event.getEventSource(), event.getEventTarget())) {
 			return false;
 		}
 		return fire(event, host);
@@ -96,7 +96,7 @@ public abstract class GameEventTrigger extends CustomCloneable {
 	public boolean canFireCondition(GameEvent event) {
 		Condition condition = (Condition) desc.get(EventTriggerArg.FIRE_CONDITION);
 		Player owner = event.getGameContext().getPlayer(getOwner());
-		if (condition != null && !condition.isFulfilled(event.getGameContext(), owner, event.getEventTarget())) {
+		if (condition != null && !condition.isFulfilled(event.getGameContext(), owner, event.getEventSource(), event.getEventTarget())) {
 			return false;
 		}
 		return true;

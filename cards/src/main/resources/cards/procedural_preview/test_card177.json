@@ -1,1 +1,32 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "Vade Tome", "heroClass": "DRUID", "description": "Taunt. Battlecry: If you have a Beast, transform this minion into a 7/7.", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 3.0, "baseManaCost": 3.0, "attributes": {"TAUNT": true, "BATTLECRY": true}, "battlecry": {"spell": {"class": "TransformMinionSpell", "card": "token_cobra_form", "target": "SELF"}, "condition": {"race": "BEAST", "class": "RaceOnBoardCondition"}}, "type": "MINION", "id": "Vade Tome", "baseAttack": 3.0}
+{
+  "collectible": true,
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Vade Tome",
+  "heroClass": "DRUID",
+  "description": "Taunt. Battlecry: If you have a Beast, transform this minion into a 7/7.",
+  "fileFormatVersion": 1,
+  "rarity": "COMMON",
+  "baseHp": 3.0,
+  "baseManaCost": 3.0,
+  "attributes": {
+    "TAUNT": true,
+    "BATTLECRY": true
+  },
+  "battlecry": {
+    "spell": {
+      "class": "TransformMinionSpell",
+      "card": "token_cobra_form",
+      "target": "SELF"
+    },
+    "condition": {
+      "class": "MinionOnBoardCondition",
+      "cardfilter": {
+        "class": "RaceFilter",
+        "race": "BEAST"
+      }
+    }
+  },
+  "type": "MINION",
+  "id": "Vade Tome",
+  "baseAttack": 3.0
+}

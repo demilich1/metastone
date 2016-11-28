@@ -1,36 +1,20 @@
 package net.demilich.metastone.game.logic;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.ThreadLocalRandom;
-
-import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.fibers.Suspendable;
 import com.google.gson.annotations.Expose;
 import com.hiddenswitch.proto3.net.common.NullResult;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
-import net.demilich.metastone.game.actions.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.cards.CardCollection;
-import net.demilich.metastone.game.cards.CardType;
-import net.demilich.metastone.game.cards.SecretCard;
-import net.demilich.metastone.game.cards.SpellCard;
+import net.demilich.metastone.game.actions.ActionType;
+import net.demilich.metastone.game.actions.BattlecryAction;
+import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.actions.PlaySpellCardAction;
+import net.demilich.metastone.game.cards.*;
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
@@ -39,34 +23,7 @@ import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.weapons.Weapon;
-import net.demilich.metastone.game.events.AfterPhysicalAttackEvent;
-import net.demilich.metastone.game.events.AfterSpellCastedEvent;
-import net.demilich.metastone.game.events.ArmorGainedEvent;
-import net.demilich.metastone.game.events.BoardChangedEvent;
-import net.demilich.metastone.game.events.CardPlayedEvent;
-import net.demilich.metastone.game.events.DamageEvent;
-import net.demilich.metastone.game.events.DiscardEvent;
-import net.demilich.metastone.game.events.DrawCardEvent;
-import net.demilich.metastone.game.events.EnrageChangedEvent;
-import net.demilich.metastone.game.events.GameEvent;
-import net.demilich.metastone.game.events.GameStartEvent;
-import net.demilich.metastone.game.events.HealEvent;
-import net.demilich.metastone.game.events.HeroPowerUsedEvent;
-import net.demilich.metastone.game.events.JoustEvent;
-import net.demilich.metastone.game.events.KillEvent;
-import net.demilich.metastone.game.events.OverloadEvent;
-import net.demilich.metastone.game.events.PhysicalAttackEvent;
-import net.demilich.metastone.game.events.PreDamageEvent;
-import net.demilich.metastone.game.events.SecretPlayedEvent;
-import net.demilich.metastone.game.events.SecretRevealedEvent;
-import net.demilich.metastone.game.events.SilenceEvent;
-import net.demilich.metastone.game.events.SpellCastedEvent;
-import net.demilich.metastone.game.events.SummonEvent;
-import net.demilich.metastone.game.events.TargetAcquisitionEvent;
-import net.demilich.metastone.game.events.TurnEndEvent;
-import net.demilich.metastone.game.events.TurnStartEvent;
-import net.demilich.metastone.game.events.WeaponDestroyedEvent;
-import net.demilich.metastone.game.events.WeaponEquippedEvent;
+import net.demilich.metastone.game.events.*;
 import net.demilich.metastone.game.heroes.powers.HeroPower;
 import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.SpellUtils;
@@ -77,15 +34,15 @@ import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
 import net.demilich.metastone.game.spells.trigger.IGameEventListener;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 import net.demilich.metastone.game.spells.trigger.secrets.Secret;
-import net.demilich.metastone.game.targeting.CardLocation;
-import net.demilich.metastone.game.targeting.CardReference;
-import net.demilich.metastone.game.targeting.EntityReference;
-import net.demilich.metastone.game.targeting.IdFactory;
-import net.demilich.metastone.game.targeting.TargetSelection;
+import net.demilich.metastone.game.targeting.*;
 import net.demilich.metastone.utils.MathUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.Serializable;
+import java.util.*;
 
 public class GameLogic implements Cloneable, Serializable {
-
 	public static Logger logger = LoggerFactory.getLogger(GameLogic.class);
 
 	public static final int MAX_PLAYERS = 2;
@@ -112,6 +69,7 @@ public class GameLogic implements Cloneable, Serializable {
 	private final ActionLogic actionLogic = new ActionLogic();
 	private final SpellFactory spellFactory = new SpellFactory();
 	protected final IdFactory idFactory;
+	private final Random random = new Random();
 
 	@Expose(serialize = false, deserialize = false)
 	protected GameContext context;
@@ -133,6 +91,7 @@ public class GameLogic implements Cloneable, Serializable {
 	}
 
 	public void addGameEventListener(Player player, IGameEventListener gameEventListener, Entity target) {
+		debugHistory.add("Player " + player.getId() + " has set event listener " + gameEventListener.getClass().getName() + " from entity " + target.getName() + "[Reference ID: " + target.getId() + "]");
 		gameEventListener.setHost(target);
 		if (!gameEventListener.hasPersistentOwner() || gameEventListener.getOwner() == -1) {
 			gameEventListener.setOwner(player.getId());
@@ -507,7 +466,7 @@ public class GameLogic implements Cloneable, Serializable {
 	}
 
 	public int determineBeginner(int... playerIds) {
-		return ThreadLocalRandom.current().nextBoolean() ? playerIds[0] : playerIds[1];
+		return getRandom().nextBoolean() ? playerIds[0] : playerIds[1];
 	}
 
 	public void discardCard(Player player, Card card) {
@@ -560,6 +519,7 @@ public class GameLogic implements Cloneable, Serializable {
 
 		Hero hero = player.getHero();
 		hero.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
+		hero.removeAttribute(Attribute.HERO_POWER_USAGES);
 		handleFrozen(hero);
 		for (Minion minion : player.getMinions()) {
 			minion.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
@@ -696,6 +656,10 @@ public class GameLogic implements Cloneable, Serializable {
 		if (armor > 0) {
 			context.fireGameEvent(new ArmorGainedEvent(context, player.getHero()));
 		}
+	}
+
+	public String generateCardID() {
+		return "temp_card_name_" + idFactory.generateId();
 	}
 
 	public Actor getAnotherRandomTarget(Player player, Actor attacker, Actor originalTarget, EntityReference potentialTargets) {
@@ -1189,6 +1153,7 @@ public class GameLogic implements Cloneable, Serializable {
 
 	@Suspendable
 	public void performGameAction(int playerId, GameAction action) {
+		debugHistory.add(action.toString());
 		if (playerId != context.getActivePlayerId()) {
 			logger.warn("Player {} tries to perform an action, but it is not his turn!", context.getPlayer(playerId).getName());
 		}
@@ -1265,7 +1230,7 @@ public class GameLogic implements Cloneable, Serializable {
 
 	public void processTargetModifiers(Player player, GameAction action) {
 		HeroPower heroPower = player.getHero().getHeroPower();
-		if (heroPower.getClassRestriction() != HeroClass.HUNTER) {
+		if (heroPower.getHeroClass() != HeroClass.HUNTER) {
 			return;
 		}
 		if (action.getActionType() == ActionType.HERO_POWER && hasAttribute(player, Attribute.HERO_POWER_CAN_TARGET_MINIONS)) {
@@ -1281,11 +1246,11 @@ public class GameLogic implements Cloneable, Serializable {
 	 * @return Random number between 0 and max (exclusive)
 	 */
 	public int random(int max) {
-		return ThreadLocalRandom.current().nextInt(max);
+		return getRandom().nextInt(max);
 	}
 
 	public boolean randomBool() {
-		return ThreadLocalRandom.current().nextBoolean();
+		return getRandom().nextBoolean();
 	}
 
 	public void receiveCard(int playerId, Card card) {
@@ -1361,9 +1326,7 @@ public class GameLogic implements Cloneable, Serializable {
 		Player player = context.getPlayer(playerID);
 		log("Card {} has been moved from the DECK to the GRAVEYARD", card);
 		card.setLocation(CardLocation.GRAVEYARD);
-		if (card.getAttribute(Attribute.PASSIVE_TRIGGER) != null) {
-			removeSpelltriggers(card);
-		}
+		removeSpelltriggers(card);
 		player.getDeck().remove(card);
 		player.getGraveyard().add(card);
 	}
@@ -1447,6 +1410,11 @@ public class GameLogic implements Cloneable, Serializable {
 
 		newCard.setOwner(playerId);
 		CardCollection deck = player.getDeck();
+
+		if (newCard.getAttribute(Attribute.DECK_TRIGGER) != null) {
+			TriggerDesc triggerDesc = (TriggerDesc) newCard.getAttribute(Attribute.DECK_TRIGGER);
+			addGameEventListener(player, triggerDesc.create(), newCard);
+		}
 
 		log("{} replaces card {} with card {}", player.getName(), oldCard, newCard);
 		deck.replace(oldCard, newCard);
@@ -1552,6 +1520,11 @@ public class GameLogic implements Cloneable, Serializable {
 
 		if (player.getDeck().getCount() < MAX_DECK_SIZE) {
 			player.getDeck().addRandomly(card);
+
+			if (card.getAttribute(Attribute.DECK_TRIGGER) != null) {
+				TriggerDesc triggerDesc = (TriggerDesc) card.getAttribute(Attribute.DECK_TRIGGER);
+				addGameEventListener(player, triggerDesc.create(), card);
+			}
 			log("Card {} has been shuffled to {}'s deck", card, player.getName());
 		}
 	}
@@ -1805,6 +1778,10 @@ public class GameLogic implements Cloneable, Serializable {
 		if (summoned != null) {
 			summoned.handle(new SummonResult(result));
 		}
+	}
+
+	public Random getRandom() {
+		return random;
 	}
 
 	protected class FirstHand {

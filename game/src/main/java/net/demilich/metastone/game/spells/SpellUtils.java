@@ -79,7 +79,7 @@ public class SpellUtils {
 		return card;
 	}
 
-	public static Card[] getCards(SpellDesc spell) {
+	public static Card[] getCards(GameContext context, SpellDesc spell) {
 		String[] cardNames = null;
 		if (spell.contains(SpellArg.CARDS)) {
 			cardNames = (String[]) spell.get(SpellArg.CARDS);
@@ -89,7 +89,7 @@ public class SpellUtils {
 		}
 		Card[] cards = new Card[cardNames.length];
 		for (int i = 0; i < cards.length; i++) {
-			cards[i] = CardCatalogue.getCardById(cardNames[i]);
+			cards[i] = context.getCardById(cardNames[i]);
 		}
 		return cards;
 	}
@@ -107,10 +107,24 @@ public class SpellUtils {
 		for (Card card : cards) {
 			SpellDesc spellClone = spell.addArg(SpellArg.CARD, card.getCardId());
 			DiscoverAction discover = DiscoverAction.createDiscover(spellClone);
+			discover.setCard(card);
 			discover.setActionSuffix(card.getName());
 			discoverActions.add(discover);
 		}
 		return discoverActions;
+	}
+
+	public static DiscoverAction getSpellDiscover(GameContext context, Player player, SpellDesc desc, List<SpellDesc> spells) {
+		List<GameAction> discoverActions = new ArrayList<>();
+		for (SpellDesc spell : spells) {
+			DiscoverAction discover = DiscoverAction.createDiscover(spell);
+			discover.setName(spell.getString(SpellArg.NAME));
+			discover.setDescription(spell.getString(SpellArg.DESCRIPTION));
+			discover.setActionSuffix((String) spell.get(SpellArg.NAME));
+			discoverActions.add(discover);
+		}
+		
+		return (DiscoverAction) player.getBehaviour().requestAction(context, player, discoverActions);
 	}
 
 	public static Card getRandomCard(CardCollection source, Predicate<Card> filter) {

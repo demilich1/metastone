@@ -5,6 +5,7 @@ import com.google.gson.annotations.Expose;
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
 import net.demilich.metastone.game.decks.DeckFormat;
@@ -51,6 +52,8 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 
 	private boolean ignoreEvents;
 
+	private CardCollection tempCards = new CardCollection();
+
 	public GameContext() {
 	}
 
@@ -61,6 +64,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		}
 		this.setLogic(logic);
 		this.setDeckFormat(deckFormat);
+		tempCards.removeAll();
 	}
 
 
@@ -68,8 +72,8 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		return true;
 	}
 
-	public void addCardCostModifier(CardCostModifier cardCostModifier) {
-		getCardCostModifiers().add(cardCostModifier);
+	public void addTempCard(Card card) {
+		tempCards.add(card);
 	}
 
 	public void addTrigger(IGameEventListener trigger) {
@@ -84,6 +88,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		Player player2Clone = getPlayer2().clone();
 		// player2Clone.getDeck().shuffle();
 		GameContext clone = new GameContext(player1Clone, player2Clone, logicClone, getDeckFormat());
+		clone.tempCards = tempCards.clone();
 		clone.triggerManager = triggerManager.clone();
 		clone.activePlayer = activePlayer;
 		clone.setTurn(getTurn());
@@ -213,6 +218,18 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 			}
 		}
 		return -1;
+	}
+
+	public Card getCardById(String cardId) {
+		Card card = CardCatalogue.getCardById(cardId);
+		if (card == null) {
+			for (Card tempCard : tempCards) {
+				if (tempCard.getCardId().equalsIgnoreCase(cardId)) {
+					return tempCard.clone();
+				}
+			}
+		}
+		return card;
 	}
 
 	public List<CardCostModifier> getCardCostModifiers() {

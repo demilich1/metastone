@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -28,7 +27,7 @@ public class TransformCardSpell extends Spell {
 		}
 
 		String cardId = (String) desc.get(SpellArg.CARD);
-		Card newCard = CardCatalogue.getCardById(cardId);
+		Card newCard = context.getCardById(cardId);
 		context.getLogic().receiveCard(player.getId(), newCard);
 	}
 

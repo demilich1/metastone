@@ -8,11 +8,11 @@
 	"heroClass": "ANY",
 	"rarity": "RARE",
 	"race": "MURLOC",
-	"description": "Battlecry: Give ALL other Murlocs +2 Health.",
+	"description": "Battlecry: Give your other Murlocs +2 Health.",
 	"battlecry": {
 		"spell": {
 			"class": "BuffSpell",
-			"target": "ALL_OTHER_MINIONS",
+			"target": "OTHER_FRIENDLY_MINIONS",
 			"hpBonus": 2,
 			"filter": {
 				"class": "RaceFilter",

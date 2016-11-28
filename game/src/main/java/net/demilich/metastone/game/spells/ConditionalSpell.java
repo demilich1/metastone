@@ -15,7 +15,7 @@ public class ConditionalSpell extends Spell {
 		Condition condition = (Condition) desc.get(SpellArg.CONDITION);
 		if (condition != null) {
 			SpellDesc spell = (SpellDesc) desc.get(SpellArg.SPELL);
-			if (condition.isFulfilled(context, player, target)) {
+			if (condition.isFulfilled(context, player, source, target)) {
 				SpellUtils.castChildSpell(context, player, spell, source, target);
 			}
 			return;
@@ -25,7 +25,7 @@ public class ConditionalSpell extends Spell {
 		Condition[] conditions = (Condition[]) desc.get(SpellArg.CONDITIONS);
 		SpellDesc[] spells = (SpellDesc[]) desc.get(SpellArg.SPELLS);
 		for (int i = 0; i < conditions.length; i++) {
-			if (conditions[i].isFulfilled(context, player, target)) {
+			if (conditions[i].isFulfilled(context, player, source, target)) {
 				SpellUtils.castChildSpell(context, player, spells[i], source, target);	
 			}
 		}

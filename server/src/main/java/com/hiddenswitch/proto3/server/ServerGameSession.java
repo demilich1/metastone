@@ -35,6 +35,7 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	}
 
 	@Override
+	@Suspendable
 	public void onPlayerConnected(Player player) {
 		if (getPlayer1() == null) {
 			setPlayer1(player);

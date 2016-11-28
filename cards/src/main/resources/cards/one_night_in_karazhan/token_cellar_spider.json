@@ -5,7 +5,7 @@
 	"type": "MINION",
 	"baseAttack": 1,
 	"baseHp": 3,
-	"heroClass": "BEAST",
+	"heroClass": "ANY",
 	"rarity": "COMMON",
 	"race": "BEAST",
 	"description": "",

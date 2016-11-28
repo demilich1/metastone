@@ -88,6 +88,9 @@ public class CardCatalogue {
     public static CardCollection query(DeckFormat deckFormat, CardType cardType, Rarity rarity, HeroClass heroClass) {
         return query(deckFormat, cardType, rarity, heroClass, (Attribute) null);
     }
+	public static CardCollection query(DeckFormat deckFormat, HeroClass heroClass, HeroClass actualHeroClass) {
+		return query(deckFormat, (CardType) null, (Rarity) null, heroClass, (Attribute) null, actualHeroClass);
+	}
 
     public static CardCollection query(DeckFormat deckFormat, CardType cardType, Rarity rarity, HeroClass heroClass, Attribute tag) {
         CardCollection result = new CardCollection();
@@ -108,7 +111,7 @@ public class CardCatalogue {
             if (rarity != null && !card.getRarity().isRarity(rarity)) {
                 continue;
             }
-            if (heroClass != null && card.getClassRestriction() != heroClass) {
+            if (heroClass != null && !card.hasHeroClass(heroClass)) {
                 continue;
             }
             if (tag != null && !card.hasAttribute(tag)) {
@@ -120,18 +123,42 @@ public class CardCatalogue {
         return result;
     }
 
-    public static CardCollection query(DeckFormat deckFormat, Predicate<Card> filter) {
-        CardCollection result = new CardCollection();
-        for (Card card : cards) {
-            if (deckFormat != null && !deckFormat.isInFormat(card)) {
-                continue;
-            }
-            if (filter.test(card)) {
-                result.add(card);
-            }
-        }
-        return result;
-    }
+	public static CardCollection query(DeckFormat deckFormat, CardType cardType, Rarity rarity, HeroClass heroClass, Attribute tag, HeroClass actualHeroClass) {
+		CardCollection result = new CardCollection();
+		for (Card card : cards) {
+			if (!deckFormat.isInFormat(card)) {
+				continue;
+			}
+			if (!card.isCollectible()) {
+				continue;
+			}
+			if (cardType != null && !card.getCardType().isCardType(cardType)) {
+				continue;
+			}
+			// per default, do not include heroes or hero powers
+			if (card.getCardType().isCardType(CardType.HERO_POWER) || card.getCardType().isCardType(CardType.HERO)) {
+				continue;
+			}
+			if (rarity != null && !card.getRarity().isRarity(rarity)) {
+				continue;
+			}
+			if (actualHeroClass != null && card.getHeroClasses() != null) {
+				if (heroClass != null && (card.getHeroClass() != heroClass || !card.hasHeroClass(actualHeroClass))) {
+					continue;
+				}
+			} else {
+				if (heroClass != null && card.getHeroClass() != heroClass) {
+					continue;
+				}
+			}
+			if (tag != null && !card.hasAttribute(tag)) {
+				continue;
+			}
+			result.add(card.clone());
+		}
+
+		return result;
+	}
 
     public static void loadCardsFromPackage() throws IOException, URISyntaxException, CardParseException {
         synchronized (cards) {
@@ -143,6 +170,19 @@ public class CardCatalogue {
         loadCards(inputStreams);
     }
 
+	public static CardCollection query(DeckFormat deckFormat, Predicate<Card> filter) {
+		CardCollection result = new CardCollection();
+		for (Card card : cards) {
+			if (deckFormat != null && !deckFormat.isInFormat(card)) {
+				continue;
+			}
+			if (filter.test(card)) {
+				result.add(card);
+			}
+		}
+		return result;
+	}
+	
     public static void loadCardsFromFilesystem() throws IOException, URISyntaxException, CardParseException {
         // load cards from ~/metastone/cards on the file system
         Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(CARDS_FOLDER_PATH, true);

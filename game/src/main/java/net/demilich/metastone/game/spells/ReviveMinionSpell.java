@@ -21,7 +21,7 @@ public class ReviveMinionSpell extends Spell {
 
 	public static SpellDesc create(EntityReference target, int hpAdjustment) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(ReviveMinionSpell.class);
-		arguments.put(SpellArg.VALUE, hpAdjustment);
+		arguments.put(SpellArg.HP_BONUS, hpAdjustment);
 		arguments.put(SpellArg.TARGET, target);
 
 		return new SpellDesc(arguments);
@@ -32,12 +32,13 @@ public class ReviveMinionSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int hpAdjustment = desc.getValue(SpellArg.HP_BONUS, context, player, target, source, 0);
 		Actor targetActor = (Actor) target;
+		int boardPosition = SpellUtils.getBoardPosition(context, player, desc, source);
 		MinionCard minionCard = (MinionCard) targetActor.getSourceCard();
 		Minion minion = minionCard.summon();
 		if (hpAdjustment != 0) {
 			minion.setHp(hpAdjustment);
 		}
-		context.getLogic().summon(player.getId(), minion, null, -1, false);
+		context.getLogic().summon(player.getId(), minion, null, boardPosition, false);
 	}
 
 }

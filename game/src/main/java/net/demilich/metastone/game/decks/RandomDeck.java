@@ -27,13 +27,13 @@ public class RandomDeck extends Deck {
 			return card.isCollectible()
 					&& !card.getCardType().isCardType(CardType.HERO)
 					&& !card.getCardType().isCardType(CardType.HERO_POWER)
-					&& card.getClassRestriction() == getHeroClass();
+					&& card.hasHeroClass(getHeroClass());
 		});
 		CardCollection neutralCards = CardCatalogue.query(deckFormat, card -> {
 			return card.isCollectible()
 					&& !card.getCardType().isCardType(CardType.HERO)
 					&& !card.getCardType().isCardType(CardType.HERO_POWER)
-					&& (card.getClassRestriction() == HeroClass.ANY || card.getClassRestriction() == HeroClass.NEUTRAL);
+					&& card.hasHeroClass(HeroClass.ANY);
 		});
 
 		while (!copyDeck.isComplete()) {

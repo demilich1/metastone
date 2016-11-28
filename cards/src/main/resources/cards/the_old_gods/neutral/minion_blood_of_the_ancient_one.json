@@ -29,8 +29,7 @@
 					"card": "minion_blood_of_the_ancient_one"
 				},
 				{
-					"class": "TransformMinionSpell",
-					"target": "SELF",
+					"class": "SummonSpell",
 					"card": "token_the_ancient_one"
 				}
 			]

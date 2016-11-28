@@ -19,6 +19,7 @@ public abstract class CardDesc implements Serializable {
 	public String description;
 	public CardType type;
 	public HeroClass heroClass;
+	public HeroClass[] heroClasses;
 	public Rarity rarity;
 	public CardSet set;
 	public int baseManaCost;

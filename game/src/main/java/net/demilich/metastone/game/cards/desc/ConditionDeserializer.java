@@ -31,7 +31,6 @@ public class ConditionDeserializer implements JsonDeserializer<ConditionDesc>, J
 		parseArgument(ConditionArg.VALUE, jsonData, arguments, ParseValueType.INTEGER);
 		parseArgument(ConditionArg.VALUE1, jsonData, arguments, ParseValueType.VALUE);
 		parseArgument(ConditionArg.VALUE2, jsonData, arguments, ParseValueType.VALUE);
-		parseArgument(ConditionArg.VALUE_PROVIDER, jsonData, arguments, ParseValueType.VALUE_PROVIDER);
 		parseArgument(ConditionArg.TARGET_PLAYER, jsonData, arguments, ParseValueType.TARGET_PLAYER);
 		parseArgument(ConditionArg.TARGET, jsonData, arguments, ParseValueType.TARGET_REFERENCE);
 		parseArgument(ConditionArg.OPERATION, jsonData, arguments, ParseValueType.OPERATION);
@@ -42,6 +41,7 @@ public class ConditionDeserializer implements JsonDeserializer<ConditionDesc>, J
 		parseArgument(ConditionArg.CARD_ID, jsonData, arguments, ParseValueType.STRING);
 		parseArgument(ConditionArg.CARD_IDS, jsonData, arguments, ParseValueType.STRING_ARRAY);
 		parseArgument(ConditionArg.FILTER, jsonData, arguments, ParseValueType.ENTITY_FILTER);
+		parseArgument(ConditionArg.CARD_FILTER, jsonData, arguments, ParseValueType.ENTITY_FILTER);
 
 		return new ConditionDesc(arguments);
 	}
