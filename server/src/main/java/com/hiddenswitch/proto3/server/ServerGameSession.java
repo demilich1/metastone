@@ -9,9 +9,12 @@ import io.vertx.core.Vertx;
 import io.vertx.core.WorkerExecutor;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.decks.DeckFormat;
+import net.demilich.metastone.game.gameconfig.PlayerConfig;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.List;
 
@@ -25,13 +28,17 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	private ServerGameContext gameContext;
 	private Player player1;
 	private Player player2;
-	private WorkerExecutor executor;
-	private Vertx vertx;
+	private final String gameId;
 
 	private ClientConnectionConfiguration getConfigurationFor(PregamePlayerConfiguration player) {
 		// TODO: It's obviously insecure to allow the client to specify things like their player object
+		Player tempPlayer = player.getPlayer();
+		if (tempPlayer == null) {
+			PlayerConfig playerConfig = new PlayerConfig(player.getDeck(), new HumanBehaviour());
+			tempPlayer = new Player(playerConfig);
+		}
 		return new ClientConnectionConfiguration(getHost(), getPort(),
-				new ClientToServerMessage(player.getPlayer(), getGameId()));
+				new ClientToServerMessage(tempPlayer, getGameId()));
 	}
 
 	@Override
@@ -77,14 +84,14 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 		return getConfigurationFor(pregamePlayerConfiguration2);
 	}
 
-	public ServerGameSession(Vertx vertx, String host, int port, PregamePlayerConfiguration p1, PregamePlayerConfiguration p2) {
+	public ServerGameSession(String host, int port, PregamePlayerConfiguration p1, PregamePlayerConfiguration p2) {
 		super();
-		this.vertx = vertx;
 		setHost(host);
 		setPort(port);
 		// TODO: in PregamePlayerConfiguration should really contain a playerConfig object.
 		this.pregamePlayerConfiguration1 = p1;
 		this.pregamePlayerConfiguration2 = p2;
+		this.gameId = RandomStringUtils.randomAlphanumeric(20).toLowerCase();
 	}
 
 	@Override

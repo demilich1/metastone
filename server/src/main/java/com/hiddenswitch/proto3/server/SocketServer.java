@@ -5,6 +5,7 @@ import com.hiddenswitch.proto3.net.common.ClientToServerMessage;
 import com.hiddenswitch.proto3.net.common.NetworkBehaviour;
 import com.hiddenswitch.proto3.net.util.IncomingMessage;
 import com.hiddenswitch.proto3.net.util.Serialization;
+import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.net.NetServer;
 import io.vertx.core.net.NetSocket;
@@ -29,7 +30,7 @@ public class SocketServer extends SyncVerticle {
 
 	@Override
 	@Suspendable
-	public void start() {
+	public void start(Future<Void> done) {
 		server = vertx.createNetServer();
 		server.connectHandler(socket -> {
 			socket.handler(Sync.fiberHandler(messageBuffer -> {
@@ -40,6 +41,9 @@ public class SocketServer extends SyncVerticle {
 		server.listen(getPort(), getHost(), listenResult -> {
 			if (!listenResult.succeeded()) {
 				getVertx().undeploy(deploymentID());
+				done.fail(listenResult.cause());
+			} else {
+				done.complete();
 			}
 		});
 	}
@@ -155,7 +159,7 @@ public class SocketServer extends SyncVerticle {
 
 	public ServerGameSession createGameSession(PregamePlayerConfiguration player1, PregamePlayerConfiguration player2) {
 		// Check if a session already exists for these two players
-		ServerGameSession newSession = new ServerGameSession(vertx, getHost(), getPort(), player1, player2);
+		ServerGameSession newSession = new ServerGameSession(getHost(), getPort(), player1, player2);
 		games.put(newSession.getGameId(), newSession);
 		return newSession;
 	}

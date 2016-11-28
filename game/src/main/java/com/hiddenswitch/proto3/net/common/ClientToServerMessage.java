@@ -90,11 +90,12 @@ public class ClientToServerMessage implements Serializable {
 
 	@Override
 	public String toString() {
-		int playerId = getCallingPlayer() == null ? (getPlayer1() == null ? getPlayer1().getId() : 0) : getCallingPlayer().getId();
+		Player player = getCallingPlayer() == null ? getPlayer1() : null;
+
 		return new ToStringBuilder(this)
 				.append("type", getMt())
 				.append("gameId", getGameId())
-				.append("playerId", playerId)
+				.append("playerId", player == null ? 0 : player.getId())
 				.toString();
 	}
 

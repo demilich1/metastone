@@ -21,7 +21,11 @@ public class GamePlayer {
 
 	@DynamoDBIgnore
 	public PregamePlayerConfiguration getPregamePlayerConfig() {
-		PregamePlayerConfiguration config = new PregamePlayerConfiguration(getDeck(), getProfile().name);
+		String name = null;
+		if (getProfile() != null) {
+			name = profile.name;
+		}
+		PregamePlayerConfiguration config = new PregamePlayerConfiguration(getDeck(), name);
 		return config;
 	}
 

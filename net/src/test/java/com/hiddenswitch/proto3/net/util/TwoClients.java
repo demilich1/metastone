@@ -10,6 +10,7 @@ import com.hiddenswitch.proto3.net.models.MatchmakingResponse;
 import com.hiddenswitch.proto3.server.PregamePlayerConfiguration;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardParseException;
+import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.DeckCatalogue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,13 +79,13 @@ public class TwoClients {
 		return this;
 	}
 
-	public TwoClients invoke(MatchmakingResponse response1, MatchmakingResponse response2, String gameId, GameSessions service) {
+	public TwoClients invoke(MatchmakingResponse response1, Deck deck1, MatchmakingResponse response2, Deck deck2, String gameId, GameSessions service) {
 		this.service = service;
 		this.gameId = gameId;
 		// Manually override the player in the configurations
-		response1.getConnection().getFirstMessage().setPlayer1(new AIPlayer());
+		response1.getConnection().getFirstMessage().setPlayer1(new AIPlayer(deck1));
 		playerContext1 = createRemoteGameContext(response1.getConnection());
-		response2.getConnection().getFirstMessage().setPlayer1(new AIPlayer());
+		response2.getConnection().getFirstMessage().setPlayer1(new AIPlayer(deck2));
 		playerContext2 = createRemoteGameContext(response2.getConnection());
 		playerContext1.ignoreEventOverride = true;
 		playerContext2.ignoreEventOverride = true;

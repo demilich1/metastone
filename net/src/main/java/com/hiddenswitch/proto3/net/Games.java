@@ -9,17 +9,14 @@ import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
 import com.hiddenswitch.proto3.net.models.*;
 import com.hiddenswitch.proto3.net.util.Serialization;
 import com.hiddenswitch.proto3.server.GameSession;
+import io.vertx.core.Future;
 import net.demilich.metastone.game.decks.Deck;
 import org.apache.commons.lang3.RandomStringUtils;
 
-public class Games extends Service {
+public class Games extends Service<Games> {
 	public static final String MATCHMAKING_QUEUE = "matchmakingQueue";
-	private Accounts accounts;
 	private GameSessions gameSessions;
 	private String matchmakingQueueUrl;
-
-	public Games() {
-	}
 
 	public String getMatchmakingQueueUrl() {
 		if (matchmakingQueueUrl == null) {
@@ -28,8 +25,17 @@ public class Games extends Service {
 		return matchmakingQueueUrl;
 	}
 
-	public MatchmakingResponse matchmakeAndJoin(MatchmakingRequest matchmakingRequest) {
-		String userId = getAccounts().getUserId();
+	@Override
+	public void start(Future<Void> done) {
+		if (gameSessions == null) {
+			// TODO: Look up the verticle on the verticle service thing
+			done.fail(new NullPointerException("gameSessions wasn't configured when the Games verticle was started. Please inject this dependency."));
+		} else {
+			done.complete();
+		}
+	}
+
+	public MatchmakingResponse matchmakeAndJoin(MatchmakingRequest matchmakingRequest, String userId) {
 		MatchmakingResponse response = new MatchmakingResponse();
 		GameRecord record;
 		String gameId;
@@ -107,7 +113,7 @@ public class Games extends Service {
 		return response;
 	}
 
-	private MatchmakingRequestRetry createRetry(String gameId) {
+	protected MatchmakingRequestRetry createRetry(String gameId) {
 		MatchmakingRequestMessage matchmakingRequestMessage = new MatchmakingRequestMessage(gameId);
 		SendMessageResult result = getQueue().sendMessage(getMatchmakingQueueUrl(), Serialization.serialize(matchmakingRequestMessage));
 		MatchmakingRequestRetry retry = new MatchmakingRequestRetry(result.getMessageId(), gameId);
@@ -115,38 +121,23 @@ public class Games extends Service {
 		return retry;
 	}
 
-	private GamePlayer createPlayer(String userId, Deck deck) {
+	protected GamePlayer createPlayer(String userId, Deck deck) {
 		GamePlayer thisGamePlayer = new GamePlayer();
 		thisGamePlayer.setUserId(userId);
 		thisGamePlayer.setDeck(deck);
-		thisGamePlayer.setProfile(getAccounts().getProfileForId(userId));
 		return thisGamePlayer;
 	}
 
-	public GameRecord get(String gameId) {
+	protected GameRecord get(String gameId) {
 		return getDatabase().load(GameRecord.class, gameId);
 	}
 
-	private Game create() {
-		return new Game();
-	}
-
-	private String save(String id, Game game) {
-		if (id == null) {
-			id = RandomStringUtils.randomAlphanumeric(36);
-		}
-		GameRecord record = new GameRecord(game);
-		record.setId(id);
+	protected String save(GameRecord record) {
 		getDatabase().save(record);
 		return record.getId();
 	}
 
-	private String save(GameRecord record) {
-		getDatabase().save(record);
-		return record.getId();
-	}
-
-	private String findGameIdAwaitingPlayer() {
+	protected String findGameIdAwaitingPlayer() {
 		ReceiveMessageResult result = getQueue().receiveMessage(getMatchmakingQueueUrl());
 		if (result.getMessages().isEmpty()) {
 			return null;
@@ -157,20 +148,17 @@ public class Games extends Service {
 		return request.getGameId();
 	}
 
-	public Accounts getAccounts() {
-		return accounts;
-	}
-
-	public void setAccounts(Accounts accounts) {
-		this.accounts = accounts;
-	}
-
 	public GameSessions getGameSessions() {
 		return gameSessions;
 	}
 
 	public void setGameSessions(GameSessions gameSessions) {
 		this.gameSessions = gameSessions;
+	}
+
+	public Games withGameSessions(GameSessions gameSessions) {
+		setGameSessions(gameSessions);
+		return this;
 	}
 
 	public void setMatchmakingQueueUrl(String matchmakingQueueUrl) {

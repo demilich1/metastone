@@ -132,7 +132,7 @@ public class AccountsTest extends ServiceTestBase<Accounts> {
 	}
 
 	@Override
-	public Accounts getServiceInstance() {
+	public Accounts setupAndReturnServiceInstance() {
 		return new Accounts();
 	}
 }

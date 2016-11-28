@@ -36,7 +36,6 @@ public class CreateGameSessionResponse {
 	}
 
 	public GameSession toSession() {
-		String gameId = getGameId();
 		return new GameSession() {
 			@Override
 			public ClientConnectionConfiguration getConfigurationForPlayer1() {

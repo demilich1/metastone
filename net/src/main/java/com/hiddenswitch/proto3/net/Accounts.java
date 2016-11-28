@@ -11,12 +11,18 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.regex.Pattern;
 
-public class Accounts extends Service {
+public class Accounts extends Service<Accounts> {
 	private Pattern usernamePattern = Pattern.compile("[A-Za-z0-9_]+");
 	private String userId;
 
-	public Accounts() {
-		super();
+	@Override
+	public void start() {
+
+	}
+
+	@Override
+	public void stop() {
+
 	}
 
 	public CreateAccountResponse createAccount(String emailAddress, String password, String username) {

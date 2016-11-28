@@ -5,7 +5,7 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.sqs.AmazonSQSClient;
 
-public class StackConfiguration {
+public class AwsStackConfiguration {
 	public AWSCredentials credentials;
 	public AmazonSQSClient queue;
 	public AmazonDynamoDB dynamoDBClient;

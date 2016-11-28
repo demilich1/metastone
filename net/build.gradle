@@ -44,7 +44,7 @@ dependencyManagement {
 }
 
 dependencies {
-    quasar  "co.paralleluniverse:quasar-core:0.7.5:jdk8"
+    quasar "co.paralleluniverse:quasar-core:0.7.5:jdk8"
 
     compile group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.+'
     compile group: 'com.lambdaworks', name: 'scrypt', version: '1.4.0'
@@ -54,6 +54,7 @@ dependencies {
     compile group: 'io.vertx', name: 'vertx-core', version: '3.3.3'
     compile group: 'io.vertx', name: 'vertx-sync', version: '3.3.3'
     compile group: 'io.vertx', name: 'vertx-service-discovery', version: '3.3.3'
+    compile group: 'io.vertx', name: 'vertx-web', version: '3.3.3'
 
     compile project(':server')
     compile project(':cards')

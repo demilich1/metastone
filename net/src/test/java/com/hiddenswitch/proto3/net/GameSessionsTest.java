@@ -3,6 +3,7 @@ package com.hiddenswitch.proto3.net;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import com.hiddenswitch.proto3.net.util.TwoClients;
+import io.vertx.core.Vertx;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardParseException;
 import org.slf4j.LoggerFactory;
@@ -21,13 +22,13 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 	@BeforeMethod
 	@Override
 	public void setUp() throws Exception {
-		super.setUp();
 		Logger root = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
 		root.setLevel(Level.ERROR);
 		CardCatalogue.loadCardsFromPackage();
+		super.setUp();
 	}
 
-//	@Test
+	@Test
 	public void testCreateGameSession() throws CardParseException, IOException, URISyntaxException {
 		getAndTestTwoClients();
 	}
@@ -54,13 +55,13 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 		return twoClients;
 	}
 
-//	@Test
+	@Test
 	public void testTwoGameSessionsOneAfterAnother() throws CardParseException, IOException, URISyntaxException {
 		getAndTestTwoClients();
 		getAndTestTwoClients();
 	}
 
-//	@Test
+	@Test
 	public void testOldSessionDisposed() throws CardParseException, IOException, URISyntaxException {
 		getAndTestTwoClients();
 		getAndTestTwoClients();
@@ -73,7 +74,7 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 		Assert.assertEquals(this.service.getServer().getGames().size(), 0, "After four seconds, the server should have cleaned up any lingering games.");
 	}
 
-//	@Test
+	@Test
 	public void testTwoSimultaneousSessions() throws Exception {
 		simultaneousSessions(2);
 	}
@@ -112,13 +113,14 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 	}
 
 	@Override
-	public GameSessions getServiceInstance() {
-		try {
-			return new GameSessions();
-		} catch (IOException | URISyntaxException | CardParseException e) {
-			e.printStackTrace();
-			Assert.fail();
-			return null;
+	public GameSessions setupAndReturnServiceInstance() {
+		if (service == null) {
+			Vertx vertx = Vertx.vertx();
+			GameSessions instance = new GameSessions();
+			vertx.deployVerticle(instance);
+			return instance;
+		} else {
+			return service;
 		}
 	}
 

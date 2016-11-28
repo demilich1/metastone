@@ -5,25 +5,19 @@ import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.sqs.AmazonSQSClient;
+import io.vertx.core.AbstractVerticle;
 
-public class Service {
+public abstract class Service <T extends Service<T>> extends AbstractVerticle {
 	private DynamoDBMapper database;
 	private AWSCredentials credentials;
 	private AmazonSQSClient queue;
 
-	public Service() {
-	}
-
-	private void initializeProductionDependencies() {
-		if (credentials == null) {
-			setCredentials(getAWSCredentials());
-		}
-		if (database == null) {
-			setDatabase(new DynamoDBMapper(new AmazonDynamoDBClient(getCredentials())));
-		}
-		if (queue == null) {
-			setQueue(new AmazonSQSClient(getCredentials()));
-		}
+	@SuppressWarnings("unchecked")
+	public T withProductionConfiguration() {
+		setCredentials(getAWSCredentials());
+		setDatabase(new DynamoDBMapper(new AmazonDynamoDBClient(getCredentials())));
+		setQueue(new AmazonSQSClient(getCredentials()));
+		return (T) this;
 	}
 
 	private AWSCredentials getAWSCredentials() {
@@ -32,9 +26,6 @@ public class Service {
 	}
 
 	public AWSCredentials getCredentials() {
-		if (credentials == null) {
-			initializeProductionDependencies();
-		}
 		return credentials;
 	}
 
@@ -42,10 +33,13 @@ public class Service {
 		this.credentials = credentials;
 	}
 
+	@SuppressWarnings("unchecked")
+	public T withCredentials(AWSCredentials credentials) {
+		setCredentials(credentials);
+		return (T)this;
+	}
+
 	public AmazonSQSClient getQueue() {
-		if (queue == null) {
-			initializeProductionDependencies();
-		}
 		return queue;
 	}
 
@@ -53,14 +47,23 @@ public class Service {
 		this.queue = queue;
 	}
 
+	@SuppressWarnings("unchecked")
+	public T withQueue(AmazonSQSClient queue) {
+		setQueue(queue);
+		return (T)this;
+	}
+
 	public DynamoDBMapper getDatabase() {
-		if (database == null) {
-			initializeProductionDependencies();
-		}
 		return database;
 	}
 
 	public void setDatabase(DynamoDBMapper database) {
 		this.database = database;
+	}
+
+	@SuppressWarnings("unchecked")
+	public T withDatabase(DynamoDBMapper database) {
+		setDatabase(database);
+		return (T)this;
 	}
 }

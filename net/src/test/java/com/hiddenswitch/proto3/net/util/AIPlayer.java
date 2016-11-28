@@ -9,27 +9,17 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
 import org.apache.commons.lang3.RandomUtils;
 
-import java.util.Arrays;
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class AIPlayer extends Player {
 	private transient Deck configuredDeck;
 
 	public AIPlayer() {
-		super();
-		HeroClass[] heroClasses = {HeroClass.DRUID, HeroClass.HUNTER, HeroClass.MAGE, HeroClass.PALADIN, HeroClass.PRIEST, HeroClass.ROGUE, HeroClass.SHAMAN, HeroClass.WARLOCK, HeroClass.WARRIOR};
-		Deck randomDeck = DeckFactory.getRandomDeck(
-				heroClasses[RandomUtils.nextInt(0, heroClasses.length)],
-				new DeckFormat().withCardSets(
-						CardSet.PROCEDURAL_PREVIEW,
-						CardSet.BASIC,
-						CardSet.CLASSIC));
-		setConfiguredDeck(randomDeck);
-		buildFromConfig(new PlayerConfig(randomDeck, new AI()));
+		this(DeckFactory.getRandomDeck());
 	}
 
-	protected AIPlayer(PlayerConfig config) {
-		super(config);
+	public AIPlayer(Deck deck) {
+		super();
+		setConfiguredDeck(deck);
+		buildFromConfig(new PlayerConfig(deck, new AI()));
 	}
 
 	public Deck getConfiguredDeck() {

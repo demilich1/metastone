@@ -16,12 +16,6 @@ public class RandomDeck extends Deck {
 	public RandomDeck(HeroClass heroClass, DeckFormat deckFormat) {
 		super(heroClass);
 		this.deckFormat = deckFormat;
-		setName("[Random deck]");
-	}
-
-	@Override
-	public CardCollection getCardsCopy() {
-		Deck copyDeck = new Deck(getHeroClass());
 		IDeckValidator deckValidator = new DefaultDeckValidator();
 		CardCollection classCards = CardCatalogue.query(deckFormat, card -> {
 			return card.isCollectible()
@@ -36,16 +30,16 @@ public class RandomDeck extends Deck {
 					&& card.hasHeroClass(HeroClass.ANY);
 		});
 
-		while (!copyDeck.isComplete()) {
+		while (!this.isComplete()) {
 			// random deck consists of roughly 50% class cards and 50% neutral
 			// cards
 
 			Card randomCard = ThreadLocalRandom.current().nextBoolean() ? classCards.getRandom() : neutralCards.getRandom();
-			if (deckValidator.canAddCardToDeck(randomCard, copyDeck)) {
-				copyDeck.getCards().add(randomCard);
+			if (deckValidator.canAddCardToDeck(randomCard, this)) {
+				this.getCards().add(randomCard);
 			}
 		}
-		return copyDeck.getCardsCopy();
-	}
 
+		setName("[Random deck]");
+	}
 }

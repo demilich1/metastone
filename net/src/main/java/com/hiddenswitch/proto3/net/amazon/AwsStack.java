@@ -4,9 +4,8 @@ import com.amazonaws.services.dynamodbv2.model.CreateTableRequest;
 import com.amazonaws.services.dynamodbv2.model.ProvisionedThroughput;
 import com.hiddenswitch.proto3.net.Games;
 
-public class Stack {
-
-	public static void initializeStack(StackConfiguration configuration) {
+public class AwsStack {
+	public static void initializeStack(AwsStackConfiguration configuration) {
 		if (configuration.database == null) {
 			return;
 		}
@@ -16,6 +15,7 @@ public class Stack {
 			request.setProvisionedThroughput(new ProvisionedThroughput(1L, 1L));
 			configuration.dynamoDBClient.createTable(request);
 		}
+
 		configuration.queue.createQueue(Games.MATCHMAKING_QUEUE);
 	}
 }

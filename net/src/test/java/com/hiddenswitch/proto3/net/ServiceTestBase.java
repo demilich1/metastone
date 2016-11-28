@@ -5,25 +5,25 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.local.embedded.DynamoDBEmbedded;
 import com.amazonaws.services.sqs.AmazonSQSClient;
-import com.hiddenswitch.proto3.net.amazon.Stack;
-import com.hiddenswitch.proto3.net.amazon.StackConfiguration;
+import com.hiddenswitch.proto3.net.amazon.AwsStack;
+import com.hiddenswitch.proto3.net.amazon.AwsStackConfiguration;
 import org.elasticmq.rest.sqs.SQSRestServer;
 import org.elasticmq.rest.sqs.SQSRestServerBuilder;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-public abstract class ServiceTestBase<T extends Service> {
-	public T service;
+public abstract class ServiceTestBase<T extends Service<T>> {
+	protected T service;
 	private AmazonSQSClient queue;
 	private DynamoDBMapper database;
 	private AmazonDynamoDB dynamoDBEmbedded;
 	private SQSRestServer elasticMQ;
 
-	public abstract T getServiceInstance();
+	public abstract T setupAndReturnServiceInstance();
 
 	@BeforeMethod
 	public void setUp() throws Exception {
-		StackConfiguration configuration = new StackConfiguration();
+		AwsStackConfiguration configuration = new AwsStackConfiguration();
 		BasicAWSCredentials credentials = new BasicAWSCredentials("x", "y");
 		try {
 			elasticMQ = SQSRestServerBuilder.start();
@@ -38,11 +38,11 @@ public abstract class ServiceTestBase<T extends Service> {
 			configuration.dynamoDBClient = dynamoDBEmbedded;
 			configuration.database = database;
 			configuration.queue = queue;
-			Stack.initializeStack(configuration);
-			service = getServiceInstance();
-			service.setCredentials(credentials);
-			service.setDatabase(database);
-			service.setQueue(queue);
+			AwsStack.initializeStack(configuration);
+			service = setupAndReturnServiceInstance()
+					.withCredentials(credentials)
+					.withDatabase(database)
+					.withQueue(queue);
 		}
 	}
 
