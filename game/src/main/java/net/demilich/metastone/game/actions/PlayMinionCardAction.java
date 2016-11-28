@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.actions;
 
+import co.paralleluniverse.fibers.Suspendable;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.MinionCard;
@@ -35,6 +36,7 @@ public class PlayMinionCardAction extends PlayCardAction {
 	}
 
 	@Override
+	@Suspendable
 	protected void play(GameContext context, int playerId) {
 		MinionCard minionCard = (MinionCard) context.getPendingCard();
 		Actor nextTo = (Actor) (getTargetKey() != null ? context.resolveSingleTarget(getTargetKey()) : null);

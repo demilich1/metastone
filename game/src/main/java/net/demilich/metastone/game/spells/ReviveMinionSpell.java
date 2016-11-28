@@ -2,6 +2,7 @@ package net.demilich.metastone.game.spells;
 
 import java.util.Map;
 
+import co.paralleluniverse.fibers.Suspendable;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.MinionCard;
@@ -27,6 +28,7 @@ public class ReviveMinionSpell extends Spell {
 	}
 
 	@Override
+	@Suspendable
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int hpAdjustment = desc.getValue(SpellArg.HP_BONUS, context, player, target, source, 0);
 		Actor targetActor = (Actor) target;

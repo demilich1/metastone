@@ -48,14 +48,17 @@ public abstract class ServiceTestBase<T extends Service> {
 
 	@AfterMethod
 	public void tearDown() throws Exception {
-		if (elasticMQ != null) {
-			elasticMQ.stopAndWait();
-		}
-		if (dynamoDBEmbedded != null) {
-			dynamoDBEmbedded.shutdown();
-		}
-		if (queue != null) {
-			queue.shutdown();
+		try {
+			if (elasticMQ != null) {
+				elasticMQ.stopAndWait();
+			}
+			if (dynamoDBEmbedded != null) {
+				dynamoDBEmbedded.shutdown();
+			}
+			if (queue != null) {
+				queue.shutdown();
+			}
+		} catch (Exception ignored) {
 		}
 	}
 }

@@ -3,18 +3,14 @@ package com.hiddenswitch.proto3.net;
 import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.ReceiveMessageResult;
 import com.amazonaws.services.sqs.model.SendMessageResult;
-import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
 import com.hiddenswitch.proto3.net.amazon.GameRecord;
 import com.hiddenswitch.proto3.net.amazon.MatchmakingRequestMessage;
+import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
 import com.hiddenswitch.proto3.net.models.*;
 import com.hiddenswitch.proto3.net.util.Serialization;
 import com.hiddenswitch.proto3.server.GameSession;
-import net.demilich.metastone.game.decks.Bench;
 import net.demilich.metastone.game.decks.Deck;
 import org.apache.commons.lang3.RandomStringUtils;
-
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
 
 public class Games extends Service {
 	public static final String MATCHMAKING_QUEUE = "matchmakingQueue";
@@ -32,7 +28,6 @@ public class Games extends Service {
 		return matchmakingQueueUrl;
 	}
 
-	@PUT
 	public MatchmakingResponse matchmakeAndJoin(MatchmakingRequest matchmakingRequest) {
 		String userId = getAccounts().getUserId();
 		MatchmakingResponse response = new MatchmakingResponse();

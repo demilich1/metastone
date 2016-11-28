@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.spells.trigger.secrets;
 
+import co.paralleluniverse.fibers.Suspendable;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.events.GameEvent;
@@ -21,6 +22,7 @@ public class Secret extends SpellTrigger {
 	}
 
 	@Override
+	@Suspendable
 	protected void onFire(int ownerId, SpellDesc spell, GameEvent event) {
 		super.onFire(ownerId, spell, event);
 		Player owner = event.getGameContext().getPlayer(ownerId);
@@ -29,6 +31,7 @@ public class Secret extends SpellTrigger {
 	}
 
 	@Override
+	@Suspendable
 	public void onGameEvent(GameEvent event) {
 		if (event.getGameContext().getActivePlayerId() == getOwner()) {
 			return;

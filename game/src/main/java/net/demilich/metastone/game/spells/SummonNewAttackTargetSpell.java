@@ -2,6 +2,7 @@ package net.demilich.metastone.game.spells;
 
 import java.util.Map;
 
+import co.paralleluniverse.fibers.Suspendable;
 import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -22,6 +23,7 @@ public class SummonNewAttackTargetSpell extends Spell {
 	}
 
 	@Override
+	@Suspendable
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		MinionCard minionCard = (MinionCard) SpellUtils.getCards(desc)[0];
 		Minion targetMinion = minionCard.summon();

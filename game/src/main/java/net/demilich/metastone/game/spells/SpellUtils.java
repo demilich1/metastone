@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 
+import co.paralleluniverse.fibers.Suspendable;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -28,7 +29,7 @@ import net.demilich.metastone.game.spells.desc.filter.Operation;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class SpellUtils {
-
+	@Suspendable
 	public static void castChildSpell(GameContext context, Player player, SpellDesc spell, Entity source, Entity target) {
 		EntityReference sourceReference = source != null ? source.getReference() : null;
 		EntityReference targetReference = spell.getTarget();
@@ -92,7 +93,8 @@ public class SpellUtils {
 		}
 		return cards;
 	}
-	
+
+	@Suspendable
 	public static DiscoverAction getDiscover(GameContext context, Player player, SpellDesc desc, CardCollection cards) {
 		List<GameAction> discoverActions = getDiscoverActionsForDiscoverSpell(desc, cards);
 		

@@ -1,5 +1,6 @@
 package com.hiddenswitch.proto3.server;
 
+import co.paralleluniverse.fibers.Suspendable;
 import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
 import com.hiddenswitch.proto3.net.common.ClientToServerMessage;
 import com.hiddenswitch.proto3.net.common.RemoteUpdateListener;
@@ -53,6 +54,7 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	}
 
 	@Override
+	@Suspendable
 	public void onActionReceived(String id, Player callingPlayer, GameAction action) {
 		checkContext();
 		getGameContext().onActionReceived(id, callingPlayer, action);

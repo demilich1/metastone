@@ -1,6 +1,11 @@
 package com.hiddenswitch.proto3.net.common;
 
+import co.paralleluniverse.fibers.SuspendExecution;
+import co.paralleluniverse.fibers.Suspendable;
+import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
+import io.vertx.core.VertxException;
+import io.vertx.ext.sync.Sync;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.actions.GameAction;
@@ -9,9 +14,11 @@ import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.weapons.Weapon;
 import net.demilich.metastone.game.logic.GameLogic;
+import net.demilich.metastone.game.logic.SummonResult;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Created by bberman on 11/23/16.
@@ -49,17 +56,23 @@ public class GameLogicAsync extends GameLogic {
 		});
 	}
 
-//	@Override
-//	protected void resolveBattlecry(int playerId, Actor actor) throws UnsupportedOperationException {
-//		throw new UnsupportedOperationException("GameLogicAsync::resolveBattlecry is unsupported. Use GameLogicAsync::resolveBattlecryAsync instead.");
-//	}
+	@Override
+	@Suspendable
+	protected void resolveBattlecry(int playerId, Actor actor) {
+		logger.debug("AsyncDebug {} successfully called resolveBattlecry.", this.context);
+		Boolean result = Sync.awaitResult(new BattlecryResult(playerId, actor));
+	}
 
 	@Override
-	protected void resolveBattlecryAsync(int playerId, Actor actor, Handler<GameAction> result) {
+	@Suspendable
+	protected void resolveBattlecryAsync(int playerId, Actor actor, Handler<AsyncResult<Boolean>> result) {
 		BattlecryAction battlecry = actor.getBattlecry();
 
 		Player player = context.getPlayer(playerId);
 		if (!battlecry.canBeExecuted(context, player)) {
+			if (result != null) {
+				result.handle(NullResult.SUCESSS);
+			}
 			return;
 		}
 
@@ -70,71 +83,166 @@ public class GameLogicAsync extends GameLogic {
 
 			if (battlecryActions == null
 					|| battlecryActions.size() == 0) {
+				result.handle(NullResult.SUCESSS);
 				return;
 			}
 
 			NetworkBehaviour networkBehaviour = (NetworkBehaviour) player.getBehaviour();
 			networkBehaviour.requestActionAsync((ServerGameContext) context, player, battlecryActions, action -> {
 				performBattlecryAction(playerId, actor, player, action);
-				result.handle(action);
+				logger.debug("AsyncDebug {} successfully called resolveBattlecryAsync", this.context);
+				if (result != null) {
+					result.handle(NullResult.SUCESSS);
+				}
 			});
 		} else {
 			performBattlecryAction(playerId, actor, player, battlecry);
-			result.handle(battlecry);
+			if (result != null) {
+				result.handle(NullResult.SUCESSS);
+			}
 		}
 	}
 
-//	@Override
-//	public void equipWeapon(int playerId, Weapon weapon) throws UnsupportedOperationException {
-//		throw new UnsupportedOperationException("GameLogicAsync::equipWeapon is unsupported. Use GameLogicAsync::equipWeaponAsync instead.");
-//	}
+	@Override
+	@Suspendable
+	public void equipWeapon(int playerId, Weapon weapon, boolean resolveBattlecry) {
+		logger.debug("AsyncDebug {} successfully called equipWeapon.", this.context);
+		if (!resolveBattlecry) {
+			super.equipWeapon(playerId, weapon, false);
+		} else {
+			Boolean result = Sync.awaitResult(new EquipWeaponResult(playerId, weapon, resolveBattlecry));
+		}
+	}
 
 	@Override
-	public void equipWeaponAsync(int playerId, Weapon weapon, Handler<Weapon> result) {
+	@Suspendable
+	public void equipWeaponAsync(int playerId, Weapon weapon, boolean resolveBattlecry, Handler<AsyncResult<Boolean>> result) {
+		logger.debug("AsyncDebug {} successfully called equipWeaponAsync.", this.context);
 		PreEquipWeapon preEquipWeapon = new PreEquipWeapon(playerId, weapon).invoke();
 		Weapon currentWeapon = preEquipWeapon.getCurrentWeapon();
 		Player player = preEquipWeapon.getPlayer();
 
-		if (weapon.getBattlecry() != null) {
-			resolveBattlecry(playerId, weapon);
+		if (resolveBattlecry
+				&& weapon.getBattlecry() != null) {
 			resolveBattlecryAsync(playerId, weapon, action -> {
 				postEquipWeapon(playerId, weapon, currentWeapon, player);
-				result.handle(weapon);
+				if (result != null) {
+					result.handle(NullResult.SUCESSS);
+				}
 			});
 		} else {
 			postEquipWeapon(playerId, weapon, currentWeapon, player);
-			result.handle(weapon);
+			if (result != null) {
+				result.handle(NullResult.SUCESSS);
+			}
 		}
 	}
 
-//	@Override
-//	public boolean summon(int playerId, Minion minion, Card source, int index, boolean resolveBattlecry) throws UnsupportedOperationException {
-//		throw new UnsupportedOperationException("GameLogicAsync::summon is unsupported. Use GameLogicAsync::summonAsync instead.");
-//	}
+	@Override
+	@Suspendable
+	public boolean summon(int playerId, Minion minion, Card source, int index, boolean resolveBattlecry) {
+		if (!resolveBattlecry) {
+			logger.debug("AsyncDebug {} successfully called regular summon.", this.context.toString());
+			return super.summon(playerId, minion, source, index, false);
+		}
+
+		Boolean summonResult = Sync.awaitResult(new SummonResult2(playerId, minion, source, index));
+
+		logger.debug("AsyncDebug {} successfully called async summon.", this.context.toString());
+		return summonResult;
+	}
 
 	@Override
-	protected void summonAsync(int playerId, Minion minion, Card source, int index, boolean resolveBattlecry, Handler<Boolean> summoned) {
+	@Suspendable
+	protected void summonAsync(int playerId, Minion minion, Card source, int index, boolean resolveBattlecry, Handler<AsyncResult<Boolean>> summoned) {
 		PreSummon preSummon = new PreSummon(playerId, minion, index).invoke();
 		if (preSummon.is()) {
-			summoned.handle(false);
+			if (summoned != null) {
+				summoned.handle(SummonResult.NOT_SUMMONED);
+			}
 			return;
 		}
 
 		Player player = preSummon.getPlayer();
 
-		Handler<GameAction> postSummonHandler = battlecry -> {
-			if (battlecry != null) {
-				checkForDeadEntities();
-			}
+		Handler<AsyncResult<Boolean>> postSummonHandler = result -> {
+			checkForDeadEntities();
 
 			postSummon(minion, source, player);
-			summoned.handle(true);
+			if (summoned != null) {
+				summoned.handle(SummonResult.SUMMONED);
+			}
 		};
 
 		if (resolveBattlecry && minion.getBattlecry() != null) {
-			resolveBattlecryAsync(player.getId(), minion, postSummonHandler);
+			resolveBattlecryAsync(player.getId(), minion, (o) -> {
+				postSummonHandler.handle(SummonResult.SUMMONED);
+			});
 		} else {
-			postSummonHandler.handle(null);
+			postSummonHandler.handle(SummonResult.SUMMONED);
+		}
+	}
+
+	private class EquipWeaponResult implements Consumer<Handler<AsyncResult<Boolean>>> {
+		private final int playerId;
+		private final Weapon weapon;
+		private final boolean resolveBattlecry;
+
+		public EquipWeaponResult(int playerId, Weapon weapon, boolean resolveBattlecry) {
+			this.playerId = playerId;
+			this.weapon = weapon;
+			this.resolveBattlecry = resolveBattlecry;
+		}
+
+		@Override
+		@Suspendable
+		public void accept(Handler<AsyncResult<Boolean>> done) {
+			if (done == null) {
+				logger.error("A handler was null!");
+			}
+			GameLogicAsync.this.equipWeaponAsync(playerId, weapon, resolveBattlecry, done);
+		}
+	}
+
+	private class BattlecryResult implements Consumer<Handler<AsyncResult<Boolean>>> {
+		private final int playerId;
+		private final Actor actor;
+
+		public BattlecryResult(int playerId, Actor actor) {
+			this.playerId = playerId;
+			this.actor = actor;
+		}
+
+		@Override
+		@Suspendable
+		public void accept(Handler<AsyncResult<Boolean>> done) {
+			if (done == null) {
+				logger.error("A handler was null!");
+			}
+			GameLogicAsync.this.resolveBattlecryAsync(playerId, actor, done);
+		}
+	}
+
+	private class SummonResult2 implements Consumer<Handler<AsyncResult<Boolean>>> {
+		private final int playerId;
+		private final Minion minion;
+		private final Card source;
+		private final int index;
+
+		public SummonResult2(int playerId, Minion minion, Card source, int index) {
+			this.playerId = playerId;
+			this.minion = minion;
+			this.source = source;
+			this.index = index;
+		}
+
+		@Override
+		@Suspendable
+		public void accept(Handler<AsyncResult<Boolean>> done) {
+			if (done == null) {
+				logger.error("A handler was null!");
+			}
+			GameLogicAsync.this.summonAsync(playerId, minion, source, index, true, done);
 		}
 	}
 }

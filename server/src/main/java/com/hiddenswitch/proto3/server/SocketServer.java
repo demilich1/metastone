@@ -1,20 +1,24 @@
 package com.hiddenswitch.proto3.server;
 
+import co.paralleluniverse.fibers.Suspendable;
 import com.hiddenswitch.proto3.net.common.ClientToServerMessage;
 import com.hiddenswitch.proto3.net.common.NetworkBehaviour;
 import com.hiddenswitch.proto3.net.util.IncomingMessage;
 import com.hiddenswitch.proto3.net.util.Serialization;
-import io.vertx.core.AbstractVerticle;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.net.NetServer;
 import io.vertx.core.net.NetSocket;
+import io.vertx.ext.sync.Sync;
+import io.vertx.ext.sync.SyncVerticle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
-import java.util.*;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
-public class SocketServer extends AbstractVerticle {
+public class SocketServer extends SyncVerticle {
 	private static final Logger logger = LoggerFactory.getLogger(SocketServer.class);
 	private static final int DEFAULT_PORT = 11111;
 	private final int port;
@@ -24,12 +28,13 @@ public class SocketServer extends AbstractVerticle {
 	private NetServer server;
 
 	@Override
+	@Suspendable
 	public void start() {
 		server = vertx.createNetServer();
 		server.connectHandler(socket -> {
-			socket.handler(messageBuffer -> {
+			socket.handler(Sync.fiberHandler(messageBuffer -> {
 				receiveData(socket, messageBuffer);
-			});
+			}));
 		});
 
 		server.listen(getPort(), getHost(), listenResult -> {
@@ -39,6 +44,7 @@ public class SocketServer extends AbstractVerticle {
 		});
 	}
 
+	@Suspendable
 	private void receiveData(NetSocket socket, Buffer messageBuffer) {
 		logger.debug("Getting buffer from socket with hashCode {} length {}. Incoming message count: {}", socket.hashCode(), messageBuffer.length(), messages.size());
 		// Do we have a reader for this socket?
@@ -137,6 +143,7 @@ public class SocketServer extends AbstractVerticle {
 	}
 
 	@Override
+	@Suspendable
 	public void stop() {
 		kill();
 	}

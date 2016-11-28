@@ -2,6 +2,7 @@ package net.demilich.metastone.game.spells;
 
 import java.util.List;
 
+import co.paralleluniverse.fibers.Suspendable;
 import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -11,7 +12,7 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 
 public abstract class Spell {
-
+	@Suspendable
 	public void cast(GameContext context, Player player, SpellDesc desc, Entity source, List<Entity> targets) {
 		// no target specified, cast the spell once with target NULL
 		if (targets == null) {
@@ -69,6 +70,7 @@ public abstract class Spell {
 		}
 	}
 
+	@Suspendable
 	protected abstract void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target);
 
 	@Override

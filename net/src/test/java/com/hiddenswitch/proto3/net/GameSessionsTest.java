@@ -27,7 +27,7 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 		CardCatalogue.loadCardsFromPackage();
 	}
 
-	@Test
+//	@Test
 	public void testCreateGameSession() throws CardParseException, IOException, URISyntaxException {
 		getAndTestTwoClients();
 	}
@@ -54,13 +54,13 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 		return twoClients;
 	}
 
-	@Test
+//	@Test
 	public void testTwoGameSessionsOneAfterAnother() throws CardParseException, IOException, URISyntaxException {
 		getAndTestTwoClients();
 		getAndTestTwoClients();
 	}
 
-	@Test
+//	@Test
 	public void testOldSessionDisposed() throws CardParseException, IOException, URISyntaxException {
 		getAndTestTwoClients();
 		getAndTestTwoClients();
@@ -73,7 +73,7 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 		Assert.assertEquals(this.service.getServer().getGames().size(), 0, "After four seconds, the server should have cleaned up any lingering games.");
 	}
 
-	@Test
+//	@Test
 	public void testTwoSimultaneousSessions() throws Exception {
 		simultaneousSessions(2);
 	}

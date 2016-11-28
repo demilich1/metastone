@@ -20,14 +20,15 @@ task copyNativeDeps(type: Copy) {
 
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'jp.classmethod.aws'
-apply plugin: 'war'
-apply plugin: 'jetty'
 
 aws {
     profileName = 'metastone_net'
     region = 'us-east-1'
 }
 
+configurations {
+    quasar
+}
 
 repositories {
     mavenCentral()
@@ -43,12 +44,15 @@ dependencyManagement {
 }
 
 dependencies {
+    quasar  "co.paralleluniverse:quasar-core:0.7.5:jdk8"
+
     compile group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.+'
     compile group: 'com.lambdaworks', name: 'scrypt', version: '1.4.0'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
     compile group: 'commons-validator', name: 'commons-validator', version: '1.4.1'
     compile group: 'com.google.code.gson', name: 'gson', version: '2.3.1'
     compile group: 'io.vertx', name: 'vertx-core', version: '3.3.3'
+    compile group: 'io.vertx', name: 'vertx-sync', version: '3.3.3'
     compile group: 'io.vertx', name: 'vertx-service-discovery', version: '3.3.3'
 
     compile project(':server')
@@ -67,7 +71,12 @@ dependencies {
     testCompile group: 'com.amazonaws', name: 'DynamoDBLocal', version: '1.11.0.1'
 }
 
+tasks.withType(JavaExec) {
+    jvmArgs "-javaagent:${configurations.quasar.iterator().next()}"
+}
+
 test {
+    jvmArgs "-javaagent:${configurations.quasar.iterator().next()}"
     useTestNG()
     testLogging.showStandardStreams = true
     testLogging {

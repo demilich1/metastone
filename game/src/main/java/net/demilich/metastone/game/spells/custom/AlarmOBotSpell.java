@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.spells.custom;
 
+import co.paralleluniverse.fibers.Suspendable;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.CardType;
@@ -11,6 +12,7 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 public class AlarmOBotSpell extends ReturnMinionToHandSpell {
 
 	@Override
+	@Suspendable
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		// Check to see if there is a minion before returning to hand!
 		// If there is no minion, do not activate!

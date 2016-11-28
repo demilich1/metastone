@@ -10,7 +10,11 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ThreadLocalRandom;
 
+import co.paralleluniverse.fibers.SuspendExecution;
+import co.paralleluniverse.fibers.Suspendable;
 import com.google.gson.annotations.Expose;
+import com.hiddenswitch.proto3.net.common.NullResult;
+import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import net.demilich.metastone.game.actions.*;
 import org.slf4j.Logger;
@@ -236,6 +240,7 @@ public class GameLogic implements Cloneable, Serializable {
 		return player.getMinions().size() < MAX_MINIONS;
 	}
 
+	@Suspendable
 	public void castSpell(int playerId, SpellDesc spellDesc, EntityReference sourceReference, EntityReference targetReference,
 	                      boolean childSpell) {
 		Player player = context.getPlayer(playerId);
@@ -582,12 +587,14 @@ public class GameLogic implements Cloneable, Serializable {
 		}
 	}
 
-	public void equipWeapon(int playerId, Weapon weapon) {
+	@Suspendable
+	public void equipWeapon(int playerId, Weapon weapon, boolean resolveBattlecry) {
 		PreEquipWeapon preEquipWeapon = new PreEquipWeapon(playerId, weapon).invoke();
 		Weapon currentWeapon = preEquipWeapon.getCurrentWeapon();
 		Player player = preEquipWeapon.getPlayer();
 
-		if (weapon.getBattlecry() != null) {
+		if (resolveBattlecry
+				&& weapon.getBattlecry() != null) {
 			resolveBattlecry(playerId, weapon);
 		}
 
@@ -1180,6 +1187,7 @@ public class GameLogic implements Cloneable, Serializable {
 		}
 	}
 
+	@Suspendable
 	public void performGameAction(int playerId, GameAction action) {
 		if (playerId != context.getActivePlayerId()) {
 			logger.warn("Player {} tries to perform an action, but it is not his turn!", context.getPlayer(playerId).getName());
@@ -1201,6 +1209,7 @@ public class GameLogic implements Cloneable, Serializable {
 		}
 	}
 
+	@Suspendable
 	public void playCard(int playerId, CardReference cardReference) {
 		Player player = context.getPlayer(playerId);
 		Card card = context.resolveCardReference(cardReference);
@@ -1445,6 +1454,7 @@ public class GameLogic implements Cloneable, Serializable {
 		newCard.setLocation(CardLocation.DECK);
 	}
 
+	@Suspendable
 	protected void resolveBattlecry(int playerId, Actor actor) {
 		BattlecryAction battlecry = actor.getBattlecry();
 
@@ -1485,6 +1495,7 @@ public class GameLogic implements Cloneable, Serializable {
 		return battlecryActions;
 	}
 
+	@Suspendable
 	protected void performBattlecryAction(int playerId, Actor actor, Player player, GameAction battlecryAction) {
 		if (hasAttribute(player, Attribute.DOUBLE_BATTLECRIES) && actor.getSourceCard().hasAttribute(Attribute.BATTLECRY)) {
 			// You need DOUBLE_BATTLECRIES before your battlecry action, not after.
@@ -1517,6 +1528,7 @@ public class GameLogic implements Cloneable, Serializable {
 		}
 	}
 
+	@Suspendable
 	public void secretTriggered(Player player, Secret secret) {
 		log("Secret was trigged: {}", secret.getSource());
 		player.getSecrets().remove(secret.getSource().getCardId());
@@ -1613,6 +1625,7 @@ public class GameLogic implements Cloneable, Serializable {
 		checkForDeadEntities();
 	}
 
+	@Suspendable
 	public boolean summon(int playerId, Minion minion, Card source, int index, boolean resolveBattlecry) {
 		PreSummon preSummon = new PreSummon(playerId, minion, index).invoke();
 		if (preSummon.is()) return false;
@@ -1770,24 +1783,27 @@ public class GameLogic implements Cloneable, Serializable {
 		}
 	}
 
-	protected void resolveBattlecryAsync(int playerId, Actor actor, Handler<GameAction> result) {
+	@Suspendable
+	protected void resolveBattlecryAsync(int playerId, Actor actor, Handler<AsyncResult<Boolean>> result) {
 		resolveBattlecry(playerId, actor);
 		if (result != null) {
-			result.handle(null);
+			result.handle(NullResult.SUCESSS);
 		}
 	}
 
-	public void equipWeaponAsync(int playerId, Weapon weapon, Handler<Weapon> result) {
-		equipWeapon(playerId, weapon);
+	@Suspendable
+	public void equipWeaponAsync(int playerId, Weapon weapon, boolean resolveBattlecry, Handler<AsyncResult<Boolean>> result) {
+		equipWeapon(playerId, weapon, resolveBattlecry);
 		if (result != null) {
-			result.handle(null);
+			result.handle(NullResult.SUCESSS);
 		}
 	}
 
-	protected void summonAsync(int playerId, Minion minion, Card source, int index, boolean resolveBattlecry, Handler<Boolean> summoned) {
+	@Suspendable
+	protected void summonAsync(int playerId, Minion minion, Card source, int index, boolean resolveBattlecry, Handler<AsyncResult<Boolean>> summoned) {
 		boolean result = summon(playerId, minion, source, index, resolveBattlecry);
 		if (summoned != null) {
-			summoned.handle(result);
+			summoned.handle(new SummonResult(result));
 		}
 	}
 
@@ -1904,4 +1920,5 @@ public class GameLogic implements Cloneable, Serializable {
 			return this;
 		}
 	}
+
 }

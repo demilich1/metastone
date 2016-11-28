@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.actions;
 
+import co.paralleluniverse.fibers.Suspendable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,25 +38,26 @@ public abstract class PlayCardAction extends GameAction {
 	}
 
 	@Override
+	@Suspendable
 	public void execute(GameContext context, int playerId) {
 		Card card = context.resolveCardReference(getCardReference());
 		context.setPendingCard(card);
-		try {
+//		try {
 			context.getLogic().playCard(playerId, getCardReference());
 			// card was countered, do not actually resolve its effects
 			if (!card.hasAttribute(Attribute.COUNTERED)) {
 				play(context, playerId);
 			}
-		} catch (Exception e) {
-			logger.error("ERROR while playing card " + card.toString() + " reference: " + cardReference.toString(), e);
-			logger.error(context.toLongString());
-			context.addException(e);
-			if (e instanceof PlayCardException) {
-				throw e;
-			} else {
-				throw new PlayCardException(e);
-			}
-		}
+//		} catch (Exception e) {
+//			logger.error("ERROR while playing card " + card.toString() + " reference: " + cardReference.toString(), e);
+//			logger.error(context.toLongString());
+//			context.addException(e);
+//			if (e instanceof PlayCardException) {
+//				throw e;
+//			} else {
+//				throw new PlayCardException(e);
+//			}
+//		}
 
 		context.getLogic().afterCardPlayed(playerId, getCardReference());
 		context.setPendingCard(null);
@@ -83,6 +85,7 @@ public abstract class PlayCardAction extends GameAction {
 		return playCardAction.getGroupIndex() == getGroupIndex() && this.cardReference.equals(playCardAction.cardReference);
 	}
 
+	@Suspendable
 	protected abstract void play(GameContext context, int playerId);
 
 	public void setGroupIndex(int groupIndex) {

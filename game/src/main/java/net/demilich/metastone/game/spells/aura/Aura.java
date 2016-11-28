@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
+import co.paralleluniverse.fibers.Suspendable;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Actor;
@@ -81,6 +82,7 @@ public class Aura extends SpellTrigger {
 		affectedEntities.clear();
 	}
 
+	@Suspendable
 	public void onGameEvent(GameEvent event) {
 		GameContext context = event.getGameContext();
 		Player owner = context.getPlayer(getOwner());

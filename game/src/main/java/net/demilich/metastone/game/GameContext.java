@@ -1,5 +1,6 @@
 package net.demilich.metastone.game;
 
+import co.paralleluniverse.fibers.Suspendable;
 import com.google.gson.annotations.Expose;
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.GameAction;
@@ -397,6 +398,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 	protected void onGameStateChanged() {
 	}
 
+	@Suspendable
 	protected void performAction(int playerId, GameAction gameAction) {
 		getLogic().performGameAction(playerId, gameAction);
 		onGameStateChanged();
@@ -523,7 +525,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 
 	@Override
 	public String toString() {
-		return toLongString();
+		return String.format("[GameContext turn=%d turnState=%s]", getTurn(), getTurnState().toString());
 	}
 
 	public Entity tryFind(EntityReference targetKey) {

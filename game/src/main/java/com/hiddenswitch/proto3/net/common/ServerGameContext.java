@@ -1,7 +1,9 @@
 package com.hiddenswitch.proto3.net.common;
 
+import co.paralleluniverse.fibers.Suspendable;
 import io.vertx.core.Handler;
 import io.vertx.core.WorkerExecutor;
+import io.vertx.ext.sync.Sync;
 import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -23,7 +25,7 @@ import java.util.function.Consumer;
 public class ServerGameContext extends GameContext {
 	private final String gameId;
 	private Map<Player, RemoteUpdateListener> listenerMap = new HashMap<>();
-	private final Map<String, Consumer> requestCallbacks = new HashMap<>();
+	private final Map<String, Handler> requestCallbacks = new HashMap<>();
 
 	public ServerGameContext(Player player1, Player player2, DeckFormat deckFormat, String gameId) {
 		// The player's IDs are set here
@@ -124,6 +126,7 @@ public class ServerGameContext extends GameContext {
 		throw new UnsupportedOperationException("ServerGameContext::playTurn should not be called.");
 	}
 
+	@Suspendable
 	protected void networkedPlayTurn(Handler<Boolean> callback) {
 		setActionsThisTurn(getActionsThisTurn() + 1);
 
@@ -172,31 +175,33 @@ public class ServerGameContext extends GameContext {
 
 	}
 
-	public void networkRequestAction(Player player, List<GameAction> actions, Consumer<GameAction> callback) {
+	@Suspendable
+	public void networkRequestAction(Player player, List<GameAction> actions, Handler<GameAction> callback) {
 		logger.debug("Requesting acton for playerId {} hashCode {}", player.getId(), player.hashCode());
 		String id = RandomStringUtils.randomAscii(8);
 		requestCallbacks.put(id, callback);
 		getListenerMap().get(player).onRequestAction(id, actions);
 	}
 
-	public void networkRequestMulligan(Player player, List<Card> starterCards, Consumer<List<Card>> callback) {
+	public void networkRequestMulligan(Player player, List<Card> starterCards, Handler<List<Card>> callback) {
 		logger.debug("Requesting mulligan for playerId {} hashCode {}", player.getId(), player.hashCode());
 		String id = RandomStringUtils.randomAscii(8);
 		requestCallbacks.put(id, callback);
 		getListenerMap().get(player).onMulligan(id, player, starterCards);
 	}
 
+	@Suspendable
 	@SuppressWarnings("unchecked")
 	public void onActionReceived(String messageId, Player player, GameAction action) {
 		logger.debug("Accepting acton for playerId {} hashCode {}", player.getId(), player.hashCode());
-		((Consumer<GameAction>) requestCallbacks.get(messageId)).accept(action);
+		Sync.fiberHandler((Handler<GameAction>) requestCallbacks.get(messageId)).handle(action);
 		requestCallbacks.remove(messageId);
 	}
 
 	@SuppressWarnings("unchecked")
 	public void onMulliganReceived(String messageId, Player player, List<Card> discardedCards) {
 		logger.debug("Mulligan received from {}", player.getName());
-		((Consumer<List<Card>>) requestCallbacks.get(messageId)).accept(discardedCards);
+		((Handler<List<Card>>) requestCallbacks.get(messageId)).handle(discardedCards);
 		requestCallbacks.remove(messageId);
 	}
 

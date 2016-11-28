@@ -1,5 +1,6 @@
 package com.hiddenswitch.proto3.net.common;
 
+import co.paralleluniverse.fibers.Suspendable;
 import io.vertx.core.Handler;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -45,6 +46,7 @@ public class NetworkBehaviour extends Behaviour implements Serializable {
 		return getWrapBehaviour().requestAction(context, player, validActions);
 	}
 
+	@Suspendable
 	public void requestActionAsync(ServerGameContext context, Player player, List<GameAction> validActions, Handler<GameAction> handler) {
 		logger.debug("Requesting action from network. Player: {}, validActions: {}", player, validActions);
 		context.networkRequestAction(player, validActions, handler::handle);
