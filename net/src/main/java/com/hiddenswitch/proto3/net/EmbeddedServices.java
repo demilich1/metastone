@@ -1,35 +1,49 @@
 package com.hiddenswitch.proto3.net;
 
+import co.paralleluniverse.fibers.Fiber;
 import co.paralleluniverse.fibers.Suspendable;
 import com.hiddenswitch.proto3.net.models.MatchmakingRequest;
 import com.hiddenswitch.proto3.net.models.MatchmakingResponse;
+import com.hiddenswitch.proto3.net.util.Result;
 import com.hiddenswitch.proto3.net.util.Serialization;
 import io.vertx.core.Future;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
+import io.vertx.ext.sync.Sync;
 import io.vertx.ext.sync.SyncVerticle;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
 import io.vertx.ext.web.handler.LoggerHandler;
+import org.apache.commons.lang3.RandomUtils;
 
 import static io.vertx.ext.sync.Sync.awaitResult;
+import static io.vertx.ext.sync.Sync.fiberHandler;
 
 /**
  * Created by bberman on 11/27/16.
  */
-public class AnonymousServices extends SyncVerticle {
+public class EmbeddedServices extends SyncVerticle {
 	@Override
 	@Suspendable
-	public void start(Future<Void> started) {
-		Logger logger = LoggerFactory.getLogger(AnonymousServices.class);
-
+	public void start() {
+		Logger logger = LoggerFactory.getLogger(EmbeddedServices.class);
 		HttpServer server = vertx.createHttpServer();
 		Router router = Router.router(vertx);
 
 		try {
-			GameSessions gameSessions = new GameSessions().withEmbeddedConfiguration();
+			logger.info("Deploying embedded services...");
+			GameSessions gameSessions = new GameSessions();
+
+			Void t = awaitResult(done -> context.executeBlocking(blocking -> {
+				logger.info("Starting embedded configuration...");
+				gameSessions.withEmbeddedConfiguration();
+				logger.info("Embedded configuration complete.");
+				blocking.complete();
+			}, done));
+
+			logger.info("Deploying gameGessions...");
 
 			String socketServerDeploymentId = awaitResult(done -> {
 				vertx.deployVerticle(gameSessions, done);
@@ -67,19 +81,10 @@ public class AnonymousServices extends SyncVerticle {
 						routingContext.response().end(Serialization.serialize(matchmakingResponse));
 					});
 
-			HttpServer listening = awaitResult(done -> server.requestHandler(router::accept).listen(80, done));
-			logger.info("Listening on port 80.");
-			started.complete();
+			int httpPort = 6112;
+			HttpServer listening = awaitResult(done -> server.requestHandler(router::accept).listen(httpPort, done));
+			logger.info("Listening on port {}", httpPort);
 		} catch (Exception e) {
-			started.fail(e);
 		}
-
-		server.requestHandler(router::accept).listen(80, o -> {
-			if (o.succeeded()) {
-				started.complete();
-			} else {
-				started.fail(o.cause());
-			}
-		});
 	}
 }

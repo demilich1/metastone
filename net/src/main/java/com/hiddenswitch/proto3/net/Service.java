@@ -11,10 +11,15 @@ import com.amazonaws.services.sqs.AmazonSQSClient;
 import com.hiddenswitch.proto3.net.amazon.AwsStack;
 import com.hiddenswitch.proto3.net.amazon.AwsStackConfiguration;
 import io.vertx.core.AbstractVerticle;
+import io.vertx.core.logging.Logger;
+import io.vertx.core.logging.LoggerFactory;
 import org.elasticmq.rest.sqs.SQSRestServer;
 import org.elasticmq.rest.sqs.SQSRestServerBuilder;
 
+import java.io.File;
+
 public abstract class Service<T extends Service<T>> extends AbstractVerticle {
+	private static Logger logger = LoggerFactory.getLogger(Service.class);
 	private DynamoDBMapper database;
 	private AWSCredentials credentials;
 	private AmazonSQSClient queue;
@@ -31,31 +36,47 @@ public abstract class Service<T extends Service<T>> extends AbstractVerticle {
 	}
 
 	@SuppressWarnings("unchecked")
-	public T withEmbeddedConfiguration() {
-		createdEmbeddedServices();
+	public T withEmbeddedConfiguration(File dbFile) {
+		createdEmbeddedServices(dbFile);
 
+		logger.info("Setting default services...");
 		this.credentials = new BasicAWSCredentials("x", "y");
 		this.database = new DynamoDBMapper(dynamoDBEmbedded);
 		this.queue = new AmazonSQSClient(credentials);
 		this.queue.setEndpoint("http://localhost:9324");
-
+		logger.info("Default services ready in embedded configuration.");
 		return (T) this;
 	}
 
-	private synchronized static void createdEmbeddedServices() {
+	@SuppressWarnings("unchecked")
+	public T withEmbeddedConfiguration() {
+		return withEmbeddedConfiguration(null);
+	}
+
+	private synchronized static void createdEmbeddedServices(File dbFile) {
 		if (elasticMQ == null) {
+			logger.info("Starting ElasticMQ...");
 			elasticMQ = SQSRestServerBuilder.start();
 			elasticMQ.waitUntilStarted();
+			logger.info("Started ElasticMQ.");
+		} else {
+			logger.info("SQS already started.");
 		}
 
+
 		if (dynamoDBEmbedded == null) {
-			dynamoDBEmbedded = DynamoDBEmbedded.create().amazonDynamoDB();
+			logger.info("Starting DynamoDB embedded...");
+			dynamoDBEmbedded = DynamoDBEmbedded.create(dbFile).amazonDynamoDB();
+			logger.info("Started DynamoDB embedded.");
+		} else {
+			logger.info("DynamoDB already started.");
 		}
 
 		if (embeddedConfigured) {
 			return;
 		}
 
+		logger.info("Configuring stack...");
 		AwsStackConfiguration configuration = new AwsStackConfiguration();
 		BasicAWSCredentials credentials = new BasicAWSCredentials("x", "y");
 		configuration.credentials = credentials;
@@ -63,7 +84,7 @@ public abstract class Service<T extends Service<T>> extends AbstractVerticle {
 		configuration.database = new DynamoDBMapper(dynamoDBEmbedded);
 		configuration.queue = new AmazonSQSClient(credentials).withEndpoint("http://localhost:9324");
 		AwsStack.initializeStack(configuration);
-
+		logger.info("Stack initialized, embedding configured.");
 		embeddedConfigured = true;
 	}
 
@@ -116,17 +137,17 @@ public abstract class Service<T extends Service<T>> extends AbstractVerticle {
 
 	@Override
 	public void stop() {
-		try {
-			if (elasticMQ != null) {
-				elasticMQ.stopAndWait();
-			}
-			if (dynamoDBEmbedded != null) {
-				dynamoDBEmbedded.shutdown();
-			}
-			if (queue != null) {
-				queue.shutdown();
-			}
-		} catch (Exception ignored) {
-		}
+//		try {
+//			if (elasticMQ != null) {
+//				elasticMQ.stopAndWait();
+//			}
+//			if (dynamoDBEmbedded != null) {
+//				dynamoDBEmbedded.shutdown();
+//			}
+//			if (queue != null) {
+//				queue.shutdown();
+//			}
+//		} catch (Exception ignored) {
+//		}
 	}
 }

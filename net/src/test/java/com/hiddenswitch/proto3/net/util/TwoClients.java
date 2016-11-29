@@ -13,9 +13,9 @@ import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardParseException;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.DeckCatalogue;
+import org.junit.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.Assert;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -128,7 +128,7 @@ public class TwoClients {
 		List<Throwable> exceptions = getServerGameContext().getExceptions();
 		if (exceptions.size() > 0) {
 			for (Throwable t : exceptions) {
-				Assert.fail(t.getMessage(), t.getCause());
+				Assert.fail(t.getMessage());
 			}
 		}
 		if (!gameDecided()) {

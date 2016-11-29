@@ -12,6 +12,8 @@ import io.netty.channel.DefaultChannelId;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
+import io.vertx.core.logging.Logger;
+import io.vertx.core.logging.LoggerFactory;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardParseException;
 import org.apache.commons.lang3.RandomUtils;
@@ -20,12 +22,10 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class GameSessions extends Service<GameSessions> {
+	private Logger logger = LoggerFactory.getLogger(GameSessions.class);
 	private SocketServer server;
 
 	public GameSessions() {
-		DefaultChannelId.newInstance();
-		int port = RandomUtils.nextInt(6200, 16200);
-		server = new SocketServer(port);
 	}
 
 	@Override
@@ -36,13 +36,20 @@ public class GameSessions extends Service<GameSessions> {
 			result.fail(e);
 		}
 
-		vertx.deployVerticle(server, done -> {
+		vertx.executeBlocking(blocking -> {
+			DefaultChannelId.newInstance();
+			int port = RandomUtils.nextInt(6200, 16200);
+			server = new SocketServer(port);
+			logger.info("Socket server configured.");
+			blocking.complete();
+		}, then -> vertx.deployVerticle(server, done -> {
+			logger.info("Socket server deployed.");
 			if (done.succeeded()) {
 				result.complete();
 			} else {
 				result.fail(done.cause());
 			}
-		});
+		}));
 	}
 
 	public ServerGameContext getGameContext(String gameId) {
@@ -69,5 +76,10 @@ public class GameSessions extends Service<GameSessions> {
 
 	public DescribeGameSessionResponse describeGameSession(DescribeGameSessionRequest request) {
 		return DescribeGameSessionResponse.fromGameContext(getGameContext(request.getGameId()));
+	}
+
+	@Override
+	public void stop() {
+		super.stop();
 	}
 }

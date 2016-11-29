@@ -20,6 +20,10 @@ task copyNativeDeps(type: Copy) {
 
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'jp.classmethod.aws'
+apply plugin: 'application'
+
+mainClassName = 'com.hiddenswitch.proto3.net.EmbeddedApplication'
+
 
 aws {
     profileName = 'metastone_net'
@@ -68,8 +72,9 @@ dependencies {
     compile project(':cards')
 
     testCompile project(':game')
+    testCompile group: 'junit', name: 'junit', version: '4.+'
     testCompile group: 'org.unitils', name: 'unitils-core', version: '3.4.3'
-    testCompile group: 'org.testng', name: 'testng', version: '6.+'
+    testCompile group: 'io.vertx', name: 'vertx-unit', version: '3.3.3'
 }
 
 tasks.withType(JavaExec) {
@@ -78,7 +83,7 @@ tasks.withType(JavaExec) {
 
 test {
     jvmArgs "-javaagent:${configurations.quasar.iterator().next()}"
-    useTestNG()
+    useJUnit()
     testLogging.showStandardStreams = true
     testLogging {
         events "standardError"

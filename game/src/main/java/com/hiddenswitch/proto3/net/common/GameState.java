@@ -4,7 +4,9 @@ import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.TurnState;
+import net.demilich.metastone.game.spells.trigger.TriggerManager;
 import net.demilich.metastone.game.targeting.IdFactory;
+import org.apache.commons.lang3.SerializationUtils;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -13,30 +15,21 @@ public class GameState implements Serializable {
 	public final Player player1;
 	public final Player player2;
 	public final HashMap<Environment, Object> environment;
+	public final TriggerManager triggerManager;
 	public final IdFactory idFactory;
 	public final TurnState turnState;
 
 	public GameState(GameContext fromContext) {
-		player1 = fromContext.getPlayer1();
-		player2 = fromContext.getPlayer2();
-		environment = fromContext.getEnvironment();
-		idFactory = fromContext.getLogic().getIdFactory();
-		turnState = fromContext.getTurnState();
+		this(fromContext, fromContext.getTurnState());
 	}
 
 	public GameState(GameContext fromContext, TurnState turnState) {
-		player1 = fromContext.getPlayer1();
-		player2 = fromContext.getPlayer2();
-		environment = fromContext.getEnvironment();
-		idFactory = fromContext.getLogic().getIdFactory();
+		player1 = SerializationUtils.clone(fromContext.getPlayer1());
+		player2 = SerializationUtils.clone(fromContext.getPlayer2());
+		environment = SerializationUtils.clone(fromContext.getEnvironment());
+		idFactory = SerializationUtils.clone(fromContext.getLogic().getIdFactory());
+		triggerManager  = SerializationUtils.clone(fromContext.getTriggerManager());
 		this.turnState = turnState;
 	}
 
-	public GameState(Player player1, Player player2, HashMap<Environment, Object> environment, IdFactory idFactory, TurnState turnState) {
-		this.player1 = player1;
-		this.player2 = player2;
-		this.environment = environment;
-		this.idFactory = idFactory;
-		this.turnState = turnState;
-	}
 }

@@ -36,6 +36,11 @@ public class Games extends Service<Games> {
 		}
 	}
 
+	@Override
+	public void stop() {
+		super.stop();
+	}
+
 	public MatchmakingResponse matchmakeAndJoin(MatchmakingRequest matchmakingRequest, String userId) {
 		// TODO: The user can have at most 1 matchmaking session pending.
 		// TODO: Make sure the user doesn't get matchmade into their own matchmaking request
@@ -172,5 +177,4 @@ public class Games extends Service<Games> {
 	public void setMatchmakingQueueUrl(String matchmakingQueueUrl) {
 		this.matchmakingQueueUrl = matchmakingQueueUrl;
 	}
-
 }

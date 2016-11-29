@@ -2,10 +2,8 @@ package com.hiddenswitch.proto3.server;
 
 import co.paralleluniverse.fibers.Suspendable;
 import com.hiddenswitch.proto3.net.common.ClientToServerMessage;
-import com.hiddenswitch.proto3.net.common.NetworkBehaviour;
 import com.hiddenswitch.proto3.net.util.IncomingMessage;
 import com.hiddenswitch.proto3.net.util.Serialization;
-import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.net.NetServer;
 import io.vertx.core.net.NetSocket;
@@ -30,21 +28,21 @@ public class SocketServer extends SyncVerticle {
 
 	@Override
 	@Suspendable
-	public void start(Future<Void> done) {
+	public void start() {
 		server = vertx.createNetServer();
-		server.connectHandler(socket -> {
-			socket.handler(Sync.fiberHandler(messageBuffer -> {
-				receiveData(socket, messageBuffer);
-			}));
-		});
+		NetServer result = Sync.awaitResult(done -> {
+			server.connectHandler(socket -> {
+				socket.handler(Sync.fiberHandler(messageBuffer -> {
+					receiveData(socket, messageBuffer);
+				}));
+			});
 
-		server.listen(getPort(), getHost(), listenResult -> {
-			if (!listenResult.succeeded()) {
-				getVertx().undeploy(deploymentID());
-				done.fail(listenResult.cause());
-			} else {
-				done.complete();
-			}
+			server.listen(getPort(), getHost(), listenResult -> {
+				if (!listenResult.succeeded()) {
+					logger.error("Failure deploying socket listener: {}", listenResult.cause());
+				}
+				done.handle(listenResult);
+			});
 		});
 	}
 
@@ -146,12 +144,8 @@ public class SocketServer extends SyncVerticle {
 	@Override
 	@Suspendable
 	public void stop() {
-		kill();
-	}
-
-	public void kill() {
-		setRunning(false);
 		getGames().values().forEach(ServerGameSession::kill);
+		Void t = Sync.awaitResult(done -> server.close(done));
 	}
 
 	public ServerGameSession createGameSession(PregamePlayerConfiguration player1, PregamePlayerConfiguration player2) {
@@ -171,11 +165,5 @@ public class SocketServer extends SyncVerticle {
 
 	public Map<String, ServerGameSession> getGames() {
 		return Collections.unmodifiableMap(games);
-	}
-
-	public void setRunning(boolean running) {
-		if (!running) {
-			kill();
-		}
 	}
 }

@@ -1,8 +1,10 @@
-package com.hiddenswitch.proto3.net.util;
+package com.hiddenswitch.proto3.net;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import com.google.gson.reflect.TypeToken;
+import com.hiddenswitch.proto3.net.util.Serialization;
+import com.hiddenswitch.proto3.net.util.SerializationTestContext;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.*;
@@ -21,18 +23,18 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 import net.demilich.metastone.tests.TestBase;
-import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.slf4j.LoggerFactory;
-import org.testng.Assert;
-import static com.hiddenswitch.proto3.Assert.*;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-import static org.testng.Assert.*;
+import static com.hiddenswitch.proto3.Assert.assertReflectionEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class SerializationTest extends TestBase {
 
@@ -45,13 +47,13 @@ public class SerializationTest extends TestBase {
 		return randomClass;
 	}
 
-	@BeforeTest
+	@Before
 	private void loggerSetup() {
 		Logger root = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
 		root.setLevel(Level.INFO);
 	}
 
-	@Test(threadPoolSize = 16, invocationCount = 1)
+	@Test
 	public void testGameContextSerialization() {
 		DeckFormat deckFormat = new DeckFormat();
 		for (CardSet set : CardSet.values()) {
@@ -73,7 +75,7 @@ public class SerializationTest extends TestBase {
 			context.play();
 			context.dispose();
 		} catch (Exception e) {
-			Assert.fail("Exception occured", e);
+			Assert.fail(e.getMessage());
 		}
 	}
 

@@ -2,39 +2,60 @@ package com.hiddenswitch.proto3.net;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
+import com.hiddenswitch.proto3.net.util.Result;
 import com.hiddenswitch.proto3.net.util.TwoClients;
+import io.vertx.core.AsyncResult;
+import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
+import io.vertx.ext.unit.Async;
+import io.vertx.ext.unit.TestContext;
+import io.vertx.ext.unit.junit.VertxUnitRunner;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardParseException;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.LoggerFactory;
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+@RunWith(VertxUnitRunner.class)
 public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 	private org.slf4j.Logger logger = LoggerFactory.getLogger(GameSessionsTest.class);
 
-	@BeforeMethod
-	@Override
-	public void setUp() throws Exception {
+	@Before
+	public void setErrorLevel() {
 		Logger root = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
 		root.setLevel(Level.ERROR);
-		CardCatalogue.loadCardsFromPackage();
-		super.setUp();
+	}
+
+	@Before
+	public void loadCards(TestContext context) {
+		final Async async = context.async();
+		try {
+			CardCatalogue.loadCardsFromPackage();
+		} catch (IOException | URISyntaxException | CardParseException e) {
+			Assert.fail(e.getMessage());
+		}
+		async.complete();
 	}
 
 	@Test
-	public void testCreateGameSession() throws CardParseException, IOException, URISyntaxException {
-		getAndTestTwoClients();
+	public void testCreateGameSession(TestContext context) throws CardParseException, IOException, URISyntaxException {
+		wrapBlocking(context, this::getAndTestTwoClients);
 	}
 
-	private TwoClients getAndTestTwoClients() throws CardParseException, IOException, URISyntaxException {
-		TwoClients twoClients = new TwoClients().invoke(this.service);
+	private TwoClients getAndTestTwoClients() {
+		TwoClients twoClients = null;
+		try {
+			twoClients = new TwoClients().invoke(this.service);
+		} catch (IOException | URISyntaxException | CardParseException e) {
+			Assert.fail(e.getMessage());
+		}
 		try {
 			twoClients.play();
 			float seconds = 0.0f;
@@ -48,7 +69,7 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 
 			twoClients.assertGameOver();
 		} catch (Exception e) {
-			Assert.fail("Exception in execution", e);
+			Assert.fail(e.getMessage());
 		} finally {
 			twoClients.dispose();
 		}
@@ -56,42 +77,55 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 	}
 
 	@Test
-	public void testTwoGameSessionsOneAfterAnother() throws CardParseException, IOException, URISyntaxException {
-		getAndTestTwoClients();
-		getAndTestTwoClients();
+	public void testTwoGameSessionsOneAfterAnother(TestContext context) throws CardParseException, IOException, URISyntaxException {
+		wrapBlocking(context, () -> {
+			getAndTestTwoClients();
+			getAndTestTwoClients();
+		});
+
 	}
 
 	@Test
-	public void testOldSessionDisposed() throws CardParseException, IOException, URISyntaxException {
-		getAndTestTwoClients();
-		getAndTestTwoClients();
-		// The game server should have cleaned up the games by now.
-		try {
-			Thread.sleep(4000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		Assert.assertEquals(this.service.getServer().getGames().size(), 0, "After four seconds, the server should have cleaned up any lingering games.");
+	public void testOldSessionDisposed(TestContext context) throws CardParseException, IOException, URISyntaxException {
+		wrapBlocking(context, () -> {
+			getAndTestTwoClients();
+			getAndTestTwoClients();
+			// The game server should have cleaned up the games by now.
+			try {
+				Thread.sleep(4000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			Assert.assertEquals("After four seconds, the server should have cleaned up any lingering games.", this.service.getServer().getGames().size(), 0);
+		});
 	}
 
 	@Test
-	public void testTwoSimultaneousSessions() throws Exception {
-		simultaneousSessions(2);
+	public void testTwoSimultaneousSessions(TestContext context) throws Exception {
+		wrapBlocking(context, () -> {
+			simultaneousSessions(2);
+		});
 	}
-	
+
 	@Test
-	public void testTenSessionsTenTimes() throws Exception {
-		for(int i = 0; i < 10; i++){
-			simultaneousSessions(10);
-			logger.info("Iteration completed : " + (i+1));
-		}
+	public void testTenSessionsTenTimes(TestContext context) throws Exception {
+		wrapBlocking(context,  () -> {
+			for (int i = 0; i < 10; i++) {
+				simultaneousSessions(10);
+				logger.info("Iteration completed : " + (i + 1));
+			}
+		});
 	}
-	
-	
-	private void simultaneousSessions(int sessions) throws Exception {
+
+
+	private void simultaneousSessions(int sessions) {
 		List<TwoClients> clients = new ArrayList<>();
 		for (int i = 0; i < sessions; i++) {
-			clients.add(new TwoClients().invoke(this.service));
+			try {
+				clients.add(new TwoClients().invoke(this.service));
+			} catch (IOException | URISyntaxException | CardParseException e) {
+				Assert.fail(e.getMessage());
+			}
 		}
 
 		try {
@@ -106,22 +140,17 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 			}
 			clients.forEach(TwoClients::assertGameOver);
 		} catch (Exception e) {
-			Assert.fail("Exception in execution", e);
+			Assert.fail(e.getMessage());
 		} finally {
 			clients.forEach(TwoClients::dispose);
 		}
 	}
 
 	@Override
-	public GameSessions setupAndReturnServiceInstance() {
-		if (service == null) {
-			Vertx vertx = Vertx.vertx();
-			GameSessions instance = new GameSessions();
-			vertx.deployVerticle(instance);
-			return instance;
-		} else {
-			return service;
-		}
+	public void deployServices(Vertx vertx, Handler<AsyncResult<GameSessions>> done) {
+		GameSessions instance = new GameSessions();
+		vertx.deployVerticle(instance, then -> {
+			done.handle(new Result<>(instance));
+		});
 	}
-
 }

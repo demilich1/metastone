@@ -183,7 +183,7 @@ public class CardCatalogue {
 		}
 		return result;
 	}
-	
+
     public static void loadCardsFromFilesystem() throws IOException, URISyntaxException, CardParseException {
         // load cards from ~/metastone/cards on the file system
         Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(CARDS_FOLDER_PATH, true);
@@ -213,8 +213,10 @@ public class CardCatalogue {
         for (CardDesc desc : cardDesc.values()) {
             Card instance = desc.createInstance();
             CardCatalogue.add(instance);
-            logger.debug("Adding {} to CardCatalogue", instance);
+
         }
+
+	    logger.debug("{} cards loaded.", CardCatalogue.cards.getCount());
 
         if (!badCards.isEmpty()) {
             throw new CardParseException(badCards);

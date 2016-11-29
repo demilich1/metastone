@@ -1,24 +1,64 @@
 package com.hiddenswitch.proto3.net;
 
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.amazonaws.services.dynamodbv2.local.embedded.DynamoDBEmbedded;
-import com.amazonaws.services.sqs.AmazonSQSClient;
-import com.hiddenswitch.proto3.net.amazon.AwsStack;
-import com.hiddenswitch.proto3.net.amazon.AwsStackConfiguration;
-import org.elasticmq.rest.sqs.SQSRestServer;
-import org.elasticmq.rest.sqs.SQSRestServerBuilder;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import io.vertx.core.AsyncResult;
+import io.vertx.core.Handler;
+import io.vertx.core.Vertx;
+import io.vertx.core.logging.Logger;
+import io.vertx.core.logging.LoggerFactory;
+import io.vertx.ext.unit.Async;
+import io.vertx.ext.unit.TestContext;
+import io.vertx.ext.unit.junit.VertxUnitRunner;
+import net.demilich.metastone.game.cards.CardParseException;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.runner.RunWith;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+
+@RunWith(VertxUnitRunner.class)
 public abstract class ServiceTestBase<T extends Service<T>> {
+	Logger logger = LoggerFactory.getLogger(ServiceTestBase.class);
+	protected Vertx vertx;
 	protected T service;
 
-	public abstract T setupAndReturnServiceInstance();
+	public abstract void deployServices(Vertx vertx, Handler<AsyncResult<T>> done);
 
-	@BeforeMethod
-	public void setUp() throws Exception {
-		service = setupAndReturnServiceInstance().withEmbeddedConfiguration();
+	@Before
+	public void setUp(TestContext context) {
+		vertx = Vertx.vertx();
+		final Async async = context.async();
+		deployServices(vertx, then -> {
+			service = then.result();
+			vertx.executeBlocking(done -> {
+				service.withEmbeddedConfiguration();
+				done.complete();
+			}, then2 -> {
+				logger.info("Embedded configuration completed.");
+				context.assertNotNull(service);
+				async.complete();
+			});
+		});
+	}
+
+	@After
+	public void tearDown(TestContext context) {
+		logger.info("Tearing down vertx.");
+		vertx.close(context.asyncAssertSuccess());
+	}
+
+	protected void wrapBlocking(TestContext context, Runnable code) {
+		final Async async = context.async();
+		vertx.executeBlocking(fut -> {
+			try {
+				code.run();
+			} catch (Exception e) {
+				Assert.fail(e.getMessage());
+			}
+			fut.complete();
+		}, then -> {
+			async.complete();
+		});
 	}
 }

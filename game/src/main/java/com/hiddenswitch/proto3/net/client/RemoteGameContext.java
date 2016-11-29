@@ -348,6 +348,7 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 		this.setPlayer(GameContext.PLAYER_1, state.player1);
 		this.setPlayer(GameContext.PLAYER_2, state.player2);
 		this.setEnvironment(state.environment);
+		this.setTriggerManager(state.triggerManager);
 		this.getLogic().setIdFactory(state.idFactory);
 		this.setRemoteTurnState(state.turnState);
 		this.onGameStateChanged();

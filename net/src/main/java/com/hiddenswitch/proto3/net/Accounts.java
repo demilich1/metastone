@@ -22,7 +22,7 @@ public class Accounts extends Service<Accounts> {
 
 	@Override
 	public void stop() {
-
+		super.stop();
 	}
 
 	public CreateAccountResponse createAccount(String emailAddress, String password, String username) {

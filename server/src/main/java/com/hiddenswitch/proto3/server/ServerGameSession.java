@@ -120,6 +120,7 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 		}
 	}
 
+	@Suspendable
 	public void kill() {
 
 	}
