@@ -1,13 +1,12 @@
 package com.hiddenswitch.proto3.net.models;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.*;
-import com.hiddenswitch.proto3.net.behaviour.NullBehaviour;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIgnore;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted;
 import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
 import com.hiddenswitch.proto3.server.PregamePlayerConfiguration;
-import net.demilich.metastone.game.cards.NullHeroCard;
-import net.demilich.metastone.game.decks.Bench;
 import net.demilich.metastone.game.decks.Deck;
-import net.demilich.metastone.game.gameconfig.PlayerConfig;
 
 @DynamoDBDocument
 public class GamePlayer {

@@ -33,7 +33,7 @@ public class AnonymousServices extends SyncVerticle {
 
 		try {
 			GameSessions gameSessions = new GameSessions().withEmbeddedConfiguration();
-
+			
 			String socketServerDeploymentId = awaitResult(done -> {
 				vertx.deployVerticle(gameSessions, done);
 			});
