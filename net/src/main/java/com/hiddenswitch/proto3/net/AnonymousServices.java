@@ -32,29 +32,30 @@ public class AnonymousServices extends SyncVerticle {
 		Router router = Router.router(vertx);
 
 		try {
-			GameSessions gameSessions = new GameSessions();
+			GameSessions gameSessions = new GameSessions().withEmbeddedConfiguration();
+
 			String socketServerDeploymentId = awaitResult(done -> {
 				vertx.deployVerticle(gameSessions, done);
 			});
 
-			Games games = new Games().withGameSessions(gameSessions);
+			Games games = new Games()
+					.withGameSessions(gameSessions)
+					.withEmbeddedConfiguration();
 
 			String gamesDeploymentId = awaitResult(done -> {
 				vertx.deployVerticle(games, done);
 			});
 
 			router.route("/v0/anonymous/matchmake")
-					.method(HttpMethod.HEAD)
-					.handler(routingContext -> {
-						// HEAD: Lookup the retry ID quickly.
-					})
 					.method(HttpMethod.POST)
+					.consumes("application/json")
+					.produces("application/json")
 					.handler(BodyHandler.create())
 					.blockingHandler(routingContext -> {
-						HttpServerResponse response = routingContext.response();
 						MatchmakingRequest request = Serialization.deserialize(routingContext.getBodyAsString(), MatchmakingRequest.class);
 						String userId = routingContext.request().getHeader("X-Auth-UserId");
 						MatchmakingResponse matchmakingResponse = games.matchmakeAndJoin(request, userId);
+						routingContext.response().end(Serialization.serialize(matchmakingResponse));
 					});
 
 			HttpServer listening = awaitResult(done -> server.requestHandler(router::accept).listen(80, done));
