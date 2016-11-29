@@ -112,9 +112,6 @@ public class SocketServer extends SyncVerticle {
 
 				gameForSocket.put(socket, session);
 
-				// Wrap the player's supplied behaviour as a NetworkBehaviour to make it work
-				NetworkBehaviour networkBehaviour = new NetworkBehaviour(message.getPlayer1().getBehaviour());
-				message.getPlayer1().setBehaviour(networkBehaviour);
 				session.onPlayerConnected(message.getPlayer1());
 				break;
 

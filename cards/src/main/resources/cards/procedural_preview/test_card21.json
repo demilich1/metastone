@@ -1,1 +1,23 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "Knight Commander", "heroClass": "ANY", "description": "Battlecry: Copy your opponent's Hero Power.", "fileFormatVersion": 1, "rarity": "EPIC", "baseHp": 3.0, "baseManaCost": 3.0, "attributes": {"BATTLECRY": true}, "battlecry": {"spell": {"class": "CopyHeroPower", "target": "FRIENDLY_HERO"}}, "type": "MINION", "id": "Knight Commander", "baseAttack": 4.0}
+{
+  "collectible": true,
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Knight Commander",
+  "heroClass": "ANY",
+  "description": "Battlecry: Copy your opponent's Hero Power.",
+  "fileFormatVersion": 1,
+  "rarity": "EPIC",
+  "baseHp": 3.0,
+  "baseManaCost": 3.0,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "battlecry": {
+    "spell": {
+      "class": "CopyHeroPower",
+      "target": "FRIENDLY_HERO"
+    }
+  },
+  "type": "MINION",
+  "id": "Knight Commander",
+  "baseAttack": 4.0
+}

@@ -1,10 +1,7 @@
 package com.hiddenswitch.proto3.server;
 
 import co.paralleluniverse.fibers.Suspendable;
-import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
-import com.hiddenswitch.proto3.net.common.ClientToServerMessage;
-import com.hiddenswitch.proto3.net.common.RemoteUpdateListener;
-import com.hiddenswitch.proto3.net.common.ServerGameContext;
+import com.hiddenswitch.proto3.net.common.*;
 import io.vertx.core.Vertx;
 import io.vertx.core.WorkerExecutor;
 import net.demilich.metastone.game.Player;
@@ -14,6 +11,7 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
+import net.demilich.metastone.game.targeting.IdFactory;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.List;
@@ -30,13 +28,14 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	private Player player2;
 	private final String gameId;
 
-	private ClientConnectionConfiguration getConfigurationFor(PregamePlayerConfiguration player) {
+	private ClientConnectionConfiguration getConfigurationFor(PregamePlayerConfiguration player, int id) {
 		// TODO: It's obviously insecure to allow the client to specify things like their player object
 		Player tempPlayer = player.getPlayer();
 		if (tempPlayer == null) {
 			PlayerConfig playerConfig = new PlayerConfig(player.getDeck(), new HumanBehaviour());
 			tempPlayer = new Player(playerConfig);
 		}
+		tempPlayer.setId(id);
 		return new ClientConnectionConfiguration(getHost(), getPort(),
 				new ClientToServerMessage(tempPlayer, getGameId()));
 	}
@@ -44,21 +43,39 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	@Override
 	@Suspendable
 	public void onPlayerConnected(Player player) {
-		if (getPlayer1() == null) {
+		if (player.getId() == IdFactory.PLAYER_1) {
+			if (getPlayer1() != null) {
+				throw new RuntimeException("Two players tried to connect to the same player slot.");
+			}
 			setPlayer1(player);
-		} else if (getPlayer2() == null) {
+		} else if (player.getId() == IdFactory.PLAYER_2) {
+			if (getPlayer2() != null) {
+				throw new RuntimeException("Two players tried to connect to the same player slot.");
+			}
 			setPlayer2(player);
-			DeckFormat simpleFormat = new DeckFormat();
-			simpleFormat.addSet(CardSet.PROCEDURAL_PREVIEW);
-			simpleFormat.addSet(CardSet.CLASSIC);
-			simpleFormat.addSet(CardSet.BASIC);
-			this.gameContext = new ServerGameContext(getPlayer1(), getPlayer2(), simpleFormat, getGameId());
-			getGameContext().setUpdateListener(getPlayer1(), getPlayerListener(0));
-			getGameContext().setUpdateListener(getPlayer2(), getPlayerListener(1));
-			getGameContext().networkPlay();
 		} else {
-			throw new RuntimeException(String.format("Too many players connected!. gameId: %s", getGameId()));
+			throw new RuntimeException("A player without an ID set has attempted to connect.");
 		}
+
+		if (areBothPlayersConnected()) {
+			startGame();
+		}
+	}
+
+	protected boolean areBothPlayersConnected() {
+		return player1 != null
+				&& player2 != null;
+	}
+
+	protected void startGame() {
+		DeckFormat simpleFormat = new DeckFormat().withCardSets(CardSet.values());
+		// Configure the network behaviours on the players
+		getPlayer1().setBehaviour(new NetworkBehaviour(getPlayer1().getBehaviour()));
+		getPlayer2().setBehaviour(new NetworkBehaviour(getPlayer2().getBehaviour()));
+		this.gameContext = new ServerGameContext(getPlayer1(), getPlayer2(), simpleFormat, getGameId());
+		getGameContext().setUpdateListener(getPlayer1(), getPlayerListener(IdFactory.PLAYER_1));
+		getGameContext().setUpdateListener(getPlayer2(), getPlayerListener(IdFactory.PLAYER_2));
+		getGameContext().networkPlay();
 	}
 
 	@Override
@@ -76,12 +93,12 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 
 	@Override
 	public ClientConnectionConfiguration getConfigurationForPlayer1() {
-		return getConfigurationFor(pregamePlayerConfiguration1);
+		return getConfigurationFor(pregamePlayerConfiguration1, IdFactory.PLAYER_1);
 	}
 
 	@Override
 	public ClientConnectionConfiguration getConfigurationForPlayer2() {
-		return getConfigurationFor(pregamePlayerConfiguration2);
+		return getConfigurationFor(pregamePlayerConfiguration2, IdFactory.PLAYER_2);
 	}
 
 	public ServerGameSession(String host, int port, PregamePlayerConfiguration p1, PregamePlayerConfiguration p2) {

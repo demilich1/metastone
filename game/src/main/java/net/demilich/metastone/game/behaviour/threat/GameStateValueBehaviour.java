@@ -36,7 +36,7 @@ public class GameStateValueBehaviour extends Behaviour {
 	}
 
 	private double alphaBeta(GameContext context, int playerId, GameAction action, int depth) {
-		GameContext simulation = context.clone();
+		GameContext simulation = getClone(context);
 		simulation.getLogic().performGameAction(playerId, action);
 		if (depth == 0 || simulation.getActivePlayerId() != playerId || simulation.gameDecided()) {
 			return heuristic.getScore(simulation, playerId);
@@ -54,6 +54,14 @@ public class GameStateValueBehaviour extends Behaviour {
 		}
 
 		return score;
+	}
+
+	private GameContext getClone(GameContext original) {
+		GameContext context = original.clone();
+		// Assume that the players are GameStateValueBehaviour players
+		context.getPlayer1().setBehaviour(new GameStateValueBehaviour(featureVector, nameSuffix));
+		context.getPlayer2().setBehaviour(new GameStateValueBehaviour(featureVector, nameSuffix));
+		return context;
 	}
 
 	private void answerTrainingData(TrainingData trainingData) {

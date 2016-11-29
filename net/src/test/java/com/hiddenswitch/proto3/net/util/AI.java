@@ -8,10 +8,10 @@ import net.demilich.metastone.game.behaviour.threat.GameStateValueBehaviour;
 import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class AI extends PlayRandomBehaviour implements Serializable {
+public class AI extends GameStateValueBehaviour implements Serializable {
 
 	public AI() {
-		super();
+		super(FeatureVector.getFittest(), "Test");
 	}
 
 	@Override

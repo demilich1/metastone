@@ -68,7 +68,7 @@ public class GameLogic implements Cloneable, Serializable {
 	protected final TargetLogic targetLogic = new TargetLogic();
 	private final ActionLogic actionLogic = new ActionLogic();
 	private final SpellFactory spellFactory = new SpellFactory();
-	protected final IdFactory idFactory;
+	private IdFactory idFactory;
 	private final Random random = new Random();
 
 	@Expose(serialize = false, deserialize = false)
@@ -153,7 +153,7 @@ public class GameLogic implements Cloneable, Serializable {
 
 	protected void assignCardIds(CardCollection cardCollection) {
 		for (Card card : cardCollection) {
-			card.setId(idFactory.generateId());
+			card.setId(getIdFactory().generateId());
 			card.setLocation(CardLocation.DECK);
 		}
 	}
@@ -308,7 +308,7 @@ public class GameLogic implements Cloneable, Serializable {
 
 	@Override
 	public GameLogic clone() {
-		GameLogic clone = new GameLogic(idFactory.clone());
+		GameLogic clone = new GameLogic(getIdFactory().clone());
 		clone.debugHistory = new LinkedList<>(debugHistory);
 		return clone;
 	}
@@ -507,7 +507,7 @@ public class GameLogic implements Cloneable, Serializable {
 
 	public void drawSetAsideCard(int playerId, Card card) {
 		if (card.getId() == IdFactory.UNASSIGNED) {
-			card.setId(idFactory.generateId());
+			card.setId(getIdFactory().generateId());
 		}
 		card.setOwner(playerId);
 		Player player = context.getPlayer(playerId);
@@ -659,7 +659,7 @@ public class GameLogic implements Cloneable, Serializable {
 	}
 
 	public String generateCardID() {
-		return "temp_card_name_" + idFactory.generateId();
+		return "temp_card_name_" + getIdFactory().generateId();
 	}
 
 	public Actor getAnotherRandomTarget(Player player, Actor attacker, Actor originalTarget, EntityReference potentialTargets) {
@@ -950,12 +950,12 @@ public class GameLogic implements Cloneable, Serializable {
 
 	protected Player initializePlayer(int playerId) {
 		Player player = context.getPlayer(playerId);
-		player.getHero().setId(idFactory.generateId());
+		player.getHero().setId(getIdFactory().generateId());
 		player.getHero().setOwner(player.getId());
 		player.getHero().setMaxHp(player.getHero().getAttributeValue(Attribute.BASE_HP));
 		player.getHero().setHp(player.getHero().getAttributeValue(Attribute.BASE_HP));
 
-		player.getHero().getHeroPower().setId(idFactory.generateId());
+		player.getHero().getHeroPower().setId(getIdFactory().generateId());
 		assignCardIds(player.getDeck());
 		assignCardIds(player.getHand());
 
@@ -1260,7 +1260,7 @@ public class GameLogic implements Cloneable, Serializable {
 	public void receiveCard(int playerId, Card card, Entity source, boolean drawn) {
 		Player player = context.getPlayer(playerId);
 		if (card.getId() == IdFactory.UNASSIGNED) {
-			card.setId(idFactory.generateId());
+			card.setId(getIdFactory().generateId());
 		}
 
 		card.setOwner(playerId);
@@ -1376,7 +1376,7 @@ public class GameLogic implements Cloneable, Serializable {
 	public void replaceCard(int playerId, Card oldCard, Card newCard) {
 		Player player = context.getPlayer(playerId);
 		if (newCard.getId() == IdFactory.UNASSIGNED) {
-			newCard.setId(idFactory.generateId());
+			newCard.setId(getIdFactory().generateId());
 		}
 
 		if (!player.getHand().contains(oldCard)) {
@@ -1401,7 +1401,7 @@ public class GameLogic implements Cloneable, Serializable {
 	public void replaceCardInDeck(int playerId, Card oldCard, Card newCard) {
 		Player player = context.getPlayer(playerId);
 		if (newCard.getId() == IdFactory.UNASSIGNED) {
-			newCard.setId(idFactory.generateId());
+			newCard.setId(getIdFactory().generateId());
 		}
 
 		if (!player.getDeck().contains(oldCard)) {
@@ -1514,7 +1514,7 @@ public class GameLogic implements Cloneable, Serializable {
 
 	public void shuffleToDeck(Player player, Card card) {
 		if (card.getId() == IdFactory.UNASSIGNED) {
-			card.setId(idFactory.generateId());
+			card.setId(getIdFactory().generateId());
 		}
 		card.setLocation(CardLocation.DECK);
 
@@ -1677,7 +1677,7 @@ public class GameLogic implements Cloneable, Serializable {
 			log("{} was transformed to {}", minion, newMinion);
 
 			// Give the new minion an ID.
-			newMinion.setId(idFactory.generateId());
+			newMinion.setId(getIdFactory().generateId());
 			newMinion.setOwner(owner.getId());
 
 			// If the minion being transforms is being summoned, replace the old
@@ -1717,7 +1717,7 @@ public class GameLogic implements Cloneable, Serializable {
 				handleEnrage(newMinion);
 			} else {
 				owner.getSetAsideZone().add(newMinion);
-				newMinion.setId(idFactory.generateId());
+				newMinion.setId(getIdFactory().generateId());
 				newMinion.setOwner(owner.getId());
 				removeSpelltriggers(newMinion);
 				return;
@@ -1784,6 +1784,14 @@ public class GameLogic implements Cloneable, Serializable {
 		return random;
 	}
 
+	public IdFactory getIdFactory() {
+		return idFactory;
+	}
+
+	public void setIdFactory(IdFactory idFactory) {
+		this.idFactory = idFactory;
+	}
+
 	protected class FirstHand {
 		private Player player;
 		private boolean begins;
@@ -1840,7 +1848,7 @@ public class GameLogic implements Cloneable, Serializable {
 		public PreEquipWeapon invoke() {
 			player = context.getPlayer(playerId);
 
-			weapon.setId(idFactory.generateId());
+			weapon.setId(getIdFactory().generateId());
 			currentWeapon = player.getHero().getWeapon();
 
 			if (currentWeapon != null) {
@@ -1881,7 +1889,7 @@ public class GameLogic implements Cloneable, Serializable {
 				myResult = true;
 				return this;
 			}
-			minion.setId(idFactory.generateId());
+			minion.setId(getIdFactory().generateId());
 			minion.setOwner(player.getId());
 
 			context.getSummonReferenceStack().push(minion.getReference());

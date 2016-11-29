@@ -13,18 +13,18 @@ public class DebugContext extends GameContext {
 
 	@Override
 	public void init() {
-		activePlayer = getPlayer(PLAYER_1).getId();
-		getLogic().init(activePlayer, true);
+		setActivePlayerIndex(getPlayer(PLAYER_1).getId());
+		getLogic().init(getActivePlayerId(), true);
 		getLogic().init(getOpponent(getActivePlayer()).getId(), false);
 	}
 
-	public void setActivePlayer(int playerId) {
-		this.activePlayer = playerId;
+	public void setActivePlayerIndex(int playerId) {
+		setActivePlayerIndex(playerId);
 	}
 	
 	public void endTurn() {
 		super.endTurn();
-		startTurn(activePlayer);
+		startTurn(getActivePlayerId());
 	}
 
 }

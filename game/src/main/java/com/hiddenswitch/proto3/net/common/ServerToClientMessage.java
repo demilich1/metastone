@@ -18,6 +18,7 @@ public class ServerToClientMessage implements Serializable {
 	public int turnNumber;
 	public TurnState turnState;
 	public Player player1, player2;
+	public GameState gameState;
 	public List<GameAction> actions;
 	public List<Card> startingCards;
 	public String id;
@@ -52,10 +53,8 @@ public class ServerToClientMessage implements Serializable {
 		this.mt = MessageType.ON_TURN_END;
 	}
 
-	public ServerToClientMessage(Player player, Player player2, TurnState newState) {
-		this.player1 = player;
-		this.player2 = player2;
-		this.turnState = newState;
+	public ServerToClientMessage(GameState gameState) {
+		this.gameState = gameState;
 		this.mt = MessageType.ON_UPDATE;
 	}
 

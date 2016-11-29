@@ -1,5 +1,6 @@
 package com.hiddenswitch.proto3.server;
 
+import com.hiddenswitch.proto3.net.common.GameState;
 import com.hiddenswitch.proto3.net.common.RemoteUpdateListener;
 import com.hiddenswitch.proto3.net.common.ServerToClientMessage;
 import com.hiddenswitch.proto3.net.util.IncomingMessage;
@@ -72,7 +73,6 @@ class SocketClientReceiver implements RemoteUpdateListener {
 	@Override
 	public void setPlayers(Player localPlayer, Player remotePlayer) {
 		sendMessage(new ServerToClientMessage(localPlayer, remotePlayer));
-
 	}
 
 	@Override
@@ -87,8 +87,8 @@ class SocketClientReceiver implements RemoteUpdateListener {
 	}
 
 	@Override
-	public void onUpdate(Player player1, Player player2, TurnState newState) {
-		sendMessage(new ServerToClientMessage(player1, player2, newState));
+	public void onUpdate(GameState state) {
+		sendMessage(new ServerToClientMessage(state));
 	}
 
 	@Override

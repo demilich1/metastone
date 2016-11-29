@@ -165,9 +165,10 @@ public class CardCatalogue {
             if (!cards.isEmpty()) {
                 return;
             }
+
+	        Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(CARDS_FOLDER, false);
+	        loadCards(inputStreams);
         }
-        Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(CARDS_FOLDER, false);
-        loadCards(inputStreams);
     }
 
 	public static CardCollection query(DeckFormat deckFormat, Predicate<Card> filter) {

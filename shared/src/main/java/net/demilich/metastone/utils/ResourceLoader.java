@@ -29,13 +29,11 @@ public class ResourceLoader {
 	/**
 	 * Loads all the json files from the given rootDir into a collection of
 	 * ResourceInputStreams
-	 * 
-	 * @param rootDir
-	 *            the root dir from where to start traversing to load the json
-	 *            files
-	 * @param fromFileSystem
-	 *            True if the rootDir is on the filesystem, False if the rootDir
-	 *            is in the Resources dir
+	 *
+	 * @param rootDir        the root dir from where to start traversing to load the json
+	 *                       files
+	 * @param fromFileSystem True if the rootDir is on the filesystem, False if the rootDir
+	 *                       is in the Resources dir
 	 * @return Collections of ResourceInputStreams pointing to the json files
 	 * @throws URISyntaxException
 	 * @throws IOException
@@ -57,7 +55,7 @@ public class ResourceLoader {
 
 		Path filePath;
 		Stream<Path> walk = Files.walk(pathReference.path, DIR_LEVELS);
-		for (Iterator<Path> it = walk.iterator(); it.hasNext();) {
+		for (Iterator<Path> it = walk.iterator(); it.hasNext(); ) {
 			filePath = it.next();
 
 			// skip over non-json files and directories
@@ -94,11 +92,10 @@ public class ResourceLoader {
 	/**
 	 * Utility method to get a PathReference from a given sourceDir that's in
 	 * the Resources dir or a Jar file.
-	 * 
-	 * @param sourceDir
-	 *            the dir of interest in the Resources dir or Jar file
+	 *
+	 * @param sourceDir the dir of interest in the Resources dir or Jar file
 	 * @return a PathReference which contains a Path and boolean indicating the
-	 *         path is in a Jar fle.
+	 * path is in a Jar fle.
 	 * @throws URISyntaxException
 	 * @throws IOException
 	 */
@@ -133,7 +130,7 @@ public class ResourceLoader {
 			try {
 				fileSystem = FileSystems.getFileSystem(uri);
 			} catch (FileSystemNotFoundException ex) {
-				fileSystem = FileSystems.newFileSystem(uri, Collections.<String, Object> emptyMap());
+				fileSystem = FileSystems.newFileSystem(uri, Collections.<String, Object>emptyMap());
 			}
 			path = fileSystem.getPath(sourceDir);
 		} else { // from resources folder on the filesystem
@@ -146,11 +143,9 @@ public class ResourceLoader {
 	/**
 	 * Copy all files from the Resources sourceDir subfolder to the targetDir on
 	 * the filesystem.
-	 * 
-	 * @param sourceDir
-	 *            path to dir who's contents to copy
-	 * @param targetdir
-	 *            path to dir where we want to copy the files to
+	 *
+	 * @param sourceDir path to dir who's contents to copy
+	 * @param targetdir path to dir where we want to copy the files to
 	 * @throws URISyntaxException
 	 * @throws IOException
 	 */

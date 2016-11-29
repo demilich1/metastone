@@ -21,6 +21,7 @@ import net.demilich.metastone.game.spells.trigger.TriggerManager;
 import net.demilich.metastone.game.targeting.CardReference;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.utils.IDisposable;
+import org.apache.commons.lang3.SerializationUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,7 +43,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 	private HashMap<Environment, Object> environment = new HashMap<>();
 	private List<CardCostModifier> cardCostModifiers = new ArrayList<>();
 	private transient final List<Throwable> exceptions = new ArrayList<>();
-	protected int activePlayer = -1;
+	private int activePlayerIndex = -1;
 	private Player winner;
 	private MatchResult result;
 	private TurnState turnState = TurnState.TURN_ENDED;
@@ -64,7 +65,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		}
 		this.setLogic(logic);
 		this.setDeckFormat(deckFormat);
-		tempCards.removeAll();
+		getTempCards().removeAll();
 	}
 
 
@@ -73,11 +74,11 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 	}
 
 	public void addTempCard(Card card) {
-		tempCards.add(card);
+		getTempCards().add(card);
 	}
 
 	public void addTrigger(IGameEventListener trigger) {
-		triggerManager.addTrigger(trigger);
+		getTriggerManager().addTrigger(trigger);
 	}
 
 	@Override
@@ -88,9 +89,9 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		Player player2Clone = getPlayer2().clone();
 		// player2Clone.getDeck().shuffle();
 		GameContext clone = new GameContext(player1Clone, player2Clone, logicClone, getDeckFormat());
-		clone.tempCards = tempCards.clone();
-		clone.triggerManager = triggerManager.clone();
-		clone.activePlayer = activePlayer;
+		clone.setTempCards(getTempCards().clone());
+		clone.setTriggerManager(SerializationUtils.clone(getTriggerManager()));
+		clone.setActivePlayerIndex(activePlayerIndex);
 		clone.setTurn(getTurn());
 		clone.setActionsThisTurn(getActionsThisTurn());
 		clone.setResult(getResult());
@@ -100,9 +101,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		for (CardCostModifier cardCostModifier : getCardCostModifiers()) {
 			clone.getCardCostModifiers().add(cardCostModifier.clone());
 		}
-		for (Environment key : getEnvironment().keySet()) {
-			clone.getEnvironment().put(key, getEnvironment().get(key));
-		}
+		setEnvironment(SerializationUtils.clone(getEnvironment()));
 		clone.getLogic().setLoggingEnabled(false);
 		return clone;
 	}
@@ -111,7 +110,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 	public void dispose() {
 		this.players = null;
 		getCardCostModifiers().clear();
-		triggerManager.dispose();
+		getTriggerManager().dispose();
 		getEnvironment().clear();
 	}
 
@@ -143,8 +142,8 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 	}
 
 	public void endTurn() {
-		getLogic().endTurn(activePlayer);
-		activePlayer = activePlayer == PLAYER_1 ? PLAYER_2 : PLAYER_1;
+		getLogic().endTurn(getActivePlayerId());
+		setActivePlayerIndex(getActivePlayerId() == PLAYER_1 ? PLAYER_2 : PLAYER_1);
 		onGameStateChanged();
 		setTurnState(TurnState.TURN_ENDED);
 	}
@@ -163,7 +162,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 			return;
 		}
 		try {
-			triggerManager.fireGameEvent(gameEvent);
+			getTriggerManager().fireGameEvent(gameEvent);
 		} catch (Exception e) {
 			logger.error("Error while processing gameEvent {}", gameEvent);
 			getLogic().panicDump();
@@ -178,11 +177,11 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 	}
 
 	public Player getActivePlayer() {
-		return getPlayer(activePlayer);
+		return getPlayer(getActivePlayerId());
 	}
 
 	public int getActivePlayerId() {
-		return activePlayer;
+		return activePlayerIndex;
 	}
 
 	public List<Actor> getAdjacentMinions(Player player, EntityReference minionReference) {
@@ -205,7 +204,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 	}
 
 	public GameAction getAutoHeroPowerAction() {
-		return getLogic().getAutoHeroPowerAction(activePlayer);
+		return getLogic().getAutoHeroPowerAction(getActivePlayerId());
 	}
 
 	public int getBoardPosition(Minion minion) {
@@ -223,7 +222,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 	public Card getCardById(String cardId) {
 		Card card = CardCatalogue.getCardById(cardId);
 		if (card == null) {
-			for (Card tempCard : tempCards) {
+			for (Card tempCard : getTempCards()) {
 				if (tempCard.getCardId().equalsIgnoreCase(cardId)) {
 					return tempCard.clone();
 				}
@@ -371,7 +370,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 	}
 
 	public List<IGameEventListener> getTriggersAssociatedWith(EntityReference entityReference) {
-		return triggerManager.getTriggersAssociatedWith(entityReference);
+		return getTriggerManager().getTriggersAssociatedWith(entityReference);
 	}
 
 	public int getTurn() {
@@ -386,7 +385,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		if (gameDecided()) {
 			return new ArrayList<>();
 		}
-		return getLogic().getValidActions(activePlayer);
+		return getLogic().getValidActions(getActivePlayerId());
 	}
 
 	public int getWinningPlayerId() {
@@ -397,7 +396,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		if (gameDecided()) {
 			return false;
 		}
-		return getLogic().hasAutoHeroPower(activePlayer);
+		return getLogic().hasAutoHeroPower(getActivePlayerId());
 	}
 
 	public boolean ignoreEvents() {
@@ -406,9 +405,9 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 
 	public void init() {
 		int startingPlayerId = getLogic().determineBeginner(PLAYER_1, PLAYER_2);
-		activePlayer = getPlayer(startingPlayerId).getId();
+		setActivePlayerIndex(getPlayer(startingPlayerId).getId());
 		logger.debug(getActivePlayer().getName() + " begins");
-		getLogic().init(activePlayer, true);
+		getLogic().init(getActivePlayerId(), true);
 		getLogic().init(getOpponent(getActivePlayer()).getId(), false);
 	}
 
@@ -425,7 +424,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		logger.debug("Game starts: " + getPlayer1().getName() + " VS. " + getPlayer2().getName());
 		init();
 		while (!gameDecided()) {
-			startTurn(activePlayer);
+			startTurn(getActivePlayerId());
 			while (playTurn()) {
 			}
 			if (getTurn() > GameLogic.TURN_LIMIT) {
@@ -442,8 +441,8 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 			endTurn();
 			return false;
 		}
-		if (getLogic().hasAutoHeroPower(activePlayer)) {
-			performAction(activePlayer, getAutoHeroPowerAction());
+		if (getLogic().hasAutoHeroPower(getActivePlayerId())) {
+			performAction(getActivePlayerId(), getAutoHeroPowerAction());
 			return true;
 		}
 
@@ -461,22 +460,22 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 			throw new RuntimeException("Behaviour " + getActivePlayer().getBehaviour().getName() + " selected NULL action while "
 					+ getValidActions().size() + " actions were available");
 		}
-		performAction(activePlayer, nextAction);
+		performAction(getActivePlayerId(), nextAction);
 
 		return nextAction.getActionType() != ActionType.END_TURN;
 	}
 
 	public void printCurrentTriggers() {
 		logger.info("Active spelltriggers:");
-		triggerManager.printCurrentTriggers();
+		getTriggerManager().printCurrentTriggers();
 	}
 
 	public void removeTrigger(IGameEventListener trigger) {
-		triggerManager.removeTrigger(trigger);
+		getTriggerManager().removeTrigger(trigger);
 	}
 
 	public void removeTriggersAssociatedWith(EntityReference entityReference) {
-		triggerManager.removeTriggersAssociatedWith(entityReference);
+		getTriggerManager().removeTriggersAssociatedWith(entityReference);
 	}
 
 	public Card resolveCardReference(CardReference cardReference) {
@@ -661,16 +660,41 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 
 	public void setPlayer1(Player player1) {
 		this.players[PLAYER_1] = player1;
-		player1.setId(PLAYER_1);
 	}
 
 	public void setPlayer2(Player player2) {
 		this.players[PLAYER_2] = player2;
-		player2.setId(PLAYER_2);
 	}
 
-	public void setPlayer(int id, Player player) {
-		this.players[id] = player;
-		player.setId(id);
+	public void setPlayer(int index, Player player) {
+		this.players[index] = player;
+	}
+
+	protected void setActivePlayerIndex(int id) {
+		activePlayerIndex = id;
+	}
+
+	public TargetLogic getTargetLogic() {
+		return targetLogic;
+	}
+
+	public void setTargetLogic(TargetLogic targetLogic) {
+		this.targetLogic = targetLogic;
+	}
+
+	public TriggerManager getTriggerManager() {
+		return triggerManager;
+	}
+
+	public void setTriggerManager(TriggerManager triggerManager) {
+		this.triggerManager = triggerManager;
+	}
+
+	public CardCollection getTempCards() {
+		return tempCards;
+	}
+
+	public void setTempCards(CardCollection tempCards) {
+		this.tempCards = tempCards;
 	}
 }

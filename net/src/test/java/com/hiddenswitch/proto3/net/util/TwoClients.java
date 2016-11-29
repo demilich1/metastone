@@ -3,6 +3,7 @@ package com.hiddenswitch.proto3.net.util;
 import com.hiddenswitch.proto3.net.GameSessions;
 import com.hiddenswitch.proto3.net.client.RemoteGameContext;
 import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
+import com.hiddenswitch.proto3.net.common.ClientToServerMessage;
 import com.hiddenswitch.proto3.net.common.ServerGameContext;
 import com.hiddenswitch.proto3.net.models.CreateGameSessionRequest;
 import com.hiddenswitch.proto3.net.models.CreateGameSessionResponse;
@@ -83,9 +84,15 @@ public class TwoClients {
 		this.service = service;
 		this.gameId = gameId;
 		// Manually override the player in the configurations
-		response1.getConnection().getFirstMessage().setPlayer1(new AIPlayer(deck1));
+		AIPlayer player1 = new AIPlayer(deck1);
+		AIPlayer player2 = new AIPlayer(deck2);
+		ClientToServerMessage firstMessage1 = response1.getConnection().getFirstMessage();
+		ClientToServerMessage firstMessage2 = response2.getConnection().getFirstMessage();
+		player1.setId(firstMessage1.getPlayer1().getId());
+		player2.setId(firstMessage2.getPlayer1().getId());
+		firstMessage1.setPlayer1(player1);
+		firstMessage2.setPlayer1(player2);
 		playerContext1 = createRemoteGameContext(response1.getConnection());
-		response2.getConnection().getFirstMessage().setPlayer1(new AIPlayer(deck2));
 		playerContext2 = createRemoteGameContext(response2.getConnection());
 		playerContext1.ignoreEventOverride = true;
 		playerContext2.ignoreEventOverride = true;

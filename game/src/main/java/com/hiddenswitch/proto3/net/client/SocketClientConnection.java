@@ -1,9 +1,7 @@
 package com.hiddenswitch.proto3.net.client;
 
 import java.io.*;
-import java.net.ConnectException;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
@@ -15,16 +13,14 @@ import com.hiddenswitch.proto3.net.common.ServerToClientMessage;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.Marker;
 
 public class SocketClientConnection implements ClientCommunicationReceive, ClientCommunicationSend, Runnable {
 	private final String host;
 	private final int port;
 	private BlockingQueue<ClientToServerMessage> queue = new LinkedBlockingQueue<>();
-	private RemoteUpdateListener remoteUpdateListener;
+	private RemoteUpdateListener updateListener;
 	private boolean shouldRun = true;
 	private Logger logger = LoggerFactory.getLogger(SocketClientConnection.class);
 
@@ -61,7 +57,7 @@ public class SocketClientConnection implements ClientCommunicationReceive, Clien
 
 	@Override
 	public void RegisterListener(RemoteUpdateListener remoteUpdateListener) {
-		this.remoteUpdateListener = remoteUpdateListener;
+		this.updateListener = remoteUpdateListener;
 	}
 
 	@Override
@@ -110,28 +106,28 @@ public class SocketClientConnection implements ClientCommunicationReceive, Clien
 						ServerToClientMessage message = (ServerToClientMessage) serverInputStream.readObject();
 						switch (message.mt) {
 							case ON_GAME_EVENT:
-								remoteUpdateListener.onGameEvent(message.event);
+								updateListener.onGameEvent(message.event);
 								break;
 							case ON_GAME_END:
-								remoteUpdateListener.onGameEnd(message.winner);
+								updateListener.onGameEnd(message.winner);
 								break;
 							case SET_PLAYERS:
-								remoteUpdateListener.setPlayers(message.localPlayer, message.remotePlayer);
+								updateListener.setPlayers(message.localPlayer, message.remotePlayer);
 								break;
 							case ON_ACTIVE_PLAYER:
-								remoteUpdateListener.onActivePlayer(message.activePlayer);
+								updateListener.onActivePlayer(message.activePlayer);
 								break;
 							case ON_UPDATE:
-								remoteUpdateListener.onUpdate(message.player1, message.player2, message.turnState);
+								updateListener.onUpdate(message.gameState);
 								break;
 							case ON_TURN_END:
-								remoteUpdateListener.onTurnEnd(message.activePlayer, message.turnNumber, message.turnState);
+								updateListener.onTurnEnd(message.activePlayer, message.turnNumber, message.turnState);
 								break;
 							case ON_REQUEST_ACTION:
-								remoteUpdateListener.onRequestAction(message.id, message.actions);
+								updateListener.onRequestAction(message.id, message.actions);
 								break;
 							case ON_MULLIGAN:
-								remoteUpdateListener.onMulligan(message.id, message.player1, message.startingCards);
+								updateListener.onMulligan(message.id, message.player1, message.startingCards);
 								break;
 							default:
 								System.err.println("Unexpected message from server received");

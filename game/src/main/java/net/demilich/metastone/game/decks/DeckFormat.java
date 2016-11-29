@@ -67,4 +67,11 @@ public class DeckFormat implements Serializable {
 		}
 		return this;
 	}
+
+	public DeckFormat withCardSets(Iterable<CardSet> cardSets) {
+		for (CardSet cardSet : cardSets) {
+			addSet(cardSet);
+		}
+		return this;
+	}
 }

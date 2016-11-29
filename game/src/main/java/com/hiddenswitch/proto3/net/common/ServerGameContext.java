@@ -2,7 +2,6 @@ package com.hiddenswitch.proto3.net.common;
 
 import co.paralleluniverse.fibers.Suspendable;
 import io.vertx.core.Handler;
-import io.vertx.core.WorkerExecutor;
 import io.vertx.ext.sync.Sync;
 import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.GameContext;
@@ -14,13 +13,13 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.logic.GameLogic;
+import net.demilich.metastone.game.targeting.IdFactory;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 
 public class ServerGameContext extends GameContext {
 	private final String gameId;
@@ -31,7 +30,8 @@ public class ServerGameContext extends GameContext {
 		// The player's IDs are set here
 		super(player1, player2, new GameLogicAsync(), deckFormat);
 		if (player1.getId() == player2.getId()) {
-			throw new RuntimeException("The player IDs in this ServerGameContext are equal, which is not allowed.");
+			player1.setId(IdFactory.PLAYER_1);
+			player2.setId(IdFactory.PLAYER_2);
 		}
 		NotificationProxy.init(new NullNotifier());
 		this.gameId = gameId;
@@ -53,15 +53,16 @@ public class ServerGameContext extends GameContext {
 	@Override
 	protected void startTurn(int playerId) {
 		super.startTurn(playerId);
-		getListenerMap().get(getPlayer1()).onUpdate(getPlayer(0), getPlayer(1), TurnState.TURN_IN_PROGRESS);
-		getListenerMap().get(getPlayer2()).onUpdate(getPlayer(0), getPlayer(1), TurnState.TURN_IN_PROGRESS);
+		GameState state = new GameState(this, TurnState.TURN_IN_PROGRESS);
+		getListenerMap().get(getPlayer1()).onUpdate(state);
+		getListenerMap().get(getPlayer2()).onUpdate(state);
 	}
 
 	public void endTurn() {
 		logger.debug("Ending turn: " + getActivePlayer().getId());
 		super.endTurn();
 		this.onGameStateChanged();
-		logger.debug("Active player changed to: " + getActivePlayer().getId());
+		logger.debug("Active player changed to: " + getActivePlayerId());
 		getListenerMap().get(getPlayer1()).onTurnEnd(getActivePlayer(), getTurn(), getTurnState());
 		getListenerMap().get(getPlayer2()).onTurnEnd(getActivePlayer(), getTurn(), getTurnState());
 	}
@@ -79,7 +80,7 @@ public class ServerGameContext extends GameContext {
 	public void networkPlay() {
 		logger.debug("Game starts: " + getPlayer1().getName() + " VS. " + getPlayer2().getName());
 		int startingPlayerId = getLogic().determineBeginner(PLAYER_1, PLAYER_2);
-		this.activePlayer = getPlayer(startingPlayerId).getId();
+		setActivePlayerIndex(getPlayer(startingPlayerId).getId());
 		logger.debug(getActivePlayer().getName() + " begins");
 
 		getListenerMap().get(getPlayer1()).setPlayers(getPlayer1(), getPlayer2());
@@ -87,7 +88,7 @@ public class ServerGameContext extends GameContext {
 		getListenerMap().get(getActivePlayer()).onActivePlayer(getActivePlayer());
 		getListenerMap().get(getNonActivePlayer()).onActivePlayer(getActivePlayer());
 
-		getNetworkGameLogic().initAsync(this.activePlayer, true, _ap -> {
+		getNetworkGameLogic().initAsync(getActivePlayerId(), true, _ap -> {
 			getNetworkGameLogic().initAsync(getOpponent(getActivePlayer()).getId(), false, _op -> {
 				Recursive<Runnable> playTurnLoop = new Recursive<>();
 				playTurnLoop.func = () -> {
@@ -138,8 +139,8 @@ public class ServerGameContext extends GameContext {
 			return;
 		}
 
-		if (getLogic().hasAutoHeroPower(activePlayer)) {
-			performAction(activePlayer, getAutoHeroPowerAction());
+		if (getLogic().hasAutoHeroPower(getActivePlayerId())) {
+			performAction(getActivePlayerId(), getAutoHeroPowerAction());
 			callback.handle(true);
 			return;
 		}
@@ -164,8 +165,9 @@ public class ServerGameContext extends GameContext {
 
 	@Override
 	protected void onGameStateChanged() {
-		getListenerMap().get(getPlayer1()).onUpdate(getPlayer(0), getPlayer(1), getTurnState());
-		getListenerMap().get(getPlayer2()).onUpdate(getPlayer(0), getPlayer(1), getTurnState());
+		GameState state = new GameState(this);
+		getListenerMap().get(getPlayer1()).onUpdate(state);
+		getListenerMap().get(getPlayer2()).onUpdate(state);
 	}
 
 	@Override

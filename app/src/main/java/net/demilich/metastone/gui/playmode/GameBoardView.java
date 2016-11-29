@@ -229,11 +229,11 @@ public class GameBoardView extends BorderPane {
 		entityTokenMap.clear();
 		p1Hero.setHero(context.getPlayer1());
 		p1Hero.updateHeroPowerCost(context, context.getPlayer1());
-		p1Hero.highlight(context.getActivePlayer() == context.getPlayer1());
+		p1Hero.highlight(context.getActivePlayerId() == context.getPlayer1().getId());
 		entityTokenMap.put(context.getPlayer1().getHero(), p1Hero);
 		p2Hero.setHero(context.getPlayer2());
 		p2Hero.updateHeroPowerCost(context, context.getPlayer2());
-		p2Hero.highlight(context.getActivePlayer() == context.getPlayer2());
+		p2Hero.highlight(context.getActivePlayerId() == context.getPlayer2().getId());
 		entityTokenMap.put(context.getPlayer2().getHero(), p2Hero);
 
 		updateHandCards(context, context.getPlayer1(), p1Cards);
