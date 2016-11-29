@@ -1,6 +1,7 @@
 package com.hiddenswitch.proto3.net;
 
 import com.amazonaws.services.sqs.model.Message;
+import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
 import com.amazonaws.services.sqs.model.ReceiveMessageResult;
 import com.amazonaws.services.sqs.model.SendMessageResult;
 import com.hiddenswitch.proto3.net.amazon.GameRecord;
@@ -36,6 +37,10 @@ public class Games extends Service<Games> {
 	}
 
 	public MatchmakingResponse matchmakeAndJoin(MatchmakingRequest matchmakingRequest, String userId) {
+		// TODO: The user can have at most 1 matchmaking session pending.
+		// TODO: Make sure the user doesn't get matchmade into their own matchmaking request
+		// TODO: Setup a user with a game against an AI if they've been waiting more than 10 seconds
+
 		MatchmakingResponse response = new MatchmakingResponse();
 		GameRecord record;
 		String gameId;
@@ -138,7 +143,10 @@ public class Games extends Service<Games> {
 	}
 
 	protected String findGameIdAwaitingPlayer() {
-		ReceiveMessageResult result = getQueue().receiveMessage(getMatchmakingQueueUrl());
+		ReceiveMessageResult result = getQueue().receiveMessage(
+				new ReceiveMessageRequest()
+						.withQueueUrl(getMatchmakingQueueUrl())
+						.withMaxNumberOfMessages(1));
 		if (result.getMessages().isEmpty()) {
 			return null;
 		}
