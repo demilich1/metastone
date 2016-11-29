@@ -31,19 +31,6 @@ public class AnonymousServices extends SyncVerticle {
 		HttpServer server = vertx.createHttpServer();
 		Router router = Router.router(vertx);
 
-		router.route("/v0/anonymous/matchmake")
-				.method(HttpMethod.HEAD)
-				.handler(routingContext -> {
-					// HEAD: Lookup the retry ID quickly.
-				})
-				.method(HttpMethod.POST)
-				.handler(BodyHandler.create())
-				.blockingHandler(routingContext -> {
-					HttpServerResponse response = routingContext.response();
-					MatchmakingRequest request = Serialization.deserialize(routingContext.getBodyAsString(), MatchmakingRequest.class);
-
-				});
-
 		try {
 			GameSessions gameSessions = new GameSessions();
 			String socketServerDeploymentId = awaitResult(done -> {
@@ -55,6 +42,20 @@ public class AnonymousServices extends SyncVerticle {
 			String gamesDeploymentId = awaitResult(done -> {
 				vertx.deployVerticle(games, done);
 			});
+
+			router.route("/v0/anonymous/matchmake")
+					.method(HttpMethod.HEAD)
+					.handler(routingContext -> {
+						// HEAD: Lookup the retry ID quickly.
+					})
+					.method(HttpMethod.POST)
+					.handler(BodyHandler.create())
+					.blockingHandler(routingContext -> {
+						HttpServerResponse response = routingContext.response();
+						MatchmakingRequest request = Serialization.deserialize(routingContext.getBodyAsString(), MatchmakingRequest.class);
+						String userId = routingContext.request().getHeader("X-Auth-UserId");
+						MatchmakingResponse matchmakingResponse = games.matchmakeAndJoin(request, userId);
+					});
 
 			HttpServer listening = awaitResult(done -> server.requestHandler(router::accept).listen(80, done));
 			started.complete();

@@ -14,51 +14,11 @@ import org.testng.annotations.BeforeMethod;
 
 public abstract class ServiceTestBase<T extends Service<T>> {
 	protected T service;
-	private AmazonSQSClient queue;
-	private DynamoDBMapper database;
-	private AmazonDynamoDB dynamoDBEmbedded;
-	private SQSRestServer elasticMQ;
 
 	public abstract T setupAndReturnServiceInstance();
 
 	@BeforeMethod
 	public void setUp() throws Exception {
-		AwsStackConfiguration configuration = new AwsStackConfiguration();
-		BasicAWSCredentials credentials = new BasicAWSCredentials("x", "y");
-		try {
-			elasticMQ = SQSRestServerBuilder.start();
-			elasticMQ.waitUntilStarted();
-			dynamoDBEmbedded = DynamoDBEmbedded.create().amazonDynamoDB();
-			configuration.credentials = credentials;
-			database = new DynamoDBMapper(dynamoDBEmbedded);
-			queue = new AmazonSQSClient(credentials);
-			queue.setEndpoint("http://localhost:9324");
-		} catch (Exception ignored) {
-		} finally {
-			configuration.dynamoDBClient = dynamoDBEmbedded;
-			configuration.database = database;
-			configuration.queue = queue;
-			AwsStack.initializeStack(configuration);
-			service = setupAndReturnServiceInstance()
-					.withCredentials(credentials)
-					.withDatabase(database)
-					.withQueue(queue);
-		}
-	}
-
-	@AfterMethod
-	public void tearDown() throws Exception {
-		try {
-			if (elasticMQ != null) {
-				elasticMQ.stopAndWait();
-			}
-			if (dynamoDBEmbedded != null) {
-				dynamoDBEmbedded.shutdown();
-			}
-			if (queue != null) {
-				queue.shutdown();
-			}
-		} catch (Exception ignored) {
-		}
+		service = setupAndReturnServiceInstance().withEmbeddedConfiguration();
 	}
 }

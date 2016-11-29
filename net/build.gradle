@@ -10,7 +10,7 @@ buildscript {
 }
 
 task copyNativeDeps(type: Copy) {
-    from(configurations.testCompile) {
+    from(configurations.compile) {
         include "*.dylib"
         include "*.so"
         include "*.dll"
@@ -55,6 +55,14 @@ dependencies {
     compile group: 'io.vertx', name: 'vertx-sync', version: '3.3.3'
     compile group: 'io.vertx', name: 'vertx-service-discovery', version: '3.3.3'
     compile group: 'io.vertx', name: 'vertx-web', version: '3.3.3'
+    compile group: 'org.elasticmq', name: 'elasticmq-rest-sqs_2.11', version: '0.10.0'
+    compile group: 'com.almworks.sqlite4java', name: 'sqlite4java', version: '1.0.392'
+    compile group: 'com.almworks.sqlite4java', name: 'sqlite4java-win32-x86', version: '1.0.392'
+    compile group: 'com.almworks.sqlite4java', name: 'sqlite4java-win32-x64', version: '1.0.392'
+    compile group: 'com.almworks.sqlite4java', name: 'libsqlite4java-osx', version: '1.0.392'
+    compile group: 'com.almworks.sqlite4java', name: 'libsqlite4java-linux-i386', version: '1.0.392'
+    compile group: 'com.almworks.sqlite4java', name: 'libsqlite4java-linux-amd64', version: '1.0.392'
+    compile group: 'com.amazonaws', name: 'DynamoDBLocal', version: '1.11.0.1'
 
     compile project(':server')
     compile project(':cards')
@@ -62,14 +70,6 @@ dependencies {
     testCompile project(':game')
     testCompile group: 'org.unitils', name: 'unitils-core', version: '3.4.3'
     testCompile group: 'org.testng', name: 'testng', version: '6.+'
-    testCompile group: 'org.elasticmq', name: 'elasticmq-rest-sqs_2.11', version: '0.10.0'
-    testCompile group: 'com.almworks.sqlite4java', name: 'sqlite4java', version: '1.0.392'
-    testCompile group: 'com.almworks.sqlite4java', name: 'sqlite4java-win32-x86', version: '1.0.392'
-    testCompile group: 'com.almworks.sqlite4java', name: 'sqlite4java-win32-x64', version: '1.0.392'
-    testCompile group: 'com.almworks.sqlite4java', name: 'libsqlite4java-osx', version: '1.0.392'
-    testCompile group: 'com.almworks.sqlite4java', name: 'libsqlite4java-linux-i386', version: '1.0.392'
-    testCompile group: 'com.almworks.sqlite4java', name: 'libsqlite4java-linux-amd64', version: '1.0.392'
-    testCompile group: 'com.amazonaws', name: 'DynamoDBLocal', version: '1.11.0.1'
 }
 
 tasks.withType(JavaExec) {
