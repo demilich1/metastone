@@ -5,7 +5,7 @@
 	"heroClass": "PRIEST",
 	"rarity": "RARE",
 	"description": "Restore 12 Health to a friendly character.",
-	"targetSelection": "FRIENDLY_CHARACTER",
+	"targetSelection": "FRIENDLY_CHARACTERS",
 	"spell": {
 		"class": "HealSpell",
 		"value": 12

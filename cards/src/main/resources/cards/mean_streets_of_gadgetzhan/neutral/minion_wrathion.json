@@ -14,7 +14,8 @@
 			"value": 60,
 			"condition": {
 				"class": "RaceCondition",
-				"race": "DRAGON"
+				"race": "DRAGON",
+				"invert": true
 			}
 		}
 	},

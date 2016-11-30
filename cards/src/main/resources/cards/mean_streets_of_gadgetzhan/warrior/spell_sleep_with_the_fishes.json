@@ -8,7 +8,7 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "DamageSpell",
-		"target": "MINIONS",
+		"target": "ALL_MINIONS",
 		"value": 3,
 		"filter": {
 			"class": "DamagedFilter"

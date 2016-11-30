@@ -56,7 +56,7 @@ public abstract class Actor extends Entity {
 	public Actor clone() {
 		Actor clone = (Actor) super.clone();
 		clone.attributes = new EnumMap<>(getAttributes());
-		for (SpellTrigger trigger : spellTriggers) {
+		for (SpellTrigger trigger : getSpellTriggers()) {
 			clone.spellTriggers.add(trigger.clone());
 		}
 		if (hasAttribute(Attribute.DEATHRATTLES)) {
@@ -122,7 +122,7 @@ public abstract class Actor extends Entity {
 	}
 
 	public List<SpellTrigger> getSpellTriggers() {
-		return spellTriggers;
+		return new ArrayList<SpellTrigger>(spellTriggers);
 	}
 
 	public boolean hasSpellTrigger() {

@@ -11,6 +11,7 @@
 		"targetSelection": "NONE",
 		"spell": {
 			"class": "RemoveAttributeSpell",
+			"target": "ENEMY_MINIONS",
 			"attribute": "STEALTH"
 		}
 	},

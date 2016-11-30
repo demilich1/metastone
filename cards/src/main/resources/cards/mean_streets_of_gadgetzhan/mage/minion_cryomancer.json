@@ -19,6 +19,7 @@
 			"target": "ENEMY_CHARACTERS",
 			"filter": {
 				"class": "AttributeFilter",
+				"operation": "HAS",
 				"attribute": "FROZEN"
 			} 
 		}

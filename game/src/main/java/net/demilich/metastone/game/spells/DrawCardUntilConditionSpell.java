@@ -16,7 +16,7 @@ public class DrawCardUntilConditionSpell extends Spell {
 		Condition condition = (Condition) desc.get(SpellArg.CONDITION);
 		for (int i = 0; i < cardCount; i++) {
 			Card card = context.getLogic().drawCard(player.getId(), source);
-			if (condition != null && condition.isFulfilled(context, player, source, card)) {
+			if (card == null || (condition != null && condition.isFulfilled(context, player, source, card))) {
 				return;
 			}
 		}

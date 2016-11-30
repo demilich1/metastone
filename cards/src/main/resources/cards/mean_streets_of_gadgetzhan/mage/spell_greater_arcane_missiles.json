@@ -8,6 +8,7 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MissilesSpell",
+		"target": "ENEMY_CHARACTERS",
 		"howMany": 3,
 		"value": 3
 	},
