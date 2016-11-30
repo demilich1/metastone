@@ -12,6 +12,7 @@ import net.demilich.metastone.game.cards.desc.MinionCardDesc;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.desc.BattlecryDesc;
+import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
 
 public class MinionCard extends Card {
 
@@ -61,9 +62,15 @@ public class MinionCard extends Card {
 			minion.addDeathrattle(desc.deathrattle);
 		}
 		if (desc.trigger != null) {
-			minion.setSpellTrigger(desc.trigger.create());
-		} else if (desc.aura != null) {
-			minion.setSpellTrigger(desc.aura.create());
+			minion.addSpellTrigger(desc.trigger.create());
+		}
+		if (desc.triggers != null) {
+			for (TriggerDesc trigger : desc.triggers) {
+				minion.addSpellTrigger(trigger.create());
+			}
+		}
+		if (desc.aura != null) {
+			minion.addSpellTrigger(desc.aura.create());
 		}
 		if (desc.cardCostModifier != null) {
 			minion.setCardCostModifier(desc.cardCostModifier.create());

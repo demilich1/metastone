@@ -7,10 +7,12 @@ import net.demilich.metastone.game.entities.Entity;
 public class AfterSpellCastedEvent extends GameEvent {
 
 	private final Card sourceCard;
+	private final Entity spellTarget;
 
-	public AfterSpellCastedEvent(GameContext context, int playerId, Card sourceCard) {
-		super(context, playerId, playerId);
+	public AfterSpellCastedEvent(GameContext context, int playerId, Card sourceCard, Entity target) {
+		super(context, target == null ? null : target.getOwner(), playerId);
 		this.sourceCard = sourceCard;
+		this.spellTarget = target;
 	}
 	
 	@Override
@@ -20,7 +22,7 @@ public class AfterSpellCastedEvent extends GameEvent {
 
 	@Override
 	public Entity getEventTarget() {
-		return getSourceCard();
+		return spellTarget;
 	}
 
 	@Override

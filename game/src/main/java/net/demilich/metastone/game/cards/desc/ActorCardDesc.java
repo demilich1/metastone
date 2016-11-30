@@ -10,6 +10,7 @@ public abstract class ActorCardDesc extends CardDesc {
 	public BattlecryDesc battlecry;
 	public SpellDesc deathrattle;
 	public TriggerDesc trigger;
+	public TriggerDesc[] triggers;
 	public AuraDesc aura;
 
 }
