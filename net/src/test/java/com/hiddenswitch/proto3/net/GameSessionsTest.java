@@ -107,9 +107,9 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 		});
 	}
 
-	@Test
+	@Test(timeout = 20 * 60 * 1000L)
 	public void testTenSessionsTenTimes(TestContext context) throws Exception {
-		wrapBlocking(context,  () -> {
+		wrapBlocking(context, () -> {
 			for (int i = 0; i < 10; i++) {
 				simultaneousSessions(10);
 				logger.info("Iteration completed : " + (i + 1));
