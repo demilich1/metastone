@@ -23,6 +23,7 @@ import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.spells.trigger.IGameEventListener;
 import net.demilich.metastone.game.targeting.EntityReference;
+import net.demilich.metastone.game.targeting.IdFactory;
 import net.demilich.metastone.game.visuals.GameContextVisuals;
 
 public class RemoteGameContext extends GameContext implements GameContextVisuals, RemoteUpdateListener {
@@ -64,7 +65,7 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	}
 
 	@Override
-	protected void setActivePlayerIndex(int id) {
+	public void setActivePlayerIndex(int id) {
 		super.setActivePlayerIndex(id);
 		this.getActivePlayerAtomic().set(id);
 	}
@@ -81,12 +82,12 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 
 
 	@Override
-	public GameContext clone() {
+	public synchronized GameContext clone() {
 		return super.clone();
 	}
 
 	@Override
-	public void dispose() {
+	public synchronized void dispose() {
 		super.dispose();
 		socketClientConnection.kill();
 	}
@@ -192,18 +193,19 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 		logger.debug("Players connected, waiting for action.");
 		while (!gameDecided()) {
 			if (getActionRequested().get()) {
-//				synchronized (this) {
-					if (getActivePlayerId() == getMyPlayerId()) {
-						logger.debug("Action was requested from player.");
-						GameAction action = getLocalPlayer().getBehaviour().requestAction(this, getActivePlayer(), getValidActions());
-						ccs.getSendToServer().sendAction(this.lastRequestId, getLocalPlayer(), action);
-					}
-//				}
-
+				requestLocalAction();
 				getActionRequested().set(false);
 			}
 		}
 		endGame();
+	}
+
+	protected synchronized void requestLocalAction() {
+		if (getActivePlayerId() == getMyPlayerId()) {
+			logger.debug("Action was requested from player.");
+			GameAction action = getLocalPlayer().getBehaviour().requestAction(this, getActivePlayer(), getValidActions());
+			ccs.getSendToServer().sendAction(this.lastRequestId, getLocalPlayer(), action);
+		}
 	}
 
 	protected int getMyPlayerId() {
@@ -327,7 +329,8 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	}
 
 	@Override
-	public synchronized void onRequestAction(String id, List<GameAction> availableActions) {
+	public synchronized void onRequestAction(String id, GameState state, List<GameAction> availableActions) {
+		onUpdate(state);
 		this.lastRequestId = id;
 		this.getActionRequested().set(true);
 		this.setRemoteValidActions(availableActions);
@@ -345,11 +348,14 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 
 	@Override
 	public synchronized void onUpdate(GameState state) {
+		if (!state.isValid()) {
+			throw new RuntimeException("Invalid state received from wire!");
+		}
 		this.setPlayer(GameContext.PLAYER_1, state.player1);
 		this.setPlayer(GameContext.PLAYER_2, state.player2);
 		this.setEnvironment(state.environment);
 		this.setTriggerManager(state.triggerManager);
-		this.getLogic().setIdFactory(state.idFactory);
+		this.getLogic().setIdFactory(new IdFactory(state.currentId));
 		this.setRemoteTurnState(state.turnState);
 		this.onGameStateChanged();
 	}

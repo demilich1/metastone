@@ -49,7 +49,7 @@ public class NetworkBehaviour extends Behaviour implements Serializable {
 	@Suspendable
 	public void requestActionAsync(ServerGameContext context, Player player, List<GameAction> validActions, Handler<GameAction> handler) {
 		logger.debug("Requesting action from network. Player: {}, validActions: {}", player, validActions);
-		context.networkRequestAction(player, validActions, handler::handle);
+		context.networkRequestAction(new GameState(context), player.getId(), validActions, handler::handle);
 	}
 
 

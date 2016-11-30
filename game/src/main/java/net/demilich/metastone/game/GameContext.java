@@ -20,6 +20,7 @@ import net.demilich.metastone.game.spells.trigger.IGameEventListener;
 import net.demilich.metastone.game.spells.trigger.TriggerManager;
 import net.demilich.metastone.game.targeting.CardReference;
 import net.demilich.metastone.game.targeting.EntityReference;
+import net.demilich.metastone.game.targeting.IdFactory;
 import net.demilich.metastone.utils.IDisposable;
 import org.apache.commons.lang3.SerializationUtils;
 import org.slf4j.Logger;
@@ -47,6 +48,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 	private Player winner;
 	private MatchResult result;
 	private TurnState turnState = TurnState.TURN_ENDED;
+	private boolean disposed = false;
 
 	private int turn;
 	private int actionsThisTurn;
@@ -60,9 +62,16 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 
 	public GameContext(Player player1, Player player2, GameLogic logic, DeckFormat deckFormat) {
 		this.setPlayer1(player1);
+		if (player1.getId() == IdFactory.UNASSIGNED) {
+			player1.setId(PLAYER_1);
+		}
 		if (player2 != null) {
 			this.setPlayer2(player2);
+			if (player2.getId() == IdFactory.UNASSIGNED) {
+				player2.setId(PLAYER_2);
+			}
 		}
+
 		this.setLogic(logic);
 		this.setDeckFormat(deckFormat);
 		getTempCards().removeAll();
@@ -82,12 +91,10 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 	}
 
 	@Override
-	public GameContext clone() {
+	public synchronized GameContext clone() {
 		GameLogic logicClone = getLogic().clone();
 		Player player1Clone = getPlayer1().clone();
-		// player1Clone.getDeck().shuffle();
 		Player player2Clone = getPlayer2().clone();
-		// player2Clone.getDeck().shuffle();
 		GameContext clone = new GameContext(player1Clone, player2Clone, logicClone, getDeckFormat());
 		clone.setTempCards(getTempCards().clone());
 		clone.setTriggerManager(SerializationUtils.clone(getTriggerManager()));
@@ -101,13 +108,14 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		for (CardCostModifier cardCostModifier : getCardCostModifiers()) {
 			clone.getCardCostModifiers().add(cardCostModifier.clone());
 		}
-		setEnvironment(SerializationUtils.clone(getEnvironment()));
+		clone.setEnvironment(SerializationUtils.clone(getEnvironment()));
 		clone.getLogic().setLoggingEnabled(false);
 		return clone;
 	}
 
 	@Override
-	public void dispose() {
+	public synchronized void dispose() {
+		this.disposed = true;
 		this.players = null;
 		getCardCostModifiers().clear();
 		getTriggerManager().dispose();
@@ -593,13 +601,6 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		this.turn = turn;
 	}
 
-	public void setPlayers(Player[] players) {
-		this.players = players;
-		for (int i = 0; i < players.length; i++) {
-			this.players[i].setId(i);
-		}
-	}
-
 	public int getActionsThisTurn() {
 		return actionsThisTurn;
 	}
@@ -670,7 +671,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		this.players[index] = player;
 	}
 
-	protected void setActivePlayerIndex(int id) {
+	public void setActivePlayerIndex(int id) {
 		activePlayerIndex = id;
 	}
 
@@ -696,5 +697,9 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 
 	public void setTempCards(CardCollection tempCards) {
 		this.tempCards = tempCards;
+	}
+
+	public boolean isDisposed() {
+		return disposed;
 	}
 }

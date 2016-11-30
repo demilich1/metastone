@@ -58,9 +58,10 @@ public class ServerToClientMessage implements Serializable {
 		this.mt = MessageType.ON_UPDATE;
 	}
 
-	public ServerToClientMessage(String id, List<GameAction> actions) {
+	public ServerToClientMessage(String id, GameState state, List<GameAction> actions) {
 		this.id = id;
 		this.actions = actions;
+		this.gameState = state;
 		this.mt = MessageType.ON_REQUEST_ACTION;
 	}
 

@@ -37,6 +37,9 @@ public class GameStateValueBehaviour extends Behaviour {
 
 	private double alphaBeta(GameContext context, int playerId, GameAction action, int depth) {
 		GameContext simulation = getClone(context);
+		if (simulation.isDisposed()) {
+			return Float.NEGATIVE_INFINITY;
+		}
 		simulation.getLogic().performGameAction(playerId, action);
 		if (depth == 0 || simulation.getActivePlayerId() != playerId || simulation.gameDecided()) {
 			return heuristic.getScore(simulation, playerId);

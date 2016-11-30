@@ -17,10 +17,6 @@ public class DebugContext extends GameContext {
 		getLogic().init(getActivePlayerId(), true);
 		getLogic().init(getOpponent(getActivePlayer()).getId(), false);
 	}
-
-	public void setActivePlayerIndex(int playerId) {
-		setActivePlayerIndex(playerId);
-	}
 	
 	public void endTurn() {
 		super.endTurn();

@@ -16,7 +16,7 @@ public class GameState implements Serializable {
 	public final Player player2;
 	public final HashMap<Environment, Object> environment;
 	public final TriggerManager triggerManager;
-	public final IdFactory idFactory;
+	public final int currentId;
 	public final TurnState turnState;
 
 	public GameState(GameContext fromContext) {
@@ -24,12 +24,19 @@ public class GameState implements Serializable {
 	}
 
 	public GameState(GameContext fromContext, TurnState turnState) {
-		player1 = SerializationUtils.clone(fromContext.getPlayer1());
-		player2 = SerializationUtils.clone(fromContext.getPlayer2());
+		player1 = fromContext.getPlayer1();
+		player2 = fromContext.getPlayer2();
 		environment = SerializationUtils.clone(fromContext.getEnvironment());
-		idFactory = SerializationUtils.clone(fromContext.getLogic().getIdFactory());
-		triggerManager  = SerializationUtils.clone(fromContext.getTriggerManager());
+		currentId = fromContext.getLogic().getIdFactory().getInternalId();
+		triggerManager = SerializationUtils.clone(fromContext.getTriggerManager());
 		this.turnState = turnState;
 	}
 
+	public boolean isValid() {
+		return player1 != null
+				&& player2 != null
+				&& environment != null
+				&& triggerManager != null
+				&& turnState != null;
+	}
 }

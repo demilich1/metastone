@@ -25,7 +25,7 @@ public interface RemoteUpdateListener {
 
 	void onUpdate(GameState state);
 
-	void onRequestAction(String messageId, List<GameAction> availableActions);
+	void onRequestAction(String messageId, GameState state, List<GameAction> actions);
 	
 	void onMulligan(String messageId, Player player, List<Card> cards);
 }

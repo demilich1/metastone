@@ -40,6 +40,11 @@ public class CastRandomSpellSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
+		// TODO: Disable this spell for now since it causes too many problems with the way it is implemented.
+		return;
+	}
+
+	private void internalYogg(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		// This spell is crazy.
 		CardFilter filter = (CardFilter) desc.get(SpellArg.CARD_FILTER);
 		CardCollection spells = CardCatalogue.query(context.getDeckFormat(), CardType.SPELL);
@@ -54,13 +59,13 @@ public class CastRandomSpellSpell extends Spell {
 			}
 		}
 		// Straight up insane.
-		
+
 		// Set behavior to random. Because we're already insane.
 		// This allows Discover effects and targeting to actually be random.
 		IBehaviour currentBehaviour = player.getBehaviour();
 		player.setBehaviour(new PlayRandomBehaviour());
 		// HAHAHAHAHAHAHAHAHAHA!
-		
+
 		int numberOfSpellsToCast = desc.getValue(SpellArg.VALUE, context, player, target, source, 1);
 		Player originalPlayer = player;
 		for (int i = 0; i < numberOfSpellsToCast; i++) {
@@ -115,7 +120,7 @@ public class CastRandomSpellSpell extends Spell {
 			// your opponent has died, but should if you do. But, it works for now.
 			context.getLogic().checkForDeadEntities();
 		}
-		
+
 		originalPlayer.setBehaviour(currentBehaviour);
 		// *ahem* Back to normal.
 	}

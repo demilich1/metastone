@@ -9,6 +9,7 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.TurnState;
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.behaviour.PlayRandomBehaviour;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.events.GameEvent;
@@ -29,7 +30,9 @@ public class ServerGameContext extends GameContext {
 	public ServerGameContext(Player player1, Player player2, DeckFormat deckFormat, String gameId) {
 		// The player's IDs are set here
 		super(player1, player2, new GameLogicAsync(), deckFormat);
-		if (player1.getId() == player2.getId()) {
+		if (player1.getId() == player2.getId()
+				|| player1.getId() == IdFactory.UNASSIGNED
+				|| player2.getId() == IdFactory.UNASSIGNED) {
 			player1.setId(IdFactory.PLAYER_1);
 			player2.setId(IdFactory.PLAYER_2);
 		}
@@ -83,10 +86,15 @@ public class ServerGameContext extends GameContext {
 		setActivePlayerIndex(getPlayer(startingPlayerId).getId());
 		logger.debug(getActivePlayer().getName() + " begins");
 
-		getListenerMap().get(getPlayer1()).setPlayers(getPlayer1(), getPlayer2());
-		getListenerMap().get(getPlayer2()).setPlayers(getPlayer2(), getPlayer1());
 		getListenerMap().get(getActivePlayer()).onActivePlayer(getActivePlayer());
 		getListenerMap().get(getNonActivePlayer()).onActivePlayer(getActivePlayer());
+
+		// Make sure the players are initialized before sending the original player updates.
+		getNetworkGameLogic().initializePlayer(IdFactory.PLAYER_1);
+		getNetworkGameLogic().initializePlayer(IdFactory.PLAYER_2);
+
+		getListenerMap().get(getPlayer1()).setPlayers(getPlayer1(), getPlayer2());
+		getListenerMap().get(getPlayer2()).setPlayers(getPlayer2(), getPlayer1());
 
 		getNetworkGameLogic().initAsync(getActivePlayerId(), true, _ap -> {
 			getNetworkGameLogic().initAsync(getOpponent(getActivePlayer()).getId(), false, _op -> {
@@ -179,11 +187,11 @@ public class ServerGameContext extends GameContext {
 	}
 
 	@Suspendable
-	public void networkRequestAction(Player player, List<GameAction> actions, Handler<GameAction> callback) {
-		logger.debug("Requesting acton for playerId {} hashCode {}", player.getId(), player.hashCode());
+	public void networkRequestAction(GameState state, int playerId, List<GameAction> actions, Handler<GameAction> callback) {
+		logger.debug("Requesting acton for playerId {}", playerId);
 		String id = RandomStringUtils.randomAscii(8);
 		requestCallbacks.put(id, callback);
-		getListenerMap().get(player).onRequestAction(id, actions);
+		getListenerMap().get(getPlayer(playerId)).onRequestAction(id, state, actions);
 	}
 
 	public void networkRequestMulligan(Player player, List<Card> starterCards, Handler<List<Card>> callback) {

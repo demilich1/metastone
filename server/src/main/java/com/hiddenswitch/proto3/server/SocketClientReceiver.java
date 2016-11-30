@@ -92,8 +92,8 @@ class SocketClientReceiver implements RemoteUpdateListener {
 	}
 
 	@Override
-	public void onRequestAction(String id, List<GameAction> availableActions) {
-		sendMessage(new ServerToClientMessage(id, availableActions));
+	public void onRequestAction(String id, GameState state, List<GameAction> availableActions) {
+		sendMessage(new ServerToClientMessage(id, state, availableActions));
 	}
 
 	@Override

@@ -124,7 +124,7 @@ public class SocketClientConnection implements ClientCommunicationReceive, Clien
 								updateListener.onTurnEnd(message.activePlayer, message.turnNumber, message.turnState);
 								break;
 							case ON_REQUEST_ACTION:
-								updateListener.onRequestAction(message.id, message.actions);
+								updateListener.onRequestAction(message.id, message.gameState, message.actions);
 								break;
 							case ON_MULLIGAN:
 								updateListener.onMulligan(message.id, message.player1, message.startingCards);

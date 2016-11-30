@@ -948,7 +948,7 @@ public class GameLogic implements Cloneable, Serializable {
 		context.fireGameEvent(gameStartEvent);
 	}
 
-	protected Player initializePlayer(int playerId) {
+	public Player initializePlayer(int playerId) {
 		Player player = context.getPlayer(playerId);
 		player.getHero().setId(getIdFactory().generateId());
 		player.getHero().setOwner(player.getId());

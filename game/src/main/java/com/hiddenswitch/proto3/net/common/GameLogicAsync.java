@@ -48,7 +48,7 @@ public class GameLogicAsync extends GameLogic {
 
 	@Override
 	public void initAsync(int playerId, boolean begins, Handler<Player> callback) {
-		Player player = initializePlayer(playerId);
+		Player player = context.getPlayer(playerId);
 
 		mulliganAsync(player, begins, o -> {
 			startGameForPlayer(player);
