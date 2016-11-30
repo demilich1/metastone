@@ -1,17 +1,12 @@
 {
-	"name": "Jade Spirit",
-	"baseManaCost": 4,
+	"name": "Jade Chieftain",
+	"baseManaCost": 7,
 	"type": "MINION",
-	"baseAttack": 2,
-	"baseHp": 3,
-	"heroClass": "ANY",
-	"heroClasses": [
-		"DRUID",
-		"ROGUE",
-		"SHAMAN"
-	],
+	"baseAttack": 5,
+	"baseHp": 5,
+	"heroClass": "SHAMAN",
 	"rarity": "COMMON",
-	"description": "Battlecry: Summon a Jade Golem.",
+	"description": "Battlecry: Summon a Jade Golem. Give it Taunt.",
 	"battlecry": {
 		"targetSelection": "NONE",
 		"spell": {
@@ -41,10 +36,20 @@
 				"value2": 10
 			},
 			"spell1": {
-				"class": "ModifyAttributeSpell",
-				"target": "FRIENDLY_PLAYER",
-				"attribute": "JADE_BUFF",
-				"value": 1
+				"class": "MetaSpell",
+				"spells": [
+					{
+						"class": "AddAttributeSpell",
+						"attribute": "TAUNT"
+					},
+					{
+						"class": "ModifyAttributeSpell",
+						"target": "FRIENDLY_PLAYER",
+						"attribute": "JADE_BUFF",
+						"value": 1
+					}
+				]
+				
 			}
 		}
 	},

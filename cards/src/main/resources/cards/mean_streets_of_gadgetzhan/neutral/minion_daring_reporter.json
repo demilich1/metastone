@@ -1,0 +1,25 @@
+{
+	"name": "Daring Reporter",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 3,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Whenever your opponent draws a card, gain +1/+1.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "CardDrawnTrigger",
+			"targetPlayer": "OPPONENT"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"target": "SELF",
+			"attackBonus": 1,
+			"hpBonus": 1
+		}
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZHAN",
+	"fileFormatVersion": 1
+}

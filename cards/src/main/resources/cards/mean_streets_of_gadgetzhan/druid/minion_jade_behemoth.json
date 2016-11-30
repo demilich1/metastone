@@ -1,17 +1,12 @@
 {
-	"name": "Jade Spirit",
-	"baseManaCost": 4,
+	"name": "Jade Behemoth",
+	"baseManaCost": 6,
 	"type": "MINION",
-	"baseAttack": 2,
-	"baseHp": 3,
-	"heroClass": "ANY",
-	"heroClasses": [
-		"DRUID",
-		"ROGUE",
-		"SHAMAN"
-	],
+	"baseAttack": 3,
+	"baseHp": 6,
+	"heroClass": "DRUID",
 	"rarity": "COMMON",
-	"description": "Battlecry: Summon a Jade Golem.",
+	"description": "Taunt. Battlecry: Summon a Jade Golem.",
 	"battlecry": {
 		"targetSelection": "NONE",
 		"spell": {
@@ -49,7 +44,8 @@
 		}
 	},
 	"attributes": {
-		"BATTLECRY": true
+		"BATTLECRY": true,
+		"TAUNT": true
 	},
 	"collectible": true,
 	"set": "MEAN_STREETS_OF_GADGETZHAN",

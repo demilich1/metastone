@@ -1,13 +1,12 @@
 {
-	"id": "minion_the_mistcaller",
-	"name": "The Mistcaller",
-	"baseManaCost": 6,
+	"name": "Hobart Grapplehammer",
+	"baseManaCost": 2,
 	"type": "MINION",
-	"baseAttack": 4,
-	"baseHp": 4,
-	"heroClass": "SHAMAN",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"heroClass": "WARRIOR",
 	"rarity": "LEGENDARY",
-	"description": "Battlecry: Give all minions in your hand and deck +1/+1.",
+	"description": "Battlecry: Give all weapons in your hand and deck +1 Attack.",
 	"battlecry": {
 		"spell": {
 			"class": "MetaSpell",
@@ -16,10 +15,9 @@
 					"class": "BuffSpell",
 					"target": "FRIENDLY_HAND",
 					"attackBonus": 1,
-					"hpBonus": 1,
 					"filter": {
 						"class": "CardFilter",
-						"cardType": "MINION"
+						"cardType": "WEAPON"
 					}
 				},
 				{
@@ -32,14 +30,13 @@
 							"queueCondition": {
 								"class": "CardPropertyCondition",
 								"target": "EVENT_TARGET",
-								"cardType": "MINION"
+								"cardType": "WEAPON"
 							}
 						},
 						"spell": {
 							"class": "BuffSpell",
 							"target": "EVENT_TARGET",
-							"attackBonus": 1,
-							"hpBonus": 1
+							"attackBonus": 1
 						}
 					}
 				}
@@ -50,6 +47,6 @@
 		"BATTLECRY": true
 	},
 	"collectible": true,
-	"set": "THE_GRAND_TOURNAMENT",
+	"set": "MEAN_STREETS_OF_GADGETZHAN",
 	"fileFormatVersion": 1
 }

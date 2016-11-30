@@ -1,0 +1,16 @@
+{
+	"name": "The Storm Guardian",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 10,
+	"baseHp": 10,
+	"heroClass": "SHAMAN",
+	"rarity": "LEGENDARY",
+	"description": "Taunt.",
+	"attributes": {
+		"TAUNT": true
+	},
+	"collectible": false,
+	"set": "MEAN_STREETS_OF_GADGETZHAN",
+	"fileFormatVersion": 1
+}

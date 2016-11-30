@@ -1,17 +1,12 @@
 {
-	"name": "Jade Spirit",
-	"baseManaCost": 4,
-	"type": "MINION",
-	"baseAttack": 2,
-	"baseHp": 3,
-	"heroClass": "ANY",
-	"heroClasses": [
-		"DRUID",
-		"ROGUE",
-		"SHAMAN"
-	],
-	"rarity": "COMMON",
-	"description": "Battlecry: Summon a Jade Golem.",
+	"name": "Jade Claws",
+	"baseManaCost": 2,
+	"type": "WEAPON",
+	"damage": 2,
+	"durability": 2,
+	"heroClass": "WARRIOR",
+	"rarity": "RARE",
+	"description": "Battlecry: Summon a Jade Golem. Overload: (1)",
 	"battlecry": {
 		"targetSelection": "NONE",
 		"spell": {
@@ -49,7 +44,8 @@
 		}
 	},
 	"attributes": {
-		"BATTLECRY": true
+		"BATTLECRY": true,
+		"OVERLOAD": 1
 	},
 	"collectible": true,
 	"set": "MEAN_STREETS_OF_GADGETZHAN",
