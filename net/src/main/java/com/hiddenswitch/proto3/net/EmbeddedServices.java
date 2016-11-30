@@ -49,7 +49,7 @@ public class EmbeddedServices extends SyncVerticle {
 				vertx.deployVerticle(gameSessions, done);
 			});
 
-			logger.info("Deployed gameSessions with verticle ID {}.", socketServerDeploymentId);
+			logger.info("Deployed gameSessions with verticle ID " + socketServerDeploymentId);
 
 			Games games = new Games()
 					.withGameSessions(gameSessions)
@@ -59,10 +59,8 @@ public class EmbeddedServices extends SyncVerticle {
 				vertx.deployVerticle(games, done);
 			});
 
-			logger.info("Deployed games with verticle ID {}.", gamesDeploymentId);
-
-			router.route("*").failureHandler(LoggerHandler.create());
-
+			logger.info("Deployed games with verticle ID " + gamesDeploymentId);
+			logger.info("Configuring router...");
 			router.route("/v0/anonymous/matchmake")
 					.method(HttpMethod.POST)
 					.consumes("application/json")
@@ -79,11 +77,13 @@ public class EmbeddedServices extends SyncVerticle {
 						}
 						routingContext.response().setStatusCode(statusCode);
 						routingContext.response().end(Serialization.serialize(matchmakingResponse));
-					});
+					})
+					.failureHandler(LoggerHandler.create());
 
-			int httpPort = 6112;
+			logger.info("Router configured.");
+			final int httpPort = 8080;
 			HttpServer listening = awaitResult(done -> server.requestHandler(router::accept).listen(httpPort, done));
-			logger.info("Listening on port {}", httpPort);
+			logger.info("Listening on port " + Integer.toString(httpPort));
 		} catch (Exception e) {
 		}
 	}
