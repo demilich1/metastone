@@ -1,26 +1,15 @@
 package com.hiddenswitch.proto3.net;
 
-import com.amazonaws.services.sqs.model.Message;
-import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
-import com.amazonaws.services.sqs.model.ReceiveMessageResult;
-import com.amazonaws.services.sqs.model.SendMessageResult;
-import com.hiddenswitch.proto3.net.amazon.GameRecord;
-import com.hiddenswitch.proto3.net.amazon.MatchmakingRequestMessage;
 import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
+import com.hiddenswitch.proto3.net.common.MatchmakingRequest;
+import com.hiddenswitch.proto3.net.common.MatchmakingResponse;
 import com.hiddenswitch.proto3.net.models.*;
 import com.hiddenswitch.proto3.net.util.Matchmaker;
-import com.hiddenswitch.proto3.net.util.Serialization;
 import com.hiddenswitch.proto3.server.GameSession;
 import com.hiddenswitch.proto3.server.PregamePlayerConfiguration;
 import io.vertx.core.Future;
-import net.demilich.metastone.game.decks.Deck;
-import org.apache.commons.collections.FastTreeMap;
-import org.apache.commons.collections.list.TreeList;
-import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.*;
-import java.util.concurrent.LinkedBlockingDeque;
-import java.util.concurrent.LinkedBlockingQueue;
 
 public class Games extends Service<Games> {
 	private GameSessions gameSessions;

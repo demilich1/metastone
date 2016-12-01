@@ -198,6 +198,11 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 				requestLocalAction();
 				getActionRequested().set(false);
 			}
+			try {
+				Thread.sleep(BuildConfig.DEFAULT_SLEEP_DELAY);
+			} catch (Exception ignored) {
+			}
+
 		}
 		endGame();
 	}

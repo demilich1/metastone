@@ -35,12 +35,7 @@ public class StartGameCommand extends SimpleCommand<GameNotification> {
 		GameContext newGame;
 
 		if (gameConfig.isMultiplayer()) {
-			player1 = new Player(playerConfig1);
-			player2 = new Player(playerConfig1);
-			//TODO: get first message correctly from places.
-			ClientConnectionConfiguration config = new ClientConnectionConfiguration(gameConfig.getHost(),gameConfig.getPort(),
-					new ClientToServerMessage(player1, "123"));
-			newGame = new RemoteGameContext(config);
+			newGame = new RemoteGameContext(gameConfig.getConnection());
 		} else {
 			player1 = new Player(playerConfig1);
 			player2 = new Player(playerConfig2);

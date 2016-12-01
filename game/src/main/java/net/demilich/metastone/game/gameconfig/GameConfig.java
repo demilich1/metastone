@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.gameconfig;
 
+import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
 import net.demilich.metastone.game.decks.DeckFormat;
 
 import java.io.Serializable;
@@ -11,8 +12,8 @@ public class GameConfig implements Cloneable, Serializable {
 	private PlayerConfig playerConfig2;
 	private DeckFormat deckFormat;
 	private boolean isMultiplayer;
-	private String host;
-	private int port;
+
+	private ClientConnectionConfiguration connection;
 
 	public GameConfig() {
 	}
@@ -49,28 +50,20 @@ public class GameConfig implements Cloneable, Serializable {
 		this.playerConfig2 = playerConfig2;
 	}
 
-	public String getHost() {
-		return host;
-	}
-
-	public void setHost(String host) {
-		this.host = host;
-	}
-
-	public int getPort() {
-		return port;
-	}
-
-	public void setPort(int port) {
-		this.port = port;
-	}
-
 	public boolean isMultiplayer() {
 		return isMultiplayer;
 	}
 
 	public void setMultiplayer(boolean multiplayer) {
 		isMultiplayer = multiplayer;
+	}
+
+	public ClientConnectionConfiguration getConnection() {
+		return connection;
+	}
+
+	public void setConnection(ClientConnectionConfiguration connection) {
+		this.connection = connection;
 	}
 
 	public GameConfig clone() {
@@ -80,8 +73,7 @@ public class GameConfig implements Cloneable, Serializable {
 		config.setPlayerConfig2(getPlayerConfig2());
 		config.setDeckFormat(getDeckFormat());
 		config.setMultiplayer(isMultiplayer());
-		config.setHost(getHost());
-		config.setPort(getPort());
+		config.setConnection(getConnection());
 		return config;
 	}
 

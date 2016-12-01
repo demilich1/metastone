@@ -1,6 +1,7 @@
-package com.hiddenswitch.proto3.net.models;
+package com.hiddenswitch.proto3.net.common;
 
 import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
+import com.hiddenswitch.proto3.net.common.MatchmakingRequest;
 
 public class MatchmakingResponse {
 	private ClientConnectionConfiguration connection;
