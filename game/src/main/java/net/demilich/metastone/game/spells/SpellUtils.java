@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 
+import co.paralleluniverse.fibers.Suspendable;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -28,7 +29,7 @@ import net.demilich.metastone.game.spells.desc.filter.Operation;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class SpellUtils {
-
+	@Suspendable
 	public static void castChildSpell(GameContext context, Player player, SpellDesc spell, Entity source, Entity target) {
 		EntityReference sourceReference = source != null ? source.getReference() : null;
 		EntityReference targetReference = spell.getTarget();
@@ -78,7 +79,7 @@ public class SpellUtils {
 		return card;
 	}
 
-	public static Card[] getCards(SpellDesc spell) {
+	public static Card[] getCards(GameContext context, SpellDesc spell) {
 		String[] cardNames = null;
 		if (spell.contains(SpellArg.CARDS)) {
 			cardNames = (String[]) spell.get(SpellArg.CARDS);
@@ -88,11 +89,12 @@ public class SpellUtils {
 		}
 		Card[] cards = new Card[cardNames.length];
 		for (int i = 0; i < cards.length; i++) {
-			cards[i] = CardCatalogue.getCardById(cardNames[i]);
+			cards[i] = context.getCardById(cardNames[i]);
 		}
 		return cards;
 	}
-	
+
+	@Suspendable
 	public static DiscoverAction getDiscover(GameContext context, Player player, SpellDesc desc, CardCollection cards) {
 		List<GameAction> discoverActions = getDiscoverActionsForDiscoverSpell(desc, cards);
 		
@@ -105,10 +107,24 @@ public class SpellUtils {
 		for (Card card : cards) {
 			SpellDesc spellClone = spell.addArg(SpellArg.CARD, card.getCardId());
 			DiscoverAction discover = DiscoverAction.createDiscover(spellClone);
+			discover.setCard(card);
 			discover.setActionSuffix(card.getName());
 			discoverActions.add(discover);
 		}
 		return discoverActions;
+	}
+
+	public static DiscoverAction getSpellDiscover(GameContext context, Player player, SpellDesc desc, List<SpellDesc> spells) {
+		List<GameAction> discoverActions = new ArrayList<>();
+		for (SpellDesc spell : spells) {
+			DiscoverAction discover = DiscoverAction.createDiscover(spell);
+			discover.setName(spell.getString(SpellArg.NAME));
+			discover.setDescription(spell.getString(SpellArg.DESCRIPTION));
+			discover.setActionSuffix((String) spell.get(SpellArg.NAME));
+			discoverActions.add(discover);
+		}
+		
+		return (DiscoverAction) player.getBehaviour().requestAction(context, player, discoverActions);
 	}
 
 	public static Card getRandomCard(CardCollection source, Predicate<Card> filter) {

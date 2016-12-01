@@ -3,6 +3,7 @@ package net.demilich.metastone.game.spells;
 import java.util.ArrayList;
 import java.util.List;
 
+import co.paralleluniverse.fibers.Suspendable;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.MinionCard;
@@ -14,8 +15,8 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 
 public class ResurrectSpell extends Spell {
-
 	@Override
+	@Suspendable
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		List<Minion> deadMinions = new ArrayList<>();
 		EntityFilter cardFilter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
@@ -35,7 +36,7 @@ public class ResurrectSpell extends Spell {
 			}
 			Minion resurrectedMinion = deadMinions.get(context.getLogic().random(deadMinions.size()));
 			MinionCard minionCard = (MinionCard) resurrectedMinion.getSourceCard();
-			context.getLogic().summon(player.getId(), minionCard.summon());
+			context.getLogic().summon(player.getId(), minionCard.summon(), null, -1, false);
 			deadMinions.remove(resurrectedMinion);
 		}
 	}

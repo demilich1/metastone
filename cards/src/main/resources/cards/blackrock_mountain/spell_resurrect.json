@@ -10,6 +10,11 @@
 	"spell": {
 		"class": "ResurrectSpell"
 	},
+	"condition": {
+		"class": "GraveyardCountCondition",
+		"operation": "GREATER",
+		"value": 0
+	},
 	"collectible": true,
 	"set": "BLACKROCK_MOUNTAIN",
 	"fileFormatVersion": 1

@@ -43,4 +43,8 @@ public abstract class GameEvent implements Serializable {
 		return sourcePlayerId;
 	}
 
+	@Override
+	public String toString() {
+		return "[EVENT " + getClass().getSimpleName() + "]";
+	}
 }

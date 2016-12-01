@@ -12,7 +12,7 @@ public class HasWeaponCondition extends Condition {
 	}
 
 	@Override
-	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity target) {
+	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity source, Entity target) {
 		Weapon weapon = player.getHero().getWeapon();
 		if (weapon == null || weapon.isBroken()) {
 			return false;

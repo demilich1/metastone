@@ -52,7 +52,7 @@ public class ReceiveCardAndDoSomethingSpell extends Spell {
 				}
 			}
 		} else {
-			for (Card card : SpellUtils.getCards(desc)) {
+			for (Card card : SpellUtils.getCards(context, desc)) {
 				for (int i = 0; i < count; i++) {
 					castSomethingSpell(context, player, cardEffectSpell, source, card);
 				}

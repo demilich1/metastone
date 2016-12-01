@@ -2,6 +2,7 @@ package net.demilich.metastone.game.spells;
 
 import java.util.Map;
 
+import co.paralleluniverse.fibers.Suspendable;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.MinionCard;
@@ -20,22 +21,24 @@ public class ReviveMinionSpell extends Spell {
 
 	public static SpellDesc create(EntityReference target, int hpAdjustment) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(ReviveMinionSpell.class);
-		arguments.put(SpellArg.VALUE, hpAdjustment);
+		arguments.put(SpellArg.HP_BONUS, hpAdjustment);
 		arguments.put(SpellArg.TARGET, target);
 
 		return new SpellDesc(arguments);
 	}
 
 	@Override
+	@Suspendable
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int hpAdjustment = desc.getValue(SpellArg.HP_BONUS, context, player, target, source, 0);
 		Actor targetActor = (Actor) target;
+		int boardPosition = SpellUtils.getBoardPosition(context, player, desc, source);
 		MinionCard minionCard = (MinionCard) targetActor.getSourceCard();
 		Minion minion = minionCard.summon();
 		if (hpAdjustment != 0) {
 			minion.setHp(hpAdjustment);
 		}
-		context.getLogic().summon(player.getId(), minion);
+		context.getLogic().summon(player.getId(), minion, null, boardPosition, false);
 	}
 
 }

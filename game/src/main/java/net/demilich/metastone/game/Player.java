@@ -5,8 +5,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.behaviour.Behaviour;
+import net.demilich.metastone.game.behaviour.DoNothingBehaviour;
 import net.demilich.metastone.game.behaviour.IBehaviour;
 import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
+import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.entities.Actor;
@@ -16,10 +20,36 @@ import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.statistics.GameStatistics;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class Player extends Entity implements Serializable {
+	public static Player Empty() {
+		Player player = new Player();
+
+		PlayerConfig config = new PlayerConfig(Deck.EMPTY, new Behaviour() {
+			@Override
+			public String getName() {
+				return "Waiting for player to connect...";
+			}
+
+			@Override
+			public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
+				return null;
+			}
+
+			@Override
+			public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
+				return null;
+			}
+		});
+
+		player.buildFromConfig(config);
+		return player;
+	}
+
 	protected Hero hero;
-	protected final String deckName;
+	protected String deckName;
 
 	protected CardCollection deck;
 	private final CardCollection hand = new CardCollection();
@@ -58,7 +88,21 @@ public class Player extends Entity implements Serializable {
 		this.getStatistics().merge(otherPlayer.getStatistics());
 	}
 
+	static {
+
+	}
+
+	/**
+	 * Use build from config to actually build the class.
+	 */
+	protected Player() {
+	}
+
 	public Player(PlayerConfig config) {
+		buildFromConfig(config);
+	}
+
+	protected void buildFromConfig(PlayerConfig config) {
 		config.build();
 		Deck selectedDeck = config.getDeckForPlay();
 
@@ -174,4 +218,25 @@ public class Player extends Entity implements Serializable {
 		return "[PLAYER " + "id: " + getId() + ", name: " + getName() + ", hero: " + getHero() + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder()
+				.append(getId())
+				.append(getName())
+				.toHashCode();
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		if (other == null
+				|| !(other instanceof Player)) {
+			return false;
+		}
+
+		Player rhd = (Player) other;
+		return new EqualsBuilder()
+				.append(getId(), rhd.getId())
+				.append(getName(), rhd.getName())
+				.isEquals();
+	}
 }

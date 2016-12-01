@@ -5,4 +5,5 @@ include 'cards'
 include 'app'
 include 'net'
 include 'server'
+include 'cardsgen'
 

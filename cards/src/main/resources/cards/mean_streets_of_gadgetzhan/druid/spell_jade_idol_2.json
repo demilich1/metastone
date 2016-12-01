@@ -1,0 +1,17 @@
+{
+	"name": "Shuffle 3 Copies",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"description": "Shuffle 3 copies of this into your deck.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "ShuffleToDeckSpell",
+		"target": "NONE",
+		"card": "spell_jade_idol"
+	},
+	"collectible": false,
+	"set": "MEAN_STREETS_OF_GADGETZHAN",
+	"fileFormatVersion": 1
+}

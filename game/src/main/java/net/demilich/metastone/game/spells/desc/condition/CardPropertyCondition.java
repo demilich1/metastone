@@ -14,7 +14,7 @@ public class CardPropertyCondition extends Condition {
 	}
 
 	@Override
-	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity target) {
+	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity source, Entity target) {
 		Card card = null;
 		if (target instanceof Card) {
 			card = (Card) target;

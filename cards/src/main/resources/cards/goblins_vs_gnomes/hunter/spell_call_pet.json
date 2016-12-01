@@ -12,9 +12,14 @@
 		"spell": {
 			"class": "ConditionalSpell",
 			"spell": {
-				"class": "ModifyAttributeSpell",
-				"attribute": "MANA_COST_MODIFIER",
-				"value": -4
+				"class": "CardCostModifierSpell",
+				"target": "FRIENDLY_PLAYER",
+				"cardCostModifier": {
+					"class": "CardCostModifier",
+					"target": "EVENT_CARD",
+					"operation": "SUBTRACT",
+					"value": 4
+				}
 			},
 			"condition": {
 				"class": "RaceCondition",

@@ -13,9 +13,13 @@ import net.demilich.metastone.game.targeting.EntityReference;
 public class AddSecretSpell extends Spell {
 
 	public static SpellDesc create(Secret secret) {
+		return create (EntityReference.FRIENDLY_PLAYER, secret);
+	}
+
+	public static SpellDesc create(EntityReference target, Secret secret) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(AddSecretSpell.class);
 		arguments.put(SpellArg.SECRET, secret);
-		arguments.put(SpellArg.TARGET, EntityReference.FRIENDLY_PLAYER);
+		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
 	}
 
@@ -24,5 +28,4 @@ public class AddSecretSpell extends Spell {
 		Secret secret = (Secret) desc.get(SpellArg.SECRET);
 		context.getLogic().playSecret(player, secret);
 	}
-
 }

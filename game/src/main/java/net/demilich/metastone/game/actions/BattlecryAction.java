@@ -2,6 +2,7 @@ package net.demilich.metastone.game.actions;
 
 import java.util.function.Predicate;
 
+import co.paralleluniverse.fibers.Suspendable;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
@@ -35,7 +36,7 @@ public class BattlecryAction extends GameAction {
 		if (getCondition() == null) {
 			return true;
 		}
-		return getCondition().isFulfilled(context, player, null);
+		return getCondition().isFulfilled(context, player, null, null);
 	}
 
 	@Override
@@ -61,6 +62,7 @@ public class BattlecryAction extends GameAction {
 	}
 
 	@Override
+	@Suspendable
 	public void execute(GameContext context, int playerId) {
 		EntityReference target = getSpell().hasPredefinedTarget() ? getSpell().getTarget() : getTargetKey();
 		context.getLogic().castSpell(playerId, getSpell(), getSource(), target, false);

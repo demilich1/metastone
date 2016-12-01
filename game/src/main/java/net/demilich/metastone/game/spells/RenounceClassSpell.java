@@ -34,7 +34,7 @@ public class RenounceClassSpell extends Spell {
 		CardCollection cards = CardCatalogue.query(context.getDeckFormat());
 		CardCollection result = new CardCollection();
 		for (Card card : cards) {
-			if (card.getClassRestriction() == rebornClass) {
+			if (card.getHeroClass() == rebornClass) {
 				result.add(card);
 			}
 		}
@@ -43,7 +43,7 @@ public class RenounceClassSpell extends Spell {
 		
 		CardCollection heroPowers = CardCatalogue.getHeroPowers(context.getDeckFormat());
 		for (Card heroPowerCard : heroPowers) {
-			if (heroPowerCard.getClassRestriction() == rebornClass) {
+			if (heroPowerCard.getHeroClass() == rebornClass) {
 				HeroPower heroPower = (HeroPower) heroPowerCard;
 				player.getHero().setHeroPower(heroPower);
 			}
@@ -51,7 +51,7 @@ public class RenounceClassSpell extends Spell {
 
 		CardCollection replacedCards = new CardCollection();
 		for (Card card : player.getDeck()) {
-			if (card.getClassRestriction() == renouncedClass) {
+			if (card.getHeroClass() == renouncedClass) {
 				replacedCards.add(card);
 			}
 		}
@@ -72,7 +72,7 @@ public class RenounceClassSpell extends Spell {
 		
 		replacedCards = new CardCollection();
 		for (Card card : player.getHand()) {
-			if (card.getClassRestriction() == renouncedClass) {
+			if (card.getHeroClass() == renouncedClass) {
 				replacedCards.add(card);
 			}
 		}

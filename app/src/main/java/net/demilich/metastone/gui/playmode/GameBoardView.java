@@ -164,13 +164,9 @@ public class GameBoardView extends BorderPane {
 			Entity target = context.resolveSingleTarget(action.getTargetKey());
 			GameToken token = getToken(target);
 
-			EventHandler<MouseEvent> clickedHander = new EventHandler<MouseEvent>() {
-
-				@Override
-				public void handle(MouseEvent event) {
-					disableTargetSelection();
-					targetOptions.getActionSelectionListener().onActionSelected(action);
-				}
+			EventHandler<MouseEvent> clickedHander = event -> {
+				disableTargetSelection();
+				targetOptions.getActionSelectionListener().onActionSelected(action);
 			};
 
 			token.showTargetMarker(clickedHander);
@@ -186,13 +182,9 @@ public class GameBoardView extends BorderPane {
 			Button summonHelper = playerId == 0 ? summonHelperMap1.get(token) : summonHelperMap2.get(token);
 			summonHelper.setVisible(true);
 			summonHelper.setManaged(true);
-			EventHandler<ActionEvent> clickedHander = new EventHandler<ActionEvent>() {
-
-				@Override
-				public void handle(ActionEvent event) {
-					disableTargetSelection();
-					targetOptions.getActionSelectionListener().onActionSelected(action);
-				}
+			EventHandler<ActionEvent> clickedHander = event -> {
+				disableTargetSelection();
+				targetOptions.getActionSelectionListener().onActionSelected(action);
 			};
 			summonHelper.setOnAction(clickedHander);
 		}
@@ -227,20 +219,24 @@ public class GameBoardView extends BorderPane {
 
 	public void updateGameState(GameContext context) {
 		entityTokenMap.clear();
-		p1Hero.setHero(context.getPlayer1());
-		p1Hero.updateHeroPowerCost(context, context.getPlayer1());
-		p1Hero.highlight(context.getActivePlayer() == context.getPlayer1());
-		entityTokenMap.put(context.getPlayer1().getHero(), p1Hero);
-		p2Hero.setHero(context.getPlayer2());
-		p2Hero.updateHeroPowerCost(context, context.getPlayer2());
-		p2Hero.highlight(context.getActivePlayer() == context.getPlayer2());
-		entityTokenMap.put(context.getPlayer2().getHero(), p2Hero);
+		PlayerVisuals playerVisuals = new PlayerVisuals(context).invoke();
+		Player localPlayer = playerVisuals.getLocalPlayer();
+		Player opponentPlayer = playerVisuals.getOpponentPlayer();
 
-		updateHandCards(context, context.getPlayer1(), p1Cards);
-		updateHandCards(context, context.getPlayer2(), p2Cards);
+		p1Hero.setHero(localPlayer);
+		p1Hero.updateHeroPowerCost(context, localPlayer);
+		p1Hero.highlight(context.getActivePlayerId() == localPlayer.getId());
+		entityTokenMap.put(localPlayer.getHero(), p1Hero);
+		p2Hero.setHero(opponentPlayer);
+		p2Hero.updateHeroPowerCost(context, opponentPlayer);
+		p2Hero.highlight(context.getActivePlayerId() == opponentPlayer.getId());
+		entityTokenMap.put(opponentPlayer.getHero(), p2Hero);
 
-		updateMinionTokens(context.getPlayer1(), p1Minions);
-		updateMinionTokens(context.getPlayer2(), p2Minions);
+		updateHandCards(context, localPlayer, p1Cards);
+		updateHandCards(context, opponentPlayer, p2Cards);
+
+		updateMinionTokens(localPlayer, p1Minions);
+		updateMinionTokens(opponentPlayer, p2Minions);
 
 		checkForWinner(context);
 	}
@@ -273,6 +269,51 @@ public class GameBoardView extends BorderPane {
 				minionTokens[i].setManaged(false);
 				minionTokens[i].setVisible(false);
 			}
+		}
+	}
+
+	private class PlayerVisuals {
+		private GameContext context;
+		private Player localPlayer;
+		private Player opponentPlayer;
+
+		public PlayerVisuals(GameContext context) {
+			this.context = context;
+		}
+
+		public Player getLocalPlayer() {
+			return localPlayer;
+		}
+
+		public Player getOpponentPlayer() {
+			return opponentPlayer;
+		}
+
+		public PlayerVisuals invoke() {
+			localPlayer = context.getPlayer1();
+			opponentPlayer = context.getPlayer2();
+
+			// Try to configure the players based on what data is available.
+			if (context instanceof GameContextVisuals) {
+				int localPlayerId = ((GameContextVisuals) context).getLocalPlayerId();
+
+				if (context.hasPlayer(localPlayerId)) {
+					localPlayer = context.getPlayer(localPlayerId);
+				} else {
+					localPlayer = Player.Empty();
+					localPlayer.setId(localPlayerId);
+				}
+
+				final int opponentId = localPlayerId == GameContext.PLAYER_1 ? GameContext.PLAYER_2 : GameContext.PLAYER_1;
+
+				if (context.hasPlayer(opponentId)) {
+					opponentPlayer = context.getOpponent(localPlayer);
+				} else {
+					opponentPlayer = Player.Empty();
+					opponentPlayer.setId(opponentId);
+				}
+			}
+			return this;
 		}
 	}
 }

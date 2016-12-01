@@ -1,7 +1,10 @@
 dependencies {
     compile project(':shared')
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
     compile group: 'com.google.code.gson', name: 'gson', version: '2.3.1'
     compile group: 'commons-io', name: 'commons-io', version: '2.4'
+    compile group: 'io.vertx', name: 'vertx-core', version: '3.3.3'
+    compile group: 'io.vertx', name: 'vertx-sync', version: '3.3.3'
     testCompile project(':cards')
     testCompile group: 'org.testng', name: 'testng', version: '6.+'
 }

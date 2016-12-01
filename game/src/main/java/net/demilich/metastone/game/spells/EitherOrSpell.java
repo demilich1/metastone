@@ -17,7 +17,7 @@ public class EitherOrSpell extends Spell {
 		Map<SpellArg, Object> arguments = SpellDesc.build(EitherOrSpell.class);
 		arguments.put(SpellArg.SPELL_1, either);
 		arguments.put(SpellArg.SPELL_2, or);
-		arguments.put(SpellArg.SPELL_CONDITION_CHECKER, condition);
+		arguments.put(SpellArg.CONDITION, condition);
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
 	}
@@ -32,7 +32,7 @@ public class EitherOrSpell extends Spell {
 		SpellDesc either = (SpellDesc) desc.get(SpellArg.SPELL_1);
 		SpellDesc or = (SpellDesc) desc.get(SpellArg.SPELL_2);
 
-		SpellDesc spellToCast = condition.isFulfilled(context, player, target) ? either : or;
+		SpellDesc spellToCast = condition.isFulfilled(context, player, source, target) ? either : or;
 		SpellUtils.castChildSpell(context, player, spellToCast, source, target);
 	}
 

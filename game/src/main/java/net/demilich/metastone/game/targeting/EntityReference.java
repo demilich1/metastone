@@ -49,7 +49,7 @@ public class EntityReference implements Serializable {
 
 	private int id;
 
-	public EntityReference() {
+	private EntityReference() {
 	}
 
 	public EntityReference(int key) {

@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 import net.demilich.metastone.NotificationProxy;
+import net.demilich.metastone.game.statistics.SimulationResult;
 import org.apache.commons.lang3.time.DurationFormatUtils;
 
 import javafx.collections.FXCollections;
@@ -123,6 +124,9 @@ public class SimulationResultView extends BorderPane {
 	private String getFavouriteCardName(GameStatistics stats, CardType cardType) {
 		List<Card> cards = new ArrayList<Card>();
 		for (String cardId : stats.getCardsPlayed().keySet()) {
+			if (cardId.startsWith("temp_card_name_")) {
+				continue;
+			}
 			Card card = CardCatalogue.getCardById(cardId);
 			if (card == null) {
 				System.out.println("Invalid card with id: " + cardId);

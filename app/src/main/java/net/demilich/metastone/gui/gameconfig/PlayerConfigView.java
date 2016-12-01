@@ -201,4 +201,11 @@ public class PlayerConfigView extends VBox {
 		filterDecks();
 	}
 
+	public void hideBehaviours() {
+		behaviourBox.setVisible(false);
+	}
+
+	public void hideHideCards() {
+		hideCardsCheckBox.setVisible(false);
+	}
 }

@@ -8,13 +8,17 @@ import net.demilich.metastone.game.logic.GameLogic;
 import java.io.Serializable;
 
 public class Deck implements Serializable {
-
+	public static final Deck EMPTY;
 	private String name = "";
 	private HeroClass heroClass;
 	protected CardCollection cards = new CardCollection();
 	private String description;
 	private String filename;
 	private boolean arbitrary;
+
+	static {
+		EMPTY = new Deck(HeroClass.WARRIOR);
+	}
 
 	protected Deck() {
 	}
@@ -92,5 +96,19 @@ public class Deck implements Serializable {
 
 	public void setFilename(String filename) {
 		this.filename = filename;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("[Deck]\n");
+		builder.append("name:\n");
+		builder.append(name);
+		builder.append("\ncards: ");
+		for (Card card : cards) {
+			builder.append(card.getCardId());
+			builder.append(", ");
+		}
+		return builder.toString();
 	}
 }

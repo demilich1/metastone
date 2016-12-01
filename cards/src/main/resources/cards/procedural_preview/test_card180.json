@@ -1,1 +1,40 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "Ogremblider", "heroClass": "ANY", "description": "Battlecry: If you control another Mech, Discover a Mech.", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 5.0, "race": "MECH", "baseManaCost": 6.0, "attributes": {"BATTLECRY": true}, "battlecry": {"spell": {"cardFilter": {"cardType": "MINION", "race": "MECH", "class": "CardFilter"}, "spell": {"targetPlayer": "SELF", "class": "ReceiveCardSpell"}, "class": "DiscoverRandomCardSpell"}, "targetSelection": "NONE", "condition": {"race": "MECH", "class": "RaceOnBoardCondition"}}, "type": "MINION", "id": "Ogremblider", "baseAttack": 7.0}
+{
+  "collectible": true,
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Ogremblider",
+  "heroClass": "ANY",
+  "description": "Battlecry: If you control another Mech, Discover a Mech.",
+  "fileFormatVersion": 1,
+  "rarity": "COMMON",
+  "baseHp": 5.0,
+  "race": "MECH",
+  "baseManaCost": 6.0,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "battlecry": {
+    "spell": {
+      "cardFilter": {
+        "cardType": "MINION",
+        "race": "MECH",
+        "class": "CardFilter"
+      },
+      "spell": {
+        "targetPlayer": "SELF",
+        "class": "ReceiveCardSpell"
+      },
+      "class": "DiscoverRandomCardSpell"
+    },
+    "targetSelection": "NONE",
+    "condition": {
+      "class": "MinionOnBoardCondition",
+      "cardfilter": {
+        "class": "RaceFilter",
+        "race": "MECH"
+      }
+    }
+  },
+  "type": "MINION",
+  "id": "Ogremblider",
+  "baseAttack": 7.0
+}

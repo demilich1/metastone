@@ -11,7 +11,7 @@ public class Assert {
 		ReflectionComparator reflectionComparator = ReflectionComparatorFactory.createRefectionComparator(ReflectionComparatorMode.IGNORE_DEFAULTS);
 		Difference difference = reflectionComparator.getDifference(rhs, lhs);
 		if (difference != null) {
-			org.testng.Assert.fail(new DefaultDifferenceReport().createReport(difference));
+			org.junit.Assert.fail(new DefaultDifferenceReport().createReport(difference));
 		}
 	}
 }

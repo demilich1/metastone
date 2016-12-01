@@ -16,16 +16,6 @@
                 <Label styleClass="name-small" text="Deck Format:"/>
                 <ComboBox fx:id="formatBox" prefWidth="150.0"/>
             </HBox>
-            <VBox alignment="CENTER" BorderPane.alignment="CENTER" spacing="4" fx:id="multiplayerGroup">
-                <HBox alignment="CENTER" BorderPane.alignment="CENTER" spacing="4">
-                    <Label styleClass="name-small" text="Host:"/>
-                    <TextField fx:id="hostBox" prefWidth="150.0" text="127.0.0.1"/>
-                </HBox>
-                <HBox alignment="CENTER" BorderPane.alignment="CENTER" spacing="4">
-                    <Label styleClass="name-small" text="Port:"/>
-                    <TextField fx:id="portBox" prefWidth="150.0" text="11111"/>
-                </HBox>
-            </VBox>
             <HBox fx:id="playerArea" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="0.0"
                   BorderPane.alignment="CENTER"/>
         </VBox>

@@ -1,0 +1,27 @@
+{
+	"name": "Second-rate Bruiser",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "Taunt. Costs (2) less if your opponent has at least three minions.",
+	"manaCostModifier": {
+		"class": "ConditionalValueProvider",
+		"ifTrue": 2,
+		"ifFalse": 0,
+		"condition": {
+			"class": "MinionCountCondition",
+			"targetPlayer": "OPPONENT",
+			"operation": "GREATER_OR_EQUAL",
+			"value": 3
+		}
+	},
+	"attributes": {
+		"TAUNT": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZHAN",
+	"fileFormatVersion": 1
+}

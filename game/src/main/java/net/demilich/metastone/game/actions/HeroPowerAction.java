@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.actions;
 
+import co.paralleluniverse.fibers.Suspendable;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -16,6 +17,7 @@ public class HeroPowerAction extends PlaySpellCardAction {
 	}
 
 	@Override
+	@Suspendable
 	public void execute(GameContext context, int playerId) {
 		play(context, playerId);
 		context.getLogic().useHeroPower(playerId);
@@ -27,6 +29,7 @@ public class HeroPowerAction extends PlaySpellCardAction {
 	}
 
 	@Override
+	@Suspendable
 	public void play(GameContext context, int playerId) {
 		context.getLogic().castSpell(playerId, getSpell(), cardReference, getTargetKey(), false);
 	}

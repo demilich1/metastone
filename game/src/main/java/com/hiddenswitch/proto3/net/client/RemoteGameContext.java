@@ -6,6 +6,9 @@ import java.util.Stack;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
+import com.hiddenswitch.proto3.net.common.GameState;
+import com.hiddenswitch.proto3.net.common.NetworkBehaviour;
 import com.hiddenswitch.proto3.net.common.RemoteUpdateListener;
 import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.GameNotification;
@@ -14,63 +17,64 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.TurnState;
 import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.behaviour.IBehaviour;
+import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
 import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
+import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.spells.trigger.IGameEventListener;
 import net.demilich.metastone.game.targeting.EntityReference;
+import net.demilich.metastone.game.targeting.IdFactory;
 import net.demilich.metastone.game.visuals.GameContextVisuals;
 
 public class RemoteGameContext extends GameContext implements GameContextVisuals, RemoteUpdateListener {
 	private final List<GameEvent> gameEvents = new ArrayList<>();
 	private boolean blockedByAnimation;
-	private Player localPlayer;
-	private final AtomicInteger activePlayer;
+	private final AtomicInteger activePlayerAtomic;
 	private final AtomicBoolean actionRequested;
-	private boolean gameDecided = false;
+	private int localPlayerId = -1;
+	private volatile boolean gameDecided = false;
 	private int remoteTurn;
 	private TurnState remoteTurnState;
 	private volatile List<GameAction> remoteValidActions;
 	private String host;
 	private int port;
 	private boolean mulligan;
-	ClientCommunicationSend ccs;
-	ClientCommunicationReceive ccr;
+	private String lastRequestId;
+	private ClientConnectionConfiguration connectionConfiguration;
+	private ClientCommunicationSend ccs;
+	private ClientCommunicationReceive ccr;
+	public boolean ignoreEventOverride = false;
+	private final SocketClientConnection socketClientConnection;
 
-	public RemoteGameContext(Player player1, Player player2, GameLogic gameLogic, DeckFormat df, String host, int port) {
-		super(player1, player2, gameLogic, df);
-		SocketClientConnection scc = new SocketClientConnection(host, port);
-		this.ccs = scc;
-		this.ccr = scc;
-		new Thread(scc).start();
-
-		this.activePlayer = new AtomicInteger();
+	public RemoteGameContext(ClientConnectionConfiguration connectionConfiguration) {
+		super(connectionConfiguration.getFirstMessage().getPlayer1(), null, new GameLogic(), new DeckFormat()
+				.withCardSets(CardSet.values()));
+		this.connectionConfiguration = connectionConfiguration;
+		this.host = connectionConfiguration.getHost();
+		this.port = connectionConfiguration.getPort();
+		this.socketClientConnection = new SocketClientConnection(host, port);
+		this.ccs = socketClientConnection;
+		this.ccr = socketClientConnection;
+		this.activePlayerAtomic = new AtomicInteger();
 		this.getActivePlayerAtomic().set(-1);
 		this.actionRequested = new AtomicBoolean();
 		this.getActionRequested().set(false);
-
 		ccr.RegisterListener(this);
+		Thread networkingThread = new Thread(socketClientConnection);
+		networkingThread.start();
 	}
 
-
-	protected void setActivePlayer(int id) {
-		if (localPlayer.getId() == PLAYER_1){
-			this.getActivePlayerAtomic().set(id);
-		} else {
-			this.getActivePlayerAtomic().set(1 - id);
-		}
+	@Override
+	public void setActivePlayerIndex(int id) {
+		super.setActivePlayerIndex(id);
+		this.getActivePlayerAtomic().set(id);
 	}
-
 
 	@Override
 	protected boolean acceptAction(GameAction nextAction) {
-		throw new RuntimeException("should not be called");
-	}
-
-	@Override
-	public void addCardCostModifier(CardCostModifier cardCostModifier) {
 		throw new RuntimeException("should not be called");
 	}
 
@@ -81,18 +85,14 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 
 
 	@Override
-	public GameContext clone() {
-		Player player1Clone = getPlayer1().clone();
-		// player1Clone.getDeck().shuffle();
-		Player player2Clone = getPlayer2().clone();
-		// player2Clone.getDeck().shuffle();
-		GameContext clone = new RemoteGameContext(player1Clone, player2Clone, getLogic().clone(), getDeckFormat(), getHost(), getPort());
-		return clone;
+	public synchronized GameContext clone() {
+		return super.clone();
 	}
 
 	@Override
-	public void dispose() {
-		throw new RuntimeException("should not be called");
+	public synchronized void dispose() {
+		super.dispose();
+		socketClientConnection.kill();
 	}
 
 	@Override
@@ -156,13 +156,6 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 		return gameDecided;
 	}
 
-
-	@Override
-	public int getActivePlayerId() {
-		//TODO: update this with remote;
-		return getActivePlayerAtomic().get();
-	}
-
 	@Override
 	public GameAction getAutoHeroPowerAction() {
 		throw new RuntimeException("should not be called");
@@ -170,45 +163,83 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 
 	@Override
 	public boolean ignoreEvents() {
+		//Patch around lack of good notification when testing
+		//TODO: refactor this patch
+		if (ignoreEventOverride) {
+			return true;
+		}
 		return (!mulligan && getActivePlayerId() == -1);
 	}
 
 	@Override
 	public void init() {
-		//TODO: Update game Id on client-side.
-		ccs.getSendToServer().sendFirstMessage(getPlayer1(), "123");
+		ccs.getSendToServer().sendGenericMessage(connectionConfiguration.getFirstMessage());
 	}
 
 	@Override
 	public GameLogic getLogic() {
 		//TODO: FIX
 		return super.getLogic();
-		//throw new RuntimeException("should not be called");
 	}
 
 	@Override
 	public void play() {
-		logger.debug("Game starts: " + getPlayer1().getName() + " VS. " + getPlayer2().getName());
+		logger.debug("Game starts.");
 		init();
-		System.out.println("waiting");
+		logger.debug("Waiting for players to connect...");
 		while (getActivePlayerAtomic().get() == -1) {
-			//Busy wait
+			try {
+				Thread.sleep(BuildConfig.DEFAULT_SLEEP_DELAY);
+			} catch (InterruptedException ignored) {
+			}
 		}
-		System.out.println("inGame");
+		logger.debug("Players connected, waiting for action.");
 		while (!gameDecided()) {
 			if (getActionRequested().get()) {
-				System.out.println("actionRequested");
-				GameAction action = getLocalPlayer().getBehaviour().requestAction(this, getActivePlayer(), getValidActions());
-				ccs.getSendToServer().registerAction(getLocalPlayer(), action);
+				requestLocalAction();
 				getActionRequested().set(false);
+			}
+			if (isHumanPlayer()) {
+				try {
+					Thread.sleep(BuildConfig.DEFAULT_SLEEP_DELAY);
+				} catch (InterruptedException ignored) {
+				}
 			}
 		}
 		endGame();
 	}
 
+	protected boolean isHumanPlayer() {
+		if (getLocalPlayer() == null) {
+			return true;
+		}
+		return getLocalPlayer().getBehaviour() instanceof NetworkBehaviour ?
+				(((NetworkBehaviour) (getLocalPlayer().getBehaviour())).getWrapBehaviour() instanceof HumanBehaviour)
+				: getLocalPlayer().getBehaviour() instanceof HumanBehaviour;
+	}
+
+	protected void requestLocalAction() {
+		if (getActivePlayerId() == getMyPlayerId()
+				&& getActivePlayerId() != -1) {
+			logger.debug("Action was requested from player.");
+			GameAction action = getLocalPlayer().getBehaviour().requestAction(this, getActivePlayer(), getValidActions());
+			ccs.getSendToServer().sendAction(this.lastRequestId, getLocalPlayer(), action);
+		}
+	}
+
+	protected int getMyPlayerId() {
+		return getLocalPlayerId();
+	}
+
 	@Override
 	public Player getActivePlayer() {
 		return super.getPlayer(getActivePlayerAtomic().get());
+	}
+
+	@Override
+	public int getActivePlayerId() {
+		//TODO: update this with remote;
+		return getActivePlayerAtomic().get();
 	}
 
 	public boolean isBlockedByAnimation() {
@@ -231,7 +262,7 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 		while (blockedByAnimation) {
 			try {
 				Thread.sleep(BuildConfig.DEFAULT_SLEEP_DELAY);
-			} catch (InterruptedException e) {
+			} catch (InterruptedException ignored) {
 			}
 		}
 		NotificationProxy.sendNotification(GameNotification.GAME_STATE_LATE_UPDATE, this);
@@ -247,7 +278,7 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	}
 
 	public AtomicInteger getActivePlayerAtomic() {
-		return activePlayer;
+		return activePlayerAtomic;
 	}
 
 	public TurnState getRemoteTurnState() {
@@ -255,6 +286,7 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	}
 
 	public void setRemoteTurnState(TurnState remoteTurnState) {
+		setTurnState(remoteTurnState);
 		this.remoteTurnState = remoteTurnState;
 	}
 
@@ -267,11 +299,15 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	}
 
 	public Player getLocalPlayer() {
-		return localPlayer;
+		if (getLocalPlayerId() == -1) {
+			return null;
+		}
+
+		return getPlayer(getLocalPlayerId());
 	}
 
 	public void setLocalPlayer(Player localPlayer) {
-		this.localPlayer = localPlayer;
+		this.localPlayerId = localPlayer.getId();
 	}
 
 	public List<GameAction> getRemoteValidActions() {
@@ -291,56 +327,37 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	@Override
 	public void onGameEnd(Player w) {
 		this.setWinner(w);
+		this.gameDecided = true;
 		this.onGameStateChanged();
 		this.endGame();
 	}
 
 	@Override
 	public void onActivePlayer(Player ap) {
-		System.out.println("ON_ACTIVE_PLAYER " + ap.getId());
-		this.setActivePlayer(ap.getId());
+		logger.debug("On active player {}", ap.getId());
+		this.setActivePlayerIndex(ap.getId());
 		this.onGameStateChanged();
+		logger.debug("End active player {}", ap.getId());
 	}
 
 	@Override
-	public void setPlayers(Player lp, Player rp) {
-		this.setLocalPlayer(lp);
-		rp.setHideCards(true);
-		this.getPlayers()[PLAYER_1] = lp;
-		this.getPlayers()[PLAYER_2] = rp;
+	public void setPlayers(Player localPlayer, Player remotePlayer) {
+		this.setLocalPlayer(localPlayer);
+		this.setPlayer(localPlayer.getId(), localPlayer);
+		this.setPlayer(remotePlayer.getId(), remotePlayer);
+
+		hideCards();
 	}
-	
-	@Override
-	public Player getPlayer(int index){
-		if (this.localPlayer.getId() == PLAYER_2){
-			return super.getPlayer(1 - index);
-		} else {
-			return super.getPlayer(index);
-		}
-	}
-		
 
-	@Override
-	public void onUpdate(Player player1, Player player2, TurnState newState) {
-		System.out.println("update received");
-		if (this.localPlayer.getId() == player1.getId()){ //Player 1 is local
-			player2.setHideCards(true);
-			this.setPlayers(new Player[] {player1, player2});
-
-		} else { //Player 2 is local
-			player2.setId(0);
-			player1.setId(1);
-			player1.setHideCards(true);
-			this.setPlayers(new Player[] {player2, player1});
-		}
-		
-		this.setRemoteTurnState(newState);
-		this.onGameStateChanged();
-
+	protected void hideCards() {
+		getLocalPlayer().setHideCards(false);
+		getOpponent(getLocalPlayer()).setHideCards(true);
 	}
 
 	@Override
-	public void onRequestAction(List<GameAction> availableActions) {
+	public void onRequestAction(String id, GameState state, List<GameAction> availableActions) {
+		updateWithState(state);
+		this.lastRequestId = id;
 		this.getActionRequested().set(true);
 		this.setRemoteValidActions(availableActions);
 		this.onGameStateChanged();
@@ -348,11 +365,30 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 
 	@Override
 	public void onTurnEnd(Player ap, int turnNumber, TurnState turnState) {
-		System.out.println("new active player: " + ap.getId());
-		this.setActivePlayer(ap.getId());
+		logger.debug("new active player: " + ap.getId());
+		this.setActivePlayerIndex(ap.getId());
 		this.setRemoteTurn(turnNumber);
 		this.setRemoteTurnState(turnState);
 		this.onGameStateChanged();
+	}
+
+	@Override
+	public void onUpdate(GameState state) {
+		updateWithState(state);
+		this.onGameStateChanged();
+	}
+
+	protected synchronized void updateWithState(GameState state) {
+		if (!state.isValid()) {
+			throw new RuntimeException("Invalid state received from wire!");
+		}
+		this.setPlayer(GameContext.PLAYER_1, state.player1);
+		this.setPlayer(GameContext.PLAYER_2, state.player2);
+		this.setEnvironment(state.environment);
+		this.setTriggerManager(state.triggerManager);
+		this.getLogic().setIdFactory(new IdFactory(state.currentId));
+		this.setRemoteTurnState(state.turnState);
+		hideCards();
 	}
 
 	public String getHost() {
@@ -364,10 +400,26 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	}
 
 	@Override
-	public void onMulligan(Player player, List<Card> cards) {
+	public void onMulligan(String id, Player player, List<Card> cards) {
 		mulligan = false;
+		logger.debug("Mulligan requested.");
 		List<Card> discardedCards = player.getBehaviour().mulligan(this, player, cards);
 		mulligan = true;
-		ccs.getSendToServer().sendMulligan(player, discardedCards);
+		ccs.getSendToServer().sendMulligan(id, player, discardedCards);
+	}
+
+	@Override
+	public void setPlayer(int index, Player player) {
+		// Don't override the existing behaviour
+		if (getPlayer(index) != null) {
+			IBehaviour existingBehaviour = getPlayer(index).getBehaviour();
+			player.setBehaviour(existingBehaviour);
+		}
+		super.setPlayer(index, player);
+	}
+
+	@Override
+	public int getLocalPlayerId() {
+		return localPlayerId;
 	}
 }

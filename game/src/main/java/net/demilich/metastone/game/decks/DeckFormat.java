@@ -60,4 +60,18 @@ public class DeckFormat implements Serializable {
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
+
+	public DeckFormat withCardSets(CardSet... cardSets) {
+		for (CardSet cardSet : cardSets) {
+			addSet(cardSet);
+		}
+		return this;
+	}
+
+	public DeckFormat withCardSets(Iterable<CardSet> cardSets) {
+		for (CardSet cardSet : cardSets) {
+			addSet(cardSet);
+		}
+		return this;
+	}
 }

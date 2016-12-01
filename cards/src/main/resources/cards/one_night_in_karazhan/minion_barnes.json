@@ -12,8 +12,9 @@
 		"targetSelection": "NONE",
 		"spell": {
 			"class": "SummonOneOneCopySpell",
-			"cardFilter": {
-				"class": "InDeckFilter"
+			"cardSource": {
+				"class": "DeckSource",
+				"targetPlayer": "SELF"
 			},
 			"boardPositionRelative": "RIGHT"
 		}

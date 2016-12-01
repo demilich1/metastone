@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import co.paralleluniverse.fibers.Suspendable;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -23,6 +24,7 @@ public class KelThuzadSpell extends Spell {
 	}
 
 	@Override
+	@Suspendable
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int currentTurn = context.getTurn();
 		List<Entity> graveyardSnapshot = new ArrayList<>(player.getGraveyard());
@@ -33,7 +35,7 @@ public class KelThuzadSpell extends Spell {
 			Minion deadMinion = (Minion) deadEntity;
 			if (deadMinion.getAttributeValue(Attribute.DIED_ON_TURN) == currentTurn) {
 				MinionCard minionCard = (MinionCard) deadMinion.getSourceCard();
-				context.getLogic().summon(player.getId(), minionCard.summon());
+				context.getLogic().summon(player.getId(), minionCard.summon(), null, -1, false);
 			}
 		}
 	}

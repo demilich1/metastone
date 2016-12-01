@@ -1,0 +1,14 @@
+{
+	"name": "Demon",
+	"baseManaCost": 8,
+	"type": "MINION",
+	"baseAttack": 8,
+	"baseHp": 8,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"race": "DEMON",
+	"description": "",
+	"collectible": false,
+	"set": "MEAN_STREETS_OF_GADGETZHAN",
+	"fileFormatVersion": 1
+}

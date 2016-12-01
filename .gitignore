@@ -12,3 +12,4 @@ classes/
 *.iml
 
 cards/src/main/resources/metastone.properties
+.DS_Store

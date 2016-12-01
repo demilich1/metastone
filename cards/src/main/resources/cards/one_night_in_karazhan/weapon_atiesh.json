@@ -32,6 +32,12 @@
 					"hpBonus": -1
 				}
 			]
+		},
+		"fireCondition": {
+			"class": "MinionCountCondition",
+			"targetPlayer": "SELF",
+			"operation": "LESS",
+			"value": 7
 		}
 	},
 	"collectible": false,

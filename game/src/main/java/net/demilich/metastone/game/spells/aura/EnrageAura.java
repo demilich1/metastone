@@ -2,6 +2,7 @@ package net.demilich.metastone.game.spells.aura;
 
 import java.util.List;
 
+import co.paralleluniverse.fibers.Suspendable;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -31,6 +32,7 @@ public class EnrageAura extends Aura {
 	}
 
 	@Override
+	@Suspendable
 	public void onGameEvent(GameEvent event) {
 		if (event.getEventType() == GameEventType.ENRAGE_CHANGED) {
 			active = event.getEventTarget().hasAttribute(Attribute.ENRAGED);

@@ -19,8 +19,11 @@
     },
     "targetSelection": "NONE",
     "condition": {
-      "race": "BEAST",
-      "class": "RaceOnBoardCondition"
+      "class": "MinionOnBoardCondition",
+      "cardfilter": {
+        "class": "RaceFilter",
+        "race": "BEAST"
+      }
     }
   },
   "type": "MINION",

@@ -12,13 +12,14 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderDesc;
 
-public abstract class CardDesc implements Serializable{
+public abstract class CardDesc implements Serializable {
 
 	public String id;
 	public String name;
 	public String description;
 	public CardType type;
 	public HeroClass heroClass;
+	public HeroClass[] heroClasses;
 	public Rarity rarity;
 	public CardSet set;
 	public int baseManaCost;

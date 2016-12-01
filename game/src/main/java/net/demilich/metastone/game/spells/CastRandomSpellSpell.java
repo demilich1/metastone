@@ -25,22 +25,33 @@ import net.demilich.metastone.game.events.CardRevealedEvent;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.CardFilter;
+import net.demilich.metastone.game.spells.desc.source.CardSource;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class CastRandomSpellSpell extends Spell {
 	
 	Logger logger = LoggerFactory.getLogger(CastRandomSpellSpell.class);
 
-	public static SpellDesc create() {
+	public static SpellDesc create(int value) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(CastRandomSpellSpell.class);
+		arguments.put(SpellArg.VALUE, value);
 		return new SpellDesc(arguments);
 	}
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
+		// TODO: Disable this spell for now since it causes too many problems with the way it is implemented.
+		return;
+	}
+
+	private void internalYogg(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		// This spell is crazy.
 		CardFilter filter = (CardFilter) desc.get(SpellArg.CARD_FILTER);
 		CardCollection spells = CardCatalogue.query(context.getDeckFormat(), CardType.SPELL);
+		CardSource cardSource = (CardSource) desc.get(SpellArg.CARD_SOURCE);
+		if (cardSource != null) {
+			spells = cardSource.getCards(context, player);
+		}
 		CardCollection filteredSpells = new CardCollection();
 		for (Card spell : spells) {
 			if (filter == null || filter.matches(context, player, spell)) {
@@ -48,13 +59,13 @@ public class CastRandomSpellSpell extends Spell {
 			}
 		}
 		// Straight up insane.
-		
+
 		// Set behavior to random. Because we're already insane.
 		// This allows Discover effects and targeting to actually be random.
 		IBehaviour currentBehaviour = player.getBehaviour();
 		player.setBehaviour(new PlayRandomBehaviour());
 		// HAHAHAHAHAHAHAHAHAHA!
-		
+
 		int numberOfSpellsToCast = desc.getValue(SpellArg.VALUE, context, player, target, source, 1);
 		Player originalPlayer = player;
 		for (int i = 0; i < numberOfSpellsToCast; i++) {
@@ -109,7 +120,7 @@ public class CastRandomSpellSpell extends Spell {
 			// your opponent has died, but should if you do. But, it works for now.
 			context.getLogic().checkForDeadEntities();
 		}
-		
+
 		originalPlayer.setBehaviour(currentBehaviour);
 		// *ahem* Back to normal.
 	}

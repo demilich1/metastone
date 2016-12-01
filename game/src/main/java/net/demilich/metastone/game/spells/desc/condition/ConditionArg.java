@@ -6,7 +6,6 @@ public enum ConditionArg {
 	VALUE,
 	VALUE1,
 	VALUE2,
-	VALUE_PROVIDER,
 	TARGET,
 	TARGET_PLAYER,
 	OPERATION,
@@ -16,5 +15,6 @@ public enum ConditionArg {
 	CARD_ID,
 	CARD_IDS,
 	INVERT,
-	FILTER
+	CARD_FILTER,
+	FILTER,
 }

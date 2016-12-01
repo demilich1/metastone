@@ -11,10 +11,10 @@ public class AndCondition extends Condition {
 	}
 
 	@Override
-	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity target) {
+	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity source, Entity target) {
 		Condition[] conditions = (Condition[]) desc.get(ConditionArg.CONDITIONS);
 		for (Condition condition : conditions) {
-			if (!condition.isFulfilled(context, player, target)) {
+			if (!condition.isFulfilled(context, player, source, target)) {
 				return false;
 			}
 		}

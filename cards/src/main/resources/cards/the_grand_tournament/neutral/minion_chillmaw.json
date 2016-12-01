@@ -18,7 +18,10 @@
 		},
 		"condition": {
 			"class": "HoldsCardCondition",
-			"race": "DRAGON"
+			"cardFilter": {
+				"class": "CardFilter",
+				"race": "DRAGON"
+			}
 		}
 	},
 	"attributes": {

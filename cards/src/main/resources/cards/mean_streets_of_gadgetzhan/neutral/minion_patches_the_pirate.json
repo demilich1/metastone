@@ -1,0 +1,31 @@
+{
+	"name": "Patches the Pirate",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"race": "PIRATE",
+	"description": "Charge. After you play a pirate, summon this minion from your deck.",
+	"deckTrigger": {
+		"eventTrigger": {
+			"class": "MinionPlayedTrigger",
+			"targetPlayer": "SELF",
+			"queueCondition": {
+				"class": "RaceCondition",
+				"race": "PIRATE"
+			}
+		},
+		"spell": {
+			"class": "PutMinionOnBoardFromDeckSpell",
+			"target": "SELF"
+		}
+	},
+	"attributes": {
+		"CHARGE": true
+	},
+	"collectible": true,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

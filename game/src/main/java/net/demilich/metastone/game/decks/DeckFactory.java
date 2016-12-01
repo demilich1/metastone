@@ -4,7 +4,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
+import org.apache.commons.lang3.RandomUtils;
 
 public class DeckFactory {
 
@@ -24,4 +26,14 @@ public class DeckFactory {
 		return new RandomDeck(heroClass, deckFormat);
 	}
 
+	public static Deck getRandomDeck() {
+		HeroClass[] heroClasses = {HeroClass.DRUID, HeroClass.HUNTER, HeroClass.MAGE, HeroClass.PALADIN, HeroClass.PRIEST, HeroClass.ROGUE, HeroClass.SHAMAN, HeroClass.WARLOCK, HeroClass.WARRIOR};
+		Deck randomDeck = DeckFactory.getRandomDeck(
+				heroClasses[RandomUtils.nextInt(0, heroClasses.length)],
+				new DeckFormat().withCardSets(
+						CardSet.PROCEDURAL_PREVIEW,
+						CardSet.BASIC,
+						CardSet.CLASSIC));
+		return randomDeck;
+	}
 }

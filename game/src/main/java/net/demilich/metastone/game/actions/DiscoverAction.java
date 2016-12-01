@@ -2,8 +2,10 @@ package net.demilich.metastone.game.actions;
 
 import java.util.function.Predicate;
 
+import co.paralleluniverse.fibers.Suspendable;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.condition.Condition;
@@ -22,6 +24,9 @@ public class DiscoverAction extends GameAction {
 
 	private SpellDesc spell;
 	private Condition condition;
+	private Card card;
+	private String name = "";
+	private String description = "";
 
 	private DiscoverAction() {
 		setActionType(ActionType.DISCOVER);
@@ -36,7 +41,7 @@ public class DiscoverAction extends GameAction {
 		if (getCondition() == null) {
 			return true;
 		}
-		return getCondition().isFulfilled(context, player, null);
+		return getCondition().isFulfilled(context, player, null, null);
 	}
 
 	@Override
@@ -62,13 +67,22 @@ public class DiscoverAction extends GameAction {
 	}
 
 	@Override
+	@Suspendable
 	public void execute(GameContext context, int playerId) {
 		EntityReference target = getSpell().hasPredefinedTarget() ? getSpell().getTarget() : getTargetKey();
 		context.getLogic().castSpell(playerId, getSpell(), getSource(), target, false);
 	}
 
+	public Card getCard() {
+		return card;
+	}
+
 	private Condition getCondition() {
 		return condition;
+	}
+
+	public String getDescription() {
+		return description;
 	}
 
 	public EntityFilter getEntityFilter() {
@@ -77,6 +91,10 @@ public class DiscoverAction extends GameAction {
 
 	public int getGroupIndex() {
 		return groupIndex;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	@Override
@@ -93,12 +111,24 @@ public class DiscoverAction extends GameAction {
 		return false;
 	}
 
+	public void setCard(Card card) {
+		this.card = card;
+	}
+
 	public void setCondition(Condition condition) {
 		this.condition = condition;
 	}
 
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public void setEntityFilter(Predicate<Entity> entityFilter) {
 		// this.entityFilter = entityFilter;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override

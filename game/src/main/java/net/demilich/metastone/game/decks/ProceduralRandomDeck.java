@@ -37,10 +37,10 @@ public class ProceduralRandomDeck extends Deck {
 		Deck copyDeck = new Deck(getHeroClass());
 		IDeckValidator deckValidator = new DefaultDeckValidator();
 		CardCollection classCards = CardCatalogue.query(classDecks, card -> {
-			return card.isCollectible() && !card.getCardType().isCardType(CardType.HERO) && !card.getCardType().isCardType(CardType.HERO_POWER) && card.getClassRestriction() == getHeroClass();
+			return card.isCollectible() && !card.getCardType().isCardType(CardType.HERO) && !card.getCardType().isCardType(CardType.HERO_POWER) && card.hasHeroClass(getHeroClass());
 		});
 		CardCollection neutralCards = CardCatalogue.query(proceduralDeck, card -> {
-			return card.isCollectible() && !card.getCardType().isCardType(CardType.HERO) && !card.getCardType().isCardType(CardType.HERO_POWER) && card.getClassRestriction() == HeroClass.ANY;
+			return card.isCollectible() && !card.getCardType().isCardType(CardType.HERO) && !card.getCardType().isCardType(CardType.HERO_POWER) && card.hasHeroClass(HeroClass.ANY);
 		});
 
 		while (!copyDeck.isComplete()) {

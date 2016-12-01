@@ -24,6 +24,10 @@ public class Weapon extends Actor {
 		return (Weapon) super.clone();
 	}
 
+	public int getBaseDurability() {
+		return getAttributeValue(Attribute.BASE_HP);
+	}
+
 	public int getDurability() {
 		return getAttributeValue(Attribute.HP);
 	}
@@ -33,8 +37,12 @@ public class Weapon extends Actor {
 		return EntityType.WEAPON;
 	}
 
+	public int getMaxDurability() {
+		return getAttributeValue(Attribute.MAX_HP) + getAttributeValue(Attribute.HP_BONUS);
+	}
+
 	public int getWeaponDamage() {
-		return Math.max(0, getAttributeValue(Attribute.ATTACK) + getAttributeValue(Attribute.CONDITIONAL_ATTACK_BONUS));
+		return Math.max(0, getAttributeValue(Attribute.ATTACK) + getAttributeValue(Attribute.CONDITIONAL_ATTACK_BONUS)) + getAttributeValue(Attribute.ATTACK_BONUS);
 	}
 
 	public boolean isActive() {

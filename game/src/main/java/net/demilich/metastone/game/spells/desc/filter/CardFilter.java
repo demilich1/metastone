@@ -25,7 +25,7 @@ public class CardFilter extends EntityFilter {
 			heroClass = player.getHero().getHeroClass();
 		}
 		
-		if (heroClass != null && heroClass != card.getClassRestriction()) {
+		if (heroClass != null && card.getHeroClass() == heroClass) {
 			return false;
 		}
 		
@@ -57,7 +57,7 @@ public class CardFilter extends EntityFilter {
 		if (heroClasses != null && heroClasses.length > 0) {
 			boolean test = false;
 			for (HeroClass heroClass : heroClasses) {
-				test |= heroClassTest(context, player, card, heroClass);
+				test |= !heroClassTest(context, player, card, heroClass);
 			}
 			if (!test) {
 				return false;
@@ -65,7 +65,7 @@ public class CardFilter extends EntityFilter {
 		}
 		
 		HeroClass heroClass = (HeroClass) desc.get(FilterArg.HERO_CLASS);
-		if (heroClass != null && !heroClassTest(context, player, card, heroClass)) {
+		if (heroClass != null && heroClassTest(context, player, card, heroClass)) {
 			return false;
 		}
 		

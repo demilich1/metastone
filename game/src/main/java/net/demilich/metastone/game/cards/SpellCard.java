@@ -39,7 +39,7 @@ public class SpellCard extends Card {
 			break;
 		}
 		if (condition != null) {
-			return condition.isFulfilled(context, player, null);
+			return condition.isFulfilled(context, player, null, null);
 		}
 		return true;
 	}

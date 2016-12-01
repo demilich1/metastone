@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.spells;
 
+import co.paralleluniverse.fibers.Suspendable;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.CardCollection;
@@ -14,6 +15,7 @@ import net.demilich.metastone.game.targeting.CardLocation;
 public class PutRandomMinionOnBoardSpell extends Spell {
 
 	@Override
+	@Suspendable
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		EntityFilter cardFilter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
 		CardLocation cardLocation = (CardLocation) desc.get(SpellArg.CARD_LOCATION);
@@ -26,6 +28,7 @@ public class PutRandomMinionOnBoardSpell extends Spell {
 		}
 	}
 
+	@Suspendable
 	private void putRandomMinionFromDeckOnBoard(GameContext context, Player player, EntityFilter cardFilter, CardLocation cardLocation) {
 		MinionCard minionCard = null;
 		CardCollection collection = cardLocation == CardLocation.HAND ? player.getHand() : player.getDeck();
@@ -42,14 +45,16 @@ public class PutRandomMinionOnBoardSpell extends Spell {
 		// we need to remove the card temporarily here, because there are card interactions like Starving Buzzard + Desert Camel
 		// which could result in the card being drawn while a minion is summoned
 		if (cardLocation == CardLocation.DECK) {
-			player.getDeck().remove(minionCard);	
+			player.getDeck().remove(minionCard);
+			player.getSetAsideZone().add(minionCard);
 		}
-		
-		boolean summonSuccess = context.getLogic().summon(player.getId(), minionCard.summon());
+
+		boolean summonSuccess = context.getLogic().summon(player.getId(), minionCard.summon(), null, -1, false);
 		
 		// re-add the card here if we removed it before
 		if (cardLocation == CardLocation.DECK) {
-			player.getDeck().add(minionCard);	
+			player.getSetAsideZone().remove(minionCard);
+			player.getDeck().add(minionCard);
 		}
 		
 		if (summonSuccess) {

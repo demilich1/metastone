@@ -11,36 +11,35 @@ import net.demilich.metastone.game.decks.validation.DefaultDeckValidator;
 import net.demilich.metastone.game.decks.validation.IDeckValidator;
 
 public class RandomDeck extends Deck {
-	
 	private DeckFormat deckFormat;
 
 	public RandomDeck(HeroClass heroClass, DeckFormat deckFormat) {
 		super(heroClass);
 		this.deckFormat = deckFormat;
-		setName("[Random deck]");
-	}
-
-	@Override
-	public CardCollection getCardsCopy() {
-		Deck copyDeck = new Deck(getHeroClass());
 		IDeckValidator deckValidator = new DefaultDeckValidator();
 		CardCollection classCards = CardCatalogue.query(deckFormat, card -> {
-			return card.isCollectible() && !card.getCardType().isCardType(CardType.HERO) && !card.getCardType().isCardType(CardType.HERO_POWER) && card.getClassRestriction() == getHeroClass();
+			return card.isCollectible()
+					&& !card.getCardType().isCardType(CardType.HERO)
+					&& !card.getCardType().isCardType(CardType.HERO_POWER)
+					&& card.hasHeroClass(getHeroClass());
 		});
 		CardCollection neutralCards = CardCatalogue.query(deckFormat, card -> {
-			return card.isCollectible() && !card.getCardType().isCardType(CardType.HERO) && !card.getCardType().isCardType(CardType.HERO_POWER) && card.getClassRestriction() == HeroClass.ANY;
+			return card.isCollectible()
+					&& !card.getCardType().isCardType(CardType.HERO)
+					&& !card.getCardType().isCardType(CardType.HERO_POWER)
+					&& card.hasHeroClass(HeroClass.ANY);
 		});
 
-		while (!copyDeck.isComplete()) {
+		while (!this.isComplete()) {
 			// random deck consists of roughly 50% class cards and 50% neutral
 			// cards
 
 			Card randomCard = ThreadLocalRandom.current().nextBoolean() ? classCards.getRandom() : neutralCards.getRandom();
-			if (deckValidator.canAddCardToDeck(randomCard, copyDeck)) {
-				copyDeck.getCards().add(randomCard);
+			if (deckValidator.canAddCardToDeck(randomCard, this)) {
+				this.getCards().add(randomCard);
 			}
 		}
-		return copyDeck.getCardsCopy();
-	}
 
+		setName("[Random deck]");
+	}
 }

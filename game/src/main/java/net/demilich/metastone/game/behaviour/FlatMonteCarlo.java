@@ -78,7 +78,7 @@ public class FlatMonteCarlo extends Behaviour {
 
 	private double simulate(GameContext context, int playerId, GameAction action) {
 		GameContext simulation = context.clone();
-		simulation.getLogic().performGameAction(simulation.getActivePlayer().getId(), action);
+		simulation.getLogic().performGameAction(simulation.getActivePlayerId(), action);
 		if (simulation.gameDecided()) {
 			return simulation.getWinningPlayerId() == playerId ? 1 : 0;
 		}

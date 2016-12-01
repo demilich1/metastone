@@ -19,7 +19,7 @@ public class WeaponTests extends TestBase {
 
 		WeaponCard weaponCard = (WeaponCard) CardCatalogue.getCardById("weapon_battle_axe");
 
-		context.setActivePlayer(player.getId());
+		context.setActivePlayerIndex(player.getId());
 		context.getLogic().startTurn(player.getId());
 		Assert.assertEquals(warrior.getAttack(), 0);
 		context.getLogic().receiveCard(player.getId(), weaponCard);
@@ -37,7 +37,7 @@ public class WeaponTests extends TestBase {
 		Player player = context.getPlayer1();
 		Hero hero = player.getHero();
 		
-		playCard(context, player, CardCatalogue.getCardById("weapon_death_bite"));
+		playCard(context, player, CardCatalogue.getCardById("weapon_deaths_bite"));
 		Assert.assertEquals(hero.getWeapon().getAttack(), 4);
 		Assert.assertEquals(hero.getWeapon().getDurability(), 2);
 		playCard(context, player, CardCatalogue.getCardById("minion_tournament_attendee"));
@@ -54,7 +54,7 @@ public class WeaponTests extends TestBase {
 		Player player = context.getPlayer1();
 		Hero hero = player.getHero();
 		
-		playCard(context, player, CardCatalogue.getCardById("weapon_death_bite"));
+		playCard(context, player, CardCatalogue.getCardById("weapon_deaths_bite"));
 		Assert.assertEquals(hero.getWeapon().getAttack(), 4);
 		Assert.assertEquals(hero.getWeapon().getDurability(), 2);
 		playCard(context, player, CardCatalogue.getCardById("minion_hogger_doom_of_elwynn"));

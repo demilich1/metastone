@@ -30,7 +30,7 @@ public class ReceiveCardSpell extends Spell {
 				if (!result.isEmpty()) {
 					card = result.getRandom();
 				} else if (replacementCard != null) {
-					card = CardCatalogue.getCardById(replacementCard);
+					card = context.getCardById(replacementCard);
 				}
 				if (card != null) {
 					Card clone = card.clone();
@@ -38,7 +38,7 @@ public class ReceiveCardSpell extends Spell {
 				}
 			}
 		} else {
-			for (Card card : SpellUtils.getCards(desc)) {
+			for (Card card : SpellUtils.getCards(context, desc)) {
 				for (int i = 0; i < count; i++) {
 					context.getLogic().receiveCard(player.getId(), card);
 				}

@@ -1,6 +1,9 @@
 package net.demilich.metastone.game.actions;
 
 import java.io.Serializable;
+
+import co.paralleluniverse.fibers.SuspendExecution;
+import co.paralleluniverse.fibers.Suspendable;
 import com.google.gson.annotations.SerializedName;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -30,6 +33,7 @@ public abstract class GameAction implements Cloneable, Serializable {
 		return null;
 	}
 
+	@Suspendable
 	public abstract void execute(GameContext context, int playerId);
 
 	public String getActionSuffix() {

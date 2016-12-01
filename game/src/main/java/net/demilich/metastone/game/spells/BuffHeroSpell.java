@@ -18,6 +18,10 @@ public class BuffHeroSpell extends Spell {
 
 	private static Logger logger = LoggerFactory.getLogger(BuffHeroSpell.class);
 
+	public static SpellDesc create(int attackBonus, int armorBonus) {
+		return create(EntityReference.FRIENDLY_HERO, attackBonus, armorBonus);
+	}
+
 	public static SpellDesc create(EntityReference target, int attackBonus, int armorBonus) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(BuffHeroSpell.class);
 		arguments.put(SpellArg.ATTACK_BONUS, attackBonus);
@@ -33,8 +37,7 @@ public class BuffHeroSpell extends Spell {
 		int armorBonus = desc.getValue(SpellArg.ARMOR_BONUS, context, player, target, source, 0);
 
 		if (attackBonus != 0) {
-			logger.debug("{} gains {} attack", hero, attackBonus);
-			hero.modifyAttribute(Attribute.TEMPORARY_ATTACK_BONUS, +attackBonus);
+			hero.modifyAttribute(Attribute.TEMPORARY_ATTACK_BONUS, attackBonus);
 		}
 		if (armorBonus != 0) {
 			context.getLogic().gainArmor(player, armorBonus);

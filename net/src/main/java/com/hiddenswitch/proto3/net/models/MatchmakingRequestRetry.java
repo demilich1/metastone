@@ -2,12 +2,10 @@ package com.hiddenswitch.proto3.net.models;
 
 public class MatchmakingRequestRetry {
 	private String receipt;
-	private String gameId;
 	public int delayMilliseconds;
 
-	public MatchmakingRequestRetry(String receipt, String gameId) {
+	public MatchmakingRequestRetry(String receipt) {
 		setReceipt(receipt);
-		setGameId(gameId);
 	}
 
 	public String getReceipt() {
@@ -16,13 +14,5 @@ public class MatchmakingRequestRetry {
 
 	private void setReceipt(String receipt) {
 		this.receipt = receipt;
-	}
-
-	public String getGameId() {
-		return gameId;
-	}
-
-	private void setGameId(String gameId) {
-		this.gameId = gameId;
 	}
 }

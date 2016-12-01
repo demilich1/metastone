@@ -2,6 +2,7 @@ package net.demilich.metastone.game.spells;
 
 import java.util.Map;
 
+import co.paralleluniverse.fibers.Suspendable;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.CardCatalogue;
@@ -24,13 +25,14 @@ public class EquipRandomWeaponSpell extends Spell {
 	}
 
 	@Override
+	@Suspendable
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		CardCollection allWeapons = CardCatalogue.query(context.getDeckFormat(), CardType.WEAPON);
 		WeaponCard weaponCard = (WeaponCard) allWeapons.getRandom();
 		Weapon weapon = weaponCard.getWeapon();
 		weapon.setBattlecry(null);
 
-		context.getLogic().equipWeapon(player.getId(), weapon);
+		context.getLogic().equipWeapon(player.getId(), weapon, false);
 	}
 
 }

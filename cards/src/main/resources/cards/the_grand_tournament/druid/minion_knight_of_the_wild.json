@@ -15,10 +15,14 @@
 			"race": "BEAST"
 		},
 		"spell": {
-			"class": "ModifyAttributeSpell",
-			"target": "SELF",
-			"attribute": "MANA_COST_MODIFIER",
-			"value": -1
+			"class": "CardCostModifierSpell",
+			"target": "FRIENDLY_PLAYER",
+			"cardCostModifier": {
+				"class": "CardCostModifier",
+				"target": "SELF",
+				"operation": "SUBTRACT",
+				"value": 1
+			}
 		}
 	},
 	"collectible": true,

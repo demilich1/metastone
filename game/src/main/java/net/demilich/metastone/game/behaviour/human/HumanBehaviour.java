@@ -12,9 +12,11 @@ import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.actions.IActionSelectionListener;
 import net.demilich.metastone.game.behaviour.Behaviour;
 import net.demilich.metastone.game.cards.Card;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class HumanBehaviour extends Behaviour implements IActionSelectionListener {
-
+	Logger logger = LoggerFactory.getLogger(HumanBehaviour.class);
 	private GameAction selectedAction;
 	private boolean waitingForInput;
 	private List<Card> mulliganCards;
@@ -26,7 +28,7 @@ public class HumanBehaviour extends Behaviour implements IActionSelectionListene
 
 	@Override
 	public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
-		System.out.println("mulligan");
+		logger.debug("Human mulligans.");
 		if (context.ignoreEvents()) {
 			return new ArrayList<Card>();
 		}

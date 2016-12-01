@@ -1,13 +1,19 @@
 package com.hiddenswitch.proto3.net;
 
-import com.hiddenswitch.proto3.net.models.*;
-import org.testng.annotations.Test;
+import com.hiddenswitch.proto3.net.models.CreateAccountResponse;
+import com.hiddenswitch.proto3.net.models.LoginRequest;
+import com.hiddenswitch.proto3.net.models.LoginResponse;
+import com.hiddenswitch.proto3.net.models.User;
+import com.hiddenswitch.proto3.net.util.Result;
+import io.vertx.core.AsyncResult;
+import io.vertx.core.Handler;
+import io.vertx.core.Vertx;
+import org.junit.Test;
 
 import java.sql.Date;
 import java.time.Instant;
-import java.util.function.Function;
 
-import static org.testng.Assert.*;
+import static org.junit.Assert.*;
 
 public class AccountsTest extends ServiceTestBase<Accounts> {
 	@Test
@@ -107,6 +113,14 @@ public class AccountsTest extends ServiceTestBase<Accounts> {
 		throw new AssertionError(message);
 	}
 
+	@Override
+	public void deployServices(Vertx vertx, Handler<AsyncResult<Accounts>> done) {
+		Accounts instance = new Accounts();
+		vertx.deployVerticle(instance, then -> {
+			done.handle(new Result<>(instance));
+		});
+	}
+
 	public interface ThrowingRunnable {
 		void run() throws Throwable;
 	}
@@ -129,10 +143,5 @@ public class AccountsTest extends ServiceTestBase<Accounts> {
 		assertThrows(() -> {
 			service.getProfileForId(null);
 		});
-	}
-
-	@Override
-	public Accounts getServiceInstance() {
-		return new Accounts();
 	}
 }

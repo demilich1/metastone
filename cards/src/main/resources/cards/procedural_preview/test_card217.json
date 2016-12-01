@@ -1,1 +1,32 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "Doommygoon", "heroClass": "ANY", "description": "Battlecry: If you control a Beast, gain Taunt.", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 8.0, "baseManaCost": 9.0, "attributes": {"BATTLECRY": true}, "battlecry": {"spell": {"attribute": "TAUNT", "class": "AddAttributeSpell", "target": "SELF"}, "targetSelection": "NONE", "condition": {"race": "BEAST", "class": "RaceOnBoardCondition"}}, "type": "MINION", "id": "Doommygoon", "baseAttack": 6.0}
+{
+  "collectible": true,
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Doommygoon",
+  "heroClass": "ANY",
+  "description": "Battlecry: If you control a Beast, gain Taunt.",
+  "fileFormatVersion": 1,
+  "rarity": "COMMON",
+  "baseHp": 8.0,
+  "baseManaCost": 9.0,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "battlecry": {
+    "spell": {
+      "attribute": "TAUNT",
+      "class": "AddAttributeSpell",
+      "target": "SELF"
+    },
+    "targetSelection": "NONE",
+    "condition": {
+      "class": "MinionOnBoardCondition",
+      "cardfilter": {
+        "class": "RaceFilter",
+        "race": "BEAST"
+      }
+    }
+  },
+  "type": "MINION",
+  "id": "Doommygoon",
+  "baseAttack": 6.0
+}

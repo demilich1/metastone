@@ -69,7 +69,7 @@ public class TestBase {
 		root.setLevel(Level.DEBUG);
 
 		try {
-			CardCatalogue.loadLocalCards();
+			CardCatalogue.loadCardsFromPackage();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (URISyntaxException e) {

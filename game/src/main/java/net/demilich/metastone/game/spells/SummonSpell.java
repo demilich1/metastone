@@ -2,6 +2,7 @@ package net.demilich.metastone.game.spells;
 
 import java.util.Map;
 
+import co.paralleluniverse.fibers.Suspendable;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
@@ -56,10 +57,11 @@ public class SummonSpell extends Spell {
 	}
 
 	@Override
+	@Suspendable
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int boardPosition = SpellUtils.getBoardPosition(context, player, desc, source);
 		int count = desc.getValue(SpellArg.VALUE, context, player, target, source, 1);
-		for (Card card : SpellUtils.getCards(desc)) {
+		for (Card card : SpellUtils.getCards(context, desc)) {
 			for (int i = 0; i < count; i++) {
 				MinionCard minionCard = count == 1 ? (MinionCard) card : (MinionCard) card.clone();
 				context.getLogic().summon(player.getId(), minionCard.summon(), null, boardPosition, false);

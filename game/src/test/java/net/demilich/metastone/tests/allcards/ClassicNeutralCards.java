@@ -9,61 +9,10 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
-import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.tests.TestBase;
 
 public class ClassicNeutralCards extends TestBase {
-
-	@Test
-	public void testGrimscaleOracle() {
-		GameContext context = createContext(HeroClass.WARRIOR, HeroClass.SHAMAN);
-		Player player = context.getPlayer1();
-		Player opponent = context.getPlayer2();
-
-		playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_murloc_tidehunter"));
-		playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_bluegill_warrior"));
-
-		Assert.assertEquals(player.getMinions().size(), 3);
-		context.endTurn();
-
-		playMinionCard(context, opponent, (MinionCard) CardCatalogue.getCardById("minion_grimscale_oracle"));
-		playMinionCard(context, opponent, (MinionCard) CardCatalogue.getCardById("minion_murloc_raider"));
-
-		final int MURLOC_TIDEHUNTER = 0;
-		final int MURLOC_SCOUT = 1;
-		final int BLUEGILL_WARRIOR = 2;
-		for (int i = 0; i < player.getMinions().size(); i++) {
-			Minion minion = player.getMinions().get(i);
-			switch (i) {
-			case MURLOC_TIDEHUNTER:
-			case BLUEGILL_WARRIOR:
-				Assert.assertEquals(minion.getAttack(), 3);
-				Assert.assertEquals(minion.getHp(), 1);
-				break;
-			case MURLOC_SCOUT:
-				Assert.assertEquals(minion.getAttack(), 2);
-				Assert.assertEquals(minion.getHp(), 1);
-				break;
-			}
-		}
-
-		final int GRIMSCALE_ORACLE = 0;
-		final int MURLOC_RAIDER = 1;
-		for (int i = 0; i < opponent.getMinions().size(); i++) {
-			Minion minion = opponent.getMinions().get(i);
-			switch (i) {
-			case GRIMSCALE_ORACLE:
-				Assert.assertEquals(minion.getAttack(), 1);
-				Assert.assertEquals(minion.getHp(), 1);
-				break;
-			case MURLOC_RAIDER:
-				Assert.assertEquals(minion.getAttack(), 3);
-				Assert.assertEquals(minion.getHp(), 1);
-				break;
-			}
-		}
-	}
 
 	@Test
 	public void testElvenArcher() {
