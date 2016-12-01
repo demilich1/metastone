@@ -44,7 +44,7 @@ public class Matchmaker extends AbstractMap<String, QueueEntry> {
 		toRemoveMatches.forEach(matches::remove);
 	}
 
-	private void clean() {
+	public void clean() {
 		Date dateAgo = Date.from(Instant.now().minusSeconds(45));
 		if (lastClean.before(dateAgo)) {
 			this.clean(e -> e.lastTouchedAt.before(dateAgo),
@@ -130,7 +130,7 @@ public class Matchmaker extends AbstractMap<String, QueueEntry> {
 	}
 
 
-	protected void sortAfterAdd() {
+	protected synchronized void sortAfterAdd() {
 		if (queue.size() >= 2) {
 			QueueEntry newLast = (QueueEntry) queue.get(queue.size() - 1);
 			QueueEntry formerLast = (QueueEntry) queue.get(queue.size() - 2);
@@ -141,20 +141,20 @@ public class Matchmaker extends AbstractMap<String, QueueEntry> {
 	}
 
 	@Override
-	public QueueEntry remove(Object key) {
+	public synchronized QueueEntry remove(Object key) {
 		QueueEntry entry = entries.get(key);
 		remove((String) key);
 		return entry;
 	}
 
-	public boolean remove(String userId) {
+	public synchronized boolean remove(String userId) {
 		QueueEntry entry = entries.get(userId);
 		entries.remove(userId);
 		queue.remove(entry);
 		return true;
 	}
 
-	public boolean remove(QueueEntry entry) {
+	public synchronized boolean remove(QueueEntry entry) {
 		entries.remove(entry.userId);
 		queue.remove(entry);
 		return true;

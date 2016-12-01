@@ -42,6 +42,10 @@ public class Games extends Service<Games> {
 		super.stop();
 	}
 
+	public void cancel(String userId) {
+		matchmaker.remove(userId);
+	}
+
 	public MatchmakingResponse matchmakeAndJoin(MatchmakingRequest matchmakingRequest, String userId) {
 		// TODO: Setup a user with a game against an AI if they've been waiting more than 10 seconds
 		MatchmakingResponse response = new MatchmakingResponse();

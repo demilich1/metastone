@@ -14,7 +14,6 @@ public class CardCollection implements Iterable<Card>, Cloneable, Serializable {
 	private List<Card> cards = new ArrayList<Card>();
 
 	public CardCollection() {
-
 	}
 
 	public void add(Card card) {

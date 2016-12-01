@@ -78,6 +78,13 @@ public class EmbeddedServices extends SyncVerticle {
 						routingContext.response().setStatusCode(statusCode);
 						routingContext.response().end(Serialization.serialize(matchmakingResponse));
 					})
+					.method(HttpMethod.DELETE)
+					.blockingHandler(routingContext -> {
+						String userId = routingContext.request().getHeader("X-Auth-UserId");
+						games.cancel(userId);
+						routingContext.response().setStatusCode(200);
+						routingContext.response().end();
+					})
 					.failureHandler(LoggerHandler.create());
 
 			logger.info("Router configured.");
