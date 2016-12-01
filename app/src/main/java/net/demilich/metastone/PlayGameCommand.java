@@ -1,5 +1,6 @@
 package net.demilich.metastone;
 
+import javafx.concurrent.Task;
 import net.demilich.nittygrittymvc.SimpleCommand;
 import net.demilich.nittygrittymvc.interfaces.INotification;
 import net.demilich.metastone.game.GameContext;

@@ -18,6 +18,8 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.TurnState;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.behaviour.IBehaviour;
+import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
+import net.demilich.metastone.game.behaviour.threat.GameStateValueBehaviour;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.decks.DeckFormat;
@@ -198,13 +200,20 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 				requestLocalAction();
 				getActionRequested().set(false);
 			}
-			try {
-				Thread.sleep(BuildConfig.DEFAULT_SLEEP_DELAY);
-			} catch (Exception ignored) {
+			if (isHumanPlayer()) {
+				try {
+					Thread.sleep(BuildConfig.DEFAULT_SLEEP_DELAY);
+				} catch (InterruptedException ignored) {
+				}
 			}
-
 		}
 		endGame();
+	}
+
+	protected boolean isHumanPlayer() {
+		return getLocalPlayer().getBehaviour() instanceof NetworkBehaviour ?
+				(((NetworkBehaviour) (getLocalPlayer().getBehaviour())).getWrapBehaviour() instanceof HumanBehaviour)
+				: getLocalPlayer().getBehaviour() instanceof HumanBehaviour;
 	}
 
 	protected synchronized void requestLocalAction() {
@@ -307,13 +316,13 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	}
 
 	@Override
-	public synchronized void onGameEvent(GameEvent event) {
+	public void onGameEvent(GameEvent event) {
 		this.addGameEvent(event);
 		this.onGameStateChanged();
 	}
 
 	@Override
-	public synchronized void onGameEnd(Player w) {
+	public void onGameEnd(Player w) {
 		this.setWinner(w);
 		this.gameDecided = true;
 		this.onGameStateChanged();
@@ -321,7 +330,7 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	}
 
 	@Override
-	public synchronized void onActivePlayer(Player ap) {
+	public void onActivePlayer(Player ap) {
 		logger.debug("On active player {}", ap.getId());
 		this.setActivePlayerIndex(ap.getId());
 		this.onGameStateChanged();
@@ -329,15 +338,15 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	}
 
 	@Override
-	public synchronized void setPlayers(Player localPlayer, Player remotePlayer) {
+	public void setPlayers(Player localPlayer, Player remotePlayer) {
 		this.setLocalPlayer(localPlayer);
 		this.setPlayer(localPlayer.getId(), localPlayer);
 		this.setPlayer(remotePlayer.getId(), remotePlayer);
 	}
 
 	@Override
-	public synchronized void onRequestAction(String id, GameState state, List<GameAction> availableActions) {
-		onUpdate(state);
+	public void onRequestAction(String id, GameState state, List<GameAction> availableActions) {
+		updateWithState(state);
 		this.lastRequestId = id;
 		this.getActionRequested().set(true);
 		this.setRemoteValidActions(availableActions);
@@ -345,7 +354,7 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	}
 
 	@Override
-	public synchronized void onTurnEnd(Player ap, int turnNumber, TurnState turnState) {
+	public void onTurnEnd(Player ap, int turnNumber, TurnState turnState) {
 		logger.debug("new active player: " + ap.getId());
 		this.setActivePlayerIndex(ap.getId());
 		this.setRemoteTurn(turnNumber);
@@ -354,7 +363,12 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	}
 
 	@Override
-	public synchronized void onUpdate(GameState state) {
+	public void onUpdate(GameState state) {
+		updateWithState(state);
+		this.onGameStateChanged();
+	}
+
+	protected synchronized void updateWithState(GameState state) {
 		if (!state.isValid()) {
 			throw new RuntimeException("Invalid state received from wire!");
 		}
@@ -364,7 +378,6 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 		this.setTriggerManager(state.triggerManager);
 		this.getLogic().setIdFactory(new IdFactory(state.currentId));
 		this.setRemoteTurnState(state.turnState);
-		this.onGameStateChanged();
 	}
 
 	public String getHost() {
@@ -378,6 +391,7 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	@Override
 	public void onMulligan(String id, Player player, List<Card> cards) {
 		mulligan = false;
+		logger.debug("Mulligan requested.");
 		List<Card> discardedCards = player.getBehaviour().mulligan(this, player, cards);
 		mulligan = true;
 		ccs.getSendToServer().sendMulligan(id, player, discardedCards);
