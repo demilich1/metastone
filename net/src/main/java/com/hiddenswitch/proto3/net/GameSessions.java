@@ -38,6 +38,7 @@ public class GameSessions extends Service<GameSessions> {
 
 		vertx.executeBlocking(blocking -> {
 			DefaultChannelId.newInstance();
+			// TODO: These ports shouldn't be totally randomized because of AWS security groups
 			int port = RandomUtils.nextInt(6200, 16200);
 			server = new SocketServer(port);
 			logger.info("Socket server configured.");

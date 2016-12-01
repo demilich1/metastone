@@ -79,6 +79,12 @@ public class PlayModeConfigView extends BorderPane implements EventHandler<Actio
 		formatBox.setConverter(new DeckFormatStringConverter());
 
 		player1Config = new PlayerConfigView(PlayerConfigType.HUMAN);
+
+		if (isMultiplayer) {
+			player1Config.hideBehaviours();
+			player1Config.hideHideCards();
+		}
+
 		player2Config = new PlayerConfigView(PlayerConfigType.OPPONENT);
 
 		playerArea.getChildren().add(player1Config);
