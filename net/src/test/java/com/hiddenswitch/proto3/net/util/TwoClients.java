@@ -13,6 +13,7 @@ import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardParseException;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.DeckCatalogue;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,6 +68,7 @@ public class TwoClients {
 
 		request.setPregame1(pregame1);
 		request.setPregame2(pregame2);
+		request.setGameId(RandomStringUtils.randomAlphanumeric(8));
 
 		CreateGameSessionResponse response = service.createGameSession(request);
 		this.gameId = response.getGameId();
@@ -135,6 +137,8 @@ public class TwoClients {
 			// Print some diagnostic information
 			logger.error("A match was not decided in this test by the deadline. Game information:");
 			logger.error(getServerGameContext().toLongString());
+		} else {
+			logger.info("TwoClients match complete.");
 		}
 		Assert.assertTrue(gameDecided());
 		Assert.assertTrue(playerContext1.getWinningPlayerId() == playerContext2.getWinningPlayerId());

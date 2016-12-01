@@ -70,7 +70,10 @@ public class GameSessions extends Service<GameSessions> {
 	}
 
 	public CreateGameSessionResponse createGameSession(CreateGameSessionRequest request) {
-		ServerGameSession newSession = server.createGameSession(request.getPregame1(), request.getPregame2());
+		if (request.getGameId() == null) {
+			throw new RuntimeException("Game ID cannot be null in a create game session request.");
+		}
+		ServerGameSession newSession = server.createGameSession(request.getPregame1(), request.getPregame2(), request.getGameId());
 		return new CreateGameSessionResponse(newSession.getConfigurationForPlayer1(), newSession.getConfigurationForPlayer2(), newSession.getGameId());
 	}
 

@@ -1,6 +1,7 @@
 package com.hiddenswitch.proto3.net;
 
 import co.paralleluniverse.fibers.Suspendable;
+import co.paralleluniverse.strands.Strand;
 import com.hiddenswitch.proto3.net.models.MatchmakingRequest;
 import com.hiddenswitch.proto3.net.models.MatchmakingResponse;
 import com.hiddenswitch.proto3.net.util.Result;
@@ -43,11 +44,12 @@ public class GamesTest extends ServiceTestBase<Games> {
 	}
 
 	@Test
-	public void testMatchmakeAndJoin(TestContext context) {
-		wrapBlocking(context, this::createTwoPlayersAndMatchmake);
+	public void testMatchmakeAndJoin() {
+		createTwoPlayersAndMatchmake();
 	}
 
 	private String createTwoPlayersAndMatchmake() {
+		logger.info("Starting matchmaking...");
 		String player1 = "player1";
 		String player2 = "player2";
 
@@ -55,29 +57,27 @@ public class GamesTest extends ServiceTestBase<Games> {
 		MatchmakingRequest request1 = new MatchmakingRequest();
 		Deck deck1 = DeckFactory.getRandomDeck();
 		request1.deck = deck1;
-		request1.retry = null;
 		MatchmakingResponse response1 = service.matchmakeAndJoin(request1, player1);
 		assertNotNull(response1.getRetry());
 		assertNull(response1.getConnection());
-		assertNotNull(response1.getRetry().getGameId());
-		assertNotNull(response1.getRetry().getReceipt());
+		assertNull(response1.getRetry().deck);
+		logger.info("Matchmaking for player1 entered.");
 
 		// Assume player 2's identity
 		MatchmakingRequest request2 = new MatchmakingRequest();
 		Deck deck2 = DeckFactory.getRandomDeck();
 		request2.deck = deck2;
-		request2.retry = null;
 		MatchmakingResponse response2 = service.matchmakeAndJoin(request2, player2);
 		assertNull(response2.getRetry());
 		assertNotNull(response2.getConnection());
+		logger.info("Matchmaking for player2 entered.");
 
 		// Assume player 1's identity, poll for matchmaking again and receive the new game information
-		request1 = new MatchmakingRequest();
-		request1.deck = DeckFactory.getRandomDeck();
-		request1.retry = response1.getRetry();
+		request1 = response1.getRetry();
 		response1 = service.matchmakeAndJoin(request1, player1);
 		assertNull(response1.getRetry());
 		assertNotNull(response1.getConnection());
+		logger.info("Matchmaking for player1 entered, 2nd time.");
 
 		// Now try connecting
 		TwoClients twoClients = new TwoClients().invoke(response1, deck1, response2, deck2, response1.getConnection().getFirstMessage().getGameId(), service.getGameSessions());
@@ -94,13 +94,6 @@ public class GamesTest extends ServiceTestBase<Games> {
 		twoClients.assertGameOver();
 		return response1.getConnection().getFirstMessage().getGameId();
 	}
-
-	@Test
-	public void testGetMatchmakingQueueUrl(TestContext context) throws Exception {
-		context.assertNotNull(service.getMatchmakingQueueUrl());
-		context.async().complete();
-	}
-
 
 	@Override
 	public void deployServices(Vertx vertx, Handler<AsyncResult<Games>> done) {

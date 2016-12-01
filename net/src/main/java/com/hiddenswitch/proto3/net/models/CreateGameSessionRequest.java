@@ -3,6 +3,7 @@ package com.hiddenswitch.proto3.net.models;
 import com.hiddenswitch.proto3.server.PregamePlayerConfiguration;
 
 public class CreateGameSessionRequest {
+	private String gameId;
 	private PregamePlayerConfiguration pregame1;
 	private PregamePlayerConfiguration pregame2;
 
@@ -29,6 +30,19 @@ public class CreateGameSessionRequest {
 
 	public CreateGameSessionRequest withPregame2(PregamePlayerConfiguration pregame2) {
 		setPregame2(pregame2);
+		return this;
+	}
+
+	public String getGameId() {
+		return gameId;
+	}
+
+	public void setGameId(String gameId) {
+		this.gameId = gameId;
+	}
+
+	public CreateGameSessionRequest withGameId(String gameId) {
+		setGameId(gameId);
 		return this;
 	}
 }

@@ -8,6 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
 import com.hiddenswitch.proto3.net.common.GameState;
+import com.hiddenswitch.proto3.net.common.NetworkBehaviour;
 import com.hiddenswitch.proto3.net.common.RemoteUpdateListener;
 import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.GameNotification;
@@ -16,6 +17,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.TurnState;
 import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.behaviour.IBehaviour;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.decks.DeckFormat;
@@ -315,7 +317,7 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 
 	@Override
 	public synchronized void onActivePlayer(Player ap) {
-		logger.debug("On active player {}",  ap.getId());
+		logger.debug("On active player {}", ap.getId());
 		this.setActivePlayerIndex(ap.getId());
 		this.onGameStateChanged();
 		logger.debug("End active player {}", ap.getId());
@@ -374,5 +376,15 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 		List<Card> discardedCards = player.getBehaviour().mulligan(this, player, cards);
 		mulligan = true;
 		ccs.getSendToServer().sendMulligan(id, player, discardedCards);
+	}
+
+	@Override
+	public void setPlayer(int index, Player player) {
+		// Don't override the existing behaviour
+		if (getPlayer(index) != null) {
+			IBehaviour existingBehaviour = getPlayer(index).getBehaviour();
+			player.setBehaviour(existingBehaviour);
+		}
+		super.setPlayer(index, player);
 	}
 }

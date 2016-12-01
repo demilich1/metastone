@@ -10,12 +10,10 @@ public class AwsStack {
 			return;
 		}
 
-		for (Class t : new Class[]{UserRecord.class, AuthorizationRecord.class, GameRecord.class}) {
+		for (Class t : new Class[]{UserRecord.class, AuthorizationRecord.class}) {
 			CreateTableRequest request = configuration.database.generateCreateTableRequest(t);
 			request.setProvisionedThroughput(new ProvisionedThroughput(1L, 1L));
 			configuration.dynamoDBClient.createTable(request);
 		}
-
-		configuration.queue.createQueue(Games.MATCHMAKING_QUEUE);
 	}
 }

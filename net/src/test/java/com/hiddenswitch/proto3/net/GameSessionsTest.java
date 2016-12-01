@@ -86,21 +86,6 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 	}
 
 	@Test
-	public void testOldSessionDisposed(TestContext context) throws CardParseException, IOException, URISyntaxException {
-		wrapBlocking(context, () -> {
-			getAndTestTwoClients();
-			getAndTestTwoClients();
-			// The game server should have cleaned up the games by now.
-			try {
-				Thread.sleep(4000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			Assert.assertEquals("After four seconds, the server should have cleaned up any lingering games.", this.service.getServer().getGames().size(), 0);
-		});
-	}
-
-	@Test
 	public void testTwoSimultaneousSessions(TestContext context) throws Exception {
 		wrapBlocking(context, () -> {
 			simultaneousSessions(2);

@@ -336,11 +336,11 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 	}
 
 	public Player getPlayer1() {
-		return getPlayers().get(PLAYER_1);
+		return getPlayer(PLAYER_1);
 	}
 
 	public Player getPlayer2() {
-		return getPlayers().get(PLAYER_2);
+		return getPlayer(PLAYER_2);
 	}
 
 	public List<Player> getPlayers() {
@@ -660,11 +660,11 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 	}
 
 	public void setPlayer1(Player player1) {
-		this.players[PLAYER_1] = player1;
+		setPlayer(PLAYER_1, player1);
 	}
 
 	public void setPlayer2(Player player2) {
-		this.players[PLAYER_2] = player2;
+		setPlayer(PLAYER_2, player2);
 	}
 
 	public void setPlayer(int index, Player player) {

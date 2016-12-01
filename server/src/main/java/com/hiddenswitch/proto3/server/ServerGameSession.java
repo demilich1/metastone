@@ -2,8 +2,8 @@ package com.hiddenswitch.proto3.server;
 
 import co.paralleluniverse.fibers.Suspendable;
 import com.hiddenswitch.proto3.net.common.*;
-import io.vertx.core.Vertx;
-import io.vertx.core.WorkerExecutor;
+import io.vertx.core.logging.Logger;
+import io.vertx.core.logging.LoggerFactory;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
@@ -12,7 +12,6 @@ import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
 import net.demilich.metastone.game.targeting.IdFactory;
-import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.List;
 
@@ -27,6 +26,7 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	private Player player1;
 	private Player player2;
 	private final String gameId;
+	private Logger logger = LoggerFactory.getLogger(ServerGameSession.class);
 
 	private ClientConnectionConfiguration getConfigurationFor(PregamePlayerConfiguration player, int id) {
 		// TODO: It's obviously insecure to allow the client to specify things like their player object
@@ -43,6 +43,7 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	@Override
 	@Suspendable
 	public void onPlayerConnected(Player player) {
+		logger.debug("Receive connections from {}", player.toString());
 		if (player.getId() == IdFactory.PLAYER_1) {
 			if (getPlayer1() != null) {
 				throw new RuntimeException("Two players tried to connect to the same player slot.");
@@ -68,6 +69,7 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	}
 
 	protected void startGame() {
+		logger.debug("Starting game...");
 		DeckFormat simpleFormat = new DeckFormat().withCardSets(CardSet.values());
 		// Configure the network behaviours on the players
 		getPlayer1().setBehaviour(new NetworkBehaviour(getPlayer1().getBehaviour()));
@@ -101,14 +103,13 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 		return getConfigurationFor(pregamePlayerConfiguration2, IdFactory.PLAYER_2);
 	}
 
-	public ServerGameSession(String host, int port, PregamePlayerConfiguration p1, PregamePlayerConfiguration p2) {
+	public ServerGameSession(String host, int port, PregamePlayerConfiguration p1, PregamePlayerConfiguration p2, String gameId) {
 		super();
 		setHost(host);
 		setPort(port);
-		// TODO: in PregamePlayerConfiguration should really contain a playerConfig object.
 		this.pregamePlayerConfiguration1 = p1;
 		this.pregamePlayerConfiguration2 = p2;
-		this.gameId = RandomStringUtils.randomAlphanumeric(20).toLowerCase();
+		this.gameId = gameId;
 	}
 
 	@Override

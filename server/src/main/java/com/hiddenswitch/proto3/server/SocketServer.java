@@ -9,6 +9,7 @@ import io.vertx.core.net.NetServer;
 import io.vertx.core.net.NetSocket;
 import io.vertx.ext.sync.Sync;
 import io.vertx.ext.sync.SyncVerticle;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -101,6 +102,7 @@ public class SocketServer extends SyncVerticle {
 
 		switch (message.getMt()) {
 			case FIRST_MESSAGE:
+				logger.debug("First message received from {}", message.getPlayer1().toString());
 				SocketClientReceiver client = new SocketClientReceiver(socket);
 				if (session.getClient1() == null) {
 					session.setClient1(client);
@@ -110,6 +112,7 @@ public class SocketServer extends SyncVerticle {
 
 				gameForSocket.put(socket, session);
 
+				logger.debug("Calling onPlayerConnected for {}, {}", toString(), message.getPlayer1().toString());
 				session.onPlayerConnected(message.getPlayer1());
 				break;
 
@@ -148,9 +151,8 @@ public class SocketServer extends SyncVerticle {
 		Void t = Sync.awaitResult(done -> server.close(done));
 	}
 
-	public ServerGameSession createGameSession(PregamePlayerConfiguration player1, PregamePlayerConfiguration player2) {
-		// Check if a session already exists for these two players
-		ServerGameSession newSession = new ServerGameSession(getHost(), getPort(), player1, player2);
+	public ServerGameSession createGameSession(PregamePlayerConfiguration player1, PregamePlayerConfiguration player2, String gameId) {
+		ServerGameSession newSession = new ServerGameSession(getHost(), getPort(), player1, player2, gameId);
 		games.put(newSession.getGameId(), newSession);
 		return newSession;
 	}
