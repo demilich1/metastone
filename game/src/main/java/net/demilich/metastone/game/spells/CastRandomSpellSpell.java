@@ -22,6 +22,7 @@ import net.demilich.metastone.game.cards.ChooseOneCard;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.events.CardRevealedEvent;
+import net.demilich.metastone.game.events.OverloadEvent;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.CardFilter;
@@ -110,6 +111,11 @@ public class CastRandomSpellSpell extends Spell {
 					battlecryAction = battlecry;
 				}
 				context.getLogic().performGameAction(player.getId(), battlecryAction);
+				// If the card has Overload, then start overloading...
+				if (spellCard.hasAttribute(Attribute.OVERLOAD)) {
+					player.modifyAttribute(Attribute.OVERLOAD, spellCard.getAttributeValue(Attribute.OVERLOAD));
+					context.fireGameEvent(new OverloadEvent(context, player.getId(), spellCard));
+				}
 			}
 			// Technically, this is only half correct. Yogg-Saron should not stop if
 			// your opponent has died, but should if you do. But, it works for now.
