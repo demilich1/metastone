@@ -7,6 +7,7 @@ import io.vertx.core.Vertx;
  */
 public class EmbeddedApplication {
 	public static void main(String args[]) {
+		System.setProperty("java.net.preferIPv4Stack", "true");
 		Vertx vertx = Vertx.vertx();
 		vertx.deployVerticle(new EmbeddedServices());
 	}

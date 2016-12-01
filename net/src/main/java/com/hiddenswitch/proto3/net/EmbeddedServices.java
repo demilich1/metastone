@@ -6,6 +6,7 @@ import com.hiddenswitch.proto3.net.common.MatchmakingResponse;
 import com.hiddenswitch.proto3.net.util.Serialization;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServer;
+import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 import io.vertx.ext.sync.SyncVerticle;
@@ -23,7 +24,9 @@ public class EmbeddedServices extends SyncVerticle {
 	@Suspendable
 	public void start() {
 		Logger logger = LoggerFactory.getLogger(EmbeddedServices.class);
-		HttpServer server = vertx.createHttpServer();
+		HttpServer server = vertx.createHttpServer(new HttpServerOptions()
+				.setHost("0.0.0.0")
+				.setPort(8080));
 		Router router = Router.router(vertx);
 
 		try {
@@ -89,9 +92,8 @@ public class EmbeddedServices extends SyncVerticle {
 			router.route(MATCHMAKE_PATH).failureHandler(LoggerHandler.create());
 
 			logger.info("Router configured.");
-			final int httpPort = 8080;
-			HttpServer listening = awaitResult(done -> server.requestHandler(router::accept).listen(httpPort, done));
-			logger.info("Listening on port " + Integer.toString(httpPort));
+			HttpServer listening = awaitResult(done -> server.requestHandler(router::accept).listen(done));
+			logger.info("Listening on port " + Integer.toString(server.actualPort()));
 		} catch (Exception e) {
 		}
 	}
