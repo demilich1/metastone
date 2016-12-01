@@ -33,9 +33,9 @@ import net.demilich.metastone.game.visuals.GameContextVisuals;
 public class RemoteGameContext extends GameContext implements GameContextVisuals, RemoteUpdateListener {
 	private final List<GameEvent> gameEvents = new ArrayList<>();
 	private boolean blockedByAnimation;
-	private Player localPlayer;
 	private final AtomicInteger activePlayerAtomic;
 	private final AtomicBoolean actionRequested;
+	private int localPlayerId = -1;
 	private volatile boolean gameDecided = false;
 	private int remoteTurn;
 	private TurnState remoteTurnState;
@@ -211,13 +211,17 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	}
 
 	protected boolean isHumanPlayer() {
+		if (getLocalPlayer() == null) {
+			return true;
+		}
 		return getLocalPlayer().getBehaviour() instanceof NetworkBehaviour ?
 				(((NetworkBehaviour) (getLocalPlayer().getBehaviour())).getWrapBehaviour() instanceof HumanBehaviour)
 				: getLocalPlayer().getBehaviour() instanceof HumanBehaviour;
 	}
 
-	protected synchronized void requestLocalAction() {
-		if (getActivePlayerId() == getMyPlayerId()) {
+	protected void requestLocalAction() {
+		if (getActivePlayerId() == getMyPlayerId()
+				&& getActivePlayerId() != -1) {
 			logger.debug("Action was requested from player.");
 			GameAction action = getLocalPlayer().getBehaviour().requestAction(this, getActivePlayer(), getValidActions());
 			ccs.getSendToServer().sendAction(this.lastRequestId, getLocalPlayer(), action);
@@ -225,7 +229,7 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	}
 
 	protected int getMyPlayerId() {
-		return getLocalPlayer().getId();
+		return localPlayerId;
 	}
 
 	@Override
@@ -296,15 +300,15 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	}
 
 	public Player getLocalPlayer() {
-		if (localPlayer == null) {
-			return getPlayer1();
-		} else {
-			return localPlayer;
+		if (localPlayerId == -1) {
+			return null;
 		}
+
+		return getPlayer(localPlayerId);
 	}
 
 	public void setLocalPlayer(Player localPlayer) {
-		this.localPlayer = localPlayer;
+		this.localPlayerId = localPlayer.getId();
 	}
 
 	public List<GameAction> getRemoteValidActions() {
@@ -342,6 +346,13 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 		this.setLocalPlayer(localPlayer);
 		this.setPlayer(localPlayer.getId(), localPlayer);
 		this.setPlayer(remotePlayer.getId(), remotePlayer);
+
+		hideCards();
+	}
+
+	protected void hideCards() {
+		getLocalPlayer().setHideCards(false);
+		getOpponent(getLocalPlayer()).setHideCards(true);
 	}
 
 	@Override
@@ -378,6 +389,7 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 		this.setTriggerManager(state.triggerManager);
 		this.getLogic().setIdFactory(new IdFactory(state.currentId));
 		this.setRemoteTurnState(state.turnState);
+		hideCards();
 	}
 
 	public String getHost() {

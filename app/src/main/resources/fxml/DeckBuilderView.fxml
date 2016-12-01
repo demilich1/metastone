@@ -13,14 +13,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="968.0" prefWidth="1280.0" styleClass="panel" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" styleClass="panel" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header" text="Deck Builder" BorderPane.alignment="CENTER" />
    </top>
    <right>
       <VBox spacing="2.0">
          <children>
-            <Pane fx:id="upperInfoArea" prefHeight="50.0" prefWidth="240.0" />
+            <Pane fx:id="upperInfoArea" prefHeight="160.0" prefWidth="240.0" />
             <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="780.0" prefViewportWidth="220.0" prefWidth="250.0" styleClass="sidebar">
                <padding>
                   <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />

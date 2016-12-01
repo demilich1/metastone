@@ -3,7 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="968.0"
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0"
          prefWidth="1280.0" styleClass="panel" type="BorderPane" xmlns="http://javafx.com/javafx/8"
          xmlns:fx="http://javafx.com/fxml/1">
     <top/>
@@ -16,6 +16,16 @@
                 <Label styleClass="name-small" text="Deck Format:"/>
                 <ComboBox fx:id="formatBox" prefWidth="150.0"/>
             </HBox>
+            <VBox alignment="CENTER" BorderPane.alignment="CENTER" spacing="4" fx:id="multiplayerGroup">
+                <HBox alignment="CENTER" BorderPane.alignment="CENTER" spacing="4">
+                    <Label styleClass="name-small" text="Host:"/>
+                    <TextField fx:id="hostBox" prefWidth="150.0" text="127.0.0.1"/>
+                </HBox>
+                <HBox alignment="CENTER" BorderPane.alignment="CENTER" spacing="4">
+                    <Label styleClass="name-small" text="Port:"/>
+                    <TextField fx:id="portBox" prefWidth="150.0" text="11111"/>
+                </HBox>
+            </VBox>
             <HBox fx:id="playerArea" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="0.0"
                   BorderPane.alignment="CENTER"/>
         </VBox>
