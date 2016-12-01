@@ -37,14 +37,14 @@ public class Matchmaker extends AbstractMap<String, QueueEntry> {
 		}
 	}
 
-	public void clean(Predicate<QueueEntry> queuePredicate, Predicate<Match> matchPredicate) {
+	private void clean(Predicate<QueueEntry> queuePredicate, Predicate<Match> matchPredicate) {
 		List<String> toRemoveUsers = keySet().stream().filter(k -> queuePredicate.test(entries.get(k))).collect(Collectors.toList());
 		List<String> toRemoveMatches = matches.values().stream().filter(matchPredicate).flatMap(m -> Stream.of(m.entry1.userId, m.entry2.userId)).collect(Collectors.toList());
 		toRemoveUsers.forEach(this::remove);
 		toRemoveMatches.forEach(matches::remove);
 	}
 
-	public void clean() {
+	private void clean() {
 		Date dateAgo = Date.from(Instant.now().minusSeconds(45));
 		if (lastClean.before(dateAgo)) {
 			this.clean(e -> e.lastTouchedAt.before(dateAgo),
@@ -53,35 +53,32 @@ public class Matchmaker extends AbstractMap<String, QueueEntry> {
 		lastClean = dateAgo;
 	}
 
-	public synchronized Match match(String userId) {
+	public synchronized Match match(String userId, Deck deck) {
 		if (matches.containsKey(userId)) {
 			return matches.get(userId);
 		}
 
 		if (!contains(userId)) {
-			throw new ArrayStoreException();
+			if (deck == null) {
+				throw new ArrayStoreException();
+			}
+			this.asQueue().add(new QueueEntry(userId, deck));
+		} else {
+			QueueEntry entry = this.get(userId);
+			QueueEntry replacement = new QueueEntry(userId, entry.deck);
+			this.replace(userId, replacement);
 		}
 
-		touch(userId);
-		if (asQueue().peekSecond() != null) {
-			return new Match(asQueue().poll(), asQueue().poll());
-		}
+		QueueEntry otherPlayer = asQueue().peekSecond();
 
-		return null;
-	}
-
-	public synchronized Match match(String userId, Deck deck) {
-		if (deck == null) {
-			return match(userId);
-		}
-
-		if (matches.containsKey(userId)) {
-			return matches.get(userId);
-		}
-
-		touch(userId, deck);
-		if (asQueue().peekSecond() != null) {
-			return new Match(asQueue().poll(), asQueue().poll());
+		while (otherPlayer != null) {
+			// Skip really old players
+			if (otherPlayer.lastTouchedAt.before(Date.from(Instant.now().minusSeconds(10)))) {
+				this.remove(otherPlayer);
+				otherPlayer = asQueue().peekSecond();
+			} else {
+				return new Match(asQueue().poll(), asQueue().poll());
+			}
 		}
 
 		return null;
@@ -89,24 +86,6 @@ public class Matchmaker extends AbstractMap<String, QueueEntry> {
 
 	private MatchmakingQueue asQueue() {
 		return new MatchmakingQueue();
-	}
-
-	private synchronized void touch(String userId, Deck deck) {
-		if (contains(userId)) {
-			touch(userId);
-		} else {
-			this.asQueue().add(new QueueEntry(userId, deck));
-		}
-	}
-
-	private void touch(String userId) {
-		if (!contains(userId)) {
-			throw new ArrayStoreException();
-		}
-
-		QueueEntry entry = this.get(userId);
-		QueueEntry replacement = new QueueEntry(userId, entry.deck);
-		this.replace(userId, replacement);
 	}
 
 	@SuppressWarnings("unchecked")
