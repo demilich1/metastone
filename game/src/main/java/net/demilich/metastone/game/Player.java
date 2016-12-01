@@ -5,8 +5,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.behaviour.Behaviour;
+import net.demilich.metastone.game.behaviour.DoNothingBehaviour;
 import net.demilich.metastone.game.behaviour.IBehaviour;
 import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
+import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.entities.Actor;
@@ -20,6 +24,30 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class Player extends Entity implements Serializable {
+	public static Player Empty() {
+		Player player = new Player();
+
+		PlayerConfig config = new PlayerConfig(Deck.EMPTY, new Behaviour() {
+			@Override
+			public String getName() {
+				return "Waiting for player to connect...";
+			}
+
+			@Override
+			public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
+				return null;
+			}
+
+			@Override
+			public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
+				return null;
+			}
+		});
+
+		player.buildFromConfig(config);
+		return player;
+	}
+
 	protected Hero hero;
 	protected String deckName;
 
@@ -58,6 +86,10 @@ public class Player extends Entity implements Serializable {
 		this.lockedMana = otherPlayer.lockedMana;
 		this.behaviour = otherPlayer.behaviour;
 		this.getStatistics().merge(otherPlayer.getStatistics());
+	}
+
+	static {
+
 	}
 
 	/**

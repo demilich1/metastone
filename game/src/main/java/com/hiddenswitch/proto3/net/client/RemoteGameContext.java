@@ -19,7 +19,6 @@ import net.demilich.metastone.game.TurnState;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.behaviour.IBehaviour;
 import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
-import net.demilich.metastone.game.behaviour.threat.GameStateValueBehaviour;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.decks.DeckFormat;
@@ -229,7 +228,7 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	}
 
 	protected int getMyPlayerId() {
-		return localPlayerId;
+		return getLocalPlayerId();
 	}
 
 	@Override
@@ -300,11 +299,11 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	}
 
 	public Player getLocalPlayer() {
-		if (localPlayerId == -1) {
+		if (getLocalPlayerId() == -1) {
 			return null;
 		}
 
-		return getPlayer(localPlayerId);
+		return getPlayer(getLocalPlayerId());
 	}
 
 	public void setLocalPlayer(Player localPlayer) {
@@ -417,5 +416,10 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 			player.setBehaviour(existingBehaviour);
 		}
 		super.setPlayer(index, player);
+	}
+
+	@Override
+	public int getLocalPlayerId() {
+		return localPlayerId;
 	}
 }

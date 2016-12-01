@@ -8,13 +8,17 @@ import net.demilich.metastone.game.logic.GameLogic;
 import java.io.Serializable;
 
 public class Deck implements Serializable {
-
+	public static final Deck EMPTY;
 	private String name = "";
 	private HeroClass heroClass;
 	protected CardCollection cards = new CardCollection();
 	private String description;
 	private String filename;
 	private boolean arbitrary;
+
+	static {
+		EMPTY = new Deck(HeroClass.WARRIOR);
+	}
 
 	protected Deck() {
 	}

@@ -140,8 +140,8 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		if (getWinner() != null) {
 			logger.debug("Game finished after " + getTurn() + " turns, the winner is: " + getWinner().getName());
 			getWinner().getStatistics().gameWon();
-			Player looser = getOpponent(getWinner());
-			looser.getStatistics().gameLost();
+			Player loser = getOpponent(getWinner());
+			loser.getStatistics().gameLost();
 		} else {
 			logger.debug("Game finished after " + getTurn() + " turns, DRAW");
 			getPlayer1().getStatistics().gameLost();
@@ -333,6 +333,14 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 
 	public Player getPlayer(int index) {
 		return getPlayers().get(index);
+	}
+
+	public int playerCount() {
+		return getPlayers().size();
+	}
+
+	public boolean hasPlayer(int id) {
+		return id >= 0 && players != null && players.length > id && players[id] != null;
 	}
 
 	public Player getPlayer1() {

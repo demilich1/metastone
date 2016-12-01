@@ -67,6 +67,11 @@ public class GameContextVisualizable extends GameContext implements GameContextV
 		return gameEvents;
 	}
 
+	@Override
+	public int getLocalPlayerId() {
+		return 0;
+	}
+
 	public boolean isBlockedByAnimation() {
 		return blockedByAnimation;
 	}

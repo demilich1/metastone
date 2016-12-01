@@ -121,11 +121,13 @@ public class PlayModeConfigView extends BorderPane implements EventHandler<Actio
 			gameConfig.setDeckFormat(formatBox.getValue());
 
 			if (isMultiplayer) {
+
 				Alert dialog = new Alert(Alert.AlertType.INFORMATION,
 						"Finding another player...",
 						ButtonType.CANCEL);
 
 				dialog.setTitle("Matchmaking");
+				dialog.setHeaderText(null);
 
 				AtomicBoolean isMatchmaking = new AtomicBoolean(true);
 				final ClientConnectionConfiguration[] connection = {null};
