@@ -10,7 +10,7 @@ public class AfterSpellCastedEvent extends GameEvent {
 	private final Entity spellTarget;
 
 	public AfterSpellCastedEvent(GameContext context, int playerId, Card sourceCard, Entity target) {
-		super(context, target == null ? null : target.getOwner(), playerId);
+		super(context, target == null ? -1 : target.getOwner(), playerId);
 		this.sourceCard = sourceCard;
 		this.spellTarget = target;
 	}

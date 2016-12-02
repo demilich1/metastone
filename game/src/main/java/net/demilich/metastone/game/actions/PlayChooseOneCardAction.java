@@ -6,22 +6,24 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
-public class PlaySpellCardAction extends PlayCardAction {
+public class PlayChooseOneCardAction extends PlayCardAction {
 
 	private SpellDesc spell;
 	protected final EntityReference cardReference;
+	protected final String chosenCard;
 
-	public PlaySpellCardAction(SpellDesc spell, Card card, TargetSelection targetSelection) {
-		super(card.getCardReference());
+	public PlayChooseOneCardAction(SpellDesc spell, Card chooseOneCard, String chosenCard, TargetSelection targetSelection) {
+		super(chooseOneCard.getCardReference());
 		setActionType(ActionType.SPELL);
 		setTargetRequirement(targetSelection);
 		this.setSpell(spell);
-		this.cardReference = card.getReference();
+		this.cardReference = chooseOneCard.getReference();
+		this.chosenCard = chosenCard;
 	}
 
 	@Override
 	public void play(GameContext context, int playerId) {
-		context.getLogic().castSpell(playerId, spell, cardReference, getTargetKey(), getTargetRequirement(), false);
+		context.getLogic().castChooseOneSpell(playerId, spell, cardReference, getTargetKey(), chosenCard);
 	}
 
 	public SpellDesc getSpell() {

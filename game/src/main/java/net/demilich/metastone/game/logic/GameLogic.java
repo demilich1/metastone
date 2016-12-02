@@ -253,8 +253,68 @@ public class GameLogic implements Cloneable {
 		return player.getMinions().size() < MAX_MINIONS;
 	}
 
+	public void castChooseOneSpell(int playerId, SpellDesc spellDesc, EntityReference sourceReference, EntityReference targetReference, String cardId) {
+		Player player = context.getPlayer(playerId);
+		Entity source = null;
+		if (sourceReference != null) {
+			try {
+				source = context.resolveSingleTarget(sourceReference);
+			} catch (Exception e) {
+				e.printStackTrace();
+				logger.error("Error resolving source entity while casting spell: " + spellDesc);
+			}
+		}
+		EntityReference spellTarget = spellDesc.hasPredefinedTarget() ? spellDesc.getTarget() : targetReference;
+		List<Entity> targets = targetLogic.resolveTargetKey(context, player, source, spellTarget);
+		Card sourceCard = null;
+		SpellCard chosenCard = (SpellCard) context.getCardById(cardId);
+		sourceCard = source.getEntityType() == EntityType.CARD ? (Card) source : null;
+		if (!spellDesc.hasPredefinedTarget() && targets != null && targets.size() == 1) {
+			if (chosenCard.getTargetRequirement() != TargetSelection.NONE) {
+				context.getEnvironment().remove(Environment.TARGET_OVERRIDE);
+				context.getEnvironment().put(Environment.CHOOSE_ONE_CARD, chosenCard.getCardId());
+				GameEvent spellTargetEvent = new TargetAcquisitionEvent(context, playerId, ActionType.SPELL, chosenCard, targets.get(0));
+				context.fireGameEvent(spellTargetEvent);
+				Entity targetOverride = context
+						.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.TARGET_OVERRIDE));
+				if (targetOverride != null && targetOverride.getId() != IdFactory.UNASSIGNED) {
+					targets.remove(0);
+					targets.add(targetOverride);
+					spellDesc = spellDesc.addArg(SpellArg.FILTER, null);
+					log("Target for spell {} has been changed! New target {}", chosenCard, targets.get(0));
+				}
+			}
+		}
+		try {
+			Spell spell = spellFactory.getSpell(spellDesc);
+			spell.cast(context, player, spellDesc, source, targets);
+		} catch (Exception e) {
+			if (source != null) {
+				logger.error("Error while playing card: " + source.getName());
+			}
+			logger.error("Error while casting spell: " + spellDesc);
+			panicDump();
+			e.printStackTrace();
+		}
+
+		context.getEnvironment().remove(Environment.TARGET_OVERRIDE);
+		context.getEnvironment().remove(Environment.CHOOSE_ONE_CARD);
+
+		checkForDeadEntities();
+		if (targets == null || targets.size() != 1) {
+			context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, sourceCard, null));
+		} else {
+			context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, sourceCard, targets.get(0)));
+		}
+	}
+
 	public void castSpell(int playerId, SpellDesc spellDesc, EntityReference sourceReference, EntityReference targetReference,
 			boolean childSpell) {
+		castSpell(playerId, spellDesc, sourceReference, targetReference, TargetSelection.NONE, childSpell);
+	}
+
+	public void castSpell(int playerId, SpellDesc spellDesc, EntityReference sourceReference, EntityReference targetReference,
+			TargetSelection targetSelection, boolean childSpell) {
 		Player player = context.getPlayer(playerId);
 		Entity source = null;
 		if (sourceReference != null) {
@@ -266,7 +326,7 @@ public class GameLogic implements Cloneable {
 			}
 
 		}
-		SpellCard spellCard = null;
+		//SpellCard spellCard = null;
 		EntityReference spellTarget = spellDesc.hasPredefinedTarget() ? spellDesc.getTarget() : targetReference;
 		List<Entity> targets = targetLogic.resolveTargetKey(context, player, source, spellTarget);
 		// target can only be changed when there is one target
@@ -279,12 +339,8 @@ public class GameLogic implements Cloneable {
 		}
 		if (sourceCard != null && sourceCard.getCardType().isCardType(CardType.SPELL) && !spellDesc.hasPredefinedTarget() && targets != null
 				&& targets.size() == 1) {
-			if (sourceCard instanceof SpellCard) {
-				spellCard = (SpellCard) sourceCard;
-			}
-
-			if (spellCard != null && spellCard.getTargetRequirement() != TargetSelection.NONE && !childSpell) {
-				GameEvent spellTargetEvent = new TargetAcquisitionEvent(context, playerId, ActionType.SPELL, spellCard, targets.get(0));
+			if (sourceCard.getCardType().isCardType(CardType.SPELL) && targetSelection != TargetSelection.NONE && !childSpell) {
+				GameEvent spellTargetEvent = new TargetAcquisitionEvent(context, playerId, ActionType.SPELL, sourceCard, targets.get(0));
 				context.fireGameEvent(spellTargetEvent);
 				Entity targetOverride = context
 						.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.TARGET_OVERRIDE));
@@ -292,7 +348,7 @@ public class GameLogic implements Cloneable {
 					targets.remove(0);
 					targets.add(targetOverride);
 					spellDesc = spellDesc.addArg(SpellArg.FILTER, null);
-					log("Target for spell {} has been changed! New target {}", spellCard, targets.get(0));
+					log("Target for spell {} has been changed! New target {}", sourceCard, targets.get(0));
 				}
 			}
 
@@ -309,14 +365,14 @@ public class GameLogic implements Cloneable {
 			e.printStackTrace();
 		}
 
-		if (spellCard != null && !childSpell) {
+		if (sourceCard != null && sourceCard.getCardType().isCardType(CardType.SPELL) && !childSpell) {
 			context.getEnvironment().remove(Environment.TARGET_OVERRIDE);
 
 			checkForDeadEntities();
-			if (targets.size() != 1) {
-				context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, spellCard, null));
+			if (targets == null || targets.size() != 1) {
+				context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, sourceCard, null));
 			} else {
-				context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, spellCard, targets.get(0)));
+				context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, sourceCard, targets.get(0)));
 			}
 		}
 	}
@@ -1688,6 +1744,9 @@ public class GameLogic implements Cloneable {
 		if (resolveBattlecry && minion.getBattlecry() != null) {
 			resolveBattlecry(player.getId(), minion);
 			checkForDeadEntities();
+			if (minion.isDestroyed()) {
+				return true;
+			}
 		}
 
 		if (context.getEnvironment().get(Environment.TRANSFORM_REFERENCE) != null) {
