@@ -53,7 +53,7 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 		super(connectionConfiguration.getFirstMessage().getPlayer1(), null, new GameLogic(), new DeckFormat()
 				.withCardSets(CardSet.values()));
 		this.connectionConfiguration = connectionConfiguration;
-		this.host = connectionConfiguration.getHost();
+		this.host = BuildConfig.GAMESESSIONS_HOST;
 		this.port = connectionConfiguration.getPort();
 		this.socketClientConnection = new SocketClientConnection(host, port);
 		this.ccs = socketClientConnection;

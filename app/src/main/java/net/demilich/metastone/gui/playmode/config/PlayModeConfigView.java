@@ -18,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.decks.Deck;
@@ -204,7 +205,7 @@ public class PlayModeConfigView extends BorderPane implements EventHandler<Actio
 	protected MatchmakingResponse getMatchmakingResponse(MatchmakingRequest request) throws IOException {
 		CloseableHttpClient client = HttpClientBuilder.create().build();
 		RequestConfig globalConfig = RequestConfig.custom().setCircularRedirectsAllowed(true).build();
-		HttpPost post1 = new HttpPost("http://localhost:8080/v0/anonymous/matchmake");
+		HttpPost post1 = new HttpPost(BuildConfig.MATCHMAKING_URI);
 		post1.setEntity(new StringEntity(Serialization.serialize(request), ContentType.APPLICATION_JSON));
 		post1.addHeader("X-Auth-UserId", sessionId);
 		post1.setConfig(globalConfig);
@@ -223,7 +224,7 @@ public class PlayModeConfigView extends BorderPane implements EventHandler<Actio
 	protected void cancelMatchmaking() throws IOException {
 		CloseableHttpClient client = HttpClientBuilder.create().build();
 		RequestConfig globalConfig = RequestConfig.custom().setCircularRedirectsAllowed(true).build();
-		HttpDelete post1 = new HttpDelete("http://localhost:8080/v0/anonymous/matchmake");
+		HttpDelete post1 = new HttpDelete(BuildConfig.MATCHMAKING_URI);
 		post1.addHeader("X-Auth-UserId", sessionId);
 		post1.setConfig(globalConfig);
 		CloseableHttpResponse httpResponse = client.execute(post1);
