@@ -30,13 +30,12 @@ public class GameSessions extends Service<GameSessions> {
 
 	@Override
 	public void start(Future<Void> result) {
-		try {
-			CardCatalogue.loadCardsFromPackage();
-		} catch (IOException | URISyntaxException | CardParseException e) {
-			result.fail(e);
-		}
-
 		vertx.executeBlocking(blocking -> {
+			try {
+				CardCatalogue.loadCardsFromPackage();
+			} catch (IOException | URISyntaxException | CardParseException e) {
+				result.fail(e);
+			}
 			DefaultChannelId.newInstance();
 			// TODO: These ports shouldn't be totally randomized because of AWS security groups
 			int port = RandomUtils.nextInt(6200, 16200);
