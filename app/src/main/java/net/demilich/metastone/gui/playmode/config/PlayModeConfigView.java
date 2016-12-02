@@ -189,7 +189,12 @@ public class PlayModeConfigView extends BorderPane implements EventHandler<Actio
 
 				ClientConnectionConfiguration clientConnectionConfiguration = connection[0];
 				if (clientConnectionConfiguration != null) {
-					gameConfig.setConnection(clientConnectionConfiguration);
+					// TODO: The matchmaker should really do its best to return the correct public URL
+					gameConfig.setConnection(new ClientConnectionConfiguration(
+							BuildConfig.GAMESESSIONS_HOST,
+							clientConnectionConfiguration.getPort(),
+							clientConnectionConfiguration.getFirstMessage()
+					));
 				} else {
 					// Do nothing and cancel.
 					return;
