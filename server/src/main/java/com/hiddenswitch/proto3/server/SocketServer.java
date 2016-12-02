@@ -162,7 +162,7 @@ public class SocketServer extends SyncVerticle {
 	}
 
 	public String getHost() {
-		return "localhost";
+		return "0.0.0.0";
 	}
 
 	public Map<String, ServerGameSession> getGames() {
