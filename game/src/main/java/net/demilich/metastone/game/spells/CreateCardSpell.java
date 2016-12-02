@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import co.paralleluniverse.fibers.Suspendable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,6 +29,7 @@ public class CreateCardSpell extends Spell {
 	
 	Logger logger = LoggerFactory.getLogger(CreateCardSpell.class);
 
+	@Suspendable
 	private SpellDesc[] discoverCardParts(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		List<SpellDesc> spells = new ArrayList<SpellDesc>();
 		SpellDesc[] spellArray = (SpellDesc[]) desc.get(SpellArg.SPELLS);
@@ -74,6 +76,7 @@ public class CreateCardSpell extends Spell {
 	}
 
 	@Override
+	@Suspendable
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		HeroClass heroClass = HeroClass.ANY;
 		Rarity rarity = Rarity.FREE;

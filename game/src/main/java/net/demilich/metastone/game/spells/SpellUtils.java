@@ -114,6 +114,7 @@ public class SpellUtils {
 		return discoverActions;
 	}
 
+	@Suspendable
 	public static DiscoverAction getSpellDiscover(GameContext context, Player player, SpellDesc desc, List<SpellDesc> spells) {
 		List<GameAction> discoverActions = new ArrayList<>();
 		for (SpellDesc spell : spells) {

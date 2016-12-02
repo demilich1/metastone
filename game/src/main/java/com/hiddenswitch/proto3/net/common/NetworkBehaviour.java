@@ -1,7 +1,9 @@
 package com.hiddenswitch.proto3.net.common;
 
 import co.paralleluniverse.fibers.Suspendable;
+import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
+import io.vertx.ext.sync.Sync;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
@@ -41,9 +43,16 @@ public class NetworkBehaviour extends Behaviour implements Serializable {
 	}
 
 	@Override
+	@Suspendable
 	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
-		logger.debug("Requesting action from wrapped behaviour. Player: {}, validActions: {}", player, validActions);
-		return getWrapBehaviour().requestAction(context, player, validActions);
+		if (context instanceof ServerGameContext) {
+			logger.debug("Requesting action from network using blocking behaviour.");
+			GameAction action = Sync.awaitEvent(done -> requestActionAsync((ServerGameContext)context, player, validActions, done));
+			return action;
+		} else {
+			logger.debug("Requesting action from wrapped behaviour. Player: {}, validActions: {}", player, validActions);
+			return getWrapBehaviour().requestAction(context, player, validActions);
+		}
 	}
 
 	@Suspendable
