@@ -12,8 +12,6 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.actions.GameAction;
-import net.demilich.metastone.game.behaviour.IBehaviour;
-import net.demilich.metastone.game.behaviour.PlayRandomBehaviour;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
@@ -58,18 +56,19 @@ public class CastRandomSpellSpell extends Spell {
 		
 		// Set behavior to random. Because we're already insane.
 		// This allows Discover effects and targeting to actually be random.
-		IBehaviour currentBehaviour = player.getBehaviour();
-		player.setBehaviour(new PlayRandomBehaviour());
+		Player originalPlayer = player;
+		Player opponent = context.getOpponent(player);
+		opponent.setAttribute(Attribute.ALL_RANDOM_YOGG_ONLY_FINAL_DESTINATION, true);
+		player.setAttribute(Attribute.ALL_RANDOM_YOGG_ONLY_FINAL_DESTINATION, true); 
 		// HAHAHAHAHAHAHAHAHAHA!
 		
 		int numberOfSpellsToCast = desc.getValue(SpellArg.VALUE, context, player, target, source, 1);
-		Player originalPlayer = player;
 		for (int i = 0; i < numberOfSpellsToCast; i++) {
 			// In case Yogg changes sides, this should case who the spells are being cast for.
 			player = context.getPlayer(source.getOwner());
 			// If Yogg is removed from the board, stop casting spells.
 			if (!player.getMinions().contains(source)) {
-				return;
+				break;
 			}
 			Card randomCard = filteredSpells.getRandom();
 			logger.debug("Yogg-Saron chooses to play " + randomCard.getName());
@@ -105,8 +104,7 @@ public class CastRandomSpellSpell extends Spell {
 						targetedBattlecry.setTarget(validTarget);
 						battlecryActions.add(targetedBattlecry);
 					}
-
-					battlecryAction = player.getBehaviour().requestAction(context, player, battlecryActions);
+					battlecryAction = battlecryActions.get(context.getLogic().random(battlecryActions.size()));
 				} else {
 					battlecryAction = battlecry;
 				}
@@ -121,8 +119,9 @@ public class CastRandomSpellSpell extends Spell {
 			// your opponent has died, but should if you do. But, it works for now.
 			context.getLogic().checkForDeadEntities();
 		}
-		
-		originalPlayer.setBehaviour(currentBehaviour);
+
+		opponent.removeAttribute(Attribute.ALL_RANDOM_YOGG_ONLY_FINAL_DESTINATION);
+		originalPlayer.removeAttribute(Attribute.ALL_RANDOM_YOGG_ONLY_FINAL_DESTINATION);
 		// *ahem* Back to normal.
 	}
 
