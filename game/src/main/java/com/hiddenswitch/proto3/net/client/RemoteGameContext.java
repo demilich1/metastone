@@ -195,7 +195,10 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 		}
 		logger.debug("Players connected, waiting for action.");
 		while (!gameDecided()) {
-			if (getActionRequested().get()) {
+			if (getActionRequested().get()
+					&& hasPlayer(PLAYER_1)
+					&& hasPlayer(PLAYER_2)
+					&& getLocalPlayer() != null) {
 				requestLocalAction();
 				getActionRequested().set(false);
 			}
@@ -210,25 +213,26 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	}
 
 	protected boolean isHumanPlayer() {
-		if (getLocalPlayer() == null) {
+		final Player localPlayer = getLocalPlayer();
+		if (localPlayer == null) {
 			return true;
 		}
-		return getLocalPlayer().getBehaviour() instanceof NetworkBehaviour ?
-				(((NetworkBehaviour) (getLocalPlayer().getBehaviour())).getWrapBehaviour() instanceof HumanBehaviour)
-				: getLocalPlayer().getBehaviour() instanceof HumanBehaviour;
+		final IBehaviour behaviour = localPlayer.getBehaviour();
+		if (behaviour == null) {
+			return true;
+		}
+		return behaviour instanceof NetworkBehaviour ?
+				(((NetworkBehaviour) behaviour).getWrapBehaviour() instanceof HumanBehaviour)
+				: behaviour instanceof HumanBehaviour;
 	}
 
 	protected void requestLocalAction() {
-		if (getActivePlayerId() == getMyPlayerId()
+		if (getActivePlayerId() == getLocalPlayerId()
 				&& getActivePlayerId() != -1) {
 			logger.debug("Action was requested from player.");
-			GameAction action = getLocalPlayer().getBehaviour().requestAction(this, getActivePlayer(), getValidActions());
+			GameAction action = getLocalPlayer().getBehaviour().requestAction(this.clone(), getActivePlayer(), getValidActions());
 			ccs.getSendToServer().sendAction(this.lastRequestId, getLocalPlayer(), action);
 		}
-	}
-
-	protected int getMyPlayerId() {
-		return getLocalPlayerId();
 	}
 
 	@Override
@@ -300,6 +304,10 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 
 	public Player getLocalPlayer() {
 		if (getLocalPlayerId() == -1) {
+			return null;
+		}
+
+		if (!hasPlayer(getLocalPlayerId())) {
 			return null;
 		}
 
@@ -411,7 +419,7 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	@Override
 	public void setPlayer(int index, Player player) {
 		// Don't override the existing behaviour
-		if (getPlayer(index) != null) {
+		if (hasPlayer(index)) {
 			IBehaviour existingBehaviour = getPlayer(index).getBehaviour();
 			player.setBehaviour(existingBehaviour);
 		}

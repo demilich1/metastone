@@ -42,22 +42,12 @@ public abstract class PlayCardAction extends GameAction {
 	public void execute(GameContext context, int playerId) {
 		Card card = context.resolveCardReference(getCardReference());
 		context.setPendingCard(card);
-//		try {
-			context.getLogic().playCard(playerId, getCardReference());
-			// card was countered, do not actually resolve its effects
-			if (!card.hasAttribute(Attribute.COUNTERED)) {
-				play(context, playerId);
-			}
-//		} catch (Exception e) {
-//			logger.error("ERROR while playing card " + card.toString() + " reference: " + cardReference.toString(), e);
-//			logger.error(context.toLongString());
-//			context.addException(e);
-//			if (e instanceof PlayCardException) {
-//				throw e;
-//			} else {
-//				throw new PlayCardException(e);
-//			}
-//		}
+
+		context.getLogic().playCard(playerId, getCardReference());
+		// card was countered, do not actually resolve its effects
+		if (!card.hasAttribute(Attribute.COUNTERED)) {
+			play(context, playerId);
+		}
 
 		context.getLogic().afterCardPlayed(playerId, getCardReference());
 		context.setPendingCard(null);

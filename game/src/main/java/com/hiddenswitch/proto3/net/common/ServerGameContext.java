@@ -188,7 +188,7 @@ public class ServerGameContext extends GameContext {
 
 	@Suspendable
 	public void networkRequestAction(GameState state, int playerId, List<GameAction> actions, Handler<GameAction> callback) {
-		logger.debug("Requesting acton for playerId {}", playerId);
+		logger.debug("Requesting action for playerId {}", playerId);
 		String id = RandomStringUtils.randomAscii(8);
 		requestCallbacks.put(id, callback);
 		getListenerMap().get(getPlayer(playerId)).onRequestAction(id, state, actions);
@@ -204,16 +204,18 @@ public class ServerGameContext extends GameContext {
 	@Suspendable
 	@SuppressWarnings("unchecked")
 	public void onActionReceived(String messageId, Player player, GameAction action) {
-		logger.debug("Accepting acton for playerId {} hashCode {}", player.getId(), player.hashCode());
-		Sync.fiberHandler((Handler<GameAction>) requestCallbacks.get(messageId)).handle(action);
+		logger.debug("Accepting action for playerId {} hashCode {}", player.getId(), player.hashCode());
+		final Handler handler = requestCallbacks.get(messageId);
 		requestCallbacks.remove(messageId);
+		Sync.fiberHandler((Handler<GameAction>) handler).handle(action);
 	}
 
 	@SuppressWarnings("unchecked")
 	public void onMulliganReceived(String messageId, Player player, List<Card> discardedCards) {
 		logger.debug("Mulligan received from {}", player.getName());
-		((Handler<List<Card>>) requestCallbacks.get(messageId)).handle(discardedCards);
+		final Handler handler = requestCallbacks.get(messageId);
 		requestCallbacks.remove(messageId);
+		((Handler<List<Card>>) handler).handle(discardedCards);
 	}
 
 	public void sendGameOver(Player sender, Player winner) {

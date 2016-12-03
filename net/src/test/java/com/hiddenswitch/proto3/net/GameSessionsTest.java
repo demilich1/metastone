@@ -54,17 +54,17 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 		try {
 			twoClients = new TwoClients().invoke(this.service);
 		} catch (IOException | URISyntaxException | CardParseException e) {
-			Assert.fail(e.getMessage());
+			ServiceTestBase.getContext().fail(e.getMessage());
 		}
 		try {
 			twoClients.play();
 			float seconds = 0.0f;
-			while (seconds <= 20.0f && !twoClients.gameDecided()) {
+			while (seconds <= 40.0f && !twoClients.gameDecided()) {
 				if (twoClients.isInterrupted()) {
 					break;
 				}
-				Thread.sleep(100);
-				seconds += 0.1f;
+				Thread.sleep(1000);
+				seconds += 1.0f;
 			}
 
 			twoClients.assertGameOver();
@@ -109,23 +109,23 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 			try {
 				clients.add(new TwoClients().invoke(this.service));
 			} catch (IOException | URISyntaxException | CardParseException e) {
-				Assert.fail(e.getMessage());
+				ServiceTestBase.getContext().fail(e.getMessage());
 			}
 		}
 
 		try {
 			clients.forEach(TwoClients::play);
 			float seconds = 0.0f;
-			while (seconds <= 120.0f && !clients.stream().allMatch(TwoClients::gameDecided)) {
+			while (seconds <= 240.0f && !clients.stream().allMatch(TwoClients::gameDecided)) {
 				if (clients.stream().anyMatch(TwoClients::isInterrupted)) {
 					break;
 				}
-				Thread.sleep(100);
-				seconds += 0.1f;
+				Thread.sleep(1000);
+				seconds += 1.0f;
 			}
 			clients.forEach(TwoClients::assertGameOver);
 		} catch (Exception e) {
-			Assert.fail(e.getMessage());
+			ServiceTestBase.getContext().fail(e.getMessage());
 		} finally {
 			clients.forEach(TwoClients::dispose);
 		}

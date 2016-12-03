@@ -331,7 +331,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		return (Card) resolveSingleTarget((EntityReference) getEnvironment().get(Environment.PENDING_CARD));
 	}
 
-	public Player getPlayer(int index) {
+	public synchronized Player getPlayer(int index) {
 		return getPlayers().get(index);
 	}
 
@@ -351,7 +351,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		return getPlayer(PLAYER_2);
 	}
 
-	public List<Player> getPlayers() {
+	public synchronized List<Player> getPlayers() {
 		return Collections.unmodifiableList(Arrays.asList(players));
 	}
 

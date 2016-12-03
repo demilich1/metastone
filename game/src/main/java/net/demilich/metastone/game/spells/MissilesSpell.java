@@ -12,6 +12,7 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 
 public class MissilesSpell extends DamageSpell {
 
@@ -24,7 +25,15 @@ public class MissilesSpell extends DamageSpell {
 			missiles = context.getLogic().applyAmplify(player, missiles, Attribute.SPELL_AMPLIFY_MULTIPLIER);
 		}
 		for (int i = 0; i < missiles; i++) {
-			List<Actor> validTargets = SpellUtils.getValidRandomTargets(targets);
+			List<Actor> validTargets;
+			if (desc.contains(SpellArg.FILTER)) {
+				EntityFilter targetFilter = desc.getEntityFilter();
+				List<Entity> filteredTargets = SpellUtils.getValidTargets(context, player, targets, targetFilter);
+				validTargets = SpellUtils.getValidRandomTargets(filteredTargets);
+			} else {
+				validTargets = SpellUtils.getValidRandomTargets(targets);
+			}
+
 			if (validTargets.isEmpty()) {
 				return;
 			}

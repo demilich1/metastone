@@ -1,6 +1,7 @@
 package com.hiddenswitch.proto3.net.common;
 
 import co.paralleluniverse.fibers.Suspendable;
+import com.hiddenswitch.proto3.net.util.Result;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.ext.sync.Sync;
@@ -47,7 +48,12 @@ public class NetworkBehaviour extends Behaviour implements Serializable {
 	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
 		if (context instanceof ServerGameContext) {
 			logger.debug("Requesting action from network using blocking behaviour.");
-			GameAction action = Sync.awaitEvent(done -> requestActionAsync((ServerGameContext)context, player, validActions, done));
+			GameAction action = Sync.awaitResult(done -> {
+				logger.debug("Inner await result...");
+				requestActionAsync((ServerGameContext) context, player, validActions, result -> {
+					done.handle(new Result<>(result));
+				});
+			});
 			return action;
 		} else {
 			logger.debug("Requesting action from wrapped behaviour. Player: {}, validActions: {}", player, validActions);

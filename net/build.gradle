@@ -83,12 +83,12 @@ dependencies {
     testCompile group: 'io.vertx', name: 'vertx-unit', version: '3.3.3'
 }
 
-//tasks.withType(JavaExec) {
-////    jvmArgs "-javaagent:${configurations.quasar.iterator().next()}"
-//}
+tasks.withType(JavaExec) {
+    jvmArgs "-javaagent:${configurations.quasar.iterator().next()}"
+}
 
 test {
-//    jvmArgs "-javaagent:${configurations.quasar.iterator().next()}"
+    jvmArgs "-javaagent:${configurations.quasar.iterator().next()}"
     useJUnit()
     testLogging.showStandardStreams = true
     testLogging {
@@ -106,21 +106,21 @@ test.doFirst {
     systemProperty "sqlite4java.library.path", 'build/libs'
 }
 
-compileJava.dependsOn processResources
-compileJava {
-    doLast {
-        ant.taskdef(name:'instrumentation', classname:'co.paralleluniverse.fibers.instrument.InstrumentationTask', classpath: configurations.compile.asPath)
-        ant.instrumentation(verbose:'true', check:'true', debug:'true') {
-            fileset(dir: sourceSets.main.output.classesDir)
-        }
-    }
-}
-compileTestJava.dependsOn processTestResources
-compileTestJava {
-    doLast {
-        ant.taskdef(name:'instrumentation', classname:'co.paralleluniverse.fibers.instrument.InstrumentationTask', classpath: configurations.testCompile.asPath)
-        ant.instrumentation(verbose:'true', check:'true', debug:'true') {
-            fileset(dir: sourceSets.test.output.classesDir)
-        }
-    }
-}
+//compileJava.dependsOn processResources
+//compileJava {
+//    doLast {
+//        ant.taskdef(name:'instrumentation', classname:'co.paralleluniverse.fibers.instrument.InstrumentationTask', classpath: configurations.compile.asPath)
+//        ant.instrumentation(verbose:'true', check:'true', debug:'true') {
+//            fileset(dir: sourceSets.main.output.classesDir)
+//        }
+//    }
+//}
+//compileTestJava.dependsOn processTestResources
+//compileTestJava {
+//    doLast {
+//        ant.taskdef(name:'instrumentation', classname:'co.paralleluniverse.fibers.instrument.InstrumentationTask', classpath: configurations.testCompile.asPath)
+//        ant.instrumentation(verbose:'true', check:'true', debug:'true') {
+//            fileset(dir: sourceSets.test.output.classesDir)
+//        }
+//    }
+//}

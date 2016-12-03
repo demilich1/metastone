@@ -1,20 +1,20 @@
 package com.hiddenswitch.proto3.net.util;
 
 import com.hiddenswitch.proto3.net.GameSessions;
+import com.hiddenswitch.proto3.net.ServiceTestBase;
 import com.hiddenswitch.proto3.net.client.RemoteGameContext;
 import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
 import com.hiddenswitch.proto3.net.common.ClientToServerMessage;
+import com.hiddenswitch.proto3.net.common.MatchmakingResponse;
 import com.hiddenswitch.proto3.net.common.ServerGameContext;
 import com.hiddenswitch.proto3.net.models.CreateGameSessionRequest;
 import com.hiddenswitch.proto3.net.models.CreateGameSessionResponse;
-import com.hiddenswitch.proto3.net.common.MatchmakingResponse;
 import com.hiddenswitch.proto3.server.PregamePlayerConfiguration;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardParseException;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.DeckCatalogue;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -130,7 +130,7 @@ public class TwoClients {
 		List<Throwable> exceptions = getServerGameContext().getExceptions();
 		if (exceptions.size() > 0) {
 			for (Throwable t : exceptions) {
-				Assert.fail(t.getMessage());
+				ServiceTestBase.getContext().fail(t.getMessage());
 			}
 		}
 		if (!gameDecided()) {
@@ -140,8 +140,8 @@ public class TwoClients {
 		} else {
 			logger.info("TwoClients match complete.");
 		}
-		Assert.assertTrue(gameDecided());
-		Assert.assertTrue(playerContext1.getWinningPlayerId() == playerContext2.getWinningPlayerId());
+		ServiceTestBase.getContext().assertTrue(gameDecided());
+		ServiceTestBase.getContext().assertTrue(playerContext1.getWinningPlayerId() == playerContext2.getWinningPlayerId());
 	}
 
 	public void dispose() {

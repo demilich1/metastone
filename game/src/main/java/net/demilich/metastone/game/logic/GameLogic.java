@@ -6,10 +6,7 @@ import com.hiddenswitch.proto3.net.common.NullResult;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import net.demilich.metastone.BuildConfig;
-import net.demilich.metastone.game.Attribute;
-import net.demilich.metastone.game.Environment;
-import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.*;
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.actions.GameAction;
@@ -1743,41 +1740,29 @@ public class GameLogic implements Cloneable, Serializable {
 	}
 
 	protected void mulliganAsync(Player player, boolean begins, Handler<Object> callback) {
-		mulligan(player, begins);
-		if (callback != null) {
-			callback.handle(null);
-		}
+		throw new RecoverableGameException("Cannot call GameLogic::mulliganAsync from a non-async GameLogic instance.", context);
 	}
 
 	public void initAsync(int playerId, boolean begins, Handler<Player> callback) {
-		init(playerId, begins);
-		if (callback != null) {
-			callback.handle(context.getPlayer(playerId));
-		}
+		throw new RecoverableGameException("Cannot call GameLogic::initAsync from a non-async GameLogic instance.", context);
+
 	}
 
 	@Suspendable
 	protected void resolveBattlecryAsync(int playerId, Actor actor, Handler<AsyncResult<Boolean>> result) {
-		resolveBattlecry(playerId, actor);
-		if (result != null) {
-			result.handle(NullResult.SUCESSS);
-		}
+		throw new RecoverableGameException("Cannot call GameLogic::resolveBattlecryAsync from a non-async GameLogic instance.", context);
+
 	}
 
 	@Suspendable
 	public void equipWeaponAsync(int playerId, Weapon weapon, boolean resolveBattlecry, Handler<AsyncResult<Boolean>> result) {
-		equipWeapon(playerId, weapon, resolveBattlecry);
-		if (result != null) {
-			result.handle(NullResult.SUCESSS);
-		}
+		throw new RecoverableGameException("Cannot call GameLogic::equipWeaponAsync from a non-async GameLogic instance.", context);
+
 	}
 
 	@Suspendable
 	protected void summonAsync(int playerId, Minion minion, Card source, int index, boolean resolveBattlecry, Handler<AsyncResult<Boolean>> summoned) {
-		boolean result = summon(playerId, minion, source, index, resolveBattlecry);
-		if (summoned != null) {
-			summoned.handle(new SummonResult(result));
-		}
+		throw new RecoverableGameException("Cannot call GameLogic::summonAsync from a non-async GameLogic instance.", context);
 	}
 
 	public Random getRandom() {
