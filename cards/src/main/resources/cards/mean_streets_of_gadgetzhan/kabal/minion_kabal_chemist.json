@@ -23,7 +23,10 @@
 				"spell_pint-size_potion",
 				"spell_felfire_potion",
 				"secret_potion_of_polymorph",
-				"spell_bloodfury_potion"
+				"spell_bloodfury_potion",
+				"spell_freezing_potion",
+				"spell_greater_healing_potion",
+				"spell_blastcrystal_potion"
 			]
 		}
 	},

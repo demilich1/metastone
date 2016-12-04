@@ -39,7 +39,7 @@
 					},
 					"value2": 10
 				},
-				"spell": {
+				"spell1": {
 					"class": "ModifyAttributeSpell",
 					"target": "FRIENDLY_PLAYER",
 					"attribute": "JADE_BUFF",

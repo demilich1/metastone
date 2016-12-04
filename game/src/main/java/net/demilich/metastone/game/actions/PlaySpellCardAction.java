@@ -30,7 +30,7 @@ public class PlaySpellCardAction extends PlayCardAction {
 	@Override
 	@Suspendable
 	public void play(GameContext context, int playerId) {
-		context.getLogic().castSpell(playerId, spell, cardReference, getTargetKey(), false);
+		context.getLogic().castSpell(playerId, spell, cardReference, getTargetKey(), getTargetRequirement(), false);
 	}
 
 	public SpellDesc getSpell() {

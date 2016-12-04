@@ -198,7 +198,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		List<Minion> minions = getPlayer(minion.getOwner()).getMinions();
 		int index = minions.indexOf(minion);
 		if (index == -1) {
-			return null;
+			return adjacentMinions;
 		}
 		int left = index - 1;
 		int right = index + 1;
@@ -277,7 +277,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		List<Minion> minions = getPlayer(minion.getOwner()).getMinions();
 		int index = minions.indexOf(minion);
 		if (index == -1) {
-			return null;
+			return leftMinions;
 		}
 		for (int i = 0; i < index; i++) {
 			leftMinions.add(minions.get(i));
@@ -361,7 +361,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		List<Minion> minions = getPlayer(minion.getOwner()).getMinions();
 		int index = minions.indexOf(minion);
 		if (index == -1) {
-			return null;
+			return rightMinions;
 		}
 		for (int i = index + 1; i < player.getMinions().size(); i++) {
 			rightMinions.add(minions.get(i));

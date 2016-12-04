@@ -3,6 +3,7 @@ package net.demilich.metastone.game.cards;
 import com.google.gson.annotations.SerializedName;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.actions.PlayCardAction;
+import net.demilich.metastone.game.actions.PlayChooseOneCardAction;
 import net.demilich.metastone.game.cards.desc.ChooseOneCardDesc;
 
 public class ChooseOneCard extends Card implements IChooseOneCard {
@@ -24,6 +25,7 @@ public class ChooseOneCard extends Card implements IChooseOneCard {
 	public Card clone() {
 		ChooseOneCard clone = (ChooseOneCard) super.clone();
 		clone.cardIds = cardIds;
+		clone.cardId = cardId;
 		return clone;
 	}
 
@@ -47,6 +49,10 @@ public class ChooseOneCard extends Card implements IChooseOneCard {
 		return getCard(cardId);
 	}
 
+	public boolean hasBothOptions() {
+		return cardId != null;
+	}
+
 	@Override
 	public PlayCardAction play() {
 		throw new UnsupportedOperationException("The method .play() should not be called for ChooseOneCard");
@@ -57,8 +63,8 @@ public class ChooseOneCard extends Card implements IChooseOneCard {
 		PlayCardAction[] actions = new PlayCardAction[cardIds.length];
 		for (int i = 0; i < cardIds.length; i++) {
 			String cardId = cardIds[i];
-			Card card = getCard(cardId);
-			PlayCardAction cardAction = card.play();
+			SpellCard card = (SpellCard) getCard(cardId);
+			PlayChooseOneCardAction cardAction = new PlayChooseOneCardAction(card.getSpell(), this, cardId, card.getTargetRequirement());
 			cardAction.setActionSuffix(card.getName());
 			cardAction.setGroupIndex(i);
 			actions[i] = cardAction;
@@ -68,8 +74,9 @@ public class ChooseOneCard extends Card implements IChooseOneCard {
 
 	@Override
 	public PlayCardAction playBothOptions() {
-		Card card = getCard(cardId);
-		PlayCardAction cardAction = card.play();
+		SpellCard card = (SpellCard) getCard(cardId);
+		PlayChooseOneCardAction cardAction = new PlayChooseOneCardAction(card.getSpell(), this, cardId, card.getTargetRequirement());
+		cardAction.setActionSuffix(card.getName());
 		cardAction.setActionSuffix(card.getName());
 		return cardAction;
 	}

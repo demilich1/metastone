@@ -11,9 +11,17 @@
 	"battlecry": {
 		"targetSelection": "NONE",
 		"spell": {
-			"class": "DamageSpell",
-			"target": "ALL_OTHER_CHARACTERS",
-			"value": 3
+			"class": "AddAttributeSpell",
+			"target": "FRIENDLY_PLAYER",
+			"attribute": "MURLOCS_COST_HEALTH",
+			"revertTrigger": {
+				"class": "TurnEndTrigger"
+			},
+			"secondRevertTrigger": {
+				"class": "CardPlayedTrigger",
+				"targetPlayer": "SELF",
+				"race": "MURLOC"
+			}
 		}
 	},
 	"attributes": {

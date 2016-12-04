@@ -13,7 +13,7 @@
 		"targetSelection": "NONE",
 		"spell": {
 			"class": "BuffWeaponSpell",
-			"targetPlayer": "SELF",
+			"target": "FRIENDLY_WEAPON",
 			"attackBonus": 1,
 			"hpBonus": 1
 		},

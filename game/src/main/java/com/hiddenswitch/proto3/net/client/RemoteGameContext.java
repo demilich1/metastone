@@ -303,15 +303,18 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	}
 
 	public Player getLocalPlayer() {
-		if (getLocalPlayerId() == -1) {
+		try {
+			if (getLocalPlayerId() == -1) {
+				return null;
+			}
+
+			if (!hasPlayer(getLocalPlayerId())) {
+				return null;
+			}
+			return getPlayer(getLocalPlayerId());
+		} catch (Exception ignored) {
 			return null;
 		}
-
-		if (!hasPlayer(getLocalPlayerId())) {
-			return null;
-		}
-
-		return getPlayer(getLocalPlayerId());
 	}
 
 	public void setLocalPlayer(Player localPlayer) {
