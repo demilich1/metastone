@@ -2,6 +2,8 @@ package net.demilich.metastone.game.behaviour;
 
 import java.util.List;
 
+import co.paralleluniverse.fibers.Suspendable;
+import io.vertx.core.Handler;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
@@ -17,5 +19,9 @@ public interface IBehaviour extends Cloneable {
 
 	void onGameOver(GameContext context, int playerId, int winningPlayerId);
 
+	@Suspendable
 	GameAction requestAction(GameContext context, Player player, List<GameAction> validActions);
+
+	@Suspendable
+	void requestActionAsync(GameContext context, Player player, List<GameAction> validActions, Handler<GameAction> handler);
 }

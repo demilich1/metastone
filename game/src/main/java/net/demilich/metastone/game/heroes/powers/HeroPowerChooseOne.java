@@ -30,6 +30,10 @@ public class HeroPowerChooseOne extends HeroPower implements IChooseOneCard {
 		return card;
 	}
 
+	public boolean hasBothOptions() {
+		return cardId != null;
+	}
+
 	@Override
 	public PlayCardAction play() {
 		throw new UnsupportedOperationException("The method .play() should not be called for HeroPowerChooseOne");
@@ -49,8 +53,6 @@ public class HeroPowerChooseOne extends HeroPower implements IChooseOneCard {
 		}
 		return actions;
 	}
-	
-
 
 	@Override
 	public PlayCardAction playBothOptions() {

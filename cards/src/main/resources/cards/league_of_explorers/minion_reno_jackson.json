@@ -7,7 +7,7 @@
 	"baseHp": 6,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
-	"description": "Battlecry: If your deck contains no more than 1 of any card, fully heal your Hero.",
+	"description": "Battlecry: If your deck contains no duplicates, fully heal your Hero.",
 	"battlecry": {
 		"targetSelection": "NONE",
 		"spell": {

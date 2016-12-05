@@ -63,6 +63,12 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 		}
 	}
 
+	@Override
+	public void onActionReceived(String id, GameAction action) {
+		checkContext();
+		getGameContext().onActionReceived(id, action);
+	}
+
 	protected boolean areBothPlayersConnected() {
 		return player1 != null
 				&& player2 != null;
@@ -78,13 +84,6 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 		getGameContext().setUpdateListener(getPlayer1(), getPlayerListener(IdFactory.PLAYER_1));
 		getGameContext().setUpdateListener(getPlayer2(), getPlayerListener(IdFactory.PLAYER_2));
 		getGameContext().networkPlay();
-	}
-
-	@Override
-	@Suspendable
-	public void onActionReceived(String id, Player callingPlayer, GameAction action) {
-		checkContext();
-		getGameContext().onActionReceived(id, callingPlayer, action);
 	}
 
 	@Override

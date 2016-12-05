@@ -83,6 +83,8 @@ public class SocketServer extends SyncVerticle {
 			message = deserializeMessage(incomingMessage);
 		} catch (IOException | ClassNotFoundException e) {
 			logger.error("Deserializing the message failed!", e);
+		} catch (Exception e) {
+			logger.error("A different deserialization error occurred!");
 		} finally {
 			messages.remove(socket);
 		}
@@ -117,7 +119,8 @@ public class SocketServer extends SyncVerticle {
 				break;
 
 			case UPDATE_ACTION:
-				session.onActionReceived(message.getId(), message.getCallingPlayer(), message.getAction());
+				logger.debug("Server received message with ID {} action {}", message.getId(), message.getAction());
+				session.onActionReceived(message.getId(), message.getAction());
 				break;
 
 			case UPDATE_MULLIGAN:

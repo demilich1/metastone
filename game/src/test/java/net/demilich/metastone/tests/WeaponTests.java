@@ -19,7 +19,7 @@ public class WeaponTests extends TestBase {
 
 		WeaponCard weaponCard = (WeaponCard) CardCatalogue.getCardById("weapon_battle_axe");
 
-		context.setActivePlayerIndex(player.getId());
+		context.setActivePlayerId(player.getId());
 		context.getLogic().startTurn(player.getId());
 		Assert.assertEquals(warrior.getAttack(), 0);
 		context.getLogic().receiveCard(player.getId(), weaponCard);

@@ -9,6 +9,7 @@ import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.targeting.EntityReference;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class SpellDesc extends Desc<SpellArg> {
 
@@ -83,5 +84,4 @@ public class SpellDesc extends Desc<SpellArg> {
 		result += "}";
 		return result;
 	}
-
 }

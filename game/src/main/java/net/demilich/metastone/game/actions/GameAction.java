@@ -10,6 +10,7 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public abstract class GameAction implements Cloneable, Serializable {
 
@@ -83,12 +84,12 @@ public abstract class GameAction implements Cloneable, Serializable {
 	public void setTargetRequirement(TargetSelection targetRequirement) {
 		this.targetRequirement = targetRequirement;
 	}
-	
+
 	@Override
-	public boolean equals(Object other){
-		if (other instanceof GameAction){
+	public boolean equals(Object other) {
+		if (other instanceof GameAction) {
 			GameAction otherAction = (GameAction) other;
-			return (this.actionType == otherAction.actionType) 
+			return (this.actionType == otherAction.actionType)
 					&& (this.targetRequirement == otherAction.targetRequirement)
 					&& (this.getSource().equals(otherAction.getSource()))
 					&& (this.getTargetKey().equals(otherAction.getTargetKey()));
@@ -96,10 +97,15 @@ public abstract class GameAction implements Cloneable, Serializable {
 			return false;
 		}
 	}
-	
+
 	@Override
-	public int hashCode(){
-		//TODO: Fix
-		return this.getSource().hashCode() + this.getTargetKey().hashCode();
+	public int hashCode() {
+		return new HashCodeBuilder()
+				.append(targetRequirement)
+				.append(actionType)
+				.append(source)
+				.append(targetKey)
+				.append(actionSuffix)
+				.toHashCode();
 	}
 }

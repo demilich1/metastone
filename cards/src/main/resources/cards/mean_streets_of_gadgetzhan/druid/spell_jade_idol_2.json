@@ -8,6 +8,7 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "ShuffleToDeckSpell",
+		"value": 3,
 		"target": "NONE",
 		"card": "spell_jade_idol"
 	},

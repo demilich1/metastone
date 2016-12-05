@@ -9,7 +9,6 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.TurnState;
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.GameAction;
-import net.demilich.metastone.game.behaviour.PlayRandomBehaviour;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.events.GameEvent;
@@ -83,7 +82,7 @@ public class ServerGameContext extends GameContext {
 	public void networkPlay() {
 		logger.debug("Game starts: " + getPlayer1().getName() + " VS. " + getPlayer2().getName());
 		int startingPlayerId = getLogic().determineBeginner(PLAYER_1, PLAYER_2);
-		setActivePlayerIndex(getPlayer(startingPlayerId).getId());
+		setActivePlayerId(getPlayer(startingPlayerId).getId());
 		logger.debug(getActivePlayer().getName() + " begins");
 
 		getListenerMap().get(getActivePlayer()).onActivePlayer(getActivePlayer());
@@ -188,8 +187,8 @@ public class ServerGameContext extends GameContext {
 
 	@Suspendable
 	public void networkRequestAction(GameState state, int playerId, List<GameAction> actions, Handler<GameAction> callback) {
-		logger.debug("Requesting acton for playerId {}", playerId);
 		String id = RandomStringUtils.randomAscii(8);
+		logger.debug("Requesting action with callback {} for playerId {}", id, playerId);
 		requestCallbacks.put(id, callback);
 		getListenerMap().get(getPlayer(playerId)).onRequestAction(id, state, actions);
 	}
@@ -203,17 +202,20 @@ public class ServerGameContext extends GameContext {
 
 	@Suspendable
 	@SuppressWarnings("unchecked")
-	public void onActionReceived(String messageId, Player player, GameAction action) {
-		logger.debug("Accepting acton for playerId {} hashCode {}", player.getId(), player.hashCode());
-		Sync.fiberHandler((Handler<GameAction>) requestCallbacks.get(messageId)).handle(action);
+	public void onActionReceived(String messageId, GameAction action) {
+		logger.debug("Accepting action for callback {}", messageId);
+		final Handler handler = requestCallbacks.get(messageId);
 		requestCallbacks.remove(messageId);
+		Sync.fiberHandler((Handler<GameAction>) handler).handle(action);
+		logger.debug("Action executed for callback {}", messageId);
 	}
 
 	@SuppressWarnings("unchecked")
 	public void onMulliganReceived(String messageId, Player player, List<Card> discardedCards) {
 		logger.debug("Mulligan received from {}", player.getName());
-		((Handler<List<Card>>) requestCallbacks.get(messageId)).handle(discardedCards);
+		final Handler handler = requestCallbacks.get(messageId);
 		requestCallbacks.remove(messageId);
+		((Handler<List<Card>>) handler).handle(discardedCards);
 	}
 
 	public void sendGameOver(Player sender, Player winner) {

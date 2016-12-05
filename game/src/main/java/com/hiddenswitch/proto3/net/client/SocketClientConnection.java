@@ -5,6 +5,7 @@ import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import com.hiddenswitch.proto3.net.common.ClientToServerMessage;
@@ -19,10 +20,11 @@ import org.slf4j.LoggerFactory;
 public class SocketClientConnection implements ClientCommunicationReceive, ClientCommunicationSend, Runnable {
 	private final String host;
 	private final int port;
-	private BlockingQueue<ClientToServerMessage> queue = new LinkedBlockingQueue<>();
+	private BlockingQueue<ClientToServerMessage> queue = new LinkedBlockingDeque<>();
 	private RemoteUpdateListener updateListener;
 	private boolean shouldRun = true;
 	private Logger logger = LoggerFactory.getLogger(SocketClientConnection.class);
+	private boolean isGameEnded;
 
 	public SocketClientConnection() {
 		this("127.0.0.1", 11111);
@@ -38,14 +40,13 @@ public class SocketClientConnection implements ClientCommunicationReceive, Clien
 		return new SendToServer() {
 
 			@Override
-			public void sendAction(String id, Player callingPlayer, GameAction action) {
-				queue.add(new ClientToServerMessage(id, callingPlayer, action));
+			public void sendAction(String id, GameAction action) {
+				queue.add(new ClientToServerMessage(id, action));
 			}
 
 			@Override
 			public void sendMulligan(String id, Player player, List<Card> discardedCards) {
 				queue.add(new ClientToServerMessage(id, player, discardedCards));
-
 			}
 
 			@Override
@@ -104,11 +105,14 @@ public class SocketClientConnection implements ClientCommunicationReceive, Clien
 						serverInputStream = new ObjectInputStream(inputStream);
 
 						ServerToClientMessage message = (ServerToClientMessage) serverInputStream.readObject();
+						logger.debug("Client received message from server: {}", message);
 						switch (message.mt) {
 							case ON_GAME_EVENT:
 								updateListener.onGameEvent(message.event);
 								break;
 							case ON_GAME_END:
+								isGameEnded = true;
+								shouldRun = false;
 								updateListener.onGameEnd(message.winner);
 								break;
 							case SET_PLAYERS:
@@ -134,8 +138,12 @@ public class SocketClientConnection implements ClientCommunicationReceive, Clien
 								break;
 						}
 					}
+				} catch (EOFException e) {
+					logger.error("The client has been disconnected from the server.");
 				} catch (IOException e) {
-					logger.error("The client's read thread experiences an IOException.", e);
+					if (!isGameEnded) {
+						logger.error("The client's read thread experiences an IOException.", e);
+					}
 				} catch (ClassNotFoundException e) {
 					logger.error("The client attempted to deserialize a class that didn't exist.", e);
 				} finally {
@@ -143,7 +151,9 @@ public class SocketClientConnection implements ClientCommunicationReceive, Clien
 						try {
 							serverInputStream.close();
 						} catch (IOException e) {
-							logger.warn("The client could not close the server input stream.", e);
+							if (!isGameEnded) {
+								logger.warn("The client could not close the server input stream.", e);
+							}
 						}
 					}
 
@@ -152,7 +162,9 @@ public class SocketClientConnection implements ClientCommunicationReceive, Clien
 							readSocket.close();
 						}
 					} catch (IOException e) {
-						logger.warn("The client could not close its socket.", e);
+						if (!isGameEnded) {
+							logger.warn("The client could not close its socket.", e);
+						}
 					}
 				}
 			}).start();
@@ -169,12 +181,12 @@ public class SocketClientConnection implements ClientCommunicationReceive, Clien
 						objectOutputStream.writeObject(message);
 						objectOutputStream.flush();
 						// Write the header to help the server know how much data it is expecting.
-						network.write(new byte[] {1,2,-127,83});
+						network.write(new byte[]{1, 2, -127, 83});
 						int messageSize = bytes.size();
 						network.write(ByteBuffer.allocate(4).putInt(messageSize).array());
 						network.write(bytes.toByteArray());
 						network.flush();
-						logger.debug("Client with hashCode {} sent message with length {}.", hashCode(), messageSize);
+						logger.debug("Client sent message: {}", message);
 					}
 					network.close();
 				} catch (IOException e1) {

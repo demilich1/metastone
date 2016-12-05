@@ -1,12 +1,13 @@
 package com.hiddenswitch.proto3.net;
 
 import ch.qos.logback.classic.Level;
-import ch.qos.logback.classic.Logger;
 import com.hiddenswitch.proto3.net.util.Result;
 import com.hiddenswitch.proto3.net.util.TwoClients;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
+import io.vertx.core.logging.Logger;
+import io.vertx.core.logging.LoggerFactory;
 import io.vertx.ext.unit.Async;
 import io.vertx.ext.unit.TestContext;
 import io.vertx.ext.unit.junit.VertxUnitRunner;
@@ -16,7 +17,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -25,13 +25,7 @@ import java.util.List;
 
 @RunWith(VertxUnitRunner.class)
 public class GameSessionsTest extends ServiceTestBase<GameSessions> {
-	private org.slf4j.Logger logger = LoggerFactory.getLogger(GameSessionsTest.class);
-
-	@Before
-	public void setErrorLevel() {
-		Logger root = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
-		root.setLevel(Level.ERROR);
-	}
+	private Logger logger = LoggerFactory.getLogger(GameSessionsTest.class);
 
 	@Before
 	public void loadCards(TestContext context) {
@@ -44,6 +38,13 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 		async.complete();
 	}
 
+	@Before
+	public void setLoggingLevel() {
+		ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) org.slf4j.LoggerFactory
+				.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME);
+		root.setLevel(Level.INFO);
+	}
+
 	@Test
 	public void testCreateGameSession(TestContext context) throws CardParseException, IOException, URISyntaxException {
 		wrapBlocking(context, this::getAndTestTwoClients);
@@ -54,17 +55,17 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 		try {
 			twoClients = new TwoClients().invoke(this.service);
 		} catch (IOException | URISyntaxException | CardParseException e) {
-			Assert.fail(e.getMessage());
+			ServiceTestBase.getContext().fail(e.getMessage());
 		}
 		try {
 			twoClients.play();
 			float seconds = 0.0f;
-			while (seconds <= 20.0f && !twoClients.gameDecided()) {
+			while (seconds <= 40.0f && !twoClients.gameDecided()) {
 				if (twoClients.isInterrupted()) {
 					break;
 				}
-				Thread.sleep(100);
-				seconds += 0.1f;
+				Thread.sleep(1000);
+				seconds += 1.0f;
 			}
 
 			twoClients.assertGameOver();
@@ -82,7 +83,6 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 			getAndTestTwoClients();
 			getAndTestTwoClients();
 		});
-
 	}
 
 	@Test
@@ -109,26 +109,36 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 			try {
 				clients.add(new TwoClients().invoke(this.service));
 			} catch (IOException | URISyntaxException | CardParseException e) {
-				Assert.fail(e.getMessage());
+				ServiceTestBase.getContext().fail(e.getMessage());
 			}
 		}
 
-		try {
-			clients.forEach(TwoClients::play);
-			float seconds = 0.0f;
-			while (seconds <= 120.0f && !clients.stream().allMatch(TwoClients::gameDecided)) {
-				if (clients.stream().anyMatch(TwoClients::isInterrupted)) {
-					break;
-				}
-				Thread.sleep(100);
-				seconds += 0.1f;
+		clients.forEach(TwoClients::play);
+		float seconds = 0.0f;
+		while (seconds <= 600.0f && !clients.stream().allMatch(TwoClients::gameDecided)) {
+			if (clients.stream().anyMatch(TwoClients::isInterrupted)) {
+				break;
 			}
-			clients.forEach(TwoClients::assertGameOver);
-		} catch (Exception e) {
-			Assert.fail(e.getMessage());
-		} finally {
-			clients.forEach(TwoClients::dispose);
+			clients.forEach(c -> {
+				final long c1 = c.getPlayerContext1().clientDelay();
+				final long c2 = c.getPlayerContext2().clientDelay();
+				final boolean gd1 = c.getPlayerContext1().gameDecided();
+				final boolean gd2 = c.getPlayerContext2().gameDecided();
+				if ((!gd1 && c1 > 20e9) || (!gd2 && c2 > 20e9)) {
+					logger.info(String.format("Delayed game %s thread: %s", c.getGameId(), c.getPlayerContext1().isActivePlayer() ? c.getThread1().getName() : c.getThread2().getName()));
+				}
+			});
+			if (clients.stream().anyMatch(c -> c.isTimedOut((long) 40e9))) {
+				break;
+			}
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			seconds += 1.0f;
 		}
+		clients.forEach(TwoClients::assertGameOver);
 	}
 
 	@Override

@@ -18,12 +18,14 @@ public class GameState implements Serializable {
 	public final TriggerManager triggerManager;
 	public final int currentId;
 	public final TurnState turnState;
+	public final long timestamp;
 
 	public GameState(GameContext fromContext) {
 		this(fromContext, fromContext.getTurnState());
 	}
 
 	public GameState(GameContext fromContext, TurnState turnState) {
+		this.timestamp = System.nanoTime();
 		player1 = fromContext.getPlayer1();
 		player2 = fromContext.getPlayer2();
 		environment = SerializationUtils.clone(fromContext.getEnvironment());

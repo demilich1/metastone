@@ -1,0 +1,24 @@
+{
+	"name": "Smuggler's Crate",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "HUNTER",
+	"rarity": "COMMON",
+	"description": "Give a random Beast in your hand gain +2/+2.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "BuffSpell",
+		"target": "FRIENDLY_HAND",
+		"attackBonus": 2,
+		"hpBonus": 2,
+		"filter": {
+			"class": "CardFilter",
+			"cardType": "MINION",
+			"race": "BEAST"
+		},
+		"randomTarget": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZHAN",
+	"fileFormatVersion": 1
+}

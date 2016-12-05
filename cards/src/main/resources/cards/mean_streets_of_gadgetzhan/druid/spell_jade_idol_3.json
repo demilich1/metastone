@@ -10,6 +10,12 @@
 		"class": "MetaSpell",
 		"spells": [
 			{
+				"class": "ShuffleToDeckSpell",
+				"value": 3,
+				"target": "NONE",
+				"card": "spell_jade_idol"
+			},
+			{
 				"class": "CreateSummonSpell",
 				"name": "Jade Golem",
 				"attackBonus": {
@@ -35,17 +41,12 @@
 					},
 					"value2": 10
 				},
-				"spell": {
+				"spell1": {
 					"class": "ModifyAttributeSpell",
 					"target": "FRIENDLY_PLAYER",
 					"attribute": "JADE_BUFF",
 					"value": 1
 				}
-			},
-			{
-				"class": "ShuffleToDeckSpell",
-				"target": "NONE",
-				"card": "spell_jade_idol"
 			}
 		]
 	},

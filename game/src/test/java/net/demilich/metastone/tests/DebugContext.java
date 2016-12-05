@@ -13,7 +13,7 @@ public class DebugContext extends GameContext {
 
 	@Override
 	public void init() {
-		setActivePlayerIndex(getPlayer(PLAYER_1).getId());
+		setActivePlayerId(getPlayer(PLAYER_1).getId());
 		getLogic().init(getActivePlayerId(), true);
 		getLogic().init(getOpponent(getActivePlayer()).getId(), false);
 	}

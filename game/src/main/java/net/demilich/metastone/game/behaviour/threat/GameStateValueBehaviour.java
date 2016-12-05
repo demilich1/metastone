@@ -99,7 +99,7 @@ public class GameStateValueBehaviour extends Behaviour {
 	}
 
 	@Override
-	public synchronized GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
+	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
 		if (validActions.size() == 1) {
 			return validActions.get(0);
 		}

@@ -39,6 +39,7 @@ public abstract class Spell {
 		}
 	}
 
+	@Suspendable
 	private void castForPlayer(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		TargetPlayer targetPlayer = desc.getTargetPlayer();
 		if (targetPlayer == null) {

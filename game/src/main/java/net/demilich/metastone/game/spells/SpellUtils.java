@@ -6,6 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 
 import co.paralleluniverse.fibers.Suspendable;
+import io.vertx.core.Handler;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -41,18 +42,18 @@ public class SpellUtils {
 
 	public static boolean evaluateOperation(Operation operation, int actualValue, int targetValue) {
 		switch (operation) {
-		case EQUAL:
-			return actualValue == targetValue;
-		case GREATER:
-			return actualValue > targetValue;
-		case GREATER_OR_EQUAL:
-			return actualValue >= targetValue;
-		case HAS:
-			return actualValue > 0;
-		case LESS:
-			return actualValue < targetValue;
-		case LESS_OR_EQUAL:
-			return actualValue <= targetValue;
+			case EQUAL:
+				return actualValue == targetValue;
+			case GREATER:
+				return actualValue > targetValue;
+			case GREATER_OR_EQUAL:
+				return actualValue >= targetValue;
+			case HAS:
+				return actualValue > 0;
+			case LESS:
+				return actualValue < targetValue;
+			case LESS_OR_EQUAL:
+				return actualValue <= targetValue;
 		}
 		return false;
 	}
@@ -66,7 +67,7 @@ public class SpellUtils {
 		}
 		return result;
 	}
-	
+
 	public static Card getCard(GameContext context, SpellDesc spell) {
 		Card card = null;
 		String cardName = (String) spell.get(SpellArg.CARD);
@@ -95,10 +96,12 @@ public class SpellUtils {
 	}
 
 	@Suspendable
-	public static DiscoverAction getDiscover(GameContext context, Player player, SpellDesc desc, CardCollection cards) {
+	public static void getDiscoverAsync(GameContext context, Player player, SpellDesc desc, CardCollection cards, Handler<DiscoverAction> handler) {
 		List<GameAction> discoverActions = getDiscoverActionsForDiscoverSpell(desc, cards);
-		
-		return (DiscoverAction) player.getBehaviour().requestAction(context, player, discoverActions);
+
+		player.getBehaviour().requestActionAsync(context, player, discoverActions, e -> {
+			handler.handle((DiscoverAction) e);
+		});
 	}
 
 	public static List<GameAction> getDiscoverActionsForDiscoverSpell(SpellDesc desc, CardCollection cards) {
@@ -111,11 +114,28 @@ public class SpellUtils {
 			discover.setActionSuffix(card.getName());
 			discoverActions.add(discover);
 		}
+		if (discoverActions.size() == 0) {
+			return null;
+		}
 		return discoverActions;
 	}
 
 	@Suspendable
 	public static DiscoverAction getSpellDiscover(GameContext context, Player player, SpellDesc desc, List<SpellDesc> spells) {
+		List<GameAction> discoverActions = getDiscoverActionsForSpells(spells);
+
+		final boolean isAllRandom = context.getLogic().attributeExists(Attribute.ALL_RANDOM_FINAL_DESTINATION) ||
+				context.getLogic().attributeExists(Attribute.ALL_RANDOM_FINAL_DESTINATION);
+
+		if (isAllRandom) {
+			return (DiscoverAction) discoverActions.get(context.getLogic().random(discoverActions.size()));
+		}
+
+		return (DiscoverAction) player.getBehaviour().requestAction(context, player, discoverActions);
+
+	}
+
+	protected static List<GameAction> getDiscoverActionsForSpells(List<SpellDesc> spells) {
 		List<GameAction> discoverActions = new ArrayList<>();
 		for (SpellDesc spell : spells) {
 			DiscoverAction discover = DiscoverAction.createDiscover(spell);
@@ -124,8 +144,28 @@ public class SpellUtils {
 			discover.setActionSuffix((String) spell.get(SpellArg.NAME));
 			discoverActions.add(discover);
 		}
-		
-		return (DiscoverAction) player.getBehaviour().requestAction(context, player, discoverActions);
+		return discoverActions;
+	}
+
+	@Suspendable
+	public static void getSpellDiscoverAsync(GameContext context, Player player, SpellDesc desc, List<SpellDesc> spells, Handler<DiscoverAction> handler) {
+		// TODO: Adapt Kazakus to use this
+		List<GameAction> discoverActions = getDiscoverActionsForSpells(spells);
+
+		final boolean isAllRandom = context.getLogic().attributeExists(Attribute.ALL_RANDOM_FINAL_DESTINATION) ||
+				context.getLogic().attributeExists(Attribute.ALL_RANDOM_FINAL_DESTINATION);
+
+		if (isAllRandom) {
+			if (handler != null) {
+				handler.handle((DiscoverAction) discoverActions.get(context.getLogic().random(discoverActions.size())));
+			}
+		}
+
+		player.getBehaviour().requestActionAsync(context, player, discoverActions, e -> {
+			if (handler != null) {
+				handler.handle((DiscoverAction) e);
+			}
+		});
 	}
 
 	public static Card getRandomCard(CardCollection source, Predicate<Card> filter) {
@@ -135,7 +175,7 @@ public class SpellUtils {
 		}
 		return result.getRandom();
 	}
-	
+
 	public static HeroClass getRandomHeroClass() {
 		HeroClass[] values = HeroClass.values();
 		List<HeroClass> heroClasses = new ArrayList<HeroClass>();
@@ -146,7 +186,7 @@ public class SpellUtils {
 		}
 		return heroClasses.get(ThreadLocalRandom.current().nextInt(heroClasses.size()));
 	}
-	
+
 	public static HeroClass getRandomHeroClassExcept(HeroClass... heroClassesExcluded) {
 		HeroClass[] values = HeroClass.values();
 		List<HeroClass> heroClasses = new ArrayList<HeroClass>();
@@ -202,7 +242,7 @@ public class SpellUtils {
 		}
 		return count;
 	}
-	
+
 	public static boolean highlanderDeck(Player player) {
 		List<String> cards = new ArrayList<String>();
 		for (Card card : player.getDeck()) {
@@ -249,7 +289,7 @@ public class SpellUtils {
 		}
 		return count;
 	}
-	
+
 	public static int getBoardPosition(GameContext context, Player player, SpellDesc desc, Entity source) {
 		final int UNDEFINED = -1;
 		int boardPosition = desc.getInt(SpellArg.BOARD_POSITION_ABSOLUTE, UNDEFINED);
@@ -266,12 +306,12 @@ public class SpellUtils {
 			return UNDEFINED;
 		}
 		switch (relativeBoardPosition) {
-		case LEFT:
-			return sourcePosition;
-		case RIGHT:
-			return sourcePosition + 1;
-		default:
-			return UNDEFINED;
+			case LEFT:
+				return sourcePosition;
+			case RIGHT:
+				return sourcePosition + 1;
+			default:
+				return UNDEFINED;
 		}
 	}
 

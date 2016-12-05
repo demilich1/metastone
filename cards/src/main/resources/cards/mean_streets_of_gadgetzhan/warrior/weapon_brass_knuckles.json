@@ -4,7 +4,7 @@
 	"type": "WEAPON",
 	"damage": 2,
 	"durability": 3,
-	"heroClass": "HUNTER",
+	"heroClass": "WARRIOR",
 	"rarity": "EPIC",
 	"description": "After your Hero attacks, give a random minion in your hand +1/+1.",
 	"trigger": {

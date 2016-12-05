@@ -130,6 +130,7 @@ public class Matchmaker extends AbstractMap<String, QueueEntry> {
 	}
 
 
+	@SuppressWarnings({"unchecked"})
 	protected synchronized void sortAfterAdd() {
 		if (queue.size() >= 2) {
 			QueueEntry newLast = (QueueEntry) queue.get(queue.size() - 1);

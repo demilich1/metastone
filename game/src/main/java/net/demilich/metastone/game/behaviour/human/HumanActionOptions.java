@@ -15,8 +15,8 @@ public class HumanActionOptions {
 
 	public HumanActionOptions(HumanBehaviour behaviour, GameContext context, Player player, List<GameAction> validActions) {
 		this.behaviour = behaviour;
-		this.context = context;
-		this.player = player;
+		this.context = context.clone();
+		this.player = player.clone();
 		this.validActions = validActions;
 	}
 
