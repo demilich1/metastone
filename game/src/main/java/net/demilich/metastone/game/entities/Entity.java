@@ -8,6 +8,7 @@ import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.logic.CustomCloneable;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.IdFactory;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public abstract class Entity extends CustomCloneable implements Serializable {
 
@@ -108,5 +109,4 @@ public abstract class Entity extends CustomCloneable implements Serializable {
 	public void setOwner(int ownerIndex) {
 		this.ownerIndex = ownerIndex;
 	}
-
 }
