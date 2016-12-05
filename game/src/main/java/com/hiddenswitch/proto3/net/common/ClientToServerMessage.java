@@ -17,9 +17,8 @@ public class ClientToServerMessage implements Serializable {
 	private List<Card> discardedCards;
 	private String id;
 
-	public ClientToServerMessage(String id, Player player, GameAction action) {
+	public ClientToServerMessage(String id, GameAction action) {
 		this.id = id;
-		this.setCallingPlayer(player);
 		this.setAction(action);
 		setMt(MessageType.UPDATE_ACTION);
 	}
@@ -93,8 +92,10 @@ public class ClientToServerMessage implements Serializable {
 		Player player = getCallingPlayer() == null ? getPlayer1() : null;
 
 		return new ToStringBuilder(this)
+				.append("id", getId())
 				.append("type", getMt())
 				.append("gameId", getGameId())
+				.append("action", getAction())
 				.append("playerId", player == null ? 0 : player.getId())
 				.toString();
 	}

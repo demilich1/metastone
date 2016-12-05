@@ -2,13 +2,16 @@ package net.demilich.metastone.game.cards.desc;
 
 import java.io.Serializable;
 import java.util.Map;
+import java.util.Objects;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class Desc<T> implements Serializable{
+public class Desc<T> implements Serializable {
 
 	protected final Map<T, Object> arguments;
 
@@ -35,7 +38,7 @@ public class Desc<T> implements Serializable{
 	public String getString(T arg) {
 		return arguments.containsKey(arg) ? (String) get(arg) : "";
 	}
-	
+
 	public int getValue(T arg, GameContext context, Player player, Entity target, Entity host, int defaultValue) {
 		Object storedValue = arguments.get(arg);
 		if (storedValue == null) {
@@ -45,6 +48,6 @@ public class Desc<T> implements Serializable{
 			ValueProvider valueProvider = (ValueProvider) storedValue;
 			return valueProvider.getValue(context, player, target, host);
 		}
-		return (int)storedValue;
+		return (int) storedValue;
 	}
 }

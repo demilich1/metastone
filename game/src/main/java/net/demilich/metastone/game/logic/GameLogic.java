@@ -85,7 +85,7 @@ public class GameLogic implements Cloneable, Serializable {
 	private final int MAX_HISTORY_ENTRIES = 100;
 
 	@Expose(serialize = false, deserialize = false)
-	private Queue<String> debugHistory = new LinkedList<>();
+	private Queue<String> debugHistory = new ArrayDeque<>();
 
 	public GameLogic() {
 		idFactory = new IdFactory();
@@ -394,7 +394,6 @@ public class GameLogic implements Cloneable, Serializable {
 	@Override
 	public GameLogic clone() {
 		GameLogic clone = new GameLogic(getIdFactory().clone());
-		clone.debugHistory = new LinkedList<>(debugHistory);
 		return clone;
 	}
 
@@ -1042,6 +1041,7 @@ public class GameLogic implements Cloneable, Serializable {
 
 	public Player initializePlayer(int playerId) {
 		Player player = context.getPlayer(playerId);
+		player.setOwner(player.getId());
 		player.getHero().setId(getIdFactory().generateId());
 		player.getHero().setOwner(player.getId());
 		player.getHero().setMaxHp(player.getHero().getAttributeValue(Attribute.BASE_HP));
@@ -1118,9 +1118,9 @@ public class GameLogic implements Cloneable, Serializable {
 	}
 
 	private void logToDebugHistory(String message, Object... params) {
-		if (!BuildConfig.DEV_BUILD) {
-			return;
-		}
+//		if (!BuildConfig.DEV_BUILD) {
+//			return;
+//		}
 		if (debugHistory.size() == MAX_HISTORY_ENTRIES) {
 			debugHistory.poll();
 		}
@@ -1863,7 +1863,6 @@ public class GameLogic implements Cloneable, Serializable {
 	@Suspendable
 	public void equipWeaponAsync(int playerId, Weapon weapon, boolean resolveBattlecry, Handler<AsyncResult<Boolean>> result) {
 		throw new RecoverableGameException("Cannot call GameLogic::equipWeaponAsync from a non-async GameLogic instance.", context);
-
 	}
 
 	@Suspendable

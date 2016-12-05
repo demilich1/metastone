@@ -13,7 +13,7 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class DiscoverCardSpell extends Spell {
-	
+
 	public static SpellDesc create(EntityReference target, SpellDesc spell) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(DiscoverCardSpell.class);
 		arguments.put(SpellArg.TARGET, target);
@@ -45,7 +45,10 @@ public class DiscoverCardSpell extends Spell {
 		}
 		
 		if (!cards.isEmpty()) {
-			SpellUtils.castChildSpell(context, player, SpellUtils.getDiscover(context, player, desc, cards).getSpell(), source, target);
+			SpellUtils.getDiscoverAsync(context, player, desc, cards, discovered -> {
+				SpellUtils.castChildSpell(context, player, discovered.getSpell(), source, target);
+			});
+
 		}
 	}
 

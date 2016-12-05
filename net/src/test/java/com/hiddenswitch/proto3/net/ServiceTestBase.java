@@ -30,24 +30,36 @@ public abstract class ServiceTestBase<T extends Service<T>> {
 	public void setUp(TestContext context) {
 		vertx = Vertx.vertx();
 		final Async async = context.async();
-		deployServices(vertx, then -> {
-			service = then.result();
-			vertx.executeBlocking(done -> {
-//				service.withEmbeddedConfiguration();
-				done.complete();
-			}, then2 -> {
-				logger.info("Embedded configuration completed.");
-				context.assertNotNull(service);
-				async.complete();
+		if (service == null) {
+			deployServices(vertx, then -> {
+				service = then.result();
+				vertx.executeBlocking(done -> {
+					if (isEmbeddedServiceRequired()) {
+						service.withEmbeddedConfiguration();
+					}
+					done.complete();
+				}, then2 -> {
+					if (isEmbeddedServiceRequired()) {
+						logger.info("Embedded configuration completed.");
+					}
+					context.assertNotNull(service);
+					async.complete();
+				});
 			});
-		});
+		} else {
+			async.complete();
+		}
 	}
 
-	@After
-	public void tearDown(TestContext context) {
-		logger.info("Tearing down vertx.");
-		vertx.close(context.asyncAssertSuccess());
+	public boolean isEmbeddedServiceRequired() {
+		return false;
 	}
+
+//	@After
+//	public void tearDown(TestContext context) {
+//		logger.info("Tearing down vertx.");
+//		vertx.close(context.asyncAssertSuccess());
+//	}
 
 	protected void wrapBlocking(TestContext context, Runnable code) {
 		ServiceTestBase.wrappedContext = context;

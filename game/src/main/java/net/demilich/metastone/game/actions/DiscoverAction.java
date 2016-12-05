@@ -12,6 +12,7 @@ import net.demilich.metastone.game.spells.desc.condition.Condition;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class DiscoverAction extends GameAction {
 	private int groupIndex;
@@ -89,10 +90,6 @@ public class DiscoverAction extends GameAction {
 		return spell.getEntityFilter();
 	}
 
-	public int getGroupIndex() {
-		return groupIndex;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -134,5 +131,15 @@ public class DiscoverAction extends GameAction {
 	@Override
 	public String toString() {
 		return String.format("[%s '%s' %s]", getActionType(), getSpell().getSpellClass().getSimpleName(), "Test");
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder()
+				.appendSuper(super.hashCode())
+				.append(spell)
+				.append(condition)
+				.append(card)
+				.toHashCode();
 	}
 }

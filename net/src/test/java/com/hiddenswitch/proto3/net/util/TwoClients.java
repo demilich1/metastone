@@ -1,6 +1,7 @@
 package com.hiddenswitch.proto3.net.util;
 
 import com.hiddenswitch.proto3.net.GameSessions;
+import com.hiddenswitch.proto3.net.Service;
 import com.hiddenswitch.proto3.net.ServiceTestBase;
 import com.hiddenswitch.proto3.net.client.RemoteGameContext;
 import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
@@ -21,6 +22,9 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * Created by bberman on 11/18/16.
@@ -128,20 +132,31 @@ public class TwoClients {
 
 	public void assertGameOver() {
 		List<Throwable> exceptions = getServerGameContext().getExceptions();
-		if (exceptions.size() > 0) {
-			for (Throwable t : exceptions) {
-				ServiceTestBase.getContext().fail(t.getMessage());
-			}
-		}
-		if (!gameDecided()) {
+		if (!gameDecided()
+				|| isTimedOut()
+				|| exceptions.size() > 0) {
 			// Print some diagnostic information
-			logger.error("A match was not decided in this test by the deadline. Game information:");
-			logger.error(getServerGameContext().toLongString());
+			log("A match was not decided in this test by the deadline. Game information:");
 		} else {
 			logger.info("TwoClients match complete.");
 		}
 		ServiceTestBase.getContext().assertTrue(gameDecided());
+		ServiceTestBase.getContext().assertFalse(isTimedOut());
+		ServiceTestBase.getContext().assertTrue(exceptions.size() == 0);
 		ServiceTestBase.getContext().assertTrue(playerContext1.getWinningPlayerId() == playerContext2.getWinningPlayerId());
+		this.dispose();
+	}
+
+	public void log(String message) {
+		logger.error(message);
+		final ServerGameContext serverGameContext = getServerGameContext();
+		if (serverGameContext == null) {
+			logger.error("Server game context is null?");
+		} else {
+			logger.error(serverGameContext.toLongString());
+			logger.error("Panic Dump:");
+			serverGameContext.getLogic().panicDump();
+		}
 	}
 
 	public void dispose() {
@@ -149,5 +164,17 @@ public class TwoClients {
 		thread2.interrupt();
 		playerContext1.dispose();
 		playerContext2.dispose();
+	}
+
+	public boolean isTimedOut() {
+		return !gameDecided() && playerContext1.isTimedOut() && playerContext2.isTimedOut();
+	}
+
+	public boolean isTimedOut(long time) {
+		return !gameDecided() && playerContext1.isTimedOut(time) && playerContext2.isTimedOut(time);
+	}
+
+	public String getGameId() {
+		return gameId;
 	}
 }

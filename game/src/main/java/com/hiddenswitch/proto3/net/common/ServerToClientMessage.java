@@ -8,6 +8,7 @@ import net.demilich.metastone.game.TurnState;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.events.GameEvent;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class ServerToClientMessage implements Serializable {
 	public MessageType mt;
@@ -23,6 +24,16 @@ public class ServerToClientMessage implements Serializable {
 	public List<Card> startingCards;
 	public String id;
 
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append("mt", mt)
+				.append("event", event)
+				.append("turnNumber", turnNumber)
+				.append("turnState", turnState)
+				.append("actions", actions)
+				.append("id", id)
+				.toString();
+	}
 
 	public ServerToClientMessage(GameEvent event) {
 		this.mt = MessageType.ON_GAME_EVENT;

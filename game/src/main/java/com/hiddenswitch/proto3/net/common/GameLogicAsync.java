@@ -1,10 +1,9 @@
 package com.hiddenswitch.proto3.net.common;
 
-import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.fibers.Suspendable;
+import com.hiddenswitch.proto3.net.util.LoggerUtils;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
-import io.vertx.core.VertxException;
 import io.vertx.ext.sync.Sync;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.BattlecryAction;
@@ -146,7 +145,13 @@ public class GameLogicAsync extends GameLogic {
 			return super.summon(playerId, minion, source, index, false);
 		}
 
-		Boolean summonResult = Sync.awaitResult(new SummonResult2(playerId, minion, source, index));
+
+		Boolean summonResult = false;
+		try {
+			summonResult = Sync.awaitResult(done -> summonAsync(playerId, minion, source, index, true, done));
+		} catch (Throwable e) {
+			LoggerUtils.log(this, context, e);
+		}
 
 		logger.debug("AsyncDebug {} successfully called async summon.", this.context.toString());
 		return summonResult;
@@ -223,26 +228,4 @@ public class GameLogicAsync extends GameLogic {
 		}
 	}
 
-	private class SummonResult2 implements Consumer<Handler<AsyncResult<Boolean>>> {
-		private final int playerId;
-		private final Minion minion;
-		private final Card source;
-		private final int index;
-
-		public SummonResult2(int playerId, Minion minion, Card source, int index) {
-			this.playerId = playerId;
-			this.minion = minion;
-			this.source = source;
-			this.index = index;
-		}
-
-		@Override
-		@Suspendable
-		public void accept(Handler<AsyncResult<Boolean>> done) {
-			if (done == null) {
-				logger.error("A handler was null!");
-			}
-			GameLogicAsync.this.summonAsync(playerId, minion, source, index, true, done);
-		}
-	}
 }

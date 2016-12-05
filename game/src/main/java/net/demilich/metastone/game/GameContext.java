@@ -23,6 +23,7 @@ import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.IdFactory;
 import net.demilich.metastone.utils.IDisposable;
 import org.apache.commons.lang3.SerializationUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,8 +44,8 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 	private TriggerManager triggerManager = new TriggerManager();
 	private HashMap<Environment, Object> environment = new HashMap<>();
 	private List<CardCostModifier> cardCostModifiers = new ArrayList<>();
-	private transient final List<Throwable> exceptions = new ArrayList<>();
-	private int activePlayerIndex = -1;
+	private final List<Throwable> exceptions = new ArrayList<>();
+	private int activePlayerId = -1;
 	private Player winner;
 	private MatchResult result;
 	private TurnState turnState = TurnState.TURN_ENDED;
@@ -98,7 +99,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		GameContext clone = new GameContext(player1Clone, player2Clone, logicClone, getDeckFormat());
 		clone.setTempCards(getTempCards().clone());
 		clone.setTriggerManager(SerializationUtils.clone(getTriggerManager()));
-		clone.setActivePlayerIndex(activePlayerIndex);
+		clone.setActivePlayerId(activePlayerId);
 		clone.setTurn(getTurn());
 		clone.setActionsThisTurn(getActionsThisTurn());
 		clone.setResult(getResult());
@@ -151,7 +152,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 
 	public void endTurn() {
 		getLogic().endTurn(getActivePlayerId());
-		setActivePlayerIndex(getActivePlayerId() == PLAYER_1 ? PLAYER_2 : PLAYER_1);
+		setActivePlayerId(getActivePlayerId() == PLAYER_1 ? PLAYER_2 : PLAYER_1);
 		onGameStateChanged();
 		setTurnState(TurnState.TURN_ENDED);
 	}
@@ -189,7 +190,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 	}
 
 	public int getActivePlayerId() {
-		return activePlayerIndex;
+		return activePlayerId;
 	}
 
 	public List<Actor> getAdjacentMinions(Player player, EntityReference minionReference) {
@@ -335,11 +336,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		return getPlayers().get(index);
 	}
 
-	public int playerCount() {
-		return getPlayers().size();
-	}
-
-	public boolean hasPlayer(int id) {
+	public synchronized boolean hasPlayer(int id) {
 		return id >= 0 && players != null && players.length > id && players[id] != null;
 	}
 
@@ -352,6 +349,9 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 	}
 
 	public synchronized List<Player> getPlayers() {
+		if (players == null) {
+			return Collections.unmodifiableList(new ArrayList<>());
+		}
 		return Collections.unmodifiableList(Arrays.asList(players));
 	}
 
@@ -421,7 +421,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 
 	public void init() {
 		int startingPlayerId = getLogic().determineBeginner(PLAYER_1, PLAYER_2);
-		setActivePlayerIndex(getPlayer(startingPlayerId).getId());
+		setActivePlayerId(getPlayer(startingPlayerId).getId());
 		logger.debug(getActivePlayer().getName() + " begins");
 		getLogic().init(getActivePlayerId(), true);
 		getLogic().init(getOpponent(getActivePlayer()).getId(), false);
@@ -664,6 +664,13 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		builder.append("Result: " + getResult() + "\n");
 		builder.append("Winner: " + (getWinner() == null ? "tbd" : getWinner().getName()));
 
+		builder.append("\nExceptions: \n");
+		getExceptions().forEach(t -> {
+			builder.append(t.getMessage() + "\n");
+			builder.append(ExceptionUtils.getStackTrace(t));
+			builder.append("\n");
+		});
+
 		return builder.toString();
 	}
 
@@ -679,8 +686,8 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		this.players[index] = player;
 	}
 
-	public void setActivePlayerIndex(int id) {
-		activePlayerIndex = id;
+	public void setActivePlayerId(int id) {
+		activePlayerId = id;
 	}
 
 	public TargetLogic getTargetLogic() {

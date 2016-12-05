@@ -12,7 +12,7 @@ public interface ServerListener {
 	void onPlayerConnected(Player player);
 
 	@Suspendable
-	void onActionReceived(String id, Player callingPlayer, GameAction action);
+	void onActionReceived(String id, GameAction action);
 	
 	void onMulliganReceived(String id, Player player, List<Card> discardedCards);
 }

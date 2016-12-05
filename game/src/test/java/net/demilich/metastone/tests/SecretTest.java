@@ -30,7 +30,7 @@ public class SecretTest extends TestBase {
 		playCard(context, mage, new TestSecretCard(SECRET_DAMAGE));
 		playCard(context, warrior, new TestMinionCard(2, 3));
 
-		context.setActivePlayerIndex(warrior.getId());
+		context.setActivePlayerId(warrior.getId());
 		Actor minion = getSingleMinion(warrior.getMinions());
 		attack(context, warrior, minion, mage.getHero());
 		Assert.assertEquals(mage.getHero().getHp(), mage.getHero().getMaxHp() - minion.getAttack());
@@ -65,7 +65,7 @@ public class SecretTest extends TestBase {
 			GameAction spellAttackAction = testSpellCard.play();
 			spellAttackAction.setTarget(minion);
 
-			context.setActivePlayerIndex(warrior.getId());
+			context.setActivePlayerId(warrior.getId());
 			context.getLogic().performGameAction(warrior.getId(), spellAttackAction);
 
 			Assert.assertEquals(minion.getHp(), fullHp);
