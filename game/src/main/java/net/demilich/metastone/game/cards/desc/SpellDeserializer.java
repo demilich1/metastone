@@ -40,6 +40,7 @@ public class SpellDeserializer implements JsonDeserializer<SpellDesc> {
 		parseArgument(SpellArg.CARD_COST_MODIFIER, jsonData, spellArgs, ParseValueType.CARD_COST_MODIFIER);
 		parseArgument(SpellArg.CARD_DESC_TYPE, jsonData, spellArgs, ParseValueType.CARD_DESC_TYPE);
 		parseArgument(SpellArg.CARD_FILTER, jsonData, spellArgs, ParseValueType.ENTITY_FILTER);
+		parseArgument(SpellArg.CARD_FILTERS, jsonData, spellArgs, ParseValueType.ENTITY_FILTER_ARRAY);
 		parseArgument(SpellArg.CARD_LOCATION, jsonData, spellArgs, ParseValueType.CARD_LOCATION);
 		parseArgument(SpellArg.CARD_SOURCE, jsonData, spellArgs, ParseValueType.CARD_SOURCE);
 		parseArgument(SpellArg.CARD_TYPE, jsonData, spellArgs, ParseValueType.CARD_TYPE);

@@ -20,14 +20,20 @@
 				"class": "ReceiveCardSpell",
 				"targetPlayer": "SELF"
 			},
-			"cardFilter": {
-				"class": "CardFilter",
-				"heroClasses": [
-					"MAGE",
-					"PRIEST",
-					"WARLOCK"
-				]
-			}
+			"cardFilters": [
+				{
+					"class": "CardFilter",
+					"heroClass": "MAGE"
+				},
+				{
+					"class": "CardFilter",
+					"heroClass": "PRIEST"
+				},
+				{
+					"class": "CardFilter",
+					"heroClass": "WARLOCK"
+				}
+			]
 		}
 	},
 	"attributes": {

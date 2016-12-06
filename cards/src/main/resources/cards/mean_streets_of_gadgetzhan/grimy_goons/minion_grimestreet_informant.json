@@ -20,14 +20,20 @@
 				"class": "ReceiveCardSpell",
 				"targetPlayer": "SELF"
 			},
-			"cardFilter": {
-				"class": "CardFilter",
-				"heroClasses": [
-					"HUNTER",
-					"PALADIN",
-					"WARRIOR"
-				]
-			}
+			"cardFilters": [
+				{
+					"class": "CardFilter",
+					"heroClass": "HUNTER"
+				},
+				{
+					"class": "CardFilter",
+					"heroClass": "PALADIN"
+				},
+				{
+					"class": "CardFilter",
+					"heroClass": "WARRIOR"
+				}
+			]
 		}
 	},
 	"attributes": {

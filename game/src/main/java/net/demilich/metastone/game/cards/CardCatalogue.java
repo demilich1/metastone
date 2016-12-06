@@ -85,19 +85,11 @@ public class CardCatalogue {
 		return query(deckFormat, (CardType) null, (Rarity) null, heroClass, (Attribute) null);
 	}
 
-	public static CardCollection query(DeckFormat deckFormat, HeroClass heroClass, HeroClass actualHeroClass) {
-		return query(deckFormat, (CardType) null, (Rarity) null, heroClass, (Attribute) null, actualHeroClass);
-	}
-
 	public static CardCollection query(DeckFormat deckFormat, CardType cardType, Rarity rarity, HeroClass heroClass) {
 		return query(deckFormat, cardType, rarity, heroClass, (Attribute) null);
 	}
 
 	public static CardCollection query(DeckFormat deckFormat, CardType cardType, Rarity rarity, HeroClass heroClass, Attribute tag) {
-		return query(deckFormat, cardType, rarity, heroClass, tag, (HeroClass) null);
-	}
-
-	public static CardCollection query(DeckFormat deckFormat, CardType cardType, Rarity rarity, HeroClass heroClass, Attribute tag, HeroClass actualHeroClass) {
 		CardCollection result = new CardCollection();
 		for (Card card : cards) {
 			if (!deckFormat.isInFormat(card)) {
@@ -116,14 +108,8 @@ public class CardCatalogue {
 			if (rarity != null && !card.getRarity().isRarity(rarity)) {
 				continue;
 			}
-			if (actualHeroClass != null && card.getHeroClasses() != null) {
-				if (heroClass != null && (card.getHeroClass() != heroClass || !card.hasHeroClass(actualHeroClass))) {
-					continue;
-				}
-			} else {
-				if (heroClass != null && card.getHeroClass() != heroClass) {
-					continue;
-				}
+			if (heroClass != null && !card.hasHeroClass(heroClass)) {
+				continue;
 			}
 			if (tag != null && !card.hasAttribute(tag)) {
 				continue;

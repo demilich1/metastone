@@ -20,14 +20,20 @@
 				"class": "ReceiveCardSpell",
 				"targetPlayer": "SELF"
 			},
-			"cardFilter": {
-				"class": "CardFilter",
-				"heroClasses": [
-					"DRUID",
-					"ROGUE",
-					"SHAMAN"
-				]
-			}
+			"cardFilters": [
+				{
+					"class": "CardFilter",
+					"heroClass": "DRUID"
+				},
+				{
+					"class": "CardFilter",
+					"heroClass": "ROGUE"
+				},
+				{
+					"class": "CardFilter",
+					"heroClass": "SHAMAN"
+				}
+			]
 		}
 	},
 	"attributes": {
