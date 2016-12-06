@@ -1,9 +1,9 @@
 {
 	"name": "Kabal Demon",
-	"baseManaCost": 8,
+	"baseManaCost": 2,
 	"type": "MINION",
-	"baseAttack": 8,
-	"baseHp": 8,
+	"baseAttack": 2,
+	"baseHp": 2,
 	"heroClass": "ANY",
 	"rarity": "FREE",
 	"race": "DEMON",
