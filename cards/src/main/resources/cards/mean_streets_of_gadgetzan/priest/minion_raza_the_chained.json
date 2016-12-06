@@ -1,0 +1,32 @@
+{
+	"name": "Raza the Chained",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 5,
+	"heroClass": "PRIEST",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: If your deck has no duplicates, your Hero Power costs (0) this game.",
+	"battlecry": {
+		"spell": {
+			"class": "CardCostModifierSpell",
+			"target": "FRIENDLY_PLAYER",
+			"cardCostModifier": {
+				"class": "CardCostModifier",
+				"cardType": "HERO_POWER",
+				"targetPlayer": "SELF",
+				"operation": "SET",
+				"value": 0
+			}
+		},
+		"condition": {
+			"class": "HighlanderDeckCondition"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}
