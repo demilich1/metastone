@@ -26,6 +26,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
+import static net.demilich.metastone.game.GameContext.PLAYER_1;
+import static net.demilich.metastone.game.GameContext.PLAYER_2;
+
 /**
  * Created by bberman on 11/18/16.
  */
@@ -37,6 +40,10 @@ public class TwoClients {
 	private String gameId;
 	private GameSessions service;
 	private Logger logger = LoggerFactory.getLogger(TwoClients.class);
+	private PregamePlayerConfiguration pregame1;
+	private PregamePlayerConfiguration pregame2;
+	private ClientConnectionConfiguration configurationForPlayer1;
+	private ClientConnectionConfiguration configurationForPlayer2;
 
 	public ServerGameContext getServerGameContext() {
 		return service.getGameContext(gameId);
@@ -65,10 +72,8 @@ public class TwoClients {
 		CreateGameSessionRequest request = new CreateGameSessionRequest();
 		AIPlayer player1 = new AIPlayer();
 		AIPlayer player2 = new AIPlayer();
-		PregamePlayerConfiguration pregame1 = new PregamePlayerConfiguration(player1.getConfiguredDeck(), "Player 1");
-		pregame1.setPlayer(player1);
-		PregamePlayerConfiguration pregame2 = new PregamePlayerConfiguration(player2.getConfiguredDeck(), "Player 2");
-		pregame2.setPlayer(player2);
+		pregame1 = new PregamePlayerConfiguration(player1.getConfiguredDeck(), "Player 1").withPlayer(player1);
+		pregame2 = new PregamePlayerConfiguration(player2.getConfiguredDeck(), "Player 2").withPlayer(player2);
 
 		request.setPregame1(pregame1);
 		request.setPregame2(pregame2);
@@ -77,12 +82,10 @@ public class TwoClients {
 		CreateGameSessionResponse response = service.createGameSession(request);
 		this.gameId = response.getGameId();
 		// Manually override the player in the configurations
-		playerContext1 = createRemoteGameContext(response.getConfigurationForPlayer1());
-		playerContext2 = createRemoteGameContext(response.getConfigurationForPlayer2());
-		playerContext1.ignoreEventOverride = true;
-		playerContext2.ignoreEventOverride = true;
-		thread1 = new Thread(playerContext1::play);
-		thread2 = new Thread(playerContext2::play);
+		configurationForPlayer1 = response.getConfigurationForPlayer1();
+		configurationForPlayer2 = response.getConfigurationForPlayer2();
+		connect(PLAYER_1);
+		connect(PLAYER_2);
 		return this;
 	}
 
@@ -98,13 +101,31 @@ public class TwoClients {
 		player2.setId(firstMessage2.getPlayer1().getId());
 		firstMessage1.setPlayer1(player1);
 		firstMessage2.setPlayer1(player2);
-		playerContext1 = createRemoteGameContext(response1.getConnection());
-		playerContext2 = createRemoteGameContext(response2.getConnection());
-		playerContext1.ignoreEventOverride = true;
-		playerContext2.ignoreEventOverride = true;
-		thread1 = new Thread(playerContext1::play);
-		thread2 = new Thread(playerContext2::play);
+		configurationForPlayer1 = response1.getConnection();
+		configurationForPlayer2 = response2.getConnection();
+		connect(PLAYER_1);
+		connect(PLAYER_2);
 		return this;
+	}
+
+	public void connect(int playerId) {
+		if (playerId == PLAYER_1) {
+			playerContext1 = createRemoteGameContext(configurationForPlayer1);
+			thread1 = new Thread(playerContext1::play);
+		} else {
+			playerContext2 = createRemoteGameContext(configurationForPlayer2);
+			thread2 = new Thread(playerContext2::play);
+		}
+	}
+
+	public void disconnect(int playerId) {
+		if (playerId == PLAYER_1) {
+			thread1.interrupt();
+			playerContext1.dispose();
+		} else {
+			thread2.interrupt();
+			playerContext2.dispose();
+		}
 	}
 
 	private RemoteGameContext createRemoteGameContext(ClientConnectionConfiguration configuration) {
@@ -114,12 +135,20 @@ public class TwoClients {
 			e.printStackTrace();
 		}
 
-		return new RemoteGameContext(configuration);
+		return new RemoteGameContext(configuration).withIgnoreEventOverride(true);
 	}
 
 	public void play() {
-		thread1.start();
-		thread2.start();
+		play(PLAYER_1);
+		play(PLAYER_2);
+	}
+
+	public void play(int playerId) {
+		if (playerId == PLAYER_1) {
+			thread1.start();
+		} else {
+			thread2.start();
+		}
 	}
 
 	public boolean isInterrupted() {
@@ -160,10 +189,8 @@ public class TwoClients {
 	}
 
 	public void dispose() {
-		thread1.interrupt();
-		thread2.interrupt();
-		playerContext1.dispose();
-		playerContext2.dispose();
+		disconnect(PLAYER_1);
+		disconnect(PLAYER_2);
 	}
 
 	public boolean isTimedOut() {

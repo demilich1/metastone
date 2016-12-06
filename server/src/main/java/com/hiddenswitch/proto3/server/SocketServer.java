@@ -9,7 +9,6 @@ import io.vertx.core.net.NetServer;
 import io.vertx.core.net.NetSocket;
 import io.vertx.ext.sync.Sync;
 import io.vertx.ext.sync.SyncVerticle;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -80,7 +79,7 @@ public class SocketServer extends SyncVerticle {
 		}
 
 		try {
-			message = deserializeMessage(incomingMessage);
+			message = Serialization.deserialize(incomingMessage.getBufferWithoutHeader().getBytes());
 		} catch (IOException | ClassNotFoundException e) {
 			logger.error("Deserializing the message failed!", e);
 		} catch (Exception e) {
@@ -105,19 +104,17 @@ public class SocketServer extends SyncVerticle {
 		switch (message.getMt()) {
 			case FIRST_MESSAGE:
 				logger.debug("First message received from {}", message.getPlayer1().toString());
-				SocketClientReceiver client = new SocketClientReceiver(socket);
-				if (session.getClient1() == null) {
-					session.setClient1(client);
-				} else {
-					session.setClient2(client);
-				}
-
+				ServerClientConnection client = new ServerClientConnection(socket);
 				gameForSocket.put(socket, session);
-
-				logger.debug("Calling onPlayerConnected for {}, {}", toString(), message.getPlayer1().toString());
-				session.onPlayerConnected(message.getPlayer1());
+				// Is this a reconnect?
+				if (session.areBothPlayersJoined()) {
+					// Replace the client
+					session.onPlayerReconnected(message.getPlayer1(), client);
+				} else {
+					logger.debug("Calling onPlayerConnected for {}, {}", toString(), message.getPlayer1().toString());
+					session.onPlayerConnected(message.getPlayer1(), client);
+				}
 				break;
-
 			case UPDATE_ACTION:
 				logger.debug("Server received message with ID {} action {}", message.getId(), message.getAction());
 				session.onActionReceived(message.getId(), message.getAction());
@@ -131,12 +128,6 @@ public class SocketServer extends SyncVerticle {
 		if (remainder != null) {
 			receiveData(socket, remainder);
 		}
-	}
-
-	private ClientToServerMessage deserializeMessage(IncomingMessage incomingMessage) throws IOException, ClassNotFoundException {
-		ClientToServerMessage message = null;
-		message = Serialization.deserialize(incomingMessage.getBufferWithoutHeader().getBytes());
-		return message;
 	}
 
 	public SocketServer() {

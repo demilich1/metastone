@@ -1,6 +1,7 @@
 package com.hiddenswitch.proto3.net;
 
 import ch.qos.logback.classic.Level;
+import co.paralleluniverse.strands.Strand;
 import com.hiddenswitch.proto3.net.util.Result;
 import com.hiddenswitch.proto3.net.util.TwoClients;
 import io.vertx.core.AsyncResult;
@@ -22,6 +23,9 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.demilich.metastone.game.GameContext.PLAYER_1;
+import static net.demilich.metastone.game.GameContext.PLAYER_2;
 
 @RunWith(VertxUnitRunner.class)
 public class GameSessionsTest extends ServiceTestBase<GameSessions> {
@@ -98,6 +102,40 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 			for (int i = 0; i < 10; i++) {
 				simultaneousSessions(10);
 				logger.info("Iteration completed : " + (i + 1));
+			}
+		});
+	}
+
+	@Test
+	public void testReconnects(TestContext context) throws Exception {
+		wrapBlocking(context, () -> {
+			TwoClients twoClients = null;
+			try {
+				twoClients = new TwoClients().invoke(this.service);
+				twoClients.play();
+				Strand.sleep(100);
+				twoClients.disconnect(PLAYER_2);
+				Strand.sleep(1000);
+				// Try to reconnect
+				twoClients.connect(PLAYER_2);
+				twoClients.play(PLAYER_2);
+
+				float seconds = 0.0f;
+				while (seconds <= 40.0f && !twoClients.gameDecided()) {
+					if (twoClients.isInterrupted()) {
+						break;
+					}
+					Strand.sleep(1000);
+					seconds += 1.0f;
+				}
+
+				twoClients.assertGameOver();
+			} catch (Exception e) {
+				Assert.fail(e.getMessage());
+			} finally {
+				if (twoClients != null) {
+					twoClients.dispose();
+				}
 			}
 		});
 	}

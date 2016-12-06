@@ -20,11 +20,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ServerGameContext extends GameContext {
 	private final String gameId;
 	private Map<Player, RemoteUpdateListener> listenerMap = new HashMap<>();
-	private final Map<String, Handler> requestCallbacks = new HashMap<>();
+	private final Map<CallbackId, GameplayRequest> requestCallbacks = new HashMap<>();
+	private boolean isRunning = true;
 
 	public ServerGameContext(Player player1, Player player2, DeckFormat deckFormat, String gameId) {
 		// The player's IDs are set here
@@ -85,20 +87,24 @@ public class ServerGameContext extends GameContext {
 		setActivePlayerId(getPlayer(startingPlayerId).getId());
 		logger.debug(getActivePlayer().getName() + " begins");
 
-		getListenerMap().get(getActivePlayer()).onActivePlayer(getActivePlayer());
-		getListenerMap().get(getNonActivePlayer()).onActivePlayer(getActivePlayer());
+		updateActivePlayers();
 
 		// Make sure the players are initialized before sending the original player updates.
 		getNetworkGameLogic().initializePlayer(IdFactory.PLAYER_1);
 		getNetworkGameLogic().initializePlayer(IdFactory.PLAYER_2);
 
-		getListenerMap().get(getPlayer1()).setPlayers(getPlayer1(), getPlayer2());
-		getListenerMap().get(getPlayer2()).setPlayers(getPlayer2(), getPlayer1());
+		setLocalPlayer1();
+		setLocalPlayer2();
 
 		getNetworkGameLogic().initAsync(getActivePlayerId(), true, _ap -> {
 			getNetworkGameLogic().initAsync(getOpponent(getActivePlayer()).getId(), false, _op -> {
 				Recursive<Runnable> playTurnLoop = new Recursive<>();
 				playTurnLoop.func = () -> {
+					if (!isRunning) {
+						endGame();
+						return;
+					}
+
 					// Check if the game has been decided right at the end of the player's turn
 					if (gameDecided()) {
 						endGame();
@@ -109,6 +115,10 @@ public class ServerGameContext extends GameContext {
 					Recursive<Handler<Boolean>> actionLoop = new Recursive<>();
 
 					actionLoop.func = hasMoreActions -> {
+						if (!isRunning) {
+							endGame();
+							return;
+						}
 						if (hasMoreActions) {
 							networkedPlayTurn(actionLoop.func);
 						} else {
@@ -128,6 +138,19 @@ public class ServerGameContext extends GameContext {
 				playTurnLoop.func.run();
 			});
 		});
+	}
+
+	protected void setLocalPlayer2() {
+		getListenerMap().get(getPlayer2()).setPlayers(getPlayer2(), getPlayer1());
+	}
+
+	protected void setLocalPlayer1() {
+		getListenerMap().get(getPlayer1()).setPlayers(getPlayer1(), getPlayer2());
+	}
+
+	protected void updateActivePlayers() {
+		getListenerMap().get(getActivePlayer()).onActivePlayer(getActivePlayer());
+		getListenerMap().get(getNonActivePlayer()).onActivePlayer(getActivePlayer());
 	}
 
 	@Override
@@ -189,14 +212,14 @@ public class ServerGameContext extends GameContext {
 	public void networkRequestAction(GameState state, int playerId, List<GameAction> actions, Handler<GameAction> callback) {
 		String id = RandomStringUtils.randomAscii(8);
 		logger.debug("Requesting action with callback {} for playerId {}", id, playerId);
-		requestCallbacks.put(id, callback);
+		requestCallbacks.put(new CallbackId(id, playerId), new GameplayRequest(GameplayRequestType.ACTION, state, actions, callback));
 		getListenerMap().get(getPlayer(playerId)).onRequestAction(id, state, actions);
 	}
 
 	public void networkRequestMulligan(Player player, List<Card> starterCards, Handler<List<Card>> callback) {
 		logger.debug("Requesting mulligan for playerId {} hashCode {}", player.getId(), player.hashCode());
 		String id = RandomStringUtils.randomAscii(8);
-		requestCallbacks.put(id, callback);
+		requestCallbacks.put(new CallbackId(id, player.getId()), new GameplayRequest(GameplayRequestType.MULLIGAN, starterCards, callback));
 		getListenerMap().get(player).onMulligan(id, player, starterCards);
 	}
 
@@ -204,8 +227,8 @@ public class ServerGameContext extends GameContext {
 	@SuppressWarnings("unchecked")
 	public void onActionReceived(String messageId, GameAction action) {
 		logger.debug("Accepting action for callback {}", messageId);
-		final Handler handler = requestCallbacks.get(messageId);
-		requestCallbacks.remove(messageId);
+		final Handler handler = requestCallbacks.get(CallbackId.of(messageId)).handler;
+		requestCallbacks.remove(CallbackId.of(messageId));
 		Sync.fiberHandler((Handler<GameAction>) handler).handle(action);
 		logger.debug("Action executed for callback {}", messageId);
 	}
@@ -213,8 +236,8 @@ public class ServerGameContext extends GameContext {
 	@SuppressWarnings("unchecked")
 	public void onMulliganReceived(String messageId, Player player, List<Card> discardedCards) {
 		logger.debug("Mulligan received from {}", player.getName());
-		final Handler handler = requestCallbacks.get(messageId);
-		requestCallbacks.remove(messageId);
+		final Handler handler = requestCallbacks.get(CallbackId.of(messageId)).handler;
+		requestCallbacks.remove(CallbackId.of(messageId));
 		((Handler<List<Card>>) handler).handle(discardedCards);
 	}
 
@@ -241,5 +264,51 @@ public class ServerGameContext extends GameContext {
 
 	public Map<Player, RemoteUpdateListener> getListenerMap() {
 		return Collections.unmodifiableMap(listenerMap);
+	}
+
+	@Suspendable
+	@SuppressWarnings("unchecked")
+	public void onPlayerReconnected(Player player, RemoteUpdateListener client) {
+		// Update the client
+		setUpdateListener(player, client);
+
+		// Don't replace the player object! We don't need it
+		// Resynchronize the game states
+		if (player.getId() == PLAYER_1) {
+			setLocalPlayer1();
+		} else if (player.getId() == PLAYER_2) {
+			setLocalPlayer2();
+		}
+
+		updateActivePlayers();
+		onGameStateChanged();
+		retryRequests(player);
+	}
+
+	@Suspendable
+	@SuppressWarnings("unchecked")
+	protected void retryRequests(Player player) {
+		List<Map.Entry<CallbackId, GameplayRequest>> requests = requestCallbacks.entrySet().stream().filter(e -> e.getKey().playerId == player.getId()).collect(Collectors.toList());
+		if (requests.size() > 0) {
+			requestCallbacks.entrySet().removeIf(e -> e.getKey().playerId == player.getId());
+			requests.forEach(e -> {
+				final GameplayRequest request = e.getValue();
+				switch (request.type) {
+					case ACTION:
+						networkRequestAction(request.state, e.getKey().playerId, request.actions, request.handler);
+						break;
+					case MULLIGAN:
+						networkRequestMulligan(getPlayer(e.getKey().playerId), request.starterCards, request.handler);
+						break;
+					default:
+						logger.error("Unknown gameplay request was pending.");
+						break;
+				}
+			});
+		}
+	}
+
+	public void kill() {
+		isRunning = false;
 	}
 }

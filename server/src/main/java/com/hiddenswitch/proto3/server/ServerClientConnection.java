@@ -25,10 +25,10 @@ import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-class SocketClientReceiver implements RemoteUpdateListener {
+public class ServerClientConnection implements RemoteUpdateListener {
 	private NetSocket privateSocket;
 
-	SocketClientReceiver(NetSocket socket) {
+	ServerClientConnection(NetSocket socket) {
 		this.setPrivateSocket(socket);
 	}
 
@@ -59,6 +59,10 @@ class SocketClientReceiver implements RemoteUpdateListener {
 		socket.write(out.getBuffer().setInt(4, messageSize));
 	}
 
+	public void close() {
+		privateSocket.close();
+	}
+
 	@Override
 	public void onGameEvent(GameEvent event) {
 		sendMessage(new ServerToClientMessage(event));
@@ -83,7 +87,6 @@ class SocketClientReceiver implements RemoteUpdateListener {
 	@Override
 	public void onTurnEnd(Player activePlayer, int turnNumber, TurnState turnState) {
 		sendMessage(new ServerToClientMessage(activePlayer, turnNumber, turnState));
-
 	}
 
 	@Override

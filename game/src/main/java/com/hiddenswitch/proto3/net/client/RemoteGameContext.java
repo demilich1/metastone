@@ -451,4 +451,9 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	public boolean isActivePlayer() {
 		return getActivePlayerId() == getLocalPlayerId();
 	}
+
+	public RemoteGameContext withIgnoreEventOverride(boolean b) {
+		ignoreEventOverride = b;
+		return this;
+	}
 }
