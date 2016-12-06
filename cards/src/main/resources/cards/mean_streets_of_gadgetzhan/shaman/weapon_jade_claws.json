@@ -4,7 +4,7 @@
 	"type": "WEAPON",
 	"damage": 2,
 	"durability": 2,
-	"heroClass": "WARRIOR",
+	"heroClass": "SHAMAN",
 	"rarity": "RARE",
 	"description": "Battlecry: Summon a Jade Golem. Overload: (1)",
 	"battlecry": {
@@ -35,7 +35,7 @@
 				},
 				"value2": 10
 			},
-			"spell1": {
+			"spell": {
 				"class": "ModifyAttributeSpell",
 				"target": "FRIENDLY_PLAYER",
 				"attribute": "JADE_BUFF",
