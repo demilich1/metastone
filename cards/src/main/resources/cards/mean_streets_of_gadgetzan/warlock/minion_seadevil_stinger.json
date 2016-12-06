@@ -1,0 +1,33 @@
+{
+	"name": "Seadevil Stinger",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 2,
+	"heroClass": "WARLOCK",
+	"rarity": "COMMON",
+	"race": "MURLOC",
+	"description": "Battlecry: The next Murloc you play this turn costs Health instead of Mana.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "AddAttributeSpell",
+			"target": "FRIENDLY_PLAYER",
+			"attribute": "MURLOCS_COST_HEALTH",
+			"revertTrigger": {
+				"class": "TurnEndTrigger"
+			},
+			"secondRevertTrigger": {
+				"class": "CardPlayedTrigger",
+				"targetPlayer": "SELF",
+				"race": "MURLOC"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,21 @@
+{
+	"name": "White Eyes",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 5,
+	"heroClass": "SHAMAN",
+	"rarity": "LEGENDARY",
+	"description": "Taunt. Deathrattle: Shuffle 'The Storm Guardian' into your deck.",
+	"deathrattle": {
+		"class": "ShuffleToDeckSpell",
+		"card": "token_the_storm_guardian"
+	},
+	"attributes": {
+		"DEATHRATTLES": true,
+		"TAUNT": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

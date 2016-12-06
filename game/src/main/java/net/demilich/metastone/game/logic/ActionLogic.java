@@ -87,7 +87,7 @@ public class ActionLogic {
 
 			if (card.hasAttribute(Attribute.CHOOSE_ONE)) {
 				IChooseOneCard chooseOneCard = (IChooseOneCard) card;
-				if (context.getLogic().hasAttribute(player, Attribute.BOTH_CHOOSE_ONE_OPTIONS)) {
+				if (context.getLogic().hasAttribute(player, Attribute.BOTH_CHOOSE_ONE_OPTIONS) && chooseOneCard.hasBothOptions()) {
 					GameAction chooseOneAction = chooseOneCard.playBothOptions();
 					rollout(chooseOneAction, context, player, playCardActions);
 				} else {

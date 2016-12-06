@@ -21,6 +21,9 @@ public class SwapAttackSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
+		if (context.getSummonReferenceStack().isEmpty()) {
+			return;
+		}
 		Minion sourceMinion = (Minion) context.resolveSingleTarget(context.getSummonReferenceStack().peek());
 		Actor targetActor = (Actor) target;
 		int sourceAttack = sourceMinion.getAttack();

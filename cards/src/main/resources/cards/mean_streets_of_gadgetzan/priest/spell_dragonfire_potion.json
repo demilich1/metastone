@@ -1,0 +1,22 @@
+{
+	"name": "Dragonfire Potion",
+	"baseManaCost": 6,
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "EPIC",
+	"description": "Deal 5 damage to all minions except Dragons.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "DamageSpell",
+		"target": "ALL_MINIONS",
+		"value": 5,
+		"filter": {
+			"class": "RaceFilter",
+			"race": "DRAGON",
+			"invert": true
+		}
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

@@ -13,5 +13,13 @@ public enum Environment {
 	DEBUG,
 	PENDING_CARD,
 	EVENT_CARD,
-	LAST_MANA_COST
+	CHOOSE_ONE_CARD,
+	LAST_MANA_COST,
+	;
+	
+	public boolean customClone() {
+		return (this == SUMMON_REFERENCE_STACK ||
+				this == EVENT_TARGET_REFERENCE_STACK ||
+				this == DAMAGE_STACK);
+	}
 }

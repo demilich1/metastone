@@ -1,0 +1,25 @@
+{
+	"name": "Dirty Rat",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 6,
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"description": "Taunt. Battlecry: Your opponent summons a random minion from their hand.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "PutRandomMinionOnBoardSpell",
+			"targetPlayer": "OPPONENT",
+			"cardLocation": "HAND"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true,
+		"TAUNT": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

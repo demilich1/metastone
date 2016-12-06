@@ -1,0 +1,32 @@
+{
+	"name": "Kabal Lackey",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 1,
+	"heroClass": "MAGE",
+	"rarity": "COMMON",
+	"description": "Battlecry: The next Secret you play this turn costs (0).",
+	"battlecry": {
+		"spell": {
+			"class": "CardCostModifierSpell",
+			"target": "FRIENDLY_PLAYER",
+			"cardCostModifier": {
+				"class": "OneTurnCostModifier",
+				"cardType": "SPELL",
+				"operation": "SET",
+				"value": 0,
+				"expirationTrigger": {
+					"class": "SecretPlayedTrigger"
+				},
+				"requiredAttribute": "SECRET"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

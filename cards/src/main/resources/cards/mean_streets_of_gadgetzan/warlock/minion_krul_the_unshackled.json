@@ -1,0 +1,33 @@
+{
+	"name": "Krul the Unshackled",
+	"baseManaCost": 9,
+	"type": "MINION",
+	"baseAttack": 7,
+	"baseHp": 9,
+	"heroClass": "WARLOCK",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: If your deck contains no duplicates, summon all Demons from your hand.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "PutRandomMinionOnBoardSpell",
+			"targetPlayer": "SELF",
+			"value": 7,
+			"cardLocation": "HAND",
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "MINION",
+				"race": "DEMON"
+			}
+		},
+		"condition": {
+			"class": "HighlanderDeckCondition"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

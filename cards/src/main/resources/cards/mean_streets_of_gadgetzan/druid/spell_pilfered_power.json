@@ -1,0 +1,30 @@
+{
+	"name": "Pilfered Power",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "EPIC",
+	"description": "Gain an empty Mana Crystal for each friendly minion.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "EitherOrSpell",
+		"spell1": {
+			"class": "ReceiveCardSpell",
+			"targetPlayer": "SELF",
+			"card": "spell_excess_mana"
+		},
+		"spell2": {
+			"class": "ModifyMaxManaSpell",
+			"value": {
+				"class": "EntityCounter",
+				"target": "FRIENDLY_MINIONS"
+			}
+		},
+		"condition": {
+			"class": "ManaMaxedCondition"
+		}
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

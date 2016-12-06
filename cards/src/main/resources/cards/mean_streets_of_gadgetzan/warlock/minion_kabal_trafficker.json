@@ -1,0 +1,27 @@
+{
+	"name": "Kabal Trafficker",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"baseAttack": 6,
+	"baseHp": 6,
+	"heroClass": "WARLOCK",
+	"rarity": "EPIC",
+	"description": "At the end of your turn, add a random Demon to your hand.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "ReceiveCardSpell",
+			"targetPlayer": "SELF",
+			"cardFilter": {
+				"class": "CardFilter",
+				"race": "DEMON"
+			}
+		}
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

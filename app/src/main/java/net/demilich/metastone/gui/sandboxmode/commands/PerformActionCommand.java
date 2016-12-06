@@ -47,6 +47,7 @@ public class PerformActionCommand extends SimpleCommand<GameNotification> {
 		SandboxProxy sandboxProxy = (SandboxProxy) getFacade().retrieveProxy(SandboxProxy.NAME);
 		GameContext context = sandboxProxy.getSandbox();
 		Player selectedPlayer = sandboxProxy.getSelectedPlayer();
+		action.setSource(selectedPlayer.getReference());
 
 		context.getLogic().performGameAction(selectedPlayer.getId(), action);
 		sendNotification(GameNotification.UPDATE_SANDBOX_STATE, context);

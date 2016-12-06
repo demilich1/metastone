@@ -101,8 +101,21 @@ public class GameContext implements Cloneable, IDisposable {
 		for (CardCostModifier cardCostModifier : cardCostModifiers) {
 			clone.cardCostModifiers.add(cardCostModifier.clone());
 		}
+		
+		Stack<Integer> damageStack = new Stack<Integer>();
+		damageStack.addAll(getDamageStack());
+		clone.getEnvironment().put(Environment.DAMAGE_STACK, damageStack);
+		Stack<EntityReference> summonReferenceStack = new Stack<EntityReference>();
+		summonReferenceStack.addAll(getSummonReferenceStack());
+		clone.getEnvironment().put(Environment.SUMMON_REFERENCE_STACK, summonReferenceStack);
+		Stack<EntityReference> eventTargetReferenceStack = new Stack<EntityReference>();
+		eventTargetReferenceStack.addAll(getEventTargetStack());
+		clone.getEnvironment().put(Environment.EVENT_TARGET_REFERENCE_STACK, eventTargetReferenceStack);
+		
 		for (Environment key : getEnvironment().keySet()) {
-			clone.getEnvironment().put(key, getEnvironment().get(key));
+			if (!key.customClone()) {
+				clone.getEnvironment().put(key, getEnvironment().get(key));
+			}
 		}
 		clone.getLogic().setLoggingEnabled(false);
 		return clone;
@@ -186,7 +199,7 @@ public class GameContext implements Cloneable, IDisposable {
 		List<Minion> minions = getPlayer(minion.getOwner()).getMinions();
 		int index = minions.indexOf(minion);
 		if (index == -1) {
-			return null;
+			return adjacentMinions;
 		}
 		int left = index - 1;
 		int right = index + 1;
@@ -265,7 +278,7 @@ public class GameContext implements Cloneable, IDisposable {
 		List<Minion> minions = getPlayer(minion.getOwner()).getMinions();
 		int index = minions.indexOf(minion);
 		if (index == -1) {
-			return null;
+			return leftMinions;
 		}
 		for (int i = 0; i < index; i++) {
 			leftMinions.add(minions.get(i));
@@ -341,7 +354,7 @@ public class GameContext implements Cloneable, IDisposable {
 		List<Minion> minions = getPlayer(minion.getOwner()).getMinions();
 		int index = minions.indexOf(minion);
 		if (index == -1) {
-			return null;
+			return rightMinions;
 		}
 		for (int i = index + 1; i < player.getMinions().size(); i++) {
 			rightMinions.add(minions.get(i));

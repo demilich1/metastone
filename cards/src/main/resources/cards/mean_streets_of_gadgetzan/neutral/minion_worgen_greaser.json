@@ -1,0 +1,13 @@
+{
+	"name": "Worgen Greaser",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 6,
+	"baseHp": 3,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "",
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

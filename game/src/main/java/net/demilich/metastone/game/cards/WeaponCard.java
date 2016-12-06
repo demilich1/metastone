@@ -11,6 +11,7 @@ import net.demilich.metastone.game.actions.PlayWeaponCardAction;
 import net.demilich.metastone.game.cards.desc.WeaponCardDesc;
 import net.demilich.metastone.game.entities.weapons.Weapon;
 import net.demilich.metastone.game.spells.desc.BattlecryDesc;
+import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
 
 public class WeaponCard extends Card {
 
@@ -58,7 +59,12 @@ public class WeaponCard extends Card {
 			weapon.addDeathrattle(desc.deathrattle);
 		}
 		if (desc.trigger != null) {
-			weapon.setSpellTrigger(desc.trigger.create());
+			weapon.addSpellTrigger(desc.trigger.create());
+		}
+		if (desc.triggers != null) {
+			for (TriggerDesc trigger : desc.triggers) {
+				weapon.addSpellTrigger(trigger.create());
+			}
 		}
 		if (desc.cardCostModifier != null) {
 			weapon.setCardCostModifier(desc.cardCostModifier.create());

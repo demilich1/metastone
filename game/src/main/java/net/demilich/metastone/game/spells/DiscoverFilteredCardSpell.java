@@ -26,35 +26,54 @@ public class DiscoverFilteredCardSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		EntityFilter cardFilter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
+		EntityFilter[] cardFilters = (EntityFilter[]) desc.get(SpellArg.CARD_FILTERS);
 		CardCollection cards = CardCatalogue.query(context.getDeckFormat());
 		CardSource cardSource = (CardSource) desc.get(SpellArg.CARD_SOURCE);
 		if (cardSource != null) {
 			cards = cardSource.getCards(context, player);
 		}
-		CardCollection result = new CardCollection();
-		for (Card card : cards) {
-			if (cardFilter == null || cardFilter.matches(context, player, card)) {
-				result.add(card);
-			}
-		}
-		cards = new CardCollection();
-		
 		int count = desc.getValue(SpellArg.HOW_MANY, context, player, target, source, 3);
-		for (int i = 0; i < count; i++) {
-			if (!result.isEmpty()) {
-				Card card = null;
-				do {
-					card = result.getRandom();
-					result.remove(card);
-				} while (cards.containsCard(card));
-				if (card != null) {
-					cards.add(card);
+		CardCollection discoverCards = new CardCollection();
+
+		if (cardFilters != null) {
+			for (EntityFilter filter : cardFilters) {
+				CardCollection result = new CardCollection();
+				for (Card card : cards) {
+					if (filter == null || filter.matches(context, player, card)) {
+						result.add(card);
+					}
+				}
+				
+				if (!result.isEmpty()) {
+					discoverCards.add(result.getRandom());
 				}
 			}
+		} else {
+			CardCollection result = new CardCollection();
+			for (Card card : cards) {
+				if (cardFilter == null || cardFilter.matches(context, player, card)) {
+					result.add(card);
+				}
+			}
+			discoverCards = new CardCollection();
+			
+			for (int i = 0; i < count; i++) {
+				if (!result.isEmpty()) {
+					Card card = null;
+					do {
+						card = result.getRandom();
+						result.remove(card);
+					} while (discoverCards.containsCard(card));
+					if (card != null) {
+						discoverCards.add(card);
+					}
+				}
+			}
+			
 		}
 		
-		if (!cards.isEmpty()) {
-			SpellUtils.castChildSpell(context, player, SpellUtils.getDiscover(context, player, desc, cards).getSpell(), source, target);
+		if (!discoverCards.isEmpty()) {
+			SpellUtils.castChildSpell(context, player, SpellUtils.getDiscover(context, player, desc, discoverCards).getSpell(), source, target);
 		}
 	}
 

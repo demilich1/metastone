@@ -1,0 +1,21 @@
+{
+	"name": "Small-Time Recruits",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "PALADIN",
+	"rarity": "EPIC",
+	"description": "Draw three 1-Cost minions from your deck.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "FromDeckToHandSpell",
+		"value": 3,
+		"cardFilter": {
+			"class": "CardFilter",
+			"cardType": "MINION",
+			"manaCost": 1
+		}
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

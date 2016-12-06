@@ -1,0 +1,24 @@
+{
+	"name": "Jinyu Waterspeaker",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 6,
+	"heroClass": "SHAMAN",
+	"rarity": "RARE",
+	"description": "Battlecry: Restore 6 Health. Overload: (1)",
+	"battlecry": {
+		"targetSelection": "ANY",
+		"spell": {
+			"class": "HealSpell",
+			"value": 6
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true,
+		"OVERLOAD": 1
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

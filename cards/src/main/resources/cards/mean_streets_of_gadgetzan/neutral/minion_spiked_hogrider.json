@@ -1,0 +1,33 @@
+{
+	"name": "Spiked Hogrider",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "Battlecry: If an enemy minion has Taunt, gain Charge.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "AddAttributeSpell",
+			"target": "SELF",
+			"attribute": "CHARGE"
+		},
+		"condition": {
+			"class": "HasEntityCondition",
+			"target": "ENEMY_MINIONS",
+			"filter": {
+				"class": "AttributeFilter",
+				"attribute": "TAUNT",
+				"operation": "HAS"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

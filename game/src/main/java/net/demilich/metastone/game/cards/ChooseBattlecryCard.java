@@ -19,6 +19,10 @@ public class ChooseBattlecryCard extends MinionCard implements IChooseOneCard {
 		setAttribute(Attribute.CHOOSE_ONE);
 	}
 
+	public boolean hasBothOptions() {
+		return battlecryBothOptions != null;
+	}
+
 	@Override
 	public PlayCardAction[] playOptions() {
 		PlayCardAction[] actions = new PlayCardAction[battlecryOptions.length];

@@ -1,0 +1,35 @@
+{
+	"name": "Don Han'Cho",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 6,
+	"heroClass": "ANY",
+	"heroClasses": [
+		"HUNTER",
+		"PALADIN",
+		"WARRIOR"
+	],
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Give a random minion in your hand +5/+5.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "BuffSpell",
+			"target": "FRIENDLY_HAND",
+			"attackBonus": 5,
+			"hpBonus": 5,
+			"filter": {
+				"class": "CardFilter",
+				"cardType": "MINION"
+			},
+			"randomTarget": true
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

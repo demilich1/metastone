@@ -1,0 +1,25 @@
+{
+	"name": "Unlicensed Apothecary",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 5,
+	"heroClass": "WARLOCK",
+	"rarity": "EPIC",
+	"description": "Whenever you summon a minion, deal 5 damage to your Hero.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "MinionSummonedTrigger",
+			"targetPlayer": "SELF",
+			"requiredAttribute": "DEATHRATTLES"
+		},
+		"spell": {
+			"class": "DamageSpell",
+			"target": "FRIENDLY_HERO",
+			"value": 5
+		}
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

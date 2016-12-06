@@ -12,7 +12,7 @@
 		"targetSelection": "NONE",
 		"spell": {
 			"class": "AddAttributeSpell",
-			"target": "FRIENDLY_HERO",
+			"target": "FRIENDLY_PLAYER",
 			"attribute": "SPELLS_COST_HEALTH",
 			"revertTrigger": {
 				"class": "TurnEndTrigger"

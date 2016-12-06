@@ -1,0 +1,22 @@
+{
+	"name": "Kabal Songstealer",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 5,
+	"heroClass": "PRIEST",
+	"rarity": "COMMON",
+	"description": "Battlecry: Silence a minion.",
+	"battlecry": {
+		"targetSelection": "MINIONS",
+		"spell": {
+			"class": "SilenceSpell"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

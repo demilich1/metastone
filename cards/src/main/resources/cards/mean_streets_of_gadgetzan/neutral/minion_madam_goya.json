@@ -1,0 +1,29 @@
+{
+	"name": "Madam Goya",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 3,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Choose a friendly minion. Swap it with a minion in your deck.",
+	"battlecry": {
+		"targetSelection": "FRIENDLY_MINIONS",
+		"spell": {
+			"class": "custom.MadamGoyaSpell"
+		},
+		"condition": {
+			"class": "DeckContainsCondition",
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "MINION"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

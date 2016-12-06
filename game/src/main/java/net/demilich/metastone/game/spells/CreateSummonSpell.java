@@ -3,6 +3,7 @@ package net.demilich.metastone.game.spells;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.CardSet;
@@ -12,6 +13,7 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.desc.MinionCardDesc;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
@@ -31,7 +33,10 @@ public class CreateSummonSpell extends Spell {
 		minionCardDesc.type = CardType.MINION;
 		minionCardDesc.rarity = Rarity.FREE;
 		minionCardDesc.description = description;
-		//minionCardDesc.attributes.put(key, value);
+		Attribute attribute = (Attribute) desc.get(SpellArg.ATTRIBUTE);
+		if (attribute != null) {
+			minionCardDesc.attributes.put(attribute, true);
+		}
 		minionCardDesc.set = CardSet.BASIC;
 		minionCardDesc.collectible = false;
 		minionCardDesc.baseManaCost = desc.getValue(SpellArg.MANA, context, player, target, source, 0);
@@ -41,11 +46,14 @@ public class CreateSummonSpell extends Spell {
 		int boardPosition = SpellUtils.getBoardPosition(context, player, desc, source);
 		int count = desc.getValue(SpellArg.VALUE, context, player, target, source, 1);
 		SpellDesc spell = (SpellDesc) desc.get(SpellArg.SPELL);
+		SpellDesc successfulSummonSpell = (SpellDesc) desc.get(SpellArg.SPELL_1);
 		for (int i = 0; i < count; i++) {
 			MinionCard minionCard = (MinionCard) newCard.clone();
-			if (context.getLogic().summon(player.getId(), minionCard.summon(), null, boardPosition, false) && spell != null) {
-				SpellUtils.castChildSpell(context, player, spell, source, target);
+			Minion minion = minionCard.summon();
+			if (context.getLogic().summon(player.getId(), minion, null, boardPosition, false) && successfulSummonSpell != null) {
+				SpellUtils.castChildSpell(context, player, successfulSummonSpell, source, minion);
 			}
+			SpellUtils.castChildSpell(context, player, spell, source, target);
 		}
 	}
 }

@@ -19,7 +19,7 @@ public class MinionOnBoardCondition extends Condition {
 
 		int count = 0;
 		for (Minion minion : player.getMinions()) {
-			if ((cardFilter == null || cardFilter.matches(context, player, minion)) && context.getSummonReferenceStack().contains(minion.getReference())) {
+			if ((cardFilter == null || cardFilter.matches(context, player, minion)) && !context.getSummonReferenceStack().contains(minion.getReference())) {
 				count++;
 			}
 		}

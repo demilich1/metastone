@@ -1,0 +1,36 @@
+{
+	"name": "Inkmaster Solia",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 5,
+	"heroClass": "MAGE",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: If your deck has no duplicates, the next Spell you cast this turn costs (0).",
+	"battlecry": {
+		"spell": {
+			"class": "CardCostModifierSpell",
+			"target": "FRIENDLY_PLAYER",
+			"cardCostModifier": {
+				"class": "OneTurnCostModifier",
+				"cardType": "SPELL",
+				"operation": "SET",
+				"value": 0,
+				"expirationTrigger": {
+					"class": "CardPlayedTrigger",
+					"cardType": "SPELL",
+					"targetPlayer": "SELF"
+				}
+			}
+		},
+		"condition": {
+			"class": "HighlanderDeckCondition"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

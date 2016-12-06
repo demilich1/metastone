@@ -103,8 +103,16 @@ public class SpellUtils {
 			discover.setActionSuffix(card.getName());
 			discoverActions.add(discover);
 		}
+		if (discoverActions.size() == 0) {
+			return null;
+		}
 		
-		return (DiscoverAction) player.getBehaviour().requestAction(context, player, discoverActions);
+		if (context.getLogic().attributeExists(Attribute.ALL_RANDOM_FINAL_DESTINATION) ||
+				context.getLogic().attributeExists(Attribute.ALL_RANDOM_FINAL_DESTINATION)) {
+			return (DiscoverAction) discoverActions.get(context.getLogic().random(discoverActions.size()));
+		} else {
+			return (DiscoverAction) player.getBehaviour().requestAction(context, player, discoverActions);
+		}
 	}
 
 	public static DiscoverAction getSpellDiscover(GameContext context, Player player, SpellDesc desc, List<SpellDesc> spells) {
@@ -117,7 +125,12 @@ public class SpellUtils {
 			discoverActions.add(discover);
 		}
 		
-		return (DiscoverAction) player.getBehaviour().requestAction(context, player, discoverActions);
+		if (context.getLogic().attributeExists(Attribute.ALL_RANDOM_FINAL_DESTINATION) ||
+				context.getLogic().attributeExists(Attribute.ALL_RANDOM_FINAL_DESTINATION)) {
+			return (DiscoverAction) discoverActions.get(context.getLogic().random(discoverActions.size()));
+		} else {
+			return (DiscoverAction) player.getBehaviour().requestAction(context, player, discoverActions);
+		}
 	}
 
 	public static Card getRandomCard(CardCollection source, Predicate<Card> filter) {

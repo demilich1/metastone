@@ -1,0 +1,17 @@
+{
+	"name": "Street Trickster",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 0,
+	"baseHp": 7,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"race": "DEMON",
+	"description": "Spell Damage +1",
+	"attributes": {
+		"SPELL_DAMAGE": 1
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

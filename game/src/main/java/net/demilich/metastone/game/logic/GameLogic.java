@@ -34,6 +34,7 @@ import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.entities.weapons.Weapon;
 import net.demilich.metastone.game.events.AfterPhysicalAttackEvent;
 import net.demilich.metastone.game.events.AfterSpellCastedEvent;
@@ -146,11 +147,7 @@ public class GameLogic implements Cloneable {
 
 		player.modifyAttribute(Attribute.COMBO, +1);
 		Card card = context.resolveCardReference(cardReference);
-
-		if (card.getCardType().isCardType(CardType.SPELL) && !card.hasAttribute(Attribute.COUNTERED)) {
-			checkForDeadEntities();
-			context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, card));
-		}
+		
 		card.removeAttribute(Attribute.MANA_COST_MODIFIER);
 	}
 
@@ -193,17 +190,39 @@ public class GameLogic implements Cloneable {
 		}
 	}
 
+	public boolean attributeExists(Attribute attr) {
+		for (Player player : context.getPlayers()) {
+			if (player.getHero().hasAttribute(attr)) {
+				return true;
+			}
+			for (Entity minion : player.getMinions()) {
+				if (minion.hasAttribute(attr) && !minion.hasAttribute(Attribute.PENDING_DESTROY)) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
 	public boolean canPlayCard(int playerId, CardReference cardReference) {
 		Player player = context.getPlayer(playerId);
 		Card card = context.resolveCardReference(cardReference);
 		int manaCost = getModifiedManaCost(player, card);
 		if (card.getCardType().isCardType(CardType.SPELL)
-				&& player.getHero().hasAttribute(Attribute.SPELLS_COST_HEALTH)
+				&& player.hasAttribute(Attribute.SPELLS_COST_HEALTH)
+				&& player.getHero().getEffectiveHp() < manaCost) {
+			return false;
+		} else if (card.getCardType().isCardType(CardType.MINION)
+				&& (Race) card.getAttribute(Attribute.RACE) == Race.MURLOC
+				&& player.hasAttribute(Attribute.MURLOCS_COST_HEALTH)
 				&& player.getHero().getEffectiveHp() < manaCost) {
 			return false;
 		} else if (player.getMana() < manaCost && manaCost != 0
-				&& !(card.getCardType().isCardType(CardType.SPELL)
-				&& player.getHero().hasAttribute(Attribute.SPELLS_COST_HEALTH))) {
+				&& !((card.getCardType().isCardType(CardType.SPELL)
+				&& player.hasAttribute(Attribute.SPELLS_COST_HEALTH))
+				|| ((Race) card.getAttribute(Attribute.RACE) == Race.MURLOC
+				&& player.hasAttribute(Attribute.MURLOCS_COST_HEALTH)))) {
 			return false;
 		}
 		if (card.getCardType().isCardType(CardType.HERO_POWER)) {
@@ -234,8 +253,68 @@ public class GameLogic implements Cloneable {
 		return player.getMinions().size() < MAX_MINIONS;
 	}
 
+	public void castChooseOneSpell(int playerId, SpellDesc spellDesc, EntityReference sourceReference, EntityReference targetReference, String cardId) {
+		Player player = context.getPlayer(playerId);
+		Entity source = null;
+		if (sourceReference != null) {
+			try {
+				source = context.resolveSingleTarget(sourceReference);
+			} catch (Exception e) {
+				e.printStackTrace();
+				logger.error("Error resolving source entity while casting spell: " + spellDesc);
+			}
+		}
+		EntityReference spellTarget = spellDesc.hasPredefinedTarget() ? spellDesc.getTarget() : targetReference;
+		List<Entity> targets = targetLogic.resolveTargetKey(context, player, source, spellTarget);
+		Card sourceCard = null;
+		SpellCard chosenCard = (SpellCard) context.getCardById(cardId);
+		sourceCard = source.getEntityType() == EntityType.CARD ? (Card) source : null;
+		if (!spellDesc.hasPredefinedTarget() && targets != null && targets.size() == 1) {
+			if (chosenCard.getTargetRequirement() != TargetSelection.NONE) {
+				context.getEnvironment().remove(Environment.TARGET_OVERRIDE);
+				context.getEnvironment().put(Environment.CHOOSE_ONE_CARD, chosenCard.getCardId());
+				GameEvent spellTargetEvent = new TargetAcquisitionEvent(context, playerId, ActionType.SPELL, chosenCard, targets.get(0));
+				context.fireGameEvent(spellTargetEvent);
+				Entity targetOverride = context
+						.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.TARGET_OVERRIDE));
+				if (targetOverride != null && targetOverride.getId() != IdFactory.UNASSIGNED) {
+					targets.remove(0);
+					targets.add(targetOverride);
+					spellDesc = spellDesc.addArg(SpellArg.FILTER, null);
+					log("Target for spell {} has been changed! New target {}", chosenCard, targets.get(0));
+				}
+			}
+		}
+		try {
+			Spell spell = spellFactory.getSpell(spellDesc);
+			spell.cast(context, player, spellDesc, source, targets);
+		} catch (Exception e) {
+			if (source != null) {
+				logger.error("Error while playing card: " + source.getName());
+			}
+			logger.error("Error while casting spell: " + spellDesc);
+			panicDump();
+			e.printStackTrace();
+		}
+
+		context.getEnvironment().remove(Environment.TARGET_OVERRIDE);
+		context.getEnvironment().remove(Environment.CHOOSE_ONE_CARD);
+
+		checkForDeadEntities();
+		if (targets == null || targets.size() != 1) {
+			context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, sourceCard, null));
+		} else {
+			context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, sourceCard, targets.get(0)));
+		}
+	}
+
 	public void castSpell(int playerId, SpellDesc spellDesc, EntityReference sourceReference, EntityReference targetReference,
 			boolean childSpell) {
+		castSpell(playerId, spellDesc, sourceReference, targetReference, TargetSelection.NONE, childSpell);
+	}
+
+	public void castSpell(int playerId, SpellDesc spellDesc, EntityReference sourceReference, EntityReference targetReference,
+			TargetSelection targetSelection, boolean childSpell) {
 		Player player = context.getPlayer(playerId);
 		Entity source = null;
 		if (sourceReference != null) {
@@ -247,7 +326,7 @@ public class GameLogic implements Cloneable {
 			}
 
 		}
-		SpellCard spellCard = null;
+		//SpellCard spellCard = null;
 		EntityReference spellTarget = spellDesc.hasPredefinedTarget() ? spellDesc.getTarget() : targetReference;
 		List<Entity> targets = targetLogic.resolveTargetKey(context, player, source, spellTarget);
 		// target can only be changed when there is one target
@@ -260,12 +339,8 @@ public class GameLogic implements Cloneable {
 		}
 		if (sourceCard != null && sourceCard.getCardType().isCardType(CardType.SPELL) && !spellDesc.hasPredefinedTarget() && targets != null
 				&& targets.size() == 1) {
-			if (sourceCard instanceof SpellCard) {
-				spellCard = (SpellCard) sourceCard;
-			}
-
-			if (spellCard != null && spellCard.getTargetRequirement() != TargetSelection.NONE && !childSpell) {
-				GameEvent spellTargetEvent = new TargetAcquisitionEvent(context, playerId, ActionType.SPELL, spellCard, targets.get(0));
+			if (sourceCard.getCardType().isCardType(CardType.SPELL) && targetSelection != TargetSelection.NONE && !childSpell) {
+				GameEvent spellTargetEvent = new TargetAcquisitionEvent(context, playerId, ActionType.SPELL, sourceCard, targets.get(0));
 				context.fireGameEvent(spellTargetEvent);
 				Entity targetOverride = context
 						.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.TARGET_OVERRIDE));
@@ -273,7 +348,7 @@ public class GameLogic implements Cloneable {
 					targets.remove(0);
 					targets.add(targetOverride);
 					spellDesc = spellDesc.addArg(SpellArg.FILTER, null);
-					log("Target for spell {} has been changed! New target {}", spellCard, targets.get(0));
+					log("Target for spell {} has been changed! New target {}", sourceCard, targets.get(0));
 				}
 			}
 
@@ -290,8 +365,15 @@ public class GameLogic implements Cloneable {
 			e.printStackTrace();
 		}
 
-		if (spellCard != null) {
+		if (sourceCard != null && sourceCard.getCardType().isCardType(CardType.SPELL) && !childSpell) {
 			context.getEnvironment().remove(Environment.TARGET_OVERRIDE);
+
+			checkForDeadEntities();
+			if (targets == null || targets.size() != 1) {
+				context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, sourceCard, null));
+			} else {
+				context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, sourceCard, targets.get(0)));
+			}
 		}
 	}
 
@@ -590,6 +672,10 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void equipWeapon(int playerId, Weapon weapon) {
+		equipWeapon(playerId, weapon, false);
+	}
+
+	public void equipWeapon(int playerId, Weapon weapon, boolean battlecry) {
 		Player player = context.getPlayer(playerId);
 
 		weapon.setId(idFactory.generateId());
@@ -602,7 +688,7 @@ public class GameLogic implements Cloneable {
 		log("{} equips weapon {}", player.getHero(), weapon);
 		player.getHero().setWeapon(weapon);
 
-		if (weapon.getBattlecry() != null) {
+		if (battlecry && weapon.getBattlecry() != null) {
 			resolveBattlecry(playerId, weapon);
 		}
 		
@@ -616,8 +702,9 @@ public class GameLogic implements Cloneable {
 		weapon.onEquip(context, player);
 		weapon.setActive(context.getActivePlayerId() == playerId);
 		if (weapon.hasSpellTrigger()) {
-			SpellTrigger spellTrigger = weapon.getSpellTrigger();
-			addGameEventListener(player, spellTrigger, weapon);
+			for (SpellTrigger spellTrigger : weapon.getSpellTriggers()) {
+				addGameEventListener(player, spellTrigger, weapon);
+			}
 		}
 		if (weapon.getCardCostModifier() != null) {
 			addManaModifier(player, weapon.getCardCostModifier(), weapon);
@@ -1222,7 +1309,11 @@ public class GameLogic implements Cloneable {
 
 		int modifiedManaCost = getModifiedManaCost(player, card);
 		if (card.getCardType().isCardType(CardType.SPELL)
-				&& player.getHero().hasAttribute(Attribute.SPELLS_COST_HEALTH)) {
+				&& player.hasAttribute(Attribute.SPELLS_COST_HEALTH)) {
+			context.getEnvironment().put(Environment.LAST_MANA_COST, 0);
+			damage(player, player.getHero(), modifiedManaCost, card, true);
+		} else if ((Race) card.getAttribute(Attribute.RACE) == Race.MURLOC
+				&& player.getHero().hasAttribute(Attribute.MURLOCS_COST_HEALTH)) {
 			context.getEnvironment().put(Environment.LAST_MANA_COST, 0);
 			damage(player, player.getHero(), modifiedManaCost, card, true);
 		} else {
@@ -1486,8 +1577,12 @@ public class GameLogic implements Cloneable {
 				targetedBattlecry.setTarget(validTarget);
 				battlecryActions.add(targetedBattlecry);
 			}
-
-			battlecryAction = player.getBehaviour().requestAction(context, player, battlecryActions);
+			
+			if (attributeExists(Attribute.ALL_RANDOM_FINAL_DESTINATION)) {
+				battlecryAction = battlecryActions.get(random(battlecryActions.size()));
+			} else {
+				battlecryAction = player.getBehaviour().requestAction(context, player, battlecryActions);
+			}
 		} else {
 			battlecryAction = battlecry;
 		}
@@ -1674,7 +1769,9 @@ public class GameLogic implements Cloneable {
 		refreshAttacksPerRound(minion);
 
 		if (minion.hasSpellTrigger()) {
-			addGameEventListener(player, minion.getSpellTrigger(), minion);
+			for (SpellTrigger trigger : minion.getSpellTriggers()) {
+				addGameEventListener(player, trigger, minion);
+			}
 		}
 
 		if (minion.getCardCostModifier() != null) {
@@ -1747,7 +1844,9 @@ public class GameLogic implements Cloneable {
 				refreshAttacksPerRound(newMinion);
 	
 				if (newMinion.hasSpellTrigger()) {
-					addGameEventListener(owner, newMinion.getSpellTrigger(), newMinion);
+					for (SpellTrigger spellTrigger : newMinion.getSpellTriggers()) {
+						addGameEventListener(owner, spellTrigger, newMinion);
+					}
 				}
 	
 				if (newMinion.getCardCostModifier() != null) {

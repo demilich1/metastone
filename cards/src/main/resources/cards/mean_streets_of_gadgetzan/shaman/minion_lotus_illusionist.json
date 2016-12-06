@@ -1,0 +1,28 @@
+{
+	"name": "Lotus Illusionist",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 5,
+	"heroClass": "SHAMAN",
+	"rarity": "EPIC",
+	"description": "After this minion attacks a hero, transform it into a random 6-Cost minion.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "AfterPhysicalAttackTrigger",
+			"targetEntityType": "HERO",
+			"hostTargetType": "IGNORE_OTHER_SOURCES"
+		},
+		"spell": {
+			"class": "TransformToRandomMinionSpell",
+			"target": "SELF",
+			"cardFilter": {
+				"class": "CardFilter",
+				"manaCost": 6
+			}
+		}
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

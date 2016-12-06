@@ -1,0 +1,16 @@
+{
+	"name": "Shadow Rager",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 1,
+	"heroClass": "ROGUE",
+	"rarity": "COMMON",
+	"description": "Stealth",
+	"attributes": {
+		"STEALTH": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

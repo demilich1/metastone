@@ -28,7 +28,12 @@
 					"trigger": {
 						"eventTrigger": {
 							"class": "CardDrawnTrigger",
-							"targetPlayer": "SELF"
+							"targetPlayer": "SELF",
+							"queueCondition": {
+								"class": "CardPropertyCondition",
+								"target": "EVENT_TARGET",
+								"cardType": "MINION"
+							}
 						},
 						"spell": {
 							"class": "BuffSpell",

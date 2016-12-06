@@ -1,0 +1,14 @@
+{
+	"name": "Sheep",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"race": "BEAST",
+	"description": "",
+	"collectible": false,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}
