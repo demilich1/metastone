@@ -1,0 +1,16 @@
+{
+	"name": "Greater Healing Potion",
+	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "RARE",
+	"description": "Restore 12 Health to a friendly character.",
+	"targetSelection": "FRIENDLY_CHARACTERS",
+	"spell": {
+		"class": "HealSpell",
+		"value": 12
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

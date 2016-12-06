@@ -1,0 +1,24 @@
+{
+	"name": "Fel Orc Soulfiend",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 7,
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"description": "At the start of your turn, deal 2 damage to this minion.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnStartTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "DamageSpell",
+			"target": "SELF",
+			"value": 2
+		}
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

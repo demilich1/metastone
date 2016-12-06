@@ -1,0 +1,28 @@
+{
+	"name": "Shadow Sensei",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 4,
+	"heroClass": "ROGUE",
+	"rarity": "RARE",
+	"description": "Battlecry: Give a Stealthed minion +2/+2.",
+	"battlecry": {
+		"targetSelection": "MINIONS",
+		"spell": {
+			"class": "BuffSpell",
+			"value": 2,
+			"filter": {
+				"class": "AttributeFilter",
+				"attribute": "STEALTH",
+				"operation": "HAS"
+			}
+		}
+	},
+	"attributes": {
+		"COMBO": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,14 @@
+{
+	"name": "Kabal Demon",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"race": "DEMON",
+	"description": "",
+	"collectible": false,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

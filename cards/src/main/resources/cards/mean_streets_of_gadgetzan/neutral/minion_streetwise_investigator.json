@@ -1,0 +1,24 @@
+{
+	"name": "Streetwise Investigator",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 6,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Battlecry: Enemy minions lose Stealth.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "RemoveAttributeSpell",
+			"target": "ENEMY_MINIONS",
+			"attribute": "STEALTH"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

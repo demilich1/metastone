@@ -1,0 +1,35 @@
+{
+	"name": "Luckydo Buccaneer",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 5,
+	"heroClass": "ROGUE",
+	"rarity": "EPIC",
+	"race": "PIRATE",
+	"description": "Battlecry: If your weapon has at least 3 Attack, gain +4/+4.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "BuffSpell",
+			"target": "SELF",
+			"value": 4
+		},
+		"condition": {
+			"class": "HasEntityCondition",
+			"target": "FRIENDLY_WEAPON",
+			"filter": {
+				"class": "AttributeFilter",
+				"attribute": "ATTACK",
+				"value": 3,
+				"operation": "GREATER_OR_EQUAL"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

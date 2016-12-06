@@ -1,0 +1,27 @@
+{
+	"name": "Bloodfury Potion",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "RARE",
+	"description": "Give a minion +3 Attack. If it's a Demon, also give it +3 Health.",
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "ConditionalEffectSpell",
+		"spell1": {
+			"class": "BuffSpell",
+			"attackBonus": 3
+		},
+		"spell2": {
+			"class": "BuffSpell",
+			"hpBonus": 3
+		},
+		"condition": {
+			"class": "RaceCondition",
+			"race": "DEMON"
+		}
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

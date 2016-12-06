@@ -1,0 +1,28 @@
+{
+	"name": "Crystalweaver",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 4,
+	"heroClass": "WARLOCK",
+	"rarity": "COMMON",
+	"description": "Battlecry: Give your Demons +1/+1.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "BuffSpell",
+			"target": "FRIENDLY_MINIONS",
+			"value": 1,
+			"filter": {
+				"class": "RaceFilter",
+				"race": "DEMON"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

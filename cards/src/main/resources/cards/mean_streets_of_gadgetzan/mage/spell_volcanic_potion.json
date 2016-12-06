@@ -1,0 +1,17 @@
+{
+	"name": "Volcanic Potion",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "RARE",
+	"description": "Deal 2 damage to all minions.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "DamageSpell",
+		"target": "ALL_MINIONS",
+		"value": 2
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

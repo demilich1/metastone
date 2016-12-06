@@ -1,0 +1,32 @@
+{
+	"name": "Brass Knuckles",
+	"baseManaCost": 4,
+	"type": "WEAPON",
+	"damage": 2,
+	"durability": 3,
+	"heroClass": "WARRIOR",
+	"rarity": "EPIC",
+	"description": "After your Hero attacks, give a random minion in your hand +1/+1.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "AfterPhysicalAttackTrigger",
+			"sourcePlayer": "SELF",
+			"targetPlayer": "BOTH",
+			"sourceEntityType": "HERO"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"target": "FRIENDLY_HAND",
+			"attackBonus": 1,
+			"hpBonus": 1,
+			"filter": {
+				"class": "CardFilter",
+				"cardType": "MINION"
+			},
+			"randomTarget": true
+		}
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

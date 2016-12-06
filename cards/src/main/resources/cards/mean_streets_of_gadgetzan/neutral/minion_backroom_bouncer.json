@@ -1,0 +1,24 @@
+{
+	"name": "Backroom Bouncer",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "Whenever a friendly minion dies, gain +1 Attack.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "MinionDeathTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"target": "SELF",
+			"attackBonus": 1
+		}
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

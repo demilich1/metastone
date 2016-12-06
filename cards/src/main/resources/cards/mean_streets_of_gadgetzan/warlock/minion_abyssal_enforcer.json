@@ -1,0 +1,25 @@
+{
+	"name": "Abyssal Enforcer",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"baseAttack": 6,
+	"baseHp": 6,
+	"heroClass": "WARLOCK",
+	"rarity": "COMMON",
+	"race": "DEMON",
+	"description": "Battlecry: Deal 3 damage to all other characters.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "DamageSpell",
+			"target": "ALL_OTHER_CHARACTERS",
+			"value": 3
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

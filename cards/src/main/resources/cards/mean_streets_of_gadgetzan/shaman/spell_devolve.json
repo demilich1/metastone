@@ -1,0 +1,25 @@
+{
+	"name": "Devolve",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "SHAMAN",
+	"rarity": "RARE",
+	"description": "Transform all enemy minions into random ones that cost (1) less.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "TransformToRandomMinionSpell",
+		"target": "ENEMY_MINIONS",
+		"cardFilter": {
+			"class": "CardFilter",
+			"manaCost": {
+				"class": "AttributeValueProvider",
+				"target": "SPELL_TARGET",
+				"attribute": "BASE_MANA_COST",
+				"offset": -1
+			}
+		}
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

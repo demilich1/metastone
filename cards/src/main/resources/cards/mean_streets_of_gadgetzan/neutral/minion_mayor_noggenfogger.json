@@ -1,0 +1,42 @@
+{
+	"name": "Mayor Noggenfogger",
+	"baseManaCost": 9,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "All targets are chosen randomly.",
+	"triggers": [
+		{
+			"eventTrigger": {
+				"class": "TargetAcquisitionTrigger",
+				"actionType": "PHYSICAL_ATTACK",
+				"sourcePlayer": "BOTH",
+				"targetPlayer": "BOTH",
+				"sourceEntityType": "MINION"
+			},
+			"spell": {
+				"class": "RandomAttackTargetSpell"
+			}
+		},
+		{
+			"eventTrigger": {
+				"class": "TargetAcquisitionTrigger",
+				"actionType": "SPELL",
+				"sourcePlayer": "BOTH",
+				"targetPlayer": "BOTH"
+			},
+			"spell": {
+				"class": "RandomSpellTargetSpell",
+				"target": "PENDING_CARD"
+			}
+		}
+	],
+	"attributes": {
+		"ALL_RANDOM_FINAL_DESTINATION": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

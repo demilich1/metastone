@@ -1,0 +1,17 @@
+{
+	"name": "Felfire Potion",
+	"baseManaCost": 6,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "RARE",
+	"description": "Deal 5 damage to ALL characters.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "DamageSpell",
+		"target": "ALL_CHARACTERS",
+		"value": 5
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

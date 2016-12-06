@@ -1,0 +1,31 @@
+{
+	"name": "Grimscale Chum",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 1,
+	"heroClass": "PALADIN",
+	"rarity": "COMMON",
+	"race": "MURLOC",
+	"description": "Battlecry: Give a random Murloc in your hand +1/+1.",
+	"battlecry": {
+		"spell": {
+			"class": "BuffSpell",
+			"target": "FRIENDLY_HAND",
+			"attackBonus": 1,
+			"hpBonus": 1,
+			"filter": {
+				"class": "CardFilter",
+				"cardType": "MINION",
+				"race": "MURLOC"
+			},
+			"randomTarget": true
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

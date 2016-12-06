@@ -1,0 +1,25 @@
+{
+	"name": "Naga Corsair",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"race": "PIRATE",
+	"description": "Battlecry: Give your weapon +1 Attack.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "BuffSpell",
+			"target": "FRIENDLY_WEAPON",
+			"attackBonus": 1
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}
