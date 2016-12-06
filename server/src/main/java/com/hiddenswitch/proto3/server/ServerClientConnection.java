@@ -104,7 +104,7 @@ public class ServerClientConnection implements RemoteUpdateListener {
 		sendMessage(new ServerToClientMessage(id, player, cards));
 	}
 
-	private NetSocket getPrivateSocket() {
+	NetSocket getPrivateSocket() {
 		return privateSocket;
 	}
 

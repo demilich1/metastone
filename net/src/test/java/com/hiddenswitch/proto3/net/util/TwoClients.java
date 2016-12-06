@@ -160,10 +160,8 @@ public class TwoClients {
 	}
 
 	public void assertGameOver() {
-		List<Throwable> exceptions = getServerGameContext().getExceptions();
 		if (!gameDecided()
-				|| isTimedOut()
-				|| exceptions.size() > 0) {
+				|| isTimedOut()) {
 			// Print some diagnostic information
 			log("A match was not decided in this test by the deadline. Game information:");
 		} else {
@@ -171,7 +169,6 @@ public class TwoClients {
 		}
 		ServiceTestBase.getContext().assertTrue(gameDecided());
 		ServiceTestBase.getContext().assertFalse(isTimedOut());
-		ServiceTestBase.getContext().assertTrue(exceptions.size() == 0);
 		ServiceTestBase.getContext().assertTrue(playerContext1.getWinningPlayerId() == playerContext2.getWinningPlayerId());
 		this.dispose();
 	}
@@ -180,7 +177,8 @@ public class TwoClients {
 		logger.error(message);
 		final ServerGameContext serverGameContext = getServerGameContext();
 		if (serverGameContext == null) {
-			logger.error("Server game context is null?");
+			logger.error("The server game context is null, so an error cannot be logged. Client errors:");
+			logger.error(getPlayerContext1().toLongString());
 		} else {
 			logger.error(serverGameContext.toLongString());
 			logger.error("Panic Dump:");

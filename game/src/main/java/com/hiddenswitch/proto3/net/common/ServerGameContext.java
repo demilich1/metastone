@@ -160,37 +160,47 @@ public class ServerGameContext extends GameContext {
 
 	@Suspendable
 	protected void networkedPlayTurn(Handler<Boolean> callback) {
-		setActionsThisTurn(getActionsThisTurn() + 1);
-
-		if (getActionsThisTurn() > 99) {
-			logger.warn("Turn has been forcefully ended after {} actions", getActionsThisTurn());
-			endTurn();
-			callback.handle(false);
+		if (!isRunning) {
 			return;
 		}
 
-		if (getLogic().hasAutoHeroPower(getActivePlayerId())) {
-			performAction(getActivePlayerId(), getAutoHeroPowerAction());
-			callback.handle(true);
-			return;
-		}
+		try {
+			setActionsThisTurn(getActionsThisTurn() + 1);
 
-		List<GameAction> validActions = getValidActions();
-		if (validActions.size() == 0) {
-			endTurn();
-			callback.handle(false);
-			return;
-		}
-
-		NetworkBehaviour networkBehaviour = (NetworkBehaviour) getActivePlayer().getBehaviour();
-		networkBehaviour.requestActionAsync(this, getActivePlayer(), getValidActions(), action -> {
-			if (action == null) {
-				throw new RuntimeException("Behaviour " + getActivePlayer().getBehaviour().getName() + " selected NULL action while "
-						+ getValidActions().size() + " actions were available");
+			if (getActionsThisTurn() > 99) {
+				logger.warn("Turn has been forcefully ended after {} actions", getActionsThisTurn());
+				endTurn();
+				callback.handle(false);
+				return;
 			}
-			performAction(getActivePlayerId(), action);
-			callback.handle(action.getActionType() != ActionType.END_TURN);
-		});
+
+			if (getLogic().hasAutoHeroPower(getActivePlayerId())) {
+				performAction(getActivePlayerId(), getAutoHeroPowerAction());
+				callback.handle(true);
+				return;
+			}
+
+			List<GameAction> validActions = getValidActions();
+			if (validActions.size() == 0) {
+				endTurn();
+				callback.handle(false);
+				return;
+			}
+
+			NetworkBehaviour networkBehaviour = (NetworkBehaviour) getActivePlayer().getBehaviour();
+			networkBehaviour.requestActionAsync(this, getActivePlayer(), getValidActions(), action -> {
+				if (action == null) {
+					throw new RuntimeException("Behaviour " + getActivePlayer().getBehaviour().getName() + " selected NULL action while "
+							+ getValidActions().size() + " actions were available");
+				}
+				performAction(getActivePlayerId(), action);
+				callback.handle(action.getActionType() != ActionType.END_TURN);
+			});
+		} catch (NullPointerException e) {
+			if (isRunning) {
+				throw e;
+			}
+		}
 	}
 
 	@Override
@@ -241,8 +251,8 @@ public class ServerGameContext extends GameContext {
 		((Handler<List<Card>>) handler).handle(discardedCards);
 	}
 
-	public void sendGameOver(Player sender, Player winner) {
-		getListenerMap().get(sender).onGameEnd(winner);
+	void sendGameOver(Player recipient, Player winner) {
+		getListenerMap().get(recipient).onGameEnd(winner);
 	}
 
 	@Override
@@ -287,7 +297,7 @@ public class ServerGameContext extends GameContext {
 
 	@Suspendable
 	@SuppressWarnings("unchecked")
-	protected void retryRequests(Player player) {
+	private void retryRequests(Player player) {
 		List<Map.Entry<CallbackId, GameplayRequest>> requests = requestCallbacks.entrySet().stream().filter(e -> e.getKey().playerId == player.getId()).collect(Collectors.toList());
 		if (requests.size() > 0) {
 			requestCallbacks.entrySet().removeIf(e -> e.getKey().playerId == player.getId());
@@ -308,7 +318,14 @@ public class ServerGameContext extends GameContext {
 		}
 	}
 
-	public void kill() {
+	public synchronized void kill() {
+		endGame();
 		isRunning = false;
+		// Clear out the request callbacks
+		requestCallbacks.clear();
+		// Clear the listeners
+		listenerMap.clear();
+		// Clear out even more stuff
+		dispose();
 	}
 }

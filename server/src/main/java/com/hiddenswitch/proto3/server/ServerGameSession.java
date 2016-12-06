@@ -104,6 +104,7 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 		getGameContext().setUpdateListener(getPlayer1(), getPlayerListener(IdFactory.PLAYER_1));
 		getGameContext().setUpdateListener(getPlayer2(), getPlayerListener(IdFactory.PLAYER_2));
 		getGameContext().networkPlay();
+
 	}
 
 	@Override
@@ -141,11 +142,10 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	}
 
 	@Suspendable
-	public void kill() {
+	void kill() {
 		getGameContext().kill();
 		getClient1().close();
 		getClient2().close();
-
 	}
 
 	private void checkContext() {
@@ -170,7 +170,7 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 		this.port = port;
 	}
 
-	private ServerClientConnection getClient1() {
+	public ServerClientConnection getClient1() {
 		return c1;
 	}
 
@@ -178,7 +178,7 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 		this.c1 = c1;
 	}
 
-	private ServerClientConnection getClient2() {
+	public ServerClientConnection getClient2() {
 		return c2;
 	}
 

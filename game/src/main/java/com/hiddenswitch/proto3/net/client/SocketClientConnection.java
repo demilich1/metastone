@@ -2,6 +2,7 @@ package com.hiddenswitch.proto3.net.client;
 
 import java.io.*;
 import java.net.Socket;
+import java.net.SocketException;
 import java.nio.ByteBuffer;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
@@ -189,6 +190,10 @@ public class SocketClientConnection implements ClientCommunicationReceive, Clien
 						logger.debug("Client sent message: {}", message);
 					}
 					network.close();
+				} catch (SocketException e) {
+					if (!isGameEnded) {
+						logger.error("Socket error before the game was ended.", e);
+					}
 				} catch (IOException e1) {
 					logger.error("The write thread has experienced an IOException.", e1);
 				} catch (InterruptedException e2) {

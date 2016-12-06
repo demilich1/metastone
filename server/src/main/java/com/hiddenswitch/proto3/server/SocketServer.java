@@ -13,17 +13,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class SocketServer extends SyncVerticle {
 	private static final Logger logger = LoggerFactory.getLogger(SocketServer.class);
 	private static final int DEFAULT_PORT = 11111;
 	private final int port;
 	private final Map<String, ServerGameSession> games = new HashMap<>();
-	private final Map<NetSocket, ServerGameSession> gameForSocket = new HashMap<>();
-	private final Map<NetSocket, IncomingMessage> messages = new HashMap<>();
+	private final HashMap<NetSocket, ServerGameSession> gameForSocket = new HashMap<>();
+	private final HashMap<NetSocket, IncomingMessage> messages = new HashMap<>();
 	private NetServer server;
 
 	@Override
@@ -48,7 +46,7 @@ public class SocketServer extends SyncVerticle {
 
 	@Suspendable
 	private void receiveData(NetSocket socket, Buffer messageBuffer) {
-		logger.debug("Getting buffer from socket with hashCode {} length {}. Incoming message count: {}", socket.hashCode(), messageBuffer.length(), messages.size());
+		logger.trace("Getting buffer from socket with hashCode {} length {}. Incoming message count: {}", socket.hashCode(), messageBuffer.length(), messages.size());
 		// Do we have a reader for this socket?
 		ClientToServerMessage message = null;
 		int bytesRead = 0;
@@ -74,7 +72,7 @@ public class SocketServer extends SyncVerticle {
 
 		// If there appears to be data left over after finishing the message, hold onto the remainder of the buffer.
 		if (bytesRead < messageBuffer.length()) {
-			logger.debug("Some remainder of a message was found. Bytes read: {}, remainder: {}", bytesRead, messageBuffer.length() - bytesRead);
+			logger.trace("Some remainder of a message was found. Bytes read: {}, remainder: {}", bytesRead, messageBuffer.length() - bytesRead);
 			remainder = messageBuffer.getBuffer(bytesRead, messageBuffer.length());
 		}
 
@@ -83,12 +81,12 @@ public class SocketServer extends SyncVerticle {
 		} catch (IOException | ClassNotFoundException e) {
 			logger.error("Deserializing the message failed!", e);
 		} catch (Exception e) {
-			logger.error("A different deserialization error occurred!");
+			logger.error("A different deserialization error occurred!", e);
 		} finally {
 			messages.remove(socket);
 		}
 
-		logger.debug("IncomingMessage complete on socket {}, expectedLength {} actual {}", socket.hashCode(), incomingMessage.getExpectedLength(), incomingMessage.getBufferWithoutHeader().length());
+		logger.trace("IncomingMessage complete on socket {}, expectedLength {} actual {}", socket.hashCode(), incomingMessage.getExpectedLength(), incomingMessage.getBufferWithoutHeader().length());
 
 		if (message == null) {
 			return;
@@ -108,6 +106,7 @@ public class SocketServer extends SyncVerticle {
 				gameForSocket.put(socket, session);
 				// Is this a reconnect?
 				if (session.areBothPlayersJoined()) {
+					// TODO: Remove references to the old socket
 					// Replace the client
 					session.onPlayerReconnected(message.getPlayer1(), client);
 				} else {
@@ -143,6 +142,25 @@ public class SocketServer extends SyncVerticle {
 	public void stop() {
 		getGames().values().forEach(ServerGameSession::kill);
 		Void t = Sync.awaitResult(done -> server.close(done));
+	}
+
+	public void kill(String gameId) {
+		ServerGameSession session = games.get(gameId);
+
+		// Get the sockets associated with the session
+		List<NetSocket> sockets = Arrays.asList(session.getClient1().getPrivateSocket(), session.getClient2().getPrivateSocket());
+
+		// Kill the session
+		session.kill();
+
+		// Clear our maps of these sockets
+		sockets.forEach(s -> {
+			gameForSocket.remove(s);
+			messages.remove(s);
+		});
+
+		// Remove the game session
+		games.remove(gameId);
 	}
 
 	public ServerGameSession createGameSession(PregamePlayerConfiguration player1, PregamePlayerConfiguration player2, String gameId) {

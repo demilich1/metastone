@@ -1,7 +1,9 @@
 package com.hiddenswitch.proto3.net;
 
 import ch.qos.logback.classic.Level;
+import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.strands.Strand;
+import com.hiddenswitch.proto3.net.models.EndGameSessionRequest;
 import com.hiddenswitch.proto3.net.util.Result;
 import com.hiddenswitch.proto3.net.util.TwoClients;
 import io.vertx.core.AsyncResult;
@@ -89,6 +91,36 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 		});
 	}
 
+	@Test(timeout = 20 * 1000L)
+	public void testTerminatingSession(TestContext context) throws CardParseException, IOException, URISyntaxException {
+		wrapBlocking(context, () -> {
+			try {
+				TwoClients clients1 = new TwoClients().invoke(this.service);
+				getContext().assertNotNull(clients1);
+				clients1.play();
+				logger.info("testTerminatingSession: Waiting for game to start...");
+				while (clients1.getServerGameContext() == null) {
+					Strand.sleep(100);
+				}
+				logger.info("testTerminatingSession: Waiting for game to reach turn 3...");
+				while (clients1.getServerGameContext().getTurn() < 3) {
+					Strand.sleep(100);
+				}
+				String gameId = clients1.getGameId();
+				service.endGameSession(new EndGameSessionRequest(gameId));
+				getContext().assertNull(service.getGameSession(gameId));
+				logger.info("testTerminatingSession: Waiting for players to receive game end message...");
+				while (!clients1.getPlayerContext1().gameDecided()
+						&& !clients1.getPlayerContext2().gameDecided()) {
+					Strand.sleep(100);
+				}
+				clients1.assertGameOver();
+			} catch (Throwable e) {
+				getContext().fail(e);
+			}
+		});
+	}
+
 	@Test
 	public void testTwoSimultaneousSessions(TestContext context) throws Exception {
 		wrapBlocking(context, () -> {
@@ -96,7 +128,7 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 		});
 	}
 
-	@Test(timeout = 20 * 60 * 1000L)
+	@Test(timeout = 45 * 60 * 1000L)
 	public void testTenSessionsTenTimes(TestContext context) throws Exception {
 		wrapBlocking(context, () -> {
 			for (int i = 0; i < 10; i++) {
@@ -113,7 +145,10 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 			try {
 				twoClients = new TwoClients().invoke(this.service);
 				twoClients.play();
-				Strand.sleep(100);
+				while (twoClients.getServerGameContext() == null
+						|| twoClients.getServerGameContext().getTurn() < 3) {
+					Strand.sleep(100);
+				}
 				twoClients.disconnect(PLAYER_2);
 				Strand.sleep(1000);
 				// Try to reconnect
@@ -131,7 +166,7 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 
 				twoClients.assertGameOver();
 			} catch (Exception e) {
-				Assert.fail(e.getMessage());
+				getContext().fail(e);
 			} finally {
 				if (twoClients != null) {
 					twoClients.dispose();

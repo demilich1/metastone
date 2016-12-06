@@ -68,7 +68,7 @@ public abstract class ServiceTestBase<T extends Service<T>> {
 			try {
 				code.run();
 			} catch (Exception e) {
-				context.fail(e.getMessage());
+				context.fail(e);
 			}
 			fut.complete();
 		}, then -> {
