@@ -1744,9 +1744,6 @@ public class GameLogic implements Cloneable {
 		if (resolveBattlecry && minion.getBattlecry() != null) {
 			resolveBattlecry(player.getId(), minion);
 			checkForDeadEntities();
-			if (minion.isDestroyed()) {
-				return true;
-			}
 		}
 
 		if (context.getEnvironment().get(Environment.TRANSFORM_REFERENCE) != null) {
