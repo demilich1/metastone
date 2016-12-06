@@ -18,8 +18,8 @@ import java.util.List;
 public class ServerGameSession extends GameSession implements ServerCommunicationSend, ServerListener {
 	private String host;
 	private int port;
-	private SocketClientReceiver c1;
-	private SocketClientReceiver c2;
+	private ServerClientConnection c1;
+	private ServerClientConnection c2;
 	private PregamePlayerConfiguration pregamePlayerConfiguration1;
 	private PregamePlayerConfiguration pregamePlayerConfiguration2;
 	private ServerGameContext gameContext;
@@ -42,34 +42,54 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 
 	@Override
 	@Suspendable
-	public void onPlayerConnected(Player player) {
+	public void onPlayerConnected(Player player, ServerClientConnection client) {
 		logger.debug("Receive connections from {}", player.toString());
 		if (player.getId() == IdFactory.PLAYER_1) {
 			if (getPlayer1() != null) {
 				throw new RuntimeException("Two players tried to connect to the same player slot.");
 			}
+			setClient1(client);
 			setPlayer1(player);
 		} else if (player.getId() == IdFactory.PLAYER_2) {
 			if (getPlayer2() != null) {
 				throw new RuntimeException("Two players tried to connect to the same player slot.");
 			}
+			setClient2(client);
 			setPlayer2(player);
 		} else {
 			throw new RuntimeException("A player without an ID set has attempted to connect.");
 		}
 
-		if (areBothPlayersConnected()) {
+		if (areBothPlayersJoined()) {
 			startGame();
 		}
 	}
 
 	@Override
+	@Suspendable
+	public void onPlayerReconnected(Player player, ServerClientConnection client) {
+		checkContext();
+		if (player.getId() == IdFactory.PLAYER_1) {
+			getClient1().close();
+			setClient1(client);
+		} else if (player.getId() == IdFactory.PLAYER_2) {
+			getClient2().close();
+			setClient2(client);
+		} else {
+			throw new RuntimeException("A player without an ID set has attempted to connect.");
+		}
+
+		getGameContext().onPlayerReconnected(player, client);
+	}
+
+	@Override
+	@Suspendable
 	public void onActionReceived(String id, GameAction action) {
 		checkContext();
 		getGameContext().onActionReceived(id, action);
 	}
 
-	protected boolean areBothPlayersConnected() {
+	protected boolean areBothPlayersJoined() {
 		return player1 != null
 				&& player2 != null;
 	}
@@ -122,6 +142,9 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 
 	@Suspendable
 	public void kill() {
+		getGameContext().kill();
+		getClient1().close();
+		getClient2().close();
 
 	}
 
@@ -147,19 +170,19 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 		this.port = port;
 	}
 
-	public SocketClientReceiver getClient1() {
+	private ServerClientConnection getClient1() {
 		return c1;
 	}
 
-	public void setClient1(SocketClientReceiver c1) {
+	private void setClient1(ServerClientConnection c1) {
 		this.c1 = c1;
 	}
 
-	public SocketClientReceiver getClient2() {
+	private ServerClientConnection getClient2() {
 		return c2;
 	}
 
-	public void setClient2(SocketClientReceiver c2) {
+	private void setClient2(ServerClientConnection c2) {
 		this.c2 = c2;
 	}
 
@@ -167,19 +190,19 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 		return gameContext;
 	}
 
-	public Player getPlayer1() {
+	private Player getPlayer1() {
 		return player1;
 	}
 
-	public void setPlayer1(Player player1) {
+	private void setPlayer1(Player player1) {
 		this.player1 = player1;
 	}
 
-	public Player getPlayer2() {
+	private Player getPlayer2() {
 		return player2;
 	}
 
-	public void setPlayer2(Player player2) {
+	private void setPlayer2(Player player2) {
 		this.player2 = player2;
 	}
 

@@ -54,7 +54,7 @@ dependencyManagement {
 }
 
 dependencies {
-    quasar "co.paralleluniverse:quasar-core:0.7.5:jdk8"
+    quasar files("lib/quasar-core-0.7.5-jdk8.jar")
 
     compile group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.+'
     compile group: 'com.lambdaworks', name: 'scrypt', version: '1.4.0'
