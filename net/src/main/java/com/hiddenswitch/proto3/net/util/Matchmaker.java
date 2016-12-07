@@ -13,15 +13,11 @@ import java.util.*;
  * Created by bberman on 11/30/16.
  */
 public class Matchmaker extends AbstractMap<String, QueueEntry> {
-	private final int timeoutSeconds;
+	private final int timeoutSeconds = 4;
 	private Map<String, QueueEntry> entries = new HashMap<>();
 	private Map<String, Match> usersToMatches = new HashMap<>();
 	private Map<String, Match> gamesToMatches = new HashMap<>();
 	private TreeList queue = new TreeList();
-
-	public Matchmaker() {
-		timeoutSeconds = 4;
-	}
 
 	public class Match {
 		public final String gameId;
@@ -30,7 +26,7 @@ public class Matchmaker extends AbstractMap<String, QueueEntry> {
 		public final Date createdAt;
 
 		public Match(QueueEntry entry1, QueueEntry entry2) {
-			this.gameId = RandomStringUtils.randomAlphanumeric(timeoutSeconds).toLowerCase();
+			this.gameId = RandomStringUtils.randomAlphanumeric(10).toLowerCase();
 			this.entry1 = entry1;
 			this.entry2 = entry2;
 			this.createdAt = Date.from(Instant.now());
