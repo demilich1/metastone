@@ -1,0 +1,30 @@
+{
+	"name": "Knuckles",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 7,
+	"heroClass": "HUNTER",
+	"rarity": "LEGENDARY",
+	"race": "BEAST",
+	"description": "After this attacks a minion, it also hits the enemy Hero.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "AfterPhysicalAttackTrigger",
+			"targetEntityType": "MINION",
+			"hostTargetType": "IGNORE_OTHER_SOURCES"
+		},
+		"spell": {
+			"class": "DamageSpell",
+			"target": "ENEMY_HERO",
+			"value": {
+				"class": "AttributeValueProvider",
+				"target": "SELF",
+				"attribute": "ATTACK"
+			}
+		}
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

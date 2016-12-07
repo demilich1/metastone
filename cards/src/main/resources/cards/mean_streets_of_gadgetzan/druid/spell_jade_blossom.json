@@ -1,0 +1,54 @@
+{
+	"name": "Jade Blossom",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"description": "Summon a Jade Golem. Gain an empty Mana Crystal.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "CreateSummonSpell",
+				"name": "Jade Golem",
+				"attackBonus": {
+					"class": "AttributeValueProvider",
+					"target": "FRIENDLY_PLAYER",
+					"attribute": "JADE_BUFF",
+					"offset": 1
+				},
+				"hpBonus": {
+					"class": "AttributeValueProvider",
+					"target": "FRIENDLY_PLAYER",
+					"attribute": "JADE_BUFF",
+					"offset": 1
+				},
+				"mana": {
+					"class": "AlgebraicValueProvider",
+					"operation": "MAXIMUM",
+					"value1": {
+						"class": "AttributeValueProvider",
+						"target": "FRIENDLY_PLAYER",
+						"attribute": "JADE_BUFF",
+						"offset": 1
+					},
+					"value2": 10
+				},
+				"spell": {
+					"class": "ModifyAttributeSpell",
+					"target": "FRIENDLY_PLAYER",
+					"attribute": "JADE_BUFF",
+					"value": 1
+				}
+			},
+			{
+				"class": "ModifyMaxManaSpell",
+				"value": 1
+			}
+		]
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

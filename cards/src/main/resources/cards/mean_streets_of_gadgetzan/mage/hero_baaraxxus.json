@@ -1,0 +1,15 @@
+{
+	"name": "Baaraxxus",
+	"baseManaCost": 1,
+	"heroPower": "hero_power_inferno",
+	"type": "HERO",
+	"heroClass": "MAGE",
+	"rarity": "RARE",
+	"attributes": {
+		"HP": 1,
+		"MAX_HP": 1
+	},
+	"collectible": false,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

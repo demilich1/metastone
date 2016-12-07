@@ -1,18 +1,9 @@
 package net.demilich.metastone.game.logic;
 
 import co.paralleluniverse.fibers.Suspendable;
-
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-
 import com.google.gson.annotations.Expose;
-import com.hiddenswitch.proto3.net.common.NullResult;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
-import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.game.*;
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.BattlecryAction;
@@ -1703,9 +1694,6 @@ public class GameLogic implements Cloneable, Serializable {
 		if (resolveBattlecry && minion.getBattlecry() != null) {
 			resolveBattlecry(player.getId(), minion);
 			checkForDeadEntities();
-			if (minion.isDestroyed()) {
-				return true;
-			}
 		}
 
 		postSummon(minion, source, player);

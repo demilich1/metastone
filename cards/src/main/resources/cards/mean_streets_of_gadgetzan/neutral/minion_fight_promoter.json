@@ -1,0 +1,33 @@
+{
+	"name": "Fight Promoter",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"description": "Battlecry: If you control a minion with 6 or more Health, draw two cards.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "DrawCardSpell",
+			"value": 2
+		},
+		"condition": {
+			"class": "HasEntityCondition",
+			"target": "FRIENDLY_MINIONS",
+			"filter": {
+				"class": "AttributeFilter",
+				"attribute": "HP",
+				"operation": "GREATER_OR_EQUAL",
+				"value": 6
+			} 
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

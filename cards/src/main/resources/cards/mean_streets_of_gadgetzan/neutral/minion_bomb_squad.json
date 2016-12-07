@@ -1,0 +1,29 @@
+{
+	"name": "Bomb Squad",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "Battlecry: Deal 5 damage to an enemy minion. Deathrattle: Deal 5 damage to your hero.",
+	"battlecry": {
+		"targetSelection": "ENEMY_MINIONS",
+		"spell": {
+			"class": "DamageSpell",
+			"value": 5
+		}
+	},
+	"deathrattle": {
+		"class": "DamageSpell",
+		"target": "FRIENDLY_HERO",
+		"value": 5
+	},
+	"attributes": {
+		"BATTLECRY": true,
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

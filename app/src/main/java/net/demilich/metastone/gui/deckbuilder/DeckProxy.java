@@ -71,7 +71,7 @@ public class DeckProxy extends Proxy<GameNotification> {
 		} else {
 			cardCollection = CardCatalogue.query(deckFormat, heroClass);
 			// add neutral cards
-			cardCollection.addAll(CardCatalogue.query(deckFormat, HeroClass.ANY, heroClass));
+			cardCollection.addAll(CardCatalogue.query(deckFormat, HeroClass.ANY));
 		}
 		cardCollection.sortByName();
 		cardCollection.sortByManaCost();

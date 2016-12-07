@@ -1,0 +1,23 @@
+{
+	"name": "Burgly Bully",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 6,
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"description": "Whenever your opponent casts a spell, add a Coin to your hand.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "SpellCastedTrigger",
+			"sourcePlayer": "OPPONENT"
+		},
+		"spell": {
+			"class": "ReceiveCardSpell",
+			"card": "spell_the_coin"
+		}
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

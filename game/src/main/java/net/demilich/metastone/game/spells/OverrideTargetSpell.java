@@ -18,7 +18,9 @@ public class OverrideTargetSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		context.getEnvironment().put(Environment.TARGET_OVERRIDE, target.getReference());
+		if (context.getEnvironment().get(Environment.TARGET_OVERRIDE) == null) {
+			context.getEnvironment().put(Environment.TARGET_OVERRIDE, target.getReference());
+		}
 	}
 
 }

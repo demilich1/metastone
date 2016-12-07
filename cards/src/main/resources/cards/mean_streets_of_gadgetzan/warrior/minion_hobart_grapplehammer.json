@@ -1,0 +1,52 @@
+{
+	"name": "Hobart Grapplehammer",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"heroClass": "WARRIOR",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Give all weapons in your hand and deck +1 Attack.",
+	"battlecry": {
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "BuffSpell",
+					"target": "FRIENDLY_HAND",
+					"attackBonus": 1,
+					"filter": {
+						"class": "CardFilter",
+						"cardType": "WEAPON"
+					}
+				},
+				{
+					"class": "AddSpellTriggerSpell",
+					"target": "FRIENDLY_PLAYER",
+					"trigger": {
+						"eventTrigger": {
+							"class": "CardDrawnTrigger",
+							"targetPlayer": "SELF",
+							"queueCondition": {
+								"class": "CardPropertyCondition",
+								"target": "EVENT_TARGET",
+								"cardType": "WEAPON"
+							}
+						},
+						"spell": {
+							"class": "BuffSpell",
+							"target": "EVENT_TARGET",
+							"attackBonus": 1
+						}
+					}
+				}
+			]
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

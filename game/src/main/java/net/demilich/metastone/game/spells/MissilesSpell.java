@@ -28,6 +28,7 @@ public class MissilesSpell extends DamageSpell {
 			damage = context.getLogic().applySpellpower(player, source,  damage);
 			damage = context.getLogic().applyAmplify(player, damage, Attribute.SPELL_AMPLIFY_MULTIPLIER);
 		}
+		EntityFilter filter = (EntityFilter) desc.get(SpellArg.FILTER);
 		for (int i = 0; i < missiles; i++) {
 			List<Actor> validTargets;
 			if (desc.contains(SpellArg.FILTER)) {

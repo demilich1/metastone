@@ -109,7 +109,22 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		for (CardCostModifier cardCostModifier : getCardCostModifiers()) {
 			clone.getCardCostModifiers().add(cardCostModifier.clone());
 		}
-		clone.setEnvironment(SerializationUtils.clone(getEnvironment()));
+		Stack<Integer> damageStack = new Stack<Integer>();
+		damageStack.addAll(getDamageStack());
+		clone.getEnvironment().put(Environment.DAMAGE_STACK, damageStack);
+		Stack<EntityReference> summonReferenceStack = new Stack<EntityReference>();
+		summonReferenceStack.addAll(getSummonReferenceStack());
+		clone.getEnvironment().put(Environment.SUMMON_REFERENCE_STACK, summonReferenceStack);
+		Stack<EntityReference> eventTargetReferenceStack = new Stack<EntityReference>();
+		eventTargetReferenceStack.addAll(getEventTargetStack());
+		clone.getEnvironment().put(Environment.EVENT_TARGET_REFERENCE_STACK, eventTargetReferenceStack);
+
+		for (Environment key : getEnvironment().keySet()) {
+			if (!key.customClone()) {
+				clone.getEnvironment().put(key, getEnvironment().get(key));
+			}
+		}
+
 		clone.getLogic().setLoggingEnabled(false);
 		return clone;
 	}

@@ -1,0 +1,35 @@
+{
+	"name": "Genzo, the Shark",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Whenever this attacks, both players draw until they have 3 cards.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "TargetAcquisitionTrigger",
+			"actionType": "PHYSICAL_ATTACK",
+			"targetPlayer": "BOTH",
+			"hostTargetType": "IGNORE_OTHER_SOURCES"
+		},
+		"spell": {
+			"class": "DrawCardSpell",
+			"targetPlayer": "BOTH",
+			"value": {
+				"class": "AlgebraicValueProvider",
+				"operation": "SUBTRACT",
+				"value1": 3,
+				"value2": {
+					"class": "PlayerAttributeValueProvider",
+					"targetPlayer": "SELF",
+					"playerAttribute": "HAND_COUNT"
+				}
+			}
+		}
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

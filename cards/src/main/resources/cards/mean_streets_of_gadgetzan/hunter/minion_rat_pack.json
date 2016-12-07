@@ -1,0 +1,26 @@
+{
+	"name": "Rat Pack",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"heroClass": "HUNTER",
+	"rarity": "EPIC",
+	"race": "BEAST",
+	"description": "Deathrattle: Summon a number of 1/1 Rats equal to this minion's Attack.",
+	"deathrattle": {
+		"class": "SummonSpell",
+		"card": "token_rat",
+		"value": {
+			"class": "AttributeValueProvider",
+			"target": "SELF",
+			"attribute": "ATTACK"
+		}
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

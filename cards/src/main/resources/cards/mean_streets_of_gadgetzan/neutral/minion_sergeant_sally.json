@@ -1,0 +1,25 @@
+{
+	"name": "Sergeant Sally",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Deathrattle: Deal damage equal to this minion's Attack to all enemy minions.",
+	"deathrattle": {
+		"class": "DamageSpell",
+		"target": "ENEMY_MINIONS",
+		"value": {
+			"class": "AttributeValueProvider",
+			"target": "SELF",
+			"attribute": "ATTACK"
+		}
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

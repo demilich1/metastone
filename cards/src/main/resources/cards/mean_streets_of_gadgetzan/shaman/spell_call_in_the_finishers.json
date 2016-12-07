@@ -1,0 +1,17 @@
+{
+	"name": "Call in the Finishers",
+	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "SHAMAN",
+	"rarity": "COMMON",
+	"description": "Summon 4 1/1 Murlocs.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "SummonSpell",
+		"value": 4,
+		"card": "token_murloc"
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}
