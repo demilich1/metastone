@@ -1,0 +1,29 @@
+{
+	"name": "Leatherclad Hogleader",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"baseAttack": 6,
+	"baseHp": 6,
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"description": "Battlecry: If your opponent has 6 or more cards in hand, gain Charge.",
+	"battlecry": {
+		"spell": {
+			"class": "AddAttributeSpell",
+			"target": "SELF",
+			"attribute": "CHARGE"
+		},
+		"condition": {
+			"class": "CardCountCondition",
+			"targetPlayer": "OPPONENT",
+			"operation": "GREATER_OR_EQUAL",
+			"value": 6
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

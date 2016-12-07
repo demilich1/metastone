@@ -1,0 +1,13 @@
+{
+	"name": "Crystal",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"heroClass": "PRIEST",
+	"rarity": "EPIC",
+	"description": "",
+	"collectible": false,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

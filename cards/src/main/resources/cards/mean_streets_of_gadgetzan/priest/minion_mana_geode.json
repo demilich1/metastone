@@ -1,0 +1,23 @@
+{
+	"name": "Mana Geode",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 3,
+	"heroClass": "PRIEST",
+	"rarity": "EPIC",
+	"description": "Whenever this minion is healed, summon a 2/2 Crystal.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "HealingTrigger",
+			"hostTargetType": "IGNORE_OTHER_TARGETS"
+		},
+		"spell": {
+			"class": "SummonSpell",
+			"card": "token_crystal"
+		}
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

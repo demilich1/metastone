@@ -1,0 +1,38 @@
+{
+	"name": "Drakonid Operative",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 6,
+	"heroClass": "PRIEST",
+	"rarity": "RARE",
+	"race": "DRAGON",
+	"description": "Battlecry: If you're holding a Dragon, Discover a card from your opponent's deck.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "DiscoverFilteredCardSpell",
+			"cardSource": {
+				"class": "DeckSource",
+				"targetPlayer": "OPPONENT"
+			},
+			"spell": {
+				"class": "ReceiveCardSpell",
+				"targetPlayer": "SELF"
+			}
+		},
+		"condition": {
+			"class": "HoldsCardCondition",
+			"cardFilter": {
+				"class": "CardFilter",
+				"race": "DRAGON"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

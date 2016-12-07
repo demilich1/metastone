@@ -1,0 +1,27 @@
+{
+	"name": "Shaky Zipgunner",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 3,
+	"heroClass": "HUNTER",
+	"rarity": "COMMON",
+	"description": "Deathrattle: Give a random minion in your hand +2/+2.",
+	"deathrattle": {
+		"class": "BuffSpell",
+		"target": "FRIENDLY_HAND",
+		"attackBonus": 2,
+		"hpBonus": 2,
+		"filter": {
+			"class": "CardFilter",
+			"cardType": "MINION"
+		},
+		"randomTarget": true
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

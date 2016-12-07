@@ -1,0 +1,29 @@
+{
+	"name": "Wrathion",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Taunt. Battlecry: Draw cards until you draw one that isn't a Dragon.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "DrawCardUntilConditionSpell",
+			"value": 60,
+			"condition": {
+				"class": "RaceCondition",
+				"race": "DRAGON",
+				"invert": true
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true,
+		"TAUNT": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

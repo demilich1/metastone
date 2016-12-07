@@ -1,0 +1,30 @@
+{
+	"name": "Grimy Gadgeteer",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 3,
+	"heroClass": "WARRIOR",
+	"rarity": "COMMON",
+	"description": "At the end of your turn, give a random minion in your hand +2/+2.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"target": "FRIENDLY_HAND",
+			"attackBonus": 2,
+			"hpBonus": 2,
+			"filter": {
+				"class": "CardFilter",
+				"cardType": "MINION"
+			},
+			"randomTarget": true
+		}
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

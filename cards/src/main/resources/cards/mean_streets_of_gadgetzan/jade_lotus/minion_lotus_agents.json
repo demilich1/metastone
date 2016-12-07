@@ -1,0 +1,45 @@
+{
+	"name": "Lotus Agents",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 3,
+	"heroClass": "ANY",
+	"heroClasses": [
+		"DRUID",
+		"ROGUE",
+		"SHAMAN"
+	],
+	"rarity": "RARE",
+	"description": "Battlecry: Discover a Druid, Rogue, or Shaman card.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "DiscoverFilteredCardSpell",
+			"spell": {
+				"class": "ReceiveCardSpell",
+				"targetPlayer": "SELF"
+			},
+			"cardFilters": [
+				{
+					"class": "CardFilter",
+					"heroClass": "DRUID"
+				},
+				{
+					"class": "CardFilter",
+					"heroClass": "ROGUE"
+				},
+				{
+					"class": "CardFilter",
+					"heroClass": "SHAMAN"
+				}
+			]
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

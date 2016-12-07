@@ -1,0 +1,24 @@
+{
+	"name": "Blastcrystal Potion",
+	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "COMMON",
+	"description": "Destroy a minion and one of your Mana Crystals.",
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "DestroySpell"
+			},
+			{
+				"class": "ModifyMaxManaSpell",
+				"value": -1
+			}
+		]
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

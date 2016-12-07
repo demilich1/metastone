@@ -1,0 +1,55 @@
+{
+	"name": "Jade Shuriken",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "ROGUE",
+	"rarity": "COMMON",
+	"description": "Deal 2 damage. Combo: Summon a Jade Golem.",
+	"targetSelection": "ANY",
+	"spell": {
+		"class": "ComboSpell",
+		"spell1": {
+			"class": "DamageSpell",
+			"value": 2
+		},
+		"spell2": {
+			"class": "CreateSummonSpell",
+			"name": "Jade Golem",
+			"attackBonus": {
+				"class": "AttributeValueProvider",
+				"target": "FRIENDLY_PLAYER",
+				"attribute": "JADE_BUFF",
+				"offset": 1
+			},
+			"hpBonus": {
+				"class": "AttributeValueProvider",
+				"target": "FRIENDLY_PLAYER",
+				"attribute": "JADE_BUFF",
+				"offset": 1
+			},
+			"mana": {
+				"class": "AlgebraicValueProvider",
+				"operation": "MAXIMUM",
+				"value1": {
+					"class": "AttributeValueProvider",
+					"target": "FRIENDLY_PLAYER",
+					"attribute": "JADE_BUFF",
+					"offset": 1
+				},
+				"value2": 10
+			},
+			"spell": {
+				"class": "ModifyAttributeSpell",
+				"target": "FRIENDLY_PLAYER",
+				"attribute": "JADE_BUFF",
+				"value": 1
+			}
+		}
+	},
+	"attributes": {
+		"COMBO": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

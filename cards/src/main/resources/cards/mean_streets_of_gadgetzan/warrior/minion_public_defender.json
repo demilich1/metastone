@@ -1,0 +1,16 @@
+{
+	"name": "Public Defender",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 0,
+	"baseHp": 7,
+	"heroClass": "WARRIOR",
+	"rarity": "COMMON",
+	"description": "Taunt.",
+	"attributes": {
+		"TAUNT": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

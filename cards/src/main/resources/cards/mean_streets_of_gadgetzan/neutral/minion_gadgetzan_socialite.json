@@ -1,0 +1,23 @@
+{
+	"name": "Gadgetzan Socialite",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Battlecry: Restore 2 Health.",
+	"battlecry": {
+		"targetSelection": "ANY",
+		"spell": {
+			"class": "HealSpell",
+			"value": 2
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}
