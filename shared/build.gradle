@@ -21,7 +21,7 @@ buildConfig {
 	buildConfigField 'int', 'DEFAULT_SLEEP_DELAY', '100'
 	buildConfigField 'String', 'MATCHMAKING_URI', 'http://ec2-34-193-238-52.compute-1.amazonaws.com:8080/v0/anonymous/matchmake'
 	buildConfigField 'String', 'GAMESESSIONS_HOST', 'ec2-34-193-238-52.compute-1.amazonaws.com'
-	buildConfigField 'boolean', 'DECK_BUILDER_ENABLED', 'false'
+	buildConfigField 'boolean', 'DECK_BUILDER_ENABLED', 'true'
 }
 
 ext {
