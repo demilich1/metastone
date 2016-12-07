@@ -1,8 +1,6 @@
 package com.hiddenswitch.proto3.net.util;
 
 import com.hiddenswitch.proto3.net.GameSessions;
-import com.hiddenswitch.proto3.net.Service;
-import com.hiddenswitch.proto3.net.ServiceTestBase;
 import com.hiddenswitch.proto3.net.client.RemoteGameContext;
 import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
 import com.hiddenswitch.proto3.net.common.ClientToServerMessage;
@@ -21,10 +19,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 
 import static net.demilich.metastone.game.GameContext.PLAYER_1;
 import static net.demilich.metastone.game.GameContext.PLAYER_2;

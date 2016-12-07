@@ -5,6 +5,7 @@ import com.hiddenswitch.proto3.net.models.LoginRequest;
 import com.hiddenswitch.proto3.net.models.LoginResponse;
 import com.hiddenswitch.proto3.net.models.User;
 import com.hiddenswitch.proto3.net.util.Result;
+import com.hiddenswitch.proto3.net.util.ServiceTestBase;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;

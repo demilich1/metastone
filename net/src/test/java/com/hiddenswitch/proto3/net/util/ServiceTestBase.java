@@ -1,5 +1,6 @@
-package com.hiddenswitch.proto3.net;
+package com.hiddenswitch.proto3.net.util;
 
+import com.hiddenswitch.proto3.net.Service;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
@@ -8,8 +9,6 @@ import io.vertx.core.logging.LoggerFactory;
 import io.vertx.ext.unit.Async;
 import io.vertx.ext.unit.TestContext;
 import io.vertx.ext.unit.junit.VertxUnitRunner;
-import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 

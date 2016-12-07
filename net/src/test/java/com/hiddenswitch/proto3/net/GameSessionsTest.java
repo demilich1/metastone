@@ -1,10 +1,10 @@
 package com.hiddenswitch.proto3.net;
 
 import ch.qos.logback.classic.Level;
-import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.strands.Strand;
 import com.hiddenswitch.proto3.net.models.EndGameSessionRequest;
 import com.hiddenswitch.proto3.net.util.Result;
+import com.hiddenswitch.proto3.net.util.ServiceTestBase;
 import com.hiddenswitch.proto3.net.util.TwoClients;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
@@ -20,14 +20,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import scala.reflect.internal.Trees;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.demilich.metastone.game.GameContext.PLAYER_1;
 import static net.demilich.metastone.game.GameContext.PLAYER_2;
 
 @RunWith(VertxUnitRunner.class)

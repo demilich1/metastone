@@ -5,6 +5,7 @@ import com.hiddenswitch.proto3.net.common.MatchmakingRequest;
 import com.hiddenswitch.proto3.net.common.MatchmakingResponse;
 import com.hiddenswitch.proto3.net.models.MatchExpireRequest;
 import com.hiddenswitch.proto3.net.util.Result;
+import com.hiddenswitch.proto3.net.util.ServiceTestBase;
 import com.hiddenswitch.proto3.net.util.TwoClients;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
