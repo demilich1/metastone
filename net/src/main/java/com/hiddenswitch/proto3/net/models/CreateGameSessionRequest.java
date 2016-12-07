@@ -1,11 +1,13 @@
 package com.hiddenswitch.proto3.net.models;
 
 import com.hiddenswitch.proto3.server.PregamePlayerConfiguration;
+import com.hiddenswitch.proto3.server.SocketServer;
 
 public class CreateGameSessionRequest {
 	private String gameId;
 	private PregamePlayerConfiguration pregame1;
 	private PregamePlayerConfiguration pregame2;
+	private long noActivityTimeout = SocketServer.DEFAULT_NO_ACTIVITY_TIMEOUT;
 
 	public PregamePlayerConfiguration getPregame1() {
 		return pregame1;
@@ -39,6 +41,35 @@ public class CreateGameSessionRequest {
 
 	public void setGameId(String gameId) {
 		this.gameId = gameId;
+	}
+
+	/**
+	 * Gets how many milliseconds to wait for activity before shutting down this game session.
+	 *
+	 * @return Milliseconds
+	 */
+	public long getNoActivityTimeout() {
+		return noActivityTimeout;
+	}
+
+	/**
+	 * Sets the number of milliseconds to wait for activity before shutting down this game session.
+	 *
+	 * @param noActivityTimeout Milliseconds
+	 */
+	public void setNoActivityTimeout(long noActivityTimeout) {
+		this.noActivityTimeout = noActivityTimeout;
+	}
+
+	/**
+	 * Sets the number of milliseconds to wait for activity before shutting down this game session.
+	 *
+	 * @param noActivityTimeout Milliseconds
+	 * @return The request
+	 */
+	public CreateGameSessionRequest withNoActivityTimeout(long noActivityTimeout) {
+		setNoActivityTimeout(noActivityTimeout);
+		return this;
 	}
 
 	public CreateGameSessionRequest withGameId(String gameId) {

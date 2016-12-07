@@ -15,11 +15,9 @@ import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.targeting.IdFactory;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.event.EventListenerSupport;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ServerGameContext extends GameContext {
@@ -27,6 +25,7 @@ public class ServerGameContext extends GameContext {
 	private Map<Player, RemoteUpdateListener> listenerMap = new HashMap<>();
 	private final Map<CallbackId, GameplayRequest> requestCallbacks = new HashMap<>();
 	private boolean isRunning = true;
+	private final transient HashSet<Handler<ServerGameContext>> onGameEndHandlers = new HashSet<>();
 
 	public ServerGameContext(Player player1, Player player2, DeckFormat deckFormat, String gameId) {
 		// The player's IDs are set here
@@ -160,37 +159,47 @@ public class ServerGameContext extends GameContext {
 
 	@Suspendable
 	protected void networkedPlayTurn(Handler<Boolean> callback) {
-		setActionsThisTurn(getActionsThisTurn() + 1);
-
-		if (getActionsThisTurn() > 99) {
-			logger.warn("Turn has been forcefully ended after {} actions", getActionsThisTurn());
-			endTurn();
-			callback.handle(false);
+		if (!isRunning) {
 			return;
 		}
 
-		if (getLogic().hasAutoHeroPower(getActivePlayerId())) {
-			performAction(getActivePlayerId(), getAutoHeroPowerAction());
-			callback.handle(true);
-			return;
-		}
+		try {
+			setActionsThisTurn(getActionsThisTurn() + 1);
 
-		List<GameAction> validActions = getValidActions();
-		if (validActions.size() == 0) {
-			endTurn();
-			callback.handle(false);
-			return;
-		}
-
-		NetworkBehaviour networkBehaviour = (NetworkBehaviour) getActivePlayer().getBehaviour();
-		networkBehaviour.requestActionAsync(this, getActivePlayer(), getValidActions(), action -> {
-			if (action == null) {
-				throw new RuntimeException("Behaviour " + getActivePlayer().getBehaviour().getName() + " selected NULL action while "
-						+ getValidActions().size() + " actions were available");
+			if (getActionsThisTurn() > 99) {
+				logger.warn("Turn has been forcefully ended after {} actions", getActionsThisTurn());
+				endTurn();
+				callback.handle(false);
+				return;
 			}
-			performAction(getActivePlayerId(), action);
-			callback.handle(action.getActionType() != ActionType.END_TURN);
-		});
+
+			if (getLogic().hasAutoHeroPower(getActivePlayerId())) {
+				performAction(getActivePlayerId(), getAutoHeroPowerAction());
+				callback.handle(true);
+				return;
+			}
+
+			List<GameAction> validActions = getValidActions();
+			if (validActions.size() == 0) {
+				endTurn();
+				callback.handle(false);
+				return;
+			}
+
+			NetworkBehaviour networkBehaviour = (NetworkBehaviour) getActivePlayer().getBehaviour();
+			networkBehaviour.requestActionAsync(this, getActivePlayer(), getValidActions(), action -> {
+				if (action == null) {
+					throw new RuntimeException("Behaviour " + getActivePlayer().getBehaviour().getName() + " selected NULL action while "
+							+ getValidActions().size() + " actions were available");
+				}
+				performAction(getActivePlayerId(), action);
+				callback.handle(action.getActionType() != ActionType.END_TURN);
+			});
+		} catch (NullPointerException e) {
+			if (isRunning) {
+				throw e;
+			}
+		}
 	}
 
 	@Override
@@ -241,8 +250,8 @@ public class ServerGameContext extends GameContext {
 		((Handler<List<Card>>) handler).handle(discardedCards);
 	}
 
-	public void sendGameOver(Player sender, Player winner) {
-		getListenerMap().get(sender).onGameEnd(winner);
+	void sendGameOver(Player recipient, Player winner) {
+		getListenerMap().get(recipient).onGameEnd(winner);
 	}
 
 	@Override
@@ -287,7 +296,7 @@ public class ServerGameContext extends GameContext {
 
 	@Suspendable
 	@SuppressWarnings("unchecked")
-	protected void retryRequests(Player player) {
+	private void retryRequests(Player player) {
 		List<Map.Entry<CallbackId, GameplayRequest>> requests = requestCallbacks.entrySet().stream().filter(e -> e.getKey().playerId == player.getId()).collect(Collectors.toList());
 		if (requests.size() > 0) {
 			requestCallbacks.entrySet().removeIf(e -> e.getKey().playerId == player.getId());
@@ -308,7 +317,34 @@ public class ServerGameContext extends GameContext {
 		}
 	}
 
+	@Override
+	public void endGame() {
+		super.endGame();
+		onGameEndHandlers.forEach(h -> {
+			h.handle(this);
+		});
+	}
+
+	public void handleEndGame(Handler<ServerGameContext> handler) {
+		onGameEndHandlers.add(handler);
+	}
+
 	public void kill() {
+		if (!gameDecided()) {
+			endGame();
+		}
 		isRunning = false;
+		// Clear out even more stuff
+		dispose();
+	}
+
+	@Override
+	public void dispose() {
+		super.dispose();
+		// Clear out the request callbacks
+		requestCallbacks.clear();
+		// Clear the listeners
+		listenerMap.clear();
+		onGameEndHandlers.clear();
 	}
 }

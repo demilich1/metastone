@@ -2,8 +2,13 @@ package com.hiddenswitch.proto3.server;
 
 import co.paralleluniverse.fibers.Suspendable;
 import com.hiddenswitch.proto3.net.common.*;
+import io.vertx.core.Handler;
+import io.vertx.core.Vertx;
+import io.vertx.core.impl.ContextImpl;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
+import io.vertx.core.net.impl.HandlerManager;
+import io.vertx.core.net.impl.VertxEventLoopGroup;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
@@ -13,6 +18,7 @@ import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
 import net.demilich.metastone.game.targeting.IdFactory;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class ServerGameSession extends GameSession implements ServerCommunicationSend, ServerListener {
@@ -27,6 +33,8 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	private Player player2;
 	private final String gameId;
 	private Logger logger = LoggerFactory.getLogger(ServerGameSession.class);
+	private long noActivityTimeout = SocketServer.DEFAULT_NO_ACTIVITY_TIMEOUT;
+	private final HashSet<Handler<ServerGameSession>> gameOverHandlers = new HashSet<>();
 
 	private ClientConnectionConfiguration getConfigurationFor(PregamePlayerConfiguration player, int id) {
 		// TODO: It's obviously insecure to allow the client to specify things like their player object
@@ -103,6 +111,11 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 		this.gameContext = new ServerGameContext(getPlayer1(), getPlayer2(), simpleFormat, getGameId());
 		getGameContext().setUpdateListener(getPlayer1(), getPlayerListener(IdFactory.PLAYER_1));
 		getGameContext().setUpdateListener(getPlayer2(), getPlayerListener(IdFactory.PLAYER_2));
+		getGameContext().handleEndGame(sgc -> {
+			gameOverHandlers.forEach(h -> {
+				h.handle(this);
+			});
+		});
 		getGameContext().networkPlay();
 	}
 
@@ -122,13 +135,18 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 		return getConfigurationFor(pregamePlayerConfiguration2, IdFactory.PLAYER_2);
 	}
 
-	public ServerGameSession(String host, int port, PregamePlayerConfiguration p1, PregamePlayerConfiguration p2, String gameId) {
+	ServerGameSession(String host, int port, PregamePlayerConfiguration p1, PregamePlayerConfiguration p2, String gameId) {
 		super();
 		setHost(host);
 		setPort(port);
 		this.pregamePlayerConfiguration1 = p1;
 		this.pregamePlayerConfiguration2 = p2;
 		this.gameId = gameId;
+	}
+
+	ServerGameSession(String host, int port, PregamePlayerConfiguration p1, PregamePlayerConfiguration p2, String gameId, long noActivityTimeout) {
+		this(host, port, p1, p2, gameId);
+		this.noActivityTimeout = noActivityTimeout;
 	}
 
 	@Override
@@ -141,11 +159,10 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	}
 
 	@Suspendable
-	public void kill() {
+	void kill() {
 		getGameContext().kill();
 		getClient1().close();
 		getClient2().close();
-
 	}
 
 	private void checkContext() {
@@ -170,19 +187,25 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 		this.port = port;
 	}
 
-	private ServerClientConnection getClient1() {
+	public ServerClientConnection getClient1() {
 		return c1;
 	}
 
 	private void setClient1(ServerClientConnection c1) {
+		if (this.c1 != null) {
+			c1.close();
+		}
 		this.c1 = c1;
 	}
 
-	private ServerClientConnection getClient2() {
+	public ServerClientConnection getClient2() {
 		return c2;
 	}
 
 	private void setClient2(ServerClientConnection c2) {
+		if (this.c2 != null) {
+			c2.close();
+		}
 		this.c2 = c2;
 	}
 
@@ -208,5 +231,13 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 
 	public String getGameId() {
 		return gameId;
+	}
+
+	public long getNoActivityTimeout() {
+		return noActivityTimeout;
+	}
+
+	public void handleGameOver(Handler<ServerGameSession> handler) {
+		gameOverHandlers.add(handler);
 	}
 }

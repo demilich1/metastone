@@ -5,6 +5,8 @@ import com.hiddenswitch.proto3.net.common.ClientToServerMessage;
 import com.hiddenswitch.proto3.net.util.IncomingMessage;
 import com.hiddenswitch.proto3.net.util.Serialization;
 import io.vertx.core.buffer.Buffer;
+import io.vertx.core.eventbus.EventBus;
+import io.vertx.core.json.JsonObject;
 import io.vertx.core.net.NetServer;
 import io.vertx.core.net.NetSocket;
 import io.vertx.ext.sync.Sync;
@@ -13,17 +15,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class SocketServer extends SyncVerticle {
 	private static final Logger logger = LoggerFactory.getLogger(SocketServer.class);
 	private static final int DEFAULT_PORT = 11111;
+	public static final long DEFAULT_NO_ACTIVITY_TIMEOUT = 60 * 1000L;
 	private final int port;
 	private final Map<String, ServerGameSession> games = new HashMap<>();
 	private final Map<NetSocket, ServerGameSession> gameForSocket = new HashMap<>();
 	private final Map<NetSocket, IncomingMessage> messages = new HashMap<>();
+	private final Map<String, ActivityMonitor> gameActivityMonitors = new HashMap<>();
+	private final long cleanupDelayMilliseconds = 500L;
 	private NetServer server;
 
 	@Override
@@ -48,7 +51,7 @@ public class SocketServer extends SyncVerticle {
 
 	@Suspendable
 	private void receiveData(NetSocket socket, Buffer messageBuffer) {
-		logger.debug("Getting buffer from socket with hashCode {} length {}. Incoming message count: {}", socket.hashCode(), messageBuffer.length(), messages.size());
+		logger.trace("Getting buffer from socket with hashCode {} length {}. Incoming message count: {}", socket.hashCode(), messageBuffer.length(), messages.size());
 		// Do we have a reader for this socket?
 		ClientToServerMessage message = null;
 		int bytesRead = 0;
@@ -74,7 +77,7 @@ public class SocketServer extends SyncVerticle {
 
 		// If there appears to be data left over after finishing the message, hold onto the remainder of the buffer.
 		if (bytesRead < messageBuffer.length()) {
-			logger.debug("Some remainder of a message was found. Bytes read: {}, remainder: {}", bytesRead, messageBuffer.length() - bytesRead);
+			logger.trace("Some remainder of a message was found. Bytes read: {}, remainder: {}", bytesRead, messageBuffer.length() - bytesRead);
 			remainder = messageBuffer.getBuffer(bytesRead, messageBuffer.length());
 		}
 
@@ -83,12 +86,12 @@ public class SocketServer extends SyncVerticle {
 		} catch (IOException | ClassNotFoundException e) {
 			logger.error("Deserializing the message failed!", e);
 		} catch (Exception e) {
-			logger.error("A different deserialization error occurred!");
+			logger.error("A different deserialization error occurred!", e);
 		} finally {
 			messages.remove(socket);
 		}
 
-		logger.debug("IncomingMessage complete on socket {}, expectedLength {} actual {}", socket.hashCode(), incomingMessage.getExpectedLength(), incomingMessage.getBufferWithoutHeader().length());
+		logger.trace("IncomingMessage complete on socket {}, expectedLength {} actual {}", socket.hashCode(), incomingMessage.getExpectedLength(), incomingMessage.getBufferWithoutHeader().length());
 
 		if (message == null) {
 			return;
@@ -101,6 +104,9 @@ public class SocketServer extends SyncVerticle {
 			session = gameForSocket.get(socket);
 		}
 
+		// Show activity on the game activity monitor
+		gameActivityMonitors.get(session.getGameId()).activity();
+
 		switch (message.getMt()) {
 			case FIRST_MESSAGE:
 				logger.debug("First message received from {}", message.getPlayer1().toString());
@@ -108,6 +114,7 @@ public class SocketServer extends SyncVerticle {
 				gameForSocket.put(socket, session);
 				// Is this a reconnect?
 				if (session.areBothPlayersJoined()) {
+					// TODO: Remove references to the old socket
 					// Replace the client
 					session.onPlayerReconnected(message.getPlayer1(), client);
 				} else {
@@ -145,9 +152,49 @@ public class SocketServer extends SyncVerticle {
 		Void t = Sync.awaitResult(done -> server.close(done));
 	}
 
+	@Suspendable
+	public void kill(String gameId) {
+		ServerGameSession session = games.get(gameId);
+
+		if (session == null) {
+			// The session was already removed
+			return;
+		}
+
+		// Clear out the activity monitors
+		gameActivityMonitors.get(gameId).cancel();
+		gameActivityMonitors.remove(gameId);
+
+		// Get the sockets associated with the session
+		List<NetSocket> sockets = Arrays.asList(session.getClient1().getPrivateSocket(), session.getClient2().getPrivateSocket());
+
+		// Kill the session
+		session.kill();
+
+		// Clear our maps of these sockets
+		sockets.forEach(s -> {
+			gameForSocket.remove(s);
+			messages.remove(s);
+		});
+
+		// Expire the match
+		expireMatch(gameId);
+
+		// Remove the game session
+		games.remove(gameId);
+	}
+
 	public ServerGameSession createGameSession(PregamePlayerConfiguration player1, PregamePlayerConfiguration player2, String gameId) {
-		ServerGameSession newSession = new ServerGameSession(getHost(), getPort(), player1, player2, gameId);
-		games.put(newSession.getGameId(), newSession);
+		return createGameSession(player1, player2, gameId, DEFAULT_NO_ACTIVITY_TIMEOUT);
+	}
+
+	public ServerGameSession createGameSession(PregamePlayerConfiguration player1, PregamePlayerConfiguration player2, String gameId, long noActivityTimeout) {
+		ServerGameSession newSession = new ServerGameSession(getHost(), getPort(), player1, player2, gameId, noActivityTimeout);
+		newSession.handleGameOver(this::onGameOver);
+		final String finalGameId = newSession.getGameId();
+		games.put(finalGameId, newSession);
+		// If the game has no activity after a certain amount of time, kill it automatically.
+		gameActivityMonitors.put(finalGameId, new ActivityMonitor(vertx, finalGameId, noActivityTimeout, this::kill));
 		return newSession;
 	}
 
@@ -161,5 +208,28 @@ public class SocketServer extends SyncVerticle {
 
 	public Map<String, ServerGameSession> getGames() {
 		return Collections.unmodifiableMap(games);
+	}
+
+	private void expireMatch(String gameId) {
+		EventBus eb = vertx.eventBus();
+		JsonObject message = new JsonObject();
+		message.put("gameId", gameId);
+		eb.send("Games::expireMatch", message, reply -> {
+			if (reply.failed()) {
+				// Nobody was listening, the matchmaking service isn't running
+			} else {
+				final JsonObject body = (JsonObject) reply.result().body();
+				if (!body.getBoolean("expired")) {
+					// TODO: Do something if we failed to expire the message.
+				}
+			}
+		});
+	}
+
+	private void onGameOver(ServerGameSession sgs) {
+		final String gameOverId = sgs.getGameId();
+		vertx.setTimer(cleanupDelayMilliseconds, t -> {
+			kill(gameOverId);
+		});
 	}
 }

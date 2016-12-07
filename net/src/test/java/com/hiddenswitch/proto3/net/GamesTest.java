@@ -1,7 +1,9 @@
 package com.hiddenswitch.proto3.net;
 
+import co.paralleluniverse.strands.Strand;
 import com.hiddenswitch.proto3.net.common.MatchmakingRequest;
 import com.hiddenswitch.proto3.net.common.MatchmakingResponse;
+import com.hiddenswitch.proto3.net.models.MatchExpireRequest;
 import com.hiddenswitch.proto3.net.util.Result;
 import com.hiddenswitch.proto3.net.util.TwoClients;
 import io.vertx.core.AsyncResult;
@@ -43,6 +45,25 @@ public class GamesTest extends ServiceTestBase<Games> {
 	@Test
 	public void testMatchmakeAndJoin() {
 		createTwoPlayersAndMatchmake();
+	}
+
+	@Test
+	public void testMatchmakeSamePlayersTwice(TestContext context) {
+		wrapBlocking(context, () -> {
+			try {
+				// Creates the same two players
+				String gameId = createTwoPlayersAndMatchmake();
+				Strand.sleep(1000L);
+				getContext().assertNull(service.getGameSessions().getGameSession(gameId));
+				final MatchExpireRequest request = new MatchExpireRequest();
+				request.gameId = gameId;
+				getContext().assertFalse(service.expireMatch(request).expired, "We should fail to expire an already expired match.");
+				createTwoPlayersAndMatchmake();
+			} catch (Throwable e) {
+				getContext().fail(e);
+			}
+		});
+
 	}
 
 	private String createTwoPlayersAndMatchmake() {

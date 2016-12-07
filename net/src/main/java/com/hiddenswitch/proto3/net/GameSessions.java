@@ -1,17 +1,12 @@
 package com.hiddenswitch.proto3.net;
 
 import com.hiddenswitch.proto3.net.common.ServerGameContext;
-import com.hiddenswitch.proto3.net.models.CreateGameSessionRequest;
-import com.hiddenswitch.proto3.net.models.CreateGameSessionResponse;
-import com.hiddenswitch.proto3.net.models.DescribeGameSessionRequest;
-import com.hiddenswitch.proto3.net.models.DescribeGameSessionResponse;
+import com.hiddenswitch.proto3.net.models.*;
 import com.hiddenswitch.proto3.server.GameSession;
 import com.hiddenswitch.proto3.server.ServerGameSession;
 import com.hiddenswitch.proto3.server.SocketServer;
 import io.netty.channel.DefaultChannelId;
-import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Future;
-import io.vertx.core.Vertx;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 import net.demilich.metastone.game.cards.CardCatalogue;
@@ -53,10 +48,11 @@ public class GameSessions extends Service<GameSessions> {
 	}
 
 	public ServerGameContext getGameContext(String gameId) {
-		return getServer()
-				.getGames()
-				.get(gameId)
-				.getGameContext();
+		ServerGameSession session = getServer().getGames().get(gameId);
+		if (session == null) {
+			return null;
+		}
+		return session.getGameContext();
 	}
 
 	public GameSession getGameSession(String gameId) {
@@ -73,7 +69,7 @@ public class GameSessions extends Service<GameSessions> {
 		if (request.getGameId() == null) {
 			throw new RuntimeException("Game ID cannot be null in a create game session request.");
 		}
-		ServerGameSession newSession = server.createGameSession(request.getPregame1(), request.getPregame2(), request.getGameId());
+		ServerGameSession newSession = server.createGameSession(request.getPregame1(), request.getPregame2(), request.getGameId(), request.getNoActivityTimeout());
 		return new CreateGameSessionResponse(newSession.getConfigurationForPlayer1(), newSession.getConfigurationForPlayer2(), newSession.getGameId());
 	}
 
@@ -84,5 +80,15 @@ public class GameSessions extends Service<GameSessions> {
 	@Override
 	public void stop() {
 		super.stop();
+	}
+
+	public EndGameSessionResponse endGameSession(EndGameSessionRequest request) {
+		if (request.getGameId() == null) {
+			throw new RuntimeException("Game ID cannot be null in an end game session request.");
+		}
+
+		getServer().kill(request.getGameId());
+
+		return new EndGameSessionResponse();
 	}
 }
