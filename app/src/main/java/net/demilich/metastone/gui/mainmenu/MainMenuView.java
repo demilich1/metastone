@@ -80,6 +80,9 @@ public class MainMenuView extends BorderPane {
 
 		}
 
+		deckBuilderButton.setVisible(BuildConfig.DECK_BUILDER_ENABLED);
+		deckBuilderButton.setManaged(BuildConfig.DECK_BUILDER_ENABLED);
+
 		versionLabel.setText(BuildConfig.VERSION + (BuildConfig.DEV_BUILD ? " (Dev build)" : ""));
 
 		donationButton.setOnAction(this::openDonation);
