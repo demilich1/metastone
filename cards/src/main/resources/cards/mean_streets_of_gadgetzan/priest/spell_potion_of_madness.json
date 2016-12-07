@@ -1,0 +1,21 @@
+{
+	"name": "Potion of Madness",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "COMMON",
+	"description": "Gain control of an enemy minion with 2 or less Attack until end of turn.",
+	"targetSelection": "ENEMY_MINIONS",
+	"spell": {
+		"class": "custom.ShadowMadnessSpell",
+		"filter": {
+			"class": "AttributeFilter",
+			"attribute": "ATTACK",
+			"operation": "LESS_OR_EQUAL",
+			"value": 2
+		}
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

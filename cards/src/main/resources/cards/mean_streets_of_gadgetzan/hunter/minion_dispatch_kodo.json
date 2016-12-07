@@ -1,0 +1,28 @@
+{
+	"name": "Dispatch Kodo",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 4,
+	"heroClass": "HUNTER",
+	"rarity": "RARE",
+	"race": "BEAST",
+	"description": "Battlecry: Deal damage equal to this minion's Attack.",
+	"battlecry": {
+		"targetSelection": "ANY",
+		"spell": {
+			"class": "DamageSpell",
+			"value": {
+				"class": "AttributeValueProvider",
+				"target": "SELF",
+				"attribute": "ATTACK"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

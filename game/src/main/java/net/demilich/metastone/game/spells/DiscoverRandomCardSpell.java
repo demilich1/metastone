@@ -50,7 +50,7 @@ public class DiscoverRandomCardSpell extends Spell {
 			CardCollection classCards = CardCatalogue.query(context.getDeckFormat());
 			cards.addAll(classCards);
 		} else {
-			cards.addAll(CardCatalogue.query(context.getDeckFormat(), HeroClass.ANY, heroClass));
+			cards.addAll(CardCatalogue.query(context.getDeckFormat(), HeroClass.ANY));
 			CardCollection classCards = CardCatalogue.query(context.getDeckFormat(), heroClass);
 			for (int i = 0; i < 4; i++) {
 				cards.addAll(classCards);

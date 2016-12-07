@@ -1,0 +1,20 @@
+{
+	"name": "Sleep with the Fishes",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "WARRIOR",
+	"rarity": "EPIC",
+	"description": "Deal 3 damage to all damaged minions.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "DamageSpell",
+		"target": "ALL_MINIONS",
+		"value": 3,
+		"filter": {
+			"class": "DamagedFilter"
+		}
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

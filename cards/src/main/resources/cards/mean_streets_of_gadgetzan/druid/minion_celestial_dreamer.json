@@ -1,0 +1,34 @@
+{
+	"name": "Celestial Dreamer",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 3,
+	"heroClass": "DRUID",
+	"rarity": "RARE",
+	"description": "Battlecry: If a friendly minion has 5 or more Attack, gain +2/+2.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "BuffSpell",
+			"value": 2,
+			"target": "SELF"
+		},
+		"condition": {
+			"class": "HasEntityCondition",
+			"target": "OTHER_FRIENDLY_MINIONS",
+			"filter": {
+				"class": "AttributeFilter",
+				"attribute": "ATTACK",
+				"operation": "GREATER_OR_EQUAL",
+				"value": 5
+			} 
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

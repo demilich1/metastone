@@ -1,0 +1,45 @@
+{
+	"name": "Kabal Courier",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"heroClass": "ANY",
+	"heroClasses": [
+		"MAGE",
+		"PRIEST",
+		"WARLOCK"
+	],
+	"rarity": "RARE",
+	"description": "Battlecry: Discover a Mage, Priest, or Warlock card.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "DiscoverFilteredCardSpell",
+			"spell": {
+				"class": "ReceiveCardSpell",
+				"targetPlayer": "SELF"
+			},
+			"cardFilters": [
+				{
+					"class": "CardFilter",
+					"heroClass": "MAGE"
+				},
+				{
+					"class": "CardFilter",
+					"heroClass": "PRIEST"
+				},
+				{
+					"class": "CardFilter",
+					"heroClass": "WARLOCK"
+				}
+			]
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

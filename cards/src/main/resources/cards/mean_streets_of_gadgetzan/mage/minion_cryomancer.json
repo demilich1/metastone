@@ -1,0 +1,33 @@
+{
+	"name": "Cryomancer",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 5,
+	"heroClass": "MAGE",
+	"rarity": "COMMON",
+	"description": "Battlecry: Gain +2/+2 if an enemy is Frozen.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "BuffSpell",
+			"value": 2,
+			"target": "SELF"
+		},
+		"condition": {
+			"class": "HasEntityCondition",
+			"target": "ENEMY_CHARACTERS",
+			"filter": {
+				"class": "AttributeFilter",
+				"operation": "HAS",
+				"attribute": "FROZEN"
+			} 
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

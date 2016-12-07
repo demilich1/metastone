@@ -1,0 +1,16 @@
+{
+	"name": "Counterfeit Coin",
+	"baseManaCost": 0,
+	"type": "SPELL",
+	"heroClass": "ROGUE",
+	"rarity": "RARE",
+	"description": "Gain 1 Mana this turn only.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "GainManaSpell",
+		"value": 1
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

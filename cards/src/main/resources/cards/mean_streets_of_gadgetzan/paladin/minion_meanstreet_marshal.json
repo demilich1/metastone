@@ -1,0 +1,30 @@
+{
+	"name": "Meanstreet Marshal",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 2,
+	"heroClass": "PALADIN",
+	"rarity": "EPIC",
+	"description": "Deathrattle: If this minion has 2 or more Attack, draw a card.",
+	"deathrattle": {
+		"class": "ConditionalSpell",
+		"spell": {
+			"class": "DrawCardSpell",
+			"value": 1
+		},
+		"condition": {
+			"class": "AttributeCondition",
+			"target": "SELF",
+			"attribute": "ATTACK",
+			"operation": "GREATER_OR_EQUAL",
+			"value": 2
+		}
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

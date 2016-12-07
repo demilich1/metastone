@@ -1,0 +1,32 @@
+{
+	"name": "Wickerflame Burnbristle",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"heroClass": "PALADIN",
+	"rarity": "LEGENDARY",
+	"description": "Divine Shield. Taunt. Damage dealt by this minion also heals your hero.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "DamageCausedTrigger",
+			"hostTargetType": "IGNORE_OTHER_SOURCES"
+		},
+		"spell": {
+			"class": "HealSpell",
+			"target": "FRIENDLY_HERO",
+			"value": {
+				"class": "AttributeValueProvider",
+				"target": "EVENT_TARGET",
+				"attribute": "LAST_HIT"
+			}
+		}
+	},
+	"attributes": {
+		"DIVINE_SHIELD": true,
+		"TAUNT": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

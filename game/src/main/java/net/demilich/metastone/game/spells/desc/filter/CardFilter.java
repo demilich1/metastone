@@ -25,7 +25,7 @@ public class CardFilter extends EntityFilter {
 			heroClass = player.getHero().getHeroClass();
 		}
 		
-		if (heroClass != null && card.getHeroClass() == heroClass) {
+		if (heroClass != null && card.hasHeroClass(heroClass)) {
 			return false;
 		}
 		

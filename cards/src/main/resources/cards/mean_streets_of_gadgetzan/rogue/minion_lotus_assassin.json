@@ -1,0 +1,31 @@
+{
+	"name": "Lotus Assassin",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 5,
+	"heroClass": "ROGUE",
+	"rarity": "EPIC",
+	"description": "Stealth. Whenever this minion attacks and kills a minion, gain Stealth.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "AfterPhysicalAttackTrigger",
+			"targetEntityType": "MINION",
+			"hostTargetType": "IGNORE_OTHER_SOURCES",
+			"fireCondition": {
+				"class": "IsDeadCondition"
+			}
+		},
+		"spell": {
+			"class": "AddAttributeSpell",
+			"target": "SELF",
+			"attribute": "STEALTH"
+		}
+	},
+	"attributes": {
+		"STEALTH": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

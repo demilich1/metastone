@@ -1,0 +1,17 @@
+{
+	"name": "Jade Idol",
+	"baseManaCost": 1,
+	"type": "CHOOSE_ONE",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"description": "Choose One - Summon a Jade Golem; or Shuffle 3 copies of this card into your deck.",
+	"targetSelection": "NONE",
+	"options": [
+		"spell_jade_idol_1",
+		"spell_jade_idol_2"
+	],
+	"bothOptions": "spell_jade_idol_3",
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

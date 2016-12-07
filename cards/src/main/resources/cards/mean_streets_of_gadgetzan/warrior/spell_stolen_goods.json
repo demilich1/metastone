@@ -1,0 +1,25 @@
+{
+	"name": "Stolen Goods",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "WARRIOR",
+	"rarity": "RARE",
+	"description": "Give a random Taunt minion in your hand +3/+3.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "BuffSpell",
+		"target": "FRIENDLY_HAND",
+		"attackBonus": 3,
+		"hpBonus": 3,
+		"filter": {
+			"class": "CardFilter",
+			"cardType": "MINION",
+			"attribute": "TAUNT",
+			"operation": "HAS"
+		},
+		"randomTarget": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

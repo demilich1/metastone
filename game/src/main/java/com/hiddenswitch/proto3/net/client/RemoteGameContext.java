@@ -111,11 +111,6 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 	}
 
 	@Override
-	public Stack<EntityReference> getSummonReferenceStack() {
-		throw new RuntimeException("should not be called");
-	}
-
-	@Override
 	public int getTotalMinionCount() {
 		throw new RuntimeException("should not be called");
 	}

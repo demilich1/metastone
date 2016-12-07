@@ -116,9 +116,13 @@ public class AccountsTest extends ServiceTestBase<Accounts> {
 	@Override
 	public void deployServices(Vertx vertx, Handler<AsyncResult<Accounts>> done) {
 		Accounts instance = new Accounts();
-		vertx.deployVerticle(instance, then -> {
+		vertx.executeBlocking(fut -> {
+			instance.withEmbeddedConfiguration();
+			fut.complete();
+		}, then -> vertx.deployVerticle(instance, andThen -> {
 			done.handle(new Result<>(instance));
-		});
+		}));
+
 	}
 
 	public interface ThrowingRunnable {

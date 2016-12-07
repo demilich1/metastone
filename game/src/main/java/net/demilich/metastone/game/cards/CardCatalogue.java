@@ -142,14 +142,8 @@ public class CardCatalogue {
 			if (rarity != null && !card.getRarity().isRarity(rarity)) {
 				continue;
 			}
-			if (actualHeroClass != null && card.getHeroClasses() != null) {
-				if (heroClass != null && (card.getHeroClass() != heroClass || !card.hasHeroClass(actualHeroClass))) {
-					continue;
-				}
-			} else {
-				if (heroClass != null && card.getHeroClass() != heroClass) {
-					continue;
-				}
+			if (heroClass != null && !card.hasHeroClass(heroClass)) {
+				continue;
 			}
 			if (tag != null && !card.hasAttribute(tag)) {
 				continue;

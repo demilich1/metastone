@@ -1,0 +1,29 @@
+{
+	"name": "Tanaris Hogchopper",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Battlecry: If your opponent's hand is empty, gain Charge.",
+	"battlecry": {
+		"spell": {
+			"class": "AddAttributeSpell",
+			"target": "SELF",
+			"attribute": "CHARGE"
+		},
+		"condition": {
+			"class": "CardCountCondition",
+			"targetPlayer": "OPPONENT",
+			"operation": "EQUAL",
+			"value": 0
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

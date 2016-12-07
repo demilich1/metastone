@@ -1,0 +1,53 @@
+{
+	"name": "Jade Behemoth",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 6,
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"description": "Taunt. Battlecry: Summon a Jade Golem.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "CreateSummonSpell",
+			"name": "Jade Golem",
+			"attackBonus": {
+				"class": "AttributeValueProvider",
+				"target": "FRIENDLY_PLAYER",
+				"attribute": "JADE_BUFF",
+				"offset": 1
+			},
+			"hpBonus": {
+				"class": "AttributeValueProvider",
+				"target": "FRIENDLY_PLAYER",
+				"attribute": "JADE_BUFF",
+				"offset": 1
+			},
+			"mana": {
+				"class": "AlgebraicValueProvider",
+				"operation": "MAXIMUM",
+				"value1": {
+					"class": "AttributeValueProvider",
+					"target": "FRIENDLY_PLAYER",
+					"attribute": "JADE_BUFF",
+					"offset": 1
+				},
+				"value2": 10
+			},
+			"spell": {
+				"class": "ModifyAttributeSpell",
+				"target": "FRIENDLY_PLAYER",
+				"attribute": "JADE_BUFF",
+				"value": 1
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true,
+		"TAUNT": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

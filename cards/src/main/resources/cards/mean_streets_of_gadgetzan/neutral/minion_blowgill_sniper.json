@@ -1,0 +1,24 @@
+{
+	"name": "Blowgill Sniper",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 1,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"race": "MURLOC",
+	"description": "Battlecry: Deal 1 damage.",
+	"battlecry": {
+		"targetSelection": "ANY",
+		"spell": {
+			"class": "DamageSpell",
+			"value": 1
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

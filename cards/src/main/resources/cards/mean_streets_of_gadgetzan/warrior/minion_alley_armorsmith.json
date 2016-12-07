@@ -1,0 +1,31 @@
+{
+	"name": "Alley Armorsmith",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 7,
+	"heroClass": "WARRIOR",
+	"rarity": "RARE",
+	"description": "Taunt. Whenever this minion deals damage, gain that much Armor.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "DamageCausedTrigger",
+			"hostTargetType": "IGNORE_OTHER_SOURCES"
+		},
+		"spell": {
+			"class": "BuffHeroSpell",
+			"target": "FRIENDLY_HERO",
+			"armorBonus": {
+				"class": "AttributeValueProvider",
+				"target": "EVENT_TARGET",
+				"attribute": "LAST_HIT"
+			}
+		}
+	},
+	"attributes": {
+		"TAUNT": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

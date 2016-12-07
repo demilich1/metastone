@@ -1,0 +1,27 @@
+{
+	"name": "Hozen Healer",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 6,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Battlecry: Restore a minion to full Health.",
+	"battlecry": {
+		"targetSelection": "MINIONS",
+		"spell": {
+			"class": "HealSpell",
+			"value": {
+				"class": "AttributeValueProvider",
+				"target": "TARGET",
+				"attribute": "MAX_HP"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

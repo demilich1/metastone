@@ -1,0 +1,29 @@
+{
+	"name": "Grimestreet Enforcer",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 4,
+	"heroClass": "PALADIN",
+	"rarity": "RARE",
+	"description": "At the end of your turn, give all minions in your hand +1/+1.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"target": "FRIENDLY_HAND",
+			"attackBonus": 1,
+			"hpBonus": 1,
+			"filter": {
+				"class": "CardFilter",
+				"cardType": "MINION"
+			}
+		}
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

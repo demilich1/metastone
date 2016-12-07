@@ -1,0 +1,24 @@
+{
+	"name": "Red Mana Wyrm",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 6,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Whenever you cast a spell, gain +2 Attack.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "SpellCastedTrigger",
+			"sourcePlayer": "SELF"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"target": "SELF",
+			"attackBonus": 2
+		}
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

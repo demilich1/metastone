@@ -1,0 +1,57 @@
+{
+	"name": "Jade Spirit",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 3,
+	"heroClass": "ANY",
+	"heroClasses": [
+		"DRUID",
+		"ROGUE",
+		"SHAMAN"
+	],
+	"rarity": "COMMON",
+	"description": "Battlecry: Summon a Jade Golem.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "CreateSummonSpell",
+			"name": "Jade Golem",
+			"attackBonus": {
+				"class": "AttributeValueProvider",
+				"target": "FRIENDLY_PLAYER",
+				"attribute": "JADE_BUFF",
+				"offset": 1
+			},
+			"hpBonus": {
+				"class": "AttributeValueProvider",
+				"target": "FRIENDLY_PLAYER",
+				"attribute": "JADE_BUFF",
+				"offset": 1
+			},
+			"mana": {
+				"class": "AlgebraicValueProvider",
+				"operation": "MAXIMUM",
+				"value1": {
+					"class": "AttributeValueProvider",
+					"target": "FRIENDLY_PLAYER",
+					"attribute": "JADE_BUFF",
+					"offset": 1
+				},
+				"value2": 10
+			},
+			"spell": {
+				"class": "ModifyAttributeSpell",
+				"target": "FRIENDLY_PLAYER",
+				"attribute": "JADE_BUFF",
+				"value": 1
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

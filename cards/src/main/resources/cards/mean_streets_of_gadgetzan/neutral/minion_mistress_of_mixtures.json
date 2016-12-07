@@ -1,0 +1,31 @@
+{
+	"name": "Mistress of Mixtures",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Deathrattle: Restore 4 Health to both players.",
+	"deathrattle": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "HealSpell",
+				"target": "FRIENDLY_HERO",
+				"value": 4
+			},
+			{
+				"class": "HealSpell",
+				"target": "ENEMY_HERO",
+				"value": 4
+			}
+		]
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}
