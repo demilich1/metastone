@@ -8,9 +8,6 @@ import org.joda.time.DateTimeComparator;
 
 import java.time.Instant;
 import java.util.*;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Created by bberman on 11/30/16.
@@ -18,7 +15,8 @@ import java.util.stream.Stream;
 public class Matchmaker extends AbstractMap<String, QueueEntry> {
 	private final int timeoutSeconds;
 	private Map<String, QueueEntry> entries = new HashMap<>();
-	private Map<String, Match> matches = new HashMap<>();
+	private Map<String, Match> usersToMatches = new HashMap<>();
+	private Map<String, Match> gamesToMatches = new HashMap<>();
 	private TreeList queue = new TreeList();
 
 	public Matchmaker() {
@@ -36,25 +34,33 @@ public class Matchmaker extends AbstractMap<String, QueueEntry> {
 			this.entry1 = entry1;
 			this.entry2 = entry2;
 			this.createdAt = Date.from(Instant.now());
-			matches.put(this.entry1.userId, this);
-			matches.put(this.entry2.userId, this);
+			usersToMatches.put(this.entry1.userId, this);
+			usersToMatches.put(this.entry2.userId, this);
+			gamesToMatches.put(this.gameId, this);
+		}
+
+		public void remove() {
+			usersToMatches.remove(this.entry1.userId);
+			usersToMatches.remove(this.entry2.userId);
+			gamesToMatches.remove(this.gameId);
+			Matchmaker.this.remove(this.entry1.userId);
+			Matchmaker.this.remove(this.entry2.userId);
 		}
 	}
 
 	public synchronized boolean expire(String gameId) {
-		if (!matches.containsKey(gameId)) {
+		if (!gamesToMatches.containsKey(gameId)) {
 			return false;
 		}
-		Match match = matches.get(gameId);
-		matches.remove(gameId);
-		remove(match.entry1.userId);
-		remove(match.entry2.userId);
+		Match match = gamesToMatches.get(gameId);
+		match.remove();
+
 		return true;
 	}
 
 	public synchronized Match match(String userId, Deck deck) {
-		if (matches.containsKey(userId)) {
-			return matches.get(userId);
+		if (usersToMatches.containsKey(userId)) {
+			return usersToMatches.get(userId);
 		}
 
 		if (!contains(userId)) {

@@ -26,7 +26,7 @@ public class SocketServer extends SyncVerticle {
 	private final Map<NetSocket, ServerGameSession> gameForSocket = new HashMap<>();
 	private final Map<NetSocket, IncomingMessage> messages = new HashMap<>();
 	private final Map<String, ActivityMonitor> gameActivityMonitors = new HashMap<>();
-	private final long cleanupDelayMilliseconds;
+	private final long cleanupDelayMilliseconds = 500L;
 	private NetServer server;
 
 	@Override
@@ -139,12 +139,10 @@ public class SocketServer extends SyncVerticle {
 
 	public SocketServer() {
 		this.port = DEFAULT_PORT;
-		cleanupDelayMilliseconds = 4000L;
 	}
 
 	public SocketServer(int port) {
 		this.port = port;
-		cleanupDelayMilliseconds = 4000L;
 	}
 
 	@Override

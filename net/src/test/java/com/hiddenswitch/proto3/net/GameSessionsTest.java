@@ -153,7 +153,7 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 				TwoClients twoClients = getAndTestTwoClients();
 				String gameId = twoClients.getGameId();
 				// Exceeds the cleanup time
-				Strand.sleep(8000L);
+				Strand.sleep(1000L);
 				getContext().assertNull(service.getGameSession(gameId));
 			} catch (Throwable e) {
 				getContext().fail(e);
