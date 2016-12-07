@@ -85,7 +85,7 @@ public class TestBase {
 		context.getLogic().performGameAction(player.getId(), physicalAttackAction);
 	}
 
-	protected static DebugContext createContext(HeroClass hero1, HeroClass hero2) {
+	public static DebugContext createContext(HeroClass hero1, HeroClass hero2) {
 		DeckFormat deckFormat = new DeckFormat();
 		for (CardSet set : CardSet.values()) {
 			deckFormat.addSet(set);

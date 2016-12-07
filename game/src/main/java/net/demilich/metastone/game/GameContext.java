@@ -2,6 +2,7 @@ package net.demilich.metastone.game;
 
 import co.paralleluniverse.fibers.Suspendable;
 import com.google.gson.annotations.Expose;
+import com.hiddenswitch.proto3.net.common.GameState;
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
@@ -695,6 +696,15 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 
 	public void setPlayer2(Player player2) {
 		setPlayer(PLAYER_2, player2);
+	}
+
+	public void loadState(GameState state) {
+		this.setPlayer(GameContext.PLAYER_1, state.player1);
+		this.setPlayer(GameContext.PLAYER_2, state.player2);
+		this.setEnvironment(state.environment);
+		this.setTriggerManager(state.triggerManager);
+		this.getLogic().setIdFactory(new IdFactory(state.currentId));
+		this.setTurnState(state.turnState);
 	}
 
 	public void setPlayer(int index, Player player) {
