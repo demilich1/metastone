@@ -18,7 +18,7 @@
 			"operation": "HAS"
 		}
 	},
-	"attribute": {
+	"attributes": {
 		"OVERLOAD": 1
 	},
 	"collectible": true,
