@@ -15,11 +15,9 @@ import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.targeting.IdFactory;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.event.EventListenerSupport;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ServerGameContext extends GameContext {
@@ -27,6 +25,7 @@ public class ServerGameContext extends GameContext {
 	private Map<Player, RemoteUpdateListener> listenerMap = new HashMap<>();
 	private final Map<CallbackId, GameplayRequest> requestCallbacks = new HashMap<>();
 	private boolean isRunning = true;
+	private final transient HashSet<Handler<ServerGameContext>> onGameEndHandlers = new HashSet<>();
 
 	public ServerGameContext(Player player1, Player player2, DeckFormat deckFormat, String gameId) {
 		// The player's IDs are set here
@@ -318,14 +317,34 @@ public class ServerGameContext extends GameContext {
 		}
 	}
 
-	public synchronized void kill() {
-		endGame();
+	@Override
+	public void endGame() {
+		super.endGame();
+		onGameEndHandlers.forEach(h -> {
+			h.handle(this);
+		});
+	}
+
+	public void handleEndGame(Handler<ServerGameContext> handler) {
+		onGameEndHandlers.add(handler);
+	}
+
+	public void kill() {
+		if (!gameDecided()) {
+			endGame();
+		}
 		isRunning = false;
+		// Clear out even more stuff
+		dispose();
+	}
+
+	@Override
+	public void dispose() {
+		super.dispose();
 		// Clear out the request callbacks
 		requestCallbacks.clear();
 		// Clear the listeners
 		listenerMap.clear();
-		// Clear out even more stuff
-		dispose();
+		onGameEndHandlers.clear();
 	}
 }

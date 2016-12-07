@@ -20,6 +20,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import scala.reflect.internal.Trees;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -139,6 +140,21 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 				getContext().assertNull(service.getGameSession(gameId));
 				getContext().assertTrue(clients1.getPlayerContext2().gameDecided());
 
+			} catch (Throwable e) {
+				getContext().fail(e);
+			}
+		});
+	}
+
+	@Test(timeout = 40 * 1000L)
+	public void testRemoveSessionAfterNormalGameOver(TestContext context) {
+		wrapBlocking(context, () -> {
+			try {
+				TwoClients twoClients = getAndTestTwoClients();
+				String gameId = twoClients.getGameId();
+				// Exceeds the cleanup time
+				Strand.sleep(8000L);
+				getContext().assertNull(service.getGameSession(gameId));
 			} catch (Throwable e) {
 				getContext().fail(e);
 			}

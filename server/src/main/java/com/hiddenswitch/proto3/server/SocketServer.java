@@ -6,7 +6,6 @@ import com.hiddenswitch.proto3.net.util.IncomingMessage;
 import com.hiddenswitch.proto3.net.util.Serialization;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.eventbus.EventBus;
-import io.vertx.core.eventbus.impl.codecs.JsonObjectMessageCodec;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.net.NetServer;
 import io.vertx.core.net.NetSocket;
@@ -27,6 +26,7 @@ public class SocketServer extends SyncVerticle {
 	private final Map<NetSocket, ServerGameSession> gameForSocket = new HashMap<>();
 	private final Map<NetSocket, IncomingMessage> messages = new HashMap<>();
 	private final Map<String, ActivityMonitor> gameActivityMonitors = new HashMap<>();
+	private final long cleanupDelayMilliseconds;
 	private NetServer server;
 
 	@Override
@@ -139,10 +139,12 @@ public class SocketServer extends SyncVerticle {
 
 	public SocketServer() {
 		this.port = DEFAULT_PORT;
+		cleanupDelayMilliseconds = 4000L;
 	}
 
 	public SocketServer(int port) {
 		this.port = port;
+		cleanupDelayMilliseconds = 4000L;
 	}
 
 	@Override
@@ -155,6 +157,11 @@ public class SocketServer extends SyncVerticle {
 	@Suspendable
 	public void kill(String gameId) {
 		ServerGameSession session = games.get(gameId);
+
+		if (session == null) {
+			// The session was already removed
+			return;
+		}
 
 		// Clear out the activity monitors
 		gameActivityMonitors.get(gameId).cancel();
@@ -185,6 +192,7 @@ public class SocketServer extends SyncVerticle {
 
 	public ServerGameSession createGameSession(PregamePlayerConfiguration player1, PregamePlayerConfiguration player2, String gameId, long noActivityTimeout) {
 		ServerGameSession newSession = new ServerGameSession(getHost(), getPort(), player1, player2, gameId, noActivityTimeout);
+		newSession.handleGameOver(this::onGameOver);
 		final String finalGameId = newSession.getGameId();
 		games.put(finalGameId, newSession);
 		// If the game has no activity after a certain amount of time, kill it automatically.
@@ -210,13 +218,20 @@ public class SocketServer extends SyncVerticle {
 		message.put("gameId", gameId);
 		eb.send("Games::expireMatch", message, reply -> {
 			if (reply.failed()) {
-				return;
+				// Nobody was listening, the matchmaking service isn't running
 			} else {
 				final JsonObject body = (JsonObject) reply.result().body();
 				if (!body.getBoolean("expired")) {
 					// TODO: Do something if we failed to expire the message.
 				}
 			}
+		});
+	}
+
+	private void onGameOver(ServerGameSession sgs) {
+		final String gameOverId = sgs.getGameId();
+		vertx.setTimer(cleanupDelayMilliseconds, t -> {
+			kill(gameOverId);
 		});
 	}
 }
