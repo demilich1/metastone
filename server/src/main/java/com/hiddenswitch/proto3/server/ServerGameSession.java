@@ -192,9 +192,6 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	}
 
 	private void setClient1(ServerClientConnection c1) {
-		if (this.c1 != null) {
-			c1.close();
-		}
 		this.c1 = c1;
 	}
 
@@ -203,9 +200,6 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	}
 
 	private void setClient2(ServerClientConnection c2) {
-		if (this.c2 != null) {
-			c2.close();
-		}
 		this.c2 = c2;
 	}
 
