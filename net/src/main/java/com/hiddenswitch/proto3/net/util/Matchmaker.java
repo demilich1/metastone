@@ -16,10 +16,14 @@ import java.util.stream.Stream;
  * Created by bberman on 11/30/16.
  */
 public class Matchmaker extends AbstractMap<String, QueueEntry> {
+	private final int timeoutSeconds;
 	private Map<String, QueueEntry> entries = new HashMap<>();
 	private Map<String, Match> matches = new HashMap<>();
 	private TreeList queue = new TreeList();
-	private Date lastClean = Date.from(Instant.now());
+
+	public Matchmaker() {
+		timeoutSeconds = 4;
+	}
 
 	public class Match {
 		public final String gameId;
@@ -28,7 +32,7 @@ public class Matchmaker extends AbstractMap<String, QueueEntry> {
 		public final Date createdAt;
 
 		public Match(QueueEntry entry1, QueueEntry entry2) {
-			this.gameId = RandomStringUtils.randomAlphanumeric(10).toLowerCase();
+			this.gameId = RandomStringUtils.randomAlphanumeric(timeoutSeconds).toLowerCase();
 			this.entry1 = entry1;
 			this.entry2 = entry2;
 			this.createdAt = Date.from(Instant.now());
@@ -37,20 +41,15 @@ public class Matchmaker extends AbstractMap<String, QueueEntry> {
 		}
 	}
 
-	private void clean(Predicate<QueueEntry> queuePredicate, Predicate<Match> matchPredicate) {
-		List<String> toRemoveUsers = keySet().stream().filter(k -> queuePredicate.test(entries.get(k))).collect(Collectors.toList());
-		List<String> toRemoveMatches = matches.values().stream().filter(matchPredicate).flatMap(m -> Stream.of(m.entry1.userId, m.entry2.userId)).collect(Collectors.toList());
-		toRemoveUsers.forEach(this::remove);
-		toRemoveMatches.forEach(matches::remove);
-	}
-
-	public void clean() {
-		Date dateAgo = Date.from(Instant.now().minusSeconds(45));
-		if (lastClean.before(dateAgo)) {
-			this.clean(e -> e.lastTouchedAt.before(dateAgo),
-					m -> m.createdAt.before(dateAgo));
+	public synchronized boolean expire(String gameId) {
+		if (!matches.containsKey(gameId)) {
+			return false;
 		}
-		lastClean = dateAgo;
+		Match match = matches.get(gameId);
+		matches.remove(gameId);
+		remove(match.entry1.userId);
+		remove(match.entry2.userId);
+		return true;
 	}
 
 	public synchronized Match match(String userId, Deck deck) {
@@ -73,7 +72,7 @@ public class Matchmaker extends AbstractMap<String, QueueEntry> {
 
 		while (otherPlayer != null) {
 			// Skip really old players
-			if (otherPlayer.lastTouchedAt.before(Date.from(Instant.now().minusSeconds(10)))) {
+			if (otherPlayer.lastTouchedAt.before(Date.from(Instant.now().minusSeconds(timeoutSeconds)))) {
 				this.remove(otherPlayer);
 				otherPlayer = asQueue().peekSecond();
 			} else {
@@ -151,7 +150,9 @@ public class Matchmaker extends AbstractMap<String, QueueEntry> {
 	public synchronized boolean remove(String userId) {
 		QueueEntry entry = entries.get(userId);
 		entries.remove(userId);
-		queue.remove(entry);
+		if (entry != null) {
+			queue.remove(entry);
+		}
 		return true;
 	}
 

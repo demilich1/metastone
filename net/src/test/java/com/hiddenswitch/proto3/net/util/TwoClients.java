@@ -66,6 +66,10 @@ public class TwoClients {
 	}
 
 	public TwoClients invoke(GameSessions service) throws IOException, URISyntaxException, CardParseException {
+		return invoke(service, 40 * 1000L);
+	}
+
+	public TwoClients invoke(GameSessions service, long noActivityTimeout) throws IOException, URISyntaxException, CardParseException {
 		this.service = service;
 		CardCatalogue.loadCardsFromPackage();
 
@@ -78,6 +82,7 @@ public class TwoClients {
 		request.setPregame1(pregame1);
 		request.setPregame2(pregame2);
 		request.setGameId(RandomStringUtils.randomAlphanumeric(8));
+		request.setNoActivityTimeout(noActivityTimeout);
 
 		CreateGameSessionResponse response = service.createGameSession(request);
 		this.gameId = response.getGameId();

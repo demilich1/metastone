@@ -8,6 +8,12 @@ import com.hiddenswitch.proto3.net.util.Matchmaker;
 import com.hiddenswitch.proto3.server.GameSession;
 import com.hiddenswitch.proto3.server.PregamePlayerConfiguration;
 import io.vertx.core.Future;
+import io.vertx.core.eventbus.EventBus;
+import io.vertx.core.eventbus.MessageCodec;
+import io.vertx.core.eventbus.impl.codecs.JsonObjectMessageCodec;
+import io.vertx.core.json.Json;
+import io.vertx.core.json.JsonObject;
+import io.vertx.ext.web.handler.sockjs.impl.JsonCodec;
 
 import java.util.*;
 
@@ -22,7 +28,20 @@ public class Games extends Service<Games> {
 			// TODO: Look up the verticle on the verticle service thing
 			done.fail(new NullPointerException("gameSessions wasn't configured when the Games verticle was started. Please inject this dependency."));
 		} else {
-			done.complete();
+			EventBus eb = vertx.eventBus();
+			// Configure the expire match method
+			eb.consumer("Games::expireMatch", message -> {
+				JsonObject body = (JsonObject) message.body();
+				String gameId = body.getString("gameId");
+				MatchExpireRequest request = new MatchExpireRequest();
+				request.gameId = gameId;
+				MatchExpireResponse response = expireMatch(request);
+				JsonObject reply = new JsonObject();
+				reply.put("expired", response.expired);
+				message.reply(reply);
+			}).completionHandler(then -> {
+				done.complete();
+			});
 		}
 	}
 
@@ -60,6 +79,13 @@ public class Games extends Service<Games> {
 		response.setConnection(connections.get(userId));
 		return response;
 	}
+
+	public MatchExpireResponse expireMatch(MatchExpireRequest request) {
+		final MatchExpireResponse response = new MatchExpireResponse();
+		response.expired = matchmaker.expire(request.gameId);
+		return response;
+	}
+
 	public GameSessions getGameSessions() {
 		return gameSessions;
 	}

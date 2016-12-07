@@ -121,6 +121,30 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 		});
 	}
 
+	@Test(timeout = 40 * 1000L)
+	public void testTimeoutSession(TestContext context) {
+		wrapBlocking(context, () -> {
+			try {
+				TwoClients clients1 = new TwoClients().invoke(this.service, 5000L);
+				clients1.play();
+				while (clients1.getServerGameContext() == null
+						|| clients1.getServerGameContext().getTurn() < 3) {
+					Strand.sleep(100);
+				}
+				String gameId = clients1.getGameId();
+				clients1.disconnect(0);
+				// This is greater than the timeout
+				Strand.sleep(6000L);
+				// From player 2's point of view, the game should be decided because it's over
+				getContext().assertNull(service.getGameSession(gameId));
+				getContext().assertTrue(clients1.getPlayerContext2().gameDecided());
+
+			} catch (Throwable e) {
+				getContext().fail(e);
+			}
+		});
+	}
+
 	@Test
 	public void testTwoSimultaneousSessions(TestContext context) throws Exception {
 		wrapBlocking(context, () -> {

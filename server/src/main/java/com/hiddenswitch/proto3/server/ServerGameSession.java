@@ -27,6 +27,7 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	private Player player2;
 	private final String gameId;
 	private Logger logger = LoggerFactory.getLogger(ServerGameSession.class);
+	private long noActivityTimeout = SocketServer.DEFAULT_NO_ACTIVITY_TIMEOUT;
 
 	private ClientConnectionConfiguration getConfigurationFor(PregamePlayerConfiguration player, int id) {
 		// TODO: It's obviously insecure to allow the client to specify things like their player object
@@ -123,13 +124,18 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 		return getConfigurationFor(pregamePlayerConfiguration2, IdFactory.PLAYER_2);
 	}
 
-	public ServerGameSession(String host, int port, PregamePlayerConfiguration p1, PregamePlayerConfiguration p2, String gameId) {
+	ServerGameSession(String host, int port, PregamePlayerConfiguration p1, PregamePlayerConfiguration p2, String gameId) {
 		super();
 		setHost(host);
 		setPort(port);
 		this.pregamePlayerConfiguration1 = p1;
 		this.pregamePlayerConfiguration2 = p2;
 		this.gameId = gameId;
+	}
+
+	ServerGameSession(String host, int port, PregamePlayerConfiguration p1, PregamePlayerConfiguration p2, String gameId, long noActivityTimeout) {
+		this(host, port, p1, p2, gameId);
+		this.noActivityTimeout = noActivityTimeout;
 	}
 
 	@Override
@@ -175,6 +181,9 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	}
 
 	private void setClient1(ServerClientConnection c1) {
+		if (this.c1 != null) {
+			c1.close();
+		}
 		this.c1 = c1;
 	}
 
@@ -183,6 +192,9 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	}
 
 	private void setClient2(ServerClientConnection c2) {
+		if (this.c2 != null) {
+			c2.close();
+		}
 		this.c2 = c2;
 	}
 
@@ -208,5 +220,9 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 
 	public String getGameId() {
 		return gameId;
+	}
+
+	public long getNoActivityTimeout() {
+		return noActivityTimeout;
 	}
 }

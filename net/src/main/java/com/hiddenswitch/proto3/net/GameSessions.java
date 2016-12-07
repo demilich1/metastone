@@ -69,7 +69,7 @@ public class GameSessions extends Service<GameSessions> {
 		if (request.getGameId() == null) {
 			throw new RuntimeException("Game ID cannot be null in a create game session request.");
 		}
-		ServerGameSession newSession = server.createGameSession(request.getPregame1(), request.getPregame2(), request.getGameId());
+		ServerGameSession newSession = server.createGameSession(request.getPregame1(), request.getPregame2(), request.getGameId(), request.getNoActivityTimeout());
 		return new CreateGameSessionResponse(newSession.getConfigurationForPlayer1(), newSession.getConfigurationForPlayer2(), newSession.getGameId());
 	}
 

@@ -5,6 +5,9 @@ import com.hiddenswitch.proto3.net.common.ClientToServerMessage;
 import com.hiddenswitch.proto3.net.util.IncomingMessage;
 import com.hiddenswitch.proto3.net.util.Serialization;
 import io.vertx.core.buffer.Buffer;
+import io.vertx.core.eventbus.EventBus;
+import io.vertx.core.eventbus.impl.codecs.JsonObjectMessageCodec;
+import io.vertx.core.json.JsonObject;
 import io.vertx.core.net.NetServer;
 import io.vertx.core.net.NetSocket;
 import io.vertx.ext.sync.Sync;
@@ -18,10 +21,12 @@ import java.util.*;
 public class SocketServer extends SyncVerticle {
 	private static final Logger logger = LoggerFactory.getLogger(SocketServer.class);
 	private static final int DEFAULT_PORT = 11111;
+	public static final long DEFAULT_NO_ACTIVITY_TIMEOUT = 60 * 1000L;
 	private final int port;
 	private final Map<String, ServerGameSession> games = new HashMap<>();
-	private final HashMap<NetSocket, ServerGameSession> gameForSocket = new HashMap<>();
-	private final HashMap<NetSocket, IncomingMessage> messages = new HashMap<>();
+	private final Map<NetSocket, ServerGameSession> gameForSocket = new HashMap<>();
+	private final Map<NetSocket, IncomingMessage> messages = new HashMap<>();
+	private final Map<String, ActivityMonitor> gameActivityMonitors = new HashMap<>();
 	private NetServer server;
 
 	@Override
@@ -99,6 +104,9 @@ public class SocketServer extends SyncVerticle {
 			session = gameForSocket.get(socket);
 		}
 
+		// Show activity on the game activity monitor
+		gameActivityMonitors.get(session.getGameId()).activity();
+
 		switch (message.getMt()) {
 			case FIRST_MESSAGE:
 				logger.debug("First message received from {}", message.getPlayer1().toString());
@@ -144,8 +152,13 @@ public class SocketServer extends SyncVerticle {
 		Void t = Sync.awaitResult(done -> server.close(done));
 	}
 
+	@Suspendable
 	public void kill(String gameId) {
 		ServerGameSession session = games.get(gameId);
+
+		// Clear out the activity monitors
+		gameActivityMonitors.get(gameId).cancel();
+		gameActivityMonitors.remove(gameId);
 
 		// Get the sockets associated with the session
 		List<NetSocket> sockets = Arrays.asList(session.getClient1().getPrivateSocket(), session.getClient2().getPrivateSocket());
@@ -159,13 +172,23 @@ public class SocketServer extends SyncVerticle {
 			messages.remove(s);
 		});
 
+		// Expire the match
+		expireMatch(gameId);
+
 		// Remove the game session
 		games.remove(gameId);
 	}
 
 	public ServerGameSession createGameSession(PregamePlayerConfiguration player1, PregamePlayerConfiguration player2, String gameId) {
-		ServerGameSession newSession = new ServerGameSession(getHost(), getPort(), player1, player2, gameId);
-		games.put(newSession.getGameId(), newSession);
+		return createGameSession(player1, player2, gameId, DEFAULT_NO_ACTIVITY_TIMEOUT);
+	}
+
+	public ServerGameSession createGameSession(PregamePlayerConfiguration player1, PregamePlayerConfiguration player2, String gameId, long noActivityTimeout) {
+		ServerGameSession newSession = new ServerGameSession(getHost(), getPort(), player1, player2, gameId, noActivityTimeout);
+		final String finalGameId = newSession.getGameId();
+		games.put(finalGameId, newSession);
+		// If the game has no activity after a certain amount of time, kill it automatically.
+		gameActivityMonitors.put(finalGameId, new ActivityMonitor(vertx, finalGameId, noActivityTimeout, this::kill));
 		return newSession;
 	}
 
@@ -179,5 +202,21 @@ public class SocketServer extends SyncVerticle {
 
 	public Map<String, ServerGameSession> getGames() {
 		return Collections.unmodifiableMap(games);
+	}
+
+	private void expireMatch(String gameId) {
+		EventBus eb = vertx.eventBus();
+		JsonObject message = new JsonObject();
+		message.put("gameId", gameId);
+		eb.send("Games::expireMatch", message, reply -> {
+			if (reply.failed()) {
+				return;
+			} else {
+				final JsonObject body = (JsonObject) reply.result().body();
+				if (!body.getBoolean("expired")) {
+					// TODO: Do something if we failed to expire the message.
+				}
+			}
+		});
 	}
 }
