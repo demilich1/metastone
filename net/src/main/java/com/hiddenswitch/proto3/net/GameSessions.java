@@ -7,6 +7,7 @@ import com.hiddenswitch.proto3.server.ServerGameSession;
 import com.hiddenswitch.proto3.server.SocketServer;
 import io.netty.channel.DefaultChannelId;
 import io.vertx.core.Future;
+import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 import net.demilich.metastone.game.cards.CardCatalogue;
@@ -25,6 +26,7 @@ public class GameSessions extends Service<GameSessions> {
 
 	@Override
 	public void start(Future<Void> result) {
+
 		vertx.executeBlocking(blocking -> {
 			try {
 				CardCatalogue.loadCardsFromPackage();
@@ -36,6 +38,7 @@ public class GameSessions extends Service<GameSessions> {
 			int port = RandomUtils.nextInt(6200, 16200);
 			server = new SocketServer(port);
 			logger.info("Socket server configured.");
+
 			blocking.complete();
 		}, then -> vertx.deployVerticle(server, done -> {
 			logger.info("Socket server deployed.");
