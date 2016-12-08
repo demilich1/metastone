@@ -2,6 +2,7 @@ package com.hiddenswitch.proto3.net;
 
 import ch.qos.logback.classic.Level;
 import co.paralleluniverse.strands.Strand;
+import com.hiddenswitch.proto3.net.impl.GameSessionsImpl;
 import com.hiddenswitch.proto3.net.models.EndGameSessionRequest;
 import com.hiddenswitch.proto3.net.util.Result;
 import com.hiddenswitch.proto3.net.util.ServiceTestBase;
@@ -29,7 +30,7 @@ import java.util.List;
 import static net.demilich.metastone.game.GameContext.PLAYER_2;
 
 @RunWith(VertxUnitRunner.class)
-public class GameSessionsTest extends ServiceTestBase<GameSessions> {
+public class GameSessionsTest extends ServiceTestBase<GameSessionsImpl> {
 	private Logger logger = LoggerFactory.getLogger(GameSessionsTest.class);
 
 	@Before
@@ -169,7 +170,7 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 	@Test(timeout = 45 * 60 * 1000L)
 	public void testTenSessionsTenTimes(TestContext context) throws Exception {
 		wrapBlocking(context, () -> {
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < 2; i++) {
 				simultaneousSessions(10);
 				logger.info("Iteration completed : " + (i + 1));
 			}
@@ -253,8 +254,8 @@ public class GameSessionsTest extends ServiceTestBase<GameSessions> {
 	}
 
 	@Override
-	public void deployServices(Vertx vertx, Handler<AsyncResult<GameSessions>> done) {
-		GameSessions instance = new GameSessions();
+	public void deployServices(Vertx vertx, Handler<AsyncResult<GameSessionsImpl>> done) {
+		GameSessionsImpl instance = new GameSessionsImpl();
 		vertx.deployVerticle(instance, then -> {
 			done.handle(new Result<>(instance));
 		});

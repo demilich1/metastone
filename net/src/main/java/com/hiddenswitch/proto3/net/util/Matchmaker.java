@@ -1,6 +1,6 @@
 package com.hiddenswitch.proto3.net.util;
 
-import com.hiddenswitch.proto3.net.models.QueueEntry;
+import com.hiddenswitch.proto3.net.impl.models.QueueEntry;
 import net.demilich.metastone.game.decks.Deck;
 import org.apache.commons.collections.list.TreeList;
 import org.apache.commons.lang3.RandomStringUtils;

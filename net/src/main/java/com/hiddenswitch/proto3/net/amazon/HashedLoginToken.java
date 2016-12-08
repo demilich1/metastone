@@ -3,7 +3,6 @@ package com.hiddenswitch.proto3.net.amazon;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConvertedTimestamp;
-import com.hiddenswitch.proto3.net.models.LoginToken;
 import com.lambdaworks.crypto.SCryptUtil;
 
 import java.util.Date;

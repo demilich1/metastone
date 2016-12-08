@@ -4,7 +4,9 @@ import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
 import com.hiddenswitch.proto3.server.GameSession;
 import com.hiddenswitch.proto3.server.PregamePlayerConfiguration;
 
-public class CreateGameSessionResponse {
+import java.io.Serializable;
+
+public class CreateGameSessionResponse implements Serializable {
 	private ClientConnectionConfiguration player1;
 	private ClientConnectionConfiguration player2;
 	private final String gameId;

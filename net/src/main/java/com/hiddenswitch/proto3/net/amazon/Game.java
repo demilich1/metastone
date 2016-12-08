@@ -1,15 +1,7 @@
-package com.hiddenswitch.proto3.net.models;
+package com.hiddenswitch.proto3.net.amazon;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import com.amazonaws.services.kms.model.UnsupportedOperationException;
-import com.hiddenswitch.proto3.net.amazon.GameContextConverter;
-import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.cards.CardSet;
-import net.demilich.metastone.game.decks.DeckFormat;
-import net.demilich.metastone.game.gameconfig.PlayerConfig;
-import net.demilich.metastone.game.logic.GameLogic;
 
 import java.util.HashMap;
 

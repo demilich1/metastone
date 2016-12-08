@@ -1,9 +1,10 @@
 package com.hiddenswitch.proto3.net;
 
+import com.hiddenswitch.proto3.net.impl.AccountsImpl;
 import com.hiddenswitch.proto3.net.models.CreateAccountResponse;
-import com.hiddenswitch.proto3.net.models.LoginRequest;
-import com.hiddenswitch.proto3.net.models.LoginResponse;
-import com.hiddenswitch.proto3.net.models.User;
+import com.hiddenswitch.proto3.net.amazon.LoginRequest;
+import com.hiddenswitch.proto3.net.amazon.LoginResponse;
+import com.hiddenswitch.proto3.net.amazon.User;
 import com.hiddenswitch.proto3.net.util.Result;
 import com.hiddenswitch.proto3.net.util.ServiceTestBase;
 import io.vertx.core.AsyncResult;
@@ -16,7 +17,7 @@ import java.time.Instant;
 
 import static org.junit.Assert.*;
 
-public class AccountsTest extends ServiceTestBase<Accounts> {
+public class AccountsTest extends ServiceTestBase<AccountsImpl> {
 	@Test
 	public void testCreateAccount() throws Exception {
 		CreateAccountResponse response = service.createAccount("benjamin.s.berman@gmail.com", "destructoid", "doctorpangloss");
@@ -115,8 +116,8 @@ public class AccountsTest extends ServiceTestBase<Accounts> {
 	}
 
 	@Override
-	public void deployServices(Vertx vertx, Handler<AsyncResult<Accounts>> done) {
-		Accounts instance = new Accounts();
+	public void deployServices(Vertx vertx, Handler<AsyncResult<AccountsImpl>> done) {
+		AccountsImpl instance = new AccountsImpl();
 		vertx.executeBlocking(fut -> {
 			instance.withEmbeddedConfiguration();
 			fut.complete();

@@ -3,6 +3,8 @@ package com.hiddenswitch.proto3.net;
 import co.paralleluniverse.strands.Strand;
 import com.hiddenswitch.proto3.net.common.MatchmakingRequest;
 import com.hiddenswitch.proto3.net.common.MatchmakingResponse;
+import com.hiddenswitch.proto3.net.impl.GameSessionsImpl;
+import com.hiddenswitch.proto3.net.impl.GamesImpl;
 import com.hiddenswitch.proto3.net.models.MatchExpireRequest;
 import com.hiddenswitch.proto3.net.util.Result;
 import com.hiddenswitch.proto3.net.util.ServiceTestBase;
@@ -30,7 +32,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 @RunWith(VertxUnitRunner.class)
-public class GamesTest extends ServiceTestBase<Games> {
+public class GamesTest extends ServiceTestBase<GamesImpl> {
 	Logger logger = LoggerFactory.getLogger(GamesTest.class);
 
 	@Before
@@ -76,7 +78,7 @@ public class GamesTest extends ServiceTestBase<Games> {
 		MatchmakingRequest request1 = new MatchmakingRequest();
 		Deck deck1 = DeckFactory.getRandomDeck();
 		request1.deck = deck1;
-		MatchmakingResponse response1 = service.matchmakeAndJoin(request1, player1);
+		MatchmakingResponse response1 = service.matchmakeAndJoin(request1);
 		assertNotNull(response1.getRetry());
 		assertNull(response1.getConnection());
 		assertNull(response1.getRetry().deck);
@@ -86,14 +88,14 @@ public class GamesTest extends ServiceTestBase<Games> {
 		MatchmakingRequest request2 = new MatchmakingRequest();
 		Deck deck2 = DeckFactory.getRandomDeck();
 		request2.deck = deck2;
-		MatchmakingResponse response2 = service.matchmakeAndJoin(request2, player2);
+		MatchmakingResponse response2 = service.matchmakeAndJoin(request2);
 		assertNull(response2.getRetry());
 		assertNotNull(response2.getConnection());
 		logger.info("Matchmaking for player2 entered.");
 
 		// Assume player 1's identity, poll for matchmaking again and receive the new game information
 		request1 = response1.getRetry();
-		response1 = service.matchmakeAndJoin(request1, player1);
+		response1 = service.matchmakeAndJoin(request1);
 		assertNull(response1.getRetry());
 		assertNotNull(response1.getConnection());
 		logger.info("Matchmaking for player1 entered, 2nd time.");
@@ -115,10 +117,10 @@ public class GamesTest extends ServiceTestBase<Games> {
 	}
 
 	@Override
-	public void deployServices(Vertx vertx, Handler<AsyncResult<Games>> done) {
+	public void deployServices(Vertx vertx, Handler<AsyncResult<GamesImpl>> done) {
 		logger.info("Deploying services...");
-		GameSessions gameSessions = new GameSessions();
-		Games instance = new Games().withGameSessions(gameSessions);
+		GameSessionsImpl gameSessions = new GameSessionsImpl();
+		GamesImpl instance = new GamesImpl().withGameSessions(gameSessions);
 		vertx.deployVerticle(gameSessions, then -> {
 			vertx.deployVerticle(instance, then2 -> {
 				logger.info("Services deployed.");

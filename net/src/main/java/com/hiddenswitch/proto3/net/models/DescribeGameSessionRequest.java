@@ -1,9 +1,11 @@
 package com.hiddenswitch.proto3.net.models;
 
+import java.io.Serializable;
+
 /**
  * Created by bberman on 11/18/16.
  */
-public class DescribeGameSessionRequest {
+public class DescribeGameSessionRequest implements Serializable {
     public DescribeGameSessionRequest() {
     }
 

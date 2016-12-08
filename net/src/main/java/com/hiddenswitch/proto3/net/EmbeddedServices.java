@@ -3,6 +3,8 @@ package com.hiddenswitch.proto3.net;
 import co.paralleluniverse.fibers.Suspendable;
 import com.hiddenswitch.proto3.net.common.MatchmakingRequest;
 import com.hiddenswitch.proto3.net.common.MatchmakingResponse;
+import com.hiddenswitch.proto3.net.impl.GameSessionsImpl;
+import com.hiddenswitch.proto3.net.impl.GamesImpl;
 import com.hiddenswitch.proto3.net.util.Serialization;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServer;
@@ -31,7 +33,7 @@ public class EmbeddedServices extends SyncVerticle {
 
 		try {
 			logger.info("Deploying embedded services...");
-			GameSessions gameSessions = new GameSessions();
+			GameSessionsImpl gameSessions = new GameSessionsImpl();
 
 			Void t = awaitResult(done -> context.executeBlocking(blocking -> {
 				logger.info("Starting embedded configuration...");
@@ -48,7 +50,7 @@ public class EmbeddedServices extends SyncVerticle {
 
 			logger.info("Deployed gameSessions with verticle ID " + socketServerDeploymentId);
 
-			Games games = new Games()
+			GamesImpl games = new GamesImpl()
 					.withGameSessions(gameSessions)
 					.withEmbeddedConfiguration();
 
@@ -79,8 +81,10 @@ public class EmbeddedServices extends SyncVerticle {
 					.method(HttpMethod.POST)
 					.blockingHandler(routingContext -> {
 						MatchmakingRequest request = Serialization.deserialize(routingContext.getBodyAsString(), MatchmakingRequest.class);
+						// TODO: Use real user IDs
 						String userId = routingContext.request().getHeader("X-Auth-UserId");
-						MatchmakingResponse matchmakingResponse = games.matchmakeAndJoin(request, userId);
+						request.userId = userId;
+						MatchmakingResponse matchmakingResponse = games.matchmakeAndJoin(request);
 						int statusCode = 200;
 						if (matchmakingResponse.getRetry() != null) {
 							statusCode = 202;

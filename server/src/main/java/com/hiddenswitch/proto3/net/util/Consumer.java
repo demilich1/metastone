@@ -1,14 +1,12 @@
 package com.hiddenswitch.proto3.net.util;
 
-import io.vertx.core.AsyncResult;
 import io.vertx.core.Context;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
-import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;
 
-import java.lang.reflect.Type;
+import java.io.Serializable;
 import java.util.function.Function;
 
 /**

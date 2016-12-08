@@ -5,5 +5,6 @@ import net.demilich.metastone.game.decks.Deck;
 
 public class MatchmakingRequest {
 	public Deck deck;
+	public String userId;
 }
 

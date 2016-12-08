@@ -1,6 +1,8 @@
 package com.hiddenswitch.proto3.net.models;
 
-public class CreateAccountRequest {
+import java.io.Serializable;
+
+public class CreateAccountRequest implements Serializable {
 	public String name;
 	public String emailAddress;
 	public String password;

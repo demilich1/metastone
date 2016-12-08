@@ -184,10 +184,6 @@ public class SocketServer extends SyncVerticle {
 		games.remove(gameId);
 	}
 
-	public ServerGameSession createGameSession(PregamePlayerConfiguration player1, PregamePlayerConfiguration player2, String gameId) {
-		return createGameSession(player1, player2, gameId, DEFAULT_NO_ACTIVITY_TIMEOUT);
-	}
-
 	public ServerGameSession createGameSession(PregamePlayerConfiguration player1, PregamePlayerConfiguration player2, String gameId, long noActivityTimeout) {
 		ServerGameSession newSession = new ServerGameSession(getHost(), getPort(), player1, player2, gameId, noActivityTimeout);
 		newSession.handleGameOver(this::onGameOver);

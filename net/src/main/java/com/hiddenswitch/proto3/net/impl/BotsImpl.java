@@ -1,5 +1,9 @@
-package com.hiddenswitch.proto3.net;
+package com.hiddenswitch.proto3.net.impl;
 
+import com.hiddenswitch.proto3.net.Bots;
+import com.hiddenswitch.proto3.net.models.RequestActionRequest;
+import com.hiddenswitch.proto3.net.models.RequestActionResponse;
+import com.hiddenswitch.proto3.net.Service;
 import com.hiddenswitch.proto3.net.models.MulliganRequest;
 import com.hiddenswitch.proto3.net.models.MulliganResponse;
 import com.hiddenswitch.proto3.net.util.Broker;

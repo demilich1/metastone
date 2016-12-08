@@ -1,4 +1,4 @@
-package com.hiddenswitch.proto3.net.models;
+package com.hiddenswitch.proto3.net.amazon;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;

@@ -1,8 +1,11 @@
 package com.hiddenswitch.proto3.net;
 
 import com.hiddenswitch.proto3.net.common.GameState;
+import com.hiddenswitch.proto3.net.impl.BotsImpl;
 import com.hiddenswitch.proto3.net.models.MulliganRequest;
 import com.hiddenswitch.proto3.net.models.MulliganResponse;
+import com.hiddenswitch.proto3.net.models.RequestActionRequest;
+import com.hiddenswitch.proto3.net.models.RequestActionResponse;
 import com.hiddenswitch.proto3.net.util.AsyncProxy;
 import com.hiddenswitch.proto3.net.util.Broker;
 import com.hiddenswitch.proto3.net.util.Result;
