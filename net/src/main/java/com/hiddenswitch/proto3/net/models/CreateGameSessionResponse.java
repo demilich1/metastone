@@ -1,8 +1,7 @@
 package com.hiddenswitch.proto3.net.models;
 
 import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
-import com.hiddenswitch.proto3.server.GameSession;
-import com.hiddenswitch.proto3.server.PregamePlayerConfiguration;
+import com.hiddenswitch.proto3.net.impl.server.GameSession;
 
 import java.io.Serializable;
 

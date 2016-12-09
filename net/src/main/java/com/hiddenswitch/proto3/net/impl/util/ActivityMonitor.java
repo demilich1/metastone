@@ -1,4 +1,4 @@
-package com.hiddenswitch.proto3.server;
+package com.hiddenswitch.proto3.net.impl.util;
 
 import co.paralleluniverse.fibers.Suspendable;
 import io.vertx.core.Handler;

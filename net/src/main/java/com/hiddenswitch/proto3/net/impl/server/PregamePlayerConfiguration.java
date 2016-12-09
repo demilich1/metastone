@@ -1,9 +1,11 @@
-package com.hiddenswitch.proto3.server;
+package com.hiddenswitch.proto3.net.impl.server;
 
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.decks.Deck;
 
-public class PregamePlayerConfiguration {
+import java.io.Serializable;
+
+public class PregamePlayerConfiguration implements Serializable {
 	private final Deck deck;
 	private final String name;
 	private Player player;

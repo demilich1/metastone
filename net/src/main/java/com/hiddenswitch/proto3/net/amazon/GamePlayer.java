@@ -5,7 +5,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIgnore;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted;
 import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
-import com.hiddenswitch.proto3.server.PregamePlayerConfiguration;
+import com.hiddenswitch.proto3.net.impl.server.PregamePlayerConfiguration;
 import net.demilich.metastone.game.decks.Deck;
 
 @DynamoDBDocument

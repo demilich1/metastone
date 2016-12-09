@@ -1,4 +1,4 @@
-package com.hiddenswitch.proto3.net.impl.models;
+package com.hiddenswitch.proto3.net.impl.util;
 
 import net.demilich.metastone.game.decks.Deck;
 import org.joda.time.DateTimeComparator;

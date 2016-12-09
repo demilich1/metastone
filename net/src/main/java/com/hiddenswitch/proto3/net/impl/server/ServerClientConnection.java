@@ -1,4 +1,4 @@
-package com.hiddenswitch.proto3.server;
+package com.hiddenswitch.proto3.net.impl.server;
 
 import com.hiddenswitch.proto3.net.common.GameState;
 import com.hiddenswitch.proto3.net.common.RemoteUpdateListener;
@@ -6,29 +6,20 @@ import com.hiddenswitch.proto3.net.common.ServerToClientMessage;
 import com.hiddenswitch.proto3.net.util.IncomingMessage;
 import com.hiddenswitch.proto3.net.util.Serialization;
 import com.hiddenswitch.proto3.net.util.VertxBufferOutputStream;
-import io.vertx.core.buffer.Buffer;
 import io.vertx.core.net.NetSocket;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.TurnState;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.events.GameEvent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.lang.ref.WeakReference;
-import java.nio.ByteBuffer;
 import java.util.List;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 public class ServerClientConnection implements RemoteUpdateListener {
 	private NetSocket privateSocket;
 
-	ServerClientConnection(NetSocket socket) {
+	public ServerClientConnection(NetSocket socket) {
 		this.setPrivateSocket(socket);
 	}
 
@@ -104,7 +95,7 @@ public class ServerClientConnection implements RemoteUpdateListener {
 		sendMessage(new ServerToClientMessage(id, player, cards));
 	}
 
-	NetSocket getPrivateSocket() {
+	public NetSocket getPrivateSocket() {
 		return privateSocket;
 	}
 

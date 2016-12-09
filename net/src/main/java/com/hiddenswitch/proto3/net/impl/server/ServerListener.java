@@ -1,9 +1,8 @@
-package com.hiddenswitch.proto3.server;
+package com.hiddenswitch.proto3.net.impl.server;
 
 import java.util.List;
 
 import co.paralleluniverse.fibers.Suspendable;
-import com.hiddenswitch.proto3.net.common.RemoteUpdateListener;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;

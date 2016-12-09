@@ -1,4 +1,4 @@
-package com.hiddenswitch.proto3.server;
+package com.hiddenswitch.proto3.net.impl.server;
 
 import com.hiddenswitch.proto3.net.common.RemoteUpdateListener;
 

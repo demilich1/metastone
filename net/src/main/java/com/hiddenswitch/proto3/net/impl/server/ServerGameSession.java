@@ -1,7 +1,8 @@
-package com.hiddenswitch.proto3.server;
+package com.hiddenswitch.proto3.net.impl.server;
 
 import co.paralleluniverse.fibers.Suspendable;
 import com.hiddenswitch.proto3.net.common.*;
+import com.hiddenswitch.proto3.net.impl.GameSessionsImpl;
 import io.vertx.core.Handler;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
@@ -29,7 +30,7 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	private Player player2;
 	private final String gameId;
 	private Logger logger = LoggerFactory.getLogger(ServerGameSession.class);
-	private long noActivityTimeout = SocketServerImpl.DEFAULT_NO_ACTIVITY_TIMEOUT;
+	private long noActivityTimeout = GameSessionsImpl.DEFAULT_NO_ACTIVITY_TIMEOUT;
 	private final HashSet<Handler<ServerGameSession>> gameOverHandlers = new HashSet<>();
 
 	private ClientConnectionConfiguration getConfigurationFor(PregamePlayerConfiguration player, int id) {
@@ -93,7 +94,7 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 		getGameContext().onActionReceived(id, action);
 	}
 
-	protected boolean areBothPlayersJoined() {
+	public boolean areBothPlayersJoined() {
 		return player1 != null
 				&& player2 != null;
 	}
@@ -140,7 +141,7 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 		this.gameId = gameId;
 	}
 
-	ServerGameSession(String host, int port, PregamePlayerConfiguration p1, PregamePlayerConfiguration p2, String gameId, long noActivityTimeout) {
+	public ServerGameSession(String host, int port, PregamePlayerConfiguration p1, PregamePlayerConfiguration p2, String gameId, long noActivityTimeout) {
 		this(host, port, p1, p2, gameId);
 		this.noActivityTimeout = noActivityTimeout;
 	}
@@ -155,7 +156,7 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	}
 
 	@Suspendable
-	void kill() {
+	public void kill() {
 		getGameContext().kill();
 		getClient1().close();
 		getClient2().close();
