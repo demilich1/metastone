@@ -1,18 +1,52 @@
 package com.hiddenswitch.proto3.net.util;
 
+import io.vertx.core.AsyncResult;
 import io.vertx.core.Context;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.eventbus.Message;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 /**
  * Created by bberman on 12/7/16.
  */
 public class Consumer {
+	public static <T, R> Handler<Message<Buffer>> of(BiConsumer<T, Handler<AsyncResult<R>>> method) {
+		return (Message<Buffer> message) -> {
+			VertxBufferInputStream inputStream = new VertxBufferInputStream(message.body());
+
+			final T request;
+			try {
+				request = Serialization.deserialize(inputStream);
+			} catch (IOException | ClassNotFoundException e) {
+				message.fail(1, e.getMessage());
+				return;
+			}
+
+
+			method.accept(request, (then) -> {
+				if (then.succeeded()) {
+					Buffer reply = Buffer.buffer(512);
+					try {
+						Serialization.serialize(then.result(), new VertxBufferOutputStream(reply));
+					} catch (IOException e) {
+						message.fail(1, e.getCause().getMessage());
+						return;
+					}
+
+					message.reply(reply);
+				} else {
+					message.fail(1, then.cause().getMessage());
+				}
+			});
+		};
+	}
+
 	public static <T, R> Handler<Message<Buffer>> of(Function<T, R> method) {
 		// Get the context at the time of calling this function
 		final Context context = Vertx.currentContext();
