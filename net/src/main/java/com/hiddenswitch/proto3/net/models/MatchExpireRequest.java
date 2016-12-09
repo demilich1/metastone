@@ -7,4 +7,8 @@ import java.io.Serializable;
  */
 public class MatchExpireRequest implements Serializable {
 	public String gameId;
+
+	public MatchExpireRequest(String gameId) {
+		this.gameId = gameId;
+	}
 }

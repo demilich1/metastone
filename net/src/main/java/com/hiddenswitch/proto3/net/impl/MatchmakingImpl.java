@@ -1,5 +1,8 @@
 package com.hiddenswitch.proto3.net.impl;
 
+import co.paralleluniverse.fibers.SuspendExecution;
+import co.paralleluniverse.fibers.Suspendable;
+import com.hiddenswitch.proto3.net.Games;
 import com.hiddenswitch.proto3.net.Matchmaking;
 import com.hiddenswitch.proto3.net.Service;
 import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
@@ -9,38 +12,23 @@ import com.hiddenswitch.proto3.net.models.*;
 import com.hiddenswitch.proto3.net.impl.util.Matchmaker;
 import com.hiddenswitch.proto3.net.impl.server.GameSession;
 import com.hiddenswitch.proto3.net.impl.server.PregamePlayerConfiguration;
-import io.vertx.core.Future;
-import io.vertx.core.eventbus.EventBus;
-import io.vertx.core.json.JsonObject;
+import com.hiddenswitch.proto3.net.util.ServiceProxy;
+import com.hiddenswitch.proto3.net.util.Broker;
 
 import java.util.*;
 
 public class MatchmakingImpl extends Service<MatchmakingImpl> implements Matchmaking {
-	private GamesImpl gameSessions;
+	private ServiceProxy<Games> gameSessions;
 	private Matchmaker matchmaker = new Matchmaker();
 	private Map<String, ClientConnectionConfiguration> connections = new HashMap<>();
 
 	@Override
-	public void start(Future<Void> done) {
+	public void start() {
 		if (gameSessions == null) {
-			// TODO: Look up the verticle on the verticle service thing
-			done.fail(new NullPointerException("gameSessions wasn't configured when the MatchmakingImpl verticle was started. Please inject this dependency."));
-		} else {
-			EventBus eb = vertx.eventBus();
-			// Configure the expire match method
-			eb.consumer("MatchmakingImpl::expireMatch", message -> {
-				JsonObject body = (JsonObject) message.body();
-				String gameId = body.getString("gameId");
-				MatchExpireRequest request = new MatchExpireRequest();
-				request.gameId = gameId;
-				MatchExpireResponse response = expireMatch(request);
-				JsonObject reply = new JsonObject();
-				reply.put("expired", response.expired);
-				message.reply(reply);
-			}).completionHandler(then -> {
-				done.complete();
-			});
+			gameSessions = Broker.proxy(Games.class, vertx.eventBus());
 		}
+
+		Broker.of(this, Matchmaking.class, vertx.eventBus());
 	}
 
 	@Override
@@ -48,12 +36,14 @@ public class MatchmakingImpl extends Service<MatchmakingImpl> implements Matchma
 		super.stop();
 	}
 
-	public void cancel(String userId) {
-		matchmaker.remove(userId);
+	@Override
+	public MatchCancelResponse cancel(MatchCancelRequest matchCancelRequest) {
+		return new MatchCancelResponse(matchmaker.remove(matchCancelRequest.getUserId()));
 	}
 
 	@Override
-	public MatchmakingResponse matchmakeAndJoin(MatchmakingRequest matchmakingRequest) {
+	@Suspendable
+	public MatchmakingResponse matchmakeAndJoin(MatchmakingRequest matchmakingRequest) throws InterruptedException, SuspendExecution {
 		final String userId = matchmakingRequest.userId;
 		// TODO: Setup a user with a game against an AI if they've been waiting more than 10 seconds
 		MatchmakingResponse response = new MatchmakingResponse();
@@ -61,13 +51,15 @@ public class MatchmakingImpl extends Service<MatchmakingImpl> implements Matchma
 		Matchmaker.Match match = matchmaker.match(userId, matchmakingRequest.deck);
 
 		if (match == null) {
-			response.setRetry(new MatchmakingRequest());
+			response.setRetry(new MatchmakingRequest().withUserId(matchmakingRequest.userId));
 			return response;
 		}
 
-		if (!getGameSessions().containsGameSession(new ContainsGameSessionRequest(match.gameId)).result) {
+		final ContainsGameSessionResponse contains = gameSessions.sync().containsGameSession(new ContainsGameSessionRequest(match.gameId));
+
+		if (!contains.result) {
 			// Create a game session.
-			CreateGameSessionResponse createGameSessionResponse = gameSessions.createGameSession(new CreateGameSessionRequest()
+			CreateGameSessionResponse createGameSessionResponse = gameSessions.sync().createGameSession(new CreateGameSessionRequest()
 					.withPregame1(new PregamePlayerConfiguration(match.entry1.deck, match.entry1.userId))
 					.withPregame2(new PregamePlayerConfiguration(match.entry2.deck, match.entry2.userId))
 					.withGameId(match.gameId));
@@ -85,18 +77,5 @@ public class MatchmakingImpl extends Service<MatchmakingImpl> implements Matchma
 		final MatchExpireResponse response = new MatchExpireResponse();
 		response.expired = matchmaker.expire(request.gameId);
 		return response;
-	}
-
-	public GamesImpl getGameSessions() {
-		return gameSessions;
-	}
-
-	public void setGameSessions(GamesImpl gameSessions) {
-		this.gameSessions = gameSessions;
-	}
-
-	public MatchmakingImpl withGameSessions(GamesImpl gameSessions) {
-		setGameSessions(gameSessions);
-		return this;
 	}
 }

@@ -2,6 +2,7 @@ package com.hiddenswitch.proto3.net.impl;
 
 import co.paralleluniverse.fibers.Suspendable;
 import com.hiddenswitch.proto3.net.Games;
+import com.hiddenswitch.proto3.net.Matchmaking;
 import com.hiddenswitch.proto3.net.Service;
 import com.hiddenswitch.proto3.net.common.ClientToServerMessage;
 import com.hiddenswitch.proto3.net.common.ServerGameContext;
@@ -10,13 +11,14 @@ import com.hiddenswitch.proto3.net.impl.server.ServerClientConnection;
 import com.hiddenswitch.proto3.net.impl.server.ServerGameSession;
 import com.hiddenswitch.proto3.net.impl.util.ActivityMonitor;
 import com.hiddenswitch.proto3.net.models.*;
+import com.hiddenswitch.proto3.net.util.ServiceProxy;
+import com.hiddenswitch.proto3.net.util.Broker;
 import com.hiddenswitch.proto3.net.util.IncomingMessage;
 import com.hiddenswitch.proto3.net.util.Serialization;
 import io.netty.channel.DefaultChannelId;
+import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
-import io.vertx.core.eventbus.EventBus;
-import io.vertx.core.json.JsonObject;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 import io.vertx.core.net.NetServer;
@@ -44,12 +46,16 @@ public class GamesImpl extends Service<GamesImpl> implements Games {
 	private NetServer server;
 	private final int port;
 
+	private ServiceProxy<Matchmaking> matchmaking;
+
 	public GamesImpl() {
 		this.port = RandomUtils.nextInt(6200, 16200);
 	}
 
 	@Override
 	public void start(Future<Void> fut) {
+		matchmaking = Broker.proxy(Matchmaking.class, vertx.eventBus());
+
 		vertx.executeBlocking(blocking -> {
 			try {
 				CardCatalogue.loadCardsFromPackage();
@@ -63,6 +69,7 @@ public class GamesImpl extends Service<GamesImpl> implements Games {
 			logger.info("Socket server configured.");
 			blocking.complete();
 		}, then -> {
+
 			server = vertx.createNetServer();
 
 			server.connectHandler(socket -> {
@@ -76,6 +83,7 @@ public class GamesImpl extends Service<GamesImpl> implements Games {
 					logger.error("Failure deploying socket listener: {}", listenResult.cause());
 					fut.fail(listenResult.cause());
 				} else {
+					Broker.of(this, Games.class, vertx.eventBus());
 					fut.complete();
 				}
 			});
@@ -97,6 +105,7 @@ public class GamesImpl extends Service<GamesImpl> implements Games {
 	}
 
 	@Override
+	@Suspendable
 	public ContainsGameSessionResponse containsGameSession(ContainsGameSessionRequest request) {
 		return new ContainsGameSessionResponse(this.getGames().containsKey(request.gameId));
 	}
@@ -247,7 +256,7 @@ public class GamesImpl extends Service<GamesImpl> implements Games {
 		// Kill the session
 		session.kill();
 
-		// Clear our maps of these sockets
+		// Clear our maps of these socketsz
 		sockets.forEach(s -> {
 			gameForSocket.remove(s);
 			messages.remove(s);
@@ -274,19 +283,8 @@ public class GamesImpl extends Service<GamesImpl> implements Games {
 	}
 
 	private void expireMatch(String gameId) {
-		EventBus eb = vertx.eventBus();
-		JsonObject message = new JsonObject();
-		message.put("gameId", gameId);
-		eb.send("Matchmaking::expireMatch", message, reply -> {
-			if (reply.failed()) {
-				// Nobody was listening, the matchmaking service isn't running
-			} else {
-				final JsonObject body = (JsonObject) reply.result().body();
-				if (!body.getBoolean("expired")) {
-					// TODO: Do something if we failed to expire the message.
-				}
-			}
-		});
+		matchmaking.async((AsyncResult<MatchExpireResponse> response) -> {
+		}).expireMatch(new MatchExpireRequest(gameId));
 	}
 
 	private void onGameOver(ServerGameSession sgs) {

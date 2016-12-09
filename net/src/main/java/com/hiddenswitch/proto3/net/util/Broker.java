@@ -1,10 +1,11 @@
 package com.hiddenswitch.proto3.net.util;
 
+import co.paralleluniverse.fibers.Suspendable;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
-import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.eventbus.EventBus;
+import io.vertx.ext.sync.Sync;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
@@ -21,21 +22,21 @@ public class Broker {
 
 		for (Method method : serviceInterface.getDeclaredMethods()) {
 			String methodName = name + "::" + method.getName();
-			eb.consumer(methodName, Consumer.of(arg -> {
+			eb.consumer(methodName, Sync.fiberHandler(Consumer.of(arg -> {
 				try {
 					return method.invoke(instance, arg);
 				} catch (IllegalAccessException | InvocationTargetException ignored) {
 					return null;
 				}
-			}));
+			})));
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T> AsyncProxy<T> proxy(Class<? extends T> serviceInterface, final EventBus bus) {
+	public static <T> ServiceProxy<T> proxy(Class<? extends T> serviceInterface, final EventBus bus) {
 		final VertxInvocationHandler<T> invocationHandler = new VertxInvocationHandler<>();
 
-		AsyncProxy<T> result = new AsyncProxy<>((T) Proxy.newProxyInstance(
+		ServiceProxy<T> result = new ServiceProxy<>((T) Proxy.newProxyInstance(
 				serviceInterface.getClassLoader(),
 				new Class[]{serviceInterface},
 				invocationHandler
@@ -43,20 +44,30 @@ public class Broker {
 
 		invocationHandler.eb = bus;
 		invocationHandler.name = serviceInterface.getName();
-		invocationHandler.asyncProxy = result;
+		invocationHandler.serviceProxy = result;
 
 		return result;
 	}
 
 	private static class VertxInvocationHandler<T> implements InvocationHandler {
-		AsyncProxy<T> asyncProxy;
+		ServiceProxy<T> serviceProxy;
 		String name;
 		EventBus eb;
 
 		@Override
+		@Suspendable
 		@SuppressWarnings("unchecked")
 		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-			if (asyncProxy.next == null) {
+			final boolean sync = serviceProxy.sync;
+			final Handler<AsyncResult<Object>> next = serviceProxy.next;
+
+			serviceProxy.next = null;
+			serviceProxy.sync = false;
+
+			final String methodName = method.getName();
+
+			if (next == null
+					&& !sync) {
 				throw new RuntimeException();
 			}
 
@@ -64,26 +75,39 @@ public class Broker {
 				throw new RuntimeException();
 			}
 
-			final Handler<AsyncResult<?>> next = asyncProxy.next;
-			asyncProxy.next = null;
+			if (sync) {
+				return Sync.awaitResult(done -> {
+					call(methodName, args, done);
+				});
+			} else {
+				call(methodName, args, next);
+				return null;
+			}
+		}
 
+		@Suspendable
+		private void call(String methodName, Object[] args, Handler<AsyncResult<Object>> next) {
 			Buffer result = Buffer.buffer(512);
-			Serialization.serialize(args[0], new VertxBufferOutputStream(result));
 
-			eb.send(name + "::" + method.getName(), result, reply -> {
+			try {
+				Serialization.serialize(args[0], new VertxBufferOutputStream(result));
+			} catch (IOException e) {
+				next.handle(new Result<>(e));
+				return;
+			}
+
+			eb.send(name + "::" + methodName, result, Sync.fiberHandler(reply -> {
 				if (reply.succeeded()) {
 					try {
 						Object body = Serialization.deserialize(new VertxBufferInputStream((Buffer) reply.result().body()));
 						next.handle(new Result<>(null, body));
 					} catch (IOException | ClassNotFoundException e) {
-						next.handle(new Result(e));
+						next.handle(new Result<>(e));
 					}
 				} else {
-					next.handle(new Result(reply.cause()));
+					next.handle(new Result<>(reply.cause()));
 				}
-			});
-
-			return null;
+			}));
 		}
 	}
 }

@@ -1,5 +1,7 @@
 package com.hiddenswitch.proto3.net;
 
+import co.paralleluniverse.fibers.SuspendExecution;
+import co.paralleluniverse.fibers.Suspendable;
 import co.paralleluniverse.strands.Strand;
 import com.hiddenswitch.proto3.net.common.MatchmakingRequest;
 import com.hiddenswitch.proto3.net.common.MatchmakingResponse;
@@ -14,6 +16,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
+import io.vertx.ext.sync.Sync;
 import io.vertx.ext.unit.TestContext;
 import io.vertx.ext.unit.junit.VertxUnitRunner;
 import net.demilich.metastone.game.cards.CardCatalogue;
@@ -33,7 +36,8 @@ import static org.junit.Assert.assertNull;
 
 @RunWith(VertxUnitRunner.class)
 public class MatchmakingTest extends ServiceTestBase<MatchmakingImpl> {
-	Logger logger = LoggerFactory.getLogger(MatchmakingTest.class);
+	private Logger logger = LoggerFactory.getLogger(MatchmakingTest.class);
+	private GamesImpl gameSessions;
 
 	@Before
 	public void loadCards(TestContext context) {
@@ -46,71 +50,70 @@ public class MatchmakingTest extends ServiceTestBase<MatchmakingImpl> {
 	}
 
 	@Test
-	public void testMatchmakeAndJoin() {
-		createTwoPlayersAndMatchmake();
+	public void testMatchmakeAndJoin(TestContext context) {
+		wrapSync(context, this::createTwoPlayersAndMatchmake);
 	}
 
 	@Test
 	public void testMatchmakeSamePlayersTwice(TestContext context) {
-		wrapBlocking(context, () -> {
-			try {
-				// Creates the same two players
-				String gameId = createTwoPlayersAndMatchmake();
-				Strand.sleep(1000L);
-				getContext().assertNull(service.getGameSessions().getGameSession(gameId));
-				final MatchExpireRequest request = new MatchExpireRequest();
-				request.gameId = gameId;
-				getContext().assertFalse(service.expireMatch(request).expired, "We should fail to expire an already expired match.");
-				createTwoPlayersAndMatchmake();
-			} catch (Throwable e) {
-				getContext().fail(e);
-			}
+		wrapSync(context, () -> {
+			// Creates the same two players
+			String gameId = createTwoPlayersAndMatchmake();
+			Strand.sleep(1000L);
+			getContext().assertNull(gameSessions.getGameSession(gameId));
+			final MatchExpireRequest request = new MatchExpireRequest(gameId);
+			getContext().assertFalse(service.expireMatch(request).expired, "We should fail to expire an already expired match.");
+			createTwoPlayersAndMatchmake();
 		});
 
 	}
 
-	private String createTwoPlayersAndMatchmake() {
+	@Suspendable
+	private String createTwoPlayersAndMatchmake() throws SuspendExecution, InterruptedException {
 		logger.info("Starting matchmaking...");
 		String player1 = "player1";
 		String player2 = "player2";
 
 		// Assume player 1's identity
 		MatchmakingRequest request1 = new MatchmakingRequest();
+		request1.userId = player1;
 		Deck deck1 = DeckFactory.getRandomDeck();
 		request1.deck = deck1;
-		MatchmakingResponse response1 = service.matchmakeAndJoin(request1);
-		assertNotNull(response1.getRetry());
-		assertNull(response1.getConnection());
-		assertNull(response1.getRetry().deck);
+		MatchmakingResponse response1 = null;
+
+		response1 = service.matchmakeAndJoin(request1);
+		getContext().assertNotNull(response1.getRetry());
+		getContext().assertNull(response1.getConnection());
+		getContext().assertNull(response1.getRetry().deck);
 		logger.info("Matchmaking for player1 entered.");
 
 		// Assume player 2's identity
 		MatchmakingRequest request2 = new MatchmakingRequest();
+		request2.userId = player2;
 		Deck deck2 = DeckFactory.getRandomDeck();
 		request2.deck = deck2;
-		MatchmakingResponse response2 = service.matchmakeAndJoin(request2);
-		assertNull(response2.getRetry());
-		assertNotNull(response2.getConnection());
+		MatchmakingResponse response2 = null;
+
+		response2 = service.matchmakeAndJoin(request2);
+		getContext().assertNull(response2.getRetry());
+		getContext().assertNotNull(response2.getConnection());
 		logger.info("Matchmaking for player2 entered.");
 
 		// Assume player 1's identity, poll for matchmaking again and receive the new game information
 		request1 = response1.getRetry();
+
 		response1 = service.matchmakeAndJoin(request1);
-		assertNull(response1.getRetry());
-		assertNotNull(response1.getConnection());
+		getContext().assertNull(response1.getRetry());
+		getContext().assertNotNull(response1.getConnection());
 		logger.info("Matchmaking for player1 entered, 2nd time.");
 
 		// Now try connecting
-		TwoClients twoClients = new TwoClients().invoke(response1, deck1, response2, deck2, response1.getConnection().getFirstMessage().getGameId(), service.getGameSessions());
+		TwoClients twoClients = new TwoClients().invoke(response1, deck1, response2, deck2, response1.getConnection().getFirstMessage().getGameId(), gameSessions);
 		twoClients.play();
 		float time = 0f;
-		while (time < 40f && !twoClients.gameDecided()) {
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				Assert.fail(e.getMessage());
-			}
-			time += 0.1f;
+		while (time < 60f && !twoClients.gameDecided()) {
+			Strand.sleep(1000);
+			time += 1.0f;
 		}
 		twoClients.assertGameOver();
 		return response1.getConnection().getFirstMessage().getGameId();
@@ -119,8 +122,8 @@ public class MatchmakingTest extends ServiceTestBase<MatchmakingImpl> {
 	@Override
 	public void deployServices(Vertx vertx, Handler<AsyncResult<MatchmakingImpl>> done) {
 		logger.info("Deploying services...");
-		GamesImpl gameSessions = new GamesImpl();
-		MatchmakingImpl instance = new MatchmakingImpl().withGameSessions(gameSessions);
+		gameSessions = new GamesImpl();
+		MatchmakingImpl instance = new MatchmakingImpl();
 		vertx.deployVerticle(gameSessions, then -> {
 			vertx.deployVerticle(instance, then2 -> {
 				logger.info("Services deployed.");

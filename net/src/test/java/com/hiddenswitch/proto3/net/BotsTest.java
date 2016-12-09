@@ -6,7 +6,7 @@ import com.hiddenswitch.proto3.net.models.MulliganRequest;
 import com.hiddenswitch.proto3.net.models.MulliganResponse;
 import com.hiddenswitch.proto3.net.models.RequestActionRequest;
 import com.hiddenswitch.proto3.net.models.RequestActionResponse;
-import com.hiddenswitch.proto3.net.util.AsyncProxy;
+import com.hiddenswitch.proto3.net.util.ServiceProxy;
 import com.hiddenswitch.proto3.net.util.Broker;
 import com.hiddenswitch.proto3.net.util.Result;
 import com.hiddenswitch.proto3.net.util.ServiceTestBase;
@@ -72,7 +72,7 @@ public class BotsTest extends ServiceTestBase<BotsImpl> {
 	public void testBroker(TestContext context) throws CardParseException, IOException, URISyntaxException {
 		CardCatalogue.loadCardsFromPackage();
 		final Async async = context.async();
-		AsyncProxy<Bots> bots = Broker.proxy(Bots.class, vertx.eventBus());
+		ServiceProxy<Bots> bots = Broker.proxy(Bots.class, vertx.eventBus());
 		final MulliganRequest request = new MulliganRequest();
 		request.cards = Arrays.asList(CardCatalogue.getCardById("spell_fireball"), CardCatalogue.getCardById("spell_arcane_missiles"), CardCatalogue.getCardById("spell_assassinate"));
 		bots.async((AsyncResult<MulliganResponse> t) -> {

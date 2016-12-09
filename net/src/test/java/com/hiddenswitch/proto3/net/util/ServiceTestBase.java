@@ -1,11 +1,16 @@
 package com.hiddenswitch.proto3.net.util;
 
+import co.paralleluniverse.fibers.Fiber;
+import co.paralleluniverse.fibers.FiberScheduler;
+import co.paralleluniverse.fibers.SuspendExecution;
+import co.paralleluniverse.fibers.Suspendable;
+import co.paralleluniverse.strands.SuspendableRunnable;
 import com.hiddenswitch.proto3.net.Service;
-import io.vertx.core.AsyncResult;
-import io.vertx.core.Handler;
-import io.vertx.core.Vertx;
+import io.vertx.core.*;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
+import io.vertx.ext.sync.Sync;
+import io.vertx.ext.sync.SyncVerticle;
 import io.vertx.ext.unit.Async;
 import io.vertx.ext.unit.TestContext;
 import io.vertx.ext.unit.junit.VertxUnitRunner;
@@ -54,12 +59,6 @@ public abstract class ServiceTestBase<T extends Service<T>> {
 		return false;
 	}
 
-//	@After
-//	public void tearDown(TestContext context) {
-//		logger.info("Tearing down vertx.");
-//		vertx.close(context.asyncAssertSuccess());
-//	}
-
 	protected void wrapBlocking(TestContext context, Runnable code) {
 		ServiceTestBase.wrappedContext = context;
 		final Async async = context.async();
@@ -71,28 +70,47 @@ public abstract class ServiceTestBase<T extends Service<T>> {
 			}
 			fut.complete();
 		}, then -> {
-			async.complete();
 			ServiceTestBase.wrappedContext = null;
+			async.complete();
 		});
+	}
+
+	@Suspendable
+	protected void wrapSync(TestContext context, SuspendableRunnable code) {
+		ServiceTestBase.wrappedContext = context;
+		final Async async = context.async();
+
+		// Create a verticle on the fly to run sync stuff in, then tear down the verticle
+		TestSyncVerticle testVerticle = new TestSyncVerticle(code);
+		vertx.deployVerticle(testVerticle, getContext().asyncAssertSuccess(fut -> {
+			vertx.undeploy(fut, then -> {
+				ServiceTestBase.wrappedContext = null;
+				async.complete();
+			});
+		}));
 	}
 
 	private static class Assert implements TestContext {
 		@Override
+		@Suspendable
 		public <T> T get(String key) {
 			return wrappedContext.get(key);
 		}
 
 		@Override
+		@Suspendable
 		public <T> T put(String key, Object value) {
 			return wrappedContext.put(key, value);
 		}
 
 		@Override
+		@Suspendable
 		public <T> T remove(String key) {
 			return wrappedContext.remove(key);
 		}
 
 		@Override
+		@Suspendable
 		public TestContext assertNull(Object expected) {
 			if (wrappedContext == null) {
 				org.junit.Assert.assertNull(expected);
@@ -103,6 +121,7 @@ public abstract class ServiceTestBase<T extends Service<T>> {
 		}
 
 		@Override
+		@Suspendable
 		public TestContext assertNull(Object expected, String message) {
 			if (wrappedContext == null) {
 				org.junit.Assert.assertNull(message, expected);
@@ -113,6 +132,7 @@ public abstract class ServiceTestBase<T extends Service<T>> {
 		}
 
 		@Override
+		@Suspendable
 		public TestContext assertNotNull(Object expected) {
 			if (wrappedContext == null) {
 				org.junit.Assert.assertNotNull(expected);
@@ -123,6 +143,7 @@ public abstract class ServiceTestBase<T extends Service<T>> {
 		}
 
 		@Override
+		@Suspendable
 		public TestContext assertNotNull(Object expected, String message) {
 			if (wrappedContext == null) {
 				org.junit.Assert.assertNotNull(message, expected);
@@ -133,6 +154,7 @@ public abstract class ServiceTestBase<T extends Service<T>> {
 		}
 
 		@Override
+		@Suspendable
 		public TestContext assertTrue(boolean condition) {
 			if (wrappedContext == null) {
 				org.junit.Assert.assertTrue(condition);
@@ -143,6 +165,7 @@ public abstract class ServiceTestBase<T extends Service<T>> {
 		}
 
 		@Override
+		@Suspendable
 		public TestContext assertTrue(boolean condition, String message) {
 			if (wrappedContext == null) {
 				org.junit.Assert.assertTrue(message, condition);
@@ -153,6 +176,7 @@ public abstract class ServiceTestBase<T extends Service<T>> {
 		}
 
 		@Override
+		@Suspendable
 		public TestContext assertFalse(boolean condition) {
 			if (wrappedContext == null) {
 				org.junit.Assert.assertFalse(condition);
@@ -163,6 +187,7 @@ public abstract class ServiceTestBase<T extends Service<T>> {
 		}
 
 		@Override
+		@Suspendable
 		public TestContext assertFalse(boolean condition, String message) {
 			if (wrappedContext == null) {
 				org.junit.Assert.assertFalse(message, condition);
@@ -173,6 +198,7 @@ public abstract class ServiceTestBase<T extends Service<T>> {
 		}
 
 		@Override
+		@Suspendable
 		public TestContext assertEquals(Object expected, Object actual) {
 			if (wrappedContext == null) {
 				org.junit.Assert.assertEquals(expected, actual);
@@ -183,6 +209,7 @@ public abstract class ServiceTestBase<T extends Service<T>> {
 		}
 
 		@Override
+		@Suspendable
 		public TestContext assertEquals(Object expected, Object actual, String message) {
 			if (wrappedContext == null) {
 				org.junit.Assert.assertEquals(message, expected, actual);
@@ -193,6 +220,7 @@ public abstract class ServiceTestBase<T extends Service<T>> {
 		}
 
 		@Override
+		@Suspendable
 		public TestContext assertInRange(double expected, double actual, double delta) {
 			if (wrappedContext == null) {
 				throw new RuntimeException("Unsupported!");
@@ -203,6 +231,7 @@ public abstract class ServiceTestBase<T extends Service<T>> {
 		}
 
 		@Override
+		@Suspendable
 		public TestContext assertInRange(double expected, double actual, double delta, String message) {
 			if (wrappedContext == null) {
 				throw new RuntimeException("Unsupported!");
@@ -213,6 +242,7 @@ public abstract class ServiceTestBase<T extends Service<T>> {
 		}
 
 		@Override
+		@Suspendable
 		public TestContext assertNotEquals(Object first, Object second) {
 			if (wrappedContext == null) {
 				org.junit.Assert.assertNotEquals(first, second);
@@ -223,6 +253,7 @@ public abstract class ServiceTestBase<T extends Service<T>> {
 		}
 
 		@Override
+		@Suspendable
 		public TestContext assertNotEquals(Object first, Object second, String message) {
 			if (wrappedContext == null) {
 				org.junit.Assert.assertEquals(message, first, second);
@@ -233,6 +264,7 @@ public abstract class ServiceTestBase<T extends Service<T>> {
 		}
 
 		@Override
+		@Suspendable
 		public void fail() {
 			if (wrappedContext == null) {
 				org.junit.Assert.fail("(No message)");
@@ -242,6 +274,7 @@ public abstract class ServiceTestBase<T extends Service<T>> {
 		}
 
 		@Override
+		@Suspendable
 		public void fail(String message) {
 			if (wrappedContext == null) {
 				org.junit.Assert.fail(message);
@@ -251,6 +284,7 @@ public abstract class ServiceTestBase<T extends Service<T>> {
 		}
 
 		@Override
+		@Suspendable
 		public void fail(Throwable cause) {
 			if (wrappedContext == null) {
 				org.junit.Assert.fail(cause.getMessage());
@@ -292,6 +326,20 @@ public abstract class ServiceTestBase<T extends Service<T>> {
 		@Override
 		public Handler<Throwable> exceptionHandler() {
 			return wrappedContext.exceptionHandler();
+		}
+	}
+
+	private static class TestSyncVerticle extends SyncVerticle {
+		private final SuspendableRunnable code;
+
+		public TestSyncVerticle(SuspendableRunnable code) {
+			this.code = code;
+		}
+
+		@Override
+		@Suspendable
+		public void start() throws SuspendExecution, InterruptedException {
+			code.run();
 		}
 	}
 }

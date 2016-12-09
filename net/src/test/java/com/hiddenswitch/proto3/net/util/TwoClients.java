@@ -1,5 +1,6 @@
 package com.hiddenswitch.proto3.net.util;
 
+import co.paralleluniverse.fibers.Suspendable;
 import com.hiddenswitch.proto3.net.impl.GamesImpl;
 import com.hiddenswitch.proto3.net.client.RemoteGameContext;
 import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
@@ -63,6 +64,7 @@ public class TwoClients {
 		return invoke(service, 60000L);
 	}
 
+	@Suspendable
 	public TwoClients invoke(GamesImpl service, long noActivityTimeout) throws IOException, URISyntaxException, CardParseException {
 		this.service = service;
 		CardCatalogue.loadCardsFromPackage();
@@ -88,6 +90,7 @@ public class TwoClients {
 		return this;
 	}
 
+	@Suspendable
 	public TwoClients invoke(MatchmakingResponse response1, Deck deck1, MatchmakingResponse response2, Deck deck2, String gameId, GamesImpl service) {
 		this.service = service;
 		this.gameId = gameId;
