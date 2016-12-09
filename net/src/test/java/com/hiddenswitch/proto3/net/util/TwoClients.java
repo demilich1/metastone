@@ -1,6 +1,6 @@
 package com.hiddenswitch.proto3.net.util;
 
-import com.hiddenswitch.proto3.net.impl.GameSessionsImpl;
+import com.hiddenswitch.proto3.net.impl.GamesImpl;
 import com.hiddenswitch.proto3.net.client.RemoteGameContext;
 import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
 import com.hiddenswitch.proto3.net.common.ClientToServerMessage;
@@ -32,7 +32,7 @@ public class TwoClients {
 	private Thread thread1;
 	private Thread thread2;
 	private String gameId;
-	private GameSessionsImpl service;
+	private GamesImpl service;
 	private Logger logger = LoggerFactory.getLogger(TwoClients.class);
 	private PregamePlayerConfiguration pregame1;
 	private PregamePlayerConfiguration pregame2;
@@ -59,11 +59,11 @@ public class TwoClients {
 		return thread2;
 	}
 
-	public TwoClients invoke(GameSessionsImpl service) throws IOException, URISyntaxException, CardParseException {
+	public TwoClients invoke(GamesImpl service) throws IOException, URISyntaxException, CardParseException {
 		return invoke(service, 60000L);
 	}
 
-	public TwoClients invoke(GameSessionsImpl service, long noActivityTimeout) throws IOException, URISyntaxException, CardParseException {
+	public TwoClients invoke(GamesImpl service, long noActivityTimeout) throws IOException, URISyntaxException, CardParseException {
 		this.service = service;
 		CardCatalogue.loadCardsFromPackage();
 
@@ -88,7 +88,7 @@ public class TwoClients {
 		return this;
 	}
 
-	public TwoClients invoke(MatchmakingResponse response1, Deck deck1, MatchmakingResponse response2, Deck deck2, String gameId, GameSessionsImpl service) {
+	public TwoClients invoke(MatchmakingResponse response1, Deck deck1, MatchmakingResponse response2, Deck deck2, String gameId, GamesImpl service) {
 		this.service = service;
 		this.gameId = gameId;
 		// Manually override the player in the configurations

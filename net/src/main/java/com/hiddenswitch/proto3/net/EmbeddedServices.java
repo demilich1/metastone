@@ -3,8 +3,8 @@ package com.hiddenswitch.proto3.net;
 import co.paralleluniverse.fibers.Suspendable;
 import com.hiddenswitch.proto3.net.common.MatchmakingRequest;
 import com.hiddenswitch.proto3.net.common.MatchmakingResponse;
-import com.hiddenswitch.proto3.net.impl.GameSessionsImpl;
 import com.hiddenswitch.proto3.net.impl.GamesImpl;
+import com.hiddenswitch.proto3.net.impl.MatchmakingImpl;
 import com.hiddenswitch.proto3.net.util.Serialization;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServer;
@@ -33,7 +33,7 @@ public class EmbeddedServices extends SyncVerticle {
 
 		try {
 			logger.info("Deploying embedded services...");
-			GameSessionsImpl gameSessions = new GameSessionsImpl();
+			GamesImpl gameSessions = new GamesImpl();
 
 			Void t = awaitResult(done -> context.executeBlocking(blocking -> {
 				logger.info("Starting embedded configuration...");
@@ -50,7 +50,7 @@ public class EmbeddedServices extends SyncVerticle {
 
 			logger.info("Deployed gameSessions with verticle ID " + socketServerDeploymentId);
 
-			GamesImpl games = new GamesImpl()
+			MatchmakingImpl games = new MatchmakingImpl()
 					.withGameSessions(gameSessions)
 					.withEmbeddedConfiguration();
 
