@@ -33,6 +33,20 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	private long noActivityTimeout = GamesImpl.DEFAULT_NO_ACTIVITY_TIMEOUT;
 	private final HashSet<Handler<ServerGameSession>> gameOverHandlers = new HashSet<>();
 
+	private ServerGameSession(String host, int port, PregamePlayerConfiguration p1, PregamePlayerConfiguration p2, String gameId) {
+		super();
+		setHost(host);
+		setPort(port);
+		this.pregamePlayerConfiguration1 = p1;
+		this.pregamePlayerConfiguration2 = p2;
+		this.gameId = gameId;
+	}
+
+	public ServerGameSession(String host, int port, PregamePlayerConfiguration p1, PregamePlayerConfiguration p2, String gameId, long noActivityTimeout) {
+		this(host, port, p1, p2, gameId);
+		this.noActivityTimeout = noActivityTimeout;
+	}
+
 	private ClientConnectionConfiguration getConfigurationFor(PregamePlayerConfiguration player, int id) {
 		// TODO: It's obviously insecure to allow the client to specify things like their player object
 		Player tempPlayer = player.getPlayer();
@@ -130,20 +144,6 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	@Override
 	public ClientConnectionConfiguration getConfigurationForPlayer2() {
 		return getConfigurationFor(pregamePlayerConfiguration2, IdFactory.PLAYER_2);
-	}
-
-	ServerGameSession(String host, int port, PregamePlayerConfiguration p1, PregamePlayerConfiguration p2, String gameId) {
-		super();
-		setHost(host);
-		setPort(port);
-		this.pregamePlayerConfiguration1 = p1;
-		this.pregamePlayerConfiguration2 = p2;
-		this.gameId = gameId;
-	}
-
-	public ServerGameSession(String host, int port, PregamePlayerConfiguration p1, PregamePlayerConfiguration p2, String gameId, long noActivityTimeout) {
-		this(host, port, p1, p2, gameId);
-		this.noActivityTimeout = noActivityTimeout;
 	}
 
 	@Override
