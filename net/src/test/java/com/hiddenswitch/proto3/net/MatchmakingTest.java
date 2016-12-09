@@ -5,6 +5,7 @@ import co.paralleluniverse.fibers.Suspendable;
 import co.paralleluniverse.strands.Strand;
 import com.hiddenswitch.proto3.net.common.MatchmakingRequest;
 import com.hiddenswitch.proto3.net.common.MatchmakingResponse;
+import com.hiddenswitch.proto3.net.impl.BotsImpl;
 import com.hiddenswitch.proto3.net.impl.GamesImpl;
 import com.hiddenswitch.proto3.net.impl.MatchmakingImpl;
 import com.hiddenswitch.proto3.net.models.MatchExpireRequest;
@@ -38,6 +39,7 @@ import static org.junit.Assert.assertNull;
 public class MatchmakingTest extends ServiceTestBase<MatchmakingImpl> {
 	private Logger logger = LoggerFactory.getLogger(MatchmakingTest.class);
 	private GamesImpl gameSessions;
+	private BotsImpl bots;
 
 	@Before
 	public void loadCards(TestContext context) {
@@ -123,11 +125,14 @@ public class MatchmakingTest extends ServiceTestBase<MatchmakingImpl> {
 	public void deployServices(Vertx vertx, Handler<AsyncResult<MatchmakingImpl>> done) {
 		logger.info("Deploying services...");
 		gameSessions = new GamesImpl();
+		bots = new BotsImpl();
 		MatchmakingImpl instance = new MatchmakingImpl();
 		vertx.deployVerticle(gameSessions, then -> {
-			vertx.deployVerticle(instance, then2 -> {
-				logger.info("Services deployed.");
-				done.handle(new Result<>(instance));
+			vertx.deployVerticle(bots, then2 -> {
+				vertx.deployVerticle(instance, then3 -> {
+					logger.info("Services deployed.");
+					done.handle(new Result<>(instance));
+				});
 			});
 		});
 	}
