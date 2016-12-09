@@ -3,12 +3,8 @@ package com.hiddenswitch.proto3.server;
 import co.paralleluniverse.fibers.Suspendable;
 import com.hiddenswitch.proto3.net.common.*;
 import io.vertx.core.Handler;
-import io.vertx.core.Vertx;
-import io.vertx.core.impl.ContextImpl;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
-import io.vertx.core.net.impl.HandlerManager;
-import io.vertx.core.net.impl.VertxEventLoopGroup;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
@@ -33,7 +29,7 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	private Player player2;
 	private final String gameId;
 	private Logger logger = LoggerFactory.getLogger(ServerGameSession.class);
-	private long noActivityTimeout = SocketServer.DEFAULT_NO_ACTIVITY_TIMEOUT;
+	private long noActivityTimeout = SocketServerImpl.DEFAULT_NO_ACTIVITY_TIMEOUT;
 	private final HashSet<Handler<ServerGameSession>> gameOverHandlers = new HashSet<>();
 
 	private ClientConnectionConfiguration getConfigurationFor(PregamePlayerConfiguration player, int id) {

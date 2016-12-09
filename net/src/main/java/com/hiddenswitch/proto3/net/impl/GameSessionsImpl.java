@@ -6,7 +6,7 @@ import com.hiddenswitch.proto3.net.common.ServerGameContext;
 import com.hiddenswitch.proto3.net.models.*;
 import com.hiddenswitch.proto3.server.GameSession;
 import com.hiddenswitch.proto3.server.ServerGameSession;
-import com.hiddenswitch.proto3.server.SocketServer;
+import com.hiddenswitch.proto3.server.SocketServerImpl;
 import io.netty.channel.DefaultChannelId;
 import io.vertx.core.Future;
 import io.vertx.core.logging.Logger;
@@ -20,7 +20,7 @@ import java.net.URISyntaxException;
 
 public class GameSessionsImpl extends Service<GameSessionsImpl> implements GameSessions {
 	private Logger logger = LoggerFactory.getLogger(GameSessionsImpl.class);
-	private SocketServer server;
+	private SocketServerImpl server;
 
 	public GameSessionsImpl() {
 	}
@@ -37,7 +37,7 @@ public class GameSessionsImpl extends Service<GameSessionsImpl> implements GameS
 			DefaultChannelId.newInstance();
 			// TODO: These ports shouldn't be totally randomized because of AWS security groups
 			int port = RandomUtils.nextInt(6200, 16200);
-			server = new SocketServer(port);
+			server = new SocketServerImpl(port);
 			logger.info("Socket server configured.");
 
 			blocking.complete();
@@ -65,7 +65,7 @@ public class GameSessionsImpl extends Service<GameSessionsImpl> implements GameS
 				.getOrDefault(gameId, null);
 	}
 
-	public SocketServer getServer() {
+	public SocketServerImpl getServer() {
 		return server;
 	}
 

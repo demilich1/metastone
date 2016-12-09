@@ -3,7 +3,7 @@ package com.hiddenswitch.proto3;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import com.hiddenswitch.proto3.server.SocketServer;
+import com.hiddenswitch.proto3.server.SocketServerImpl;
 
 import io.netty.channel.DefaultChannelId;
 import io.vertx.core.Vertx;
@@ -16,7 +16,7 @@ public class MetaStoneSimpleServer {
 	public static void main(String[] args) {
 		DefaultChannelId.newInstance();
 		Vertx vertx = Vertx.vertx();
-		SocketServer ssc = new SocketServer();
+		SocketServerImpl ssc = new SocketServerImpl();
 		try {
 			CardCatalogue.loadCardsFromPackage();
 			DeckCatalogue.loadDecksFromPackage();

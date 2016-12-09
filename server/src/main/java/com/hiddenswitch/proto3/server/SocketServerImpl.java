@@ -1,6 +1,7 @@
 package com.hiddenswitch.proto3.server;
 
 import co.paralleluniverse.fibers.Suspendable;
+import com.hiddenswitch.proto3.net.GameServer;
 import com.hiddenswitch.proto3.net.common.ClientToServerMessage;
 import com.hiddenswitch.proto3.net.util.IncomingMessage;
 import com.hiddenswitch.proto3.net.util.Serialization;
@@ -17,8 +18,8 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.*;
 
-public class SocketServer extends SyncVerticle {
-	private static final Logger logger = LoggerFactory.getLogger(SocketServer.class);
+public class SocketServerImpl extends SyncVerticle implements GameServer {
+	private static final Logger logger = LoggerFactory.getLogger(SocketServerImpl.class);
 	private static final int DEFAULT_PORT = 11111;
 	public static final long DEFAULT_NO_ACTIVITY_TIMEOUT = 60 * 1000L;
 	private final int port;
@@ -137,11 +138,11 @@ public class SocketServer extends SyncVerticle {
 		}
 	}
 
-	public SocketServer() {
+	public SocketServerImpl() {
 		this.port = DEFAULT_PORT;
 	}
 
-	public SocketServer(int port) {
+	public SocketServerImpl(int port) {
 		this.port = port;
 	}
 
@@ -152,6 +153,7 @@ public class SocketServer extends SyncVerticle {
 		Void t = Sync.awaitResult(done -> server.close(done));
 	}
 
+	@Override
 	@Suspendable
 	public void kill(String gameId) {
 		ServerGameSession session = games.get(gameId);
@@ -184,6 +186,7 @@ public class SocketServer extends SyncVerticle {
 		games.remove(gameId);
 	}
 
+	@Override
 	public ServerGameSession createGameSession(PregamePlayerConfiguration player1, PregamePlayerConfiguration player2, String gameId, long noActivityTimeout) {
 		ServerGameSession newSession = new ServerGameSession(getHost(), getPort(), player1, player2, gameId, noActivityTimeout);
 		newSession.handleGameOver(this::onGameOver);
