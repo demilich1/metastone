@@ -14,4 +14,10 @@ public class RequestActionRequest implements Serializable {
 	public GameState gameState;
 	public int playerId;
 	public List<GameAction> validActions;
+
+	public RequestActionRequest(GameState gameState, int playerId, List<GameAction> validActions) {
+		this.gameState = gameState;
+		this.playerId = playerId;
+		this.validActions = validActions;
+	}
 }

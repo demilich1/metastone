@@ -10,4 +10,8 @@ import java.util.List;
  */
 public class MulliganRequest implements Serializable {
 	public List<Card> cards;
+
+	public MulliganRequest(List<Card> cards) {
+		this.cards = cards;
+	}
 }

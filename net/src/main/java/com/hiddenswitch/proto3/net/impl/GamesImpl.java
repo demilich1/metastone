@@ -195,7 +195,7 @@ public class GamesImpl extends Service<GamesImpl> implements Games {
 				ServerClientConnection client = new ServerClientConnection(socket);
 				gameForSocket.put(socket, session);
 				// Is this a reconnect?
-				if (session.areBothPlayersJoined()) {
+				if (session.isGameReady()) {
 					// TODO: Remove references to the old socket
 					// Replace the client
 					session.onPlayerReconnected(message.getPlayer1(), client);

@@ -3,6 +3,8 @@ package com.hiddenswitch.proto3.net.impl.server;
 import co.paralleluniverse.fibers.Suspendable;
 import com.hiddenswitch.proto3.net.common.*;
 import com.hiddenswitch.proto3.net.impl.GamesImpl;
+import com.hiddenswitch.proto3.net.util.Broker;
+import com.hiddenswitch.proto3.net.util.ServiceProxy;
 import io.vertx.core.Handler;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
@@ -17,6 +19,9 @@ import net.demilich.metastone.game.targeting.IdFactory;
 
 import java.util.HashSet;
 import java.util.List;
+
+import static net.demilich.metastone.game.targeting.IdFactory.PLAYER_1;
+import static net.demilich.metastone.game.targeting.IdFactory.PLAYER_2;
 
 public class ServerGameSession extends GameSession implements ServerCommunicationSend, ServerListener {
 	private String host;
@@ -63,7 +68,7 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	@Suspendable
 	public void onPlayerConnected(Player player, ServerClientConnection client) {
 		logger.debug("Receive connections from {}", player.toString());
-		if (player.getId() == IdFactory.PLAYER_1) {
+		if (player.getId() == PLAYER_1) {
 			if (getPlayer1() != null) {
 				throw new RuntimeException("Two players tried to connect to the same player slot.");
 			}
@@ -79,7 +84,7 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 			throw new RuntimeException("A player without an ID set has attempted to connect.");
 		}
 
-		if (areBothPlayersJoined()) {
+		if (isGameReady()) {
 			startGame();
 		}
 	}
@@ -88,11 +93,16 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	@Suspendable
 	public void onPlayerReconnected(Player player, ServerClientConnection client) {
 		checkContext();
-		if (player.getId() == IdFactory.PLAYER_1) {
-			getClient1().close();
+		if (player.getId() == PLAYER_1) {
+			if (getClient1() != null) {
+				getClient1().close();
+			}
 			setClient1(client);
 		} else if (player.getId() == IdFactory.PLAYER_2) {
-			getClient2().close();
+			if (getClient2() != null) {
+				getClient2().close();
+			}
+
 			setClient2(client);
 		} else {
 			throw new RuntimeException("A player without an ID set has attempted to connect.");
@@ -108,20 +118,56 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 		getGameContext().onActionReceived(id, action);
 	}
 
+	public boolean isGameReady() {
+		return (isAgainstAI()
+				&& isExactlyOnePlayerJoined())
+				|| areBothPlayersJoined();
+	}
+
 	public boolean areBothPlayersJoined() {
 		return player1 != null
 				&& player2 != null;
+	}
+
+	public boolean isExactlyOnePlayerJoined() {
+		return (player1 != null && player2 == null)
+				|| (player1 == null && player2 != null);
 	}
 
 	protected void startGame() {
 		logger.debug("Starting game...");
 		DeckFormat simpleFormat = new DeckFormat().withCardSets(CardSet.values());
 		// Configure the network behaviours on the players
+		if (isAgainstAI()) {
+			if (pregamePlayerConfiguration1.isAI()) {
+				setPlayer1(createAIPlayer(pregamePlayerConfiguration1, PLAYER_1));
+			} else if (pregamePlayerConfiguration2.isAI()) {
+				setPlayer2(createAIPlayer(pregamePlayerConfiguration2, PLAYER_2));
+			}
+		}
+
 		getPlayer1().setBehaviour(new NetworkBehaviour(getPlayer1().getBehaviour()));
 		getPlayer2().setBehaviour(new NetworkBehaviour(getPlayer2().getBehaviour()));
 		this.gameContext = new ServerGameContext(getPlayer1(), getPlayer2(), simpleFormat, getGameId());
-		getGameContext().setUpdateListener(getPlayer1(), getPlayerListener(IdFactory.PLAYER_1));
-		getGameContext().setUpdateListener(getPlayer2(), getPlayerListener(IdFactory.PLAYER_2));
+		final RemoteUpdateListener listener1;
+		final RemoteUpdateListener listener2;
+
+
+		if (isAgainstAI()) {
+			if (pregamePlayerConfiguration1.isAI()) {
+				listener1 = new AIServiceConnection(getGameContext(), PLAYER_1);
+				listener2 = getPlayerListener(PLAYER_2);
+			} else {
+				listener1 = getPlayerListener(PLAYER_1);
+				listener2 = new AIServiceConnection(getGameContext(), PLAYER_2);
+			}
+		} else {
+			listener1 = getPlayerListener(PLAYER_1);
+			listener2 = getPlayerListener(PLAYER_2);
+		}
+
+		getGameContext().setUpdateListener(getPlayer1(), listener1);
+		getGameContext().setUpdateListener(getPlayer2(), listener2);
 		getGameContext().handleEndGame(sgc -> {
 			gameOverHandlers.forEach(h -> {
 				h.handle(this);
@@ -138,12 +184,12 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 
 	@Override
 	public ClientConnectionConfiguration getConfigurationForPlayer1() {
-		return getConfigurationFor(pregamePlayerConfiguration1, IdFactory.PLAYER_1);
+		return getConfigurationFor(pregamePlayerConfiguration1, PLAYER_1);
 	}
 
 	@Override
 	public ClientConnectionConfiguration getConfigurationForPlayer2() {
-		return getConfigurationFor(pregamePlayerConfiguration2, IdFactory.PLAYER_2);
+		return getConfigurationFor(pregamePlayerConfiguration2, PLAYER_2);
 	}
 
 	@Override
@@ -158,14 +204,30 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	@Suspendable
 	public void kill() {
 		getGameContext().kill();
-		getClient1().close();
-		getClient2().close();
+		if (getClient1() != null) {
+			getClient1().close();
+		}
+		if (getClient2() != null) {
+			getClient2().close();
+		}
 	}
 
 	private void checkContext() {
 		if (getGameContext() == null) {
 			throw new NullPointerException(String.format("The game context for this game session is null. gameId: %s", getGameId()));
 		}
+	}
+
+	private boolean isAgainstAI() {
+		return pregamePlayerConfiguration1.isAI()
+				|| pregamePlayerConfiguration2.isAI();
+	}
+
+	private Player createAIPlayer(PregamePlayerConfiguration pregame, int id) {
+		PlayerConfig playerConfig = new PlayerConfig(pregame.getDeck(), new HumanBehaviour());
+		Player player = new Player(playerConfig);
+		player.setId(id);
+		return player;
 	}
 
 	public String getHost() {
