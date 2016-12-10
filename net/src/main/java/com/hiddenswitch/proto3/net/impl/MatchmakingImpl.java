@@ -8,12 +8,15 @@ import com.hiddenswitch.proto3.net.Service;
 import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
 import com.hiddenswitch.proto3.net.common.MatchmakingRequest;
 import com.hiddenswitch.proto3.net.common.MatchmakingResponse;
+import com.hiddenswitch.proto3.net.impl.util.QueueEntry;
 import com.hiddenswitch.proto3.net.models.*;
 import com.hiddenswitch.proto3.net.impl.util.Matchmaker;
 import com.hiddenswitch.proto3.net.impl.server.GameSession;
 import com.hiddenswitch.proto3.net.impl.server.PregamePlayerConfiguration;
 import com.hiddenswitch.proto3.net.util.ServiceProxy;
 import com.hiddenswitch.proto3.net.util.Broker;
+import net.demilich.metastone.game.decks.DeckFactory;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.*;
 
@@ -45,8 +48,33 @@ public class MatchmakingImpl extends Service<MatchmakingImpl> implements Matchma
 	@Suspendable
 	public MatchmakingResponse matchmakeAndJoin(MatchmakingRequest matchmakingRequest) throws InterruptedException, SuspendExecution {
 		final String userId = matchmakingRequest.userId;
-		// TODO: Setup a user with a game against an AI if they've been waiting more than 10 seconds
 		MatchmakingResponse response = new MatchmakingResponse();
+
+		final boolean isWaitingTooLong = matchmaker.contains(userId)
+				&& matchmaker.get(userId).createdAt + (long) 10e9 > System.nanoTime();
+
+		// Setup a user with a game against an AI if they've been waiting more than 10 seconds
+		if (isWaitingTooLong) {
+			QueueEntry entry = matchmaker.get(userId);
+			String gameId = RandomStringUtils.randomAlphanumeric(8).toLowerCase();
+			String aiUserId = RandomStringUtils.randomAlphanumeric(8).toLowerCase();
+			// The player has been waiting too long. Match to an AI.
+			final CreateGameSessionRequest request = new CreateGameSessionRequest()
+					.withPregame1(new PregamePlayerConfiguration(entry.deck, entry.userId))
+					// TODO: Pick a better deck for the AI
+					.withPregame2(new PregamePlayerConfiguration(DeckFactory.getRandomDeck(), aiUserId)
+							.withAI(true))
+					.withGameId(gameId);
+
+			CreateGameSessionResponse createGameSessionResponse = gameSessions.sync().createGameSession(request);
+
+			GameSession session = createGameSessionResponse.toSession();
+			final ClientConnectionConfiguration connection = session.getConfigurationForPlayer1();
+			connections.put(userId, connection);
+			matchmaker.remove(userId);
+			response.setConnection(connection);
+			return response;
+		}
 
 		Matchmaker.Match match = matchmaker.match(userId, matchmakingRequest.deck);
 
@@ -59,10 +87,11 @@ public class MatchmakingImpl extends Service<MatchmakingImpl> implements Matchma
 
 		if (!contains.result) {
 			// Create a game session.
-			CreateGameSessionResponse createGameSessionResponse = gameSessions.sync().createGameSession(new CreateGameSessionRequest()
+			final CreateGameSessionRequest request = new CreateGameSessionRequest()
 					.withPregame1(new PregamePlayerConfiguration(match.entry1.deck, match.entry1.userId))
 					.withPregame2(new PregamePlayerConfiguration(match.entry2.deck, match.entry2.userId))
-					.withGameId(match.gameId));
+					.withGameId(match.gameId);
+			CreateGameSessionResponse createGameSessionResponse = gameSessions.sync().createGameSession(request);
 			GameSession session = createGameSessionResponse.toSession();
 			connections.put(match.entry1.userId, session.getConfigurationForPlayer1());
 			connections.put(match.entry2.userId, session.getConfigurationForPlayer2());
@@ -74,7 +103,13 @@ public class MatchmakingImpl extends Service<MatchmakingImpl> implements Matchma
 
 	@Override
 	public MatchExpireResponse expireMatch(MatchExpireRequest request) {
+		// TODO: Clear out old connections from AI games
 		final MatchExpireResponse response = new MatchExpireResponse();
+		Matchmaker.Match match = matchmaker.asMatches().get(request.gameId);
+		if (match != null) {
+			connections.remove(match.entry1.userId);
+			connections.remove(match.entry2.userId);
+		}
 		response.expired = matchmaker.expire(request.gameId);
 		return response;
 	}

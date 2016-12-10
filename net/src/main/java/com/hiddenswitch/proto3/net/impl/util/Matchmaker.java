@@ -84,6 +84,10 @@ public class Matchmaker extends AbstractMap<String, QueueEntry> {
 		return null;
 	}
 
+	public Map<String, Match> asMatches() {
+		return Collections.unmodifiableMap(this.gamesToMatches);
+	}
+
 	private MatchmakingQueue asQueue() {
 		return new MatchmakingQueue();
 	}
