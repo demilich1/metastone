@@ -13,7 +13,7 @@
 	<bottom>
 		<BorderPane prefHeight="-1.0" prefWidth="-1.0">
 			<bottom>
-				<HBox fx:id="p1CardPane" alignment="CENTER" prefHeight="150.0" prefWidth="200.0" spacing="5">
+				<HBox fx:id="p1CardPane" alignment="CENTER" prefHeight="130.0" prefWidth="200.0" spacing="5">
 					<padding>
 						<Insets bottom="0" top="4.0" fx:id="x1" />
 					</padding>
