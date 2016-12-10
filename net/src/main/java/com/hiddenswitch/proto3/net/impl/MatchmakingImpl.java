@@ -51,7 +51,7 @@ public class MatchmakingImpl extends Service<MatchmakingImpl> implements Matchma
 		MatchmakingResponse response = new MatchmakingResponse();
 
 		final boolean isWaitingTooLong = matchmaker.contains(userId)
-				&& matchmaker.get(userId).createdAt + (long) 10e9 < System.nanoTime();
+				&& matchmaker.get(userId).createdAt + (long) 25e9 < System.nanoTime();
 
 		// TODO: Deal with reconnecting to AI game
 
