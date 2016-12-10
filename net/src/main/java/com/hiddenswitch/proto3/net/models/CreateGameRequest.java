@@ -2,7 +2,9 @@ package com.hiddenswitch.proto3.net.models;
 
 import net.demilich.metastone.game.decks.Deck;
 
-public class CreateGameRequest {
+import java.io.Serializable;
+
+public class CreateGameRequest implements Serializable {
 	public long randomSeed;
 	public Deck player1Deck;
 	public Deck player2Deck;

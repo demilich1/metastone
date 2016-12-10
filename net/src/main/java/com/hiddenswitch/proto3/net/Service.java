@@ -137,17 +137,5 @@ public abstract class Service<T extends Service<T>> extends AbstractVerticle {
 
 	@Override
 	public void stop() {
-//		try {
-//			if (elasticMQ != null) {
-//				elasticMQ.stopAndWait();
-//			}
-//			if (dynamoDBEmbedded != null) {
-//				dynamoDBEmbedded.shutdown();
-//			}
-//			if (queue != null) {
-//				queue.shutdown();
-//			}
-//		} catch (Exception ignored) {
-//		}
 	}
 }

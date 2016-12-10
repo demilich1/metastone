@@ -1,10 +1,11 @@
 package com.hiddenswitch.proto3.net.models;
 
 import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
-import com.hiddenswitch.proto3.server.GameSession;
-import com.hiddenswitch.proto3.server.PregamePlayerConfiguration;
+import com.hiddenswitch.proto3.net.impl.server.GameSession;
 
-public class CreateGameSessionResponse {
+import java.io.Serializable;
+
+public class CreateGameSessionResponse implements Serializable {
 	private ClientConnectionConfiguration player1;
 	private ClientConnectionConfiguration player2;
 	private final String gameId;

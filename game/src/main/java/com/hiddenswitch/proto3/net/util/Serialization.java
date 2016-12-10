@@ -96,11 +96,25 @@ public class Serialization {
 
 	@SuppressWarnings("unchecked")
 	public static <T> T deserialize(byte[] buffer) throws IOException, ClassNotFoundException {
-		ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(buffer));
+		return deserialize(new ByteArrayInputStream(buffer));
+	}
+
+
+	@SuppressWarnings("unchecked")
+	public static <T> T deserialize(InputStream stream) throws IOException, ClassNotFoundException {
+		ObjectInputStream ois = new ObjectInputStream(stream);
 		T result = (T) ois.readObject();
 		ois.close();
 		return result;
 	}
+
+	public static <T> T deserialize(InputStream stream, Class<? extends T> returnClass) throws IOException, ClassNotFoundException {
+		ObjectInputStream ois = new ObjectInputStream(stream);
+		T result = returnClass.cast(ois.readObject());
+		ois.close();
+		return result;
+	}
+
 
 	public static void serialize(Object obj, OutputStream output) throws IOException {
 		ObjectOutputStream oos = new ObjectOutputStream(output);

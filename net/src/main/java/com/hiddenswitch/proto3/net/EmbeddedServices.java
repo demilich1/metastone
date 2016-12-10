@@ -1,14 +1,20 @@
 package com.hiddenswitch.proto3.net;
 
+import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.fibers.Suspendable;
 import com.hiddenswitch.proto3.net.common.MatchmakingRequest;
 import com.hiddenswitch.proto3.net.common.MatchmakingResponse;
+import com.hiddenswitch.proto3.net.impl.BotsImpl;
+import com.hiddenswitch.proto3.net.impl.GamesImpl;
+import com.hiddenswitch.proto3.net.impl.MatchmakingImpl;
+import com.hiddenswitch.proto3.net.models.MatchCancelRequest;
 import com.hiddenswitch.proto3.net.util.Serialization;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
+import io.vertx.ext.sync.Sync;
 import io.vertx.ext.sync.SyncVerticle;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
@@ -31,32 +37,28 @@ public class EmbeddedServices extends SyncVerticle {
 
 		try {
 			logger.info("Deploying embedded services...");
-			GameSessions gameSessions = new GameSessions();
+			GamesImpl games = new GamesImpl();
 
 			Void t = awaitResult(done -> context.executeBlocking(blocking -> {
 				logger.info("Starting embedded configuration...");
-				gameSessions.withEmbeddedConfiguration();
+				games.withEmbeddedConfiguration();
 				logger.info("Embedded configuration complete.");
 				blocking.complete();
 			}, done));
 
 			logger.info("Deploying gameGessions...");
+			String socketServerDeploymentId = awaitResult(done -> vertx.deployVerticle(games, done));
+			logger.info("Deployed games with verticle ID " + socketServerDeploymentId);
 
-			String socketServerDeploymentId = awaitResult(done -> {
-				vertx.deployVerticle(gameSessions, done);
-			});
+			MatchmakingImpl matchmaking = new MatchmakingImpl();
+			String gamesDeploymentId = awaitResult(done -> vertx.deployVerticle(matchmaking, done));
+			logger.info("Deployed matchmaking with verticle ID " + gamesDeploymentId);
 
-			logger.info("Deployed gameSessions with verticle ID " + socketServerDeploymentId);
+			logger.info("Deploying bots...");
+			BotsImpl bots = new BotsImpl();
+			String botsDeploymentId = awaitResult(done -> vertx.deployVerticle(bots, done));
+			logger.info("Deployed bots with verticle ID " + botsDeploymentId);
 
-			Games games = new Games()
-					.withGameSessions(gameSessions)
-					.withEmbeddedConfiguration();
-
-			String gamesDeploymentId = awaitResult(done -> {
-				vertx.deployVerticle(games, done);
-			});
-
-			logger.info("Deployed games with verticle ID " + gamesDeploymentId);
 			logger.info("Configuring router...");
 			final String MATCHMAKE_PATH = "/v0/anonymous/matchmake";
 
@@ -64,7 +66,7 @@ public class EmbeddedServices extends SyncVerticle {
 					.method(HttpMethod.DELETE)
 					.blockingHandler(routingContext -> {
 						String userId = routingContext.request().getHeader("X-Auth-UserId");
-						games.cancel(userId);
+						matchmaking.cancel(new MatchCancelRequest(userId)).getCanceled();
 						routingContext.response().setStatusCode(200);
 						routingContext.response().end();
 					});
@@ -77,17 +79,25 @@ public class EmbeddedServices extends SyncVerticle {
 
 			router.route(MATCHMAKE_PATH)
 					.method(HttpMethod.POST)
-					.blockingHandler(routingContext -> {
+					.blockingHandler(Sync.fiberHandler(routingContext -> {
 						MatchmakingRequest request = Serialization.deserialize(routingContext.getBodyAsString(), MatchmakingRequest.class);
+						// TODO: Use real user IDs
 						String userId = routingContext.request().getHeader("X-Auth-UserId");
-						MatchmakingResponse matchmakingResponse = games.matchmakeAndJoin(request, userId);
+						request.userId = userId;
+						MatchmakingResponse matchmakingResponse = null;
+						try {
+							matchmakingResponse = matchmaking.matchmakeAndJoin(request);
+						} catch (InterruptedException | SuspendExecution e) {
+							routingContext.fail(e);
+							return;
+						}
 						int statusCode = 200;
 						if (matchmakingResponse.getRetry() != null) {
 							statusCode = 202;
 						}
 						routingContext.response().setStatusCode(statusCode);
 						routingContext.response().end(Serialization.serialize(matchmakingResponse));
-					});
+					}));
 
 			router.route(MATCHMAKE_PATH).failureHandler(LoggerHandler.create());
 

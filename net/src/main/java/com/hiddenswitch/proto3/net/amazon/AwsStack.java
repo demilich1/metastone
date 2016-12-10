@@ -2,7 +2,6 @@ package com.hiddenswitch.proto3.net.amazon;
 
 import com.amazonaws.services.dynamodbv2.model.CreateTableRequest;
 import com.amazonaws.services.dynamodbv2.model.ProvisionedThroughput;
-import com.hiddenswitch.proto3.net.Games;
 
 public class AwsStack {
 	public static void initializeStack(AwsStackConfiguration configuration) {

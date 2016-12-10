@@ -74,10 +74,9 @@ dependencies {
     compile group: 'com.almworks.sqlite4java', name: 'libsqlite4java-linux-amd64', version: '1.0.392'
     compile group: 'com.amazonaws', name: 'DynamoDBLocal', version: '1.11.0.1'
 
-    compile project(':server')
+    compile project(':game')
     compile project(':cards')
 
-    testCompile project(':game')
     testCompile group: 'junit', name: 'junit', version: '4.+'
     testCompile group: 'org.unitils', name: 'unitils-core', version: '3.4.3'
     testCompile group: 'io.vertx', name: 'vertx-unit', version: '3.3.3'

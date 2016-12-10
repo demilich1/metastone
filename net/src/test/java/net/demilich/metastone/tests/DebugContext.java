@@ -23,4 +23,8 @@ public class DebugContext extends GameContext {
 		startTurn(getActivePlayerId());
 	}
 
+	public void forceStartTurn(int playerId) {
+		startTurn(playerId);
+	}
+
 }

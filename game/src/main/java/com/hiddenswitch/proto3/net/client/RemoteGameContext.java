@@ -384,13 +384,14 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 			logger.error("State from wire out of date!");
 		}
 		this.lastUpdatedAt = state.timestamp;
-		this.setPlayer(GameContext.PLAYER_1, state.player1);
-		this.setPlayer(GameContext.PLAYER_2, state.player2);
-		this.setEnvironment(state.environment);
-		this.setTriggerManager(state.triggerManager);
-		this.getLogic().setIdFactory(new IdFactory(state.currentId));
-		this.setRemoteTurnState(state.turnState);
+		loadState(state);
 		hideCards();
+	}
+
+	@Override
+	public void loadState(GameState state) {
+		super.loadState(state);
+		setRemoteTurnState(state.turnState);
 	}
 
 	public String getHost() {

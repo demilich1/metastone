@@ -1,9 +1,11 @@
 package com.hiddenswitch.proto3.net.models;
 
+import java.io.Serializable;
+
 /**
  * Created by bberman on 12/6/16.
  */
-public class EndGameSessionRequest {
+public class EndGameSessionRequest implements Serializable {
 	private String gameId;
 
 	public EndGameSessionRequest() {

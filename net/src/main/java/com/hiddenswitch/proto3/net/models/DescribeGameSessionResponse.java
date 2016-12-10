@@ -4,13 +4,14 @@ import com.hiddenswitch.proto3.net.common.ServerGameContext;
 import net.demilich.metastone.game.statistics.GameStatistics;
 import net.demilich.metastone.game.statistics.Statistic;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by bberman on 11/18/16.
  */
-public class DescribeGameSessionResponse {
+public class DescribeGameSessionResponse implements Serializable {
     private String gameId;
     private Map<String, Object> statistics;
 

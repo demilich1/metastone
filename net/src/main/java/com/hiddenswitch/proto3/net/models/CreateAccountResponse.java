@@ -1,6 +1,10 @@
 package com.hiddenswitch.proto3.net.models;
 
-public class CreateAccountResponse {
+import com.hiddenswitch.proto3.net.amazon.LoginToken;
+
+import java.io.Serializable;
+
+public class CreateAccountResponse implements Serializable {
 	public LoginToken loginToken;
 	public String userId;
 	public boolean invalidName;
