@@ -10,11 +10,22 @@ import java.util.Objects;
 /**
  * Created by bberman on 11/30/16.
  */
-public class QueueEntry implements Comparable<QueueEntry> {
+public class QueueEntry implements Comparable<QueueEntry>, Cloneable {
 	public final String userId;
 	public final Deck deck;
 	public final Date lastTouchedAt;
 	public final long createdAt;
+
+	public QueueEntry touch() {
+		return new QueueEntry(this.userId, this.deck, Date.from(Instant.now()), this.createdAt);
+	}
+
+	private QueueEntry(String userId, Deck deck, Date lastTouchedAt, long createdAt) {
+		this.createdAt = createdAt;
+		this.userId = userId;
+		this.deck = deck;
+		this.lastTouchedAt = lastTouchedAt;
+	}
 
 	public QueueEntry(String userId, Deck deck) {
 		this.createdAt = System.nanoTime();

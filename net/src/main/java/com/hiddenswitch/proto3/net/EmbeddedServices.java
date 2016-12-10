@@ -4,6 +4,7 @@ import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.fibers.Suspendable;
 import com.hiddenswitch.proto3.net.common.MatchmakingRequest;
 import com.hiddenswitch.proto3.net.common.MatchmakingResponse;
+import com.hiddenswitch.proto3.net.impl.BotsImpl;
 import com.hiddenswitch.proto3.net.impl.GamesImpl;
 import com.hiddenswitch.proto3.net.impl.MatchmakingImpl;
 import com.hiddenswitch.proto3.net.models.MatchCancelRequest;
@@ -46,20 +47,18 @@ public class EmbeddedServices extends SyncVerticle {
 			}, done));
 
 			logger.info("Deploying gameGessions...");
-
-			String socketServerDeploymentId = awaitResult(done -> {
-				vertx.deployVerticle(games, done);
-			});
-
+			String socketServerDeploymentId = awaitResult(done -> vertx.deployVerticle(games, done));
 			logger.info("Deployed games with verticle ID " + socketServerDeploymentId);
 
 			MatchmakingImpl matchmaking = new MatchmakingImpl();
-
-			String gamesDeploymentId = awaitResult(done -> {
-				vertx.deployVerticle(matchmaking, done);
-			});
-
+			String gamesDeploymentId = awaitResult(done -> vertx.deployVerticle(matchmaking, done));
 			logger.info("Deployed matchmaking with verticle ID " + gamesDeploymentId);
+
+			logger.info("Deploying bots...");
+			BotsImpl bots = new BotsImpl();
+			String botsDeploymentId = awaitResult(done -> vertx.deployVerticle(bots, done));
+			logger.info("Deployed bots with verticle ID " + botsDeploymentId);
+
 			logger.info("Configuring router...");
 			final String MATCHMAKE_PATH = "/v0/anonymous/matchmake";
 

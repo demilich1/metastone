@@ -1,5 +1,6 @@
 package com.hiddenswitch.proto3.net.util;
 
+import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.fibers.Suspendable;
 import com.hiddenswitch.proto3.net.impl.GamesImpl;
 import com.hiddenswitch.proto3.net.client.RemoteGameContext;
@@ -14,6 +15,7 @@ import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardParseException;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.DeckCatalogue;
+import net.demilich.metastone.game.decks.DeckFactory;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,21 +62,21 @@ public class TwoClients {
 		return thread2;
 	}
 
-	public TwoClients invoke(GamesImpl service) throws IOException, URISyntaxException, CardParseException {
+	public TwoClients invoke(GamesImpl service) throws IOException, URISyntaxException, CardParseException, SuspendExecution {
 		return invoke(service, 60000L);
 	}
 
 	@Suspendable
-	public TwoClients invoke(GamesImpl service, long noActivityTimeout) throws IOException, URISyntaxException, CardParseException {
+	public TwoClients invoke(GamesImpl service, long noActivityTimeout) throws IOException, URISyntaxException, CardParseException, SuspendExecution {
 		this.service = service;
 		CardCatalogue.loadCardsFromPackage();
 
-		CreateGameSessionRequest request = new CreateGameSessionRequest();
 		AIPlayer player1 = new AIPlayer();
 		AIPlayer player2 = new AIPlayer();
 		pregame1 = new PregamePlayerConfiguration(player1.getConfiguredDeck(), "Player 1").withPlayer(player1);
 		pregame2 = new PregamePlayerConfiguration(player2.getConfiguredDeck(), "Player 2").withPlayer(player2);
 
+		CreateGameSessionRequest request = new CreateGameSessionRequest();
 		request.setPregame1(pregame1);
 		request.setPregame2(pregame2);
 		request.setGameId(RandomStringUtils.randomAlphanumeric(8));
@@ -87,6 +89,30 @@ public class TwoClients {
 		configurationForPlayer2 = response.getConfigurationForPlayer2();
 		connect(PLAYER_1);
 		connect(PLAYER_2);
+		return this;
+	}
+
+	@Suspendable
+	public TwoClients invoke(GamesImpl service, boolean aiOpponent) throws IOException, URISyntaxException, CardParseException, SuspendExecution {
+		this.service = service;
+		CardCatalogue.loadCardsFromPackage();
+
+		AIPlayer player1 = new AIPlayer();
+		pregame1 = new PregamePlayerConfiguration(player1.getConfiguredDeck(), "Player 1").withPlayer(player1);
+		pregame2 = new PregamePlayerConfiguration(DeckFactory.getRandomDeck(), "Player 2").withAI(true);
+
+		CreateGameSessionRequest request = new CreateGameSessionRequest();
+		request.setPregame1(pregame1);
+		request.setPregame2(pregame2);
+		request.setGameId(RandomStringUtils.randomAlphanumeric(8));
+		request.setNoActivityTimeout(60000L);
+
+		CreateGameSessionResponse response = service.createGameSession(request);
+		this.gameId = response.getGameId();
+		// Manually override the player in the configurations
+		configurationForPlayer1 = response.getConfigurationForPlayer1();
+		connect(PLAYER_1);
+
 		return this;
 	}
 
@@ -122,11 +148,20 @@ public class TwoClients {
 
 	public void disconnect(int playerId) {
 		if (playerId == PLAYER_1) {
-			thread1.interrupt();
-			playerContext1.dispose();
+			if (thread1 != null) {
+				thread1.interrupt();
+			}
+			if (playerContext1 != null) {
+				playerContext1.dispose();
+			}
+
 		} else {
-			thread2.interrupt();
-			playerContext2.dispose();
+			if (thread2 != null) {
+				thread2.interrupt();
+			}
+			if (playerContext2 != null) {
+				playerContext2.dispose();
+			}
 		}
 	}
 
@@ -158,7 +193,8 @@ public class TwoClients {
 	}
 
 	public boolean gameDecided() {
-		return getPlayerContext1().gameDecided() && getPlayerContext2().gameDecided();
+		return getPlayerContext1().gameDecided()
+				&& (getPlayerContext2() == null || getPlayerContext2().gameDecided());
 	}
 
 	public void assertGameOver() {
@@ -171,7 +207,10 @@ public class TwoClients {
 		}
 		ServiceTestBase.getContext().assertTrue(gameDecided());
 		ServiceTestBase.getContext().assertFalse(isTimedOut());
-		ServiceTestBase.getContext().assertTrue(playerContext1.getWinningPlayerId() == playerContext2.getWinningPlayerId());
+		if (playerContext2 != null) {
+			ServiceTestBase.getContext().assertTrue(playerContext1.getWinningPlayerId() == playerContext2.getWinningPlayerId());
+		}
+
 		this.dispose();
 	}
 
@@ -194,11 +233,13 @@ public class TwoClients {
 	}
 
 	public boolean isTimedOut() {
-		return !gameDecided() && playerContext1.isTimedOut() && playerContext2.isTimedOut();
+		return isTimedOut((long) 40e9);
 	}
 
 	public boolean isTimedOut(long time) {
-		return !gameDecided() && playerContext1.isTimedOut(time) && playerContext2.isTimedOut(time);
+		return !gameDecided()
+				&& playerContext1.isTimedOut(time)
+				&& (playerContext2 == null || playerContext2.isTimedOut(time));
 	}
 
 	public String getGameId() {

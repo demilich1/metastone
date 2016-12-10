@@ -65,7 +65,7 @@ public class Matchmaker extends AbstractMap<String, QueueEntry> {
 			this.asQueue().add(new QueueEntry(userId, deck));
 		} else {
 			QueueEntry entry = this.get(userId);
-			QueueEntry replacement = new QueueEntry(userId, entry.deck);
+			QueueEntry replacement = entry.touch();
 			this.replace(userId, replacement);
 		}
 

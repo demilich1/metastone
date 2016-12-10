@@ -1,5 +1,6 @@
 package com.hiddenswitch.proto3.net.impl;
 
+import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.fibers.Suspendable;
 import com.hiddenswitch.proto3.net.Games;
 import com.hiddenswitch.proto3.net.Matchmaking;
@@ -106,12 +107,13 @@ public class GamesImpl extends Service<GamesImpl> implements Games {
 
 	@Override
 	@Suspendable
-	public ContainsGameSessionResponse containsGameSession(ContainsGameSessionRequest request) {
+	public ContainsGameSessionResponse containsGameSession(ContainsGameSessionRequest request) throws SuspendExecution {
 		return new ContainsGameSessionResponse(this.getGames().containsKey(request.gameId));
 	}
 
 	@Override
-	public CreateGameSessionResponse createGameSession(CreateGameSessionRequest request) {
+	@Suspendable
+	public CreateGameSessionResponse createGameSession(CreateGameSessionRequest request) throws SuspendExecution {
 		if (request.getGameId() == null) {
 			throw new RuntimeException("Game ID cannot be null in a create game session request.");
 		}

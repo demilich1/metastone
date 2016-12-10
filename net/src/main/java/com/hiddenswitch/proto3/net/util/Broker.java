@@ -22,11 +22,18 @@ public class Broker {
 
 		for (Method method : serviceInterface.getDeclaredMethods()) {
 			String methodName = name + "::" + method.getName();
+
 			eb.consumer(methodName, Sync.fiberHandler(Consumer.of(arg -> {
 				try {
 					return method.invoke(instance, arg);
-				} catch (IllegalAccessException | InvocationTargetException ignored) {
+				} catch (IllegalAccessException | InvocationTargetException e) {
+					RuntimeException re = (RuntimeException)e.getCause();
+					if (re != null) {
+						throw re;
+					}
 					return null;
+				} catch (Throwable e) {
+					throw e;
 				}
 			})));
 		}

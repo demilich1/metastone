@@ -65,7 +65,7 @@ public class Consumer {
 					Buffer reply = Buffer.buffer(512);
 					Serialization.serialize(response, new VertxBufferOutputStream(reply));
 					blocking.complete(reply);
-				} catch (Exception e) {
+				} catch (Throwable e) {
 					blocking.fail(e);
 				}
 			}, false, then -> {

@@ -59,22 +59,6 @@ public abstract class ServiceTestBase<T extends Service<T>> {
 		return false;
 	}
 
-	protected void wrapBlocking(TestContext context, Runnable code) {
-		ServiceTestBase.wrappedContext = context;
-		final Async async = context.async();
-		vertx.executeBlocking(fut -> {
-			try {
-				code.run();
-			} catch (Exception e) {
-				context.fail(e);
-			}
-			fut.complete();
-		}, then -> {
-			ServiceTestBase.wrappedContext = null;
-			async.complete();
-		});
-	}
-
 	@Suspendable
 	protected void wrapSync(TestContext context, SuspendableRunnable code) {
 		ServiceTestBase.wrappedContext = context;

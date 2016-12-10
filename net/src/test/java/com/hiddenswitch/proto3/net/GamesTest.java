@@ -1,6 +1,8 @@
 package com.hiddenswitch.proto3.net;
 
 import ch.qos.logback.classic.Level;
+import co.paralleluniverse.fibers.SuspendExecution;
+import co.paralleluniverse.fibers.Suspendable;
 import co.paralleluniverse.strands.Strand;
 import com.hiddenswitch.proto3.net.impl.GamesImpl;
 import com.hiddenswitch.proto3.net.models.EndGameSessionRequest;
@@ -53,10 +55,10 @@ public class GamesTest extends ServiceTestBase<GamesImpl> {
 
 	@Test
 	public void testCreateGameSession(TestContext context) throws CardParseException, IOException, URISyntaxException {
-		wrapBlocking(context, this::getAndTestTwoClients);
+		wrapSync(context, this::getAndTestTwoClients);
 	}
 
-	private TwoClients getAndTestTwoClients() {
+	private TwoClients getAndTestTwoClients() throws SuspendExecution {
 		TwoClients twoClients = null;
 		try {
 			twoClients = new TwoClients().invoke(this.service);
@@ -85,7 +87,7 @@ public class GamesTest extends ServiceTestBase<GamesImpl> {
 
 	@Test
 	public void testTwoGameSessionsOneAfterAnother(TestContext context) throws CardParseException, IOException, URISyntaxException {
-		wrapBlocking(context, () -> {
+		wrapSync(context, () -> {
 			getAndTestTwoClients();
 			getAndTestTwoClients();
 		});
@@ -93,7 +95,7 @@ public class GamesTest extends ServiceTestBase<GamesImpl> {
 
 	@Test(timeout = 20 * 1000L)
 	public void testTerminatingSession(TestContext context) throws CardParseException, IOException, URISyntaxException {
-		wrapBlocking(context, () -> {
+		wrapSync(context, () -> {
 			try {
 				TwoClients clients1 = new TwoClients().invoke(this.service);
 				getContext().assertNotNull(clients1);
@@ -123,7 +125,7 @@ public class GamesTest extends ServiceTestBase<GamesImpl> {
 
 	@Test(timeout = 40 * 1000L)
 	public void testTimeoutSession(TestContext context) {
-		wrapBlocking(context, () -> {
+		wrapSync(context, () -> {
 			try {
 				TwoClients clients1 = new TwoClients().invoke(this.service, 5000L);
 				clients1.play();
@@ -147,7 +149,7 @@ public class GamesTest extends ServiceTestBase<GamesImpl> {
 
 	@Test(timeout = 40 * 1000L)
 	public void testRemoveSessionAfterNormalGameOver(TestContext context) {
-		wrapBlocking(context, () -> {
+		wrapSync(context, () -> {
 			try {
 				TwoClients twoClients = getAndTestTwoClients();
 				String gameId = twoClients.getGameId();
@@ -162,14 +164,14 @@ public class GamesTest extends ServiceTestBase<GamesImpl> {
 
 	@Test
 	public void testTwoSimultaneousSessions(TestContext context) throws Exception {
-		wrapBlocking(context, () -> {
+		wrapSync(context, () -> {
 			simultaneousSessions(2);
 		});
 	}
 
 	@Test(timeout = 45 * 60 * 1000L)
 	public void testTenSessionsTenTimes(TestContext context) throws Exception {
-		wrapBlocking(context, () -> {
+		wrapSync(context, () -> {
 			for (int i = 0; i < 2; i++) {
 				simultaneousSessions(10);
 				logger.info("Iteration completed : " + (i + 1));
@@ -179,7 +181,7 @@ public class GamesTest extends ServiceTestBase<GamesImpl> {
 
 	@Test
 	public void testReconnects(TestContext context) throws Exception {
-		wrapBlocking(context, () -> {
+		wrapSync(context, () -> {
 			TwoClients twoClients = null;
 			try {
 				twoClients = new TwoClients().invoke(this.service);
@@ -215,7 +217,8 @@ public class GamesTest extends ServiceTestBase<GamesImpl> {
 	}
 
 
-	private void simultaneousSessions(int sessions) {
+	@Suspendable
+	private void simultaneousSessions(int sessions) throws SuspendExecution {
 		List<TwoClients> clients = new ArrayList<>();
 		for (int i = 0; i < sessions; i++) {
 			try {
