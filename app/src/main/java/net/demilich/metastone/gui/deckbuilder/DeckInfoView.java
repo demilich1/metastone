@@ -23,6 +23,8 @@ import net.demilich.metastone.gui.dialog.DialogResult;
 import net.demilich.metastone.gui.dialog.DialogType;
 import net.demilich.metastone.gui.dialog.IDialogListener;
 
+import javax.swing.*;
+
 public class DeckInfoView extends HBox implements EventHandler<ActionEvent>, IDialogListener {
 
 	@FXML
@@ -46,6 +48,7 @@ public class DeckInfoView extends HBox implements EventHandler<ActionEvent>, IDi
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
+
 		doneButton.setOnAction(this);
 	}
 
@@ -61,7 +64,7 @@ public class DeckInfoView extends HBox implements EventHandler<ActionEvent>, IDi
 					"Your deck is not complete yet. If you proceed, all open slots will be filled with random cards.", DialogType.CONFIRM);
 			dialogNotification.setHandler(this);
 			ApplicationFacade.getInstance().notifyObservers(dialogNotification);
-		} else if (!activeDeck.isMetaDeck() && !activeDeck.isComplete() && activeDeck.isTooBig() && !activeDeck.isArbitrary()) { 
+		} else if (!activeDeck.isMetaDeck() && !activeDeck.isComplete() && activeDeck.isTooBig() && !activeDeck.isArbitrary()) {
 			DialogNotification dialogNotification = new DialogNotification("Remove random cards",
 					"Your deck has too many cards. If you proceed, some cards will be removed at random.", DialogType.CONFIRM);
 			dialogNotification.setHandler(this);
