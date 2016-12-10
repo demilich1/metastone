@@ -1,10 +1,8 @@
 package com.hiddenswitch.proto3.net.impl.server;
 
 import co.paralleluniverse.fibers.Suspendable;
+import com.hiddenswitch.proto3.net.Games;
 import com.hiddenswitch.proto3.net.common.*;
-import com.hiddenswitch.proto3.net.impl.GamesImpl;
-import com.hiddenswitch.proto3.net.util.Broker;
-import com.hiddenswitch.proto3.net.util.ServiceProxy;
 import io.vertx.core.Handler;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
@@ -35,7 +33,7 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 	private Player player2;
 	private final String gameId;
 	private Logger logger = LoggerFactory.getLogger(ServerGameSession.class);
-	private long noActivityTimeout = GamesImpl.DEFAULT_NO_ACTIVITY_TIMEOUT;
+	private long noActivityTimeout = Games.DEFAULT_NO_ACTIVITY_TIMEOUT;
 	private final HashSet<Handler<ServerGameSession>> gameOverHandlers = new HashSet<>();
 
 	private ServerGameSession(String host, int port, PregamePlayerConfiguration p1, PregamePlayerConfiguration p2, String gameId) {

@@ -1,6 +1,6 @@
 package com.hiddenswitch.proto3.net.models;
 
-import com.hiddenswitch.proto3.net.impl.GamesImpl;
+import com.hiddenswitch.proto3.net.Games;
 import com.hiddenswitch.proto3.net.impl.server.PregamePlayerConfiguration;
 
 import java.io.Serializable;
@@ -9,7 +9,7 @@ public class CreateGameSessionRequest implements Serializable {
 	private String gameId;
 	private PregamePlayerConfiguration pregame1;
 	private PregamePlayerConfiguration pregame2;
-	private long noActivityTimeout = GamesImpl.DEFAULT_NO_ACTIVITY_TIMEOUT;
+	private long noActivityTimeout = Games.DEFAULT_NO_ACTIVITY_TIMEOUT;
 
 	public PregamePlayerConfiguration getPregame1() {
 		return pregame1;

@@ -36,7 +36,6 @@ import java.util.*;
 public class GamesImpl extends Service<GamesImpl> implements Games {
 	private Logger logger = LoggerFactory.getLogger(GamesImpl.class);
 
-	public static final long DEFAULT_NO_ACTIVITY_TIMEOUT = 60 * 1000L;
 	private static final long CLEANUP_DELAY_MILLISECONDS = 500L;
 
 	private final Map<String, ServerGameSession> games = new HashMap<>();

@@ -8,6 +8,8 @@ import com.hiddenswitch.proto3.net.models.*;
  * Created by bberman on 12/8/16.
  */
 public interface Games {
+	long DEFAULT_NO_ACTIVITY_TIMEOUT = 180000L;
+
 	@Suspendable
 	ContainsGameSessionResponse containsGameSession(ContainsGameSessionRequest request) throws SuspendExecution;
 
