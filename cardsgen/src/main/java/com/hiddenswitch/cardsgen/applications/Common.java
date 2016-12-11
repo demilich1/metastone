@@ -14,6 +14,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.math3.util.Combinations;
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.security.AccessControlException;
 import org.apache.log4j.Logger;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
@@ -27,7 +28,7 @@ import static com.amazonaws.util.EC2MetadataUtils.getIAMSecurityCredentials;
 
 public class Common {
 	public static JavaPairRDD<TestConfig, SimulationResult> simulate(JavaPairRDD<TestConfig, GameConfig> configs) {
-		JavaPairRDD<TestConfig, SimulationResult> simulations = configs.repartition(8 * 16).mapValues(new Simulator());
+		JavaPairRDD<TestConfig, SimulationResult> simulations = configs.repartition((int) configs.count()).mapValues(new Simulator());
 		return simulations.reduceByKey(new MergeSimulationResults());
 	}
 
@@ -91,38 +92,35 @@ public class Common {
 
 	public static void configureS3Credentials(JavaSparkContext sc, String sentinelKeyPrefix) {
 		Logger logger = Logger.getLogger(Common.class);
+		/*
 		try {
 			// Try accessing saving a file on s3
 			sc.parallelize(Collections.singletonList("sentinel")).saveAsObjectFile(sentinelKeyPrefix + RandomStringUtils.randomAlphanumeric(5) + ".txt");
-		} catch (Exception e) {
-			if (e instanceof org.apache.hadoop.security.AccessControlException
-					|| e instanceof java.lang.IllegalArgumentException) {
-				logger.info("Failed to save sentinel file.", e);
-				AWSCredentials credentials = getAwsCredentials();
-				logger.info(String.format("The credentials retrieved from Common.getAwsCredentials are: %s %s", credentials.getAWSAccessKeyId(), credentials.getAWSSecretKey()));
-				Configuration configuration = sc.hadoopConfiguration();
-				logger.info("Hadoop configuration before setting values:");
-				for (Map.Entry<String, String> entry : configuration) {
-					logger.info(String.format("%s: %s", entry.getKey(), entry.getValue()));
-				}
-
-				if (configuration.get("fs.s3n.impl", "").isEmpty()) {
-					configuration.set("fs.s3n.impl", "org.apache.hadoop.fs.s3native.NativeS3FileSystem");
-				}
-
-				configuration.set("fs.s3n.awsAccessKeyId", credentials.getAWSAccessKeyId());
-				configuration.set("fs.s3n.awsSecretAccessKey", credentials.getAWSSecretKey());
-
-				logger.info("Hadoop configuration after setting values:");
-				for (Map.Entry<String, String> entry : configuration) {
-					logger.info(String.format("%s: %s", entry.getKey(), entry.getValue()));
-				}
-				// Try to save the sentinel file now.
-				sc.parallelize(Arrays.asList("sentinel")).saveAsObjectFile(sentinelKeyPrefix + RandomStringUtils.randomAlphanumeric(5) + ".txt");
-			} else {
-				throw e;
+		} catch (AccessControlException | IllegalArgumentException e) {
+			logger.info("Failed to save sentinel file.", e);
+			AWSCredentials credentials = getAwsCredentials();
+			logger.info(String.format("The credentials retrieved from Common.getAwsCredentials are: %s %s", credentials.getAWSAccessKeyId(), credentials.getAWSSecretKey()));
+			Configuration configuration = sc.hadoopConfiguration();
+			logger.info("Hadoop configuration before setting values:");
+			for (Map.Entry<String, String> entry : configuration) {
+				logger.info(String.format("%s: %s", entry.getKey(), entry.getValue()));
 			}
+
+			if (configuration.get("fs.s3n.impl", "").isEmpty()) {
+				configuration.set("fs.s3n.impl", "org.apache.hadoop.fs.s3native.NativeS3FileSystem");
+			}
+
+			configuration.set("fs.s3n.awsAccessKeyId", credentials.getAWSAccessKeyId());
+			configuration.set("fs.s3n.awsSecretAccessKey", credentials.getAWSSecretKey());
+
+			logger.info("Hadoop configuration after setting values:");
+			for (Map.Entry<String, String> entry : configuration) {
+				logger.info(String.format("%s: %s", entry.getKey(), entry.getValue()));
+			}
+			// Try to save the sentinel file now.
+			sc.parallelize(Arrays.asList("sentinel")).saveAsObjectFile(sentinelKeyPrefix + RandomStringUtils.randomAlphanumeric(5) + ".txt");
 		}
+		*/
 	}
 
 	static String defaultsTo(String msg, String value) {

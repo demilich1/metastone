@@ -1,5 +1,6 @@
 package com.hiddenswitch.cardsgen.applications;
 
+import ch.qos.logback.classic.Level;
 import com.hiddenswitch.cardsgen.functions.MergeSimulationResults;
 import com.hiddenswitch.cardsgen.models.TestConfig;
 import net.demilich.metastone.game.cards.CardParseException;
@@ -10,6 +11,7 @@ import org.apache.log4j.Logger;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -29,11 +31,13 @@ public class ControlApplication {
 	private static final String SENTINEL_KEY_PREFIX = "sentinelkeyprefix";
 
 	public static void main(String[] args) throws ParseException, CardParseException, IOException, URISyntaxException {
+		ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME);
+		root.setLevel(Level.ERROR);
 		Logger logger = Logger.getLogger(ControlApplication.class);
 
 		String decksFile = null;
-		int gamesPerBatch = 3;
-		int batches = 2;
+		int gamesPerBatch = 1;
+		int batches = 1;
 		String output = Common.getTemporaryOutput();
 		String input = null;
 		String sentinelKeyPrefix = "s3n://clusterresults/sentinel/";
@@ -77,7 +81,7 @@ public class ControlApplication {
 		}
 
 		// Start Spark
-		SparkConf conf = new SparkConf().setAppName("Compute control statistics");
+		SparkConf conf = new SparkConf().setAppName("Compute control statistics").setMaster("local[8]");
 		JavaSparkContext sc = new JavaSparkContext(conf);
 
 		if ((input != null && (input.contains("s3n://") || input.contains("s3://") || input.contains("s3a://")))

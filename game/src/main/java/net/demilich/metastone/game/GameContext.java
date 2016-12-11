@@ -99,7 +99,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		Player player2Clone = getPlayer2().clone();
 		GameContext clone = new GameContext(player1Clone, player2Clone, logicClone, getDeckFormat());
 		clone.setTempCards(getTempCards().clone());
-		clone.setTriggerManager(SerializationUtils.clone(getTriggerManager()));
+		clone.setTriggerManager(getTriggerManager().clone());
 		clone.setActivePlayerId(activePlayerId);
 		clone.setTurn(getTurn());
 		clone.setActionsThisTurn(getActionsThisTurn());
