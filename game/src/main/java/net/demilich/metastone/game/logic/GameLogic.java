@@ -4,6 +4,7 @@ import co.paralleluniverse.fibers.Suspendable;
 import com.google.gson.annotations.Expose;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
+import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.game.*;
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.BattlecryAction;
@@ -1109,9 +1110,9 @@ public class GameLogic implements Cloneable, Serializable {
 	}
 
 	private void logToDebugHistory(String message, Object... params) {
-//		if (!BuildConfig.DEV_BUILD) {
-//			return;
-//		}
+		if (!BuildConfig.DEV_BUILD) {
+			return;
+		}
 		if (debugHistory.size() == MAX_HISTORY_ENTRIES) {
 			debugHistory.poll();
 		}
@@ -1236,7 +1237,10 @@ public class GameLogic implements Cloneable, Serializable {
 
 	@Suspendable
 	public void performGameAction(int playerId, GameAction action) {
-		debugHistory.add(action.toString());
+		if (BuildConfig.DEV_BUILD) {
+			debugHistory.add(action.toString());
+		}
+
 		if (playerId != context.getActivePlayerId()) {
 			logger.warn("Player {} tries to perform an action, but it is not his turn!", context.getPlayer(playerId).getName());
 		}
