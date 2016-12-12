@@ -28,7 +28,6 @@ public class ControlApplication {
 	private static final String BATCHES = "batches";
 	private static final String OUTPUT = "output";
 	private static final String INPUT = "input";
-	private static final String SENTINEL_KEY_PREFIX = "sentinelkeyprefix";
 
 	public static void main(String[] args) throws ParseException, CardParseException, IOException, URISyntaxException {
 		ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME);
@@ -50,8 +49,7 @@ public class ControlApplication {
 						"non-parallelized chunk of game simulations", Integer.toString(gamesPerBatch)))
 				.addOption(BATCHES, true, defaultsTo("The number of batches of games to simulate. This is a parallelizable " +
 						"chunk of games to execute.", Integer.toString(batches)))
-				.addOption(OUTPUT, true, defaultsTo("The output file to save the training data to.", output))
-				.addOption(SENTINEL_KEY_PREFIX, true, defaultsTo("A path to try writing to to verify that we have AWS permissions (when applicable).", sentinelKeyPrefix));
+				.addOption(OUTPUT, true, defaultsTo("The output file to save the training data to.", output));
 
 		CommandLineParser parser = new GnuParser();
 		CommandLine cmd = parser.parse(options, args);
@@ -76,19 +74,11 @@ public class ControlApplication {
 			input = cmd.getOptionValue(INPUT);
 		}
 
-		if (cmd.hasOption(SENTINEL_KEY_PREFIX)) {
-			sentinelKeyPrefix = cmd.getOptionValue(SENTINEL_KEY_PREFIX);
-		}
-
 		// Start Spark
 		SparkConf conf = new SparkConf().setAppName("Compute control statistics").setMaster("local[8]");
 		JavaSparkContext sc = new JavaSparkContext(conf);
 
-		if ((input != null && (input.contains("s3n://") || input.contains("s3://") || input.contains("s3a://")))
-				|| output.contains("s3n://") || output.contains("s3://") || output.contains("s3a://")) {
-			Common.configureS3Credentials(sc, sentinelKeyPrefix);
-		}
-
+		Common.configureS3Credentials(sc);
 
 		// Load the decks
 		List<String> decks = null;

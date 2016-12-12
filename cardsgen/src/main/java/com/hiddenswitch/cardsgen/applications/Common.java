@@ -1,5 +1,6 @@
 package com.hiddenswitch.cardsgen.applications;
 
+import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.*;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.util.EC2MetadataUtils;
@@ -20,13 +21,56 @@ import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.*;
 
+import static com.amazonaws.util.EC2MetadataUtils.EC2_METADATA_ROOT;
 import static com.amazonaws.util.EC2MetadataUtils.getIAMSecurityCredentials;
 
 public class Common {
+	private static Optional<Boolean> isEC2Environment = Optional.empty();
+
+	public static boolean isEC2Environment() {
+		if (isEC2Environment.isPresent()) {
+			return isEC2Environment.get();
+		} else {
+			final boolean result = getEC2Environment();
+			isEC2Environment = Optional.of(result);
+			return result;
+		}
+
+	}
+
+	private static boolean getEC2Environment() {
+		File hypervisor = new File("/sys/hypervisor/uuid");
+
+		if (!hypervisor.exists()) {
+			return false;
+		}
+
+		try {
+			FileInputStream reader = new FileInputStream(hypervisor);
+			byte[] bytes = new byte[3];
+			int read = reader.read(bytes);
+			reader.close();
+
+			if (read != 3) {
+				return false;
+			}
+
+			// Do these three bytes equal ec2?
+			return bytes[0] == 101
+					&& bytes[1] == 99
+					&& bytes[2] == 50;
+		} catch (IOException e) {
+			return false;
+		}
+	}
+
 	public static JavaPairRDD<TestConfig, SimulationResult> simulate(JavaPairRDD<TestConfig, GameConfig> configs) {
 		JavaPairRDD<TestConfig, SimulationResult> simulations = configs.repartition((int) configs.count()).mapValues(new Simulator());
 		return simulations.reduceByKey(new MergeSimulationResults());
@@ -65,14 +109,16 @@ public class Common {
 	}
 
 	public static AWSCredentials getAwsCredentials(String profile) {
-		try {
-			Map<String, EC2MetadataUtils.IAMSecurityCredential> credentials = getIAMSecurityCredentials();
-			// Get the first credentials here
+		if (isEC2Environment()) {
+			try {
+				Map<String, EC2MetadataUtils.IAMSecurityCredential> credentials = getIAMSecurityCredentials();
+				// Get the first credentials here
 
-			for (Map.Entry<String, EC2MetadataUtils.IAMSecurityCredential> entry : credentials.entrySet()) {
-				return new BasicAWSCredentials(entry.getValue().accessKeyId, entry.getValue().secretAccessKey);
+				for (Map.Entry<String, EC2MetadataUtils.IAMSecurityCredential> entry : credentials.entrySet()) {
+					return new BasicAWSCredentials(entry.getValue().accessKeyId, entry.getValue().secretAccessKey);
+				}
+			} catch (Exception ignored) {
 			}
-		} catch (Exception ignored) {
 		}
 
 		if (profile == null || profile.isEmpty()) {
@@ -90,37 +136,21 @@ public class Common {
 		}
 	}
 
-	public static void configureS3Credentials(JavaSparkContext sc, String sentinelKeyPrefix) {
-		Logger logger = Logger.getLogger(Common.class);
-		/*
-		try {
-			// Try accessing saving a file on s3
-			sc.parallelize(Collections.singletonList("sentinel")).saveAsObjectFile(sentinelKeyPrefix + RandomStringUtils.randomAlphanumeric(5) + ".txt");
-		} catch (AccessControlException | IllegalArgumentException e) {
-			logger.info("Failed to save sentinel file.", e);
-			AWSCredentials credentials = getAwsCredentials();
-			logger.info(String.format("The credentials retrieved from Common.getAwsCredentials are: %s %s", credentials.getAWSAccessKeyId(), credentials.getAWSSecretKey()));
-			Configuration configuration = sc.hadoopConfiguration();
-			logger.info("Hadoop configuration before setting values:");
-			for (Map.Entry<String, String> entry : configuration) {
-				logger.info(String.format("%s: %s", entry.getKey(), entry.getValue()));
-			}
+	public static void configureS3Credentials(JavaSparkContext sc) {
+		if (isEC2Environment()) {
+			return;
+		}
 
-			if (configuration.get("fs.s3n.impl", "").isEmpty()) {
-				configuration.set("fs.s3n.impl", "org.apache.hadoop.fs.s3native.NativeS3FileSystem");
-			}
+		AWSCredentials credentials = getAwsCredentials();
+		Configuration configuration = sc.hadoopConfiguration();
 
+		if (configuration.get("fs.s3n.impl", "").isEmpty()) {
+			configuration.set("fs.s3n.impl", "org.apache.hadoop.fs.s3native.NativeS3FileSystem");
+		}
+		if (configuration.get("fs.s3n.awsAccessKeyId", "").isEmpty()) {
 			configuration.set("fs.s3n.awsAccessKeyId", credentials.getAWSAccessKeyId());
 			configuration.set("fs.s3n.awsSecretAccessKey", credentials.getAWSSecretKey());
-
-			logger.info("Hadoop configuration after setting values:");
-			for (Map.Entry<String, String> entry : configuration) {
-				logger.info(String.format("%s: %s", entry.getKey(), entry.getValue()));
-			}
-			// Try to save the sentinel file now.
-			sc.parallelize(Arrays.asList("sentinel")).saveAsObjectFile(sentinelKeyPrefix + RandomStringUtils.randomAlphanumeric(5) + ".txt");
 		}
-		*/
 	}
 
 	static String defaultsTo(String msg, String value) {
