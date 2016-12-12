@@ -4,7 +4,7 @@
 	"baseManaCost": 6,
 	"type": "SPELL",
 	"heroClass": "HUNTER",
-	"rarity": "EPIC",
+	"rarity": "RARE",
 	"description": "Summon three 1/1 Webspinners.",
 	"targetSelection": "NONE",
 	"spell": {

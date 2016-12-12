@@ -3,7 +3,7 @@
 	"baseManaCost": 1,
 	"type": "SPELL",
 	"heroClass": "DRUID",
-	"rarity": "COMMON",
+	"rarity": "RARE",
 	"description": "Summon a Jade Golem.",
 	"targetSelection": "NONE",
 	"spell": {
