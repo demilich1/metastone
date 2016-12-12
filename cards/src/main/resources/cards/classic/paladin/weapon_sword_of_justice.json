@@ -10,7 +10,7 @@
 	"description": "After you summon a minion, give it +1/+1 and this loses 1 Durability.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "MinionSummonedTrigger",
+			"class": "AfterMinionSummonedTrigger",
 			"targetPlayer": "SELF",
 			"fireCondition": {
 				"class": "HasWeaponCondition"

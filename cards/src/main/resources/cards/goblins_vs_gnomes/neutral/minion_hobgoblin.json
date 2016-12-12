@@ -10,7 +10,7 @@
 	"description": "Whenever you play a 1-Attack minion, give it +2/+2.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "MinionPlayedTrigger",
+			"class": "BeforeMinionPlayedTrigger",
 			"targetPlayer": "SELF",
 			"queueCondition": {
 				"class": "AttributeCondition",

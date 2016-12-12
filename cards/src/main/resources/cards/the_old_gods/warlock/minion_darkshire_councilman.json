@@ -10,7 +10,7 @@
 	"description": "After you summon a minion, gain +1 Attack.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "MinionSummonedTrigger",
+			"class": "AfterMinionSummonedTrigger",
 			"targetPlayer": "SELF"
 		},
 		"spell": {

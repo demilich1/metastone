@@ -10,7 +10,7 @@
 	"description": "Charge. After you play a pirate, summon this minion from your deck.",
 	"deckTrigger": {
 		"eventTrigger": {
-			"class": "MinionPlayedTrigger",
+			"class": "AfterMinionPlayedTrigger",
 			"targetPlayer": "SELF",
 			"queueCondition": {
 				"class": "RaceCondition",
