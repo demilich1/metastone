@@ -23,7 +23,7 @@ public class ResultsToTSV {
 		Logger logger = Common.getLogger(ResultsToTSV.class);
 
 		String input = null;
-		String output = Common.getTemporaryOutput() + "/output.tsv";
+		String output = Common.getDatedOutput() + "/output.tsv";
 		String profile = "default";
 
 		Options options = new Options()

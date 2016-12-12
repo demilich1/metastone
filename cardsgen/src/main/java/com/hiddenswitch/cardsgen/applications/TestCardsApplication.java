@@ -111,7 +111,7 @@ public class TestCardsApplication {
 		JavaPairRDD<TestConfig, SimulationResult> existingSimulationsPair = JavaPairRDD.fromJavaRDD(existingSimulations);
 		simulations = simulations
 				.union(existingSimulationsPair)
-				.reduceByKey((SimulationResult a, SimulationResult b) -> a.merge(b));
+				.reduceByKey(SimulationResult::merge);
 
 		simulations.saveAsObjectFile("build/results_game_03");
 		simulations.saveAsTextFile("build/results_game_text_03");

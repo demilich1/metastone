@@ -11,7 +11,6 @@ import net.demilich.metastone.game.cards.CardParseException;
 import net.demilich.metastone.game.gameconfig.GameConfig;
 import net.demilich.metastone.game.statistics.SimulationResult;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.math3.util.Combinations;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.log4j.ConsoleAppender;
@@ -21,12 +20,16 @@ import org.apache.log4j.SimpleLayout;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.storage.StorageLevel;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -75,7 +78,8 @@ public class Common {
 	}
 
 	public static JavaPairRDD<TestConfig, SimulationResult> simulate(JavaPairRDD<TestConfig, GameConfig> configs) {
-		JavaPairRDD<TestConfig, SimulationResult> simulations = configs.repartition((int) configs.count()).mapValues(new Simulator());
+		final StorageLevel storageLevel = new StorageLevel(true, true, false, false, 10);
+		JavaPairRDD<TestConfig, SimulationResult> simulations = configs.repartition((int) configs.count()).persist(storageLevel).mapValues(new Simulator()).persist(storageLevel);
 		return simulations.reduceByKey(new MergeSimulationResults());
 	}
 
@@ -93,6 +97,20 @@ public class Common {
 		return deckPairs;
 	}
 
+	public static List<String[]> getDeckCombinations(List<String> decks, boolean complete) {
+		if (complete) {
+			List<String[]> deckPairs = new ArrayList<>();
+			for (String deck1 : decks) {
+				for (String deck2 : decks) {
+					deckPairs.add(new String[]{deck1, deck2});
+				}
+			}
+			return deckPairs;
+		} else {
+			return getDeckCombinations(decks);
+		}
+	}
+
 	public static JavaPairRDD<TestConfig, GameConfig> getConfigsForDecks(JavaSparkContext sc, List<String> decks, int gamesPerBatch, int batches) throws IOException, URISyntaxException, CardParseException {
 		List<String[]> deckPairs = getDeckCombinations(decks);
 
@@ -107,14 +125,19 @@ public class Common {
 		return IOUtils.readLines(Common.class.getClassLoader().getResourceAsStream("defaults/decks.txt"));
 	}
 
-	public static String getTemporaryOutput() {
-		return "s3n://clusterresults/build/" + RandomStringUtils.randomAlphabetic(20);
+	public static String getDatedOutput() {
+		return "s3n://clusterresults/build/" + getTimestampString();
+	}
+
+	private static String getTimestampString() {
+		return new SimpleDateFormat("yyyyMMDD hhmmss").format(Date.from(Instant.now())) + " " + Long.toString(System.nanoTime());
 	}
 
 	public static AWSCredentials getAwsCredentials() {
 		return getAwsCredentials("default");
 	}
 
+	@SuppressWarnings("deprecation")
 	public static AWSCredentials getAwsCredentials(String profile) {
 		if (isEC2Environment()) {
 			try {

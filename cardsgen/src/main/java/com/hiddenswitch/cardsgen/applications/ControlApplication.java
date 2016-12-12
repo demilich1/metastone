@@ -30,16 +30,13 @@ public class ControlApplication {
 	private static final String INPUT = "input";
 
 	public static void main(String[] args) throws ParseException, CardParseException, IOException, URISyntaxException {
-		ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME);
-		root.setLevel(Level.ERROR);
 		Logger logger = Logger.getLogger(ControlApplication.class);
 
 		String decksFile = null;
 		int gamesPerBatch = 1;
 		int batches = 1;
-		String output = Common.getTemporaryOutput();
+		String output = Common.getDatedOutput();
 		String input = null;
-		String sentinelKeyPrefix = "s3n://clusterresults/sentinel/";
 
 		// Parse all the options
 		Options options = new Options()
@@ -75,7 +72,7 @@ public class ControlApplication {
 		}
 
 		// Start Spark
-		SparkConf conf = new SparkConf().setAppName("Compute control statistics").setMaster("local[8]");
+		SparkConf conf = new SparkConf().setAppName("Compute control statistics");
 		JavaSparkContext sc = new JavaSparkContext(conf);
 
 		Common.configureS3Credentials(sc);
@@ -87,7 +84,6 @@ public class ControlApplication {
 			decks = sc.textFile(decksFile).collect();
 		} else {
 			decks = Common.getDefaultDecks();
-
 		}
 
 		JavaPairRDD<TestConfig, GameConfig> configs = Common.getConfigsForDecks(sc, decks, gamesPerBatch, batches);

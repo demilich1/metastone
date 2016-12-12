@@ -45,7 +45,7 @@ public class DeployCluster {
 		String bidPrice = "0.05";
 		String ec2KeyName = "clusterpair";
 		int spotInstanceCount = 0;
-		String instanceType = "c4.xlarge";
+		String instanceType = "c4.4xlarge";
 
 		// Parse all the options
 		Options options = new Options()
@@ -207,7 +207,7 @@ public class DeployCluster {
 								.addPropertiesEntry("maximizeResourceAllocation", "true"),
 						new Configuration()
 								.withClassification("spark-log4j")
-								.addPropertiesEntry("log4j.rootCategory", "WARN, console"),
+								.addPropertiesEntry("log4j.rootCategory", "ERROR, console"),
 						new Configuration()
 								.withClassification("hadoop-env")
 								.withConfigurations(new Configuration()
