@@ -204,15 +204,15 @@ public abstract class Card extends Entity {
 			}
 			String operator = filter.substring(split[0].length(), filter.indexOf(split[1], split[0].length() + 1));
 			if ((split[0].contains("mana") || split[0].contains("cost")) &&
-					evaluateExpression(operator, value, getBaseManaCost())) {
+					evaluateExpression(operator, getBaseManaCost(), value)) {
 				return true;
 			}
 			if (split[0].contains("attack") && hasAttribute(Attribute.BASE_ATTACK) &&
-					evaluateExpression(operator, value, getAttributeValue(Attribute.BASE_ATTACK))) {
+					evaluateExpression(operator, getAttributeValue(Attribute.BASE_ATTACK), value)) {
 				return true;
 			}
 			if ((split[0].contains("health") || split[0].contains("hp")) && hasAttribute(Attribute.BASE_HP) &&
-					evaluateExpression(operator, value, getAttributeValue(Attribute.BASE_ATTACK))) {
+					evaluateExpression(operator, getAttributeValue(Attribute.BASE_HP), value)) {
 				return true;
 			}
 		}
@@ -227,7 +227,8 @@ public abstract class Card extends Entity {
 			return true;
 		}
 		if ((getHeroClass() == HeroClass.ANY && "neutral".contains(filter))
-				|| (getHeroClass() != HeroClass.ANY && getHeroClass().toString().toLowerCase().contains(filter))) {
+				|| (getHeroClass() != HeroClass.ANY && (getHeroClass().toString().toLowerCase().contains(filter)
+				|| "class".contains(filter)))) {
 			return true;
 		}
 		String lowerCaseName = getName().toLowerCase();
