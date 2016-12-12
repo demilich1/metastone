@@ -49,8 +49,7 @@ public class PutRandomSecretIntoPlaySpell extends Spell {
 			SpellDesc secretSpellDesc = secretCard.getSpell();
 			Secret secret = (Secret) secretSpellDesc.get(SpellArg.SECRET);
 			context.getLogic().playSecret(player, secret, false);
-			context.getLogic().removeCard(player.getId(), secretCard);
-			player.getDeck().remove(secretCard);
+			context.getLogic().removeCardFromDeck(player.getId(), secretCard);
 
 		}
 	}
