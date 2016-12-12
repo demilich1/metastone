@@ -151,7 +151,7 @@ public class DeployCluster {
 		List<StepConfig> stepConfigs = new ArrayList<>();
 
 		StepConfig debugEnabled = new StepConfig()
-				.withName("Enable bebugging")
+				.withName("Enable debugging")
 				.withActionOnFailure("TERMINATE_JOB_FLOW")
 				.withHadoopJarStep(new HadoopJarStepConfig()
 						.withJar("command-runner.jar")
