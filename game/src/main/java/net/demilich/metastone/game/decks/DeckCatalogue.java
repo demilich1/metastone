@@ -61,9 +61,12 @@ public class DeckCatalogue {
 	}
 
 	public static void loadDecksFromPackage() throws IOException, URISyntaxException {
-		decks.clear();
-		loadStandardDecks(ResourceLoader.loadJsonInputStreams(DECKS_FOLDER, false), new GsonBuilder().setPrettyPrinting().create());
-		loadMetaDecks(ResourceLoader.loadJsonInputStreams(DECKS_FOLDER, false), new GsonBuilder().setPrettyPrinting().create());
+		synchronized (decks) {
+			if (decks.size() == 0) {
+				loadStandardDecks(ResourceLoader.loadJsonInputStreams(DECKS_FOLDER, false), new GsonBuilder().setPrettyPrinting().create());
+				loadMetaDecks(ResourceLoader.loadJsonInputStreams(DECKS_FOLDER, false), new GsonBuilder().setPrettyPrinting().create());
+			}
+		}
 	}
 
 	public static void loadDecksFromFilesystem() throws IOException, URISyntaxException {

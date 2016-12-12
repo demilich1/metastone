@@ -1,6 +1,5 @@
 package com.hiddenswitch.cardsgen.applications;
 
-import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.*;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.util.EC2MetadataUtils;
@@ -15,20 +14,24 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.math3.util.Combinations;
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.security.AccessControlException;
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.apache.log4j.SimpleLayout;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
-import static com.amazonaws.util.EC2MetadataUtils.EC2_METADATA_ROOT;
 import static com.amazonaws.util.EC2MetadataUtils.getIAMSecurityCredentials;
 
 public class Common {
@@ -82,6 +85,10 @@ public class Common {
 		List<String[]> deckPairs = new ArrayList<>();
 		for (int[] combination : combinations) {
 			deckPairs.add(new String[]{decks.get(combination[0]), decks.get(combination[1])});
+		}
+		// Include same deck matchups
+		for (String deck : decks) {
+			deckPairs.add(new String[]{deck, deck});
 		}
 		return deckPairs;
 	}
@@ -137,11 +144,15 @@ public class Common {
 	}
 
 	public static void configureS3Credentials(JavaSparkContext sc) {
+		configureS3Credentials(sc, "default");
+	}
+
+	public static void configureS3Credentials(JavaSparkContext sc, String profile) {
 		if (isEC2Environment()) {
 			return;
 		}
 
-		AWSCredentials credentials = getAwsCredentials();
+		AWSCredentials credentials = getAwsCredentials(profile);
 		Configuration configuration = sc.hadoopConfiguration();
 
 		if (configuration.get("fs.s3n.impl", "").isEmpty()) {
@@ -155,5 +166,27 @@ public class Common {
 
 	static String defaultsTo(String msg, String value) {
 		return String.format("%s Defaults to %s.", msg, value);
+	}
+
+	public static Logger getLogger(Class clazz) {
+		ConsoleAppender console = new ConsoleAppender();
+		console.setLayout(new SimpleLayout());
+		console.setTarget("System.out");
+		console.activateOptions();
+
+		Logger.getRootLogger().addAppender(console);
+		Logger.getRootLogger().setLevel(Level.INFO);
+		return Logger.getLogger(clazz);
+	}
+
+	public static void setLogLevelToError() {
+		Object rootObject = LoggerFactory.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME);
+		if (rootObject instanceof ch.qos.logback.classic.Logger) {
+			ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) rootObject;
+			root.setLevel(ch.qos.logback.classic.Level.ERROR);
+		} else if (rootObject instanceof Logger) {
+			Logger root = (Logger) rootObject;
+			root.setLevel(Level.ERROR);
+		}
 	}
 }
