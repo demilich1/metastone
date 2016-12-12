@@ -1800,7 +1800,7 @@ public class GameLogic implements Cloneable {
 		if (player.getMinions().contains(minion)) {
 			context.fireGameEvent(new AfterSummonEvent(context, minion, source));
 		}
-		//context.fireGameEvent(new BoardChangedEvent(context));
+		context.fireGameEvent(new BoardChangedEvent(context));
 		return true;
 	}
 
