@@ -68,7 +68,7 @@ public class ControlApplication {
 		}
 
 		if (cmd.hasOption(INPUT)) {
-			input = cmd.getOptionValue(INPUT);
+			input = cmd.getOptionValue(INPUT).trim().replace("\"", "").replace("'", "");
 		}
 
 		// Start Spark

@@ -130,7 +130,7 @@ public class Common {
 	}
 
 	private static String getTimestampString() {
-		return new SimpleDateFormat("yyyyMMDD hhmmss").format(Date.from(Instant.now())) + " " + Long.toString(System.nanoTime());
+		return new SimpleDateFormat("yyyyMMDD_hhmmss").format(Date.from(Instant.now())) + "_" + Long.toString(System.nanoTime());
 	}
 
 	public static AWSCredentials getAwsCredentials() {

@@ -1,6 +1,8 @@
 package com.hiddenswitch.cardsgen.applications;
 
 import com.amazonaws.SdkClientException;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.ec2.model.Region;
 import com.amazonaws.services.elasticmapreduce.AmazonElasticMapReduce;
 import com.amazonaws.services.elasticmapreduce.AmazonElasticMapReduceClientBuilder;
 import com.amazonaws.services.elasticmapreduce.model.*;
@@ -38,12 +40,12 @@ public class DeployCluster {
 		String mainClass = ControlApplication.class.getName();
 		String bucketName = "clustercode";
 		String jobId = RandomStringUtils.randomAlphanumeric(8);
-		String subnetId = "subnet-1f5cf568";
+		String subnetId = "subnet-c2e425ab";
 		String logUri = "s3n://aws-logs-786922801148-us-east-1/elasticmapreduce/";
 		String serviceRole = "cluster";
 		String jobFlowRole = "clustermachines";
 		String bidPrice = "0.05";
-		String ec2KeyName = "clusterpair";
+		String ec2KeyName = "clusterpair-us-east-2";
 		int spotInstanceCount = 0;
 		String instanceType = "c4.4xlarge";
 
@@ -122,7 +124,7 @@ public class DeployCluster {
 		appArgs = appArgs.replaceAll("^[\"\']", "").replaceAll("[\"\']$", "");
 		List<String> appArgsList = Arrays.asList(appArgs.split(" "));
 
-		AmazonElasticMapReduce emr = AmazonElasticMapReduceClientBuilder.defaultClient();
+		AmazonElasticMapReduce emr = AmazonElasticMapReduceClientBuilder.standard().withRegion(Regions.US_EAST_2).build();
 		AmazonS3 s3 = AmazonS3ClientBuilder.defaultClient();
 
 		// Upload jar to s3
@@ -182,12 +184,12 @@ public class DeployCluster {
 						.withInstanceRole(InstanceRoleType.MASTER)
 						.withInstanceCount(1)
 						.withMarket(MarketType.ON_DEMAND)
-						.withInstanceType("m1.medium"),
+						.withInstanceType("m4.large"),
 				new InstanceGroupConfig()
 						.withInstanceCount(1)
 						.withInstanceRole(InstanceRoleType.CORE)
 						.withMarket(MarketType.ON_DEMAND)
-						.withInstanceType("m1.medium")));
+						.withInstanceType("m4.large")));
 
 		if (spotInstanceCount > 0) {
 			instanceGroupConfigs.add(new InstanceGroupConfig()
@@ -221,7 +223,7 @@ public class DeployCluster {
 				)
 				.withServiceRole(serviceRole)
 				.withApplications(sparkApp)
-				.withReleaseLabel("emr-5.1.0")
+				.withReleaseLabel("emr-5.2.0")
 				.withSteps(stepConfigs)
 				.withJobFlowRole(jobFlowRole)
 				.withInstances(new JobFlowInstancesConfig()
