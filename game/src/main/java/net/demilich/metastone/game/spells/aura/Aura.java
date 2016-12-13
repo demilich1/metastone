@@ -52,11 +52,6 @@ public class Aura extends SpellTrigger {
 		if (target.getReference().equals(getHostReference())) {
 			return false;
 		}
-
-		Actor targetActor = (Actor) target;
-		if (targetActor.isDestroyed()) {
-			return false;
-		}
 		
 		if (getEntityFilter() != null && !getEntityFilter().matches(context, player, target)) {
 			return false;
