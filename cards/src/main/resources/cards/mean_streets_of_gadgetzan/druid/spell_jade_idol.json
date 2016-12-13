@@ -3,7 +3,7 @@
 	"baseManaCost": 1,
 	"type": "CHOOSE_ONE",
 	"heroClass": "DRUID",
-	"rarity": "COMMON",
+	"rarity": "RARE",
 	"description": "Choose One - Summon a Jade Golem; or Shuffle 3 copies of this card into your deck.",
 	"targetSelection": "NONE",
 	"options": [

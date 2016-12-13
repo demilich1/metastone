@@ -1,11 +1,11 @@
 {
-	"name": "Ogre",
+	"name": "\"Little Friend\"",
 	"baseManaCost": 6,
 	"type": "MINION",
 	"baseAttack": 6,
 	"baseHp": 6,
 	"heroClass": "ANY",
-	"rarity": "COMMON",
+	"rarity": "FREE",
 	"description": "",
 	"collectible": false,
 	"set": "MEAN_STREETS_OF_GADGETZAN",

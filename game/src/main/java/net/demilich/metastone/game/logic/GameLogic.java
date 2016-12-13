@@ -38,7 +38,9 @@ import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.entities.weapons.Weapon;
 import net.demilich.metastone.game.events.AfterPhysicalAttackEvent;
 import net.demilich.metastone.game.events.AfterSpellCastedEvent;
+import net.demilich.metastone.game.events.AfterSummonEvent;
 import net.demilich.metastone.game.events.ArmorGainedEvent;
+import net.demilich.metastone.game.events.BeforeSummonEvent;
 import net.demilich.metastone.game.events.BoardChangedEvent;
 import net.demilich.metastone.game.events.CardPlayedEvent;
 import net.demilich.metastone.game.events.DamageEvent;
@@ -1388,7 +1390,11 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void receiveCard(int playerId, Card card) {
-		receiveCard(playerId, card, null, false);
+		receiveCard(playerId, card, null);
+	}
+
+	public void receiveCard(int playerId, Card card, Entity source) {
+		receiveCard(playerId, card, source, false);
 	}
 
 	public void receiveCard(int playerId, Card card, Entity source, boolean drawn) {
@@ -1741,6 +1747,9 @@ public class GameLogic implements Cloneable {
 			player.getMinions().add(index, minion);
 		}
 
+		context.fireGameEvent(new BeforeSummonEvent(context, minion, source));
+		context.fireGameEvent(new BoardChangedEvent(context));
+		
 		if (resolveBattlecry && minion.getBattlecry() != null) {
 			resolveBattlecry(player.getId(), minion);
 			checkForDeadEntities();
@@ -1788,6 +1797,9 @@ public class GameLogic implements Cloneable {
 		handleEnrage(minion);
 
 		context.getSummonReferenceStack().pop();
+		if (player.getMinions().contains(minion)) {
+			context.fireGameEvent(new AfterSummonEvent(context, minion, source));
+		}
 		context.fireGameEvent(new BoardChangedEvent(context));
 		return true;
 	}

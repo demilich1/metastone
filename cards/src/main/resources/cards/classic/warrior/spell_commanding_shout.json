@@ -24,7 +24,7 @@
 				"target": "FRIENDLY_PLAYER",
 				"trigger": {
 					"eventTrigger": {
-						"class": "MinionSummonedTrigger",
+						"class": "BeforeMinionSummonedTrigger",
 						"targetPlayer": "SELF"
 					},
 					"spell": {

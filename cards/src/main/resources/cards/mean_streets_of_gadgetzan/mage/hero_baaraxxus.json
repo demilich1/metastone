@@ -4,7 +4,7 @@
 	"heroPower": "hero_power_inferno",
 	"type": "HERO",
 	"heroClass": "MAGE",
-	"rarity": "RARE",
+	"rarity": "FREE",
 	"attributes": {
 		"HP": 1,
 		"MAX_HP": 1

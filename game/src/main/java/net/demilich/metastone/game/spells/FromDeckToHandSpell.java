@@ -17,7 +17,8 @@ public class FromDeckToHandSpell extends Spell {
 		if (target != null && target.getEntityType() == EntityType.CARD) {
 			Card card = (Card) target;
 			if (player.getDeck().containsCard(card)) {
-				context.getLogic().drawCard(player.getId(), card, source);
+				context.getLogic().removeCardFromDeck(player.getId(), card);
+				context.getLogic().receiveCard(player.getId(), card, source);
 			}
 			return;
 		}
@@ -37,7 +38,7 @@ public class FromDeckToHandSpell extends Spell {
 			if (!relevantCards.isEmpty()) {
 				card = relevantCards.getRandom();
 				relevantCards.remove(card);
-				player.getDeck().remove(card);
+				context.getLogic().removeCardFromDeck(player.getId(), card);
 			} else if (replacementCard != null) {
 				card = context.getCardById(replacementCard);
 			}

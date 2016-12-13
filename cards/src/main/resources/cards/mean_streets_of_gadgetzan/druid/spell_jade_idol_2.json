@@ -3,7 +3,7 @@
 	"baseManaCost": 1,
 	"type": "SPELL",
 	"heroClass": "DRUID",
-	"rarity": "COMMON",
+	"rarity": "RARE",
 	"description": "Shuffle 3 copies of this into your deck.",
 	"targetSelection": "NONE",
 	"spell": {

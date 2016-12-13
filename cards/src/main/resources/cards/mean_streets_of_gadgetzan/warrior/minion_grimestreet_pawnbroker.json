@@ -5,7 +5,7 @@
 	"baseAttack": 3,
 	"baseHp": 3,
 	"heroClass": "WARRIOR",
-	"rarity": "COMMON",
+	"rarity": "RARE",
 	"description": "Battlecry: Give a random weapon in your hand +1/+1.",
 	"battlecry": {
 		"spell": {

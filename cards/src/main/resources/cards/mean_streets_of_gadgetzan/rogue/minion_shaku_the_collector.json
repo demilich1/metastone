@@ -5,7 +5,7 @@
 	"baseAttack": 2,
 	"baseHp": 3,
 	"heroClass": "ROGUE",
-	"rarity": "EPIC",
+	"rarity": "LEGENDARY",
 	"description": "Stealth. Whenever this minion attacks, add a random card to your hand (from your opponent's class).",
 	"trigger": {
 		"eventTrigger": {
