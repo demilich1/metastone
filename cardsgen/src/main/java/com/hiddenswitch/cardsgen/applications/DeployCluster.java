@@ -41,7 +41,8 @@ public class DeployCluster {
 		String bucketName = "clustercode";
 		String jobId = RandomStringUtils.randomAlphanumeric(8);
 		String subnetId = "subnet-c2e425ab";
-		String logUri = "s3n://aws-logs-786922801148-us-east-1/elasticmapreduce/";
+		// For us-east-2 only
+		String logUri = "s3n://aws-logs-hiddenswitch-emr/elasticmapreduce/";
 		String serviceRole = "cluster";
 		String jobFlowRole = "clustermachines";
 		String bidPrice = "0.05";
