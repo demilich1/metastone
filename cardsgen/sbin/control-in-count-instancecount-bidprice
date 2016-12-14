@@ -1,0 +1,3 @@
+#!/bin/bash
+./gradlew cardsgen:shadowJar
+java -cp cardsgen/build/libs/cardsgen-1.2.0-all.jar com.hiddenswitch.cardsgen.applications.DeployCluster -appargs "-input s3n://clusterresults/$1 -gamesperbatch 1 -batches $2" -bucketname clustercode -instancecount $3 -bidprice $4

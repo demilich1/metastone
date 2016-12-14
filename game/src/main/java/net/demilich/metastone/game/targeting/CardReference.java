@@ -2,7 +2,7 @@ package net.demilich.metastone.game.targeting;
 
 import java.io.Serializable;
 
-public class CardReference implements Serializable{
+public class CardReference implements Serializable {
 
 	private int playerId;
 	private CardLocation location;

@@ -30,7 +30,9 @@ public class Simulator implements Function<GameConfig, SimulationResult> {
 		for (int i = 0; i < gameConfig.getNumberOfGames(); i++) {
 			Player player1 = new Player(playerConfig1);
 			Player player2 = new Player(playerConfig2);
-			GameContext newGame = new GameContext(player1, player2, new GameLogic(), deckFormat);
+			final GameLogic logic = new GameLogic();
+			logic.setLoggingEnabled(false);
+			GameContext newGame = new GameContext(player1, player2, logic, deckFormat);
 			try {
 				newGame.play();
 

@@ -1,6 +1,8 @@
 package com.hiddenswitch.cardsgen.applications;
 
 import com.amazonaws.SdkClientException;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.ec2.model.Region;
 import com.amazonaws.services.elasticmapreduce.AmazonElasticMapReduce;
 import com.amazonaws.services.elasticmapreduce.AmazonElasticMapReduceClientBuilder;
 import com.amazonaws.services.elasticmapreduce.model.*;
@@ -8,10 +10,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import org.apache.commons.cli.*;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.apache.log4j.SimpleLayout;
 
 import java.io.File;
 import java.util.*;
@@ -31,29 +30,25 @@ public class DeployCluster {
 	private static final String BID_PRICE = "bidprice";
 	private static final String INSTANCE_COUNT = "instancecount";
 	private static final String KEY_PAIR = "keypair";
+	private static final String INSTANCE_TYPE = "instancetype";
 
 	public static void main(String[] args) throws ParseException, SdkClientException {
-		ConsoleAppender console = new ConsoleAppender();
-		console.setLayout(new SimpleLayout());
-		console.setTarget("System.out");
-		console.activateOptions();
-
-		Logger.getRootLogger().addAppender(console);
-		Logger.getRootLogger().setLevel(Level.INFO);
-		Logger logger = Logger.getLogger(DeployCluster.class);
+		Logger logger = Common.getLogger(DeployCluster.class);
 
 		String appArgs = "";
 		String jar = "cardsgen/build/libs/cardsgen-1.2.0-all.jar";
 		String mainClass = ControlApplication.class.getName();
 		String bucketName = "clustercode";
 		String jobId = RandomStringUtils.randomAlphanumeric(8);
-		String subnetId = "subnet-1f5cf568";
-		String logUri = "s3n://aws-logs-786922801148-us-east-1/elasticmapreduce/";
+		String subnetId = "subnet-c2e425ab";
+		// For us-east-2 only
+		String logUri = "s3n://aws-logs-hiddenswitch-emr/elasticmapreduce/";
 		String serviceRole = "cluster";
 		String jobFlowRole = "clustermachines";
 		String bidPrice = "0.05";
-		String ec2KeyName = "clusterpair";
+		String ec2KeyName = "clusterpair-us-east-2";
 		int spotInstanceCount = 0;
+		String instanceType = "c4.4xlarge";
 
 		// Parse all the options
 		Options options = new Options()
@@ -68,7 +63,8 @@ public class DeployCluster {
 				.addOption(JOB_FLOW_ROLE, true, defaultsTo("The name of the role to use to execute the actual jobs on the job machines.", jobFlowRole))
 				.addOption(BID_PRICE, true, defaultsTo("The bid price for c4.xlarge instances used for the tasks.", bidPrice))
 				.addOption(INSTANCE_COUNT, true, defaultsTo("The number of c4.xlarge instances, in addition to the 1 reserved instance, to execute the job on.", Integer.toString(spotInstanceCount)))
-				.addOption(KEY_PAIR, true, defaultsTo("The name of the keypair to use for the master node.", "clusterpair"));
+				.addOption(KEY_PAIR, true, defaultsTo("The name of the keypair to use for the master node.", "clusterpair"))
+				.addOption(INSTANCE_TYPE, true, defaultsTo("The type of the instance to use for spot pricing.", instanceType));
 
 		CommandLineParser parser = new GnuParser();
 		CommandLine cmd = parser.parse(options, args, false);
@@ -121,11 +117,15 @@ public class DeployCluster {
 			ec2KeyName = cmd.getOptionValue(KEY_PAIR);
 		}
 
+		if (cmd.hasOption(INSTANCE_TYPE)) {
+			instanceType = cmd.getOptionValue(INSTANCE_TYPE);
+		}
+
 		// Strip appArgs of trailing punctuation
 		appArgs = appArgs.replaceAll("^[\"\']", "").replaceAll("[\"\']$", "");
 		List<String> appArgsList = Arrays.asList(appArgs.split(" "));
 
-		AmazonElasticMapReduce emr = AmazonElasticMapReduceClientBuilder.defaultClient();
+		AmazonElasticMapReduce emr = AmazonElasticMapReduceClientBuilder.standard().withRegion(Regions.US_EAST_2).build();
 		AmazonS3 s3 = AmazonS3ClientBuilder.defaultClient();
 
 		// Upload jar to s3
@@ -152,7 +152,7 @@ public class DeployCluster {
 		List<StepConfig> stepConfigs = new ArrayList<>();
 
 		StepConfig debugEnabled = new StepConfig()
-				.withName("Enable bebugging")
+				.withName("Enable debugging")
 				.withActionOnFailure("TERMINATE_JOB_FLOW")
 				.withHadoopJarStep(new HadoopJarStepConfig()
 						.withJar("command-runner.jar")
@@ -185,19 +185,19 @@ public class DeployCluster {
 						.withInstanceRole(InstanceRoleType.MASTER)
 						.withInstanceCount(1)
 						.withMarket(MarketType.ON_DEMAND)
-						.withInstanceType("m1.medium"),
+						.withInstanceType("m4.large"),
 				new InstanceGroupConfig()
 						.withInstanceCount(1)
 						.withInstanceRole(InstanceRoleType.CORE)
 						.withMarket(MarketType.ON_DEMAND)
-						.withInstanceType("m1.medium")));
+						.withInstanceType("m4.large")));
 
 		if (spotInstanceCount > 0) {
 			instanceGroupConfigs.add(new InstanceGroupConfig()
 					.withInstanceCount(spotInstanceCount)
 					.withInstanceRole(InstanceRoleType.TASK)
 					.withMarket(MarketType.SPOT)
-					.withInstanceType("c4.xlarge")
+					.withInstanceType(instanceType)
 					.withBidPrice(bidPrice));
 		}
 
@@ -210,7 +210,7 @@ public class DeployCluster {
 								.addPropertiesEntry("maximizeResourceAllocation", "true"),
 						new Configuration()
 								.withClassification("spark-log4j")
-								.addPropertiesEntry("log4j.rootCategory", "WARN, console"),
+								.addPropertiesEntry("log4j.rootCategory", "ERROR, console"),
 						new Configuration()
 								.withClassification("hadoop-env")
 								.withConfigurations(new Configuration()
@@ -224,7 +224,7 @@ public class DeployCluster {
 				)
 				.withServiceRole(serviceRole)
 				.withApplications(sparkApp)
-				.withReleaseLabel("emr-5.1.0")
+				.withReleaseLabel("emr-5.2.0")
 				.withSteps(stepConfigs)
 				.withJobFlowRole(jobFlowRole)
 				.withInstances(new JobFlowInstancesConfig()

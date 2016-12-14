@@ -1,5 +1,6 @@
 package com.hiddenswitch.cardsgen.applications;
 
+import ch.qos.logback.classic.Level;
 import com.hiddenswitch.cardsgen.functions.MergeSimulationResults;
 import com.hiddenswitch.cardsgen.models.TestConfig;
 import net.demilich.metastone.game.cards.CardParseException;
@@ -10,6 +11,7 @@ import org.apache.log4j.Logger;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -26,17 +28,15 @@ public class ControlApplication {
 	private static final String BATCHES = "batches";
 	private static final String OUTPUT = "output";
 	private static final String INPUT = "input";
-	private static final String SENTINEL_KEY_PREFIX = "sentinelkeyprefix";
 
 	public static void main(String[] args) throws ParseException, CardParseException, IOException, URISyntaxException {
 		Logger logger = Logger.getLogger(ControlApplication.class);
 
 		String decksFile = null;
-		int gamesPerBatch = 3;
-		int batches = 2;
-		String output = Common.getTemporaryOutput();
+		int gamesPerBatch = 1;
+		int batches = 1;
+		String output = Common.getDatedOutput();
 		String input = null;
-		String sentinelKeyPrefix = "s3n://clusterresults/sentinel/";
 
 		// Parse all the options
 		Options options = new Options()
@@ -46,8 +46,7 @@ public class ControlApplication {
 						"non-parallelized chunk of game simulations", Integer.toString(gamesPerBatch)))
 				.addOption(BATCHES, true, defaultsTo("The number of batches of games to simulate. This is a parallelizable " +
 						"chunk of games to execute.", Integer.toString(batches)))
-				.addOption(OUTPUT, true, defaultsTo("The output file to save the training data to.", output))
-				.addOption(SENTINEL_KEY_PREFIX, true, defaultsTo("A path to try writing to to verify that we have AWS permissions (when applicable).", sentinelKeyPrefix));
+				.addOption(OUTPUT, true, defaultsTo("The output file to save the training data to.", output));
 
 		CommandLineParser parser = new GnuParser();
 		CommandLine cmd = parser.parse(options, args);
@@ -69,22 +68,14 @@ public class ControlApplication {
 		}
 
 		if (cmd.hasOption(INPUT)) {
-			input = cmd.getOptionValue(INPUT);
-		}
-
-		if (cmd.hasOption(SENTINEL_KEY_PREFIX)) {
-			sentinelKeyPrefix = cmd.getOptionValue(SENTINEL_KEY_PREFIX);
+			input = cmd.getOptionValue(INPUT).trim().replace("\"", "").replace("'", "");
 		}
 
 		// Start Spark
 		SparkConf conf = new SparkConf().setAppName("Compute control statistics");
 		JavaSparkContext sc = new JavaSparkContext(conf);
 
-		if ((input != null && (input.contains("s3n://") || input.contains("s3://") || input.contains("s3a://")))
-				|| output.contains("s3n://") || output.contains("s3://") || output.contains("s3a://")) {
-			Common.configureS3Credentials(sc, sentinelKeyPrefix);
-		}
-
+		Common.configureS3Credentials(sc);
 
 		// Load the decks
 		List<String> decks = null;
@@ -93,7 +84,6 @@ public class ControlApplication {
 			decks = sc.textFile(decksFile).collect();
 		} else {
 			decks = Common.getDefaultDecks();
-
 		}
 
 		JavaPairRDD<TestConfig, GameConfig> configs = Common.getConfigsForDecks(sc, decks, gamesPerBatch, batches);

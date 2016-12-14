@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.actions;
 
+import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
