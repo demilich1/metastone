@@ -180,7 +180,7 @@ public class GamesImpl extends Service<GamesImpl> implements Games {
 			return;
 		}
 
-		ServerGameSession session;
+		ServerGameSession session = null;
 		if (message.getGameId() != null) {
 			session = getGames().get(message.getGameId());
 		} else {
@@ -188,7 +188,18 @@ public class GamesImpl extends Service<GamesImpl> implements Games {
 		}
 
 		// Show activity on the game activity monitor
-		gameActivityMonitors.get(session.getGameId()).activity();
+		if (session == null) {
+			logger.error("Received a message from a client for a game session that is killed.");
+			logger.error("Message: {}", message);
+			return;
+		}
+
+		String gameId = session.getGameId();
+		ActivityMonitor activityMonitor = gameActivityMonitors.get(gameId);
+		if (activityMonitor == null) {
+			gameActivityMonitors.put(gameId, new ActivityMonitor(getVertx(), gameId, session.getNoActivityTimeout(), this::kill));
+		}
+		activityMonitor.activity();
 
 		switch (message.getMt()) {
 			case FIRST_MESSAGE:
@@ -252,15 +263,23 @@ public class GamesImpl extends Service<GamesImpl> implements Games {
 		gameActivityMonitors.remove(gameId);
 
 		// Get the sockets associated with the session
-		List<NetSocket> sockets = Arrays.asList(session.getClient1().getPrivateSocket(), session.getClient2().getPrivateSocket());
+		List<NetSocket> sockets = new ArrayList<>();
+		if (session.getClient1() != null) {
+			sockets.add(session.getClient1().getPrivateSocket());
+		}
+		if (session.getClient2() != null) {
+			sockets.add(session.getClient2().getPrivateSocket());
+		}
 
 		// Kill the session
 		session.kill();
 
 		// Clear our maps of these socketsz
 		sockets.forEach(s -> {
-			gameForSocket.remove(s);
-			messages.remove(s);
+			if (s != null) {
+				gameForSocket.remove(s);
+				messages.remove(s);
+			}
 		});
 
 		// Expire the match

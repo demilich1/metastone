@@ -10,7 +10,7 @@
 	"description": "After you summon a Pirate, deal 2 damage to a random enemy.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "MinionSummonedTrigger",
+			"class": "AfterMinionSummonedTrigger",
 			"targetPlayer": "SELF",
 			"race": "PIRATE"
 		},

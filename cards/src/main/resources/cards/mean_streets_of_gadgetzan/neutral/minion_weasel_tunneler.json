@@ -6,6 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "ANY",
 	"rarity": "EPIC",
+	"race": "BEAST",
 	"description": "Deathrattle: Shuffle this minion into your opponent's deck.",
 	"deathrattle": {
 		"class": "ShuffleMinionToDeckSpell",

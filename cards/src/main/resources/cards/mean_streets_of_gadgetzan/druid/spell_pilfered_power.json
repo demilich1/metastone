@@ -21,7 +21,17 @@
 			}
 		},
 		"condition": {
-			"class": "ManaMaxedCondition"
+			"class": "AndCondition",
+			"conditions": [
+				{
+					"class": "ManaMaxedCondition"
+				},
+				{
+					"class": "HasEntityCondition",
+					"target": "FRIENDLY_MINIONS"
+				}
+			]
+			
 		}
 	},
 	"collectible": true,

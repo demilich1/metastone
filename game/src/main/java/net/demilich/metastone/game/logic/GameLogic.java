@@ -6,10 +6,7 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.game.*;
-import net.demilich.metastone.game.actions.ActionType;
-import net.demilich.metastone.game.actions.BattlecryAction;
-import net.demilich.metastone.game.actions.GameAction;
-import net.demilich.metastone.game.actions.PlaySpellCardAction;
+import net.demilich.metastone.game.actions.*;
 import net.demilich.metastone.game.cards.*;
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
 import net.demilich.metastone.game.entities.Actor;
@@ -1345,7 +1342,11 @@ public class GameLogic implements Cloneable, Serializable {
 	}
 
 	public void receiveCard(int playerId, Card card) {
-		receiveCard(playerId, card, null, false);
+		receiveCard(playerId, card, null);
+	}
+
+	public void receiveCard(int playerId, Card card, Entity source) {
+		receiveCard(playerId, card, source, false);
 	}
 
 	public void receiveCard(int playerId, Card card, Entity source, boolean drawn) {
@@ -1691,7 +1692,7 @@ public class GameLogic implements Cloneable, Serializable {
 
 	@Suspendable
 	public boolean summon(int playerId, Minion minion, Card source, int index, boolean resolveBattlecry) {
-		PreSummon preSummon = new PreSummon(playerId, minion, index).invoke();
+		PreSummon preSummon = new PreSummon(playerId, minion, index, source).invoke();
 		if (preSummon.is()) return false;
 		Player player = preSummon.getPlayer();
 
@@ -1747,6 +1748,9 @@ public class GameLogic implements Cloneable, Serializable {
 		handleEnrage(minion);
 
 		context.getSummonReferenceStack().pop();
+		if (player.getMinions().contains(minion)) {
+			context.fireGameEvent(new AfterSummonEvent(context, minion, source));
+		}
 		context.fireGameEvent(new BoardChangedEvent(context));
 	}
 
@@ -1944,16 +1948,18 @@ public class GameLogic implements Cloneable, Serializable {
 	}
 
 	protected class PreSummon {
+		private Card source;
 		private boolean myResult;
 		private int playerId;
 		private Minion minion;
 		private int index;
 		private Player player;
 
-		public PreSummon(int playerId, Minion minion, int index) {
+		public PreSummon(int playerId, Minion minion, int index, Card source) {
 			this.playerId = playerId;
 			this.minion = minion;
 			this.index = index;
+			this.source = source;
 		}
 
 		public boolean is() {

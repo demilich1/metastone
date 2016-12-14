@@ -4,7 +4,7 @@
 	"baseManaCost": 2,
 	"type": "HERO_POWER",
 	"heroClass": "PRIEST",
-	"rarity": "EPIC",
+	"rarity": "FREE",
 	"description": "Deal 3 damage.",
 	"targetSelection": "ANY",
 	"spell": {

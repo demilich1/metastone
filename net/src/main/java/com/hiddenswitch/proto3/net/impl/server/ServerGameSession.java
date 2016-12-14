@@ -201,7 +201,11 @@ public class ServerGameSession extends GameSession implements ServerCommunicatio
 
 	@Suspendable
 	public void kill() {
-		getGameContext().kill();
+		// The game never started if this were null
+		if (getGameContext() != null) {
+			getGameContext().kill();
+		}
+
 		if (getClient1() != null) {
 			getClient1().close();
 		}

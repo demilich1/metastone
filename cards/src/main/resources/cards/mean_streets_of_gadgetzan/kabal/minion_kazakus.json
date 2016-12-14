@@ -10,7 +10,7 @@
 		"PRIEST",
 		"WARLOCK"
 	],
-	"rarity": "RARE",
+	"rarity": "LEGENDARY",
 	"description": "Battlecry: If your deck has no duplicates, create a custom spell.",
 	"battlecry": {
 		"targetSelection": "NONE",

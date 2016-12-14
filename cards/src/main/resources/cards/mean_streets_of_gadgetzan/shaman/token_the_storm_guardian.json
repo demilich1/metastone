@@ -5,7 +5,7 @@
 	"baseAttack": 10,
 	"baseHp": 10,
 	"heroClass": "SHAMAN",
-	"rarity": "LEGENDARY",
+	"rarity": "FREE",
 	"description": "Taunt.",
 	"attributes": {
 		"TAUNT": true
