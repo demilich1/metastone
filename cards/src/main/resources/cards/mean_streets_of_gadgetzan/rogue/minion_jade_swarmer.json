@@ -5,7 +5,7 @@
 	"baseAttack": 1,
 	"baseHp": 1,
 	"heroClass": "ROGUE",
-	"rarity": "EPIC",
+	"rarity": "COMMON",
 	"description": "Stealth. Deathrattle: Summon a Jade Golem.",
 	"deathrattle": {
 		"class": "CreateSummonSpell",

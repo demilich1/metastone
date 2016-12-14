@@ -13,10 +13,18 @@
 			"targetPlayer": "OPPONENT"
 		},
 		"spell": {
-			"class": "BuffSpell",
-			"target": "SELF",
-			"attackBonus": 1,
-			"hpBonus": 1
+			"class": "ConditionalSpell",
+			"spell": {
+				"class": "BuffSpell",
+				"target": "SELF",
+				"attackBonus": 1,
+				"hpBonus": 1
+			},
+			"condition": {
+				"class": "IsDeadCondition",
+				"target": "SELF",
+				"invert": true
+			}
 		}
 	},
 	"collectible": true,

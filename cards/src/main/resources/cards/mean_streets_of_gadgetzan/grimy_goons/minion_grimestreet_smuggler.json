@@ -10,7 +10,7 @@
 		"PALADIN",
 		"WARRIOR"
 	],
-	"rarity": "RARE",
+	"rarity": "COMMON",
 	"description": "Battlecry: Give a random minion in your hand +1/+1.",
 	"battlecry": {
 		"targetSelection": "NONE",

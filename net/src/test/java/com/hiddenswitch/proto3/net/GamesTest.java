@@ -72,7 +72,7 @@ public class GamesTest extends ServiceTestBase<GamesImpl> {
 				if (twoClients.isInterrupted()) {
 					break;
 				}
-				Thread.sleep(1000);
+				Strand.sleep(1000);
 				seconds += 1.0f;
 			}
 
@@ -247,7 +247,7 @@ public class GamesTest extends ServiceTestBase<GamesImpl> {
 				break;
 			}
 			try {
-				Thread.sleep(1000);
+				Strand.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

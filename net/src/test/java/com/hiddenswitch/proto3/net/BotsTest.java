@@ -74,17 +74,16 @@ public class BotsTest extends ServiceTestBase<BotsImpl> {
 	@Test
 	public void testBroker(TestContext context) throws CardParseException, IOException, URISyntaxException {
 		CardCatalogue.loadCardsFromPackage();
-		final Async async = context.async();
-		ServiceProxy<Bots> bots = Broker.proxy(Bots.class, vertx.eventBus());
-		final MulliganRequest request = new MulliganRequest(
-				Arrays.asList(
-						CardCatalogue.getCardById("spell_fireball"),
-						CardCatalogue.getCardById("spell_arcane_missiles"),
-						CardCatalogue.getCardById("spell_assassinate")));
-		bots.async((AsyncResult<MulliganResponse> t) -> {
-			context.assertTrue(t.result().discardedCards.size() == 2);
-			async.complete();
-		}).mulligan(request);
+		wrapSync(context, () -> {
+			ServiceProxy<Bots> bots = Broker.proxy(Bots.class, vertx.eventBus());
+			final MulliganRequest request = new MulliganRequest(
+					Arrays.asList(
+							CardCatalogue.getCardById("spell_fireball"),
+							CardCatalogue.getCardById("spell_arcane_missiles"),
+							CardCatalogue.getCardById("spell_assassinate")));
+			MulliganResponse r = bots.sync().mulligan(request);
+			context.assertTrue(r.discardedCards.size() == 2);
+		});
 	}
 
 	@Test
@@ -115,7 +114,7 @@ public class BotsTest extends ServiceTestBase<BotsImpl> {
 	public void deployServices(Vertx vertx, Handler<AsyncResult<BotsImpl>> done) {
 		BotsImpl instance = new BotsImpl();
 		vertx.deployVerticle(instance, then -> {
-			done.handle(new Result<BotsImpl>(instance));
+			done.handle(new Result<>(instance));
 		});
 	}
 }

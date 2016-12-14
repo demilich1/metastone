@@ -1,1 +1,31 @@
-{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "Anmegjas Archer", "heroClass": "PALADIN", "description": "Whenever you summon a 1-Health minion, give it Divine Shield.", "fileFormatVersion": 1, "rarity": "RARE", "baseHp": 2.0, "trigger": {"eventTrigger": {"targetPlayer": "SELF", "class": "MinionSummonedTrigger", "queueCondition": {"attribute": "HP", "operation": "EQUAL", "class": "AttributeCondition", "value": 1}}, "spell": {"attribute": "DIVINE_SHIELD", "class": "AddAttributeSpell", "target": "EVENT_TARGET"}}, "baseManaCost": 3.0, "type": "MINION", "id": "Anmegjas Archer", "baseAttack": 4.0}
+{
+  "collectible": true,
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Anmegjas Archer",
+  "heroClass": "PALADIN",
+  "description": "Whenever you summon a 1-Health minion, give it Divine Shield.",
+  "fileFormatVersion": 1,
+  "rarity": "RARE",
+  "baseHp": 2.0,
+  "trigger": {
+    "eventTrigger": {
+      "class": "BeforeMinionSummonedTrigger",
+      "targetPlayer": "SELF",
+      "queueCondition": {
+        "class": "AttributeCondition",
+        "attribute": "HP",
+        "operation": "EQUAL",
+        "value": 1
+      }
+    },
+    "spell": {
+      "class": "AddAttributeSpell",
+      "target": "EVENT_TARGET",
+      "attribute": "DIVINE_SHIELD"
+    }
+  },
+  "baseManaCost": 3.0,
+  "type": "MINION",
+  "id": "Anmegjas Archer",
+  "baseAttack": 4.0
+}

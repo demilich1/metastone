@@ -152,11 +152,11 @@ public class CardCatalogue {
 		return result;
 	}
 
-    public static void loadCardsFromFilesystem() throws IOException, URISyntaxException, CardParseException {
-        // load cards from ~/metastone/cards on the file system
-        Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(CARDS_FOLDER_PATH, true);
-        loadCards(inputStreams);
-    }
+	public static void loadCardsFromFilesystem() throws IOException, URISyntaxException, CardParseException {
+		// load cards from ~/metastone/cards on the file system
+		Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(CARDS_FOLDER_PATH, true);
+		loadCards(inputStreams);
+	}
 
 
 	private static void loadCards(Collection<ResourceInputStream> inputStreams) throws IOException, URISyntaxException, CardParseException {

@@ -3,7 +3,7 @@
 	"baseManaCost": 7,
 	"type": "SPELL",
 	"heroClass": "MAGE",
-	"rarity": "RARE",
+	"rarity": "EPIC",
 	"description": "Shoot three missiles at random enemies that deal 3 damage each.",
 	"targetSelection": "NONE",
 	"spell": {
