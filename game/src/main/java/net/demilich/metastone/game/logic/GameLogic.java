@@ -908,7 +908,7 @@ public class GameLogic implements Cloneable, Serializable {
 			return;
 		}
 		boolean enraged = entity.getHp() < entity.getMaxHp();
-		// enrage state has not changed; do nothing
+		// enrage publicState has not changed; do nothing
 		if (entity.hasAttribute(Attribute.ENRAGED) == enraged) {
 			return;
 		}

@@ -374,7 +374,7 @@ public class RemoteGameContext extends GameContext implements GameContextVisuals
 
 	protected synchronized void updateWithState(GameState state) {
 		if (!state.isValid()) {
-			throw new RuntimeException("Invalid state received from wire!");
+			throw new RuntimeException("Invalid publicState received from wire!");
 		}
 		if (lastUpdatedAt == Long.MIN_VALUE) {
 			// Update the time diff with the server
