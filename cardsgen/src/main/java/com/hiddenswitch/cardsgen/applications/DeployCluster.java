@@ -156,7 +156,7 @@ public class DeployCluster {
 				.withActionOnFailure("TERMINATE_JOB_FLOW")
 				.withHadoopJarStep(new HadoopJarStepConfig()
 						.withJar("command-runner.jar")
-						.withArgs("publicState-pusher-script"));
+						.withArgs("state-pusher-script"));
 		stepConfigs.add(debugEnabled);
 
 		// Add the application arguments here

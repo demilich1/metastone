@@ -35,7 +35,7 @@ class Node {
 		try {
 			newState.getLogic().performGameAction(newState.getActivePlayerId(), action);
 		} catch (Exception e) {
-			System.err.println("Exception on action: " + action + " publicState decided: " + state.gameDecided());
+			System.err.println("Exception on action: " + action + " state decided: " + state.gameDecided());
 			e.printStackTrace();
 			throw e;
 		}
