@@ -32,8 +32,8 @@ public class MatchmakingTask extends Task<Void> {
 	private final String userId;
 	private final AtomicBoolean isMatchmaking;
 
-	public MatchmakingTask(String sessionId, Deck deck) {
-		this.userId = sessionId;
+	public MatchmakingTask(String userId, Deck deck) {
+		this.userId = userId;
 		this.deck = deck;
 		this.isMatchmaking = new AtomicBoolean();
 	}

@@ -14,8 +14,13 @@ import io.vertx.ext.sync.SyncVerticle;
 import io.vertx.ext.unit.Async;
 import io.vertx.ext.unit.TestContext;
 import io.vertx.ext.unit.junit.VertxUnitRunner;
+import net.demilich.metastone.game.cards.CardCatalogue;
+import net.demilich.metastone.game.cards.CardParseException;
 import org.junit.Before;
 import org.junit.runner.RunWith;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 @RunWith(VertxUnitRunner.class)
 public abstract class ServiceTestBase<T extends Service<T>> {
@@ -27,6 +32,16 @@ public abstract class ServiceTestBase<T extends Service<T>> {
 	Logger logger = LoggerFactory.getLogger(ServiceTestBase.class);
 	protected Vertx vertx;
 	protected T service;
+
+	@Before
+	public void loadCards(TestContext context) {
+		try {
+			CardCatalogue.loadCardsFromPackage();
+		} catch (IOException | URISyntaxException | CardParseException e) {
+			context.fail(e);
+		}
+		context.async().complete();
+	}
 
 	public abstract void deployServices(Vertx vertx, Handler<AsyncResult<T>> done);
 

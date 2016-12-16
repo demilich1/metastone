@@ -40,6 +40,7 @@ public class DraftLogic {
 	public void startDraft(HeroClass heroClass) {
 		// Determine the cards available to this player for the draft.
 		// For now, do not make later parts of the draft dependent on earlier parts.
+		getContext().getPublicState().heroClass = heroClass;
 		getContext().getPrivateState().cards = createDraftCards(heroClass);
 		// Initialize the first card choices
 		getContext().getPublicState().currentCardChoices = getContext().getPrivateState().cards.get(0);

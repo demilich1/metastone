@@ -12,8 +12,10 @@ import net.demilich.metastone.game.behaviour.human.DraftSelectionOptions;
 import net.demilich.metastone.game.behaviour.human.HumanActionOptions;
 import net.demilich.metastone.game.behaviour.human.HumanMulliganOptions;
 import net.demilich.metastone.game.behaviour.human.HumanTargetOptions;
+import net.demilich.metastone.game.gameconfig.GameConfig;
 import net.demilich.metastone.gui.playmode.HumanActionPromptView;
 import net.demilich.metastone.gui.playmode.HumanMulliganView;
+import net.demilich.metastone.gui.playmode.PlayModeMediator;
 import net.demilich.metastone.gui.playmode.PlayModeView;
 import net.demilich.nittygrittymvc.Mediator;
 import net.demilich.nittygrittymvc.interfaces.INotification;
@@ -51,6 +53,13 @@ public class DraftModeMediator extends Mediator<GameNotification> implements Eve
 				DraftSelectionOptions draftOptions = (DraftSelectionOptions) notification.getBody();
 				Platform.runLater(() -> new DraftSelectionView(draftOptions));
 				break;
+			case COMMIT_PLAYMODE_CONFIG:
+				getFacade().registerMediator(new PlayModeMediator());
+				new Thread(() -> {
+					GameConfig gameConfig = (GameConfig) notification.getBody();
+					getFacade().sendNotification(GameNotification.START_GAME, gameConfig);
+				}).start();
+				break;
 			default:
 				break;
 		}
@@ -61,6 +70,7 @@ public class DraftModeMediator extends Mediator<GameNotification> implements Eve
 		List<GameNotification> notificationInterests = new ArrayList<GameNotification>();
 		notificationInterests.add(GameNotification.DRAFT_STATE_UPDATE);
 		notificationInterests.add(GameNotification.HUMAN_PROMPT_FOR_DRAFT);
+		notificationInterests.add(GameNotification.COMMIT_PLAYMODE_CONFIG);
 		return notificationInterests;
 	}
 

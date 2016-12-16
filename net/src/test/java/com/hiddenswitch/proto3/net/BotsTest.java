@@ -40,7 +40,6 @@ import static net.demilich.metastone.game.GameContext.PLAYER_1;
 public class BotsTest extends ServiceTestBase<BotsImpl> {
 	@Test
 	public void testMulligan() throws Exception {
-		CardCatalogue.loadCardsFromPackage();
 		MulliganRequest request = new MulliganRequest(
 				Arrays.asList(
 						CardCatalogue.getCardById("spell_fireball"),
@@ -73,7 +72,6 @@ public class BotsTest extends ServiceTestBase<BotsImpl> {
 
 	@Test
 	public void testBroker(TestContext context) throws CardParseException, IOException, URISyntaxException {
-		CardCatalogue.loadCardsFromPackage();
 		wrapSync(context, () -> {
 			ServiceProxy<Bots> bots = Broker.proxy(Bots.class, vertx.eventBus());
 			final MulliganRequest request = new MulliganRequest(
@@ -88,7 +86,6 @@ public class BotsTest extends ServiceTestBase<BotsImpl> {
 
 	@Test
 	public void testPlaysGameAgainstAI(TestContext context) throws CardParseException, IOException, URISyntaxException, SuspendExecution {
-		CardCatalogue.loadCardsFromPackage();
 		final Async async = context.async();
 		GamesImpl games = new GamesImpl();
 		vertx.deployVerticle(games, then -> {

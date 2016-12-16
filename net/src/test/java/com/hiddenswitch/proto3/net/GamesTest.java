@@ -36,17 +36,6 @@ public class GamesTest extends ServiceTestBase<GamesImpl> {
 	private Logger logger = LoggerFactory.getLogger(GamesTest.class);
 
 	@Before
-	public void loadCards(TestContext context) {
-		final Async async = context.async();
-		try {
-			CardCatalogue.loadCardsFromPackage();
-		} catch (IOException | URISyntaxException | CardParseException e) {
-			Assert.fail(e.getMessage());
-		}
-		async.complete();
-	}
-
-	@Before
 	public void setLoggingLevel() {
 		ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) org.slf4j.LoggerFactory
 				.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME);

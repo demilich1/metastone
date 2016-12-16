@@ -50,7 +50,8 @@ public class MatchmakingImpl extends Service<MatchmakingImpl> implements Matchma
 		final String userId = matchmakingRequest.userId;
 		MatchmakingResponse response = new MatchmakingResponse();
 
-		final boolean isWaitingTooLong = matchmaker.contains(userId)
+		final boolean isWaitingTooLong = matchmakingRequest.allowBots
+				&& matchmaker.contains(userId)
 				&& matchmaker.get(userId).createdAt + (long) 25e9 < System.nanoTime();
 
 		// TODO: Deal with reconnecting to AI game
@@ -81,7 +82,7 @@ public class MatchmakingImpl extends Service<MatchmakingImpl> implements Matchma
 		Matchmaker.Match match = matchmaker.match(userId, matchmakingRequest.deck);
 
 		if (match == null) {
-			response.setRetry(new MatchmakingRequest().withUserId(matchmakingRequest.userId));
+			response.setRetry(new MatchmakingRequest(matchmakingRequest).withDeck(null));
 			return response;
 		}
 
