@@ -3,6 +3,8 @@ package net.demilich.metastone.gui.mainmenu;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.demilich.metastone.gui.draftmode.DraftModeMediator;
+import net.demilich.metastone.gui.draftmode.StartDraftOptions;
 import net.demilich.nittygrittymvc.Mediator;
 import net.demilich.nittygrittymvc.interfaces.INotification;
 import net.demilich.metastone.GameNotification;
@@ -12,6 +14,7 @@ import net.demilich.metastone.gui.playmode.config.PlayModeConfigMediator;
 import net.demilich.metastone.gui.sandboxmode.SandboxModeMediator;
 import net.demilich.metastone.gui.simulationmode.SimulationMediator;
 import net.demilich.metastone.gui.trainingmode.TrainingModeMediator;
+import org.apache.commons.lang3.RandomStringUtils;
 
 public class MainMenuMediator extends Mediator<GameNotification> {
 
@@ -48,6 +51,11 @@ public class MainMenuMediator extends Mediator<GameNotification> {
 		case BATTLE_OF_DECKS_SELECTED:
 			getFacade().registerMediator(new BattleOfDecksMediator());
 			break;
+		case DRAFT_MODE_SELECTED:
+			getFacade().registerMediator(new DraftModeMediator());
+			// TODO: Where would be the wiser place to put this?
+			getFacade().sendNotification(GameNotification.START_DRAFT, new StartDraftOptions(RandomStringUtils.randomAlphanumeric(35)));
+			break;
 		default:
 			break;
 		}
@@ -64,6 +72,7 @@ public class MainMenuMediator extends Mediator<GameNotification> {
 		notificationInterests.add(GameNotification.SANDBOX_MODE_SELECTED);
 		notificationInterests.add(GameNotification.TRAINING_MODE_SELECTED);
 		notificationInterests.add(GameNotification.BATTLE_OF_DECKS_SELECTED);
+		notificationInterests.add(GameNotification.DRAFT_MODE_SELECTED);
 		return notificationInterests;
 	}
 

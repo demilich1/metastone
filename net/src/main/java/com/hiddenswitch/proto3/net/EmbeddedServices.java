@@ -36,15 +36,7 @@ public class EmbeddedServices extends SyncVerticle {
 		Router router = Router.router(vertx);
 
 		try {
-			logger.info("Deploying embedded services...");
 			GamesImpl games = new GamesImpl();
-
-			Void t = awaitResult(done -> context.executeBlocking(blocking -> {
-				logger.info("Starting embedded configuration...");
-				games.withEmbeddedConfiguration();
-				logger.info("Embedded configuration complete.");
-				blocking.complete();
-			}, done));
 
 			logger.info("Deploying gameGessions...");
 			String socketServerDeploymentId = awaitResult(done -> vertx.deployVerticle(games, done));

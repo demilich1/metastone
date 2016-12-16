@@ -26,11 +26,13 @@ public class Broker {
 			eb.consumer(methodName, Sync.fiberHandler(Consumer.of(arg -> {
 				try {
 					return method.invoke(instance, arg);
-				} catch (IllegalAccessException | InvocationTargetException e) {
-					RuntimeException re = (RuntimeException)e.getCause();
+				} catch (InvocationTargetException e) {
+					RuntimeException re = (RuntimeException)(e.getTargetException());
 					if (re != null) {
 						throw re;
 					}
+					return null;
+				} catch (IllegalAccessException e) {
 					return null;
 				} catch (Throwable e) {
 					throw e;

@@ -6,6 +6,8 @@ import java.io.Serializable;
  * Created by bberman on 12/6/16.
  */
 public class EndGameSessionRequest implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private String gameId;
 
 	public EndGameSessionRequest() {

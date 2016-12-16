@@ -6,6 +6,8 @@ import com.hiddenswitch.proto3.net.impl.server.PregamePlayerConfiguration;
 import java.io.Serializable;
 
 public class CreateGameSessionRequest implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private String gameId;
 	private PregamePlayerConfiguration pregame1;
 	private PregamePlayerConfiguration pregame2;

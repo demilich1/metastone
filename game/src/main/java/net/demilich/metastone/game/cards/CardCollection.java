@@ -1,31 +1,30 @@
 package net.demilich.metastone.game.cards;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 
 public class CardCollection implements Iterable<Card>, Cloneable, Serializable {
+	private static final long serialVersionUID = 1L;
 
 	private List<Card> cards = new ArrayList<Card>();
 
 	public CardCollection() {
 	}
 
-	public void add(Card card) {
+	public CardCollection add(Card card) {
 		cards.add(card);
+		return this;
 	}
 
-	public void addAll(CardCollection cardCollection) {
+	public CardCollection addAll(CardCollection cardCollection) {
 		for (Card card : cardCollection) {
 			cards.add(card.clone());
 		}
+		return this;
 	}
-	
+
 	public void addRandomly(Card card) {
 		int index = ThreadLocalRandom.current().nextInt(cards.size() + 1);
 		cards.add(index, card);
@@ -43,7 +42,7 @@ public class CardCollection implements Iterable<Card>, Cloneable, Serializable {
 	public boolean contains(Card card) {
 		return cards.contains(card);
 	}
-	
+
 	public boolean containsCard(Card card) {
 		if (card == null) {
 			return false;
@@ -133,6 +132,10 @@ public class CardCollection implements Iterable<Card>, Cloneable, Serializable {
 
 	public void shuffle() {
 		Collections.shuffle(cards);
+	}
+
+	public void shuffle(Random random) {
+		Collections.shuffle(cards, random);
 	}
 
 	public void sortByManaCost() {

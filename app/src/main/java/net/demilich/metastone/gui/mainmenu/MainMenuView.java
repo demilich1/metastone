@@ -27,6 +27,9 @@ public class MainMenuView extends BorderPane {
 	private Button multiplayerButton;
 
 	@FXML
+	private Button draftButton;
+
+	@FXML
 	private Button simulationModeButton;
 
 	@FXML
@@ -71,6 +74,8 @@ public class MainMenuView extends BorderPane {
 
 		battleOfDecksButton
 				.setOnAction(event -> NotificationProxy.sendNotification(GameNotification.BATTLE_OF_DECKS_SELECTED));
+
+		draftButton.setOnAction(event -> NotificationProxy.sendNotification(GameNotification.DRAFT_MODE_SELECTED));
 
 		if (!BuildConfig.DEV_BUILD) {
 			trainingModeButton.setVisible(false);

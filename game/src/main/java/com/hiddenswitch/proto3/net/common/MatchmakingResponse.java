@@ -3,7 +3,10 @@ package com.hiddenswitch.proto3.net.common;
 import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
 import com.hiddenswitch.proto3.net.common.MatchmakingRequest;
 
-public class MatchmakingResponse {
+import java.io.Serializable;
+
+public class MatchmakingResponse implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private ClientConnectionConfiguration connection;
 
 	private MatchmakingRequest retry;

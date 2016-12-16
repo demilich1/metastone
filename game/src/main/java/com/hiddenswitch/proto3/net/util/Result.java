@@ -22,6 +22,7 @@ public class Result<T> implements AsyncResult<T>, Serializable {
 		this.error = error;
 		this.inner = null;
 	}
+
 	@Override
 	public T result() {
 		return inner;

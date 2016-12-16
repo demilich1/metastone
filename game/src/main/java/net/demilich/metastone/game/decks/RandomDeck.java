@@ -11,11 +11,10 @@ import net.demilich.metastone.game.decks.validation.DefaultDeckValidator;
 import net.demilich.metastone.game.decks.validation.IDeckValidator;
 
 public class RandomDeck extends Deck {
-	private DeckFormat deckFormat;
+	private static final long serialVersionUID = 1L;
 
 	public RandomDeck(HeroClass heroClass, DeckFormat deckFormat) {
 		super(heroClass);
-		this.deckFormat = deckFormat;
 		IDeckValidator deckValidator = new DefaultDeckValidator();
 		CardCollection classCards = CardCatalogue.query(deckFormat, card -> {
 			return card.isCollectible()

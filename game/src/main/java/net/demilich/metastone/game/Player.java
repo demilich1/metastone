@@ -24,6 +24,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class Player extends Entity implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	public static Player Empty() {
 		Player player = new Player();
 

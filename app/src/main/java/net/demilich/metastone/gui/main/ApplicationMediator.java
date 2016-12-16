@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.gui.battleofdecks.BattleOfDecksMediator;
 import net.demilich.metastone.gui.deckbuilder.DeckBuilderMediator;
+import net.demilich.metastone.gui.draftmode.DraftModeMediator;
 import net.demilich.metastone.gui.mainmenu.MainMenuMediator;
 import net.demilich.metastone.gui.playmode.PlayModeMediator;
 import net.demilich.metastone.gui.playmode.config.PlayModeConfigMediator;
@@ -59,6 +60,7 @@ public class ApplicationMediator extends Mediator<GameNotification> {
 	
 	private void removeOtherViews() {
 		getFacade().removeMediator(PlayModeMediator.NAME);
+		getFacade().removeMediator(DraftModeMediator.NAME);
 		getFacade().removeMediator(PlayModeConfigMediator.SINGLE_PLAYER_NAME);
 		getFacade().removeMediator(PlayModeConfigMediator.MULTIPLAYER_NAME);
 		getFacade().removeMediator(DeckBuilderMediator.NAME);
