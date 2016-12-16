@@ -11,6 +11,7 @@ import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.gameconfig.GameConfig;
@@ -33,10 +34,13 @@ public class StartDraftCommand extends SimpleCommand<GameNotification> {
 		context.setBehaviour(behaviour);
 
 		context.accept(done -> {
-			final Deck deck = context.getPublicState().createDeck();
+			final Deck deck = done.result().getPublicState().createDeck();
 
 			// Start a game with the resulting deck
 			GameConfig gameConfig = new GameConfig();
+
+			PlayerConfig playerConfig = new PlayerConfig(deck, new HumanBehaviour());
+			gameConfig.setPlayerConfig1(playerConfig);
 
 			Alert dialog = new Alert(Alert.AlertType.INFORMATION,
 					"Finding another player...",

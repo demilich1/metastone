@@ -20,7 +20,6 @@ public class PublicDraftState {
 	public List<Card> selectedCards;
 	public int cardsRemaining;
 	public int draftIndex;
-	public String deckId;
 
 	public PublicDraftState() {
 		this.currentCardChoices = Collections.emptyList();
