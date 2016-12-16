@@ -1989,6 +1989,9 @@ public class GameLogic implements Cloneable, Serializable {
 			} else {
 				player.getMinions().add(index, minion);
 			}
+
+			context.fireGameEvent(new BeforeSummonEvent(context, minion, source));
+			context.fireGameEvent(new BoardChangedEvent(context));
 			myResult = false;
 			return this;
 		}
