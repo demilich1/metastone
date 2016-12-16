@@ -12,6 +12,8 @@ import java.util.Map;
  * Created by bberman on 11/18/16.
  */
 public class DescribeGameSessionResponse implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String gameId;
     private Map<String, Object> statistics;
 

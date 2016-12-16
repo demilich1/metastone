@@ -6,6 +6,8 @@ import com.hiddenswitch.proto3.net.impl.server.GameSession;
 import java.io.Serializable;
 
 public class CreateGameSessionResponse implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private ClientConnectionConfiguration player1;
 	private ClientConnectionConfiguration player2;
 	private final String gameId;

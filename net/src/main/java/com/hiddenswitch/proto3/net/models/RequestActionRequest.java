@@ -11,6 +11,8 @@ import java.util.List;
  * Created by bberman on 12/7/16.
  */
 public class RequestActionRequest implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	public GameState gameState;
 	public int playerId;
 	public List<GameAction> validActions;
