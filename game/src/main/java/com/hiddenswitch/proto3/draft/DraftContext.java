@@ -4,48 +4,65 @@ import com.hiddenswitch.proto3.net.common.Recursive;
 import com.hiddenswitch.proto3.net.util.Result;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
+import net.demilich.metastone.game.entities.heroes.HeroClass;
+
+import java.util.function.Consumer;
 
 /**
  * Created by bberman on 12/14/16.
  */
-public class DraftContext {
+public class DraftContext implements Consumer<Handler<AsyncResult<DraftContext>>> {
 	private DraftLogic logic = new DraftLogic(this);
 	private PublicDraftState publicState = new PublicDraftState();
 	private PrivateDraftState privateState = new PrivateDraftState();
 	private DraftBehaviour behaviour = new NullDraftBehaviour();
+	private Handler<AsyncResult<DraftContext>> handleDone;
 
 	public DraftContext() {
 	}
 
-	void run(Handler<AsyncResult<DraftContext>> handler) {
+	public void accept(Handler<AsyncResult<DraftContext>> done) {
+		if (handleDone != null) {
+			throw new RuntimeException("Stale draft context.");
+		}
+
+		handleDone = done;
 		// Resume from the correct spot
 		switch (getPublicState().status) {
 			case NOT_STARTED:
 				getLogic().initializeDraft();
-				getBehaviour().chooseHeroAsync(getPublicState().heroClassChoices, choice -> {
-					if (choice.failed()) {
-						// TODO: Retry
-						return;
-					}
-
-					getLogic().startDraft(choice.result());
-					Recursive<Runnable> selectCardLoop = new Recursive<>();
-					selectCardLoop.func = () -> {
-						getBehaviour().chooseCardAsync(getLogic().getCardChoices(), selectedCardResult -> {
-							getLogic().selectCard(selectedCardResult.result());
-
-							if (getLogic().isDraftOver()) {
-								// TODO: What do we do when we're done? We should create a deck and populate it
-								handler.handle(new Result<>(this));
-							} else {
-								selectCardLoop.func.run();
-							}
-						});
-					};
-					selectCardLoop.func.run();
-				});
+				selectHero();
 				break;
-				// TODO: Handle other cases for proper resuming
+			// TODO: Handle other cases for proper resuming
+		}
+	}
+
+	protected void selectHero() {
+		getBehaviour().chooseHeroAsync(getPublicState().heroClassChoices, this::onHeroSelected);
+	}
+
+	protected void onHeroSelected(AsyncResult<HeroClass> choice) {
+		if (choice.failed()) {
+			// TODO: Retry
+			return;
+		}
+
+		getLogic().startDraft(choice.result());
+		selectCard();
+	}
+
+	protected void selectCard() {
+		getBehaviour().chooseCardAsync(getLogic().getCardChoices(), this::onCardSelected);
+	}
+
+	protected void onCardSelected(AsyncResult<Integer> selectedCardResult) {
+		getLogic().selectCard(selectedCardResult.result());
+
+		if (getLogic().isDraftOver()) {
+			// TODO: What do we do when we're done? We should create a deck and populate it
+			handleDone.handle(new Result<>(this));
+		} else {
+			selectCard();
 		}
 	}
 
@@ -99,5 +116,9 @@ public class DraftContext {
 	public DraftContext withBehaviour(final DraftBehaviour behaviour) {
 		this.setBehaviour(behaviour);
 		return this;
+	}
+
+	protected void notifyPublicStateChanged() {
+		getBehaviour().notifyDraftState(getPublicState());
 	}
 }

@@ -34,6 +34,7 @@ public class DraftLogic {
 
 		getContext().getPublicState().heroClassChoices = createHeroChoices();
 		getContext().getPublicState().status = DraftStatus.SELECT_HERO;
+		notifyPublicStateChanged();
 	}
 
 	public void startDraft(HeroClass heroClass) {
@@ -43,6 +44,7 @@ public class DraftLogic {
 		// Initialize the first card choices
 		getContext().getPublicState().currentCardChoices = getContext().getPrivateState().cards.get(0);
 		getContext().getPublicState().status = DraftStatus.IN_PROGRESS;
+		notifyPublicStateChanged();
 	}
 
 	private List<HeroClass> createHeroChoices() {
@@ -79,6 +81,13 @@ public class DraftLogic {
 		// Until we have enough mean streets cards, don't use it
 		CardSet latestExpansion = CardSet.MEAN_STREETS_OF_GADGETZHAN;
 
+		Set<CardType> validCardTypes = new HashSet<>(Arrays.asList(
+				CardType.CHOOSE_ONE,
+				CardType.MINION,
+				CardType.SPELL,
+				CardType.WEAPON
+		));
+
 		for (int draft = 0; draft < DRAFTS; draft++) {
 			// Select a rarity at the appropriate frequency
 			float rarityRoll = roll();
@@ -96,7 +105,7 @@ public class DraftLogic {
 			// Select the card set. The latest expansion gets a 50% bonus
 			List<Card> draftChoices = new ArrayList<>(CARDS_PER_DRAFT);
 
-			while (draftChoices.stream().map(Card::getCardId).distinct().count() <= 3) {
+			while (draftChoices.stream().map(Card::getCardId).distinct().count() < 3) {
 				float cardSetRoll = roll();
 				CardSet set;
 
@@ -110,8 +119,18 @@ public class DraftLogic {
 				}
 
 				// Get neutral and hero cards
-				CardCollection classCards = CardCatalogue.query(new DeckFormat().withCardSets(set), c -> c.hasHeroClass(hero) && c.getRarity() == rarity && c.isCollectible());
-				CardCollection neutralCards = CardCatalogue.query(new DeckFormat().withCardSets(set), c -> c.hasHeroClass(HeroClass.ANY) && c.getRarity() == rarity && c.isCollectible());
+				CardCollection classCards = CardCatalogue.query(new DeckFormat().withCardSets(set), c -> {
+					return c.hasHeroClass(hero)
+							&& c.getRarity() == rarity
+							&& validCardTypes.contains(c.getCardType())
+							&& c.isCollectible();
+				});
+				CardCollection neutralCards = CardCatalogue.query(new DeckFormat().withCardSets(set), c -> {
+					return c.hasHeroClass(HeroClass.ANY)
+							&& c.getRarity() == rarity
+							&& validCardTypes.contains(c.getCardType())
+							&& c.isCollectible();
+				});
 				// Add two copies of the class cards and then the neutrals
 				CardCollection cards = classCards.clone().addAll(classCards).addAll(neutralCards);
 
@@ -119,7 +138,9 @@ public class DraftLogic {
 				cards.shuffle(getRandom());
 
 				int card_i = 0;
-				while (card_i < CARDS_PER_DRAFT && cards.getCount() > 0) {
+				while (card_i < CARDS_PER_DRAFT
+						&& cards.getCount() > 0
+						&& draftChoices.stream().map(Card::getCardId).distinct().count() < 3) {
 					final Card nextCard = cards.removeFirst();
 					if (draftChoices.stream().anyMatch(c -> Objects.equals(c.getCardId(), nextCard.getCardId()))) {
 						continue;
@@ -167,6 +188,12 @@ public class DraftLogic {
 		} else {
 			publicState.currentCardChoices = getContext().getPrivateState().cards.get(publicState.draftIndex);
 		}
+
+		notifyPublicStateChanged();
+	}
+
+	private void notifyPublicStateChanged() {
+		getContext().notifyPublicStateChanged();
 	}
 
 	public boolean isDraftOver() {

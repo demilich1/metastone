@@ -33,7 +33,7 @@ public class PublicDraftState {
 
 	public Deck createDeck() {
 		Deck deck = new Deck(this.heroClass);
-		this.currentCardChoices.forEach(deck.getCards()::add);
+		this.selectedCards.forEach(deck.getCards()::add);
 		return deck;
 	}
 }

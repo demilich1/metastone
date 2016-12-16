@@ -5,5 +5,7 @@ package com.hiddenswitch.proto3.draft;
  */
 public enum DraftStatus {
 	IN_PROGRESS,
-	SELECT_HERO, NOT_STARTED, COMPLETE
+	SELECT_HERO,
+	NOT_STARTED,
+	COMPLETE
 }

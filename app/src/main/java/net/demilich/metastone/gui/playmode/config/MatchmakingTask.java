@@ -26,7 +26,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * Created by bberman on 12/2/16.
  */
-class MatchmakingTask extends Task<Void> {
+public class MatchmakingTask extends Task<Void> {
 	private final Deck deck;
 	private ClientConnectionConfiguration connection;
 	private final String userId;

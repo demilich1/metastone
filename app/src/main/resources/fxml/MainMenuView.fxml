@@ -20,9 +20,10 @@
          <children>
          	<Group>
          		<children>
-                   <Button fx:id="playModeButton" mnemonicParsing="false" prefWidth="300.0" layoutY="300" styleClass = "main-button" text="Play" textAlignment="CENTER" />
-                   <Button fx:id="multiplayerButton" mnemonicParsing="false" prefWidth="300.0" layoutY="378" styleClass = "main-button" text="Multiplayer" textAlignment="CENTER" />
-                   <Button fx:id="deckBuilderButton" mnemonicParsing="false" prefWidth="300.0" layoutY="456" styleClass = "main-button" text="Deck Builder" textAlignment="CENTER"  wrapText="true" />
+                   <Button fx:id="playModeButton" mnemonicParsing="false" prefWidth="300.0" layoutY="300" styleClass = "main-button" text="Practice" textAlignment="CENTER" />
+                   <Button fx:id="multiplayerButton" mnemonicParsing="false" prefWidth="300.0" layoutY="378" styleClass = "main-button" text="Constructed" textAlignment="CENTER" />
+                   <Button fx:id="draftButton" mnemonicParsing="false" prefWidth="300.0" layoutY="456" styleClass = "main-button" text="Draft" textAlignment="CENTER" />
+                   <Button fx:id="deckBuilderButton" mnemonicParsing="false" prefWidth="300.0" layoutY="534" styleClass = "main-button" text="Deck Builder" textAlignment="CENTER"  wrapText="true" />
          		</children>
          	</Group>
             <Group styleClass="hidden">
