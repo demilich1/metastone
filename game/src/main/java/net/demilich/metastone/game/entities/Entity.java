@@ -11,6 +11,7 @@ import net.demilich.metastone.game.targeting.IdFactory;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public abstract class Entity extends CustomCloneable implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	private String name;
 	protected Map<Attribute, Object> attributes = new EnumMap<Attribute, Object>(Attribute.class);

@@ -8,6 +8,8 @@ import net.demilich.metastone.game.logic.GameLogic;
 import java.io.Serializable;
 
 public class Deck implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	public static final Deck EMPTY;
 	private String name = "";
 	private HeroClass heroClass;

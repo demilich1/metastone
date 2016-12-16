@@ -34,7 +34,7 @@ public class StartDraftCommand extends SimpleCommand<GameNotification> {
 		context.setBehaviour(behaviour);
 
 		context.accept(done -> {
-			final Deck deck = done.result().getPublicState().createDeck();
+			final Deck deck = context.getPublicState().createDeck();
 
 			// Start a game with the resulting deck
 			GameConfig gameConfig = new GameConfig();

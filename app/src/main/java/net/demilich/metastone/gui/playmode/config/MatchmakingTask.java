@@ -80,7 +80,8 @@ public class MatchmakingTask extends Task<Void> {
 		CloseableHttpClient client = HttpClientBuilder.create().build();
 		RequestConfig globalConfig = RequestConfig.custom().setCircularRedirectsAllowed(true).build();
 		HttpPost post1 = new HttpPost(BuildConfig.MATCHMAKING_URI);
-		post1.setEntity(new StringEntity(Serialization.serialize(request), ContentType.APPLICATION_JSON));
+		String serialized = Serialization.serialize(request);
+		post1.setEntity(new StringEntity(serialized, ContentType.APPLICATION_JSON));
 		post1.addHeader("X-Auth-UserId", userId);
 		post1.setConfig(globalConfig);
 		HttpPost post = post1;

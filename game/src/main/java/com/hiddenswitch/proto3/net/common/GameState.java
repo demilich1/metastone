@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class GameState implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	public final Player player1;
 	public final Player player2;
 	public final HashMap<Environment, Object> environment;

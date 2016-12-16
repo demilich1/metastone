@@ -6,6 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 
 public class CardCollection implements Iterable<Card>, Cloneable, Serializable {
+	private static final long serialVersionUID = 1L;
 
 	private List<Card> cards = new ArrayList<Card>();
 
