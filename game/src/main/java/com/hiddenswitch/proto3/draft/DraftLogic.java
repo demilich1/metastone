@@ -3,6 +3,8 @@ package com.hiddenswitch.proto3.draft;
 import net.demilich.metastone.game.cards.*;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.ref.WeakReference;
 import java.util.*;
@@ -11,6 +13,7 @@ import java.util.*;
  * Created by bberman on 12/14/16.
  */
 public class DraftLogic {
+	private static final Logger logger = LoggerFactory.getLogger(DraftLogic.class);
 	public static final float EXPANSION_ODDS_FACTOR = 1.5f;
 	public static final float COMMON_ROLL = 0.76f;
 	private static final float RARE_ROLL = 0.20f;
@@ -88,7 +91,8 @@ public class DraftLogic {
 				CardType.WEAPON
 		));
 
-		Set<String> bannedCards = new HashSet<>(Arrays.asList(
+		Set<String> bannedCards = new HashSet<>();
+		bannedCards.addAll(Arrays.asList(
 				"spell_forgotten_torch",
 				"minion_snowchugger",
 				"minion_faceless_summoner",
@@ -174,7 +178,7 @@ public class DraftLogic {
 				});
 
 				CardCollection neutralCards = CardCatalogue.query(format, c -> {
-					return c.hasHeroClass(HeroClass.ANY)
+					return (c.hasHeroClass(HeroClass.ANY) || c.hasHeroClass(HeroClass.NEUTRAL))
 							&& !bannedCards.contains(c.getCardId())
 							&& c.getRarity() == rarity
 							&& validCardTypes.contains(c.getCardType())
@@ -184,16 +188,24 @@ public class DraftLogic {
 				// Add two copies of the class cards and then the neutrals
 				CardCollection cards = classCards.clone().addAll(classCards).addAll(neutralCards);
 
-				// Shuffle then choose until we're done
-				cards.shuffle(getRandom());
-
-				final Card nextCard = cards.removeFirst();
-
-				if (draftChoices.stream().anyMatch(c -> Objects.equals(c.getCardId(), nextCard.getCardId()))) {
+				if (cards.getCount() == 0) {
+					logger.info("Draft pulled no cards given parameters: draft={}, rarity={}, sets={}", draft, rarity, format.getCardSets());
 					continue;
 				}
 
-				draftChoices.add(nextCard);
+				// Shuffle then choose until we're done
+				cards.shuffle(getRandom());
+
+				while (cards.getCount() > 0
+						&& draftChoices.stream().map(Card::getCardId).distinct().count() < CARDS_PER_DRAFT) {
+					final Card nextCard = cards.removeFirst();
+
+					if (draftChoices.stream().anyMatch(c -> Objects.equals(c.getCardId(), nextCard.getCardId()))) {
+						continue;
+					}
+
+					draftChoices.add(nextCard);
+				}
 			}
 
 			draftCards.add(draftChoices);
