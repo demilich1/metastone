@@ -2,6 +2,7 @@
 	"id": "hero_rexxar",
 	"name": "Rexxar",
 	"baseManaCost": 0,
+	"description": "The Hunter Hero",
 	"heroPower": "hero_power_steady_shot",
 	"type": "HERO",
 	"heroClass": "HUNTER",

@@ -2,6 +2,7 @@
 	"id": "hero_malfurion",
 	"name": "Malfurion Stormrage",
 	"baseManaCost": 0,
+	"description": "The Druid Hero",
 	"heroPower": "hero_power_shapeshift",
 	"type": "HERO",
 	"heroClass": "DRUID",

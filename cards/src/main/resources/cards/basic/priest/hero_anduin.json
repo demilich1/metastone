@@ -2,6 +2,7 @@
 	"id": "hero_anduin",
 	"name": "Anduin Wrynn",
 	"baseManaCost": 0,
+	"description": "The Priest Hero",
 	"heroPower": "hero_power_lesser_heal",
 	"type": "HERO",
 	"heroClass": "PRIEST",

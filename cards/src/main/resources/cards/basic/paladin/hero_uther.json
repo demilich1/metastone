@@ -2,6 +2,7 @@
 	"id": "hero_uther",
 	"name": "Uther Lightbringer",
 	"baseManaCost": 0,
+	"description": "The Paladin Hero",
 	"heroPower": "hero_power_reinforce",
 	"type": "HERO",
 	"heroClass": "PALADIN",

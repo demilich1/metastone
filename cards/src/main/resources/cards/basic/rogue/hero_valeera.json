@@ -2,6 +2,7 @@
 	"id": "hero_valeera",
 	"name": "Valeera Sanguinar",
 	"baseManaCost": 0,
+	"description": "The Rogue Hero",
 	"heroPower": "hero_power_dagger_mastery",
 	"type": "HERO",
 	"heroClass": "ROGUE",
