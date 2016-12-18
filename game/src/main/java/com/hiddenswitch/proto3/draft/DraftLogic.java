@@ -76,8 +76,7 @@ public class DraftLogic {
 				CardSet.THE_GRAND_TOURNAMENT,
 				CardSet.LEAGUE_OF_EXPLORERS,
 				CardSet.THE_OLD_GODS,
-				CardSet.ONE_NIGHT_IN_KARAZHAN,
-				CardSet.MEAN_STREETS_OF_GADGETZHAN);
+				CardSet.ONE_NIGHT_IN_KARAZHAN);
 
 		// Until we have enough mean streets cards, don't use it
 		CardSet latestExpansion = CardSet.MEAN_STREETS_OF_GADGETZHAN;
@@ -106,49 +105,45 @@ public class DraftLogic {
 			// Select the card set. The latest expansion gets a 50% bonus
 			List<Card> draftChoices = new ArrayList<>(CARDS_PER_DRAFT);
 
-			while (draftChoices.stream().map(Card::getCardId).distinct().count() < 3) {
+			while (draftChoices.stream().map(Card::getCardId).distinct().count() < CARDS_PER_DRAFT) {
 				float cardSetRoll = roll();
 				CardSet set;
-
+				DeckFormat format = new DeckFormat();
 				float latestExpansionOdds = EXPANSION_ODDS_FACTOR / (equals.size() + EXPANSION_ODDS_FACTOR);
 				if (cardSetRoll < latestExpansionOdds) {
-					set = latestExpansion;
+					format.withCardSets(latestExpansion);
 				} else {
-					float rescaled = (cardSetRoll - latestExpansionOdds) / (1f - latestExpansionOdds);
-					int index = (int) (rescaled * equals.size());
-					set = equals.get(index);
+					format.withCardSets(equals);
 				}
 
 				// Get neutral and hero cards
-				CardCollection classCards = CardCatalogue.query(new DeckFormat().withCardSets(set), c -> {
+				CardCollection classCards = CardCatalogue.query(format, c -> {
 					return c.hasHeroClass(hero)
 							&& c.getRarity() == rarity
 							&& validCardTypes.contains(c.getCardType())
 							&& c.isCollectible();
 				});
-				CardCollection neutralCards = CardCatalogue.query(new DeckFormat().withCardSets(set), c -> {
+
+				CardCollection neutralCards = CardCatalogue.query(format, c -> {
 					return c.hasHeroClass(HeroClass.ANY)
 							&& c.getRarity() == rarity
 							&& validCardTypes.contains(c.getCardType())
 							&& c.isCollectible();
 				});
+
 				// Add two copies of the class cards and then the neutrals
 				CardCollection cards = classCards.clone().addAll(classCards).addAll(neutralCards);
 
 				// Shuffle then choose until we're done
 				cards.shuffle(getRandom());
 
-				int card_i = 0;
-				while (card_i < CARDS_PER_DRAFT
-						&& cards.getCount() > 0
-						&& draftChoices.stream().map(Card::getCardId).distinct().count() < 3) {
-					final Card nextCard = cards.removeFirst();
-					if (draftChoices.stream().anyMatch(c -> Objects.equals(c.getCardId(), nextCard.getCardId()))) {
-						continue;
-					}
-					draftChoices.add(nextCard);
-					card_i++;
+				final Card nextCard = cards.removeFirst();
+				
+				if (draftChoices.stream().anyMatch(c -> Objects.equals(c.getCardId(), nextCard.getCardId()))) {
+					continue;
 				}
+
+				draftChoices.add(nextCard);
 			}
 
 			draftCards.add(draftChoices);
