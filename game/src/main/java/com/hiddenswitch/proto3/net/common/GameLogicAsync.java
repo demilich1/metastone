@@ -35,8 +35,9 @@ public class GameLogicAsync extends GameLogic {
 		NetworkBehaviour networkBehaviour = (NetworkBehaviour) player.getBehaviour();
 
 		networkBehaviour.mulligan((ServerGameContext) context, player, firstHand.getStarterCards(), (List<Card> discardedCards) -> {
+			logger.debug("Discarded cards from {}: {}", player.getName(), discardedCards.stream().map(Card::toString).reduce((a, b) -> a + ", " + b));
 			handleMulligan(player, begins, firstHand, discardedCards);
-			callback.handle(null);
+			callback.handle(discardedCards);
 		});
 	}
 
