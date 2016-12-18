@@ -41,6 +41,11 @@ public class GenerateConfigsForDecks implements PairFlatMapFunction<String[], Te
 		Deck testDeck = DeckCatalogue.getDeckByName(decks[0]);
 		Deck opponentDeck = DeckCatalogue.getDeckByName(decks[1]);
 
+		if (testDeck == null
+				|| opponentDeck == null) {
+			throw new NullPointerException();
+		}
+
 		PlayerConfig testPlayerConfig = new PlayerConfig(testDeck, new GameStateValueBehaviour(FeatureVector.getFittest(), "testPlayer "));
 		testPlayerConfig.setName("[Test Player]");
 		testPlayerConfig.setHeroCard(MetaHero.getHeroCard(testDeck.getHeroClass()));
