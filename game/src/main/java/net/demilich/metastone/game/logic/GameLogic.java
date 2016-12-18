@@ -1197,7 +1197,7 @@ public class GameLogic implements Cloneable, Serializable {
 		// remove player selected cards from starter cards
 		for (Card discardedCard : discardedCards) {
 			log("Player {} mulligans {} ", player.getName(), discardedCard);
-			starterCards.remove(discardedCard);
+			starterCards.removeIf(c -> c.getId() == discardedCard.getId());
 		}
 
 		// draw random cards from deck until required starter card count is

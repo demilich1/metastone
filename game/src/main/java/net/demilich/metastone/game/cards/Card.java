@@ -13,8 +13,11 @@ import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.targeting.CardLocation;
 import net.demilich.metastone.game.targeting.CardReference;
 import net.demilich.metastone.game.targeting.IdFactory;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.util.EnumMap;
+import java.util.Objects;
 
 public abstract class Card extends Entity {
 	private static final long serialVersionUID = 1L;
@@ -73,19 +76,19 @@ public abstract class Card extends Entity {
 	}
 
 	public boolean evaluateExpression(String operator, int value1, int value2) {
-		switch(operator) {
-		case "=":
-			return value1 == value2;
-		case ">":
-			return value1 > value2;
-		case "<":
-			return value1 < value2;
-		case ">=":
-			return value1 >= value2;
-		case "<=":
-			return value1 <= value2;
-		case "!=":
-			return value1 != value2;
+		switch (operator) {
+			case "=":
+				return value1 == value2;
+			case ">":
+				return value1 > value2;
+			case "<":
+				return value1 < value2;
+			case ">=":
+				return value1 >= value2;
+			case "<=":
+				return value1 <= value2;
+			case "!=":
+				return value1 != value2;
 		}
 		return false;
 	}
@@ -181,7 +184,7 @@ public abstract class Card extends Entity {
 	}
 
 	public boolean matchesFilter(String filter) {
-		if (filter == null || filter == "") {
+		if (filter == null || filter.isEmpty()) {
 			return true;
 		}
 		String[] filters = filter.split(" ");
