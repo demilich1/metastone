@@ -190,7 +190,7 @@ public class GamesImpl extends Service<GamesImpl> implements Games {
 		// Show activity on the game activity monitor
 		if (session == null) {
 			logger.error("Received a message from a client for a game session that is killed.");
-			logger.error("Message: {}", message);
+			logger.error("Message: " + message.toString());
 			return;
 		}
 

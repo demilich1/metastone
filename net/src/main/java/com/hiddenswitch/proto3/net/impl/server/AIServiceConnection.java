@@ -69,7 +69,11 @@ public class AIServiceConnection implements RemoteUpdateListener {
 			if (gc == null) {
 				return;
 			}
-			gc.onActionReceived(messageId, result.result().gameAction);
+			if (result.result() == null) {
+				throw new NullPointerException("A bot did not reply with an action. GameContext: \n" + gc.toLongString() + "\nActions:\n" + actions.toString());
+			} else {
+				gc.onActionReceived(messageId, result.result().gameAction);
+			}
 		}).requestAction(new RequestActionRequest(state, playerId, actions));
 	}
 

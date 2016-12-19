@@ -63,7 +63,7 @@ public class TwoClients {
 	}
 
 	public TwoClients invoke(GamesImpl service) throws IOException, URISyntaxException, CardParseException, SuspendExecution {
-		return invoke(service, 60000L);
+		return invoke(service, 120000L);
 	}
 
 	@Suspendable
@@ -105,7 +105,7 @@ public class TwoClients {
 		request.setPregame1(pregame1);
 		request.setPregame2(pregame2);
 		request.setGameId(RandomStringUtils.randomAlphanumeric(8));
-		request.setNoActivityTimeout(60000L);
+		request.setNoActivityTimeout(120000L);
 
 		CreateGameSessionResponse response = service.createGameSession(request);
 		this.gameId = response.getGameId();

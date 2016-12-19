@@ -1,5 +1,6 @@
 package com.hiddenswitch.proto3.net;
 
+import ch.qos.logback.classic.Level;
 import com.hiddenswitch.proto3.net.impl.AccountsImpl;
 import com.hiddenswitch.proto3.net.models.CreateAccountResponse;
 import com.hiddenswitch.proto3.net.amazon.LoginRequest;
@@ -20,6 +21,7 @@ import static org.junit.Assert.*;
 public class AccountsTest extends ServiceTestBase<AccountsImpl> {
 	@Test
 	public void testCreateAccount() throws Exception {
+		setLoggingLevel(Level.ERROR);
 		CreateAccountResponse response = service.createAccount("benjamin.s.berman@gmail.com", "destructoid", "doctorpangloss");
 		assertNotNull(response.loginToken);
 		assertFalse(response.invalidEmailAddress);
@@ -31,6 +33,7 @@ public class AccountsTest extends ServiceTestBase<AccountsImpl> {
 
 	@Test
 	public void testLogin() throws Exception {
+		setLoggingLevel(Level.ERROR);
 		CreateAccountResponse response = service.createAccount("test@test.com", "password", "username");
 		LoginResponse loginResponse = service.login("username", "password");
 		assertNotNull(loginResponse.token);
@@ -55,6 +58,7 @@ public class AccountsTest extends ServiceTestBase<AccountsImpl> {
 
 	@Test
 	public void testIsAuthorizedWithToken() throws Exception {
+		setLoggingLevel(Level.ERROR);
 		CreateAccountResponse response = service.createAccount("test@test.com", "password", "username");
 		assertTrue(service.isAuthorizedWithToken(response.userId, response.loginToken.token));
 		assertFalse(service.isAuthorizedWithToken(response.userId, null));
@@ -67,6 +71,7 @@ public class AccountsTest extends ServiceTestBase<AccountsImpl> {
 
 	@Test
 	public void testGet() throws Exception {
+		setLoggingLevel(Level.ERROR);
 		CreateAccountResponse response = service.createAccount("test@test.com", "password", "username");
 		User user = service.get(response.userId);
 		assertNotNull(user);
@@ -133,6 +138,7 @@ public class AccountsTest extends ServiceTestBase<AccountsImpl> {
 
 	@Test
 	public void testGetUserId() throws Exception {
+		setLoggingLevel(Level.ERROR);
 		CreateAccountResponse response = service.createAccount("test@test.com", "password", "username");
 		assertEquals(service.getUserId(), "username");
 		service.login("A", "");
@@ -143,6 +149,7 @@ public class AccountsTest extends ServiceTestBase<AccountsImpl> {
 
 	@Test
 	public void testGetProfileForId() throws Exception {
+		setLoggingLevel(Level.ERROR);
 		service.createAccount("test@test.com", "password", "username");
 		assertEquals(service.getProfileForId("username").name, "username");
 		assertNull(service.getProfileForId("a"));

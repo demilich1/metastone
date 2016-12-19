@@ -1,5 +1,6 @@
 package com.hiddenswitch.proto3.net.util;
 
+import ch.qos.logback.classic.Level;
 import co.paralleluniverse.fibers.Fiber;
 import co.paralleluniverse.fibers.FiberScheduler;
 import co.paralleluniverse.fibers.SuspendExecution;
@@ -41,6 +42,12 @@ public abstract class ServiceTestBase<T extends Service<T>> {
 			context.fail(e);
 		}
 		context.async().complete();
+	}
+
+	public void setLoggingLevel(Level level) {
+		ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) org.slf4j.LoggerFactory
+				.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME);
+		root.setLevel(level);
 	}
 
 	public abstract void deployServices(Vertx vertx, Handler<AsyncResult<T>> done);

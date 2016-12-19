@@ -1,5 +1,6 @@
 package com.hiddenswitch.proto3.net;
 
+import ch.qos.logback.classic.Level;
 import com.hiddenswitch.proto3.draft.DraftContext;
 import com.hiddenswitch.proto3.net.util.AbstractMatchmakingTest;
 import io.vertx.ext.unit.TestContext;
@@ -12,11 +13,13 @@ import org.junit.Test;
 public class DraftTest extends AbstractMatchmakingTest {
 	@Test
 	public void testDraftAndJoin(TestContext context) {
+		setLoggingLevel(Level.ERROR);
 		wrapSync(context, this::createTwoPlayersAndMatchmake);
 	}
 
 	@Override
 	protected Deck createDeckForMatchmaking(int playerId) {
+		setLoggingLevel(Level.ERROR);
 		DraftContext context = new DraftContext();
 		context.accept(done -> {
 		});

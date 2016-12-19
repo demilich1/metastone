@@ -1,5 +1,6 @@
 package com.hiddenswitch.proto3.net;
 
+import ch.qos.logback.classic.Level;
 import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.strands.Strand;
 import com.hiddenswitch.proto3.net.common.GameState;
@@ -40,6 +41,7 @@ import static net.demilich.metastone.game.GameContext.PLAYER_1;
 public class BotsTest extends ServiceTestBase<BotsImpl> {
 	@Test
 	public void testMulligan() throws Exception {
+		setLoggingLevel(Level.ERROR);
 		MulliganRequest request = new MulliganRequest(
 				Arrays.asList(
 						CardCatalogue.getCardById("spell_fireball"),
@@ -50,6 +52,7 @@ public class BotsTest extends ServiceTestBase<BotsImpl> {
 
 	@Test
 	public void testRequestAction() throws Exception {
+		setLoggingLevel(Level.ERROR);
 		DebugContext context = TestBase.createContext(HeroClass.HUNTER, HeroClass.PALADIN);
 		context.endTurn();
 		context.forceStartTurn(context.getActivePlayerId());
@@ -72,20 +75,23 @@ public class BotsTest extends ServiceTestBase<BotsImpl> {
 
 	@Test
 	public void testBroker(TestContext context) throws CardParseException, IOException, URISyntaxException {
-		wrapSync(context, () -> {
-			ServiceProxy<Bots> bots = Broker.proxy(Bots.class, vertx.eventBus());
-			final MulliganRequest request = new MulliganRequest(
-					Arrays.asList(
-							CardCatalogue.getCardById("spell_fireball"),
-							CardCatalogue.getCardById("spell_arcane_missiles"),
-							CardCatalogue.getCardById("spell_assassinate")));
-			MulliganResponse r = bots.sync().mulligan(request);
-			context.assertTrue(r.discardedCards.size() == 2);
-		});
+		setLoggingLevel(Level.ERROR);
+		final Async async = context.async();
+		ServiceProxy<Bots> bots = Broker.proxy(Bots.class, vertx.eventBus());
+		final MulliganRequest request = new MulliganRequest(
+				Arrays.asList(
+						CardCatalogue.getCardById("spell_fireball"),
+						CardCatalogue.getCardById("spell_arcane_missiles"),
+						CardCatalogue.getCardById("spell_assassinate")));
+		bots.async((AsyncResult<MulliganResponse> r) -> {
+			context.assertTrue(r.result().discardedCards.size() == 2);
+			async.complete();
+		}).mulligan(request);
 	}
 
 	@Test
 	public void testPlaysGameAgainstAI(TestContext context) throws CardParseException, IOException, URISyntaxException, SuspendExecution {
+		setLoggingLevel(Level.ERROR);
 		final Async async = context.async();
 		GamesImpl games = new GamesImpl();
 		vertx.deployVerticle(games, then -> {

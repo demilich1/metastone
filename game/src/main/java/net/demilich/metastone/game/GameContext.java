@@ -701,6 +701,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 	public void loadState(GameState state) {
 		this.setPlayer(GameContext.PLAYER_1, state.player1);
 		this.setPlayer(GameContext.PLAYER_2, state.player2);
+		this.setTempCards(state.tempCards);
 		this.setCardCostModifiers(state.cardCostModifiers);
 		this.setEnvironment(state.environment);
 		this.setTriggerManager(state.triggerManager);

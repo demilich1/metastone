@@ -1,5 +1,6 @@
 package com.hiddenswitch.proto3.net;
 
+import ch.qos.logback.classic.Level;
 import co.paralleluniverse.strands.Strand;
 import com.hiddenswitch.proto3.net.models.MatchExpireRequest;
 import com.hiddenswitch.proto3.net.util.AbstractMatchmakingTest;
@@ -15,11 +16,13 @@ import static org.junit.Assert.assertNull;
 public class MatchmakingTest extends AbstractMatchmakingTest {
 	@Test
 	public void testMatchmakeAndJoin(TestContext context) {
+		setLoggingLevel(Level.ERROR);
 		wrapSync(context, this::createTwoPlayersAndMatchmake);
 	}
 
 	@Test
 	public void testMatchmakeSamePlayersTwice(TestContext context) {
+		setLoggingLevel(Level.ERROR);
 		wrapSync(context, () -> {
 			// Creates the same two players
 			String gameId = createTwoPlayersAndMatchmake();
