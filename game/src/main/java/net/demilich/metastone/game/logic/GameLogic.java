@@ -101,6 +101,8 @@ public class GameLogic implements Cloneable {
 	public static final int WINDFURY_ATTACKS = 2;
 	public static final int MEGA_WINDFURY_ATTACKS = 4;
 
+	public static final String TEMP_CARD_LABEL = "temp_card_id_";
+
 	private static final int INFINITE = -1;
 
 	private static boolean hasPlayerLost(Player player) {
@@ -159,23 +161,43 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void applyAttribute(Entity entity, Attribute attr) {
-		if (attr == Attribute.MEGA_WINDFURY && entity.hasAttribute(Attribute.WINDFURY)) {
+		if (attr == Attribute.MEGA_WINDFURY && entity.hasAttribute(Attribute.WINDFURY) && !entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, MEGA_WINDFURY_ATTACKS - WINDFURY_ATTACKS);
 		} else
 			if (attr == Attribute.WINDFURY && !entity.hasAttribute(Attribute.WINDFURY) && !entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, WINDFURY_ATTACKS - 1);
-		} else if (attr == Attribute.MEGA_WINDFURY && !entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
+		} else if (attr == Attribute.MEGA_WINDFURY && !entity.hasAttribute(Attribute.WINDFURY) && !entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, MEGA_WINDFURY_ATTACKS - 1);
 		}
 		entity.setAttribute(attr);
 		log("Applying attr {} to {}", attr, entity);
 	}
 
+	/**
+	 * Applies hero power damage increases
+	 * @param player
+	 * 			The Player to grab additional hero power damage from
+	 * @param baseValue
+	 * 			The base damage the hero power does
+	 * @return
+	 * 			Increased hero power damage
+	 */
 	public int applyHeroPowerDamage(Player player, int baseValue) {
 		int spellpower = getTotalAttributeValue(player, Attribute.HERO_POWER_DAMAGE);
 		return baseValue + spellpower;
 	}
 
+	/**
+	 * Applies spell damage increases
+	 * @param player
+	 * 			The Player to grab the additional spell damage from
+	 * @param source
+	 * 			The source Card
+	 * @param baseValue
+	 * 			The base damage the spell does
+	 * @return
+	 * 			Increased spell damage
+	 */
 	public int applySpellpower(Player player, Entity source, int baseValue) {
 		int spellpower = getTotalAttributeValue(player, Attribute.SPELL_DAMAGE)
 				+ getTotalAttributeValue(context.getOpponent(player), Attribute.OPPONENT_SPELL_DAMAGE);
@@ -185,6 +207,11 @@ public class GameLogic implements Cloneable {
 		return baseValue + spellpower;
 	}
 
+	/**
+	 * Assigns an ID to each Card in a given deck
+	 * @param cardCollection
+	 * 		The Deck to assign IDs to
+	 */
 	private void assignCardIds(CardCollection cardCollection) {
 		for (Card card : cardCollection) {
 			card.setId(idFactory.generateId());
@@ -664,15 +691,6 @@ public class GameLogic implements Cloneable {
 		checkForDeadEntities();
 	}
 
-	private void handleFrozen(Actor actor) {
-		if (!actor.hasAttribute(Attribute.FROZEN)) {
-			return;
-		}
-		if (actor.getAttributeValue(Attribute.NUMBER_OF_ATTACKS) >= actor.getMaxNumberOfAttacks()) {
-			removeAttribute(actor, Attribute.FROZEN);
-		}
-	}
-
 	public void equipWeapon(int playerId, Weapon weapon) {
 		equipWeapon(playerId, weapon, false);
 	}
@@ -792,7 +810,7 @@ public class GameLogic implements Cloneable {
 	}
 
 	public String generateCardID() {
-		return "temp_card_name_" + idFactory.generateId();
+		return TEMP_CARD_LABEL + idFactory.generateId();
 	}
 
 	public Actor getAnotherRandomTarget(Player player, Actor attacker, Actor originalTarget, EntityReference potentialTargets) {
@@ -981,6 +999,15 @@ public class GameLogic implements Cloneable {
 		context.fireGameEvent(new EnrageChangedEvent(context, entity));
 	}
 
+	private void handleFrozen(Actor actor) {
+		if (!actor.hasAttribute(Attribute.FROZEN)) {
+			return;
+		}
+		if (actor.getAttributeValue(Attribute.NUMBER_OF_ATTACKS) >= actor.getMaxNumberOfAttacks()) {
+			removeAttribute(actor, Attribute.FROZEN);
+		}
+	}
+
 	public boolean hasAttribute(Player player, Attribute attr) {
 		if (player.getHero().hasAttribute(attr)) {
 			return true;
@@ -1016,7 +1043,11 @@ public class GameLogic implements Cloneable {
 			damage(player, target, healing, source);
 			return;
 		}
-		healing = applyAmplify(player, healing, Attribute.HEAL_AMPLIFY_MULTIPLIER);
+		if (source != null && source instanceof Card
+				&& (((Card) source).getCardType().isCardType(CardType.SPELL)
+				|| ((Card) source).getCardType().isCardType(CardType.HERO_POWER))) {
+			healing = applyAmplify(player, healing, Attribute.HEAL_AMPLIFY_MULTIPLIER);
+		}
 		boolean success = false;
 		switch (target.getEntityType()) {
 		case MINION:
@@ -1595,6 +1626,9 @@ public class GameLogic implements Cloneable {
 		if (hasAttribute(player, Attribute.DOUBLE_BATTLECRIES) && actor.getSourceCard().hasAttribute(Attribute.BATTLECRY)) {
 			// You need DOUBLE_BATTLECRIES before your battlecry action, not after.
 			performGameAction(playerId, battlecryAction);
+			if (!battlecry.canBeExecuted(context, player)) {
+				return;
+			}
 			performGameAction(playerId, battlecryAction);
 		} else {
 			performGameAction(playerId, battlecryAction);
