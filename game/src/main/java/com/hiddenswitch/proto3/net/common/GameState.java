@@ -34,14 +34,15 @@ public class GameState implements Serializable {
 	}
 
 	public GameState(GameContext fromContext, TurnState turnState) {
+		GameContext clone = fromContext.clone();
 		this.timestamp = System.nanoTime();
-		player1 = fromContext.getPlayer1();
-		player2 = fromContext.getPlayer2();
-		tempCards = fromContext.getTempCards();
-		environment = SerializationUtils.clone(fromContext.getEnvironment());
-		currentId = fromContext.getLogic().getIdFactory().getInternalId();
-		triggerManager = SerializationUtils.clone(fromContext.getTriggerManager());
-		cardCostModifiers = SerializationUtils.clone(new ArrayList<>(fromContext.getCardCostModifiers()));
+		player1 = clone.getPlayer1();
+		player2 = clone.getPlayer2();
+		tempCards = clone.getTempCards();
+		environment = clone.getEnvironment();
+		currentId = clone.getLogic().getIdFactory().getInternalId();
+		triggerManager = clone.getTriggerManager();
+		cardCostModifiers = clone.getCardCostModifiers();
 		this.turnState = turnState;
 	}
 

@@ -38,7 +38,6 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 	protected static final Logger logger = LoggerFactory.getLogger(GameContext.class);
 
 	private Player[] players = new Player[2];
-	@Expose(serialize = false, deserialize = false)
 	private GameLogic logic;
 	private DeckFormat deckFormat;
 	private TargetLogic targetLogic = new TargetLogic();
@@ -51,12 +50,9 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 	private MatchResult result;
 	private TurnState turnState = TurnState.TURN_ENDED;
 	private boolean disposed = false;
-
 	private int turn;
 	private int actionsThisTurn;
-
 	private boolean ignoreEvents;
-
 	private CardCollection tempCards = new CardCollection();
 
 	public GameContext() {
@@ -633,14 +629,6 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		this.actionsThisTurn = actionsThisTurn;
 	}
 
-	public void addException(Throwable e) {
-		exceptions.add(e);
-	}
-
-	public List<Throwable> getExceptions() {
-		return Collections.unmodifiableList(exceptions);
-	}
-
 	public String toLongString() {
 		StringBuilder builder = new StringBuilder("GameContext hashCode: " + hashCode() + "\nPlayer: ");
 		for (Player player : getPlayers()) {
@@ -679,13 +667,6 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		builder.append("Turn: " + getTurn() + "\n");
 		builder.append("Result: " + getResult() + "\n");
 		builder.append("Winner: " + (getWinner() == null ? "tbd" : getWinner().getName()));
-
-		builder.append("\nExceptions: \n");
-		getExceptions().forEach(t -> {
-			builder.append(t.getMessage() + "\n");
-			builder.append(ExceptionUtils.getStackTrace(t));
-			builder.append("\n");
-		});
 
 		return builder.toString();
 	}
