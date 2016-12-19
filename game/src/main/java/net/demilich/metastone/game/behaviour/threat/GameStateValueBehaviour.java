@@ -95,8 +95,10 @@ public class GameStateValueBehaviour extends Behaviour {
 
 		int depth = 2;
 		// when evaluating battlecry and discover actions, only optimize the immediate value
-		if (validActions.get(0).getActionType() == ActionType.BATTLECRY || validActions.get(0).getActionType() == ActionType.DISCOVER) {
+		if (validActions.get(0).getActionType() == ActionType.BATTLECRY) {
 			depth = 0;
+		} else if (validActions.get(0).getActionType() == ActionType.DISCOVER) {
+			return validActions.get(0);
 		}
 
 		GameAction bestAction = validActions.get(0);
