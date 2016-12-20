@@ -124,7 +124,7 @@ public class SpellUtils {
 	public static DiscoverAction getSpellDiscover(GameContext context, Player player, SpellDesc desc, List<SpellDesc> spells) {
 		List<GameAction> discoverActions = getDiscoverActionsForSpells(spells);
 
-		final boolean isAllRandom = context.getLogic().attributeExists(Attribute.ALL_RANDOM_FINAL_DESTINATION) ||
+		final boolean isAllRandom = context.getLogic().attributeExists(Attribute.ALL_RANDOM_YOGG_ONLY_FINAL_DESTINATION) ||
 				context.getLogic().attributeExists(Attribute.ALL_RANDOM_FINAL_DESTINATION);
 
 		if (isAllRandom) {
@@ -152,7 +152,7 @@ public class SpellUtils {
 		// TODO: Adapt Kazakus to use this
 		List<GameAction> discoverActions = getDiscoverActionsForSpells(spells);
 
-		final boolean isAllRandom = context.getLogic().attributeExists(Attribute.ALL_RANDOM_FINAL_DESTINATION) ||
+		final boolean isAllRandom = context.getLogic().attributeExists(Attribute.ALL_RANDOM_YOGG_ONLY_FINAL_DESTINATION) ||
 				context.getLogic().attributeExists(Attribute.ALL_RANDOM_FINAL_DESTINATION);
 
 		if (isAllRandom) {

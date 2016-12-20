@@ -11,7 +11,8 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "AfterMinionSummonedTrigger",
-			"targetPlayer": "SELF"
+			"targetPlayer": "SELF",
+			"hostTargetType": "IGNORE_AS_TARGET"
 		},
 		"spell": {
 			"class": "MissilesSpell",
