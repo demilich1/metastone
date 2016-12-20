@@ -3,7 +3,7 @@ package com.hiddenswitch.proto3.net;
 import ch.qos.logback.classic.Level;
 import co.paralleluniverse.strands.Strand;
 import com.hiddenswitch.proto3.net.models.MatchExpireRequest;
-import com.hiddenswitch.proto3.net.util.AbstractMatchmakingTest;
+import com.hiddenswitch.proto3.net.util.AbstractMatchmakingRuntime;
 import io.vertx.ext.unit.TestContext;
 import io.vertx.ext.unit.junit.VertxUnitRunner;
 import org.junit.Test;
@@ -13,7 +13,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 @RunWith(VertxUnitRunner.class)
-public class MatchmakingTest extends AbstractMatchmakingTest {
+public class MatchmakingTest extends AbstractMatchmakingRuntime {
 	@Test
 	public void testMatchmakeAndJoin(TestContext context) {
 		setLoggingLevel(Level.ERROR);

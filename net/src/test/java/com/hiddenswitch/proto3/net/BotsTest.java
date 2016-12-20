@@ -24,12 +24,12 @@ import net.demilich.metastone.game.cards.CardParseException;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.tests.DebugContext;
 import net.demilich.metastone.tests.TestBase;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import static net.demilich.metastone.game.GameContext.PLAYER_1;
@@ -38,7 +38,7 @@ import static net.demilich.metastone.game.GameContext.PLAYER_1;
  * Created by bberman on 12/7/16.
  */
 @RunWith(VertxUnitRunner.class)
-public class BotsTest extends ServiceTestBase<BotsImpl> {
+public class BotsTest extends ServiceRuntime<BotsImpl> {
 	@Test
 	public void testMulligan() throws Exception {
 		setLoggingLevel(Level.ERROR);
@@ -74,6 +74,7 @@ public class BotsTest extends ServiceTestBase<BotsImpl> {
 	}
 
 	@Test
+	@Ignore
 	public void testBroker(TestContext context) throws CardParseException, IOException, URISyntaxException {
 		setLoggingLevel(Level.ERROR);
 		final Async async = context.async();

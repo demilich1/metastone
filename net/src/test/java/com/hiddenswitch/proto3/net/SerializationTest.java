@@ -25,6 +25,7 @@ import net.demilich.metastone.game.targeting.TargetSelection;
 import net.demilich.metastone.tests.TestBase;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
 
@@ -104,6 +105,7 @@ public class SerializationTest extends TestBase {
 	}
 
 	@Test
+	@Ignore
 	public void testAllGameActions() {
 		SpellCard fireball = (SpellCard) CardCatalogue.getCardById("spell_fireball");
 		MinionCard elven_archer = (MinionCard) CardCatalogue.getCardById("minion_elven_archer");
