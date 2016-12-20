@@ -121,8 +121,6 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 				clone.getEnvironment().put(key, getEnvironment().get(key));
 			}
 		}
-
-		clone.getLogic().setLoggingEnabled(false);
 		return clone;
 	}
 
@@ -508,24 +506,31 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 
 	public Card resolveCardReference(CardReference cardReference) {
 		Player player = getPlayer(cardReference.getPlayerId());
+		Card card = null;
 		if (getPendingCard() != null && getPendingCard().getCardReference().equals(cardReference)) {
-			return getPendingCard();
+			card = getPendingCard();
+		} else {
+			switch (cardReference.getLocation()) {
+				case DECK:
+					card = findCardinCollection(player.getDeck(), cardReference.getCardId());
+					break;
+				case HAND:
+					card = findCardinCollection(player.getHand(), cardReference.getCardId());
+					break;
+				case PENDING:
+					card = getPendingCard();
+					break;
+				case HERO_POWER:
+					card = player.getHero().getHeroPower();
+				default:
+					break;
+			}
 		}
-		switch (cardReference.getLocation()) {
-			case DECK:
-				return findCardinCollection(player.getDeck(), cardReference.getCardId());
-			case HAND:
-				return findCardinCollection(player.getHand(), cardReference.getCardId());
-			case PENDING:
-				return getPendingCard();
-			case HERO_POWER:
-				return player.getHero().getHeroPower();
-			default:
-				break;
-
+		if (card == null) {
+			throw new NullPointerException("Could not resolve cardReference " + cardReference.toString());
+		} else {
+			return card;
 		}
-		logger.error("Could not resolve cardReference {}", cardReference);
-		return null;
 	}
 
 	public Entity resolveSingleTarget(EntityReference targetKey) {

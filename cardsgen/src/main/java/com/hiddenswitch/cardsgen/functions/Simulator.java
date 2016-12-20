@@ -1,5 +1,6 @@
 package com.hiddenswitch.cardsgen.functions;
 
+import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -31,7 +32,7 @@ public class Simulator implements Function<GameConfig, SimulationResult> {
 			Player player1 = new Player(playerConfig1);
 			Player player2 = new Player(playerConfig2);
 			final GameLogic logic = new GameLogic();
-			logic.setLoggingEnabled(false);
+			logic.setLoggingEnabled(BuildConfig.DEV_BUILD);
 			GameContext newGame = new GameContext(player1, player2, logic, deckFormat);
 			try {
 				newGame.play();

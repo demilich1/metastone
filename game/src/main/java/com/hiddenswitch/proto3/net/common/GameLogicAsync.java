@@ -89,7 +89,8 @@ public class GameLogicAsync extends GameLogic {
 
 			NetworkBehaviour networkBehaviour = (NetworkBehaviour) player.getBehaviour();
 			networkBehaviour.requestActionAsync((ServerGameContext) context, player, battlecryActions, action -> {
-				performBattlecryAction(playerId, actor, player, action);
+				BattlecryAction battlecryAction = (BattlecryAction)action;
+				performBattlecryAction(playerId, actor, player, battlecryAction);
 				logger.debug("AsyncDebug {} successfully called resolveBattlecryAsync", this.context);
 				if (result != null) {
 					result.handle(NullResult.SUCESSS);

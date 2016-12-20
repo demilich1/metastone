@@ -26,15 +26,6 @@
 					"mana": 1,
 					"spells": [
 						{
-							"class": "BuffSpell",
-							"name": "Goldthorn",
-							"description": "Give your minions +2 Health.",
-							"targetSelection": "NONE",
-							"cardDescType": "SPELL",
-							"target": "FRIENDLY_MINIONS",
-							"hpBonus": 2
-						},
-						{
 							"class": "DamageSpell",
 							"name": "Felbloom",
 							"description": "Deal 2 damage to all minions.",
@@ -76,6 +67,15 @@
 							"targetSelection": "NONE",
 							"cardDescType": "SPELL",
 							"card": "token_lesser_demon"
+						},
+						{
+							"class": "BuffSpell",
+							"name": "Goldthorn",
+							"description": "Give your minions +2 Health.",
+							"targetSelection": "NONE",
+							"cardDescType": "SPELL",
+							"target": "FRIENDLY_MINIONS",
+							"hpBonus": 2
 						},
 						{
 							"class": "BuffHeroSpell",
@@ -127,15 +127,6 @@
 							"randomTarget": true
 						},
 						{
-							"class": "BuffSpell",
-							"name": "Goldthorn",
-							"description": "Give your minions +4 Health.",
-							"targetSelection": "NONE",
-							"cardDescType": "SPELL",
-							"target": "FRIENDLY_MINIONS",
-							"hpBonus": 4
-						},
-						{
 							"class": "DamageSpell",
 							"name": "Felbloom",
 							"description": "Deal 4 damage to all minions.",
@@ -180,6 +171,15 @@
 							"targetSelection": "NONE",
 							"cardDescType": "SPELL",
 							"card": "token_greater_demon"
+						},
+						{
+							"class": "BuffSpell",
+							"name": "Goldthorn",
+							"description": "Give your minions +4 Health.",
+							"targetSelection": "NONE",
+							"cardDescType": "SPELL",
+							"target": "FRIENDLY_MINIONS",
+							"hpBonus": 4
 						},
 						{
 							"class": "BuffHeroSpell",
@@ -231,15 +231,6 @@
 							"card": "token_sheep"
 						},
 						{
-							"class": "BuffSpell",
-							"name": "Goldthorn",
-							"description": "Give your minions +6 Health.",
-							"targetSelection": "NONE",
-							"cardDescType": "SPELL",
-							"target": "FRIENDLY_MINIONS",
-							"hpBonus": 6
-						},
-						{
 							"class": "DamageSpell",
 							"name": "Felbloom",
 							"description": "Deal 6 damage to all minions.",
@@ -284,6 +275,15 @@
 							"targetSelection": "NONE",
 							"cardDescType": "SPELL",
 							"card": "token_superior_demon"
+						},
+						{
+							"class": "BuffSpell",
+							"name": "Goldthorn",
+							"description": "Give your minions +6 Health.",
+							"targetSelection": "NONE",
+							"cardDescType": "SPELL",
+							"target": "FRIENDLY_MINIONS",
+							"hpBonus": 6
 						},
 						{
 							"class": "BuffHeroSpell",

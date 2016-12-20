@@ -113,7 +113,7 @@ public class TargetLogic implements Serializable {
 		logger.error("Id " + targetId + " not found!");
 		logger.error(context.toString());
 		logger.error(context.getEnvironment().toString());
-		throw new RuntimeException("Target not found exception: " + targetKey);
+		throw new NullPointerException("Target not found exception: " + targetKey);
 	}
 
 	private Entity findInCards(Player player, int targetId) {
