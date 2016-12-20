@@ -3,6 +3,7 @@ package net.demilich.metastone.game;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import net.demilich.metastone.game.behaviour.IBehaviour;
 import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
@@ -43,12 +44,11 @@ public class Player extends Entity {
 		this.deckName = otherPlayer.getDeckName();
 		this.setHero(otherPlayer.getHero().clone());
 		this.deck = otherPlayer.getDeck().clone();
-		for (Minion minion : otherPlayer.getMinions()) {
-			minions.add(minion.clone());
-		}
-		this.hand.addAll(otherPlayer.hand);
-		this.graveyard.addAll(otherPlayer.graveyard);
-		this.setAsideZone.addAll(otherPlayer.setAsideZone);
+		this.attributes.putAll(otherPlayer.getAttributes());
+		this.hand.addAll(otherPlayer.getHand().clone());
+		this.minions.addAll(otherPlayer.getMinions().stream().map(Minion::clone).collect(Collectors.toList()));
+		this.graveyard.addAll(otherPlayer.getGraveyard().stream().map(Entity::clone).collect(Collectors.toList()));
+		this.setAsideZone.addAll(otherPlayer.getSetAsideZone().stream().map(Entity::clone).collect(Collectors.toList()));
 		this.secrets.addAll(otherPlayer.secrets);
 		this.setId(otherPlayer.getId());
 		this.mana = otherPlayer.mana;
