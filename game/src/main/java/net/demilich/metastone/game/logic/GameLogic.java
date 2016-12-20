@@ -4,7 +4,6 @@ import co.paralleluniverse.fibers.Suspendable;
 import com.google.gson.annotations.Expose;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
-import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.game.*;
 import net.demilich.metastone.game.actions.*;
 import net.demilich.metastone.game.cards.*;
@@ -74,7 +73,7 @@ public class GameLogic implements Cloneable, Serializable {
 
 	// DEBUG
 	private final int MAX_HISTORY_ENTRIES = 100;
-	private Queue<String> debugHistory = new ArrayDeque<>();
+	private ArrayDeque<String> debugHistory = new ArrayDeque<>();
 
 	public GameLogic() {
 		idFactory = new IdFactory();
@@ -85,7 +84,10 @@ public class GameLogic implements Cloneable, Serializable {
 	}
 
 	public void addGameEventListener(Player player, IGameEventListener gameEventListener, Entity target) {
-		debugHistory.add("Player " + player.getId() + " has set event listener " + gameEventListener.getClass().getName() + " from entity " + target.getName() + "[Reference ID: " + target.getId() + "]");
+		if (isLoggingEnabled()) {
+			debugHistory.add("Player " + player.getId() + " has set event listener " + gameEventListener.getClass().getName() + " from entity " + target.getName() + "[Reference ID: " + target.getId() + "]");
+		}
+
 		gameEventListener.setHost(target);
 		if (!gameEventListener.hasPersistentOwner() || gameEventListener.getOwner() == -1) {
 			gameEventListener.setOwner(player.getId());
@@ -408,6 +410,10 @@ public class GameLogic implements Cloneable, Serializable {
 	@Override
 	public GameLogic clone() {
 		GameLogic clone = new GameLogic(getIdFactory().clone());
+		clone.setLoggingEnabled(this.isLoggingEnabled());
+		if (isLoggingEnabled()) {
+			clone.debugHistory = this.debugHistory.clone();
+		}
 		return clone;
 	}
 
@@ -1136,7 +1142,7 @@ public class GameLogic implements Cloneable, Serializable {
 	}
 
 	private void logToDebugHistory(String message, Object... params) {
-		if (!BuildConfig.DEV_BUILD) {
+		if (!isLoggingEnabled()) {
 			return;
 		}
 		if (debugHistory.size() == MAX_HISTORY_ENTRIES) {
@@ -1263,7 +1269,7 @@ public class GameLogic implements Cloneable, Serializable {
 
 	@Suspendable
 	public void performGameAction(int playerId, GameAction action) {
-		if (BuildConfig.DEV_BUILD) {
+		if (isLoggingEnabled()) {
 			debugHistory.add(action.toString());
 		}
 
