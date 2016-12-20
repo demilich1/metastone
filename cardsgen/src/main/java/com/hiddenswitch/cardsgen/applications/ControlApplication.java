@@ -18,6 +18,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 import static com.hiddenswitch.cardsgen.applications.Common.defaultsTo;
+import static com.hiddenswitch.cardsgen.applications.Common.setLogLevelToError;
 
 /**
  * Calculates control statistics for all the decks.
@@ -31,6 +32,7 @@ public class ControlApplication {
 
 	public static void main(String[] args) throws ParseException, CardParseException, IOException, URISyntaxException {
 		Logger logger = Logger.getLogger(ControlApplication.class);
+		setLogLevelToError();
 
 		String decksFile = null;
 		int gamesPerBatch = 1;

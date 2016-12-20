@@ -8,29 +8,12 @@
 	"description": "Destroy 2 random enemy minions. Discard 2 random cards.",
 	"targetSelection": "NONE",
 	"spell": {
-		"class": "MetaSpell",
-		"spells": [
-			{
-				"class": "DestroySpell",
-				"target": "ENEMY_MINIONS",
-				"randomTarget": true
-			},
-			{
-				"class": "DestroySpell",
-				"target": "ENEMY_MINIONS",
-				"randomTarget": true,
-				"filter": {
-					"class": "AttributeFilter",
-					"attribute": "DESTROYED",
-					"operation": "HAS",
-					"invert": true
-				}
-			},
-			{
-				"class": "DiscardSpell",
-				"value": 2
-			}
-		]
+		"class": "MultiTargetSpell",
+		"target": "ENEMY_MINIONS",
+		"value": 2,
+		"spell": {
+			"class": "DestroySpell"
+		}
 	},
 	"condition": {
 		"class": "MinionCountCondition",

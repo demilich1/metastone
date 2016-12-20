@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.behaviour.Behaviour;
@@ -54,10 +55,10 @@ public class Player extends Entity implements Serializable {
 	protected String deckName;
 
 	protected CardCollection deck;
-	private final CardCollection hand = new CardCollection();
-	private final List<Entity> setAsideZone = new ArrayList<>();
-	private final List<Entity> graveyard = new ArrayList<>();
-	private final List<Minion> minions = new ArrayList<>();
+	private final CardCollection hand;
+	private final ArrayList<Entity> setAsideZone = new ArrayList<>();
+	private final ArrayList<Entity> graveyard = new ArrayList<>();
+	private final ArrayList<Minion> minions = new ArrayList<>();
 	private final HashSet<String> secrets = new HashSet<>();
 
 	private final GameStatistics statistics = new GameStatistics();
@@ -75,12 +76,10 @@ public class Player extends Entity implements Serializable {
 		this.deckName = otherPlayer.getDeckName();
 		this.setHero(otherPlayer.getHero().clone());
 		this.deck = otherPlayer.getDeck().clone();
-		for (Minion minion : otherPlayer.getMinions()) {
-			minions.add(minion.clone());
-		}
-		this.hand.addAll(otherPlayer.hand);
-		this.graveyard.addAll(otherPlayer.graveyard);
-		this.setAsideZone.addAll(otherPlayer.setAsideZone);
+		this.hand = otherPlayer.getHand().clone();
+		this.minions.addAll(otherPlayer.getMinions().stream().map(Minion::clone).collect(Collectors.toList()));
+		this.graveyard.addAll(otherPlayer.getGraveyard().stream().map(Entity::clone).collect(Collectors.toList()));
+		this.setAsideZone.addAll(otherPlayer.getSetAsideZone().stream().map(Entity::clone).collect(Collectors.toList()));
 		this.secrets.addAll(otherPlayer.secrets);
 		this.setId(otherPlayer.getId());
 		this.mana = otherPlayer.mana;
@@ -89,18 +88,15 @@ public class Player extends Entity implements Serializable {
 		this.behaviour = otherPlayer.behaviour;
 		this.getStatistics().merge(otherPlayer.getStatistics());
 	}
-
-	static {
-
-	}
-
 	/**
 	 * Use build from config to actually build the class.
 	 */
 	protected Player() {
+		this.hand = new CardCollection();
 	}
 
 	public Player(PlayerConfig config) {
+		this();
 		buildFromConfig(config);
 	}
 
