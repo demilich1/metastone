@@ -74,9 +74,6 @@ public class GameLogic implements Cloneable, Serializable {
 
 	// DEBUG
 	private final int MAX_HISTORY_ENTRIES = 100;
-	private Queue<String> debugHistory = new LinkedList<>();
-
-	@Expose(serialize = false, deserialize = false)
 	private Queue<String> debugHistory = new ArrayDeque<>();
 
 	public GameLogic() {
@@ -1565,7 +1562,7 @@ public class GameLogic implements Cloneable, Serializable {
 				return;
 			}
 
-			GameAction targetedBattlecry = player.getBehaviour().requestAction(context, player, battlecryActions);
+			BattlecryAction targetedBattlecry = (BattlecryAction)player.getBehaviour().requestAction(context, player, battlecryActions);
 			performBattlecryAction(playerId, actor, player, targetedBattlecry);
 		} else {
 			performBattlecryAction(playerId, actor, player, battlecry);
@@ -1588,11 +1585,11 @@ public class GameLogic implements Cloneable, Serializable {
 	}
 
 	@Suspendable
-	protected void performBattlecryAction(int playerId, Actor actor, Player player, GameAction battlecryAction) {
+	protected void performBattlecryAction(int playerId, Actor actor, Player player, BattlecryAction battlecryAction) {
 		if (hasAttribute(player, Attribute.DOUBLE_BATTLECRIES) && actor.getSourceCard().hasAttribute(Attribute.BATTLECRY)) {
 			// You need DOUBLE_BATTLECRIES before your battlecry action, not after.
 			performGameAction(playerId, battlecryAction);
-			if (!battlecry.canBeExecuted(context, player)) {
+			if (!battlecryAction.canBeExecuted(context, player)) {
 				return;
 			}
 			performGameAction(playerId, battlecryAction);
