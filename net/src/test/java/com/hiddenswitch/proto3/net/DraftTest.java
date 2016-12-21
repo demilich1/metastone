@@ -11,7 +11,7 @@ import org.junit.Test;
  * Created by bberman on 12/16/16.
  */
 public class DraftTest extends AbstractMatchmakingRuntime {
-	@Test
+	@Test(timeout = 80000L)
 	public void testDraftAndJoin(TestContext context) {
 		setLoggingLevel(Level.ERROR);
 		wrapSync(context, this::createTwoPlayersAndMatchmake);

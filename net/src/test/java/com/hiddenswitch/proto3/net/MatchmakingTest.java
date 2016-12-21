@@ -14,13 +14,13 @@ import static org.junit.Assert.assertNull;
 
 @RunWith(VertxUnitRunner.class)
 public class MatchmakingTest extends AbstractMatchmakingRuntime {
-	@Test
+	@Test(timeout = 80000L)
 	public void testMatchmakeAndJoin(TestContext context) {
 		setLoggingLevel(Level.ERROR);
 		wrapSync(context, this::createTwoPlayersAndMatchmake);
 	}
 
-	@Test
+	@Test(timeout = 80000L)
 	public void testMatchmakeSamePlayersTwice(TestContext context) {
 		setLoggingLevel(Level.ERROR);
 		wrapSync(context, () -> {

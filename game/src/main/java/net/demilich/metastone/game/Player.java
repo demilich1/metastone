@@ -73,6 +73,7 @@ public class Player extends Entity implements Serializable {
 
 	private Player(Player otherPlayer) {
 		this.setName(otherPlayer.getName());
+		this.attributes.putAll(otherPlayer.getAttributes());
 		this.deckName = otherPlayer.getDeckName();
 		this.setHero(otherPlayer.getHero().clone());
 		this.deck = otherPlayer.getDeck().clone();

@@ -74,7 +74,7 @@ public class GamesTest extends ServiceRuntime<GamesImpl> {
 		});
 	}
 
-	@Test(timeout = 20 * 1000L)
+	@Test(timeout = 20000L)
 	public void testTerminatingSession(TestContext context) throws CardParseException, IOException, URISyntaxException {
 		setLoggingLevel(Level.ERROR);
 		wrapSync(context, () -> {
@@ -105,7 +105,7 @@ public class GamesTest extends ServiceRuntime<GamesImpl> {
 		});
 	}
 
-	@Test(timeout = 40 * 1000L)
+	@Test(timeout = 40000L)
 	public void testTimeoutSession(TestContext context) {
 		setLoggingLevel(Level.ERROR);
 		wrapSync(context, () -> {
@@ -130,7 +130,7 @@ public class GamesTest extends ServiceRuntime<GamesImpl> {
 		});
 	}
 
-	@Test(timeout = 40 * 1000L)
+	@Test(timeout = 40000L)
 	public void testRemoveSessionAfterNormalGameOver(TestContext context) {
 		setLoggingLevel(Level.ERROR);
 		wrapSync(context, () -> {
@@ -146,7 +146,14 @@ public class GamesTest extends ServiceRuntime<GamesImpl> {
 		});
 	}
 
-	@Test(timeout = 5 * 60 * 1000L)
+	@Test(timeout = 80000L)
+	public void testTwoSimultaneousSessions(TestContext context) throws Exception {
+		wrapSync(context, () -> {
+			simultaneousSessions(2);
+		});
+	}
+
+	@Test(timeout = 45 * 60 * 1000L)
 	public void testTenSimultaneousSessionsTwice(TestContext context) throws Exception {
 		setLoggingLevel(Level.ERROR);
 		wrapSync(context, () -> {
@@ -157,7 +164,7 @@ public class GamesTest extends ServiceRuntime<GamesImpl> {
 		});
 	}
 
-	@Test
+	@Test(timeout = 80000L)
 	public void testReconnects(TestContext context) throws Exception {
 		setLoggingLevel(Level.ERROR);
 		wrapSync(context, () -> {

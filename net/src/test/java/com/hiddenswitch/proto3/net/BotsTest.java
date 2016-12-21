@@ -51,6 +51,7 @@ public class BotsTest extends ServiceRuntime<BotsImpl> {
 	}
 
 	@Test
+	@Ignore
 	public void testRequestAction() throws Exception {
 		setLoggingLevel(Level.ERROR);
 		DebugContext context = TestBase.createContext(HeroClass.HUNTER, HeroClass.PALADIN);
