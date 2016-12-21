@@ -23,7 +23,7 @@ import static net.demilich.metastone.game.GameContext.PLAYER_2;
 /**
  * Created by bberman on 12/16/16.
  */
-public class AbstractMatchmakingTest extends ServiceTestBase<MatchmakingImpl> {
+public abstract class AbstractMatchmakingRuntime extends ServiceRuntime<MatchmakingImpl> {
 	protected GamesImpl gameSessions;
 	private Logger logger = LoggerFactory.getLogger(MatchmakingTest.class);
 	private BotsImpl bots;

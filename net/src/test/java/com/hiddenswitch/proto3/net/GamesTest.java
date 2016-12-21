@@ -7,20 +7,17 @@ import co.paralleluniverse.strands.Strand;
 import com.hiddenswitch.proto3.net.impl.GamesImpl;
 import com.hiddenswitch.proto3.net.models.EndGameSessionRequest;
 import com.hiddenswitch.proto3.net.util.Result;
-import com.hiddenswitch.proto3.net.util.ServiceTestBase;
+import com.hiddenswitch.proto3.net.util.ServiceRuntime;
 import com.hiddenswitch.proto3.net.util.TwoClients;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
-import io.vertx.ext.unit.Async;
 import io.vertx.ext.unit.TestContext;
 import io.vertx.ext.unit.junit.VertxUnitRunner;
-import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardParseException;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -32,18 +29,12 @@ import java.util.List;
 import static net.demilich.metastone.game.GameContext.PLAYER_2;
 
 @RunWith(VertxUnitRunner.class)
-public class GamesTest extends ServiceTestBase<GamesImpl> {
+public class GamesTest extends ServiceRuntime<GamesImpl> {
 	private Logger logger = LoggerFactory.getLogger(GamesTest.class);
-
-	@Before
-	public void setLoggingLevel() {
-		ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) org.slf4j.LoggerFactory
-				.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME);
-		root.setLevel(Level.INFO);
-	}
 
 	@Test
 	public void testCreateGameSession(TestContext context) throws CardParseException, IOException, URISyntaxException {
+		setLoggingLevel(Level.ERROR);
 		wrapSync(context, this::getAndTestTwoClients);
 	}
 
@@ -52,7 +43,7 @@ public class GamesTest extends ServiceTestBase<GamesImpl> {
 		try {
 			twoClients = new TwoClients().invoke(this.service);
 		} catch (IOException | URISyntaxException | CardParseException e) {
-			ServiceTestBase.getContext().fail(e.getMessage());
+			ServiceRuntime.getContext().fail(e.getMessage());
 		}
 		try {
 			twoClients.play();
@@ -76,6 +67,7 @@ public class GamesTest extends ServiceTestBase<GamesImpl> {
 
 	@Test
 	public void testTwoGameSessionsOneAfterAnother(TestContext context) throws CardParseException, IOException, URISyntaxException {
+		setLoggingLevel(Level.ERROR);
 		wrapSync(context, () -> {
 			getAndTestTwoClients();
 			getAndTestTwoClients();
@@ -84,6 +76,7 @@ public class GamesTest extends ServiceTestBase<GamesImpl> {
 
 	@Test(timeout = 20 * 1000L)
 	public void testTerminatingSession(TestContext context) throws CardParseException, IOException, URISyntaxException {
+		setLoggingLevel(Level.ERROR);
 		wrapSync(context, () -> {
 			try {
 				TwoClients clients1 = new TwoClients().invoke(this.service);
@@ -114,9 +107,10 @@ public class GamesTest extends ServiceTestBase<GamesImpl> {
 
 	@Test(timeout = 40 * 1000L)
 	public void testTimeoutSession(TestContext context) {
+		setLoggingLevel(Level.ERROR);
 		wrapSync(context, () -> {
 			try {
-				TwoClients clients1 = new TwoClients().invoke(this.service, 5000L);
+				TwoClients clients1 = new TwoClients().invoke(this.service, 10000L);
 				clients1.play();
 				while (clients1.getServerGameContext() == null
 						|| clients1.getServerGameContext().getTurn() < 3) {
@@ -125,7 +119,7 @@ public class GamesTest extends ServiceTestBase<GamesImpl> {
 				String gameId = clients1.getGameId();
 				clients1.disconnect(0);
 				// This is greater than the timeout
-				Strand.sleep(6000L);
+				Strand.sleep(14000L);
 				// From player 2's point of view, the game should be decided because it's over
 				getContext().assertNull(service.getGameSession(gameId));
 				getContext().assertTrue(clients1.getPlayerContext2().gameDecided());
@@ -138,6 +132,7 @@ public class GamesTest extends ServiceTestBase<GamesImpl> {
 
 	@Test(timeout = 40 * 1000L)
 	public void testRemoveSessionAfterNormalGameOver(TestContext context) {
+		setLoggingLevel(Level.ERROR);
 		wrapSync(context, () -> {
 			try {
 				TwoClients twoClients = getAndTestTwoClients();
@@ -151,15 +146,9 @@ public class GamesTest extends ServiceTestBase<GamesImpl> {
 		});
 	}
 
-	@Test
-	public void testTwoSimultaneousSessions(TestContext context) throws Exception {
-		wrapSync(context, () -> {
-			simultaneousSessions(2);
-		});
-	}
-
-	@Test(timeout = 45 * 60 * 1000L)
-	public void testTenSessionsTenTimes(TestContext context) throws Exception {
+	@Test(timeout = 5 * 60 * 1000L)
+	public void testTenSimultaneousSessionsTwice(TestContext context) throws Exception {
+		setLoggingLevel(Level.ERROR);
 		wrapSync(context, () -> {
 			for (int i = 0; i < 2; i++) {
 				simultaneousSessions(10);
@@ -170,6 +159,7 @@ public class GamesTest extends ServiceTestBase<GamesImpl> {
 
 	@Test
 	public void testReconnects(TestContext context) throws Exception {
+		setLoggingLevel(Level.ERROR);
 		wrapSync(context, () -> {
 			TwoClients twoClients = null;
 			try {
@@ -213,7 +203,7 @@ public class GamesTest extends ServiceTestBase<GamesImpl> {
 			try {
 				clients.add(new TwoClients().invoke(this.service));
 			} catch (IOException | URISyntaxException | CardParseException e) {
-				ServiceTestBase.getContext().fail(e.getMessage());
+				ServiceRuntime.getContext().fail(e.getMessage());
 			}
 		}
 
@@ -247,6 +237,7 @@ public class GamesTest extends ServiceTestBase<GamesImpl> {
 
 	@Override
 	public void deployServices(Vertx vertx, Handler<AsyncResult<GamesImpl>> done) {
+		setLoggingLevel(Level.ERROR);
 		GamesImpl instance = new GamesImpl();
 		vertx.deployVerticle(instance, then -> {
 			done.handle(new Result<>(instance));

@@ -87,21 +87,21 @@ tasks.withType(JavaExec) {
 }
 
 test {
+    dependsOn copyNativeDeps
+
+    doFirst {
+        systemProperty "sqlite4java.library.path", 'build/libs'
+    }
+
     jvmArgs "-javaagent:${configurations.quasar.iterator().next()}"
     useJUnit()
-    testLogging.showStandardStreams = true
     testLogging {
-        events "standardError"
+        events "failed"
     }
 }
 
 run.dependsOn copyNativeDeps
 run.doFirst {
-    systemProperty "sqlite4java.library.path", 'build/libs'
-}
-
-test.dependsOn copyNativeDeps
-test.doFirst {
     systemProperty "sqlite4java.library.path", 'build/libs'
 }
 

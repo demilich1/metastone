@@ -4,6 +4,8 @@ import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.TurnState;
+import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
 import net.demilich.metastone.game.spells.trigger.TriggerManager;
 import net.demilich.metastone.game.targeting.IdFactory;
@@ -19,6 +21,7 @@ public class GameState implements Serializable {
 
 	public final Player player1;
 	public final Player player2;
+	public final CardCollection tempCards;
 	public final HashMap<Environment, Object> environment;
 	public final List<CardCostModifier> cardCostModifiers;
 	public final TriggerManager triggerManager;
@@ -31,13 +34,15 @@ public class GameState implements Serializable {
 	}
 
 	public GameState(GameContext fromContext, TurnState turnState) {
+		GameContext clone = fromContext.clone();
 		this.timestamp = System.nanoTime();
-		player1 = fromContext.getPlayer1();
-		player2 = fromContext.getPlayer2();
-		environment = SerializationUtils.clone(fromContext.getEnvironment());
-		currentId = fromContext.getLogic().getIdFactory().getInternalId();
-		triggerManager = SerializationUtils.clone(fromContext.getTriggerManager());
-		cardCostModifiers = SerializationUtils.clone(new ArrayList<>(fromContext.getCardCostModifiers()));
+		player1 = clone.getPlayer1();
+		player2 = clone.getPlayer2();
+		tempCards = clone.getTempCards();
+		environment = clone.getEnvironment();
+		currentId = clone.getLogic().getIdFactory().getInternalId();
+		triggerManager = clone.getTriggerManager();
+		cardCostModifiers = clone.getCardCostModifiers();
 		this.turnState = turnState;
 	}
 

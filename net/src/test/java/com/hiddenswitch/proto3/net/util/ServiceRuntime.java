@@ -1,7 +1,6 @@
 package com.hiddenswitch.proto3.net.util;
 
-import co.paralleluniverse.fibers.Fiber;
-import co.paralleluniverse.fibers.FiberScheduler;
+import ch.qos.logback.classic.Level;
 import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.fibers.Suspendable;
 import co.paralleluniverse.strands.SuspendableRunnable;
@@ -9,7 +8,6 @@ import com.hiddenswitch.proto3.net.Service;
 import io.vertx.core.*;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
-import io.vertx.ext.sync.Sync;
 import io.vertx.ext.sync.SyncVerticle;
 import io.vertx.ext.unit.Async;
 import io.vertx.ext.unit.TestContext;
@@ -23,13 +21,13 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 @RunWith(VertxUnitRunner.class)
-public abstract class ServiceTestBase<T extends Service<T>> {
+public abstract class ServiceRuntime<T extends Service<T>> {
 	public static TestContext getContext() {
 		return new Assert();
 	}
 
 	private static TestContext wrappedContext;
-	Logger logger = LoggerFactory.getLogger(ServiceTestBase.class);
+	Logger logger = LoggerFactory.getLogger(ServiceRuntime.class);
 	protected Vertx vertx;
 	protected T service;
 
@@ -41,6 +39,12 @@ public abstract class ServiceTestBase<T extends Service<T>> {
 			context.fail(e);
 		}
 		context.async().complete();
+	}
+
+	public void setLoggingLevel(Level level) {
+		ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) org.slf4j.LoggerFactory
+				.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME);
+		root.setLevel(level);
 	}
 
 	public abstract void deployServices(Vertx vertx, Handler<AsyncResult<T>> done);
@@ -76,14 +80,14 @@ public abstract class ServiceTestBase<T extends Service<T>> {
 
 	@Suspendable
 	protected void wrapSync(TestContext context, SuspendableRunnable code) {
-		ServiceTestBase.wrappedContext = context;
+		ServiceRuntime.wrappedContext = context;
 		final Async async = context.async();
 
 		// Create a verticle on the fly to run sync stuff in, then tear down the verticle
 		TestSyncVerticle testVerticle = new TestSyncVerticle(code);
 		vertx.deployVerticle(testVerticle, getContext().asyncAssertSuccess(fut -> {
 			vertx.undeploy(fut, then -> {
-				ServiceTestBase.wrappedContext = null;
+				ServiceRuntime.wrappedContext = null;
 				async.complete();
 			});
 		}));

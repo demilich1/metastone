@@ -73,6 +73,7 @@ public class CloningTest extends TestBase {
 
 			GameContext original = new GameContext(player1, player2, new GameLogic(), deckFormat);
 			TestMinionCard minionCard = new TestMinionCard(3, 3);
+			original.getTempCards().add(minionCard);
 			original.getLogic().receiveCard(player1.getId(), minionCard);
 			original.getLogic().performGameAction(player1.getId(), minionCard.play());
 			Actor testMinion = minionCard.getMinion();
