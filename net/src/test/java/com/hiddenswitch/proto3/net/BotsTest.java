@@ -92,6 +92,7 @@ public class BotsTest extends ServiceRuntime<BotsImpl> {
 	}
 
 	@Test
+	@Ignore
 	public void testPlaysGameAgainstAI(TestContext context) throws CardParseException, IOException, URISyntaxException, SuspendExecution {
 		setLoggingLevel(Level.ERROR);
 		final Async async = context.async();

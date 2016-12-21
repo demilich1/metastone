@@ -30,6 +30,7 @@ import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.targeting.EntityReference;
+import org.testng.annotations.BeforeMethod;
 
 public class TestBase {
 
@@ -70,19 +71,11 @@ public class TestBase {
 
 	}
 
-	static {
+	@BeforeMethod
+	public void loadCards() throws Exception {
 		Logger root = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
 		root.setLevel(Level.DEBUG);
-
-		try {
-			CardCatalogue.loadCardsFromPackage();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (CardParseException e) {
-			System.err.println(e.getMessage());
-		}
+		CardCatalogue.loadCardsFromPackage();
 	}
 
 	protected static void attack(GameContext context, Player player, Entity attacker, Entity target) {
