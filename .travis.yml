@@ -8,6 +8,7 @@ cache:
     - $HOME/.gradle/wrapper/
 jdk:
   - oraclejdk8
+dist: trusty
 sudo: false
 addons:
   apt:
@@ -18,4 +19,4 @@ branches:
   - master
 env:
   global:
-    JAVA_OPTS=-Xmx2g
+    JAVA_OPTS=-Xmx128m
