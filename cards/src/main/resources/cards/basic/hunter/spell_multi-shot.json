@@ -8,9 +8,13 @@
 	"description": "Deal 3 damage to two random enemy minions.",
 	"targetSelection": "NONE",
 	"spell": {
-		"class": "MultiTargetDamageSpell",
-		"value": 3,
-		"howMany": 2
+		"class": "MultiTargetSpell",
+		"target": "ENEMY_MINIONS",
+		"value": 2,
+		"spell": {
+			"class": "DamageSpell",
+			"value": 3
+		}
 	},
 	"condition": {
 		"class": "MinionCountCondition",

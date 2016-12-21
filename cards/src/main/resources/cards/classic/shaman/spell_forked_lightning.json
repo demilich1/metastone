@@ -8,9 +8,13 @@
 	"description": "Deal 2 damage to 2 random enemy minions. Overload: (2)",
 	"targetSelection": "NONE",
 	"spell": {
-		"class": "MultiTargetDamageSpell",
+		"class": "MultiTargetSpell",
+		"target": "ENEMY_MINIONS",
 		"value": 2,
-		"howMany": 2
+		"spell": {
+			"class": "DamageSpell",
+			"value": 2
+		}
 	},
 	"condition": {
 		"class": "MinionCountCondition",

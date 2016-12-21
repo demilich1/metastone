@@ -23,6 +23,7 @@ import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardType;
+import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.statistics.GameStatistics;
 import net.demilich.metastone.game.statistics.Statistic;
 
@@ -123,7 +124,7 @@ public class SimulationResultView extends BorderPane {
 	private String getFavouriteCardName(GameStatistics stats, CardType cardType) {
 		List<Card> cards = new ArrayList<Card>();
 		for (String cardId : stats.getCardsPlayed().keySet()) {
-			if (cardId.startsWith("temp_card_name_")) {
+			if (cardId.startsWith(GameLogic.TEMP_CARD_LABEL)) {
 				continue;
 			}
 			Card card = CardCatalogue.getCardById(cardId);

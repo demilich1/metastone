@@ -4,7 +4,7 @@
 	"type": "SPELL",
 	"heroClass": "HUNTER",
 	"rarity": "COMMON",
-	"description": "Give a random Beast in your hand gain +2/+2.",
+	"description": "Give a random Beast in your hand +2/+2.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "BuffSpell",

@@ -107,8 +107,7 @@ public class SpellUtils {
 			return null;
 		}
 		
-		if (context.getLogic().attributeExists(Attribute.ALL_RANDOM_FINAL_DESTINATION) ||
-				context.getLogic().attributeExists(Attribute.ALL_RANDOM_FINAL_DESTINATION)) {
+		if (context.getLogic().attributeExists(Attribute.ALL_RANDOM_YOGG_ONLY_FINAL_DESTINATION)) {
 			return (DiscoverAction) discoverActions.get(context.getLogic().random(discoverActions.size()));
 		} else {
 			return (DiscoverAction) player.getBehaviour().requestAction(context, player, discoverActions);
@@ -125,8 +124,7 @@ public class SpellUtils {
 			discoverActions.add(discover);
 		}
 		
-		if (context.getLogic().attributeExists(Attribute.ALL_RANDOM_FINAL_DESTINATION) ||
-				context.getLogic().attributeExists(Attribute.ALL_RANDOM_FINAL_DESTINATION)) {
+		if (context.getLogic().attributeExists(Attribute.ALL_RANDOM_YOGG_ONLY_FINAL_DESTINATION)) {
 			return (DiscoverAction) discoverActions.get(context.getLogic().random(discoverActions.size()));
 		} else {
 			return (DiscoverAction) player.getBehaviour().requestAction(context, player, discoverActions);
