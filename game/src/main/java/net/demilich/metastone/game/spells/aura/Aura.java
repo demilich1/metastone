@@ -49,10 +49,6 @@ public class Aura extends SpellTrigger {
 	}
 
 	protected boolean affects(GameContext context, Player player, Entity target, List<Entity> resolvedTargets) {
-		if (target.getReference().equals(getHostReference())) {
-			return false;
-		}
-		
 		if (getEntityFilter() != null && !getEntityFilter().matches(context, player, target)) {
 			return false;
 		}
