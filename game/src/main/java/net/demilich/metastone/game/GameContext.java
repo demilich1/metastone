@@ -370,6 +370,10 @@ public class GameContext implements Cloneable, IDisposable {
 		return (Stack<EntityReference>) environment.get(Environment.SUMMON_REFERENCE_STACK);
 	}
 
+	public CardCollection getTempCards() {
+		return tempCards;
+	}
+
 	public int getTotalMinionCount() {
 		int totalMinionCount = 0;
 		for (int i = 0; i < players.length; i++) {
@@ -481,8 +485,8 @@ public class GameContext implements Cloneable, IDisposable {
 		triggerManager.removeTrigger(trigger);
 	}
 
-	public void removeTriggersAssociatedWith(EntityReference entityReference) {
-		triggerManager.removeTriggersAssociatedWith(entityReference);
+	public void removeTriggersAssociatedWith(EntityReference entityReference, boolean removeAuras) {
+		triggerManager.removeTriggersAssociatedWith(entityReference, removeAuras);
 	}
 
 	public Card resolveCardReference(CardReference cardReference) {

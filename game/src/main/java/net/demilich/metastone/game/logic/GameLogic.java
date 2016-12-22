@@ -69,6 +69,7 @@ import net.demilich.metastone.game.events.WeaponEquippedEvent;
 import net.demilich.metastone.game.heroes.powers.HeroPower;
 import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.SpellUtils;
+import net.demilich.metastone.game.spells.aura.Aura;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.SpellFactory;
@@ -557,7 +558,7 @@ public class GameLogic implements Cloneable {
 
 		for (int i = 0; i < targets.length; i++) {
 			Actor target = targets[i];
-			removeSpelltriggers(target);
+			removeSpellTriggers(target, false);
 			Player owner = context.getPlayer(target.getOwner());
 			context.getPlayer(target.getOwner()).getGraveyard().add(target);
 
@@ -593,6 +594,10 @@ public class GameLogic implements Cloneable {
 			}
 
 			resolveDeathrattles(owner, target, boardPositions[i]);
+		}
+		
+		for (Actor target : targets) {
+			removeSpellTriggers(target, true);
 		}
 
 		context.fireGameEvent(new BoardChangedEvent(context));
@@ -1221,7 +1226,7 @@ public class GameLogic implements Cloneable {
 			applyAttribute(minion, Attribute.SUMMONING_SICKNESS);
 			refreshAttacksPerRound(minion);
 			List<IGameEventListener> triggers = context.getTriggersAssociatedWith(minion.getReference());
-			removeSpelltriggers(minion);
+			removeSpellTriggers(minion);
 			for (IGameEventListener trigger : triggers) {
 				addGameEventListener(player, trigger, minion);
 			}
@@ -1488,7 +1493,7 @@ public class GameLogic implements Cloneable {
 		Player player = context.getPlayer(playerId);
 		log("Card {} has been moved from the HAND to the GRAVEYARD", card);
 		card.setLocation(CardLocation.GRAVEYARD);
-		removeSpelltriggers(card);
+		removeSpellTriggers(card);
 		player.getHand().remove(card);
 		player.getGraveyard().add(card);
 	}
@@ -1497,13 +1502,13 @@ public class GameLogic implements Cloneable {
 		Player player = context.getPlayer(playerID);
 		log("Card {} has been moved from the DECK to the GRAVEYARD", card);
 		card.setLocation(CardLocation.GRAVEYARD);
-		removeSpelltriggers(card);
+		removeSpellTriggers(card);
 		player.getDeck().remove(card);
 		player.getGraveyard().add(card);
 	}
 
 	public void removeMinion(Minion minion, boolean peacefully) {
-		removeSpelltriggers(minion);
+		removeSpellTriggers(minion);
 
 		log("{} was removed", minion);
 
@@ -1529,13 +1534,20 @@ public class GameLogic implements Cloneable {
 		player.getSecrets().clear();
 	}
 
-	private void removeSpelltriggers(Entity entity) {
+	private void removeSpellTriggers(Entity entity) {
+		removeSpellTriggers(entity, true);
+	}
+
+	private void removeSpellTriggers(Entity entity, boolean removeAuras) {
 		EntityReference entityReference = entity.getReference();
 		for (IGameEventListener trigger : context.getTriggersAssociatedWith(entityReference)) {
+			if (!removeAuras && trigger instanceof Aura) {
+				continue;
+			}
 			log("SpellTrigger {} was removed for {}", trigger, entity);
 			trigger.onRemove(context);
 		}
-		context.removeTriggersAssociatedWith(entityReference);
+		context.removeTriggersAssociatedWith(entityReference, removeAuras);
 		for (Iterator<CardCostModifier> iterator = context.getCardCostModifiers().iterator(); iterator.hasNext();) {
 			CardCostModifier cardCostModifier = iterator.next();
 			if (cardCostModifier.getHostReference().equals(entityReference)) {
@@ -1711,7 +1723,7 @@ public class GameLogic implements Cloneable {
 			}
 			removeAttribute(target, attr);
 		}
-		removeSpelltriggers(target);
+		removeSpellTriggers(target);
 
 		int oldMaxHp = target.getMaxHp();
 		target.setMaxHp(target.getAttributeValue(Attribute.BASE_HP));
@@ -1848,7 +1860,7 @@ public class GameLogic implements Cloneable {
 	 */
 	public void transformMinion(Minion minion, Minion newMinion) {
 		// Remove any spell triggers associated with the old minion.
-		removeSpelltriggers(minion);
+		removeSpellTriggers(minion);
 
 		Player owner = context.getPlayer(minion.getOwner());
 		int index = owner.getMinions().indexOf(minion);
@@ -1904,7 +1916,7 @@ public class GameLogic implements Cloneable {
 				owner.getSetAsideZone().add(newMinion);
 				newMinion.setId(idFactory.generateId());
 				newMinion.setOwner(owner.getId());
-				removeSpelltriggers(newMinion);
+				removeSpellTriggers(newMinion);
 				return;
 			}
 		
