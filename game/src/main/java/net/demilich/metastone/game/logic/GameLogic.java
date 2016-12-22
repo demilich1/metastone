@@ -107,7 +107,8 @@ public class GameLogic implements Cloneable {
 	private static final int INFINITE = -1;
 
 	private static boolean hasPlayerLost(Player player) {
-		return player.getHero().getHp() < 1 || player.getHero().hasAttribute(Attribute.DESTROYED);
+		return player.getHero().getHp() < 1 || player.getHero().hasAttribute(Attribute.DESTROYED)
+				|| player.hasAttribute(Attribute.DESTROYED);
 	}
 
 	private final TargetLogic targetLogic = new TargetLogic();
@@ -438,6 +439,10 @@ public class GameLogic implements Cloneable {
 		List<Actor> destroyList = new ArrayList<>();
 		for (Player player : context.getPlayers()) {
 
+			if (player.getHero().isDestroyed() || player.hasAttribute(Attribute.DESTROYED)) {
+				destroyList.add(player.getHero());
+			}
+
 			for (Minion minion : player.getMinions()) {
 				if (minion.isDestroyed()) {
 					destroyList.add(minion);
@@ -456,6 +461,9 @@ public class GameLogic implements Cloneable {
 		Collections.sort(destroyList, (a1, a2) -> Integer.compare(a1.getId(), a2.getId()));
 		// this method performs the actual removal
 		destroy(destroyList.toArray(new Actor[0]));
+		if (context.gameDecided()) {
+			return;
+		}
 		// deathrattles have been resolved, which may lead to other actors being destroyed now, so we need to check again
 		checkForDeadEntities(i + 1);
 	}
@@ -580,6 +588,7 @@ public class GameLogic implements Cloneable {
 			case HERO:
 				log("Hero {} has been destroyed.", target.getName());
 				applyAttribute(target, Attribute.DESTROYED);
+				applyAttribute(context.getPlayer(target.getOwner()), Attribute.DESTROYED);
 				break;
 			case MINION:
 				destroyMinion((Minion) target);
@@ -618,7 +627,7 @@ public class GameLogic implements Cloneable {
 		// resolveDeathrattles(owner, weapon);
 		if (owner.getHero().getWeapon() != null && owner.getHero().getWeapon().getId() == weapon.getId()) {
 			owner.getHero().setWeapon(null);
-		} 
+		}
 		weapon.onUnequip(context, owner);
 		context.fireGameEvent(new WeaponDestroyedEvent(context, weapon));
 	}

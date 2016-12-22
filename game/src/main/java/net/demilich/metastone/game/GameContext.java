@@ -459,7 +459,7 @@ public class GameContext implements Cloneable, IDisposable {
 
 		List<GameAction> validActions = getValidActions();
 		if (validActions.size() == 0) {
-			endTurn();
+			//endTurn();
 			return false;
 		}
 
