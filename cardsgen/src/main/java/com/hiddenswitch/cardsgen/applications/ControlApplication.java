@@ -74,7 +74,7 @@ public class ControlApplication {
 		}
 
 		// Start Spark
-		SparkConf conf = new SparkConf().setAppName("Compute control statistics").setMaster("local[8]");
+		SparkConf conf = new SparkConf().setAppName("Compute control statistics");
 		JavaSparkContext sc = new JavaSparkContext(conf);
 
 		Common.configureS3Credentials(sc);
