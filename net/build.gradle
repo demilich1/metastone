@@ -56,7 +56,7 @@ dependencyManagement {
 dependencies {
     quasar files("lib/quasar-core-0.7.5-jdk8.jar")
 
-    compile group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.+'
+    compile group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.52'
     compile group: 'com.lambdaworks', name: 'scrypt', version: '1.4.0'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
     compile group: 'commons-validator', name: 'commons-validator', version: '1.4.1'
