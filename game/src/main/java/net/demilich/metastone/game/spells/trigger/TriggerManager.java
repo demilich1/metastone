@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
+import net.demilich.metastone.game.spells.aura.Aura;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.utils.IDisposable;
 
@@ -115,9 +116,12 @@ public class TriggerManager implements Cloneable, IDisposable {
 		}
 	}
 
-	public void removeTriggersAssociatedWith(EntityReference entityReference) {
+	public void removeTriggersAssociatedWith(EntityReference entityReference, boolean removeAuras) {
 		for (IGameEventListener trigger : getListSnapshot(triggers)) {
 			if (trigger.getHostReference().equals(entityReference)) {
+				if (!removeAuras && trigger instanceof Aura) {
+					continue;
+				}
 				triggers.remove(trigger);
 			}
 		}
