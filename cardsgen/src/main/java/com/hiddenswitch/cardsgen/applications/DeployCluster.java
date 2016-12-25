@@ -190,6 +190,13 @@ public class DeployCluster {
 						.withInstanceCount(1)
 						.withInstanceRole(InstanceRoleType.CORE)
 						.withMarket(MarketType.ON_DEMAND)
+						.withEbsConfiguration(new EbsConfiguration()
+								.withEbsOptimized(true)
+								.withEbsBlockDeviceConfigs(new EbsBlockDeviceConfig()
+										.withVolumesPerInstance(1)
+										.withVolumeSpecification(new VolumeSpecification()
+												.withSizeInGB(1000)
+												.withVolumeType("gp2"))))
 						.withInstanceType("m4.large")));
 
 		if (spotInstanceCount > 0) {

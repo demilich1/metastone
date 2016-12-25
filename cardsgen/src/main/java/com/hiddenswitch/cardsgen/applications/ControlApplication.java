@@ -104,7 +104,7 @@ public class ControlApplication {
 
 			try {
 				if (existing != null
-						|| existing.count() == 0) {
+						&& existing.count() != 0) {
 					results = results.union(existing).reduceByKey(new MergeSimulationResults());
 				} else {
 					logger.info("Existing results to merge were not loaded correctly or there were zero records.");
