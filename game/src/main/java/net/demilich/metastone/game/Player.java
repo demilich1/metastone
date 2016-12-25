@@ -73,10 +73,10 @@ public class Player extends Entity implements Serializable {
 
 	private Player(Player otherPlayer) {
 		this.setName(otherPlayer.getName());
-		this.attributes.putAll(otherPlayer.getAttributes());
 		this.deckName = otherPlayer.getDeckName();
 		this.setHero(otherPlayer.getHero().clone());
 		this.deck = otherPlayer.getDeck().clone();
+		this.attributes.putAll(otherPlayer.getAttributes());
 		this.hand = otherPlayer.getHand().clone();
 		this.minions.addAll(otherPlayer.getMinions().stream().map(Minion::clone).collect(Collectors.toList()));
 		this.graveyard.addAll(otherPlayer.getGraveyard().stream().map(Entity::clone).collect(Collectors.toList()));
