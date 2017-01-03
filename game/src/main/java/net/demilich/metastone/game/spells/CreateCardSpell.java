@@ -92,7 +92,7 @@ public class CreateCardSpell extends Spell {
 		case MINION:
 			Minion sourceMinion = (Minion) source;
 			heroClass = sourceMinion.getSourceCard().getHeroClass();
-			rarity = sourceMinion.getSourceCard().getRarity();
+			rarity = Rarity.FREE;
 			cardSet = sourceMinion.getSourceCard().getCardSet();
 			break;
 		case PLAYER:

@@ -270,8 +270,10 @@ Examples: Wild Growth, Darnassus Aspirant, Felguard
 "value": Number of crystals to gain. Negative values destroy crystals instead.
 "targetPlayer": Player whose mana will be modified. Default is "SELF".
 
-MultiTargetDamageSpell {}: Works the same as MissilesSpell, currently.
-[]
+MultiTargetSpell
+A Spell that targets multiple random Entities with the given Spell.
+"value": Maximum number of targets to acquire. If there are less, will target all.
+"spell": The Spell to cast on the targeted Entities.
 
 NullSpell
 A Spell that does nothing. Used on cards that passively activate.

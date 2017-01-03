@@ -418,13 +418,6 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		return getWinner() == null ? -1 : getWinner().getId();
 	}
 
-	public boolean hasAutoHeroPower() {
-		if (gameDecided()) {
-			return false;
-		}
-		return getLogic().hasAutoHeroPower(getActivePlayerId());
-	}
-
 	public boolean ignoreEvents() {
 		return ignoreEvents;
 	}
@@ -474,7 +467,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 
 		List<GameAction> validActions = getValidActions();
 		if (validActions.size() == 0) {
-			endTurn();
+			//endTurn();
 			return false;
 		}
 
@@ -500,8 +493,8 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		getTriggerManager().removeTrigger(trigger);
 	}
 
-	public void removeTriggersAssociatedWith(EntityReference entityReference) {
-		getTriggerManager().removeTriggersAssociatedWith(entityReference);
+	public void removeTriggersAssociatedWith(EntityReference entityReference, boolean removeAuras) {
+		triggerManager.removeTriggersAssociatedWith(entityReference, removeAuras);
 	}
 
 	public Card resolveCardReference(CardReference cardReference) {
