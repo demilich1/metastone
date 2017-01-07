@@ -14,8 +14,7 @@ import org.testng.annotations.Test;
 
 
 public class BlackrockMountainTests extends BasicTests {
-	// TODO: disabled for now
-	
+
 	@Test
 	public void testAxeFlinger() {
 		GameContext context = createContext(HeroClass.MAGE, HeroClass.WARRIOR);
@@ -159,8 +158,8 @@ public class BlackrockMountainTests extends BasicTests {
 		
 		Minion dragonEgg = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_dragon_egg"));
 		Assert.assertEquals(getSummonedMinion(player.getMinions()), dragonEgg);
-		
-        playCardWithTarget(context, player, CardCatalogue.getCardById("spell_fireball"), dragonEgg);
+
+		playCardWithTarget(context, player, CardCatalogue.getCardById("spell_fireball"), dragonEgg);
 		Assert.assertEquals(getSummonedMinion(player.getMinions()).getSourceCard().getCardId(), TOKEN);
 		
 	}
