@@ -1,7 +1,7 @@
 {
 	"id": "token_tauren_slime",
 	"name": "Slime",
-	"baseManaCost": 1,
+	"baseManaCost": 2,
 	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 2,
