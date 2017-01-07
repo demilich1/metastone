@@ -9,7 +9,7 @@
 	"spell": {
 		"class": "SummonSpell",
 		"value": 4,
-		"card": "token_murloc"
+		"card": "token_murloc_razorgill"
 	},
 	"collectible": true,
 	"set": "MEAN_STREETS_OF_GADGETZAN",
