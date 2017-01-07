@@ -1,12 +1,21 @@
 package net.demilich.metastone.tests;
 
-
+import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.cards.CardCatalogue;
+import net.demilich.metastone.game.cards.MinionCard;
+import net.demilich.metastone.game.cards.SpellCard;
+import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.spells.DamageSpell;
+import net.demilich.metastone.game.targeting.EntityReference;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 
 public class BlackrockMountainTests extends BasicTests {
 	// TODO: disabled for now
 	
-	/*
 	@Test
 	public void testAxeFlinger() {
 		GameContext context = createContext(HeroClass.MAGE, HeroClass.WARRIOR);
@@ -110,8 +119,8 @@ public class BlackrockMountainTests extends BasicTests {
 		
 		context.getLogic().endTurn(player.getId());
 		
-		Minion testMinionOpponent = playMinionCard(context, player, new TestMinionCard(3, 3, 0));
-		Minion injuredBlademasterOpponent = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_injured_blademaster"));
+		Minion testMinionOpponent = playMinionCard(context, opponent, new TestMinionCard(3, 3, 0));
+		Minion injuredBlademasterOpponent = playMinionCard(context, opponent, (MinionCard) CardCatalogue.getCardById("minion_injured_blademaster"));
 		Assert.assertEquals(testMinionOpponent.getHp(), testMinionOpponent.getMaxHp());
 		Assert.assertEquals(injuredBlademasterOpponent.getHp(), injuredBlademasterOpponent.getMaxHp() - 4);
 		
@@ -136,9 +145,9 @@ public class BlackrockMountainTests extends BasicTests {
 		MinionCard dragonConsort = (MinionCard) CardCatalogue.getCardById("minion_dragon_consort");
 		context.getLogic().receiveCard(player.getId(), dragonConsort);
 		Assert.assertEquals(dragonConsort.getManaCost(context, player), dragonConsort.getBaseManaCost());
-		
+
 		playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_dragon_consort"));
-		Assert.assertEquals(dragonConsort.getManaCost(context, player), dragonConsort.getBaseManaCost() - MANA_REDUCTION);
+		Assert.assertEquals(context.getLogic().getModifiedManaCost(player, dragonConsort), dragonConsort.getBaseManaCost() - MANA_REDUCTION);
 	}
 	
 	@Test
@@ -146,15 +155,12 @@ public class BlackrockMountainTests extends BasicTests {
 		GameContext context = createContext(HeroClass.DRUID, HeroClass.HUNTER);
 		Player player = context.getPlayer1();
 		
-		final String TOKEN = "token_whelp_egg";
-		
-		TestBehaviour behaviour = (TestBehaviour) player.getBehaviour();
+		final String TOKEN = "token_black_whelp";
 		
 		Minion dragonEgg = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_dragon_egg"));
 		Assert.assertEquals(getSummonedMinion(player.getMinions()), dragonEgg);
 		
-		behaviour.setTargetPreference(dragonEgg.getReference());
-		playCard(context, player, (SpellCard) CardCatalogue.getCardById("spell_fireball"));
+        playCardWithTarget(context, player, CardCatalogue.getCardById("spell_fireball"), dragonEgg);
 		Assert.assertEquals(getSummonedMinion(player.getMinions()).getSourceCard().getCardId(), TOKEN);
 		
 	}
@@ -167,16 +173,12 @@ public class BlackrockMountainTests extends BasicTests {
 		final int ATTACK_BONUS = 1;
 		final int HP_BONUS = 1;
 		
-		TestBehaviour behaviour = (TestBehaviour) player.getBehaviour();
-		
 		Minion dragonkin1 = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_dragonkin_sorcerer"));
 		Minion dragonkin2 = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_dragonkin_sorcerer"));
 		Assert.assertEquals(dragonkin1.getAttack(), dragonkin2.getAttack());
 		Assert.assertEquals(dragonkin1.getHp(), dragonkin2.getHp());
 		
-		behaviour.setTargetPreference(dragonkin1.getReference());
-		
-		playCard(context, player, (SpellCard) CardCatalogue.getCardById("spell_gang_up"));
+		playCardWithTarget(context, player, CardCatalogue.getCardById("spell_gang_up"), dragonkin1);
 		Assert.assertEquals(dragonkin1.getAttack(), dragonkin2.getAttack() + ATTACK_BONUS);
 		Assert.assertEquals(dragonkin1.getHp(), dragonkin2.getHp() + HP_BONUS);
 	}
@@ -200,5 +202,4 @@ public class BlackrockMountainTests extends BasicTests {
 		Assert.assertEquals(drakonid.getAttack(), drakonid.getBaseAttack() + ATTACK_BONUS);
 		Assert.assertEquals(drakonid.getHp(), drakonid.getBaseHp() + HP_BONUS);
 	}
-*/
 }
