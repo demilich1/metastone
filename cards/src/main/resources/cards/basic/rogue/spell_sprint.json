@@ -1,5 +1,4 @@
 {
-	"id": "spell_sprint",
 	"name": "Sprint",
 	"baseManaCost": 7,
 	"type": "SPELL",

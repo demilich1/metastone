@@ -1,5 +1,4 @@
 {
-	"id": "spell_battle_rage",
 	"name": "Battle Rage",
 	"baseManaCost": 2,
 	"type": "SPELL",

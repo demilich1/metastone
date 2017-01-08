@@ -1,5 +1,4 @@
 {
-	"id": "spell_far_sight",
 	"name": "Far Sight",
 	"baseManaCost": 3,
 	"type": "SPELL",

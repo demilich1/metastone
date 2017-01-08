@@ -1,5 +1,4 @@
 {
-	"id": "spell_kill_command",
 	"name": "Kill Command",
 	"baseManaCost": 3,
 	"type": "SPELL",

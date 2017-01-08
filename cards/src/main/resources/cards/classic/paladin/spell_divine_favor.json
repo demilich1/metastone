@@ -1,5 +1,4 @@
 {
-	"id": "spell_divine_favor",
 	"name": "Divine Favor",
 	"baseManaCost": 3,
 	"type": "SPELL",

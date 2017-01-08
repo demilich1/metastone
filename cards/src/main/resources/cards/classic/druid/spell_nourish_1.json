@@ -1,5 +1,4 @@
 {
-	"id": "spell_nourish_1",
 	"name": "+2 Mana Crystals",
 	"baseManaCost": 5,
 	"type": "SPELL",

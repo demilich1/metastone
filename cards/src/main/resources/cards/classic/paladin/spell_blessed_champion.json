@@ -1,5 +1,4 @@
 {
-	"id": "spell_blessed_champion",
 	"name": "Blessed Champion",
 	"baseManaCost": 5,
 	"type": "SPELL",

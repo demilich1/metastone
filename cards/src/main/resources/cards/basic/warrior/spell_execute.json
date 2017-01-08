@@ -1,5 +1,4 @@
 {
-	"id": "spell_execute",
 	"name": "Execute",
 	"baseManaCost": 2,
 	"type": "SPELL",

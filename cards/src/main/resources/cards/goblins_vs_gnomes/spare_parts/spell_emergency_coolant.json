@@ -1,5 +1,4 @@
 {
-	"id": "spell_emergency_coolant",
 	"name": "Emergency Coolant",
 	"baseManaCost": 1,
 	"type": "SPELL",

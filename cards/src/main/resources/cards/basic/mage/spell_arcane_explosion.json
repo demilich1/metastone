@@ -1,5 +1,4 @@
 {
-	"id": "spell_arcane_explosion",
 	"name": "Arcane Explosion",
 	"baseManaCost": 2,
 	"type": "SPELL",

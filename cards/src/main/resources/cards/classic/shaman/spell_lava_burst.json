@@ -1,5 +1,4 @@
 {
-	"id": "spell_lava_burst",
 	"name": "Lava Burst",
 	"baseManaCost": 3,
 	"type": "SPELL",

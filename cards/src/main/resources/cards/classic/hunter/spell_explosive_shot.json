@@ -1,5 +1,4 @@
 {
-	"id": "spell_explosive_shot",
 	"name": "Explosive Shot",
 	"baseManaCost": 5,
 	"type": "SPELL",

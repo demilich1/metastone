@@ -1,5 +1,4 @@
 {
-	"id": "hero_anduin",
 	"name": "Anduin Wrynn",
 	"baseManaCost": 0,
 	"heroPower": "hero_power_lesser_heal",

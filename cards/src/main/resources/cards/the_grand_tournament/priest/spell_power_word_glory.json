@@ -1,5 +1,4 @@
 {
-	"id": "spell_power_word_glory",
 	"name": "Power Word: Glory",
 	"baseManaCost": 1,
 	"type": "SPELL",

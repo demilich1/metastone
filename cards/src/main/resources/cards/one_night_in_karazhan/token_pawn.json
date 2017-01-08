@@ -1,5 +1,4 @@
 {
-	"id": "token_pawn",
 	"name": "Pawn",
 	"baseManaCost": 1,
 	"type": "MINION",

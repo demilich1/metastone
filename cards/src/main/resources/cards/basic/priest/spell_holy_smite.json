@@ -1,5 +1,4 @@
 {
-	"id": "spell_holy_smite",
 	"name": "Holy Smite",
 	"baseManaCost": 1,
 	"type": "SPELL",

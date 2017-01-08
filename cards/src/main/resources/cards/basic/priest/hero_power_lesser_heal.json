@@ -1,5 +1,4 @@
 {
-	"id": "hero_power_lesser_heal",
 	"name": "Lesser Heal",
 	"baseManaCost": 2,
 	"type": "HERO_POWER",

@@ -1,5 +1,4 @@
 {
-	"id": "spell_summon_searing_totem",
 	"name": "Searing Totem",
 	"baseManaCost": 2,
 	"type": "SPELL",

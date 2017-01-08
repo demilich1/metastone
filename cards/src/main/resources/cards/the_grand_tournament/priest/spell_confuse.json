@@ -1,5 +1,4 @@
 {
-	"id": "spell_confuse",
 	"name": "Confuse",
 	"baseManaCost": 2,
 	"type": "SPELL",

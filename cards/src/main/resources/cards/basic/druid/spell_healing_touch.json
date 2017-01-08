@@ -1,5 +1,4 @@
 {
-	"id": "spell_healing_touch",
 	"name": "Healing Touch",
 	"baseManaCost": 3,
 	"type": "SPELL",

@@ -1,5 +1,4 @@
 {
-	"id": "spell_arcane_intellect",
 	"name": "Arcane Intellect",
 	"baseManaCost": 3,
 	"type": "SPELL",

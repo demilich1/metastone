@@ -1,5 +1,4 @@
 {
-	"id": "spell_polymorph",
 	"name": "Polymorph",
 	"baseManaCost": 4,
 	"type": "SPELL",

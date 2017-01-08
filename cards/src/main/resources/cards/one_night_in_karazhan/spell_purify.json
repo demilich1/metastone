@@ -1,5 +1,4 @@
 {
-	"id": "spell_purify",
 	"name": "Purify",
 	"baseManaCost": 2,
 	"type": "SPELL",

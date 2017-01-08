@@ -1,5 +1,4 @@
 {
-	"id": "spell_doom",
 	"name": "DOOM!",
 	"baseManaCost": 10,
 	"type": "SPELL",

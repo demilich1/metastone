@@ -1,5 +1,4 @@
 {
-	"id": "spell_ironforge_portal",
 	"name": "Ironforge Portal",
 	"baseManaCost": 5,
 	"type": "SPELL",

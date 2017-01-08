@@ -1,5 +1,4 @@
 {
-	"id": "token_repair_bot",
 	"name": "Repair Bot",
 	"baseManaCost": 1,
 	"type": "MINION",

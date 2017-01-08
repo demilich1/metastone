@@ -1,5 +1,4 @@
 {
-	"id": "spell_flamestrike",
 	"name": "Flamestrike",
 	"baseManaCost": 7,
 	"type": "SPELL",

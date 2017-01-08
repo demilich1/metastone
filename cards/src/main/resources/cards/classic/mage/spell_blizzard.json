@@ -1,5 +1,4 @@
 {
-	"id": "spell_blizzard",
 	"name": "Blizzard",
 	"baseManaCost": 6,
 	"type": "SPELL",

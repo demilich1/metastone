@@ -1,5 +1,4 @@
 {
-	"id": "spell_shield_slam",
 	"name": "Shield Slam",
 	"baseManaCost": 1,
 	"type": "SPELL",

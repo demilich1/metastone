@@ -1,5 +1,4 @@
 {
-	"id": "hero_guldan",
 	"name": "Gul'dan",
 	"baseManaCost": 0,
 	"heroPower": "hero_power_life_tap",

@@ -1,5 +1,4 @@
 {
-	"id": "spell_ancestors_call",
 	"name": "Ancestor's Call",
 	"baseManaCost": 4,
 	"type": "SPELL",

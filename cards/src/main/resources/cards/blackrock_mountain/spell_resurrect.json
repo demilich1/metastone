@@ -1,5 +1,4 @@
 {
-	"id": "spell_resurrect",
 	"name": "Resurrect",
 	"baseManaCost": 2,
 	"type": "SPELL",

@@ -1,5 +1,4 @@
 {
-	"id": "spell_quick_shot",
 	"name": "Quick Shot",
 	"baseManaCost": 2,
 	"type": "SPELL",

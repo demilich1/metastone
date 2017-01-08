@@ -1,5 +1,4 @@
 {
-	"id": "spell_power_word_shield",
 	"name": "Power Word: Shield",
 	"baseManaCost": 1,
 	"type": "SPELL",

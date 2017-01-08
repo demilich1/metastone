@@ -1,5 +1,4 @@
 {
-	"id": "minion_target_dummy",
 	"name": "Target Dummy",
 	"baseManaCost": 0,
 	"type": "MINION",

@@ -1,5 +1,4 @@
 {
-	"id": "spell_silence",
 	"name": "Silence",
 	"baseManaCost": 0,
 	"type": "SPELL",

@@ -1,5 +1,4 @@
 {
-	"id": "spell_cone_of_cold",
 	"name": "Cone of Cold",
 	"baseManaCost": 4,
 	"type": "SPELL",

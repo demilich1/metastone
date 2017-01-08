@@ -1,5 +1,4 @@
 {
-	"id": "spell_lightning_bolt",
 	"name": "Lightning Bolt",
 	"baseManaCost": 1,
 	"type": "SPELL",

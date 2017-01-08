@@ -1,5 +1,4 @@
 {
-	"id": "spell_whirlwind",
 	"name": "Whirlwind",
 	"baseManaCost": 1,
 	"type": "SPELL",

@@ -1,5 +1,4 @@
 {
-	"id": "token_teapot",
 	"name": "Teapot",
 	"baseManaCost": 3,
 	"type": "MINION",

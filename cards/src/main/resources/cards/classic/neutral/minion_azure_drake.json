@@ -1,5 +1,4 @@
 {
-	"id": "minion_azure_drake",
 	"name": "Azure Drake",
 	"baseManaCost": 5,
 	"type": "MINION",

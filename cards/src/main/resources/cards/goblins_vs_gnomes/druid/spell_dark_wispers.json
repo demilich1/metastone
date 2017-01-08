@@ -1,5 +1,4 @@
 {
-	"id": "spell_dark_wispers",
 	"name": "Dark Wispers",
 	"baseManaCost": 6,
 	"type": "CHOOSE_ONE",

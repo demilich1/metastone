@@ -1,5 +1,4 @@
 {
-	"id": "spell_inner_fire",
 	"name": "Inner Fire",
 	"baseManaCost": 1,
 	"type": "SPELL",

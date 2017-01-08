@@ -1,5 +1,4 @@
 {
-	"id": "spell_holy_fire",
 	"name": "Holy Fire",
 	"baseManaCost": 6,
 	"type": "SPELL",

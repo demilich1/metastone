@@ -1,5 +1,4 @@
 {
-	"id": "spell_animal_companion",
 	"name": "Animal Companion",
 	"baseManaCost": 3,
 	"type": "SPELL",

@@ -1,5 +1,4 @@
 {
-	"id": "spell_healing_wave",
 	"name": "Healing Wave",
 	"baseManaCost": 3,
 	"type": "SPELL",

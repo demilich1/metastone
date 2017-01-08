@@ -1,5 +1,4 @@
 {
-	"id": "spell_mind_blast",
 	"name": "Mind Blast",
 	"baseManaCost": 2,
 	"type": "SPELL",

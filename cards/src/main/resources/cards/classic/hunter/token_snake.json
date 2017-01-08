@@ -1,5 +1,4 @@
 {
-	"id": "token_snake",
 	"name": "Snake",
 	"baseManaCost": 1,
 	"type": "MINION",

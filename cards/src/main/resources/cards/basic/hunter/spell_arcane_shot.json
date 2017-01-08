@@ -1,5 +1,4 @@
 {
-	"id": "spell_arcane_shot",
 	"name": "Arcane Shot",
 	"baseManaCost": 1,
 	"type": "SPELL",

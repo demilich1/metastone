@@ -1,5 +1,4 @@
 {
-	"id": "spell_forgotten_torch",
 	"name": "Forgotten Torch",
 	"baseManaCost": 3,
 	"type": "SPELL",

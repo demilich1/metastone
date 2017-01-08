@@ -1,5 +1,4 @@
 {
-	"id": "spell_time_rewinder",
 	"name": "Time Rewinder",
 	"baseManaCost": 1,
 	"type": "SPELL",
