@@ -1,5 +1,4 @@
 {
-	"id": "spell_multi-shot",
 	"name": "Multi-Shot",
 	"baseManaCost": 4,
 	"type": "SPELL",

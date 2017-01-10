@@ -1,5 +1,4 @@
 {
-	"id": "spell_excess_mana",
 	"name": "Excess Mana",
 	"baseManaCost": 0,
 	"type": "SPELL",

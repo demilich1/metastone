@@ -1,5 +1,4 @@
 {
-	"id": "minion_mana_addict",
 	"name": "Mana Addict",
 	"baseManaCost": 2,
 	"type": "MINION",

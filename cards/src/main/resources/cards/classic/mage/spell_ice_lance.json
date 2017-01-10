@@ -1,5 +1,4 @@
 {
-	"id": "spell_ice_lance",
 	"name": "Ice Lance",
 	"baseManaCost": 1,
 	"type": "SPELL",

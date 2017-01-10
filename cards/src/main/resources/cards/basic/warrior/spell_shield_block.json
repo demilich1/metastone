@@ -1,5 +1,4 @@
 {
-	"id": "spell_shield_block",
 	"name": "Shield Block",
 	"baseManaCost": 3,
 	"type": "SPELL",

@@ -1,5 +1,4 @@
 {
-	"id": "spell_shadow_word_death",
 	"name": "Shadow Word: Death",
 	"baseManaCost": 3,
 	"type": "SPELL",

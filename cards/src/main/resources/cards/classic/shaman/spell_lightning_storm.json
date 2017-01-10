@@ -1,5 +1,4 @@
 {
-	"id": "spell_lightning_storm",
 	"name": "Lightning Storm",
 	"baseManaCost": 3,
 	"type": "SPELL",

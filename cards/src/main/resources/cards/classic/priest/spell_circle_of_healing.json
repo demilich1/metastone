@@ -1,5 +1,4 @@
 {
-	"id": "spell_circle_of_healing",
 	"name": "Circle of Healing",
 	"baseManaCost": 0,
 	"type": "SPELL",

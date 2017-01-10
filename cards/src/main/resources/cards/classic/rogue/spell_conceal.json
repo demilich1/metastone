@@ -1,5 +1,4 @@
 {
-	"id": "spell_conceal",
 	"name": "Conceal",
 	"baseManaCost": 1,
 	"type": "SPELL",

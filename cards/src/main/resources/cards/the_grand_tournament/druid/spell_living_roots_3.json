@@ -1,5 +1,4 @@
 {
-	"id": "spell_living_roots_3",
 	"name": "Deal 2 damage and summon two 1/1",
 	"baseManaCost": 1,
 	"type": "SPELL",

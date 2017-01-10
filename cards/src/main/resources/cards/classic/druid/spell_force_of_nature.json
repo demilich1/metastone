@@ -1,5 +1,4 @@
 {
-	"id": "spell_force_of_nature",
 	"name": "Force of Nature",
 	"baseManaCost": 5,
 	"type": "SPELL",

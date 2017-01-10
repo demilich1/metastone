@@ -1,5 +1,4 @@
 {
-	"id": "spell_lock_and_load",
 	"name": "Lock and Load",
 	"baseManaCost": 2,
 	"type": "SPELL",

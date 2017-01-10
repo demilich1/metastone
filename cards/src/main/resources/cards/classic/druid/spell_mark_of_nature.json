@@ -1,5 +1,4 @@
 {
-	"id": "spell_mark_of_nature",
 	"name": "Mark of Nature",
 	"baseManaCost": 3,
 	"type": "CHOOSE_ONE",

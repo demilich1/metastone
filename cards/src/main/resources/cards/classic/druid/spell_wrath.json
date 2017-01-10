@@ -1,5 +1,4 @@
 {
-	"id": "spell_wrath",
 	"name": "Wrath",
 	"baseManaCost": 2,
 	"type": "CHOOSE_ONE",

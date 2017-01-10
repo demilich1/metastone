@@ -1,5 +1,4 @@
 {
-	"id": "minion_quartermaster",
 	"name": "Quartermaster",
 	"baseManaCost": 5,
 	"type": "MINION",

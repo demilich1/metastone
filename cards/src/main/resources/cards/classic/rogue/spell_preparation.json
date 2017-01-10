@@ -1,5 +1,4 @@
 {
-	"id": "spell_preparation",
 	"name": "Preparation",
 	"baseManaCost": 0,
 	"type": "SPELL",

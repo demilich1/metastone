@@ -1,5 +1,4 @@
 {
-	"id": "spell_rampage",
 	"name": "Rampage",
 	"baseManaCost": 2,
 	"type": "SPELL",

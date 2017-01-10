@@ -1,5 +1,4 @@
 {
-	"id": "spell_innervate",
 	"name": "Innervate",
 	"baseManaCost": 0,
 	"type": "SPELL",

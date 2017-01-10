@@ -1,5 +1,4 @@
 {
-	"id": "minion_leeroy_jenkins",
 	"name": "Leeroy Jenkins",
 	"baseManaCost": 5,
 	"type": "MINION",

@@ -1,5 +1,4 @@
 {
-	"id": "spell_equality",
 	"name": "Equality",
 	"baseManaCost": 2,
 	"type": "SPELL",

@@ -1,5 +1,4 @@
 {
-	"id": "spell_cursed",
 	"name": "Cursed!",
 	"baseManaCost": 2,
 	"type": "SPELL",

@@ -1,5 +1,4 @@
 {
-	"id": "spell_brawl",
 	"name": "Brawl",
 	"baseManaCost": 5,
 	"type": "SPELL",

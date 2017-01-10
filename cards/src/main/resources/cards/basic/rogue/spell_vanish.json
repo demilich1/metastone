@@ -1,5 +1,4 @@
 {
-	"id": "spell_vanish",
 	"name": "Vanish",
 	"baseManaCost": 6,
 	"type": "SPELL",

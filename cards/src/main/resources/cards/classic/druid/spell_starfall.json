@@ -1,5 +1,4 @@
 {
-	"id": "spell_starfall",
 	"name": "Starfall",
 	"baseManaCost": 5,
 	"type": "CHOOSE_ONE",

@@ -1,5 +1,4 @@
 {
-	"id": "token_cellar_spider",
 	"name": "Cellar Spider",
 	"baseManaCost": 3,
 	"type": "MINION",

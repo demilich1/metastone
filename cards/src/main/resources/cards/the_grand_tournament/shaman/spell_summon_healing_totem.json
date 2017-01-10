@@ -1,5 +1,4 @@
 {
-	"id": "spell_summon_healing_totem",
 	"name": "Healing Totem",
 	"baseManaCost": 2,
 	"type": "SPELL",

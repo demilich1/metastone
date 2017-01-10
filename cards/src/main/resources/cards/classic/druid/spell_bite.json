@@ -1,5 +1,4 @@
 {
-	"id": "spell_bite",
 	"name": "Bite",
 	"baseManaCost": 4,
 	"type": "SPELL",

@@ -1,5 +1,4 @@
 {
-	"id": "spell_hand_of_protection",
 	"name": "Hand of Protection",
 	"baseManaCost": 1,
 	"type": "SPELL",

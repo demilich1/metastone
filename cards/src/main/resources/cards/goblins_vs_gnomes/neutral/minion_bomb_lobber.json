@@ -1,5 +1,4 @@
 {
-	"id": "minion_bomb_lobber",
 	"name": "Bomb Lobber",
 	"baseManaCost": 5,
 	"type": "MINION",

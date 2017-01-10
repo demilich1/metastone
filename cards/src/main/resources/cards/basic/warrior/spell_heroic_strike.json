@@ -1,5 +1,4 @@
 {
-	"id": "spell_heroic_strike",
 	"name": "Heroic Strike",
 	"baseManaCost": 2,
 	"type": "SPELL",

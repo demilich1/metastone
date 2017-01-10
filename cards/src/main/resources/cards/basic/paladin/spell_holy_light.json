@@ -1,5 +1,4 @@
 {
-	"id": "spell_holy_light",
 	"name": "Holy Light",
 	"baseManaCost": 2,
 	"type": "SPELL",

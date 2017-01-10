@@ -1,5 +1,4 @@
 {
-	"id": "spell_mind_vision",
 	"name": "Mind Vision",
 	"baseManaCost": 1,
 	"type": "SPELL",

@@ -1,5 +1,4 @@
 {
-	"id": "hero_power_ballista_shot",
 	"name": "Ballista Shot",
 	"baseManaCost": 2,
 	"type": "HERO_POWER",

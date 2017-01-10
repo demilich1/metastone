@@ -1,5 +1,4 @@
 {
-	"id": "spell_bane_of_doom",
 	"name": "Bane of Doom",
 	"baseManaCost": 5,
 	"type": "SPELL",

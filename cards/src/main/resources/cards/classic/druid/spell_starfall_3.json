@@ -1,5 +1,4 @@
 {
-	"id": "spell_starfall_3",
 	"name": "7 damage single and 2 damage AoE",
 	"baseManaCost": 5,
 	"type": "SPELL",

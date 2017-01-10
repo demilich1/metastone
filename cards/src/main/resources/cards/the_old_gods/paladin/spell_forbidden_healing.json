@@ -1,5 +1,4 @@
 {
-	"id": "spell_forbidden_healing",
 	"name": "Forbidden Healing",
 	"baseManaCost": 0,
 	"type": "SPELL",

@@ -1,5 +1,4 @@
 {
-	"id": "spell_stand_against_darkness",
 	"name": "Stand Against Darkness",
 	"baseManaCost": 5,
 	"type": "SPELL",

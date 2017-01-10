@@ -1,5 +1,4 @@
 {
-	"id": "spell_recycle",
 	"name": "Recycle",
 	"baseManaCost": 6,
 	"type": "SPELL",

@@ -1,5 +1,4 @@
 {
-	"id": "spell_lava_shock",
 	"name": "Lava Shock",
 	"baseManaCost": 2,
 	"type": "SPELL",

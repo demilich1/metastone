@@ -1,5 +1,4 @@
 {
-	"id": "spell_flame_lance",
 	"name": "Flame Lance",
 	"baseManaCost": 5,
 	"type": "SPELL",

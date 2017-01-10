@@ -1,5 +1,4 @@
 {
-	"id": "spell_assassinate",
 	"name": "Assassinate",
 	"baseManaCost": 5,
 	"type": "SPELL",

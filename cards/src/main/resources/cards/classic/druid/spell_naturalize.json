@@ -1,5 +1,4 @@
 {
-	"id": "spell_naturalize",
 	"name": "Naturalize",
 	"baseManaCost": 1,
 	"type": "SPELL",

@@ -1,5 +1,4 @@
 {
-	"id": "spell_starfall_1",
 	"name": "5 damage single",
 	"baseManaCost": 5,
 	"type": "SPELL",

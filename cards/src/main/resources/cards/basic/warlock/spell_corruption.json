@@ -1,5 +1,4 @@
 {
-	"id": "spell_corruption",
 	"name": "Corruption",
 	"baseManaCost": 1,
 	"type": "SPELL",

@@ -1,5 +1,4 @@
 {
-	"id": "spell_thoughtsteal",
 	"name": "Thoughtsteal",
 	"baseManaCost": 3,
 	"type": "SPELL",

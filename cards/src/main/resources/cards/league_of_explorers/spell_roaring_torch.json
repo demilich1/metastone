@@ -1,5 +1,4 @@
 {
-	"id": "spell_roaring_torch",
 	"name": "Roaring Torch",
 	"baseManaCost": 3,
 	"type": "SPELL",

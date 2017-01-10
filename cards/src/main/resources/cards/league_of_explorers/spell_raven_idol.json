@@ -1,5 +1,4 @@
 {
-	"id": "spell_raven_idol",
 	"name": "Raven Idol",
 	"baseManaCost": 1,
 	"type": "CHOOSE_ONE",

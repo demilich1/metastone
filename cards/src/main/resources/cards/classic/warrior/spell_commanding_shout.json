@@ -1,5 +1,4 @@
 {
-	"id": "spell_commanding_shout",
 	"name": "Commanding Shout",
 	"baseManaCost": 2,
 	"type": "SPELL",

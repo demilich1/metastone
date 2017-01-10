@@ -1,5 +1,4 @@
 {
-	"id": "spell_sabotage",
 	"name": "Sabotage",
 	"baseManaCost": 4,
 	"type": "SPELL",

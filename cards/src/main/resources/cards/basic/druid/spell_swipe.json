@@ -1,5 +1,4 @@
 {
-	"id": "spell_swipe",
 	"name": "Swipe",
 	"baseManaCost": 4,
 	"type": "SPELL",

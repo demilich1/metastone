@@ -1,5 +1,4 @@
 {
-	"id": "spell_flash_heal",
 	"name": "Flash Heal",
 	"baseManaCost": 1,
 	"type": "SPELL",
