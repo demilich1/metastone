@@ -1,5 +1,4 @@
 {
-	"id": "spell_infest",
 	"name": "Infest",
 	"baseManaCost": 3,
 	"type": "SPELL",

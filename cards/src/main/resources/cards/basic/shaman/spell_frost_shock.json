@@ -1,5 +1,4 @@
 {
-	"id": "spell_frost_shock",
 	"name": "Frost Shock",
 	"baseManaCost": 1,
 	"type": "SPELL",

@@ -1,5 +1,4 @@
 {
-	"id": "spell_flare",
 	"name": "Flare",
 	"baseManaCost": 2,
 	"type": "SPELL",

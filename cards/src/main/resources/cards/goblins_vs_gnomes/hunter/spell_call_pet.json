@@ -1,5 +1,4 @@
 {
-	"id": "spell_call_pet",
 	"name": "Call Pet",
 	"baseManaCost": 2,
 	"type": "SPELL",

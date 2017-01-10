@@ -1,5 +1,4 @@
 {
-	"id": "spell_renounce_darkness",
 	"name": "Renounce Darkness",
 	"baseManaCost": 2,
 	"type": "SPELL",

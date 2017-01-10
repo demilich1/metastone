@@ -1,5 +1,4 @@
 {
-	"id": "spell_forked_lightning",
 	"name": "Forked Lightning",
 	"baseManaCost": 1,
 	"type": "SPELL",

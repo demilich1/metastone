@@ -1,5 +1,4 @@
 {
-	"id": "spell_mirror_of_doom",
 	"name": "Mirror of Doom",
 	"baseManaCost": 10,
 	"type": "SPELL",

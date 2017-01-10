@@ -1,5 +1,4 @@
 {
-	"id": "token_candle",
 	"name": "Candle",
 	"baseManaCost": 1,
 	"type": "MINION",

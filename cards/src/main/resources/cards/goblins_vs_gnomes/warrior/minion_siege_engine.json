@@ -1,5 +1,4 @@
 {
-	"id": "minion_siege_engine",
 	"name": "Siege Engine",
 	"baseManaCost": 5,
 	"type": "MINION",

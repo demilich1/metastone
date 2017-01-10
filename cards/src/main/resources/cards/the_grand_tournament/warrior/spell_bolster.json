@@ -1,5 +1,4 @@
 {
-	"id": "spell_bolster",
 	"name": "Bolster",
 	"baseManaCost": 2,
 	"type": "SPELL",

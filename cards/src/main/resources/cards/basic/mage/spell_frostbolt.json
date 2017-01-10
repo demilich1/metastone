@@ -1,5 +1,4 @@
 {
-	"id": "spell_frostbolt",
 	"name": "Frostbolt",
 	"baseManaCost": 2,
 	"type": "SPELL",

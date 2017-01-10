@@ -1,5 +1,4 @@
 {
-	"id": "spell_convert",
 	"name": "Convert",
 	"baseManaCost": 2,
 	"type": "SPELL",

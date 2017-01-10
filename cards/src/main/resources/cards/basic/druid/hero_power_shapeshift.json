@@ -1,5 +1,4 @@
 {
-	"id": "hero_power_shapeshift",
 	"name": "Shapeshift",
 	"baseManaCost": 2,
 	"type": "HERO_POWER",

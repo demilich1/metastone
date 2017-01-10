@@ -1,5 +1,4 @@
 {
-	"id": "spell_shadow_bolt",
 	"name": "Shadow Bolt",
 	"baseManaCost": 3,
 	"type": "SPELL",

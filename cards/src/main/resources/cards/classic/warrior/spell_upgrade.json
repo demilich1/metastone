@@ -1,5 +1,4 @@
 {
-	"id": "spell_upgrade",
 	"name": "Upgrade!",
 	"baseManaCost": 1,
 	"type": "SPELL",

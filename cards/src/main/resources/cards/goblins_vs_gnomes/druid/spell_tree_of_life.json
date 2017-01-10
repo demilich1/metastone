@@ -1,5 +1,4 @@
 {
-	"id": "spell_tree_of_life",
 	"name": "Tree of Life",
 	"baseManaCost": 9,
 	"type": "SPELL",

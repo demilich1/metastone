@@ -1,5 +1,4 @@
 {
-	"id": "spell_nourish_2",
 	"name": "Draw 3 cards",
 	"baseManaCost": 5,
 	"type": "SPELL",

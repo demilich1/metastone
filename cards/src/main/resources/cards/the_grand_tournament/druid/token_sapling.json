@@ -1,5 +1,4 @@
 {
-	"id": "token_sapling",
 	"name": "Sapling",
 	"baseManaCost": 1,
 	"type": "MINION",

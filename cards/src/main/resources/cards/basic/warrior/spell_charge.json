@@ -1,5 +1,4 @@
 {
-	"id": "spell_CHARGE",
 	"name": "Charge",
 	"baseManaCost": 1,
 	"type": "SPELL",

@@ -1,5 +1,4 @@
 {
-	"id": "spell_holy_nova",
 	"name": "Holy Nova",
 	"baseManaCost": 5,
 	"type": "SPELL",

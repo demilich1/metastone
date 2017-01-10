@@ -1,5 +1,4 @@
 {
-	"id": "spell_powershot",
 	"name": "Powershot",
 	"baseManaCost": 3,
 	"type": "SPELL",

@@ -1,5 +1,4 @@
 {
-	"id": "spell_holy_wrath",
 	"name": "Holy Wrath",
 	"baseManaCost": 5,
 	"type": "SPELL",

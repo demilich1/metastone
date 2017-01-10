@@ -1,5 +1,4 @@
 {
-	"id": "spell_moonfire",
 	"name": "Moonfire",
 	"baseManaCost": 0,
 	"type": "SPELL",

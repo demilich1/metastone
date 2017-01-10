@@ -1,5 +1,4 @@
 {
-	"id": "spell_deadly_shot",
 	"name": "Deadly Shot",
 	"baseManaCost": 3,
 	"type": "SPELL",

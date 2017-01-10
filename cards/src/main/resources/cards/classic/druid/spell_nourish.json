@@ -1,5 +1,4 @@
 {
-	"id": "spell_nourish",
 	"name": "Nourish",
 	"baseManaCost": 5,
 	"type": "CHOOSE_ONE",

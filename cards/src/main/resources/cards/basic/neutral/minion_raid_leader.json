@@ -1,5 +1,4 @@
 {
-	"id": "minion_raid_leader",
 	"name": "Raid Leader",
 	"baseManaCost": 3,
 	"type": "MINION",

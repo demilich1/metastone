@@ -1,5 +1,4 @@
 {
-	"id": "spell_slam",
 	"name": "Slam",
 	"baseManaCost": 2,
 	"type": "SPELL",

@@ -1,5 +1,4 @@
 {
-	"id": "spell_firelands_portal",
 	"name": "Firelands Portal",
 	"baseManaCost": 7,
 	"type": "SPELL",

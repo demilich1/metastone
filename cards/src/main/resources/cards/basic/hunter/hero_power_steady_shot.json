@@ -1,5 +1,4 @@
 {
-	"id": "hero_power_steady_shot",
 	"name": "Steady Shot",
 	"baseManaCost": 2,
 	"type": "HERO_POWER",

@@ -1,5 +1,4 @@
 {
-	"id": "spell_eviscerate",
 	"name": "Eviscerate",
 	"baseManaCost": 2,
 	"type": "SPELL",

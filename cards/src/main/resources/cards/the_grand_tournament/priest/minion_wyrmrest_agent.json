@@ -1,5 +1,4 @@
 {
-	"id": "minion_wyrmrest_agent",
 	"name": "Wyrmrest Agent",
 	"baseManaCost": 2,
 	"type": "MINION",

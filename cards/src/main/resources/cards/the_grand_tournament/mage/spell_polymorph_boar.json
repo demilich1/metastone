@@ -1,5 +1,4 @@
 {
-	"id": "spell_polymorph_boar",
 	"name": "Polymorph: Boar",
 	"baseManaCost": 3,
 	"type": "SPELL",

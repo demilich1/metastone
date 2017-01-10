@@ -1,5 +1,4 @@
 {
-	"id": "spell_cold_blood",
 	"name": "Cold Blood",
 	"baseManaCost": 1,
 	"type": "SPELL",

@@ -1,5 +1,4 @@
 {
-	"id": "spell_enter_the_coliseum",
 	"name": "Enter the Coliseum",
 	"baseManaCost": 6,
 	"type": "SPELL",

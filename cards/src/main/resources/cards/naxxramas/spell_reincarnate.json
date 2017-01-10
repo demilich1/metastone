@@ -1,5 +1,4 @@
 {
-	"id": "spell_reincarnate",
 	"name": "Reincarnate",
 	"baseManaCost": 2,
 	"type": "SPELL",

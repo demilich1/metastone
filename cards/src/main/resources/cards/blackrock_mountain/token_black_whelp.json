@@ -1,6 +1,5 @@
 {
-	"id": "token_black_whelp",
-	"name": "Black Whelp",
+	"name": "Whelp",
 	"baseManaCost": 1,
 	"type": "MINION",
 	"baseAttack": 2,

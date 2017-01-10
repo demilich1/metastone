@@ -1,5 +1,4 @@
 {
-	"id": "spell_dark_wispers_1",
 	"name": "Summon 5 Wisps",
 	"baseManaCost": 6,
 	"type": "SPELL",

@@ -1,5 +1,4 @@
 {
-	"id": "hero_power_poisoned_dagger",
 	"name": "Poisoned Dagger",
 	"baseManaCost": 2,
 	"type": "HERO_POWER",

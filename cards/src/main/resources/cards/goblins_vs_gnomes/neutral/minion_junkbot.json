@@ -1,5 +1,4 @@
 {
-	"id": "minion_junkbot",
 	"name": "Junkbot",
 	"baseManaCost": 5,
 	"type": "MINION",

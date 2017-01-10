@@ -1,5 +1,4 @@
 {
-	"id": "minion_coliseum_manager",
 	"name": "Coliseum Manager",
 	"baseManaCost": 3,
 	"type": "MINION",

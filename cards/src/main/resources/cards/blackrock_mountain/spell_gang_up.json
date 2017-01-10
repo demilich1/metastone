@@ -1,5 +1,4 @@
 {
-	"id": "spell_gang_up",
 	"name": "Gang Up",
 	"baseManaCost": 2,
 	"type": "SPELL",

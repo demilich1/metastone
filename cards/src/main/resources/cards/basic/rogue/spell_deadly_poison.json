@@ -1,5 +1,4 @@
 {
-	"id": "spell_deadly_poison",
 	"name": "Deadly Poison",
 	"baseManaCost": 1,
 	"type": "SPELL",

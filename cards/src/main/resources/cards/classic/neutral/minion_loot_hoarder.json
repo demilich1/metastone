@@ -1,5 +1,4 @@
 {
-	"id": "minion_loot_hoarder",
 	"name": "Loot Hoarder",
 	"baseManaCost": 2,
 	"type": "MINION",

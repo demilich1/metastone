@@ -1,5 +1,4 @@
 {
-	"id": "hero_power_reinforce",
 	"name": "Reinforce",
 	"baseManaCost": 2,
 	"type": "HERO_POWER",

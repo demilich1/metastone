@@ -1,5 +1,4 @@
 {
-	"id": "spell_hex",
 	"name": "Hex",
 	"baseManaCost": 3,
 	"type": "SPELL",

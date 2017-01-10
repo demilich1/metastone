@@ -1,5 +1,4 @@
 {
-	"id": "spell_wrath_3",
 	"name": "4 damage and draw a card",
 	"baseManaCost": 2,
 	"type": "SPELL",

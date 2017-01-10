@@ -1,5 +1,4 @@
 {
-	"id": "spell_cleave",
 	"name": "Cleave",
 	"baseManaCost": 2,
 	"type": "SPELL",

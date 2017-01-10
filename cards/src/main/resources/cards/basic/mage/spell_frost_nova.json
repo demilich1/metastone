@@ -1,5 +1,4 @@
 {
-	"id": "spell_frost_nova",
 	"name": "Frost Nova",
 	"baseManaCost": 3,
 	"type": "SPELL",

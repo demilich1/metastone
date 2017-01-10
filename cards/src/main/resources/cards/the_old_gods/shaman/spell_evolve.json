@@ -1,5 +1,4 @@
 {
-	"id": "spell_evolve",
 	"name": "Evolve",
 	"baseManaCost": 1,
 	"type": "SPELL",

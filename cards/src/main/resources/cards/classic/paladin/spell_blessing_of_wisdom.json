@@ -1,5 +1,4 @@
 {
-	"id": "spell_blessing_of_wisdom",
 	"name": "Blessing of Wisdom",
 	"baseManaCost": 1,
 	"type": "SPELL",

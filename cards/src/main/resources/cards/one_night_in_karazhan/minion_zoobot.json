@@ -1,5 +1,4 @@
 {
-	"id": "minion_zoobot",
 	"name": "Zoobot",
 	"baseManaCost": 3,
 	"type": "MINION",

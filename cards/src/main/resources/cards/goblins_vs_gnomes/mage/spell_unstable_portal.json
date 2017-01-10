@@ -1,5 +1,4 @@
 {
-	"id": "spell_unstable_portal",
 	"name": "Unstable Portal",
 	"baseManaCost": 2,
 	"type": "SPELL",

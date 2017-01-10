@@ -1,5 +1,4 @@
 {
-	"id": "spell_shadowflame",
 	"name": "Shadowflame",
 	"baseManaCost": 4,
 	"type": "SPELL",

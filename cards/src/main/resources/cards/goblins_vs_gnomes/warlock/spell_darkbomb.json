@@ -1,5 +1,4 @@
 {
-	"id": "spell_darkbomb",
 	"name": "Darkbomb",
 	"baseManaCost": 2,
 	"type": "SPELL",

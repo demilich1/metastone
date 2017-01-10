@@ -1,5 +1,4 @@
 {
-	"id": "spell_cobra_shot",
 	"name": "Cobra Shot",
 	"baseManaCost": 5,
 	"type": "SPELL",

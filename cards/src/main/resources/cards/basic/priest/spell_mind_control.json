@@ -1,5 +1,4 @@
 {
-	"id": "spell_mind_control",
 	"name": "Mind Control",
 	"baseManaCost": 10,
 	"type": "SPELL",

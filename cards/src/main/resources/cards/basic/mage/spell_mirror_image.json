@@ -1,5 +1,4 @@
 {
-	"id": "spell_mirror_image",
 	"name": "Mirror Image",
 	"baseManaCost": 1,
 	"type": "SPELL",

@@ -1,5 +1,4 @@
 {
-	"id": "spell_revenge",
 	"name": "Revenge",
 	"baseManaCost": 2,
 	"type": "SPELL",

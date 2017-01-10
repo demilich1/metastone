@@ -1,5 +1,4 @@
 {
-	"id": "hero_power_tank_up",
 	"name": "Tank Up!",
 	"baseManaCost": 2,
 	"type": "HERO_POWER",

@@ -1,5 +1,4 @@
 {
-	"id": "spell_power_of_the_wild",
 	"name": "Power of the Wild",
 	"baseManaCost": 2,
 	"type": "CHOOSE_ONE",

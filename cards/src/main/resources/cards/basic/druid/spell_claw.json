@@ -1,5 +1,4 @@
 {
-	"id": "spell_claw",
 	"name": "Claw",
 	"baseManaCost": 1,
 	"type": "SPELL",

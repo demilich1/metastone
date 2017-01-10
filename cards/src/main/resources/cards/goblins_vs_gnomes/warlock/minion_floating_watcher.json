@@ -1,5 +1,4 @@
 {
-	"id": "minion_floating_watcher",
 	"name": "Floating Watcher",
 	"baseManaCost": 5,
 	"type": "MINION",

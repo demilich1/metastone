@@ -1,5 +1,4 @@
 {
-	"id": "spell_maelstrom_portal",
 	"name": "Maelstrom Portal",
 	"baseManaCost": 2,
 	"type": "SPELL",

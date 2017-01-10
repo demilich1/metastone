@@ -1,5 +1,4 @@
 {
-	"id": "spell_demonfuse",
 	"name": "Demonfuse",
 	"baseManaCost": 2,
 	"type": "SPELL",

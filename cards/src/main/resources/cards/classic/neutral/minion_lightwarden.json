@@ -1,5 +1,4 @@
 {
-	"id": "minion_lightwarden",
 	"name": "Lightwarden",
 	"baseManaCost": 1,
 	"type": "MINION",

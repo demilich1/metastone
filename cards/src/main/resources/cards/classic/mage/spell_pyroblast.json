@@ -1,5 +1,4 @@
 {
-	"id": "spell_pyroblast",
 	"name": "Pyroblast",
 	"baseManaCost": 10,
 	"type": "SPELL",

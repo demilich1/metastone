@@ -1,5 +1,4 @@
 {
-	"id": "spell_lightbomb",
 	"name": "Lightbomb",
 	"baseManaCost": 6,
 	"type": "SPELL",

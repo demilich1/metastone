@@ -1,5 +1,4 @@
 {
-	"id": "spell_bananas",
 	"name": "Bananas",
 	"baseManaCost": 1,
 	"type": "SPELL",

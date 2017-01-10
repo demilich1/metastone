@@ -1,5 +1,4 @@
 {
-	"id": "spell_feign_death",
 	"name": "Feign Death",
 	"baseManaCost": 2,
 	"type": "SPELL",

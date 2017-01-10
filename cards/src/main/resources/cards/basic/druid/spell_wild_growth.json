@@ -1,5 +1,4 @@
 {
-	"id": "spell_wild_growth",
 	"name": "Wild Growth",
 	"baseManaCost": 2,
 	"type": "SPELL",

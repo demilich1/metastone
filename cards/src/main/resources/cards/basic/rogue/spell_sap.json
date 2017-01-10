@@ -1,5 +1,4 @@
 {
-	"id": "spell_sap",
 	"name": "Sap",
 	"baseManaCost": 2,
 	"type": "SPELL",
