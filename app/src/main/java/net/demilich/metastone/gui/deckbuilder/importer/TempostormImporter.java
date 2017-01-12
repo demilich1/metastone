@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
 
 public class TempostormImporter implements IDeckImporter{
 
-    private static Logger logger = LoggerFactory.getLogger(HearthPwnImporter.class);
+    private static Logger logger = LoggerFactory.getLogger(TempostormImporter.class);
 
     Deck parse(JsonObject root)
     {
