@@ -6,6 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "SHAMAN",
 	"rarity": "FREE",
+	"race": "MURLOC",
 	"description": "",
 	"collectible": false,
 	"set": "MEAN_STREETS_OF_GADGETZAN",

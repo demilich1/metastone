@@ -49,8 +49,8 @@ Sure! There is still a lot to do and anybody willing to contribute is welcome
    * _The above gradle task will automatically generate the `BuildConfig.java` file._
    * Open Eclipse and choose `File > Import > General > Existing projects into workspace`
    * Select the `Search for nested project` checkbox on the `Import Projects` screen.
-   * Change `Eclipse > Preferences > Java > Compiler > Compiler Complience Level` to 1.8
-   * Change `Eclipse > Preferences > Java > Compiler > Building > Circular dependencies` from `Error` to `Warning`.  There is a [known bug](https://issues.gradle.org/browse/GRADLE-2200) with importing multi-module gradle projects into Eclipse. The IDE of choice for working with gradle projects is [IntelliJ IDEA](https://www.jetbrains.com/idea/).
+   * Change `Eclipse > Window > Preferences > Java > Compiler > Compiler Complience Level` to 1.8
+   * Change `Eclipse > Window > Preferences > Java > Compiler > Building > Circular dependencies` from `Error` to `Warning`.  There is a [known bug](https://issues.gradle.org/browse/GRADLE-2200) with importing multi-module gradle projects into Eclipse. The IDE of choice for working with gradle projects is [IntelliJ IDEA](https://www.jetbrains.com/idea/).
 * If you want to build from IntelliJ IDEA, create the IntelliJ project files:
    * Linux/Mac OSX `./gradlew idea`
    * Windows `gradlew.bat idea`
