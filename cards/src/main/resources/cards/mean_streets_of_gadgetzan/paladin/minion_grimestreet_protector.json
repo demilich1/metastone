@@ -12,7 +12,7 @@
 		"spell": {
 			"class": "AddAttributeSpell",
 			"target": "ADJACENT_MINIONS",
-			"attribute": "TAUNT"
+			"attribute": "DIVINE_SHIELD"
 		}
 	},
 	"attributes": {
