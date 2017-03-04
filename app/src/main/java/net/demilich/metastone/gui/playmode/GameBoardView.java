@@ -1,8 +1,7 @@
 package net.demilich.metastone.gui.playmode;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,16 +20,15 @@ import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.behaviour.human.HumanTargetOptions;
 import net.demilich.metastone.game.cards.CardCollection;
-import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.logic.GameLogic;
+import net.demilich.metastone.game.visuals.GameContextVisuals;
 import net.demilich.metastone.gui.IconFactory;
 import net.demilich.metastone.gui.cards.HandCard;
 import net.demilich.metastone.gui.playmode.animation.EventVisualizerDispatcher;
 
 public class GameBoardView extends BorderPane {
-
 	@FXML
 	private HBox p1CardPane;
 	@FXML
@@ -56,11 +54,16 @@ public class GameBoardView extends BorderPane {
 	private MinionToken[] p1Minions = new MinionToken[GameLogic.MAX_MINIONS];
 	private MinionToken[] p2Minions = new MinionToken[GameLogic.MAX_MINIONS];
 
-	private final HashMap<GameToken, Button> summonHelperMap1 = new HashMap<GameToken, Button>();
-	private final HashMap<GameToken, Button> summonHelperMap2 = new HashMap<GameToken, Button>();
-	private final HashMap<Actor, GameToken> entityTokenMap = new HashMap<Actor, GameToken>();
+	private final HashMap<GameToken, Button> summonHelperMap1 = new HashMap<>();
+	private final HashMap<GameToken, Button> summonHelperMap2 = new HashMap<>();
+	private final Map<Entity, GameToken> entityTokenMap = new EntityGameTokenMap();
+
+	private final Button p1RightmostSummon;
+	private final Button p2RightmostSummon;
 
 	private final EventVisualizerDispatcher gameEventVisualizer = new EventVisualizerDispatcher();
+
+	private int localPlayerId;
 
 	@FXML
 	private Label centerMessageLabel;
@@ -101,13 +104,13 @@ public class GameBoardView extends BorderPane {
 			summonHelperMap2.put(p2Minions[i], summonHelper);
 		}
 		// create one additional summon helper (for each player)
-		Button summonHelper = createSummonHelper();
-		p1MinionPane.getChildren().add(summonHelper);
-		summonHelperMap1.put(null, summonHelper);
+		p1RightmostSummon = createSummonHelper();
+		p1MinionPane.getChildren().add(p1RightmostSummon);
+		summonHelperMap1.put(null, p1RightmostSummon);
 
-		summonHelper = createSummonHelper();
-		p2MinionPane.getChildren().add(summonHelper);
-		summonHelperMap2.put(null, summonHelper);
+		p2RightmostSummon = createSummonHelper();
+		p2MinionPane.getChildren().add(p2RightmostSummon);
+		summonHelperMap2.put(null, p2RightmostSummon);
 
 		p1Hero = new HeroToken();
 		p2Hero = new HeroToken();
@@ -163,13 +166,9 @@ public class GameBoardView extends BorderPane {
 			Entity target = context.resolveSingleTarget(action.getTargetKey());
 			GameToken token = getToken(target);
 
-			EventHandler<MouseEvent> clickedHander = new EventHandler<MouseEvent>() {
-
-				@Override
-				public void handle(MouseEvent event) {
-					disableTargetSelection();
-					targetOptions.getActionSelectionListener().onActionSelected(action);
-				}
+			EventHandler<MouseEvent> clickedHander = event -> {
+				disableTargetSelection();
+				targetOptions.getActionSelectionListener().onActionSelected(action);
 			};
 
 			token.showTargetMarker(clickedHander);
@@ -182,16 +181,15 @@ public class GameBoardView extends BorderPane {
 		for (final GameAction action : targetOptions.getActionGroup().getActionsInGroup()) {
 			Entity target = context.resolveSingleTarget(action.getTargetKey());
 			GameToken token = getToken(target);
-			Button summonHelper = playerId == 0 ? summonHelperMap1.get(token) : summonHelperMap2.get(token);
+			Button summonHelper = playerId == localPlayerId ? summonHelperMap1.get(token) : summonHelperMap2.get(token);
+			if (summonHelper == null) {
+				summonHelper = getRightmostSummon(playerId == localPlayerId ? 0 : 1);
+			}
 			summonHelper.setVisible(true);
 			summonHelper.setManaged(true);
-			EventHandler<ActionEvent> clickedHander = new EventHandler<ActionEvent>() {
-
-				@Override
-				public void handle(ActionEvent event) {
-					disableTargetSelection();
-					targetOptions.getActionSelectionListener().onActionSelected(action);
-				}
+			EventHandler<ActionEvent> clickedHander = event -> {
+				disableTargetSelection();
+				targetOptions.getActionSelectionListener().onActionSelected(action);
 			};
 			summonHelper.setOnAction(clickedHander);
 		}
@@ -221,25 +219,32 @@ public class GameBoardView extends BorderPane {
 	}
 
 	public void showAnimations(GameContext context) {
-		gameEventVisualizer.visualize((GameContextVisualizable) context, this);
+		gameEventVisualizer.visualize((GameContextVisuals) context, this);
 	}
 
 	public void updateGameState(GameContext context) {
 		entityTokenMap.clear();
-		p1Hero.setHero(context.getPlayer1());
-		p1Hero.updateHeroPowerCost(context, context.getPlayer1());
-		p1Hero.highlight(context.getActivePlayer() == context.getPlayer1());
-		entityTokenMap.put(context.getPlayer1().getHero(), p1Hero);
-		p2Hero.setHero(context.getPlayer2());
-		p2Hero.updateHeroPowerCost(context, context.getPlayer2());
-		p2Hero.highlight(context.getActivePlayer() == context.getPlayer2());
-		entityTokenMap.put(context.getPlayer2().getHero(), p2Hero);
+		PlayerVisuals playerVisuals = new PlayerVisuals(context).invoke();
+		Player localPlayer = playerVisuals.getLocalPlayer();
+		Player opponentPlayer = playerVisuals.getOpponentPlayer();
 
-		updateHandCards(context, context.getPlayer1(), p1Cards);
-		updateHandCards(context, context.getPlayer2(), p2Cards);
+		localPlayerId = localPlayer.getId();
+		p1Hero.setHero(localPlayer);
+		p1Hero.updateHeroPowerCost(context, localPlayer);
+		p1Hero.highlight(context.getActivePlayerId() == localPlayer.getId());
+		entityTokenMap.put(localPlayer, p1Hero);
+		entityTokenMap.put(localPlayer.getHero(), p1Hero);
+		p2Hero.setHero(opponentPlayer);
+		p2Hero.updateHeroPowerCost(context, opponentPlayer);
+		p2Hero.highlight(context.getActivePlayerId() == opponentPlayer.getId());
+		entityTokenMap.put(opponentPlayer, p2Hero);
+		entityTokenMap.put(opponentPlayer.getHero(), p2Hero);
 
-		updateMinionTokens(context.getPlayer1(), p1Minions);
-		updateMinionTokens(context.getPlayer2(), p2Minions);
+		updateHandCards(context, localPlayer, p1Cards);
+		updateHandCards(context, opponentPlayer, p2Cards);
+
+		updateMinionTokens(localPlayer, p1Minions);
+		updateMinionTokens(opponentPlayer, p2Minions);
 
 		checkForWinner(context);
 	}
@@ -272,6 +277,59 @@ public class GameBoardView extends BorderPane {
 				minionTokens[i].setManaged(false);
 				minionTokens[i].setVisible(false);
 			}
+		}
+	}
+
+	private Button getRightmostSummon(int playerId) {
+		if (playerId == 0) {
+			return p1RightmostSummon;
+		} else {
+			return p2RightmostSummon;
+		}
+	}
+
+	private class PlayerVisuals {
+		private GameContext context;
+		private Player localPlayer;
+		private Player opponentPlayer;
+
+		public PlayerVisuals(GameContext context) {
+			this.context = context;
+		}
+
+		public Player getLocalPlayer() {
+			return localPlayer;
+		}
+
+		public Player getOpponentPlayer() {
+			return opponentPlayer;
+		}
+
+		public PlayerVisuals invoke() {
+			localPlayer = context.getPlayer1();
+			opponentPlayer = context.getPlayer2();
+
+			// Try to configure the players based on what data is available.
+			if (context instanceof GameContextVisuals) {
+				int localPlayerId = ((GameContextVisuals) context).getLocalPlayerId();
+
+				if (context.hasPlayer(localPlayerId)) {
+					localPlayer = context.getPlayer(localPlayerId);
+				} else {
+					localPlayer = Player.Empty();
+					localPlayer.setId(localPlayerId);
+				}
+
+				final int opponentId = localPlayerId == GameContext.PLAYER_1 ? GameContext.PLAYER_2 : GameContext.PLAYER_1;
+
+				if (context.hasPlayer(opponentId)) {
+					opponentPlayer = context.getOpponent(localPlayer);
+				} else {
+					opponentPlayer = Player.Empty();
+					opponentPlayer.setId(opponentId);
+				}
+			}
+			return this;
 		}
 	}
 }

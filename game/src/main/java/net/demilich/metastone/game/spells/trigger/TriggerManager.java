@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.spells.trigger;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +13,7 @@ import net.demilich.metastone.game.spells.aura.Aura;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.utils.IDisposable;
 
-public class TriggerManager implements Cloneable, IDisposable {
-
+public class TriggerManager implements Cloneable, IDisposable, Serializable {
 	public static Logger logger = LoggerFactory.getLogger(TriggerManager.class);
 
 	private final List<IGameEventListener> triggers = new ArrayList<IGameEventListener>();

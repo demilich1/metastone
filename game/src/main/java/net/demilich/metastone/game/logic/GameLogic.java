@@ -1,32 +1,12 @@
 package net.demilich.metastone.game.logic;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.ThreadLocalRandom;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import net.demilich.metastone.BuildConfig;
-import net.demilich.metastone.game.Attribute;
-import net.demilich.metastone.game.Environment;
-import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.actions.ActionType;
-import net.demilich.metastone.game.actions.BattlecryAction;
-import net.demilich.metastone.game.actions.GameAction;
-import net.demilich.metastone.game.actions.PlaySpellCardAction;
-import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.cards.CardCollection;
-import net.demilich.metastone.game.cards.CardType;
-import net.demilich.metastone.game.cards.SecretCard;
-import net.demilich.metastone.game.cards.SpellCard;
+import co.paralleluniverse.fibers.Suspendable;
+import com.google.gson.annotations.Expose;
+import io.vertx.core.AsyncResult;
+import io.vertx.core.Handler;
+import net.demilich.metastone.game.*;
+import net.demilich.metastone.game.actions.*;
+import net.demilich.metastone.game.cards.*;
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
@@ -36,36 +16,7 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.entities.weapons.Weapon;
-import net.demilich.metastone.game.events.AfterPhysicalAttackEvent;
-import net.demilich.metastone.game.events.AfterSpellCastedEvent;
-import net.demilich.metastone.game.events.AfterSummonEvent;
-import net.demilich.metastone.game.events.ArmorGainedEvent;
-import net.demilich.metastone.game.events.BeforeSummonEvent;
-import net.demilich.metastone.game.events.BoardChangedEvent;
-import net.demilich.metastone.game.events.CardPlayedEvent;
-import net.demilich.metastone.game.events.DamageEvent;
-import net.demilich.metastone.game.events.DiscardEvent;
-import net.demilich.metastone.game.events.DrawCardEvent;
-import net.demilich.metastone.game.events.EnrageChangedEvent;
-import net.demilich.metastone.game.events.GameEvent;
-import net.demilich.metastone.game.events.GameStartEvent;
-import net.demilich.metastone.game.events.HealEvent;
-import net.demilich.metastone.game.events.HeroPowerUsedEvent;
-import net.demilich.metastone.game.events.JoustEvent;
-import net.demilich.metastone.game.events.KillEvent;
-import net.demilich.metastone.game.events.OverloadEvent;
-import net.demilich.metastone.game.events.PhysicalAttackEvent;
-import net.demilich.metastone.game.events.PreDamageEvent;
-import net.demilich.metastone.game.events.SecretPlayedEvent;
-import net.demilich.metastone.game.events.SecretRevealedEvent;
-import net.demilich.metastone.game.events.SilenceEvent;
-import net.demilich.metastone.game.events.SpellCastedEvent;
-import net.demilich.metastone.game.events.SummonEvent;
-import net.demilich.metastone.game.events.TargetAcquisitionEvent;
-import net.demilich.metastone.game.events.TurnEndEvent;
-import net.demilich.metastone.game.events.TurnStartEvent;
-import net.demilich.metastone.game.events.WeaponDestroyedEvent;
-import net.demilich.metastone.game.events.WeaponEquippedEvent;
+import net.demilich.metastone.game.events.*;
 import net.demilich.metastone.game.heroes.powers.HeroPower;
 import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.SpellUtils;
@@ -77,15 +28,15 @@ import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
 import net.demilich.metastone.game.spells.trigger.IGameEventListener;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 import net.demilich.metastone.game.spells.trigger.secrets.Secret;
-import net.demilich.metastone.game.targeting.CardLocation;
-import net.demilich.metastone.game.targeting.CardReference;
-import net.demilich.metastone.game.targeting.EntityReference;
-import net.demilich.metastone.game.targeting.IdFactory;
-import net.demilich.metastone.game.targeting.TargetSelection;
+import net.demilich.metastone.game.targeting.*;
 import net.demilich.metastone.utils.MathUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class GameLogic implements Cloneable {
+import java.io.Serializable;
+import java.util.*;
 
+public class GameLogic implements Cloneable, Serializable {
 	public static Logger logger = LoggerFactory.getLogger(GameLogic.class);
 
 	public static final int MAX_PLAYERS = 2;
@@ -111,17 +62,20 @@ public class GameLogic implements Cloneable {
 				|| player.hasAttribute(Attribute.DESTROYED);
 	}
 
-	private final TargetLogic targetLogic = new TargetLogic();
+	protected final TargetLogic targetLogic = new TargetLogic();
 	private final ActionLogic actionLogic = new ActionLogic();
 	private final SpellFactory spellFactory = new SpellFactory();
-	private final IdFactory idFactory;
-	private GameContext context;
+	private IdFactory idFactory;
+	private final Random random = new Random();
+
+	@Expose(serialize = false, deserialize = false)
+	protected GameContext context;
 
 	private boolean loggingEnabled = true;
 
 	// DEBUG
 	private final int MAX_HISTORY_ENTRIES = 100;
-	private Queue<String> debugHistory = new LinkedList<>();
+	private ArrayDeque<String> debugHistory = new ArrayDeque<>();
 
 	public GameLogic() {
 		idFactory = new IdFactory();
@@ -132,7 +86,10 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void addGameEventListener(Player player, IGameEventListener gameEventListener, Entity target) {
-		debugHistory.add("Player " + player.getId() + " has set event listener " + gameEventListener.getClass().getName() + " from entity " + target.getName() + "[Reference ID: " + target.getId() + "]");
+		if (isLoggingEnabled()) {
+			debugHistory.add("Player " + player.getId() + " has set event listener " + gameEventListener.getClass().getName() + " from entity " + target.getName() + "[Reference ID: " + target.getId() + "]");
+		}
+
 		gameEventListener.setHost(target);
 		if (!gameEventListener.hasPersistentOwner() || gameEventListener.getOwner() == -1) {
 			gameEventListener.setOwner(player.getId());
@@ -153,7 +110,7 @@ public class GameLogic implements Cloneable {
 
 		player.modifyAttribute(Attribute.COMBO, +1);
 		Card card = context.resolveCardReference(cardReference);
-		
+
 		card.removeAttribute(Attribute.MANA_COST_MODIFIER);
 	}
 
@@ -165,8 +122,7 @@ public class GameLogic implements Cloneable {
 	public void applyAttribute(Entity entity, Attribute attr) {
 		if (attr == Attribute.MEGA_WINDFURY && entity.hasAttribute(Attribute.WINDFURY) && !entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, MEGA_WINDFURY_ATTACKS - WINDFURY_ATTACKS);
-		} else
-			if (attr == Attribute.WINDFURY && !entity.hasAttribute(Attribute.WINDFURY) && !entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
+		} else if (attr == Attribute.WINDFURY && !entity.hasAttribute(Attribute.WINDFURY) && !entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, WINDFURY_ATTACKS - 1);
 		} else if (attr == Attribute.MEGA_WINDFURY && !entity.hasAttribute(Attribute.WINDFURY) && !entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, MEGA_WINDFURY_ATTACKS - 1);
@@ -214,9 +170,9 @@ public class GameLogic implements Cloneable {
 	 * @param cardCollection
 	 * 		The Deck to assign IDs to
 	 */
-	private void assignCardIds(CardCollection cardCollection) {
+	protected void assignCardIds(CardCollection cardCollection) {
 		for (Card card : cardCollection) {
-			card.setId(idFactory.generateId());
+			card.setId(getIdFactory().generateId());
 			card.setLocation(CardLocation.DECK);
 		}
 	}
@@ -340,12 +296,13 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void castSpell(int playerId, SpellDesc spellDesc, EntityReference sourceReference, EntityReference targetReference,
-			boolean childSpell) {
+	                      boolean childSpell) {
 		castSpell(playerId, spellDesc, sourceReference, targetReference, TargetSelection.NONE, childSpell);
 	}
 
+	@Suspendable
 	public void castSpell(int playerId, SpellDesc spellDesc, EntityReference sourceReference, EntityReference targetReference,
-			TargetSelection targetSelection, boolean childSpell) {
+	                      TargetSelection targetSelection, boolean childSpell) {
 		Player player = context.getPlayer(playerId);
 		Entity source = null;
 		if (sourceReference != null) {
@@ -384,18 +341,9 @@ public class GameLogic implements Cloneable {
 			}
 
 		}
-		try {
-			Spell spell = spellFactory.getSpell(spellDesc);
-			spell.cast(context, player, spellDesc, source, targets);
-		} catch (Exception e) {
-			if (source != null) {
-				logger.error("Error while playing card: " + source.getName());
-			}
-			logger.error("Error while casting spell: " + spellDesc);
-			panicDump();
-			e.printStackTrace();
-		}
 
+		Spell spell = spellFactory.getSpell(spellDesc);
+		spell.cast(context, player, spellDesc, source, targets);
 		if (sourceCard != null && sourceCard.getCardType().isCardType(CardType.SPELL) && !childSpell) {
 			context.getEnvironment().remove(Environment.TARGET_OVERRIDE);
 
@@ -470,8 +418,11 @@ public class GameLogic implements Cloneable {
 
 	@Override
 	public GameLogic clone() {
-		GameLogic clone = new GameLogic(idFactory.clone());
-		clone.debugHistory = new LinkedList<>(debugHistory);
+		GameLogic clone = new GameLogic(getIdFactory().clone());
+		clone.setLoggingEnabled(this.isLoggingEnabled());
+		if (isLoggingEnabled()) {
+			clone.debugHistory = this.debugHistory.clone();
+		}
 		return clone;
 	}
 
@@ -508,14 +459,14 @@ public class GameLogic implements Cloneable {
 			source.removeAttribute(Attribute.STEALTH);
 		}
 		switch (target.getEntityType()) {
-		case MINION:
-			damageDealt = damageMinion((Actor) target, damage);
-			break;
-		case HERO:
-			damageDealt = damageHero((Hero) target, damage);
-			break;
-		default:
-			break;
+			case MINION:
+				damageDealt = damageMinion((Actor) target, damage);
+				break;
+			case HERO:
+				damageDealt = damageHero((Hero) target, damage);
+				break;
+			default:
+				break;
 		}
 
 		target.setAttribute(Attribute.LAST_HIT, damageDealt);
@@ -585,26 +536,26 @@ public class GameLogic implements Cloneable {
 			Actor target = targets[i];
 			Player owner = context.getPlayer(target.getOwner());
 			switch (target.getEntityType()) {
-			case HERO:
-				log("Hero {} has been destroyed.", target.getName());
-				applyAttribute(target, Attribute.DESTROYED);
+				case HERO:
+					log("Hero {} has been destroyed.", target.getName());
+					applyAttribute(target, Attribute.DESTROYED);
 				applyAttribute(context.getPlayer(target.getOwner()), Attribute.DESTROYED);
-				break;
-			case MINION:
-				destroyMinion((Minion) target);
-				break;
-			case WEAPON:
-				destroyWeapon((Weapon) target);
-				break;
-			case ANY:
-			default:
-				logger.error("Trying to destroy unknown entity type {}", target.getEntityType());
-				break;
+					break;
+				case MINION:
+					destroyMinion((Minion) target);
+					break;
+				case WEAPON:
+					destroyWeapon((Weapon) target);
+					break;
+				case ANY:
+				default:
+					logger.error("Trying to destroy unknown entity type {}", target.getEntityType());
+					break;
 			}
 
 			resolveDeathrattles(owner, target, boardPositions[i]);
-		}
 		
+		}
 		for (Actor target : targets) {
 			removeSpellTriggers(target, true);
 		}
@@ -633,7 +584,7 @@ public class GameLogic implements Cloneable {
 	}
 
 	public int determineBeginner(int... playerIds) {
-		return ThreadLocalRandom.current().nextBoolean() ? playerIds[0] : playerIds[1];
+		return getRandom().nextBoolean() ? playerIds[0] : playerIds[1];
 	}
 
 	public void discardCard(Player player, Card card) {
@@ -674,7 +625,7 @@ public class GameLogic implements Cloneable {
 
 	public void drawSetAsideCard(int playerId, Card card) {
 		if (card.getId() == IdFactory.UNASSIGNED) {
-			card.setId(idFactory.generateId());
+			card.setId(getIdFactory().generateId());
 		}
 		card.setOwner(playerId);
 		Player player = context.getPlayer(playerId);
@@ -696,7 +647,7 @@ public class GameLogic implements Cloneable {
 		hero.activateWeapon(false);
 		log("{} ends his turn.", player.getName());
 		context.fireGameEvent(new TurnEndEvent(context, playerId));
-		for (Iterator<CardCostModifier> iterator = context.getCardCostModifiers().iterator(); iterator.hasNext();) {
+		for (Iterator<CardCostModifier> iterator = context.getCardCostModifiers().iterator(); iterator.hasNext(); ) {
 			CardCostModifier cardCostModifier = iterator.next();
 			if (cardCostModifier.isExpired()) {
 				iterator.remove();
@@ -709,42 +660,42 @@ public class GameLogic implements Cloneable {
 		equipWeapon(playerId, weapon, false);
 	}
 
-	public void equipWeapon(int playerId, Weapon weapon, boolean battlecry) {
-		Player player = context.getPlayer(playerId);
+	@Suspendable
+	public void equipWeapon(int playerId, Weapon weapon, boolean resolveBattlecry) {
+		PreEquipWeapon preEquipWeapon = new PreEquipWeapon(playerId, weapon).invoke();
+		Weapon currentWeapon = preEquipWeapon.getCurrentWeapon();
+		Player player = preEquipWeapon.getPlayer();
 
-		weapon.setId(idFactory.generateId());
-		Weapon currentWeapon = player.getHero().getWeapon();
-		
-		if (currentWeapon != null) {
-			player.getSetAsideZone().add(currentWeapon);
-		}
-
-		log("{} equips weapon {}", player.getHero(), weapon);
-		player.getHero().setWeapon(weapon);
-
-		if (battlecry && weapon.getBattlecry() != null) {
+		if (resolveBattlecry
+				&& weapon.getBattlecry() != null) {
 			resolveBattlecry(playerId, weapon);
 		}
-		
+
+		postEquipWeapon(playerId, weapon, currentWeapon, player);
+	}
+
+	protected void postEquipWeapon(int playerId, Weapon newWeapon, Weapon currentWeapon, Player player) {
 		if (currentWeapon != null) {
 			log("{} discards currently equipped weapon {}", player.getHero(), currentWeapon);
 			destroy(currentWeapon);
 			player.getSetAsideZone().remove(currentWeapon);
 		}
-		
-		player.getStatistics().equipWeapon(weapon);
-		weapon.onEquip(context, player);
-		weapon.setActive(context.getActivePlayerId() == playerId);
-		if (weapon.hasSpellTrigger()) {
-			for (SpellTrigger spellTrigger : weapon.getSpellTriggers()) {
-				addGameEventListener(player, spellTrigger, weapon);
-			}
+
+		player.getStatistics().equipWeapon(newWeapon);
+		newWeapon.onEquip(context, player);
+		newWeapon.setActive(context.getActivePlayerId() == playerId);
+		if (newWeapon.hasSpellTrigger()) {
+			List<SpellTrigger> spellTriggers = newWeapon.getSpellTriggers();
+			spellTriggers.forEach(s -> {
+				addGameEventListener(player, s, newWeapon);
+			});
+
 		}
-		if (weapon.getCardCostModifier() != null) {
-			addManaModifier(player, weapon.getCardCostModifier(), weapon);
+		if (newWeapon.getCardCostModifier() != null) {
+			addManaModifier(player, newWeapon.getCardCostModifier(), newWeapon);
 		}
 		checkForDeadEntities();
-		context.fireGameEvent(new WeaponEquippedEvent(context, weapon));
+		context.fireGameEvent(new WeaponEquippedEvent(context, newWeapon));
 		context.fireGameEvent(new BoardChangedEvent(context));
 	}
 
@@ -844,12 +795,10 @@ public class GameLogic implements Cloneable {
 	 * Returns the first value of the attribute encountered. This method should
 	 * be used with caution, as the result is random if there are different
 	 * values of the same attribute in play.
-	 * 
+	 *
 	 * @param player
-	 * @param attr
-	 *            Which attribute to find
-	 * @param defaultValue
-	 *            The value returned if no occurrence of the attribute is found
+	 * @param attr         Which attribute to find
+	 * @param defaultValue The value returned if no occurrence of the attribute is found
 	 * @return the first occurrence of the value of attribute or defaultValue
 	 */
 	public int getAttributeValue(Player player, Attribute attr, int defaultValue) {
@@ -870,11 +819,9 @@ public class GameLogic implements Cloneable {
 	 * Return the greatest value of the attribute from all Actors of a Player.
 	 * This method will return infinite if an Attribute value is negative, so
 	 * use this method with caution.
-	 * 
-	 * @param player
-	 *            Which Player to check
-	 * @param attr
-	 *            Which attribute to find
+	 *
+	 * @param player Which Player to check
+	 * @param attr   Which attribute to find
 	 * @return The highest value from all sources. -1 is considered infinite.
 	 */
 	public int getGreatestAttributeValue(Player player, Attribute attr) {
@@ -927,7 +874,7 @@ public class GameLogic implements Cloneable {
 
 	public List<IGameEventListener> getSecrets(Player player) {
 		List<IGameEventListener> secrets = context.getTriggersAssociatedWith(player.getHero().getReference());
-		for (Iterator<IGameEventListener> iterator = secrets.iterator(); iterator.hasNext();) {
+		for (Iterator<IGameEventListener> iterator = secrets.iterator(); iterator.hasNext(); ) {
 			IGameEventListener trigger = iterator.next();
 			if (!(trigger instanceof Secret)) {
 				iterator.remove();
@@ -997,7 +944,7 @@ public class GameLogic implements Cloneable {
 			return;
 		}
 		boolean enraged = entity.getHp() < entity.getMaxHp();
-		// enrage state has not changed; do nothing
+		// enrage publicState has not changed; do nothing
 		if (entity.hasAttribute(Attribute.ENRAGED) == enraged) {
 			return;
 		}
@@ -1064,14 +1011,14 @@ public class GameLogic implements Cloneable {
 		}
 		boolean success = false;
 		switch (target.getEntityType()) {
-		case MINION:
-			success = healMinion((Actor) target, healing);
-			break;
-		case HERO:
-			success = healHero((Hero) target, healing);
-			break;
-		default:
-			break;
+			case MINION:
+				success = healMinion((Actor) target, healing);
+				break;
+			case HERO:
+				success = healHero((Hero) target, healing);
+				break;
+			default:
+				break;
 		}
 
 		if (success) {
@@ -1105,22 +1052,14 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void init(int playerId, boolean begins) {
-		Player player = context.getPlayer(playerId);
-		player.getHero().setId(idFactory.generateId());
-		player.getHero().setOwner(player.getId());
-		player.getHero().setMaxHp(player.getHero().getAttributeValue(Attribute.BASE_HP));
-		player.getHero().setHp(player.getHero().getAttributeValue(Attribute.BASE_HP));
-
-		player.getHero().getHeroPower().setId(idFactory.generateId());
-		assignCardIds(player.getDeck());
-		assignCardIds(player.getHand());
-
-		log("Setting hero hp to {} for {}", player.getHero().getHp(), player.getName());
-
-		player.getDeck().shuffle();
+		Player player = initializePlayer(playerId);
 
 		mulligan(player, begins);
 
+		startGameForPlayer(player);
+	}
+
+	protected void startGameForPlayer(Player player) {
 		for (Card card : player.getDeck()) {
 			if (card.getAttribute(Attribute.DECK_TRIGGER) != null) {
 				TriggerDesc triggerDesc = (TriggerDesc) card.getAttribute(Attribute.DECK_TRIGGER);
@@ -1136,6 +1075,23 @@ public class GameLogic implements Cloneable {
 
 		GameStartEvent gameStartEvent = new GameStartEvent(context, player.getId());
 		context.fireGameEvent(gameStartEvent);
+	}
+
+	public Player initializePlayer(int playerId) {
+		Player player = context.getPlayer(playerId);
+		player.setOwner(player.getId());
+		player.getHero().setId(getIdFactory().generateId());
+		player.getHero().setOwner(player.getId());
+		player.getHero().setMaxHp(player.getHero().getAttributeValue(Attribute.BASE_HP));
+		player.getHero().setHp(player.getHero().getAttributeValue(Attribute.BASE_HP));
+
+		player.getHero().getHeroPower().setId(getIdFactory().generateId());
+		assignCardIds(player.getDeck());
+		assignCardIds(player.getHand());
+
+		log("Setting hero hp to {} for {}", player.getHero().getHp(), player.getName());
+		player.getDeck().shuffle();
+		return player;
 	}
 
 	public boolean isLoggingEnabled() {
@@ -1185,7 +1141,7 @@ public class GameLogic implements Cloneable {
 		}
 	}
 
-	private void log(String message, Object param1, Object param2) {
+	protected void log(String message, Object param1, Object param2) {
 		logToDebugHistory(message, param1, param2);
 		if (isLoggingEnabled() && logger.isDebugEnabled()) {
 			logger.debug(message, param1, param2);
@@ -1200,7 +1156,7 @@ public class GameLogic implements Cloneable {
 	}
 
 	private void logToDebugHistory(String message, Object... params) {
-		if (!BuildConfig.DEV_BUILD) {
+		if (!isLoggingEnabled()) {
 			return;
 		}
 		if (debugHistory.size() == MAX_HISTORY_ENTRIES) {
@@ -1275,24 +1231,22 @@ public class GameLogic implements Cloneable {
 		}
 	}
 
-	private void mulligan(Player player, boolean begins) {
-		int numberOfStarterCards = begins ? STARTER_CARDS : STARTER_CARDS + 1;
-		List<Card> starterCards = new ArrayList<>();
-		for (int j = 0; j < numberOfStarterCards; j++) {
-			Card randomCard = player.getDeck().getRandom();
-			if (randomCard != null) {
-				player.getDeck().remove(randomCard);
-				log("Player {} been offered card {} for mulligan", player.getName(), randomCard);
-				starterCards.add(randomCard);
-			}
-		}
+	protected void mulligan(Player player, boolean begins) {
+		FirstHand firstHand = new FirstHand(player, begins).invoke();
 
-		List<Card> discardedCards = player.getBehaviour().mulligan(context, player, starterCards);
+		List<Card> discardedCards = player.getBehaviour().mulligan(context, player, firstHand.getStarterCards());
+
+		handleMulligan(player, begins, firstHand, discardedCards);
+	}
+
+	protected void handleMulligan(Player player, boolean begins, FirstHand firstHand, List<Card> discardedCards) {
+		List<Card> starterCards = firstHand.getStarterCards();
+		int numberOfStarterCards = firstHand.getNumberOfStarterCards();
 
 		// remove player selected cards from starter cards
 		for (Card discardedCard : discardedCards) {
 			log("Player {} mulligans {} ", player.getName(), discardedCard);
-			starterCards.remove(discardedCard);
+			starterCards.removeIf(c -> c.getId() == discardedCard.getId());
 		}
 
 		// draw random cards from deck until required starter card count is
@@ -1303,7 +1257,7 @@ public class GameLogic implements Cloneable {
 			starterCards.add(randomCard);
 		}
 
-		// put the mulligan cards back in the deck
+		// put the networkRequestMulligan cards back in the deck
 		for (Card discardedCard : discardedCards) {
 			player.getDeck().add(discardedCard);
 		}
@@ -1322,14 +1276,17 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void panicDump() {
-		logger.error("=========PANIC DUMP=========");
 		for (String entry : debugHistory) {
 			logger.error(entry);
 		}
 	}
 
+	@Suspendable
 	public void performGameAction(int playerId, GameAction action) {
-		debugHistory.add(action.toString());
+		if (isLoggingEnabled()) {
+			debugHistory.add(action.toString());
+		}
+
 		if (playerId != context.getActivePlayerId()) {
 			logger.warn("Player {} tries to perform an action, but it is not his turn!", context.getPlayer(playerId).getName());
 		}
@@ -1350,6 +1307,7 @@ public class GameLogic implements Cloneable {
 		}
 	}
 
+	@Suspendable
 	public void playCard(int playerId, CardReference cardReference) {
 		Player player = context.getPlayer(playerId);
 		Card card = context.resolveCardReference(cardReference);
@@ -1421,17 +1379,15 @@ public class GameLogic implements Cloneable {
 	}
 
 	/**
-	 * 
-	 * @param max
-	 *            Upper bound of random number (exclusive)
+	 * @param max Upper bound of random number (exclusive)
 	 * @return Random number between 0 and max (exclusive)
 	 */
 	public int random(int max) {
-		return ThreadLocalRandom.current().nextInt(max);
+		return getRandom().nextInt(max);
 	}
 
 	public boolean randomBool() {
-		return ThreadLocalRandom.current().nextBoolean();
+		return getRandom().nextBoolean();
 	}
 
 	public void receiveCard(int playerId, Card card) {
@@ -1445,7 +1401,7 @@ public class GameLogic implements Cloneable {
 	public void receiveCard(int playerId, Card card, Entity source, boolean drawn) {
 		Player player = context.getPlayer(playerId);
 		if (card.getId() == IdFactory.UNASSIGNED) {
-			card.setId(idFactory.generateId());
+			card.setId(getIdFactory().generateId());
 		}
 
 		card.setOwner(playerId);
@@ -1456,7 +1412,7 @@ public class GameLogic implements Cloneable {
 				TriggerDesc triggerDesc = (TriggerDesc) card.getAttribute(Attribute.PASSIVE_TRIGGER);
 				addGameEventListener(player, triggerDesc.create(), card);
 			}
-			
+
 			log("{} receives card {}", player.getName(), card);
 			hand.add(card);
 			card.setLocation(CardLocation.HAND);
@@ -1568,9 +1524,9 @@ public class GameLogic implements Cloneable {
 	public void replaceCard(int playerId, Card oldCard, Card newCard) {
 		Player player = context.getPlayer(playerId);
 		if (newCard.getId() == IdFactory.UNASSIGNED) {
-			newCard.setId(idFactory.generateId());
+			newCard.setId(getIdFactory().generateId());
 		}
-		
+
 		if (!player.getHand().contains(oldCard)) {
 			return;
 		}
@@ -1589,13 +1545,13 @@ public class GameLogic implements Cloneable {
 		newCard.setLocation(CardLocation.HAND);
 		context.fireGameEvent(new DrawCardEvent(context, playerId, newCard, null, false));
 	}
-	
+
 	public void replaceCardInDeck(int playerId, Card oldCard, Card newCard) {
 		Player player = context.getPlayer(playerId);
 		if (newCard.getId() == IdFactory.UNASSIGNED) {
-			newCard.setId(idFactory.generateId());
+			newCard.setId(getIdFactory().generateId());
 		}
-		
+
 		if (!player.getDeck().contains(oldCard)) {
 			return;
 		}
@@ -1614,40 +1570,53 @@ public class GameLogic implements Cloneable {
 		newCard.setLocation(CardLocation.DECK);
 	}
 
-	private void resolveBattlecry(int playerId, Actor actor) {
+	@Suspendable
+	protected void resolveBattlecry(int playerId, Actor actor) {
 		BattlecryAction battlecry = actor.getBattlecry();
+
 		Player player = context.getPlayer(playerId);
 		if (!battlecry.canBeExecuted(context, player)) {
 			return;
 		}
 
-		GameAction battlecryAction = null;
 		battlecry.setSource(actor.getReference());
+
 		if (battlecry.getTargetRequirement() != TargetSelection.NONE) {
-			List<Entity> validTargets = targetLogic.getValidTargets(context, player, battlecry);
-			if (validTargets.isEmpty()) {
+			List<GameAction> battlecryActions = getTargetedBattlecryGameActions(battlecry, player);
+
+			if (battlecryActions == null
+					|| battlecryActions.size() == 0) {
 				return;
 			}
 
-			List<GameAction> battlecryActions = new ArrayList<>();
-			for (Entity validTarget : validTargets) {
-				GameAction targetedBattlecry = battlecry.clone();
-				targetedBattlecry.setTarget(validTarget);
-				battlecryActions.add(targetedBattlecry);
-			}
-			
-			if (attributeExists(Attribute.ALL_RANDOM_FINAL_DESTINATION)) {
-				battlecryAction = battlecryActions.get(random(battlecryActions.size()));
-			} else {
-				battlecryAction = player.getBehaviour().requestAction(context, player, battlecryActions);
-			}
+			BattlecryAction targetedBattlecry = (BattlecryAction)player.getBehaviour().requestAction(context, player, battlecryActions);
+			performBattlecryAction(playerId, actor, player, targetedBattlecry);
 		} else {
-			battlecryAction = battlecry;
+			performBattlecryAction(playerId, actor, player, battlecry);
 		}
+	}
+
+	protected List<GameAction> getTargetedBattlecryGameActions(BattlecryAction battlecry, Player player) {
+		List<Entity> validTargets = targetLogic.getValidTargets(context, player, battlecry);
+		if (validTargets.isEmpty()) {
+			return null;
+		}
+
+		List<GameAction> battlecryActions = new ArrayList<>();
+		for (Entity validTarget : validTargets) {
+			GameAction targetedBattlecry = battlecry.clone();
+			targetedBattlecry.setTarget(validTarget);
+			battlecryActions.add(targetedBattlecry);
+		}
+		return battlecryActions;
+	}
+
+	@Suspendable
+	protected void performBattlecryAction(int playerId, Actor actor, Player player, BattlecryAction battlecryAction) {
 		if (hasAttribute(player, Attribute.DOUBLE_BATTLECRIES) && actor.getSourceCard().hasAttribute(Attribute.BATTLECRY)) {
 			// You need DOUBLE_BATTLECRIES before your battlecry action, not after.
 			performGameAction(playerId, battlecryAction);
-			if (!battlecry.canBeExecuted(context, player)) {
+			if (!battlecryAction.canBeExecuted(context, player)) {
 				return;
 			}
 			performGameAction(playerId, battlecryAction);
@@ -1678,6 +1647,7 @@ public class GameLogic implements Cloneable {
 		}
 	}
 
+	@Suspendable
 	public void secretTriggered(Player player, Secret secret) {
 		log("Secret was trigged: {}", secret.getSource());
 		player.getSecrets().remove(secret.getSource().getCardId());
@@ -1695,13 +1665,13 @@ public class GameLogic implements Cloneable {
 
 	public void shuffleToDeck(Player player, Card card) {
 		if (card.getId() == IdFactory.UNASSIGNED) {
-			card.setId(idFactory.generateId());
+			card.setId(getIdFactory().generateId());
 		}
 		card.setLocation(CardLocation.DECK);
 
 		if (player.getDeck().getCount() < MAX_DECK_SIZE) {
 			player.getDeck().addRandomly(card);
-			
+
 			if (card.getAttribute(Attribute.DECK_TRIGGER) != null) {
 				TriggerDesc triggerDesc = (TriggerDesc) card.getAttribute(Attribute.DECK_TRIGGER);
 				addGameEventListener(player, triggerDesc.create(), card);
@@ -1779,37 +1749,22 @@ public class GameLogic implements Cloneable {
 		checkForDeadEntities();
 	}
 
-	public boolean summon(int playerId, Minion minion) {
-		return summon(playerId, minion, null, -1, false);
-	}
-
+	@Suspendable
 	public boolean summon(int playerId, Minion minion, Card source, int index, boolean resolveBattlecry) {
-		Player player = context.getPlayer(playerId);
-		if (!canSummonMoreMinions(player)) {
-			log("{} cannot summon any more minions, {} is destroyed", player.getName(), minion);
-			return false;
-		}
-		minion.setId(idFactory.generateId());
-		minion.setOwner(player.getId());
+		PreSummon preSummon = new PreSummon(playerId, minion, index, source).invoke();
+		if (preSummon.is()) return false;
+		Player player = preSummon.getPlayer();
 
-		context.getSummonReferenceStack().push(minion.getReference());
-
-		log("{} summons {}", player.getName(), minion);
-
-		if (index < 0 || index >= player.getMinions().size()) {
-			player.getMinions().add(minion);
-		} else {
-			player.getMinions().add(index, minion);
-		}
-
-		context.fireGameEvent(new BeforeSummonEvent(context, minion, source));
-		context.fireGameEvent(new BoardChangedEvent(context));
-		
 		if (resolveBattlecry && minion.getBattlecry() != null) {
 			resolveBattlecry(player.getId(), minion);
 			checkForDeadEntities();
 		}
 
+		postSummon(minion, source, player);
+		return true;
+	}
+
+	protected void postSummon(Minion minion, Card source, Player player) {
 		if (context.getEnvironment().get(Environment.TRANSFORM_REFERENCE) != null) {
 			minion = (Minion) context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.TRANSFORM_REFERENCE));
 			minion.setBattlecry(null);
@@ -1856,16 +1811,13 @@ public class GameLogic implements Cloneable {
 			context.fireGameEvent(new AfterSummonEvent(context, minion, source));
 		}
 		context.fireGameEvent(new BoardChangedEvent(context));
-		return true;
 	}
 
 	/**
 	 * Transforms a Minion into a new Minion.
-	 * 
-	 * @param minion
-	 *            The original minion in play
-	 * @param newMinion
-	 *            The new minion to transform into
+	 *
+	 * @param minion    The original minion in play
+	 * @param newMinion The new minion to transform into
 	 */
 	public void transformMinion(Minion minion, Minion newMinion) {
 		// Remove any spell triggers associated with the old minion.
@@ -1874,16 +1826,16 @@ public class GameLogic implements Cloneable {
 		Player owner = context.getPlayer(minion.getOwner());
 		int index = owner.getMinions().indexOf(minion);
 		owner.getMinions().remove(minion);
-		
+
 		// If we want to straight up remove a minion from existence without
 		// killing it, this would be the best way.
 		if (newMinion != null) {
 			log("{} was transformed to {}", minion, newMinion);
 
 			// Give the new minion an ID.
-			newMinion.setId(idFactory.generateId());
+			newMinion.setId(getIdFactory().generateId());
 			newMinion.setOwner(owner.getId());
-	
+
 			// If the minion being transforms is being summoned, replace the old
 			// minion on the stack.
 			// Otherwise, summon the add the new minion.
@@ -1892,7 +1844,7 @@ public class GameLogic implements Cloneable {
 					&& !context.getEnvironment().containsKey(Environment.TRANSFORM_REFERENCE)) {
 				context.getEnvironment().put(Environment.TRANSFORM_REFERENCE, newMinion.getReference());
 				owner.getMinions().add(index, newMinion);
-	
+
 				// It's quite possible that this is actually supposed to add the
 				// minion to the zone it was originally in.
 				// This means minions in the SetAsideZone or the Graveyard that are
@@ -1906,29 +1858,29 @@ public class GameLogic implements Cloneable {
 				} else {
 					owner.getMinions().add(index, newMinion);
 				}
-	
+
 				applyAttribute(newMinion, Attribute.SUMMONING_SICKNESS);
 				refreshAttacksPerRound(newMinion);
-	
+
 				if (newMinion.hasSpellTrigger()) {
 					for (SpellTrigger spellTrigger : newMinion.getSpellTriggers()) {
 						addGameEventListener(owner, spellTrigger, newMinion);
 					}
 				}
-	
+
 				if (newMinion.getCardCostModifier() != null) {
 					addManaModifier(owner, newMinion.getCardCostModifier(), newMinion);
 				}
-	
+
 				handleEnrage(newMinion);
 			} else {
 				owner.getSetAsideZone().add(newMinion);
-				newMinion.setId(idFactory.generateId());
+				newMinion.setId(getIdFactory().generateId());
 				newMinion.setOwner(owner.getId());
 				removeSpellTriggers(newMinion);
 				return;
 			}
-		
+
 		}
 
 		// Move the old minion to the Set Aside Zone
@@ -1946,6 +1898,162 @@ public class GameLogic implements Cloneable {
 		power.markUsed();
 		player.getStatistics().cardPlayed(power);
 		context.fireGameEvent(new HeroPowerUsedEvent(context, playerId, power));
+	}
+
+	protected void mulliganAsync(Player player, boolean begins, Handler<Object> callback) {
+		throw new RecoverableGameException("Cannot call GameLogic::mulliganAsync from a non-async GameLogic instance.", context);
+	}
+
+	public void initAsync(int playerId, boolean begins, Handler<Player> callback) {
+		throw new RecoverableGameException("Cannot call GameLogic::initAsync from a non-async GameLogic instance.", context);
+
+	}
+
+	@Suspendable
+	protected void resolveBattlecryAsync(int playerId, Actor actor, Handler<AsyncResult<Boolean>> result) {
+		throw new RecoverableGameException("Cannot call GameLogic::resolveBattlecryAsync from a non-async GameLogic instance.", context);
+
+	}
+
+	@Suspendable
+	public void equipWeaponAsync(int playerId, Weapon weapon, boolean resolveBattlecry, Handler<AsyncResult<Boolean>> result) {
+		throw new RecoverableGameException("Cannot call GameLogic::equipWeaponAsync from a non-async GameLogic instance.", context);
+	}
+
+	@Suspendable
+	protected void summonAsync(int playerId, Minion minion, Card source, int index, boolean resolveBattlecry, Handler<AsyncResult<Boolean>> summoned) {
+		throw new RecoverableGameException("Cannot call GameLogic::summonAsync from a non-async GameLogic instance.", context);
+	}
+
+	public Random getRandom() {
+		return random;
+	}
+
+	public IdFactory getIdFactory() {
+		return idFactory;
+	}
+
+	public void setIdFactory(IdFactory idFactory) {
+		this.idFactory = idFactory;
+	}
+
+	protected class FirstHand {
+		private Player player;
+		private boolean begins;
+		private int numberOfStarterCards;
+		private List<Card> starterCards;
+
+		public FirstHand(Player player, boolean begins) {
+			this.player = player;
+			this.begins = begins;
+		}
+
+		public int getNumberOfStarterCards() {
+			return numberOfStarterCards;
+		}
+
+		public List<Card> getStarterCards() {
+			return starterCards;
+		}
+
+		public FirstHand invoke() {
+			numberOfStarterCards = begins ? STARTER_CARDS : STARTER_CARDS + 1;
+			starterCards = new ArrayList<>();
+			for (int j = 0; j < numberOfStarterCards; j++) {
+				Card randomCard = player.getDeck().getRandom();
+				if (randomCard != null) {
+					player.getDeck().remove(randomCard);
+					log("Player {} been offered card {} for networkRequestMulligan", player.getName(), randomCard);
+					starterCards.add(randomCard);
+				}
+			}
+			return this;
+		}
+	}
+
+	protected class PreEquipWeapon {
+		private int playerId;
+		private Weapon weapon;
+		private Player player;
+		private Weapon currentWeapon;
+
+		public PreEquipWeapon(int playerId, Weapon weapon) {
+			this.playerId = playerId;
+			this.weapon = weapon;
+		}
+
+		public Player getPlayer() {
+			return player;
+		}
+
+		public Weapon getCurrentWeapon() {
+			return currentWeapon;
+		}
+
+		public PreEquipWeapon invoke() {
+			player = context.getPlayer(playerId);
+
+			weapon.setId(getIdFactory().generateId());
+			currentWeapon = player.getHero().getWeapon();
+
+			if (currentWeapon != null) {
+				player.getSetAsideZone().add(currentWeapon);
+			}
+
+			log("{} equips weapon {}", player.getHero(), weapon);
+			player.getHero().setWeapon(weapon);
+			return this;
+		}
+	}
+
+	protected class PreSummon {
+		private Card source;
+		private boolean myResult;
+		private int playerId;
+		private Minion minion;
+		private int index;
+		private Player player;
+
+		public PreSummon(int playerId, Minion minion, int index, Card source) {
+			this.playerId = playerId;
+			this.minion = minion;
+			this.index = index;
+			this.source = source;
+		}
+
+		public boolean is() {
+			return myResult;
+		}
+
+		public Player getPlayer() {
+			return player;
+		}
+
+		public PreSummon invoke() {
+			player = context.getPlayer(playerId);
+			if (!canSummonMoreMinions(player)) {
+				log("{} cannot summon any more minions, {} is destroyed", player.getName(), minion);
+				myResult = true;
+				return this;
+			}
+			minion.setId(getIdFactory().generateId());
+			minion.setOwner(player.getId());
+
+			context.getSummonReferenceStack().push(minion.getReference());
+
+			log("{} summons {}", player.getName(), minion);
+
+			if (index < 0 || index >= player.getMinions().size()) {
+				player.getMinions().add(minion);
+			} else {
+				player.getMinions().add(index, minion);
+			}
+
+			context.fireGameEvent(new BeforeSummonEvent(context, minion, source));
+			context.fireGameEvent(new BoardChangedEvent(context));
+			myResult = false;
+			return this;
+		}
 	}
 
 }

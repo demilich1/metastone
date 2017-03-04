@@ -18,7 +18,7 @@ public class PutMinionOnBoardFromDeckSpell extends Spell {
 		player.getDeck().remove(minionCard);
 		player.getSetAsideZone().add(minionCard);
 		
-		boolean summonSuccess = context.getLogic().summon(player.getId(), minionCard.summon());
+		boolean summonSuccess = context.getLogic().summon(player.getId(), minionCard.summon(), null, -1, false);
 		
 		// re-add the card here if we removed it before
 		player.getSetAsideZone().remove(minionCard);

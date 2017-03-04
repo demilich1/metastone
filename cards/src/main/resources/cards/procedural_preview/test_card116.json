@@ -1,0 +1,14 @@
+{
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Discheo",
+  "description": "",
+  "baseHp": 12.0,
+  "heroClass": "ANY",
+  "fileFormatVersion": 1,
+  "collectible": true,
+  "baseManaCost": 10.0,
+  "id": "Discheo",
+  "baseAttack": 12.0,
+  "type": "MINION",
+  "rarity": "LEGENDARY"
+}

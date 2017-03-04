@@ -28,5 +28,4 @@ public class AddSecretSpell extends Spell {
 		Secret secret = (Secret) desc.get(SpellArg.SECRET);
 		context.getLogic().playSecret(player, secret);
 	}
-
 }

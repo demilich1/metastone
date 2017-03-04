@@ -3,6 +3,7 @@ package net.demilich.metastone.gui.simulationmode;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.demilich.metastone.game.statistics.SimulationResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

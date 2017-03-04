@@ -1,0 +1,14 @@
+{
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Inquisitive Deathbubble",
+  "description": "",
+  "baseHp": 9.0,
+  "baseManaCost": 9.0,
+  "heroClass": "ANY",
+  "fileFormatVersion": 1,
+  "collectible": true,
+  "type": "MINION",
+  "rarity": "LEGENDARY",
+  "id": "Inquisitive Deathbubble",
+  "baseAttack": 10.0
+}

@@ -2,6 +2,7 @@ package net.demilich.metastone.game.spells;
 
 import java.util.Map;
 
+import co.paralleluniverse.fibers.Suspendable;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
@@ -12,7 +13,7 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class DiscoverCardSpell extends Spell {
-	
+
 	public static SpellDesc create(EntityReference target, SpellDesc spell) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(DiscoverCardSpell.class);
 		arguments.put(SpellArg.TARGET, target);
@@ -21,6 +22,7 @@ public class DiscoverCardSpell extends Spell {
 	}
 	
 	@Override
+	@Suspendable
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		CardCollection result = new CardCollection();
 		boolean cannotReceiveOwned = desc.getBool(SpellArg.CANNOT_RECEIVE_OWNED);
@@ -43,7 +45,10 @@ public class DiscoverCardSpell extends Spell {
 		}
 		
 		if (!cards.isEmpty()) {
-			SpellUtils.castChildSpell(context, player, SpellUtils.getDiscover(context, player, desc, cards).getSpell(), source, target);
+			SpellUtils.getDiscoverAsync(context, player, desc, cards, discovered -> {
+				SpellUtils.castChildSpell(context, player, discovered.getSpell(), source, target);
+			});
+
 		}
 	}
 

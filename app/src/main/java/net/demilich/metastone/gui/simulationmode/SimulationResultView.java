@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 import net.demilich.metastone.NotificationProxy;
+import net.demilich.metastone.game.statistics.SimulationResult;
 import org.apache.commons.lang3.time.DurationFormatUtils;
 
 import javafx.collections.FXCollections;

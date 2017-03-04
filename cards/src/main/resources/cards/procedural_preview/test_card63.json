@@ -1,0 +1,24 @@
+{
+  "collectible": true,
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Frokeman Hurtself",
+  "heroClass": "ANY",
+  "description": "Battlecry: Deal 4 damage to HIMSELF.",
+  "fileFormatVersion": 1,
+  "rarity": "RARE",
+  "baseHp": 5.0,
+  "baseManaCost": 4.0,
+  "attributes": {
+    "BATTLECRY": true
+  },
+  "battlecry": {
+    "spell": {
+      "class": "DamageSpell",
+      "value": 4,
+      "target": "SELF"
+    }
+  },
+  "type": "MINION",
+  "id": "Froke",
+  "baseAttack": 7.0
+}

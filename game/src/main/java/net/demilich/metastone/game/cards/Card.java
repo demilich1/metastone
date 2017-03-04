@@ -1,7 +1,5 @@
 package net.demilich.metastone.game.cards;
 
-import java.util.EnumMap;
-
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -11,25 +9,33 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Race;
-import net.demilich.metastone.game.spells.desc.BattlecryDesc;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.targeting.CardLocation;
 import net.demilich.metastone.game.targeting.CardReference;
 import net.demilich.metastone.game.targeting.IdFactory;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
+import java.util.EnumMap;
+import java.util.Objects;
 
 public abstract class Card extends Entity {
+	private static final long serialVersionUID = 1L;
 
 	private String description = "";
-	private final CardType cardType;
-	private final CardSet cardSet;
-	private final Rarity rarity;
+	private CardType cardType;
+	private CardSet cardSet;
+	private Rarity rarity;
 	private HeroClass heroClass;
 	private HeroClass[] heroClasses;
 	private boolean collectible = true;
 	private CardLocation location;
-	private BattlecryDesc battlecry;
 	private ValueProvider manaCostModifier;
-	private final String cardId;
+	private String cardId;
+
+	public Card() {
+		super();
+	}
 
 	public Card(CardDesc desc) {
 		cardId = desc.id;
@@ -70,29 +76,25 @@ public abstract class Card extends Entity {
 	}
 
 	public boolean evaluateExpression(String operator, int value1, int value2) {
-		switch(operator) {
-		case "=":
-			return value1 == value2;
-		case ">":
-			return value1 > value2;
-		case "<":
-			return value1 < value2;
-		case ">=":
-			return value1 >= value2;
-		case "<=":
-			return value1 <= value2;
-		case "!=":
-			return value1 != value2;
+		switch (operator) {
+			case "=":
+				return value1 == value2;
+			case ">":
+				return value1 > value2;
+			case "<":
+				return value1 < value2;
+			case ">=":
+				return value1 >= value2;
+			case "<=":
+				return value1 <= value2;
+			case "!=":
+				return value1 != value2;
 		}
 		return false;
 	}
 
 	public int getBaseManaCost() {
 		return getAttributeValue(Attribute.BASE_MANA_COST);
-	}
-
-	public BattlecryDesc getBattlecry() {
-		return battlecry;
 	}
 
 	public String getCardId() {
@@ -130,7 +132,13 @@ public abstract class Card extends Entity {
 	}
 
 	public String getDescription() {
-		return description;
+		// Cleanup the html tags that appear in the description
+		// TODO: Show effects on card behaviour like increased spell damage
+		if (description == null || description.isEmpty()) {
+			return description;
+		}
+		String descriptionCleaned = description.replaceAll("(</?[bi]>)|\\[x\\]", "");
+		return descriptionCleaned;
 	}
 
 	@Override
@@ -158,10 +166,6 @@ public abstract class Card extends Entity {
 		return hasAttribute(Attribute.RACE) ? (Race) getAttribute(Attribute.RACE) : Race.NONE;
 	}
 
-	public boolean hasBattlecry() {
-		return this.battlecry != null;
-	}
-
 	public boolean hasHeroClass(HeroClass heroClass) {
 		if (getHeroClasses() != null) {
 			for (HeroClass h : getHeroClasses()) {
@@ -180,7 +184,7 @@ public abstract class Card extends Entity {
 	}
 
 	public boolean matchesFilter(String filter) {
-		if (filter == null || filter == "") {
+		if (filter == null || filter.isEmpty()) {
 			return true;
 		}
 		String[] filters = filter.split(" ");
@@ -239,6 +243,7 @@ public abstract class Card extends Entity {
 		if (regexName.contains(filter)) {
 			return true;
 		}
+
 		if (getDescription() != null) {
 			String lowerCaseDescription = getDescription().toLowerCase();
 			if (lowerCaseDescription.contains(filter)) {
@@ -250,10 +255,6 @@ public abstract class Card extends Entity {
 	}
 
 	public abstract PlayCardAction play();
-
-	public void setBattlecry(BattlecryDesc battlecry) {
-		this.battlecry = battlecry;
-	}
 
 	public void setCollectible(boolean collectible) {
 		this.collectible = collectible;
@@ -271,5 +272,4 @@ public abstract class Card extends Entity {
 	public String toString() {
 		return String.format("[%s '%s' %s Manacost:%d]", getCardType(), getName(), getReference(), getBaseManaCost());
 	}
-
 }

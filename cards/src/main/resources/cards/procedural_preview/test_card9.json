@@ -1,0 +1,17 @@
+{
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Stormyniat Rader",
+  "description": "(2) Overload",
+  "type": "MINION",
+  "rarity": "LEGENDARY",
+  "heroClass": "ANY",
+  "fileFormatVersion": 1,
+  "collectible": true,
+  "baseHp": 11.0,
+  "baseManaCost": 10.0,
+  "attributes": {
+    "OVERLOAD": 2.0
+  },
+  "id": "Stormyniat Rader",
+  "baseAttack": 7.0
+}

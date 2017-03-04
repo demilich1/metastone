@@ -1,0 +1,32 @@
+{
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Trath",
+  "heroClass": "ANY",
+  "fileFormatVersion": 1,
+  "collectible": true,
+  "description": "(1) Overload. At the end of your turn, restore 5 Health to a damaged friendly character.",
+  "rarity": "LEGENDARY",
+  "baseHp": 3.0,
+  "trigger": {
+    "eventTrigger": {
+      "targetPlayer": "SELF",
+      "class": "TurnEndTrigger"
+    },
+    "spell": {
+      "filter": {
+        "class": "DamagedFilter"
+      },
+      "randomTarget": true,
+      "class": "HealSpell",
+      "value": 5,
+      "target": "FRIENDLY_CHARACTERS"
+    }
+  },
+  "baseManaCost": 4.0,
+  "attributes": {
+    "OVERLOAD": 1.0
+  },
+  "type": "MINION",
+  "id": "Trath",
+  "baseAttack": 6.0
+}

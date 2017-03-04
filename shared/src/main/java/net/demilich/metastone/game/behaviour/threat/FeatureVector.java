@@ -1,9 +1,10 @@
 package net.demilich.metastone.game.behaviour.threat;
 
+import java.io.Serializable;
 import java.util.EnumMap;
 import java.util.Map;
 
-public class FeatureVector implements Cloneable {
+public class FeatureVector implements Cloneable, Serializable {
 
 	public static FeatureVector getDefault() {
 		FeatureVector defaultVector = new FeatureVector();

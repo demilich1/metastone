@@ -25,10 +25,12 @@ public class MadamGoyaSpell extends ShuffleMinionToDeckSpell {
 		// return target to deck (Now it's safe and won't destroy itself!)
 		
 		// Summon the minion, which ALSO won't destroy itself...
-		context.getLogic().summon(player.getId(), randomMinionCard.summon());
+		context.getLogic().summon(player.getId(), randomMinionCard.summon(), null, -1, false);
 		
 		// If there is no minion to shuffle... Idk, blame a wizard.
 		super.onCast(context, player, desc, source, target);
+		// Summon the minion, which ALSO won't destroy itself...
+		context.getLogic().summon(player.getId(), randomMinionCard.summon(), null, -1, false);
 	}
 
 }

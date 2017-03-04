@@ -1,11 +1,20 @@
 package net.demilich.metastone.game.targeting;
 
-public class CardReference {
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-	private final int playerId;
-	private final CardLocation location;
-	private final int cardId;
-	private final String cardName;
+import java.io.Serializable;
+
+public class CardReference implements Serializable {
+
+	private int playerId;
+	private CardLocation location;
+	private int cardId;
+	private String cardName;
+
+	protected CardReference() {
+		location = CardLocation.NONE;
+	}
 
 	public CardReference(int playerId, CardLocation location, int cardId, String cardName) {
 		this.playerId = playerId;
@@ -19,8 +28,17 @@ public class CardReference {
 		if (!(obj instanceof CardReference)) {
 			return false;
 		}
-		CardReference cardReference = (CardReference) obj;
-		return cardReference.getCardId() == getCardId() && cardReference.getPlayerId() == cardReference.getPlayerId();
+		CardReference rhs = (CardReference) obj;
+		return new EqualsBuilder()
+				.append(getCardId(), rhs.getCardId())
+				.isEquals();
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder()
+				.append(getCardId())
+				.toHashCode();
 	}
 
 	public int getCardId() {

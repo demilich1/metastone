@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.spells.trigger;
 
+import co.paralleluniverse.fibers.Suspendable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -90,11 +91,13 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 	public void onAdd(GameContext context) {
 	}
 
+	@Suspendable
 	protected void onFire(int ownerId, SpellDesc spell, GameEvent event) {
 		event.getGameContext().getLogic().castSpell(ownerId, spell, hostReference, null, true);
 	}
 
 	@Override
+	@Suspendable
 	public void onGameEvent(GameEvent event) {
 		if (expired) {
 			return;

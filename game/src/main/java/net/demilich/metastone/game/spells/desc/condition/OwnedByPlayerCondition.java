@@ -16,9 +16,9 @@ public class OwnedByPlayerCondition extends Condition {
 		TargetPlayer targetPlayer = (TargetPlayer) desc.get(ConditionArg.TARGET_PLAYER);
 		switch (targetPlayer) {
 		case ACTIVE:
-			return context.getActivePlayer().getId() == player.getId();
+			return context.getActivePlayerId() == player.getId();
 		case INACTIVE:
-			return context.getActivePlayer().getId() != player.getId();
+			return context.getActivePlayerId() != player.getId();
 		case BOTH:
 			return true;
 		case OPPONENT:

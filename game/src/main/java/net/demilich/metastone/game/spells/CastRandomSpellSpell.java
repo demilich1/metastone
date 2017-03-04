@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import co.paralleluniverse.fibers.Suspendable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,6 +40,12 @@ public class CastRandomSpellSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
+		// TODO: Disable this spell for now since it causes too many problems with the way it is implemented.
+		return;
+	}
+
+	@Suspendable
+	private void internalYogg(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		// This spell is crazy.
 		CardFilter filter = (CardFilter) desc.get(SpellArg.CARD_FILTER);
 		CardCollection spells = CardCatalogue.query(context.getDeckFormat(), CardType.SPELL);
@@ -53,7 +60,7 @@ public class CastRandomSpellSpell extends Spell {
 			}
 		}
 		// Straight up insane.
-		
+
 		// Set behavior to random. Because we're already insane.
 		// This allows Discover effects and targeting to actually be random.
 		Player originalPlayer = player;
@@ -61,7 +68,7 @@ public class CastRandomSpellSpell extends Spell {
 		opponent.setAttribute(Attribute.ALL_RANDOM_YOGG_ONLY_FINAL_DESTINATION, true);
 		player.setAttribute(Attribute.ALL_RANDOM_YOGG_ONLY_FINAL_DESTINATION, true); 
 		// HAHAHAHAHAHAHAHAHAHA!
-		
+
 		int numberOfSpellsToCast = desc.getValue(SpellArg.VALUE, context, player, target, source, 1);
 		for (int i = 0; i < numberOfSpellsToCast; i++) {
 			// In case Yogg changes sides, this should case who the spells are being cast for.

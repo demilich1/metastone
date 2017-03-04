@@ -2,6 +2,7 @@ package net.demilich.metastone.game.actions;
 
 import java.util.function.Predicate;
 
+import co.paralleluniverse.fibers.Suspendable;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
@@ -11,6 +12,7 @@ import net.demilich.metastone.game.spells.desc.condition.Condition;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class DiscoverAction extends GameAction {
 	private int groupIndex;
@@ -21,11 +23,15 @@ public class DiscoverAction extends GameAction {
 		return discover;
 	}
 
-	private final SpellDesc spell;
+	private SpellDesc spell;
 	private Condition condition;
 	private Card card;
 	private String name = "";
 	private String description = "";
+
+	private DiscoverAction() {
+		setActionType(ActionType.DISCOVER);
+	}
 
 	protected DiscoverAction(SpellDesc spell) {
 		this.spell = spell;
@@ -62,6 +68,7 @@ public class DiscoverAction extends GameAction {
 	}
 
 	@Override
+	@Suspendable
 	public void execute(GameContext context, int playerId) {
 		EntityReference target = getSpell().hasPredefinedTarget() ? getSpell().getTarget() : getTargetKey();
 		context.getLogic().castSpell(playerId, getSpell(), getSource(), target, false);
@@ -81,10 +88,6 @@ public class DiscoverAction extends GameAction {
 
 	public EntityFilter getEntityFilter() {
 		return spell.getEntityFilter();
-	}
-
-	public int getGroupIndex() {
-		return groupIndex;
 	}
 
 	public String getName() {
@@ -128,5 +131,15 @@ public class DiscoverAction extends GameAction {
 	@Override
 	public String toString() {
 		return String.format("[%s '%s' %s]", getActionType(), getSpell().getSpellClass().getSimpleName(), "Test");
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder()
+				.appendSuper(super.hashCode())
+				.append(spell)
+				.append(condition)
+				.append(card)
+				.toHashCode();
 	}
 }

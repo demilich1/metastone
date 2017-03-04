@@ -13,13 +13,17 @@ import javafx.scene.paint.Color;
 import net.demilich.metastone.ApplicationFacade;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.NotificationProxy;
+import net.demilich.metastone.game.decks.Bench;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.MetaDeck;
 import net.demilich.metastone.game.logic.GameLogic;
+import net.demilich.metastone.game.logic.ProceduralGameLogic;
 import net.demilich.metastone.gui.dialog.DialogNotification;
 import net.demilich.metastone.gui.dialog.DialogResult;
 import net.demilich.metastone.gui.dialog.DialogType;
 import net.demilich.metastone.gui.dialog.IDialogListener;
+
+import javax.swing.*;
 
 public class DeckInfoView extends HBox implements EventHandler<ActionEvent>, IDialogListener {
 
@@ -44,6 +48,7 @@ public class DeckInfoView extends HBox implements EventHandler<ActionEvent>, IDi
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
+
 		doneButton.setOnAction(this);
 	}
 
@@ -59,7 +64,7 @@ public class DeckInfoView extends HBox implements EventHandler<ActionEvent>, IDi
 					"Your deck is not complete yet. If you proceed, all open slots will be filled with random cards.", DialogType.CONFIRM);
 			dialogNotification.setHandler(this);
 			ApplicationFacade.getInstance().notifyObservers(dialogNotification);
-		} else if (!activeDeck.isMetaDeck() && !activeDeck.isComplete() && activeDeck.isTooBig() && !activeDeck.isArbitrary()) { 
+		} else if (!activeDeck.isMetaDeck() && !activeDeck.isComplete() && activeDeck.isTooBig() && !activeDeck.isArbitrary()) {
 			DialogNotification dialogNotification = new DialogNotification("Remove random cards",
 					"Your deck has too many cards. If you proceed, some cards will be removed at random.", DialogType.CONFIRM);
 			dialogNotification.setHandler(this);
@@ -86,11 +91,15 @@ public class DeckInfoView extends HBox implements EventHandler<ActionEvent>, IDi
 			countLabel.setText(metaDeck.getDecks().size() + "");
 		} else {
 			typeLabel.setText("Cards");
+			int deckSize = GameLogic.DECK_SIZE;
+			if (deck instanceof Bench){
+				deckSize = ProceduralGameLogic.BENCH_SIZE;
+			}
 			if (deck.isTooBig()) {
-				countLabel.setText(deck.getCards().getCount() + "!/" + GameLogic.DECK_SIZE);
+				countLabel.setText(deck.getCards().getCount() + "!/" + deckSize);
 				countLabel.setTextFill(Color.RED);
 			} else {
-				countLabel.setText(deck.getCards().getCount() + "/" + GameLogic.DECK_SIZE);
+				countLabel.setText(deck.getCards().getCount() + "/" + deckSize);
 				countLabel.setTextFill(Color.BLACK);
 			}
 		}

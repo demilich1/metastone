@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "Cingeur", "heroClass": "ANY", "description": "Stealth. ", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 5.0, "race": "MECH", "baseManaCost": 5.0, "attributes": {"TAUNT": true, "STEALTH": true, "DIVINE_SHIELD": true}, "type": "MINION", "id": "Cingeur", "baseAttack": 7.0}

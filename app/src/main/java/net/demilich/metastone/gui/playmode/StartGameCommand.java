@@ -1,15 +1,22 @@
 package net.demilich.metastone.gui.playmode;
 
-import net.demilich.metastone.NotificationProxy;
-import net.demilich.nittygrittymvc.SimpleCommand;
-import net.demilich.nittygrittymvc.interfaces.INotification;
+import com.hiddenswitch.proto3.net.client.RemoteGameContext;
+import com.hiddenswitch.proto3.net.common.ClientConnectionConfiguration;
+import com.hiddenswitch.proto3.net.common.ClientToServerMessage;
+
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.ProceduralPlayer;
 import net.demilich.metastone.game.decks.DeckFormat;
-import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.gameconfig.GameConfig;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
+import net.demilich.metastone.game.logic.GameLogic;
+import net.demilich.metastone.game.logic.ProceduralGameLogic;
+import net.demilich.metastone.game.visuals.GameContextVisualizable;
+import net.demilich.nittygrittymvc.SimpleCommand;
+import net.demilich.nittygrittymvc.interfaces.INotification;
 
 public class StartGameCommand extends SimpleCommand<GameNotification> {
 
@@ -20,12 +27,21 @@ public class StartGameCommand extends SimpleCommand<GameNotification> {
 		PlayerConfig playerConfig1 = gameConfig.getPlayerConfig1();
 		PlayerConfig playerConfig2 = gameConfig.getPlayerConfig2();
 
-		Player player1 = new Player(playerConfig1);
-		Player player2 = new Player(playerConfig2);
-		
+		Player player1 = null;
+		Player player2 = null;
+
 		DeckFormat deckFormat = gameConfig.getDeckFormat();
 
-		GameContext newGame = new GameContextVisualizable(player1, player2, new GameLogic(), deckFormat);
+		GameContext newGame;
+
+		if (gameConfig.isMultiplayer()) {
+			newGame = new RemoteGameContext(gameConfig.getConnection());
+		} else {
+			player1 = new Player(playerConfig1);
+			player2 = new Player(playerConfig2);
+			newGame = new GameContextVisualizable(player1, player2, new GameLogic(), deckFormat);
+		}
+
 		Thread t = new Thread(new Runnable() {
 
 			@Override

@@ -1,0 +1,17 @@
+{
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Walking Deathsnake",
+  "description": "Taunt. ",
+  "baseHp": 7.0,
+  "baseManaCost": 9.0,
+  "type": "MINION",
+  "heroClass": "ANY",
+  "fileFormatVersion": 1,
+  "collectible": true,
+  "rarity": "LEGENDARY",
+  "attributes": {
+    "TAUNT": true
+  },
+  "id": "Walkingit Snake",
+  "baseAttack": 8.0
+}

@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.cards.costmodifier;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ import net.demilich.metastone.game.spells.trigger.GameEventTrigger;
 import net.demilich.metastone.game.spells.trigger.IGameEventListener;
 import net.demilich.metastone.game.targeting.EntityReference;
 
-public class CardCostModifier extends CustomCloneable implements IGameEventListener {
+public class CardCostModifier extends CustomCloneable implements IGameEventListener, Serializable {
 
 	private boolean expired;
 	private int owner;

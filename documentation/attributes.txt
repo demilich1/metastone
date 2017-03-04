@@ -49,7 +49,7 @@ PENDING_DESTROY
 Internal tracker to determine death ordering.
 
 FATIGUE
-Internal tracker for the amount of Fatigue a player has.
+Internal tracker for the amount of Fatigue a gamePlayer has.
 
 FROZEN
 Freezes the target Actor. Frozen Actors cannot attack, and Unfreeze at the end of their controller’s turn, provided they have not attacked that turn.
@@ -73,7 +73,7 @@ SPELL_DAMAGE: X
 Grants the target Spell Damage +X
 
 OPPONENT_SPELL_DAMAGE: X
-Grants the target Spell Damage +X for the opposing player.
+Grants the target Spell Damage +X for the opposing gamePlayer.
 
 CHARGE
 Grants the target Charge. Charge minions can attack the turn they are summoned and do not get Summoning Sickness. See Summoning Sickness.
@@ -93,7 +93,7 @@ DOUBLE_DEATHRATTLES
 Entities with this Attribute have “Deathrattles happen twice.”
 
 IMMUNE
-Grants the Entity Immune. Immune Entities cannot be damaged or targeted directly by the opposing player.
+Grants the Entity Immune. Immune Entities cannot be damaged or targeted directly by the opposing gamePlayer.
 
 IMMUNE_WHILE_ATTACKING
 Grants the Entity Immune while attacking. See Immune.
@@ -102,7 +102,7 @@ DIVINE_SHIELD
 Grants the Actor Divine Shield. Actors with Divine Shield negate the next instance of damage taken.
 
 STEALTH
-Grants the Actor Stealth. Actors with Stealth cannot be targeted by the opposing player directly. Dealing damage while Stealthed removes Stealth.
+Grants the Actor Stealth. Actors with Stealth cannot be targeted by the opposing gamePlayer directly. Dealing damage while Stealthed removes Stealth.
 
 SECRET
 Determines if a card is a Secret.
@@ -111,7 +111,7 @@ COMBO
 Determines if a card has Combo.
 
 OVERLOAD: X
-When the card is played, the player overloads for X.
+When the card is played, the gamePlayer overloads for X.
 
 CHOOSE_ONE
 Determines if a Card has Choose One.
@@ -120,7 +120,7 @@ BOTH_CHOOSE_ONE_OPTIONS
 Entities with this attribute have "Your Choose One cards have both effects combined."
 
 SUMMONING_SICKNESS
-Grants a minion Summoning Sickness. Minions with Summoning Sickness cannot attack. Minions automatically get Summoning Sickness the turn they are summoned. Summoning Sickness is removed at the end of each player’s turn.
+Grants a minion Summoning Sickness. Minions with Summoning Sickness cannot attack. Minions automatically get Summoning Sickness the turn they are summoned. Summoning Sickness is removed at the end of each gamePlayer’s turn.
 
 UNTARGETABLE_BY_SPELLS
 Grants an Actor Untargetable by Spells. Actors with Untargetable by Spells cannot be directly targeted by Spells or Hero Powers.
@@ -144,7 +144,7 @@ CANNOT_ATTACK
 Grants an Actor “Cannot Attack.” Actors with “Cannot Attack” cannot attack, regardless of the number of attacks the Actor has.
 
 CANNOT_ATTACK_HEROES
-Grants an Actor “Cannot attack Heroes.” Actors with this Attribute cannot attack Heroes, regardless of the minions the opposing player owns.
+Grants an Actor “Cannot attack Heroes.” Actors with this Attribute cannot attack Heroes, regardless of the minions the opposing gamePlayer owns.
 
 INVERT_HEALING
 Grants an Actor “Any healing by cards you own deals damage instead.” Actors with this Attribute cause all cards or Entities you own or play to deal damage instead of healing.

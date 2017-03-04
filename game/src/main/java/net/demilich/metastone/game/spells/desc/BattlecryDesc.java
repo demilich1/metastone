@@ -1,9 +1,11 @@
 package net.demilich.metastone.game.spells.desc;
 
+import java.io.Serializable;
+
 import net.demilich.metastone.game.spells.desc.condition.ConditionDesc;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
-public class BattlecryDesc {
+public class BattlecryDesc implements Serializable {
 
 	public SpellDesc spell;
 	public TargetSelection targetSelection;

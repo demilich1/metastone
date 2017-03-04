@@ -1,0 +1,23 @@
+{
+  "collectible": true,
+  "cardCostModifier": {
+    "value": 1,
+    "cardType": "HERO_POWER",
+    "class": "CardCostModifier",
+    "operation": "SET"
+  },
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Nuttyalt Warden Champion",
+  "heroClass": "ANY",
+  "description": "Charge. Your Hero Power costs (1).",
+  "fileFormatVersion": 1,
+  "rarity": "COMMON",
+  "baseHp": 3.0,
+  "baseManaCost": 4.0,
+  "attributes": {
+    "CHARGE": true
+  },
+  "type": "MINION",
+  "id": "Nuttyalt Warden Champion",
+  "baseAttack": 4.0
+}

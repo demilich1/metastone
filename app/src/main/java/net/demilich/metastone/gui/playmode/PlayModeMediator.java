@@ -15,7 +15,7 @@ import net.demilich.metastone.game.behaviour.human.HumanActionOptions;
 import net.demilich.metastone.game.behaviour.human.HumanMulliganOptions;
 import net.demilich.metastone.game.behaviour.human.HumanTargetOptions;
 
-public class PlayModeMediator extends Mediator<GameNotification>implements EventHandler<KeyEvent> {
+public class PlayModeMediator extends Mediator<GameNotification> implements EventHandler<KeyEvent> {
 
 	public static final String NAME = "PlayModeMediator";
 
@@ -40,28 +40,28 @@ public class PlayModeMediator extends Mediator<GameNotification>implements Event
 	@Override
 	public void handleNotification(final INotification<GameNotification> notification) {
 		switch (notification.getId()) {
-		case GAME_STATE_UPDATE:
-			GameContext context = (GameContext) notification.getBody();
-			Platform.runLater(() -> view.showAnimations(context));
-			break;
-		case GAME_STATE_LATE_UPDATE:
-			GameContext context2 = (GameContext) notification.getBody();
-			Platform.runLater(() -> view.updateGameState(context2));
-			break;
-		case HUMAN_PROMPT_FOR_ACTION:
-			HumanActionOptions actionOptions = (HumanActionOptions) notification.getBody();
-			Platform.runLater(() -> actionPromptView.setActions(actionOptions));
-			break;
-		case HUMAN_PROMPT_FOR_TARGET:
-			HumanTargetOptions options = (HumanTargetOptions) notification.getBody();
-			Platform.runLater(() -> view.enableTargetSelection(options));
-			break;
-		case HUMAN_PROMPT_FOR_MULLIGAN:
-			HumanMulliganOptions mulliganOptions = (HumanMulliganOptions) notification.getBody();
-			Platform.runLater(() -> new HumanMulliganView(mulliganOptions));
-			break;
-		default:
-			break;
+			case GAME_STATE_UPDATE:
+				GameContext context = (GameContext) notification.getBody();
+				Platform.runLater(() -> view.showAnimations(context));
+				break;
+			case GAME_STATE_LATE_UPDATE:
+				GameContext context2 = (GameContext) notification.getBody();
+				Platform.runLater(() -> view.updateGameState(context2));
+				break;
+			case HUMAN_PROMPT_FOR_ACTION:
+				HumanActionOptions actionOptions = (HumanActionOptions) notification.getBody();
+				Platform.runLater(() -> actionPromptView.setActions(actionOptions));
+				break;
+			case HUMAN_PROMPT_FOR_TARGET:
+				HumanTargetOptions options = (HumanTargetOptions) notification.getBody();
+				Platform.runLater(() -> view.enableTargetSelection(options));
+				break;
+			case HUMAN_PROMPT_FOR_MULLIGAN:
+				HumanMulliganOptions mulliganOptions = (HumanMulliganOptions) notification.getBody();
+				Platform.runLater(() -> new HumanMulliganView(mulliganOptions));
+				break;
+			default:
+				break;
 		}
 	}
 

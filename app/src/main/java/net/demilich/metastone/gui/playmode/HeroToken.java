@@ -117,6 +117,7 @@ public class HeroToken extends GameToken {
 	}
 
 	public void updateHeroPowerCost(GameContext context, Player player) {
+		//TODO: Fetch from remote.
 		setScoreValueLowerIsBetter(heroPowerAnchor, context.getLogic().getModifiedManaCost(player, player.getHero().getHeroPower()), player.getHero().getHeroPower().getBaseManaCost());
 	}
 

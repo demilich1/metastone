@@ -19,15 +19,14 @@ import java.nio.file.Paths;
 public class MetaStone extends Application {
 
 	private static Logger logger = LoggerFactory.getLogger(MetaStone.class);
+	public static final boolean procedural = false;
 
 	public static void main(String[] args) {
-		//DevCardTools.formatJsons();
-
 		try {
 			// ensure that the user home metastone dir exists
 			Files.createDirectories(Paths.get(UserHomeMetastone.getPath()));
 		} catch (IOException e) {
-			logger.error("Trouble creating " +  Paths.get(UserHomeMetastone.getPath()));
+			logger.error("Trouble creating " + Paths.get(UserHomeMetastone.getPath()));
 			e.printStackTrace();
 		}
 
@@ -36,7 +35,7 @@ public class MetaStone extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		primaryStage.setTitle("MetaStone");
+		primaryStage.setTitle("Minionate");
 		primaryStage.initStyle(StageStyle.UNIFIED);
 		primaryStage.setResizable(false);
 		primaryStage.getIcons().add(new Image(IconFactory.getImageUrl("ui/app_icon.png")));
@@ -49,21 +48,21 @@ public class MetaStone extends Application {
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("/css/main.css").toExternalForm());
 		primaryStage.setScene(scene);
-		
+
 		// implementing potential visual fix for JavaFX
 		// setting the visual opacity to zero, and then
 		// once the stage is shown, setting the opacity to one.
 		// this fixes an issue where some users would only see a blank
 		// screen on application startup
 		primaryStage.setOpacity(0.0);
-		
+
 		facade.sendNotification(GameNotification.CANVAS_CREATED, root);
 		facade.sendNotification(GameNotification.MAIN_MENU);
 		primaryStage.show();
-		
+
 		// setting opacity to one for JavaFX hotfix
 		primaryStage.setOpacity(1.0);
-		
+
 		facade.sendNotification(GameNotification.CHECK_FOR_UPDATE);
 	}
 

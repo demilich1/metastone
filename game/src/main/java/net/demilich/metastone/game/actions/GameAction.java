@@ -1,12 +1,18 @@
 package net.demilich.metastone.game.actions;
 
+import java.io.Serializable;
+
+import co.paralleluniverse.fibers.SuspendExecution;
+import co.paralleluniverse.fibers.Suspendable;
+import com.google.gson.annotations.SerializedName;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public abstract class GameAction implements Cloneable {
+public abstract class GameAction implements Cloneable, Serializable {
 
 	private TargetSelection targetRequirement = TargetSelection.NONE;
 	private ActionType actionType = ActionType.SYSTEM;
@@ -28,6 +34,7 @@ public abstract class GameAction implements Cloneable {
 		return null;
 	}
 
+	@Suspendable
 	public abstract void execute(GameContext context, int playerId);
 
 	public String getActionSuffix() {
@@ -79,7 +86,26 @@ public abstract class GameAction implements Cloneable {
 	}
 
 	@Override
-	public String toString() {
-		return "Action " + actionType.toString() + " " + actionSuffix + " from " + source.toString();
+	public boolean equals(Object other) {
+		if (other instanceof GameAction) {
+			GameAction otherAction = (GameAction) other;
+			return (this.actionType == otherAction.actionType)
+					&& (this.targetRequirement == otherAction.targetRequirement)
+					&& (this.getSource().equals(otherAction.getSource()))
+					&& (this.getTargetKey().equals(otherAction.getTargetKey()));
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder()
+				.append(targetRequirement)
+				.append(actionType)
+				.append(source)
+				.append(targetKey)
+				.append(actionSuffix)
+				.toHashCode();
 	}
 }

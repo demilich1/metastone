@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.actions;
 
+import co.paralleluniverse.fibers.Suspendable;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.MinionCard;
@@ -10,7 +11,13 @@ import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class PlayMinionCardAction extends PlayCardAction {
 
-	private final BattlecryAction battlecry;
+	private BattlecryAction battlecry;
+
+	private PlayMinionCardAction() {
+		super(null);
+		setTargetRequirement(TargetSelection.FRIENDLY_MINIONS);
+		setActionType(ActionType.SUMMON);
+	}
 
 	public PlayMinionCardAction(CardReference cardReference) {
 		this(cardReference, null);
@@ -29,6 +36,7 @@ public class PlayMinionCardAction extends PlayCardAction {
 	}
 
 	@Override
+	@Suspendable
 	protected void play(GameContext context, int playerId) {
 		MinionCard minionCard = (MinionCard) context.getPendingCard();
 		Actor nextTo = (Actor) (getTargetKey() != null ? context.resolveSingleTarget(getTargetKey()) : null);

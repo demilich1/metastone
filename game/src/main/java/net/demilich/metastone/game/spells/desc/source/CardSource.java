@@ -5,7 +5,9 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.spells.TargetPlayer;
 
-public abstract class CardSource {
+import java.io.Serializable;
+
+public abstract class CardSource implements Serializable {
 
 	protected final SourceDesc desc;
 

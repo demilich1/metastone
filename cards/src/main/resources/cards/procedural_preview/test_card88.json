@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "Valiant", "heroClass": "ANY", "description": "Can't be targeted by spells or Hero Powers.", "fileFormatVersion": 1, "rarity": "RARE", "baseHp": 1.0, "race": "MECH", "baseManaCost": 1.0, "attributes": {"TAUNT": true, "UNTARGETABLE_BY_SPELLS": true}, "type": "MINION", "id": "Valiant", "baseAttack": 1.0}

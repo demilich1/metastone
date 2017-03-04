@@ -1,0 +1,1 @@
+{"collectible": true, "cardCostModifier": {"targetPlayer": "SELF", "cardType": "MINION", "class": "CardCostModifier", "value": 3}, "set": "PROCEDURAL_PREVIEW", "name": "Hanping", "heroClass": "ANY", "description": "Your minions cost (3) more.", "fileFormatVersion": 1, "rarity": "COMMON", "baseHp": 5.0, "baseManaCost": 7.0, "type": "MINION", "id": "Hanping", "baseAttack": 8.0}

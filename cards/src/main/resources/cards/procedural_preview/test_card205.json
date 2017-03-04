@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "Old Giant", "heroClass": "DRUID", "description": "Your Choose One cards have both effects combined.", "fileFormatVersion": 1, "rarity": "LEGENDARY", "baseHp": 5.0, "baseManaCost": 6.0, "attributes": {"BOTH_CHOOSE_ONE_OPTIONS": true}, "type": "MINION", "id": "Old Giant", "baseAttack": 5.0}

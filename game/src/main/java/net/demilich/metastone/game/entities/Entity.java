@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.entities;
 
+import java.io.Serializable;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -7,13 +8,19 @@ import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.logic.CustomCloneable;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.IdFactory;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public abstract class Entity extends CustomCloneable {
+public abstract class Entity extends CustomCloneable implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	private String name;
 	protected Map<Attribute, Object> attributes = new EnumMap<Attribute, Object>(Attribute.class);
 	private int id = IdFactory.UNASSIGNED;
 	private int ownerIndex = -1;
+
+	protected Entity() {
+	}
 
 	@Override
 	public Entity clone() {
@@ -72,7 +79,7 @@ public abstract class Entity extends CustomCloneable {
 		}
 		setAttribute(attribute, getAttributeValue(attribute) + value);
 	}
-	
+
 	public void modifyHpBonus(int value) {
 		modifyAttribute(Attribute.HP_BONUS, value);
 	}
@@ -104,5 +111,4 @@ public abstract class Entity extends CustomCloneable {
 	public void setOwner(int ownerIndex) {
 		this.ownerIndex = ownerIndex;
 	}
-
 }

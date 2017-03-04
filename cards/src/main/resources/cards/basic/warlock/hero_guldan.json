@@ -1,6 +1,7 @@
 {
 	"name": "Gul'dan",
 	"baseManaCost": 0,
+	"description": "The Warlock Hero",
 	"heroPower": "hero_power_life_tap",
 	"type": "HERO",
 	"heroClass": "WARLOCK",

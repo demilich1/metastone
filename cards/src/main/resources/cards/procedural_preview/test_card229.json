@@ -1,0 +1,17 @@
+{
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Porsonid Champion",
+  "description": "Stealth. ",
+  "baseHp": 10.0,
+  "baseManaCost": 10.0,
+  "type": "MINION",
+  "rarity": "LEGENDARY",
+  "heroClass": "ANY",
+  "fileFormatVersion": 1,
+  "collectible": true,
+  "attributes": {
+    "STEALTH": true
+  },
+  "id": "Porsonid Champion",
+  "baseAttack": 8.0
+}

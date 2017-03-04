@@ -1,6 +1,7 @@
 {
 	"name": "Jaina Proudmoore",
 	"baseManaCost": 0,
+	"description": "The Mage Hero",
 	"heroPower": "hero_power_fireblast",
 	"type": "HERO",
 	"heroClass": "MAGE",

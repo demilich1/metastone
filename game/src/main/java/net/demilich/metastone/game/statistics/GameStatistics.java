@@ -1,5 +1,7 @@
 package net.demilich.metastone.game.statistics;
 
+import java.io.Serializable;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,8 +11,7 @@ import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.weapons.Weapon;
 
-public class GameStatistics implements Cloneable {
-
+public class GameStatistics implements Cloneable, Serializable {
 	private final Map<Statistic, Object> stats = new EnumMap<Statistic, Object>(Statistic.class);
 	private final Map<String, Integer> cardsPlayed = new HashMap<String, Integer>();
 	private final Map<String, Integer> minionsSummoned = new HashMap<String, Integer>();
@@ -135,7 +136,7 @@ public class GameStatistics implements Cloneable {
 		add(Statistic.MANA_SPENT, mana);
 	}
 
-	public void merge(GameStatistics otherStatistics) {
+	public GameStatistics merge(GameStatistics otherStatistics) {
 		for (Statistic stat : otherStatistics.stats.keySet()) {
 			Object value = get(stat);
 			if (value != null) {
@@ -153,6 +154,7 @@ public class GameStatistics implements Cloneable {
 			getCardsPlayed().put(cardId, getCardsPlayed().get(cardId) + otherStatistics.getCardsPlayed().get(cardId));
 		}
 		updateWinRate();
+		return this;
 	}
 	
 	public void minionSummoned(Minion minion) {
@@ -186,4 +188,7 @@ public class GameStatistics implements Cloneable {
 		set(Statistic.WIN_RATE, winRate);
 	}
 
+	public Map<Statistic, Object> getStats() {
+		return Collections.unmodifiableMap(stats);
+	}
 }

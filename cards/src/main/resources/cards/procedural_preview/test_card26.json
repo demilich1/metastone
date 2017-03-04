@@ -1,0 +1,17 @@
+{
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Roboticwers",
+  "description": "Stealth. ",
+  "baseHp": 9.0,
+  "baseManaCost": 9.0,
+  "type": "MINION",
+  "rarity": "LEGENDARY",
+  "heroClass": "ANY",
+  "fileFormatVersion": 1,
+  "collectible": true,
+  "attributes": {
+    "STEALTH": true
+  },
+  "id": "Roboticwers",
+  "baseAttack": 6.0
+}

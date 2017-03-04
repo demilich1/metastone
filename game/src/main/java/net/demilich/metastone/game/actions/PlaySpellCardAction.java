@@ -1,5 +1,7 @@
 package net.demilich.metastone.game.actions;
 
+import co.paralleluniverse.fibers.Suspendable;
+import com.google.gson.annotations.SerializedName;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -9,7 +11,13 @@ import net.demilich.metastone.game.targeting.TargetSelection;
 public class PlaySpellCardAction extends PlayCardAction {
 
 	private SpellDesc spell;
-	protected final EntityReference cardReference;
+	@SerializedName("cardReference2")
+	protected EntityReference cardReference;
+
+	protected PlaySpellCardAction() {
+		super();
+		setActionType(ActionType.SPELL);
+	}
 
 	public PlaySpellCardAction(SpellDesc spell, Card card, TargetSelection targetSelection) {
 		super(card.getCardReference());
@@ -20,6 +28,7 @@ public class PlaySpellCardAction extends PlayCardAction {
 	}
 
 	@Override
+	@Suspendable
 	public void play(GameContext context, int playerId) {
 		context.getLogic().castSpell(playerId, spell, cardReference, getTargetKey(), getTargetRequirement(), false);
 	}

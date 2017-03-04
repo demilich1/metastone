@@ -13,9 +13,9 @@
 	<bottom>
 		<BorderPane prefHeight="-1.0" prefWidth="-1.0">
 			<bottom>
-				<HBox fx:id="p1CardPane" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="4.0">
+				<HBox fx:id="p1CardPane" alignment="CENTER" prefHeight="130.0" prefWidth="200.0" spacing="5">
 					<padding>
-						<Insets bottom="4.0" top="4.0" fx:id="x1" />
+						<Insets bottom="0" top="4.0" fx:id="x1" />
 					</padding>
 				</HBox>
 			</bottom>
@@ -25,9 +25,9 @@
 		</BorderPane>
 	</bottom>
 	<center>
-		<BorderPane prefHeight="200.0" prefWidth="200.0">
+		<BorderPane prefHeight="180.0" prefWidth="200.0">
 			<bottom>
-				<HBox fx:id="p1MinionPane" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
+				<HBox fx:id="p1MinionPane" alignment="CENTER" prefHeight="90.0" prefWidth="200.0" />
 			</bottom>
 			<center>
 				<HBox alignment="CENTER" prefHeight="-1.0" prefWidth="-1.0" BorderPane.alignment="CENTER">
@@ -38,7 +38,7 @@
 				</HBox>
 			</center>
 			<top>
-				<HBox fx:id="p2MinionPane" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
+				<HBox fx:id="p2MinionPane" alignment="CENTER" prefHeight="90.0" prefWidth="200.0" />
 			</top>
 		</BorderPane>
 	</center>

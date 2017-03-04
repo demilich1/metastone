@@ -89,7 +89,15 @@ public class CardCatalogue {
 		return query(deckFormat, cardType, rarity, heroClass, (Attribute) null);
 	}
 
+	public static CardCollection query(DeckFormat deckFormat, HeroClass heroClass, HeroClass actualHeroClass) {
+		return query(deckFormat, (CardType) null, (Rarity) null, heroClass, (Attribute) null, actualHeroClass);
+	}
+
 	public static CardCollection query(DeckFormat deckFormat, CardType cardType, Rarity rarity, HeroClass heroClass, Attribute tag) {
+		return query(deckFormat, cardType, rarity, heroClass, tag, null);
+	}
+
+	public static CardCollection query(DeckFormat deckFormat, CardType cardType, Rarity rarity, HeroClass heroClass, Attribute tag, HeroClass actualHeroClass) {
 		CardCollection result = new CardCollection();
 		for (Card card : cards) {
 			if (!deckFormat.isInFormat(card)) {
@@ -120,6 +128,17 @@ public class CardCatalogue {
 		return result;
 	}
 
+	public static void loadCardsFromPackage() throws IOException, URISyntaxException, CardParseException {
+		synchronized (cards) {
+			if (!cards.isEmpty()) {
+				return;
+			}
+
+			Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(CARDS_FOLDER, false);
+			loadCards(inputStreams);
+		}
+	}
+
 	public static CardCollection query(DeckFormat deckFormat, Predicate<Card> filter) {
 		CardCollection result = new CardCollection();
 		for (Card card : cards) {
@@ -132,24 +151,19 @@ public class CardCatalogue {
 		}
 		return result;
 	}
-	
-	public static void loadLocalCards() throws IOException, URISyntaxException, CardParseException {
-		// load cards from ~/metastone/cards on the file system
-		Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(CARDS_FOLDER, false);
-		loadCards(inputStreams);
-	}
-	
-	public static void loadCards() throws IOException, URISyntaxException, CardParseException {
+
+	public static void loadCardsFromFilesystem() throws IOException, URISyntaxException, CardParseException {
 		// load cards from ~/metastone/cards on the file system
 		Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(CARDS_FOLDER_PATH, true);
 		loadCards(inputStreams);
 	}
 
-	
+
 	private static void loadCards(Collection<ResourceInputStream> inputStreams) throws IOException, URISyntaxException, CardParseException {
 		Map<String, CardDesc> cardDesc = new HashMap<String, CardDesc>();
 		ArrayList<String> badCards = new ArrayList<>();
 		CardParser cardParser = new CardParser();
+
 		for (ResourceInputStream resourceInputStream : inputStreams) {
 			try {
 				CardDesc desc = cardParser.parseCard(resourceInputStream);
@@ -167,9 +181,11 @@ public class CardCatalogue {
 		for (CardDesc desc : cardDesc.values()) {
 			Card instance = desc.createInstance();
 			CardCatalogue.add(instance);
-			logger.debug("Adding {} to CardCatalogue", instance);
+
 		}
-		
+
+		logger.debug("{} cards loaded.", CardCatalogue.cards.getCount());
+
 		if (!badCards.isEmpty()) {
 			throw new CardParseException(badCards);
 		}
@@ -179,7 +195,7 @@ public class CardCatalogue {
 		// if we have not copied cards to the USER_HOME_METASTONE cards folder,
 		// then do so now
 		int cardRevision = MetastoneProperties.getInt(CARDS_COPIED_PROPERTY, 0);
-		System.out.println("Existing card revision = " + cardRevision);
+		logger.info("Existing card revision = " + cardRevision);
 		if (BuildConfig.CARD_REVISION > cardRevision) {
 			logger.info("Card update required: MetaStone card revision is: {}, last card update was with revision {}", BuildConfig.CARD_REVISION, cardRevision);
 			ResourceLoader.copyFromResources(CARDS_FOLDER, CARDS_FOLDER_PATH);

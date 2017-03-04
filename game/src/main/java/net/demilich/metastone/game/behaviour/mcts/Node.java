@@ -33,7 +33,7 @@ class Node {
 		GameContext newState = state.clone();
 
 		try {
-			newState.getLogic().performGameAction(newState.getActivePlayer().getId(), action);
+			newState.getLogic().performGameAction(newState.getActivePlayerId(), action);
 		} catch (Exception e) {
 			System.err.println("Exception on action: " + action + " state decided: " + state.gameDecided());
 			e.printStackTrace();

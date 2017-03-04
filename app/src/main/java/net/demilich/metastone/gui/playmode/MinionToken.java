@@ -18,6 +18,8 @@ public class MinionToken extends GameToken {
 	@FXML
 	private Label name;
 	@FXML
+	private Label description;
+	@FXML
 	private Group attackAnchor;
 	@FXML
 	private Group hpAnchor;
@@ -37,7 +39,7 @@ public class MinionToken extends GameToken {
 	private Shape frozen;
 
 	private CardTooltip cardTooltip;
-	
+
 	Logger logger = LoggerFactory.getLogger(MinionToken.class);
 
 	public MinionToken() {
@@ -51,6 +53,7 @@ public class MinionToken extends GameToken {
 
 	public void setMinion(Minion minion) {
 		name.setText(minion.getName());
+		description.setText(minion.getSourceCard().getDescription());
 		setScoreValue(attackAnchor, minion.getAttack(), minion.getAttributeValue(Attribute.BASE_ATTACK));
 		setScoreValue(hpAnchor, minion.getHp(), minion.getBaseHp(), minion.getMaxHp());
 		visualizeStatus(minion);
@@ -62,7 +65,7 @@ public class MinionToken extends GameToken {
 		defaultToken.setVisible(!minion.hasAttribute(Attribute.TAUNT));
 		divineShield.setVisible(minion.hasAttribute(Attribute.DIVINE_SHIELD));
 		windfury.setVisible(minion.hasAttribute(Attribute.WINDFURY) || minion.hasAttribute(Attribute.MEGA_WINDFURY));
-		if(minion.hasAttribute(Attribute.MEGA_WINDFURY)) {
+		if (minion.hasAttribute(Attribute.MEGA_WINDFURY)) {
 			windfury.setText("x4");
 		} else {
 			windfury.setText("x2");

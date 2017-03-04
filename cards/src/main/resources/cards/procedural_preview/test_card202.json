@@ -1,0 +1,17 @@
+{
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Eletter",
+  "description": "Overload (5)",
+  "baseHp": 8.0,
+  "type": "MINION",
+  "rarity": "LEGENDARY",
+  "baseManaCost": 7.0,
+  "heroClass": "ANY",
+  "fileFormatVersion": 1,
+  "collectible": true,
+  "attributes": {
+    "OVERLOAD": 5.0
+  },
+  "id": "Eletter",
+  "baseAttack": 12.0
+}

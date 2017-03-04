@@ -1,0 +1,18 @@
+{
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Garriu",
+  "description": "Windfury. (1) Overload",
+  "baseHp": 4.0,
+  "type": "MINION",
+  "rarity": "LEGENDARY",
+  "baseManaCost": 10.0,
+  "heroClass": "ANY",
+  "fileFormatVersion": 1,
+  "collectible": true,
+  "attributes": {
+    "WINDFURY": true,
+    "OVERLOAD": 1.0
+  },
+  "id": "Garriu",
+  "baseAttack": 8.0
+}

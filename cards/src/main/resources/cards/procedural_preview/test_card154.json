@@ -1,0 +1,18 @@
+{
+  "collectible": true,
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Ditmon Blastdealer",
+  "heroClass": "ANY",
+  "description": "(3) Overload.",
+  "fileFormatVersion": 1,
+  "rarity": "COMMON",
+  "baseHp": 3.0,
+  "baseManaCost": 2.0,
+  "attributes": {
+    "OVERLOAD": 3.0,
+    "DIVINE_SHIELD": true
+  },
+  "type": "MINION",
+  "id": "Ditmon",
+  "baseAttack": 5.0
+}

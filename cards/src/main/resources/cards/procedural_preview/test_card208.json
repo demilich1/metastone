@@ -1,0 +1,1 @@
+{"collectible": true, "set": "PROCEDURAL_PREVIEW", "name": "Raith", "heroClass": "HUNTER", "description": "Your Hero Power can target minions.", "fileFormatVersion": 1, "rarity": "EPIC", "baseHp": 3.0, "baseManaCost": 3.0, "attributes": {"HERO_POWER_CAN_TARGET_MINIONS": true}, "type": "MINION", "id": "Raith", "baseAttack": 2.0}

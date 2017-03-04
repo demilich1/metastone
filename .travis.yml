@@ -1,0 +1,22 @@
+language: java
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+jdk:
+  - oraclejdk8
+dist: trusty
+sudo: false
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
+branches:
+  only:
+  - master
+env:
+  global:
+    JAVA_OPTS=-Xmx128m

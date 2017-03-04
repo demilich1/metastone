@@ -1,0 +1,14 @@
+{
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Passion Flights",
+  "description": "",
+  "baseHp": 10.0,
+  "type": "MINION",
+  "rarity": "LEGENDARY",
+  "heroClass": "ANY",
+  "fileFormatVersion": 1,
+  "collectible": true,
+  "baseManaCost": 9.0,
+  "id": "Passionmjsers",
+  "baseAttack": 12.0
+}

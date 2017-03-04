@@ -1,12 +1,15 @@
 package net.demilich.metastone.game.spells.trigger;
 
+import java.io.Serializable;
+
+import co.paralleluniverse.fibers.Suspendable;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.targeting.EntityReference;
 
-public interface IGameEventListener {
+public interface IGameEventListener extends Serializable{
 
 	public IGameEventListener clone();
 	
@@ -22,6 +25,7 @@ public interface IGameEventListener {
 
 	public abstract void onAdd(GameContext context);
 
+	@Suspendable
 	public abstract void onGameEvent(GameEvent event);
 
 	public abstract void onRemove(GameContext context);

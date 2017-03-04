@@ -1,0 +1,30 @@
+{
+  "collectible": true,
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Kingsbanananer",
+  "heroClass": "ANY",
+  "description": "(2) Overload. Battlecry: Give your opponent 3 Bananas.",
+  "fileFormatVersion": 1,
+  "rarity": "LEGENDARY",
+  "baseHp": 4.0,
+  "race": "BEAST",
+  "baseManaCost": 5.0,
+  "attributes": {
+    "BATTLECRY": true,
+    "OVERLOAD": 2.0
+  },
+  "battlecry": {
+    "spell": {
+      "targetPlayer": "OPPONENT",
+      "cards": [
+        "spell_bananas",
+        "spell_bananas",
+        "spell_bananas"
+      ],
+      "class": "ReceiveCardSpell"
+    }
+  },
+  "type": "MINION",
+  "id": "Kings",
+  "baseAttack": 8.0
+}

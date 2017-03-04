@@ -3,6 +3,7 @@ package net.demilich.metastone.gui.sandboxmode.commands;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.demilich.metastone.game.actions.PlayCardException;
 import net.demilich.nittygrittymvc.SimpleCommand;
 import net.demilich.nittygrittymvc.interfaces.INotification;
 import net.demilich.metastone.GameNotification;
@@ -49,7 +50,11 @@ public class PerformActionCommand extends SimpleCommand<GameNotification> {
 		Player selectedPlayer = sandboxProxy.getSelectedPlayer();
 		action.setSource(selectedPlayer.getReference());
 
-		context.getLogic().performGameAction(selectedPlayer.getId(), action);
+		try {
+			context.getLogic().performGameAction(selectedPlayer.getId(), action);
+		} catch (PlayCardException e) {
+			e.printStackTrace();
+		}
 		sendNotification(GameNotification.UPDATE_SANDBOX_STATE, context);
 	}
 

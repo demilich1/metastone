@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.MetaStone;
 import net.demilich.metastone.NotificationProxy;
 
 public class MainMenuView extends BorderPane {
@@ -21,6 +22,12 @@ public class MainMenuView extends BorderPane {
 
 	@FXML
 	private Button playModeButton;
+
+	@FXML
+	private Button multiplayerButton;
+
+	@FXML
+	private Button draftButton;
 
 	@FXML
 	private Button simulationModeButton;
@@ -56,6 +63,8 @@ public class MainMenuView extends BorderPane {
 
 		playModeButton.setOnAction(event -> NotificationProxy.sendNotification(GameNotification.PLAY_MODE_SELECTED));
 
+		multiplayerButton.setOnAction(event -> NotificationProxy.sendNotification(GameNotification.MULTIPLAYER_MODE_SELECTED));
+
 		simulationModeButton
 				.setOnAction(event -> NotificationProxy.sendNotification(GameNotification.SIMULATION_MODE_SELECTED));
 
@@ -66,12 +75,18 @@ public class MainMenuView extends BorderPane {
 		battleOfDecksButton
 				.setOnAction(event -> NotificationProxy.sendNotification(GameNotification.BATTLE_OF_DECKS_SELECTED));
 
+		draftButton.setOnAction(event -> NotificationProxy.sendNotification(GameNotification.DRAFT_MODE_SELECTED));
+
 		if (!BuildConfig.DEV_BUILD) {
 			trainingModeButton.setVisible(false);
 			trainingModeButton.setManaged(false);
 			battleOfDecksButton.setVisible(false);
 			battleOfDecksButton.setManaged(false);
+
 		}
+
+		deckBuilderButton.setVisible(BuildConfig.DECK_BUILDER_ENABLED);
+		deckBuilderButton.setManaged(BuildConfig.DECK_BUILDER_ENABLED);
 
 		versionLabel.setText(BuildConfig.VERSION + (BuildConfig.DEV_BUILD ? " (Dev build)" : ""));
 

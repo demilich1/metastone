@@ -1,14 +1,18 @@
 package net.demilich.metastone.game.cards;
 
+import com.google.gson.annotations.SerializedName;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.actions.PlayChooseOneCardAction;
 import net.demilich.metastone.game.cards.desc.ChooseOneCardDesc;
 
 public class ChooseOneCard extends Card implements IChooseOneCard {
-
 	private String[] cardIds;
+	@SerializedName("cardId2")
 	private String cardId;
+
+	protected ChooseOneCard() {
+	}
 
 	public ChooseOneCard(ChooseOneCardDesc desc) {
 		super(desc);

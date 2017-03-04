@@ -24,7 +24,7 @@ public class CardProxy extends Proxy<GameNotification> {
 			Files.createDirectories(Paths.get(CardCatalogue.CARDS_FOLDER_PATH));
 			// ensure cards have been copied to ~/metastone/cards
 			CardCatalogue.copyCardsFromResources();
-			CardCatalogue.loadCards();
+			CardCatalogue.loadCardsFromFilesystem();
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

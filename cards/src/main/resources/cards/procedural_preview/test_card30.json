@@ -1,0 +1,22 @@
+{
+  "collectible": true,
+  "set": "PROCEDURAL_PREVIEW",
+  "name": "Cleanerfear Happerion",
+  "heroClass": "ROGUE",
+  "description": "Deathrattle: Return a random friendly minion to your hand.",
+  "fileFormatVersion": 1,
+  "rarity": "COMMON",
+  "baseHp": 9.0,
+  "deathrattle": {
+    "randomTarget": true,
+    "class": "ReturnMinionToHandSpell",
+    "target": "FRIENDLY_MINIONS"
+  },
+  "baseManaCost": 5.0,
+  "attributes": {
+    "DEATHRATTLES": true
+  },
+  "type": "MINION",
+  "id": "Cleanerfear Happerion",
+  "baseAttack": 3.0
+}
