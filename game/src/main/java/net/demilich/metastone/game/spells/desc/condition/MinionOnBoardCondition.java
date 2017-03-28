@@ -3,7 +3,7 @@ package net.demilich.metastone.game.spells.desc.condition;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
-import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.entities.minions.Summon;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 
 public class MinionOnBoardCondition extends Condition {
@@ -18,8 +18,8 @@ public class MinionOnBoardCondition extends Condition {
 		int value = desc.contains(ConditionArg.VALUE) ? desc.getInt(ConditionArg.VALUE) : 1;
 
 		int count = 0;
-		for (Minion minion : player.getMinions()) {
-			if ((cardFilter == null || cardFilter.matches(context, player, minion)) && !context.getSummonReferenceStack().contains(minion.getReference())) {
+		for (Summon summon : player.getSummons()) {
+			if ((cardFilter == null || cardFilter.matches(context, player, summon)) && !context.getSummonReferenceStack().contains(summon.getReference())) {
 				count++;
 			}
 		}

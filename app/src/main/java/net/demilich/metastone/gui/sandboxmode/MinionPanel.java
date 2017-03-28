@@ -95,7 +95,7 @@ public class MinionPanel extends VBox {
 	public void setContext(GameContext context) {
 		killMinionButton.setDisable(true);
 		for (Player player : context.getPlayers()) {
-			if (context.getMinionCount(player) > 0) {
+			if (context.getSummonCount(player) > 0) {
 				killMinionButton.setDisable(false);
 				break;
 			}

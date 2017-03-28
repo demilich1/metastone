@@ -10,7 +10,7 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
-import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.entities.minions.Summon;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -35,16 +35,16 @@ public class ReturnMinionToHandSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		SpellDesc cardSpell = (SpellDesc) desc.get(SpellArg.SPELL);
-		Minion minion = (Minion) target;
-		Player owner = context.getPlayer(minion.getOwner());
+		Summon summon = (Summon) target;
+		Player owner = context.getPlayer(summon.getOwner());
 		if (owner.getHand().getCount() >= GameLogic.MAX_HAND_CARDS) {
-			logger.debug("{} is destroyed because {}'s hand is full", minion, owner.getName());
+			logger.debug("{} is destroyed because {}'s hand is full", summon, owner.getName());
 			context.getLogic().markAsDestroyed((Actor) target);
 		} else {
-			logger.debug("{} is returned to {}'s hand", minion, owner.getName());
-			context.getLogic().removeMinion(minion, true);
-			Card sourceCard = minion.getSourceCard().getCopy();
-			context.getLogic().receiveCard(minion.getOwner(), sourceCard);
+			logger.debug("{} is returned to {}'s hand", summon, owner.getName());
+			context.getLogic().removeSummon(summon, true);
+			Card sourceCard = summon.getSourceCard().getCopy();
+			context.getLogic().receiveCard(summon.getOwner(), sourceCard);
 			if (cardSpell != null) {
 				context.setEventCard(sourceCard);
 				SpellUtils.castChildSpell(context, player, cardSpell, source, sourceCard);

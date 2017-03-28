@@ -4,6 +4,7 @@ public enum EntityType {
 	ANY,
 	HERO,
 	MINION,
+	PERMANENT,
 	WEAPON,
 	CARD,
 	PLAYER,

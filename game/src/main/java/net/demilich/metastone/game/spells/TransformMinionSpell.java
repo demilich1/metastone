@@ -7,10 +7,11 @@ import org.slf4j.LoggerFactory;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.cards.MinionCard;
+import net.demilich.metastone.game.cards.SummonCard;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.entities.minions.Summon;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -51,13 +52,14 @@ public class TransformMinionSpell extends Spell {
 			SpellUtils.castChildSpell(context, context.getPlayer(target.getOwner()), changeHeroSpell, source, target);
 		} else {
 			String cardName = (String) desc.get(SpellArg.CARD);
-			Minion minion = (Minion) target;
-			Minion transformTarget = (Minion) desc.get(SpellArg.SECONDARY_TARGET);
-			MinionCard templateCard = cardName != null ? (MinionCard) context.getCardById(cardName) : null;
-
-			Minion newMinion = transformTarget != null ? transformTarget : templateCard.summon();
-			logger.debug("{} is transformed into a {}", minion, newMinion);
-			context.getLogic().transformMinion(minion, newMinion);
+			Summon summon = (Summon) target;
+			Summon transformTarget = (Summon) desc.get(SpellArg.SECONDARY_TARGET);
+			
+			SummonCard templateCard = cardName != null ? (SummonCard) context.getCardById(cardName) : null;
+			Summon newSummon = transformTarget != null ? transformTarget : templateCard.summon();
+			
+			logger.debug("{} is transformed into a {}", summon, newSummon);
+			context.getLogic().transformMinion(summon, newSummon);
 		}
 	}
 

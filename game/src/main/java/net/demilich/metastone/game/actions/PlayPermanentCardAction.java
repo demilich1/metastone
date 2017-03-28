@@ -2,21 +2,21 @@ package net.demilich.metastone.game.actions;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.cards.MinionCard;
+import net.demilich.metastone.game.cards.PermanentCard;
 import net.demilich.metastone.game.entities.Actor;
-import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.entities.minions.Permanent;
 import net.demilich.metastone.game.targeting.CardReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
-public class PlayMinionCardAction extends PlayCardAction {
+public class PlayPermanentCardAction extends PlayCardAction {
 
 	private final BattlecryAction battlecry;
 
-	public PlayMinionCardAction(CardReference cardReference) {
+	public PlayPermanentCardAction(CardReference cardReference) {
 		this(cardReference, null);
 	}
 
-	public PlayMinionCardAction(CardReference cardReference, BattlecryAction battlecry) {
+	public PlayPermanentCardAction(CardReference cardReference, BattlecryAction battlecry) {
 		super(cardReference);
 		this.battlecry = battlecry;
 		setTargetRequirement(TargetSelection.FRIENDLY_MINIONS);
@@ -25,20 +25,20 @@ public class PlayMinionCardAction extends PlayCardAction {
 
 	@Override
 	public String getPromptText() {
-		return "[Summon minion]";
+		return "[Summon permanent]";
 	}
 
 	@Override
 	protected void play(GameContext context, int playerId) {
-		MinionCard minionCard = (MinionCard) context.getPendingCard();
+		PermanentCard permanentCard = (PermanentCard) context.getPendingCard();
 		Actor nextTo = (Actor) (getTargetKey() != null ? context.resolveSingleTarget(getTargetKey()) : null);
-		Minion minion = minionCard.summon();
+		Permanent permanent = permanentCard.summon();
 		if (battlecry != null) {
-			minion.setBattlecry(battlecry);
+			permanent.setBattlecry(battlecry);
 		}
 		Player player = context.getPlayer(playerId);
 		int index = player.getSummons().indexOf(nextTo);
-		context.getLogic().summon(playerId, minion, minionCard, index, true);
+		context.getLogic().summon(playerId, permanent, permanentCard, index, true);
 	}
 
 }

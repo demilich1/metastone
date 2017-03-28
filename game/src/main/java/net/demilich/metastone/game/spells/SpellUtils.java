@@ -18,9 +18,9 @@ import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
-import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.entities.minions.RelativeToSource;
+import net.demilich.metastone.game.entities.minions.Summon;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
@@ -198,8 +198,8 @@ public class SpellUtils {
 
 	public static int hasHowManyOfRace(Player player, Race race) {
 		int count = 0;
-		for (Minion minion : player.getMinions()) {
-			if (minion.getRace() == race) {
+		for (Summon summon : player.getSummons()) {
+			if (summon.getRace() == race) {
 				count++;
 			}
 		}
@@ -264,7 +264,7 @@ public class SpellUtils {
 			return UNDEFINED;
 		}
 
-		int sourcePosition = context.getBoardPosition((Minion) source);
+		int sourcePosition = context.getBoardPosition((Summon) source);
 		if (sourcePosition == UNDEFINED) {
 			return UNDEFINED;
 		}

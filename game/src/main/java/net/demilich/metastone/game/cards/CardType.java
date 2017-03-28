@@ -3,6 +3,7 @@ package net.demilich.metastone.game.cards;
 public enum CardType {
 	HERO,
 	MINION,
+	PERMANENT,
 	SPELL,
 	WEAPON,
 	HERO_POWER,

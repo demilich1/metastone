@@ -14,7 +14,7 @@ import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.desc.BattlecryDesc;
 import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
 
-public class MinionCard extends Card {
+public class MinionCard extends SummonCard {
 
 	private static final Set<Attribute> ignoredAttributes = new HashSet<Attribute>(
 			Arrays.asList(new Attribute[] { Attribute.PASSIVE_TRIGGER, Attribute.DECK_TRIGGER, Attribute.MANA_COST_MODIFIER, Attribute.BASE_ATTACK,

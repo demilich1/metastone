@@ -34,7 +34,9 @@ import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.entities.minions.Permanent;
 import net.demilich.metastone.game.entities.minions.Race;
+import net.demilich.metastone.game.entities.minions.Summon;
 import net.demilich.metastone.game.entities.weapons.Weapon;
 import net.demilich.metastone.game.events.AfterPhysicalAttackEvent;
 import net.demilich.metastone.game.events.AfterSpellCastedEvent;
@@ -226,8 +228,8 @@ public class GameLogic implements Cloneable {
 			if (player.getHero().hasAttribute(attr)) {
 				return true;
 			}
-			for (Entity minion : player.getMinions()) {
-				if (minion.hasAttribute(attr) && !minion.hasAttribute(Attribute.PENDING_DESTROY)) {
+			for (Entity summon : player.getSummons()) {
+				if (summon.hasAttribute(attr) && !summon.hasAttribute(Attribute.PENDING_DESTROY)) {
 					return true;
 				}
 			}
@@ -281,7 +283,7 @@ public class GameLogic implements Cloneable {
 	}
 
 	public boolean canSummonMoreMinions(Player player) {
-		return player.getMinions().size() < MAX_MINIONS;
+		return player.getSummons().size() < MAX_MINIONS;
 	}
 
 	public void castChooseOneSpell(int playerId, SpellDesc spellDesc, EntityReference sourceReference, EntityReference targetReference, String cardId) {
@@ -443,9 +445,9 @@ public class GameLogic implements Cloneable {
 				destroyList.add(player.getHero());
 			}
 
-			for (Minion minion : player.getMinions()) {
-				if (minion.isDestroyed()) {
-					destroyList.add(minion);
+			for (Summon summon : player.getSummons()) {
+				if (summon.isDestroyed()) {
+					destroyList.add(summon);
 				}
 			}
 			if (player.getHero().getWeapon() != null && player.getHero().getWeapon().isDestroyed()) {
@@ -570,7 +572,7 @@ public class GameLogic implements Cloneable {
 			Player owner = context.getPlayer(target.getOwner());
 			context.getPlayer(target.getOwner()).getGraveyard().add(target);
 
-			int boardPosition = owner.getMinions().indexOf(target);
+			int boardPosition = owner.getSummons().indexOf(target);
 			boardPositions[i] = boardPosition;
 		}
 
@@ -578,7 +580,7 @@ public class GameLogic implements Cloneable {
 			Actor target = targets[i];
 			log("{} is destroyed", target);
 			Player owner = context.getPlayer(target.getOwner());
-			owner.getMinions().remove(target);
+			owner.getSummons().remove(target);
 		}
 
 		for (int i = 0; i < targets.length; i++) {
@@ -688,9 +690,9 @@ public class GameLogic implements Cloneable {
 		hero.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
 		hero.removeAttribute(Attribute.HERO_POWER_USAGES);
 		handleFrozen(hero);
-		for (Minion minion : player.getMinions()) {
-			minion.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
-			handleFrozen(minion);
+		for (Summon summon : player.getSummons()) {
+			summon.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
+			handleFrozen(summon);
 		}
 		player.removeAttribute(Attribute.COMBO);
 		hero.activateWeapon(false);
@@ -853,9 +855,9 @@ public class GameLogic implements Cloneable {
 	 * @return the first occurrence of the value of attribute or defaultValue
 	 */
 	public int getAttributeValue(Player player, Attribute attr, int defaultValue) {
-		for (Entity minion : player.getMinions()) {
-			if (minion.hasAttribute(attr)) {
-				return minion.getAttributeValue(attr);
+		for (Summon summon : player.getSummons()) {
+			if (summon.hasAttribute(attr)) {
+				return summon.getAttributeValue(attr);
 			}
 		}
 
@@ -882,12 +884,12 @@ public class GameLogic implements Cloneable {
 		if (greatest == INFINITE) {
 			return greatest;
 		}
-		for (Entity minion : player.getMinions()) {
-			if (minion.hasAttribute(attr)) {
-				if (minion.getAttributeValue(attr) > greatest) {
-					greatest = minion.getAttributeValue(attr);
+		for (Summon summon : player.getSummons()) {
+			if (summon.hasAttribute(attr)) {
+				if (summon.getAttributeValue(attr) > greatest) {
+					greatest = summon.getAttributeValue(attr);
 				}
-				if (minion.getAttributeValue(attr) == INFINITE) {
+				if (summon.getAttributeValue(attr) == INFINITE) {
 					return INFINITE;
 				}
 			}
@@ -946,12 +948,12 @@ public class GameLogic implements Cloneable {
 
 	public int getTotalAttributeValue(Player player, Attribute attr) {
 		int total = player.getHero().getAttributeValue(attr);
-		for (Entity minion : player.getMinions()) {
-			if (!minion.hasAttribute(attr)) {
+		for (Summon summon : player.getSummons()) {
+			if (!summon.hasAttribute(attr)) {
 				continue;
 			}
 
-			total += minion.getAttributeValue(attr);
+			total += summon.getAttributeValue(attr);
 		}
 		return total;
 	}
@@ -961,9 +963,9 @@ public class GameLogic implements Cloneable {
 		if (player.getHero().hasAttribute(attribute)) {
 			player.getHero().getAttributeValue(attribute);
 		}
-		for (Entity minion : player.getMinions()) {
-			if (minion.hasAttribute(attribute)) {
-				total *= minion.getAttributeValue(attribute);
+		for (Summon summon : player.getSummons()) {
+			if (summon.hasAttribute(attribute)) {
+				total *= summon.getAttributeValue(attribute);
 			}
 		}
 		return total;
@@ -1026,8 +1028,8 @@ public class GameLogic implements Cloneable {
 		if (player.getHero().hasAttribute(attr)) {
 			return true;
 		}
-		for (Entity minion : player.getMinions()) {
-			if (minion.hasAttribute(attr) && !minion.hasAttribute(Attribute.PENDING_DESTROY)) {
+		for (Summon summon : player.getSummons()) {
+			if (summon.hasAttribute(attr) && !summon.hasAttribute(Attribute.PENDING_DESTROY)) {
 				return true;
 			}
 		}
@@ -1220,28 +1222,28 @@ public class GameLogic implements Cloneable {
 		}
 	}
 
-	public void mindControl(Player player, Minion minion) {
-		log("{} mind controls {}", player.getName(), minion);
+	public void mindControl(Player player, Summon summon) {
+		log("{} mind controls {}", player.getName(), summon);
 		Player opponent = context.getOpponent(player);
-		if (!opponent.getMinions().contains(minion)) {
+		if (!opponent.getSummons().contains(summon)) {
 			// logger.warn("Minion {} cannot be mind-controlled, because
 			// opponent does not own it.", minion);
 			return;
 		}
 		if (canSummonMoreMinions(player)) {
-			context.getOpponent(player).getMinions().remove(minion);
-			player.getMinions().add(minion);
-			minion.setOwner(player.getId());
-			applyAttribute(minion, Attribute.SUMMONING_SICKNESS);
-			refreshAttacksPerRound(minion);
-			List<IGameEventListener> triggers = context.getTriggersAssociatedWith(minion.getReference());
-			removeSpellTriggers(minion);
+			context.getOpponent(player).getSummons().remove(summon);
+			player.getSummons().add(summon);
+			summon.setOwner(player.getId());
+			applyAttribute(summon, Attribute.SUMMONING_SICKNESS);
+			refreshAttacksPerRound(summon);
+			List<IGameEventListener> triggers = context.getTriggersAssociatedWith(summon.getReference());
+			removeSpellTriggers(summon);
 			for (IGameEventListener trigger : triggers) {
-				addGameEventListener(player, trigger, minion);
+				addGameEventListener(player, trigger, summon);
 			}
 			context.fireGameEvent(new BoardChangedEvent(context));
 		} else {
-			markAsDestroyed(minion);
+			markAsDestroyed(summon);
 		}
 	}
 
@@ -1370,7 +1372,7 @@ public class GameLogic implements Cloneable {
 		}
 		log("{} plays {}", player.getName(), card);
 
-		player.getStatistics().cardPlayed(card);
+		player.getStatistics().cardPlayed(card, context.getTurn());
 		CardPlayedEvent cardPlayedEvent = new CardPlayedEvent(context, playerId, card);
 		context.fireGameEvent(cardPlayedEvent);
 
@@ -1516,19 +1518,19 @@ public class GameLogic implements Cloneable {
 		player.getGraveyard().add(card);
 	}
 
-	public void removeMinion(Minion minion, boolean peacefully) {
-		removeSpellTriggers(minion);
+	public void removeSummon(Summon summon, boolean peacefully) {
+		removeSpellTriggers(summon);
 
-		log("{} was removed", minion);
+		log("{} was removed", summon);
 
-		minion.setAttribute(Attribute.DESTROYED);
+		summon.setAttribute(Attribute.DESTROYED);
 
-		Player owner = context.getPlayer(minion.getOwner());
-		owner.getMinions().remove(minion);
+		Player owner = context.getPlayer(summon.getOwner());
+		owner.getSummons().remove(summon);
 		if (peacefully) {
-			owner.getSetAsideZone().add(minion);
+			owner.getSetAsideZone().add(summon);
 		} else {
-			owner.getGraveyard().add(minion);
+			owner.getGraveyard().add(summon);
 		}
 		context.fireGameEvent(new BoardChangedEvent(context));
 	}
@@ -1665,7 +1667,7 @@ public class GameLogic implements Cloneable {
 			return;
 		}
 		if (boardPosition == -1) {
-			player.getMinions().indexOf(actor);
+			player.getSummons().indexOf(actor);
 		}
 		boolean doubleDeathrattles = hasAttribute(player, Attribute.DOUBLE_DEATHRATTLES);
 		EntityReference sourceReference = actor.getReference();
@@ -1763,97 +1765,111 @@ public class GameLogic implements Cloneable {
 		log("{} starts his turn with {} mana", player.getName(), manaString);
 
 		player.removeAttribute(Attribute.OVERLOAD);
-		for (Minion minion : player.getMinions()) {
-			minion.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
+		for (Summon summon : player.getSummons()) {
+			summon.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
 		}
 
 		player.getHero().getHeroPower().setUsed(0);
 		player.getHero().activateWeapon(true);
 		refreshAttacksPerRound(player.getHero());
-		for (Entity minion : player.getMinions()) {
-			minion.removeAttribute(Attribute.SUMMONING_SICKNESS);
-			refreshAttacksPerRound(minion);
+		for (Summon summon : player.getSummons()) {
+			summon.removeAttribute(Attribute.SUMMONING_SICKNESS);
+			refreshAttacksPerRound(summon);
 		}
 		context.fireGameEvent(new TurnStartEvent(context, player.getId()));
 		drawCard(playerId, null);
 		checkForDeadEntities();
 	}
 
-	public boolean summon(int playerId, Minion minion) {
-		return summon(playerId, minion, null, -1, false);
+	public boolean summon(int playerId, Summon summon) {
+		return summon(playerId, summon, null, -1, false);
 	}
 
-	public boolean summon(int playerId, Minion minion, Card source, int index, boolean resolveBattlecry) {
+	public boolean summon(int playerId, Summon summon, Card source, int index, boolean resolveBattlecry) {
 		Player player = context.getPlayer(playerId);
 		if (!canSummonMoreMinions(player)) {
-			log("{} cannot summon any more minions, {} is destroyed", player.getName(), minion);
+			log("{} cannot summon any more summons, {} is destroyed", player.getName(), summon);
 			return false;
 		}
-		minion.setId(idFactory.generateId());
-		minion.setOwner(player.getId());
+		summon.setId(idFactory.generateId());
+		summon.setOwner(player.getId());
 
-		context.getSummonReferenceStack().push(minion.getReference());
+		context.getSummonReferenceStack().push(summon.getReference());
 
-		log("{} summons {}", player.getName(), minion);
+		log("{} summons {}", player.getName(), summon);
 
-		if (index < 0 || index >= player.getMinions().size()) {
-			player.getMinions().add(minion);
+		if (index < 0 || index >= player.getSummons().size()) {
+			player.getSummons().add(summon);
 		} else {
-			player.getMinions().add(index, minion);
+			player.getSummons().add(index, summon);
 		}
+		if (summon instanceof Minion) {
+			Minion minion = (Minion) summon;
 
-		context.fireGameEvent(new BeforeSummonEvent(context, minion, source));
+			context.fireGameEvent(new BeforeSummonEvent(context, minion, source));
+		}
 		context.fireGameEvent(new BoardChangedEvent(context));
 		
-		if (resolveBattlecry && minion.getBattlecry() != null) {
-			resolveBattlecry(player.getId(), minion);
+		if (resolveBattlecry && summon.getBattlecry() != null) {
+			resolveBattlecry(player.getId(), summon);
 			checkForDeadEntities();
 		}
 
 		if (context.getEnvironment().get(Environment.TRANSFORM_REFERENCE) != null) {
-			minion = (Minion) context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.TRANSFORM_REFERENCE));
-			minion.setBattlecry(null);
+			summon = (Summon) context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.TRANSFORM_REFERENCE));
+			summon.setBattlecry(null);
 			context.getEnvironment().remove(Environment.TRANSFORM_REFERENCE);
 		}
 
 		context.fireGameEvent(new BoardChangedEvent(context));
 
-		player.getStatistics().minionSummoned(minion);
-		if (context.getEnvironment().get(Environment.TARGET_OVERRIDE) != null) {
-			Actor actor = (Actor) context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.TARGET_OVERRIDE));
-			context.getEnvironment().remove(Environment.TARGET_OVERRIDE);
-			SummonEvent summonEvent = new SummonEvent(context, actor, source);
-			context.fireGameEvent(summonEvent);
-		} else {
-			SummonEvent summonEvent = new SummonEvent(context, minion, source);
-			context.fireGameEvent(summonEvent);
+		if (summon instanceof Minion) {
+			Minion minion = (Minion) summon;
+			player.getStatistics().minionSummoned(minion, context.getTurn());
+
+			if (context.getEnvironment().get(Environment.TARGET_OVERRIDE) != null) {
+				Actor actor = (Actor) context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.TARGET_OVERRIDE));
+				context.getEnvironment().remove(Environment.TARGET_OVERRIDE);
+				SummonEvent summonEvent = new SummonEvent(context, actor, source);
+				context.fireGameEvent(summonEvent);
+
+				applyAttribute(minion, Attribute.SUMMONING_SICKNESS);
+				refreshAttacksPerRound(minion);
+			} else {
+				SummonEvent summonEvent = new SummonEvent(context, minion, source);
+				context.fireGameEvent(summonEvent);
+			}
+		} else if (summon instanceof Permanent) {
+			Permanent permanent = (Permanent) summon;
+			player.getStatistics().permanentSummoned(permanent, context.getTurn());
+			
 		}
 
-		applyAttribute(minion, Attribute.SUMMONING_SICKNESS);
-		refreshAttacksPerRound(minion);
-
-		if (minion.hasSpellTrigger()) {
-			for (SpellTrigger trigger : minion.getSpellTriggers()) {
-				addGameEventListener(player, trigger, minion);
+		if (summon.hasSpellTrigger()) {
+			for (SpellTrigger trigger : summon.getSpellTriggers()) {
+				addGameEventListener(player, trigger, summon);
 			}
 		}
 
-		if (minion.getCardCostModifier() != null) {
-			addManaModifier(player, minion.getCardCostModifier(), minion);
+		if (summon.getCardCostModifier() != null) {
+			addManaModifier(player, summon.getCardCostModifier(), summon);
 		}
 
-		if (source != null) {
-			source.setAttribute(Attribute.ATTACK, source.getAttributeValue(Attribute.BASE_ATTACK));
-			source.setAttribute(Attribute.ATTACK_BONUS, 0);
-			source.setAttribute(Attribute.MAX_HP, source.getAttributeValue(Attribute.BASE_HP));
-			source.setAttribute(Attribute.HP, source.getAttributeValue(Attribute.BASE_HP));
-			source.setAttribute(Attribute.HP_BONUS, 0);
-		}
-		handleEnrage(minion);
+		if (summon instanceof Minion) {
+			Minion minion = (Minion) summon;
+			if (source != null) {
+				source.setAttribute(Attribute.ATTACK, source.getAttributeValue(Attribute.BASE_ATTACK));
+				source.setAttribute(Attribute.ATTACK_BONUS, 0);
+				source.setAttribute(Attribute.MAX_HP, source.getAttributeValue(Attribute.BASE_HP));
+				source.setAttribute(Attribute.HP, source.getAttributeValue(Attribute.BASE_HP));
+				source.setAttribute(Attribute.HP_BONUS, 0);
+			}
+			handleEnrage(minion);
 
-		context.getSummonReferenceStack().pop();
-		if (player.getMinions().contains(minion)) {
-			context.fireGameEvent(new AfterSummonEvent(context, minion, source));
+			context.getSummonReferenceStack().pop();
+			if (player.getSummons().contains(minion)) {
+				context.fireGameEvent(new AfterSummonEvent(context, minion, source));
+			}
 		}
 		context.fireGameEvent(new BoardChangedEvent(context));
 		return true;
@@ -1867,31 +1883,31 @@ public class GameLogic implements Cloneable {
 	 * @param newMinion
 	 *            The new minion to transform into
 	 */
-	public void transformMinion(Minion minion, Minion newMinion) {
+	public void transformMinion(Summon summon, Summon newSummon) {
 		// Remove any spell triggers associated with the old minion.
-		removeSpellTriggers(minion);
+		removeSpellTriggers(summon);
 
-		Player owner = context.getPlayer(minion.getOwner());
-		int index = owner.getMinions().indexOf(minion);
-		owner.getMinions().remove(minion);
+		Player owner = context.getPlayer(summon.getOwner());
+		int index = owner.getSummons().indexOf(summon);
+		owner.getSummons().remove(summon);
 		
 		// If we want to straight up remove a minion from existence without
 		// killing it, this would be the best way.
-		if (newMinion != null) {
-			log("{} was transformed to {}", minion, newMinion);
+		if (newSummon != null) {
+			log("{} was transformed to {}", summon, newSummon);
 
 			// Give the new minion an ID.
-			newMinion.setId(idFactory.generateId());
-			newMinion.setOwner(owner.getId());
+			newSummon.setId(idFactory.generateId());
+			newSummon.setOwner(owner.getId());
 	
 			// If the minion being transforms is being summoned, replace the old
 			// minion on the stack.
 			// Otherwise, summon the add the new minion.
 			// However, do not give a summon event.
-			if (!context.getSummonReferenceStack().isEmpty() && context.getSummonReferenceStack().peek().equals(minion.getReference())
+			if (!context.getSummonReferenceStack().isEmpty() && context.getSummonReferenceStack().peek().equals(summon.getReference())
 					&& !context.getEnvironment().containsKey(Environment.TRANSFORM_REFERENCE)) {
-				context.getEnvironment().put(Environment.TRANSFORM_REFERENCE, newMinion.getReference());
-				owner.getMinions().add(index, newMinion);
+				context.getEnvironment().put(Environment.TRANSFORM_REFERENCE, newSummon.getReference());
+				owner.getSummons().add(index, newSummon);
 	
 				// It's quite possible that this is actually supposed to add the
 				// minion to the zone it was originally in.
@@ -1900,39 +1916,39 @@ public class GameLogic implements Cloneable {
 				// add the minion to there. This will be tested eventually with
 				// Resurrect, Recombobulator, and Illidan.
 				// Since this is unknown, this is the patch for it.
-			} else if (!owner.getSetAsideZone().contains(minion)) {
-				if (index < 0 || index >= owner.getMinions().size()) {
-					owner.getMinions().add(newMinion);
+			} else if (!owner.getSetAsideZone().contains(summon)) {
+				if (index < 0 || index >= owner.getSummons().size()) {
+					owner.getSummons().add(newSummon);
 				} else {
-					owner.getMinions().add(index, newMinion);
+					owner.getSummons().add(index, newSummon);
 				}
 	
-				applyAttribute(newMinion, Attribute.SUMMONING_SICKNESS);
-				refreshAttacksPerRound(newMinion);
+				applyAttribute(newSummon, Attribute.SUMMONING_SICKNESS);
+				refreshAttacksPerRound(newSummon);
 	
-				if (newMinion.hasSpellTrigger()) {
-					for (SpellTrigger spellTrigger : newMinion.getSpellTriggers()) {
-						addGameEventListener(owner, spellTrigger, newMinion);
+				if (newSummon.hasSpellTrigger()) {
+					for (SpellTrigger spellTrigger : newSummon.getSpellTriggers()) {
+						addGameEventListener(owner, spellTrigger, newSummon);
 					}
 				}
 	
-				if (newMinion.getCardCostModifier() != null) {
-					addManaModifier(owner, newMinion.getCardCostModifier(), newMinion);
+				if (newSummon.getCardCostModifier() != null) {
+					addManaModifier(owner, newSummon.getCardCostModifier(), newSummon);
 				}
 	
-				handleEnrage(newMinion);
+				handleEnrage(newSummon);
 			} else {
-				owner.getSetAsideZone().add(newMinion);
-				newMinion.setId(idFactory.generateId());
-				newMinion.setOwner(owner.getId());
-				removeSpellTriggers(newMinion);
+				owner.getSetAsideZone().add(newSummon);
+				newSummon.setId(idFactory.generateId());
+				newSummon.setOwner(owner.getId());
+				removeSpellTriggers(newSummon);
 				return;
 			}
 		
 		}
 
 		// Move the old minion to the Set Aside Zone
-		owner.getSetAsideZone().add(minion);
+		owner.getSetAsideZone().add(summon);
 
 		context.fireGameEvent(new BoardChangedEvent(context));
 	}
@@ -1944,7 +1960,7 @@ public class GameLogic implements Cloneable {
 		modifyCurrentMana(playerId, -modifiedManaCost);
 		log("{} uses {}", player.getName(), power);
 		power.markUsed();
-		player.getStatistics().cardPlayed(power);
+		player.getStatistics().cardPlayed(power, context.getTurn());
 		context.fireGameEvent(new HeroPowerUsedEvent(context, playerId, power));
 	}
 

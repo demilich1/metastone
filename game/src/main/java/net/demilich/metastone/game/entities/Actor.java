@@ -139,7 +139,6 @@ public abstract class Actor extends Entity {
 		return 1;
 	}
 
-
 	@Override
 	public boolean isDestroyed() {
 		return getHp() < 1 || super.isDestroyed();
