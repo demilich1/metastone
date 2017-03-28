@@ -196,7 +196,7 @@ public class GameContext implements Cloneable, IDisposable {
 		List<Summon> adjacentSummons = new ArrayList<>();
 		Summon summon = (Summon) resolveSingleTarget(minionReference);
 		List<Summon> summons = getPlayer(summon.getOwner()).getSummons();
-		int index = summons.indexOf(summons);
+		int index = summons.indexOf(summon);
 		if (index == -1) {
 			return adjacentSummons;
 		}
