@@ -17,6 +17,7 @@ import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.entities.minions.Summon;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
@@ -84,9 +85,9 @@ public class TargetLogic {
 				return player.getHero().getWeapon();
 			} 
 
-			for (Actor minion : player.getMinions()) {
-				if (minion.getId() == targetId) {
-					return minion;
+			for (Summon summon : player.getSummons()) {
+				if (summon.getId() == targetId) {
+					return summon;
 				}
 			}
 
@@ -238,13 +239,13 @@ public class TargetLogic {
 			targets.remove(source);
 			return targets;
 		} else if (targetKey == EntityReference.ADJACENT_MINIONS) {
-			return new ArrayList<>(context.getAdjacentMinions(player, source.getReference()));
+			return new ArrayList<>(context.getAdjacentSummons(player, source.getReference()));
 		} else if (targetKey == EntityReference.OPPOSITE_MINIONS) {
-			return new ArrayList<>(context.getOppositeMinions(player, source.getReference()));
+			return new ArrayList<>(context.getOppositeSummons(player, source.getReference()));
 		} else if (targetKey == EntityReference.MINIONS_TO_LEFT) {
-			return new ArrayList<>(context.getLeftMinions(player, source.getReference()));
+			return new ArrayList<>(context.getLeftSummons(player, source.getReference()));
 		} else if (targetKey == EntityReference.MINIONS_TO_RIGHT) {
-			return new ArrayList<>(context.getRightMinions(player, source.getReference()));
+			return new ArrayList<>(context.getRightSummons(player, source.getReference()));
 		} else if (targetKey == EntityReference.SELF) {
 			return singleTargetAsList(source);
 		} else if (targetKey == EntityReference.EVENT_TARGET) {

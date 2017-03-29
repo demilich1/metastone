@@ -141,8 +141,8 @@ public class SimulationResultView extends BorderPane {
 		}
 
 		Collections.sort(cards, (c1, c2) -> {
-			int c1Count = stats.getCardsPlayed().get(c1.getCardId());
-			int c2Count = stats.getCardsPlayed().get(c2.getCardId());
+			int c1Count = stats.getCardsPlayedCount(c1.getCardId());
+			int c2Count = stats.getCardsPlayedCount(c2.getCardId());
 			// sort descending
 			return Integer.compare(c2Count, c1Count);
 		});

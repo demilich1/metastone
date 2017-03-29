@@ -14,6 +14,7 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.entities.minions.Summon;
 import net.demilich.metastone.game.statistics.GameStatistics;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
 
@@ -26,7 +27,7 @@ public class Player extends Entity {
 	private final CardCollection hand = new CardCollection();
 	private final List<Entity> setAsideZone = new ArrayList<>();
 	private final List<Entity> graveyard = new ArrayList<>();
-	private final List<Minion> minions = new ArrayList<>();
+	private final List<Summon> summons = new ArrayList<>();
 	private final HashSet<String> secrets = new HashSet<>();
 
 	private final GameStatistics statistics = new GameStatistics();
@@ -46,7 +47,7 @@ public class Player extends Entity {
 		this.deck = otherPlayer.getDeck().clone();
 		this.attributes.putAll(otherPlayer.getAttributes());
 		this.hand.addAll(otherPlayer.getHand().clone());
-		this.minions.addAll(otherPlayer.getMinions().stream().map(Minion::clone).collect(Collectors.toList()));
+		this.summons.addAll(otherPlayer.getSummons().stream().map(Summon::clone).collect(Collectors.toList()));
 		this.graveyard.addAll(otherPlayer.getGraveyard().stream().map(Entity::clone).collect(Collectors.toList()));
 		this.setAsideZone.addAll(otherPlayer.getSetAsideZone().stream().map(Entity::clone).collect(Collectors.toList()));
 		this.secrets.addAll(otherPlayer.secrets);
@@ -123,7 +124,17 @@ public class Player extends Entity {
 	}
 
 	public List<Minion> getMinions() {
+		List<Minion> minions = new ArrayList<Minion>();
+		for (Summon summon : getSummons()) {
+			if (summon instanceof Minion) {
+				minions.add((Minion) summon);
+			}
+		}
 		return minions;
+	}
+
+	public List<Summon> getSummons() {
+		return summons;
 	}
 
 	public HashSet<String> getSecrets() {

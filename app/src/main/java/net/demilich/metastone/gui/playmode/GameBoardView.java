@@ -23,7 +23,7 @@ import net.demilich.metastone.game.behaviour.human.HumanTargetOptions;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
-import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.entities.minions.Summon;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.gui.IconFactory;
 import net.demilich.metastone.gui.cards.HandCard;
@@ -53,8 +53,8 @@ public class GameBoardView extends BorderPane {
 	private HeroToken p2Hero;
 	private HandCard[] p1Cards = new HandCard[GameLogic.MAX_HAND_CARDS];
 	private HandCard[] p2Cards = new HandCard[GameLogic.MAX_HAND_CARDS];
-	private MinionToken[] p1Minions = new MinionToken[GameLogic.MAX_MINIONS];
-	private MinionToken[] p2Minions = new MinionToken[GameLogic.MAX_MINIONS];
+	private SummonToken[] p1Minions = new SummonToken[GameLogic.MAX_MINIONS];
+	private SummonToken[] p2Minions = new SummonToken[GameLogic.MAX_MINIONS];
 
 	private final HashMap<GameToken, Button> summonHelperMap1 = new HashMap<GameToken, Button>();
 	private final HashMap<GameToken, Button> summonHelperMap2 = new HashMap<GameToken, Button>();
@@ -90,13 +90,13 @@ public class GameBoardView extends BorderPane {
 		for (int i = 0; i < p1Minions.length; i++) {
 			Button summonHelper = createSummonHelper();
 			p1MinionPane.getChildren().add(summonHelper);
-			p1Minions[i] = new MinionToken();
+			p1Minions[i] = new SummonToken();
 			p1MinionPane.getChildren().add(p1Minions[i]);
 			summonHelperMap1.put(p1Minions[i], summonHelper);
 
 			summonHelper = createSummonHelper();
 			p2MinionPane.getChildren().add(summonHelper);
-			p2Minions[i] = new MinionToken();
+			p2Minions[i] = new SummonToken();
 			p2MinionPane.getChildren().add(p2Minions[i]);
 			summonHelperMap2.put(p2Minions[i], summonHelper);
 		}
@@ -238,8 +238,8 @@ public class GameBoardView extends BorderPane {
 		updateHandCards(context, context.getPlayer1(), p1Cards);
 		updateHandCards(context, context.getPlayer2(), p2Cards);
 
-		updateMinionTokens(context.getPlayer1(), p1Minions);
-		updateMinionTokens(context.getPlayer2(), p2Minions);
+		updateSummonTokens(context.getPlayer1(), p1Minions);
+		updateSummonTokens(context.getPlayer2(), p2Minions);
 
 		checkForWinner(context);
 	}
@@ -259,18 +259,18 @@ public class GameBoardView extends BorderPane {
 		}
 	}
 
-	private void updateMinionTokens(Player player, MinionToken[] minionTokens) {
-		List<Minion> minions = player.getMinions();
-		for (int i = 0; i < minionTokens.length; i++) {
-			if (i < minions.size()) {
-				Minion minion = minions.get(i);
-				minionTokens[i].setMinion(minion);
-				minionTokens[i].setManaged(true);
-				minionTokens[i].setVisible(true);
-				entityTokenMap.put(minion, minionTokens[i]);
+	private void updateSummonTokens(Player player, SummonToken[] summonTokens) {
+		List<Summon> summons = player.getSummons();
+		for (int i = 0; i < summonTokens.length; i++) {
+			if (i < summons.size()) {
+				Summon summon = summons.get(i);
+				summonTokens[i].setSummon(summon);
+				summonTokens[i].setManaged(true);
+				summonTokens[i].setVisible(true);
+				entityTokenMap.put(summon, summonTokens[i]);
 			} else {
-				minionTokens[i].setManaged(false);
-				minionTokens[i].setVisible(false);
+				summonTokens[i].setManaged(false);
+				summonTokens[i].setVisible(false);
 			}
 		}
 	}

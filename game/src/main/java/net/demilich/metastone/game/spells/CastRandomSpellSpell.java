@@ -67,7 +67,7 @@ public class CastRandomSpellSpell extends Spell {
 			// In case Yogg changes sides, this should case who the spells are being cast for.
 			player = context.getPlayer(source.getOwner());
 			// If Yogg is removed from the board, stop casting spells.
-			if (!player.getMinions().contains(source)) {
+			if (!player.getSummons().contains(source)) {
 				break;
 			}
 			Card randomCard = filteredSpells.getRandom();

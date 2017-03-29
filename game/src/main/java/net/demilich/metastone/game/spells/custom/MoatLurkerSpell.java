@@ -3,7 +3,7 @@ package net.demilich.metastone.game.spells.custom;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.cards.MinionCard;
+import net.demilich.metastone.game.cards.SummonCard;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.AddDeathrattleSpell;
@@ -24,7 +24,7 @@ public class MoatLurkerSpell extends Spell {
 			targetPlayer = TargetPlayer.OPPONENT;
 		}
 		source.removeAttribute(Attribute.DEATHRATTLES);
-		SpellDesc deathrattle = SummonSpell.create(targetPlayer, (MinionCard) minion.getSourceCard());
+		SpellDesc deathrattle = SummonSpell.create(targetPlayer, (SummonCard) minion.getSourceCard());
 		SpellDesc addDeathrattleSpell = AddDeathrattleSpell.create(deathrattle);
 		SpellDesc destroySpell = DestroySpell.create(target.getReference());
 		SpellUtils.castChildSpell(context, player, destroySpell, source, target);

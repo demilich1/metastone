@@ -7,13 +7,15 @@ import java.util.Map;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.entities.minions.Permanent;
 import net.demilich.metastone.game.entities.weapons.Weapon;
 
 public class GameStatistics implements Cloneable {
 
 	private final Map<Statistic, Object> stats = new EnumMap<Statistic, Object>(Statistic.class);
-	private final Map<String, Integer> cardsPlayed = new HashMap<String, Integer>();
-	private final Map<String, Integer> minionsSummoned = new HashMap<String, Integer>();
+	private final Map<String, Map<Integer, Integer>> cardsPlayed = new HashMap<String, Map<Integer, Integer>>();
+	private final Map<String, Map<Integer, Integer>> minionsSummoned = new HashMap<String, Map<Integer, Integer>>();
+	private final Map<String, Map<Integer, Integer>> permanentsSummoned = new HashMap<String, Map<Integer, Integer>>();
 
 	private void add(Statistic key, long value) {
 		if (!stats.containsKey(key)) {
@@ -31,7 +33,7 @@ public class GameStatistics implements Cloneable {
 		add(Statistic.CARDS_DRAWN, 1);
 	}
 
-	public void cardPlayed(Card card) {
+	public void cardPlayed(Card card, int turn) {
 		add(Statistic.CARDS_PLAYED, 1);
 
 		switch (card.getCardType()) {
@@ -40,6 +42,9 @@ public class GameStatistics implements Cloneable {
 			break;
 		case MINION:
 			add(Statistic.MINIONS_PLAYED, 1);
+			break;
+		case PERMANENT:
+			add(Statistic.PERMANENTS_PLAYED, 1);
 			break;
 		case SPELL:
 		case CHOOSE_ONE:
@@ -50,7 +55,7 @@ public class GameStatistics implements Cloneable {
 		case HERO:
 			break;
 		}
-		increaseCardCount(card);
+		increaseCardCount(card, turn);
 	}
 
 	public GameStatistics clone() {
@@ -58,6 +63,7 @@ public class GameStatistics implements Cloneable {
 		clone.stats.putAll(stats);
 		clone.getCardsPlayed().putAll(getCardsPlayed());
 		clone.getMinionsSummoned().putAll(getMinionsSummoned());
+		clone.getPermanentsSummoned().putAll(getPermanentsSummoned());
 		return clone;
 	}
 
@@ -91,12 +97,26 @@ public class GameStatistics implements Cloneable {
 		return stats.get(key);
 	}
 
-	public Map<String, Integer> getCardsPlayed() {
+	public Map<String, Map<Integer, Integer>> getCardsPlayed() {
 		return cardsPlayed;
 	}
+
+	public int getCardsPlayedCount(String cardId) {
+		int count = 0;
+		for (String card : cardsPlayed.keySet()) {
+			for (int turn : cardsPlayed.get(card).keySet()) {
+				count += cardsPlayed.get(card).get(turn);
+			}
+		}
+		return count;
+	}
 	
-	public Map<String, Integer> getMinionsSummoned() {
+	public Map<String, Map<Integer, Integer>> getMinionsSummoned() {
 		return minionsSummoned;
+	}
+	
+	public Map<String, Map<Integer, Integer>> getPermanentsSummoned() {
+		return permanentsSummoned;
 	}
 
 	public double getDouble(Statistic key) {
@@ -110,25 +130,41 @@ public class GameStatistics implements Cloneable {
 	public void heal(int healing) {
 		add(Statistic.HEALING_DONE, healing);
 	}
-
-	private void increaseCardCount(Card card) {
+	
+	private void increaseCardCount(Card card, int turn) {
 		if (card.getCardType().isCardType(CardType.HERO_POWER)) {
 			return;
 		}
 		String cardId = card.getCardId();
-		;
 		if (!getCardsPlayed().containsKey(cardId)) {
-			getCardsPlayed().put(cardId, 0);
+			getCardsPlayed().put(cardId, new HashMap<Integer, Integer>());
 		}
-		getCardsPlayed().put(cardId, getCardsPlayed().get(cardId) + 1);
+		if (!getCardsPlayed().get(cardId).containsKey(turn)) {
+			getCardsPlayed().get(cardId).put(turn, 0);
+		}
+		getCardsPlayed().get(cardId).put(turn, getCardsPlayed().get(cardId).get(turn) + 1);
 	}
 	
-	private void increaseMinionCount(Minion minion) {
+	private void increaseMinionCount(Minion minion, int turn) {
 		String cardId = minion.getSourceCard().getCardId();
 		if (!getMinionsSummoned().containsKey(cardId)) {
-			getMinionsSummoned().put(cardId, 0);
+			getMinionsSummoned().put(cardId, new HashMap<Integer, Integer>());
 		}
-		getMinionsSummoned().put(cardId, getMinionsSummoned().get(cardId) + 1);
+		if (!getMinionsSummoned().get(cardId).containsKey(turn)) {
+			getMinionsSummoned().get(cardId).put(turn, 0);
+		}
+		getMinionsSummoned().get(cardId).put(turn, getMinionsSummoned().get(cardId).get(turn) + 1);
+	}
+	
+	private void increasePermanentCount(Permanent permanent, int turn) {
+		String cardId = permanent.getSourceCard().getCardId();
+		if (!getPermanentsSummoned().containsKey(cardId)) {
+			getPermanentsSummoned().put(cardId, new HashMap<Integer, Integer>());
+		}
+		if (!getPermanentsSummoned().get(cardId).containsKey(turn)) {
+			getPermanentsSummoned().get(cardId).put(turn, 0);
+		}
+		getPermanentsSummoned().get(cardId).put(turn, getPermanentsSummoned().get(cardId).get(turn) + 1);
 	}
 
 	public void manaSpent(int mana) {
@@ -148,17 +184,28 @@ public class GameStatistics implements Cloneable {
 		}
 		for (String cardId : otherStatistics.getCardsPlayed().keySet()) {
 			if (!getCardsPlayed().containsKey(cardId)) {
-				getCardsPlayed().put(cardId, 0);
+				getCardsPlayed().put(cardId, new HashMap<Integer, Integer>());
 			}
-			getCardsPlayed().put(cardId, getCardsPlayed().get(cardId) + otherStatistics.getCardsPlayed().get(cardId));
+			for (int turn : otherStatistics.getCardsPlayed().get(cardId).keySet()) {
+				if (!getCardsPlayed().get(cardId).containsKey(turn)) {
+					getCardsPlayed().get(cardId).put(turn, 0);
+				}
+				getCardsPlayed().get(cardId).put(turn, getCardsPlayed().get(cardId).get(turn) + otherStatistics.getCardsPlayed().get(cardId).get(turn));
+			}
 		}
 		updateWinRate();
 	}
 	
-	public void minionSummoned(Minion minion) {
+	public void minionSummoned(Minion minion, int turn) {
 		add(Statistic.MINIONS_PLAYED, 1);
 
-		increaseMinionCount(minion);
+		increaseMinionCount(minion, turn);
+	}
+	
+	public void permanentSummoned(Permanent permanent, int turn) {
+		add(Statistic.PERMANENTS_PLAYED, 1);
+
+		increasePermanentCount(permanent, turn);
 	}
 
 	public void set(Statistic key, Object value) {

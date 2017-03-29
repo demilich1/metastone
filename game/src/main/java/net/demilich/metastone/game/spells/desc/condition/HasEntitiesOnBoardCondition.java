@@ -30,7 +30,7 @@ public class HasEntitiesOnBoardCondition extends Condition {
 		}
 		String[] cardNames = (String[]) desc.get(ConditionArg.CARD_IDS);
 		
-		List<Actor> checkedActors = new ArrayList<Actor>(player.getMinions());
+		List<Actor> checkedActors = new ArrayList<Actor>(player.getSummons());
 		if (player.getHero().getWeapon() != null) {
 			checkedActors.add(player.getHero().getWeapon());
 		}
