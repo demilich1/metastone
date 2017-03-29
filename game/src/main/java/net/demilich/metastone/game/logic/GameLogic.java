@@ -1832,13 +1832,13 @@ public class GameLogic implements Cloneable {
 				context.getEnvironment().remove(Environment.TARGET_OVERRIDE);
 				SummonEvent summonEvent = new SummonEvent(context, actor, source);
 				context.fireGameEvent(summonEvent);
-
-				applyAttribute(minion, Attribute.SUMMONING_SICKNESS);
-				refreshAttacksPerRound(minion);
 			} else {
 				SummonEvent summonEvent = new SummonEvent(context, minion, source);
 				context.fireGameEvent(summonEvent);
 			}
+
+			applyAttribute(minion, Attribute.SUMMONING_SICKNESS);
+			refreshAttacksPerRound(minion);
 		} else if (summon instanceof Permanent) {
 			Permanent permanent = (Permanent) summon;
 			player.getStatistics().permanentSummoned(permanent, context.getTurn());
