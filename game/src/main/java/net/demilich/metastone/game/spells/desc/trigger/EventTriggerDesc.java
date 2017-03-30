@@ -43,6 +43,10 @@ public class EventTriggerDesc extends Desc<EventTriggerArg> {
 		return (TargetPlayer) get(EventTriggerArg.TARGET_PLAYER);
 	}
 
+	public int getTriggerCount() {
+		return getInt(EventTriggerArg.VALUE);
+	}
+
 	@SuppressWarnings("unchecked")
 	public Class<? extends GameEventTrigger> getTriggerClass() {
 		return (Class<? extends GameEventTrigger>) get(EventTriggerArg.CLASS);

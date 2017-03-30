@@ -26,6 +26,7 @@ import net.demilich.metastone.game.cards.desc.HeroCardDesc;
 import net.demilich.metastone.game.cards.desc.HeroPowerCardDesc;
 import net.demilich.metastone.game.cards.desc.MinionCardDesc;
 import net.demilich.metastone.game.cards.desc.PermanentCardDesc;
+import net.demilich.metastone.game.cards.desc.QuestCardDesc;
 import net.demilich.metastone.game.cards.desc.SecretCardDesc;
 import net.demilich.metastone.game.cards.desc.SpellCardDesc;
 import net.demilich.metastone.game.cards.desc.SpellDeserializer;
@@ -117,6 +118,8 @@ public class CardParser {
 			}
 			if (jsonData.getAsJsonObject().has("trigger")) {
 				return gson.fromJson(jsonData, SecretCardDesc.class);
+			} else if (jsonData.getAsJsonObject().has("quest")) {
+				return gson.fromJson(jsonData, QuestCardDesc.class);
 			} else {
 				if (!jsonData.getAsJsonObject().has("targetSelection")) {
 					throw new RuntimeException(resourceInputStream.fileName + " is missing 'targetSelection' attribute!");

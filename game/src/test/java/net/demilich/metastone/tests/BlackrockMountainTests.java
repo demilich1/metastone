@@ -53,7 +53,7 @@ public class BlackrockMountainTests extends BasicTests {
 	public void testBlackwingTechnician() {
 		GameContext context = createContext(HeroClass.DRUID, HeroClass.HUNTER);
 		Player player = context.getPlayer1();
-		player.getHand().removeAll();
+		context.getLogic().removeAllCards(player.getId());
 		
 		Minion blackwingTechnician = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_blackwing_technician"));
 		Assert.assertEquals(blackwingTechnician.getHp(), blackwingTechnician.getBaseHp());

@@ -72,7 +72,10 @@ public class TriggerManager implements Cloneable, IDisposable {
 
 		for (IGameEventListener trigger : eventTriggers) {
 			if (trigger.canFireCondition(event) && triggers.contains(trigger)) {
-				trigger.onGameEvent(event);
+				trigger.countDown();
+				if (!trigger.hasCounter()) {
+					trigger.onGameEvent(event);
+				}
 			}
 
 			// we need to double check here if the trigger still exists;

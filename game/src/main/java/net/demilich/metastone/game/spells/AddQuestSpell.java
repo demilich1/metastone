@@ -7,26 +7,26 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.spells.trigger.types.Secret;
+import net.demilich.metastone.game.spells.trigger.types.Quest;
 import net.demilich.metastone.game.targeting.EntityReference;
 
-public class AddSecretSpell extends Spell {
+public class AddQuestSpell extends Spell {
 
-	public static SpellDesc create(Secret secret) {
-		return create (EntityReference.FRIENDLY_PLAYER, secret);
+	public static SpellDesc create(Quest quest) {
+		return create (EntityReference.FRIENDLY_PLAYER, quest);
 	}
 
-	public static SpellDesc create(EntityReference target, Secret secret) {
-		Map<SpellArg, Object> arguments = SpellDesc.build(AddSecretSpell.class);
-		arguments.put(SpellArg.SECRET, secret);
+	public static SpellDesc create(EntityReference target, Quest quest) {
+		Map<SpellArg, Object> arguments = SpellDesc.build(AddQuestSpell.class);
+		arguments.put(SpellArg.QUEST, quest);
 		arguments.put(SpellArg.TARGET, target);
 		return new SpellDesc(arguments);
 	}
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		Secret secret = (Secret) desc.get(SpellArg.SECRET);
-		context.getLogic().playSecret(player, secret);
+		Quest quest = (Quest) desc.get(SpellArg.QUEST);
+		context.getLogic().playQuest(player, quest);
 	}
 
 }
