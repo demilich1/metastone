@@ -13,7 +13,7 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 import net.demilich.metastone.game.spells.trigger.PhysicalAttackTrigger;
 import net.demilich.metastone.game.spells.trigger.TurnEndTrigger;
-import net.demilich.metastone.game.spells.trigger.secrets.Secret;
+import net.demilich.metastone.game.spells.trigger.types.Secret;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class TestSecretCard extends SecretCard {

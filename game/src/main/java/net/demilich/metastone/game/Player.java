@@ -29,6 +29,7 @@ public class Player extends Entity {
 	private final List<Entity> graveyard = new ArrayList<>();
 	private final List<Summon> summons = new ArrayList<>();
 	private final HashSet<String> secrets = new HashSet<>();
+	private final HashSet<String> quests = new HashSet<>();
 
 	private final GameStatistics statistics = new GameStatistics();
 
@@ -51,6 +52,7 @@ public class Player extends Entity {
 		this.graveyard.addAll(otherPlayer.getGraveyard().stream().map(Entity::clone).collect(Collectors.toList()));
 		this.setAsideZone.addAll(otherPlayer.getSetAsideZone().stream().map(Entity::clone).collect(Collectors.toList()));
 		this.secrets.addAll(otherPlayer.secrets);
+		this.quests.addAll(otherPlayer.quests);
 		this.setId(otherPlayer.getId());
 		this.mana = otherPlayer.mana;
 		this.maxMana = otherPlayer.maxMana;
@@ -131,6 +133,10 @@ public class Player extends Entity {
 			}
 		}
 		return minions;
+	}
+
+	public HashSet<String> getQuests() {
+		return quests;
 	}
 
 	public List<Summon> getSummons() {

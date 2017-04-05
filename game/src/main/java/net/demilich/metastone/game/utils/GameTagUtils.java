@@ -45,6 +45,7 @@ public class GameTagUtils {
 		case IMMUNE:
 		case IMMUNE_WHILE_ATTACKING:
 		case INVERT_HEALING:
+		case QUEST:
 		case SECRET:
 		case STEALTH:
 		case SUMMONING_SICKNESS:

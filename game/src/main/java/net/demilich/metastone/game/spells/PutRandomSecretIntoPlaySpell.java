@@ -9,7 +9,7 @@ import net.demilich.metastone.game.cards.SecretCard;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.spells.trigger.secrets.Secret;
+import net.demilich.metastone.game.spells.trigger.types.Secret;
 
 public class PutRandomSecretIntoPlaySpell extends Spell {
 

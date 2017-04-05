@@ -15,9 +15,11 @@ public abstract class GameEventTrigger extends CustomCloneable {
 
 	private int owner = -1;
 	protected final EventTriggerDesc desc;
+	private int triggerCount;
 
 	public GameEventTrigger(EventTriggerDesc desc) {
 		this.desc = desc;
+		this.triggerCount = desc.getTriggerCount();
 	}
 
 	@Override
@@ -80,6 +82,24 @@ public abstract class GameEventTrigger extends CustomCloneable {
 
 	public int getOwner() {
 		return owner;
+	}
+
+	public int getTriggerCount() {
+		return triggerCount;
+	}
+
+	public void countDown() {
+		triggerCount--;
+		if (triggerCount < 0) {
+			triggerCount = 0;
+		}
+	}
+
+	public void countDown(int num) {
+		triggerCount -= num;
+		if (triggerCount < 0) {
+			triggerCount = 0;
+		}
 	}
 
 	public abstract GameEventType interestedIn();

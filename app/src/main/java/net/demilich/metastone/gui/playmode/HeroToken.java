@@ -15,6 +15,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
+import net.demilich.metastone.game.cards.QuestCard;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.weapons.Weapon;
 import net.demilich.metastone.gui.IconFactory;
@@ -124,11 +125,16 @@ public class HeroToken extends GameToken {
 		secretsAnchor.getChildren().clear();
 		HashSet<String> secretsCopy = new HashSet<String>(player.getSecrets());
 		for (String secretId : secretsCopy) {
-			ImageView secretIcon = new ImageView(IconFactory.getImageUrl("common/secret.png"));
+			Card card = CardCatalogue.getCardById(secretId);
+			ImageView secretIcon = null;
+			if (card instanceof QuestCard) {
+				secretIcon = new ImageView(IconFactory.getImageUrl("common/quest.png"));
+			} else {
+				secretIcon = new ImageView(IconFactory.getImageUrl("common/secret.png"));
+			}
 			secretsAnchor.getChildren().add(secretIcon);
 
-			if (!player.hideCards()) {
-				Card card = CardCatalogue.getCardById(secretId);
+			if (!player.hideCards() || card instanceof QuestCard) {
 				Tooltip tooltip = new Tooltip();
 				CardTooltip tooltipContent = new CardTooltip();
 				tooltipContent.setCard(card);

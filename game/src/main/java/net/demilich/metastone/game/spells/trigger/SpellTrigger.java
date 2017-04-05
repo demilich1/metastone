@@ -188,6 +188,27 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 		return turnDelay > 0 ? true : false;
 	}
 	
+	public void countDown() {
+		primaryTrigger.countDown();
+		if (secondaryTrigger != null) {
+			secondaryTrigger.countDown();
+		}
+	}
+	
+	public void countDown(int num) {
+		primaryTrigger.countDown(num);
+		if (secondaryTrigger != null) {
+			secondaryTrigger.countDown(num);
+		}
+	}
+	
+	public boolean hasCounter() {
+		if (secondaryTrigger != null) {
+			return primaryTrigger.getTriggerCount() > 0 || secondaryTrigger.getTriggerCount() > 0;
+		}
+		return primaryTrigger.getTriggerCount() > 0;
+	}
+	
 	public boolean oneTurnOnly() {
 		return oneTurn;
 	}

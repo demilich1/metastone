@@ -221,4 +221,14 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 		return true;
 	}
 
+	@Override
+	public boolean hasCounter() {
+		return false;
+	}
+
+	@Override
+	public void countDown() {
+		
+	}
+
 }

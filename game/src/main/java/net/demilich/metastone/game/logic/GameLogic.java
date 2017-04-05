@@ -25,6 +25,7 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.cards.CardType;
+import net.demilich.metastone.game.cards.QuestCard;
 import net.demilich.metastone.game.cards.SecretCard;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
@@ -58,6 +59,8 @@ import net.demilich.metastone.game.events.KillEvent;
 import net.demilich.metastone.game.events.OverloadEvent;
 import net.demilich.metastone.game.events.PhysicalAttackEvent;
 import net.demilich.metastone.game.events.PreDamageEvent;
+import net.demilich.metastone.game.events.QuestPlayedEvent;
+import net.demilich.metastone.game.events.QuestSuccessfulEvent;
 import net.demilich.metastone.game.events.SecretPlayedEvent;
 import net.demilich.metastone.game.events.SecretRevealedEvent;
 import net.demilich.metastone.game.events.SilenceEvent;
@@ -78,7 +81,8 @@ import net.demilich.metastone.game.spells.desc.SpellFactory;
 import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
 import net.demilich.metastone.game.spells.trigger.IGameEventListener;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
-import net.demilich.metastone.game.spells.trigger.secrets.Secret;
+import net.demilich.metastone.game.spells.trigger.types.Quest;
+import net.demilich.metastone.game.spells.trigger.types.Secret;
 import net.demilich.metastone.game.targeting.CardLocation;
 import net.demilich.metastone.game.targeting.CardReference;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -96,6 +100,7 @@ public class GameLogic implements Cloneable {
 	public static final int MAX_HERO_HP = 30;
 	public static final int STARTER_CARDS = 3;
 	public static final int MAX_MANA = 10;
+	public static final int MAX_QUESTS = 1;
 	public static final int MAX_SECRETS = 5;
 	public static final int DECK_SIZE = 30;
 	public static final int MAX_DECK_SIZE = 60;
@@ -276,6 +281,10 @@ public class GameLogic implements Cloneable {
 			return spellCard.canBeCast(context, player);
 		}
 		return true;
+	}
+
+	public boolean canPlayQuest(Player player, QuestCard card) {
+		return player.getSecrets().size() < MAX_SECRETS && player.getQuests().size() < MAX_QUESTS && !player.getQuests().contains(card.getCardId());
 	}
 
 	public boolean canPlaySecret(Player player, SecretCard card) {
@@ -927,6 +936,17 @@ public class GameLogic implements Cloneable {
 		return manaCost;
 	}
 
+	public List<IGameEventListener> getQuests(Player player) {
+		List<IGameEventListener> quests = context.getTriggersAssociatedWith(player.getHero().getReference());
+		for (Iterator<IGameEventListener> iterator = quests.iterator(); iterator.hasNext();) {
+			IGameEventListener trigger = iterator.next();
+			if (!(trigger instanceof Quest)) {
+				iterator.remove();
+			}
+		}
+		return quests;
+	}
+
 	public List<IGameEventListener> getSecrets(Player player) {
 		List<IGameEventListener> secrets = context.getTriggersAssociatedWith(player.getHero().getReference());
 		for (Iterator<IGameEventListener> iterator = secrets.iterator(); iterator.hasNext();) {
@@ -1396,6 +1416,20 @@ public class GameLogic implements Cloneable {
 		}
 	}
 
+	public void playQuest(Player player, Quest quest) {
+		playQuest(player, quest, true);
+	}
+
+	public void playQuest(Player player, Quest quest, boolean fromHand) {
+		log("{} has a new quest activated: {}", player.getName(), quest.getSource());
+		addGameEventListener(player, quest, player.getHero());
+		player.getSecrets().add(quest.getSource().getCardId());
+		player.getQuests().add(quest.getSource().getCardId());
+		if (fromHand) {
+			context.fireGameEvent(new QuestPlayedEvent(context, player.getId(), (QuestCard) quest.getSource()));
+		}
+	}
+
 	public void playSecret(Player player, Secret secret) {
 		playSecret(player, secret, true);
 	}
@@ -1509,6 +1543,12 @@ public class GameLogic implements Cloneable {
 		player.getGraveyard().add(card);
 	}
 
+	public void removeAllCards(int playerId) {
+		for (Card card : context.getPlayer(playerId).getHand().toList()) {
+			removeCard(playerId, card);
+		}
+	}
+
 	public void removeCardFromDeck(int playerID, Card card) {
 		Player player = context.getPlayer(playerID);
 		log("Card {} has been moved from the DECK to the GRAVEYARD", card);
@@ -1516,6 +1556,17 @@ public class GameLogic implements Cloneable {
 		removeSpellTriggers(card);
 		player.getDeck().remove(card);
 		player.getGraveyard().add(card);
+	}
+
+	public void removeQuests(Player player) {
+		log("All quests for {} have been destroyed", player.getName());
+		// This actually works amazingly
+		for (IGameEventListener quest : getQuests(player)) {
+			quest.onRemove(context);
+			context.removeTrigger(quest);
+		}
+		player.getSecrets().removeAll(player.getQuests());
+		player.getQuests().clear();
 	}
 
 	public void removeSummon(Summon summon, boolean peacefully) {
@@ -1538,11 +1589,13 @@ public class GameLogic implements Cloneable {
 	public void removeSecrets(Player player) {
 		log("All secrets for {} have been destroyed", player.getName());
 		// this only works while Secrets are the only SpellTrigger on the heroes
+		// Web - Lol, it works now.
 		for (IGameEventListener secret : getSecrets(player)) {
 			secret.onRemove(context);
 			context.removeTrigger(secret);
 		}
 		player.getSecrets().clear();
+		player.getSecrets().addAll(player.getQuests());
 	}
 
 	private void removeSpellTriggers(Entity entity) {
@@ -1678,6 +1731,13 @@ public class GameLogic implements Cloneable {
 				castSpell(player.getId(), deathrattle, sourceReference, EntityReference.NONE, false);
 			}
 		}
+	}
+
+	public void questTriggered(Player player, Quest quest) {
+		log("Quest was trigged: {}", quest.getSource());
+		player.getSecrets().remove(quest.getSource().getCardId());
+		player.getQuests().remove(quest.getSource().getCardId());
+		context.fireGameEvent(new QuestSuccessfulEvent(context, (QuestCard) quest.getSource(), player.getId()));
 	}
 
 	public void secretTriggered(Player player, Secret secret) {

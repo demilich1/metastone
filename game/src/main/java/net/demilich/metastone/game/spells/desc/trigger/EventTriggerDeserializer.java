@@ -31,19 +31,20 @@ public class EventTriggerDeserializer implements JsonDeserializer<EventTriggerDe
 			throw new JsonParseException("Trigger parser encountered an invalid class: " + triggerClassName);
 		}
 		Map<EventTriggerArg, Object> arguments = EventTriggerDesc.build(triggerClass);
-		parseArgument(EventTriggerArg.RACE, jsonData, arguments, ParseValueType.RACE);
-		parseArgument(EventTriggerArg.CARD_TYPE, jsonData, arguments, ParseValueType.CARD_TYPE);
-		parseArgument(EventTriggerArg.TARGET_PLAYER, jsonData, arguments, ParseValueType.TARGET_PLAYER);
-		parseArgument(EventTriggerArg.SOURCE_PLAYER, jsonData, arguments, ParseValueType.TARGET_PLAYER);
-		parseArgument(EventTriggerArg.SOURCE_ENTITY_TYPE, jsonData, arguments, ParseValueType.ENTITY_TYPE);
-		parseArgument(EventTriggerArg.TARGET_ENTITY_TYPE, jsonData, arguments, ParseValueType.ENTITY_TYPE);
-		parseArgument(EventTriggerArg.SOURCE_TYPE, jsonData, arguments, ParseValueType.CARD_TYPE);
 		parseArgument(EventTriggerArg.ACTION_TYPE, jsonData, arguments, ParseValueType.ACTION_TYPE);
-		parseArgument(EventTriggerArg.HOST_TARGET_TYPE, jsonData, arguments, ParseValueType.TARGET_TYPE);
-		parseArgument(EventTriggerArg.REQUIRED_ATTRIBUTE, jsonData, arguments, ParseValueType.ATTRIBUTE);
-		parseArgument(EventTriggerArg.QUEUE_CONDITION, jsonData, arguments, ParseValueType.CONDITION);
+		parseArgument(EventTriggerArg.CARD_TYPE, jsonData, arguments, ParseValueType.CARD_TYPE);
 		parseArgument(EventTriggerArg.FIRE_CONDITION, jsonData, arguments, ParseValueType.CONDITION);
+		parseArgument(EventTriggerArg.HOST_TARGET_TYPE, jsonData, arguments, ParseValueType.TARGET_TYPE);
+		parseArgument(EventTriggerArg.QUEUE_CONDITION, jsonData, arguments, ParseValueType.CONDITION);
+		parseArgument(EventTriggerArg.RACE, jsonData, arguments, ParseValueType.RACE);
+		parseArgument(EventTriggerArg.REQUIRED_ATTRIBUTE, jsonData, arguments, ParseValueType.ATTRIBUTE);
+		parseArgument(EventTriggerArg.SOURCE_ENTITY_TYPE, jsonData, arguments, ParseValueType.ENTITY_TYPE);
+		parseArgument(EventTriggerArg.SOURCE_PLAYER, jsonData, arguments, ParseValueType.TARGET_PLAYER);
+		parseArgument(EventTriggerArg.SOURCE_TYPE, jsonData, arguments, ParseValueType.CARD_TYPE);
 		parseArgument(EventTriggerArg.TARGET, jsonData, arguments, ParseValueType.TARGET_REFERENCE);
+		parseArgument(EventTriggerArg.TARGET_ENTITY_TYPE, jsonData, arguments, ParseValueType.ENTITY_TYPE);
+		parseArgument(EventTriggerArg.TARGET_PLAYER, jsonData, arguments, ParseValueType.TARGET_PLAYER);
+		parseArgument(EventTriggerArg.VALUE, jsonData, arguments, ParseValueType.VALUE);
 
 		return new EventTriggerDesc(arguments);
 	}

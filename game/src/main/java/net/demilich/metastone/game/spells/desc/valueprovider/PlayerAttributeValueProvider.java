@@ -30,7 +30,7 @@ public class PlayerAttributeValueProvider extends ValueProvider {
 		case MAX_MANA:
 			return player.getMaxMana();
 		case SECRET_COUNT:
-			return player.getSecrets().size();
+			return player.getSecrets().size() - player.getQuests().size();
 		case SPELLS_CAST:
 			return (int) player.getStatistics().getLong(Statistic.SPELLS_CAST);
 		default:
