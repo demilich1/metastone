@@ -17,6 +17,8 @@ dependencies {
 	compile files('lib/controlsfx-8.40.10-20151003.010657-492.jar')
 	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
 	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5'
+	compile 'org.jsoup:jsoup:1.10.2'
+	compile 'org.controlsfx:openjfx-dialogs:1.0.2'
 	testCompile group: 'org.testng', name: 'testng', version: '6.+'
 }
 
