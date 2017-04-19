@@ -12,6 +12,12 @@ public class ImporterFactory {
 
         if(url.contains("tempostorm.com"))
            return new TempostormImporter();
+        
+        if(url.contains("icy-veins.com"))
+            return new IcyVeinsImporter();
+        
+        if(url.contains("hearthhead.com"))
+            return new HearthHeedImporter();
 
         return null;
     }
