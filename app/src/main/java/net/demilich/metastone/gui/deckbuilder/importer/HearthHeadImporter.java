@@ -17,7 +17,7 @@ import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 
-public class HearthHeedImporter implements IDeckImporter {
+public class HearthHeadImporter implements IDeckImporter {
 	private static Logger logger = LoggerFactory.getLogger(IcyVeinsImporter.class);
 
 	@Override

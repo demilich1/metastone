@@ -17,7 +17,7 @@ public class ImporterFactory {
             return new IcyVeinsImporter();
         
         if(url.contains("hearthhead.com"))
-            return new HearthHeedImporter();
+            return new HearthHeadImporter();
 
         return null;
     }
