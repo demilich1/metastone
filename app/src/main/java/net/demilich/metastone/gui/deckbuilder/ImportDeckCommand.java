@@ -23,7 +23,7 @@ public class ImportDeckCommand extends SimpleCommand<GameNotification> {
 
 		if (importedDeck == null) {
 			DialogNotification dialogNotification = new DialogNotification("Error",
-					"Import of deck failed. Please make sure to provide a valid URL. At the moment, only hearthpwn.com and tempostorm.com are supported for deck import.",
+					"Import of deck failed. Please make sure to provide a valid URL. At the moment, only hearthpwn.com, tempostorm.com, icy-veins.com, and heartheed.com are supported for deck import.",
 					DialogType.ERROR);
 			notifyObservers(dialogNotification);
 			return;
