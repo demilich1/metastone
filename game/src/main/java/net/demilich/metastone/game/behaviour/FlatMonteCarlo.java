@@ -56,7 +56,7 @@ public class FlatMonteCarlo extends Behaviour {
 		for (Player player : simulation.getPlayers()) {
 			player.setBehaviour(new PlayRandomBehaviour());
 		}
-		simulation.playTurn();
+		simulation.playFromState();
 		return simulation.getWinningPlayerId() == playerId ? 1 : 0;
 	}
 
