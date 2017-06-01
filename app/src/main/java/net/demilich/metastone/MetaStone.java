@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import net.demilich.metastone.analytics.MetastoneAnalytics;
 import net.demilich.metastone.gui.IconFactory;
 import net.demilich.metastone.utils.UserHomeMetastone;
 import org.slf4j.Logger;
@@ -26,16 +27,28 @@ public class MetaStone extends Application {
 		try {
 			// ensure that the user home metastone dir exists
 			Files.createDirectories(Paths.get(UserHomeMetastone.getPath()));
-		} catch (IOException e) {
-			logger.error("Trouble creating " +  Paths.get(UserHomeMetastone.getPath()));
+ 		} catch (IOException e) {
+			logger.error("Trouble creating " + UserHomeMetastone.getPath());
 			e.printStackTrace();
 		}
+
+		// register a shutdown hook for reporting analytics on shutdown
+		Runtime.getRuntime().addShutdownHook(new Thread () {
+
+			@Override
+			public void run() {
+				logger.info("Shutting down!");
+				MetastoneAnalytics.registerAppShutdownEvent();
+			}
+		});
 
 		launch(args);
 	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		MetastoneAnalytics.registerAppStartupEvent();
+
 		primaryStage.setTitle("MetaStone");
 		primaryStage.initStyle(StageStyle.UNIFIED);
 		primaryStage.setResizable(false);

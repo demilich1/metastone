@@ -3,6 +3,7 @@ package net.demilich.metastone.gui.playmode;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.demilich.metastone.analytics.MetastoneAnalytics;
 import net.demilich.nittygrittymvc.Mediator;
 import net.demilich.nittygrittymvc.interfaces.INotification;
 import javafx.application.Platform;
@@ -81,6 +82,7 @@ public class PlayModeMediator extends Mediator<GameNotification>implements Event
 	@Override
 	public void onRegister() {
 		getFacade().sendNotification(GameNotification.SHOW_VIEW, view);
+		MetastoneAnalytics.registerShowScreen("Play");
 		view.getScene().setOnKeyPressed(this);
 	}
 

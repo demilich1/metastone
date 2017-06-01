@@ -3,6 +3,8 @@ package net.demilich.metastone.gui.mainmenu;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.demilich.metastone.analytics.MetastoneAnalytics;
+import net.demilich.metastone.gui.termsofuse.AnalyticsDisclaimerMediator;
 import net.demilich.nittygrittymvc.Mediator;
 import net.demilich.nittygrittymvc.interfaces.INotification;
 import net.demilich.metastone.GameNotification;
@@ -45,6 +47,9 @@ public class MainMenuMediator extends Mediator<GameNotification> {
 		case BATTLE_OF_DECKS_SELECTED:
 			getFacade().registerMediator(new BattleOfDecksMediator());
 			break;
+		case ANALYTICS_DISCLAIMER_SELECTED:
+			getFacade().registerMediator(new AnalyticsDisclaimerMediator());
+			break;
 		default:
 			break;
 		}
@@ -60,12 +65,14 @@ public class MainMenuMediator extends Mediator<GameNotification> {
 		notificationInterests.add(GameNotification.SANDBOX_MODE_SELECTED);
 		notificationInterests.add(GameNotification.TRAINING_MODE_SELECTED);
 		notificationInterests.add(GameNotification.BATTLE_OF_DECKS_SELECTED);
+		notificationInterests.add(GameNotification.ANALYTICS_DISCLAIMER_SELECTED);
 		return notificationInterests;
 	}
 
 	@Override
 	public void onRegister() {
 		getFacade().sendNotification(GameNotification.SHOW_VIEW, view);
+		MetastoneAnalytics.registerShowScreen("MainMenu");
 	}
 
 }

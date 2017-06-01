@@ -3,6 +3,7 @@ package net.demilich.metastone.gui.deckbuilder;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.demilich.metastone.analytics.MetastoneAnalytics;
 import net.demilich.nittygrittymvc.Mediator;
 import net.demilich.nittygrittymvc.interfaces.INotification;
 import net.demilich.metastone.GameNotification;
@@ -80,6 +81,7 @@ public class DeckBuilderMediator extends Mediator<GameNotification> {
 	@Override
 	public void onRegister() {
 		getFacade().sendNotification(GameNotification.SHOW_VIEW, view);
+		MetastoneAnalytics.registerShowScreen("DeckBuilder");
 		getFacade().sendNotification(GameNotification.LOAD_DECKS);
 		getFacade().sendNotification(GameNotification.LOAD_DECK_FORMATS);
 	}

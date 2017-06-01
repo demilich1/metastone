@@ -3,6 +3,7 @@ package net.demilich.metastone.gui.sandboxmode;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.demilich.metastone.analytics.MetastoneAnalytics;
 import net.demilich.nittygrittymvc.Mediator;
 import net.demilich.nittygrittymvc.interfaces.INotification;
 import javafx.application.Platform;
@@ -103,6 +104,7 @@ public class SandboxModeMediator extends Mediator<GameNotification>implements Ev
 	@Override
 	public void onRegister() {
 		getFacade().sendNotification(GameNotification.SHOW_VIEW, configView);
+		MetastoneAnalytics.registerShowScreen("Sandbox");
 		getFacade().sendNotification(GameNotification.REQUEST_DECKS);
 		getFacade().sendNotification(GameNotification.REQUEST_DECK_FORMATS);
 	}

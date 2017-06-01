@@ -3,6 +3,7 @@ package net.demilich.metastone.gui.trainingmode;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.demilich.metastone.analytics.MetastoneAnalytics;
 import net.demilich.nittygrittymvc.Mediator;
 import net.demilich.nittygrittymvc.interfaces.INotification;
 import javafx.application.Platform;
@@ -67,6 +68,7 @@ public class TrainingModeMediator extends Mediator<GameNotification> {
 	@Override
 	public void onRegister() {
 		getFacade().sendNotification(GameNotification.SHOW_VIEW, configView);
+		MetastoneAnalytics.registerShowScreen("TrainingMode");
 		getFacade().sendNotification(GameNotification.REQUEST_DECKS);
 		getFacade().sendNotification(GameNotification.REQUEST_DECK_FORMATS);
 	}

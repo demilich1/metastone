@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" styleClass="panel" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+   <center>
+      <TitledPane collapsible="false" text="Terms of use" styleClass="titled-pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="600" prefWidth="800">
+      <content>
+         <VBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="100.0">
+            <children>
+               <TextArea fx:id="disclaimerTextArea" styleClass="white-label" editable="false" nodeOrientation="LEFT_TO_RIGHT" wrapText="true" prefHeight="480.0" prefWidth="600.0"/>
+               <CheckBox fx:id="optOutCheckbox" styleClass="white-label" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Opt-out of analytics tracking" textAlignment="JUSTIFY" wrapText="true">
+                  <VBox.margin>
+                     <Insets top="10.0" />
+                  </VBox.margin>
+               </CheckBox>
+            </children>
+         </VBox>
+      </content>
+      </TitledPane>
+   </center>
+   <bottom>
+      <AnchorPane>
+         <children>
+            <Button fx:id="backButton" mnemonicParsing="false" text="Back" AnchorPane.leftAnchor="0.0" />
+         </children>
+      </AnchorPane>
+   </bottom>
+</fx:root>

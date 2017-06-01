@@ -57,6 +57,7 @@
                   </ImageView>
                </graphic>
             </Button>
+            <Button fx:id="analyticsDisclaimerButton" mnemonicParsing="false" prefWidth="200.0" styleClass="main-button" text="Disclaimer" textAlignment="CENTER" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="8.0"/>
          </children>
       </AnchorPane>
    </bottom>
