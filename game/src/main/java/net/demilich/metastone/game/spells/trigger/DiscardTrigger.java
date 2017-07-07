@@ -18,11 +18,23 @@ public class DiscardTrigger extends GameEventTrigger {
 	protected boolean fire(GameEvent event, Entity host) {
 		DiscardEvent discardEvent = (DiscardEvent) event;
 		EntityReference target = (EntityReference) desc.get(EventTriggerArg.TARGET);
-		if (target == EntityReference.SELF && discardEvent.getCard() != host) {
-			return false;
+		TargetPlayer targetPlayer = (TargetPlayer) desc.get(EventTriggerArg.TARGET_PLAYER);
+
+
+		final int owner = host.getOwner();
+
+		boolean targetPlayerSatisfied = targetPlayer == null
+				|| (targetPlayer == TargetPlayer.SELF && owner == event.getTargetPlayerId())
+				|| (targetPlayer == TargetPlayer.OWNER && owner == event.getTargetPlayerId());
+
+		boolean targetSatisfied = target == null;
+
+		if (target != null) {
+			List<Entity> resolvedTargets = event.getGameContext().resolveTarget(event.getGameContext().getPlayer(owner), host, target);
+			targetSatisfied = resolvedTargets != null && resolvedTargets.stream().anyMatch(e -> e.getId() == discardEvent.getCard().getId());
 		}
-		
-		return true;
+
+		return targetPlayerSatisfied && targetSatisfied;
 	}
 
 	@Override
