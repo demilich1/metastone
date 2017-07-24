@@ -313,28 +313,5 @@ public class AdvancedMechanicTests extends BasicTests {
 
 	}
 	
-	@Test
-	public void testDiscardAndDraw() {
-		GameContext context = createContext(HeroClass.WARLOCK, HeroClass.PRIEST);
-		Player warlock = context.getPlayer1();
-		warlock.getHand().clear();
-		warlock.getDeck().clear();
-		final Card acidicSwampOoze = CardCatalogue.getCardById("minion_acidic_swamp_ooze");
-		acidicSwampOoze.setOwner(warlock.getId());
-		acidicSwampOoze.setId(context.getLogic().getIdFactory().generateId());
-		warlock.getDeck().addCard(acidicSwampOoze);
-		final Card minionNoviceEngineer = CardCatalogue.getCardById("minion_novice_engineer");
-		context.getLogic().receiveCard(PLAYER_1, minionNoviceEngineer);
-		final Card malchezaarsImpl = CardCatalogue.getCardById("minion_malchezaars_imp");
-		final Card soulfire = CardCatalogue.getCardById("spell_soulfire");
-		playCard(context, warlock, malchezaarsImpl);
-		context.getLogic().receiveCard(PLAYER_1, soulfire);
-		PlayCardAction action = soulfire.play();
-		action.setTarget(context.getPlayer2().getHero());
-		context.getLogic().performGameAction(PLAYER_1, action);
-		Assert.assertEquals(warlock.getHand().get(0).getCardId(), "minion_acidic_swamp_ooze", "The player should have Acidic Swamp Ooze in their hand after playing soulfire.");
-		Assert.assertEquals(minionNoviceEngineer.getZone(), Zones.GRAVEYARD, "Novice engineer should be in the graveyard.");
-	}
-	
 	
 }
