@@ -48,80 +48,101 @@ public class IconFactory {
 
 	public static String getHeroIconUrl(HeroClass heroClass) {
 		String iconPath = RESOURCE_PATH + "/img/heroes/";
-		switch (heroClass) {
-		case DRUID:
-			iconPath += "malfurion";
-			break;
-		case HUNTER:
-			iconPath += "rexxar";
-			break;
-		case MAGE:
-			iconPath += "jaina";
-			break;
-		case PALADIN:
-			iconPath += "uther";
-			break;
-		case PRIEST:
-			iconPath += "anduin";
-			break;
-		case ROGUE:
-			iconPath += "valeera";
-			break;
-		case SHAMAN:
-			iconPath += "thrall";
-			break;
-		case WARLOCK:
-			iconPath += "guldan";
-			break;
-		case WARRIOR:
-			iconPath += "garrosh";
-			break;
-		default:
-		case ANY:
-			iconPath += "unknown";
-			break;
-
+		if (((HeroCard)hero.getSourceCard()).getAsset().equals("<Def>")){
+			switch (hero.getHeroClass()) {
+			case DRUID:
+				iconPath += "malfurion";
+				break;
+			case HUNTER:
+				iconPath += "rexxar";
+				break;
+			case MAGE:
+				iconPath += "jaina";
+				break;
+			case PALADIN:
+				iconPath += "uther";
+				break;
+			case PRIEST:
+				iconPath += "anduin";
+				break;
+			case ROGUE:
+				iconPath += "valeera";
+				break;
+			case SHAMAN:
+				iconPath += "thrall";
+				break;
+			case WARLOCK:
+				iconPath += "guldan";
+				break;
+			case WARRIOR:
+				iconPath += "garrosh";
+				break;
+			default:
+			case ANY:
+				iconPath += "unknown";
+				break;
+	
+			}
+			return iconPath + ".png";
+		} else {
+			String assetsFolder = UserHomeMetastone.getPath().replace("\\\\", "/") + "/" + "assets";
+			String pth = assetsFolder + "/" + ((HeroCard)hero.getSourceCard()).getAsset() + ".png";
+			try {
+				return new File(pth).toURI().toURL().toString();
+			} catch (MalformedURLException e) {
+				return pth;
+			}
 		}
-		return iconPath + ".png";
 	}
 
 	public static String getHeroPowerIconUrl(HeroPower heroPower) {
-		String iconPath = RESOURCE_PATH + "/img/powers/";
-		switch (heroPower.getHeroClass()) {
-		case DRUID:
-			iconPath += "shapeshift";
-			break;
-		case HUNTER:
-			iconPath += "steady_shot";
-			break;
-		case MAGE:
-			iconPath += "fireblast";
-			break;
-		case PALADIN:
-			iconPath += "reinforce";
-			break;
-		case PRIEST:
-			iconPath += "lesser_heal";
-			break;
-		case ROGUE:
-			iconPath += "dagger_mastery";
-			break;
-		case SHAMAN:
-			iconPath += "totemic_call";
-			break;
-		case WARLOCK:
-			iconPath += "life_tap";
-			break;
-		case WARRIOR:
-			iconPath += "armor_up";
-			break;
-		default:
-			iconPath += "unknown";
-			break;
-
+		if (heroPower.getAsset().equals("<Def>")){
+			String iconPath = RESOURCE_PATH + "/img/powers/";
+			
+			switch (heroPower.getHeroClass()) {
+			case DRUID:
+				iconPath += "shapeshift";
+				break;
+			case HUNTER:
+				iconPath += "steady_shot";
+				break;
+			case MAGE:
+				iconPath += "fireblast";
+				break;
+			case PALADIN:
+				iconPath += "reinforce";
+				break;
+			case PRIEST:
+				iconPath += "lesser_heal";
+				break;
+			case ROGUE:
+				iconPath += "dagger_mastery";
+				break;
+			case SHAMAN:
+				iconPath += "totemic_call";
+				break;
+			case WARLOCK:
+				iconPath += "life_tap";
+				break;
+			case WARRIOR:
+				iconPath += "armor_up";
+				break;
+			default:
+				iconPath += "unknown";
+				break;
+	
+			}
+			iconPath += ".png";
+			return iconPath;
+		} else {
+			String assetsFolder = UserHomeMetastone.getPath().replace("\\\\", "/") + "/" + "assets";
+			String pth = assetsFolder + "/" + heroPower.getAsset() + ".png";
+			try {
+				return new File(pth).toURI().toURL().toString();
+			} catch (MalformedURLException e) {
+				return pth;
+			}
 		}
-		iconPath += ".png";
-		return iconPath;
 	}
 
 	public static String getImageUrl(String imageName) {
