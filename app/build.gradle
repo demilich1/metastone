@@ -1,6 +1,15 @@
 apply plugin: 'java'
 apply plugin: 'application'
-apply from: 'javafx.plugin'
+apply plugin: 'javafx-gradle-plugin'
+
+buildscript {
+    dependencies {
+        classpath group: 'de.dynamicfiles.projects.gradle.plugins', name: 'javafx-gradle-plugin', version: '8.8.2'
+    }
+    repositories {
+        jcenter()
+    }
+}
 
 mainClassName = 'net.demilich.metastone.MetaStone'
 
@@ -22,9 +31,12 @@ dependencies {
 	testCompile group: 'org.testng', name: 'testng', version: '6.+'
 }
 
-javafx {
-	appName rootProject.name
-	mainClass = mainClassName
+jfx {
+    // minimal requirement for jfxJar-task
+    mainClass = 'JavaFXDemo'
+    
+    // minimal requirement for jfxNative-task
+    vendor = ''
 }
 
 test {
