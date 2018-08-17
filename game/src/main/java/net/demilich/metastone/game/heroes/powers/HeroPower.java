@@ -11,10 +11,12 @@ import net.demilich.metastone.game.targeting.CardLocation;
 public class HeroPower extends SpellCard {
 
 	private int used;
+	private String asset;
 
 	public HeroPower(HeroPowerCardDesc desc) {
 		super(desc);
 		setLocation(CardLocation.HERO_POWER);
+		asset = (desc.asset == null ? "<Def>" : desc.asset);
 	}
 
 	public int hasBeenUsed() {
@@ -36,6 +38,10 @@ public class HeroPower extends SpellCard {
 	
 	public void setUsed(int used) {
 		this.used = used;
+	}
+	
+	public String getAsset(){
+		return asset;
 	}
 
 }

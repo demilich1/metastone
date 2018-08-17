@@ -8,6 +8,7 @@ public class HeroCardDesc extends CardDesc {
 
 	public String heroPower;
 	public Race race = Race.NONE;
+	public String asset;
 
 	@Override
 	public Card createInstance() {

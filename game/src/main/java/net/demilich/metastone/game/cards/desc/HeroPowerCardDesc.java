@@ -8,6 +8,7 @@ public class HeroPowerCardDesc extends SpellCardDesc {
 	
 	public String[] options;
 	public String bothOptions;
+	public String asset;
 
 	@Override
 	public Card createInstance() {

@@ -20,6 +20,7 @@ public class HeroCard extends Card {
 	public HeroCard(HeroCardDesc desc) {
 		super(desc);
 		setAttribute(Attribute.BASE_HP, getAttributeValue(Attribute.MAX_HP));
+		if (desc.asset == null) desc.asset = "<Def>";
 		this.desc = desc;
 	}
 
@@ -38,6 +39,10 @@ public class HeroCard extends Card {
 	@Override
 	public PlayCardAction play() {
 		throw new UnsupportedOperationException("Hero cards cannot be played");
+	}
+	
+	public String getAsset(){
+		return desc.asset;
 	}
 
 }
